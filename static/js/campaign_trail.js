@@ -157,20 +157,8 @@ function returnToMainPage() {
     // achButton.addEventListener("click", openAchievMenu);
 }
 
-
-
-
-
 // set up ach system
 amongusonetwothree = false
-
-//yet another anticheat
-window.setInterval(function() {
-    if (MD5(localStorage.getItem('achievements')) != localStorage.getItem('ach4')) {
-        resetAchievements()
-        window.location.reload();
-    }
-}, 5000)
 
 function simpleAdventure(ans) {
     return 1203;
