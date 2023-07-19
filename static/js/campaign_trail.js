@@ -100,7 +100,7 @@ function openAchievMenu() {
 
     for (const i in achList) {
         const achieved = run.achievements[i] || false;
-        const src = `../the-community-trail/static/achievementicons/${i}.png`;
+        const src = `../static/achievementicons/${i}.png`;
         const imgStyle = achieved ? "width:50px;" : "width:50px;filter: grayscale(100%);";
         const imgHTML = `<img style='${imgStyle}' src='${src}'></img>`;
         const subcategory = achList[i][2] || "";
@@ -501,7 +501,7 @@ $("#submitMod").click(function() {
         }
     } else {
         var client = new XMLHttpRequest();
-        client.open('GET', "../the-community-trail/static/mods/" + $("#modSelect")[0].value + "_init.html");
+        client.open('GET', "../static/mods/" + $("#modSelect")[0].value + "_init.html");
         client.onreadystatechange = function() {
             evaluate(client.responseText)
         }
@@ -779,7 +779,7 @@ function divideElectoralVotesProp(e, t) {
                     }
                     if (modded == false) {
                         aaa = election_HTML(t, i, a)
-                        aaa = "../the-community-trail/static/questionset/" + aaa
+                        aaa = "../static/questionset/" + aaa
                         $("#game_window").load(aaa)
                         e.question_number = 0, e.questions_json = campaignTrail_temp.questions_json, e.answers_json = campaignTrail_temp.answers_json, e.states_json = campaignTrail_temp.states_json, e.issues_json = campaignTrail_temp.issues_json, e.state_issue_score_json = campaignTrail_temp.state_issue_score_json, e.candidate_issue_score_json = campaignTrail_temp.candidate_issue_score_json, e.running_mate_issue_score_json = campaignTrail_temp.running_mate_issue_score_json, e.candidate_state_multiplier_json = campaignTrail_temp.candidate_state_multiplier_json, e.answer_score_global_json = campaignTrail_temp.answer_score_global_json, e.answer_score_issue_json = campaignTrail_temp.answer_score_issue_json, e.answer_score_state_json = campaignTrail_temp.answer_score_state_json, e.answer_feedback_json = campaignTrail_temp.answer_feedback_json, e.candidate_image_url = campaignTrail_temp.candidate_image_url, e.running_mate_image_url = campaignTrail_temp.running_mate_image_url, e.candidate_last_name = campaignTrail_temp.candidate_last_name, e.running_mate_last_name = campaignTrail_temp.running_mate_last_name, e.running_mate_state_id = campaignTrail_temp.running_mate_state_id, e.player_answers = campaignTrail_temp.player_answers, e.player_visits = campaignTrail_temp.player_visits, e.answer_feedback_flg = campaignTrail_temp.answer_feedback_flg, e.election_id = Number(e.election_id), e.candidate_id = Number(e.candidate_id), e.running_mate_id = Number(e.running_mate_id), e.difficulty_level_id = Number(e.difficulty_level_id), e.game_start_logging_id = Number(campaignTrail_temp.game_start_logging_id)
                         var important_code = setInterval(function() {
@@ -797,7 +797,7 @@ function divideElectoralVotesProp(e, t) {
                         }, 1000);
                     } else if ($("#modSelect")[0].value != "other" || e.hotload) {
                         aaa = election_HTML(t, i, a)
-                        aaa = "../the-community-trail/static/questionset/" + aaa
+                        aaa = "../static/questionset/" + aaa
                         try {
                             $("#game_window").load(aaa, function() {
                                 e = campaignTrail_temp
@@ -809,7 +809,7 @@ function divideElectoralVotesProp(e, t) {
                                 //theorId = $("#modSelect")[0].value
 
                                 var client = new XMLHttpRequest();
-                                client.open('GET', "../the-community-trail/static/mods/" + theorId + ".html");
+                                client.open('GET', "../static/mods/" + theorId + ".html");
                                 client.onreadystatechange = function() {
                                     evaluate(client.responseText) // eval later
                                     
@@ -818,7 +818,7 @@ function divideElectoralVotesProp(e, t) {
                                     tempFuncO(e)
                                 }
                                 client.send();
-                                endingUrl = "../the-community-trail/static/mods/" + theorId + "_ending.html"
+                                endingUrl = "../static/mods/" + theorId + "_ending.html"
 
                                 try {
                                     if (fileExists(endingUrl))
@@ -855,7 +855,7 @@ function divideElectoralVotesProp(e, t) {
                     } else {
                         // other block case
                         aaa = election_HTML(t, i, a)
-                        aaa = "../the-community-trail/static/questionset/" + aaa
+                        aaa = "../static/questionset/" + aaa
                         $("#game_window").load(aaa, function() {
                             evaluate($("#codeset2")[0].value);
                             tempFuncO=function(e,i=campaignTrail_temp){if(e.collect_results){let a = A(2);e.current_results = [getLatestRes(a)[0], a]}for(var s=[],a=0;a<i.answers_json.length&&(i.answers_json[a].fields.question!=i.questions_json[i.question_number].pk||(s.push({key:a,order:Math.random()}),4!=s.length));a+=1){};P(s,"order");for(var t="",a=0;a<s.length;a+=1){t+='<input type="radio" name="game_answers" class="game_answers"             id="game_answers['+a.toString()+']" value="'+i.answers_json[s[a].key].pk+'"/>\t\t    <label for="game_answers['+a.toString()+']">'+i.answers_json[s[a].key].fields.description+"</label><br>"}var r='<div class="game_header">    <h2>NEW CAMPAIGN TRAIL</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>'+i.questions_json[i.question_number].fields.description+'</h3>            <div id="question_form">                <form name="question">'+t+'</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="'+i.candidate_image_url+'">    <img id="running_mate_pic" src="'+i.running_mate_image_url+'">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question '+(i.question_number+1)+" of "+i.global_parameter_json[0].fields.question_count+'</h3>        </div>        <div id="campaign_sign">        <p>'+i.candidate_last_name+"</p>        <p>"+i.running_mate_last_name+"</p>        </div>    </div>";$("#game_window").html(r)};
@@ -1840,26 +1840,26 @@ function divideElectoralVotesProp(e, t) {
 
                 // Destiny Arrives All the Same - Get a 306-232 electoral count in every possible official scenario.
                 if (!run.achievements["destiny"] && run.threeosix["2020"] && run.threeosix["2016"] && run.threeosix["2012"] && run.threeosix["2000"] && run.threeosix["1988"] && run.threeosix["1976"] && run.threeosix["1964"]) {
-                    unlockAchievement(among, "destiny", "../the-community-trail/static/achievementicons/destiny.png", "<b><font color='yellow'>Destiny Arrives All the Same</font></b>")
+                    unlockAchievement(among, "destiny", "../static/achievementicons/destiny.png", "<b><font color='yellow'>Destiny Arrives All the Same</font></b>")
                 } else
 
                 // ## 2020 ##
 
                 // The Dark Brandon Rises - Achieve 406 electoral votes or higher with Joe Biden in the 2020 scenario.
                 if (!modded&&  !run.achievements["ridingBiden"] && e.candidate_last_name == "Biden" && e.election_id == 21 && campaignTrail_temp.difficulty_level_multiplier <= 0.97 && e.final_overall_results[n].electoral_votes > 405) {
-                    unlockAchievement(among, "ridingBiden", "../the-community-trail/static/achievementicons/darkbrandon.png", "<b>The Dark Brandon Rises</b>")
+                    unlockAchievement(among, "ridingBiden", "../static/achievementicons/darkbrandon.png", "<b>The Dark Brandon Rises</b>")
                 } else
                 // MAGA... Again - Achieve 322 electoral votes or higher with Donald Trump in the 2020 scenario.
                 if (!modded && !run.achievements["magaa"] && e.candidate_last_name == "Trump" && e.election_id == 21 && campaignTrail_temp.difficulty_level_multiplier <= 0.97 && e.final_overall_results[n].electoral_votes > 321) {
-                    unlockAchievement(among, "magaa", "../the-community-trail/static/achievementicons/magaa.png", "<b>MAGA... Again</b>")
+                    unlockAchievement(among, "magaa", "../static/achievementicons/magaa.png", "<b>MAGA... Again</b>")
                 } else
                 // Not My President! - Deadlock the election as Donald Trump in 2020.
                 if (!modded && !run.achievements["nmpr"] && e.candidate_last_name == "Trump" && e.election_id == 21 && campaignTrail_temp.difficulty_level_multiplier <= 0.97 && e.final_overall_results[n].electoral_votes == 269) {
-                    unlockAchievement(among, "nmpr", "../the-community-trail/static/achievementicons/nmpr.png", "<b>Not My President!</b>")
+                    unlockAchievement(among, "nmpr", "../static/achievementicons/nmpr.png", "<b>Not My President!</b>")
                 } else
                 // Civility Prevails...? - Get the real life ending to the 2020 scenario.
                 if (!modded && !run.achievements["nomalarkey"] && e.candidate_last_name == "Biden" && e.election_id == 21 && campaignTrail_temp.difficulty_level_multiplier <= 0.97 && e.final_overall_results[n].electoral_votes == 306) {
-                    unlockAchievement(among, "nomalarkey", "../the-community-trail/static/achievementicons/nomalarkey.png", "<b>Civility Prevails...? </b>")
+                    unlockAchievement(among, "nomalarkey", "../static/achievementicons/nomalarkey.png", "<b>Civility Prevails...? </b>")
                 } else
 
                 // ### 2016 ###
@@ -1881,11 +1881,11 @@ function divideElectoralVotesProp(e, t) {
 
                 // Why? - Play 2016a
                 if (!modded && !run.achievements["why"] && e.election_id == 16) {
-                    unlockAchievement(among, "why", "../the-community-trail/static/achievementicons/why.png", "<b>Why? </b>")
+                    unlockAchievement(among, "why", "../static/achievementicons/why.png", "<b>Why? </b>")
                 } else
                 // Why? - Play 2016a
                 if (!modded && !run.achievements["what"] && e.election_id == 16 && run.tsatrolling > 99) {
-                    unlockAchievement(among, "what", "../the-community-trail/static/achievementicons/limitBreak.png", "<b>WHY?!?!?!?!</b>")
+                    unlockAchievement(among, "what", "../static/achievementicons/limitBreak.png", "<b>WHY?!?!?!?!</b>")
                 } else
 
                 // ### 2012 ###
@@ -2037,11 +2037,11 @@ function divideElectoralVotesProp(e, t) {
             } else {
                 // Still Alive - Enact the dream of the average r/tct user
                 if (!modded && e.candidate_last_name == "Wallace" && e.election_id == 4 && e.final_overall_results[n].electoral_votes == 535 && !run.achievements["stillAlive"]) {
-                    unlockAchievement(among, "stillAlive", "../the-community-trail/static/achievementicons/stillalive.png", "<b>Still Alive</b>")
+                    unlockAchievement(among, "stillAlive", "../static/achievementicons/stillalive.png", "<b>Still Alive</b>")
                 } else 
                 // NOW'S YOUR CHANCE TO BE A - [[Big Shot]]
                 if (!modded && !run.achievements["yourchance"] && campaignTrail_temp.bigshot_mode) {
-                    unlockAchievement(among, "yourchance", "../the-community-trail/static/achievementicons/yourChance.png", "<b>NOW'S YOUR CHANCE TO BE A</b>")
+                    unlockAchievement(among, "yourchance", "../static/achievementicons/yourChance.png", "<b>NOW'S YOUR CHANCE TO BE A</b>")
                 } 
             }
         }
@@ -2072,8 +2072,8 @@ function divideElectoralVotesProp(e, t) {
 
             console.log("ACHIEVEMENT UNLOCKED: " + id)
 
-            plays = ["../the-community-trail/static/achievementicons/beep.mp3", "../the-community-trail/static/achievementicons/beep2.mp3"]
-            image = "../the-community-trail/static/achievementicons/"+id+".png"
+            plays = ["../static/achievementicons/beep.mp3", "../static/achievementicons/beep2.mp3"]
+            image = "../static/achievementicons/"+id+".png"
 
             if (amongusonetwothree) {
                 return false
