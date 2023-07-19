@@ -204,7 +204,7 @@ $(document).ready(function() {
     function loadEntries() {
         $.ajax({
             type: "GET",
-            url: "../static/mods/MODLOADERFILE.html",
+            url: "../the-community-trail/static/mods/MODLOADERFILE.html",
             dataType: "text",
             success: function(response) {
                 $("#modSelect").html(response);
@@ -334,8 +334,8 @@ nct_stuff.dynamicOverride = false;
 nct_stuff.themes = {
     "tct": {
         name: "The Community Trail",
-        background: "../static/images/backgrounds/tct_background.png",
-        banner: "../static/images/banners/tct_banner.png",
+        background: "../the-community-trail/static/images/backgrounds/tct_background.png",
+        banner: "../the-community-trail/static/images/banners/tct_banner.png",
         coloring_window: "#ff6b6b",
         coloring_container: "#930301",
         coloring_title: ""
@@ -552,22 +552,22 @@ ree = {}
 
 campaignTrail_temp.election_json = {}
 campaignTrail_temp.candidate_json = {}
-loadJSON("../static/json/election.json", "campaignTrail_temp.election_json", () => {
+loadJSON("../the-community-trail/static/json/election.json", "campaignTrail_temp.election_json", () => {
     ree.election_json = strCopy(campaignTrail_temp.election_json);
 })
-loadJSON("../static/json/candidate.json", "campaignTrail_temp.candidate_json", () => {
+loadJSON("../the-community-trail/static/json/candidate.json", "campaignTrail_temp.candidate_json", () => {
     ree.candidate_json = strCopy(campaignTrail_temp.candidate_json);
 })
-loadJSON("../static/json/running_mate.json", "campaignTrail_temp.running_mate_json", () => {
+loadJSON("../the-community-trail/static/json/running_mate.json", "campaignTrail_temp.running_mate_json", () => {
     ree.running_mate_json = strCopy(campaignTrail_temp.running_mate_json);
 })
-loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_default_json", () => {
+loadJSON("../the-community-trail/static/json/opponents.json", "campaignTrail_temp.opponents_default_json", () => {
     ree.opponents_default_json = strCopy(campaignTrail_temp.opponents_default_json);
 })
-loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_weighted_json", () => {
+loadJSON("../the-community-trail/static/json/opponents.json", "campaignTrail_temp.opponents_weighted_json", () => {
     ree.opponents_weighted_json = strCopy(campaignTrail_temp.opponents_weighted_json);
 })
-loadJSON("../static/json/election_list.json", "campaignTrail_temp.temp_election_list", () => {
+loadJSON("../the-community-trail/static/json/election_list.json", "campaignTrail_temp.temp_election_list", () => {
     ree.temp_election_list = strCopy(campaignTrail_temp.temp_election_list);
 })
 

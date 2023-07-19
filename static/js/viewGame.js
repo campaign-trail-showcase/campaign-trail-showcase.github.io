@@ -14,7 +14,7 @@ document.getElementById("submitMod").addEventListener("click", function() {
         }
     } else {
         var client = new XMLHttpRequest();
-        client.open('GET', "../static/mods/" + $("#modSelect")[0].value + "_init.html");
+        client.open('GET', "../the-community-trail/static/mods/" + $("#modSelect")[0].value + "_init.html");
         client.onreadystatechange = function() {
             eval(client.responseText)
         }
