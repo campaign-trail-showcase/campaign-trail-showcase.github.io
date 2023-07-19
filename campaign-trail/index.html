@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <head>
-    <title>The New Campaign Trail</title>
+    <title>The Community Trail</title>
     <link rel="stylesheet" href="../static/amusa_main_2016032801.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../static/css/bigshot.css" type="text/css" media="screen" />
     <link rel="shortcut icon" href="/static/34starcircle-2.png" type="image/png" />
     <link rel="canonical" href="index.html" />
     <meta name="description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out." />
-    <meta property="og:title" content="The New Campaign Trail - A Revamped Presidential Election Game" />
+    <meta property="og:title" content="The Community Trail" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="../static/34starcircle-2.png" />
     <meta property="og:image:type" content="image/png" />
@@ -16,7 +16,7 @@
     <meta property="og:image:height" content="200" />
     <meta property="og:url" content="index.html" />
     <meta property="og:description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out." />
-    <meta property="og:site_name" content="The New Campaign Trail" />
+    <meta property="og:site_name" content="The Community Trail" />
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
@@ -32,7 +32,7 @@
         <div class="content_single">
           <div id="game_window">
             <div class="game_header">
-              <h2>NEW CAMPAIGN TRAIL</h2>
+              <h2>THE COMMUNITY TRAIL</h2>
             </div>
             <div class="below_header" id="below_header">
               <div class="inner_window_front" id="inner_window_1">
@@ -50,19 +50,12 @@
                   </button>
                 </span>
                 <span style="font-weight: bolder;position:absolute;right:10px;top:10px;">
-                  <a href="https://blog.newcampaigntrail.com" target="_blank">Blog</a>
-                  <a href="http://modmaker.newcampaigntrail.com/" target="_blank">Modmaker</a>
                   </li>
               </div>
             </div>
-            <div id="bottomBar" class="inner_window_front" style="height:30px;font-size: 12px;border-style: solid;border-width: 5px;width:95%;position:absolute;bottom:10px;"></div>
+            <div id="bottomBar" class="inner_window_front" style="display:none;height:30px;font-size: 12px;border-style: solid;border-width: 5px;width:95%;position:absolute;bottom:10px;"></div>
           </div>
           <div class="footer">
-            <div id="music_player" style="display:none">
-              <button onclick="document.getElementById('campaigntrailmusic').play()">Play Soundtrack</button>
-              <button onClick="document.getElementById('campaigntrailmusic').pause()">Pause</button>
-              <audio id="campaigntrailmusic" loop="true" style="display:none" src="" autoplay="false"></audio>
-            </div>
             <button id="modLoadReveal" onclick="if(document.getElementById('modloaddiv').style.display != 'none'){document.getElementById('modloaddiv').style.display = 'none'}else{document.getElementById('modloaddiv').style.display = 'block'}"> Mod Loader </button>
             <br>
             <br>
@@ -119,9 +112,8 @@
             <div id="bonus_menu_area"></div>
             <br>
             <br>
+            <a href="https://www.newcampaigntrail.com/campaign-trail/index.html" style="color:#FF6B6B">This site is a fork of The New Campaign Trail</a><br>
             <a href="http://www.americanhistoryusa.com" style="color:#FF6B6B">Original site</a> created by Dan Bryan &copy; 2012- <testf id="year">2022</testf>
-            <br> To report bugs and view the source code, please visit our <a href="https://github.com/newcampaigntrail/newcampaigntrail.github.io" style="color:#FF6B6B">GitHub</a>
-            <br> Join our <a href="https://discord.gg/CfS6yTtjZj" style="color:#FF6B6B">Discord Server here!</a>
             <br>
           </div>
         </div>
@@ -152,7 +144,6 @@
           <br>
           <input type="checkbox" id="disableRNG" checked />
           <label for="disableRNG">Toggle Scenario RNG</label>
-          <audio id="sfxMeme" style='display:none' src='https://files.gamebanana.com/preview/sounds/kingu_crimsono.mp3'></audio>
 
           </div>
 
@@ -163,8 +154,6 @@
   </body>
   <!-- <script src="../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
   <script src="../static/js/lib/raphael.js"></script>
-  <script src="/static/js/christmas.js"></script>
-  
   <script src="/static/js/indexCode.js"></script>
   <script src="/static/js/bigshot.js"></script>
   <script src="../static/js/lib/md5.js"></script>

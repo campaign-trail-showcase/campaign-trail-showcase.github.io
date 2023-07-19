@@ -33,7 +33,7 @@ function dHondtAllocation(votes, seats, thresh = 0.15) {
 
 var states = []
 var initIt=0
-window.setInterval(function(){campaignTrail_temp.candidate_json = campaignTrail_temp.candidate_json.filter(n => n)},200) // eye roll goes here -> modders are stupid
+window.setInterval(function(){campaignTrail_temp.candidate_json = campaignTrail_temp.candidate_json.filter(n => n)},200);
 var fileExists = function(url) {
     var req = new XMLHttpRequest();
     req.open('GET', url, false);
@@ -45,200 +45,13 @@ lastUpdatedDate="2023-06-19"
 var RecReading;
 
 achList = {
-    "destiny": [
-        "Destiny Arrives All the Same",
-        "Get a 306-232 electoral count in every possible official scenario. (1964, and 1976-2020, not including 2016a)",
-        "<b><em>Misc.</em></b><br><table>"
-    ],
-    "yourchance": [
-        "NOW'S YOUR CHANCE TO BE A",
-        "[[Big Shot]]"
-    ],
-    "stillAlive": [
-        "Still Alive",
-        "Enact the dream of the average r/tct user"
-    ],
-    //2020
-    "ridingBiden": [
-        "The Dark Brandon Rises",
-        "Achieve 406 electoral votes or higher with Joe Biden in the 2020 scenario.",
-        "</table><br><b><em>2020</em></b><br><table>"
-    ],
-    "magaa": [
-        "MAGA... Again",
-        "Achieve 322 electoral votes or higher with Donald Trump in the 2020 scenario."
-    ],
-    "nmpr": [
-        "Not My President!",
-        "Deadlock the election as Donald Trump in 2020."
-    ],
-    "nomalarkey": [
-        "Civility Prevails...?",
-        "Get the real life ending to the 2020 scenario."
-    ],
-    //2016
-    "whatbelt": [
-        "I'm Still Standing",
-        "Win 2016 without Wisconsin, Michigan, or Pennsylvania as either candidate.",
-        "</table><br><b><em>2016</em></b><br><table>"
-    ],
-    "thebern": [
-        "The Flame Berns Bright",
-        "Win 350 or more electoral votes as Hillary Clinton with running mate Bernie Sanders"
-    ],
-    "moscow": [
-        "Moscow's Musketeers",
-        "Win the popular vote as Trump with Palin as your running mate."
-    ],
-    //2016a
-    "why": [
-        "Why?",
-        "Play 2016a.",
-        "</table><br><b><em>2016a</em></b><br><table>"
-    ],
-    "what": [
-        "WHY?!?!?!?!",
-        "Play 2016a 100 times."
-    ],
-    //2012
-    "realdebate": [
-        "A Real Debate",
-        "Win as Obama while fully commiting to the liberal tradition and suggesting Obamacare's expansion.",
-        "</table><br><b><em>2012</em></b><br><table>"
-    ],
-    "karmic": [
-        "Karmic Retribution",
-        "Losing everything except D.C. as Obama after ditching Biden."
-    ],
-    //2000
-    "florida2000": [
-        "Art Imitates Life",
-        "Have Florida be under a 0.5% margin of victory. It must also be the deciding state in such a case that it flips.",
-        "</table><br><b><em>2000</em></b><br><table>"
-    ],
-    "raiders": [
-        "Nader's Raiders",
-        "Win 5% of the popular vote as Ralph Rader (All difficulties allowed)."
-    ],
-    "master": [
-        "I'm My Own Master Now",
-        "Win as Al Gore after saying that Clinton should've been impeached."
-    ],
-    "swap": [
-        "Death Swap",
-        "Win as Al Gore while losing the popular vote."
-    ],
-    //1988
-    "tanks": [
-        "Tanks and Taxes",
-        "Win as Dukakis despite riding the tank and pledging to raise taxes.",
-        "</table><br><b><em>1988</em></b><br><table>"
-    ],
-    "Kinder": [
-        "A Kinder, Gentler Landslide",
-        "Earn over 500 EVs as Bush in on normal.",
-    ],
-    "Rainbow": [
-        "The Rainbow Coalition",
-        "Win with running mate Jesse Jackson as Michael Dukakis.",
+    /*
+    "NotReal": [
+        "Achievement Name",
+        "Description",
+        "</table><br><b><em>1864</em></b><br><table>"
     ]
-    ,
-    //1976
-    "georgia": [
-        "Radical Liberal Jimmy Carter",
-        "Win as Jimmy Carter with over 400 EVs while being firmly pro-choice and for universal healthcare.",
-        "</table><br><b><em>1976</em></b><br><table>"
-    ],
-    //1968
-    "georgenixon": [
-        "The Devil Went Down To Georgia",
-        "As Nixon in 1968, win Georgia.",
-        "</table><br><b><em>1968</em></b><br><table>"
-    ],
-    "ratio": [
-        "Hubert Horatio'd",
-        "As Hubert Humphrey, win 430 or more electoral votes.",
-    ],
-    //1960
-    "BCitsHard": [
-        "Not Because It Is Easy, But Because It Is Hard",
-        "Win as John Kennedy on impossible.",
-        "</table><br><b><em>1960</em></b><br><table>"
-    ],
-    "BCitsEasy": [
-        "Not Because It Is Hard, But Because It Is Easy",
-        "Win less then 100 Electoral Votes as John Kennedy on Cakewalk difficulty",
-    ],
-    "Vice": [
-        "The Vice With No Vice",
-        "Win as Nixon/Goldwater.",
-    ],
-
-    //1948
-    "dixieDewey": [
-        "Dixie Defeats Dewey",
-        "Win as Truman by preventing a southern walkout.",
-        "</table><br><b><em>1948</em></b><br><table>"
-    ],
-    "Dewey": [
-        "All Over But The Shouting",
-        "Win the Popular Vote as Thomas Dewey.",
-    ],
-    //1916
-    "California": [
-        "Califor-Huh?",
-        "As Charles Evans Hughes, win the election without California.",
-        "</table><br><b><em>1916</em></b><br><table>"
-    ],
-    //1896
-    "Commoner": [
-        "The Great Commoner",
-        "Win as Bryan with over 330 electoral votes.",
-        "</table><br><b><em>1896</em></b><br><table>"
-    ],
-    // Mods
-    //2019NK
-    "trueKorea": [
-        "Potato P.R.I.D.E",
-        "Get the true ending to 2019NK.",
-        "</table><br><h2>Mods</h2><br><b><em>2019NK</em></b><br><table>"
-    ],
-    //2008
-    "peoplesvictory": [
-        "The People's President",
-        "Decry the folly of capitalism as John McCain, and still win. (All difficulties allowed)",
-        "</table><br><b><em>2008</em></b><br><table>"
-    ],
-    //1984
-    "minnesotanice": [
-        "'Well, Minnesota Would've Been Nice'",
-        "As Ronald Reagan, win Minnesota.",
-        "</table><br><b><em>1984</em></b><br><table>"
-    ],
-    //1972b
-    "Wallaloha": [
-        "'Wallaloha'",
-        "As George Wallace, win Hawaii.",
-        "</table><br><b><em>1972b</em></b><br><table>"
-    ],
-    //1936c
-    "fixyourmod": [
-        "Fix Your Damn Mod",
-        "As Long in 1936c, die.",
-        "</table><br><b><em>1936c</em></b><br><table>"
-    ],
-    //1876
-    "ATruceNotACompromise": [
-        "A Truce, Not A Compromise",
-        "Have the final results be 185-184 in favour of Hayes, while agreeing to a possible compromise on the last question, mimicking real life events. (Doing this as either candidate counts)",
-        "</table><br><b><em>1876</em></b><br><table>"
-    ],
-    //1872
-    "AVictoryForAllPeople": [
-        "A Victory For All People",
-        "Die as Greeley and win on Normal. Sumner is required as your running mate.",
-        "</table><br><b><em>1872</em></b><br><table>"
-    ]
+    */
 }
 
 // ~~Muffin~~ Achievement Button
@@ -258,16 +71,18 @@ function addAchButton() {
 
     gameWin.appendChild(achievementDiv);
 
-    const achievMenuButton = document.getElementById("achievMenuButton");
-    achievMenuButton.addEventListener("click", openAchievMenu);
+    //const achievMenuButton = document.getElementById("achievMenuButton");
+    //achievMenuButton.addEventListener("click", openAchievMenu);
 }
 
-addAchButton()
-addInfoButton()
-document.getElementById("achievMenuButton").addEventListener("click",openAchievMenu)
+//addAchButton()
+//document.getElementById("achievMenuButton").addEventListener("click",openAchievMenu)
 
 // Opens the achievement menu
 function openAchievMenu() {
+
+    // TODO: Re-add later
+    return;
     const bottomBar = document.getElementById("bottomBar");
     bottomBar.style.display = "none";
 
@@ -277,10 +92,8 @@ function openAchievMenu() {
     }
 
     const gameWin = document.getElementById("game_window");
-    const achievMenuButton = document.getElementById("achievMenuButton");
-    const infoMenuButton = document.getElementById("infoMenuButton");
-    achievMenuButton.remove();
-    infoMenuButton.remove();
+    //const achievMenuButton = document.getElementById("achievMenuButton");
+    //achievMenuButton.remove();
 
     const run = JSON.parse(localStorage.getItem('achievements'));
     let achievementHtml = '';
@@ -326,106 +139,6 @@ function openAchievMenu() {
     backButton.addEventListener("click", returnToMainPage);
 }
 
-// Creates the Additional Information button + last updated date
-function addInfoButton() {
-    const bottomBar = document.getElementById("bottomBar");
-    bottomBar.style.display = "";
-
-    const gameWin = document.getElementById("bottomBar");
-    const infoDiv = document.createElement("div");
-
-    const stylesheetSet = "position: absolute; right: 10px; top: 5px;";
-
-    infoDiv.innerHTML = `
-      <button id='infoMenuButton' style='width:200px;height:25px;font-size:100%;text-align:center'><b>Additional Information</b></button>
-    `;
-    infoDiv.style = stylesheetSet;
-
-    if (!bottomBar.innerHTML.includes("last-updated-date")) {
-        bottomBar.innerHTML += `
-        <style>
-          .bottom-right-text:after {
-            content: var(--bottom-right-text);
-            font-style: italic;
-            position: absolute;
-            bottom: .8em;
-            right: 1em;
-          }
-        </style>
-        <div id="last-updated-date" class="bottom-right-text" style="--bottom-right-text: 'Last updated: ${lastUpdatedDate}'"></div>
-      `;
-    }
-
-    gameWin.appendChild(infoDiv);
-
-    const infoMenuButton = document.getElementById("infoMenuButton");
-    infoMenuButton.addEventListener("click", openInfoMenu);
-
-    const infoBox = document.getElementById("infoBox");
-    if (infoBox) {
-        infoBox.remove();
-    }
-}
-
-// Opens the Additional Information menu
-function openInfoMenu() {
-    const bottomBar = document.getElementById("bottomBar");
-    bottomBar.style.display = "none";
-
-    const gameWin = document.getElementById("game_window");
-    const infoMenuButton = document.getElementById("infoMenuButton");
-    const achievMenuButton = document.getElementById("achievMenuButton");
-    infoMenuButton.remove();
-    achievMenuButton.remove();
-
-    const belowHeader = $("#below_header")[0];
-    belowHeader.style.display = "none";
-
-    const infoDiv = document.createElement("div");
-    infoDiv.id = "infoBox";
-    gameWin.appendChild(infoDiv);
-
-    const textInfo = `
-    <div style="text-align:left">
-      <b>Hello, and welcome to the New Campaign Trail! This is an updated version of The Campaign Trail (hence the name). What does TNCT bring that TCT doesn't? A number of new features, not limited to:</b><br /><br />
-    
-      <p>- A mod loader/library, allowing many of the mods made by our fabulous community to be played/compiled</p>
-      <p>- Faster processing times, so you don't have to sit there forever while the game says <i>Processing Results, wait one moment...</i></p>
-      <p>- Achievements, for if you want to challenge yourself and memorialize unique results.</p>
-      <p>- Ending codes, a functionality of scenarios that allows the end screen to be altered depending on different factors like electoral and popular vote.</p>
-    
-      <p>I could go on, but I think you get the point. We hope you enjoy playing it as much as we do. If you run into any issues, please either report them on the TNCT Github, or Discord server, both linked below at the bottom of the screen.</p>
-    
-      <h3>Credits:</h3>
-      <ul>
-        <li>Dan Bryan (Original Site)</li>
-        <li>DecstarG (Lead Dev)</li>
-        <li>Danxv33 (Assistant Dev)</li>
-        <li>ItsAstronomical (Community Manager)</li>
-        <li>T3CH0X (Dev)</li>
-        <li><a href="https://discord.gg/thecampaigntrail" target="_blank">The Campaign Trail Discord</a></li>
-        <li><a href="https://reddit.com/r/thecampaigntrail/" target="_blank">r/thecampaigntrail</a></li>
-      </ul>
-    
-      <h3>Recent patch notes:</h3>
-      <p>Numerous [[BIG SHOT]] improvements have been implemented. You can now get into [[BIG SHOT]] <b>via the shortcut <code style='font-size:120%;background-color:#cccccc'>bs[enter]</code>.</b> This will only apply <b>if you have already unlocked it.</b></p>
-      <p>From now on, we will include our patch notes, and other important information <a href="https://blog.newcampaigntrail.com/">here</a>. It is a developer log for TNCT. Check it out, we have some info on the recent modmaker program, as well as what happened to achievements.</p>
-    </div>
-    `;
-    
-    const infoBox = document.getElementById("infoBox");
-    infoBox.innerHTML = `
-      <div class="inner_window_front" style="padding:0"><b><h1>Welcome to the New Campaign Trail!</h1></b></div>
-      <div class="inner_window_front" style="padding:1em;overflow-y:scroll;height:300px;"><center>
-      ${textInfo}</table></center>
-      </div>
-      <button id='backButton' style='position: absolute;left: 1.5em;bottom:.5em;width:200px;height:50px;font-size:25px;text-align:center'><b>Back</b></button>
-    `;
-
-    const backButton = document.getElementById("backButton");
-    backButton.addEventListener("click", returnToMainPage);
-}
-
 // This function, when called, returns the user to the main page
 function returnToMainPage() {
     const achBox = document.getElementById("achBox");
@@ -437,15 +150,11 @@ function returnToMainPage() {
     } catch (e) { }
 
     document.getElementById("below_header").style.display = "";
-    addAchButton();
-    addInfoButton();
+    //addAchButton();
     
     // Adds event listeners to the achievement and info buttons
-    const achButton = document.getElementById("achievMenuButton");
-    achButton.addEventListener("click", openAchievMenu);
-
-    const infoButton = document.getElementById("infoMenuButton");
-    infoButton.addEventListener("click", openInfoMenu);
+    // const achButton = document.getElementById("achievMenuButton");
+    // achButton.addEventListener("click", openAchievMenu);
 }
 
 
@@ -454,29 +163,6 @@ function returnToMainPage() {
 
 // set up ach system
 amongusonetwothree = false
-if (localStorage.getItem('achievements') == null) {
-    resetAchievements()
-}
-
-function resetAchievements() {
-    achhh = {
-        achievements: {
-
-        },
-        threeosix: {
-            2020: false,
-            2016: false,
-            2012: false,
-            2000: false,
-            1988: false,
-            1976: false,
-            1964: false
-        },
-        "tsatrolling": 0
-    }
-    localStorage.setItem('achievements', JSON.stringify(achhh))
-    localStorage.setItem('ach4', MD5(JSON.stringify(achhh)))
-}
 
 //yet another anticheat
 window.setInterval(function() {
@@ -2118,7 +1804,7 @@ function divideElectoralVotesProp(e, t) {
             }
         quickstats = [e.final_overall_results[n].electoral_votes, e.final_overall_results[n].popular_votes / o * 100, e.final_overall_results[n].popular_votes] //format: electoral vote count, popular vote proportion, popular vote vote count
 
-
+        /*
         if (!amongusonetwothree) {
 
             among = [e.final_overall_results[0].electoral_votes, e.final_overall_results[0].popular_votes / o * 100, e.final_overall_results[0].popular_votes]
@@ -2315,14 +2001,6 @@ function divideElectoralVotesProp(e, t) {
                 } else               
 
                 // ###### MODS ######
-
-        		// ### 2024G ###
-                // You WILL win Oregon - Removed because that mod fucking sucks and deserves nothing
-                /*
-                if (!run.achievements["youwillwinoregon"] && e.candidate_last_name == "Carlson" && e.election_id == 20 && campaignTrail_temp.difficulty_level_multiplier <= 0.97 && 23 == campaignTrail_temp.final_state_results[36].result[0].candidate==200 && e.final_outcome =="lose") {
-                    unlockAchievement(among, "youwillwinoregon", "", "You <b>WILL</b> win Oregon")
-                } else
-                */
 		
                 // ### 2019NK ###
                 // Potato P.R.I.D.E - Get the true ending to 2019NK.
@@ -2379,6 +2057,7 @@ function divideElectoralVotesProp(e, t) {
                 } 
             }
         }
+        */
 
         if (campaignTrail_temp.multiple_endings) {
 
@@ -2388,6 +2067,7 @@ function divideElectoralVotesProp(e, t) {
 
         }
 
+        /*
         function swap306(year) {
             CAAS = localStorage.getItem('achievements');
             CAASS = JSON.parse(CAAS);
@@ -2397,7 +2077,9 @@ function divideElectoralVotesProp(e, t) {
             localStorage.setItem("achievements", newAchg)
             localStorage.setItem("ach4", secg)
         }
+        */
 
+        /*
         function unlockAchievement(ch, id, image, unlocked) {
 
             console.log("ACHIEVEMENT UNLOCKED: " + id)
@@ -2448,6 +2130,7 @@ function divideElectoralVotesProp(e, t) {
                 });
             }, 8000)
         }
+        */
 
         function isLegitRun() {
             return campaignTrail_temp.bigshot_mode != true && dirtyhacker3 == null //&& campaignTrail_temp.difficulty_level_multiplier  <= 0.97
