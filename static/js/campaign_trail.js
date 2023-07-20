@@ -2420,43 +2420,6 @@ function nextPage2() {
     document.getElementById("monologue").innerHTML = "* you're just a dirty modder, aren't you?<br>* yeah, get outta here."
 }
 
-var dirtyhacker1, dirtyhacker2, dirtyhacker3
-document.addEventListener('keydown', function(event) {
-    if (event.keyCode == 32) {
-        if (document.getElementById("visit_overlay") != null && campaignTrail_temp.bigshot_mode != true && campaignTrail_temp.spacebarformods != true) {
-            // you're just a dirty hacker, aren't you?
-            campaignTrail_temp.multiple_endings = true;
-            dirtyhacker1 = function() {
-                document.getElementById("monologue").innerHTML = "heh heh heh... that's your fault isn't it?<br>you can't understand how this feels.<br><button onclick='dirtyhacker2()'>Next Page</button>"
-            }
-            dirtyhacker2 = function() {
-                document.getElementById("monologue").innerHTML = "knowing that one day, without any warning... it's all going to be reset.<br>look. i gave up trying to stop hacking a long time ago.<br>and stopping the spacebar glitch doesn't really appeal anymore, either.<br><button onclick='dirtyhacker3()'>Next Page</button>"
-            }
-            dirtyhacker3 = function() {
-                document.getElementById("monologue").innerHTML = "cause even if we do... we'll just end up right back here, without any memory of it, right?<br>to be blunt... it makes it kind of hard to give it my all.<br>... or is that just a poor excuse for being lazy...? hell if i know."
-            }
-            endingPicker = function() {
-                if (localStorage.getItem("???") == null) {
-                    localStorage.setItem("???", 0);
-                } else {
-                    localStorage.setItem("???", Number(localStorage.getItem("???") + 1));
-                }
-                if (Number(localStorage.getItem("???")) < 2) {
-                    return "<audio loop='true' autoplay='true' src='https://ia800103.us.archive.org/2/items/sansost/15%20Sans..mp3' style='display:none;'></audio><font id='monologue' face='Comic Sans MS'>our reports showed a massive anomaly in the gamespace continuum.<br>global multipliers jumping left and right, stopping and starting...<br>until suddenly, everything ends.<br><button onclick='dirtyhacker1()'>Next Page</button></font>"
-                } else {
-                    secretsecretending = function() {
-                        document.getElementById("monologue").innerHTML = "* type 'bigshot' into the main page, press enter, type 'bigshot' again, press enter. now go into a game and look at the bottom of the page."
-                    }
-                    return "<font id='monologue' face='Comic Sans MS'>* heya<br>* is anyone there...?<br>* you must be sick of hearing this, huh?<br>* what if i told you there was another way...<br><button onclick='secretsecretending()'>Next Page</button></font>"
-                }
-            }
-        } else if (document.getElementById("visit_overlay") != null && campaign_trail.spacebarformods) {
-            campaignTrail_temp.spacebarUsed = true;
-        }
-    }
-
-});
-
 fix1964= window.setInterval(function(){
     try{
     if (document.getElementById("election_id").value==69) {
