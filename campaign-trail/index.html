@@ -66,12 +66,11 @@
                 </button>
               </span>
             </div>
-            <button style="display:none" id="modLoadReveal" onclick="if(document.getElementById('modloaddiv').style.display != 'none'){document.getElementById('modloaddiv').style.display = 'none'}else{document.getElementById('modloaddiv').style.display = 'block'}"> Mod Loader </button>
             <br>
-            <hr>
-            <div style="text-align: center;"><h1>Featured Mods</h1></div>
+            <button id="modLoadReveal" onclick="if(document.getElementById('modloaddiv').style.display != 'none'){document.getElementById('modloaddiv').style.display = 'none'}else{document.getElementById('modloaddiv').style.display = 'block'}"> Custom Mod Loader </button>
+            <br>
             <div id="modloaddiv" style="display:none">
-              <div id="tagContainer">
+              <div style="display:none" id="tagContainer">
                 <label>
                   <input type="checkbox" class="tagCheckbox" value="historical">Historical </label>
                 <label>
@@ -81,7 +80,7 @@
                 <label>
                   <input type="checkbox" class="tagCheckbox" value="international">International </label>
               </div>
-              <select name="mod" id="modSelect" onchange="modSelectChange()"></select>
+              <select style="display:none" name="mod" id="modSelect" onchange="modSelectChange()"></select>
               <div id="customMenu">
                 <br>
                 <b>Code Set 1:</b>
@@ -115,8 +114,11 @@
             <br>
             <div id="bonus_menu_area"></div>
             <br>
-            <br>
-            <div id="mod-grid" class="community-grid"></div>
+            <hr>
+            <div id="featured-mods-area">
+              <div style="text-align: center;"><h1>Featured Mods</h1></div>
+              <div id="mod-grid" class="community-grid"></div>
+            </div>
             </div>      
 
             

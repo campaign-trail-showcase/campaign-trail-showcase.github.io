@@ -88,7 +88,7 @@ function loadModFromButton(modValue) {
     
     $("#modloaddiv")[0].style.display = 'none'
     $("#modLoadReveal")[0].style.display = 'none'
-    document.getElementById("mod-grid").style.display = "none";
+    document.getElementById("featured-mods-area").style.display = "none";
     modded = true
 }
 

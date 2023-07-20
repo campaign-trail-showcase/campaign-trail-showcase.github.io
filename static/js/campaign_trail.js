@@ -477,6 +477,7 @@ function exportResults() {
 diff_mod = false
 
 $("#submitMod").click(function() {
+    document.getElementById("featured-mods-area").style.display = "none";
     if ($("#importfile")[0].value != "") {
         const content = document.querySelector('.content');
         const [file] = document.querySelector('input[type=file]').files;
