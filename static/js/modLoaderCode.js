@@ -1,3 +1,4 @@
+let loadingFromModButton = false;
 
 $(document).ready(async function() {
     var originalOptions = null;
@@ -69,11 +70,26 @@ function createModView(mod, imageUrl, description) {
     <h1>${mod.value}</h1>
     <img style="width:80%; border: 4px solid white;" src="${imageUrl}"></img>
     <div class="mod-desc">${description}</div>
-    <button>Load Mod</button>
-    <p>LOAD MOD BUTTON NOT WORKING YET</p>
+    <button onclick="loadModFromButton('${mod.value}')">Load Mod</button>
     `
 
     return modView;
+}
+
+function loadModFromButton(modValue) {
+    loadingFromModButton = true;
+    var client = new XMLHttpRequest();
+    client.open('GET', "../static/mods/" + modValue + "_init.html");
+    client.onreadystatechange = function() {
+        evaluate(client.responseText)
+    }
+    client.send();
+    diff_mod = true
+    
+    $("#modloaddiv")[0].style.display = 'none'
+    $("#modLoadReveal")[0].style.display = 'none'
+    document.getElementById("mod-grid").style.display = "none";
+    modded = true
 }
 
 function getAllIndexes(arr, val) {

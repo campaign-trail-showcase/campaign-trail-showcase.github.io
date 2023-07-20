@@ -795,7 +795,7 @@ function divideElectoralVotesProp(e, t) {
                                 clearInterval(important_code)
                             }
                         }, 1000);
-                    } else if ($("#modSelect")[0].value != "other" || e.hotload) {
+                    } else if ($("#modSelect")[0].value != "other" || e.hotload || loadingFromModButton) {
                         aaa = election_HTML(t, i, a)
                         aaa = "../static/questionset/" + aaa
                         try {
