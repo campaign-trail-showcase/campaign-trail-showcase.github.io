@@ -381,22 +381,17 @@ function themePicked() {
 susnum = Math.floor((Math.random() * 8) + 1)
 stassennum = Math.floor((Math.random() * 8) + 1)
 stassenyear = ["1944", "1948", "1952", "1964", "1968", "1980", "1984", "1988", "1992"]
-nct_stuff.quotes = [`"All men are created equal" - Thomas Jefferson`, `"All the Way with LBJ!"`, `"Those who make peaceful revolution impossible, make violent revolution inevitable" - John Kennedy`, `"I'm Gerald Ford, and you're not."`, `"Fool me once, shame on  -  shame on you. Fool me  -  you can't get fooled again." - George W. Bush`, `"It's the economy stupid!"`, `"You shall not crucify mankind upon a cross of gold." - William Jennings Bryan`, `"Politics have no relations to morals." - Machiavelli`, `"I am not going to exploit, for political purposes, my opponent's youth and inexperience." - Ronald Reagan`, `"There are weapons of mass destruction in Iraq." - George W. Bush`, `"That was really uncalled for, Senator." - Dan Quayle`, `"My failures have been error in judgement, not intent." - Ulysses S. Grant`, `"When the president does it, that means it is not illegal" - Richard Nixon`, `"Leave nothing for tomorrow which can be done today" - Abraham Lincoln`, `"Extremism, in the defense of liberty, is no vice." - Barry Goldwater`, `"I've signed legislation that will outlaw Russia forever. We begin bombing in five minutes." - Ronald Reagan`, `"Injustice anywhere, is a threat to justice everywhere." - Martin Luther King`, `"The Dream shall never die!" - Ted Kennedy`, `"I have binders full of women!" - Mitt Romney`, `"Who am I? Why am I here?" - James Stockdale`, `"Read My Lips: No New Taxes." - George HW. Bush`, `"Thomas Jefferson lives." - John Adams`, `"Tippecanoe and Tyler Too!"`, `"There is no Soviet domination of eastern Europe!" - Gerald Ford`, `"Change based on principle is progress. Constant change without principle becomes chaos." - Dwight Eisenhower`, `"Freedom is never more than one generation away from extinction."" - Ronald Reagan`, ` "Ladies and gentlemen, I don't know whether you fully understand that I have just been shot," - Theodore Roosevelt`, `"DEWEY DEFEATS TRUMAN"`, `"Hell no, we won't go!"`, '"Hey, hey, LBJ, how many kids did you kill today?"', `"Vote for the Crook: It’s Important!`, `"Every man a king, but no one wears a crown!"`, `"Keep cool with Coolidge!"`, `"Don't swap horses in the middle of the stream."`, `"Mr. Gorbachev, tear down this wall!" - Ronald Reagan`, `"Pokémon Go to the Polls!" - Hillary Clinton`, `"The only thing we have to fear is fear itself." - Franklin Roosevelt`, `"Only those who have the courage to fail greatly achieve greatly." - Robert Kennedy`, `"Amnesty, acid, and abortion."`, `"In your heart, you know he's right!"`, `"Give me liberty, or give me death!" - Patrick Henry`, `"Vote for Taft now, you can vote for Bryan anytime!"`, `"Vote for the crook. It's important."`, `"Blaine, Blaine, James G. Blaine, The Continental Liar from the State of Maine!"`, `"I like Ike!"`, `"A house divided can not stand." - Abraham Lincoln`, `"Ask not what your country can do for you- ask what you can do for your country." - John Kennedy`, `"Give me six hours to chop down a tree and I will spend four sharpening the axe" - Abraham Lincoln`]
-quotnum = Math.floor((Math.random() * nct_stuff.quotes.length))
-quote = nct_stuff.quotes[quotnum]
 
 // Caching frequently accessed elements and values
-let correctbannerpar = document.getElementsByClassName("game_header")[0]
-correctbannerpar.innerHTML += "<font id='wittyquote' size='4' color='white'><em>" + quote + "</em></font>"
-corrr = correctbannerpar.innerHTML
-var corrr = correctbannerpar.innerHTML
-var header = $('#header')[0];
-var gameHeader = document.getElementsByClassName("game_header")[0];
-var gameWindow = $("#game_window")[0];
-var container = $(".container")[0];
-var campaignTrailMusic = document.getElementById('campaigntrailmusic');
+let correctbannerpar = document.getElementsByClassName("game_header")[0];
+let corrr = correctbannerpar.innerHTML;
+let header = $('#header')[0];
+let gameHeader = document.getElementsByClassName("game_header")[0];
+let gameWindow = $("#game_window")[0];
+let container = $(".container")[0];
+let campaignTrailMusic = document.getElementById('campaigntrailmusic');
 // Create a style element
-var dynamicStyle = document.createElement('style');
+let dynamicStyle = document.createElement('style');
 document.head.appendChild(dynamicStyle);
 
 // Update banner and styling
@@ -416,10 +411,10 @@ function updateBannerAndStyling() {
 
 // Update inner windows styling
 function updateInnerWindowsStyling() {
-    var innerWindow2 = document.getElementById("inner_window_2");
-    var innerWindow3 = document.getElementById("inner_window_3");
-    var innerWindow4 = document.getElementById("inner_window_4");
-    var innerWindow5 = document.getElementById("inner_window_5");
+    let innerWindow2 = document.getElementById("inner_window_2");
+    let innerWindow3 = document.getElementById("inner_window_3");
+    let innerWindow4 = document.getElementById("inner_window_4");
+    let innerWindow5 = document.getElementById("inner_window_5");
 
     if (innerWindow2 != null) {
         innerWindow2.style.backgroundColor = selectedTheme.coloring_window;

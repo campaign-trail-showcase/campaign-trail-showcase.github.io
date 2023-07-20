@@ -661,7 +661,7 @@ h2.headline_pretty {
 	border-width: 2px;
 	border-color: #C9C9C9;
 	text-align: center;
-	height: 15%;
+	height: auto;
 	width: 100%
 }
 
