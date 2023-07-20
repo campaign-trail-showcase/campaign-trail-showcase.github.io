@@ -8,14 +8,15 @@
 
 .mod-desc {
     text-align: center;
-    font-size: 12px;
+    font-size: 10px;
     width: 90%;
-    margin: 10px auto;
+    margin: 5px auto;
 }
 
 .community-grid-element {
-    width: 45%;
-    height: 30rem;
+    padding:10px;
+    width: 25%;
+    height: 25rem;
     background-color : #BFE6FF;
     margin : 5px 5px 10px 10px;
     border-radius: 10px;

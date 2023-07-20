@@ -67,7 +67,7 @@ function createModView(mod, imageUrl, description) {
 
     modView.innerHTML = `
     <h1>${mod.value}</h1>
-    <img style="width:80%; border: 15px solid white;" src="${imageUrl}"></img>
+    <img style="width:80%; border: 4px solid white;" src="${imageUrl}"></img>
     <div class="mod-desc">${description}</div>
     <button>Load Mod</button>
     <p>LOAD MOD BUTTON NOT WORKING YET</p>
