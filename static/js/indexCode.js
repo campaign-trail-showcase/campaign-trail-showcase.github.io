@@ -194,136 +194,6 @@ function changeFavicon(src) {
 
 changeFavicon("/static/34starcircle-2.png")
 
-$(document).ready(function() {
-    var originalOptions = null;
-
-    $('.tagCheckbox').on('change', filterEntries);
-
-    loadEntries();
-
-    function loadEntries() {
-        $.ajax({
-            type: "GET",
-            url: "../static/mods/MODLOADERFILE.html",
-            dataType: "text",
-            success: function(response) {
-                $("#modSelect").html(response);
-
-                // hot load
-                let hotload = window.localStorage.getItem("hotload");
-                if (hotload) {
-                    try {
-                        $("#modSelect")[0].value = hotload;
-                        campaignTrail_temp.hotload = hotload;
-                        $("#submitMod").click();
-                    } catch {
-
-                    }
-                    window.localStorage.removeItem("hotload") // this should be done whether or not there is an error.
-                }
-
-                //clone so we don't reduce the list of mods every time a tag is selected
-                originalOptions = $("#modSelect option").clone();
-                filterEntries();
-            },
-            error: function() {
-                console.log("Error loading mod loader - couldn't reach server.");
-            }
-        });
-    }
-
-    function filterEntries() {
-        var selectedTags = [];
-
-        // Get all selected tags
-        $('.tagCheckbox:checked').each(function() {
-            selectedTags.push($(this).val());
-        });
-
-        var filteredOptions = originalOptions.filter(function() {
-            var entryTags = $(this).data('tags');
-
-            if (selectedTags.length === 0) {
-                // Show all if no tags are selected
-                return true;
-            }
-
-            //return mods that are tagged and have all checked tags
-            return entryTags && (containsAllTags(entryTags, selectedTags));
-        });
-
-        var $modSelect = $('#modSelect');
-        $modSelect.empty().append(filteredOptions);
-
-        $modSelect.val($modSelect.find('option:first').val());
-    }
-
-    function containsAllTags(entryTags, selectedTags) {
-        var entryTagArray = entryTags.split(' ');
-
-        for (var i = 0; i < selectedTags.length; i++) {
-            if (!entryTagArray.includes(selectedTags[i])) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-});
-
-
-function uwuifier(a) {
-    b = a.split(" I ")
-    if (b.length > 0) {
-        for (i in b) {
-            if (i < b.length - 1) {
-                b[i] += " I-I "
-            }
-        }
-    }
-    a = b.join("")
-    b = a.split("l")
-    if (b.length > 0) {
-        for (i in b) {
-            if (i < b.length - 1) {
-                b[i] += "w"
-            }
-        }
-    }
-    a = b.join("")
-    b = a.split("r")
-    if (b.length > 0) {
-        for (i in b) {
-            if (i < b.length - 1) {
-                b[i] += "w"
-            }
-        }
-    }
-    a = b.join("")
-    b = a.split(" t")
-    if (b.length > 0) {
-        for (i in b) {
-            if (i < b.length - 1) {
-                if (b[Number(i) + 1][0] != '-')
-                    b[i] += " t-t"
-                else
-                    b[i] += " t"
-            }
-        }
-    }
-    a = b.join("")
-    b = a.split("ow")
-    if (b.length > 0) {
-        for (i in b) {
-            if (i < b.length - 1) {
-                b[i] += "uw"
-            }
-        }
-    }
-    a = b.join("")
-    return a
-}
-
 function choose(choices) {
     var index = Math.floor(Math.random() * choices.length);
     return choices[index];
@@ -332,6 +202,14 @@ function choose(choices) {
 nct_stuff = {}
 nct_stuff.dynamicOverride = false;
 nct_stuff.themes = {
+    "classic": {
+        name: "Classic",
+        background: "",
+        banner: "../static/images/banners/banner_classic.png",
+        coloring_window: "",
+        coloring_container: "",
+        coloring_title: ""
+    },
     "tct": {
         name: "The Community Trail",
         background: "../static/images/backgrounds/tct_background.png",
@@ -354,7 +232,7 @@ nct_stuff.selectedTheme = "";
 theme = window.localStorage.getItem("theme");
 
 if (theme == null) {
-    nct_stuff.selectedTheme = "tct"
+    nct_stuff.selectedTheme = "classic"
 } else {
     nct_stuff.selectedTheme = theme
 }
@@ -572,146 +450,5 @@ campaignTrail_temp.candidate_dropout_json = JSON.parse("[{\"model\": \"campaign_
 campaignTrail_temp.show_premium = true;
 campaignTrail_temp.premier_ab_test_version = -1;
 campaignTrail_temp.credits = "Dan Bryan";
-
-// CUSTOM THEME MANAGER
-
-open_first_gate = (e) => { // gate of opening
-    e.preventDefault();
-    let menu_area = $("#bonus_menu_area")[0];
-    menu_area.style.display = "block";
-
-    /*
-        name: "Custom",
-        background: "",
-        banner: "",
-        coloring_window: "",
-        coloring_container: "",
-        coloring_title: ""
-    */
-
-    let th = window.localStorage.getItem("custom_theme");
-
-    menu_area.innerHTML = `
-    <div class='prometh'>
-    <h3>Custom Theme Menu</h3>
-    <p>Background Image URL: <input id='background_url' placeholder='Link directly to the image.' /></p>
-    <p>Background Image Covers?: <input id='background_cover' type='checkbox' /></p>
-    <p>Banner Image URL (suggested dimensions: 1000x303): <input id='banner_url' placeholder='Link directly to the image.' /></p>
-    <p>Window Image URL (<b>OPTIONAL</b>, WILL LOOK BAD IF YOU DON'T KNOW WHAT YOU'RE DOING): <input id='window_url' placeholder='Link directly to the image.' /></p>
-    <p>Window Colouring: <input id='window_colour' type='color' /></p>
-    <p>Container Colouring: <input id='cont_colour' type='color' /></p>
-    <p>Title Colouring: <input id='title_colour' type='color' /></p>
-    <p>Text Colouring: <input id='text_colour' type='color' /></p>
-    <p>Override Mod Themes? (experimental): <input id='mod_override' type='checkbox' /></p>
-
-    <button id='prometh_save'>Save</button>
-    </div>
-    `
-
-    if (th) {
-        let theme = JSON.parse(th);
-        $("#background_url").val(theme.background);
-        $("#background_cover")[0].checked = theme.background_cover;
-        $("#banner_url").val(theme.banner);
-        $("#window_url").val(theme.window_url)
-        $("#window_colour").val(theme.coloring_window);
-        $("#cont_colour").val(theme.coloring_container);
-        $("#title_colour").val(theme.coloring_title);
-        $("#text_colour").val(theme.text_col);
-        $("#mod_override")[0].checked = theme.mod_override;
-    }
-
-    $("#prometheus_button").off("click").click(open_fifth_gate);
-
-    $("#prometh_save").click(() => {
-        let theme = {
-            name: "Custom",
-            background: $("#background_url").val(),
-            background_cover: $("#background_cover")[0].checked,
-            banner: $("#banner_url").val(),
-            coloring_window: $("#window_colour").val(),
-            coloring_container: $("#cont_colour").val(),
-            coloring_title: $("#title_colour").val(),
-            text_col: $("#text_colour").val(),
-            mod_override: $("#mod_override")[0].checked,
-            window_url: $("#window_url").val()
-        }
-        nct_stuff.themes[nct_stuff.selectedTheme] = theme;
-        selectedTheme = theme;
-        updateBannerAndStyling();
-        if (theme.mod_override) {
-            updateDynamicStyle();
-            nct_stuff.custom_override = JSON.parse(JSON.stringify(theme));
-        } else {
-            nct_stuff.custom_override = null;
-        }
-
-        window.localStorage.setItem("custom_theme", JSON.stringify(theme));
-    })
-}
-
-open_fifth_gate = (e) => { // gate of closing
-    e.preventDefault();
-    let menu_area = $("#bonus_menu_area")[0];
-    menu_area.style.display = "none";
-
-    // close menu
-    let m_children = Array.from(menu_area.children);
-    m_children.forEach(f => f.remove());
-
-    $("#prometheus_button").off("click").click(open_first_gate);
-}
-
-
-if (nct_stuff.selectedTheme == "custom") {
-    let themePicker = $("#theme_picker")[0];
-
-    let theme_man_button = document.createElement("p");
-    theme_man_button.innerHTML = "<button id='prometheus_button'><b>Prometheus' Menu</b></button>";
-
-    themePicker.appendChild(theme_man_button);
-
-    var prometheusStyle = document.createElement('style');
-    prometheusStyle.innerHTML = `
-    #bonus_menu_area {
-        position: relative;
-        width: 500px;
-        height: 200px;
-        display: none;
-        text-align: right;
-        left: 45%;
-    }
-    
-    .prometh {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background-color: #595959;
-        border: 3px solid black;
-        color: white;
-        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-        width: 100%;
-        height: 100%;
-        overflow-y: scroll;
-        padding: 10px;
-    }
-    `
-    document.head.appendChild(prometheusStyle);
-
-    $("#prometheus_button").click(open_first_gate);
-
-    let th = window.localStorage.getItem("custom_theme");
-    if (th) {
-        let theme = JSON.parse(th);
-        nct_stuff.themes[nct_stuff.selectedTheme] = theme;
-        selectedTheme = theme;
-        updateBannerAndStyling();
-        if (theme.mod_override) {
-            updateDynamicStyle();
-            nct_stuff.custom_override = JSON.parse(JSON.stringify(theme));
-        }
-    }
-}
-
 
 updateBannerAndStyling();
