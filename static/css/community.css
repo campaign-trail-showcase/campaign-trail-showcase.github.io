@@ -37,6 +37,10 @@
     border-radius: 10px;
 }
 
+.tag-button:hover {
+    background-color : #aacee2;
+  }
+
 .community-grid-element {
     width: 25%;
     height: 25rem;

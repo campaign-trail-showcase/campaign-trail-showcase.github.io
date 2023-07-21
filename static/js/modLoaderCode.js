@@ -85,13 +85,20 @@ function createTagButtons(tagsFound) {
     const tagsGrid = document.getElementById("tags");
     tagsFound.forEach(function(tag) {
         const tagButton = document.createElement("div");
+
         tagButton.classList.add("tag-button");
         tagButton.innerHTML = `
         <input type="checkbox" id="${tag}" name="${tag}" value="${tag}" checked>
-        <label for="${tag}">${tag}</label><br>
+        <label style="user-select:none" for="${tag}">${tag}</label><br>
         `;
         tagsGrid.appendChild(tagButton);
         const checkbox = tagButton.getElementsByTagName("INPUT")[0];
+
+        tagButton.addEventListener('click', function (event) {
+            if(event.target == tagButton)
+            checkbox.click();
+        });
+
         tagList.push(checkbox);
         checkbox.addEventListener("change", updateModViews);
     });
