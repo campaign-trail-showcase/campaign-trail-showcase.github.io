@@ -70,7 +70,7 @@ $(document).ready(async function() {
         }
 
         let imageUrl = temp.election_json[0].fields.image_url;
-        let description = temp.election_json[0].fields.summary.slice(0, 300) + "...";
+        let description = temp.election_json[0].fields.summary;
         
         const modView = createModView(mod, imageUrl, description);
         document.getElementById("mod-grid").appendChild(modView);
@@ -134,8 +134,10 @@ function createModView(mod, imageUrl, description) {
     modView.setAttribute("tags", mod.dataset.tags);
 
     modView.innerHTML = `
-    <h2 class="mod-title">${mod.innerText}</h2>
-    <img style="width:80%; border: 4px solid white;" src="${imageUrl}"></img>
+    <div class="mod-title">
+        <p>${mod.innerText}</p>
+    </div>
+    <img class="mod-image" src="${imageUrl}"></img>
     <div class="mod-desc">${description}</div>
     <button class="hover-button" onclick="loadModFromButton('${mod.value}')"><span>Load Mod</span></button>
     `

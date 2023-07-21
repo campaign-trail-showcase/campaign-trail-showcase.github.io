@@ -16,17 +16,33 @@
     margin: 10px 0;
 }
 
+.mod-image {
+    width:80%;
+    border: 4px solid white;
+    height: auto;
+}
 
 .mod-title {
+    align-items: center;
+    justify-content: center;
     text-align: center;
     width: 90%;
+    margin-top: 10px;
+    height: 15%;
+    display:flex;
+    font-size: 20px;
+    font-weight: bolder;
 }
 
 .mod-desc {
+    flex: 1;
+  height: 100%;
+  overflow-y: scroll;
     text-align: center;
     font-size: 10px;
     width: 90%;
     margin: 5px auto;
+
 }
 
 .tag-button {
@@ -54,6 +70,7 @@
 }
 
 .hover-button {
+    margin-bottom: 15px;
     display: inline-block;
     border-radius: 4px;
     background-color: rgb(85, 111, 176);
@@ -65,7 +82,6 @@
     width: 80%;
     transition: all 0.5s;
     cursor: pointer;
-    margin-bottom: 25px;
     font-weight: bold;
   }
   
