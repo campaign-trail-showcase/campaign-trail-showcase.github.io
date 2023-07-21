@@ -16,6 +16,9 @@ $(document).ready(async function() {
     mods.forEach(function(mod) {
         const tags = mod.dataset.tags.split(" ");
         for(let i = 0; i < tags.length; i++) {
+            if(tags[i].length == 0) {
+                continue;
+            }
             tagsFound.add(tags[i]);
         }
     });
