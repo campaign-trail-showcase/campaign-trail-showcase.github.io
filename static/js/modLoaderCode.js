@@ -79,8 +79,8 @@ $(document).ready(async function() {
             console.log("Could not extract from " + mod.value)
         }
 
-        let imageUrl = temp.election_json[0].fields.image_url;
-        let description = temp.election_json[0].fields.summary;
+        let imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
+        let description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
         
         const modView = createModView(mod, imageUrl, description);
         document.getElementById("mod-grid").appendChild(modView);
