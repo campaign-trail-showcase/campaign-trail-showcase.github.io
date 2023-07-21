@@ -37,6 +37,7 @@ window.setInterval(function(){campaignTrail_temp.candidate_json = campaignTrail_
 var fileExists = function(url) {
     var req = new XMLHttpRequest();
     req.open('GET', url, false);
+    console.log("trying to get file from url " + url);
     req.send();
     return req.status === 200;
 };
@@ -806,6 +807,7 @@ function divideElectoralVotesProp(e, t) {
                                 year = e.temp_election_list[eArr].display_year
                                 cand = e.candidate_json[e.candidate_json.map(a=>a.pk).indexOf(e.candidate_id)].fields.last_name
                                 run = e.candidate_json[e.candidate_json.map(a=>a.pk).indexOf(e.running_mate_id)].fields.last_name
+
                                 theorId = year+"_"+cand+run
                                 //theorId = $("#modSelect")[0].value
 
