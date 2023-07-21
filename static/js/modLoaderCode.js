@@ -147,11 +147,11 @@ function setCategory(event, category) {
     const tabs = document.getElementsByClassName("tablinks");
     for(let i = 0; i < tabs.length; i++) {
         const tab = tabs[i];
+
+        tab.className = tab.className.replace(" active", "");
+        
         if(tab == event.target) {
             event.currentTarget.className += " active";
-        }
-        else {
-            tab.className = tab.className.replace(" active", "");
         }
     }
 
