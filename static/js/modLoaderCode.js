@@ -123,7 +123,7 @@ function updateModViews(event) {
                 break;
             }
         }
-        modList[i].style.display = hasTag ? "block" : "none";
+        modList[i].style.display = hasTag ? "flex" : "none";
     }
 }
 
