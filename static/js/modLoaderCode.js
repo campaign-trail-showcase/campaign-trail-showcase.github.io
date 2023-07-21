@@ -2,8 +2,18 @@ let loadingFromModButton = false;
 
 const modList = [];
 const tagList = [];
+let favoriteMods = new Set();
+
+let onlyFavorites = false;
 
 $(document).ready(async function() {
+
+    favoriteMods = localStorage.getItem("favoriteMods") != null ? localStorage.getItem("favoriteMods") : new Set();
+
+    if(typeof favoriteMods == 'string') {
+        favoriteMods = new Set(favoriteMods.split(","));
+    }
+
     var originalOptions = null;
 
     $('.tagCheckbox').on('change', filterEntries);
@@ -118,7 +128,8 @@ function updateModViews(event) {
         const modTags = modList[i].getAttribute("tags").split(" ");
         for(let j = 0; j < modTags.length; j++) {
             const tag = modTags[j];
-            if(activeTags.has(tag)) {
+
+            if(activeTags.has(tag) && (!onlyFavorites || isFavorite(modList[i].getAttribute("mod-name")))) {
                 hasTag = true;
                 break;
             }
@@ -127,11 +138,41 @@ function updateModViews(event) {
     }
 }
 
+function isFavorite(modName) {
+    return favoriteMods.has(modName);
+}
+
+function setCategory(event, category) {
+
+    const tabs = document.getElementsByClassName("tablinks");
+    for(let i = 0; i < tabs.length; i++) {
+        const tab = tabs[i];
+        if(tab == event.target) {
+            event.currentTarget.className += " active";
+        }
+        else {
+            tab.className = tab.className.replace(" active", "");
+        }
+    }
+
+    if(category == "all") {
+        onlyFavorites = false;
+    }
+    else if(category == "favorites") {
+        onlyFavorites = true;
+    }
+
+    updateModViews();
+}
+
 function createModView(mod, imageUrl, description) {
     const modView = document.createElement("div");
     modView.classList.add("community-grid-element")
 
     modView.setAttribute("tags", mod.dataset.tags);
+    modView.setAttribute("mod-name", mod.value);
+
+    const favText = isFavorite(mod.value) ? "Unfavorite" : "Favorite"; 
 
     modView.innerHTML = `
     <div class="mod-title">
@@ -140,9 +181,24 @@ function createModView(mod, imageUrl, description) {
     <img class="mod-image" src="${imageUrl}"></img>
     <div class="mod-desc">${description}</div>
     <button class="hover-button" onclick="loadModFromButton('${mod.value}')"><span>Load Mod</span></button>
+    <button class="hover-button" onclick="toggleFavorite(event, '${mod.value}')"><span>${favText}</span></button>
     `
 
     return modView;
+}
+
+function toggleFavorite(event, modValue) {
+    const inFavorites = isFavorite(modValue);
+    if(!inFavorites) {
+        favoriteMods.add(modValue);
+        event.target.innerText = "Unfavorite"
+    }
+    else {
+        favoriteMods.delete(modValue);
+        event.target.innerText = "Favorite";
+    }
+    localStorage.setItem("favoriteMods", Array.from(favoriteMods));
+    updateModViews();
 }
 
 function loadModFromButton(modValue) {
