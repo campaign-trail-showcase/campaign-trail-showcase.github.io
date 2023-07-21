@@ -127,10 +127,10 @@ function createModView(mod, imageUrl, description) {
     modView.setAttribute("tags", mod.dataset.tags);
 
     modView.innerHTML = `
-    <h2>${mod.innerText}</h2>
+    <h2 class="mod-title">${mod.innerText}</h2>
     <img style="width:80%; border: 4px solid white;" src="${imageUrl}"></img>
     <div class="mod-desc">${description}</div>
-    <button onclick="loadModFromButton('${mod.value}')">Load Mod</button>
+    <button class="hover-button" onclick="loadModFromButton('${mod.value}')"><span>Load Mod</span></button>
     `
 
     return modView;

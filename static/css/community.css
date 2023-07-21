@@ -16,6 +16,12 @@
     margin: 10px 0;
 }
 
+
+.mod-title {
+    text-align: center;
+    width: 90%;
+}
+
 .mod-desc {
     text-align: center;
     font-size: 10px;
@@ -32,7 +38,6 @@
 }
 
 .community-grid-element {
-    padding:10px;
     width: 25%;
     height: 25rem;
     background-color : #BFE6FF;
@@ -43,3 +48,44 @@
     align-items: center;
     justify-content: center;
 }
+
+.hover-button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: rgb(85, 111, 176);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 8px;
+    width: 80%;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+  
+  .hover-button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .hover-button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .hover-button:hover span {
+    padding-right: 25px;
+  }
+  
+  .hover-button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
