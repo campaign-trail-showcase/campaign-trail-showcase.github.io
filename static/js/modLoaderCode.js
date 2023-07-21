@@ -1,5 +1,8 @@
 let loadingFromModButton = false;
 
+const modList = [];
+const tagList = [];
+
 $(document).ready(async function() {
     var originalOptions = null;
 
@@ -7,6 +10,15 @@ $(document).ready(async function() {
 
     await loadEntries();
     let mods = document.getElementById('modSelect').childNodes;
+
+    let tagsFound = new Set();
+
+    mods.forEach(function(mod) {
+        const tags = mod.dataset.tags.split(" ");
+        for(let i = 0; i < tags.length; i++) {
+            tagsFound.add(tags[i]);
+        }
+    });
 
     mods.forEach(async function(mod) {
 
@@ -56,18 +68,63 @@ $(document).ready(async function() {
 
         let imageUrl = temp.election_json[0].fields.image_url;
         let description = temp.election_json[0].fields.summary.slice(0, 300) + "...";
-       
-        document.getElementById("mod-grid").appendChild(createModView(mod, imageUrl, description));
+        
+        const modView = createModView(mod, imageUrl, description);
+        document.getElementById("mod-grid").appendChild(modView);
+        modList.push(modView);
     });
+
+    createTagButtons(tagsFound);
     
 });
+
+function createTagButtons(tagsFound) {
+    const tagsGrid = document.getElementById("tags");
+    tagsFound.forEach(function(tag) {
+        const tagButton = document.createElement("div");
+        tagButton.classList.add("tag-button");
+        tagButton.innerHTML = `
+        <input type="checkbox" id="${tag}" name="${tag}" value="${tag}" checked>
+        <label for="${tag}">${tag}</label><br>
+        `;
+        tagsGrid.appendChild(tagButton);
+        const checkbox = tagButton.getElementsByTagName("INPUT")[0];
+        tagList.push(checkbox);
+        checkbox.addEventListener("change", updateModViews);
+    });
+}
+
+function updateModViews(event) {
+    const activeTags = new Set();
+    for(let i = 0; i < tagList.length; i++) {
+        if(tagList[i].checked) {
+            activeTags.add(tagList[i].value);
+        }
+    }
+
+
+    for(let i = 0; i < modList.length; i++) {
+        let hasTag = false;
+        const modTags = modList[i].getAttribute("tags").split(" ");
+        for(let j = 0; j < modTags.length; j++) {
+            const tag = modTags[j];
+            if(activeTags.has(tag)) {
+                hasTag = true;
+                break;
+            }
+        }
+        modList[i].style.display = hasTag ? "block" : "none";
+    }
+}
 
 function createModView(mod, imageUrl, description) {
     const modView = document.createElement("div");
     modView.classList.add("community-grid-element")
 
+    modView.setAttribute("tags", mod.dataset.tags);
+
     modView.innerHTML = `
-    <h1>${mod.value}</h1>
+    <h2>${mod.innerText}</h2>
     <img style="width:80%; border: 4px solid white;" src="${imageUrl}"></img>
     <div class="mod-desc">${description}</div>
     <button onclick="loadModFromButton('${mod.value}')">Load Mod</button>

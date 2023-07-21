@@ -6,11 +6,29 @@
     justify-content: center;
 }
 
+.tags-grid {
+    display: flex;
+    flex-wrap:wrap;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
 .mod-desc {
     text-align: center;
     font-size: 10px;
     width: 90%;
     margin: 5px auto;
+}
+
+.tag-button {
+    padding: 10px;
+    font-weight: bold;
+    background-color : #BFE6FF;
+    margin : 5px 5px 10px 10px;
+    border-radius: 10px;
 }
 
 .community-grid-element {
