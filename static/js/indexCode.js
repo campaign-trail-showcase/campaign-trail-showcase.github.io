@@ -140,14 +140,6 @@ nct_stuff.themes = {
         coloring_window: "#ff6b6b",
         coloring_container: "#930301",
         coloring_title: ""
-    },
-    "custom": {
-        name: "Custom",
-        background: "",
-        banner: "",
-        coloring_window: "",
-        coloring_container: "",
-        coloring_title: ""
     }
 }
 
