@@ -1,51 +1,9 @@
 const yearField = document.getElementById("year")
 yearField.innerHTML = new Date().getFullYear()
 
-// INITIAL BIGSHOT
-
-const keyCodes = [66, 73, 71, 83, 72, 79, 84, 13];
-const altCodes = [66, 83, 13]; // shortcut
 let counter = 0;
 let alt_counter = 0;
 let initial = false;
-
-document.addEventListener('keydown', function(event) {
-    if (campaignTrail_temp.bigshot_mode) {
-        return;
-    }
-    if (event.keyCode === keyCodes[counter]) {
-        counter += 1;
-
-        if (counter === keyCodes.length) {
-            if (localStorage.getItem("cheated") !== "true") {
-                const a = "LOOKING FOR [Irresistible Cheat Codes] THAT WILL [Blow Your Mind!?]\nWELL [Shut Your Mouth] BECAUSE YOU ARE [A Redditor!]\nTRY A LITTLE [Friday Night Work Out]...\nTHEN I'LL SHOW YOU MY\nTHEN I'LL SHOW YOU MY\n1 LEFT.";
-                counter = 0;
-                localStorage.setItem("cheated", true);
-                alert(a);
-                initial = true;
-                return;
-            } else {
-                a = initial ? `DON'T WORRY! FOR OUR [No Time Back Guaranttee]\nTHIS IS [One Cheat Code] YOU WILL [Regret] FOR THE REST OF YOUR REDDIT POST!` : `[Heaven], are you WATCHING?`;
-                campaignTrail_temp.bigshot_mode = true;
-                alert(a);
-                return;
-            }
-        }
-    } else {
-        counter = 0;
-    }
-    if (event.keyCode == altCodes[alt_counter] && localStorage.getItem("cheated") == "true") {
-        alt_counter += 1;
-        if (alt_counter === altCodes.length) {
-            a = `ARE YOU GETTING ALL THIS [Mike]!? I'M FINALLY\nI'M FINALLY GONNA BE A BIG SHOT!!!`;
-            campaignTrail_temp.bigshot_mode = true;
-            alert(a);
-        }
-        return;
-    } else {
-        alt_counter = 0;
-    }
-});
 
 
 function findCandidate(pk) {
@@ -141,41 +99,6 @@ function benefitCheck(objectid) {
         }
     }
     return '<font size="2"><b>Answer: </b>' + findAnswer(answerid)[1] + "'<br>" + "Feedback: " + answerfeedback + "'<br>" + mods + "</font><br><br>"
-}
-
-function benefitChecker() {
-    questionlength = document.getElementById("question_form").children[0].children.length / 3
-    nnn = ""
-    for (v = 0; v < questionlength; v++) {
-        n = benefitCheck(v)
-        nnn += n
-    }
-    $("#dialogue")[0].innerHTML = nnn
-    $("#dialogue").dialog();
-}
-
-function difficultyChanger() {
-    var sliderValue = parseFloat(document.getElementById("difficultySlider").value);
-    sliderValue = isNaN(sliderValue) == NaN ? 0.97 : sliderValue;
-    var newVal = Math.pow(sliderValue / 1000, 2);
-    campaignTrail_temp.difficulty_level_multiplier = newVal;
-    document.getElementById("difficultyMod").innerHTML = `Multiplier: <span contenteditable="true" id='difficulty_mult_bigshot'>${newVal.toFixed(2)}</span>`;
-    updateSliderValue(newVal);
-    document.getElementById('difficulty_mult_bigshot').addEventListener('input', manuallyAdjustedSlider);
-}
-
-function manuallyAdjustedSlider() {
-    var multiplier = parseFloat(document.getElementById("difficulty_mult_bigshot").innerText);
-    multiplier = isNaN(multiplier) ? 0.97 : multiplier;
-    console.log(multiplier)
-    var sliderValue = Math.sqrt(multiplier) * 1000;
-    document.getElementById("difficultySlider").value = sliderValue;
-    campaignTrail_temp.difficulty_level_multiplier = multiplier;
-}
-
-function updateSliderValue(newVal) {
-    var sliderValue = Math.sqrt(newVal) * 1000;
-    document.getElementById("difficultySlider").value = sliderValue;
 }
 
 document.head = document.head || document.getElementsByTagName('head')[0];

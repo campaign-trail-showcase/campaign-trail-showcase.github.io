@@ -386,10 +386,6 @@ code222 = []
 kill = false
 important_info = ""
 
-function sussyroth() {
-    return campaignTrail_temp.bigshot_mode
-}
-
 /*
 function loadMod(code1, code2) {
     kill = false
@@ -446,29 +442,18 @@ function download(content, fileName, contentType) {
 }
 
 function exportResults() {
-    if (campaignTrail_temp.bigshot_mode != true && dirtyhacker3 == null) {
-        results = {
-            election_id: campaignTrail_temp.election_id,
-            player_candidate: campaignTrail_temp.candidate_id,
-            player_answers: campaignTrail_temp.player_answers,
-            player_visits: campaignTrail_temp.player_visits,
-            overall_results: campaignTrail_temp.final_overall_results,
-            state_results: campaignTrail_temp.final_state_results,
-            difficulty_multiplier: campaignTrail_temp.difficulty_level_multiplier,
-            starting_mult: starting_mult
-        }
-    } else {
-        results = {
-            election_id: campaignTrail_temp.election_id,
-            player_candidate: campaignTrail_temp.candidate_id,
-            player_answers: campaignTrail_temp.player_answers,
-            player_visits: campaignTrail_temp.player_visits,
-            overall_results: campaignTrail_temp.final_overall_results,
-            state_results: campaignTrail_temp.final_state_results,
-            difficulty_multiplier: 696969,
-            starting_mult: starting_mult
-        }
+   
+    results = {
+        election_id: campaignTrail_temp.election_id,
+        player_candidate: campaignTrail_temp.candidate_id,
+        player_answers: campaignTrail_temp.player_answers,
+        player_visits: campaignTrail_temp.player_visits,
+        overall_results: campaignTrail_temp.final_overall_results,
+        state_results: campaignTrail_temp.final_state_results,
+        difficulty_multiplier: campaignTrail_temp.difficulty_level_multiplier,
+        starting_mult: starting_mult
     }
+    
 
     coded = encode(btoa(JSON.stringify(results)))
         //coded=JSON.stringify(results)
@@ -524,13 +509,7 @@ function divideElectoralVotesProp(e, t) {
 }! function() {
     var e = campaignTrail_temp;
 
-    function electionNight() {
-        if (e.bigshot_mode) { // minimise the bigshot window once election night starts
-            const cheatMenu = document.querySelector('.cheat_menu');
-            if (cheatMenu) {
-                cheatMenu.classList.add('minimized');
-            }
-        }        
+    function electionNight() { 
 
         ! function() {
             for (var t = u(), i = "", a = 0; a < t.length; a++) i += '            <li><span style="color:' + t[a].color + "; background-color: " + t[a].color + '">--</span> ' + t[a].last_name + ":  0</li>";
@@ -769,15 +748,6 @@ function divideElectoralVotesProp(e, t) {
                     if (campaignTrail_temp.musicOn) {
                         document.getElementById("music_player").style.display = ""
                         document.getElementById('campaigntrailmusic').src = campaignTrail_temp.musicSrc
-                    }
-                    if (campaignTrail_temp.bigshot_mode) {
-                        document.getElementById('cheatmode').style.display = ""
-                        let slider = document.getElementById("difficultyMod");
-                        if (slider) {
-                            slider.innerHTML = `Multiplier: <span contenteditable="true" id='difficulty_mult_bigshot'>${campaignTrail_temp.difficulty_level_multiplier.toFixed(2)}</span>`;
-                            updateSliderValue(campaignTrail_temp.difficulty_level_multiplier.toFixed(2));
-                            document.getElementById('difficulty_mult_bigshot').addEventListener('input', manuallyAdjustedSlider);                        
-                        }
                     }
                     if (modded == false) {
                         aaa = election_HTML(t, i, a)
@@ -1805,16 +1775,11 @@ function divideElectoralVotesProp(e, t) {
 
         }
 
-        function isLegitRun() {
-            return campaignTrail_temp.bigshot_mode != true && dirtyhacker3 == null //&& campaignTrail_temp.difficulty_level_multiplier  <= 0.97
-        }
-
         let diff_mult_string = 0;
         if (Number((starting_mult - encrypted).toFixed(2)) != campaignTrail_temp.difficulty_level_multiplier.toFixed(2)) {
             diff_mult_string = campaignTrail_temp.difficulty_level_multiplier.toFixed(1) + "; <em>Cheated difficulty</em>";
-        } else if (e.bigshot_mode) {
-            diff_mult_string = campaignTrail_temp.difficulty_level_multiplier.toFixed(1) + "; <em>[[BIG SHOT]] enabled</em>";
-        } else {
+        } 
+        else {
             diff_mult_string = campaignTrail_temp.difficulty_level_multiplier.toFixed(1)
         }
 
@@ -2403,16 +2368,6 @@ _ = '   <div class="game_header"> <h2>THE COMMUNITY TRAIL</h2> </div> <div id="m
         e.final_state_results = A(1), electionNight()
     })
 }();
-
-// what did you expect?
-
-setInterval(function() {
-    if (sussyroth() && localStorage.getItem("cheated") != "true") {
-        setTimeout(function() {
-            location.reload();
-        }, 1000)
-    }
-}, 100);
 
 //you're just a dirty modder, aren't you?
 //well, feel free to keep looking through at this, but it would be much cooler if you could actually find where this is in context.
