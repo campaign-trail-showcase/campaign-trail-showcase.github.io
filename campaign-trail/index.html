@@ -127,12 +127,15 @@
                 <button class="tablinks" onclick="setCategory(event, 'favorites')">Favorites</button>
               </div>
               <div id="tags" class="tags-grid"></div>
+              <div style="margin:auto; display:flex;align-items: center;justify-content: center; margin-bottom:10px;">
+                <input placeholder="Filter by mod name" oninput="filterMods(event)" type="text" id="modSearch" name="modSearch"></input>
+              </div>
               <div id="mod-grid" class="community-grid"></div>
             </div>
             </div>      
 
             
-            <div style="text-align: center;"">
+            <div style="text-align: center;">
               <a href="https://www.newcampaigntrail.com/campaign-trail/index.html" style="color:#FF6B6B">This site is a fork of The New Campaign Trail</a> | 
               <a href="http://www.americanhistoryusa.com" style="color:#FF6B6B">Original site</a> created by Dan Bryan &copy; 2012- <testf id="year">2022</testf>
             </div>

@@ -6,6 +6,8 @@ let favoriteMods = new Set();
 
 let onlyFavorites = false;
 
+let nameFilter = "";
+
 $(document).ready(async function() {
 
     favoriteMods = localStorage.getItem("favoriteMods") != null ? localStorage.getItem("favoriteMods") : new Set();
@@ -91,6 +93,11 @@ $(document).ready(async function() {
     
 });
 
+function filterMods(event) {
+    nameFilter = event.target.value.toLowerCase();
+    updateModViews();
+}
+
 function createTagButtons(tagsFound) {
     const tagsGrid = document.getElementById("tags");
     tagsFound.forEach(function(tag) {
@@ -128,8 +135,9 @@ function updateModViews(event) {
         const modTags = modList[i].getAttribute("tags").split(" ");
         for(let j = 0; j < modTags.length; j++) {
             const tag = modTags[j];
-
-            if(activeTags.has(tag) && (!onlyFavorites || isFavorite(modList[i].getAttribute("mod-name")))) {
+            const modName = modList[i].getAttribute("mod-name");
+            const modDisplayName = modList[i].getAttribute("mod-display-name");
+            if((nameFilter.replace(" ", "") == "" || modDisplayName.includes(nameFilter)) && activeTags.has(tag) && (!onlyFavorites || isFavorite(modName))) {
                 hasTag = true;
                 break;
             }
@@ -171,6 +179,7 @@ function createModView(mod, imageUrl, description) {
 
     modView.setAttribute("tags", mod.dataset.tags);
     modView.setAttribute("mod-name", mod.value);
+    modView.setAttribute("mod-display-name", mod.innerText.toLowerCase());
 
     const favText = isFavorite(mod.value) ? "Unfavorite" : "Favorite"; 
 
