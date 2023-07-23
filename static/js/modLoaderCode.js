@@ -189,8 +189,8 @@ function createModView(mod, imageUrl, description) {
     </div>
     <img class="mod-image" src="${imageUrl}"></img>
     <div class="mod-desc">${description}</div>
-    <button class="hover-button" onclick="loadModFromButton('${mod.value}')"><span>Load Mod</span></button>
-    <button class="hover-button" onclick="toggleFavorite(event, '${mod.value}')"><span>${favText}</span></button>
+    <button class="hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span>Load Mod</span></button>
+    <button class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span>${favText}</span></button>
     `
 
     return modView;
