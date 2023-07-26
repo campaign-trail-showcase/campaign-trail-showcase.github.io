@@ -2,11 +2,57 @@ let loadingFromModButton = false;
 
 const modList = [];
 const tagList = [];
+
+let customMods = [];
+let customMod = false;
 let favoriteMods = new Set();
 
 let onlyFavorites = false;
 
 let nameFilter = "";
+
+function extractElectionDetails(rawModText, nameOfMod) {
+    let codeSnippet = null;
+    let temp = {}
+    let start = ""
+    let end = ""
+
+    if(rawModText.includes(".election_json = JSON.parse(")) {
+        start = ".election_json = JSON.parse(";
+        end = ")"
+    } else if(rawModText.includes(".election_json = [")) {
+        start = ".election_json = [";
+        end = "]"
+    } else {
+        console.log("Could not extract metadata for mod: " + nameOfMod);
+        return null;
+    }
+
+    let possibleEndIndices = getAllIndexes(rawModText, end);
+
+    for(let i = 0; i < possibleEndIndices.length; i++) {
+        codeSnippet = rawModText.slice(rawModText.indexOf(start), possibleEndIndices[i] + 1);
+        if(codeSnippet.length <= 0) {
+            continue;
+        }
+
+        try {
+            eval("temp" + codeSnippet)
+        } catch {
+            codeSnippet = null;
+        }
+
+        if(codeSnippet != null) {
+            break;
+        }
+    }
+
+    if(codeSnippet == null || Object.keys(temp).length == 0) {
+        console.log("Could not extract from " + nameOfMod)
+    }
+
+    return temp;
+}
 
 $(document).ready(async function() {
 
@@ -14,6 +60,12 @@ $(document).ready(async function() {
 
     if(typeof favoriteMods == 'string') {
         favoriteMods = new Set(favoriteMods.split(","));
+    }
+
+    customMods = localStorage.getItem("customMods") != null ? localStorage.getItem("customMods") : [];
+
+    if(typeof customMods == 'string') {
+        customMods = customMods.split(",");
     }
 
     var originalOptions = null;
@@ -25,6 +77,7 @@ $(document).ready(async function() {
 
     let tagsFound = new Set();
 
+    // Get tags from normal mods and add optional custom tag
     mods.forEach(function(mod) {
         const tags = mod.dataset.tags.split(" ");
         for(let i = 0; i < tags.length; i++) {
@@ -33,8 +86,13 @@ $(document).ready(async function() {
             }
             tagsFound.add(tags[i]);
         }
+
+        if(customMods.length > 0) {
+            tagsFound.add("Custom");
+        }
     });
 
+    // Set up from normal mods
     mods.forEach(async function(mod) {
 
         if(mod.value == "other") {
@@ -43,43 +101,8 @@ $(document).ready(async function() {
 
         const modRes = await fetch("../static/mods/" + mod.value + "_init.html");
         const rawModText = await modRes.text();
-        let codeSnippet = null;
-        let temp = {}
-        let start = ""
-        let end = ""
-
-        if(rawModText.includes(".election_json = JSON.parse(")) {
-            start = ".election_json = JSON.parse(";
-            end = ")"
-        } else if(rawModText.includes(".election_json = [")) {
-            start = ".election_json = [";
-            end = "]"
-        } else {
-            console.log("Could not extract metadata for mod: " + mod.value);
-        }
-
-        let possibleEndIndices = getAllIndexes(rawModText, end);
-
-        for(let i = 0; i < possibleEndIndices.length; i++) {
-            codeSnippet = rawModText.slice(rawModText.indexOf(start), possibleEndIndices[i] + 1);
-            if(codeSnippet.length <= 0) {
-                continue;
-            }
-
-            try {
-                eval("temp" + codeSnippet)
-            } catch {
-                codeSnippet = null;
-            }
-
-            if(codeSnippet != null) {
-                break;
-            }
-        }
-
-        if(codeSnippet == null || Object.keys(temp).length == 0) {
-            console.log("Could not extract from " + mod.value)
-        }
+        
+        const temp = extractElectionDetails(rawModText, mod.value);
 
         let imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
         let description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
@@ -89,9 +112,70 @@ $(document).ready(async function() {
         modList.push(modView);
     });
 
+    // Set up from custom mods
+    for(const customModName of customMods) {
+
+        rawModText = localStorage.getItem(customModName + "_code1");
+
+        const temp = extractElectionDetails(rawModText, customModName);
+
+        let imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
+        let description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
+        
+        const modView = createModView({"value" : customModName, "innerText" : customModName, "dataset":{"tags":"Custom"}}, imageUrl, description);
+        document.getElementById("mod-grid").appendChild(modView);
+        modList.push(modView);
+    }
+
     createTagButtons(tagsFound);
     
 });
+
+function createModView(mod, imageUrl, description, isCustom) {
+    const modView = document.createElement("div");
+    modView.classList.add("community-grid-element")
+
+    modView.setAttribute("tags", mod.dataset.tags);
+    modView.setAttribute("mod-name", mod.value);
+    modView.setAttribute("mod-display-name", mod.innerText.toLowerCase());
+
+    const favText = isFavorite(mod.value) ? "Unfavorite" : "Favorite"; 
+
+    modView.innerHTML = `
+    <div class="mod-title">
+        <p>${mod.innerText}</p>
+    </div>
+    <img class="mod-image" src="${imageUrl}"></img>
+    <div class="mod-desc">${description}</div>
+    <button class="hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span>Load Mod</span></button>
+    <button class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span>${favText}</span></button>
+    `
+
+    return modView;
+}
+
+function addCustomModButton() {
+    const code1 = document.getElementById("codeset1").value;
+    const code2 = document.getElementById("codeset2").value;
+    addCustomMod(code1, code2);
+}
+
+function addCustomMod(code1, code2) {
+    const temp = extractElectionDetails(code1, "custom mod being added");
+
+    if(temp == null) {
+        alert("Could not add mod from code provided!")
+        return;
+    }
+
+    const modName = document.getElementById("customModName").value ?? temp.election_json[0].fields.year;
+    customMods.push(modName);
+    localStorage.setItem("customMods", customMods);
+    localStorage.setItem(modName + "_code1", code1);
+    localStorage.setItem(modName + "_code2", code2);
+
+    alert("Custom mod added! Reload page to see.")
+}
 
 function filterMods(event) {
     nameFilter = event.target.value.toLowerCase();
@@ -173,29 +257,6 @@ function setCategory(event, category) {
     updateModViews();
 }
 
-function createModView(mod, imageUrl, description) {
-    const modView = document.createElement("div");
-    modView.classList.add("community-grid-element")
-
-    modView.setAttribute("tags", mod.dataset.tags);
-    modView.setAttribute("mod-name", mod.value);
-    modView.setAttribute("mod-display-name", mod.innerText.toLowerCase());
-
-    const favText = isFavorite(mod.value) ? "Unfavorite" : "Favorite"; 
-
-    modView.innerHTML = `
-    <div class="mod-title">
-        <p>${mod.innerText}</p>
-    </div>
-    <img class="mod-image" src="${imageUrl}"></img>
-    <div class="mod-desc">${description}</div>
-    <button class="hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span>Load Mod</span></button>
-    <button class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span>${favText}</span></button>
-    `
-
-    return modView;
-}
-
 function toggleFavorite(event, modValue) {
     const inFavorites = isFavorite(modValue);
     if(!inFavorites) {
@@ -212,13 +273,22 @@ function toggleFavorite(event, modValue) {
 
 function loadModFromButton(modValue) {
     loadingFromModButton = true;
-    var client = new XMLHttpRequest();
-    client.open('GET', "../static/mods/" + modValue + "_init.html");
-    client.onreadystatechange = function() {
-        evaluate(client.responseText)
+
+    if(customMods.includes(modValue)) {
+        evaluate(localStorage.getItem(modValue + "_code1"));
+        diff_mod = true
+        customMod = modValue;
     }
-    client.send();
-    diff_mod = true
+    else {
+        var client = new XMLHttpRequest();
+        client.open('GET', "../static/mods/" + modValue + "_init.html");
+        client.onreadystatechange = function() {
+            evaluate(client.responseText)
+        }
+        client.send();
+        diff_mod = true
+    }
+    
     
     $("#modloaddiv")[0].style.display = 'none'
     $("#modLoadReveal")[0].style.display = 'none'
