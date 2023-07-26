@@ -93,10 +93,10 @@ $(document).ready(async function() {
     });
 
     // Set up from normal mods
-    for(const mod of mods) {
+    mods.forEach(async function(mod) {
 
         if(mod.value == "other") {
-            continue;
+            return;
         }
 
         const modRes = await fetch("../static/mods/" + mod.value + "_init.html");
@@ -110,7 +110,7 @@ $(document).ready(async function() {
         const modView = createModView(mod, imageUrl, description);
         document.getElementById("mod-grid").appendChild(modView);
         modList.push(modView);
-    }
+    });
 
     // Set up from custom mods
     for(const customModName of customMods) {
