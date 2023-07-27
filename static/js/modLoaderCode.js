@@ -3,7 +3,7 @@ let loadingFromModButton = false;
 const modList = [];
 const tagList = [];
 
-let customMods = [];
+let customMods = new Set();
 let customMod = false;
 let favoriteMods = new Set();
 
@@ -12,6 +12,11 @@ let onlyFavorites = false;
 let nameFilter = "";
 
 function extractElectionDetails(rawModText, nameOfMod) {
+
+    if(rawModText == null) {
+        return null;
+    }
+
     let codeSnippet = null;
     let temp = {}
     let start = ""
@@ -62,10 +67,11 @@ $(document).ready(async function() {
         favoriteMods = new Set(favoriteMods.split(","));
     }
 
-    customMods = localStorage.getItem("customMods") != null ? localStorage.getItem("customMods") : [];
+    customMods = localStorage.getItem("customMods") != null ? localStorage.getItem("customMods") : new Set();
 
     if(typeof customMods == 'string') {
-        customMods = customMods.split(",");
+        let customArr = customMods != '' ? customMods.split(",") : [];
+        customMods = new Set(customArr);
     }
 
     var originalOptions = null;
@@ -87,7 +93,7 @@ $(document).ready(async function() {
             tagsFound.add(tags[i]);
         }
 
-        if(customMods.length > 0) {
+        if(customMods.size > 0) {
             tagsFound.add("Custom");
         }
     });
@@ -148,6 +154,7 @@ function createModView(mod, imageUrl, description, isCustom) {
     <div class="mod-desc">${description}</div>
     <button class="hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span>Load Mod</span></button>
     <button class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span>${favText}</span></button>
+    <button style="display:${customMods.has(mod.value) ? "block" : "none"}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span>Delete Custom Mod</span></button>
     `
 
     return modView;
@@ -159,6 +166,17 @@ function addCustomModButton() {
     addCustomMod(code1, code2);
 }
 
+function deleteCustomMod(event, modValue) {
+    customMods.delete(modValue);
+    localStorage.removeItem(modValue + "_code1");
+    localStorage.removeItem(modValue + "_code2");
+    localStorage.setItem("customMods", Array.from(customMods));
+    if(customMods.length == 0) {
+        localStorage.removeItem("customMods");
+    }
+    location.reload();
+}
+
 function addCustomMod(code1, code2) {
     const temp = extractElectionDetails(code1, "custom mod being added");
 
@@ -168,8 +186,8 @@ function addCustomMod(code1, code2) {
     }
 
     const modName = document.getElementById("customModName").value ?? temp.election_json[0].fields.year;
-    customMods.push(modName);
-    localStorage.setItem("customMods", customMods);
+    customMods.add(modName);
+    localStorage.setItem("customMods", Array.from(customMods));
     localStorage.setItem(modName + "_code1", code1);
     localStorage.setItem(modName + "_code2", code2);
 
@@ -273,7 +291,7 @@ function toggleFavorite(event, modValue) {
 function loadModFromButton(modValue) {
     loadingFromModButton = true;
 
-    if(customMods.includes(modValue)) {
+    if(customMods.has(modValue)) {
         evaluate(localStorage.getItem(modValue + "_code1"));
         diff_mod = true
         customMod = modValue;
