@@ -98,29 +98,28 @@
                 <b>ENDINGS CODE:</b>
                 <br>
                 <textarea id="codeset3" width=400 height=300></textarea>
+                <div style="display:none" id="fileimp">
+                  <br>
+                  <b>File importer:</b>
+                  <br>
+                  <form action="/action_page.php">
+                    <p>Upload your result JSON files to view previous games by clicking the button below:</p>
+                    <input type="file" id="importfile" name="importfile">
+                  </form>
+                </div>
                 <br>
                 <br>
+                <br>
+                <button id="submitMod">Play Custom Mod</button>
+                <br>
+                <br>
+                <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName"></input>
+                <button onclick="addCustomModButton()" id="saveMod">Save Custom Mod</button>
+                <div>
+                  <p style="font-size: smaller; font: italic">(To update a custom mod just submit a new mod again with an identical name. This includes switching candidates/running mates.)</p>
+                </div>
               </div>
-              <div id="fileimp">
-                <br>
-                <b>File importer:</b>
-                <br>
-                <form action="/action_page.php">
-                  <p>Upload your result JSON files to view previous games by clicking the button below:</p>
-                  <input type="file" id="importfile" name="importfile">
-                </form>
-              </div>
-              <br>
-              <br>
-              <br>
-              <button id="submitMod">Play Custom Mod</button>
-              <br>
-              <br>
-              <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName"></input>
-              <button onclick="addCustomModButton()" id="saveMod">Save Custom Mod</button>
-              <div>
-                <p style="font-size: smaller; font: italic">(To update a custom mod just submit a new mod again with an identical name. This includes switching candidates/running mates.)</p>
-              </div>
+              
             </div>
             <br>
             <div id="bonus_menu_area"></div>
