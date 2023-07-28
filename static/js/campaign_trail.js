@@ -418,9 +418,9 @@ function endingPicker(out, totv, aa, quickstats) {
     if (important_info != "") {
         a = new Function("out", "totv", "aa", "quickstats", important_info)(out, totv, aa, quickstats)
         return a
-    } else {
-        return "<font id='monologue' face='Comic Sans MS'>* heya<br>* is anyone there?<br>* well... just calling to ask.<br>* you really like to challenge yourself, huh...?<br>*well... good job.<br>* just promise not to brag about it, okay?<br>* ... guess i should say something else, too.<br><button onclick='nextPage()'>Next Page</button></font>"
-    }
+    } 
+
+    return "ERROR";
 }
 
 function modSelectChange() {
@@ -860,7 +860,10 @@ function divideElectoralVotesProp(e, t) {
                     }
                     histFunction()
                 }(t, i, l, o, c)
+
+                
         })
+
     }
 
     mapCache = function(skip = false) { // preloads poll map
@@ -890,6 +893,7 @@ function divideElectoralVotesProp(e, t) {
     }
 
     function nextQuestion() {
+
         var t = A(2);
 
         if (e.cyoa) {
@@ -2377,17 +2381,6 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
         e.final_state_results = A(1), electionNight()
     })
 }();
-
-//you're just a dirty modder, aren't you?
-//well, feel free to keep looking through at this, but it would be much cooler if you could actually find where this is in context.
-//bonus points if you can tell me (decstar) what this is referencing
-function nextPage() {
-    document.getElementById("monologue").innerHTML = "<audio loop='true' autoplay='true' src='https://ia800103.us.archive.org/2/items/sansost/21%20Dogsong.mp3' style='display:none;'></audio>* it's been a while, huh?<br>* ...<br>* i'll be honest.<br>* i have no idea what happened for you to get here.<br>* this is actually some sort of error-handling message.<br>* so, if you're getting this ending...<br>* tell whoever made the mod, okay?<br>* they might fix it, or if it's a novel situation...<br>* they might even add another ending to the mod.<br>* chances are, though...<br><button onclick='nextPage2()'>Next Page</button>"
-}
-
-function nextPage2() {
-    document.getElementById("monologue").innerHTML = "* you're just a dirty modder, aren't you?<br>* yeah, get outta here."
-}
 
 fix1964= window.setInterval(function(){
     try{
