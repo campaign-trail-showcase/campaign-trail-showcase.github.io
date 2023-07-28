@@ -173,3 +173,12 @@
   bottom: 5px;
   left: 5px;
 }
+
+.cheatIndicator {
+  position:sticky;
+  top:0;
+  padding:10px;
+  font-size: large;
+  font-weight: bold;
+  z-index:999
+}

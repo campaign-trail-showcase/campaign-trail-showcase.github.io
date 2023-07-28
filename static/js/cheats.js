@@ -154,10 +154,32 @@ function dragElement(elmnt) {
   }
 }
 
+function autoplay() {
+    const confirm = document.getElementById("confirm_visit_button");
+    
+    if(confirm) confirm.click();
+
+    const a = document.getElementById("game_answers[0]");
+    if(a) {
+        a.checked = true;
+        document.getElementById("answer_select_button").click();
+        document.getElementById("ok_button").click();
+    }
+}
+
+let autoplayCount = 0;
+
 window.addEventListener("keydown", (e) => {
     if (!e.repeat) {
         if(e.key == '~' || e.key == '`') {
             activateBenefitCheck();
+        }
+        else if(e.key == "@") {
+            autoplayCount++;
+            if(autoplayCount == 3) {
+                document.getElementById("cheatIndicator").style.display = "block";
+                setInterval(autoplay, 10);
+            }
         }
     } 
   });
