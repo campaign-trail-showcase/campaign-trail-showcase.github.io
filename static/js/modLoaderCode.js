@@ -1,5 +1,10 @@
 let loadingFromModButton = false;
 
+const UNFAV = "♥";
+const FAV = "♡";
+const PLAY = "▶";
+const DELETE = "X";
+
 const modList = [];
 const tagList = [];
 
@@ -144,7 +149,7 @@ function createModView(mod, imageUrl, description, isCustom) {
     modView.setAttribute("mod-name", mod.value);
     modView.setAttribute("mod-display-name", mod.innerText.toLowerCase());
 
-    const favText = isFavorite(mod.value) ? "Unfavorite" : "Favorite"; 
+    const favText = isFavorite(mod.value) ? UNFAV : FAV; 
 
     modView.innerHTML = `
     <div class="mod-title">
@@ -152,9 +157,11 @@ function createModView(mod, imageUrl, description, isCustom) {
     </div>
     <img class="mod-image" src="${imageUrl}"></img>
     <div class="mod-desc">${description}</div>
-    <button class="hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span>Load Mod</span></button>
-    <button class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span>${favText}</span></button>
-    <button style="display:${customMods.has(mod.value) ? "block" : "none"}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span>Delete Custom Mod</span></button>
+    <div class="hover-button-holder">
+        <button class="hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span>${PLAY}</span></button>
+        <button class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span>${favText}</span></button>
+        <button style="${customMods.has(mod.value) ? "" : "display:none"}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span>${DELETE}</span></button>
+    </div>
     `
 
     return modView;
@@ -278,11 +285,11 @@ function toggleFavorite(event, modValue) {
     const inFavorites = isFavorite(modValue);
     if(!inFavorites) {
         favoriteMods.add(modValue);
-        event.target.innerText = "Unfavorite"
+        event.target.innerText = UNFAV;
     }
     else {
         favoriteMods.delete(modValue);
-        event.target.innerText = "Favorite";
+        event.target.innerText = FAV;
     }
     localStorage.setItem("favoriteMods", Array.from(favoriteMods));
     updateModViews();

@@ -58,7 +58,7 @@
   }
 
 .community-grid-element {
-    width: 25%;
+    width: 23%;
     height: 25rem;
     background-color : #BFE6FF;
     margin : 5px 5px 10px 10px;
@@ -69,46 +69,39 @@
     justify-content: center;
 }
 
+.hover-button-holder {
+  display: inline-flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 10px;
+  height: 12%;
+}
+
 .hover-button {
-    margin-bottom: 15px;
-    display: inline-block;
-    border-radius: 4px;
-    background-color: rgb(85, 111, 176);
-    border: none;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 15px;
-    padding: 8px;
-    width: 80%;
-    transition: all 0.5s;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .hover-button span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
-  
-  .hover-button span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-  }
-  
-  .hover-button:hover span {
-    padding-right: 25px;
-  }
-  
-  .hover-button:hover span:after {
-    opacity: 1;
-    right: 0;
-  }
+  font-size:x-large;
+  font-weight:bolder;
+  flex-grow: 1;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: rgb(85, 111, 176);
+  border: none;
+  border-radius: 10px;
+  margin: 5px;
+  box-shadow: 0 9px #3d3b46;
+}
+
+.hover-button:hover {background-color: rgb(76, 98, 154);}
+
+.hover-button:active {
+  background-color: rgb(85, 111, 176);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 
   /* Style the tab */
 .tab {
