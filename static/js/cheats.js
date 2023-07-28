@@ -65,7 +65,7 @@ function benefitCheck(objectid) {
 
 function activateBenefitCheck() {
     const benefitWindow = document.getElementById("benefitwindow");
-    benefitWindow.style.display = "block";
+    benefitWindow.style.display = benefitWindow.style.display != "none" ? "none" : "block";
     document.getElementById("showBenefitCheckButton").style.display = "inline-block";
 }
 
@@ -170,7 +170,7 @@ function autoplay() {
         campaignTrail_temp.election_json[0].fields.has_visits = false;
     }
     catch {
-        
+
     }
 }
 
