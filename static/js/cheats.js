@@ -155,15 +155,22 @@ function dragElement(elmnt) {
 }
 
 function autoplay() {
-    const confirm = document.getElementById("confirm_visit_button");
+    try {
+        const confirm = document.getElementById("confirm_visit_button");
     
-    if(confirm) confirm.click();
+        if(confirm) confirm.click();
 
-    const a = document.getElementById("game_answers[0]");
-    if(a) {
-        a.checked = true;
-        document.getElementById("answer_select_button").click();
-        document.getElementById("ok_button").click();
+        const a = document.getElementById("game_answers[0]");
+        if(a) {
+            a.checked = true;
+            document.getElementById("answer_select_button").click();
+            document.getElementById("ok_button").click();
+        }
+
+        campaignTrail_temp.election_json[0].fields.has_visits = false;
+    }
+    catch {
+        
     }
 }
 
