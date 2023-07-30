@@ -299,7 +299,7 @@ function loadModFromButton(modValue) {
     loadingFromModButton = true;
 
     if(customMods.has(modValue)) {
-        evaluate(localStorage.getItem(modValue + "_code1"));
+        eval(localStorage.getItem(modValue + "_code1"));
         diff_mod = true
         customMod = modValue;
     }
@@ -307,7 +307,7 @@ function loadModFromButton(modValue) {
         var client = new XMLHttpRequest();
         client.open('GET', "../static/mods/" + modValue + "_init.html");
         client.onreadystatechange = function() {
-            evaluate(client.responseText)
+            eval(client.responseText)
         }
         client.send();
         diff_mod = true
