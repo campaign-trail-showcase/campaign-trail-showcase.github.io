@@ -139,7 +139,8 @@ nct_stuff.themes = {
         banner: "../static/images/banners/tct_banner.png",
         coloring_window: "#727C96",
         coloring_container: "#222449",
-        coloring_title: "#3A3360"
+        coloring_title: "#3A3360",
+        game_window: "A53545"
     }
 }
 
