@@ -137,8 +137,8 @@ nct_stuff.themes = {
         name: "Campaign Trail Showcase",
         background: "../static/images/backgrounds/tct_background.png",
         banner: "../static/images/banners/tct_banner.png",
-        coloring_window: "#1F3A87",
-        coloring_container: "#357191",
+        coloring_window: "#27208E",
+        coloring_container: "#001D68",
         coloring_title: "#33508C"
     }
 }
