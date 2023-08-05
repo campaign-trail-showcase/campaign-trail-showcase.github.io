@@ -134,12 +134,12 @@ nct_stuff.themes = {
         coloring_title: ""
     },
     "tct": {
-        name: "The Community Trail",
+        name: "Campaign Trail Showcase",
         background: "../static/images/backgrounds/tct_background.png",
         banner: "../static/images/banners/tct_banner.png",
-        coloring_window: "#ff6b6b",
-        coloring_container: "#930301",
-        coloring_title: ""
+        coloring_window: "#1F3A87",
+        coloring_container: "#357191",
+        coloring_title: "33508C"
     }
 }
 
