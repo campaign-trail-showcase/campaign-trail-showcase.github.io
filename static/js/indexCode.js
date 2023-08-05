@@ -139,7 +139,7 @@ nct_stuff.themes = {
         banner: "../static/images/banners/tct_banner.png",
         coloring_window: "#1F3A87",
         coloring_container: "#357191",
-        coloring_title: "33508C"
+        coloring_title: "#33508C"
     }
 }
 
