@@ -125,14 +125,6 @@ function choose(choices) {
 nct_stuff = {}
 nct_stuff.dynamicOverride = false;
 nct_stuff.themes = {
-    "classic": {
-        name: "Classic",
-        background: "",
-        banner: "../static/images/banners/banner_classic.png",
-        coloring_window: "",
-        coloring_container: "",
-        coloring_title: ""
-    },
     "tct": {
         name: "Campaign Trail Showcase",
         background: "../static/images/backgrounds/tct_background.png",
@@ -141,6 +133,14 @@ nct_stuff.themes = {
         coloring_container: "#222449",
         coloring_title: "#3A3360",
         game_window: "A53545"
+    },
+    "classic": {
+        name: "Classic",
+        background: "",
+        banner: "../static/images/banners/banner_classic.png",
+        coloring_window: "",
+        coloring_container: "",
+        coloring_title: ""
     }
 }
 
@@ -148,7 +148,7 @@ nct_stuff.selectedTheme = "";
 theme = window.localStorage.getItem("theme");
 
 if (theme == null) {
-    nct_stuff.selectedTheme = "classic"
+    nct_stuff.selectedTheme = "tct"
 } else {
     nct_stuff.selectedTheme = theme
 }
