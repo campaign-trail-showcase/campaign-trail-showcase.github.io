@@ -28492,7 +28492,13 @@ let showRunningMate = true;
 
 function setRunningMateVisible() {
     const runningMateImage = document.getElementById("running_mate_pic");
+
+    if(runningMateImage.classList.contains("done")) {
+        return;
+    }
+
     if(runningMateImage)
+        runningMateImage.classList.add("done");
         runningMateImage.style.display = showRunningMate ? "block" : "none";
 }  
 function switcheroo1() {
