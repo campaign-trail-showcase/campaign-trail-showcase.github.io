@@ -1,7 +1,5 @@
 let unlockedAch = localStorage.getItem("unlockedAch") ? JSON.parse(localStorage.getItem("unlockedAch")) : {};
 
-console.log(unlockedAch);
-
 function unlockAchievement(name) {
     if(allAch[name] == null) {
         console.log("There is no achievement with the name '" + name +"'");
@@ -55,9 +53,14 @@ function addAchivement(achName, achData) {
 }
 
 function addAllAchievements() {
+    let achAvail = false;
     achContent.innerHTML = "";
     for(ach in allAch) {
+        achAvail = true;
         addAchivement(ach, allAch[ach])
+    }
+    if(!achAvail) {
+        achContent.innerHTML = "No achievements are currently added yet! Check back later!";
     }
 }
 
