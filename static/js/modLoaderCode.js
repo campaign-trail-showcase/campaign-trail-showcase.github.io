@@ -138,6 +138,12 @@ $(document).ready(async function() {
         modList.push(modView);
     }
 
+    const modNameParam = getUrlParam("modName");
+
+    if(modNameParam != null) {
+        loadModFromButton(modNameParam);
+    }
+
     createTagButtons(tagsFound);
 });
 
@@ -374,4 +380,11 @@ function containsAllTags(entryTags, selectedTags) {
     }
 
     return true;
+}
+
+function getUrlParam(param) {
+    var url_string = window.location.href; //window.location.href
+    var url = new URL(url_string);
+    console.log(url.searchParams.get(param))
+    return url.searchParams.get(param);
 }
