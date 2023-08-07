@@ -154,6 +154,10 @@ $(document).ready(async function() {
         }
     });
 
+    
+    const allModsLength = mods.length - 1;
+    let modsLoaded = [];
+
     // Set up from normal mods
     mods.forEach(async function(mod) {
 
@@ -170,10 +174,19 @@ $(document).ready(async function() {
         let imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
         let description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
         
-        const modView = createModView(mod, imageUrl, description);
-        document.getElementById("mod-grid").appendChild(modView);
-        modList.push(modView);
+        modsLoaded.push({"mod":mod, "imageUrl":imageUrl, "description":description});
+
+        if(modsLoaded.length == allModsLength) {
+            modsLoaded.sort(modCompare);
+            modsLoaded.forEach(function(modData) {
+                const modView = createModView(modData.mod, modData.imageUrl, modData.description);
+                document.getElementById("mod-grid").appendChild(modView);
+                modList.push(modView);
+            });
+        }
     });
+
+    
 
     // Set up from custom mods
     for(const customModName of customMods) {
@@ -442,3 +455,14 @@ function getUrlParam(param) {
     console.log(url.searchParams.get(param))
     return url.searchParams.get(param);
 }
+
+function modCompare( a, b ) {
+    if ( a.value < b.value ){
+      return -1;
+    }
+    if ( a.value > b.value ){
+      return 1;
+    }
+    return 0;
+  }
+  
