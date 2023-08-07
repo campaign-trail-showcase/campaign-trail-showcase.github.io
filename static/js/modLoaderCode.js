@@ -142,6 +142,7 @@ $(document).ready(async function() {
 
     if(modNameParam != null) {
         loadModFromButton(modNameParam);
+        document.getElementById("goBackButton").style.display = "inline";
     }
 
     createTagButtons(tagsFound);
