@@ -29,6 +29,11 @@
       <div id="benefitheader"><button onclick="hideBenefitChecker()" id="benefitclose">X</button> Benefit Checker</div>
       <div id="benefitcontent"></div>
     </div>
+    <div style="display:none" id="achwindow">
+      <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+      <div id="achheader"><button onclick="closeAchievements()" id="achclose">X</button> Achievements</div>
+      <div id="achcontent"></div>
+    </div>
     <div id="wittyquote" style="display:none"></div>
     <div class="container">
       <center>
@@ -128,6 +133,7 @@
               </div>
             </div>
             <br>
+            <button id="achButton" onclick="openAchievements()">Achievements</button>
             <button id="goBackButton" style="display:none" onclick="window.location.href = 'https://campaign-trail-showcase.github.io/campaign-trail/index.html'">Go Back To Main Page</button>
             <div id="bonus_menu_area"></div>
             <br>
@@ -160,8 +166,10 @@
   <script src="../static/js/lib/raphael.js"></script>
   <script src="/static/js/indexCode.js"></script>
   <script src="../static/js/modLoaderCode.js"></script>
+  <script src="../static/js/cheats.js"></script>
+  <script src="../static/js/achievements.js"></script>
   <script src="../static/js/lib/md5.js"></script>
   <script src="../static/js/lib/gradient.js"></script>
   <script src="../static/js/campaign_trail.js"></script>
-  <script src="../static/js/cheats.js"></script>
+  
 </html>

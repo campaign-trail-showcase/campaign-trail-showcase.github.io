@@ -16,6 +16,57 @@ let onlyFavorites = false;
 
 let nameFilter = "";
 
+let allAch = {};
+
+function getAllAchievements(rawModText, nameOfMod) {
+
+    if(rawModText == null) {
+        return;
+    }
+
+    let codeSnippet = null;
+    let temp = {}
+    let start = ""
+    let end = ""
+
+   if(rawModText.includes("campaignTrail_temp.achievements = {")) {
+        start = ".achievements = {";
+        end = "}"
+    } else {
+        return;
+    }
+
+    let possibleEndIndices = getAllIndexes(rawModText, end);
+
+    for(let i = 0; i < possibleEndIndices.length; i++) {
+        codeSnippet = rawModText.slice(rawModText.indexOf(start), possibleEndIndices[i] + 1);
+        if(codeSnippet.length <= 0) {
+            continue;
+        }
+
+        try {
+            eval("temp" + codeSnippet)
+        } catch (e){
+           // console.log("FAILED" + e)
+            codeSnippet = null;
+        }
+
+        if(codeSnippet != null) {
+            break;
+        }
+    }
+
+    if(codeSnippet == null) {
+        console.log("Could not extract ach from " + nameOfMod)
+    }
+
+    for(ach in temp.achievements) {
+        allAch[ach] = temp.achievements[ach];
+    }
+
+    return temp;
+}
+
 function extractElectionDetails(rawModText, nameOfMod) {
 
     if(rawModText == null) {
@@ -114,6 +165,7 @@ $(document).ready(async function() {
         const rawModText = await modRes.text();
         
         const temp = extractElectionDetails(rawModText, mod.value);
+        getAllAchievements(rawModText, mod.value);
 
         let imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
         let description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
@@ -129,6 +181,7 @@ $(document).ready(async function() {
         rawModText = localStorage.getItem(customModName + "_code1");
 
         const temp = extractElectionDetails(rawModText, customModName);
+        getAllAchievements(rawModText, customModName);
 
         let imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
         let description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
