@@ -115,7 +115,7 @@ function changeFavicon(src) {
     document.head.appendChild(link);
 }
 
-changeFavicon("/static/34starcircle-2.png")
+changeFavicon("/static/showcase-fav.png")
 
 function choose(choices) {
     var index = Math.floor(Math.random() * choices.length);
