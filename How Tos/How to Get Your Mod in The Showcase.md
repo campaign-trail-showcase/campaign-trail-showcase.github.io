@@ -1,6 +1,8 @@
 # How to Get Your Mod in The Showcase
 
-You will need to fill this out:
+We prefer to get submissions via Pull Request. But we realize not everyone can do that.
+
+If you cannot make a Pull Request, you will need to fill this out:
 
 ```
 Mod Name: YOUR MOD NAME HERE
