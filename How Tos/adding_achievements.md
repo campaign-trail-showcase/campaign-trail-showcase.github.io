@@ -1,3 +1,5 @@
+# How to Add Achievements
+
 Any mod can have achievements on the Showcase! You don't need to ask anyone to add it.
 
 **Step 1.** Define your achievements your Code 1. This can go near the top.
