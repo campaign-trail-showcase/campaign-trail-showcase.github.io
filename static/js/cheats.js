@@ -158,6 +158,8 @@ function dragElement(elmnt) {
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
+    document.touchend = null;
+    document.touchend = null;
   }
 }
 
