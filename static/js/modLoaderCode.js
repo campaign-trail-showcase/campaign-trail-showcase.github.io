@@ -178,11 +178,13 @@ $(document).ready(async function() {
 
         if(modsLoaded.length == allModsLength) {
             modsLoaded.sort(modCompare);
-            modsLoaded.forEach(function(modData) {
+            for(let i = 0; i < modsLoaded.length; i++) {
+                const modData = modsLoaded[i];
+                console.log(modData.mod.innerText)
                 const modView = createModView(modData.mod, modData.imageUrl, modData.description);
                 document.getElementById("mod-grid").appendChild(modView);
                 modList.push(modView);
-            });
+            }
         }
     });
 
@@ -457,10 +459,10 @@ function getUrlParam(param) {
 }
 
 function modCompare( a, b ) {
-    if ( a.value < b.value ){
+    if ( a.mod.value < b.mod.value ){
       return -1;
     }
-    if ( a.value > b.value ){
+    if ( a.mod.value > b.mod.value ){
       return 1;
     }
     return 0;
