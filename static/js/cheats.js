@@ -127,7 +127,7 @@ function dragElement(elmnt) {
 
   function dragMouseDown(e) {
     e = e || window.event;
-    e.preventDefault();
+    //e.preventDefault();
     // get the mouse cursor position at startup:
     pos3 = e.clientX ?? e.touches[0].clientX;
     pos4 = e.clientY ?? e.touches[0].clientY;
@@ -135,31 +135,34 @@ function dragElement(elmnt) {
     document.ontouchend = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
-    document.ontouchmove = elementDrag;
+    document.addEventListener("touchmove", elementDrag, {passive:false});
 
    // console.log(pos3, pos4)
   }
 
   function elementDrag(e) {
-    e = e || window.event;
+    //e = e || window.event;
     e.preventDefault();
     // calculate the new cursor position:
     pos1 = pos3 - (e.clientX ?? e.touches[0].clientX);
     pos2 = pos4 - (e.clientY ?? e.touches[0].clientY);
     pos3 = e.clientX ?? e.touches[0].clientX;
     pos4 = e.clientY ?? e.touches[0].clientY;
-    console.log(pos1,pos2,pos3,pos4)
     // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
 
-  function closeDragElement() {
+  function closeDragElement(e) {
+    if(e.touches && e.touches.length > 0)
+    {
+        return;
+    }
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
     document.ontouchend = null;
-    document.ontouchmove = null;
+    document.removeEventListener("touchmove", elementDrag);
   }
 }
 

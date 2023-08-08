@@ -152,7 +152,7 @@
   padding-bottom: 5%;
 }
 
-#achheader {
+#achwindowheader {
   position: relative;
   padding: 10px;
   cursor: move;
@@ -246,7 +246,7 @@
   height: 90vh;
 }
 
-#benefitheader {
+#benefitwindowheader {
   position: relative;
   padding: 10px;
   cursor: move;
