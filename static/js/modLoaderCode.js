@@ -14,6 +14,8 @@ let favoriteMods = new Set();
 
 let onlyFavorites = false;
 
+let year = null;
+
 let nameFilter = "";
 
 let allAch = {};
@@ -180,7 +182,6 @@ $(document).ready(async function() {
             modsLoaded.sort(modCompare);
             for(let i = 0; i < modsLoaded.length; i++) {
                 const modData = modsLoaded[i];
-                console.log(modData.mod.innerText)
                 const modView = createModView(modData.mod, modData.imageUrl, modData.description);
                 document.getElementById("mod-grid").appendChild(modView);
                 modList.push(modView);
@@ -283,7 +284,7 @@ function filterMods(event) {
 
 function createTagButtons(tagsFound) {
     const tagsGrid = document.getElementById("tags");
-    tagsFound.forEach(function(tag) {
+    Array.from(tagsFound).sort().forEach(function(tag) {
         const tagButton = document.createElement("div");
 
         tagButton.classList.add("tag-button");
@@ -320,7 +321,7 @@ function updateModViews(event) {
             const tag = modTags[j];
             const modName = modList[i].getAttribute("mod-name");
             const modDisplayName = modList[i].getAttribute("mod-display-name");
-            if((nameFilter.replace(" ", "") == "" || modDisplayName.includes(nameFilter)) && activeTags.has(tag) && (!onlyFavorites || isFavorite(modName))) {
+            if((nameFilter.replace(" ", "") == "" || modDisplayName.includes(nameFilter)) && activeTags.has(tag) && (!onlyFavorites || isFavorite(modName)) && (!year || year.test(modName))) {
                 hasTag = true;
                 break;
             }
@@ -346,10 +347,16 @@ function setCategory(event, category) {
         }
     }
 
-    if(category == "all") {
+    if(category instanceof RegExp) {
+        year = category;
+        onlyFavorites = false;
+    }
+    else if(category == "all") {
+        year = null;
         onlyFavorites = false;
     }
     else if(category == "favorites") {
+        year = null;
         onlyFavorites = true;
     }
 
@@ -454,7 +461,6 @@ function containsAllTags(entryTags, selectedTags) {
 function getUrlParam(param) {
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
-    console.log(url.searchParams.get(param))
     return url.searchParams.get(param);
 }
 
@@ -467,4 +473,3 @@ function modCompare( a, b ) {
     }
     return 0;
   }
-  
