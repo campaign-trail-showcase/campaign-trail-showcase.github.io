@@ -162,7 +162,7 @@ $(document).ready(async function() {
     });
 
     
-    const allModsLength = mods.length - 1;
+    let allModsLength = mods.length - 1;
     let modsLoaded = [];
 
     // Set up from normal mods
@@ -178,9 +178,24 @@ $(document).ready(async function() {
         const temp = extractElectionDetails(rawModText, mod.value);
         getAllAchievements(rawModText, mod.value);
 
-        let imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
-        let description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
-        
+        let imageUrl;
+        let description;
+
+        if(temp) {
+            imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
+            description =temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
+        }
+        else {
+            console.log("Missing or cannot read Code 1 for mod: " + mod.value)
+            imageUrl = "";
+            description = `<h1 style="color:red">COULD NOT GET CODE 1 PLEASE ALERT DEV!</h1>`;
+        }
+
+        if(!temp) {
+            allModsLength--;
+            return;
+        }
+
         modsLoaded.push({"mod":mod, "imageUrl":imageUrl, "description":description});
 
         if(modsLoaded.length == allModsLength) {
