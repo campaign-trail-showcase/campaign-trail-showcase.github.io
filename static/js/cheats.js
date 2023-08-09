@@ -254,6 +254,16 @@ function skipQuestion(e) {
         return;
     }
 
+    if(newQuestion < 1) {
+        alert("Question number cannot be < 1");
+        return;
+    }
+
+    if(newQuestion > campaignTrail_temp.questions_json.length) {
+        alert("Question number cannot be > amount of questions");
+        return;
+    }
+
     const cache = campaignTrail_temp.election_json[0].fields.has_visits;
     
     campaignTrail_temp.election_json[0].fields.has_visits = false;
