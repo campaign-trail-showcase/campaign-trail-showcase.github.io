@@ -759,7 +759,8 @@ function divideElectoralVotesProp(e, t) {
                             })
                             $("#answer_select_button").click(function() {
                                 var t = $("input:radio[name=game_answers]:checked").val();
-                                null == t ? C(e.election_id) : n(t)
+                                null == t && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(t)
+                                campaignTrail_temp.skippingQuestion = false;
                             })
                             if ($("#answer_select_button")[0] != null) {
                                 clearInterval(important_code)
@@ -823,7 +824,8 @@ function divideElectoralVotesProp(e, t) {
                             })
                             $("#answer_select_button").click(function() {
                                 var t = $("input:radio[name=game_answers]:checked").val();
-                                null == t ? C(e.election_id) : n(t)
+                                null == t && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(t)
+                                campaignTrail_temp.skippingQuestion = false;
                             })
                             if (diff_mod) {
                                 
@@ -849,7 +851,8 @@ function divideElectoralVotesProp(e, t) {
                             })
                             $("#answer_select_button").click(function() {
                                 var t = $("input:radio[name=game_answers]:checked").val();
-                                null == t ? C(e.election_id) : n(t)
+                                null == t && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(t)
+                                campaignTrail_temp.skippingQuestion = false;
                             })
                             if ($("#answer_select_button")[0] != null) {
                                 clearInterval(important_code)
@@ -1194,8 +1197,8 @@ function divideElectoralVotesProp(e, t) {
         
         $("#answer_select_button").click(function() {
             var nullN = $("input:radio[name=game_answers]:checked").val();
-            null == nullN ? C(e.election_id) : n(nullN)
-            
+            null == nullN && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(nullN)
+            campaignTrail_temp.skippingQuestion = false;
 
             
         })
