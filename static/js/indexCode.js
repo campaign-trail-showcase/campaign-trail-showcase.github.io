@@ -277,9 +277,6 @@ function updateDynamicStyle() {
     #inner_window_5 {
         background-color: ${selectedTheme.coloring_window};
     }
-    div div h1 {
-        color: ${selectedTheme.coloring_window};
-    }
     #main_content_area {
         color: ${selectedTheme.text_col || "inherit"};
     }

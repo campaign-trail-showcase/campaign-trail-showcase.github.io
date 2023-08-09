@@ -279,3 +279,30 @@
   font-weight: bold;
   z-index:999
 }
+
+.mode-button {
+  font-size:medium;
+  font-weight:bolder;
+  flex-grow: 1;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #ffffff;
+  background-color: rgb(85, 111, 176);
+  border: none;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 10px 10px;
+}
+
+.mode-button:hover {background-color: rgb(76, 98, 154);}
+
+.mode-button:active {
+  background-color: rgb(53, 70, 113);
+}
+
+.pressed {
+  background-color: rgb(53, 70, 113)!important;
+}

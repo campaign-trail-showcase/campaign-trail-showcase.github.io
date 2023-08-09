@@ -4,6 +4,9 @@ const UNFAV = "♥";
 const FAV = "♡";
 const PLAY = "▶";
 const DELETE = "X";
+const SHOWCASE = "featured";
+const ALL = "all";
+const COMMUNITY = "community";
 
 const modList = [];
 const tagList = [];
@@ -17,6 +20,8 @@ let onlyFavorites = false;
 let year = null;
 
 let nameFilter = "";
+
+let mode = SHOWCASE;
 
 let allAch = {};
 
@@ -221,6 +226,7 @@ function createModView(mod, imageUrl, description, isCustom) {
     const modView = document.createElement("div");
     modView.classList.add("community-grid-element")
 
+    modView.setAttribute("mode", mod.dataset.mode);
     modView.setAttribute("tags", mod.dataset.tags);
     modView.setAttribute("mod-name", mod.value);
     modView.setAttribute("mod-display-name", mod.innerText.toLowerCase());
@@ -316,12 +322,13 @@ function updateModViews(event) {
 
     for(let i = 0; i < modList.length; i++) {
         let hasTag = false;
+        const modMode = modList[i].getAttribute("mode");
         const modTags = modList[i].getAttribute("tags").split(" ");
         for(let j = 0; j < modTags.length; j++) {
             const tag = modTags[j];
             const modName = modList[i].getAttribute("mod-name");
             const modDisplayName = modList[i].getAttribute("mod-display-name");
-            if((nameFilter.replace(" ", "") == "" || modDisplayName.includes(nameFilter)) && activeTags.has(tag) && (!onlyFavorites || isFavorite(modName)) && (!year || year.test(modName))) {
+            if((nameFilter.replace(" ", "") == "" || modDisplayName.includes(nameFilter)) && activeTags.has(tag) && (!onlyFavorites || isFavorite(modName)) && (!year || year.test(modName)) && (onlyFavorites || mode == ALL || modMode == mode)) {
                 hasTag = true;
                 break;
             }
@@ -472,4 +479,17 @@ function modCompare( a, b ) {
       return 1;
     }
     return 0;
-  }
+}
+
+function setMode(evt, newMode) {
+    const buttons = document.getElementsByClassName("mode-button");
+    for(let i = 0; i < buttons.length; i++) {
+        const button = buttons[i];
+        if(button.classList.contains("pressed")) {
+            button.classList.remove("pressed")
+        }
+    }
+    evt.target.classList.add("pressed");
+    mode = newMode;
+    updateModViews();
+}
