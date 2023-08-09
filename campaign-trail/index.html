@@ -89,6 +89,13 @@
                 <button onclick="skipQuestion(event)" style="border-radius:5px; font-weight:bold;padding:10px;">Skip To Question</button>
               </div>
             </div>
+            <div id="autoplayMenu" style="display:none">
+              <label style="font-weight: bolder;" for="autoplayYes">Autoplay Settings</label><br><br>
+              <label style="font-weight:bold">Always Pick</label><br>
+              <textarea  placeholder="Put PKs of answers you always want here separated by spaces. Ex: 451 467 232" id="autoplayYes" name="autoplayYes" rows="4" cols="25"></textarea><br>
+              <label style="font-weight:bold">Never Pick</label><br>
+              <textarea  placeholder="Put PKs of answers you never want here separated by spaces. Ex: 651 367 2332" id="autoplayNo" name="autoplayNo" rows="4" cols="25"></textarea>
+            </div>
             <h4>Theme Picker</h4>
             <div id="theme_picker">
               <span class="campaign_trail_start_emphasis">

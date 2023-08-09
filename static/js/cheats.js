@@ -199,24 +199,91 @@ function dragElement(elmnt) {
   }
 }
 
+let answerSet = new Set();
+let noAnswerSet = new Set();
+
+document.getElementById("autoplayYes").addEventListener("input", function(e) {
+    const splits = e.target.value.split(" ");
+    answerSet = new Set();
+    for(let i = 0; i < splits.length; i++) {
+        const pk = splits[i];
+        if(pk) {
+            answerSet.add(Number(pk));
+        }
+    }
+});
+
+document.getElementById("autoplayNo").addEventListener("input", function(e) {
+    console.log("updating set")
+    const splits = e.target.value.split(" ");
+    noAnswerSet = new Set();
+    for(let i = 0; i < splits.length; i++) {
+        const pk = splits[i];
+        if(pk) {
+            noAnswerSet.add(Number(pk));
+        }
+    }
+});
+
 function autoplay() {
     try {
         const confirm = document.getElementById("confirm_visit_button");
     
         if(confirm) confirm.click();
 
-        const a = document.getElementById("game_answers[0]");
-        if(a) {
-            a.checked = true;
-            document.getElementById("answer_select_button").click();
-            document.getElementById("ok_button").click();
+        const questionLength = document.getElementById("question_form").children[0].children.length / 3;
+
+        let clicked = false;
+        for (let i = 0; i < questionLength; i++) {
+            clicked = checkIfAnswer(i, answerSet);
+            if(clicked) {
+                break;
+            }
         }
 
+        if(!clicked) {
+            for (let i = 0; i < questionLength; i++) {
+                clicked = clickIfAvailable(i, noAnswerSet);
+                
+                if(clicked) {
+                    break;
+                }
+            }
+        }
+
+        if(clicked == false) {
+            console.log("ERROR: Cannot find answer to click!");
+        }
+       
         campaignTrail_temp.election_json[0].fields.has_visits = false;
     }
     catch {
 
     }
+}
+
+function checkIfAnswer(i, answerSet) {
+    const object = document.getElementById("question_form").children[0].children[(i * 3)]
+    const pk = Number(object.value);
+    if(answerSet.has(pk)) {
+        object.click();
+        document.getElementById("answer_select_button").click();
+        document.getElementById("ok_button").click();
+        return true;
+    }
+    return false;
+}
+
+function clickIfAvailable(i, noAnswerSet) {
+    const object = document.getElementById("question_form").children[0].children[(i * 3)]
+    const pk = Number(object.value);
+    if(!noAnswerSet.has(pk)) {
+        object.click();
+        document.getElementById("answer_select_button").click();
+        document.getElementById("ok_button").click();
+        return true;
+    }
+    return false;
 }
 
 let autoplayCount = 0;
@@ -233,6 +300,7 @@ window.addEventListener("keydown", (e) => {
             autoplayCount++;
             if(autoplayCount == 3) {
                 document.getElementById("cheatIndicator").style.display = "block";
+                document.getElementById("autoplayMenu").style.display = "inline-block";
                 setInterval(autoplay, 10);
             }
         }
