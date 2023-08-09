@@ -22,3 +22,5 @@ Paste your filled out form and then post the issue. We will get back to you once
 [Here is an example to follow](https://github.com/campaign-trail-showcase/campaign-trail-showcase.github.io/issues/4)
 
 Thanks!
+
+P.S. The CTS Team will publicly vote on your mod's showcase status on our [Discord server](https://discord.gg/NP9E3YCA). We aim to be fully transparent in our process and you are welcome to discuss there. 
