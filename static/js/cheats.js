@@ -63,10 +63,43 @@ function benefitCheck(objectid) {
     return '<p><b>Answer: </b>' + findAnswer(answerid)[1] + "'<br>" + "Feedback: " + answerfeedback + "'<br>" + mods + "</p><br><br>"
 }
 
+let benefitCheckAlreadyActivated = false;
 function activateBenefitCheck() {
+    if(benefitCheckAlreadyActivated) {
+        return;
+    }
+    benefitCheckAlreadyActivated = true;
     const benefitWindow = document.getElementById("benefitwindow");
     benefitWindow.style.display = benefitWindow.style.display != "none" ? "none" : "block";
     document.getElementById("showBenefitCheckButton").style.display = "inline-block";
+}
+
+
+let cheatMenuAlreadyActivated = false;
+function activateCheatMenu() {
+    if(cheatMenuAlreadyActivated) {
+        return;
+    }
+
+    document.getElementById("cheatMenu").style.display = "inline-block";
+    cheatMenuAlreadyActivated = true;
+    
+    const difficultySlider = document.getElementById("difficultySlider")
+    const difficultyValue = document.getElementById("difficultyValue");
+
+    difficultySlider.value = campaignTrail_temp.difficulty_level_multiplier;
+    difficultyValue.value = difficultySlider.value;
+
+    difficultySlider.oninput = function() {
+        difficultyValue.value = this.value;
+        campaignTrail_temp.difficulty_level_multiplier = Number.parseFloat(this.value);
+    }
+
+    difficultyValue.oninput = function() {
+        const cleaned = Number.parseFloat(this.value);
+        difficultySlider.value = this.value;
+        campaignTrail_temp.difficulty_level_multiplier = Number.parseFloat(this.value);
+    }
 }
 
 function benefitChecker() {
@@ -193,6 +226,9 @@ window.addEventListener("keydown", (e) => {
         if(e.key == '~' || e.key == '`') {
             activateBenefitCheck();
         }
+        else if(e.key == '#') {
+            activateCheatMenu();
+        }
         else if(e.key == "@") {
             autoplayCount++;
             if(autoplayCount == 3) {
@@ -202,3 +238,27 @@ window.addEventListener("keydown", (e) => {
         }
     } 
   });
+
+function turnOffVisits()
+{
+    campaignTrail_temp.election_json[0].fields.has_visits = false;
+    alert("Visits are now disabled");
+}
+
+function skipQuestion(e) {
+    e.preventDefault();
+    const newQuestion = Number(document.getElementById("skipQuestionValue").value)
+    
+    if(!newQuestion) {
+        alert("Question number cannot be blank!")
+        return;
+    }
+
+    const cache = campaignTrail_temp.election_json[0].fields.has_visits;
+    
+    campaignTrail_temp.election_json[0].fields.has_visits = false;
+    campaignTrail_temp.question_number = newQuestion - 2;
+    campaignTrail_temp.skippingQuestion = true;
+    document.getElementById("answer_select_button")?.click()
+    campaignTrail_temp.election_json[0].fields.has_visits = cache;
+}

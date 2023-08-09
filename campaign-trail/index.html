@@ -77,6 +77,18 @@
             <div id="bottomBar" class="inner_window_front" style="display:none;height:30px;font-size: 12px;border-style: solid;border-width: 5px;width:95%;position:absolute;bottom:10px;"></div>
           </div>
           <div  class="footer">
+            <div id="cheatMenu" style="display:none">
+              <div class="slidecontainer"  style="padding-right: 20px; padding: 10px; border-radius:5px; background-color: white;">
+                <label style="font-weight:bold">Difficulty Slider</label>
+                <input type="range" min="0.0" max="100.0" step="0.25" value="1.0"  class="slider" id="difficultySlider">
+                <input style="display:inline-block" step="any" type="number" id="difficultyValue"></input>
+              </div>
+              <div style="margin-top:10px; display:inline-block;">
+                <button onclick="turnOffVisits()" style="border-radius:5px; font-weight:bold;padding:10px;">Turn Off Visits</button>
+                <input style="border-radius:5px; font-weight:bold;padding:10px;"  type="number" id="skipQuestionValue" placeholder="Enter question to skip to"></input>
+                <button onclick="skipQuestion(event)" style="border-radius:5px; font-weight:bold;padding:10px;">Skip To Question</button>
+              </div>
+            </div>
             <h4>Theme Picker</h4>
             <div id="theme_picker">
               <span class="campaign_trail_start_emphasis">
