@@ -206,6 +206,7 @@ $(document).ready(async function() {
                 document.getElementById("mod-grid").appendChild(modView);
                 modList.push(modView);
             }
+            updateModViews();
         }
     });
 
