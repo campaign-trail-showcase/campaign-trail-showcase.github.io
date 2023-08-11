@@ -25,14 +25,6 @@ campaignTrail_temp.game_start_logging_id = '4166808';
  
 campaignTrail_temp.cyoa = true
 
-cyoAdventure = function(a) {
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
-    if ([19001,19002,19003,19004].includes(ans)){
-campaignTrail_temp.election_json[0].fields.advisor_url="https://i.imgur.com/AOo45X9.png"
-}
-}
-
-
 function changeVP(name, url, flag=null) {
     flag = flag ? flag : name
     campaignTrail_temp.running_mate_last_name = name;
@@ -46,6 +38,11 @@ function tunnel(new_q){
 }
 
 cyoAdventure = function(a) {
+
+    if ([19001,19002,19003,19004].includes(ans)){
+        campaignTrail_temp.election_json[0].fields.advisor_url="https://i.imgur.com/AOo45X9.png"
+        }
+        
     ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
     if ([6001].includes(ans)){
         changeVP('Vacant', 'https://i.imgur.com/YCvd7IH.png');
