@@ -1373,32 +1373,45 @@ function divideElectoralVotesProp(e, t) {
             if (e.state_issue_score_json[l].fields.state == e.states_json[s].pk) {
               // Find the issue object that matches the current state_issue_score
               var issue = e.issues_json.find(i => i.pk == e.state_issue_score_json[l].fields.issue);
+              let stanceDesc = null;
               // Use a switch statement to determine the stance based on the state_issue_score
               switch (true) {
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_1_max:
                   var v = issue.fields.stance_1;
+                  stanceDesc = issue.fields.stance_desc_1;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_2_max:
                   v = issue.fields.stance_2;
+                  stanceDesc = issue.fields.stance_desc_2;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_3_max:
                   v = issue.fields.stance_3;
+                  stanceDesc = issue.fields.stance_desc_3;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_4_max:
                   v = issue.fields.stance_4;
+                  stanceDesc = issue.fields.stance_desc_4;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_5_max:
                   v = issue.fields.stance_5;
+                  stanceDesc = issue.fields.stance_desc_5;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_6_max:
                   v = issue.fields.stance_6;
+                  stanceDesc = issue.fields.stance_desc_6;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score > e.global_parameter_json[0].fields.issue_stance_6_max:
                   v = issue.fields.stance_7;
+                  stanceDesc = issue.fields.stance_desc_7;
                   break;
               }
+              const issueDescription = issue.fields.description ?? null;
               // Add the issue name and stance to the list
-              u += "<li>" + issue.fields.name + " -- " + v + "</li>";
+              u += `
+              <li>
+                <span class=${issueDescription ? "tooltip" : ""}>${issue.fields.name}<span class="tooltiptext">${issueDescription}</span></span>
+                <span class=${stanceDesc ? "tooltip" : ""}>${v}<span class="tooltiptext">${stanceDesc}</span></span>
+              </li>`
             }
           }
         if (e.primary) {
