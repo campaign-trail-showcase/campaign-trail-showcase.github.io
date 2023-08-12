@@ -214,7 +214,6 @@ document.getElementById("autoplayYes").addEventListener("input", function(e) {
 });
 
 document.getElementById("autoplayNo").addEventListener("input", function(e) {
-    console.log("updating set")
     const splits = e.target.value.split(" ");
     noAnswerSet = new Set();
     for(let i = 0; i < splits.length; i++) {
