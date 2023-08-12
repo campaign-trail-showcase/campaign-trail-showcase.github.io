@@ -337,19 +337,19 @@ function updateModViews(event) {
 
 
     for(let i = 0; i < modList.length; i++) {
-        let hasTag = false;
+        let shouldShow = false;
         const modMode = modList[i].getAttribute("mode");
         const modTags = modList[i].getAttribute("tags").split(" ");
         for(let j = 0; j < modTags.length; j++) {
             const tag = modTags[j];
             const modName = modList[i].getAttribute("mod-name");
             const modDisplayName = modList[i].getAttribute("mod-display-name");
-            if((nameFilter.replace(" ", "") == "" || modDisplayName.includes(nameFilter)) && activeTags.has(tag) && (!onlyFavorites || isFavorite(modName)) && (!year || year.test(modName)) && (onlyFavorites || mode == ALL || modMode == mode)) {
-                hasTag = true;
+            if((nameFilter.replace(" ", "") == "" || (modDisplayName.includes(nameFilter) || modName.includes(nameFilter))) && activeTags.has(tag) && (!onlyFavorites || isFavorite(modName)) && (!year || year.test(modName)) && (onlyFavorites || mode == ALL || modMode == mode)) {
+                shouldShow = true;
                 break;
             }
         }
-        modList[i].style.display = hasTag ? "flex" : "none";
+        modList[i].style.display = shouldShow ? "flex" : "none";
     }
 }
 
