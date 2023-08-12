@@ -1406,11 +1406,15 @@ function divideElectoralVotesProp(e, t) {
                   break;
               }
 
-              if(stanceDesc == "" || stanceDesc == "'") {
-                stanceDesc = null;
+              if(stanceDesc == "'" || stanceDesc == null) {
+                stanceDesc = "";
               }
               
-              const issueDescription = issue.fields.description ?? null;
+              let issueDescription = issue.fields.description ?? "";
+              if(issueDescription == "'" || issueDescription == null) {
+                issueDescription = "";
+              }
+
               // Add the issue name and stance to the list
               u += `
               <li>
