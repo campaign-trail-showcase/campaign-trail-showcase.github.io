@@ -1406,12 +1406,12 @@ function divideElectoralVotesProp(e, t) {
                   break;
               }
 
-              if(stanceDesc == "'" || stanceDesc == null) {
+              if(stanceDesc == "'" || stanceDesc == null || !isNaN(stanceDesc)) {
                 stanceDesc = "";
               }
               
               let issueDescription = issue.fields.description ?? "";
-              if(issueDescription == "'" || issueDescription == null) {
+              if(issueDescription == "'" || issueDescription == null || !isNaN(issueDescription) ) {
                 issueDescription = "";
               }
 
