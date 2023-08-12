@@ -1405,6 +1405,11 @@ function divideElectoralVotesProp(e, t) {
                   stanceDesc = issue.fields.stance_desc_7;
                   break;
               }
+
+              if(stanceDesc == "" || stanceDesc == "'") {
+                stanceDesc = null;
+              }
+              
               const issueDescription = issue.fields.description ?? null;
               // Add the issue name and stance to the list
               u += `
