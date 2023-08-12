@@ -1419,6 +1419,7 @@ function divideElectoralVotesProp(e, t) {
               u += `
               <li>
                 <span class=${issueDescription ? "tooltip" : ""}>${issue.fields.name}<span class="tooltiptext">${issueDescription}</span></span>
+                <span> -- </span>
                 <span class=${stanceDesc ? "tooltip" : ""}>${v}<span class="tooltiptext">${stanceDesc}</span></span>
               </li>`
             }
