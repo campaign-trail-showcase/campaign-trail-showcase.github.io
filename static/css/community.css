@@ -318,11 +318,16 @@
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   color: #fff;
+  outline-color: black;
+  outline-width: 1px;
+  outline-style: solid;
+  color:black;
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
+  padding: 3px;
  
   /* Position the tooltip text - see examples below! */
   position: absolute;
