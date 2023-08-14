@@ -1,4 +1,4 @@
-
+let res = [];
 
 function removeIssueDuplicates(array) {
     const a = array.filter((item, index) => array.map(f=>f.issue).indexOf(item.issue) == index);
