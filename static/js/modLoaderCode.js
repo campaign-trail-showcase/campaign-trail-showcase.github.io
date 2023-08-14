@@ -4,9 +4,8 @@ const UNFAV = "♥";
 const FAV = "♡";
 const PLAY = "▶";
 const DELETE = "X";
-const SHOWCASE = "featured";
+const NEW_RELEASE = "new";
 const ALL = "all";
-const COMMUNITY = "community";
 
 const modList = [];
 const tagList = [];
@@ -21,7 +20,7 @@ let year = null;
 
 let nameFilter = "";
 
-let mode = SHOWCASE;
+let mode = ALL;
 
 let allAch = {};
 
