@@ -107,8 +107,8 @@ function benefitChecker() {
         questionlength = document.getElementById("question_form").children[0].children.length / 3
         let content = "";
         for (v = 0; v < questionlength; v++) {
-            res = benefitCheck(v);
-            content += res;
+            let benefitResult = benefitCheck(v);
+            content += benefitResult;
         }
 
         content += "<br>Benefit Checker code partially adapted from NCT`"
