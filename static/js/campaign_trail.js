@@ -1,4 +1,6 @@
+// Custom variables
 
+campaignTrail_temp.issue_font_size = ".8em";
 
 function removeIssueDuplicates(array) {
     const a = array.filter((item, index) => array.map(f=>f.issue).indexOf(item.issue) == index);
@@ -1417,7 +1419,7 @@ function divideElectoralVotesProp(e, t) {
 
               // Add the issue name and stance to the list
               u += `
-              <li>
+              <li style="font-size: ${campaignTrail_temp.issue_font_size};">
                 <span class=${issueDescription ? "tooltip" : ""}>${issue.fields.name}<span class="tooltiptext">${issueDescription}</span></span>
                 <span> -- </span>
                 <span class=${stanceDesc ? "tooltip" : ""}>${v}<span class="tooltiptext">${stanceDesc}</span></span>
