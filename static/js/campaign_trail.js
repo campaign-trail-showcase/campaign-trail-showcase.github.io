@@ -2385,6 +2385,9 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
     gameStart = (a) => {
         a.preventDefault(),
             function() {
+                $("#modloaddiv")[0].style.display = 'none'
+                $("#modLoadReveal")[0].style.display = 'none'
+                document.getElementById("featured-mods-area").style.display = "none";
                 for (var a = "", n = 0; n < e.temp_election_list.length; n++) 0 == e.temp_election_list[n].is_premium ? a += "<option value=" + e.temp_election_list[n].id + ">" + e.temp_election_list[n].display_year + "</option>" : 1 == e.show_premium ? a += "<option value=" + e.temp_election_list[n].id + ">" + e.temp_election_list[n].display_year + "</option>" : a += "<option value=" + e.temp_election_list[n].id + " disabled>" + e.temp_election_list[n].display_year + "</option>";
                 e.election_id = e.election_id ? e.election_id : e.election_json[0].pk
                 let inX = S(e.election_id)
