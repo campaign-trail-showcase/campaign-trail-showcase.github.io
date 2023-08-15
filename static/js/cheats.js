@@ -261,11 +261,28 @@ function autoplay() {
     }
 }
 
+let answersPickedAutoplay = new Set();
+
 function printAutoplayClickedMessage(object) {
-
     const answerDesc = findAnswer(Number(object.value))[1];
+    const autoplayString = "Question " + (campaignTrail_temp.question_number + 1) + ") \"" + answerDesc + "\" is what AUTOPLAY chose!\n";
+    const autoplayStringToSave = "Question " + (campaignTrail_temp.question_number + 1) + ") \"" + answerDesc + "\n\n";
+    console.log(autoplayString);
+    answersPickedAutoplay.add(autoplayStringToSave);
+}
 
-    console.log("Question " + (campaignTrail_temp.question_number + 1) + ") \"" + answerDesc + "\" is what AUTOPLAY chose!");
+function printAllAnswersAutoplayPicked() {
+    let finalString = "-- AUTOPLAY RESULTS --\n\n";
+
+    const answers = Array.from(answersPickedAutoplay);
+
+    for(let i = 0; i < answers.length; i++) {
+        finalString += answers[i];
+    }
+
+    const autoplayTextBox = document.getElementById("autoplayAnswers");
+    autoplayTextBox.style.display = "inline-block";
+    autoplayTextBox.value = finalString;
 }
 
 function checkIfAnswer(i, answerSet) {
