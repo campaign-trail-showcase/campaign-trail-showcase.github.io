@@ -261,10 +261,18 @@ function autoplay() {
     }
 }
 
+function printAutoplayClickedMessage(object) {
+
+    const answerDesc = findAnswer(Number(object.value))[1];
+
+    console.log("Question " + (campaignTrail_temp.question_number + 1) + ") \"" + answerDesc + "\" is what AUTOPLAY chose!");
+}
+
 function checkIfAnswer(i, answerSet) {
     const object = document.getElementById("question_form").children[0].children[(i * 3)]
     const pk = Number(object.value);
     if(answerSet.has(pk)) {
+        printAutoplayClickedMessage(object);
         object.click();
         document.getElementById("answer_select_button").click();
         document.getElementById("ok_button").click();
@@ -277,6 +285,7 @@ function clickIfAvailable(i, noAnswerSet) {
     const object = document.getElementById("question_form").children[0].children[(i * 3)]
     const pk = Number(object.value);
     if(!noAnswerSet.has(pk)) {
+        printAutoplayClickedMessage(object);
         object.click();
         document.getElementById("answer_select_button").click();
         document.getElementById("ok_button").click();
