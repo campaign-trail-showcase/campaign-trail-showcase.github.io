@@ -900,6 +900,7 @@ function divideElectoralVotesProp(e, t) {
         var t = A(2);
 
         if (e.cyoa) {
+            if(e.collect_results){let a = A(2);e.current_results = [getLatestRes(a)[0], a]}
             cyoAdventure(e.questions_json[e.question_number])
         }
         a = false
