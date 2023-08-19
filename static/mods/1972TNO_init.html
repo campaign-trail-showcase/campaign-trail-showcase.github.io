@@ -239,6 +239,9 @@ musicMode = () => {
     }
   
     function newMusicPlayer() {
+        if(document.getElementById("trackSelParent")) {
+            return;
+        }
         trackSel = document.createElement("div");
         trackSel.id = "trackSelParent"
         let z = `<br><br><br><br><br><br><br><br><br><br><div id='trackSel' style="text-align:left;border-style:solid;border-width:3px;overflow-y: scroll;overflow-x: hidden;height:200px; width:400px;background-color:#999999;float:right;">`
