@@ -217,6 +217,11 @@ $(document).ready(async function() {
         rawModText = localStorage.getItem(customModName + "_code1");
 
         const temp = extractElectionDetails(rawModText, customModName);
+
+        if(temp == null) {
+            continue;
+        }
+
         getAllAchievements(rawModText, customModName);
 
         let imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
