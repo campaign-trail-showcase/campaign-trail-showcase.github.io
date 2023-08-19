@@ -9853,25 +9853,25 @@ endingPicker = (out, totv, aa, quickstats) => {
         }, 50);
     }
 
+	if(quickstats[1] > 85) {
+        setImage("https://i.imgur.com/fE4BRTx.png");
+        return `<h3>DARK BRANDON RISES</h3><p>Your power ever grows with victory after victory. Now immense, you know what you have to do, and you have a plan. What plan? The biggest plan. First, become Vice President to some unsuspecting fool. Then, become President yourself. And when you do, it will be time to institute full Brandonism, ravaging the entire world until you have it under your thumb.<br><br>Godspeed, Brandon, and let's go.</p>`;
+    }
     if(quickstats[1] > 50) {
         setImage("https://i.imgur.com/9khgjwz.png");
         return `<h3>BIDEN PULLS OFF VICTORY IN SHOCKING UPSET</h3><p>Valerie grins as you hear the news. Back in June, she’d reserved a ballroom at the Hotel du Pont for a victory party - unlikely as it was. You celebrate with Neilia, your three children, and your entire family, who have pulled off probably the most surprising upset in Delaware history. Henry Topel receives a call from Senator Vance Hartke of Indiana, and upon Topel’s silence when he’s asked what kind of guy you are, Hartke says <q>You mean he wants to be president?</q>, to which you let out a laugh when you hear about it.<br><br>Nationally, President Nixon has, as expected, won the 1972 election in a landslide. But your victory, along with a slew of others, means that the Democrats have held the Senate, and, despite substantial Republican gains, the House.<br><br>You’ll have to wait until your 30th birthday to take your seat in the hallowed halls of the U.S. Senate. Due to your youth, you’ve got a long road ahead of you - you comment that you could see yourself staying in the chamber for 40 years. Maybe you might run for president someday, even.<br><br>But now is not the time for that. Revel, Mr. Senator-elect, in your upset victory.</p>`;
     }
-    if(quickstats[1] > 85) {
-        setImage("https://i.imgur.com/fE4BRTx.png");
-        return `<h3>DARK BRANDON RISES</h3><p>Your power ever grows with victory after victory. Now immense, you know what you have to do, and you have a plan. What plan? The biggest plan. First, become Vice President to some unsuspecting fool. Then, become President yourself. And when you do, it will be time to institute full Brandonism, ravaging the entire world until you have it under your thumb.<br><br>Godspeed, Brandon, and let's go.</p>`;
+	if(quickstats[1] < 10) {
+        setImage("https://i.imgur.com/1BaBIFB.png");
+        return `<h3>JOE BIDEN WINS THE US PRESIDENTIAL ELECTION</h3><p>You wake up in a cold sweat. It's November 2020, and you've just won 306 electoral votes, beating President Donald Trump. You've been given a limited mandate to rule - as Trump cries election fraud, you know that you're going to lead this country in a better direction and save its soul.<br><br>That was a bad dream, Mr. President-elect.</p>`;
+    }
+	if(quickstats[1] < 40) {
+        setImage("https://i.imgur.com/JnmWcS8.png");
+        return `<h3>BOGGS COASTS TO RE-ELECTION</h3><p>Maybe you had no chance in politics after all, Mr. Biden. Your family trusted you, but Delaware seems to have not. With Boggs winning in a landslide, you've gone back to the drawing board in terms of what you'll do next in life. You are sure to lose your county council seat from redistricting. Maybe a run for the House would be good, during the midterms - it seems Nixon's going down, anyways, despite his huge win over McGovern.<br><br>With or without you, the Democrats have kept the Senate and the House. Nixon, that old bastard, is sure to keep governing for another four years, unless something unexpected happens regarding the Watergate investigations.<br><br>You wake up to a new day, now that all the votes have been counted. It's been a long time since you could be by yourself like this.</p>`;
     }
     if(quickstats[1] < 50) {
         setImage("https://i.imgur.com/JnmWcS8.png");
         return `<h3>BOGGS KEEPS SENATE SEAT, FIGHTS OFF DEMOCRATIC CHALLENGER</h3><p>You give a dejected call to Cale Boggs. He consoles you, saying that your youth gives you many more opportunities to run. For him, well, he didn't even want to run in the first place. As Boggs prepares to return to Washington after a strong campaign, and you are destined to lose your council seat due to redistricting, thoughts pop up in your mind. Maybe it was the pressures of his incumbency that brought you down, or maybe you just didn't run your campaign correctly.<br><br>Regardless, Democrats have kept both the Senate and the House, despite huge Republican gains and a landslide victory for Nixon in the general election. Boggs is sure to keep supporting Nixon, and his popularity, ever so great, will help him coast to re-election if he so chooses - which, as he's told you, he won't.<br><br>Looking to the future then, Mr. Biden, you have a bright one ahead of you. The closeness of this election means you could probably run for the House in the midterms, or for Delaware's other Senate seat when it next comes to an election. You're still popular with the youth, and your age means you can do anything you really want to in the next few years. But that is up to you.</p>`;
-    }
-    if(quickstats[1] < 40) {
-        setImage("https://i.imgur.com/JnmWcS8.png");
-        return `<h3>BOGGS COASTS TO RE-ELECTION</h3><p>Maybe you had no chance in politics after all, Mr. Biden. Your family trusted you, but Delaware seems to have not. With Boggs winning in a landslide, you've gone back to the drawing board in terms of what you'll do next in life. You are sure to lose your county council seat from redistricting. Maybe a run for the House would be good, during the midterms - it seems Nixon's going down, anyways, despite his huge win over McGovern.<br><br>With or without you, the Democrats have kept the Senate and the House. Nixon, that old bastard, is sure to keep governing for another four years, unless something unexpected happens regarding the Watergate investigations.<br><br>You wake up to a new day, now that all the votes have been counted. It's been a long time since you could be by yourself like this.</p>`;
-    }
-    if(quickstats[1] < 10) {
-        setImage("https://i.imgur.com/1BaBIFB.png");
-        return `<h3>JOE BIDEN WINS THE US PRESIDENTIAL ELECTION</h3><p>You wake up in a cold sweat. It's November 2020, and you've just won 306 electoral votes, beating President Donald Trump. You've been given a limited mandate to rule - as Trump cries election fraud, you know that you're going to lead this country in a better direction and save its soul.<br><br>That was a bad dream, Mr. President-elect.</p>`;
     }
 }
 
