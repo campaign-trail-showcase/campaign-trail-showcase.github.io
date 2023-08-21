@@ -1637,3 +1637,8 @@ const useConsoleCheats = () => {
 		});
 	});
 };
+
+window.addEventListener('keypress', (e) => {
+	if (e.key === '$') useConsoleCheats();
+});
+
