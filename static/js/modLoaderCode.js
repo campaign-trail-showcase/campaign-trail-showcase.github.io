@@ -4,9 +4,8 @@ const UNFAV = "♥";
 const FAV = "♡";
 const PLAY = "▶";
 const DELETE = "X";
-const SHOWCASE = "featured";
+const NEW_RELEASE = "new";
 const ALL = "all";
-const COMMUNITY = "community";
 
 const modList = [];
 const tagList = [];
@@ -21,7 +20,7 @@ let year = null;
 
 let nameFilter = "";
 
-let mode = SHOWCASE;
+let mode = ALL;
 
 let allAch = {};
 
@@ -218,6 +217,11 @@ $(document).ready(async function() {
         rawModText = localStorage.getItem(customModName + "_code1");
 
         const temp = extractElectionDetails(rawModText, customModName);
+
+        if(temp == null) {
+            continue;
+        }
+
         getAllAchievements(rawModText, customModName);
 
         let imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
@@ -337,19 +341,19 @@ function updateModViews(event) {
 
 
     for(let i = 0; i < modList.length; i++) {
-        let hasTag = false;
+        let shouldShow = false;
         const modMode = modList[i].getAttribute("mode");
         const modTags = modList[i].getAttribute("tags").split(" ");
         for(let j = 0; j < modTags.length; j++) {
             const tag = modTags[j];
             const modName = modList[i].getAttribute("mod-name");
             const modDisplayName = modList[i].getAttribute("mod-display-name");
-            if((nameFilter.replace(" ", "") == "" || modDisplayName.includes(nameFilter)) && activeTags.has(tag) && (!onlyFavorites || isFavorite(modName)) && (!year || year.test(modName)) && (onlyFavorites || mode == ALL || modMode == mode)) {
-                hasTag = true;
+            if((nameFilter.replace(" ", "") == "" || (modDisplayName.includes(nameFilter) || modName.includes(nameFilter))) && activeTags.has(tag) && (!onlyFavorites || isFavorite(modName)) && (!year || year.test(modName)) && (onlyFavorites || mode == ALL || modMode == mode)) {
+                shouldShow = true;
                 break;
             }
         }
-        modList[i].style.display = hasTag ? "flex" : "none";
+        modList[i].style.display = shouldShow ? "flex" : "none";
     }
 }
 

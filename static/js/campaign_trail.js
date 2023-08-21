@@ -1,4 +1,6 @@
+// Custom variables
 
+campaignTrail_temp.issue_font_size = null;
 
 function removeIssueDuplicates(array) {
     const a = array.filter((item, index) => array.map(f=>f.issue).indexOf(item.issue) == index);
@@ -898,6 +900,7 @@ function divideElectoralVotesProp(e, t) {
         var t = A(2);
 
         if (e.cyoa) {
+            if(e.collect_results){let a = A(2);e.current_results = [getLatestRes(a)[0], a]}
             cyoAdventure(e.questions_json[e.question_number])
         }
         a = false
@@ -1373,32 +1376,55 @@ function divideElectoralVotesProp(e, t) {
             if (e.state_issue_score_json[l].fields.state == e.states_json[s].pk) {
               // Find the issue object that matches the current state_issue_score
               var issue = e.issues_json.find(i => i.pk == e.state_issue_score_json[l].fields.issue);
+              let stanceDesc = null;
               // Use a switch statement to determine the stance based on the state_issue_score
               switch (true) {
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_1_max:
                   var v = issue.fields.stance_1;
+                  stanceDesc = issue.fields.stance_desc_1;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_2_max:
                   v = issue.fields.stance_2;
+                  stanceDesc = issue.fields.stance_desc_2;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_3_max:
                   v = issue.fields.stance_3;
+                  stanceDesc = issue.fields.stance_desc_3;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_4_max:
                   v = issue.fields.stance_4;
+                  stanceDesc = issue.fields.stance_desc_4;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_5_max:
                   v = issue.fields.stance_5;
+                  stanceDesc = issue.fields.stance_desc_5;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score <= e.global_parameter_json[0].fields.issue_stance_6_max:
                   v = issue.fields.stance_6;
+                  stanceDesc = issue.fields.stance_desc_6;
                   break;
                 case e.state_issue_score_json[l].fields.state_issue_score > e.global_parameter_json[0].fields.issue_stance_6_max:
                   v = issue.fields.stance_7;
+                  stanceDesc = issue.fields.stance_desc_7;
                   break;
               }
+
+              if(stanceDesc == "'" || stanceDesc == null || !isNaN(stanceDesc)) {
+                stanceDesc = "";
+              }
+              
+              let issueDescription = issue.fields.description ?? "";
+              if(issueDescription == "'" || issueDescription == null || !isNaN(issueDescription) ) {
+                issueDescription = "";
+              }
+
               // Add the issue name and stance to the list
-              u += "<li>" + issue.fields.name + " -- " + v + "</li>";
+              u += `
+              <li ${ campaignTrail_temp.issue_font_size != null ? `style="font-size: ${campaignTrail_temp.issue_font_size};"` : ""}>
+                <span class=${issueDescription ? "tooltip" : ""}>${issue.fields.name}<span style="font-size: 10.4px;" class="tooltiptext">${issueDescription}</span></span>
+                <span> -- </span>
+                <span class=${stanceDesc ? "tooltip" : ""}>${v}<span style="font-size: 10.4px;" class="tooltiptext">${stanceDesc}</span></span>
+              </li>`
             }
           }
         if (e.primary) {
@@ -2360,6 +2386,9 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
     gameStart = (a) => {
         a.preventDefault(),
             function() {
+                $("#modloaddiv")[0].style.display = 'none'
+                $("#modLoadReveal")[0].style.display = 'none'
+                document.getElementById("featured-mods-area").style.display = "none";
                 for (var a = "", n = 0; n < e.temp_election_list.length; n++) 0 == e.temp_election_list[n].is_premium ? a += "<option value=" + e.temp_election_list[n].id + ">" + e.temp_election_list[n].display_year + "</option>" : 1 == e.show_premium ? a += "<option value=" + e.temp_election_list[n].id + ">" + e.temp_election_list[n].display_year + "</option>" : a += "<option value=" + e.temp_election_list[n].id + " disabled>" + e.temp_election_list[n].display_year + "</option>";
                 e.election_id = e.election_id ? e.election_id : e.election_json[0].pk
                 let inX = S(e.election_id)

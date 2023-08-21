@@ -107,8 +107,8 @@ function benefitChecker() {
         questionlength = document.getElementById("question_form").children[0].children.length / 3
         let content = "";
         for (v = 0; v < questionlength; v++) {
-            res = benefitCheck(v);
-            content += res;
+            let benefitResult = benefitCheck(v);
+            content += benefitResult;
         }
 
         content += "<br>Benefit Checker code partially adapted from NCT`"
@@ -214,7 +214,6 @@ document.getElementById("autoplayYes").addEventListener("input", function(e) {
 });
 
 document.getElementById("autoplayNo").addEventListener("input", function(e) {
-    console.log("updating set")
     const splits = e.target.value.split(" ");
     noAnswerSet = new Set();
     for(let i = 0; i < splits.length; i++) {
@@ -262,10 +261,35 @@ function autoplay() {
     }
 }
 
+let answersPickedAutoplay = new Set();
+
+function printAutoplayClickedMessage(object) {
+    const answerDesc = findAnswer(Number(object.value))[1];
+    const autoplayString = "Question " + (campaignTrail_temp.question_number + 1) + ") \"" + answerDesc + "\" is what AUTOPLAY chose!\n";
+    const autoplayStringToSave = "Question " + (campaignTrail_temp.question_number + 1) + ") \"" + answerDesc + "\n\n";
+    console.log(autoplayString);
+    answersPickedAutoplay.add(autoplayStringToSave);
+}
+
+function printAllAnswersAutoplayPicked() {
+    let finalString = "-- AUTOPLAY RESULTS --\n\n";
+
+    const answers = Array.from(answersPickedAutoplay);
+
+    for(let i = 0; i < answers.length; i++) {
+        finalString += answers[i];
+    }
+
+    const autoplayTextBox = document.getElementById("autoplayAnswers");
+    autoplayTextBox.style.display = "inline-block";
+    autoplayTextBox.value = finalString;
+}
+
 function checkIfAnswer(i, answerSet) {
     const object = document.getElementById("question_form").children[0].children[(i * 3)]
     const pk = Number(object.value);
     if(answerSet.has(pk)) {
+        printAutoplayClickedMessage(object);
         object.click();
         document.getElementById("answer_select_button").click();
         document.getElementById("ok_button").click();
@@ -278,6 +302,7 @@ function clickIfAvailable(i, noAnswerSet) {
     const object = document.getElementById("question_form").children[0].children[(i * 3)]
     const pk = Number(object.value);
     if(!noAnswerSet.has(pk)) {
+        printAutoplayClickedMessage(object);
         object.click();
         document.getElementById("answer_select_button").click();
         document.getElementById("ok_button").click();

@@ -97,7 +97,10 @@
               <label style="font-weight:bold">Always Pick</label><br>
               <textarea  placeholder="Put PKs of answers you always want here separated by spaces. Ex: 451 467 232" id="autoplayYes" name="autoplayYes" rows="4" cols="25"></textarea><br>
               <label style="font-weight:bold">Never Pick</label><br>
-              <textarea  placeholder="Put PKs of answers you never want here separated by spaces. Ex: 651 367 2332" id="autoplayNo" name="autoplayNo" rows="4" cols="25"></textarea>
+              <textarea  placeholder="Put PKs of answers you never want here separated by spaces. Ex: 651 367 2332" id="autoplayNo" name="autoplayNo" rows="4" cols="25"></textarea><br>
+              <br>
+              <button onclick="printAllAnswersAutoplayPicked()">View Autoplay Answers</button><br><br>
+              <textarea style="display:none"  placeholder="Put PKs of answers you never want here separated by spaces. Ex: 651 367 2332" id="autoplayAnswers" rows="25" cols="25"></textarea><br>
             </div>
             <h4>Theme Picker</h4>
             <div id="theme_picker">
@@ -171,9 +174,8 @@
             <hr>
             <div id="featured-mods-area">
               <div style="margin:10px; display:flex; justify-items: center; justify-content: center; gap:5%;">
-                <button class="mode-button pressed" onclick="setMode(event, 'featured')" style="text-align: center;">Showcase</button>
-                <button class="mode-button" onclick="setMode(event, 'community')" style="text-align: center;">Community</button>
-                <button class="mode-button" onclick="setMode(event, 'all')" style="text-align: center;">All Mods</button>
+                <button class="mode-button pressed" onclick="setMode(event, 'all')" style="text-align: center;">All Mods</button>
+                <button class="mode-button" onclick="setMode(event, 'new')" style="text-align: center;">New Releases</button>
               </div>
               <div class="tab">
                 <button class="tablinks active" onclick="setCategory(event, 'all')">All</button>
@@ -199,6 +201,12 @@
               <a href="https://github.com/campaign-trail-showcase/campaign-trail-showcase.github.io/blob/main/How%20Tos/How%20to%20Get%20Your%20Mod%20in%20The%20Showcase.md" style="color:#FF6B6B">How to submit a mod to Campaign Trail Showcase</a><br>
               <a href="https://www.newcampaigntrail.com/campaign-trail/index.html" style="color:#FF6B6B">This site is a fork of The New Campaign Trail created by Decstar and NCT Staff</a><br>
               <a href="http://www.americanhistoryusa.com" style="color:#FF6B6B">Original site created by Dan Bryan &copy; 2012- <testf id="year">2022</testf></a>
+              <div>
+                <div style="margin-top:10px; display:inline-block;">
+                  <button onclick="activateBenefitCheck()" style="border-radius:5px; font-weight:bold;padding:10px;">Benefit Checker</button>
+                  <button onclick="activateCheatMenu()" style="border-radius:5px; font-weight:bold;padding:10px;">Cheat Menu</button>
+                </div>
+              </div>
             </div>
             <br>
           </div>
