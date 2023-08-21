@@ -1,4 +1,4 @@
-const UseConsoleCheats = () => {
+const useConsoleCheats = () => {
 	if (campaignTrail_temp.candidate_id === undefined) return; // must be in a scenario to use
 	if (window.UsingConsoleCheats === true) return;
 	window.UsingConsoleCheats = true;
@@ -1602,9 +1602,9 @@ const UseConsoleCheats = () => {
 		$(document).keypress((e) => {
 			if (e.isDefaultPrevented()) return;
 
-			const keyCode = e.which;
+			const key = e.key;
 
-			if (keyCode === "`".charCodeAt()) {
+			if (key === "$") {
 				const expanded = toggleTerminal();
 				if (expanded) {
 					$(".terminal-input")[0].focus({ focusVisible: true });
@@ -1616,13 +1616,12 @@ const UseConsoleCheats = () => {
 
 			if (document.activeElement !== document.body) return;
 
-			if (keyCode >= "1".charCodeAt() && keyCode <= "5".charCodeAt()) {
+			if (key >= "1" && key <= "5") {
 				const radioElts = $(".game_answers");
-				const radioElt = radioElts[keyCode - "1".charCodeAt()];
+				const radioElt = radioElts[key.charCodeAt() - "1".charCodeAt()];
 				if (radioElt) radioElt.checked = true;
 				e.preventDefault();
-			} else if (keyCode === 13) {
-				// ENTER key
+			} else if (key === "Enter") {
 				const tryClick = (id) => {
 					const elt = $(id)[0];
 					if (elt != null) {
