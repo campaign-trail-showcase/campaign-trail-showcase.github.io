@@ -333,7 +333,7 @@ async function rateMod(event, modName, rating) {
 
     const modView = document.getElementById(modName);
     await getRating(modName, modView);
-    configureRatingButtons(modName, modView);
+    // configureRatingButtons(modName, modView);
 }
 
 function addCustomModButton() {
