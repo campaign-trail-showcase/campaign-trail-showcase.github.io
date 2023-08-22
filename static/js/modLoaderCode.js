@@ -336,6 +336,9 @@ async function rateMod(event, modName, rating) {
 
     if(modName in ratedMods) {
         oldRating = ratedMods[modName];
+        if(oldRating == rating) {
+            return;
+        }
     }
 
     ratedMods[modName] = rating;
