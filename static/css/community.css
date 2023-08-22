@@ -343,3 +343,36 @@
   top: -5px;
   right: 105%;
 }
+
+.rating-background {
+  background-color: rgb(85, 111, 176);
+  width: 100%;
+  border-radius: 0px 0px 10px 10px;
+  color:white;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.rating-holder {
+  display:flex; gap: 5px; margin:5px;
+  justify-content: center;
+}
+
+.rate-button {
+  overflow:hidden;
+  background-size: cover;
+  outline-style: solid;
+  outline-width: 3px;
+  outline-color: white;
+  width: 32px;
+  height: 32px;
+  margin: 2px;
+}
+
+.rate-button:active {
+  transform: translateY(1px);
+}
+
+.rate-button.pressed {
+  filter: brightness(40%);
+}

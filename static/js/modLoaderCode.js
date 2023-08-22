@@ -24,6 +24,8 @@ let mode = ALL;
 
 let allAch = {};
 
+let ratedMods = JSON.parse(localStorage.getItem("ratedMods")) ?? {};
+
 function getAllAchievements(rawModText, nameOfMod) {
 
     if(rawModText == null) {
@@ -264,9 +266,94 @@ function createModView(mod, imageUrl, description, isCustom) {
         <button class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span>${favText}</span></button>
         <button style="${customMods.has(mod.value) ? "" : "display:none"}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span>${DELETE}</span></button>
     </div>
+    ${!customMods.has(mod.value) ? `
+    <div class="rating-background">
+    <div class="modRating">LOADING RATING...</div>
+        <div class="rating-holder">
+            <button style="background-image: url('../static/icons/1.png');" data-rate="1" class="rate-button" onclick="rateMod(event, \`${mod.value}\`, 1)"></button>
+            <button style="background-image: url('../static/icons/2.png');" data-rate="2" class="rate-button" onclick="rateMod(event, \`${mod.value}\`, 2)"></button>
+            <button style="background-image: url('../static/icons/3.png');" data-rate="3" class="rate-button" onclick="rateMod(event, \`${mod.value}\`, 3)"></button>
+            <button style="background-image: url('../static/icons/4.png');" data-rate="4" class="rate-button" onclick="rateMod(event, \`${mod.value}\`, 4)"></button>
+            <button style="background-image: url('../static/icons/5.png'); "data-rate="5" class="rate-button" onclick="rateMod(event, \`${mod.value}\`, 5)"></button>
+    </div></div>` : ""}
+    
     `
 
+    modView.id = mod.value;
+    getRating(mod.value, modView);
+    configureRatingButtons(mod.value, modView);
+
     return modView;
+}
+
+function configureRatingButtons(modName, modView)
+{
+    if(!(modName in ratedMods)) {
+        return;
+    }
+
+    const buttons = modView.getElementsByClassName("rate-button");
+
+    for(let i = 0; i < buttons.length; i++) {
+        const button = buttons[i];
+
+        if(button.classList.contains("pressed")) {
+            button.classList.remove("pressed")
+        }
+
+        if(button.dataset.rate == ratedMods[modName]) {
+            button.classList.add("pressed");
+        }
+    }
+
+}
+
+async function getRating(modName, modView) {
+    const res = await fetch('https://cts-backend-w8is.onrender.com/api/get_mod?modName=' + modName, {
+    method: 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    })
+    const ratingData = await res.json();
+
+    let rating = (ratingData.rating / ratingData.ratingCount);
+    if(isNaN(rating)) {
+        rating = "?";
+    }
+    else {
+        rating = rating.toFixed(2);
+    }
+
+    console.log("set inner text to " + rating)
+    modView.getElementsByClassName("modRating")[0].innerHTML = "<span style='font-weight:bold'>Rating: " + rating + "/5.00 </span>(" + ratingData.ratingCount +  ")";
+}
+
+async function rateMod(event, modName, rating) {
+
+    let oldRating = null;
+
+    if(modName in ratedMods) {
+        oldRating = ratedMods[modName];
+    }
+
+    ratedMods[modName] = rating;
+
+    localStorage.setItem("ratedMods", JSON.stringify(ratedMods));
+
+    await fetch('https://cts-backend-w8is.onrender.com/api/rate_mod', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ "modName": modName, "rating": rating, "oldRating": oldRating })
+    });
+
+    const modView = document.getElementById(modName);
+    await getRating(modName, modView);
+    configureRatingButtons(modName, modView);
 }
 
 function addCustomModButton() {
