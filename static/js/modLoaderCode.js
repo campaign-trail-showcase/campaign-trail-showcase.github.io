@@ -268,20 +268,14 @@ function createModView(mod, imageUrl, description, isCustom) {
     </div>
     ${!customMods.has(mod.value) ? `
     <div class="rating-background">
-    <div class="modRating">LOADING RATING...</div>
-        <div class="rating-holder">
-            <button style="background-image: url('../static/icons/1.png');" data-rate="1" class="rate-button" onclick="rateMod(event, \`${mod.value}\`, 1)"></button>
-            <button style="background-image: url('../static/icons/2.png');" data-rate="2" class="rate-button" onclick="rateMod(event, \`${mod.value}\`, 2)"></button>
-            <button style="background-image: url('../static/icons/3.png');" data-rate="3" class="rate-button" onclick="rateMod(event, \`${mod.value}\`, 3)"></button>
-            <button style="background-image: url('../static/icons/4.png');" data-rate="4" class="rate-button" onclick="rateMod(event, \`${mod.value}\`, 4)"></button>
-            <button style="background-image: url('../static/icons/5.png'); "data-rate="5" class="rate-button" onclick="rateMod(event, \`${mod.value}\`, 5)"></button>
-    </div></div>` : ""}
+    <div class="modRating">LOADING FAVORITES...</div>
+    </div>` : ""}
     
     `
 
     modView.id = mod.value;
     getRating(mod.value, modView);
-    configureRatingButtons(mod.value, modView);
+    //configureRatingButtons(mod.value, modView);
 
     return modView;
 }
@@ -310,7 +304,7 @@ function configureRatingButtons(modName, modView)
 
 async function getRating(modName, modView) {
     try {
-        const res = await fetch('https://cts-backend-w8is.onrender.com/api/get_mod?modName=' + modName, {
+        const res = await fetch('http://localhost:1337/api/get_mod?modName=' + modName, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -318,46 +312,23 @@ async function getRating(modName, modView) {
         }
         })
         const ratingData = await res.json();
-    
-        let rating = (ratingData.rating / ratingData.ratingCount);
-        if(isNaN(rating)) {
-            rating = "?";
-        }
-        else {
-            rating = rating.toFixed(2);
-        }
-    
-        modView.getElementsByClassName("modRating")[0].innerHTML = "<span style='font-weight:bold'>Rating: " + rating + "/5.00 </span>(" + ratingData.ratingCount +  ")";
-        modView.dataset.rating = rating;
+        modView.getElementsByClassName("modRating")[0].innerHTML = `<span style="font-weight:bold">${ratingData.favs} FAVORITES</span>` ;
     }
     catch {
-        modView.getElementsByClassName("modRating")[0].innerHTML = "Failed to get rating. Try again later.";
+        modView.getElementsByClassName("modRating")[0].innerHTML = "Failed to get total. Try again later.";
     }
    
 }
 
 async function rateMod(event, modName, rating) {
 
-    let oldRating = null;
-
-    if(modName in ratedMods) {
-        oldRating = ratedMods[modName];
-        if(oldRating == rating) {
-            return;
-        }
-    }
-
-    ratedMods[modName] = rating;
-
-    localStorage.setItem("ratedMods", JSON.stringify(ratedMods));
-
-    await fetch('https://cts-backend-w8is.onrender.com/api/rate_mod', {
+    await fetch('http://localhost:1337/api/rate_mod', {
     method: 'POST',
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ "modName": modName, "rating": rating, "oldRating": oldRating })
+    body: JSON.stringify({ "modName": modName, "rating": rating })
     });
 
     const modView = document.getElementById(modName);
@@ -515,10 +486,12 @@ function toggleFavorite(event, modValue) {
     if(!inFavorites) {
         favoriteMods.add(modValue);
         event.target.innerText = UNFAV;
+        rateMod(event, modValue, 1)
     }
     else {
         favoriteMods.delete(modValue);
         event.target.innerText = FAV;
+        rateMod(event, modValue, -1)
     }
     localStorage.setItem("favoriteMods", Array.from(favoriteMods));
     updateModViews();
