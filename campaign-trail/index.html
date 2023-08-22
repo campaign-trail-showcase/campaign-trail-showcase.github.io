@@ -193,6 +193,12 @@
                 <input placeholder="Filter by mod name" oninput="filterMods(event)" type="text" id="modSearch" name="modSearch"></input>
                 
                 <div>
+                <label for="sorting">Sort by:</label>
+                <select onchange="onChangeModSorter(event)" name="sorting" id="modSorting">
+                  <option value="chrono">Year</option>
+                  <option value="mostFav">Popularity</option>
+                  <option value="leastFav">Nicheness</option>
+                </select>
               </div>
               </div>
               <div id="mod-grid" class="community-grid"></div>

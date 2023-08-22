@@ -274,8 +274,7 @@ function createModView(mod, imageUrl, description, isCustom) {
     `
 
     modView.id = mod.value;
-    getRating(mod.value, modView);
-    //configureRatingButtons(mod.value, modView);
+    getFavs(mod.value, modView);
 
     return modView;
 }
@@ -302,7 +301,7 @@ function configureRatingButtons(modName, modView)
 
 }
 
-async function getRating(modName, modView) {
+async function getFavs(modName, modView) {
     try {
         const res = await fetch('https://cts-backend-w8is.onrender.com/api/get_mod?modName=' + modName, {
         method: 'GET',
@@ -313,14 +312,18 @@ async function getRating(modName, modView) {
         })
         const ratingData = await res.json();
         modView.getElementsByClassName("modRating")[0].innerHTML = `<span style="font-weight:bold">${ratingData.favs} FAVORITES</span>` ;
+        modView.dataset.favs = ratingData.favs;
     }
     catch {
         modView.getElementsByClassName("modRating")[0].innerHTML = "Failed to get total. Try again later.";
+        modView.dataset.favs = 0;
     }
+
+   
    
 }
 
-async function rateMod(event, modName, rating) {
+async function toggleFav(event, modName, favVal) {
 
     await fetch('https://cts-backend-w8is.onrender.com/api/rate_mod', {
     method: 'POST',
@@ -328,12 +331,11 @@ async function rateMod(event, modName, rating) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ "modName": modName, "rating": rating })
+    body: JSON.stringify({ "modName": modName, "rating": favVal })
     });
 
     const modView = document.getElementById(modName);
-    await getRating(modName, modView);
-    // configureRatingButtons(modName, modView);
+    await getFavs(modName, modView);
 }
 
 function addCustomModButton() {
@@ -425,26 +427,23 @@ function updateModViews(event) {
 }
 
 function onChangeModSorter(e) {
-    console.log(e.target.value)
     if(e.target.value == "chrono") {
-        sortModViews(modCompare)
+        sortModViews(modCompare2)
     }
-    else if(e.target.value == "highestRated") {
-        sortModViews((a,b) => b.rating - a.rating);
+    else if(e.target.value == "mostFav") {
+        sortModViews((a,b) => b.dataset.favs - a.dataset.favs);
     }
-    else if(e.target.value == "lowestRated") {
-        sortModViews((a,b) => a.rating - b.rating);
+    else if(e.target.value == "leastFav") {
+        sortModViews((a,b) => a.dataset.favs - b.dataset.favs);
     }
 }
 
 function sortModViews(comparisonFunction) {
-    console.log("sorting with " + comparisonFunction)
-    let newModList = modList.slice();
-    newModList.sort(comparisonFunction);
+    modList.sort(comparisonFunction);
     const modGrid = document.getElementById("mod-grid");
     modGrid.innerHTML = "";
-    for(let i = 0; i < newModList.length; i++) {
-        modGrid.appendChild(newModList[i]);
+    for(let i = 0; i < modList.length; i++) {
+        modGrid.appendChild(modList[i]);
     }
 }
 
@@ -486,12 +485,12 @@ function toggleFavorite(event, modValue) {
     if(!inFavorites) {
         favoriteMods.add(modValue);
         event.target.innerText = UNFAV;
-        rateMod(event, modValue, 1)
+        toggleFav(event, modValue, 1)
     }
     else {
         favoriteMods.delete(modValue);
         event.target.innerText = FAV;
-        rateMod(event, modValue, -1)
+        toggleFav(event, modValue, -1)
     }
     localStorage.setItem("favoriteMods", Array.from(favoriteMods));
     updateModViews();
@@ -582,6 +581,16 @@ function getUrlParam(param) {
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
     return url.searchParams.get(param);
+}
+
+function modCompare2( a, b ) {
+    if ( a.getAttribute("mod-name") < b.getAttribute("mod-name") ){
+      return -1;
+    }
+    if ( a.getAttribute("mod-name") > b.getAttribute("mod-name") ){
+      return 1;
+    }
+    return 0;
 }
 
 function modCompare( a, b ) {
