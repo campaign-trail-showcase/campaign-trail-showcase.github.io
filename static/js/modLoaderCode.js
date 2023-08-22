@@ -309,25 +309,31 @@ function configureRatingButtons(modName, modView)
 }
 
 async function getRating(modName, modView) {
-    const res = await fetch('https://cts-backend-w8is.onrender.com/api/get_mod?modName=' + modName, {
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+    try {
+        const res = await fetch('https://cts-backend-w8is.onrender.com/api/get_mod?modName=' + modName, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+        })
+        const ratingData = await res.json();
+    
+        let rating = (ratingData.rating / ratingData.ratingCount);
+        if(isNaN(rating)) {
+            rating = "?";
+        }
+        else {
+            rating = rating.toFixed(2);
+        }
+    
+        modView.getElementsByClassName("modRating")[0].innerHTML = "<span style='font-weight:bold'>Rating: " + rating + "/5.00 </span>(" + ratingData.ratingCount +  ")";
+        modView.dataset.rating = rating;
     }
-    })
-    const ratingData = await res.json();
-
-    let rating = (ratingData.rating / ratingData.ratingCount);
-    if(isNaN(rating)) {
-        rating = "?";
+    catch {
+        modView.getElementsByClassName("modRating")[0].innerHTML = "Failed to get rating. Try again later.";
     }
-    else {
-        rating = rating.toFixed(2);
-    }
-
-    console.log("set inner text to " + rating)
-    modView.getElementsByClassName("modRating")[0].innerHTML = "<span style='font-weight:bold'>Rating: " + rating + "/5.00 </span>(" + ratingData.ratingCount +  ")";
+   
 }
 
 async function rateMod(event, modName, rating) {
@@ -444,6 +450,30 @@ function updateModViews(event) {
             }
         }
         modList[i].style.display = shouldShow ? "flex" : "none";
+    }
+}
+
+function onChangeModSorter(e) {
+    console.log(e.target.value)
+    if(e.target.value == "chrono") {
+        sortModViews(modCompare)
+    }
+    else if(e.target.value == "highestRated") {
+        sortModViews((a,b) => b.rating - a.rating);
+    }
+    else if(e.target.value == "lowestRated") {
+        sortModViews((a,b) => a.rating - b.rating);
+    }
+}
+
+function sortModViews(comparisonFunction) {
+    console.log("sorting with " + comparisonFunction)
+    let newModList = modList.slice();
+    newModList.sort(comparisonFunction);
+    const modGrid = document.getElementById("mod-grid");
+    modGrid.innerHTML = "";
+    for(let i = 0; i < newModList.length; i++) {
+        modGrid.appendChild(newModList[i]);
     }
 }
 
