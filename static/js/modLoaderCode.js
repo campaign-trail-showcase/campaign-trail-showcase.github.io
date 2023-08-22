@@ -304,7 +304,7 @@ function configureRatingButtons(modName, modView)
 
 async function getRating(modName, modView) {
     try {
-        const res = await fetch('http://localhost:1337/api/get_mod?modName=' + modName, {
+        const res = await fetch('https://cts-backend-w8is.onrender.com/api/get_mod?modName=' + modName, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -322,7 +322,7 @@ async function getRating(modName, modView) {
 
 async function rateMod(event, modName, rating) {
 
-    await fetch('http://localhost:1337/api/rate_mod', {
+    await fetch('https://cts-backend-w8is.onrender.com/api/rate_mod', {
     method: 'POST',
     headers: {
         'Accept': 'application/json',
