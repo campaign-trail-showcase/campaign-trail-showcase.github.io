@@ -1711,13 +1711,27 @@ function divideElectoralVotesProp(e, t) {
         var n = [],
             l = S(e.election_id),
             o = e.election_json[l].fields.winning_electoral_vote_number;
-        for (a = 0; a < e.final_overall_results.length; a++) n.push({
-            candidate_id: e.final_overall_results[a].candidate,
-            electoral_votes: e.final_overall_results[a].electoral_votes,
-            popular_votes: e.final_overall_results[a].popular_votes,
-            player_candidate_flg: e.candidate_id == e.final_overall_results[a].candidate,
-            winning_candidate_flg: e.final_overall_results[a].electoral_votes >= o
-        });
+        for (a = 0; a < e.final_overall_results.length; a++) {
+
+            // At high and low difficulty the game may skip a candidate existing
+            // If it doesn't exist we need to make a dummy one that we flag as fake with -1
+            if(!e.final_overall_results[a]) {
+                e.final_overall_results[a] = {
+                    candidate: -1,
+                    electoral_votes: 0,
+                    popular_votes: 0,
+
+                }
+            }
+
+            n.push({
+                candidate_id: e.final_overall_results[a].candidate,
+                electoral_votes: e.final_overall_results[a].electoral_votes,
+                popular_votes: e.final_overall_results[a].popular_votes,
+                player_candidate_flg: e.candidate_id == e.final_overall_results[a].candidate,
+                winning_candidate_flg: e.final_overall_results[a].electoral_votes >= o
+            });
+        }
         n = JSON.stringify(n);
         var _ = [];
         for (a = 0; a < e.final_state_results.length; a++)
@@ -1826,6 +1840,8 @@ function divideElectoralVotesProp(e, t) {
         let difficulty_string = `<div id='difficulty_mult'><br><b>Difficulty Multiplier:</b> ${diff_mult_string}</div><br>`
 
         for (_ = 0; _ < e.final_overall_results.length; _++) {
+            // Game gets messed up at high difficulty, if candidate is flagged as non-existant we skip it
+            if(e.final_overall_results[_].candidate == -1) continue;
             i = E(e.final_overall_results[_].candidate);
             let d = e.candidate_json[i].fields.color_hex;
             r += '            <tr><td style="text-align: left;">            <span style="background-color: ' + d + "; color: " + d + ';">----</span> ' + (f = e.candidate_json[i].fields.first_name + " " + e.candidate_json[i].fields.last_name) + "</td><td> " + e.final_overall_results[_].electoral_votes + " </td><td> " + M(e.final_overall_results[_].popular_votes) + " </td><td> " + (e.final_overall_results[_].popular_votes / o * 100).toFixed(1) + "% </td></tr>"
