@@ -271,13 +271,13 @@ function updateDynamicStyle() {
         background-color: ${selectedTheme.inner_window_2 ?? selectedTheme.coloring_window};
     }
     #inner_window_3 {
-        background-color: ${selectedTheme.coloring_window};
+        background-color: ${selectedTheme.inner_window_3 ?? selectedTheme.coloring_window};
     }
     #inner_window_4 {
-        background-color: ${selectedTheme.coloring_window};
+        background-color: ${selectedTheme.inner_window_4 ?? selectedTheme.coloring_window};
     }
     #inner_window_5 {
-        background-color: ${selectedTheme.coloring_window};
+        background-color: ${selectedTheme.inner_window_5 ?? selectedTheme.coloring_window};
     }
     #main_content_area {
         color: ${selectedTheme.text_col || "inherit"};
