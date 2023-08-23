@@ -140,7 +140,8 @@ nct_stuff.themes = {
         banner: "../static/images/banners/banner_classic.png",
         coloring_window: "",
         coloring_container: "",
-        coloring_title: ""
+        coloring_title: "",
+        inner_window_2: "#E8FBFF"
     }
 }
 
