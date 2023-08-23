@@ -142,7 +142,8 @@ nct_stuff.themes = {
         coloring_container: "",
         coloring_title: "",
         inner_window_2: "#E8FBFF",
-        inner_window_3: "#E8FBFF"
+        inner_window_3: "#E8FBFF",
+        inner_window_4: "#E8FBFF"
     }
 }
 
