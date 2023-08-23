@@ -267,7 +267,7 @@ function updateDynamicStyle() {
         background-color: ${selectedTheme.coloring_title};
     }
     #inner_window_2 {
-        background-color: ${selectedTheme.coloring_window};
+        background-color: ${selectedTheme.inner_window_2 ?? selectedTheme.coloring_window};
     }
     #inner_window_3 {
         background-color: ${selectedTheme.coloring_window};
