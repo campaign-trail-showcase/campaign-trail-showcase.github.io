@@ -302,6 +302,9 @@ function configureRatingButtons(modName, modView)
 }
 
 async function getFavs(modName, modView) {
+
+    if(customMods.has(modName)) return;
+    
     try {
         const res = await fetch('https://cts-backend-w8is.onrender.com/api/get_mod?modName=' + modName, {
         method: 'GET',
@@ -324,6 +327,8 @@ async function getFavs(modName, modView) {
 }
 
 async function toggleFav(event, modName, favVal) {
+
+    if(customMods.has(modName)) return;
 
     await fetch('https://cts-backend-w8is.onrender.com/api/rate_mod', {
     method: 'POST',
