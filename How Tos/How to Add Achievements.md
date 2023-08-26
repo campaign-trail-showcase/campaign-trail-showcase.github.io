@@ -19,7 +19,7 @@ campaignTrail_temp.achievements = {
     },
     "Test33333333333333333333333333333333" : {
         "image" : "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Stray_kitten_Rambo002.jpg/1200px-Stray_kitten_Rambo002.jpg",
-        "description" : "This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW"
+        "description" : "This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW",
         "cannotBeCheated" : true
     }
 }
