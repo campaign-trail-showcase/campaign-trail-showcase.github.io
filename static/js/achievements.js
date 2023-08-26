@@ -5,6 +5,11 @@ function unlockAchievement(name) {
         console.log("There is no achievement with the name '" + name +"'");
     }
 
+    if(unlockedAch[name] == null)
+    {
+        alert("ACHIEVEMENT UNLOCKED: " + name);
+    }
+
     unlockedAch[name] = allAch[name];
     localStorage.setItem("unlockedAch", JSON.stringify(unlockedAch));
     addAllAchievements();
