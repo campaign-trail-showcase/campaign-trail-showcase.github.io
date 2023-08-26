@@ -3,6 +3,7 @@ const useConsoleCheats = () => {
 	if (window.UsingConsoleCheats === true) return;
 	window.UsingConsoleCheats = true;
 	const e = campaignTrail_temp;
+	cheatsActive = true;
 
 	// == IMPROVE SELECTION ==
 

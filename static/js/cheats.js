@@ -1,3 +1,5 @@
+let cheatsActive = false;
+
 // Most of this benefit checker stuff is adapted from NCT. Thanks!
 
 function benefitCheck(objectid) {
@@ -69,6 +71,7 @@ function activateBenefitCheck() {
         return;
     }
     benefitCheckAlreadyActivated = true;
+    cheatsActive = true;
     const benefitWindow = document.getElementById("benefitwindow");
     benefitWindow.style.display = benefitWindow.style.display != "none" ? "none" : "block";
     document.getElementById("showBenefitCheckButton").style.display = "inline-block";
@@ -83,6 +86,7 @@ function activateCheatMenu() {
 
     document.getElementById("cheatMenu").style.display = "inline-block";
     cheatMenuAlreadyActivated = true;
+    cheatsActive = true;
     
     const difficultySlider = document.getElementById("difficultySlider")
     const difficultyValue = document.getElementById("difficultyValue");

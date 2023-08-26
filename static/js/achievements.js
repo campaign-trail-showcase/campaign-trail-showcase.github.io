@@ -3,10 +3,15 @@ let unlockedAch = localStorage.getItem("unlockedAch") ? JSON.parse(localStorage.
 function unlockAchievement(name) {
     if(allAch[name] == null) {
         console.log("There is no achievement with the name '" + name +"'");
+        return;
     }
 
-    if(unlockedAch[name] == null)
-    {
+    if(cheatsActive && allAch[name].cannotBeCheated) {
+        console.log(`Would unlock '${name}' but won't because cheating!`);
+        return;
+    }
+
+    if(unlockedAch[name] == null) {
         alert("ACHIEVEMENT UNLOCKED: " + name);
     }
 
