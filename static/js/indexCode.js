@@ -138,12 +138,13 @@ nct_stuff.themes = {
         name: "Classic",
         background: "",
         banner: "../static/images/banners/banner_classic.png",
-        coloring_window: "",
+        coloring_window: "#E8FBFF",
         coloring_container: "",
         coloring_title: "",
-        inner_window_2: "#E8FBFF",
-        inner_window_3: "#E8FBFF",
-        inner_window_4: "#E8FBFF"
+        // Commenting out for now until we can do this without breaking mod themes
+        //inner_window_2: "#E8FBFF",
+        //inner_window_3: "#E8FBFF",
+        //inner_window_4: "#E8FBFF"
     }
 }
 
