@@ -4,6 +4,8 @@ Any mod can have achievements on the Showcase! You don't need to ask anyone to a
 
 **Step 1.** Define your achievements your Code 1. This can go near the top.
 
+cannotBeCheated is an optional field, if set to true it makes it so it can only be unlocked via normal play.
+
 ```javascript
 
 campaignTrail_temp.achievements = {
@@ -17,7 +19,8 @@ campaignTrail_temp.achievements = {
     },
     "Test33333333333333333333333333333333" : {
         "image" : "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Stray_kitten_Rambo002.jpg/1200px-Stray_kitten_Rambo002.jpg",
-        "description" : "This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW"
+        "description" : "This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW This is a test MEOW",
+        "cannotBeCheated" : true
     }
 }
 ```
