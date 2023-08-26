@@ -139,3 +139,12 @@ else if (quickstats[0] > 522) {
 	return construct(0);
   }
 }
+
+// getResults is a way to get results for an election without using custom endings
+// Mainly for backporting achivements to old mods
+getResults = function (out, totv, aa, quickstats) {
+    let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 107);
+    if(stateResult.result[0].candidate == 25) {
+        unlockAchievement("Wallaloha");
+    }
+}

@@ -404,6 +404,11 @@ function loadMod(code1, code2) {
 }
 */
 
+// getResults is a way to get results for an election without using custom endings
+// Mainly for backporting achivements to old mods
+getResults = function (out, totv, aa, quickstats) {
+    // To override
+}
 
 function endingPicker(out, totv, aa, quickstats) {
     //out = "win", "loss", or "tie" for your candidate
@@ -1820,6 +1825,7 @@ function divideElectoralVotesProp(e, t) {
         quickstats = [e.final_overall_results[n].electoral_votes, e.final_overall_results[n].popular_votes / o * 100, e.final_overall_results[n].popular_votes] //format: electoral vote count, popular vote proportion, popular vote vote count
 
         a = endingPicker(e.final_outcome, o, e.final_overall_results, quickstats);
+        getResults(e.final_outcome, o, e.final_overall_results, quickstats);
 
         if (campaignTrail_temp.multiple_endings) {
 
