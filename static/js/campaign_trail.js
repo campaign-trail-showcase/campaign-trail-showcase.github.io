@@ -488,6 +488,7 @@ $("#submitMod").click(function() {
             campaignTrail_temp.multiple_endings = true
         }
         if (!moddercheckeror) {
+            e = campaignTrail_temp
             eval($("#codeset1")[0].value)
             moddercheckeror = true
         }

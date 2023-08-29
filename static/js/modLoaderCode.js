@@ -503,7 +503,7 @@ function toggleFavorite(event, modValue) {
 
 function loadModFromButton(modValue) {
     loadingFromModButton = true;
-
+    e = campaignTrail_temp
     if(customMods.has(modValue)) {
         eval(localStorage.getItem(modValue + "_code1"));
         diff_mod = true
