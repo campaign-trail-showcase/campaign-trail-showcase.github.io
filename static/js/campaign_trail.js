@@ -9,6 +9,11 @@ function removeIssueDuplicates(array) {
 
 AdvisorFeedbackArr=[1,0]
 
+function visitState(e, s, o, t) {
+    setTimeout(() => mapCache(skip = true), 0) // cache the correct map and prevent visit glitch
+    e.player_visits.push(e.states_json[s].pk), o(t)
+}
+
 function dHondtAllocation(votes, seats, thresh = 0.15) {
     let quotients = votes
     let allocations = []
@@ -1533,10 +1538,7 @@ function divideElectoralVotesProp(e, t) {
                 for (var s = 0; s < e.states_json.length; s++)
                     if (e.states_json[s].fields.abbr == a.name) {
                         var n = '                    <div class="overlay" id="visit_overlay"></div>    \t            <div class="overlay_window" id="visit_window">                    \t<div class="overlay_window_content" id="visit_content">                    \t<h3>Advisor Feedback</h3>                    \t<img src="' + e.election_json[u].fields.advisor_url + '" width="208" height="128"/>                    \t<p>You have chosen to visit ' + e.states_json[s].fields.name + ' -- is this correct?</p>                \t    </div>                    \t<div class="overlay_buttons" id="visit_buttons">                    \t<button id="confirm_visit_button">YES</button><br>                    \t<button id="no_visit_button">NO</button>                    \t</div>                \t</div>';
-                        $("#game_window").append(n), $("#confirm_visit_button").click(function() {
-                            setTimeout(() => mapCache(skip = true), 0) // cache the correct map and prevent visit glitch
-                            e.player_visits.push(e.states_json[s].pk), o(t)
-                        }), $("#no_visit_button").click(function() {
+                        $("#game_window").append(n), $("#confirm_visit_button").click(() => visitState(e, s, o, t)), $("#no_visit_button").click(function() {
                             $("#visit_overlay").remove(), $("#visit_window").remove()
                         });
                         break
