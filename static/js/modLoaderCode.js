@@ -26,22 +26,16 @@ let allAch = {};
 
 let ratedMods = JSON.parse(localStorage.getItem("ratedMods")) ?? {};
 
-function getAllAchievements(rawModText, nameOfMod) {
-
+function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
     if(rawModText == null) {
-        return;
+        return null;
     }
 
     let codeSnippet = null;
     let temp = {}
-    let start = ""
-    let end = ""
 
-   if(rawModText.includes("campaignTrail_temp.achievements = {")) {
-        start = ".achievements = {";
-        end = "}"
-    } else {
-        return;
+    if(!rawModText.includes(includes)) { 
+        return null;
     }
 
     let possibleEndIndices = getAllIndexes(rawModText, end);
@@ -65,14 +59,22 @@ function getAllAchievements(rawModText, nameOfMod) {
     }
 
     if(codeSnippet == null) {
-        console.log("Could not extract ach from " + nameOfMod)
+        console.log("Could not extract " + includes + " from " + nameOfMod)
+    }
+
+    return temp;
+}
+
+function getAllAchievements(rawModText, nameOfMod) {
+    temp = extractFromCode1("campaignTrail_temp.achievements = {", ".achievements = {", "}", rawModText, nameOfMod);
+
+    if(temp == null) {
+        return;
     }
 
     for(ach in temp.achievements) {
         allAch[ach] = temp.achievements[ach];
     }
-
-    return temp;
 }
 
 function extractElectionDetails(rawModText, nameOfMod) {
