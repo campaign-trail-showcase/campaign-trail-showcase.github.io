@@ -26,8 +26,9 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 90%;
-    margin-top: 10px;
+    border-radius: 10px 10px 0 0;
+    padding-top: 10px;
+    margin-bottom: 10px;
     height: 15%;
     display:flex;
     font-size: 18px;
@@ -42,7 +43,8 @@
     font-size: 12px;
     width: 90%;
     margin: 5px auto;
-
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .tag-button {

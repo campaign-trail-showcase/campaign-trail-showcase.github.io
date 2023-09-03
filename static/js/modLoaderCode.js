@@ -26,6 +26,19 @@ let allAch = {};
 
 let ratedMods = JSON.parse(localStorage.getItem("ratedMods")) ?? {};
 
+if(localStorage.getItem("customModBoxThemesEnabled") === null) {
+    localStorage.setItem("customModBoxThemesEnabled", "true");
+}
+
+document.getElementById("customThemesButton").innerText = localStorage.getItem("customModBoxThemesEnabled") == "true" ? "Turn Off Mod Box Themes" : "Turn On Mod Box Themes";
+
+let customModBoxThemes = {}
+
+function toggleModBoxThemes() {
+    localStorage.setItem("customModBoxThemesEnabled", localStorage.getItem("customModBoxThemesEnabled") == "true" ? "false" : "true");
+    location.reload();
+}
+
 function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
     if(rawModText == null) {
         return null;
@@ -63,6 +76,15 @@ function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
     }
 
     return temp;
+}
+
+function getCustomTheme(rawModText, nameOfMod) {
+    const temp = extractFromCode1("campaignTrail_temp.modBoxTheme = {", ".modBoxTheme = {", "}", rawModText, nameOfMod);
+    if(temp == null) {
+        return;
+    }
+
+    customModBoxThemes[nameOfMod] = temp.modBoxTheme;
 }
 
 function getAllAchievements(rawModText, nameOfMod) {
@@ -180,6 +202,7 @@ $(document).ready(async function() {
         
         const temp = extractElectionDetails(rawModText, mod.value);
         getAllAchievements(rawModText, mod.value);
+        getCustomTheme(rawModText, mod.value);
 
         let imageUrl;
         let description;
@@ -227,6 +250,7 @@ $(document).ready(async function() {
         }
 
         getAllAchievements(rawModText, customModName);
+        getCustomTheme(rawModText, customModName);
 
         let imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
         let description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
@@ -257,25 +281,31 @@ function createModView(mod, imageUrl, description, isCustom) {
 
     const favText = isFavorite(mod.value) ? UNFAV : FAV; 
 
+    let theme = localStorage.getItem("customModBoxThemesEnabled") == "true" ? customModBoxThemes[mod.value] : null;
+
     modView.innerHTML = `
-    <div class="mod-title">
-        <p>${mod.innerText}</p>
+    <div class="mod-title" ${theme ? `style="background-color:${theme.header_color};"` : ''}>
+        <p ${theme ? `style="color:${theme.header_text_color};"` : ''}>${mod.innerText}</p>
     </div>
     <img class="mod-image" src="${imageUrl}"></img>
-    <div class="mod-desc">${description}</div>
+    <div ${theme ? `style="background-color:${theme.description_background_color}; color:${theme.description_text_color};"` : ''} class="mod-desc" >${description}</div>
     <div class="hover-button-holder">
-        <button class="hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span>${PLAY}</span></button>
-        <button class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span>${favText}</span></button>
-        <button style="${customMods.has(mod.value) ? "" : "display:none"}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span>${DELETE}</span></button>
+        <button ${theme ? `style="background-color:${theme.secondary_color};"` : ''} class="hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${PLAY}</span></button>
+        <button ${theme ? `style="background-color:${theme.secondary_color};"` : ''} class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${favText}</span></button>
+        <button ${theme ? `style="background-color:${theme.secondary_color};"` : ''} style="${customMods.has(mod.value) ? "" : "display:none"}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${DELETE}</span></button>
     </div>
     ${!customMods.has(mod.value) ? `
-    <div class="rating-background">
-    <div class="modRating">LOADING FAVORITES...</div>
+    <div ${theme ? `style="background-color:${theme.secondary_color};"` : ''} class="rating-background">
+    <div ${theme ? `style="color:${theme.ui_text_color};"` : ''} class="modRating">LOADING FAVORITES...</div>
     </div>` : ""}
-    
     `
 
+    if(theme) {
+        modView.style.backgroundColor = theme.main_color;
+    }
+
     modView.id = mod.value;
+
     getFavs(mod.value, modView);
 
     return modView;
@@ -375,8 +405,7 @@ function addCustomMod(code1, code2) {
     localStorage.setItem("customMods", Array.from(customMods));
     localStorage.setItem(modName + "_code1", code1);
     localStorage.setItem(modName + "_code2", code2);
-
-    alert("Custom mod added! Reload page to see.")
+    location.reload();
 }
 
 function filterMods(event) {
