@@ -292,7 +292,7 @@ function createModView(mod, imageUrl, description, isCustom) {
     <div class="hover-button-holder">
         <button ${theme ? `style="background-color:${theme.secondary_color};"` : ''} class="hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${PLAY}</span></button>
         <button ${theme ? `style="background-color:${theme.secondary_color};"` : ''} class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${favText}</span></button>
-        <button ${theme ? `style="background-color:${theme.secondary_color};"` : ''} style="${customMods.has(mod.value) ? "" : "display:none"}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${DELETE}</span></button>
+        <button style="${customMods.has(mod.value) ? "" : "display:none;"}${theme ? `background-color:${theme.secondary_color};"` : ''}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${DELETE}</span></button>
     </div>
     ${!customMods.has(mod.value) ? `
     <div ${theme ? `style="background-color:${theme.secondary_color};"` : ''} class="rating-background">
