@@ -4,6 +4,8 @@ Any mod can have a custom theme for it's mod box on the homepage. These are opti
 
 To add one, simply add this chunk of code to your Code 1, and replace the relevant colors with new hex color values.
 
+To test out what your theme looks like, you can either fork this repo and locally host the site, OR you can just add a mod with a theme as a custom mod to the site. Custom mods also work with this!
+
 ```javascript
 campaignTrail_temp.modBoxTheme = {
     "header_color" : "#FFFFFF",
