@@ -3205,6 +3205,7 @@ campaignTrail_temp.player_visits = [];
 campaignTrail_temp.answer_feedback_flg = 1; 
 
 campaignTrail_temp.game_start_logging_id = '4166808'; 
+var achivementLevel = 0;
 //CYOA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 campaignTrail_temp.cyoa = true
 
@@ -3215,6 +3216,9 @@ function tunnel(new_q){
 
 cyoAdventure = function(a) {
   ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
+	if(ans == 8001 || ans == 8002 || ans == 8005 || ans == 8045) {
+		achivementLevel++;
+	}
     if([8008, 8009,8010,8011].includes(ans)){
       campaignTrail_temp.running_mate_last_name = "Vacant";
       campaignTrail_temp.running_mate_image_url = "";
@@ -3601,6 +3605,9 @@ orderID = [aa[0].candidate, aa[1].candidate, aa[2].candidate];
 //totv = total votes in entire election
 //aa = all final overall results data
 //quickstats = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
+if (out == "win" && achivementLevel == 2) {
+	unlockAchievement("Judd's Nightmare");
+}
 if (quickstats[0] >= 531) {
   if (used != true) {
       setInterval(function () {

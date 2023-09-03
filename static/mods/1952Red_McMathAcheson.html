@@ -2117,6 +2117,9 @@ endingPicker = (out, totv, aa, quickstats) => {
   let orderID = [aa[0].candidate, aa[1].candidate, aa[2].candidate];
   let e = campaignTrail_temp;
   let html;
+  if ((e.player_answers.includes(8013) && out == "win")) {
+	unlockAchievement("McDixie");
+}
 if ((e.player_answers.includes(8006)) && quickstats[0] >= 266) {
   if (used != true) {
     setInterval(function () {
