@@ -33,6 +33,11 @@
     display:flex;
     font-size: 18px;
     font-weight: bolder;
+    width:100%;
+}
+
+.mod-title p {
+  padding:10px;
 }
 
 .mod-desc {
