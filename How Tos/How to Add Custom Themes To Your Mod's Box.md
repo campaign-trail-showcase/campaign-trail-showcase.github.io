@@ -6,7 +6,7 @@ To add one, simply add this chunk of code to your Code 1, and replace the releva
 
 To test out what your theme looks like, you can either fork this repo and locally host the site, OR you can just add a mod with a theme as a custom mod to the site. Custom mods also work with this!
 
-If you prefer to use a GUI I have also created a tool for people to generate the code needed. [You can use it here](http://jetsimon.com/cts-mod-box-tool/).
+If you prefer to use a GUI I have also created a tool for people to generate the code needed. [You can use it here](https://jetsimon.com/cts-mod-box-tool/).
 
 ```javascript
 campaignTrail_temp.modBoxTheme = {
