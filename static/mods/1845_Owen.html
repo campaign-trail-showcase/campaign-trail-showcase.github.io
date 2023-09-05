@@ -123,7 +123,7 @@ campaignTrail_temp.questions_json = [
         "pk": 619,
         "fields": {
             "priority": 4,
-            "description": "The most shocking of your treatises has been republished in part by the Evansville Journal, \\\\\\\\Moral Physiology; or, A Brief and Plain Treatise on the Population Question,\"\\\\\\ the work is a ten page essay that proclaims the benefits of premarital sex and encourages methods of intercourse that prevents the birth of offspring. Do you have anything you would like to add regarding this scandalous work?",
+            "description": "The most shocking of your treatises has been republished in part by the Evansville Journal, <q>Moral Physiology; or, A Brief and Plain Treatise on the Population Question,</q> the work is a ten page essay that proclaims the benefits of premarital sex and encourages methods of intercourse that prevents the birth of offspring. Do you have anything you would like to add regarding this scandalous work?",
             "likelihood": 1
         }
     },
@@ -688,7 +688,7 @@ campaignTrail_temp.answers_json = [
         "pk": 80007,
         "fields": {
             "question": 639,
-            "description": "I would like to call on both parties, Democrat and Whig, that if re-elected I will take the fight against slavery in Washington, I support a ban on slavery in the District of Columbia."
+            "description": "If re-elected I will take the fight against slave-power in Washington. I support a ban on slavery in the District of Columbia."
         }
     },
     {
@@ -3574,6 +3574,8 @@ construct = (a = 1) => {
 
   return html;
 }
+
+
 e.multiple_endings = true;
 endingPicker = (out, totv, aa, quickstats) => {
   //out = "win", "loss", or "tie" for your candidate
@@ -3603,4 +3605,13 @@ endingPicker = (out, totv, aa, quickstats) => {
 		e.image = "https://i.imgur.com/qqQdx0G.png";
 		return construct(0);
   }
+}
+
+// getResults is a way to get results for an election without using custom endings
+// Mainly for backporting achivements to old mods
+getResults = function (out, totv, aa, quickstats) {
+	
+if (quickstats[1] > 49.99 && e.player_answers.includes(4201) && e.player_answers.includes(4152)) {
+	unlockAchievement("Marx's Dream");
+	}
 }

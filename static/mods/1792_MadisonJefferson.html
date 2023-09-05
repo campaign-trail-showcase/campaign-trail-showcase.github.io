@@ -372,6 +372,7 @@ campaignTrail_temp.answer_score_state_json = JSON.parse("[{\"model\": \"campaign
     var c = [];
     s(e, "usmap", l, c)
 })(jQuery, document, window, Raphael)
+campaignTrail_temp.multiple_endings=true
 
 
 endingPicker = (out, totv, aa, quickstats) => {
@@ -386,4 +387,12 @@ endingPicker = (out, totv, aa, quickstats) => {
     return "<h3>Rejoice, Columbia's sons, rejoice!</h3><p>Kentucky's crucial electoral votes arrived late, having to be retrieved from the state by Secretary Jefferson at the request of Vice President Adams, thereby concluding the 1792 presidential election but not the partisan rage that came with it. The defeat of John Adams for the Vice Presidential chair by George Clinton came as a little shock to you and Thomas Jefferson, while it never even crossed the mind of the arrogant Adams. It is unclear what, if any, effect Clinton's presence will have on fighting the influence of Alexander Hamilton in the cabinet of George Washington, but what is clear is that even if the president continues to stand by the Secretary of Treasury, the people sure as hell will not.</p>" }
 }
 
-campaignTrail_temp.multiple_endings=true
+getResults = function (out, totv, aa, quickstats) {
+    let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 397);
+    let stateResulttwo = campaignTrail_temp.final_state_results.find((x) => x.state == 407);
+
+    if(stateResult.result[0].candidate == 134 && stateResulttwo.result[0].candidate == 133) {
+     	 unlockAchievement("Jefferson and Manufacturing");
+    }
+}
+
