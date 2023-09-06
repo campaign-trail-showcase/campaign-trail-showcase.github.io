@@ -124,20 +124,28 @@ function addAllAchievements() {
             if(subHolder.style.visibility != "hidden") {
                 toggle.innerText = "+";
                 subHolder.style.display = "none";
-                subHolder.style.visibility = "hidden";
-                subHolder.style.maxHeight = "0px";
+
+                setTimeout(() => {
+                    subHolder.style.visibility = "hidden";
+                    subHolder.style.maxHeight = "0px";
+                }, 5);
             } 
             else {
                 toggle.innerText = "-";
                 subHolder.style.display = "inline-flex";
-                subHolder.style.visibility = "visible";
-                subHolder.style.maxHeight = "1000px";
+
+                setTimeout(() => {
+                    subHolder.style.visibility = "visible";
+                    subHolder.style.maxHeight = "1000px";
+                }, 5);
             }
 
-            for(let i = 0; i < subHolder.childElementCount; i++) {
-                let box = subHolder.children[i];
-                box.style.opacity = subHolder.style.visibility == "hidden" ? "0%" : "100%";
-            }
+            setTimeout(() => {
+                for(let i = 0; i < subHolder.childElementCount; i++) {
+                    let box = subHolder.children[i];
+                    box.style.opacity = subHolder.style.visibility == "hidden" ? "0%" : "100%";
+                }
+            }, 6); 
         }
 
         holder.appendChild(labelHolder);
