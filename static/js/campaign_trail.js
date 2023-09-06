@@ -1,6 +1,6 @@
 // Custom variables
 
-const DEBUG = true;
+const DEBUG = false;
 
 campaignTrail_temp.issue_font_size = null;
 e=campaignTrail_temp
