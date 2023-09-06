@@ -123,14 +123,14 @@ function addAllAchievements() {
         labelHolder.onclick = () => {
             if(subHolder.style.visibility != "hidden") {
                 toggle.innerText = "+";
+                subHolder.style.display = "none";
                 subHolder.style.visibility = "hidden";
-                //subHolder.style.display = "none";
                 subHolder.style.maxHeight = "0px";
             } 
             else {
                 toggle.innerText = "-";
+                subHolder.style.display = "inline-flex";
                 subHolder.style.visibility = "visible";
-                //subHolder.style.display = "inline-flex";
                 subHolder.style.maxHeight = "1000px";
             }
 
