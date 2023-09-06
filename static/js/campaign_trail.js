@@ -1,10 +1,27 @@
 // Custom variables
 
 campaignTrail_temp.issue_font_size = null;
+e=campaignTrail_temp
+e.shining_data = {}
 
 function removeIssueDuplicates(array) {
     const a = array.filter((item, index) => array.map(f=>f.issue).indexOf(item.issue) == index);
     return a
+}
+
+function openTab(evt, tabName) {
+    $(".tabcontent").css("display", "none");
+    $(".tablinks").removeClass("active");
+    $(".tablinks").attr("disabled", false)
+    $("#" + tabName).css("display", "block");
+    if (evt) {
+        evt.currentTarget.classList.add("active");
+        evt.currentTarget.disabled = true;
+    }
+    else {
+        $("#funds")[0].classList.add("active");
+        $(".tablinks")[0].disabled = true;
+    }
 }
 
 AdvisorFeedbackArr=[1,0]
@@ -15,7 +32,7 @@ function visitState(e, s, o, t) {
 }
 
 function dHondtAllocation(votes, seats, thresh = 0.15) {
-    let quotients = votes
+    let quotients = votes.splice()
     let allocations = []
     votes.forEach(function(){allocations.push(0)})
     let total_votes = votes.reduce((sum, value)=>sum+value)
@@ -26,8 +43,9 @@ function dHondtAllocation(votes, seats, thresh = 0.15) {
         for (let w = 0; w < votes.length; w++) {
             if (perc_votes[w] < thresh) {
                 quotients[w] = 0
+            } else {
+                quotients[w] = votes[w]/(allocations[w]+1)
             }
-            quotients[w] = votes[w]/(allocations[w]+1)
         }
         index = quotients.indexOf(Math.max(...quotients))
         allocations[index] += 1
@@ -47,7 +65,7 @@ var fileExists = function(url) {
     return req.status === 200;
 };
 
-lastUpdatedDate="2023-06-19"
+lastUpdatedDate="2023-08-20"
 var RecReading;
 
 achList = {
@@ -76,95 +94,7 @@ function addAchButton() {
     achievementDiv.style = stylesheetSet;
 
     gameWin.appendChild(achievementDiv);
-
-    //const achievMenuButton = document.getElementById("achievMenuButton");
-    //achievMenuButton.addEventListener("click", openAchievMenu);
 }
-
-//addAchButton()
-//document.getElementById("achievMenuButton").addEventListener("click",openAchievMenu)
-
-// Opens the achievement menu
-function openAchievMenu() {
-
-    // TODO: Re-add later
-    return;
-    const bottomBar = document.getElementById("bottomBar");
-    bottomBar.style.display = "none";
-
-    const lastUpdatedDate = document.getElementById("last-updated-date");
-    if (lastUpdatedDate) {
-        lastUpdatedDate.remove();
-    }
-
-    const gameWin = document.getElementById("game_window");
-    //const achievMenuButton = document.getElementById("achievMenuButton");
-    //achievMenuButton.remove();
-
-    const run = JSON.parse(localStorage.getItem('achievements'));
-    let achievementHtml = '';
-
-    for (const i in achList) {
-        const achieved = run.achievements[i] || false;
-        const src = `../static/achievementicons/${i}.png`;
-        const imgStyle = achieved ? "width:50px;" : "width:50px;filter: grayscale(100%);";
-        const imgHTML = `<img style='${imgStyle}' src='${src}'></img>`;
-        const subcategory = achList[i][2] || "";
-        const achTable = `
-        <tr>
-          <th style="padding:3px;width:60px">${imgHTML}</th>
-          <th style="padding:3px;width:200px">${achList[i][0]}</th>
-          <th style="padding:3px">${achList[i][1]}</th>
-        </tr>
-      `;
-        achievementHtml += subcategory + achTable;
-    }
-
-    const belowHeader = document.getElementById("below_header");
-    belowHeader.style.display = "none";
-
-    const achievementDiv = document.createElement("div");
-    achievementDiv.id = "achBox";
-    gameWin.appendChild(achievementDiv);
-
-    achievementDiv.innerHTML = `
-      <div class="inner_window_front" style="padding:0px"><b><h1>Achievements</h1></b></div>
-      <div class="inner_window_front" style="overflow-y:scroll;height:300px;"><center>
-      ${achievementHtml}</table></center>
-      </div>
-      <button id='backButton' style='position: absolute;left: 1.5em;bottom:.5em;width:200px;height:50px;font-size:25px;text-align:center'><b>Back</b></button>
-      <h1 style="font-style:italic;font-size:12px;position:absolute;bottom:1.75em;right:6em;">For all achievements, unless otherwise stated, completing them must be done on normal or a harder difficulty</h1>
-    `;
-
-    const tablesList = document.getElementsByTagName("table");
-    for (const table of tablesList) {
-        table.style.width = "700px";
-    }
-
-    const backButton = document.getElementById("backButton");
-    backButton.addEventListener("click", returnToMainPage);
-}
-
-// This function, when called, returns the user to the main page
-function returnToMainPage() {
-    const achBox = document.getElementById("achBox");
-    const infoBox = document.getElementById("infoBox");
-
-    try {
-        achBox.remove();
-        infoBox.remove();
-    } catch (e) { }
-
-    document.getElementById("below_header").style.display = "";
-    //addAchButton();
-    
-    // Adds event listeners to the achievement and info buttons
-    // const achButton = document.getElementById("achievMenuButton");
-    // achButton.addEventListener("click", openAchievMenu);
-}
-
-// set up ach system
-amongusonetwothree = false
 
 function simpleAdventure(ans) {
     return 1203;
@@ -510,6 +440,13 @@ $("#submitMod").click(function() {
     $("#modLoadReveal")[0].style.display = 'none'
     modded = true
 })
+var F = () => {
+    var e, t, i;
+    do {
+        i = (e = 2 * Math.random() - 1) * e + (t = 2 * Math.random() - 1) * t
+    } while (i >= 1 || 0 == i);
+    return e * Math.sqrt(-2 * Math.log(i) / i)
+}
 
 function divideElectoralVotesProp(e, t) {
     for (var i = [], a = 0, s = 0; s < e.length; s++) {
@@ -520,13 +457,559 @@ function divideElectoralVotesProp(e, t) {
 }! function() {
     var e = campaignTrail_temp;
 
-    function electionNight() { 
+    const shining_menu = (polling, e = campaignTrail_temp) => {
+        let game_winArr = Array.from($("#game_window")[0].children);
+    
+        let inflation_factor = Math.pow(1.04, 2020 - e.election_json.find(f => f.pk === e.election_id).fields.year);
+    
+        const uninflatedBalance = (e.shining_data.balance / inflation_factor);
+        const uninflatedPrev = e.shining_data.prev_balance / inflation_factor;
+        const change = uninflatedBalance - uninflatedPrev;
+
+        let projected_change = change;
+
+        const update_projection = () => {
+            let our_info = campaignTrail_temp.shining_info.find(f=>f.pk === e.election_id&&f.candidate===e.candidate_id);
+
+            projected_change = 0;
+            projected_change += 5000000 * e.shining_data.times.fundraising_time * (our_info ? our_info.fundraising_effect : 1);
+            projected_change -= 500000;
+        
+            our_info.lobby.forEach(f=>{
+                let x = f.opinion;
+                const r = 0.097;
+                const x0 = 65.3;
+                const y = f.fund_base / (1 + Math.exp(-r * (x - x0)));
+                projected_change += y;
+            });
+
+            e.shining_data.ad_spending.forEach(f=>{    
+                projected_change -= f.amount;
+            });
+
+            projected_change = projected_change / inflation_factor;
+
+            $("#projected_change").html(`<b>Estimated change for next turn:</b> <span style='${projected_change > 0 ? 'color:green' : projected_change == 0 ? 'color:yellow' : 'color:red'};'>${projected_change < 0 ? "-$" : "$"}${Math.abs(Math.floor(projected_change)).toLocaleString()}</span>`);
+        }
+    
+        const DEBT_STRING = uninflatedBalance < 0 ? "<p style='color:red;font-weight:bolder;'>Campaign currently in debt. Effectiveness will suffer.</p>" : "";
+    
+        let a_states = "";
+        for (let i in e.states_json) {
+            a_states += `<option value='${e.states_json[i].pk}'>${e.states_json[i].fields.name}</option>\n`;
+        }
+
+        let adSpendTable = `
+            <table id="ad_spend_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
+                <thead>
+                    <tr>
+                        <th>State</th>
+                        <th>Amount per Turn</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows will be added dynamically -->
+                </tbody>
+            </table>
+        `;
+
+        let staffTable = `
+            <table id="staff_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
+                <thead>
+                    <tr>
+                        <th>Staff</th>
+                        <th style="width: 250px;">Description</th>
+                        <th>Cost (one time)</th>
+                        <th>Hired?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows will be added dynamically -->
+                </tbody>
+            </table>
+        `;
+
+        let lobbyTable = `
+            <table id="pac_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
+                <thead>
+                    <tr>
+                        <th style="width: 200px;">Organisation</th>
+                        <th style="width: 150px;">Description</th>
+                        <th>Relationship</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows will be added dynamically -->
+                </tbody>
+            </table>
+        `;
+    
+        let z = `
+        
+        <div class="inner_window_front" id="shining_menu_header" style="height: 50px; background-color:#2d2d2d">
+            <h1 style='position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; text-align: center; font-size: 3em; line-height: normal; font-style: italic; color: white; margin: 0;font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;'>
+                State of the Campaign
+            </h1>
+        </div>
+        <div class="shining_tab" style='position: absolute;bottom: 65px;left:50%;transform:translateX(-50%)'>
+            <button class="tablinks" onclick="openTab(event, 'funds')">Funds</button>
+            <button class="tablinks" onclick="openTab(event, 'campaign_time')">Campaign Time</button>
+            <button class="tablinks" onclick="openTab(event, 'ad_campaign')">Ad Campaign</button>
+            <button class="tablinks" onclick="openTab(event, 'staff')">Staff</button>
+            <button class="tablinks" onclick="openTab(event, 'lobbies')">Lobbies</button>
+        </div>
+        <div class="inner_window_front" id="shining_menu" style="height: 260px; overflow-y: auto; background-color:#2d2d2d; color:white;">
+            <div id="funds" class="tabcontent">
+                <h2>Funds</h2>
+                <p><b>Current balance:</b> <span id='shining_balance'>$${Math.floor(uninflatedBalance).toLocaleString()}</span></p>
+                <p><b>Change in balance from previous turn:</b> <span style='${change > 0 ? 'color:green' : change == 0 ? 'color:yellow' : 'color:red'};'>${change < 0 ? "-$" : "$"}${Math.abs(Math.floor(change)).toLocaleString()}</span></p>
+                <p id='projected_change'><b>Estimated change for next turn:</b> <span style='${projected_change > 0 ? 'color:green' : projected_change == 0 ? 'color:yellow' : 'color:red'};'>${projected_change < 0 ? "-$" : "$"}${Math.abs(Math.floor(projected_change)).toLocaleString()}</span></p>
+                ${DEBT_STRING}
+            </div>
+            <div id="campaign_time" class="tabcontent">
+                <h2>Campaign Time</h2>
+                <div class="time_slider_group">
+                    <div class="time_slider">
+                        <label for="campaign_time_physical">Physically Campaigning:</label>
+                        <input type="range" id="campaign_time_physical" min="0" max="1" step="0.01" value="0.33">
+                    </div>
+                    <div class="time_slider">
+                        <label for="campaign_time_fundraising">Fundraising:</label>
+                        <input type="range" id="campaign_time_fundraising" min="0" max="1" step="0.01" value="0.33">
+                    </div>
+                    <div class="time_slider">
+                        <label for="campaign_time_media">Media Engagement:</label>
+                        <input type="range" id="campaign_time_media" min="0" max="1" step="0.01" value="0.34">
+                    </div>
+                </div>
+            </div>
+            <div id="ad_campaign" class="tabcontent">
+                <h2>Ad Campaign</h2>
+                <p>Select a state to add ad spending for it:</p>
+                <select id='shining_ad_state_sel'>${a_states}</select>
+                <p>Enter ad spending amount:</p>
+                <input id="ad_spending_amount" placeholder="Amount">
+                <input type="range" id="ad_spending_slider" min="0" step="1">
+                <button id="add_ad_spending">Add Spending</button>
+                <h2>Current Ad Spends</h2>
+                <em>Note: will <b>all</b> automatically be cancelled in the event of your campaign running a debt.</em>
+                <p>
+                <center> <!-- This tag can be explained by laziness -->
+                ${adSpendTable}
+                </center>
+                </p>
+            </div>
+            <div id="staff" class="tabcontent">
+                <h2>Staff</h2>
+                <center> <!-- This tag can be explained by laziness -->
+                ${staffTable}
+                </center>
+            </div>
+            <div id="lobbies" class="tabcontent">
+                <h2>Lobbies</h2>
+                <em>Align your answers with an organisation's values in order to have them contribute to fundraising.</em>
+                <p>
+                <center> <!-- This tag can be explained by laziness -->
+                ${lobbyTable}
+                </center>
+                </p>
+            </div>
+        </div>
+            <button id="shining_back" style="position: relative; bottom: -13px; left: -380px; width: 150px; height: 80px; font-size: 40px; padding-top: 5px; padding-left: 8px;">
+                <b>BACK</b>
+            </button>
+
+            <style>
+                .time_slider_group {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                
+                .time_slider {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 8px;
+                }
+                
+                .time_slider label {
+                    margin-right: 10px;
+                    width: 180px; /* Adjust this width as needed */
+                }            
+            </style>
+            `;
+            for (i in game_winArr) {
+            if (game_winArr[i].getAttribute("id") != "main_content_area" && game_winArr[i].getAttribute("class") != "game_header" ) {
+                game_winArr[i].remove()
+            }
+        }
+
+        let game_window = $("#game_window")[0]
+        if ($("#main_content_area")[0])
+        $("#main_content_area")[0].style.display="none"
+
+        let inner_window_question = document.createElement("div");
+        //inner_window_question.setAttribute("class", "inner_window_question");
+        inner_window_question.innerHTML = z;
+        game_window.appendChild(inner_window_question);
+
+        $("#shining_back").click(() => {
+            o(polling);
+        })
+
+        $("#add_ad_spending").click(() => {
+            let currval = $("#ad_spending_amount").val();
+            currval = currval.replaceAll(",", "");
+            currval = Math.abs(Number(currval))
+            currval = isNaN(currval) ? 0 : Math.floor(currval);
+            currval = Math.min(e.shining_data.balance / inflation_factor, currval);
+            currval = Math.max(0, currval);
+
+            const selectedStatePk = Number($("#shining_ad_state_sel").val());
+            const adSpendingAmount = currval;
+
+            let currentState = e.shining_data.ad_spending.find(f=>f.state == selectedStatePk);
+
+            if (currentState) {
+                e.shining_data.balance += currentState.amount;
+                currentState.amount = adSpendingAmount * inflation_factor;
+
+            } else {
+                e.shining_data.ad_spending.push({
+                    state: selectedStatePk,
+                    amount: adSpendingAmount * inflation_factor
+                });
+            }
+
+            e.shining_data.balance -= adSpendingAmount * inflation_factor;
+
+            update_projection();
+
+            $("#ad_spending_slider").val(0);
+            $("#ad_spending_amount").val(0);
+            updateSliderMax();
+            update_projection();
+
+            const stateName = $("#shining_ad_state_sel option:selected").text();
+            update_ad_table();
+        });
+
+        const updateSliderMax = () => {
+            const currentBalance = parseFloat( e.shining_data.balance / inflation_factor );
+            const slider = $("#ad_spending_slider");
+            slider.attr("max", currentBalance);
+            slider.val(0);
+            $("#shining_balance").html(`$${Math.floor(e.shining_data.balance / inflation_factor).toLocaleString()}`)
+        }
+
+        const update_staff_table = () => {
+            const tableBody = $("#staff_table tbody");
+            tableBody.html("");
+
+            let our_info = campaignTrail_temp.shining_info.find(f=>f.pk === e.election_id&&f.candidate===e.candidate_id);
+
+            for (let i in our_info.staff) {
+                let targ = our_info.staff[i];
+                let hire_str = targ.hired == true ? `<em>Hired.</em>` : `<button class="hire_button" data-pk="${targ.pk}" style='color:green'>Hire</button>`;
+                const newRow = `
+                <tr>
+                    <td><h4>${targ.name}</h4><img style='width:100px' src='${targ.image}'></img></td>
+                    <td>${targ.description}</td>
+                    <td>$${Math.floor(targ.cost / inflation_factor).toLocaleString()}</td>
+                    <td>${hire_str}</td>
+                </tr>
+                `;
+                tableBody.append(newRow);
+                $(`button.hire_button[data-pk="${targ.pk}"]`).click(() => {
+
+                    if (e.shining_data.balance < 0) {
+                        return;
+                    }
+                    
+                    e.shining_data.balance -= targ.cost;
+
+                    our_info.staff[i].hired = true;
+                    our_info.staff[i].execute();
+
+                    updateSliderMax();
+                    update_projection();
+                    update_staff_table();
+                });
+            }
+        }
+
+        const update_pac_table = () => {
+            const tableBody = $("#pac_table tbody");
+            tableBody.html("");
+
+            let our_info = campaignTrail_temp.shining_info.find(f=>f.pk === e.election_id&&f.candidate===e.candidate_id);
+
+            for (let i in our_info.lobby) {
+                let targ = our_info.lobby[i];
+                const newRow = `
+                <tr>
+                    <td><h4>${targ.name}</h4><img style='width:100px' src='${targ.image}'></img></td>
+                    <td>${targ.description}</td>
+                    <td>Opinion: ${Math.floor(targ.opinion)}<br>Max Bonus: $${Math.floor(targ.fund_base / inflation_factor).toLocaleString()}</td>
+                </tr>
+                `;
+                tableBody.append(newRow);
+            }
+        }
+
+        const update_ad_table = () => {
+            const tableBody = $("#ad_spend_table tbody");
+            tableBody.html("");
+
+            for (let i in e.shining_data.ad_spending) {
+                let targ = e.shining_data.ad_spending[i];
+                const newRow = `
+                <tr>
+                    <td>${e.states_json.find(f=>f.pk===targ.state).fields.name}</td>
+                    <td>$${Math.floor(targ.amount / inflation_factor).toLocaleString()}</td>
+                    <td><button class="remove_ad_spend" data-state-pk="${targ.state}" style='color:red'>Remove</button></td>
+                </tr>
+                `;
+                tableBody.append(newRow);
+                $(`button.remove_ad_spend[data-state-pk="${targ.state}"]`).click(() => {
+                    e.shining_data.balance += targ.amount;
+                    
+                    e.shining_data.ad_spending.splice(i, 1);
+
+                    updateSliderMax();
+                    update_ad_table();
+                    update_projection();
+                });
+            }
+        }
+
+        $("#ad_spending_slider").change(() => {
+            $("#ad_spending_amount").val($("#ad_spending_slider").val());
+            $("#ad_spending_amount").val(Number($("#ad_spending_amount").val()).toLocaleString());
+        })
+
+        $("#ad_spending_amount").change(() => {
+            let currval = $("#ad_spending_amount").val();
+            currval = currval.replaceAll(",", "");
+            currval = Math.abs(Number(currval))
+            currval = isNaN(currval) ? 0 : Math.floor(currval);
+            currval = Math.min(e.shining_data.balance / inflation_factor, currval);
+            currval = Math.max(0, currval);
+
+            $("#ad_spending_amount").val(currval.toLocaleString());
+            $("#ad_spending_slider").val(currval);
+        })
+
+        function updateSliders(physicalTime, fundraisingTime, mediaTime) {
+            $("#campaign_time_physical").val(physicalTime);
+            $("#campaign_time_fundraising").val(fundraisingTime);
+            $("#campaign_time_media").val(mediaTime);
+
+            e.shining_data.times.physical_time = physicalTime;
+            e.shining_data.times.fundraising_time = fundraisingTime;
+            e.shining_data.times.media_time = mediaTime;
+
+            update_projection();
+        }
+    
+        $("#campaign_time_physical, #campaign_time_fundraising, #campaign_time_media").on("input", () => {
+            const physicalTime = parseFloat($("#campaign_time_physical").val());
+            const fundraisingTime = parseFloat($("#campaign_time_fundraising").val());
+            const mediaTime = parseFloat($("#campaign_time_media").val());
+    
+            const total = physicalTime + fundraisingTime + mediaTime;
+    
+            // ensure the total time adds up to 1
+            if (total !== 0) {
+                const adjustment = 1 / total;
+                updateSliders(physicalTime * adjustment, fundraisingTime * adjustment, mediaTime * adjustment);
+            } else {
+                updateSliders(0.33, 0.33, 0.34);   
+            }
+        });
+
+        updateSliders(e.shining_data.times.physical_time, e.shining_data.times.fundraising_time, e.shining_data.times.media_time);
+
+        updateSliderMax();
+        $("#ad_spending_slider").val(0);
+        $("#ad_spending_amount").val(0);
+        update_ad_table();
+        update_staff_table();
+        update_pac_table();
+        update_projection();
+    
+        openTab(null, "funds");    
+    }
+
+    const shining_cal = (polling) => { // run at the start of every turn
+
+        let our_info = campaignTrail_temp.shining_info.find(f=>f.pk === e.election_id&&f.candidate===e.candidate_id);
+
+        // opponent visit logic
+        if ((e.question_number + 1) % 2 == 0 && 1 == e.election_json.find(f=>f.pk===e.election_id).fields.has_visits) {
+            const active_opps = e.opponents_list.filter(f=>e.candidate_json.find(_f=>_f.pk===f).fields.is_active === 1);
+
+            // calculate closest state for each oppo
+            let closests = {}
+            active_opps.forEach(opp=>{
+                let closest = polling[0];
+                polling.forEach(state => {
+                    if (state.result[0].candidate === opp || state.result[1].candidate === opp) {
+                        if (Math.abs(state.result[0].percent - state.result[1].percent) < Math.abs(closest.result[0].percent - closest.result[1].percent)) {
+                            closest = state;
+                        }
+                    }
+                });
+                closests[opp] = closest;
+            });
+
+            e.opponent_visits.push({})
+            active_opps.forEach(f=>{
+                e.opponent_visits[e.opponent_visits.length - 1][f] = closests[f].state;
+                const target = e.candidate_state_multiplier_json.find(_f=>_f.fields.state===closests[f].state&&_f.fields.candidate===f);
+                
+                target.fields.state_multiplier += 0.001 * (our_info ? our_info.opponent_visit_effect : 1);
+            });
+
+        }
+
+        // update PAC opinions
+
+        our_info.lobby.forEach(f=>{
+            let relevant = e.answer_score_issue_json.filter(_f=>_f.fields.issue===f.issue_tie&&_f.fields.answer===e.player_answers[e.player_answers.length - 1]);
+            for (let i in relevant) {
+                const op_raw = f.issue_link(relevant[i].fields.issue_score * relevant[i].fields.issue_importance);
+                const op_final = op_raw * 10;
+                f.opinion += op_final;
+                f.opinion = Math.min(100, f.opinion);
+            }
+        });
+
+        // update previous balance before we go into the current balance
+        e.shining_data.prev_balance = e.shining_data.balance;
+
+        // deal with time spent
+
+        e.shining_data.balance += 5000000 * e.shining_data.times.fundraising_time * (our_info ? our_info.fundraising_effect : 1); // base fundraising value
+        e.shining_data.balance -= 500000 - (100000 * F(e.candidate_id)); // base upkeep cost with normalised RNG element
+
+        // add to balance based on PAC opinions
+
+        our_info.lobby.forEach(f=>{
+            let x = f.opinion;
+            const r = 0.097;
+            const x0 = 65.3;
+            const y = f.fund_base / (1 + Math.exp(-r * (x - x0)));
+            e.shining_data.balance += y;
+        })
+
+        // if >0.5 of the player's time is not spent on media, this will hurt them
+        let media_boost = (e.shining_data.times.media_time - 0.5) * 0.0025;
+        media_boost = e.shining_data.balance < 0 ? media_boost - 0.0025 : media_boost // debt penalty
+        e.candidate_state_multiplier_json.forEach(f=>{
+            if (f.fields.candidate === e.candidate_id) {
+                f.fields.state_multiplier += media_boost;
+            }
+        });
+
+        // visit multiplier; same deal as above. will halve your visit effects at 0 and double at 1.
+        e.shining_data.visit_multiplier += ((e.shining_data.times.physical_time*2)-1)/50;
+        e.shining_data.visit_multiplier = Math.max(0,e.shining_data.visit_multiplier);
+        e.shining_data.visit_multiplier = Math.min(2,e.shining_data.visit_multiplier);
+
+        // ads
+        e.shining_data.ad_spending.forEach(f=>{
+            const target = e.candidate_state_multiplier_json.find(_f=>f.state===_f.fields.state&&_f.fields.candidate===e.candidate_id);
+            let currMult = target.fields.state_multiplier;
+            let boost = currMult * f.amount / 750000000;
+            console.log(target.fields.state_multiplier)
+            target.fields.state_multiplier += boost * (our_info ? our_info.ad_effect : 1);
+            console.log(target.fields.state_multiplier)
+
+            e.shining_data.balance -= f.amount;
+        });
+
+        if (e.shining_data.balance < 0) {
+            e.shining_data.ad_spending = [];
+        }
+
+        return;
+    }
+
+    const o = (t, e = campaignTrail_temp) => {
+        for (var i = [], a = 0; a < e.answers_json.length && (e.answers_json[a].fields.question != e.questions_json[e.question_number].pk || (i.push({
+                key: a,
+                order: Math.random()
+            }), 4 != i.length)); a++);
+        P(i, "order");
+        var s = "";
+        for (a = 0; a < i.length; a++) s += '<input type="radio" name="game_answers" class="game_answers"             id="game_answers[' + a.toString() + ']" value="' + e.answers_json[i[a].key].pk + '"/>\t\t    <label for="game_answers[' + a.toString() + ']">' + e.answers_json[i[a].key].fields.description + "</label><br>";
+        var l = '<img id="candidate_pic" src="' + e.candidate_image_url + '">    <img id="running_mate_pic" src="' + e.running_mate_image_url + '">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question ' + (e.question_number + 1) + " of " + e.global_parameter_json[0].fields.question_count + '</h3>        </div>        <div id="campaign_sign">        <p>' + e.candidate_last_name + "</p>        <p>" + e.running_mate_last_name + "</p>        </div>    </div>";
+        let game_winArr = Array.from($("#game_window")[0].children)
+        let shining_button = e.game_type_id == "3" ? `
+            <button id="shining_menu_button" class="answer_select_button" style='color:navy;font-weight:bolder;margin-left:1.5em;'>The Campaign</button>
+        ` : "";
+        let z = `
+        <div class="inner_inner_window">
+            <h3>${e.questions_json[e.question_number].fields.description}</h3>
+            <div id="question_form">
+                <form name="question">${s}</form>
+            </div>
+        </div>
+        <p>
+            <button id="answer_select_button" class="answer_select_button">CONTINUE</button>
+            <button id="view_electoral_map">Latest Polls/Electoral Map</button>
+            ${shining_button}
+        </p>
+        `;
+        for (i in game_winArr) {
+            if (game_winArr[i].getAttribute("id") != "main_content_area" && game_winArr[i].getAttribute("class") != "game_header" ) {
+                game_winArr[i].remove()
+            }
+        }
+        let game_window = $("#game_window")[0]
+        if ($("#main_content_area")[0])
+        $("#main_content_area")[0].style.display="none"
+
+        let inner_window_question = document.createElement("div")
+        inner_window_question.setAttribute("class", "inner_window_question")
+        inner_window_question.innerHTML = z
+        game_window.appendChild(inner_window_question)
+
+        let ports = document.createElement("g")
+        ports.innerHTML = l
+        game_window.appendChild(ports)
+
+        //$("#game_window").html(l)
+
+        $("#view_electoral_map").click(function() {
+            _(t)
+        })
+
+        $("#shining_menu_button").click(() => {
+            shining_menu(t);
+        })
+
+        $("#answer_select_button")[0].addEventListener("click", function() {
+            var nullN = $("input:radio[name=game_answers]:checked").val();
+            null == nullN ? C(e.election_id) : n(nullN)
+        })
+    }
+
+    function electionNight() {
+        if (e.bigshot_mode) { // minimise the bigshot window once election night starts
+            const cheatMenu = document.querySelector('.cheat_menu');
+            if (cheatMenu) {
+                cheatMenu.classList.add('minimized');
+            }
+        }
 
         ! function() {
             for (var t = u(), i = "", a = 0; a < t.length; a++) i += '            <li><span style="color:' + t[a].color + "; background-color: " + t[a].color + '">--</span> ' + t[a].last_name + ":  0</li>";
             var s = S(e.election_id),
                 n = e.election_json[s].fields.winning_electoral_vote_number;
-            $("#game_window").html('        <div class="game_header">            <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTORAL VOTES</h3>                        <ul>' + i + "</ul>                        <p>0% complete</br>" + n + ' to win</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_result">                        <h3>STATE RESULTS</h3>                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    </div>                </div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>        <div class="overlay" id="election_night_overlay"></div>        <div class="overlay_window" id="election_night_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="' + e.election_json[s].fields.advisor_url + '" width="208" height="128"/>            <p>Election night has arrived. Settle in and wait for the returns, however                 long it may take. Best of luck!</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>');
+            $("#game_window").html('        <div class="game_header">            ' + corrr + '        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTORAL VOTES</h3>                        <ul>' + i + "</ul>                        <p>0% complete</br>" + n + ' to win</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_result">                        <h3>STATE RESULTS</h3>                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    </div>                </div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>        <div class="overlay" id="election_night_overlay"></div>        <div class="overlay_window" id="election_night_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="' + e.election_json[s].fields.advisor_url + '" width="208" height="128"/>            <p>Election night has arrived. Settle in and wait for the returns, however                 long it may take. Best of luck!</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>');
             var lTemp = function() {
                 for (var t = {}, i = 0; i < e.states_json.length; i++) t[e.states_json[i].fields.abbr] = {
                     fill: "#C9C9C9"
@@ -581,7 +1064,7 @@ function divideElectoralVotesProp(e, t) {
                     }
                     var a = v(i);
                     var l = S(e.election_id);
-                    var o = e.election_json[l].fields.winning_electoral_vote_number;
+                    let o = e.election_json[l].fields.winning_electoral_vote_number;
                     var _ = u();
                     var r = "";
                     for (var n = 0; n < _.length; n++) {
@@ -596,7 +1079,7 @@ function divideElectoralVotesProp(e, t) {
                     var h = Math.floor(i / 480 * 100);
                     var g = $("#state_result_container").html();
                     $("#game_window").html("");
-                    $("#game_window").html('        <div class="game_header">            <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTION TALLY</h3>                        <ul>' + r + "</ul>                        <p>" + h + "% complete</br>" + o + ' to win</p>                    </div>                </div>                <div id="state_result_container">' + g + '</div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>');
+                    $("#game_window").html('        <div class="game_header">            ' + corrr + '        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTION TALLY</h3>                        <ul>' + r + "</ul>                        <p>" + h + "% complete</br>" + o + ' to win</p>                    </div>                </div>                <div id="state_result_container">' + g + '</div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>');
                     $("#map_container").usmap(p);
                     $("#final_result_button").click(function() {
                         clearTimeout(results_timeout), $("#map_footer").html("<i>Processing Results, wait one moment...</i>");
@@ -645,14 +1128,28 @@ function divideElectoralVotesProp(e, t) {
     }
 
     function a(e) {
-        var t;
+        let t;
         switch (e) {
-        case "1":
-            t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candiate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
-            break;
-        case "2":
-            t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
-            break;
+            case "1":
+                t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candiate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
+                break;
+            case "2":
+                t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
+                break;
+            case "3":
+                t = `
+                    <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
+                    <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
+                    <p>
+                    - Campaign finance<br>
+                    - Staffing your campaign<br>
+                    - Interactions with lobbies<br>
+                    - Ad buys
+                    </p>
+                    <p><b>This is not the recommended experience for new players.</b></p>
+                    <p><b>Originally from New Campaign Trail, added with permission.</b></p>
+                    `;
+                break;
         }
         $("#opponent_selection_description_window").html(t);
 
@@ -676,9 +1173,9 @@ function divideElectoralVotesProp(e, t) {
         if (id != 16) {
             if (modded) {
                 try {
-                yearbit = ree.election_json[findFromPK(ree.election_json, id)].fields.year
-                lastnamebit = ree.candidate_json[findFromPK(ree.candidate_json, campaignTrail_temp.candidate_id)].fields.last_name
-                veeplastname = ree.candidate_json[findFromPK(ree.candidate_json, campaignTrail_temp.running_mate_id)].fields.last_name
+                    yearbit = ree.election_json[findFromPK(ree.election_json, id)].fields.year
+                    lastnamebit = ree.candidate_json[findFromPK(ree.candidate_json, campaignTrail_temp.candidate_id)].fields.last_name
+                    veeplastname = ree.candidate_json[findFromPK(ree.candidate_json, campaignTrail_temp.running_mate_id)].fields.last_name
                 } catch {}
                 real = realityCheck(cand, running_mate, ree)
 
@@ -706,7 +1203,7 @@ function divideElectoralVotesProp(e, t) {
                 oldRM = e.candidate_json[e.candidate_json.map(f=>f.pk).indexOf(Number(running_mate))]
                 veeplastname = ree.candidate_json[correctIndex].fields.last_name
                 e.candidate_json[correctIndex] = oldRM //sets to new RM (lmao this is such a fucking stupid solution)
-                
+
                 return yearbit + "_" + lastnamebit + "_" + veeplastname + ".html"
             } else {
                 return campaignTrail_temp.election_json[findFromPK(campaignTrail_temp.election_json, id)].fields.year + "_" + campaignTrail_temp.candidate_json[findFromPK(campaignTrail_temp.candidate_json, cand)].fields.last_name + "_" + campaignTrail_temp.candidate_json[findFromPK(campaignTrail_temp.candidate_json, running_mate)].fields.last_name + ".html"
@@ -716,19 +1213,104 @@ function divideElectoralVotesProp(e, t) {
         }
     }
 
+    let issue_popup = () => {
+        let kill = true;
+        try {
+            kill = !(e.issues_json[0].fields.description.length > 1)
+        } catch {kill = true}
+
+        if (kill) {
+            return;
+        }
+
+        let createPopupContent = (issue) => {
+            const popupContent = document.createElement('div');
+
+            const issueName = document.createElement('h3');
+            issueName.textContent = issue.fields.name;
+            popupContent.appendChild(issueName);
+
+            const mainContent = document.createElement('div');
+            mainContent.className = 'popup-content';
+
+            const issueDescription = document.createElement('p');
+            issueDescription.textContent = issue.fields.description;
+            mainContent.appendChild(issueDescription);
+
+            for (let i = 1; i <= 7; i++) {
+                const stance = issue.fields[`stance_${i}`];
+                const stanceDescription = issue.fields[`stance_desc_${i}`];
+                
+                if (stanceDescription !== 0 && stanceDescription.length > 0) {
+                    const stanceTitle = document.createElement('b');
+                    stanceTitle.textContent = stance;
+                    mainContent.appendChild(stanceTitle);
+
+                    const stanceDesc = document.createElement('p');
+                    stanceDesc.textContent = stanceDescription;
+                    stanceDesc.className = "stance_desc";
+                    mainContent.appendChild(stanceDesc);
+                }
+            }
+
+            popupContent.appendChild(mainContent);
+
+            return popupContent;
+        
+        }
+
+        $("#state_info")[0].outerHTML = $("#state_info")[0].outerHTML;
+
+        for (const issue of e.issues_json) {
+            $(`#issue_${issue.pk}`)[0].addEventListener('click', () => {
+
+                $("#state_info")[0].innerHTML = `
+                    <div class="overlay_tab_i" id="popup_content_container"></div>
+                `;
+
+                const popupContent = createPopupContent(issue);
+                $("#popup_content_container")[0].appendChild(popupContent);
+                
+            });
+
+            $(`#issue_${issue.pk}`)[0].style.cursor = "pointer";
+        }
+    }
+
     function s(t, i, l) {
-        for (var o = "", r = 0; r < e.difficulty_level_json.length; r++) "Normal" == e.difficulty_level_json[r].fields.name ? o += "<option value=" + e.difficulty_level_json[r].pk + " selected>" + e.difficulty_level_json[r].fields.name + "</option>" : o += "<option value=" + e.difficulty_level_json[r].pk + ">" + e.difficulty_level_json[r].fields.name + "</option>";
-        let d = '        <div class="game_header">        <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div class="inner_window_w_desc" id="inner_window_4">            <div id="game_options">            <form name="game_type_selection">            <p><h3>How would you like the electoral votes to be allocated?</h3>            <select name="game_type_id" id="game_type_id">                <option value=1>Default (Winner-Take-All)</option>                <option value=2>Proportional</option>            </select>            </p>            </form>            </div>            <div class="description_window_small"                 id="opponent_selection_description_window">            </div>            <div id="difficulty_level">            <form name="difficulty_level_selection">            <p><h3>Please choose your difficulty level:</h3>            <select name="difficulty_level_id" id="difficulty_level_id">' + o + '</select>            </p>            </form>            </div>        <p id="opponent_selection_id_button_p"><button class="person_button" id="opponent_selection_id_back">Back</button> <button class="person_button" id="opponent_selection_id_button">Continue</button>        </p>        </div>';
+        let difficultyStr;
+        for (difficultyStr = "", r = 0; r < e.difficulty_level_json.length; r++) "Normal" == e.difficulty_level_json[r].fields.name ? difficultyStr += "<option value=" + e.difficulty_level_json[r].pk + " selected>" + e.difficulty_level_json[r].fields.name + "</option>" : difficultyStr += "<option value=" + e.difficulty_level_json[r].pk + ">" + e.difficulty_level_json[r].fields.name + "</option>";
+        let shining = "";
+        if (e.shining) {
+            shining = `<option value=3 style="">Sea to Shining Sea</option>`
+        }
+        let d = `        
+        <div class="game_header">        ${corrr}        </div>        
+        <div class="inner_window_w_desc" id="inner_window_4">            
+        <div id="game_options">            
+        <form name="game_type_selection">            
+        <p><h3>Select your game mode.</h3>            
+        <select name="game_type_id" id="game_type_id">                
+        <option value=1>Default (Winner-Take-All)</option>                
+        <option value=2>Proportional</option>
+        ${shining}
+        </select>            
+        </p>            
+        </form>            </div>            
+        <div class="description_window_small"                 id="opponent_selection_description_window">            </div>            
+        <div id="difficulty_level">            <form name="difficulty_level_selection">            <p><h3>Please choose your difficulty level:</h3>            
+        <select name="difficulty_level_id" id="difficulty_level_id"> ${difficultyStr} </select>            </p>            </form>            </div>        <p id="opponent_selection_id_button_p"><button class="person_button" id="opponent_selection_id_back">Back</button> <button class="person_button" id="opponent_selection_id_button">Continue</button>        </p>        </div>`;
         $("#game_window").html(d), $("#game_type_id").ready(function() {
             a($("select[name=game_type_id]").val())
 
         }), $("#game_type_id").change(function() {
             a($("select[name=game_type_id]").val())
         })
+        // if (e.shining) $("#game_type_id").val("3");
         $("#opponent_selection_id_back").click(vpSelect)
         $("#opponent_selection_id_button").click(function() {
             $("#opponent_selection_id_button").replaceWith("<em>One moment...</em>");
-            for (var a = [], o = [], r = 0; r < e.candidate_dropout_json.length; r++) e.candidate_dropout_json[r].fields.candidate == i && a.push(e.candidate_dropout_json[r].fields.affected_candidate);
+            for (var a = [], opponents = [], r = 0; r < e.candidate_dropout_json.length; r++) e.candidate_dropout_json[r].fields.candidate == i && a.push(e.candidate_dropout_json[r].fields.affected_candidate);
             let d = -1;
             for (r = 0; r < e.opponents_default_json.length; r++)
                 if (e.opponents_default_json[r].election == t) {
@@ -736,7 +1318,7 @@ function divideElectoralVotesProp(e, t) {
                     break
                 }
             for (r = 0; r < e.opponents_default_json[d].candidates.length; r++) {
-                e.opponents_default_json[d].candidates[r] != i && -1 == a.indexOf(e.opponents_default_json[d].candidates[r]) && o.push(e.opponents_default_json[d].candidates[r]);
+                e.opponents_default_json[d].candidates[r] != i && -1 == a.indexOf(e.opponents_default_json[d].candidates[r]) && opponents.push(e.opponents_default_json[d].candidates[r]);
             }
             // define ONLY if not already defined - necessary for code 1 base switching gimmicks
             e.election_id = e.election_id ? e.election_id : t
@@ -747,15 +1329,35 @@ function divideElectoralVotesProp(e, t) {
             i = e.candidate_id
             l = e.running_mate_id
 
-            e.opponents_list = o, e.game_type_id = $("select[name=game_type_id]").val(), e.difficulty_level_id = $("select[name=difficulty_level_id]").val();
+            e.opponents_list = opponents, e.game_type_id = $("select[name=game_type_id]").val(), e.difficulty_level_id = $("select[name=difficulty_level_id]").val();
             var c = $("select[name=difficulty_level_id]").val();
             for ($("select[name=game_type_id]").val(), d = -1, r = 0; r < e.difficulty_level_json.length; r++)
                 if (e.difficulty_level_json[r].pk == $("select[name=difficulty_level_id]").val()) {
                     d = r;
                     break
                 }
-            e.difficulty_level_multiplier = e.difficulty_level_json[d].fields.multiplier, starting_mult = encrypted + e.difficulty_level_json[d].fields.multiplier,
-                function(t, i, a, l, o) {
+            e.difficulty_level_multiplier = e.difficulty_level_json[d].fields.multiplier, starting_mult = encrypted + e.difficulty_level_json[d].fields.multiplier
+
+            if (e.game_type_id === "3") {
+                const default_init = 50000000;
+                const boost = F(e.candidate_id) * default_init * e.global_parameter_json[0].fields.global_variance * 4;
+
+                e.shining_data = {
+                    balance: (default_init + boost) * e.difficulty_level_multiplier,
+                    ad_spending: [],
+                    times: {
+                        fundraising_time: 0.33,
+                        media_time: 0.33,
+                        physical_time: 0.34
+                    },
+                    visit_multiplier: 1,
+                }
+
+                e.shining_data.prev_balance = e.shining_data.balance;
+            }
+
+            let oFunc = o;
+            ((t, i, a, l, o) => {
                     if (campaignTrail_temp.musicOn) {
                         document.getElementById("music_player").style.display = ""
                         document.getElementById('campaigntrailmusic').src = campaignTrail_temp.musicSrc
@@ -763,7 +1365,10 @@ function divideElectoralVotesProp(e, t) {
                     if (modded == false) {
                         aaa = election_HTML(t, i, a)
                         aaa = "../static/questionset/" + aaa
-                        $("#game_window").load(aaa)
+                        $("#game_window").load(aaa, () => {
+                            let e = A(2);
+                            oFunc(e);
+                        })
                         e.question_number = 0, e.questions_json = campaignTrail_temp.questions_json, e.answers_json = campaignTrail_temp.answers_json, e.states_json = campaignTrail_temp.states_json, e.issues_json = campaignTrail_temp.issues_json, e.state_issue_score_json = campaignTrail_temp.state_issue_score_json, e.candidate_issue_score_json = campaignTrail_temp.candidate_issue_score_json, e.running_mate_issue_score_json = campaignTrail_temp.running_mate_issue_score_json, e.candidate_state_multiplier_json = campaignTrail_temp.candidate_state_multiplier_json, e.answer_score_global_json = campaignTrail_temp.answer_score_global_json, e.answer_score_issue_json = campaignTrail_temp.answer_score_issue_json, e.answer_score_state_json = campaignTrail_temp.answer_score_state_json, e.answer_feedback_json = campaignTrail_temp.answer_feedback_json, e.candidate_image_url = campaignTrail_temp.candidate_image_url, e.running_mate_image_url = campaignTrail_temp.running_mate_image_url, e.candidate_last_name = campaignTrail_temp.candidate_last_name, e.running_mate_last_name = campaignTrail_temp.running_mate_last_name, e.running_mate_state_id = campaignTrail_temp.running_mate_state_id, e.player_answers = campaignTrail_temp.player_answers, e.player_visits = campaignTrail_temp.player_visits, e.answer_feedback_flg = campaignTrail_temp.answer_feedback_flg, e.election_id = Number(e.election_id), e.candidate_id = Number(e.candidate_id), e.running_mate_id = Number(e.running_mate_id), e.difficulty_level_id = Number(e.difficulty_level_id), e.game_start_logging_id = Number(campaignTrail_temp.game_start_logging_id)
                         var important_code = setInterval(function() {
                             $("#view_electoral_map").click(function() {
@@ -827,12 +1432,13 @@ function divideElectoralVotesProp(e, t) {
                             })
 
                         } catch {
-                            
+
                         }
                         e.question_number = 0, e.questions_json = campaignTrail_temp.questions_json, e.answers_json = campaignTrail_temp.answers_json, e.states_json = campaignTrail_temp.states_json, e.issues_json = campaignTrail_temp.issues_json, e.state_issue_score_json = campaignTrail_temp.state_issue_score_json, e.candidate_issue_score_json = campaignTrail_temp.candidate_issue_score_json, e.running_mate_issue_score_json = campaignTrail_temp.running_mate_issue_score_json, e.candidate_state_multiplier_json = campaignTrail_temp.candidate_state_multiplier_json, e.answer_score_global_json = campaignTrail_temp.answer_score_global_json, e.answer_score_issue_json = campaignTrail_temp.answer_score_issue_json, e.answer_score_state_json = campaignTrail_temp.answer_score_state_json, e.answer_feedback_json = campaignTrail_temp.answer_feedback_json, e.candidate_image_url = campaignTrail_temp.candidate_image_url, e.running_mate_image_url = campaignTrail_temp.running_mate_image_url, e.candidate_last_name = campaignTrail_temp.candidate_last_name, e.running_mate_last_name = campaignTrail_temp.running_mate_last_name, e.running_mate_state_id = campaignTrail_temp.running_mate_state_id, e.player_answers = campaignTrail_temp.player_answers, e.player_visits = campaignTrail_temp.player_visits, e.answer_feedback_flg = campaignTrail_temp.answer_feedback_flg, e.election_id = Number(e.election_id), e.candidate_id = Number(e.candidate_id), e.running_mate_id = Number(e.running_mate_id), e.difficulty_level_id = Number(e.difficulty_level_id), e.game_start_logging_id = Number(campaignTrail_temp.game_start_logging_id)
                         var important_code = setInterval(function() {
                             $("#view_electoral_map").click(function() {
-                                var e = A(return_type = 2);
+                                let e = A(return_type = 2);
+                                console.log("e",e)
                                 _(e);
                             })
                             $("#answer_select_button").click(function() {
@@ -840,9 +1446,6 @@ function divideElectoralVotesProp(e, t) {
                                 null == t && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(t)
                                 campaignTrail_temp.skippingQuestion = false;
                             })
-                            if (diff_mod) {
-                                
-                            }
                             if ($("#answer_select_button")[0] != null) {
                                 clearInterval(important_code)
                             }
@@ -859,7 +1462,7 @@ function divideElectoralVotesProp(e, t) {
                         e.question_number = 0, e.questions_json = campaignTrail_temp.questions_json, e.answers_json = campaignTrail_temp.answers_json, e.states_json = campaignTrail_temp.states_json, e.issues_json = campaignTrail_temp.issues_json, e.state_issue_score_json = campaignTrail_temp.state_issue_score_json, e.candidate_issue_score_json = campaignTrail_temp.candidate_issue_score_json, e.running_mate_issue_score_json = campaignTrail_temp.running_mate_issue_score_json, e.candidate_state_multiplier_json = campaignTrail_temp.candidate_state_multiplier_json, e.answer_score_global_json = campaignTrail_temp.answer_score_global_json, e.answer_score_issue_json = campaignTrail_temp.answer_score_issue_json, e.answer_score_state_json = campaignTrail_temp.answer_score_state_json, e.answer_feedback_json = campaignTrail_temp.answer_feedback_json, e.candidate_image_url = campaignTrail_temp.candidate_image_url, e.running_mate_image_url = campaignTrail_temp.running_mate_image_url, e.candidate_last_name = campaignTrail_temp.candidate_last_name, e.running_mate_last_name = campaignTrail_temp.running_mate_last_name, e.running_mate_state_id = campaignTrail_temp.running_mate_state_id, e.player_answers = campaignTrail_temp.player_answers, e.player_visits = campaignTrail_temp.player_visits, e.answer_feedback_flg = campaignTrail_temp.answer_feedback_flg, e.election_id = Number(e.election_id), e.candidate_id = Number(e.candidate_id), e.running_mate_id = Number(e.running_mate_id), e.difficulty_level_id = Number(e.difficulty_level_id), e.game_start_logging_id = Number(campaignTrail_temp.game_start_logging_id)
                         var important_code = setInterval(function() {
                             $("#view_electoral_map").click(function() {
-                                var e = A(return_type = 2);
+                                let e = A(return_type = 2);
                                 _(e);
                             })
                             $("#answer_select_button").click(function() {
@@ -873,9 +1476,7 @@ function divideElectoralVotesProp(e, t) {
                         }, 1000);
                     }
                     histFunction()
-                }(t, i, l, o, c)
-
-                
+                })(t, i, l, opponents, c)
         })
 
     }
@@ -899,24 +1500,32 @@ function divideElectoralVotesProp(e, t) {
         $("#map_container").remove()
         $("#main_content_area").html('<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>')
         $("#main_content_area")[0].style.display=""
+
         let rr = A(returnType = 2)
-        rFuncRes = r(rr, 0);
+        rFuncRes = rFunc(rr, 0);
         $("#map_container").usmap(rFuncRes)
         $("#main_content_area")[0].style.display="none"
+
         return true;
     }
 
     function nextQuestion() {
+        // calculate shining
+
+        if (e.game_type_id == "3") {
+            let temp_polls = A(2);
+            shining_cal(temp_polls);
+        }
 
         var t = A(2);
 
         if (e.cyoa) {
-            if(e.collect_results){let a = A(2);e.current_results = [getLatestRes(a)[0], a]}
+			if(e.collect_results){let a = A(2);e.current_results = [getLatestRes(a)[0], a]}
             cyoAdventure(e.questions_json[e.question_number])
         }
         a = false
         if (e.primary) {
-            /* Primary code format: 
+            /* Primary code format:
             e.primary_code = [
                 {
                     "breakQ": 0,
@@ -938,7 +1547,7 @@ function divideElectoralVotesProp(e, t) {
 
         setTimeout(() => mapCache(skip = false), 0) // starts new thread for poll map preloading
 
-        if (e.corQuestion) e.corQuestion = false   
+        if (e.corQuestion) e.corQuestion = false
         else e.question_number++;
 
         if (e.player_answers.length < e.question_number) {
@@ -952,15 +1561,15 @@ function divideElectoralVotesProp(e, t) {
                 e.final_state_results = A(1)
                 electionNight()
                 v(500)
-                m() 
+                m()
             } else {
                 e.final_state_results = A(1), electionNight();
             }
         } else if (e.question_number % 2 == 0) {
             var i = S(e.election_id);
             1 == e.election_json[i].fields.has_visits ? function(e) {
-                $("#game_window").html('        <div class="game_header">            <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>        </div>        <p class="visit_text"><font size="2">Use this map to click on the next state you wish to visit. Choose wisely             and focus your efforts where they will have the most impact.</p>        </div>        ');
-                var t = r(e, 1);
+                $("#game_window").html('        <div class="game_header">            ' + corrr + '        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>        </div>        <p class="visit_text"><font size="2">Use this map to click on the next state you wish to visit. Choose wisely             and focus your efforts where they will have the most impact.</p>        </div>        ');
+                var t = rFunc(e, 1);
                 $("#map_container").usmap(t)
             }(t) : o(t)
         } else o(t)
@@ -970,6 +1579,7 @@ function divideElectoralVotesProp(e, t) {
     }
 
     function n(t) {
+        if ($("#visit_overlay")[0]) return;
         e.player_answers.push(Number(t));
         var i = 0,
             a = S(e.election_id);
@@ -981,7 +1591,8 @@ function divideElectoralVotesProp(e, t) {
                 }
             if (1 == i) {
                 var n = '                    <div class="overlay" id="visit_overlay"></div>                    <div class="overlay_window" id="visit_window">                        <div class="overlay_window_content" id="visit_content">                        <h3>Advisor Feedback</h3>                        <img src="' + e.election_json[a].fields.advisor_url + '" width="208" height="128"/>                        <p>' + e.answer_feedback_json[s].fields.answer_feedback + '</p>                        </div>                        <div class="overlay_buttons" id="visit_buttons">                        <button id="ok_button">OK</button><br><button id="no_feedback_button">Don\'t give me advice</button>                                                </div>                    </div>';
-                $("#game_window").append(n), $("#ok_button").click(function() {
+                $("#game_window").append(n);
+                $("#ok_button").click(function() {
                     nextQuestion()
                 }), $("#no_feedback_button").click(function() {
                     e.answer_feedback_flg = 0, nextQuestion()
@@ -1009,25 +1620,25 @@ function divideElectoralVotesProp(e, t) {
         if (!execute) {
           return false;
         }
-      
+
         // Get the data for the current question number
         dat = e.primary_code[breaks.indexOf(e.question_number)];
-      
+
         // Get the state for the current question
         stateMap = dat.states;
-      
+
         stateMap2 = e.states_json.map(f => f.pk);
-      
+
         states = [];
-      
+
         stateMap.forEach(function(f, it, arr) {
           correctState = stateMap2.indexOf(f);
           states.push(e.states_json[correctState]);
         });
-      
+
         // Set the final state results to an array with one element (1)
         e.final_state_results = A(1);
-      
+
         // Loop through the final state results
         for (i in e.final_state_results) {
           // If the current state is not in the state map, set its value to null
@@ -1035,7 +1646,7 @@ function divideElectoralVotesProp(e, t) {
             e.final_state_results[i] = null;
           }
         }
-      
+
         // Filter out any null values from the final state results
         e.final_state_results = e.final_state_results.filter(f => f);
 
@@ -1067,10 +1678,10 @@ function divideElectoralVotesProp(e, t) {
             var i = t.map(function(item) {
               var color = item.color;
               return `<li><span style="color:${color}; background-color:${color}">--</span> ${item.last_name}: 0</li>`;
-            }).join('');            
+            }).join('');
             var s = S(e.election_id),
                 n = e.election_json[s].fields.winning_electoral_vote_number;
-            $("#game_window").html('        <div class="game_header">            <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTORAL VOTES</h3>                        <ul>' + i + "</ul>                        <p>0% complete</br>" + n + ' to win</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_result">                        <h3>STATE RESULTS</h3>                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    </div>                </div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go back to questions</button>        </div>        <div class="overlay" id="election_night_overlay"></div>        <div class="overlay_window" id="election_night_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="' + e.election_json[s].fields.advisor_url + '" width="208" height="128"/>            <p>One of many election nights has arrived. Winning the delegates in these races will be vital to your primary victory.</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>');
+            $("#game_window").html('        <div class="game_header">            ' + corrr + '        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTORAL VOTES</h3>                        <ul>' + i + "</ul>                        <p>0% complete</br>" + n + ' to win</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_result">                        <h3>STATE RESULTS</h3>                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    </div>                </div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go back to questions</button>        </div>        <div class="overlay" id="election_night_overlay"></div>        <div class="overlay_window" id="election_night_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="' + e.election_json[s].fields.advisor_url + '" width="208" height="128"/>            <p>One of many election nights has arrived. Winning the delegates in these races will be vital to your primary victory.</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>');
             var lTemp = function() {
                 for (var t = {}, i = 0; i < states.length; i++) t[states[i].fields.abbr] = {
                     fill: "#C9C9C9"
@@ -1133,7 +1744,7 @@ function divideElectoralVotesProp(e, t) {
                     var a = v(i);
                     var _ = u();
                     var r = "";
-                    var o = ""
+                    let o = ""
                     for (var n = 0; n < _.length; n++) {
                         for (let d = 0; d < e.final_overall_results.length; d++)
                             if (e.final_overall_results[d].candidate == _[n].candidate) {
@@ -1146,7 +1757,7 @@ function divideElectoralVotesProp(e, t) {
                     var h = Math.floor(i / 480 * 100);
                     var g = $("#state_result_container").html();
                     $("#game_window").html("");
-                    $("#game_window").html('        <div class="game_header">            <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTION TALLY</h3>                        <ul>' + r + "</ul>                        <p>" + h + "% complete</br>" + '</div>                </div>                <div id="state_result_container">' + g + '</div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go back to questions</button>        </div>');
+                    $("#game_window").html('        <div class="game_header">            ' + corrr + '        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTION TALLY</h3>                        <ul>' + r + "</ul>                        <p>" + h + "% complete</br>" + '</div>                </div>                <div id="state_result_container">' + g + '</div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go back to questions</button>        </div>');
                     $("#map_container").usmap(p);
                     $("#final_result_button").click(function() {
                         clearTimeout(results_timeout), $("#map_footer").html("<i>Processing Results, wait one moment...</i>");
@@ -1169,56 +1780,7 @@ function divideElectoralVotesProp(e, t) {
         })
     }
 
-    function o(t, e = campaignTrail_temp) {
-        if (e.collect_results) {
-            let a = A(2);
-            e.current_results = [getLatestRes(a)[0], a];
-        }
-        
-        for (var i = [], a = 0; a < e.answers_json.length && (e.answers_json[a].fields.question != e.questions_json[e.question_number].pk || (i.push({
-                key: a,
-                order: Math.random()
-            }), 4 != i.length)); a++);
-        P(i, "order");
-        var s = "";
-        for (a = 0; a < i.length; a++) s += '<input type="radio" name="game_answers" class="game_answers"             id="game_answers[' + a.toString() + ']" value="' + e.answers_json[i[a].key].pk + '"/>\t\t    <label for="game_answers[' + a.toString() + ']">' + e.answers_json[i[a].key].fields.description + "</label><br>";
-        var l = '<img id="candidate_pic" src="' + e.candidate_image_url + '">    <img id="running_mate_pic" src="' + e.running_mate_image_url + '">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question ' + (e.question_number + 1) + " of " + e.global_parameter_json[0].fields.question_count + '</h3>        </div>        <div id="campaign_sign">        <p>' + e.candidate_last_name + "</p>        <p>" + e.running_mate_last_name + "</p>        </div>    </div>";
-        let game_winArr = Array.from($("#game_window")[0].children)
-        z = '<div class="inner_inner_window">        <h3>' + e.questions_json[e.question_number].fields.description + '</h3>            <div id="question_form">                <form name="question">' + s + '</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>'
-        for (i in game_winArr) {
-            if (game_winArr[i].getAttribute("id") != "main_content_area" && game_winArr[i].getAttribute("class") != "game_header" ) {
-                game_winArr[i].remove()
-            }
-        }
-        let game_window = $("#game_window")[0]
-        if ($("#main_content_area")[0])
-        $("#main_content_area")[0].style.display="none"
-
-        let inner_window_question = document.createElement("div")
-        inner_window_question.setAttribute("class", "inner_window_question")
-        inner_window_question.innerHTML = z
-        game_window.appendChild(inner_window_question)
-
-        let ports = document.createElement("g")
-        ports.innerHTML = l
-        game_window.appendChild(ports)
-
-        //$("#game_window").html(l)
-
-        $("#view_electoral_map").click(function() {
-            _(t)
-        })
-        
-        $("#answer_select_button").click(function() {
-            var nullN = $("input:radio[name=game_answers]:checked").val();
-            null == nullN && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(nullN)
-            campaignTrail_temp.skippingQuestion = false;
-
-            
-        })
-    }
-
-    function _(e) {
+    function _(_e) {
         //startTime = performance.now();
         if ($("#main_content_area")[0]) {
             let n = Array.from($("#game_window")[0].children)
@@ -1235,17 +1797,18 @@ function divideElectoralVotesProp(e, t) {
             game_window.appendChild(ftH)
             $("#main_content_area")[0].style.display=""
         } else {
-            $("#game_window").html('        <div class="game_header">            <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>        </div>        <div id="map_footer"><button id="resume_questions_button">Back to the game</button><button id="margin_switcher">Switch margin colouring gradient</button><button id="AdvisorButton">Enable/Disable Advisor Feedback</button></div>');
-            var t = r(e, 0);
+            $("#game_window").html('        <div class="game_header">            ' + corrr + '        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>        </div>        <div id="map_footer"><button id="resume_questions_button">Back to the game</button><button id="margin_switcher">Switch margin colouring gradient</button><button id="AdvisorButton">Enable/Disable Advisor Feedback</button></div>');
+            var t = rFunc(_e, 0);
+
             $("#map_container").usmap(t)
         }
         //endTime = performance.now();
         $("#resume_questions_button").click(function() {
-            o(e)
+            o(_e)
         })
         $("#AdvisorButton").click(function() {
                 campaignTrail_temp.answer_feedback_flg=AdvisorFeedbackArr[campaignTrail_temp.answer_feedback_flg]
-                o(e)
+                o(_e)
         })
         $("#margin_switcher").click(function() {
             if (campaignTrail_temp.margin_format == "#C9C9C9") {
@@ -1254,13 +1817,9 @@ function divideElectoralVotesProp(e, t) {
                 campaignTrail_temp.margin_format = "#C9C9C9"
             }
             window.localStorage.setItem("margin_form", campaignTrail_temp.margin_format)
-            o(e)
+            o(_e)
         })
     }
-
- 
-
-
 
 	function getLatestRes(t) {
         total_v = 0
@@ -1275,7 +1834,7 @@ function divideElectoralVotesProp(e, t) {
         const state = e.states_json[s];
 
         // finds the matching state in the array
-        
+
 
         // reverses and sorts the array by percent
         nArray.sort((a, b) => b.value - a.value);
@@ -1283,17 +1842,17 @@ function divideElectoralVotesProp(e, t) {
         // updates the total popular votes
         //total_v += campaignTrail_temp.states_json[s].fields.popular_votes;
         }
-        
+
         // Use Array.prototype.filter() method to filter e.candidate_json
         const filteredCandidates = e.candidate_json.filter(candidate =>
             containsObject(candidate.pk, e.opponents_list) || candidate.pk === e.candidate_id
         )
-        
+
         // Use Array.prototype.forEach() method to update filteredCandidates
         filteredCandidates.forEach(candidate => {
             candidate.popvs = 0
             candidate.evvs = 0
-          
+
             t.forEach(state => {
                 const stateIndex = e.states_json.map(f => f.pk).indexOf(state.state)
                 const stateElectoralVotes = e.states_json[stateIndex].fields.electoral_votes
@@ -1312,30 +1871,30 @@ function divideElectoralVotesProp(e, t) {
                 } else if (candidateIndex == 0 && !e.primary) {
                     candidate.evvs += stateElectoralVotes
                 }
-                
+
                 candidate.popvs += candidateResult.votes
                 total_v += candidateResult.votes
             })
 
-            
+
           })
           filteredCandidates.forEach(candidate => {
               candidate.pvp = candidate.popvs / total_v
               candidate.popvs = 0
           })
-        
+
         // Use Array.prototype.sort() method to sort filteredCandidates in descending order of pvp
         const sortedCandidates = filteredCandidates.sort((a, b) => b.pvp - a.pvp)
-        
+
         // Use Array.prototype.map() method to create nn2 and nn3 arrays
         nn2 = sortedCandidates.map(candidate => candidate)
         nn3 = sortedCandidates.map(candidate => candidate.evvs || 0)
-        
+
         return [nn2, n]
     }
 
 	function setStatePollText(s, t) {
-        
+
         const results = t.filter(({ abbr }) => abbr === e.states_json[s].fields.abbr);
         var doPrimaryMode = false
 
@@ -1368,7 +1927,7 @@ function divideElectoralVotesProp(e, t) {
             } else {
                 return `<b>${candidateName}</b> - ${(100 * percent).toFixed(2)}%<br>`;
             }
-            
+
         });
 
         const _ = formattedResults.join('');
@@ -1467,9 +2026,10 @@ function divideElectoralVotesProp(e, t) {
             var f = "                    <h3>STATE SUMMARY</h3>                    <p>" + e.states_json[s].fields.name + "</p>                    <ul>" + u + "</ul>                    <p>Electoral Votes: " + e.states_json[s].fields.electoral_votes + "</p>" + "                    <p>Popular Votes: " + e.states_json[s].fields.popular_votes.toLocaleString() + "</p>";
         }
 		$("#state_info").html(f);
+        issue_popup();
 	}
 
-    function r(t, i) {
+    rFunc = (t, i) => {
         for (var a = {}, s = 0; s < t.length; s++) {
             let item = t[s]
             // Find the result with the highest percent
@@ -1483,10 +2043,20 @@ function divideElectoralVotesProp(e, t) {
             const candidate = e.candidate_json.find(c => c.pk === winner);
             // Add the result to the map
 
-            a[item.abbr] = {
-              fill: candidate ? r2h(_interpolateColor(h2r(campaignTrail_temp.margin_format), h2r(candidate.fields.color_hex), gradient(Math.log((margin + 1)) * 4.5, 0, 1))) : null
-            };
-          }   
+            const latest_oppo_visit = e.opponent_visits[e.opponent_visits.length - 1];
+            if (e.game_type_id === "3" && i == 1 && Object.values(latest_oppo_visit).includes(item.state)) {
+                let cand = Object.keys(latest_oppo_visit)[Object.values(latest_oppo_visit).indexOf(item.state)];
+                cand = e.candidate_json.find(f=>f.pk===Number(cand));
+
+                a[item.abbr] = {
+                    fill: candidate ? r2h(_interpolateColor(h2r("#000000"), _interpolateColor(h2r(cand.fields.color_hex), h2r(candidate.fields.color_hex), gradient(Math.log((margin + 1)) * 4.5, 0, 1)), gradient(0.7, 0, 1))) : null
+                };
+            } else {
+                a[item.abbr] = {
+                    fill: candidate ? r2h(_interpolateColor(h2r(campaignTrail_temp.margin_format), h2r(candidate.fields.color_hex), gradient(Math.log((margin + 1)) * 4.5, 0, 1))) : null
+                };
+            }
+          }
 
         var c = function(i, a) {
                 res = getLatestRes(t)
@@ -1510,7 +2080,7 @@ function divideElectoralVotesProp(e, t) {
                         setStatePollText(s, t)
                         break
                     }
-				}            
+				}
 				},
             u = S(e.election_id);
         if (0 == i) var v = {
@@ -1548,7 +2118,7 @@ function divideElectoralVotesProp(e, t) {
         };
         return v
     }
-    
+
     function c(e, t) {
         P(e, "votes"), e.reverse();
         var i = (e[0].votes - e[1].votes) / (e[0].votes + e[1].votes);
@@ -1556,20 +2126,23 @@ function divideElectoralVotesProp(e, t) {
     }
 
     function u() {
-        var t = [],
-            i = E(e.candidate_id);
+        let t = [];
+        let i = E(e.candidate_id);
         t.push({
             candidate: e.candidate_id,
             priority: e.candidate_json[i].fields.priority,
             color: e.candidate_json[i].fields.color_hex,
             last_name: e.candidate_json[i].fields.last_name
         });
-        for (var a = 0; a < e.opponents_list.length; a++) i = E(e.opponents_list[a]), t.push({
-            candidate: e.opponents_list[a],
-            priority: e.candidate_json[i].fields.priority,
-            color: e.candidate_json[i].fields.color_hex,
-            last_name: e.candidate_json[i].fields.last_name
-        });
+        for (let a = 0; a < e.opponents_list.length; a++) {
+            i = E(e.opponents_list[a]);
+            t.push({
+                candidate: e.opponents_list[a],
+                priority: e.candidate_json[i].fields.priority,
+                color: e.candidate_json[i].fields.color_hex,
+                last_name: e.candidate_json[i].fields.last_name
+            });
+        }
         return P(t, "priority"), t
     }
 
@@ -1583,7 +2156,7 @@ function divideElectoralVotesProp(e, t) {
             }
         var l = [];
         for (a = 0; a < e.final_overall_results.length; a++) {
-            var o = [];
+            let o = [];
             for (s = 0; s < e.final_overall_results.length; s++) {
                 var _ = 1;
                 for (n = 0; n < l.length; n++) l[n].candidate == e.final_overall_results[s].candidate && (_ = 0);
@@ -1598,7 +2171,7 @@ function divideElectoralVotesProp(e, t) {
                 }
             l.push(o[c])
         }
-        
+
         return e.final_overall_results = l, i
     }
 
@@ -1627,9 +2200,10 @@ function divideElectoralVotesProp(e, t) {
                             var n = "                        <h3>STATE RESULTS</h3>                        <p>Returns for this state are not yet available!</p>";
                             $("#state_result").html(n)
                         } else {
+                            let o;
                             for (var l = 0; l < e.states_json.length; l++)
                                 if (e.states_json[l].fields.abbr == a.name) {
-                                    var o = l;
+                                    o = l;
                                     break
                                 }
                             var _ = "";
@@ -1643,7 +2217,7 @@ function divideElectoralVotesProp(e, t) {
                             } else {
                                 n = "                        <h3>STATE RESULTS</h3>                        <p>" + e.states_json[o].fields.name + "</p>                        <p>Electoral Votes: " + e.states_json[o].fields.electoral_votes + "<ul>" + _ + "</ul>                        </p>", $("#state_result").html(n)
                             }
-                            
+
                         }
                         break
                     }
@@ -1662,23 +2236,23 @@ function divideElectoralVotesProp(e, t) {
             for (let s = 0; s < e.states_json.length; s++) {
                 total_v += campaignTrail_temp.states_json[s].fields.popular_votes;
             }
-            
+
             // Use Array.prototype.forEach() method to update filteredCandidates
             filteredCandidates.forEach(candidate => {
                 candidate.popvs = 0
                 candidate.evvs = 0
-              
+
                 t.forEach(state => {
                     const stateIndex = e.states_json.map(f => f.pk).indexOf(state.state)
                     const stateElectoralVotes = e.states_json[stateIndex].fields.electoral_votes
-    
+
                     const candidateIndex = state.result.map(f => f.candidate).indexOf(candidate.pk)
                     const candidateResult = state.result[candidateIndex]
-    
+
                     if (e.primary_states) {
                         const primaryStates = JSON.parse(e.primary_states)
                         const primaryMap = primaryStates.map(f=>f.state)
-    
+
                         if (primaryMap.includes(state.state)) {
                             allocation = dHondtAllocation(state.result.map(f=>f.votes),stateElectoralVotes, 0.15)
                             candidate.evvs += allocation[candidateIndex]
@@ -1686,10 +2260,10 @@ function divideElectoralVotesProp(e, t) {
                     } else if (candidateIndex == 0 && !e.primary) {
                         candidate.evvs += stateElectoralVotes
                     }
-                    
+
                     candidate.popvs += candidateResult.votes
                 })
-    
+
                 candidate.pvp = candidate.popvs / total_v
                 candidate.popvs = 0
             })
@@ -1765,7 +2339,7 @@ function divideElectoralVotesProp(e, t) {
         try {
             date2 += " "+date.toString().match(/\(([A-Za-z\s].*)\)/)[1]
         } catch {}
-        
+
         e.historical_overall = "None", e.percentile = "None", e.game_results_url = "None", p()
         $.ajax({
             type: "POST",
@@ -1812,7 +2386,8 @@ function divideElectoralVotesProp(e, t) {
         var n = E(e.final_overall_results[0].candidate);
         if (e.final_overall_results[0].electoral_votes >= a) var l = e.candidate_json[n].fields.image_url;
         else l = e.election_json[t].fields.no_electoral_majority_image;
-        for (var o = 0, _ = 0; _ < e.final_overall_results.length; _++) o += e.final_overall_results[_].popular_votes;
+        let o;
+        for (o = 0, _ = 0; _ < e.final_overall_results.length; _++) o += e.final_overall_results[_].popular_votes;
         var r = "";
 
         if (important_info.indexOf("<html>") == -1 && important_info != "") {
@@ -1858,9 +2433,9 @@ function divideElectoralVotesProp(e, t) {
         if ("None" != e.game_results_url) var c = '<h4>Final Results: <a target="_blank" href="' + e.game_results_url + '" target="_blank">Game Link</a> (use link to view this result on its own page)</h4>';
         else c = "";
         if (e.primary) {
-          var u='<div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div id="main_content_area"> <div id="results_container"> <img class="person_image" src="' + l + '"/> <div id="final_results_description">' + s + '</div> ' + difficulty_string + ' <div id="overall_vote_statistics">' + c + ' <table class="final_results_table"> <br> <tr><th>Candidate</th><th>Delegates</th> <th>Popular Votes</th><th>Popular Vote %</th></tr>' + r + ' </table> </div> </div> </div> <div id="map_footer"> <button class="final_menu_button" id="overall_results_button" disabled="disabled"> Final Election Results </button> <button class="final_menu_button" id="final_election_map_button"> Election Map </button> <button class="final_menu_button" id="state_results_button"> Results by State </button> <button class="final_menu_button" id="overall_details_button"> Overall Results Details </button> <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button> <button class="final_menu_button" id="play_again_button"> Play Again! </button>  </div>'
+          var u='<div class="game_header"> ' + corrr + ' </div> <div id="main_content_area"> <div id="results_container"> <img class="person_image" src="' + l + '"/> <div id="final_results_description">' + s + '</div> ' + difficulty_string + ' <div id="overall_vote_statistics">' + c + ' <table class="final_results_table"> <br> <tr><th>Candidate</th><th>Delegates</th> <th>Popular Votes</th><th>Popular Vote %</th></tr>' + r + ' </table> </div> </div> </div> <div id="map_footer"> <button class="final_menu_button" id="overall_results_button" disabled="disabled"> Final Election Results </button> <button class="final_menu_button" id="final_election_map_button"> Election Map </button> <button class="final_menu_button" id="state_results_button"> Results by State </button> <button class="final_menu_button" id="overall_details_button"> Overall Results Details </button> <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button> <button class="final_menu_button" id="play_again_button"> Play Again! </button>  </div>'
         } else {
-          var u='<div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div id="main_content_area"> <div id="results_container"> <img class="person_image" src="' + l + '"/> <div id="final_results_description">' + s + '</div> ' + difficulty_string + ' <div id="overall_vote_statistics">' + c + ' <table class="final_results_table"> <br> <tr><th>Candidate</th><th>Electoral Votes</th> <th>Popular Votes</th><th>Popular Vote %</th></tr>' + r + ' </table> </div> </div> </div> <div id="map_footer"> <button class="final_menu_button" id="overall_results_button" disabled="disabled"> Final Election Results </button> <button class="final_menu_button" id="final_election_map_button"> Election Map </button> <button class="final_menu_button" id="state_results_button"> Results by State </button> <button class="final_menu_button" id="overall_details_button"> Overall Results Details </button> <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button> <button class="final_menu_button" id="play_again_button"> Play Again! </button>  </div>'
+          var u='<div class="game_header"> ' + corrr + ' </div> <div id="main_content_area"> <div id="results_container"> <img class="person_image" src="' + l + '"/> <div id="final_results_description">' + s + '</div> ' + difficulty_string + ' <div id="overall_vote_statistics">' + c + ' <table class="final_results_table"> <br> <tr><th>Candidate</th><th>Electoral Votes</th> <th>Popular Votes</th><th>Popular Vote %</th></tr>' + r + ' </table> </div> </div> </div> <div id="map_footer"> <button class="final_menu_button" id="overall_results_button" disabled="disabled"> Final Election Results </button> <button class="final_menu_button" id="final_election_map_button"> Election Map </button> <button class="final_menu_button" id="state_results_button"> Results by State </button> <button class="final_menu_button" id="overall_details_button"> Overall Results Details </button> <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button> <button class="final_menu_button" id="play_again_button"> Play Again! </button>  </div>'
         }
             $("#game_window").html(u);
         prev = document.getElementById("difficulty_mult").innerHTML
@@ -1908,8 +2483,8 @@ function divideElectoralVotesProp(e, t) {
                 if (e.final_overall_results[n].candidate == i[s].candidate) var l = e.final_overall_results[n].electoral_votes;
             a += '            <li><span style="color:' + i[s].color + "; background-color: " + i[s].color + '">--</span> ' + i[s].last_name + ":  " + l + "</li>"
         }
-        var o = S(e.election_id),
-_ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div id="main_content_area"> <div id="map_container"></div> <div id="menu_container"> <div id="overall_result_container"> <div id="overall_result"> <h3>ELECTORAL VOTES</h3> <ul>' + a + "</ul><p>" + e.election_json[o].fields.winning_electoral_vote_number + ' to win</p> </div> </div> <div id="state_result_container"> <div id="state_result"> <h3>STATE RESULTS</h3> <p>Click on a state to view final results.</p> </div> </div> </div> </div> <div id="map_footer"> <button class="final_menu_button" id="overall_results_button"> Final Election Results </button> <button class="final_menu_button" id="final_election_map_button" disabled="disabled"> Election Map </button> <button class="final_menu_button" id="state_results_button"> Results by State </button> <button class="final_menu_button" id="overall_details_button"> Overall Results Details </button> <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button> <button class="final_menu_button" id="play_again_button"> Play Again! </button> </div>    ';        $("#game_window").html(_), $("#map_container").usmap(t), $("#overall_results_button").click(function() {
+        let o = S(e.election_id),
+_ = '   <div class="game_header"> ' + corrr + ' </div> <div id="main_content_area"> <div id="map_container"></div> <div id="menu_container"> <div id="overall_result_container"> <div id="overall_result"> <h3>ELECTORAL VOTES</h3> <ul>' + a + "</ul><p>" + e.election_json[o].fields.winning_electoral_vote_number + ' to win</p> </div> </div> <div id="state_result_container"> <div id="state_result"> <h3>STATE RESULTS</h3> <p>Click on a state to view final results.</p> </div> </div> </div> </div> <div id="map_footer"> <button class="final_menu_button" id="overall_results_button"> Final Election Results </button> <button class="final_menu_button" id="final_election_map_button" disabled="disabled"> Election Map </button> <button class="final_menu_button" id="state_results_button"> Results by State </button> <button class="final_menu_button" id="overall_details_button"> Overall Results Details </button> <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button> <button class="final_menu_button" id="play_again_button"> Play Again! </button> </div>    ';        $("#game_window").html(_), $("#map_container").usmap(t), $("#overall_results_button").click(function() {
             p()
         }), $("#state_results_button").click(function() {
             g()
@@ -1977,7 +2552,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
         var g = "";
         for (s = 0; s < o.length; s++) g += '<option value="' + (20 + s) + '">Highest ' + o[s].last_name + " %</option>";
 
-        var j='    <div class="game_header">    \t<h2>CAMPAIGN TRAIL SHOWCASE</h2>\t</div>\t<div id="main_content_area">\t<div id="results_container">\t\t<h3 class="title_h3">Election Results and Data by State</h3>\t\t<div id="drop_down_area_state">\t\t\t<div id="sort_tab_area">\t\t\t<p>View states by:\t\t\t<select id="sort_tab">\t\t\t<option value="1">Alphabetical</option>\t\t\t<option value="2">Most Electoral Votes</option>\t\t\t<option value="3">Closest States</option>' + m + g + '</select>\t\t\t</p>\t\t\t</div>\t\t\t<div id="state_tab_area">\t\t\t<p>Select a state:\t\t\t<select id="state_tab">' + k(t) + '</select>\t\t\t</p>\t\t\t</div>\t\t</div>\t\t<div id="state_result_data_summary">' + T(t[0].state) + '</div>\t</div>\t<div id="results_container_description">\t</div>\t</div>\t<div id="map_footer">\t\t<button class="final_menu_button" id="overall_results_button">Final Election Results</button>\t\t<button class="final_menu_button" id="final_election_map_button">Election Map</button>\t\t<button class="final_menu_button" id="state_results_button" disabled="disabled">Results by State</button>\t\t<button class="final_menu_button" id="overall_details_button">Overall Results Details</button>\t\t<button class="final_menu_button" id="recommended_reading_button">Further Reading</button>\t\t<button class="final_menu_button" id="play_again_button">Play Again!</button>\t</div>';
+        var j='    <div class="game_header">    \t' + corrr + '\t</div>\t<div id="main_content_area">\t<div id="results_container">\t\t<h3 class="title_h3">Election Results and Data by State</h3>\t\t<div id="drop_down_area_state">\t\t\t<div id="sort_tab_area">\t\t\t<p>View states by:\t\t\t<select id="sort_tab">\t\t\t<option value="1">Alphabetical</option>\t\t\t<option value="2">Most Electoral Votes</option>\t\t\t<option value="3">Closest States</option>' + m + g + '</select>\t\t\t</p>\t\t\t</div>\t\t\t<div id="state_tab_area">\t\t\t<p>Select a state:\t\t\t<select id="state_tab">' + k(t) + '</select>\t\t\t</p>\t\t\t</div>\t\t</div>\t\t<div id="state_result_data_summary">' + T(t[0].state) + '</div>\t</div>\t<div id="results_container_description">\t</div>\t</div>\t<div id="map_footer">\t\t<button class="final_menu_button" id="overall_results_button">Final Election Results</button>\t\t<button class="final_menu_button" id="final_election_map_button">Election Map</button>\t\t<button class="final_menu_button" id="state_results_button" disabled="disabled">Results by State</button>\t\t<button class="final_menu_button" id="overall_details_button">Overall Results Details</button>\t\t<button class="final_menu_button" id="recommended_reading_button">Further Reading</button>\t\t<button class="final_menu_button" id="play_again_button">Play Again!</button>\t</div>';
         $("#game_window").html(j), $("#sort_tab").change(function() {
             if (1 == sort_tab.value) var e = k(t);
             else if (2 == sort_tab.value) e = k(i);
@@ -2014,10 +2589,11 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
                 n = e.candidate_json[s].fields.color_hex;
             a += '            <tr><td style="text-align: left;">            <span style="background-color: ' + n + "; color: " + n + ';">----</span> ' + (e.candidate_json[s].fields.first_name + " " + e.candidate_json[s].fields.last_name) + "</td><td> " + e.final_overall_results[i].electoral_votes + " </td><td> " + M(e.final_overall_results[i].popular_votes) + " </td><td> " + (e.final_overall_results[i].popular_votes / t * 100).toFixed(1) + "% </td></tr>"
         }
+        let o;
         if ("None" != e.percentile) var l = "<p>You have done better than approximately <strong>" + e.percentile + "%</strong> of the games that have been played with your candidate and difficulty level.</p>";
         else l = "";
         if ("None" != e.historical_overall) {
-            var o = "";
+            o = "";
             for (i = 0; i < e.historical_overall.length; i++) o += '<tr><td style="text-align: left;">                <span style="background-color: ' + e.historical_overall[i].color_hex + "; color: " + e.historical_overall[i].color_hex + ';">----</span>' + e.historical_overall[i].name + "</td><td>" + e.historical_overall[i].winning_pct.toFixed(2) + "</td><td>" + e.historical_overall[i].electoral_votes_avg.toFixed(1) + "</td><td>" + M(e.historical_overall[i].popular_votes_avg) + "</td><td>" + e.historical_overall[i].popular_vote_pct_avg.toFixed(2) + "</td><td>" + e.historical_overall[i].electoral_votes_min + " - " + e.historical_overall[i].electoral_votes_max + "</td><td>" + M(e.historical_overall[i].popular_votes_min) + " - " + M(e.historical_overall[i].popular_votes_max) + "</td></tr>";
             var _ = '<div id="overall_stat_details">            <h4>Historical Results - Your Candidate and Difficulty Level</h4>            <table>            <tr><th>Candidate</th>                <th>Win %</th>                <th>EV Avg.</th>                <th>PV Avg.</th>                <th>PV % Avg.</th>                <th>EV Range</th>                <th>PV Range</th>            </tr>' + o + "</table>            </div>"
         } else o = "", _ = "";
@@ -2029,7 +2605,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
            } else {
                 game_url = null
            }
-           var r='<div class="game_header"><h2>CAMPAIGN TRAIL SHOWCASE</h2></div> <div id="main_content_area"> <div id="overall_details_container"> <h3>Overall Election Details</h3> <div id="overall_election_details"> <h4>Results - This Game</h4> <table> <tbody> <tr> <th>Candidate</th> <th>Electoral Votes</th> <th>Popular Votes</th> <th>Popular Vote %</th> </tr>' + a + '</table>' + l + '</div> <div id="overall_election_details"> <h4>Results - Historical</h4> <table> <tbody> <tr> <th>Candidate</th> <th>Electoral Votes</th> <th>Popular Votes</th> <th>Popular Vote %</th> </tr> <tr> <td style="text-align: left;"><span style="background-color:' + HistHexcolour[0] + '; color:' + HistHexcolour[0] + ';">----</span>' + HistName[0] + '</td> <td>' + HistEV[0] + '</td> <td>' + HistPV[0] + '</td> <td>' + HistPVP[0] + '</td> </tr> <tr> <td style="text-align: left;"><span style="background-color:' + HistHexcolour[1] + '; color:' + HistHexcolour[1] + ';">----</span>' + HistName[1] + '</td> <td>' + HistEV[1] + '</td> <td>' + HistPV[1] + '</td> <td>' + HistPVP[1] + '</td> </tr> <tr> <td style="text-align: left;"><span style="background-color:' + HistHexcolour[2] + '; color:' + HistHexcolour[2] + ';">----</span>' + HistName[2] + '</td> <td>' + HistEV[2] + '</td> <td>' + HistPV[2] + '</td> <td>' + HistPVP[2] + '</td> </tr> <tr> <td style="text-align: left;"><span style="background-color:' + HistHexcolour[3] + '; color:' + HistHexcolour[3] + ';">----</span>' + HistName[3] + '</td> <td>' + HistEV[3] + '</td> <td>' + HistPV[3] + '</td> <td>' + HistPVP[3] + '</td> </tr> </tbody> </table><p><b><a style="font-size:15px;" href="'+game_url+'">GAME LINK</a><br> <button id="ExportFileButton" onclick="exportResults()" style="position: absolute; margin-top:10px;margin-left:-70px;">Export Game as File</button></b></p><br><br /> <br /></div></div><div id="map_footer"><button class="final_menu_button" id="overall_results_button">Final Election Results</button><button class="final_menu_button" id="final_election_map_button">Election Map</button><button class="final_menu_button" id="state_results_button">Results by State</button><button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button><button class="final_menu_button" id="recommended_reading_button">Further Reading</button><button class="final_menu_button" id="play_again_button">Play Again!</button></div> </div> </div> </div>'
+           var r='<div class="game_header">' + corrr + '</div> <div id="main_content_area"> <div id="overall_details_container"> <h3>Overall Election Details</h3> <div id="overall_election_details"> <h4>Results - This Game</h4> <table> <tbody> <tr> <th>Candidate</th> <th>Electoral Votes</th> <th>Popular Votes</th> <th>Popular Vote %</th> </tr>' + a + '</table>' + l + '</div> <div id="overall_election_details"> <h4>Results - Historical</h4> <table> <tbody> <tr> <th>Candidate</th> <th>Electoral Votes</th> <th>Popular Votes</th> <th>Popular Vote %</th> </tr> <tr> <td style="text-align: left;"><span style="background-color:' + HistHexcolour[0] + '; color:' + HistHexcolour[0] + ';">----</span>' + HistName[0] + '</td> <td>' + HistEV[0] + '</td> <td>' + HistPV[0] + '</td> <td>' + HistPVP[0] + '</td> </tr> <tr> <td style="text-align: left;"><span style="background-color:' + HistHexcolour[1] + '; color:' + HistHexcolour[1] + ';">----</span>' + HistName[1] + '</td> <td>' + HistEV[1] + '</td> <td>' + HistPV[1] + '</td> <td>' + HistPVP[1] + '</td> </tr> <tr> <td style="text-align: left;"><span style="background-color:' + HistHexcolour[2] + '; color:' + HistHexcolour[2] + ';">----</span>' + HistName[2] + '</td> <td>' + HistEV[2] + '</td> <td>' + HistPV[2] + '</td> <td>' + HistPVP[2] + '</td> </tr> <tr> <td style="text-align: left;"><span style="background-color:' + HistHexcolour[3] + '; color:' + HistHexcolour[3] + ';">----</span>' + HistName[3] + '</td> <td>' + HistEV[3] + '</td> <td>' + HistPV[3] + '</td> <td>' + HistPVP[3] + '</td> </tr> </tbody> </table><p><b><a style="font-size:15px;" href="'+game_url+'">GAME LINK</a><br> <button id="ExportFileButton" onclick="exportResults()" style="position: absolute; margin-top:10px;margin-left:-70px;">Export Game as File</button></b></p><br><br /> <br /></div></div><div id="map_footer"><button class="final_menu_button" id="overall_results_button">Final Election Results</button><button class="final_menu_button" id="final_election_map_button">Election Map</button><button class="final_menu_button" id="state_results_button">Results by State</button><button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button><button class="final_menu_button" id="recommended_reading_button">Further Reading</button><button class="final_menu_button" id="play_again_button">Play Again!</button></div> </div> </div> </div>'
            $("#game_window").html(r), $("#overall_results_button").click(function() {
             p()
         }), $("#final_election_map_button").click(function() {
@@ -2048,21 +2624,21 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
          if(RecReading!=true && modded==true)//if is modded and has no recommended reading
          {
           var t = S(e.election_id),
-          i = '        <div class="game_header">            <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div id="main_content_area_reading">            <h3 class="results_tab_header">Further Reading</h3>        <p>This election has no further reading.</p>           </div>        <div id="map_footer" style="margin-top:-35px">                <button class="final_menu_button" id="overall_results_button">                    Final Election Results                </button>                <button class="final_menu_button" id="final_election_map_button">                    Election Map                </button>                <button class="final_menu_button" id="state_results_button">                    Results by State                </button>                <button class="final_menu_button" id="overall_details_button">                    Overall Results Details                </button> <button class="final_menu_button" id="recommended_reading_button" disabled="disabled"> Further Reading    </button>          <button class="final_menu_button" id="play_again_button">                    Play Again!                </button>            </div>';
+          i = '        <div class="game_header">            ' + corrr + '        </div>        <div id="main_content_area_reading">            <h3 class="results_tab_header">Further Reading</h3>        <p>This election has no further reading.</p>           </div>        <div id="map_footer" style="margin-top:-35px">                <button class="final_menu_button" id="overall_results_button">                    Final Election Results                </button>                <button class="final_menu_button" id="final_election_map_button">                    Election Map                </button>                <button class="final_menu_button" id="state_results_button">                    Results by State                </button>                <button class="final_menu_button" id="overall_details_button">                    Overall Results Details                </button> <button class="final_menu_button" id="recommended_reading_button" disabled="disabled"> Further Reading    </button>          <button class="final_menu_button" id="play_again_button">                    Play Again!                </button>            </div>';
          }
          else if(modded==true)//is modded and has further reading
          {
           var t = S(e.election_id),
-          i = '        <div class="game_header">            <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div id="main_content_area_reading">            <h3 class="results_tab_header">Further Reading</h3>        <p>Are you interested in exploring the ' + e.election_json[0].fields.year + ' election further?         This page contains some further reading to get you up to speed.</p>        <div id="recommended_reading_box">' + e.election_json[t].fields.recommended_reading + '</div>        </div>        <div id="map_footer" style="margin-top:-35px">                <button class="final_menu_button" id="overall_results_button">                    Final Election Results                </button>                <button class="final_menu_button" id="final_election_map_button">                    Election Map                </button>                <button class="final_menu_button" id="state_results_button">                    Results by State                </button>                <button class="final_menu_button" id="overall_details_button">                    Overall Results Details                </button> <button class="final_menu_button" id="recommended_reading_button" disabled="disabled"> Further Reading    </button>                                <button class="final_menu_button" id="play_again_button">                    Play Again!                </button>            </div>';
+          i = '        <div class="game_header">            ' + corrr + '        </div>        <div id="main_content_area_reading">            <h3 class="results_tab_header">Further Reading</h3>        <p>Are you interested in exploring the ' + e.election_json[0].fields.year + ' election further?         This page contains some further reading to get you up to speed.</p>        <div id="recommended_reading_box">' + e.election_json[t].fields.recommended_reading + '</div>        </div>        <div id="map_footer" style="margin-top:-35px">                <button class="final_menu_button" id="overall_results_button">                    Final Election Results                </button>                <button class="final_menu_button" id="final_election_map_button">                    Election Map                </button>                <button class="final_menu_button" id="state_results_button">                    Results by State                </button>                <button class="final_menu_button" id="overall_details_button">                    Overall Results Details                </button> <button class="final_menu_button" id="recommended_reading_button" disabled="disabled"> Further Reading    </button>                                <button class="final_menu_button" id="play_again_button">                    Play Again!                </button>            </div>';
          }
          else//is base game
          {
           var t = S(e.election_id),
-          i = '        <div class="game_header">            <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div id="main_content_area_reading">            <h3 class="results_tab_header">Further Reading</h3>        <p>Are you interested in exploring the ' + e.election_json[t].fields.year + ' election further?         This page contains some further reading to get you up to speed.</p>        <div id="recommended_reading_box">' + e.election_json[t].fields.recommended_reading + '</div>        </div>        <div id="map_footer" style="margin-top:-35px">                <button class="final_menu_button" id="overall_results_button">                    Final Election Results                </button>                <button class="final_menu_button" id="final_election_map_button">                    Election Map                </button>                <button class="final_menu_button" id="state_results_button">                    Results by State                </button>                <button class="final_menu_button" id="overall_details_button">                    Overall Results Details                </button> <button class="final_menu_button" id="recommended_reading_button" disabled="disabled"> Further Reading    </button>                            <button class="final_menu_button" id="play_again_button">                    Play Again!                </button>            </div>';
+          i = '        <div class="game_header">            ' + corrr + '        </div>        <div id="main_content_area_reading">            <h3 class="results_tab_header">Further Reading</h3>        <p>Are you interested in exploring the ' + e.election_json[t].fields.year + ' election further?         This page contains some further reading to get you up to speed.</p>        <div id="recommended_reading_box">' + e.election_json[t].fields.recommended_reading + '</div>        </div>        <div id="map_footer" style="margin-top:-35px">                <button class="final_menu_button" id="overall_results_button">                    Final Election Results                </button>                <button class="final_menu_button" id="final_election_map_button">                    Election Map                </button>                <button class="final_menu_button" id="state_results_button">                    Results by State                </button>                <button class="final_menu_button" id="overall_details_button">                    Overall Results Details                </button> <button class="final_menu_button" id="recommended_reading_button" disabled="disabled"> Further Reading    </button>                            <button class="final_menu_button" id="play_again_button">                    Play Again!                </button>            </div>';
          }
 
-       
-      
+
+
 
 
                $("#game_window").html(i), $("#overall_results_button").click(function() {
@@ -2126,7 +2702,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
             }x
             return acc;
           }, []);
-        
+
           const l = n.reduce((acc, score) => acc + score, 0);
           const o =
             candidate === e.candidate_id && l < -0.4
@@ -2134,17 +2710,17 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
               : 1 + l;
           const c =
             candidate === e.candidate_id
-              ? o * (1 + F() * e.global_parameter_json[0].fields.global_variance) * e.difficulty_level_multiplier
-              : o * (1 + F() * e.global_parameter_json[0].fields.global_variance);
+              ? o * (1 + F(candidate) * e.global_parameter_json[0].fields.global_variance) * e.difficulty_level_multiplier
+              : o * (1 + F(candidate) * e.global_parameter_json[0].fields.global_variance);
           const _ = isNaN(c) ? 1 : c;
-        
+
           return {
             candidate,
             global_multiplier: _,
           };
         });
 
-        
+
         const u = i.map((candidate) => {
             const v = e.candidate_issue_score_json
               .filter((item) => item.fields.candidate === candidate)
@@ -2152,19 +2728,19 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
                 issue: item.fields.issue,
                 issue_score: item.fields.issue_score,
               }));
-          
+
             return {
               candidate_id: candidate,
               issue_scores: removeIssueDuplicates(v),
             };
           });
-          
+
         var f = [];
         for (a = 0; a < i.length; a++) {
             var m = [];
             for (r = 0; r < e.candidate_state_multiplier_json.length; r++)
                 if (e.candidate_state_multiplier_json[r].fields.candidate == i[a]) {
-                    var p = e.candidate_state_multiplier_json[r].fields.state_multiplier * s[a].global_multiplier * (1 + F() * e.global_parameter_json[0].fields.global_variance);
+                    var p = e.candidate_state_multiplier_json[r].fields.state_multiplier * s[a].global_multiplier * (1 + F(e.candidate_state_multiplier_json[r].fields.candidate) * e.global_parameter_json[0].fields.global_variance);
                     if (m.push({
                             state: e.candidate_state_multiplier_json[r].fields.state,
                             state_multiplier: p
@@ -2196,7 +2772,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
                     for (var j = 0; j < e.answer_score_state_json.length; j++) e.answer_score_state_json[j].fields.state == f[a].state_multipliers[r].state && e.answer_score_state_json[j].fields.answer == e.player_answers[d] && e.answer_score_state_json[j].fields.candidate == e.candidate_id && e.answer_score_state_json[j].fields.affected_candidate == i[a] && (w += e.answer_score_state_json[j].fields.state_multiplier);
                 if (0 == a) {
                     e.running_mate_state_id == f[a].state_multipliers[r].state && (w += .004 * f[a].state_multipliers[r].state_multiplier);
-                    for (d = 0; d < e.player_visits.length; d++) e.player_visits[d] == f[a].state_multipliers[r].state && (w += .005 * Math.max(.1, f[a].state_multipliers[r].state_multiplier))
+                    for (d = 0; d < e.player_visits.length; d++) e.player_visits[d] == f[a].state_multipliers[r].state && (w += .005 * Math.max(.1, f[a].state_multipliers[r].state_multiplier) * (e.shining_data.visit_multiplier ?? 1))
                 }
                 f[a].state_multipliers[r].state_multiplier += w
             }
@@ -2253,7 +2829,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
         for (a = 0; a < y.length; a++) {
             var I = R(y[a].state),
                 O = 0;
-            if (P(y[a].result, "percent"), y[a].result.reverse(), O = e.states_json[I].fields.electoral_votes, "1" == e.game_type_id)
+            if (P(y[a].result, "percent"), y[a].result.reverse(), O = e.states_json[I].fields.electoral_votes, ("1" == e.game_type_id || "3" == e.game_type_id))
                 if (1 == e.states_json[I].fields.winner_take_all_flg)
                     for (r = 0; r < y[a].result.length; r++) y[a].result[r].electoral_votes = 0 == r ? O : 0;
                 else {
@@ -2291,7 +2867,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
         if (2 == t) {
             for (a = 0; a < y.length; a++) {
                 for (r = 0; r < y[a].result.length; r++) {
-                    var G = 1 + F() * e.global_parameter_json[0].fields.global_variance;
+                    var G = 1 + F(y[a].result[r].candidate) * e.global_parameter_json[0].fields.global_variance;
                     y[a].result[r].result *= G
                 }
                 for (M = 0, r = 0; r < e.states_json.length; r++)
@@ -2345,14 +2921,6 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
         })
     }
 
-    function F() {
-        var e, t, i;
-        do {
-            i = (e = 2 * Math.random() - 1) * e + (t = 2 * Math.random() - 1) * t
-        } while (i >= 1 || 0 == i);
-        return e * Math.sqrt(-2 * Math.log(i) / i)
-    }
-
     function P(e, t) {
         return e.sort(function(e, i) {
             var a = e[t],
@@ -2373,7 +2941,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
                 e.candidate_id = Number(a)
                 for (var n = "", l = 0; l < e.running_mate_json.length; l++)
                     if (e.running_mate_json[l].fields.candidate == a) {
-                        var o = e.running_mate_json[l].fields.running_mate,
+                        let o = e.running_mate_json[l].fields.running_mate,
                             _ = -1;
                         for (j = 0; j < e.candidate_json.length; j++)
                             if (o == e.candidate_json[j].pk) {
@@ -2382,7 +2950,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
                             }
                         n += "<option value=" + e.candidate_json[_].pk + ">" + e.candidate_json[_].fields.first_name + " " + e.candidate_json[_].fields.last_name + "</option>"
                     }
-                var r = '        <div class="game_header">        <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div class="inner_window_w_desc" id="inner_window_4">            <div id="running_mate_form">            <form name="running mate">            <p><h3>Please select your running mate:</h3>            <select name="running_mate_id" id="running_mate_id">' + n + '</select>            </p>            </form>            </div>            <div class="person_description_window" id="running_mate_description_window">            </div>        <p><button class="person_button" id="running_mate_id_back">Back</button> <button class="person_button" id="running_mate_id_button">Continue</button>        </p>        </div>';
+                let r = '        <div class="game_header">        ' + corrr + '        </div>        <div class="inner_window_w_desc" id="inner_window_4">            <div id="running_mate_form">            <form name="running mate">            <p><h3>Please select your running mate:</h3>            <select name="running_mate_id" id="running_mate_id">' + n + '</select>            </p>            </form>            </div>            <div class="person_description_window" id="running_mate_description_window">            </div>        <p><button class="person_button" id="running_mate_id_back">Back</button> <button class="person_button" id="running_mate_id_button">Continue</button>        </p>        </div>';
                 $("#game_window").html(r), $("#running_mate_id").ready(function() {
                         i()
                     }), $("#running_mate_id").change(function() {
@@ -2393,12 +2961,15 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
                     $("#running_mate_id_back").click(candSel)
             }(a, candidate_id ? candidate_id.value : e.candidate_id)
     }
-    
+
     candSel = (a) => {
         a.preventDefault(),
             function(a) {
+                if (!modded)
+                    e.shining = e.shining_info.map(f=>f.pk).includes(a);
+
                 for (var n = "", l = 0; l < e.candidate_json.length; l++) e.candidate_json[l].fields.election == a && 1 == e.candidate_json[l].fields.is_active && (n += "<option value=" + e.candidate_json[l].pk + ">" + e.candidate_json[l].fields.first_name + " " + e.candidate_json[l].fields.last_name + "</option>");
-                var o = '<div class="game_header">        <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_w_desc" id="inner_window_3">        <div id="candidate_form">        <form name="candidate">            <p>            <h3>Please select your candidate:</h3>            <select name="candidate_id" id="candidate_id">' + n + '</select>            </p>        </form>        </div>        <div class="person_description_window" id="candidate_description_window">        </div>        <p><button class="person_button" id="candidate_id_back">Back</button> <button class="person_button" id="candidate_id_button">Continue</button>        </p>    </div>';
+                let o = '<div class="game_header">        ' + corrr + '    </div>    <div class="inner_window_w_desc" id="inner_window_3">        <div id="candidate_form">        <form name="candidate">            <p>            <h3>Please select your candidate:</h3>            <select name="candidate_id" id="candidate_id">' + n + '</select>            </p>        </form>        </div>        <div class="person_description_window" id="candidate_description_window">        </div>        <p><button class="person_button" id="candidate_id_back">Back</button> <button class="person_button" id="candidate_id_button">Continue</button>        </p>    </div>';
                 $("#game_window").html(o), $("#candidate_id").ready(function() {
                         t()
                     }), $("#candidate_id").change(function() {
@@ -2407,7 +2978,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
                     $("#candidate_id_back").click(gameStart)
             }(e.election_id ? e.election_id : election_id.value)
     }
-    
+
     gameStart = (a) => {
         a.preventDefault(),
             function() {
@@ -2417,7 +2988,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
                 for (var a = "", n = 0; n < e.temp_election_list.length; n++) 0 == e.temp_election_list[n].is_premium ? a += "<option value=" + e.temp_election_list[n].id + ">" + e.temp_election_list[n].display_year + "</option>" : 1 == e.show_premium ? a += "<option value=" + e.temp_election_list[n].id + ">" + e.temp_election_list[n].display_year + "</option>" : a += "<option value=" + e.temp_election_list[n].id + " disabled>" + e.temp_election_list[n].display_year + "</option>";
                 e.election_id = e.election_id ? e.election_id : e.election_json[0].pk
                 let inX = S(e.election_id)
-                var l = '<div class="game_header">            <h2>CAMPAIGN TRAIL SHOWCASE</h2>        </div>        <div class="inner_window_w_desc" id="inner_window_2">            <div id="election_year_form">            <form name="election_year">            <p>                <h3>Please select the election you will run in:</h3>    \t\t    <select name="election_id" id="election_id">' + a + '</select>            </p>            </form>            <div class="election_description_window" id="election_description_window">                <div id="election_image">                    <img src="' + e.election_json[inX].fields.image_url + '" width="300" height="160"/>                </div>                <div id="election_summary">' + e.election_json[inX].fields.summary + '</div>            </div>        </div>        <p><button id="election_id_button">Continue</button></p> <p id="credits">This scenario was made by ' + e.credits + '.</p>';
+                var l = '<div class="game_header">            ' + corrr + '        </div>        <div class="inner_window_w_desc" id="inner_window_2">            <div id="election_year_form">            <form name="election_year">            <p>                <h3>Please select the election you will run in:</h3>    \t\t    <select name="election_id" id="election_id">' + a + '</select>            </p>            </form>            <div class="election_description_window" id="election_description_window">                <div id="election_image">                    <img src="' + e.election_json[inX].fields.image_url + '" width="300" height="160"/>                </div>                <div id="election_summary">' + e.election_json[inX].fields.summary + '</div>            </div>        </div>        <p><button id="election_id_button">Continue</button></p> <p id="credits">This scenario was made by ' + e.credits + '.</p>';
                 $("#game_window").html(l)
                 $("#election_id")[0].value=e.election_id
                 $("#election_id").change(function() {
@@ -2431,7 +3002,7 @@ _ = '   <div class="game_header"> <h2>CAMPAIGN TRAIL SHOWCASE</h2> </div> <div i
                 }), $("#election_id_button").click(candSel)
             }()
     }
-    
+
     $("#game_start").click(gameStart), $("#skip_to_final").click(function(t) {
         e.final_state_results = A(1), electionNight()
     })
