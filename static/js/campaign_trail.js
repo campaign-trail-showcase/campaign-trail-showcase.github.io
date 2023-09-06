@@ -1376,6 +1376,11 @@ function divideElectoralVotesProp(e, t) {
                                 var e = A(return_type = 2);
                                 _(e);
                             })
+                            $("#answer_select_button").click(function() {
+                                var t = $("input:radio[name=game_answers]:checked").val();
+                                null == t && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(t)
+                                campaignTrail_temp.skippingQuestion = false;
+                            })
                             if ($("#answer_select_button")[0] != null) {
                                 clearInterval(important_code)
                             }
@@ -1437,6 +1442,11 @@ function divideElectoralVotesProp(e, t) {
                                 console.log("e",e)
                                 _(e);
                             })
+                            $("#answer_select_button").click(function() {
+                                var t = $("input:radio[name=game_answers]:checked").val();
+                                null == t && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(t)
+                                campaignTrail_temp.skippingQuestion = false;
+                            })
                             if ($("#answer_select_button")[0] != null) {
                                 clearInterval(important_code)
                             }
@@ -1455,6 +1465,11 @@ function divideElectoralVotesProp(e, t) {
                             $("#view_electoral_map").click(function() {
                                 let e = A(return_type = 2);
                                 _(e);
+                            })
+                            $("#answer_select_button").click(function() {
+                                var t = $("input:radio[name=game_answers]:checked").val();
+                                null == t && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(t)
+                                campaignTrail_temp.skippingQuestion = false;
                             })
                             if ($("#answer_select_button")[0] != null) {
                                 clearInterval(important_code)
