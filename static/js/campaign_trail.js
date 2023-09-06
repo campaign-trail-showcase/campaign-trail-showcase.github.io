@@ -76,34 +76,6 @@ var fileExists = function(url) {
 lastUpdatedDate="2023-08-20"
 var RecReading;
 
-achList = {
-    /*
-    "NotReal": [
-        "Achievement Name",
-        "Description",
-        "</table><br><b><em>1864</em></b><br><table>"
-    ]
-    */
-}
-
-// ~~Muffin~~ Achievement Button
-function addAchButton() {
-    const bottomBar = document.getElementById("bottomBar");
-    bottomBar.style.display = "";
-
-    const gameWin = document.getElementById("bottomBar");
-    const achievementDiv = document.createElement("div");
-
-    const stylesheetSet = "position: absolute; left: 10px; top: 5px;";
-
-    achievementDiv.innerHTML = `
-      <button id='achievMenuButton' style='width:200px;height:47px;font-size:150%;text-align:center'><b>Achievements</b></button>
-    `;
-    achievementDiv.style = stylesheetSet;
-
-    gameWin.appendChild(achievementDiv);
-}
-
 function simpleAdventure(ans) {
     return 1203;
 }
