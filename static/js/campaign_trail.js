@@ -1550,7 +1550,7 @@ function divideElectoralVotesProp(e, t) {
             return;
         }
 
-        console.log("Applying answer effects for answer pk " + t)
+        debugConsole("Applying answer effects for answer pk " + t)
         e.player_answers.push(Number(t));
         var i = 0,
             a = S(e.election_id);
