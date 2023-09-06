@@ -1,12 +1,27 @@
 let unlockedAch = localStorage.getItem("unlockedAch") ? JSON.parse(localStorage.getItem("unlockedAch")) : {};
 
+function findAchievementByName(name) {
+    for(mod in allAch) {
+        for(a in allAch[mod]) {
+            if(a == name) {
+                return allAch[mod][a];
+            }
+        }
+    }
+
+    return null;
+}
+
 function unlockAchievement(name) {
-    if(allAch[name] == null) {
+
+    const ach = findAchievementByName(name);
+
+    if(ach == null) {
         console.log("There is no achievement with the name '" + name +"'");
         return;
     }
 
-    if(cheatsActive && allAch[name].cannotBeCheated) {
+    if(cheatsActive && ach.cannotBeCheated) {
         console.log(`Would unlock '${name}' but won't because cheating!`);
         return;
     }
@@ -15,7 +30,7 @@ function unlockAchievement(name) {
         alert("ACHIEVEMENT UNLOCKED: " + name);
     }
 
-    unlockedAch[name] = allAch[name];
+    unlockedAch[name] = ach;
     localStorage.setItem("unlockedAch", JSON.stringify(unlockedAch));
     addAllAchievements();
 }
@@ -37,7 +52,8 @@ function closeAchievements() {
 
 dragElement(achWindow);
 
-function addAchivement(achName, achData) {
+// Returns true if the achievement is unlocked
+function addAchivement(achName, achData, parent, theme) {
     const ach = document.createElement("div");
     const locked = unlockedAch[achName] == null;
 
@@ -49,25 +65,90 @@ function addAchivement(achName, achData) {
         ach.classList.remove("locked");
     }
     ach.innerHTML = `
-    <div class="achTitle">
+    <div class="achTitle" style="${theme ? `color:${theme.ui_text_color}` : ""}">
         ${achName}
     </div>
     <div class="achImageHolder">
         <img class="achImage" src=${achData.image}></img>
     </div>
-    <div class="achText">
+    <div class="achText" style="${theme ? `background-color:${theme.description_background_color}; color:${theme.description_text_color}` : ""}">
         ${achData.description}
     </div>
     `
-    achContent.appendChild(ach);
+    
+    if(theme) {
+        ach.style.backgroundColor = theme.main_color;
+    }
+
+    parent.appendChild(ach);
+
+    return !locked;
 }
 
 function addAllAchievements() {
     let achAvail = false;
     achContent.innerHTML = "";
-    for(ach in allAch) {
+    for(modName in allAch) {
+        let count = 0;
+        let total = Object.values(allAch[modName]).length;
         achAvail = true;
-        addAchivement(ach, allAch[ach])
+        const holder = document.createElement("div");
+        holder.classList.add("achHolder");
+        const subHolder = document.createElement("div");
+        const labelHolder = document.createElement("div");
+        subHolder.classList.add("achSubHolder");
+        let theme = localStorage.getItem("customModBoxThemesEnabled") == "true" ? customModBoxThemes[modName] : null;
+
+        for(ach in allAch[modName]) {
+            if(addAchivement(ach, allAch[modName][ach], subHolder, theme)) {
+                count++;
+            };
+        }
+
+        const label = document.createElement("p");
+        label.innerHTML = `${namesOfModsFromValue[modName]}`;
+        labelHolder.innerHTML += `<span style="position:absolute;top:0;right:0;font-style:italic;opacity:80%;padding:8px;font-size:small;">(${(count/total)*100}%)</span>`
+        labelHolder.classList.add("achLabel");
+        labelHolder.appendChild(label);
+
+        const toggle = document.createElement("div");
+        toggle.classList.add("achToggle");
+        labelHolder.appendChild(toggle);
+        toggle.innerText = "+";
+
+
+        subHolder.style.visibility = "hidden";
+        subHolder.style.maxHeight = "0px";
+
+        labelHolder.onclick = () => {
+            if(subHolder.style.visibility != "hidden") {
+                toggle.innerText = "+";
+                subHolder.style.visibility = "hidden";
+                //subHolder.style.display = "none";
+                subHolder.style.maxHeight = "0px";
+            } 
+            else {
+                toggle.innerText = "-";
+                subHolder.style.visibility = "visible";
+                //subHolder.style.display = "inline-flex";
+                subHolder.style.maxHeight = "1000px";
+            }
+
+            for(let i = 0; i < subHolder.childElementCount; i++) {
+                let box = subHolder.children[i];
+                box.style.opacity = subHolder.style.visibility == "hidden" ? "0%" : "100%";
+            }
+        }
+
+        holder.appendChild(labelHolder);
+        holder.appendChild(subHolder);
+
+        achContent.append(holder);
+
+        if(theme) {
+            labelHolder.style.backgroundColor = theme.header_color;
+            labelHolder.style.color = theme.header_text_color;
+        }
     }
     if(!achAvail) {
         achContent.innerHTML = "No achievements are currently added yet! Check back later!";

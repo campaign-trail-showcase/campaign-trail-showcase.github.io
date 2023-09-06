@@ -26,6 +26,8 @@ let allAch = {};
 
 let ratedMods = JSON.parse(localStorage.getItem("ratedMods")) ?? {};
 
+const namesOfModsFromValue = {};
+
 if(localStorage.getItem("customModBoxThemesEnabled") === null) {
     localStorage.setItem("customModBoxThemesEnabled", "true");
 }
@@ -94,9 +96,7 @@ function getAllAchievements(rawModText, nameOfMod) {
         return;
     }
 
-    for(ach in temp.achievements) {
-        allAch[ach] = temp.achievements[ach];
-    }
+    allAch[nameOfMod] = temp.achievements;
 }
 
 function extractElectionDetails(rawModText, nameOfMod) {
@@ -278,6 +278,7 @@ function createModView(mod, imageUrl, description, isCustom) {
     modView.setAttribute("tags", mod.dataset.tags);
     modView.setAttribute("mod-name", mod.value);
     modView.setAttribute("mod-display-name", mod.innerText.toLowerCase());
+    namesOfModsFromValue[mod.value] = mod.innerText;
 
     const favText = isFavorite(mod.value) ? UNFAV : FAV; 
 

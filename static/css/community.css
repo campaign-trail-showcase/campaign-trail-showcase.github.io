@@ -188,7 +188,43 @@
   left: 5px;
 }
 
+.achHolder {
+  outline: #3d3b46;
+  outline-width: 2px;
+  outline-style: solid;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.achSubHolder {
+  transition: max-height 0.3s ease-out;
+}
+
+.achSubHolder {
+  display: inline-flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.achLabel {
+  display:flex;
+  justify-content: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 0px;
+  font-size: xx-large;
+  font-weight: bolder;
+  background-color: #BFE6FF;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
 .achBox {
+  transition: all 0.2s ease-out;
   height: 250px;
   max-height: 250px;
   max-width: 150px;
@@ -212,6 +248,18 @@
   outline-color: white;
   outline-style: auto;
   outline-width: 10px;
+  position: relative;
+}
+
+.achToggle {
+  user-select: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  opacity: 80%;
 }
 
 .achImage {
@@ -237,6 +285,8 @@
   overflow-x:hidden;
   height: 20%;
   font-size: 12px;
+  border-radius: 5px;
+    padding: 5px;
 }
 
 .locked {
