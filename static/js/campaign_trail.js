@@ -1187,70 +1187,6 @@ function divideElectoralVotesProp(e, t) {
         }
     }
 
-    let issue_popup = () => {
-        let kill = true;
-        try {
-            kill = !(e.issues_json[0].fields.description.length > 1)
-        } catch {kill = true}
-
-        if (kill) {
-            return;
-        }
-
-        let createPopupContent = (issue) => {
-            const popupContent = document.createElement('div');
-
-            const issueName = document.createElement('h3');
-            issueName.textContent = issue.fields.name;
-            popupContent.appendChild(issueName);
-
-            const mainContent = document.createElement('div');
-            mainContent.className = 'popup-content';
-
-            const issueDescription = document.createElement('p');
-            issueDescription.textContent = issue.fields.description;
-            mainContent.appendChild(issueDescription);
-
-            for (let i = 1; i <= 7; i++) {
-                const stance = issue.fields[`stance_${i}`];
-                const stanceDescription = issue.fields[`stance_desc_${i}`];
-                
-                if (stanceDescription !== 0 && stanceDescription.length > 0) {
-                    const stanceTitle = document.createElement('b');
-                    stanceTitle.textContent = stance;
-                    mainContent.appendChild(stanceTitle);
-
-                    const stanceDesc = document.createElement('p');
-                    stanceDesc.textContent = stanceDescription;
-                    stanceDesc.className = "stance_desc";
-                    mainContent.appendChild(stanceDesc);
-                }
-            }
-
-            popupContent.appendChild(mainContent);
-
-            return popupContent;
-        
-        }
-
-        $("#state_info")[0].outerHTML = $("#state_info")[0].outerHTML;
-
-        for (const issue of e.issues_json) {
-            $(`#issue_${issue.pk}`)[0].addEventListener('click', () => {
-
-                $("#state_info")[0].innerHTML = `
-                    <div class="overlay_tab_i" id="popup_content_container"></div>
-                `;
-
-                const popupContent = createPopupContent(issue);
-                $("#popup_content_container")[0].appendChild(popupContent);
-                
-            });
-
-            $(`#issue_${issue.pk}`)[0].style.cursor = "pointer";
-        }
-    }
-
     function s(t, i, l) {
         let difficultyStr;
         for (difficultyStr = "", r = 0; r < e.difficulty_level_json.length; r++) "Normal" == e.difficulty_level_json[r].fields.name ? difficultyStr += "<option value=" + e.difficulty_level_json[r].pk + " selected>" + e.difficulty_level_json[r].fields.name + "</option>" : difficultyStr += "<option value=" + e.difficulty_level_json[r].pk + ">" + e.difficulty_level_json[r].fields.name + "</option>";
@@ -1997,7 +1933,6 @@ function divideElectoralVotesProp(e, t) {
             var f = "                    <h3>STATE SUMMARY</h3>                    <p>" + e.states_json[s].fields.name + "</p>                    <ul>" + u + "</ul>                    <p>Electoral Votes: " + e.states_json[s].fields.electoral_votes + "</p>" + "                    <p>Popular Votes: " + e.states_json[s].fields.popular_votes.toLocaleString() + "</p>";
         }
 		$("#state_info").html(f);
-        issue_popup();
 	}
 
     rFunc = (t, i) => {
