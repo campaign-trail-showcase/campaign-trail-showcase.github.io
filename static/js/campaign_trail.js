@@ -972,13 +972,6 @@ function divideElectoralVotesProp(e, t) {
     }
 
     function electionNight() {
-        if (e.bigshot_mode) { // minimise the bigshot window once election night starts
-            const cheatMenu = document.querySelector('.cheat_menu');
-            if (cheatMenu) {
-                cheatMenu.classList.add('minimized');
-            }
-        }
-
         ! function() {
             for (var t = u(), i = "", a = 0; a < t.length; a++) i += '            <li><span style="color:' + t[a].color + "; background-color: " + t[a].color + '">--</span> ' + t[a].last_name + ":  0</li>";
             var s = S(e.election_id),
@@ -1481,7 +1474,8 @@ function divideElectoralVotesProp(e, t) {
 
     function n(t) {
 
-        if ($("#visit_overlay")[0]) {
+        const stopSpacebar = false;
+        if (stopSpacebar && $("#visit_overlay")[0]) {
             debugConsole("Visit overlay is showing, not applying answer effects")
             return;
         }
