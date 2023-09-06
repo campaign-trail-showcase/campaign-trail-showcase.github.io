@@ -1,8 +1,16 @@
 // Custom variables
 
+const DEBUG = true;
+
 campaignTrail_temp.issue_font_size = null;
 e=campaignTrail_temp
 e.shining_data = {}
+
+function debugConsole(...args) {
+    if(DEBUG) {
+        console.log(...args)
+    }
+}
 
 function removeIssueDuplicates(array) {
     const a = array.filter((item, index) => array.map(f=>f.issue).indexOf(item.issue) == index);
@@ -320,24 +328,6 @@ moddercheckeror = false
 code222 = []
 kill = false
 important_info = ""
-
-/*
-function loadMod(code1, code2) {
-    kill = false
-    if (moddercheckeror == false) {
-        eval(code1)
-        moddercheckeror = true
-        var important_code = setInterval(function() {
-            if ($("#answer_select_button")[0] != null && kill == false) {
-                eval(code2)
-                if (kill == false)
-                    kill = true
-            }
-            i += 1
-        }, 1000);
-    }
-}
-*/
 
 // getResults is a way to get results for an election without using custom endings
 // Mainly for backporting achivements to old mods
@@ -991,11 +981,22 @@ function divideElectoralVotesProp(e, t) {
             shining_menu(t);
         })
 
-        $("#answer_select_button")[0].addEventListener("click", function() {
-            var nullN = $("input:radio[name=game_answers]:checked").val();
-            null == nullN && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(nullN);
-            campaignTrail_temp.skippingQuestion = false;
-        })
+        let answerButton = $("#answer_select_button")[0];
+        answerButton.addEventListener("click", onAnswerSelectButtonClicked);
+    }
+
+    function onAnswerSelectButtonClicked() {
+        var selectedAnswerPk = $("input:radio[name=game_answers]:checked").val();
+        debugConsole("answer button clicked, skip question? ", campaignTrail_temp.skippingQuestion, "selected answer", selectedAnswerPk)
+        if(null == selectedAnswerPk && !campaignTrail_temp.skippingQuestion) {
+            // Show "you must select answer"
+            C(e.election_id);
+        }
+        else {
+            // Apply effects
+            n(selectedAnswerPk)
+        };
+        campaignTrail_temp.skippingQuestion = false;
     }
 
     function electionNight() {
@@ -1376,11 +1377,8 @@ function divideElectoralVotesProp(e, t) {
                                 var e = A(return_type = 2);
                                 _(e);
                             })
-                            $("#answer_select_button").click(function() {
-                                var t = $("input:radio[name=game_answers]:checked").val();
-                                null == t && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(t)
-                                campaignTrail_temp.skippingQuestion = false;
-                            })
+                            let answerButton = $("#answer_select_button")[0];
+                            answerButton.addEventListener("click", onAnswerSelectButtonClicked);
                             if ($("#answer_select_button")[0] != null) {
                                 clearInterval(important_code)
                             }
@@ -1442,11 +1440,8 @@ function divideElectoralVotesProp(e, t) {
                                 console.log("e",e)
                                 _(e);
                             })
-                            $("#answer_select_button").click(function() {
-                                var t = $("input:radio[name=game_answers]:checked").val();
-                                null == t && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(t)
-                                campaignTrail_temp.skippingQuestion = false;
-                            })
+                            let answerButton = $("#answer_select_button")[0];
+                            answerButton.addEventListener("click", onAnswerSelectButtonClicked);
                             if ($("#answer_select_button")[0] != null) {
                                 clearInterval(important_code)
                             }
@@ -1466,11 +1461,8 @@ function divideElectoralVotesProp(e, t) {
                                 let e = A(return_type = 2);
                                 _(e);
                             })
-                            $("#answer_select_button").click(function() {
-                                var t = $("input:radio[name=game_answers]:checked").val();
-                                null == t && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(t)
-                                campaignTrail_temp.skippingQuestion = false;
-                            })
+                            let answerButton = $("#answer_select_button")[0];
+                            answerButton.addEventListener("click", onAnswerSelectButtonClicked);
                             if ($("#answer_select_button")[0] != null) {
                                 clearInterval(important_code)
                             }
@@ -1580,7 +1572,13 @@ function divideElectoralVotesProp(e, t) {
     }
 
     function n(t) {
-        if ($("#visit_overlay")[0]) return;
+
+        if ($("#visit_overlay")[0]) {
+            debugConsole("Visit overlay is showing, not applying answer effects")
+            return;
+        }
+
+        console.log("Applying answer effects for answer pk " + t)
         e.player_answers.push(Number(t));
         var i = 0,
             a = S(e.election_id);
