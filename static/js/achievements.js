@@ -88,7 +88,9 @@ function addAchivement(achName, achData, parent, theme) {
 function addAllAchievements() {
     let achAvail = false;
     achContent.innerHTML = "";
-    for(modName in allAch) {
+    let names = Object.keys(allAch).sort();
+    for(let i = 0; i < names.length; i++) {
+        const modName = names[i];
         let count = 0;
         let total = Object.values(allAch[modName]).length;
         achAvail = true;
