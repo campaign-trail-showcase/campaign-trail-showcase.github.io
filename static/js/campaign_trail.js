@@ -993,7 +993,8 @@ function divideElectoralVotesProp(e, t) {
 
         $("#answer_select_button")[0].addEventListener("click", function() {
             var nullN = $("input:radio[name=game_answers]:checked").val();
-            null == nullN ? C(e.election_id) : n(nullN)
+            null == nullN && !campaignTrail_temp.skippingQuestion ? C(e.election_id) : n(nullN);
+            campaignTrail_temp.skippingQuestion = false;
         })
     }
 
