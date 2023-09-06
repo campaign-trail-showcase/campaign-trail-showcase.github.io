@@ -107,7 +107,7 @@ function addAllAchievements() {
 
         const label = document.createElement("p");
         label.innerHTML = `${namesOfModsFromValue[modName]}`;
-        labelHolder.innerHTML += `<span style="position:absolute;top:0;right:0;font-style:italic;opacity:80%;padding:8px;font-size:small;">(${(count/total)*100}%)</span>`
+        labelHolder.innerHTML += `<span style="position:absolute;top:0;right:0;font-style:italic;opacity:80%;padding:8px;font-size:small;">(${((count/total)*100).toFixed(2)}%)</span>`
         labelHolder.classList.add("achLabel");
         labelHolder.appendChild(label);
 
