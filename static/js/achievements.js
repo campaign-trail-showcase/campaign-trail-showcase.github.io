@@ -116,7 +116,7 @@ function addAllAchievements() {
         labelHolder.appendChild(toggle);
         toggle.innerText = "+";
 
-
+        subHolder.style.display = "none";
         subHolder.style.visibility = "hidden";
         subHolder.style.maxHeight = "0px";
 
