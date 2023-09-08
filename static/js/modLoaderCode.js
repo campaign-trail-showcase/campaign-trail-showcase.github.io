@@ -591,7 +591,7 @@ function loadModFromButton(modValue) {
 
 function copyModLink() {
     const modLink = document.location.href + "?modName=" + modBeingPlayed;
-    navigator.clipboard.writeText(modLink);
+    window.navigator.clipboard.writeText(modLink);
     alert("Copied link to clipboard!");
 }
 
