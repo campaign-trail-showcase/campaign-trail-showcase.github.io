@@ -26,6 +26,8 @@ let allAch = {};
 
 let ratedMods = JSON.parse(localStorage.getItem("ratedMods")) ?? {};
 
+let modBeingPlayed = ""
+
 const namesOfModsFromValue = {};
 
 if(localStorage.getItem("customModBoxThemesEnabled") === null) {
@@ -577,7 +579,20 @@ function loadModFromButton(modValue) {
     document.getElementById("featured-mods-area").style.display = "none";
     modded = true;
 
+    modBeingPlayed = modValue;
+
+    if(!customMods.has(modValue)) {
+        document.getElementById("copyLinkButton").style.display = "block";
+    }
+    
+
     setTimeout(() => updateModViewCount(modValue), 10000);
+}
+
+function copyModLink() {
+    const modLink = document.location.href + "?modName=" + modBeingPlayed;
+    navigator.clipboard.writeText(modLink);
+    alert("Copied link to clipboard!");
 }
 
 async function updateModViewCount(modName) {
