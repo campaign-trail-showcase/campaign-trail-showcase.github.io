@@ -576,7 +576,7 @@ function loadModFromButton(modValue) {
     document.getElementById("featured-mods-area").style.display = "none";
     modded = true;
 
-    updateModViewCount(modValue);
+    setTimeout(() => updateModViewCount(modValue), 10000);
 }
 
 async function updateModViewCount(modName) {
