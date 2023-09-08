@@ -549,6 +549,7 @@ function loadRandomMod() {
 function loadModFromButton(modValue) {
 
     if(modValue == "0000Random_Mod") {
+        setTimeout(() => updateModViewCount(modValue), 10000);
         loadRandomMod();
         return;
     }
