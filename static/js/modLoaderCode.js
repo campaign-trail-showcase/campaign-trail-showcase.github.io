@@ -589,9 +589,9 @@ function loadModFromButton(modValue) {
     setTimeout(() => updateModViewCount(modValue), 10000);
 }
 
-function copyModLink() {
+async function copyModLink() {
     const modLink = document.location.href + "?modName=" + modBeingPlayed;
-    window.navigator.clipboard.writeText(modLink);
+    await window.navigator.clipboard.writeText(modLink);
     alert("Copied link to clipboard!");
 }
 
