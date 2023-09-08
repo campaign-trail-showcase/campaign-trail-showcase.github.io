@@ -298,6 +298,7 @@ function createModView(mod, imageUrl, description, isCustom) {
     ${!customMods.has(mod.value) ? `
     <div ${theme ? `style="background-color:${theme.secondary_color};"` : ''} class="rating-background">
     <div ${theme ? `style="color:${theme.ui_text_color};"` : ''} class="modRating">LOADING FAVORITES...</div>
+    <div ${theme ? `style="color:${theme.ui_text_color};"` : ''} class="modPlayCount">LOADING PLAYS...</div>
     </div>` : ""}
     `
 
@@ -307,7 +308,7 @@ function createModView(mod, imageUrl, description, isCustom) {
 
     modView.id = mod.value;
 
-    getFavs(mod.value, modView);
+    getFavsAndPlayCount(mod.value, modView);
 
     return modView;
 }
@@ -334,7 +335,7 @@ function configureRatingButtons(modName, modView)
 
 }
 
-async function getFavs(modName, modView) {
+async function getFavsAndPlayCount(modName, modView) {
 
     if(customMods.has(modName)) return;
     
@@ -348,10 +349,14 @@ async function getFavs(modName, modView) {
         })
         const ratingData = await res.json();
         modView.getElementsByClassName("modRating")[0].innerHTML = `<span style="font-weight:bold">${ratingData.favs} FAVORITES</span>` ;
+        modView.getElementsByClassName("modPlayCount")[0].innerHTML = `<span style="font-weight:bold">${ratingData.playCount ?? 0} PLAYS</span>` ;
         modView.dataset.favs = ratingData.favs;
+        modView.dataset.playCount = ratingData.playCount ?? 0;
     }
     catch {
-        modView.getElementsByClassName("modRating")[0].innerHTML = "Failed to get total. Try again later.";
+        modView.getElementsByClassName("modRating")[0].innerHTML = "Failed to get mod info. Try again later.";
+        modView.getElementsByClassName("modPlayCount")[0].innerHTML = `` ;
+        modView.dataset.playCount = 0;
         modView.dataset.favs = 0;
     }
 
@@ -373,7 +378,7 @@ async function toggleFav(event, modName, favVal) {
     });
 
     const modView = document.getElementById(modName);
-    await getFavs(modName, modView);
+    await getFavsAndPlayCount(modName, modView);
 }
 
 function addCustomModButton() {
@@ -473,6 +478,9 @@ function onChangeModSorter(e) {
     else if(e.target.value == "leastFav") {
         sortModViews((a,b) => a.dataset.favs - b.dataset.favs);
     }
+    else if(e.target.value == "mostPlays") {
+        sortModViews((a,b) => b.dataset.playCount - a.dataset.playCount);
+    }
 }
 
 function sortModViews(comparisonFunction) {
@@ -566,7 +574,22 @@ function loadModFromButton(modValue) {
     $("#modloaddiv")[0].style.display = 'none'
     $("#modLoadReveal")[0].style.display = 'none'
     document.getElementById("featured-mods-area").style.display = "none";
-    modded = true
+    modded = true;
+
+    updateModViewCount(modValue);
+}
+
+async function updateModViewCount(modName) {
+    if(customMods.has(modName)) return;
+
+    await fetch('https://cts-backend-w8is.onrender.com/api/play_mod', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ "modName": modName })
+    });
 }
 
 function getAllIndexes(arr, val) {
