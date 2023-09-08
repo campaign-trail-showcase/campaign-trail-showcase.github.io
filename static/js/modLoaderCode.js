@@ -291,7 +291,7 @@ function createModView(mod, imageUrl, description, isCustom) {
     <img class="mod-image" src="${imageUrl}"></img>
     <div ${theme ? `style="background-color:${theme.description_background_color}; color:${theme.description_text_color};"` : ''} class="mod-desc" >${description}</div>
     <div class="hover-button-holder">
-        <button ${theme ? `style="background-color:${theme.secondary_color};"` : ''} class="hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${PLAY}</span></button>
+        <button ${theme ? `style="background-color:${theme.secondary_color};"` : ''} class="mod-play-button hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${PLAY}</span></button>
         <button ${theme ? `style="background-color:${theme.secondary_color};"` : ''} class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${favText}</span></button>
         <button style="${customMods.has(mod.value) ? "" : "display:none;"}${theme ? `background-color:${theme.secondary_color};"` : ''}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ''}>${DELETE}</span></button>
     </div>
@@ -533,7 +533,18 @@ function toggleFavorite(event, modValue) {
     updateModViews();
 }
 
+function loadRandomMod() {
+    const modView = choose(modList);
+    modView.querySelector(".mod-play-button").click();
+}
+
 function loadModFromButton(modValue) {
+
+    if(modValue == "0000Random_Mod") {
+        loadRandomMod();
+        return;
+    }
+
     loadingFromModButton = true;
     e = campaignTrail_temp
     if(customMods.has(modValue)) {
