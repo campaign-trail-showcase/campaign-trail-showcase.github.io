@@ -2,15 +2,17 @@ document.head.innerHTML += "<style>#recommended_reading_box {color:black}</style
 
 e = campaignTrail_temp;
 e.collect_results = true;
-var music = new Audio('https://cdn.discordapp.com/attachments/1098488379575914516/1146956485679665162/y2mate.is_-_1956_HITS_ARCHIVE_I_Could_Have_Danced_All_Night_Sylvia_Syms-FlxYw8lmHm0-192k-1693526020.mp3');
+if (!e.runIntro) {
+
+  var music = new Audio('https://cdn.discordapp.com/attachments/1098488379575914516/1146956485679665162/y2mate.is_-_1956_HITS_ARCHIVE_I_Could_Have_Danced_All_Night_Sylvia_Syms-FlxYw8lmHm0-192k-1693526020.mp3');
 music.loop = true; 
 music.play();
-if (!e.runIntro) {
+
 e.runIntro = true;
 RecReading=true
 quotes = ["“Whoever kindles the flame of intolerance in America is lighting a fire underneath his own home.” ~ Harold Stassen"]
 customquote = quotes[Math.floor((Math.random() * quotes.length))]
-corrr=`\n<h2>NEW CAMPAIGN TRAIL</h2><font id='wittyquote' size='4' color='white'><em>`+customquote+`</em></font>`
+corrr=`\n<h2>CAMPAIGN TRAIL SHOWCASE</h2><font id='wittyquote' size='4' color='white'><em>`+customquote+`</em></font>`
 campaignTrail_temp.modBoxTheme = {
   "header_color": "#3a0000",
   "header_text_color": "#bbbbbb",
@@ -392,7 +394,7 @@ document.head.appendChild(customStyling);
         quotes = ["“McCarthyism is Americanism with its sleeves rolled.” ~ Joseph McCarthy", "“At long last, have you left no sense of decency?” ~ Joe Welsh", "“It is double pleasure to deceive the deceiver.” ~ Niccholo Machiavelli", "“There will be no interruptions, unless I think it's of importance.” ~ Joseph McCarthy", "“Roy Cohn is here speaking for Roy Cohn.” ~ Roy Cohn", "“Your motives are not always as altruistic as they seem to yourself.” ~ Bertrand Russell", "“The trouble with free elections is that you never know how they are going to turn out.” ~ Vyecheslav Molotov", "“Politics is theater, but it's more than that.  It concerns the future of all our citizens.” ~ John McCormack"]
         customquote = quotes[Math.floor((Math.random() * quotes.length))]
         
-        corrr=`\n<h2>NEW CAMPAIGN TRAIL</h2><font id='wittyquote' size='4' color='white'><em>`+customquote+`</em></font>`
+        corrr=`\n<h2>CAMPAIGN TRAIL SHOWCASE</h2><font id='wittyquote' size='4' color='white'><em>`+customquote+`</em></font>`
         document.body.background = "https://i.imgur.com/BW5QO74.jpg" 
         bannerlist=["https://cdn.discordapp.com/attachments/1112942334229876816/1133919670806786098/image.png"]
         document.getElementById("header").src = bannerlist[Math.floor((Math.random() * bannerlist.length))] 
@@ -794,6 +796,8 @@ function newMusicPlayer() {
   $("#game_start").click((event) => {
     event.preventDefault();
     $("#election_id_button").click((event) => {
+      console.log(music)
+        music.pause();
         musicMode()
 
         setInterval(changeFontColour, 200)
