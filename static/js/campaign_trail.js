@@ -1,6 +1,6 @@
 // Custom variables
 
-const DEBUG = false;
+let DEBUG = false;
 
 campaignTrail_temp.issue_font_size = null;
 e=campaignTrail_temp
@@ -2696,6 +2696,12 @@ _ = '   <div class="game_header"> ' + corrr + ' </div> <div id="main_content_are
                 }
                 for (d = 0; d < f[r].state_multipliers.length; d++)
                     if (f[r].state_multipliers[d].state == f[0].state_multipliers[a].state) var C = d;
+
+                if(DEBUG) {
+                    console.log(`From key ${r} into f, trying to get state multiplier index ${C}`);
+                    console.log(f[r].state_multipliers[C]);
+                }
+
                 $ *= f[r].state_multipliers[C].state_multiplier, $ = Math.max($, 0), k.push({
                     candidate: i[r],
                     result: $
