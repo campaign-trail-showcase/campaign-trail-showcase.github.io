@@ -429,7 +429,7 @@ function createTagButtons(tagsFound) {
         tagButton.classList.add("tag-button");
         tagButton.innerHTML = `
         <input type="checkbox" id="${tag}" name="${tag}" value="${tag}" checked>
-        <label style="user-select:none" for="${tag}">${tag}</label><br>
+        <label style="user-select:none" for="${tag}">${tag.replaceAll("_", " ")}</label><br>
         `;
         tagsGrid.appendChild(tagButton);
         const checkbox = tagButton.getElementsByTagName("INPUT")[0];
