@@ -1782,18 +1782,6 @@ function loadScript(url, callback) {
   document.head.appendChild(script);
 }
 
-function mcaHeight() {
-    var mca = document.getElementById("main_content_area");
-    var map = document.getElementById("map_container")
-    if (mca) {
-      mca.style.height = "79%";
-      if(map){
-       mca.style.height = "76%";
-      }
-    }
-  }
-  const mcaObserver = new MutationObserver(mcaHeight);
-  mcaObserver.observe(document.documentElement, { childList: true, subtree: true });
 
 var charts = ["voteshare", "seats"]
 
