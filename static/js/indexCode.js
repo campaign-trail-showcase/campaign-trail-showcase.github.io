@@ -138,7 +138,7 @@ nct_stuff.themes = {
         name: "Classic",
         background: "",
         banner: "../static/images/banners/banner_classic.png",
-        coloring_window: "#E8FBFF",
+        coloring_window: "#BFE6FF",
         coloring_container: "",
         coloring_title: "",
         // Commenting out for now until we can do this without breaking mod themes
