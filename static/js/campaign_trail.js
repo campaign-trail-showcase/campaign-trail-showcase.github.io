@@ -1154,14 +1154,20 @@ function divideElectoralVotesProp(e, t) {
         return false
     }
 
+    // Loads up the html for an election when loading the game. From my understanding this sets up the map and such.
+    // Important for mods because it will load the base scenario code 2 for the mod before loading the custom code 2.
+    // That way you have less boilerplate
     function election_HTML(id, cand, running_mate) {
         if (id != 16) {
             if (modded) {
                 try {
+                    // ree = the actual base election json unmodded
                     yearbit = ree.election_json[findFromPK(ree.election_json, id)].fields.year
                     lastnamebit = ree.candidate_json[findFromPK(ree.candidate_json, campaignTrail_temp.candidate_id)].fields.last_name
                     veeplastname = ree.candidate_json[findFromPK(ree.candidate_json, campaignTrail_temp.running_mate_id)].fields.last_name
                 } catch {}
+
+                // Check if this is a base scenario and if so we need the specific base scenario code 2. Otherwise we can use whatever one with the same year.
                 real = realityCheck(cand, running_mate, ree)
 
                 if (real) {
@@ -1170,9 +1176,14 @@ function divideElectoralVotesProp(e, t) {
                 
                 return baseScenarioDict[yearbit]
             } else {
+                // If it's not modded then it must bea real base scenario so just return the real info
                 return campaignTrail_temp.election_json[findFromPK(campaignTrail_temp.election_json, id)].fields.year + "_" + campaignTrail_temp.candidate_json[findFromPK(campaignTrail_temp.candidate_json, cand)].fields.last_name + "_" + campaignTrail_temp.candidate_json[findFromPK(campaignTrail_temp.candidate_json, running_mate)].fields.last_name + ".html"
             }
         } else if (id == 16) {
+            // If it's a mod we don't need to get the specific 2016a scenario
+            if (modded) {
+                return baseScenarioDict["2016a"];
+            }
             return "2016a_" + campaignTrail_temp.candidate_json[findFromPK(campaignTrail_temp.candidate_json, cand)].fields.last_name + "_" + campaignTrail_temp.candidate_json[findFromPK(campaignTrail_temp.candidate_json, running_mate)].fields.last_name + ".html"
         }
     }
