@@ -5863,13 +5863,13 @@ endingPicker = (out, totv, aa, quickstats) => {
 
     function getLeadership() {
         let leadership = ""
-        if(pv > 95) {
+        if(pv > 85) {
             leadership = "You are renowned by your community. A leader like you only comes along once a millenia. Statues are built in your honour and fables are told of this Winter."
         }
-        else if(pv > 90) {
+        else if(pv > 80) {
             leadership = "You were an invaluable asset during such a harsh Winter. Your legacy echoes through time. In the years to come linguists will disover that the word in many languages for Leader stems from your name."
         }
-        else if(pv > 75) {
+        else if(pv > 65) {
             leadership = "Your leadership skills were useful during such a tough Winter. Although you didn't always make the right choices, you held it together enough to call yourself a survivor."
         }
         else if(pv > 50) {
@@ -5885,7 +5885,7 @@ endingPicker = (out, totv, aa, quickstats) => {
         let family = "";
 
         if(wife && pregnant) {
-            if(pv > 80) {
+            if(pv >= 75) {
                 family = "In the years after the famine, you were able to raise a small family. Your ancestors had influence for years to come and tales of their deeds have been passed down in some form to the modern day."
             }
             else {
@@ -5909,14 +5909,14 @@ endingPicker = (out, totv, aa, quickstats) => {
 
         influence = ""
 
-        if(pv > 80) {
+        if(pv > 70) {
             influence += "<p>The way your people lived had a profound effect on many cultures around the world.</p>"
         } else {
             influence += "<p>Your people and culture spread out over time. Until it got harder and harder to trace exactly where and who you used to be. Though in the late 1800s a group of researchers managed to use linguistics to make some guesses.<p>"
         }
     
         if(farmersMakeGraves) {
-            if(pv > 85) {
+            if(pv > 70) {
                 influence += "<p>After your encouragment (or lack of discouragement), farmers continued to decorate their ancestors graves with copper. In fact, the practice is still practiced in the modern era, though no one knows where it originated. Except you.</p>"
             } else {
                 influence += "<p>After your encouragement, farmers continued to decorate their ancestors graves with copper. In the 20th century archaeologists uncovered the ruins of your settlement and found evidence that some graves were covered in copper, while others were not. No one knows why.</p>"
@@ -5925,7 +5925,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 
         if(leftFoodOut) {
             influence += "<p>The practice of leaving food for ancestral spirits";
-            if(pv > 80) {
+            if(pv >= 75) {
                 influence += " caught on in the years after the famine. It is said if one leaves food out once a year at Winter, next year's harvest will be plentiful.</p>"
             }
             else {
