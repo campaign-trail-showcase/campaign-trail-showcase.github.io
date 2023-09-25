@@ -247,7 +247,7 @@ $(document).ready(async function() {
 
         const temp = extractElectionDetails(rawModText, customModName);
 
-        if(temp == null) {
+        if(temp == null || temp.election_json == null || temp.election_json[0] == null || temp.election_json[0].fields == null) {
             continue;
         }
 
