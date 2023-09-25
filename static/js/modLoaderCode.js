@@ -1,5 +1,4 @@
 let loadingFromModButton = false;
-
 const UNFAV = "♥";
 const FAV = "♡";
 const PLAY = "▶";
