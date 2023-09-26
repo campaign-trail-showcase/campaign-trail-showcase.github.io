@@ -3923,19 +3923,22 @@ cyoAdventure = function(a) {
 
   if(ans == 80016){
     langer += 1;
+    console.log(1)
   }
   if(ans == 80017){
     langer += 1;
+    console.log(2)
   }
   if(ans == 80041){
     langer += 1;
+    console.log(3)
   }
   if(sex2 >= 4){
     e.answers_json.find(f=>f.pk===8015).fields.question = null
     e.answers_json.find(f=>f.pk===80150).fields.question = 4004
   } 
   if(langer >= 3){
-    e.answers_json.find(f=>f.pk===80057).fields.question = 40011 
+    e.answers_json.find(f=>f.pk===80057).fields.question = 40015
   }
   if(ans == 80150){
     campaignTrail_temp.candidate_json[1]["fields"].first_name = "G. Mennen";
@@ -4050,7 +4053,7 @@ cyoAdventure = function(a) {
   }
   let pop_vote = e.current_results[0];
   let playerPolling = (pop_vote.find(p => p.pk === 24)).pvp;
-  if(playerPolling > 0.52){
+  if(playerPolling > 0.50){
     if(ans == 8033){
       e.answers_json.find(f=>f.pk===8039).fields.question = null
       e.answers_json.find(f=>f.pk===80390).fields.question = 4011
@@ -4392,7 +4395,7 @@ campaignTrail_temp.multiple_endings=true
 
 
 
-let vpName = "Lyndon B. Johnson";
+let vpName = "Wayne Morse";
 
 
 

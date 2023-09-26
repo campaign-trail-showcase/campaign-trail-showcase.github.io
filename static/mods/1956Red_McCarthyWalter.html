@@ -2438,3 +2438,75 @@ return "<h3>MCCART HAS WON</h3><p>be ready to hit some blinkers</p>"
 }
 
 campaignTrail_temp.multiple_endings=true
+
+let vpName = "Francis E. Walter";
+
+
+
+vpTable = {
+    "Joseph McCarthy" : vpName,
+    "John McCormack" : "Lyndon B. Johnson ",
+    "Tom Connally" : "W.A Criswell",
+    "Eric Hass/Others" : "Georgia Cozzini/Others"
+}
+
+vpTableHistorical = {
+    "Joseph McCarthy" : "Henry Cabot Lodge Jr",
+    "John McCormack" : "Lyndon B. Johnson ",
+    "Tom Connally" : "W.A Criswell",
+    "Eric Hass/Others" : "Georgia Cozzini/Others"
+  } 
+
+function onGameWindowChangeCandidates() {
+        const resultsTableHolder = document.getElementById("overall_details_container");
+
+        if(!resultsTableHolder || resultsTableHolder.classList.contains("done")) {
+            return;
+        }
+
+        resultsTableHolder.classList.add("done");
+
+        const resultsTable = resultsTableHolder.childNodes[3].childNodes[3].children[0];
+        
+        for(let i = 0; i < resultsTable.children.length; i++) {
+            const row = resultsTable.children[i];
+            let name = row.firstChild.innerText;
+            row.insertCell(1);
+            if(name) {
+                name = name.replaceAll("-", "").trim();
+                console.log("name is:" + name)
+            }
+
+            if(i == 0) {
+                row.children[1].innerHTML = `<span style="font-weight:bold">Running Mate<span>`;
+            }
+            else {
+                row.children[1].innerHTML = vpTable[name];
+            }
+        }
+
+        
+        const resultsTableHistorical = resultsTableHolder.childNodes[5].childNodes[3].children[0];
+        
+        for(let i = 0; i < resultsTableHistorical.children.length; i++) {
+            const row = resultsTableHistorical.children[i];
+            let name = row.childNodes[1].innerText;
+            row.insertCell(1);
+            if(name) {
+                name = name.replaceAll("-", "").trim();
+            }
+
+            if(i == 0) {
+                row.children[1].innerHTML = `<span style="font-weight:bold">Running Mate<span>`;
+            }
+            else {
+                row.children[1].innerHTML = vpTableHistorical[name];
+            }
+        }
+}
+
+const gameWindowNode = document.getElementById("game_window");
+const candidateWatcherConfig = { attributes: true, childList: true, subtree: true };
+
+const candidateObserver = new MutationObserver(onGameWindowChangeCandidates);
+candidateObserver.observe(gameWindowNode, candidateWatcherConfig);
