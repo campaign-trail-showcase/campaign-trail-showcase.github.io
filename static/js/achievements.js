@@ -138,7 +138,7 @@ function addAllAchievements() {
 
                 setTimeout(() => {
                     subHolder.style.visibility = "visible";
-                    subHolder.style.maxHeight = "1000px";
+                    subHolder.style.maxHeight = "100000px";
                 }, 5);
             }
 

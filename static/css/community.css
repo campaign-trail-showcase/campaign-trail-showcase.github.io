@@ -43,7 +43,7 @@
 .mod-desc {
     flex: 1;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
     text-align: center;
     font-size: 12px;
     width: 90%;
@@ -283,10 +283,10 @@
 .achText {
   overflow-y: auto;
   overflow-x:hidden;
-  height: 20%;
+  height: 10%;
   font-size: 12px;
   border-radius: 5px;
-    padding: 5px;
+  padding: 5px;
 }
 
 .locked {
