@@ -766,7 +766,7 @@ function divideElectoralVotesProp(e, t) {
 
         $("#ad_spending_slider").change(() => {
             $("#ad_spending_amount").val($("#ad_spending_slider").val());
-            $("#ad_spending_amount").val(Number($("#ad_spending_amount").val()).toLocaleString());
+            $("#ad_spending_amount").val(Number($("#ad_spending_amount").val()));
         })
 
         $("#ad_spending_amount").change(() => {
@@ -777,7 +777,7 @@ function divideElectoralVotesProp(e, t) {
             currval = Math.min(e.shining_data.balance / inflation_factor, currval);
             currval = Math.max(0, currval);
 
-            $("#ad_spending_amount").val(currval.toLocaleString());
+            $("#ad_spending_amount").val(currval);
             $("#ad_spending_slider").val(currval);
         })
 
