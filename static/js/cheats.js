@@ -369,3 +369,12 @@ function skipQuestion(e) {
     document.getElementById("answer_select_button")?.click()
     campaignTrail_temp.election_json[0].fields.has_visits = cache;
 }
+
+function addSTSSMoney() {
+    if(campaignTrail_temp.shining_data.balance) {
+        campaignTrail_temp.shining_data.balance += 1000000;
+    }
+    else {
+        alert("You must be playing Sea to Shining Sea mode to use this!");
+    }
+}
