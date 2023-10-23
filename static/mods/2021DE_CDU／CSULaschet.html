@@ -1645,11 +1645,11 @@ cyoAdventure = function(a) {
     if ([4039, 4040, 4041, 4042].includes(ans)) {
        if ((ideologyRight-ideologyCenter) > 1) {
             campaignTrail_temp.questions_json[12]=extraQuestions[3];
-           answerSwapper(4080 ,4642)
+           answerSwapper(4080 ,4642, false)
            changeGlobalEffect(77, 4080, 0.02)
            changeGlobalEffect(79, 4080, -0.01)
            changeGlobalEffect(78, 4080, -0.01)
-           answerSwapper(4099 ,4653)
+           answerSwapper(4099 ,4653, false)
            changeGlobalEffect(77, 4099, -0.01)
            changeGlobalEffect(78, 4099, 0.01)
            $("#game_window")[0].style.backgroundImage = "url(https://media.discordapp.net/attachments/1131296206908301423/1154740854892810330/CDURechtsUnten.png)";
@@ -1681,7 +1681,7 @@ cyoAdventure = function(a) {
             $("#trackSel")[0].style.backgroundSize = "cover";
             $("#timeTracker")[0].style.backgroundImage = "url(https://media.discordapp.net/attachments/1131296206908301423/1154740646972764220/CDUCentristUnten.png)";
             $("#timeTracker")[0].style.backgroundSize = "cover";
-           answerSwapper(4080 ,4641)
+           answerSwapper(4080 ,4641, false)
            changeGlobalEffect(77, 4080, -0.02)
            changeGlobalEffect(79, 4080, 0.01)
            changeGlobalEffect(78, 4080, 0.01)
