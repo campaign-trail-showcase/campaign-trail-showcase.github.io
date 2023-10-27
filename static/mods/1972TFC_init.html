@@ -12,6 +12,16 @@ campaignTrail_temp.temp_election_list = [{"id": 10, "year": 1972, "is_premium": 
 campaignTrail_temp.show_premium = true;
 campaignTrail_temp.premier_ab_test_version = -1;
 
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#002334",
+    "header_text_color": "#da9262",
+    "description_text_color": "#000000",
+    "description_background_color": "#2e86ff",
+    "main_color": "#da9262",
+    "secondary_color": "#002233",
+    "ui_text_color": "#FFFFFF"
+}
+
 var changeGameDisp = (hide) => {
     disp = "";
     if (hide) {
@@ -23,8 +33,9 @@ var changeGameDisp = (hide) => {
     credits_html = `
       <h3>Creator</h3>
       <p>_kenshii | raygun</p>
-      <h3>Writer</h3>
+      <h3>Writers</h3>
       <p>_kenshii | raygun</p>
+      <p>kungfucious | WilyWillis</p>
       <h3>Coders</h3>
       <p>aidensilly | Aiden</p>
       <p>catboxxd | CatBoxXD</p>
@@ -37,11 +48,12 @@ var changeGameDisp = (hide) => {
       <p>ltdan65 | Lieutenant Dan Taylor</p>
       <p>yankee07 | Yankee07</p>
       <p>profesordino | ProfesorDino</p>
-      <h3>Bits From Other Mods</h3>
+      <h3>Bits From Other Mods & People</h3>
       <p>Credit Page - 2000N</p>
       <p>Soundtrack System - 2000N</p>
       <p>Replacing Candidate & Running Mate Thing - 1956Red</p>
       <p>Farther Reading Formatting - captaintom | Captain Tom</p>
+      <p>Reagan Banner - tappedframe88 | TappedFrame88</p>
       <h3>Music Credits</h3>
       <p>Say Goodbye To Hollywood - Billy Joel</p>
       <p>Saturday Nights Alright For Fighting - Elton John</p>
@@ -92,16 +104,6 @@ var changeGameDisp = (hide) => {
   
 e.credits = "<button onclick='e.creditsPage()'>The 1972 Team</button>"
 
-campaignTrail_temp.modBoxTheme = {
-    "header_color": "#002334",
-    "header_text_color": "#da9262",
-    "description_text_color": "#000000",
-    "description_background_color": "#2e86ff",
-    "main_color": "#da9262",
-    "secondary_color": "#002233",
-    "ui_text_color": "#FFFFFF"
-}
-
 RecReading=true
 
 next0 = function() {
@@ -121,7 +123,7 @@ reaganback0 = function() {
     document.getElementById("candidate_summary").innerHTML = text
 }
 
-HistHexcolour=["#c44141","#0020c1","#506526"]; HistName=[" Ronald Reagan"," Frank Church"," John Hospers/Others"]; HistEV=[288,249,1]; HistPV=["39,649,453","37,317,133","777,440"]; HistPVP=["51.0%","48.0%","1.0%"];
+HistHexcolour=["#c44141","#0020c1","#e5eb34","#000000"]; HistName=[" Ronald Reagan"," Frank Church"," John Hospers/Others", " N/A"]; HistEV=[288,249,1,0]; HistPV=["39,649,453","37,317,133","777,440","0"]; HistPVP=["51.0%","48.0%","1.0%","0.0%"];
   
 $("#game_window")[0].style.borderColor = "#002334" 
 $(".container")[0].style.backgroundColor = "#002334"
