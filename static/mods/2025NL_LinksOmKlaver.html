@@ -3,21 +3,21 @@
 const partyLeaders = [
   { party: 105, leaderName: 'Van der Plas', image: 'https://jetsimon.com/cts-media/public/2021DE_CDU／CSULaschet_0.png' },
   { party: 106, leaderName: 'Klaver', image: 'https://jetsimon.com/cts-media/public/2025NL_LinksOmKlaver_0.png' },
-  { party: 16, leaderName: 'Kaag', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_1.png' },
-  { party: 17, leaderName: 'Omtzigt', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_2.png' },
-  { party: 23, leaderName: 'Rutte V', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_3.png' },
+  { party: 16, leaderName: 'Kaag', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_1.png' },
+  { party: 17, leaderName: 'Omtzigt', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_2.png' },
+  { party: 23, leaderName: 'Rutte V', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_3.png' },
   { party: 25, leaderName: 'Wilders', image: 'https://jetsimon.com/cts-media/public/2020LT_LSDPPaluckas_0.png' },
-  { party: 21, leaderName: 'Hoekstra', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_4.png' },
+  { party: 21, leaderName: 'Hoekstra', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_4.png' },
   { party: 67, leaderName: 'Marijnissen', image: 'https://jetsimon.com/cts-media/public/2020LT_LSDPPaluckas_1.png' },
   { party: 68, leaderName: 'Baudet', image: 'https://jetsimon.com/cts-media/public/2020LT_LSDPPaluckas_2.png' },
   { party: 77, leaderName: 'Ouwehand', image: 'https://jetsimon.com/cts-media/public/2020LT_LSDPPaluckas_3.png' },
   { party: 78, leaderName: 'Bikker', image: 'https://jetsimon.com/cts-media/public/2020LT_LSDPPaluckas_4.png' },
   { party: 79, leaderName: 'Dassen', image: 'https://jetsimon.com/cts-media/public/2020LT_LSDPPaluckas_5.png' },
   { party: 91, leaderName: 'Eerdmans', image: 'https://jetsimon.com/cts-media/public/2020LT_LSDPPaluckas_6.png' },
-  { party: 92, leaderName: 'Kuzu', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_5.png' },
-  { party: 116, leaderName: 'Simons', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_6.png' },
-  { party: 512, leaderName: 'someone', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_7.png' },
-  { party: 117, leaderName: 'Van der Staaij', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_8.png' }
+  { party: 92, leaderName: 'Kuzu', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_5.png' },
+  { party: 116, leaderName: 'Simons', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_6.png' },
+  { party: 512, leaderName: 'someone', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_7.png' },
+  { party: 117, leaderName: 'Van der Staaij', image: 'https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_8.png' }
 ];
 e = campaignTrail_temp;
 
@@ -541,49 +541,49 @@ endingPicker = (out, totv, aa, quickstats) => {
   if (aa[0].candidate == 23 && quickstats[1] >= 12) {// Rutte wins, but LO still wins, as it's larger than the previous
       e.header = "<h2>Liberals triumphant again! Nation on course for 20 years of Rutte!</h2>"
       e.pages = [`<p>It appears history has repeated once again. The VVD has once again come out victoriously and the nation appears on track for *another* four years under his premiership. At least if the BBB-instigated boycott does not do him in.</p><p>Still, not all is negative: LinksOm has won support compared to the combined vote totals of PvdA and GroenLinks. This at least vindicates the cooperation strategy and makes it more probable that the party will stay together at least in some form. Perhaps the VVD will seek LinksOm out to join the cabinet, which would put you at risk of repeating the fate of the PvdA in 2017. As for you, much will depend on your party's attitude to your leadership. The PvdA wing wants to see you replaced by one of their own, likely Aboutaleb or Timmermans, but the GroenLinks wing has your back.</p>`]
-      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_12.png";
+      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_12.png";
       return construct(0);
   }
   if (aa[0].candidate == 23 && quickstats[1] < 12 && quickstats[1] > .67) {// Rutte wins and LO loses.
       e.header = "<h2>Liberals triumphant again! Nation on course for 20 years Rutte.</h2>"
       e.pages = [`<p>It appears history has repeated once again. The VVD has once again come out victoriously and the nation appears on track for *another* four years under his premiership. At least if the BBB-instigated boycott does not do him in.</p><p>Not only that, but LinksOm has actually lost seats compared to the combination PvdA-GroenLinks, which was an awful result already. This has reversed the momentum against further cooperation, and it seems likely the two parties will compete separately again in 2029, and they may even act independently in the coming formation as well. As for you, your best hope is preserving your leadership of GroenLinks, but this poor performance gives rise to some desire for you to step aside and let someone run the show next time. Then again, there is no obvious successor for you either.</p>`]
-      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_12.png";
+      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_12.png";
       return construct(0);
   }
   if (aa[0].candidate == 17 && quickstats[1] >= 12) {// Omtzigt wins, but the LO is still larger than last time
       e.header = "<h2>Omtzigt Functie Elders!</h2>"
       e.pages = [`<p>Omtzigt has been victorious. Well, among the three most likely contenders from coming in first instead of you, this is likely the least bad outcome in the eyes of your supporters. At least this means that Rutte will be out of the way, which is a plus. However, if you hear Omtzigt's rhetoric on the climate, that is not something to be too chipper about either.</p><p>LinksOm has performed satisfactorily, but the failure to become the country's largest stings. At least you outperformed the combined totals of GroenLinks and PvdA in 2021. This vindicates the cooperation strategy and ensures that the alliance will likely last, at least in some capacity. Depending on the way Omtzigt wants to go, you may find yourself becoming part of his cabinet. Perhaps LinksOm can mature a bit as a party either in the coalition or in the opposition. Omtzigt's group is unproven, and at risk of falling prey to the growing pains that many new parties are subjected to. If he fails, that might open a window of opportunity for LinksOm to sweep in after all.</p>`]
-      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_13.png";
+      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_13.png";
       return construct(0);
   }
   if (aa[0].candidate == 17 && quickstats[1] < 12 && quickstats[1] > .67) {// Omtzigt wins, to the detriment of LO
       e.header = "<h2>Omtzigt Functie Elders!</h2>"
       e.pages = [`<p>Omtzigt has been victorious. Well, among the three most likely contenders from coming in first instead of you, this is likely the least bad outcome in the eyes of your supporters. At least this means that Rutte will be out of the way, which is a plus. However, if you hear Omtzigt's rhetoric on the climate, that is not something to be too chipper about either.</p><p>But that is where the good news ends. LinksOm has really disappointed this cycle. It has earned fewer votes than PvdA and GroenLinks together, and that was an awful result already. Momentum for cooperation has completely reversed, and the two parties will likely contend separately again in 2029. As for you, your best hope is preserving your leadership of GroenLinks, but this poor performance gives rise to some desire for you to step aside and let someone run the show next time. Then again, there is no obvious successor for you either.</p>`]
-      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_13.png";
+      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_13.png";
       return construct(0);
   }
   if (aa[0].candidate == 105 && quickstats[1] >= 12) {// BBB wins, but LO held its own.
       e.header = "<h2>Peasant revolt in Holland shakes the establishment!</h2>"
       e.pages = [`<p>That headline on Fox News has it right. Two years after their surprise victory in the provincial elections, the BBB has repeated their feat in the much more important general elections. The Dutch people have made their discontent with the nitrogen policy of the incumbent government loud and clear.</p><p>At least LinksOm outperformed the joint performance of GroenLinks and PvdA four years ago. This vindicates the cooperation strategy and makes it likely that the fusion party will stay together in the foreseeable future. It's unclear that you will be entering the coalition: your nitrogen views are diametrically opposed to the BBB's. GroenLinks has also been apprehensive about joining the BBB on the Provincial level, but perhaps pressure from the PvdA wing will force your hand. As for you, much will depend on your party's attitude to your leadership. The PvdA wing wants to see you replaced by one of their own, likely Aboutaleb or Timmermans, but the GroenLinks wing has your back.</p>`]
-      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_11.png";
+      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_11.png";
       return construct(0);
   }
   if (aa[0].candidate == 105 && quickstats[1] < 12 && quickstats[1] > .67) {// BBB wins, to the detriment of LO
       e.header = "<h2>Peasant revolt in Holland shakes the establishment!</h2>"
       e.pages = [`<p>That headline on Fox News has it right. Two years after their surprise victory in the provincial elections, the BBB has repeated their feat in the much more important general elections. The Dutch people have made their discontent with the nitrogen policy of the incumbent government loud and clear.</p><p>This by itself is disappointing, given that your parties leaned towards an intensification of that policy, but to make matters worse, LinksOm also underperformed the combined total of the PvdA and GroenLinks in 2021. That was already a thoroughly mediocre performance and undermines the momentum the drive for cooperation between the parties had. You will likely be spending your time in the opposition as the leader of GroenLinks if you can stave off calls for new leadership after the last two results being so disappointing.</p>`]
-      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_11.png";
+      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_11.png";
       return construct(0);
   }
   if (aa[0].candidate == 16 && quickstats[1] > .67) {// D66 wins
       e.header = "<h2>New New Leadership</h2>"
       e.pages = [`<p>This is most surprising. Sure, D66 was the second largest party last time, but in all previous Rutte cabinets, the secondary party was decimated. It looked like this fate was destined to repeat itself not that long ago, but it didn't materialize. In fact, Sigrid Kaag is on track to become the Netherlands' first female prime minister now.</p><p>This turn of events is your failure, really. You had been gunning to win the election outright, but instead, your parties had to surrender the leadership of the left flank of Dutch politics to D66 yet again. The redeeming factor is that it shows progressive politics still has potential in this country, and that Kaag will want you in her cabinet. This at least increases the chance that LinksOm will stay together as GroenLinks and PvdA will not want to miss out on this progressive cabinet by appearing unstable due to infighting. At the same time, the consensus is that you botched an opportunity to win. It is likely your leadership will be challenged by Timmermans and Aboutaleb at the very least.</p>`]
-      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_15.png";
+      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_15.png";
       return construct(0);
   }
   if (aa[0].candidate == 25 && aa[1].candidate !== 105 && quickstats[1] > .67) { // PVV wins
       e.header = "<h2>PVV rides the wave of discontent to victory!</h2>"
       e.pages = [`<p>In a massive upset, Geert Wilders' Freedom Party has become the nation's largest. International media are taking their time reporting this populist uprising in detail. Mere months ago, it seemed like the PVV was heading to a severe defeat as its base was being split by both the BBB and Forum. The populist insurgent makes his victory speech in front of only a handful of journalists in the building of the House of Representatives: for years already, the PVV does not do election night events, because the necessary security would be onerously expensive.</p><p>However, Wilders has burned all his bridges with the other parties. Though he will get the initiative, a PVV-led stable majority cabinet seems inconceivable. Likely, the party coming in second will therefore form a coalition over the broad center.</p>`]
-      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_16.png";
+      e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_16.png";
       return construct(0);
   }
   if (aa[0].candidate == 25 && aa[1].candidate == 105) {// PVV wins, LO second
@@ -607,67 +607,67 @@ endingPicker = (out, totv, aa, quickstats) => {
   if (aa[0].candidate == 21 && quickstats[1] > .67) {// CDA wins
   e.header = "<h2>Bedankt voor uw stem voor Hugo de Jonge!</h2>"
   e.pages = [`<p>I don't know how this has happened, but you've somehow caused the practically moribund CDA to be elevated to a height not seen since the elections to the European Parliament in 2009. This has resulted in the CDA becoming the leading party in a government formation, with its leader Wopke Hoekstra expected to become Prime Minister. The most likely cabinets revolve around the CDA governing to the right with the BBB, or the left with LinksOm. Groep Omtzigt is expected to be a part of the coalition in either scenario.</p><p>Here's to you, Wopke Hoekstra, nu doorpakken!</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/I4wHK4pWLQc?&autoplay=1" title="Harry Wesselink - Verkiezingslied" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_19.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_19.png";
   return construct(0);
   }
   if (aa[0].candidate == 67 && quickstats[1] > .67) {// SP wins
   e.header = "<h2>Lilian Marijnissen Wins 100% of Votes in Netherlands Election</h2>"
   e.pages = [`<p>Young leader seals remarkable victory in country "seething with election atmosphere," according to state media.</p><p>Dutch state media confirmed on Monday what was surely never in doubt — a 100 percent, no-abstention victory for leader Lilian Marijnissen in the country's stage-managed parliamentary election.</p><p>Every single registered elector had turned out to vote, the state-run Dutch Central News Agency (DCNA) reported, "except for those on foreign tour or working in oceans."</p><p>The country's young leader personally stood for election in the symbolic Oss district. It was there, according to family legend, that Lilian's father Jan led the fight against American imperialism and where Lilian was later born.</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/-1xPcVS169Y?start=7&autoplay=1" title="De Internationale" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_20.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_20.png";
   return construct(0);
   }
   if (aa[0].candidate == 68 && quickstats[1] > .67) {// FvD wins
   e.header = "<h2>Party Cartel Crushed.</h2>"
   e.pages = [`<p>You hear the news from your hotel room in London, where you were forced to go after the Russians spearhead called 'Operation Bigshot' through NATO overran the Netherlands. Now they have organized sham elections, of course 'won' by that lunatic quisling Thierry Baudet, now going on about tribunals for you and your colleagues and the final defeat of the World Economic Forum.</p><p>The Russians may have trapped NATO's armies in the Baltics, leaving Europe completely exposed to the mobilized Russian armies, but losing a battle is not losing the war. When America completes its Asia First strategy and shifts to Europe and reinforces the armies of France and Britain, the Netherlands will surely swiftly be liberated. Let's see who laughs then, Minerva's uilskuiken!</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/AOAtz8xWM0w&autoplay=1" title="Russian National Anthem" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_21.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_21.png";
   return construct(0);
   }
   if (aa[0].candidate == 77 && quickstats[1] > .67) {// Animal Party wins
   e.header = "<h2>Voorts zijn wij van mening dat er een einde moet komen aan de bio-industrie.</h2>"
   e.pages = [`<p>What has happened? The animal party has become the largest?! Well, it seems the country is really hot for animal rights suddenly. Any hopes of the BBB to stop nitrogen legislation have been thoroughly crushed, and a hard leftwing course seems likely to take hold in national politics.</p><p>I hope you don't have a fondness for meat, because the meat exports from the Netherlands are likely to go down rather rapidly in the foreseeable future, and we currently export a lot of it.</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/48FUkuWsCtY?&autoplay=1" title="J. Hoes - Vogeltjesdans" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_22.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_22.png";
   return construct(0);
   }
   if (aa[0].candidate == 78 && quickstats[1] > .67) {// CU wins
   e.header = "<h2>Did you know I lived in Egypt?</h2>"
   e.pages = [`<p>God has blessed us with an overwhelming election victory. Now it is finally time to save Egypt and to appoint the pharaoh of the Netherlands...</p><p>Wait a second! That was Gert-Jan Segers for whom that Egypt meme worked so well. But he left in 2023! Who is the new party leader? Carola Schouten? Not even, it's Mirjam Bikker. But her memeability is so limited compared to Segers :( Oh well. Back to the drawing board.</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/3WUeK6n8ep0?&autoplay=1" title="Arjen Lubach - Het Nationale Faraolied" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_23.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_23.png";
   return construct(0);
   }
   if (aa[0].candidate == 79 && quickstats[1] > .67) {// Volt wins
   e.header = "<h2>Europe is the Future!</h2>"
   e.pages = [`<p>Somehow, Volt has won the election. You watch as the leader of Volt takes to the stage, surrounded by cheering supporters, and delivers a victory speech. You feel a sense of disbelief and disappointment wash over you.</p><p>As the reality sinks in, you start to think about what this means for your party and your political career. Losing an election is never easy, but losing to a relatively new and unknown party like Volt is particularly galling. You start to analyze where you went wrong and what you could have done differently. Was it your policy? Your messaging? Your campaigning strategy? Perhaps you should have recognized that there was a much, much greater desire for Eurofederalism than you thought.</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/Jg3sEE18WsE?&autoplay=1" title="André Rieu - Ode to Joy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_24.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_24.png";
   return construct(0);
   }
   if (aa[0].candidate == 91 && quickstats[1] > .67) {// JA21 wins
   e.header = "<h2>Het Rad van Fortuyn</h2>"
   e.pages = [`<p>Ding ding ding ding. Another spin at the wheel of Fortuyn. The fickle silent plurality has flown out again. Once again disappointed with the failure of the BBB to make it true, after having been let down by Forum before that, the PVV before that, and the LPF before that. Each of them has been torn asunder by internal conflict and political opportunism.</p><p>Now the flock has landed with Joost Eerdmans and Annabel Nanninga's JA21. For the first time since Fortuyn, the rebellion takes place in a general election. Where the BBB and Forum peaked too early in the provincials, they peaked at the right time. Time will tell if they can break the spell that was cast on this corner of Dutch politics.</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/tM7mfyPuGSg?&autoplay=1" title="Rad van Fortuin Tune" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_25.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_25.png";
   return construct(0);
   }
   if (aa[0].candidate == 92 && quickstats[1] > .67) {// DENK wins
   e.header = "<h2>Wat DENKen we nu?</h2>"
   e.pages = [`<p>Sevgili Hollanda vatandaşları,</p><p>Bugün tarihi bir gün yaşadık! Büyük bir onur ve saygıyla, DENK partisinin lideri olarak ülkemizin başbakanı olarak seçilmiş olmak beni çok mutlu ediyor.</p><p>Bu yolculuk boyunca bize destek olan herkesin samimiyetle minnettarlığını ifade etmek istiyorum. Bizim amacımıza, kampanya boyunca gösterdiğiniz azimli çabalarınıza ve daha kapsayıcı ve adil bir Hollanda için olan tutkunuza borçlu olduğumuz bir zafer elde ettik.</p><p>Bizim toplumumuzda ayrılıkçılık ve nefret politikalarının yeri olmadığını gösterdik. Saygı, hoşgörü ve karşılıklı anlayışa dayalı bir gelecek inşa edebileceğimizi gösterdik. Kim olduğunuz ya da nereden geldiğiniz fark etmeksizin, toplumumuzda yeriniz olduğunu ve hükümetimizde söz sahibi olabileceğinizi gösterdik.</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/Y75Km7dlt94?&autoplay=1" title="İstiklal Marşı" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_5.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_5.png";
   return construct(0);
   }
   if (aa[0].candidate == 92 && quickstats[1] > .67) {// BIJ1 wins
   e.header = "<h2>YOU SHOW ME A CAPITALIST, AND I'LL SHOW YOU A BLOODSUCKER!</h2>"
   e.pages = [`<p>The right has been dealt a terrible blow as your party has become the first party in Dutch history to command an absolute majority in parliament. Although you face an immediate obstacle in the Senate to your plans, there's no doubt you will command a massive majority in the Senate two years on. If you can avoid the leftist tradition of sectarianism, perhaps racial and economic justice will now finally be achieved, here's to the global revolution against the chains of capital!</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/5nCuz4qjTro?&autoplay=1" title="Move on over or we move on over you!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_6.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_6.png";
   return construct(0);
   }
   if (aa[0].candidate == 512 && quickstats[1] > .67) {// Other wins
   e.header = "<h2>Elderly Revenge!</h2>"
   e.pages = [`<p>You thought you were done with the 50Plus party when Den Haan left the party and took its only seat. Now they're not only back, but they'll also be forming their cabinet, likely in coalition with the Libertarian Party, the Pirate Party, and Jezus Leeft.</p><p>What kind of sick magic caused this hellish outcome to come about? You don't know, and you don't want to know. It's time to go back to bed. Hopefully, this nightmare will be over when you wake up.</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/mj96kw-uBls?&autoplay=1" title="Blijf van mijn Pensioen af." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_26.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_26.png";
   return construct(0);
   }
   if (aa[0].candidate == 116 && quickstats[1] > .67) {// SGP wins
   e.header = "<h2>Praise be God!</h2>"
   e.pages = [`<p>The LORD, praise be Him, in His almighty wisdom has granted thee an absolute commandment of these poor sinners and needy of this country. Ye must decide how to best implement the LORD’s wishes for this fair land, from outlawing gay marriage to bringing back capital punishment to outlawing abortion, it is all at thee's command.</p><p>Onze Vader die in de hemel zijt</p><p>Uw naam worde geheiligd</p><p>Uw koninkrijk kome<p></p>Uw wil geschiede</p><p>gelijk in de hemel als ook op de aarde</p><p>Geef ons heden ons dagelijks brood</p><p>en vergeef ons onze schulden</p><p>gelijk ook wij vergeven onze schuldenaren</p><p>Leid ons niet in verzoeking</p><p>maar verlos ons van de boze</p><p>Want van U is het koninkrijk en de kracht</p><p>en de heerlijkheid, tot in eeuwigheid</p><p>Amen.</p><iframe width="361" height="45" src="https://www.youtube-nocookie.com/embed/35K6vQRt67g?&autoplay=1" title="Genesis - Jesus He Knows Me" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan der Plas_8.png";
+  e.image = "https://jetsimon.com/cts-media/public/2025NL_BBBvan_der_Plas_8.png";
   return construct(0);
   }
   if(negotiationsDone && selectedCoalition.id === 1){ //D66-VVD-Omtzigt-CDA-CU (impl. SGP)
