@@ -2467,6 +2467,17 @@ if (quickstats[0] >= 531) {
         }, 100);
     }
   return "<h3>The New Republican Party</h3><p>The returns from Alabama, from Mississippi, from South Carolina, from Texas, it all pointed to one terrifying conclusion: the Republican Party as it was thought of before was now dead.  And its place, Joe McCarthy had built up something entirely new.</p><p>Henry Cabot Lodge Jr., holed up in his residence in Washington, drew a long sigh, before stepping forward and turning off the glaring television.  He would hear no more about how to win, his own party had sold its soul.</p><p>He was not the only one.  At 1600 Pennsylvania Avenue, a certain Harold Stassen was also scornfully solemn, for the progress he had strove forward for would soon be undone by the monster of his own design.</p>"
+} else if (quickstats[0] == 274) {
+  unlockAchievement("This One's For The Record");
+  { 
+    
+    e.image = ["https://i.imgur.com/HYwSUHN.png"];
+    e.header = "<h3>The Record</h3>";
+    e.pages = ["<p>Entry - 5/26/1957</p>Patient arrived and admitted himself for treatment.  Patient reports to have been experiencing nausea, vomiting and watery diarrhea in the mornings since February.  Patient’s liver is enlarged, and much of it is missing.  Patient’s skin is jaundiced.  Patient’s temperature is spiked.  Patient has been sedated prior to admission.</p><p>Entry - 5/30/1957</p><p>Patient is dazed and confused most times but often experiences moments of lucidity, especially when the Chief of Staff or Roy come around.  Suffers from alcohol withdrawal, but could also be afflicted by a cancer of the bones.</p>", "<p>Entry - 6/2/1957</p><p>Urbane Van Susteren was back today, and gave the patient a bottle of whiskey.  By the time I got a hold of it the whole thing was empty.</p><p>Entry - 6/7/1957</p>Jean visited again today, and spoke with the patient for an hour.  Upon her exit, she entered into a long argument with the doctor, and accused him and the others of not doing enough to help the patient’s recovery.", "<p>Entry - 6/11/1957</p><p>The patient was on the phone with someone from the city.  It’s the first time anyone’s heard him apologize.</p><p>Entry - 6/15/1957</p><p>Patient was looking up at me and all of a sudden threw up his hands.  I took them in mine, and I noticed his eyes rolled back and his face and shoulders getting very flush.  He started to gag and I noticed the patient going into what seemed like a Grand Mal Seizure.  I realized then we had lost the patient, and I immediately got on the bed and began artificial respiration.  Patient started to breathe again.</p>", "<p>Entry - 6/16/1957</p><p>The patient suffered another seizure.  Patient is in severe discomfort, his bedclothes are frequently soiled, and a pneumonia-like rattle is heard from his chest.  His urine is red.</p><p>I tried to make out what he was saying the best I could.  ‘I want to go home, I haven’t had a drink in two or three weeks… only a few beers.’  Later he delivered a speech, moving his arms all around to address a crowd that wans’t there.  ‘Mr. President, no… Mr. Speaker, the time is coming for a new dawn for… the time has come.’  Eventually the speech died down and the patient muttered about how excited he was about his new baby.</p>", "<p>Entry - 6/17/1957</p><p>Patient woke up early this morning and began clapping his hands and laughing.  He laughed at nothing for a good hour, then the light drained from his face.  He waved his arms overhead, as if he was warding off attackers, and began to shout ‘get away, get away!’  The patient was then sedated.</p><p>Nasal oxygen started.  Color ashen.</p>", "<p>Entry - 6/18/1957</p><p>The Vice President came in to visit, and spent a good deal of time with us and the doctors before going in to see the patient.  He only was with the patient for about a minute.</p><p>5:31 PM.  The priest came to deliver the patient’s last rites.  Vice President has been notified.</p><p>6:03 PM.  Respiration ceased.  Pronounced by Dr. Kenny.</p>"];
+    return construct(0);
+    
+  }
+ 
 } else if (e.drugs == 1 && (quickstats[0] >= 270 && quickstats[0] <= 280)) {
   {
     e.image = ["https://i.imgur.com/HYwSUHN.png"];
@@ -2507,19 +2518,7 @@ if (used != true) {
       }, 100);
   }
 return "<h3>The Bully’s Pulpit</h3><p>‘We did it, Mac.  It’s all our’s.’</p><p>That’s what Roy Cohn whispers in your ear as the final results come in from California.  True enough, it was over for John McCormack, and the nation was your’s, and <i>fairly</i> won.</p><p>McCarthyism has been vindicated by this electoral victory, and soon the White House will be conquered too, the Oval Office the bully’s pulpit.</p><p>Sure, you had to step over plenty of people to get here, but life ain’t fair.  Never was, and never will be.  You’re a shocker, and you’ve produced the biggest shock of your career with this win.  Let’s hope an even greater dose of the McCarthyist drug is what America needs.</p>"
-} else if (quickstats[0] == 274) {
-  if (used != true) {
-        setInterval(function () {
-            used = true;
-            imgg = document.getElementsByClassName("person_image")[0];
-            if (imgg != null) {
-                imgg.src = "https://i.imgur.com/iXhvjvw.png";
-            }
-        }, 100);
-    }
-    unlockAchievement("This One's For The Record");
-  return "<h3>The Enemy Within</h3><p><i>Victory.</i>  The word lingers in your thoughts for hours as the results seep in, at times growing faded, at others louder, until soon a great chorus of supporters was echoing its sweet contents, letter-by-letter.</p><p><i>Victory.</i>  It was a close-won fight, but won nonetheless.  This is truly the most shocking upset in American political history, but you were always a man to defy odds.</p><p><i>Victory.</i>  Now comes the work of governance.  Americans now look to you, their unlikely leader to guide them to the end of this prosperous decade.  The leader of the free world, a man like you…</p><p>And should your crusade bear fruit; should the communists truly Grovel as you've promised, you shall have <i>victory.</i></p>"
-  }else if (quickstats[0] >= 266 && quickstats[0]<= 300) {
+} else if (quickstats[0] >= 266 && quickstats[0]<= 300) {
 if (used != true) {
       setInterval(function () {
           used = true;
