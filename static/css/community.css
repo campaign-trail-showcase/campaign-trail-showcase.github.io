@@ -34,6 +34,23 @@
     font-size: 18px;
     font-weight: bolder;
     width:100%;
+    position:relative;
+}
+
+.trophy-holder {
+  height:32px;
+  width:32px;
+  position: absolute;
+  right:8px;
+  bottom:8px;
+}
+
+.mod-trophy {
+  transition: transform .2s; /* Animation */
+}
+
+.mod-trophy:hover {
+  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
 .mod-title p {
@@ -373,7 +390,7 @@
 }
 
 /* Tooltip text */
-.tooltip .tooltiptext {
+.tooltip .tooltiptext, .trophy-holder .tooltiptext {
   visibility: hidden;
   width: 120px;
   background-color: rgb(255, 255, 255);
@@ -397,9 +414,19 @@
   visibility: visible;
 }
 
+.trophy-holder:hover .tooltiptext, .trophy-holder:active .tooltiptext{
+  visibility: visible;
+  font-size: small;
+}
+
 .tooltip .tooltiptext {
   top: -5px;
   right: 105%;
+}
+
+.trophy-holder .tooltiptext {
+  top: -32px;
+  left: -150%;
 }
 
 .rating-background {
@@ -408,6 +435,7 @@
   border-radius: 0px 0px 10px 10px;
   color:white;
   padding-top: 10px;
+  position: relative;
   padding-bottom: 5px;
 }
 
