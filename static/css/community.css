@@ -425,8 +425,9 @@
 }
 
 .trophy-holder .tooltiptext {
-  top: -32px;
+  bottom: 48px;
   left: -150%;
+  padding: 10px;
 }
 
 .rating-background {
