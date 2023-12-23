@@ -10203,12 +10203,12 @@ endingPicker = (out, totv, aa, quickstats) => {
     if(campaignTrail_temp.player_answers.includes(5251)) {progScore++};
     if(campaignTrail_temp.player_answers.includes(5252)) {progScore--};
 
-    if (out == "win" && campaignTrail_temp.player_answers.includes(5170) && campaignTrail_temp.player_answers.includes(20726) && campaignTrail_temp.player_answers.includes(5227) && campaignTrail_temp.difficulty <=1) {
-        unlockAchievement("Disentangled")
+    if (out == "win" && campaignTrail_temp.player_answers.includes(5170) && campaignTrail_temp.player_answers.includes(20726) && campaignTrail_temp.player_answers.includes(5227)) {
+        ctsAchievement("Disentangled")
     }
 
-    if (out == "win" && e.candidate_id == e.final_state_results[4].result[0].candidate && e.candidate_id == e.final_state_results[25].result[0].candidate && e.candidate_id == e.final_state_results[27].result[0].candidate && e.candidate_id == e.final_state_results[36].result[0].candidate && e.candidate_id == e.final_state_results[46].result[0].candidate && campaignTrail_temp.difficulty <=1) {
-        unlockAchievement("Western Strategy")
+    if (out == "win" && e.candidate_id == e.final_state_results[4].result[0].candidate && e.candidate_id == e.final_state_results[25].result[0].candidate && e.candidate_id == e.final_state_results[27].result[0].candidate && e.candidate_id == e.final_state_results[36].result[0].candidate && e.candidate_id == e.final_state_results[46].result[0].candidate) {
+        ctsAchievement("Western Strategy")
     }
 
     if (out == "tie" && progScore > 1) {
@@ -10225,7 +10225,7 @@ endingPicker = (out, totv, aa, quickstats) => {
     
         document.body.background = "https://i.imgur.com/HUakSH3.jpg";
 
-        if (campaignTrail_temp.difficulty <=1) {unlockAchievement("To Danville")}
+        ctsAchievement("To Danville")
         
         return "<h3>Early morning of November 5th. A stately house in Springfield, IL.</h3><p>As the first results trickle in, your old heart quickens. Hour after hour goes by, with the race on a knife’s edge -- you hold majorities in some swing states, and Conkling holds some in others. At any point, the race could tip one way or the other; but it never does. And as the results from the West start to roll in, a thought grips you. You and Conkling may not be the only ones to win states this election. Perhaps you made some moves to encourage them, that they might split Conkling’s support, but as you take in that fact -- that a couple of states have slipped out of the reach of both you and Conkling, just enough to deny the both of you a majority -- it still doesn’t feel quite real.</p><p>An urgency grips you. Harper, the humble party chairman only seeking to make a statement, now holds the key to the White House. Under normal circumstances, this would have been of no consequence; in the lead-up to the Democratic Convention, Harper indicated that his party’s aim was to put on a strong showing, and wouldn’t strike any deals with a Tildenite. But as the campaign progressed, and you demonstrated a greater openness to economic progressivism, his attitude changed. He said, during one rally, that, should his party carry any states, he would be willing to ‘work with the party that can promise the greatest commitment to the social and economic progress of the American nation.’</p><p>A deal may still be in reach. As you turn the possibility over in your mind, you feel warm, and strong, as though a mighty steam engine in your breast fueled your every movement. A quick wire to some of your trusted confidantes, who must be coming to the same conclusion you are; down the stairs, coat on, boots, hat! Wallet, and out the door! Find a carriage at this late hour that will take you to the train station!</p><p>You have quite the head-start on the President. Danville, Illinois, and Jesse Harper, and your destiny, lay just a hundred miles away.</p>"
     } else if (out == "tie") {
@@ -10248,3 +10248,10 @@ endingPicker = (out, totv, aa, quickstats) => {
 }
 
 campaignTrail_temp.multiple_endings=true
+
+function ctsAchievement(achievement, difficultyChecker = true){
+    if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+        if(campaignTrail_temp.CTS){
+            unlockAchievement(achievement);
+        }
+    }

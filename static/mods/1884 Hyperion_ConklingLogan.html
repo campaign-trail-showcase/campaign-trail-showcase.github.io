@@ -10183,16 +10183,16 @@ endingPicker = (out, totv, aa, quickstats) => {
     if(campaignTrail_temp.player_answers.includes(20899)) {bungleScore++};
     if(campaignTrail_temp.player_answers.includes(20900)) {corruptionScore = corruptionScore - 2};
 
-    if (out == "win" && corruptionScore == -3 && campaignTrail_temp.difficulty <=1) {
-        unlockAchievement("I am normal and can be trusted with power")
+    if (out == "win" && corruptionScore == -3) {
+        ctsAchievement("I am normal and can be trusted with power")
     }
 
-    if (out == "win" && bungleScore > 2 && campaignTrail_temp.difficulty <=1) {
-        unlockAchievement("Crooked Style")
+    if (out == "win" && bungleScore > 2) {
+        ctsAchievement("Crooked Style")
     }
 
-    if (out == "win" && campaignTrail_temp.player_answers.includes(5196) && e.candidate_id == e.final_state_results[8].result[0].candidate && campaignTrail_temp.difficulty <=1) {
-        unlockAchievement("Orange Juice")
+    if (out == "win" && campaignTrail_temp.player_answers.includes(5196) && e.candidate_id == e.final_state_results[8].result[0].candidate) {
+        ctsAchievement("Orange Juice")
     }
 
     if (out == "tie" && corruptionScore > 1) {
@@ -10231,3 +10231,10 @@ endingPicker = (out, totv, aa, quickstats) => {
 }
 
 campaignTrail_temp.multiple_endings=true
+
+function ctsAchievement(achievement, difficultyChecker = true){
+    if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+        if(campaignTrail_temp.CTS){
+            unlockAchievement(achievement);
+        }
+    }
