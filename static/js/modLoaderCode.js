@@ -667,7 +667,7 @@ function loadModFromButton(modValue) {
 }
 
 async function copyModLink() {
-    const modLink = document.location.href + "?modName=" + modBeingPlayed;
+    const modLink = document.location.href + "?modName=" + modBeingPlayed.replaceAll(" ", "%20");
     await window.navigator.clipboard.writeText(modLink);
     alert("Copied link to clipboard!");
 }
