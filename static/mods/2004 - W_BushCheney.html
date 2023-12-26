@@ -40839,7 +40839,7 @@ e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/y4eg352.p
 
 // END-OF-GAME ACHIEVEMENTS
 
-if (quickstats[0] >= 269 && Wins == 0 && Dem == 7) { // Beat TK with no wins
+if (quickstats[0] >= 269 && Dem == 7 && !(e.player_answers.includes(9086) || e.player_answers.includes(9101) || e.player_answers.includes(9106) || e.player_answers.includes(9108) || e.player_answers.includes(8979) || e.player_answers.includes(9296) || e.player_answers.includes(8993))) { // Beat TK with no wins
     ctsAchievement("Loved by the People");  
 }
 
