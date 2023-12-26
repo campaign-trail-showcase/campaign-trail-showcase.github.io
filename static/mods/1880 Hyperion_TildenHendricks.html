@@ -9399,14 +9399,14 @@ campaignTrail_temp.game_start_logging_id = '3663253';
 endingPicker = (out, totv, aa, quickstats) => {
     used=true
 
-    if (out == "win" && campaignTrail_temp.player_answers.includes(5225) && campaignTrail_temp.difficulty <=1) {
-        unlockAchievement("The Trusts Betrayed")
+    if (out == "win" && campaignTrail_temp.player_answers.includes(5225)) {
+        ctsAchievement("The Trusts Betrayed")
     }
 
     if (out == "tie") {
         return "<h3>A DEAD-LOCK! ELECTION GOES TO HOUSE</h3><p>You almost laugh as you stare down the stark print of the paper. To come so far, to fight so hard, for it to come to this. Republicans hold the majority of House delegations, and thus Roscoe Conkling will become President. It seems like the spoiler candidates who sought to drag your re-election down have gotten what they wanted. Republicans have held the House. And Democrats, thank God, will hold the Senate. Just barely. Conkling will take power, but there exists a faction of the party with just enough power to check his worst impulses.</p><p>You feel many things. Rage, shame, despair. But more than anything, you feel weak. America was faced with a choice between a shameless, corrupt radical and yourself. This was to be the ultimate battle of your career, the culmination of an honest life spent battling the corrupt. And the anti-corruption crusader Samuel Jones Tilden has lost his last battle, thrown from his horse by the meddling of under-handed third parties. You mope for a few minutes, but then, as you remember the crowds of people who came to see you speak, you feel a strength surge through your old bones. The Democratic party still needs leaders to stand up to men like Conkling, and with the power they hold, your voice will still carry far.</p><p>You’ll send a congratulatory telegraph. But mostly you’re preparing for a new role, as a man who will continue to command the people’s respect despite this narrow loss. You will provide guidance to your fearful party, and remind the country of its founding principles as President Conkling ascends. You are an old man. You feel ashamed at the way Conkling got under your skin, and how his dirty tricks paid off in the end. But as you rise from the table in Greystone, you feel strong enough to wage one more fight in the years you have left. </p>"
-    } else if (quickstats[0] > 184 && campaignTrail_temp.player_answers.includes(5197) && campaignTrail_temp.difficulty <=1) {
-        unlockAchievement("Deconstruction");
+    } else if (quickstats[0] > 184 && campaignTrail_temp.player_answers.includes(5197)) {
+        ctsAchievement("Deconstruction");
         return "<h3>TILDEN: CIVIL RIGHTS SAVIOR?</h3><p>The nation holds its breath.</p><p>Perhaps Conkling's associates thought they could sink you with a forged letter. They could not have been more wrong. What kind of person could pull off such a reversal, and dare to upset the delicate balance that characterized the party? Only Samuel Tilden.</p><p>Perhaps Conkling was truly so odious, but you understand that it had to be more than that. The people trust their leader so completely that they would be willing to take this challenge with none but you at the helm. What happens next is anyone's guess. Will the South rise up again in revolt? Will they submit to the new state of affairs? No one planned for this. You have sailed the nation past every contingency, into the fog. What awaits you can only be far more difficult than everything that has come before. But there is scarcely a man more up to the challenge than you. Godspeed, Mr. President.</p>"
     } else if (quickstats[0] < 1) {
         return "<h2>KING ROSCOE I BANISHES FOES</h2><p>Today, King Roscoe I of Utica saw off his political foes, who had agreed to a deal whereby they would be permanently exiled to England in return for their safety. After publicly shearing the beards of both Rutherford Hayes and James Blaine, Roscoe bought the deed to Greystone estate from Tilden for one dollar. The King has enacted reforms to our broken system of patronage; before, it was possible for several offices in the country to be filled by people unknown to the monarch; this has been rectified, and the King will work diligently to ensure the quality of life of any individual in this nation is directly proportional to how much Conkling himself likes them. Long live the king!</p>"
@@ -9430,3 +9430,10 @@ endingPicker = (out, totv, aa, quickstats) => {
 }
 
 campaignTrail_temp.multiple_endings=true
+
+function ctsAchievement(achievement, difficultyChecker = true){
+    if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+        if(campaignTrail_temp.CTS){
+            unlockAchievement(achievement);
+        }
+    }
