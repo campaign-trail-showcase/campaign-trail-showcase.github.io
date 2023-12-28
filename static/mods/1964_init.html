@@ -6,7 +6,7 @@ campaignTrail_temp.opponents_default_json = JSON.parse("[{\"election\": 10, \"ca
 campaignTrail_temp.opponents_weighted_json = JSON.parse("[{\"election\": 10, \"candidates\": [91, 92, 93, 94]}]");        
 //campaignTrail_temp.difficulty_level_json = JSON.parse("[{\"model\": \"campaign_trail.difficulty_level\", \"pk\": 1, \"fields\": {\"name\": \"Easy\", \"multiplier\": 1.1}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 3, \"fields\": {\"name\": \"Normal\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 4, \"fields\": {\"name\": \"Hard\", \"multiplier\": 0.95}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 5, \"fields\": {\"name\": \"Impossible\", \"multiplier\": 0.9}}]");
 campaignTrail_temp.global_parameter_json = JSON.parse("[{\"model\": \"campaign_trail.global_parameter\", \"pk\": 1, \"fields\": {\"vote_variable\": 1.125, \"max_swing\": 0.12, \"start_point\": 0.94, \"candidate_issue_weight\": 10.0, \"running_mate_issue_weight\": 3.0, \"issue_stance_1_max\": -0.71, \"issue_stance_2_max\": -0.3, \"issue_stance_3_max\": -0.125, \"issue_stance_4_max\": 0.125, \"issue_stance_5_max\": 0.3, \"issue_stance_6_max\": 0.71, \"global_variance\": 0.01, \"state_variance\": 0.005, \"question_count\": 25, \"default_map_color_hex\": \"#C9C9C9\", \"no_state_map_color_hex\": \"#999999\"}}]");
-campaignTrail_temp.temp_election_list = [{"id": 10, "year": 1964, "is_premium": 0, "display_year": "1964DL"}];
+campaignTrail_temp.temp_election_list = [{"id": 10, "year": 1964, "is_premium": 0, "display_year": "1964"}];
 
 campaignTrail_temp.credits = "tex, with assistance from /u/inb4username and notjoebiden.<br>Executive produced by /u/astrohunch_o.<br><br><b><small>🐰 <a href='https://hunchonautilus.github.io/nct-mod-code-retrieval/bunnyhop/index.html' target='_BLANK' style='color:#0066cc;'>QUESTIONS RANDOMIZED WITH BUNNYHOP</a></small>";
 
@@ -25,16 +25,44 @@ document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_st
 nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#e8fbff";
 $("#game_window")[0].style.backgroundColor = "#bfe6ff";
 $(".footer")[0].style.color = "#000";
+$(".footer a").css({"color":"#0066cc"});
+$("#site_credits a").css({"color":"#0066cc"});
+document.styleSheets[0].insertRule(".game_header{ height:4.1em !important;}", 0);
+document.styleSheets[0].insertRule("#game_window{ height:41em !important;}", 0);
+document.getElementById("inner_window_1").children[1].innerHTML = `  <li>Select a year and a candidate to find out.</li>  <li>You will answer questions about your platform and positions, and also about your campaign strategy.</li>  <li>The answers will affect your popularity for better or worse, both nationally and in individual states.</li>  <li>Walk the fine line between appealing to your base and winning a majority of the votes.</li>`
+document.styleSheets[0].insertRule(".inner_window_w_desc{ margin:1em 1em 0 !important;padding-top: 0.5em !important;}", 0);
+document.styleSheets[0].insertRule(".inner_window_question{ margin:1em 1em .7em !important;padding-top: 0.3em !important;}", 0);
+document.styleSheets[0].insertRule("#main_content_area { height:82% !important;}", 0);
+
+function onGameWindowFixHistorical() {
+    const resultsTableHolder = document.getElementById("overall_details_container");
+
+    if(!resultsTableHolder || resultsTableHolder.classList.contains("done")) {
+        return;
+    }
+
+    resultsTableHolder.classList.add("done");
+    document.getElementById("overall_details_container").children[2].children[5].remove()
+    document.getElementById("overall_details_container").children[2].children[4].remove()
+    document.getElementById("overall_details_container").children[2].children[3].style.marginBottom = "0.4em"
+    console.log("DANXV FIX YOUR CODE")
+}
+
+const gameWindowNode = document.getElementById("game_window");
+const candidateWatcherConfig = { attributes: true, childList: true, subtree: true };
+
+const candidateObserver = new MutationObserver(onGameWindowFixHistorical);
+candidateObserver.observe(gameWindowNode, candidateWatcherConfig);
 
 campaignTrail_temp.election_json[0].fields.recommended_reading = "<p style=\"color:red;font-size:1.1em;\"><b><img src=\"https://i.imgur.com/VsGKwRc.png\" width=\"120px\"><br><br>THANK YOU FOR PLAYING<br>\"LET US CONTINUE\"<br>(DAYLIGHT) 0.9<br><br>JOHNSON SIDE NET 01/24<br>(incl. further reading 🌞)</b></p>"
 RecReading=true
 
 campaignTrail_temp.modBoxTheme = {
-     "header_color": "#bfe6ff",
-     "header_text_color": "#000000",
-     "description_text_color": "#000000",
-     "description_background_color": "#e8fbff",
-     "main_color": "#bfe6ff",
-     "secondary_color": "#700016",
-     "ui_text_color": "#FFFFFF"
+    "header_color": "#bfe6ff",
+    "header_text_color": "#000000",
+    "description_text_color": "#000000",
+    "description_background_color": "#e8fbff",
+    "main_color": "#bfe6ff",
+    "secondary_color": "#700016",
+    "ui_text_color": "#FFFFFF"
 }
