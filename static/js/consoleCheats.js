@@ -1596,50 +1596,50 @@ const useConsoleCheats = () => {
         `);
 
 	$("head").append(styleTag);
-
-	// QOL: play game with keyboard
-
-	$(document).ready(() => {
-		$(document).keypress((e) => {
-			if (e.isDefaultPrevented()) return;
-
-			const key = e.key;
-
-			if (key === "$") {
-				const expanded = toggleTerminal();
-				if (expanded) {
-					$(".terminal-input")[0].focus({ focusVisible: true });
-				} else {
-					$(".terminal-input")[0].blur();
-				}
-				e.preventDefault();
-			}
-
-			if (document.activeElement !== document.body) return;
-
-			if (key >= "1" && key <= "5") {
-				const radioElts = $(".game_answers");
-				const radioElt = radioElts[key.charCodeAt() - "1".charCodeAt()];
-				if (radioElt) radioElt.checked = true;
-				e.preventDefault();
-			} else if (key === "Enter") {
-				const tryClick = (id) => {
-					const elt = $(id)[0];
-					if (elt != null) {
-						elt.click();
-						return true;
-					} else {
-						return false;
-					}
-				};
-				tryClick("#ok_button") || tryClick("#answer_select_button");
-				e.preventDefault();
-			}
-		});
-	});
 };
 
 window.addEventListener('keypress', (e) => {
 	if (e.key === '$') useConsoleCheats();
+});
+
+
+// QOL: play game with keyboard
+$(document).ready(() => {
+	$(document).keypress((e) => {
+		if (e.isDefaultPrevented()) return;
+
+		const key = e.key;
+
+		if (key === "$") {
+			const expanded = toggleTerminal();
+			if (expanded) {
+				$(".terminal-input")[0].focus({ focusVisible: true });
+			} else {
+				$(".terminal-input")[0].blur();
+			}
+			e.preventDefault();
+		}
+
+		if (document.activeElement !== document.body) return;
+
+		if (key >= "1" && key <= "5") {
+			const radioElts = $(".game_answers");
+			const radioElt = radioElts[key.charCodeAt() - "1".charCodeAt()];
+			if (radioElt) radioElt.checked = true;
+			e.preventDefault();
+		} else if (key === "Enter") {
+			const tryClick = (id) => {
+				const elt = $(id)[0];
+				if (elt != null) {
+					elt.click();
+					return true;
+				} else {
+					return false;
+				}
+			};
+			tryClick("#ok_button") || tryClick("#answer_select_button");
+			e.preventDefault();
+		}
+	});
 });
 
