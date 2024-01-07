@@ -46,10 +46,14 @@
 }
 
 .mod-trophy {
+  position: absolute;
+  right:0px;
+  bottom:0px;
   transition: transform .2s; /* Animation */
 }
 
 .mod-trophy:hover {
+  position: relative;
   transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
