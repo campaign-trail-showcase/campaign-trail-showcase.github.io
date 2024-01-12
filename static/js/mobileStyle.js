@@ -13,6 +13,11 @@ if(mobileMode) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         @media only screen and (max-width: 768px) {
+
+            #benefitwindow {
+                width: 75%!important;
+            }
+
             .inner_window_question,
             #results_container,
             #map_footer,
