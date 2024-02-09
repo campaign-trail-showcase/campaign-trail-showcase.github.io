@@ -2157,7 +2157,7 @@ function divideElectoralVotesProp(e, t) {
                 candidate.evvs = 0
 
                 t.forEach(state => {
-                    const stateIndex = e.states_json.map(f => f.pk).indexOf(state.state)
+                    const stateIndex = e.states_json.map(f => Number(f.pk)).indexOf(Number(state.state))
                     const stateElectoralVotes = e.states_json[stateIndex].fields.electoral_votes
 
                     const candidateIndex = state.result.map(f => f.candidate).indexOf(candidate.pk)
