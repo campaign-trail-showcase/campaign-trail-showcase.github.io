@@ -1059,15 +1059,20 @@ function divideElectoralVotesProp(e, t) {
                     var _ = u();
                     var r = "";
                     for (var n = 0; n < _.length; n++) {
-                        for (let d = 0; d < e.final_overall_results.length; d++)
-                            if(e.final_overall_results[d] == null || _[n] == null) {
-                                console.log("Something went wrong with final_overall_results. d:", d, "n: ", n,"_: ", _, " e:", e);
+                        for (let d = 0; d < e.final_overall_results.length; d++) {
+                            const can1 = e.final_overall_results[d].candidate;
+                            const can2 = _[n].candidate;
+                            
+                            if(DEBUG) {
+                                console.log("final_overall_results. d:", d, "n: ", n,"_: ", _, " e:", e, can1, can2);
                             }
-                            if (e.final_overall_results[d].candidate == _[n].candidate) {
+                            
+                            if (can1 == can2) {
                                 var c = e.final_overall_results[d].electoral_votes;
                                 var popvthing = (pop_vs[d] * 100).toFixed(1)
                             }
-                        r += '            <span style="color:' + _[n].color + "; background-color: " + _[n].color + '">--</span> <b>' + _[n].last_name + "</b> -  " + c + " / " + popvthing + "%<br>"
+                        }
+                        r += '            <span style="color:' + _[n].color + "; background-color: " + _[n].color + '">--</span> <b>' + _[n].last_name + "</b> -  " + c + " / " + popvthing + "%<br>";
                     }
                     var p = f(i);
                     var h = Math.floor(i / 480 * 100);
