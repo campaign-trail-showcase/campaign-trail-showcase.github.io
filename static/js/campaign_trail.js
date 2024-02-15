@@ -1060,6 +1060,9 @@ function divideElectoralVotesProp(e, t) {
                     var r = "";
                     for (var n = 0; n < _.length; n++) {
                         for (let d = 0; d < e.final_overall_results.length; d++)
+                            if(e.final_overall_results[d] == null) {
+                                console.log("Something went wrong with final_overall_results. Key:", d," e:", e);
+                            }
                             if (e.final_overall_results[d].candidate == _[n].candidate) {
                                 var c = e.final_overall_results[d].electoral_votes;
                                 var popvthing = (pop_vs[d] * 100).toFixed(1)
