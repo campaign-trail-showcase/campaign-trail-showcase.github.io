@@ -50,19 +50,27 @@ campaignTrail_temp.answer_score_state_json = JSON.parse("[{\"model\": \"campaign
 function multiplyEffect(num, answers) {
     campaignTrail_temp.answer_score_global_json.forEach(item => {
         if (answers.includes(item.fields.answer)) {
-            item.fields.global_multiplier *= num;
+		    if (!campaignTrail_temp.player_answers.includes(item.fields.answer)){
+				item.fields.global_multiplier *= num;
+				}            
         }
     });
 
     campaignTrail_temp.answer_score_issue_json.forEach(item => {
         if (answers.includes(item.fields.answer)) {
-            item.fields.issue_importance *= num;
+			if (!campaignTrail_temp.player_answers.includes(item.fields.answer)){
+				item.fields.issue_importance *= num;
+				}
+            
         }
     });
 
     campaignTrail_temp.answer_score_state_json.forEach(item => {
         if (answers.includes(item.fields.answer)) {
-            item.fields.state_multiplier *= num;
+			if (!campaignTrail_temp.player_answers.includes(item.fields.answer)){
+				console.log(item.fields.answer)
+				item.fields.state_multiplier *= num;
+				}            
         }
     });
 }
@@ -2565,7 +2573,9 @@ function changeGlobalEffect(affectedCandidate, answer, changeAmount) {
     // Check if the affected candidate and answer fields match the provided values
     if (item.fields.affected_candidate === affectedCandidate && item.fields.answer === answer) {
       // Update the global_multiplier
-      item.fields.global_multiplier += changeAmount;
+	  if (!campaignTrail_temp.player_answers.includes(answer)){
+		item.fields.global_multiplier += changeAmount;
+		}
       found = true;
     }
   });
