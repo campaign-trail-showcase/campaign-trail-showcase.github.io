@@ -2608,7 +2608,10 @@ _ = '   <div class="game_header"> ' + corrr + ' </div> <div id="main_content_are
     }
 
     function A(t) {
-        const i = [e.candidate_id, ...e.opponents_list];
+        let i = [e.candidate_id, ...e.opponents_list];
+        console.log("before",i)
+        i = [...new Set(i.filter((x) => Number(x)))];
+        console.log("after",i)
         let r;
 
         const s = i.map((candidate) => {
