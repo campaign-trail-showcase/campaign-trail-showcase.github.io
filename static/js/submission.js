@@ -329,7 +329,9 @@ async function submitMod() {
 
     data.set('additionalInfo', document.getElementById("fadditional").value);
 
-    let req = await fetch('./', {
+    data.set('updatePassword', document.getElementById("fpassword").value);
+
+    let req = await fetch('https://campaigntrailmojo.eu.pythonanywhere.com/update-repo', {
       method: 'POST',
       body: data,      
     });
