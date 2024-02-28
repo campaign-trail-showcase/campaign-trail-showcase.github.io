@@ -265,7 +265,7 @@ function setUpCode2Submissions(election, candidates, runningMates, tempElection)
         `
     }
 
-    document.getElementById("submitArea").innerHTML += `<button onclick="submitMod()">Submit Mod</button><div>Please only press this button once</div><p style="color:red" id="warning"></p>`
+    document.getElementById("submitArea").innerHTML += `<button id="submitButton" onclick="submitMod()">Submit Mod</button><div>Please only press this button once</div><p style="color:red" id="warning"></p>`
 }
 
 function checkAllPickers() {
@@ -331,17 +331,20 @@ async function submitMod() {
 
     data.set('updatePassword', document.getElementById("fpassword").value);
 
+    document.getElementById("submitButton").style.display = "none";
+    document.getElementById("submitArea").innerHTML = "Submitting please wait...If there is an error refresh the page before trying again";
+
     let req = await fetch('https://campaigntrailmojo.eu.pythonanywhere.com/update-repo', {
       method: 'POST',
       body: data,      
     });
 
     if(!req.ok) {
-        alert("There was an error submitting your mod!");
+        alert("There was an error submitting your mod! See the console for details.");
         console.log(req);
     }
     else {
-        alert("Mod submitted!");
+        alert("Mod submitted! Check CTS Github for status.");
         window.location.href = "../";
     }
    
