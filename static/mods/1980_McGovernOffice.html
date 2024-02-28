@@ -11844,7 +11844,7 @@ endingPicker = (out, totv, aa, quickstats) => {
   e.pages = ["<p></p>",
          	"<p></p>"]
   */
-  if ((e.player_answers.includes(4173) || e.player_answers.includes(4171) || e.player_answers.includes(16433)) && out == "win") {
+  if ((e.player_answers.includes(4173) || e.player_answers.includes(4171) || e.player_answers.includes(16433)) && quickstats[2] == aa[0].popular_votes) {
 	unlockAchievement("A Win-Win Scenario");
 	}
   // NOT NORMAL ENDINGS
