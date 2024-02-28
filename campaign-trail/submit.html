@@ -30,6 +30,13 @@
 
       gtag('config', 'G-H6KK5MD763');
     </script>
+    <style>
+      .section {
+        outline: solid black 1px;
+        padding: 10px;
+        margin: 10px;
+      }
+    </style>
   </head>
   <body style="padding-top: 5%;" class="base" style="position:relative">
     <div id="wittyquote" style="display:none"></div>
@@ -39,11 +46,12 @@
        
             <div class="game_header">
               <h2>CAMPAIGN TRAIL SHOWCASE</h2>
-              <h2>MOD SUBMISSION FORM (WIP, DOES NOT WORK YET)</h2>
+              <h2>MOD SUBMISSION FORM</h2>
             </div>
             
                 <h3>Mod Info</h3>
 
+                <div class="section">
                 <label for="fname">Mod Name:</label><br>
                 <input type="text" id="fname" name="fname" placeholder="Mod Name Goes Here"><br>
 
@@ -52,8 +60,9 @@
 
                 <label for="fadditional">Any Additional Info Needed:</label><br>
                 <textarea type="text" id="fadditional" name="fadditional" placeholder="Anything else we may need to know"></textarea><br>
+                </div>
 
-                <div>
+                <div class="section">
                     <h3>Tags</h3>
                     <p>Please select at least one tag</p>
                     <input class="tagCheckbox" type="checkbox" id="Althist" name="Althist" />
@@ -72,18 +81,24 @@
                     <label for="State">State</label>
                 </div>
 
-                
+               
+
                 <h3>Files</h3>
 
+                <div class="section">
                 <h2>Code 1</h2>
                 <div>This file will be scanned for all playable code 1/2s</div>
                 <br>
                 <label style="font-weight:bold" for="code1">Code 1</label>
                 <input class="filePicker" type="file" id="code1" name="code1" accept="" />
+                </div>
 
                 <h2>Code 2s</h2>
-                <div id="code2s">
+                <div class="section" id="code2s">
                 </div>
+
+                <div id="submitArea"></div>
+              
             
         </div>
         <br>
