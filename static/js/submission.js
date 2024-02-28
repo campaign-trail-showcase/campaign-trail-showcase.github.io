@@ -246,6 +246,8 @@ function setUpCode2Submissions(election, candidates, runningMates, tempElection)
     let electionPk = election[0].pk;
     displayYear = tempElection.display_year ?? election[0].fields.display_year;
 
+    document.getElementById("code1").name = displayYear + "_init";
+
     let modCandidates = candidates.filter((x) => x.fields.election == electionPk);
 
     let code2Names = modCandidates.filter((x) => x.fields.is_active).map((x) => runningMates.filter((y) => y.fields.candidate == x.pk).map(
@@ -290,7 +292,7 @@ async function submitMod() {
     for (const filePicker of document.getElementsByClassName("filePicker")) {
         if(filePicker.files[0]) {
             validFileCount++;
-            data.append(filePicker.files[0].name, filePicker.files[0], filePicker.files[0].name);
+            data.append(filePicker.name + ".html", filePicker.files[0], filePicker.name + ".html");
         }
     }
 
