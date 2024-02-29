@@ -345,7 +345,7 @@ async function submitMod() {
     }
     else {
         alert("Mod submitted! Check CTS Github for status.");
-        window.location.href = "../";
+        window.location.href = "https://github.com/campaign-trail-showcase/campaign-trail-showcase.github.io/pulls";
     }
    
 }
