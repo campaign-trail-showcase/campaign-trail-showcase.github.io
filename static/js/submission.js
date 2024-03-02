@@ -1,3 +1,4 @@
+let displayYear = null;
 
 function extractElectionDetails(rawModText, nameOfMod) {
 
@@ -243,7 +244,9 @@ function setUpCode2Submissions(election, candidates, runningMates, tempElection)
     code2Area.innerHTML = "";
 
     let electionPk = election[0].pk;
-    let displayYear = tempElection.display_year ?? election[0].fields.display_year;
+    displayYear = tempElection.display_year ?? election[0].fields.display_year;
+
+    document.getElementById("code1").name = displayYear + "_init";
 
     let modCandidates = candidates.filter((x) => x.fields.election == electionPk);
 
@@ -257,25 +260,47 @@ function setUpCode2Submissions(election, candidates, runningMates, tempElection)
         let id = name.split(".html")[0];
         code2Area.innerHTML += `
         <label style="font-weight:bold" for="${id}">${name}</label>
-        <input class="filePicker" type="file" id="${id}" name="${id}" accept="" />
+        <input onchange="checkAllPickers()" class="filePicker" type="file" id="${id}" name="${id}" accept="" />
         <br><br>
         `
     }
 
-    code2Area.innerHTML += `<button onclick="submitMod()">Submit Mod</button><div>Please only press this button once</div>`
+    document.getElementById("submitArea").innerHTML += `<button id="submitButton" onclick="submitMod()">Submit Mod</button><div>Please only press this button once</div><p style="color:red" id="warning"></p>`
+}
+
+function checkAllPickers() {
+    let allCode2s = true;
+    for (const filePicker of document.getElementsByClassName("filePicker")) {
+        if(!filePicker.files[0]) {
+            allCode2s = false;
+        }
+    }
+
+    if(!allCode2s) {
+        document.getElementById("warning").innerText =  "Warning: Not all candidates/running mates have a code 2. If this is intentional because a candidate is not playable you are fine. Otherwise make sure all are uploaded before submitting.";
+    }
+    else {
+        document.getElementById("warning").innerText = "";
+    }
 }
 
 async function submitMod() {
     const data = new FormData();
 
+    let validFileCount = 0;
+
     for (const filePicker of document.getElementsByClassName("filePicker")) {
-        try {
-            data.append(filePicker.files[0].name, filePicker.files[0], filePicker.files[0].name);
+        if(filePicker.files[0]) {
+            validFileCount++;
+            data.append(filePicker.name + ".html", filePicker.files[0], filePicker.name + ".html");
         }
-        catch {
-            alert("Error uploading code 2s, are you sure you uploaded them all?");
-            return;
-        }
+    }
+
+    let anyCode2 = validFileCount > 1;
+
+    if(!anyCode2) {
+        alert("You did not upload any Code 2s!");
+        return;
     }
 
     const tags = Array.from(document.getElementsByClassName("tagCheckbox")).filter((x) => x.checked).map((x) => x.name);
@@ -293,6 +318,7 @@ async function submitMod() {
     }
 
     data.set('modName', document.getElementById("fname").value);
+    data.set('modDisplayYear', displayYear);
   
     if(document.getElementById("fcontact").value == "") {
         alert("Please add your contact info");
@@ -303,18 +329,23 @@ async function submitMod() {
 
     data.set('additionalInfo', document.getElementById("fadditional").value);
 
-    let req = await fetch('./', {
+    data.set('updatePassword', document.getElementById("fpassword").value);
+
+    document.getElementById("submitButton").style.display = "none";
+    document.getElementById("submitArea").innerHTML = "Submitting please wait...If there is an error refresh the page before trying again";
+
+    let req = await fetch('https://campaigntrailmojo.eu.pythonanywhere.com/update-repo', {
       method: 'POST',
       body: data,      
     });
 
     if(!req.ok) {
-        alert("There was an error submitting your mod!");
+        alert("There was an error submitting your mod! See the console for details.");
         console.log(req);
     }
     else {
-        alert("Mod submitted!");
-        window.location.href = "../";
+        alert("Mod submitted! Check CTS Github for status.");
+        window.location.href = "https://github.com/campaign-trail-showcase/campaign-trail-showcase.github.io/pulls";
     }
    
 }
