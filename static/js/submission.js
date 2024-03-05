@@ -340,8 +340,8 @@ async function submitMod() {
     });
 
     if(!req.ok) {
-        alert("There was an error submitting your mod! See the console for details.");
-        console.log(req);
+        alert("There was an error submitting your mod request to the server! See the console for details.");
+        console.log("Request:", req);
     }
     else {
         alert("Mod submitted! Check CTS Github for status.");
