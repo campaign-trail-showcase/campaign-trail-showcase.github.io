@@ -270,7 +270,6 @@ $(document).ready(async function() {
 
     if(modNameParam != null) {
         loadModFromButton(modNameParam);
-        document.getElementById("goBackButton").style.display = "inline";
     }
 
     createTagButtons(tagsFound);
@@ -584,6 +583,7 @@ function loadModFromButton(modValue) {
         return;
     }
 
+    document.getElementById("goBackButton").style.display = "inline";
     loadingFromModButton = true;
     e = campaignTrail_temp
     if(customMods.has(modValue)) {
