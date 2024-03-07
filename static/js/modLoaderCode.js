@@ -592,6 +592,10 @@ function loadModFromButton(modValue) {
         customMod = modValue;
     }
     else {
+        if(!location.href.includes("?modName")) {
+            history.replaceState(null, "", "?modName=" + modValue);
+        }
+        
         var client = new XMLHttpRequest();
         client.open('GET', "../static/mods/" + modValue + "_init.html");
         client.onreadystatechange = function() {
