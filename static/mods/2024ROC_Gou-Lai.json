@@ -1,0 +1,4020 @@
+campaignTrail_temp.questions_json = [
+    {
+        "model": "campaign_trail.question",
+        "pk": 12761,
+        "fields": {
+            "priority": 0,
+            "description": "\nAs of January 2023, Chairman Terry Gou, Happy New Year! This year is an election year. With the DPP's significant defeat in last year's county and city mayor elections, you may have the opportunity to become the Kuomintang (KMT) presidential candidate for 2024. In this year, what are your primary political objectives?\n",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12762,
+        "fields": {
+            "priority": 0,
+            "description": "\nOn March 22nd, the Kuomintang (KMT) Central Committee decided to use a draft system to determine the presidential candidate for 2024. It was announced that you and Mayor Hou You-yi would compete in the primary, with the final winner to be decided based on party opinions and the highest results in public opinion polls. What is your assessment of this decision?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12763,
+        "fields": {
+            "priority": 0,
+            "description": "On May 17th, the Kuomintang will announce the results of the presidential nomination. In the final sprint phase, it is crucial for you to enhance your grassroots support and approval in specific regions. Otherwise, your non-party membership status will naturally impact how the KMT's grassroots perceives you. Returning to party membership also requires certain procedures and measures. Which areas do you hope to visit?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12764,
+        "fields": {
+            "priority": 0,
+            "description": "Today is May 17th, and Chairman Eric Chu would like to invite you to the central party headquarters to hear the final results of the primary. You get into your private car and drive to the Kuomintang (KMT) central party headquarters. The candidate to be officially announced today for drafting is...",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12765,
+        "fields": {
+            "priority": 0,
+            "description": "Chairman Guo, with the conclusion of the primary elections, you currently find yourself without any political standing or attention. Perhaps it's time to return to managing your personal business or embark on a foreign journey. However, if your political ambitions persist, maybe you could consider running as an independent candidate...?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12766,
+        "fields": {
+            "priority": 0,
+            "description": "With the failed of your candidacy, many polls have ceased to consider you, but as long as you continue to make moves, the media will refocus on you. What statements do you plan to make during this period to capture attention?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12767,
+        "fields": {
+            "priority": 0,
+            "description": "With your decision not to publicly endorse Hou You-yi but rather to focus on your own schedule in various locations, many media outlets have shifted their attention to your campaign activities. Meanwhile, the Kuomintang is currently occupied with handling Hou's kindergarten incident, temporarily overlooking your presence. During this period, what should we do to enhance your influence and bring back your staunch supporters?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12768,
+        "fields": {
+            "priority": 0,
+            "description": "Due to Hou You-yi's continuous decline in polls, there are voices within the Kuomintang clamoring to revoke his nomination and replace him with Han Kuo-yu or Terry Gou. Are you willing to continue promoting such discourse?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12769,
+        "fields": {
+            "priority": 0,
+            "description": "\nOn July 23rd, Han Kuo-yu made an appearance to endorse Hou You-yi, announcing his support to oust the Democratic Progressive Party. Although the effort was modest, it has already started to draw back some of Han's supporters and deep-blue voters to the Kuomintang. The good news is that many polls have reintroduced you, with your support rating hovering around 10% to 15%. This suggests that you could significantly influence the fate of opposition candidates.",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12770,
+        "fields": {
+            "priority": 0,
+            "description": "Entering August, it's time to prepare for announcing your independent candidacy! But before that, let's engage in some more campaign activities to build momentum. What kind of activities do you prefer to garner attention and votes?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12771,
+        "fields": {
+            "priority": 0,
+            "description": "August 28th, the day has finally arrived! Today, at the 'Mainstream Public Opinion Alliance' press conference, you announced the long-awaited news of your independent candidacy! The announcement you made at the press conference has sent shockwaves across the nation, and now, the election officially has four candidates!",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12772,
+        "fields": {
+            "priority": 0,
+            "description": "As you officially declare the start of your independent candidacy, you require a vice-presidential candidate to meet legal requirements. Therefore, before all other candidates announce their running mates, you need to unveil yours. On September 14th, you hold a press conference and announce your running mate as...",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12773,
+        "fields": {
+            "priority": 0,
+            "description": "With your announcement of independent candidacy and the confirmation of your vice presidential candidate, the law stipulates that the number of citizen signatures must reach 1.5% of the total number of eligible voters in the most recent legislative election. This means you need over 290,000 citizen signatures to qualify for independent candidacy. Your finances are certainly not an issue, but in which major areas should we set up signature collection sites to gather the most signatures?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12774,
+        "fields": {
+            "priority": 0,
+            "description": "\nThroughout September and October, you've been busy setting up more citizen signature collection sites, investing a significant amount of time in the process. Fortunately, you quickly reached the threshold for citizen signatures. In an effort to showcase strength, you're attempting to garner even more signatures. Unfortunately, discussions of blue-green cooperation between Hou and Ke have started to gradually lower your poll numbers. This isn't a good sign...",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12775,
+        "fields": {
+            "priority": 0,
+            "description": "ww",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12776,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12777,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12778,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12779,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12780,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12781,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12782,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12783,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12784,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12785,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12786,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12787,
+        "fields": {
+            "priority": 0,
+            "description": "put description here",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12788,
+        "fields": {
+            "priority": 0,
+            "description": "It's November 2023, and you've obtained over a million citizen signatures, which you can now submit to the CEC to formalize your candidacy. However, despite the increase in signatures, it hasn't improved your polling numbers. Since the blue-white coalition further united, your polling numbers have consistently been below 10% and even lower. On November 15th, the blue-white coalition decided to jointly nominate a presidential ticket. What do you need to do now?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12789,
+        "fields": {
+            "priority": 0,
+            "description": "\nOn November 23rd, you invited Mayor Hou and Chairman Ke to the Taipei Grand Hyatt Hotel to discuss polling margin of error and final candidate issues. However, Mayor Hou unexpectedly brought former President Ma Ying-jeou and KMT Chairman Eric Chu, which was an unexpected development, as you did not invite these two individuals. What statement would you like to make?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 12790,
+        "fields": {
+            "priority": 0,
+            "description": "\nToday is November 24th, and with yesterday's negotiations ending in no resolution, you have reached a moment where you must make a decision. Will you continue to run with the current ultra-low polling support, or will you choose to withdraw and facilitate a rotation of power between the KMT and TPP parties?",
+            "likelihood": 1
+        }
+    }
+]
+
+campaignTrail_temp.answers_json = [
+    {
+        "model": "campaign_trail.answer",
+        "pk": 12903,
+        "fields": {
+            "question": 12761,
+            "description": "I am now announcing my participation in the Kuomintang (KMT) presidential primary, and I hope Chairman Eric Chu can nominate me as the presidential candidate!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 12904,
+        "fields": {
+            "question": 12761,
+            "description": "I aim to strengthen my image among mayors and legislators across various counties and cities. Gaining their support would be highly beneficial for my campaign!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 12905,
+        "fields": {
+            "question": 12761,
+            "description": "\nCertainly, my top priority is to boost my poll numbers! In politics, high poll ratings can make a significant impact, and with strong public support, I am confident that the Kuomintang will nominate me for the presidency!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 12915,
+        "fields": {
+            "question": 12762,
+            "description": "I can contribute a significant amount of campaign funds to the Kuomintang, merely by allocating a portion of the profits from my stock holdings. This would enable us to organize substantial campaign activities, allowing us to invest heavily in promotional efforts!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 12916,
+        "fields": {
+            "question": 12762,
+            "description": "Mayor Hou is a pragmatic and capable individual, and I am pleased to compete with him in the primary. However, I hope he does not relinquish his position as the Mayor of New Taipei City."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 12917,
+        "fields": {
+            "question": 12762,
+            "description": "Mayor Hou manages New Taipei City, which is also my hometown. I was born in Banqiao District, so I hope Mayor Hou can stay and continue serving the people of New Taipei City. As for the presidency, let me take care of that!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13101,
+        "fields": {
+            "question": 12763,
+            "description": "Of course, it would be in my hometown of New Taipei City! It's also the area where Mayor Hou is in office, allowing me to shape an image of direct confrontation with him!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13102,
+        "fields": {
+            "question": 12763,
+            "description": "Let me connect with the elderly members of the Blue Camp in the capital city Taipei. In this blue stronghold, we must prevail over Mayor Hou You-yi!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13103,
+        "fields": {
+            "question": 12763,
+            "description": "We must showcase our strength in the vulnerable southern region of the KMT. Let's organize a gathering in Kaohsiung, and it would be even better if I could speak a few sentences in Taiwanese!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13104,
+        "fields": {
+            "question": 12763,
+            "description": "Why not organize events in Taoyuan, a city with a thriving high-tech industry and a significant population? We will compete with Mayor Hou in the Hakka region!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13115,
+        "fields": {
+            "question": 12764,
+            "description": "...Why isn't the drafting for me?!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13116,
+        "fields": {
+            "question": 12764,
+            "description": "...Why isn't the drafting for me?!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13117,
+        "fields": {
+            "question": 12764,
+            "description": "...Why isn't the drafting for me?!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13121,
+        "fields": {
+            "question": 12764,
+            "description": "...Why isn't the drafting for me?!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13130,
+        "fields": {
+            "question": 12765,
+            "description": "I have decided to run for president as an independent candidate, but let's not announce it too early. Currently, polls indicate that the KMT candidate is a clear favorite, so I am excluded from the polls. We need to reach out to local factions, legislators, and influential figures within the blue camp, building momentum for the independent candidacy!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13153,
+        "fields": {
+            "question": 12766,
+            "description": "Let me take a stroll in Kinmen, allowing me to appear alongside Legislator Chen Yu-chen, who has always supported me. I want everyone to know that my political journey is not over yet!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13154,
+        "fields": {
+            "question": 12766,
+            "description": "Let me head to the southern part of the country to meet with former county mayors, speakers, and local factions within the Kuomintang. They could provide valuable support and attract media attention for me!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13155,
+        "fields": {
+            "question": 12766,
+            "description": "Hey, let's showcase my vision for the nation! I can bring peace across the strait, prosperity to the economy, and justice to society. As an innovative entrepreneur, an unconventional political figure, a political outsider, I have the capability to bring the best future for Taiwan!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13168,
+        "fields": {
+            "question": 12767,
+            "description": "Let's continue to make emotional appeals to the deep-blue mainlanders. I, too, came from the mainland, born in 1950 when Taiwan was still underdeveloped. However, the Republic of China has empowered Taiwan to become a formidable player on the world stage. Our nation is truly great!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13169,
+        "fields": {
+            "question": 12767,
+            "description": "I want to emphasize my identity as a successful entrepreneur. I was once the wealthiest person in Taiwan and remain one of the wealthiest individuals in the country. I intend to bring my leadership style and track record of success from the business world into politics, contributing to the prosperity of Taiwan's economy!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13170,
+        "fields": {
+            "question": 12767,
+            "description": "Let's recruit some young, dynamic individuals with strong public images and absorb those who have faced setbacks and underutilization within the broader blue camp. Since my campaign still revolves around the blue color, I need them for support!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13171,
+        "fields": {
+            "question": 12767,
+            "description": "Let me showcase our diplomatic experience. Have you seen this photo? That's me with President Trump. I can assure you, I have better international connections than any other candidate here. Even Lai Ching-te wouldn't get a foot in white house!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13182,
+        "fields": {
+            "question": 12768,
+            "description": "Let's vigorously promote this discourse! Terry Gou is the best KMT candidate. It's best to have some local faction leaders come out and speak up in support of Gou!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13183,
+        "fields": {
+            "question": 12768,
+            "description": "We don't want to waste time on such impossible matters. Anyway, Han Kuo-yu might be more inclined to support Hou rather than me. Perhaps Hou didn't assist him back in 2019, but I am Han's direct competitor. I don't want to undermine Hou too much to the point where Han taking stage."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13193,
+        "fields": {
+            "question": 12769,
+            "description": "Let's continue our efforts towards an independent candidacy! Reappearing in the polls is just the first step. The next step is to announce my independent candidacy. That's when our true rise will begin!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13208,
+        "fields": {
+            "question": 12770,
+            "description": "\"Let's release a book specifically targeted at young people! The book could be titled '30 Pieces of Advice from Gou Dad to Young People.' Many young individuals aspire to the lives and experiences of successful figures, and who better than me to offer them that?\""
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13209,
+        "fields": {
+            "question": 12770,
+            "description": "Instead of wasting time on these useless online activities, let's focus on grassroots campaigning offline. We'll hold a rally in Pingtung to boost our momentum and snatch votes away from the Kuomintang!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13210,
+        "fields": {
+            "question": 12770,
+            "description": "I want everyone to hear the story of 'The Three Little Pigs.' We can't defeat the DPP without unity. I invite Ko Wen-je and Hou You-yi to sit down for a 'coffee chat,' hoping to have a constructive discussion on cooperation within the mainstream public opinion framework and work together to oust the DPP."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13211,
+        "fields": {
+            "question": 12770,
+            "description": "I want to start directing the criticism towards the current DPP government. In recent years, the DPP has heavily suppressed freedom of speech and exhibited arrogance and incompetence. Their flawed energy policies, along with Lai Ching-te and Tsai Ing-wen, should not forget the original intention of the DPP!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13226,
+        "fields": {
+            "question": 12771,
+            "description": "I know you media folks love to nitpick and amplify the flaws in my words, but today, I'm announcing my independent candidacy and garnering enough citizen signatures to achieve our goal of unity in the opposition!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13227,
+        "fields": {
+            "question": 12771,
+            "description": "I announce my candidacy for president and officially launch a comprehensive citizen coalition signature drive to qualify as a candidate, representing the mainstream consensus of both the blue and white parties.  I firmly believe that public opinion always surpasses party interests, and the public good always outweighs personal gain.  "
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13236,
+        "fields": {
+            "question": 12772,
+            "description": "I have chosen Ms. Lai Pei-hsia, who has American heritage, as my vice president. She possesses excellent image, eloquence, and is a respected woman. Additionally, being a political outsider, she can strengthen and complement my shortcomings. She has a background in acting and now is the vice presidential candidate!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13240,
+        "fields": {
+            "question": 12772,
+            "description": "Do you remember Wave Makers? That's right, in that TV series, Lai Pei-hsia played the role of the female president! Now, she transitions from the stage to reality to serve as my vice president. It's truly surreal"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13244,
+        "fields": {
+            "question": 12773,
+            "description": "We will set up signature collection sites in places like Changhua, Yunlin, Pingtung, and Nantou, where powerful local factions reside. We'll leverage the discord between these local factions and the Kuomintang to boost the number of signatures."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13245,
+        "fields": {
+            "question": 12773,
+            "description": "I will directly confront the Kuomintang in the northern regions, strengthening my influence in New Taipei, Taipei, and Keelung. I want the Kuomintang to know that my financial power is exceptionally strong!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13246,
+        "fields": {
+            "question": 12773,
+            "description": "Let's garner some support in the southern regions of Tainan, Chiayi, and Kaohsiung! I've heard there are many deep-green individuals here willing to help with my signature collection... Regardless of their intentions, I can boost my number of signatures!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13247,
+        "fields": {
+            "question": 12773,
+            "description": "Let's gather signatures in Miaoli, Hsinchu, Hualien, Taitung, Kinmen, and Matsu, where the Kuomintang holds significant influence. People in these areas are likely to shift their support to me easily, as I am a candidate bluer than Hou!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13270,
+        "fields": {
+            "question": 12774,
+            "description": "... It seems like my independent candidacy doesn't have much hope after all? Poll numbers are declining more and more..."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13275,
+        "fields": {
+            "question": 12775,
+            "description": "Let's wait and see. Perhaps there will be a turn of events?"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13280,
+        "fields": {
+            "question": 12788,
+            "description": "Let's wait and see. Perhaps there will be a turn of events?"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13285,
+        "fields": {
+            "question": 12789,
+            "description": "I only invited Mayor Hou, so it was unexpected to have former President Ma Ying-jeou and Chairman Eric Chu attend. President Ma has been a benefactor to me, but today they both are heavyweight unexpected guests..."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13286,
+        "fields": {
+            "question": 12789,
+            "description": "\nSince both Chairman Ko Wen-je and Mayor Hou believe that integration needs to go through me and have asked me to be a mediator, then I will step up. I am willing to pay any price to facilitate the victory of mainstream public opinion."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13287,
+        "fields": {
+            "question": 12789,
+            "description": "What? Are you going to discuss statistics and polling issues? Sorry, I'll go to the restroom. Grabbing a cup of coffee on the way."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13288,
+        "fields": {
+            "question": 12789,
+            "description": "\nMayor Hou, Chairman Ko, I've booked the pricey Room 2538. If you have any consensus or issues to discuss, you can go upstairs. I'll leave this space for the reporters."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13297,
+        "fields": {
+            "question": 12790,
+            "description": "\nI will continue to run and persevere until January 13th. I want the KMT to know that I am not someone to be trifled with. Even if I don't win, they won't win either!\n\n"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 13298,
+        "fields": {
+            "question": 12790,
+            "description": "\nSigh, I'll withdraw from this election. I don't want to burden the blue and white camps anymore. Let them compete on their own. I hope the DPP can be defeated."
+        }
+    }
+]
+
+campaignTrail_temp.states_json = [
+    {
+        "model": "campaign_trail.state",
+        "pk": 251,
+        "fields": {
+            "name": "Tainan City",
+            "abbr": "Tainancity",
+            "electoral_votes": 1,
+            "popular_votes": 1120238,
+            "poll_closing_time": 150,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 252,
+        "fields": {
+            "name": "Kaohsiung City",
+            "abbr": "Kaohsiungcity",
+            "electoral_votes": 1,
+            "popular_votes": 1636962,
+            "poll_closing_time": 180,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 253,
+        "fields": {
+            "name": "Pingtung County",
+            "abbr": "Pingtung",
+            "electoral_votes": 1,
+            "popular_votes": 475927,
+            "poll_closing_time": 120,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 254,
+        "fields": {
+            "name": "Taidong County",
+            "abbr": "Taidong",
+            "electoral_votes": 1,
+            "popular_votes": 109941,
+            "poll_closing_time": 75,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 255,
+        "fields": {
+            "name": "Hualien County",
+            "abbr": "Hualien",
+            "electoral_votes": 1,
+            "popular_votes": 174157,
+            "poll_closing_time": 90,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 256,
+        "fields": {
+            "name": "Chiayi County",
+            "abbr": "ChiayiCounty",
+            "electoral_votes": 1,
+            "popular_votes": 292534,
+            "poll_closing_time": 110,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 257,
+        "fields": {
+            "name": "Chiayi City",
+            "abbr": "ChiayiCity",
+            "electoral_votes": 1,
+            "popular_votes": 157656,
+            "poll_closing_time": 80,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 258,
+        "fields": {
+            "name": "Nantou County",
+            "abbr": "Nantou",
+            "electoral_votes": 1,
+            "popular_votes": 287296,
+            "poll_closing_time": 110,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 259,
+        "fields": {
+            "name": "Yunlin County",
+            "abbr": "Yunlin",
+            "electoral_votes": 1,
+            "popular_votes": 380619,
+            "poll_closing_time": 130,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 260,
+        "fields": {
+            "name": "Changhua County",
+            "abbr": "Changhua",
+            "electoral_votes": 1,
+            "popular_votes": 741368,
+            "poll_closing_time": 150,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 261,
+        "fields": {
+            "name": "Penghu County",
+            "abbr": "Penghu",
+            "electoral_votes": 1,
+            "popular_votes": 49277,
+            "poll_closing_time": 120,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 262,
+        "fields": {
+            "name": "Taichung City",
+            "abbr": "Taichung",
+            "electoral_votes": 1,
+            "popular_votes": 1707203,
+            "poll_closing_time": 200,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 263,
+        "fields": {
+            "name": "Yilan County",
+            "abbr": "Yilan",
+            "electoral_votes": 1,
+            "popular_votes": 267129,
+            "poll_closing_time": 120,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 264,
+        "fields": {
+            "name": "Hsinchu County",
+            "abbr": "HsinchuCounty",
+            "electoral_votes": 1,
+            "popular_votes": 340310,
+            "poll_closing_time": 110,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 265,
+        "fields": {
+            "name": "Hsinchu City",
+            "abbr": "HsinchuCity",
+            "electoral_votes": 1,
+            "popular_votes": 266389,
+            "poll_closing_time": 100,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 266,
+        "fields": {
+            "name": "Miaoli County",
+            "abbr": "Miaoli",
+            "electoral_votes": 1,
+            "popular_votes": 318665,
+            "poll_closing_time": 110,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 267,
+        "fields": {
+            "name": "New Taipei City",
+            "abbr": "Newtaipei",
+            "electoral_votes": 1,
+            "popular_votes": 2458480,
+            "poll_closing_time": 225,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 268,
+        "fields": {
+            "name": "Taipei City",
+            "abbr": "Taipei",
+            "electoral_votes": 1,
+            "popular_votes": 1542009,
+            "poll_closing_time": 200,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 269,
+        "fields": {
+            "name": "Taoyuan City",
+            "abbr": "Taoyuan",
+            "electoral_votes": 1,
+            "popular_votes": 1350792,
+            "poll_closing_time": 150,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 270,
+        "fields": {
+            "name": "Keelung City",
+            "abbr": "Keelung",
+            "electoral_votes": 1,
+            "popular_votes": 218781,
+            "poll_closing_time": 100,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 271,
+        "fields": {
+            "name": "Kinmen County",
+            "abbr": "Kinmen",
+            "electoral_votes": 1,
+            "popular_votes": 45612,
+            "poll_closing_time": 70,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.state",
+        "pk": 272,
+        "fields": {
+            "name": "Lienchiang County",
+            "abbr": "Matsu",
+            "electoral_votes": 1,
+            "popular_votes": 6159,
+            "poll_closing_time": 50,
+            "winner_take_all_flg": 1,
+            "election": 20
+        }
+    }
+]
+
+campaignTrail_temp.issues_json = [
+    {
+        "model": "campaign_trail.issue",
+        "pk": 32,
+        "fields": {
+            "name": "Party coalition",
+            "description": 0,
+            "stance_1": "Deep Green",
+            "stance_desc_1": 0,
+            "stance_2": "Green",
+            "stance_desc_2": 0,
+            "stance_3": "Light Green",
+            "stance_desc_3": 0,
+            "stance_4": "Neutral",
+            "stance_desc_4": 0,
+            "stance_5": "Light Blue",
+            "stance_desc_5": 0,
+            "stance_6": "Blue",
+            "stance_desc_6": 0,
+            "stance_7": "Deep Blue",
+            "stance_desc_7": 0,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.issue",
+        "pk": 33,
+        "fields": {
+            "name": "Provincial differences",
+            "description": 0,
+            "stance_1": "Mostly Taiwanese",
+            "stance_desc_1": 0,
+            "stance_2": "Taiwanese and Hakka mixed",
+            "stance_desc_2": 0,
+            "stance_3": "Taiwanese,Hakka,Mainlanders mixed",
+            "stance_desc_3": 0,
+            "stance_4": "mixing of ethnic groups",
+            "stance_desc_4": 0,
+            "stance_5": "Aboriginal",
+            "stance_desc_5": 0,
+            "stance_6": "Taiwanese Hakka(Northern)",
+            "stance_desc_6": 0,
+            "stance_7": "Mostly Mainlanders",
+            "stance_desc_7": 0,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.issue",
+        "pk": 34,
+        "fields": {
+            "name": "Urban/rural differences",
+            "description": 0,
+            "stance_1": "Townships Rural",
+            "stance_desc_1": 0,
+            "stance_2": "Small towns and large towns",
+            "stance_desc_2": 0,
+            "stance_3": "Small cities and towns",
+            "stance_desc_3": 0,
+            "stance_4": "Medium-sized city",
+            "stance_desc_4": 0,
+            "stance_5": "Groups of Small Cities",
+            "stance_desc_5": 0,
+            "stance_6": "Large Cities",
+            "stance_desc_6": 0,
+            "stance_7": "Capitals",
+            "stance_desc_7": 0,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.issue",
+        "pk": 35,
+        "fields": {
+            "name": "Young population",
+            "description": 0,
+            "stance_1": "Very little",
+            "stance_desc_1": 0,
+            "stance_2": "Little",
+            "stance_desc_2": 0,
+            "stance_3": "Less",
+            "stance_desc_3": 0,
+            "stance_4": "Normal level",
+            "stance_desc_4": 0,
+            "stance_5": "Relatively much more",
+            "stance_desc_5": 0,
+            "stance_6": "Large young population",
+            "stance_desc_6": 0,
+            "stance_7": "Younger society",
+            "stance_desc_7": 0,
+            "election": 20
+        }
+    },
+    {
+        "model": "campaign_trail.issue",
+        "pk": 36,
+        "fields": {
+            "name": "Feelings about DPP Government",
+            "description": 0,
+            "stance_1": "DPP is the best!",
+            "stance_desc_1": 0,
+            "stance_2": "That's what we like!",
+            "stance_desc_2": 0,
+            "stance_3": "Pro-DPP",
+            "stance_desc_3": 0,
+            "stance_4": "no feelings for the DPP",
+            "stance_desc_4": 0,
+            "stance_5": "Hate green governance",
+            "stance_desc_5": 0,
+            "stance_6": "Mosquitoes, cockroaches, and the DPP",
+            "stance_desc_6": 0,
+            "stance_7": "Never support the Taiwan Independence Party!!",
+            "stance_desc_7": 0,
+            "election": 20
+        }
+    }
+]
+
+campaignTrail_temp.state_issue_score_json = []
+
+campaignTrail_temp.candidate_issue_score_json = [
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 12977,
+        "fields": {
+            "candidate": 2001653,
+            "issue": 32,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 12978,
+        "fields": {
+            "candidate": 2001653,
+            "issue": 33,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 12979,
+        "fields": {
+            "candidate": 2001653,
+            "issue": 34,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 12980,
+        "fields": {
+            "candidate": 2001653,
+            "issue": 35,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 12981,
+        "fields": {
+            "candidate": 2001653,
+            "issue": 36,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13005,
+        "fields": {
+            "candidate": 12982,
+            "issue": 32,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13006,
+        "fields": {
+            "candidate": 12982,
+            "issue": 33,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13007,
+        "fields": {
+            "candidate": 12982,
+            "issue": 34,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13008,
+        "fields": {
+            "candidate": 12982,
+            "issue": 35,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13009,
+        "fields": {
+            "candidate": 12982,
+            "issue": 36,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13033,
+        "fields": {
+            "candidate": 13010,
+            "issue": 32,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13034,
+        "fields": {
+            "candidate": 13010,
+            "issue": 33,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13035,
+        "fields": {
+            "candidate": 13010,
+            "issue": 34,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13036,
+        "fields": {
+            "candidate": 13010,
+            "issue": 35,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13037,
+        "fields": {
+            "candidate": 13010,
+            "issue": 36,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13061,
+        "fields": {
+            "candidate": 13038,
+            "issue": 32,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13062,
+        "fields": {
+            "candidate": 13038,
+            "issue": 33,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13063,
+        "fields": {
+            "candidate": 13038,
+            "issue": 34,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13064,
+        "fields": {
+            "candidate": 13038,
+            "issue": 35,
+            "issue_score": 0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 13065,
+        "fields": {
+            "candidate": 13038,
+            "issue": 36,
+            "issue_score": 0
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_issue_score_json = []
+
+campaignTrail_temp.candidate_state_multiplier_json = [
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12955,
+        "fields": {
+            "candidate": 2001653,
+            "state": 251,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12956,
+        "fields": {
+            "candidate": 2001653,
+            "state": 252,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12957,
+        "fields": {
+            "candidate": 2001653,
+            "state": 253,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12958,
+        "fields": {
+            "candidate": 2001653,
+            "state": 254,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12959,
+        "fields": {
+            "candidate": 2001653,
+            "state": 255,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12960,
+        "fields": {
+            "candidate": 2001653,
+            "state": 256,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12961,
+        "fields": {
+            "candidate": 2001653,
+            "state": 257,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12962,
+        "fields": {
+            "candidate": 2001653,
+            "state": 258,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12963,
+        "fields": {
+            "candidate": 2001653,
+            "state": 259,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12964,
+        "fields": {
+            "candidate": 2001653,
+            "state": 260,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12965,
+        "fields": {
+            "candidate": 2001653,
+            "state": 261,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12966,
+        "fields": {
+            "candidate": 2001653,
+            "state": 262,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12967,
+        "fields": {
+            "candidate": 2001653,
+            "state": 263,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12968,
+        "fields": {
+            "candidate": 2001653,
+            "state": 264,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12969,
+        "fields": {
+            "candidate": 2001653,
+            "state": 265,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12970,
+        "fields": {
+            "candidate": 2001653,
+            "state": 266,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12971,
+        "fields": {
+            "candidate": 2001653,
+            "state": 267,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12972,
+        "fields": {
+            "candidate": 2001653,
+            "state": 268,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12973,
+        "fields": {
+            "candidate": 2001653,
+            "state": 269,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12974,
+        "fields": {
+            "candidate": 2001653,
+            "state": 270,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12975,
+        "fields": {
+            "candidate": 2001653,
+            "state": 271,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12976,
+        "fields": {
+            "candidate": 2001653,
+            "state": 272,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12983,
+        "fields": {
+            "candidate": 12982,
+            "state": 251,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12984,
+        "fields": {
+            "candidate": 12982,
+            "state": 252,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12985,
+        "fields": {
+            "candidate": 12982,
+            "state": 253,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12986,
+        "fields": {
+            "candidate": 12982,
+            "state": 254,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12987,
+        "fields": {
+            "candidate": 12982,
+            "state": 255,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12988,
+        "fields": {
+            "candidate": 12982,
+            "state": 256,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12989,
+        "fields": {
+            "candidate": 12982,
+            "state": 257,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12990,
+        "fields": {
+            "candidate": 12982,
+            "state": 258,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12991,
+        "fields": {
+            "candidate": 12982,
+            "state": 259,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12992,
+        "fields": {
+            "candidate": 12982,
+            "state": 260,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12993,
+        "fields": {
+            "candidate": 12982,
+            "state": 261,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12994,
+        "fields": {
+            "candidate": 12982,
+            "state": 262,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12995,
+        "fields": {
+            "candidate": 12982,
+            "state": 263,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12996,
+        "fields": {
+            "candidate": 12982,
+            "state": 264,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12997,
+        "fields": {
+            "candidate": 12982,
+            "state": 265,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12998,
+        "fields": {
+            "candidate": 12982,
+            "state": 266,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12999,
+        "fields": {
+            "candidate": 12982,
+            "state": 267,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13000,
+        "fields": {
+            "candidate": 12982,
+            "state": 268,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13001,
+        "fields": {
+            "candidate": 12982,
+            "state": 269,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13002,
+        "fields": {
+            "candidate": 12982,
+            "state": 270,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13003,
+        "fields": {
+            "candidate": 12982,
+            "state": 271,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13004,
+        "fields": {
+            "candidate": 12982,
+            "state": 272,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13011,
+        "fields": {
+            "candidate": 13010,
+            "state": 251,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13012,
+        "fields": {
+            "candidate": 13010,
+            "state": 252,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13013,
+        "fields": {
+            "candidate": 13010,
+            "state": 253,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13014,
+        "fields": {
+            "candidate": 13010,
+            "state": 254,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13015,
+        "fields": {
+            "candidate": 13010,
+            "state": 255,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13016,
+        "fields": {
+            "candidate": 13010,
+            "state": 256,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13017,
+        "fields": {
+            "candidate": 13010,
+            "state": 257,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13018,
+        "fields": {
+            "candidate": 13010,
+            "state": 258,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13019,
+        "fields": {
+            "candidate": 13010,
+            "state": 259,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13020,
+        "fields": {
+            "candidate": 13010,
+            "state": 260,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13021,
+        "fields": {
+            "candidate": 13010,
+            "state": 261,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13022,
+        "fields": {
+            "candidate": 13010,
+            "state": 262,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13023,
+        "fields": {
+            "candidate": 13010,
+            "state": 263,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13024,
+        "fields": {
+            "candidate": 13010,
+            "state": 264,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13025,
+        "fields": {
+            "candidate": 13010,
+            "state": 265,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13026,
+        "fields": {
+            "candidate": 13010,
+            "state": 266,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13027,
+        "fields": {
+            "candidate": 13010,
+            "state": 267,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13028,
+        "fields": {
+            "candidate": 13010,
+            "state": 268,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13029,
+        "fields": {
+            "candidate": 13010,
+            "state": 269,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13030,
+        "fields": {
+            "candidate": 13010,
+            "state": 270,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13031,
+        "fields": {
+            "candidate": 13010,
+            "state": 271,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13032,
+        "fields": {
+            "candidate": 13010,
+            "state": 272,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13039,
+        "fields": {
+            "candidate": 13038,
+            "state": 251,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13040,
+        "fields": {
+            "candidate": 13038,
+            "state": 252,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13041,
+        "fields": {
+            "candidate": 13038,
+            "state": 253,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13042,
+        "fields": {
+            "candidate": 13038,
+            "state": 254,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13043,
+        "fields": {
+            "candidate": 13038,
+            "state": 255,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13044,
+        "fields": {
+            "candidate": 13038,
+            "state": 256,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13045,
+        "fields": {
+            "candidate": 13038,
+            "state": 257,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13046,
+        "fields": {
+            "candidate": 13038,
+            "state": 258,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13047,
+        "fields": {
+            "candidate": 13038,
+            "state": 259,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13048,
+        "fields": {
+            "candidate": 13038,
+            "state": 260,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13049,
+        "fields": {
+            "candidate": 13038,
+            "state": 261,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13050,
+        "fields": {
+            "candidate": 13038,
+            "state": 262,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13051,
+        "fields": {
+            "candidate": 13038,
+            "state": 263,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13052,
+        "fields": {
+            "candidate": 13038,
+            "state": 264,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13053,
+        "fields": {
+            "candidate": 13038,
+            "state": 265,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13054,
+        "fields": {
+            "candidate": 13038,
+            "state": 266,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13055,
+        "fields": {
+            "candidate": 13038,
+            "state": 267,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13056,
+        "fields": {
+            "candidate": 13038,
+            "state": 268,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13057,
+        "fields": {
+            "candidate": 13038,
+            "state": 269,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13058,
+        "fields": {
+            "candidate": 13038,
+            "state": 270,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13059,
+        "fields": {
+            "candidate": 13038,
+            "state": 271,
+            "state_multiplier": 1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 13060,
+        "fields": {
+            "candidate": 13038,
+            "state": 272,
+            "state_multiplier": 1
+        }
+    }
+]
+
+campaignTrail_temp.answer_score_global_json = [
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12910,
+        "fields": {
+            "answer": 12905,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 0.0185
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12914,
+        "fields": {
+            "answer": 12903,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13094,
+        "fields": {
+            "answer": 12917,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13097,
+        "fields": {
+            "answer": 12915,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13099,
+        "fields": {
+            "answer": 12916,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": -0.012
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13123,
+        "fields": {
+            "answer": 13115,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -50
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13125,
+        "fields": {
+            "answer": 13116,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -50
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13126,
+        "fields": {
+            "answer": 13117,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -50
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13128,
+        "fields": {
+            "answer": 13121,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -50
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13133,
+        "fields": {
+            "answer": 13130,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": -0.25
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13181,
+        "fields": {
+            "answer": 13171,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 0.012
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13184,
+        "fields": {
+            "answer": 13153,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": -0.05
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13186,
+        "fields": {
+            "answer": 13154,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": -0.05
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13187,
+        "fields": {
+            "answer": 13155,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": -0.05
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13189,
+        "fields": {
+            "answer": 13182,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": -0.025
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13191,
+        "fields": {
+            "answer": 13183,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 0.012
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13196,
+        "fields": {
+            "answer": 13193,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 49.9
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13207,
+        "fields": {
+            "answer": 13193,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": 0.035
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13215,
+        "fields": {
+            "answer": 13209,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13220,
+        "fields": {
+            "answer": 13211,
+            "candidate": 2001653,
+            "affected_candidate": 12982,
+            "global_multiplier": -0.015
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13224,
+        "fields": {
+            "answer": 13210,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": -0.012
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13225,
+        "fields": {
+            "answer": 13210,
+            "candidate": 2001653,
+            "affected_candidate": 13038,
+            "global_multiplier": -0.015
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13229,
+        "fields": {
+            "answer": 13226,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13231,
+        "fields": {
+            "answer": 13227,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13232,
+        "fields": {
+            "answer": 13226,
+            "candidate": 2001653,
+            "affected_candidate": 12982,
+            "global_multiplier": 0.08
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13233,
+        "fields": {
+            "answer": 13227,
+            "candidate": 2001653,
+            "affected_candidate": 12982,
+            "global_multiplier": 0.08
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13238,
+        "fields": {
+            "answer": 13236,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 0.022
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13242,
+        "fields": {
+            "answer": 13240,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13272,
+        "fields": {
+            "answer": 13270,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -0.25
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13273,
+        "fields": {
+            "answer": 13270,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": 0.12
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13274,
+        "fields": {
+            "answer": 13270,
+            "candidate": 2001653,
+            "affected_candidate": 13038,
+            "global_multiplier": 0.12
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13278,
+        "fields": {
+            "answer": 13275,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13279,
+        "fields": {
+            "answer": 13275,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": 0.08
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13283,
+        "fields": {
+            "answer": 13280,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13284,
+        "fields": {
+            "answer": 13280,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13290,
+        "fields": {
+            "answer": 13285,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -0.5
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13293,
+        "fields": {
+            "answer": 13286,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -0.5
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13294,
+        "fields": {
+            "answer": 13287,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -0.8
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13295,
+        "fields": {
+            "answer": 13288,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -0.55
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13301,
+        "fields": {
+            "answer": 13297,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -0.5
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13302,
+        "fields": {
+            "answer": 13298,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "global_multiplier": -99999
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13303,
+        "fields": {
+            "answer": 13285,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": 0.19
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13304,
+        "fields": {
+            "answer": 13286,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": 0.15
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13305,
+        "fields": {
+            "answer": 13286,
+            "candidate": 2001653,
+            "affected_candidate": 13038,
+            "global_multiplier": -0.04
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13306,
+        "fields": {
+            "answer": 13287,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": 0.15
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13307,
+        "fields": {
+            "answer": 13287,
+            "candidate": 2001653,
+            "affected_candidate": 13038,
+            "global_multiplier": 0.05
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13308,
+        "fields": {
+            "answer": 13288,
+            "candidate": 2001653,
+            "affected_candidate": 13010,
+            "global_multiplier": 0.18
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 13309,
+        "fields": {
+            "answer": 13288,
+            "candidate": 2001653,
+            "affected_candidate": 13038,
+            "global_multiplier": -0.04
+        }
+    }
+]
+
+campaignTrail_temp.answer_score_issue_json = [
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 12909,
+        "fields": {
+            "answer": 12903,
+            "issue": 32,
+            "issue_score": 0.1,
+            "issue_importance": 0.15
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 12912,
+        "fields": {
+            "answer": 12904,
+            "issue": 32,
+            "issue_score": 0.1,
+            "issue_importance": 0.12
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 12913,
+        "fields": {
+            "answer": 12904,
+            "issue": 36,
+            "issue_score": 0.045,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13095,
+        "fields": {
+            "answer": 12917,
+            "issue": 32,
+            "issue_score": 0.08,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13098,
+        "fields": {
+            "answer": 12915,
+            "issue": 34,
+            "issue_score": 0.08,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13100,
+        "fields": {
+            "answer": 12916,
+            "issue": 34,
+            "issue_score": 0.05,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13134,
+        "fields": {
+            "answer": 13130,
+            "issue": 32,
+            "issue_score": 0.1,
+            "issue_importance": 0.12
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13157,
+        "fields": {
+            "answer": 13153,
+            "issue": 32,
+            "issue_score": 0.1,
+            "issue_importance": 0.12
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13164,
+        "fields": {
+            "answer": 13155,
+            "issue": 34,
+            "issue_score": 0.08,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13165,
+        "fields": {
+            "answer": 13155,
+            "issue": 36,
+            "issue_score": 0.02,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13166,
+        "fields": {
+            "answer": 13154,
+            "issue": 32,
+            "issue_score": -0.05,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13167,
+        "fields": {
+            "answer": 13154,
+            "issue": 34,
+            "issue_score": -0.05,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13176,
+        "fields": {
+            "answer": 13170,
+            "issue": 35,
+            "issue_score": 0.12,
+            "issue_importance": 0.125
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13177,
+        "fields": {
+            "answer": 13169,
+            "issue": 34,
+            "issue_score": 0.1,
+            "issue_importance": 0.12
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13178,
+        "fields": {
+            "answer": 13169,
+            "issue": "32",
+            "issue_score": 0.03,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13179,
+        "fields": {
+            "answer": 13168,
+            "issue": 36,
+            "issue_score": 0.08,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13180,
+        "fields": {
+            "answer": 13168,
+            "issue": 33,
+            "issue_score": 0.08,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13192,
+        "fields": {
+            "answer": 13183,
+            "issue": "32",
+            "issue_score": 0.08,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13213,
+        "fields": {
+            "answer": 13208,
+            "issue": 35,
+            "issue_score": 0.07,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13223,
+        "fields": {
+            "answer": 13211,
+            "issue": 36,
+            "issue_score": 0.1,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13234,
+        "fields": {
+            "answer": 13227,
+            "issue": "32",
+            "issue_score": 0.08,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13235,
+        "fields": {
+            "answer": 13226,
+            "issue": 36,
+            "issue_score": 0.1,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13239,
+        "fields": {
+            "answer": 13236,
+            "issue": 35,
+            "issue_score": 0.1,
+            "issue_importance": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13243,
+        "fields": {
+            "answer": 13240,
+            "issue": 35,
+            "issue_score": 0.15,
+            "issue_importance": 0.1
+        }
+    }
+]
+
+campaignTrail_temp.answer_score_state_json = [
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13111,
+        "fields": {
+            "answer": 13104,
+            "state": 269,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.0167
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13112,
+        "fields": {
+            "answer": 13103,
+            "state": 252,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.0144
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13113,
+        "fields": {
+            "answer": 13102,
+            "state": 268,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.015
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13114,
+        "fields": {
+            "answer": 13101,
+            "state": 267,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13135,
+        "fields": {
+            "answer": 13115,
+            "state": 267,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13136,
+        "fields": {
+            "answer": 13115,
+            "state": 268,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13137,
+        "fields": {
+            "answer": 13116,
+            "state": 266,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13138,
+        "fields": {
+            "answer": 13116,
+            "state": 267,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13139,
+        "fields": {
+            "answer": 13116,
+            "state": 268,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13140,
+        "fields": {
+            "answer": 13115,
+            "state": 266,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13141,
+        "fields": {
+            "answer": 13117,
+            "state": 266,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13142,
+        "fields": {
+            "answer": 13117,
+            "state": 267,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13143,
+        "fields": {
+            "answer": 13117,
+            "state": 268,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13144,
+        "fields": {
+            "answer": 13121,
+            "state": 266,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13145,
+        "fields": {
+            "answer": 13121,
+            "state": 268,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13146,
+        "fields": {
+            "answer": 13121,
+            "state": 267,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13147,
+        "fields": {
+            "answer": 13130,
+            "state": 269,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13148,
+        "fields": {
+            "answer": 13130,
+            "state": 264,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13149,
+        "fields": {
+            "answer": 13130,
+            "state": 265,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13150,
+        "fields": {
+            "answer": 13130,
+            "state": 270,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13151,
+        "fields": {
+            "answer": 13130,
+            "state": 254,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13152,
+        "fields": {
+            "answer": 13130,
+            "state": 255,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13158,
+        "fields": {
+            "answer": 13153,
+            "state": 271,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13160,
+        "fields": {
+            "answer": 13154,
+            "state": 253,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.012
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13161,
+        "fields": {
+            "answer": 13154,
+            "state": 258,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.012
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13162,
+        "fields": {
+            "answer": 13154,
+            "state": 260,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.012
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13197,
+        "fields": {
+            "answer": 13193,
+            "state": 270,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13198,
+        "fields": {
+            "answer": 13193,
+            "state": 255,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13199,
+        "fields": {
+            "answer": 13193,
+            "state": 254,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13200,
+        "fields": {
+            "answer": 13193,
+            "state": 267,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13201,
+        "fields": {
+            "answer": 13193,
+            "state": 268,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13202,
+        "fields": {
+            "answer": 13193,
+            "state": 269,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13203,
+        "fields": {
+            "answer": 13193,
+            "state": 266,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13204,
+        "fields": {
+            "answer": 13193,
+            "state": 265,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13205,
+        "fields": {
+            "answer": 13193,
+            "state": 264,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13216,
+        "fields": {
+            "answer": 13209,
+            "state": 253,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.011
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13249,
+        "fields": {
+            "answer": 13247,
+            "state": 264,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.015
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13250,
+        "fields": {
+            "answer": 13247,
+            "state": 265,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.015
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13251,
+        "fields": {
+            "answer": 13247,
+            "state": 271,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.05
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13252,
+        "fields": {
+            "answer": 13247,
+            "state": 272,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.05
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13253,
+        "fields": {
+            "answer": 13247,
+            "state": 254,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.025
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13254,
+        "fields": {
+            "answer": 13247,
+            "state": 255,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.025
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13256,
+        "fields": {
+            "answer": 13246,
+            "state": 257,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.02
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13257,
+        "fields": {
+            "answer": 13246,
+            "state": 256,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.015
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13258,
+        "fields": {
+            "answer": 13246,
+            "state": 251,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13259,
+        "fields": {
+            "answer": 13246,
+            "state": 252,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13261,
+        "fields": {
+            "answer": 13245,
+            "state": 268,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13262,
+        "fields": {
+            "answer": 13245,
+            "state": 267,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.0075
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13263,
+        "fields": {
+            "answer": 13245,
+            "state": 270,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.02
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13264,
+        "fields": {
+            "answer": 13244,
+            "state": 260,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13265,
+        "fields": {
+            "answer": 13244,
+            "state": 259,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.012
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13266,
+        "fields": {
+            "answer": 13244,
+            "state": 253,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.012
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13267,
+        "fields": {
+            "answer": 13244,
+            "state": 258,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.012
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13269,
+        "fields": {
+            "answer": 13247,
+            "state": 266,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": 0.015
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13310,
+        "fields": {
+            "answer": 13298,
+            "state": 251,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13311,
+        "fields": {
+            "answer": 13298,
+            "state": 254,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13312,
+        "fields": {
+            "answer": 13298,
+            "state": 252,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13313,
+        "fields": {
+            "answer": 13298,
+            "state": 253,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13314,
+        "fields": {
+            "answer": 13298,
+            "state": 255,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13315,
+        "fields": {
+            "answer": 13298,
+            "state": 256,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13316,
+        "fields": {
+            "answer": 13298,
+            "state": 257,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13317,
+        "fields": {
+            "answer": 13298,
+            "state": 258,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13318,
+        "fields": {
+            "answer": 13298,
+            "state": 259,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13319,
+        "fields": {
+            "answer": 13298,
+            "state": 260,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13320,
+        "fields": {
+            "answer": 13298,
+            "state": 261,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13321,
+        "fields": {
+            "answer": 13298,
+            "state": 262,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13322,
+        "fields": {
+            "answer": 13298,
+            "state": 263,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13323,
+        "fields": {
+            "answer": 13298,
+            "state": 264,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13324,
+        "fields": {
+            "answer": 13298,
+            "state": 265,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13325,
+        "fields": {
+            "answer": 13298,
+            "state": 266,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13326,
+        "fields": {
+            "answer": 13298,
+            "state": 267,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13327,
+        "fields": {
+            "answer": 13298,
+            "state": 268,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13328,
+        "fields": {
+            "answer": 13298,
+            "state": 269,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13329,
+        "fields": {
+            "answer": 13298,
+            "state": 271,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13330,
+        "fields": {
+            "answer": 13298,
+            "state": 272,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13333,
+        "fields": {
+            "answer": 13298,
+            "state": 270,
+            "candidate": 2001653,
+            "affected_candidate": 2001653,
+            "state_multiplier": -100
+        }
+    }
+]
+
+campaignTrail_temp.answer_feedback_json = [
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 12906,
+        "fields": {
+            "answer": 12903,
+            "candidate": 2001653,
+            "answer_feedback": "\nImmediately announcing your participation in the primary election has exposed your political ambitions. Currently, you have not restored your membership with the KMT, and there is a need to repair the strained relationship with the KMT that resulted from the unpleasant incidents after the 2019 primary.\n"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 12907,
+        "fields": {
+            "answer": 12904,
+            "candidate": 2001653,
+            "answer_feedback": "the majority of legislators and county/city leaders from the KMT are not particularly supportive of you. However, you can leverage support for Hou in certain areas. Perhaps you could garner the backing of a group of staunch party members within the KMT and encourage them to act as representatives on your behalf.\n"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 12908,
+        "fields": {
+            "answer": 12905,
+            "candidate": 2001653,
+            "answer_feedback": "In opinion polls, your figures are not particularly high. When compared individually with Lai Ching-te, you lose in all six polls, while Hou can secure victory in two of them."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 12923,
+        "fields": {
+            "answer": 12916,
+            "candidate": 2001653,
+            "answer_feedback": "Since a large portion of the Kuomintang's party assets has been confiscated, the party has been in a financially strained state. Your monetary offensive will undoubtedly be effective, but please be aware that politics isn't solely about having money; you must accumulate some political capital to make a difference.\n"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 12924,
+        "fields": {
+            "answer": 12917,
+            "candidate": 2001653,
+            "answer_feedback": "\nCurrently, you still lag behind Mayor Hou in the polls, and the majority of legislators and local leaders do not support you. After all, the harm you caused to the Kuomintang in 2019 persists to this day, and they still don't have much trust in you."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 12925,
+        "fields": {
+            "answer": 12915,
+            "candidate": 2001653,
+            "answer_feedback": "Since a large portion of the Kuomintang's party assets has been confiscated, the party has been in a financially strained state. Your monetary offensive will undoubtedly be effective, but please be aware that politics isn't solely about having money; "
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13105,
+        "fields": {
+            "answer": 13101,
+            "candidate": 2001653,
+            "answer_feedback": "You and Mayor Hou appearing at the temple in New Taipei City at the same time has sparked media attention and speculation. What will the outcome of this primary be?"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13106,
+        "fields": {
+            "answer": 13102,
+            "candidate": 2001653,
+            "answer_feedback": "The media has noticed your connection with the traditional Mainlander community and the blue stronghold of Taipei City. They are speculating whether you are strengthening your mainland Chinese identity to gain more support from the deep-blue voters."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13107,
+        "fields": {
+            "answer": 13103,
+            "candidate": 2001653,
+            "answer_feedback": "You know, your Taiwanese is quite mediocre. Anyone who knows a bit can speak better than you. However, it's just one way for you to increase your affability."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13109,
+        "fields": {
+            "answer": 13104,
+            "candidate": 2001653,
+            "answer_feedback": "Taoyuan is an area with a significant presence of high-tech industries, aligning well with your identity as a tech tycoon. This will enhance your appeal in this blue-leaning region!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13118,
+        "fields": {
+            "answer": 13115,
+            "candidate": 2001653,
+            "answer_feedback": "Mayor Hou You-yi has been drafted as the KMT presidential candidate. All your efforts and attempts over the past few months seem to have been in vain. Despite publicly declaring your support for Mayor Hou on Facebook, there's a myriad of reluctance in your heart to fully endorse him."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13119,
+        "fields": {
+            "answer": 13116,
+            "candidate": 2001653,
+            "answer_feedback": "Mayor Hou You-yi has been drafted as the KMT presidential candidate. All your efforts and attempts over the past few months seem to have been in vain. Despite publicly declaring your support for Mayor Hou on Facebook, there's a myriad of reluctance in your heart to fully endorse him."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13120,
+        "fields": {
+            "answer": 13117,
+            "candidate": 2001653,
+            "answer_feedback": "Mayor Hou You-yi has been drafted as the KMT presidential candidate. All your efforts and attempts over the past few months seem to have been in vain. Despite publicly declaring your support for Mayor Hou on Facebook, there's a myriad of reluctance in your heart to fully endorse him."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13122,
+        "fields": {
+            "answer": 13121,
+            "candidate": 2001653,
+            "answer_feedback": "Mayor Hou You-yi has been drafted as the KMT presidential candidate. All your efforts and attempts over the past few months seem to have been in vain. Despite publicly declaring your support for Mayor Hou on Facebook, there's a myriad of reluctance in your heart to fully endorse him."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13132,
+        "fields": {
+            "answer": 13130,
+            "candidate": 2001653,
+            "answer_feedback": "Media reports suggest that Chairman Chu Li-lun is highly dissatisfied with your association with local factions within the blue camp, creating an image of internal disunity and factionalism. There are even reports claiming that Chairman Chu referred to those local factions as 'demons and monsters.'"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13156,
+        "fields": {
+            "answer": 13153,
+            "candidate": 2001653,
+            "answer_feedback": "You met with Legislator Chen Yu-chen, participated in local folk activities in Kinmen, and had a photo opportunity alongside Vice President Lai Ching-te. Both of you shook hands in greeting."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13159,
+        "fields": {
+            "answer": 13154,
+            "candidate": 2001653,
+            "answer_feedback": "This is precisely what Chairman Eric Chu dislikes about you: your close connections with those local factions have created an image of opposition to the central party and disruption of internal unity. However, many of them are willing to temporarily oppose the central party to gain more benefits."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13163,
+        "fields": {
+            "answer": 13155,
+            "candidate": 2001653,
+            "answer_feedback": "These words have caught the attention of many media outlets, and many are pondering whether this is a precursor to your independent candidacy. Currently, numerous media sources are speculating that you may not be willing to concede to Hou..."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13172,
+        "fields": {
+            "answer": 13168,
+            "candidate": 2001653,
+            "answer_feedback": "\nThis is a strong appeal to deep-blue voters, avoiding direct attacks on the mainstream KMT candidate Hou You-yi while reminding voters of the differences between you and him."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13173,
+        "fields": {
+            "answer": 13169,
+            "candidate": 2001653,
+            "answer_feedback": "Many believe that you have been influenced by U.S. President Trump. However, venturing into politics across different domains is not an easy feat. Moreover, whether your company is truly favored and admired by the Taiwanese people is still a matter for discussion."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13174,
+        "fields": {
+            "answer": 13170,
+            "candidate": 2001653,
+            "answer_feedback": "You have plenty of money, enabling you to recruit numerous staff to work for you, thereby increasing your political influence."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13175,
+        "fields": {
+            "answer": 13171,
+            "candidate": 2001653,
+            "answer_feedback": "President Trump's wealth doesn't even come close to yours. However, in politics, having money alone isn't enough. While you can showcase your diplomatic credentials, you're still a political novice."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13188,
+        "fields": {
+            "answer": 13182,
+            "candidate": 2001653,
+            "answer_feedback": "\nThis will continue to undermine Hou's poll numbers and the internal unity of the KMT. Many media outlets believe that you are gearing up for an independent candidacy, even though you haven't announced it yet."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13190,
+        "fields": {
+            "answer": 13183,
+            "candidate": 2001653,
+            "answer_feedback": "Focusing on your own campaign strategy might be the best approach. Hou's decline in the polls could benefit you, but it may not last long."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13206,
+        "fields": {
+            "answer": 13193,
+            "candidate": 2001653,
+            "answer_feedback": "This marks the beginning of Kuomintang voters rallying around Hou. Fortunately, his increase in the polls is not significant, leaving ample opportunity for you."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13212,
+        "fields": {
+            "answer": 13208,
+            "candidate": 2001653,
+            "answer_feedback": "You may be stuck in the past era. Nowadays, young people either don't read books or prefer e-books. How many votes do you think you can win over with this?"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13214,
+        "fields": {
+            "answer": 13209,
+            "candidate": 2001653,
+            "answer_feedback": "This is a tangible threat and a fact of your close ties with local factions. It can indeed increase your share of votes, but strategically, a couple of events won't change much."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13217,
+        "fields": {
+            "answer": 13210,
+            "candidate": 2001653,
+            "answer_feedback": "If you truly want unity, then you shouldn't run independently... Oh, I forgot, I'm your campaign aide! Of course, unity is the most important thing!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13218,
+        "fields": {
+            "answer": 13211,
+            "candidate": 2001653,
+            "answer_feedback": "You're finally focusing on targeting the DPP. Although this may not help you win the election, it can strengthen your support base."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13228,
+        "fields": {
+            "answer": 13226,
+            "candidate": 2001653,
+            "answer_feedback": "We've heard enough of this talk about unity. What's crucial now for the opposition camp is to have a clear, strongest candidate emerge."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13230,
+        "fields": {
+            "answer": 13227,
+            "candidate": 2001653,
+            "answer_feedback": "After your independent candidacy announcement, many media outlets and commentators believe it's a sign that Lai Ching-te will win effortlessly, as you'll only divert more pan-blue votes.\n"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13237,
+        "fields": {
+            "answer": 13236,
+            "candidate": 2001653,
+            "answer_feedback": "Lai is a seasoned actress. However, her possession of American citizenship disqualifies her from becoming vice president. Nevertheless, if she applies to renounce her citizenship by November 24th, she would be eligible, as ROC law stipulates that only ROC citizens can hold the position of vice president."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13241,
+        "fields": {
+            "answer": 13240,
+            "candidate": 2001653,
+            "answer_feedback": "Lai is a seasoned actress. However, her possession of American citizenship disqualifies her from becoming vice president. Nevertheless, if she applies to renounce her citizenship by November 24th, she would be eligible, as ROC law stipulates that only ROC citizens can hold the position of vice president."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13248,
+        "fields": {
+            "answer": 13247,
+            "candidate": 2001653,
+            "answer_feedback": "These areas are indeed strongholds of the Kuomintang, and leveraging support here would be beneficial. However, their population and voter numbers are relatively low."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13255,
+        "fields": {
+            "answer": 13246,
+            "candidate": 2001653,
+            "answer_feedback": "A group known as 'Deep Green Gou Fans' are actively campaigning for you in the south. These individuals seem to have ties to the Democratic Progressive Party."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13260,
+        "fields": {
+            "answer": 13245,
+            "candidate": 2001653,
+            "answer_feedback": "These areas are advantageous for you as they are in the northern region, where you can strengthen your support base. Additionally, these areas have the highest population density."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13268,
+        "fields": {
+            "answer": 13244,
+            "candidate": 2001653,
+            "answer_feedback": "You continue to forge close connections with local factions, which undoubtedly provide you with significant support. Just ensure that you can provide them with enough benefits, such as funding, in return."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13271,
+        "fields": {
+            "answer": 13270,
+            "candidate": 2001653,
+            "answer_feedback": "That's okay, we, your staff, are still here with you, Chairman Gou. We'll stand by you until the very end!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13277,
+        "fields": {
+            "answer": 13275,
+            "candidate": 2001653,
+            "answer_feedback": ""
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13282,
+        "fields": {
+            "answer": 13280,
+            "candidate": 2001653,
+            "answer_feedback": "The constant attacks between the KMT and TPP regarding polling victories and margins of error suggest that their fragile alliance may be disintegrating from within....."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13289,
+        "fields": {
+            "answer": 13285,
+            "candidate": 2001653,
+            "answer_feedback": "\nThis has sparked dissatisfaction among the Blue camp... They believe that the esteemed former President Ma Ying-jeou should not be referred to as an unexpected guest by you. If you did this intentionally, then they will only be more determined to support the KMT."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13291,
+        "fields": {
+            "answer": 13287,
+            "candidate": 2001653,
+            "answer_feedback": "\nYou posted on Facebook, mentioning that you were in a statistics class, while outside, Lai Pei-hsia and you was enjoying expensive coffee."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13292,
+        "fields": {
+            "answer": 13286,
+            "candidate": 2001653,
+            "answer_feedback": "\nAs Hou You-yi mentioned that Ko Wen-je wants you to withdraw from the election, you feel very uncomfortable. However, it seems there is no way around it. Do you need to find a reason to withdraw from the election...?"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13296,
+        "fields": {
+            "answer": 13288,
+            "candidate": 2001653,
+            "answer_feedback": "\nMayor Hou rejected your proposal and demanded to have the discussion publicly in front of the media rather than behind closed doors."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13299,
+        "fields": {
+            "answer": 13298,
+            "candidate": 2001653,
+            "answer_feedback": "\nThis is the right choice, and you don't need to worry about election matters anymore. Now you can just hop on a plane and go travel abroad!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 13300,
+        "fields": {
+            "answer": 13297,
+            "candidate": 2001653,
+            "answer_feedback": "\nLet's see how low your current polling support is, and how much support you can get on election day... Hopefully, you can secure one million votes!"
+        }
+    }
+]
+
+
+
+campaignTrail_temp.jet_data = [{}
+]
+
