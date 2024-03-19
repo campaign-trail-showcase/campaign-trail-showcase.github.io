@@ -6509,7 +6509,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 78,
             "state": 208,
-            "state_multiplier": 0.999
+            "state_multiplier": 0.945
         }
     },
     {
@@ -8127,7 +8127,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 3286,
             "candidate": 78,
             "affected_candidate": 78,
-            "global_multiplier": -0.1
+            "global_multiplier": -0.5
         }
     },
     {
@@ -8907,7 +8907,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 3326,
             "candidate": 78,
             "affected_candidate": 78,
-            "global_multiplier": -0.08999
+            "global_multiplier": -0.1
         }
     },
     {
@@ -9617,6 +9617,16 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 3290,
             "candidate": 78,
             "affected_candidate": 80,
+            "global_multiplier": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1360,
+        "fields": {
+            "answer": 3253,
+            "candidate": 78,
+            "affected_candidate": 78,
             "global_multiplier": 0.1
         }
     },
@@ -15754,6 +15764,7 @@ cyoAdventure = function(a) {
         campaignTrail_temp.questions_json[7] = tunnel(410);
         campaignTrail_temp.questions_json[9] = tunnel(416);
         campaignTrail_temp.questions_json[12] = tunnel(417);
+        campaignTrail_temp.questions_json[15] = tunnel(330);
         campaignTrail_temp.questions_json[19] = tunnel(338);
         campaignTrail_temp.questions_json[22] = tunnel(339);
         campaignTrail_temp.questions_json[24] = tunnel(336);
@@ -15765,7 +15776,7 @@ cyoAdventure = function(a) {
         campaignTrail_temp.questions_json[9] = tunnel(385);
         campaignTrail_temp.questions_json[12] = tunnel(422);
         campaignTrail_temp.questions_json[19] = tunnel(338);
-        campaignTrail_temp.questions_json[21] = tunnel(325);
+        campaignTrail_temp.questions_json[21] = tunnel(330);
         campaignTrail_temp.questions_json[22] = tunnel(339);
         campaignTrail_temp.questions_json[24] = tunnel(336);
     }
@@ -15853,7 +15864,7 @@ cyoAdventure = function(a) {
         nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#07b2f0"
         nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#facf23"
         $(".container")[0].style.backgroundColor = "#4f4320"
-        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/HiIY8LM.jpeg)"
+        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/U7ZWKqg.jpeg)"
         $("#game_window")[0].style.borderColor = "#4A4A2B"
         $("#game_window")[0].style.coloring_window = "#4A4A2B"
         quotes = ["<i>You can never quit. Winners never quit, and quitters never win. - Ted Turner</i>"]
@@ -15949,7 +15960,7 @@ cyoAdventure = function(a) {
         nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#07b2f0"
         nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#facf23"
         $(".container")[0].style.backgroundColor = "#4f4320"
-        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/HiIY8LM.jpeg)"
+        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/U7ZWKqg.jpeg)"
         $("#game_window")[0].style.borderColor = "#4A4A2B"
         $("#game_window")[0].style.coloring_window = "#4A4A2B"
         quotes = ["<i>You can never quit. Winners never quit, and quitters never win. - Ted Turner</i>"]
@@ -16626,40 +16637,40 @@ endingPicker = (out, totv, aa, quickstats) => {
 
         //third party endings
         if (maverick == 1 && quitter == false && playerlost == false){
-        if (quickstats[0] == 0){
-            e.pages.push(`<h2>Excerpt from <q>Toward the Millennium: The Elections of 1996</q> by Larry Sabato</h2>
-                    <p>And now with the major parties out of the way, it would be wise to take a pause and acknowledge the relatively insignificant run of eccentric billionaire Ted Turner. What had promised to be a potential stronger, more successful bid to challenge the duopoly of the Republican and Democratic parties proved another folly of a campaign, as we had seen with Perot four years earlier. Just as with Perot, Turner similarly failed to win even a single electoral vote.<br><br>Turner, the famous media mogul from Georgia, had attempted a bid in the Democratic primary before flaming out early in the race, having had his attempt at bribing Tennesee Senator and former nominee for vice president, Al Gore, with dropping out in exchange for him receiving the position as his number two, exposed. It is disputed whether Gore really did accept the offer, but an audio recording obtained by the <i>New York Post</i> in the immediate aftermath had the Senator seemingly agree to Turner's conditions.<br><br>This would lead to a surge of support for former Pennsylvania Governor Casey, a pro-life Democrat who made a name among the blue dog faction of the party in his opposition to the growing pro-abortion sentiment bubbling in the party during the 1992 party convention. Casey had failed to command a substantial majority, but thanks to Gore and Turner splitting very similar voting groups between one another, combined with the scandal having had the effect of weakening them both, Casey came out the winner.<br><br>This would have, in theory, given Turner the perfect avenue towards a strong third-party showing in the general. After all, he wisely chose to trust the polls and didn't stick around long enough to be placed on any Democratic primary ballots, preventing conflict with sore loser laws.<br><br>He also had been gifted the benefit of two unpopular nominees in Casey and House Minority Leader Gingrich as his main opposition. Casey, though having strong support in his home state of Pennsylvania, as well as the loyal backing of party faithful, turned away many liberals in the general with his positions. Gingrich's issues would stem predominately from the calvacade of scandals conflicting with the values of the Christian conservative voters he badly needed to coalesce to win, not to mention the lingering fatigue towards Republicans.<br><br>But as we know, Turner failed to meet the moment. We'll get into the multitude of reasons later in this book, and there are many. Be it taking poor, unpopular positions, bad campaign strategy or controversy revolving around his running mate, Turner would flop, and so with him the much promised Reform Party and the hope for a viable third option in American democracy.</p>
-                    `)
-        ending4();
-        e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/c2JaLzM.jpeg"})])
+            if (quickstats[0] == 0){
+                e.pages.push(`<h2>Excerpt from <q>Toward the Millennium: The Elections of 1996</q> by Larry Sabato</h2>
+                        <p>And now with the major parties out of the way, it would be wise to take a pause and acknowledge the relatively insignificant run of eccentric billionaire Ted Turner. What had promised to be a potential stronger, more successful bid to challenge the duopoly of the Republican and Democratic parties proved another folly of a campaign, as we had seen with Perot four years earlier. Just as with Perot, Turner similarly failed to win even a single electoral vote.<br><br>Turner, the famous media mogul from Georgia, had attempted a bid in the Democratic primary before flaming out early in the race, having had his attempt at bribing Tennesee Senator and former nominee for vice president, Al Gore, with dropping out in exchange for him receiving the position as his number two, exposed. It is disputed whether Gore really did accept the offer, but an audio recording obtained by the <i>New York Post</i> in the immediate aftermath had the Senator seemingly agree to Turner's conditions.<br><br>This would lead to a surge of support for former Pennsylvania Governor Casey, a pro-life Democrat who made a name among the blue dog faction of the party in his opposition to the growing pro-abortion sentiment bubbling in the party during the 1992 party convention. Casey had failed to command a substantial majority, but thanks to Gore and Turner splitting very similar voting groups between one another, combined with the scandal having had the effect of weakening them both, Casey came out the winner.<br><br>This would have, in theory, given Turner the perfect avenue towards a strong third-party showing in the general. After all, he wisely chose to trust the polls and didn't stick around long enough to be placed on any Democratic primary ballots, preventing conflict with sore loser laws.<br><br>He also had been gifted the benefit of two unpopular nominees in Casey and House Minority Leader Gingrich as his main opposition. Casey, though having strong support in his home state of Pennsylvania, as well as the loyal backing of party faithful, turned away many liberals in the general with his positions. Gingrich's issues would stem predominately from the calvacade of scandals conflicting with the values of the Christian conservative voters he badly needed to coalesce to win, not to mention the lingering fatigue towards Republicans.<br><br>But as we know, Turner failed to meet the moment. We'll get into the multitude of reasons later in this book, and there are many. Be it taking poor, unpopular positions, bad campaign strategy or controversy revolving around his running mate, Turner would flop, and so with him the much promised Reform Party and the hope for a viable third option in American democracy.</p>
+                        `)
+            ending4();
+            e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/c2JaLzM.jpeg"})])
+            }
+            else if (quickstats[0] <= 16){
+                e.pages.push(`<h2><q><i>TURNER WINS SOME ELECTORAL VOTES, MAKES LITTLE IMPACT ON OUTCOME</i></q></h2>
+                        <p>Gene Roberts, <i>The New York Times</i><br><br>Media mogul and Reform Party nominee, Ted Turner, was the first third-party candidate for president since George C. Wallace in 1968 to win a state in a presidential election. Mr. Turner, who dropped out of the Democratic primaries last year after former Pennsylvania Governor Bob Casey began to surpass him and Tennessee Senator Al Gore in the polls, performed relatively as expected last night.<br><br>Though hardly a poor showing, Mr. Turner was speculated to do even better with the reputations of his opponents being quite poor among their respective party electorates. Nevertheless, Mr. Turner was able to secure a victory for the fledging Reform Party, though it's unknown whether it will be able to continue to build upon this performance and produce substantial victories in the years to come, or even in 2000.<br><br>Charlie Cook, of the eponymous <i>Cook Political Report</i>, is doubtful, saying “Turner was definitely the highest profile third-party candidate in years, possibly ever. I think this was the ceiling for a viable third-party in America, a handful of electoral votes earned from home state advantage and pockets of disaffected voters, but nothing that can generate a real challenge to the Republicans and Democrats, as we saw last night.”</p>
+                        `)
+            ending4();
+            e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/58OSTHa.jpeg"})])
+            }
+            else if (quickstats[0] <= 25){
+                e.pages.push(`<h2>White House Daily Briefing | November 12, 1996</h2>
+                <p>REPORTER: “Has the president seen the performance of Ted Turner?”</p>
+                <p>FITZWATER: “He's aware.”</p>
+                <p>REPORTER: “What does the White House take away from Turner's showing? He won multiple states against Casey and Gingrich.”</p>
+                <p>FITZWATER: “The general consensus is we don't have much to say on the matter. We congratulate Mr. Turner on his strong performance and celebrate his participation in the democratic process.”</p>
+                <p>REPORTER: “Is the president concerned about the Reform Party's success? Some speculate it could pose a threat to the established power of the Republican and Democratic parties. Does the White House invite third-parties to participate in the democratic process?”</p>
+                <p>FITZWATER: “We're not taking any further questions on that. Next question.”</p>
+                `)
+            ending5();
+            e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/8AfSNFc.jpeg"})])
+            }
+            else if (quickstats[0] >= 40){
+                e.pages.push(`<h2>The Seventh Party System</h2>
+                <p>HOLT: “Good evening from Hofstra University in Hempstead, New York. I’m Lester Holt, anchor of “NBC Nightly News.” I want to welcome you to the first presidential debate.<br><br>The participants tonight are Jeb Bush, Jerry Brown and Bernie Sanders. This debate is sponsored by the Commission on Presidential Debates, a nonpartisan, nonprofit organization. The commission drafted tonight’s format, and the rules have been agreed to by the campaigns.<br><br>The 90-minute debate is divided into six segments, each 15 minutes long. We’ll explore three topic areas tonight: Achieving prosperity; America’s direction; and securing America. At the start of each segment, I will ask the same lead-off question to both candidates, and they will each have up to two minutes to respond. From that point until the end of the segment, we’ll have an open discussion.<br><br>The questions are mine and have not been shared with the commission or the campaigns. The audience here in the room has agreed to remain silent so that we can focus on what the candidates are saying.<br><br>I will invite you to applaud, however, at this moment, as we welcome the candidates: Democratic nominee for president of the United States, Gerald Brown, and Republican nominee for president of the United States, Jeb Bush, and Reform nominee for president of the United States, Bernard Sanders.”</p>
+                `)
+            ending5();
+            e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/ug8apOk.jpeg"})])
+            }
         }
-        else if (quickstats[0] <= 16){
-            e.pages.push(`<h2><q><i>TURNER WINS SOME ELECTORAL VOTES, MAKES LITTLE IMPACT ON OUTCOME</i></q></h2>
-                    <p>Gene Roberts, <i>The New York Times</i><br><br>Media mogul and Reform Party nominee, Ted Turner, was the first third-party candidate for president since George C. Wallace in 1968 to win a state in a presidential election. Mr. Turner, who dropped out of the Democratic primaries last year after former Pennsylvania Governor Bob Casey began to surpass him and Tennessee Senator Al Gore in the polls, performed relatively as expected last night.<br><br>Though hardly a poor showing, Mr. Turner was speculated to do even better with the reputations of his opponents being quite poor among their respective party electorates. Nevertheless, Mr. Turner was able to secure a victory for the fledging Reform Party, though it's unknown whether it will be able to continue to build upon this performance and produce substantial victories in the years to come, or even in 2000.<br><br>Charlie Cook, of the eponymous <i>Cook Political Report</i>, is doubtful, saying “Turner was definitely the highest profile third-party candidate in years, possibly ever. I think this was the ceiling for a viable third-party in America, a handful of electoral votes earned from home state advantage and pockets of disaffected voters, but nothing that can generate a real challenge to the Republicans and Democrats, as we saw last night.”</p>
-                    `)
-        ending4();
-        e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/58OSTHa.jpeg"})])
-        }
-        else if (quickstats[0] <= 25){
-            e.pages.push(`<h2>White House Daily Briefing | November 12, 1996</h2>
-            <p>REPORTER: “Has the president seen the performance of Ted Turner?”</p>
-            <p>FITZWATER: “He's aware.”</p>
-            <p>REPORTER: “What does the White House take away from Turner's showing? He won multiple states against Casey and Gingrich.”</p>
-            <p>FITZWATER: “The general consensus is we don't have much to say on the matter. We congratulate Mr. Turner on his strong performance and celebrate his participation in the democratic process.”</p>
-            <p>REPORTER: “Is the president concerned about the Reform Party's success? Some speculate it could pose a threat to the established power of the Republican and Democratic parties. Does the White House invite third-parties to participate in the democratic process?”</p>
-            <p>FITZWATER: “We're not taking any further questions on that. Next question.”</p>
-            `)
-        ending5();
-        e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/8AfSNFc.jpeg"})])
-        }
-        else if (quickstats[0] >= 40){
-            e.pages.push(`<h2>The Seventh Party System</h2>
-            <p>HOLT: “Good evening from Hofstra University in Hempstead, New York. I’m Lester Holt, anchor of “NBC Nightly News.” I want to welcome you to the first presidential debate.<br><br>The participants tonight are Jeb Bush, Jerry Brown and Bernie Sanders. This debate is sponsored by the Commission on Presidential Debates, a nonpartisan, nonprofit organization. The commission drafted tonight’s format, and the rules have been agreed to by the campaigns.<br><br>The 90-minute debate is divided into six segments, each 15 minutes long. We’ll explore three topic areas tonight: Achieving prosperity; America’s direction; and securing America. At the start of each segment, I will ask the same lead-off question to both candidates, and they will each have up to two minutes to respond. From that point until the end of the segment, we’ll have an open discussion.<br><br>The questions are mine and have not been shared with the commission or the campaigns. The audience here in the room has agreed to remain silent so that we can focus on what the candidates are saying.<br><br>I will invite you to applaud, however, at this moment, as we welcome the candidates: Democratic nominee for president of the United States, Gerald Brown, and Republican nominee for president of the United States, Jeb Bush, and Reform nominee for president of the United States, Bernard Sanders.”</p>
-            `)
-        ending5();
-        e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/ug8apOk.jpeg"})])
-        }
-    }
 
     //Gore primary win
     if (maverick == 0){
@@ -16694,8 +16705,8 @@ endingPicker = (out, totv, aa, quickstats) => {
         }
     }
 
-    //Mondale late replacement
-    if (maverick == 0){
+    //Perot late replacement
+    if (maverick == 1){
         if (e.player_answers.includes(3287)){
             e.pages.push(`<h2><q><i>PEROT FLOPS. REFORM PARTY DOOMED?</i></q></h2>
                     <p>...</p>
@@ -16757,53 +16768,23 @@ endingPicker = (out, totv, aa, quickstats) => {
         }
     }
 
-    if (maverick == 1 && quitter == false){
-        if (e.player_answers.includes(3479)){
-            e.pages.push(`<h2><q><i>TED TURNER LOSES BIG ON AOL-TIME WARNER MERGER. LOSSES ESTIMATED AT 8 BILLION.</i></q></h2>
-                    <p>The eccentric billionaire was delivered a severe financial blow last month when AOL-Time Warner, who Turner had sold his company Turner Broadcasting Systems to in October 1996 while running for president under the Reform Party banner, suffered a serious blow following the dot-com bubble bursting. The bubble, created around intense speculative investments into internet-based companies, had helped many companies such as AOL become behemoths in the financial world. Once the bubble burst, so did the value in these companies, and AOL-Time Warner is suffering from the outcome of such downturns.<br><br>Turner had received 10 percent of Time Warner's stock following the sale of his company to the industry giant and was named vice chairman after losing his bid. It's unknown what will transpire following these events. Turner could not be reached for comment.</p>
-                    `)
-        e.executable.push([2, (() => {e.image = e.image = "https://i.imgur.com/ZyUUbb5.jpeg"})])
-        }
-        else if (e.player_answers.includes(3478)){
-            e.pages.push(`<h2>It's Time to Put Droopy Out to Pasture</h2>
-            <p>Roger Ebert, <i>The Chicago Sun-Times</i><br><br>Shall I really state the obvious? It seems a sin against Americana to dedicate an article to bashing the continued pervailing influence of Yogi Bear and other Hanna-Barbera properties, but when it begins to escape the television sets of the kids of America and into the theaters where, doubtless, adults will be dragged to pay for what they can get for free at home, I feel it's time to speak truth to power. That's right, I will be committing the sacrilegious act of taking the attack to Scooby-Doo and the like.<br><br>In the past few years alone, we've gotten several feature films rehashing the same characters and concepts we've seen and heard years ago. James Gunn's <i>Scooby-Doo</i> and <i>Scooby-Doo 2: Monsters Unleashed</i>, Craig McCracken's <i>Wacky Races: The Movie</i>, Des McAnuff's <i>Yogi Bear: The Movie</i> (how he managed another feature film after 2000's <i>The Adventures of Rocky and Bullwinkle</i> still alludes me) or last week's <i>Tom and Jerry</i> directed by <i>Charlie's Angels</i>'s very own McG.<br><br>Surely Turner Broadcasting Systems, the company of former presidential candidate Ted Turner, could hire some people to think up new anthropomorphic cartoon characters to merchandise? No? It's difficult to understand their logic in pushing the same strategy that led Cartoon Network to go out of business two years ago. Hanna-Barbera has its charms, but always recycling the same cartoons just won't cut it, and if the flop that was <i>Looney Tunes: Back in Action</i> was any indicator, neither is Merrie Melodies.<br><br>If you're reading this Ted, I know we've had our differences, I still harbor lingering grudges over your colorization of <i>Casablanca</i>, but please, for your sake, hire a writer with an ounce of originality. Or just my sake if anything, I would rather not sit through another rendition of <i>Tom and Jerry</i> that's nothing more than a haphazard excuse to get Drew Barrymore more work (the voice of Jerry? Jerry having a voice <i>at all</i>? Seriously?)</p>
-            `)
-        e.executable.push([2, (() => {e.image = e.image = "https://i.imgur.com/lR1WAai.jpeg"})])
-        }
-    }
-
     if (maverick == 0 && quitter == false && divorce == true){
         if (quickstats[0] < 269 && e.player_answers.includes(3479)){
             e.pages.push(`<h2><q><i>TURNER LOSES BIG ON AOL-TIME WARNER MERGER. LOSSES ESTIMATED AT 8 BILLION.</i></q></h2>
                     <p>The former Democratic nominee for president was delivered a severe financial blow last month when AOL-Time Warner, who Turner had sold his company Turner Broadcasting Systems to in October 1996 while running for president, suffered a serious blow following the dot-com bubble bursting. The bubble, created around intense speculative investments into internet-based companies, had helped many companies such as AOL become behemoths in the financial world. Once the bubble burst, so did the value in these companies, and AOL-Time Warner is suffering from the outcome of such downturns.<br><br>Turner had received 10 percent of Time Warner's stock following the sale of his company to the industry giant and was named vice chairman after losing his bid. It's unknown what will transpire following these events. Turner could not be reached for comment.</p>
                     `)
-        e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/ZyUUbb5.jpeg"})])
+        e.executable.push([2, (() => {e.image = e.image = "https://i.imgur.com/ZyUUbb5.jpeg"})])
         }
         else if (quickstats[0] < 269 && e.player_answers.includes(3478)){
             e.pages.push(`<h2>It's Time to Put Droopy Out to Pasture</h2>
             <p>Roger Ebert, <i>The Chicago Sun-Times</i><br><br>Shall I really state the obvious? It seems a sin against Americana to dedicate an article to bashing the continued pervailing influence of Yogi Bear and other Hanna-Barbera properties, but when it begins to escape the television sets of the kids of America and into the theaters where, doubtless, adults will be dragged to pay for what they can get for free at home, I feel it's time to speak truth to power. That's right, I will be committing the sacrilegious act of taking the attack to Scooby-Doo and the like.<br><br>In the past few years alone, we've gotten several feature films rehashing the same characters and concepts we've seen and heard years ago. James Gunn's <i>Scooby-Doo</i> and <i>Scooby-Doo 2: Monsters Unleashed</i>, Craig McCracken's <i>Wacky Races: The Movie</i>, Des McAnuff's <i>Yogi Bear: The Movie</i> (how he managed another feature film after 2000's <i>The Adventures of Rocky and Bullwinkle</i> still alludes me) or last week's <i>Tom and Jerry</i> directed by <i>Charlie's Angels</i>'s very own McG.<br><br>Surely Turner Broadcasting Systems, the company of Ted Turner, could hire some people to think up new anthropomorphic cartoon characters to merchandise? No? It's difficult to understand their logic in pushing the same strategy that led Cartoon Network to go out of business two years ago. Hanna-Barbera has its charms, but always recycling the same cartoons just won't cut it, and if the flop that was <i>Looney Tunes: Back in Action</i> was any indicator, neither is Merrie Melodies.<br><br>If you're reading this Ted, I know we've had our differences, I still harbor lingering grudges over your colorization of <i>Casablanca</i>, but please, for your sake, hire a writer with an ounce of originality. For my sake if anything, I would rather not sit through another rendition of <i>Tom and Jerry</i> that's nothing more than a haphazard excuse to get Drew Barrymore more work (the voice of Jerry? Jerry having a voice <i>at all</i>? Seriously?)</p>
             `)
-        e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/lR1WAai.jpeg"})])
-        }
-    }
-
-    if (maverick == 1 && quitter == false && divorce == true){
-        if (e.player_answers.includes(3479)){
-            e.pages.push(`<h2><q><i>TED TURNER LOSES BIG ON AOL-TIME WARNER MERGER. LOSSES ESTIMATED AT 8 BILLION.</i></q></h2>
-                    <p>The eccentric billionaire was delivered a severe financial blow last month when AOL-Time Warner, who Turner had sold his company Turner Broadcasting Systems to in October 1996 while running for president under the Reform Party banner, suffered a serious blow following the dot-com bubble bursting. The bubble, created around intense speculative investments into internet-based companies, had helped many companies such as AOL become behemoths in the financial world. Once the bubble burst, so did the value in these companies, and AOL-Time Warner is suffering from the outcome of such downturns.<br><br>Turner had received 10 percent of Time Warner's stock following the sale of his company to the industry giant and was named vice chairman after losing his bid. It's unknown what will transpire following these events. Turner could not be reached for comment.</p>
-                    `)
-        e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/ZyUUbb5.jpeg"})])
-        }
-        else if (e.player_answers.includes(3478)){
-            e.pages.push(`<h2>It's Time to Put Droopy Out to Pasture</h2>
-            <p>Roger Ebert, <i>The Chicago Sun-Times</i><br><br>Shall I really state the obvious? It seems a sin against Americana to dedicate an article to bashing the continued pervailing influence of Yogi Bear and other Hanna-Barbera properties, but when it begins to escape the television sets of the kids of America and into the theaters where, doubtless, adults will be dragged to pay for what they can get for free at home, I feel it's time to speak truth to power. That's right, I will be committing the sacrilegious act of taking the attack to Scooby-Doo and the like.<br><br>In the past few years alone, we've gotten several feature films rehashing the same characters and concepts we've seen and heard years ago. James Gunn's <i>Scooby-Doo</i> and <i>Scooby-Doo 2: Monsters Unleashed</i>, Craig McCracken's <i>Wacky Races: The Movie</i>, Des McAnuff's <i>Yogi Bear: The Movie</i> (how he managed another feature film after 2000's <i>The Adventures of Rocky and Bullwinkle</i> still alludes me) or last week's <i>Tom and Jerry</i> directed by <i>Charlie's Angels</i>'s very own McG.<br><br>Surely Turner Broadcasting Systems, the company of former presidential candidate Ted Turner, could hire some people to think up new anthropomorphic cartoon characters to merchandise? No? It's difficult to understand their logic in pushing the same strategy that led Cartoon Network to go out of business two years ago. Hanna-Barbera has its charms, but always recycling the same cartoons just won't cut it, and if the flop that was <i>Looney Tunes: Back in Action</i> was any indicator, neither is Merrie Melodies.<br><br>If you're reading this Ted, I know we've had our differences, I still harbor lingering grudges over your colorization of <i>Casablanca</i>, but please, for your sake, hire a writer with an ounce of originality. Or just my sake if anything, I would rather not sit through another rendition of <i>Tom and Jerry</i> that's nothing more than a haphazard excuse to get Drew Barrymore more work (the voice of Jerry? Jerry having a voice <i>at all</i>? Seriously?)</p>
-            `)
-        e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/lR1WAai.jpeg"})])
+        e.executable.push([2, (() => {e.image = e.image = "https://i.imgur.com/lR1WAai.jpeg"})])
         }
     }
 
     //secret bonus landslide ending
-    if (maverick == 0 && quitter == false && playerlost == false){
+    if (maverick == 0 && quitter == false && playerlost == false && divorce == false){
         if (quickstats[0] > 350 && e.player_answers.includes(3319) || e.player_answers.includes(3320) && itsover == false) {
             e.pages.push(`<h2>www.congress.gov/bill/105th-congress/house-bill/3734</h2>
                    <p><center>H.R.3734 - Public Welfare and Healthcare Reconciliation Act of 1998</p></center>
@@ -16822,20 +16803,20 @@ endingPicker = (out, totv, aa, quickstats) => {
     }
 
     //unique third party ending slides
-    if (maverick == 1){
-        if (quickstats[0] >= 25 && e.player_answers.includes(3503) || e.player_answers.includes(3302)){
+    if (maverick == 1 && quickstats[0] >= 20){
+        if (e.player_answers.includes(3503)){
             e.pages.push(`<h2><i>Superman Lives</i> Review</h2>
                     <p><i>Entertainment Weekly</i>, June 22, 1999<br><br>It was certainly a bold choice to enlist Tim Burton (<i>Beetlejuice</i>, <i>Edward Scissorhands</i>) to helm the first Superman film since 1987's critical and commercial flop, <i>Superman IV: The Quest for Peace</i>, the final outting for Christopher Reeve's iconic portrayal of the comic superhero. Burton had success previously, directing the first two <i>Batman</i> films starring Michael Keaton as the titular caped crusader. However, it was difficult to imagine the quirky director known for making odd misfits the protagonists of his films being the man to create the world for the famously optimistic, outgoing boy scout.<br><br>Enter <i>Superman Lives</i>, where the vigilante superhero Superman (Nicolas Cage) leads a double life as <i>Daily Planet</i> reporter Clark Kent, dating star colleague Lois Lane (Courteney Cox) and paling around with his good friend Jimmy Olsen (Chris Rock), all the while unaware of his true origins as the last Kryptonian. But sinister forces are working against him, and megalomaniac billionaire businessman Lex Luthor (Kevin Spacey) soon forms an alliance with the extraterrestial menance Brainiac (Christopher Walken), creating the gestalt entity Lexiac to kill Superman once and for all.<br><br>The first two <i>Batman</i> films were definitely aided heavily from the inclusion of their charismatic villains, whether in Jack Nicholson's Joker or Danny DeVito's turn as the vile Penguin, but there's a great lack of that here. Spacey's performance is commendable, delivering well on his trademark charm as a slimy, greed-obsessed heel as similarly seen in his <i>Swimming with Sharks</i> and <i>The Unusual Suspects</i> roles, but he's wasted here. He appears sparingly, and oftentimes has his performance obscured by poor computer-generated effects meant to allude to his Lexiac persona. Walken, who had prior portrayed the original character Max Shreck in Burton's last comic book film, suffers from these special effect heavy pitfalls, though is able to shine more simply due to the granduer owed to his presence. One memorable scene features Walken's Brainiac going toe-to-toe with polar bears in the Great White North as he breaks into Superman's Fortress of Solitude.<br><br>Cage's Superman is a stark departure from Reeve's performance, but not necessarily a bad one. He's without question the Burtonized Superman we all had expected to see following the announcement of their partnership. His long, flowing locks draw comparisons to his comic counterpart, who had taken to the mullet look in the successor to the highly marketed <q>Death of Superman</q> plotline from earlier in the decade, which this film takes heavy inspiration from. He has an unusual charm to him, at times off-putting but also capable of pulling the audience into his plight of loneliness in the world.<br><br>This is certainly not your daddy or granddaddy's Superman. Cox's Lois Lane by contrast bares intense similarities to Margot Kidder's take on the character, so much so she fails to make it her own in many ways, and is unable to make much of the role particularly notable or engaging. Special mention goes to WCW wrestler and former vice presidential candidate Ric Flair's go at the hulking mute Doomsday, who Luthor and Brainiac create to do the hero in. One can only assume the casting of the outlandish Nature Boy stems from Ted Turner's breakout success at the polls three years ago, although it's unknown how much the Reform Party will contribute to <i>Superman Lives</i>'s box office this summer.<br><br>It's safe to say the film suffers from an identity crisis. At times, it wants to be that optimistic Reeve Superman, but also wishes to carve itself a unique niche as the kid who listens to Marilyn Manson's Superman. It's difficult to say if it's a success. You have to give it to Burton though, it's entertaining. That'll probably be good enough. <i>B-</i></p>
                     `)
         e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/j7bjigM.jpeg"})])
         }
-        else if (quickstats[0] >= 25 && e.player_answers.includes(3502)){
+        else if (e.player_answers.includes(3502) || e.player_answers.includes(3501)){
             e.pages.push(`<h2><q><i>TRUMP TO BE REFORM PARTY NOMINEE, NAMES GOVERNOR VENTURA AS RUNNING MATE.</i></q></h2>
-                    <p>In a ceremonial gathering at the Reform Party headquarters in Minneapolis, Minnesota, businessman and the Reform Party's vice presidential nominee in 1996, Donald Trump, gave a celebratory victory speech after easily clearing the bar over his nearest challenger, former White House Communications Director Pat Buchanan, who many feared would destroy the fledging party if nominated.<br><br>In his speech, Trump credited party founder Ross Perot and 1996 Reform Party nominee and CNN founder Ted Turner as people who “had the stuff,” before slamming the Republicans and Democrats as “dumbasses.”<br><br>State governor Jesse Ventura, elected in an upset victory in 1998, two years after Turner's shockingly strong performance for the party, followed up on Trump's remarks, graciously accepting Trump and the Reform Party's nomination. The outlined platform for the Trump/Ventura ticket has proposed to enact universal healthcare, environmental protections and regulations, protection of gun rights and drug decriminalization.<br><br>While it's unknown how the Reform Party might impact the results in november for the two major parties, it's currently polling at a staggering 32% nationally, which if it holds would have the potential to deadlock the election as the party hopes to achieve. In addition, many Reform candidates plan to seek office statewide and congressionally across the nation, promising to shake up many local races.</p>
+                    <p>In a ceremonial gathering at the Reform Party headquarters in Minneapolis, Minnesota, businessman Donald Trump gave a celebratory victory speech after easily clearing the bar over his nearest challenger, former White House Communications Director Pat Buchanan, who many feared would destroy the fledging party if nominated.<br><br>In his speech, Trump credited party founder Ross Perot and 1996 Reform Party nominee and CNN founder Ted Turner as people who “had the stuff,” before slamming the Republicans and Democrats as “dumbasses.”<br><br>State governor Jesse Ventura, elected in an upset victory in 1998, two years after Turner's shockingly strong performance for the party, followed up on Trump's remarks, graciously accepting Trump and the Reform Party's nomination. The outlined platform for the Trump/Ventura ticket has proposed to enact universal healthcare, environmental protections and regulations, protection of gun rights and drug decriminalization.<br><br>While it's unknown how the Reform Party might impact the results in november for the two major parties, it's currently polling at a staggering 32% nationally, which if it holds would have the potential to deadlock the election as the party hopes to achieve. In addition, many Reform candidates plan to seek office statewide and congressionally across the nation, promising to shake up many local races.</p>
                     `)
         e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/X0BlKs6.jpeg"})])
         }
-        else if (quickstats[0] >= 25 && e.player_answers.includes(3506)){
+        else if (e.player_answers.includes(3506)){
             e.pages.push(`<h2><q><i>HILLARY CLINTON ELECTED SENATOR FROM ARKANSAS FOR THE REFORM PARTY.</i></q></h2>
                     <p>Hillary Rodham Clinton, wife of former Arkansas governor, 1992 Democratic presidential nominee and 1996 Reform Party vice presidential nominee, Bill Clinton, has been elected the next Senator from Arkansas for the Reform Party in a first for the developing third-party, which had exceeded expectations in 1996 following Ted Turner's impressive campaign, garnering dozens of electoral votes and winning multiple states.<br><br>Clinton defeated incumbent Republican Senator Tim Hutchinson and Democratic Arkansas Attorney General Mark Pryor to narrowly declare victory, marking a first for the Reform Party in Senatorial representation and the first time since James L. Buckley was elected Senator from New York for the Conservative Party that a party other than Republican or Democratic has won a Senate seat.<br><br>Joined by her husband, Clinton celebrated her victory, proclaiming it a win for women everywhere and a sign of things to come for the Reform Party. Speculation has already begun to arise that she may serve as the party's presidential nominee come 2004, though she will have to face a primary fight with Minnesota Governor Jesse Ventura, who also won his election this month to serve a second term.</p>
                     `)
@@ -16851,7 +16832,7 @@ endingPicker = (out, totv, aa, quickstats) => {
     ctsAchievement("Captain Outrageous");
     }
     
-    if (jane >= -1 && maverick == 0 && itsover == false) {
+    if (quickstats[0] >= 269 && jane >= -1 && maverick == 0 && itsover == false) {
     ctsAchievement("Barbarella Goes to Washington");
     }
     

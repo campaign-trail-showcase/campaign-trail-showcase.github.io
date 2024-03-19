@@ -6509,7 +6509,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 78,
             "state": 208,
-            "state_multiplier": 0.999
+            "state_multiplier": 0.945
         }
     },
     {
@@ -8127,7 +8127,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 3286,
             "candidate": 78,
             "affected_candidate": 78,
-            "global_multiplier": -0.1
+            "global_multiplier": -0.2
         }
     },
     {
@@ -8907,7 +8907,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 3326,
             "candidate": 78,
             "affected_candidate": 78,
-            "global_multiplier": -0.08999
+            "global_multiplier": -0.1
         }
     },
     {
@@ -9638,6 +9638,16 @@ campaignTrail_temp.answer_score_global_json = [
             "candidate": 78,
             "affected_candidate": 78,
             "global_multiplier": -0.12
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1362,
+        "fields": {
+            "answer": 3253,
+            "candidate": 78,
+            "affected_candidate": 78,
+            "global_multiplier": 0.1
         }
     },
 ]
@@ -15893,6 +15903,7 @@ cyoAdventure = function(a) {
         campaignTrail_temp.questions_json[7] = tunnel(410);
         campaignTrail_temp.questions_json[9] = tunnel(416);
         campaignTrail_temp.questions_json[12] = tunnel(417);
+        campaignTrail_temp.questions_json[15] = tunnel(330);
         campaignTrail_temp.questions_json[19] = tunnel(338);
         campaignTrail_temp.questions_json[22] = tunnel(339);
         campaignTrail_temp.questions_json[24] = tunnel(336);
@@ -15904,7 +15915,7 @@ cyoAdventure = function(a) {
         campaignTrail_temp.questions_json[9] = tunnel(385);
         campaignTrail_temp.questions_json[12] = tunnel(422);
         campaignTrail_temp.questions_json[19] = tunnel(338);
-        campaignTrail_temp.questions_json[21] = tunnel(325);
+        campaignTrail_temp.questions_json[21] = tunnel(330);
         campaignTrail_temp.questions_json[22] = tunnel(339);
         campaignTrail_temp.questions_json[24] = tunnel(336);
     }
@@ -15992,7 +16003,7 @@ cyoAdventure = function(a) {
         nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#07b2f0"
         nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#facf23"
         $(".container")[0].style.backgroundColor = "#4f4320"
-        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/HiIY8LM.jpeg)"
+        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/U7ZWKqg.jpeg)"
         $("#game_window")[0].style.borderColor = "#4A4A2B"
         $("#game_window")[0].style.coloring_window = "#4A4A2B"
         quotes = ["<i>You can never quit. Winners never quit, and quitters never win. - Ted Turner</i>"]
@@ -16088,7 +16099,7 @@ cyoAdventure = function(a) {
         nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#07b2f0"
         nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#facf23"
         $(".container")[0].style.backgroundColor = "#4f4320"
-        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/HiIY8LM.jpeg)"
+        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/U7ZWKqg.jpeg)"
         $("#game_window")[0].style.borderColor = "#4A4A2B"
         $("#game_window")[0].style.coloring_window = "#4A4A2B"
         quotes = ["<i>You can never quit. Winners never quit, and quitters never win. - Ted Turner</i>"]
@@ -16835,8 +16846,8 @@ e.header = "<h1>Error-Handling Message (oops)</h1>";
             }
         }
     
-        //Mondale late replacement
-        if (maverick == 0){
+        //Perot late replacement
+        if (maverick == 1){
             if (e.player_answers.includes(3287)){
                 e.pages.push(`<h2><q><i>PEROT FLOPS. REFORM PARTY DOOMED?</i></q></h2>
                         <p>...</p>
@@ -16898,53 +16909,23 @@ e.header = "<h1>Error-Handling Message (oops)</h1>";
             }
         }
     
-        if (maverick == 1 && quitter == false){
-            if (e.player_answers.includes(3479)){
-                e.pages.push(`<h2><q><i>TED TURNER LOSES BIG ON AOL-TIME WARNER MERGER. LOSSES ESTIMATED AT 8 BILLION.</i></q></h2>
-                        <p>The eccentric billionaire was delivered a severe financial blow last month when AOL-Time Warner, who Turner had sold his company Turner Broadcasting Systems to in October 1996 while running for president under the Reform Party banner, suffered a serious blow following the dot-com bubble bursting. The bubble, created around intense speculative investments into internet-based companies, had helped many companies such as AOL become behemoths in the financial world. Once the bubble burst, so did the value in these companies, and AOL-Time Warner is suffering from the outcome of such downturns.<br><br>Turner had received 10 percent of Time Warner's stock following the sale of his company to the industry giant and was named vice chairman after losing his bid. It's unknown what will transpire following these events. Turner could not be reached for comment.</p>
-                        `)
-            e.executable.push([2, (() => {e.image = e.image = "https://i.imgur.com/ZyUUbb5.jpeg"})])
-            }
-            else if (e.player_answers.includes(3478)){
-                e.pages.push(`<h2>It's Time to Put Droopy Out to Pasture</h2>
-                <p>Roger Ebert, <i>The Chicago Sun-Times</i><br><br>Shall I really state the obvious? It seems a sin against Americana to dedicate an article to bashing the continued pervailing influence of Yogi Bear and other Hanna-Barbera properties, but when it begins to escape the television sets of the kids of America and into the theaters where, doubtless, adults will be dragged to pay for what they can get for free at home, I feel it's time to speak truth to power. That's right, I will be committing the sacrilegious act of taking the attack to Scooby-Doo and the like.<br><br>In the past few years alone, we've gotten several feature films rehashing the same characters and concepts we've seen and heard years ago. James Gunn's <i>Scooby-Doo</i> and <i>Scooby-Doo 2: Monsters Unleashed</i>, Craig McCracken's <i>Wacky Races: The Movie</i>, Des McAnuff's <i>Yogi Bear: The Movie</i> (how he managed another feature film after 2000's <i>The Adventures of Rocky and Bullwinkle</i> still alludes me) or last week's <i>Tom and Jerry</i> directed by <i>Charlie's Angels</i>'s very own McG.<br><br>Surely Turner Broadcasting Systems, the company of former presidential candidate Ted Turner, could hire some people to think up new anthropomorphic cartoon characters to merchandise? No? It's difficult to understand their logic in pushing the same strategy that led Cartoon Network to go out of business two years ago. Hanna-Barbera has its charms, but always recycling the same cartoons just won't cut it, and if the flop that was <i>Looney Tunes: Back in Action</i> was any indicator, neither is Merrie Melodies.<br><br>If you're reading this Ted, I know we've had our differences, I still harbor lingering grudges over your colorization of <i>Casablanca</i>, but please, for your sake, hire a writer with an ounce of originality. Or just my sake if anything, I would rather not sit through another rendition of <i>Tom and Jerry</i> that's nothing more than a haphazard excuse to get Drew Barrymore more work (the voice of Jerry? Jerry having a voice <i>at all</i>? Seriously?)</p>
-                `)
-            e.executable.push([2, (() => {e.image = e.image = "https://i.imgur.com/lR1WAai.jpeg"})])
-            }
-        }
-    
         if (maverick == 0 && quitter == false && divorce == true){
             if (quickstats[0] < 269 && e.player_answers.includes(3479)){
                 e.pages.push(`<h2><q><i>TURNER LOSES BIG ON AOL-TIME WARNER MERGER. LOSSES ESTIMATED AT 8 BILLION.</i></q></h2>
                         <p>The former Democratic nominee for president was delivered a severe financial blow last month when AOL-Time Warner, who Turner had sold his company Turner Broadcasting Systems to in October 1996 while running for president, suffered a serious blow following the dot-com bubble bursting. The bubble, created around intense speculative investments into internet-based companies, had helped many companies such as AOL become behemoths in the financial world. Once the bubble burst, so did the value in these companies, and AOL-Time Warner is suffering from the outcome of such downturns.<br><br>Turner had received 10 percent of Time Warner's stock following the sale of his company to the industry giant and was named vice chairman after losing his bid. It's unknown what will transpire following these events. Turner could not be reached for comment.</p>
                         `)
-            e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/ZyUUbb5.jpeg"})])
+            e.executable.push([2, (() => {e.image = e.image = "https://i.imgur.com/ZyUUbb5.jpeg"})])
             }
             else if (quickstats[0] < 269 && e.player_answers.includes(3478)){
                 e.pages.push(`<h2>It's Time to Put Droopy Out to Pasture</h2>
                 <p>Roger Ebert, <i>The Chicago Sun-Times</i><br><br>Shall I really state the obvious? It seems a sin against Americana to dedicate an article to bashing the continued pervailing influence of Yogi Bear and other Hanna-Barbera properties, but when it begins to escape the television sets of the kids of America and into the theaters where, doubtless, adults will be dragged to pay for what they can get for free at home, I feel it's time to speak truth to power. That's right, I will be committing the sacrilegious act of taking the attack to Scooby-Doo and the like.<br><br>In the past few years alone, we've gotten several feature films rehashing the same characters and concepts we've seen and heard years ago. James Gunn's <i>Scooby-Doo</i> and <i>Scooby-Doo 2: Monsters Unleashed</i>, Craig McCracken's <i>Wacky Races: The Movie</i>, Des McAnuff's <i>Yogi Bear: The Movie</i> (how he managed another feature film after 2000's <i>The Adventures of Rocky and Bullwinkle</i> still alludes me) or last week's <i>Tom and Jerry</i> directed by <i>Charlie's Angels</i>'s very own McG.<br><br>Surely Turner Broadcasting Systems, the company of Ted Turner, could hire some people to think up new anthropomorphic cartoon characters to merchandise? No? It's difficult to understand their logic in pushing the same strategy that led Cartoon Network to go out of business two years ago. Hanna-Barbera has its charms, but always recycling the same cartoons just won't cut it, and if the flop that was <i>Looney Tunes: Back in Action</i> was any indicator, neither is Merrie Melodies.<br><br>If you're reading this Ted, I know we've had our differences, I still harbor lingering grudges over your colorization of <i>Casablanca</i>, but please, for your sake, hire a writer with an ounce of originality. For my sake if anything, I would rather not sit through another rendition of <i>Tom and Jerry</i> that's nothing more than a haphazard excuse to get Drew Barrymore more work (the voice of Jerry? Jerry having a voice <i>at all</i>? Seriously?)</p>
                 `)
-            e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/lR1WAai.jpeg"})])
-            }
-        }
-    
-        if (maverick == 1 && quitter == false && divorce == true){
-            if (e.player_answers.includes(3479)){
-                e.pages.push(`<h2><q><i>TED TURNER LOSES BIG ON AOL-TIME WARNER MERGER. LOSSES ESTIMATED AT 8 BILLION.</i></q></h2>
-                        <p>The eccentric billionaire was delivered a severe financial blow last month when AOL-Time Warner, who Turner had sold his company Turner Broadcasting Systems to in October 1996 while running for president under the Reform Party banner, suffered a serious blow following the dot-com bubble bursting. The bubble, created around intense speculative investments into internet-based companies, had helped many companies such as AOL become behemoths in the financial world. Once the bubble burst, so did the value in these companies, and AOL-Time Warner is suffering from the outcome of such downturns.<br><br>Turner had received 10 percent of Time Warner's stock following the sale of his company to the industry giant and was named vice chairman after losing his bid. It's unknown what will transpire following these events. Turner could not be reached for comment.</p>
-                        `)
-            e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/ZyUUbb5.jpeg"})])
-            }
-            else if (e.player_answers.includes(3478)){
-                e.pages.push(`<h2>It's Time to Put Droopy Out to Pasture</h2>
-                <p>Roger Ebert, <i>The Chicago Sun-Times</i><br><br>Shall I really state the obvious? It seems a sin against Americana to dedicate an article to bashing the continued pervailing influence of Yogi Bear and other Hanna-Barbera properties, but when it begins to escape the television sets of the kids of America and into the theaters where, doubtless, adults will be dragged to pay for what they can get for free at home, I feel it's time to speak truth to power. That's right, I will be committing the sacrilegious act of taking the attack to Scooby-Doo and the like.<br><br>In the past few years alone, we've gotten several feature films rehashing the same characters and concepts we've seen and heard years ago. James Gunn's <i>Scooby-Doo</i> and <i>Scooby-Doo 2: Monsters Unleashed</i>, Craig McCracken's <i>Wacky Races: The Movie</i>, Des McAnuff's <i>Yogi Bear: The Movie</i> (how he managed another feature film after 2000's <i>The Adventures of Rocky and Bullwinkle</i> still alludes me) or last week's <i>Tom and Jerry</i> directed by <i>Charlie's Angels</i>'s very own McG.<br><br>Surely Turner Broadcasting Systems, the company of former presidential candidate Ted Turner, could hire some people to think up new anthropomorphic cartoon characters to merchandise? No? It's difficult to understand their logic in pushing the same strategy that led Cartoon Network to go out of business two years ago. Hanna-Barbera has its charms, but always recycling the same cartoons just won't cut it, and if the flop that was <i>Looney Tunes: Back in Action</i> was any indicator, neither is Merrie Melodies.<br><br>If you're reading this Ted, I know we've had our differences, I still harbor lingering grudges over your colorization of <i>Casablanca</i>, but please, for your sake, hire a writer with an ounce of originality. Or just my sake if anything, I would rather not sit through another rendition of <i>Tom and Jerry</i> that's nothing more than a haphazard excuse to get Drew Barrymore more work (the voice of Jerry? Jerry having a voice <i>at all</i>? Seriously?)</p>
-                `)
-            e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/lR1WAai.jpeg"})])
+            e.executable.push([2, (() => {e.image = e.image = "https://i.imgur.com/lR1WAai.jpeg"})])
             }
         }
     
         //secret bonus landslide ending
-        if (maverick == 0 && quitter == false && playerlost == false){
+        if (maverick == 0 && quitter == false && playerlost == false && divorce == false){
             if (quickstats[0] > 350 && e.player_answers.includes(3319) || e.player_answers.includes(3320) && itsover == false) {
                 e.pages.push(`<h2>www.congress.gov/bill/105th-congress/house-bill/3734</h2>
                        <p><center>H.R.3734 - Public Welfare and Healthcare Reconciliation Act of 1998</p></center>
@@ -16963,20 +16944,20 @@ e.header = "<h1>Error-Handling Message (oops)</h1>";
         }
     
         //unique third party ending slides
-        if (maverick == 1){
-            if (quickstats[0] >= 25 && e.player_answers.includes(3503) || e.player_answers.includes(3302)){
+        if (maverick == 1 && quickstats[0] >= 20){
+            if (e.player_answers.includes(3503)){
                 e.pages.push(`<h2><i>Superman Lives</i> Review</h2>
                         <p><i>Entertainment Weekly</i>, June 22, 1999<br><br>It was certainly a bold choice to enlist Tim Burton (<i>Beetlejuice</i>, <i>Edward Scissorhands</i>) to helm the first Superman film since 1987's critical and commercial flop, <i>Superman IV: The Quest for Peace</i>, the final outting for Christopher Reeve's iconic portrayal of the comic superhero. Burton had success previously, directing the first two <i>Batman</i> films starring Michael Keaton as the titular caped crusader. However, it was difficult to imagine the quirky director known for making odd misfits the protagonists of his films being the man to create the world for the famously optimistic, outgoing boy scout.<br><br>Enter <i>Superman Lives</i>, where the vigilante superhero Superman (Nicolas Cage) leads a double life as <i>Daily Planet</i> reporter Clark Kent, dating star colleague Lois Lane (Courteney Cox) and paling around with his good friend Jimmy Olsen (Chris Rock), all the while unaware of his true origins as the last Kryptonian. But sinister forces are working against him, and megalomaniac billionaire businessman Lex Luthor (Kevin Spacey) soon forms an alliance with the extraterrestial menance Brainiac (Christopher Walken), creating the gestalt entity Lexiac to kill Superman once and for all.<br><br>The first two <i>Batman</i> films were definitely aided heavily from the inclusion of their charismatic villains, whether in Jack Nicholson's Joker or Danny DeVito's turn as the vile Penguin, but there's a great lack of that here. Spacey's performance is commendable, delivering well on his trademark charm as a slimy, greed-obsessed heel as similarly seen in his <i>Swimming with Sharks</i> and <i>The Unusual Suspects</i> roles, but he's wasted here. He appears sparingly, and oftentimes has his performance obscured by poor computer-generated effects meant to allude to his Lexiac persona. Walken, who had prior portrayed the original character Max Shreck in Burton's last comic book film, suffers from these special effect heavy pitfalls, though is able to shine more simply due to the granduer owed to his presence. One memorable scene features Walken's Brainiac going toe-to-toe with polar bears in the Great White North as he breaks into Superman's Fortress of Solitude.<br><br>Cage's Superman is a stark departure from Reeve's performance, but not necessarily a bad one. He's without question the Burtonized Superman we all had expected to see following the announcement of their partnership. His long, flowing locks draw comparisons to his comic counterpart, who had taken to the mullet look in the successor to the highly marketed <q>Death of Superman</q> plotline from earlier in the decade, which this film takes heavy inspiration from. He has an unusual charm to him, at times off-putting but also capable of pulling the audience into his plight of loneliness in the world.<br><br>This is certainly not your daddy or granddaddy's Superman. Cox's Lois Lane by contrast bares intense similarities to Margot Kidder's take on the character, so much so she fails to make it her own in many ways, and is unable to make much of the role particularly notable or engaging. Special mention goes to WCW wrestler and former vice presidential candidate Ric Flair's go at the hulking mute Doomsday, who Luthor and Brainiac create to do the hero in. One can only assume the casting of the outlandish Nature Boy stems from Ted Turner's breakout success at the polls three years ago, although it's unknown how much the Reform Party will contribute to <i>Superman Lives</i>'s box office this summer.<br><br>It's safe to say the film suffers from an identity crisis. At times, it wants to be that optimistic Reeve Superman, but also wishes to carve itself a unique niche as the kid who listens to Marilyn Manson's Superman. It's difficult to say if it's a success. You have to give it to Burton though, it's entertaining. That'll probably be good enough. <i>B-</i></p>
                         `)
             e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/j7bjigM.jpeg"})])
             }
-            else if (quickstats[0] >= 25 && e.player_answers.includes(3502)){
+            else if (e.player_answers.includes(3502) || e.player_answers.includes(3501)){
                 e.pages.push(`<h2><q><i>TRUMP TO BE REFORM PARTY NOMINEE, NAMES GOVERNOR VENTURA AS RUNNING MATE.</i></q></h2>
-                        <p>In a ceremonial gathering at the Reform Party headquarters in Minneapolis, Minnesota, businessman and the Reform Party's vice presidential nominee in 1996, Donald Trump, gave a celebratory victory speech after easily clearing the bar over his nearest challenger, former White House Communications Director Pat Buchanan, who many feared would destroy the fledging party if nominated.<br><br>In his speech, Trump credited party founder Ross Perot and 1996 Reform Party nominee and CNN founder Ted Turner as people who “had the stuff,” before slamming the Republicans and Democrats as “dumbasses.”<br><br>State governor Jesse Ventura, elected in an upset victory in 1998, two years after Turner's shockingly strong performance for the party, followed up on Trump's remarks, graciously accepting Trump and the Reform Party's nomination. The outlined platform for the Trump/Ventura ticket has proposed to enact universal healthcare, environmental protections and regulations, protection of gun rights and drug decriminalization.<br><br>While it's unknown how the Reform Party might impact the results in november for the two major parties, it's currently polling at a staggering 32% nationally, which if it holds would have the potential to deadlock the election as the party hopes to achieve. In addition, many Reform candidates plan to seek office statewide and congressionally across the nation, promising to shake up many local races.</p>
+                        <p>In a ceremonial gathering at the Reform Party headquarters in Minneapolis, Minnesota, businessman Donald Trump gave a celebratory victory speech after easily clearing the bar over his nearest challenger, former White House Communications Director Pat Buchanan, who many feared would destroy the fledging party if nominated.<br><br>In his speech, Trump credited party founder Ross Perot and 1996 Reform Party nominee and CNN founder Ted Turner as people who “had the stuff,” before slamming the Republicans and Democrats as “dumbasses.”<br><br>State governor Jesse Ventura, elected in an upset victory in 1998, two years after Turner's shockingly strong performance for the party, followed up on Trump's remarks, graciously accepting Trump and the Reform Party's nomination. The outlined platform for the Trump/Ventura ticket has proposed to enact universal healthcare, environmental protections and regulations, protection of gun rights and drug decriminalization.<br><br>While it's unknown how the Reform Party might impact the results in november for the two major parties, it's currently polling at a staggering 32% nationally, which if it holds would have the potential to deadlock the election as the party hopes to achieve. In addition, many Reform candidates plan to seek office statewide and congressionally across the nation, promising to shake up many local races.</p>
                         `)
             e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/X0BlKs6.jpeg"})])
             }
-            else if (quickstats[0] >= 25 && e.player_answers.includes(3506)){
+            else if (e.player_answers.includes(3506)){
                 e.pages.push(`<h2><q><i>HILLARY CLINTON ELECTED SENATOR FROM ARKANSAS FOR THE REFORM PARTY.</i></q></h2>
                         <p>Hillary Rodham Clinton, wife of former Arkansas governor, 1992 Democratic presidential nominee and 1996 Reform Party vice presidential nominee, Bill Clinton, has been elected the next Senator from Arkansas for the Reform Party in a first for the developing third-party, which had exceeded expectations in 1996 following Ted Turner's impressive campaign, garnering dozens of electoral votes and winning multiple states.<br><br>Clinton defeated incumbent Republican Senator Tim Hutchinson and Democratic Arkansas Attorney General Mark Pryor to narrowly declare victory, marking a first for the Reform Party in Senatorial representation and the first time since James L. Buckley was elected Senator from New York for the Conservative Party that a party other than Republican or Democratic has won a Senate seat.<br><br>Joined by her husband, Clinton celebrated her victory, proclaiming it a win for women everywhere and a sign of things to come for the Reform Party. Speculation has already begun to arise that she may serve as the party's presidential nominee come 2004, though she will have to face a primary fight with Minnesota Governor Jesse Ventura, who also won his election this month to serve a second term.</p>
                         `)
@@ -16992,7 +16973,7 @@ e.header = "<h1>Error-Handling Message (oops)</h1>";
         ctsAchievement("Captain Outrageous");
         }
         
-        if (jane >= -1 && maverick == 0 && itsover == false) {
+        if (quickstats[0] >= 269 && jane >= -1 && maverick == 0 && itsover == false) {
         ctsAchievement("Barbarella Goes to Washington");
         }
         
