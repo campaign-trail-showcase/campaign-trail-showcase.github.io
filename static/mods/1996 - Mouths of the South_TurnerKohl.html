@@ -715,7 +715,7 @@ campaignTrail_temp.answers_json = [
         "pk": 3243,
         "fields": {
             "question": 322,
-            "description": "Flair should record one of those promos he's always doing for my wrastlin' promotion. Slam the Senators for excluding him."
+            "description": "Flair should record one of those promos he's always doing for my rasslin' promotion. Slam the Senators for excluding him."
         }
     },
     {
@@ -2195,7 +2195,7 @@ campaignTrail_temp.answers_json = [
         "pk": 3537,
         "fields": {
             "question": 395,
-            "description": "McMahon is humoring me. I think he's very funny! Of course, he'll never find a way out of the wrastlin' business, so I don't know why he's trying to involve himself in politics. Just not his area of expertise."
+            "description": "McMahon is humoring me. I think he's very funny! Of course, he'll never find a way out of the rasslin' business, so I don't know why he's trying to involve himself in politics. Just not his area of expertise."
         }
     },
     {
@@ -8117,7 +8117,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 3287,
             "candidate": 78,
             "affected_candidate": 78,
-            "global_multiplier": -0.1
+            "global_multiplier": -0.2
         }
     },
     {
@@ -8207,7 +8207,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 3297,
             "candidate": 78,
             "affected_candidate": 77,
-            "global_multiplier": -0.05
+            "global_multiplier": -0.03
         }
     },
     {
@@ -12620,7 +12620,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 183,
             "candidate": 78,
             "affected_candidate": 79,
-            "state_multiplier": 0.999
+            "state_multiplier": 0.9
         }
     },
     {
@@ -12752,7 +12752,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 189,
             "candidate": 78,
             "affected_candidate": 79,
-            "state_multiplier": 1.0
+            "state_multiplier": 0.85
         }
     },
     {
@@ -14987,7 +14987,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3297,
             "candidate": 78,
-            "answer_feedback": "The negative impact this has on Gingrich is nullified slightly as you begin airing relatiatory attack ads in Democratic states against Casey, hitting him for being anti-abortion. Casey is furious, saying to the press that Gingrich and you are both “in cahoots.”"
+            "answer_feedback": "The negative impact this has on Gingrich is nullified slightly as you begin airing retaliatory attack ads in Democratic states against Casey, hitting him for being anti-abortion. Casey is furious, saying to the press that Gingrich and you are both “in cahoots.”"
         }
     },
     {
@@ -16380,7 +16380,7 @@ endingPicker = (out, totv, aa, quickstats) => {
         playerlost = true;
     }
 
-    if (e.player_answers.includes(3286) || e.player_answers.includes(3540) && aa[0].electoral_votes > 269 && orderID[0] == 78){
+    if (e.player_answers.includes(3286) || e.player_answers.includes(3540)){
         divorce = true;
     }
 
@@ -16484,6 +16484,18 @@ endingPicker = (out, totv, aa, quickstats) => {
         playAudio9()
         }
 
+    function playAudio10() {
+        document.getElementById("campaigntrailmusic").play()
+        campaignTrail_temp.musicSrc = "https://file.garden/Zfx1pGIg9weivlmd/Dear_Mr._Gingrich_(Incomplete).mp3.mpeg"
+        document.getElementById('campaigntrailmusic').src = campaignTrail_temp.musicSrc
+        }
+                                
+    function ending9() {
+        document.getElementById("campaigntrailmusic").pause()
+        document.getElementById("music_player").style.display = "none"
+        playAudio10()
+        }
+
         //Dem endings first slide
         if (maverick == 0 && divorce == false){
         if (quickstats[0] <= 110 && itsover == false) {
@@ -16518,7 +16530,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                     <p>“Yes, that's the way it seems.”</p>
                     <p>“You are captives—and you have made a captive of the world itself. That's what's at stake, isn't it?—your captivity and the captivity of the world.”</p>
                     `)
-        ending2();
+        ending3();
         e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/kfwfhGa.jpeg"})])
         }
         else if (quickstats[0] > 269 && itsover == false) {
@@ -16546,7 +16558,7 @@ endingPicker = (out, totv, aa, quickstats) => {
             e.pages.push(`<h2>The Fog Horn</h2>
                    <p>The monster stopped and froze. It's great lantern eyes blinked. Its mouth gaped. It gave a sort of rumble, like a volcano. It twitched its head this way and that, as if to seek the sounds now dwindled off in the fog. It peered at the lighthouse. It rumbled again. Then its eyes caught fire. It reared up, threshed the water, and rushed at the tower, its eyes filled with angry torment.<br><br>The tower rocked, trembled, and started to give. The Fog Horn and the monster roared. We stumbled and half fell down the stairs.<br><br>We reached the bottom as the tower buckled down towards us. We ducked under the stairs in the small stone cellar. There were a thousand concussions as the rocks rained down; the Fog Horn stopped abruptly. The monster crashed upon the tower. The tower fell. We knelt together, McDunn and I holding tight, while our world exploded.<br><br>We waited a moment. And then I began to hear it. First a great vacuumed sucking of air, and then the lament, the bewilderment, the loneliness of the great monster, folded over upon us, above us, so that the sickening reek of its body filled the air, a stone's thickness away from our cellar. The monster gasped and cried. The tower was gone. The light was gone. The thing that had called it across a million years was gone. And the monster was opening its mouth and sending out great sounds. the sounds of a Fog Horn, again and again. And ships far at sea, not finding the light, not seeing anything, but passing and hearing late that night must've thought: There it is, the lonely sound, the Lonesome Bay horn. All's well. We've rounded the cape. And so it went for the rest of that night.</p>
                    `)
-        ending7();
+        ending1();
         e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/GGQUzrq.jpeg"})])
         }
         else if (quickstats[0] < 269 && itsover == false) {
@@ -16564,7 +16576,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                     <p><center>In yon strait path a thousand may well be stopped by three.</center><?p>
                     <p><center>Now who will stand on either hand, and keep the bridge with me?</center></p>
                     `)
-        ending7();
+        ending2();
         e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/kqBCAjI.jpeg"})])
         }
         else if (quickstats[0] == 269 && itsover == false) {
@@ -16651,7 +16663,7 @@ endingPicker = (out, totv, aa, quickstats) => {
             ending4();
             e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/58OSTHa.jpeg"})])
             }
-            else if (quickstats[0] <= 25){
+            else if (quickstats[0] < 40){
                 e.pages.push(`<h2>White House Daily Briefing | November 12, 1996</h2>
                 <p>REPORTER: “Has the president seen the performance of Ted Turner?”</p>
                 <p>FITZWATER: “He's aware.”</p>
@@ -16665,7 +16677,7 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             else if (quickstats[0] >= 40){
                 e.pages.push(`<h2>The Seventh Party System</h2>
-                <p>HOLT: “Good evening from Hofstra University in Hempstead, New York. I’m Lester Holt, anchor of “NBC Nightly News.” I want to welcome you to the first presidential debate.<br><br>The participants tonight are Jeb Bush, Jerry Brown and Bernie Sanders. This debate is sponsored by the Commission on Presidential Debates, a nonpartisan, nonprofit organization. The commission drafted tonight’s format, and the rules have been agreed to by the campaigns.<br><br>The 90-minute debate is divided into six segments, each 15 minutes long. We’ll explore three topic areas tonight: Achieving prosperity; America’s direction; and securing America. At the start of each segment, I will ask the same lead-off question to both candidates, and they will each have up to two minutes to respond. From that point until the end of the segment, we’ll have an open discussion.<br><br>The questions are mine and have not been shared with the commission or the campaigns. The audience here in the room has agreed to remain silent so that we can focus on what the candidates are saying.<br><br>I will invite you to applaud, however, at this moment, as we welcome the candidates: Democratic nominee for president of the United States, Gerald Brown, and Republican nominee for president of the United States, Jeb Bush, and Reform nominee for president of the United States, Bernard Sanders.”</p>
+                <p>HOLT: “Good evening from Hofstra University in Hempstead, New York. I’m Lester Holt, anchor of “NBC Nightly News.” I want to welcome you to the first presidential debate.<br><br>The participants tonight are Jeb Bush, Jerry Brown and Bernie Sanders. This debate is sponsored by the Commission on Presidential Debates, a nonpartisan, nonprofit organization. The commission drafted tonight’s format, and the rules have been agreed to by the campaigns.<br><br>The 90-minute debate is divided into six segments, each 15 minutes long. We’ll explore three topic areas tonight: Achieving prosperity; America’s direction; and securing America. At the start of each segment, I will ask the same lead-off question to all three candidates, and they will each have up to two minutes to respond. From that point until the end of the segment, we’ll have an open discussion.<br><br>The questions are mine and have not been shared with the commission or the campaigns. The audience here in the room has agreed to remain silent so that we can focus on what the candidates are saying.<br><br>I will invite you to applaud, however, at this moment, as we welcome the candidates: Democratic nominee for president of the United States, Gerald Brown, and Republican nominee for president of the United States, Jeb Bush, and Reform nominee for president of the United States, Bernard Sanders.”</p>
                 `)
             ending5();
             e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/ug8apOk.jpeg"})])
@@ -16697,11 +16709,24 @@ endingPicker = (out, totv, aa, quickstats) => {
     //Mondale late replacement
     if (maverick == 0){
         if (e.player_answers.includes(3541)){
-            e.pages.push(`<h2><q><i>MONDALE LOSES IN A LANDSLIDE, AGAIN. GINGRICH TO BECOME NEXT PRESIDENT.</i></q></h2>
-                    <p>...</p>
+            e.pages.push(`<h2><q>MONDALE LOSES IN A LANDSLIDE, AGAIN. GINGRICH TO BECOME NEXT PRESIDENT.</q></h2>
+                    <p><i>The Washington Post</i><br><br>Former Vice President Walter Mondale, who stepped up to the plate following former Democratic nominee for president Ted Turner unexpectedly withdrawing his name from the ballot, has lost in a landslide defeat to Republican House Minority Leader Newt Gingrich.<br><br>It was expected that 1996 would've been the year for Democrats to finally break the curse of Carter, but it just ended up a rerun as his number two marked the fifth consecutive loss for the party of Roosevelt and Truman in a fashion not seen since those two mens' time.<br><br>Few Democrats were willing to replace Turner at this stage in the race, immediate polls had the Democratic ticket cratering after the news broke and it frightened many. After an emergency meeting held in Washington, D.C., it was determined Mondale would be the replacement candidate, in what many are calling a decision calculated on the idea of putting up a respectable sacrifical lamb, in hopes they'd rebound again come 1998 during the midterms.<br><br>Mondale had the deck stacked against him in this regard, and he and his running mate, an obscure backbencher from northeastern Pennsylvania named Paul Kanjorski, were delivered a damaging blow come election day. Gingrich, for his part, was gracious in his triumph towards the twice-presidential loser Minnesotan, calling him a “distinguished statesman” and a “legend of American history.”</p>
                     `)
-        ending1();
+        ending9();
         e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/0VSooIK.jpeg"})])
+        }
+    }
+
+    if (maverick == 0){
+        if (e.player_answers.includes(3541)){
+            e.pages.push(`<h2><q><i>PRESIDENT-ELECT GINGRICH MEETS WITH PRESIDENT BUSH, ANNOUNCES FIRST PICKS FOR CABINET</i></q></h2>
+                    <br><br>President-elect Newt Gingrich made his trek to Washington today, meeting with incumbent President George Bush as is custom following presidential elections. They spoke for an hour before taking some questions in the Oval Office, with Gingrich mainly taking control of the situation and answering various reporters' inquiries on several key issues such as abortion, healthcare, gay marriage and foreign relations. He rejected every question asked pertaining to his ongoing divorce from his estranged wife, Marianne Gingrich, or concerning his mistress, Republican congressional staffer Callista Bisek.<br><br>Afterward, Gingrich made his way to a nearby pre-scheduled press conference as part of his transition into the presidency, where he updated the press corps on the plan for his upcoming cabinet. He announced the first set of names that'll be promoted to notable positions, including:<br><br>
+                    <p><center>Elizabeth Dole for Secretary of State (wife to Republican Senator Bob Dole and formerly Secretary of Labor under President Bush from 1989 to 1990)</center></p>
+                    <p><center>George W. Bush for Secretary of Agriculture (son to President Bush and former unsuccessful Republican nominee for governor of Texas in 1994</center></p>
+                    <p><center>Steve Gunderson for Chief of Staff (Wisconsin representative from the 3rd congressional district since 1981)</center></p>
+                    <br><br>Mr. Bush and Senator Dole, in attendance in place of his wife, were present to take questions. The announcement of Gunderson in particular drew immediate attention, as the congressman not only was exposed as a homosexual by California Represenative Bob Dornan two years ago, but was the very represenative Callista had staffed for while she and Gingrich were engaging in their illicit affair.<br><br>Gingrich refused to take any questions concerning his appointment, while Bush and Dole similarly ignored any request for comment. Gunderson could not be reached for comment. In his appointment, he'll become the first gay individual to serve in the Presidential Cabinet.</p>
+                    `)
+        e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/18McsvH.jpeg"})])
         }
     }
 
@@ -16810,9 +16835,9 @@ endingPicker = (out, totv, aa, quickstats) => {
                     `)
         e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/j7bjigM.jpeg"})])
         }
-        else if (e.player_answers.includes(3502) || e.player_answers.includes(3501)){
+        else if (e.player_answers.includes(3502)){
             e.pages.push(`<h2><q><i>TRUMP TO BE REFORM PARTY NOMINEE, NAMES GOVERNOR VENTURA AS RUNNING MATE.</i></q></h2>
-                    <p>In a ceremonial gathering at the Reform Party headquarters in Minneapolis, Minnesota, businessman Donald Trump gave a celebratory victory speech after easily clearing the bar over his nearest challenger, former White House Communications Director Pat Buchanan, who many feared would destroy the fledging party if nominated.<br><br>In his speech, Trump credited party founder Ross Perot and 1996 Reform Party nominee and CNN founder Ted Turner as people who “had the stuff,” before slamming the Republicans and Democrats as “dumbasses.”<br><br>State governor Jesse Ventura, elected in an upset victory in 1998, two years after Turner's shockingly strong performance for the party, followed up on Trump's remarks, graciously accepting Trump and the Reform Party's nomination. The outlined platform for the Trump/Ventura ticket has proposed to enact universal healthcare, environmental protections and regulations, protection of gun rights and drug decriminalization.<br><br>While it's unknown how the Reform Party might impact the results in november for the two major parties, it's currently polling at a staggering 32% nationally, which if it holds would have the potential to deadlock the election as the party hopes to achieve. In addition, many Reform candidates plan to seek office statewide and congressionally across the nation, promising to shake up many local races.</p>
+                    <p>In a ceremonial gathering at the Reform Party headquarters in Minneapolis, Minnesota, businessman Donald Trump gave a celebratory victory speech after easily clearing the bar over his nearest challenger, former White House Communications Director Pat Buchanan, who many feared would destroy the fledging party if nominated.<br><br>In his speech, Trump credited party founder Ross Perot and 1996 Reform Party nominee and CNN founder Ted Turner as people who “had the stuff,” before slamming the Republicans and Democrats as “dumbasses.”<br><br>State governor Jesse Ventura, elected in an upset victory in 1998, two years after Turner's shockingly strong performance for the party, followed up on Trump's remarks, graciously accepting Trump and the Reform Party's nomination. The outlined platform for the Trump/Ventura ticket has proposed to enact universal healthcare, environmental protections and regulations, protection of gun rights and drug decriminalization.<br><br>While it's unknown how the Reform Party might impact the results in November for the two major parties, it's currently polling at a staggering 32% nationally, which if it holds would have the potential to deadlock the election as the party hopes to achieve. In addition, many Reform candidates plan to seek office statewide and congressionally across the nation, promising to shake up many local races.</p>
                     `)
         e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/X0BlKs6.jpeg"})])
         }
@@ -16821,6 +16846,12 @@ endingPicker = (out, totv, aa, quickstats) => {
                     <p>Hillary Rodham Clinton, wife of former Arkansas governor, 1992 Democratic presidential nominee and 1996 Reform Party vice presidential nominee, Bill Clinton, has been elected the next Senator from Arkansas for the Reform Party in a first for the developing third-party, which had exceeded expectations in 1996 following Ted Turner's impressive campaign, garnering dozens of electoral votes and winning multiple states.<br><br>Clinton defeated incumbent Republican Senator Tim Hutchinson and Democratic Arkansas Attorney General Mark Pryor to narrowly declare victory, marking a first for the Reform Party in Senatorial representation and the first time since James L. Buckley was elected Senator from New York for the Conservative Party that a party other than Republican or Democratic has won a Senate seat.<br><br>Joined by her husband, Clinton celebrated her victory, proclaiming it a win for women everywhere and a sign of things to come for the Reform Party. Speculation has already begun to arise that she may serve as the party's presidential nominee come 2004, though she will have to face a primary fight with Minnesota Governor Jesse Ventura, who also won his election this month to serve a second term.</p>
                     `)
         e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/JjApwu2.jpeg"})])
+        }
+        else if (e.player_answers.includes(3501)){
+            e.pages.push(`<h2><q><i>ROSS PEROT, BRASH TEXAN BILLIONAIRE WHO FOUNDED THE REFORM PARTY, DIES AT 89</i></q></h2>
+                    <p><i>The New York Times</i><br><br>By Robert D. McFadden, July 9, 2019<br><br>Ross Perot, the wiry Texas gadfly who made a fortune in computer services, amazed the nation with audacious paramilitary missions to Vietnam and Iran, and ran for president in 1992 and vice president alongside media mogul Ted Turner in 1996 with populist talk of restoring Norman Rockwell’s America, died on Tuesday at his home in Dallas. He was 89.<br><br>The cause was leukemia, a family spokesman, James Fuller, said.<br><br>They called him the man from Texarkana, but he really came out of an era — the Great Depression, World War II and the exuberant postwar years — when boys had paper routes, folks tuned in to the radio and patriots rolled up their sleeves for Uncle Sam and built innovative companies and a powerful nation.<br><br>He was no quitter: an Eagle Scout, a Navy officer out of Annapolis, a top I.B.M. salesman, the founder of wildly successful data processing enterprises, a crusader for education and against drugs, a billionaire philanthropist. In 1969, he became a kind of folk hero with a quixotic attempt to fly medicine and food to American prisoners of war in North Vietnam. In 1979 he staged a commando raid that freed two of his employees, and thousands of criminals and political prisoners, from captivity in revolutionary Iran.<br><br>And in 1992 he became one of the most unlikely candidates ever to run for president. He had never held public office, and he seemed all wrong, like a cartoon character sprung to life: an elfin 5 feet 6 inches and 144 pounds, with a 1950s crew cut; a squeaky, nasal country-boy twang; and ears that stuck out like Alfred E. Neuman’s on a Mad magazine cover. Stiff-necked, cantankerous, impetuous, often sentimental, he was given to homespun epigrams: “If you see a snake, just kill it. Don’t appoint a committee on snakes.”<br><br>Under the banner “United We Stand America,” he spent $65 million of his billions in a campaign that featured innovative half-hour infomercials about himself and his ideas. They were popular, with ratings that sometimes surpassed those of prime-time sitcoms. Ignoring negative newspaper and magazine articles, he laid siege to radio and television talk shows. Switchboards lit up with calls from people wanting to volunteer.<br><br>It wouldn't be until his second run in 1996 however, that he would forever leave his mark on American political history. Running once again, he was hammered by many Democrats and even former supporters of his for supposedly splitting the anti-NAFTA vote with Democrat Bill Clinton in 1992, and his numbers stagnated. Under his new Reform Party, he needed the required 5% of the national vote to achieve federal funding, but he was consistently not meeting that in the polls.<br><br>As if it were fate, fellow politically conscious southern billionaire Turner would get into contact with Perot, and the two would strike a deal that helped secure them wins across multiple states and an impressive showing in the popular vote. Now supplied with matching federal funds and a reputation as a party that could win elections, the Reform Party would go on to be a significant force in local and congressional races, proving there was an appetite for a third choice among the American people.</p>
+                    `)
+        e.executable.push([1, (() => {e.image = e.image = "https://i.imgur.com/dAtV3st.jpeg"})])
         }
     }
 
