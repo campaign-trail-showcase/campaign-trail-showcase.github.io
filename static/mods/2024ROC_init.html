@@ -19,7 +19,7 @@ campaignTrail_temp.global_parameter_json = [
             "issue_stance_6_max": 0.71,
             "global_variance": 0.01,
             "state_variance": 0.005,
-            "question_count": 30,
+            "question_count": 31,
             "default_map_color_hex": "#C9C9C9",
             "no_state_map_color_hex": "#999999"
         }
@@ -32,7 +32,7 @@ campaignTrail_temp.election_json = [
         "pk": 20,
         "fields": {
             "year": 2024,
-            "display_year": "2024ROC",
+            "display_year": "ROC 2024",
             "summary": "<div style='overflow-y:scroll;height:200px;'><p>The 16th Presidential Election of the Republic of China (Taiwan) will be held on January 13, 2024.</p>In 2020, the huge victory of the current Democratic Progressive Party (DPP) government brought President Tsai Ing-wen to the peak of her popularity and a wave of low morale for the Kuomintang (KMT). President Tsai successfully won re-election with 8.17 million votes, defeating Han Kuo-yu. However, in the 2022 local elections, the DPP suffered an unprecedented defeat, attributed to incompetence and misconduct in DPP's local governance. With the “8-year curse” looming, it appears the DPP government is destined to fall in 2024. Following the local elections, Hou You-yi, a strong candidate seen as capable of reclaiming the presidential seat lost by the KMT for eight years, temporarily exceeded the current Vice President Lai Ching-te's approval ratings.<p>But, this election presents more intricate and changing situations: former Taipei Mayor and Taiwan People's Party Chairman Ko Wen-je also harbors expectations for the presidency, advocating for rationality, practicality, and science, with substantial support from the youth. Additionally, Terry Gou, former chairman of Hon Hai Precision Industry Co., Ltd., and Taiwanese tycoon, seems inclined to compete for the KMT's presidential nomination. There are even rumors of Han Kuo-yu re-entering the presidential race. It seems that the election year of 2023 is destined to be turbulent. The relationship between the United States and China, as well as the decisions of Taiwan's 23 million inhabitants, will forever influence the future of this island. In the midst of the enormous storm in the Taiwan Strait and across the Pacific, how will the beautiful island of Formosa navigate through it? Only time will tell.</p></div>",
             "image_url": "https://i.imgur.com/InseU2v.png",
             "winning_electoral_vote_number": 22,
@@ -50,7 +50,7 @@ campaignTrail_temp.temp_election_list = [
         "id": 20,
         "year": 2024,
         "is_premium": 0,
-        "display_year": "2024ROC"
+        "display_year": "ROC 2024"
     }
 ]
 e.collect_results = true;
@@ -67,7 +67,7 @@ campaignTrail_temp.credits = "Phone_Tall(Soyorin) and thanks for the some codes 
 campaignTrail_temp.candidate_json = [
     {
         "model": "campaign_trail.candidate",
-        "pk": 2001557,
+        "pk": 67,
         "fields": {
             "first_name": "",
             "last_name": "Lai Ching-te",
@@ -113,7 +113,7 @@ campaignTrail_temp.candidate_json = [
     },
     {
         "model": "campaign_trail.candidate",
-        "pk": 2001591,
+        "pk": 68,
         "fields": {
             "first_name": "",
             "last_name": "Hou You-Yi",
@@ -159,7 +159,7 @@ campaignTrail_temp.candidate_json = [
     },
     {
         "model": "campaign_trail.candidate",
-        "pk": 2001622,
+        "pk": 200,
         "fields": {
             "first_name": "",
             "last_name": "Ko Wen-Je",
@@ -205,7 +205,7 @@ campaignTrail_temp.candidate_json = [
     },
     {
         "model": "campaign_trail.candidate",
-        "pk": 2001653,
+        "pk": 201,
         "fields": {
             "first_name": "",
             "last_name": "Terry Gou",
@@ -348,7 +348,7 @@ campaignTrail_temp.running_mate_json = [
         "model": "campaign_trail.running_mate",
         "pk": 91377,
         "fields": {
-            "candidate": 2001557,
+            "candidate": 67,
             "running_mate": 1002
         }
     },
@@ -356,7 +356,7 @@ campaignTrail_temp.running_mate_json = [
         "model": "campaign_trail.running_mate",
         "pk": 123729,
         "fields": {
-            "candidate": 2001591,
+            "candidate": 68,
             "running_mate": 50001
         }
     },
@@ -364,7 +364,7 @@ campaignTrail_temp.running_mate_json = [
         "model": "campaign_trail.running_mate",
         "pk": 89932,
         "fields": {
-            "candidate": 2001622,
+            "candidate": 200,
             "running_mate": 50003
         }
     },
@@ -372,7 +372,7 @@ campaignTrail_temp.running_mate_json = [
         "model": "campaign_trail.running_mate",
         "pk": 94824,
         "fields": {
-            "candidate": 2001653,
+            "candidate": 201,
             "running_mate": 50005
         }
     },
@@ -380,7 +380,7 @@ campaignTrail_temp.running_mate_json = [
         "model": "campaign_trail.running_mate",
         "pk": 112966,
         "fields": {
-            "candidate": 2001591,
+            "candidate": 68,
             "running_mate": 50000
         }
     },
@@ -388,7 +388,7 @@ campaignTrail_temp.running_mate_json = [
         "model": "campaign_trail.running_mate",
         "pk": 112592,
         "fields": {
-            "candidate": 2001591,
+            "candidate": 68,
             "running_mate": 2020558
         }
     },
@@ -396,7 +396,7 @@ campaignTrail_temp.running_mate_json = [
         "model": "campaign_trail.running_mate",
         "pk": 149818,
         "fields": {
-            "candidate": 2001591,
+            "candidate": 68,
             "running_mate": 2022055
         }
     },
@@ -404,7 +404,7 @@ campaignTrail_temp.running_mate_json = [
         "model": "campaign_trail.running_mate",
         "pk": 155836,
         "fields": {
-            "candidate": 2001622,
+            "candidate": 200,
             "running_mate": 25000
         }
     }
@@ -414,10 +414,10 @@ campaignTrail_temp.opponents_default_json = [
     {
         "election": 20,
         "candidates": [
-            2001557,
-            2001591,
-            2001622,
-            2001653
+            67,
+            68,
+            200,
+            201
         ]
     }
 ]
@@ -426,10 +426,10 @@ campaignTrail_temp.opponents_weighted_json = [
     {
         "election": 20,
         "candidates": [
-            2001557,
-            2001591,
-            2001622,
-            2001653
+            67,
+            68,
+            200,
+            201
         ]
     }
 ]
@@ -1038,7 +1038,7 @@ tooltipList = [
     {searchString: "Triumph Apartments", explanationText: "<img src=https://static.zaobao.com/s3fs-public/articles/2023/12/27/phpAY2z4z_0.jpg>"},
     {searchString: "Chiang Ching-kuo", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/%E7%AC%AC7%E4%BB%BB%E7%B8%BD%E7%B5%B1%E8%94%A3%E7%B6%93%E5%9C%8B%E5%85%88%E7%94%9F%E7%8E%89%E7%85%A7.jpg/450px-%E7%AC%AC7%E4%BB%BB%E7%B8%BD%E7%B5%B1%E8%94%A3%E7%B6%93%E5%9C%8B%E5%85%88%E7%94%9F%E7%8E%89%E7%85%A7.jpg>6th - 7th President of the Republic of China"},
     {searchString: "On November 15th", explanationText: "<img src=https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2023/11/17/realtime/27284449.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=800&exp=3600>"},
-    {searchString: "Ko Chih-en", explanationText: "<img src=https://images.chinatimes.com/newsphoto/2023-11-01/656/20231101005469.jpg>Current lawmaker, candidate for mayor of Kaohsiung"},
+    {searchString: "Ko Chih-en", explanationText: "<img src=https://images.chinatimes.com/newsphoto/2023-11-01/656/20231101005469.jpg>former lawmaker, candidate for mayor of Kaohsiung"},
     {searchString: "Zhao Zilong, loyal to Liu Bei", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/f/f3/Zhaoyunfightsatchangban.jpg>Can you guide me through the Seven Ins and Seven Outs at Changbanpo?"},
     {searchString: "Cai Pei-hui", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/4/43/%E8%94%A1%E5%9F%B9%E6%85%A7%E5%A7%94%E5%93%A1.jpg>"},
     {searchString: "Castro", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/6/6f/Xiomara_Castro_2022_%28cropped%29.jpg>The 38th President of Honduras"},
@@ -1089,7 +1089,21 @@ tooltipList = [
     {searchString: "30 Pieces of Advice from Gou Dad to Young People", explanationText: "<img src=https://d2a6d2ofes041u.cloudfront.net/resize?norotation=true&url=https%3A%2F%2Fimages.vocus.cc%2F256920c4-5603-4a6f-a051-e628fc9972a2.jpg&width=1200&sign=ReIVvd_TrxJe5vshAaUse1yBBEsOXJGDyEaoRdGgwqU>My New Book!"},
     {searchString: "Taipei Grand Hyatt Hotel", explanationText: "<img src=https://rwnews.tw/upload/newstemp_12686/rplbsjj_S__94601225.jpg>11.23"},
     {searchString: "over a million citizen signatures", explanationText: "<img src=https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2023/11/14/realtime/27190488.png&s=Y&x=0&y=132&sw=1280&sh=952&sl=W&fw=800&exp=3600&w=930>The official confirmation of our signatures is a significant milestone, and I extend my heartfelt gratitude to the millions of people who supported us!"},
+    {searchString: "a tense debate", explanationText: "<img src=https://static.zaobao.com/s3fs-public/articles/2024/01/01/file7tiebsctv441lxbzgkqf.jpg>"},
+    {searchString: "debate will be more intriguing", explanationText: "<img src=https://media.zenfs.com/ko/chinatimes.com.tw/14eec4010ad1c352f4bd1e1a47d30de9>"},
+    {searchString: "debate were women", explanationText: "<img src=https://images.chinatimes.com/newsphoto/2023-10-31/656/20231031001457.jpg>"},
+    {searchString: "Fu Kun-chi", explanationText: "<img src=https://www.taipeitimes.com/images/2023/06/16/P03-230616-011.jpg>Hualien County Mayor"},
     ];
+
+    campaignTrail_temp.modBoxTheme = {
+        "header_color": "#004db3",
+        "header_text_color": "#ffffff",
+        "description_text_color": "#000000",
+        "description_background_color": "#e0e0e0",
+        "main_color": "#ffffff",
+        "secondary_color": "#ae3232",
+        "ui_text_color": "#FFFFFF"
+   }
 
 //#endcode
 
