@@ -1314,8 +1314,8 @@ function divideElectoralVotesProp(e, t) {
                                 e = campaignTrail_temp
                                 eArr = e.temp_election_list.map(a=>a.id).indexOf(e.election_id)
                                 year = e.temp_election_list[eArr].display_year
-                                cand = e.candidate_json[e.candidate_json.map(a=>a.pk).indexOf(e.candidate_id)].fields.last_name
-                                run = e.candidate_json[e.candidate_json.map(a=>a.pk).indexOf(e.running_mate_id)].fields.last_name
+                                cand = e.candidate_json[e.candidate_json.map(a=>Number(a.pk)).indexOf(Number(e.candidate_id))].fields.last_name
+                                run = e.candidate_json[e.candidate_json.map(a=>Number(a.pk)).indexOf(Number(e.running_mate_id))].fields.last_name
 
                                 theorId = year+"_"+cand+run
                                 //theorId = $("#modSelect")[0].value
