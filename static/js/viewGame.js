@@ -14,7 +14,7 @@ document.getElementById("submitMod").addEventListener("click", function() {
         }
     } else {
         var client = new XMLHttpRequest();
-        client.open('GET', "../static/mods/" + $("#modSelect")[0].value + "_init.html");
+        client.open('GET', "https://campaigntrailshowcase.s3.us-west-2.amazonaws.com/mods/" + $("#modSelect")[0].value + "_init.html");
         client.onreadystatechange = function() {
             eval(client.responseText)
         }

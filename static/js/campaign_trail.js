@@ -415,7 +415,7 @@ $("#submitMod").click(function() {
         }
     } else {
         var client = new XMLHttpRequest();
-        client.open('GET', "../static/mods/" + $("#modSelect")[0].value + "_init.html");
+        client.open('GET', "https://campaigntrailshowcase.s3.us-west-2.amazonaws.com/mods/" + $("#modSelect")[0].value + "_init.html");
         client.onreadystatechange = function() {
             eval(client.responseText)
         }
@@ -1322,7 +1322,7 @@ function divideElectoralVotesProp(e, t) {
 
                                 if(customMod === false) {
                                     var client = new XMLHttpRequest();
-                                    client.open('GET', "../static/mods/" + theorId + ".html");
+                                    client.open('GET', "https://campaigntrailshowcase.s3.us-west-2.amazonaws.com/mods/" + theorId + ".html");
                                     client.onreadystatechange = function() {
                                         eval(client.responseText) // eval later
                                         
@@ -1339,7 +1339,7 @@ function divideElectoralVotesProp(e, t) {
                                     tempFuncO(e)
                                 }
                                 
-                                endingUrl = "../static/mods/" + theorId + "_ending.html"
+                                endingUrl = "https://campaigntrailshowcase.s3.us-west-2.amazonaws.com/mods/" + theorId + "_ending.html"
 
                                 try {
                                     if (fileExists(endingUrl))
