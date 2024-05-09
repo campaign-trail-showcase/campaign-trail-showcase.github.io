@@ -616,11 +616,9 @@ function loadModFromButton(modValue) {
     if(!customMods.has(modValue)) {
         document.getElementById("copyLinkButton").style.display = "block";
     }
-    
 
-    const announcement = document.getElementById("announcement");
-    if(announcement !== null) {
-        announcement.style.display = 'none';
+    if(document.getElementById("announcement") !== null) {
+        document.getElementById("announcement").style.display = 'none';
     }
 
     setTimeout(() => updateModViewCount(modValue), 10000);
