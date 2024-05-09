@@ -127,7 +127,7 @@ nct_stuff.dynamicOverride = false;
 nct_stuff.themes = {
     "tct": {
         name: "Campaign Trail Showcase",
-        background: "../static/images/backgrounds/tct_background.png",
+        background: "../static/images/backgrounds/tct_background.jpg",
         banner: "../static/images/banners/tct_banner.png",
         coloring_window: "#727C96",
         coloring_container: "#222449",
