@@ -16,5 +16,5 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'us-west-2'   # optional: defaults to us-east-1
         SOURCE_DIR: 'static/mods'
-        DEST_DIR: 'mods',
+        DEST_DIR: 'mods'
         AWS_S3_BUCKET: 'campaigntrailshowcase'
