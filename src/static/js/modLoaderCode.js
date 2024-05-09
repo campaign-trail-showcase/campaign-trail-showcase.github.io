@@ -150,6 +150,13 @@ function extractElectionDetails(rawModText, nameOfMod) {
 
 $(document).ready(async function() {
 
+    const modNameParam = getUrlParam("modName");
+
+    if(modNameParam !== null) {
+        loadModFromButton(modNameParam);
+        return;
+    }
+
     favoriteMods = localStorage.getItem("favoriteMods") != null ? localStorage.getItem("favoriteMods") : new Set();
 
     if(typeof favoriteMods == 'string') {
@@ -264,12 +271,6 @@ $(document).ready(async function() {
         const modView = createModView({"value" : customModName, "innerText" : customModName, "dataset":{"tags":"Custom"}}, imageUrl, description);
         document.getElementById("mod-grid").appendChild(modView);
         modList.push(modView);
-    }
-
-    const modNameParam = getUrlParam("modName");
-
-    if(modNameParam != null) {
-        loadModFromButton(modNameParam);
     }
 
     createTagButtons(tagsFound);
