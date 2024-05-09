@@ -152,11 +152,6 @@ $(document).ready(async function() {
 
     const modNameParam = getUrlParam("modName");
 
-    if(modNameParam !== null) {
-        loadModFromButton(modNameParam);
-        return;
-    }
-
     favoriteMods = localStorage.getItem("favoriteMods") != null ? localStorage.getItem("favoriteMods") : new Set();
 
     if(typeof favoriteMods == 'string') {
@@ -274,6 +269,10 @@ $(document).ready(async function() {
     }
 
     createTagButtons(tagsFound);
+
+    if(modNameParam !== null) {
+        loadModFromButton(modNameParam);
+    }
 });
 
 function createModView(mod, imageUrl, description, isCustom) {
