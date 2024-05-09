@@ -471,3 +471,21 @@
 .rate-button.pressed {
   filter: brightness(40%);
 }
+
+.announcement {
+  background-color: white;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-weight: bold;
+  text-align: center;
+  font-size: larger;
+}
+
+.announcement > a {
+  color: red;
+}
+
+.announcement > span {
+  color: red;
+  font-weight: bolder;
+}
