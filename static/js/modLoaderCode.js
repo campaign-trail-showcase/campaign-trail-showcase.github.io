@@ -200,7 +200,7 @@ $(document).ready(async function() {
             return;
         }
 
-        const modRes = await fetch("https://campaigntrailshowcase.s3.us-west-2.amazonaws.com/mods/" + mod.value + "_init.html");
+        const modRes = await fetch("../static/mods/" + mod.value + "_init.html");
         const rawModText = await modRes.text();
         
         const temp = extractElectionDetails(rawModText, mod.value);
@@ -597,7 +597,7 @@ function loadModFromButton(modValue) {
         }
         
         var client = new XMLHttpRequest();
-        client.open('GET', "https://campaigntrailshowcase.s3.us-west-2.amazonaws.com/mods/" + modValue + "_init.html");
+        client.open('GET', "../static/mods/" + modValue + "_init.html");
         client.onreadystatechange = function() {
             eval(client.responseText)
         }
@@ -659,7 +659,7 @@ function getAllIndexes(arr, val) {
 
 async function loadEntries() {
     
-    const modList = await fetch("https://campaigntrailshowcase.s3.us-west-2.amazonaws.com/mods/MODLOADERFILE.html");
+    const modList = await fetch("../static/mods/MODLOADERFILE.html");
 
     $("#modSelect").html(await modList.text());
     //clone so we don't reduce the list of mods every time a tag is selected
