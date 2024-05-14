@@ -607,7 +607,11 @@ musicMode = () => {
     $("#opponent_selection_id_button").click((event) => {
 		music.pause();
         musicMode();
-		audio.play()
+
+        if(audio !== null) {
+            audio.play();
+        }
+
     })
     })
 	})
