@@ -6945,97 +6945,228 @@ campaignTrail_temp.answer_feedback_flg = 1;
     if (e.page < e.pages.length - 1) {
       html += `<button onclick='endingConstructor(a = 1)'>Next</button>`;
     }
- 
-    if (e.image[e.page] == true)
-      setTimeout(()=>{
-        candImg = $(".person_image")[0];
-        if (candImg) {
-          candImg.remove();
-          $("#final_results_description")[0].style = `
-            text-align:center;
-            width: 70%;
-            text-overflow: ellipsis;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-          `;
+    for (i in e.executable) {
+        if (e.executable[i][0] == e.page) {
+            e.executable[i][1]();
+            
         }
-      }, 10);
-    else if (e.image[e.page])
+    }
+ 
+    if (e.image == true)
     setTimeout(()=>{
-        candImg = $(".person_image")[0];
-        if (candImg)
-          candImg.src = e.image[e.page];
-      }, 10);
+      candImg = $(".person_image")[0]
+      if (candImg) {
+        candImg.remove()
+        console.log("TRYING");
+        $("#final_results_description")[0].style = `
+          text-align:left;
+          width: 72%;
+          height:71%;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          overflow: auto;
+          color: #000000
+        `
+         console.log("RESULTS UPDATED");
+      }
+    }, 10)
+    else if (e.image)
+    setTimeout(()=>{
+      candImg = $(".person_image")[0];
+      if (candImg) {
+        candImg.src = e.image;
+        console.log("TRYING");
+        $("#final_results_description")[0].style = `
+          text-align:left;
+          width: 72%;
+          height:71%;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          overflow: auto;
+          color: #000000
+        `
+         console.log("RESULTS UPDATED");
+      }		
+    }, 10)
+    
  
     return html;
  };
  endingConstructor = (a = 1) => {
     $("#final_results_description")[0].innerHTML = construct(a);
- };
- e.multiple_endings = true;
-e.page = 0;
-e.initDC = false;
-campaignTrail_temp.multiple_endings = true;
+  };
+  e.multiple_endings = true;
+  e.page = 0;
+  e.initDC = false;
+  campaignTrail_temp.multiple_endings = true;
   endingPicker = (out, totv, aa, quickstats) => {
     let used = false;
     let orderID = [aa[0].candidate, aa[1].candidate, aa[2].candidate];
     let e = campaignTrail_temp;
     let html;  
-
+    e.pages = []
+    e.executable = []
+  
     if(quickstats[0] >= 401) {
         e.image = ["https://i.ibb.co/Ldy6fKr/image.png"];
         e.header = "<h3>Viva Las Vegas</h3>";
         e.pages = ["<p>Despite naysayers across the country, angry lobbyists and Nixon himself, you have managed a sweeping victory across the United States of America. Against even your most optimistic polling, you've created an incredible electoral majority and presidential mandate through a combination of charisma, negotiations and sheer luck. Through your tenacious leadership, the Democratic Party has not only survived, but rebounded at unimaginable levels. You have successfully brought youthful and powerful leadership, and now the whole country awaits in bated breath to see what you will do with your mandate. Vietnam may be going on, the economy may be bad, but by God you know exactly what to do. You will transform this country into its true soul, and bring salvation to its people. God bless you Elvis, God bless America, and in God we Trust!</p>"];
+        e.pages.push(`<div style='overflow-y:scroll;height:200px;'><h3>The King of Rock N' Roll and U.S President, Elvis Presley, Dies, Aged 57</h3><br><p><i>The Financial Times, December 12, 1991</i><br>Elvis Aaron Presley, 37th President of the United States and \"King of Rock N' Roll\" has died peacefully in his sleep, aged 57. As millions of fans, impersonators and politically active people visit his state funeral's premises even before his coffin arrived, and as millions more clear their schedules to say goodbye to the King, we at the Financial Times figured it would be a good idea to discuss his achievements, and his time in office.<br>Elvis had gained an incredible landslide victory in the 1968 elections, and won a comfortable re-election in 1972. His day-one executive orders ranged from the creation of a Bureau Of Cultural Affairs, a tax cut for the middle class and abolishing the draft for Vietnam. As his Presidency went on, his musical career had practically become a menagerie of reissues, unreleased demos and other similar releases, almost as if they were released posthumously. In 1971, President Presley passed the \"School Grants Act\", which redefined the American education system to include more emphasis on creative self-expression through curriculum standardization. Besides these landmark policies, Elvis' term was perceived as a high moment for the United States as the economy survived -- and even thrived -- as the Yom Kippur War and the wider Iran Oil Crisis occured in the Middle East, which crippled US imports. However, by 1976, when Elvis had ended his 2nd term as President, a \"Comeback Tour\" had been declared across the United States, all broadcast through cutting-edge satellite technology. Playing across a range of genres, the comeback tour revived Presley's musical career and propelled him to the status of legend, as many believed he had become a founding symbol of America itself. As his tours and albums dropped off by 1984, Elvis retired from the public in 1989, but notably had continued contact via the brand-new technology of the World Wide Web, especially through his e-mail. Elvis Presley thus was last seen tending to his Graceland mansion's garden, only two days before his death. Lisa Marie and the rest of Elvis' family have not commented yet, but many expect the address will be delivered on-line.</p></div>`)
+        e.executable.push([1, (() => {e.image = e.image = 'https://i.ibb.co/8zh8f7v/image.png'})])   
         ctsAchievement("Rock Against Nixon"); 
+        
+        getResults = function (out, totv, aa, quickstats) {
+            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 105);
+            if( stateResult.result[0].candidate == 24) {
+                unlockAchievement("Gators For Elvis");
+                }
+        }
+        getResults = function (out, totv, aa, quickstats) {
+            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 101);
+            if( stateResult.result[0].candidate == 23) {
+                unlockAchievement("Hotel Nevada");
+                }
+        }
         return construct(0);
     }
-    else if(quickstats[0] >= 270 && (e.player_answers.includes(1656)||(e.player_answers.includes(1676) )||(e.player_answers.includes(1714)))) {
+    else if(quickstats[0] >= 270 && (e.player_answers.includes(1656) && (e.player_answers.includes(1676) ) && (e.player_answers.includes(1714)))) {
         e.image = ["https://i.ibb.co/2gTtM7T/image.png"];
         e.header = "<h3>A Dream Come True</h3>";
         e.pages = ["<p>It took a lot of hard work and it was very touch and go for a while, but you've done it! You've managed to win against the odds and secure yourself a true place in history as the first singer turned President. As you celebrate this big victory in Graceland with Priscilla and Vernon, you feel that something isn't quite right. The Colonel is oddly quiet, despite the big news, but he's probably just soaking it in.<br>However, not everything is sunshine and roses. You still have to guide America out of this chaotic period and towards something brighter, a better land. Along with that, the  Vietnam War is something you have to take care of. As always, people will try to sway you towards one way or another, but it's ultimately your choice at the end of the day.<br>But that's not all. You'll also have to contend with Congress who isn't exactly thrilled that you somehow managed to pull off a victory. Despite Democratic majorities in both chambers, they could oppose your agenda, but that's why you got your running mate to settle things between you and Congress. If all goes as planned, the next four years will be transformative and give Americans hope in a better tomorrow...</p>"];
-       ctsAchievement("Flowers In Your Greaser"); 
+        e.pages.push(`<div style='overflow-y:scroll;height:200px;'><h3>United States Pulls Out Of Vietnam</h3><br><p><i>New York Times, August 20, 1969</i><br>President Presley has, in a televised address, ordered all U.S soldiers still in Saigon to leave the city and abandon South Vietnam, where they will be guaranteed safe passage to the United States, along with any applicable refugees, until December 1st, 1969. All soldiers to stick past that date will be ordered to comply with local authorities on passage to the United States.<br>As thousands of American veterans already fly away, many in the country's cities have worried over the survivability of the South Vietnamese government. President Presley had this to comment: \"I deeply sympathize with the Vietnamese people. There is no world in which I'd do this kind of decision with a smile on my face, but I am the President of the United States, not the President of the Republic of Vietnam. It's time we bring our boys home, and end this war.\"<br>Nonetheless, top-level security officials and diplomats, such as Secretary of State Henry Kissinger, have suggested that the United States could've permanently held back the North Vietnamese to the city of Hue. Nonetheless, Hanoi has agreed on ending the war on conditions that allow the continued existence of a South Vietnamese republic, albeit reduced in size, and a permanent \"Demilitarized Zone\", where only wilderness and small outposts may exist. Whilst many argue this is not enough to finally bring peace to Vietnam, many, especially in the left, have seen Presley's overtures towards peace to be commendable.<br><i>More at page 8.</i></p></div>`)
+        e.executable.push([1, (() => {e.image = e.image = 'https://i.ibb.co/SX67PBc/image.png'})])   
+        ctsAchievement("Flowers In Your Greaser"); 
+       getResults = function (out, totv, aa, quickstats) {
+        let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 105);
+        if( stateResult.result[0].candidate == 24) {
+            unlockAchievement("Gators For Elvis");
+            }
+    }
+    getResults = function (out, totv, aa, quickstats) {
+        let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 101);
+        if( stateResult.result[0].candidate == 23) {
+            unlockAchievement("Hotel Nevada");
+            }
+    }
         return construct(0);
     }
     else if(quickstats[0] >= 270 && (e.player_answers.includes(9124))) {
+        e.image = ["https://i.ibb.co/d68Vh5w/image.png"];
+        e.header = "<h3>Homesick</h3>";
+        e.pages = ["<div style='overflow-y:scroll;height:200px;'><p>Elvis had been chewing on a pen for the past hour. He looked onto the electoral calls on television. He had long left Nashville by this point, to crowds throwing tomatoes and other rotten fruit. \"In Vegas, nobody gave a damn about segregation,\" he thought.<br>He sweated and worried over his total so-called \"betrayal\" of the South. His time with Mr. King, his years near Black musicians, did they not realize what were his views? Did they think he would stop desegregation? It didn't matter.<br>Elvis had reached 270 by the evening's end, without much of anything in the South. At best, he might've held some points in Nashville and Memphis. Nonetheless, the South had generally given up on him, and he too, gave up on the South. His accent, too, died down as he became more of an all-American figure.<br>Was it, however, at the expense of his home? He thought. It didn't matter. He was President with comfortable House and Senate majorities. He could nuke Birmingham and get away with it. Those bastards, ungrateful as they are, saw you as a race traitor. Yet, you knew better. You knew the South wasn't about all that. But it doesn't matter.<br>You knew that the South was about hospitality, love and warmth. But they did not care. Elvis was given a week's notice to get to DC from Vegas and pack his stuff. But it doesn't matter.</p></div>"];
+        e.pages.push(`<div style='overflow-y:scroll;height:200px;'><h3>The Great Elvis Record Burning Of 1969</h3><br><p><b>NASHVILLE, TENNESSEE -- Elvis Fans Burn Their Records As They Watch His Presidential Address</b><br>January 20th 1969. Elvis Presley, 36 years old, is the youngest President in United States history. As he delivered his address to the nation, thousands of Southerner former fans had begun burning piles of Elvis records, including his 1956 debut. As the smell of sweltering burning plastic fogged the skies of Nashville, Tennessee is now without a governor, and the United States has a new President. Sympathetic millions of Elvis voters, particularly in cities like San Francisco have been seen purchasing his latest records in droves as a reaction to the violent record burnings in Nashville.<br><br><br><i>More on this story at Page 8.</i></p></div>`)
+        e.executable.push([1, (() => {e.image = e.image = 'https://i.ibb.co/4dP7Ywn/image.png'})])   
+        ctsAchievement("Leaving Memphis Town"); 
+       getResults = function (out, totv, aa, quickstats) {
+        let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 105);
+        if( stateResult.result[0].candidate == 24) {
+            unlockAchievement("Gators For Elvis");
+            }
+    }
+    getResults = function (out, totv, aa, quickstats) {
+        let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 101);
+        if( stateResult.result[0].candidate == 23) {
+            unlockAchievement("Hotel Nevada");
+            }
+    }
+        return construct(0);
+    }
+    else if(quickstats[0] >= 270) {
         e.image = ["https://i.ibb.co/2gTtM7T/image.png"];
         e.header = "<h3>A Dream Come True</h3>";
         e.pages = ["<p>It took a lot of hard work and it was very touch and go for a while, but you've done it! You've managed to win against the odds and secure yourself a true place in history as the first singer turned President. As you celebrate this big victory in Graceland with Priscilla and Vernon, you feel that something isn't quite right. The Colonel is oddly quiet, despite the big news, but he's probably just soaking it in.<br>However, not everything is sunshine and roses. You still have to guide America out of this chaotic period and towards something brighter, a better land. Along with that, the  Vietnam War is something you have to take care of. As always, people will try to sway you towards one way or another, but it's ultimately your choice at the end of the day.<br>But that's not all. You'll also have to contend with Congress who isn't exactly thrilled that you somehow managed to pull off a victory. Despite Democratic majorities in both chambers, they could oppose your agenda, but that's why you got your running mate to settle things between you and Congress. If all goes as planned, the next four years will be transformative and give Americans hope in a better tomorrow...</p>"];
-       ctsAchievement("Leaving Memphis Town"); 
+        getResults = function (out, totv, aa, quickstats) {
+            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 105);
+            if( stateResult.result[0].candidate == 24) {
+                unlockAchievement("Gators For Elvis");
+                }
+        }
+        getResults = function (out, totv, aa, quickstats) {
+            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 101);
+            if( stateResult.result[0].candidate == 23) {
+                unlockAchievement("Hotel Nevada");
+                }
+        }
         return construct(0);
-    }
-      else if(quickstats[0] >= 270) {
-          e.image = ["https://i.ibb.co/2gTtM7T/image.png"];
-          e.header = "<h3>A Dream Come True</h3>";
-          e.pages = ["<p>It took a lot of hard work and it was very touch and go for a while, but you've done it! You've managed to win against the odds and secure yourself a true place in history as the first singer turned President. As you celebrate this big victory in Graceland with Priscilla and Vernon, you feel that something isn't quite right. The Colonel is oddly quiet, despite the big news, but he's probably just soaking it in.<br>However, not everything is sunshine and roses. You still have to guide America out of this chaotic period and towards something brighter, a better land. Along with that, the  Vietnam War is something you have to take care of. As always, people will try to sway you towards one way or another, but it's ultimately your choice at the end of the day.<br>But that's not all. You'll also have to contend with Congress who isn't exactly thrilled that you somehow managed to pull off a victory. Despite Democratic majorities in both chambers, they could oppose your agenda, but that's why you got your running mate to settle things between you and Congress. If all goes as planned, the next four years will be transformative and give Americans hope in a better tomorrow...</p>"];
-          return construct(0);
       }
       else if(quickstats[0] < 270 && (e.player_answers.includes(9209))){
-        e.image = ["https://i.ibb.co/6bGfPs2/image.png"];
-        e.header = "<h3>Hallowed Candlelights</h3>";
-        e.pages = ["<p>As millions looked onto their television screens and saw the total anarchy that ensued from the deportation of Andreas Cornelis van Kuijk, formerly known as Colonel Tom Parker, Elvis' opinion polling across the nation collapsed. Millions more saw this as the attempt of a dying artist to desperately cling on to relevance by <i>being advised politically by an illegal immigrant.</i> Besides a general nativist sentiment, the national security implications were so great, so dire, that an ensuing avalanche of anti-Elvis propaganda unfurled in the streets of every city. Paid for by the pockets of Nixon donors (and possibly the Feds), Elvis was so thoroughly wiped, so nuclear of a loss, that many believe his defeat will be remembered for decades onward.<br>But for now, Elvis is still governor of Tennessee. The ensuing constitutional crisis will certainly be fun to watch. Anarchy ensues in America.</p>"];
-        return construct(0);
+          e.image = ["https://i.ibb.co/6bGfPs2/image.png"];
+          e.header = "<h3>Hallowed Candlelights</h3>";
+          e.pages = ["<p>As millions looked onto their television screens and saw the total anarchy that ensued from the deportation of Andreas Cornelis van Kuijk, formerly known as Colonel Tom Parker, Elvis' opinion polling across the nation collapsed. Millions more saw this as the attempt of a dying artist to desperately cling on to relevance by <i>being advised politically by an illegal immigrant.</i> Besides a general nativist sentiment, the national security implications were so great, so dire, that an ensuing avalanche of anti-Elvis propaganda unfurled in the streets of every city. Paid for by the pockets of Nixon donors (and possibly the Feds), Elvis was so thoroughly wiped, so nuclear of a loss, that many believe his defeat will be remembered for decades onward.<br>But for now, Elvis is still governor of Tennessee. The ensuing constitutional crisis will certainly be fun to watch. Anarchy ensues in America.</p>"];
+        e.pages.push(`<div style='overflow-y:scroll;height:200px;'><h3>Elvis Presley Charged With Treason</h3><br><p><i>New York Times, August 12, 1969</i><br>Elvis Aaron Presley, former US Presidential candidate, has been arrested and indicted on a charge of treason, one of the only recent examples of this in American history. The charges are primarily originating from concerns regarding Presley's closest campaigning advisor, Colonel Tom Parker. Tom was deported only a week before the 1968 elections took place, which plummeted Elvis' polling towards the single digits. As millions of Americans saw an existential threat in making a \"eminence grise\" of an illegal immigrant, even if from a US Ally like the Netherlands, gain genuine political power. Concerns regarding the Cold War fired up immensely since then, alongside new stringent requirements for gaining ballot access in most states as a Presidential candidate. Regardless, after Richard Nixon was elected nearly unopposed, Elvis was impeached as Governor of Tennessee and forced to live in Graceland in house arrest. After a few months, Elvis had been brought to trial. Whilst the Presley family declared this a \"Kangaroo court\", it concluded that Elvis had worked with international governments and illegal immigrants to weaken US governmental institutions in favor of personal financial gain, resulting in a charge of treason, with a sentence of life imprisonment.<br><i>More at page 8...</i></p></div>`)
+        e.executable.push([1, (() => {e.image = e.image = 'https://i.ibb.co/ypxFkNC/image.png'})])
         ctsAchievement("Jailhouse Rock"); 
-    }
-    else if((quickstats[0] < 270 && (e.player_answers.includes(9191)))){
-        e.image = ["https://i.ibb.co/TR09gP7/image.png"];
-        e.header = "<h3>A Dream Deferred</h3>";
-        e.pages = ["<p>Despite your hardest efforts to win against Nixon, you've lost. But don't give up hope now. You can always run again, or stay in Nashville for another term as Governor. And if you really wanted to, you could run for Senate or even return to your old ways of singing.<br>These options are always open to you and you shouldn't be swayed any way towards any of them. After all, you still have a few years as Governor left for your first term. I'm sure that history will remember you fondly as the man who tried to help America through one of it's darkest periods, but being unable to win. Let's just hope Nixon can steer America through these unsteady waters.<br>But for now, rest up and continue spending time as the Governor of Tennessee!</p>"];
-        return construct(0);
-        ctsAchievement("Stick To Music, Boy"); 
-    }
-    else if((quickstats[0] < 270 && (e.player_answers.includes(9183)))){
-        e.image = ["https://i.ibb.co/TR09gP7/image.png"];
-        e.header = "<h3>A Dream Deferred</h3>";
-        e.pages = ["<p>Despite your hardest efforts to win against Nixon, you've lost. But don't give up hope now. You can always run again, or stay in Nashville for another term as Governor. And if you really wanted to, you could run for Senate or even return to your old ways of singing.<br>These options are always open to you and you shouldn't be swayed any way towards any of them. After all, you still have a few years as Governor left for your first term. I'm sure that history will remember you fondly as the man who tried to help America through one of it's darkest periods, but being unable to win. Let's just hope Nixon can steer America through these unsteady waters.<br>But for now, rest up and continue spending time as the Governor of Tennessee!</p>"];
-        return construct(0);
-        ctsAchievement("Stick To Music, Boy"); 
-    }
+        getResults = function (out, totv, aa, quickstats) {
+            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 105);
+            if( stateResult.result[0].candidate == 24) {
+                unlockAchievement("Gators For Elvis");
+                }
+        }
+        getResults = function (out, totv, aa, quickstats) {
+            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 101);
+            if( stateResult.result[0].candidate == 23) {
+                unlockAchievement("Hotel Nevada");
+                }
+        }
+          return construct(0);
+      }
+      else if((quickstats[0] < 270 && (e.player_answers.includes(9191)))){
+          e.image = ["https://i.ibb.co/TR09gP7/image.png"];
+          e.header = "<h3>A Dream Deferred</h3>";
+          e.pages = ["<p>Despite your hardest efforts to win against Nixon, you've lost. But don't give up hope now. You can always run again, or stay in Nashville for another term as Governor. And if you really wanted to, you could run for Senate or even return to your old ways of singing.<br>These options are always open to you and you shouldn't be swayed any way towards any of them. After all, you still have a few years as Governor left for your first term. I'm sure that history will remember you fondly as the man who tried to help America through one of it's darkest periods, but being unable to win. Let's just hope Nixon can steer America through these unsteady waters.<br>But for now, rest up and continue spending time as the Governor of Tennessee!</p>"];
+          ctsAchievement("Stick To Music, Boy"); 
+          getResults = function (out, totv, aa, quickstats) {
+            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 105);
+            if( stateResult.result[0].candidate == 24) {
+                unlockAchievement("Gators For Elvis");
+                }
+        }
+        getResults = function (out, totv, aa, quickstats) {
+            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 101);
+            if( stateResult.result[0].candidate == 23) {
+                unlockAchievement("Hotel Nevada");
+                }
+        }
+          return construct(0);
+      }
+      else if((quickstats[0] < 270 && (e.player_answers.includes(9183)))){
+          e.image = ["https://i.ibb.co/TR09gP7/image.png"];
+          e.header = "<h3>A Dream Deferred</h3>";
+          e.pages = ["<p>Despite your hardest efforts to win against Nixon, you've lost. But don't give up hope now. You can always run again, or stay in Nashville for another term as Governor. And if you really wanted to, you could run for Senate or even return to your old ways of singing.<br>These options are always open to you and you shouldn't be swayed any way towards any of them. After all, you still have a few years as Governor left for your first term. I'm sure that history will remember you fondly as the man who tried to help America through one of it's darkest periods, but being unable to win. Let's just hope Nixon can steer America through these unsteady waters.<br>But for now, rest up and continue spending time as the Governor of Tennessee!</p>"];
+          ctsAchievement("Stick To Music, Boy"); 
+          getResults = function (out, totv, aa, quickstats) {
+            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 105);
+            if( stateResult.result[0].candidate == 24) {
+                unlockAchievement("Gators For Elvis");
+                }
+        }
+        getResults = function (out, totv, aa, quickstats) {
+            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 101);
+            if( stateResult.result[0].candidate == 23) {
+                unlockAchievement("Hotel Nevada");
+                }
+        }
+          return construct(0);
+      }
     else if(quickstats[0] < 270) {
-        e.image = ["https://i.ibb.co/TR09gP7/image.png"];
-        e.header = "<h3>A Dream Deferred</h3>";
-        e.pages = ["<p>Despite your hardest efforts to win against Nixon, you've lost. But don't give up hope now. You can always run again, or stay in Nashville for another term as Governor. And if you really wanted to, you could run for Senate or even return to your old ways of singing.<br>These options are always open to you and you shouldn't be swayed any way towards any of them. After all, you still have a few years as Governor left for your first term. I'm sure that history will remember you fondly as the man who tried to help America through one of it's darkest periods, but being unable to win. Let's just hope Nixon can steer America through these unsteady waters.<br>But for now, rest up and continue spending time as the Governor of Tennessee!</p>"];
-        return construct(0);
+      e.image = ["https://i.ibb.co/TR09gP7/image.png"];
+      e.header = "<h3>A Dream Deferred</h3>";
+      e.pages = ["<p>Despite your hardest efforts to win against Nixon, you've lost. But don't give up hope now. You can always run again, or stay in Nashville for another term as Governor. And if you really wanted to, you could run for Senate or even return to your old ways of singing.<br>These options are always open to you and you shouldn't be swayed any way towards any of them. After all, you still have a few years as Governor left for your first term. I'm sure that history will remember you fondly as the man who tried to help America through one of it's darkest periods, but being unable to win. Let's just hope Nixon can steer America through these unsteady waters.<br>But for now, rest up and continue spending time as the Governor of Tennessee!</p>"];
+      getResults = function (out, totv, aa, quickstats) {
+        let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 105);
+        if( stateResult.result[0].candidate == 24) {
+            unlockAchievement("Gators For Elvis");
+            }
+    }
+    getResults = function (out, totv, aa, quickstats) {
+        let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 101);
+        if( stateResult.result[0].candidate == 23) {
+            unlockAchievement("Hotel Nevada");
+            }
+    }
+      return construct(0);
     }
     else { e.pages = ["<p>IAMERROR</p>"]}
-  }
+    }
