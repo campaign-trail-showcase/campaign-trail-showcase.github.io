@@ -319,20 +319,16 @@ setInterval(function() {
     //updateGameHeaderContentAndStyling();
 }, 100);
 
-function loadJSON(path, varr, callback = () => {}) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                eval(varr + "=JSON.parse(" + JSON.stringify(xhr.responseText.trim()) + ")");
-                callback()
-            } else {
-                return xhr;
-            }
-        }
-    };
-    xhr.open("GET", path, true);
-    xhr.send();
+async function loadJSON(path, varr, callback = null) {
+    const res = await fetch(path);
+    if(!res.ok) {
+        return;
+    }
+    const responseText = await res.text();
+    eval(varr + "=JSON.parse(" + JSON.stringify(responseText.trim()) + ")");
+    if(callback !== null) {
+        callback();
+    }
 }
 
 strCopy = (toCopy) => {

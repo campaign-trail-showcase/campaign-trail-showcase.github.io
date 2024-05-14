@@ -575,7 +575,7 @@ function loadRandomMod() {
     modView.querySelector(".mod-play-button").click();
 }
 
-function loadModFromButton(modValue) {
+async function loadModFromButton(modValue) {
 
     if(modValue == "0000Random_Mod") {
         setTimeout(() => updateModViewCount(modValue), 10000);
@@ -596,12 +596,10 @@ function loadModFromButton(modValue) {
             history.replaceState(null, "", "?modName=" + modValue);
         }
         
-        var client = new XMLHttpRequest();
-        client.open('GET', "../static/mods/" + modValue + "_init.html");
-        client.onreadystatechange = function() {
-            eval(client.responseText)
-        }
-        client.send();
+        const res = await fetch("../static/mods/" + modValue + "_init.html");
+        const modCode = await res.text();
+        eval(modCode);
+
         diff_mod = true
     }
     
