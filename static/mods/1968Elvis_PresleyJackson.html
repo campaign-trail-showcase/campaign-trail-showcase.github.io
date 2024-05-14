@@ -7031,13 +7031,7 @@ else if(quickstats[0] >= 270 && (e.player_answers.includes(9124))) {
       e.pages = ["<p>It took a lot of hard work and it was very touch and go for a while, but you've done it! You've managed to win against the odds and secure yourself a true place in history as the first singer turned President. As you celebrate this big victory in Graceland with Priscilla and Vernon, you feel that something isn't quite right. The Colonel is oddly quiet, despite the big news, but he's probably just soaking it in.<br>However, not everything is sunshine and roses. You still have to guide America out of this chaotic period and towards something brighter, a better land. Along with that, the  Vietnam War is something you have to take care of. As always, people will try to sway you towards one way or another, but it's ultimately your choice at the end of the day.<br>But that's not all. You'll also have to contend with Congress who isn't exactly thrilled that you somehow managed to pull off a victory. Despite Democratic majorities in both chambers, they could oppose your agenda, but that's why you got your running mate to settle things between you and Congress. If all goes as planned, the next four years will be transformative and give Americans hope in a better tomorrow...</p>"];
       return construct(0);
   }
-else if(quickstats[0] < 270) {
-    e.image = ["https://i.ibb.co/TR09gP7/image.png"];
-    e.header = "<h3>A Dream Deferred</h3>";
-    e.pages = ["<p>Despite your hardest efforts to win against Nixon, you've lost. But don't give up hope now. You can always run again, or stay in Nashville for another term as Governor. And if you really wanted to, you could run for Senate or even return to your old ways of singing.<br>These options are always open to you and you shouldn't be swayed any way towards any of them. After all, you still have a few years as Governor left for your first term. I'm sure that history will remember you fondly as the man who tried to help America through one of it's darkest periods, but being unable to win. Let's just hope Nixon can steer America through these unsteady waters.<br>But for now, rest up and continue spending time as the Governor of Tennessee!</p>"];
-    return construct(0);
-}
-else if(quickstats[0] < 270 && (e.player_answers.includes(9209))){
+  else if(quickstats[0] < 270 && (e.player_answers.includes(9209))){
     e.image = ["https://i.ibb.co/6bGfPs2/image.png"];
     e.header = "<h3>Hallowed Candlelights</h3>";
     e.pages = ["<p>As millions looked onto their television screens and saw the total anarchy that ensued from the deportation of Andreas Cornelis van Kuijk, formerly known as Colonel Tom Parker, Elvis' opinion polling across the nation collapsed. Millions more saw this as the attempt of a dying artist to desperately cling on to relevance by <i>being advised politically by an illegal immigrant.</i> Besides a general nativist sentiment, the national security implications were so great, so dire, that an ensuing avalanche of anti-Elvis propaganda unfurled in the streets of every city. Paid for by the pockets of Nixon donors (and possibly the Feds), Elvis was so thoroughly wiped, so nuclear of a loss, that many believe his defeat will be remembered for decades onward.<br>But for now, Elvis is still governor of Tennessee. The ensuing constitutional crisis will certainly be fun to watch. Anarchy ensues in America.</p>"];
@@ -7057,6 +7051,12 @@ else if((quickstats[0] < 270 && (e.player_answers.includes(9183)))){
     e.pages = ["<p>Despite your hardest efforts to win against Nixon, you've lost. But don't give up hope now. You can always run again, or stay in Nashville for another term as Governor. And if you really wanted to, you could run for Senate or even return to your old ways of singing.<br>These options are always open to you and you shouldn't be swayed any way towards any of them. After all, you still have a few years as Governor left for your first term. I'm sure that history will remember you fondly as the man who tried to help America through one of it's darkest periods, but being unable to win. Let's just hope Nixon can steer America through these unsteady waters.<br>But for now, rest up and continue spending time as the Governor of Tennessee!</p>"];
     return construct(0);
     ctsAchievement("Stick To Music, Boy"); 
+}
+else if(quickstats[0] < 270) {
+    e.image = ["https://i.ibb.co/TR09gP7/image.png"];
+    e.header = "<h3>A Dream Deferred</h3>";
+    e.pages = ["<p>Despite your hardest efforts to win against Nixon, you've lost. But don't give up hope now. You can always run again, or stay in Nashville for another term as Governor. And if you really wanted to, you could run for Senate or even return to your old ways of singing.<br>These options are always open to you and you shouldn't be swayed any way towards any of them. After all, you still have a few years as Governor left for your first term. I'm sure that history will remember you fondly as the man who tried to help America through one of it's darkest periods, but being unable to win. Let's just hope Nixon can steer America through these unsteady waters.<br>But for now, rest up and continue spending time as the Governor of Tennessee!</p>"];
+    return construct(0);
 }
 else { e.pages = ["<p>IAMERROR</p>"]}
 }
