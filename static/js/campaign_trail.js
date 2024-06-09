@@ -94,10 +94,10 @@ var states = []
 var initIt=0
 
 window.setInterval(function() {
-    if(campaignTrail_temp.candidate_json) {
+    if(campaignTrail_temp.candidate_json && campaignTrail_temp.candidate_json.filter) {
         campaignTrail_temp.candidate_json = campaignTrail_temp.candidate_json.filter(n => n);
     }
-},200);
+}, 200);
 
 var fileExists = function(url) {
     var req = new XMLHttpRequest();
@@ -1306,8 +1306,8 @@ function divideElectoralVotesProp(e, t) {
                                 openMap(e);
                             })
                             let answerButton = $("#answer_select_button")[0];
-                            answerButton.addEventListener("click", onAnswerSelectButtonClicked);
-                            if ($("#answer_select_button")[0] != null) {
+                            if (answerButton != null) {
+                                answerButton.addEventListener("click", onAnswerSelectButtonClicked);
                                 clearInterval(important_code)
                             }
                         }, 1000);
