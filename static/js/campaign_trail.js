@@ -1,6 +1,6 @@
 async function evalFromUrl(url, callback = null) {
-    const res = await fetch(url);
-    const code = await res.text();
+    const evalRes = await fetch(url);
+    const code = await evalRes.text();
     eval(code);
 
     if(callback !== null) {
