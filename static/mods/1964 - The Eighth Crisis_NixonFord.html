@@ -14912,13 +14912,13 @@ endingPicker = (out, totv, aa, quickstats) => {
     //aa = all final overall results data
     //quickstats = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
 
-if(quickstats[0] >= 0){
+if(wildfire == 4 && quickstats[0] <= 269){
 if (used != true) {
     setInterval(function () {
         used = true;
         imgg = document.getElementsByClassName("person_image")[0];
         if (imgg != null) {
-            imgg.src = "blob:https://imgur.com/33c7a87b-e6c3-4853-b2d5-efe4cea55055";
+            imgg.src = "https://i.imgur.com/ORqO1z6.png";
         }
     }, 100);
 }

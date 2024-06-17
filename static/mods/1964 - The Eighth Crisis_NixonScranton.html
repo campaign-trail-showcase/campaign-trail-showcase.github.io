@@ -16095,7 +16095,13 @@ var divorce = 0; // Did you yell at Pat
 
 var denial = 0; // Are you denying wrongdoing when the scandals leak?
 
-var scrantoncoup = 0 // To see if Scranton wants you gone.
+var scrantoncoup = 0; // To see if Scranton wants you gone.
+
+var millertime = 0; // Is Miller the VP
+
+var smithtime = 0; // Is Smith the VP
+
+var goldwatertime = 0; // Is Barry the VP
 
 ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 
@@ -16168,7 +16174,7 @@ if(ans == 17359){
 
 // Does the Scranton Coup trigger?
 
-if(wildfire == 2 && divorce == 1){
+if(wildfire == 2 && divorce >= 1 ){
         scrantoncoup += 1;
         console.log("You made somebody angry!");   
         }       
@@ -16301,7 +16307,7 @@ if(ans == 17539) {
         }
     }
 
-  if (campaignTrail_temp.running_mate_last_name = 'Goldwater') {
+  if (campaignTrail_temp.running_mate_last_name = 'Goldwater' && scrantoncoup >= 1) {
   console.log("The coup starts!");
   campaignTrail_temp.questions_json[24] = {
         "model": "campaign_trail.question",
@@ -16315,7 +16321,7 @@ if(ans == 17539) {
 }
 }
 
-  if (campaignTrail_temp.running_mate_last_name = 'Miller') {
+  if (campaignTrail_temp.running_mate_last_name = 'Miller' && scrantoncoup >= 1) {
   campaignTrail_temp.questions_json[24] = {
         "model": "campaign_trail.question",
         "pk": 17630,
@@ -16328,7 +16334,7 @@ if(ans == 17539) {
 }
 }
 
-  if (campaignTrail_temp.running_mate_last_name = 'Smith') {
+  if (campaignTrail_temp.running_mate_last_name = 'Smith' && scrantoncoup >= 1) {
   campaignTrail_temp.questions_json[24] = {
         "model": "campaign_trail.question",
         "pk": 17630,
@@ -16341,21 +16347,25 @@ if(ans == 17539) {
 }
 }
 
-if(ans == 17551) {
+
+if(ans == 17551 && scrantoncoup >= 1 && campaignTrail_temp.question_number == 22) {
         console.log("Scranton / Goldwater baby")
-        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/WEyUmpv.png';
+        goldwatertime += 1;
+        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/UsvQkHm.png';
         campaignTrail_temp.running_mate_last_name = 'Goldwater';
 }
 
-if(ans == 17558) {
+if(ans == 17558 && scrantoncoup >= 1 && campaignTrail_temp.question_number == 22) {
         console.log("Scranton / Miller Time")
-        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/sDF9znD.png';
+        millertime += 1;
+        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/iU0UD03.png';
         campaignTrail_temp.running_mate_last_name = 'Miller';
 }
 
-if(ans == 17566) {
+if(ans == 17566 && scrantoncoup >= 1 && campaignTrail_temp.question_number == 22) {
         console.log("Scranton / Smith Time, something something woman")
-        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/ZdUh9MO.png';
+        smithtime += 1;
+        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/hfYJkCR.png';
         campaignTrail_temp.running_mate_last_name = 'Smith';
 }
 
@@ -16368,47 +16378,6 @@ if((ans == 17539)){
   ctsAchievement("You're Looking At It Kid.");
   console.log("Liberal!!!!");
   }
-
-// For seeing if the Scranton coup triggers.
-
-if(divorce == 1 && wildfire == 2){
-        scrantoncoup += 1;
-        console.log("You made someone mad at you!");                  
-      }
-
-// For seeing if you're blaming Johnson
-
-if(ans == 17415){
-        wildfire += 1;
-        console.log("It was him I tells ya!");                  
-      }
-
-if(ans == 17254){
-        wildfire += 1;
-        console.log("It was him I tells ya!");                  
-      }
-
-if(ans == 17249){
-        wildfire += 1;
-        console.log("It was him I tells ya!");                  
-      }
-
-if(ans == 17367){
-        wildfire += 1;
-        console.log("It was him I tells ya!");                  
-      }
-
-// Did your wife leave you
-
-if(ans == 17199){
-        divorce += 1;
-        console.log("You're a prick to your wife you know.");                  
-      }
-
-if(ans == 17359){
-        divorce += 1;
-        console.log("You're a prick to your wife you know.");                  
-      }
 
 // Are you Nixon no surrendering it
 
@@ -16525,7 +16494,7 @@ if (used != true) {
         used = true;
         imgg = document.getElementsByClassName("person_image")[0];
         if (imgg != null) {
-            imgg.src = "https://i.imgur.com/DowVCoC.png";
+            imgg.src = "https://i.imgur.com/ORqO1z6.png";
         }
     }, 100);
 }
@@ -16562,7 +16531,7 @@ return "<h3><q>WALLACE COUNTRY</q></h3><p>That damned silly fool from Alabama di
             imgg.src = "https://i.imgur.com/ouChHgv.png";
         }
     }, 100);
-    return "<h3><h3><q>REPORT ON THE IMPLICATIONS OF SCRANTON'S FAILURE</q></h3><p>We can now report that President Johnson has successfully crushed Governor Scranton, with a resounding public mandate behind him. The sudden upset of Nixon's removal from the ticket, and the way in which Governor Scranton handled the uproar on his right, are arguably more responsible for the magnitude of the President's victory than the strength of his ideas. We can certainly see the strength of Operation Wildfire, and any such strategems would be absolutely useful in 1968 against any possible opponent-at the time most likely Governor Romney of Michigan.</p><p>At this time, Great Society programs appear very likely to appear, but GOP resistance is almost certain. While our coattails have been long, the Goldwater wing of the Republican Party has gained ground, perhaps infuriated or empowered by Scranton's usurping of Vice President Nixon, and they will almost certainly look for a new conservative rising star to face us in 1968. The burning question is of who.</p>>p"
+    return "<h3><h3><q>REPORT ON THE IMPLICATIONS OF SCRANTON'S FAILURE</q></h3><p>We can now report that President Johnson has successfully crushed Governor Scranton, with a resounding public mandate behind him. The sudden upset of Nixon's removal from the ticket, and the way in which Governor Scranton handled the uproar on his right, are arguably more responsible for the magnitude of the President's victory than the strength of his ideas. We can certainly see the strength of Operation Wildfire, and any such strategems would be absolutely useful in 1968 against any possible opponent-at the time most likely Governor Romney of Michigan.</p><p>At this time, Great Society programs appear very likely to succeed, but GOP resistance is almost certain. While our coattails have been long, the Goldwater wing of the Republican Party has gained ground, perhaps infuriated or empowered by Scranton's usurping of Vice President Nixon, and they will almost certainly look for a new conservative rising star to face us in 1968. The burning question is of who.</p>>p"
 } else if(quickstats[0] >= 270 && scrantoncoup == 0){
     return "<h3><h3><q>Finally Made It</q></h3><p>Nobody can stop you now. Not Johnson. Not Kennedy. Not Eisenhower. In a shock, in a genuine shock, you have won the presidency. States projected to go to Lyndon by historic margins have fallen into your column. All of his dirty tricks? They mean nothing to you. The only thing that matters is your victory, so sweet. The White House will be yours, and Johnson will be condemned as a bookend, the man who didn't shape up.</p><p>The first order of business, of course, is to clean out his staff. Gut the bastards, y'know? Really stick it to them, after what they did to you. After that it's win this little silly war in Indochina. Johnson could never do a thing like that, but you can clean up his mess. That's what you do. From there? The future is yours, Mr. President.</p><p>President Nixon. That has a good ring to it.</p>"
 } else if(quickstats[0] < 270 && quickstats[0] > 199 && scrantoncoup == 0){
