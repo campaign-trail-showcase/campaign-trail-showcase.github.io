@@ -16488,7 +16488,24 @@ endingPicker = (out, totv, aa, quickstats) => {
     //aa = all final overall results data
     //quickstats = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
 
-if(wildfire == 4 && quickstats[0] <= 269 && scrantoncoup == 0){
+     // END-OF-GAME ACHIEVEMENTS
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
+    
+    if (wildfire == 4 && quickstats[0] <= 269) { // Get the Secret Ending 
+        ctsAchievement("Nutcutting");  
+    
+    }
+
+    if (wildfire == 4 && quickstats[0] <= 270 && noSurrender >= 10 && denial == 3) { // Get the nomination in '68 
+        ctsAchievement("I Have Never Been A Quitter");  
+    
+    }
+
+        if(quickstats[0] >= 270 && noSurrender >= 10) { // Get the Gay Ending
+        ctsAchievement("I Bet On Losing Dogs");  
+    }
+
+if(wildfire == 4 && quickstats[0] <= 269){
 if (used != true) {
     setInterval(function () {
         used = true;
@@ -16499,7 +16516,7 @@ if (used != true) {
     }, 100);
 }
     return "<div style='overflow-y: scroll;height: 38em;'><table style='margin:0px;padding:0px;display: flex;'><tbody style='display: flex;'><tr><td style='border: none;padding: 0px;display: flow-root;'><p style='margin-left: 0em;margin-right: 0em;'><h3>NEW YORK TIMES, AUGUST 30TH, 1968</h3><p><i>Interview with President Humphrey</i></p><p><i>Governor Percy increasingly certain to be nominee</i></p><p><i>Democratic convention: excerpt from Senator Kennedy’s speech</i></p><p>So do not let them say the last eight years have been wasted. Let them not say our mission for the future is fruitless.</p><p>For another great task lies before us, to confront the poverty of satisfaction and hope. To confront a lack of purpose and dignity that threatens to infect us all. It is truly folly to believe that we can find such purpose and dignity in the mere accumulation of material possessions. Our gross national project us over eight hundred billion dollars. But this figure contains air pollution and cigarette advertising. It counts for ambulances, which day after day clear our highways of carnage. It counts special locks for our doors, for those Americans scared of their fellow man, and it counts jails for those who break them. It counts napalm and the cost of a nuclear warhead, and armoured cars for our police who fight riots in our very streets and television programs that glorify violence for mere profit.</p><p>And for all that it measures, it does not allow for the health of our children, the quality of their education, or the simple joy of their play. It does not include the beauty of our poetry or the strength of our marriages, the intelligence of our public officials or the intelligence of our public debate. It tells us everything about America except why we are proud to be Americans.</p><p>As you and I begin our national campaign to solve this crisis, let me quote George Bernard Shaw, <q>Some men see things as they are, and say why. I dream of things that never were, and ask why not?</q></p></font>"
-} else if(quickstats[0] >= 270 && divorce == 1 && scrantoncoup == 0){
+} else if(quickstats[0] >= 270 && divorce == 1){
 if (used != true) {
     setInterval(function () {
         used = true;
@@ -16512,7 +16529,7 @@ if (used != true) {
     return "<h3>Moon, Baby Here on Earth</h3><p>The White House was a lonely place. Quiet. Cold. The Oval Office so austere. Sitting behind that desk was a lonely job.</p><p>But everyday he would look at him. Stare, tastefully. The fire in his thighs, burning. The way he walked, glided through the White House. Like a ghost from a Dickens novel, leaving no trace, except for the sweet smell of his scent. He just wanted it. Just for a second. To feel what it meant to be wanted.</p><p>It distracted him from his work, too, is the worst part. Everyone in the cabinet wondering where his mind was wandering. Rockefeller, in State, was doing a lot of the work on Viet-nam by himself. Organizing the bombings. Romney was looped in on it at this point, because he was so out of it. But goddamn. Just one moment for those lips. That would make it all worth it.</p><p>Pat was alone.</p>"
 } else if(quickstats[0] >= 270 && campaignTrail_temp.candidate_json[1]["fields"].last_name == "Scranton"){
     return "<h3><h3>The Adult in the Room</h3><p>In a stunning turn of events, after kicking Nixon off the ticket, after Johnson hammered you at every opportunity, after Wallace nearly stole this from you, you have won the election and will soon become the next president. This turn of events is almost unexplainable. Johnson was immensely popular, and you did this merely to salvage the ticket and to avoid a blowout downballot. Winning was never part of the plan.</p><p>Yet somehow, you did it, by magic or otherwise. Perhaps it was pure sex appeal-your looks so oft compared to President Kennedy may have won you the day. Looks, however, do not an agenda make. You'll have to continue to settle domestic disputes, using the power of the White House to bring justice to all those Johnson promised it to. That itself is a tall order, but the crisis in Indochina will also need to be settled most agreeably. Still, if you can beat Johnson, you can pull that off too. Congratulations Governor. Let the Secret Service know Richard Nixon might try to kill you.</p>"
-} else if(aa[0].electoral_votes < 270 && aa[1].electoral_votes < 270 && scrantoncoup == 0){
+} else if(aa[0].electoral_votes < 270 && aa[1].electoral_votes < 270){
         if (used != true) {
             setInterval(function () {
                 used = true;
@@ -16532,9 +16549,9 @@ return "<h3><q>WALLACE COUNTRY</q></h3><p>That damned silly fool from Alabama di
         }
     }, 100);
     return "<h3><h3><q>REPORT ON THE IMPLICATIONS OF SCRANTON'S FAILURE</q></h3><p>We can now report that President Johnson has successfully crushed Governor Scranton, with a resounding public mandate behind him. The sudden upset of Nixon's removal from the ticket, and the way in which Governor Scranton handled the uproar on his right, are arguably more responsible for the magnitude of the President's victory than the strength of his ideas. We can certainly see the strength of Operation Wildfire, and any such strategems would be absolutely useful in 1968 against any possible opponent-at the time most likely Governor Romney of Michigan.</p><p>At this time, Great Society programs appear very likely to succeed, but GOP resistance is almost certain. While our coattails have been long, the Goldwater wing of the Republican Party has gained ground, perhaps infuriated or empowered by Scranton's usurping of Vice President Nixon, and they will almost certainly look for a new conservative rising star to face us in 1968. The burning question is of who.</p>>p"
-} else if(quickstats[0] >= 270 && scrantoncoup == 0){
+} else if(quickstats[0] >= 270){
     return "<h3><h3><q>Finally Made It</q></h3><p>Nobody can stop you now. Not Johnson. Not Kennedy. Not Eisenhower. In a shock, in a genuine shock, you have won the presidency. States projected to go to Lyndon by historic margins have fallen into your column. All of his dirty tricks? They mean nothing to you. The only thing that matters is your victory, so sweet. The White House will be yours, and Johnson will be condemned as a bookend, the man who didn't shape up.</p><p>The first order of business, of course, is to clean out his staff. Gut the bastards, y'know? Really stick it to them, after what they did to you. After that it's win this little silly war in Indochina. Johnson could never do a thing like that, but you can clean up his mess. That's what you do. From there? The future is yours, Mr. President.</p><p>President Nixon. That has a good ring to it.</p>"
-} else if(quickstats[0] < 270 && quickstats[0] > 199 && scrantoncoup == 0){
+} else if(quickstats[0] < 270 && quickstats[0] > 199){
         setInterval(function () {
         used = true;
         imgg = document.getElementsByClassName("person_image")[0];
@@ -16543,7 +16560,7 @@ return "<h3><q>WALLACE COUNTRY</q></h3><p>That damned silly fool from Alabama di
         }
     }, 100);
 return "<h3><q>REPORT ON THE IMPLICATIONS OF JOHNSON'S THINNED MANDATE</q></h3><p>Our final vote tally indicates that Nixon made the race significantly closer than expected. Seemingly <q>Operation Wildfire</q> failed to reduce public trust in Nixon and Wallace to a serious enough extent to sincerely reduce his vote tally. The reasons for this are frustrating to ascertain. Factors could include perceptions of distrust with all of Washington, a strong conservative tide, white backlash towards the Civil Rights Act of 1964 as predicted, or President Johnson's refusal to face Nixon face to face.</p><p>Whatever the reason, the President will receieve a second term, but not a clear mandate to enact the Great Society programs-his congressional coattails were not enough to gain seats as extensive as those gained in the 1962 midterms, and we can anticipate a difficult congressional struggle to pass the Voting Rights Act or to work on future fair housing legislation. Numerous rising stars from this cycle may pose challenges in 1968-Nixon's career is likely over, but Governor Romney or newly elected Governor Percy of Illinois are likely candidates, if not Senator Goldwater (hopefully an easier opponent). Future memorandums will cover expected political challenges each possible opponent could pose over the coming term.</p><p>BURN THIS MEMORANDUM- Bill Moyers</p>"
-} else if(quickstats[0] < 200 && quickstats[0] > 99 && scrantoncoup == 0){
+} else if(quickstats[0] < 200 && quickstats[0] > 99){
         setInterval(function () {
         used = true;
         imgg = document.getElementsByClassName("person_image")[0];
@@ -16552,7 +16569,7 @@ return "<h3><q>REPORT ON THE IMPLICATIONS OF JOHNSON'S THINNED MANDATE</q></h3><
         }
     }, 100);
 return "<h3><q>REPORT ON THE IMPLICATIONS OF JOHNSON'S  MANDATE</q></h3><p>President Johnson's final vote tally indicates a strong performance for the current President, likely ballooned by <q>Operation Wildfire</q> and the reduced credibility of Vice President Nixon. The implications of his victory are, as of yet, unclear. The President has earned a solid tally of the popular vote, though has been hampered by the strength of the backlash vote and Nixon's ability to unite the GOP. His congressional coattails were strong, matching those of 1962, meaning future hopes to pass the suite of <q>Great Society</q> Programs are not quite dashed, but certain bills, such as the Voting Rights Act, may face pushback from those representatives concerned about the <q>White Backlash Vote</q> which turned out in spades.</p><p>Likely what pushed the President into his victory was, more than anything, the credibility issue, rather than the strength of President Johnson's political program or liberal ideals. Nixon's repeated suffering with the public reduced public trust in him-the strategy of reducing him to a corporate puppet was effective. This bodes well for future attempts to attack political opponents-the same label could likely be applied to Governor Percy or Governor Romney were they to earn the nomination in 1968. Future memorandums will cover how we can best face these possible opponents over the coming years.</p><p>BURN THIS MEMORANDUM- Bill Moyers</p>"
-} else if(quickstats[0] < 100 && scrantoncoup == 0){
+} else if(quickstats[0] < 100){
         setInterval(function () {
         used = true;
         imgg = document.getElementsByClassName("person_image")[0];
@@ -16566,24 +16583,4 @@ return "<h3>Racism.</h3><p>Yeah. Wallace fucking won. Whatever I don't give a sh
 } else {
 return "<p>Oh shit it broke</p><p>Let Stockdale know what happened b/c this is a bug, and your ending crashed. I hope you had fun at least?</p>"
 }
-     // END-OF-GAME ACHIEVEMENTS
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
-    
-    if (wildfire == 4 && quickstats[0] <= 269) { // Get the Secret Ending 
-        ctsAchievement("Nutcutting");  
-    
-    }
-
-    if (wildfire == 4 && quickstats[0] <= 270 && noSurrender >= 10 && denial == 3) { // Get the nomination in '68 
-        ctsAchievement("I Have Never Been A Quitter");  
-    
-    }
-
-        if(quickstats[0] >= 270 && noSurrender >= 10) { // Get the Gay Ending
-        ctsAchievement("I Bet On Losing Dogs");  
-    }
 }
-
-
-
-

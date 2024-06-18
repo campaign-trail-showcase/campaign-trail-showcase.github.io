@@ -14912,6 +14912,23 @@ endingPicker = (out, totv, aa, quickstats) => {
     //aa = all final overall results data
     //quickstats = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
 
+     // END-OF-GAME ACHIEVEMENTS
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
+    
+    if (wildfire == 4 && quickstats[0] <= 269) { // Get the Secret Ending 
+        ctsAchievement("Nutcutting");  
+    
+    }
+
+    if (wildfire == 4 && quickstats[0] <= 270 && noSurrender >= 10 && denial == 3) { // Get the nomination in '68 
+        ctsAchievement("I Have Never Been A Quitter");  
+    
+    }
+
+        if(quickstats[0] >= 270 && noSurrender >= 10) { // Get the Gay Ending
+        ctsAchievement("I Bet On Losing Dogs");  
+    }
+
 if(wildfire == 4 && quickstats[0] <= 269){
 if (used != true) {
     setInterval(function () {
@@ -14990,23 +15007,4 @@ return "<h3>Racism.</h3><p>Yeah. Wallace fucking won. Whatever I don't give a sh
 } else {
 return "<p>Oh shit it broke</p><p>Let Stockdale know what happened b/c this is a bug, and your ending crashed. I hope you had fun at least?</p>"
 }
-     // END-OF-GAME ACHIEVEMENTS
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
-    
-    if (wildfire == 4 && quickstats[0] <= 269) { // Get the Secret Ending 
-        ctsAchievement("Nutcutting");  
-    
-    }
-
-    if (wildfire == 4 && quickstats[0] <= 270 && noSurrender >= 10 && denial == 3) { // Get the nomination in '68 
-        ctsAchievement("I Have Never Been A Quitter");  
-    
-    }
-
-        if(quickstats[0] >= 270 && noSurrender >= 10) { // Get the Gay Ending
-        ctsAchievement("I Bet On Losing Dogs");  
-    }
 }
-
-
-
