@@ -100,11 +100,11 @@ Join our <a href="https://discord.gg/CfS6yTtjZj" style="color:#FF6B6B">Discord S
 
 
 async function loadJSON(path, varr, callback = null) {
-    const res = await fetch(path);
-    if(!res.ok) {
+    const loadJsonRes = await fetch(path);
+    if(!loadJsonRes.ok) {
         return;
     }
-    const responseText = await res.text();
+    const responseText = await loadJsonRes.text();
     eval(varr + "=JSON.parse(" + JSON.stringify(responseText.trim()) + ")");
     if(callback !== null) {
         callback();
