@@ -1363,9 +1363,10 @@ function divideElectoralVotesProp(e, t) {
                                 console.log("e",e)
                                 openMap(e);
                             })
-                            let answerButton = $("#answer_select_button")[0];
-                            answerButton.addEventListener("click", onAnswerSelectButtonClicked);
+                             
                             if ($("#answer_select_button")[0] != null) {
+                                let answerButton = $("#answer_select_button")[0];
+                                answerButton.addEventListener("click", onAnswerSelectButtonClicked);
                                 clearInterval(important_code)
                             }
                         }, 1000);
