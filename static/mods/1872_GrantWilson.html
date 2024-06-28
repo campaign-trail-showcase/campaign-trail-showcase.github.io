@@ -4288,6 +4288,10 @@ campaignTrail_temp.game_start_logging_id = '4472388';
 
 endingPicker = (out, totv, aa, quickstats) => {
 
+  if (quickstats[0] >= 200 && ans == 8095) { 
+    ctsAchievement("Where Credit's Due");  
+  }
+
   //out = "win", "loss", or "tie" for your candidate
 //totv = total votes in entire election
 //aa = all final overall results data
@@ -4326,9 +4330,6 @@ if (campaignTrail_temp.player_answers[18] == 8067 && campaignTrail_temp.player_a
 return "<h3>What?!</h3><p>This is an error page. Contact Astronomical#3005 and explain in detail how you got to here. Device, answer for Question #30, etc.</p><p>If you won, congrats.</p>"
 }
 
-if (quickstats[0] >= 200 && ans == 8095) { 
-  ctsAchievement("Where Credit's Due");  
-}
 
 }
 campaignTrail_temp.multiple_endings=true
