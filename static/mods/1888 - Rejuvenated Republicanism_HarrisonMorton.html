@@ -1,5 +1,14 @@
+
 if (!campaignTrail_temp.loaded){
     campaignTrail_temp.loaded = true
+
+    function ctsAchievement(achievement, difficultyChecker = true){
+        if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+            if(campaignTrail_temp.CTS){
+            unlockAchievement(achievement);
+        }
+    }
+    
 
 campaignTrail_temp.questions_json = [
     {
@@ -7617,7 +7626,7 @@ if (ans == 1612) {
     dummy += 1;
 }
 
-// Scoring for Tounge of Fire
+// Scoring for Tongue of Fire
 if (ans == 1523) {
     equal += 1;
 }
@@ -8015,12 +8024,5 @@ endingPicker = (out, totv, aa, quickstats) => {
 
 }
 campaignTrail_temp.multiple_endings=true
-  
-function ctsAchievement(achievement, difficultyChecker = true){
-    if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
-        if(campaignTrail_temp.CTS){
-        unlockAchievement(achievement);
-    }
-}
 
 }
