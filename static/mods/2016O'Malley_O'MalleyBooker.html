@@ -53,7 +53,22 @@ cyoAdventure = function (a) {
 endingPicker = (out, totv, aa, quickstats) => {
 
     used=false
+
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
+
+
+    if (quickstats[0] >= 270 && ans == 5226) { 
+        ctsAchievement("Truthnuke");  
+    }
+
+    if (quickstats[0] >= 270 && ans == 5252 || ans == 20695) { 
+        ctsAchievement("Unaccountable");  
+    }
     
+    if (quickstats[0] >= 410) { 
+        ctsAchievement("Holding The (Old) Line");  
+    }
+
     //out = "win", "loss", or "tie" for your candidate
     //totv = total votes in entire election
     //aa = all final overall results data

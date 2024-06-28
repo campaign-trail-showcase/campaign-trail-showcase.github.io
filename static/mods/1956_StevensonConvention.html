@@ -1,3 +1,10 @@
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -16183,13 +16190,18 @@ campaignTrail_temp.game_start_logging_id = '4326237';
 e=campaignTrail_temp
 
 endingPicker = (out, totv, aa, quickstats) => {
+
+    if (quickstats[0] >= 0 && vp >= 2) { 
+        ctsAchievement("Third Time's The Charm");  
+    }
+    
     ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
     used=false
     if (aa[0].electoral_votes < 266 && aa[1].electoral_votes < 266 && aa[2].electoral_votes < 266 && aa[3].electoral_votes < 266) {
         return "<h3>'NO ELECTORAL MAJORITY; STEVENSON THE FAVORITE FOR THE PRESIDENCY'</h3><p>This is the Headline of the New York Times, and one which has quite frankly shocked the nation. Somehow, neither you or Ike won a majority in the electoral college. This hasn’t happened since 1824 or 132 years! While the fully complete results aren’t fully in, it’s likely this occurred due to the interference of Andrews and the Dixiecrats down South, winning a couple states, either that or you and Eisenhower tied up the states. However, you can relax Governor, as it has been reported that the democrats have held onto the House and Senate meaning, the presidency may be yours after all. Whatever the outcome, it’s very clear this election will go down in history as one of the most chaotic and insane the country has seen for a long time. Best of Luck Gove-, President Stevenson, you’ll sure as hell need it.</p>"
-        } else if (aa[0].electoral_votes >= 266 && aa[0].candidate == 202) {
+} else if (aa[0].electoral_votes >= 266 && aa[0].candidate == 202) {
         return "<h3>'ANDREWS PULLS HISTORIC UPSET; BOTH PARTIES BAFFLED WHILE STATE RIGHTS PARTY SWEEPS SOUTH IN CONGRESS'</h3><p>This is the Headline of the New York Times, President Andrews is sworn in with a newely elected congress made up of many members of the States Rights party. Famous Southerns senators like Richard Russell, Strom Thurmond and John Sparkman, among others also joined their ranks creating a decent bloc in both the House and Senate. Not long after The Democratic Party soon began to collapse and in 1957, Adlai Stevenson, Dwight Eisenhower, Estes Fefauver, John F. Kennedy and other formed the Liberal party in protest to the Democratic and Republican Parties sheepishness throughout the Andrews Presidency especially after he sent federal troops in to ensure protesters couldn’t stop the Little Rock 9 from going to the all black school very far from their homes.</p><p>After a successful midterm for the liberal party which saw them gain seats across the county, Eisenhower and Stevenson would run on the liberal ticket in the 1960 election, with support of both the fractured Democratic and Republican parties. After a brutal race, The two former political rivals United to defeat Andrews and Segregation as the first major piece of legislation passed by the Eisenhower/Stevenson Administration would be the Civil rights act of 1961. Down with Segregation, Integration now, integration tomorrow, and integration forever!</p><p><a href='https://drive.google.com/drive/folders/1JXXk1gNyRVsorFrDFMO8MHfQdseD1gKz?usp=drive_link'>Of course, there may be a way to change this reality.</a></p>"
-        } else if (aa[0].electoral_votes >= 266 && aa[0].candidate == 203) {
+} else if (aa[0].electoral_votes >= 266 && aa[0].candidate == 203) {
             nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#000000"
             nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#000000"
             document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title
@@ -16206,27 +16218,33 @@ endingPicker = (out, totv, aa, quickstats) => {
         }, 100);
     }
         return "<audio loop='false' autoplay='true' src='https://itsastronomical.com/assets/Dogsong.ogg' style='display:none;'></audio><body><p style='color:white;* i'll be honest.<br> * i have no idea what happened for you to get here.<br> * this is actually some sort of error-handling message.<br> * so, if you're getting this ending...<br> * tell whoever made the game, okay?<br> * they'll fix it, or if it's a novel situation...<br> * they might even add another ending to the game.<br> * chances are, though...you're just a dirty hacker, aren't you?<br> * yeah, get outta here.<p></body>"
-        } else if (quickstats[0] < 3) {
+} else if (quickstats[0] < 3) {
             return "<h3>EISENHOWER WINS IN HISTORICAL LANDSLIDE; REPUBLICANS SWEEP CONGRESS</h3><p>This is the headline of The New York Times, as you hold the newspaper in your hands. Teardrops sign the bottom of the paper as you feel the weight of what has just happened begin to set in. The President was able to garner the support of the entire country, even in the solid South which hadn’t voted for a Republican since reconstruction. Republicans easily retook control of both houses of Congress and even famous Senators like Mike Monroney and Carl Hayden have lost their seats.</p><p>You receive many calls that night from well known politicians who offer their condolences for your loss; Eleanor Roosevelt, Harry Truman, Sam Rayburn, and most surprisingly from Alf Landon, with whom you have a warm and pleasant conversation, despite the looming reality of your new legacy as the biggest loser in Presidential history. You may have lost the race, you may have lost every state, but perhaps the real Presidency was the friends we made along the way.</p>"
-        } else if (ans == 5127 && quickstats[0] == 89) {
+} else if (ans == 5127 && quickstats[0] == 89) {
             return "<h3>EISENHOWER AGAIN CARRIES 39 STATES; DEMOCRATS HOLD CONGRESS</h3><p>Here we are again. Despite all the campaigning across the country, on the West Coast, Midwest and Great Plains, you've only managed to carry the exact same states as you did four years ago. Many are confused as to the last minute running-mate switch to Sparkman, making this an exact repeat of the 52 election. During the campaign you also further pivoted the Democratic Party away from civil rights and toward continued Segregation which will definitely continue to divide the party. After telephoning Ike a concession, Sparkman and Yourself, share a drink and reminisce about  the last eight years. You wonder to yourself If John will run in 60 or after your failure, the party will pivot to the left with a fella like Kennedy or Kefauver. Whatever may happen,   you can happily retire to your home in libertyville and play behind the scenes as the Democratic Party evolves into the 1960s.</p>"
-           } else if (quickstats[0] >= 3 && quickstats[0]<170) {
+} else if (quickstats[0] >= 3 && quickstats[0]<170) {
             return "<h3>EISENHOWER BY A LANDSLIDE; BATTLE FOR CONGRESS CLOSE</h3><p>This is the headline of The New York Times and an unfortunate one for your campaign. You’ve once again been beaten by General Eisenhower. He was able to sweep most of the Northeast, Midwest, Great Plains, and West, whilst you’ve been relegated to winning only a handful of states. The loss is fairly crushing, and has proven America still likes Ike. Speaking of Eisenhower, his administration will continue for the next four years. He will likely continue to govern as the non-partisan, moderate President who kept America united against the forces of communism.</p><p>Meanwhile, Adlai, you still have many options. You could always return home to Illinois and seek office there, despite your consecutive losses in the state presidentially.  You could also take another shot at things and run in 1960, though rising stars within the Democratic Party like Jack Kennedy and Hubert Humphrey look to be the early favorites. If they can send Nixon packing, you could have a cabinet position in their administration. There may be a happy ending after all for the man from Libertyville.</p>"
-        } else if (quickstats[0] >= 170 && quickstats[0]<266) {
+} else if (quickstats[0] >= 170 && quickstats[0]<266) {
             return "<h3>EISENHOWER WINS NARROWLY; DEMOCRATS EXPAND MAJORITIES IN CONGRESS</h3><p>This is the headline of The New York Times and a disappointing but expected one for your campaign. You’ve once again been beaten by General Eisenhower but fortunately you vastly overperformed your run from four years ago and have flipped many states. Along with your close loss, Democrats continued their victories from 54’ and have expanded their majority in Congress  by many seats.</p><p>Eisenhower is content with winning reelection but the close victory has left a bittersweet taste in his mouth and many Republicans are in fear over a potential midterm massacre in 58. Meanwhile Adlai, you're looking better than ever and have many options! With this close loss, you may be able to get a third run at the Presidency in 60 and will have a lot of folks behind you if you try. With your political experience and energy, Nixon or whoever the Republicans put up next won’t stand a chance. The history books may have a President Stevenson after all…</p>"
-           } else if (quickstats[0] >= 266 && quickstats[0]<350) {
+} else if (quickstats[0] >= 266 && quickstats[0]<350) {
+            ctsAchievement("Eggheads Unite!");
            return "<h3>STEVENSON UPSETS IKE; DEMOCRATS SWEEP CONGRESS</h3><p>This is the headline of The New York Times, and in Washington, a shocked Eisenhower reads it. He sits, quiet and clearly baffled by what he did wrong. On the other hand, you are happy as can be! You’ve managed to beat the odds and defeat a popular (or at least who many thought was popular) incumbent president. Eleanor Roosevelt calls you immediately with clear gitty and joy, saying Franklin would be damn proud. An expansive coalition of the South, Midwest, West-coast and maybe even a few Northeast and Plains states carried you to victory, and now the battle for Congress is a bloodbath for Republicans as they see continued losses from the 54 midterms. The strongly Democratic congress will be by your side as you legislate the next four years and hopefully see continued economic prosperity. If all goes well, you’ll hopefully win reelection against a revenge seeking Dick Nixon. The Egghead from Libertyville has finally beat the odds and proven that America is Madly for Adlai!</p>"
-           } else if (quickstats[0] >= 350 && quickstats[0]<531) {
+} else if (quickstats[0] >= 350 && quickstats[0]<531) {
+            ctsAchievement("Eggheads Unite!");
            return "<h3>STEVENSON BEATS IKE IN LANDSLIDE; DEMOCRATS SWEEP CONGRESS</h3><p>This is the headline of the New York Times and one that nobody expected, not even your most brazen supporters. You’ve beaten President Eisenhower in a landslide, despite his seemingly high approval ratings and successes during his first term. A saddened and dumbfounded Eisenhower calls to concede you while you hear a furious Nixon in the other room through the phone. You receive joyfull calls from all kinds of Democrats, praising you for returning the Democratic Party to the White House. The battle for congress was a bloodbath for Republicans as they see losses worse than even the ‘54 midterms. Even well-known Republicans, from Styles Bridges to Henry Dworshak lose their senate seats tonight alongside the President. In a comeback for the ages, the Egghead from Libertyville has finally beat the odds and proven that America is Madly for Adlai!</p>"
-           } else if (quickstats[0] >= 531) {
+} else if (quickstats[0] >= 531) {
+            ctsAchievement("Eggheads Unite!");
            return "<h3>STEVENSON WINS EVERY STATE: EISENHOWER REPUDIATED AS CONGRESSIONAL REPUBLICANS FLOUNDER</h3><p>This is the headline of the New York Times, though many think it to be another “Chicago Daily Tribune” screw up, as surely the old egghead couldn’t have won EVERY state. Eisenhower’s concession is a mix of confusion and depression and you’re certain you can hear Nixon in the other room crying fraud. The other calls you receive, from Eleanor Roosevelt, Harry Truman, Lyndon Johnson, and others, are a mix of excitement, jubilation, and admittedly, surprise. It’s unclear how, against Eisenhower’s strong approval ratings and seeming success throughout his first term, yet here you are, the first Democrat to ever win the state of Vermont, and the first President in all of history to be elected unanimously. In congress, it’s a Republican slaughter, with epic supermajorities for you in both chambers of congress, and it seems for the next two years, at least, you’ll have free reign over the country. In a comeback for the ages, you’ve turned your catastrophic loss in ‘52 into a historic footnote on your rise to greatness.</p>"
 }
 }
 campaignTrail_temp.multiple_endings=true
 
+// checks for achievement
+var vp = 1;
 
 campaignTrail_temp.cyoa = true
 cyoAdventure = function (a) {
+
     ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
     if (e.question_number == 2) {
         window.setTimeout(e.vpSwitcher, 20)
@@ -16305,11 +16323,13 @@ cyoAdventure = function (a) {
           }
     }
     if(ans == 5127){
+        vp += 1;
     // Sparkman joins Ticket
         window.setTimeout(e.vpSwitcher, 20)
         campaignTrail_temp.running_mate_json = JSON.parse("[{\"model\": \"campaign_trail.running_mate\", \"pk\": 155, \"fields\": {\"candidate\": 201, \"running_mate\": 214}}]");
     }
     if(ans == 454905){
+        vp += 1;
       // Kefauver leaves the ticket
       campaignTrail_temp.running_mate_image_url = 'https://itsastronomical.com/assets/1956/goresr.png';
       campaignTrail_temp.running_mate_last_name = 'Gore';

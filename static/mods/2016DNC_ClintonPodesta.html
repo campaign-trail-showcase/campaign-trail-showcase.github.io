@@ -1,6 +1,12 @@
 // 2016 Democratic Primaries - By ItsAstronomical
 // There are some backend features here that should be not looked at if you wish to avoid spoilers
 
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
 
 e=campaignTrail_temp // this is redundant, but Decstar uses this because it looks nicer in the code. 
 campaignTrail_temp.cyoa = true
@@ -148,6 +154,7 @@ campaignTrail_temp.game_start_logging_id = '3661014';
 
 endingPicker = (out, totv, aa, quickstats) => {
 if ((campaignTrail_temp.player_answers.includes(200975)||campaignTrail_temp.player_answers.includes(200965)||campaignTrail_temp.player_answers.includes(200969)) && quickstats[0] >= 2382) {
+    ctsAchievement("I Will Survive"); 
         if (used != true) {
           setInterval(function () {
               used = true;

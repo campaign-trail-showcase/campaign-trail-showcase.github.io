@@ -1,3 +1,10 @@
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
 campaignTrail_temp.questions_json = [
   {
     "model": "campaign_trail.question",
@@ -1680,6 +1687,7 @@ endingPicker = (out, totv, aa, quickstats) => {
   //quickstats = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
 
 if(campaignTrail_temp.player_answers[9] == 8032) {
+  ctsAchievement("ELEMENT.");
     if (used != true) {
         setInterval(function () {
             used = true;
@@ -1689,9 +1697,10 @@ if(campaignTrail_temp.player_answers[9] == 8032) {
             }
         }, 100);
     }
-     return "<h3>'June 5tth, 2023 - Havana, Cuba'</h3><p>Luuwuu looks around at her apartment. It's small, but it'll do. She has everything she could need here - and then some. She's worked too hard to have any of this ruined. She turns her computer on, searches something up, and then a screen appears.</p><p>'Luuwuu Astronomical: 2002 - 2023'</p><p>She hears someone call her name - or more specifically, her new name - 'Rosa!' With a smirk on her face, she gets up from her chair, grabs her keys, and goes downstairs. She has no clue what awaits her.</p>";
+     return "<h3>'June 5th, 2023 - Havana, Cuba'</h3><p>Luuwuu looks around at her apartment. It's small, but it'll do. She has everything she could need here - and then some. She's worked too hard to have any of this ruined. She turns her computer on, searches something up, and then a screen appears.</p><p>'Luuwuu Astronomical: 2002 - 2023'</p><p>She hears someone call her name - or more specifically, her new name - 'Rosa!' With a smirk on her face, she gets up from her chair, grabs her keys, and goes downstairs. She has no clue what awaits her.</p>";
 
   } else if (campaignTrail_temp.player_answers[0] == 8000 && campaignTrail_temp.player_answers[1] == 8004 && campaignTrail_temp.player_answers[4] == 8019 && campaignTrail_temp.player_answers[8] == 8031 && campaignTrail_temp.player_answers[9] == 8033 && campaignTrail_temp.player_answers[12] == 8046 && campaignTrail_temp.player_answers[14] == 8053) {
+    ctsAchievement("All's Well That Ends Well");
       if (used != true) {
           setInterval(function () {
               used = true;
@@ -1703,12 +1712,15 @@ if(campaignTrail_temp.player_answers[9] == 8032) {
       }
        return "<h3>Wow! You've cancelled the divorce!</h3><p>This is quite rare, and of course, this is never the end - marriage counseling and time will be needed to solve everything, but you've managed to make things work. You and Astro have agreed to try to make this marriage work, and so the court case is cancelled.</p><p>Astro will of course, need to finish 2016DNC, and there's still some people peeved that he not only lied about releasing 2024, but that the mod he actually released was some April Fools Day trash. But that's a different story - and maybe if they find the true ending, maybe they'll understand. Oh wait.</p>";
     } else if (quickstats[0] < 10) {
+      ctsAchievement("It's Astrover");
       return "<h3>Sorry! You lost the case.</h3><p>Looks like Astro is promised to get custody of New Campaign Trail, and the jury is favoring giving himBruno. This is pretty bad news for you. For now, you probably have to move back to Michigan, or maybe you could travel the world now?</p><p>As for Astro, people are still expecting 2016DNC, and the stunt he pulled on April Fools likely left a poor taste in their mouth. You're still free to interact with the TCT community, if you wish.</p>"
     } else if (quickstats[0] == 10) {
       return "<h3>The Jury is tied.</h3><p>I honestly have no clue what happens here.</p><p>You and Astro will have to work together to solve this, although given how bitterly this must have been fought, that sounds harder than expected.</p>"
     } else if (quickstats[0] >= 11 && quickstats[0]<15) {
+      ctsAchievement("I Fought The Law (And Won?)");
       return "<h3>Wow! You have won the Divorce Trial!</h3><p>After months of litigation, the court has given you custody of a lot! You get to keep the house, and most of the stuff there. Astro will be forced to leave the house - he will probably remain in the City of Brotherly Love.</p><p>Many people are expecting his next mod now, and the stunt he pulled on April Fools likely left a poor taste in their mouth. You're still free to interact with the TCT community, if you wish.</p>"
      } else if (quickstats[0] >= 15) {
+      ctsAchievement("I Fought The Law (And Won?)");
       return "<h3>Wow! You have won custody of everything!</h3><p>After months of litigation, the court has given you custody of a lot, everything, in fact! You get to keep the house, and most of the stuff there. Astro will be forced to leave the house - he will probably remain in the City of Brotherly Love. But hey - you get a 20% stake in New Campaign Trail!</p><p>Many people are expecting your very own mod now, and the stunt Astro pulled on April Fools likely left a poor taste in their mouth. Get working on that mod, and maybe you can beat Astro at his own game - literally!</p>"
   
 } else {
