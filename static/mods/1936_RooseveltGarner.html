@@ -1,3 +1,10 @@
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -9764,6 +9771,10 @@ console.log("🐰")
 
 endingPicker = (out, totv, aa, quickstats) => {
 
+    if (quickstats[0] >= 531) { 
+        ctsAchievement("A Big (New) Deal");  
+    }
+
             //out = "win", "loss", or "tie" for your candidate
         //totv = total votes in entire election
         //aa = all final overall results data
@@ -9783,7 +9794,6 @@ endingPicker = (out, totv, aa, quickstats) => {
   } else if (quickstats[0] >= 524 && quickstats[0]<531) {
     return "<h3>Congratulations, Mr. President! You've won, and exceeded your margin from four years ago!</h3><p>Despite some concerns about the continuing depression, and that scare by <i>The Literary Digest</i>, you have held on, and voters have given you a greater margin than your victory four years ago. Things could have gone wrong along the way, but many expected this, regardless of what some polls said. Landon sends a brief telegram to concede the election, as you continue to celebrate.</p><p>With this victory, the coattails you have brought with you are massive. Democrats appear poised to control 3/4ths of both chambers of Congress, as returns show Republicans will have under 20 Senate seats and under 100 House seats. With this commanding win, you're in ample position to build upon your first four years, and lead the country back to prosperity and security. At this rate, maybe you could even run for a third term! Well, I'm joking, Mr. President, but still.</p>"
   } else if (quickstats[0] >= 531) {
-    ctsAchievement("A Big (New) Deal");
     return "<h3>Congratulations, Mr. President! You've won every state!</h3><p>Despite some concerns about the continuing depression, and that scare by <i>The Literary Digest</i>, you have held on, and voters have given you a greater margin than your victory four years ago. Things could have gone wrong along the way, but many expected this, regardless of what some polls said. Landon sends a brief telegram to concede the election, as you continue to celebrate.</p><p>With this victory, the coattails you have brought with you are massive. Democrats appear poised to control 3/4ths of both chambers of Congress, as returns show Republicans will have under 20 Senate seats and under 100 House seats. With this commanding win, you're in ample position to build upon your first four years, and lead the country back to prosperity and security. At this rate, maybe you could even run for a third term! Well, I'm joking, Mr. President, but still.</p>"
   } else {
     return "<h3>Sorry, you have lost the 1936 election!</h3><p>It’s a major shock to not only your supporters, but the nation. It seems Landon has (somehow) pulled off quite the incredible upset. Maybe you veto'd the wrong bills or made some poor administrative choices. The Democratic Party is absolutely furious that you lost to the likes of Alf Landon, especially when you started the race as a very popular President.</p><p>The stage is now set for Cactus Jack to run for the nomination in 1940, and some party leaders see your brand of liberalism as dead on arrival going forward. Perhaps you may try to run for Senate, although it’s more than likely you shall retire back to New York.</p>"
