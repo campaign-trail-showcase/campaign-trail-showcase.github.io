@@ -1,5 +1,12 @@
 // 2016 O'Malley - By ItsAstronomical
 
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
 e=campaignTrail_temp // this is redundant, but Decstar uses this because it looks nicer in the code. 
 campaignTrail_temp.cyoa = true
 
