@@ -1,4 +1,3 @@
-
 if (!campaignTrail_temp.loaded){
     campaignTrail_temp.loaded = true
 
@@ -7941,6 +7940,8 @@ singleObserver.observe(document.documentElement, { childList: true, subtree: tru
 
 endingPicker = (out, totv, aa, quickstats) => {
 
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1] 
+
     // Checks for the Upper South
 
     let kentuckyResult = campaignTrail_temp.final_state_results.find((x) => x.state == 65);
@@ -7988,11 +7989,11 @@ endingPicker = (out, totv, aa, quickstats) => {
         ctsAchievement("Rejuvenated Republican");  
       }
     
-      if (lilyWhite >= 1 && e.running_mate_last_name == "Bradley" && quickstats[0] >= 201) { 
+      if (lilyWhite >= 1 && quickstats[0] >= 201) { 
         ctsAchievement("A New South?");  
       }
     
-      if (equal >= 1 && quickstats[0] >= 201) { 
+      if (ans == 1523 && quickstats[0] >= 201) { 
         ctsAchievement("Tongue of Fire");  
       }
       
