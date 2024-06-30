@@ -64,11 +64,11 @@ endingPicker = (out, totv, aa, quickstats) => {
     ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 
 
-    if (quickstats[0] >= 270 && ans == 5226) { 
+    if (ans == 5226 && quickstats[0] >= 270) { 
         ctsAchievement("Truthnuke");  
     }
 
-    if (quickstats[0] >= 270 && ans == 5252 || ans == 20695) { 
+    if ((ans == 5252 || ans == 20695) && quickstats[0] >= 270) { 
         ctsAchievement("Unaccountable");  
     }
     

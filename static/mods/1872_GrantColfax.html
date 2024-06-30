@@ -4287,15 +4287,18 @@ campaignTrail_temp.game_start_logging_id = '4472388';
 
 endingPicker = (out, totv, aa, quickstats) => {
 
+  ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
+
+
   if (quickstats[0] >= 200 && ans == 8095) { 
     ctsAchievement("Where Credit's Due");  
   }
   
-  if (campaignTrail_temp.player_answers[18] == 8067 && campaignTrail_temp.player_answers[30] == 8120 && quickstats[0] >= 176) {
+  if (ans == 8067 && ans == 8120 && quickstats[0] >= 176) {
     ctsAchievement("It's Kaiseright"); 
   }
 
-  if (campaignTrail_temp.player_answers[18] == 8067 && quickstats[0] >= 184) {
+  if (ans == 8067 && quickstats[0] >= 184) {
     ctsAchievement("It's Kaiseright"); 
   }
 
