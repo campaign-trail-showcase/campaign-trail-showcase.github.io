@@ -99,12 +99,12 @@ window.setInterval(function() {
     }
 }, 200);
 
-var fileExists = async function(url) {
-    const fileExistsRes = await fetch(url);
-    if(!fileExistsRes.ok) {
-        console.log("Seems file does not exist: " + url);
-    }
-    return fileExistsRes.ok;
+var fileExists = function(url) {
+    var req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    console.log("trying to get file from url " + url);
+    req.send();
+    return req.status === 200;
 };
 
 lastUpdatedDate="2023-08-20"
