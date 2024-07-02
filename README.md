@@ -25,11 +25,12 @@ Install this extension by following the instructions on the page and make a live
 # Uploading to itch.io
 
 1. Zip up the whole folder EXCEPT FOR THE FOLLOWING:
-    - node_modules
+    - node_modules (a folder, if it exists)
     - Anything that says git
     - main.js
     - package-lock.json
     - package.json
+    - out (a folder, if it exists)
 2. Make an itch.io account if you don't have one already
 3. Press the Upload new project button to the right of your username.
 4. Fill out your project details. Be creative! 
