@@ -40,7 +40,6 @@ const achButton = document.getElementById("achButton");
 const achContent = document.getElementById("achcontent");
 
 function openAchievements() {
-
     addAllAchievements();
     
     achWindow.style.display = "block";
@@ -99,7 +98,7 @@ function addAllAchievements() {
         const subHolder = document.createElement("div");
         const labelHolder = document.createElement("div");
         subHolder.classList.add("achSubHolder");
-        let theme = localStorage.getItem("customModBoxThemesEnabled") == "true" ? customModBoxThemes[modName] : null;
+        let theme = null;
 
         for(ach in allAch[modName]) {
             if(addAchivement(ach, allAch[modName][ach], subHolder, theme)) {

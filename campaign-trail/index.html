@@ -21,18 +21,8 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://malsup.github.io/jquery.blockUI.js" type="text/javascript"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H6KK5MD763"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-H6KK5MD763');
-    </script>
   </head>
   <body class="base" style="position:relative">
-    <div style="display:none" id="announcement" class="announcement"><span>📣 ANNOUNCEMENT:</span> WE HAD TO MOVE OUR WEBSITE! <a href="https://www.reddit.com/r/thecampaigntrail/comments/1co0tt6/important_update_regarding_campaign_trail_showcase/">SEE HERE FOR MORE INFO.</a></div>
     <div style="display:none" id="cheatIndicator" class="cheatIndicator">AUTO-PLAY ENABLED</div>
     <div style="display:none" id="benefitwindow">
       <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
@@ -54,7 +44,7 @@
         <div class="content_single">
           <div id="game_window">
             <div class="game_header">
-              <h2>CAMPAIGN TRAIL SHOWCASE</h2>
+              <h2>THE CAMPAIGN TRAIL</h2>
             </div>
             <div class="below_header" id="below_header">
               <div class="inner_window_front" id="inner_window_1">
@@ -121,107 +111,17 @@
               <audio id="campaigntrailmusic" loop="true" style="display:none" src="" autoplay="false"></audio>
             </div>
             <button style="display:none" onclick="showBenefitChecker()" id="showBenefitCheckButton">Show Benefit Check Window</button>
-            <button id="modLoadReveal" onclick="if(document.getElementById('modloaddiv').style.display != 'none'){document.getElementById('modloaddiv').style.display = 'none'}else{document.getElementById('modloaddiv').style.display = 'block'}"> Custom Mod Loader </button>
-            <br>
-            <div id="modloaddiv" style="display:none">
-              <div style="display:none" id="tagContainer">
-                <label>
-                  <input type="checkbox" class="tagCheckbox" value="historical">Historical </label>
-                <label>
-                  <input type="checkbox" class="tagCheckbox" value="althist">AltHist </label>
-                <label>
-                  <input type="checkbox" class="tagCheckbox" value="state">State/Local </label>
-                <label>
-                  <input type="checkbox" class="tagCheckbox" value="international">International </label>
-              </div>
-              <select style="display:none" name="mod" id="modSelect" onchange="modSelectChange()"></select>
-              <div id="customMenu">
-                <br>
-                <b>Code Set 1:</b>
-                <br>
-                <textarea id="codeset1" width=400 height=300></textarea>
-                <br>
-                <b>Code Set 2:</b>
-                <br>
-                <textarea id="codeset2" width=400 height=300></textarea>
-                <br>
-                <b>ENDINGS CODE:</b>
-                <br>
-                <textarea id="codeset3" width=400 height=300></textarea>
-                <div style="display:none" id="fileimp">
-                  <br>
-                  <b>File importer:</b>
-                  <br>
-                  <form action="/action_page.php">
-                    <p>Upload your result JSON files to view previous games by clicking the button below:</p>
-                    <input type="file" id="importfile" name="importfile">
-                  </form>
-                </div>
-                <br>
-                <br>
-                <br>
-                <button id="submitMod">Play Custom Mod</button>
-                <br>
-                <br>
-                <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName"></input>
-                <button onclick="addCustomModButton()" id="saveMod">Save Custom Mod</button>
-                <div>
-                  <p style="font-size: smaller; font: italic">(To update a custom mod just submit a new mod again with an identical name. This includes switching candidates/running mates.)</p>
-                </div>
-              </div>
-            </div>
-            <br>
             <button id="achButton" onclick="openAchievements()">Achievements</button>
-            <div id="copyLinkButton" style="display:none; margin-top:10px;" ><button onclick="copyModLink()">Copy Mod Link</button></div>
-            <button id="goBackButton" style="display:none" onclick="window.location.href = 'https://campaigntrailshowcase.com/campaign-trail/index.html'">Go Back To Main Page</button>
-            <div id="bonus_menu_area"></div>
             <br>
-            <hr>
-            <div id="featured-mods-area">
-              <div style="margin:10px; display:flex; justify-items: center; justify-content: center;">
-                <button class="mode-button pressed" onclick="setMode(event, 'all')" style="text-align: center;">All Mods</button>
-                <button class="mode-button" onclick="setMode(event, 'new')" style="text-align: center;">New Releases</button>
-              </div>
-              <div class="tab">
-                <button class="tablinks active" onclick="setCategory(event, 'all')">All</button>
-                <button class="tablinks" onclick="setCategory(event, 'favorites')">Favs</button>
-                <button class="tablinks" onclick="setCategory(event, new RegExp('[0-1][0-6][0-9][0-9]|BCE'))">Pre 1700s</button>
-                <button class="tablinks" onclick="setCategory(event, new RegExp('1[7-8][0-9][0-9]'))">1700s-1800s</button>
-                <button class="tablinks" onclick="setCategory(event, new RegExp('19[0-3][0-9]'))">1900s-1930s</button>
-                <button class="tablinks" onclick="setCategory(event, new RegExp('19[4-5][0-9]'))">1940s-1950s</button>
-                <button class="tablinks" onclick="setCategory(event, new RegExp('19[6-7][0-9]'))">1960s-1970s</button>
-                <button class="tablinks" onclick="setCategory(event, new RegExp('19[8-9][0-9]'))">1980s-1990s</button>
-                <button class="tablinks" onclick="setCategory(event, new RegExp('[2-9][0-9][0-9][0-9][^(BCE)]|2008'))">2000s and Beyond</button>
-              </div>
-              <div id="tags" class="tags-grid"></div>
-              <div style="color:white;margin:auto; display:flex;align-items: center;justify-content: center; margin-bottom:10px; gap:10px;">
-                <input placeholder="Filter by mod name" oninput="filterMods(event)" type="text" id="modSearch" name="modSearch"></input>
-                
-                <div>
-                <label for="sorting">Sort by:</label>
-                <select onchange="onChangeModSorter(event)" name="sorting" id="modSorting">
-                  <option value="chrono">Year</option>
-                  <option value="mostFav">Popularity</option>
-                  <option value="leastFav">Nicheness</option>
-                  <option value="mostPlays">Plays</option>
-                </select>
-              </div>
-              </div>
-              <div id="mod-grid" class="community-grid"></div>
-            </div>
-            </div>      
             
             <div id="site_credits" style="text-align: center;">
-              <a href="https://discord.gg/cqgVSNRKDP" style="color:#FF6B6B">We have a Discord server here.</a><br><br>
               <a href="https://github.com/campaign-trail-showcase/campaign-trail-showcase.github.io/blob/main/How%20Tos/How%20to%20Get%20Your%20Mod%20in%20The%20Showcase.md" style="color:#FF6B6B">How to submit a mod to Campaign Trail Showcase</a><br>
-              <a href="https://www.newcampaigntrail.com/campaign-trail/index.html" style="color:#FF6B6B">This site is a fork of The New Campaign Trail created by Decstar and NCT Staff</a><br>
+              <a href="https://www.newcampaigntrail.com/campaign-trail/index.html" style="color:#FF6B6B">This game is a fork of The New Campaign Trail created by Decstar and NCT Staff</a><br>
               <a href="http://www.americanhistoryusa.com" style="color:#FF6B6B">Original site created by Dan Bryan &copy; 2012- <testf id="year">2022</testf></a>
-              <p style="color:#FF6B6B">All DBA award images created by cherrymeringue. Thanks so much!</p>
               <div>
                 <div style="margin-top:10px; display:inline-block;">
                   <button onclick="activateBenefitCheck()" style="border-radius:5px; font-weight:bold;padding:10px;">Benefit Checker</button>
                   <button onclick="activateCheatMenu()" style="border-radius:5px; font-weight:bold;padding:10px;">Cheat Menu</button>
-                  <button id="customThemesButton" onclick="toggleModBoxThemes()" style="border-radius:5px; font-weight:bold;padding:10px;">Loading</button>
                   <button id="mobileModeButton" onclick="toggleMobileMode()" style="border-radius:5px; font-weight:bold;padding:10px;">Loading</button>
                 </div>
               </div>
@@ -231,7 +131,6 @@
         </div>
         <br>
   </body>
-  <!-- <script src="../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
   <script src="../static/js/lib/raphael.js"></script>
   <script src="../static/js/indexCode.js"></script>
   <script src="../static/js/modLoaderCode.js"></script>
@@ -242,7 +141,6 @@
   <script src="../static/js/lib/gradient.js"></script>
   <script src="../static/js/sea_to_sea.js"></script>
   <script src="../static/js/campaign_trail.js"></script>
-  <script src="../static/js/remote.js"></script>
   <script src="../static/js/mobileStyle.js"></script>
   <script>campaignTrail_temp.CTS = true</script>
 </html>
