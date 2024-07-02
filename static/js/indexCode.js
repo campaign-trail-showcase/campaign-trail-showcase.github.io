@@ -127,8 +127,8 @@ nct_stuff.dynamicOverride = false;
 nct_stuff.themes = {
     "tct": {
         name: "Campaign Trail Showcase",
-        background: "../static/images/backgrounds/tct_background.jpg",
-        banner: "../static/images/banners/tct_banner.png",
+        background: "./static/images/backgrounds/tct_background.jpg",
+        banner: "./static/images/banners/tct_banner.png",
         coloring_window: "#727C96",
         coloring_container: "#222449",
         coloring_title: "#3A3360",
@@ -137,7 +137,7 @@ nct_stuff.themes = {
     "classic": {
         name: "Classic",
         background: "",
-        banner: "../static/images/banners/banner_classic.png",
+        banner: "./static/images/banners/banner_classic.png",
         coloring_window: "#E8FBFF",
         coloring_container: "",
         coloring_title: "",
@@ -337,26 +337,26 @@ strCopy = (toCopy) => {
 }
 
 var campaignTrail_temp = {};
-ree = {}
+let ree = {}
 
 campaignTrail_temp.election_json = {}
 campaignTrail_temp.candidate_json = {}
-loadJSON("../static/json/election.json", "campaignTrail_temp.election_json", () => {
+loadJSON("./static/json/election.json", "campaignTrail_temp.election_json", () => {
     ree.election_json = strCopy(campaignTrail_temp.election_json);
 })
-loadJSON("../static/json/candidate.json", "campaignTrail_temp.candidate_json", () => {
+loadJSON("./static/json/candidate.json", "campaignTrail_temp.candidate_json", () => {
     ree.candidate_json = strCopy(campaignTrail_temp.candidate_json);
 })
-loadJSON("../static/json/running_mate.json", "campaignTrail_temp.running_mate_json", () => {
+loadJSON("./static/json/running_mate.json", "campaignTrail_temp.running_mate_json", () => {
     ree.running_mate_json = strCopy(campaignTrail_temp.running_mate_json);
 })
-loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_default_json", () => {
+loadJSON("./static/json/opponents.json", "campaignTrail_temp.opponents_default_json", () => {
     ree.opponents_default_json = strCopy(campaignTrail_temp.opponents_default_json);
 })
-loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_weighted_json", () => {
+loadJSON("./static/json/opponents.json", "campaignTrail_temp.opponents_weighted_json", () => {
     ree.opponents_weighted_json = strCopy(campaignTrail_temp.opponents_weighted_json);
 })
-loadJSON("../static/json/election_list.json", "campaignTrail_temp.temp_election_list", () => {
+loadJSON("./static/json/election_list.json", "campaignTrail_temp.temp_election_list", () => {
     ree.temp_election_list = strCopy(campaignTrail_temp.temp_election_list);
 })
 

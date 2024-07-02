@@ -69,8 +69,10 @@ function getAllAchievements(rawModText, nameOfMod) {
 async function loadMod(modValue) {
     e = campaignTrail_temp;
 
-    const res = await fetch("../static/mods/" + modValue + "_init.html");
+    const res = await fetch("./static/mods/" + modValue + "_init.html");
     const modCode = await res.text();
+
+    document.body.style.display = "initial";
 
     getAllAchievements(modCode, modValue);
 

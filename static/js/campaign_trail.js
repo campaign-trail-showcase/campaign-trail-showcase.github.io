@@ -400,19 +400,6 @@ diff_mod = false
 
 $("#submitMod").click(function() {
     document.getElementById("featured-mods-area").style.display = "none";
-    if ($("#importfile")[0].value != "") {
-        const content = document.querySelector('.content');
-        const [file] = document.querySelector('input[type=file]').files;
-        const reader = new FileReader();
-
-        reader.onload = function(fle) {
-            importedtext = fle.target.result
-            importedtext = encode(importedtext)
-            importedtext = atob(importedtext)
-            campaignTrail_temp.dagakotowaru = importedtext
-        }
-        reader.readAsText(file);
-    }
     if ($("#modSelect")[0].value == "other") {
         important_info = $("#codeset3")[0].value;
         if (important_info != "") {
@@ -424,7 +411,7 @@ $("#submitMod").click(function() {
             moddercheckeror = true
         }
     } else {
-        evalFromUrl("../static/mods/" + $("#modSelect")[0].value + "_init.html")
+        evalFromUrl("./static/mods/" + $("#modSelect")[0].value + "_init.html")
         diff_mod = true
     }
     $("#modloaddiv")[0].style.display = 'none'
@@ -1159,9 +1146,9 @@ function divideElectoralVotesProp(e, t) {
 
     }
 
-    function findFromPK(array, pk) {
-        a = array.map(zzzz => zzzz.pk).indexOf(Number(pk))
-        return a;
+    function findFromPK(arr, pk) {
+        const pkresult = arr.map(zzzz => zzzz.pk).indexOf(Number(pk))
+        return pkresult;
     }
 
     function realityCheck(cand, running_mate, ree) { //checks if we are actually looking at a real candidate pairing
@@ -1179,12 +1166,17 @@ function divideElectoralVotesProp(e, t) {
     function election_HTML(id, cand, running_mate) {
         if (id != 16) {
             if (modded) {
+                let yearbit = null;
+                let lastnamebit = null;
+                let veeplastname = null;
                 try {
                     // ree = the actual base election json unmodded
                     yearbit = ree.election_json[findFromPK(ree.election_json, id)].fields.year
                     lastnamebit = ree.candidate_json[findFromPK(ree.candidate_json, campaignTrail_temp.candidate_id)].fields.last_name
                     veeplastname = ree.candidate_json[findFromPK(ree.candidate_json, campaignTrail_temp.running_mate_id)].fields.last_name
-                } catch {}
+                } catch(err) {
+                    console.log("Err when getting election html", err);
+                }
 
                 // Check if this is a base scenario and if so we need the specific base scenario code 2. Otherwise we can use whatever one with the same year.
                 real = realityCheck(cand, running_mate, ree)
@@ -1294,7 +1286,7 @@ function divideElectoralVotesProp(e, t) {
                     }
                     if (modded == false) {
                         aaa = election_HTML(t, i, a)
-                        aaa = "../static/questionset/" + aaa
+                        aaa = "./static/questionset/" + aaa
                         $("#game_window").load(aaa, () => {
                             let e = A(2);
                             oFunc(e);
@@ -1313,7 +1305,7 @@ function divideElectoralVotesProp(e, t) {
                         }, 1000);
                     } else if (loadingFromModButton) {
                         aaa = election_HTML(t, i, a)
-                        aaa = "../static/questionset/" + aaa
+                        aaa = "./static/questionset/" + aaa
                         try {
                             $("#game_window").load(aaa, function() {
                                 e = campaignTrail_temp
@@ -1324,14 +1316,14 @@ function divideElectoralVotesProp(e, t) {
 
                                 theorId = year+"_"+cand+run
                                 //theorId = $("#modSelect")[0].value
-                                evalFromUrl( "../static/mods/" + theorId + ".html", () => {
+                                evalFromUrl( "./static/mods/" + theorId + ".html", () => {
                                     tempFuncO=function(e,i=campaignTrail_temp){if(e.collect_results){let a = A(2);e.current_results = [getLatestRes(a)[0], a]}for(var s=[],a=0;a<i.answers_json.length&&(i.answers_json[a].fields.question!=i.questions_json[i.question_number].pk||(s.push({key:a,order:Math.random()}),4!=s.length));a+=1){};P(s,"order");for(var t="",a=0;a<s.length;a+=1){t+='<input type="radio" name="game_answers" class="game_answers"             id="game_answers['+a.toString()+']" value="'+i.answers_json[s[a].key].pk+'"/>\t\t    <label for="game_answers['+a.toString()+']">'+i.answers_json[s[a].key].fields.description+"</label><br>"}var r='<div class="game_header">    <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>'+i.questions_json[i.question_number].fields.description+'</h3>            <div id="question_form">                <form name="question">'+t+'</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="'+i.candidate_image_url+'">    <img id="running_mate_pic" src="'+i.running_mate_image_url+'">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question '+(i.question_number+1)+" of "+i.global_parameter_json[0].fields.question_count+'</h3>        </div>        <div id="campaign_sign">        <p>'+i.candidate_last_name+"</p>        <p>"+i.running_mate_last_name+"</p>        </div>    </div>";$("#game_window").html(r)};
                                     tempFuncO(e);
                                 });
                                 
                                
                                 
-                                endingUrl = "../static/mods/" + theorId + "_ending.html"
+                                endingUrl = "./static/mods/" + theorId + "_ending.html"
 
                                 try {
                                     if (fileExists(endingUrl)) {
@@ -1366,7 +1358,7 @@ function divideElectoralVotesProp(e, t) {
                     } else {
                         // other block case
                         aaa = election_HTML(t, i, a)
-                        aaa = "../static/questionset/" + aaa
+                        aaa = "./static/questionset/" + aaa
                         $("#game_window").load(aaa, function() {
                             eval($("#codeset2")[0].value);
                             tempFuncO=function(e,i=campaignTrail_temp){if(e.collect_results){let a = A(2);e.current_results = [getLatestRes(a)[0], a]}for(var s=[],a=0;a<i.answers_json.length&&(i.answers_json[a].fields.question!=i.questions_json[i.question_number].pk||(s.push({key:a,order:Math.random()}),4!=s.length));a+=1){};P(s,"order");for(var t="",a=0;a<s.length;a+=1){t+='<input type="radio" name="game_answers" class="game_answers"             id="game_answers['+a.toString()+']" value="'+i.answers_json[s[a].key].pk+'"/>\t\t    <label for="game_answers['+a.toString()+']">'+i.answers_json[s[a].key].fields.description+"</label><br>"}var r='<div class="game_header">    <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>'+i.questions_json[i.question_number].fields.description+'</h3>            <div id="question_form">                <form name="question">'+t+'</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="'+i.candidate_image_url+'">    <img id="running_mate_pic" src="'+i.running_mate_image_url+'">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question '+(i.question_number+1)+" of "+i.global_parameter_json[0].fields.question_count+'</h3>        </div>        <div id="campaign_sign">        <p>'+i.candidate_last_name+"</p>        <p>"+i.running_mate_last_name+"</p>        </div>    </div>";$("#game_window").html(r)};
@@ -1483,9 +1475,6 @@ function divideElectoralVotesProp(e, t) {
                 $("#map_container").usmap(t)
             }(t) : o(t)
         } else o(t)
-        if ($("#importfile")[0].value != "") {
-            importgame(e.dagakotowaru)
-        }
     }
 
     function n(t) {
