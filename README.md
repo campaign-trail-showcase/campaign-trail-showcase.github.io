@@ -30,6 +30,7 @@ Install this extension by following the instructions on the page and make a live
     - main.js
     - package-lock.json
     - package.json
+    - force.config.js
     - out (a folder, if it exists)
 2. Make an itch.io account if you don't have one already
 3. Press the Upload new project button to the right of your username.
