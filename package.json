@@ -1,0 +1,11 @@
+{
+  "name": "the-community-trail",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^31.1.0"
+  }
+}

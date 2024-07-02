@@ -12,6 +12,8 @@ Where DISPLAYYEAR is the display_year set in your Code 1, and the candidate last
 
 After that you will need to change modLoaderCode.js. Replace the references to "2004 - W" with your DISPLAYYEAR. Replace the W. with what the mod is actually called. 
 
+In index.html replace W. with your mod name too.
+
 # Testing It Works
 
 To test it works, I reccomend using Visual Studio Code and the Live Server extension. 
@@ -22,7 +24,12 @@ Install this extension by following the instructions on the page and make a live
 
 # Uploading to itch.io
 
-1. Zip up the whole folder (excluding anything that says git) with index.html in the root folder. 
+1. Zip up the whole folder EXCEPT FOR THE FOLLOWING:
+    - node_modules
+    - Anything that says git
+    - main.js
+    - package-lock.json
+    - package.json
 2. Make an itch.io account if you don't have one already
 3. Press the Upload new project button to the right of your username.
 4. Fill out your project details. Be creative! 
