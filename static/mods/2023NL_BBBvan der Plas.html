@@ -4,7 +4,7 @@
     { party: 105, leaderName: 'Keijzer', image: 'https://i.imgur.com/oG0KYdQ.png' },
     { party: 106, leaderName: 'Timmermans', image: 'https://i.imgur.com/1G3KNLr.png' },
     { party: 24, leaderName: 'Jetten', image: 'https://i.imgur.com/qHura3w.png' },
-    { party: 20, leaderName: 'Postma', image: 'https://i.imgur.com/TZfIx93.png' },
+    { party: 20, leaderName: 'Van Hijum', image: 'https://i.imgur.com/A6eOImW.png' },
     { party: 23, leaderName: 'Yeşilgöz', image: 'https://i.imgur.com/tFzIPQT.png' },
     { party: 25, leaderName: 'Wilders', image: 'https://i.imgur.com/wPBwa6n.png' },
     { party: 21, leaderName: 'Bontenbal', image: 'https://i.imgur.com/KgDSaZD.png' },
@@ -480,7 +480,7 @@ return questionSheath[index];
 
   // Define a list of possible coalitions
   const coalitions = [
-    { id: 1, name: 'GL/PvdA, VVD and D66', weight: 0.8, parties: [24, 23, 106], impossibleCoalitions: [3, 5, 6, 7] }, 
+    { id: 1, name: 'GL/PvdA, VVD and D66', weight: 0.8, parties: [24, 23, 106], impossibleCoalitions: [3, 5, 6, 7, 57] }, 
     { id: 2, name: 'GL/PvdA, VVD and Volt', weight: 0.8, parties: [23, 79, 106], impossibleCoalitions: [3, 6, 7] },
     { id: 3, name: 'GL/PvdA, VVD, D66 and Volt', weight: 0.5, parties: [24, 23, 79, 106], impossibleCoalitions: [7] },
     { id: 4, name: 'GL/PvdA, VVD and CDA', weight: 0.8, parties: [21, 23, 106], impossibleCoalitions: [5, 6, 7, 9] },
@@ -733,6 +733,7 @@ return questionSheath[index];
               newYouTubeMusicPlayer(songChoice);
               musicHasBeenEnabled = true;
             }
+            unlockAchievementSafe("ComeBBBack);
             return construct(0);
         }
         if (aa[0].candidate == 25) { // PVV Wins
@@ -988,7 +989,7 @@ return questionSheath[index];
           negotiationLength = "It's a nice Sunday afternoon on the 28th of April when king Willem-Alexander can finally take the oaths of the new ministers"
         }
         else if(selectedCoalition.weight > 2.0) {
-          negotiationLength = "It's a hot Tuesday afternoon on the 2nd of July when, after a formation that to the annoyance of many took more than 200 days for the third time in a row, king Willem-Alexander can finally take the oaths of the new ministers"
+          negotiationLength = "It's a cloudy Tuesday afternoon on the 2nd of July when, after a formation that to the annoyance of many took more than 200 days for the third time in a row, king Willem-Alexander can finally take the oaths of the new ministers"
         }
         else if(selectedCoalition.weight > 1.0) {
           negotiationLength = "It's a warm Monday afternoon on the 9th of September when, after the most horrifyingly long-winded formation in Dutch political history, which shattered all previous records, the new ministers can finally be sworn in by King Willem-Alexander"

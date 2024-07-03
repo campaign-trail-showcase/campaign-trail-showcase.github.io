@@ -4,7 +4,7 @@
     { party: 105, leaderName: 'Keijzer', image: 'https://i.imgur.com/oG0KYdQ.png' },
     { party: 106, leaderName: 'Klaver', image: 'https://i.imgur.com/IDgOiJy.png' },
     { party: 24, leaderName: 'Jetten', image: 'https://i.imgur.com/qHura3w.png' },
-    { party: 20, leaderName: 'Postma', image: 'https://i.imgur.com/TZfIx93.png' },
+    { party: 20, leaderName: 'Van Hijum', image: 'https://i.imgur.com/A6eOImW.png' },
     { party: 23, leaderName: 'Yeşilgöz', image: 'https://i.imgur.com/tFzIPQT.png' },
     { party: 25, leaderName: 'Wilders', image: 'https://i.imgur.com/wPBwa6n.png' },
     { party: 21, leaderName: 'Bontenbal', image: 'https://i.imgur.com/KgDSaZD.png' },
@@ -690,7 +690,7 @@ return questionSheath[index];
 
   // Define a list of possible coalitions
   const coalitions = [
-    { id: 1, name: 'GL/PvdA, VVD and D66', weight: 0.8, parties: [24, 23, 106], impossibleCoalitions: [3, 5, 6, 7] }, 
+    { id: 1, name: 'GL/PvdA, VVD and D66', weight: 0.8, parties: [24, 23, 106], impossibleCoalitions: [3, 5, 6, 7, 57] }, 
     { id: 2, name: 'GL/PvdA, VVD and Volt', weight: 0.8, parties: [23, 79, 106], impossibleCoalitions: [3, 6, 7] },
     { id: 3, name: 'GL/PvdA, VVD, D66 and Volt', weight: 0.5, parties: [24, 23, 79, 106], impossibleCoalitions: [7] },
     { id: 4, name: 'GL/PvdA, VVD and CDA', weight: 0.8, parties: [21, 23, 106], impossibleCoalitions: [5, 6, 7, 9] },
@@ -757,7 +757,7 @@ return questionSheath[index];
     { id: 55, name: 'PVV, VVD and BBB (minority)', weight: 0.6, parties: [25, 23, 105, 68, 117, 20], impossibleCoalitions: [] },
     { id: 56, name: 'PVV, NSC and BBB (minority)', weight: 0.6, parties: [25, 23, 105, 68, 117, 20], impossibleCoalitions: [] },
     { id: 57, name: 'GL/PvdA, VVD and D66 (minority)', weight: 0.4, parties: [24, 21, 23, 79, 106], impossibleCoalitions: [] },
-    { id: 61, name: 'GL, PvdA, VVD and D66', weight: 0.8, parties: [24, 23, 106, 116], impossibleCoalitions: [63, 65, 66, 67] }, 
+    { id: 61, name: 'GL, PvdA, VVD and D66', weight: 0.8, parties: [24, 23, 106, 116], impossibleCoalitions: [63, 65, 66, 67, 95] }, 
     { id: 62, name: 'GL, PvdA, VVD and Volt', weight: 0.8, parties: [23, 79, 106, 116], impossibleCoalitions: [63] },
     { id: 63, name: 'GL, PvdA, VVD, D66 and Volt', weight: 0.5, parties: [24, 23, 79, 106, 116], impossibleCoalitions: [] },
     { id: 64, name: 'GL, PvdA, VVD and CDA', weight: 0.8, parties: [21, 23, 106, 116], impossibleCoalitions: [65, 66, 67, 69] },
@@ -777,7 +777,7 @@ return questionSheath[index];
     { id: 77, name: 'GL, PvdA and NSC', weight: 1.0, parties: [106, 20, 116], impossibleCoalitions: [78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95] },
     { id: 78, name: 'PvdA, NSC and BBB', weight: 1.0, parties: [20, 105, 116], impossibleCoalitions: [78, 79, 80, 81, 82, 83, 84, 85] },
     { id: 79, name: 'PvdA, NSC, BBB and SP', weight: 0.9, parties: [20, 105, 67, 116], impossibleCoalitions: [82, 84, 85] },
-    { id: 80, name: 'PvdA, NSC, BBB and CDA', weight: 0.8, parties: [20, 105, 21, 116], impossibleCoalitions: [82, 83, 85] },
+    { id: 80, name: 'PvdA, NSC, BBB and CDA', weight: 0.8, parties: [20, 105, 21, 116], impossibleCoalitions: [82, 83, 85, 94] },
     { id: 81, name: 'PvdA, NSC, BBB and CU', weight: 0.9, parties: [20, 105, 78, 116], impossibleCoalitions: [83, 84, 85] },
     { id: 82, name: 'PvdA, NSC, BBB, CDA and SP', weight: 0.9, parties: [20, 105, 21, 67, 116], impossibleCoalitions: [85] },
     { id: 83, name: 'PvdA, NSC, BBB, CDA and CU', weight: 0.9, parties: [20, 105, 21, 78, 116], impossibleCoalitions: [85] },
@@ -1398,7 +1398,7 @@ return questionSheath[index];
           negotiationLength = "It's a nice Sunday afternoon on the 28th of April when king Willem-Alexander can finally take the oaths of the new ministers"
         }
         else if(selectedCoalition.weight > 2.0) {
-          negotiationLength = "It's a hot Tuesday afternoon on the 2nd of July when, after a formation that to the annoyance of many took more than 200 days for the third time in a row, king Willem-Alexander can finally take the oaths of the new ministers"
+          negotiationLength = "It's a cloudy Tuesday afternoon on the 2nd of July when, after a formation that to the annoyance of many took more than 200 days for the third time in a row, king Willem-Alexander can finally take the oaths of the new ministers"
         }
         else if(selectedCoalition.weight > 1.0) {
           negotiationLength = "It's a warm Monday afternoon on the 9th of September when, after the most horrifyingly long-winded formation in Dutch political history, which shattered all previous records, the new ministers can finally be sworn in by King Willem-Alexander"
@@ -1417,6 +1417,7 @@ return questionSheath[index];
             e.header = "<h2>“Samen Vooruit naar Morgen”</h2>"
             e.pages = [`<p>${negotiationLength}. The first ${leader.leaderName} cabinet is a fact with the conclusion of its governing agreement, titled "Together Forwards to Tomorrow". It is composed of ${selectedCoalition.name}, making it in essence the fourth purple cabinet with its two main characters, GL/PvdA and VVD.</p><p>In that sense it's a typical polder-result: you can be sure that neither you nor the VVD were pumped for this marriage. This same lack of enthusiasm exists in the rest of society, frankly: your own supporters bemoan that the VVD is in the executive again, and those on the right are clearly disappointed that we will now get the fourth centrist 'watery compromise'-laden cabinet in a row. You and the VVD are both already suffering in the polls as a result.</p><p>${playerFate}</p>`]
             e.image = leader.image;
+            unlockAchievementSafe("Liever Turks dan Paaps");
             return construct(0);
         }
         if (selectedCoalition.id > 9 && selectedCoalition.id < 17) { // Vivaldi cabinet
@@ -1650,8 +1651,8 @@ var myChart = Highcharts.chart('myChart', {
           ['Socialist Party', SPSeats.electoral_votes, '#450101', 'SP'],
           ['GroenLinks/PvdA', LOSeats.electoral_votes, '#D90000', 'GL/PvdA'],
           ['Animal Party', PvdDSeats.electoral_votes, '#1B4D1C', 'PvdD'],
-          ['GroenLinks', BIJ1Seats.electoral_votes, '#D90000', 'PvdA'],
-          ['Labour Party', GLSeats.electoral_votes, '#39A935', 'GL'],
+          ['GroenLinks', GLSeats.electoral_votes, '#39A935', 'GL'],
+          ['Labour Party', BIJ1Seats.electoral_votes, '#D90000', 'PvdA'],
           ['DENK', DENKSeats.electoral_votes, '#9CC1C1', 'DENK'],
           ['Democrats \'66', D66Seats.electoral_votes, '#84CF84', 'D66'],
           ['Volt', VoltSeats.electoral_votes, '#AA00FF', 'Volt'],
