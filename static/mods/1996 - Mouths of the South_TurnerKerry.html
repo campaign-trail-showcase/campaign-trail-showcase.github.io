@@ -16517,6 +16517,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 
     if (e.player_answers.includes(3309) && aa[0].electoral_votes > 269 && orderID[0] == 77){
         playerlost = true;
+        ctsAchievement("The Washington Screwjob");
     }
 
     if (e.player_answers.includes(3286) || e.player_answers.includes(3540)){
@@ -17008,6 +17009,10 @@ endingPicker = (out, totv, aa, quickstats) => {
     
     if (quickstats[0] >= 269 && e.player_answers.includes(3326)) {
     ctsAchievement("Jesus Freaks");
+    }
+
+    if (e.player_answers.includes(3499) && aa[0].electoral_votes <= 269 && orderID[0] == 79) {
+    ctsAchievement("Bozo");
     }
     
     let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 206);
