@@ -2,3 +2,5 @@
 static/.DS_Store
 .DS_Store
 .vscode/settings.json
+/out/
+node_modules

@@ -91,6 +91,11 @@ function addAllAchievements() {
     let names = Object.keys(allAch).sort();
     for(let i = 0; i < names.length; i++) {
         const modName = names[i];
+
+        if(allAch[modName] === null || allAch[modName] === undefined) {
+            continue;
+        }
+
         let count = 0;
         let total = Object.values(allAch[modName]).length;
         achAvail = true;
