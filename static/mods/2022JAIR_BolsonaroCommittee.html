@@ -476,11 +476,12 @@ cyoAdventure = function (a) {
     if(ans == 14493){
         CoupPower += 3;
     }
-    if(ans == 14493){
+    if(ans == 14495){
         CoupPower -= 1;
     }
-    if(ans == 14498){
+    if(ans == 14497){
         CollapseOfCoup += 1;
+        campaignTrail_temp.question_number = 24
     }
     if(ans == 14500){
         CivilWar += 1;
@@ -8098,6 +8099,15 @@ campaignTrail_temp.multiple_endings = true;
         ctsAchievement("We Don't Need Ro(un)ds"); 
         return construct(0);
     }
+    else if(JairCoupEnabled == 1 && CollapseOfCoup == 1) { //coup fail
+        e.image = ["https://files.catbox.moe/bez9fh.png"];
+        e.header = "<cetxt><h3>Political Science</h3></cetxt>";
+        e.pages = ["<cetxt><p><h3>HERE LIES</h3><br>JAIR M.<br>BOLSONARO<br>BELOVED FAMILY MAN AND PRESIDENT OF BRAZIL 2018-2023<br>1955-2023<br><i>donation of the Military Club</i><br><br>The man was not there. He had been lynched and sent to a common grave. The caretaker government, of course, had only a token interest in recovering his body. And just like that, Jair M. Bolsonaro would become a simple, hateful regret of Brazil's history.</p></cetxt>"];
+        ctsAchievement("Row The Boat Ashore");
+        ctsAchievement("Glass Cannon");
+        ending4();
+        return construct(0);
+    }
     else if(CoupPower >= 10 && e.player_answers.includes(14502)) { //massacre edition
         e.image = ["https://files.catbox.moe/6bskgf.png"];
         e.header = "<cetxt><h3>Enfant Terrible</h3></cetxt>";
@@ -8120,15 +8130,6 @@ campaignTrail_temp.multiple_endings = true;
         e.pages = ["<cetxt><p>The atmosphere in Brasília was holocaustic. Bolsonaro had done a botched attempt at a coup and the entire Brazilian Army went into mobilization. Blood was pouring and flowing like rivers of horror throughout the Plano Piloto, and the entire World watched in absolute despair as thousands more were sent to new frontlines etched in one of the world's least warring countries. Families were split, frontier justice took hold and gang factions seized territory. The country had fallen into civil war -- and Bolsonaro sat in the Capital, guarded by two thousand elite soldiers who watched every move around the Plano Piloto. Bolsonaro may have lost the rest of the country, but here... He was President. Here, he still held the country...<br>Oh, God...</p></cetxt>"];
         ctsAchievement("Dust To Dust");
         ending3();
-        return construct(0);
-    }
-    else if(JairCoupEnabled == 1 && CoupPower <= 9 || e.player_answers.includes(14497) || e.player_answers.includes(14500)) { //coup fail
-        e.image = ["https://files.catbox.moe/bez9fh.png"];
-        e.header = "<cetxt><h3>Political Science</h3></cetxt>";
-        e.pages = ["<cetxt><p><h3>HERE LIES</h3><br>JAIR M.<br>BOLSONARO<br>BELOVED FAMILY MAN AND PRESIDENT OF BRAZIL 2018-2023<br>1955-2023<br><i>donation of the Military Club</i><br><br>The man was not there. He had been lynched and sent to a common grave. The caretaker government, of course, had only a token interest in recovering his body. And just like that, Jair M. Bolsonaro would become a simple, hateful regret of Brazil's history.</p></cetxt>"];
-        ctsAchievement("Row The Boat Ashore");
-        ctsAchievement("Glass Cannon");
-        ending4();
         return construct(0);
     }
     else if(quickstats[1] > 42.99 && JairEvil >= 2) { //stole the election, but won by the skin of your teeth
