@@ -5,6 +5,8 @@ function ctsAchievement(achievement, difficultyChecker = true){
 	}
 }
 
+marsh = 0;
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -20053,7 +20055,7 @@ used=false
 //quickstats = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
 ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 
-if (quickstats[0] >= 128 && ans != 4275) { 
+if (quickstats[0] >= 128 && marsh == 0) { 
     ctsAchievement("How Does He Do It?");  
 }
 
@@ -20385,6 +20387,7 @@ cyoAdventure = function (a) {
       }
     }
     if(ans == 4275){
+        marsh += 1;
         // Sets everything at the start up to Marshall if Wilson resigns
             console.log("done");
             switcheroo();
@@ -20484,7 +20487,7 @@ cyoAdventure = function (a) {
 ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 
 // Sets image back to Cox if you do not convince Wilson to resign
-   if(ans == 4272){
+if(ans == 4272){
     campaignTrail_temp.candidate_image_url = 'https://itsastronomical.com/assets/1920/cox.png';
     campaignTrail_temp.running_mate_image_url = 'https://itsastronomical.com/assets/1920/cox_button.png';
     campaignTrail_temp.candidate_last_name = 'Cox';
