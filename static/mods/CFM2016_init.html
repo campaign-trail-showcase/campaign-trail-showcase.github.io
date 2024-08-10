@@ -1,0 +1,489 @@
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 24,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2016,
+            "summary": "<p>Donald J. Trump, well known businessman, less well known politician, won the Republican nomination for president. His nomination shocked the American political landscape. It was so shocking, in fact, that, upon hearing the news, Hillary Clinton, the already confirmed Democratic nominee, fainted. While doctors confirmed it was nothing too serious, they were strongly opposed to her running a full political campaign. The next few days at the DNC were total chaos. Desks were flipped, chairs were hurled, Sander's phone calls were ignored, and an air of doom and gloom lingered around the cold rooms of the committe. That is until <strong>he</strong> showed up, sporting a cowboy hat, an American flag-colored medieval armor, luscious beard and hair, and a scent of weed and honey. His name was Cheeseburger Freedom Man, but they would come to know him as their last chance.</p>",
+            "image_url": "https://bigmemes123.funnyjunk.com/comments/No+its+from+cheeseburger+freedom+mans+campaign+truly+the+_a72fec42b13f8b4032fca7784b1d7fdb.jpg",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://static.wikia.nocookie.net/vinesauce/images/0/0d/Big_Joel.jpg",
+            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">Articles</h4>FiveThirtyEight - <a href=\"http://projects.fivethirtyeight.com/2016-swing-the-election/\" target=\"_blank\"> What Would It Take To Turn Blue States Red?</a></br><a href=\"http://thehill.com/blogs/ballot-box/presidential-races/274317-anti-trump-forces-point-to-losing-match-ups-with-clinton\">Anti-Trump forces seize on grim polls for Clinton match-up</a></br><a href=\"http://www.slate.com/blogs/the_slatest/2016/02/24/donald_trump_could_beat_hillary_clinton_in_the_general.html\">Think Hillary Clinton Will Crush Donald Trump in the General Election? Don’t Be So Sure.</a></br><a href=\"http://www.slate.com/blogs/the_slatest/2016/03/01/hillary_clinton_plots_her_general_election_trump_strategy.html\">How Team Clinton Is Planning to Defeat Trump</a></br><a href=\"http://www.vox.com/2016/2/10/10961324/donald-trump-win-november\">Here's Donald Trump's Best Strategy for Winning the White House</a><h4>Books</h4>\nHillary Clinton - <a href=\"http://www.amazon.com/exec/obidos/ASIN/1476751471/amhius20-20\" target=\"_blank\">Hard Choices</a></br>\nHillary Clinton - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0743222253/amhius20-20\" target=\"_blank\">Living History</a></br>\nDonald Trump - <a href=\"http://www.amazon.com/exec/obidos/ASIN/1501137964/amhius20-20\" target=\"_blank\">Crippled America: How to Make America Great Again</a></br>\nDonald Trump - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0399594493/amhius20-20\" target=\"_blank\">The Art of the Deal</a></br>\nGary Johnson - <a href=\"http://www.amazon.com/exec/obidos/ASIN/B008PXW0C0/amhius20-20\" target=\"_blank\">Seven Principles of Good Government</a>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "CFM2016"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 200,
+        "fields": {
+            "first_name": "Donald",
+            "last_name": "Trump",
+            "election": 20,
+            "party": "Republican",
+            "state": "New York",
+            "priority": 1,
+            "description": "<p>Donald Trump has shocked the political establishment by winning the Republican nomination in a divisive contest. He has taken a hard line on immigration and tax cuts, along with unorthodox positions on many other issues. He must unite his own party while finding some way to peel off potential Clinton voters -- or to blunt their enthusiasm for Clinton enough that they stay home. Will he continue the strategy of relentless attack that served him so well in the primary season?</p>",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/donald-trump-2016.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2016 election.</h3><p>In spite of a hard-fought challenge from Hillary Clinton, you have shocked the world with your election victory.</p><p>On the political front, you have the bully pulpit in your favor, but support in Congress in uncertain. Will you govern as a more traditional conservative, or will you make a break from orthodoxy?</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2016 election.</h3><p>Many of your supporters are despondent that you have faltered to the likes of Hillary Clinton. Republicans in general believe this was a very winnable election, and are enraged that you came in to blow it. Luckily, there are any number of ways for you to take advantage of your newfound exposure. One rumor even has you founding a television station to profit from the aggrieved sensibilities of your followers. The future is in your hands.</p>",
+            "no_electoral_majority_message": "<h3>Wow! You have pulled out 2016 election.</h3><p>No candidate secured a majority in the Electoral College. However, the Republicans won a majority in Congress and will elevate you to the Presidency. Time will tell how things go in that regard. Any mutual affection between you and Congress is predicted to be short-lived, but you've pulled off a number of surprises to get this far.</p>",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 201,
+        "fields": {
+            "first_name": "Cheeseburger",
+            "last_name": "Freedom Man",
+            "election": 20,
+            "party": "Democrat",
+            "state": "Minnesota",
+            "priority": 2,
+            "description": "<p>Freedom Man enters the election as the latest curveball of the political world. After his underwhelming run as an Indepenent in the 2012 Election, Freedom Man disappeared from the political scene to cryofreeze himself to a year in which pot would be legal. However, he decided to cut corners by using cold Pepsi cans instead of liquid nitrogen. As such, the cryofreeze only lasted for a few years, leaving him with freakish blue skin.</p><p> He'll have to skirt by many icebergs to avoid sinking his campaign. For one, his base isn't united, with many prominent Democrats labelling him a \"radical\", a \"pothead\" and an \"asylum escapee\". Then there's also the issue of defining himself more clearly on a political level; while it was his charm and off-the-wall attitude that entrusted him the nomination, he may have to tone himself down to win over moderates still on the fence in crucial swing states. Will he be able to appeal to as many voters as possible without alienating his base to pull off a great upset, or will he be another Mondale?</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://pbs.twimg.com/profile_images/1030182650277965824/yFf8wr5z_400x400.jpg",
+            "electoral_victory_message": "<h3>Oooooo! You have won the 2016 Election!</h3><p>The Democrats have managed to avoid a certain political wallop, and it's all thanks to you!</p><p>On the political front, it is unclear what you will actually plan to do, although many Americans have been sent into a frenzy over your victory speech, which promises free pizza for your supporters, and deportation to space for Trump's. Whichever direction you're planning to follow, your loyal supporters will always have your back no matter what.</p><p>A new age of darkness and evil has been brought to the world.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2016 election.</h3><p>You fought with everything you had, but it wasn't enough. Perhaps your base was unsure about you, perhaps you didn't appeal to enough moderates, perhaps the United States simply weren't ready for Cheeseburger Freedom Man just yet.</p><p>Considering that you essentially were the last, \"break-in-case-of-fire\", resort for the Dems, it's very unlikely that you will be nominated again, especially since Clinton has already announced her interest for a run in 2020.</p><p>Time to break out those cans of Pepsi, Cheeseburger.</p>",
+            "no_electoral_majority_message": "<h3>REPORTS OF ALIEN SIGHTINGS UP BY 30%</h3><p>In the past few weeks, there has been a noticeable uptick in reports of extraterrestrial life-forms. \"The goverment is hiding this stuff from us\", one believer said, \"but they won't be able to keep hiding it for much longer. I saw them! They tried to abduct me! I thought it was just my sleep deprivation, but... they're out there! Trsut me!\". Following these reports, a signal station in the desert has reportedly gone offline, and has apparently not made any communications in the last 48 hours. Officials say that they're trying to get back in touch with the station, but the attempts made have so far been futile. More at 6.</p>",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 202,
+        "fields": {
+            "first_name": "Gary",
+            "last_name": "Johnson/Others",
+            "election": 20,
+            "party": "Libertarian",
+            "state": "New Mexico",
+            "priority": 3,
+            "description": "'",
+            "color_hex": "#FFFF00",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 203,
+        "fields": {
+            "first_name": "Jill",
+            "last_name": "Stein",
+            "election": 20,
+            "party": "Green",
+            "state": "Massachusetts",
+            "priority": 4,
+            "description": "'",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 204,
+        "fields": {
+            "first_name": "Mike",
+            "last_name": "Pence",
+            "election": 20,
+            "party": "Republican",
+            "state": "Indiana",
+            "priority": 5,
+            "description": "'",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/mike-pence-2016.jpg",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>Mike Pence is a former Congressman and the current Governor of Indiana. He is a popular figure among social conservatives and would help assuage concern about Trump among party insiders. He would add executive experience to the ticket and make few mistakes on the campaign trail, but he could also undercut Trump's outsider credentials.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 205,
+        "fields": {
+            "first_name": "Chris",
+            "last_name": "Christie",
+            "election": 20,
+            "party": "Republican",
+            "state": "New Jersey",
+            "priority": 6,
+            "description": "'",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/chris-christie-2016.jpg",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>Chris Christie is the current Governor of New Jersey, and was Trump's first opponent to endorse him, after making his own bid for the Republican nomination. Christie once enjoyed significant bipartisan support in New Jersey, but that has plummeted. His selection would double-down on Trump's image as an unorthodox, East Coast-influenced Republican. This may or may not be helpful.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 208,
+        "fields": {
+            "first_name": "Sarah",
+            "last_name": "Palin",
+            "election": 20,
+            "party": "Republican",
+            "state": "Alaska",
+            "priority": 7,
+            "description": "'",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/sarah-palin-2016.jpg",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>Sarah Palin is the former Governor of Alaska and ill-fated running mate on John McCain's 2008 ticket. Many people believe that she alienated some moderate support and may have cost McCain the election. On the other hand, she endorsed your candidacy relatively early and is still something of a folk hero on the right. In any case, she would certainly help you grab an even greater share of the headlines this fall.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 206,
+        "fields": {
+            "first_name": "Ben",
+            "last_name": "Carson",
+            "election": 20,
+            "party": "Republican",
+            "state": "Michigan",
+            "priority": 7,
+            "description": "'",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/ben-carson-2016.jpg",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>Ben Carson was a candidate for President in 2016, with a long history within the evangelical community. He has never served in political office, a fact which may be an asset in this election. Carson was one of the Trump's first opponents to publicly endorse him, and he consistently polled relatively high in the black community during the primary season. However, he has also made a number of bizarre statements and may be vulnerable to a sustained attack campaign.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 207,
+        "fields": {
+            "first_name": "Jeff",
+            "last_name": "Sessions",
+            "election": 20,
+            "party": "Republican",
+            "state": "Alabama",
+            "priority": 8,
+            "description": "'",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/jeff-sessions-2016.jpg",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>Jeff Sessions, a Senator from Alabama, was the first major Republican politician to endorse your candidacy. He could help shore up some potentially shaky support on the right of the Republican party. Conversely, Alabama is not competitive, and sustained attacks on Hillary Clinton may be all that is needed to keep that wing in line.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 209,
+        "fields": {
+            "first_name": "Bill",
+            "last_name": "Clinton",
+            "election": 20,
+            "party": "Democrat",
+            "state": "Arkansas... or was it New York? Doesn't matter.",
+            "priority": 9,
+            "description": "'",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Bill_Clinton_DNC_July_2016_%28cropped%29.jpg/669px-Bill_Clinton_DNC_July_2016_%28cropped%29.jpg",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>This was never supposed to happen. This was never in the script. It was meant to be a cakewalk. It was meant to be her coronation. It was meant to be her reward after suffering because of her husband's infidelity for years.</p><p>He tried to kill her. He knew she would have steamrolled him, so he tried to kill her. He knew that he would have finally felt at peace after she won, so he made sure that that couldn't happen. He must avenge her. He must avenge himself.</p><p>He's been out of the process for a while now. So what? It doesn't matter. He still knows his way around DC. He still knows how to keep the spotlight on him. He still knows what it's like to be the centre of controversy.</p><p>Politically speaking, he could help bring geographical balance to the ticket, in one area or the other, as well as make Freedom Man more palatable to neo-liberals and establishment moderates alike, though it could dampen the energy of his campaign. But that's ok. Sacrifices must be made to achieve greatness. No one knows that better than Billy.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 214,
+        "fields": {
+            "first_name": "William",
+            "last_name": "Weld",
+            "election": 20,
+            "party": "Libertarian",
+            "state": "Massachusetts",
+            "priority": 14,
+            "description": "'",
+            "color_hex": "#FFFF00",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 215,
+        "fields": {
+            "first_name": "Ajamu",
+            "last_name": "Baraka",
+            "election": 20,
+            "party": "Green",
+            "state": "Washington DC",
+            "priority": 15,
+            "description": "'",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 155,
+        "fields": {
+            "candidate": 201,
+            "running_mate": 209
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 150,
+        "fields": {
+            "candidate": 200,
+            "running_mate": 204
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 151,
+        "fields": {
+            "candidate": 200,
+            "running_mate": 205
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 153,
+        "fields": {
+            "candidate": 200,
+            "running_mate": 207
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 152,
+        "fields": {
+            "candidate": 200,
+            "running_mate": 206
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 154,
+        "fields": {
+            "candidate": 200,
+            "running_mate": 208
+        }
+    }
+]
+
+campaignTrail_temp.credits = "Dan Bryan's evil twin [u/LE_V7] using Jet's Code 1 & 2 tools (Special thanks to Decstar for the TCT ipod!)"
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            200,
+            201,
+            202,
+            203
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            200,
+            201,
+            202,
+            203
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2016,
+        "is_premium": 0,
+        "display_year": "CFM2016"
+    }
+]
+
+jet_data = {
+    "headerColor": "#bd0026",
+    "windowColor": "#cacaca",
+    "containerColor": "#004080",
+    "innerWindowColor": "#0059b3",
+    "bannerImageUrl": "https://media.discordapp.net/attachments/1265745796133814282/1271833987660120164/Senza_titolo.jpg?ex=66b8c734&is=66b775b4&hm=890570431db12c2af0fd6ed49ba23cda82851fe9d7bd457f3b16950516fbb4a1&=&format=webp&width=1440&height=436",
+    "backgroundImageUrl": "https://storage.modworkshop.net/mods/images/93957_1629710720_9fe4ac916a2d67fbb30514a575e4d88f.webp",
+    "endingTextColor": "#000000",
+    "customQuote": "\"You guys hear any something? Che- check the bathroom?\""
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>THE CAMPAIGN TRAIL</h2><font id="wittyquote" size="4" color="white"><em>"You guys hear any something? Che- check the bathroom?"</em></font>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#bd0026";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#cacaca";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#004080";
+
+document.getElementById("header").src = "https://media.discordapp.net/attachments/1265745796133814282/1271833987660120164/Senza_titolo.jpg?ex=66b8c734&is=66b775b4&hm=890570431db12c2af0fd6ed49ba23cda82851fe9d7bd457f3b16950516fbb4a1&=&format=webp&width=1440&height=436";
+
+document.body.background = "https://storage.modworkshop.net/mods/images/93957_1629710720_9fe4ac916a2d67fbb30514a575e4d88f.webp";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#0059b3!important;}</style>";
+
+
+
+  // Track list
+  
+  var soundtracks = {
+    0: {
+      name: "FREEDOM TIME",
+      tracklist: [
+        {
+          "name": "Bonnie Tyler - Holding out for a hero",
+          "url": "https://audio.jukehost.co.uk/JMahYeHnE6Sv7GQDkxrROkEPFIETMeye"
+        },
+        {
+          "name": "ABBA - Gimme, gimme, gimme",
+          "url": "https://audio.jukehost.co.uk/AY23RNtZISYgvCLv4UKcBcIaVKiLKtXZ"
+        },
+        {
+          "name": "the madness begins",
+          "url": "https://audio.jukehost.co.uk/adTnb0HMbyBS02hsKIfBE048CRRkecpd"
+        },
+        {
+          "name": "Super Ghostbusters - You need to pee",
+          "url": "https://audio.jukehost.co.uk/n9NYrudwjGUc2P2s2RSjw2X4em90CbiV"
+        },
+        {
+          "name": "The Flintstones Theme Song - Trap Remix",
+          "url": "https://audio.jukehost.co.uk/FpaIaLoiS3IysGKDGirsSXrvZcijMNYH"
+        },
+        {
+          "name": "joel gets food poisoning from a ghost burger",
+          "url": "https://audio.jukehost.co.uk/Nw8bjFPscaGgVlCv9ATOmv7dFfEiGDcd"
+        },
+        {
+          "name": "joel smokes a weed ghost and dies",
+          "url": "https://audio.jukehost.co.uk/HAeUlolSBh9K4nWvCc64Z8IOkvdokQsI"
+        },
+                        
+      ]
+    }
+  }
+  
+  // Set up new music player
+  
+  newMusicPlayer()
+
+
+//#endcode
