@@ -1,5 +1,7 @@
 campaignTrail_temp.cyoa = true
-cred = false;
+var cred = 0;
+var kaiser = 0;
+
 function ctsAchievement(achievement, difficultyChecker = true){
 	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
 		if(campaignTrail_temp.CTS){
@@ -25,7 +27,10 @@ cyoAdventure = function (a) {
     }
 
     if (ans == 8095){
-      cred = true;
+      cred += 1;
+    }
+    if (ans == 8067){
+      kaiser += 1;
     }
 
 }
@@ -4295,15 +4300,15 @@ endingPicker = (out, totv, aa, quickstats) => {
   ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 
 
-  if (quickstats[0] >= 200 && cred == true) { 
+  if (cred > 0 && quickstats[0] >= 200) { 
     ctsAchievement("Where Credit's Due");  
   }
   
-  if (ans == 8067 && ans == 8120 && quickstats[0] >= 176) {
+  if (kaiser > 0 && ans == 8120 && quickstats[0] >= 176) {
     ctsAchievement("It's Kaiseright"); 
   }
 
-  if (ans == 8067 && quickstats[0] >= 184) {
+  if (kaiser > 0 && quickstats[0] >= 184) {
     ctsAchievement("It's Kaiseright"); 
   }
 

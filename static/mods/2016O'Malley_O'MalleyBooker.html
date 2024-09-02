@@ -10,6 +10,9 @@ function ctsAchievement(achievement, difficultyChecker = true){
 e=campaignTrail_temp // this is redundant, but Decstar uses this because it looks nicer in the code. 
 campaignTrail_temp.cyoa = true
 
+var account = 0;
+var terror = 0;
+
 campaignTrail_temp.candidate_image_url = 'https://itsastronomical.com/assets/2016OMalley/martin.png';
 campaignTrail_temp.running_mate_image_url = 'https://itsastronomical.com/assets/2016OMalley/booker.png';
 campaignTrail_temp.candidate_last_name = 'O\u0027Malley';
@@ -29,6 +32,20 @@ function switcheroo() {
 }
 
 cyoAdventure = function (a) {
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
+
+    if (ans == 20695){
+        account += 1;
+      }
+
+      if (ans == 5252){
+        account += 1;
+      }
+
+      if (ans == 5226){
+        terror += 1;
+      }
+
     // CYOA for if Sanders runs third party
     if ([5252, 20695].includes(campaignTrail_temp.player_answers[21])) {
       // do the thing
@@ -64,11 +81,11 @@ endingPicker = (out, totv, aa, quickstats) => {
     ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 
 
-    if (ans == 5226 && quickstats[0] >= 270) { 
+    if (terror >= 1 && quickstats[0] >= 270) { 
         ctsAchievement("Truthnuke");  
     }
 
-    if ((ans == 5252 || ans == 20695) && quickstats[0] >= 270) { 
+    if (account >= 1 && quickstats[0] >= 270) { 
         ctsAchievement("Unaccountable");  
     }
     
@@ -124,10 +141,7 @@ endingPicker = (out, totv, aa, quickstats) => {
     }
     
     campaignTrail_temp.multiple_endings=true
-
-
-    
-    
+ 
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
