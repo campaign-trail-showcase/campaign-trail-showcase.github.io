@@ -1,0 +1,254 @@
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2016,
+            "display_year": "2020",
+            "summary": "Elizabeth Warren and Donald Trump face off in a heated 2020 election campaign. In the midst of the COVID-19 pandemic and widespread calls for racial and economic justice, voter turnout is expected to break records. Can Warren unite a broad coalition of progressive activists, anti-Trump voters, and working-class Americans to defeat Trump and enact her bold vision for structural reform? Or will Trump, once again trailing in the polls, defy expectations and pull off another upset, securing a second term despite widespread discontent?",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Warren_Has_A_Plan_For_That_1.pdf",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Nomination_of_Richard_Cordray.jpg",
+            "recommended_reading": "<ul>\n<li><a href=https://www.chicagotribune.com/opinion/editorials/ct-edit-chicago-tribune-biden-endorsement-20200925-lnyxsb5qvrftnjjmj3rnzj33jy-story.html>Our Case For Joe Biden</a></li>\n<li><a href=https://nationalinterest.org/feature/case-trump-166808>The Case For Trump</a></li>\n<li><a href=https://www.npr.org/2020/11/18/935730100/how-biden-won-ramping-up-the-base-and-expanding-margins-in-the-suburbs>How Biden Won: Ramping Up The Base And Expanding Margins In The Suburbs</a></li>\n<li><a href=https://www.prospectmagazine.co.uk/politics/donald-trump-joe-biden-us-election-almost-win-votes-concede>Why Did Trump Almost Win?</a></li>\n<li><a href=https://www.hoover.org/research/no-evidence-voter-fraud-guide-statistical-claims-about-2020-election>No Evidence For Voter Fraud: A Guide To Statistical Claims About The 2020 Election</a></li>\n</ul>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2016,
+        "is_premium": 0,
+        "display_year": "2020"
+    }
+]
+
+campaignTrail_temp.credits = "Weak-Divide-1603"
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 300,
+        "fields": {
+            "first_name": "Elizabeth",
+            "last_name": "Warren",
+            "election": 20,
+            "party": "Democratic ",
+            "state": "Massachusetts ",
+            "priority": 1,
+            "description": "<p> Elizabeth Warren emerged as the Democratic nominee after a fiercely contested primary season in 2020. With her message of structural reform, economic justice, and curbing corporate power, Warren steadily gained traction among progressive voters while also appealing to many moderates with her detailed policy plans. Her debate performances and grassroots fundraising impressed the Democratic base, and she successfully built a broad coalition that included young voters, women, and working-class Americans. Warren's victory in key early primaries, such as Iowa and New Hampshire, solidified her momentum, and her relentless campaign organization helped her outlast competitors like Bernie Sanders and Joe Biden. Her ability to unify progressive and more centrist Democrats ultimately propelled her to the nomination, setting up a dramatic face-off against Donald Trump in the general election. </p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Elizabeth_Warren%2C_official_portrait%2C_114th_Congress.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 302,
+        "fields": {
+            "first_name": "Bernie",
+            "last_name": "Sanders",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Vermont ",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Bernie_Sanders_in_March_2020_%28cropped%29.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p> Bernie Sanders is a Senator from Vermont who ran for President in 2016 and 2020. He is a champion of progressive policies like Medicare for All, free college tuition, and raising the minimum wage. While he inspires a passionate base of young voters and progressives, his democratic socialist platform is less appealing to moderates and the political establishment. Sanders is known for his consistency on key issues and his focus on reducing income inequality, but his candidacy has faced skepticism from centrist Democrats and financial elites. Despite this, he has shifted the Democratic Party's conversation significantly to the left.</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 303,
+        "fields": {
+            "first_name": "Amy",
+            "last_name": "Klobuchar",
+            "election": 20,
+            "party": "Democratic ",
+            "state": "Minnesota",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Amy_Klobuchar%2C_official_portrait%2C_113th_Congress.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p> Amy Klobuchar is a Senator from Minnesota who gained national attention during her 2020 presidential run for her pragmatic approach and Midwestern appeal. Known for her work on bipartisan legislation and her ability to win over moderate voters, Klobuchar would bring balance to the ticket, complementing Warren’s more progressive platform. She has a reputation for being tough, experienced, and focused on bread-and-butter issues like infrastructure and healthcare. While she may not have the same appeal to the progressive base, her down-to-earth style and ability to connect with swing-state voters could make her a strong running mate for Warren in a general election. </p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 304,
+        "fields": {
+            "first_name": "Marianne ",
+            "last_name": "Williamson",
+            "election": 20,
+            "party": "Democratic",
+            "state": "California",
+            "priority": 1,
+            "description": "<p> Marianne Williamson is an author and spiritual leader who ran for President in 2020, capturing attention with her message of love, healing, and moral clarity. Known for her unconventional approach and focus on the deeper, emotional roots of America’s problems, Williamson has a passionate following among progressives who resonate with her call for radical change. While her candidacy struggled to gain traction with mainstream Democrats and she lacks traditional political experience, her ability to inspire and connect on a human level could bring a unique energy to the ticket. As a running mate for Warren, she would amplify the campaign’s message of systemic transformation, though her outsider status might raise concerns among more pragmatic voters. </p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Marianne_Williamson_%2848541662667%29_%28cropped%29.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p> Marianne Williamson is an author and spiritual leader who ran for President in 2020, capturing attention with her message of love, healing, and moral clarity. Known for her unconventional approach and focus on the deeper, emotional roots of America’s problems, Williamson has a passionate following among progressives who resonate with her call for radical change. While her candidacy struggled to gain traction with mainstream Democrats and she lacks traditional political experience, her ability to inspire and connect on a human level could bring a unique energy to the ticket. As a running mate for Warren, she would amplify the campaign’s message of systemic transformation, though her outsider status might raise concerns among more pragmatic voters.</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 301,
+        "fields": {
+            "first_name": "Donald ",
+            "last_name": "Trump",
+            "election": 20,
+            "party": "Republican ",
+            "state": "Florida",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#e22400",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 153036,
+        "fields": {
+            "candidate": 300,
+            "running_mate": 303
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 85122,
+        "fields": {
+            "candidate": 300,
+            "running_mate": 302
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 81351,
+        "fields": {
+            "candidate": 300,
+            "running_mate": 304
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            300,
+            301
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            300,
+            301
+        ]
+    }
+]
+
+jet_data = {
+    "headerColor": "#0061fe",
+    "windowColor": "#BFE6FF",
+    "containerColor": "#FFFFFF",
+    "innerWindowColor": "#E8FBFF",
+    "bannerImageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/af/New_York_City%2C_NY_Corruption_Speech_-_49641300352.jpg",
+    "backgroundImageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/af/New_York_City%2C_NY_Corruption_Speech_-_49641300352.jpg",
+    "endingTextColor": "#000000",
+    "customQuote": "",
+    "gameTitle": "THE WARREN TRAIL"
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>THE WARREN TRAIL</h2>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#0061fe";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#BFE6FF";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#FFFFFF";
+
+document.getElementById("header").src = "https://upload.wikimedia.org/wikipedia/commons/a/af/New_York_City%2C_NY_Corruption_Speech_-_49641300352.jpg";
+
+document.body.background = "https://upload.wikimedia.org/wikipedia/commons/a/af/New_York_City%2C_NY_Corruption_Speech_-_49641300352.jpg";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#E8FBFF!important;}</style>";
+
+//#endcode
