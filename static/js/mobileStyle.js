@@ -1,15 +1,16 @@
 const mobileMode = localStorage.getItem("mobileMode") === "true";
 
 function toggleMobileMode() {
-    localStorage.setItem("mobileMode", mobileMode ? "false" : "true");
-    location.reload();
+  localStorage.setItem("mobileMode", mobileMode ? "false" : "true");
+  location.reload();
 }
 
-document.getElementById("mobileModeButton").innerText = mobileMode ? "Turn Off Mobile Compatibility (Beta)" : "Turn On Mobile Compatibility (Beta)";
+document.getElementById("mobileModeButton").innerText = mobileMode
+  ? "Turn Off Mobile Compatibility (Beta)"
+  : "Turn On Mobile Compatibility (Beta)";
 
-if(mobileMode) {
-    document.head.innerHTML +=
-    `
+if (mobileMode) {
+  document.head.innerHTML += `
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         @media only screen and (max-width: 768px) {
@@ -122,5 +123,5 @@ if(mobileMode) {
             }
         }
     </style>
-    `
+    `;
 }
