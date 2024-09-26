@@ -1,0 +1,223 @@
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2016,
+            "display_year": "2032 Template",
+            "summary": "The Year is 2032, after the shining second presidency of Founding Father Donald Trump. There is no dire emergency.\n\nPolitical dynasty and corporate titan August Wesley has fallen out of favour, allowing Bill Gurney, popular governor of Virginia to make a stab at the presidency. He would be the first non-corporate candidate since the Romney Presidency",
+            "image_url": "https://upload.wikimedia.org/wikipedia/en/3/31/Cruelty_Squad_Steam_Header.jpg",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://pbs.twimg.com/profile_images/1485910658768158720/4CMcfcRE_400x400.jpg",
+            "recommended_reading": "<ul>\n<li><a href=https://www.chicagotribune.com/opinion/editorials/ct-edit-chicago-tribune-biden-endorsement-20200925-lnyxsb5qvrftnjjmj3rnzj33jy-story.html>Our Case For Joe Biden</a></li>\n<li><a href=https://nationalinterest.org/feature/case-trump-166808>The Case For Trump</a></li>\n<li><a href=https://www.npr.org/2020/11/18/935730100/how-biden-won-ramping-up-the-base-and-expanding-margins-in-the-suburbs>How Biden Won: Ramping Up The Base And Expanding Margins In The Suburbs</a></li>\n<li><a href=https://www.prospectmagazine.co.uk/politics/donald-trump-joe-biden-us-election-almost-win-votes-concede>Why Did Trump Almost Win?</a></li>\n<li><a href=https://www.hoover.org/research/no-evidence-voter-fraud-guide-statistical-claims-about-2020-election>No Evidence For Voter Fraud: A Guide To Statistical Claims About The 2020 Election</a></li>\n</ul>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2016,
+        "is_premium": 0,
+        "display_year": "2032 Template"
+    }
+]
+
+campaignTrail_temp.credits = "Paul"
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 14514,
+        "fields": {
+            "first_name": "August",
+            "last_name": "Wesley",
+            "election": 20,
+            "party": "Wealth Party",
+            "state": "New York",
+            "priority": 1,
+            "description": "August Wesley, ninth of his name, a great man of an incorporated family, on the way out. This is why he's been demoted to President.",
+            "color_hex": "#ff0000",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://us-tuna-sounds-images.voicemod.net/62c580a2-1abc-48fb-9d09-7e3b648f4919-1711569985508.png",
+            "electoral_victory_message": "You glimmer, you gleam, you are simply sublime, chaos does not exist, there are only individual moments of time, and this one is glorious.",
+            "electoral_loss_message": "Now you've done it you freak shit. You've fucked up. You're being tracked by the grid. The eye in the sky is watching. We're coming for you. Prepare to die.\n\n",
+            "no_electoral_majority_message": "Now you've done it you freak shit. You've fucked up. You're being tracked by the grid. The eye in the sky is watching. We're coming for you. Prepare to die.\n\n",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 2,
+        "fields": {
+            "first_name": "Mitch",
+            "last_name": "McConnel",
+            "election": 20,
+            "party": "Wealth Party",
+            "state": "Kentucky",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#ff0000",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Mitch_McConnell_2016_official_photo_%281%29.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "The far-left voter outreach part of the ticket, Turkey amongst men. Young and spry. Uncharismatic but a serviceable lackey. ",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 14476,
+        "fields": {
+            "first_name": "Bill",
+            "last_name": "Gurney",
+            "election": 20,
+            "party": "Progressive Party",
+            "state": "Virginia",
+            "priority": 1,
+            "description": "<p>Bill Gurney is a tolerated opposition member whose gone a step too far, he thinks he has prospects of winning!</p>",
+            "color_hex": "#00ff91",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://t3.ftcdn.net/jpg/02/94/62/14/360_F_294621430_9dwIpCeY1LqefWCcU23pP9i11BgzOS0N.jpg",
+            "electoral_victory_message": "This could spell the end for HyperPACs....",
+            "electoral_loss_message": "Expected",
+            "no_electoral_majority_message": "We all lose, fucker, now they have to kill you AND Wesley in the perpetual cycle of rebirths and reanimations, you fucked over everybody, fuck you",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1,
+        "fields": {
+            "first_name": "M.T",
+            "last_name": "Fuck",
+            "election": 20,
+            "party": "Progressive Party",
+            "state": "New York",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#11ff00",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://static.tvtropes.org/pmwiki/pub/images/cruelty_guy.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>Why is this fucker here? A dethatched fuckup SEC Death Squad layoff victim could be a good shower of your message </p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 87602,
+        "fields": {
+            "candidate": 14476,
+            "running_mate": 1
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 163396,
+        "fields": {
+            "candidate": 14514,
+            "running_mate": 2
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            14514,
+            14476
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            14514,
+            14476
+        ]
+    }
+]
+
+jet_data = {
+    "headerColor": "#ff0033",
+    "windowColor": "#a6ff00",
+    "containerColor": "#ff0000",
+    "innerWindowColor": "#d400ff",
+    "bannerImageUrl": "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/22743101/ss_5234b051b742a8cf758fc35895ca563880de1001.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "backgroundImageUrl": "https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg",
+    "endingTextColor": "#000000",
+    "customQuote": "\"Vanity, vanity of vanities\" -Solomon",
+    "gameTitle": "THE CRUEL, CRUEL, CAMPAIGN TRAIL"
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>THE CRUEL, CRUEL, CAMPAIGN TRAIL</h2><font id="wittyquote" size="4" color="white"><em>"Vanity, vanity of vanities" -Solomon</em></font>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#ff0033";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#a6ff00";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#ff0000";
+
+document.getElementById("header").src = "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/22743101/ss_5234b051b742a8cf758fc35895ca563880de1001.jpg?quality=90&strip=all&crop=0,0,100,100";
+
+document.body.background = "https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#d400ff!important;}</style>";
+
+//#endcode
