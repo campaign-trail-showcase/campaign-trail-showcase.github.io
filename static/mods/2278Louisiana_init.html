@@ -16,7 +16,7 @@ campaignTrail_temp.global_parameter_json = [
             "issue_stance_6_max": 0.71,
             "global_variance": 0.01,
             "state_variance": 0.005,
-            "question_count": 22,
+            "question_count": 25,
             "default_map_color_hex": "#C9C9C9",
             "no_state_map_color_hex": "#999999"
         }
@@ -74,11 +74,11 @@ campaignTrail_temp.candidate_json = [
             "party": "Intellectuals and Families",
             "state": "Yefferson",
             "priority": 1,
-            "description": ".",
+            "description": "<p>Rangreuse Liam is best recognized in the Big Easy as a social disrupter and conscientious objector to the New Orleans Offensive of 2266. Having lived through the years of turmoil surrounding Languedoc's first term, he had left the hallowed walls of the Great Library of Chassis City to the realm of political battle. Part of the Free Yeffersonian Church movement, Liam deeply believes in peace among men, absolute devotion to nonviolence against those who have not aggressed towards you (the theological concept of the \"Golden Rule\", one of the most important concepts of Yeffersonianism), a profound praise of the Founding American Stock and its emphasis as an Anglo-Saxon and Israelite people who have been redeemed from the wastes by the Gods past to create a bright future of anarcho-pacifism, and last but not least, emphasis on isolationist protectionism. Practically Languedoc's opposite, Liam will have much to fight for, but he faces a comfortable starting lead in major Parishes due to fatigue with Languedoc's programme.</p>",
             "color_hex": "#1c4d57",
             "secondary_color_hex": null,
-            "is_active": 0,
-            "image_url": "https://www.jetsimon.com/public/candidateexample.png", //thismightnotmatter
+            "is_active": 1,
+            "image_url": "https://files.catbox.moe/s5il9e.png",
             "electoral_victory_message": ".",
             "electoral_loss_message": ".",
             "no_electoral_majority_message": ".",
@@ -92,20 +92,20 @@ campaignTrail_temp.candidate_json = [
         "pk": 14580,
         "fields": {
             "first_name": "Omar",
-            "last_name": "Qulaques",
+            "last_name": "Chamberlain",
             "election": 21,
-            "party": "Intellectuals and Families",
-            "state": "Yefferson",
+            "party": "Families",
+            "state": "Desalemans",
             "priority": 1,
-            "description": ".",
+            "description": "Representing the \"Families\" side of the coalition around Liam, Chamberlain is, as you might imagine, a greatly pious man who emphasizes the need for familial relations to be strengthened in the Big Easy as a way to deal with social ailments, urging the need for community and belonging as a way to bring people together and give spiritual comfort. Whilst this kind of messaging would be universally beloved in better times, the Wasteland has long forgotten overtures of familial communitarianism, and it's unlikely that they'll come back to it anytime soon. Nonetheless, Omar persists and believes in the restoration of not only this most sacred social institution, but to an idyllic, innocent pre-war America. Blessed with a preacher's voice and the oratory skills of a politician, Chamberlain is exactly the kind of person you'll need to defeat the rootless cosmopolitanists of Languedoc.",
             "color_hex": "#1c4d57",
             "secondary_color_hex": null,
             "is_active": 0,
-            "image_url": "https://www.jetsimon.com/public/candidateexample.png", //thismightnotmatter
+            "image_url": "https://files.catbox.moe/50a0j9.png",
             "electoral_victory_message": ".",
             "electoral_loss_message": ".",
             "no_electoral_majority_message": ".",
-            "description_as_running_mate": null,
+            "description_as_running_mate": "Representing the \"Families\" side of the coalition around Liam, Chamberlain is, as you might imagine, a greatly pious man who emphasizes the need for familial relations to be strengthened in the Big Easy as a way to deal with social ailments, urging the need for community and belonging as a way to bring people together and give spiritual comfort. Whilst this kind of messaging would be universally beloved in better times, the Wasteland has long forgotten overtures of familial communitarianism, and it's unlikely that they'll come back to it anytime soon. Nonetheless, Omar persists and believes in the restoration of not only this most sacred social institution, but to an idyllic, innocent pre-war America.",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -404,7 +404,15 @@ campaignTrail_temp.temp_election_list = [
     }
 ]
 
-campaignTrail_temp.credits = "/u/RagyTheKindaHipster"
+campaignTrail_temp.credits = "<button onclick='credits()'>[/u/RagyTheKindaHipster]</button>";
+  credits = function() {
+    credits = ["Special thanks go to my friends, /vst/ and other folks who kept me motivated through a tough development cycle. Credit for partial ending writing to Halligan Elysium"]
+    text = ""
+    for (i in credits) {
+        text += credits[i] + "\n"
+    }
+    alert(text)
+  }
 
 function addDynamicCSS() {
     var css = `
@@ -470,6 +478,7 @@ tooltipList = [
   {searchString: "Battle Of Destrekhan", explanationText: "<img src=https://files.catbox.moe/sdxnzb.png> A battle in the banks of the Mississippi that ended in a decisive Plaqueminian victory."},
   {searchString: "Gangmen", explanationText: "Troublemakers from Landsbone. Hated by the locals, but rejected in Raceland and Whoma. They often lobby for the creation of their own Parish."},
   {searchString: "Palereeys", explanationText: "A Plaquemines-ism referring to paramilitaries of varying sizes and influence."},
+  {searchString: "Citizen House", explanationText: "The civilian assemblies of local areas in Parishes, of varying numbers and geographic administration. They work side-by-side with the Senates and Paramilitary Assemblies."},
   {searchString: "Citizen Houses", explanationText: "The civilian assemblies of local areas in Parishes, of varying numbers and geographic administration. They work side-by-side with the Senates and Paramilitary Assemblies."},
   {searchString: "Friendship Bridge", explanationText: "<img src=https://files.catbox.moe/5i76ys.png><br> The only bridge connecting Kouba-Timken and the rest of the Big Easy."},
   {searchString: "Kouba-Timken", explanationText: "<img src=https://files.catbox.moe/hkts2h.png> A tiny Mississippi African kingdom surrounded by us."},
@@ -478,7 +487,6 @@ tooltipList = [
   {searchString: "Rosie", explanationText: "One of the humans in Thibodaux Camp. A 20-something lady that speaks (and listens) to plushies and rocks back and forth in a pile of them to not get panic attacks. Claims to be able to speak to other objects. Lucky to be alive."},
   {searchString: "Baton Rouge", explanationText: "<img src=https://files.catbox.moe/wzbtj1.png>The Republic of Baton Rouge, a purported remnant of the United States federal government. Despises our way of life, a state of grey bureaucrats."},
   {searchString: "Commandments of our Confederation", explanationText: "<img src=https://files.catbox.moe/d3g2fe.png>The defining document of our Confederation, part of its wider declaration of secession from what is now Baton Rouge."},
-  {searchString: "Rangreuse", explanationText: "<img src=https://files.catbox.moe/a76dxj.png>Your opponent in this election. Part of the Yefferson Free Church, huge anti-war dove, trade isolationist, in favor of reducing raids and quite a bit racist."},
   {searchString: "Golden Rule", explanationText: "The primary commandment and guiding philosophy of the Yefferson Free Church."},
   {searchString: "Eden Isle", explanationText: "<img src=https://files.catbox.moe/hoesit.png>A tiny enclave of prosperity in the wildest, most merciless and brutal parts of the Big Easy."},
   {searchString: "Big Easy", explanationText: "The local name for the area formerly called Louisiana."},
@@ -487,7 +495,11 @@ tooltipList = [
   {searchString: "Chassis City Declaration", explanationText: "An expansion to the original founding documents of our Confederation, it delineates how the polity functions at a local and \"national\" level."},
   {searchString: "Grand Dragon Empire", explanationText: "Despite hundreds of years, profound racism thrives still with lynching bands, all dedicated to maintaining a Whites-only republic with British Israelite ideals. Their wider potential is with exterminating all non-White persons across Louisiana and Mississippi, and then unifying the United States."},
   {searchString: "Albert Roland", explanationText: "Nicknamed \"the last good bureaucrat\". Loves working within the system and all its strange, decentralized and confusing legal, social and political structures."},
-  {searchString: "Zadok", explanationText: "Senator for Yefferson Parish. One of your few allies there."}
+  {searchString: "New Africa", explanationText: "Multiracial communists, New Africa's entire secure and peaceful existence is maintained by deep trenches of barbed wire and mines covering the border to the former parts of New Orleans which it now occupies. Ironic."},
+  {searchString: "Zadok", explanationText: "Senator for Yefferson Parish. One of your few allies there."},
+  {searchString: "Metairie", explanationText: "The Free Port of Metairie. The largest functioning port in the Big Easy, they're also one of the wealthiest areas in the Gulf of Mexico due to near-monopoly on trade coming in and out."},
+  {searchString: "Treaty of Mutual Understanding", explanationText: "A treaty among the polities of the Gulf of Mexico which assert Metairie's independence as a neutral port is absolutely necessary for the stability of the region. Any attacks against them will be seen as an attack on all nations part of the Treaty.<br>The signatories are: Baton Rouge, Maurepas, Fontainebleau, New Africa, Grand Dragon Empire, Bogalusa Republic, Plaquemine Confederation"}
+
 
  ];
 
@@ -600,62 +612,97 @@ select {
 campaignTrail_temp.achievements = {
   "HAHAHAHA." : {
       "image" : "https://files.catbox.moe/hu4wri.png",
-      "description" : "Undo an ember of democracy.",
+      "description" : "As Buster, Undo an ember of democracy.",
       "cannotBeCheated" : true
   },
   "Sleep Tight" : {
       "image" : "https://files.catbox.moe/hlezn9.png",
-      "description" : "Defend the weak and burn the world with it.",
+      "description" : "As Buster, Defend the weak and burn the world with it.",
       "cannotBeCheated" : true
   },
   "Le Chauviniste" : {
       "image" : "https://files.catbox.moe/rgmp50.png",
-      "description" : "Add a whole new electorate to the mix.",
+      "description" : "As Buster, Add a whole new electorate to the mix.",
       "cannotBeCheated" : true
   },
   "Imperator" : {
       "image" : "https://files.catbox.moe/u4200x.png",
-      "description" : "Annex as much territory as possible.",
+      "description" : "As Buster, Annex as much territory as possible.",
       "cannotBeCheated" : true
   },
   "Good Natured" : {
       "image" : "https://files.catbox.moe/0qqx46.png",
-      "description" : "Solve every conflict diplomatically.",
+      "description" : "As Buster, Solve every conflict diplomatically.",
       "cannotBeCheated" : true
   },
   "My Way" : {
       "image" : "https://files.catbox.moe/xqz9r2.png",
-      "description" : "Pay for what you've done.",
+      "description" : "As Buster, Pay for what you've done.",
       "cannotBeCheated" : true
   },
   "What Goes Around Comes Around" : {
       "image" : "https://files.catbox.moe/ab1cdy.png",
-      "description" : "Play stupid games, win stupid prizes.",
+      "description" : "As Buster, Play stupid games, win stupid prizes.",
       "cannotBeCheated" : true
   },
   "Durr-mo-crud-cy" : {
       "image" : "https://files.catbox.moe/zjix2g.png",
-      "description" : "Win the election because of annexed territory.",
+      "description" : "As Buster, Win the election because of annexed territory.",
       "cannotBeCheated" : true
   },
   "Double Kill" : {
       "image" : "https://files.catbox.moe/lt74el.png",
-      "description" : "Ruin two lives.",
+      "description" : "As Buster, Ruin two lives.",
       "cannotBeCheated" : true
   },
   "Bayou King" : {
       "image" : "https://files.catbox.moe/p0f76k.png",
-      "description" : "Win 130 electoral votes or more.",
+      "description" : "As Buster, Win 130 electoral votes or more.",
       "cannotBeCheated" : true
   },
-  "Venice Of The South" : {
+  "Vive la mort, vive la guerre" : {
       "image" : "https://files.catbox.moe/azwdzc.png",
-      "description" : "War never changes, does it?.",
+      "description" : "As Buster, make them all pay.",
       "cannotBeCheated" : true
   },
   "It Was Never Meant To Be" : {
       "image" : "https://files.catbox.moe/jh1mu7.png",
-      "description" : "Betray those who can't fend for themselves.",
+      "description" : "As Buster, Betray those who can't fend for themselves.",
+      "cannotBeCheated" : true
+  },
+  "Barukh Shem Kevod" : {
+      "image" : "https://files.catbox.moe/8grdlu.png",
+      "description" : "As Liam, Create a theodemocracy.",
+      "cannotBeCheated" : true
+  },
+  "Losin' My Religion" : {
+      "image" : "https://files.catbox.moe/1u506p.png",
+      "description" : "As Liam, Abandon your faith.",
+      "cannotBeCheated" : true
+  },
+  "Let's Rejoice and Be Happy" : {
+      "image" : "https://files.catbox.moe/wmlfhw.gif",
+      "description" : "As Liam, Win 120 electoral votes or more.",
+      "cannotBeCheated" : true
+  },
+  "The Lord's Sheep" : {
+      "image" : "https://files.catbox.moe/s21k1x.png",
+      "description" : "As Liam, allow an evil man to go free.",
+      "cannotBeCheated" : true
+  },
+  "The Binding of Liam" : {
+      "image" : "https://files.catbox.moe/swb2dq.png",
+      "description" : "As Liam, pick every ultra-religious option (and win).",
+      "cannotBeCheated" : true
+  },
+  ">leaves" : {
+      "image" : "https://files.catbox.moe/ycsvsm.png",
+      "description" : "As Liam, refuse to elaborate.",
+      "cannotBeCheated" : true
+  },
+  "OMGWTFBBQ" : {
+      "image" : "https://files.catbox.moe/09splh.png",
+      "description" : "As Liam, take Violet Parish.",
       "cannotBeCheated" : true
   }
 }
@@ -678,7 +725,7 @@ document.getElementById("header").src = "https://files.catbox.moe/3np81n.png";
 document.body.background = "https://files.catbox.moe/84fxq6.png";
 
 
-document.getElementById("inner_window_1").children[1].innerHTML = `<robco><b>CAMPAIGN TRAIL VERSION 2.1<br>PUBLIC DOMAIN VIDEO-GAME FOR THE R.I.E.S.</b><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></robco>`;
+document.getElementById("inner_window_1").children[1].innerHTML = `<robco><b>CAMPAIGN TRAIL VERSION 2.6<br>PUBLIC DOMAIN VIDEO-GAME FOR THE R.I.E.S.</b><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></robco>`;
 
 document.head.innerHTML += "<style>#results_container {color:#00ff11;} .election_description_window {background-color:#000000!important} .campaign_trail_start_emphasis {background-color:#00ff11!important; color:#00ff11!important} .game_start {color:#00ff11!important} .inner_window_front {background-color:#000000!important}.inner_window_w_desc {background-color:#000000!important;} .person_description_window {background-color:#000000!important} .person_summary {color:#00ff11!important} .inner_window_w_desc {color:#00ff11!important} .description_window_small {background-color:#000000!important} </style>";
 
@@ -917,6 +964,35 @@ soundtracks = {
       {
         "name": "Dock Walsh - Going Back To Jericho",
         "url": "https://files.catbox.moe/zzoek6.mp3"
+      }
+    ]
+  },
+  1: {
+    name: "Old Country Broadcasting Outpost",
+    tracklist: [
+      {
+        "name": "Pine Ridge Boys - You Are My Sunshine",
+        "url": "https://files.catbox.moe/0ypqq7.m4a"
+      },
+      {
+        "name": "Wilf Carter - There's A Blue Bird On Your Windowsill",
+        "url": "https://files.catbox.moe/e1tjgc.m4a"
+      },
+      {
+        "name": "Cliff Carlisle - Hobo Blues",
+        "url": "https://files.catbox.moe/l5phct.m4a"
+      },
+      {
+        "name": "South Carolina String Band - Oh! Susanna",
+        "url": "https://files.catbox.moe/gpme2w.m4a"
+      },
+      {
+        "name": "Earl Scruggs - Ground Speed",
+        "url": "https://files.catbox.moe/q25o6p.m4a"
+      },
+      {
+        "name": "Wilf Carter - I Long For Old Wyoming",
+        "url": "https://files.catbox.moe/yx9cam.m4a"
       }
     ]
   }
