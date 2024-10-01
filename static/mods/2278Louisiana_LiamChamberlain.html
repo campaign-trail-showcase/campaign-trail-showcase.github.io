@@ -23,6 +23,7 @@ function getQuestionNumberFromPk(pk) {
     var BibleThumper = 0;
     var Protectionism = 0;
     var endingCode = 0;
+    var whomaEndorsement = 0;
     e.noCounter = 0;
     e.vpIndex = 0
 	
@@ -514,6 +515,9 @@ cyoAdventure = function (a) {
        BadKarma += 2;
        BibleThumper += 1;
     }
+    if(ans == 692042){
+        whomaEndorsement += 1;
+    }
     if(ans == 692102 || ans == 692107 || ans == 692114){
        campaignTrail_temp.questions_json[13] = tunnel(692303);
        GoodKarma += 1;
@@ -530,14 +534,17 @@ cyoAdventure = function (a) {
     if(e.noCounter == 19 && BadKarma <= GoodKarma){
         campaignTrail_temp.questions_json[19] = tunnel(692400);
     }
-    if(e.noCounter == 19 && Protectionism > 2 && Protectionism < 4 ){
+    if(e.noCounter == 19 && Protectionism > 2 && Protectionism < 4 && whomaEndorsement == 1){
         campaignTrail_temp.questions_json[20] = tunnel(692420);
     }
-    if(e.noCounter == 19 && Protectionism <= 2 ){
+    if(e.noCounter == 19 && Protectionism <= 2  && whomaEndorsement == 1){
         campaignTrail_temp.questions_json[20] = tunnel(692431);
     }
-    if(e.noCounter == 19 && Protectionism > 3 ){
+    if(e.noCounter == 19 && Protectionism > 3  && whomaEndorsement == 1){
         campaignTrail_temp.questions_json[20] = tunnel(692411);
+    }
+    if(e.noCounter == 19 && whomaEndorsement == 0){
+        campaignTrail_temp.questions_json[20] = tunnel(692438);
     }
     if(ans == 692318){
         dismissOmar();
@@ -7058,7 +7065,7 @@ endingPicker = (out, totv, aa, quickstats) => {
         //ending1();
         return construct(0);
     }
-    if(quickstats[0] >= 100 && BadKarma > GoodKarma) {
+    if(quickstats[0] >= 85 && BadKarma > GoodKarma) {
         e.image = ["https://files.catbox.moe/usx865.png"];
         e.header = "<h3>Oseh Shalom</h3>";
         e.pages = ["<p>The starry night burnt Liam's soul. He looked towards the Churches and crosses dotting the countryside of the Plaquemine-Yefferson border on his truck ride to Ft. Liberty. Through his years, he had sacrificed every little comfort he had, every little luxury he attempted to give himself forgone to the annals of recent history. And nonetheless, the stars burnt through his soul. He felt a profound aching stemming across his veins, his heart palpitating. He had sweeped the fair Confederation, but at much cost, his soul damned to represent good people as the worst among them. He, nonetheless, took this trial from his God to mean a potential road to redemption.<br>He looked towards a small, homely church near Ft. Liberty. They might've been Neo-Baptists? Liam didn't quite recall. They, though, were closer to God than he would ever be. His car slowly roared towards a murmur, and he stepped out of the vehicle for a much-needed prayer. The priest, a woman with no particular importance or recognition of and to Liam, would silently join him in prayer. The two, they had so much behind them, that they could only hope, that one day, they'd be able to finally go past the waters of the deep they now found themselves on.<br>And would God answer these pleas? Would God be willing to understand the horrors and crude sins of Liam in his quest for Power?<br>...It didn't matter. Liam knew what he had to do. He had to bring peace and harmony, righteousness and love to this land. He had to do something. He had to save not only the entire Big Easy, but himself, especially.</p>"];
