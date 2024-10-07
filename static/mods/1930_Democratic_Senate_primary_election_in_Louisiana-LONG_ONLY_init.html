@@ -1,0 +1,192 @@
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 9,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 12,
+        "fields": {
+            "year": 1948,
+            "summary": "A showdown between the current Governor of Louisiana and the current Senator of Louisiana.",
+            "image_url": "https://www.hueylong.com/images/photos/life-times/sen_sticker.jpg",
+            "winning_electoral_vote_number": 266,
+            "advisor_url": "https://whyy.org/wp-content/uploads/2017/07h/herbert-hoover_1200x675.jpg",
+            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">1948 Election Books and Links</h4>David McCullough - <a href=\"http://www.amazon.com/exec/obidos/ASIN/B000FC0VVQ/amhius20-20\" target=\"_blank\">Truman</a></br>Andrew E. Busch - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0700618678/amhius20-20\" target=\"_blank\">Truman's Triumphs: The 1948 Election and the Making of Postwar America</a></br>David Pietruza - <a href=\"http://www.amazon.com/exec/obidos/ASIN/140276748X/amhius20-20\" target=\"_blank\">1948: Harry Truman's Improbable Victory and the Year that Transformed America</a></br>Richard Norton Smith - <a href=\"http://www.amazon.com/exec/obidos/ASIN/067141741X/amhius20-20\" target=\"_blank\">Thomas E. Dewey and His Times</a></br><a href=\"https://www.youtube.com/watch?v=rJABgG4YDwM\" target=\"_blank\">The 1948 Democratic Convention (newsreel footage)</a></br><a href=\"https://www.youtube.com/watch?v=ogg9YsxGQm4\" target=\"_blank\">The 1948 Republican Convention (newsreel footage)</a></br><a href=\"https://www.youtube.com/watch?v=LW2ae0Fznwg\" target=\"_blank\">The 1948 Election Explained (video)</a>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/1960-no-majority-photo.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "1930 Democratic Senate primary election in Louisiana-LONG ONLY"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 116,
+        "fields": {
+            "first_name": "Huey",
+            "last_name": "Long",
+            "election": 12,
+            "party": "Democrat",
+            "state": "Louisiana",
+            "priority": 1,
+            "description": "Huey Pierce Long Jr. (August 30, 1893 – September 10, 1935), nicknamed \"The Kingfish\", was an American politician who served as the 40th governor of Louisiana from 1928 to 1932.",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://www.hueylong.com/images/photos/resources/hpl-memorial-lg.jpg",
+            "electoral_victory_message": "Congrats",
+            "electoral_loss_message": "Sorry",
+            "no_electoral_majority_message": "<h3>No candidate captured an Electoral College majority.</h3><p>This leaves everyone in a bad situation. Segregationists from the South are demanding concessions before they will support a candidate, leaving the House deadlocked. Perhaps you can work out a deal with Dewey to circumvent this, based on who has the plurality of popular and electoral votes. It's always possible that one of you could serve as the other's Vice President.</p>",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 117,
+        "fields": {
+            "first_name": "Joseph E.",
+            "last_name": "Ransdell",
+            "election": 12,
+            "party": "Democrat",
+            "state": "Louisiana",
+            "priority": 2,
+            "description": "Joseph Eugene Ransdell (October 7, 1858 – July 27, 1954) was an attorney and politician from Louisiana. Beginning in 1899, he was elected for seven consecutive terms as United States representative from Louisiana's 5th congressional district.He subsequently served for three terms in the United States Senate from Louisiana.",
+            "color_hex": "#00ffaa",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/JosephERansdell.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 1948 Presidential Election.</h3><p>You have become the first Republican to win the White House in 20 years. You face a dangerous foreign situation, and your domestic agenda is likely to be opposed by Democrats and conservatives alike. Conversely, the support and confidence of the Republican establishment is almost guaranteed. With luck, you might become the first two-term Republican since Ulysses Grant.</p>",
+            "electoral_loss_message": "<h3>Sorry. You have lost the 1948 Presidential Election.</h3><p>Pundits and political pros are shocked at your collapse. The second-guessing will likely come fast and furious from your party. The Republicans have now lost five Presidential elections in a row, and have no obvious standard-bearer to break the trend in 1952. As for your own career, you are still the Governor of New York, but it is pretty unlikely that you'll be given another chance to prove yourself on the national stage.</p>",
+            "no_electoral_majority_message": "<h3>No candidate captured an Electoral College majority.</h3><p>This leaves everyone in a bad situation. Segregationists from the South are demanding concessions before they will support a candidate, leaving the House deadlocked. Perhaps you can work out a deal with Truman to circumvent this, based on who has the plurality of popular and electoral votes. It's always possible that one of you could serve as the other's Vice President.</p>",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 120,
+        "fields": {
+            "first_name": "Democrat",
+            "last_name": "Party",
+            "election": 12,
+            "party": "Democrat",
+            "state": "National",
+            "priority": 5,
+            "description": "'",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://cdn.britannica.com/34/73634-050-B12861D8/pin-Democratic-Party.jpg",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "The Democratic Party",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 76,
+        "fields": {
+            "candidate": 116,
+            "running_mate": 120
+        }
+    }
+]
+
+campaignTrail_temp.credits = "Jesus Is First"
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 12,
+        "candidates": [
+            116,
+            117
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 12,
+        "candidates": [
+            116,
+            117
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 12,
+        "year": 1948,
+        "is_premium": 0,
+        "display_year": "1930 Democratic Senate primary election in Louisiana-LONG ONLY"
+    }
+]
+
+jet_data = {
+    "headerColor": "#002b70",
+    "windowColor": "#648786",
+    "containerColor": "#FFFFFF",
+    "innerWindowColor": "#e31616",
+    "bannerImageUrl": "https://64parishes.org/wp-content/uploads/2015/07/LA-state-Capitol-1933-330x190.jpg",
+    "backgroundImageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/New_Orleans_Stereo_View_down_from_Lee_Circle_1930s_detail.png",
+    "endingTextColor": "#000000",
+    "customQuote": "\"Every Man A King!\""
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>THE CAMPAIGN TRAIL</h2><font id="wittyquote" size="4" color="white"><em>"Every Man A King!"</em></font>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#002b70";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#648786";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#FFFFFF";
+
+document.getElementById("header").src = "https://64parishes.org/wp-content/uploads/2015/07/LA-state-Capitol-1933-330x190.jpg";
+
+document.body.background = "https://upload.wikimedia.org/wikipedia/commons/3/35/New_Orleans_Stereo_View_down_from_Lee_Circle_1930s_detail.png";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#e31616!important;}</style>";
+
+//#endcode
