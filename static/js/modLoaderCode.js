@@ -684,6 +684,7 @@ async function loadModFromButton(modValue) {
   }
 
   setTimeout(() => updateModViewCount(modValue), 10000);
+  window.scrollTo(0, 0); // Scroll to top
 }
 
 async function copyModLink() {
