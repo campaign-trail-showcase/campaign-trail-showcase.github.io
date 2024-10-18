@@ -8,6 +8,10 @@ async function evalFromUrl(url, callback = null) {
   }
 }
 
+function changeFontColour() {
+  // Just to stop breaking mods
+}
+
 // Custom variables
 
 let baseScenarioDict = {
