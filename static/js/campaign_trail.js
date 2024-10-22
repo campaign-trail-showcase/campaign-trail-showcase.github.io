@@ -1,11 +1,7 @@
-async function evalFromUrl(url, callback = null) {
+async function evalFromUrl(url) {
   const evalRes = await fetch(url);
   const code = await evalRes.text();
   eval(code);
-
-  if (callback !== null) {
-    callback();
-  }
 }
 
 function changeFontColour() {
@@ -1778,7 +1774,7 @@ function divideElectoralVotesProp(e, t) {
           aaa = election_HTML(t, i, a);
           aaa = "../static/questionset/" + aaa;
           try {
-            $("#game_window").load(aaa, function () {
+            $("#game_window").load(aaa, async function () {
               e = campaignTrail_temp;
               eArr = e.temp_election_list
                 .map((a) => a.id)
@@ -1801,56 +1797,55 @@ function divideElectoralVotesProp(e, t) {
               //theorId = $("#modSelect")[0].value
 
               if (customMod === false) {
-                evalFromUrl("../static/mods/" + theorId + ".html", () => {
-                  tempFuncO = function (e, i = campaignTrail_temp) {
-                    if (e.collect_results) {
-                      let a = A(2);
-                      e.current_results = [getLatestRes(a)[0], a];
-                    }
-                    for (
-                      var s = [], a = 0;
-                      a < i.answers_json.length &&
-                      (i.answers_json[a].fields.question !=
-                        i.questions_json[i.question_number].pk ||
-                        (s.push({ key: a, order: Math.random() }),
-                        4 != s.length));
-                      a += 1
-                    ) {}
-                    P(s, "order");
-                    for (var t = "", a = 0; a < s.length; a += 1) {
-                      t +=
-                        '<input type="radio" name="game_answers" class="game_answers"             id="game_answers[' +
-                        a.toString() +
-                        ']" value="' +
-                        i.answers_json[s[a].key].pk +
-                        '"/>\t\t    <label for="game_answers[' +
-                        a.toString() +
-                        ']">' +
-                        i.answers_json[s[a].key].fields.description +
-                        "</label><br>";
-                    }
-                    var r =
-                      '<div class="game_header">    <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>' +
-                      i.questions_json[i.question_number].fields.description +
-                      '</h3>            <div id="question_form">                <form name="question">' +
-                      t +
-                      '</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="' +
-                      i.candidate_image_url +
-                      '">    <img id="running_mate_pic" src="' +
-                      i.running_mate_image_url +
-                      '">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question ' +
-                      (i.question_number + 1) +
-                      " of " +
-                      i.global_parameter_json[0].fields.question_count +
-                      '</h3>        </div>        <div id="campaign_sign">        <p>' +
-                      i.candidate_last_name +
-                      "</p>        <p>" +
-                      i.running_mate_last_name +
-                      "</p>        </div>    </div>";
-                    $("#game_window").html(r);
-                  };
-                  tempFuncO(e);
-                });
+                await evalFromUrl("../static/mods/" + theorId + ".html");
+                tempFuncO = function (e, i = campaignTrail_temp) {
+                  if (e.collect_results) {
+                    let a = A(2);
+                    e.current_results = [getLatestRes(a)[0], a];
+                  }
+                  for (
+                    var s = [], a = 0;
+                    a < i.answers_json.length &&
+                    (i.answers_json[a].fields.question !=
+                      i.questions_json[i.question_number].pk ||
+                      (s.push({ key: a, order: Math.random() }),
+                      4 != s.length));
+                    a += 1
+                  ) {}
+                  P(s, "order");
+                  for (var t = "", a = 0; a < s.length; a += 1) {
+                    t +=
+                      '<input type="radio" name="game_answers" class="game_answers"             id="game_answers[' +
+                      a.toString() +
+                      ']" value="' +
+                      i.answers_json[s[a].key].pk +
+                      '"/>\t\t    <label for="game_answers[' +
+                      a.toString() +
+                      ']">' +
+                      i.answers_json[s[a].key].fields.description +
+                      "</label><br>";
+                  }
+                  var r =
+                    '<div class="game_header">    <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>' +
+                    i.questions_json[i.question_number].fields.description +
+                    '</h3>            <div id="question_form">                <form name="question">' +
+                    t +
+                    '</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="' +
+                    i.candidate_image_url +
+                    '">    <img id="running_mate_pic" src="' +
+                    i.running_mate_image_url +
+                    '">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question ' +
+                    (i.question_number + 1) +
+                    " of " +
+                    i.global_parameter_json[0].fields.question_count +
+                    '</h3>        </div>        <div id="campaign_sign">        <p>' +
+                    i.candidate_last_name +
+                    "</p>        <p>" +
+                    i.running_mate_last_name +
+                    "</p>        </div>    </div>";
+                  $("#game_window").html(r);
+                };
+                tempFuncO(e);
               } else {
                 eval(localStorage.getItem(customMod + "_code2"));
                 tempFuncO = function (e, i = campaignTrail_temp) {
