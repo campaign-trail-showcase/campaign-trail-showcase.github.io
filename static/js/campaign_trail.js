@@ -1915,9 +1915,13 @@ function divideElectoralVotesProp(e, t) {
                   };
                   client2.send();
                 }
-              } catch {}
+              } catch(err) {
+                console.error("Error loading code 2", err);
+              }
             });
-          } catch {}
+          } catch(err) {
+            console.error("Error loading code 2", err);
+          }
           (e.question_number = 0),
             (e.questions_json = campaignTrail_temp.questions_json),
             (e.answers_json = campaignTrail_temp.answers_json),
