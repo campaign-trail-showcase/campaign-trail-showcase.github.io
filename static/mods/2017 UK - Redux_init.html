@@ -230,13 +230,6 @@ const startScreenUpdater = setInterval(function() {
         	}
     	}
 	}
-    
-	else if(!candidateButton && runningMateButton) {
-    	runningMateButton.click();
-    	const finalBack = document.getElementById("opponent_selection_id_back");
-    	finalBack.remove();
-    	observer.disconnect()
-	}
 
 	if(finalScreenID) { // delete back button and delete the interval
     	finalScreenBB.remove();
