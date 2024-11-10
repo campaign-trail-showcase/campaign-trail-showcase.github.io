@@ -5,6 +5,55 @@ function ctsAchievement(achievement, difficultyChecker = true){
 	}
 }
 
+const customStyling = document.createElement("style");
+customStyling.innerHTML = `
+#campaign_sign {
+    background-image: url("https://itsastronomical.com/assets/2022PAGov/shapirosign.png");
+    background-size: cover;
+    border-color: #c9c9c9;    
+    border-width: .01em;
+    margin: 0 auto;
+    background-position: center;
+    width: 100%; 
+    height: 104px; 
+    margin-left: -0.07em;
+  }
+#campaign_sign p {
+    color: rgb(0 0 0 / 0%);
+}
+.inner_window_sign_display {
+  margin: 0;
+    margin-right: 0px;
+    margin-left: 0px;
+  height: 25%;
+  position: relative;
+  width: 35%;
+  height: 28%;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: double;
+  border-color: #C9C9C9;
+}
+#state_info {
+  margin: 5% 0 0;
+  height: 120%;
+  background-color: #F8F8F8;
+  border-style: double;
+  border-color: #C9C9C9;
+}
+.inner_window_question {
+  margin: 0
+  padding-top: .3em;
+  border-style: double;
+  border-color: #C9C9C9;
+  text-align: center;
+  height: 55%;
+  position: relative;
+  clear: both;
+}
+`;
+document.head.appendChild(customStyling);
+
 campaignTrail_temp.questions_json = [
   {
     "model": "campaign_trail.question",
@@ -3325,8 +3374,8 @@ campaignTrail_temp.answer_feedback_json = [
     }
   }
 ]
-campaignTrail_temp.candidate_image_url = 'https://media.discordapp.net/attachments/939249993041215528/985392484760838174/unknown.png?width=586&height=670';
-campaignTrail_temp.running_mate_image_url = 'https://media.discordapp.net/attachments/974874611164532796/992999307450003526/unknown.png?width=586&height=670';
+campaignTrail_temp.candidate_image_url = 'https://itsastronomical.com/assets/2022PAGov/shapiro.png';
+campaignTrail_temp.running_mate_image_url = 'https://itsastronomical.com/assets/2022PAGov/sims.png';
 campaignTrail_temp.candidate_last_name = 'Shapiro';
 campaignTrail_temp.running_mate_last_name = 'Sims';
 campaignTrail_temp.running_mate_state_id = '1045';
@@ -3364,7 +3413,7 @@ if (used != true) {
         used = true;
         imgg = document.getElementsByClassName("person_image")[0];
         if (imgg != null) {
-            imgg.src = "https://i.imgur.com/YxdgghS.png";
+            imgg.src = "https://itsastronomical.com/assets/2022PAGov/shapiro.png";
         }
     }, 100);
 }
@@ -3375,7 +3424,7 @@ return "<h3>Congratulations! You have won the 2022 Pennsylvania Gubernatorial el
             used = true;
             imgg = document.getElementsByClassName("person_image")[0];
             if (imgg != null) {
-                imgg.src = "https://i.imgur.com/YxdgghS.png";
+                imgg.src = "https://itsastronomical.com/assets/2022PAGov/shapiro.png";
             }
         }, 100);
     }
@@ -3386,7 +3435,7 @@ if (used != true) {
         used = true;
         imgg = document.getElementsByClassName("person_image")[0];
         if (imgg != null) {
-            imgg.src = "https://i.imgur.com/S6fK2uM.png";
+            imgg.src = "https://itsastronomical.com/assets/2022PAGov/mastriano.png";
         }
     }, 100);
 }
