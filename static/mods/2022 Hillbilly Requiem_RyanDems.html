@@ -1,7 +1,7 @@
 e=campaignTrail_temp
 
 function ctsAchievement(achievement, difficultyChecker = true){
-	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1.06)||!difficultyChecker)
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=0.97)||!difficultyChecker)
 		if(campaignTrail_temp.CTS){
 		unlockAchievement(achievement);
 	}
@@ -31,7 +31,7 @@ quotes = [
 selQuote = quotes[Math.round(Math.random()*(quotes.length - 1))]
 corrr = `<h2>2022 Ohio Senate Race</h2><font id="wittyquote" size="4" color="white"><em>` + selQuote + `</em></font>`
 
-campaignTrail_temp.global_parameter_json = JSON.parse("[{\"model\": \"campaign_trail.global_parameter\", \"pk\": 1, \"fields\": {\"vote_variable\": 1.125, \"max_swing\": 0.12, \"start_point\": 0.94, \"candidate_issue_weight\": 10.0, \"running_mate_issue_weight\": 3.0, \"issue_stance_1_max\": -0.71, \"issue_stance_2_max\": -0.3, \"issue_stance_3_max\": -0.125, \"issue_stance_4_max\": 0.125, \"issue_stance_5_max\": 0.3, \"issue_stance_6_max\": 0.71, \"global_variance\": 0.0, \"state_variance\": 0.0, \"question_count\": 22, \"default_map_color_hex\": \"#C9C9C9\", \"no_state_map_color_hex\": \"#999999\"}}]");
+campaignTrail_temp.global_parameter_json = JSON.parse("[{\"model\": \"campaign_trail.global_parameter\", \"pk\": 1, \"fields\": {\"vote_variable\": 1.125, \"max_swing\": 0.12, \"start_point\": 0.94, \"candidate_issue_weight\": 10.0, \"running_mate_issue_weight\": 3.0, \"issue_stance_1_max\": -0.71, \"issue_stance_2_max\": -0.3, \"issue_stance_3_max\": -0.125, \"issue_stance_4_max\": 0.125, \"issue_stance_5_max\": 0.3, \"issue_stance_6_max\": 0.71, \"global_variance\": 0.01, \"state_variance\": 0.005, \"question_count\": 22, \"default_map_color_hex\": \"#C9C9C9\", \"no_state_map_color_hex\": \"#999999\"}}]");
 
 campaignTrail_temp.election_json[0].fields.advisor_url = "https://i.imgur.com/HZeulRa.png";
 
@@ -80,6 +80,12 @@ const style_overwrite = document.createElement("style");
         `#campaign_sign {
             background-color: #484ddb;
             border-color: #ff4d17;
+        }
+        #menu_container {
+            background-color: #0339fc;
+        }
+        #overall_result_container {
+            background-color: #0339fc;
         }
         #overall_result h3 {
             background-color: #ff957d;
