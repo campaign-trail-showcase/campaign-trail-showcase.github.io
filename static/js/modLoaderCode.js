@@ -353,7 +353,8 @@ function createModView(mod, imageUrl, description, isCustom) {
   modView.innerHTML = `
     <div class="mod-title" ${theme ? `style="background-color:${theme.header_color};"` : ""}>
         <p ${theme ? `style="color:${theme.header_text_color};"` : ""}>${mod.innerText}</p>
-    </div><div>
+    </div>
+    <div class = "mod-img-desc">
     <img class="mod-image" src="${imageUrl}"></img>
     <div ${theme ? `style="background-color:${theme.description_background_color}; color:${theme.description_text_color};"` : ""} class="mod-desc" >${description}</div></div>
     <div class="hover-button-holder">
