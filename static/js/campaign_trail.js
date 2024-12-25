@@ -1122,6 +1122,8 @@ function divideElectoralVotesProp(e, t) {
     return;
   };
 
+  e.answer_count = 4;
+
   const o = (t, e = campaignTrail_temp) => {
     for (
       var i = [], a = 0;
@@ -1132,7 +1134,7 @@ function divideElectoralVotesProp(e, t) {
           key: a,
           order: Math.random(),
         }),
-        4 != i.length));
+        e.answer_count != i.length));
       a++
     );
     P(i, "order");
