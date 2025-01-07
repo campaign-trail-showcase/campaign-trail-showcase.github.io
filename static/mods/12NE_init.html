@@ -1,0 +1,292 @@
+    function updateCandidateForm() {
+        try {
+        const form = document.querySelector("#candidate_form form");
+        const heading = form.querySelector("h3");
+        
+        heading.textContent = "Please select your Dalek:";
+        } catch {}
+    }
+    window.setInterval(updateCandidateForm,10)
+    function updateRunningMateForm() {
+        try {
+        const form = document.querySelector("#running_mate_form form");
+        const heading = form.querySelector("h3");
+        
+        heading.textContent = "Please select your running mate:";
+        } catch {}
+    }
+    window.setInterval(updateRunningMateForm,10)
+    function removeCandidateSummary() {
+    try {
+        const candidateSummary = document.querySelector("#candidate_summary");
+        if (candidateSummary) {
+        const ulList = candidateSummary.querySelector("ul");
+        if (ulList) {
+            candidateSummary.removeChild(ulList);
+        }
+        }
+    } catch {}
+    }
+    function removeRunningMateSummary() {
+    try {
+        const candidateSummary = document.querySelector("#candidate_summary");
+        if (candidateSummary) {
+        const ulList = candidateSummary.querySelector("ul");
+        if (ulList) {
+            candidateSummary.removeChild(ulList);
+        }
+        }
+    } catch {}
+    }
+    window.setInterval(removeCandidateSummary,10)
+    
+    let z = new MutationObserver((mutationsList, observer) => {
+        let candidateSummary = document.querySelector("#candidate_summary");
+        if (candidateSummary && candidateSummary.children[0].children[2].innerHTML != candidateSummary.children[0].children[2].innerHTML.replaceAll("Home State", "Constituency")) {
+            candidateSummary.children[0].children[2].innerHTML = candidateSummary.children[0].children[2].innerHTML.replaceAll("Home State", "Constituency");
+        }
+    });
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 3,
+        "fields": {
+            "year": 12,
+            "summary": "<div style='overflow-y:scroll;height:200px;'><p>It has been 12 years since the founding of the Skaro Republic on Planet Kepler-452b, locally named ‘Great Skaro’ and officially placed under the protection of the Doctor. In these 12 years, diversity has for the first time ever been introduced to the Dalek society with the rise of the Human-Daleks, with the first of the Human-Daleks leading the Republic of Skaro since its founding with the blessing of the Doctor. \n<p>However, despite considerable progress and the saving of the Daleks from the brink of extinction, these 12 years of the New Era have also been years of great tension. The ‘Old Daleks’ continue to struggle to accept the concept of non-supremacy and equality, while Human-Daleks have been accused of elitist discrimination. Also, a new race of Cybermen-Dalek has arisen in an unholy fusion of two supremacist races both of which seek to dominate, however, it remains fringe and mostly hated by both the Daleks and Human-Daleks. \n<p>This election, Great Skaro’s very first, threatens to tear the Republic at the very seams. The Dalek Emperor has returned from the vast void of time itself and with him brought a surge in disillusionment among the Dalek classes of the planet. Unless Dalek ‘Sec’ can manage to convince his own people to continue their path of loyalty to him and to continue belief in a prosperous, diverse future, Great Skaro is doomed and the Doctor himself may intervene...",
+            "image_url": "https://thedoctorwhosite.co.uk/wp-images/daleks/dalek-skaro-asylum-2.jpg",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://i.imgur.com/XeRow6O.jpeg",
+            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">Political News and Analysis</h4> <a href=\"http://www.realclearpolitics.com/\" target=\"_blank\">Real Clear Politics</a> -- <a href=\"http://www.theatlantic.com/\" target=\"_blank\">The Atlantic</a> -- <a href=\"http://www.politico.com/\" target=\"_blank\">Politico</a> -- <a href=\"http://www.huffingtonpost.com/\" target=\"_blank\">Huffington Post</a> -- <a href=\"http://www.foxnews.com/politics/index.html\" target=\"_blank\">Fox News Politics</a> <h4>Books by the Candidates</h4>Barack Obama - <a href=\"http://www.amazon.com/exec/obidos/ASIN/1400082773/amhius20-20\" target=\"_blank\">Dreams from My Father: A Story of Race and Inheritance</a><br>Barack Obama - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0307455874/amhius20-20\" target=\"_blank\">The Audacity of Hope: Thoughts on Reclaiming the American Dream (Vintage)</a><br> Mitt Romney - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0312671733/amhius20-20\" target=\"_blank\">No Apology: Believe in America</a><br> Gary Johnson - <a href=\"http://www.amazon.com/exec/obidos/ASIN/B008PXW0C0/amhius20-20\" target=\"_blank\">Seven Principles of Good Government</a><h4>Politics in 2012</h4> Edward Klein - <a href=\"http://www.amazon.com/exec/obidos/ASIN/1596987855/amhius20-20\" target=\"_blank\">The Amateur</a><br>Michael Kranish & Scott Helman - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0062123289/amhius20-20\" target=\"_blank\">The Real Romney</a><br>Lawrence Lessig - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0446576433/amhius20-20\" target=\"_blank\">Republic, Lost: How Money Corrupts Congress--and a Plan to Stop It</a><br>Ron Suskind - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0061429252/amhius20-20\" target=\"_blank\">Confidence Men: Wall Street, Washington, and the Education of a President</a><h4>The Financial Crisis</h4> Johan Norberg - <a href=\"http://www.amazon.com/exec/obidos/ASIN/1935308130/amhius20-20\" target=\"_blank\">Financial Fiasco: How America's Infatuation with Home Ownership and Easy Money Created the Economic Crisis</a><br>John Bellamy Foster & Fred Magdoff - <a href=\"http://www.amazon.com/exec/obidos/ASIN/1583671846/amhius20-20\" target=\"_blank\">The Great Financial Crisis: Causes and Consequences</a>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "12NE"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 16,
+        "fields": {
+            "first_name": "Dalek",
+            "last_name": "'Sec'",
+            "election": 3,
+            "party": "All-Dalek Progress Party",
+            "state": "Old Skaro",
+            "priority": 1,
+            "description": "<li><b>Name: Dalek Sec</b></li><li><b>Party: All-Dalek Progress Party</b></li><li><b>Home World: Skaro</b></li><div style='overflow-y:scroll;height:200px;'>Dalek ‘Sec’ was the leader of the Cult of Skaro, a group set up to do the unthinkable: <p>Imagine. \n<p>And imagine, he did, becoming firm in the belief that to survive the Daleks had to go beyond their narrow mentality. However, though ruthless strategy drove him at first; following his merger with a human and his rise as the first Human-Dalek, ‘Sec’ became more empathetic and pacifist. \n<p>His 12 years of leadership as the first leader of the Republic of Skaro have reflected this, with the Dalek race finding itself at peace for the first time in a long time, and a flurry of laws passed protecting equality and encouraging foreign tourism and settlement on the planet of Great Skaro. \nSeveral times crises threatened to unseat Dalek ‘Sec’, but every time the Doctor intervened and strengthened his grip on power- on the condition that the transition for democracy would arrive definitively, and now it has. \n<p>With help from the Doctor now no longer forthcoming, Dalek ‘Sec’ must rely on his achievements and keeping the loyalty of the old Daleks to ensure the Republic of Skaro endures into the New Era...</div>\n",
+            "color_hex": "#46fb64",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c9a553fd-fb07-44f3-bc93-4e085b16fc08/d1lha6e-6fe085b1-3a65-45d4-8437-78d1be0e9f7c.jpg/v1/fill/w_600,h_609,q_75,strp/human_dalek_hybrid_sec_by_jinkies36_d1lha6e-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjA5IiwicGF0aCI6IlwvZlwvYzlhNTUzZmQtZmIwNy00NGYzLWJjOTMtNGUwODViMTZmYzA4XC9kMWxoYTZlLTZmZTA4NWIxLTNhNjUtNDVkNC04NDM3LTc4ZDFiZTBlOWY3Yy5qcGciLCJ3aWR0aCI6Ijw9NjAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.TtSyDAHhYUoJ6cQSlzCgZasHV9sKh8f9B-MB-3iHFU0",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 17,
+        "fields": {
+            "first_name": "Dalek ",
+            "last_name": "Emperor",
+            "election": 3,
+            "party": "Independent",
+            "state": "Old Skaro",
+            "priority": 2,
+            "description": "",
+            "color_hex": "#000000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://i.ytimg.com/vi/B2neSCXq6CM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDL1-dBleYXZCXumGvm6nL5PfVQaw",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 0.8,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 18,
+        "fields": {
+            "first_name": "Dalek",
+            "last_name": "1202",
+            "election": 3,
+            "party": "Independent",
+            "state": "Great Skaro",
+            "priority": 3,
+            "description": "",
+            "color_hex": "#FFFF00",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": "",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 19,
+        "fields": {
+            "first_name": "Cyberman-Dalek",
+            "last_name": "'Zenith'",
+            "election": 3,
+            "party": "",
+            "state": "",
+            "priority": 4,
+            "description": "",
+            "color_hex": "#3271c3",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 30,
+        "fields": {
+            "first_name": "The",
+            "last_name": "Doctor",
+            "election": 3,
+            "party": "Last of the Time Lords",
+            "state": "Gallifrey",
+            "priority": 7,
+            "description": "<p>V.P. </p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/TpBBz9r.jpeg",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "No one really knows who he is. \n\nAnd yet everyone knows him at the same time. \n\n<p>It's the Doctor, after all. The scourge of the Dalek race, the man who almost brought them to extinction, the greatest enemy of the Daleks ever. And yet, at the same time, he is your greatest backer, he gave you; and the Daleks, this planet and another chance. \n\n<p>Yet he has seemingly abandoned you - a rant about the integrity of democracy and how this is the moment the Daleks will choose their own future, and he stepped into his stupid blue box and flew off to who knows where. So now you get all the hurt of association with the Doctor and none of the benefit, with the man himself nowhere to be found. ",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 1,
+        "fields": {
+            "candidate": 16,
+            "running_mate": 30
+        }
+    }
+]
+
+campaignTrail_temp.credits = "Amur, with help from Girlie and Mango."
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 20,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 3,
+        "candidates": [
+            16,
+            17,
+            18,
+            19
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 3,
+        "candidates": [
+            16,
+            17,
+            18,
+            19
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 3,
+        "year": 2012,
+        "is_premium": 0,
+        "display_year": "12NE"
+    }
+]
+
+jet_data = {
+    "headerColor": "#431e25",
+    "windowColor": "#2c74a0",
+    "containerColor": "#3a3131",
+    "innerWindowColor": "#dbdcf5",
+    "bannerImageUrl": "https://pbs.twimg.com/media/F9dK53RXEAAS-gx?format=jpg&name=large",
+    "backgroundImageUrl": "https://images.alphacoders.com/861/thumb-1920-861290.jpg",
+    "endingTextColor": "#000000",
+    "customQuote": "\"My Daleks... understand this. If you choose death and destruction... then death and destruction will choose you.\"",
+    "gameTitle": "The Dalek Trail"
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>The Dalek Trail</h2><font id="wittyquote" size="4" color="white"><em>"My Daleks... understand this. If you choose death and destruction... then death and destruction will choose you."</em></font>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#431e25";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#2c74a0";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#3a3131";
+
+document.getElementById("header").src = "https://pbs.twimg.com/media/F9dK53RXEAAS-gx?format=jpg&name=large";
+
+document.body.background = "https://images.alphacoders.com/861/thumb-1920-861290.jpg";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#dbdcf5!important;}</style>";
+
+//#endcode

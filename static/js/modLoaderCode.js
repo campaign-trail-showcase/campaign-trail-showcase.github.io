@@ -354,8 +354,9 @@ function createModView(mod, imageUrl, description, isCustom) {
     <div class="mod-title" ${theme ? `style="background-color:${theme.header_color};"` : ""}>
         <p ${theme ? `style="color:${theme.header_text_color};"` : ""}>${mod.innerText}</p>
     </div>
+    <div class = "mod-img-desc">
     <img class="mod-image" src="${imageUrl}"></img>
-    <div ${theme ? `style="background-color:${theme.description_background_color}; color:${theme.description_text_color};"` : ""} class="mod-desc" >${description}</div>
+    <div ${theme ? `style="background-color:${theme.description_background_color}; color:${theme.description_text_color};"` : ""} class="mod-desc" >${description}</div></div>
     <div class="hover-button-holder">
         <button ${theme ? `style="background-color:${theme.secondary_color};"` : ""} class="mod-play-button hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ""}>${PLAY}</span></button>
         <button ${theme ? `style="background-color:${theme.secondary_color};"` : ""} class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ""}>${favText}</span></button>

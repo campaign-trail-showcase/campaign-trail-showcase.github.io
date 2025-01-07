@@ -1,0 +1,667 @@
+RecReading=true;
+e=campaignTrail_temp
+
+if(document.getElementById("position-display")==null)
+{
+
+function updateIntroForm() {
+    try {
+      const form = document.querySelector("#election_year_form form");
+      const heading = form.querySelector("h3");
+      
+      heading.textContent = "Please select the Christmas you wish to manage:";
+    } catch {}
+  }
+window.setInterval(updateIntroForm,10)
+
+function updateElectionNightForm() {
+    // Change text inside p tag in a div with id "election_night_content"
+    const contentDiv = document.getElementById("election_night_content");
+    if (contentDiv) {
+      const pTag = contentDiv.querySelector("p");
+      if (pTag) {
+        pTag.textContent = "Christmas Night has arrived. Start delivering the presents, however long it may take. Merry Xmas!";
+      }
+    }
+}
+window.setInterval(updateElectionNightForm,10)
+
+function updateCandidateForm() {
+    try {
+      const form = document.querySelector("#candidate_form form");
+      const heading = form.querySelector("h3");
+      
+      heading.textContent = "Please select your Champion of Christmas:";
+    } catch {}
+  }
+window.setInterval(updateCandidateForm,10)
+
+// Running Mate
+function updateRunningMateForm() {
+    try {
+      const form = document.querySelector("#running_mate_form form");
+      const heading = form.querySelector("h3");
+      
+      heading.textContent = "Please select your Helper:";
+    } catch {}
+}
+window.setInterval(updateRunningMateForm,10)
+  function removeVPSummary() {
+  try {
+    const vpSummary = document.querySelector("#running_mate_summary");
+    if (vpSummary) {
+      const ulList = vpSummary.querySelector("ul");
+      if (ulList) {
+        vpSummary.removeChild(ulList);
+      }
+    }
+  } catch {}
+  }
+  window.setInterval(removeVPSummary,10)
+function updateRunningMateForm() {
+        try {
+        const form = document.querySelector("#running_mate_form form");
+        const heading = form.querySelector("h3");
+        
+        heading.textContent = "Please select your Helper:";
+        } catch {}
+    }
+    window.setInterval(updateRunningMateForm,10)
+    function removeCandidateSummary() {
+    try {
+        const candidateSummary = document.querySelector("#candidate_summary");
+        if (candidateSummary) {
+        const ulList = candidateSummary.querySelector("ul");
+        if (ulList) {
+            candidateSummary.removeChild(ulList);
+        }
+        }
+    } catch {}
+    }
+    function removeRunningMateSummary() {
+    try {
+        const candidateSummary = document.querySelector("#candidate_summary");
+        if (candidateSummary) {
+        const ulList = candidateSummary.querySelector("ul");
+        if (ulList) {
+            candidateSummary.removeChild(ulList);
+        }
+        }
+    } catch {}
+    }
+    window.setInterval(removeCandidateSummary,10)
+    
+    let z = new MutationObserver((mutationsList, observer) => {
+        let candidateSummary = document.querySelector("#candidate_summary");
+        if (candidateSummary && candidateSummary.children[0].children[2].innerHTML != candidateSummary.children[0].children[2].innerHTML.replaceAll("Home State", "Constituency")) {
+            candidateSummary.children[0].children[2].innerHTML = candidateSummary.children[0].children[2].innerHTML.replaceAll("Home State", "Constituency");
+        }
+    });
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 3,
+        "fields": {
+            "year": 2024,
+            "summary": "<div style='overflow-y:scroll;height:200px;'><p style=\"font-family:Spectral; \">2024 has been a tumultuous year for everyone the whole world over. Beyond just the worldwide news stories and the constant roll of fear and uncertainty; a lot of meaningful things have happened for people on a personal level. There have been ups, as well as a lot of downs, but however everyone’s year has gone, it is now finally nearing its end.</p><p style=\"font-family:Spectral; \">Christmas is here, and a certain jolly old man wants to make sure to spread as much cheer as possible before 2025 rolls around. After all, what’s the point of feeling down over what’s already been? A happy new year could be just around the corner.</p><p style=\"font-family:Spectral; \">And it doesn’t matter if you celebrate Christmas or not. It doesn’t matter where you live, who you are, or what you love; Sinterklaas is here for everyone.</p>",
+            "image_url": "https://img.freepik.com/premium-photo/new-year-image-dancing-reindeer-surrounded-by-festive-decor_1177187-218924.jpg?semt=ais_hybrid",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://www.publicdomainpictures.net/pictures/560000/nahled/image-1701585606kai.jpg",
+            "recommended_reading": "<h4 style=\\\"margin-top: 0.5em;\\\">Further Reading</h4><a href=\\\"https://www.hollandsentinel.com/story/news/local/2021/12/05/ho-ho-who-sinterklaas-and-st-nick/8850448002/\\\" target=\\\"_blank\\\">Who Are Sinterklaas and St. Nick?</a><br><a href=\\\"https://www.kipmistral.com/the-adventures-of-amerigo-flying-white-horse-of-sinterklaas/\\\" target=\\\"_blank\\\">The Adventures of Amerigo</a><h4>MERRY CHRISTMAS EVERYONE!</h4>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "2024 🌟 Christmas"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 16,
+        "fields": {
+            "first_name": "",
+            "last_name": "Sinterklaas",
+            "election": 3,
+            "party": "Making People Happy",
+            "state": "Naughty Children",
+            "priority": 1,
+            "description": "<li><b>Name: Sinterklaas</b></li><li><b>Likes: Making People Happy... And Cookies!</b></li><li><b>Dislikes: Naughty Children</b></li><div style='overflow-y:scroll;height:200px;'><p style=\"font-family:Spectral; \">You have many names; and sure, we could list them all... but it doesn’t really matter. Everyone who knows you, knows you no matter what they choose to call you, and everyone who doesn’t know you still has their name on your famous list!</p><p style=\"font-family:Spectral; \">Oh yes, you’ve been keeping close track this past year of who’s been naughty or nice and you’ve checked the list over not just twice, but thrice! But this year is particularly special. It’s been a toughie for far too many, and so much has happened that pains your heart and as jolly as you may seem, you care far too much to pretend nothing’s wrong.</p><p style=\"font-family:Spectral; \">But for at least one magical night, it’s your chance to make the whole world a little happier. Hopefully, there’s no one out there planning to steal Christmas...</p>",
+            "color_hex": "#3ecdea",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://i.ibb.co/BPbZ0nH/Sinterklaas.jpg ",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 17,
+        "fields": {
+            "first_name": "",
+            "last_name": "The Grinch",
+            "election": 3,
+            "party": "Republican",
+            "state": "Massachusetts",
+            "priority": 2,
+            "description": "",
+            "color_hex": "#e1ff00",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/mitt-romney-2012.jpg",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 0.8,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 18,
+        "fields": {
+            "first_name": "",
+            "last_name": "Love",
+            "election": 3,
+            "party": "Libertarian",
+            "state": "New Mexico",
+            "priority": 3,
+            "description": "",
+            "color_hex": "#dd0e68",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/gary-johnson-2012.jpg",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": "",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 19,
+        "fields": {
+            "first_name": "",
+            "last_name": "Joy",
+            "election": 3,
+            "party": "Green",
+            "state": "Massachusetts",
+            "priority": 4,
+            "description": "",
+            "color_hex": "#60c62a",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": null,
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 30,
+        "fields": {
+            "first_name": "Zwarte",
+            "last_name": "Piet",
+            "election": 3,
+            "party": "Giving Out Candy",
+            "state": "Grumpy Folk",
+            "priority": 7,
+            "description": "<p>V.P. </p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.ibb.co/KwdmtsP/Zwarte-Piet.jpg ",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "<li><b>Name: Zwarte Piet</b></li><li><b>Likes: Giving Out Candy</b></li><li><b>Dislikes: Grumpy Folk</b></li><p style=\"font-family:Spectral; \">Zwarte Piet has been your faithful companion for many years. For a long time, he had the more unfortunate parts of the job, like doling out coal; but that’s not what Christmas is about! Especially not this year.</p><p style=\"font-family:Spectral; \">No, this year it’s all about the presents, and beyond that it’s all about the Christmas spirit. It’s about the love and the peace and the chance to be together. There isn’t going to be any coal to see the whole world over, at least, not any from you! (Christmas Country’s already at net zero, anyway.)</p><p style=\"font-family:Spectral; \">Piet has stuffed his magical sack with as much candy and sweets as you’d ever need to give out, and he’s ready to join you to spread cheer and joy. Make sure to thank him for his help!</p> ",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 1,
+        "fields": {
+            "candidate": 16,
+            "running_mate": 30
+        }
+    }
+]
+
+campaignTrail_temp.credits = "Amur, for the Oracle"
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 15,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 3,
+        "candidates": [
+            16,
+            17,
+            18,
+            19
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 3,
+        "candidates": [
+            16,
+            17,
+            18,
+            19
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 3,
+        "year": 2012,
+        "is_premium": 0,
+        "display_year": "2024 Christmas"
+    }
+]
+
+jet_data = {
+    "headerColor": "#d6002b",
+    "windowColor": "#db061b",
+    "containerColor": "#74c214",
+    "innerWindowColor": "#3ddfff",
+    "bannerImageUrl": "https://i.ibb.co/KGpsqTS/Banner2.png",
+    "backgroundImageUrl": "https://i.gifer.com/19V4.gif",
+    "endingTextColor": "#ffffff",
+    "customQuote": "\"Christmas isn't a season. It's a feeling.\"",
+    "gameTitle": "🎄The Christmas Trail🎄"
+}
+
+//#startcode
+
+
+corrr = `\n              <h2>🎄The Christmas Trail🎄</h2><font id="wittyquote" size="4" color="white"><em>"Christmas isn't a season. It's a feeling."</em></font>\n            `;
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#d6002b";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#db061b";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#74c214";
+
+document.getElementById("header").src = "https://i.ibb.co/xS6jmJM/Banner-3.png";
+
+document.body.background = "https://i.gifer.com/19V4.gif";
+
+document.head.innerHTML += "<style>#results_container {color:#ffffff;} .inner_window_w_desc {background-color:#3ddfff!important;}</style>";
+
+//#endcode
+
+// Initialise custom music
+
+$("#music_player")[0].children[0].style.display="none"
+$("#music_player")[0].children[1].style.display="none"
+
+document.getElementById("modLoadReveal").style.display="none"
+document.getElementById("modloaddiv").style.display="none"
+
+musicBox = document.getElementById("music_player")
+musicBox.style.display=""
+
+var trackSel;
+e = campaignTrail_temp
+e.selectedSoundtrack = 0
+
+toTime = (seconds) => {
+  var date = new Date(null);
+  date.setSeconds(seconds);
+  return date.toISOString().substr(11, 8);
+}
+
+generateTime = () => {
+    // Get the audio element
+    var audio = document.getElementById("campaigntrailmusic");
+
+    timeTracker = document.createElement("div");
+    timeTracker.style = `
+      text-align:left;
+      border-style:solid;
+      border-width:3px;
+      height:150px;
+      width:200px;
+      background-color:#90EE90;
+      float:right;
+      padding: 10px;
+    `
+    $("#trackSelParent")[0].prepend(timeTracker);
+    $("#trackSelParent")[0].prepend(document.createElement("br"));
+
+    // Create a new element to display the current position of the audio
+    var positionDisplay = document.createElement("gg");
+    positionDisplay.id = "position-display";
+
+    // Create a new slider element to change the time
+    var timeSlider = document.createElement("input");
+    timeSlider.type = "range";
+    timeSlider.min = 0;
+    timeSlider.max = 1;
+    timeSlider.step = 0.001;
+    timeSlider.value = 0;
+    timeSlider.style.width = "200px";
+    timeSlider.id = "time-slider";
+
+    var pausePlay = document.createElement("button");
+    pausePlay.id = "position-display";
+    pausePlay.innerHTML = "<b>Pause</b>"
+    pausePlay.style.width = "100%";
+
+
+    pausePlay.addEventListener("click", event => {
+      event.preventDefault();
+      updatePositionDisplay();
+      let audio = document.getElementById("campaigntrailmusic");
+      if (audio.paused) {
+        audio.play();
+        event.target.innerHTML = "<b>Pause</b>";
+        return;
+      }
+      audio.pause();
+      event.target.innerHTML = "<b>Play</b>";
+      return;
+    })
+
+    var volumeLabel = document.createElement("gg");
+    volumeLabel.id = "volume-label";
+    volumeLabel.innerHTML = "<br><b>Volume: </b>"
+
+    var volumeSlider = document.createElement("input");
+    volumeSlider.type = "range";
+    volumeSlider.min = 0;
+    volumeSlider.max = 1;
+    volumeSlider.step = 0.001;
+    volumeSlider.value = 0;
+    volumeSlider.style.width = "200px";
+    volumeSlider.id = "volume-slider";
+
+    volumeSlider.value = audio.volume;
+
+    timeTracker.appendChild(pausePlay);
+    timeTracker.appendChild(document.createElement("br"));
+    timeTracker.appendChild(document.createElement("br"));
+    timeTracker.appendChild(positionDisplay);
+    timeTracker.appendChild(timeSlider);
+    timeTracker.appendChild(volumeLabel);
+    timeTracker.appendChild(volumeSlider);
+
+    updatePositionDisplay();
+
+    //for (let i = 0; i < 10; i++)
+    //timeTracker.append(document.createElement("br"));
+
+
+    // Function to update the position display
+    function updatePositionDisplay() {
+      positionDisplay.innerHTML = "<b>Time:</b> " + toTime(audio.currentTime) + "<br>";
+      timeSlider.value = audio.duration ? audio.currentTime / audio.duration : 0;
+    }
+
+    // Function to change the time of the audio
+    function changeTime() {
+      positionDisplay.innerHTML = "<b>Time:</b> " + toTime(audio.currentTime) + "<br>";
+      audio.currentTime = timeSlider.value * audio.duration;
+    }
+
+    updateVolume = event => {
+      audio.volume = event.target.value;
+    }
+    
+    // Update the position display and slider every second
+    setInterval(updatePositionDisplay, 1000);
+
+    // Listen for changes to the time slider and change the time of the audio
+    timeSlider.addEventListener("input", changeTime);
+    volumeSlider.addEventListener("input", updateVolume)
+}
+
+function newMusicPlayer() {
+  trackSel = document.createElement("div");
+  trackSel.id = "trackSelParent"
+  let z = `<br><br><br><br><br><br><br><br><br><br><div id='trackSel' style="text-align:left;border-style:solid;border-width:3px;overflow-y: scroll;overflow-x: hidden;height:200px; width:400px;background-color:#90EE90;float:right;">`
+  z += `<b><select id='selectSoundtrack'><option value='`+soundtracks[e.selectedSoundtrack].name+`'>`+soundtracks[e.selectedSoundtrack].name+"</option>"
+  for (i in soundtracks) {
+    if (soundtracks[e.selectedSoundtrack] != soundtracks[i]) {
+      z += `<option value='`+soundtracks[i].name+`'>`+soundtracks[i].name+`</option>`
+    }
+  }
+  z += `</select></b><br><br>`
+  // <label><input type="radio" name="option" value="option1">Option 1</label><br>
+  for (i in soundtracks[e.selectedSoundtrack].tracklist) {
+    let a = soundtracks[e.selectedSoundtrack].tracklist[i]
+    let b = `<label><input class="trackSelector" type="radio" name="trackSelector" value="`+i+`">`+a.name+`</label><br>`
+    z += b
+  }
+  z += "</div><br><br>"
+  trackSel.innerHTML = z
+
+  // select correct song
+
+  musicBox.appendChild(trackSel);
+  Array.from(document.getElementById("trackSel").children).filter(f=>{
+    return f.tagName == "LABEL"
+  }).map(f=>f.children[0])[0].checked = true
+
+  // set soundtrack changer
+
+  soundtrackSelector = document.getElementById("selectSoundtrack")
+  soundtrackSelector.onchange = function() {
+    for (i in soundtracks) {
+      if (soundtracks[i].name == soundtrackSelector.value) {
+        e.selectedSoundtrack = i
+        break
+      }
+    }
+    document.getElementById("trackSelParent").remove()
+    newMusicPlayer()
+  }
+
+  var matches = document.querySelectorAll('.trackSelector');
+
+  for (match in matches) {
+    matches[match].onchange = function() {
+      audio = $("#campaigntrailmusic")[0];
+      audio.src = soundtracks[e.selectedSoundtrack].tracklist[this.value].url
+      audio.currentTime = 0
+    }
+  }
+
+  musicBox.children[2].loop = false
+  musicBox.children[2].src = soundtracks[e.selectedSoundtrack].tracklist[0].url
+
+  musicBox.children[2].onended = function() {
+    console.log("next track")
+    let selected = Number(document.querySelector('input[name="trackSelector"]:checked').value);
+    let newSel = clamp(selected+1, soundtracks[e.selectedSoundtrack].tracklist.length-1, 0)
+    let buttons = Array.from(document.getElementById("trackSel").children).filter(f=>{
+      return f.tagName == "LABEL"
+    }).map(f=>f.children[0])
+    //let selectedIndex = buttons.map(f=>f.children[0]).map(f=>f.checked)
+    buttons[newSel].click()
+  }
+
+  for (w = 0; w < 7; w++) {
+    document.getElementById("trackSelParent").appendChild(document.createElement("br"))
+  }
+  
+  generateTime();
+}
+
+clamp = function(a, max, min, overflow=true) {
+  if (overflow) {
+    return a > max ? min : a < min ? max : a;
+  }
+  return a > max ? max : a < min ? min : a;
+}
+
+
+// Track list
+
+var soundtracks = {
+  0: {
+    name: "Christmas '24!",
+    tracklist: [
+      {
+        "name": "Jingle Bells",
+        "url": "https://files.catbox.moe/eywn01.mp3"
+      },
+      {
+        "name": "Silent Night",
+        "url": "https://files.catbox.moe/h37sh9.mp3"
+      },
+      {
+        "name": "Deck the Halls",
+        "url": "https://files.catbox.moe/7k1w0c.mp3"
+      },
+      {
+        "name": "Santa Claus Is Comin' To Town",
+        "url": "https://files.catbox.moe/nm68ov.mp3"
+      },
+	  {
+        "name": "We Wish You A Merry Christmas",
+        "url": "https://files.catbox.moe/9dmesn.mp3"
+      },
+	  {
+        "name": "Nutcracker - Dance of the Sugar Plum Fairy",
+        "url": "https://files.catbox.moe/x755ld.mp3"
+      },
+	  {
+        "name": "Good King Wenceslas",
+        "url": "https://files.catbox.moe/1e8m2j.mp3"
+      },
+	  {
+        "name": "Joy to the World",
+        "url": "https://files.catbox.moe/k2ysxs.mp3"
+      }
+    ]
+  }
+}
+
+// Set up new music player
+
+newMusicPlayer()
+
+function addDynamicCSS() {
+    var css = `
+        .inner_window_question h3 .mytooltip{
+            background-color: lightgreen;
+        }
+
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background-color: lightblue;
+        }
+
+        .mytooltip .mytooltiptext {
+            width: 240px;
+            background-color: lightgreen;
+            color: black;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 20%;
+            left: 20%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid black;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+
+        .mytooltip .mytooltiptext img {
+            max-width: 240px;
+            height: auto;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+    
+    styleElem.appendChild(document.createTextNode(css));
+    
+    document.head.appendChild(styleElem);
+}
+
+
+addDynamicCSS();
+
+tooltipList = [
+    {searchString: "love", explanationText: "Everywhere, always new, love is in you."},
+    {searchString: "Christmas", explanationText: "A wonderful time of the year, never comes fast enough and always far too short."},
+	{searchString: "Cupid", explanationText: "Luckily there's more than enough arrows for everyone!"},
+	{searchString: "adults", explanationText: "Big kids who've lost their way. Don't worry, they'll come around!"},
+	{searchString: "peace", explanationText: "One day, every one will live in peace, all over the world."},
+	{searchString: "presents", explanationText: "They're far more fun to give... though receiving them is pretty good too!"},
+	{searchString: "Nice", explanationText: "Hope one day everyone's going to be on this list!"},
+	{searchString: "Zingibara", explanationText: "<img src=https://i.ibb.co/3MnG1LK/Zingi.png> :3"}
+        
+];
+}
+
+

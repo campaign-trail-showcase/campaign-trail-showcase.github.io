@@ -10513,6 +10513,26 @@ campaignTrail_temp.answer_score_issue_json = [
             "issue_score": 0.6,
             "issue_importance": 7
         }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 11743,
+        "fields": {
+            "answer": 11604,
+            "issue": 13,
+            "issue_score": 0.5,
+            "issue_importance": 6
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 11744,
+        "fields": {
+            "answer": 11602,
+            "issue": 14,
+            "issue_score": 0.7,
+            "issue_importance": 5
+        }
     }
 ]
 
@@ -21230,6 +21250,171 @@ campaignTrail_temp.answer_score_state_json = [
             "affected_candidate": 25,
             "state_multiplier": 0.01
         }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11728,
+        "fields": {
+            "answer": 11600,
+            "state": 103,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11729,
+        "fields": {
+            "answer": 11600,
+            "state": 109,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11730,
+        "fields": {
+            "answer": 11600,
+            "state": 117,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11731,
+        "fields": {
+            "answer": 11600,
+            "state": 128,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.05
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11732,
+        "fields": {
+            "answer": 11600,
+            "state": 135,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11733,
+        "fields": {
+            "answer": 11602,
+            "state": 103,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11734,
+        "fields": {
+            "answer": 11602,
+            "state": 109,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11735,
+        "fields": {
+            "answer": 11602,
+            "state": 117,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11736,
+        "fields": {
+            "answer": 11602,
+            "state": 128,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.05
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11737,
+        "fields": {
+            "answer": 11602,
+            "state": 135,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11738,
+        "fields": {
+            "answer": 11604,
+            "state": 103,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11739,
+        "fields": {
+            "answer": 11604,
+            "state": 109,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11740,
+        "fields": {
+            "answer": 11604,
+            "state": 117,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11741,
+        "fields": {
+            "answer": 11604,
+            "state": 128,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.05
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 11742,
+        "fields": {
+            "answer": 11604,
+            "state": 135,
+            "candidate": "25",
+            "affected_candidate": "25",
+            "state_multiplier": 0.03
+        }
     }
 ]
 
@@ -21762,7 +21947,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1683,
             "candidate": 25,
-            "answer_feedback": "In the end, little is changed - the draconian restrictions still exist, and you've managed to isolate both sides of the debate here."
+            "answer_feedback": "In the end, little is changed - the draconian restrictions still exist, and you've managed to isolate both sides of the debate here. Henry Ford writes an opinion piece in support of your vote."
         }
     },
     {
@@ -22627,6 +22812,8 @@ var guard = false;
 var lynn = false;
 var brand = false;
 
+// Achievement Variables
+var noparty = false;
 
 // This is where the actual CYOA code really is
 
@@ -22907,6 +23094,9 @@ if((ans == 1792 || ans == 1793 || ans == 1794) && gop >= 2 && harding >= 2 && ac
     }
   }
 
+  if (ans == 1688) {
+    noparty = true;
+  }
 
   // Loads VP selection screen
   if (e.question_number == 15) {
@@ -23294,30 +23484,24 @@ if (quickstats[1] >= 20) {
   ctsAchievement("One in Five");
 }
 
-if (ans == 1688 && aa[1].electoral_votes < 266 && aa[2].electoral_votes < 266 && aa[3].electoral_votes < 266) {
+if (noparty == true && aa[1].electoral_votes < 266 && aa[2].electoral_votes < 266 && aa[3].electoral_votes < 266) {
   ctsAchievement("He's All In");
 }
 
-if (aa[0].electoral_votes >= 266 && (aa[0].candidate == 23 || aa[0].candidate == 24) && quickstats[0] >= 40) {
+if (aa[0].electoral_votes >= 266 && quickstats[0] >= 40) {
   ctsAchievement("The People's Voice");
+}
+if (aa[0].electoral_votes >= 266 && ans == 1689) {
+  ctsAchievement("A Real Choice");
+}
+if (aa[0].electoral_votes < 266 && quickstats[0] >= 70) {
+  ctsAchievement("A Visible Revolt");
 }
 
 // Page 1
 
-// Coolidge/Davis Wins
-if (aa[0].electoral_votes >= 266 && (aa[0].candidate == 23 || aa[0].candidate == 24)) {
-  e.pages.push(`<h3>'Democracy is a life, and involves continual struggle'</h3><p>The telegram comes in soon enough - the conservatives, of either the Republican or Democratic brand, will keep their stranglehold on government. You don't even stop to think about which one it is - although it's almost certainly Coolidge. Both the House and the Senate are also going to almost certainly stay divided between the two parties, although you do find solace in the fact that the Farmer-Labor and Socialists will likely pick up at least one seat each. You also still have until 1928 for your own Senate seat.<br><br>Unfortunately, your poor health now puts the progressives in a tricky spot. Much of the energy was spent attempting to get you elected, with the hope that it would trickle down ballot. That has not appeared to occur, with little inroads made by the progressives nationally. Still, you have just received one of the best showings of a third party in history - the third or fourth best depending on your definition of the great election of 1860. In any case, you have little time left, but still so much work to do. You shall now return to the Senate, hoping to make some headway on the issues you so care about.</p>`)
-  e.executable.push([0, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/bobloss.png'})])
-}
-// Coolidge/Davis Wins but you made your own party
-else if (aa[0].electoral_votes >= 266 && ans == 1689 && (aa[0].candidate == 23 || aa[0].candidate == 24)) {
-  ctsAchievement("A Real Choice");
-  e.pages.push(`<h3>'Democracy is a life, and involves continual struggle'</h3><p>The telegram comes in soon enough - the conservatives, of either the Republican or Democratic brand, will keep their stranglehold on government. You don't even stop to think about which one it is - although it's almost certainly Coolidge. Both the House and the Senate are also going to almost certainly stay divided between the two parties, although you do find solace in the fact that the Progressive Party will likely pick up a series of seats in the Midwest and New York City. You also still have until 1928 for your own Senate seat.<br><br>With the Progressive Party now formed, there are possibilities for you and this party. Your health is poor, but your sprits are not, and many are hoping that this party can have the momentum that the so-called 'Bull Moose' Party failed to achieve after the success in 1912. With not much time left, you must think about the future of this movement - who should be the leader? Will it be Bob Junior? Or your running mate? Only time will tell, but there are plenty of options.</p>`)
-  e.executable.push([0, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/bobloss.png'})])
-}
-
 // La Follette Wins
-else if (aa[0].electoral_votes >= 266 && aa[0].candidate == 25) {
+if (aa[0].electoral_votes >= 266 && aa[0].candidate == 25) {
   ctsAchievement("Fighting Bob");
   e.pages.push(`<h3>'The will of the people shall be the law of the land'</h3><p>For your whole career, you have pushed for progressive policies, no matter how much ire it brought you from your political opponent. Tonight's stunning result is a vindication of yourself and everything you have fought for. You aren't even sure how long you shall be in office for, given your health, but you know that you shall push for bold and great reform.<br><br>Days, perhaps weeks pass as you wait for Coolidge to telegram you a concession. Eventually he does so. He also asks that you prepare yourself to enter the White House. You're pushing for your son to be appointed to your soon-to-be vacated Senate seat, as you begin preparations to form a cabinet. Here's to hoping you can make it through all four years, and that this independence from the duopoly is here to stay!</p>`)
   e.executable.push([0, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/bobwin.png'})])
@@ -23339,6 +23523,18 @@ else if (aa[0].electoral_votes >= 266 && (aa[0].candidate == 23 || aa[0].candida
 else if (aa[1].candidate == 25) {
   e.pages.push(`<h3>'Publicity, discussion, and agitation are necessary to accomplish any work of lasting benefit'</h3><p>Within the day or so, you realize that you will not be the next President. However, Bob Junior and Phillip tell you to hold off on a statement - let the votes trickle in. As it turns out, they were 100% right. Something unexpected has happened - despite losing, you've managed to win second place. Newspapers are quick to report on this, having not expected this. They provide a variety of reasoning - Jim Crow laws cut off potential Davis vote in the south, La Follette did better in the population-rich east, among other reasons.<br><br>While you will not be around for much of the future, the progressive movement has been blessed with the second opportunity in 12 years to reshape American politics in a more left-wing tilt. It will certainly be difficult to manage the large coalition it took to get to this point, and the ensuing leadership battle could cause its untimely demise. However, if you use whatever time you have left, who knows what could happen?</p>`)
   e.executable.push([0, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/bobrunner.png'})])
+}
+
+// Coolidge/Davis Wins
+else if (aa[0].electoral_votes >= 266 && (aa[0].candidate == 23 || aa[0].candidate == 24)) {
+  e.pages.push(`<h3>'Democracy is a life, and involves continual struggle'</h3><p>The telegram comes in soon enough - the conservatives, of either the Republican or Democratic brand, will keep their stranglehold on government. You don't even stop to think about which one it is - although it's almost certainly Coolidge. Both the House and the Senate are also going to almost certainly stay divided between the two parties, although you do find solace in the fact that the Farmer-Labor and Socialists will likely pick up at least one seat each. You also still have until 1928 for your own Senate seat.<br><br>Unfortunately, your poor health now puts the progressives in a tricky spot. Much of the energy was spent attempting to get you elected, with the hope that it would trickle down ballot. That has not appeared to occur, with little inroads made by the progressives nationally. Still, you have just received one of the best showings of a third party in history - the third or fourth best depending on your definition of the great election of 1860. In any case, you have little time left, but still so much work to do. You shall now return to the Senate, hoping to make some headway on the issues you so care about.</p>`)
+  e.executable.push([0, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/bobloss.png'})])
+}
+// Coolidge/Davis Wins but you made your own party
+else if (aa[0].electoral_votes >= 266 && ans == 1689 && (aa[0].candidate == 23 || aa[0].candidate == 24)) {
+  ctsAchievement("A Real Choice");
+  e.pages.push(`<h3>'Democracy is a life, and involves continual struggle'</h3><p>The telegram comes in soon enough - the conservatives, of either the Republican or Democratic brand, will keep their stranglehold on government. You don't even stop to think about which one it is - although it's almost certainly Coolidge. Both the House and the Senate are also going to almost certainly stay divided between the two parties, although you do find solace in the fact that the Progressive Party will likely pick up a series of seats in the Midwest and New York City. You also still have until 1928 for your own Senate seat.<br><br>With the Progressive Party now formed, there are possibilities for you and this party. Your health is poor, but your sprits are not, and many are hoping that this party can have the momentum that the so-called 'Bull Moose' Party failed to achieve after the success in 1912. With not much time left, you must think about the future of this movement - who should be the leader? Will it be Bob Junior? Or your running mate? Only time will tell, but there are plenty of options.</p>`)
+  e.executable.push([0, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/bobloss.png'})])
 }
 
 // Successful Deadlock 
@@ -23429,12 +23625,12 @@ else if (success == false && lynn == true && (aa[0].candidate == 23 || aa[0].can
 else if (success == true && brand == true && (aa[0].candidate == 23 || aa[0].candidate == 24)) {
   ctsAchievement("End Poverty");
   e.pages.push(`<h3>1932 United States presidential election</h3><p><i>From Wikipedia, the free encyclopedia</i><br><br>The 1932 United States presidential election was the 37th quadrennial presidential election, held on Tuesday, November 8, 1932. The election took place against the backdrop of the Great Depression. The incumbent Republican President Calvin Coolidge was defeated in a landslide by Progressive Upton Sinclair, with Democrat James Reed taking second place. Sinclair was the first third-party candidate to win a Presidential election, and the first non-Democratic or non-Republican President since Millard Fillmore in the 1850s.<br><br>The election marked the effective end of the Fourth Party System, which had been dominated by Republicans. Despite disastrous economic conditions due to the Great Depression, Coolidge easily defeated opposition such as Herbert Hoover at the 1932 Republican National Convention. Reed was widely considered the front-runner after the 1932 Democratic National Convention, but began to lose ground to the third-party Progressive ticket during the fall campaign. The collapse of the Republican campaign largely benefitted Sinclair's bid, although Reed gained conservative voters as well.<br><br>Sinclair won both a majority in the electoral and a plurality of the popular votes, carrying the west and winning nearly every industrial midwest and northern state.</p>`)
-  e.executable.push([1, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/winbrandeis.png'})])
+  e.executable.push([1, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/brandeiswin.png'})])
 }
 // Failed Brandeis
 else if (success == false && brand == true && (aa[0].candidate == 23 || aa[0].candidate == 24)) {
   e.pages.push(`<h3>Louis Brandeis' Biggest Mistake</h3><p>Many on the left frequently idolize Justice Brandeis' brief yet progressive tenure. While he only served for eight years, frequent rankings of Supreme Court justices often place him in the upper tier of Justices, possibly being ranked the best. While his judicial experience is undoubtable, there is one clear mistake that he made.<br><br>In 1924, with things looking up for progressives, Robert La Follette sought to oust both major parties with a third-party bid. Brandeis, sensing success, choose to join as La Follette's running mate. While Brandeis' campaigning was widely regarded as successful, decisions at the top of the ticket seemed to blunt the party's appeal, and in the end, they lost. Brandeis choose to resign in order to accept the ticket's nomination. Given what we know now, this was a mistake. Coolidge was able to appoint his replacement, George Wickersham, causing us to lose a progressive idol on the highest court at a time when progressives needed such an idol.</p>`)
-  e.executable.push([1, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/failbrandeis.png'})])
+  e.executable.push([1, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/brandeisfail.png'})])
 }
 
 // Win outright (cheating necessary)

@@ -60,21 +60,19 @@
 .mod-title p {
   padding:10px;
 }
-
+.mod-img-desc {
+    overflow-y: scroll;
+}
 .mod-desc {
     flex: 1;
-  height: 100%;
-  overflow-y: auto;
+  height: auto;
     text-align: center;
     font-size: 12px;
-    width: 90%;
+    width: 89%;
     margin: 5px auto;
     border-radius: 5px;
     padding: 5px;
-}
-
-.mod-desc > * {
-  overflow-y: hidden!important;
+    overflow-y: clip;
 }
 
 .tag-button {

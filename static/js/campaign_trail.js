@@ -466,21 +466,52 @@ function download(content, fileName, contentType) {
 }
 
 function exportResults() {
-  results = {
+  const results = {
     election_id: campaignTrail_temp.election_id,
     player_candidate: campaignTrail_temp.candidate_id,
-    player_answers: campaignTrail_temp.player_answers,
-    player_visits: campaignTrail_temp.player_visits,
-    overall_results: campaignTrail_temp.final_overall_results,
-    state_results: campaignTrail_temp.final_state_results,
-    difficulty_multiplier: campaignTrail_temp.difficulty_level_multiplier,
-    starting_mult: starting_mult,
+    results: campaignTrail_temp.final_state_results.map((stateResult) => {
+      // Get state abbreviation
+      const stateAbbreviation = stateResult.abbr;
+
+      // Total votes in the state for percentage calculation
+      const totalPopularVotes = stateResult.result.reduce((total, candidateResult) => {
+        return total + (candidateResult.votes || 0); // Add up all popular votes
+      }, 0);
+
+      return {
+        state: stateAbbreviation,
+        results: stateResult.result.map((candidateResult) => {
+          const candidate = campaignTrail_temp.candidate_json.find(
+            (candidate) => candidate.pk === candidateResult.candidate
+          );
+
+          return {
+            candidate_name: candidate.fields.first_name + " " + candidate.fields.last_name,
+            electoral_votes: candidateResult.electoral_votes,
+            popular_votes: candidateResult.votes || 0,
+            vote_percentage: totalPopularVotes
+              ? ((candidateResult.votes || 0) / totalPopularVotes) * 100
+              : 0, // Avoid NaN if no votes exist
+          };
+        }),
+      };
+    }),
   };
 
-  coded = encode(btoa(JSON.stringify(results)));
-  //coded=JSON.stringify(results)
-  download(coded, "results.json", "text/plain");
+  // Convert the data to JSON and download as a file
+  const fileContent = JSON.stringify(results, null, 2);
+  const fileName = `election_results_${campaignTrail_temp.election_id}.json`;
+
+  const element = document.createElement("a");
+  const fileBlob = new Blob([fileContent], { type: "application/json" });
+  element.href = URL.createObjectURL(fileBlob);
+  element.download = fileName;
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
 }
+
+
 
 diff_mod = false;
 
@@ -1091,6 +1122,8 @@ function divideElectoralVotesProp(e, t) {
     return;
   };
 
+  e.answer_count = 4;
+
   const o = (t, e = campaignTrail_temp) => {
     for (
       var i = [], a = 0;
@@ -1101,7 +1134,7 @@ function divideElectoralVotesProp(e, t) {
           key: a,
           order: Math.random(),
         }),
-        4 != i.length));
+        e.answer_count != i.length));
       a++
     );
     P(i, "order");
