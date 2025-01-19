@@ -7832,7 +7832,7 @@ construct = (a = 1) => {
       e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/YZe1AEe.png'})])
       e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/9elVvyY.png'})])
       e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/tdVCnhr.png'})])
-      } else if (aa[id].electoral_votes >= 0 && campaignTrail_temp.candidate_json[3]["fields"].last_name == "Klar" && aa[0].candidate == 200) { // Scott wins despite Klar running indi
+      } else if (aa[id].electoral_votes > 0 && campaignTrail_temp.candidate_json[3]["fields"].last_name == "Klar" && aa[0].candidate == 200) { // Scott wins despite Klar running indi
         unlockAchievement("Still Standing");  
         unlockAchievement("Klar Country");  
       e.pages.push(`
@@ -7941,7 +7941,7 @@ else if (aa[0].candidate != 200 && campaignTrail_temp.candidate_json[3]["fields"
       e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/Smxs5KV.png'})])
       e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/Czauzpq.png'})])
       
-  } else if (aa[id].electoral_votes >= 0 && (aa[0].candidate != 200 && campaignTrail_temp.candidate_json[3]["fields"].last_name == "Klar")) { // Loose with Klar
+  } else if (aa[id].electoral_votes > 0 && (aa[0].candidate != 200 && campaignTrail_temp.candidate_json[3]["fields"].last_name == "Klar")) { // Loose with Klar
     unlockAchievement("That’s Life");
     unlockAchievement("Klar Country");      
       e.pages.push(`
