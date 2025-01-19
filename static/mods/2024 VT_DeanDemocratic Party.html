@@ -6392,6 +6392,7 @@ function updateAdvisorImage(electionId, newImageUrl) {
         console.log(`Election with ID ${electionId} not found`);
     }
 }
+
 campaignTrail_temp.candidate_image_url = "https://i.imgur.com/ILGK42n.png";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/ii8RqSl.jpeg"
 campaignTrail_temp.candidate_last_name = "";
@@ -6742,12 +6743,14 @@ if(e.player_answers.includes(2123712)) {
 if(e.player_answers.includes(21170)) {
 unlockAchievement("GREEN Mountain State");
 }
-if(e.player_answers.includes(8695)) {
+if(e.player_answers.includes(5256)) {
 unlockAchievement("Hope and Change");
 }
 if(e.player_answers.includes(5139132131321)) {
 unlockAchievement("No More Duopoly");
- }
+}
+
+
 if(e.player_answers.includes(21202)) {
 console.log("ans == 21202")
 campaignTrail_temp.questions_json[22] = {
@@ -6824,6 +6827,9 @@ campaignTrail_temp.questions_json[24] = {
 
 if (ans == 5235) { // Go across the pond
 unlockAchievement("The Democratic Wing of the Liberal Democrat Party");
+}
+if (ans == 21266 || ans == 212531 || ans == 21253) {
+unlockAchievement("GREEN Mountain State");
 }
 
 
@@ -7284,7 +7290,7 @@ construct = (a = 1) => {
     e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/ZgkvVsJ.png'})])
     } else if (aa[0].candidate == 201 && campaignTrail_temp.candidate_json[2]["fields"].last_name == "Dean" && campaignTrail_temp.candidate_json[2]["fields"].color_hex == "#0000ff" && e.player_answers.includes(5176) && e.player_answers.includes(21019)) { // Dean wins against Prog
         unlockAchievement("The Return");
-        unlockAchievement("Win against a Progressive third party campaign");
+        unlockAchievement("Establishmentarian");
         e.pages.push(`<p>Polls in Vermont close early. So by 8, when you’ve made it to the VDP Election Event in Burlington, results are already trickling in. At first it’s too early to see anything, of course you’re overperforming Siegel by leaps and bounds, but everyone expected that. The only certainty it seems, is that it will be a close one. Other candidates have no such difficulties. Sanders, Zuckerman, and Balint deliver their victory speeches to great applause in the main hall while you and your staff over-analyze returns from small towns with 200 votes. But you’re not even looking at that, you’re checking the initial results from Pennsylvania. That race too, will be close. </p>
                     <p>But with time, there’s a change. You take the lead, and you hold the lead. With every return the window for Governor Scott to win the day grows smaller and smaller. Eventually, it’s all over. When the AP calls the race, there’s a great cheer from the hall, and within your private room, it’s all hugs and shaking hands.</p>
                     <p>You will indeed return to the high office you first entered upon the death of Governor Snelling in 1991. You will have the opportunity to craft major reforms on healthcare, education, and more, and shape the future of the state you love. You have the opportunity to serve as a transitional figure to the next generation of Democratic leaders, you may even get to pick those leaders.</p>
