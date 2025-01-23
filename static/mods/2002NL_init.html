@@ -36,6 +36,15 @@ document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_st
 $(".container")[0].style.backgroundColor = "#C97800"
 document.body.background = "https://i.imgur.com/cqOezGA.jpg"
 
+// Check if redirected from another NL mod and hasn't run before
+if (!window.autoStartExecuted && window.location.search.includes('from=othernlmod')) {
+    window.autoStartExecuted = true; // Set flag to prevent multiple executions
+    setTimeout(function() {
+        const startButton = document.getElementById('game_start');
+        if (startButton) startButton.click();
+    }, 100);
+}
+
 var element = document.getElementById('my-invisible-element');
 if(!element){
 function changeIntroDescription() {
