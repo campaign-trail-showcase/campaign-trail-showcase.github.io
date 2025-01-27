@@ -376,6 +376,7 @@ function clickIfAvailable(i, noAnswerSet) {
 }
 
 let autoplayCount = 0;
+let autoplayHandle = null;
 
 window.addEventListener("keydown", (e) => {
   if (!e.repeat) {
@@ -385,10 +386,17 @@ window.addEventListener("keydown", (e) => {
       activateCheatMenu();
     } else if (e.key == "@") {
       autoplayCount++;
-      if (autoplayCount == 3) {
+      if (autoplayCount % 3 == 0) {
         document.getElementById("cheatIndicator").style.display = "block";
         document.getElementById("autoplayMenu").style.display = "inline-block";
-        setInterval(autoplay, 10);
+        autoplayHandle = setInterval(autoplay, 10);
+      }
+    }
+    else if (e.key == "$") {
+      if(autoplayHandle != null) {
+        document.getElementById("cheatIndicator").style.display = "none";
+        clearInterval(autoplayHandle);
+        autoplayHandle = null;
       }
     }
   }
