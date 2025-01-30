@@ -238,6 +238,8 @@ $(document).ready(async function () {
     let imageUrl;
     let description;
 
+    let loaded = true;
+
     if (temp && temp.election_json && temp.election_json.length > 0) {
       imageUrl =
         temp.election_json[0].fields.site_image ??
@@ -246,12 +248,13 @@ $(document).ready(async function () {
         temp.election_json[0].fields.site_description ??
         temp.election_json[0].fields.summary;
     } else {
+      loaded = false;
       console.log("Missing or cannot read Code 1 for mod: " + mod.value);
       imageUrl = "";
       description = `<h1 style="color:red">COULD NOT GET CODE 1 PLEASE ALERT DEV!</h1>`;
     }
 
-    if (!temp) {
+    if (!loaded) {
       allModsLength--;
       return;
     }
