@@ -238,7 +238,7 @@ $(document).ready(async function () {
     let imageUrl;
     let description;
 
-    if (temp) {
+    if (temp && temp.election_json && temp.election_json.length > 0) {
       imageUrl =
         temp.election_json[0].fields.site_image ??
         temp.election_json[0].fields.image_url;
