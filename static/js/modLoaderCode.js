@@ -84,5 +84,5 @@ async function loadMod(modValue) {
     modBeingPlayed = modValue;
 }
 
-loadMod("2004 - W");
-const namesOfModsFromValue = {"2004 - W" : "W."}
+loadMod("1924");
+const namesOfModsFromValue = {"1924" : "1924: 'Silent Cal' in The Silent Decade"}

@@ -22,7 +22,21 @@ https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
 
 Install this extension by following the instructions on the page and make a live server from the root of your project folder so you can preview it in your browser. Some images may not load when hosting this way and that is normal.
 
-# Uploading to itch.io
+# Building for Windows
+
+If you want a web version do not follow these steps.
+
+Run
+
+```npm i```
+
+```npm run make```
+
+You should now have a folder called 'out' with your files.
+
+# Uploading Web Version to itch.io
+
+If you want a windows verison do not follow these steps.
 
 1. Zip up the whole folder EXCEPT FOR THE FOLLOWING:
     - node_modules (a folder, if it exists)
