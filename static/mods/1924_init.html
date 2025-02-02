@@ -1,7 +1,27 @@
 e=campaignTrail_temp
-if (!e.done) {
-e.done = true;
 RecReading=true
+corrr=`\n<h2>SILENT CAL</h2><font id='wittyquote' size='4' color='white'><em>in the Silent Decade</em></font>`
+
+// Select the node that will be observed for mutations
+const windowsAdvisorTargetNode = document.getElementById("game_window");
+
+// Options for the observer (which mutations to observe)
+const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
+
+// Callback function to execute when mutations are observed
+const callback = (mutationList, observer) => {
+    visitWindow = document.getElementsByClassName("overlay_window")[0];
+
+    if(visitWindow == null || visitWindow.classList.contains("done")) {
+        return;
+    }
+    visitWindow.classList.add("done");
+    visitWindow.classList.add("window");
+    let titleBar = visitWindow.querySelector("h3");
+    titleBar.classList.add("title-bar");
+    titleBar.classList.add("title-bar-text")
+    titleBar.style.paddingLeft = "3px";
+};
 
 e = campaignTrail_temp;
 campaignTrail_temp.credits = 'ItsAstronomical, with MassachusettsForStockdale, Lurker, River, NotJoeBiden, and Gelid Lagopus helping';
@@ -99,26 +119,87 @@ campaignTrail_temp.modBoxTheme = {
     "ui_text_color": "#FFFFFF"
 }
 
-styling = document.createElement("style");
-document.head.appendChild(styling);
+async function appendStyle() {
+    var metaTag=document.createElement('meta');
+    metaTag.name = "viewport";
+    metaTag.content = "width=device-width, initial-scale=1";
+    document.getElementsByTagName('head')[0].appendChild(metaTag);
 
-styling.innerHTML = `
-#opponent_selection_id_back {
-    display: none;
+    if (!document.querySelector('#radio-option-style')) {
+        let style = document.createElement('style');
+        style.type = 'text/css';
+        style.id = 'radio-option-style';
+        style.innerHTML = `
+        .inner_inner_window {
+        display: flex;
+        flex-direction: column;
+        }
+        .inner_inner_window h3{
+            padding: 5px;
+        }
+
+        #candidate_pic,
+        #running_mate_pic,
+        .inner_window_sign_display {
+            height: 167px;
+        }
+        #candidate_pic {
+            margin-left: 160px;
+        }
+        #running_mate_pic {
+            margin-right: 160px;
+        }
+        `;
+
+        document.head.appendChild(style);
+    }
 }
-`
+appendStyle();
 
-let z = new MutationObserver((mutationsList, observer) => {
-    let runningMateSummary = document.querySelector("#running_mate_summary");
-    if (runningMateSummary) {
-        $("#running_mate_id_button").click();
+e = campaignTrail_temp
+
+const startScreenUpdater = setInterval(function() {
+    const goBackButton = document.getElementById("candidate_id_back");
+    const candidateButton = document.getElementById("candidate_id_button");
+    const runningMateButton = document.getElementById("running_mate_id_button");
+    const finalScreenBB = document.getElementById("opponent_selection_id_back");
+    const finalScreenID = document.getElementById("opponent_selection_id_button");
+    const difficultySlider = document.getElementById("difficulty_level");
+    const gameType = document.getElementById("game_type_id");
+
+    if(gameType){
+        const difficultySlider = document.getElementById("difficulty_level");
+        difficultySlider.style.display = 'none';
+        
+        multiplier = 1;
+    }
+    
+    if((candidateButton || c != 0)&& !runningMateButton){ // change theme on candidate viewing
+        var c = document.getElementById("candidate_id")?.value ?? -1;
+        if(c == 23 && !(candidateButton) && !(runningMateButton)) {
+            goBackButton.click();
+            const initContinue = document.getElementById("election_id_button");
+            initContinue.click();
+        }
+        else if(c == 24 || c == 25) {
+            if(candidateButton) {
+                candidateButton.remove();
+            }
+        }
+    }
+    
+    else if(!candidateButton && runningMateButton) { 
+        runningMateButton.click();
+        const finalBack = document.getElementById("opponent_selection_id_back");
+        finalBack.remove();
         observer.disconnect()
     }
-});
 
-
-z.observe(document, { subtree: true, childList: true });
-}
+    if(finalScreenID && finalScreenBB) { // delete back button and delete the interval
+        finalScreenBB.remove();
+        clearInterval(startScreenUpdater);
+    }
+}, 1);
 
 
 campaignTrail_temp.achievements = {

@@ -76,13 +76,15 @@ async function loadMod(modValue) {
 
     getAllAchievements(modCode, modValue);
 
-    eval(modCode);
-
-    diff_mod = true
-    loadingFromModButton = true;
-    modded = true;
-    modBeingPlayed = modValue;
+    setTimeout(() => {
+        eval(modCode),
+        25
+        diff_mod = true
+        loadingFromModButton = true;
+        modded = true;
+        modBeingPlayed = modValue;
+    })
 }
 
+const namesOfModsFromValue = {"1924" : "1924"}
 loadMod("1924");
-const namesOfModsFromValue = {"1924" : "1924: 'Silent Cal' in The Silent Decade"}
