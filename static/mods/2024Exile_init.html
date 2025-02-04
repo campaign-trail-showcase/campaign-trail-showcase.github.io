@@ -416,7 +416,7 @@ campaignTrail_temp.election_json = [
 					"winning_electoral_vote_number":270,
 					"advisor_url":"https://i.imgur.com/a7IpHtm.png",
 					"recommended_reading":"",
-					"site_image": "https://i.imgur.com/h32hWv3.png",
+					"site_image": "https://media.discordapp.net/attachments/1061855514536988743/1120846808655085568/2016dncadvisor.png",
 					"site_description": "<p>After their defeat in the 2nd American Civil War, MacArthur's loyalists undertook a retreat to Puerto Rico, where they spent the next 40 years plotting their return to the mainland. Following the collapse of the USSA and the reforms of Carter, gradual democratization has eroded the ruling Patriot Bloc's hold on power and allowed for the rise of a Puerto Rican nationalist movement committed to the declaration of a Puerto Rican republic.</p><p>With their Iron Voters increasingly lost to local grievances and rural issues have produced two minor parties in the form of the Spanish-Cuban influenced Carlists and the Mexican backed Hostosians, the party is at a crossroads.</p><p>In desperation, the PB have drafted Virgin Islander party-boss and former VP Kelsey Grammer to head the ticket and lead them to victory.</p><p>Will Grammer succeed or are the Exile's dreams doomed to die at last?</p>",
 					"has_visits":0,
 					"no_electoral_majority_image":"../static/images/2012-no-majority.jpg"
@@ -642,84 +642,48 @@ campaignTrail_temp.opponents_weighted_json = [
 RecReading = true;
 campaignTrail_temp.election_json[0].fields.recommended_reading = "<h4 style='margin-top: 0.5em;'>The World of Exile America</h4><a href='https://i.imgur.com/x920LiK.png' target='_blank'>The World in 2024</a><br><a href='https://i.imgur.com/z4q54JY.png' target='_blank'>USA Wikibox</a><br><a href='https://i.imgur.com/LxCS8Xf.png'>USSA Wikibox</a><br><a href='https://i.imgur.com/i5fF4Hz.png' target='_blank'>Pan-Blues</a><br><a href='https://i.imgur.com/9eG0UOm.png' target='_blank'>Pan-Greens</a><br><h4>Lore</h4><p>This mod started off with a simple premise: <i>'In what kind of world could Kelsey Grammer become president?'</i> <br><br>Out of that came the wikiboxes, which were the earliest things I made for this setting. They're not amazing, but they do explain what's going on.<br><br>Fundamentally, the setting is based off Kaiserreich, as you've probably observed. To this, I've added a few of my own ideas and concepts. <br><br>Is the world I've created plausible? Probably not, but it has been fun to make and I hope you've enjoyed it, just as I hope you've enjoyed this mod.</p>"
 
-function removeCandidateSummary() {
-try {
-  const candidateSummary = document.querySelector("#candidate_summary");
-  if (candidateSummary) {
-    const ulList = candidateSummary.querySelector("ul");
-    if (ulList) {
-      candidateSummary.removeChild(ulList);
+// Maintain interval-based removal
+function removeCandidateSummaries() {
+  try {
+    const candidateSummaryElements = document.querySelectorAll("#candidate_summary");
+    candidateSummaryElements.forEach(summaryElement => {
+      const ulLists = summaryElement.querySelectorAll("ul");
+      ulLists.forEach(ul => ul.remove());
+    });
+  } catch (err) {
+    console.error("Error removing summaries:", err);
+  }
+}
+
+window.setInterval(removeCandidateSummaries, 200);
+
+// Combined observer for form updates
+const summaryObserver = new MutationObserver((mutations) => {
+  try {
+    // Update candidate form if needed
+    const candidateForm = document.querySelector("#candidate_form form h3");
+    if (candidateForm) {
+      candidateForm.textContent = "Please select your candidate:";
     }
-  }
-} catch {}
-}
-window.setInterval(removeCandidateSummary,200)
-
-function updateCandidateForm() {
-  formobserver.disconnect();
-  const heading = document.querySelector("#candidate_form form h3");
-
-  if (heading) {
-    heading.textContent = "Please select your candidate:";
-  }
-  formobserver.observe(document.documentElement, { childList: true, subtree: true });
-}
-
-var formobserver = new MutationObserver(updateCandidateForm);
-formobserver.observe(document.documentElement, { childList: true, subtree: true });
-
-function removeCandidateSummary() {
-   sumobserver.disconnect();
-  const candidateSummary = document.querySelector("#candidate_summary");
-  if (candidateSummary) {
-    const ulList = candidateSummary.querySelector("ul");
-    if (ulList) {
-      candidateSummary.removeChild(ulList);
+    
+    // Remove running mate summary if present
+    const runningMateSummary = document.querySelector("#running_mate_summary");
+    if (runningMateSummary?.querySelector("ul")) {
+      runningMateSummary.querySelector("ul").remove();
     }
+  } catch (err) {
+    console.error("Error updating UI:", err);
   }
-  sumobserver.observe(document.body, {childList: true,subtree: true});
-}
+});
 
-var sumobserver = new MutationObserver(removeCandidateSummary);
-sumobserver.observe(document.body, {childList: true,subtree: true});
+// Watch specific containers
+const containers = ["#candidate_form", "#running_mate_summary"]
+  .map(s => document.querySelector(s))
+  .filter(Boolean);
 
-function removeRunningMateSummary() {
-try {
-  const running_mate_summary = document.querySelector("#running_mate_summary");
-  if (running_mate_summary) {
-    const ulList = running_mate_summary.querySelector("ul");
-    if (ulList) {
-      running_mate_summary.removeChild(ulList);
-    }
-  }
-} catch {}
-}
-window.setInterval(removeRunningMateSummary,204)
-
-function updateRunningMateForm() {
-  formobserver.disconnect();
-  const heading = document.querySelector("#candidate_form form h3");
-
-  if (heading) {
-    heading.textContent = "Please select your running mate:";
-  }
-  formobserver.observe(document.documentElement, { childList: true, subtree: true });
-}
-
-var formobserver = new MutationObserver(updateRunningMateForm);
-formobserver.observe(document.documentElement, { childList: true, subtree: true });
-
-function removeRunningMateSummary() {
-   sumobserver.disconnect();
-  const running_mate_summary = document.querySelector("#running_mate_summary");
-  if (running_mate_summary) {
-    const ulList = running_mate_summary.querySelector("ul");
-    if (ulList) {
-      running_mate_summary.removeChild(ulList);
-    }
-  }
-  sumobserver.observe(document.body, {childList: true,subtree: true});
-}
-
-var sumobserver = new MutationObserver(removeRunningMateSummary);
-sumobserver.observe(document.body, {childList: true,subtree: true});
+containers.forEach(container => {
+  summaryObserver.observe(container, {
+    childList: true,
+    subtree: true
+  });
+});
