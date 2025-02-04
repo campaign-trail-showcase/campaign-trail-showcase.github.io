@@ -657,6 +657,20 @@ function removeCandidateSummaries() {
 
 window.setInterval(removeCandidateSummaries, 200);
 
+function removeRunningMateSummary() {
+try {
+  const running_mate_summary = document.querySelector("#running_mate_summary");
+  if (running_mate_summary) {
+    const ulList = running_mate_summary.querySelector("ul");
+    if (ulList) {
+      running_mate_summary.removeChild(ulList);
+    }
+  }
+} catch {}
+}
+window.setInterval(removeRunningMateSummary,204);
+
+
 // Combined observer for form updates
 const summaryObserver = new MutationObserver((mutations) => {
   try {
