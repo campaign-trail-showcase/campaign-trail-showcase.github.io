@@ -13555,6 +13555,7 @@ cyoAdventure = function (a) {
         console.log("zaibatsu_deal_offer") 
 		console.log("zaibatsu_deal_answers count")   
 		console.log(zaibatsu_deal_answers)
+		unlockAchievement("The Business of America is Business");
     }
 	if (ans === 5073) {
         mitteleuropa_agrideal_answers++
@@ -13584,6 +13585,7 @@ cyoAdventure = function (a) {
         console.log("mitteleuropa_agrideal_offer") 
 		console.log("mitteleuropa_agrideal_answers count")   
 		console.log(mitteleuropa_agrideal_answers)
+		unlockAchievement("The Business of America is Business");
     }
 	if (ans === 5001) {
         rainbow_democracy_answers++
@@ -13686,6 +13688,7 @@ cyoAdventure = function (a) {
 	if ( ( dixie_normalisation_answers === 2 ) && !DixieNormal ) {
 		DixieNormal = true;
 		console.log("Dixie Normal")
+		unlockAchievement("The Business of America is Business");
     }
 	if ( ( rainbow_democracy_answers === 8 ) && !RainbowDemocracy ) {
         e.questions_json.splice(29, 0 , getQuestionFromPk(10341))
@@ -14124,7 +14127,7 @@ endingPicker = (out, totv, aa, quickstats) => {
         //aa = all final overall results data
 	
 	if ( InfinitaTristeza )  { 
-		setMusic("https://od.lk/s/Nl8yMTA1NTQ0NTFf/The%20Ride%20of%20the%20Valkyries.mp3")
+		setMusic("https://audio.jukehost.co.uk/FJmZqWrmPWSourAMvLrvpodS0la6y2Co")
         if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14133,11 +14136,12 @@ endingPicker = (out, totv, aa, quickstats) => {
                         imgg.src = "https://i.imgur.com/kSsB8gU.jpeg";
                     }
                 }, 100);
+				unlockAchievement("Martyr");
             }
 	return "<h3>Falling Down.</h3><p>\"<i>\Talk of imminent threat to our national security through the application of external force is pure nonsense.\"</i> - <b>Douglas MacArthur</b></p><p><i>\"Civil liberty and this kind of martial law cannot endure together; the antagonism is irreconcilable; and, in the conflict, one or the other must perish.\"</i> - <b>Ex parte Milligan</b></p><p></p><p><i>\"Army takeover on Puerto Rico-Martial Law declared.\"</i> - <b>Boston Herald</b></p><p>You sit huddled in your villa, considering your options, when the radio crackles: <i>\"We interrupt our programming; this is a national emergency. Stand by for further information.\"</i><p>You don't need to keep listening to understand what has happened. More and more aggrieved by political developments in the country, reactionary forces have finally taken matters into their own hands. In the long-run, they've doomed themselves. For now? It looks like they have mastery of the land. The only option is to flee. <p>You exit your home through the back door, hoping to slip away unnoticed, when a shot rings out. You stare down at your shirt as it begins to turn red."
 	}
 	else if ( CarlistCooperation )  { 
-		setMusic("https://od.lk/s/MTVfNjU0NjM2Nzhf/Spanish%20Capriccio-No%204.mp3")
+		setMusic("https://audio.jukehost.co.uk/oKYTUshYfSWIAuPZq5AS4ViKtFsVHeu1")
         if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14146,11 +14150,12 @@ endingPicker = (out, totv, aa, quickstats) => {
                         imgg.src = "https://i.imgur.com/J97qaY3.png";
                     }
                 }, 100);
+				unlockAchievement("Archeofuturist");
             }
 	return "<h3>Dios, Patria, Rey?</h3><p>\"<i>\We shall fight together, all together, all together in union, defending the banner of Sacred Tradition\"</i> - <b>March of Oriamendi</b></p><p><i>\"Providence will not permit that in these countries which were discovered by the Spanish nation the echo of our language should ever cease to be heard, nor that our flag should disappear before the eyes.\"</i> - <b>Manuel Macías y Casado</b></p><p></p><p><i>\"Congress pass non-binding resolution to recognize Grammer's right to take up Grandee title.\"</i> - <b>International Herald Tribune</b></p><p>Your cooperation with the Carlists is a political earthquake. You succeed in locking down the countryside and galvanizing the majority of the island, much to the chagrin of both Independentists and a horrified Exile Establishment. While a few PB legislators defect to a new <i>\"Constitution Party\"</i>, many ultraconservatives are satisfied with your new particularist vision. The remaining secularists have consolidated under an infernal alliance between the NPP and the PB's liberal wing, but their future prospects are negligible.<p>In the mean time, the upswing in relations with Spain holds a promise of a fresh start with the Entente. Legislative changes are likely to be slow, even if few admit that the Organic vision of Carlism already mirrors the post-Civil War constitutional patchwork. While the formal seperation of church and state is unlikely to disappear and you will never become a prime minister, appeals to Hispanophone values, including the presence of cabinet members at Catholic services are now very much in vogue. <p>La Fortaleza is well worth a mass."
 	}
 	else if ( ElPresidente )  { 
-		setMusic("https://od.lk/s/Nl8yMTA1NjA3OTBf/Four_Ruffles_and_Flourishes_and_Hail_to_the_Chief.mp3")
+		setMusic("https://audio.jukehost.co.uk/wGHtePIyxRhkeJchB9YzDlsbI2bGbq2G")
         if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14159,11 +14164,12 @@ endingPicker = (out, totv, aa, quickstats) => {
                         imgg.src = "https://imgur.com/9CfV7N9";
                     }
                 }, 100);
+				unlockAchievement("False Prophet");
             }
 	return "<h3>Hail to the Chief!</h3><p>\"<i>\For what does it profit a man to gain the whole world and forfeit his soul?\"</i> - <b>Mark 8:36</b></p><p><i>\"If you must break the law, do it to seize power: in all other cases observe it.\"</i> - <b>Julius Caesar</b></p><p><i>\"Grammer dissolves legislature, declares State of Emergency.\"</i> - <b>Boston Herald</b></p><p>The first days after dissolution are tumultuous. Rioting and protests rock the island as crowds try to storm their way into the capitol. Day after day, night after night, the protesters break up on the riot police as their leaders are rounded up.  After a week, Dalmau realizes he is beaten and flees to Mexico, a fact you eagerly broadcast on the radio and plaster on every newspaper.<p>Without a credible leader, the opposition collapses with a whimper. Now you can commence with the real work. The first step is to put those NPP leaders currently under arrest on trial.<p>Whether the reorganisation takes a year or a decade is irrelevant. You <b>will</b> make America what it was always <b>destined</b> to be."
 	}
 	else if ( (RainbowDemocracy) && AmericanTrilogy )  { 
-		setMusic("https://od.lk/s/Nl8yMTA1MjE1ODJf/Goin%27%20Home.mp3")
+		setMusic("https://audio.jukehost.co.uk/p0Jc5hzmlnYxW5ljDttcegq8VRF9wl8W")
         if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14172,11 +14178,12 @@ endingPicker = (out, totv, aa, quickstats) => {
                         imgg.src = "https://i.imgur.com/NYxj98k.png";
                     }
                 }, 100);
+				unlockAchievement("Refounder");
             }
 	return "<h3>A New Founding Father!</h3><p>\"<i>\Observe good faith and justice towards all Nations; cultivate peace and harmony with all.\"</i> - <b>George Washington</b></p><p><i>\"Tristani to attend MacArthur internment in ex-President role.\"</i> - <b>San Juan Star</b></p><p><i>\"Delegates arrive at Philadelphia Convention, Texans send observer.\"</i> - <b>International Herald Tribune</b></p><p><i>\"Discussions commence on repatriating Declaration of Independence to Washington.\"</i> - <b>Christian Science Monitor</b></p><p>Reconciling divisions at home and abroad, you have managed to chart a course to re-union, while establishing a lasting peace on Puerto Rico.<p>Proving your capacity to reach out to all Americans, you have succeeded in healing political rifts on the island and galvanizing even the NPP towards a closer relationship with the Mainland. While the party is sure to remain a political force, it now faces a crisis of identity not seen since the days of Carter. All the while, international recognition of your status as a statesman grows. You are already being spoken of as the <i>\"Leader of a United America\"</i>.  <p><b>Mr President</b>, your name deservedly ranks alongside those of the Founders! "
 	}
 	else if ( (RainbowDemocracy) && ZaibatsuDeal )  { 
-		setMusic("https://od.lk/s/Nl8yMTAzNjQ2MTZf/La%20Vida%20Es%20Un%20Carnaval.mp3")
+		setMusic("https://audio.jukehost.co.uk/ZASiU1JYFHrTyNZyT3Zml7Ol3pFpNdlD")
         if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14185,11 +14192,12 @@ endingPicker = (out, totv, aa, quickstats) => {
                         imgg.src = "https://i.imgur.com/mtXsuQE.png";
                     }
                 }, 100);
+				unlockAchievement("Peacemaker");
             }
 	return "<h3>A Rainbow Democracy?</h3><p>\"<i>\The bond of our common humanity is stronger than the divisiveness of our fears and prejudices.\"</i> - <b>Jimmy Carter</b></p><p><i>\"Local community leaders greet Holywood director interested in Carter biopic.\"</i> - <b>San Juan Star</b></p><p><i>\"Mitsubishi to further expand production on Puerto Rico.\"</i> - <b>International Herald Tribune</b></p><p><i>\"Ethiopian Crown Prince visits St. Thomas, greets Rastafarian devotees.\"</i> - <b>Virgin Islands Daily News</b></p><p>When Jimmy Carter died, some wondered if the dream of a multicultural Puerto Rico died with him. You have more than proven the doubters wrong.<p>Nothing shocked you more than to hear both Dalmau ring you after the election and congratulate you on your victory. While he’s returned to his old academic career, you've been able to consult on some legal questions and have settled into a role as sparring partners of sorts. Rosselló has returned to a prominent role in the NPP, but this is more a sign of the party’s doldrums than a serious political future.<p>The new model is not perfect and tensions are bound to arise, you have secured the country’s economic future and found a way to reconcile much of the country. "
 	}
 	else if ( (RainbowDemocracy) && MitteleuropaAgriDeal )  { 
-		setMusic("https://od.lk/s/Nl8yMTAzNjQ2MTZf/La%20Vida%20Es%20Un%20Carnaval.mp3")
+		setMusic("https://audio.jukehost.co.uk/ZASiU1JYFHrTyNZyT3Zml7Ol3pFpNdlD")
         if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14198,11 +14206,12 @@ endingPicker = (out, totv, aa, quickstats) => {
                         imgg.src = "https://i.imgur.com/mtXsuQE.png";
                     }
                 }, 100);
+				unlockAchievement("Peacemaker");
             }
 	return "<h3>A Rainbow Democracy?</h3><p>\"<i>\The bond of our common humanity is stronger than the divisiveness of our fears and prejudices.\"</i> - <b>Jimmy Carter</b></p><p><i>\"Local community leaders greet Babelsberg director interested in Carter biopic.\"</i> - <b>San Juan Star</b></p><p><i>\"Douwe Egberts to further expand sourcing from Puerto Rico.\"</i> - <b>International Herald Tribune</b></p><p><i>\"Delegation of Fons visits St. Thomas, meet Caribbean cousins.\"</i> - <b>Virgin Islands Daily News</b></p><p>When Jimmy Carter died, some wondered if the dream of a multicultural Puerto Rico died with him. You have more than proven the doubters wrong.<p>Nothing shocked you more than to hear both Dalmau ring you after the election and congratulate you on your victory. While he’s returned to his old academic career, you've been able to consult on some legal questions and have settled into a role as sparring partners of sorts. Rosselló has returned to a prominent role in the NPP, but this is more a sign of the party’s doldrums than a serious political future.<p>The new model is not perfect and tensions are bound to arise, you have secured the country’s economic future and found a way to reconcile much of the country. "
 	}
 	else if ( (RainbowDemocracy) && DixieNormal )  { 
-		setMusic("https://od.lk/s/Nl8yMTAzNjQ2MTZf/La%20Vida%20Es%20Un%20Carnaval.mp3")
+		setMusic("https://audio.jukehost.co.uk/ZASiU1JYFHrTyNZyT3Zml7Ol3pFpNdlD")
         if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14211,11 +14220,12 @@ endingPicker = (out, totv, aa, quickstats) => {
                         imgg.src = "https://i.imgur.com/mtXsuQE.png";
                     }
                 }, 100);
+				unlockAchievement("Peacemaker");
             }
 	return "<h3>A Rainbow Democracy?</h3><p>\"<i>\The bond of our common humanity is stronger than the divisiveness of our fears and prejudices.\"</i> - <b>Jimmy Carter</b></p><p><i>\"President greets visitors from Carter's hometown.\"</i> - <b>San Juan Star</b></p><p><i>\"Richmond and San Juan reach deal on non-brand pharmaceuticals.\"</i> - <b>International Herald Tribune</b></p><p><i>\"Delegation of Southerners visit St. Thomas, families reunited.\"</i> - <b>Virgin Islands Daily News</b></p><p>When Jimmy Carter died, some wondered if the dream of a multicultural Puerto Rico died with him. You have more than proven the doubters wrong.<p>Nothing shocked you more than to hear both Dalmau ring you after the election and congratulate you on your victory. While he’s returned to his old academic career, you've been able to consult on some legal questions and have settled into a role as sparring partners of sorts. Rosselló has returned to a prominent role in the NPP, but this is more a sign of the party’s doldrums than a serious political future.<p>The new model is not perfect and tensions are bound to arise, you have secured the country’s economic future and found a way to reconcile much of the country. "
 	}
 	else if ( RainbowDemocracy )  { 
-		setMusic("https://od.lk/s/Nl8yMTAzNjQ2MTZf/La%20Vida%20Es%20Un%20Carnaval.mp3")
+		setMusic("https://audio.jukehost.co.uk/ZASiU1JYFHrTyNZyT3Zml7Ol3pFpNdlD")
         if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14224,11 +14234,12 @@ endingPicker = (out, totv, aa, quickstats) => {
                         imgg.src = "https://i.imgur.com/mtXsuQE.png";
                     }
                 }, 100);
+				unlockAchievement("Peacemaker");
             }
 	return "<h3>A Rainbow Democracy?</h3><p>\"<i>\The bond of our common humanity is stronger than the divisiveness of our fears and prejudices.\"</i> - <b>Jimmy Carter</b></p><p><i>\"Miranda premiers play about Carter.\"</i> - <b>San Juan Star</b></p><p><i>\"Tourism industry buoyed by decreased tensions.\"</i> - <b>International Herald Tribune</b></p><p><i>\"Liberian president visits St. Thomas, speaks about shared heritage.\"</i> - <b>Virgin Islands Daily News</b></p><p>When Jimmy Carter died, some wondered if the dream of a multicultural Puerto Rico died with him. You have more than proven the doubters wrong.<p>Nothing shocked you more than to hear both Dalmau ring you after the election and congratulate you on your victory. While he’s returned to his old academic career, you've been able to consult on some legal questions and have settled into a role as sparring partners of sorts. Rosselló has returned to a prominent role in the NPP, but this is more a sign of the party’s doldrums than a serious political future.<p>The new model is not perfect and tensions are bound to arise, you have secured the country’s economic future and found a way to reconcile much of the country. "
 	}
 	else if ( AmericanTrilogy ) { 
-		setMusic("https://od.lk/s/Nl8yMDkzNzg4NDVf/An_American_Trilogy_with_The_Royal_Philharmonic_Orchestra.mp3")
+		setMusic("https://audio.jukehost.co.uk/tjQuJ8ps47oxk5tZ1fLZfo4OQpoQBbJy")
         if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14237,6 +14248,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                         imgg.src = "https://i.imgur.com/lxKCN2y.jpeg";
                     }
                 }, 100);
+				unlockAchievement("Glory, Glory, Hallelujah!");
             }
 	return "<h3>Glory, Glory, Hallelujah!</h3><p>\"<i>\Even when opportunity knocks, a man still has to get up off his seat and open the door.\"</i> - <b>Douglas MacArthur</b></p><p><i>\"O’Malley election confirmed by Supreme Court after stand-off, tensions begin to dissipate.\"</i> - <b>San Juan Star</b></p><p><i>\"Texans express interest in free movement, common market.\"</i> - <b>International Herald Tribune</b></p><p><i>\"CS opens Restitution Tribunal, émigrés begin filing claims.\"</i> - <b>Christian Science Monitor</b></p><p>At 12:00, 4 July, 2025, the pall bearers lift the casket from its funerary carriage and carry it to its final destination.<p>After more than 80 years in exile, Douglas MacArthur has at last arrived in Arlington. With more than half the heads of state in America in attendance and an aged Arthur MacArthur watching from a wheelchair, Presidents Grammer and Crist raise their respective flags to flutter in the summer breeze.<p>The old United States may be buried, but for the first time since the Civil War, its people seem to be on the road to another union."
 	}
@@ -14249,6 +14261,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                         imgg.src = "https://i.imgur.com/2qXIPwT.png";
                     }
                 }, 100);
+				unlockAchievement("Cheers to That");
             }
     return "<h3>ISLANDER WAVE DROWNS DALMAU</h3><p><li>\"</i>I was brought up to never lie. Sure, I have. But in the final mix, the lies I’ve told are far outweighed by the truths I’ve lived.\"</i> - Kelsey Grammer</p><p>This is an astonishing victory! As the final votes are tallied, it quickly becomes apparent that you’ve won a landslide victory. If there were any doubts about your candidacy before, they’ve been wiped out by a performance not equalled since the 1988 election. </p>Whether it was your own appeal, the NPP’s disaster year or Dalmau’s inability to control his campaign, the result is clear. You now stand nigh unopposed in your dreams of  facilitating \"government of the people, for the people, by the people\". </p>The time has come for you to stamp your vision on the country. Let the chips fall where they may!"
 	} else if (aa[0].candidate == 200) {
