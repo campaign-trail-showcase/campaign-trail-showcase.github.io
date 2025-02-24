@@ -47,7 +47,7 @@ campaignTrail_temp.questions_json = [
         "pk": 1045,
         "fields": {
             "priority": 3,
-            "description": "Mississipians continue to struggle to afford anything. This has resulted from the high inflation few years back and the state's notoriusly low annual income. Do you have anything in mind to help Mississippians?",
+            "description": "Mississipians continue to struggle to afford anything. This has resulted from the high inflation few years back and the state's notoriously low annual income. Do you have anything in mind to help Mississippians?",
             "likelihood": 1
         }
     },
@@ -92,7 +92,7 @@ campaignTrail_temp.questions_json = [
         "pk": 1065,
         "fields": {
             "priority": 7,
-            "description": "What do you plan on discussing on the State Capital this week? Will you hit on Reeves or maybe dicuss your own policies?",
+            "description": "What do you plan on discussing on the State Capital this week? Will you hit on Reeves or maybe discuss your own policies?",
             "likelihood": 1
         }
     },
@@ -400,7 +400,7 @@ campaignTrail_temp.answers_json = [
         "pk": 21552,
         "fields": {
             "question": 1046,
-            "description": "I do not have a comment on the matter. We will just continue on normally with the campaign. Voters are already well aware of unpopular moves by the Legistlature."
+            "description": "I do not have a comment on the matter. We will just continue on normally with the campaign. Voters are already well aware of unpopular moves by the Legislature."
         }
     },
     {
@@ -8427,7 +8427,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 22170,
             "candidate": 201,
             "affected_candidate": 200,
-            "global_multiplier": 0.045
+            "global_multiplier": 0.0375
         }
     },
     {
@@ -11767,7 +11767,7 @@ window.setInterval(changechart, 200);
 
 endingPicker = (out, totv, aa, quickstats) => {
   if (quickstats[1] >= 50) {
-    unlockAchievement("Let's Go Brandon!");
+    ctsAchievement("Let's Go Brandon!");
     setImage("https://i.imgur.com/rtobqrt.png");
     setMusic("https://files.catbox.moe/qvbs18.mp3");
     return "<div style='overflow-y:scroll;height:200px;'><h3>It looks like our prediction has been proven wrong. Brandon Presley has won the Gubernatorial Election.</h3><br>Well, Brandon, you’ve done it. You managed to beat the corrupted Reeves and returned the governorship to the Democrats for the first time in 24 years. It’s rather surprising that you made it this far. Everyone knew that Reeves was a deeply unpopular governor, but the state's strong support for the Republican Party should have guaranteed a victory for him. But it did not. Instead, it meant a victory for perhaps an older form of Democrats—the Blue Dogs. You’ve shown that there is still a place for Democrats like you, and that it’s not all about being progressive. It’s about truly connecting with the people you wish to represent and doing your best to get their wishes passed in the legislature. Reeves simply could not understand this.<br><br>Now, Brandon, it’s time to move into the Governor’s Mansion and make Mississippi a beacon of hope by expanding Medicare, cutting taxes, and pushing for substantial reform so that people like Reeves don’t come back. I believe many here in the South will try to follow in your footsteps.</div>";
@@ -11782,7 +11782,7 @@ endingPicker = (out, totv, aa, quickstats) => {
   if (aa[0].popular_votes / totv < 0.5) {
     setImage("https://i.imgur.com/7FmsFt2.png");
     setMusic("https://files.catbox.moe/5gcekt.mp3");
-    return "<div style='overflow-y:scroll;height:200px;'><h3>Well, it was a long night, and it's going to be a long month, too.</h3><br>It looks like no one secured a majority of the popular vote. You defied expectations and made it this far, but unfortunately, not with a majority. Still, the battle for the Governorship is far from over. Prepare for an aggressive campaign for the runoff on November 23rd. Democrats and Republicans are definitely going to be putting massive amounts of effort to make sure their candidate win. It's going to be a wild ride. Let's hope you can pull through for Mississippi. They need it. If you did not make the runoff, then it sucks for you for letting that happen.";
+    return "<div style='overflow-y:scroll;height:200px;'><h3>Well, it was a long night, and it's going to be a long month, too.</h3><br>It looks like no one secured a majority of the popular vote. You defied expectations and made it this far, but unfortunately, not with a majority. Still, the battle for the Governorship is far from over. Prepare for an aggressive campaign for the runoff on November 23rd. Democrats and Republicans are definitely going to be putting massive amounts of effort to make sure their candidate wins. It's going to be a wild ride. Let's hope you can pull through for Mississippi. They need it. If you did not make the runoff, then it sucks for you for letting that happen.";
   }
 
   var id = aa.map(f => f.candidate).indexOf(200);
