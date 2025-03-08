@@ -4,15 +4,28 @@
 
 
 campaignTrail_temp.cyoa = true;
+let woke = 0;
 
 function getQuestionNumberFromPk(pk) {
-    return campaignTrail_temp.questions_json.map(q=>q.pk).indexOf(pk)-1;
+    // Assuming you want the index of the question in the array
+    // map() to extract pk values, and find the index
+    return campaignTrail_temp.questions_json.map(q => q.pk).indexOf(pk);
 }
 
-cyoAdventure = function (a) {
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
+// Ensure `ans` is set from the last player answer
+cyoAdventure = function () {
+    const ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1];
 
-}
+    // Check if the current answer is the specific one
+    if (ans === 21956) {
+        woke += 1;
+    }
+
+    // If woke equals 1, trigger achievement
+    if (woke === 1) {
+        ctsAchievement("2023 Woke");
+    }
+};
 
 campaignTrail_temp.questions_json = [
     {
