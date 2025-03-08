@@ -157,7 +157,7 @@ campaignTrail_temp.questions_json = [
         "pk": 322,
         "fields": {
             "priority": 0,
-            "description": "California Senator Hiram Johnson, who served as Teddy Roosevelt's running mate in 1912, has placed his name in the Republican primaries to prevent you from securing the Republican nomination. He stands opposed to the conservatism of your and Harding's administration. Buoyed by a win in South Carolina, Johnson hopes to win his home state of California and perhaps send your re-election bid into question. How will you dispatch this challenge?",
+            "description": "California Senator Hiram Johnson, who served as Teddy Roosevelt's running mate in 1912, has placed his name in the Republican primaries to prevent you from securing the Republican nomination. He stands opposed to the conservatism of your and Harding's administration. Buoyed by a win in South Dakota, Johnson hopes to win his home state of California and perhaps send your re-election bid into question. How will you dispatch this challenge?",
             "likelihood": 1
         }
     },
@@ -598,7 +598,7 @@ campaignTrail_temp.questions_json = [
         "pk": 10947,
         "fields": {
             "priority": 0,
-            "description": "With your hostility towards both equality and fiscal progressivism clear as ever, Alabama Senator Oscar Underwood was able to win the Democratic nomination as a compromise candidate on the 57th ballot. Running on a ticket with New York Governor Royal Copeland, Mr. Underwood seeks to become the first southerner elected since the antebellum era - and does so as an anti-klan and anti-prohibition candidate. Any thoughts, Mr. Coolidge?",
+            "description": "With your hostility towards both equality and fiscal progressivism clear as ever, Alabama Senator Oscar Underwood was able to win the Democratic nomination as a compromise candidate on the 57th ballot. Running on a ticket with New York Senator Royal Copeland, Mr. Underwood seeks to become the first southerner elected since the antebellum era - and does so as an anti-klan and anti-prohibition candidate. Any thoughts, Mr. Coolidge?",
             "likelihood": 1
         }
     },
@@ -3567,7 +3567,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 105,
             "issue": 14,
-            "state_issue_score": -0.6,
+            "state_issue_score": 0.6,
             "weight": 1
         }
     },
@@ -24882,7 +24882,7 @@ if(ans == 1745 && equality < -5 && gop < 3 && mellonTax == true && alt == false)
       "pk": 10947,
       "fields": {
         "priority": 1,
-        "description": "With your hostility towards both equality and fiscal progressivism clear as ever, Alabama Senator Oscar Underwood was able to win the Democratic nomination as a compromise candidate on the 57th ballot. Running on a ticket with New York Governor Royal Copeland, Mr. Underwood seeks to become the first southerner elected since the antebellum era - and does so as an anti-klan and anti-prohibition candidate. Any thoughts, Mr. Coolidge?",
+        "description": "With your hostility towards both equality and fiscal progressivism clear as ever, Alabama Senator Oscar Underwood was able to win the Democratic nomination as a compromise candidate on the 57th ballot. Running on a ticket with New York Senator Royal Copeland, Mr. Underwood seeks to become the first southerner elected since the antebellum era - and does so as an anti-klan and anti-prohibition candidate. Any thoughts, Mr. Coolidge?",
         "likelihood": 1
       }
     }
@@ -25399,11 +25399,11 @@ if (quickstats[0] >= 383 && cabinet < 1) {
   ctsAchievement("Do I Hear Firing?"); 
 }
 
-if (quickstats[0] >= 383 && econ <= -1) {
+if (quickstats[0] >= 266 && econ <= -1) {
   ctsAchievement("Costly Cal"); 
 }
 
-if (quickstats[0] >= 383 && econ >= 5 && gop >= 5) {
+if (quickstats[0] >= 266 && econ >= 5 && gop >= 5) {
   ctsAchievement("What A Friend!"); 
 }
 
