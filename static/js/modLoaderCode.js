@@ -354,7 +354,7 @@ function createModView(mod, imageUrl, description, isCustom) {
       : null;
 
   modView.innerHTML = `
-    <div class="mod-title" ${theme ? `style="background-color:${theme.header_color};"` : ""}>
+    <div class="mod-title" ${theme ? `style="background:url('${theme.header_image_url ?? ""}'); background-color:${theme.header_color};"` : ""}>
         <p ${theme ? `style="color:${theme.header_text_color};"` : ""}>${mod.innerText}</p>
     </div>
     <div class = "mod-img-desc">
