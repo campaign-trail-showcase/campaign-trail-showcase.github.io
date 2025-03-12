@@ -163,7 +163,12 @@ function addAllAchievements() {
     achContent.append(holder);
 
     if (theme) {
-      labelHolder.style.backgroundColor = theme.header_color;
+      if(theme.label_background_image_url) {
+        labelHolder.style.backgroundImage = `url("${theme.label_background_image_url}")`
+      }
+      else {
+        labelHolder.style.backgroundColor = theme.header_color;
+      }
       labelHolder.style.color = theme.header_text_color;
     }
   }
