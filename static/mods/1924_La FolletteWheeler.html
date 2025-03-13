@@ -23498,7 +23498,7 @@ if (quickstats[1] >= 20) {
   ctsAchievement("One in Five");
 }
 
-if (noparty == true && aa[1].electoral_votes < 266) {
+if (noparty == true && aa[0].electoral_votes < 266) {
   ctsAchievement("He's All In");
 }
 
@@ -23550,7 +23550,7 @@ else if (aa[0].electoral_votes >= 266 && (aa[0].candidate == 23 || aa[0].candida
   e.executable.push([0, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/bobloss.png'})])
 }
 // Coolidge/Davis Wins but you made your own party
-else if (aa[0].electoral_votes >= 266 && ans == 1689 && (aa[0].candidate == 23 || aa[0].candidate == 24)) {
+else if (aa[0].electoral_votes >= 266 && noparty == false && (aa[0].candidate == 23 || aa[0].candidate == 24)) {
   ctsAchievement("A Real Choice");
   e.pages.push(`<h3>'Democracy is a life, and involves continual struggle'</h3><p>The telegram comes in soon enough - the conservatives, of either the Republican or Democratic brand, will keep their stranglehold on government. You don't even stop to think about which one it is - although it's almost certainly Coolidge. Both the House and the Senate are also going to almost certainly stay divided between the two parties, although you do find solace in the fact that the Progressive Party will likely pick up a series of seats in the Midwest and New York City. You also still have until 1928 for your own Senate seat.<br><br>With the Progressive Party now formed, there are possibilities for you and this party. Your health is poor, but your sprits are not, and many are hoping that this party can have the momentum that the so-called 'Bull Moose' Party failed to achieve after the success in 1912. With not much time left, you must think about the future of this movement - who should be the leader? Will it be Bob Junior? Or your running mate? Only time will tell, but there are plenty of options.</p>`)
   e.executable.push([0, (() => {e.image = e.image = 'https://itsastronomical.com/assets/1924/endings/bobloss.png'})])
