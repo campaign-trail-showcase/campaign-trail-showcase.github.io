@@ -1,0 +1,958 @@
+function addDynamicCSS() {
+    var css = `
+        .inner_window_question h3 .mytooltip{
+            background-color: #999999;
+        }
+
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background-color: #C4C4C4;
+        }
+
+        .mytooltip .mytooltiptext {
+            width: 400px;
+            background-color: #999999;
+            color: Black;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 20%;
+            left: 20%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-style: double;
+	        border-color: #434343;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+
+        .mytooltip .mytooltiptext img {
+            max-width: 150px;
+            height: auto;
+            border-style: double;
+	        border-color: #434343;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+    
+    styleElem.appendChild(document.createTextNode(css));
+    
+    document.head.appendChild(styleElem);
+}
+
+
+addDynamicCSS();
+
+tooltipList = [
+    //Organisations
+    {searchString: "NEC", explanationText: "The National Emergency Committee (NEC), also known as “the Committee”, is the semi-secret council of sixteen wealthy individuals that both funded and organized the March on Washington, and currently hold great sway over the subsequent post-coup administration. They are committedly capitalist on economic policy, conservative on social policy, and nearly all their members have sympathies towards fascism."},
+    {searchString: "PFLA", explanationText: "<img src='https://i.postimg.cc/7h54KxY5/MOW-PFLA-Infobox.png' style='max-width: 300px;'><br>The Progressive-Farmer-Labor-Alliance (PFLA) is an electoral coalition of the Progressive Party, the Farmer-Labor Party and the Nonpartisan League. Formed in 1930, the group managed to win the presidency in the ‘32 election, only to be couped by the American Legion and their wealthy backers on July 4th, 1933, in what would become known as the March on Washington."},
+    {searchString: "IWW", explanationText: "<img src='https://i.postimg.cc/4y0fGYFv/MOW-IWW-Infobox.png' style='max-width: 300px;'><br>The Industrial Workers of the World (IWW) is an overtly syndicalist and militant industrial union and one of the largest unions in the United States, despite its status as illegal. Surviving the red scare of the 10’s and 20’s due to funding from the Soviets, the IWW has since capitalized on unemployment and poor working conditions to become a notable force amongst the American left going into the 30’s. Its members are often known as Wobblies."},
+    {searchString: "Wobblies", explanationText: "<img src='https://i.postimg.cc/4y0fGYFv/MOW-IWW-Infobox.png' style='max-width: 300px;'><br>The Industrial Workers of the World (IWW) is an overtly syndicalist and militant industrial union and one of the largest unions in the United States, despite its status as illegal. Surviving the red scare of the 10’s and 20’s due to funding from the Soviets, the IWW has since capitalized on unemployment and poor working conditions to become a notable force amongst the American left going into the 30’s. Its members are often known as Wobblies."},
+    //NEC and Cabinet
+    {searchString: "Bush", explanationText: "<img src='https://i.postimg.cc/9XLz1M1Q/MOW-Bush-Infobox.png'><br>Prescott Bush, Secretary of State, is one of the members of the NEC and its loudest proponent of increased foreign intervention. An investment banker, he has numerous ties to businesses in Italy, Austria and the German Empire, and is openly supportive of fascism. One of the few personal allies of Child."},
+    {searchString: "Raskob", explanationText: "<img src='https://i.postimg.cc/C1PYCZYy/MOW-Raskob-Infobox.png'><br>John J. Raskob, Secretary of Treasury, is a conservative businessman and former Chair of the DNC. Whilst not a member of the NEC, his connections to DuPont and General Motors, alongside his record for fiscal responsibility, have made him perfect for the job of balancing the country’s budget."},
+    {searchString: "Doyle", explanationText: "<img src='https://i.postimg.cc/bNMrcB7X/MOW-Doyle-Infobox.png'><br>Bill Doyle, Secretary of War, is a member of the NEC and the former commander of the American Legion’s Massachusetts branch. As one of the earliest members of the Committee, his primary concern is keeping the left out of power for good."},
+    {searchString: "Davis", explanationText: "<img src='https://i.postimg.cc/TYh1s6Hq/MOW-Davis-Infobox.png'><br>John W. Davis, Attorney General, is a member of the NEC, a former lawyer and ambassador, and the Committee’s primary legal advisor. Ran for President in 1924 as the Democratic candidate, but lost in a landslide. Despises Child for taking what he views as rightfully his position."},
+    {searchString: "Wadsworth", explanationText: "<img src='https://i.postimg.cc/pLbvBMNd/MOW-Wadsworth-Infobox.png'><br>James W. Wadsworth Jr., Secretary of the Interior, is a former senator and devoutly conservative Republican. Although not a member of the NEC, he finds an ally in their militant anti-socialism, yet his firmly laissez-faire economics often put him at odds with Child’s personal support of corporatism."},
+    {searchString: "Shouse", explanationText: "<img src='https://i.postimg.cc/gc7mn6N8/MOW-Shouse-Infobox.png'><br>Jouett Shouse, Secretary of Agriculture, is a member of the NEC, a lawyer, and close ally of John J. Raskob. A talented wheeler-dealer, he spends much of his time working behind the scenes to build bipartisan connections with other conservatives and ensure the Committee’s allies remain loyal."},
+    {searchString: "du Pont", explanationText: "<img src='https://i.postimg.cc/50xNSdCz/MOW-Du-Pont-Infobox.png'><br>Irénée du Pont, Secretary of Commerce, is a member of the NEC, as well as the wealthy Du Pont family, which have been longtime sponsors of American conservatism. Whilst supportive of Child and most of his fascist ideals, du Pont disagrees with his more corporatist tendencies, and isn’t the most reliable ally."},
+    {searchString: "Du Pont", explanationText: "<img src='https://i.postimg.cc/50xNSdCz/MOW-Du-Pont-Infobox.png'><br>Irénée du Pont, Secretary of Commerce, is a member of the NEC, as well as the wealthy Du Pont family, which have been longtime sponsors of American conservatism. Whilst supportive of Child and most of his fascist ideals, du Pont disagrees with his more corporatist tendencies, and isn’t the most reliable ally."},
+    {searchString: "Johnson", explanationText: "<img src='https://i.postimg.cc/WpYbgybD/MOW-Johnson-Infobox.png'><br>Hugh S. Johnson, Secretary of Labor, is a member of the NEC and a proficient speech writer. A fellow disciple of Mussolini and corporatism, he is a close ally of Child, acting as one of the few dissenting voices within the NEC on economic policy."},
+    {searchString: "Morgan", explanationText: "<img src='https://i.postimg.cc/1zS9yhMd/MOW-Morgan-Infobox.png'><br>J.P. Morgan Jr. is a member of the NEC, one of its three primary financial backers, and also Child's former employer. It was by Morgan's suggestion that the Committee even considered Child as a possible candidate for Butler's VP."},
+    {searchString: "Ford", explanationText: "<img src='https://i.postimg.cc/GpPmDhHr/MOW-Ford-Infobox.png'><br>Henry Ford is a member of the NEC and one of its three primary financial backers. Founder and President of Ford Motor Company, Henry has a deep and personal hatred of the IWW, the PFLA and anyone else who seeks to tell him how to run his own business. Despite being a fascist-adjacent rabid anti-semite, he views Child as nothing more than an inexperienced and wide-eyed ideologue."},
+    {searchString: "Hearst", explanationText: "<img src='https://i.postimg.cc/9MJXx8dn/MOW-Hearst-Infobox.png'><br>William Randolph Hearst is a member of the NEC and its de facto head of public relations. Being one of the pioneers of yellow journalism, as well as the chairman of Hearst Communications, Hearst and his media machine play a vital role in molding public opinion. Though a convert of fascism, he largely dislikes Child."},
+    {searchString: "Clark", explanationText: "<img src='https://i.postimg.cc/Cxq1F40R/MOW-Clark-Infobox.png'><br>Robert Sterling Clark is a member of the NEC and one of its three primary financial backers. Despite this, he shows little interest in politics beyond whatever keeps himself wealthy and his fellow capitalists at the top."},
+    {searchString: "MacGuire", explanationText: "<img src='https://i.postimg.cc/bNKyF2np/MOW-Mac-Guire-Infobox.png'><br>Gerald C. MacGuire is a member of the NEC, the American Legion, and a bond salesman for a Wall Street banking firm. One of the earliest members of the Committee, he was the first person to try and convince Butler to lead their prospective coup, but was unable to convince him, ultimately resulting in the adoption of more desperate measures to force the ex-marine’s hand."},
+    {searchString: "MacNider", explanationText: "<img src='https://i.postimg.cc/P5YXGrbZ/MOW-Mac-Nider-Infobox.png'><br>Hanford MacNider is a member of the NEC and a former senior officer who briefly served as National Commander of the American Legion in the early 20’s. An important asset in matters of both military and diplomacy, MacNider has preferred to shy away from more public duties following his failure to become the Republican VP candidate in 1932. "},
+    {searchString: "Wood", explanationText: "<img src='https://i.postimg.cc/Gpb1ZPmw/MOW-Wood-Infobox.png'><br>Robert E. Wood is a member of the NEC, a former brigadier general and a leading voice in American conservatism. Rabidly isolationist, he regularly finds himself in opposition to Child and Bush over the issue of foreign policy."},
+    //Others
+    {searchString: "Edgar Hoover", explanationText: "<img src='https://i.postimg.cc/fyyz1c5T/MOW-Hoover-Infobox.png'><br>John Edgar Hoover, Director of the Bureau of Investigation, is, despite not being a member of the NEC, one of the most important men in the post-coup administration, overseeing domestic intelligence operations. Being a conservative and staunch anti-socialist, he has no qualms doing the Committee's dirty work, and will willingly ‘deal’ with anyone he views as a threat to his vision of America."},
+    {searchString: "Dorothy", explanationText: "Dorothy Child, your fourth wife and one of the only people in your life who will support you untill the end."},
+    {searchString: "Mussolini", explanationText: "<img src='https://i.postimg.cc/XvgnJHzY/MOW-Mussolini-Infobox.png'><br>Benito Mussolini is the current duce of Italy, as well as being the founder and main ideologue of fascism. Despite his near-universal hatred amongst the left, many in the US view him as a capable and charismatic leader, and his ideology as something the country should strive to imitate."},
+    {searchString: "Spiridonova", explanationText: "<img src='https://i.postimg.cc/Nj6cJCYk/MOW-Spiridonova-Infobox.png'><br>Maria Spiridonova, founder of the Left Socialist Revolutionary Party and its successor, the Revolutionary Association of Narodniks, is the current chairwoman of the Inter-Republic Congress of Soviets, the ruling body of the SRL. To many in the US, she is the embodiment of narodism, and the antithesis of everything America supposedly stands for."},
+    {searchString: "Pabst", explanationText: "<img src='https://i.postimg.cc/wvTgsXCc/MOW-Pabst-Infobox.png'><br>Waldemar Pabst is the chancellor of the German Empire, one of the three states competing for the mantle of Germany following the country’s implosion during the Kapp Putsch. A diehard anti-socialist with overt fascist sympathies, he is an ideal ally for the Child Administration."},
+    //Misc
+    {searchString: "SRL", explanationText: "<img src='https://i.postimg.cc/5NF1vNRG/MOW-SRL-Flag-Infobox.png' style='max-width: 300px;'><br>The Soviet Republics of Labour (SRL), commonly known just as “the Soviets”, is a multi-ethnic federation of Socialist Republics that span across a large chunk of Eurasia. Formally founded in 1921 during the latter years of the Russian Civil War, the SRL has quickly become a beacon of socialism, and a pariah to the capitalist world. Global powers such as the United States and United Kingdom are still yet to formally recognize it as a real nation."},
+    {searchString: "Soviets", explanationText: "<img src='https://i.postimg.cc/5NF1vNRG/MOW-SRL-Flag-Infobox.png' style='max-width: 300px;'><br>The Soviet Republics of Labour (SRL), commonly known just as “the Soviets”, is a multi-ethnic federation of Socialist Republics that span across a large chunk of Eurasia. Formally founded in 1921 during the latter years of the Russian Civil War, the SRL has quickly become a beacon of socialism, and a pariah to the capitalist world. Global powers such as the United States and United Kingdom are still yet to formally recognize it as a real nation."},
+    {searchString: "Argentina", explanationText: "<img src='https://i.postimg.cc/7LrLbTPm/MOW-Free-Territory-of-Argentina-Flag-Infobox.png' style='max-width: 300px;'><br>The Free Territory of Argentina is an Anarcho-Syndicalist Confederation that sits in the southern cone of Latin America. Created in the wake of the Argentine Civil War, it was, for a long time, the only socialist nation in the Western Hemisphere, leading to a level of diplomatic and economic isolation from its capitalist neighbors. It's often nicknamed “the Black Spot of the Americas”."},
+    {searchString: "League of Nations", explanationText: "<img src='https://i.postimg.cc/9F4XpBrL/MOW-League-of-Nations-Flag-Infobox.png' style='max-width: 300px;'><br>Brainchild of former President Woodrow Wilson, the League of Nations was an international organization with the primary goal of preserving peace. Founded in January 1920, the League lasted barely a year before the joint humiliations of the German Collapse and Turkish War of Independence resulted in its disbandment in March 1921. The US never joined the League."},
+    {searchString: "Rhineland", explanationText: "<img src='https://i.postimg.cc/j2Bb9GLZ/MOW-ROA-Flag-Infobox.png' style='max-width: 300px;'><br>The Rhineland Occupational Authority (ROA) was established in 1921 when it became apparent that the French occupation of the western Rhineland was permanent. A puppet military administration bordering a hostile socialist state, it lacks sizable popular support and relies almost entirely on French funding to continue existing."},
+];
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#434343",
+    "header_text_color": "#ffffff",
+    "description_text_color": "#000000",
+    "description_background_color": "#ffffff",
+    "main_color": "#c4c4c4",
+    "secondary_color": "#6e6e6e",
+    "ui_text_color": "#FFFFFF"
+}
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 35,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 12,
+        "fields": {
+            "year": 1948,
+            "summary": "<div style='overflow-y:scroll;height:180px;padding-right:7px'><b>CONTENT WARNING: Racism, ableism and other general bigotry. This mod depicts a United States steadily descending into fascism, along with the violent and regressive realities of such an ideology. If that is a subject matter that upsets you, it is recommended you do not play this mod.</b><p>America's overton window, so neatly centered on the ideas of conservative capitalism, was shattered by the Great Depression, throwing the nation's political scene into chaos. Outside of the peaceful resolution of the Bonus Army, Coolidge's third term proved to be a disaster, sacrificing millions on a cross of laissez-faire capitalism. The Democrats, on the other hand, lacked a strong figure to unite themselves around, and proved too divided to act as meaningful opposition. It wasn't much of a surprise, then, when Jacob Coxey Sr. and the Progressive-Farmer-Labor Alliance narrowly clinched the presidency in '32. The reactions were instantaneous. Progressives cheered, liberals wagged their fingers, conservatives clutched their pearls, and Gerald C. MacGuire sent a letter to retired marine Smedley Butler that would change the course of American history forever.\n\n<p>Elected on a platform of nation-spanning public works, unemployment relief and expanded worker's rights, the PFLA's tiny numbers in Congress resulted in them having to compromise with liberal Republicans and Democrats to get anything passed. Outside of executive orders, January through July was marked by a sheer inability by the federal government to get anything done, leading to many moderates who voted for the otherwise radical ticket on the promises of action to waver in their support for the president.\n\n<p>Meanwhile, in the shady backrooms of wealthy hotels, a plot was being cooked up by those opposed to the PFLA and their left wing agenda. A small collection of capitalists, generals, conservative politicians and fascists, known to themselves as the National Emergency Committee, began their takeover of the American Legion, drumming up the already existing anti-socialist sentiment to push it in the direction of a more dedicatedly militant group. Their goal was simple: to use the Legion to overthrow President Coxey and replace his administration with one that was much further to the right. They just needed someone to marshall their troops and lead them in the prospective coup.\n\n<p>Smedley Butler was resistant at first. The somewhat disappointing outcome of the Bonus Army had rebuilt his respect for the Legion, but it had also caused him to distrust the wealthy political establishment. Still, after a particularly <i>persuasive</i> meeting with the plotters, the man was finally convinced, albeit reluctantly, to run for the position of National Commander of the American Legion, which he won, allowing for the NEC to finally set their plan for a coup in motion. Months of speeches and rallies, combined with a concerted campaign of bribery and intimidation behind the scenes, came to a head on July 2nd, 1933, when a crowd of thousands of veterans set off on a laborious two-day march from Harrisburg down to Washington DC, demanding the removal of the 'crypto-socialist' Coxey.<p>They would return successful.<p></div>",
+            "image_url": "https://i.postimg.cc/qqPJNnMw/MOW-36-Election-Image.png",
+            "winning_electoral_vote_number": 266,
+            "advisor_url": "https://i.postimg.cc/T39K47PX/Child-Advisor-Feedback.png",
+            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">1948 Election Books and Links</h4>David McCullough - <a href=\"http://www.amazon.com/exec/obidos/ASIN/B000FC0VVQ/amhius20-20\" target=\"_blank\">Truman</a></br>Andrew E. Busch - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0700618678/amhius20-20\" target=\"_blank\">Truman's Triumphs: The 1948 Election and the Making of Postwar America</a></br>David Pietruza - <a href=\"http://www.amazon.com/exec/obidos/ASIN/140276748X/amhius20-20\" target=\"_blank\">1948: Harry Truman's Improbable Victory and the Year that Transformed America</a></br>Richard Norton Smith - <a href=\"http://www.amazon.com/exec/obidos/ASIN/067141741X/amhius20-20\" target=\"_blank\">Thomas E. Dewey and His Times</a></br><a href=\"https://www.youtube.com/watch?v=rJABgG4YDwM\" target=\"_blank\">The 1948 Democratic Convention (newsreel footage)</a></br><a href=\"https://www.youtube.com/watch?v=ogg9YsxGQm4\" target=\"_blank\">The 1948 Republican Convention (newsreel footage)</a></br><a href=\"https://www.youtube.com/watch?v=LW2ae0Fznwg\" target=\"_blank\">The 1948 Election Explained (video)</a>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/1960-no-majority-photo.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "1936 March On Washington"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 116,
+        "fields": {
+            "first_name": "Smedley",
+            "last_name": "Butler",
+            "election": 12,
+            "party": "Republican (formerly)",
+            "state": "Pennsylvania",
+            "priority": 1,
+            "description": "<div style='overflow-y:scroll;height:180px;padding-right:7px'>To the people of America, Butler is the definition of a hero: a man who fought tooth and nail to further righteous causes of liberty and democracy. To the veterans of America, he is their champion: the leader of their movement and the loudest voice calling for their rights. To you and your fellows in the National Emergency Council, he's your biggest asset - and your biggest threat.\n\n<p>Gaining his fame from his valiant and exceptional actions in nearly every American-involved conflict from 1898 to 1929, Butler was the NEC's first obvious choice to lead the March on Washington. His near cult-like status amongst the people of the nation would ensure a wide range of support in the prospective coup, and would be vital in appeasing any opponents. To say it took a while to get him on board would be an understatement - getting him to run for commander of the American legion cost a full day's worth of tense and underhanded negotiations alone - but, finally convinced of the plan's necessity, Smedley has pledged himself to the creation of a new regime for the sake of America's stability. <i>Supposedly.</i><p>However, it's no small worry that, once given the levers of power, Butler will not settle for being the NEC's puppet for long. His gradual shift leftwards since his retirement, coupled with his distaste for fascism and its sympathizers, could easily result in the former Marine sweeping the rug out from under you and your compatriots, resulting in the establishment of a government ten times more dangerous and competent than Coxey's. Needless to say, plans have been put in place to ensure old Smedley never gets the chance.<p></div>",
+            "color_hex": "#434343",
+            "secondary_color_hex": "#999999",
+            "is_active": 1,
+            "image_url": "https://i.postimg.cc/j5kdrmpG/MOW-Butler-Candidate.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 117,
+        "fields": {
+            "first_name": "Undecided",
+            "last_name": "Republican",
+            "election": 12,
+            "party": "Republican",
+            "state": "'",
+            "priority": 2,
+            "description": "'",
+            "color_hex": "#990000",
+            "secondary_color_hex": "#b05555",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 118,
+        "fields": {
+            "first_name": "Undecided",
+            "last_name": "Democrat",
+            "election": 12,
+            "party": "Democrat",
+            "state": "'",
+            "priority": 3,
+            "description": "'",
+            "color_hex": "#073763",
+            "secondary_color_hex": "#4c7ead",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 119,
+        "fields": {
+            "first_name": "Jacob S.",
+            "last_name": "Coxey Sr.",
+            "election": 12,
+            "party": "PFLA",
+            "state": "'",
+            "priority": 4,
+            "description": "'",
+            "color_hex": "#34a853",
+            "secondary_color_hex": "#6fc886",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 120,
+        "fields": {
+            "first_name": "Richard Washburn",
+            "last_name": "Child",
+            "election": 12,
+            "party": "Independent",
+            "state": "Massachusetts",
+            "priority": 5,
+            "description": "'",
+            "color_hex": "#6b6b6b",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.postimg.cc/fb8Mx1RJ/MOW-Child-Candidate.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<div style='overflow-y:scroll;height:180px;padding-right:7px'>If someone had asked you twenty-two years ago if you could see yourself as one of the ringleaders of a pro-business plot to overthrow the American president, you'd probably call them insane and waffle on about some Rooseveltian, trust-busting policy. But, you're not that young, naive progressive anymore, because you've seen the future - both the good and bad - and in neither of them does democracy flourish.\n\n<p>First, you watched in horror as the Russian Revolution saw constitutional democracy overthrown in favor of mob rule and parasitic socialism. Spiridonova and her dastardly allies made a mockery of freedom with their 'soviet democracy' and 'informal state', whilst the traitors at home only grew in number and ferocity. And, then, Harding appointed you to be ambassador of Italy, and you saw it for the first time: the only system that could stop the encroachment of narodism and save America from anarchy. Fascism.\n\n<p>After years of propagandizing for Mussolini, you returned to the states in 1930 to spread the gospel of ultranationalism amongst the angry masses, running for a seat in the House in the midterms. With a bit of financial help from the likes of Henry Ford, you rode the wave of anti-establishment sentiment into the Capitol as one of the many independent politicians to do so that year. When it became clear Coxey and the PFLA would win in '32, your close relations to conservatives and business-leaders alike meant you were one of the first politicians to be roped into the plan to remove the new President, with the NEC quickly settling on you to be Butler's VP if he accepted his role in the coup.\n\n<p>With Washington in the Committee's hands, the presidency is only one unfortunate event away…<p></div>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 121,
+        "fields": {
+            "first_name": "Undecided",
+            "last_name": "Republican",
+            "election": 12,
+            "party": "Republican",
+            "state": "'",
+            "priority": 6,
+            "description": "'",
+            "color_hex": "#ffffff",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 125,
+        "fields": {
+            "first_name": "Undecided",
+            "last_name": "Democrat",
+            "election": 12,
+            "party": "Democrat",
+            "state": "'",
+            "priority": 10,
+            "description": "'",
+            "color_hex": "#ffffff",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 126,
+        "fields": {
+            "first_name": "Robert M.",
+            "last_name": "La Follette Jr.",
+            "election": 12,
+            "party": "PFLA",
+            "state": "'",
+            "priority": 11,
+            "description": "'",
+            "color_hex": "#ffffff",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 76,
+        "fields": {
+            "candidate": 116,
+            "running_mate": 120
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 81,
+        "fields": {
+            "candidate": 118,
+            "running_mate": 125
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 77,
+        "fields": {
+            "candidate": 117,
+            "running_mate": 121
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 153351,
+        "fields": {
+            "candidate": 119,
+            "running_mate": 126
+        }
+    }
+]
+
+campaignTrail_temp.credits = "Ban Dryan"
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 12,
+        "candidates": [
+            116,
+            117,
+            118,
+            119
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 12,
+        "candidates": [
+            116,
+            117,
+            118,
+            119
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 12,
+        "year": 1936,
+        "is_premium": 0,
+        "display_year": "1936 March On Washington"
+    }
+]
+
+jet_data = {
+    "headerColor": "#434343",
+    "windowColor": "#6e6e6e",
+    "containerColor": "#999999",
+    "innerWindowColor": "#c4c4c4",
+    "bannerImageUrl": "https://i.postimg.cc/qv8RCmK3/MOW-Butler-Banner.png",
+    "backgroundImageUrl": "https://i.postimg.cc/8zHM4jgt/MOW-36-Background.png",
+    "endingTextColor": "#000000",
+    "customQuote": "“In short, I was a racketeer, a gangster for capitalism.” Smedley D. Butler"
+}
+
+document.body.style.backgroundSize="cover";
+
+//#startcode
+
+corrr = '\n              <h2>THE CAMPAIGN TRAIL</h2><font id="wittyquote" size="4" color="white"><em>“In short, I was a racketeer, a gangster for capitalism.” - Smedley D. Butler</em></font>\n            ';
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#434343";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#6e6e6e";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#999999";
+
+document.getElementById("header").src = "https://i.postimg.cc/qv8RCmK3/MOW-Butler-Banner.png";
+
+document.body.background = "https://i.postimg.cc/8zHM4jgt/MOW-36-Background.png";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#c4c4c4!important;}</style>";
+
+//Historical Overall Results
+
+HistHexcolour=["#434343","#073763","#cc0000","#34a853"];
+HistName=[" Richard Washburn Child"," John Nance Garner"," Joseph Irwin France"," Robert M. La Follette Jr."];
+HistEV=[347,110,74,0];
+HistPV=["16,393,984","11,821,872","11,906,787","6,002,116"];
+HistPVP=["35.5%","25.6%","25.8%","13.0%"];
+
+//Credits
+
+e=campaignTrail_temp
+
+var changeGameDisp = (hide) => {
+  disp = "";
+  if (hide) {
+    disp = "none";
+  }
+  document.getElementsByClassName("inner_window_w_desc")[0].style.display = disp
+};
+
+e.creditsPage = () => {
+  credits_html = `
+    <h3>Writing and Coding</h3>
+    <p>BreadSanta1917 (aka ProbablyUsername)</p>
+    <h3>Proofreading</h3>
+    <p>Cardboardigan</p>
+    <h3>Playtesting</h3>
+    <p>Cecilia</p>
+    <p>PrussianPatriot<p>
+    <p>Genny</p>
+    <h3>Borrowed Code (without which this mod wouldn’t exist)</h3>
+    <p>Credits screen - DecstarG</p>
+    <p>Variable Headquarters Code - Astro</p>
+    <p>Tooltip Code - Nina</p>
+    <p>Code to resize the Feedback Box - Vice</p>
+    <p>Code to edit Overall Results screen - Peace With Honor</p>
+    <p>Music Player - DecstarG, 1972d, 2016 4 Way Election</p>
+    <h3>With Special Thanks To</h3>
+    <p>Everyone in the #mod-help channel who put up with my clueless ass</p><br><br>
+    <h3>Note from the Developer</h3>
+    <div style='width: 70%;text-overflow: ellipsis;text-align:center;display: block;margin-left: auto;margin-right: auto;'>
+    <p>Thank you for playing this mod. As someone who’s been playing this game for around a year or so, and has had so much fun playing all the different mods this wonderful community has made, the idea that I may be able to repay even a tiny amount of that joy through this mod is extremely humbling.</p>
+    <p>Being my first ever TCT mod, I am aware that it probably isn’t going to be the greatest. Still, I hope the six or so months of writing I’ve put into this is enough to make it at least somewhat interesting.</p>
+    <p>Hopefully, this will merely be the first of many mods I make. With how kind and accommodating the people on the discord have been, I’m sure this will be the case.</p>
+    <p>Once again, thank you for giving this mod a chance, and I hope you have fun playing it.</p>
+    <p>- BreadSanta1917</p>
+    </div>
+  `
+  changeGameDisp(true);
+  var spacer = document.createElement("amongusspacerthisisntarealelement");
+  spacer.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  document
+    .getElementsByClassName("inner_window_w_desc")[0]
+    .children[1].appendChild(spacer);
+    changeGameDisp(true);
+    var menuHeader = document.createElement("div");
+    menuHeader.classList.add("inner_window_front");
+    menuHeader.innerHTML = `<h1 style='font-family: "Arial";'><font color='white'>CREDITS</font></h1>`;
+    menuHeader.id = "SOTUheader";
+    menuHeader.style = "height: 50px;background-color:#2d2d2d";
+    var newMenu = document.createElement("div");
+    newMenu.classList.add("inner_window_front");
+    newMenu.id = "SOTUmenu";
+    newMenu.style = `height:260px;background-color:#2d2d2d;color:white;overflow-y: scroll;`;
+
+    newMenu.innerHTML = credits_html;
+    let z = document.getElementById("game_window");
+    var backButton = document.createElement("button");
+    backButton.style =
+      "position: relative; bottom: -13px; left: -380px; width: 150px; height: 80px;font-size:40px;padding-top:5px;padding-left:8px";
+    backButton.id = "backSOTUBtn";
+    backButton.innerHTML = `<b>BACK</b>`;
+    backButton.onclick = function () {
+      document.getElementById("SOTUheader").remove();
+      document.getElementById("SOTUmenu").remove();
+      document.getElementById("backSOTUBtn").remove();
+      changeGameDisp(false);
+    };
+    z.appendChild(menuHeader);
+    z.appendChild(newMenu);
+    z.appendChild(backButton);
+
+}
+
+e.credits = "<button onclick='e.creditsPage()'>Credits</button>";
+
+// Initialise custom music
+  
+$("#music_player")[0].children[0].style.display="none"
+$("#music_player")[0].children[1].style.display="none"
+
+document.getElementById("modLoadReveal").style.display="none"
+document.getElementById("modloaddiv").style.display="none"
+
+musicBox = document.getElementById("music_player")
+musicBox.style.display=""
+
+var trackSel;
+e = campaignTrail_temp
+e.selectedSoundtrack = 0
+
+toTime = (seconds) => {
+  var date = new Date(null);
+  date.setSeconds(seconds);
+  return date.toISOString().substr(11, 8);
+}
+
+generateTime = () => {
+    // Get the audio element
+    var audio = document.getElementById("campaigntrailmusic");
+
+    timeTracker = document.createElement("div");
+    timeTracker.style = `
+      text-align:left;
+      border-style:solid;
+      border-width:3px;
+      height:150px;
+      width:200px;
+      background-color:#999999;
+      float:right;
+      padding: 10px;
+    `
+    $("#trackSelParent")[0].prepend(timeTracker);
+    $("#trackSelParent")[0].prepend(document.createElement("br"));
+
+    // Create a new element to display the current position of the audio
+    var positionDisplay = document.createElement("gg");
+    positionDisplay.id = "position-display";
+
+    // Create a new slider element to change the time
+    var timeSlider = document.createElement("input");
+    timeSlider.type = "range";
+    timeSlider.min = 0;
+    timeSlider.max = 1;
+    timeSlider.step = 0.001;
+    timeSlider.value = 0;
+    timeSlider.style.width = "200px";
+    timeSlider.id = "time-slider";
+
+    var pausePlay = document.createElement("button");
+    pausePlay.id = "position-display";
+    pausePlay.innerHTML = "<b>Pause</b>"
+    pausePlay.style.width = "100%";
+
+
+    pausePlay.addEventListener("click", event => {
+      event.preventDefault();
+      updatePositionDisplay();
+      let audio = document.getElementById("campaigntrailmusic");
+      if (audio.paused) {
+        audio.play();
+        event.target.innerHTML = "<b>Pause</b>";
+        return;
+      }
+      audio.pause();
+      event.target.innerHTML = "<b>Play</b>";
+      return;
+    })
+
+    var volumeLabel = document.createElement("gg");
+    volumeLabel.id = "volume-label";
+    volumeLabel.innerHTML = "<br><b>Volume: </b>"
+
+    var volumeSlider = document.createElement("input");
+    volumeSlider.type = "range";
+    volumeSlider.min = 0;
+    volumeSlider.max = 1;
+    volumeSlider.step = 0.001;
+    volumeSlider.value = 0;
+    volumeSlider.style.width = "200px";
+    volumeSlider.id = "volume-slider";
+
+    volumeSlider.value = audio.volume;
+
+    timeTracker.appendChild(pausePlay);
+    timeTracker.appendChild(document.createElement("br"));
+    timeTracker.appendChild(document.createElement("br"));
+    timeTracker.appendChild(positionDisplay);
+    timeTracker.appendChild(timeSlider);
+    timeTracker.appendChild(volumeLabel);
+    timeTracker.appendChild(volumeSlider);
+
+    updatePositionDisplay();
+
+    //for (let i = 0; i < 10; i++)
+    //timeTracker.append(document.createElement("br"));
+
+
+    // Function to update the position display
+    function updatePositionDisplay() {
+      positionDisplay.innerHTML = "<b>Time:</b> " + toTime(audio.currentTime) + "<br>";
+      timeSlider.value = audio.duration ? audio.currentTime / audio.duration : 0;
+    }
+
+    // Function to change the time of the audio
+    function changeTime() {
+      positionDisplay.innerHTML = "<b>Time:</b> " + toTime(audio.currentTime) + "<br>";
+      audio.currentTime = timeSlider.value * audio.duration;
+    }
+
+    updateVolume = event => {
+      audio.volume = event.target.value;
+    }
+    
+    // Update the position display and slider every second
+    setInterval(updatePositionDisplay, 1000);
+
+    // Listen for changes to the time slider and change the time of the audio
+    timeSlider.addEventListener("input", changeTime);
+    volumeSlider.addEventListener("input", updateVolume)
+}
+
+function newMusicPlayer() {
+  trackSel = document.createElement("div");
+  trackSel.id = "trackSelParent"
+  let z = `<br><br><br><br><br><br><br><br><br><br><div id='trackSel' style="text-align:left;border-style:solid;border-width:3px;overflow-y: scroll;overflow-x: hidden;height:200px; width:400px;background-color:#999999;float:right;">`
+  z += `<b><select id='selectSoundtrack'><option value='`+soundtracks[e.selectedSoundtrack].name+`'>`+soundtracks[e.selectedSoundtrack].name+"</option>"
+  for (i in soundtracks) {
+    if (soundtracks[e.selectedSoundtrack] != soundtracks[i]) {
+      z += `<option value='`+soundtracks[i].name+`'>`+soundtracks[i].name+`</option>`
+    }
+  }
+  z += `</select></b><br><br>`
+  // <label><input type="radio" name="option" value="option1">Option 1</label><br>
+  for (i in soundtracks[e.selectedSoundtrack].tracklist) {
+    let a = soundtracks[e.selectedSoundtrack].tracklist[i]
+    let b = `<label><input class="trackSelector" type="radio" name="trackSelector" value="`+i+`">`+a.name+`</label><br>`
+    z += b
+  }
+  z += "</div><br><br>"
+  trackSel.innerHTML = z
+
+  // select correct song
+
+  musicBox.appendChild(trackSel);
+  Array.from(document.getElementById("trackSel").children).filter(f=>{
+    return f.tagName == "LABEL"
+  }).map(f=>f.children[0])[0].checked = true
+
+  // set soundtrack changer
+
+  soundtrackSelector = document.getElementById("selectSoundtrack")
+  soundtrackSelector.onchange = function() {
+    for (i in soundtracks) {
+      if (soundtracks[i].name == soundtrackSelector.value) {
+        e.selectedSoundtrack = i
+        break
+      }
+    }
+    document.getElementById("trackSelParent").remove()
+    newMusicPlayer()
+  }
+
+  var matches = document.querySelectorAll('.trackSelector');
+
+  for (match in matches) {
+    matches[match].onchange = function() {
+      audio = $("#campaigntrailmusic")[0];
+      audio.src = soundtracks[e.selectedSoundtrack].tracklist[this.value].url
+      audio.currentTime = 0
+    }
+  }
+
+  musicBox.children[2].loop = false
+  musicBox.children[2].src = soundtracks[e.selectedSoundtrack].tracklist[0].url
+
+  musicBox.children[2].onended = function() {
+    console.log("next track")
+    let selected = Number(document.querySelector('input[name="trackSelector"]:checked').value);
+    let newSel = clamp(selected+1, soundtracks[e.selectedSoundtrack].tracklist.length-1, 0)
+    let buttons = Array.from(document.getElementById("trackSel").children).filter(f=>{
+      return f.tagName == "LABEL"
+    }).map(f=>f.children[0])
+    //let selectedIndex = buttons.map(f=>f.children[0]).map(f=>f.checked)
+    buttons[newSel].click()
+  }
+
+  for (w = 0; w < 7; w++) {
+    document.getElementById("trackSelParent").appendChild(document.createElement("br"))
+  }
+  
+  generateTime();
+}
+
+clamp = function(a, max, min, overflow=true) {
+  if (overflow) {
+    return a > max ? min : a < min ? max : a;
+  }
+  return a > max ? max : a < min ? min : a;
+}
+
+
+// Track list
+
+var soundtracks = {
+  0: {
+      name: "Wobbly Radio",
+      tracklist: [
+        {
+          "name": "Which Side are You On? (The Almanac Singers)",
+          "url": "https://audio.jukehost.co.uk/njztnzwgc4FWa2cPgZPSO6ZwcvSOiGEA"
+        },
+        {
+            "name": "In a Shanty in Old Shanty Town (The Ink Spots)",
+            "url": "https://audio.jukehost.co.uk/o8dkA6LpnVzcENI03aLxjWit8AnQtdyh"
+        },
+        {
+            "name": "We’re In The Money <i>(The Golddiggers’ Song)</i> (Bing Crosby)",
+            "url": "https://audio.jukehost.co.uk/q5tBCBn9ksmelqZrtx2V1pZW9Wdeowe7"
+        },
+        {
+            "name": "Anything Goes (Cole Porter)",
+            "url": "https://audio.jukehost.co.uk/1ZFEdOCUlv5ifq1B0o748T9pm3LeN411"
+        },
+        {
+            "name": "Brother, Can You Spare A Dime? (Bing Crosby)",
+            "url": "https://audio.jukehost.co.uk/APDB9RqSmUeppOWSMD3yPWEFpXVJtd7b"
+        },
+        {
+            "name": "Bank Failures (Bob Miller)",
+            "url": "https://audio.jukehost.co.uk/TIhxbDbzY4AoVhv0MWgzACgMhqWvCFhq"
+        },
+        {
+            "name": "The Bourgeois Blues (Lead Belly)",
+            "url": "https://audio.jukehost.co.uk/dS15xXisEWoTxlT4SrH5DbL2xziZvUXW"
+        },
+        {
+            "name": "All You Fascists (Woody Guthrie)",
+            "url": "https://audio.jukehost.co.uk/Zbr7cUAOA5ep4GCDAJVat62C6mDIqVXQ"
+        },
+        {
+            "name": "I Don’t Want Your Millions, Mister (Pete Seeger, The Almanac Singers)",
+            "url": "https://audio.jukehost.co.uk/hjULxw3tbuREOLCLXmcoiz6yuqq21xY9"
+        },
+    ]
+  },
+  1: {
+    name: "Ending Songs - SPOILERS!!!",
+    tracklist: [
+      {
+        "name": "American Legion March (United States Air Force Band)",
+        "url": "https://audio.jukehost.co.uk/e5KH0VQ8SSwN3yO0h1DBZUllqsLxTMQG"
+      },
+      {
+        "name": "On the Sidewalks of New York (Nat King Cole)",
+        "url": "https://audio.jukehost.co.uk/7USQlPufDlI6SOixfCSRylw2xu5U4mnA"
+      },
+      {
+        "name": "God Bless America (Kate Smith)",
+        "url": "https://audio.jukehost.co.uk/6YH9qEPBzSD5ogSKtLZJe7yIGwOJyAha"
+      },
+      {
+        "name": "Giovinezza (Fanfara e Coro diretta da V. Santini)",
+        "url": "https://audio.jukehost.co.uk/VUeiWoezOO6uu48F7DJY3I75QWugouql"
+      },
+      {
+        "name": "Swing Is King (Ted Heath)",
+        "url": "https://audio.jukehost.co.uk/D1bst24dD7aINA8NtlGtobhsZ2GmUhkN"
+      },
+      {
+        "name": "Union Dixie (Tennessee Ernie Ford)",
+        "url": "https://audio.jukehost.co.uk/pDSey4vhJiMRMVi6lE2LXF4YdkbTSwxn"
+      },
+      {
+        "name": "When I Get Low, I Get High (Ella Fitzgerald, Chick Webb)",
+        "url": "https://audio.jukehost.co.uk/Qs3c0iNcXQZlwHaFxulMLRcosXauAAxT"
+      },
+      {
+        "name": "Happy Days are Here Again (Ben Selvin & His Orchestra)",
+        "url": "https://audio.jukehost.co.uk/XqDeeGJfQbtfWmNk9pBWVOKBLe0mE9SO"
+      },
+      {
+        "name": "A Room With A View (Artie Shaw)",
+        "url": "https://audio.jukehost.co.uk/NSILETREXOyT0WdSCbEnYTBEsuagBn0G"
+      },
+      {
+        "name": "The Yellow Rose of Texas (Gene Autry)",
+        "url": "https://audio.jukehost.co.uk/534dmVX9OWLFdO5AWhjs48ukjr9J5plm"
+      },
+      {
+        "name": "We’re in the Money (Pee Wee Russell)",
+        "url": "https://audio.jukehost.co.uk/5wZs1zZ53noS3nmMLHnc9fBcSydODcpZ"
+      },
+      {
+        "name": "Eugene Talmadge’s Campaign Song <i>(1940)</i> (sourced from RussellLibraryOralHistory)",
+        "url": "https://audio.jukehost.co.uk/LsjZFO9Ra1lsBzWNhy8it9rNGbA4nICh"
+      },
+      {
+        "name": "If I Didn’t Care (The Ink Spots)",
+        "url": "https://audio.jukehost.co.uk/KA0PklcOBp88FjHnxFEUP1UqoqreK0dj"
+      },
+      {
+        "name": "Hold the Fort (The Almanac Singers)",
+        "url": "https://audio.jukehost.co.uk/5Ak7TOMLD2OakpDbm3IuK01MLaWhRSTF"
+      },
+      {
+        "name": "John Brown’s Body (Paul Robeson)",
+        "url": "https://audio.jukehost.co.uk/zicZzuxKjHdGCiC4s50W4MR71XUABoBg"
+      },
+      {
+        "name": "Bella Ciao (Manu Pilas)",
+        "url": "https://audio.jukehost.co.uk/JFXMZvNUP4PgWfx4L8o90kkGsW0804DP"
+      },
+  ]
+}
+}
+
+// Set up new music player
+  
+newMusicPlayer();
+
+//Achievements
+
+campaignTrail_temp.achievements = {
+    "Mr. Unremarkable": {
+      "image": "https://i.postimg.cc/X7XKktft/Mr-Unremarkable.png",
+      "description": "Become just another president",
+      "cannotBeCheated": true
+  },
+    "Early Retirement": {
+      "image": "https://i.postimg.cc/8z6hqWnH/Quiet-Retirement.png",
+      "description": "Outlive your usefulness",
+      "cannotBeCheated": true
+  },
+    "The Men behind the Man": {
+      "image": "https://i.postimg.cc/C1FkB2MP/The-Men-behind-the-Man.png",
+      "description": "Become a puppet pseudo-dictator (CANON ENDING)",
+      "cannotBeCheated": true
+  },
+    "Avanti Americana": {
+      "image": "https://i.postimg.cc/wvV5wpbY/Avanti-Americana.png",
+      "description": "Ascend to your rightful position",
+      "cannotBeCheated": true
+  },
+    "To Own a Lib": {
+      "image": "https://i.postimg.cc/KjWMWvPw/To-Own-a-Lib.png",
+      "description": "Draw, but win",
+      "cannotBeCheated": true
+  },
+    "Anyone but Him": {
+      "image": "https://i.postimg.cc/g03H6RVJ/Anyone-but-Him.png",
+      "description": "Unite the opposition",
+      "cannotBeCheated": true
+  },
+    "We have FDR at home": {
+      "image": "https://i.postimg.cc/XN1dqxRL/We-have-FDR-at-home.png",
+      "description": "Lose to a Liberal Democrat",
+      "cannotBeCheated": true
+  },
+    "C’est la vie": {
+      "image": "https://i.postimg.cc/3NfXHZTL/C-est-la-vie.png",
+      "description": "Lose to a Liberal Republican",
+      "cannotBeCheated": true
+  },
+    "Cactus Jack Rides": {
+      "image": "https://i.postimg.cc/mDRN3DjS/Cactus-Jack-Rides.png",
+      "description": "Lose to a Conservative Democrat",
+      "cannotBeCheated": true
+  },
+    "Who but Hoover?": {
+      "image": "https://i.postimg.cc/PrBDzJr8/Who-but-Hoover.png",
+      "description": "Lose to a Conservative Republican",
+      "cannotBeCheated": true
+  },
+    "Red Suspenders": {
+      "image": "https://i.postimg.cc/pdMDxTwt/Red-Suspenders-are-in-Fashion.png",
+      "description": "Get replaced by a more popular demagogue",
+      "cannotBeCheated": true
+  },
+    "Butler’s Revenge": {
+      "image": "https://i.postimg.cc/x81v74WJ/Butler-s-Revenge.png",
+      "description": "Watch your brand new party get couped",
+      "cannotBeCheated": true
+  },
+    "Taiwanification": {
+      "image": "https://i.postimg.cc/R01w0mmJ/Taiwanification.png",
+      "description": "Reduce the US to a couple of islands",
+      "cannotBeCheated": true
+  },
+    "The Patton before the fall": {
+      "image": "https://i.postimg.cc/rmQWS9K8/The-Patton-before-the-Fall.png",
+      "description": "Have Japan invade Hawaii",
+      "cannotBeCheated": true
+  },
+    "Thus Unto Tyrants": {
+      "image": "https://i.postimg.cc/RhhtGnHw/Thus-Unto-Tyrants.png",
+      "description": "Destroy the United States of America",
+      "cannotBeCheated": true
+  },
+    "What Letters?": {
+      "image": "https://i.postimg.cc/vH19VfMs/What-Letters.png",
+      "description": "Have the truth come out and still win",
+      "cannotBeCheated": true
+  },
+    "World’s Most Agreeable Fascist": {
+      "image": "https://i.postimg.cc/YCYWX7hD/World-s-Most-Agreeable-Fascist.png",
+      "description": "Win without agitating the Wobblies",
+      "cannotBeCheated": true
+  },
+    "The Nationalist International": {
+      "image": "https://i.postimg.cc/RV87sGGh/Nationalist-Internationalism.png",
+      "description": "Win despite having an aggressive foreign policy",
+      "cannotBeCheated": true
+  },
+    "If Debs could do it…": {
+      "image": "https://i.postimg.cc/fW8jXM9x/If-Debs-could-do-it.png",
+      "description": "Have at least one state vote for a man in jail",
+      "cannotBeCheated": true
+  },
+    "Frownin’ Sid": {
+      "image": "https://i.postimg.cc/dQd7rMP9/Frownin-Sid.png",
+      "description": "Arrest the Red Sheriff",
+      "cannotBeCheated": true
+  },
+}
+
+//endcode1
