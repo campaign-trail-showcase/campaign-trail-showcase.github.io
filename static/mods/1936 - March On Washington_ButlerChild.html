@@ -1,5 +1,12 @@
 campaignTrail_temp.cyoa = true;
 
+function ctsAchievement(achievement, difficultyChecker = true){
+    if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+        if(campaignTrail_temp.CTS){
+        unlockAchievement(achievement);
+    }
+}
+
 function getQuestionNumberFromPk(pk) {
     return campaignTrail_temp.questions_json.map(q=>q.pk).indexOf(pk)-1;
 }
@@ -3521,11 +3528,11 @@ campaignTrail_temp.issues_json = [
             "stance_desc_3": "This state has a deeply ingrained culture of conservatism, most likely due to a largely insular population and political oppression of ‘others’. It supports the solidification of the existing immigration restrictions and ethnic hierarchy. state",
             "stance_4": "Centrist",
             "stance_desc_4": "This state has a variable political culture, and acts as a battleground between conservative and progressive philosophies. It supports limited reforms to civil rights and immigration policy, as long as it does not fundamentally challenge the ethnic hierarchy of the US.",
-            "stance_5": "Progressive",
+            "stance_5": "Reformist",
             "stance_desc_5": "This state has a culture of progressivism, most likely due to a largely ethnically varied population and less political restrictions on non-WASPs. It supports the loosening of existing immigration restrictions and the expansion of civil rights.",
-            "stance_6": "Progressive",
+            "stance_6": "Reformist",
             "stance_desc_6": "This state has a culture of progressivism, most likely due to a largely ethnically varied population and less political restrictions on non-WASPs. It supports the loosening of existing immigration restrictions and the expansion of civil rights.",
-            "stance_7": "Revolutionary",
+            "stance_7": "Progressive",
             "stance_desc_7": "This state has a deeply ingrained culture of progressivism, most likely due to a largely ethnically varied population and less political restrictions on non-WASPs. It supports the rollback of most existing immigration restrictions and a sizable expansion of civil rights.",
             "election": 12
         }
@@ -3618,7 +3625,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 335,
             "issue": 43,
-            "state_issue_score": -0.5,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -3628,7 +3635,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 336,
             "issue": 43,
-            "state_issue_score": -0.5,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -3668,7 +3675,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 340,
             "issue": 43,
-            "state_issue_score": 0,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -3708,7 +3715,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 344,
             "issue": 43,
-            "state_issue_score": 0,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -3718,7 +3725,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 345,
             "issue": 43,
-            "state_issue_score": -0.5,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -3738,7 +3745,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 347,
             "issue": 43,
-            "state_issue_score": 0,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -3768,7 +3775,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 350,
             "issue": 43,
-            "state_issue_score": 0.5,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -3778,7 +3785,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 351,
             "issue": 43,
-            "state_issue_score": 0,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -3808,7 +3815,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 354,
             "issue": 43,
-            "state_issue_score": 1,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -3828,7 +3835,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 356,
             "issue": 43,
-            "state_issue_score": 0.5,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -3838,7 +3845,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 357,
             "issue": 43,
-            "state_issue_score": 0.5,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -3848,7 +3855,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 358,
             "issue": 43,
-            "state_issue_score": 0,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -3858,7 +3865,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 359,
             "issue": 43,
-            "state_issue_score": 0,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -3868,7 +3875,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 360,
             "issue": 43,
-            "state_issue_score": 0.5,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -3878,7 +3885,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 361,
             "issue": 43,
-            "state_issue_score": 0,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -3888,7 +3895,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 362,
             "issue": 43,
-            "state_issue_score": 0,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -3898,7 +3905,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 363,
             "issue": 43,
-            "state_issue_score": 0.5,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -3918,7 +3925,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 365,
             "issue": 43,
-            "state_issue_score": 0.5,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -3948,7 +3955,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 368,
             "issue": 43,
-            "state_issue_score": 0.5,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -3958,7 +3965,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 369,
             "issue": 43,
-            "state_issue_score": 0,
+            "state_issue_score": 1,
             "weight": 2
         }
     },
@@ -3988,7 +3995,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 372,
             "issue": 43,
-            "state_issue_score": 0,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -4008,7 +4015,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 374,
             "issue": 43,
-            "state_issue_score": -0.5,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -4018,7 +4025,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 375,
             "issue": 43,
-            "state_issue_score": -1,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -4028,7 +4035,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 376,
             "issue": 43,
-            "state_issue_score": 1,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -4038,7 +4045,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 377,
             "issue": 43,
-            "state_issue_score": -0.5,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -4078,7 +4085,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 381,
             "issue": 43,
-            "state_issue_score": 0.5,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -4568,7 +4575,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 334,
             "issue": 44,
-            "state_issue_score": -1,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -4588,7 +4595,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 336,
             "issue": 44,
-            "state_issue_score": -0.5,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -4598,7 +4605,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 337,
             "issue": 44,
-            "state_issue_score": 1,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -4628,7 +4635,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 340,
             "issue": 44,
-            "state_issue_score": 0.5,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -4638,7 +4645,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 341,
             "issue": 44,
-            "state_issue_score": -0.5,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -4648,7 +4655,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 342,
             "issue": 44,
-            "state_issue_score": -1,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -4658,7 +4665,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 343,
             "issue": 44,
-            "state_issue_score": -0.5,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -4668,7 +4675,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 344,
             "issue": 44,
-            "state_issue_score": 0,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -4688,7 +4695,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 346,
             "issue": 44,
-            "state_issue_score": -0.5,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -4708,7 +4715,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 348,
             "issue": 44,
-            "state_issue_score": 0,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -4718,7 +4725,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 349,
             "issue": 44,
-            "state_issue_score": -1,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -4728,7 +4735,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 350,
             "issue": 44,
-            "state_issue_score": 1,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -4748,7 +4755,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 352,
             "issue": 44,
-            "state_issue_score": 1,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -4778,7 +4785,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 355,
             "issue": 44,
-            "state_issue_score": -1,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -4798,7 +4805,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 357,
             "issue": 44,
-            "state_issue_score": -0.5,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -4818,7 +4825,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 359,
             "issue": 44,
-            "state_issue_score": 0.5,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -4828,7 +4835,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 360,
             "issue": 44,
-            "state_issue_score": 0.5,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -4838,7 +4845,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 361,
             "issue": 44,
-            "state_issue_score": 0.5,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -4858,7 +4865,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 363,
             "issue": 44,
-            "state_issue_score": 1,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -4868,7 +4875,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 364,
             "issue": 44,
-            "state_issue_score": 0,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -4898,7 +4905,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 367,
             "issue": 44,
-            "state_issue_score": 0,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -4908,7 +4915,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 368,
             "issue": 44,
-            "state_issue_score": 0.5,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -4938,7 +4945,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 371,
             "issue": 44,
-            "state_issue_score": -0.5,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -4948,7 +4955,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 372,
             "issue": 44,
-            "state_issue_score": -0.5,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -4958,7 +4965,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 373,
             "issue": 44,
-            "state_issue_score": -0.5,
+            "state_issue_score": 1,
             "weight": 1
         }
     },
@@ -4968,7 +4975,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 374,
             "issue": 44,
-            "state_issue_score": -0.5,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -4988,7 +4995,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 376,
             "issue": 44,
-            "state_issue_score": 0.5,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -4998,7 +5005,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 377,
             "issue": 44,
-            "state_issue_score": 0,
+            "state_issue_score": 0.5,
             "weight": 1
         }
     },
@@ -5008,7 +5015,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 378,
             "issue": 44,
-            "state_issue_score": 0.5,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -5018,7 +5025,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 379,
             "issue": 44,
-            "state_issue_score": -1,
+            "state_issue_score": -0.5,
             "weight": 1
         }
     },
@@ -5038,7 +5045,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 381,
             "issue": 44,
-            "state_issue_score": -0.5,
+            "state_issue_score": -1,
             "weight": 1
         }
     },
@@ -19119,7 +19126,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 334,
             "candidate": 116,
             "affected_candidate": 116,
-            "state_multiplier": -0.03
+            "state_multiplier": 0.03
         }
     },
     {
@@ -19229,7 +19236,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 334,
             "candidate": 116,
             "affected_candidate": 116,
-            "state_multiplier": -0.03
+            "state_multiplier": 0.03
         }
     },
     {
@@ -19339,7 +19346,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 334,
             "candidate": 116,
             "affected_candidate": 116,
-            "state_multiplier": -0.03
+            "state_multiplier": 0.03
         }
     },
     {
@@ -19449,7 +19456,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 334,
             "candidate": 116,
             "affected_candidate": 116,
-            "state_multiplier": -0.03
+            "state_multiplier": 0.03
         }
     },
     {
@@ -27947,7 +27954,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 14493,
             "candidate": 116,
-            "answer_feedback": "IBoth Dixies and Yankees initially throw their support behind your reforms, viewing it as an expression of support for their versions of law and order. However, when a meeting between you and Talmadge is leaked, revealing your administration has no interest in using the newly militarized police force to tackle lynching, the north pulls their support, letting your dream of a stronger state apparatus die on the floor of the House."
+            "answer_feedback": "Both Dixies and Yankees initially throw their support behind your reforms, viewing it as an expression of support for their versions of law and order. However, when a meeting between you and Talmadge is leaked, revealing your administration has no interest in using the newly militarized police force to tackle lynching, the north pulls their support, letting your dream of a stronger state apparatus die on the floor of the House."
         }
     },
     {
@@ -29865,7 +29872,7 @@ if (ans ==  13562){
     PartyComposition -= 2;
     }
 if (ans == 13563){
-    PartyComposition -= 2;
+    PartyComposition -= 1;
     LegislativeGoodwill += 1;
     }
 //Question 8 CYOA
@@ -29880,7 +29887,6 @@ if (ans == 13593){
 }
 //Question 9 CYOA
 if (ans ==  13598){
-    campaignTrail_temp.candidate_image_url = "https://i.postimg.cc/fb8Mx1RJ/MOW-Child-Candidate.png";
     campaignTrail_temp.running_mate_image_url = "https://i.postimg.cc/Qtkmv5CP/MOW-Murphy-Candidate.png";
     campaignTrail_temp.running_mate_last_name = "Murphy";
     campaignTrail_temp.candidate_json[4]["fields"].first_name = "Grayson M. P.";
@@ -30512,6 +30518,7 @@ if (ans == 15457){
 if (ans == 15458){
     MussoliniMeter += 1;
     IWWAgitation += 1;
+    ctsAchievement("Frownin’ Sid");
 }
 if (ans == 15488){
     MussoliniMeter += 1;
@@ -30520,6 +30527,7 @@ if (ans == 15488){
 if (ans == 15494){
     MussoliniMeter += 1;
     IWWAgitation += 1;
+    ctsAchievement("Frownin’ Sid");
 }
 if (ans == 15524){
     MussoliniMeter += 1;
@@ -30528,6 +30536,7 @@ if (ans == 15524){
 if (ans == 15530){
     MussoliniMeter += 1;
     IWWAgitation += 1;
+    ctsAchievement("Frownin’ Sid");
 }
 if (ans == 15554){
     MussoliniMeter += 1;
@@ -30735,7 +30744,7 @@ function openHeadquarter() {
     if (IWWAgitation > 5 && IWWAgitation < 9) {
         WobbleLevel = 'furious'
     }
-    if (IWWAgitation > 8 && IWWAgitation < 111) {
+    if (IWWAgitation > 8 && IWWAgitation < 11) {
         WobbleLevel = 'irate'
     }
     if (IWWAgitation > 10) {
@@ -30974,9 +30983,30 @@ endingPicker = (out, totv, aa, quickstats) => {
         }, 50);
     }
 
+    music_end = function() {
+        document.getElementById("campaigntrailmusic").pause()
+        document.getElementById("music_player").style.display = "none"
+    }
+    
+    music_end()
+
+    if(aa[3].candidate === 119 && aa[3].electoral_votes > 0 && PFLATicket === 1){
+        ctsAchievement("If Debs could do it…");
+    }
+
     if(quickstats[0] > 265) {
+        if(ButlerCult > 2){
+            ctsAchievement("What Letters?");
+        }
+        if(IWWAgitation < 1){
+            ctsAchievement("World’s Most Agreeable Fascist");
+        }
+        if(Isolationism < 1){
+            ctsAchievement("Nationalist Internationalism");
+        }
         //Victory Endings
         if(MussoliniMeter < 13 && NECApproval > 6 && IWWAgitation < 11 && TalmadgePrimary < 3 && VanZandtPrimary < 3){
+            ctsAchievement("Mr. Unremarkable");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -30984,9 +31014,10 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/6Q4yLH3C/MOW-Ending-1-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>Four More Years</b><p>You stand below the Capitol building, before a crowd of thousands, in a scene nearly identical to the one three and a half years ago. But now, you’re not playing second fiddle to some unwilling general, borrowing the attention of a congregation assembled for him - you’re the President, and this congregation was yours.<p>Dorothy stands by your side, her hand in yours as she walks you up to the podium for your speech. “Look at them, Richard,” she whispered, nodding out at the sea of flags and banners, “they’re all here for you.”<p>Your lips purse involuntarily, grumbling in acknowledgement. This crowd wasn’t any bigger than the one at your first speech. If anything, it was a bit smaller. You had spent months leading this ungrateful mob of a population, and they couldn’t even be bothered to turn up for your inauguration? Were you always destined to remain in the shadow of your successor?<p>Your focus meanders to the stands, scanning the rows of foreign dignitaries. An uncharacteristically laid-back looking Edward Wood sits next to Kuno von Westarp, mutually conversing as if their nations didn’t have decades of unresolved tension. A couple seats over, Aarón Sáenz Garza rests his chin in his hand, observing your supporters with mild revulsion. Eventually, your gaze rests on the centre of the front row, where you had specifically requested there be a reserved seat, only to see it occupied by Galeazzo Ciano, the Italian Foreign Minister. Your heart sinks.<p>“He didn't come…” The words feebly escape your lips.<p>Dorothy frowns sympathetically, squeezing your hand. “It's alright, honey,” she consoled, “maybe he's just busy. You know how hard governing is…” She leans in, pressing an encouraging kiss to your cheek, “now, forget about all that and show these people just why they elected you.”<p>Smiling weakly at your wife, you straighten your posture and step up to the podium to the sound of raucous cheers. Out of the corner of your eye, you see the members of the NEC lined up at the side of the stage, most too caught up in their own conversations to spare you a second thought. You can’t help but wonder if they’re already discussing who they’ll get to replace you in four years time.<p>No. Dorothy was right, you need to forget about all that. At least just for now. Even if they discard you in ‘40, even if they continue to order you around like a dog, for the next four years all eyes are on you, and that knowledge fills you with a sense of pride that writing detective novels never could.<p>You clear your throat, turning your attention out to the National Mall.<p>“My fellow Americans…”`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/e5KH0VQ8SSwN3yO0h1DBZUllqsLxTMQG' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>Four More Years</b><p>You stand below the Capitol building, before a crowd of thousands, in a scene nearly identical to the one three and a half years ago. But now, you’re not playing second fiddle to some unwilling general, borrowing the attention of a congregation assembled for him - you’re the President, and this congregation was yours.<p>Dorothy stands by your side, her hand in yours as she walks you up to the podium for your speech. “Look at them, Richard,” she whispered, nodding out at the sea of flags and banners, “they’re all here for you.”<p>Your lips purse involuntarily, grumbling in acknowledgement. This crowd wasn’t any bigger than the one at your first speech. If anything, it was a bit smaller. You had spent months leading this ungrateful mob of a population, and they couldn’t even be bothered to turn up for your inauguration? Were you always destined to remain in the shadow of your predecessor?<p>Your focus meanders to the stands, scanning the rows of foreign dignitaries. An uncharacteristically laid-back looking Edward Wood sits next to Kuno von Westarp, mutually conversing as if their nations didn’t have decades of unresolved tension. A couple seats over, Aarón Sáenz Garza rests his chin in his hand, observing your supporters with mild revulsion. Eventually, your gaze rests on the centre of the front row, where you had specifically requested there be a reserved seat, only to see it occupied by Galeazzo Ciano, the Italian Foreign Minister. Your heart sinks.<p>“He didn't come…” The words feebly escape your lips.<p>Dorothy frowns sympathetically, squeezing your hand. “It's alright, honey,” she consoled, “maybe he's just busy. You know how hard governing is…” She leans in, pressing an encouraging kiss to your cheek, “now, forget about all that and show these people just why they elected you.”<p>Smiling weakly at your wife, you straighten your posture and step up to the podium to the sound of raucous cheers. Out of the corner of your eye, you see the members of the NEC lined up at the side of the stage, most too caught up in their own conversations to spare you a second thought. You can’t help but wonder if they’re already discussing who they’ll get to replace you in four years time.<p>No. Dorothy was right, you need to forget about all that. At least just for now. Even if they discard you in ‘40, even if they continue to order you around like a dog, for the next four years all eyes are on you, and that knowledge fills you with a sense of pride that writing detective novels never could.<p>You clear your throat, turning your attention out to the National Mall.<p>“My fellow Americans…”`;
         }
         if(MussoliniMeter < 13 && NECApproval < 7 && IWWAgitation < 11 && TalmadgePrimary < 3 && VanZandtPrimary < 3) {
+            ctsAchievement("Early Retirement");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -30994,9 +31025,10 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/fbmPHtPm/MOW-Ending-2-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>Redundancy</b><p>You stride through the halls of the White House, the jubilant celebrations of the reinauguration crowd still audible through the walls. Dorothy walks with you all the way towards the Oval Office, her arm looped through yours as she regales you with earnest compliments.<p>“My husband, President for another four years,” she chuckles lightly, gazing up at you with a pride that warms your frigid soul, “aren’t I just the luckiest woman in the world? I’m proud of you, Richard. I really am.”<p>You push open the door to your coveted workspace, only to find the fifteen other members of the Committee already present, occupying the various couches and chairs. Behind your desk sits a straight-faced Murphy, his hands clasped together over a small collection of documents. Something wasn’t right.<p>“I’ll leave you men to talk business, then?” Dorothy anxiously simpers towards the Committee, shooting you a concerned look before departing. You’re suddenly overcome with an intense awareness that you’ve just been cornered.<p>Murphy nods at you from his seat, not getting up. “Congratulations, Richard. Well done on a race hard-won,” a twinge of sorrow underlies his honeyed words, “if you could just take a seat-”<p>You ignore his request, stepping further into the den of snakes. “What’s happened? What’s gone wrong?”<p>“You have, Mister Child,” Ford rises from the couch, pointing a wrinkled digit at you, “you and these last three years. We’ve been trying to work with you, but you’ve been too self-righteous and egotistical to take our advice.”<p>Blindsided by the sudden aggression, your voice begins to tremble. “I- I admit that I may have disappointed you on some occasions-”<p>Hearst is the next to take to his feet, cutting you off with a coarse guffaw. “Hah! Disappointed?” he snipes, “that’s a fucking understatement. You may as well be Coxey himself with how well you’ve governed. If it weren’t for us you would’ve emptied the treasury by now. Probably would’ve tried to empty our bank accounts, too.”<p>The rest of the room burbles in agreement. “William is exaggerating, as usual,” your Vice President waves at the standing men, prompting them to return to their seats, “but he’s not wrong. This arrangement does not work anymore.”<p>You look towards Bush and Johnson, your ideological brethren, but their resigned expressions chip away at your will to resist. You flinch as a hand rests on your shoulder, spinning around to meet the face of J. P. Morgan Jr, you former boss, patron, and the very man who instigated your rise to power. Your heart sinks as he frowns apologetically.<p>“Honestly, Richard? It was a mistake. To keep you in the Committee, to allow you to become president, all of it. I thought you’d be able to follow orders and work for the good of the country, but you couldn’t even do that,” his inflection, paternal and mournful, cuts deeper than any insult, “I can’t protect you anymore. You’re just too much of a liability for this administration.”<p>No response forms in your mind. Instead, you stand there like a scolded juvenile, tears welling in your eyes as Murphy slides a letter across the table. “In seven months you will retire due to a health scare, and Grayson will become president in your stead. John will take the VP spot. The candidate for 1940 will be decided on closer to the time.” A smug grin breaks out on Davis’ face, wounding you further.<p>“But… What then? What will I do without… this?”<p>There’s an awkward pause as your former Vice President considers. “Retire to that house you bought in Massachusetts? Get back into writing? Maybe you could move to Italy and see if they’ll take you on as an advisor? But for our sake, Rich - for America’s sake - stay out of politics.”`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/7USQlPufDlI6SOixfCSRylw2xu5U4mnA' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>Redundancy</b><p>You stride through the halls of the White House, the jubilant celebrations of the reinauguration crowd still audible through the walls. Dorothy walks with you all the way towards the Oval Office, her arm looped through yours as she regales you with earnest compliments.<p>“My husband, President for another four years,” she chuckles lightly, gazing up at you with a pride that warms your frigid soul, “aren’t I just the luckiest woman in the world? I’m proud of you, Richard. I really am.”<p>You push open the door to your coveted workspace, only to find the fifteen other members of the Committee already present, occupying the various couches and chairs. Behind your desk sits a straight-faced Murphy, his hands clasped together over a small collection of documents. Something wasn’t right.<p>“I’ll leave you men to talk business, then?” Dorothy anxiously simpers towards the Committee, shooting you a concerned look before departing. You’re suddenly overcome with an intense awareness that you’ve just been cornered.<p>Murphy nods at you from his seat, not getting up. “Congratulations, Richard. Well done on a race hard-won,” a twinge of sorrow underlies his honeyed words, “if you could just take a seat-”<p>You ignore his request, stepping further into the den of snakes. “What’s happened? What’s gone wrong?”<p>“You have, Mister Child,” Ford rises from the couch, pointing a wrinkled digit at you, “you and these last three years. We’ve been trying to work with you, but you’ve been too self-righteous and egotistical to take our advice.”<p>Blindsided by the sudden aggression, your voice begins to tremble. “I- I admit that I may have disappointed you on some occasions-”<p>Hearst is the next to take to his feet, cutting you off with a coarse guffaw. “Hah! Disappointed?” he snipes, “that’s a fucking understatement. You may as well be Coxey himself with how well you’ve governed. If it weren’t for us you would’ve emptied the treasury by now. Probably would’ve tried to empty our bank accounts, too.”<p>The rest of the room burbles in agreement. “William is exaggerating, as usual,” your Vice President waves at the standing men, prompting them to return to their seats, “but he’s not wrong. This arrangement does not work anymore.”<p>You look towards Bush and Johnson, your ideological brethren, but their resigned expressions chip away at your will to resist. You flinch as a hand rests on your shoulder, spinning around to meet the face of J. P. Morgan Jr, you former boss, patron, and the very man who instigated your rise to power. Your heart sinks as he frowns apologetically.<p>“Honestly, Richard? It was a mistake. To keep you in the Committee, to allow you to become president, all of it. I thought you’d be able to follow orders and work for the good of the country, but you couldn’t even do that,” his inflection, paternal and mournful, cuts deeper than any insult, “I can’t protect you anymore. You’re just too much of a liability for this administration.”<p>No response forms in your mind. Instead, you stand there like a scolded juvenile, tears welling in your eyes as Murphy slides a letter across the table. “In seven months you will retire due to a health scare, and Grayson will become president in your stead. John will take the VP spot. The candidate for 1940 will be decided on closer to the time.” A smug grin breaks out on Davis’ face, wounding you further.<p>“But… What then? What will I do without… this?”<p>There’s an awkward pause as your former Vice President considers. “Retire to that house you bought in Massachusetts? Get back into writing? Maybe you could move to Italy and see if they’ll take you on as an advisor? But for our sake, Rich - for America’s sake - stay out of politics.”`;
         }
         if(MussoliniMeter > 12 && NECApproval > 6 && IWWAgitation < 11 && TalmadgePrimary < 3 && VanZandtPrimary < 3) {
+            ctsAchievement("The Men behind the Man");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31004,9 +31036,10 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/sgF8gxWy/MOW-Ending-3-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>A New Era?</b><p>You stand below the Capitol building, before a crowd of thousands, in a scene nearly identical to the one three and a half years ago. But now, you’re not playing second fiddle to some unwilling general, borrowing the attention of a congregation assembled for him - you’re the President, and this congregation was yours.<p>Dorothy stands by your side, her hand in yours as she walks you up to the podium for your speech. “Look at them, Richard,” she whispered, nodding out at the sea of flags and banners, “they’re all here for you.”<p>The corners of your mouth twitch upwards at her words. She was damn right they were all here for you, and in numbers that made the march that started it all seem like a birthday party. Swarms of uniformed Legionnaires and gleeful citizens, many of which had travelled across the country just to attend, were practically clambering over one another to get a good look at you. It was the sort of scene you had only ever observed during your time in Italy, or the recurring dreams since.<p>Your focus meanders to the stands, scanning the rows of foreign dignitaries. An uncharacteristically laid-back looking Edward Wood sits next to Kuno von Westarp, mutually conversing as if their nations didn’t have decades of unresolved tension. A couple seats over, Aarón Sáenz Garza rests his chin in his hand, observing your supporters with mild revulsion. Eventually, your gaze rests on the centre of the front row, where you had specifically requested there be a reserved seat, pride bubbling up inside you as you see it occupied by Il Duce himself: Benito Mussolini. He meets your eyes and flashes you a toothy grin. You fire one back.<p>Dorothy stops before the podium, granting you a soft, supporting peck on the lips. “Good luck, darling,” she coos, letting go of your hand, “you’re going to do great.”<p>Winking at her, you straighten your posture and step up to the podium to the sound of raucous cheers. Out of the corner of your eye, you see the members of the NEC lined up at the side of the stage, watching the crowd with a mix of fascination and dread. Ford whispers something to Hearst, causing his jaw to tighten slightly. Were they… scared of you?<p>“One day,” you mutter to yourself as you adjust the microphone, the audience steadily falling silent in anticipation of your speech, “one day I’ll cut my strings, and you two will be the first to go.”<p>You clear your throat, turning your attention out to the National Mall.<p>“My fellow Americans…”`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/6YH9qEPBzSD5ogSKtLZJe7yIGwOJyAha' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>A New Era?</b><p>You stand below the Capitol building, before a crowd of thousands, in a scene nearly identical to the one three and a half years ago. But now, you’re not playing second fiddle to some unwilling general, borrowing the attention of a congregation assembled for him - you’re the President, and this congregation was yours.<p>Dorothy stands by your side, her hand in yours as she walks you up to the podium for your speech. “Look at them, Richard,” she whispered, nodding out at the sea of flags and banners, “they’re all here for you.”<p>The corners of your mouth twitch upwards at her words. She was damn right they were all here for you, and in numbers that made the march that started it all seem like a birthday party. Swarms of uniformed Legionnaires and gleeful citizens, many of which had travelled across the country just to attend, were practically clambering over one another to get a good look at you. It was the sort of scene you had only ever observed during your time in Italy, or the recurring dreams since.<p>Your focus meanders to the stands, scanning the rows of foreign dignitaries. An uncharacteristically laid-back looking Edward Wood sits next to Kuno von Westarp, mutually conversing as if their nations didn’t have decades of unresolved tension. A couple seats over, Aarón Sáenz Garza rests his chin in his hand, observing your supporters with mild revulsion. Eventually, your gaze rests on the centre of the front row, where you had specifically requested there be a reserved seat, pride bubbling up inside you as you see it occupied by Il Duce himself: Benito Mussolini. He meets your eyes and flashes you a toothy grin. You fire one back.<p>Dorothy stops before the podium, granting you a soft, supporting peck on the lips. “Good luck, darling,” she coos, letting go of your hand, “you’re going to do great.”<p>Winking at her, you straighten your posture and step up to the podium to the sound of raucous cheers. Out of the corner of your eye, you see the members of the NEC lined up at the side of the stage, watching the crowd with a mix of fascination and dread. Ford whispers something to Hearst, causing his jaw to tighten slightly. Were they… scared of you?<p>“One day,” you mutter to yourself as you adjust the microphone, the audience steadily falling silent in anticipation of your speech, “one day I’ll cut my strings, and you two will be the first to go.”<p>You clear your throat, turning your attention out to the National Mall.<p>“My fellow Americans…”`;
         }
         if(MussoliniMeter > 12 && NECApproval < 7 && IWWAgitation < 11 && TalmadgePrimary < 3 && VanZandtPrimary < 3) {
+            ctsAchievement("Avanti Americana");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31014,10 +31047,11 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/nz1Px8pL/MOW-Ending-4-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>Rectification</b><p>You stride through the halls of the White House, the jubilant celebrations of the reinauguration crowd still audible through the walls. Dorothy walks with you all the way towards the Oval Office, her arm looped through yours as she regales you with earnest compliments.<p>“My husband, President for another four years,” she chuckles lightly, gazing up at you with a pride that warms your frigid soul, “aren’t I just the luckiest woman in the world? I’m proud of you, Richard. I really-.”<p>She falls silent as she sees the intimidating figure of George Van Horn Moseley posted up outside the door to the office, pistol holstered by his side. The fascist grants the two of you a curt salute, before gesturing towards the enclosed room. “They’re already in there, Mister President.”<p>So Bush was right - they were really going to try this as soon as they could. “Thank you, George,” you shift towards Dorothy, planting a contrite kiss on her cheek, “I’m going to need a couple minutes, darling. I’ll meet you back at our room, okay?”<p>You watch her scurry off before marching inside, head held high. As expected, the rest of the Committee are already seated inside, their whispered argument dying down as soon as they notice your entrance. “And what do I owe this pleasure to, gentlemen?” You settle down in your rightful seat, peculiarly left vacant by the rebellious committee members. Half of the room share hesitant expressions with one another, “Oh, come on, there must be some reason you’re all here. Masters of politicking like you prefer to schedule your meetings in advance.”<p>Finally, someone stands: Henry Ford. “We’re here because of your actions, Richard,” the industrialist clarifies, eyes sweeping his comrades in search for support, “Your time in office has, frankly, been subpar and in conflict with the interests of this committee.”<p>You raise your eyebrows in mock surprise. “It has? Well, that’s a real shame, especially since I don’t intend to change anything.”<p>“That doesn’t matter,” Hearst joins Ford on his feet, “You’re no longer needed here. You are to resign as president before the year ends, to be replaced by someone less egotistical. If you don’t, the Committee will be forced to-”<p>“Forced to what?” You flatly cut him off, surprising everyone in the present with your sudden authority - including yourself, “Honestly, I'm surprised you're still in business with such a poor understanding of public opinion. But, then again, your papers are little more than mindless slop.”<p>The publisher laughs in disbelief. “I beg your pardon?!”<p>“Out of all the individuals in this room, who has the largest and most devoted following? Do any of the rest of you have a nationwide paramilitary utterly loyal to your vision?” the chants from the crowd outside, still yet to disperse, thrum faintly beneath your words, “Can you boast a public perception that isn't just ‘stingy oligarch’? I'm afraid that this little coup of yours is a couple months too late.”<p>Heast shoots an anxious look towards a dumbfounded Ford. In a fit of desperation, Davis pipes up. “You're bluffing. We have the media, we have the connections, you-”<p>“The only thing you're going to have is a quick trial. GEORGE!”<p>A small squad of legionnaires burst into the office via both doors, their weapons drawn and pointed at the traitors. Moseley’s eyes flash with sadistic delight as he follows in behind them, roughly cuffing Ford, Hearst and Davis, whilst the seated committee members watch on with a mix of dread and relief.<p>“You two-faced papist bastard!” Spittle flies from Henry’s mouth as he yells at you, “you fucking jewish crony! I hope they string you up by your feet-!” A painful crack rings out as a young legionnaire slams the butt of his rifle into the industrialist’s nose, sending blood pouring down his philtrum. You stifle a laugh.<p>“Thank you, friends. Take them away.” With a flick of your hand, the armed men abide, parading the three potential putschists out of the room and leaving behind a stunned Committee. “Now, are there any more grievances I should know of?” Your former puppet masters regard you with an obedient terror, none daring to speak. “Good. I'll see you all at dinner tonight. I have a number of suggestions about these next four years. Dismissed.”`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/VUeiWoezOO6uu48F7DJY3I75QWugouql' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>Rectification</b><p>You stride through the halls of the White House, the jubilant celebrations of the reinauguration crowd still audible through the walls. Dorothy walks with you all the way towards the Oval Office, her arm looped through yours as she regales you with earnest compliments.<p>“My husband, President for another four years,” she chuckles lightly, gazing up at you with a pride that warms your frigid soul, “aren’t I just the luckiest woman in the world? I’m proud of you, Richard. I really-.”<p>She falls silent as she sees the intimidating figure of George Van Horn Moseley posted up outside the door to the office, pistol holstered by his side. The fascist grants the two of you a curt salute, before gesturing towards the enclosed room. “They’re already in there, Mister President.”<p>So Bush was right - they were really going to try this as soon as they could. “Thank you, George,” you shift towards Dorothy, planting a contrite kiss on her cheek, “I’m going to need a couple minutes, darling. I’ll meet you back at our room, okay?”<p>You watch her scurry off before marching inside, head held high. As expected, the rest of the Committee are already seated inside, their whispered argument dying down as soon as they notice your entrance. “And what do I owe this pleasure to, gentlemen?” You settle down in your rightful seat, peculiarly left vacant by the rebellious committee members. Half of the room share hesitant expressions with one another, “Oh, come on, there must be some reason you’re all here. Masters of politicking like you prefer to schedule your meetings in advance.”<p>Finally, someone stands: Henry Ford. “We’re here because of your actions, Richard,” the industrialist clarifies, eyes sweeping his comrades in search for support, “Your time in office has, frankly, been subpar and in conflict with the interests of this committee.”<p>You raise your eyebrows in mock surprise. “It has? Well, that’s a real shame, especially since I don’t intend to change anything.”<p>“That doesn’t matter,” Hearst joins Ford on his feet, “You’re no longer needed here. You are to resign as president before the year ends, to be replaced by someone less egotistical. If you don’t, the Committee will be forced to-”<p>“Forced to what?” You flatly cut him off, surprising everyone in the present with your sudden authority - including yourself, “Honestly, I'm surprised you're still in business with such a poor understanding of public opinion. But, then again, your papers are little more than mindless slop.”<p>The publisher laughs in disbelief. “I beg your pardon?!”<p>“Out of all the individuals in this room, who has the largest and most devoted following? Do any of the rest of you have a nationwide paramilitary utterly loyal to your vision?” the chants from the crowd outside, still yet to disperse, thrum faintly beneath your words, “Can you boast a public perception that isn't just ‘stingy oligarch’? I'm afraid that this little coup of yours is a couple months too late.”<p>Heast shoots an anxious look towards a dumbfounded Ford. In a fit of desperation, Davis pipes up. “You're bluffing. We have the media, we have the connections, you-”<p>“The only thing you're going to have is a quick trial. GEORGE!”<p>A small squad of legionnaires burst into the office via both doors, their weapons drawn and pointed at the traitors. Moseley’s eyes flash with sadistic delight as he follows in behind them, roughly cuffing Ford, Hearst and Davis, whilst the seated committee members watch on with a mix of dread and relief.<p>“You two-faced papist bastard!” Spittle flies from Henry’s mouth as he yells at you, “you fucking jewish crony! I hope they string you up by your feet-!” A painful crack rings out as a young legionnaire slams the butt of his rifle into the industrialist’s nose, sending blood pouring down his philtrum. You stifle a laugh.<p>“Thank you, friends. Take them away.” With a flick of your hand, the armed men abide, parading the three potential putschists out of the room and leaving behind a stunned Committee. “Now, are there any more grievances I should know of?” Your former puppet masters regard you with an obedient terror, none daring to speak. “Good. I'll see you all at dinner tonight. I have a number of suggestions about these next four years. Dismissed.”`;
         }
         //Primaried Endings
         if(TalmadgePrimary > 2) {
+            ctsAchievement("Red Suspenders are in Fashion");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31025,9 +31059,10 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/zvXPXdGF/MOW-Ending-12-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>On the Shoulders of Failures</b><p>“That should be everything for today. It’s good to have you on board, Mister President.”<p>The rest of the Committee murmurs in agreement at Murphy’s statement, offering Eugene a series of polite smiles and firm handshakes before shuffling out of the Oval Office. You remain perched on the couch, watching the southerner as he runs his hand across the desk you once sat behind. President Talmadge? What a joke. That fool couldn’t govern his state for a month without pissing off the entire political class - handing him the keys to power was equivalent to putting the country in a basket and sending it over a waterfall.<p>“Do you need something Richard?” The unworthy successor drawled, his voice an insult to your ears. You stand up, forcing a grin, though it comes out as a constipated grimace.<p>“No, Eugene, I don’t. I was just wondering how your first day in office has been. It’s a stressful job.”<p>The President kicks his feet up on the table, a cocky laugh escaping his maw. You feel your jaw tighten at the sight of his shoes dirtying your former workspace. “Maybe it was for you, but I’m doing just fine. Nothing this job throws at me could be harder than the bullshit I wrangled my way out of in Atlanta.”<p>“Do you actually plan on achieving anything these next four years?” Your words come out more venomous than intended, “or are you just going to sit around and admire the view?”<p>Talmadge rolls his eyes behind his circle-framed glasses, “Well, the people obviously think I’ll do a better job than you.”<p>“The people don’t know what’s good for them!” Your voice begins to rise, bitterness seeping from every sentence, “they’re vapid, emotional, easily led astray. If the American public had an ounce of collective critical thinking then they wouldn’t have elected a hypocrite whose only value lies in how well he follows his masters’ orders.”<p>A switch flips somewhere in the southerner’s brain and he leaps to his feet, his effortless charm vanishing in favor of an anger that could level forests, “You want to talk about hypocrisy, Child?!” He slams his fist on the polished desk, causing its content to rattle anxiously, “you spent your last three years licking fifteen pairs of boots until you could see your goddamn reflection in them! Every bill you signed was in service of the rich and power, yet you strut around like you’re some sort of revolutionary nationalist who stands up for the working class,” you jump slightly as his finger finds purchase on your chest, “you and I are the exact same. We’re grifters, people who know who to please to climb the ladder. The only difference is I know what I’m fucking doing. That’s why I’m sitting at this table and you’re on the damn couch.”<p>The President finishes his tirade, leaving his face reddened and you utterly speechless. When it becomes clear you’re unable to answer back, he drops back into his chair, returning to work like you were never there to begin with. You turn to leave, stopping in the doorway when Talmadge speaks up for a final time.<p>“Don’t bother coming to the next meeting, Richard. If I see you in the White House again, I’ll have you arrested.”`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/LsjZFO9Ra1lsBzWNhy8it9rNGbA4nICh' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>On the Shoulders of Failures</b><p>“That should be everything for today. It’s good to have you on board, Mister President.”<p>The rest of the Committee murmurs in agreement at Murphy’s statement, offering Eugene a series of polite smiles and firm handshakes before shuffling out of the Oval Office. You remain perched on the couch, watching the southerner as he runs his hand across the desk you once sat behind. President Talmadge? What a joke. That fool couldn’t govern his state for a month without pissing off the entire political class - handing him the keys to power was equivalent to putting the country in a basket and sending it over a waterfall.<p>“Do you need something Richard?” The unworthy successor drawled, his voice an insult to your ears. You stand up, forcing a grin, though it comes out as a constipated grimace.<p>“No, Eugene, I don’t. I was just wondering how your first day in office has been. It’s a stressful job.”<p>The President kicks his feet up on the table, a cocky laugh escaping his maw. You feel your jaw tighten at the sight of his shoes dirtying your former workspace. “Maybe it was for you, but I’m doing just fine. Nothing this job throws at me could be harder than the bullshit I wrangled my way out of in Atlanta.”<p>“Do you actually plan on achieving anything these next four years?” Your words come out more venomous than intended, “or are you just going to sit around and admire the view?”<p>Talmadge rolls his eyes behind his circle-framed glasses, “Well, the people obviously think I’ll do a better job than you.”<p>“The people don’t know what’s good for them!” Your voice begins to rise, bitterness seeping from every sentence, “they’re vapid, emotional, easily led astray. If the American public had an ounce of collective critical thinking then they wouldn’t have elected a hypocrite whose only value lies in how well he follows his masters’ orders.”<p>A switch flips somewhere in the southerner’s brain and he leaps to his feet, his effortless charm vanishing in favor of an anger that could level forests, “You want to talk about hypocrisy, Child?!” He slams his fist on the polished desk, causing its content to rattle anxiously, “you spent your last three years licking fifteen pairs of boots until you could see your goddamn reflection in them! Every bill you signed was in service of the rich and power, yet you strut around like you’re some sort of revolutionary nationalist who stands up for the working class,” you jump slightly as his finger finds purchase on your chest, “you and I are the exact same. We’re grifters, people who know who to please to climb the ladder. The only difference is I know what I’m fucking doing. That’s why I’m sitting at this table and you’re on the damn couch.”<p>The President finishes his tirade, leaving his face reddened and you utterly speechless. When it becomes clear you’re unable to answer back, he drops back into his chair, returning to work like you were never there to begin with. You turn to leave, stopping in the doorway when Talmadge speaks up for a final time.<p>“Don’t bother coming to the next meeting, Richard. If I see you in the White House again, I’ll have you arrested.”`;
         }
         if(VanZandtPrimary > 2) {
+            ctsAchievement("Butler’s Revenge");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31035,10 +31070,11 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/4dGSj4CM/MOW-Ending-13-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>Be All My Sins Remembered</b><p>The soft whir of recording equipment is barely audible beneath the voice of prosecutor Robert H. Jackson as he displayed the evidence to the jury. All around the United States of America, people are sitting by their radios, beholding the trial of the man who tried to kill democracy, taking down a beloved veteran in the process. Your hands shake behind the wood of the witness box, thankfully obscured from the scrutiny of your peers, but nothing can conceal the gauntness of your cheeks or the grey strands in your hair. Three more weeks in your cell would be preferable to a second more of this humiliation.<p>Only MacNider had managed to escape the wrath of the new President, slipping through the FBI’s fingers and disappearing into Canada, whilst the rest of your former allies were thrown in jail on charges of treason. A conviction was guaranteed, so the plan became one of silence, a last attempt to retain your collective dignity in the face of oblivion. Then Clark squealed, and the first domino fell. One by one, the other putschists began to point fingers, shifting blame for the more unsavoury acts of your administration in an effort to avoid the rope, and, as expected, the accusations always led back to you.<p>Now, here you were, neck deep in your own sins, the once coveted title of President nothing more than a target on your back. How you wished you had let Davis take the position all those years ago.<p>“Mister Child. Mister Child!” The prosecutor's voice pierces through your haze, unceremoniously pulling you from the swamp of self pity. Your gaze slowly swivels to meet his, acknowledging him for the first time since you took the stand. His bespectacled face shows no remorse or restraint, just a silent, calculated fury that had felled your comrades and would fell you too.<p>“I had asked you a question, Mister Child,” he continues, readjusting his glasses, “what role did you play in the kidnapping of the Butler family?”<p>You turn your head towards your lawyer, trying to analyse his facial expressions for a hint of advice. Silence - that was the plan. But the plan was dead. At this point, silence would be cowardice. Had you really come this far, ruined this many lives, just to hide behind a veil of false ignorance?<p>“Mister Child,” the judge interjects, “answer the question.”<p>You take a deep breath.<p>“I suggested the idea and helped plan the operation. I did not participate myself.”<p>The courtroom fills with murmurs, only to be muzzled by the swift slam of the judge’s gavel. Jackson’s eyes briefly flit to his notes before once again cornering you beneath his glare. “Why did you suggest this in the first place?”<p>“General Butler was resistant to our ideas. We were worried he would tell the government about the march. It was a necessity to secure his loyalty for as long as we needed him.”<p>Jackson’s mouth twists into a thin line, disgust barely concealed in his tone. “Do you regret initiating this plan?”<p>You look past the prosecutor and see him at the back of the hall; President Van Zandt, his fists clenched on his lap. Beside him, Ethel Conway Peters, still pale from her years in isolation, wipes tears from her eyes. The chair next to them is empty. Butler’s.<p>“No. I do not.”`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/KA0PklcOBp88FjHnxFEUP1UqoqreK0dj' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>Be All My Sins Remembered</b><p>The soft whir of recording equipment is barely audible beneath the voice of prosecutor Robert H. Jackson as he displayed the evidence to the jury. All around the United States of America, people are sitting by their radios, beholding the trial of the man who tried to kill democracy, taking down a beloved veteran in the process. Your hands shake behind the wood of the witness box, thankfully obscured from the scrutiny of your peers, but nothing can conceal the gauntness of your cheeks or the grey strands in your hair. Three more weeks in your cell would be preferable to a second more of this humiliation.<p>Only MacNider had managed to escape the wrath of the new President, slipping through the FBI’s fingers and disappearing into Canada, whilst the rest of your former allies were thrown in jail on charges of treason. A conviction was guaranteed, so the plan became one of silence, a last attempt to retain your collective dignity in the face of oblivion. Then Clark squealed, and the first domino fell. One by one, the other putschists began to point fingers, shifting blame for the more unsavoury acts of your administration in an effort to avoid the rope, and, as expected, the accusations always led back to you.<p>Now, here you were, neck deep in your own sins, the once coveted title of President nothing more than a target on your back. How you wished you had let Davis take the position all those years ago.<p>“Mister Child. Mister Child!” The prosecutor's voice pierces through your haze, unceremoniously pulling you from the swamp of self pity. Your gaze slowly swivels to meet his, acknowledging him for the first time since you took the stand. His bespectacled face shows no remorse or restraint, just a silent, calculated fury that had felled your comrades and would fell you too.<p>“I had asked you a question, Mister Child,” he continues, readjusting his glasses, “what role did you play in the kidnapping of the Butler family?”<p>You turn your head towards your lawyer, trying to analyse his facial expressions for a hint of advice. Silence - that was the plan. But the plan was dead. At this point, silence would be cowardice. Had you really come this far, ruined this many lives, just to hide behind a veil of false ignorance?<p>“Mister Child,” the judge interjects, “answer the question.”<p>You take a deep breath.<p>“I suggested the idea and helped plan the operation. I did not participate myself.”<p>The courtroom fills with murmurs, only to be muzzled by the swift slam of the judge’s gavel. Jackson’s eyes briefly flit to his notes before once again cornering you beneath his glare. “Why did you suggest this in the first place?”<p>“General Butler was resistant to our ideas. We were worried he would tell the government about the march. It was a necessity to secure his loyalty for as long as we needed him.”<p>Jackson’s mouth twists into a thin line, disgust barely concealed in his tone. “Do you regret initiating this plan?”<p>You look past the prosecutor and see him at the back of the hall; President Van Zandt, his fists clenched on his lap. Beside him, Ethel Conway Peters, still pale from her years in isolation, wipes tears from her eyes. The chair next to them is empty. Butler’s.<p>“No. I do not.”`;
         }
         //Civil War Endings
         if(IWWAgitation > 10 && LegionLeader === 1) {
+            ctsAchievement("Taiwanification");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31060,9 +31096,10 @@ endingPicker = (out, totv, aa, quickstats) => {
             document.getElementById("header").src = "https://i.postimg.cc/Bvfs2kQS/MOW-Ending-14-Banner.png";
             document.body.background = "https://i.postimg.cc/J7pkKcXV/MOW-Ending-14-Background.png";
             setImage("https://i.postimg.cc/8CdG44jh/MOW-Ending-14-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;'>Hawaii</b><p>Hawaii, officially the United States of America (USA), is a country in the Pacific Ocean about 2,000 miles (3,200 km) southwest of the American Commonwealth. It has a total area of 28,311 square kilometres (10,931 square miles), with 58.8% of it being composed of land, and the remaining 41.2% water. The combined territories under USA control consist of 137 volcanic islands that comprise the entire Hawaiian archipelago. The largest metropolitan area is that of New Washington (the capital), formerly Honolulu, which is located on the island of Washburn, formerly Oʻahu. With around 3.5 million inhabitants, Hawaii is the most densely populated country in North America.<p>Settled by Polynesians sometime between 1000 and 1200 CE, Hawaii was home to numerous independent chiefdoms. In 1778, British explorer James Cook was the first known non-Polynesian to arrive at the archipelago. An influx of European and American explorers, traders, and whalers soon arrived, leading to the decimation of the once-isolated indigenous community through the introduction of diseases such as syphilis, tuberculosis, smallpox, and measles; the native Hawaiian population declined from between 300,000 and one million to less than 40,000 by 1890. Hawaii became a unified, internationally recognized kingdom in 1810, remaining independent until American and European businessmen overthrew the monarchy in 1893; this led to annexation by the U.S. in 1898. The Second American Revolution (1936-1945) resulted in the loss of the American mainland to Socialist forces and the flight of the USA central government to Hawaii. The victorious Socialists proceeded to establish the American Commonwealth under Provisional Chairwoman Elizabeth Gurley Flynn, and took the USA’s position as the dominant geopolitical power in North America.<p>Though fleeing to the island as a nominally fascist one-party state, the death of President Richard Washburn Child in 1946 saw the USA slowly transition back into a liberal democracy over the course of three decades, with democratically elected presidents being reinstated in 1976. Historians largely attribute this slow change in policy to a mix of numerous factors, including the capitulation of the Kingdom of Italy in 1945, diplomatic pressure from the British Empire, and the governmental purges by President Douglas MacArthur (1946-1964). The first democratically elected President of the USA post-second revolution was Nelson Rockefeller, standing for the American Liberty League.<p>The political status of the USA is contentious. The USA maintains its claim of being the sole legitimate government of America, and it regards the American Commonwealth as an illegal entity. In turn, the American Commonwealth also denies the legitimacy of the USA, claiming it occupies territory that belongs to an indigenous republic. Though formerly recognised by both the British and Japanese empires, the normalization of relations between the American Commonwealth and Britain in the 70s led to them recognising the Commonwealth instead, whilst the collapse of the Japanese Empire in 1991 deprived the USA of their final major international backer. Very few nations currently recognise the USA as a country, with the most notable being the State of Mexico.`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/5Ak7TOMLD2OakpDbm3IuK01MLaWhRSTF' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;'>Hawaii</b><p>Hawaii, officially the United States of America (USA), is a country in the Pacific Ocean about 2,000 miles (3,200 km) southwest of the American Commonwealth. It has a total area of 28,311 square kilometres (10,931 square miles), with 58.8% of it being composed of land, and the remaining 41.2% water. The combined territories under USA control consist of 137 volcanic islands that comprise the entire Hawaiian archipelago. The largest metropolitan area is that of New Washington (the capital), formerly Honolulu, which is located on the island of Washburn, formerly Oʻahu. With around 3.5 million inhabitants, Hawaii is the most densely populated country in North America.<p>Settled by Polynesians sometime between 1000 and 1200 CE, Hawaii was home to numerous independent chiefdoms. In 1778, British explorer James Cook was the first known non-Polynesian to arrive at the archipelago. An influx of European and American explorers, traders, and whalers soon arrived, leading to the decimation of the once-isolated indigenous community through the introduction of diseases such as syphilis, tuberculosis, smallpox, and measles; the native Hawaiian population declined from between 300,000 and one million to less than 40,000 by 1890. Hawaii became a unified, internationally recognized kingdom in 1810, remaining independent until American and European businessmen overthrew the monarchy in 1893; this led to annexation by the U.S. in 1898. The Second American Revolution (1936-1945) resulted in the loss of the American mainland to Socialist forces and the flight of the USA central government to Hawaii. The victorious Socialists proceeded to establish the American Commonwealth under Provisional Chairwoman Elizabeth Gurley Flynn, and took the USA’s position as the dominant geopolitical power in North America.<p>Though fleeing to the island as a nominally fascist one-party state, the death of President Richard Washburn Child in 1946 saw the USA slowly transition back into a liberal democracy over the course of three decades, with democratically elected presidents being reinstated in 1976. Historians largely attribute this slow change in policy to a mix of numerous factors, including the capitulation of the Kingdom of Italy in 1945, diplomatic pressure from the British Empire, and the governmental purges by President Douglas MacArthur (1946-1964). The first democratically elected President of the USA post-second revolution was Nelson Rockefeller, standing for the American Liberty League.<p>The political status of the USA is contentious. The USA maintains its claim of being the sole legitimate government of America, and it regards the American Commonwealth as an illegal entity. In turn, the American Commonwealth also denies the legitimacy of the USA, claiming it occupies territory that belongs to an indigenous republic. Though formerly recognised by both the British and Japanese empires, the normalization of relations between the American Commonwealth and Britain in the 70s led to them recognising the Commonwealth instead, whilst the collapse of the Japanese Empire in 1991 deprived the USA of their final major international backer. Very few nations currently recognise the USA as a country, with the most notable being the State of Mexico.`;
         }
         if(IWWAgitation > 10 && LegionLeader === 2) {
+            ctsAchievement("The Patton before the fall");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31078,9 +31115,10 @@ endingPicker = (out, totv, aa, quickstats) => {
             document.getElementById("header").src = "https://i.postimg.cc/50kPMnbF/MOW-Ending-15-Banner.png";
             document.body.background = "https://i.postimg.cc/WpxvG7g3/MOW-Ending-15-Background.png";
             setImage("https://i.postimg.cc/Hnc6WXkv/MOW-Ending-15-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>JAPANESE DESTROYER SUNK BY US MILITARY</b><p>SUNDAY, JANUARY 26TH, 1947<p>On Wednesday the 22nd, at 20:08 HST, the Japanese Akizuki-class destroyer Niizuki was sunk eight miles off the coast of Kauai after being struck by a barrage of rounds shot from Hawaiian coastal artillery. The ship, which, according to Japanese officials, had been patrolling the area to protect Japanese merchant vessels following numerous skirmishes between the two countries over their pacific claims, entered the US’s territorial waters without their express permission, resulting in a brief shootout. Of the exactly 300 crewmembers aboard, roughly half perished, with the United States Military claiming to have taken 143 Japanese personnel prisoner.<p>The Japanese Ministry of Foreign Affairs has denounced the sinking as “an act of US aggression” and have demanded the immediate release of the detained sailors, alongside the payment of 500,000USD in reparations. The US Military, for their part, have justified their actions as self-defence, accusing the Japanese of purposefully provoking their forces by entering Hawaiian waters and citing international precedent for the incarceration of the crewmembers. As of Friday the 24th, Secretary of State George Marshall has formally announced that the nation would not be submitting to any of the Japanese demands.<p>This incident comes after years of increasing tensions between the Japanese Empire and the rump United States of America (since reduced to just Hawaii and a number of other pacific island possessions following the end of the Second American Civil War in 1942). Former Prime Minister Yonai’s failed attempts to muscle the USA into the Co-Prosperity Sphere back in 1945 is seen by many as the beginning of this diplomatic schism, with the irredentism and anti-Japanese sentiment of General-President Patton only exacerbating the situation.<p>International observers have voiced concerns that this dispute may soon spiral into open conflict, which threatens to upset a region still reeling from the fallout of the Second World War. Despite this, other regional powers have declined outside offers to mediate, with Chairman Hatfield of the American Commonwealth describing the situation as an “inter-reactionary conflict” that “may as well see the bastards do us all a favour and destroy themselves”.`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/zicZzuxKjHdGCiC4s50W4MR71XUABoBg' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>JAPANESE DESTROYER SUNK BY US MILITARY</b><p>SUNDAY, JANUARY 26TH, 1947<p>On Wednesday the 22nd, at 20:08 HST, the Japanese Akizuki-class destroyer Niizuki was sunk eight miles off the coast of Kauai after being struck by a barrage of rounds shot from Hawaiian coastal artillery. The ship, which, according to Japanese officials, had been patrolling the area to protect Japanese merchant vessels following numerous skirmishes between the two countries over their pacific claims, entered the US’s territorial waters without their express permission, resulting in a brief shootout. Of the exactly 300 crewmembers aboard, roughly half perished, with the United States Military claiming to have taken 143 Japanese personnel prisoner.<p>The Japanese Ministry of Foreign Affairs has denounced the sinking as “an act of US aggression” and have demanded the immediate release of the detained sailors, alongside the payment of 500,000USD in reparations. The US Military, for their part, have justified their actions as self-defence, accusing the Japanese of purposefully provoking their forces by entering Hawaiian waters and citing international precedent for the incarceration of the crewmembers. As of Friday the 24th, Secretary of State George Marshall has formally announced that the nation would not be submitting to any of the Japanese demands.<p>This incident comes after years of increasing tensions between the Japanese Empire and the rump United States of America (since reduced to just Hawaii and a number of other pacific island possessions following the end of the Second American Civil War in 1942). Former Prime Minister Yonai’s failed attempts to muscle the USA into the Co-Prosperity Sphere back in 1945 is seen by many as the beginning of this diplomatic schism, with the irredentism and anti-Japanese sentiment of General-President Patton only exacerbating the situation.<p>International observers have voiced concerns that this dispute may soon spiral into open conflict, which threatens to upset a region still reeling from the fallout of the Second World War. Despite this, other regional powers have declined outside offers to mediate, with Chairman Hatfield of the American Commonwealth describing the situation as an “inter-reactionary conflict” that “may as well see the bastards do us all a favour and destroy themselves”.`;
         }
         if(IWWAgitation > 10 && LegionLeader === 3) {
+            ctsAchievement("Thus Unto Tyrants");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31096,12 +31134,13 @@ endingPicker = (out, totv, aa, quickstats) => {
             document.getElementById("header").src = "https://i.postimg.cc/vH38yyfg/MOW-Ending-16-Banner.png";
             document.body.background = "https://i.postimg.cc/XNrWBPZm/MOW-Ending-16-Background.png";
             setImage("https://i.postimg.cc/L8596W3y/MOW-Ending-16-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>HAPPY LIBERATION DAY: 10 YEARS OF ANARCHY!</b><p>SUNDAY, SEPTMEBER 4TH, 1949<p>Most people remember where they were when they heard that George Moseley was captured. My wife was with her militia, garrisoning a newly-occupied Columbus. My brother was back up in Chicago, helping sort rations in our neighbourhood’s distribution center. As for me, I was down in Louisiana, watching in person as my comrades apprehended the tyrant.<p>It was a sunny day in New Orleans, the clear sky giving an incongruous tone to the fierce battle waging below. The Red Guard detachment I was commanding had just managed to dislodge the last few Legionnaires holding out in the city’s port, disarming the few who surrendered and reappropriating their defenses in case of a counter-attack. Overall, the assault on the fascists’ temporary capital had been going better for us than expected. The other captains and I had gloomily expected it to turn into one long, drawn-out siege, but, much to our (at the time unknown) luck, part of the Generalissimo’s inner circle had rebelled against him, depriving his remaining troops of half a command structure. It seemed that, from the moment it had overthrown its predecessor, to its very last fight, Moseley’s regime was destined to cannibalise itself.<p>Exhausted from lugging around sandbags, I slumped down against the wall of a nearby warehouse, pulling out my pocket-sized edition of Malatesta’s At The Café for entertainment. Yet, I had made it through no more than three sentences before the crack of rifle fire sent me running towards the embankment. The militiamen perched at the edge of the harbor had spotted a small boat sailing southwards down the Mississippi, a small group of shoddily cloaked figures aboard. The lack of a red or white flag had immediately heightened my comrades’ suspicions, and, when the vessel had refused their orders to stop, they opened fire with the intention to sink. Bullets swiftly peppered the hull, sending the craft beneath the waves and its passengers scrambling towards the shore. Unfortunately for them, the only path back to dry land was via our position.<p>One by one, the failed escapees were pulled ashore, their sodden disguises torn off to reveal none other than the American Mussolini and his personal guard. At first, my compatriots and I were in disbelief - there was a higher chance we had captured an unfortunate lookalike than the man himself - but the medals, the entourage, they were confirmation enough. I scrambled over the rubble to find our radio officer, shaking her by the shoulders as I ordered her to relay the news. The machine whirred to life, four words transmitting throughout the city: “We have the President.”<p>Slowly, the bursts of gunfire and artillery that had permeated the day’s events went quiet, bathing New Orleans in a ghostly silence. Then, a cheer. From the streets, the harbors and the field hospitals, people cried out in joy and relief. Three years of hell were finally over. Tears trickled down the faces of even my most aloof comrades as they held each other and discussed what they would do when they returned home to their loved ones. It wasn’t until I touched my face I realised I was weeping too. The Generalissimo spat at my feet, declaring me an “limp-wristed prissy”, but I couldn’t bring myself to care. He wasn’t in charge anymore, and he never would be again.<p>Even now, when I think of that day, my eyes mist up. The celebrations in Chicago, my meeting with Chairman Tresca, they were all great celebrations that hold a dear place in my heart, but none hold a candle to the sheer emotion that overcame the battlefield that day. The knowledge that the sacrifices we made had ended such a horrendous chapter of American history, that those we had lost had not died in vain, lifted an emotional burden brought on by eighteen months of war, even just for a couple minutes. Whenever that burden weighs on me again, as it often does, all it takes is one look outside at a world freer and fairer than ever before, and I am blessed with that feeling once more.<p>Happy Liberation Day, comrades. Here's to many more.`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/JFXMZvNUP4PgWfx4L8o90kkGsW0804DP' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>HAPPY LIBERATION DAY: 10 YEARS OF ANARCHY!</b><p>SUNDAY, SEPTMEBER 4TH, 1949<p>Most people remember where they were when they heard that George Moseley was captured. My wife was with her militia, garrisoning a newly-occupied Columbus. My brother was back up in Chicago, helping sort rations in our neighbourhood’s distribution center. As for me, I was down in Louisiana, watching in person as my comrades apprehended the tyrant.<p>It was a sunny day in New Orleans, the clear sky giving an incongruous tone to the fierce battle waging below. The Red Guard detachment I was commanding had just managed to dislodge the last few Legionnaires holding out in the city’s port, disarming the few who surrendered and reappropriating their defenses in case of a counter-attack. Overall, the assault on the fascists’ temporary capital had been going better for us than expected. The other captains and I had gloomily expected it to turn into one long, drawn-out siege, but, much to our (at the time unknown) luck, part of the Generalissimo’s inner circle had rebelled against him, depriving his remaining troops of half a command structure. It seemed that, from the moment it had overthrown its predecessor, to its very last fight, Moseley’s regime was destined to cannibalise itself.<p>Exhausted from lugging around sandbags, I slumped down against the wall of a nearby warehouse, pulling out my pocket-sized edition of Malatesta’s At The Café for entertainment. Yet, I had made it through no more than three sentences before the crack of rifle fire sent me running towards the embankment. The militiamen perched at the edge of the harbor had spotted a small boat sailing southwards down the Mississippi, a small group of shoddily cloaked figures aboard. The lack of a red or white flag had immediately heightened my comrades’ suspicions, and, when the vessel had refused their orders to stop, they opened fire with the intention to sink. Bullets swiftly peppered the hull, sending the craft beneath the waves and its passengers scrambling towards the shore. Unfortunately for them, the only path back to dry land was via our position.<p>One by one, the failed escapees were pulled ashore, their sodden disguises torn off to reveal none other than the American Mussolini and his personal guard. At first, my compatriots and I were in disbelief - there was a higher chance we had captured an unfortunate lookalike than the man himself - but the medals, the entourage, they were confirmation enough. I scrambled over the rubble to find our radio officer, shaking her by the shoulders as I ordered her to relay the news. The machine whirred to life, four words transmitting throughout the city: “We have the President.”<p>Slowly, the bursts of gunfire and artillery that had permeated the day’s events went quiet, bathing New Orleans in a ghostly silence. Then, a cheer. From the streets, the harbors and the field hospitals, people cried out in joy and relief. Three years of hell were finally over. Tears trickled down the faces of even my most aloof comrades as they held each other and discussed what they would do when they returned home to their loved ones. It wasn’t until I touched my face I realised I was weeping too. The Generalissimo spat at my feet, declaring me an “limp-wristed prissy”, but I couldn’t bring myself to care. He wasn’t in charge anymore, and he never would be again.<p>Even now, when I think of that day, my eyes mist up. The celebrations in Chicago, my meeting with Chairman Tresca, they were all great celebrations that hold a dear place in my heart, but none hold a candle to the sheer emotion that overcame the battlefield that day. The knowledge that the sacrifices we made had ended such a horrendous chapter of American history, that those we had lost had not died in vain, lifted an emotional burden brought on by eighteen months of war, even just for a couple minutes. Whenever that burden weighs on me again, as it often does, all it takes is one look outside at a world freer and fairer than ever before, and I am blessed with that feeling once more.<p>Happy Liberation Day, comrades. Here's to many more.`;
         }
     }
     if(aa[0].electoral_votes < 266) {
         //Draw Endings
         if(PartyComposition === 1) {
+            ctsAchievement("To Own a Lib");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31109,9 +31148,10 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/sXpxbv5X/MOW-Ending-5-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>WHITE HOUSE DISCORD - IS HOOVER’S TRIP VOLUNTARY?</b><p>When last year’s contingent election resulted in a ground-breaking agreement between the American Liberty League and Republican Party to share the executive branch, with former Vice President Murphy even resigning to allow for the ascension of Herbert Hoover, few believed that the resulting administration would be as optimistic as advertised. Sure enough, after an extended, yet tentative honeymoon period, Vice President Herbert Hoover has announced that he will be going on a two month diplomatic trip to Europe, visiting countries such as the United Kingdom and Italy in an attempt to ease tensions on the currently volatile continent. Needless to say, such a notoriously isolationist man embarking on a highly interventionist quest has raised eyebrows amongst the American public, not least Hoover’s own supporters - some of whom believe the trip isn’t his choice.<p>Gossip of underhanded deals and shady maneuverings have been a staple of President Child’s time in office long before he was forced to work with Hoover, yet, with new aides in the White House, many of whom have no loyalty to the ALL, these stories have become much more frequent. A common rumor floating around the beltway is that the two recently had a very intense argument about the direction of American foreign policy, resulting in Child refusing to talk to Hoover anymore, only communicating via memo. Another tells of Hoover’s attempts to sabotage a bill providing federal relief to small business owners by forcing the resignation of Hugh Johnson, former Secretary of Labor and a close ally of Child’s. Whilst the truth of either of these tales can hardly be verified, many view them as indicative of the deteriorating relationship between the two politicians.<p>Those who do believe these leaks, however, speculate that either of these conflicts could be the reason behind the Vice President’s uncharacteristic departure. Hoover’s own former running mate, Robert Taft, has openly accused President Child of “effectively exiling” his VP from Washington D.C. to prevent him from intervening in the ALL’s agenda. In response, a spokesperson for the ALL denounced Taft’s allegations as “nonsense”, in turn accusing him of being “bitter” over his denial of the Vice Presidency. Regardless of the intention behind Hoover’s trip, the reality is mostly in line with Taft’s worries, as the Vice President’s absence from the halls of power nullifies his ability to influence or block any actions he’s opposed to. It seems, until Herbert returns from the old continent, President Child and his allies have regained full reign over the White House.`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/D1bst24dD7aINA8NtlGtobhsZ2GmUhkN' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>WHITE HOUSE DISCORD - IS HOOVER’S TRIP VOLUNTARY?</b><p>When last year’s contingent election resulted in a ground-breaking agreement between the American Liberty League and Republican Party to share the executive branch, with former Vice President Murphy even resigning to allow for the ascension of Herbert Hoover, few believed that the resulting administration would be as optimistic as advertised. Sure enough, after an extended, yet tentative honeymoon period, Vice President Herbert Hoover has announced that he will be going on a two month diplomatic trip to Europe, visiting countries such as the United Kingdom and Italy in an attempt to ease tensions on the currently volatile continent. Needless to say, such a notoriously isolationist man embarking on a highly interventionist quest has raised eyebrows amongst the American public, not least Hoover’s own supporters - some of whom believe the trip isn’t his choice.<p>Gossip of underhanded deals and shady maneuverings have been a staple of President Child’s time in office long before he was forced to work with Hoover, yet, with new aides in the White House, many of whom have no loyalty to the ALL, these stories have become much more frequent. A common rumor floating around the beltway is that the two recently had a very intense argument about the direction of American foreign policy, resulting in Child refusing to talk to Hoover anymore, only communicating via memo. Another tells of Hoover’s attempts to sabotage a bill providing federal relief to small business owners by forcing the resignation of Hugh Johnson, former Secretary of Labor and a close ally of Child’s. Whilst the truth of either of these tales can hardly be verified, many view them as indicative of the deteriorating relationship between the two politicians.<p>Those who do believe these leaks, however, speculate that either of these conflicts could be the reason behind the Vice President’s uncharacteristic departure. Hoover’s own former running mate, Robert Taft, has openly accused President Child of “effectively exiling” his VP from Washington D.C. to prevent him from intervening in the ALL’s agenda. In response, a spokesperson for the ALL denounced Taft’s allegations as “nonsense”, in turn accusing him of being “bitter” over his denial of the Vice Presidency. Regardless of the intention behind Hoover’s trip, the reality is mostly in line with Taft’s worries, as the Vice President’s absence from the halls of power nullifies his ability to influence or block any actions he’s opposed to. It seems, until Herbert returns from the old continent, President Child and his allies have regained full reign over the White House.`;
         }
         if(PartyComposition === 2) {
+            ctsAchievement("Anyone but Him");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31119,9 +31159,10 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/7PWhvns2/MOW-Ending-6-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>REVIEW: The Scourge of Volunteerism (1939)</b><p>(The tape begins. There is a faint squeak of leather as one of the politicians takes a seat, followed by a long, pensive silence. Eventually, the leather chair is heard again, as someone, presumably the same politician from earlier, stands up and walks away from the recording device. A cabinet door creaks open and a glass container is retrieved from it before it is slammed shut. The man walks back over towards the table with the recording device and pours two glasses of liquid. One is audibly filled more than the other. The glass container is then placed on the table and the politician sits back down. A couple more seconds of silence pass.)<p>FRANCE: So… Not him?<p>HULL: Not him.<p>FRANCE: Definitely not him.<p>HULL: Anyone but him.<p>FRANCE: One of us two, you mean.<p>HULL: What, do you think I’m going to suggest Norman fucking Thomas?<p>FRANCE: No, no, of course not… I’m just nervous. This hasn’t happened in a hundred years, there’s no telling how this will go. Who Child and his allies have in their pocket.<p>HULL: Calm down, Joseph, agonizing won’t help either of us. Take a drink and breathe.<p>(France does as suggested, taking a sip from his glass and sighing.)<p>FRANCE: Okay… Let’s work this out. Which one of us will become the president?<p>HULL: I trust you can take that position.<p>FRANCE: And the VP slot?<p>HULL: Me, naturally.<p>FRANCE: But that would completely sideline our running mates.<p>HULL: It’s the Vice Presidency. They’re not missing out on much.<p>FRANCE: I suppose it works well enough as a compromise. Still, I worry we won’t have enough votes to secure both spots.<p>HULL: Our parties put together hold a majority of delegates in both houses. That’s all we need.<p>FRANCE: But how do we guarantee that they vote for us? There’s decades of anonymity between us which the ALL simply doesn’t have. Whole blocs of your party could end up voting for Child just to make sure I don’t become President, and vice versa.<p>HULL: I don’t doubt there’ll be stragglers, especially with our men in the deep south, but there’s already precedent for cooperation between us. If we could convince our respective conventions to endorse each other-<p>FRANCE: You’re not seriously suggesting a National Unity ticket?<p>HULL: Sixty two congressional districts had National Unity tickets two years ago. That amount has almost doubled this election. There is a clear desire amongst our voters for our parties to cooperate against the ALL.<p>FRANCE: I don’t know if that’s precedent enough…<p>HULL: Lincoln did it. Why can’t we?<p>FRANCE: You are aware that Lincoln got shot, Cordell?<p>HULL: Well, unless the assassin gets us whilst we’re standing in a line, we should be alright.<p>(There is another long pause.)<p>FRANCE: I think I actually want to be Vice President.`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/pDSey4vhJiMRMVi6lE2LXF4YdkbTSwxn' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>REVIEW: The Scourge of Volunteerism (1939)</b><p>(The tape begins. There is a faint squeak of leather as one of the politicians takes a seat, followed by a long, pensive silence. Eventually, the leather chair is heard again, as someone, presumably the same politician from earlier, stands up and walks away from the recording device. A cabinet door creaks open and a glass container is retrieved from it before it is slammed shut. The man walks back over towards the table with the recording device and pours two glasses of liquid. One is audibly filled more than the other. The glass container is then placed on the table and the politician sits back down. A couple more seconds of silence pass.)<p>FRANCE: So… Not him?<p>HULL: Not him.<p>FRANCE: Definitely not him.<p>HULL: Anyone but him.<p>FRANCE: One of us two, you mean.<p>HULL: What, do you think I’m going to suggest Norman fucking Thomas?<p>FRANCE: No, no, of course not… I’m just nervous. This hasn’t happened in a hundred years, there’s no telling how this will go. Who Child and his allies have in their pocket.<p>HULL: Calm down, Joseph, agonizing won’t help either of us. Take a drink and breathe.<p>(France does as suggested, taking a sip from his glass and sighing.)<p>FRANCE: Okay… Let’s work this out. Which one of us will become the president?<p>HULL: I trust you can take that position.<p>FRANCE: And the VP slot?<p>HULL: Me, naturally.<p>FRANCE: But that would completely sideline our running mates.<p>HULL: It’s the Vice Presidency. They’re not missing out on much.<p>FRANCE: I suppose it works well enough as a compromise. Still, I worry we won’t have enough votes to secure both spots.<p>HULL: Our parties put together hold a majority of delegates in both houses. That’s all we need.<p>FRANCE: But how do we guarantee that they vote for us? There’s decades of anonymity between us which the ALL simply doesn’t have. Whole blocs of your party could end up voting for Child just to make sure I don’t become President, and vice versa.<p>HULL: I don’t doubt there’ll be stragglers, especially with our men in the deep south, but there’s already precedent for cooperation between us. If we could convince our respective conventions to endorse each other-<p>FRANCE: You’re not seriously suggesting a National Unity ticket?<p>HULL: Sixty two congressional districts had National Unity tickets two years ago. That amount has almost doubled this election. There is a clear desire amongst our voters for our parties to cooperate against the ALL.<p>FRANCE: I don’t know if that’s precedent enough…<p>HULL: Lincoln did it. Why can’t we?<p>FRANCE: You are aware that Lincoln got shot, Cordell?<p>HULL: Well, unless the assassin gets us whilst we’re standing in a line, we should be alright.<p>(There is another long pause.)<p>FRANCE: I think I actually want to be Vice President.`;
         }
         if(PartyComposition === 3) {
+            ctsAchievement("To Own a Lib");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31129,12 +31170,13 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/7hwh4wNN/MOW-Ending-7-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>THE ELECTION SAFEGUARDING ACT: CHILD SAVES DEMOCRACY!</b><p>The election of the crypto-socialist PFLA ticket back in 1932 was a shock to all good Americans. How could a party so fundamentally opposed to the core values of our great nation manage to worm its way into power? The answer is simple: voter fraud. Thousands upon thousands of false ballots casted by judeo-narodnik infiltrators resulted in the victory of that addled old man, Coxey, and his serpent Vice President, placing our country on the precipice of a far-left coup. If it wasn’t for the bravery of the Legion and the genius of great men such as Butler and Child, American democracy would be dead, squished under the heel of the Soviets.<p>Whilst, thankfully, the presidency is no longer occupied by these saboteurs, that doesn’t mean we are free from socialist subversion. The inconclusive result of the 1936 election is glaring proof that these cockroaches still infest our political system, undermining it at every turn. Well, if Spiridonova thought that burdening our President with a Democratic VP would stop his crusade against her vile ideology, she was wrong. Child and Garner have proven to be a solid pair, and their selfless devotion to upholding traditional American principles has (as of yesterday’s Senate vote) culminated in the implementation of the Election Safeguarding Act.<p>A product of close collaboration between the American Liberty League and a number of southern Democratic governors, this bill is a massive step forward in eradicating voter fraud and counteracting the influence of this “fifth column”. From now on, citizens will be required to show a form of government identification with them if they wish to vote, as to prevent known agitators from interfering in the democratic process. This new provision, combined with the introduction of national guardsmen at polling stations and a nationwide ban on pro-socialist propaganda, has done much to relieve the public’s fear of future elections being tampered with.<p>Of course, no attempt to make this country safer can happen without fierce opposition from Soviet sympathisers in the Republican and Democratic parties. Despite the best efforts by Garner and the respectable faction of his party, liberal Democrats have been crossing the aisle to collaborate with Republicans on illegal schemes to shut down the act before it can fully come into effect. Known proto-progressive Earl Warren has even submitted an appeal to the Supreme Court, baselessly claiming that many of the bill’s provisions are unconstitutional. Whilst it’s too early to know how this ridiculous case will conclude, we here at The Patriot have full faith in the court to make the right decision and dismiss Warren’s arguments. Until then, all we can do as loyal Americans is make sure that the President knows he has our unwavering support, and to continue fighting against socialism wherever it rears its ugly head.`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/Qs3c0iNcXQZlwHaFxulMLRcosXauAAxT' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>THE ELECTION SAFEGUARDING ACT: CHILD SAVES DEMOCRACY!</b><p>The election of the crypto-socialist PFLA ticket back in 1932 was a shock to all good Americans. How could a party so fundamentally opposed to the core values of our great nation manage to worm its way into power? The answer is simple: voter fraud. Thousands upon thousands of false ballots casted by judeo-narodnik infiltrators resulted in the victory of that addled old man, Coxey, and his serpent Vice President, placing our country on the precipice of a far-left coup. If it wasn’t for the bravery of the Legion and the genius of great men such as Butler and Child, American democracy would be dead, squished under the heel of the Soviets.<p>Whilst, thankfully, the presidency is no longer occupied by these saboteurs, that doesn’t mean we are free from socialist subversion. The inconclusive result of the 1936 election is glaring proof that these cockroaches still infest our political system, undermining it at every turn. Well, if Spiridonova thought that burdening our President with a Democratic VP would stop his crusade against her vile ideology, she was wrong. Child and Garner have proven to be a solid pair, and their selfless devotion to upholding traditional American principles has (as of yesterday’s Senate vote) culminated in the implementation of the Election Safeguarding Act.<p>A product of close collaboration between the American Liberty League and a number of southern Democratic governors, this bill is a massive step forward in eradicating voter fraud and counteracting the influence of this “fifth column”. From now on, citizens will be required to show a form of government identification with them if they wish to vote, as to prevent known agitators from interfering in the democratic process. This new provision, combined with the introduction of national guardsmen at polling stations and a nationwide ban on pro-socialist propaganda, has done much to relieve the public’s fear of future elections being tampered with.<p>Of course, no attempt to make this country safer can happen without fierce opposition from Soviet sympathisers in the Republican and Democratic parties. Despite the best efforts by Garner and the respectable faction of his party, liberal Democrats have been crossing the aisle to collaborate with Republicans on illegal schemes to shut down the act before it can fully come into effect. Known proto-progressive Earl Warren has even submitted an appeal to the Supreme Court, baselessly claiming that many of the bill’s provisions are unconstitutional. Whilst it’s too early to know how this ridiculous case will conclude, we here at The Patriot have full faith in the court to make the right decision and dismiss Warren’s arguments. Until then, all we can do as loyal Americans is make sure that the President knows he has our unwavering support, and to continue fighting against socialism wherever it rears its ugly head.`;
         }
     } 
     if(aa[0].candidate === 117 && aa[0].electoral_votes > 265) {
         //Republican Victory Endings
         if(PartyComposition === 1) {
+            ctsAchievement("Who but Hoover?");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31142,9 +31184,10 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/Kz9z8PmC/MOW-Ending-8-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>REVIEW: The Scourge of Volunteerism (1939)</b><p>Herbert Hoover is, arguably, one of the worst Presidents to ever grace that pit of depravity we call the Oval Office. His unwillingness to utilize any level of state intervention to fight the Great Depression, combined with a stringent isolationism that allowed for the rise of fascism across mainland Europe and South America, gives him a body count that would make most dictators blush - and that’s not even mentioning all the racism. Frankly, whenever I come across someone who goes out of their way to defend Hoover, I write them off as criminally insane and attempt to leave their vicinity as soon as possible.<p>That being said, I would rather be locked in a room full of Hoover apologists than spend even one more minute talking to a Child sympathiser.<p>No conversation about the failures of the Hoover administration is complete without some poorly closeted fascist urging everyone to read Richard Washburn Child’s 1939 book, <i>The Scourge of Volunteerism</i>. These individuals often claim it’s a groundbreaking critique of Hoover’s specific strain of classical liberalism, and a compelling argument for why a Child victory would’ve been the best outcome in 1936. Of course, no sane person takes these assertions at face value, as Child’s name on the cover is enough to steer people away from the book for good, but the almost scripture-like status it holds amongst the American far-right is undeniable, with modern figures like David Duke and Richard Spencer regularly singing its praises. So, as someone worryingly obsessed with understanding and dissecting the beliefs of these bigots, I bought the book to find out why they revere it so much.<p>I have since finished the book and I still have no idea.<p>The way people talk about <i>The Scourge of Volunteerism</i>, you’d think it was some piece of integral fascist theory. Some abhorrent, yet still sufficiently thought-out work like those of Gentile or Savinkov. In reality, it’s the late thirties equivalent of a salty reddit post - one that, despite the title, isn’t even mostly directed at President Hoover. Yes, the many (and, believe me, there are MANY) chapters begin with a surface level analysis of Hoover’s philosophies and their real world impacts, but said essays quickly devolve into rambling, often horribly bigoted, diatribes about figures within Child’s own administration who opposed his policies. Just by doing a simple word search on the book’s PDF, I found that the names “Henry Ford” and “William Hearst” both individually come up TWICE as much as “Herbet Hoover”.<p>The actual criticism of Hoover, volunteerism and classical liberalism as a whole is such an inconsequential part of the book that I’m surprised Richard wasn’t sued for false advertising. I won’t deny, I do agree with some of the points he makes about the toxicity of American hyper-individualism and the purposeful ineffectuality of laissez-faire solutions to the Great Depression, but these critiques are undermined by the fact that Child’s solutions are LITERALLY FASCISM. He doesn’t even bother to elaborate on a lot of his supposed answers, clearly finding the need to blame his failures on other people much more important.<p>I mean, Jesus Christ, I can’t stress enough that this book is 90% Richard slagging people off. It literally is the piece of writing that finally confirmed the existence of the National Emergency Committee to the public, and it was done completely out of spite. Child doomed his legacy to be one of a puppet dictator just so he could call the puppet masters a bunch of greedy cunts. I hate to say it, but I respect the pettiness, even if it is the only part of this literary disaster I can bring myself to like.<p>Overall, I give <i>The Scourge of Volunteerism</i> zero stars out of five. It serves more purpose as emergency toilet paper than reading material.`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/5wZs1zZ53noS3nmMLHnc9fBcSydODcpZ' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>REVIEW: The Scourge of Volunteerism (1939)</b><p>Herbert Hoover is, arguably, one of the worst Presidents to ever grace that pit of depravity we call the Oval Office. His unwillingness to utilize any level of state intervention to fight the Great Depression, combined with a stringent isolationism that allowed for the rise of fascism across mainland Europe and South America, gives him a body count that would make most dictators blush - and that’s not even mentioning all the racism. Frankly, whenever I come across someone who goes out of their way to defend Hoover, I write them off as criminally insane and attempt to leave their vicinity as soon as possible.<p>That being said, I would rather be locked in a room full of Hoover apologists than spend even one more minute talking to a Child sympathiser.<p>No conversation about the failures of the Hoover administration is complete without some poorly closeted fascist urging everyone to read Richard Washburn Child’s 1939 book, <i>The Scourge of Volunteerism</i>. These individuals often claim it’s a groundbreaking critique of Hoover’s specific strain of classical liberalism, and a compelling argument for why a Child victory would’ve been the best outcome in 1936. Of course, no sane person takes these assertions at face value, as Child’s name on the cover is enough to steer people away from the book for good, but the almost scripture-like status it holds amongst the American far-right is undeniable, with modern figures like David Duke and Richard Spencer regularly singing its praises. So, as someone worryingly obsessed with understanding and dissecting the beliefs of these bigots, I bought the book to find out why they revere it so much.<p>I have since finished the book and I still have no idea.<p>The way people talk about <i>The Scourge of Volunteerism</i>, you’d think it was some piece of integral fascist theory. Some abhorrent, yet still sufficiently thought-out work like those of Gentile or Savinkov. In reality, it’s the late thirties equivalent of a salty reddit post - one that, despite the title, isn’t even mostly directed at President Hoover. Yes, the many (and, believe me, there are MANY) chapters begin with a surface level analysis of Hoover’s philosophies and their real world impacts, but said essays quickly devolve into rambling, often horribly bigoted, diatribes about figures within Child’s own administration who opposed his policies. Just by doing a simple word search on the book’s PDF, I found that the names “Henry Ford” and “William Hearst” both individually come up TWICE as much as “Herbet Hoover”.<p>The actual criticism of Hoover, volunteerism and classical liberalism as a whole is such an inconsequential part of the book that I’m surprised Richard wasn’t sued for false advertising. I won’t deny, I do agree with some of the points he makes about the toxicity of American hyper-individualism and the purposeful ineffectuality of laissez-faire solutions to the Great Depression, but these critiques are undermined by the fact that Child’s solutions are LITERALLY FASCISM. He doesn’t even bother to elaborate on a lot of his supposed answers, clearly finding the need to blame his failures on other people much more important.<p>I mean, Jesus Christ, I can’t stress enough that this book is 90% Richard slagging people off. It literally is the piece of writing that finally confirmed the existence of the National Emergency Committee to the public, and it was done completely out of spite. Child doomed his legacy to be one of a puppet dictator just so he could call the puppet masters a bunch of greedy cunts. I hate to say it, but I respect the pettiness, even if it is the only part of this literary disaster I can bring myself to like.<p>Overall, I give <i>The Scourge of Volunteerism</i> zero stars out of five. It serves more purpose as emergency toilet paper than reading material.`;
         }
         if(PartyComposition > 1) {
+            ctsAchievement("C’est la vie");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31152,12 +31195,13 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/HnRkQTc2/MOW-Ending-9-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>A Russian in D.C.</b><p>Vladimir Karelin, Soviet Commissar of Foreign Affairs, peered out over the balcony and across the skyline of Washington D.C., his lips pursing in a combination of distaste and disappointment. <i>This</i> was supposed to be the hub of American democracy? He had seen pictures, of course, but he had expected something more… flashy? Something more in-tune with the wasteful lifestyle of the western bourgeoisie, but, instead, he was met with neatly organised rows of office buildings that failed to hide masses of sprawling slums. Well, at least the city was indicative of the country at large.<p>The sound of tailored shoes on sandstone prompted him to swivel on the spot, away from the urban view and towards the door that had just opened. Out stepped a round-faced man with thin, greying hair and a kind smile - the very one Vladimir had seen plastered over the front page of every foreign newspaper last November. “President France,” the diplomat began, holding out his hand, “it’s an honor to finally meet you.”<p>Joseph Irwin France let out a humble chuckle, taking the socialist’s hand and shaking it firmly, “The honor is all mine, Mister Karelin. I’ve been looking forward to this meeting ever since they got around to inaugurating me. It’s a shame it didn’t happen fifteen years ago.”<p>Vladimir nodded, his eyes narrowing behind his glasses ever so slightly as he looked the President up and down. He had met many capitalist leaders before, and was used to them viewing the Republics of Labour as a mere tool to be used and discarded. As a result, he had become accustomed to the typical red flags present in western diplomats; sleaze, infantilization, and, more often than not, blatant racism. Yet, the man before him - the man who represented a global superpower so diametrically opposed to everything he and his comrades stood for - seemed nothing other than completely genuine, if not a little nervous.<p>“Is everything alright, Mister Karelin?” President France queried, a faint unease to his words.<p>Vladimir cleared his throat. “Oh, yes, sorry. My mind wandered for a second,” he straightened himself up, placing a hand on the balcony as he once again turned towards the skyline, “I agree, this meeting has been a long time coming. None of your successors would’ve been open-minded enough to ever consider something like this, especially Mister Child.”<p>An unfamiliar fury flashed across the President’s face. “The less said about that man the better. He will get his due this term, even if it destroys any chance at my reelection.”<p>“A capitalist of principle,” the corners of Karelin’s lips twitched upwards, betraying his stoic demeanor, “You’re a rare breed, Mister President. Now, I assume you didn’t invite me all the way here just to bestow recognition on our humble Republics. What do you want?”<p>Joseph sighed, deflated by the ambassador’s focus on business. “Well, as you could probably tell, the US is struggling at the moment, especially with food poverty. The agricultural surplus we had at the beginning of the Depression has practically vanished, what with the Dust Bowl and farms going bankrupt. My administration wishes to create a program to help feed poor families, but we’re worried there isn’t enough food to go around-”<p>“So you want some from us.”<p>“You’re a nation of farmers,” an apologetic smile crossed France’s face, as if he were embarrassed to be asking for anything to begin with, “if any country could give us grain and still have more than enough left over, it’s the Soviets.”<p>Karelin raised his eyebrow skeptically. “And what do we get in return?”<p>The President’s eyes darted around the balcony, before he leant in and lowered his voice. “Arms, Mister Karelin. I’m not blind to the situation in Europe. I know Britain and Italy are sizing you up, readying to pounce at any moment. In its current state, the Red Guard has no chance against either of their militaries, let alone the two combined.”<p>The ambassador froze. The poster child of modern capitalism supplying weapons to the largest socialist nation in the world? It was a baffling suggestion. Comical, even. And yet, was it one the revolution could afford to pass up? He was right - the Red Guard was able to protect its own territory, but a continent-wide war would see them stretched disastrously thin. Sensing Karelin’s uncertainty, France continued: “For all our differences, Vladimir, I’d rather see the old world under the red flag than the iron fist of fascism,” his eyes softened, laying bare an anxiety the socialist was all too familiar with, “We almost had our own Mussolini over here. Trust me when I tell you I want to help prevent that from happening anywhere else.”<p>Vladimir clicked his tongue as he mulled over his few remaining objections. None of them were more convincing than the guilt that settled in his stomach at the thought of a Europe subjected by that hateful ideology. He held out his hand once more. “Okay, Joseph. We have a deal.”`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/NSILETREXOyT0WdSCbEnYTBEsuagBn0G' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>A Russian in D.C.</b><p>Vladimir Karelin, Soviet Commissar of Foreign Affairs, peered out over the balcony and across the skyline of Washington D.C., his lips pursing in a combination of distaste and disappointment. <i>This</i> was supposed to be the hub of American democracy? He had seen pictures, of course, but he had expected something more… flashy? Something more in-tune with the wasteful lifestyle of the western bourgeoisie, but, instead, he was met with neatly organised rows of office buildings that failed to hide masses of sprawling slums. Well, at least the city was indicative of the country at large.<p>The sound of tailored shoes on sandstone prompted him to swivel on the spot, away from the urban view and towards the door that had just opened. Out stepped a round-faced man with thin, greying hair and a kind smile - the very one Vladimir had seen plastered over the front page of every foreign newspaper last November. “President France,” the diplomat began, holding out his hand, “it’s an honor to finally meet you.”<p>Joseph Irwin France let out a humble chuckle, taking the socialist’s hand and shaking it firmly, “The honor is all mine, Mister Karelin. I’ve been looking forward to this meeting ever since they got around to inaugurating me. It’s a shame it didn’t happen fifteen years ago.”<p>Vladimir nodded, his eyes narrowing behind his glasses ever so slightly as he looked the President up and down. He had met many capitalist leaders before, and was used to them viewing the Republics of Labour as a mere tool to be used and discarded. As a result, he had become accustomed to the typical red flags present in western diplomats; sleaze, infantilization, and, more often than not, blatant racism. Yet, the man before him - the man who represented a global superpower so diametrically opposed to everything he and his comrades stood for - seemed nothing other than completely genuine, if not a little nervous.<p>“Is everything alright, Mister Karelin?” President France queried, a faint unease to his words.<p>Vladimir cleared his throat. “Oh, yes, sorry. My mind wandered for a second,” he straightened himself up, placing a hand on the balcony as he once again turned towards the skyline, “I agree, this meeting has been a long time coming. None of your successors would’ve been open-minded enough to ever consider something like this, especially Mister Child.”<p>An unfamiliar fury flashed across the President’s face. “The less said about that man the better. He will get his due this term, even if it destroys any chance at my reelection.”<p>“A capitalist of principle,” the corners of Karelin’s lips twitched upwards, betraying his stoic demeanor, “You’re a rare breed, Mister President. Now, I assume you didn’t invite me all the way here just to bestow recognition on our humble Republics. What do you want?”<p>Joseph sighed, deflated by the ambassador’s focus on business. “Well, as you could probably tell, the US is struggling at the moment, especially with food poverty. The agricultural surplus we had at the beginning of the Depression has practically vanished, what with the Dust Bowl and farms going bankrupt. My administration wishes to create a program to help feed poor families, but we’re worried there isn’t enough food to go around-”<p>“So you want some from us.”<p>“You’re a nation of farmers,” an apologetic smile crossed France’s face, as if he were embarrassed to be asking for anything to begin with, “if any country could give us grain and still have more than enough left over, it’s the Soviets.”<p>Karelin raised his eyebrow skeptically. “And what do we get in return?”<p>The President’s eyes darted around the balcony, before he leant in and lowered his voice. “Arms, Mister Karelin. I’m not blind to the situation in Europe. I know Britain and Italy are sizing you up, readying to pounce at any moment. In its current state, the Red Guard has no chance against either of their militaries, let alone the two combined.”<p>The ambassador froze. The poster child of modern capitalism supplying weapons to the largest socialist nation in the world? It was a baffling suggestion. Comical, even. And yet, was it one the revolution could afford to pass up? He was right - the Red Guard was able to protect its own territory, but a continent-wide war would see them stretched disastrously thin. Sensing Karelin’s uncertainty, France continued: “For all our differences, Vladimir, I’d rather see the old world under the red flag than the iron fist of fascism,” his eyes softened, laying bare an anxiety the socialist was all too familiar with, “We almost had our own Mussolini over here. Trust me when I tell you I want to help prevent that from happening anywhere else.”<p>Vladimir clicked his tongue as he mulled over his few remaining objections. None of them were more convincing than the guilt that settled in his stomach at the thought of a Europe subjected by that hateful ideology. He held out his hand once more. “Okay, Joseph. We have a deal.”`;
         }
     }
     if(aa[0].candidate === 118 && aa[0].electoral_votes > 265) {
         //Democrat Victory Endings
         if(PartyComposition === 3) {
+            ctsAchievement("Cactus Jack Rides");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31165,9 +31209,10 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/nrCLjXzr/MOW-Ending-10-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>Archive: Republican Party Pamphlet - 1940 Presidential Election</b><p>Four years is ENOUGH.<br>It’s time to GET RID OF GARNER!<p>We Americans demand real change, not an endless stream of empty slogans and broken promises. We demand a President who will represent the people, not Wall Street or Southern Landlords. We demand a President that will craft active legislation instead of vetoing every bill that comes his way! <br>In short, we demand a President that isn’t John Nance Garner.<p>When you get your ballot paper, think about what each option will mean for the next four years!<p>JOHN NANCE GARNER - DEMOCRATIC PARTY:<br>More vetoed Public Works bills<br>More vetoed Anti-Lynching bills<br>More Dixie bias<br>More inaction on political reform<br>More unworkable status-quo!<p>PRESCOTT BUSH - AMERICAN LIBERTY LEAGUE:<br>Rule by oligarch<br>Legion violence in the streets<br>American soldiers in Europe<br>Innocent men in jail<br>A return to Childite fascism!<p>WENDELL WILLKIE - REPUBLICAN PARTY:<br>Government jobs for the unemployed<br>Food for the hungry<br>Care for the forgotten<br>Reform for the people<br>A rejuvenated American Democracy!<p>Send ol’ Cactus Jack riding,<br>VOTE WILLKIE AND WARREN<br>this November 5th!`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/534dmVX9OWLFdO5AWhjs48ukjr9J5plm' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>Archive: Republican Party Pamphlet - 1940 Presidential Election</b><p>Four years is ENOUGH.<br>It’s time to GET RID OF GARNER!<p>We Americans demand real change, not an endless stream of empty slogans and broken promises. We demand a President who will represent the people, not Wall Street or Southern Landlords. We demand a President that will craft active legislation instead of vetoing every bill that comes his way! <br>In short, we demand a President that isn’t John Nance Garner.<p>When you get your ballot paper, think about what each option will mean for the next four years!<p>JOHN NANCE GARNER - DEMOCRATIC PARTY:<br>More vetoed Public Works bills<br>More vetoed Anti-Lynching bills<br>More Dixie bias<br>More inaction on political reform<br>More unworkable status-quo!<p>PRESCOTT BUSH - AMERICAN LIBERTY LEAGUE:<br>Rule by oligarch<br>Legion violence in the streets<br>American soldiers in Europe<br>Innocent men in jail<br>A return to Childite fascism!<p>WENDELL WILLKIE - REPUBLICAN PARTY:<br>Government jobs for the unemployed<br>Food for the hungry<br>Care for the forgotten<br>Reform for the people<br>A rejuvenated American Democracy!<p>Send ol’ Cactus Jack riding,<br>VOTE WILLKIE AND WARREN<br>this November 5th!`;
         }
         if(PartyComposition < 3) {
+            ctsAchievement("We have FDR at home");
             document.head.innerHTML +=`
             <style>
             #main_content_area {
@@ -31175,7 +31220,7 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
             </style>`
             setImage("https://i.postimg.cc/7h96Ydsr/MOW-Ending-11-Image.png");
-            return `<div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>On the Job</b><p>One long, shrill note rang out over the construction site, signaling the beginning of a union-mandated lunch break. Placing his tools safely on the floor, Marco joined the small gaggle of his fellow CWA workers as they ambled towards their de facto hangout spot on the side of the road. The foreman was already there, pulling open the bed of his truck and handing out packed lunches to the frazzled employees. Marco took his with a fatigued “thank you”, before lumbering over to the shade of a nearby silver maple and collapsing onto the ground next to his friend.<p>“Fuck…” Marco sank back against the bark of the tree, lazily unwrapping his free meal, “Y’know, Benny, I haven't worked this hard since ‘28. And, back then, I was building ships up in New York. Almost lost a couple fingers in the process, but at least they didn’t have me building houses out in the midday sun.”<p>“Tell me about it,” Benny waved his sandwich around dramatically, “I'm thinking of voting Republican next election just so I can go back to doing nothing.”<p>Marco chortled through a mouthful of baloney and white bread, crumbs tumbling to the grass below. Swallowing his bite, he opened his mouth to quip back at his friend, when he was interrupted by the arrival of another coworker, Ellis, nose-deep in an unfamiliar newspaper. “Whatcha reading there?”<p>Ellis peered up from the periodical with a slight pout. “Some rag they were selling in town,” he held out the paper, showing the other two the front cover, “Apparently the President is planning on breaking up the Legion. Got a legal team, a senate committee, the works.”<p>“Good riddance,” Marco commented, squinting in an attempt to read the first couple lines, “bastards have been begging for a beat down for a while now. You can’t overthrow the government and act like nothing ever happened,” he emitted a resigned sigh, shaking his head “I just hope Hull’s got the balls to actually go through with it.”<p>Benny merely shrugged, beginning his assault on his second sandwich, “Eh, he’s got us this far-”<p>Ellis abruptly pulled back the newspaper, his face twisting into a bitter scowl, “Hey, watch your mouth! There ain’t nothing wrong with the Legion. Coxey was a damn traitor, the March on Washington was the best thing that happened to this country.”<p>For a second, Marco seemed surprised by his colleague’s outburst, only to roll his eyes and return to his trademark cynicism, “Blah blah. Spare me the Union Plot crap. The whole thing was made up.”<p>“Made up?!” Ellis galloped forward, towering over his seated coworker, “Our country is under attack from fuckin’ ruskies and pinkos and you think that’s all made up?! I didn’t spend two years in the Legion, fighting for your freedom, just for you to spew garbage like-”<p>Marco’s eye snapped up to Ellis, his mellow grin vanishing, “You what?”<p>“I said, I didn’t spend two years in the Legion for you to-”<p>Marco pounced from his position under the tree, tackling Ellis by the waist and knocking him to the ground. Benny could only watch in shock as his normally docile comrade proceeded to straddle the former Legionnaire and land blow after blow on his face, the audible crunching of bone causing heads to turn. The other workers rushed over to the action, forming a circle around the two to better observe the one-sided beat down, some even calling out encouragement to Marco.<p>“Hey, knuckleheads!” Marco froze mid-punch at the sound of the foreman’s voice, the ring of spectators falling silent as the portly man stepped in and yanked him off of Ellis, “Knock it off! You are government employees, what the hell do you think you’re doing?!”<p>“He attacked me, sir. He just attacked me outta nowhere!” Stammered Ellis, fresh bruises blossoming on his pale skin.<p>The foreman’s jaw tightened and he shot daggers at the instigating subordinate, “Is this true, Marco?”<p>“Not for no reason, sir,” Marco mumbled, his eyes glued to the ground like a scolded child , “He said he was in the Legion.”<p>There was a short pause, “He did?” The foreman looked to Benny for confirmation, receiving a nervous nod. He took a deep breath, flashing an appalled sneer in Ellis’ direction before patting Marco on the back and lowering his voice, “I’m gonna stand over there for a couple minutes. Make sure you give that fink a couple extra punches for me, okay?”`;
+            return `<audio loop='false' autoplay='true' src='https://audio.jukehost.co.uk/XqDeeGJfQbtfWmNk9pBWVOKBLe0mE9SO' style='display:none;'></audio><div style='overflow-y:scroll;height:250px;padding-right:7px;'><b><p style='font-size:20px;text-align:center;'>On the Job</b><p>One long, shrill note rang out over the construction site, signaling the beginning of a union-mandated lunch break. Placing his tools safely on the floor, Marco joined the small gaggle of his fellow CWA workers as they ambled towards their de facto hangout spot on the side of the road. The foreman was already there, pulling open the bed of his truck and handing out packed lunches to the frazzled employees. Marco took his with a fatigued “thank you”, before lumbering over to the shade of a nearby silver maple and collapsing onto the ground next to his friend.<p>“Fuck…” Marco sank back against the bark of the tree, lazily unwrapping his free meal, “Y’know, Benny, I haven't worked this hard since ‘28. And, back then, I was building ships up in New York. Almost lost a couple fingers in the process, but at least they didn’t have me building houses out in the midday sun.”<p>“Tell me about it,” Benny waved his sandwich around dramatically, “I'm thinking of voting Republican next election just so I can go back to doing nothing.”<p>Marco chortled through a mouthful of baloney and white bread, crumbs tumbling to the grass below. Swallowing his bite, he opened his mouth to quip back at his friend, when he was interrupted by the arrival of another coworker, Ellis, nose-deep in an unfamiliar newspaper. “Whatcha reading there?”<p>Ellis peered up from the periodical with a slight pout. “Some rag they were selling in town,” he held out the paper, showing the other two the front cover, “Apparently the President is planning on breaking up the Legion. Got a legal team, a senate committee, the works.”<p>“Good riddance,” Marco commented, squinting in an attempt to read the first couple lines, “bastards have been begging for a beat down for a while now. You can’t overthrow the government and act like nothing ever happened,” he emitted a resigned sigh, shaking his head “I just hope Hull’s got the balls to actually go through with it.”<p>Benny merely shrugged, beginning his assault on his second sandwich, “Eh, he’s got us this far-”<p>Ellis abruptly pulled back the newspaper, his face twisting into a bitter scowl, “Hey, watch your mouth! There ain’t nothing wrong with the Legion. Coxey was a damn traitor, the March on Washington was the best thing that happened to this country.”<p>For a second, Marco seemed surprised by his colleague’s outburst, only to roll his eyes and return to his trademark cynicism, “Blah blah. Spare me the Union Plot crap. The whole thing was made up.”<p>“Made up?!” Ellis galloped forward, towering over his seated coworker, “Our country is under attack from fuckin’ ruskies and pinkos and you think that’s all made up?! I didn’t spend two years in the Legion, fighting for your freedom, just for you to spew garbage like-”<p>Marco’s eye snapped up to Ellis, his mellow grin vanishing, “You what?”<p>“I said, I didn’t spend two years in the Legion for you to-”<p>Marco pounced from his position under the tree, tackling Ellis by the waist and knocking him to the ground. Benny could only watch in shock as his normally docile comrade proceeded to straddle the former Legionnaire and land blow after blow on his face, the audible crunching of bone causing heads to turn. The other workers rushed over to the action, forming a circle around the two to better observe the one-sided beat down, some even calling out encouragement to Marco.<p>“Hey, knuckleheads!” Marco froze mid-punch at the sound of the foreman’s voice, the ring of spectators falling silent as the portly man stepped in and yanked him off of Ellis, “Knock it off! You are government employees, what the hell do you think you’re doing?!”<p>“He attacked me, sir. He just attacked me outta nowhere!” Stammered Ellis, fresh bruises blossoming on his pale skin.<p>The foreman’s jaw tightened and he shot daggers at the instigating subordinate, “Is this true, Marco?”<p>“Not for no reason, sir,” Marco mumbled, his eyes glued to the ground like a scolded child , “He said he was in the Legion.”<p>There was a short pause, “He did?” The foreman looked to Benny for confirmation, receiving a nervous nod. He took a deep breath, flashing an appalled sneer in Ellis’ direction before patting Marco on the back and lowering his voice, “I’m gonna stand over there for a couple minutes. Make sure you give that fink a couple extra punches for me, okay?”`;
         }
     }
     if(aa[0].candidate === 119 && aa[0].electoral_votes > 265) {
