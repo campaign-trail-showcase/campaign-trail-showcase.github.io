@@ -35,6 +35,67 @@ document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_st
 $(".container")[0].style.backgroundColor = "#C97800"
 document.body.background = "https://i.imgur.com/cqOezGA.jpg"
 
+// Check if redirected from another NL mod and hasn't run before
+if (!window.autoStartExecuted && window.location.search.includes('from=othernlmod')) {
+    window.autoStartExecuted = true; // Set flag to prevent multiple executions
+    setTimeout(function() {
+        const startButton = document.getElementById('game_start');
+        if (startButton) startButton.click();
+    }, 100);
+}
+
+function modifyElectionSelect() {
+    const select = document.querySelector('select[name="election_id"]');
+    if (select) {
+        // Create 2002 option
+        const option2002 = document.createElement('option');
+        option2002.value = "2002";
+        option2002.textContent = "2002NL";
+        
+        // Add 2017 option
+        const option2017 = document.createElement('option');
+        option2017.value = "2017"; 
+        option2017.textContent = "2017NL";
+        
+        // Add 2017 after existing option
+        select.insertBefore(option2017, select.firstChild);
+
+        // Insert 2002 before existing option
+        select.insertBefore(option2002, select.firstChild);
+
+        // Add change handler
+        select.addEventListener('change', function() {
+            if (this.value === "2002") {
+                window.location.href = "https://campaigntrailshowcase.com/campaign-trail/?modName=2002NL&from=othernlmod";
+            }
+            else if (this.value === "2017") {
+                window.location.href = "https://campaigntrailshowcase.com/campaign-trail/?modName=2017NL&from=othernlmod";
+            }
+        });
+    }
+}
+
+
+// Add listener for the back button
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'candidate_id_back') {
+        setTimeout(modifyElectionSelect, 100); // Small delay to ensure DOM is updated
+    }
+});
+
+// Create observer to watch for select element
+const selectObserver = new MutationObserver(function(mutations) {
+    if (document.querySelector('select[name="election_id"]')) {
+        modifyElectionSelect();
+        selectObserver.disconnect();
+    }
+});
+
+selectObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true
+});
+
 var element = document.getElementById('my-invisible-element');
 if(!element){
 function changeIntroDescription() {
