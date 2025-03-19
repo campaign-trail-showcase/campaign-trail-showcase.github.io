@@ -45,6 +45,57 @@ if (!window.autoStartExecuted && window.location.search.includes('from=othernlmo
     }, 100);
 }
 
+function modifyElectionSelect() {
+    const select = document.querySelector('select[name="election_id"]');
+    if (select) {
+        // Create 2017 option
+        const option2017 = document.createElement('option');
+        option2017.value = "2017";
+        option2017.textContent = "2017NL";
+        
+        // Add 2023 option
+        const option2023 = document.createElement('option');
+        option2023.value = "2023"; 
+        option2023.textContent = "2023NL";
+
+        // Add 2017 after existing option
+        select.appendChild(option2017);
+        
+        // Add 2023 after existing option
+        select.appendChild(option2023);
+
+        // Add change handler
+        select.addEventListener('change', function() {
+            if (this.value === "2017") {
+                window.location.href = "https://campaigntrailshowcase.com/campaign-trail/?modName=2017NL&from=othernlmod";
+            }
+            else if (this.value === "2023") {
+                window.location.href = "https://campaigntrailshowcase.com/campaign-trail/?modName=2023NL&from=othernlmod";
+            }
+        });
+    }
+}
+
+// Add listener for the back button
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'candidate_id_back') {
+        setTimeout(modifyElectionSelect, 100); // Small delay to ensure DOM is updated
+    }
+});
+
+// Create observer to watch for select element
+const selectObserver = new MutationObserver(function(mutations) {
+    if (document.querySelector('select[name="election_id"]')) {
+        modifyElectionSelect();
+        selectObserver.disconnect();
+    }
+});
+
+selectObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true
+});
+
 var element = document.getElementById('my-invisible-element');
 if(!element){
 function changeIntroDescription() {
