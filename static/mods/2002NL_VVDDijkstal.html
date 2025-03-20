@@ -221,7 +221,7 @@ if(answer == 2076){
     candidateToEdit.fields.image_url = "https://i.imgur.com/F6rvXh5.png";
     candidateToEdit.fields.description_as_running_mate = "<p>Hans Wiegel has been the VVD's leader before, from 1971 until 1982. At the time he was among the youngest politicians and under his leadership the VVD grew from the narrow representative of the (comparatively weak) liberal pillar that typically played third wheel in Christian coalitions to a party with popular appeal to which even conservatives entrusted their votes. He gathered fame leading the opposition against the left-wing Den Uyl government, and then worked with Dries van Agt's newly founded CDA to get around the victorious PvdA in 1977 and crush Den Uyl's dream of a second cabinet.</p><p>Wiegel left national politics in 1981 on the back of a personal tragedy and because he believed the VVD would be in the opposition for the foreseeable future after CDA-VVD lost its majority. Since then he has made a habit of making the life of his VVD successors difficult by commenting on their actions. The grand icemaster has now been called on his bluff. Can he change the VVD's fortunes around after a 20 year hiatus?</p>";
 
-    // window.setTimeout(e.vpSwitcher, 20)
+    //window.setTimeout(e.vpSwitcher, 20)
     campaignTrail_temp.candidate_image_url = 'https://i.imgur.com/F6rvXh5.png';
     campaignTrail_temp.candidate_last_name = '<font color="#FF5300">Wiegel</font>';
     WiegelReturns = true;
@@ -1809,15 +1809,15 @@ function findLeader(coalition){
   if (!ministerList.find(m => m.minID === 1 && m.party === 105)) {
     ministerNames[105][5] = "Jan Peter Balkenende";
   }
-  if (WiegelReturns) {
-    ministerNames[21][1] = "Hans Wiegel";
-  }
-  if (PMJorritsma) {
-    ministerNames[21][1] = "Annemarie Jorritsma";
-  }
   if (PMZalm) {
     ministerNames[23][1] = "Gerrit Zalm";
     ministerNames[23][2] = "Hans Hoogervorst";
+  }
+  if (PMJorritsma) {
+    ministerNames[23][1] = "Annemarie Jorritsma";
+  }
+  if (WiegelReturns) {
+    ministerNames[23][1] = "Hans Wiegel";
   }
   if (ministerList.find(m => m.minID === 14 && (m.party === 17 || m.party === 21))) {
     ministerList.find(m => m.minID === 14).ministerTitle = "Development Cooperation (BZ)";

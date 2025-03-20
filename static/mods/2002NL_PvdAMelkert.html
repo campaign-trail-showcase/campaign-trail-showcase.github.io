@@ -70,6 +70,7 @@ musicHasBeenUpdated = false;
 darkMelkertActivated = false;
 FortuynLives = true;
 BenkRemoved = false;
+PMKok = false;
 
 cyoAdventure = function (a) {
 answer = e.player_answers[e.player_answers.length - 1]; // get current answer selection
@@ -175,6 +176,12 @@ if (answer == 2036 || answer == 2037) {
   const coalition3Adjustment = coalitions.find((coalition) => coalition.id === 17);
   coalition3Adjustment.weight = 0;
   return;
+}
+if (answer == 2136) {
+  PMKok = true;
+  const leader17 = partyLeaders.find((leader) => leader.party === 17);
+  leader17.leaderName = 'third Kok';
+  leader17.image = 'https://i.imgur.com/CS1dZbV.png';
 }
 };
 
@@ -708,10 +715,21 @@ function findLeader(coalition){
       if (VVDResults.electoral_votes < 22) {
         unlockAchievementSafe("Geert who?");
       }
-      if (aa[0].candidate == 17 && !FortuynLives) { // PvdA Wins after Fortuyn was killed
+      if (aa[0].candidate == 17 && !FortuynLives && !PMKok) { // PvdA Wins after Fortuyn was killed
         e.header = "<h2>New Natural Governing Party?</h2>"
-        e.pages = [`<p>Considering what the party was put through by Fortuyn, especially when events culminated in this assassination, this result, which would've been most expected a year ago still comes as a surprise. This also leads to a rather perilous political dynamic, because the LPF blames the PvdA for the events that transpired. The riots that began before the election are certainly intensifying as the prospects of you rising to the premiership increase.</p><p>The mood at your election night event is schizophrenic. There is happiness and even some satisfaction that you made it is there, but the events surrounding Fortuyn poisons the mood. Even you, after having clearly been backed up by the electorate, are afraid of being seen as too chipper. You will likely be prime minister. But you will be starting your tenure as the eye of the storm.</p>`, `<div id="coalitionList"><p>As the results trickle in, the total number of seats of each party is calculated. As expected, neither you nor any other party has gained an outright majority and a coalition will be necessary. The largest party will get to take the initiative in this process, but they will have to be careful: if their negotiations stall, they may find themselves being relegated to the opposition by a coalition of smaller parties.</p></div>`, `<div id="coalitionList"><p>As the results trickle in, the total number of seats of each party is calculated. As expected, neither you nor any other party has gained an outright majority and a coalition will be necessary. The largest party will get to take the initiative in this process, but they will have to be careful: if their negotiations stall, they may find themselves being relegated to the opposition by a coalition of smaller parties.</p></div>`]
+        e.pages = [`<p>Considering what the party was put through by Fortuyn, especially when events culminated in this assassination, this result, which would've been most expected a year ago still comes as a surprise. This also leads to a rather perilous political dynamic, because the LPF blames the PvdA for the events that transpired. The riots that began before the election are certainly intensifying as the prospects of you rising to the premiership increase.</p><p>The mood at your election night event is schizophrenic. There is happiness and even some satisfaction that you made it is there, but the events surrounding Fortuyn poisons the mood. Even you, after having clearly been backed up by the electorate, are afraid of being seen as too chipper. You will likely be prime minister. But you will be starting your tenure as the eye of the storm.</p>`, `<div id="coalitionList"><p>As the results trickle in, the total number of seats of each party is calculated. As expected, neither you nor any other party has gained an outright majority and a coalition will be necessary. The largest party will get to take the initiative in this process, but they will have to be careful: if their negotiations stall, they may find themselves being relegated to the opposition by a coalition of smaller parties.</p></div>`]
         e.image = "https://i.imgur.com/wVNhr3f.png";
+        var songChoice = 'PvdASong';
+        if (!musicHasBeenEnabled){
+          newYouTubeMusicPlayer(songChoice);
+          musicHasBeenEnabled = true;
+        }
+        return construct(0);
+      }
+      if (aa[0].candidate == 17 && !FortuynLives && PMKok) { // PvdA Wins after Fortuyn was killed
+        e.header = "<h2>New Natural Governing Party?</h2>"
+        e.pages = [`<p>Considering what the party was put through by Fortuyn, especially when events culminated in this assassination, this result, which would've been most expected a year ago still comes as a surprise. This also leads to a rather perilous political dynamic, because the LPF blames the PvdA for the events that transpired. You have had to bend the knee to these events, and Wim Kok came in to assure the nation he would take a third term to calm things down. That paid off, and the PvdA is thus still the largest party of the country</p><p>The mood at your election night event is schizophrenic. There is happiness and even some satisfaction that Wim saved the PvdA against your backdrop, but the events surrounding Fortuyn poison the mood. Even he, after having clearly been backed up by the electorate, is afraid of being seen as too chipper. To him the task of riding the nation through the eye of the storm.</p>`, `<div id="coalitionList"><p>As the results trickle in, the total number of seats of each party is calculated. As expected, neither you nor any other party has gained an outright majority and a coalition will be necessary. The largest party will get to take the initiative in this process, but they will have to be careful: if their negotiations stall, they may find themselves being relegated to the opposition by a coalition of smaller parties.</p></div>`]
+        e.image = "https://i.imgur.com/H1fDg2Y.png";
         var songChoice = 'PvdASong';
         if (!musicHasBeenEnabled){
           newYouTubeMusicPlayer(songChoice);
@@ -816,8 +834,11 @@ function findLeader(coalition){
     }
     if(negotiationsDone) {
       leader = findLeader(selectedCoalition);
-      if (leader.party == 17) {
+      if (leader.party == 17 && !PMKok) {
         playerFate = "You have fulfilled your ambition to become this country's prime minister. Congratulations!"
+      }
+      else if (leader.party == 17 && PMKok) {
+        playerFate = "As for you, you resigned after the new <i>Tweede Kamer</i> came together, at the insistence of Prime Minister Kok. Your place as the PvdA's faction leader has been taken over by Jeltje van Nieuwenhoven. You are carrying on as a backbencher for now, but the prime minister has pulled some strings and you will likely be appointed as the Dutch representative to the World Bank in Washington DC. Hopefully your bags are packed already."
       }
       else if (darkMelkertActivated && selectedCoalition > 14 && quickstats[1] < 21) {
         playerFate = "As for you, you have had to fend off an attempt by now-former-Prime Minister Kok to have you replaced as leader with Interior Minister Klaas de Vries. When it became clear that a cabinet with the LPF was in the cards however, you had a solid argument to carry on. In the end, you narrowly prevailed. You've since chosen to become deputy prime minister and the new minister of the interior in this cabinet."
@@ -892,10 +913,17 @@ function findLeader(coalition){
       unlockAchievementSafe("Normaal");
       return construct(0);
     }
-    if(leader.party == 17 && negotiationsDone && selectedCoalition.id === 7){ //PvdA-VVD-D66
+    if(leader.party == 17 && !PMKok && negotiationsDone && selectedCoalition.id === 7){ //PvdA-VVD-D66
       leader = findLeader(selectedCoalition);
       e.header="<h2>Purple III</h2>"
       e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed. And it is another purple cabinet with VVD, PvdA and D66.</p><p>Wim Kok smiles when he hands you the key of the prime minister's office following your formal appointment by the queen, this is absolutely the result he hoped for in his succession.</p><p>Do remain somewhat weary: as you are intricately aware, the Kok II government almost collapsed multiple times, and voter fatigue with the PvdA-VVD-D66 combination is increasing, as the phenomenon Fortuyn made painfully clear. Be wary on your left flank as well, with the SP. The US seems to be intent on invading Iraq, which could make them become a problem if you decide to participate.</p>`]
+      e.image = leader.image
+      return construct(0);
+    }
+    if(leader.party == 17 && PMKok && negotiationsDone && selectedCoalition.id === 7){ //PvdA-VVD-D66
+      leader = findLeader(selectedCoalition);
+      e.header="<h2>Purple III</h2>"
+      e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed. And it is the same composition that has governed the country for the past eight years.</p><p>Unfortunately, you have had to hand the party back to Prime Minister Kok for your sins, and now he is here to serve a third term he didn't want. Frustrating.</p><p>${playerFate}</p>`]
       e.image = leader.image
       return construct(0);
     }
@@ -906,10 +934,17 @@ function findLeader(coalition){
       e.image = leader.image
       return construct(0);
     }
-    if(leader.party == 17 && negotiationsDone && selectedCoalition.id === 8){ //PvdA-VVD-CDA
+    if(leader.party == 17 && !PMKok && negotiationsDone && selectedCoalition.id === 8){ //PvdA-VVD-CDA
       leader = findLeader(selectedCoalition);
       e.header="<h2>Desperate establishment.</h2>"
       e.pages=[`<p>An unprecedented coalition of national unity, composed of all three broad people's parties. That this is a rabid reaction to Fortuyn's entrance onto the political scene is clear. His growth must have closed off many or most other options for this to happen.</p><p>Nevertheless, you have fulfilled your ambition to become the new prime minister, and you will be leading this cabinet over the next four years. You will have to be wary: your newfound primary opposition will do everything in his power to bring your cabinet down prematurely. Public discourse mentions 'the last convulsions of a dying establishment'. It will be up to you to prove them wrong. The first challenge will be the Provincial Elections of 2003. At least you have a massive majority in the Senate right now, meaning you have a lot of room to lose. Be wary too of your right-leaning coalition partners: it would be a shame if you hold out until 2006 only for the PvdA to be destroyed in that election.</p>`]
+      e.image = leader.image
+      return construct(0);
+    }
+    if(leader.party == 17 && PMKok && negotiationsDone && selectedCoalition.id === 8){ //PvdA-VVD-CDA
+      leader = findLeader(selectedCoalition);
+      e.header="<h2>Desperate establishment.</h2>"
+      e.pages=[`<p>An unprecedented coalition of national unity, composed of all three broad people's parties. That this is a rabid reaction to Fortuyn's entrance onto the political scene is clear. His growth must have closed off many or most other options for this to happen.</p><p>You are also a bit regretful that you had to give the party back to Prime Minister Kok, causing him to become the new prime minister for the third time. You will have to be wary: your newfound primary opposition will do everything in his power to bring your cabinet down prematurely. Public discourse involves 'the last convulsions of a dying establishment'. It will be up to you to prove them wrong. The first challenge will be the Provincial Elections of 2003. At least you have a massive majority in the Senate right now, meaning you have a lot of room to lose. Be wary too of your right-leaning coalition partners: it would be a shame if you hold out until 2006 only for the PvdA to be destroyed in that election.</p><p>${playerFate}</p>`]
       e.image = leader.image
       return construct(0);
     }
@@ -920,10 +955,21 @@ function findLeader(coalition){
       e.image = leader.image
       return construct(0);
     }
-    if(leader.party == 17 && negotiationsDone && selectedCoalition.id === 9){ //PvdA-CDA
+    if(leader.party == 17 && !PMKok && negotiationsDone && selectedCoalition.id === 9){ //PvdA-CDA
       leader = findLeader(selectedCoalition);
       e.header="<h2>Return of the Center-Left.</h2>"
       e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed.</p><p>The queen has appointed you to form a new cabinet, with the support of an easily achieved majority in the House of Representatives, composed of your PvdA and Balkenende's CDA.</p><p>Wim Kok smiles when he hands you the key of the prime minister's office following your formal appointment by the queen. This is an excellent outcome for him. You personally hope that together with the Christian Democrats, you might be able to profile the social democratic character of the PvdA a bit more strongly than in the past years. There are some challenges too: your government lacks a majority in the Senate, and will have to find support from the VVD, D66 and GroenLinks there. Perhaps you can secure a majority next year, but with the LPF's likely grand entrance, that forecast looks a bit grim. Furthermore, Balkenende does not seem too enthused with this cabinet which may not be good for its stability.</p>`]
+      e.image = leader.image
+      var VVDResults = (e.final_overall_results.find((r) => r.candidate === 23));
+      if (VVDResults.electoral_votes < 30) {
+        unlockAchievementSafe("Geert who?");
+      }
+      return construct(0);
+    }
+    if(leader.party == 17 && PMKok && negotiationsDone && selectedCoalition.id === 9){ //PvdA-CDA
+      leader = findLeader(selectedCoalition);
+      e.header="<h2>Return of the Center-Left.</h2>"
+      e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed.</p><p>The queen has appointed Wim Kok to form his third and hopefully last cabinet, with the support of an easily achieved majority in the House of Representatives, composed of your PvdA and Balkenende's CDA.</p><p>Personally, you hope that together with the Christian Democrats, he might be able to profile the social democratic character of the PvdA a bit more strongly than in the past years. ${playerFate}</p>`]
       e.image = leader.image
       var VVDResults = (e.final_overall_results.find((r) => r.candidate === 23));
       if (VVDResults.electoral_votes < 30) {
@@ -942,10 +988,21 @@ function findLeader(coalition){
       }
       return construct(0);
     }
-    if(leader.party == 17 && negotiationsDone && selectedCoalition.id === 10){ //PvdA-CDA-GL
+    if(leader.party == 17 && !PMKok && negotiationsDone && selectedCoalition.id === 10){ //PvdA-CDA-GL
       leader = findLeader(selectedCoalition);
       e.header="<h2>Return of the Center-Left.</h2>"
       e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed.</p><p>The queen has appointed you to form a new cabinet, with the support of an easily achieved majority in the House of Representatives, composed of your PvdA, Balkenende's CDA and Rosenmöller's GroenLinks, for whom it's the first time in national government.</p><p>Wim Kok smiles when he hands you the key of the prime minister's office following your formal appointment by the queen. This is an excellent outcome for him. You personally hope that together with the Christian Democrats, you might be able to profile the social democratic character of the PvdA a bit more strongly than in the past years. There are some challenges too: though your government has a majority in the Senate now, maintaining it in the face of the LPF's likely grand entrance in the Provincial elections next year might prove challenging. Furthermore, Balkenende does not seem too enthused with this cabinet which may not be good for its stability if the CDA comes to have electoral benefit from ending it in the future.</p>`]
+      e.image = leader.image
+      var VVDResults = (e.final_overall_results.find((r) => r.candidate === 23));
+      if (VVDResults.electoral_votes < 30) {
+        unlockAchievementSafe("Geert who?");
+      }
+      return construct(0);
+    }
+    if(leader.party == 17 && PMKok && negotiationsDone && selectedCoalition.id === 10){ //PvdA-CDA
+      leader = findLeader(selectedCoalition);
+      e.header="<h2>Return of the Center-Left.</h2>"
+      e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed.</p><p>The queen has appointed Wim Kok to form his third and hopefully last cabinet, with the support of an easily achieved majority in the House of Representatives, composed of what was until shortly ago your PvdA, Balkenende's CDA and Rosenmöller's GroenLinks.</p><p>Personally, you hope that together with the Christian Democrats, he might be able to profile the social democratic character of the PvdA a bit more strongly than in the past years. ${playerFate}</p>`]
       e.image = leader.image
       var VVDResults = (e.final_overall_results.find((r) => r.candidate === 23));
       if (VVDResults.electoral_votes < 30) {
@@ -964,10 +1021,21 @@ function findLeader(coalition){
       }
       return construct(0);
     }
-    if(leader.party == 17 && negotiationsDone && selectedCoalition.id === 11){ //PvdA-CDA-CU
+    if(leader.party == 17 && !PMKok && negotiationsDone && selectedCoalition.id === 11){ //PvdA-CDA-CU
       leader = findLeader(selectedCoalition);
       e.header="<h2>Return of the Center-Left.</h2>"
       e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed.</p><p>The queen has appointed you to form a new cabinet, with the support of an easily achieved majority in the House of Representatives, composed of your PvdA, Balkenende's CDA and Veling's ChristianUnion.</p><p>Wim Kok smiles when he hands you the key of the prime minister's office following your formal appointment by the queen. This is an excellent outcome for him. You personally hope that together with the Christian Democrats, you might be able to profile the social democratic character of the PvdA a bit more strongly than in the past years. There are some challenges too: your government lacks a majority in the Senate, and will have to find support from the VVD, D66 and GroenLinks there. Perhaps you can secure a majority next year, but with the LPF's likely grand entrance, that forecast looks a bit grim. Furthermore, Balkenende does not seem too enthused with this cabinet which may not be good for its stability if the CDA comes to have electoral benefit from ending it in the future.</p>`]
+      e.image = leader.image
+      var VVDResults = (e.final_overall_results.find((r) => r.candidate === 23));
+      if (VVDResults.electoral_votes < 30) {
+        unlockAchievementSafe("Geert who?");
+      }
+      return construct(0);
+    }
+    if(leader.party == 17 && PMKok && negotiationsDone && selectedCoalition.id === 11){ //PvdA-CDA
+      leader = findLeader(selectedCoalition);
+      e.header="<h2>Return of the Center-Left.</h2>"
+      e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed.</p><p>The queen has appointed Wim Kok to form his third and hopefully last cabinet, with the support of an easily achieved majority in the House of Representatives, composed of what was until shortly ago your PvdA, Balkenende's CDA and Veling's ChristianUnion.</p><p>Personally, you hope that together with the Christian Democrats, he might be able to profile the social democratic character of the PvdA a bit more strongly than in the past years. ${playerFate}</p>`]
       e.image = leader.image
       var VVDResults = (e.final_overall_results.find((r) => r.candidate === 23));
       if (VVDResults.electoral_votes < 30) {
@@ -986,10 +1054,21 @@ function findLeader(coalition){
       }
       return construct(0);
     }
-    if(leader.party == 17 && negotiationsDone && selectedCoalition.id === 12){ //PvdA-CDA-D66
+    if(leader.party == 17 && !PMKok && negotiationsDone && selectedCoalition.id === 12){ //PvdA-CDA-D66
       leader = findLeader(selectedCoalition);
       e.header="<h2>Return of the Center-Left.</h2>"
       e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed.</p><p>The queen has appointed you to form a new cabinet, with the support of an easily achieved majority in the House of Representatives, composed of your PvdA, Balkenende's CDA and De Graaf's D66.</p><p>Wim Kok smiles when he hands you the key of the prime minister's office following your formal appointment by the queen. This is an excellent outcome for him. You personally hope that together with the Christian Democrats, you might be able to profile the social democratic character of the PvdA a bit more strongly than in the past years. There are some challenges too: though your government has a majority in the Senate now, maintaining it in the face of the LPF's likely grand entrance in the Provincial elections next year might prove challenging. Furthermore, Balkenende does not seem too enthused with this cabinet which may not be good for its stability if the CDA comes to have electoral benefit from ending it in the future.</p>`]
+      e.image = leader.image
+      var VVDResults = (e.final_overall_results.find((r) => r.candidate === 23));
+      if (VVDResults.electoral_votes < 30) {
+        unlockAchievementSafe("Geert who?");
+      }
+      return construct(0);
+    }
+    if(leader.party == 17 && PMKok && negotiationsDone && selectedCoalition.id === 12){ //PvdA-CDA
+      leader = findLeader(selectedCoalition);
+      e.header="<h2>Return of the Center-Left.</h2>"
+      e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed.</p><p>The queen has appointed Wim Kok to form his third and hopefully last cabinet, with the support of an easily achieved majority in the House of Representatives, composed of what was until shortly ago your PvdA, Balkenende's CDA and De Graaf's D66.</p><p>Personally, you hope that together with the Christian Democrats, he might be able to profile the social democratic character of the PvdA a bit more strongly than in the past years. ${playerFate}</p>`]
       e.image = leader.image
       var VVDResults = (e.final_overall_results.find((r) => r.candidate === 23));
       if (VVDResults.electoral_votes < 30) {
@@ -1021,10 +1100,21 @@ function findLeader(coalition){
       
       return construct(0);
     }
-    if(leader.party == 17 && negotiationsDone && selectedCoalition.id === 14){ //PvdA-CDA-GL-D66
+    if(leader.party == 17 && !PMKok && negotiationsDone && selectedCoalition.id === 14){ //PvdA-CDA-GL-D66
       leader = findLeader(selectedCoalition);
       e.header="<h2>Return of the Center-Left.</h2>"
       e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed.</p><p>The queen has appointed you to form a new cabinet, with the support of an easily achieved majority in the House of Representatives, composed of your PvdA, Balkenende's CDA, Rosenmöller's GroenLinks and De Graaf's D66.</p><p>Wim Kok smiles when he hands you the key of the prime minister's office following your formal appointment by the queen. This is an excellent outcome for him. You personally hope that together with the Christian Democrats, you might be able to profile the social democratic character of the PvdA a bit more strongly than in the past years. There are some challenges too: though your government has a majority in the Senate now, maintaining it in the face of the LPF's likely grand entrance in the Provincial elections next year might prove challenging. Furthermore, Balkenende does not seem too enthused with this cabinet which may not be good for its stability if the CDA comes to have electoral benefit from ending it in the future.</p>`]
+      e.image = leader.image
+      var VVDResults = (e.final_overall_results.find((r) => r.candidate === 23));
+      if (VVDResults.electoral_votes < 30) {
+        unlockAchievementSafe("Geert who?");
+      }
+      return construct(0);
+    }
+    if(leader.party == 17 && PMKok && negotiationsDone && selectedCoalition.id === 14){ //PvdA-CDA
+      leader = findLeader(selectedCoalition);
+      e.header="<h2>Return of the Center-Left.</h2>"
+      e.pages=[`<p>Some 150 days have gone by since the 2002 elections, and white smoke finally comes out of the chimney at the Binnenhof. A government has finally been formed.</p><p>The queen has appointed Wim Kok to form his third and hopefully last cabinet, with the support of an easily achieved majority in the House of Representatives, composed of what was until shortly ago your PvdA, Balkenende's CDA, Rosenmöller's GroenLinks and De Graaf's D66.</p><p>Personally, you hope that together with the Christian Democrats, he might be able to profile the social democratic character of the PvdA a bit more strongly than in the past years. ${playerFate}</p>`]
       e.image = leader.image
       var VVDResults = (e.final_overall_results.find((r) => r.candidate === 23));
       if (VVDResults.electoral_votes < 30) {
@@ -1772,6 +1862,9 @@ function findLeader(coalition){
   }
   if (darkMelkertActivated) {
     ministerNames[17][14] = "Dick Schoof";
+  }
+  if (PMKok) {
+    ministerNames[17][1] = "Wim Kok";
   }
   if (!ministerList.find(m => m.minID === 1 && m.party === 105)) {
     ministerNames[105][5] = "Jan Peter Balkenende";

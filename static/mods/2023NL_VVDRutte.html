@@ -246,7 +246,7 @@ return questionSheath[index];
         candidateToEdit.fields.image_url = "https://i.imgur.com/tFzIPQT.png";
         candidateToEdit.fields.description_as_running_mate = "<p>Born in Turkey, from where she came to the Netherlands as a refugee with her family as a child, Dilan Yeşilgöz-Zegerius started her career in the Socialist Party. After having been active in the PvdA and GroenLinks as well, she eventually joined the VVD and was elected on their behalf to the Amsterdam municipal council, where she profiled herself with measures against street intimidation.</p><p>In 2017, Yeşilgöz was elected to the Dutch House of Representatives, but soon became State Secretary of Economic Affairs and Climate, in the capacity of which she played a key role in the coming together of the Climate Act. In 2021, she (controversially, having no law background) became Minister of Justice and Security, entering the forefront of VVD leadership, and started to be recognized as a possible successor to Mark Rutte.</p><p>Although Yeşilgöz-Zegerius is, like most prominent VVDers on the national level, a trusted associate of Mark Rutte, her law and order credentials put her on the right wing of the party.</p>";
 
-        // window.setTimeout(e.vpSwitcher, 20)
+        //window.setTimeout(e.vpSwitcher, 20)
         campaignTrail_temp.candidate_image_url = 'https://i.imgur.com/tFzIPQT.png';
         campaignTrail_temp.candidate_last_name = '<font color="#FF6400">Yeşilgöz</font>';
         yesilgozLeader = true;
@@ -2069,7 +2069,7 @@ if(selectedCoalition.parties.includes(78)) {
 if(selectedCoalition.parties.includes(79)) {
   VoltPart = (e.final_overall_results.find((r) => r.candidate === 79));
   coalitionSeats += VoltPart.popular_votes;
-  coalitionParties.push({party: 79, seats: VoltPart.popular_votes, name: "Volt", color: "#FF0000"});
+  coalitionParties.push({party: 79, seats: VoltPart.popular_votes, name: "Volt", color: "#AA00FF"});
 }
 if(selectedCoalition.parties.includes(91)) {
   JA21Part = (e.final_overall_results.find((r) => r.candidate === 91));
@@ -2256,7 +2256,7 @@ const ministerNames = {
     13: "Roel van Gurp",
     14: "Tom van der Lee",
     15: "Sofie van den Enk",
-    16: "Bram van Ojink"
+    16: "Bram van Ojik"
     },
     24: {
     1: "Rob Jetten",
@@ -2530,8 +2530,8 @@ const ministerNames = {
     }
 };
 
-if (!ministerList.find(m => m.minID === 1 && !m.party === 20)) {
-  ministerNames[20][10] = "Eddy van Hijum";
+if (!ministerList.find(m => m.minID === 1 && m.party === 20)) {
+    ministerNames[20][10] = "Eddy van Hijum";
 }
 if (ministerList.filter(m => m.party === 106).length > 0 && GLPvdA) {
     const party106Ministers = ministerList.filter(m => m.party === 106);
@@ -2541,10 +2541,9 @@ if (ministerList.filter(m => m.party === 106).length > 0 && GLPvdA) {
         }
     });
 }
-
 if (!yesilgozLeader) {
-  ministerNames[24][1] = "Mark Rutte";
-  ministerNames[24][5] = "Dilan Yeşilgöz-Zegerius";
+  ministerNames[23][1] = "Mark Rutte";
+  ministerNames[23][5] = "Dilan Yeşilgöz-Zegerius";
 }
 if (ministerList.find(m => m.party === 91)) {
     const firstJA21Minister = ministerList.find(m => m.party === 91);
@@ -2568,8 +2567,8 @@ if (ministerList.find(m => m.minID === 12 && m.party === 77)) {
   ministerList.find(m => m.minID === 12).ministerTitle = "Food Quality and Nature (VVN)";
 }
 if (ministerList.find(m => m.minID === 14 && m.party === 23)) {
-  ministerList.find(m => m.minID === 8).ministerTitle = "Economic Affairs (EZ)";
   ministerList.find(m => m.minID === 14).ministerTitle = "Climate and Green Growth (KGG)";
+  ministerList.find(m => m.minID === 8).ministerTitle = "Economic Affairs (EZ)";
 }
 if (ministerList.find(m => m.minID === 14 && m.party === 25)) {
   ministerList.find(m => m.minID === 14).ministerTitle = "Government Efficiency (OE)";
@@ -2650,7 +2649,7 @@ ministerList.forEach(minister => {
     
     // Party cell
     const partyCell = row.insertCell();
-    if ((minister.party === 25 && selectedCoalition.parties.includes(20) && minister.ministerTitle === 'Prime Minister/General Affairs (AZ)') || (minister.party === 20 && (minister.ministerTitle.includes('Justice and Security') || minister.ministerTitle.includes('Defense') || minister.ministerTitle.includes('Climate and Nitrogen')))) {
+    if ((minister.party === 25 && selectedCoalition.parties.includes(20) && minister.ministerTitle === 'Prime Minister/General Affairs (AZ)') || (minister.party === 20 && (minister.ministerTitle.includes('Justice and Security') || minister.ministerTitle.includes('Defense')))) {
         partyCell.textContent = 'Ind.';
     } else {
         partyCell.textContent = coalitionParties.find(p => p.party === minister.party)?.name || "Unassigned";
@@ -3595,6 +3594,8 @@ function charting(chartIndex=0){
   
               // Check the id of the clicked button
               if (this.id === 'overall_results_button') {
+                  resetPage = true;
+                  e.page=0;
                   endingPicker();
                   endingConstructor();
   
