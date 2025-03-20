@@ -13517,7 +13517,10 @@ campaignTrail_temp.running_mate_last_name = "For Senate!";
 campaignTrail_temp.multiple_endings = true;
 endingPicker = (out, totv, aa, quickstats) => {
     e.final_overall_results.sort((a, b) => b.popular_votes - a.popular_votes);
-
+ if (aa[0].candidate === 153 && quickstats[1] >= 75) {
+        setImage("https://i.imgur.com/59Io0Ve.png");
+return "Wow, congrats on getting here with bigshot, now take this code https://pastebin.com/raw/96ZkM3Sa."
+}
     if (aa[0].candidate === 153 && hope === 1 && easley === 0) {
         ctsAchievement("Inspiration");
 ctsAchievement("History In The Making");
