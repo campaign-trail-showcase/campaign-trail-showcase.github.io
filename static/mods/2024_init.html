@@ -1,7 +1,7 @@
 campaignTrail_temp.credits = "ItsAstronomical and Martha"
 RecReading = true;
 
-document.getElementById("inner_window_1").children[1].innerHTML = `<p>Welcome to the 2024 Presidential Election, a mod for The Campaign Trail. This mod is split into two versions ― <b>2024</b>, and <b>2024: Divided States of America</b>.</p><img src="https://itsastronomical.com/assets/2024/2024introbanner.png" width="800"><li><b>2024</b> plays like your typical scenario, and is intended to emulate an "official" 2024 scenario, with Kamala Harris vs Donald Trump. Just like the original site, many questions are randomized (with an option to answer them all).</li><img src="https://itsastronomical.com/assets/2024/2024introbannerdsa.png" width="800"><li><b>2024: Divided States of America</b> takes the base of <b>2024</b> and uses it to add alternate history elements to allow for a less historical route, where you start as President Biden or Former President Donald Trump. This version also features less vanilla content, such as Choose Your Own Adventure, plenty of endings, and soundtracks for each side. <b>2024: Divided States of America</b> is currently not released yet.</li><br><br>`;
+document.getElementById("inner_window_1").children[1].innerHTML = `<p>Welcome to the 2024 Presidential Election, a mod for The Campaign Trail. This mod is split into two versions ― <b>2024</b>, and <b>2024: Divided States of America</b>.</p><img src="https://itsastronomical.com/assets/2024/2024introbanner.png" width="800"><li><b>2024</b> plays like your typical scenario, and is intended to emulate an "official" 2024 scenario, with Kamala Harris vs Donald Trump. Just like the original site, many questions are randomized (with an option to answer them all).</li><img src="https://itsastronomical.com/assets/2024/2024introbannerdsa.png" width="800"><li><b>2024: Divided States of America</b> takes the base of <b>2024</b> and uses it to add alternate history elements to allow for a less historical route, where you start as President Biden or Former President Donald Trump. This version also features less vanilla content, such as Choose Your Own Adventure, plenty of endings, and soundtracks for each side. <b>2024: Divided States of America</b> is currently not released yet.</li><br>`;
 document.styleSheets[0].insertRule(".inner_window_w_desc{ margin:1em 0 0 0.5em !important;padding-top: 0.5em !important;}", 0);
 document.styleSheets[0].insertRule(".inner_window_question{ margin:1em 0 .7em 0.5em !important;padding-top: 0.3em !important;}", 0);
 document.styleSheets[0].insertRule("#main_content_area { height:82% !important;}", 0);
@@ -670,6 +670,21 @@ campaignTrail_temp.achievements = {
         "description" : "As Donald Trump, buck the party playbook on the Middle East, and still win.",
         "cannotBeCheated" : true
     },
+    "How High?" : {
+        "image" : "https://itsastronomical.com/assets/2024/ach/dba/elon.png",
+        "description" : "As Donald Trump, win while avoiding working with Elon Musk.",
+        "cannotBeCheated" : true
+    },
+    "Posted It Again Award" : {
+        "image" : "https://itsastronomical.com/assets/2024/ach/dba/wojak.png",
+        "description" : "As Donald Trump, get the 2016 Electoral Map. Again.",
+        "cannotBeCheated" : true
+    },
+    "Teflon Don? More like Tesla Don." : {
+        "image" : "https://itsastronomical.com/assets/2024/ach/dba/trumpsad.png",
+        "description" : "As Donald Trump, lose on cakewalk difficulty.",
+        "cannotBeCheated" : true
+    },
     "Not Going Back!" : {
         "image" : "https://itsastronomical.com/assets/2024/ach/dba/kamala.png",
         "description" : "As Kamala Harris, win the 2024 election.",
@@ -698,6 +713,21 @@ campaignTrail_temp.achievements = {
     "Sith Apprentice" : {
         "image" : "https://itsastronomical.com/assets/2024/ach/dba/sith.png",
         "description" : "As Kamala Harris, win after agreeing to defend Biden's legacy.",
+        "cannotBeCheated" : true
+    },
+    "Caught in a Vice" : {
+        "image" : "https://itsastronomical.com/assets/2024/ach/dba/cheney.png",
+        "description" : "As Kamala Harris, win over 319 electoral votes while accepting Dick Cheney's endorsement.",
+        "cannotBeCheated" : true
+    },
+    "Dropped the Walz" : {
+        "image" : "https://itsastronomical.com/assets/2024/ach/dba/ball.png",
+        "description" : "As Kamala Harris, have Tim Walz fumble the debate, and still win over 300 electoral votes.",
+        "cannotBeCheated" : true
+    },
+    "Historically Accurate" : {
+        "image" : "https://itsastronomical.com/assets/2024/ach/dba/impossible.png",
+        "description" : "As Kamala Harris, win the election on Impossible difficulty.",
         "cannotBeCheated" : true
     },
     "The Rise of a Midwest Prince" : {
@@ -812,8 +842,8 @@ e.creditsPage = () => {
   function addColor() {
           var difficultyDiv = document.getElementById("difficulty_level");
           if (difficultyDiv && !document.getElementById("bunnyhopDropdown")) {
-              var questionCounter = ["25 (Randomized Questions)", "30 (Expanded)", "35 (Full)"];
-              var questions = [25, 30, 35];
+              var questionCounter = ["25 (Randomized Questions)", "25 (Static Question Set)", "30 (Expanded)", "35 (Full)"];
+              var questions = [25, 25, 30, 35];
               var dropdown = document.createElement("select");
               dropdown.id = "bunnyhopDropdown";
   
@@ -823,7 +853,7 @@ e.creditsPage = () => {
                   if (questionCounter[i] === "25 (Randomized Questions)") {
                       opt.selected = true;
                   }
-                  opt.value = questions[i];
+                  opt.value = questionCounter[i]; // Use the text as the value
                   dropdown.options.add(opt);
               }
   
@@ -836,14 +866,17 @@ e.creditsPage = () => {
               difficultyDiv.appendChild(form);
   
               dropdown.addEventListener("change", function() {
-  
-                  if (this.value == 25){
+                  if (this.value === "25 (Randomized Questions)") {
                       campaignTrail_temp.bunnyhop = true;
-                  }
-                  else{
+                      campaignTrail_temp.staticQuestions = false; // Ensure staticQuestions is false
+                  } else if (this.value === "25 (Static Question Set)") {
                       campaignTrail_temp.bunnyhop = false;
+                      campaignTrail_temp.staticQuestions = true; // Set staticQuestions to true
+                  } else {
+                      campaignTrail_temp.bunnyhop = false;
+                      campaignTrail_temp.staticQuestions = false; // Ensure staticQuestions is false
                   }
-                  campaignTrail_temp.global_parameter_json[0].fields.question_count = this.value;
+                  campaignTrail_temp.global_parameter_json[0].fields.question_count = parseInt(this.value.match(/\d+/)[0]); // Extract the number
               });
   
               var colourForm = document.createElement("form");
