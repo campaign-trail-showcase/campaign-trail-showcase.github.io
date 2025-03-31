@@ -32,6 +32,17 @@ let baseScenarioDict = {
   2020: "2020_Biden_Bass.html",
 };
 
+// Global Text Variables
+
+// Code 1 Text
+e.SelectText = "Please select the election you will run in:"
+e.CandidText = "Please select your candidate:"
+e.VpText = "Please select your running mate:"
+// Ending Popups
+e.ElectionPopup = "Election night has arrived. Settle in and wait for the returns, however                 long it may take. Best of luck!"
+e.WinPopup = "Congratulations! You won this year's election! Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice victory speech prepared for your supporters."
+e.LosePopup = "Sorry. You have lost the election this time. Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice concession speech prepared."
+
 let DEBUG = false;
 
 campaignTrail_temp.issue_font_size = null;
@@ -1259,7 +1270,7 @@ function divideElectoralVotesProp(e, t) {
           n +
           ' to win</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_result">                        <h3>STATE RESULTS</h3>                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    </div>                </div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>        <div class="overlay" id="election_night_overlay"></div>        <div class="overlay_window" id="election_night_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="' +
           e.election_json[s].fields.advisor_url +
-          '" width="208" height="128"/>            <p>Election night has arrived. Settle in and wait for the returns, however                 long it may take. Best of luck!</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>',
+          '" width="208" height="128"/>            <p>' + e.ElectionPopup + '</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>',
       );
       var lTemp = (function () {
         for (var t = {}, i = 0; i < e.states_json.length; i++)
@@ -1415,10 +1426,10 @@ function divideElectoralVotesProp(e, t) {
             if (s[0] < o && s[1] >= o) {
               if (e.final_overall_results[0].candidate == e.candidate_id)
                 var b =
-                  "Congratulations! You won this year's election! Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice victory speech prepared for your supporters.";
+                  '' + e.WinPopup + '';
               else if (e.final_overall_results[0].candidate != e.candidate_id)
                 var b =
-                  "Sorry. You have lost the election this time. Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice concession speech prepared.";
+                  '' + e.LosePopup + '';
               $("#game_window").append(
                 '            <div class="overlay" id="election_night_overlay"></div>            <div class="overlay_window" id="election_night_window">                <div class="overlay_window_content" id="election_night_content">                <h3>Advisor Feedback</h3>                <img src="' +
                   e.election_json[l].fields.advisor_url +
@@ -4324,7 +4335,7 @@ function divideElectoralVotesProp(e, t) {
         let r =
           '        <div class="game_header">        ' +
           corrr +
-          '        </div>        <div class="inner_window_w_desc" id="inner_window_4">            <div id="running_mate_form">            <form name="running mate">            <p><h3>Please select your running mate:</h3>            <select name="running_mate_id" id="running_mate_id">' +
+          '        </div>        <div class="inner_window_w_desc" id="inner_window_4">            <div id="running_mate_form">            <form name="running mate">            <p><h3>' + e.VpText + '</h3>            <select name="running_mate_id" id="running_mate_id">' +
           n +
           '</select>            </p>            </form>            </div>            <div class="person_description_window" id="running_mate_description_window">            </div>        <p><button class="person_button" id="running_mate_id_back">Back</button> <button class="person_button" id="running_mate_id_button">Continue</button>        </p>        </div>';
         $("#game_window").html(r),
@@ -4361,7 +4372,7 @@ function divideElectoralVotesProp(e, t) {
         let o =
           '<div class="game_header">        ' +
           corrr +
-          '    </div>    <div class="inner_window_w_desc" id="inner_window_3">        <div id="candidate_form">        <form name="candidate">            <p>            <h3>Please select your candidate:</h3>            <select name="candidate_id" id="candidate_id">' +
+          '    </div>    <div class="inner_window_w_desc" id="inner_window_3">        <div id="candidate_form">        <form name="candidate">            <p>            <h3>' + e.CandidText + '</h3>            <select name="candidate_id" id="candidate_id">' +
           n +
           '</select>            </p>        </form>        </div>        <div class="person_description_window" id="candidate_description_window">        </div>        <p><button class="person_button" id="candidate_id_back">Back</button> <button class="person_button" id="candidate_id_button">Continue</button>        </p>    </div>';
         $("#game_window").html(o),
@@ -4408,7 +4419,7 @@ function divideElectoralVotesProp(e, t) {
         var l =
           '<div class="game_header">            ' +
           corrr +
-          '        </div>        <div class="inner_window_w_desc" id="inner_window_2">            <div id="election_year_form">            <form name="election_year">            <p>                <h3>Please select the election you will run in:</h3>    \t\t    <select name="election_id" id="election_id">' +
+          '        </div>        <div class="inner_window_w_desc" id="inner_window_2">            <div id="election_year_form">            <form name="election_year">            <p>                <h3>' + e.SelectText + '</h3>    \t\t    <select name="election_id" id="election_id">' +
           a +
           '</select>            </p>            </form>            <div class="election_description_window" id="election_description_window">                <div id="election_image">                    <img src="' +
           e.election_json[inX].fields.image_url +

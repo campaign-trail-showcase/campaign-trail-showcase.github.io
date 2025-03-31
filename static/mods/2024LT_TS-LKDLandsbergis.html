@@ -12087,7 +12087,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 14146,
             "state": 13141,
-            "state_multiplier": 1
+            "state_multiplier": 1.15
         }
     },
     {
@@ -23308,7 +23308,7 @@ if(answer == 3474) {
 if(answer == 14468) {
   // Liberals will be less likely to vote LSDP now.
   changeWeight(weights, 80, 78, -0.1);
-  changeWeight(weights, 13761, 78, 0.1);
+  changeWeight(weights, 13761, 78, -0.1);
   return;
 }
 if(answer == 14563) {
@@ -23804,7 +23804,7 @@ if(answer == 14489) {
 	{ id: 7, name: 'Grand Coalition: TS-LKD, LSDP, DSVL', weight: 2.0, parties: [77, 79, 14223], impossibleCoalitions: [] },
 	
 	{ id: 8, name: 'Red-Blue Coalition: LSDP, DSVL', weight: 10.0, parties: [79, 14223], impossibleCoalitions: [9, 10, 16] },
-	{ id: 9, name: 'Traffic Light Coalition: LSDP, DSVL, LS', weight: 2.0, parties: [79, 80, 14223], impossibleCoalitions: [10] },
+	{ id: 9, name: 'Traffic Light Coalition: LSDP, DSVL, LS', weight: 2.0, parties: [79, 80, 14223], impossibleCoalitions: [] },
 	{ id: 10, name: 'Pseudo-Minority Government: LSDP, DSVL, LLRA-KŠS, Independents', weight: 5.0, parties: [79, 13838, 14223, 14377], impossibleCoalitions: [13] },
 	
 	{ id: 11, name: 'New 2016 Coalition: LSDP, LVŽS', weight: 5.0, parties: [78, 79], impossibleCoalitions: [12, 13, 15] },
@@ -24038,9 +24038,9 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
 		if (aa[0].candidate == 77 && aa[0].electoral_votes >= 119) { // TS-LKD hyper win
           changeTheme("dark")
 		  setMusic("")
-          e.header = "<h2>Target eliminated.</h2>"
-          e.pages = [`<p>Upon the strike of a bolt of lightning, the grotesque monstrosity fizzled into ash, and for the first time in half an hour, a silence set in Lukiškės Square. Gabrielius let out an easier breath.</p><p>It was rather foolish to think that their quest would end with the destruction of MG Baltic. A demonic race which has existed for millennia obviously had contingency plans within contingency plans, themselves within contingency plans.</p><p><em>Nor did Mockus bring all of his associates to battle eight years ago, either.</em> This one - a veteran of the velniai clan, perhaps, judging from his size and power - decided to take over the mind of the brash, confident CEO of Agrokoncernas. He had never seen such an ability before - taking over a politician through demonic possession, as opposed to the more common murder and shapeshifting.</p><p>Gabrielius holstered his gun, crackling with raw electric power, and walked away from the scene, hands in his pockets. Tomorrow, the media will report that Ramūnas Karbauskis was hospitalized, some conspiracies will crop up in the DELFI comment section, but most will read the news and move on, while a responsible centre-right government will take power like it should have back in 2016. The hunter pulled out his iPhone.</p><p>"Andrius, are you there? Have you tracked down <em>Cellophane</em>?"</p><iframe width="361" height="45" src="https://www.youtube.com/embed/2ovliAYrhmg?si=WKhagzLA-J-4J2UZ" title="Anubi - Ozirio adventas" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
-          e.image = "https://i.imgur.com/mEM7RIM.png";
+          e.header = "<h2>A new threat to the old order...</h2>"
+          e.pages = [`<p>With the flash of a bolt of lightning above Vilnius, a second man appeared next to the first on the roof of the Cathedral Bell Tower, looking down on the empty city square, shrouded in the darkness of the night. Andrius walked up to Gabrielius, his mood despondent - once his comrade in arms heard his footsteps, he turned around and asked:</p><p>"Have you figured it out?"</p><p>"Yes," Andrius answered after a moment's pause, unsure whether to reveal the whole truth. "It's... worse than we thought. I fear that the New SocDems have been aware of our existence for years. They've... kept silent for a long time, but now I am certain that their leader has transcended the limits of humanity - in a manner different from us."</p><p>"You mean... that old woman?"</p><p>"No. She has been a puppet the whole time. I am not certain if she is even alive or if she is a meat puppet created through some otherworldly means, her body didn't even have a pulse... No, I am speaking about Gintautas Paluckas. You remember him, don't you?"</p><p>Gabrielius turned his eyes to the distance - for a second, his thoughts flashed back to old memories. They knew each other. Paluckas was once a member of the Young Conservatives, after all, before turning to... dark places. The next time they met, it was in the 2020 election - where he seemed pathetic on the surface, sure, but it felt as if he was hiding something... "It doesn't matter. He will fall, just like the rest."</p><iframe width="361" height="45" src="https://www.youtube.com/embed/2ovliAYrhmg?si=WKhagzLA-J-4J2UZ" title="Anubi - Ozirio adventas" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" donotallowfullscreen></iframe>`]
+          e.image = "https://i.imgur.com/CsPzfIp.png";
           return construct(0);
       }
 	  // Minor party majority screens:
@@ -24050,7 +24050,6 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
           e.image = "https://i.imgur.com/mLBnijQ.png";
           return construct(0);
       }
-	  // Minor party majority screens:
 	  if (aa[0].candidate == 80 && aa[0].electoral_votes >= 71) { // LRLS
           e.header = "<h2>Call Gabrielius. I want him know it was me.</h2>"
           e.pages = [`<p>How fortuitous. With the Conservatives and Freedom wrecked by scandals and infighting, all Right voters flocked to the Liberal Movement, the party which has suffered no issues in government whatsoever. So many crises wrecked the government's reputation one after another. The world suffered the Covid pandemic exactly at the year when they came to power. Someone convinced Lukashenko to send those migrants at the border, and for some reason Putin snapped and invaded Ukraine. Someone sabotaged every single Partnership Law vote and someone tipped the media about Navickienė's husband's crypto scammer ties.</p><p>How coincidental.</p><p>The opposition has wrecked themselves, too, and bled so many votes to the Liberals that they now have a majority. Someone collapsed the Peasants from within, and stoked an internal collapse of the Social Democrats. Someone convinced Žemaitaitis to burn himself up with his insane antisemitic statements.</p><p>All while the Liberals suffered nothing. Aside for that annoying MG Baltic scandal, but even the greatest chessmasters make a few slip-ups sometimes...</p>`]
@@ -24075,10 +24074,10 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
           e.image = "https://i.imgur.com/SekJzsq.png";
           return construct(0);
       }
-	  else if (aa[0].candidate == 14069 && aa[0].electoral_votes >= 71) { // CP-T
-          e.header = "<h2>Power to the People!</h2>"
-          e.pages = [`<p>Incredible! The Supreme Election Commission has announced that the Centre-Nationalists won a majority of the seats! Nobody expected this result and neither did they - as they immediately broke down into five different parties over which of their leaders should become the Prime Minister. Naglis Puteikis, technically commanding the largest of the splinters, will become the next Prime Minister, but... let's just say that he's not lasting long.</p><p>What will be on the agenda of their five-minute government? Not much, but it is possible that they will declare war on Norway to free all of the children which their child protection services have stolen from honest Lithuanian parents. Someone has to fight God's hardest battles.</p>`]
-          e.image = "https://cdn.discordapp.com/attachments/559653590390800384/1151596163909308426/CP-T_pergale.png";
+	  else if (aa[0].candidate == 14069 && aa[0].electoral_votes >= 71) { // Peace Coalition
+          e.header = "<h2>I'm back, bitch.</h2>"
+          e.pages = [`<p>You killed my party, you killed my body, but you never killed the idea. You couldn't stop me.</p><p>My spiritual COVID-19 healing water kept me alive in my hour of need. When I felt a cup of ice cream near my hand, I held on and I pulled myself out of hell. From there, I came preaching peace, but I waged a war. Do you think a million people actually voted for me? No, I voted a million times.</p><p>What I've always taught is... love, respect is something great, it is an emotional energy that has healing power. However, you should love sincerely, without expecting thanks. Otherwise, you will not receive this power. I love money and corruption sincerely. You, Conservative, love nothing sincerely.</p><p>I'm coming for you.</p>`]
+          e.image = "https://i.imgur.com/PYvWAPo.png";
           return construct(0);
       }
 	  else if (aa[0].candidate == 13992 && aa[0].electoral_votes >= 71) { // LRP
@@ -24103,14 +24102,14 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
       }
 	  else if (aa[0].candidate == 14818 && aa[0].electoral_votes >= 71) { // LLP
           e.header = "<h2>From the diaries of a partisan, Dainava forests, October 11th, 2028.</h2>"
-          e.pages = [`<p>It has been a year since the ruzzians crossed the border. News came from the front recently - NATO troops made a breakthrough near Warsaw, might move the front a couple kilometers our way now. By their pace, maybe they'll reach us by the time we're fifty.</p><p>Since it's not looking like shit'll change for a while, they pretended to hold an election here today. People's Party got all of the votes, all of the seats, the ruzzkie account on Twitter says that this was the will of the real Lithuanian people or some shit. Didn't even wait for procedure and declared Vaitkus the new Prime Minister today, and with a treaty of eternal friendship with Putin to add. Fuck... I remember reposting those stupid ENOUGH IS ENOUGH memes on Discord. We all thought he was just a dumbass. Maybe he still is. But now I feel kinda stupid.</p>`]
+          e.pages = [`<p>It has been a year since the ruzzians crossed the border. News came from the front recently - NATO troops made a breakthrough near Warsaw, might move the front a couple kilometers our way now. Judging by their pace, maybe they'll reach us by the time we're fifty.</p><p>Since it's not looking like shit'll change for a while, they pretended to hold an election here today. People's Party got all of the votes, all of the seats, the ruzzkie account on Twitter says that this was the will of the real Lithuanian people or some shit. Didn't even wait for procedure and declared Vaitkus the new Prime Minister today, and with a treaty of eternal friendship with Putin to add. Fuck... I remember reposting those stupid ENOUGH IS ENOUGH memes on Discord. We all thought he was just a dumbass. Maybe he still is. But now we're the ones who feel stupid.</p>`]
           e.image = "https://i.imgur.com/Op1qZkO.png";
           return construct(0);
       }
 	  else if (aa[0].candidate == 14377 && aa[0].electoral_votes >= 71) { // Minors
-          e.header = "<h2>Lithuania, 2172.</h2>"
-          e.pages = [`<p>It has been 152 years since the beginning of the great Lithuanian-Swedish Hyperwar. On one fateful day in 2020, Lithuanians declared that 'billions must die', and so they did. A parliament of kooks and nutters was elected, and the leader of this circus was Valdemaras Valkiūnas - former mayor of Biržai and far right businessman, once the only member of the Seimas to vote against Sweden's accession to NATO because they had yet to return the cannons they stole from the Biržai Castle during the Deluge.</p><p>And so, we went to war. Air pollution has made Vilnius inhospitable to life, but thousands of Lithuanians live here anyway. COVID-171 is ravaging Samogitia and turning people into brain-eating mutants. The National Stadium still hasn't been built.</p><p>At least it's better than under the Conservatives.</p>`]
-          e.image = "https://media.discordapp.net/attachments/559653590390800384/1151596318993682462/Minors_pergale.jpg";
+          e.header = "<h2>In a city far, far away...</h2>"
+          e.pages = [`<p>The brain worms implanted in the minds of the country's citizens have worked, and they all voted in 141 independents into the Seimas. All but one will immediately resign, and this will mean that the entire parliament will be composed of one man - Artūras Zuokas. Soon, his battalions of BTR vehicles will roll through the entire country, crushing everything, especially illegally parked cars, while his army of clones of the Dalai Lama will install order, first in Lithuania, then across the entire globe.</p><p>The year 2024 shall be known as the birth of the New Vilnius Empire!</p>`]
+          e.image = "https://i.imgur.com/Kd5uneB.png";
           return construct(0);
       }
 		else if (aa[0].candidate == 77 && aa[0].electoral_votes >= 71) { // TS-LKD majority
@@ -24342,8 +24341,9 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
 		  leader23.leaderName = 'Paluckas';
 		  leader23.image = 'https://i.imgur.com/YZoUOZV.png';
 		  leader = findLeader(selectedCoalition);
-		  e.header="<h2>Red Fanta Coalition! LSDP and Liberals Together</h2>"
+		  e.header="<h2>Red Fanta Coalition! LSDP and Liberals Together!</h2>"
 		  e.pages=[`<p>After lengthy negotiations, a a ${leader.leaderName} Cabinet has been formed between the LSDP and LS. Surprising! With so many potential partners among the 'Left', few anticipated the Social Democrats to go to the completely opposite direction and select someone from the despised previous government. The personality conflicts and various rifts among the Left must have been very severe. The Liberals themselves were not particularly initially enthusiastic to enter a Left government, but a lot of unexpected things can be done for the sake of power.</p><p>The coalition program represents a moderated version of the Social Democratic program. Vows to increase the budget to GDP ratio via unmentioned reforms to the taxation system were included, as well as reforms to the pension system, a nationwide road fund, and continued support for Ukraine. Needless to say, this is not particularly exciting to the Social Democrats, and the libertarian MPs in the Liberal parliamentary group had to swallow a lot as well. Some question whether this coalition will even last until 2028 or if one of the two partners will quit in search of greener pastures.</p><p>Watching the Prime Minister's first speech from Greece, you smile. This went perfectly. You can retire, knowing the nation is in good hands.</p>`]
+		  ctsAchievement("Perfidy");
 		  e.image = leader.image
 		  return construct(0);
 		}

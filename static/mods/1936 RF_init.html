@@ -1,0 +1,588 @@
+function addDynamicCSS() {
+    var css = `
+        .inner_window_question h3 .mytooltip{
+            background-color: lightskyblue;
+        }
+
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background-color: lightblue;
+        }
+
+        .mytooltip .mytooltiptext {
+            width: 240px;
+            background-color: lightblue;
+            color: black;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 20%;
+            left: 20%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid black;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+
+        .mytooltip .mytooltiptext img {
+            max-width: 240px;
+            height: auto;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+    
+    styleElem.appendChild(document.createTextNode(css));
+    
+    document.head.appendChild(styleElem);
+}
+
+
+addDynamicCSS();
+
+tooltipList = [
+    {searchString: "Populists", explanationText: "The People's Party was reformed in 1924 by progressive members of the democratic party who opposed President Wilson's intervention in Mexico. Merged with the Democrats in 1931 to form the American Party"},
+    {searchString: "Andrew Mellon", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/MELLON%2C_ANDREW._SECRETARY_LCCN2016860988_%28cropped%29%28d%29.jpg/330px-MELLON%2C_ANDREW._SECRETARY_LCCN2016860988_%28cropped%29%28d%29.jpg> Sitting President of the United States. Useless Bastard"},
+    {searchString: "Senator Long", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/HueyPLongGesture.jpg/330px-HueyPLongGesture.jpg> Huey Long, Governor,  Senator and political boss of Louisiana known for his Share our Wealth program. Architect of the Democratic-Populist Merger. Met an unfortunate end by  an albino Hippo named 'White Charlie' in 1935"},
+    {searchString: "Glass", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Senator_Carter_Glass_of_Virginia.jpg/196px-Senator_Carter_Glass_of_Virginia.jpg> Carter Glass, Virginia Senator and Independent candidate for President, running on a platform of state's rights, pro-segregation and and fiscal conservatism"},
+   {searchString: "Leche", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/c/c2/Gov_Richard_Leche.jpg> Richard Leche, Current Governor of Louisiana handpicked by the Long Machine. Under investigation for tax fraud and embezzling government funds"},
+    {searchString: "Artaud", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Antonin_Artaud_1926.jpg/330px-Antonin_Artaud_1926.jpg> Antonin Artaud, avant-garde artist turned mad dictator of France following the 1934 Revolution. Seeks to reshape Europe in his violent, hyper modernist image"},
+    {searchString: "Kolchak", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Kolchak.jpg/330px-Kolchak.jpg> Regent and autocrat  of the Russia Empire."},
+    {searchString: "Rosa Luxembourg", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Rosa_Luxemburg.jpg/330px-Rosa_Luxemburg.jpg> Leader of the January Revolution in Germany and mother of the GSCR"},
+    {searchString: "GSCR", explanationText: "The German Socialist Council Republic was founded in 1919 following the January Revolution. The World's first and most influential socialist state"},
+    {searchString: "Alcoa Corporation", explanationText: "The Aluminum Company of America,  one of the largest industrial metal producers in the US. A certain President happens to own shares in the company"},
+    {searchString: "Dust Bowl", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Dust_storm_approaching_Stratford%2C_Texas.jpg/1920px-Dust_storm_approaching_Stratford%2C_Texas.jpg> A series of brutal dust storms in the great plains caused by drought and soil erosion"},
+    {searchString: "Ludendorff", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Bundesarchiv_Bild_183-2005-0828-525_Erich_Ludendorff_%28cropped%29%28b%29.jpg/330px-Bundesarchiv_Bild_183-2005-0828-525_Erich_Ludendorff_%28cropped%29%28b%29.jpg> German Field Marshall and dictator of the rump Imperial government in East Prussia. Blames his loss in the Great War on a supposed 'Judeo-Spartacist conspiracy to stab Germany in the back'"},
+    {searchString: "Paul Levi", explanationText: "<https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Paul_Levi_-_Schwadron.jpg/330px-Paul_Levi_-_Schwadron.jpg> Heir to Rosa Luxemberg and Chancellor of the GSCR"},
+    {searchString: "Rotfront", explanationText: "A military alliance of mostly socialist nations lead by Germany"},
+    {searchString: "Wilkie", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Wendell_Willkie_cph.3c02567.jpg/330px-Wendell_Willkie_cph.3c02567.jpg> Sitting Vice President of the United States. Not in the best position"},
+    {searchString: "Muenter bombing", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Senate_Bombing_July_2%2C_1915.jpg/1280px-Senate_Bombing_July_2%2C_1915.jpg> On June 2, 1921, a bomb was detonated in the Senate Chamber, killing Vice President Thomas Marshall. The culprit, Eric Muenter, was a former German spy who blamed American material support of the Entente for his countries' failure in the Great War"},
+     {searchString: "that crook Ferguson", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/James_E._Ferguson.jpg/330px-James_E._Ferguson.jpg> Notoriously corrupt Governor and later First Gentleman of Texas"},
+    {searchString: "World War", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Germanmachineguncrew1918.webp/700px-Germanmachineguncrew1918.webp.png> In 1913, Russia intervention against Bulgaria in defense of Serbia spiraled into a continent spanning war. 7 years of brutal trench warfare lead to a stalemate."},
+    {searchString: "Great War", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Germanmachineguncrew1918.webp/700px-Germanmachineguncrew1918.webp.png> In 1913, Russia intervention against Bulgaria in defense of Serbia spiraled into a continent spanning war. 7 years of brutal trench warfare lead to a stalemate."},
+    {searchString: "Mellonvilles", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Hooverville.jpg.webp/1200px-Hooverville.jpg.webp.png> Shantytown bult by the homeless people in major cities, across the country. Lovingly named after President Mellon thanks to his inaction"},
+    {searchString: "Invisible Empire", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/9/9f/Ku_Klux_Klan_members_and_a_burning_cross%2C_Denver%2C_Colorado%2C_1921.jpg> Some of those who work forces, are the same who burn crosses"},
+    {searchString: "Black Legion", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/1/14/Black_Legion_Uniforms_with_Skull-and-Crossbones_Insignia.png>Loosely organized and highly radical terrorist organization. Somehow makes the KKK look like choir boys,"},
+    {searchString: "J. Edgar Hoover", explanationText: "<img src= https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/J._Edgar_Hoover_cph.3b10753.jpg/1280px-J._Edgar_Hoover_cph.3b10753.jpg> Director of the Bureau of Investigation. A jackass. "},
+    {searchString: "Clifford Walker", explanationText: "<img src= https://upload.wikimedia.org/wikipedia/commons/8/88/GovernorCliffWalker_%283x4%29.jpg> Former Governor of Georgia and Klan member. Murdered on October 2, 1936 in his home in Monroe by the black legion"},
+    {searchString: "a massacre of a local KKK chapter", explanationText: "On September 21, 1936, several armed Black Legion members opened fire ata local Klan meeting in Columbus, Georgia, killing 14 and critically wounding 31"},
+    {searchString: "Pope", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Pius_XII_with_tabard%2C_by_Michael_Pitcairn%2C_1951_%28retouched%29.jpg/330px-Pius_XII_with_tabard%2C_by_Michael_Pitcairn%2C_1951_%28retouched%29.jpg> Pontifex Maximus"},
+    {searchString: "Accelerationists", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Umberto_Boccioni_001.jpg/375px-Umberto_Boccioni_001.jpg> FASTER"},
+    {searchString: "Cannon", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/5/5f/JamesPCannon.jpg> James Cannon, General Secretary of the CPUSA"},
+    {searchString: "Flynn", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Paterson_strike_leaders.jpg/330px-Paterson_strike_leaders.jpg> Elizabeth Gurley Flynn, noted suffragette and Communist"},
+    {searchString: "Al Capone", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Al_Capone_in_1930.jpg/330px-Al_Capone_in_1930.jpg> Noted 'furniture salesman' in Chicago"},
+    {searchString: "February 14, 1929", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/en/thumb/6/65/SaintValentine%27sDayMassacre.jpg/330px-SaintValentine%27sDayMassacre.jpg> Not one's ideal Valentines Day"},
+    {searchString: "'Kerensky", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Alexander_Kerensky_LOC_hec_24462.jpg/800px-Alexander_Kerensky_LOC_hec_24462.jpg> President of remnants of the Russian Republic in ZheltoRossia"},
+    {searchString: "in Spain", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Soldrepteruel1937.jpg/1280px-Soldrepteruel1937.jpg> Here lies half of Spain. It died of the other half- Mariano Jose de Larra"},
+    {searchString: "in Japan.", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Japanese_Special_Naval_Landing_Forces_in_Battle_of_Shanghai_1937.jpg/1024px-Japanese_Special_Naval_Landing_Forces_in_Battle_of_Shanghai_1937.jpg> If the sovereign is easily provoked and fond of resorting to arms, and neglects agricultural and military training, but needlessly ventures into warfare, then ruin is possible- Han Fiezi"},
+    {searchString: "Lerroux", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Alejandro_Lerroux_Garc%C3%ADa.jpg/330px-Alejandro_Lerroux_Garc%C3%ADa.jpg> Alejandro Lerroux, Prime Minister of the Spanish Republic"},
+    {searchString: "Vice President Hoover", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/President_%26_Mrs_Hoover_in_Belvidere_IL_cph.3b12319.jpg/800px-President_%26_Mrs_Hoover_in_Belvidere_IL_cph.3b12319.jpg> Herbert Hoover, former VP and businessman known for his humanitarian work during the World War"},
+    {searchString: "Shah", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Reza_shah_uniform.jpg/330px-Reza_shah_uniform.jpg> Reza Shah Pahlavi, current monarch of Persia."},
+    {searchString: "Sinclair", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/9/90/Upton_Beall_Sinclair_Jr.jpg>  Upton Sinclair, current governor of California. Wrote a book or two back in the day"},
+    {searchString: "Polzi", explanationText: "<https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adolf_Hitler_1932_%28cropped%29.jpg/180px-Adolf_Hitler_1932_%28cropped%29.jpg> Upton Sinclair, current governor of California. Wrote a book or two back in the say"},
+    {searchString: "fast track", explanationText: "<https://preview.redd.it/1kban23ro4951.jpg?width=500&format=pjpg&auto=webp&s=d268647739126aec48b5d5ec6262ae0f279161d6> Upton Sinclair, current governor of California. Wrote a book or two back in the say"},
+
+
+  
+];
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 12,
+        "fields": {
+            "year": 1948,
+            "summary": "<p>The American nightmare drags on for another year. Long gone is the optimism and prosperity of the Roaring 20s. In its place is a decimated economy, widespread bank failures, agricultural disaster in the Great Plains, skyrocketing crime, an increasingly unstable international scene and a president seemingly content to sit back and watch his country burn. Amidst the chaos, the country faces a choice that will shape its future </p>\n\n<li> Governor Dan Moody of the American Party and Senator Bronson M. Cutting of the GOP pledge to pursue moderate governance and pull the US out of the depression\n\n</li><li> Father Cox of the Jobless Progressive Party and Howard Scott of Technocracy Inc. look to upend the two-party system entirely and reshape America from the ground up</li></ul>\n",
+            "image_url": "https://i.imgur.com/ovjYaEz.png",
+            "winning_electoral_vote_number": 266,
+            "advisor_url": "https://i.imgur.com/9M3c2Qg.png",
+            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">1948 Election Books and Links</h4>David McCullough - <a href=\"http://www.amazon.com/exec/obidos/ASIN/B000FC0VVQ/amhius20-20\" target=\"_blank\">Truman</a></br>Andrew E. Busch - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0700618678/amhius20-20\" target=\"_blank\">Truman's Triumphs: The 1948 Election and the Making of Postwar America</a></br>David Pietruza - <a href=\"http://www.amazon.com/exec/obidos/ASIN/140276748X/amhius20-20\" target=\"_blank\">1948: Harry Truman's Improbable Victory and the Year that Transformed America</a></br>Richard Norton Smith - <a href=\"http://www.amazon.com/exec/obidos/ASIN/067141741X/amhius20-20\" target=\"_blank\">Thomas E. Dewey and His Times</a></br><a href=\"https://www.youtube.com/watch?v=rJABgG4YDwM\" target=\"_blank\">The 1948 Democratic Convention (newsreel footage)</a></br><a href=\"https://www.youtube.com/watch?v=ogg9YsxGQm4\" target=\"_blank\">The 1948 Republican Convention (newsreel footage)</a></br><a href=\"https://www.youtube.com/watch?v=LW2ae0Fznwg\" target=\"_blank\">The 1948 Election Explained (video)</a>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/1960-no-majority-photo.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "1936 RF"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 116,
+        "fields": {
+            "first_name": "Dan ",
+            "last_name": "Moody",
+            "election": 12,
+            "party": "American",
+            "state": "Texas",
+            "priority": 1,
+            "description": "<p>Dan Moody is the dark horse nominee for the American party, a party formed from of the all but defunct Democratic Party and a revived People's Party, having rose to the top of the pile following a chaotic convention. He gained a national reputation a district attorney for prosecuting crooked politicians and the KKK. Moody quickly rose the ranks to become the youngest ever Governor of Texas in 1926, pursuing an agenda of reforming the state's prisons, roads and auditing. In order to oust the Republicans, Moody will have to battle Cutting for middle class voters, while making sure to keep his own coalition in line. </p>",
+            "color_hex": "#0101a2",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/XWv4SUG.png",
+            "electoral_victory_message": "<h3>11/4/36- MOODY WINS THE PRESIDENCY. AMERICAN PARTY OUSTS REPUBLICANS. </h3><p>The returns are in, and it can safely be projected that Governor Daniel Moody of the American Party has received a majority of electoral votes and is set to become the next President of the United States. The 43-year-old former governor of Texas is set to become the youngest president since Theodore Roosevelt, and the first of the American party since it's creation in 1930. Running mate Alben Barkley, a longtime Senator from Kentucky, is set to become the Vice President. </p>\n\n<p> In a speech in Austin before hundreds of raving supporters, Governor Moody promised a return to stability and prosperity, saying \" We stand at a new dawn in America\" </p>\n\n<p>Senator Bronson Cutting and Father James Renshaw Cox have both reportedly sent telegrams congratulating Governor Moody on his victory. The election was a clean sweep for the American party, winning a majority in both houses of congress. With a cooperative congress, it seems that making good on his campaign promises should be no challenge for the President-Elect</p>",
+            "electoral_loss_message": "<h3>8/12/1942- MOODY SUSPENDS HIS SENATE CAMPAIGN. </h3><p> AUSTIN- Daniel Moody has announced that he is no longer in the running for the American Party nomination for the upcoming Senate election in Texas. In a speech to reporters at his home in Austin, the former governor and presidential candidate stated \"The situation has developed not necessarily to our advantage. I do not wish to continue the campaign further.\" Moody was polling at around 12 percent of the vote in the primary elections, which are currently being contested by incumbent Senator and former governor \"Pappy\" O'Daniel and another former governor, James V. Allred. So far, Moody has yet to publicly endorse any candidate in this tightly contested race </p>\n\n<p> Moody captured public attention with his unsuccessful 1936 campaign for President on the American party ticket. Moody has remained a staunch critic of his former Republican opponent's policies, specifically President Cutting's policies, decrying his repeal of the 18th Amendment and criticizing many of the federal programs created by his administration. With Moody's attempted return to politics after about a decade in the private sector foiled, it seems his lofty political career has all but drawn to a close.</P>\n<p> The Republicans have held on to control of the Senate since 1936, but early polls are showing the American Party ahead in many key races, such as in Montana, Colorado, and New Jersey. The Progressive Pact is also looking to make gains in Michigan and Ohio. The slowly rebounding economy, Cutting's support for Britain and Germany in the Franco-German War and the response to the South American refugee crisis are ultimately what will determine whether or not the GOP will retain the Senate. </p>\n\n",
+            "no_electoral_majority_message": "<h3> 11/4/36- DEADLOCK! NO CANDIDATE HAS WON A MAJORITY IN THE ELECTORAL COLLEGE!.</h3><p> For the first time in over a hundred years, no candidate has won a majority of the electoral vote, and therefore the election will be decided by the Congress  this January. Many credit the rise of the Jobless Progressive Party and the Technocracy movement for splitting the electoral vote and preventing any candidate from winning the necessary 266 electoral votes to win the presidency. The last time the election was decided by congress was in the election of 1824, in which the House elected John Quincy Adams, despite Andrew Jackson winning the most electoral votes. Many have expressed their concerns at a similar occurrence in this year's contingent election, as strong performances down ballot for the JPP has led to a deadlocked senate and a house majority for the American party of only one seat. \"It looks like another corrupt bargain is in the cards\" Representative Samuel Rayburn of Texas told the Times. </p>\n\n",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 117,
+        "fields": {
+            "first_name": "Bronson",
+            "last_name": "Cutting",
+            "election": 12,
+            "party": "Republican",
+            "state": "New Mexico",
+            "priority": 2,
+            "description": "<p> A few months before the RNC, President Andrew Mellon announced his intention not to seek a second term, citing his ailing health. Of course, everyone knows the real reason. Through his lack of any action and blind dedication to the same <i>laissez fare </i> principles of the 20s in the midst of an economic meltdown, he has earned the coveted title of the most loathed man in America.\n\Bronson Murray Cutting is the man tasked with righting the ship. The Senator from New Mexico is a leading progressive Republican, one who has championed the causes of free speech, civil rights and economic reform. He has been a leading critic of Mellon for years and looks to bring the GOP in an new direction. Overcoming the current administration's unpopularity might be easier said than done, however.</p>\n\n",
+            "color_hex": "#d0ae01",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/FifgQwG.png",
+            "electoral_victory_message": "<h3>3/4/37 - MELLON NOWHERE TO BE FOUND AT PRESIDENTIAL INAUGURATION.</h3><p>Perhaps the most notable absence at today's inauguration ceremony was the outgoing President, Andrew Mellon. Not since President Andrew Johnson refused to attend Ulysses Grant's inauguration has a president declined to be present at the swearing in of his successor. Mellon did not announce he would not be attending the inauguration ceremony at any point, and his sudden absence has been the cause of much speculation. Many Washington insiders are claiming Mellon's absence is a result of his bitterness towards  now-President Cutting, with whom he has had a cold relationship for years, and who usurped him for last years GOP nomination before going on to win an unlikely victory in the Presidential election. A spokesperson for the  former President has told the Times these rumors are false, and that President Mellon did not attend for health concerns.</p>",
+            "electoral_loss_message": "<h3>6/3/38 - CUTTING SLAMS AIR COMMERCE BUREAU IN COMMITTEE REPORT</h3><p>The Congressional Committee to investigate the crash of Transcontinental and Western Airlines flight 13 has released a report chastising the  Bureau of Air Commerce for 'inadequate safety standards.' The Crash of TWA Flight 13 in Newark killed 12 people, including Senators Royal Copeland and Harry S. Truman. In his report, Committee Chair Bronson M. Cutting of New Mexico claimed that Bureau mismanagement resulted in the crash. For their part, has dismissed the claims as spurious, and insists that the bureau's management was up to proper protocol and environmental conditions and errors in judgement from both airport  and pilot are at fault. Senator Cutting also implored President Moody to increase oversight of air travel in the wake of this disaster. Between this investigation and the prominent role he played in the Ford Hearings, Senator Cutting has certainly boosted his national profile, which many suspect could be in preparation for another campaign for president in 1940.</p>",
+            "no_electoral_majority_message": "<h3>2/5/37 - WILKIE BECOMES CARETAKER PRESIDENT AS CONTINGENT ELECTION LOOMS.</h3><p>Yesterday, President Andrew Mellon stepped down, becoming the first President in American history to leave office before the Mellon announced his decision on Monday, in a nationally broadcast speech, citing his ailing health. In his speech, the president revealed he had been  diagnosed with cancer last November, a fact the White House has largely remained quiet about, and stated “To tell the truth, I can no longer perform the duties of my office to the best of my ability, and therefore it is in the best interest of our country that vacate the office for someone who will”. America’s oldest President leaves office highly unpopular, amid economic crises and growing unrest, as well as a public perception of being apathetic. Vice President Wendell Willkie was sworn in at noon, becoming the 32nd president of the United States. His term will likely not be long, as he is set to be replaced in March by the winner of the contingent election, which at the moment seems to be a toss up between Governor Moody and Senator Cutting.</p>",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 118,
+        "fields": {
+            "first_name": "James Renshaw",
+            "last_name": "Cox",
+            "election": 12,
+            "party": "JPP",
+            "state": "Pennsylvania",
+            "priority": 3,
+            "description": "'Father James Renshaw Cox is a Catholic priest from Pittsburgh. A man from working class origins, Cox worked as steelworker, a newsie and a cab driver before being ordained to the priesthood in 1911. Cox has made it his mission to help the poor. His charitable efforts and his radio sermons preaching the biblical virtues of charity has made him a beloved figure in Western Pennsylvania. In 1932, fed up with the government's indifference in the face of the depression, Cox lead a march 20,000 strong to Washington to demand the government take action. While his pleas to the White House were met with indifference, he certainly turned heads, and when he announced his candidacy on the Jobless Party Ticket,  voters rallied behind him. Now, he stands as the Candidate for the Jobless Progressive Party, a shaky leftist coalition of progressives, unionists, socialists and communists. While he may be unlikely to win, his backing amongst the working class voters has terrified big business and raised red flags in both parties. Keeping his coalition together will be crucial for Cox to have any chance at victory. <b>Not Playable yet</p>",
+            "color_hex": "#ff388e",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/p8XDVCU.png",
+            "electoral_victory_message": "' LAGUARDIA O",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 119,
+        "fields": {
+            "first_name": "Howard",
+            "last_name": "Scott",
+            "election": 12,
+            "party": "Technocracy Inc",
+            "state": "New York",
+            "priority": 4,
+            "description": "To some, Howard Scott is a Revolutionary. To others, he is a lunatic. But nobody will deny he is quite unusual for a Presidential candidate. As a blue-collar engineer in New York, he would join forces with the IWW as head of their Bureau of Industrial Research, before eventually founding Technocracy Inc in 1932. Scott dreams of a world where monetary value is replaced with energy value, where scientists and engineers rule instead of elected politicians, and where everything is perfectly socially engineered. This dream so far has been just that, as his 1932 campaign for president was a dead on arrival.  From the disaster that were his campaign speeches to being ridiculed from across the political spectrum for his zany ideas, it seemed the like Technocracy was done and over with. However, with the economy in shambles and discontent reaching a boiling point, there has never been a better time to convince people to abandon such sacrosanct things like democracy and capitalism.  <b>Not Playable yet</p>",
+            "color_hex": "#aba0a0",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 1,
+            "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7f/Howard_Scott_at_a_Technocracy_Section_house.jpg/330px-Howard_Scott_at_a_Technocracy_Section_house.jpg",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 120,
+        "fields": {
+            "first_name": "Alben",
+            "last_name": "Barkley",
+            "election": 12,
+            "party": "American",
+            "state": "Kentucky",
+            "priority": 5,
+            "description": "'",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/vDoLIi8.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>Alben William Barkley is a senator from Kentucky. A man from humble beginnings on a Kentucky tobacco farm, Barkley has long been an advocate for reform. In his two decades in both the House and Senate, he has supported ending child labor, rooting out corruption, banning  parimutuel betting, and the passage of the 18th Amendment although he has since changed his mind on the last one. Barkley adds an experience presence to the ticket and can appeal to more reform-minded voters. His changing stances on prohibition might be a weak spot. ",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 121,
+        "fields": {
+            "first_name": "Alfred",
+            "last_name": "Landon",
+            "election": 12,
+            "party": "Republican",
+            "state": "Kansas",
+            "priority": 6,
+            "description": "'",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/Vo80iaq.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>Alf Landon is the current governor of Kansas. After striking it rich in the oil industry and becoming a millionaire, Landon would become a leading Liberal Republican, eventually winning the governorship in 1932. Landon considers himself a progressive in the tradition of Roosevelt and LaFollette, he has gained a reputation not only for his fiscally conservative polices, but for outflanking many of his only party on social issues. Choosing Landon can help emphasize a new direction for the GOP in the wake of the Depression, and his experience leading a state battered by the Dust Bowl couldn't hurt. However, he is not the best campaigner, and it may prove difficult to win back the more conservative wing with his selection. </p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 125,
+        "fields": {
+            "first_name": "Fiorello",
+            "last_name": "La Guardia ",
+            "election": 12,
+            "party": "JPP",
+            "state": "New York",
+            "priority": 10,
+            "description": "'",
+            "color_hex": "#ff0095",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/TJws9OO.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "Fiorello La Guardia is the Mayor of New York. The son of Italian immigrants, La Guardia has been one of the leading progressive politicians in New York since he was a member of the House of Representatives. He has long championed labor rights, regulation of businesses, and the repeal of prohibition. After becoming Mayor in 1934, La Guardia went on a crusade to lift The City out of the depression and take down mafia bosses like 'Lucky' Luciano. La Guardia is widely known and well liked and is a moderate as far as JPP members go. He also can appeal to urban and minority voters quite well.  ",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 126,
+        "fields": {
+            "first_name": "M. King",
+            "last_name": "Hubbard",
+            "election": 12,
+            "party": "Technocracy Inc.",
+            "state": "Texas",
+            "priority": 11,
+            "description": "'",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/es2MRAK.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "Marion King Hubbard is a well-respected geologist from Texas. He has gained significant acclaim for his numerous contributions to geophysics, particularly in in regard to oil and natural gases. He also is a tireless advocate for the technocrat cause, having co-founded Technocracy Inc alongside Howard Scott. Hubbard provides Scott with a known commodity: a fellow intellectual who is loyal to the party, which is helpful following his falling out with Walter Rautenstrauch in the wake of the 1932 campaign. However, he does little to appeal to voters besides the scientists and academics who already make up TI's base. \n ",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50003,
+        "fields": {
+            "first_name": "Norman",
+            "last_name": "Thomas",
+            "election": 12,
+            "party": "JPP/ Socialist",
+            "state": "New York",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#e04300",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/v1ZBma3.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p> Norman Thomas is a Presbyterian minister, activist, and Socialist figurehead. A leading proponent of the social gospel movement, his opposition to US involvement in the first world war led him to join the Socialist Party. Since than he has run for numerous public offices- State Senate, Mayor, Governor and in 1928, for President as the Socialist candidate. Choosing Thomas would help keep the SPA loyal. However, some of the more radical factions have a bone to pick with him.  ",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50004,
+        "fields": {
+            "first_name": "Elizabeth Gurley",
+            "last_name": "Flynn",
+            "election": 12,
+            "party": "JPP/CPUSA",
+            "state": "Oregon",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/TTumJNK.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "Elizabeth Gurley Flynn is a feminist, labor activist and communist. She joined the IWW at the age of 17, organizing labor action and often clashing with police, until she was expelled in 1916. Flynn is a co-founder of the American Civil Liberties Union and has long been outspoken in her support for Women's suffrage, birth control advocacy, and other feminist causes. Flynn would be a historic pick for VP, and her experience organizing unions would certainly help with motivating the base. However, she is seen by the wider American public as a radical, and it's going to take a hell of an effort to overcome the constant attacks hurled toward her. ",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 13554,
+        "fields": {
+            "first_name": "Carter",
+            "last_name": "Glass",
+            "election": 12,
+            "party": "Independent",
+            "state": "Virginia",
+            "priority": 1,
+            "description": "<p>Virginia Senator and Independent candidate for President, running on a platform of state's rights, pro-segregation and and fiscal conservatism</p>",
+            "color_hex": "#008060",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://itsastronomical.com/assets/1920/glass.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50006,
+        "fields": {
+            "first_name": "Josiah",
+            "last_name": "Bailey",
+            "election": 12,
+            "party": "Independent",
+            "state": "North Carolina",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/93/Josiah_W._Bailey.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50000,
+        "fields": {
+            "first_name": "Henry",
+            "last_name": "Ford",
+            "election": 12,
+            "party": "Independent",
+            "state": "Michigan",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/KTVvSMb.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "Henry Ford is a business magnate and the founder of the Ford Motor company. He has shown an interest in politics in the past, being a proponent of \"Welfare Capitalism\" as well as a vehement opponent of American entry into the Great War. Ford even ran for a Senate seat in 1918, falling short by only 7,000 votes. Ford's views do not align with Scott's by any stretch of the imagination, but the two share a background and a fascination with industrial efficiency. Recruiting him will mean having to compromise parts of the platform, however he can provide a massive boost simply off of name recognition. That is, as long as his controversial writings in <i> The Dearborn Independent</i> about certain ethnicities don't come back to bite him. ",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 76,
+        "fields": {
+            "candidate": 116,
+            "running_mate": 120
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 81,
+        "fields": {
+            "candidate": 118,
+            "running_mate": 125
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 82,
+        "fields": {
+            "candidate": 119,
+            "running_mate": 126
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 77,
+        "fields": {
+            "candidate": 117,
+            "running_mate": 121
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 174094,
+        "fields": {
+            "candidate": 118,
+            "running_mate": 50004
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 100633,
+        "fields": {
+            "candidate": 118,
+            "running_mate": 50003
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 156120,
+        "fields": {
+            "candidate": 13554,
+            "running_mate": 50006
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 86161,
+        "fields": {
+            "candidate": 119,
+            "running_mate": 50000
+        }
+    }
+]
+
+campaignTrail_temp.credits = "Apad1333. Banner by metheguyTNCT. Based off the Hearts of Iron 4 Mod of the same name"
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 12,
+        "candidates": [
+            116,
+            117,
+            118,
+            119,
+            13554
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 12,
+        "candidates": [
+            116,
+            117,
+            118,
+            119,
+            13554
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 12,
+        "year": 1948,
+        "is_premium": 0,
+        "display_year": "1936 RF"
+    }
+]
+
+jet_data = {
+    "headerColor": "#b18d0b",
+    "windowColor": "#7b6b6b",
+    "containerColor": "#000000",
+    "innerWindowColor": "#feea90",
+    "bannerImageUrl": "https://i.imgur.com/ZZ9eaVp.jpeg",
+    "backgroundImageUrl": "https://preview.redd.it/an-american-teaser-for-a-late-fourth-of-july-v0-wzldf42zzmad1.png?width=1080&crop=smart&auto=webp&s=1980ed158a8260dc6c753263fc8038e4720eda65",
+    "endingTextColor": "#000000",
+    "customQuote": "This is the goddamn Fall of Rome",
+    "gameTitle": "THE RED FLOOD TRAIL"
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>THE RED FLOOD TRAIL</h2><font id="wittyquote" size="4" color="white"><em>This is the goddamn Fall of Rome</em></font>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#b18d0b";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#7b6b6b";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#000000";
+
+document.getElementById("header").src = "https://i.imgur.com/ZZ9eaVp.jpeg";
+
+document.body.background = "https://preview.redd.it/an-american-teaser-for-a-late-fourth-of-july-v0-wzldf42zzmad1.png?width=1080&crop=smart&auto=webp&s=1980ed158a8260dc6c753263fc8038e4720eda65";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#feea90!important;}</style>";
+
+//#endcode

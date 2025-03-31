@@ -16,6 +16,10 @@
     margin: 10px 0;
 }
 
+.tablinks {
+  font-size: 10px;
+}
+
 .mod-image {
     width:80%;
     border: 4px solid white;
@@ -137,6 +141,11 @@
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
 }
 
 /* Style the buttons that are used to open the tab content */
