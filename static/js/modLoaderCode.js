@@ -224,7 +224,7 @@ $(document).ready(async function () {
 
   // Set up from normal mods
   mods.forEach(async function (mod) {
-    if (mod.value == "other") {
+    if (mod.value == "other" || (modNameParam != null && modNameParam != mod.value)) {
       return;
     }
 
