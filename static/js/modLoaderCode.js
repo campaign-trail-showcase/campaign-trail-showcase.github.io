@@ -224,7 +224,7 @@ $(document).ready(async function () {
 
   // Set up from normal mods
   mods.forEach(async function (mod) {
-    if (mod.value == "other") {
+    if (mod.value == "other" || (modNameParam != null && modNameParam != mod.value)) {
       return;
     }
 
@@ -436,7 +436,7 @@ async function getFavsAndPlayCount(modName, modView) {
 
   try {
     const res = await fetch(
-      "https://cts-backend-w8is.onrender.com/api/get_mod?modName=" + modName,
+      "https://intense-lake-78568-f86393a88bcb.herokuapp.com/api/get_mod?modName=" + modName,
       {
         method: "GET",
         headers: {
@@ -464,7 +464,7 @@ async function getFavsAndPlayCount(modName, modView) {
 async function toggleFav(event, modName, favVal) {
   if (customMods.has(modName)) return;
 
-  await fetch("https://cts-backend-w8is.onrender.com/api/rate_mod", {
+  await fetch("https://intense-lake-78568-f86393a88bcb.herokuapp.com/api/rate_mod", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -705,7 +705,7 @@ async function copyModLink() {
 async function updateModViewCount(modName) {
   if (customMods.has(modName)) return;
 
-  await fetch("https://cts-backend-w8is.onrender.com/api/play_mod", {
+  await fetch("https://intense-lake-78568-f86393a88bcb.herokuapp.com/api/play_mod", {
     method: "POST",
     headers: {
       Accept: "application/json",
