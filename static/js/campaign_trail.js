@@ -1511,9 +1511,9 @@ function divideElectoralVotesProp(e, t) {
             e.candidate_json[t].fields.first_name +
             " " +
             e.candidate_json[t].fields.last_name +
-            "</li>        <li>Party: " +
+            "</li>        <li>" + e.PartyText + " " +
             e.candidate_json[t].fields.party +
-            "</li>        <li>Home State: " +
+            "</li>        <li>" + e.HomeStateText + " " +
             e.candidate_json[t].fields.state +
             "</li>        </ul>" +
             e.candidate_json[t].fields.description_as_running_mate +
