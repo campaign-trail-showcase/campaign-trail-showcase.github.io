@@ -27,16 +27,6 @@ campaignTrail_temp.global_parameter_json = [
     }
 ]
 
-campaignTrail_temp.modBoxTheme = {
-     "header_color": "#7a99c9",
-     "header_text_color": "#ffffff",
-     "description_text_color": "#000000",
-     "description_background_color": "#ffffff",
-     "main_color": "#ccc9c1",
-     "secondary_color": "#bbbbbc",
-     "ui_text_color": "#000000"
-}
-
 e.SelectText = ""
 e.CandidText = "Select your Presidential nominee:"
 e.VpText = "Select your Vice Presidential nominee:"
@@ -100,7 +90,7 @@ campaignTrail_temp.election_json = [
             "has_visits": 1,
             "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
             "creator": "Dan Bryan",
-            "display_year": "2000"
+            "display_year": "2000_BM"
         }
     }
 ]
@@ -595,7 +585,7 @@ campaignTrail_temp.temp_election_list = [
         "id": 9,
         "year": 2000,
         "is_premium": 0,
-        "display_year": "2000"
+        "display_year": "2000_BM"
     }
 ]
 
@@ -691,7 +681,7 @@ function newMusicPlayer() {
 
   // Customize music player position
   document.getElementById("musicPlayer").style.top = "911px"; // Set vertical position
-  document.getElementById("musicPlayer").style.left = "0px"; // Set horizontal position
+  document.getElementById("musicPlayer").style.left = "255px"; // Set horizontal position
   document.getElementById("musicPlayer").style.paddingTop = "60px"; // Add extra padding to give space for the header
 
   let soundtracks = {
@@ -936,6 +926,8 @@ document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_st
 $("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
 
 $(".container")[0].style.backgroundColor = "#e9e7e3";
+$(".container")[0].style.minHeight = "1290px";  // Extend height of the container, adjust this value as needed
+
 
 document.getElementById("header").src = "https://i.imgur.com/tMv8RZ0.gif";
 
@@ -1705,4 +1697,3 @@ tooltipList = [
 
         
 ];
-
