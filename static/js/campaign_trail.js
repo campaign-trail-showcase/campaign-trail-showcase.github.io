@@ -43,6 +43,19 @@ e.ElectionPopup = "Election night has arrived. Settle in and wait for the return
 e.WinPopup = "Congratulations! You won this year's election! Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice victory speech prepared for your supporters."
 e.LosePopup = "Sorry. You have lost the election this time. Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice concession speech prepared."
 
+function substitutePlaceholders(str) {
+  if (!str || typeof str !== "string") return str;
+  return str.replace(/\{\{(.*?)\}\}/g, (_, varName) => {
+    try {
+      return (window[varName] !== undefined) ? window[varName] : `{{${varName}}}`;
+    } catch {
+      return `{{${varName}}}`;
+    }
+  });
+}
+
+
+
 let DEBUG = false;
 
 campaignTrail_temp.issue_font_size = null;
@@ -1159,7 +1172,7 @@ function divideElectoralVotesProp(e, t) {
                 '"/>\t\t    <label for="game_answers[' +
                 a.toString() +
                 ']">' +
-                e.answers_json[i[a].key].fields.description +
+                substitutePlaceholders(e.answers_json[i[a].key].fields.description) +
                 "</label><br>";
         var l =
             '<img id="candidate_pic" src="' +
@@ -1184,7 +1197,7 @@ function divideElectoralVotesProp(e, t) {
                 : "";
         let z = `
         <div class="inner_inner_window">
-            <h3>${e.questions_json[e.question_number].fields.description}</h3>
+            <h3>${substitutePlaceholders(e.questions_json[e.question_number].fields.description)}</h3>
             <div id="question_form">
                 <form name="question">${s}</form>
             </div>
@@ -1870,12 +1883,12 @@ function divideElectoralVotesProp(e, t) {
                                                 '"/>\t\t    <label for="game_answers[' +
                                                 a.toString() +
                                                 ']">' +
-                                                i.answers_json[s[a].key].fields.description +
+                                                substitutePlaceholders(i.answers_json[s[a].key].fields.description) +
                                                 "</label><br>";
                                         }
                                         var r =
                                             '<div class="game_header">    <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>' +
-                                            i.questions_json[i.question_number].fields.description +
+                                            substitutePlaceholders(i.questions_json[i.question_number].fields.description) +
                                             '</h3>            <div id="question_form">                <form name="question">' +
                                             t +
                                             '</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="' +
@@ -1926,7 +1939,7 @@ function divideElectoralVotesProp(e, t) {
                                     }
                                     var r =
                                         '<div class="game_header">    <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>' +
-                                        i.questions_json[i.question_number].fields.description +
+                                        substitutePlaceholders(i.questions_json[i.question_number].fields.description) +
                                         '</h3>            <div id="question_form">                <form name="question">' +
                                         t +
                                         '</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="' +
@@ -2049,12 +2062,12 @@ function divideElectoralVotesProp(e, t) {
                                     '"/>\t\t    <label for="game_answers[' +
                                     a.toString() +
                                     ']">' +
-                                    i.answers_json[s[a].key].fields.description +
+                                    substitutePlaceholders(i.answers_json[s[a].key].fields.description) +
                                     "</label><br>";
                             }
                             var r =
                                 '<div class="game_header">    <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>' +
-                                i.questions_json[i.question_number].fields.description +
+                                substitutePlaceholders(i.questions_json[i.question_number].fields.description) +
                                 '</h3>            <div id="question_form">                <form name="question">' +
                                 t +
                                 '</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="' +
@@ -2274,7 +2287,7 @@ function divideElectoralVotesProp(e, t) {
                     '                    <div class="overlay" id="visit_overlay"></div>                    <div class="overlay_window" id="visit_window">                        <div class="overlay_window_content" id="visit_content">                        <h3>Advisor Feedback</h3>                        <img src="' +
                     e.election_json[a].fields.advisor_url +
                     '" width="208" height="128"/>                        <p>' +
-                    e.answer_feedback_json[s].fields.answer_feedback +
+                    substitutePlaceholders(e.answer_feedback_json[s].fields.answer_feedback) +
                     '</p>                        </div>                        <div class="overlay_buttons" id="visit_buttons">                        <button id="ok_button">OK</button><br><button id="no_feedback_button">Don\'t give me advice</button>                                                </div>                    </div>';
                 $("#game_window").append(n);
                 $("#ok_button").click(function () {
