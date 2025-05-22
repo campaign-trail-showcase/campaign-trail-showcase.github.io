@@ -43,18 +43,19 @@ e.ElectionPopup = "Election night has arrived. Settle in and wait for the return
 e.WinPopup = "Congratulations! You won this year's election! Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice victory speech prepared for your supporters."
 e.LosePopup = "Sorry. You have lost the election this time. Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice concession speech prepared."
 
+e.finalPercentDigits = 1; // for PV % in final results
+e.statePercentDigits = 2;
+
 function substitutePlaceholders(str) {
-  if (!str || typeof str !== "string") return str;
-  return str.replace(/\{\{(.*?)\}\}/g, (_, varName) => {
-    try {
-      return (window[varName] !== undefined) ? window[varName] : `{{${varName}}}`;
-    } catch {
-      return `{{${varName}}}`;
-    }
-  });
+    if (!str || typeof str !== "string") return str;
+    return str.replace(/\{\{(.*?)\}\}/g, (_, varName) => {
+        try {
+            return (window[varName] !== undefined) ? window[varName] : `{{${varName}}}`;
+        } catch {
+            return `{{${varName}}}`;
+        }
+    });
 }
-
-
 
 let DEBUG = false;
 
@@ -157,10 +158,10 @@ function histFunction() {
             case 21: // 2020
                 HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
                 HistName = [
-                    "Joe Biden",
-                    "Donald Trump",
-                    "Jo Jorgensen",
-                    "Howie Hawkins",
+                    " Joe Biden",
+                    " Donald Trump",
+                    " Jo Jorgensen",
+                    " Howie Hawkins",
                 ];
                 HistEV = [306, 232, 0, 0];
                 HistPV = ["81,268,924", "74,216,154", "1,865,724", "405,035"];
@@ -169,10 +170,10 @@ function histFunction() {
             case 20: // 2016
                 HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
                 HistName = [
-                    "Donald Trump",
-                    "Hillary Clinton",
-                    "Gary Johnson",
-                    "Jill Stein",
+                    " Donald Trump",
+                    " Hillary Clinton",
+                    " Gary Johnson",
+                    " Jill Stein",
                 ];
                 HistEV = [306, 232, 0, 0];
                 HistPV = ["62,984,828", "65,853,514", "4,489,341", "405,035"];
@@ -181,10 +182,10 @@ function histFunction() {
             case 16: // 2016a
                 HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
                 HistName = [
-                    "Donald Trump",
-                    "Hillary Clinton",
-                    "Gary Johnson",
-                    "Jill Stein",
+                    " Donald Trump",
+                    " Hillary Clinton",
+                    " Gary Johnson",
+                    " Jill Stein",
                 ];
                 HistEV = [306, 232, 0, 0];
                 HistPV = ["62,984,828", "65,853,514", "4,489,341", "405,035"];
@@ -193,18 +194,18 @@ function histFunction() {
             case 3: // 2012
                 HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
                 HistName = [
-                    "Barack Obama",
-                    "Mitt Romney",
-                    "Gary Johnson",
-                    "Jill Stein",
+                    " Barack Obama",
+                    " Mitt Romney",
+                    " Gary Johnson",
+                    " Jill Stein",
                 ];
                 HistEV = [332, 206, 0, 0];
                 HistPV = ["65,915,795", "60,933,504", "1,275,971", "469,627"];
                 HistPVP = ["51.1%", "47.2%", "1.0%", "0.4%"];
                 break;
             case 9: // 2000
-                HistHexcolour = ["#FF0000", "#0000FF", "#00C100", "#800080"];
-                HistName = ["George W. Bush", "Al Gore", "Ralph Nader", "Pat Buchanan"];
+                HistHexcolour = ["#FF0000", "#0000FF", "#00C100", "#FFFF00"];
+                HistName = [" George W. Bush", " Al Gore", " Ralph Nader", " Pat Buchanan"];
                 HistEV = [271, 267, 0, 0];
                 HistPV = ["50,456,002", "50,999,897", "2,882,955", "448,895"];
                 HistPVP = ["47.9%", "48.4%", "2.7%", "0.4%"];
@@ -212,22 +213,22 @@ function histFunction() {
             case 15: // 1988
                 HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
                 HistName = [
-                    "George Bush",
-                    "Michael Dukakis",
-                    "Ron Paul",
-                    "Lenora Fulani",
+                    " George Bush",
+                    " Michael Dukakis",
+                    " Ron Paul",
+                    " Lenora Fulani",
                 ];
                 HistEV = [426, 112, 0, 0];
                 HistPV = ["48,886,597", "41,809,476", "431,750", "217,221"];
                 HistPVP = ["53.4%", "45.7%", "0.5%", "0.2%"];
                 break;
             case 10: // 1976
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFFFF", "#FFFF00"];
+                HistHexcolour = ["#0000FF", "#FF0000", "#00C100", "#FFFF00"];
                 HistName = [
-                    "Jimmy Carter",
-                    "Gerald Ford",
-                    "Eugene McCarthy",
-                    "Roger MacBride",
+                    " Jimmy Carter",
+                    " Gerald Ford",
+                    " Eugene McCarthy",
+                    " Roger MacBride",
                 ];
                 HistEV = [297, 241, 0, 0];
                 HistPV = ["40,831,881", "39,148,634", "744,763", "172,557"];
@@ -236,22 +237,22 @@ function histFunction() {
             case 4: // 1968
                 HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FFFFFF"];
                 HistName = [
-                    "Richard Nixon",
-                    "Hubert Humphrey",
-                    "George Wallace",
-                    "Other",
+                    " Richard Nixon",
+                    " Hubert Humphrey",
+                    " George Wallace",
+                    " Other",
                 ];
                 HistEV = [302, 191, 45, 0];
                 HistPV = ["31,783,783", "31,271,839", "9,901,118", "243,259"];
                 HistPVP = ["43.4%", "42.7%", "13.5%", "0.3%"];
                 break;
             case 69: // 1964
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#DB261D"];
+                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
                 HistName = [
-                    "Lyndon B. Johnson",
-                    "Barry Goldwater",
-                    "Unpledged electors",
-                    "Eric Hass",
+                    " Lyndon B. Johnson",
+                    " Barry Goldwater",
+                    " Unpledged electors",
+                    " Eric Hass",
                 ];
                 HistEV = [486, 52, 0, 0];
                 HistPV = ["43,129,040", "27,175,754", "210,732", "45,189"];
@@ -260,46 +261,46 @@ function histFunction() {
             case 11: // 1960
                 HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#FFFFFF"];
                 HistName = [
-                    "John Kennedy",
-                    "Richard Nixon",
-                    "Harry Byrd",
-                    "Unpledged elector",
+                    " John Kennedy",
+                    " Richard Nixon",
+                    " Harry Byrd",
+                    " Unpledged",
                 ];
                 HistEV = [303, 219, 15, 0];
-                HistPV = ["34,220,984", "34,108,157", "Unknown", "286,359"];
-                HistPVP = ["49.7%", "49.5%", "Unknown", "0.4%"];
+                HistPV = ["34,220,984", "34,108,157", "0", "286,359"];
+                HistPVP = ["49.7%", "49.5%", "0", "0.4%"];
                 break;
             case 12: // 1948
                 HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
                 HistName = [
-                    "Harry Truman",
-                    "Thomas Dewey",
-                    "Strom Thurmond",
-                    "Henry Wallace",
+                    " Harry Truman",
+                    " Thomas Dewey",
+                    " Strom Thurmond",
+                    " Henry Wallace",
                 ];
                 HistEV = [303, 189, 39, 0];
                 HistPV = ["24,179,347", "21,991,292", "1,175,930", "1,157,328"];
                 HistPVP = ["49.6%", "45.1%", "2.4%", "2.4%"];
                 break;
             case 14: // 1916
-                HistHexcolour = ["#0000FF", "#FF0000", "#DB261D", "#FFC0CB"];
+                HistHexcolour = ["#0000FF", "#FF0000", "#00C100", "#FFFF00"];
                 HistName = [
-                    "Woodrow Wilson",
-                    "Charles Evans Hughes",
-                    "Allan Benson",
-                    "James Hanly",
+                    " Woodrow Wilson",
+                    " Charles Evans Hughes",
+                    " Allan Benson",
+                    " James Hanly",
                 ];
                 HistEV = [277, 254, 0, 0];
                 HistPV = ["9,126,868", "8,548,728", "590,524", "221,302"];
                 HistPVP = ["49.2%", "46.1%", "3.2%", "1.2%"];
                 break;
             case 5: // 1896
-                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FFC0CB"];
+                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FF00FF"];
                 HistName = [
-                    "William McKinley",
-                    "William Jennings Bryan",
-                    "John Palmer",
-                    "Joshua Levering",
+                    " William McKinley",
+                    " William Jennings Bryan",
+                    " John Palmer",
+                    " Joshua Levering",
                 ];
                 HistEV = [271, 176, 0, 0];
                 HistPV = ["7,111,607", "6,509,052", "134,645", "131,312"];
@@ -308,21 +309,25 @@ function histFunction() {
             case 8: // 1860
                 HistHexcolour = ["#FF0000", "#FFFF00", "#00C100", "#0000FF"];
                 HistName = [
-                    "Abraham Lincoln",
-                    "John C. Breckinridge",
-                    "John Bell",
-                    "Stephen Douglas",
+                    " Abraham Lincoln",
+                    " John C. Breckinridge",
+                    " John Bell",
+                    " Stephen Douglas",
                 ];
                 HistEV = [180, 72, 39, 12];
                 HistPV = ["1,865,908", "848,019", "590,901", "1,380,202"];
                 HistPVP = ["39.8%", "18.1%", "12.6%", "29.5%"];
                 break;
             case 13: // 1844
-                HistHexcolour = ["#0000FF", "#F0C862", "#FFFF00", "#FFFFFF"];
-                HistName = ["James K. Polk", "Henry Clay", "James Birney", "N/A"];
-                HistEV = [170, 105, 0, 0];
-                HistPV = ["1,339,494", "1,300,004", "62,103", "N/A"];
-                HistPVP = ["49.5%", "48.1%", "2.3%", "N/A"];
+                HistHexcolour = ["#0000FF", "#F0C862", "#FFFF00"];
+                HistName = [
+                    " James K. Polk",
+                    " Henry Clay",
+                    " James Birney"
+                ];
+                HistEV = [170, 105, 0];
+                HistPV = ["1,339,494", "1,300,004", "62,103"];
+                HistPVP = ["49.5%", "48.1%", "2.3%"];
                 break;
         }
     }
@@ -692,7 +697,7 @@ function divideElectoralVotesProp(e, t) {
         `;
 
         let z = `
-        
+
         <div class="inner_window_front" id="shining_menu_header" style="height: 50px; background-color:#2d2d2d">
             <h1 style='position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; text-align: center; font-size: 3em; line-height: normal; font-style: italic; color: white; margin: 0;font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;'>
                 State of the Campaign
@@ -772,17 +777,17 @@ function divideElectoralVotesProp(e, t) {
                     flex-direction: column;
                     align-items: center;
                 }
-                
+
                 .time_slider {
                     display: flex;
                     align-items: center;
                     margin-bottom: 8px;
                 }
-                
+
                 .time_slider label {
                     margin-right: 10px;
                     width: 180px; /* Adjust this width as needed */
-                }            
+                }
             </style>
             `;
         for (i in game_winArr) {
@@ -1664,21 +1669,21 @@ function divideElectoralVotesProp(e, t) {
         if (e.shining) {
             shining = `<option value=3 style="">Sea to Shining Sea</option>`;
         }
-        let d = `        
-        <div class="game_header">        ${corrr}        </div>        
-        <div class="inner_window_w_desc" id="inner_window_4">            
-        <div id="game_options">            
-        <form name="game_type_selection">            
-        <p><h3>Select your game mode.</h3>            
-        <select name="game_type_id" id="game_type_id">                
-        <option value=1>Default (Winner-Take-All)</option>                
+        let d = `
+        <div class="game_header">        ${corrr}        </div>
+        <div class="inner_window_w_desc" id="inner_window_4">
+        <div id="game_options">
+        <form name="game_type_selection">
+        <p><h3>Select your game mode.</h3>
+        <select name="game_type_id" id="game_type_id">
+        <option value=1>Default (Winner-Take-All)</option>
         <option value=2>Proportional</option>
         ${shining}
-        </select>            
-        </p>            
-        </form>            </div>            
-        <div class="description_window_small"                 id="opponent_selection_description_window">            </div>            
-        <div id="difficulty_level">            <form name="difficulty_level_selection">            <p><h3>Please choose your difficulty level:</h3>            
+        </select>
+        </p>
+        </form>            </div>
+        <div class="description_window_small"                 id="opponent_selection_description_window">            </div>
+        <div id="difficulty_level">            <form name="difficulty_level_selection">            <p><h3>Please choose your difficulty level:</h3>
         <select name="difficulty_level_id" id="difficulty_level_id"> ${difficultyStr} </select>            </p>            </form>            </div>        <p id="opponent_selection_id_button_p"><button class="person_button" id="opponent_selection_id_back">Back</button> <button class="person_button" id="opponent_selection_id_button">Continue</button>        </p>        </div>`;
         $("#game_window").html(d),
             $("#game_type_id").ready(function () {
@@ -3782,7 +3787,7 @@ function divideElectoralVotesProp(e, t) {
                 " </td><td> " +
                 M(e.final_overall_results[i].popular_votes) +
                 " </td><td> " +
-                ((e.final_overall_results[i].popular_votes / t) * 100).toFixed(1) +
+                ((e.final_overall_results[i].popular_votes / t) * 100).toFixed(e.finalPercentDigits) +
                 "% </td></tr>";
         }
         let o;
@@ -3975,7 +3980,7 @@ function divideElectoralVotesProp(e, t) {
                         "</td><td>" +
                         M(e.final_state_results[a].result[s].votes) +
                         "</td><td>" +
-                        (100 * e.final_state_results[a].result[s].percent).toFixed(2) +
+                        (100 * e.final_state_results[a].result[s].percent).toFixed(e.statePercentDigits) +
                         "</td><td>" +
                         e.final_state_results[a].result[s].electoral_votes +
                         "</td></tr>";
