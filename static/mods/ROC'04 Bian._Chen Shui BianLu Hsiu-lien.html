@@ -4106,7 +4106,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 257,
             "issue": 32,
-            "state_issue_score": -0.45,
+            "state_issue_score": -0.4,
             "weight": 1
         }
     },
@@ -4116,7 +4116,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 257,
             "issue": 33,
-            "state_issue_score": -0.75,
+            "state_issue_score": -0.73,
             "weight": 1.8
         }
     },
@@ -5600,7 +5600,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 1952556,
             "candidate": 67,
             "affected_candidate": 68,
-            "global_multiplier": 0.03
+            "global_multiplier": 0.05
         }
     },
     {
@@ -5610,7 +5610,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 1952557,
             "candidate": 67,
             "affected_candidate": 68,
-            "global_multiplier": 0.03
+            "global_multiplier": 0.05
         }
     },
     {
@@ -6140,7 +6140,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 1952916,
             "candidate": 67,
             "affected_candidate": 67,
-            "global_multiplier": 0.035
+            "global_multiplier": 0.03
         }
     },
     {
@@ -14029,7 +14029,7 @@ campaignTrail_temp.answer_feedback_json = [
         "pk": 1953133,
         "fields": {
             "answer": 1953130,
-            "candidate": 78,
+            "candidate": 67,
             "answer_feedback": "In the coming days, the DPP and media will muddy the waters by dredging up Lien’s financial controversies and Song’s U.S. asset issues—while Lien and Song retaliate by attacking your record as Kaohsiung’s mayor. Frankly, where’s the hope in all this?"
         }
     },
@@ -17203,7 +17203,7 @@ if ((e.player_answers.includes(1952916) || e.abian == 1) && state268) {
     }
     const state267 = e.final_state_results.find(s => s.state === 267);
 // 假设 e.final_state_results 就是你给的那个数组
-if (aa[0].candidate === 67 && (e.player_answers.includes(1952916) || e.abian == 1) && state267) {
+if (aa[0].candidate === 67 && (e.player_answers.includes(1953103) || e.suzhenchang == 1) && state267) {
   // 用 reduce 算出最大的那一条 result（即赢家）
   const winner = state267.result.reduce((best, curr) =>
     curr.result > best.result ? curr : best
@@ -17215,7 +17215,7 @@ if (aa[0].candidate === 67 && (e.player_answers.includes(1952916) || e.abian == 
     ctsAchievement("Respected Magistrate");
   }
 }
-   if (aa[0].candidate === 67 && (e.player_answers.includes(1953321) || e.luhsiulien == 1) ) { 
+if (aa[0].candidate === 67 && (e.player_answers.includes(1953321) || e.luhsiulien == 1) ) { 
     ctsAchievement("Early Woman President");  
     }
      if (aa[0].candidate === 67 &&  (e.player_answers.includes(1953206) || e.xiechangting == 1) && e.player_answers.includes(1953111)) { 
