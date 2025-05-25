@@ -168,17 +168,6 @@ function histFunction() {
                 HistPVP = ["51.3%", "46.9%", "1.2%", "0.4%"];
                 break;
             case 20: // 2016
-                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Donald Trump",
-                    " Hillary Clinton",
-                    " Gary Johnson",
-                    " Jill Stein",
-                ];
-                HistEV = [306, 232, 0, 0];
-                HistPV = ["62,984,828", "65,853,514", "4,489,341", "405,035"];
-                HistPVP = ["46.1%", "48.2%", "3.3%", "1.1%"];
-                break;
             case 16: // 2016a
                 HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
                 HistName = [
