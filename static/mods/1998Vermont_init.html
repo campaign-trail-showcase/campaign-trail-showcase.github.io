@@ -1,0 +1,201 @@
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 21,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2016,
+            "display_year": "1998Vermont",
+            "summary": "Very little stands in the way of Patrick Leahy’s path to reelection this November. Nearly 3 decades of diligent service in the US Capitol has led Leahy to see nail biters dating back to the days of Nixon up into comfortable victories in the Democratic pheonix of 1992, but he now stands with great Democratic establishment support and a deep bond with generations of Vermonters.  But even less stands in the way of Leahy’s likely challenger.Jack McMullin has made his fortune in Massachusetts but sauntered on up for the explicit purpose of challenging for public office from his Burlington apartment and tourist trap ski resorts. McMullin’s lack of seniority runs many GOP faithful the wrong way, but they can almost certainly look past it to send their candidate to face off against the man marked for death so many times by the national Republican Party.",
+            "image_url": "https://files.catbox.moe/ln7r3w.jpeg",
+            "winning_electoral_vote_number": 0,
+            "advisor_url": "https://files.catbox.moe/yjqj87.jpg",
+            "recommended_reading": "<ul>\n<li><a href=https://www.chicagotribune.com/opinion/editorials/ct-edit-chicago-tribune-biden-endorsement-20200925-lnyxsb5qvrftnjjmj3rnzj33jy-story.html>Our Case For Joe Biden</a></li>\n<li><a href=https://nationalinterest.org/feature/case-trump-166808>The Case For Trump</a></li>\n<li><a href=https://www.npr.org/2020/11/18/935730100/how-biden-won-ramping-up-the-base-and-expanding-margins-in-the-suburbs>How Biden Won: Ramping Up The Base And Expanding Margins In The Suburbs</a></li>\n<li><a href=https://www.prospectmagazine.co.uk/politics/donald-trump-joe-biden-us-election-almost-win-votes-concede>Why Did Trump Almost Win?</a></li>\n<li><a href=https://www.hoover.org/research/no-evidence-voter-fraud-guide-statistical-claims-about-2020-election>No Evidence For Voter Fraud: A Guide To Statistical Claims About The 2020 Election</a></li>\n</ul>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2016,
+        "is_premium": 0,
+        "display_year": "1998Vermont"
+    }
+]
+
+campaignTrail_temp.credits = "Mayfly"
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 200,
+        "fields": {
+            "first_name": "Fred",
+            "last_name": "Tuttle",
+            "election": 20,
+            "party": "Republican",
+            "state": "Vermont",
+            "priority": 1,
+            "description": "<p>It wasn’t too long ago Fred Tuttle was just like any other Vermonter of his time; a humble, hardworking farmer who always voted red on the ballots. But 1996 brought with it great change for both politics and Mr. Tuttle’s own twilight. A good neighbor by the name of John O’Brien made the decision to cast the eccentric dairyman in his independent film lampooning the political process, which would quickly become a cult hit all across Vermont. In no time, Tuttle would begin to pop up on ballots from high bailiff to President, and a lightbulb went off in O’Brien’s head: what if he turned fiction into reality in 1998? In order for the unlikely hero to endure electorally, there would need to be a true villain to root against. A challenge to Bernie Sanders was but a fleeting thought in John’s mind before Jack McMullin took himself and his millions to Burlington, an easy target in stature and appearance. Unfortunately, O’Brien is but a broke filmmaker and a creative mind, and will have to act diligently to match the spending of McMullin.</p>",
+            "color_hex": "#008000",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://files.catbox.moe/ds7adl.jpg",
+            "electoral_victory_message": "<h3>You've got a big month ahead of you, Fred.</h3><p>John meets you at the front porch Wednesday morning to tell you the good news; You've won against the dastardly flatlander and are heading off to the general election. But that's not all: Senator Leahy and his wife will be coming over for dinner soon, and you can't wait to talk with him about the land you both love so much. But before all that, John says, you should get your dress overalls and fancy glasses, <b>because he's booked you for the Jay Leno Show.</b></p>",
+            "electoral_loss_message": "<h3>Well Fred, you tried your best. That's what matters, right?</h3><p>Unfortunately, McMullen caught on to our antics and was able to put a stop to them before our momentum could really get going. Regardless, John tells you how fun it was to do something like this, and he hopes that you can find another time to do a campaign, film or reality, again.</p>",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 202,
+        "fields": {
+            "first_name": "Senate",
+            "last_name": "Campaign",
+            "election": 20,
+            "party": "Republican",
+            "state": "Vermont",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#008000",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://files.catbox.moe/o4vndi.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>Simply put, there isn't much to build off of here. Neither you nor O'Brien are seasoned poltical operatives, and your team totals the farm animals combined from your two farms. The party you run with, once a juggernaut in Vermont, now lies fractured, withering away like flowers after the first cold snap of a blue winter. But what your campaign lacks in what Jack McMullen's has, you hold a key advantage over him; <b>The people of this state really, truly, love Fred Tuttle.</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 201,
+        "fields": {
+            "first_name": "Jack",
+            "last_name": "McMullen",
+            "election": 20,
+            "party": "Republican",
+            "state": "Massachusetts",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#ff3535",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://files.catbox.moe/v76cg8.jpeg",
+            "electoral_victory_message": "<h3>Well Fred, you tried your best. That's what matters, right?</h3><p>Unfortunately, McMullen caught on to our antics and was able to put a stop to them before our momentum could really get going. Regardless, John tells you how fun it was to do something like this, and he hopes that you can find another time to do a campaign, film or reality, again.",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 150585,
+        "fields": {
+            "candidate": 200,
+            "running_mate": 202
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            200,
+            201
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            200,
+            201
+        ]
+    }
+]
+
+jet_data = {
+    "headerColor": "#0000a0",
+    "windowColor": "#ff0000",
+    "containerColor": "#004080",
+    "innerWindowColor": "#ff0000",
+    "bannerImageUrl": "https://files.catbox.moe/nfr55d.jpeg",
+    "backgroundImageUrl": "https://files.catbox.moe/gqdde5.jpeg",
+    "endingTextColor": "#000000",
+    "customQuote": "",
+    "gameTitle": "MAN WITH A PLAN"
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>MAN WITH A PLAN</h2>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#0000a0";
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#ff4444",
+     "header_text_color": "#2b4aaa",
+     "description_text_color": "#4fa7ff",
+     "description_background_color": "#ff4444",
+     "main_color": "#005cb9",
+     "secondary_color": "#ff4444",
+     "ui_text_color": "#005cb9"
+}
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#ff0000";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#004080";
+
+document.getElementById("header").src = "https://files.catbox.moe/nfr55d.jpeg";
+
+document.body.background = "https://files.catbox.moe/gqdde5.jpeg";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#ff0000!important;}</style>";
+
+//#endcode
