@@ -33,18 +33,19 @@ let baseScenarioDict = {
 // Global Text Variables
 
 // Code 1 Text
-e.SelectText = "Please select the election you will run in:"
-e.CandidText = "Please select your candidate:"
-e.VpText = "Please select your running mate:"
-e.PartyText = "Party:"
-e.HomeStateText = "Home State:"
+e.SelectText = "Please select the election you will run in:";
+e.CandidText = "Please select your candidate:";
+e.VpText = "Please select your running mate:";
+e.PartyText = "Party:";
+e.HomeStateText = "Home State:";
 // Ending Popups
-e.ElectionPopup = "Election night has arrived. Settle in and wait for the returns, however                 long it may take. Best of luck!"
-e.WinPopup = "Congratulations! You won this year's election! Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice victory speech prepared for your supporters."
-e.LosePopup = "Sorry. You have lost the election this time. Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice concession speech prepared."
+e.ElectionPopup = "Election night has arrived. Settle in and wait for the returns, however                 long it may take. Best of luck!";
+e.WinPopup = "Congratulations! You won this year's election! Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice victory speech prepared for your supporters.";
+e.LosePopup = "Sorry. You have lost the election this time. Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice concession speech prepared.";
 
 e.finalPercentDigits = 1; // for PV % in final results
 e.statePercentDigits = 2;
+e.SelAnsContText = "Please select an answer before continuing!";
 
 function substitutePlaceholders(str) {
     if (!str || typeof str !== "string") return str;
@@ -4296,7 +4297,7 @@ function divideElectoralVotesProp(e, t) {
             a =
                 '    <div class="overlay" id="feedback_overlay"></div>    <div class="overlay_window" id="feedback_window">        <div class="overlay_window_content" id="feedback_content">        <h3>Advisor Feedback</h3>        <img src="' +
                 e.election_json[i].fields.advisor_url +
-                '" width="208" height="128"/>        <p>Please select an answer before continuing!</p>        </div>        <div id="visit_buttons">        <button id="ok_button">OK</button><br>        </div>    </div>';
+                '" width="208" height="128"/>        <p>' + e.SelAnsContText + '</p>        </div>        <div id="visit_buttons">        <button id="ok_button">OK</button><br>        </div>    </div>';
         $("#game_window").append(a),
             $("#ok_button").click(function () {
                 $("#feedback_overlay").remove(), $("#feedback_window").remove();
