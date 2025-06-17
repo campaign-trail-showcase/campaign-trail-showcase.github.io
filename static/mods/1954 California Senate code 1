@@ -1,0 +1,239 @@
+HistHexcolour=["#cc0000","#0000FF","#750000"];
+HistName=["Thomas Kuchel","Samuel Yorty","Isobel M. Cerney"];
+HistEV=[43,15,0];
+HistPV=["2,090,836","1,788,071","50,506"];
+HistPVP=["53.21%","45.50%","1.29%"]; 
+campaignTrail_temp.achievements = {
+    "A Defined Man" : {
+        "image" : "https://i.imgur.com/2TvSPQu.png",
+        "description" : "Defeat Kuchel",
+        "cannotBeCheated" : true
+    },
+    "Bananas Opposed" : {
+        "image" : "https://media.washtimes.com/media/image/2023/06/28/230629-hunter-b.jpg",
+        "description" : "Oppose the Guatemalan Coup and still win",
+        "cannotBeCheated" : true
+    },
+    "The Biggest Prize" : {
+        "image" : "https://live.staticflickr.com/7258/6922480114_c9b6cfb4b6_b.jpg",
+        "description" : "Win San Bernardino County",
+        "cannotBeCheated" : true
+    }
+};
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 24,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2016,
+            "display_year": "1954 California Senate",
+            "summary": "It has been 2 years since Dwight Eisenhower came into office and although he has been highly popular, his party faces a major complication. Republican Joseph McCarthy's Red Hearings, in which he baselessly claimed numerous officials to be communists, have brought immense backlash towards the GOP.\n<br><br>Thomas Kuchel must distance himself from a radical like McCarthy and use his moderate image to pull him to victory.\n<br><br>Samuel Yorty must make a clear distinction between him and Kuchel and run a more inspiring campaign.",
+            "image_url": "https://i.imgur.com/oYJoiK2.jpeg",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://i.imgur.com/Rp0wXtu.png",
+            "recommended_reading": "<ul>\n<li><a href=https://www.chicagotribune.com/opinion/editorials/ct-edit-chicago-tribune-biden-endorsement-20200925-lnyxsb5qvrftnjjmj3rnzj33jy-story.html>Our Case For Joe Biden</a></li>\n<li><a href=https://nationalinterest.org/feature/case-trump-166808>The Case For Trump</a></li>\n<li><a href=https://www.npr.org/2020/11/18/935730100/how-biden-won-ramping-up-the-base-and-expanding-margins-in-the-suburbs>How Biden Won: Ramping Up The Base And Expanding Margins In The Suburbs</a></li>\n<li><a href=https://www.prospectmagazine.co.uk/politics/donald-trump-joe-biden-us-election-almost-win-votes-concede>Why Did Trump Almost Win?</a></li>\n<li><a href=https://www.hoover.org/research/no-evidence-voter-fraud-guide-statistical-claims-about-2020-election>No Evidence For Voter Fraud: A Guide To Statistical Claims About The 2020 Election</a></li>\n</ul>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2016,
+        "is_premium": 0,
+        "display_year": "1954 California Senate"
+    }
+]
+
+campaignTrail_temp.credits = "Wah Guy"
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 117,
+        "fields": {
+            "first_name": "Samuel",
+            "last_name": "Yorty",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Los Angeles",
+            "priority": 1,
+            "description": "<div style='overflow-y:scroll;height:200px;'>Samuel Yorty is the United States Representative for the 26th congressional district after being redistricted, but he was first elected in 1950. Before becoming a Representative, he was a state Representative. Yorty had previously tried for the Senate in 1940, but lost badly in the primary to incumbent Republican Hiram Johnson. He then served in World War 2 before returning to the state assembly.<br><br> So far he has positioned himself as a liberal Democrat. He supported state ownership of public utilities, labor unions, and sided with the Spanish Republicans during the Spanish Civil War. However, this led to the Communist Party to support him and he was labeled a member of the party and a communist. Thankfully, these allegations were quickly disproven, so Yorty's reputation remains intact. Still, the whole fiasco has caused Yorty to perhaps rethink his political beliefs to better suit him.\n<br><br>Regardless, Yorty has once again sought the Senate again and he is in a more favorable position. The McCarthy Hearings has given him momentum to a close race, but it won't guarantee him a victory. His opponent, Kuchel, has kept himself away from the backlash and presented himself as a moderate and even has similar positions to Yorty. If Yorty wants to win this, he must define the election and himself.",
+            "color_hex": "#1900bd",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/GaT9BH2.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1002,
+        "fields": {
+            "first_name": "The",
+            "last_name": "Democrats",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Nationwide",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/4nZoSuK.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "One of the oldest parties, the Democrats have had mixed results these past few years. After dominating congress throughout FDR's Presidency, the party lost Congress, but were able to resecure it in 1948. They then lost in 1952 due to the immense unpopularity of Truman. While the Democrats are in the minority right now, they are looking to recapture Congress again in large part due to McCarthy which is good for your chances.",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 116,
+        "fields": {
+            "first_name": "Thomas",
+            "last_name": "Kuchel",
+            "election": 20,
+            "party": "Turbo Team",
+            "state": "Idaho",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#bd0000",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 118,
+        "fields": {
+            "first_name": "",
+            "last_name": "Carney",
+            "election": 20,
+            "party": "Turbo Team",
+            "state": "Idaho",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#76ee6d",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 83897,
+        "fields": {
+            "candidate": 117,
+            "running_mate": 1002
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            117,
+            116,
+            118
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            117,
+            116,
+            118
+        ]
+    }
+]
+
+jet_data = {
+    "headerColor": "#7e128c",
+    "windowColor": "#8213aa",
+    "containerColor": "#5c1961",
+    "innerWindowColor": "#ffe5ff",
+    "bannerImageUrl": "",
+    "backgroundImageUrl": "",
+    "endingTextColor": "#000000",
+    "customQuote": "Opportunists reap the rewards for themselves, leaving nothing for the people who do the sowing."
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>THE CAMPAIGN TRAIL</h2><font id="wittyquote" size="4" color="white"><em>Opportunists reap the rewards for themselves, leaving nothing for the people who do the sowing.</em></font>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#7e128c";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#8213aa";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#5c1961";
+
+document.getElementById("header").src = "https://i.imgur.com/jkNIdUP.png";
+
+document.body.background = "https://i.imgur.com/2TvSPQu.png";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#ffe5ff!important;}</style>";
+
+//#endcode
