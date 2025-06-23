@@ -1899,8 +1899,6 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
         const selectElement = document.getElementById('running_mate_id');
         if (!selectElement) return;
 
-        console.log("Running mate dropdown found. Applying visibility rules...");
-
         let unlockedPks = [];
         try {
             const storedData = localStorage.getItem(STORAGE_KEY);
@@ -1916,11 +1914,8 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             const optionPk = parseInt(option.value, 10);
 
             if (UNLOCKABLE_RM_IDS.includes(optionPk)) {
-                if (!unlockedPks.includes(optionPk)) {
-                    option.hidden = true;
-                } else {
-                    option.hidden = false;
-                }
+                // This logic can be simplified slightly
+                option.hidden = !unlockedPks.includes(optionPk);
             }
         }
     }
@@ -1928,13 +1923,15 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
     const observerCallback = (mutationsList, observer) => {
         if (document.getElementById('running_mate_id')) {
             applyRunningMateVisibility();
-            observer.disconnect();
         }
     };
 
     const observer = new MutationObserver(observerCallback);
     const targetNode = document.getElementById('game_window') || document.body;
+
     observer.observe(targetNode, { childList: true, subtree: true });
+
+    applyRunningMateVisibility();
 
     console.log("Checking for running mates...");
 })();
