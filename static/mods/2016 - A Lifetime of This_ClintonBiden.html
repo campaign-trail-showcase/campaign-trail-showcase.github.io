@@ -14317,47 +14317,75 @@ function shuffle(array) {
     }
 }
 
-// configuration for segments to be shuffled
-// each object defines the 'start' index (0-based) of the segment in the original array
-// and the 'count' of elements in that segment
-const segmentsToShuffle = [
-    //{ start: 1,  count: 3 },  // questions 2-4 (indices 1-3)
-    //{ start: 7,  count: 2 },  // questions 8-9 (indices 7-8)
-    { start: 10, count: 11, extra: [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] }, // questions 11-21 (indices 10-20) + post-29 questions
-    { start: 25, count: 2 }   // questions 26-27 (indices 25-26)
-];
+const questionCount = campaignTrail_temp.global_parameter_json[0].fields.question_count;
 
-// iterate over the configuration and shuffle the specified segments
-segmentsToShuffle.forEach(segment => {
-  // grab the contiguous block
-  let block = campaignTrail_temp.questions_json
-    .slice(segment.start, segment.start + segment.count);
+if (questionCount == 40) {
+	// questions 1-10
+    const fixedStart = campaignTrail_temp.questions_json.slice(0, 10);
 
-  // if there are extras, pull them in too
-  if (Array.isArray(segment.extra)) {
-    segment.extra.forEach(idx => {
-      // only pull if in bounds
-      if (campaignTrail_temp.questions_json[idx]) {
-        block.push(campaignTrail_temp.questions_json[idx]);
+    // create the main randomized batch
+    // this pool has questions 11-21 AND questions 30-40
+    const mainRandomPoolSource = campaignTrail_temp.questions_json.slice(10, 21); // Q11-21
+    const extraRandomPoolSource = campaignTrail_temp.questions_json.slice(29, 40); // Q30-40
+    const combinedRandomPool = mainRandomPoolSource.concat(extraRandomPoolSource);
+    shuffle(combinedRandomPool); // shuffle the combined pool
+
+    // create the second randomized batch for questions 22-25
+    const midRandomPool = campaignTrail_temp.questions_json.slice(21, 25); // Q22-25
+    shuffle(midRandomPool);
+
+    // questions 26-29 (fixed at the end)
+    const fixedEnd = campaignTrail_temp.questions_json.slice(25, 29); // Q26-29
+
+    // assemble the new, final question list
+    const newQuestionsList = [
+        ...fixedStart,
+        ...combinedRandomPool,
+        ...midRandomPool,
+        ...fixedEnd
+    ];
+
+    // replace the old question list with the newly constructed one
+    campaignTrail_temp.questions_json = newQuestionsList;
+
+} else {
+    // configuration for segments to be shuffled
+	// each object defines the 'start' index (0-based) of the segment in the original array
+	// and the 'count' of elements in that segment
+    const segmentsToShuffle = [
+        { start: 10, count: 11, extra: [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] },   // questions 11-21 (indices 10-20) + post-29 questions
+        { start: 25, count: 2 }   // questions 26-27 (indices 25-26) are shuffled amongst themselves
+    ];
+
+    // iterate over the configuration and shuffle the specified segments
+    segmentsToShuffle.forEach(segment => {
+      // grab the contiguous block
+      let block = campaignTrail_temp.questions_json
+        .slice(segment.start, segment.start + segment.count);
+
+      // if there are extras, pull them in too
+      if (Array.isArray(segment.extra)) {
+        segment.extra.forEach(idx => {
+          // only pull if the question exists
+          if (campaignTrail_temp.questions_json[idx]) {
+            block.push(campaignTrail_temp.questions_json[idx]);
+          }
+        });
       }
+
+      // shuffle the combined pool
+      shuffle(block);
+
+      // take only as many as the original segment count to fill the space
+      const toWrite = block.slice(0, segment.count);
+
+      // splice those back into the main list
+      campaignTrail_temp.questions_json
+        .splice(segment.start, segment.count, ...toWrite);
     });
-  }
-
-  // shuffle the combined pool
-  shuffle(block);
-
-  // take only as many as the original segment count
-  const toWrite = block.slice(0, segment.count);
-
-  // splice those back into the main list
-  campaignTrail_temp.questions_json
-    .splice(segment.start, segment.count, ...toWrite);
-});
+}
 
 console.log("Question re-ordering applied. At least this is working.");
-
-// debug: to verify the PKs after shuffling
-// console.log(campaignTrail_temp.questions_json.map(q => q.pk));
 
 // This is used to replace a series of images & question data for each running mate.
 // 211 is Booker, and 212 is Patrick. Kaine is unaffected, for obvious reasons
@@ -15075,11 +15103,11 @@ function attemptRenderEnding() {
         if (endingObserver) {
             endingObserver.disconnect();
             endingObserver = null;
-            console.log("Ending observer disconnected.");
+            //console.log("Ending observer disconnected.");
         }
         return true;
     }
-    console.log("Ending elements not yet ready. Observer will continue watching.");
+    //console.log("Ending elements not yet ready. Observer will continue watching.");
     return false;
 }
 
@@ -15299,7 +15327,7 @@ function endingPickerCONT() {
   const contingentObserver = new MutationObserver((mutationsList, observer) => {
     const finalDesc = document.getElementById("final_results_description");
     if (finalDesc && !finalDesc.innerHTML.includes("You have made a decision.")) {
-      console.log("Contingent ending was overwritten, re-rendering...");
+      //console.log("Contingent ending was overwritten, re-rendering...");
       endingConstructor(0);
     }
   });
@@ -15454,7 +15482,7 @@ endingPicker = (out, totv, aa, quickstats) => {
     if (endingObserver) {
         endingObserver.disconnect();
         endingObserver = null;
-        console.log("Previous ending observer disconnected.");
+        //console.log("Previous ending observer disconnected.");
     }
 
     if (attemptRenderEnding()) {
@@ -15862,7 +15890,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
             return;
         }
 
-        console.log(`Loading video: ${currentSong.getVideoId()} - ${currentSong.getTitle()}`);
+        //console.log(`Loading video: ${currentSong.getVideoId()} - ${currentSong.getTitle()}`);
         ytPlayer.loadVideoById({
             videoId: currentSong.getVideoId(),
             startSeconds: 0,
@@ -15879,7 +15907,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
         activePlaylistIndex = newPlaylistIndex;
         const selectedPlaylistData = PLAYLISTS_DATA[activePlaylistIndex];
 
-        console.log(`Switching to playlist: "${selectedPlaylistData.name}" (index: ${activePlaylistIndex})`);
+        //console.log(`Switching to playlist: "${selectedPlaylistData.name}" (index: ${activePlaylistIndex})`);
 
         if (playerReady && ytPlayer && typeof ytPlayer.stopVideo === 'function' && hasUserInitiatedPlayback) {
             ytPlayer.stopVideo();
@@ -16038,7 +16066,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
     function onPlayerStateChange(event) {
         const state = event.data;
         const stateName = Object.keys(YT.PlayerState).find(key => YT.PlayerState[key] === state) || 'UNKNOWN';
-        console.log(`Player state changed: ${state} (${stateName})`);
+        //console.log(`Player state changed: ${state} (${stateName})`);
 
         // ensure hasUserInitiatedPlayback is true if we get any meaningful state change after initial load
         if (state !== YT.PlayerState.UNSTARTED && state !== -1) {
@@ -18265,7 +18293,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
             }
         });
         stylesAdded = true;
-        console.log('Styles for recommended reading added.');
+        //console.log('Styles for recommended reading added.');
     }
 
     function initializeTabs() {
@@ -18388,9 +18416,9 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                 });
                 contentPanes.forEach(pane => { if (pane) pane.style.display = 'none'; });
                 if (tabs.length > 0 && contentPanes.length === 0) {
-                     console.log(`Initial tab set to index ${initialActiveIndex} visually, but no content panes available.`);
+                     //console.log(`Initial tab set to index ${initialActiveIndex} visually, but no content panes available.`);
                 } else if (tabs.length > 0) {
-                     console.log(`Initial tab set to index ${initialActiveIndex} visually, corresponding content pane missing.`);
+                     //console.log(`Initial tab set to index ${initialActiveIndex} visually, corresponding content pane missing.`);
                 }
             }
         } else if (tabs.length > 0) {
@@ -18399,7 +18427,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
 
         recommendedReadingBox._tabsInitialized = true;
         tabSystemInitializedForCurrentBox = true;
-        console.log('Recommended reading tabs initialized using event delegation.');
+        console.log('Recommended reading tabs initialized.');
     }
 
     function setupObserver() {
@@ -18423,7 +18451,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                 }
             } else {
                 if (tabSystemInitializedForCurrentBox) {
-                    console.log('Recommended reading box removed from DOM.');
+                    //console.log('Recommended reading box removed from DOM.');
                     tabSystemInitializedForCurrentBox = false;
                 }
             }
@@ -18431,11 +18459,11 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
 
         const observer = new MutationObserver(callback);
         observer.observe(targetNode, config);
-        console.log('MutationObserver set up to watch for recommended_reading_box appearance/disappearance.');
+        //console.log('MutationObserver set up to watch for recommended_reading_box appearance/disappearance.');
 
         const existingBox = document.getElementById('recommended_reading_box');
         if (existingBox) {
-            console.log('recommended_reading_box already in DOM. Initializing immediately.');
+            //console.log('recommended_reading_box already in DOM. Initializing immediately.');
             if (!stylesAdded) {
                 addStyles();
             }
@@ -18472,7 +18500,7 @@ let goodtimes = 0;
 
 cyoAdventure = function (a) {
     let ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1];
-	console.log("ans is: " + ans); // @todo: remove this for release
+	//console.log("ans is: " + ans); // @todo: remove this for release
 
     if (ans == 5146) {
         window.aggressiveScore -= 2;
@@ -18613,10 +18641,10 @@ cyoAdventure = function (a) {
             
             const oldScore = entry.fields.issue_score;
             entry.fields.issue_score += delta;
-            console.log(
-                `Candidate ${candidateId} · issue ${entry.fields.issue} (entry PK ${entry.pk}): ` +
-                `score changed from ${oldScore.toFixed(3)} to ${entry.fields.issue_score.toFixed(3)} (mod: ${delta})`
-            );
+            //console.log(
+            //    `Candidate ${candidateId} · issue ${entry.fields.issue} (entry PK ${entry.pk}): ` +
+            //    `score changed from ${oldScore.toFixed(3)} to ${entry.fields.issue_score.toFixed(3)} (mod: ${delta})`
+            //);
         }
     }
 
@@ -18631,7 +18659,7 @@ cyoAdventure = function (a) {
 		const TRUMP_CANDIDATE_ID = 200;
         const CLINTON_CANDIDATE_ID = 201;
 
-        console.log(`Applying effects for VP: ${vpName}`);
+        //console.log(`Applying effects for VP: ${vpName}`);
 
         // home state bonus
         if (profile.homeState) {
@@ -18647,10 +18675,10 @@ cyoAdventure = function (a) {
         }
 
         // apply issue shifts
-        console.log("Applying issue score shifts...");
+        //console.log("Applying issue score shifts...");
         applyIssueShift(TRUMP_CANDIDATE_ID, profile.issue_scores);
 		
-        console.log(`Effects applied!`);
+        //console.log(`Effects applied!`);
     }
 
     function handleGameUpdate(mutationsList, observer) {
@@ -18705,7 +18733,7 @@ cyoAdventure = function (a) {
         isProcessing = true;
         try {
             if (!window.campaignTrail_temp || !Array.isArray(window.campaignTrail_temp.player_answers)) {
-                console.log("Game state not ready, skipping image check.");
+                //console.log("Game state not ready, skipping image check.");
                 return;
             }
 

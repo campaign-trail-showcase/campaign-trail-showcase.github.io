@@ -1936,6 +1936,63 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
     console.log("Checking for running mates...");
 })();
 
+// This is for the question count selector.
+const gameWindowNode = document.getElementById("game_window");
+const createQuestionSelector = function() {
+    if (document.getElementById("difficulty_level") && !document.getElementById("question_select")) {
+        
+        const questionOptions = [
+            ["25 (Best)", 25],
+            ["40 (Full)", 40]
+        ];
+
+        let dropdown = document.createElement("select");
+        dropdown.id = "question_select";
+
+        questionOptions.forEach(opt => {
+            let optionElement = document.createElement("option");
+            optionElement.text = opt[0];
+            optionElement.value = opt[1];
+            if (opt[0] === "25 (Best)") {
+                optionElement.selected = true;
+            }
+            dropdown.options.add(optionElement);
+        });
+
+        let formContainer = document.createElement("form");
+        formContainer.name = "question_select_form";
+        let heading = document.createElement("h3");
+        heading.textContent = "Select the number of questions:";
+        formContainer.appendChild(heading);
+        formContainer.appendChild(dropdown);
+
+        document.getElementById("difficulty_level").appendChild(formContainer);
+
+        const updateQuestionCount = (value) => {
+            if (campaignTrail_temp.global_parameter_json && campaignTrail_temp.global_parameter_json[0]) {
+                campaignTrail_temp.global_parameter_json[0].fields.question_count = value;
+            }
+        };
+
+        dropdown.addEventListener("change", function () {
+            updateQuestionCount(this.value);
+        });
+        
+        updateQuestionCount(dropdown.value);
+    }
+};
+
+const diffWatcherConfig = { attributes: true, childList: true, subtree: true };
+const diffObserver = new MutationObserver(createQuestionSelector);
+diffObserver.observe(gameWindowNode, diffWatcherConfig);
+
+try {
+    document.styleSheets[0].insertRule("#difficulty_level form {display: inline-block !important; padding: 0 1em !important;}", 0);
+    document.styleSheets[0].insertRule("#difficulty_level form p {margin: 0 !important;}", 0);
+} catch (e) {
+    console.error("Could not apply selector styling:", e);
+}
+
 // Achievements?
 campaignTrail_temp.achievements = {
     "Just Like Heaven": {
