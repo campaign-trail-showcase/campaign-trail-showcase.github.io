@@ -3003,7 +3003,7 @@ function divideElectoralVotesProp(e, t) {
      * Dictates how long it takes until the results in a particular state are called
      * @param e The parameter used for this is e.final_state_results[t].result
      * @param t The parameter used for this is e.states_json[i].fields.poll_closing_time
-     * @returns {number|*|number} Time at which the state's results are called
+     * @returns {number} Time at which the state's results are called
      */
 
     function c(e, t) {
