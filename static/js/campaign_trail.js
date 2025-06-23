@@ -2999,66 +2999,32 @@ function divideElectoralVotesProp(e, t) {
         return v;
     };
 
+    /**
+     * Dictates how long it takes until the results in a particular state are called
+     * @param e
+     * @param t
+     * @returns {number|*|number}
+     */
+
     function c(e, t) {
         P(e, "votes"), e.reverse();
         var i = (e[0].votes - e[1].votes) / (e[0].votes + e[1].votes);
-        return i < 0.0025
-            ? 480
-            : i < 0.005
-                ? 460
-                : i < 0.01
-                    ? t > 200
-                        ? 440
-                        : t + 240
-                    : i < 0.015
-                        ? t > 260
-                            ? 440
-                            : t + 180
-                        : i < 0.03
-                            ? t > 270
-                                ? 420
-                                : t + 150
-                            : i < 0.045
-                                ? t > 300
-                                    ? 420
-                                    : t + 120
-                                : i < 0.066
-                                    ? t > 330
-                                        ? 420
-                                        : t + 90
-                                    : i < 0.085
-                                        ? t > 340
-                                            ? 420
-                                            : t + 80
-                                        : i < 0.1
-                                            ? t > 350
-                                                ? 420
-                                                : t + 70
-                                            : i < 0.12
-                                                ? t > 360
-                                                    ? 420
-                                                    : t + 60
-                                                : i < 0.14
-                                                    ? t > 370
-                                                        ? 420
-                                                        : t + 50
-                                                    : i < 0.16
-                                                        ? t > 380
-                                                            ? 420
-                                                            : t + 40
-                                                        : i < 0.18
-                                                            ? t > 390
-                                                                ? 420
-                                                                : t + 30
-                                                            : i < 0.2
-                                                                ? t > 400
-                                                                    ? 420
-                                                                    : t + 20
-                                                                : i < 0.25
-                                                                    ? t > 410
-                                                                        ? 420
-                                                                        : t + 10
-                                                                    : t;
+        if (i < 0.0025) return 480;
+        if (i < 0.005) return 460;
+        if (i < 0.01) return t > 200 ? 440 : t + 240;
+        if (i < 0.015) return t > 260 ? 440 : t + 180;
+        if (i < 0.03) return t > 270 ? 420 : t + 150;
+        if (i < 0.045) return t > 300 ? 420 : t + 120;
+        if (i < 0.066) return t > 330 ? 420 : t + 90;
+        if (i < 0.085) return t > 340 ? 420 : t + 80;
+        if (i < 0.1) return t > 350 ? 420 : t + 70;
+        if (i < 0.12) return t > 360 ? 420 : t + 60;
+        if (i < 0.14) return t > 370 ? 420 : t + 50;
+        if (i < 0.16) return t > 380 ? 420 : t + 40;
+        if (i < 0.18) return t > 390 ? 420 : t + 30;
+        if (i < 0.2) return t > 400 ? 420 : t + 20;
+        if (i < 0.25) return t > 410 ? 420 : t + 10;
+        return t;
     }
 
     function u() {
