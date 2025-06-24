@@ -1942,7 +1942,7 @@ const createQuestionSelector = function() {
     if (document.getElementById("difficulty_level") && !document.getElementById("question_select")) {
         
         const questionOptions = [
-            ["25 (Best)", 25],
+            ["29 (Best)", 29],
             ["40 (Full)", 40]
         ];
 
@@ -1953,7 +1953,7 @@ const createQuestionSelector = function() {
             let optionElement = document.createElement("option");
             optionElement.text = opt[0];
             optionElement.value = opt[1];
-            if (opt[0] === "25 (Best)") {
+            if (opt[0] === "29 (Best)") {
                 optionElement.selected = true;
             }
             dropdown.options.add(optionElement);
