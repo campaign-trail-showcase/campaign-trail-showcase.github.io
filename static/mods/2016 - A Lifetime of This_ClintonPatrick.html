@@ -14438,6 +14438,7 @@ const RUNNING_MATE_DATA = {
 			5214: "We can’t be everywhere all at once, but you gotta take risks sometimes. Do you think Trump would be as strong on Milosevic as your husband was?",
 			5220: "Who knows how this will end up, but you can always get Magaziner to come up with a plan that suits you if all goes well.",
 			5231: "Behind the scenes, you hear that Obama is pleased with your comments. As a gift, he sends you a pot of Häagen-Dazs® creamy mango ice cream after one of your rallies; it’s a funny taste, and not your favorite, but you’re slowly warming up to it.",
+			20803: "Some of the names floated to you include Amy Klobuchar, Lucy Koh, and… wait, Cory Booker? H-hold on a bit. But— are you— did you write this down, Hill?",
 			20896: "Good call. After our failures with Kyoto, the least we want to see is a Trump presidency turning the nation into a seaQuestian-like dystopian nightmare.",
 			21020: "After much discussion, Podesta presents a name to you: that of former eBay CEO Meg Whitman. You feel like you want to cry, and your tears are not of joy.",
 			21156: "You know, Saddam tried to ban Pokémon in Iraq once. If he wasn’t history now, I’d get my— what do they call it again? Oh yeah, a “Machamp” to whoop his ass."
@@ -14497,7 +14498,7 @@ const RUNNING_MATE_DATA = {
 			20751: "Damn Hillary. Back at it again with the anti-trade comments. You know, my job’s on the line too—",
 			20803: "Some of the names floated to you include Paul Watford, Sri Srinivasan, and Ketanji Brown Jackson. On the very bottom of the list, one scribbled name needles you a bit: Barack Obama. Heh. I didn’t add him. You know what, I think we can keep that one.",
 			21020: "After much discussion, Podesta presents a name to you: that of former mayor of New York City Michael Bloomberg. I mean, he was a Republican once, so it counts. You feel like you want to cry, and your tears are not of joy.",
-			21156: "We love the Pokémon, we’re telling you. On my way home, I almost stepped into a Sylveon. Poor guy."
+			21156: "We love the Pokémon, we’re telling you. On my way home, I almost stepped into a Squirtle. Poor guy."
         },
         issueScores: {
             5155: [
@@ -14550,6 +14551,7 @@ const RUNNING_MATE_DATA = {
             5176: "You know, I never met lunar bears, but I met a couple of polar bears. Very funny guys, strange sense of humor though.",
 			5198: "Privately, Biden’s surrogates tell you this is a good thing. They say he’s too busy with his newest love affair, Jennifer Aniston, to campaign with you anyway.",
             5231: "Behind the scenes, you hear that Obama is pleased with your comments. As a gift, he sends you a pot of Häagen-Dazs® chocolate chip cookie dough ice cream after one of your rallies; attached to it is a note. ‘This is Joe’s favorite,’ the note reads. ‘He can eat a whole pint in one sitting. It’s a little frightening, honestly.’",
+			20803: "Some of the names floated to you include Jane Kelly, Jacqueline Nguyen, and Kamala Harris. On the very bottom of the list, one scribbled name needles you a bit: Barack Obama. <i>This is malarkey, jack…</i>",
             21156: "I wish we could do Donkey Kong Country references here, but I’m not sure if ‘Donkey Kong go to the polls’ works."
         },
         issueScores: {
@@ -14596,6 +14598,7 @@ const RUNNING_MATE_DATA = {
             5262: "A solid defense that your supporters appreciate. Podesta accidentally briefs Julian’s twin brother, Joaquin, for a full hour before anyone realizes the mistake. To his credit, Joaquin was surprisingly well-informed on housing policy.",
             5263: "This focus on his cabinet experience helps shore up his credentials. He’s an effective surrogate, although the public still needs to see quite a bit more of Castro on the campaign before forming their opinions about him.",
             // other feedback
+			5148: "You recall that after Columbine, the Republican-led House refused to vote on the gun control bills your husband introduced. You haven’t forgiven them for it since.",
 			5176: "God, I hope there are no lunar bears around here. Lunar bears can sure be a downer.",
             21156: "Good, good. We honestly ran out of jokes to include here, Hill. So uh… get those Pokémon or whatever."
         },
@@ -14638,7 +14641,7 @@ const RUNNING_MATE_DATA = {
             5263: "The challenges facing our cities are the same challenges facing our nation. Eric understands that; I’ve never heard of an Eric who doesn’t. We’re going to talk about solutions that work, regardless of whether you live, and get our country moving forward."
         },
         feedback: {
-            5155: "A strong defense of his executive experience. It’s not like Garcetti will ask you to replace Air Force One with a fleet of electric scooters and a hyperloop tunnel to Camp David; but he will the celebrities who like these ideas to vote for you.",
+            5155: "A strong defense of his executive experience. It’s not like Garcetti will ask you to replace Air Force One with a fleet of electric scooters and a hyperloop tunnel to Camp David; but he will get the celebrities who like these ideas to vote for <i>you</i>.",
             5156: "Garcetti is an interesting choice, to say the least. Let’s see how that pans out.",
             5157: "Fox News host Tucker Carlson spends a week or so trying to pronounce his name correctly before giving up and just using ‘GAR-seth’. Although some pundits praise your ‘outside-the-beltway’ thinking, you think that’s mostly because they have nothing else to say about him. That’s good, right?",
 			5179: "— Honey, why is there a robot-looking Hillary Clinton on our couch watching TV? Is she with you?<br/>— There is a— ohhh. Huh? Well. Actually— no. Good question, actually.",
@@ -14647,6 +14650,7 @@ const RUNNING_MATE_DATA = {
             // other feedback
 			5176: "Hmm, no, but they’ve been known to shit in the liquor tent, if I remember it right.",
 			5261: "Thanks to Garcetti, he manages to get actor Shia LaBeouf on stage with you. Your rally quickly derails when the two of them keep talking the early 2000s show Even Stevens and nothing else.",
+			21096: "Why can’t Cuban-Americans see the light? You’re so 3008, they’re so 2000 and late.",
             21156: "I always liked Tetris better, to be honest."
         },
         issueScores: {
@@ -14713,7 +14717,7 @@ function applyDataModifications() {
         if (mateData.stateScores) {
             const answersToReplace = mateData.stateScores.map(s => s.answer);
             campaignTrail_temp.answer_score_state_json = campaignTrail_temp.answer_score_state_json.filter(e => !answersToReplace.includes(e.fields.answer));
-            mateData.stateScores.forEach(({ answer, state }) => campaignTrail_temp.answer_score_state_json.push({ model: "campaign_trail.answer_score_state", pk: generateMockPK(), fields: { answer, state, candidate: 201, affected_candidate: 201, state_multiplier: 0.002 } }));
+            mateData.stateScores.forEach(({ answer, state }) => campaignTrail_temp.answer_score_state_json.push({ model: "campaign_trail.answer_score_state", pk: generateMockPK(), fields: { answer, state, candidate: 201, affected_candidate: 201, state_multiplier: 0.005 } }));
         }
     }
 
@@ -14802,7 +14806,6 @@ function unlockRmInStorage(pk) {
     return false;
 }
 
-
 function showUnlockNotification(mateName) {
     const notification = document.createElement('div');
     notification.className = 'unlock-notification';
@@ -14842,6 +14845,13 @@ let isAchievementShowing = false;
 const achievementSoundURL = "";
 
 function unlockAchievement(title) {
+	if (unlockedAchievements[title]) { // has been unlocked? then do nothing
+        return;
+    }
+	if (playthroughAchievements[title]) { // has been unlocked in this playthrough? then do nothing
+        return;
+    }
+	
     // look up the achievement data using the title
     const achData = campaignTrail_temp.achievements[title];
 
@@ -14867,7 +14877,11 @@ function unlockAchievement(title) {
     queueAchievementPopup(title, achData.image, achievementSoundURL, achData.description);
 
     // save to local storage if it's a new unlock and difficulty is valid
-    if (campaignTrail_temp.difficulty_level_multiplier <= 1 && campaignTrail_temp.CTS && !unlockedAchievements[title]) {
+    if (campaignTrail_temp.difficulty_level_multiplier <= 1 && campaignTrail_temp.CTS) {
+        // only queue the popup for a brand new unlock
+        queueAchievementPopup(title, achData.image, achievementSoundURL, achData.description);
+
+        // mark as permanently unlocked and save
         unlockedAchievements[title] = true;
         localStorage.setItem("unlockedAch", JSON.stringify(unlockedAchievements));
         addAllAchievements();
@@ -14875,6 +14889,9 @@ function unlockAchievement(title) {
 }
 
 function queueAchievementPopup(title, imageUrl, soundUrl, description) {
+	if (achievementQueue.some(ach => ach.title === title)) {
+			return;
+    }
     achievementQueue.push({ title, imageUrl, soundUrl, description });
     processAchievementQueue();
 }
@@ -15392,7 +15409,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 		if (playerEV >= 332) unlockAchievement("Mother's Pride");
 		if (campaignTrail_temp.player_answers.includes(5184)) unlockAchievement("If I Was Your Girlfriend");
 		if (campaignTrail_temp.player_answers.includes(20988)) unlockAchievement("I Could Never Take The Place of Your Man");
-		if (feelthebern >= 4) unlockAchievement("Eminence Front");
+		if (feelthebern >= 5) unlockAchievement("Eminence Front");
 		if (yeshillaryyes >= 3) unlockAchievement("Walking On A Dream");
 		if (campaignTrail_temp.running_mate_id == 211) unlockAchievement("One Way Ticket");
 		if (campaignTrail_temp.running_mate_id == 212) unlockAchievement("I Can See Clearly Now");
@@ -16879,7 +16896,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
             name: "INTELLIGENCE GATHERING",
             classification: "COVERT ACTION",
             description: "Acquire sensitive information from various sources through multiple operational vectors.",
-            baseSuccessRate: 0.70,
+            baseSuccessRate: 0.65,
             cooldown: 1,
             riskLevel: "MEDIUM",
             operations: [
@@ -16939,6 +16956,12 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                     },
                     failureEffect: (targetStateName) => {
                         politicalCapital = Math.max(0, politicalCapital - 4);
+						const ct_temp = campaignTrail_temp;
+                        const stateEntry = ct_temp.states_json.find(s => s.fields.name === targetStateName);
+                        if(stateEntry) {
+                            const opponentMults = ct_temp.candidate_state_multiplier_json.filter(f => f.fields.state === stateEntry.pk && f.fields.candidate !== ct_temp.candidate_id);
+                            opponentMults.forEach(mult => { mult.fields.state_multiplier = (mult.fields.state_multiplier || 1) * 1.005; });
+                        }
                         return `Close call. Our operatives were nearly compromised while surveilling the opponent’s state headquarters. They were forced to burn their cover and exfiltrate immediately. We lost the asset and wasted significant resources. (-4 PC).`;
                     }
             },
@@ -16971,6 +16994,12 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                     },
                     failureEffect: () => {
                         politicalCapital = Math.max(0, politicalCapital - 5);
+						const ct_temp = campaignTrail_temp;
+                        const stateEntry = ct_temp.states_json.find(s => s.fields.name === targetStateName);
+                        if(stateEntry) {
+                            const opponentMults = ct_temp.candidate_state_multiplier_json.filter(f => f.fields.state === stateEntry.pk && f.fields.candidate !== ct_temp.candidate_id);
+                            opponentMults.forEach(mult => { mult.fields.state_multiplier = (mult.fields.state_multiplier || 1) * 1.005; });
+                        }
                         return `Negative. The opponent’s research division is like a fortress. Our asset hit a digital firewall and a surprisingly robust internal security protocol. They pulled back before tripping any alarms. We learned one thing: they’re not amateurs. (-5 PC)`;
                     }
             },
@@ -16994,7 +17023,15 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                     },
                     failureEffect: () => {
                         politicalCapital = Math.max(0, politicalCapital - 3);
-                        return `Contact lost. It seems our primary media asset got cold feet, citing internal pressure. In other words, they’ve gone dark. The channel is dead for now, and we’ll have to rely on public-facing information like everyone else. A frustrating setback and a waste of funds. (-3 PC)`
+						const ct_temp = campaignTrail_temp;
+                        if (ct_temp.issue_score_json) {
+                            ct_temp.issue_score_json.forEach(issue => {
+                                if (issue.fields.candidate === ct_temp.candidate_id) {
+                                    issue.fields.issue_score = Math.max(0.0, (issue.fields.issue_score || 0) - 0.005);
+                                }
+                            });
+                        }
+                        return `Contact lost. It seems our primary media asset got cold feet, citing internal pressure. In other words, they’ve gone dark. The channel is dead for now, and we’ll have to rely on public-facing information like everyone else. Worse; the botched approach has made them suspicious of our motives, resulting in slightly more critical coverage of our campaign. A frustrating setback and a waste of funds. (-3 PC)`
                     }
             },
                 {
@@ -17089,7 +17126,10 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                     },
                     failureEffect: () => {
                         politicalCapital = Math.max(0, politicalCapital - 5);
-                        return `Our attempts to probe the opponent’s donor network were detected. No public scandal, but the word is out in their fundraising circles, and they’ve tightened security. We’ve lost the element of surprise and some capital. (-5 PC)`;
+						const ct_temp = campaignTrail_temp;
+                        const opponentNationalMult = ct_temp.candidate_state_multiplier_json.find(f => f.fields.candidate !== ct_temp.candidate_id && f.fields.state === 1);
+                        if (opponentNationalMult) { opponentNationalMult.fields.state_multiplier = (opponentNationalMult.fields.state_multiplier || 1) * 1.008; }
+                        return `Our clumsy attempts to probe the opponent’s donor network were detected and leaked. The opponent is now using it to rally their big donors against your 'dirty tricks,' boosting their fundraising. (-5 PC)`;
                     }
             },
                 {
@@ -17123,7 +17163,13 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                     },
                     failureEffect: (targetStateName) => {
                         politicalCapital = Math.max(0, politicalCapital - 4);
-                        return `Yikes. A sharp-eyed field director flagged our operative for asking too many probing questions. They were politely asked to leave and their access was revoked. They know we’re watching their ground game in ${targetStateName} now. (-4 PC)`;
+						const ct_temp = campaignTrail_temp;
+                        const stateEntry = ct_temp.states_json.find(s => s.fields.name === targetStateName);
+                        if(stateEntry) {
+                            const opponentMults = ct_temp.candidate_state_multiplier_json.filter(f => f.fields.state === stateEntry.pk && f.fields.candidate !== ct_temp.candidate_id);
+                            opponentMults.forEach(mult => { mult.fields.state_multiplier = (mult.fields.state_multiplier || 1) * 1.01; });
+                        }
+                        return `Yikes. A sharp-eyed field director flagged our operative for asking too many probing questions. They were politely asked to leave and their access was revoked. They know we’re watching their ground game in ${targetStateName} now, and might use this to rally their volunteers. (-4 PC)`;
                     }
 				}
 			]
@@ -17132,7 +17178,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
             name: "POLITICAL ARRANGEMENTS",
             classification: "BACKROOM DEALS",
             description: "Negotiate strategic alliances or disruptions.",
-            baseSuccessRate: 0.75,
+            baseSuccessRate: 0.60,
             cooldown: 2,
             riskLevel: "MEDIUM",
             operations: [
@@ -17170,7 +17216,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                     description: "Discreetly funnel resources and organizational support to Gary Johnson’s Libertarian campaign in key Western states.",
                     successEffect: () => {
                         const ct_temp = campaignTrail_temp;
-                        const westernStates = ["Colorado", "Nevada", "New Mexico", "Arizona", "Montana"];
+                        const westernStates = ["Colorado", "Nevada", "New Mexico", "Arizona", "Montana", "Texas", "Wyoming", "Idaho", "North Dakota", "South Dakota",  "Nebraska", "Kansas", "Oklahoma"];
                         let changesMade = false;
                         westernStates.forEach(stateName => {
                             const state = ct_temp.states_json.find(f => f.fields.name === stateName);
@@ -17194,7 +17240,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                     },
                     failureEffect: () => {
                         const ct_temp = campaignTrail_temp;
-                        const westernStates = ["Colorado", "Nevada", "New Mexico", "Arizona", "Montana"];
+                        const westernStates = ["Colorado", "Nevada", "New Mexico", "Arizona", "Montana", "Texas", "Wyoming", "Idaho", "North Dakota", "South Dakota",  "Nebraska", "Kansas", "Oklahoma"];
                         let changesMade = false;
                         westernStates.forEach(stateName => {
                             const state = ct_temp.states_json.find(f => f.fields.name === stateName);
@@ -17207,7 +17253,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                             }
                         });
                         politicalCapital = Math.max(0, politicalCapital - 3);
-                        return changesMade ? "The deal fell through. Johnson got wind of the backchannel offer and personally vetoed it. He was worried that any hint of coordination would make them look like our puppets and destroy their credibility with libertarians. A missed opportunity. (-3 PC)" : "Johnson deal failure had no discernible impact (Western state data issue).";
+                        return changesMade ? "The deal fell through. Johnson got wind of the backchannel offer and personally vetoed it. He was worried that any hint of coordination would make them look like our puppets and destroy their credibility with libertarians. The bad thing is that it was leaked by a Johnson staffer, and now Trump is hammering you for trying to 'rig the election with dirty tricks'. (-3 PC)" : "Johnson deal failure had no discernible impact (Western state data issue).";
                     }
                 }
             ]
@@ -17216,7 +17262,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
             name: "INFLUENCE OPERATIONS",
             classification: "SOFT POWER",
             description: "Secure strategic endorsements or sway public opinion.",
-            baseSuccessRate: 0.80,
+            baseSuccessRate: 0.70,
             cooldown: 1,
             riskLevel: "LOW",
             operations: [
@@ -17594,7 +17640,8 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
             overflow: 'hidden',
             display: 'flex',
             flexDirection: 'column',
-            transition: 'opacity 0.3s ease-in-out'
+            transition: 'opacity 0.3s ease-in-out',
+            touchAction: 'manipulation'
         });
 
         const docHeader = document.createElement('div');
@@ -18538,25 +18585,25 @@ cyoAdventure = function (a) {
         window.aggressiveScore -= 1;
     }
 	
-	if (ans == 5170 | ans == 5151 | ans == 5191 | ans == 20938 | ans == 5200 | ans == 5201 | ans == 5202) {
-        feelthebern++;
-    }
+	if (ans == 5170 || ans == 5151 || ans == 5189 || ans == 20798 || ans == 20938 || ans == 5200 || ans == 5201 || ans == 5202 || ans == 21115) {
+		feelthebern++;
+	}
 	
-	if (ans == 20988 | ans == 20978 | ans == 5172 | ans == 20988 | ans == 5198) {
+	if (ans == 20988 || ans == 5251 || ans == 5172 || ans == 20988 || ans == 5198) {
         yeshillaryyes++;
     }
 	
-	if (ans == 20893 | ans == 21109 | ans == 20893 | ans == 2660 | ans == 21156) { 
+	if (ans == 20893 || ans == 5179 || ans == 20893 || ans == 5261 || ans == 21156) { 
 		hipnfly++;
 	}
 	
-	if (ans == 5148 | ans == 5215 | ans == 21013 | ans == 5172 | ans == 21108) {
-        hawkhill++;
-    }
+	if (ans == 5215 || ans == 21013 || ans == 21108 || ans == 21001 || ans == 5231) {
+		hawkhill++;
+	}
 	
-	if (ans == 5175 | ans == 5151 | ans == 5220 | ans == 21007) {
-        goodtimes++;
-    }
+	if (ans == 5175 || ans == 5220 || ans == 5142 || ans == 5184 || ans == 5223) {
+		goodtimes++;
+	}
 	if (ans == 5215) {
         goodtimes--;
     }
@@ -18573,39 +18620,39 @@ cyoAdventure = function (a) {
     let vpEffectsApplied = false;
 
     const vpEffectProfiles = {
-		// psst: base scores are: 1000 (-0.4), 1001 (0.5), 1002 (0.1), 1003 (-0.5), 1004 (-0.6)
+		// psst: base scores are: Ideology (-0.4), Trade (0.5), Foreign Policy (0.1), Social Issues (-0.5) and Immigration (-0.6)
 		// the closer to 0, the better Trump does
 		"Mike Pence": {
 			nationalMultiplier: 1.0, homeState: "Indiana",
-			issue_scores: { "1000": 0.0, "1001": 0.0, "1002": 0.0, "1003": 0.0, "1004": 0.0 }
+			issue_scores: { "1000": 0.05, "1001": -0.1, "1002": 0.0, "1003": 0.15, "1004": 0.1 }
 		},
 		"Chris Christie": {
 			nationalMultiplier: 0.99, homeState: "New Jersey",
-			issue_scores: { "1000": -0.05, "1001": -0.2, "1002": -0.1, "1003": 0.0, "1004": 0.05 }
+			issue_scores: { "1000": -0.1, "1001": -0.2, "1002": -0.1, "1003": 0.0, "1004": 0.1 }
 		},
 		"Newt Gingrich": {
 			nationalMultiplier: 0.985, homeState: "Georgia",
-			issue_scores: { "1000": 0.15, "1001": -0.05, "1002": -0.05, "1003": 0.2, "1004": 0.15 }
+			issue_scores: { "1000": 0.12, "1001": -0.08, "1002": -0.1, "1003": 0.2, "1004": 0.16 }
 		},
 		"Mike Flynn": {
 			nationalMultiplier: 1.005, homeState: "Rhode Island",
-			issue_scores: { "1000": 0.1, "1001": 0.0, "1002": -0.1, "1003": 0.07, "1004": 0.01 }
+			issue_scores: { "1000": 0.1, "1001": 0.0, "1002": -0.1, "1003": 0.07, "1004": 0.05 }
 		},
 		"Sarah Palin": {
 			nationalMultiplier: 1.01, homeState: "Alaska",
-			issue_scores: { "1000": 0.2, "1001": 0.05, "1002": 0.0, "1003": 0.3, "1004": 0.13 }
+			issue_scores: { "1000": 0.12, "1001": -0.05, "1002": 0.0, "1003": 0.3, "1004": 0.05 }
 		},
 		"Ted Cruz": {
-			nationalMultiplier: 0.995, homeState: "Texas",
-			issue_scores: { "1000": 0.15, "1001": 0.1, "1002": 0.05, "1003": 0.12, "1004": 0.16 }
+			nationalMultiplier: 0.992, homeState: "Texas",
+			issue_scores: { "1000": 0.12, "1001": -0.1, "1002": -0.05, "1003": 0.12, "1004": 0.1 }
 		},
 		"Tom Cotton": {
 			nationalMultiplier: 1.0, homeState: "Arkansas",
-			issue_scores: { "1000": 0.12, "1001": -0.05, "1002": -0.05, "1003": 0.15, "1004": 0.18 }
+			issue_scores: { "1000": 0.12, "1001": -0.1, "1002": -0.2, "1003": 0.15, "1004": 0.18 }
 		},
 		"Jeff Sessions": {
 			nationalMultiplier: 1.008, homeState: "Alabama",
-			issue_scores: { "1000": 0.2, "1001": 0.0, "1002": 0.0, "1003": 0.15, "1004": 0.15 }
+			issue_scores: { "1000": 0.11, "1001": 0.0, "1002": 0.0, "1003": 0.05, "1004": 0.15 }
 		},
 		"Scott Brown": {
 			nationalMultiplier: 0.99, homeState: "New Hampshire",
@@ -18613,7 +18660,7 @@ cyoAdventure = function (a) {
 		},
 		"Bob Corker": {
 			nationalMultiplier: 0.995, homeState: "Tennessee",
-			issue_scores: { "1000": 0.05, "1001": -0.15, "1002": -0.1, "1003": 0.05, "1004": 0.05 }
+			issue_scores: { "1000": 0.1, "1001": -0.2, "1002": -0.1, "1003": 0.1, "1004": 0.05 }
 		},
 		"Mary Fallin": {
 			nationalMultiplier: 1.0, homeState: "Oklahoma",
@@ -18669,7 +18716,7 @@ cyoAdventure = function (a) {
                     m => m.fields.candidate === TRUMP_CANDIDATE_ID && m.fields.state === stateData.pk
                 );
                 if (homeStateMultiplier) {
-                    homeStateMultiplier.fields.state_multiplier *= 1.002;
+                    homeStateMultiplier.fields.state_multiplier *= 1.006;
                 }
             }
         }
