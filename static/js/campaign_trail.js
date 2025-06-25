@@ -4397,7 +4397,7 @@ const fix1964Observer = new MutationObserver(() => {
     }
 });
 
-fix1964Observer.observe(document, {
+fix1964Observer.observe(document.body, {
     childList: true,
     subtree: true,
 });
