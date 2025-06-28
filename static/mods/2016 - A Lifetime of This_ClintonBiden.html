@@ -16016,6 +16016,14 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
         }
         return false;
     };
+	
+	const pickAndAssign = (position, candidates, seal, announceTier) => {
+        for (const nominee of candidates) {
+            if (nominee && assignNominee(position, nominee, seal, announceTier, announceTier)) {
+                return; 
+            }
+        }
+    };
 
     // candidate & seal pools
     const seals = {
@@ -16253,67 +16261,134 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 		};
 		assignedPeople.add(vicePresident.name);
 
-		// Tier 1 confirmations
-		if (runningMateID === 213) assignNominee("Secretary of State", clintonCandidates.state.biden_vp_loyalist, seals.state, 1);
-		else if (hawkScore >= 3) assignNominee("Secretary of State", clintonCandidates.state.hawk, seals.state, 1);
-		else assignNominee("Secretary of State", clintonCandidates.state.establishment, seals.state, 1);
+		const candidates = clintonCandidates;
 
-		if (playerEV < 280) assignNominee("Secretary of Defense", clintonCandidates.defense.unity, seals.defense, 1);
-		else if (runningMateID === 213) assignNominee("Secretary of Defense", clintonCandidates.defense.biden_vp_loyalist, seals.defense, 1);
-		else assignNominee("Secretary of Defense", clintonCandidates.defense.hawk, seals.defense, 1);
+        // Tier 1 appointments
+        const statePicks = [
+            (runningMateID === 213 && candidates.state.biden_vp_loyalist),
+            (hawkScore >= 3 && candidates.state.hawk),
+            candidates.state.establishment,
+            candidates.state.loyalist,
+            candidates.state.progressive
+        ].filter(Boolean);
+        pickAndAssign("Secretary of State", statePicks, seals.state, 1);
 
-		if (wallStreetScore <= -2) assignNominee("Secretary of the Treasury", clintonCandidates.treasury.progressive, seals.treasury, 1);
-		else if (playerEV > 350) assignNominee("Secretary of the Treasury", clintonCandidates.treasury.technocrat, seals.treasury, 1);
-		else assignNominee("Secretary of the Treasury", clintonCandidates.treasury.establishment, seals.treasury, 1);
+        const defensePicks = [
+            (playerEV < 280 && candidates.defense.unity),
+            (runningMateID === 213 && candidates.defense.biden_vp_loyalist),
+            candidates.defense.hawk,
+            candidates.defense.establishment,
+            candidates.defense.dove
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Defense", defensePicks, seals.defense, 1);
 
-		if (playerEV < 290) assignNominee("Secretary of Homeland Security", clintonCandidates.homeland.unity, seals.homeland, 1);
-		else assignNominee("Secretary of Homeland Security", clintonCandidates.homeland.counter_terror, seals.homeland, 1);
+        const treasuryPicks = [
+            (wallStreetScore <= -2 && candidates.treasury.progressive),
+            (playerEV > 350 && candidates.treasury.technocrat),
+            candidates.treasury.establishment,
+            candidates.treasury.corporate,
+            candidates.treasury.loyalist
+        ].filter(Boolean);
+        pickAndAssign("Secretary of the Treasury", treasuryPicks, seals.treasury, 1);
 
-		// Tier 2 confirmations
-		if (playerEV < 290) assignNominee("Attorney General", clintonCandidates.attorneyGeneral.unity, seals.attorneyGeneral, 2);
-		else if (runningMateID === 213) assignNominee("Attorney General", clintonCandidates.attorneyGeneral.biden_vp_loyalist, seals.attorneyGeneral, 2);
-		else if (wallStreetScore >= 2) assignNominee("Attorney General", clintonCandidates.attorneyGeneral.prosecutor, seals.attorneyGeneral, 2);
-		else assignNominee("Attorney General", clintonCandidates.attorneyGeneral.progressive, seals.attorneyGeneral, 2);
+        const homelandPicks = [
+            (playerEV < 290 && candidates.homeland.unity),
+            candidates.homeland.counter_terror,
+            candidates.homeland.establishment,
+            candidates.homeland.centrist
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Homeland Security", homelandPicks, seals.homeland, 1);
 
-		if (obamaLoyalty >= 2) { if (!assignNominee("Secretary of Health & Human Services", clintonCandidates.hhs.establishment, seals.hhs, 2)) assignNominee("Secretary of Health & Human Services", clintonCandidates.hhs.technocrat, seals.hhs, 2); }
-		else if (sandersRelations >= 3) assignNominee("Secretary of Health & Human Services", clintonCandidates.hhs.progressive, seals.hhs, 2);
-		else assignNominee("Secretary of Health & Human Services", clintonCandidates.hhs.loyalist, seals.hhs, 2);
+        // Tier 2 appointments
+        const agPicks = [
+            (playerEV < 290 && candidates.attorneyGeneral.unity),
+            (runningMateID === 213 && candidates.attorneyGeneral.biden_vp_loyalist),
+            (wallStreetScore >= 2 && candidates.attorneyGeneral.prosecutor),
+            candidates.attorneyGeneral.progressive,
+            candidates.attorneyGeneral.establishment
+        ].filter(Boolean);
+        pickAndAssign("Attorney General", agPicks, seals.attorneyGeneral, 2);
 
-		if (playerEV < 290) assignNominee("Secretary of Transportation", clintonCandidates.transportation.unity, seals.transportation, 2);
-		else if (runningMateID === 215) assignNominee("Secretary of Transportation", clintonCandidates.transportation.establishment, seals.transportation, 2);
-		else assignNominee("Secretary of Transportation", clintonCandidates.transportation.infrastructure, seals.transportation, 2);
-		
-		if (campaignTrail_temp.player_answers.includes(20893)) assignNominee("Secretary of Energy", clintonCandidates.energy.green, seals.energy, 2);
-		else if (sandersRelations <= 1) assignNominee("Secretary of Energy", clintonCandidates.energy.technocrat, seals.energy, 2);
-		else assignNominee("Secretary of Energy", clintonCandidates.energy.establishment, seals.energy, 2);
-		
-		// Tier 3 confirmations
-		if (sandersRelations >= 3) assignNominee("Secretary of the Interior", clintonCandidates.interior.progressive, seals.interior, 3);
-		else assignNominee("Secretary of the Interior", clintonCandidates.interior.western_dem, seals.interior, 3);
+        const hhsPicks = [
+            (obamaLoyalty >= 2 && candidates.hhs.establishment),
+            (sandersRelations >= 3 && candidates.hhs.progressive),
+            candidates.hhs.loyalist,
+            candidates.hhs.technocrat
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Health & Human Services", hhsPicks, seals.hhs, 2);
 
-		if (runningMateID === 213) assignNominee("Secretary of Agriculture", clintonCandidates.agriculture.biden_vp_loyalist, seals.agriculture, 3);
-		else if (obamaLoyalty >= 2) { if (!assignNominee("Secretary of Agriculture", clintonCandidates.agriculture.establishment, seals.agriculture, 3)) assignNominee("Secretary of Agriculture", clintonCandidates.agriculture.rural_outreach, seals.agriculture, 3); }
-		else assignNominee("Secretary of Agriculture", clintonCandidates.agriculture.rural_outreach, seals.agriculture, 3);
+        const transportPicks = [
+            (playerEV < 290 && candidates.transportation.unity),
+            (runningMateID !== 215 && candidates.transportation.infrastructure), 
+            candidates.transportation.establishment,
+            candidates.transportation.technocrat
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Transportation", transportPicks, seals.transportation, 2);
 
-		if (globalistScore <= -2) assignNominee("Secretary of Commerce", clintonCandidates.commerce.protectionist, seals.commerce, 3);
-		else if (playerEV < 300) assignNominee("Secretary of Commerce", clintonCandidates.commerce.unity, seals.commerce, 3);
-		else assignNominee("Secretary of Commerce", clintonCandidates.commerce.corporate, seals.commerce, 3);
+        const energyPicks = [
+            (campaignTrail_temp.player_answers.includes(20893) && candidates.energy.green),
+            (sandersRelations <= 1 && candidates.energy.technocrat),
+            candidates.energy.establishment,
+            candidates.energy.progressive
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Energy", energyPicks, seals.energy, 2);
 
-		if (sandersRelations >= 6 && playerEV > 350) { if (!assignNominee("Secretary of Labor", clintonCandidates.labor.progressive_unity, seals.labor, 3)) assignNominee("Secretary of Labor", clintonCandidates.labor.union, seals.labor, 3); }
-		else if (sandersRelations >= 3) { if (!assignNominee("Secretary of Labor", clintonCandidates.labor.union, seals.labor, 3)) assignNominee("Secretary of Labor", clintonCandidates.labor.establishment, seals.labor, 3); }
-		else { if (!assignNominee("Secretary of Labor", clintonCandidates.labor.establishment, seals.labor, 3)) assignNominee("Secretary of Labor", clintonCandidates.labor.biden_vp_loyalist, seals.labor, 3); }
-		
-		if (runningMateID === 214) { if (!assignNominee("Secretary of Housing & Urban Development", clintonCandidates.hud.progressive, seals.hud, 3)) assignNominee("Secretary of Housing & Urban Development", clintonCandidates.hud.mayor, seals.hud, 3); }
-		else if(runningMateID === 211) { assignNominee("Secretary of Housing & Urban Development", clintonCandidates.hud.booker_vp_loyalist, seals.hud, 3); }
-		else { assignNominee("Secretary of Housing & Urban Development", clintonCandidates.hud.establishment, seals.hud, 3); }
+        // Tier 3 appointments
+        const interiorPicks = [
+            (sandersRelations >= 3 && candidates.interior.progressive),
+            candidates.interior.western_dem,
+            candidates.interior.establishment,
+            candidates.interior.tribal_affairs
+        ].filter(Boolean);
+        pickAndAssign("Secretary of the Interior", interiorPicks, seals.interior, 3);
+        
+        const agriculturePicks = [
+             (runningMateID === 213 && candidates.agriculture.biden_vp_loyalist),
+             (obamaLoyalty >= 2 && candidates.agriculture.establishment),
+             candidates.agriculture.rural_outreach,
+             candidates.agriculture.progressive
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Agriculture", agriculturePicks, seals.agriculture, 3);
 
-		if (playerEV < 300) assignNominee("Secretary of Education", clintonCandidates.education.unity, seals.education, 3);
-		else if (sandersRelations >= 4) assignNominee("Secretary of Education", clintonCandidates.education.union, seals.education, 3);
-		else assignNominee("Secretary of Education", clintonCandidates.education.reformer, seals.education, 3);
+        const commercePicks = [
+            (globalistScore <= -2 && candidates.commerce.protectionist),
+            (playerEV < 300 && candidates.commerce.unity),
+            candidates.commerce.corporate,
+            candidates.commerce.establishment
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Commerce", commercePicks, seals.commerce, 3);
+        
+        const laborPicks = [
+            (sandersRelations >= 6 && playerEV > 350 && candidates.labor.progressive_unity),
+            (sandersRelations >= 3 && candidates.labor.union),
+            candidates.labor.establishment,
+            (runningMateID === 213 && candidates.labor.biden_vp_loyalist)
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Labor", laborPicks, seals.labor, 3);
 
-		if (runningMateID === 213) assignNominee("Secretary of Veterans Affairs", clintonCandidates.veterans.biden_vp_loyalist, seals.veterans, 3);
-		else if (hawkScore >= 3) assignNominee("Secretary of Veterans Affairs", clintonCandidates.veterans.bipartisan, seals.veterans, 3);
-		else assignNominee("Secretary of Veterans Affairs", clintonCandidates.veterans.war_veteran, seals.veterans, 3);
+        const hudPicks = [
+            (runningMateID === 214 && candidates.hud.establishment),
+            (runningMateID === 211 && candidates.hud.booker_vp_loyalist),
+            candidates.hud.progressive,
+            candidates.hud.mayor
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Housing & Urban Development", hudPicks, seals.hud, 3);
+
+        const educationPicks = [
+            (playerEV < 300 && candidates.education.unity),
+            (sandersRelations >= 4 && candidates.education.union),
+            candidates.education.reformer,
+            candidates.education.establishment
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Education", educationPicks, seals.education, 3);
+
+        const veteransPicks = [
+            (runningMateID === 213 && candidates.veterans.biden_vp_loyalist),
+            (hawkScore >= 3 && candidates.veterans.bipartisan),
+            candidates.veterans.war_veteran,
+            candidates.veterans.progressive
+        ].filter(Boolean);
+        pickAndAssign("Secretary of Veterans Affairs", veteransPicks, seals.veterans, 3);
 
 	} else { // Trump victory
 		president = { name: "Donald Trump", img: "https://www.thesun.co.uk/wp-content/uploads/2019/06/NINTCHDBPICT000494691093-e1559546002438.jpg?strip=all&w=960", formerRole: "Businessman", state: "New York" };
@@ -16334,64 +16409,46 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 		vicePresident = { position: "Vice President", ...selectedVPData, seal: seals.vp };
 		assignedPeople.add(vicePresident.name);
 
+		const candidates = trumpCandidates; // for brevity
 		const trumpMandate = (playerEV < 200) ? 100 : (270 - playerEV);
 
-		if (!assignNominee("Attorney General", trumpCandidates.attorneyGeneral.loyalist_1, seals.attorneyGeneral, 1, 1)) {
-			if (!assignNominee("Attorney General", trumpCandidates.attorneyGeneral.loyalist_2, seals.attorneyGeneral, 1, 1)) {
-				assignNominee("Attorney General", trumpCandidates.attorneyGeneral.hardliner, seals.attorneyGeneral, 1, 1);
-			}
-		}
+        // Tier 1 appointments
+        pickAndAssign("Attorney General", [candidates.attorneyGeneral.loyalist_1, candidates.attorneyGeneral.loyalist_2, candidates.attorneyGeneral.hardliner], seals.attorneyGeneral, 1);
+        
+        pickAndAssign("Secretary of Defense", [candidates.defense.general, candidates.defense.loyalist], seals.defense, 1);
+        
+        const treasuryPicks = (trumpMandate < 40) 
+            ? [candidates.treasury.unity, candidates.treasury.establishment, candidates.treasury.populist]
+            : [candidates.treasury.establishment, candidates.treasury.populist, candidates.treasury.unity];
+        pickAndAssign("Secretary of the Treasury", treasuryPicks, seals.treasury, 1);
+        
+        const homelandPicks = (trumpMandate > 60)
+            ? [candidates.homeland.hardliner, candidates.homeland.general, candidates.homeland.loyalist]
+            : [candidates.homeland.general, candidates.homeland.hardliner, candidates.homeland.loyalist];
+        pickAndAssign("Secretary of Homeland Security", homelandPicks, seals.homeland, 1);
+        
+        // Tier 2 appointments
+        const statePicks = (hawkScore >= 3)
+            ? [candidates.state.hawk, candidates.state.loyalist, candidates.state.wildcard, candidates.state.alternate_loyalist]
+            : [candidates.state.loyalist, candidates.state.wildcard, candidates.state.hawk, candidates.state.alternate_loyalist];
+        pickAndAssign("Secretary of State", statePicks, seals.state, 2);
 
-		if (!assignNominee("Secretary of Defense", trumpCandidates.defense.general, seals.defense, 1, 1)) {
-			assignNominee("Secretary of Defense", trumpCandidates.defense.loyalist, seals.defense, 1, 1);
-		}
-		
-		if (trumpMandate < 40) {
-			if (!assignNominee("Secretary of the Treasury", trumpCandidates.treasury.unity, seals.treasury, 1, 1)) {
-				assignNominee("Secretary of the Treasury", trumpCandidates.treasury.establishment, seals.treasury, 1, 1);
-			}
-		} else {
-			if (!assignNominee("Secretary of the Treasury", trumpCandidates.treasury.establishment, seals.treasury, 1, 1)) {
-				assignNominee("Secretary of the Treasury", trumpCandidates.treasury.populist, seals.treasury, 1, 1);
-			}
-		}
+        pickAndAssign("Secretary of HHS", [candidates.hhs.establishment, candidates.hhs.loyalist, candidates.hhs.unity], seals.hhs, 2);
+        pickAndAssign("Secretary of Transportation", [candidates.transportation.establishment, candidates.transportation.alternate], seals.transportation, 2);
+        pickAndAssign("Secretary of Commerce", [candidates.commerce.business, candidates.commerce.populist, candidates.commerce.establishment], seals.commerce, 2);
 
-		if (trumpMandate > 60) {
-			if (!assignNominee("Secretary of Homeland Security", trumpCandidates.homeland.hardliner, seals.homeland, 1, 1)) {
-				assignNominee("Secretary of Homeland Security", trumpCandidates.homeland.general, seals.homeland, 1, 1);
-			}
-		} else {
-			if (!assignNominee("Secretary of Homeland Security", trumpCandidates.homeland.general, seals.homeland, 1, 1)) {
-				assignNominee("Secretary of Homeland Security", trumpCandidates.homeland.hardliner, seals.homeland, 1, 1);
-			}
-		}
-
-		if (hawkScore >= 3) {
-			if (!assignNominee("Secretary of State", trumpCandidates.state.hawk, seals.state, 2, 2)) assignNominee("Secretary of State", trumpCandidates.state.loyalist, seals.state, 2, 2);
-		} else {
-			if (!assignNominee("Secretary of State", trumpCandidates.state.loyalist, seals.state, 2, 2)) {
-				if (!assignNominee("Secretary of State", trumpCandidates.state.alternate_loyalist, seals.state, 2, 2)) {
-					assignNominee("Secretary of State", trumpCandidates.state.wildcard, seals.state, 2, 2);
-				}
-			}
-		}
-
-		if (!assignNominee("Secretary of HHS", trumpCandidates.hhs.establishment, seals.hhs, 2, 2)) assignNominee("Secretary of HHS", trumpCandidates.hhs.loyalist, seals.hhs, 2, 2);
-		if (!assignNominee("Secretary of Transportation", trumpCandidates.transportation.establishment, seals.transportation, 2, 2)) assignNominee("Secretary of Transportation", trumpCandidates.transportation.alternate, seals.transportation, 2, 2);
-		if (!assignNominee("Secretary of Commerce", trumpCandidates.commerce.business, seals.commerce, 2, 2)) assignNominee("Secretary of Commerce", trumpCandidates.commerce.populist, seals.commerce, 2, 2);
-		
-		if (trumpMandate > 80) {
-			if (!assignNominee("Secretary of the Interior", trumpCandidates.interior.firebrand, seals.interior, 3, 3)) assignNominee("Secretary of the Interior", trumpCandidates.interior.establishment, seals.interior, 3, 3);
-		} else {
-			if (!assignNominee("Secretary of the Interior", trumpCandidates.interior.establishment, seals.interior, 3, 3)) assignNominee("Secretary of the Interior", trumpCandidates.interior.western, seals.interior, 3, 3);
-		}
-		
-		if (!assignNominee("Secretary of Agriculture", trumpCandidates.agriculture.establishment, seals.agriculture, 3, 3)) assignNominee("Secretary of Agriculture", trumpCandidates.agriculture.populist, seals.agriculture, 3, 3);
-		if (!assignNominee("Secretary of Labor", trumpCandidates.labor.business, seals.labor, 3, 3)) assignNominee("Secretary of Labor", trumpCandidates.labor.establishment, seals.labor, 3, 3);
-		if (!assignNominee("Secretary of Housing & Urban Development", trumpCandidates.hud.loyalist, seals.hud, 3, 3)) assignNominee("Secretary of Housing & Urban Development", trumpCandidates.hud.alternate, seals.hud, 3, 3);
-		if (!assignNominee("Secretary of Energy", trumpCandidates.energy.establishment, seals.energy, 3, 3)) assignNominee("Secretary of Energy", trumpCandidates.energy.oil_gas, seals.energy, 3, 3);
-		if (!assignNominee("Secretary of Education", trumpCandidates.education.establishment, seals.education, 3, 3)) assignNominee("Secretary of Education", trumpCandidates.education.alternate, seals.education, 3, 3);
-		if (!assignNominee("Secretary of Veterans Affairs", trumpCandidates.veterans.establishment, seals.veterans, 3, 3)) assignNominee("Secretary of Veterans Affairs", trumpCandidates.veterans.alternate, seals.veterans, 3, 3);
+        // Tier 3 appointments
+        const interiorPicks = (trumpMandate > 80)
+            ? [candidates.interior.firebrand, candidates.interior.establishment, candidates.interior.western]
+            : [candidates.interior.establishment, candidates.interior.western, candidates.interior.firebrand];
+        pickAndAssign("Secretary of the Interior", interiorPicks, seals.interior, 3);
+        
+        pickAndAssign("Secretary of Agriculture", [candidates.agriculture.establishment, candidates.agriculture.populist, candidates.agriculture.agribusiness], seals.agriculture, 3);
+        pickAndAssign("Secretary of Labor", [candidates.labor.business, candidates.labor.establishment], seals.labor, 3);
+        pickAndAssign("Secretary of Housing & Urban Development", [candidates.hud.loyalist, candidates.hud.alternate], seals.hud, 3);
+        pickAndAssign("Secretary of Energy", [candidates.energy.establishment, candidates.energy.oil_gas], seals.energy, 3);
+        pickAndAssign("Secretary of Education", [candidates.education.establishment, candidates.education.alternate], seals.education, 3);
+        pickAndAssign("Secretary of Veterans Affairs", [candidates.veterans.establishment, candidates.veterans.alternate], seals.veterans, 3);
 	}
     
     // html generation
