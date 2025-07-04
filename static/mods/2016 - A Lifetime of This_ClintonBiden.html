@@ -14925,7 +14925,13 @@ const RUNNING_MATE_DATA = {
         },
         feedback: {
             5155: "Cory is a bit of a rising star in the Democratic Party, and this selection only reinforces that. In fact, he’s so excited that he’s already lining up new community events for you.",
-            5156: "Happy to be on your team, Booker wants to be directly involved in your outreach efforts. His enthusiasm is quite infectious, and he brings copies of one of his favorite movies, <i>Click</i>, to every rally he’s in. A lot of copies, actually.",
+			5156: (() => {
+                const favoriteMovies = [
+                    'Click', 'Grown Ups', 'Grown Ups 2', 'Paul Blart: Mall Cop', 'Paul Blart: Mall Cop 2', 'Jack and Jill', 'Hoodwinked', 'Hoodwinked Two! Hood vs. Evil', 'Pixels', 'Zookeeper', 'That’s My Boy', 'Fred: The Movie', 'Little Nicky', 'Gigli', 'Happily N’Ever After', 'Bridge to Terabithia', 'Tenacious D in The Pick of Destiny', 'Alvin and the Chipmunks: The Squeakquel', 'Happy Feet', 'Miss Congeniality', 'The Pink Panther', 'The Pink Panther 2', 'Reno 911!: Miami', 'Taxi (2004)', 'D.E.B.S.', 'Bad Girls from Valley High', 'Legally Blondes', 'Dream a Little Dream 2', 'An Extremely Goofy Movie', 'National Lampoon’s Last Resort', 'The Aristocrats', 'The Longest Yard', 'Bingo', 'The Human Centipede (First Sequence)', 'The Heartbreak Kid', 'Dirty Rotten Scoundrels', 'The Out-of-Towners (1999)', 'Arthur (2011)', 'Bedazzled (2000)', 'A Bucket of Blood (1995)', 'The Kid from Left Field (1979)', 'Gambit (2012)', 'Piranha 3D', 'I Don’t Know How She Does It', 'I Want Someone to Eat Cheese With', 'School for Scoundrels (2006)', 'Spy Kids: All the Time in the World', 'The Magic Roundabout', 'TMMT (2007)',
+                ];
+                const movie = favoriteMovies[Math.floor(Math.random() * favoriteMovies.length)];
+                return `Happy to be on your team, Booker wants to be directly involved in your outreach efforts. His enthusiasm is quite infectious, and he brings copies of one of his favorite movies, <i>${movie}</i>, to every rally he’s in. A lot of copies, actually.`;
+            })(),
             5157: "Though some see him as more pragmatic than progressive, you believe his blend of idealism might help you win over skeptical moderates, and maybe get some of those Bernie-bros to look more into him.",
             5262: "To be fair, Cory’s only been in the Senate for about three years now, although you think his experience in Newark more than makes up for it. Whether the others in your party will be convinced, well…",
             5263: "The good news is that, if anything goes wrong in the next four years, you can at least twist the meaning of “progressive” to favor your side. You’d better hope they look at Cory and see him as someone they can also trust.",
@@ -15049,6 +15055,7 @@ const RUNNING_MATE_DATA = {
 			5198: "Privately, Biden’s surrogates tell you this is a good thing. They say he’s too busy with his newest love affair, Jennifer Aniston, to campaign with you anyway.",
             5231: "Behind the scenes, you hear that Obama is pleased with your comments. As a gift, he sends you a pot of Häagen-Dazs® chocolate chip cookie dough ice cream after one of your rallies; attached to it is a note. ‘This is Joe’s favorite,’ the note reads. ‘He can eat a whole pint in one sitting. It’s a little frightening, honestly.’",
 			20803: "Some of the names floated to you include Jane Kelly, Jacqueline Nguyen, and Kamala Harris. On the very bottom of the list, one scribbled name needles you a bit: Barack Obama. <i>This is malarkey, jack…</i>",
+			21020: "After much discussion, Podesta presents a name to you: that of— wait, what? Bush Sr? H-how did that even happen? You feel strange.",
             21156: "I wish we could do Donkey Kong Country references here, but I’m not sure if ‘Donkey Kong go to the polls’ works."
         },
         issueScores: {
@@ -15343,6 +15350,9 @@ let isAchievementShowing = false;
 const achievementSoundURL = "";
 
 function unlockAchievement(title) {
+	if (typeof cheatsActive === 'undefined' || typeof campaign_trail_temp === 'undefined' || !campaign_trail_temp.CTS) { // not on CTS? then do nothing
+		return;
+	}
 	if (unlockedAchievements[title]) { // has been unlocked? then do nothing
         return;
     }
@@ -16138,7 +16148,7 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 		transportation: {
 			infrastructure: { name: "Eric Garcetti", img: "https://cdn.britannica.com/14/191614-050-DFF52410/Eric-Garcetti.jpg", formerRole: "Mayor of Los Angeles", state: "California" },
 			establishment: { name: "Anthony Foxx", img: "https://s.wsj.net/public/resources/images/OB-XG443_0428tr_G_20130428174057.jpg", formerRole: "Secretary of Transportation", state: "North Carolina" },
-			technocrat: { name: "Jane Garvey", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy4AHQdOABzeH4kcS3d1BzX-BbAgTz-OWxwA&s", formerRole: "Administrator of the FAA", state: "Massachusetts" },
+			technocrat: { name: "Jane Garvey", img: "https://media.gettyimages.com/id/1164441/pt/foto/federal-aviation-administration-administrator-jane-garvey-testifies-september-20-2001-during-a.jpg?s=612x612&w=0&k=20&c=gB48z4EW3clmEPMlSKngr7HYs9e0HSyUGT_6gdVzgkA=", formerRole: "Administrator of the FAA", state: "Massachusetts" },
 			unity: { name: "Ray LaHood", img: "https://www.ttnews.com/sites/default/files/images/articles/ray-lahood.jpg", formerRole: "Former Sec. of Transportation (R)", state: "Illinois" }
 		},
 		energy: {
@@ -16191,7 +16201,7 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 			hardliner: { name: "Jeff Sessions", img: "https://m.media-amazon.com/images/M/MV5BMTRhNTM4ZTMtMjk0OS00MWY4LWIyYjUtZjBmYWRlOGYwYjBlXkEyXkFqcGc@._V1_.jpg", formerRole: "U.S. Senator", state: "Alabama" }
 		},
 		interior: {
-			firebrand: { name: "Sarah Palin", img: "https://upload.wikimedia.org/wikipedia/commons/1/14/Cathy_McMorris%2C_official_photo_portrait%2C_color.jpg", formerRole: "Former Governor of Alaska", state: "Alaska" },
+			firebrand: { name: "Sarah Palin", img: "https://media.gettyimages.com/id/499973456/pt/foto/universal-city-ca-sarah-palin-visits-extra-at-universal-studios-hollywood-on-december-4-2015-in.jpg?s=612x612&w=0&k=20&c=w5B9KZhVcOmNc4zXpk-A_8IitiGPw0V6ND83csvojwU=", formerRole: "Former Governor of Alaska", state: "Alaska" },
 			establishment: { name: "Mary Fallin", img: "https://upload.wikimedia.org/wikipedia/commons/6/64/Mary_Fallin_official_110th_Congress_photo.jpg", formerRole: "Governor of Oklahoma", state: "Oklahoma" },
 			western: { name: "Cathy McMorris Rodgers", img: "https://upload.wikimedia.org/wikipedia/commons/1/14/Cathy_McMorris%2C_official_photo_portrait%2C_color.jpg", formerRole: "U.S. Representative", state: "Washington" }
 		},
@@ -16276,7 +16286,7 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
         const defensePicks = [
             (playerEV < 280 && candidates.defense.unity),
             (runningMateID === 213 && candidates.defense.biden_vp_loyalist),
-            candidates.defense.hawk,
+            (hawkScore >= 2 && candidates.defense.hawk),
             candidates.defense.establishment,
             candidates.defense.dove
         ].filter(Boolean);
@@ -16285,8 +16295,8 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
         const treasuryPicks = [
             (wallStreetScore <= -2 && candidates.treasury.progressive),
             (playerEV > 350 && candidates.treasury.technocrat),
+            (wallStreetScore >= 2 && candidates.treasury.corporate),
             candidates.treasury.establishment,
-            candidates.treasury.corporate,
             candidates.treasury.loyalist
         ].filter(Boolean);
         pickAndAssign("Secretary of the Treasury", treasuryPicks, seals.treasury, 1);
@@ -16300,12 +16310,12 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
         pickAndAssign("Secretary of Homeland Security", homelandPicks, seals.homeland, 1);
 
         // Tier 2 appointments
-        const agPicks = [
+		const agPicks = [
             (playerEV < 290 && candidates.attorneyGeneral.unity),
-            (runningMateID === 213 && candidates.attorneyGeneral.biden_vp_loyalist),
             (wallStreetScore >= 2 && candidates.attorneyGeneral.prosecutor),
-            candidates.attorneyGeneral.progressive,
-            candidates.attorneyGeneral.establishment
+            (sandersRelations >= 3 && candidates.attorneyGeneral.progressive),
+            (obamaLoyalty >= 2 && candidates.attorneyGeneral.establishment),
+            candidates.attorneyGeneral.biden_vp_loyalist
         ].filter(Boolean);
         pickAndAssign("Attorney General", agPicks, seals.attorneyGeneral, 2);
 
@@ -16361,15 +16371,15 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
         const laborPicks = [
             (sandersRelations >= 6 && playerEV > 350 && candidates.labor.progressive_unity),
             (sandersRelations >= 3 && candidates.labor.union),
-            candidates.labor.establishment,
-            (runningMateID === 213 && candidates.labor.biden_vp_loyalist)
+            (runningMateID === 213 && candidates.labor.biden_vp_loyalist),
+			candidates.labor.establishment
         ].filter(Boolean);
         pickAndAssign("Secretary of Labor", laborPicks, seals.labor, 3);
 
         const hudPicks = [
-            (runningMateID === 214 && candidates.hud.establishment),
             (runningMateID === 211 && candidates.hud.booker_vp_loyalist),
-            candidates.hud.progressive,
+            (obamaLoyalty >= 2 && candidates.hud.establishment),
+            (sandersRelations >= 4 && candidates.hud.progressive),
             candidates.hud.mayor
         ].filter(Boolean);
         pickAndAssign("Secretary of Housing & Urban Development", hudPicks, seals.hud, 3);
@@ -16409,13 +16419,13 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 		vicePresident = { position: "Vice President", ...selectedVPData, seal: seals.vp };
 		assignedPeople.add(vicePresident.name);
 
-		const candidates = trumpCandidates; // for brevity
+		const candidates = trumpCandidates;
 		const trumpMandate = (playerEV < 200) ? 100 : (270 - playerEV);
 
         // Tier 1 appointments
         pickAndAssign("Attorney General", [candidates.attorneyGeneral.loyalist_1, candidates.attorneyGeneral.loyalist_2, candidates.attorneyGeneral.hardliner], seals.attorneyGeneral, 1);
         
-        pickAndAssign("Secretary of Defense", [candidates.defense.general, candidates.defense.loyalist], seals.defense, 1);
+        pickAndAssign("Secretary of Defense", [candidates.defense.general, candidates.defense.loyalist, candidates.defense.hardliner], seals.defense, 1);
         
         const treasuryPicks = (trumpMandate < 40) 
             ? [candidates.treasury.unity, candidates.treasury.establishment, candidates.treasury.populist]
@@ -16515,7 +16525,6 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 	for (let i = 0; i < cabinetMembers.length; i += 2) {
 		html += '<tr>';
 		const member1 = cabinetMembers[i];
-		// Check if member1 exists to prevent errors
 		if (member1) {
 			html += generateCabinetCells(member1, victoryType);
 		}
@@ -17341,6 +17350,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
         // don't load song - just update UI to show first song's metadata
         // playback will be initiated by user action
         updateUI();
+		updateVolumeIcon();
 
         if (document.visibilityState === 'visible' && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING && hasUserInitiatedPlayback) {
             startRafUpdater();
@@ -17455,21 +17465,20 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
         volumePercentageElement.textContent = `${newVolumePercent}%`;
         updateVolumeIcon();
     }
-    function toggleMute() { 
-        if (!playerReady || !ytPlayer || typeof ytPlayer.isMuted !== 'function' || !volumeSlider) return;
-
+    function toggleMute() {
+        if (!playerReady || !ytPlayer || !volumeSlider || !volumeIconElement) return;
+		
         if (ytPlayer.isMuted()) {
             ytPlayer.unMute();
-            if (parseFloat(volumeSlider.value) === 0) {
-                volumeSlider.value = (volumeBeforeMute > 0) ? volumeBeforeMute : 0.5; 
-            }
-             setVolumeFromSlider(false); 
+            volumeSlider.value = (volumeBeforeMute > 0) ? volumeBeforeMute : 0.5;
+            volumeIconElement.src = ICON_VOLUME;
         } else {
-            volumeBeforeMute = parseFloat(volumeSlider.value); 
-            if (typeof ytPlayer.mute === 'function') ytPlayer.mute();
-            volumeSlider.value = 0; 
-            setVolumeFromSlider(false); 
+            volumeBeforeMute = parseFloat(volumeSlider.value);
+            ytPlayer.mute();
+            volumeSlider.value = 0;
+            volumeIconElement.src = ICON_MUTED;
         }
+        setVolumeFromSlider(false);
     }
     function updateVolumeIcon() { 
         if (!volumeIconElement) return;
@@ -17777,8 +17786,13 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
         const handleSeekEnd = () => { if (isSeeking) progressBar.dispatchEvent(new Event('change')); };
         progressBar.addEventListener("mouseup", handleSeekEnd);
         progressBar.addEventListener("touchend", handleSeekEnd);
-
-        volumeSlider.addEventListener("input", () => setVolumeFromSlider(true));
+		
+		volumeSlider.addEventListener("input", () => {
+            setVolumeFromSlider(true);
+            if (volumeIconElement) {
+                volumeIconElement.src = parseFloat(volumeSlider.value) === 0 ? ICON_MUTED : ICON_VOLUME;
+            }
+        });
         
         playlistSelectorElement.addEventListener("change", (event) => {
             const newIndex = parseInt(event.target.value, 10);
