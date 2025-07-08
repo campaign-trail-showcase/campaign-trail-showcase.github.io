@@ -16,7 +16,7 @@ campaignTrail_temp.global_parameter_json = [
             "issue_stance_6_max": 0.71,
             "global_variance": 0.01,
             "state_variance": 0.005,
-            "question_count": 17,
+            "question_count": 19,
             "default_map_color_hex": "#a3948c",
             "no_state_map_color_hex": "#a3948c"
         }
@@ -74,7 +74,7 @@ campaignTrail_temp.candidate_json = [
             "last_name": "Person",
             "election": 21,
             "party": "Democratic Party - Hardline Moderate",
-            "state": "r/thespinroom",
+            "state": "Arkansas",
             "priority": 5,
             "description": "'",
             "color_hex": "#0000FF",
@@ -212,7 +212,7 @@ jet_data = {
     "containerColor": "#a23994",
     "innerWindowColor": "#e5ffeb",
     "bannerImageUrl": "https://i.imgur.com/s74NzsJ.png",
-    "backgroundImageUrl": "https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg",
+    "backgroundImageUrl": "https://i.imgur.com/NsGicUA.png",
     "endingTextColor": "#000000",
     "customQuote": "\"I really like tucker\" - Gunsmokexeon",
     "gameTitle": "Smoke In The Air"
@@ -221,7 +221,7 @@ jet_data = {
 campaignTrail_temp.credits = "<button onclick='credits()'>ThePearPerson</button>"
 
 credits = function() {
-  credits = [ "This mod was written and (mostly) coded by ThePearPerson using Jet's Code 1 and 2 Tools", "Music Player: Stolen from DecstarG", "Credits Function: Made by DecstarG in 2000N; Borrowed from Thatchmaster's <i> American Carnage </i>", "Gunsmokexeon: For giving me permission to make this mod :3"]
+  credits = [ "This mod was written and (mostly) coded by ThePearPerson using Jet's Code 1 and 2 Tools", "Music Player: Stolen from DecstarG", "Credits Function: Made by DecstarG in 2000N; Borrowed from Thatchmaster's American Carnage", "Tooltips: Germany 2021 Mod", "Gunsmokexeon: For giving me permission to make this mod :3"]
   text = "CREDITS:\n\n"
   for (i in credits) {
       text += credits[i] + "\n"
@@ -247,9 +247,17 @@ $(".container")[0].style.backgroundColor = "#a23994";
 
 document.getElementById("header").src = "https://i.imgur.com/s74NzsJ.png";
 
-document.body.background = "https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg";
+document.body.background = "https://i.imgur.com/3ORAr8k.jpeg";
 
 document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#e5ffeb!important;}</style>";
+
+$("#dynamic-favicon").attr("href", "https://i.imgur.com/hii5zOv.jpeg");
+
+// Election night descs
+e.ElectionPopup = "Please... Please..."
+e.WinPopup = "Thank you... Thank you..."
+e.LosePopup = "Oh God... Oh God..."
+e.SelAnsContText = "Gunsmoke, you gotta say <i>something</i>."
 
 // Initialise custom music
 
@@ -492,7 +500,79 @@ newMusicPlayer()
 
 RecReading=true
 
-HistHexcolour=["#7C56B9","#A73270","#86a2a0","#928b45"]; HistName=[" Gunsmoke Exeon"," JD Vance"," Woman _ Trees"," One- Community"]; HistEV=[320,218,0,0]; HistPV=["84,217,132","77,102,174","3,126,231","1,671,423"]; HistPVP=["50.2%","46.1%"," 2.1%"," 1.6%"];
+HistHexcolour=["#7C56B9","#A73270","#86a2a0","#928b45"]; HistName=[" Gunsmoke Exeon"," JD Vance"," Woman _ Trees"," One- Community"]; HistEV=[321,217,0,0]; HistPV=["84,217,132","77,102,174","3,126,231","1,671,423"]; HistPVP=["50.2%","46.7%"," 2.1%"," 1.6%"];
 
+function addDynamicCSS() {
+    var css = `
+        .inner_window_question h3 .mytooltip{
+            background-color: e193c4;
+        }
+
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background-color: #e193c4;
+        }
+
+        .mytooltip .mytooltiptext {
+            width: 240px;
+            background-color: #664D65;
+            color: #FD6524;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 20%;
+            left: 20%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            border: 2px solid #C9AEBE;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+
+        .mytooltip .mytooltiptext img {
+            max-width: 240px;
+            height: auto;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+    
+    styleElem.appendChild(document.createTextNode(css));
+    
+    document.head.appendChild(styleElem);
+}
+
+
+addDynamicCSS();
+
+tooltipList = [
+    {searchString: "JD Vance", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/J._D._Vance_%2853808261332%29.jpg/2560px-J._D._Vance_%2853808261332%29.jpg>The Vice-President of the United States, Republican Nominee, and my #1 hater. I hate him too."},
+    {searchString: "Respect for Marriage Act", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Joe_Biden_signed_the_%22Respect_for_Marriage_Act%22_%281%29.jpg>Repealed in 2026 by a 53-47 vote in the Senate. The last thing achieved by the 119th Congress before a wave of Democrats took back the House and reduced the Senate Majority. Of course they hurt people on the way out."},
+	{searchString: "Trump", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/President_Donald_Trump_and_his_national_security_team_meet_in_the_Situation_Room_of_the_White_House_%2854607926187%29.jpg/2560px-President_Donald_Trump_and_his_national_security_team_meet_in_the_Situation_Room_of_the_White_House_%2854607926187%29.jpg> The President of the United States. I'm gonna need his job."},
+	{searchString: "October 10, 2027", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Damage_in_Gaza_Strip_during_the_October_2023_-_29.jpg/640px-Damage_in_Gaza_Strip_during_the_October_2023_-_29.jpg> The Iran-Israel War started with the Israeli invasion of the Ilam province, and the frontlines have since expanded to include much of Western Iran. Nearly a whole year later, almost 300,000 casualties are reported, with 135,000 of those being civillians."},
+	{searchString: "I have a better option in mind.", explanationText: "<img src=https://i.imgur.com/xptWmhX.png> I thought it'd be funny if he was on the ticket. <b>He</b> doesn't think it is."},
+	{searchString: "Toby Fox", explanationText: "<img src=https://i.imgur.com/5DTW8v7.png> The man who created Deltarune. He's one of your favorite people."},
+	{searchString: "Deltarune", explanationText: "<img src=https://i.imgur.com/nwWl6gd.png> A game created by Toby Fox. It's one of your favorite games."},
+	{searchString: "1926", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Victor_Berger_of_Wis_circa_1910s.jpg/1024px-Victor_Berger_of_Wis_circa_1910s.jpg> Victor Berger was a member of the Socialist Party of America, and representative of Wisconsin's 5th district from 1911-1913, 1919, and 1923-1929."},
+	{searchString: "slur", explanationText: "You knew it would happen one day. It still hurts."},
+	{searchString: "Boykisser", explanationText: "<img src=https://i.imgur.com/kloBpkV.png> :3."},
+	{searchString: "UNITED STATES v. SKRMETTI", explanationText: "<img src=https://media.cnn.com/api/v1/images/stellar/prod/230630093016-supreme-court-lgbtq-rights-062623.jpg?c=16x9&q=h_833,w_1480,c_fill>A Supreme Court case wherein the court ruled that state laws that banned gender affirming care for minors is constitutional."},
+	{searchString: "Go out there and make Democrats everywhere proud", explanationText: "They're all watching me."}
+        
+]
 
 //#endcode
