@@ -1,7 +1,7 @@
  /*
  * @title: 2016: A Lifetime of This / 2016b / The Hillary Trail
  * @author: StrawberryMaster & Friends
- * @version: 1.0.3
+ * @version: 1.0.4
  * @description: The 2016 election in the eyes of Hillary Clinton (and a couple of others, too)
  * 
  * Coding license: Apache License 2.0
@@ -95,16 +95,16 @@ campaignTrail_temp.candidate_json = [
             "party": "Republican",
             "state": "New York",
             "priority": 2,
-            "description": "'",
+            "description": "<p>An unconventional and polarizing figure, real estate mogul Donald Trump has completely upended the American political landscape. Leveraging his universal name recognition from business and reality television — including the hit TV show <i>The Apprentice</i> —, his populist message, challenging everything from trade deals to immigration, has defied the predictions of every expert and won him the Republican nomination. There isn’t a person in America who doesn’t know the name Trump.</p><p>He faces former Secretary of State Hillary Clinton, a candidate who, in Trump’s eyes, represents the very political establishment he is running against. With decades of experience, a robust political network, and significant institutional support, Clinton holds what appears to be an insurmountable advantage. Polls and pundits alike have all but declared the race over before it has truly begun.</p><span style=\"float:right\">But not all may be lost for him.</span>",
             "color_hex": "#cf1321",
             "secondary_color_hex": "#fc9d9d",
-            "is_active": 0,
-            "image_url": "https://i.imgur.com/yIDR8jT.jpeg",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/Hf2mDDm.jpeg",
             "electoral_victory_message": "'",
             "electoral_loss_message": "'",
             "no_electoral_majority_message": "'",
             "description_as_running_mate": "'",
-            "candidate_score": 0,
+            "candidate_score": 1,
             "running_mate": false
         }
     },
@@ -118,11 +118,11 @@ campaignTrail_temp.candidate_json = [
             "party": "Libertarian",
             "state": "New Mexico",
             "priority": 3,
-            "description": "'",
+            "description": "<p>For voters fed up with the two major parties, there is another choice: former New Mexico Governor Gary Johnson. Running on the Libertarian ticket, Johnson champions a platform of fiscal conservatism and social liberalism, and he's hoping to present himself as a common-sense alternative to the two most disliked candidates in modern history.</p><p>Johnson (and the Libertarians)'s primary goal is to reach the elusive 15% polling threshold required to gain a spot on the national debate stage. He believes that if Americans can just hear his message, they'll abandon the old parties. However, his campaign may hampered by a lack of media coverage and his own occasional gaffes. Still, his ability to peel off disaffected Republicans and independents could prove decisive in tight swing states.",
             "color_hex": "#F7F70E",
             "secondary_color_hex": "#FFFFC0",
-            "is_active": 0,
-            "image_url": "'",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/0UDlbiI.jpeg",
             "electoral_victory_message": "'",
             "electoral_loss_message": "'",
             "no_electoral_majority_message": "'",
@@ -141,11 +141,11 @@ campaignTrail_temp.candidate_json = [
             "party": "Green",
             "state": "Massachusetts",
             "priority": 4,
-            "description": "'",
+            "description": "<p>Appealing to the progressive wing of the electorate is Green Party candidate Dr. Jill Stein. Positioning herself as the true heir to Bernie Sanders' political revolution, Stein offers an uncompromisingly leftist platform, calling for stronger environmental protections, tuition-free college, and a dramatic reduction in military spending.</p><p>Her campaign's strategy hinges on attracting disillusioned Sanders supporters who view Hillary Clinton as an unacceptable corporate centrist. While her own path to victory is non-existent, Democrats live in fear of a repeat of 2000; even a small percentage of the vote for Stein in critical states like Wisconsin, Michigan, and Pennsylvania could siphon enough support from Clinton to tip the entire election to Donald Trump.</p>",
             "color_hex": "#14BD14",
             "secondary_color_hex": "#A1FFA1",
-            "is_active": 0,
-            "image_url": "'",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/w4iEfO0.jpeg",
             "electoral_victory_message": "'",
             "electoral_loss_message": "'",
             "no_electoral_majority_message": "'",
@@ -462,7 +462,7 @@ function appendStyle() {
                 font-family: Georgia, Arial, serif;
                 font-size: 22pt;
             }
-            #election_id, #candidate_id, #running_mate_id, #game_type_selection, #game_type_id, #difficulty_level_id {
+            #election_id, #candidate_id, #running_mate_id, #game_type_selection, #game_type_id, #difficulty_level_id, #question_select {
                 border-width: .1rem; /* on Firefox, button borders are different compared to Chrome & friends */
                 margin-left: .25rem;
 				padding: .2em .4em;
@@ -1312,10 +1312,17 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
         const select = form.querySelector('select[name="game_type_id"]');
         if (!select || select === currentSelect) return false;
 
+        const descriptionEl = document.getElementById("opponent_selection_description_window");
+        if (!descriptionEl) return false;
+
+        if (currentSelect) {
+            currentSelect.removeEventListener('change', handleSelectionChange);
+        }
+        
+        currentSelect = select;
+
         const options = select.querySelectorAll('option');
         if (options.length < 2) return false;
-
-        currentSelect = select;
 
         // 0 - WTA, 1 - Proportional
         const firstOption = options[0];
@@ -1336,19 +1343,19 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 
         select.addEventListener('change', handleSelectionChange, { passive: true });
 
-        updateDescription(select.value);
+        updateDescription(select.value, descriptionEl);
 
         return true;
     }
 
     function handleSelectionChange(event) {
-        updateDescription(event.target.value);
+        const descriptionEl = document.getElementById("opponent_selection_description_window");
+        if (descriptionEl) {
+            updateDescription(event.target.value, descriptionEl);
+        }
     }
 
-    function updateDescription(selectedValue) {
-        const descriptionEl = document.getElementById("opponent_selection_description_window");
-        if (!descriptionEl) return;
-
+    function updateDescription(selectedValue, descriptionEl) {
         const descriptionKey = selectedValue === "1" ? 'wta' : 'proportional';
 
         requestAnimationFrame(() => {
@@ -1365,14 +1372,14 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             let shouldCheck = false;
 
             for (const mutation of mutations) {
-                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                    for (const node of mutation.addedNodes) {
-                        if (node.nodeType === Node.ELEMENT_NODE) {
-                            if (node.matches?.('form[name="game_type_selection"]') ||
-                                node.querySelector?.('form[name="game_type_selection"]')) {
-                                shouldCheck = true;
-                                break;
-                            }
+                if (mutation.type !== 'childList' || mutation.addedNodes.length === 0) continue;
+                
+                for (const node of mutation.addedNodes) {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        if (node.matches?.('form[name="game_type_selection"]') ||
+                            node.querySelector?.('form[name="game_type_selection"]')) {
+                            shouldCheck = true;
+                            break;
                         }
                     }
                 }
@@ -1386,7 +1393,9 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
                 }, 50);
             }
         });
-
+        
+        observer.debounceTimer = null;
+        
         observer.observe(document.body, {
             childList: true,
             subtree: true,
@@ -1398,6 +1407,9 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 
         window.addEventListener('beforeunload', () => {
             observer.disconnect();
+            if (currentSelect) {
+                currentSelect.removeEventListener('change', handleSelectionChange);
+            }
         });
 
         return observer;
@@ -1411,6 +1423,9 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 
     window.cleanupElectoralSystemModifier = () => {
         isInitialized = false;
+        if (currentSelect) {
+            currentSelect.removeEventListener('change', handleSelectionChange);
+        }
         currentSelect = null;
     };
 })();
@@ -1428,7 +1443,9 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
         enablePreloading: true,
         enableLocalStorage: true,
         hoverEffect: true,
-        clickCooldown: 150
+        clickCooldown: 150,
+        maxCacheSize: 20,
+        useRequestIdleCallback: true
     };
 
     // banner list
@@ -1567,8 +1584,6 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             alt: "Viagra banner",
             weight: 1
         },
-
-
     ];
 
     // caching system
@@ -1578,6 +1593,7 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             this.loadedUrls = new Set();
             this.storageKey = 'vintageBannerCache_v2';
             this.maxCacheAge = 7 * 24 * 60 * 60 * 1000; // 7 days
+            this.cacheAccessOrder = [];
 
             if (CONFIG.enableLocalStorage) {
                 this.loadFromStorage();
@@ -1601,15 +1617,15 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
         loadFromStorage() {
             try {
                 const cached = localStorage.getItem(this.storageKey);
-                if (cached) {
-                    const data = JSON.parse(cached);
-                    const age = Date.now() - data.timestamp;
+                if (!cached) return;
+                
+                const data = JSON.parse(cached);
+                const age = Date.now() - data.timestamp;
 
-                    if (age < this.maxCacheAge) {
-                        this.loadedUrls = new Set(data.urls);
-                    } else {
-                        localStorage.removeItem(this.storageKey);
-                    }
+                if (age < this.maxCacheAge) {
+                    this.loadedUrls = new Set(data.urls);
+                } else {
+                    localStorage.removeItem(this.storageKey);
                 }
             } catch (e) {
                 // silent fail
@@ -1618,89 +1634,157 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 
         preloadImage(url) {
             if (this.imageCache.has(url)) {
+                this.updateCacheOrder(url);
                 return Promise.resolve(this.imageCache.get(url));
             }
 
             return new Promise((resolve, reject) => {
                 const img = new Image();
-                const timeout = setTimeout(() => {
+                let timeoutId;
+                
+                const cleanup = () => {
+                    clearTimeout(timeoutId);
+                    img.onload = img.onerror = null;
+                };
+
+                timeoutId = setTimeout(() => {
+                    cleanup();
                     reject(new Error(`Timeout: ${url}`));
-                }, 8000); // 8 seconds
+                }, 8000);
 
                 img.onload = () => {
-                    clearTimeout(timeout);
-                    this.imageCache.set(url, img);
-                    this.loadedUrls.add(url);
-                    this.saveToStorage();
+                    cleanup();
+                    this.addToCache(url, img);
                     resolve(img);
                 };
 
                 img.onerror = () => {
-                    clearTimeout(timeout);
+                    cleanup();
                     reject(new Error(`Failed: ${url}`));
                 };
 
+                // set image loading priority to low
+                img.fetchPriority = "low";
                 img.src = url;
             });
         }
 
-        async preloadBatch(urls) {
-            if (!CONFIG.enablePreloading) return;
+        addToCache(url, img) {
+            // LRU cache eviction policy
+            if (this.imageCache.size >= CONFIG.maxCacheSize && !this.imageCache.has(url)) {
+                const lruUrl = this.cacheAccessOrder.shift();
+                this.imageCache.delete(lruUrl);
+            }
+            
+            this.imageCache.set(url, img);
+            this.updateCacheOrder(url);
+            this.loadedUrls.add(url);
+            this.saveToStorage();
+        }
 
-            const promises = urls.map(url =>
-                this.preloadImage(url).catch(() => null)
-            );
+        updateCacheOrder(url) {
+            // remove url if it exists in the order array
+            const index = this.cacheAccessOrder.indexOf(url);
+            if (index > -1) {
+                this.cacheAccessOrder.splice(index, 1);
+            }
+            // add to the end (most recently used)
+            this.cacheAccessOrder.push(url);
+        }
 
-            await Promise.allSettled(promises);
+        preloadBatch(urls) {
+            if (!CONFIG.enablePreloading) return Promise.resolve();
+
+            if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
+                return new Promise(resolve => {
+                    window.requestIdleCallback(() => {
+                        const promises = urls.map(url => 
+                            this.preloadImage(url).catch(() => null)
+                        );
+                        Promise.allSettled(promises).then(resolve);
+                    }, { timeout: 2000 });
+                });
+            } else {
+                const promises = urls.map(url => 
+                    this.preloadImage(url).catch(() => null)
+                );
+                return Promise.allSettled(promises);
+            }
         }
 
         getCachedImage(url) {
-            return this.imageCache.get(url) || null;
+            const img = this.imageCache.get(url);
+            if (img) {
+                this.updateCacheOrder(url);
+            }
+            return img || null;
         }
     }
 
-    // weighted random selection
-    function getWeightedRandomBanner(banners, excludeRecent = []) {
-        const availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+    // weighted random selection with memoization
+    const bannerSelector = (() => {
+        let weightSum = null;
+        
+        const getTotalWeight = () => {
+            if (weightSum === null) {
+                weightSum = banners.reduce((sum, banner) => sum + banner.weight, 0);
+            }
+            return weightSum;
+        };
 
-        // if we've excluded too many, reset with just the current one
-        if (availableBanners.length === 0) {
-            const currentUrl = excludeRecent[excludeRecent.length - 1];
-            return banners.find(b => b.url !== currentUrl) || banners[0];
-        }
-
-        const totalWeight = availableBanners.reduce((sum, banner) => sum + banner.weight, 0);
-        let random = Math.random() * totalWeight;
-
-        for (const banner of availableBanners) {
-            random -= banner.weight;
-            if (random <= 0) return banner;
-        }
-
-        return availableBanners[0];
-    }
+        return {
+            getRandomBanner(excludeRecent = []) {
+                const availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+                
+                if (availableBanners.length === 0) {
+                    const currentUrl = excludeRecent[excludeRecent.length - 1];
+                    return banners.find(b => b.url !== currentUrl) || banners[0];
+                }
+                
+                const totalWeight = availableBanners.reduce((sum, banner) => sum + banner.weight, 0);
+                let random = Math.random() * totalWeight;
+                
+                for (const banner of availableBanners) {
+                    random -= banner.weight;
+                    if (random <= 0) return banner;
+                }
+                
+                return availableBanners[0];
+            },
+            
+            // precompute weighted selection table
+            initializeSelectionTable() {
+                getTotalWeight();
+            }
+        };
+    })();
 
     // banner system
     class ClickableBannerSystem {
         constructor() {
+            this.createElements();
+            
             this.cache = new BannerCache();
             this.currentBanner = null;
             this.recentBanners = [];
-            this.container = null;
-            this.imageElement = null;
-            this.clickIndicator = null;
             this.isTransitioning = false;
             this.lastClickTime = 0;
+            this.rafId = null;
 
             this.init();
         }
 
         init() {
-            this.createContainer();
-            this.createClickIndicator();
-            this.preloadInitialBanners();
-            this.displayRandomBanner();
             this.setupEventListeners();
+            bannerSelector.initializeSelectionTable();
+            
+            Promise.resolve()
+                .then(() => this.preloadInitialBanners())
+                .then(() => this.displayRandomBanner())
+                .catch(() => {
+                    // fallback if preloading fails
+                    this.displayRandomBanner();
+                });
 
             // cleanup on page unload
             window.addEventListener('beforeunload', () => {
@@ -1708,9 +1792,15 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             });
         }
 
-        createContainer() {
+        createElements() {
             this.container = document.createElement("div");
+            this.imageElement = document.createElement("img");
+            this.clickIndicator = document.createElement("div");
+
             this.container.id = "bottomBar";
+            this.container.setAttribute('tabindex', '0');
+            this.container.setAttribute('role', 'button');
+            this.container.setAttribute('aria-label', 'Click to change banner');
 
             this.container.style.cssText = `
                 height: ${CONFIG.bannerHeight}px;
@@ -1723,12 +1813,11 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
                 position: relative;
                 overflow: hidden;
                 cursor: pointer;
-                transition: all ${CONFIG.fadeTransition}ms ease-in-out;
+                transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
                 user-select: none;
                 border-radius: 3px;
             `;
 
-            this.imageElement = document.createElement("img");
             this.imageElement.style.cssText = `
                 width: 100%; 
                 height: 100%; 
@@ -1738,13 +1827,6 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
                 pointer-events: none;
             `;
 
-            this.container.appendChild(this.imageElement);
-            gameWindow.insertAdjacentElement("afterend", this.container);
-        }
-
-        createClickIndicator() {
-            // click indicator overlay
-            this.clickIndicator = document.createElement("div");
             this.clickIndicator.style.cssText = `
                 position: absolute;
                 top: 2px;
@@ -1760,17 +1842,21 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
                 font-weight: bold;
                 color: #333;
                 opacity: 0;
-                transition: opacity 200ms ease-in-out;
+                transition: opacity 200ms ease-in-out, transform 150ms ease-in-out;
                 pointer-events: none;
                 z-index: 10;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.3);
             `;
             this.clickIndicator.textContent = "↻";
+
+            // append elements
+            this.container.appendChild(this.imageElement);
             this.container.appendChild(this.clickIndicator);
+            gameWindow.insertAdjacentElement("afterend", this.container);
         }
 
         setupEventListeners() {
-            this.container.addEventListener('click', (e) => {
+            this.container.onclick = (e) => {
                 e.preventDefault();
                 const now = Date.now();
                 if (now - this.lastClickTime < CONFIG.clickCooldown || this.isTransitioning) {
@@ -1778,45 +1864,48 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
                 }
                 this.lastClickTime = now;
                 this.nextBanner();
-            });
+            };
 
             // hover effects
             if (CONFIG.hoverEffect) {
-                this.container.addEventListener('mouseenter', () => {
-                    if (!this.isTransitioning) {
+                this.container.onmouseenter = () => {
+                    if (this.isTransitioning) return;
+                    
+                    cancelAnimationFrame(this.rafId);
+                    this.rafId = requestAnimationFrame(() => {
                         this.container.style.transform = 'scale(1.02)';
                         this.container.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
                         this.clickIndicator.style.opacity = '1';
-                    }
-                });
+                    });
+                };
 
-                this.container.addEventListener('mouseleave', () => {
-                    this.container.style.transform = 'scale(1)';
-                    this.container.style.boxShadow = 'none';
-                    this.clickIndicator.style.opacity = '0';
-                });
+                this.container.onmouseleave = () => {
+                    cancelAnimationFrame(this.rafId);
+                    this.rafId = requestAnimationFrame(() => {
+                        this.container.style.transform = 'scale(1)';
+                        this.container.style.boxShadow = 'none';
+                        this.clickIndicator.style.opacity = '0';
+                    });
+                };
             }
 
-            // for keyboard accessbility
-            this.container.addEventListener('keydown', (e) => {
+            // keyboard accessibility
+            this.container.onkeydown = (e) => {
                 if (e.code === 'Space' || e.code === 'Enter') {
                     e.preventDefault();
                     this.nextBanner();
                 }
-            });
-
-            // making it focusable
-            this.container.setAttribute('tabindex', '0');
-            this.container.setAttribute('role', 'button');
-            this.container.setAttribute('aria-label', 'Click to change banner');
+            };
         }
 
         async preloadInitialBanners() {
-            const urlsToPreload = banners
-                .slice(0, CONFIG.preloadCount)
-                .map(b => b.url);
-
-            await this.cache.preloadBatch(urlsToPreload);
+            // prioritize preloading based on banner weights
+            const sortedBanners = [...banners]
+                .sort((a, b) => b.weight - a.weight)
+                .slice(0, CONFIG.preloadCount);
+                
+            const urlsToPreload = sortedBanners.map(b => b.url);
+            return this.cache.preloadBatch(urlsToPreload);
         }
 
         async displayBanner(banner, useTransition = false) {
@@ -1829,22 +1918,29 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
                 this.imageElement.style.opacity = '0';
 
                 setTimeout(() => {
+                    requestAnimationFrame(() => {
+                        if (cachedImg) {
+                            this.imageElement.src = cachedImg.src;
+                        } else {
+                            this.imageElement.src = banner.url;
+                        }
+                        this.imageElement.alt = banner.alt;
+                        
+                        // force reflow to ensure transition works
+                        void this.imageElement.offsetWidth;
+                        this.imageElement.style.opacity = '1';
+                        this.isTransitioning = false;
+                    });
+                }, CONFIG.fadeTransition / 2);
+            } else {
+                requestAnimationFrame(() => {
                     if (cachedImg) {
                         this.imageElement.src = cachedImg.src;
                     } else {
                         this.imageElement.src = banner.url;
                     }
                     this.imageElement.alt = banner.alt;
-                    this.imageElement.style.opacity = '1';
-                    this.isTransitioning = false;
-                }, CONFIG.fadeTransition / 2);
-            } else {
-                if (cachedImg) {
-                    this.imageElement.src = cachedImg.src;
-                } else {
-                    this.imageElement.src = banner.url;
-                }
-                this.imageElement.alt = banner.alt;
+                });
             }
 
             this.currentBanner = banner;
@@ -1855,32 +1951,62 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
                 this.recentBanners.shift();
             }
 
-            // preload next batch if not cached
+            // preload next banner if not cached
             if (!cachedImg) {
                 this.cache.preloadImage(banner.url).catch(() => {
                     // silent fail
                 });
             }
+
+            // opportunistically preload next potential banners
+            if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
+                window.requestIdleCallback(() => {
+                    const nextBanners = banners
+                        .filter(b => !this.recentBanners.includes(b.url) && !this.cache.imageCache.has(b.url))
+                        .sort((a, b) => b.weight - a.weight)
+                        .slice(0, 2);
+                        
+                    this.cache.preloadBatch(nextBanners.map(b => b.url));
+                }, { timeout: 5000 });
+            }
         }
 
         displayRandomBanner() {
-            const banner = getWeightedRandomBanner(banners, this.recentBanners);
+            const banner = bannerSelector.getRandomBanner(this.recentBanners);
             this.displayBanner(banner, this.currentBanner !== null);
         }
 
         nextBanner() {
             this.displayRandomBanner();
 
-            this.clickIndicator.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-                this.clickIndicator.style.transform = 'scale(1)';
-            }, 150);
+            requestAnimationFrame(() => {
+                this.clickIndicator.style.transform = 'scale(1.2)';
+                
+                setTimeout(() => {
+                    requestAnimationFrame(() => {
+                        this.clickIndicator.style.transform = 'scale(1)';
+                    });
+                }, 150);
+            });
         }
 
         destroy() {
-            if (this.container && this.container.parentNode) {
-                this.container.parentNode.removeChild(this.container);
+            cancelAnimationFrame(this.rafId);
+            
+            if (this.container) {
+                this.container.onclick = null;
+                this.container.onmouseenter = null;
+                this.container.onmouseleave = null;
+                this.container.onkeydown = null;
+                
+                if (this.container.parentNode) {
+                    this.container.parentNode.removeChild(this.container);
+                }
             }
+            
+            this.container = null;
+            this.imageElement = null;
+            this.clickIndicator = null;
         }
     }
 
@@ -1890,7 +2016,6 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
         next: () => bannerSystem.nextBanner(),
         current: () => bannerSystem.currentBanner?.alt || 'Loading...'
     };
-
 })();
 
 // This checks if any running mates have been unlocked
@@ -1898,44 +2023,91 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 (function() {
     const STORAGE_KEY = 'hillary2016_unlocked_rms';
     const UNLOCKABLE_RM_IDS = [213, 214, 215]; // Biden, Castro, Garcetti
-
+    
+    // attempt at a cross-browser solution. check if localStorage is available
+    function isLocalStorageAvailable() {
+        try {
+            const test = '__storage_test__';
+            localStorage.setItem(test, test);
+            localStorage.removeItem(test);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+    
+    // get unlocked running mates from storage
+    function getUnlockedRunningMates() {
+        if (!isLocalStorageAvailable()) {
+            console.warn("localStorage not available - running mates will be hidden");
+            return [];
+        }
+        
+        try {
+            const storedData = localStorage.getItem(STORAGE_KEY);
+            return storedData ? JSON.parse(storedData) : [];
+        } catch (e) {
+            console.error("Could not parse unlock data from localStorage.", e);
+            return [];
+        }
+    }
+    
+    // apply visibility using both hidden attribute and style
     function applyRunningMateVisibility() {
         const selectElement = document.getElementById('running_mate_id');
         if (!selectElement) return;
 
-        let unlockedPks = [];
-        try {
-            const storedData = localStorage.getItem(STORAGE_KEY);
-            if (storedData) {
-                unlockedPks = JSON.parse(storedData);
-            }
-        } catch (e) {
-            console.error("Could not parse unlock data from localStorage.", e);
-            unlockedPks = [];
-        }
-
-        for (const option of selectElement.options) {
+        const unlockedPks = getUnlockedRunningMates();
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        
+        Array.from(selectElement.options).forEach(option => {
             const optionPk = parseInt(option.value, 10);
-
+            
             if (UNLOCKABLE_RM_IDS.includes(optionPk)) {
-                // This logic can be simplified slightly
-                option.hidden = !unlockedPks.includes(optionPk);
+                const isUnlocked = unlockedPks.includes(optionPk);
+                
+                // use both hidden attribute and style.display for maximum compatibility
+                option.hidden = !isUnlocked;
+                
+                // for Safari, apply inline style as well
+                if (isSafari) {
+                    option.style.display = isUnlocked ? '' : 'none';
+                }
+                
+                // if running on iOS Safari, force-refresh the select element
+                if (isSafari && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                    option.disabled = !isUnlocked; // additional Safari-specific attribute
+                }
             }
+        });
+        
+        // force Safari to redraw the select element if needed
+        if (isSafari && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            selectElement.style.display = 'none';
+            setTimeout(() => { selectElement.style.display = ''; }, 0);
         }
     }
 
+    let debounceTimer;
     const observerCallback = (mutationsList, observer) => {
-        if (document.getElementById('running_mate_id')) {
-            applyRunningMateVisibility();
-        }
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            if (document.getElementById('running_mate_id')) {
+                applyRunningMateVisibility();
+            }
+        }, 50);
     };
 
     const observer = new MutationObserver(observerCallback);
     const targetNode = document.getElementById('game_window') || document.body;
-
     observer.observe(targetNode, { childList: true, subtree: true });
 
+    // apply visibility immediately and also when the DOM is fully loaded
     applyRunningMateVisibility();
+    document.addEventListener('DOMContentLoaded', applyRunningMateVisibility);
+    
+    // apply one more time after a short delay to catch any late rendering
+    setTimeout(applyRunningMateVisibility, 500);
 
     console.log("Checking for running mates...");
 })();
@@ -1996,6 +2168,73 @@ try {
 } catch (e) {
     console.error("Could not apply selector styling:", e);
 }
+
+// This is, essentially, for preventing candidates or running mates
+// from being selected. Very useful if you're having a one-candidate
+// mod but still want to list the other candidates
+function automateStartSequence() {
+
+    const BAD_CANDIDATE_IDS = ['200', '202', '203']; // Trump, Johnson, Stein
+    const RESET_CANDIDATE_ID = '201'; // Clinton
+
+    const ELEMENT_IDS = {
+        goBackButton: "candidate_id_back",
+        candidateButton: "candidate_id_button",
+        runningMateButton: "running_mate_id_button",
+        finalScreenBackButton: "opponent_selection_id_back",
+        finalScreenContinueButton: "opponent_selection_id_button",
+        candidateIdInput: "candidate_id",
+        initialContinueButton: "election_id_button"
+    };
+
+    // track the last selected candidate ID
+    let lastSelectedCandidateId = null;
+
+    const handleDomChange = (mutationsList, observer) => {
+        // query for elements within the callback, as they may have just been added
+        const goBackButton = document.getElementById(ELEMENT_IDS.goBackButton);
+        const candidateButton = document.getElementById(ELEMENT_IDS.candidateButton);
+        const runningMateButton = document.getElementById(ELEMENT_IDS.runningMateButton);
+        const finalScreenBackButton = document.getElementById(ELEMENT_IDS.finalScreenBackButton);
+        const finalScreenContinueButton = document.getElementById(ELEMENT_IDS.finalScreenContinueButton);
+        const candidateIdInput = document.getElementById(ELEMENT_IDS.candidateIdInput);
+
+        // if we've reached the final screen, perform the last action and stop the script
+        if (finalScreenContinueButton && finalScreenBackButton) {
+            // only remove the back button if we selected a bad candidate
+            if (BAD_CANDIDATE_IDS.includes(lastSelectedCandidateId)) {
+                finalScreenBackButton.remove();
+            }
+            observer.disconnect();
+            return;
+        }
+		
+        if (candidateIdInput) {
+            const currentCandidateId = candidateIdInput.value;
+            // store the current candidate ID for later reference
+            lastSelectedCandidateId = currentCandidateId;
+
+            // handle "bad" candidates by removing the continue button
+            if (BAD_CANDIDATE_IDS.includes(currentCandidateId) && candidateButton) {
+                candidateButton.remove();
+            }
+            // handle the special "reset" candidate
+            else if (currentCandidateId === RESET_CANDIDATE_ID && goBackButton && !candidateButton) {
+                goBackButton.click();
+				
+                const initialContinue = document.getElementById(ELEMENT_IDS.initialContinueButton);
+                if (initialContinue) {
+                     initialContinue.click();
+                }
+            }
+        }
+    };
+
+    const observer = new MutationObserver(handleDomChange);
+    const config = { childList: true, subtree: true };
+    observer.observe(document.body, config);
+}
+automateStartSequence();
 
 // Achievements?
 campaignTrail_temp.achievements = {
