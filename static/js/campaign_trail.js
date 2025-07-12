@@ -4072,9 +4072,9 @@ document.addEventListener("DOMContentLoaded", () => {
             questionHTML(A(2));
         },
         "#margin_switcher": () => {
-            campaignTrail_temp.margin_format = campaignTrail_temp.margin_format === "#fff"
-                ? "#000"
-                : "#fff";
+            campaignTrail_temp.margin_format = campaignTrail_temp.margin_format === "#c9c9c9"
+                ? "#fff"
+                : "#c9c9c9";
             questionHTML(A(2));
         },
     };
