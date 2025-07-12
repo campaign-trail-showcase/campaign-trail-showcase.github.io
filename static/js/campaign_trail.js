@@ -4075,6 +4075,10 @@ document.addEventListener("DOMContentLoaded", () => {
             campaignTrail_temp.margin_format = campaignTrail_temp.margin_format === "#c9c9c9"
                 ? "#fff"
                 : "#c9c9c9";
+            window.localStorage.setItem(
+                "margin_form",
+                campaignTrail_temp.margin_format,
+            );
             questionHTML(A(2));
         },
     };
