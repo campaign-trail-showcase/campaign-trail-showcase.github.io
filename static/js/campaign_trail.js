@@ -1273,6 +1273,9 @@ function openMap(_e) {
     // startTime = performance.now();
     const gameWindow = document.querySelector("#game_window");
     const mainContentArea = document.querySelector("#main_content_area");
+    const advisorButtonText = (e.answer_feedback_flg === 1) 
+        ? "Disable advisor feedback" 
+        : "Enable advisor feedback";
     if (mainContentArea) {
         gameWindow.querySelectorAll(":scope > *:not(#main_content_area):not(.game_header)")
             .forEach((el) => el.remove());
@@ -1280,7 +1283,7 @@ function openMap(_e) {
         const footer_html = `
             <button id="resume_questions_button">Back to the game</button>
             <button id="margin_switcher">Switch margin colouring gradient</button>
-            <button id="AdvisorButton">Enable/Disable Advisor Feedback</button>
+            <button id="AdvisorButton">${advisorButtonText}</button>
         </div>`.trim();
         const ftH = document.createElement("div");
         ftH.id = "map_footer";
@@ -1311,7 +1314,7 @@ function openMap(_e) {
             <div id="map_footer">
                 <button id="resume_questions_button">Back to the game</button>
                 <button id="margin_switcher">Switch margin colouring gradient</button>
-                <button id="AdvisorButton">Enable/Disable Advisor Feedback</button>
+                <button id="AdvisorButton">${advisorButtonText}</button>
             </div>`.trim());
         const t = rFunc(_e, 0);
 
@@ -1977,7 +1980,7 @@ function a(e) {
     // eslint-disable-next-line default-case
     switch (e) {
         case "1":
-            t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candiate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
+            t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candidate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
             break;
         case "2":
             t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
@@ -4062,13 +4065,20 @@ document.addEventListener("DOMContentLoaded", () => {
         "#shining_menu_button": () => shining_menu(A(2)),
         "#answer_select_button": (event) => onAnswerSelectButtonClicked(event),
         "#resume_questions_button": () => questionHTML(A(2)),
-        "#AdvisorButton": () => {
-            campaignTrail_temp.answer_feedback_flg = AdvisorFeedbackArr[
-                campaignTrail_temp.answer_feedback
-            ];
-            questionHTML(A(2));
+        "#AdvisorButton": (event) => {
+            event.preventDefault();
+
+            campaignTrail_temp.answer_feedback_flg = 1 - campaignTrail_temp.answer_feedback_flg;
+
+            const newButtonText = (campaignTrail_temp.answer_feedback_flg === 1)
+                ? "Disable advisor feedback"
+                : "Enable advisor feedback";
+
+            $(event.target).text(newButtonText);
         },
-        "#margin_switcher": () => {
+        "#margin_switcher": (event) => {
+            event.preventDefault();
+
             campaignTrail_temp.margin_format = campaignTrail_temp.margin_format === "#c9c9c9"
                 ? "#fff"
                 : "#c9c9c9";
@@ -4076,7 +4086,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 "margin_form",
                 campaignTrail_temp.margin_format,
             );
-            questionHTML(A(2));
+
+            const pollingData = A(2);
+            const mapOptions = rFunc(pollingData, 0);
+
+            $("#map_container").remove();
+            $('#main_content_area').prepend('<div id="map_container"></div>');
+
+            $("#map_container").usmap(mapOptions);
         },
     };
 
