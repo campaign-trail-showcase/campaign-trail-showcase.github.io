@@ -2185,10 +2185,9 @@ function renderOptions(electionId, candId, runId) {
         </div>`.trim();
     const gameTypeId = document.querySelector("#game_type_id");
     const difficultyLevelId = document.querySelector("#difficulty_level_id");
-    const gameTypeVal = gameTypeId.value;
-    a(gameTypeVal);
+    a(gameTypeId.value);
     gameTypeId.addEventListener("change", () => {
-        a(gameTypeVal);
+        a(gameTypeId.value);
     });
     // if (e.shining) $("#game_type_id").val("3");
     $("#opponent_selection_id_button").click(() => {
