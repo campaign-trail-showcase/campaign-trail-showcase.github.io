@@ -4376,25 +4376,53 @@ function divideElectoralVotesProp(e, t) {
         $("#skip_to_final").click((t) => {
             (e.final_state_results = A(1)), electionNight();
         });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const handlers = {
+            "#view_electoral_map": () => openMap(A(2)),
+            "#shining_menu_button": () => shining_menu(A(2)),
+            "#answer_select_button": (event) => onAnswerSelectButtonClicked(event),
+        };
+
+        document.body.addEventListener("click", (event) => {
+            Object.entries(handlers).some(([selector, handler]) => {
+                if (event.target.matches(selector)) {
+                    event.preventDefault();
+                    if (handler.length === 1) handler(event);
+                    else handler();
+                    return true;
+                }
+                return false;
+            });
+        });
+    });
+
 }());
 
-const fix1964Observer = new MutationObserver(() => {
-    const electionSelect = document.getElementById("election_id");
-    if (electionSelect) {
-        fix1964Observer.disconnect();
+let curElectSelect = null;
 
-        const fix1964 = () => {
-            const electionId = parseInt(electionSelect.value, 10);
-            const credits = document.getElementById("credits");
-            if (electionId === 69) {
-                credits.innerHTML = "This scenario was made by Tex.";
-            } else if (electionId > -1 && !modded) {
-                credits.innerHTML = "This scenario was made by Dan Bryan.";
-            }
-        };
-        electionSelect.addEventListener("change", fix1964);
+const fix1964 = () => {
+    const electionSelect = document.querySelector("#election_id");
+    const electionId = Number(electionSelect.value);
+    const credits = document.querySelector("#credits");
+    if (electionId === 69) {
+        credits.innerHTML = "This scenario was made by Tex.";
+    } else if (electionId > -1 && !modded) {
+        credits.innerHTML = "This scenario was made by Dan Bryan.";
+    }
+};
+
+const fix1964Observer = new MutationObserver(() => {
+    const newElectSelect = document.querySelector("#election_id");
+    if (newElectSelect && newElectSelect !== curElectSelect) {
+        if (curElectSelect) {
+            curElectSelect.removeEventListener("change", fix1964);
+        }
+        curElectSelect = newElectSelect;
+        curElectSelect.addEventListener("change", fix1964);
         fix1964();
     }
+    if (document.querySelector(".inner_window_question")) fix1964Observer.disconnect();
 });
 
 fix1964Observer.observe(document.body, {
