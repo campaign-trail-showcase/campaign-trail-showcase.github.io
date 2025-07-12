@@ -1888,20 +1888,32 @@ function nextQuestion() {
             e.final_state_results = A(1);
             electionNight();
         }
-    } else if (e.question_number % 2 == 0) {
-        const i = findFromPK(e.election_json, e.election_id);
-        e.election_json[i].fields.has_visits == 1
-            ? (function (e) {
-                $("#game_window").html(
+    } else {
+        setTimeout(() => mapCache((skip = false)), 0); 
+
+        if (e.corQuestion) e.corQuestion = false;
+        else e.question_number++;
+
+        if (e.player_answers.length < e.question_number) {
+            while (e.player_answers.length != e.question_number) {
+                e.player_answers.push(null);
+            }
+        }
+        
+        if (e.question_number % 2 == 0) {
+            const i = findFromPK(e.election_json, e.election_id);
+            e.election_json[i].fields.has_visits == 1
+                ? (function (e) {
+                    $("#game_window").html(
                     `        <div class="game_header">            ${
                         corrr
                     }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>        </div>        <p class="visit_text"><font size="2">Use this map to click on the next state you wish to visit. Choose wisely             and focus your efforts where they will have the most impact.</p>        </div>        `,
                 );
                 const t = rFunc(e, 1);
                 $("#map_container").usmap(t);
-            }(t))
-            : questionHTML(t);
-    } else questionHTML(t);
+                }(t))
+                : questionHTML(t);
+        } else questionHTML(t);
     if ($("#importfile")[0].value != "") {
         importgame(e.dagakotowaru);
     }
