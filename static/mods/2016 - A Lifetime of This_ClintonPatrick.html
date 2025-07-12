@@ -15350,7 +15350,7 @@ let isAchievementShowing = false;
 const achievementSoundURL = "";
 
 function unlockAchievement(title) {
-	if (typeof cheatsActive === 'undefined' || typeof campaign_trail_temp === 'undefined' || !campaign_trail_temp.CTS) { // not on CTS? then do nothing
+	if (typeof cheatsActive === 'undefined' || typeof campaignTrail_temp === 'undefined' || !campaignTrail_temp.CTS) { // not on CTS? then do nothing
 		return;
 	}
 	if (unlockedAchievements[title]) { // has been unlocked? then do nothing
@@ -16556,32 +16556,33 @@ endingPicker = (out, totv, aa, quickstats) => {
     campaignTrail_temp.image = false;
 
     const playerEV = quickstats[0];
-    let orderID = [aa[0].candidate, aa[1].candidate, aa[2].candidate];
-	let popularVoteWon = aa[0].popular_votes > aa[1].popular_votes;
+    const playerCandidateId = campaignTrail_temp.candidate_id;
+    let popularVoteWon = aa[0].candidate === playerCandidateId && aa[0].popular_votes > aa[1].popular_votes;
     
-    // for the contingent scenario
-	// see: https://discord.com/channels/818130397706846238/827378337894236170/1344276826087755857
-    let opponentEVs;
-    let otherOpponentEVs;
-
-    for (let i = 0; i < orderID.length; i++) {
-        if (orderID[i] === 200) {
-            if (opponentEVs === undefined) {
-                opponentEVs = aa[i].electoral_votes;
+    // sort by electoral votes to ensure we handle any number of candidates correctly
+    const sortedResults = [...aa].sort((a, b) => b.electoral_votes - a.electoral_votes);
+    
+    // find the player's position in the sorted results
+    const playerIndex = sortedResults.findIndex(result => result.candidate === playerCandidateId);
+    
+    // get opponent EVs (that is, the candidate with most EVs who isn't the player)
+    let opponentEVs = 0;
+    let otherOpponentEVs = 0;
+    
+    if (playerIndex === 0) {
+        // player is winning, get second and third place
+        opponentEVs = sortedResults.length > 1 ? sortedResults[1].electoral_votes : 0;
+        otherOpponentEVs = sortedResults.length > 2 ? sortedResults[2].electoral_votes : 0;
+    } else {
+        // player isn't winning, get first place and third place (or second non-player)
+        opponentEVs = sortedResults[0].electoral_votes;
+        
+        // find the next highest candidate who isn't the player
+        for (let i = 1; i < sortedResults.length; i++) {
+            if (sortedResults[i].candidate !== playerCandidateId) {
+                otherOpponentEVs = sortedResults[i].electoral_votes;
+                break;
             }
-        }
-        else if (orderID[i] === 202) {
-            if (otherOpponentEVs === undefined) {
-                otherOpponentEVs = aa[i].electoral_votes;
-            }
-        }
-        else if (orderID[i] === 203) {
-            if (otherOpponentEVs === undefined) {
-                otherOpponentEVs = aa[i].electoral_votes;
-            }
-        }
-        if (opponentEVs !== undefined && otherOpponentEVs !== undefined) {
-            break;
         }
     }
     
