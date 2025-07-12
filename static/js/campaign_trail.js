@@ -375,7 +375,7 @@ function cyoAdventure(question) {
     }
 }
 
-campaignTrail_temp.margin_format = window.localStorage.getItem("margin_form") ?? "#FFFFFF";
+campaignTrail_temp.margin_format = window.localStorage.getItem("margin_form") ?? "#fff";
 
 function encode(str) {
     const revArray = [];
