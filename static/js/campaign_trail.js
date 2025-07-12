@@ -2282,6 +2282,13 @@ function renderOptions(electionId, candId, runId) {
                 clearInterval(important_code);
             }
         }, 1000);
+        tempFuncO = (e) => {
+            if (e.collect_results) {
+                const a = A(2);
+                e.current_results = [getLatestRes(a)[0], a];
+            }
+            questionHTML();
+        };
 
         if (!modded) {
             $("#game_window").load(aaa, () => {
@@ -2312,14 +2319,6 @@ function renderOptions(electionId, candId, runId) {
                     const theorId = `${year}_${cand}${run}`;
                     // theorId = $("#modSelect")[0].value
 
-                    tempFuncO = (e) => {
-                        if (e.collect_results) {
-                            const a = A(2);
-                            e.current_results = [getLatestRes(a)[0], a];
-                        }
-                        questionHTML();
-                    };
-
                     if (customMod === false) {
                         evalFromUrl(`../static/mods/${theorId}.html`, () => {
                             tempFuncO(e);
@@ -2349,7 +2348,6 @@ function renderOptions(electionId, candId, runId) {
             }
         } else {
             // other block case
-            aaa = `../static/questionset/${election_HTML(e.election_id, e.candidate_id, e.running_mate_id)}`;
             $("#game_window").load(aaa, () => {
                 eval($("#codeset2")[0].value);
                 tempFuncO(e);
