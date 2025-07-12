@@ -3888,7 +3888,7 @@ function A(t) {
 
     calcStatePolls.forEach((f) => {
         const state = e.states_json.find((g) => g.pk === f.state);
-        const M = state ? Math.floor(state.fields.popular_votes * 0.95 + 0.1 * Math.random()) : 0;
+        const M = state ? Math.floor(state.fields.popular_votes * (0.95 + 0.1 * Math.random())) : 0;
 
         const total = f.result.reduce((acc, g) => acc + g.result, 0);
 
