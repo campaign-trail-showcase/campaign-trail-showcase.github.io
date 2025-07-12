@@ -1,14 +1,19 @@
 /* global campaignTrail_temp, jQuery, $ */
 
 let e = campaignTrail_temp;
-e.skippingQuestion = false;
 
 async function evalFromUrl(url, callback = null) {
     const evalRes = await fetch(url);
     const code = await evalRes.text();
     eval(code);
 
-    callback?.();
+    if (callback !== null) {
+        callback();
+    }
+}
+
+function changeFontColour() {
+    // Just to stop breaking mods
 }
 
 const baseScenarioDict = {
@@ -45,11 +50,10 @@ e.LosePopup = "Sorry. You have lost the election this time. Click OK to view the
 e.finalPercentDigits = 1; // for PV % in final results
 e.statePercentDigits = 2;
 e.SelAnsContText = "Please select an answer before continuing!";
-e.numberFormat = "en-US";
 
 function substitutePlaceholders(str) {
     if (!str || typeof str !== "string") return str;
-    return str.replace(/\{\{(.*?)}\}/g, (_, varName) => {
+    return str.replace(/\{\{(.*?)\}\}/g, (_, varName) => {
         try {
             return (window[varName] !== undefined) ? window[varName] : `{{${varName}}}`;
         } catch {
@@ -89,41 +93,11 @@ function openTab(evt, tabName) {
     }
 }
 
-const AdvisorFeedbackArr = [1, 0];
+let AdvisorFeedbackArr = [1, 0];
 
-function mapCache(skip = false) {
-    // preloads poll map
-    if (!skip) {
-        if (!$("#main_content_area")[0]) {
-            return false;
-        }
-        const i = findFromPK(e.election_json, e.election_id);
-        if (
-            (
-                (e.question_number - 1) % 2 !== 0 && e.election_json[i].fields.has_visits === 1
-            )
-            || (
-                e.question_number === e.global_parameter_json[0].fields.question_count
-            )
-            || (
-                e.primary_code && e.primary_code.some((f) => f.breakQ === e.question_number)
-            )
-        ) {
-            return false;
-        }
-    }
-    $("#map_container").remove();
-    $("#main_content_area").html(
-        '<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>',
-    );
-    $("#main_content_area")[0].style.display = "";
-
-    const rr = A((returnType = 2));
-    rFuncRes = rFunc(rr, 0);
-    $("#map_container").usmap(rFuncRes);
-    $("#main_content_area")[0].style.display = "none";
-
-    return true;
+function visitState(e, s, o, t) {
+    setTimeout(() => mapCache((skip = true)), 0); // cache the correct map and prevent visit glitch
+    e.player_visits.push(e.states_json[s].pk), o(t);
 }
 
 function dHondtAllocation(votes, seats, thresh = 0.15) {
@@ -153,24 +127,28 @@ function dHondtAllocation(votes, seats, thresh = 0.15) {
     return allocations;
 }
 
-function findFromPK(array, pk) {
-    return array.findIndex((x) => x.pk === Number(pk));
-}
-
 let states = [];
 const initIt = 0;
 
-function fileExists(url) {
+window.setInterval(() => {
+    if (
+        campaignTrail_temp.candidate_json
+        && campaignTrail_temp.candidate_json.filter
+    ) {
+        campaignTrail_temp.candidate_json = campaignTrail_temp.candidate_json.filter((n) => n);
+    }
+}, 200);
+
+const fileExists = function (url) {
     const req = new XMLHttpRequest();
     req.open("GET", url, false);
     console.log(`trying to get file from url ${url}`);
     req.send();
     return req.status === 200;
-}
+};
 
 lastUpdatedDate = "2023-08-20";
 let RecReading;
-let modded = false;
 
 function simpleAdventure(ans) {
     return 1203;
@@ -184,7 +162,6 @@ let HistPVP = [0, 0, 0, 0];
 
 function histFunction() {
     if (modded === false) {
-        // eslint-disable-next-line default-case
         switch (campaignTrail_temp.election_id) {
             case 21: // 2020
                 HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
@@ -354,12 +331,12 @@ function histFunction() {
 }
 
 function cyoAdventure(question) {
-    const latestAnswer = campaignTrail_temp.player_answers[
+    latestAnswer = campaignTrail_temp.player_answers[
     campaignTrail_temp.player_answers.length - 1
         ];
-    for (let i = 0; i < campaignTrail_temp.questions_json.length; i++) {
-        if (campaignTrail_temp.questions_json[i].pk === question.pk) {
-            for (let v = 0; v < campaignTrail_temp.questions_json.length; v++) {
+    for (i = 0; i < campaignTrail_temp.questions_json.length; i++) {
+        if (campaignTrail_temp.questions_json[i].pk == question.pk) {
+            for (v = 0; v < campaignTrail_temp.questions_json.length; v++) {
                 if (
                     campaignTrail_temp.questions_json[v].pk
                     === simpleAdventure(latestAnswer)
@@ -375,7 +352,7 @@ function cyoAdventure(question) {
     }
 }
 
-campaignTrail_temp.margin_format = window.localStorage.getItem("margin_form") ?? "#fff";
+campaignTrail_temp.margin_format = window.localStorage.getItem("margin_form") ?? "#FFFFFF";
 
 function encode(str) {
     const revArray = [];
@@ -410,12 +387,12 @@ function csrfToken() {
     }("csrftoken"));
 }
 
-let slrr = "";
-let rrr = "";
-let starting_mult = 0;
-const encrypted = Math.round(Math.random() * 100);
-const t = "";
-let nnn = "";
+slrr = "";
+rrr = "";
+starting_mult = 0;
+encrypted = Math.round(Math.random() * 100);
+t = "";
+nnn = "";
 
 function switchPV() {
     // switchingEst, rrr, _, pvswitcher
@@ -436,6 +413,17 @@ function evest() {
     swE.innerHTML = nnn;
 }
 
+function containsObject(obj, list) {
+    let i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i] === obj) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function copy(mainObject) {
     const objectCopy = {}; // objectCopy will store a copy of the mainObject
     let key;
@@ -445,11 +433,12 @@ function copy(mainObject) {
     return objectCopy;
 }
 
+modded = false;
 i = 1;
 moddercheckeror = false;
 code222 = [];
 kill = false;
-let important_info = "";
+important_info = "";
 
 // getResults is a way to get results for an election without using custom endings
 // Mainly for backporting achivements to old mods
@@ -461,27 +450,27 @@ function endingPicker(out, totv, aa, quickstats) {
     // out = "win", "loss", or "tie" for your candidate
     // totv = total votes in entire election
     // aa = all final overall results data
-    // quickstat = relevant data on candidate performance
-    // (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
+    // quickstat = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
 
     if (important_info.indexOf("404") > -1) {
         important_info = "return false";
     }
 
     if (important_info != "") {
-        return new Function("out", "totv", "aa", "quickstats", important_info)(
+        a = new Function("out", "totv", "aa", "quickstats", important_info)(
             out,
             totv,
             aa,
             quickstats,
         );
+        return a;
     }
 
     return "ERROR";
 }
 
 function modSelectChange() {
-    if ($("#modSelect")[0].value === "other") {
+    if ($("#modSelect")[0].value == "other") {
         $("#customMenu")[0].style.display = "block";
     } else {
         $("#customMenu")[0].style.display = "none";
@@ -507,8 +496,8 @@ function exportResults() {
             const stateAbbreviation = stateResult.abbr;
 
             // Total votes in the state for percentage calculation
-            const totalPopularVotes = stateResult.result.reduce( // Add up all popular votes
-                (total, candidateResult) => total + (candidateResult.votes || 0),
+            const totalPopularVotes = stateResult.result.reduce(
+                (total, candidateResult) => total + (candidateResult.votes || 0), // Add up all popular votes
                 0,
             );
 
@@ -516,7 +505,7 @@ function exportResults() {
                 state: stateAbbreviation,
                 results: stateResult.result.map((candidateResult) => {
                     const candidate = campaignTrail_temp.candidate_json.find(
-                        (cand) => cand.pk === candidateResult.candidate,
+                        (candidate) => candidate.pk === candidateResult.candidate,
                     );
 
                     return {
@@ -545,7 +534,7 @@ function exportResults() {
     document.body.removeChild(element);
 }
 
-let diff_mod = false;
+diff_mod = false;
 
 $("#submitMod").click(() => {
     document.getElementById("featured-mods-area").style.display = "none";
@@ -580,89 +569,80 @@ $("#submitMod").click(() => {
     $("#modLoadReveal")[0].style.display = "none";
     modded = true;
 });
-
-function randomNormal() {
-    let x;
-    let y;
-    let r2;
+const F = () => {
+    let e;
+    let t;
+    let
+        i;
     do {
-        x = 2 * Math.random() - 1;
-        y = 2 * Math.random() - 1;
-        r2 = x ** 2 + y ** 2;
-    } while (r2 >= 1 || r2 === 0);
-    return x * Math.sqrt((-2 * Math.log(r2)) / r2);
-}
-
-function sortByProp(arr, prop) {
-    return arr.sort((e, i) => {
-        const a = e[prop];
-        const s = i[prop];
-        if (a < s) return -1;
-        if (a > s) return 1;
-        return 0;
-    });
-}
+        i = (e = 2 * Math.random() - 1) * e + (t = 2 * Math.random() - 1) * t;
+    } while (i >= 1 || i == 0);
+    return e * Math.sqrt((-2 * Math.log(i)) / i);
+};
 
 function divideElectoralVotesProp(e, t) {
-    const i = e.map((x) => Math.floor(x * t));
-    i[0] += t - i.reduce((a, b) => a + b, 0);
-    return i;
+    for (var i = [], a = 0, s = 0; s < e.length; s++) {
+        const n = Math.floor(e[s] * t);
+        i.push(n), (a += n);
+    }
+    return (i[0] += t - a), i;
 }
 
-const shining_menu = (polling) => {
-    const game_winArr = Array.from($("#game_window")[0].children);
+!(function () {
+    let e = campaignTrail_temp;
 
-    const inflation_factor = 1.04 ** (
-        2020 - e.election_json.find((f) => f.pk === e.election_id).fields.year
-    );
+    const shining_menu = (polling, e = campaignTrail_temp) => {
+        const game_winArr = Array.from($("#game_window")[0].children);
 
-    const uninflatedBalance = e.shining_data.balance / inflation_factor;
-    const uninflatedPrev = e.shining_data.prev_balance / inflation_factor;
-    const change = uninflatedBalance - uninflatedPrev;
+        const inflation_factor = 1.04 ** (2020 - e.election_json.find((f) => f.pk === e.election_id).fields.year);
 
-    let projected_change = change;
+        const uninflatedBalance = e.shining_data.balance / inflation_factor;
+        const uninflatedPrev = e.shining_data.prev_balance / inflation_factor;
+        const change = uninflatedBalance - uninflatedPrev;
 
-    const update_projection = () => {
-        const our_info = campaignTrail_temp.shining_info.find(
-            (f) => f.pk === e.election_id && f.candidate === e.candidate_id,
-        );
+        let projected_change = change;
 
-        projected_change = 0;
-        projected_change
-            += 5000000
-            * e.shining_data.times.fundraising_time
-            * (our_info ? our_info.fundraising_effect : 1);
-        projected_change -= 500000;
+        const update_projection = () => {
+            const our_info = campaignTrail_temp.shining_info.find(
+                (f) => f.pk === e.election_id && f.candidate === e.candidate_id,
+            );
 
-        our_info.lobby.forEach((f) => {
-            const x = f.opinion;
-            const r = 0.097;
-            const x0 = 65.3;
-            const y = f.fund_base / (1 + Math.exp(-r * (x - x0)));
-            projected_change += y;
-        });
+            projected_change = 0;
+            projected_change
+                += 5000000
+                * e.shining_data.times.fundraising_time
+                * (our_info ? our_info.fundraising_effect : 1);
+            projected_change -= 500000;
 
-        e.shining_data.ad_spending.forEach((f) => {
-            projected_change -= f.amount;
-        });
+            our_info.lobby.forEach((f) => {
+                const x = f.opinion;
+                const r = 0.097;
+                const x0 = 65.3;
+                const y = f.fund_base / (1 + Math.exp(-r * (x - x0)));
+                projected_change += y;
+            });
 
-        projected_change /= inflation_factor;
+            e.shining_data.ad_spending.forEach((f) => {
+                projected_change -= f.amount;
+            });
 
-        $("#projected_change").html(
-            `<b>Estimated change for next turn:</b> <span style='${projected_change > 0 ? "color:green" : projected_change == 0 ? "color:yellow" : "color:red"};'>${projected_change < 0 ? "-$" : "$"}${Math.abs(Math.floor(projected_change)).toLocaleString()}</span>`,
-        );
-    };
+            projected_change /= inflation_factor;
 
-    const DEBT_STRING = uninflatedBalance < 0
-        ? "<p style='color:red;font-weight:bolder;'>Campaign currently in debt. Effectiveness will suffer.</p>"
-        : "";
+            $("#projected_change").html(
+                `<b>Estimated change for next turn:</b> <span style='${projected_change > 0 ? "color:green" : projected_change == 0 ? "color:yellow" : "color:red"};'>${projected_change < 0 ? "-$" : "$"}${Math.abs(Math.floor(projected_change)).toLocaleString()}</span>`,
+            );
+        };
 
-    let a_states = "";
-    for (const i in e.states_json) {
-        a_states += `<option value='${e.states_json[i].pk}'>${e.states_json[i].fields.name}</option>\n`;
-    }
+        const DEBT_STRING = uninflatedBalance < 0
+            ? "<p style='color:red;font-weight:bolder;'>Campaign currently in debt. Effectiveness will suffer.</p>"
+            : "";
 
-    const adSpendTable = `
+        let a_states = "";
+        for (const i in e.states_json) {
+            a_states += `<option value='${e.states_json[i].pk}'>${e.states_json[i].fields.name}</option>\n`;
+        }
+
+        const adSpendTable = `
             <table id="ad_spend_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
                 <thead>
                     <tr>
@@ -677,7 +657,7 @@ const shining_menu = (polling) => {
             </table>
         `;
 
-    const staffTable = `
+        const staffTable = `
             <table id="staff_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
                 <thead>
                     <tr>
@@ -693,7 +673,7 @@ const shining_menu = (polling) => {
             </table>
         `;
 
-    const lobbyTable = `
+        const lobbyTable = `
             <table id="pac_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
                 <thead>
                     <tr>
@@ -708,7 +688,7 @@ const shining_menu = (polling) => {
             </table>
         `;
 
-    const z = `
+        const z = `
 
         <div class="inner_window_front" id="shining_menu_header" style="height: 50px; background-color:#2d2d2d">
             <h1 style='position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; text-align: center; font-size: 3em; line-height: normal; font-style: italic; color: white; margin: 0;font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;'>
@@ -802,91 +782,91 @@ const shining_menu = (polling) => {
                 }
             </style>
             `;
-    for (i in game_winArr) {
-        if (
-            game_winArr[i].getAttribute("id") != "main_content_area"
-            && game_winArr[i].getAttribute("class") != "game_header"
-        ) {
-            game_winArr[i].remove();
-        }
-    }
-
-    const game_window = $("#game_window")[0];
-    if ($("#main_content_area")[0]) $("#main_content_area")[0].style.display = "none";
-
-    const inner_window_question = document.createElement("div");
-    // inner_window_question.setAttribute("class", "inner_window_question");
-    inner_window_question.innerHTML = z;
-    game_window.appendChild(inner_window_question);
-
-    $("#shining_back").click(() => {
-        questionHTML(polling);
-    });
-
-    $("#add_ad_spending").click(() => {
-        let currval = $("#ad_spending_amount").val();
-        currval = currval.replaceAll(",", "");
-        currval = Math.abs(Number(currval));
-        currval = isNaN(currval) ? 0 : Math.floor(currval);
-        currval = Math.min(e.shining_data.balance / inflation_factor, currval);
-        currval = Math.max(0, currval);
-
-        const selectedStatePk = Number($("#shining_ad_state_sel").val());
-        const adSpendingAmount = currval;
-
-        const currentState = e.shining_data.ad_spending.find(
-            (f) => f.state == selectedStatePk,
-        );
-
-        if (currentState) {
-            e.shining_data.balance += currentState.amount;
-            currentState.amount = adSpendingAmount * inflation_factor;
-        } else {
-            e.shining_data.ad_spending.push({
-                state: selectedStatePk,
-                amount: adSpendingAmount * inflation_factor,
-            });
+        for (i in game_winArr) {
+            if (
+                game_winArr[i].getAttribute("id") != "main_content_area"
+                && game_winArr[i].getAttribute("class") != "game_header"
+            ) {
+                game_winArr[i].remove();
+            }
         }
 
-        e.shining_data.balance -= adSpendingAmount * inflation_factor;
+        const game_window = $("#game_window")[0];
+        if ($("#main_content_area")[0]) $("#main_content_area")[0].style.display = "none";
 
-        update_projection();
+        const inner_window_question = document.createElement("div");
+        // inner_window_question.setAttribute("class", "inner_window_question");
+        inner_window_question.innerHTML = z;
+        game_window.appendChild(inner_window_question);
 
-        $("#ad_spending_slider").val(0);
-        $("#ad_spending_amount").val(0);
-        updateSliderMax();
-        update_projection();
+        $("#shining_back").click(() => {
+            o(polling);
+        });
 
-        const stateName = $("#shining_ad_state_sel option:selected").text();
-        update_ad_table();
-    });
+        $("#add_ad_spending").click(() => {
+            let currval = $("#ad_spending_amount").val();
+            currval = currval.replaceAll(",", "");
+            currval = Math.abs(Number(currval));
+            currval = isNaN(currval) ? 0 : Math.floor(currval);
+            currval = Math.min(e.shining_data.balance / inflation_factor, currval);
+            currval = Math.max(0, currval);
 
-    const updateSliderMax = () => {
-        const currentBalance = parseFloat(
-            e.shining_data.balance / inflation_factor,
-        );
-        const slider = $("#ad_spending_slider");
-        slider.attr("max", currentBalance);
-        slider.val(0);
-        $("#shining_balance").html(
-            `$${Math.floor(e.shining_data.balance / inflation_factor).toLocaleString()}`,
-        );
-    };
+            const selectedStatePk = Number($("#shining_ad_state_sel").val());
+            const adSpendingAmount = currval;
 
-    const update_staff_table = () => {
-        const tableBody = $("#staff_table tbody");
-        tableBody.html("");
+            const currentState = e.shining_data.ad_spending.find(
+                (f) => f.state == selectedStatePk,
+            );
 
-        const our_info = campaignTrail_temp.shining_info.find(
-            (f) => f.pk === e.election_id && f.candidate === e.candidate_id,
-        );
+            if (currentState) {
+                e.shining_data.balance += currentState.amount;
+                currentState.amount = adSpendingAmount * inflation_factor;
+            } else {
+                e.shining_data.ad_spending.push({
+                    state: selectedStatePk,
+                    amount: adSpendingAmount * inflation_factor,
+                });
+            }
 
-        for (const i in our_info.staff) {
-            const targ = our_info.staff[i];
-            const hire_str = targ.hired == true
-                ? `<em>Hired.</em>`
-                : `<button class="hire_button" data-pk="${targ.pk}" style='color:green'>Hire</button>`;
-            const newRow = `
+            e.shining_data.balance -= adSpendingAmount * inflation_factor;
+
+            update_projection();
+
+            $("#ad_spending_slider").val(0);
+            $("#ad_spending_amount").val(0);
+            updateSliderMax();
+            update_projection();
+
+            const stateName = $("#shining_ad_state_sel option:selected").text();
+            update_ad_table();
+        });
+
+        const updateSliderMax = () => {
+            const currentBalance = parseFloat(
+                e.shining_data.balance / inflation_factor,
+            );
+            const slider = $("#ad_spending_slider");
+            slider.attr("max", currentBalance);
+            slider.val(0);
+            $("#shining_balance").html(
+                `$${Math.floor(e.shining_data.balance / inflation_factor).toLocaleString()}`,
+            );
+        };
+
+        const update_staff_table = () => {
+            const tableBody = $("#staff_table tbody");
+            tableBody.html("");
+
+            const our_info = campaignTrail_temp.shining_info.find(
+                (f) => f.pk === e.election_id && f.candidate === e.candidate_id,
+            );
+
+            for (const i in our_info.staff) {
+                const targ = our_info.staff[i];
+                const hire_str = targ.hired == true
+                    ? `<em>Hired.</em>`
+                    : `<button class="hire_button" data-pk="${targ.pk}" style='color:green'>Hire</button>`;
+                const newRow = `
                 <tr>
                     <td><h4>${targ.name}</h4><img style='width:100px' src='${targ.image}'></img></td>
                     <td>${targ.description}</td>
@@ -894,356 +874,315 @@ const shining_menu = (polling) => {
                     <td>${hire_str}</td>
                 </tr>
                 `;
-            tableBody.append(newRow);
-            $(`button.hire_button[data-pk="${targ.pk}"]`).click(() => {
-                if (e.shining_data.balance < 0) {
-                    return;
-                }
+                tableBody.append(newRow);
+                $(`button.hire_button[data-pk="${targ.pk}"]`).click(() => {
+                    if (e.shining_data.balance < 0) {
+                        return;
+                    }
 
-                e.shining_data.balance -= targ.cost;
+                    e.shining_data.balance -= targ.cost;
 
-                our_info.staff[i].hired = true;
-                our_info.staff[i].execute();
+                    our_info.staff[i].hired = true;
+                    our_info.staff[i].execute();
 
-                updateSliderMax();
-                update_projection();
-                update_staff_table();
-            });
-        }
-    };
+                    updateSliderMax();
+                    update_projection();
+                    update_staff_table();
+                });
+            }
+        };
 
-    const update_pac_table = () => {
-        const tableBody = $("#pac_table tbody");
-        tableBody.html("");
+        const update_pac_table = () => {
+            const tableBody = $("#pac_table tbody");
+            tableBody.html("");
 
-        const our_info = campaignTrail_temp.shining_info.find(
-            (f) => f.pk === e.election_id && f.candidate === e.candidate_id,
-        );
+            const our_info = campaignTrail_temp.shining_info.find(
+                (f) => f.pk === e.election_id && f.candidate === e.candidate_id,
+            );
 
-        for (const i in our_info.lobby) {
-            const targ = our_info.lobby[i];
-            const newRow = `
+            for (const i in our_info.lobby) {
+                const targ = our_info.lobby[i];
+                const newRow = `
                 <tr>
                     <td><h4>${targ.name}</h4><img style='width:100px' src='${targ.image}'></img></td>
                     <td>${targ.description}</td>
                     <td>Opinion: ${Math.floor(targ.opinion)}<br>Max Bonus: $${Math.floor(targ.fund_base / inflation_factor).toLocaleString()}</td>
                 </tr>
                 `;
-            tableBody.append(newRow);
-        }
-    };
+                tableBody.append(newRow);
+            }
+        };
 
-    const update_ad_table = () => {
-        const tableBody = $("#ad_spend_table tbody");
-        tableBody.html("");
+        const update_ad_table = () => {
+            const tableBody = $("#ad_spend_table tbody");
+            tableBody.html("");
 
-        for (const i in e.shining_data.ad_spending) {
-            const targ = e.shining_data.ad_spending[i];
-            const newRow = `
+            for (const i in e.shining_data.ad_spending) {
+                const targ = e.shining_data.ad_spending[i];
+                const newRow = `
                 <tr>
                     <td>${e.states_json.find((f) => f.pk === targ.state).fields.name}</td>
                     <td>$${Math.floor(targ.amount / inflation_factor).toLocaleString()}</td>
                     <td><button class="remove_ad_spend" data-state-pk="${targ.state}" style='color:red'>Remove</button></td>
                 </tr>
                 `;
-            tableBody.append(newRow);
-            $(`button.remove_ad_spend[data-state-pk="${targ.state}"]`).click(() => {
-                e.shining_data.balance += targ.amount;
+                tableBody.append(newRow);
+                $(`button.remove_ad_spend[data-state-pk="${targ.state}"]`).click(() => {
+                    e.shining_data.balance += targ.amount;
 
-                e.shining_data.ad_spending.splice(i, 1);
+                    e.shining_data.ad_spending.splice(i, 1);
 
-                updateSliderMax();
-                update_ad_table();
-                update_projection();
+                    updateSliderMax();
+                    update_ad_table();
+                    update_projection();
+                });
+            }
+        };
+
+        $("#ad_spending_slider").change(() => {
+            $("#ad_spending_amount").val($("#ad_spending_slider").val());
+            $("#ad_spending_amount").val(Number($("#ad_spending_amount").val()));
+        });
+
+        $("#ad_spending_amount").change(() => {
+            let currval = $("#ad_spending_amount").val();
+            currval = currval.replaceAll(",", "");
+            currval = Math.abs(Number(currval));
+            currval = isNaN(currval) ? 0 : Math.floor(currval);
+            currval = Math.min(e.shining_data.balance / inflation_factor, currval);
+            currval = Math.max(0, currval);
+
+            $("#ad_spending_amount").val(currval);
+            $("#ad_spending_slider").val(currval);
+        });
+
+        function updateSliders(physicalTime, fundraisingTime, mediaTime) {
+            $("#campaign_time_physical").val(physicalTime);
+            $("#campaign_time_fundraising").val(fundraisingTime);
+            $("#campaign_time_media").val(mediaTime);
+
+            e.shining_data.times.physical_time = physicalTime;
+            e.shining_data.times.fundraising_time = fundraisingTime;
+            e.shining_data.times.media_time = mediaTime;
+
+            update_projection();
+        }
+
+        $(
+            "#campaign_time_physical, #campaign_time_fundraising, #campaign_time_media",
+        ).on("input", () => {
+            const physicalTime = parseFloat($("#campaign_time_physical").val());
+            const fundraisingTime = parseFloat($("#campaign_time_fundraising").val());
+            const mediaTime = parseFloat($("#campaign_time_media").val());
+
+            const total = physicalTime + fundraisingTime + mediaTime;
+
+            // ensure the total time adds up to 1
+            if (total !== 0) {
+                const adjustment = 1 / total;
+                updateSliders(
+                    physicalTime * adjustment,
+                    fundraisingTime * adjustment,
+                    mediaTime * adjustment,
+                );
+            } else {
+                updateSliders(0.33, 0.33, 0.34);
+            }
+        });
+
+        updateSliders(
+            e.shining_data.times.physical_time,
+            e.shining_data.times.fundraising_time,
+            e.shining_data.times.media_time,
+        );
+
+        updateSliderMax();
+        $("#ad_spending_slider").val(0);
+        $("#ad_spending_amount").val(0);
+        update_ad_table();
+        update_staff_table();
+        update_pac_table();
+        update_projection();
+
+        openTab(null, "funds");
+    };
+
+    const shining_cal = (polling) => {
+        // run at the start of every turn
+
+        const our_info = campaignTrail_temp.shining_info.find(
+            (f) => f.pk === e.election_id && f.candidate === e.candidate_id,
+        );
+
+        // opponent visit logic
+        if (
+            (e.question_number + 1) % 2 == 0
+            && e.election_json.find((f) => f.pk === e.election_id).fields.has_visits == 1
+        ) {
+            const active_opps = e.opponents_list.filter(
+                (f) => e.candidate_json.find((_f) => _f.pk === f).fields.is_active === 1,
+            );
+
+            // calculate closest state for each oppo
+            const closests = {};
+            active_opps.forEach((opp) => {
+                let closest = polling[0];
+                polling.forEach((state) => {
+                    if (
+                        state.result[0].candidate === opp
+                        || state.result[1].candidate === opp
+                    ) {
+                        if (
+                            Math.abs(state.result[0].percent - state.result[1].percent)
+                            < Math.abs(closest.result[0].percent - closest.result[1].percent)
+                        ) {
+                            closest = state;
+                        }
+                    }
+                });
+                closests[opp] = closest;
             });
+
+            e.opponent_visits.push({});
+            active_opps.forEach((f) => {
+                e.opponent_visits[e.opponent_visits.length - 1][f] = closests[f].state;
+                const target = e.candidate_state_multiplier_json.find(
+                    (_f) => _f.fields.state === closests[f].state && _f.fields.candidate === f,
+                );
+
+                target.fields.state_multiplier
+                    += 0.001 * (our_info ? our_info.opponent_visit_effect : 1);
+            });
+        }
+
+        // update PAC opinions
+
+        our_info.lobby.forEach((f) => {
+            const relevant = e.answer_score_issue_json.filter(
+                (_f) => _f.fields.issue === f.issue_tie
+                    && _f.fields.answer === e.player_answers[e.player_answers.length - 1],
+            );
+            for (const i in relevant) {
+                const op_raw = f.issue_link(
+                    relevant[i].fields.issue_score * relevant[i].fields.issue_importance,
+                );
+                const op_final = op_raw * 10;
+                f.opinion += op_final;
+                f.opinion = Math.min(100, f.opinion);
+            }
+        });
+
+        // update previous balance before we go into the current balance
+        e.shining_data.prev_balance = e.shining_data.balance;
+
+        // deal with time spent
+
+        e.shining_data.balance
+            += 5000000
+            * e.shining_data.times.fundraising_time
+            * (our_info ? our_info.fundraising_effect : 1); // base fundraising value
+        e.shining_data.balance -= 500000 - 100000 * F(e.candidate_id); // base upkeep cost with normalised RNG element
+
+        // add to balance based on PAC opinions
+
+        our_info.lobby.forEach((f) => {
+            const x = f.opinion;
+            const r = 0.097;
+            const x0 = 65.3;
+            const y = f.fund_base / (1 + Math.exp(-r * (x - x0)));
+            e.shining_data.balance += y;
+        });
+
+        // if >0.5 of the player's time is not spent on media, this will hurt them
+        let media_boost = (e.shining_data.times.media_time - 0.5) * 0.0025;
+        media_boost = e.shining_data.balance < 0 ? media_boost - 0.0025 : media_boost; // debt penalty
+        e.candidate_state_multiplier_json.forEach((f) => {
+            if (f.fields.candidate === e.candidate_id) {
+                f.fields.state_multiplier += media_boost;
+            }
+        });
+
+        // visit multiplier; same deal as above. will halve your visit effects at 0 and double at 1.
+        e.shining_data.visit_multiplier
+            += (e.shining_data.times.physical_time * 2 - 1) / 50;
+        e.shining_data.visit_multiplier = Math.max(
+            0,
+            e.shining_data.visit_multiplier,
+        );
+        e.shining_data.visit_multiplier = Math.min(
+            2,
+            e.shining_data.visit_multiplier,
+        );
+
+        // ads
+        e.shining_data.ad_spending.forEach((f) => {
+            const target = e.candidate_state_multiplier_json.find(
+                (_f) => f.state === _f.fields.state && _f.fields.candidate === e.candidate_id,
+            );
+            const currMult = target.fields.state_multiplier;
+            const boost = (currMult * f.amount) / 750000000;
+            console.log(target.fields.state_multiplier);
+            target.fields.state_multiplier
+                += boost * (our_info ? our_info.ad_effect : 1);
+            console.log(target.fields.state_multiplier);
+
+            e.shining_data.balance -= f.amount;
+        });
+
+        if (e.shining_data.balance < 0) {
+            e.shining_data.ad_spending = [];
         }
     };
 
-    $("#ad_spending_slider").change(() => {
-        $("#ad_spending_amount").val($("#ad_spending_slider").val());
-        $("#ad_spending_amount").val(Number($("#ad_spending_amount").val()));
-    });
+    e.answer_count = 4;
 
-    $("#ad_spending_amount").change(() => {
-        let currval = $("#ad_spending_amount").val();
-        currval = currval.replaceAll(",", "");
-        currval = Math.abs(Number(currval));
-        currval = isNaN(currval) ? 0 : Math.floor(currval);
-        currval = Math.min(e.shining_data.balance / inflation_factor, currval);
-        currval = Math.max(0, currval);
-
-        $("#ad_spending_amount").val(currval);
-        $("#ad_spending_slider").val(currval);
-    });
-
-    function updateSliders(physicalTime, fundraisingTime, mediaTime) {
-        $("#campaign_time_physical").val(physicalTime);
-        $("#campaign_time_fundraising").val(fundraisingTime);
-        $("#campaign_time_media").val(mediaTime);
-
-        e.shining_data.times.physical_time = physicalTime;
-        e.shining_data.times.fundraising_time = fundraisingTime;
-        e.shining_data.times.media_time = mediaTime;
-
-        update_projection();
-    }
-
-    $(
-        "#campaign_time_physical, #campaign_time_fundraising, #campaign_time_media",
-    ).on("input", () => {
-        const physicalTime = parseFloat($("#campaign_time_physical").val());
-        const fundraisingTime = parseFloat($("#campaign_time_fundraising").val());
-        const mediaTime = parseFloat($("#campaign_time_media").val());
-
-        const total = physicalTime + fundraisingTime + mediaTime;
-
-        // ensure the total time adds up to 1
-        if (total !== 0) {
-            const adjustment = 1 / total;
-            updateSliders(
-                physicalTime * adjustment,
-                fundraisingTime * adjustment,
-                mediaTime * adjustment,
-            );
-        } else {
-            updateSliders(0.33, 0.33, 0.34);
+    const o = (t, e = campaignTrail_temp) => {
+        for (
+            var i = [], a = 0;
+            a < e.answers_json.length
+            && (e.answers_json[a].fields.question
+                != e.questions_json[e.question_number].pk
+                || (i.push({
+                    key: a,
+                    order: Math.random(),
+                }),
+                e.answer_count != i.length));
+            a++
+        ) ;
+        P(i, "order");
+        let s = "";
+        for (a = 0; a < i.length; a++) {
+            s
+                += `<input type="radio" name="game_answers" class="game_answers"             id="game_answers[${
+                a.toString()
+            }]" value="${
+                e.answers_json[i[a].key].pk
+            }"/>\t\t    <label for="game_answers[${
+                a.toString()
+            }]">${
+                substitutePlaceholders(e.answers_json[i[a].key].fields.description)
+            }</label><br>`;
         }
-    });
-
-    updateSliders(
-        e.shining_data.times.physical_time,
-        e.shining_data.times.fundraising_time,
-        e.shining_data.times.media_time,
-    );
-
-    updateSliderMax();
-    $("#ad_spending_slider").val(0);
-    $("#ad_spending_amount").val(0);
-    update_ad_table();
-    update_staff_table();
-    update_pac_table();
-    update_projection();
-
-    openTab(null, "funds");
-};
-
-const shining_cal = (polling) => {
-    // run at the start of every turn
-
-    const our_info = campaignTrail_temp.shining_info.find(
-        (f) => f.pk === e.election_id && f.candidate === e.candidate_id,
-    );
-
-    // opponent visit logic
-    if (
-        (e.question_number + 1) % 2 == 0
-        && e.election_json.find((f) => f.pk === e.election_id).fields.has_visits == 1
-    ) {
-        const active_opps = e.opponents_list.filter(
-            (f) => e.candidate_json.find((_f) => _f.pk === f).fields.is_active === 1,
-        );
-
-        // calculate closest state for each oppo
-        const closests = {};
-        active_opps.forEach((opp) => {
-            let closest = polling[0];
-            polling.forEach((state) => {
-                if (
-                    state.result[0].candidate === opp
-                    || state.result[1].candidate === opp
-                ) {
-                    if (
-                        Math.abs(state.result[0].percent - state.result[1].percent)
-                        < Math.abs(closest.result[0].percent - closest.result[1].percent)
-                    ) {
-                        closest = state;
-                    }
-                }
-            });
-            closests[opp] = closest;
-        });
-
-        e.opponent_visits.push({});
-        active_opps.forEach((f) => {
-            e.opponent_visits[e.opponent_visits.length - 1][f] = closests[f].state;
-            const target = e.candidate_state_multiplier_json.find(
-                (_f) => _f.fields.state === closests[f].state && _f.fields.candidate === f,
-            );
-
-            target.fields.state_multiplier
-                += 0.001 * (our_info ? our_info.opponent_visit_effect : 1);
-        });
-    }
-
-    // update PAC opinions
-
-    our_info.lobby.forEach((f) => {
-        const relevant = e.answer_score_issue_json.filter(
-            (_f) => _f.fields.issue === f.issue_tie
-                && _f.fields.answer === e.player_answers[e.player_answers.length - 1],
-        );
-        for (const i in relevant) {
-            const op_raw = f.issue_link(
-                relevant[i].fields.issue_score * relevant[i].fields.issue_importance,
-            );
-            const op_final = op_raw * 10;
-            f.opinion += op_final;
-            f.opinion = Math.min(100, f.opinion);
-        }
-    });
-
-    // update previous balance before we go into the current balance
-    e.shining_data.prev_balance = e.shining_data.balance;
-
-    // deal with time spent
-
-    e.shining_data.balance
-        += 5000000
-        * e.shining_data.times.fundraising_time
-        * (our_info ? our_info.fundraising_effect : 1); // base fundraising value
-    e.shining_data.balance -= 500000 - 100000 * randomNormal(e.candidate_id); // base upkeep cost with normalised RNG element
-
-    // add to balance based on PAC opinions
-
-    our_info.lobby.forEach((f) => {
-        const x = f.opinion;
-        const r = 0.097;
-        const x0 = 65.3;
-        const y = f.fund_base / (1 + Math.exp(-r * (x - x0)));
-        e.shining_data.balance += y;
-    });
-
-    // if >0.5 of the player's time is not spent on media, this will hurt them
-    let media_boost = (e.shining_data.times.media_time - 0.5) * 0.0025;
-    media_boost = e.shining_data.balance < 0 ? media_boost - 0.0025 : media_boost; // debt penalty
-    e.candidate_state_multiplier_json.forEach((f) => {
-        if (f.fields.candidate === e.candidate_id) {
-            f.fields.state_multiplier += media_boost;
-        }
-    });
-
-    // visit multiplier; same deal as above. will halve your visit effects at 0 and double at 1.
-    e.shining_data.visit_multiplier
-        += (e.shining_data.times.physical_time * 2 - 1) / 50;
-    e.shining_data.visit_multiplier = Math.max(
-        0,
-        e.shining_data.visit_multiplier,
-    );
-    e.shining_data.visit_multiplier = Math.min(
-        2,
-        e.shining_data.visit_multiplier,
-    );
-
-    // ads
-    e.shining_data.ad_spending.forEach((f) => {
-        const target = e.candidate_state_multiplier_json.find(
-            (_f) => f.state === _f.fields.state && _f.fields.candidate === e.candidate_id,
-        );
-        const currMult = target.fields.state_multiplier;
-        const boost = (currMult * f.amount) / 750000000;
-        console.log(target.fields.state_multiplier);
-        target.fields.state_multiplier
-            += boost * (our_info ? our_info.ad_effect : 1);
-        console.log(target.fields.state_multiplier);
-
-        e.shining_data.balance -= f.amount;
-    });
-
-    if (e.shining_data.balance < 0) {
-        e.shining_data.ad_spending = [];
-    }
-};
-
-function handleFinalResults(t) {
-    let i = 0;
-    e.final_overall_results.forEach((f) => {
-        const g = f;
-        g.popular_votes = 0;
-        g.electoral_votes = 0;
-    });
-    e.final_state_results.forEach((f) => {
-        if (f.result_time <= t) {
-            i++;
-            f.result.forEach((g) => {
-                e.final_overall_results.forEach((h) => {
-                    if (h.candidate === g.candidate) {
-                        const i = h;
-                        i.popular_votes += g.votes;
-                        i.electoral_votes += g.electoral_votes;
-                    }
-                });
-            });
-        }
-    });
-    e.final_overall_results = [...e.final_overall_results].sort((a, b) => {
-        if (b.electoral_votes !== a.electoral_votes) {
-            return b.electoral_votes - a.electoral_votes;
-        }
-        return b.popular_votes - a.popular_votes;
-    });
-    return i;
-}
-
-function onAnswerSelectButtonClicked() {
-    const selectedAnswerPk = $("input:radio[name=game_answers]:checked").val();
-    debugConsole(
-        "answer button clicked, skip question? ",
-        campaignTrail_temp.skippingQuestion,
-        "selected answer",
-        selectedAnswerPk,
-    );
-    if (!selectedAnswerPk && !campaignTrail_temp.skippingQuestion) {
-        // Show "you must select answer"
-        advisorFeedback(e.election_id);
-    } else {
-        // Apply effects
-        answerEffects(selectedAnswerPk);
-    }
-}
-
-function questionHTML() {
-    function shuffle(arr) { // Fisher-Yates
-        for (let i = arr.length - 1; i >= 1; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
-    const ansArr = shuffle(
-        e.answers_json
-            .map((f, idx) => ({f, idx}))
-            .filter(({f}) => f.fields.question === e.questions_json[e.question_number].pk)
-            .slice(0, e.answer_count)
-            .map(({idx}) => ({
-                key: idx,
-            })),
-    );
-
-    const gameWindow = document.querySelector("#game_window");
-    const s = ansArr.map((f, idx) => `
-            <input type="radio" name="game_answers" class="game_answers" id="game_answers[${idx}]" value = "${e.answers_json[f.key].pk}"/>
-            <label for="game_answers[${idx}]">${substitutePlaceholders(e.answers_json[f.key].fields.description)}</label><br>
-        `).join("").trim();
-    const l = `
-        <img id="candidate_pic" src="${e.candidate_image_url}">
-        <img id="running_mate_pic" src="${e.running_mate_image_url}">
-        <div class="inner_window_sign_display">
-            <div id="progress_bar">
-                <h3>Question ${e.question_number + 1} of ${e.global_parameter_json[0].fields.question_count}</h3>
-            </div>
-            <div id="campaign_sign">
-                <p>${e.candidate_last_name}</p>
-                <p>${e.running_mate_last_name}</p>
-            </div>
-        </div>
-    `.trim();
-    const shining_button = Number(e.game_type_id) === 3
-        ? `
+        const l = `<img id="candidate_pic" src="${
+            e.candidate_image_url
+        }">    <img id="running_mate_pic" src="${
+            e.running_mate_image_url
+        }">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question ${
+            e.question_number + 1
+        } of ${
+            e.global_parameter_json[0].fields.question_count
+        }</h3>        </div>        <div id="campaign_sign">        <p>${
+            e.candidate_last_name
+        }</p>        <p>${
+            e.running_mate_last_name
+        }</p>        </div>    </div>`;
+        const game_winArr = Array.from($("#game_window")[0].children);
+        const shining_button = e.game_type_id == "3"
+            ? `
             <button id="shining_menu_button" class="answer_select_button" style='color:navy;font-weight:bolder;margin-left:1.5em;'>The Campaign</button>
         `
-        : "";
-    const z = `
+            : "";
+        const z = `
         <div class="inner_inner_window">
             <h3>${substitutePlaceholders(e.questions_json[e.question_number].fields.description)}</h3>
             <div id="question_form">
@@ -1256,736 +1195,346 @@ function questionHTML() {
             ${shining_button}
         </p>
         `;
-    gameWindow.querySelectorAll(":scope > *:not(#main_content_area):not(.game_header)")
-        .forEach((el) => el.remove());
-    const mainContentArea = document.querySelector("#main_content_area");
-    if (mainContentArea) mainContentArea.style.display = "none";
+        for (i in game_winArr) {
+            if (
+                game_winArr[i].getAttribute("id") != "main_content_area"
+                && game_winArr[i].getAttribute("class") != "game_header"
+            ) {
+                game_winArr[i].remove();
+            }
+        }
+        const game_window = $("#game_window")[0];
+        if ($("#main_content_area")[0]) $("#main_content_area")[0].style.display = "none";
 
-    const inner_window_question = document.createElement("div");
-    inner_window_question.setAttribute("class", "inner_window_question");
-    inner_window_question.innerHTML = z;
-    gameWindow.appendChild(inner_window_question);
+        const inner_window_question = document.createElement("div");
+        inner_window_question.setAttribute("class", "inner_window_question");
+        inner_window_question.innerHTML = z;
+        game_window.appendChild(inner_window_question);
 
-    const ports = document.createElement("g");
-    ports.innerHTML = l;
-    gameWindow.appendChild(ports);
+        const ports = document.createElement("g");
+        ports.innerHTML = l;
+        game_window.appendChild(ports);
 
-    // $("#game_window").html(l)
-}
+        // $("#game_window").html(l)
 
-function openMap(_e) {
-    // startTime = performance.now();
-    const gameWindow = document.querySelector("#game_window");
-    const mainContentArea = document.querySelector("#main_content_area");
-    if (mainContentArea) {
-        gameWindow.querySelectorAll(":scope > *:not(#main_content_area):not(.game_header)")
-            .forEach((el) => el.remove());
+        $("#view_electoral_map").click(() => {
+            openMap(t);
+        });
 
-        const footer_html = `
-            <button id="resume_questions_button">Back to the game</button>
-            <button id="margin_switcher">Switch margin colouring gradient</button>
-            <button id="AdvisorButton">Enable/Disable Advisor Feedback</button>
-        </div>`.trim();
-        const ftH = document.createElement("div");
-        ftH.id = "map_footer";
-        ftH.innerHTML = footer_html;
-        gameWindow.appendChild(ftH);
-        $("#main_content_area").show();
-    } else {
-        $("#game_window").html(`
-            <div class="game_header">${corrr}</div>
-            <div id="main_content_area">
-                <div id="map_container"></div>
-                <div id="menu_container">
-                    <div id="overall_result_container">
-                        <div id="overall_result">
-                            <h3>ESTIMATED SUPPORT</h3>
-                            <p>Click on a state to view more info.</p>
-                        </div>
-                    </div>
-                    <div id="state_result_container">
-                        <div id="state_info">
-                            <h3>STATE SUMMARY</h3>
-                            <p>Click/hover on a state to view more info.</p>
-                            <p>Precise results will be available on election night.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="map_footer">
-                <button id="resume_questions_button">Back to the game</button>
-                <button id="margin_switcher">Switch margin colouring gradient</button>
-                <button id="AdvisorButton">Enable/Disable Advisor Feedback</button>
-            </div>`.trim());
-        const t = rFunc(_e, 0);
+        $("#shining_menu_button").click(() => {
+            shining_menu(t);
+        });
 
-        $("#map_container").usmap(t);
-    }
-}
-
-function visitState(s, o, t) {
-    setTimeout(() => mapCache(true), 0); // cache the correct map and prevent visit glitch
-    e.player_visits.push(e.states_json[s].pk);
-    o(t);
-}
-
-function formatNumbers(num) {
-    if (typeof num !== "number") {
-        num = Number(num);
-        if (Number.isNaN(num)) return "";
-    }
-    return num.toLocaleString(e.numberFormat);
-}
-
-e.answer_count = 4;
-
-function primaryResults(states) {
-    const t = getSortedCands();
-    const stateMap = new Map(states.map((s) => [s.pk, s]));
-
-    const i = t
-        .map((item) => {
-            const {color} = item;
-            return `<li><span style="color:${color}; background-color:${color}">--</span> ${item.last_name}: 0</li>`;
-        })
-        .join("");
-    const s = findFromPK(e.election_json, e.election_id);
-    const n = e.election_json[s].fields.winning_electoral_vote_number;
-    $("#game_window").html(`
-        <div class="game_header">${corrr}</div>
-        <div id="main_content_area">
-            <div id="map_container"></div>
-            <div id="menu_container">
-                <div id="overall_result_container">
-                    <div id="overall_result">
-                        <h3>ELECTORAL VOTES</h3>
-                        <ul>${i}</ul>
-                        <p>0% complete
-                            <br>
-                            ${n} to win
-                        </p>
-                    </div>
-                </div>
-                <div id="state_result_container">
-                    <div id="state_result">
-                        <h3>STATE RESULTS</h3>
-                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="map_footer">
-            <button id="final_result_button">Go back to questions</button>
-        </div>
-        <div class="overlay" id="election_night_overlay"></div>
-        <div class="overlay_window" id="election_night_window">
-            <div class="overlay_window_content" id="election_night_content">
-                <h3>Advisor Feedback</h3>
-                <img src="${e.election_json[s].fields.advisor_url}" width="208" height="128"/>
-                <p>One of many election nights has arrived. Winning the delegates in these races will be vital to your primary victory.</p>
-            </div>
-            <div class="overlay_buttons" id="election_night_buttons">
-                <button id="ok_button">OK</button>
-                <br>
-            </div>
-        </div>`.trim());
-
-    const stateColorArr = {};
-    states.forEach((f) => {
-        stateColorArr[f.fields.abbr] = {
-            fill: campaignTrail_temp.global_parameter_json[0].fields.default_map_color_hex,
-        };
-    });
-
-    const lTemp = {
-        stateStyles: {
-            fill: "transparent",
-        },
-        stateHoverStyles: {
-            fill: "transparent",
-        },
-        stateSpecificStyles: stateColorArr,
-        stateSpecificHoverStyles: stateColorArr,
+        const answerButton = $("#answer_select_button")[0];
+        answerButton.addEventListener("click", onAnswerSelectButtonClicked);
     };
-    $("#map_container").usmap(lTemp);
-    const $okButton = $("#ok_button");
-    $okButton.click(() => {
-        $("#election_night_overlay, #election_night_window").remove();
-    });
-    $("#final_result_button").click(() => {
-        clearTimeout(results_timeout);
-        $("#map_footer").html("<i>Processing Results, wait one moment...</i>");
-        // HELPFUL CODE HERE
-        // campaignTrail_temp.question_number = 0
-        // ee = A(return_type=2)
-        // o(ee)
-        e.question_number++;
-        nextQuestion();
-    });
-    e.final_overall_results = e.final_state_results[0].result.map((f) => ({
-        candidate: f.candidate,
-        electoral_votes: 0,
-        popular_votes: 0,
-    }));
-    e.final_state_results = e.final_state_results.map((f) => {
-        const stObj = stateMap.get(Number(f.state)) ?? states.find((g) => g.pk === Number(f.state));
-        if (!stObj) return f;
 
-        return {
-            ...f,
-            result_time: marginTime(f.result, stObj.fields.poll_closing_time),
-        };
-    });
+    function onAnswerSelectButtonClicked() {
+        const selectedAnswerPk = $("input:radio[name=game_answers]:checked").val();
+        debugConsole(
+            "answer button clicked, skip question? ",
+            campaignTrail_temp.skippingQuestion,
+            "selected answer",
+            selectedAnswerPk,
+        );
+        if (selectedAnswerPk == null && !campaignTrail_temp.skippingQuestion) {
+            // Show "you must select answer"
+            C(e.election_id);
+        } else {
+            // Apply effects
+            n(selectedAnswerPk);
+        }
+        campaignTrail_temp.skippingQuestion = false;
+    }
 
-    $okButton.click(() => {
-        results_timeout = setTimeout(() => {
-            !(function t(i, a) {
-                const s = [0, 0];
-                for (var n = 0; n < e.final_overall_results.length; n++) {
-                    e.final_overall_results[n].electoral_votes > s[0]
-                    && (s[0] = e.final_overall_results[n].electoral_votes);
+    function electionNight() {
+        !(function () {
+            for (var t = u(), i = "", a = 0; a < t.length; a++) {
+                i
+                    += `            <li><span style="color:${
+                    t[a].color
+                }; background-color: ${
+                    t[a].color
+                }">--</span> ${
+                    t[a].last_name
+                }:  0</li>`;
+            }
+            const s = S(e.election_id);
+            const n = e.election_json[s].fields.winning_electoral_vote_number;
+            $("#game_window").html(
+                `        <div class="game_header">            ${
+                    corrr
+                }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTORAL VOTES</h3>                        <ul>${
+                    i
+                }</ul>                        <p>0% complete</br>${
+                    n
+                } to win</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_result">                        <h3>STATE RESULTS</h3>                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    </div>                </div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>        <div class="overlay" id="election_night_overlay"></div>        <div class="overlay_window" id="election_night_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="${
+                    e.election_json[s].fields.advisor_url
+                }" width="208" height="128"/>            <p>${e.ElectionPopup}</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>`,
+            );
+            const lTemp = (function () {
+                for (var t = {}, i = 0; i < e.states_json.length; i++) {
+                    t[e.states_json[i].fields.abbr] = {
+                        fill: "#C9C9C9",
+                    };
                 }
-                total_votes = 0;
-                for (
-                    iterator = 0;
-                    iterator < e.final_overall_results.length;
-                    iterator++
-                ) {
-                    total_votes += e.final_overall_results[iterator].popular_votes;
-                }
-                pop_vs = [];
-                for (
-                    iterator = 0;
-                    iterator < e.final_overall_results.length;
-                    iterator++
-                ) {
-                    if (
-                        e.final_overall_results[iterator].popular_votes / total_votes
-                        > 0
-                    ) {
-                        pop_vs.push(
-                            e.final_overall_results[iterator].popular_votes / total_votes,
-                        );
-                    } else {
-                        pop_vs.push(0);
-                    }
-                }
-                var a = handleFinalResults(i);
-                const _ = getSortedCands();
-                let r = "";
-                const o = "";
-                for (var n = 0; n < _.length; n++) {
-                    for (let d = 0; d < e.final_overall_results.length; d++) {
-                        if (e.final_overall_results[d].candidate == _[n].candidate) {
-                            var c = e.final_overall_results[d].electoral_votes;
-                            const popvthing = (pop_vs[d] * 100).toFixed(1);
-                        }
-                    }
-                    r
-                        += `            <span style="color:${
-                        _[n].color
-                    }; background-color: ${
-                        _[n].color
-                    }">--</span> <b>${
-                        _[n].last_name
-                    }</b> -  ${
-                        c
-                    }<br>`;
-                }
-                const p = mapResultColor(i);
-                let h = Math.floor((i / 480) * 100);
-                const g = $("#state_result_container").html();
-                $("#game_window").html("");
-                $("#game_window").html(
-                    `        <div class="game_header">            ${
-                        corrr
-                    }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTION TALLY</h3>                        <ul>${
-                        r
-                    }</ul>                        <p>${
-                        h
-                    }% complete</br>`
-                    + `</div>                </div>                <div id="state_result_container">${
-                        g
-                    }</div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go back to questions</button>        </div>`,
-                );
-                $("#map_container").usmap(p);
+                return {
+                    stateStyles: {
+                        fill: "#EAFDFF",
+                    },
+                    stateHoverStyles: {
+                        fill: "#EAFDFF",
+                    },
+                    stateSpecificStyles: t,
+                    stateSpecificHoverStyles: t,
+                };
+            }());
+            $("#map_container").usmap(lTemp),
+                $("#ok_button").click(() => {
+                    $("#election_night_overlay").remove(),
+                        $("#election_night_window").remove();
+                }),
                 $("#final_result_button").click(() => {
                     clearTimeout(results_timeout),
                         $("#map_footer").html(
                             "<i>Processing Results, wait one moment...</i>",
                         );
-                    e.question_number++;
-                    nextQuestion();
+                    v(500);
+                    m();
                 });
-                for (var n = 0; n < e.final_overall_results.length; n++) {
-                    e.final_overall_results[n].electoral_votes > s[1]
-                    && (s[1] = e.final_overall_results[n].electoral_votes);
-                }
-                if (s[0] < o && s[1] >= o) {
-                    $("#overlay_result_button").click(() => {
-                        clearTimeout(results_timeout),
-                            $("#map_footer").html(
-                                "<i>Processing Results, wait one moment...</i>",
-                            );
-                        e.question_number++;
-                        nextQuestion();
-                    });
-                } else {
-                    i >= 480 || a >= states.length
-                        ? ((h = 100),
-                            $("#overall_result").html(
-                                `            <h3>ELECTION TALLY</h3>            <ul>${
-                                    r
-                                }</ul>            <p>${
-                                    h
-                                }% complete</br>${
-                                    o
-                                } to win</p>`,
-                            ))
-                        : (results_timeout = setTimeout(() => {
-                            t(i, a);
-                        }, 2e3));
-                }
-                i += 120;
-            }(0, 0));
-        }, 2e3);
-    });
-}
-
-function primaryFunction(execute, breaks) {
-    if (!execute) {
-        return false;
-    }
-
-    // Get the data for the current question number
-    const dat = e.primary_code[breaks.indexOf(e.question_number)];
-
-    // Get the state for the current question
-    const stateMap = dat.states;
-
-    const stateMap2 = e.states_json.map((f) => f.pk);
-
-    states = [];
-
-    stateMap.forEach((f, it, arr) => {
-        const correctState = stateMap2.indexOf(f);
-        states.push(e.states_json[correctState]);
-    });
-
-    // Set the final state results to an array with one element (1)
-    e.final_state_results = A(1);
-
-    // Filter out those that aren't in the map
-    e.final_state_results = e.final_state_results.filter((f) => stateMap.includes(f.state));
-
-    // Use Array.slice() to create a new copy of the filtered array
-    const filt = e.final_state_results.slice();
-
-    if (e.primary_states == null) {
-        e.primary_states = [];
-    } else {
-        e.primary_states = JSON.parse(e.primary_states);
-    }
-
-    // Add the items from the filtered list to the primary states array,
-    // without adding any duplicates
-    for (let i = 0; i < filt.length; i++) {
-        e.primary_states.push(filt[i]);
-    }
-    e.primary_states = JSON.stringify(e.primary_states);
-
-    // Call the primaryResults function and pass it the array of states
-    primaryResults(states);
-    return true;
-}
-
-function electionNight() {
-    for (var t = getSortedCands(), i = "", a = 0; a < t.length; a++) {
-        i
-            += `            <li><span style="color:${
-            t[a].color
-        }; background-color: ${
-            t[a].color
-        }">--</span> ${
-            t[a].last_name
-        }:  0</li>`;
-    }
-    const s = findFromPK(e.election_json, e.election_id);
-    const n = e.election_json[s].fields.winning_electoral_vote_number;
-    $("#game_window").html(
-        `        <div class="game_header">            ${
-            corrr
-        }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTORAL VOTES</h3>                        <ul>${
-            i
-        }</ul>                        <p>0% complete</br>${
-            n
-        } to win</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_result">                        <h3>STATE RESULTS</h3>                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    </div>                </div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>        <div class="overlay" id="election_night_overlay"></div>        <div class="overlay_window" id="election_night_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="${
-            e.election_json[s].fields.advisor_url
-        }" width="208" height="128"/>            <p>${e.ElectionPopup}</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>`,
-    );
-    const lTemp = (function () {
-        for (var t = {}, i = 0; i < e.states_json.length; i++) {
-            t[e.states_json[i].fields.abbr] = {
-                fill: "#C9C9C9",
-            };
-        }
-        return {
-            stateStyles: {
-                fill: "transparent",
-            },
-            stateHoverStyles: {
-                fill: "transparent",
-            },
-            stateSpecificStyles: t,
-            stateSpecificHoverStyles: t,
-        };
-    }());
-    $("#map_container").usmap(lTemp),
-        $("#ok_button").click(() => {
-            $("#election_night_overlay").remove(),
-                $("#election_night_window").remove();
-        }),
-        $("#final_result_button").click(() => {
-            clearTimeout(results_timeout),
-                $("#map_footer").html(
-                    "<i>Processing Results, wait one moment...</i>",
-                );
-            handleFinalResults(500);
-            m();
-        });
-    e.final_overall_results = [];
-    for (let t = 0; t < e.final_state_results[0].result.length; t++) {
-        e.final_overall_results.push({
-            candidate: e.final_state_results[0].result[t].candidate,
-            electoral_votes: 0,
-            popular_votes: 0,
-        });
-    }
-    !(function () {
-        for (let t = 0; t < e.final_state_results.length; t++) {
-            const i = findFromPK(e.states_json, e.final_state_results[t].state);
-            const a = marginTime(
-                e.final_state_results[t].result,
-                e.states_json[i].fields.poll_closing_time,
-            );
-            e.final_state_results[t].result_time = a;
-        }
-    }()),
-        $("#ok_button").click(() => {
-            results_timeout = setTimeout(() => {
-                !(function t(i, a) {
-                    const s = [0, 0];
-                    for (var n = 0; n < e.final_overall_results.length; n++) {
-                        e.final_overall_results[n].electoral_votes > s[0]
-                        && (s[0] = e.final_overall_results[n].electoral_votes);
-                    }
-                    total_votes = 0;
-                    for (
-                        iterator = 0;
-                        iterator < e.final_overall_results.length;
-                        iterator++
-                    ) {
-                        total_votes += e.final_overall_results[iterator].popular_votes;
-                    }
-                    pop_vs = [];
-                    for (
-                        iterator = 0;
-                        iterator < e.final_overall_results.length;
-                        iterator++
-                    ) {
-                        if (
-                            e.final_overall_results[iterator].popular_votes / total_votes
-                            > 0
-                        ) {
-                            pop_vs.push(
-                                e.final_overall_results[iterator].popular_votes / total_votes,
-                            );
-                        } else {
-                            pop_vs.push(0);
-                        }
-                    }
-                    var a = handleFinalResults(i);
-                    const l = findFromPK(e.election_json, e.election_id);
-                    const o = e.election_json[l].fields.winning_electoral_vote_number;
-                    const _ = getSortedCands();
-                    let r = "";
-                    for (var n = 0; n < _.length; n++) {
-                        for (let d = 0; d < e.final_overall_results.length; d++) {
-                            const can1 = e.final_overall_results[d].candidate;
-                            const can2 = _[n].candidate;
-
-                            if (DEBUG) {
-                                console.log(
-                                    "final_overall_results. d:",
-                                    d,
-                                    "n: ",
-                                    n,
-                                    "_: ",
-                                    _,
-                                    " e:",
-                                    e,
-                                    can1,
-                                    can2,
-                                );
-                            }
-
-                            if (can1 == can2) {
-                                var c = e.final_overall_results[d].electoral_votes;
-                                var popvthing = (pop_vs[d] * 100).toFixed(1);
-                            }
-                        }
-                        r
-                            += `            <span style="color:${
-                            _[n].color
-                        }; background-color: ${
-                            _[n].color
-                        }">--</span> <b>${
-                            _[n].last_name
-                        }</b> -  ${
-                            c
-                        } / ${
-                            popvthing
-                        }%<br>`;
-                    }
-                    const p = mapResultColor(i);
-                    let h = Math.floor((i / 480) * 100);
-                    const g = $("#state_result_container").html();
-                    $("#game_window").html("");
-                    $("#game_window").html(
-                        `        <div class="game_header">            ${
-                            corrr
-                        }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTION TALLY</h3>                        <ul>${
-                            r
-                        }</ul>                        <p>${
-                            h
-                        }% complete</br>${
-                            o
-                        } to win</p>                    </div>                </div>                <div id="state_result_container">${
-                            g
-                        }</div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>`,
-                    );
-                    $("#map_container").usmap(p);
-                    $("#final_result_button").click(() => {
-                        clearTimeout(results_timeout),
-                            $("#map_footer").html(
-                                "<i>Processing Results, wait one moment...</i>",
-                            );
-                        handleFinalResults(500);
-                        m();
-                    });
-                    for (var n = 0; n < e.final_overall_results.length; n++) {
-                        e.final_overall_results[n].electoral_votes > s[1]
-                        && (s[1] = e.final_overall_results[n].electoral_votes);
-                    }
-                    if (s[0] < o && s[1] >= o) {
-                        if (e.final_overall_results[0].candidate == e.candidate_id) var b = `${e.WinPopup}`;
-                        else if (e.final_overall_results[0].candidate != e.candidate_id) var b = `${e.LosePopup}`;
-                        $("#game_window").append(
-                            `            <div class="overlay" id="election_night_overlay"></div>            <div class="overlay_window" id="election_night_window">                <div class="overlay_window_content" id="election_night_content">                <h3>Advisor Feedback</h3>                <img src="${
-                                e.election_json[l].fields.advisor_url
-                            }" width="208" height="128"/><p>${
-                                b
-                            }</p></div>                <div class="overlay_buttons" id="winner_buttons">                <button id="ok_button">OK</button><br>                <button id="overlay_result_button">Go to Final Results</button>                </div>            </div>`,
-                        ),
-                            $("#ok_button").click(() => {
-                                $("#election_night_overlay").remove(),
-                                    $("#election_night_window").remove(),
-                                    (results_timeout = setTimeout(() => {
-                                        t(i, a);
-                                    }, 2e3));
-                            }),
-                            $("#overlay_result_button").click(() => {
-                                $("#election_night_overlay").remove(),
-                                    $("#election_night_window").remove(),
-                                    clearTimeout(results_timeout),
-                                    $("#map_footer").html(
-                                        "<i>Processing Results, wait one moment...</i>",
-                                    );
-                                handleFinalResults(500);
-                                m();
-                            });
-                    } else {
-                        i >= 480 || a >= e.states_json.length
-                            ? ((h = 100),
-                                $("#overall_result").html(
-                                    `            <h3>ELECTION TALLY</h3>            <ul>${
-                                        r
-                                    }</ul>            <p>${
-                                        h
-                                    }% complete</br>${
-                                        o
-                                    } to win</p>`,
-                                ))
-                            : (results_timeout = setTimeout(() => {
-                                t(i, a);
-                            }, 2e3));
-                    }
-                    i += 10;
-                }(0, 0));
-            }, 2e3);
-        });
-}
-
-function nextQuestion() {
-    // calculate shining
-
-    if (Number(e.game_type_id) === 3) {
-        const temp_polls = A(2);
-        shining_cal(temp_polls);
-    }
-
-    const t = A(2);
-
-    if (e.cyoa) {
-        if (e.collect_results) {
-            const a = A(2);
-            e.current_results = [getLatestRes(a)[0], a];
-        }
-        cyoAdventure(e.questions_json[e.question_number]);
-    }
-    let a = false;
-    if (e.primary) {
-        /* Primary code format:
-        e.primary_code = [
-            {
-                "breakQ": 0,
-                "states": [1100, 1101, 1102]
-            },
-            {
-                "breakQ": 2,
-                "states": [1103, 1104, 1105]
-            }
-        ]
-        */
-        primary_breaks = e.primary_code.map((f) => f.breakQ);
-        a = primaryFunction(
-            primary_breaks.includes(e.question_number),
-            primary_breaks,
-        );
-        if (a) {
-            e.corQuestion = true;
-            return false;
-        }
-    }
-
-    setTimeout(() => mapCache((skip = false)), 0); // starts new thread for poll map preloading
-
-    if (e.corQuestion) e.corQuestion = false;
-    else e.question_number++;
-
-    if (e.player_answers.length < e.question_number) {
-        while (e.player_answers.length != e.question_number) {
-            e.player_answers.push(null);
-        }
-    }
-
-    if (e.question_number == e.global_parameter_json[0].fields.question_count) {
-        if (e.primary) {
-            e.final_state_results = A(1);
-            electionNight();
-            handleFinalResults(500);
-            m();
-        } else {
-            e.final_state_results = A(1);
-            electionNight();
-        }
-    } else if (e.question_number % 2 == 0) {
-        const i = findFromPK(e.election_json, e.election_id);
-        e.election_json[i].fields.has_visits == 1
-            ? (function (e) {
-                $("#game_window").html(
-                    `        <div class="game_header">            ${
-                        corrr
-                    }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>        </div>        <p class="visit_text"><font size="2">Use this map to click on the next state you wish to visit. Choose wisely             and focus your efforts where they will have the most impact.</p>        </div>        `,
-                );
-                const t = rFunc(e, 1);
-                $("#map_container").usmap(t);
-            }(t))
-            : questionHTML(t);
-    } else questionHTML(t);
-    if ($("#importfile")[0].value != "") {
-        importgame(e.dagakotowaru);
-    }
-    return true;
-}
-
-function answerEffects(t) {
-    const stopSpacebar = false;
-    if (stopSpacebar && $("#visit_overlay")[0]) {
-        debugConsole("Visit overlay is showing, not applying answer effects");
-        return;
-    }
-
-    const numT = Number(t);
-    const numCand = Number(e.candidate_id);
-
-    debugConsole(`Applying answer effects for answer pk ${t}`);
-    e.player_answers.push(numT);
-    const electIndex = findFromPK(e.election_json, e.election_id);
-    if (e.answer_feedback_flg === 1) {
-        const hasFeedback = e.answer_feedback_json.some(
-            (f) => f.fields.answer === numT && f.fields.candidate === numCand,
-        );
-        if (hasFeedback) {
-            const s = e.answer_feedback_json.findIndex(
-                (f) => f.fields.answer === numT && f.fields.candidate === numCand,
-            );
-            const n = `                    <div class="overlay" id="visit_overlay"></div>                    <div class="overlay_window" id="visit_window">                        <div class="overlay_window_content" id="visit_content">                        <h3>Advisor Feedback</h3>                        <img src="${
-                e.election_json[electIndex].fields.advisor_url
-            }" width="208" height="128"/>                        <p>${
-                substitutePlaceholders(e.answer_feedback_json[s].fields.answer_feedback)
-            }</p>                        </div>                        <div class="overlay_buttons" id="visit_buttons">                        <button id="ok_button">OK</button><br><button id="no_feedback_button">Don't give me advice</button>                                                </div>                    </div>`;
-            $("#game_window").append(n);
-            $("#ok_button").click(() => nextQuestion());
-            $("#no_feedback_button").click(() => {
-                e.answer_feedback_flg = 0;
-                nextQuestion();
+        }());
+        e.final_overall_results = [];
+        for (let t = 0; t < e.final_state_results[0].result.length; t++) {
+            e.final_overall_results.push({
+                candidate: e.final_state_results[0].result[t].candidate,
+                electoral_votes: 0,
+                popular_votes: 0,
             });
-        } else if (!hasFeedback) nextQuestion();
-    } else nextQuestion();
-}
+        }
+        !(function () {
+            for (let t = 0; t < e.final_state_results.length; t++) {
+                const i = R(e.final_state_results[t].state);
+                const a = c(
+                    e.final_state_results[t].result,
+                    e.states_json[i].fields.poll_closing_time,
+                );
+                e.final_state_results[t].result_time = a;
+            }
+        }()),
+            $("#ok_button").click(() => {
+                results_timeout = setTimeout(() => {
+                    !(function t(i, a) {
+                        const s = [0, 0];
+                        for (var n = 0; n < e.final_overall_results.length; n++) {
+                            e.final_overall_results[n].electoral_votes > s[0]
+                            && (s[0] = e.final_overall_results[n].electoral_votes);
+                        }
+                        total_votes = 0;
+                        for (
+                            iterator = 0;
+                            iterator < e.final_overall_results.length;
+                            iterator++
+                        ) {
+                            total_votes += e.final_overall_results[iterator].popular_votes;
+                        }
+                        pop_vs = [];
+                        for (
+                            iterator = 0;
+                            iterator < e.final_overall_results.length;
+                            iterator++
+                        ) {
+                            if (
+                                e.final_overall_results[iterator].popular_votes / total_votes
+                                > 0
+                            ) {
+                                pop_vs.push(
+                                    e.final_overall_results[iterator].popular_votes / total_votes,
+                                );
+                            } else {
+                                pop_vs.push(0);
+                            }
+                        }
+                        var a = v(i);
+                        const l = S(e.election_id);
+                        const o = e.election_json[l].fields.winning_electoral_vote_number;
+                        const _ = u();
+                        let r = "";
+                        for (var n = 0; n < _.length; n++) {
+                            for (let d = 0; d < e.final_overall_results.length; d++) {
+                                const can1 = e.final_overall_results[d].candidate;
+                                const can2 = _[n].candidate;
 
-function advisorFeedback() {
-    const i = findFromPK(e.election_json, e.election_id);
-    const advDiv = `    <div class="overlay" id="feedback_overlay"></div>    <div class="overlay_window" id="feedback_window">        <div class="overlay_window_content" id="feedback_content">        <h3>Advisor Feedback</h3>        <img src="${
-        e.election_json[i].fields.advisor_url
-    }" width="208" height="128"/>        <p>${e.SelAnsContText}</p>        </div>        <div id="visit_buttons">        <button id="ok_button">OK</button><br>        </div>    </div>`;
-    $("#game_window").append(advDiv);
-    $("#ok_button").click(() => $("#feedback_overlay, #feedback_window").remove());
-}
+                                if (DEBUG) {
+                                    console.log(
+                                        "final_overall_results. d:",
+                                        d,
+                                        "n: ",
+                                        n,
+                                        "_: ",
+                                        _,
+                                        " e:",
+                                        e,
+                                        can1,
+                                        can2,
+                                    );
+                                }
 
-function descHTML(descWindow, id) {
-    const candObj = e.candidate_json.find((f) => f.pk === Number(id));
-    const isRM = descWindow === "#running_mate_description_window";
-    const idx = isRM ? "running_mate_summary" : "candidate_summary";
-    const desc = isRM ? "description_as_running_mate" : "description";
-    $(descWindow).html(
-        `
-        <div class="person_image" id="candidate_image">
-            <img src="${candObj.fields.image_url}" width="210" height="250"/>
-        </div>
-        <div class="person_summary" id="${idx}">
-            <ul>
-                <li>Name: ${candObj.fields.first_name} ${candObj.fields.last_name}</li>
-                <li>${e.PartyText} ${candObj.fields.party}</li>
-                <li>${e.HomeStateText} ${candObj.fields.state}</li>
-            </ul>
-        ${candObj.fields[desc]}</div>`.trim(),
-    );
-}
+                                if (can1 == can2) {
+                                    var c = e.final_overall_results[d].electoral_votes;
+                                    var popvthing = (pop_vs[d] * 100).toFixed(1);
+                                }
+                            }
+                            r
+                                += `            <span style="color:${
+                                _[n].color
+                            }; background-color: ${
+                                _[n].color
+                            }">--</span> <b>${
+                                _[n].last_name
+                            }</b> -  ${
+                                c
+                            } / ${
+                                popvthing
+                            }%<br>`;
+                        }
+                        const p = f(i);
+                        let h = Math.floor((i / 480) * 100);
+                        const g = $("#state_result_container").html();
+                        $("#game_window").html("");
+                        $("#game_window").html(
+                            `        <div class="game_header">            ${
+                                corrr
+                            }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTION TALLY</h3>                        <ul>${
+                                r
+                            }</ul>                        <p>${
+                                h
+                            }% complete</br>${
+                                o
+                            } to win</p>                    </div>                </div>                <div id="state_result_container">${
+                                g
+                            }</div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>`,
+                        );
+                        $("#map_container").usmap(p);
+                        $("#final_result_button").click(() => {
+                            clearTimeout(results_timeout),
+                                $("#map_footer").html(
+                                    "<i>Processing Results, wait one moment...</i>",
+                                );
+                            v(500);
+                            m();
+                        });
+                        for (var n = 0; n < e.final_overall_results.length; n++) {
+                            e.final_overall_results[n].electoral_votes > s[1]
+                            && (s[1] = e.final_overall_results[n].electoral_votes);
+                        }
+                        if (s[0] < o && s[1] >= o) {
+                            if (e.final_overall_results[0].candidate == e.candidate_id) var b = `${e.WinPopup}`;
+                            else if (e.final_overall_results[0].candidate != e.candidate_id) var b = `${e.LosePopup}`;
+                            $("#game_window").append(
+                                `            <div class="overlay" id="election_night_overlay"></div>            <div class="overlay_window" id="election_night_window">                <div class="overlay_window_content" id="election_night_content">                <h3>Advisor Feedback</h3>                <img src="${
+                                    e.election_json[l].fields.advisor_url
+                                }" width="208" height="128"/><p>${
+                                    b
+                                }</p></div>                <div class="overlay_buttons" id="winner_buttons">                <button id="ok_button">OK</button><br>                <button id="overlay_result_button">Go to Final Results</button>                </div>            </div>`,
+                            ),
+                                $("#ok_button").click(() => {
+                                    $("#election_night_overlay").remove(),
+                                        $("#election_night_window").remove(),
+                                        (results_timeout = setTimeout(() => {
+                                            t(i, a);
+                                        }, 2e3));
+                                }),
+                                $("#overlay_result_button").click(() => {
+                                    $("#election_night_overlay").remove(),
+                                        $("#election_night_window").remove(),
+                                        clearTimeout(results_timeout),
+                                        $("#map_footer").html(
+                                            "<i>Processing Results, wait one moment...</i>",
+                                        );
+                                    v(500);
+                                    m();
+                                });
+                        } else {
+                            i >= 480 || a >= e.states_json.length
+                                ? ((h = 100),
+                                    $("#overall_result").html(
+                                        `            <h3>ELECTION TALLY</h3>            <ul>${
+                                            r
+                                        }</ul>            <p>${
+                                            h
+                                        }% complete</br>${
+                                            o
+                                        } to win</p>`,
+                                    ))
+                                : (results_timeout = setTimeout(() => {
+                                    t(i, a);
+                                }, 2e3));
+                        }
+                        i += 10;
+                    }(0, 0));
+                }, 2e3);
+            });
+    }
 
-function a(e) {
-    let t;
-    // eslint-disable-next-line default-case
-    switch (e) {
-        case "1":
-            t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candiate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
-            break;
-        case "2":
-            t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
-            break;
-        case "3":
-            t = `
+    function t() {
+        for (var t = -1, i = 0; i < e.candidate_json.length; i++) {
+            if (e.candidate_json[i].pk == candidate_id.value) {
+                t = i;
+                break;
+            }
+        }
+        $("#candidate_description_window").html(
+            `<div class="person_image" id="candidate_image">            <img src="${
+                e.candidate_json[t].fields.image_url
+            }" width="210" height="250"/>        </div>        <div class="person_summary" id="candidate_summary">        <ul><li>Name: ${
+                e.candidate_json[t].fields.first_name
+            } ${
+                e.candidate_json[t].fields.last_name
+            }</li>        <li>${e.PartyText} ${
+                e.candidate_json[t].fields.party
+            }</li>        <li>${e.HomeStateText} ${
+                e.candidate_json[t].fields.state
+            }</li>        </ul>${
+                e.candidate_json[t].fields.description
+            }</div>`,
+        );
+    }
+
+    function i() {
+        for (var t = -1, i = 0; i < e.candidate_json.length; i++) {
+            if (e.candidate_json[i].pk == running_mate_id.value) {
+                t = i;
+                break;
+            }
+        }
+        $("#running_mate_description_window").html(
+            `<div class="person_image" id="running_mate_image">            <img src="${
+                e.candidate_json[t].fields.image_url
+            }" width="210" height="250"/>        </div>        <div class="person_summary" id="running_mate_summary">        <ul><li>Name: ${
+                e.candidate_json[t].fields.first_name
+            } ${
+                e.candidate_json[t].fields.last_name
+            }</li>        <li>${e.PartyText} ${
+                e.candidate_json[t].fields.party
+            }</li>        <li>${e.HomeStateText} ${
+                e.candidate_json[t].fields.state
+            }</li>        </ul>${
+                e.candidate_json[t].fields.description_as_running_mate
+            }</div>`,
+        );
+    }
+
+    function a(e) {
+        let t;
+        switch (e) {
+            case "1":
+                t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candiate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
+                break;
+            case "2":
+                t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
+                break;
+            case "3":
+                t = `
                     <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
                     <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
                     <p>
@@ -1997,2129 +1546,2855 @@ function a(e) {
                     <p><b>This is not the recommended experience for new players.</b></p>
                     <p><b>Originally from New Campaign Trail, added with permission.</b></p>
                     `;
-            break;
-    }
-    $("#opponent_selection_description_window").html(t);
-}
-
-function realityCheck(cand, running_mate) {
-    // checks if we are actually looking at a real candidate pairing
-    const pairs = e.running_mate_json
-        .map((f) => [f.fields.candidate, f.fields.running_mate]);
-    return pairs.some((pr) => pr[0] === cand && pr[1] === running_mate);
-}
-
-// Loads up the html for an election when loading the game. From my understanding this sets up the map and such.
-// Important for mods because it will load the base scenario code 2 for the mod before loading the custom code 2.
-// That way you have less boilerplate
-function election_HTML(id, cand, running_mate) {
-    const numId = Number(id);
-    if (numId !== 16) {
-        if (modded) {
-            let yearbit;
-            let lastnamebit;
-            let veeplastname;
-            try {
-                // ree = the actual base election json unmodded
-                yearbit = ree.election_json[findFromPK(ree.election_json, id)].fields.year;
-                lastnamebit = ree.candidate_json[
-                    findFromPK(ree.candidate_json, campaignTrail_temp.candidate_id)
-                    ].fields.last_name;
-                veeplastname = ree.candidate_json[
-                    findFromPK(ree.candidate_json, campaignTrail_temp.running_mate_id)
-                    ].fields.last_name;
-                // eslint-disable-next-line no-empty
-            } catch {
-            }
-
-            // Check if this is a base scenario and if so we need the specific base scenario code 2. Otherwise we can use whatever one with the same year.
-            const real = realityCheck(cand, running_mate);
-
-            if (real) {
-                return `${yearbit}_${lastnamebit}_${veeplastname}.html`;
-            }
-
-            return baseScenarioDict[yearbit];
+                break;
         }
-        // If it's not modded then it must bea real base scenario so just return the real info
-        const yearNM = campaignTrail_temp.election_json.find((f) => f.pk === Number(id)).fields.year;
-        const candNM = campaignTrail_temp.candidate_json.find((f) => f.pk === Number(cand)).fields.last_name;
-        const runNM = campaignTrail_temp.candidate_json.find((f) => f.pk === Number(running_mate)).fields.last_name;
-        return `${yearNM}_${candNM}_${runNM}.html`;
+        $("#opponent_selection_description_window").html(t);
     }
-    if (numId === 16) {
-        // If it's a mod we don't need to get the specific 2016a scenario
-        if (modded) {
-            return baseScenarioDict["2016a"];
+
+    function findFromPK(array, pk) {
+        a = array.map((zzzz) => zzzz.pk).indexOf(Number(pk));
+        return a;
+    }
+
+    function realityCheck(cand, running_mate, ree) {
+        // checks if we are actually looking at a real candidate pairing
+        pairs = e.running_mate_json
+            .map((f) => f.fields)
+            .map((f) => [f.candidate, f.running_mate]);
+        pair = [cand, running_mate];
+        for (i in pairs) {
+            if (JSON.stringify(pairs[i]) == JSON.stringify(pair)) return true;
         }
-        return (
-            `2016a_${
-                campaignTrail_temp.candidate_json[
-                    findFromPK(campaignTrail_temp.candidate_json, cand)
-                    ].fields.last_name
-            }_${
-                campaignTrail_temp.candidate_json[
-                    findFromPK(campaignTrail_temp.candidate_json, running_mate)
-                    ].fields.last_name
-            }.html`
-        );
+        return false;
     }
 
-    return null;
-}
+    // Loads up the html for an election when loading the game. From my understanding this sets up the map and such.
+    // Important for mods because it will load the base scenario code 2 for the mod before loading the custom code 2.
+    // That way you have less boilerplate
+    function election_HTML(id, cand, running_mate) {
+        if (id != 16) {
+            if (modded) {
+                try {
+                    // ree = the actual base election json unmodded
+                    yearbit = ree.election_json[findFromPK(ree.election_json, id)].fields.year;
+                    lastnamebit = ree.candidate_json[
+                        findFromPK(ree.candidate_json, campaignTrail_temp.candidate_id)
+                        ].fields.last_name;
+                    veeplastname = ree.candidate_json[
+                        findFromPK(ree.candidate_json, campaignTrail_temp.running_mate_id)
+                        ].fields.last_name;
+                } catch {
+                }
 
-/* eslint-disable no-use-before-define */
-function candSel(a) {
-    a.preventDefault();
-    const numElect = Number(e.election_id);
-    if (!modded) e.shining = e.shining_info.some((f) => f.pk === numElect);
-    const n = e.candidate_json
-        .filter((f) => f.fields.election === numElect && f.fields.is_active === 1)
-        .map((f) => `<option value="${f.pk}">${f.fields.first_name} ${f.fields.last_name}</option>`)
-        .join("");
+                // Check if this is a base scenario and if so we need the specific base scenario code 2. Otherwise we can use whatever one with the same year.
+                real = realityCheck(cand, running_mate, ree);
 
-    document.querySelector("#game_window").innerHTML = `
-        <div class="game_header">${corrr}</div>
-        <div class="inner_window_w_desc" id="inner_window_3">
-            <div id="candidate_form">
-                <form name="candidate">
-                    <p>
-                        <h3>${e.CandidText}</h3>
-                        <select name="candidate_id" id="candidate_id">${n}</select>
-                    </p>
-                </form>
-            </div>
-        <div class="person_description_window" id="candidate_description_window"></div>
-        <p>
-            <button class="person_button" id="candidate_id_back">Back</button>
-            <button class="person_button" id="candidate_id_button">Continue</button>
-        </p>
-        </div>`.trim();
+                if (real) {
+                    return `${yearbit}_${lastnamebit}_${veeplastname}.html`;
+                }
 
-    const candId = document.querySelector("#candidate_id");
-    descHTML("#candidate_description_window", candId.value);
-    candId.addEventListener("change", () => {
-        descHTML("#candidate_description_window", candId.value);
-    });
-}
-
-function vpSelect(t) {
-    t.preventDefault();
-    const candidate_id = document.getElementById("candidate_id");
-    const a = candidate_id ? candidate_id.value : e.candidate_id;
-
-    e.candidate_id = Number(a);
-
-    const n = e.running_mate_json
-        .filter((f) => f.fields.candidate === e.candidate_id)
-        .map((f) => {
-            const runObj = e.candidate_json.find((g) => g.pk === Number(f.fields.running_mate));
-            return `<option value="${runObj.pk}">${runObj.fields.first_name} ${runObj.fields.last_name}</option>`;
-        })
-        .join("");
-
-    document.querySelector("#game_window").innerHTML = `
-    <div class="game_header">${corrr}</div>
-    <div class="inner_window_w_desc" id="inner_window_4">
-        <div id="running_mate_form">
-            <form name="running mate">
-                <p>
-                    <h3>${e.VpText}</h3>
-                    <select name="running_mate_id" id="running_mate_id">${n}</select>
-                </p>
-            </form>
-        </div>
-        <div class="person_description_window" id="running_mate_description_window"></div>
-        <p>
-            <button class="person_button" id="running_mate_id_back">Back</button>
-            <button class="person_button" id="running_mate_id_button">Continue</button>
-        </p>
-    </div>`.trim();
-
-    const runningMateId = document.querySelector("#running_mate_id");
-    descHTML("#running_mate_description_window", runningMateId.value);
-    runningMateId.addEventListener("change", () => {
-        descHTML("#running_mate_description_window", runningMateId.value);
-    });
-}
-
-function renderOptions(electionId, candId, runId) {
-    const numElectId = Number(electionId);
-    const numCandId = Number(candId);
-    let difficultyStr = "";
-    e.difficulty_level_json.forEach((f) => {
-        const difficulty = f;
-        const isSelected = difficulty.fields.name === "Normal" ? "selected" : "";
-        difficultyStr += `<option value="${difficulty.pk}" ${isSelected}>${difficulty.fields.name}</option>`;
-    });
-    let shining = "";
-    if (e.shining) {
-        shining = `<option value=3 style="">Sea to Shining Sea</option>`;
+                return baseScenarioDict[yearbit];
+            }
+            // If it's not modded then it must bea real base scenario so just return the real info
+            return (
+                `${campaignTrail_temp.election_json[
+                    findFromPK(campaignTrail_temp.election_json, id)
+                    ].fields.year
+                }_${
+                    campaignTrail_temp.candidate_json[
+                        findFromPK(campaignTrail_temp.candidate_json, cand)
+                        ].fields.last_name
+                }_${
+                    campaignTrail_temp.candidate_json[
+                        findFromPK(campaignTrail_temp.candidate_json, running_mate)
+                        ].fields.last_name
+                }.html`
+            );
+        }
+        if (id == 16) {
+            // If it's a mod we don't need to get the specific 2016a scenario
+            if (modded) {
+                return baseScenarioDict["2016a"];
+            }
+            return (
+                `2016a_${
+                    campaignTrail_temp.candidate_json[
+                        findFromPK(campaignTrail_temp.candidate_json, cand)
+                        ].fields.last_name
+                }_${
+                    campaignTrail_temp.candidate_json[
+                        findFromPK(campaignTrail_temp.candidate_json, running_mate)
+                        ].fields.last_name
+                }.html`
+            );
+        }
     }
-    document.querySelector("#game_window").innerHTML = `
-        <div class="game_header">${corrr}</div>
+
+    function s(t, i, l) {
+        let difficultyStr;
+        for (difficultyStr = "", r = 0; r < e.difficulty_level_json.length; r++) {
+            e.difficulty_level_json[r].fields.name == "Normal"
+                ? (difficultyStr
+                    += `<option value=${
+                    e.difficulty_level_json[r].pk
+                } selected>${
+                    e.difficulty_level_json[r].fields.name
+                }</option>`)
+                : (difficultyStr
+                    += `<option value=${
+                    e.difficulty_level_json[r].pk
+                }>${
+                    e.difficulty_level_json[r].fields.name
+                }</option>`);
+        }
+        let shining = "";
+        if (e.shining) {
+            shining = `<option value=3 style="">Sea to Shining Sea</option>`;
+        }
+        const d = `
+        <div class="game_header">        ${corrr}        </div>
         <div class="inner_window_w_desc" id="inner_window_4">
-            <div id="game_options">
-                <form name="game_type_selection">
-                    <p>
-                        <h3>Select your game mode.</h3>
-                        <select name="game_type_id" id="game_type_id">
-                            <option value="1">Default (Winner-Take-All)</option>
-                            <option value="2">Proportional</option>
-                            ${shining}
-                        </select>
-                    </p>
-                </form>
-            </div>
-            <div class="description_window_small" id="opponent_selection_description_window"></div>
-            <div id="difficulty_level">
-                <form name="difficulty_level_selection">
-                <p>
-                    <h3>Please choose your difficulty level:</h3>
-                    <select name="difficulty_level_id" id="difficulty_level_id"> ${difficultyStr} </select>
-                </p>            
-                </form>
-            </div>
-            <p id="opponent_selection_id_button_p">
-                <button class="person_button" id="opponent_selection_id_back">Back</button>
-                <button class="person_button" id="opponent_selection_id_button">Continue</button>
-            </p>        
-        </div>`.trim();
-    const gameTypeId = document.querySelector("#game_type_id");
-    const difficultyLevelId = document.querySelector("#difficulty_level_id");
-    const gameTypeVal = gameTypeId.value;
-    a(gameTypeVal);
-    gameTypeId.addEventListener("change", () => {
-        a(gameTypeVal);
-    });
-    // if (e.shining) $("#game_type_id").val("3");
-    $("#opponent_selection_id_button").click(() => {
-        document.querySelector("#opponent_selection_id_button").outerHTML = "<em>One moment...</em>";
-        const oppArr = [];
-        const opponents = [];
-        e.candidate_dropout_json.forEach((f) => {
-            if (f.fields.candidate === numCandId) {
-                oppArr.push(f.fields.affected_candidate);
+        <div id="game_options">
+        <form name="game_type_selection">
+        <p><h3>Select your game mode.</h3>
+        <select name="game_type_id" id="game_type_id">
+        <option value=1>Default (Winner-Take-All)</option>
+        <option value=2>Proportional</option>
+        ${shining}
+        </select>
+        </p>
+        </form>            </div>
+        <div class="description_window_small"                 id="opponent_selection_description_window">            </div>
+        <div id="difficulty_level">            <form name="difficulty_level_selection">            <p><h3>Please choose your difficulty level:</h3>
+        <select name="difficulty_level_id" id="difficulty_level_id"> ${difficultyStr} </select>            </p>            </form>            </div>        <p id="opponent_selection_id_button_p"><button class="person_button" id="opponent_selection_id_back">Back</button> <button class="person_button" id="opponent_selection_id_button">Continue</button>        </p>        </div>`;
+        $("#game_window").html(d),
+            $("#game_type_id").ready(() => {
+                a($("select[name=game_type_id]").val());
+            }),
+            $("#game_type_id").change(() => {
+                a($("select[name=game_type_id]").val());
+            });
+        // if (e.shining) $("#game_type_id").val("3");
+        $("#opponent_selection_id_back").click(vpSelect);
+        $("#opponent_selection_id_button").click(() => {
+            $("#opponent_selection_id_button").replaceWith("<em>One moment...</em>");
+            for (
+                var a = [], opponents = [], r = 0;
+                r < e.candidate_dropout_json.length;
+                r++
+            ) {
+                e.candidate_dropout_json[r].fields.candidate == i
+                && a.push(e.candidate_dropout_json[r].fields.affected_candidate);
             }
-        });
-        const d = e.opponents_default_json.findIndex((f) => f.election === numElectId);
-        e.opponents_default_json[d].candidates.forEach((f) => {
-            if (f !== numCandId && oppArr.indexOf(f) === -1) {
-                opponents.push(f);
+            let d = -1;
+            for (r = 0; r < e.opponents_default_json.length; r++) {
+                if (e.opponents_default_json[r].election == t) {
+                    d = r;
+                    break;
+                }
             }
+            for (r = 0; r < e.opponents_default_json[d].candidates.length; r++) {
+                e.opponents_default_json[d].candidates[r] != i
+                && a.indexOf(e.opponents_default_json[d].candidates[r]) == -1
+                && opponents.push(e.opponents_default_json[d].candidates[r]);
+            }
+            // define ONLY if not already defined - necessary for code 1 base switching gimmicks
+            e.election_id = e.election_id ? e.election_id : t;
+            e.candidate_id = e.candidate_id ? e.candidate_id : i;
+            e.running_mate_id = e.running_mate_id ? e.running_mate_id : l;
+
+            t = e.election_id;
+            i = e.candidate_id;
+            l = e.running_mate_id;
+
+            (e.opponents_list = opponents),
+                (e.game_type_id = $("select[name=game_type_id]").val()),
+                (e.difficulty_level_id = $("select[name=difficulty_level_id]").val());
+            const c = $("select[name=difficulty_level_id]").val();
+            for (
+                $("select[name=game_type_id]").val(), d = -1, r = 0;
+                r < e.difficulty_level_json.length;
+                r++
+            ) {
+                if (
+                    e.difficulty_level_json[r].pk
+                    == $("select[name=difficulty_level_id]").val()
+                ) {
+                    d = r;
+                    break;
+                }
+            }
+            (e.difficulty_level_multiplier = e.difficulty_level_json[d].fields.multiplier),
+                (starting_mult = encrypted + e.difficulty_level_json[d].fields.multiplier);
+
+            if (e.game_type_id === "3") {
+                const default_init = 50000000;
+                const boost = F(e.candidate_id)
+                    * default_init
+                    * e.global_parameter_json[0].fields.global_variance
+                    * 4;
+
+                e.shining_data = {
+                    balance: (default_init + boost) * e.difficulty_level_multiplier,
+                    ad_spending: [],
+                    times: {
+                        fundraising_time: 0.33,
+                        media_time: 0.33,
+                        physical_time: 0.34,
+                    },
+                    visit_multiplier: 1,
+                };
+
+                e.shining_data.prev_balance = e.shining_data.balance;
+            }
+
+            const oFunc = o;
+            ((t, i, a, l, o) => {
+                if (campaignTrail_temp.musicOn) {
+                    document.getElementById("music_player").style.display = "";
+                    document.getElementById("campaigntrailmusic").src = campaignTrail_temp.musicSrc;
+                }
+                if (modded == false) {
+                    aaa = election_HTML(t, i, a);
+                    aaa = `../static/questionset/${aaa}`;
+                    $("#game_window").load(aaa, () => {
+                        const e = A(2);
+                        oFunc(e);
+                    });
+                    (e.question_number = 0),
+                        (e.questions_json = campaignTrail_temp.questions_json),
+                        (e.answers_json = campaignTrail_temp.answers_json),
+                        (e.states_json = campaignTrail_temp.states_json),
+                        (e.issues_json = campaignTrail_temp.issues_json),
+                        (e.state_issue_score_json = campaignTrail_temp.state_issue_score_json),
+                        (e.candidate_issue_score_json = campaignTrail_temp.candidate_issue_score_json),
+                        (e.running_mate_issue_score_json = campaignTrail_temp.running_mate_issue_score_json),
+                        (e.candidate_state_multiplier_json = campaignTrail_temp.candidate_state_multiplier_json),
+                        (e.answer_score_global_json = campaignTrail_temp.answer_score_global_json),
+                        (e.answer_score_issue_json = campaignTrail_temp.answer_score_issue_json),
+                        (e.answer_score_state_json = campaignTrail_temp.answer_score_state_json),
+                        (e.answer_feedback_json = campaignTrail_temp.answer_feedback_json),
+                        (e.candidate_image_url = campaignTrail_temp.candidate_image_url),
+                        (e.running_mate_image_url = campaignTrail_temp.running_mate_image_url),
+                        (e.candidate_last_name = campaignTrail_temp.candidate_last_name),
+                        (e.running_mate_last_name = campaignTrail_temp.running_mate_last_name),
+                        (e.running_mate_state_id = campaignTrail_temp.running_mate_state_id),
+                        (e.player_answers = campaignTrail_temp.player_answers),
+                        (e.player_visits = campaignTrail_temp.player_visits),
+                        (e.answer_feedback_flg = campaignTrail_temp.answer_feedback_flg),
+                        (e.election_id = Number(e.election_id)),
+                        (e.candidate_id = Number(e.candidate_id)),
+                        (e.running_mate_id = Number(e.running_mate_id)),
+                        (e.difficulty_level_id = Number(e.difficulty_level_id)),
+                        (e.game_start_logging_id = Number(
+                            campaignTrail_temp.game_start_logging_id,
+                        ));
+                    var important_code = setInterval(() => {
+                        $("#view_electoral_map").click(() => {
+                            const e = A((return_type = 2));
+                            openMap(e);
+                        });
+                        const answerButton = $("#answer_select_button")[0];
+                        if (answerButton != null) {
+                            answerButton.addEventListener(
+                                "click",
+                                onAnswerSelectButtonClicked,
+                            );
+                            clearInterval(important_code);
+                        }
+                    }, 1000);
+                } else if (
+                    $("#modSelect")[0].value != "other"
+                    || e.hotload
+                    || loadingFromModButton
+                ) {
+                    aaa = election_HTML(t, i, a);
+                    aaa = `../static/questionset/${aaa}`;
+                    try {
+                        $("#game_window").load(aaa, () => {
+                            e = campaignTrail_temp;
+                            eArr = e.temp_election_list
+                                .map((a) => a.id)
+                                .indexOf(e.election_id);
+                            year = e.temp_election_list[eArr].display_year;
+                            cand = e.candidate_json[
+                                e.candidate_json
+                                    .map((a) => Number(a.pk))
+                                    .indexOf(Number(e.candidate_id))
+                                ].fields.last_name;
+                            run = e.candidate_json[
+                                e.candidate_json
+                                    .map((a) => Number(a.pk))
+                                    .indexOf(Number(e.running_mate_id))
+                                ].fields.last_name;
+
+                            theorId = `${year}_${cand}${run}`;
+                            // theorId = $("#modSelect")[0].value
+
+                            if (customMod === false) {
+                                evalFromUrl(`../static/mods/${theorId}.html`, () => {
+                                    tempFuncO = function (e, i = campaignTrail_temp) {
+                                        if (e.collect_results) {
+                                            const a = A(2);
+                                            e.current_results = [getLatestRes(a)[0], a];
+                                        }
+                                        for (
+                                            var s = [], a = 0;
+                                            a < i.answers_json.length
+                                            && (i.answers_json[a].fields.question
+                                                != i.questions_json[i.question_number].pk
+                                                || (s.push({key: a, order: Math.random()}),
+                                                s.length != 4));
+                                            a += 1
+                                        ) {
+                                        }
+                                        P(s, "order");
+                                        for (var t = "", a = 0; a < s.length; a += 1) {
+                                            t
+                                                += `<input type="radio" name="game_answers" class="game_answers"             id="game_answers[${
+                                                a.toString()
+                                            }]" value="${
+                                                i.answers_json[s[a].key].pk
+                                            }"/>\t\t    <label for="game_answers[${
+                                                a.toString()
+                                            }]">${
+                                                substitutePlaceholders(i.answers_json[s[a].key].fields.description)
+                                            }</label><br>`;
+                                        }
+                                        const r = `<div class="game_header">    <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>${
+                                            substitutePlaceholders(i.questions_json[i.question_number].fields.description)
+                                        }</h3>            <div id="question_form">                <form name="question">${
+                                            t
+                                        }</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="${
+                                            i.candidate_image_url
+                                        }">    <img id="running_mate_pic" src="${
+                                            i.running_mate_image_url
+                                        }">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question ${
+                                            i.question_number + 1
+                                        } of ${
+                                            i.global_parameter_json[0].fields.question_count
+                                        }</h3>        </div>        <div id="campaign_sign">        <p>${
+                                            i.candidate_last_name
+                                        }</p>        <p>${
+                                            i.running_mate_last_name
+                                        }</p>        </div>    </div>`;
+                                        $("#game_window").html(r);
+                                    };
+                                    tempFuncO(e);
+                                });
+                            } else {
+                                eval(localStorage.getItem(`${customMod}_code2`));
+                                tempFuncO = function (e, i = campaignTrail_temp) {
+                                    if (e.collect_results) {
+                                        const a = A(2);
+                                        e.current_results = [getLatestRes(a)[0], a];
+                                    }
+                                    for (
+                                        var s = [], a = 0;
+                                        a < i.answers_json.length
+                                        && (i.answers_json[a].fields.question
+                                            != i.questions_json[i.question_number].pk
+                                            || (s.push({key: a, order: Math.random()}),
+                                            s.length != 4));
+                                        a += 1
+                                    ) {
+                                    }
+                                    P(s, "order");
+                                    for (var t = "", a = 0; a < s.length; a += 1) {
+                                        t
+                                            += `<input type="radio" name="game_answers" class="game_answers"             id="game_answers[${
+                                            a.toString()
+                                        }]" value="${
+                                            i.answers_json[s[a].key].pk
+                                        }"/>\t\t    <label for="game_answers[${
+                                            a.toString()
+                                        }]">${
+                                            i.answers_json[s[a].key].fields.description
+                                        }</label><br>`;
+                                    }
+                                    const r = `<div class="game_header">    <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>${
+                                        substitutePlaceholders(i.questions_json[i.question_number].fields.description)
+                                    }</h3>            <div id="question_form">                <form name="question">${
+                                        t
+                                    }</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="${
+                                        i.candidate_image_url
+                                    }">    <img id="running_mate_pic" src="${
+                                        i.running_mate_image_url
+                                    }">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question ${
+                                        i.question_number + 1
+                                    } of ${
+                                        i.global_parameter_json[0].fields.question_count
+                                    }</h3>        </div>        <div id="campaign_sign">        <p>${
+                                        i.candidate_last_name
+                                    }</p>        <p>${
+                                        i.running_mate_last_name
+                                    }</p>        </div>    </div>`;
+                                    $("#game_window").html(r);
+                                };
+
+                                tempFuncO(e);
+                            }
+
+                            endingUrl = `../static/mods/${theorId}_ending.html`;
+
+                            try {
+                                if (fileExists(endingUrl)) {
+                                    const client2 = new XMLHttpRequest();
+                                    client2.open("GET", endingUrl);
+                                    client2.onreadystatechange = function () {
+                                        important_info = client2.responseText;
+                                    };
+                                    client2.send();
+                                }
+                            } catch (err) {
+                                console.error("Error loading code 2", err);
+                            }
+                        });
+                    } catch (err) {
+                        console.error("Error loading code 2", err);
+                    }
+                    (e.question_number = 0),
+                        (e.questions_json = campaignTrail_temp.questions_json),
+                        (e.answers_json = campaignTrail_temp.answers_json),
+                        (e.states_json = campaignTrail_temp.states_json),
+                        (e.issues_json = campaignTrail_temp.issues_json),
+                        (e.state_issue_score_json = campaignTrail_temp.state_issue_score_json),
+                        (e.candidate_issue_score_json = campaignTrail_temp.candidate_issue_score_json),
+                        (e.running_mate_issue_score_json = campaignTrail_temp.running_mate_issue_score_json),
+                        (e.candidate_state_multiplier_json = campaignTrail_temp.candidate_state_multiplier_json),
+                        (e.answer_score_global_json = campaignTrail_temp.answer_score_global_json),
+                        (e.answer_score_issue_json = campaignTrail_temp.answer_score_issue_json),
+                        (e.answer_score_state_json = campaignTrail_temp.answer_score_state_json),
+                        (e.answer_feedback_json = campaignTrail_temp.answer_feedback_json),
+                        (e.candidate_image_url = campaignTrail_temp.candidate_image_url),
+                        (e.running_mate_image_url = campaignTrail_temp.running_mate_image_url),
+                        (e.candidate_last_name = campaignTrail_temp.candidate_last_name),
+                        (e.running_mate_last_name = campaignTrail_temp.running_mate_last_name),
+                        (e.running_mate_state_id = campaignTrail_temp.running_mate_state_id),
+                        (e.player_answers = campaignTrail_temp.player_answers),
+                        (e.player_visits = campaignTrail_temp.player_visits),
+                        (e.answer_feedback_flg = campaignTrail_temp.answer_feedback_flg),
+                        (e.election_id = Number(e.election_id)),
+                        (e.candidate_id = Number(e.candidate_id)),
+                        (e.running_mate_id = Number(e.running_mate_id)),
+                        (e.difficulty_level_id = Number(e.difficulty_level_id)),
+                        (e.game_start_logging_id = Number(
+                            campaignTrail_temp.game_start_logging_id,
+                        ));
+                    var important_code = setInterval(() => {
+                        $("#view_electoral_map").click(() => {
+                            const e = A((return_type = 2));
+                            console.log("e", e);
+                            openMap(e);
+                        });
+
+                        if ($("#answer_select_button")[0] != null) {
+                            const answerButton = $("#answer_select_button")[0];
+                            answerButton.addEventListener(
+                                "click",
+                                onAnswerSelectButtonClicked,
+                            );
+                            clearInterval(important_code);
+                        }
+                    }, 1000);
+                } else {
+                    // other block case
+                    aaa = election_HTML(t, i, a);
+                    aaa = `../static/questionset/${aaa}`;
+                    $("#game_window").load(aaa, () => {
+                        eval($("#codeset2")[0].value);
+                        tempFuncO = function (e, i = campaignTrail_temp) {
+                            if (e.collect_results) {
+                                const a = A(2);
+                                e.current_results = [getLatestRes(a)[0], a];
+                            }
+                            for (
+                                var s = [], a = 0;
+                                a < i.answers_json.length
+                                && (i.answers_json[a].fields.question
+                                    != i.questions_json[i.question_number].pk
+                                    || (s.push({key: a, order: Math.random()}), s.length != 4));
+                                a += 1
+                            ) {
+                            }
+                            P(s, "order");
+                            for (var t = "", a = 0; a < s.length; a += 1) {
+                                t
+                                    += `<input type="radio" name="game_answers" class="game_answers"             id="game_answers[${
+                                    a.toString()
+                                }]" value="${
+                                    i.answers_json[s[a].key].pk
+                                }"/>\t\t    <label for="game_answers[${
+                                    a.toString()
+                                }]">${
+                                    substitutePlaceholders(i.answers_json[s[a].key].fields.description)
+                                }</label><br>`;
+                            }
+                            const r = `<div class="game_header">    <h2>CAMPAIGN TRAIL SHOWCASE</h2>    </div>    <div class="inner_window_question">        <div class="inner_inner_window">        <h3>${
+                                substitutePlaceholders(i.questions_json[i.question_number].fields.description)
+                            }</h3>            <div id="question_form">                <form name="question">${
+                                t
+                            }</form>            </div>        </div>        <p><button id="answer_select_button" class="answer_select_button">CONTINUE</button>        <button id="view_electoral_map">Latest Polls/Electoral Map</button></p>    </div>    <img id="candidate_pic" src="${
+                                i.candidate_image_url
+                            }">    <img id="running_mate_pic" src="${
+                                i.running_mate_image_url
+                            }">    <div class="inner_window_sign_display">        <div id="progress_bar">\t    <h3>Question ${
+                                i.question_number + 1
+                            } of ${
+                                i.global_parameter_json[0].fields.question_count
+                            }</h3>        </div>        <div id="campaign_sign">        <p>${
+                                i.candidate_last_name
+                            }</p>        <p>${
+                                i.running_mate_last_name
+                            }</p>        </div>    </div>`;
+                            $("#game_window").html(r);
+                        };
+                        tempFuncO(e);
+                    });
+                    (e.question_number = 0),
+                        (e.questions_json = campaignTrail_temp.questions_json),
+                        (e.answers_json = campaignTrail_temp.answers_json),
+                        (e.states_json = campaignTrail_temp.states_json),
+                        (e.issues_json = campaignTrail_temp.issues_json),
+                        (e.state_issue_score_json = campaignTrail_temp.state_issue_score_json),
+                        (e.candidate_issue_score_json = campaignTrail_temp.candidate_issue_score_json),
+                        (e.running_mate_issue_score_json = campaignTrail_temp.running_mate_issue_score_json),
+                        (e.candidate_state_multiplier_json = campaignTrail_temp.candidate_state_multiplier_json),
+                        (e.answer_score_global_json = campaignTrail_temp.answer_score_global_json),
+                        (e.answer_score_issue_json = campaignTrail_temp.answer_score_issue_json),
+                        (e.answer_score_state_json = campaignTrail_temp.answer_score_state_json),
+                        (e.answer_feedback_json = campaignTrail_temp.answer_feedback_json),
+                        (e.candidate_image_url = campaignTrail_temp.candidate_image_url),
+                        (e.running_mate_image_url = campaignTrail_temp.running_mate_image_url),
+                        (e.candidate_last_name = campaignTrail_temp.candidate_last_name),
+                        (e.running_mate_last_name = campaignTrail_temp.running_mate_last_name),
+                        (e.running_mate_state_id = campaignTrail_temp.running_mate_state_id),
+                        (e.player_answers = campaignTrail_temp.player_answers),
+                        (e.player_visits = campaignTrail_temp.player_visits),
+                        (e.answer_feedback_flg = campaignTrail_temp.answer_feedback_flg),
+                        (e.election_id = Number(e.election_id)),
+                        (e.candidate_id = Number(e.candidate_id)),
+                        (e.running_mate_id = Number(e.running_mate_id)),
+                        (e.difficulty_level_id = Number(e.difficulty_level_id)),
+                        (e.game_start_logging_id = Number(
+                            campaignTrail_temp.game_start_logging_id,
+                        ));
+                    var important_code = setInterval(() => {
+                        $("#view_electoral_map").click(() => {
+                            const e = A((return_type = 2));
+                            openMap(e);
+                        });
+                        const answerButton = $("#answer_select_button")[0];
+                        answerButton.addEventListener("click", onAnswerSelectButtonClicked);
+                        if ($("#answer_select_button")[0] != null) {
+                            clearInterval(important_code);
+                        }
+                    }, 1000);
+                }
+                histFunction();
+            })(t, i, l, opponents, c);
         });
-        // define ONLY if not already defined - necessary for code 1 base switching gimmicks
-        e.election_id = e.election_id || electionId;
-        e.candidate_id = e.candidate_id || candId;
-        e.running_mate_id = e.running_mate_id || runId;
+    }
 
-        e.opponents_list = opponents;
-        e.game_type_id = gameTypeId.value;
-        e.difficulty_level_id = difficultyLevelId.value;
-        e.difficulty_level_multiplier = e.difficulty_level_json.find(
-            (f) => f.pk === Number(e.difficulty_level_id),
-        ).fields.multiplier;
-        starting_mult = encrypted + e.difficulty_level_multiplier;
+    mapCache = function (skip = false) {
+        // preloads poll map
+        if (!skip) {
+            if (!$("#main_content_area")[0]) {
+                return false;
+            }
+            const i = S(e.election_id);
+            if (
+                (e.question_number - 1) % 2 != 0
+                && e.election_json[i].fields.has_visits == 1
+            ) {
+                return false;
+            }
+            if (
+                e.question_number == e.global_parameter_json[0].fields.question_count
+            ) {
+                return false;
+            }
+            if (
+                e.primary_code
+                && e.primary_code.map((f) => f.breakQ).includes(e.question_number)
+            ) {
+                return false;
+            }
+        }
+        $("#map_container").remove();
+        $("#main_content_area").html(
+            '<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>',
+        );
+        $("#main_content_area")[0].style.display = "";
 
-        if (Number(e.game_type_id) === 3) {
-            const default_init = 50000000;
-            const boost = randomNormal()
-                * default_init
-                * e.global_parameter_json[0].fields.global_variance
-                * 4;
+        const rr = A((returnType = 2));
+        rFuncRes = rFunc(rr, 0);
+        $("#map_container").usmap(rFuncRes);
+        $("#main_content_area")[0].style.display = "none";
 
-            e.shining_data = {
-                balance: (default_init + boost) * e.difficulty_level_multiplier,
-                ad_spending: [],
-                times: {
-                    fundraising_time: 0.33,
-                    media_time: 0.33,
-                    physical_time: 0.34,
-                },
-                visit_multiplier: 1,
-            };
+        return true;
+    };
 
-            e.shining_data.prev_balance = e.shining_data.balance;
+    function nextQuestion() {
+        // calculate shining
+
+        if (e.game_type_id == "3") {
+            const temp_polls = A(2);
+            shining_cal(temp_polls);
         }
 
-        if (campaignTrail_temp.musicOn) {
-            document.getElementById("music_player").style.display = "";
-            document.getElementById("campaigntrailmusic").src = campaignTrail_temp.musicSrc;
-        }
-        const aaa = `../static/questionset/${election_HTML(electionId, candId, runId)}`;
+        const t = A(2);
 
-        Object.assign(e, {
-            ...campaignTrail_temp,
-            question_number: 0,
-            election_id: Number(campaignTrail_temp.election_id),
-            candidate_id: Number(campaignTrail_temp.candidate_id),
-            running_mate_id: Number(campaignTrail_temp.running_mate_id),
-            difficulty_level_id: Number(campaignTrail_temp.difficulty_level_id),
-            game_start_logging_id: Number(campaignTrail_temp.game_start_logging_id),
-        });
-        // Set up the interval for adding event listeners
-        const important_code = setInterval(() => {
-            const answerButton = document.querySelector("#answer_select_button");
-            if (answerButton) {
-                // Use jQuery's off() to remove all click handlers
-                const $answerButton = $(answerButton);
-                $answerButton.off('click');
-
-                // Add the click handler using jQuery
-                $answerButton.on('click', (e) => {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    onAnswerSelectButtonClicked(e);
-                });
-
-                // Set up map view click handler
-                $("#view_electoral_map").off("click").on("click", (e) => {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    openMap(A(2));
-                });
-
-                clearInterval(important_code);
-            }
-        }, 1000);
-        tempFuncO = (e) => {
+        if (e.cyoa) {
             if (e.collect_results) {
                 const a = A(2);
                 e.current_results = [getLatestRes(a)[0], a];
             }
-            questionHTML();
-        };
-
-        if (!modded) {
-            $("#game_window").load(aaa, () => {
-                const e = A(2);
-                questionHTML(e);
-            });
-        } else if (
-            $("#modSelect")[0].value != "other"
-            || e.hotload
-            || loadingFromModButton
-        ) {
-            try {
-                $("#game_window").load(aaa, () => {
-                    e = campaignTrail_temp;
-                    const eArr = e.temp_election_list.findIndex(
-                        (a) => a.id === Number(e.election_id),
-                    );
-                    const candIdx = e.candidate_json.findIndex(
-                        (a) => a.pk === Number(e.candidate_id),
-                    );
-                    const runIdx = e.candidate_json.findIndex(
-                        (a) => a.pk === Number(e.running_mate_id),
-                    );
-                    const year = e.temp_election_list[eArr].display_year;
-                    const cand = e.candidate_json[candIdx].fields.last_name;
-                    const run = e.candidate_json[runIdx].fields.last_name;
-
-                    const theorId = `${year}_${cand}${run}`;
-                    // theorId = $("#modSelect")[0].value
-
-                    if (customMod === false) {
-                        evalFromUrl(`../static/mods/${theorId}.html`, () => {
-                            tempFuncO(e);
-                        });
-                    } else {
-                        eval(localStorage.getItem(`${customMod}_code2`));
-                        tempFuncO(e);
-                    }
-
-                    endingUrl = `../static/mods/${theorId}_ending.html`;
-
-                    try {
-                        if (fileExists(endingUrl)) {
-                            const client2 = new XMLHttpRequest();
-                            client2.open("GET", endingUrl);
-                            client2.onreadystatechange = function () {
-                                important_info = client2.responseText;
-                            };
-                            client2.send();
-                        }
-                    } catch (err) {
-                        console.error("Error loading code 2", err);
-                    }
-                });
-            } catch (err) {
-                console.error("Error loading code 2", err);
-            }
-        } else {
-            // other block case
-            $("#game_window").load(aaa, () => {
-                eval($("#codeset2")[0].value);
-                tempFuncO(e);
-            });
+            cyoAdventure(e.questions_json[e.question_number]);
         }
-        histFunction();
-    });
-}
-
-/* eslint-enable no-use-before-define */
-
-function importgame(code) {
-    starting_mult = encrypted + campaignTrail_temp.difficulty_level_multiplier;
-    A(1);
-    campaigntrail = JSON.parse(code);
-    e.election_id = campaigntrail.election_id;
-    e.candidate_id = campaigntrail.player_candidate;
-    e.player_answers = campaigntrail.player_answers;
-    e.player_visits = campaigntrail.player_visits;
-    e.final_overall_results = campaigntrail.overall_results;
-    e.final_state_results = campaigntrail.state_results;
-    e.difficulty_level_multiplier = campaigntrail.difficulty_multiplier;
-    electionNight();
-}
-
-function getLatestRes(t) {
-    total_v = 0;
-    cand_evs = [];
-    cand_pvs = [];
-    // goes through every state
-    // converts the n object to an array of elements
-    const nArray = Object.entries(answerEffects).map(([key, value]) => ({key, value}));
-
-    // goes through every state
-    for (let s = 0; s < e.states_json.length; s++) {
-        const state = e.states_json[s];
-
-        // finds the matching state in the array
-
-        // reverses and sorts the array by percent
-        nArray.sort((a, b) => b.value - a.value);
-
-        // updates the total popular votes
-        // total_v += campaignTrail_temp.states_json[s].fields.popular_votes;
-    }
-
-    // Use Array.prototype.filter() method to filter e.candidate_json
-    const filteredCandidates = e.candidate_json.filter(
-        (candidate) => e.opponents_list.includes(candidate.pk)
-            || candidate.pk === e.candidate_id,
-    );
-
-    // Use Array.prototype.forEach() method to update filteredCandidates
-    filteredCandidates.forEach((candidate) => {
-        candidate.popvs = 0;
-        candidate.evvs = 0;
-
-        t.forEach((state) => {
-            const stateIndex = e.states_json
-                .map((f) => Number(f.pk))
-                .indexOf(Number(state.state));
-            const stateElectoralVotes = e.states_json[stateIndex].fields.electoral_votes;
-
-            const candidateIndex = state.result
-                .map((f) => Number(f.candidate))
-                .indexOf(Number(candidate.pk));
-            const candidateResult = state.result[candidateIndex];
-
-            if (e.primary_states) {
-                const primaryStates = JSON.parse(e.primary_states);
-                const primaryMap = primaryStates.map((f) => f.state);
-
-                if (primaryMap.includes(state.state)) {
-                    allocation = dHondtAllocation(
-                        state.result.map((f) => f.votes),
-                        stateElectoralVotes,
-                        0.15,
-                    );
-                    candidate.evvs += allocation[candidateIndex];
+        a = false;
+        if (e.primary) {
+            /* Primary code format:
+            e.primary_code = [
+                {
+                    "breakQ": 0,
+                    "states": [1100, 1101, 1102]
+                },
+                {
+                    "breakQ": 2,
+                    "states": [1103, 1104, 1105]
                 }
-            } else if (candidateIndex == 0 && !e.primary) {
-                candidate.evvs += stateElectoralVotes;
-            }
-
-            candidate.popvs += candidateResult.votes;
-            total_v += candidateResult.votes;
-        });
-    });
-    filteredCandidates.forEach((candidate) => {
-        candidate.pvp = candidate.popvs / total_v;
-        candidate.popvs = 0;
-    });
-
-    // Use Array.prototype.sort() method to sort filteredCandidates in descending order of pvp
-    const sortedCandidates = filteredCandidates.sort((a, b) => b.pvp - a.pvp);
-
-    // Use Array.prototype.map() method to create nn2 and nn3 arrays
-    nn2 = sortedCandidates.map((candidate) => candidate);
-    nn3 = sortedCandidates.map((candidate) => candidate.evvs || 0);
-
-    return [nn2, answerEffects];
-}
-
-function setStatePollText(s, t) {
-    const results = t.filter(
-        ({abbr}) => abbr === e.states_json[s].fields.abbr,
-    );
-    let doPrimaryMode = false;
-
-    if (e.primary_states) {
-        const primaryStates = JSON.parse(e.primary_states);
-        const primaryMap = primaryStates.map((f) => f.state);
-        if (primaryMap.includes(results[0].state)) {
-            doPrimaryMode = true;
-            const trueRes = primaryStates[primaryMap.indexOf(results[0].state)];
-            results[0].result = trueRes.result;
-        }
-    }
-
-    // Flatten the nested "result" property of the elements in the results array
-    const flatResults = results.flatMap(({result}) => result);
-
-    // Filter the flatResults array to keep only the elements with a "percent" property
-    // that is greater than or equal to 0.1
-    const filteredResults = flatResults.filter(({percent}) => percent >= 0.1);
-
-    // Sort the filteredResults array in descending order by the "percent" property
-    const sortedResults = filteredResults.sort((a, b) => b.percent - a.percent);
-
-    // Map the sortedResults array to create a new array of strings, where each
-    // string is formatted as "<b>CANDIDATE_NAME</b> - PERCENT%<br>"
-    const formattedResults = sortedResults.map(({candidate, percent}) => {
-        const candidateName = e.candidate_json.find(({pk}) => pk === candidate)
-            ?.fields.last_name;
-        if (!doPrimaryMode) {
-            return `<b>${candidateName}</b> - ${Math.floor(100 * percent)}%<br>`;
-        }
-        return `<b>${candidateName}</b> - ${(100 * percent).toFixed(2)}%<br>`;
-    });
-
-    const _ = formattedResults.join("");
-    slrr = _;
-    if (!doPrimaryMode && !e.primary) {
-        var c = `<h3>ESTIMATED SUPPORT</h3>                    <ul id='switchingEst'>${
-            _
-        }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Electoral Vote Estimate</button>`;
-    } else if (e.primary && !doPrimaryMode) {
-        var c = `<h3>ESTIMATED SUPPORT</h3>                    <ul id='switchingEst'>${
-            _
-        }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Current Delegate Count</button>`;
-    } else {
-        var c = `<h3>PRIMARY/CAUCUS RESULT</h3>                    <ul id='switchingEst'>${
-            _
-        }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Current Delegate Count</button>`;
-    }
-
-    $("#overall_result").html(c);
-    let u = "";
-    for (l = 0; l < e.state_issue_score_json.length; l++) {
-        if (e.state_issue_score_json[l].fields.state == e.states_json[s].pk) {
-            // Find the issue object that matches the current state_issue_score
-            const issue = e.issues_json.find(
-                (i) => i.pk == e.state_issue_score_json[l].fields.issue,
+            ]
+            */
+            primary_breaks = e.primary_code.map((f) => f.breakQ);
+            a = primaryFunction(
+                primary_breaks.includes(e.question_number),
+                primary_breaks,
             );
-            let stanceDesc = null;
-            // Use a switch statement to determine the stance based on the state_issue_score
-            switch (true) {
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_1_max:
-                    var v = issue.fields.stance_1;
-                    stanceDesc = issue.fields.stance_desc_1;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_2_max:
-                    v = issue.fields.stance_2;
-                    stanceDesc = issue.fields.stance_desc_2;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_3_max:
-                    v = issue.fields.stance_3;
-                    stanceDesc = issue.fields.stance_desc_3;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_4_max:
-                    v = issue.fields.stance_4;
-                    stanceDesc = issue.fields.stance_desc_4;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_5_max:
-                    v = issue.fields.stance_5;
-                    stanceDesc = issue.fields.stance_desc_5;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_6_max:
-                    v = issue.fields.stance_6;
-                    stanceDesc = issue.fields.stance_desc_6;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                > e.global_parameter_json[0].fields.issue_stance_6_max:
-                    v = issue.fields.stance_7;
-                    stanceDesc = issue.fields.stance_desc_7;
-                    break;
+            if (a) {
+                e.corQuestion = true;
+                return false;
             }
+        }
 
-            if (stanceDesc == "'" || stanceDesc == null || !isNaN(stanceDesc)) {
-                stanceDesc = "";
+        setTimeout(() => mapCache((skip = false)), 0); // starts new thread for poll map preloading
+
+        if (e.corQuestion) e.corQuestion = false;
+        else e.question_number++;
+
+        if (e.player_answers.length < e.question_number) {
+            while (e.player_answers.length != e.question_number) {
+                e.player_answers.push(null);
             }
+        }
 
-            let issueDescription = issue.fields.description ?? "";
-            if (
-                issueDescription == "'"
-                || issueDescription == null
-                || !isNaN(issueDescription)
-            ) {
-                issueDescription = "";
+        if (e.question_number == e.global_parameter_json[0].fields.question_count) {
+            if (e.primary) {
+                e.final_state_results = A(1);
+                electionNight();
+                v(500);
+                m();
+            } else {
+                (e.final_state_results = A(1)), electionNight();
             }
+        } else if (e.question_number % 2 == 0) {
+            const i = S(e.election_id);
+            e.election_json[i].fields.has_visits == 1
+                ? (function (e) {
+                    $("#game_window").html(
+                        `        <div class="game_header">            ${
+                            corrr
+                        }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>        </div>        <p class="visit_text"><font size="2">Use this map to click on the next state you wish to visit. Choose wisely             and focus your efforts where they will have the most impact.</p>        </div>        `,
+                    );
+                    const t = rFunc(e, 1);
+                    $("#map_container").usmap(t);
+                }(t))
+                : o(t);
+        } else o(t);
+        if ($("#importfile")[0].value != "") {
+            importgame(e.dagakotowaru);
+        }
+    }
 
-            // Add the issue name and stance to the list
-            u += `
+    function n(t) {
+        const stopSpacebar = false;
+        if (stopSpacebar && $("#visit_overlay")[0]) {
+            debugConsole("Visit overlay is showing, not applying answer effects");
+            return;
+        }
+
+        debugConsole(`Applying answer effects for answer pk ${t}`);
+        e.player_answers.push(Number(t));
+        let i = 0;
+        const a = S(e.election_id);
+        if (e.answer_feedback_flg == 1) {
+            for (var s = 0; s < e.answer_feedback_json.length; s++) {
+                if (
+                    e.answer_feedback_json[s].fields.answer == t
+                    && e.answer_feedback_json[s].fields.candidate == e.candidate_id
+                ) {
+                    i = 1;
+                    break;
+                }
+            }
+            if (i == 1) {
+                const n = `                    <div class="overlay" id="visit_overlay"></div>                    <div class="overlay_window" id="visit_window">                        <div class="overlay_window_content" id="visit_content">                        <h3>Advisor Feedback</h3>                        <img src="${
+                    e.election_json[a].fields.advisor_url
+                }" width="208" height="128"/>                        <p>${
+                    substitutePlaceholders(e.answer_feedback_json[s].fields.answer_feedback)
+                }</p>                        </div>                        <div class="overlay_buttons" id="visit_buttons">                        <button id="ok_button">OK</button><br><button id="no_feedback_button">Don't give me advice</button>                                                </div>                    </div>`;
+                $("#game_window").append(n);
+                $("#ok_button").click(() => {
+                    nextQuestion();
+                }),
+                    $("#no_feedback_button").click(() => {
+                        (e.answer_feedback_flg = 0), nextQuestion();
+                    });
+            }
+            i == 0 && nextQuestion();
+        } else nextQuestion();
+    }
+
+    function importgame(code) {
+        starting_mult = encrypted + campaignTrail_temp.difficulty_level_multiplier;
+        A(1);
+        campaigntrail = JSON.parse(code);
+        e.election_id = campaigntrail.election_id;
+        e.candidate_id = campaigntrail.player_candidate;
+        e.player_answers = campaigntrail.player_answers;
+        e.player_visits = campaigntrail.player_visits;
+        e.final_overall_results = campaigntrail.overall_results;
+        e.final_state_results = campaigntrail.state_results;
+        e.difficulty_level_multiplier = campaigntrail.difficulty_multiplier;
+        electionNight();
+    }
+
+    function primaryFunction(execute, breaks) {
+        if (!execute) {
+            return false;
+        }
+
+        // Get the data for the current question number
+        dat = e.primary_code[breaks.indexOf(e.question_number)];
+
+        // Get the state for the current question
+        stateMap = dat.states;
+
+        stateMap2 = e.states_json.map((f) => f.pk);
+
+        states = [];
+
+        stateMap.forEach((f, it, arr) => {
+            correctState = stateMap2.indexOf(f);
+            states.push(e.states_json[correctState]);
+        });
+
+        // Set the final state results to an array with one element (1)
+        e.final_state_results = A(1);
+
+        // Loop through the final state results
+        for (i in e.final_state_results) {
+            // If the current state is not in the state map, set its value to null
+            if (!stateMap.includes(e.final_state_results[i].state)) {
+                e.final_state_results[i] = null;
+            }
+        }
+
+        // Filter out any null values from the final state results
+        e.final_state_results = e.final_state_results.filter((f) => f);
+
+        // Use Array.slice() to create a new copy of the filtered array
+        const filt = e.final_state_results.slice();
+
+        if (e.primary_states == null) {
+            e.primary_states = [];
+        } else {
+            e.primary_states = JSON.parse(e.primary_states);
+        }
+
+        // Add the items from the filtered list to the primary states array,
+        // without adding any duplicates
+        for (let i = 0; i < filt.length; i++) {
+            e.primary_states.push(filt[i]);
+        }
+        e.primary_states = JSON.stringify(e.primary_states);
+
+        // Call the primaryResults function and pass it the array of states
+        primaryResults(states);
+        return true;
+    }
+
+    function primaryResults(states) {
+        !(function () {
+            const t = u();
+
+            const i = t
+                .map((item) => {
+                    const {color} = item;
+                    return `<li><span style="color:${color}; background-color:${color}">--</span> ${item.last_name}: 0</li>`;
+                })
+                .join("");
+            const s = S(e.election_id);
+            const n = e.election_json[s].fields.winning_electoral_vote_number;
+            $("#game_window").html(
+                `        <div class="game_header">            ${
+                    corrr
+                }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTORAL VOTES</h3>                        <ul>${
+                    i
+                }</ul>                        <p>0% complete</br>${
+                    n
+                } to win</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_result">                        <h3>STATE RESULTS</h3>                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    </div>                </div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go back to questions</button>        </div>        <div class="overlay" id="election_night_overlay"></div>        <div class="overlay_window" id="election_night_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="${
+                    e.election_json[s].fields.advisor_url
+                }" width="208" height="128"/>            <p>One of many election nights has arrived. Winning the delegates in these races will be vital to your primary victory.</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>`,
+            );
+            const lTemp = (function () {
+                for (var t = {}, i = 0; i < states.length; i++) {
+                    t[states[i].fields.abbr] = {
+                        fill: "#C9C9C9",
+                    };
+                }
+                return {
+                    stateStyles: {
+                        fill: "#EAFDFF",
+                    },
+                    stateHoverStyles: {
+                        fill: "#EAFDFF",
+                    },
+                    stateSpecificStyles: t,
+                    stateSpecificHoverStyles: t,
+                };
+            }());
+            $("#map_container").usmap(lTemp),
+                $("#ok_button").click(() => {
+                    $("#election_night_overlay").remove(),
+                        $("#election_night_window").remove();
+                }),
+                $("#final_result_button").click(() => {
+                    clearTimeout(results_timeout),
+                        $("#map_footer").html(
+                            "<i>Processing Results, wait one moment...</i>",
+                        );
+                    // HELPFUL CODE HERE
+                    // campaignTrail_temp.question_number = 0
+                    // ee = A(return_type=2)
+                    // o(ee)
+                    e.question_number++;
+                    nextQuestion();
+                });
+        }());
+        e.final_overall_results = [];
+        for (let t = 0; t < e.final_state_results[0].result.length; t++) {
+            e.final_overall_results.push({
+                candidate: e.final_state_results[0].result[t].candidate,
+                electoral_votes: 0,
+                popular_votes: 0,
+            });
+        }
+        R2 = function (t) {
+            return states.findIndex((state) => state.pk == t);
+        };
+        !(function () {
+            for (let t = 0; t < e.final_state_results.length; t++) {
+                const i = R2(e.final_state_results[t].state);
+                const a = c(
+                    e.final_state_results[t].result,
+                    states[i].fields.poll_closing_time,
+                );
+                e.final_state_results[t].result_time = a;
+            }
+        }()),
+            $("#ok_button").click(() => {
+                results_timeout = setTimeout(() => {
+                    !(function t(i, a) {
+                        const s = [0, 0];
+                        for (var n = 0; n < e.final_overall_results.length; n++) {
+                            e.final_overall_results[n].electoral_votes > s[0]
+                            && (s[0] = e.final_overall_results[n].electoral_votes);
+                        }
+                        total_votes = 0;
+                        for (
+                            iterator = 0;
+                            iterator < e.final_overall_results.length;
+                            iterator++
+                        ) {
+                            total_votes += e.final_overall_results[iterator].popular_votes;
+                        }
+                        pop_vs = [];
+                        for (
+                            iterator = 0;
+                            iterator < e.final_overall_results.length;
+                            iterator++
+                        ) {
+                            if (
+                                e.final_overall_results[iterator].popular_votes / total_votes
+                                > 0
+                            ) {
+                                pop_vs.push(
+                                    e.final_overall_results[iterator].popular_votes / total_votes,
+                                );
+                            } else {
+                                pop_vs.push(0);
+                            }
+                        }
+                        var a = v(i);
+                        const _ = u();
+                        let r = "";
+                        const o = "";
+                        for (var n = 0; n < _.length; n++) {
+                            for (let d = 0; d < e.final_overall_results.length; d++) {
+                                if (e.final_overall_results[d].candidate == _[n].candidate) {
+                                    var c = e.final_overall_results[d].electoral_votes;
+                                    const popvthing = (pop_vs[d] * 100).toFixed(1);
+                                }
+                            }
+                            r
+                                += `            <span style="color:${
+                                _[n].color
+                            }; background-color: ${
+                                _[n].color
+                            }">--</span> <b>${
+                                _[n].last_name
+                            }</b> -  ${
+                                c
+                            }<br>`;
+                        }
+                        const p = f(i);
+                        let h = Math.floor((i / 480) * 100);
+                        const g = $("#state_result_container").html();
+                        $("#game_window").html("");
+                        $("#game_window").html(
+                            `        <div class="game_header">            ${
+                                corrr
+                            }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTION TALLY</h3>                        <ul>${
+                                r
+                            }</ul>                        <p>${
+                                h
+                            }% complete</br>`
+                            + `</div>                </div>                <div id="state_result_container">${
+                                g
+                            }</div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go back to questions</button>        </div>`,
+                        );
+                        $("#map_container").usmap(p);
+                        $("#final_result_button").click(() => {
+                            clearTimeout(results_timeout),
+                                $("#map_footer").html(
+                                    "<i>Processing Results, wait one moment...</i>",
+                                );
+                            e.question_number++;
+                            nextQuestion();
+                        });
+                        for (var n = 0; n < e.final_overall_results.length; n++) {
+                            e.final_overall_results[n].electoral_votes > s[1]
+                            && (s[1] = e.final_overall_results[n].electoral_votes);
+                        }
+                        if (s[0] < o && s[1] >= o) {
+                            $("#overlay_result_button").click(() => {
+                                clearTimeout(results_timeout),
+                                    $("#map_footer").html(
+                                        "<i>Processing Results, wait one moment...</i>",
+                                    );
+                                e.question_number++;
+                                nextQuestion();
+                            });
+                        } else {
+                            i >= 480 || a >= states.length
+                                ? ((h = 100),
+                                    $("#overall_result").html(
+                                        `            <h3>ELECTION TALLY</h3>            <ul>${
+                                            r
+                                        }</ul>            <p>${
+                                            h
+                                        }% complete</br>${
+                                            o
+                                        } to win</p>`,
+                                    ))
+                                : (results_timeout = setTimeout(() => {
+                                    t(i, a);
+                                }, 2e3));
+                        }
+                        i += 120;
+                    }(0, 0));
+                }, 2e3);
+            });
+    }
+
+    function openMap(_e) {
+        // startTime = performance.now();
+        if ($("#main_content_area")[0]) {
+            const n = Array.from($("#game_window")[0].children);
+            for (i in n) {
+                if (
+                    n[i].getAttribute("id") != "main_content_area"
+                    && n[i].getAttribute("class") != "game_header"
+                ) {
+                    n[i].remove();
+                }
+            }
+            const game_window = $("#game_window")[0];
+            const footer_html = '<button id="resume_questions_button">Back to the game</button><button id="margin_switcher">Switch margin colouring gradient</button><button id="AdvisorButton">Enable/Disable Advisor Feedback</button></div>';
+            ftH = document.createElement("div");
+            ftH.id = "map_footer";
+            ftH.innerHTML = footer_html;
+            game_window.appendChild(ftH);
+            $("#main_content_area")[0].style.display = "";
+        } else {
+            $("#game_window").html(
+                `        <div class="game_header">            ${
+                    corrr
+                }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>        </div>        <div id="map_footer"><button id="resume_questions_button">Back to the game</button><button id="margin_switcher">Switch margin colouring gradient</button><button id="AdvisorButton">Enable/Disable Advisor Feedback</button></div>`,
+            );
+            const t = rFunc(_e, 0);
+
+            $("#map_container").usmap(t);
+        }
+        // endTime = performance.now();
+        $("#resume_questions_button").click(() => {
+            o(_e);
+        });
+        $("#AdvisorButton").click(() => {
+            campaignTrail_temp.answer_feedback_flg = AdvisorFeedbackArr[campaignTrail_temp.answer_feedback_flg];
+            o(_e);
+        });
+        $("#margin_switcher").click(() => {
+            if (campaignTrail_temp.margin_format == "#C9C9C9") {
+                campaignTrail_temp.margin_format = "#FFFFFF";
+            } else {
+                campaignTrail_temp.margin_format = "#C9C9C9";
+            }
+            window.localStorage.setItem(
+                "margin_form",
+                campaignTrail_temp.margin_format,
+            );
+            o(_e);
+        });
+    }
+
+    function getLatestRes(t) {
+        total_v = 0;
+        cand_evs = [];
+        cand_pvs = [];
+        // goes through every state
+        // converts the n object to an array of elements
+        const nArray = Object.entries(n).map(([key, value]) => ({key, value}));
+
+        // goes through every state
+        for (let s = 0; s < e.states_json.length; s++) {
+            const state = e.states_json[s];
+
+            // finds the matching state in the array
+
+            // reverses and sorts the array by percent
+            nArray.sort((a, b) => b.value - a.value);
+
+            // updates the total popular votes
+            // total_v += campaignTrail_temp.states_json[s].fields.popular_votes;
+        }
+
+        // Use Array.prototype.filter() method to filter e.candidate_json
+        const filteredCandidates = e.candidate_json.filter(
+            (candidate) => containsObject(candidate.pk, e.opponents_list)
+                || candidate.pk === e.candidate_id,
+        );
+
+        // Use Array.prototype.forEach() method to update filteredCandidates
+        filteredCandidates.forEach((candidate) => {
+            candidate.popvs = 0;
+            candidate.evvs = 0;
+
+            t.forEach((state) => {
+                const stateIndex = e.states_json
+                    .map((f) => Number(f.pk))
+                    .indexOf(Number(state.state));
+                const stateElectoralVotes = e.states_json[stateIndex].fields.electoral_votes;
+
+                const candidateIndex = state.result
+                    .map((f) => Number(f.candidate))
+                    .indexOf(Number(candidate.pk));
+                const candidateResult = state.result[candidateIndex];
+
+                if (e.primary_states) {
+                    const primaryStates = JSON.parse(e.primary_states);
+                    const primaryMap = primaryStates.map((f) => f.state);
+
+                    if (primaryMap.includes(state.state)) {
+                        allocation = dHondtAllocation(
+                            state.result.map((f) => f.votes),
+                            stateElectoralVotes,
+                            0.15,
+                        );
+                        candidate.evvs += allocation[candidateIndex];
+                    }
+                } else if (candidateIndex == 0 && !e.primary) {
+                    candidate.evvs += stateElectoralVotes;
+                }
+
+                candidate.popvs += candidateResult.votes;
+                total_v += candidateResult.votes;
+            });
+        });
+        filteredCandidates.forEach((candidate) => {
+            candidate.pvp = candidate.popvs / total_v;
+            candidate.popvs = 0;
+        });
+
+        // Use Array.prototype.sort() method to sort filteredCandidates in descending order of pvp
+        const sortedCandidates = filteredCandidates.sort((a, b) => b.pvp - a.pvp);
+
+        // Use Array.prototype.map() method to create nn2 and nn3 arrays
+        nn2 = sortedCandidates.map((candidate) => candidate);
+        nn3 = sortedCandidates.map((candidate) => candidate.evvs || 0);
+
+        return [nn2, n];
+    }
+
+    function setStatePollText(s, t) {
+        const results = t.filter(
+            ({abbr}) => abbr === e.states_json[s].fields.abbr,
+        );
+        let doPrimaryMode = false;
+
+        if (e.primary_states) {
+            const primaryStates = JSON.parse(e.primary_states);
+            const primaryMap = primaryStates.map((f) => f.state);
+            if (primaryMap.includes(results[0].state)) {
+                doPrimaryMode = true;
+                const trueRes = primaryStates[primaryMap.indexOf(results[0].state)];
+                results[0].result = trueRes.result;
+            }
+        }
+
+        // Flatten the nested "result" property of the elements in the results array
+        const flatResults = results.flatMap(({result}) => result);
+
+        // Filter the flatResults array to keep only the elements with a "percent" property
+        // that is greater than or equal to 0.1
+        const filteredResults = flatResults.filter(({percent}) => percent >= 0.1);
+
+        // Sort the filteredResults array in descending order by the "percent" property
+        const sortedResults = filteredResults.sort((a, b) => b.percent - a.percent);
+
+        // Map the sortedResults array to create a new array of strings, where each
+        // string is formatted as "<b>CANDIDATE_NAME</b> - PERCENT%<br>"
+        const formattedResults = sortedResults.map(({candidate, percent}) => {
+            const candidateName = e.candidate_json.find(({pk}) => pk === candidate)
+                ?.fields.last_name;
+            if (!doPrimaryMode) {
+                return `<b>${candidateName}</b> - ${Math.floor(100 * percent)}%<br>`;
+            }
+            return `<b>${candidateName}</b> - ${(100 * percent).toFixed(2)}%<br>`;
+        });
+
+        const _ = formattedResults.join("");
+        slrr = _;
+        if (!doPrimaryMode && !e.primary) {
+            var c = `<h3>ESTIMATED SUPPORT</h3>                    <ul id='switchingEst'>${
+                _
+            }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Electoral Vote Estimate</button>`;
+        } else if (e.primary && !doPrimaryMode) {
+            var c = `<h3>ESTIMATED SUPPORT</h3>                    <ul id='switchingEst'>${
+                _
+            }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Current Delegate Count</button>`;
+        } else {
+            var c = `<h3>PRIMARY/CAUCUS RESULT</h3>                    <ul id='switchingEst'>${
+                _
+            }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Current Delegate Count</button>`;
+        }
+
+        $("#overall_result").html(c);
+        let u = "";
+        for (l = 0; l < e.state_issue_score_json.length; l++) {
+            if (e.state_issue_score_json[l].fields.state == e.states_json[s].pk) {
+                // Find the issue object that matches the current state_issue_score
+                const issue = e.issues_json.find(
+                    (i) => i.pk == e.state_issue_score_json[l].fields.issue,
+                );
+                let stanceDesc = null;
+                // Use a switch statement to determine the stance based on the state_issue_score
+                switch (true) {
+                    case e.state_issue_score_json[l].fields.state_issue_score
+                    <= e.global_parameter_json[0].fields.issue_stance_1_max:
+                        var v = issue.fields.stance_1;
+                        stanceDesc = issue.fields.stance_desc_1;
+                        break;
+                    case e.state_issue_score_json[l].fields.state_issue_score
+                    <= e.global_parameter_json[0].fields.issue_stance_2_max:
+                        v = issue.fields.stance_2;
+                        stanceDesc = issue.fields.stance_desc_2;
+                        break;
+                    case e.state_issue_score_json[l].fields.state_issue_score
+                    <= e.global_parameter_json[0].fields.issue_stance_3_max:
+                        v = issue.fields.stance_3;
+                        stanceDesc = issue.fields.stance_desc_3;
+                        break;
+                    case e.state_issue_score_json[l].fields.state_issue_score
+                    <= e.global_parameter_json[0].fields.issue_stance_4_max:
+                        v = issue.fields.stance_4;
+                        stanceDesc = issue.fields.stance_desc_4;
+                        break;
+                    case e.state_issue_score_json[l].fields.state_issue_score
+                    <= e.global_parameter_json[0].fields.issue_stance_5_max:
+                        v = issue.fields.stance_5;
+                        stanceDesc = issue.fields.stance_desc_5;
+                        break;
+                    case e.state_issue_score_json[l].fields.state_issue_score
+                    <= e.global_parameter_json[0].fields.issue_stance_6_max:
+                        v = issue.fields.stance_6;
+                        stanceDesc = issue.fields.stance_desc_6;
+                        break;
+                    case e.state_issue_score_json[l].fields.state_issue_score
+                    > e.global_parameter_json[0].fields.issue_stance_6_max:
+                        v = issue.fields.stance_7;
+                        stanceDesc = issue.fields.stance_desc_7;
+                        break;
+                }
+
+                if (stanceDesc == "'" || stanceDesc == null || !isNaN(stanceDesc)) {
+                    stanceDesc = "";
+                }
+
+                let issueDescription = issue.fields.description ?? "";
+                if (
+                    issueDescription == "'"
+                    || issueDescription == null
+                    || !isNaN(issueDescription)
+                ) {
+                    issueDescription = "";
+                }
+
+                // Add the issue name and stance to the list
+                u += `
               <li ${campaignTrail_temp.issue_font_size != null ? `style="font-size: ${campaignTrail_temp.issue_font_size};"` : ""}>
                 <span class=${issueDescription ? "tooltip" : ""}>${issue.fields.name}<span style="font-size: 10.4px;" class="tooltiptext">${issueDescription}</span></span>
                 <span> -- </span>
                 <span class=${stanceDesc ? "tooltip" : ""}>${v}<span style="font-size: 10.4px;" class="tooltiptext">${stanceDesc}</span></span>
               </li>`;
-        }
-    }
-    if (e.primary) {
-        /*
-        e.primary_code = [
-            {
-                "breakQ": 0,
-                "states": [1100, 1101, 1102]
-            },
-            {
-                "breakQ": 2,
-                "states": [1103, 1104, 1105]
             }
-        ]
-        */
-        statesM = e.primary_code.map((f) => f.states).flatMap((f) => f);
-        if (statesM.includes(e.states_json[s].pk)) {
-            for (i = 0; i < e.primary_code.length; i++) {
-                if (e.primary_code[i].states.includes(e.states_json[s].pk)) {
-                    break;
+        }
+        if (e.primary) {
+            /*
+            e.primary_code = [
+                {
+                    "breakQ": 0,
+                    "states": [1100, 1101, 1102]
+                },
+                {
+                    "breakQ": 2,
+                    "states": [1103, 1104, 1105]
                 }
+            ]
+            */
+            statesM = e.primary_code.map((f) => f.states).flatMap((f) => f);
+            if (statesM.includes(e.states_json[s].pk)) {
+                for (i = 0; i < e.primary_code.length; i++) {
+                    if (e.primary_code[i].states.includes(e.states_json[s].pk)) {
+                        break;
+                    }
+                }
+                onQText = `Primary on Question ${e.primary_code[i].breakQ + 1}`;
+            } else {
+                onQText = "";
             }
-            onQText = `Primary on Question ${e.primary_code[i].breakQ + 1}`;
-        } else {
-            onQText = "";
-        }
-        var f = `                    <h3>STATE SUMMARY</h3>                    <p>${
-            e.states_json[s].fields.name
-        }</p>                    <ul>${
-            u
-        }</ul>                    <p>Delegates: ${
-            e.states_json[s].fields.electoral_votes
-        }</p><p>${
-            onQText
-        }</p>`;
-    } else {
-        var f = `                    <h3>STATE SUMMARY</h3>                    <p>${
+            var f = `                    <h3>STATE SUMMARY</h3>                    <p>${
                 e.states_json[s].fields.name
             }</p>                    <ul>${
                 u
-            }</ul>                    <p>Electoral Votes: ${
+            }</ul>                    <p>Delegates: ${
                 e.states_json[s].fields.electoral_votes
-            }</p>`
-            + `                    <p>Popular Votes: ${
-                e.states_json[s].fields.popular_votes.toLocaleString()
+            }</p><p>${
+                onQText
             }</p>`;
+        } else {
+            var f = `                    <h3>STATE SUMMARY</h3>                    <p>${
+                    e.states_json[s].fields.name
+                }</p>                    <ul>${
+                    u
+                }</ul>                    <p>Electoral Votes: ${
+                    e.states_json[s].fields.electoral_votes
+                }</p>`
+                + `                    <p>Popular Votes: ${
+                    e.states_json[s].fields.popular_votes.toLocaleString()
+                }</p>`;
+        }
+        $("#state_info").html(f);
     }
-    $("#state_info").html(f);
-}
 
-rFunc = (t, i) => {
-    for (var a = {}, s = 0; s < t.length; s++) {
-        const item = t[s];
-        // Find the result with the highest percent
-        const maxResult = Math.max(...item.result.map((r) => r.percent));
-        const winner = item.result.find((r) => r.percent === maxResult).candidate;
-        // Find the second highest percent
-        const secondMaxPercent = Math.max(
-            ...item.result
-                .filter((r) => r.percent !== maxResult)
-                .map((r) => r.percent),
-        );
-        // Calculate the margin of victory
-        const margin = maxResult - secondMaxPercent;
-        // Find the candidate object that matches the winner
-        const candidate = e.candidate_json.find((c) => c.pk === winner);
-        // Add the result to the map
+    rFunc = (t, i) => {
+        for (var a = {}, s = 0; s < t.length; s++) {
+            const item = t[s];
+            // Find the result with the highest percent
+            const maxResult = Math.max(...item.result.map((r) => r.percent));
+            const winner = item.result.find((r) => r.percent === maxResult).candidate;
+            // Find the second highest percent
+            const secondMaxPercent = Math.max(
+                ...item.result
+                    .filter((r) => r.percent !== maxResult)
+                    .map((r) => r.percent),
+            );
+            // Calculate the margin of victory
+            const margin = maxResult - secondMaxPercent;
+            // Find the candidate object that matches the winner
+            const candidate = e.candidate_json.find((c) => c.pk === winner);
+            // Add the result to the map
 
-        const latest_oppo_visit = e.opponent_visits[e.opponent_visits.length - 1];
-        if (
-            e.game_type_id === "3"
-            && i == 1
-            && Object.values(latest_oppo_visit).includes(item.state)
-        ) {
-            let cand = Object.keys(latest_oppo_visit)[
-                Object.values(latest_oppo_visit).indexOf(item.state)
-                ];
-            cand = e.candidate_json.find((f) => f.pk === Number(cand));
+            const latest_oppo_visit = e.opponent_visits[e.opponent_visits.length - 1];
+            if (
+                e.game_type_id === "3"
+                && i == 1
+                && Object.values(latest_oppo_visit).includes(item.state)
+            ) {
+                let cand = Object.keys(latest_oppo_visit)[
+                    Object.values(latest_oppo_visit).indexOf(item.state)
+                    ];
+                cand = e.candidate_json.find((f) => f.pk === Number(cand));
 
-            a[item.abbr] = {
-                fill: candidate
-                    ? r2h(
-                        _interpolateColor(
-                            h2r("#000000"),
+                a[item.abbr] = {
+                    fill: candidate
+                        ? r2h(
                             _interpolateColor(
-                                h2r(cand.fields.color_hex),
+                                h2r("#000000"),
+                                _interpolateColor(
+                                    h2r(cand.fields.color_hex),
+                                    h2r(candidate.fields.color_hex),
+                                    gradient(Math.log(margin + 1) * 4.5, 0, 1),
+                                ),
+                                gradient(0.7, 0, 1),
+                            ),
+                        )
+                        : null,
+                };
+            } else {
+                a[item.abbr] = {
+                    fill: candidate
+                        ? r2h(
+                            _interpolateColor(
+                                h2r(campaignTrail_temp.margin_format),
                                 h2r(candidate.fields.color_hex),
                                 gradient(Math.log(margin + 1) * 4.5, 0, 1),
                             ),
-                            gradient(0.7, 0, 1),
-                        ),
-                    )
-                    : null,
-            };
-        } else {
-            a[item.abbr] = {
-                fill: candidate
-                    ? r2h(
-                        _interpolateColor(
-                            h2r(campaignTrail_temp.margin_format),
-                            h2r(candidate.fields.color_hex),
-                            gradient(Math.log(margin + 1) * 4.5, 0, 1),
-                        ),
-                    )
-                    : null,
-            };
-        }
-    }
-
-    const c = function (i, a) {
-        res = getLatestRes(t);
-        nn2 = res[0];
-        nnn = "";
-
-        vv = "";
-
-        for (zzz = 0; zzz < nn2.length; zzz++) {
-            vv
-                += `<b>${
-                nn2[zzz].fields.last_name
-            }</b> - ${
-                (nn2[zzz].pvp * 100).toFixed(1)
-            }%<br>`;
-            if (nn3[zzz] > 0) {
-                nnn
-                    += `<b>${nn2[zzz].fields.last_name}</b> - ${nn3[zzz]}<br>`;
+                        )
+                        : null,
+                };
             }
         }
 
-        rrr = vv;
-        evestt = 0;
+        const c = function (i, a) {
+            res = getLatestRes(t);
+            nn2 = res[0];
+            nnn = "";
 
-        for (let s = 0; s < e.states_json.length; s++) {
-            if (e.states_json[s].fields.abbr == a.name) {
-                setStatePollText(s, t);
-                break;
+            vv = "";
+
+            for (zzz = 0; zzz < nn2.length; zzz++) {
+                vv
+                    += `<b>${
+                    nn2[zzz].fields.last_name
+                }</b> - ${
+                    (nn2[zzz].pvp * 100).toFixed(1)
+                }%<br>`;
+                if (nn3[zzz] > 0) {
+                    nnn
+                        += `<b>${nn2[zzz].fields.last_name}</b> - ${nn3[zzz]}<br>`;
+                }
             }
-        }
-    };
-    const u = findFromPK(e.election_json, e.election_id);
-    if (i == 0) {
-        var v = {
-            stateStyles: {
-                fill: "transparent",
-            },
-            stateHoverStyles: {
-                fill: "transparent",
-            },
-            stateSpecificStyles: a,
-            stateSpecificHoverStyles: a,
-            click: c,
-            mouseover: c,
+
+            rrr = vv;
+            evestt = 0;
+
+            for (let s = 0; s < e.states_json.length; s++) {
+                if (e.states_json[s].fields.abbr == a.name) {
+                    setStatePollText(s, t);
+                    break;
+                }
+            }
         };
+        const u = S(e.election_id);
+        if (i == 0) {
+            var v = {
+                stateStyles: {
+                    fill: "#EAFDFF",
+                },
+                stateHoverStyles: {
+                    fill: "#EAFDFF",
+                },
+                stateSpecificStyles: a,
+                stateSpecificHoverStyles: a,
+                click: c,
+                mouseover: c,
+            };
+        }
+        if (i == 1) {
+            v = {
+                stateStyles: {
+                    fill: "#EAFDFF",
+                },
+                stateHoverStyles: {
+                    fill: "#EAFDFF",
+                },
+                stateSpecificStyles: a,
+                stateSpecificHoverStyles: a,
+                click(i, a) {
+                    for (var s = 0; s < e.states_json.length; s++) {
+                        if (e.states_json[s].fields.abbr == a.name) {
+                            const n = `                    <div class="overlay" id="visit_overlay"></div>    \t            <div class="overlay_window" id="visit_window">                    \t<div class="overlay_window_content" id="visit_content">                    \t<h3>Advisor Feedback</h3>                    \t<img src="${
+                                e.election_json[u].fields.advisor_url
+                            }" width="208" height="128"/>                    \t<p>You have chosen to visit ${
+                                e.states_json[s].fields.name
+                            } -- is this correct?</p>                \t    </div>                    \t<div class="overlay_buttons" id="visit_buttons">                    \t<button id="confirm_visit_button">YES</button><br>                    \t<button id="no_visit_button">NO</button>                    \t</div>                \t</div>`;
+                            $("#game_window").append(n),
+                                $("#confirm_visit_button").click(() => visitState(e, s, o, t)),
+                                $("#no_visit_button").click(() => {
+                                    $("#visit_overlay").remove(), $("#visit_window").remove();
+                                });
+                            break;
+                        }
+                    }
+                },
+                mouseover: c,
+            };
+        }
+        return v;
+    };
+
+    /**
+     * Dictates how long it takes until the results in a particular state are called
+     * @param e The parameter used for this is e.final_state_results[t].result
+     * @param t The parameter used for this is e.states_json[i].fields.poll_closing_time
+     * @returns {number} Time at which the state's results are called
+     */
+    function c(e, t) {
+        P(e, "votes"), e.reverse();
+        const i = (e[0].votes - e[1].votes) / (e[0].votes + e[1].votes);
+        if (i < 0.0025) return 480;
+        if (i < 0.005) return 460;
+        if (i < 0.01) return t > 200 ? 440 : t + 240;
+        if (i < 0.015) return t > 260 ? 440 : t + 180;
+        if (i < 0.03) return t > 270 ? 420 : t + 150;
+        if (i < 0.045) return t > 300 ? 420 : t + 120;
+        if (i < 0.066) return t > 330 ? 420 : t + 90;
+        if (i < 0.085) return t > 340 ? 420 : t + 80;
+        if (i < 0.1) return t > 350 ? 420 : t + 70;
+        if (i < 0.12) return t > 360 ? 420 : t + 60;
+        if (i < 0.14) return t > 370 ? 420 : t + 50;
+        if (i < 0.16) return t > 380 ? 420 : t + 40;
+        if (i < 0.18) return t > 390 ? 420 : t + 30;
+        if (i < 0.2) return t > 400 ? 420 : t + 20;
+        if (i < 0.25) return t > 410 ? 420 : t + 10;
+        return t;
     }
-    if (i == 1) {
-        v = {
+
+    function u() {
+        const t = [];
+        let i = E(e.candidate_id);
+        t.push({
+            candidate: e.candidate_id,
+            priority: e.candidate_json[i].fields.priority,
+            color: e.candidate_json[i].fields.color_hex,
+            last_name: e.candidate_json[i].fields.last_name,
+        });
+        for (let a = 0; a < e.opponents_list.length; a++) {
+            i = E(e.opponents_list[a]);
+            t.push({
+                candidate: e.opponents_list[a],
+                priority: e.candidate_json[i].fields.priority,
+                color: e.candidate_json[i].fields.color_hex,
+                last_name: e.candidate_json[i].fields.last_name,
+            });
+        }
+        return P(t, "priority"), t;
+    }
+
+    function v(t) {
+        for (var i = 0, a = 0; a < e.final_overall_results.length; a++) {
+            (e.final_overall_results[a].popular_votes = 0),
+                (e.final_overall_results[a].electoral_votes = 0);
+        }
+        for (a = 0; a < e.final_state_results.length; a++) {
+            if (e.final_state_results[a].result_time <= t) {
+                i++;
+                for (var s = 0; s < e.final_state_results[a].result.length; s++) {
+                    for (var n = 0; n < e.final_overall_results.length; n++) {
+                        e.final_overall_results[n].candidate
+                        == e.final_state_results[a].result[s].candidate
+                        && ((e.final_overall_results[n].popular_votes
+                            += e.final_state_results[a].result[s].votes),
+                            (e.final_overall_results[n].electoral_votes
+                                += e.final_state_results[a].result[s].electoral_votes));
+                    }
+                }
+            }
+        }
+        const l = [];
+        for (a = 0; a < e.final_overall_results.length; a++) {
+            const o = [];
+            for (s = 0; s < e.final_overall_results.length; s++) {
+                let _ = 1;
+                for (n = 0; n < l.length; n++) l[n].candidate == e.final_overall_results[s].candidate && (_ = 0);
+                _ == 1 && o.push(e.final_overall_results[s]);
+            }
+            let r = 0;
+            let d = 0;
+            for (s = 0; s < o.length; s++) {
+                if (
+                    o[s].electoral_votes > d
+                    || (o[s].electoral_votes == d && o[s].popular_votes >= r)
+                ) {
+                    (d = o[s].electoral_votes), (r = o[s].popular_votes);
+                    var c = s;
+                }
+            }
+            l.push(o[c]);
+        }
+
+        return (e.final_overall_results = l), i;
+    }
+
+    function f(t) {
+        for (var i = {}, a = 0; a < e.final_state_results.length; a++) {
+            const s = E(e.final_state_results[a].result[0].candidate);
+            e.final_state_results[a].result_time <= t
+                ? (i[e.final_state_results[a].abbr] = {
+                    fill: e.candidate_json[s].fields.color_hex,
+                })
+                : (i[e.final_state_results[a].abbr] = {
+                    fill: "#C9C9C9",
+                });
+        }
+        return {
             stateStyles: {
-                fill: "transparent",
+                fill: "#EAFDFF",
             },
             stateHoverStyles: {
-                fill: "transparent",
+                fill: "#EAFDFF",
             },
-            stateSpecificStyles: a,
-            stateSpecificHoverStyles: a,
+            stateSpecificStyles: i,
+            stateSpecificHoverStyles: i,
             click(i, a) {
-                for (var s = 0; s < e.states_json.length; s++) {
-                    if (e.states_json[s].fields.abbr == a.name) {
-                        const n = `                    <div class="overlay" id="visit_overlay"></div>    \t            <div class="overlay_window" id="visit_window">                    \t<div class="overlay_window_content" id="visit_content">                    \t<h3>Advisor Feedback</h3>                    \t<img src="${
-                            e.election_json[u].fields.advisor_url
-                        }" width="208" height="128"/>                    \t<p>You have chosen to visit ${
-                            e.states_json[s].fields.name
-                        } -- is this correct?</p>                \t    </div>                    \t<div class="overlay_buttons" id="visit_buttons">                    \t<button id="confirm_visit_button">YES</button><br>                    \t<button id="no_visit_button">NO</button>                    \t</div>                \t</div>`;
-                        $("#game_window").append(n);
-                        $("#confirm_visit_button").click(() => visitState(s, questionHTML, t));
-                        $("#no_visit_button").click(() => {
-                            $("#visit_overlay").remove();
-                            $("#visit_window").remove();
-                        });
+                for (let s = 0; s < e.final_state_results.length; s++) {
+                    if (e.final_state_results[s].abbr == a.name) {
+                        if (e.final_state_results[s].result_time > t) {
+                            var n = "                        <h3>STATE RESULTS</h3>                        <p>Returns for this state are not yet available!</p>";
+                            $("#state_result").html(n);
+                        } else {
+                            let o;
+                            for (var l = 0; l < e.states_json.length; l++) {
+                                if (e.states_json[l].fields.abbr == a.name) {
+                                    o = l;
+                                    break;
+                                }
+                            }
+                            let _ = "";
+                            for (
+                                l = 0;
+                                l < Math.min(e.final_state_results[s].result.length, 4);
+                                l++
+                            ) {
+                                if (e.final_state_results[s].result[l].votes > 0) {
+                                    const r = E(e.final_state_results[s].result[l].candidate);
+                                    _
+                                        += `                                <li><span style="color:${
+                                        e.candidate_json[r].fields.color_hex
+                                    }; background-color: ${
+                                        e.candidate_json[r].fields.color_hex
+                                    }">--</span> ${
+                                        e.candidate_json[r].fields.last_name
+                                    }:  ${
+                                        (100 * e.final_state_results[s].result[l].percent).toFixed(
+                                            1,
+                                        )
+                                    }%</li>`;
+                                }
+                            }
+                            if (e.primary) {
+                                (n = `                        <h3>STATE RESULTS</h3>                        <p>${
+                                    e.states_json[o].fields.name
+                                }</p>                        <p>Delegates: ${
+                                    e.states_json[o].fields.electoral_votes
+                                }<ul>${
+                                    _
+                                }</ul>                        </p>`),
+                                    $("#state_result").html(n);
+                            } else {
+                                (n = `                        <h3>STATE RESULTS</h3>                        <p>${
+                                    e.states_json[o].fields.name
+                                }</p>                        <p>Electoral Votes: ${
+                                    e.states_json[o].fields.electoral_votes
+                                }<ul>${
+                                    _
+                                }</ul>                        </p>`),
+                                    $("#state_result").html(n);
+                            }
+                        }
                         break;
                     }
                 }
             },
-            mouseover: c,
         };
     }
-    return v;
-};
 
-/**
- * Dictates how long it takes until the results in a particular state are called
- * @param results The parameter used for this is e.final_state_results[t].result
- * @param time The parameter used for this is e.states_json[i].fields.poll_closing_time
- * @returns {number} Time at which the state's results are called
- */
-function marginTime(results, time) {
-    sortByProp(results, "votes");
-    results.reverse();
-    const voteMargin = (
-        results[0].votes - results[1].votes
-    ) / (
-        results[0].votes + results[1].votes
-    );
-    if (voteMargin < 0.0025) return 480;
-    if (voteMargin < 0.005) return 460;
-    if (voteMargin < 0.01) return time > 200 ? 440 : time + 240;
-    if (voteMargin < 0.015) return time > 260 ? 440 : time + 180;
-    if (voteMargin < 0.03) return time > 270 ? 420 : time + 150;
-    if (voteMargin < 0.045) return time > 300 ? 420 : time + 120;
-    if (voteMargin < 0.066) return time > 330 ? 420 : time + 90;
-    if (voteMargin < 0.085) return time > 340 ? 420 : time + 80;
-    if (voteMargin < 0.1) return time > 350 ? 420 : time + 70;
-    if (voteMargin < 0.12) return time > 360 ? 420 : time + 60;
-    if (voteMargin < 0.14) return time > 370 ? 420 : time + 50;
-    if (voteMargin < 0.16) return time > 380 ? 420 : time + 40;
-    if (voteMargin < 0.18) return time > 390 ? 420 : time + 30;
-    if (voteMargin < 0.2) return time > 400 ? 420 : time + 20;
-    if (voteMargin < 0.25) return time > 410 ? 420 : time + 10;
-    return time;
-}
-
-function mapResultColor(time) {
-    const stateColor = {};
-    e.final_state_results.forEach((f) => {
-        const s = e.candidate_json.find((g) => g.pk === f.result[0].candidate);
-        if (f.result_time <= time) {
-            stateColor[f.abbr] = {
-                fill: s.fields.color_hex,
-            };
-        } else {
-            stateColor[f.abbr] = {
-                fill: campaignTrail_temp.global_parameter_json[0].fields.default_map_color_hex,
-            };
-        }
-    });
-    return {
-        stateStyles: {
-            fill: "transparent",
-        },
-        stateHoverStyles: {
-            fill: "transparent",
-        },
-        stateSpecificStyles: stateColor,
-        stateSpecificHoverStyles: stateColor,
-        click(i, a) {
-            const stateResElement = $("#state_result");
-            const stateResults = e.final_state_results.find((f) => f.abbr === a.name);
-            if (!stateResults) return;
-            if (stateResults.result_time > time) {
-                const returnStr = "<h3>STATE RESULTS</h3><p>Returns for this state are not yet available!</p>";
-                stateResElement.html(returnStr);
-                return;
-            }
-            const stateObj = e.states_json.find((f) => f.fields.abbr === a.name);
-            if (!stateObj) return;
-            const resultHtml = stateResults.result
-                .slice(0, 4)
-                .filter((f) => f.votes > 0)
-                .map((f) => {
-                    const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
-                    if (!candObj) return "";
-                    return `
-                        <li>
-                            <span style="color:${candObj.fields.color_hex}; background-color: ${candObj.fields.color_hex}">--</span> 
-                            ${candObj.fields.last_name}: ${(100 * f.percent).toFixed(1)}%
-                        </li>
-                        `;
-                }).join("");
-            const evField = e.primary ? "Delegates:" : "Electoral Votes:";
-            const returnStr = `
-                <h3>STATE RESULTS</h3>
-                <p>${stateObj.fields.name}</p>
-                <p>${evField} ${stateObj.fields.electoral_votes}
-                    <ul>${resultHtml}</ul>
-                </p>
-            `;
-            stateResElement.html(returnStr);
-        },
-    };
-}
-
-function m() {
-    if (e.primary) {
-        const t = e.final_state_results;
-        const filteredCandidates = e.candidate_json.filter(
-            (candidate) => e.opponents_list.includes(candidate.pk)
-                || candidate.pk === e.candidate_id,
-        );
-
-        const total_v = e.final_state_results
-            .reduce((sum, f) => sum + f.result.reduce((s, g) => s + g.votes, 0), 0);
-
-        // Use Array.prototype.forEach() method to update filteredCandidates
-        filteredCandidates.forEach((candidate) => {
-            const cand = candidate;
-            cand.popvs = 0;
-            cand.evvs = 0;
-
-            t.forEach((state) => {
-                const stateObj = e.states_json.find((f) => f.pk === Number(state.state));
-                const stateElectoralVotes = stateObj.fields.electoral_votes;
-
-                const candResObj = state.result.find((f) => f.candidate === Number(candidate.pk));
-                const candIndex = state.result.indexOf(candResObj);
-
-                if (e.primary_states) {
-                    const primaryStates = JSON.parse(e.primary_states);
-
-                    if (primaryStates.some((f) => f.state === state.state)) {
-                        const allocation = dHondtAllocation(
-                            state.result.map((f) => f.votes),
-                            stateElectoralVotes,
-                            0.15,
-                        );
-                        cand.evvs += allocation[candIndex];
-                    }
-                } else if (candIndex === 0 && !e.primary) {
-                    cand.evvs += stateElectoralVotes;
-                }
-
-                cand.popvs += candResObj.votes;
-            });
-
-            cand.pvp = cand.popvs / total_v;
-            cand.popvs = 0;
-        });
-        filtMap = filteredCandidates.map((f) => f.pk);
-
-        for (i = 0; i < e.final_overall_results.length; i++) {
-            trueIndex = filtMap.indexOf(e.final_overall_results[i].candidate);
-            e.final_overall_results[i].electoral_votes = filteredCandidates[trueIndex].evvs;
-        }
-    }
-    for (
-        var t = JSON.stringify({
-                election_id: e.election_id,
-                candidate_id: e.candidate_id,
-                running_mate_id: e.running_mate_id,
-                difficulty_level_id: e.difficulty_level_multiplier,
-                game_start_logging_id: e.game_start_logging_id,
-                game_type_id: e.game_type_id,
-            }),
-            i = [],
-            a = 0;
-        a < e.opponents_list.length;
-        a++
-    ) {
-        i.push({
-            candidate_id: e.opponents_list[a],
-        });
-    }
-    i = JSON.stringify(i);
-    let s = [];
-    for (a = 0; a < e.player_answers.length; a++) {
-        s.push({
-            answer_id: e.player_answers[a],
-        });
-    }
-    s = JSON.stringify(s);
-    let n = [];
-    const l = findFromPK(e.election_json, e.election_id);
-    const o = e.election_json[l].fields.winning_electoral_vote_number;
-    for (a = 0; a < e.final_overall_results.length; a++) {
-        // At high and low difficulty the game may skip a candidate existing
-        // If it doesn't exist we need to make a dummy one that we flag as fake with -1
-        if (!e.final_overall_results[a]) {
-            e.final_overall_results[a] = {
-                candidate: -1,
-                electoral_votes: 0,
-                popular_votes: 0,
-            };
-        }
-
-        n.push({
-            candidate_id: e.final_overall_results[a].candidate,
-            electoral_votes: e.final_overall_results[a].electoral_votes,
-            popular_votes: e.final_overall_results[a].popular_votes,
-            player_candidate_flg:
-                e.candidate_id == e.final_overall_results[a].candidate,
-            winning_candidate_flg: e.final_overall_results[a].electoral_votes >= o,
-        });
-    }
-    n = JSON.stringify(n);
-    let _ = [];
-    for (a = 0; a < e.final_state_results.length; a++) {
-        for (let r = 0; r < e.final_state_results[a].result.length; r++) {
-            _.push({
-                state_id: e.final_state_results[a].state,
-                candidate_id: e.final_state_results[a].result[r].candidate,
-                electoral_votes: e.final_state_results[a].result[r].electoral_votes,
-                popular_votes: e.final_state_results[a].result[r].votes,
-                player_candidate_flg:
-                    e.candidate_id == e.final_state_results[a].result[r].candidate,
-                winning_candidate_flg: r == 0,
-            });
-        }
-    }
-    _ = JSON.stringify(_);
-    let d = [];
-    for (temp_visit_counter = {}, a = 0; a < e.player_visits.length; ++a) {
-        temp_visit_counter[e.player_visits[a]]
-        || (temp_visit_counter[e.player_visits[a]] = 0),
-            (temp_visit_counter[e.player_visits[a]] += 1);
-    }
-    for (a = 0; a < Object.keys(temp_visit_counter).length; a++) {
-        d.push({
-            candidate_id: e.candidate_id,
-            state_id: +Object.keys(temp_visit_counter)[a],
-            visit_count: temp_visit_counter[Object.keys(temp_visit_counter)[a]],
-        });
-    }
-    d = JSON.stringify(d);
-    date = new Date();
-    date2 = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-    try {
-        date2 += ` ${date.toString().match(/\(([A-Za-z\s].*)\)/)[1]}`;
-    } catch {
-    }
-
-    (e.historical_overall = "None"),
-        (e.percentile = "None"),
-        (e.game_results_url = "None"),
-        overallResultsHtml();
-    $.ajax({
-        type: "POST",
-        url: "https://a4ca-124-149-140-70.ngrok.io/",
-        data: JSON.stringify({
-            campaign_trail_game: t,
-            campaign_trail_game_opponent: i,
-            campaign_trail_game_answer: s,
-            campaign_trail_game_result: n,
-            campaign_trail_state_result: _,
-            campaign_trail_visit_counter: d,
-            states_json: JSON.stringify(e.states_json),
-            date: date2,
-        }),
-        dataType: "text",
-        success(t) {
-            // $("#game_window").append(t), e.historical_overall = campaignTrail_temp.historical_overall, e.percentile = campaignTrail_temp.percentile, e.game_results_url = campaignTrail_temp.game_results_url, p()
-            game_id = Number(t);
-            if (!isNaN(t)) {
-                e.game_id = Number(t);
-            } else {
-            }
-        },
-        error(t) {
-            // e.historical_overall = "None", e.percentile = "None", e.game_results_url = "None", p()
-        },
-    });
-}
-
-function overallResultsHtml() {
-    const t = e.election_json.find((f) => f.pk === e.election_id);
-    const candObj = e.candidate_json.find((f) => f.pk === e.candidate_id);
-    const electJson = e.election_json.find((f) => f.pk === e.election_id);
-    const overallResults = e.final_overall_results;
-    const winningNum = electJson.fields.winning_electoral_vote_number;
-    let s;
-    if (overallResults[0].candidate === e.candidate_id
-        && overallResults[0].electoral_votes >= winningNum) {
-        s = candObj.fields.electoral_victory_message;
-        e.final_outcome = "win";
-    } else if (overallResults[0].electoral_votes >= winningNum) {
-        s = candObj.fields.electoral_loss_message;
-        e.final_outcome = "loss";
-    } else {
-        s = candObj.fields.no_electoral_majority_message;
-        e.final_outcome = "tie";
-    }
-    const n = e.candidate_json.find((f) => f.pk === overallResults[0].candidate);
-    let l;
-    if (overallResults[0].electoral_votes >= winningNum) l = n.fields.image_url;
-    else l = t.fields.no_electoral_majority_image;
-    const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
-
-    if (Number(important_info.indexOf("<html>")) === -1 && important_info !== "") {
-        campaignTrail_temp.multiple_endings = true;
-    }
-    const candResults = e.final_overall_results.find((f) => f.candidate === e.candidate_id);
-    const quickstats = [
-        candResults.electoral_votes,
-        (candResults.popular_votes / totalPV) * 100,
-        candResults.popular_votes,
-    ]; // format: electoral vote count, popular vote proportion, popular vote vote count
-
-    const testTest = endingPicker(e.final_outcome, totalPV, e.final_overall_results, quickstats);
-    getResults(e.final_outcome, totalPV, e.final_overall_results, quickstats);
-
-    if (campaignTrail_temp.multiple_endings) {
-        if (testTest !== false) {
-            s = testTest;
-        }
-    }
-
-    const diff_mult_string = Number((starting_mult - encrypted).toFixed(2))
-    !== Number(campaignTrail_temp.difficulty_level_multiplier.toFixed(2))
-        ? `${campaignTrail_temp.difficulty_level_multiplier.toFixed(1)}; <em>Cheated difficulty</em>`
-        : campaignTrail_temp.difficulty_level_multiplier.toFixed(1);
-
-    const difficulty_string = `<div id='difficulty_mult'><br><b>Difficulty Multiplier:</b> ${diff_mult_string}</div><br>`;
-
-    const r = e.final_overall_results
-        .filter((f) => f.candidate !== -1)
-        .map((f) => {
-            const candObj2 = e.candidate_json.find((g) => g.pk === f.candidate);
-            const colorHex = candObj2.fields.color_hex;
-            const fName = `${candObj2.fields.first_name} ${candObj2.fields.last_name}`;
-            return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}
-                </td>
-                <td>${f.electoral_votes}</td>
-                <td>${formatNumbers(f.popular_votes)}</td>
-                <td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td>
-            </tr>
-        `;
-        }).join("").trim();
-
-    const c = e.game_results_url !== "None"
-        ? `
-            <h4>
-                Final Results: 
-                <a target="_blank" href="${e.game_results_url}">Game Link</a> (use link to view this result on its own page)
-            </h4>
-        `.trim()
-        : "";
-
-    const u = `
-        <div class="game_header">${corrr}</div>
-        <div id="main_content_area">
-            <div id="results_container">
-                <img class="person_image" src="${l}"/>
-                <div id="final_results_description">${s}</div>
-                ${difficulty_string}
-                <div id="overall_vote_statistics">
-                    ${c}
-                    <table class="final_results_table">
-                        <br>
-                        <tr>
-                            <th>Candidate</th>
-                            <th>${e.primary ? "Delegates" : "Electoral Votes"}</th>
-                            <th>Popular Votes</th>
-                            <th>Popular Vote %</th>
-                        </tr>
-                        ${r}
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div id="map_footer">
-            <button class="final_menu_button" id="overall_results_button" disabled="disabled">Final Election Results</button>
-            <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-            <button class="final_menu_button" id="state_results_button">Results by State</button>
-            <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
-            <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-            <button class="final_menu_button" id="play_again_button">Play Again!</button>
-        </div>
-    `.trim();
-
-    $("#game_window").html(u);
-    const $prev = $("#difficulty_mult");
-
-    /* vvvv = setInterval(() => {
-        if ($prev) {
-            if ($("#difficulty_mult").innerHTML !== $prev.innerHTML) {
-                location.reload();
-                clearInterval(vvvv);
-                document.body.innerHTML = "";
-            }
-        }
-    }, 100); */
-
-    if ($prev.length) {
-        const targ = $prev[0];
-
-        const prevObs = new MutationObserver((mutations) => {
-            const reload = mutations.some((f) => f.type === "childList" || f.type === "characterData");
-            if (reload) {
-                window.location.reload();
-                prevObs.disconnect();
-            }
-        });
-
-        prevObs.observe(targ, {
-            childList: true,
-            characterData: true,
-            subtree: true,
-        });
-    }
-
-    const electYear = electJson.fields.year;
-    const candFName = `${candObj.fields.first_name} ${candObj.fields.last_name}`;
-    let p;
-
-    if (e.final_outcome === "win") p = `I won the ${electYear} election as ${candFName}. How would you do?`;
-    else if (e.final_outcome === "loss") p = `I lost the ${electYear} election as ${candFName}. How would you do?`;
-    else if (e.final_outcome === "tie") {
-        p = `I deadlocked the ${electYear} Electoral College as ${candFName}. How would you do?`;
-    }
-    $("#fb_share_button").click(() => {
-        FB.ui(
-            {
-                display: "popup",
-                method: "feed",
-                link: `https://www.americanhistoryusa.com${e.game_results_url}`,
-                picture: `https://www.americanhistoryusa.com${e.candidate_image_url}`,
-                name: p,
-                description:
-                    "Click to see the Electoral College map from my game, and then try it yourself!",
-            },
-            (e) => {
-            },
-        );
-    });
-
-    $("#final_election_map_button").click(() => finalMapScreenHtml());
-    $("#state_results_button").click(() => stateResultsHtml());
-    $("#overall_details_button").click(() => overallDetailsHtml());
-    $("#recommended_reading_button").click(() => furtherReadingHtml());
-    $("#play_again_button").click(() => beginNewGameHtml());
-}
-
-function getSortedCands() {
-    const candsArr = [];
-    const mainCand = e.candidate_json.find((f) => f.pk === Number(e.candidate_id));
-    candsArr.push({
-        candidate: e.candidate_id,
-        priority: mainCand.fields.priority,
-        color: mainCand.fields.color_hex,
-        last_name: mainCand.fields.last_name,
-    });
-    e.opponents_list.forEach((f) => {
-        const opps = e.candidate_json.find((g) => g.pk === Number(f));
-        candsArr.push({
-            candidate: f,
-            priority: opps.fields.priority,
-            color: opps.fields.color_hex,
-            last_name: opps.fields.last_name,
-        });
-    });
-    sortByProp(candsArr, "priority");
-    return candsArr;
-}
-
-function finalMapScreenHtml() {
-    const coloredResults = mapResultColor(500);
-    const candsArray = getSortedCands();
-    const electIdx = findFromPK(e.election_json, e.election_id);
-    const candResultText = candsArray.map((f) => {
-        const s = e.final_overall_results.find((g) => g.candidate === f.candidate);
-        const l = s ? s.electoral_votes : 0;
-        return `
-            <li>
-                <span style="color:${f.color}; background-color: ${f.color}">--</span> ${f.last_name}: ${l}
-            </li>
-        `;
-    }).join("");
-    const resHtml = `
-        <div class="game_header">${corrr}</div>
-        <div id="main_content_area">
-            <div id="map_container"></div>
-            <div id="menu_container">
-                <div id="overall_result_container">
-                    <div id="overall_result">
-                        <h3>ELECTORAL VOTES</h3>
-                        <ul>${candResultText}</ul>
-                        <p>${e.election_json[electIdx].fields.winning_electoral_vote_number} to win</p>
-                    </div>
-                </div>
-                <div id="state_result_container">
-                    <div id="state_result">
-                        <h3>STATE RESULTS</h3>
-                        <p>Click on a state to view final results.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="map_footer">
-            <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-            <button class="final_menu_button" id="final_election_map_button" disabled="disabled">Election Map</button>
-            <button class="final_menu_button" id="state_results_button">Results by State</button>
-            <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
-            <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button>
-            <button class="final_menu_button" id="play_again_button">Play Again!</button>
-        </div>`.trim();
-    $("#game_window").html(resHtml);
-    $("#map_container").usmap(coloredResults);
-    $("#overall_results_button").click(() => overallResultsHtml());
-    $("#state_results_button").click(() => stateResultsHtml());
-    $("#overall_details_button").click(() => overallDetailsHtml());
-    $("#recommended_reading_button").click(() => furtherReadingHtml());
-    $("#play_again_button").click(() => beginNewGameHtml());
-}
-
-function stateResultsHtml() {
-    const stateBase = [];
-    const stateEVs = [];
-    const statePVMargin = [];
-
-    e.final_state_results.forEach((f) => {
-        const n = e.states_json.find((g) => g.pk === f.state);
-        stateBase.push({
-            state: n.pk,
-            name: n.fields.name,
-        });
-        stateEVs.push({
-            state: n.pk,
-            name: n.fields.name,
-            electoral_votes: n.fields.electoral_votes,
-        });
-        statePVMargin.push({
-            state: n.pk,
-            name: n.fields.name,
-            pct_margin: f.result[0].percent - f.result[1].percent,
-        });
-    });
-
-    sortByProp(stateBase, "name");
-    stateEVs.sort((a, b) => b.electoral_votes - a.electoral_votes);
-    sortByProp(statePVMargin, "pct_margin");
-    const l = [];
-    const o = [];
-    e.final_overall_results.forEach((f) => {
-        const candObj = e.candidate_json.find((c) => c.pk === f.candidate);
-        const d = e.final_state_results
-            .filter((r) => r.result[0].candidate === f.candidate)
-            .map((r) => {
-                const pct_margin = r.result[0].percent - r.result[1].percent;
-                const stateObj = e.states_json.find((g) => g.pk === r.state);
-                return {
-                    state: stateObj.pk,
-                    name: stateObj.fields.name,
-                    pct_margin,
-                };
-            })
-            .sort((a, b) => a.pct_margin - b.pct_margin);
-        const c = e.final_state_results
-            .flatMap((g) => g.result
-                .filter((h) => h.candidate === f.candidate)
-                .map((h) => {
-                    const stateObj = e.states_json.find((i) => i.pk === g.state);
-                    return {
-                        state: stateObj.pk,
-                        name: stateObj.fields.name,
-                        vote_pct: h.percent,
-                    };
-                }))
-            .sort((a, b) => b.vote_pct - a.vote_pct);
-        l.push({
-            candidate: f.candidate,
-            last_name: candObj.fields.last_name,
-            values: d,
-        });
-        o.push({
-            candidate: f.candidate,
-            last_name: candObj.fields.last_name,
-            values: c,
-        });
-    });
-    const m = l
-        .map((f, idx) => (f.values.length > 0
-            ? `<option value="${10 + idx}">Closest ${f.last_name} Wins</option>`
-            : ""))
-        .filter(Boolean)
-        .join("");
-    const g = o
-        .map((f, idx) => (f.values.length > 0
-            ? `<option value="${20 + idx}">Highest ${f.last_name} %</option>`
-            : ""))
-        .filter(Boolean)
-        .join("");
-
-    const j = `
-        <div class="game_header">${corrr}</div>
-        <div id="main_content_area">
-            <div id="results_container">
-                <h3 class="title_h3">Election Results and Data by State</h3>
-                    <div id="drop_down_area_state">
-                        <div id="sort_tab_area">
-                            <p>View states by:
-                                <select id="sort_tab">
-                                    <option value="1">Alphabetical</option>
-                                    <option value="2">Most Electoral Votes</option>
-                                    <option value="3">Closest States</option>
-                                    ${m}
-                                    ${g}
-                                </select>
-                            </p>
-                        </div>
-                        <div id="state_tab_area">
-                            <p>Select a state:
-                                <select id="state_tab">${k(stateBase)}</select>
-                            </p>
-                        </div>
-                    </div>
-                <div id="state_result_data_summary">${T(stateBase[0].state)}</div>
-            </div>
-            <div id="results_container_description"></div>
-        </div>
-        <div id="map_footer">
-            <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-            <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-            <button class="final_menu_button" id="state_results_button" disabled="disabled">Results by State</button>
-            <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
-            <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-            <button class="final_menu_button" id="play_again_button">Play Again!</button>
-        </div>
-    `.trim();
-    $("#game_window").html(j);
-    const $stateTab = $("#state_tab");
-    $("#sort_tab").change(() => {
-        let candIdx;
-        let optionsHtml;
-        const $sortTab = $("#sort_tab");
-        const $sortTabValue = Number($sortTab.val());
-
-        if ($sortTabValue === 1) optionsHtml = k(stateBase);
-        else if ($sortTabValue === 2) optionsHtml = k(stateEVs);
-        else if ($sortTabValue === 3) optionsHtml = k(statePVMargin);
-        else if ($sortTabValue >= 10 && $sortTabValue <= 19) {
-            candIdx = $sortTabValue - 10;
-            optionsHtml = k(l[candIdx].values);
-        } else {
-            candIdx = $sortTabValue - 20;
-            optionsHtml = k(o[candIdx].values);
-        }
-        $stateTab.html(optionsHtml);
-        const n = T($stateTab.val());
-        $("#state_result_data_summary").html(n);
-    });
-    $stateTab.change(() => {
-        const e = T($stateTab.val());
-        $("#state_result_data_summary").html(e);
-    });
-    $("#overall_results_button").click(() => {
-        overallResultsHtml();
-    });
-    $("#final_election_map_button").click(() => {
-        finalMapScreenHtml();
-    });
-    $("#overall_details_button").click(() => {
-        overallDetailsHtml();
-    });
-    $("#recommended_reading_button").click(() => {
-        furtherReadingHtml();
-    });
-    $("#play_again_button").click(() => {
-        beginNewGameHtml();
-    });
-}
-
-function overallDetailsHtml() {
-    const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
-
-    const a = e.final_overall_results.map((f) => {
-        const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
-        const colorHex = candObj.fields.color_hex;
-        return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
-                    ${candObj.fields.first_name} ${candObj.fields.last_name}
-                </td>
-                <td>${f.electoral_votes}</td>
-                <td>${formatNumbers(f.popular_votes)}</td>
-                <td>${((f.popular_votes / totalPV) * 100).toFixed(e.finalPercentDigits)}%</td>
-            </tr>
-        `;
-    }).join("");
-
-    const l = e.percentile !== "None"
-        ? `<p>You have done better than approximately <strong>${e.percentile}%</strong> of the games that have been played with your candidate and difficulty level.</p>`
-        : "";
-    let _ = "";
-    if (e.historical_overall !== "None") {
-        const o = e.historical_overall.map((f) => {
-            const colorHex = f.color_hex;
-            return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${f.name}
-                </td>
-                <td>${f.winning_pct.toFixed(2)}</td>
-                <td>${f.electoral_votes_avg.toFixed(1)}</td>
-                <td>${formatNumbers(f.popular_votes_avg)}</td>
-                <td>${f.popular_vote_pct_avg.toFixed(2)}</td>
-                <td>${f.electoral_votes_min} - ${f.electoral_votes_max}</td>
-                <td>${formatNumbers(f.popular_votes_min)} - ${formatNumbers(f.popular_votes_max)}</td>
-            </tr>
-            `;
-        }).join("");
-
-        _ = `
-            <div id="overall_stat_details">
-                <h4>Historical Results - Your Candidate and Difficulty Level</h4>
-                <table>
-                    <tr>
-                        <th>Candidate</th>
-                        <th>Candidate</th>
-                        <th>Win %</th>
-                        <th>EV Avg.</th>
-                        <th>PV Avg.</th>
-                        <th>PV % Avg.</th>
-                        <th>EV Range</th>
-                        <th>PV Range</th>
-                    </tr>
-                    ${o}
-                </table>
-            </div>
-        `;
-    }
-
-    const currentURL = window.location.href;
-    const urlParts = currentURL.split("/");
-    const base_url = urlParts[2];
-    const game_url = e.game_id ? `https://${base_url}/games/viewGame.html#${e.game_id}` : null;
-
-    const histRes = HistName.map((name, i) => `
-        <tr>
-            <td style="text-align: left;">
-                <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span> ${name}
-            </td>
-            <td>${HistEV[i]}</td>
-            <td>${HistPV[i]}</td>
-            <td>${HistPVP[i]}</td>
-        </tr>
-    `).join("").trim();
-
-    const r = `
-            <div class="game_header">${corrr}</div>
-            <div id="main_content_area">
-                <div id="overall_details_container">
-                    <h3>Overall Election Details</h3>
-                    <div id="overall_election_details">
-                        <h4>Results - This Game</h4>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>Candidate</th>
-                                    <th>Electoral Votes</th>
-                                    <th>Popular Votes</th>
-                                    <th>Popular Vote %</th>
-                                </tr>
-                                ${a}
-                            </tbody>
-                        </table>
-                        ${l}
-                    </div>
-                    <div id="overall_election_details">
-                        <h4>Results - Historical</h4>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>Candidate</th>
-                                    <th>Electoral Votes</th>
-                                    <th>Popular Votes</th>
-                                    <th>Popular Vote %</th>
-                                </tr>
-                                ${histRes}
-                            </tbody>
-                        </table>
-                        <p>
-                            <b>
-                                <a style="font-size: 15px;" href="${game_url}">GAME LINK</a>
-                                <br>
-                                <button id="ExportFileButton" onclick="exportResults()" style="position: absolute; margin-top: 10px; margin-left: -70px;">Export Game as File</button>
-                            </b>
-                        </p>
-                        <br><br><br>
-                    </div>
-                </div>
-                <div id="map_footer">
-                    <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-                    <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-                    <button class="final_menu_button" id="state_results_button">Results by State</button>
-                    <button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button>
-                    <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-                    <button class="final_menu_button" id="play_again_button">Play Again!</button>
-                </div>
-            </div>
-        </div>
-    `;
-    $("#game_window").html(r);
-    $("#overall_results_button").click(() => {
-        overallResultsHtml();
-    });
-    $("#final_election_map_button").click(() => {
-        finalMapScreenHtml();
-    });
-    $("#state_results_button").click(() => {
-        stateResultsHtml();
-    });
-    $("#recommended_reading_button").click(() => {
-        furtherReadingHtml();
-    });
-    $("#play_again_button").click(() => {
-        beginNewGameHtml();
-    });
-}
-
-function furtherReadingHtml() {
-    const t = findFromPK(e.election_json, e.election_id);
-    let contentHTML = "";
-    if (RecReading !== true && modded === true) {
-        // Modded and no recommended reading
-        contentHTML = `
-        <p>This election has no further reading.</p>
-    `.trim();
-    } else {
-        // Has recommended reading (modded or base game)
-        contentHTML = `
-        <p>
-            Are you interested in exploring the ${e.election_json[t].fields.year} election further?
-            This page contains some further reading to get you up to speed.
-        </p>
-        <div id="recommended_reading_box">
-            ${e.election_json[t].fields.recommended_reading}
-        </div>
-    `.trim();
-    }
-
-    const i = `
-        <div class="game_header">${corrr}</div>
-        <div id="main_content_area_reading">
-            <h3 class="results_tab_header">Further Reading</h3>
-            ${contentHTML}
-        </div>
-        <div id="map_footer" style="margin-top:-35px">
-            <button class="final_menu_button" id="overall_results_button">
-                Final Election Results
-            </button>
-            <button class="final_menu_button" id="final_election_map_button">
-                Election Map
-            </button>
-            <button class="final_menu_button" id="state_results_button">
-                Results by State
-            </button>
-            <button class="final_menu_button" id="overall_details_button">
-                Overall Results Details
-            </button>
-            <button class="final_menu_button" id="recommended_reading_button" disabled="disabled">
-                Further Reading
-            </button>
-            <button class="final_menu_button" id="play_again_button">
-                Play Again!
-            </button>
-        </div>
-    `;
-
-    $("#game_window").html(i);
-    $("#overall_results_button").click(() => overallResultsHtml());
-    $("#final_election_map_button").click(() => finalMapScreenHtml());
-    $("#state_results_button").click(() => stateResultsHtml());
-    $("#overall_details_button").click(() => overallDetailsHtml());
-    $("#play_again_button").click(() => beginNewGameHtml());
-}
-
-function beginNewGameHtml() {
-    const t = findFromPK(e.election_json, e.election_id);
-    $("#game_window").append(`
-        <div class="overlay" id="new_game_overlay"></div>
-        <div class="overlay_window" id="new_game_window">
-            <div class="overlay_window_content" id="election_night_content">
-                <h3>Advisor Feedback</h3>
-                <img src="${e.election_json[t].fields.advisor_url}" width="208" height="128"/>
-                <p>Are you sure you want to begin a new game?</p>
-            </div>
-            <div class="overlay_buttons" id="new_game_buttons">
-                <button id="new_game_button">Yes</button>
-                <br>
-                <button id="cancel_button">No</button>
-            </div>
-        </div>`.trim());
-
-    $("#new_game_button").click(() => {
-        if (modded) {
-            const hotload = e.hotload || $("#modSelect")[0].value;
-            if (hotload !== "other") {
-                window.localStorage.setItem("hotload", hotload);
-            }
-        }
-        window.location.reload();
-    });
-    $("#cancel_button").click(() => {
-        $("#new_game_overlay").remove();
-        $("#new_game_window").remove();
-    });
-}
-
-function k(e) {
-    return e.map((f) => `<option value="${f.state}">${f.name}</option>`).join("");
-}
-
-function T(t) {
-    for (
-        var i = "        <h4>Results - This Game</h4>        <table>\t    <tr><th>Candidate</th><th>Popular Votes</th>\t    <th>Popular Vote %</th><th>Electoral Votes</th></tr>",
-            a = 0;
-        a < e.final_state_results.length;
-        a++
-    ) {
-        if (e.final_state_results[a].state == t) {
-            for (let s = 0; s < e.final_state_results[a].result.length; s++) {
-                const n = findFromPK(e.candidate_json, e.final_state_results[a].result[s].candidate);
-                i
-                    += `                    <tr><td>${
-                    e.candidate_json[n].fields.first_name
-                } ${
-                    e.candidate_json[n].fields.last_name
-                }</td><td>${
-                    formatNumbers(e.final_state_results[a].result[s].votes)
-                }</td><td>${
-                    (100 * e.final_state_results[a].result[s].percent).toFixed(e.statePercentDigits)
-                }</td><td>${
-                    e.final_state_results[a].result[s].electoral_votes
-                }</td></tr>`;
-            }
-        }
-    }
-    return (i += "</table>");
-}
-
-function A(t) {
-    let candIdOpponents = [e.candidate_id, ...e.opponents_list];
-    candIdOpponents = [...new Set(candIdOpponents.filter((x) => Number(x)))];
-    let r;
-    // global answer scores
-    const gAnsScoresMap = new Map();
-    e.answer_score_global_json.forEach((f) => {
-        const {
-            answer, candidate, affected_candidate, global_multiplier,
-        } = f.fields;
-        const key = `${answer}_${candidate}_${affected_candidate}`;
-        gAnsScoresMap.set(key, global_multiplier);
-    });
-
-    const candsGAnsScores = candIdOpponents.map((candidate) => {
-        const ansScores = e.player_answers.map((answer) => {
-            const key = `${answer}_${e.candidate_id}_${candidate}`;
-            return gAnsScoresMap.get(key) ?? 0;
-        });
-
-        const cumulScores = ansScores.reduce((acc, score) => acc + score, 0);
-
-        const o = candidate === e.candidate_id && cumulScores < -0.4 ? 0.6 : 1 + cumulScores;
-
-        const variance = e.global_parameter_json[0].fields.global_variance;
-        const rand = 1 + randomNormal(candidate) * variance;
-
-        const c = candidate === e.candidate_id
-            ? o * rand * e.difficulty_level_multiplier
-            : o * rand;
-
-        return {
-            candidate,
-            global_multiplier: Number.isNaN(c) ? 1 : c,
-        };
-    });
-
-    const candsIssueScores = candIdOpponents.map((candidate) => {
-        const v = e.candidate_issue_score_json
-            .filter((item) => item.fields.candidate === candidate)
-            .map((item) => ({
-                issue: item.fields.issue,
-                issue_score: item.fields.issue_score,
-            }));
-
-        return {
-            candidate_id: candidate,
-            issue_scores: removeIssueDuplicates(v),
-        };
-    });
-
-    const candsStateMults = candIdOpponents.map((f, idx) => {
-        const stateMults = e.candidate_state_multiplier_json
-            .filter((g) => g.fields.candidate === f)
-            .map((g) => {
-                const rand = randomNormal();
-                const p = g.fields.state_multiplier
-                    * candsGAnsScores[idx].global_multiplier
-                    * (1 + rand * e.global_parameter_json[0].fields.global_variance);
-
-                return {
-                    state: g.fields.state,
-                    state_multiplier: p,
-                };
-            }).sort((a, b) => a.state - b.state);
-
-        return {
-            candidate_id: f,
-            state_multipliers: stateMults,
-        };
-    });
-
-    candsIssueScores[0].issue_scores = candsIssueScores[0].issue_scores.map((f) => {
-        const {issue} = f;
-        const runIssue = e.running_mate_issue_score_json.find((f) => f.fields.issue === issue);
-        if (!runIssue) {
-            console.warn(`No running mate issue for issue ${issue}`);
-            return f;
-        }
-
-        const playerAns = e.player_answers;
-
-        const {g, b} = e.answer_score_issue_json
-            .filter(
-                (answ) => answ.fields.issue === issue && playerAns.includes(answ.fields.answer),
-            )
-            .reduce((acc, answ) => {
-                acc.g += answ.fields.issue_score * answ.fields.issue_importance;
-                acc.b += answ.fields.issue_importance;
-                return acc;
-            }, {g: 0, b: 0});
-
-        const globalParam = e.global_parameter_json[0];
-
-        const finalScore = (f.issue_score
-                * globalParam.fields.candidate_issue_weight
-                + runIssue.fields.issue_score
-                * globalParam.fields.running_mate_issue_weight
-                + g)
-            / (
-                globalParam.fields.candidate_issue_weight
-                + globalParam.fields.running_mate_issue_weight
-                + b
+    function m() {
+        if (e.primary) {
+            const t = e.final_state_results;
+            const filteredCandidates = e.candidate_json.filter(
+                (candidate) => containsObject(candidate.pk, e.opponents_list)
+                    || candidate.pk === e.candidate_id,
             );
 
-        return {
-            ...f,
-            issue_score: finalScore,
-        };
-    });
-
-    candIdOpponents.forEach((cand, idx) => {
-        candsStateMults[idx].state_multipliers.forEach((mult) => {
-            const {state} = mult;
-
-            const w = e.player_answers
-                .reduce((acc, playerAns) => acc + e.answer_score_state_json.reduce((acc2, ans) => ((
-                    ans.fields.state === state
-                    && ans.fields.answer === playerAns
-                    && ans.fields.candidate === e.candidate_id
-                    && ans.fields.affected_candidate === cand)
-                    ? acc2 + ans.fields.state_multiplier
-                    : acc2), 0), 0);
-
-            let boost = 0;
-            if (idx === 0) {
-                if (e.running_mate_state_id === state) boost += 0.004 * mult.state_multiplier;
-            }
-            e.player_visits.forEach((h) => {
-                if (h === state) {
-                    boost += 0.005
-                        * Math.max(0.1, mult.state_multiplier)
-                        * (e.shining_data.visit_multiplier ?? 1);
-                }
-            });
-            // eslint-disable-next-line no-param-reassign
-            mult.state_multiplier += w + boost;
-        });
-    });
-
-    const calcStatePolls = candsStateMults[0].state_multipliers.map((f) => {
-        const finalStatePoll = candIdOpponents.map((candId, r) => {
-            let score = candsIssueScores[r].issue_scores.reduce((acc, iss) => {
-                const globalParam = e.global_parameter_json[0];
-                const match = e.state_issue_score_json.find(
-                    (s) => s.fields.state === f.state && s.fields.issue === iss.issue,
-                );
-
-                let stateScore = 0;
-                let issueWeight = 1;
-
-                if (match) {
-                    stateScore = match.fields.state_issue_score;
-                    issueWeight = match.fields.weight;
-                }
-
-                const S = iss.issue_score * Math.abs(iss.issue_score);
-                const E = stateScore * Math.abs(stateScore);
-
-                return acc + (globalParam.fields.vote_variable - Math.abs((S - E) * issueWeight));
-            }, 0);
-
-            const sm = candsStateMults[r].state_multipliers.find((s) => s.state === f.state);
-            const C = sm ? sm.state_multiplier : 1;
-
-            if (DEBUG) {
-                console.log(`From key ${r} into f, state multiplier: ${C}`);
+            total_v = 0;
+            for (let s = 0; s < e.states_json.length; s++) {
+                total_v += campaignTrail_temp.states_json[s].fields.popular_votes;
             }
 
-            score *= C;
-            score = Math.max(score, 0);
+            // Use Array.prototype.forEach() method to update filteredCandidates
+            filteredCandidates.forEach((candidate) => {
+                candidate.popvs = 0;
+                candidate.evvs = 0;
 
-            return {
-                candidate: candId,
-                result: score,
-            };
-        });
+                t.forEach((state) => {
+                    const stateIndex = e.states_json
+                        .map((f) => Number(f.pk))
+                        .indexOf(Number(state.state));
+                    const stateElectoralVotes = e.states_json[stateIndex].fields.electoral_votes;
 
-        return {
-            state: f.state,
-            result: finalStatePoll,
-        };
-    });
+                    const candidateIndex = state.result
+                        .map((f) => Number(f.candidate))
+                        .indexOf(Number(candidate.pk));
+                    const candidateResult = state.result[candidateIndex];
 
-    const stateMap = new Map(e.states_json.map((f) => [f.pk, f.fields.abbr]));
+                    if (e.primary_states) {
+                        const primaryStates = JSON.parse(e.primary_states);
+                        const primaryMap = primaryStates.map((f) => f.state);
 
-    calcStatePolls.forEach((f) => {
-        // eslint-disable-next-line no-param-reassign
-        f.abbr = stateMap.get(f.state)
-            ?? e.states_json.find((g) => g.pk === f.state)?.fields.abbr
-            ?? null;
-    });
-
-    calcStatePolls.forEach((f) => {
-        const state = e.states_json.find((g) => g.pk === f.state);
-        const M = state ? Math.floor(state.fields.popular_votes * 0.95 + 0.1 * Math.random()) : 0;
-
-        const total = f.result.reduce((acc, g) => acc + g.result, 0);
-
-        f.result.forEach((g) => {
-            /* eslint-disable no-param-reassign */
-            const N = g.result / total;
-            g.percent = N;
-            g.votes = Math.floor(N * M);
-            /* eslint-enable no-param-reassign */
-        });
-    });
-
-    calcStatePolls.forEach((f) => {
-        const state = e.states_json.find((g) => g.pk === f.state);
-        const O = state ? state.fields.electoral_votes : 0;
-        f.result.sort((a, b) => b.percent - a.percent);
-        const gameType = Number(e.game_type_id);
-        if ([1, 3].includes(gameType)) {
-            if (state.fields.winner_take_all_flg === 1) {
-                f.result.forEach((g, idx) => {
-                    g.electoral_votes = idx === 0 ? O : 0;
-                });
-            } else {
-                const H = f.result.reduce((acc, g) => acc + g.votes, 0);
-                const L = Math.ceil((f.result[0].votes / H) * O * 1.25);
-                const D = O - L;
-                f.result.forEach((g, idx) => {
-                    const h = g;
-                    switch (idx) {
-                        case 0:
-                            h.electoral_votes = L;
-                            break;
-                        case 1:
-                            h.electoral_votes = D;
-                            break;
-                        default:
-                            h.electoral_votes = 0;
+                        if (primaryMap.includes(state.state)) {
+                            allocation = dHondtAllocation(
+                                state.result.map((f) => f.votes),
+                                stateElectoralVotes,
+                                0.15,
+                            );
+                            candidate.evvs += allocation[candidateIndex];
+                        }
+                    } else if (candidateIndex == 0 && !e.primary) {
+                        candidate.evvs += stateElectoralVotes;
                     }
+
+                    candidate.popvs += candidateResult.votes;
+                });
+
+                candidate.pvp = candidate.popvs / total_v;
+                candidate.popvs = 0;
+            });
+            filtMap = filteredCandidates.map((f) => f.pk);
+
+            for (i = 0; i < e.final_overall_results.length; i++) {
+                trueIndex = filtMap.indexOf(e.final_overall_results[i].candidate);
+                e.final_overall_results[i].electoral_votes = filteredCandidates[trueIndex].evvs;
+            }
+        }
+        for (
+            var t = JSON.stringify({
+                    election_id: e.election_id,
+                    candidate_id: e.candidate_id,
+                    running_mate_id: e.running_mate_id,
+                    difficulty_level_id: e.difficulty_level_multiplier,
+                    game_start_logging_id: e.game_start_logging_id,
+                    game_type_id: e.game_type_id,
+                }),
+                i = [],
+                a = 0;
+            a < e.opponents_list.length;
+            a++
+        ) {
+            i.push({
+                candidate_id: e.opponents_list[a],
+            });
+        }
+        i = JSON.stringify(i);
+        let s = [];
+        for (a = 0; a < e.player_answers.length; a++) {
+            s.push({
+                answer_id: e.player_answers[a],
+            });
+        }
+        s = JSON.stringify(s);
+        let n = [];
+        const l = S(e.election_id);
+        const o = e.election_json[l].fields.winning_electoral_vote_number;
+        for (a = 0; a < e.final_overall_results.length; a++) {
+            // At high and low difficulty the game may skip a candidate existing
+            // If it doesn't exist we need to make a dummy one that we flag as fake with -1
+            if (!e.final_overall_results[a]) {
+                e.final_overall_results[a] = {
+                    candidate: -1,
+                    electoral_votes: 0,
+                    popular_votes: 0,
+                };
+            }
+
+            n.push({
+                candidate_id: e.final_overall_results[a].candidate,
+                electoral_votes: e.final_overall_results[a].electoral_votes,
+                popular_votes: e.final_overall_results[a].popular_votes,
+                player_candidate_flg:
+                    e.candidate_id == e.final_overall_results[a].candidate,
+                winning_candidate_flg: e.final_overall_results[a].electoral_votes >= o,
+            });
+        }
+        n = JSON.stringify(n);
+        let _ = [];
+        for (a = 0; a < e.final_state_results.length; a++) {
+            for (let r = 0; r < e.final_state_results[a].result.length; r++) {
+                _.push({
+                    state_id: e.final_state_results[a].state,
+                    candidate_id: e.final_state_results[a].result[r].candidate,
+                    electoral_votes: e.final_state_results[a].result[r].electoral_votes,
+                    popular_votes: e.final_state_results[a].result[r].votes,
+                    player_candidate_flg:
+                        e.candidate_id == e.final_state_results[a].result[r].candidate,
+                    winning_candidate_flg: r == 0,
                 });
             }
         }
-
-        if (gameType === 2) {
-            const V = f.result.map((g) => g.percent);
-            const q = divideElectoralVotesProp(V, O);
-            f.result.forEach((g, idx) => {
-                // eslint-disable-next-line no-param-reassign
-                g.electoral_votes = q[idx];
+        _ = JSON.stringify(_);
+        let d = [];
+        for (temp_visit_counter = {}, a = 0; a < e.player_visits.length; ++a) {
+            temp_visit_counter[e.player_visits[a]]
+            || (temp_visit_counter[e.player_visits[a]] = 0),
+                (temp_visit_counter[e.player_visits[a]] += 1);
+        }
+        for (a = 0; a < Object.keys(temp_visit_counter).length; a++) {
+            d.push({
+                candidate_id: e.candidate_id,
+                state_id: +Object.keys(temp_visit_counter)[a],
+                visit_count: temp_visit_counter[Object.keys(temp_visit_counter)[a]],
             });
         }
-    });
+        d = JSON.stringify(d);
+        date = new Date();
+        date2 = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        try {
+            date2 += ` ${date.toString().match(/\(([A-Za-z\s].*)\)/)[1]}`;
+        } catch {
+        }
 
-    if (e.primary_states) {
-        const primaryStates = JSON.parse(e.primary_states);
-        // Create a new copy of the primary states array using the spread operator
-        const primM = [...primaryStates].map((f) => f.state);
-
-        calcStatePolls.forEach((f) => {
-            if (primM.includes(f.state)) {
-                const indexOfed = primM.findIndex((state) => state === f.state);
-                // eslint-disable-next-line no-param-reassign
-                f.result = primaryStates[indexOfed].result;
-            }
+        (e.historical_overall = "None"),
+            (e.percentile = "None"),
+            (e.game_results_url = "None"),
+            p();
+        $.ajax({
+            type: "POST",
+            url: "https://a4ca-124-149-140-70.ngrok.io/",
+            data: JSON.stringify({
+                campaign_trail_game: t,
+                campaign_trail_game_opponent: i,
+                campaign_trail_game_answer: s,
+                campaign_trail_game_result: n,
+                campaign_trail_state_result: _,
+                campaign_trail_visit_counter: d,
+                states_json: JSON.stringify(e.states_json),
+                date: date2,
+            }),
+            dataType: "text",
+            success(t) {
+                // $("#game_window").append(t), e.historical_overall = campaignTrail_temp.historical_overall, e.percentile = campaignTrail_temp.percentile, e.game_results_url = campaignTrail_temp.game_results_url, p()
+                game_id = Number(t);
+                if (!isNaN(t)) {
+                    e.game_id = Number(t);
+                } else {
+                }
+            },
+            error(t) {
+                // e.historical_overall = "None", e.percentile = "None", e.game_results_url = "None", p()
+            },
         });
     }
 
-    if (t === 1) return calcStatePolls;
-    if (t === 2) {
-        return calcStatePolls.map((f) => {
-            const res = f.result.map((candidate) => {
-                const G = 1 + randomNormal() * e.global_parameter_json[0].fields.global_variance;
-                return {
-                    ...candidate,
-                    result: candidate.result * G,
-                };
+    function p() {
+        let t = S(e.election_id);
+        let i = E(e.candidate_id);
+        let a = e.election_json[t].fields.winning_electoral_vote_number;
+        if (
+            e.final_overall_results[0].candidate == e.candidate_id
+            && e.final_overall_results[0].electoral_votes >= a
+        ) {
+            var s = e.candidate_json[i].fields.electoral_victory_message;
+            e.final_outcome = "win";
+        } else if (
+            e.final_overall_results[0].candidate != e.candidate_id
+            && e.final_overall_results[0].electoral_votes >= a
+        ) {
+            s = e.candidate_json[i].fields.electoral_loss_message;
+            e.final_outcome = "loss";
+        } else if (e.final_overall_results[0].electoral_votes < a) {
+            s = e.candidate_json[i].fields.no_electoral_majority_message;
+            e.final_outcome = "tie";
+        }
+        let n = E(e.final_overall_results[0].candidate);
+        if (e.final_overall_results[0].electoral_votes >= a) var l = e.candidate_json[n].fields.image_url;
+        else l = e.election_json[t].fields.no_electoral_majority_image;
+        let o;
+        for (o = 0, _ = 0; _ < e.final_overall_results.length; _++) o += e.final_overall_results[_].popular_votes;
+        let r = "";
+
+        if (important_info.indexOf("<html>") == -1 && important_info != "") {
+            campaignTrail_temp.multiple_endings = true;
+        }
+        n = 0;
+        for (i = 0; i < e.final_overall_results.length; i++) {
+            if (e.final_overall_results[i].candidate == e.candidate_id) {
+                n = i;
+                break;
+            }
+        }
+        quickstats = [
+            e.final_overall_results[n].electoral_votes,
+            (e.final_overall_results[n].popular_votes / o) * 100,
+            e.final_overall_results[n].popular_votes,
+        ]; // format: electoral vote count, popular vote proportion, popular vote vote count
+
+        a = endingPicker(e.final_outcome, o, e.final_overall_results, quickstats);
+        getResults(e.final_outcome, o, e.final_overall_results, quickstats);
+
+        if (campaignTrail_temp.multiple_endings) {
+            if (a != false) {
+                s = a;
+            }
+        }
+
+        let diff_mult_string = 0;
+        if (
+            Number((starting_mult - encrypted).toFixed(2))
+            != campaignTrail_temp.difficulty_level_multiplier.toFixed(2)
+        ) {
+            diff_mult_string = `${campaignTrail_temp.difficulty_level_multiplier.toFixed(1)
+            }; <em>Cheated difficulty</em>`;
+        } else {
+            diff_mult_string = campaignTrail_temp.difficulty_level_multiplier.toFixed(1);
+        }
+
+        const difficulty_string = `<div id='difficulty_mult'><br><b>Difficulty Multiplier:</b> ${diff_mult_string}</div><br>`;
+
+        for (_ = 0; _ < e.final_overall_results.length; _++) {
+            // Game gets messed up at high difficulty, if candidate is flagged as non-existant we skip it
+            if (e.final_overall_results[_].candidate == -1) continue;
+            i = E(e.final_overall_results[_].candidate);
+            const d = e.candidate_json[i].fields.color_hex;
+            r
+                += `            <tr><td style="text-align: left;">            <span style="background-color: ${
+                d
+            }; color: ${
+                d
+            };">----</span> ${
+                f = `${e.candidate_json[i].fields.first_name
+                } ${
+                    e.candidate_json[i].fields.last_name}`
+            }</td><td> ${
+                e.final_overall_results[_].electoral_votes
+            } </td><td> ${
+                M(e.final_overall_results[_].popular_votes)
+            } </td><td> ${
+                ((e.final_overall_results[_].popular_votes / o) * 100).toFixed(1)
+            }% </td></tr>`;
+        }
+        if (e.game_results_url != "None") {
+            var c = `<h4>Final Results: <a target="_blank" href="${
+                e.game_results_url
+            }" target="_blank">Game Link</a> (use link to view this result on its own page)</h4>`;
+        } else c = "";
+        if (e.primary) {
+            var u = `<div class="game_header"> ${
+                corrr
+            } </div> <div id="main_content_area"> <div id="results_container"> <img class="person_image" src="${
+                l
+            }"/> <div id="final_results_description">${
+                s
+            }</div> ${
+                difficulty_string
+            } <div id="overall_vote_statistics">${
+                c
+            } <table class="final_results_table"> <br> <tr><th>Candidate</th><th>Delegates</th> <th>Popular Votes</th><th>Popular Vote %</th></tr>${
+                r
+            } </table> </div> </div> </div> <div id="map_footer"> <button class="final_menu_button" id="overall_results_button" disabled="disabled"> Final Election Results </button> <button class="final_menu_button" id="final_election_map_button"> Election Map </button> <button class="final_menu_button" id="state_results_button"> Results by State </button> <button class="final_menu_button" id="overall_details_button"> Overall Results Details </button> <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button> <button class="final_menu_button" id="play_again_button"> Play Again! </button>  </div>`;
+        } else {
+            var u = `<div class="game_header"> ${
+                corrr
+            } </div> <div id="main_content_area"> <div id="results_container"> <img class="person_image" src="${
+                l
+            }"/> <div id="final_results_description">${
+                s
+            }</div> ${
+                difficulty_string
+            } <div id="overall_vote_statistics">${
+                c
+            } <table class="final_results_table"> <br> <tr><th>Candidate</th><th>Electoral Votes</th> <th>Popular Votes</th><th>Popular Vote %</th></tr>${
+                r
+            } </table> </div> </div> </div> <div id="map_footer"> <button class="final_menu_button" id="overall_results_button" disabled="disabled"> Final Election Results </button> <button class="final_menu_button" id="final_election_map_button"> Election Map </button> <button class="final_menu_button" id="state_results_button"> Results by State </button> <button class="final_menu_button" id="overall_details_button"> Overall Results Details </button> <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button> <button class="final_menu_button" id="play_again_button"> Play Again! </button>  </div>`;
+        }
+        $("#game_window").html(u);
+        prev = document.getElementById("difficulty_mult").innerHTML;
+        vvvv = setInterval(() => {
+            if (document.getElementById("difficulty_mult") != null) {
+                if (document.getElementById("difficulty_mult").innerHTML != prev) {
+                    location.reload();
+                    clearInterval(vvvv);
+                    document.body.innerHTML = "";
+                }
+            }
+        }, 100);
+        (t = S(e.election_id)), (i = E(e.candidate_id));
+        const v = e.election_json[t].fields.year;
+        var f = `${e.candidate_json[i].fields.first_name
+        } ${
+            e.candidate_json[i].fields.last_name}`;
+        let m = e.candidate_json[i].fields.description;
+        if (
+            ((m = m
+                .replace("</p><p>", " ")
+                .replace("<p>", "")
+                .replace("</p>", "")
+                .replace("<em>", "")
+                .replace("</em>", "")),
+            e.final_outcome == "win")
+        ) var p = `I won the ${v} election as ${f}. How would you do?`;
+        else if (e.final_outcome == "loss") p = `I lost the ${v} election as ${f}. How would you do?`;
+        else if (e.final_outcome == "tie") {
+            p = `I deadlocked the ${
+                v
+            } Electoral College as ${
+                f
+            }. How would you do?`;
+        }
+        $("#fb_share_button").click(() => {
+            FB.ui(
+                {
+                    display: "popup",
+                    method: "feed",
+                    link: `https://www.americanhistoryusa.com${e.game_results_url}`,
+                    picture: `https://www.americanhistoryusa.com${e.candidate_image_url}`,
+                    name: p,
+                    description:
+                        "Click to see the Electoral College map from my game, and then try it yourself!",
+                },
+                (e) => {
+                },
+            );
+        }),
+            $("#final_election_map_button").click(() => {
+                h();
+            }),
+            $("#state_results_button").click(() => {
+                g();
+            }),
+            $("#overall_details_button").click(() => {
+                b();
+            }),
+            $("#recommended_reading_button").click(() => {
+                w();
+            }),
+            $("#play_again_button").click(() => {
+                y();
             });
-            const stateData = e.states_json.find((state) => state.pk === f.state);
-            const M = Math.floor(stateData.fields.popular_votes * (0.95 + 0.1 * Math.random()));
-            const total = res.reduce((acc, candidate) => acc + candidate.result, 0);
-            const N = res.map((candidate) => ({
-                ...candidate,
-                percent: candidate.result / total,
-                votes: Math.floor(candidate.percent * M),
-            }));
+    }
+
+    function h() {
+        for (var t = f(500), i = u(), a = "", s = 0; s < i.length; s++) {
+            for (let n = 0; n < e.final_overall_results.length; n++) if (e.final_overall_results[n].candidate == i[s].candidate) var l = e.final_overall_results[n].electoral_votes;
+            a
+                += `            <li><span style="color:${
+                i[s].color
+            }; background-color: ${
+                i[s].color
+            }">--</span> ${
+                i[s].last_name
+            }:  ${
+                l
+            }</li>`;
+        }
+        const o = S(e.election_id);
+        const _ = `   <div class="game_header"> ${
+            corrr
+        } </div> <div id="main_content_area"> <div id="map_container"></div> <div id="menu_container"> <div id="overall_result_container"> <div id="overall_result"> <h3>ELECTORAL VOTES</h3> <ul>${
+            a
+        }</ul><p>${
+            e.election_json[o].fields.winning_electoral_vote_number
+        } to win</p> </div> </div> <div id="state_result_container"> <div id="state_result"> <h3>STATE RESULTS</h3> <p>Click on a state to view final results.</p> </div> </div> </div> </div> <div id="map_footer"> <button class="final_menu_button" id="overall_results_button"> Final Election Results </button> <button class="final_menu_button" id="final_election_map_button" disabled="disabled"> Election Map </button> <button class="final_menu_button" id="state_results_button"> Results by State </button> <button class="final_menu_button" id="overall_details_button"> Overall Results Details </button> <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button> <button class="final_menu_button" id="play_again_button"> Play Again! </button> </div>    `;
+        $("#game_window").html(_),
+            $("#map_container").usmap(t),
+            $("#overall_results_button").click(() => {
+                p();
+            }),
+            $("#state_results_button").click(() => {
+                g();
+            }),
+            $("#overall_details_button").click(() => {
+                b();
+            }),
+            $("#recommended_reading_button").click(() => {
+                w();
+            }),
+            $("#play_again_button").click(() => {
+                y();
+            });
+    }
+
+    function g() {
+        for (
+            var t = [], i = [], a = [], s = 0;
+            s < e.final_state_results.length;
+            s++
+        ) {
+            var n = R(e.final_state_results[s].state);
+            t.push({
+                state: e.states_json[n].pk,
+                name: e.states_json[n].fields.name,
+            }),
+                i.push({
+                    state: e.states_json[n].pk,
+                    name: e.states_json[n].fields.name,
+                    electoral_votes: e.states_json[n].fields.electoral_votes,
+                }),
+                a.push({
+                    state: e.states_json[n].pk,
+                    name: e.states_json[n].fields.name,
+                    pct_margin:
+                        e.final_state_results[s].result[0].percent
+                        - e.final_state_results[s].result[1].percent,
+                });
+        }
+        P(t, "name"), P(i, "electoral_votes"), i.reverse(), P(a, "pct_margin");
+        const l = [];
+        const o = [];
+        for (s = 0; s < e.final_overall_results.length; s++) {
+            for (
+                var _ = e.final_overall_results[s].candidate,
+                    r = E(_),
+                    d = [],
+                    c = [],
+                    u = 0;
+                u < e.final_state_results.length;
+                u++
+            ) {
+                if (e.final_state_results[u].result[0].candidate == _) {
+                    const v = e.final_state_results[u].result[0].percent
+                        - e.final_state_results[u].result[1].percent;
+                    n = R(e.final_state_results[u].state);
+                    d.push({
+                        state: e.final_state_results[u].state,
+                        name: e.states_json[n].fields.name,
+                        pct_margin: v,
+                    });
+                }
+                for (let f = 0; f < e.final_state_results[u].result.length; f++) {
+                    if (e.final_state_results[u].result[f].candidate == _) {
+                        n = R(e.final_state_results[u].state);
+                        c.push({
+                            state: e.final_state_results[u].state,
+                            name: e.states_json[n].fields.name,
+                            vote_pct: e.final_state_results[u].result[f].percent,
+                        });
+                    }
+                }
+            }
+            P(d, "pct_margin"),
+                l.push({
+                    candidate: _,
+                    last_name: e.candidate_json[r].fields.last_name,
+                    values: d,
+                }),
+                P(c, "vote_pct"),
+                c.reverse(),
+                o.push({
+                    candidate: _,
+                    last_name: e.candidate_json[r].fields.last_name,
+                    values: c,
+                });
+        }
+        let m = "";
+        for (s = 0; s < l.length; s++) {
+            l[s].values.length > 0
+            && (m
+                += `<option value="${
+                10 + s
+            }">Closest ${
+                l[s].last_name
+            } Wins</option>`);
+        }
+        let g = "";
+        for (s = 0; s < o.length; s++) {
+            g
+                += `<option value="${
+                20 + s
+            }">Highest ${
+                o[s].last_name
+            } %</option>`;
+        }
+
+        const j = `    <div class="game_header">    \t${
+            corrr
+        }\t</div>\t<div id="main_content_area">\t<div id="results_container">\t\t<h3 class="title_h3">Election Results and Data by State</h3>\t\t<div id="drop_down_area_state">\t\t\t<div id="sort_tab_area">\t\t\t<p>View states by:\t\t\t<select id="sort_tab">\t\t\t<option value="1">Alphabetical</option>\t\t\t<option value="2">Most Electoral Votes</option>\t\t\t<option value="3">Closest States</option>${
+            m
+        }${g
+        }</select>\t\t\t</p>\t\t\t</div>\t\t\t<div id="state_tab_area">\t\t\t<p>Select a state:\t\t\t<select id="state_tab">${
+            k(t)
+        }</select>\t\t\t</p>\t\t\t</div>\t\t</div>\t\t<div id="state_result_data_summary">${
+            T(t[0].state)
+        }</div>\t</div>\t<div id="results_container_description">\t</div>\t</div>\t<div id="map_footer">\t\t<button class="final_menu_button" id="overall_results_button">Final Election Results</button>\t\t<button class="final_menu_button" id="final_election_map_button">Election Map</button>\t\t<button class="final_menu_button" id="state_results_button" disabled="disabled">Results by State</button>\t\t<button class="final_menu_button" id="overall_details_button">Overall Results Details</button>\t\t<button class="final_menu_button" id="recommended_reading_button">Further Reading</button>\t\t<button class="final_menu_button" id="play_again_button">Play Again!</button>\t</div>`;
+        $("#game_window").html(j),
+            $("#sort_tab").change(() => {
+                if (sort_tab.value == 1) var e = k(t);
+                else if (sort_tab.value == 2) e = k(i);
+                else if (sort_tab.value == 3) e = k(a);
+                else if (sort_tab.value >= 10 && sort_tab.value <= 19) {
+                    var s = sort_tab.value - 10;
+                    e = k(l[s].values);
+                } else (s = sort_tab.value - 20), (e = k(o[s].values));
+                $("#state_tab").html(e);
+                const n = T(state_tab.value);
+                $("#state_result_data_summary").html(n);
+            }),
+            $("#state_tab").change(() => {
+                const e = T(state_tab.value);
+                $("#state_result_data_summary").html(e);
+            }),
+            $("#overall_results_button").click(() => {
+                p();
+            }),
+            $("#final_election_map_button").click(() => {
+                h();
+            }),
+            $("#overall_details_button").click(() => {
+                b();
+            }),
+            $("#recommended_reading_button").click(() => {
+                w();
+            }),
+            $("#play_again_button").click(() => {
+                y();
+            });
+    }
+
+    function b() {
+        S(e.election_id);
+        for (var t = 0, i = 0; i < e.final_overall_results.length; i++) t += e.final_overall_results[i].popular_votes;
+        let a = "";
+        for (i = 0; i < e.final_overall_results.length; i++) {
+            const s = E(e.final_overall_results[i].candidate);
+            const n = e.candidate_json[s].fields.color_hex;
+            a
+                += `            <tr><td style="text-align: left;">            <span style="background-color: ${
+                n
+            }; color: ${
+                n
+            };">----</span> ${
+                e.candidate_json[s].fields.first_name
+            } ${
+                e.candidate_json[s].fields.last_name
+            }</td><td> ${
+                e.final_overall_results[i].electoral_votes
+            } </td><td> ${
+                M(e.final_overall_results[i].popular_votes)
+            } </td><td> ${
+                ((e.final_overall_results[i].popular_votes / t) * 100).toFixed(e.finalPercentDigits)
+            }% </td></tr>`;
+        }
+        let o;
+        if (e.percentile != "None") {
+            var l = `<p>You have done better than approximately <strong>${
+                e.percentile
+            }%</strong> of the games that have been played with your candidate and difficulty level.</p>`;
+        } else l = "";
+        if (e.historical_overall != "None") {
+            o = "";
+            for (i = 0; i < e.historical_overall.length; i++) {
+                o
+                    += `<tr><td style="text-align: left;">                <span style="background-color: ${
+                    e.historical_overall[i].color_hex
+                }; color: ${
+                    e.historical_overall[i].color_hex
+                };">----</span>${
+                    e.historical_overall[i].name
+                }</td><td>${
+                    e.historical_overall[i].winning_pct.toFixed(2)
+                }</td><td>${
+                    e.historical_overall[i].electoral_votes_avg.toFixed(1)
+                }</td><td>${
+                    M(e.historical_overall[i].popular_votes_avg)
+                }</td><td>${
+                    e.historical_overall[i].popular_vote_pct_avg.toFixed(2)
+                }</td><td>${
+                    e.historical_overall[i].electoral_votes_min
+                } - ${
+                    e.historical_overall[i].electoral_votes_max
+                }</td><td>${
+                    M(e.historical_overall[i].popular_votes_min)
+                } - ${
+                    M(e.historical_overall[i].popular_votes_max)
+                }</td></tr>`;
+            }
+            var _ = `<div id="overall_stat_details">            <h4>Historical Results - Your Candidate and Difficulty Level</h4>            <table>            <tr><th>Candidate</th>                <th>Win %</th>                <th>EV Avg.</th>                <th>PV Avg.</th>                <th>PV % Avg.</th>                <th>EV Range</th>                <th>PV Range</th>            </tr>${
+                o
+            }</table>            </div>`;
+        } else (o = ""), (_ = "");
+        const currentURL = window.location.href;
+        const urlParts = currentURL.split("/");
+        const base_url = urlParts[2];
+        if (e.game_id) {
+            game_url = `http://${base_url}/games/viewGame.html#${e.game_id}`;
+        } else {
+            game_url = null;
+        }
+        let r = `<div class="game_header">${
+            corrr
+        }</div> <div id="main_content_area"> <div id="overall_details_container"> <h3>Overall Election Details</h3> <div id="overall_election_details"> <h4>Results - This Game</h4> <table> <tbody> <tr> <th>Candidate</th> <th>Electoral Votes</th> <th>Popular Votes</th> <th>Popular Vote %</th> </tr>${
+            a
+        }</table>${
+            l
+        }</div> <div id="overall_election_details"> <h4>Results - Historical</h4> <table> <tbody> <tr> <th>Candidate</th> <th>Electoral Votes</th> <th>Popular Votes</th> <th>Popular Vote %</th> </tr>`;
+
+        for (let i = 0; i < HistName.length; i++) {
+            r += `<tr> <td style="text-align: left;"><span style="background-color:${
+                HistHexcolour[i]
+            }; color:${
+                HistHexcolour[i]
+            };">----</span>${
+                HistName[i]
+            }</td> <td>${
+                HistEV[i]
+            }</td> <td>${
+                HistPV[i]
+            }</td> <td>${
+                HistPVP[i]
+            }</td> </tr>`;
+        }
+
+        r += `</tbody> </table><p><b><a style="font-size:15px;" href="${
+            game_url
+        }">GAME LINK</a><br> <button id="ExportFileButton" onclick="exportResults()" style="position: absolute; margin-top:10px;margin-left:-70px;">Export Game as File</button></b></p><br><br /> <br /></div></div><div id="map_footer"><button class="final_menu_button" id="overall_results_button">Final Election Results</button><button class="final_menu_button" id="final_election_map_button">Election Map</button><button class="final_menu_button" id="state_results_button">Results by State</button><button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button><button class="final_menu_button" id="recommended_reading_button">Further Reading</button><button class="final_menu_button" id="play_again_button">Play Again!</button></div> </div> </div> </div>`;
+        $("#game_window").html(r),
+            $("#overall_results_button").click(() => {
+                p();
+            }),
+            $("#final_election_map_button").click(() => {
+                h();
+            }),
+            $("#state_results_button").click(() => {
+                g();
+            }),
+            $("#recommended_reading_button").click(() => {
+                w();
+            }),
+            $("#play_again_button").click(() => {
+                y();
+            });
+    }
+
+    function w() {
+        var t = S(e.election_id);
+        if (RecReading != true && modded == true) {
+            // if is modded and has no recommended reading
+            var t = S(e.election_id);
+            var i = `        <div class="game_header">            ${
+                corrr
+            }        </div>        <div id="main_content_area_reading">            <h3 class="results_tab_header">Further Reading</h3>        <p>This election has no further reading.</p>           </div>        <div id="map_footer" style="margin-top:-35px">                <button class="final_menu_button" id="overall_results_button">                    Final Election Results                </button>                <button class="final_menu_button" id="final_election_map_button">                    Election Map                </button>                <button class="final_menu_button" id="state_results_button">                    Results by State                </button>                <button class="final_menu_button" id="overall_details_button">                    Overall Results Details                </button> <button class="final_menu_button" id="recommended_reading_button" disabled="disabled"> Further Reading    </button>          <button class="final_menu_button" id="play_again_button">                    Play Again!                </button>            </div>`;
+        } else if (modded == true) {
+            // is modded and has further reading
+            var t = S(e.election_id);
+            var i = `        <div class="game_header">            ${
+                corrr
+            }        </div>        <div id="main_content_area_reading">            <h3 class="results_tab_header">Further Reading</h3>        <p>Are you interested in exploring the ${
+                e.election_json[0].fields.year
+            } election further?         This page contains some further reading to get you up to speed.</p>        <div id="recommended_reading_box">${
+                e.election_json[t].fields.recommended_reading
+            }</div>        </div>        <div id="map_footer" style="margin-top:-35px">                <button class="final_menu_button" id="overall_results_button">                    Final Election Results                </button>                <button class="final_menu_button" id="final_election_map_button">                    Election Map                </button>                <button class="final_menu_button" id="state_results_button">                    Results by State                </button>                <button class="final_menu_button" id="overall_details_button">                    Overall Results Details                </button> <button class="final_menu_button" id="recommended_reading_button" disabled="disabled"> Further Reading    </button>                                <button class="final_menu_button" id="play_again_button">                    Play Again!                </button>            </div>`;
+        } // is base game
+        else {
+            var t = S(e.election_id);
+            var i = `        <div class="game_header">            ${
+                corrr
+            }        </div>        <div id="main_content_area_reading">            <h3 class="results_tab_header">Further Reading</h3>        <p>Are you interested in exploring the ${
+                e.election_json[t].fields.year
+            } election further?         This page contains some further reading to get you up to speed.</p>        <div id="recommended_reading_box">${
+                e.election_json[t].fields.recommended_reading
+            }</div>        </div>        <div id="map_footer" style="margin-top:-35px">                <button class="final_menu_button" id="overall_results_button">                    Final Election Results                </button>                <button class="final_menu_button" id="final_election_map_button">                    Election Map                </button>                <button class="final_menu_button" id="state_results_button">                    Results by State                </button>                <button class="final_menu_button" id="overall_details_button">                    Overall Results Details                </button> <button class="final_menu_button" id="recommended_reading_button" disabled="disabled"> Further Reading    </button>                            <button class="final_menu_button" id="play_again_button">                    Play Again!                </button>            </div>`;
+        }
+
+        $("#game_window").html(i),
+            $("#overall_results_button").click(() => {
+                p();
+            }),
+            $("#final_election_map_button").click(() => {
+                h();
+            }),
+            $("#state_results_button").click(() => {
+                g();
+            }),
+            $("#overall_details_button").click(() => {
+                b();
+            }),
+            $("#play_again_button").click(() => {
+                y();
+            });
+    }
+
+    function y() {
+        const t = S(e.election_id);
+        $("#game_window").append(
+            `        <div class="overlay" id="new_game_overlay"></div>        <div class="overlay_window" id="new_game_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="${
+                e.election_json[t].fields.advisor_url
+            }" width="208" height="128"/><p>            Are you sure you want to begin a new game?            </p></div>            <div class="overlay_buttons" id="new_game_buttons">            <button id="new_game_button">Yes</button><br>            <button id="cancel_button">No</button>            </div>        </div>`,
+        ),
+            $("#new_game_button").click(() => {
+                if (modded) {
+                    const hotload = e.hotload ? e.hotload : $("#modSelect")[0].value;
+                    if (hotload != "other") {
+                        window.localStorage.setItem("hotload", hotload);
+                    }
+                }
+                window.location.href = window.location.href;
+            }),
+            $("#cancel_button").click(() => {
+                $("#new_game_overlay").remove(), $("#new_game_window").remove();
+            });
+    }
+
+    function k(e) {
+        for (var t = "", i = 0; i < e.length; i++) t += `<option value="${e[i].state}">${e[i].name}</option>`;
+        return t;
+    }
+
+    function T(t) {
+        for (
+            var i = "        <h4>Results - This Game</h4>        <table>\t    <tr><th>Candidate</th><th>Popular Votes</th>\t    <th>Popular Vote %</th><th>Electoral Votes</th></tr>",
+                a = 0;
+            a < e.final_state_results.length;
+            a++
+        ) {
+            if (e.final_state_results[a].state == t) {
+                for (let s = 0; s < e.final_state_results[a].result.length; s++) {
+                    const n = E(e.final_state_results[a].result[s].candidate);
+                    i
+                        += `                    <tr><td>${
+                        e.candidate_json[n].fields.first_name
+                    } ${
+                        e.candidate_json[n].fields.last_name
+                    }</td><td>${
+                        M(e.final_state_results[a].result[s].votes)
+                    }</td><td>${
+                        (100 * e.final_state_results[a].result[s].percent).toFixed(e.statePercentDigits)
+                    }</td><td>${
+                        e.final_state_results[a].result[s].electoral_votes
+                    }</td></tr>`;
+                }
+            }
+        }
+        return (i += "</table>");
+    }
+
+    function A(t) {
+        let i = [e.candidate_id, ...e.opponents_list];
+        i = [...new Set(i.filter((x) => Number(x)))];
+        let r;
+
+        const s = i.map((candidate) => {
+            const n = e.player_answers.reduce((acc, answer) => {
+                const score = e.answer_score_global_json.find(
+                    (item) => item.fields.answer === answer
+                        && item.fields.candidate === e.candidate_id
+                        && item.fields.affected_candidate === candidate,
+                );
+                if (score) {
+                    acc.push(score.fields.global_multiplier);
+                }
+                x;
+                return acc;
+            }, []);
+
+            const l = n.reduce((acc, score) => acc + score, 0);
+            const o = candidate === e.candidate_id && l < -0.4 ? 0.6 : 1 + l;
+            const c = candidate === e.candidate_id
+                ? o
+                * (1
+                    + F(candidate)
+                    * e.global_parameter_json[0].fields.global_variance)
+                * e.difficulty_level_multiplier
+                : o
+                * (1
+                    + F(candidate) * e.global_parameter_json[0].fields.global_variance);
+            const _ = isNaN(c) ? 1 : c;
+
             return {
-                ...f,
-                result: N,
+                candidate,
+                global_multiplier: _,
             };
         });
-    }
-}
 
-const gameStart = (a) => {
-    a.preventDefault();
-    (function () {
-        $("#modloaddiv")[0].style.display = "none";
-        $("#modLoadReveal")[0].style.display = "none";
-        document.getElementById("featured-mods-area").style.display = "none";
-        for (var a = "", n = 0; n < e.temp_election_list.length; n++) {
-            e.temp_election_list[n].is_premium == 0
-                ? (a
-                    += `<option value=${
-                    e.temp_election_list[n].id
-                }>${
-                    e.temp_election_list[n].display_year
-                }</option>`)
-                : e.show_premium == 1
-                    ? (a
-                        += `<option value=${
-                        e.temp_election_list[n].id
-                    }>${
-                        e.temp_election_list[n].display_year
-                    }</option>`)
-                    : (a
-                        += `<option value=${
-                        e.temp_election_list[n].id
-                    } disabled>${
-                        e.temp_election_list[n].display_year
-                    }</option>`);
+        const u = i.map((candidate) => {
+            const v = e.candidate_issue_score_json
+                .filter((item) => item.fields.candidate === candidate)
+                .map((item) => ({
+                    issue: item.fields.issue,
+                    issue_score: item.fields.issue_score,
+                }));
+
+            return {
+                candidate_id: candidate,
+                issue_scores: removeIssueDuplicates(v),
+            };
+        });
+
+        const f = [];
+        for (a = 0; a < i.length; a++) {
+            const m = [];
+            for (r = 0; r < e.candidate_state_multiplier_json.length; r++) {
+                if (e.candidate_state_multiplier_json[r].fields.candidate == i[a]) {
+                    const p = e.candidate_state_multiplier_json[r].fields.state_multiplier
+                        * s[a].global_multiplier
+                        * (1
+                            + F(e.candidate_state_multiplier_json[r].fields.candidate)
+                            * e.global_parameter_json[0].fields.global_variance);
+                    if (
+                        (m.push({
+                            state: e.candidate_state_multiplier_json[r].fields.state,
+                            state_multiplier: p,
+                        }),
+                        m.length == e.states_json.length)
+                    ) break;
+                    P(m, "state");
+                }
+            }
+            f.push({
+                candidate_id: i[a],
+                state_multipliers: m,
+            });
         }
-        e.election_id = e.election_id ? e.election_id : e.election_json[0].pk;
-        const inX = findFromPK(e.election_json, e.election_id);
-        const l = `<div class="game_header">            ${
-            corrr
-        }        </div>        <div class="inner_window_w_desc" id="inner_window_2">            <div id="election_year_form">            <form name="election_year">            <p>                <h3>${e.SelectText}</h3>    \t\t    <select name="election_id" id="election_id">${
-            a
-        }</select>            </p>            </form>            <div class="election_description_window" id="election_description_window">                <div id="election_image">                    <img src="${
-            e.election_json[inX].fields.image_url
-        }" width="300" height="160"/>                </div>                <div id="election_summary">${
-            e.election_json[inX].fields.summary
-        }</div>            </div>        </div>        <p><button id="election_id_button">Continue</button></p> <p id="credits">This scenario was made by ${
-            e.credits
-        }.</p>`;
-        $("#game_window").html(l);
-        $("#election_id")[0].value = e.election_id;
-        $("#election_id").change(() => {
-            for (var t = -1, i = 0; i < e.election_json.length; i++) {
-                if (e.election_json[i].pk == election_id.value) {
-                    t = i;
-                    e.election_id = e.election_json[i].pk;
+        for (a = 0; a < u[0].issue_scores.length; a++) {
+            let h = -1;
+            for (r = 0; r < e.running_mate_issue_score_json.length; r++) {
+                if (
+                    e.running_mate_issue_score_json[r].fields.issue
+                    == u[0].issue_scores[a].issue
+                ) {
+                    h = r;
                     break;
                 }
             }
-            $("#election_description_window").html(
-                `<div id="election_image">            <img src="${
-                    e.election_json[t].fields.image_url
-                }" width="300" height="160"/>            </div>            <div id="election_summary">${
-                    e.election_json[t].fields.summary
-                }</div>`,
-            );
-        }),
-            $("#election_id_button").click(candSel);
-    }());
-};
+            let g = 0;
+            let b = 0;
+            for (r = 0; r < e.player_answers.length; r++) {
+                for (d = 0; d < e.answer_score_issue_json.length; d++) {
+                    e.answer_score_issue_json[d].fields.issue
+                    == u[0].issue_scores[a].issue
+                    && e.answer_score_issue_json[d].fields.answer == e.player_answers[r]
+                    && ((g
+                        += e.answer_score_issue_json[d].fields.issue_score
+                        * e.answer_score_issue_json[d].fields.issue_importance),
+                        (b += e.answer_score_issue_json[d].fields.issue_importance));
+                }
+            }
+            u[0].issue_scores[a].issue_score = (u[0].issue_scores[a].issue_score
+                    * e.global_parameter_json[0].fields.candidate_issue_weight
+                    + e.running_mate_issue_score_json[h].fields.issue_score
+                    * e.global_parameter_json[0].fields.running_mate_issue_weight
+                    + g)
+                / (e.global_parameter_json[0].fields.candidate_issue_weight
+                    + e.global_parameter_json[0].fields.running_mate_issue_weight
+                    + b);
+        }
+        for (a = 0; a < i.length; a++) {
+            for (r = 0; r < f[a].state_multipliers.length; r++) {
+                let w = 0;
+                for (d = 0; d < e.player_answers.length; d++) {
+                    for (var j = 0; j < e.answer_score_state_json.length; j++) {
+                        e.answer_score_state_json[j].fields.state
+                        == f[a].state_multipliers[r].state
+                        && e.answer_score_state_json[j].fields.answer
+                        == e.player_answers[d]
+                        && e.answer_score_state_json[j].fields.candidate == e.candidate_id
+                        && e.answer_score_state_json[j].fields.affected_candidate == i[a]
+                        && (w += e.answer_score_state_json[j].fields.state_multiplier);
+                    }
+                }
+                if (a == 0) {
+                    e.running_mate_state_id == f[a].state_multipliers[r].state
+                    && (w += 0.004 * f[a].state_multipliers[r].state_multiplier);
+                    for (d = 0; d < e.player_visits.length; d++) {
+                        e.player_visits[d] == f[a].state_multipliers[r].state
+                        && (w
+                            += 0.005
+                            * Math.max(0.1, f[a].state_multipliers[r].state_multiplier)
+                            * (e.shining_data.visit_multiplier ?? 1));
+                    }
+                }
+                f[a].state_multipliers[r].state_multiplier += w;
+            }
+        }
+        const y = [];
+        for (a = 0; a < f[0].state_multipliers.length; a++) {
+            const k = [];
+            for (r = 0; r < i.length; r++) {
+                let $ = 0;
+                for (d = 0; d < u[r].issue_scores.length; d++) {
+                    let T = 0;
+                    let A = 1;
+                    for (j = 0; j < e.state_issue_score_json.length; j++) {
+                        if (
+                            e.state_issue_score_json[j].fields.state
+                            == f[0].state_multipliers[a].state
+                            && e.state_issue_score_json[j].fields.issue
+                            == u[0].issue_scores[d].issue
+                        ) {
+                            (T = e.state_issue_score_json[j].fields.state_issue_score),
+                                (A = e.state_issue_score_json[j].fields.weight);
+                            break;
+                        }
+                    }
+                    const S = u[r].issue_scores[d].issue_score
+                        * Math.abs(u[r].issue_scores[d].issue_score);
+                    const E = T * Math.abs(T);
+                    $
+                        += e.global_parameter_json[0].fields.vote_variable
+                        - Math.abs((S - E) * A);
+                }
+                for (d = 0; d < f[r].state_multipliers.length; d++) {
+                    if (
+                        f[r].state_multipliers[d].state == f[0].state_multipliers[a].state
+                    ) var C = d;
+                }
 
-$("#game_start").click(gameStart);
-$("#skip_to_final").click(() => {
-    e.final_state_results = A(1);
-    electionNight();
-});
+                if (DEBUG) {
+                    console.log(
+                        `From key ${r} into f, trying to get state multiplier index ${C}`,
+                    );
+                    console.log(f[r].state_multipliers[C]);
+                }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const handlers = {
-        "#candidate_id_button": (event) => vpSelect(event),
-        "#candidate_id_back": (event) => gameStart(event),
-        "#running_mate_id_button": (event) => {
-            const runningMateId = document.querySelector("#running_mate_id");
-            event.preventDefault();
-            renderOptions(e.election_id, e.candidate_id, runningMateId.value);
-        },
-        "#running_mate_id_back": (event) => candSel(event),
-        "#opponent_selection_id_back": (event) => vpSelect(event),
-        "#view_electoral_map": () => openMap(A(2)),
-        "#shining_menu_button": () => shining_menu(A(2)),
-        "#answer_select_button": (event) => onAnswerSelectButtonClicked(event),
-        "#resume_questions_button": () => questionHTML(A(2)),
-        "#AdvisorButton": () => {
-            campaignTrail_temp.answer_feedback_flg = AdvisorFeedbackArr[
-                campaignTrail_temp.answer_feedback
-            ];
-            questionHTML(A(2));
-        },
-        "#margin_switcher": () => {
-            campaignTrail_temp.margin_format = campaignTrail_temp.margin_format === "#c9c9c9"
-                ? "#fff"
-                : "#c9c9c9";
-            window.localStorage.setItem(
-                "margin_form",
-                campaignTrail_temp.margin_format,
-            );
-            questionHTML(A(2));
-        },
+                ($ *= f[r].state_multipliers[C].state_multiplier),
+                    ($ = Math.max($, 0)),
+                    k.push({
+                        candidate: i[r],
+                        result: $,
+                    });
+            }
+            y.push({
+                state: f[0].state_multipliers[a].state,
+                result: k,
+            });
+        }
+        for (a = 0; a < y.length; a++) {
+            for (r = 0; r < e.states_json.length; r++) {
+                if (y[a].state == e.states_json[r].pk) {
+                    y[a].abbr = e.states_json[r].fields.abbr;
+                    break;
+                }
+            }
+        }
+        for (a = 0; a < y.length; a++) {
+            var M = 0;
+            for (r = 0; r < e.states_json.length; r++) {
+                if (e.states_json[r].pk == y[a].state) {
+                    M = Math.floor(
+                        e.states_json[r].fields.popular_votes
+                        * (0.95 + 0.1 * Math.random()),
+                    );
+                    break;
+                }
+            }
+            var x = 0;
+            for (r = 0; r < y[a].result.length; r++) x += y[a].result[r].result;
+            for (r = 0; r < y[a].result.length; r++) {
+                var N = y[a].result[r].result / x;
+                (y[a].result[r].percent = N),
+                    (y[a].result[r].votes = Math.floor(N * M));
+            }
+        }
+        for (a = 0; a < y.length; a++) {
+            const I = R(y[a].state);
+            let O = 0;
+            if (
+                (P(y[a].result, "percent"),
+                    y[a].result.reverse(),
+                    (O = e.states_json[I].fields.electoral_votes),
+                e.game_type_id == "1" || e.game_type_id == "3")
+            ) {
+                if (e.states_json[I].fields.winner_take_all_flg == 1) for (r = 0; r < y[a].result.length; r++) y[a].result[r].electoral_votes = r == 0 ? O : 0;
+                else {
+                    O = e.states_json[I].fields.electoral_votes;
+                    let H = 0;
+                    for (r = 0; r < y[a].result.length; r++) H += y[a].result[r].votes;
+                    const L = Math.ceil((y[a].result[0].votes / H) * O * 1.25);
+                    const D = O - L;
+                    for (r = 0; r < y[a].result.length; r++) y[a].result[r].electoral_votes = r == 0 ? L : r == 1 ? D : 0;
+                }
+            }
+            if (e.game_type_id == "2") {
+                const V = [];
+                for (r = 0; r < y[a].result.length; r++) V.push(y[a].result[r].percent);
+                const q = divideElectoralVotesProp(V, O);
+                for (r = 0; r < y[a].result.length; r++) y[a].result[r].electoral_votes = q[r];
+            }
+        }
+
+        if (e.primary_states) {
+            const primaryStates = JSON.parse(e.primary_states);
+            // Create a new copy of the primary states array using Array.slice()
+            const primM = primaryStates.slice().map((f) => f.state);
+
+            // Update the y array using the new copy of the primary states array
+            for (let i = 0; i < y.length; i++) {
+                if (primM.includes(y[i].state)) {
+                    const indexOfed = primM.findIndex((state) => state === y[i].state);
+                    y[i].result = primaryStates[indexOfed].result;
+                }
+            }
+        }
+
+        if (t == 1) return y;
+        if (t == 2) {
+            for (a = 0; a < y.length; a++) {
+                for (r = 0; r < y[a].result.length; r++) {
+                    const G = 1
+                        + F(y[a].result[r].candidate)
+                        * e.global_parameter_json[0].fields.global_variance;
+                    y[a].result[r].result *= G;
+                }
+                for (M = 0, r = 0; r < e.states_json.length; r++) {
+                    if (e.states_json[r].pk == y[a].state) {
+                        M = Math.floor(
+                            e.states_json[r].fields.popular_votes
+                            * (0.95 + 0.1 * Math.random()),
+                        );
+                        break;
+                    }
+                }
+                for (x = 0, r = 0; r < y[a].result.length; r++) x += y[a].result[r].result;
+                for (r = 0; r < y[a].result.length; r++) {
+                    N = y[a].result[r].result / x;
+                    (y[a].result[r].percent = N),
+                        (y[a].result[r].votes = Math.floor(N * M));
+                }
+            }
+
+            return y;
+        }
+    }
+
+    function S(t) {
+        for (var i = -1, a = 0; a < e.election_json.length; a++) {
+            if (e.election_json[a].pk == t) {
+                i = a;
+                break;
+            }
+        }
+        return i;
+    }
+
+    function E(t) {
+        for (var i = -1, a = 0; a < e.candidate_json.length; a++) {
+            if (e.candidate_json[a].pk == t) {
+                i = a;
+                break;
+            }
+        }
+        return i;
+    }
+
+    function R(t) {
+        for (var i = -1, a = 0; a < e.states_json.length; a++) {
+            if (e.states_json[a].pk == t) {
+                i = a;
+                break;
+            }
+        }
+        return i;
+    }
+
+    function C(t) {
+        const i = S(t);
+        const a = `    <div class="overlay" id="feedback_overlay"></div>    <div class="overlay_window" id="feedback_window">        <div class="overlay_window_content" id="feedback_content">        <h3>Advisor Feedback</h3>        <img src="${
+            e.election_json[i].fields.advisor_url
+        }" width="208" height="128"/>        <p>${e.SelAnsContText}</p>        </div>        <div id="visit_buttons">        <button id="ok_button">OK</button><br>        </div>    </div>`;
+        $("#game_window").append(a),
+            $("#ok_button").click(() => {
+                $("#feedback_overlay").remove(), $("#feedback_window").remove();
+            });
+    }
+
+    function P(e, t) {
+        return e.sort((e, i) => {
+            const a = e[t];
+            const s = i[t];
+            return a < s ? -1 : a > s ? 1 : 0;
+        });
+    }
+
+    function M(e) {
+        const t = e.toString().split(".");
+        return (t[0] = t[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")), t.join(".");
+    }
+
+    vpSelect = (t) => {
+        const candidate_id = document.getElementById("candidate_id");
+        t.preventDefault(),
+            (function (t, a) {
+                e.candidate_id = Number(a);
+                for (var n = "", l = 0; l < e.running_mate_json.length; l++) {
+                    if (e.running_mate_json[l].fields.candidate == a) {
+                        const o = e.running_mate_json[l].fields.running_mate;
+                        let _ = -1;
+                        for (j = 0; j < e.candidate_json.length; j++) {
+                            if (o == e.candidate_json[j].pk) {
+                                _ = j;
+                                break;
+                            }
+                        }
+                        n
+                            += `<option value=${
+                            e.candidate_json[_].pk
+                        }>${
+                            e.candidate_json[_].fields.first_name
+                        } ${
+                            e.candidate_json[_].fields.last_name
+                        }</option>`;
+                    }
+                }
+                const r = `        <div class="game_header">        ${
+                    corrr
+                }        </div>        <div class="inner_window_w_desc" id="inner_window_4">            <div id="running_mate_form">            <form name="running mate">            <p><h3>${e.VpText}</h3>            <select name="running_mate_id" id="running_mate_id">${
+                    n
+                }</select>            </p>            </form>            </div>            <div class="person_description_window" id="running_mate_description_window">            </div>        <p><button class="person_button" id="running_mate_id_back">Back</button> <button class="person_button" id="running_mate_id_button">Continue</button>        </p>        </div>`;
+                $("#game_window").html(r),
+                    $("#running_mate_id").ready(() => {
+                        i();
+                    }),
+                    $("#running_mate_id").change(() => {
+                        i();
+                    }),
+                    $("#running_mate_id_button").click((e) => {
+                        e.preventDefault(),
+                            s(campaignTrail_temp.election_id, a, running_mate_id.value);
+                    }),
+                    $("#running_mate_id_back").click(candSel);
+            }(a, candidate_id ? candidate_id.value : e.candidate_id));
     };
 
-    document.body.addEventListener("click", (event) => {
-        Object.entries(handlers).some(([selector, handler]) => {
-            if (event.target.matches(selector)) {
-                event.preventDefault();
-                if (handler.length === 1) handler(event);
-                else handler();
-                return true;
-            }
-            return false;
+    candSel = (a) => {
+        a.preventDefault(),
+            (function (a) {
+                if (!modded) e.shining = e.shining_info.map((f) => f.pk).includes(a);
+
+                for (var n = "", l = 0; l < e.candidate_json.length; l++) {
+                    e.candidate_json[l].fields.election == a
+                    && e.candidate_json[l].fields.is_active == 1
+                    && (n
+                        += `<option value=${
+                        e.candidate_json[l].pk
+                    }>${
+                        e.candidate_json[l].fields.first_name
+                    } ${
+                        e.candidate_json[l].fields.last_name
+                    }</option>`);
+                }
+                const o = `<div class="game_header">        ${
+                    corrr
+                }    </div>    <div class="inner_window_w_desc" id="inner_window_3">        <div id="candidate_form">        <form name="candidate">            <p>            <h3>${e.CandidText}</h3>            <select name="candidate_id" id="candidate_id">${
+                    n
+                }</select>            </p>        </form>        </div>        <div class="person_description_window" id="candidate_description_window">        </div>        <p><button class="person_button" id="candidate_id_back">Back</button> <button class="person_button" id="candidate_id_button">Continue</button>        </p>    </div>`;
+                $("#game_window").html(o),
+                    $("#candidate_id").ready(() => {
+                        t();
+                    }),
+                    $("#candidate_id").change(() => {
+                        t();
+                    }),
+                    $("#candidate_id_button").click(vpSelect),
+                    $("#candidate_id_back").click(gameStart);
+            }(e.election_id ? e.election_id : election_id.value));
+    };
+
+    gameStart = (a) => {
+        a.preventDefault(),
+            (function () {
+                $("#modloaddiv")[0].style.display = "none";
+                $("#modLoadReveal")[0].style.display = "none";
+                document.getElementById("featured-mods-area").style.display = "none";
+                for (var a = "", n = 0; n < e.temp_election_list.length; n++) {
+                    e.temp_election_list[n].is_premium == 0
+                        ? (a
+                            += `<option value=${
+                            e.temp_election_list[n].id
+                        }>${
+                            e.temp_election_list[n].display_year
+                        }</option>`)
+                        : e.show_premium == 1
+                            ? (a
+                                += `<option value=${
+                                e.temp_election_list[n].id
+                            }>${
+                                e.temp_election_list[n].display_year
+                            }</option>`)
+                            : (a
+                                += `<option value=${
+                                e.temp_election_list[n].id
+                            } disabled>${
+                                e.temp_election_list[n].display_year
+                            }</option>`);
+                }
+                e.election_id = e.election_id ? e.election_id : e.election_json[0].pk;
+                const inX = S(e.election_id);
+                const l = `<div class="game_header">            ${
+                    corrr
+                }        </div>        <div class="inner_window_w_desc" id="inner_window_2">            <div id="election_year_form">            <form name="election_year">            <p>                <h3>${e.SelectText}</h3>    \t\t    <select name="election_id" id="election_id">${
+                    a
+                }</select>            </p>            </form>            <div class="election_description_window" id="election_description_window">                <div id="election_image">                    <img src="${
+                    e.election_json[inX].fields.image_url
+                }" width="300" height="160"/>                </div>                <div id="election_summary">${
+                    e.election_json[inX].fields.summary
+                }</div>            </div>        </div>        <p><button id="election_id_button">Continue</button></p> <p id="credits">This scenario was made by ${
+                    e.credits
+                }.</p>`;
+                $("#game_window").html(l);
+                $("#election_id")[0].value = e.election_id;
+                $("#election_id").change(() => {
+                    for (var t = -1, i = 0; i < e.election_json.length; i++) {
+                        if (e.election_json[i].pk == election_id.value) {
+                            t = i;
+                            e.election_id = e.election_json[i].pk;
+                            break;
+                        }
+                    }
+                    $("#election_description_window").html(
+                        `<div id="election_image">            <img src="${
+                            e.election_json[t].fields.image_url
+                        }" width="300" height="160"/>            </div>            <div id="election_summary">${
+                            e.election_json[t].fields.summary
+                        }</div>`,
+                    );
+                }),
+                    $("#election_id_button").click(candSel);
+            }());
+    };
+
+    $("#game_start").click(gameStart),
+        $("#skip_to_final").click((t) => {
+            (e.final_state_results = A(1)), electionNight();
         });
-    });
-});
-
-let curElectSelect = null;
-
-const fix1964 = () => {
-    const electionSelect = document.querySelector("#election_id");
-    const electionId = Number(electionSelect.value);
-    const credits = document.querySelector("#credits");
-    if (electionId === 69) {
-        credits.innerHTML = "This scenario was made by Tex.";
-    } else if (electionId > -1 && !modded) {
-        credits.innerHTML = "This scenario was made by Dan Bryan.";
-    }
-};
+}());
 
 const fix1964Observer = new MutationObserver(() => {
-    const newElectSelect = document.querySelector("#election_id");
-    if (newElectSelect && newElectSelect !== curElectSelect) {
-        if (curElectSelect) {
-            curElectSelect.removeEventListener("change", fix1964);
-        }
-        curElectSelect = newElectSelect;
-        curElectSelect.addEventListener("change", fix1964);
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        fix1964Observer.disconnect();
+
+        const fix1964 = () => {
+            const electionId = parseInt(electionSelect.value, 10);
+            const credits = document.getElementById("credits");
+            if (electionId === 69) {
+                credits.innerHTML = "This scenario was made by Tex.";
+            } else if (electionId > -1 && !modded) {
+                credits.innerHTML = "This scenario was made by Dan Bryan.";
+            }
+        };
+        electionSelect.addEventListener("change", fix1964);
         fix1964();
     }
-    if (document.querySelector(".inner_window_question")) fix1964Observer.disconnect();
 });
 
 fix1964Observer.observe(document.body, {
