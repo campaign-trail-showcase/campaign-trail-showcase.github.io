@@ -468,13 +468,19 @@ function endingPicker(out, totv, aa, quickstats) {
         important_info = "return false";
     }
 
-    if (important_info != "") {
-        return new Function("out", "totv", "aa", "quickstats", important_info)(
-            out,
-            totv,
-            aa,
-            quickstats,
-        );
+    if (important_info !== "") {
+        return (function() {
+            var endingPicker; 
+            eval(important_info);
+
+            // if the mod defined 'endingPicker', we call it
+            if (typeof endingPicker === 'function') {
+                return endingPicker(out, totv, aa, quickstats);
+            } else {
+                // for mods that that are just a block of code
+            }
+
+        }).call(this);
     }
 
     return "ERROR";
