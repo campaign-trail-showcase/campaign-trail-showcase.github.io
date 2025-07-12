@@ -1955,9 +1955,11 @@ function descHTML(descWindow, id) {
     const isRM = descWindow === "#running_mate_description_window";
     const idx = isRM ? "running_mate_summary" : "candidate_summary";
     const desc = isRM ? "description_as_running_mate" : "description";
+    const imageId = isRM ? "running_mate_image" : "candidate_image";
+
     $(descWindow).html(
         `
-        <div class="person_image" id="candidate_image">
+        <div class="person_image" id="${imageId}">
             <img src="${candObj.fields.image_url}" width="210" height="250"/>
         </div>
         <div class="person_summary" id="${idx}">
