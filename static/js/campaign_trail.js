@@ -3023,7 +3023,7 @@ function m() {
 }
 
 function overallResultsHtml() {
-    // const t = findFromPK(e.election_json, e.election_id);
+    const t = e.election_json.find((f) => f.pk === e.election_id);
     const candObj = e.candidate_json.find((f) => f.pk === e.candidate_id);
     const electJson = e.election_json.find((f) => f.pk === e.election_id);
     const overallResults = e.final_overall_results;
@@ -3043,7 +3043,7 @@ function overallResultsHtml() {
     const n = e.candidate_json.find((f) => f.pk === overallResults[0].candidate);
     let l;
     if (overallResults[0].electoral_votes >= winningNum) l = n.fields.image_url;
-    else l = e.election_json[t].fields.no_electoral_majority_image;
+    else l = t.fields.no_electoral_majority_image;
     const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
 
     if (Number(important_info.indexOf("<html>")) === -1 && important_info !== "") {
