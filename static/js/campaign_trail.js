@@ -477,8 +477,6 @@ function endingPicker(out, totv, aa, quickstats) {
         } else {
             // for mods that that are just a block of code
         }
-
-        }
     }
 
     return "ERROR";
