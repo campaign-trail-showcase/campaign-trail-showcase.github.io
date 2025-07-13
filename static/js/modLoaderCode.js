@@ -21,6 +21,9 @@ let nameFilter = "";
 
 let mode = ALL;
 
+let currentPage = 1;
+const modsPerPage = 12;
+
 let allAch = {};
 
 let ratedMods = JSON.parse(localStorage.getItem("ratedMods")) ?? {};
@@ -29,12 +32,14 @@ let modBeingPlayed = "";
 
 const namesOfModsFromValue = {};
 
+const customThemesButton = document.getElementById("customThemesButton");
+
 if (localStorage.getItem("customModBoxThemesEnabled") === null) {
   localStorage.setItem("customModBoxThemesEnabled", "true");
 }
 
-document.getElementById("customThemesButton").innerText =
-  localStorage.getItem("customModBoxThemesEnabled") == "true"
+customThemesButton.innerText =
+  localStorage.getItem("customModBoxThemesEnabled") === "true"
     ? "Turn Off Mod Box Themes"
     : "Turn On Mod Box Themes";
 
@@ -43,7 +48,7 @@ let customModBoxThemes = {};
 function toggleModBoxThemes() {
   localStorage.setItem(
     "customModBoxThemesEnabled",
-    localStorage.getItem("customModBoxThemesEnabled") == "true"
+    localStorage.getItem("customModBoxThemesEnabled") === "true"
       ? "false"
       : "true",
   );
@@ -51,25 +56,25 @@ function toggleModBoxThemes() {
 }
 
 function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
-  if (rawModText == null) {
+  if (!rawModText) {
     return null;
   }
-
-  let codeSnippet = null;
-  let temp = {};
 
   if (!rawModText.includes(includes)) {
     return null;
   }
 
-  let possibleEndIndices = getAllIndexes(rawModText, end);
+  const possibleEndIndices = getAllIndexes(rawModText, end);
+  let codeSnippet = null;
+  let temp = {};
 
   for (let i = 0; i < possibleEndIndices.length; i++) {
     codeSnippet = rawModText.slice(
       rawModText.indexOf(start),
       possibleEndIndices[i] + 1,
     );
-    if (codeSnippet.length <= 0) {
+
+    if (!codeSnippet || codeSnippet.length <= 0) {
       continue;
     }
 
@@ -80,13 +85,13 @@ function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
       codeSnippet = null;
     }
 
-    if (codeSnippet != null) {
+    if (codeSnippet) {
       break;
     }
   }
 
-  if (codeSnippet == null) {
-    console.log("Could not extract " + includes + " from " + nameOfMod);
+  if (!codeSnippet) {
+    console.log(`Could not extract ${includes} from ${nameOfMod}`);
   }
 
   return temp;
@@ -100,15 +105,13 @@ function getCustomTheme(rawModText, nameOfMod) {
     rawModText,
     nameOfMod,
   );
-  if (temp == null) {
-    return;
+  if (temp?.modBoxTheme) {
+    customModBoxThemes[nameOfMod] = temp.modBoxTheme;
   }
-
-  customModBoxThemes[nameOfMod] = temp.modBoxTheme;
 }
 
 function getAllAchievements(rawModText, nameOfMod) {
-  temp = extractFromCode1(
+  const temp = extractFromCode1(
     "campaignTrail_temp.achievements = {",
     ".achievements = {",
     "}",
@@ -116,22 +119,17 @@ function getAllAchievements(rawModText, nameOfMod) {
     nameOfMod,
   );
 
-  if (temp == null) {
-    return;
+  if (temp?.achievements) {
+    allAch[nameOfMod] = temp.achievements;
   }
-
-  allAch[nameOfMod] = temp.achievements;
 }
 
 function extractElectionDetails(rawModText, nameOfMod) {
-  if (rawModText == null) {
+  if (!rawModText) {
     return null;
   }
 
-  let codeSnippet = null;
-  let temp = {};
-  let start = "";
-  let end = "";
+  let start, end;
 
   if (rawModText.includes(".election_json = JSON.parse(")) {
     start = ".election_json = JSON.parse(";
@@ -140,18 +138,21 @@ function extractElectionDetails(rawModText, nameOfMod) {
     start = ".election_json = [";
     end = "]";
   } else {
-    console.log("Could not extract metadata for mod: " + nameOfMod);
+    console.log(`Could not extract metadata for mod: ${nameOfMod}`);
     return null;
   }
 
-  let possibleEndIndices = getAllIndexes(rawModText, end);
+  const possibleEndIndices = getAllIndexes(rawModText, end);
+  let codeSnippet = null;
+  let temp = {};
 
   for (let i = 0; i < possibleEndIndices.length; i++) {
     codeSnippet = rawModText.slice(
       rawModText.indexOf(start),
       possibleEndIndices[i] + 1,
     );
-    if (codeSnippet.length <= 0) {
+
+    if (!codeSnippet || codeSnippet.length <= 0) {
       continue;
     }
 
@@ -161,58 +162,45 @@ function extractElectionDetails(rawModText, nameOfMod) {
       codeSnippet = null;
     }
 
-    if (codeSnippet != null) {
+    if (codeSnippet) {
       break;
     }
   }
 
-  if (codeSnippet == null || Object.keys(temp).length == 0) {
-    console.log("Could not extract from " + nameOfMod);
+  if (!codeSnippet || Object.keys(temp).length === 0) {
+    console.log(`Could not extract from ${nameOfMod}`);
   }
 
   return temp;
 }
 
-$(document).ready(async function () {
+$(document).ready(async () => {
   const modNameParam = getUrlParam("modName");
 
-  favoriteMods =
-    localStorage.getItem("favoriteMods") != null
-      ? localStorage.getItem("favoriteMods")
-      : new Set();
+  favoriteMods = new Set(
+    localStorage.getItem("favoriteMods")?.split(",") || [],
+  );
+  customMods = new Set(localStorage.getItem("customMods")?.split(",") || []);
 
-  if (typeof favoriteMods == "string") {
-    favoriteMods = new Set(favoriteMods.split(","));
-  }
-
-  customMods =
-    localStorage.getItem("customMods") != null
-      ? localStorage.getItem("customMods")
-      : new Set();
-
-  if (typeof customMods == "string") {
-    let customArr = customMods != "" ? customMods.split(",") : [];
-    customMods = new Set(customArr);
-  }
-
-  var originalOptions = null;
+  const $modSelect = $("#modSelect");
+  const originalOptions = $modSelect.find("option").clone();
 
   $(".tagCheckbox").on("change", filterEntries);
 
   await loadEntries();
-  let mods = document.getElementById("modSelect").childNodes;
+  const mods = document.getElementById("modSelect").childNodes;
 
   let tagsFound = new Set();
 
   // Get tags from normal mods and add optional custom tag
-  mods.forEach(function (mod) {
+  mods.forEach((mod) => {
+    if (!mod.dataset || !mod.dataset.tags) return;
     const tags = mod.dataset.tags.split(" ");
-    for (let i = 0; i < tags.length; i++) {
-      if (tags[i].length == 0) {
-        continue;
+    tags.forEach((tag) => {
+      if (tag.length > 0) {
+        tagsFound.add(tag);
       }
-      tagsFound.add(tags[i]);
-    }
+    });
 
     if (customMods.size > 0) {
       tagsFound.add("Custom");
@@ -223,83 +211,80 @@ $(document).ready(async function () {
   let modsLoaded = [];
 
   // Set up from normal mods
-  mods.forEach(async function (mod) {
-    if (mod.value == "other" || (modNameParam != null && modNameParam != mod.value)) {
+  const modPromises = Array.from(mods).map(async (mod) => {
+    if (mod.value === "other" || (modNameParam && modNameParam !== mod.value)) {
       return;
     }
 
-    const modRes = await fetch("../static/mods/" + mod.value + "_init.html");
-    const rawModText = await modRes.text();
+    try {
+      const modRes = await fetch(`../static/mods/${mod.value}_init.html`);
+      const rawModText = await modRes.text();
 
-    const temp = extractElectionDetails(rawModText, mod.value);
-    getAllAchievements(rawModText, mod.value);
-    getCustomTheme(rawModText, mod.value);
+      const temp = extractElectionDetails(rawModText, mod.value);
+      getAllAchievements(rawModText, mod.value);
+      getCustomTheme(rawModText, mod.value);
 
-    let imageUrl;
-    let description;
+      let imageUrl = "";
+      let description = "";
+      let loaded = true;
 
-    let loaded = true;
-
-    if (temp && temp.election_json && temp.election_json.length > 0) {
-      imageUrl =
-        temp.election_json[0].fields.site_image ??
-        temp.election_json[0].fields.image_url;
-      description =
-        temp.election_json[0].fields.site_description ??
-        temp.election_json[0].fields.summary;
-    } else {
-      loaded = false;
-      console.log("Missing or cannot read Code 1 for mod: " + mod.value);
-      imageUrl = "";
-      description = `<h1 style="color:red">COULD NOT GET CODE 1 PLEASE ALERT DEV!</h1>`;
-    }
-
-    if (!loaded) {
-      allModsLength--;
-      return;
-    }
-
-    modsLoaded.push({ mod: mod, imageUrl: imageUrl, description: description });
-
-    if (modsLoaded.length == allModsLength) {
-      modsLoaded.sort(modCompare);
-      for (let i = 0; i < modsLoaded.length; i++) {
-        const modData = modsLoaded[i];
-        const modView = createModView(
-          modData.mod,
-          modData.imageUrl,
-          modData.description,
-        );
-        document.getElementById("mod-grid").appendChild(modView);
-
-        if (
-          modData.mod.dataset.awardimageurls &&
-          modData.mod.dataset.awardimageurls.split(", ").length > 1
-        ) {
-          cycleAwards(
-            modView.querySelector(".mod-trophy"),
-            modData.mod.dataset.awardimageurls.split(", "),
-            0,
-          );
-        }
-
-        modList.push(modView);
+      if (temp?.election_json?.length > 0 && temp.election_json[0].fields) {
+        imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
+        description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
+      } else {
+        loaded = false;
+        console.log(`Missing or cannot read Code 1 for mod: ${mod.value}`);
+        description = `<h1 style="color:red">COULD NOT GET CODE 1 PLEASE ALERT DEV!</h1>`;
       }
-      updateModViews();
+
+      if (!loaded) {
+        allModsLength--;
+        return;
+      }
+
+      modsLoaded.push({ mod: mod, imageUrl: imageUrl, description: description });
+    } catch (error) {
+      console.error(`Error loading mod ${mod.value}:`, error);
+      allModsLength--;
     }
   });
 
+  await Promise.all(modPromises);
+
+  modsLoaded.sort(modCompare);
+  const modGrid = document.getElementById("mod-grid");
+  for (let i = 0; i < modsLoaded.length; i++) {
+    const modData = modsLoaded[i];
+    const modView = createModView(
+      modData.mod,
+      modData.imageUrl,
+      modData.description,
+    );
+    document.getElementById("mod-grid").appendChild(modView);
+
+    if (
+      modData.mod.dataset.awardimageurls &&
+      modData.mod.dataset.awardimageurls.split(", ").length > 1
+    ) {
+      cycleAwards(
+        modView.querySelector(".mod-trophy"),
+        modData.mod.dataset.awardimageurls.split(", "),
+        0,
+      );
+    }
+
+    modList.push(modView);
+  }
+  // updateModViews();
+
   // Set up from custom mods
   for (const customModName of customMods) {
-    rawModText = localStorage.getItem(customModName + "_code1");
+    const rawModText = localStorage.getItem(customModName + "_code1");
 
     const temp = extractElectionDetails(rawModText, customModName);
 
     if (
-      temp == null ||
-      temp.election_json == null ||
-      temp.election_json[0] == null ||
-      temp.election_json[0].fields == null
+      !temp?.election_json?.[0]?.fields
     ) {
       continue;
     }
@@ -307,10 +292,10 @@ $(document).ready(async function () {
     getAllAchievements(rawModText, customModName);
     getCustomTheme(rawModText, customModName);
 
-    let imageUrl =
+    const imageUrl =
       temp.election_json[0].fields.site_image ??
       temp.election_json[0].fields.image_url;
-    let description =
+    const description =
       temp.election_json[0].fields.site_description ??
       temp.election_json[0].fields.summary;
 
@@ -328,8 +313,9 @@ $(document).ready(async function () {
   }
 
   createTagButtons(tagsFound);
+  updateModViews();
 
-  if (modNameParam !== null) {
+  if (modNameParam) {
     loadModFromButton(modNameParam);
   }
 });
@@ -349,7 +335,7 @@ function createModView(mod, imageUrl, description, isCustom) {
   const favText = isFavorite(mod.value) ? UNFAV : FAV;
 
   let theme =
-    localStorage.getItem("customModBoxThemesEnabled") == "true"
+    localStorage.getItem("customModBoxThemesEnabled") === "true"
       ? customModBoxThemes[mod.value]
       : null;
 
@@ -383,7 +369,7 @@ function createModView(mod, imageUrl, description, isCustom) {
 
   modView.id = mod.value;
 
-  getFavsAndPlayCount(mod.value, modView);
+  // getFavsAndPlayCount(mod.value, modView);
 
   return modView;
 }
@@ -431,12 +417,15 @@ function configureRatingButtons(modName, modView) {
   }
 }
 
-async function getFavsAndPlayCount(modName, modView) {
-  if (customMods.has(modName)) return;
+async function getFavsAndPlayCount(modName, modView, force = false) {
+  if (customMods.has(modName) || (modView.dataset.infoLoaded === "true" && !force))
+    return;
+
+  modView.dataset.infoLoaded = "true"; // mark as loading/loaded
 
   try {
     const res = await fetch(
-      "https://intense-lake-78568-f86393a88bcb.herokuapp.com/api/get_mod?modName=" + modName,
+      `https://intense-lake-78568-f86393a88bcb.herokuapp.com/api/get_mod?modName=${modName}`,
       {
         method: "GET",
         headers: {
@@ -452,7 +441,8 @@ async function getFavsAndPlayCount(modName, modView) {
       `<span style="font-weight:bold">${ratingData.playCount ?? 0} PLAYS</span>`;
     modView.dataset.favs = ratingData.favs;
     modView.dataset.playCount = ratingData.playCount ?? 0;
-  } catch {
+  } catch (error) {
+    console.error(`Failed to get mod info for ${modName}:`, error);
     modView.getElementsByClassName("modRating")[0].innerHTML =
       "Failed to get mod info. Try again later.";
     modView.getElementsByClassName("modPlayCount")[0].innerHTML = ``;
@@ -464,17 +454,21 @@ async function getFavsAndPlayCount(modName, modView) {
 async function toggleFav(event, modName, favVal) {
   if (customMods.has(modName)) return;
 
-  await fetch("https://intense-lake-78568-f86393a88bcb.herokuapp.com/api/rate_mod", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ modName: modName, rating: favVal }),
-  });
+  try {
+    await fetch("https://intense-lake-78568-f86393a88bcb.herokuapp.com/api/rate_mod", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ modName: modName, rating: favVal }),
+    });
 
-  const modView = document.getElementById(modName);
-  await getFavsAndPlayCount(modName, modView);
+    const modView = document.getElementById(modName);
+    await getFavsAndPlayCount(modName, modView, true);
+  } catch (error) {
+    console.error(`Failed to toggle favorite for ${modName}:`, error);
+  }
 }
 
 function addCustomModButton() {
@@ -487,17 +481,20 @@ function deleteCustomMod(event, modValue) {
   customMods.delete(modValue);
   localStorage.removeItem(modValue + "_code1");
   localStorage.removeItem(modValue + "_code2");
-  localStorage.setItem("customMods", Array.from(customMods));
-  if (customMods.length == 0) {
+
+  if (customMods.size === 0) {
     localStorage.removeItem("customMods");
+  } else {
+    localStorage.setItem("customMods", Array.from(customMods));
   }
+
   location.reload();
 }
 
 function addCustomMod(code1, code2) {
   const temp = extractElectionDetails(code1, "custom mod being added");
 
-  if (temp == null) {
+  if (!temp) {
     alert("Could not add mod from code provided!");
     return;
   }
@@ -521,7 +518,7 @@ function createTagButtons(tagsFound) {
   const tagsGrid = document.getElementById("tags");
   Array.from(tagsFound)
     .sort()
-    .forEach(function (tag) {
+    .forEach((tag) => {
       const tagButton = document.createElement("div");
 
       tagButton.classList.add("tag-button");
@@ -532,8 +529,8 @@ function createTagButtons(tagsFound) {
       tagsGrid.appendChild(tagButton);
       const checkbox = tagButton.getElementsByTagName("INPUT")[0];
 
-      tagButton.addEventListener("click", function (event) {
-        if (event.target == tagButton) checkbox.click();
+      tagButton.addEventListener("click", (event) => {
+        if (event.target === tagButton) checkbox.click();
       });
 
       tagList.push(checkbox);
@@ -542,6 +539,10 @@ function createTagButtons(tagsFound) {
 }
 
 function updateModViews(event) {
+  if (event) {
+    currentPage = 1; // reset to first page on filter change
+  }
+
   const activeTags = new Set();
   for (let i = 0; i < tagList.length; i++) {
     if (tagList[i].checked) {
@@ -549,50 +550,144 @@ function updateModViews(event) {
     }
   }
 
+  const visibleMods = [];
   for (let i = 0; i < modList.length; i++) {
+    const modView = modList[i];
     let shouldShow = false;
-    const modMode = modList[i].getAttribute("mode");
-    const modTags = modList[i].getAttribute("tags").split(" ");
-    for (let j = 0; j < modTags.length; j++) {
-      const tag = modTags[j];
-      const modName = modList[i].getAttribute("mod-name");
-      const modDisplayName = modList[i].getAttribute("mod-display-name");
-      if (
-        (nameFilter.replace(" ", "") == "" ||
-          modDisplayName.includes(nameFilter) ||
-          modName.includes(nameFilter)) &&
-        activeTags.has(tag) &&
-        (!onlyFavorites || isFavorite(modName)) &&
-        (!year || year.test(modName)) &&
-        (onlyFavorites || mode == ALL || modMode == mode)
-      ) {
-        shouldShow = true;
-        break;
-      }
+    const modMode = modView.getAttribute("mode");
+    const modTags = modView.getAttribute("tags").split(" ");
+    const modName = modView.getAttribute("mod-name");
+    const modDisplayName = modView.getAttribute("mod-display-name");
+
+    if (
+      (nameFilter === "" ||
+        modDisplayName.includes(nameFilter) ||
+        modName.includes(nameFilter)) &&
+      modTags.some(tag => activeTags.has(tag)) &&
+      (!onlyFavorites || isFavorite(modName)) &&
+      (!year || year.test(modName)) &&
+      (onlyFavorites || mode === ALL || modMode === mode)
+    ) {
+      shouldShow = true;
     }
-    modList[i].style.display = shouldShow ? "flex" : "none";
+
+    modView.style.display = "none"; // hide all mods initially
+    if (shouldShow) {
+      visibleMods.push(modView);
+    }
   }
+
+  const modGrid = document.getElementById("mod-grid");
+  let noFavsMessage = document.getElementById("no-favorites-message");
+
+  if (onlyFavorites && visibleMods.length === 0) {
+    if (!noFavsMessage) {
+      noFavsMessage = document.createElement("div");
+      noFavsMessage.id = "no-favorites-message";
+      noFavsMessage.classList.add("no-favorites-message");
+      modGrid.appendChild(noFavsMessage);
+    }
+    noFavsMessage.innerHTML = `You have no favorite mods. Press the ${FAV} button on any mod to see them here!`;
+    noFavsMessage.style.display = "block";
+  } else if (noFavsMessage) {
+    noFavsMessage.style.display = "none";
+  }
+
+  const startIndex = (currentPage - 1) * modsPerPage;
+  const endIndex = startIndex + modsPerPage;
+  const pageMods = visibleMods.slice(startIndex, endIndex);
+
+  pageMods.forEach(modView => {
+    modView.style.display = "flex";
+    // lazy load mod info
+    getFavsAndPlayCount(modView.getAttribute("mod-name"), modView);
+  });
+
+  renderPaginationControls(visibleMods.length);
+}
+
+function renderPaginationControls(totalMods) {
+  let paginationContainer = document.getElementById("pagination-controls");
+  const modGrid = document.getElementById("mod-grid");
+
+  // if the container doesn't exist, create and insert it after the mod grid
+  if (!paginationContainer && modGrid) {
+    paginationContainer = document.createElement("div");
+    paginationContainer.id = "pagination-controls";
+    paginationContainer.style.textAlign = "center";
+    paginationContainer.style.margin = "20px 0";
+    modGrid.parentNode.insertBefore(paginationContainer, modGrid.nextSibling);
+  } else if (!paginationContainer) {
+    // fallback if modGrid also doesn't exist for some reason
+    return;
+  }
+
+  paginationContainer.innerHTML = "";
+  const totalPages = Math.ceil(totalMods / modsPerPage);
+
+  if (totalPages <= 1) {
+    return; // no need for controls if there's only one page or less
+  }
+
+  // previous button
+  const prevButton = document.createElement("button");
+  prevButton.innerText = "Previous";
+  prevButton.disabled = currentPage === 1;
+  prevButton.classList.add("mode-button");
+  prevButton.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      updateModViews();
+    }
+  });
+  paginationContainer.appendChild(prevButton);
+
+  // page numbers
+  const pageInfo = document.createElement("span");
+  pageInfo.innerText = ` Page ${currentPage} of ${totalPages} `;
+  pageInfo.classList.add("pagination-info");
+  paginationContainer.appendChild(pageInfo);
+
+  // next button
+  const nextButton = document.createElement("button");
+  nextButton.innerText = "Next";
+  nextButton.disabled = currentPage === totalPages;
+  nextButton.classList.add("mode-button");
+  nextButton.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      updateModViews();
+    }
+  });
+  paginationContainer.appendChild(nextButton);
 }
 
 function onChangeModSorter(e) {
-  if (e.target.value == "chrono") {
-    sortModViews(modCompare2);
-  } else if (e.target.value == "mostFav") {
-    sortModViews((a, b) => b.dataset.favs - a.dataset.favs);
-  } else if (e.target.value == "leastFav") {
-    sortModViews((a, b) => a.dataset.favs - b.dataset.favs);
-  } else if (e.target.value == "mostPlays") {
-    sortModViews((a, b) => b.dataset.playCount - a.dataset.playCount);
+  const sorter = e.target.value;
+  switch (sorter) {
+    case "chrono":
+      sortModViews(modCompare2);
+      break;
+    case "mostFav":
+      sortModViews((a, b) => b.dataset.favs - a.dataset.favs);
+      break;
+    case "leastFav":
+      sortModViews((a, b) => a.dataset.favs - b.dataset.favs);
+      break;
+    case "mostPlays":
+      sortModViews((a, b) => b.dataset.playCount - a.dataset.playCount);
+      break;
   }
 }
 
 function sortModViews(comparisonFunction) {
   modList.sort(comparisonFunction);
   const modGrid = document.getElementById("mod-grid");
-  modGrid.innerHTML = "";
-  for (let i = 0; i < modList.length; i++) {
-    modGrid.appendChild(modList[i]);
-  }
+  // re-append mods to the grid in a sorted order
+  modList.forEach(modView => modGrid.appendChild(modView));
+  // reset to the first page and update the view to show the sorted results
+  currentPage = 1;
+  updateModViews();
 }
 
 function isFavorite(modName) {
@@ -606,7 +701,7 @@ function setCategory(event, category) {
 
     tab.className = tab.className.replace(" active", "");
 
-    if (tab == event.target) {
+    if (tab === event.target) {
       event.currentTarget.className += " active";
     }
   }
@@ -614,27 +709,33 @@ function setCategory(event, category) {
   if (category instanceof RegExp) {
     year = category;
     onlyFavorites = false;
-  } else if (category == "all") {
+  } else if (category === "all") {
     year = null;
     onlyFavorites = false;
-  } else if (category == "favorites") {
+  } else if (category === "favorites") {
     year = null;
     onlyFavorites = true;
   }
 
+  currentPage = 1; // reset to first page when category changes
   updateModViews();
 }
 
 function toggleFavorite(event, modValue) {
   const inFavorites = isFavorite(modValue);
+  const favText = inFavorites ? FAV : UNFAV; // toggle text *before* updating the set
+
   if (!inFavorites) {
     favoriteMods.add(modValue);
-    event.target.innerText = UNFAV;
     toggleFav(event, modValue, 1);
   } else {
     favoriteMods.delete(modValue);
-    event.target.innerText = FAV;
     toggleFav(event, modValue, -1);
+  }
+
+  const span = event.currentTarget.querySelector("span");
+  if (span) {
+    span.innerText = favText; // update the button text robustly
   }
   localStorage.setItem("favoriteMods", Array.from(favoriteMods));
   updateModViews();
@@ -646,15 +747,11 @@ function loadRandomMod() {
 }
 
 async function loadModFromButton(modValue) {
-  if (modValue == "0000Random_Mod") {
+  if (modValue === "0000Random_Mod") {
     setTimeout(() => updateModViewCount(modValue), 10000);
     loadRandomMod();
     return;
   }
-
-  document.getElementById("goBackButton").style.display = "inline";
-  loadingFromModButton = true;
-  e = campaignTrail_temp;
   if (customMods.has(modValue)) {
     eval(localStorage.getItem(modValue + "_code1"));
     diff_mod = true;
@@ -664,11 +761,16 @@ async function loadModFromButton(modValue) {
       history.replaceState(null, "", "?modName=" + modValue);
     }
 
-    const res = await fetch("../static/mods/" + modValue + "_init.html");
-    const modCode = await res.text();
-    eval(modCode);
-
-    diff_mod = true;
+    try {
+      const res = await fetch(`../static/mods/${modValue}_init.html`);
+      const modCode = await res.text();
+      eval(modCode);
+      diff_mod = true;
+    } catch (error) {
+      console.error(`Failed to load mod ${modValue}:`, error);
+      alert(`Failed to load mod ${modValue}. See console for details.`);
+      return;
+    }
   }
 
   $("#modloaddiv")[0].style.display = "none";
@@ -683,7 +785,7 @@ async function loadModFromButton(modValue) {
   }
 
   const announcement = document.getElementById("announcement");
-  if (announcement !== null) {
+  if (announcement) {
     announcement.style.display = "none";
   }
 
@@ -692,45 +794,59 @@ async function loadModFromButton(modValue) {
 }
 
 async function copyModLink() {
-  const modLink = document.location.href;
+  let modLink = document.location.href;
 
   if (!modLink.includes("?modName")) {
     modLink = modLink + "?modName=" + modBeingPlayed.replaceAll(" ", "%20");
   }
 
-  await window.navigator.clipboard.writeText(modLink);
-  alert("Copied link to clipboard!");
+  try {
+    await window.navigator.clipboard.writeText(modLink);
+    alert("Copied link to clipboard!");
+  } catch (err) {
+    console.error("Failed to copy: ", err);
+    alert("Failed to copy link to clipboard.");
+  }
 }
 
 async function updateModViewCount(modName) {
   if (customMods.has(modName)) return;
 
-  await fetch("https://intense-lake-78568-f86393a88bcb.herokuapp.com/api/play_mod", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ modName: modName }),
-  });
+  try {
+    await fetch("https://intense-lake-78568-f86393a88bcb.herokuapp.com/api/play_mod", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ modName: modName }),
+    });
+  } catch (error) {
+    console.error(`Failed to update play count for ${modName}:`, error);
+  }
 }
 
 function getAllIndexes(arr, val) {
-  var indexes = [],
-    i = -1;
-  while ((i = arr.indexOf(val, i + 1)) != -1) {
-    indexes.push(i);
+  const indexes = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === val) {
+      indexes.push(i);
+    }
   }
   return indexes;
 }
 
 async function loadEntries() {
-  const modList = await fetch("../static/mods/MODLOADERFILE.html");
-
-  $("#modSelect").html(await modList.text());
-  //clone so we don't reduce the list of mods every time a tag is selected
-  originalOptions = $("#modSelect option").clone();
-  filterEntries();
+  try {
+    const modListResponse = await fetch("../static/mods/MODLOADERFILE.html");
+    const modListHTML = await modListResponse.text();
+    $("#modSelect").html(modListHTML);
+    //clone so we don't reduce the list of mods every time a tag is selected
+    originalOptions = $("#modSelect option").clone();
+    filterEntries();
+  } catch (error) {
+    console.error("Failed to load mod entries:", error);
+  }
 }
 
 function filterEntries() {
@@ -772,16 +888,19 @@ function containsAllTags(entryTags, selectedTags) {
 }
 
 function getUrlParam(param) {
-  var url_string = window.location.href; //window.location.href
-  var url = new URL(url_string);
+  const url_string = window.location.href;
+  const url = new URL(url_string);
   return url.searchParams.get(param);
 }
 
 function modCompare2(a, b) {
-  if (a.getAttribute("mod-name") < b.getAttribute("mod-name")) {
+  const nameA = a.getAttribute("mod-name");
+  const nameB = b.getAttribute("mod-name");
+
+  if (nameA < nameB) {
     return -1;
   }
-  if (a.getAttribute("mod-name") > b.getAttribute("mod-name")) {
+  if (nameA > nameB) {
     return 1;
   }
   return 0;

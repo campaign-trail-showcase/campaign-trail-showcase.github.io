@@ -393,6 +393,31 @@
   background-color: rgb(53, 70, 113);
 }
 
+.mode-button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  display: inline-block;
+  margin: 0 15px;
+  padding: 10px 15px;
+  font-weight: bold;
+  vertical-align: middle;
+  background-color: #BFE6FF;
+  color: #000;
+  border-radius: 10px;
+}
+
+.no-favorites-message {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 40px;
+  color: #fff;
+}
+
 .pressed {
   background-color: rgb(53, 70, 113)!important;
 }
