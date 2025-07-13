@@ -837,7 +837,7 @@ async function loadModFromButton(modValue) {
 
   if (!customMods.has(modValue)) {
     document.getElementById("copyLinkButton").style.display = "block";
-    document.getElementById("goBackButton").style.display = "block";
+    document.getElementById("goBackButton").style.display = "inline";
   }
 
   const announcement = document.getElementById("announcement");
