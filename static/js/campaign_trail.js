@@ -2308,43 +2308,46 @@ function renderOptions(electionId, candId, runId) {
             || loadingFromModButton
         ) {
             try {
-                e = campaignTrail_temp;
-                const eArr = e.temp_election_list.findIndex(a => a.id === Number(e.election_id));
-                const candIdx = e.candidate_json.findIndex(a => a.pk === Number(e.candidate_id));
-                const runIdx = e.candidate_json.findIndex(a => a.pk === Number(e.running_mate_id));
-                const year = e.temp_election_list[eArr].display_year;
-                const cand = e.candidate_json[candIdx].fields.last_name;
-                const run = e.candidate_json[runIdx].fields.last_name;
+        // For modded games, skip loading the base scenario code 2
+        // and directly load the mod's code 2
+        e = campaignTrail_temp;
+        const eArr = e.temp_election_list.findIndex(a => a.id === Number(e.election_id));
+        const candIdx = e.candidate_json.findIndex(a => a.pk === Number(e.candidate_id));
+        const runIdx = e.candidate_json.findIndex(a => a.pk === Number(e.running_mate_id));
+        const year = e.temp_election_list[eArr].display_year;
+        const cand = e.candidate_json[candIdx].fields.last_name;
+        const run = e.candidate_json[runIdx].fields.last_name;
 
-                const theorId = `${year}_${cand}${run}`;
-                    // theorId = $("#modSelect")[0].value
+        const theorId = `${year}_${cand}${run}`;
 
-                if (customMod === false) {
-                    evalFromUrl(`../static/mods/${theorId}.html`, () => {
-                        tempFuncO(e);
-                    });
-                } else {
-                    eval(localStorage.getItem(`${customMod}_code2`));
-                    tempFuncO(e);
-                }
-
-                endingUrl = `../static/mods/${theorId}_ending.html`;
-                try {
-                    if (fileExists(endingUrl)) {
-                        const client2 = new XMLHttpRequest();
-                        client2.open("GET", endingUrl);
-                        client2.onreadystatechange = function () {
-                            important_info = client2.responseText;
-                        };
-                        client2.send();
-                    }
-                } catch (err) {
-                    console.error("Error loading code 2", err);
-                }
-            } catch (err) {
-                console.error("Error loading code 2", err);
-            }
+        if (customMod === false) {
+            // Load mod file directly without loading base file first
+            evalFromUrl(`../static/mods/${theorId}.html`, () => {
+                tempFuncO(e);
+            });
         } else {
+            eval(localStorage.getItem(`${customMod}_code2`));
+            tempFuncO(e);
+        }
+
+        // Keep the ending file logic
+        endingUrl = `../static/mods/${theorId}_ending.html`;
+        try {
+            if (fileExists(endingUrl)) {
+                const client2 = new XMLHttpRequest();
+                client2.open("GET", endingUrl);
+                client2.onreadystatechange = function () {
+                    important_info = client2.responseText;
+                };
+                client2.send();
+            }
+        } catch (err) {
+            console.error("Error loading ending file", err);
+        }
+    } catch (err) {
+        console.error("Error loading mod code 2", err);
+    }
+} else {
             // other block case
             $("#game_window").load(aaa, () => {
                 eval($("#codeset2")[0].value);
