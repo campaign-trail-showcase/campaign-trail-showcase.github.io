@@ -3503,24 +3503,27 @@ function overallDetailsHtml() {
     `).join("").trim();
 
     const r = `
-        <div class="game_header">${corrr}</div>
-        <div id="main_content_area">
-            <div id="overall_details_container"><h3>Overall Election Details</h3><div id="overall_election_details">
-                    <h4>Results - This Game</h4>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Candidate</th>
-                                <th>Electoral Votes</th>
-                                <th>Popular Votes</th>
-                                <th>Popular Vote %</th>
-                            </tr>
-                            ${a}
-                        </tbody>
-                    </table>
-                    ${l}
-                </div><div id="overall_election_details">
-                    <h4>Results - Historical</h4>
+            <div class="game_header">${corrr}</div>
+            <div id="main_content_area">
+                <div id="overall_details_container">
+                    <h3>Overall Election Details</h3><span></span>
+                    <div id="overall_election_details">
+                        <h4>Results - This Game</h4>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Candidate</th>
+                                    <th>Electoral Votes</th>
+                                    <th>Popular Votes</th>
+                                    <th>Popular Vote %</th>
+                                </tr>
+                                ${a}
+                            </tbody>
+                        </table>
+                        ${l}
+                    </div>
+                    <div id="overall_election_details">
+                        <h4>Results - Historical</h4>
                         <table>
                             <tbody>
                                 <tr>
