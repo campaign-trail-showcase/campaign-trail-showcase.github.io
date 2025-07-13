@@ -3083,7 +3083,7 @@ function overallResultsHtml() {
             return `
             <tr>
                 <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}
+                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span><span class="candidate-name-table">${fName}</span>
                 </td>
                 <td>${f.electoral_votes}</td>
                 <td>${formatNumbers(f.popular_votes)}</td>
