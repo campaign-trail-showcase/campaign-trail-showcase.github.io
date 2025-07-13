@@ -3083,7 +3083,7 @@ function overallResultsHtml() {
             return `
             <tr>
                 <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span><span class="candidate-name-table">${fName}</span>
+                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}
                 </td>
                 <td>${f.electoral_votes}</td>
                 <td>${formatNumbers(f.popular_votes)}</td>
@@ -3506,7 +3506,7 @@ function overallDetailsHtml() {
             <div class="game_header">${corrr}</div>
             <div id="main_content_area">
                 <div id="overall_details_container">
-                    <h3>Overall Election Details</h3><i></i><i></i>
+                    <h3>Overall Election Details</h3>
                     <div id="overall_election_details">
                         <h4>Results - This Game</h4>
                         <table>
