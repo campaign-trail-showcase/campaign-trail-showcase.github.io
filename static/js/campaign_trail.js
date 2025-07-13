@@ -469,15 +469,13 @@ function endingPicker(out, totv, aa, quickstats) {
     }
 
     if (important_info !== "") {
-        window.out = out;
-        window.totv = totv;
-        window.aa = aa;
-        window.quickstats = quickstats;
-        window.e = campaignTrail_temp;
-
-        return (function() {
-            return eval(important_info);
-        })();
+        const result = new Function("out", "totv", "aa", "quickstats", important_info)(
+            out,
+            totv,
+            aa,
+            quickstats,
+        );
+        return result;
     }
 
     return "ERROR";
@@ -3059,7 +3057,7 @@ function overallResultsHtml() {
         campaignTrail_temp.multiple_endings = true;
     }
     const candResults = e.final_overall_results.find((f) => f.candidate === e.candidate_id);
-    const quickstats = [
+    quickstats = [
         candResults.electoral_votes,
         (candResults.popular_votes / totalPV) * 100,
         candResults.popular_votes,
