@@ -461,7 +461,7 @@ function endingPicker(out, totv, aa, quickstats) {
     // out = "win", "loss", or "tie" for your candidate
     // totv = total votes in entire election
     // aa = all final overall results data
-    // quickstat = relevant data on candidate performance
+    // quickstats = relevant data on candidate performance
     // (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
 
     if (important_info.indexOf("404") > -1) {
@@ -469,14 +469,15 @@ function endingPicker(out, totv, aa, quickstats) {
     }
 
     if (important_info !== "") {
-        var endingPicker; 
-        eval(important_info);
+        e.quickstats = quickstats;
 
-        if (typeof endingPicker === 'function') {
-            return endingPicker(out, totv, aa, quickstats);
-        } else {
-            // for mods that that are just a block of code
-        }
+        const result = new Function("out", "totv", "aa", "quickstats", important_info)(
+            out,
+            totv,
+            aa,
+            quickstats,
+        );
+        return result;
     }
 
     return "ERROR";
