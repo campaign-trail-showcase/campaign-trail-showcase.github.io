@@ -30,6 +30,8 @@ let ratedMods = JSON.parse(localStorage.getItem("ratedMods")) ?? {};
 
 let modBeingPlayed = "";
 
+let loadingInterval = null;
+
 const namesOfModsFromValue = {};
 
 const customThemesButton = document.getElementById("customThemesButton");
@@ -538,11 +540,7 @@ function createTagButtons(tagsFound) {
     });
 }
 
-function updateModViews(event) {
-  if (event) {
-    currentPage = 1; // reset to first page on filter change
-  }
-
+function getVisibleMods() {
   const activeTags = new Set();
   for (let i = 0; i < tagList.length; i++) {
     if (tagList[i].checked) {
@@ -553,7 +551,6 @@ function updateModViews(event) {
   const visibleMods = [];
   for (let i = 0; i < modList.length; i++) {
     const modView = modList[i];
-    let shouldShow = false;
     const modMode = modView.getAttribute("mode");
     const modTags = modView.getAttribute("tags").split(" ");
     const modName = modView.getAttribute("mod-name");
@@ -563,19 +560,26 @@ function updateModViews(event) {
       (nameFilter === "" ||
         modDisplayName.includes(nameFilter) ||
         modName.includes(nameFilter)) &&
-      modTags.some(tag => activeTags.has(tag)) &&
+      modTags.some((tag) => activeTags.has(tag)) &&
       (!onlyFavorites || isFavorite(modName)) &&
       (!year || year.test(modName)) &&
       (onlyFavorites || mode === ALL || modMode === mode)
     ) {
-      shouldShow = true;
-    }
-
-    modView.style.display = "none"; // hide all mods initially
-    if (shouldShow) {
       visibleMods.push(modView);
     }
   }
+  return visibleMods;
+}
+
+function updateModViews(event) {
+  if (event) {
+    currentPage = 1; // reset to first page on filter change
+  }
+
+  const visibleMods = getVisibleMods();
+
+  // hide all mods before showing the paginated ones
+  modList.forEach((modView) => (modView.style.display = "none"));
 
   const modGrid = document.getElementById("mod-grid");
   let noFavsMessage = document.getElementById("no-favorites-message");
@@ -597,7 +601,7 @@ function updateModViews(event) {
   const endIndex = startIndex + modsPerPage;
   const pageMods = visibleMods.slice(startIndex, endIndex);
 
-  pageMods.forEach(modView => {
+  pageMods.forEach((modView) => {
     modView.style.display = "flex";
     // lazy load mod info
     getFavsAndPlayCount(modView.getAttribute("mod-name"), modView);
@@ -662,30 +666,77 @@ function renderPaginationControls(totalMods) {
   paginationContainer.appendChild(nextButton);
 }
 
-function onChangeModSorter(e) {
+async function onChangeModSorter(e) {
   const sorter = e.target.value;
-  switch (sorter) {
-    case "chrono":
-      sortModViews(modCompare2);
-      break;
-    case "mostFav":
-      sortModViews((a, b) => b.dataset.favs - a.dataset.favs);
-      break;
-    case "leastFav":
-      sortModViews((a, b) => a.dataset.favs - b.dataset.favs);
-      break;
-    case "mostPlays":
-      sortModViews((a, b) => b.dataset.playCount - a.dataset.playCount);
-      break;
+
+  const sorterElement = e.target;
+  let loadingIndicator = document.getElementById("loading-indicator");
+  if (!loadingIndicator) {
+    loadingIndicator = document.createElement("span");
+    loadingIndicator.id = "loading-indicator";
+    sorterElement.parentNode.insertBefore(
+      loadingIndicator,
+      sorterElement.nextSibling,
+    );
+  }
+
+  loadingIndicator.innerText = " Sorting mods";
+  loadingIndicator.style.display = "inline";
+  let dots = 0;
+  if (loadingInterval) clearInterval(loadingInterval);
+  loadingInterval = setInterval(() => {
+    dots = (dots + 1) % 4;
+    loadingIndicator.innerText = " Sorting mods" + ".".repeat(dots);
+  }, 300);
+
+  try {
+    if (sorter === "mostFav" || sorter === "leastFav" || sorter === "mostPlays") {
+      const visibleMods = getVisibleMods();
+      const promises = visibleMods.map((modView) =>
+        getFavsAndPlayCount(modView.getAttribute("mod-name"), modView),
+      );
+      await Promise.all(promises);
+    }
+
+    switch (sorter) {
+      case "chrono":
+        sortModViews(modCompare2);
+        break;
+      case "mostFav":
+        sortModViews((a, b) => (b.dataset.favs ?? 0) - (a.dataset.favs ?? 0));
+        break;
+      case "leastFav":
+        sortModViews((a, b) => (a.dataset.favs ?? 0) - (b.dataset.favs ?? 0));
+        break;
+      case "mostPlays":
+        sortModViews(
+          (a, b) => (b.dataset.playCount ?? 0) - (a.dataset.playCount ?? 0),
+        );
+        break;
+    }
+  } finally {
+    clearInterval(loadingInterval);
+    loadingInterval = null;
+    loadingIndicator.style.display = "none";
   }
 }
 
 function sortModViews(comparisonFunction) {
-  modList.sort(comparisonFunction);
+  const visibleMods = getVisibleMods();
+  visibleMods.sort(comparisonFunction);
+
+  const otherMods = modList.filter((mod) => !visibleMods.includes(mod));
+
+  // re-order the main modList
+  modList.length = 0;
+  modList.push(...visibleMods, ...otherMods);
+
   const modGrid = document.getElementById("mod-grid");
-  // re-append mods to the grid in a sorted order
-  modList.forEach(modView => modGrid.appendChild(modView));
-  // reset to the first page and update the view to show the sorted results
+  // clear the mod grid and append the sorted views
+  const fragment = document.createDocumentFragment();
+  modList.forEach((modView) => fragment.appendChild(modView));
+  modGrid.appendChild(fragment);
+
   currentPage = 1;
   updateModViews();
 }
