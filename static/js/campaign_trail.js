@@ -469,8 +469,18 @@ function endingPicker(out, totv, aa, quickstats) {
     }
 
     if (important_info !== "") {
-        eval(important_info);
-        return endingPicker(out, totv, aa, quickstats);
+        return (function() {
+            var endingPicker; 
+            eval(important_info);
+
+            // if the mod defined 'endingPicker', we call it
+            if (typeof endingPicker === 'function') {
+                return endingPicker(out, totv, aa, quickstats);
+            } else {
+                // for mods that that are just a block of code
+            }
+
+        }).call(this);
     }
 
     return "ERROR";
