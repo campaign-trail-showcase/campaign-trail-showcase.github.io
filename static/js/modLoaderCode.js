@@ -818,9 +818,7 @@ async function loadModFromButton(modValue) {
     }
 
     try {
-      const res = await fetch(`../static/mods/${modValue}_init.html`);
-      const modCode = await res.text();
-      eval(modCode);
+      await evalFromUrl(`../static/mods/${modValue}_init.html`);
       diff_mod = true;
     } catch (error) {
       console.error(`Failed to load mod ${modValue}:`, error);
