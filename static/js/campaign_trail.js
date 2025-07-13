@@ -3506,7 +3506,7 @@ function overallDetailsHtml() {
             <div class="game_header">${corrr}</div>
             <div id="main_content_area">
                 <div id="overall_details_container">
-                    <h3>Overall Election Details</h3>
+                    <h3>Overall Election Details</h3><i></i><i></i>
                     <div id="overall_election_details">
                         <h4>Results - This Game</h4>
                         <table>
