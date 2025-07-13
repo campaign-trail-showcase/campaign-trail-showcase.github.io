@@ -228,6 +228,7 @@ $(document).ready(async function () {
       const loadDividedStatesAchievements = modNameParam == "2024" && mod.value == "2024 Divided States";
       if(!loadDividedStatesAchievements) {
         // If do not need for divided states achievements then skip loading this mod
+        allModsLength--;
         return;
       }
     }
