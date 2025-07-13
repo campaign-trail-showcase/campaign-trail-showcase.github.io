@@ -218,6 +218,16 @@ $(document).ready(async () => {
       return;
     }
 
+    // Special case for DSA because it uses two code 1s to define achivements. So we need to load both of those to get both sets.
+    const loadDividedStatesAchievements = modNameParam == "2024" && mod.value == "2024 Divided States";
+    if(!loadDividedStatesAchievements) {
+      // If do not need for divided states achievements then skip loading this mod
+      allModsLength--;
+      return;
+    }
+
+    namesOfModsFromValue[mod.value] = mod.innerText ?? mod.value;
+
     try {
       const modRes = await fetch(`../static/mods/${mod.value}_init.html`);
       const rawModText = await modRes.text();
