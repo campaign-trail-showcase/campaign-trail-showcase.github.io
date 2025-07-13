@@ -225,7 +225,7 @@ $(document).ready(async function () {
   // Set up from normal mods
   mods.forEach(async function (mod) {
     if (mod.value == "other" || (modNameParam != null && modNameParam != mod.value)) {
-      const loadDividedStatesAchievements = modNameParam == "2024" && mod.value == "Divided States";
+      const loadDividedStatesAchievements = modNameParam == "2024" && mod.value == "2024 Divided States";
       if(!loadDividedStatesAchievements) {
         // If do not need for divided states achievements then skip loading this mod
         return;
