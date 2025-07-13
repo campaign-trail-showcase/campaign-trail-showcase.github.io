@@ -225,7 +225,11 @@ $(document).ready(async function () {
   // Set up from normal mods
   mods.forEach(async function (mod) {
     if (mod.value == "other" || (modNameParam != null && modNameParam != mod.value)) {
-      return;
+      const loadDividedStatesAchievements = modNameParam == "2024" && mod.value == "Divided States";
+      if(!loadDividedStatesAchievements) {
+        // If do not need for divided states achievements then skip loading this mod
+        return;
+      }
     }
 
     const modRes = await fetch("../static/mods/" + mod.value + "_init.html");
