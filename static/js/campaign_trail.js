@@ -3080,8 +3080,17 @@ function overallResultsHtml() {
             const candObj2 = e.candidate_json.find((g) => g.pk === f.candidate);
             const colorHex = candObj2.fields.color_hex;
             const fName = `${candObj2.fields.first_name} ${candObj2.fields.last_name}`;
-            return `<tr><td style="text-align: left;"><span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}</td><td>${f.electoral_votes}</td><td>${formatNumbers(f.popular_votes)}</td><td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td></tr>`;
-        }).join("");
+            return `
+            <tr>
+                <td style="text-align: left;">
+                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}
+                </td>
+                <td>${f.electoral_votes}</td>
+                <td>${formatNumbers(f.popular_votes)}</td>
+                <td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td>
+            </tr>
+        `;
+        }).join("").trim();
 
     const c = e.game_results_url !== "None"
         ? `
@@ -3482,30 +3491,36 @@ function overallDetailsHtml() {
     const base_url = urlParts[2];
     const game_url = e.game_id ? `https://${base_url}/games/viewGame.html#${e.game_id}` : null;
 
-    const histRes = HistName.map((name, i) => `<tr><td style="text-align: left;"><span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span> ${name}</td><td>${HistEV[i]}</td><td>${HistPV[i]}</td><td>${HistPVP[i]}</td></tr>`).join("");
+    const histRes = HistName.map((name, i) => `
+        <tr>
+            <td style="text-align: left;">
+                <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span> ${name}
+            </td>
+            <td>${HistEV[i]}</td>
+            <td>${HistPV[i]}</td>
+            <td>${HistPVP[i]}</td>
+        </tr>
+    `).join("").trim();
 
     const r = `
-            <div class="game_header">${corrr}</div>
-            <div id="main_content_area">
-                <div id="overall_details_container">
-                    <h3>Overall Election Details</h3>
-                    <div id="overall_election_details">
-                        <h4>Results - This Game</h4>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>Candidate</th>
-                                    <th>Electoral Votes</th>
-                                    <th>Popular Votes</th>
-                                    <th>Popular Vote %</th>
-                                </tr>
-                                ${a}
-                            </tbody>
-                        </table>
-                        ${l}
-                    </div>
-                    <div id="overall_election_details">
-                        <h4>Results - Historical</h4>
+        <div class="game_header">${corrr}</div>
+        <div id="main_content_area">
+            <div id="overall_details_container"><h3>Overall Election Details</h3><div id="overall_election_details">
+                    <h4>Results - This Game</h4>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Candidate</th>
+                                <th>Electoral Votes</th>
+                                <th>Popular Votes</th>
+                                <th>Popular Vote %</th>
+                            </tr>
+                            ${a}
+                        </tbody>
+                    </table>
+                    ${l}
+                </div><div id="overall_election_details">
+                    <h4>Results - Historical</h4>
                         <table>
                             <tbody>
                                 <tr>
