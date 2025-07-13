@@ -461,7 +461,7 @@ function endingPicker(out, totv, aa, quickstats) {
     // out = "win", "loss", or "tie" for your candidate
     // totv = total votes in entire election
     // aa = all final overall results data
-    // quickstats = relevant data on candidate performance
+    // quickstat = relevant data on candidate performance
     // (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
 
     if (important_info.indexOf("404") > -1) {
@@ -469,13 +469,15 @@ function endingPicker(out, totv, aa, quickstats) {
     }
 
     if (important_info !== "") {
-        const result = new Function("out", "totv", "aa", "quickstats", important_info)(
-            out,
-            totv,
-            aa,
-            quickstats,
-        );
-        return result;
+        window.out = out;
+        window.totv = totv;
+        window.aa = aa;
+        window.quickstats = quickstats;
+        window.e = campaignTrail_temp;
+
+        return (function() {
+            return eval(important_info);
+        })();
     }
 
     return "ERROR";
@@ -3063,15 +3065,7 @@ function overallResultsHtml() {
         candResults.popular_votes,
     ]; // format: electoral vote count, popular vote proportion, popular vote vote count
 
-    window.quickstats = quickstats;
-    window.aa = e.final_overall_results;
-    window.e = campaignTrail_temp;
-
     const testTest = endingPicker(e.final_outcome, totalPV, e.final_overall_results, quickstats);
-
-    delete window.quickstats;
-    delete window.aa;
-
     getResults(e.final_outcome, totalPV, e.final_overall_results, quickstats);
 
     if (campaignTrail_temp.multiple_endings) {
