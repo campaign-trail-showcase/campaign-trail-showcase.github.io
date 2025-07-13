@@ -803,13 +803,12 @@ async function loadModFromButton(modValue) {
     loadRandomMod();
     return;
   }
+
+  loadingFromModButton = true;
+  e = campaignTrail_temp;
+
   if (customMods.has(modValue)) {
     eval(localStorage.getItem(modValue + "_code1"));
-
-    const code2 = localStorage.getItem(modValue + "_code2");
-    if (code2) {
-      eval(code2);
-    }
     diff_mod = true;
     customMod = modValue;
   } else {
@@ -818,7 +817,9 @@ async function loadModFromButton(modValue) {
     }
 
     try {
-      await evalFromUrl(`../static/mods/${modValue}_init.html`);
+      const res = await fetch(`../static/mods/${modValue}_init.html`);
+      const modCode = await res.text();
+      eval(modCode);
       diff_mod = true;
     } catch (error) {
       console.error(`Failed to load mod ${modValue}:`, error);
@@ -842,6 +843,8 @@ async function loadModFromButton(modValue) {
   if (announcement) {
     announcement.style.display = "none";
   }
+
+  gameStart(new Event('submit'));
 
   setTimeout(() => updateModViewCount(modValue), 10000);
   window.scrollTo(0, 0); // Scroll to top
