@@ -233,6 +233,7 @@ $(document).ready(async function () {
       }
     }
 
+    namesOfModsFromValue[mod.value] = mod.innerText ?? mod.value;
     const modRes = await fetch("../static/mods/" + mod.value + "_init.html");
     const rawModText = await modRes.text();
 
