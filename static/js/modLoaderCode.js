@@ -805,6 +805,11 @@ async function loadModFromButton(modValue) {
   }
   if (customMods.has(modValue)) {
     eval(localStorage.getItem(modValue + "_code1"));
+
+    const code2 = localStorage.getItem(modValue + "_code2");
+    if (code2) {
+      eval(code2);
+    }
     diff_mod = true;
     customMod = modValue;
   } else {
