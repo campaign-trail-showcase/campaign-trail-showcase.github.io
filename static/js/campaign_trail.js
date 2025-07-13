@@ -469,8 +469,6 @@ function endingPicker(out, totv, aa, quickstats) {
     }
 
     if (important_info !== "") {
-        e.quickstats = quickstats;
-
         const result = new Function("out", "totv", "aa", "quickstats", important_info)(
             out,
             totv,
@@ -3065,7 +3063,15 @@ function overallResultsHtml() {
         candResults.popular_votes,
     ]; // format: electoral vote count, popular vote proportion, popular vote vote count
 
+    window.quickstats = quickstats;
+    window.aa = e.final_overall_results;
+    window.e = campaignTrail_temp;
+
     const testTest = endingPicker(e.final_outcome, totalPV, e.final_overall_results, quickstats);
+
+    delete window.quickstats;
+    delete window.aa;
+
     getResults(e.final_outcome, totalPV, e.final_overall_results, quickstats);
 
     if (campaignTrail_temp.multiple_endings) {
