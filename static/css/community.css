@@ -385,6 +385,7 @@
   border-radius: 10px;
   margin: 5px;
   padding: 10px 10px;
+  vertical-align: middle;
 }
 
 .mode-button:hover {background-color: rgb(76, 98, 154);}
