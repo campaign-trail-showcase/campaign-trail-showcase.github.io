@@ -670,7 +670,17 @@ function deleteCustomMod(event, modValue) {
     localStorage.setItem("customMods", Array.from(customMods));
   }
 
-  location.reload();
+  // remove from the grid
+  const modView = document.getElementById(modValue);
+  if (modView) {
+    modView.parentNode.removeChild(modView);
+  }
+  const idx = modList.findIndex(mv => mv.id === modValue);
+  if (idx !== -1) {
+    modList.splice(idx, 1);
+  }
+
+  updateModViews();
 }
 
 function addCustomMod(code1, code2) {
