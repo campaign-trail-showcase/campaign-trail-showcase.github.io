@@ -965,8 +965,6 @@ async function loadModFromButton(modValue) {
     announcement.style.display = "none";
   }
 
-  gameStart(new Event('submit'));
-
   setTimeout(() => updateModViewCount(modValue), 10000);
   window.scrollTo(0, 0); // Scroll to top
 }
