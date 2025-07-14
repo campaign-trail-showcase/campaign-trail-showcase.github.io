@@ -179,6 +179,17 @@ function extractElectionDetails(rawModText, nameOfMod) {
 // cache to store award icons
 const awardIconCache = {};
 const pendingIconLoads = {};
+const failedIconUrls = {};
+
+// when testing CTS in forks, the award icons may not be available
+// so we provide an alternative URL to load them from
+function getAlternativeIconUrl(url) {
+  if (url.includes('/static/dba2024/')) {
+    const fileName = url.split('/').pop();
+    return `https://raw.githubusercontent.com/campaign-trail-showcase/campaign-trail-showcase.github.io/refs/heads/main/static/dba2024/${fileName}`;
+  }
+  return null;
+}
 
 // preload award icons to avoid flickering
 function preloadAwardIcon(url) {
@@ -195,16 +206,42 @@ function preloadAwardIcon(url) {
   // create a new promise for loading the icon
   const loadPromise = new Promise((resolve, reject) => {
     const img = new Image();
+    
     img.onload = () => {
       awardIconCache[url] = true;
       delete pendingIconLoads[url];
       resolve(url);
     };
+    
     img.onerror = () => {
-      console.error(`Failed to load award icon: ${url}`);
       delete pendingIconLoads[url];
-      reject(url);
+      
+      // try alt URL
+      const altUrl = getAlternativeIconUrl(url);
+      if (altUrl) {
+        console.log(`Primary URL failed, trying alternative: ${altUrl}`);
+        const altImg = new Image();
+        
+        altImg.onload = () => {
+          awardIconCache[url] = true;
+          awardIconCache[altUrl] = true;
+          resolve(url);
+        };
+        
+        altImg.onerror = () => {
+          console.error(`Failed to load award icon: ${url} (and alternative)`);
+          failedIconUrls[url] = true;
+          reject(url);
+        };
+        
+        altImg.src = altUrl;
+      } else {
+        console.error(`Failed to load award icon: ${url}`);
+        failedIconUrls[url] = true;
+        reject(url);
+      }
     };
+    
     img.src = url;
   });
   
@@ -463,8 +500,8 @@ function cycleAwards(img, awardUrls, index) {
   // check if the image is still connected to the DOM before cycling
   const currentUrl = awardUrls[index] || awardUrls[0];
   
-  // check if the image source is different from the current URL
-  if (!awardIconCache[currentUrl] && !pendingIconLoads[currentUrl]) {
+    // check if the image source is different from the current URL
+  if (!failedIconUrls[currentUrl] && !awardIconCache[currentUrl] && !pendingIconLoads[currentUrl]) {
     // if not already loading, start preloading the icon
     preloadAwardIcon(currentUrl).catch(() => {
       // if it fails, just continue - the next URL will be tried in the next cycle
