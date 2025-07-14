@@ -197,43 +197,43 @@ function preloadAwardIcon(url) {
   if (awardIconCache[url]) {
     return Promise.resolve(url);
   }
-  
+
   // if already pending, return the existing promise
   if (pendingIconLoads[url]) {
     return pendingIconLoads[url];
   }
-  
+
   // create a new promise for loading the icon
   const loadPromise = new Promise((resolve, reject) => {
     const img = new Image();
-    
+
     img.onload = () => {
       awardIconCache[url] = true;
       delete pendingIconLoads[url];
       resolve(url);
     };
-    
+
     img.onerror = () => {
       // try to load an alternative URL if the primary fails
       const altUrl = getAlternativeIconUrl(url);
       if (altUrl) {
         console.log(`Primary URL failed, trying alternative: ${altUrl}`);
         const altImg = new Image();
-        
+
         altImg.onload = () => {
           awardIconCache[url] = true;
           awardIconCache[altUrl] = true;
           delete pendingIconLoads[url];
           resolve(url);
         };
-        
+
         altImg.onerror = () => {
           console.error(`Failed to load award icon: ${url} (and alternative)`);
           failedIconUrls[url] = true;
           delete pendingIconLoads[url];
           reject(url);
         };
-        
+
         altImg.src = altUrl;
       } else {
         console.error(`Failed to load award icon: ${url}`);
@@ -242,10 +242,10 @@ function preloadAwardIcon(url) {
         reject(url);
       }
     };
-    
+
     img.src = url;
   });
-  
+
   pendingIconLoads[url] = loadPromise;
   return loadPromise;
 }
@@ -301,7 +301,7 @@ $(document).ready(async () => {
     }
 
     namesOfModsFromValue[mod.value] = mod.innerText ?? mod.value;
-    
+
     try {
       const modRes = await fetch(`../static/mods/${mod.value}_init.html`);
       const rawModText = await modRes.text();
@@ -337,24 +337,27 @@ $(document).ready(async () => {
 
   await Promise.all(modPromises);
 
-  // collect all award icon URLs for preloading
-  const allAwardIconUrls = new Set();
-  Array.from(mods).forEach(mod => {
-    if (mod.dataset && mod.dataset.awardimageurls) {
-      mod.dataset.awardimageurls.split(", ").forEach(url => {
-        allAwardIconUrls.add(url);
-      });
-    }
-  });
+  // if we are not loading a specific mod, preload all award icons
+  if (!modNameParam) {
+    // collect all award icon URLs for preloading
+    const allAwardIconUrls = new Set();
+    Array.from(mods).forEach(mod => {
+      if (mod.dataset && mod.dataset.awardimageurls) {
+        mod.dataset.awardimageurls.split(", ").forEach(url => {
+          allAwardIconUrls.add(url);
+        });
+      }
+    });
 
-  // preload all award icons
-  if (allAwardIconUrls.size > 0) {
-    console.log(`Preloading ${allAwardIconUrls.size} award icons...`);
-    Promise.allSettled([...allAwardIconUrls].map(preloadAwardIcon))
-      .then(results => {
-        const loaded = results.filter(r => r.status === 'fulfilled').length;
-        console.log(`Preloaded ${loaded}/${allAwardIconUrls.size} award icons`);
-      });
+    // preload all award icons
+    if (allAwardIconUrls.size > 0) {
+      console.log(`Preloading ${allAwardIconUrls.size} award icons...`);
+      Promise.allSettled([...allAwardIconUrls].map(preloadAwardIcon))
+        .then(results => {
+          const loaded = results.filter(r => r.status === 'fulfilled').length;
+          console.log(`Preloaded ${loaded}/${allAwardIconUrls.size} award icons`);
+        });
+    }
   }
 
   modsLoaded.sort(modCompare);
@@ -457,15 +460,14 @@ function createModView(mod, imageUrl, description, isCustom) {
         <button ${theme ? `style="background-color:${theme.secondary_color};"` : ""} class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ""}>${favText}</span></button>
         <button style="${customMods.has(mod.value) ? "" : "display:none;"}${theme ? `background-color:${theme.secondary_color};"` : ""}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ""}>${DELETE}</span></button>
     </div>
-    ${
-      !customMods.has(mod.value)
-        ? `
+    ${!customMods.has(mod.value)
+      ? `
     <div ${theme ? `style="background-color:${theme.secondary_color};"` : ""} class="rating-background">
         <div ${theme ? `style="color:${theme.ui_text_color};"` : ""} class="modRating">LOADING FAVORITES...</div>
         <div ${theme ? `style="color:${theme.ui_text_color};"` : ""} class="modPlayCount">LOADING PLAYS...</div>
         ${mod.dataset.awards != null && mod.dataset.awards.length > 0 ? renderAwards(mod.dataset.awards, mod.dataset.awardimageurls) : ""}
     </div>`
-        : ""
+      : ""
     }
     `;
 
