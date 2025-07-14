@@ -372,9 +372,9 @@ $(document).ready(async () => {
       modData.mod.dataset.awardimageurls &&
       modData.mod.dataset.awardimageurls.split(", ").length > 1
     ) {
+      // find the holder and start the cycling process
       cycleAwards(
-        modView.querySelector(".mod-trophy"),
-        modData.mod.dataset.awardimageurls.split(", "),
+        modView.querySelector(".trophy-holder"),
         0,
       );
     }
@@ -482,47 +482,39 @@ function createModView(mod, imageUrl, description, isCustom) {
 
 function renderAwards(awards, rawAwardUrls) {
   let awardUrls = rawAwardUrls.split(", ");
-  let awardNames = awards.split(", ");
 
-  // use the first URL if there are multiple URLs
-  let firstIconUrl = awardUrls[0];
-  
-  let awardImages = `<img class="mod-trophy" src=${firstIconUrl}></img>`;
+  // create an image tag for each URL. the first is visible, the rest are hidden
+  let awardImagesHTML = awardUrls.map((url, index) => {
+    const style = index === 0 ? 'opacity: 1; transition: opacity 0.3s ease-in-out;' : 'opacity: 0; transition: opacity 0.3s ease-in-out;';
+    return `<img class="mod-trophy" src="${url}" style="${style}">`;
+  }).join('');
 
   return `
-    <div class="trophy-holder")">
-    <span class="tooltiptext">${awards.replaceAll(", ", "<br><br>")}</span>
-    ${awardImages}
+    <div class="trophy-holder">
+      <span class="tooltiptext">${awards.replaceAll(", ", "<br><br>")}</span>
+      ${awardImagesHTML}
     </div>
-    `;
+  `;
 }
 
-function cycleAwards(img, awardUrls, index) {
-  // check if the image is still connected to the DOM before cycling
-  const currentUrl = awardUrls[index] || awardUrls[0];
-  
-    // check if the image source is different from the current URL
-  if (!failedIconUrls[currentUrl] && !awardIconCache[currentUrl] && !pendingIconLoads[currentUrl]) {
-    // if not already loading, start preloading the icon
-    preloadAwardIcon(currentUrl).catch(() => {
-      // if it fails, just continue - the next URL will be tried in the next cycle
-    });
+function cycleAwards(holder, index) {
+  // ensure the element is still part of the page
+  if (!holder || !holder.isConnected) {
+    return;
   }
-  
-  // update the image only if it is *not already set to the current URL and the image exists in the cache
-  if (img.src !== currentUrl && awardIconCache[currentUrl]) {
-    img.src = currentUrl;
+
+  const images = holder.querySelectorAll(".mod-trophy");
+  if (images.length <= 1) {
+    return; // no need to cycle if there's only one image
   }
-  
-  setTimeout(
-    () => {
-      // check if the image is still connected to the DOM before cycling
-      if (img && img.isConnected) {
-        cycleAwards(img, awardUrls, (index + 1) % awardUrls.length);
-      }
-    },
-    2000,
-  );
+
+  images[index].style.opacity = '0';
+  const nextIndex = (index + 1) % images.length;
+  images[nextIndex].style.opacity = '1';
+
+  setTimeout(() => {
+    cycleAwards(holder, nextIndex);
+  }, 2000);
 }
 
 function configureRatingButtons(modName, modView) {
