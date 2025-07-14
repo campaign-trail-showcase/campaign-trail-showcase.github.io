@@ -1,18 +1,32 @@
 const mobileMode = localStorage.getItem("mobileMode") === "true";
+const mobileModeButton = document.getElementById("mobileModeButton");
 
 function toggleMobileMode() {
-  localStorage.setItem("mobileMode", mobileMode ? "false" : "true");
-  location.reload();
+    const enabled = localStorage.getItem("mobileMode") === "true";
+    localStorage.setItem("mobileMode", enabled ? "false" : "true");
+    applyMobileStyle();
+    mobileModeButton.innerText = enabled
+        ? "Turn On Mobile Compatibility (Beta)"
+        : "Turn Off Mobile Compatibility (Beta)";
 }
 
-document.getElementById("mobileModeButton").innerText = mobileMode
-  ? "Turn Off Mobile Compatibility (Beta)"
-  : "Turn On Mobile Compatibility (Beta)";
+function applyMobileStyle() {
+    const enabled = localStorage.getItem("mobileMode") === "true";
+    const prevStyle = document.getElementById("mobile-style");
+    if (prevStyle) prevStyle.remove();
+    const prevMeta = document.getElementById("mobile-viewport");
+    if (prevMeta) prevMeta.remove();
 
-if (mobileMode) {
-  document.head.innerHTML += `
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
+    if (enabled) {
+        const meta = document.createElement("meta");
+        meta.name = "viewport";
+        meta.content = "width=device-width, initial-scale=1";
+        meta.id = "mobile-viewport";
+        document.head.appendChild(meta);
+
+        const style = document.createElement("style");
+        style.id = "mobile-style";
+        style.innerHTML = `
         @media only screen and (max-width: 768px) {
 
             #benefitwindow {
@@ -113,15 +127,18 @@ if (mobileMode) {
 
             .inner_window_question button,
             #visit_window button,
-            #map_footer {
-                line-height: 2.5em;
-            }
-
-            #drop_down_area_state {
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-    </style>
+        #map_footer { line-height: 2.5em; }
+        #drop_down_area_state { margin-left: auto; margin-right: auto; }
+      }
     `;
+        document.head.appendChild(style);
+    }
 }
+
+mobileModeButton.innerText = mobileMode
+    ? "Turn Off Mobile Compatibility (Beta)"
+    : "Turn On Mobile Compatibility (Beta)";
+
+applyMobileStyle();
+
+mobileModeButton.onclick = toggleMobileMode;
