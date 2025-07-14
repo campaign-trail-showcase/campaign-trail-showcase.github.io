@@ -1277,6 +1277,9 @@ function openMap(_e) {
     // startTime = performance.now();
     const gameWindow = document.querySelector("#game_window");
     const mainContentArea = document.querySelector("#main_content_area");
+    const advisorButtonText = (e.answer_feedback_flg === 1)
+        ? "Disable advisor feedback"
+        : "Enable advisor feedback";
     if (mainContentArea) {
         gameWindow.querySelectorAll(":scope > *:not(#main_content_area):not(.game_header)")
             .forEach((el) => el.remove());
@@ -1284,7 +1287,7 @@ function openMap(_e) {
         const footer_html = `
             <button id="resume_questions_button">Back to the game</button>
             <button id="margin_switcher">Switch margin colouring gradient</button>
-            <button id="AdvisorButton">Enable/Disable Advisor Feedback</button>
+            <button id="AdvisorButton">${advisorButtonText}</button>
         </div>`.trim();
         const ftH = document.createElement("div");
         ftH.id = "map_footer";
@@ -1315,7 +1318,7 @@ function openMap(_e) {
             <div id="map_footer">
                 <button id="resume_questions_button">Back to the game</button>
                 <button id="margin_switcher">Switch margin colouring gradient</button>
-                <button id="AdvisorButton">Enable/Disable Advisor Feedback</button>
+                <button id="AdvisorButton">${advisorButtonText}</button>
             </div>`.trim());
         const t = rFunc(_e, 0);
 
