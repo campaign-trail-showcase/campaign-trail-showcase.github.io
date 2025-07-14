@@ -409,33 +409,8 @@ $(document).ready(async () => {
     }
   }
 
-  modsLoaded.sort(modCompare);
-  const modGrid = document.getElementById("mod-grid");
-  for (let i = 0; i < modsLoaded.length; i++) {
-    const modData = modsLoaded[i];
-    const modView = createModView(
-      modData.mod,
-      modData.imageUrl,
-      modData.description,
-    );
-    document.getElementById("mod-grid").appendChild(modView);
-
-    if (
-      modData.mod.dataset.awardimageurls &&
-      modData.mod.dataset.awardimageurls.split(", ").length > 1
-    ) {
-      // find the holder and start the cycling process
-      cycleAwards(
-        modView.querySelector(".trophy-holder"),
-        0,
-      );
-    }
-
-    modList.push(modView);
-  }
-  // updateModViews();
-
   // Set up from custom mods
+  let customModsLoaded = [];
   for (const customModName of customMods) {
     const rawModText = localStorage.getItem(customModName + "_code1");
 
@@ -466,9 +441,40 @@ $(document).ready(async () => {
       imageUrl,
       description,
     );
-    document.getElementById("mod-grid").appendChild(modView);
+    customModsLoaded.push(modView);
     modList.push(modView);
   }
+
+  // push custom mods to the mod grid first
+  const modGrid = document.getElementById("mod-grid");
+  customModsLoaded.forEach(modView => {
+    modGrid.appendChild(modView);
+  });
+
+  modsLoaded.sort(modCompare);
+  for (let i = 0; i < modsLoaded.length; i++) {
+    const modData = modsLoaded[i];
+    const modView = createModView(
+      modData.mod,
+      modData.imageUrl,
+      modData.description,
+    );
+    modGrid.appendChild(modView);
+
+    if (
+      modData.mod.dataset.awardimageurls &&
+      modData.mod.dataset.awardimageurls.split(", ").length > 1
+    ) {
+      // find the holder and start the cycling process
+      cycleAwards(
+        modView.querySelector(".trophy-holder"),
+        0,
+      );
+    }
+
+    modList.push(modView);
+  }
+  // updateModViews();
 
   createTagButtons(tagsFound);
   updateModViews();
