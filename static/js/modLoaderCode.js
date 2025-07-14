@@ -684,11 +684,39 @@ function addCustomMod(code1, code2) {
   const modName =
     document.getElementById("customModName").value ??
     temp.election_json[0].fields.year;
+
+  // save/update custom mod
   customMods.add(modName);
   localStorage.setItem("customMods", Array.from(customMods));
   localStorage.setItem(modName + "_code1", code1);
   localStorage.setItem(modName + "_code2", code2);
-  location.reload();
+
+  // add custom mod to the mod list
+  getAllAchievements(code1, modName);
+  getCustomTheme(code1, modName);
+
+  const imageUrl =
+    temp.election_json[0].fields.site_image ??
+    temp.election_json[0].fields.image_url;
+  const description =
+    temp.election_json[0].fields.site_description ??
+    temp.election_json[0].fields.summary;
+
+  const modView = createModView(
+    {
+      value: modName,
+      innerText: modName,
+      dataset: { tags: "Custom" },
+    },
+    imageUrl,
+    description,
+  );
+
+  const modGrid = document.getElementById("mod-grid");
+  modGrid.insertBefore(modView, modGrid.firstChild);
+  modList.unshift(modView);
+
+  updateModViews();
 }
 
 function filterMods(event) {
