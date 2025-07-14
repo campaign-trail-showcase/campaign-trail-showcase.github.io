@@ -176,6 +176,42 @@ function extractElectionDetails(rawModText, nameOfMod) {
   return temp;
 }
 
+// cache to store award icons
+const awardIconCache = {};
+const pendingIconLoads = {};
+
+// preload award icons to avoid flickering
+function preloadAwardIcon(url) {
+  // if already cached, return the cached URL
+  if (awardIconCache[url]) {
+    return Promise.resolve(url);
+  }
+  
+  // if already pending, return the existing promise
+  if (pendingIconLoads[url]) {
+    return pendingIconLoads[url];
+  }
+  
+  // create a new promise for loading the icon
+  const loadPromise = new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      awardIconCache[url] = true;
+      delete pendingIconLoads[url];
+      resolve(url);
+    };
+    img.onerror = () => {
+      console.error(`Failed to load award icon: ${url}`);
+      delete pendingIconLoads[url];
+      reject(url);
+    };
+    img.src = url;
+  });
+  
+  pendingIconLoads[url] = loadPromise;
+  return loadPromise;
+}
+
 $(document).ready(async () => {
   const modNameParam = getUrlParam("modName");
 
@@ -262,6 +298,26 @@ $(document).ready(async () => {
   });
 
   await Promise.all(modPromises);
+
+  // collect all award icon URLs for preloading
+  const allAwardIconUrls = new Set();
+  Array.from(mods).forEach(mod => {
+    if (mod.dataset && mod.dataset.awardimageurls) {
+      mod.dataset.awardimageurls.split(", ").forEach(url => {
+        allAwardIconUrls.add(url);
+      });
+    }
+  });
+
+  // preload all award icons
+  if (allAwardIconUrls.size > 0) {
+    console.log(`Preloading ${allAwardIconUrls.size} award icons...`);
+    Promise.allSettled([...allAwardIconUrls].map(preloadAwardIcon))
+      .then(results => {
+        const loaded = results.filter(r => r.status === 'fulfilled').length;
+        console.log(`Preloaded ${loaded}/${allAwardIconUrls.size} award icons`);
+      });
+  }
 
   modsLoaded.sort(modCompare);
   const modGrid = document.getElementById("mod-grid");
@@ -387,11 +443,13 @@ function createModView(mod, imageUrl, description, isCustom) {
 }
 
 function renderAwards(awards, rawAwardUrls) {
-  // onclick="alert('-- AWARDS --\\n${awards.replace('<br>', '\\n')}'
-
   let awardUrls = rawAwardUrls.split(", ");
   let awardNames = awards.split(", ");
-  let awardImages = `<img class="mod-trophy" src=${awardUrls[0]}></img>`;
+
+  // use the first URL if there are multiple URLs
+  let firstIconUrl = awardUrls[0];
+  
+  let awardImages = `<img class="mod-trophy" src=${firstIconUrl}></img>`;
 
   return `
     <div class="trophy-holder")">
@@ -402,9 +460,29 @@ function renderAwards(awards, rawAwardUrls) {
 }
 
 function cycleAwards(img, awardUrls, index) {
-  img.src = awardUrls[index];
+  // check if the image is still connected to the DOM before cycling
+  const currentUrl = awardUrls[index] || awardUrls[0];
+  
+  // check if the image source is different from the current URL
+  if (!awardIconCache[currentUrl] && !pendingIconLoads[currentUrl]) {
+    // if not already loading, start preloading the icon
+    preloadAwardIcon(currentUrl).catch(() => {
+      // if it fails, just continue - the next URL will be tried in the next cycle
+    });
+  }
+  
+  // update the image only if it is *not already set to the current URL and the image exists in the cache
+  if (img.src !== currentUrl && awardIconCache[currentUrl]) {
+    img.src = currentUrl;
+  }
+  
   setTimeout(
-    () => cycleAwards(img, awardUrls, (index + 1) % awardUrls.length),
+    () => {
+      // check if the image is still connected to the DOM before cycling
+      if (img && img.isConnected) {
+        cycleAwards(img, awardUrls, (index + 1) % awardUrls.length);
+      }
+    },
     2000,
   );
 }
