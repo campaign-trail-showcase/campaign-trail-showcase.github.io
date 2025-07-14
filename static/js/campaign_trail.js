@@ -1870,7 +1870,9 @@ function nextQuestion() {
             return false;
         }
     }
-    
+
+    // in some mods, the map cache breaks election night after answering the final question
+    // we should skip it in that case.
     if (e.question_number < e.global_parameter_json[0].fields.question_count - 1) {
         setTimeout(() => mapCache((skip = false)), 0); // starts new thread for poll map preloading
     }
