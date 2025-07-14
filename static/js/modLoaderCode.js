@@ -336,14 +336,15 @@ $(document).ready(async () => {
 
   // Set up from normal mods
   const modPromises = Array.from(mods).map(async (mod) => {
-    if (mod.value === "other" || (modNameParam && modNameParam !== mod.value)) {
-      return;
-    }
-
-    // Special case for DSA because it uses two code 1s to define achievements. So we need to load both of those to get both sets.
-    const isDividedStatesAchievements = modNameParam == "2024" && mod.value == "2024 Divided States";
-    // Skip normal mods when a specific mod is requested via URL, but always load the mod that matches the URL parameter
-    if (modNameParam && modNameParam !== mod.value && !isDividedStatesAchievements) {
+    // MODIFICADO: lógica para carregar ambos os mods quando necessário
+    if (
+      mod.value === "other" ||
+      ( // Special case for DSA because it uses two code 1s to define achievements. So we need to load both of those to get both sets.
+        getUrlParam("modName") != null &&
+        getUrlParam("modName") != mod.value &&
+        !(getUrlParam("modName") === "2024" && mod.value === "2024 Divided States")
+      )
+    ) {
       allModsLength--;
       return;
     }
