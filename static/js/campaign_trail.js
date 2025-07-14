@@ -4052,6 +4052,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             $("#map_container").usmap(mapOptions);
         },
+        "#overall_results_button": () => overallResultsHtml(),
+        "#final_election_map_button": () => finalMapScreenHtml(),
+        "#state_results_button": () => stateResultsHtml(),
+        "#overall_details_button": () => overallDetailsHtml(),
+        "#recommended_reading_button": () => furtherReadingHtml(),
+        "#play_again_button": () => beginNewGameHtml(),
     };
 
     document.body.addEventListener("click", (event) => {
