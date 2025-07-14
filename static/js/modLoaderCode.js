@@ -48,13 +48,61 @@ customThemesButton.innerText =
 let customModBoxThemes = {};
 
 function toggleModBoxThemes() {
-  localStorage.setItem(
-    "customModBoxThemesEnabled",
-    localStorage.getItem("customModBoxThemesEnabled") === "true"
-      ? "false"
-      : "true",
-  );
-  location.reload();
+  const enabled = localStorage.getItem("customModBoxThemesEnabled") === "true";
+  localStorage.setItem("customModBoxThemesEnabled", enabled ? "false" : "true");
+  customThemesButton.innerText = enabled
+    ? "Turn On Mod Box Themes"
+    : "Turn Off Mod Box Themes";
+  applyModBoxThemes();
+}
+
+function applyModBoxThemes() {
+  const enabled = localStorage.getItem("customModBoxThemesEnabled") === "true";
+  modList.forEach(modView => {
+    const modName = modView.getAttribute("mod-name");
+    const theme = enabled ? customModBoxThemes[modName] : null;
+
+    const modTitle = modView.querySelector(".mod-title");
+    if (modTitle) {
+      if (theme) {
+        modTitle.style.background = `url('${theme.header_image_url ?? ""}')`;
+        modTitle.style.backgroundColor = theme.header_color;
+        modTitle.querySelector("p").style.color = theme.header_text_color;
+      } else {
+        modTitle.style.background = "";
+        modTitle.style.backgroundColor = "";
+        modTitle.querySelector("p").style.color = "";
+      }
+    }
+
+    const modDesc = modView.querySelector(".mod-desc");
+    if (modDesc) {
+      if (theme) {
+        modDesc.style.backgroundColor = theme.description_background_color;
+        modDesc.style.color = theme.description_text_color;
+      } else {
+        modDesc.style.backgroundColor = "";
+        modDesc.style.color = "";
+      }
+    }
+
+    modView.style.backgroundColor = theme ? theme.main_color : "";
+
+    const buttons = modView.querySelectorAll(".hover-button");
+    buttons.forEach(btn => {
+      btn.style.backgroundColor = theme ? theme.secondary_color : "";
+      const span = btn.querySelector("span");
+      if (span) span.style.color = theme ? theme.ui_text_color : "";
+    });
+
+    const ratingBg = modView.querySelector(".rating-background");
+    if (ratingBg) {
+      ratingBg.style.backgroundColor = theme ? theme.secondary_color : "";
+      ratingBg.querySelectorAll(".modRating, .modPlayCount").forEach(el => {
+        el.style.color = theme ? theme.ui_text_color : "";
+      });
+    }
+  });
 }
 
 function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
@@ -424,7 +472,10 @@ $(document).ready(async () => {
   createTagButtons(tagsFound);
   updateModViews();
 
+  applyModBoxThemes();
+
   if (modNameParam) {
+    customThemesButton.style.display = "none";
     loadModFromButton(modNameParam);
   }
 });
@@ -948,6 +999,10 @@ async function loadModFromButton(modValue) {
       alert(`Failed to load mod ${modValue}. See console for details.`);
       return;
     }
+  }
+
+  if (customThemesButton) {
+    customThemesButton.style.display = "none";
   }
 
   $("#modloaddiv")[0].style.display = "none";
