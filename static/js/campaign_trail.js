@@ -461,21 +461,20 @@ function endingPicker(out, totv, aa, quickstats) {
     // out = "win", "loss", or "tie" for your candidate
     // totv = total votes in entire election
     // aa = all final overall results data
-    // quickstat = relevant data on candidate performance
-    // (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
+    // quickstats = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
 
     if (important_info.indexOf("404") > -1) {
         important_info = "return false";
     }
 
-    if (important_info !== "") {
-        const result = new Function("out", "totv", "aa", "quickstats", important_info)(
+    if (important_info != "") {
+        a = new Function("out", "totv", "aa", "quickstats", important_info)(
             out,
             totv,
             aa,
             quickstats,
         );
-        return result;
+        return a;
     }
 
     return "ERROR";
@@ -1278,8 +1277,8 @@ function openMap(_e) {
     // startTime = performance.now();
     const gameWindow = document.querySelector("#game_window");
     const mainContentArea = document.querySelector("#main_content_area");
-    const advisorButtonText = (e.answer_feedback_flg === 1) 
-        ? "Disable advisor feedback" 
+    const advisorButtonText = (e.answer_feedback_flg === 1)
+        ? "Disable advisor feedback"
         : "Enable advisor feedback";
     if (mainContentArea) {
         gameWindow.querySelectorAll(":scope > *:not(#main_content_area):not(.game_header)")
@@ -1871,7 +1870,7 @@ function nextQuestion() {
             return false;
         }
     }
-
+    
     if (e.question_number < e.global_parameter_json[0].fields.question_count - 1) {
         setTimeout(() => mapCache((skip = false)), 0); // starts new thread for poll map preloading
     }
@@ -1967,8 +1966,7 @@ function descHTML(descWindow, id) {
     const desc = isRM ? "description_as_running_mate" : "description";
     const imageId = isRM ? "running_mate_image" : "candidate_image";
 
-    $(descWindow).html(
-        `
+    $(descWindow).html(`
         <div class="person_image" id="${imageId}">
             <img src="${candObj.fields.image_url}" width="210" height="250"/>
         </div>
@@ -1978,8 +1976,8 @@ function descHTML(descWindow, id) {
                 <li>${e.PartyText} ${candObj.fields.party}</li>
                 <li>${e.HomeStateText} ${candObj.fields.state}</li>
             </ul>
-        ${candObj.fields[desc]}</div>`.trim(),
-    );
+        ${candObj.fields[desc]}
+        </div>`.trim());
 }
 
 function a(e) {
@@ -3048,16 +3046,19 @@ function overallResultsHtml() {
         e.final_outcome = "tie";
     }
     const n = e.candidate_json.find((f) => f.pk === overallResults[0].candidate);
-    let l;
+    /* let l;
     if (overallResults[0].electoral_votes >= winningNum) l = n.fields.image_url;
-    else l = t.fields.no_electoral_majority_image;
+    else l = t.fields.no_electoral_majority_image; */
+    const l = overallResults[0].electoral_votes >= winningNum
+        ? n.fields.image_url
+        : t.fields.no_electoral_majority_image;
     const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
 
     if (Number(important_info.indexOf("<html>")) === -1 && important_info !== "") {
         campaignTrail_temp.multiple_endings = true;
     }
     const candResults = e.final_overall_results.find((f) => f.candidate === e.candidate_id);
-    quickstats = [
+    window.quickstats = [
         candResults.electoral_votes,
         (candResults.popular_votes / totalPV) * 100,
         candResults.popular_votes,
@@ -3067,7 +3068,7 @@ function overallResultsHtml() {
     getResults(e.final_outcome, totalPV, e.final_overall_results, quickstats);
 
     if (campaignTrail_temp.multiple_endings) {
-        if (testTest !== false) {
+        if (testTest) {
             s = testTest;
         }
     }
@@ -3154,11 +3155,11 @@ function overallResultsHtml() {
     if ($prev.length) {
         const targ = $prev[0];
 
-        const prevObs = new MutationObserver((mutations) => {
+        const prevObs = new MutationObserver((mutations, obs) => {
             const reload = mutations.some((f) => f.type === "childList" || f.type === "characterData");
             if (reload) {
                 window.location.reload();
-                prevObs.disconnect();
+                obs.disconnect();
             }
         });
 
@@ -3193,12 +3194,6 @@ function overallResultsHtml() {
             },
         );
     });
-
-    $("#final_election_map_button").click(() => finalMapScreenHtml());
-    $("#state_results_button").click(() => stateResultsHtml());
-    $("#overall_details_button").click(() => overallDetailsHtml());
-    $("#recommended_reading_button").click(() => furtherReadingHtml());
-    $("#play_again_button").click(() => beginNewGameHtml());
 }
 
 function getSortedCands() {
@@ -3266,11 +3261,6 @@ function finalMapScreenHtml() {
         </div>`.trim();
     $("#game_window").html(resHtml);
     $("#map_container").usmap(coloredResults);
-    $("#overall_results_button").click(() => overallResultsHtml());
-    $("#state_results_button").click(() => stateResultsHtml());
-    $("#overall_details_button").click(() => overallDetailsHtml());
-    $("#recommended_reading_button").click(() => furtherReadingHtml());
-    $("#play_again_button").click(() => beginNewGameHtml());
 }
 
 function stateResultsHtml() {
@@ -3413,21 +3403,6 @@ function stateResultsHtml() {
         const e = T($stateTab.val());
         $("#state_result_data_summary").html(e);
     });
-    $("#overall_results_button").click(() => {
-        overallResultsHtml();
-    });
-    $("#final_election_map_button").click(() => {
-        finalMapScreenHtml();
-    });
-    $("#overall_details_button").click(() => {
-        overallDetailsHtml();
-    });
-    $("#recommended_reading_button").click(() => {
-        furtherReadingHtml();
-    });
-    $("#play_again_button").click(() => {
-        beginNewGameHtml();
-    });
 }
 
 function overallDetailsHtml() {
@@ -3447,7 +3422,7 @@ function overallDetailsHtml() {
                 <td>${((f.popular_votes / totalPV) * 100).toFixed(e.finalPercentDigits)}%</td>
             </tr>
         `;
-    }).join("");
+    }).join("").replace(/>\s+</g, "><");
 
     const l = e.percentile !== "None"
         ? `<p>You have done better than approximately <strong>${e.percentile}%</strong> of the games that have been played with your candidate and difficulty level.</p>`
@@ -3560,23 +3535,8 @@ function overallDetailsHtml() {
                 </div>
             </div>
         </div>
-    `;
+    `.trim();
     $("#game_window").html(r);
-    $("#overall_results_button").click(() => {
-        overallResultsHtml();
-    });
-    $("#final_election_map_button").click(() => {
-        finalMapScreenHtml();
-    });
-    $("#state_results_button").click(() => {
-        stateResultsHtml();
-    });
-    $("#recommended_reading_button").click(() => {
-        furtherReadingHtml();
-    });
-    $("#play_again_button").click(() => {
-        beginNewGameHtml();
-    });
 }
 
 function furtherReadingHtml() {
@@ -3629,11 +3589,6 @@ function furtherReadingHtml() {
     `;
 
     $("#game_window").html(i);
-    $("#overall_results_button").click(() => overallResultsHtml());
-    $("#final_election_map_button").click(() => finalMapScreenHtml());
-    $("#state_results_button").click(() => stateResultsHtml());
-    $("#overall_details_button").click(() => overallDetailsHtml());
-    $("#play_again_button").click(() => beginNewGameHtml());
 }
 
 function beginNewGameHtml() {
@@ -4102,6 +4057,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             $("#map_container").usmap(mapOptions);
         },
+        "#overall_results_button": () => overallResultsHtml(),
+        "#final_election_map_button": () => finalMapScreenHtml(),
+        "#state_results_button": () => stateResultsHtml(),
+        "#overall_details_button": () => overallDetailsHtml(),
+        "#recommended_reading_button": () => furtherReadingHtml(),
+        "#play_again_button": () => beginNewGameHtml(),
     };
 
     document.body.addEventListener("click", (event) => {
