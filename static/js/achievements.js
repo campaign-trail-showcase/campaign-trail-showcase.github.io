@@ -93,14 +93,16 @@ const achContent = document.getElementById("achcontent");
 const styleElement = document.createElement("style");
 styleElement.textContent = `
   .achSubHolder {
-    overflow: hidden;
-    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-    max-height: 0;
+    overflow: auto;
+    transition: opacity 0.3s ease-out;
+    max-height: none;
     opacity: 0;
+    display: none;
   }
   .achSubHolder.visible {
-    max-height: 2000px;
     opacity: 1;
+    display: inline-flex;
+    flex-wrap: wrap;
   }
   .ach-pagination {
     display: flex;
