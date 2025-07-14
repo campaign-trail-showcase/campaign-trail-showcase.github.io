@@ -329,7 +329,12 @@ function addAllAchievements() {
   let names = Object.keys(allAch).sort();
   
   if (showOnlyCurrentMod) {
-    names = names.filter(modName => modName === window.modBeingPlayed);
+    // special case: when playing 2024, also show 2024 Divided States achievements
+    if (window.modBeingPlayed === "2024") {
+      names = names.filter(modName => modName === "2024" || modName === "2024 Divided States");
+    } else {
+      names = names.filter(modName => modName === window.modBeingPlayed);
+    }
   }
   
   if (showOnlyFavoriteMods) {
