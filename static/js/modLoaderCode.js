@@ -191,7 +191,7 @@ function getAlternativeIconUrl(url) {
   return null;
 }
 
-// preload award icons to avoid flickering
+// preload award icons
 function preloadAwardIcon(url) {
   // if already cached, return the cached URL
   if (awardIconCache[url]) {
@@ -214,9 +214,7 @@ function preloadAwardIcon(url) {
     };
     
     img.onerror = () => {
-      delete pendingIconLoads[url];
-      
-      // try alt URL
+      // try to load an alternative URL if the primary fails
       const altUrl = getAlternativeIconUrl(url);
       if (altUrl) {
         console.log(`Primary URL failed, trying alternative: ${altUrl}`);
@@ -225,12 +223,14 @@ function preloadAwardIcon(url) {
         altImg.onload = () => {
           awardIconCache[url] = true;
           awardIconCache[altUrl] = true;
+          delete pendingIconLoads[url];
           resolve(url);
         };
         
         altImg.onerror = () => {
           console.error(`Failed to load award icon: ${url} (and alternative)`);
           failedIconUrls[url] = true;
+          delete pendingIconLoads[url];
           reject(url);
         };
         
@@ -238,6 +238,7 @@ function preloadAwardIcon(url) {
       } else {
         console.error(`Failed to load award icon: ${url}`);
         failedIconUrls[url] = true;
+        delete pendingIconLoads[url];
         reject(url);
       }
     };
