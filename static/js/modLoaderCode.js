@@ -485,8 +485,10 @@ function renderAwards(awards, rawAwardUrls) {
 
   // create an image tag for each URL. the first is visible, the rest are hidden
   let awardImagesHTML = awardUrls.map((url, index) => {
+    // if the primary URL fails, load the alternative URL
+    const altUrl = getAlternativeIconUrl(url);
     const style = index === 0 ? 'opacity: 1; transition: opacity 0.3s ease-in-out;' : 'opacity: 0; transition: opacity 0.3s ease-in-out;';
-    return `<img class="mod-trophy" src="${url}" style="${style}">`;
+    return `<img class="mod-trophy" src="${url}" style="${style}"${altUrl ? ` onerror="this.onerror=null;this.src='${altUrl}'"` : ""}>`;
   }).join('');
 
   return `
