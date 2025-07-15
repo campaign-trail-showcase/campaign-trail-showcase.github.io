@@ -261,7 +261,7 @@ async function loadJSON(path, varr, callback = null) {
 
 const strCopy = obj => JSON.parse(JSON.stringify(obj));
 
-const campaignTrail_temp = {};
+var campaignTrail_temp = {};
 const ree = {};
 
 campaignTrail_temp.election_json = {};
