@@ -132,7 +132,7 @@ const nct_stuff = {
   selectedTheme: "",
 };
 
-const theme = window.localStorage.getItem("theme");
+var theme = window.localStorage.getItem("theme");
 nct_stuff.selectedTheme = theme || "tct";
 let selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
 
