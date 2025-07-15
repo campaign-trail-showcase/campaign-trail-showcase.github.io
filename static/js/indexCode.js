@@ -167,10 +167,10 @@ const stassenyear = [
 // DOM cache
 const correctbannerpar = document.getElementsByClassName("game_header")[0];
 var corrr = correctbannerpar.innerHTML;
-const header = $("#header")[0];
+const header = document.getElementById("header");
 const gameHeader = document.getElementsByClassName("game_header")[0];
-const gameWindow = $("#game_window")[0];
-const container = $(".container")[0];
+const gameWindow = document.getElementById("game_window");
+const container = document.querySelector(".container");
 const campaignTrailMusic = document.getElementById("campaigntrailmusic");
 const dynamicStyle = document.createElement("style");
 document.head.appendChild(dynamicStyle);
