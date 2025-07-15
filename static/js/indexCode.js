@@ -163,12 +163,12 @@ const stassenyear = [
 ];
 
 // DOM cache
-const correctbannerpar = document.getElementsByClassName("game_header")[0];
-const corrr = correctbannerpar.innerHTML;
-const header = $("#header")[0];
-const gameHeader = document.getElementsByClassName("game_header")[0];
-const gameWindow = $("#game_window")[0];
-const container = $(".container")[0];
+let correctbannerpar = document.getElementsByClassName("game_header")[0];
+let corrr = correctbannerpar.innerHTML;
+let header = $("#header")[0];
+let gameHeader = document.getElementsByClassName("game_header")[0];
+let gameWindow = $("#game_window")[0];
+l container = $(".container")[0];
 const campaignTrailMusic = document.getElementById("campaigntrailmusic");
 const dynamicStyle = document.createElement("style");
 document.head.appendChild(dynamicStyle);
