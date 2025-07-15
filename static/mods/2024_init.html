@@ -1844,8 +1844,9 @@ e.creditsPage = () => {
   
 }
   
-const fixStyle = document.createElement("style");
-fixStyle.innerHTML = `
+e.unlocks = () => {
+
+let credits_html = `<style>
 .unlock-block {
   display: flex;
   align-items: center;
@@ -1871,12 +1872,9 @@ fixStyle.innerHTML = `
   line-height: 48px; /* matches image height for perfect vertical centering */
   font-weight: normal;
   display: inline-block;
-}`;
-document.head.appendChild(fixStyle);
-
-e.unlocks = () => {
-
-let credits_html = `<h2>You have unlocked the following...</h2>`;
+}
+</style>
+<h2>You have unlocked the following...</h2>`;
 
 if (localStorage.getItem("hasDiedWon")) {
     credits_html += `<h4><font color="#ffffffff">Congratulations on winning despite Trump's death in Butler! You can use <u>"Enable Butler Tooltip?"</u> to determine which RNG answer will kill Trump in Butler, Pennsylvania.</font></h4>`;
@@ -1897,8 +1895,8 @@ if (localStorage.getItem("burgum")) {
     credits_html += `<div class="unlock-block"><img src="https://itsastronomical.com/assets/2024/square/burgum.png" alt="Doug Burgum"><h4><font color="#ffffffff"><u>Doug Burgum</u></font></h4></div>`;
 }
 
-if((!(localStorage.getItem("haley"))) || (!(localStorage.getItem("desantis"))) || (!(localStorage.getItem("vance"))) || (!(localStorage.getItem("burgum")))   ){
-    credits_html += `<h4><font color="#ffffffff"><u>It appears that you haven't unlocked any alternate Republicans. Thus,you can only play as Donald Trump Jr. right now.<br>To unlock them, find them on the Democratic side and then win the election against them!</u></font></h4>`;
+if((!(localStorage.getItem("haley"))) && (!(localStorage.getItem("desantis"))) && (!(localStorage.getItem("vance"))) && (!(localStorage.getItem("burgum")))   ){
+    credits_html += `<h4><font color="#ffffffff"><u>It appears that you haven't unlocked any alternate Republicans. Thus, you can only play as Donald Trump Jr. right now.<br>To unlock them, find them on the Democratic side and then win the election against them!</u></font></h4>`;
 }
 
 if (localStorage.getItem("rfk")) {
@@ -2047,9 +2045,10 @@ campaignTrail_temp.bunnyhop = true;
               colourCheckbox.addEventListener("change", function() {
                   if (this.checked){
                       campaignTrail_temp.helper = true;
-                  }
-                  else{          
+                      clearInterval(removeCandidateSummaryInterval)
+                  }else{          
                     campaignTrail_temp.helper = false;
+                    clearInterval(removeCandidateSummaryInterval)
                   }
               });
   
