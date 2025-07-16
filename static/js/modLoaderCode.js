@@ -447,8 +447,9 @@ $(document).ready(async () => {
 
   // push custom mods to the mod grid first
   const modGrid = document.getElementById("mod-grid");
+  const fragment = document.createDocumentFragment();
   customModsLoaded.forEach(modView => {
-    modGrid.appendChild(modView);
+    fragment.appendChild(modView);
   });
 
   modsLoaded.sort(modCompare);
@@ -459,7 +460,7 @@ $(document).ready(async () => {
       modData.imageUrl,
       modData.description,
     );
-    modGrid.appendChild(modView);
+    fragment.appendChild(modView);
 
     if (
       modData.mod.dataset.awardimageurls &&
@@ -474,7 +475,7 @@ $(document).ready(async () => {
 
     modList.push(modView);
   }
-  // updateModViews();
+  modGrid.appendChild(fragment);
 
   createTagButtons(tagsFound);
   updateModViews();
@@ -498,6 +499,8 @@ function createModView(mod, imageUrl, description, isCustom) {
   modView.setAttribute("mod-name", mod.value);
   modView.setAttribute("mod-display-name", mod.innerText.toLowerCase());
   namesOfModsFromValue[mod.value] = mod.innerText;
+
+  modView._tagsArray = mod.dataset.tags ? mod.dataset.tags.split(" ") : [];
 
   const favText = isFavorite(mod.value) ? UNFAV : FAV;
 
@@ -736,26 +739,25 @@ function filterMods(event) {
 
 function createTagButtons(tagsFound) {
   const tagsGrid = document.getElementById("tags");
+  const fragment = document.createDocumentFragment();
   Array.from(tagsFound)
     .sort()
     .forEach((tag) => {
       const tagButton = document.createElement("div");
-
       tagButton.classList.add("tag-button");
       tagButton.innerHTML = `
         <input type="checkbox" id="${tag}" name="${tag}" value="${tag}" checked>
         <label style="user-select:none" for="${tag}">${tag.replaceAll("_", " ")}</label><br>
         `;
-      tagsGrid.appendChild(tagButton);
       const checkbox = tagButton.getElementsByTagName("INPUT")[0];
-
       tagButton.addEventListener("click", (event) => {
         if (event.target === tagButton) checkbox.click();
       });
-
       tagList.push(checkbox);
       checkbox.addEventListener("change", updateModViews);
+      fragment.appendChild(tagButton);
     });
+  tagsGrid.appendChild(fragment);
 }
 
 function getVisibleMods() {
@@ -770,7 +772,7 @@ function getVisibleMods() {
   for (let i = 0; i < modList.length; i++) {
     const modView = modList[i];
     const modMode = modView.getAttribute("mode");
-    const modTags = modView.getAttribute("tags").split(" ");
+    const modTags = modView._tagsArray || [];
     const modName = modView.getAttribute("mod-name");
     const modDisplayName = modView.getAttribute("mod-display-name");
 
@@ -796,21 +798,23 @@ function updateModViews(event) {
 
   const visibleMods = getVisibleMods();
 
-  // hide all mods before showing the paginated ones
-  modList.forEach((modView) => (modView.style.display = "none"));
-
   const modGrid = document.getElementById("mod-grid");
   let noFavsMessage = document.getElementById("no-favorites-message");
+
+  // hide all mods before updating
+  while (modGrid.firstChild) {
+    modGrid.removeChild(modGrid.firstChild);
+  }
 
   if (onlyFavorites && visibleMods.length === 0) {
     if (!noFavsMessage) {
       noFavsMessage = document.createElement("div");
       noFavsMessage.id = "no-favorites-message";
       noFavsMessage.classList.add("no-favorites-message");
-      modGrid.appendChild(noFavsMessage);
     }
     noFavsMessage.innerHTML = `You have no favorite mods. Press the ${FAV} button on any mod to see them here!`;
     noFavsMessage.style.display = "block";
+    modGrid.appendChild(noFavsMessage);
   } else if (noFavsMessage) {
     noFavsMessage.style.display = "none";
   }
@@ -819,11 +823,14 @@ function updateModViews(event) {
   const endIndex = startIndex + modsPerPage;
   const pageMods = visibleMods.slice(startIndex, endIndex);
 
+  const fragment = document.createDocumentFragment();
   pageMods.forEach((modView) => {
     modView.style.display = "flex";
+    fragment.appendChild(modView);
     // lazy load mod info
     getFavsAndPlayCount(modView.getAttribute("mod-name"), modView);
   });
+  modGrid.appendChild(fragment);
 
   renderPaginationControls(visibleMods.length);
 }
@@ -910,8 +917,13 @@ async function onChangeModSorter(e) {
   try {
     if (sorter === "mostFav" || sorter === "leastFav" || sorter === "mostPlays") {
       const visibleMods = getVisibleMods();
-      const promises = visibleMods.map((modView) =>
-        getFavsAndPlayCount(modView.getAttribute("mod-name"), modView),
+      // filter out mods that already have favs and play count
+      const modsToLoad = visibleMods.filter(modView =>
+        !modView.dataset.favs || !modView.dataset.playCount
+      );
+      // load only those we need to
+      const promises = modsToLoad.map((modView) =>
+        getFavsAndPlayCount(modView.getAttribute("mod-name"), modView)
       );
       await Promise.all(promises);
     }
@@ -951,6 +963,9 @@ function sortModViews(comparisonFunction) {
 
   const modGrid = document.getElementById("mod-grid");
   // clear the mod grid and append the sorted views
+  while (modGrid.firstChild) {
+    modGrid.removeChild(modGrid.firstChild);
+  }
   const fragment = document.createDocumentFragment();
   modList.forEach((modView) => fragment.appendChild(modView));
   modGrid.appendChild(fragment);
@@ -1148,7 +1163,13 @@ function filterEntries() {
   });
 
   var $modSelect = $("#modSelect");
-  $modSelect.empty().append(filteredOptions);
+  $modSelect.empty();
+
+  const fragment = document.createDocumentFragment();
+  filteredOptions.each(function () {
+    fragment.appendChild(this);
+  });
+  $modSelect[0].appendChild(fragment);
 
   $modSelect.val($modSelect.find("option:first").val());
 }
