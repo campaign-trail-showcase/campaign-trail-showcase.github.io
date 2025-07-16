@@ -251,6 +251,7 @@ setInterval(() => {
   if (gameHeader.innerHTML != corrr) gameHeader.innerHTML = corrr;
   gameHeader.style.backgroundColor = selectedTheme.coloring_title;
   updateDynamicStyle();
+  corrr = gameHeader.innerHTML;
 }, 100);
 
 async function loadJSON(path, varr, callback = null) {
