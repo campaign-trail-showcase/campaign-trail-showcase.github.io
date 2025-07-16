@@ -44287,7 +44287,7 @@ if ((ans == 21587 || ans == 21590 || ans == 85434 || ans == 85438 || ans == 8544
     }
   }
 }
-if (campaignTrail_temp.question_number == 19 && campaignTrail_temp.candidate_last_name == 'Biden' && gaza >= 1 && trust >= 3) {
+if (campaignTrail_temp.question_number == 20 && campaignTrail_temp.candidate_last_name == 'Biden' && gaza >= 1 && trust >= 3) {
   campaignTrail_temp.questions_json[20] = {
     "model": "campaign_trail.question",
     "pk": 21965,
@@ -44387,9 +44387,19 @@ if (campaignTrail_temp.question_number == 21 && campaignTrail_temp.candidate_las
   }
 }
 
-// Harris Intro
+// Harris Intro (Default)
 if (ans == 21327) {
   changePlaylist(harrisPlaylist);
+
+  // tunnel function
+  // I gotta learn how to use this anyway
+
+  campaignTrail_temp.questions_json[20] = tunnel(1042);
+  campaignTrail_temp.questions_json[24] = tunnel(1045);
+  campaignTrail_temp.questions_json[28] = tunnel(20749);
+  campaignTrail_temp.questions_json[31] = tunnel(1074);
+  campaignTrail_temp.questions_json[34] = tunnel(1076);
+
   updateAdvisor(5002, "Unburdened", "https://itsastronomical.com/assets/2024/opp/unburdened.png", "It's time to imagine what can be, unburdened by what has been.");
   campaignTrail_temp.candidate_image_url = "https://itsastronomical.com/assets/2024/square/harris.png";
   campaignTrail_temp.running_mate_image_url = "https://itsastronomical.com/assets/2024/square/vp.png";
@@ -45426,6 +45436,7 @@ if (ans == 84476 || ans == 84474){
 // HARRIS
 if (campaignTrail_temp.candidate_json[0]["fields"].last_name == "Harris") {
 // Harris v. Haley
+
 if ((ans == 21327 || ans == 83506) && campaignTrail_temp.candidate_json[2]["fields"].last_name == "Haley") {
 
 
@@ -47044,6 +47055,9 @@ ctsAchievement("Unburdened");
 if (quickstats[0] >= 270 && running == false && campaignTrail_temp.candidate_json[0]["fields"].last_name == "Harris") {
 ctsAchievement("Worthy Sacrifice");
 }
+if (quickstats[0] >= 270 && aa[2].vote_percentage >= 5.00 && aa[2].candidate == 202 && campaignTrail_temp.candidate_json[8]["fields"].last_name == "Kennedy/Others") {
+  ctsAchievement("Controlled Opposition");
+}
 if (quickstats[0] >= 400 && running == false && campaignTrail_temp.candidate_json[0]["fields"].last_name == "Harris" && campaignTrail_temp.candidate_json[2]["fields"].last_name == "Trump (POW)" && gaza >= 2 && wins >= 5 && leftrep >= 1) {
   ctsAchievement("Gloria");
   // Before I added this achievement I kept thinking about the idea of retiring from modding. Maybe I just got burnt out, so don't worry, I don't think I will.
@@ -47647,6 +47661,12 @@ else if (quickstats[0] >= 270 && e.player_answers.includes(21189) && campaignTra
   e.pages.push(`<h3>Republicans Back Trillion Dollar Coin, If Trump's Face Can Go On It</h3><h4>CNBC | June 3rd, 2025</h4><p>The decision by President Joe Biden to mint a trillion dollar coin was one ridiculed by Republicans nationally, and the destruction of the coin was seen as a key pledge by the Republican campaign in 2024.</p><p>Dysfunction in Washington, however, may mean that the coin is here to stay longer than expected.</p><p>With a narrow Democratic House majority, and a Republican Senate, getting a bill passed that can solve the incoming government shutdown seems nearly impossible. While the House seems unified in passing a 'clean' appropriations bill, there's been a growing movement in the Senate GOP caucus to demand spending cuts before any bill regarding the budget is passed.</p><p>This movement, led by Senators Ron Johnson and Marsha Blackburn of Wisconsin and Tennessee respectively, want the GOP to stand firm and block any appropriations bill without monetary concessions.</p><p>'We were... elected to prevent this sort of crap.' says Ron Johnson 'I don't see why we should bow to the White House on this matter'.  </p><p>However, Senate Majority Leader John Thune has one possible concession he can throw to these potential holdouts - putting former President Donald Trump's face on the coin.</p><p>'It's something that's been brought up, for sure. I mean, the damage is already done, so we may as well put the face of the greatest President onto an incredibly powerful coin.' says Senator Blackburn.</p>`)
   //e.image = ""
   e.executable.push([2, (() => {e.image = e.image = 'https://itsastronomical.com/assets/2024/endings/bidencoin.png'})]) 
+}
+else if (quickstats[0] >= 270 && aa[2].vote_percentage >= 5.00 && aa[2].candidate == 202 && campaignTrail_temp.candidate_json[8]["fields"].last_name == "Kennedy/Others") {
+  ctsAchievement("Controlled Opposition");
+  e.pages.push(`<h3>Democrats to Cut FEC’s Public Election Funding</h3><h4>FOX News | September 18th, 2025</h4><p>In a move most believe to be a response to Robert F. Kennedy Jr. gaining 5% of the popular vote, some Democrats are moving to end the FEC’s Public Election Funding program, as the insurgent’s “We the People” party would have qualified for matching federal funds.</p><p>“I can’t say I’m surprised,” Kennedy told FOX NEWS when asked for a response, “it’s been a long time since the Democratic Party was the party of democracy. My father would be ashamed of the way the party’s went.”</p><p>The Kennedy family at large, despite being unified in their opposition to RFK Jr.’s bid, are not unified behind the current Democratic plan of action here, with Joe Kennedy III saying “Look, the guy’s a crank, but the rules are the rules. He won 5% of the vote, and as such is entitled to federal funds. We support campaign finance laws as is.”</p><p>Other third party candidates have had mixed reactions to this, with left-wing DEI advocate Cornel West slamming the Democrats, saying that “Kennedy’s insurgent bid is one of the few things that’s been able to challenge the duopoly. He was an unfitting warrior for the cause, but the duopoly is rearing its ugly head to stamp out any opposition as it always does.” </p><p>Kennedy has already sued the FEC, and has made it clear that he intends to escalate the case “as far as it needs to go,” making it clear that “I’m a goddamned Kennedy, of course I have the money to take this to the Supreme Court.” </p><p>This interesting situation is just another example of the Democrats being hypocrites, slamming President Donald Trump for his abuses of power while never hesitating to abuse that same power themselves.</p>`)
+  //e.image = ""
+  e.executable.push([2, (() => {e.image = e.image = 'https://itsastronomical.com/assets/2024/endings/rfkbrainrot.png'})]) 
 }
 else if (quickstats[0] >= 270 && trust <= 4 && campaignTrail_temp.candidate_json[0]["fields"].last_name == "Biden") {
   e.pages.push(`<h3>538: Why We’re Closing Our Doors</h3><h4>By: Nathaniel Rakich</h4><p>Over the last few election cycles, we at FiveThirtyEight have centered our reporting around data, particularly polling data, to attempt to better understand the American public. In 2016, when the polls heavily underestimated Donald Trump, many of us were grappling with the question of the legitimacy of our approach for the first time. We thought it may have been the margin or the sampling, and continued to press on.</p><p>However, as more elections have taken place and polls have become less and less accurate, we feel as though we’re becoming a modern Literary Digest. We gave Biden a chance below 10% of winning, and he pulled it off. No poll, swing state or national, had him ahead. With `+ opLast + ` winning a 20% chance, we thought it was just a one-in-five chance coming up. However, with the odds for winners continually getting worse, the model we use to forecast probabilities and the data just don’t support our style.</p><p>As such, we’ve struck a deal with ABC to integrate our staff into their normal politics reporting team. Our website will remain as an archive to our past work, and our reporters will still be putting in the good work, but FiveThirtyEight is gone until further notice. Should poll accuracy make a recovery in the next few years, we may bring it back, but the trends point in the opposite direction.</p><p>Thank you for your years of support, and we hope you’ll stick around with us as a part of ABC’s politics reporting team.</p>`)
