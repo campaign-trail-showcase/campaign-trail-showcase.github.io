@@ -1,3 +1,4 @@
+//Code1
 function addDynamicCSS() {
     var css = `
         .inner_window_question h3 .mytooltip{
@@ -61,9 +62,12 @@ addDynamicCSS();
 tooltipList = [
     //Organisations
     {searchString: "NEC", explanationText: "The National Emergency Committee (NEC), also known as “the Committee”, is the semi-secret council of sixteen wealthy individuals that both funded and organized the March on Washington, and currently hold great sway over the subsequent post-coup administration. They are committedly capitalist on economic policy, conservative on social policy, and nearly all their members have sympathies towards fascism."},
-    {searchString: "PFLA", explanationText: "<img src='https://i.postimg.cc/7h54KxY5/MOW-PFLA-Infobox.png' style='max-width: 300px;'><br>The Progressive-Farmer-Labor-Alliance (PFLA) is an electoral coalition of the Progressive Party, the Farmer-Labor Party and the Nonpartisan League. Formed in 1930, the group managed to win the presidency in the ‘32 election, only to be couped by the American Legion and their wealthy backers on July 4th, 1933, in what would become known as the March on Washington."},
+    {searchString: "PFLA", explanationText: "<img src='https://i.postimg.cc/7h54KxY5/MOW-PFLA-Infobox.png' style='max-width: 300px;'><br>The Progressive-Farmer-Labor-Alliance (PFLA) is an electoral coalition of the Progressive Party, the Federated Farmer-Labor Party and the Nonpartisan League. Formed in 1930, the group managed to win the presidency in the ‘32 election, only to be couped by the American Legion and their wealthy backers on July 4th, 1933, in what would become known as the March on Washington."},
     {searchString: "IWW", explanationText: "<img src='https://i.postimg.cc/4y0fGYFv/MOW-IWW-Infobox.png' style='max-width: 300px;'><br>The Industrial Workers of the World (IWW) is an overtly syndicalist and militant industrial union and one of the largest unions in the United States, despite its status as illegal. Surviving the red scare of the 10’s and 20’s due to funding from the Soviets, the IWW has since capitalized on unemployment and poor working conditions to become a notable force amongst the American left going into the 30’s. Its members are often known as Wobblies."},
     {searchString: "Wobblies", explanationText: "<img src='https://i.postimg.cc/4y0fGYFv/MOW-IWW-Infobox.png' style='max-width: 300px;'><br>The Industrial Workers of the World (IWW) is an overtly syndicalist and militant industrial union and one of the largest unions in the United States, despite its status as illegal. Surviving the red scare of the 10’s and 20’s due to funding from the Soviets, the IWW has since capitalized on unemployment and poor working conditions to become a notable force amongst the American left going into the 30’s. Its members are often known as Wobblies."},
+    {searchString: "Klan", explanationText: "<img src='https://i.postimg.cc/XvXH8ZwY/MOW-Klan-Infobox.png'><br>The Ku Klux Klan (KKK), on its second iteration since 1915, is a nationwide Christian white supremacist group made infamous for their liberal use of terror against non-whites, socialists, Catholics and various other “undesirables”. Whilst officially not aligned with any political party, the Klan has drifted towards the ALL since its founding, sharing its cultural conservatism and radical anti-socialism."},
+    {searchString: "Silver Legion", explanationText: "<img src='https://i.postimg.cc/YSmN0Q6Y/MOW-Silver-Legion-Infobox.png' style='max-width: 300px;'><br>The Silver Legion of America is an explicitly anti-semitic Christian fascist organization centered around the personality of former journalist William Dudley Pelley. Whilst not as popular as its many alternatives due to Pelley’s overly esoteric beliefs, the Silver Legion’s paramilitaries are extremely active and violent, regularly targeting Jewish communities up and down the USA."},
+    {searchString: "Black Legion", explanationText: "<img src='https://i.postimg.cc/gjyNJ3PN/MOW-Black-Legion-Infobox.png' style='max-width: 300px;'><br>Originating in 1925 as a splinter from the KKK, the Black Legion is a white supremacist terrorist group that shares much of the Klan’s ideology and structure, with the major difference being the latter’s concentration in the Midwestern states. Despite being smaller than the Klan by a large margin, the Black Legion’s location within union territory often results in bloody clashes between the two, many of which have been highly publicized by the American media."},
     //NEC and Cabinet
     {searchString: "Bush", explanationText: "<img src='https://i.postimg.cc/9XLz1M1Q/MOW-Bush-Infobox.png'><br>Prescott Bush, Secretary of State, is one of the members of the NEC and its loudest proponent of increased foreign intervention. An investment banker, he has numerous ties to businesses in Italy, Austria and the German Empire, and is openly supportive of fascism. One of the few personal allies of Child."},
     {searchString: "Raskob", explanationText: "<img src='https://i.postimg.cc/C1PYCZYy/MOW-Raskob-Infobox.png'><br>John J. Raskob, Secretary of Treasury, is a conservative businessman and former Chair of the DNC. Whilst not a member of the NEC, his connections to DuPont and General Motors, alongside his record for fiscal responsibility, have made him perfect for the job of balancing the country’s budget."},
@@ -77,22 +81,30 @@ tooltipList = [
     {searchString: "Morgan", explanationText: "<img src='https://i.postimg.cc/1zS9yhMd/MOW-Morgan-Infobox.png'><br>J.P. Morgan Jr. is a member of the NEC, one of its three primary financial backers, and also Child's former employer. It was by Morgan's suggestion that the Committee even considered Child as a possible candidate for Butler's VP."},
     {searchString: "Ford", explanationText: "<img src='https://i.postimg.cc/GpPmDhHr/MOW-Ford-Infobox.png'><br>Henry Ford is a member of the NEC and one of its three primary financial backers. Founder and President of Ford Motor Company, Henry has a deep and personal hatred of the IWW, the PFLA and anyone else who seeks to tell him how to run his own business. Despite being a fascist-adjacent rabid anti-semite, he views Child as nothing more than an inexperienced and wide-eyed ideologue."},
     {searchString: "Hearst", explanationText: "<img src='https://i.postimg.cc/9MJXx8dn/MOW-Hearst-Infobox.png'><br>William Randolph Hearst is a member of the NEC and its de facto head of public relations. Being one of the pioneers of yellow journalism, as well as the chairman of Hearst Communications, Hearst and his media machine play a vital role in molding public opinion. Though a convert of fascism, he largely dislikes Child."},
-    {searchString: "Clark", explanationText: "<img src='https://i.postimg.cc/Cxq1F40R/MOW-Clark-Infobox.png'><br>Robert Sterling Clark is a member of the NEC and one of its three primary financial backers. Despite this, he shows little interest in politics beyond whatever keeps himself wealthy and his fellow capitalists at the top."},
+    {searchString: "Clark", explanationText: "<img src='https://i.postimg.cc/8zKkvDnR/MOW-Clark-Infobox.png'><br>Robert Sterling Clark is a member of the NEC and one of its three primary financial backers. Despite this, he shows little interest in politics beyond whatever keeps himself wealthy and his fellow capitalists at the top."},
     {searchString: "MacGuire", explanationText: "<img src='https://i.postimg.cc/bNKyF2np/MOW-Mac-Guire-Infobox.png'><br>Gerald C. MacGuire is a member of the NEC, the American Legion, and a bond salesman for a Wall Street banking firm. One of the earliest members of the Committee, he was the first person to try and convince Butler to lead their prospective coup, but was unable to convince him, ultimately resulting in the adoption of more desperate measures to force the ex-marine’s hand."},
     {searchString: "MacNider", explanationText: "<img src='https://i.postimg.cc/P5YXGrbZ/MOW-Mac-Nider-Infobox.png'><br>Hanford MacNider is a member of the NEC and a former senior officer who briefly served as National Commander of the American Legion in the early 20’s. An important asset in matters of both military and diplomacy, MacNider has preferred to shy away from more public duties following his failure to become the Republican VP candidate in 1932. "},
-    {searchString: "Wood", explanationText: "<img src='https://i.postimg.cc/Gpb1ZPmw/MOW-Wood-Infobox.png'><br>Robert E. Wood is a member of the NEC, a former brigadier general and a leading voice in American conservatism. Rabidly isolationist, he regularly finds himself in opposition to Child and Bush over the issue of foreign policy."},
+    {searchString: "Wood", explanationText: "<img src='https://i.postimg.cc/Gpb1ZPmw/MOW-Wood-Infobox.png'><br>Robert E. Wood is a member of the NEC, a former brigadier general and a leading voice in American conservatism. Rabidly isolationist, he regularly finds himself in opposition to Child and Bush over the issue of foreign policy. His newfound position as Civil Governor of the Philippines has been seen by many as a naked attempt to keep the nation under tight American control."},
+    {searchString: "Hoffman", explanationText: "<img src='https://i.postimg.cc/d0c4cWCg/MOW-Hoffman-Infobox.png'><br>Clare Hoffman is the chief advisor to President Child, being a holdover from his personal staff. A lawyer with a deep admiration for fascism, Hoffman sidelined his own congressional ambitions to aid Child in his 1930 campaign for the House, proving himself to be an efficient and ideologically committed worker in the process."},
     //Others
     {searchString: "Edgar Hoover", explanationText: "<img src='https://i.postimg.cc/fyyz1c5T/MOW-Hoover-Infobox.png'><br>John Edgar Hoover, Director of the Bureau of Investigation, is, despite not being a member of the NEC, one of the most important men in the post-coup administration, overseeing domestic intelligence operations. Being a conservative and staunch anti-socialist, he has no qualms doing the Committee's dirty work, and will willingly ‘deal’ with anyone he views as a threat to his vision of America."},
     {searchString: "Dorothy", explanationText: "Dorothy Child, your fourth wife and one of the only people in your life who will support you untill the end."},
     {searchString: "Mussolini", explanationText: "<img src='https://i.postimg.cc/XvgnJHzY/MOW-Mussolini-Infobox.png'><br>Benito Mussolini is the current duce of Italy, as well as being the founder and main ideologue of fascism. Despite his near-universal hatred amongst the left, many in the US view him as a capable and charismatic leader, and his ideology as something the country should strive to imitate."},
-    {searchString: "Spiridonova", explanationText: "<img src='https://i.postimg.cc/Nj6cJCYk/MOW-Spiridonova-Infobox.png'><br>Maria Spiridonova, founder of the Left Socialist Revolutionary Party and its successor, the Revolutionary Association of Narodniks, is the current chairwoman of the Inter-Republic Congress of Soviets, the ruling body of the SRL. To many in the US, she is the embodiment of narodism, and the antithesis of everything America supposedly stands for."},
-    {searchString: "Pabst", explanationText: "<img src='https://i.postimg.cc/wvTgsXCc/MOW-Pabst-Infobox.png'><br>Waldemar Pabst is the chancellor of the German Empire, one of the three states competing for the mantle of Germany following the country’s implosion during the Kapp Putsch. A diehard anti-socialist with overt fascist sympathies, he is an ideal ally for the Child Administration."},
+    {searchString: "Spiridonova", explanationText: "<img src='https://i.postimg.cc/Nj6cJCYk/MOW-Spiridonova-Infobox.png'><br>Maria Spiridonova, one of the founders of the Left Socialist Revolutionary Party and its successor, the Revolutionary Association of Narodniks, is the current chairwoman of the Inter-Republic Congress of Soviets, the ruling body of the SRL. To many in the US, she is the embodiment of narodism, and the antithesis of everything America supposedly stands for."},
+    {searchString: "Pabst", explanationText: "<img src='https://i.postimg.cc/wvTgsXCc/MOW-Pabst-Infobox.png'><br>Waldemar Pabst is the chancellor of the German Empire, one of the three states competing for the mantle of Germany following the country’s implosion during the Kapp Putsch - a coup Pabst himself played a vital role in instigating. A diehard anti-socialist with overt fascist sympathies, he is an ideal ally for the Child Administration."},
+    {searchString: "MacDonald", explanationText: "<img src='https://i.postimg.cc/mknyXVRX/MOW-Mac-Donald-Infobox.png'><br>Prime Minister of the United Kingdom since 1932, Ramsay MacDonald leads the compromise “National Government”, consisting of the Labour Party (of which he leads), the Liberal Party and the Conservative and Unionist Party. Although Labour sits to the left of the British political spectrum, MacDonald has a tendency to compromise with his right wing adversaries on issues such as austerity, angering many within his own party."},
+    {searchString: "Patton", explanationText: "<img src='https://i.postimg.cc/MHHYmgkf/MOW-Patton-Infobox.png'><br>George S. Patton is, as of July 1933, a lieutenant colonel in the US Army, who, despite his meagre rank, holds a position of relative influence due to his friendship with Chief of Staff Douglas MacArthur. A headstrong conservative with an ardent loyalty to the American nation, Patton’s ingenuity and tactical knowhow are only rivalled by his unbridled arrogance and controversial personality."},
+    {searchString: "Moseley", explanationText: "<img src='https://i.postimg.cc/1t9BffJH/MOW-Moseley-Infobox.png'><br>George Van Horn Moseley is a hardline fascist, rabid anti-semite and former general who was very publicly sacked by President Coxey in February of 1933 due to his outspoken opposition to the new government. As a result, he became a living martyr amongst the American right, and played a vital role in recruiting disenchanted veterans and anti-socialist radicals to the march that overthrew the man who fired him."},
+    {searchString: "Calles", explanationText: "<img src='https://i.postimg.cc/MG0t6ybH/MOW-Calles-Infobox.png'><br>Plutarco Elías Calles is the current dictator of Mexico, as well as founder of the National Revolutionary Party and the primary personality behind the “Maximato” school of political thought. Though he only held the presidency from 1924 to 1928, during which he gained international notoriety due to his harboring of many high-profile bolshevik exiles, he was succeeded by a number of puppet presidents who were ultimately behest to his whims and aided his centralization of the state. He dropped any pretense of democratic rule in 1934 after using the military to coup the reform-minded President Cárdenas and reinstall himself as head of state."},
+    {searchString: "Cárdenas", explanationText: "<img src='https://i.postimg.cc/0QcfmP4q/MOW-Cardenas-Infobox.png'><br>Lázaro Cárdenas was briefly the President of Mexico, being inaugurated in December of 1934 and ousted in February of the next year. Brought to power in a rigged election with the intention of being just another puppet, Cárdenas immediately began working on a plan to undermine and exile Plutarco Calles, only for his plot to be uncovered by Calles loyalists and preempted by a military coup against him. Despite having to flee abroad, he has refused to give up his ambitions for a democratic socialist Mexico, heading a government-in-exile out of Buenos Aires."},
     //Misc
-    {searchString: "SRL", explanationText: "<img src='https://i.postimg.cc/5NF1vNRG/MOW-SRL-Flag-Infobox.png' style='max-width: 300px;'><br>The Soviet Republics of Labour (SRL), commonly known just as “the Soviets”, is a multi-ethnic federation of Socialist Republics that span across a large chunk of Eurasia. Formally founded in 1921 during the latter years of the Russian Civil War, the SRL has quickly become a beacon of socialism, and a pariah to the capitalist world. Global powers such as the United States and United Kingdom are still yet to formally recognize it as a real nation."},
-    {searchString: "Soviets", explanationText: "<img src='https://i.postimg.cc/5NF1vNRG/MOW-SRL-Flag-Infobox.png' style='max-width: 300px;'><br>The Soviet Republics of Labour (SRL), commonly known just as “the Soviets”, is a multi-ethnic federation of Socialist Republics that span across a large chunk of Eurasia. Formally founded in 1921 during the latter years of the Russian Civil War, the SRL has quickly become a beacon of socialism, and a pariah to the capitalist world. Global powers such as the United States and United Kingdom are still yet to formally recognize it as a real nation."},
-    {searchString: "Argentina", explanationText: "<img src='https://i.postimg.cc/7LrLbTPm/MOW-Free-Territory-of-Argentina-Flag-Infobox.png' style='max-width: 300px;'><br>The Free Territory of Argentina is an Anarcho-Syndicalist Confederation that sits in the southern cone of Latin America. Created in the wake of the Argentine Civil War, it was, for a long time, the only socialist nation in the Western Hemisphere, leading to a level of diplomatic and economic isolation from its capitalist neighbors. It's often nicknamed “the Black Spot of the Americas”."},
+    {searchString: "SRL", explanationText: "<img src='https://i.postimg.cc/9X9HQ94q/MOW-SRL-Infobox.png' style='max-width: 300px;'><br>The Soviet Republics of Labour (SRL), commonly known just as “the Soviets”, are a multi-ethnic federation of Socialist Republics that span across a large chunk of Eurasia. Formally founded in 1921 during the latter years of the Russian Civil War, the SRL has quickly become a beacon of socialism, and a pariah to the capitalist world. Global powers such as the United States and United Kingdom are still yet to formally recognize it as a real nation."},
+    {searchString: "Soviets", explanationText: "<img src='https://i.postimg.cc/9X9HQ94q/MOW-SRL-Infobox.png' style='max-width: 300px;'><br>The Soviet Republics of Labour (SRL), commonly known just as “the Soviets”, are a multi-ethnic federation of Socialist Republics that span across a large chunk of Eurasia. Formally founded in 1921 during the latter years of the Russian Civil War, the SRL has quickly become a beacon of socialism, and a pariah to the capitalist world. Global powers such as the United States and United Kingdom are still yet to formally recognize it as a real nation."},
+    {searchString: "Argentina", explanationText: "<img src='https://i.postimg.cc/Bv7vfjvv/MOW-Argentina-Infobox.png' style='max-width: 300px;'><br>The Free Territory of Argentina is an Anarcho-Syndicalist Confederation that sits in the southern cone of Latin America. Created in the wake of the Argentine Civil War, it was, for a long time, the only socialist nation in the Western Hemisphere, leading to a level of diplomatic and economic isolation from its capitalist neighbors. It's often nicknamed “the Black Spot of the Americas”."},
     {searchString: "League of Nations", explanationText: "<img src='https://i.postimg.cc/9F4XpBrL/MOW-League-of-Nations-Flag-Infobox.png' style='max-width: 300px;'><br>Brainchild of former President Woodrow Wilson, the League of Nations was an international organization with the primary goal of preserving peace. Founded in January 1920, the League lasted barely a year before the joint humiliations of the German Collapse and Turkish War of Independence resulted in its disbandment in March 1921. The US never joined the League."},
     {searchString: "Rhineland", explanationText: "<img src='https://i.postimg.cc/j2Bb9GLZ/MOW-ROA-Flag-Infobox.png' style='max-width: 300px;'><br>The Rhineland Occupational Authority (ROA) was established in 1921 when it became apparent that the French occupation of the western Rhineland was permanent. A puppet military administration bordering a hostile socialist state, it lacks sizable popular support and relies almost entirely on French funding to continue existing."},
+    {searchString: "Rhenish Commune", explanationText: "<img src='https://i.postimg.cc/3xKBxyNx/MOW-Rhenish-Commune-Infobox.png' style='max-width: 300px;'><br>The Council Republic of Northwestern Germany, known colloquially as the “Rhenish Commune”, is one of the three rival states claiming the mantle of Germany following the civil war and subsequent decade or so ceasefire. A socialist state aligned with the SRL, the Commune finds itself in an uneasy position due to being surrounded by capitalist nations, resulting in a level of civic militarism naturally fostering itself amongst the populace."},
+    {searchString: "Liberia", explanationText: "<img src='https://i.postimg.cc/MK05w0WL/MOW-Liberia-Infobox.png' style='max-width: 300px;'><br>A former US colony in Africa that has, despite gaining de jure independence in 1847, remained firmly within the American sphere of influence, even sporting a political system and ethnic hierarchy similar to its overlord. Since the inauguration of the Child regime, the country has become a dumping ground for black activists that the government deems too much of a threat, with notable deportees including IWW organizer Ben Fletcher, socialist George Padmore and infamous black nationalist Marcus Garvey."},
 ];
 
 campaignTrail_temp.modBoxTheme = {
@@ -110,20 +122,20 @@ campaignTrail_temp.global_parameter_json = [
         "model": "campaign_trail.global_parameter",
         "pk": 1,
         "fields": {
-            "vote_variable": 1.125,
+            "vote_variable": 1.25,
             "max_swing": 0.12,
             "start_point": 0.94,
             "candidate_issue_weight": 10,
-            "running_mate_issue_weight": 3,
+            "running_mate_issue_weight": 1,
             "issue_stance_1_max": -0.71,
-            "issue_stance_2_max": -0.3,
-            "issue_stance_3_max": -0.125,
-            "issue_stance_4_max": 0.125,
-            "issue_stance_5_max": 0.3,
+            "issue_stance_2_max": -0.42,
+            "issue_stance_3_max": -0.13,
+            "issue_stance_4_max": 0.13,
+            "issue_stance_5_max": 0.42,
             "issue_stance_6_max": 0.71,
             "global_variance": 0.01,
             "state_variance": 0.005,
-            "question_count": 35,
+            "question_count": 40,
             "default_map_color_hex": "#C9C9C9",
             "no_state_map_color_hex": "#999999"
         }
@@ -135,15 +147,15 @@ campaignTrail_temp.election_json = [
         "model": "campaign_trail.election",
         "pk": 12,
         "fields": {
-            "year": 1948,
+            "year": 1936,
             "summary": "<div style='overflow-y:scroll;height:180px;padding-right:7px'><b>CONTENT WARNING: Racism, ableism and other general bigotry. This mod depicts a United States steadily descending into fascism, along with the violent and regressive realities of such an ideology. If that is a subject matter that upsets you, it is recommended you do not play this mod.</b><p>America's overton window, so neatly centered on the ideas of conservative capitalism, was shattered by the Great Depression, throwing the nation's political scene into chaos. Outside of the peaceful resolution of the Bonus Army, Coolidge's third term proved to be a disaster, sacrificing millions on a cross of laissez-faire capitalism. The Democrats, on the other hand, lacked a strong figure to unite themselves around, and proved too divided to act as meaningful opposition. It wasn't much of a surprise, then, when Jacob Coxey Sr. and the Progressive-Farmer-Labor Alliance narrowly clinched the presidency in '32. The reactions were instantaneous. Progressives cheered, liberals wagged their fingers, conservatives clutched their pearls, and Gerald C. MacGuire sent a letter to retired marine Smedley Butler that would change the course of American history forever.\n\n<p>Elected on a platform of nation-spanning public works, unemployment relief and expanded worker's rights, the PFLA's tiny numbers in Congress resulted in them having to compromise with liberal Republicans and Democrats to get anything passed. Outside of executive orders, January through July was marked by a sheer inability by the federal government to get anything done, leading to many moderates who voted for the otherwise radical ticket on the promises of action to waver in their support for the president.\n\n<p>Meanwhile, in the shady backrooms of wealthy hotels, a plot was being cooked up by those opposed to the PFLA and their left wing agenda. A small collection of capitalists, generals, conservative politicians and fascists, known to themselves as the National Emergency Committee, began their takeover of the American Legion, drumming up the already existing anti-socialist sentiment to push it in the direction of a more dedicatedly militant group. Their goal was simple: to use the Legion to overthrow President Coxey and replace his administration with one that was much further to the right. They just needed someone to marshall their troops and lead them in the prospective coup.\n\n<p>Smedley Butler was resistant at first. The somewhat disappointing outcome of the Bonus Army had rebuilt his respect for the Legion, but it had also caused him to distrust the wealthy political establishment. Still, after a particularly <i>persuasive</i> meeting with the plotters, the man was finally convinced, albeit reluctantly, to run for the position of National Commander of the American Legion, which he won, allowing for the NEC to finally set their plan for a coup in motion. Months of speeches and rallies, combined with a concerted campaign of bribery and intimidation behind the scenes, came to a head on July 2nd, 1933, when a crowd of thousands of veterans set off on a laborious two-day march from Harrisburg down to Washington DC, demanding the removal of the 'crypto-socialist' Coxey.<p>They would return successful.<p></div>",
             "image_url": "https://i.postimg.cc/qqPJNnMw/MOW-36-Election-Image.png",
             "winning_electoral_vote_number": 266,
             "advisor_url": "https://i.postimg.cc/T39K47PX/Child-Advisor-Feedback.png",
-            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">1948 Election Books and Links</h4>David McCullough - <a href=\"http://www.amazon.com/exec/obidos/ASIN/B000FC0VVQ/amhius20-20\" target=\"_blank\">Truman</a></br>Andrew E. Busch - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0700618678/amhius20-20\" target=\"_blank\">Truman's Triumphs: The 1948 Election and the Making of Postwar America</a></br>David Pietruza - <a href=\"http://www.amazon.com/exec/obidos/ASIN/140276748X/amhius20-20\" target=\"_blank\">1948: Harry Truman's Improbable Victory and the Year that Transformed America</a></br>Richard Norton Smith - <a href=\"http://www.amazon.com/exec/obidos/ASIN/067141741X/amhius20-20\" target=\"_blank\">Thomas E. Dewey and His Times</a></br><a href=\"https://www.youtube.com/watch?v=rJABgG4YDwM\" target=\"_blank\">The 1948 Democratic Convention (newsreel footage)</a></br><a href=\"https://www.youtube.com/watch?v=ogg9YsxGQm4\" target=\"_blank\">The 1948 Republican Convention (newsreel footage)</a></br><a href=\"https://www.youtube.com/watch?v=LW2ae0Fznwg\" target=\"_blank\">The 1948 Election Explained (video)</a>",
+            "recommended_reading": "<div style='overflow-y:scroll;height:500px;margin-bottom:35px'><img src='https://i.postimg.cc/2yck9Zct/MOW-1936-Read-More-Newspaper.png'>",
             "has_visits": 1,
             "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/1960-no-majority-photo.jpg",
-            "creator": "Dan Bryan",
+            "creator": "-",
             "display_year": "1936 - March On Washington"
         }
     }
@@ -443,9 +455,9 @@ document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_wi
 
 HistHexcolour=["#434343","#073763","#cc0000","#34a853"];
 HistName=[" Richard Washburn Child"," John Nance Garner"," Joseph Irwin France"," Robert M. La Follette Jr."];
-HistEV=[347,110,74,0];
-HistPV=["16,393,984","11,821,872","11,906,787","6,002,116"];
-HistPVP=["35.5%","25.6%","25.8%","13.0%"];
+HistEV=[304,155,72,0];
+HistPV=["18,416,760","13,962,232","10,515,525","3,230,242"];
+HistPVP=["39.9%","30.3%","22.8%","7.0%"];
 
 //Credits
 
@@ -471,11 +483,41 @@ e.creditsPage = () => {
     <p>Genny</p>
     <h3>Borrowed Code (without which this mod wouldn’t exist)</h3>
     <p>Credits screen - DecstarG</p>
-    <p>Variable Headquarters Code - Astro</p>
+    <p>Variable Headquarters Code, 30’s Music Player - Astro</p>
     <p>Tooltip Code - Nina</p>
     <p>Code to resize the Feedback Box - Vice</p>
-    <p>Code to edit Overall Results screen - Peace With Honor</p>
-    <p>Music Player - DecstarG, 1972d, 2016 4 Way Election</p>
+    <p>Code to edit Overall Results screen, Ending Code - Peace With Honor</p>
+    <p>Purno Sudibyo - Canva newspaper template</p>
+    <h3>Music</h3>
+    <p>Which Side Are You On? - Pete Seeger, The Almanac Singers</p>
+    <p>In a Shanty in Old Shanty Town - The Ink Spots</p>
+    <p>We’re In The Money - Bing Crosby</p>
+    <p>Give Me Liberty Or Give Me Love - Mildred Bailey</p>
+    <p>Anything Goes - Cole Porter</p>
+    <p>Can’t Teach My Old Heart New Tricks - Benny Goodman, Martha Tilton</p>
+    <p>Brother, Can You Spare A Dime? - Bing Crosby</p>
+    <p>Bank Failures - Bob Miller</p>
+    <p>The Bourgeois Blues - Lead Belly</p>
+    <p>All You Fascists - Woody Guthrie</p>
+    <p>I Don’t Want Your Millions, Mister - Pete Seeger, The Almanac Singers</p>
+    <p>This Land is Your Land - Woody Guthrie</p>
+    <p>American Legion March - United States Air Force Band</p>
+    <p>On the Sidewalks of New York - Nat King Cole</p>
+    <p>God Bless America - Kate Smith</p>
+    <p>Giovinezza - Fanfara e Coro diretta da V. Santini</p>
+    <p>Swing Is King - Ted Heath</p>
+    <p>Union Dixie - Tennessee Ernie Ford</p>
+    <p>When I Get Low, I Get High - Ella Fitzgerald, Chick Webb</p>
+    <p>Happy Days are Here Again - Ben Selvin & His Orchestra</p>
+    <p>A Room With A View - Artie Shaw</p>
+    <p>The Yellow Rose of Texas - Gene Autry</p>
+    We’re in the Money - Pee Wee Russell</p>
+    <p>Eugene Talmadge Campaign Song - sourced from RussellLibraryOralHistory</p>
+    <p>If I Didn’t Care - The Ink Spots</p>
+    <p>Every Man A King-Goodbye Huey Long - Louisiana Ramblers</p>
+    <p>Hold the Fort - Pete Seeger, The Almanac Singers</p>
+    <p>John Brown’s Body - Paul Robeson</p>
+    <p>Bella Ciao - Manu Pilas</p>
     <h3>With Special Thanks To</h3>
     <p>Everyone in the #mod-help channel who put up with my clueless ass</p><br><br>
     <h3>Note from the Developer</h3>
@@ -525,433 +567,623 @@ e.creditsPage = () => {
 
 e.credits = "<button onclick='e.creditsPage()'>Credits</button>";
 
-// Initialise custom music
-  
-$("#music_player")[0].children[0].style.display="none"
-$("#music_player")[0].children[1].style.display="none"
+//30's Music Player
 
-document.getElementById("modLoadReveal").style.display="none"
-document.getElementById("modloaddiv").style.display="none"
+//Initialise custom music
 
-musicBox = document.getElementById("music_player")
-musicBox.style.display=""
+RecReading = true;
 
-var trackSel;
-e = campaignTrail_temp
-e.selectedSoundtrack = 0
+// Select the node that will be observed for mutations
+const windowsAdvisorTargetNode = document.getElementById("game_window");
 
-toTime = (seconds) => {
-  var date = new Date(null);
-  date.setSeconds(seconds);
-  return date.toISOString().substr(11, 8);
-}
+// Options for the observer (which mutations to observe)
+const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
 
-generateTime = () => {
-    // Get the audio element
-    var audio = document.getElementById("campaigntrailmusic");
+// Callback function to execute when mutations are observed
+const callback = (mutationList, observer) => {
+    visitWindow = document.getElementsByClassName("overlay_window")[0];
 
-    timeTracker = document.createElement("div");
-    timeTracker.style = `
-      text-align:left;
-      border-style:solid;
-      border-width:3px;
-      height:150px;
-      width:200px;
-      background-color:#999999;
-      float:right;
-      padding: 10px;
-    `
-    $("#trackSelParent")[0].prepend(timeTracker);
-    $("#trackSelParent")[0].prepend(document.createElement("br"));
-
-    // Create a new element to display the current position of the audio
-    var positionDisplay = document.createElement("gg");
-    positionDisplay.id = "position-display";
-
-    // Create a new slider element to change the time
-    var timeSlider = document.createElement("input");
-    timeSlider.type = "range";
-    timeSlider.min = 0;
-    timeSlider.max = 1;
-    timeSlider.step = 0.001;
-    timeSlider.value = 0;
-    timeSlider.style.width = "200px";
-    timeSlider.id = "time-slider";
-
-    var pausePlay = document.createElement("button");
-    pausePlay.id = "position-display";
-    pausePlay.innerHTML = "<b>Pause</b>"
-    pausePlay.style.width = "100%";
-
-
-    pausePlay.addEventListener("click", event => {
-      event.preventDefault();
-      updatePositionDisplay();
-      let audio = document.getElementById("campaigntrailmusic");
-      if (audio.paused) {
-        audio.play();
-        event.target.innerHTML = "<b>Pause</b>";
+    if (visitWindow == null || visitWindow.classList.contains("done")) {
         return;
-      }
-      audio.pause();
-      event.target.innerHTML = "<b>Play</b>";
-      return;
-    })
+    }
+    visitWindow.classList.add("done");
+    visitWindow.classList.add("window");
+    let titleBar = visitWindow.querySelector("h3");
+    titleBar.classList.add("title-bar");
+    titleBar.classList.add("title-bar-text");
+    titleBar.style.paddingLeft = "3px";
+};
 
-    var volumeLabel = document.createElement("gg");
-    volumeLabel.id = "volume-label";
-    volumeLabel.innerHTML = "<br><b>Volume: </b>"
-
-    var volumeSlider = document.createElement("input");
-    volumeSlider.type = "range";
-    volumeSlider.min = 0;
-    volumeSlider.max = 1;
-    volumeSlider.step = 0.001;
-    volumeSlider.value = 0;
-    volumeSlider.style.width = "200px";
-    volumeSlider.id = "volume-slider";
-
-    volumeSlider.value = audio.volume;
-
-    timeTracker.appendChild(pausePlay);
-    timeTracker.appendChild(document.createElement("br"));
-    timeTracker.appendChild(document.createElement("br"));
-    timeTracker.appendChild(positionDisplay);
-    timeTracker.appendChild(timeSlider);
-    timeTracker.appendChild(volumeLabel);
-    timeTracker.appendChild(volumeSlider);
-
-    updatePositionDisplay();
-
-    //for (let i = 0; i < 10; i++)
-    //timeTracker.append(document.createElement("br"));
-
-
-    // Function to update the position display
-    function updatePositionDisplay() {
-      positionDisplay.innerHTML = "<b>Time:</b> " + toTime(audio.currentTime) + "<br>";
-      timeSlider.value = audio.duration ? audio.currentTime / audio.duration : 0;
+class Song {
+    constructor(title, artist, coverLink, audioLink) {
+        this.title = title;
+        this.artist = artist;
+        this.coverLink = coverLink;
+        this.audioLink = audioLink;
+    }
+    getTitle() {
+        return this.title;
     }
 
-    // Function to change the time of the audio
-    function changeTime() {
-      positionDisplay.innerHTML = "<b>Time:</b> " + toTime(audio.currentTime) + "<br>";
-      audio.currentTime = timeSlider.value * audio.duration;
+    getArtist() {
+        return this.artist;
     }
 
-    updateVolume = event => {
-      audio.volume = event.target.value;
+    getCoverLink() {
+        return this.coverLink;
     }
+
+    getAudioLink() {
+        return this.audioLink;
+    }
+}
+
+class Playlist {
+    constructor() {
+        this.songs = [];
+        this.currentSongIndex = 0;
+    }
+
+    addSong(song) {
+        this.songs.push(song);
+    }
+
+    getCurrentSong() {
+        return this.songs[this.currentSongIndex];
+    }
+
+    playNext() {
+        this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+    }
+
+    playPrevious() {
+        this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+    }
+}
+window.Playlist = Playlist;
+window.Song = Song;
+
+function changePlaylist(newPlaylist) {
+    playlist = newPlaylist;
+    playlist.currentSongIndex = 0;
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+}
+window.changePlaylist = changePlaylist;
+
+function updateUI(playlist) {
+    const currentSong = playlist.getCurrentSong();
+    var player = document.getElementById("player");
+    player.querySelector("#cover").src = currentSong.getCoverLink();
+    player.querySelector("#title").textContent = currentSong.getTitle();
+    player.querySelector("#artist").textContent = currentSong.getArtist();
+}
+
+window.updateUI = updateUI;
+
+function setupMusicPlayer() {
+    playlist = new Playlist();
+
+    const song1 = new Song(
+        "Which Side Are You On?",
+        "Pete Seeger, The Almanac Singers",
+        "https://i.postimg.cc/WpYYhMLr/MOW-Almanac-Singers.png",
+        "https://audio.jukehost.co.uk/njztnzwgc4FWa2cPgZPSO6ZwcvSOiGEA"
+    );
+    const song2 = new Song(
+        "In a Shanty in Old Shanty Town",
+        "The Ink Spots",
+        "https://i.postimg.cc/G2mw1dG1/MOW-Ink-Spots.png",
+        "https://audio.jukehost.co.uk/o8dkA6LpnVzcENI03aLxjWit8AnQtdyh"
+    );
+    const song3 = new Song(
+        "We're In The Money",
+        "Bing Crosby",
+        "https://i.postimg.cc/44MCrC3r/MOW-We-re-In-Da-Money-Baybee.png",
+        "https://audio.jukehost.co.uk/q5tBCBn9ksmelqZrtx2V1pZW9Wdeowe7"
+    );
+    const song4 = new Song(
+        "Give Me Liberty Or Give Me Love",
+        "Mildred Bailey",
+        "https://i.postimg.cc/2SnfQHrg/MOW-Mildred-Bailey.png",
+        "https://audio.jukehost.co.uk/lpWKdRv8lEO1Em1tW4vgK9Ymby4GH1U3"
+    );
+    const song5 = new Song(
+        "Anything Goes",
+        "Cole Porter",
+        "https://i.postimg.cc/cHkqx2Bt/MOW-Anything-Goes.png",
+        "https://audio.jukehost.co.uk/1ZFEdOCUlv5ifq1B0o748T9pm3LeN411"
+    );
+    const song6 = new Song(
+        "Can’t Teach My Old Heart New Tricks",
+        "Benny Goodman, Martha Tilton",
+        "https://i.postimg.cc/FKmXDjKz/MOW-Benny-Goodman-Jumpscare.png",
+        "https://audio.jukehost.co.uk/luWM971dOG0re3BqUSDpZ1cpTSuWiSGN"
+    );
+    const song7 = new Song(
+        "Brother, Can You Spare A Dime?",
+        "Bing Crosby",
+        "https://i.postimg.cc/kG20BsT1/MOW-Can-You-Spare-A-Dime.png",
+        "https://audio.jukehost.co.uk/APDB9RqSmUeppOWSMD3yPWEFpXVJtd7b"
+    );
+    const song8 = new Song(
+        "Bank Failures",
+        "Bob Miller",
+        "https://i.postimg.cc/XqtTF5hV/MOW-Bob-MIller.png",
+        "https://audio.jukehost.co.uk/TIhxbDbzY4AoVhv0MWgzACgMhqWvCFhq"
+    );
+    const song9 = new Song(
+        "The Bourgeois Blues",
+        "Lead Belly",
+        "https://i.postimg.cc/DyXVhCJm/MOW-Lead-Belly.png",
+        "https://audio.jukehost.co.uk/dS15xXisEWoTxlT4SrH5DbL2xziZvUXW"
+    );
+    const song10 = new Song(
+        "All You Fascists",
+        "Woody Guthrie",
+        "https://i.postimg.cc/7LV8cfCV/MOW-Woody-Guthrie.png",
+        "https://audio.jukehost.co.uk/Zbr7cUAOA5ep4GCDAJVat62C6mDIqVXQ"
+    );
+    const song11 = new Song(
+        "I Don't Want Your Millions, Mister",
+        "Pete Seeger, The Almanac Singers",
+        "https://i.postimg.cc/WpYYhMLr/MOW-Almanac-Singers.png",
+        "https://audio.jukehost.co.uk/hjULxw3tbuREOLCLXmcoiz6yuqq21xY9"
+    );
+    const song12 = new Song(
+        "This Land is Your Land",
+        "Woody Guthrie",
+        "https://i.postimg.cc/7LV8cfCV/MOW-Woody-Guthrie.png",
+        "https://audio.jukehost.co.uk/2P9hXyQPFPDtKHKd34yE1tPaoSlii36I"
+    );
+
+    playlist.addSong(song1);
+    playlist.addSong(song2);
+    playlist.addSong(song3);
+    playlist.addSong(song4);
+    playlist.addSong(song5);
+    playlist.addSong(song6);
+    playlist.addSong(song7);
+    playlist.addSong(song8);
+    playlist.addSong(song9);
+    playlist.addSong(song10);
+    playlist.addSong(song11);
+    playlist.addSong(song12);
+
+
+    const playerContainer = document.createElement("div");
+    playerContainer.id = "player";
+
+    const displayBox = document.createElement("div");
+    displayBox.id = "display-box";
+
+    const coverElement = document.createElement("img");
+    coverElement.id = "cover";
+    displayBox.appendChild(coverElement);
+
+    const infoContainer = document.createElement("div");
+    infoContainer.id = "info-container";
+    infoContainer.style.backgroundImage = "url('https://i.postimg.cc/yYCTVr9r/MOW-Radio-Info-Lable.png')";
+    infoContainer.style.backgroundSize = "cover";
+    infoContainer.style.color = "#cda758";
+
+    const songInfo = document.createElement("div");
+    songInfo.id = "song-info";
+
+    const titleElement = document.createElement("h3");
+    titleElement.id = "title";
+    titleElement.style.fontWeight = 'normal';
+    songInfo.appendChild(titleElement);
+
+    const artistElement = document.createElement("p");
+    artistElement.id = "artist";
+    songInfo.appendChild(artistElement);
+
+    infoContainer.appendChild(songInfo);
+    displayBox.appendChild(infoContainer);
+
+    playerContainer.appendChild(displayBox);
+
+    const controlsContainer = document.createElement("div");
+    controlsContainer.id = "controls-container";
+
+    const controls = document.createElement("div");
+    controls.id = "controls";
+
+    const volumeDownButton = document.createElement("img");
+    volumeDownButton.id = "volumeDownButton";
+    volumeDownButton.src = "https://i.postimg.cc/pVkrGyZX/MOW-Radio-Dial-Left.png";
+    volumeDownButton.alt = "Volume Down";
+    controls.appendChild(volumeDownButton);
+
+    const prevButton = document.createElement("img");
+    prevButton.id = "prevButton";
+    prevButton.src = "https://i.postimg.cc/pVkrGyZX/MOW-Radio-Dial-Left.png";
+    prevButton.alt = "Previous";
+    controls.appendChild(prevButton);
+
+    const playPauseButton = document.createElement("img");
+    playPauseButton.id = "playPauseButton";
+    playPauseButton.src = "https://i.postimg.cc/L54X4MHp/MOW-Radio-Dial-On.png";
+    playPauseButton.alt = "Play/Pause";
+    controls.appendChild(playPauseButton);
+
+    const nextButton = document.createElement("img");
+    nextButton.id = "nextButton";
+    nextButton.src = "https://i.postimg.cc/pTJrtdMC/MOW-Radio-Dial-Right.png";
+    nextButton.alt = "Next";
+    controls.appendChild(nextButton);
+
+    const volumeUpButton = document.createElement("img");
+    volumeUpButton.id = "volumeUpButton";
+    volumeUpButton.src = "https://i.postimg.cc/pTJrtdMC/MOW-Radio-Dial-Right.png";
+    volumeUpButton.alt = "Volume Up";
+    controls.appendChild(volumeUpButton);
+
+    controlsContainer.appendChild(controls);
+
+    playPauseButton.addEventListener("click", function () {
+        const audio = document.getElementById("audio");
+        if (audio.paused) {
+            audio.play();
+            playPauseButton.src = "https://i.postimg.cc/L54X4MHp/MOW-Radio-Dial-On.png";
+        } else {
+            audio.pause();
+            playPauseButton.src = "https://i.postimg.cc/d3W0LS1T/MOW-Radio-Dial-Off.png";
+        }
+    });
+
+    nextButton.addEventListener("click", function () {
+        playlist.playNext();
+        updateUI(playlist);
+        const audio = document.getElementById("audio");
+        audio.src = playlist.getCurrentSong().audioLink;
+        audio.play();
+        rotateButton(nextButton, "right");
+    });
+
+    prevButton.addEventListener("click", function () {
+        playlist.playPrevious();
+        updateUI(playlist);
+        const audio = document.getElementById("audio");
+        audio.src = playlist.getCurrentSong().audioLink;
+        audio.play();
+        rotateButton(prevButton, "left");
+    });
+
+    let currentVolume = 6; // Medium initial volume 
+
+    volumeUpButton.addEventListener("click", function () {
+        const audio = document.getElementById("audio");
+        if (currentVolume < 20) { // Increased max volume range
+            currentVolume++;
+            audio.volume = currentVolume / 20; // Adjusted for new range
+            rotateButton(volumeUpButton, "left");
+        }
+    });
     
-    // Update the position display and slider every second
-    setInterval(updatePositionDisplay, 1000);
+    volumeDownButton.addEventListener("click", function () {
+        const audio = document.getElementById("audio");
+        if (currentVolume > 0) {
+            currentVolume--;
+            audio.volume = currentVolume / 20; // Adjusted for new range
+            rotateButton(volumeDownButton, "right");
+        }
+    });
 
-    // Listen for changes to the time slider and change the time of the audio
-    timeSlider.addEventListener("input", changeTime);
-    volumeSlider.addEventListener("input", updateVolume)
-}
-
-function newMusicPlayer() {
-  trackSel = document.createElement("div");
-  trackSel.id = "trackSelParent"
-  let z = `<br><br><br><br><br><br><br><br><br><br><div id='trackSel' style="text-align:left;border-style:solid;border-width:3px;overflow-y: scroll;overflow-x: hidden;height:200px; width:400px;background-color:#999999;float:right;">`
-  z += `<b><select id='selectSoundtrack'><option value='`+soundtracks[e.selectedSoundtrack].name+`'>`+soundtracks[e.selectedSoundtrack].name+"</option>"
-  for (i in soundtracks) {
-    if (soundtracks[e.selectedSoundtrack] != soundtracks[i]) {
-      z += `<option value='`+soundtracks[i].name+`'>`+soundtracks[i].name+`</option>`
+    function rotateButton(button, direction) {
+        const rotationAngle = direction === "left" ? "rotate(-15deg)" : "rotate(15deg)";
+        button.style.transform = rotationAngle;
+        setTimeout(() => {
+            button.style.transform = "rotate(0deg)";
+        }, 200);
     }
-  }
-  z += `</select></b><br><br>`
-  // <label><input type="radio" name="option" value="option1">Option 1</label><br>
-  for (i in soundtracks[e.selectedSoundtrack].tracklist) {
-    let a = soundtracks[e.selectedSoundtrack].tracklist[i]
-    let b = `<label><input class="trackSelector" type="radio" name="trackSelector" value="`+i+`">`+a.name+`</label><br>`
-    z += b
-  }
-  z += "</div><br><br>"
-  trackSel.innerHTML = z
 
-  // select correct song
+    const progressBarContainer = document.createElement("div");
+    progressBarContainer.id = "progress-bar-container";
 
-  musicBox.appendChild(trackSel);
-  Array.from(document.getElementById("trackSel").children).filter(f=>{
-    return f.tagName == "LABEL"
-  }).map(f=>f.children[0])[0].checked = true
+    const progressBar = document.createElement("progress");
+    progressBar.type = "range";
+    progressBar.id = "progress-bar";
+    progressBar.value = "0";
+    progressBar.max = "100";
 
-  // set soundtrack changer
+    progressBarContainer.appendChild(progressBar);
+    controlsContainer.appendChild(progressBarContainer);
+    playerContainer.appendChild(controlsContainer);
 
-  soundtrackSelector = document.getElementById("selectSoundtrack")
-  soundtrackSelector.onchange = function() {
-    for (i in soundtracks) {
-      if (soundtracks[i].name == soundtrackSelector.value) {
-        e.selectedSoundtrack = i
-        break
-      }
+    const lipImage = document.createElement("div");
+    lipImage.id = "lip-overlay";
+    playerContainer.appendChild(lipImage); // Add the overlay as a child of #player
+    
+    
+
+    gameWindow_player.insertAdjacentElement("afterend", playerContainer);
+
+    function updateProgressBar() {
+        const audio = document.getElementById("audio");
+        const progress = (audio.currentTime / audio.duration) * 100;
+        try {
+            progressBar.value = progress;
+        } catch {}
     }
-    document.getElementById("trackSelParent").remove()
-    newMusicPlayer()
-  }
 
-  var matches = document.querySelectorAll('.trackSelector');
+    progressBar.addEventListener("input", function () {
+        const audio = document.getElementById("audio");
+        const seekTime = (progressBar.value / 100) * audio.duration;
+        audio.currentTime = seekTime;
+    });
 
-  for (match in matches) {
-    matches[match].onchange = function() {
-      audio = $("#campaigntrailmusic")[0];
-      audio.src = soundtracks[e.selectedSoundtrack].tracklist[this.value].url
-      audio.currentTime = 0
-    }
-  }
+    const audio = document.createElement("audio");
+    audio.id = "audio";
+    audio.src = playlist.getCurrentSong().audioLink;
 
-  musicBox.children[2].loop = false
-  musicBox.children[2].src = soundtracks[e.selectedSoundtrack].tracklist[0].url
+    audio.addEventListener("timeupdate", updateProgressBar);
+    audio.addEventListener("ended", function () {
+        playlist.playNext();
+        updateUI(playlist);
+        audio.src = playlist.getCurrentSong().audioLink;
+        audio.play();
+    });
 
-  musicBox.children[2].onended = function() {
-    console.log("next track")
-    let selected = Number(document.querySelector('input[name="trackSelector"]:checked').value);
-    let newSel = clamp(selected+1, soundtracks[e.selectedSoundtrack].tracklist.length-1, 0)
-    let buttons = Array.from(document.getElementById("trackSel").children).filter(f=>{
-      return f.tagName == "LABEL"
-    }).map(f=>f.children[0])
-    //let selectedIndex = buttons.map(f=>f.children[0]).map(f=>f.checked)
-    buttons[newSel].click()
-  }
+    document.body.appendChild(audio);
+    audio.play();
 
-  for (w = 0; w < 7; w++) {
-    document.getElementById("trackSelParent").appendChild(document.createElement("br"))
-  }
-  
-  generateTime();
+    updateUI(playlist);
 }
 
-clamp = function(a, max, min, overflow=true) {
-  if (overflow) {
-    return a > max ? min : a < min ? max : a;
-  }
-  return a > max ? max : a < min ? min : a;
+const style = document.createElement("style");
+style.textContent = `
+#player {
+    position: relative; /* Ensures child absolute elements are positioned relative to this */
+    border: 3px solid #c4c4c4;
+    display: flex;
+    flex-direction: row;
+    height: 191px;
+    background-image: url("https://i.postimg.cc/1tShQKmx/MOW-Radio-Texture-Background.png");
+    transition: transform 0.2s ease;
+}
+
+#lip-overlay {
+    position: absolute;
+    top: 0; /* Align at the top of the player */
+    left: 0;
+    width: 100%;
+    height: 100%; /* Same height as the #player */
+    z-index: 2; /* Brings it to the foreground */
+    pointer-events: none; /* Prevent interference with user interactions */
+    background-image: url('https://i.postimg.cc/xTgNWsPm/MOW-Radio-Texture-Foreground.png');
+    background-size: cover; /* Ensures the image fills the container */
 }
 
 
-// Track list
-
-var soundtracks = {
-  0: {
-      name: "Wobbly Radio",
-      tracklist: [
-        {
-          "name": "Which Side are You On? (The Almanac Singers)",
-          "url": "https://audio.jukehost.co.uk/njztnzwgc4FWa2cPgZPSO6ZwcvSOiGEA"
-        },
-        {
-            "name": "In a Shanty in Old Shanty Town (The Ink Spots)",
-            "url": "https://audio.jukehost.co.uk/o8dkA6LpnVzcENI03aLxjWit8AnQtdyh"
-        },
-        {
-            "name": "We’re In The Money <i>(The Golddiggers’ Song)</i> (Bing Crosby)",
-            "url": "https://audio.jukehost.co.uk/q5tBCBn9ksmelqZrtx2V1pZW9Wdeowe7"
-        },
-        {
-            "name": "Anything Goes (Cole Porter)",
-            "url": "https://audio.jukehost.co.uk/1ZFEdOCUlv5ifq1B0o748T9pm3LeN411"
-        },
-        {
-            "name": "Brother, Can You Spare A Dime? (Bing Crosby)",
-            "url": "https://audio.jukehost.co.uk/APDB9RqSmUeppOWSMD3yPWEFpXVJtd7b"
-        },
-        {
-            "name": "Bank Failures (Bob Miller)",
-            "url": "https://audio.jukehost.co.uk/TIhxbDbzY4AoVhv0MWgzACgMhqWvCFhq"
-        },
-        {
-            "name": "The Bourgeois Blues (Lead Belly)",
-            "url": "https://audio.jukehost.co.uk/dS15xXisEWoTxlT4SrH5DbL2xziZvUXW"
-        },
-        {
-            "name": "All You Fascists (Woody Guthrie)",
-            "url": "https://audio.jukehost.co.uk/Zbr7cUAOA5ep4GCDAJVat62C6mDIqVXQ"
-        },
-        {
-            "name": "I Don’t Want Your Millions, Mister (Pete Seeger, The Almanac Singers)",
-            "url": "https://audio.jukehost.co.uk/hjULxw3tbuREOLCLXmcoiz6yuqq21xY9"
-        },
-    ]
-  },
-  1: {
-    name: "Ending Songs - SPOILERS!!!",
-    tracklist: [
-      {
-        "name": "American Legion March (United States Air Force Band)",
-        "url": "https://audio.jukehost.co.uk/e5KH0VQ8SSwN3yO0h1DBZUllqsLxTMQG"
-      },
-      {
-        "name": "On the Sidewalks of New York (Nat King Cole)",
-        "url": "https://audio.jukehost.co.uk/7USQlPufDlI6SOixfCSRylw2xu5U4mnA"
-      },
-      {
-        "name": "God Bless America (Kate Smith)",
-        "url": "https://audio.jukehost.co.uk/6YH9qEPBzSD5ogSKtLZJe7yIGwOJyAha"
-      },
-      {
-        "name": "Giovinezza (Fanfara e Coro diretta da V. Santini)",
-        "url": "https://audio.jukehost.co.uk/VUeiWoezOO6uu48F7DJY3I75QWugouql"
-      },
-      {
-        "name": "Swing Is King (Ted Heath)",
-        "url": "https://audio.jukehost.co.uk/D1bst24dD7aINA8NtlGtobhsZ2GmUhkN"
-      },
-      {
-        "name": "Union Dixie (Tennessee Ernie Ford)",
-        "url": "https://audio.jukehost.co.uk/pDSey4vhJiMRMVi6lE2LXF4YdkbTSwxn"
-      },
-      {
-        "name": "When I Get Low, I Get High (Ella Fitzgerald, Chick Webb)",
-        "url": "https://audio.jukehost.co.uk/Qs3c0iNcXQZlwHaFxulMLRcosXauAAxT"
-      },
-      {
-        "name": "Happy Days are Here Again (Ben Selvin & His Orchestra)",
-        "url": "https://audio.jukehost.co.uk/XqDeeGJfQbtfWmNk9pBWVOKBLe0mE9SO"
-      },
-      {
-        "name": "A Room With A View (Artie Shaw)",
-        "url": "https://audio.jukehost.co.uk/NSILETREXOyT0WdSCbEnYTBEsuagBn0G"
-      },
-      {
-        "name": "The Yellow Rose of Texas (Gene Autry)",
-        "url": "https://audio.jukehost.co.uk/534dmVX9OWLFdO5AWhjs48ukjr9J5plm"
-      },
-      {
-        "name": "We’re in the Money (Pee Wee Russell)",
-        "url": "https://audio.jukehost.co.uk/5wZs1zZ53noS3nmMLHnc9fBcSydODcpZ"
-      },
-      {
-        "name": "Eugene Talmadge’s Campaign Song <i>(1940)</i> (sourced from RussellLibraryOralHistory)",
-        "url": "https://audio.jukehost.co.uk/LsjZFO9Ra1lsBzWNhy8it9rNGbA4nICh"
-      },
-      {
-        "name": "If I Didn’t Care (The Ink Spots)",
-        "url": "https://audio.jukehost.co.uk/KA0PklcOBp88FjHnxFEUP1UqoqreK0dj"
-      },
-      {
-        "name": "Hold the Fort (The Almanac Singers)",
-        "url": "https://audio.jukehost.co.uk/5Ak7TOMLD2OakpDbm3IuK01MLaWhRSTF"
-      },
-      {
-        "name": "John Brown’s Body (Paul Robeson)",
-        "url": "https://audio.jukehost.co.uk/zicZzuxKjHdGCiC4s50W4MR71XUABoBg"
-      },
-      {
-        "name": "Bella Ciao (Manu Pilas)",
-        "url": "https://audio.jukehost.co.uk/JFXMZvNUP4PgWfx4L8o90kkGsW0804DP"
-      },
-  ]
-}
+#display-box {
+    display: flex;
+    align-items: center;
+    width: 50%;
 }
 
-// Set up new music player
-  
-newMusicPlayer();
+#cover {
+    width: 176px;
+    height: 176px;
+    margin-left: 13px;
+}
+
+#info-container {
+    display: flex;
+    flex-direction: row;
+    height: 178px;
+    width: 127px;
+    margin-top: 3px;
+}
+
+#song-info {
+    width: 100%;
+    padding: 5px;
+}
+
+#controls-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    width: 100%;
+    padding-top: 30px;
+}
+
+#controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 54px;
+    width: 54px;
+}
+
+#volumeDownButton {
+    height: 54px;
+    width: 54px;
+}
+
+#prevButton {
+    height: 54px;
+    width: 54px;
+}
+
+#playPauseButton {
+    height: 54px;
+    width: 54px;
+}
+
+#nextButton {
+    height: 54px;
+    width: 54px;
+}
+
+#volumeUpButton {
+    height: 54px;
+    width: 54px;
+}
+
+#progress-bar-container {
+    width: 100%;
+}
+
+#progress-bar {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    margin-top: 24px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#progress-bar::-webkit-progress-bar {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#progress-bar::-webkit-progress-value {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#progress-bar::-moz-progress-bar {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+`;
+
+document.head.appendChild(style);
+
+const gameWindow_player = document.getElementById("game_window");
+setupMusicPlayer();
 
 //Achievements
 
 campaignTrail_temp.achievements = {
     "Mr. Unremarkable": {
-      "image": "https://i.postimg.cc/X7XKktft/Mr-Unremarkable.png",
+      "image": "https://i.postimg.cc/NFyW2qS0/Mr-Unremarkable.png",
       "description": "Become just another president",
       "cannotBeCheated": true
   },
     "Early Retirement": {
-      "image": "https://i.postimg.cc/8z6hqWnH/Quiet-Retirement.png",
+      "image": "https://i.postimg.cc/sDhkVz56/Quiet-Retirement.png",
       "description": "Outlive your usefulness",
       "cannotBeCheated": true
   },
     "The Men behind the Man": {
-      "image": "https://i.postimg.cc/C1FkB2MP/The-Men-behind-the-Man.png",
+      "image": "https://i.postimg.cc/NMFnZvgx/The-Men-behind-the-Man.png",
       "description": "Become a puppet pseudo-dictator (CANON ENDING)",
       "cannotBeCheated": true
   },
     "Avanti Americana": {
-      "image": "https://i.postimg.cc/wvV5wpbY/Avanti-Americana.png",
+      "image": "https://i.postimg.cc/6pwtgqFL/Avanti-Americana.png",
       "description": "Ascend to your rightful position",
       "cannotBeCheated": true
   },
     "To Own a Lib": {
-      "image": "https://i.postimg.cc/KjWMWvPw/To-Own-a-Lib.png",
+      "image": "https://i.postimg.cc/rmHHkZs2/To-Own-a-Lib.png",
       "description": "Draw, but win",
       "cannotBeCheated": true
   },
     "Anyone but Him": {
-      "image": "https://i.postimg.cc/g03H6RVJ/Anyone-but-Him.png",
+      "image": "https://i.postimg.cc/cLm0SZSq/Anyone-but-Him.png",
       "description": "Unite the opposition",
       "cannotBeCheated": true
   },
     "We have FDR at home": {
-      "image": "https://i.postimg.cc/XN1dqxRL/We-have-FDR-at-home.png",
+      "image": "https://i.postimg.cc/5yFRN5QY/We-have-FDR-at-home.png",
       "description": "Lose to a Liberal Democrat",
       "cannotBeCheated": true
   },
     "C’est la vie": {
-      "image": "https://i.postimg.cc/3NfXHZTL/C-est-la-vie.png",
+      "image": "https://i.postimg.cc/kgxPyC46/C-est-la-vie.png",
       "description": "Lose to a Liberal Republican",
       "cannotBeCheated": true
   },
     "Cactus Jack Rides": {
-      "image": "https://i.postimg.cc/mDRN3DjS/Cactus-Jack-Rides.png",
+      "image": "https://i.postimg.cc/sgFRSxVC/Cactus-Jack-Rides.png",
       "description": "Lose to a Conservative Democrat",
       "cannotBeCheated": true
   },
     "Who but Hoover?": {
-      "image": "https://i.postimg.cc/PrBDzJr8/Who-but-Hoover.png",
+      "image": "https://i.postimg.cc/T2LdWZrm/Who-but-Hoover.png",
       "description": "Lose to a Conservative Republican",
       "cannotBeCheated": true
   },
     "Red Suspenders": {
-      "image": "https://i.postimg.cc/pdMDxTwt/Red-Suspenders-are-in-Fashion.png",
+      "image": "https://i.postimg.cc/Mp0gQYP1/Red-Suspenders-are-in-Fashion.png",
       "description": "Get replaced by a more popular demagogue",
       "cannotBeCheated": true
   },
     "Butler’s Revenge": {
-      "image": "https://i.postimg.cc/x81v74WJ/Butler-s-Revenge.png",
+      "image": "https://i.postimg.cc/tCF9BWv4/Butler-s-Revenge.png",
       "description": "Watch your brand new party get couped",
       "cannotBeCheated": true
   },
-    "Taiwanification": {
-      "image": "https://i.postimg.cc/R01w0mmJ/Taiwanification.png",
+    "Always a bigger Kingfish": {
+    "image": "https://i.postimg.cc/vmZM8jY4/Always-a-bigger-Kingfish.png",
+    "description": "Get Long’d bozo",
+    "cannotBeCheated": true
+  },
+    "Taiwan-ification": {
+      "image": "https://i.postimg.cc/d04XWVK1/Taiwanification.png",
       "description": "Reduce the US to a couple of islands",
       "cannotBeCheated": true
   },
     "The Patton before the fall": {
-      "image": "https://i.postimg.cc/rmQWS9K8/The-Patton-before-the-Fall.png",
+      "image": "https://i.postimg.cc/mrbJNFJJ/The-Patton-before-the-Fall.png",
       "description": "Have Japan invade Hawaii",
       "cannotBeCheated": true
   },
     "Thus Unto Tyrants": {
-      "image": "https://i.postimg.cc/RhhtGnHw/Thus-Unto-Tyrants.png",
+      "image": "https://i.postimg.cc/L8Fr5WTH/Thus-Unto-Tyrants.png",
       "description": "Destroy the United States of America",
       "cannotBeCheated": true
   },
     "What Letters?": {
-      "image": "https://i.postimg.cc/vH19VfMs/What-Letters.png",
+      "image": "https://i.postimg.cc/kD3hVVWj/What-Letters.png",
       "description": "Have the truth come out and still win",
       "cannotBeCheated": true
   },
     "World’s Most Agreeable Fascist": {
-      "image": "https://i.postimg.cc/YCYWX7hD/World-s-Most-Agreeable-Fascist.png",
+      "image": "https://i.postimg.cc/CM3FCmN2/World-s-Most-Agreeable-Fascist.png",
       "description": "Win without agitating the Wobblies",
       "cannotBeCheated": true
   },
     "The Nationalist International": {
-      "image": "https://i.postimg.cc/RV87sGGh/Nationalist-Internationalism.png",
+      "image": "https://i.postimg.cc/XqTtw16k/Nationalist-Internationalism.png",
       "description": "Win despite having an aggressive foreign policy",
       "cannotBeCheated": true
   },
     "If Debs could do it…": {
-      "image": "https://i.postimg.cc/fW8jXM9x/If-Debs-could-do-it.png",
+      "image": "https://i.postimg.cc/HxLGH7tX/If-Debs-could-do-it.png",
       "description": "Have at least one state vote for a man in jail",
       "cannotBeCheated": true
   },
     "Frownin’ Sid": {
-      "image": "https://i.postimg.cc/dQd7rMP9/Frownin-Sid.png",
+      "image": "https://i.postimg.cc/FKpt2x0h/Frownin-Sid.png",
       "description": "Arrest the Red Sheriff",
       "cannotBeCheated": true
+  },
+    "Extra Funds": {
+    "image": "https://i.postimg.cc/0NPRW4Mt/Extra-Funds.png",
+    "description": "Implement a mid-sized public works program",
+    "cannotBeCheated": true
+  },
+    "Love Thy Neighbor": {
+    "image": "https://i.postimg.cc/B67rvQhy/Love-Thy-Neighbor.png",
+    "description": "Spark a second Cristero War",
+    "cannotBeCheated": true
+  },
+    "Movie Night": {
+    "image": "https://i.postimg.cc/Y2ZcK0LL/Movie-Night.png",
+    "description": "Make an unlikely friend",
+    "cannotBeCheated": true
   },
 }
 
