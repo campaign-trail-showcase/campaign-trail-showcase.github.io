@@ -338,8 +338,12 @@ function extractFallbackTheme(rawModText, nameOfMod) {
   const winImgMatch = rawModText.match(winImgRegex);
   if (winImgMatch) theme.description_background_color = winImgMatch[1];
 
-  const borderColorMatch = rawModText.match(borderColorRegex);
-  if (borderColorMatch) theme.secondary_color = borderColorMatch[1];
+   const borderColorMatch = rawModText.match(borderColorRegex);
+  if (borderColorMatch) {
+    theme.secondary_color = borderColorMatch[1];
+  } else if (theme.header_color) {
+    theme.secondary_color = theme.header_color;
+  }
 
   // no background color for the description? use main_color, header_color, or white
   if (!theme.description_background_color) {
