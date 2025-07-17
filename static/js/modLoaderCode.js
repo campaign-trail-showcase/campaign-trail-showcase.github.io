@@ -36,71 +36,120 @@ const namesOfModsFromValue = {};
 
 const customThemesButton = document.getElementById("customThemesButton");
 
-if (localStorage.getItem("customModBoxThemesEnabled") === null) {
-  localStorage.setItem("customModBoxThemesEnabled", "true");
-}
-
-customThemesButton.innerText =
-  localStorage.getItem("customModBoxThemesEnabled") === "true"
-    ? "Turn Off Mod Box Themes"
-    : "Turn On Mod Box Themes";
-
 let customModBoxThemes = {};
 
+// check if the modThemeState is set in localStorage
+if (localStorage.getItem("modThemeState") === null) {
+  // if not, check for the legacy 'customModBoxThemesEnabled' setting
+  const legacyThemeState = localStorage.getItem("customModBoxThemesEnabled");
+
+  if (legacyThemeState !== null) {
+    // migration time!
+    // 'true' maps to 'default', and 'false' maps to 'off'
+    const newThemeState = legacyThemeState === "true" ? "default" : "off";
+    localStorage.setItem("modThemeState", newThemeState);
+
+    // remove old key
+    localStorage.removeItem("customModBoxThemesEnabled");
+  } else {
+    // initialize with default
+    localStorage.setItem("modThemeState", "default");
+  }
+}
+
+function updateButtonText() {
+  const state = localStorage.getItem("modThemeState");
+  if (state === "off") {
+    customThemesButton.innerText = "Mod Themes: Off";
+  } else if (state === "default") {
+    customThemesButton.innerText = "Mod Themes: Default";
+  } else {
+    customThemesButton.innerText = "Mod Themes: Detailed";
+  }
+}
+updateButtonText();
+
+const themeStates = ["off", "default", "detailed"];
+
 function toggleModBoxThemes() {
-  const enabled = localStorage.getItem("customModBoxThemesEnabled") === "true";
-  localStorage.setItem("customModBoxThemesEnabled", enabled ? "false" : "true");
-  customThemesButton.innerText = enabled
-    ? "Turn On Mod Box Themes"
-    : "Turn Off Mod Box Themes";
+  const currentState = localStorage.getItem("modThemeState");
+  const currentIndex = themeStates.indexOf(currentState);
+  const nextIndex = (currentIndex + 1) % themeStates.length;
+  localStorage.setItem("modThemeState", themeStates[nextIndex]);
+
+  updateButtonText();
   applyModBoxThemes();
 }
 
+function applyStyle(element, property, value) {
+  if (element) {
+    element.style[property] = value;
+  }
+}
+
 function applyModBoxThemes() {
-  const enabled = localStorage.getItem("customModBoxThemesEnabled") === "true";
+  const state = localStorage.getItem("modThemeState");
+
   modList.forEach(modView => {
     const modName = modView.getAttribute("mod-name");
-    const theme = enabled ? customModBoxThemes[modName] : null;
+    const theme = customModBoxThemes[modName];
+    let applyTheme = false;
+
+    if (state === "default" && theme && !theme._isFallback) {
+      applyTheme = true;
+    } else if (state === "detailed" && theme) {
+      applyTheme = true;
+    }
 
     const modTitle = modView.querySelector(".mod-title");
-    if (modTitle) {
-      if (theme) {
+    const modDesc = modView.querySelector(".mod-desc");
+    const buttons = modView.querySelectorAll(".hover-button");
+    const ratingBg = modView.querySelector(".rating-background");
+
+    if (applyTheme) {
+      if (modTitle) {
         modTitle.style.background = `url('${theme.header_image_url ?? ""}')`;
-        modTitle.style.backgroundColor = theme.header_color;
-        modTitle.querySelector("p").style.color = theme.header_text_color;
-      } else {
+        applyStyle(modTitle, "backgroundColor", theme.header_color);
+        applyStyle(modTitle.querySelector("p"), "color", theme.header_text_color);
+      }
+      if (modDesc) {
+        applyStyle(modDesc, "backgroundColor", theme.description_background_color);
+        applyStyle(modDesc, "color", theme.description_text_color);
+      }
+      applyStyle(modView, "backgroundColor", theme.main_color);
+      buttons.forEach(btn => {
+        applyStyle(btn, "backgroundColor", theme.secondary_color);
+        const span = btn.querySelector("span");
+        applyStyle(span, "color", theme.ui_text_color);
+      });
+      if (ratingBg) {
+        applyStyle(ratingBg, "backgroundColor", theme.secondary_color);
+        ratingBg.querySelectorAll(".modRating, .modPlayCount").forEach(el => {
+          applyStyle(el, "color", theme.ui_text_color);
+        });
+      }
+    } else {
+      if (modTitle) {
         modTitle.style.background = "";
         modTitle.style.backgroundColor = "";
         modTitle.querySelector("p").style.color = "";
       }
-    }
-
-    const modDesc = modView.querySelector(".mod-desc");
-    if (modDesc) {
-      if (theme) {
-        modDesc.style.backgroundColor = theme.description_background_color;
-        modDesc.style.color = theme.description_text_color;
-      } else {
+      if (modDesc) {
         modDesc.style.backgroundColor = "";
         modDesc.style.color = "";
       }
-    }
-
-    modView.style.backgroundColor = theme ? theme.main_color : "";
-
-    const buttons = modView.querySelectorAll(".hover-button");
-    buttons.forEach(btn => {
-      btn.style.backgroundColor = theme ? theme.secondary_color : "";
-      const span = btn.querySelector("span");
-      if (span) span.style.color = theme ? theme.ui_text_color : "";
-    });
-
-    const ratingBg = modView.querySelector(".rating-background");
-    if (ratingBg) {
-      ratingBg.style.backgroundColor = theme ? theme.secondary_color : "";
-      ratingBg.querySelectorAll(".modRating, .modPlayCount").forEach(el => {
-        el.style.color = theme ? theme.ui_text_color : "";
+      modView.style.backgroundColor = "";
+      buttons.forEach(btn => {
+        btn.style.backgroundColor = "";
+        const span = btn.querySelector("span");
+        if (span) span.style.color = "";
       });
+      if (ratingBg) {
+        ratingBg.style.backgroundColor = "";
+        ratingBg.querySelectorAll(".modRating, .modPlayCount").forEach(el => {
+          el.style.color = "";
+        });
+      }
     }
   });
 }
@@ -147,6 +196,165 @@ function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
   return temp;
 }
 
+function getContrastYIQ(hexcolor) {
+  hexcolor = hexcolor.replace('#', '');
+  let r = parseInt(hexcolor.substring(0, 2), 16);
+  let g = parseInt(hexcolor.substring(2, 4), 16);
+  let b = parseInt(hexcolor.substring(4, 6), 16);
+  // YIQ formula for contrast
+  let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+  return yiq >= 128 ? '#222' : '#fff';
+}
+
+function hexToRgb(hex) {
+  hex = hex.replace('#', '');
+  if (hex.length === 3) {
+    hex = hex.split('').map(x => x + x).join('');
+  }
+  let r = parseInt(hex.substring(0, 2), 16);
+  let g = parseInt(hex.substring(2, 4), 16);
+  let b = parseInt(hex.substring(4, 6), 16);
+  return [r, g, b];
+}
+function rgbToHex(r, g, b) {
+  return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+function mixColor(hex, mixWith, percent) {
+  let [r1, g1, b1] = hexToRgb(hex);
+  let [r2, g2, b2] = hexToRgb(mixWith);
+  let r = Math.round(r1 * (1 - percent) + r2 * percent);
+  let g = Math.round(g1 * (1 - percent) + g2 * percent);
+  let b = Math.round(b1 * (1 - percent) + b2 * percent);
+  return rgbToHex(r, g, b);
+}
+function getContrastRatio(hex1, hex2) {
+  // so we can calculate the contrast ratio between two hex colors (WCAG) 
+  function luminance([r, g, b]) {
+    let a = [r, g, b].map(function (v) {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+  }
+  let lum1 = luminance(hexToRgb(hex1));
+  let lum2 = luminance(hexToRgb(hex2));
+  let brightest = Math.max(lum1, lum2);
+  let darkest = Math.min(lum1, lum2);
+  return (brightest + 0.05) / (darkest + 0.05);
+}
+function ensureThemeContrast(theme) {
+  if (theme._isFallback) {
+    // adjust text color for header contrast
+    if (theme.header_color) {
+      theme.header_text_color = getContrastYIQ(theme.header_color);
+      let ratio = getContrastRatio(theme.header_color, theme.header_text_color);
+      let tries = 0;
+      while (ratio < 4.5 && tries < 5) {
+        if (theme.header_text_color === '#fff') {
+          theme.header_color = mixColor(theme.header_color, '#000', 0.2);
+        } else {
+          theme.header_color = mixColor(theme.header_color, '#fff', 0.2);
+        }
+        theme.header_text_color = getContrastYIQ(theme.header_color);
+        ratio = getContrastRatio(theme.header_color, theme.header_text_color);
+        tries++;
+      }
+    }
+    // adjust text color for description contrast
+    if (theme.description_background_color) {
+      theme.description_text_color = getContrastYIQ(theme.description_background_color);
+      let ratio = getContrastRatio(theme.description_background_color, theme.description_text_color);
+      let tries = 0;
+      while (ratio < 4.5 && tries < 5) {
+        if (theme.description_text_color === '#fff') {
+          theme.description_background_color = mixColor(theme.description_background_color, '#000', 0.2);
+        } else {
+          theme.description_background_color = mixColor(theme.description_background_color, '#fff', 0.2);
+        }
+        theme.description_text_color = getContrastYIQ(theme.description_background_color);
+        ratio = getContrastRatio(theme.description_background_color, theme.description_text_color);
+        tries++;
+      }
+      // for mod description backgrounds; we lighten/darken based on text color
+      let lum = getContrastRatio(theme.description_background_color, '#fff');
+      if (theme.description_text_color === '#222' && lum < 2.5) {
+        theme.description_background_color = mixColor(theme.description_background_color, '#fff', 0.3);
+        theme.description_text_color = getContrastYIQ(theme.description_background_color);
+      } else if (theme.description_text_color === '#fff' && lum > 6) {
+        theme.description_background_color = mixColor(theme.description_background_color, '#000', 0.3);
+        theme.description_text_color = getContrastYIQ(theme.description_background_color);
+      }
+    }
+    // adjust text color for secondary color contrast
+    if (theme.secondary_color) {
+      theme.ui_text_color = getContrastYIQ(theme.secondary_color);
+      let ratio = getContrastRatio(theme.secondary_color, theme.ui_text_color);
+      let tries = 0;
+      while (ratio < 4.5 && tries < 5) {
+        if (theme.ui_text_color === '#fff') {
+          theme.secondary_color = mixColor(theme.secondary_color, '#000', 0.2);
+        } else {
+          theme.secondary_color = mixColor(theme.secondary_color, '#fff', 0.2);
+        }
+        theme.ui_text_color = getContrastYIQ(theme.secondary_color);
+        ratio = getContrastRatio(theme.secondary_color, theme.ui_text_color);
+        tries++;
+      }
+      // for secondary colors; we lighten/darken based on text color
+      let lum = getContrastRatio(theme.secondary_color, '#fff');
+      if (theme.ui_text_color === '#222' && lum < 2.5) {
+        theme.secondary_color = mixColor(theme.secondary_color, '#fff', 0.3);
+        theme.ui_text_color = getContrastYIQ(theme.secondary_color);
+      } else if (theme.ui_text_color === '#fff' && lum > 6) {
+        theme.secondary_color = mixColor(theme.secondary_color, '#000', 0.3);
+        theme.ui_text_color = getContrastYIQ(theme.secondary_color);
+      }
+    }
+  }
+}
+
+// regex patterns to extract theme details from raw mod text
+const winColorRegex = /coloring_window\s*=\s*['"](#[A-Fa-f0-9]{6,8})['"]/;
+const titleColorRegex = /coloring_title\s*=\s*['"](#[A-Fa-f0-9]{6,8})['"]/;
+const headerImgRegex = /game_header"\)\.style="background-image: url\(([^\)]+)\)/;
+const winImgRegex = /game_window"\)\.style.backgroundImage = "url\(([^\)]+)\)/;
+const borderColorRegex = /game_window"\)\.style.borderColor = "(#[A-Fa-f0-9]{6,8})"/;
+
+function extractFallbackTheme(rawModText, nameOfMod) {
+  // only create a theme if a real modBoxTheme doesn't exist
+  if (customModBoxThemes[nameOfMod] && customModBoxThemes[nameOfMod].header_color) return;
+
+  const theme = { _isFallback: true };
+
+  const winColorMatch = rawModText.match(winColorRegex);
+  if (winColorMatch) theme.main_color = winColorMatch[1];
+
+  const titleColorMatch = rawModText.match(titleColorRegex);
+  if (titleColorMatch) theme.header_color = titleColorMatch[1];
+
+  const headerImgMatch = rawModText.match(headerImgRegex);
+  if (headerImgMatch) theme.header_image_url = headerImgMatch[1];
+
+  const winImgMatch = rawModText.match(winImgRegex);
+  if (winImgMatch) theme.description_background_color = winImgMatch[1];
+
+  const borderColorMatch = rawModText.match(borderColorRegex);
+  if (borderColorMatch) theme.secondary_color = borderColorMatch[1];
+
+  // no background color for the description? use main_color, header_color, or white
+  if (!theme.description_background_color) {
+    theme.description_background_color = theme.main_color || theme.header_color || '#fff';
+  }
+
+  // ensure contrast for the theme colors 
+  ensureThemeContrast(theme);
+
+  // if at least one color was found, save it as a theme
+  if ((theme.main_color || theme.header_color || theme.header_image_url) && !customModBoxThemes[nameOfMod]) {
+    customModBoxThemes[nameOfMod] = theme;
+  }
+}
+
 function getCustomTheme(rawModText, nameOfMod) {
   const temp = extractFromCode1(
     "campaignTrail_temp.modBoxTheme = {",
@@ -155,8 +363,10 @@ function getCustomTheme(rawModText, nameOfMod) {
     rawModText,
     nameOfMod,
   );
-  if (temp?.modBoxTheme) {
+  if (temp?.modBoxTheme && Object.keys(temp.modBoxTheme).length > 0) {
     customModBoxThemes[nameOfMod] = temp.modBoxTheme;
+  } else {
+    extractFallbackTheme(rawModText, nameOfMod);
   }
 }
 
@@ -504,42 +714,31 @@ function createModView(mod, imageUrl, description, isCustom) {
 
   const favText = isFavorite(mod.value) ? UNFAV : FAV;
 
-  let theme =
-    localStorage.getItem("customModBoxThemesEnabled") === "true"
-      ? customModBoxThemes[mod.value]
-      : null;
-
   modView.innerHTML = `
-    <div class="mod-title" ${theme ? `style="background:url('${theme.header_image_url ?? ""}'); background-color:${theme.header_color};"` : ""}>
-        <p ${theme ? `style="color:${theme.header_text_color};"` : ""}>${mod.innerText}</p>
+    <div class="mod-title">
+        <p>${mod.innerText}</p>
     </div>
     <div class = "mod-img-desc">
-    <img class="mod-image" data-src="${imageUrl}" loading="lazy"></img>
-    <div ${theme ? `style="background-color:${theme.description_background_color}; color:${theme.description_text_color};"` : ""} class="mod-desc" >${description}</div></div>
+      <img class="mod-image" data-src="${imageUrl}" loading="lazy"></img>
+      <div class="mod-desc">${description}</div>
+    </div>
     <div class="hover-button-holder">
-        <button ${theme ? `style="background-color:${theme.secondary_color};"` : ""} class="mod-play-button hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ""}>${PLAY}</span></button>
-        <button ${theme ? `style="background-color:${theme.secondary_color};"` : ""} class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ""}>${favText}</span></button>
-        <button style="${customMods.has(mod.value) ? "" : "display:none;"}${theme ? `background-color:${theme.secondary_color};"` : ""}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span ${theme ? `style="color:${theme.ui_text_color};"` : ""}>${DELETE}</span></button>
+        <button class="mod-play-button hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span>${PLAY}</span></button>
+        <button class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span>${favText}</span></button>
+        <button style="${customMods.has(mod.value) ? "" : "display:none;"}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span>${DELETE}</span></button>
     </div>
     ${!customMods.has(mod.value)
       ? `
-    <div ${theme ? `style="background-color:${theme.secondary_color};"` : ""} class="rating-background">
-        <div ${theme ? `style="color:${theme.ui_text_color};"` : ""} class="modRating">LOADING FAVORITES...</div>
-        <div ${theme ? `style="color:${theme.ui_text_color};"` : ""} class="modPlayCount">LOADING PLAYS...</div>
+    <div class="rating-background">
+        <div class="modRating">LOADING FAVORITES...</div>
+        <div class="modPlayCount">LOADING PLAYS...</div>
         ${mod.dataset.awards != null && mod.dataset.awards.length > 0 ? renderAwards(mod.dataset.awards, mod.dataset.awardimageurls) : ""}
     </div>`
       : ""
     }
-    `;
-
-  if (theme) {
-    modView.style.backgroundColor = theme.main_color;
-  }
+  `;
 
   modView.id = mod.value;
-
-  // getFavsAndPlayCount(mod.value, modView);
-
   return modView;
 }
 
