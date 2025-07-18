@@ -1352,8 +1352,8 @@ function primaryResults(states) {
             return `<li><span style="color:${color}; background-color:${color}">--</span> ${item.last_name}: 0</li>`;
         })
         .join("");
-    const s = findFromPK(e.election_json, e.election_id);
-    const n = e.election_json[s].fields.winning_electoral_vote_number;
+    const s = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+    const n = s.fields.winning_electoral_vote_number;
     $("#game_window").html(`
         <div class="game_header">${corrr}</div>
         <div id="main_content_area">
@@ -1384,7 +1384,7 @@ function primaryResults(states) {
         <div class="overlay_window" id="election_night_window">
             <div class="overlay_window_content" id="election_night_content">
                 <h3>Advisor Feedback</h3>
-                <img src="${e.election_json[s].fields.advisor_url}" width="208" height="128"/>
+                <img src="${s.fields.advisor_url}" width="208" height="128"/>
                 <p>One of many election nights has arrived. Winning the delegates in these races will be vital to your primary victory.</p>
             </div>
             <div class="overlay_buttons" id="election_night_buttons">
@@ -1613,8 +1613,8 @@ function electionNight() {
                 t[a].last_name
             }:  0</li>`;
     }
-    const s = findFromPK(e.election_json, e.election_id);
-    const n = e.election_json[s].fields.winning_electoral_vote_number;
+    const s = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+    const n = s.fields.winning_electoral_vote_number;
     $("#game_window").html(
         `        <div class="game_header">            ${
             corrr
@@ -1623,7 +1623,7 @@ function electionNight() {
         }</ul>                        <p>0% complete</br>${
             n
         } to win</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_result">                        <h3>STATE RESULTS</h3>                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    </div>                </div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>        <div class="overlay" id="election_night_overlay"></div>        <div class="overlay_window" id="election_night_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="${
-            e.election_json[s].fields.advisor_url
+            s.fields.advisor_url
         }" width="208" height="128"/>            <p>${e.ElectionPopup}</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>`,
     );
     const lTemp = (function () {
@@ -2935,8 +2935,8 @@ function m() {
     }
     s = JSON.stringify(s);
     let n = [];
-    const l = findFromPK(e.election_json, e.election_id);
-    const o = e.election_json[l].fields.winning_electoral_vote_number;
+    const l = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+    const o = l.fields.winning_electoral_vote_number;
     for (a = 0; a < e.final_overall_results.length; a++) {
         // At high and low difficulty the game may skip a candidate existing
         // If it doesn't exist we need to make a dummy one that we flag as fake with -1
@@ -3027,9 +3027,8 @@ function m() {
 }
 
 function overallResultsHtml() {
-    const t = e.election_json.find((f) => f.pk === e.election_id);
     const candObj = e.candidate_json.find((f) => f.pk === e.candidate_id);
-    const electJson = e.election_json.find((f) => f.pk === e.election_id);
+    const electJson = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     const overallResults = e.final_overall_results;
     const winningNum = electJson.fields.winning_electoral_vote_number;
     let s;
@@ -3050,7 +3049,7 @@ function overallResultsHtml() {
     else l = t.fields.no_electoral_majority_image; */
     const l = overallResults[0].electoral_votes >= winningNum
         ? n.fields.image_url
-        : t.fields.no_electoral_majority_image;
+        : electJson.fields.no_electoral_majority_image;
     const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
 
     if (Number(important_info.indexOf("<html>")) === -1 && important_info !== "") {
@@ -3220,7 +3219,7 @@ function getSortedCands() {
 function finalMapScreenHtml() {
     const coloredResults = mapResultColor(500);
     const candsArray = getSortedCands();
-    const electIdx = findFromPK(e.election_json, e.election_id);
+    const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     const candResultText = candsArray.map((f) => {
         const s = e.final_overall_results.find((g) => g.candidate === f.candidate);
         const l = s ? s.electoral_votes : 0;
@@ -3239,7 +3238,7 @@ function finalMapScreenHtml() {
                     <div id="overall_result">
                         <h3>ELECTORAL VOTES</h3>
                         <ul>${candResultText}</ul>
-                        <p>${e.election_json[electIdx].fields.winning_electoral_vote_number} to win</p>
+                        <p>${election.fields.winning_electoral_vote_number} to win</p>
                     </div>
                 </div>
                 <div id="state_result_container">
