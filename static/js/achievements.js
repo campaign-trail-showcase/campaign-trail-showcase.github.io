@@ -210,14 +210,15 @@ function addAchivement(achName, achData, parent, theme) {
 
   ach.classList.add("achBox");
   ach.classList.toggle("locked", locked);
-  
-  const themeStyles = theme ? {
-    titleColor: `color:${theme.ui_text_color}`,
-    textBg: `background-color:${theme.description_background_color}`,
-    textColor: `color:${theme.description_text_color}`,
-    mainBg: theme.main_color
-  } : { titleColor: "", textBg: "", textColor: "", mainBg: "" };
-  
+
+  let themeStyles = { titleColor: "", textBg: "", textColor: "", mainBg: "" };
+  if (theme) {
+    themeStyles.titleColor = theme.header_text_color ? `color:${theme.header_text_color}` : "";
+    themeStyles.textBg = theme.description_background_color ? `background-color:${theme.description_background_color}` : "";
+    themeStyles.textColor = theme.description_text_color ? `color:${theme.description_text_color}` : "";
+    themeStyles.mainBg = theme.main_color ? theme.main_color : "";
+  }
+
   ach.innerHTML = `
     <div class="achTitle" style="${themeStyles.titleColor}">
         ${achName}
@@ -230,7 +231,7 @@ function addAchivement(achName, achData, parent, theme) {
     </div>
     `;
 
-  if (theme) {
+  if (themeStyles.mainBg) {
     ach.style.backgroundColor = themeStyles.mainBg;
   }
 
@@ -434,23 +435,22 @@ function addAllAchievements() {
     const subHolder = document.createElement("div");
     const labelHolder = document.createElement("div");
     subHolder.classList.add("achSubHolder");
-    
-    const theme =
-      localStorage.getItem("customModBoxThemesEnabled") === "true"
-        ? customModBoxThemes[modName]
-        : null;
+
+    let theme = null;
+    const themeState = localStorage.getItem("modThemeState");
+    if (themeState === "default" || themeState === "detailed") {
+      theme = customModBoxThemes[modName];
+    }
 
     for (const ach in allAch[modName]) {
-      if (addAchivement(ach, allAch[modName][ach], subHolder, theme)) {
-        // Increment count only if the achievement is unlocked
-      }
+      addAchivement(ach, allAch[modName][ach], subHolder, theme);
     }
 
     const percentage = modData.percentComplete.toFixed(2);
-    
+
     const actionsContainer = document.createElement("div");
     actionsContainer.classList.add("mod-actions");
-    
+
     const pinButton = document.createElement("button");
     pinButton.classList.add("pin-button");
     pinButton.innerHTML = "📌";
@@ -460,9 +460,9 @@ function addAllAchievements() {
       e.stopPropagation();
       togglePinnedMod(modName);
     });
-    
+
     actionsContainer.appendChild(pinButton);
-    
+
     const favMods = getFavoriteMods();
     if (favMods.has(modName)) {
       const favIcon = document.createElement("span");
@@ -471,7 +471,7 @@ function addAllAchievements() {
       favIcon.title = "Favorite mod";
       actionsContainer.appendChild(favIcon);
     }
-    
+
     labelHolder.innerHTML = `
       <p>${namesOfModsFromValue[modName]}</p>
       <span class="mod-completion" style="position:absolute;top:0;right:0;font-style:italic;opacity:80%;padding:8px;font-size:small;">${count}/${total} (${percentage}%)</span>
@@ -497,13 +497,14 @@ function addAllAchievements() {
     fragment.appendChild(holder);
 
     if (theme) {
-      if(theme.label_background_image_url) {
+      if (theme.label_background_image_url) {
         labelHolder.style.backgroundImage = `url("${theme.label_background_image_url}")`;
-      }
-      else {
+        labelHolder.style.backgroundColor = "";
+      } else if (theme.header_color) {
+        labelHolder.style.backgroundImage = "";
         labelHolder.style.backgroundColor = theme.header_color;
       }
-      labelHolder.style.color = theme.header_text_color;
+      labelHolder.style.color = theme.header_text_color ?? "";
     }
   }
   
