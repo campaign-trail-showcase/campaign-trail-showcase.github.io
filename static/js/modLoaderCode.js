@@ -981,6 +981,7 @@ function addCustomMod(code1, code2) {
 
 function filterMods(event) {
   nameFilter = event.target.value.toLowerCase();
+  currentPage = 1;
   updateModViews();
 }
 
