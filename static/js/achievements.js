@@ -203,6 +203,22 @@ function closeAchievements() {
 
 dragElement(achWindow);
 
+function getContrastingTextColor(bgColor) {
+  if (!bgColor) return '#000000';
+
+  const color = (bgColor.charAt(0) === '#') ? bgColor.substring(1, 7) : bgColor;
+  if (color.length < 6) return '#000000';
+
+  const r = parseInt(color.substring(0, 2), 16);
+  const g = parseInt(color.substring(2, 4), 16);
+  const b = parseInt(color.substring(4, 6), 16);
+
+  // YIQ formula to determine brightness
+  const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+
+  return (yiq >= 128) ? '#000000' : '#FFFFFF';
+}
+
 // Returns true if the achievement is unlocked
 function addAchivement(achName, achData, parent, theme) {
   const ach = document.createElement("div");
@@ -213,7 +229,13 @@ function addAchivement(achName, achData, parent, theme) {
 
   let themeStyles = { titleColor: "", textBg: "", textColor: "", mainBg: "" };
   if (theme) {
-    themeStyles.titleColor = theme.header_text_color ? `color:${theme.header_text_color}` : "";
+    if (theme.main_color) {
+      const idealTextColor = getContrastingTextColor(theme.main_color);
+      themeStyles.titleColor = `color: ${idealTextColor};`;
+    } else {
+      themeStyles.titleColor = theme.header_text_color ? `color:${theme.header_text_color}` : "";
+    }
+    
     themeStyles.textBg = theme.description_background_color ? `background-color:${theme.description_background_color}` : "";
     themeStyles.textColor = theme.description_text_color ? `color:${theme.description_text_color}` : "";
     themeStyles.mainBg = theme.main_color ? theme.main_color : "";
