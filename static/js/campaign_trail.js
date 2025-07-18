@@ -97,10 +97,10 @@ function mapCache(skip = false) {
         if (!$("#main_content_area")[0]) {
             return false;
         }
-        const i = findFromPK(e.election_json, e.election_id);
+        const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
         if (
             (
-                (e.question_number - 1) % 2 !== 0 && e.election_json[i].fields.has_visits === 1
+                (e.question_number - 1) % 2 !== 0 && election.fields.has_visits === 1
             )
             || (
                 e.question_number === e.global_parameter_json[0].fields.question_count
@@ -1893,8 +1893,9 @@ function nextQuestion() {
             electionNight();
         }
     } else if (e.question_number % 2 == 0) {
-        const i = findFromPK(e.election_json, e.election_id);
-        e.election_json[i].fields.has_visits == 1
+        // const i = findFromPK(e.election_json, e.election_id);
+        const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+        election.fields.has_visits == 1
             ? (function (e) {
                 $("#game_window").html(
                     `        <div class="game_header">            ${
