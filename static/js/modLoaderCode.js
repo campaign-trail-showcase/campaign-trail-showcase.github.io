@@ -246,7 +246,9 @@ function ensureThemeContrast(theme) {
   if (theme._isFallback) {
     // adjust text color for header contrast
     if (theme.header_color) {
-      theme.header_text_color = getContrastYIQ(theme.header_color);
+      const contrastWhite = getContrastRatio(theme.header_color, '#fff');
+      const contrastBlack = getContrastRatio(theme.header_color, '#222');
+      theme.header_text_color = contrastWhite > contrastBlack ? '#fff' : '#222';
       let ratio = getContrastRatio(theme.header_color, theme.header_text_color);
       let tries = 0;
       while (ratio < 4.5 && tries < 5) {
@@ -255,14 +257,18 @@ function ensureThemeContrast(theme) {
         } else {
           theme.header_color = mixColor(theme.header_color, '#fff', 0.2);
         }
-        theme.header_text_color = getContrastYIQ(theme.header_color);
+        const contrastWhite2 = getContrastRatio(theme.header_color, '#fff');
+        const contrastBlack2 = getContrastRatio(theme.header_color, '#222');
+        theme.header_text_color = contrastWhite2 > contrastBlack2 ? '#fff' : '#222';
         ratio = getContrastRatio(theme.header_color, theme.header_text_color);
         tries++;
       }
     }
     // adjust text color for description contrast
     if (theme.description_background_color) {
-      theme.description_text_color = getContrastYIQ(theme.description_background_color);
+      const contrastWhite = getContrastRatio(theme.description_background_color, '#fff');
+      const contrastBlack = getContrastRatio(theme.description_background_color, '#222');
+      theme.description_text_color = contrastWhite > contrastBlack ? '#fff' : '#222';
       let ratio = getContrastRatio(theme.description_background_color, theme.description_text_color);
       let tries = 0;
       while (ratio < 4.5 && tries < 5) {
@@ -271,7 +277,9 @@ function ensureThemeContrast(theme) {
         } else {
           theme.description_background_color = mixColor(theme.description_background_color, '#fff', 0.2);
         }
-        theme.description_text_color = getContrastYIQ(theme.description_background_color);
+        const contrastWhite2 = getContrastRatio(theme.description_background_color, '#fff');
+        const contrastBlack2 = getContrastRatio(theme.description_background_color, '#222');
+        theme.description_text_color = contrastWhite2 > contrastBlack2 ? '#fff' : '#222';
         ratio = getContrastRatio(theme.description_background_color, theme.description_text_color);
         tries++;
       }
@@ -285,9 +293,11 @@ function ensureThemeContrast(theme) {
         theme.description_text_color = getContrastYIQ(theme.description_background_color);
       }
     }
-    // adjust text color for secondary color contrast
+    // adjust text color for secondary contrast
     if (theme.secondary_color) {
-      theme.ui_text_color = getContrastYIQ(theme.secondary_color);
+      const contrastWhite = getContrastRatio(theme.secondary_color, '#fff');
+      const contrastBlack = getContrastRatio(theme.secondary_color, '#222');
+      theme.ui_text_color = contrastWhite > contrastBlack ? '#fff' : '#000';
       let ratio = getContrastRatio(theme.secondary_color, theme.ui_text_color);
       let tries = 0;
       while (ratio < 4.5 && tries < 5) {
@@ -296,7 +306,9 @@ function ensureThemeContrast(theme) {
         } else {
           theme.secondary_color = mixColor(theme.secondary_color, '#fff', 0.2);
         }
-        theme.ui_text_color = getContrastYIQ(theme.secondary_color);
+        const contrastWhite2 = getContrastRatio(theme.secondary_color, '#fff');
+        const contrastBlack2 = getContrastRatio(theme.secondary_color, '#222');
+        theme.ui_text_color = contrastWhite2 > contrastBlack2 ? '#fff' : '#000';
         ratio = getContrastRatio(theme.secondary_color, theme.ui_text_color);
         tries++;
       }
@@ -327,27 +339,55 @@ function extractFallbackTheme(rawModText, nameOfMod) {
   const theme = { _isFallback: true };
 
   const winColorMatch = rawModText.match(winColorRegex);
-  if (winColorMatch) theme.main_color = winColorMatch[1];
-
   const titleColorMatch = rawModText.match(titleColorRegex);
-  if (titleColorMatch) theme.header_color = titleColorMatch[1];
-
   const headerImgMatch = rawModText.match(headerImgRegex);
-  if (headerImgMatch) theme.header_image_url = headerImgMatch[1];
-
   const winImgMatch = rawModText.match(winImgRegex);
-  if (winImgMatch) theme.description_background_color = winImgMatch[1];
+  const borderColorMatch = rawModText.match(borderColorRegex);
 
-   const borderColorMatch = rawModText.match(borderColorRegex);
-  if (borderColorMatch) {
-    theme.secondary_color = borderColorMatch[1];
-  } else if (theme.header_color) {
-    theme.secondary_color = theme.header_color;
+  const textColMatch = rawModText.match(/text_col\s*=\s*["'](#[A-Fa-f0-9]{6,8}|white|black)["']/);
+
+  let winColor = winColorMatch ? winColorMatch[1] : null;
+  let titleColor = titleColorMatch ? titleColorMatch[1] : null;
+  let borderColor = borderColorMatch ? borderColorMatch[1] : null;
+
+  // if winColor and titleColor are the same, generate a lighter/darker variant
+  if (winColor && titleColor && winColor === titleColor) {
+    theme.main_color = winColor;
+    theme.header_color = mixColor(winColor, '#000', 0.15);
+    theme.secondary_color = borderColor || mixColor(winColor, '#fff', 0.15);
+  } else {
+    theme.main_color = winColor;
+    theme.header_color = titleColor;
+    theme.secondary_color = borderColor || titleColor || winColor;
   }
+
+  if (headerImgMatch) theme.header_image_url = headerImgMatch[1];
+  if (winImgMatch) theme.description_background_color = winImgMatch[1];
 
   // no background color for the description? use main_color, header_color, or white
   if (!theme.description_background_color) {
-    theme.description_background_color = theme.main_color || theme.header_color || '#fff';
+    // if main_color is set, use it; otherwise, use header_color or white
+    if (theme.main_color) {
+      const [r, g, b] = hexToRgb(theme.main_color);
+      const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+      if (brightness < 128) {
+        theme.description_background_color = mixColor(theme.main_color, '#000', 0.25);
+      } else {
+        theme.description_background_color = mixColor(theme.main_color, '#fff', 0.25);
+      }
+    } else {
+      theme.description_background_color = theme.header_color || '#fff';
+    }
+  }
+
+  // if description_background_color == main_color, mix it with black
+  if (theme.description_background_color === theme.main_color) {
+    theme.description_background_color = mixColor(theme.main_color, '#000', 0.25);
+  }
+
+  // if header_text_color is not set, use text_col if found
+  if (textColMatch) {
+    theme.header_text_color = textColMatch[1] === 'white' ? '#fff' : (textColMatch[1] === 'black' ? '#222' : textColMatch[1]);
   }
 
   // ensure contrast for the theme colors 
@@ -513,6 +553,10 @@ function preloadAwardIcon(url) {
 }
 
 $(document).ready(async () => {
+  // show loading indicator while mods load
+  const gridEl = document.getElementById("mod-grid");
+  if (gridEl) gridEl.innerHTML = `<div id="loading-mods-text" style="text-align:center;margin:20px;">Loading mods...</div>`;
+
   const modNameParam = getUrlParam("modName");
 
   favoriteMods = new Set(
