@@ -3472,7 +3472,7 @@ function overallDetailsHtml() {
     const histRes = HistName.map((name, i) => `
         <tr>
             <td style="text-align: left;">
-                <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span> ${name}
+                <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span>${name}
             </td>
             <td>${HistEV[i]}</td>
             <td>${HistPV[i]}</td>
