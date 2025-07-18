@@ -1283,47 +1283,6 @@ function loadRandomMod() {
   modView.querySelector(".mod-play-button").click();
 }
 
-function unloadMod() {
-  modBeingPlayed = "";
-  loadingFromModButton = false;
-  customMod = false;
-  modded = false;
-
-  if (customModBoxThemes && typeof modBeingPlayed === "string" && modBeingPlayed.length > 0) {
-    delete customModBoxThemes[modBeingPlayed];
-  }
-  if (allAch && typeof modBeingPlayed === "string" && modBeingPlayed.length > 0) {
-    delete allAch[modBeingPlayed];
-  }
-
-  if (customMods.has(modBeingPlayed)) {
-    localStorage.removeItem(modBeingPlayed + "_code1");
-    localStorage.removeItem(modBeingPlayed + "_code2");
-    customMods.delete(modBeingPlayed);
-    localStorage.setItem("customMods", Array.from(customMods));
-  }
-
-  if (customThemesButton) {
-    customThemesButton.style.display = "inline-block";
-  }
-  $("#modloaddiv")[0].style.display = "none";
-  $("#modLoadReveal")[0].style.display = "inline-block";
-  document.getElementById("featured-mods-area").style.display = "block";
-  document.getElementById("copyLinkButton").style.display = "none";
-  document.getElementById("goBackButton").style.display = "none";
-
-  const announcement = document.getElementById("announcement");
-  if (announcement) {
-    announcement.parentNode.removeChild(announcement);
-  }
-
-  applyModBoxThemes();
-
-  updateModViews();
-
-  window.scrollTo(0, 0);
-}
-
 async function loadModFromButton(modValue) {
   if (modValue === "0000Random_Mod") {
     setTimeout(() => updateModViewCount(modValue), 10000);
@@ -1369,7 +1328,6 @@ async function loadModFromButton(modValue) {
   if (!customMods.has(modValue)) {
     document.getElementById("copyLinkButton").style.display = "block";
     document.getElementById("goBackButton").style.display = "inline";
-    document.getElementById("goBackButton").onclick = unloadMod;
   }
 
   const announcement = document.getElementById("announcement");
