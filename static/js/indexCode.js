@@ -167,7 +167,7 @@ const stassenyear = [
 // DOM cache
 const correctbannerpar = document.getElementsByClassName("game_header")[0];
 var corrr = correctbannerpar.innerHTML;
-const header = document.getElementById("header");
+var header = document.getElementById("header");
 const gameHeader = document.getElementsByClassName("game_header")[0];
 const gameWindow = document.getElementById("game_window");
 const container = document.querySelector(".container");
