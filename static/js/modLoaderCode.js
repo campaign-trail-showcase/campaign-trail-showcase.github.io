@@ -1283,6 +1283,31 @@ function loadRandomMod() {
   modView.querySelector(".mod-play-button").click();
 }
 
+function unloadMod() {
+  modBeingPlayed = "";
+  loadingFromModButton = false;
+  customMod = false;
+
+  if (customThemesButton) {
+    customThemesButton.style.display = "inline-block";
+  }
+  $("#modloaddiv")[0].style.display = "none";
+  $("#modLoadReveal")[0].style.display = "inline-block";
+  document.getElementById("featured-mods-area").style.display = "block";
+
+  document.getElementById("copyLinkButton").style.display = "none";
+  document.getElementById("goBackButton").style.display = "none";
+
+  const announcement = document.getElementById("announcement");
+  if (announcement) {
+    announcement.style.display = "";
+  }
+
+  window.scrollTo(0, 0);
+
+  updateModViews();
+}
+
 async function loadModFromButton(modValue) {
   if (modValue === "0000Random_Mod") {
     setTimeout(() => updateModViewCount(modValue), 10000);
@@ -1328,6 +1353,8 @@ async function loadModFromButton(modValue) {
   if (!customMods.has(modValue)) {
     document.getElementById("copyLinkButton").style.display = "block";
     document.getElementById("goBackButton").style.display = "inline";
+
+    document.getElementById("goBackButton").onclick = unloadMod;
   }
 
   const announcement = document.getElementById("announcement");
