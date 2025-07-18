@@ -1434,5 +1434,6 @@ function setMode(evt, newMode) {
   }
   evt.target.classList.add("pressed");
   mode = newMode;
+  currentPage = 1; // reset to first page when mode changes
   updateModViews();
 }
