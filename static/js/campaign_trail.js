@@ -1958,7 +1958,7 @@ function advisorFeedback() {
 }
 
 function descHTML(descWindow, id) {
-    const candObj = e.candidate_json.find((f) => f.pk === Number(id));
+    const candObj = e.candidate_json.find((f) => Number(f.pk) === Number(id));
     const isRM = descWindow === "#running_mate_description_window";
     const idx = isRM ? "running_mate_summary" : "candidate_summary";
     const desc = isRM ? "description_as_running_mate" : "description";
@@ -2075,10 +2075,10 @@ function election_HTML(id, cand, running_mate) {
 /* eslint-disable no-use-before-define */
 function candSel(a) {
     a.preventDefault();
-    const numElect = Number(e.election_id);
+    const numElect = Number(e.election_id) ?? Number(e.election_json[0].pk);
     if (!modded) e.shining = e.shining_info.some((f) => f.pk === numElect);
     const n = e.candidate_json
-        .filter((f) => f.fields.election === numElect && f.fields.is_active === 1)
+        .filter((f) => Number(f.fields.election) === numElect && [1, true].includes(f.fields.is_active))
         .map((f) => `<option value="${f.pk}">${f.fields.first_name} ${f.fields.last_name}</option>`)
         .join("");
 
@@ -3976,15 +3976,16 @@ const gameStart = (a) => {
                         }</option>`);
         }
         e.election_id = e.election_id ? e.election_id : e.election_json[0].pk;
-        const inX = findFromPK(e.election_json, e.election_id);
+        // const inX = findFromPK(e.election_json, e.election_id);
+        const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
         const l = `<div class="game_header">            ${
             corrr
         }        </div>        <div class="inner_window_w_desc" id="inner_window_2">            <div id="election_year_form">            <form name="election_year">            <p>                <h3>${e.SelectText}</h3>    \t\t    <select name="election_id" id="election_id">${
             a
         }</select>            </p>            </form>            <div class="election_description_window" id="election_description_window">                <div id="election_image">                    <img src="${
-            e.election_json[inX].fields.image_url
+            election.fields.image_url
         }" width="300" height="160"/>                </div>                <div id="election_summary">${
-            e.election_json[inX].fields.summary
+            election.fields.summary
         }</div>            </div>        </div>        <p><button id="election_id_button">Continue</button></p> <p id="credits">This scenario was made by ${
             e.credits
         }.</p>`;
