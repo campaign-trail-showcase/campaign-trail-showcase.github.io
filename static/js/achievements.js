@@ -170,6 +170,101 @@ styleElement.textContent = `
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
   }
+
+  /* Mobile and small screen responsive styles */
+  @media (max-width: 768px) {
+    #achwindow {
+      width: 95vw !important;
+      height: 90vh !important;
+      max-width: 95vw !important;
+      max-height: 90vh !important;
+    }
+    
+    #achcontent {
+      max-height: calc(90vh - 80px);
+    }
+    
+    .ach-controls button {
+      padding: 12px 6px;
+      font-size: 16px;
+      min-height: 44px;
+    }
+    
+    .ach-pagination {
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .ach-pagination button {
+      padding: 12px 20px;
+      font-size: 16px;
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+    
+    .ach-pagination-info {
+      text-align: center;
+      padding: 12px;
+      font-size: 16px;
+    }
+    
+    .achBox {
+      margin: 8px 4px;
+      min-width: calc(50% - 8px);
+    }
+    
+    .achBox img {
+      width: calc(50% - 8px);      
+    }
+    
+    .achLabel {
+      padding: 12px;
+      min-height: 40px;
+      cursor: pointer;
+    }
+    
+    .achLabel p {
+      font-size: 16px;
+      margin: 0;
+      padding-right: 80px;
+    }
+    
+  }
+
+  @media (max-width: 480px) {
+    .achBox {
+      min-width: calc(60% - 8px);
+    }
+    
+    .ach-controls {
+      padding: 0 5px;
+    }
+    
+    .ach-pagination {
+      padding: 0 5px;
+    }
+    
+    .achLabel p {
+      font-size: 14px;
+      padding-right: 60px;
+    }
+    
+    .mod-completion {
+      font-size: 10px;
+      padding: 4px;
+    }
+    
+    .achBox img {
+      width: calc(40% - 8px);      
+    }
+    
+    .pin-button, .fav-icon {
+      width: 32px;
+      height: 32px;
+      font-size: 16px;
+    }
+  }
 `;
 document.head.appendChild(styleElement);
 
@@ -182,6 +277,11 @@ function openAchievements() {
 }
 
 function centerAchievementsWindow() {
+  // Skip centering on mobile - use CSS positioning instead
+  if (window.innerWidth <= 768) {
+    return;
+  }
+  
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
   
@@ -314,8 +414,8 @@ function addLegacyViewControls() {
   container.style.display = "flex";
   container.style.justifyContent = "center";
   container.style.alignItems = "center";
-  container.style.gap = "8px";
-  container.style.margin = "15px auto 0 auto";
+  container.style.gap = "6px";
+  container.style.margin = "10px auto -10px auto";
 
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";

@@ -557,8 +557,9 @@ function createLegacyViewControls() {
   const container = document.createElement("div");
   container.style.display = "inline-flex";
   container.style.alignItems = "center";
-  container.style.gap = "8px";
+  container.style.gap = "6px";
   container.style.marginLeft = "15px";
+  container.style.verticalAlign = "middle";
 
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
