@@ -557,8 +557,9 @@ function createLegacyViewControls() {
   const container = document.createElement("div");
   container.style.display = "inline-flex";
   container.style.alignItems = "center";
-  container.style.gap = "8px";
+  container.style.gap = "6px";
   container.style.marginLeft = "15px";
+  container.style.verticalAlign = "middle";
 
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -1003,7 +1004,17 @@ function addCustomMod(code1, code2) {
   localStorage.setItem(modName + "_code1", code1);
   localStorage.setItem(modName + "_code2", code2);
 
-  // add custom mod to the mod list
+  // remove old mod if it exists
+  const oldModView = document.getElementById(modName);
+  if (oldModView && oldModView.parentNode) {
+    oldModView.parentNode.removeChild(oldModView);
+  }
+  const oldIdx = modList.findIndex(mv => mv.id === modName);
+  if (oldIdx !== -1) {
+    modList.splice(oldIdx, 1);
+  }
+
+  // update mod box theme
   getAllAchievements(code1, modName);
   getCustomTheme(code1, modName);
 
@@ -1028,7 +1039,15 @@ function addCustomMod(code1, code2) {
   modGrid.insertBefore(modView, modGrid.firstChild);
   modList.unshift(modView);
 
+  // ensure "Custom" tag is checked so the new mod is visible
+  for (const tagCheckbox of tagList) {
+    if (tagCheckbox.value === "Custom") {
+      tagCheckbox.checked = true;
+    }
+  }
+
   updateModViews();
+  applyModBoxThemes();
 }
 
 function filterMods(event) {
