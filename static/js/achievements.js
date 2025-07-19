@@ -46,7 +46,7 @@ let achievementsCache = null;
 
 function buildAchievementsCache() {
   if (achievementsCache) return achievementsCache;
-  
+
   achievementsCache = {};
   for (const mod in allAch) {
     for (const a in allAch[mod]) {
@@ -281,19 +281,19 @@ function centerAchievementsWindow() {
   if (window.innerWidth <= 768) {
     return;
   }
-  
+
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
-  
+
   const achWidth = achWindow.offsetWidth;
   const achHeight = achWindow.offsetHeight;
-  
+
   const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  
+
   const leftPosition = scrollLeft + (windowWidth - achWidth) / 2;
   const topPosition = scrollTop + (windowHeight - achHeight) / 2;
-  
+
   achWindow.style.left = Math.max(0, leftPosition) + "px";
   achWindow.style.top = Math.max(0, topPosition) + "px";
 }
@@ -336,7 +336,7 @@ function addAchivement(achName, achData, parent, theme) {
     } else {
       themeStyles.titleColor = theme.header_text_color ? `color:${theme.header_text_color}` : "";
     }
-    
+
     themeStyles.textBg = theme.description_background_color ? `background-color:${theme.description_background_color}` : "";
     themeStyles.textColor = theme.description_text_color ? `color:${theme.description_text_color}` : "";
     themeStyles.mainBg = theme.main_color ? theme.main_color : "";
@@ -371,14 +371,14 @@ function togglePinnedMod(modName) {
   }
 
   localStorage.setItem("pinnedAchMods", Array.from(pinnedAchMods).join(","));
-  
+
   addAllAchievements();
 }
 
 function addSortingControls() {
   const controlsContainer = document.createElement("div");
   controlsContainer.classList.add("ach-controls");
-  
+
   const createButton = (text, sortMethod) => {
     const button = document.createElement("button");
     button.innerText = text;
@@ -389,12 +389,12 @@ function addSortingControls() {
     });
     return button;
   };
-  
+
   controlsContainer.appendChild(createButton("Default", "default"));
   controlsContainer.appendChild(createButton("Most Complete", "percentComplete"));
   controlsContainer.appendChild(createButton("Most Achievements", "mostAch"));
   controlsContainer.appendChild(createButton("Least Achievements", "leastAch"));
-  
+
   const favoritesButton = document.createElement("button");
   favoritesButton.innerText = "Show Favorites Only";
   favoritesButton.classList.toggle("active", showOnlyFavoriteMods);
@@ -405,7 +405,7 @@ function addSortingControls() {
     addAllAchievements();
   });
   controlsContainer.appendChild(favoritesButton);
-  
+
   return controlsContainer;
 }
 
@@ -450,91 +450,108 @@ function addLegacyViewControls() {
 }
 
 function renderModList(modNamesToRender, modCompletionData) {
-    const fragment = document.createDocumentFragment();
-    let achAvail = modNamesToRender.length > 0;
+  const fragment = document.createDocumentFragment();
+  let achAvail = modNamesToRender.length > 0;
 
-    for (const modName of modNamesToRender) {
-        const modData = modCompletionData.find(data => data.modName === modName);
-        if (!allAch[modName]) continue;
-        const { count, total, percentComplete } = modData;
-        const holder = document.createElement("div");
-        holder.classList.add("achHolder");
-        const subHolder = document.createElement("div");
-        subHolder.classList.add("achSubHolder");
-        const labelHolder = document.createElement("div");
-        
-        let theme = null;
-        const themeState = localStorage.getItem("modThemeState");
-        if (themeState === "default" || themeState === "detailed") theme = customModBoxThemes[modName];
-        
-        for (const ach in allAch[modName]) {
-            addAchivement(ach, allAch[modName][ach], subHolder, theme);
-        }
-        
-        const actionsContainer = document.createElement("div");
-        actionsContainer.classList.add("mod-actions");
-        const pinButton = document.createElement("button");
-        pinButton.classList.add("pin-button");
-        pinButton.innerHTML = "📌";
-        pinButton.title = pinnedAchMods.has(modName) ? "Unpin mod" : "Pin mod";
-        pinButton.classList.toggle("pinned", pinnedAchMods.has(modName));
-        pinButton.addEventListener("click", (e) => { e.stopPropagation(); togglePinnedMod(modName); });
-        actionsContainer.appendChild(pinButton);
-        
-        if (getFavoriteMods().has(modName)) {
-            const favIcon = document.createElement("span");
-            favIcon.innerHTML = "⭐";
-            favIcon.classList.add("fav-icon");
-            favIcon.title = "Favorite mod";
-            actionsContainer.appendChild(favIcon);
-        }
-        
-        labelHolder.innerHTML = `<p>${namesOfModsFromValue[modName]}</p><span class="mod-completion" style="position:absolute;top:0;right:0;font-style:italic;opacity:80%;padding:8px;font-size:small;">${count}/${total} (${percentComplete.toFixed(2)}%)</span>`;
-        labelHolder.classList.add("achLabel");
-        labelHolder.appendChild(actionsContainer);
-        const toggle = document.createElement("div");
-        toggle.classList.add("achToggle");
-        labelHolder.appendChild(toggle);
-        toggle.innerText = "+";
-        labelHolder.onclick = () => {
-            const isVisible = subHolder.classList.contains("visible");
-            toggle.innerText = isVisible ? "+" : "-";
-            subHolder.classList.toggle("visible");
-        };
-        holder.appendChild(labelHolder);
-        holder.appendChild(subHolder);
-        fragment.appendChild(holder);
-        
-        if (theme) {
-            if (theme.label_background_image_url) {
-                labelHolder.style.backgroundImage = `url("${theme.label_background_image_url}")`;
-                labelHolder.style.backgroundColor = "";
-            } else if (theme.header_color) {
-                labelHolder.style.backgroundImage = "";
-                labelHolder.style.backgroundColor = theme.header_color;
-            }
-            labelHolder.style.color = theme.header_text_color ?? "";
-        }
+  for (const modName of modNamesToRender) {
+    const modData = modCompletionData.find(data => data.modName === modName);
+    if (!allAch[modName]) continue;
+    const { count, total, percentComplete } = modData;
+    const holder = document.createElement("div");
+    holder.classList.add("achHolder");
+    const subHolder = document.createElement("div");
+    subHolder.classList.add("achSubHolder");
+    const labelHolder = document.createElement("div");
+
+    let theme = null;
+    const themeState = localStorage.getItem("modThemeState");
+    if (themeState === "default" || themeState === "detailed") theme = customModBoxThemes[modName];
+
+    for (const ach in allAch[modName]) {
+      addAchivement(ach, allAch[modName][ach], subHolder, theme);
     }
-    
-    if (!achAvail) {
-        const message = document.createElement("p");
-        message.style.textAlign = "center";
-        message.style.marginTop = "20px";
-        message.textContent = showOnlyFavoriteMods 
-          ? "No achievements found for favorite mods. Uncheck the filter or pin some mods to see them here!"
-          : "No achievements are currently added yet! Check back later!";
-        fragment.appendChild(message);
+
+    const actionsContainer = document.createElement("div");
+    actionsContainer.classList.add("mod-actions");
+    const pinButton = document.createElement("button");
+    pinButton.classList.add("pin-button");
+    pinButton.innerHTML = "📌";
+    pinButton.title = pinnedAchMods.has(modName) ? "Unpin mod" : "Pin mod";
+    pinButton.classList.toggle("pinned", pinnedAchMods.has(modName));
+    pinButton.addEventListener("click", (e) => { e.stopPropagation(); togglePinnedMod(modName); });
+    actionsContainer.appendChild(pinButton);
+
+    if (getFavoriteMods().has(modName)) {
+      const favIcon = document.createElement("span");
+      favIcon.innerHTML = "⭐";
+      favIcon.classList.add("fav-icon");
+      favIcon.title = "Favorite mod";
+      actionsContainer.appendChild(favIcon);
     }
-    return fragment;
+
+    labelHolder.innerHTML = `<p>${namesOfModsFromValue[modName]}</p><span class="mod-completion" style="position:absolute;top:0;right:0;font-style:italic;opacity:80%;padding:8px;font-size:small;">${count}/${total} (${percentComplete.toFixed(2)}%)</span>`;
+    labelHolder.classList.add("achLabel");
+    labelHolder.appendChild(actionsContainer);
+    const toggle = document.createElement("div");
+    toggle.classList.add("achToggle");
+    labelHolder.appendChild(toggle);
+    toggle.innerText = "+";
+    labelHolder.onclick = () => {
+      const isVisible = subHolder.classList.contains("visible");
+      toggle.innerText = isVisible ? "+" : "-";
+      subHolder.classList.toggle("visible");
+    };
+    holder.appendChild(labelHolder);
+    holder.appendChild(subHolder);
+    fragment.appendChild(holder);
+
+    if (theme) {
+      if (theme.label_background_image_url) {
+        labelHolder.style.backgroundImage = `url("${theme.label_background_image_url}")`;
+        labelHolder.style.backgroundColor = "";
+      } else if (theme.header_color) {
+        labelHolder.style.backgroundImage = "";
+        labelHolder.style.backgroundColor = theme.header_color;
+      }
+      labelHolder.style.color = theme.header_text_color ?? "";
+    }
+  }
+
+  if (!achAvail) {
+    const message = document.createElement("p");
+    message.style.textAlign = "center";
+    message.style.marginTop = "20px";
+    message.textContent = showOnlyFavoriteMods
+      ? "No achievements found for favorite mods. Uncheck the filter or pin some mods to see them here!"
+      : "No achievements are currently added yet! Check back later!";
+    fragment.appendChild(message);
+  }
+  return fragment;
+}
+
+function getCurrentModName() {
+  if (window.modBeingPlayed && allAch[window.modBeingPlayed]) {
+    return window.modBeingPlayed;
+  }
+
+  // check if RecReading is available and has achievements
+  if (window.RecReading && Object.keys(allAch).length > 0) {
+    // if only one mod has achievements, assume that's the current one
+    const availableMods = Object.keys(allAch);
+    if (availableMods.length === 1) {
+      return availableMods[0];
+    }
+  }
+
+  return null;
 }
 
 function addAllAchievements() {
   achContent.innerHTML = "";
-  
+
   achContent.appendChild(addSortingControls());
   achContent.appendChild(addLegacyViewControls());
-  
+
   // prepare data for all mods first
   let allModNames = Object.keys(allAch);
   const modCompletionData = allModNames.map(modName => {
@@ -578,17 +595,23 @@ function addAllAchievements() {
     // standard view: filter and paginate
     let namesToShow = sortedNames;
 
-    // special case: when playing 2024, also show 2024 Divided States achievements
-    if (window.modBeingPlayed === "2024" || window.modBeingPlayed === "2024 Divided States") {
+    // get mod name
+    const currentMod = getCurrentModName();
+
+    if (currentMod) {
+      // special case: when playing 2024, also show 2024 Divided States achievements
+      if (currentMod === "2024" || currentMod === "2024 Divided States") {
         namesToShow = namesToShow.filter(modName => modName === "2024" || modName === "2024 Divided States");
-    } else if (window.modBeingPlayed && allAch[window.modBeingPlayed]) {
-        namesToShow = namesToShow.filter(modName => modName === window.modBeingPlayed);
+      } else {
+        namesToShow = namesToShow.filter(modName => modName === currentMod);
+      }
     }
+
     if (showOnlyFavoriteMods) {
-        const favMods = getFavoriteMods();
-        if (favMods.size > 0 || pinnedAchMods.size > 0) {
-            namesToShow = namesToShow.filter(modName => favMods.has(modName) || pinnedAchMods.has(modName));
-        }
+      const favMods = getFavoriteMods();
+      if (favMods.size > 0 || pinnedAchMods.size > 0) {
+        namesToShow = namesToShow.filter(modName => favMods.has(modName) || pinnedAchMods.has(modName));
+      }
     }
 
     totalAchPages = Math.ceil(namesToShow.length / achievementsPerPage);
@@ -609,26 +632,26 @@ function addAllAchievements() {
 function addAchievementPaginationControls() {
   const paginationContainer = document.createElement("div");
   paginationContainer.classList.add("ach-pagination");
-  
+
   // Previous button
   const prevButton = document.createElement("button");
   prevButton.innerText = "Previous";
   prevButton.disabled = currentAchPage === 1;
   prevButton.addEventListener("click", () => { if (currentAchPage > 1) { currentAchPage--; addAllAchievements(); } });
-  
+
   const pageInfo = document.createElement("span");
   pageInfo.innerText = `Page ${currentAchPage} of ${totalAchPages}`;
   pageInfo.classList.add("ach-pagination-info");
-  
+
   const nextButton = document.createElement("button");
   nextButton.innerText = "Next";
   nextButton.disabled = currentAchPage === totalAchPages;
   nextButton.addEventListener("click", () => { if (currentAchPage < totalAchPages) { currentAchPage++; addAllAchievements(); } });
-  
+
   paginationContainer.appendChild(prevButton);
   paginationContainer.appendChild(pageInfo);
   paginationContainer.appendChild(nextButton);
-  
+
   achContent.appendChild(paginationContainer);
 }
 
