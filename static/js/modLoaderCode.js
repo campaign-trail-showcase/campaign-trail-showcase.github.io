@@ -14,6 +14,7 @@ let customMod = false;
 let favoriteMods = new Set();
 
 let onlyFavorites = false;
+let showAllModsLegacy = false;
 
 let year = null;
 
@@ -552,6 +553,43 @@ function preloadAwardIcon(url) {
   return loadPromise;
 }
 
+function createLegacyViewControls() {
+  const container = document.createElement("div");
+  container.style.display = "inline-flex";
+  container.style.alignItems = "center";
+  container.style.gap = "8px";
+  container.style.marginLeft = "15px";
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.id = "modMenuLegacyViewCheckbox";
+  checkbox.checked = showAllModsLegacy;
+  checkbox.style.cursor = "pointer";
+  checkbox.addEventListener("change", () => {
+    showAllModsLegacy = checkbox.checked;
+    currentPage = 1;
+    updateModViews();
+  });
+
+  const label = document.createElement("label");
+  label.htmlFor = "modMenuLegacyViewCheckbox";
+  label.innerText = "View all mods";
+  label.style.cursor = "pointer";
+  label.style.userSelect = "none";
+
+  const loadingSpan = document.createElement("span");
+  loadingSpan.id = "mod-menu-loading-message";
+  loadingSpan.textContent = "Loading all mods...";
+  loadingSpan.style.display = "none";
+  loadingSpan.style.fontStyle = "italic";
+
+  container.appendChild(checkbox);
+  container.appendChild(label);
+  container.appendChild(loadingSpan);
+  return container;
+}
+
+
 $(document).ready(async () => {
   // show loading indicator while mods load
   const gridEl = document.getElementById("mod-grid");
@@ -566,6 +604,16 @@ $(document).ready(async () => {
 
   const $modSelect = $("#modSelect");
   const originalOptions = $modSelect.find("option").clone();
+
+  // Inject the "View all mods" checkbox next to the sorter using a more robust selector
+  const sorter = document.querySelector('[onchange="onChangeModSorter(event)"]');
+  if (sorter && sorter.parentNode) {
+    const legacyControls = createLegacyViewControls();
+    // insert after the sorter element
+    sorter.parentNode.insertBefore(legacyControls, sorter.nextSibling);
+  } else {
+    console.warn("Could not find mod sorter dropdown to attach 'View all' checkbox.");
+  }
 
   $(".tagCheckbox").on("change", filterEntries);
 
@@ -1039,54 +1087,92 @@ function getVisibleMods() {
   return visibleMods;
 }
 
+function toggleFilterControls(disabled) {
+  document.querySelectorAll('.tag-button input').forEach(el => el.disabled = disabled);
+  document.querySelectorAll('.tablinks').forEach(el => el.style.pointerEvents = disabled ? 'none' : 'auto');
+  const searchInput = document.querySelector('[oninput="filterMods(event)"]');
+  if (searchInput) searchInput.disabled = disabled;
+}
+
 function updateModViews(event) {
   if (event) {
     currentPage = 1; // reset to first page on filter change
   }
 
-  const visibleMods = getVisibleMods();
-
   const modGrid = document.getElementById("mod-grid");
-  let noFavsMessage = document.getElementById("no-favorites-message");
 
-  // hide all mods before updating
+  // clear the grid to start fresh
   while (modGrid.firstChild) {
     modGrid.removeChild(modGrid.firstChild);
   }
 
-  if (onlyFavorites && visibleMods.length === 0) {
-    if (!noFavsMessage) {
-      noFavsMessage = document.createElement("div");
-      noFavsMessage.id = "no-favorites-message";
-      noFavsMessage.classList.add("no-favorites-message");
+  // remove pagination controls as they will be re-added if needed
+  const paginationContainer = document.getElementById("pagination-controls");
+  if (paginationContainer) paginationContainer.innerHTML = "";
+
+  if (showAllModsLegacy) {
+    toggleFilterControls(true);
+
+    const loadingMessage = document.getElementById("mod-menu-loading-message");
+    const checkbox = document.getElementById("modMenuLegacyViewCheckbox");
+    if (loadingMessage) loadingMessage.style.display = 'inline';
+    if (checkbox) checkbox.disabled = true;
+
+    setTimeout(() => {
+      const fragment = document.createDocumentFragment();
+      modList.forEach((modView) => {
+        modView.style.display = "flex";
+        const img = modView.querySelector(".mod-image");
+        if (img) img.src = img.getAttribute("data-src") || img.src;
+        fragment.appendChild(modView);
+        getFavsAndPlayCount(modView.getAttribute("mod-name"), modView);
+      });
+      modGrid.appendChild(fragment);
+
+      if (loadingMessage) loadingMessage.style.display = 'none';
+      if (checkbox) checkbox.disabled = false;
+    }, 0);
+
+  } else {
+    toggleFilterControls(false); // re-enable filters
+
+    const visibleMods = getVisibleMods();
+    let noFavsMessage = document.getElementById("no-favorites-message");
+
+    if (onlyFavorites && visibleMods.length === 0) {
+      if (!noFavsMessage) {
+        noFavsMessage = document.createElement("div");
+        noFavsMessage.id = "no-favorites-message";
+        noFavsMessage.classList.add("no-favorites-message");
+        modGrid.appendChild(noFavsMessage);
+      }
+      noFavsMessage.innerHTML = `You have no favorite mods. Press the ${FAV} button on any mod to see them here!`;
+      noFavsMessage.style.display = "block";
+    } else if (noFavsMessage) {
+      noFavsMessage.style.display = "none";
     }
-    noFavsMessage.innerHTML = `You have no favorite mods. Press the ${FAV} button on any mod to see them here!`;
-    noFavsMessage.style.display = "block";
-    modGrid.appendChild(noFavsMessage);
-  } else if (noFavsMessage) {
-    noFavsMessage.style.display = "none";
+
+    const startIndex = (currentPage - 1) * modsPerPage;
+    const endIndex = startIndex + modsPerPage;
+    const pageMods = visibleMods.slice(startIndex, endIndex);
+
+    const fragment = document.createDocumentFragment();
+    pageMods.forEach((modView) => {
+      modView.style.display = "flex";
+      // lazy load image only when visible
+      const img = modView.querySelector(".mod-image");
+      if (img) {
+        img.loading = "lazy";
+        img.src = img.getAttribute("data-src") || img.src;
+      }
+      fragment.appendChild(modView);
+      // lazy load mod info
+      getFavsAndPlayCount(modView.getAttribute("mod-name"), modView);
+    });
+    modGrid.appendChild(fragment);
+
+    renderPaginationControls(visibleMods.length);
   }
-
-  const startIndex = (currentPage - 1) * modsPerPage;
-  const endIndex = startIndex + modsPerPage;
-  const pageMods = visibleMods.slice(startIndex, endIndex);
-
-  const fragment = document.createDocumentFragment();
-  pageMods.forEach((modView) => {
-    modView.style.display = "flex";
-    // lazy load image only when visible
-    const img = modView.querySelector(".mod-image");
-    if (img) {
-      img.loading = "lazy";
-      img.src = img.getAttribute("data-src") || img.src;
-    }
-    fragment.appendChild(modView);
-    // lazy load mod info
-    getFavsAndPlayCount(modView.getAttribute("mod-name"), modView);
-  });
-  modGrid.appendChild(fragment);
-
-  renderPaginationControls(visibleMods.length);
 }
 
 function renderPaginationControls(totalMods) {
