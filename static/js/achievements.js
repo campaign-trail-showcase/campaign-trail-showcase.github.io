@@ -14,7 +14,7 @@ let totalAchPages = 1;
 
 let achSortMethod = "default"; // default, percentComplete, mostAch, leastAch
 let showOnlyFavoriteMods = false;
-let showAllModsLegacy = false;
+let showAllModsLegacyAch = false;
 let pinnedAchMods = new Set();
 
 try {
