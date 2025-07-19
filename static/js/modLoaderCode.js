@@ -761,6 +761,10 @@ $(document).ready(async () => {
   modsLoaded.sort(modCompare);
   for (let i = 0; i < modsLoaded.length; i++) {
     const modData = modsLoaded[i];
+
+    // this is a special case for DSA, so we skip this in particular
+    if (modData.mod.value === '2024 Divided States') continue;
+
     const modView = createModView(
       modData.mod,
       modData.imageUrl,
