@@ -6069,7 +6069,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 201,
             "state": 1028,
-            "state_multiplier": 0.977
+            "state_multiplier": 0.98
         }
     },
     {
@@ -9830,8 +9830,8 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 5175,
             "issue": 102,
-            "issue_score": -0.25,
-            "issue_importance": 2
+            "issue_score": -0.35,
+            "issue_importance": 1
         }
     },
     {
@@ -9840,8 +9840,8 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 5175,
             "issue": 103,
-            "issue_score": 0.2,
-            "issue_importance": 2
+            "issue_score": 0.25,
+            "issue_importance": 1
         }
     },
     {
@@ -10410,8 +10410,8 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 5191,
             "issue": 102,
-            "issue_score": -0.1,
-            "issue_importance": 2
+            "issue_score": 0.15,
+            "issue_importance": 1
         }
     },
     {
@@ -15464,15 +15464,32 @@ let contingentMode = false;
 
 // helper function to set image
 function setImage(url) {
-    if(!url) return;
-    let intervalID = setInterval(function () {
-        let img = document.querySelector(".person_image");
+    if (!url) return;
+
+    const selector = ".person_image";
+
+    const immediateImg = document.querySelector(selector);
+    if (immediateImg) {
+        immediateImg.src = url;
+        return;
+    }
+
+    const observer = new MutationObserver((mutations, obs) => {
+        const img = document.querySelector(selector);
         if (img) {
             img.src = url;
-            clearInterval(intervalID);
+            obs.disconnect();
         }
-    }, 50);
-    setTimeout(() => clearInterval(intervalID), 3000);
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+    setTimeout(() => {
+        observer.disconnect();
+    }, 5000);
 }
 
 // construct the HTML for the ending page
@@ -16809,137 +16826,137 @@ endingPicker = (out, totv, aa, quickstats) => {
 // it was taken from the 2021DE scenario, albeit I'm not sure. I should elaborate more in
 // the further reading section instead of rambling here.
 
-// helper function to escape special regex characters
-function escapeRegex(s) {
-    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-}
+function createTooltipProcessor(tooltipList) {
+    function escapeRegex(s) {
+        return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
 
-// handle duplicates (keeping the last unique entry) and prepare data
-function removeDuplicateTooltips(tooltipList) {
-    const seenSearchStrings = new Set();
-    const processedTooltips = [];
-    
-    for (let i = 0; i < tooltipList.length; i++) {
-        const tooltip = tooltipList[i];
-        const searchString = tooltip.searchString;
-        
-        if (!seenSearchStrings.has(searchString)) {
-            seenSearchStrings.add(searchString);
-            processedTooltips.push(tooltip);
+    function memoize(fn) {
+        const cache = new Map();
+        return function(arg) { // simplified
+            if (cache.has(arg)) {
+                return cache.get(arg);
+            }
+            const result = fn.call(this, arg);
+            cache.set(arg, result);
+            return result;
+        };
+    }
+
+    // process & deduplicate tooltips
+    const uniqueTooltipsMap = new Map();
+    for (const tooltip of tooltipList) {
+        if (tooltip && tooltip.searchString) {
+            uniqueTooltipsMap.set(tooltip.searchString, tooltip);
         }
     }
+
+    // sort for longest strings first
+    const processedTooltips = Array.from(uniqueTooltipsMap.values())
+        .sort((a, b) => b.searchString.length - a.searchString.length);
+
+    // build.
+    const groupIndexToTooltipData = new Map();
+    const searchPatterns = processedTooltips.map((tooltip, index) => {
+        const groupNum = index + 1;
+        groupIndexToTooltipData.set(groupNum, tooltip);
+        return `(${escapeRegex(tooltip.searchString)})`;
+    });
     
-    return processedTooltips;
-}
-const processedTooltips = removeDuplicateTooltips(tooltipList);
+    // only create a regex if there are patterns to search for
+    const TOOLTIP_REGEX = searchPatterns.length > 0 ?
+        new RegExp(
+            `(?<=\\b|\\s|^|“)(?:${searchPatterns.join('|')})(?=[.,;!?]?\\b|\\s|”|$)`,
+            'gi'
+        ) :
+        null;
 
-// escape each search string and wrap it in a capturing group
-const combinedSearchPattern = processedTooltips
-    .map(tooltip => `(${escapeRegex(tooltip.searchString)})`)
-    .join('|');
+    function _applyTooltipsToString(str) {
+        if (!TOOLTIP_REGEX || !str) {
+            return str;
+        }
 
-// add lookarounds to the whole alternation group
-const TOOLTIP_REGEX = new RegExp(
-    `(?<=\\b|\\s|^|“)(?:${combinedSearchPattern})(?=[.,;!?]?\\b|\\s|”|$)`,
-    'gi' // psst. g: global, i: case-insensitive
-);
+        let matches = [];
+        let match;
+        TOOLTIP_REGEX.lastIndex = 0;
 
-// store mapping from the combined regex group index back to our processed list index
-const groupIndexToTooltipIndex = processedTooltips.reduce((map, tooltip, index) => {
-    map[index + 1] = index;
-    return map;
-}, {});
+        while ((match = TOOLTIP_REGEX.exec(str)) !== null) {
+            // find which capturing group matched
+            const matchedGroupNum = match.slice(1).findIndex(group => group != null) + 1;
 
-// actual tooltips function
-function getTooltips(str, regex, tooltips, groupMap) {
-    let matches = [];
-    let match;
-
-    while ((match = regex.exec(str)) !== null) {
-        // find which capturing group matched, then find the 
-        // index of the first non-null/undefined capturing group
-        const matchedGroupNum = match.slice(1).findIndex(group => group != null) + 1;
-
-        if (matchedGroupNum > 0) {
-            const tooltipIndex = groupMap[matchedGroupNum];
-            if (tooltipIndex !== undefined) {
+            if (matchedGroupNum > 0) {
                 matches.push({
                     start: match.index,
                     end: match.index + match[0].length,
-                    tooltipIndex: tooltipIndex,
-                    matchedString: match[0]
+                    matchedString: match[0],
+                    tooltipData: groupIndexToTooltipData.get(matchedGroupNum)
                 });
-            } else {
-                console.warn("Zoinks. Could not map matched group number:", matchedGroupNum, "Match:", match);
             }
         }
-    }
+        
+        if (matches.length === 0) {
+            return str;
+        }
 
-    // reset regex lastIndex (so we can reuse this)
-    regex.lastIndex = 0;
+        // sort by start position, then by length (longest first) to prepare for overlap removal
+        matches.sort((a, b) => a.start - b.start || b.end - a.end);
 
-    // sort by starting position; if two start at the same position, longer match comes first
-    matches.sort((a, b) => a.start - b.start || b.end - a.start - (a.end - a.start));
-
-    // filter out overlaps
-    let filteredMatches = [];
-    if (matches.length > 0) {
-        filteredMatches.push(matches[0]);
-        for (let i = 1; i < matches.length; i++) {
-            if (matches[i].start >= filteredMatches[filteredMatches.length - 1].end) {
-                filteredMatches.push(matches[i]);
+        // filter out overlapping matches, keeping the first (and longest) one
+        const filteredMatches = [];
+        let lastMatchEnd = -1;
+        for (const currentMatch of matches) {
+            if (currentMatch.start >= lastMatchEnd) {
+                filteredMatches.push(currentMatch);
+                lastMatchEnd = currentMatch.end;
             }
         }
-    }
 
-    return filteredMatches;
-}
+        // build the final string with injected HTML
+        let result = [];
+        let lastIndex = 0;
+        filteredMatches.forEach(m => {
+            result.push(str.slice(lastIndex, m.start));
+            result.push(
+                `<span class='mytooltip'>${m.matchedString}<span class='mytooltiptext'>${m.tooltipData.explanationText}</span></span>`
+            );
+            lastIndex = m.end;
+        });
 
-function applyTooltips(str, tooltips) {
-    const matches = getTooltips(str, TOOLTIP_REGEX, tooltips, groupIndexToTooltipIndex);
-
-    if (matches.length === 0) {
-        return str;
-    }
-
-    let result = [];
-    let lastIndex = 0;
-
-    matches.forEach(match => {
-        const tooltipData = tooltips[match.tooltipIndex];
-        if (match.start > lastIndex) {
-            result.push(str.slice(lastIndex, match.start));
+        // ad any remaining text after the last match
+        if (lastIndex < str.length) {
+            result.push(str.slice(lastIndex));
         }
-        // add the tooltip
-        result.push(
-            `<span class='mytooltip'>${match.matchedString}<span class='mytooltiptext'>${tooltipData.explanationText}</span></span>`
-        );
-        lastIndex = match.end;
-    });
 
-    if (lastIndex < str.length) {
-        result.push(str.slice(lastIndex));
+        return result.join('');
     }
 
-    return result.join('');
-}
+    return {
+        applyToObject(obj) {
+            // create a memoized version of our core function for this run
+            const memoizedApply = memoize(_applyTooltipsToString);
 
-function applyTooltipsToObject(obj, tooltips) {
-    for (let key in obj) {
-        if (!obj.hasOwnProperty(key)) continue;
+            function recurse(currentObj) {
+                for (let key in currentObj) {
+                    if (!Object.prototype.hasOwnProperty.call(currentObj, key)) continue;
 
-        const value = obj[key];
-        if (typeof value === 'string') {
-            obj[key] = applyTooltips(value, tooltips);
-        } else if (value !== null && typeof value === 'object') {
-            applyTooltipsToObject(value, tooltips);
+                    const value = currentObj[key];
+                    if (typeof value === 'string') {
+                        currentObj[key] = memoizedApply(value);
+                    } else if (value !== null && typeof value === 'object') {
+                        recurse(value);
+                    }
+                }
+            }
+            
+            recurse(obj);
         }
-    }
+    };
 }
+const tooltipProcessor = createTooltipProcessor(tooltipList);
 
-applyTooltipsToObject(campaignTrail_temp.questions_json, processedTooltips);
-applyTooltipsToObject(campaignTrail_temp.answers_json, processedTooltips);
-applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips);
+tooltipProcessor.applyToObject(campaignTrail_temp.questions_json);
+tooltipProcessor.applyToObject(campaignTrail_temp.answers_json);
+tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 
 // The music player!
 // This was initially developed using the one from W. as a basis, which is also why the
@@ -17455,58 +17472,81 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
         if (titleElement) titleElement.textContent = "Error";
         if (artistElement) artistElement.textContent = errorMsg;
     }
-    function setVolumeFromSlider(shouldUnmute = true) { 
-        if (!volumeSlider || !volumePercentageElement) return;
-        const volumeValue = parseFloat(volumeSlider.value);
-        const newVolumePercent = Math.round(volumeValue * 100);
+    function setVolumeFromSlider(shouldUnmute = true) {
+		if (!volumeSlider || !volumePercentageElement) return;
+		const volumeValue = parseFloat(volumeSlider.value);
+		const newVolumePercent = Math.round(volumeValue * 100);
 
-        if (playerReady && ytPlayer && typeof ytPlayer.setVolume === 'function') {
-            ytPlayer.setVolume(newVolumePercent);
-            if (shouldUnmute && newVolumePercent > 0 && typeof ytPlayer.isMuted === 'function' && ytPlayer.isMuted()) {
-                ytPlayer.unMute();
-            }
-            if (newVolumePercent === 0 && typeof ytPlayer.mute === 'function' && !ytPlayer.isMuted()) {
-                ytPlayer.mute();
-            }
-        }
-        volumePercentageElement.textContent = `${newVolumePercent}%`;
-        updateVolumeIcon();
-    }
-    function toggleMute() {
-        if (!playerReady || !ytPlayer || !volumeSlider || !volumeIconElement) return;
+		if (playerReady && ytPlayer && typeof ytPlayer.setVolume === 'function') {
+			ytPlayer.setVolume(newVolumePercent);
+			// if user drags slider up from 0, it should unmute the player.
+			if (shouldUnmute && newVolumePercent > 0 && typeof ytPlayer.isMuted === 'function' && ytPlayer.isMuted()) {
+				ytPlayer.unMute();
+			}
+			// if user drags to 0, it should mute the player.
+			if (newVolumePercent === 0 && typeof ytPlayer.mute === 'function' && !ytPlayer.isMuted()) {
+				ytPlayer.mute();
+			}
+		}
 		
-        if (ytPlayer.isMuted()) {
-            ytPlayer.unMute();
-            volumeSlider.value = (volumeBeforeMute > 0) ? volumeBeforeMute : 0.5;
-            volumeIconElement.src = ICON_VOLUME;
-        } else {
-            volumeBeforeMute = parseFloat(volumeSlider.value);
-            ytPlayer.mute();
-            volumeSlider.value = 0;
-            volumeIconElement.src = ICON_MUTED;
-        }
-        setVolumeFromSlider(false);
-    }
-    function updateVolumeIcon() { 
-        if (!volumeIconElement) return;
-        let isEffectivelyMuted = false;
-        let currentVolumePercent = 0;
+		volumePercentageElement.textContent = `${newVolumePercent}%`;
+	}
+	function toggleMute() {
+		if (!playerReady || !ytPlayer || !volumeSlider || !volumeIconElement) return;
 
-        if (playerReady && ytPlayer && typeof ytPlayer.isMuted === 'function') {
-            isEffectivelyMuted = ytPlayer.isMuted();
-            if (!isEffectivelyMuted && typeof ytPlayer.getVolume === 'function') {
-                currentVolumePercent = ytPlayer.getVolume(); 
-                if (currentVolumePercent === 0) isEffectivelyMuted = true;
-            }
-        } else if (volumeSlider) { 
-            currentVolumePercent = parseFloat(volumeSlider.value) * 100;
-            isEffectivelyMuted = currentVolumePercent === 0;
-        }
-        
-        volumeIconElement.src = isEffectivelyMuted ? ICON_MUTED : ICON_VOLUME;
-        volumeIconElement.alt = isEffectivelyMuted ? "Unmute" : "Mute";
-        volumeIconElement.title = isEffectivelyMuted ? "Unmute" : "Mute";
-    }
+		const isCurrentlyMuted = ytPlayer.isMuted();
+
+		if (isCurrentlyMuted) {
+			ytPlayer.unMute();
+
+			const restoreVolume = (volumeBeforeMute > 0) ? volumeBeforeMute : 0.5;
+
+			ytPlayer.setVolume(restoreVolume * 100);
+
+			volumeSlider.value = restoreVolume;
+			if (volumePercentageElement) {
+				volumePercentageElement.textContent = `${Math.round(restoreVolume * 100)}%`;
+			}
+
+			volumeIconElement.src = ICON_VOLUME;
+			volumeIconElement.alt = "Mute";
+			volumeIconElement.title = "Mute";
+
+		} else {
+			const currentSliderValue = parseFloat(volumeSlider.value);
+			if (currentSliderValue > 0) {
+				volumeBeforeMute = currentSliderValue;
+			}
+			
+			ytPlayer.mute();
+
+			volumeSlider.value = 0;
+			if (volumePercentageElement) {
+				volumePercentageElement.textContent = `0%`;
+			}
+			
+			volumeIconElement.src = ICON_MUTED;
+			volumeIconElement.alt = "Unmute";
+			volumeIconElement.title = "Unmute";
+		}
+	}
+    function updateVolumeIcon() {
+		if (!volumeIconElement || !volumeSlider) return;
+
+		const sliderValue = parseFloat(volumeSlider.value);
+		const isMutedBySlider = sliderValue === 0;
+
+		let isMutedByPlayer = false;
+		if (playerReady && ytPlayer && typeof ytPlayer.isMuted === 'function') {
+			isMutedByPlayer = ytPlayer.isMuted();
+		}
+		
+		const isEffectivelyMuted = isMutedBySlider || isMutedByPlayer;
+
+		volumeIconElement.src = isEffectivelyMuted ? ICON_MUTED : ICON_VOLUME;
+		volumeIconElement.alt = isEffectivelyMuted ? "Unmute" : "Mute";
+		volumeIconElement.title = isEffectivelyMuted ? "Unmute" : "Mute";
+	}
     function toggleRepeatMode() { 
         switch (repeatMode) {
             case 'none': repeatMode = 'all'; break;
@@ -17795,11 +17835,9 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
         progressBar.addEventListener("touchend", handleSeekEnd);
 		
 		volumeSlider.addEventListener("input", () => {
-            setVolumeFromSlider(true);
-            if (volumeIconElement) {
-                volumeIconElement.src = parseFloat(volumeSlider.value) === 0 ? ICON_MUTED : ICON_VOLUME;
-            }
-        });
+			setVolumeFromSlider(true);
+			updateVolumeIcon();
+		});
         
         playlistSelectorElement.addEventListener("change", (event) => {
             const newIndex = parseInt(event.target.value, 10);
@@ -17995,7 +18033,7 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json, processedTooltips
                     --title-font-size: 14px; 
                     --artist-font-size: 12px; 
                 } 
-                #${PLAYER_ELEMENT_ID} { padding: var(--spacing-sm); }
+                #${PLAYER_ELEMENT_ID} { padding: var(--spacing-sm); margin-inline: auto; width: 500px; }
                 #${PLAYLIST_SELECTOR_CONTAINER_ID} { margin-bottom: var(--spacing-sm); }
                 #${PLAYER_MAIN_CONTENT_WRAPPER_ID} { flex-direction: column; height: auto; gap: var(--spacing-sm); }
                 #${DISPLAY_BOX_ID} { width: 100%; min-width: unset; max-width: unset; } 
