@@ -1,7 +1,7 @@
  /*
  * @title: 2016: A Lifetime of This / 2016b / The Hillary Trail
  * @author: StrawberryMaster & Friends
- * @version: 1.0.5
+ * @version: 1.0.6
  * @description: The 2016 election in the eyes of Hillary Clinton (and a couple of others, too)
  * 
  * Coding license: Apache License 2.0
@@ -964,6 +964,15 @@ function appendStyle() {
 				line-height: 1.4;
 				color: #000;
 			}
+			
+			@media (max-width: 1250px) {
+				#election_description_window, .person_description_window, .description_window_small {
+					padding: 0 1em;
+				}
+				#candidate_image, #running_mate_image {
+					margin: 2em 1em 1em 0;
+				}
+            }
 			
         `;
         document.head.appendChild(style);
