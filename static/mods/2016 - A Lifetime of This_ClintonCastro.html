@@ -16574,7 +16574,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 
     const playerEV = quickstats[0];
     const playerCandidateId = campaignTrail_temp.candidate_id;
-    let popularVoteWon = aa[0].candidate === playerCandidateId && aa[0].popular_votes > aa[1].popular_votes;
+    let popularVoteWon = aa[0].popular_votes > aa[1].popular_votes;
     
     // sort by electoral votes to ensure we handle any number of candidates correctly
     const sortedResults = [...aa].sort((a, b) => b.electoral_votes - a.electoral_votes);
