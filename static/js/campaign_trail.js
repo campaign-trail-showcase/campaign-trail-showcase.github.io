@@ -58,7 +58,7 @@ function substitutePlaceholders(str) {
     });
 }
 
-const DEBUG = false;
+let DEBUG = false;
 
 campaignTrail_temp.issue_font_size = null;
 e.shining_data = {};
