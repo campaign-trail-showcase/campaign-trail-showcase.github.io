@@ -58,7 +58,7 @@ function substitutePlaceholders(str) {
     });
 }
 
-const DEBUG = false;
+let DEBUG = false;
 
 campaignTrail_temp.issue_font_size = null;
 e.shining_data = {};
@@ -1884,7 +1884,7 @@ function nextQuestion() {
 }
 
 function answerEffects(t) {
-    const stopSpacebar = false;
+    let stopSpacebar = false;
     if (stopSpacebar && $("#visit_overlay")[0]) {
         debugConsole("Visit overlay is showing, not applying answer effects");
         return;
@@ -3488,7 +3488,7 @@ function overallDetailsHtml() {
 }
 
 function furtherReadingHtml() {
-    const t = findFromPK(e.election_json, e.election_id);
+    const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     let contentHTML = "";
     if (RecReading !== true && modded === true) {
         // Modded and no recommended reading
@@ -3499,11 +3499,11 @@ function furtherReadingHtml() {
         // Has recommended reading (modded or base game)
         contentHTML = `
         <p>
-            Are you interested in exploring the ${e.election_json[t].fields.year} election further?
+            Are you interested in exploring the ${election.fields.year} election further?
             This page contains some further reading to get you up to speed.
         </p>
         <div id="recommended_reading_box">
-            ${e.election_json[t].fields.recommended_reading}
+            ${election.fields.recommended_reading}
         </div>
     `.trim();
     }
@@ -3540,13 +3540,13 @@ function furtherReadingHtml() {
 }
 
 function beginNewGameHtml() {
-    const t = findFromPK(e.election_json, e.election_id);
+    const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     $("#game_window").append(`
         <div class="overlay" id="new_game_overlay"></div>
         <div class="overlay_window" id="new_game_window">
             <div class="overlay_window_content" id="election_night_content">
                 <h3>Advisor Feedback</h3>
-                <img src="${e.election_json[t].fields.advisor_url}" width="208" height="128"/>
+                <img src="${election.fields.advisor_url}" width="208" height="128"/>
                 <p>Are you sure you want to begin a new game?</p>
             </div>
             <div class="overlay_buttons" id="new_game_buttons">
@@ -4031,7 +4031,7 @@ const fix1964 = () => {
     }
 };
 
-const fix1964Observer = new MutationObserver(() => {
+const fix1964Observer = new MutationObserver((mut, obs) => {
     const newElectSelect = document.querySelector("#election_id");
     if (newElectSelect && newElectSelect !== curElectSelect) {
         if (curElectSelect) {
@@ -4041,7 +4041,7 @@ const fix1964Observer = new MutationObserver(() => {
         curElectSelect.addEventListener("change", fix1964);
         fix1964();
     }
-    if (document.querySelector(".inner_window_question")) fix1964Observer.disconnect();
+    if (document.querySelector(".inner_window_question")) obs.disconnect();
 });
 
 fix1964Observer.observe(document.body, {
