@@ -1884,7 +1884,7 @@ function nextQuestion() {
 }
 
 function answerEffects(t) {
-    const stopSpacebar = false;
+    let stopSpacebar = false;
     if (stopSpacebar && $("#visit_overlay")[0]) {
         debugConsole("Visit overlay is showing, not applying answer effects");
         return;
