@@ -32427,11 +32427,16 @@ if(!Judge == 0){
     if (savedX !== null && savedY !== null) {
         popOutMenu.style.left = savedX + 'px';
         popOutMenu.style.top = savedY + 'px';
-    }
-    else {
+    } else {
         const buttonRect = event.target.getBoundingClientRect();
-        popOutMenu.style.left = buttonRect.right + 353 + 'px'; // Offset X
-        popOutMenu.style.top = buttonRect.top - 292 + 'px'; // Offset Y
+        
+        // Vertically position the menu above the Warroom button
+        popOutMenu.style.top = (buttonRect.top - popOutMenu.offsetHeight - 10) + 'px';
+
+        // Horizontally center the menu relative to the button
+        popOutMenu.style.left = (buttonRect.left + (buttonRect.width / 2) - (popOutMenu.offsetWidth / 2)) + 'px';
+        
+        // Save the initial calculated position
         savedX = popOutMenu.getBoundingClientRect().left;
         savedY = popOutMenu.getBoundingClientRect().top;
     }
@@ -34645,10 +34650,6 @@ campaignTrail_temp.questions_json[23] = tunnel(240422);
             }
         }
         refreshHeadquarter();
-    }
-
-    if (ans == 240511) {
-    campaignTrail_temp.election_json[1]["fields"].has_visits = 0;
     }
 
     if (e.noCounter == 24) {
