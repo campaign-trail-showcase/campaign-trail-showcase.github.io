@@ -3952,10 +3952,17 @@ $("#skip_to_final").click(() => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const handlers = {
-        "#candidate_id_button": (event) => vpSelect(event),
+        "#candidate_id_button": (event) => {
+            event.preventDefault();
+
+            if (!(document.getElementById("question_form") || document.querySelector(".visit_text"))) {
+                vpSelect(event);
+            }
+        },
         "#candidate_id_back": (event) => gameStart(event),
         "#running_mate_id_button": (event) => {
             const runningMateId = document.querySelector("#running_mate_id");
+
             event.preventDefault();
             if (!(document.getElementById("question_form") || document.querySelector(".visit_text"))) {
                 renderOptions(e.election_id, e.candidate_id, runningMateId.value);
