@@ -66,7 +66,7 @@ e.shining_info = [
         cost: 20000000,
         hired: false,
         execute: () => {
-          F = (cand) => {
+          randomNormal = (cand) => {
             var e, t, i;
             do {
               i =
@@ -299,7 +299,7 @@ e.shining_info = [
         cost: 20000000,
         hired: false,
         execute: () => {
-          F = (cand) => {
+          randomNormal = (cand) => {
             var e, t, i;
             do {
               i =
@@ -464,7 +464,7 @@ e.shining_info = [
         cost: 20000000,
         hired: false,
         execute: () => {
-          F = (cand) => {
+          randomNormal = (cand) => {
             var e, t, i;
             do {
               i =
@@ -671,7 +671,7 @@ e.shining_info = [
         cost: 20000000,
         hired: false,
         execute: () => {
-          F = (cand) => {
+          randomNormal = (cand) => {
             var e, t, i;
             do {
               i =
@@ -863,7 +863,7 @@ e.shining_info = [
 e.opponent_visits = [];
 
 /*
-F = (cand) => {
+randomNormal = (cand) => {
     var e, t, i;
     do {
         i = (e = 2 * Math.random() - 1) * e + (t = 2 * Math.random() - 1) * t
