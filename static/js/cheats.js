@@ -3,85 +3,50 @@ let cheatsActive = false;
 // Most of this benefit checker stuff is adapted from NCT. Thanks!
 
 function benefitCheck(objectid) {
-  object =
+  const object =
     document.getElementById("question_form").children[0].children[objectid * 3];
-  answerid = object.value;
-  effects = [];
-  i = 0;
-  for (i in campaignTrail_temp.answer_score_global_json) {
-    if (
-      campaignTrail_temp.answer_score_global_json[i].fields.answer == answerid
-    ) {
-      effects.push(["global", campaignTrail_temp.answer_score_global_json[i]]);
-    }
-  }
-  i = 0;
-  for (i in campaignTrail_temp.answer_score_state_json) {
-    if (
-      campaignTrail_temp.answer_score_state_json[i].fields.answer == answerid
-    ) {
-      effects.push(["state", campaignTrail_temp.answer_score_state_json[i]]);
-    }
-  }
-  i = 0;
-  for (i in campaignTrail_temp.answer_score_issue_json) {
-    if (
-      campaignTrail_temp.answer_score_issue_json[i].fields.answer == answerid
-    ) {
-      effects.push(["issue", campaignTrail_temp.answer_score_issue_json[i]]);
-    }
-  }
-  i = 0;
+  const answerid = object.value;
+  const effects = [];
 
-  mods = "";
-  for (_ = 0; _ < effects.length; _++) {
-    if (effects[_][0] == "global") {
-      affected = findCandidate(effects[_][1].fields.candidate);
-      affected1 = findCandidate(effects[_][1].fields.affected_candidate);
-      name = affected[1];
-      name2 = affected1[1];
-      multiplier = effects[_][1].fields.global_multiplier.toString();
-      mods +=
-        "<br><em>Global:</em> Affects " +
-        name2 +
-        " for " +
-        name +
-        " by " +
-        multiplier;
-    }
-    if (effects[_][0] == "issue") {
-      affected = findIssue(effects[_][1].fields.issue);
-      name = affected[1];
-      multiplier = effects[_][1].fields.issue_score.toString();
-      multiplier1 = effects[_][1].fields.issue_importance.toString();
-      mods +=
-        "<br><em>Issue:</em> Affects " +
-        name +
-        " by " +
-        multiplier +
-        " with a importance of " +
-        multiplier1;
-    }
-    if (effects[_][0] == "state") {
-      affected = findState(effects[_][1].fields.state);
-      candidatething = findCandidate(effects[_][1].fields.affected_candidate);
-      candidatething2 = findCandidate(effects[_][1].fields.candidate);
-      name1 = affected[1];
-      test5 = candidatething[1];
-      test6 = candidatething2[1];
-      multiplier = effects[_][1].fields.state_multiplier.toString();
-      mods +=
-        "<br><em>State:</em> Affects " +
-        test5 +
-        " for " +
-        test6 +
-        " in " +
-        name1 +
-        " by " +
-        multiplier;
+  for (const item of campaignTrail_temp.answer_score_global_json) {
+    if (item.fields.answer == answerid) {
+      effects.push(["global", item]);
     }
   }
-  answerfeedback = "";
+
+  for (const item of campaignTrail_temp.answer_score_state_json) {
+    if (item.fields.answer == answerid) {
+      effects.push(["state", item]);
+    }
+  }
+
+  for (const item of campaignTrail_temp.answer_score_issue_json) {
+    if (item.fields.answer == answerid) {
+      effects.push(["issue", item]);
+    }
+  }
+
+  let mods = "";
+  for (const effect of effects) {
+    const type = effect[0];
+    const data = effect[1].fields;
+
+    if (type === "global") {
+      const name = findCandidate(data.candidate)[1];
+      const name2 = findCandidate(data.affected_candidate)[1];
+      mods += `<br><em>Global:</em> Affects ${name2} for ${name} by ${data.global_multiplier}`;
+    } else if (type === "issue") {
+      const name = findIssue(data.issue)[1];
+      mods += `<br><em>Issue:</em> Affects ${name} by ${data.issue_score} with a importance of ${data.issue_importance}`;
+    } else if (type === "state") {
+      const name1 = findState(data.state)[1];
+      const test5 = findCandidate(data.affected_candidate)[1];
+      const test6 = findCandidate(data.candidate)[1];
+      mods += `<br><em>State:</em> Affects ${test5} for ${test6} in ${name1} by ${data.state_multiplier}`;
+    }
+  }
+
+  let answerfeedback = "";
   for (
     let index = 0;
     index < campaignTrail_temp.answer_feedback_json.length - 1;
@@ -90,24 +55,12 @@ function benefitCheck(objectid) {
     if (
       answerid == campaignTrail_temp.answer_feedback_json[index].fields.answer
     ) {
-      answerfeedback =
-        "<b>" +
-        campaignTrail_temp.answer_feedback_json[index].fields.answer_feedback +
-        "</b>";
+      answerfeedback = `<b>${campaignTrail_temp.answer_feedback_json[index].fields.answer_feedback}</b>`;
       break;
     }
   }
 
-  return (
-    "<p><b>Answer: </b>" +
-    findAnswer(answerid)[1] +
-    "'<br>" +
-    "Feedback: " +
-    answerfeedback +
-    "'<br>" +
-    mods +
-    "</p><br><br>"
-  );
+  return `<p><b>Answer: </b>'${findAnswer(answerid)[1]}'<br>Feedback: ${answerfeedback}'<br>${mods}</p><br><br>`;
 }
 
 let benefitCheckAlreadyActivated = false;
@@ -256,27 +209,18 @@ function dragElement(elmnt) {
 let answerSet = new Set();
 let noAnswerSet = new Set();
 
-document.getElementById("autoplayYes").addEventListener("input", function (e) {
-  const splits = e.target.value.split(" ");
-  answerSet = new Set();
-  for (let i = 0; i < splits.length; i++) {
-    const pk = splits[i];
-    if (pk) {
-      answerSet.add(Number(pk));
+function setupAutoplayInput(elementId, targetSet) {
+  document.getElementById(elementId).addEventListener("input", function (e) {
+    targetSet.clear();
+    const pks = e.target.value.split(" ").filter(Boolean);
+    for (const pk of pks) {
+      targetSet.add(Number(pk));
     }
-  }
-});
+  });
+}
 
-document.getElementById("autoplayNo").addEventListener("input", function (e) {
-  const splits = e.target.value.split(" ");
-  noAnswerSet = new Set();
-  for (let i = 0; i < splits.length; i++) {
-    const pk = splits[i];
-    if (pk) {
-      noAnswerSet.add(Number(pk));
-    }
-  }
-});
+setupAutoplayInput("autoplayYes", answerSet);
+setupAutoplayInput("autoplayNo", noAnswerSet);
 
 function autoplay() {
   try {
