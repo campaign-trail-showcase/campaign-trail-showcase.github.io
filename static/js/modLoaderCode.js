@@ -15,6 +15,14 @@ let favoriteMods = new Set();
 
 let onlyFavorites = false;
 let showAllModsLegacy = false;
+try {
+  const legacyView = localStorage.getItem("showAllModsLegacy");
+  if (legacyView !== null) {
+    showAllModsLegacy = legacyView === "true";
+  }
+} catch (e) {
+  showAllModsLegacy = false;
+}
 
 let year = null;
 
@@ -568,6 +576,9 @@ function createLegacyViewControls() {
   checkbox.style.cursor = "pointer";
   checkbox.addEventListener("change", () => {
     showAllModsLegacy = checkbox.checked;
+    try {
+      localStorage.setItem("showAllModsLegacy", showAllModsLegacy);
+    } catch (e) {}
     currentPage = 1;
     updateModViews();
   });

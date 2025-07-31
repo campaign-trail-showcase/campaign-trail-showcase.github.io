@@ -15,6 +15,14 @@ let totalAchPages = 1;
 let achSortMethod = "default"; // default, percentComplete, mostAch, leastAch
 let showOnlyFavoriteMods = false;
 let showAllModsLegacyAch = false;
+try {
+  const legacyViewAch = localStorage.getItem("showAllModsLegacyAch");
+  if (legacyViewAch !== null) {
+    showAllModsLegacyAch = legacyViewAch === "true";
+  }
+} catch (e) {
+  showAllModsLegacyAch = false;
+}
 let pinnedAchMods = new Set();
 
 try {
@@ -424,6 +432,9 @@ function addLegacyViewControls() {
   checkbox.style.cursor = "pointer";
   checkbox.addEventListener("change", () => {
     showAllModsLegacy = checkbox.checked;
+    try {
+      localStorage.setItem("showAllModsLegacyAch", showAllModsLegacy);
+    } catch (e) {}
     if (showAllModsLegacy) {
       showOnlyFavoriteMods = false;
     }
