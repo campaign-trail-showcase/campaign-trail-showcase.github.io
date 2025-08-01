@@ -1898,12 +1898,23 @@ function answerEffects(t) {
             (f) => f.fields.answer === numT && f.fields.candidate === numCand,
         );
         if (hasFeedback) {
-            const s = e.answer_feedback_json.findIndex(
+            const feedback = e.answer_feedback_json.find(
                 (f) => f.fields.answer === numT && f.fields.candidate === numCand,
             );
-            const n = `                    <div class="overlay" id="visit_overlay"></div>                    <div class="overlay_window" id="visit_window">                        <div class="overlay_window_content" id="visit_content">                        <h3>Advisor Feedback</h3>                        <img src="${election.fields.advisor_url
-            }" width="208" height="128"/>                        <p>${substitutePlaceholders(e.answer_feedback_json[s].fields.answer_feedback)
-            }</p>                        </div>                        <div class="overlay_buttons" id="visit_buttons">                        <button id="ok_button">OK</button><br><button id="no_feedback_button">Don't give me advice</button>                                                </div>                    </div>`;
+            const n = `
+                <div class="overlay" id="visit_overlay"></div>
+                <div class="overlay_window" id="visit_window">
+                    <div class="overlay_window_content" id="visit_content">
+                        <h3>Advisor Feedback</h3>
+                        <img src="${election.fields.advisor_url}" width="208" height="128"/>
+                        <p>${substitutePlaceholders(feedback.fields.answer_feedback)}</p>
+                    </div>
+                    <div class="overlay_buttons" id="visit_buttons">
+                        <button id="ok_button">OK</button>
+                        <br>
+                        <button id="no_feedback_button">Don't give me advice</button>
+                    </div>
+                </div>`.trim();
             $("#game_window").append(n);
             $("#ok_button").click(() => nextQuestion());
             $("#no_feedback_button").click(() => {
@@ -1916,8 +1927,20 @@ function answerEffects(t) {
 
 function advisorFeedback() {
     const i = findFromPK(e.election_json, e.election_id);
-    const advDiv = `    <div class="overlay" id="feedback_overlay"></div>    <div class="overlay_window" id="feedback_window">        <div class="overlay_window_content" id="feedback_content">        <h3>Advisor Feedback</h3>        <img src="${e.election_json[i].fields.advisor_url
-    }" width="208" height="128"/>        <p>${e.SelAnsContText}</p>        </div>        <div id="visit_buttons">        <button id="ok_button">OK</button><br>        </div>    </div>`;
+    const advDiv = `
+        <div class="overlay" id="feedback_overlay"></div>
+        <div class="overlay_window" id="feedback_window">
+            <div class="overlay_window_content" id="feedback_content">
+                <h3>Advisor Feedback</h3>
+                <img src="${e.election_json[i].fields.advisor_url}" width="208" height="128"/>
+                <p>${e.SelAnsContText}</p>
+            </div>
+            <div id="visit_buttons">
+                <button id="ok_button">OK</button>
+                <br>
+            </div>
+        </div>
+    `.trim();
     $("#game_window").append(advDiv);
     $("#ok_button").click(() => $("#feedback_overlay, #feedback_window").remove());
 }
