@@ -58,6 +58,7 @@ function substitutePlaceholders(str) {
     });
 }
 
+// eslint-disable-next-line prefer-const
 let DEBUG = false;
 
 campaignTrail_temp.issue_font_size = null;
@@ -67,6 +68,14 @@ function debugConsole(...args) {
     if (DEBUG) {
         console.log(...args);
     }
+}
+
+function shuffle(arr) { // Fisher-Yates
+    for (let i = arr.length - 1; i >= 1; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
 }
 
 function removeIssueDuplicates(array) {
@@ -99,15 +108,9 @@ function mapCache(skip = false) {
         }
         const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
         if (
-            (
-                (e.question_number - 1) % 2 !== 0 && election.fields.has_visits === 1
-            )
-            || (
-                e.question_number === e.global_parameter_json[0].fields.question_count
-            )
-            || (
-                e.primary_code && e.primary_code.some((f) => f.breakQ === e.question_number)
-            )
+            ((e.question_number - 1) % 2 !== 0 && election.fields.has_visits === 1)
+            || (e.question_number === e.global_parameter_json[0].fields.question_count)
+            || (e.primary_code && e.primary_code.some((f) => f.breakQ === e.question_number))
         ) {
             return false;
         }
@@ -118,7 +121,7 @@ function mapCache(skip = false) {
     );
     $("#main_content_area")[0].style.display = "";
 
-    const rr = A((returnType = 2));
+    const rr = A(2);
     rFuncRes = rFunc(rr, 0);
     $("#map_container").usmap(rFuncRes);
     $("#main_content_area")[0].style.display = "none";
@@ -252,7 +255,7 @@ function histFunction() {
                 ];
                 HistEV = [297, 241, 0, 0];
                 HistPV = ["40,831,881", "39,148,634", "744,763", "172,557"];
-                HistPVP = ["50.1", "48.0", "0.9%", "0.2%"];
+                HistPVP = ["50.1%", "48.0%", "0.9%", "0.2%"];
                 break;
             case 4: // 1968
                 HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FFFFFF"];
@@ -1202,14 +1205,6 @@ function onAnswerSelectButtonClicked() {
 }
 
 function questionHTML() {
-    function shuffle(arr) { // Fisher-Yates
-        for (let i = arr.length - 1; i >= 1; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
     const ansArr = shuffle(
         e.answers_json
             .map((f, idx) => ({ f, idx }))
@@ -1884,6 +1879,7 @@ function nextQuestion() {
 }
 
 function answerEffects(t) {
+    // eslint-disable-next-line prefer-const
     let stopSpacebar = false;
     if (stopSpacebar && $("#visit_overlay")[0]) {
         debugConsole("Visit overlay is showing, not applying answer effects");
@@ -1902,12 +1898,23 @@ function answerEffects(t) {
             (f) => f.fields.answer === numT && f.fields.candidate === numCand,
         );
         if (hasFeedback) {
-            const s = e.answer_feedback_json.findIndex(
+            const feedback = e.answer_feedback_json.find(
                 (f) => f.fields.answer === numT && f.fields.candidate === numCand,
             );
-            const n = `                    <div class="overlay" id="visit_overlay"></div>                    <div class="overlay_window" id="visit_window">                        <div class="overlay_window_content" id="visit_content">                        <h3>Advisor Feedback</h3>                        <img src="${election.fields.advisor_url
-            }" width="208" height="128"/>                        <p>${substitutePlaceholders(e.answer_feedback_json[s].fields.answer_feedback)
-            }</p>                        </div>                        <div class="overlay_buttons" id="visit_buttons">                        <button id="ok_button">OK</button><br><button id="no_feedback_button">Don't give me advice</button>                                                </div>                    </div>`;
+            const n = `
+                <div class="overlay" id="visit_overlay"></div>
+                <div class="overlay_window" id="visit_window">
+                    <div class="overlay_window_content" id="visit_content">
+                        <h3>Advisor Feedback</h3>
+                        <img src="${election.fields.advisor_url}" width="208" height="128"/>
+                        <p>${substitutePlaceholders(feedback.fields.answer_feedback)}</p>
+                    </div>
+                    <div class="overlay_buttons" id="visit_buttons">
+                        <button id="ok_button">OK</button>
+                        <br>
+                        <button id="no_feedback_button">Don't give me advice</button>
+                    </div>
+                </div>`.trim();
             $("#game_window").append(n);
             $("#ok_button").click(() => nextQuestion());
             $("#no_feedback_button").click(() => {
@@ -1920,8 +1927,20 @@ function answerEffects(t) {
 
 function advisorFeedback() {
     const i = findFromPK(e.election_json, e.election_id);
-    const advDiv = `    <div class="overlay" id="feedback_overlay"></div>    <div class="overlay_window" id="feedback_window">        <div class="overlay_window_content" id="feedback_content">        <h3>Advisor Feedback</h3>        <img src="${e.election_json[i].fields.advisor_url
-    }" width="208" height="128"/>        <p>${e.SelAnsContText}</p>        </div>        <div id="visit_buttons">        <button id="ok_button">OK</button><br>        </div>    </div>`;
+    const advDiv = `
+        <div class="overlay" id="feedback_overlay"></div>
+        <div class="overlay_window" id="feedback_window">
+            <div class="overlay_window_content" id="feedback_content">
+                <h3>Advisor Feedback</h3>
+                <img src="${e.election_json[i].fields.advisor_url}" width="208" height="128"/>
+                <p>${e.SelAnsContText}</p>
+            </div>
+            <div id="visit_buttons">
+                <button id="ok_button">OK</button>
+                <br>
+            </div>
+        </div>
+    `.trim();
     $("#game_window").append(advDiv);
     $("#ok_button").click(() => $("#feedback_overlay, #feedback_window").remove());
 }
@@ -2042,12 +2061,14 @@ function election_HTML(id, cand, running_mate) {
 /* eslint-disable no-use-before-define */
 function candSel(a) {
     a.preventDefault();
+
     const numElect = Number(e.election_id) ?? Number(e.election_json[0].pk);
-    if (!modded) e.shining = e.shining_info.some((f) => f.pk === numElect);
     const n = e.candidate_json
         .filter((f) => Number(f.fields.election) === numElect && [1, true].includes(f.fields.is_active))
         .map((f) => `<option value="${f.pk}">${f.fields.first_name} ${f.fields.last_name}</option>`)
         .join("");
+
+    if (!modded) e.shining = e.shining_info.some((f) => f.pk === numElect);
 
     document.querySelector("#game_window").innerHTML = `
         <div class="game_header">${corrr}</div>
@@ -2067,7 +2088,7 @@ function candSel(a) {
         </p>
         </div>`.trim();
 
-    const candId = document.querySelector("#candidate_id");
+    const candId = document.getElementById("candidate_id");
     descHTML("#candidate_description_window", candId.value);
     candId.addEventListener("change", () => {
         descHTML("#candidate_description_window", candId.value);
@@ -2193,7 +2214,7 @@ function renderOptions(electionId, candId, runId) {
 
         if (Number(e.game_type_id) === 3) {
             const default_init = 50000000;
-            const boost = randomNormal()
+            const boost = randomNormal(e.candidate_id)
                 * default_init
                 * e.global_parameter_json[0].fields.global_variance
                 * 4;
@@ -3211,6 +3232,8 @@ function finalMapScreenHtml() {
     $("#map_container").usmap(coloredResults);
 }
 
+const k = (e) => e.map((f) => `<option value="${f.state}">${f.name}</option>`).join("");
+
 function stateResultsHtml() {
     const stateBase = [];
     const stateEVs = [];
@@ -3430,66 +3453,64 @@ function overallDetailsHtml() {
         </tr>
     `).join("").trim();
 
-    const r = `
-            <div class="game_header">${corrr}</div>
-            <div id="main_content_area">
-                <div id="overall_details_container">
-                    <h3>Overall Election Details</h3>
-                    <div id="overall_election_details">
-                        <h4>Results - This Game</h4>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>Candidate</th>
-                                    <th>Electoral Votes</th>
-                                    <th>Popular Votes</th>
-                                    <th>Popular Vote %</th>
-                                </tr>
-                                ${a}
-                            </tbody>
-                        </table>
-                        ${l}
-                    </div>
-                    <div id="overall_election_details">
-                        <h4>Results - Historical</h4>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>Candidate</th>
-                                    <th>Electoral Votes</th>
-                                    <th>Popular Votes</th>
-                                    <th>Popular Vote %</th>
-                                </tr>
-                                ${histRes}
-                            </tbody>
-                        </table>
-                        <p>
-                            <b>
-                                <a style="font-size: 15px;" href="${game_url}">GAME LINK</a>
-                                <br>
-                                <button id="ExportFileButton" onclick="exportResults()" style="position: absolute; margin-top: 10px; margin-left: -70px;">Export Game as File</button>
-                            </b>
-                        </p>
-                        <br><br><br>
-                    </div>
+    document.getElementById("game_window").innerHTML = `
+        <div class="game_header">${corrr}</div>
+        <div id="main_content_area">
+            <div id="overall_details_container">
+                <h3>Overall Election Details</h3>
+                <div id="overall_election_details">
+                    <h4>Results - This Game</h4>
+                    <table>
+                    <tbody>
+                            <tr>
+                                <th>Candidate</th>
+                                <th>Electoral Votes</th>
+                                <th>Popular Votes</th>
+                                <th>Popular Vote %</th>
+                            </tr>
+                            ${a}
+                        </tbody>
+                    </table>
+                    ${l}
                 </div>
-                <div id="map_footer">
-                    <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-                    <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-                    <button class="final_menu_button" id="state_results_button">Results by State</button>
-                    <button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button>
-                    <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-                    <button class="final_menu_button" id="play_again_button">Play Again!</button>
+                <div id="overall_election_details">
+                    <h4>Results - Historical</h4>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Candidate</th>
+                                <th>Electoral Votes</th>
+                                <th>Popular Votes</th>
+                                <th>Popular Vote %</th>
+                            </tr>
+                            ${histRes}
+                        </tbody>
+                    </table>
+                    <p>
+                        <b>
+                            <a style="font-size: 15px;" href="${game_url}">GAME LINK</a>
+                            <br>
+                            <button id="ExportFileButton" onclick="exportResults()" style="position: absolute; margin-top: 10px; margin-left: -70px;">Export Game as File</button>
+                        </b>
+                    </p>
+                    <br><br><br>
                 </div>
+            </div>
+            <div id="map_footer">
+                <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
+                <button class="final_menu_button" id="final_election_map_button">Election Map</button>
+                <button class="final_menu_button" id="state_results_button">Results by State</button>
+                <button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button>
+                <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
+                <button class="final_menu_button" id="play_again_button">Play Again!</button>
             </div>
         </div>
     `.trim();
-    $("#game_window").html(r);
 }
 
 function furtherReadingHtml() {
     const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
-    let contentHTML = "";
+    let contentHTML;
     if (RecReading !== true && modded === true) {
         // Modded and no recommended reading
         contentHTML = `
@@ -3508,7 +3529,7 @@ function furtherReadingHtml() {
     `.trim();
     }
 
-    const i = `
+    document.getElementById("game_window").innerHTML = `
         <div class="game_header">${corrr}</div>
         <div id="main_content_area_reading">
             <h3 class="results_tab_header">Further Reading</h3>
@@ -3535,8 +3556,6 @@ function furtherReadingHtml() {
             </button>
         </div>
     `;
-
-    $("#game_window").html(i);
 }
 
 function beginNewGameHtml() {
@@ -3571,37 +3590,43 @@ function beginNewGameHtml() {
     });
 }
 
-function k(e) {
-    return e.map((f) => `<option value="${f.state}">${f.name}</option>`).join("");
-}
-
 function T(t) {
-    for (
-        var i = "        <h4>Results - This Game</h4>        <table>\t    <tr><th>Candidate</th><th>Popular Votes</th>\t    <th>Popular Vote %</th><th>Electoral Votes</th></tr>",
-            a = 0;
-        a < e.final_state_results.length;
-        a++
-    ) {
-        if (e.final_state_results[a].state == t) {
-            for (let s = 0; s < e.final_state_results[a].result.length; s++) {
-                const n = findFromPK(e.candidate_json, e.final_state_results[a].result[s].candidate);
-                i
-                    += `                    <tr><td>${e.candidate_json[n].fields.first_name
-                } ${e.candidate_json[n].fields.last_name
-                }</td><td>${formatNumbers(e.final_state_results[a].result[s].votes)
-                }</td><td>${(100 * e.final_state_results[a].result[s].percent).toFixed(e.statePercentDigits)
-                }</td><td>${e.final_state_results[a].result[s].electoral_votes
-                }</td></tr>`;
-            }
-        }
-    }
-    return (i += "</table>");
+    const numT = Number(t);
+
+    return e.final_state_results
+        .filter((result) => result.state === numT)
+        .map((result) => {
+             const rows = result.result.map((f) => {
+                const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
+                const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
+                // if (f.percent === 0) return;
+                return `
+                    <tr>
+                        <td>${fullName}</td>
+                        <td>${formatNumbers(f.votes)}</td>
+                        <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
+                        <td>${f.electoral_votes}</td>
+                    </tr>
+                `;
+            }).join("");
+
+            return `
+                <h4>Results - This Game</h4>
+                <table>
+                    <tr>
+                        <th>Candidate</th>
+                        <th>Popular Votes</th>
+                        <th>Popular Vote %</th>
+                        <th>Electoral Votes</th>
+                    </tr>
+                    ${rows}
+                </table>
+            `;
+        }).join("");
 }
 
 function A(t) {
-    let candIdOpponents = [e.candidate_id, ...e.opponents_list];
-    candIdOpponents = [...new Set(candIdOpponents.filter((x) => Number(x)))];
-    let r;
+    const candIdOpponents = [...new Set([e.candidate_id, ...e.opponents_list].filter((x) => Number(x)))];
     // global answer scores
     const gAnsScoresMap = new Map();
     e.answer_score_global_json.forEach((f) => {
@@ -3656,7 +3681,7 @@ function A(t) {
         const stateMults = e.candidate_state_multiplier_json
             .filter((g) => g.fields.candidate === f)
             .map((g) => {
-                const rand = randomNormal();
+                const rand = randomNormal(g.fields.candidate);
                 const p = g.fields.state_multiplier
                     * candsGAnsScores[idx].global_multiplier
                     * (1 + rand * e.global_parameter_json[0].fields.global_variance);
@@ -3898,55 +3923,64 @@ function A(t) {
 
 const gameStart = (a) => {
     a.preventDefault();
-    $("#modloaddiv")[0].style.display = "none";
-    $("#modLoadReveal")[0].style.display = "none";
+
+    document.getElementById("modloaddiv").style.display = "none";
+    document.getElementById("modLoadReveal").style.display = "none";
     document.getElementById("featured-mods-area").style.display = "none";
-    for (var a = "", n = 0; n < e.temp_election_list.length; n++) {
-        e.temp_election_list[n].is_premium == 0
-            ? (a
-                += `<option value=${e.temp_election_list[n].id
-            }>${e.temp_election_list[n].display_year
-            }</option>`)
-            : e.show_premium == 1
-                ? (a
-                    += `<option value=${e.temp_election_list[n].id
-                }>${e.temp_election_list[n].display_year
-                }</option>`)
-                : (a
-                    += `<option value=${e.temp_election_list[n].id
-                } disabled>${e.temp_election_list[n].display_year
-                }</option>`);
-    }
-    e.election_id = e.election_id ? e.election_id : e.election_json[0].pk;
-    // const inX = findFromPK(e.election_json, e.election_id);
-    const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
-    const l = `<div class="game_header">            ${corrr
-    }        </div>        <div class="inner_window_w_desc" id="inner_window_2">            <div id="election_year_form">            <form name="election_year">            <p>                <h3>${e.SelectText}</h3>    \t\t    <select name="election_id" id="election_id">${a
-    }</select>            </p>            </form>            <div class="election_description_window" id="election_description_window">                <div id="election_image">                    <img src="${election.fields.image_url
-    }" width="300" height="160"/>                </div>                <div id="election_summary">${election.fields.summary
-    }</div>            </div>        </div>        <p><button id="election_id_button">Continue</button></p> <p id="credits">This scenario was made by ${e.credits
-    }.</p>`;
-    $("#game_window").html(l);
-    $("#election_id")[0].value = e.election_id;
-    $("#election_id").change(() => {
-        for (var t = -1, i = 0; i < e.election_json.length; i++) {
-            if (e.election_json[i].pk == election_id.value) {
-                t = i;
-                e.election_id = e.election_json[i].pk;
-                break;
-            }
+
+    const tempOptions = e.temp_election_list.map((election) => {
+        if (election.is_premium === 0 || [1, true].includes(e.show_premium)) {
+            return `<option value="${election.id}">${election.display_year}</option>`;
         }
-        $("#election_description_window").html(
-            `<div id="election_image">            <img src="${e.election_json[t].fields.image_url
-            }" width="300" height="160"/>            </div>            <div id="election_summary">${e.election_json[t].fields.summary
-            }</div>`,
-        );
+
+        return `<option value="${election.id}" disabled>${election.display_year}</option>`;
+    }).join("");
+
+    e.election_id ??= e.election_json[0].pk;
+    const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+    document.getElementById("game_window").innerHTML = `
+        <div class="game_header">${corrr}</div>
+        <div class="inner_window_w_desc" id="inner_window_2">
+            <div id="election_year_form">
+                <form name="election_year">
+                    <p>
+                        <h3>${e.SelectText}</h3>
+                        <select name="election_id" id="election_id">${tempOptions}</select>
+                    </p>
+                </form>
+                <div class="election_description_window" id="election_description_window">
+                    <div id="election_image">
+                        <img src="${election.fields.image_url}" width="300" height="160"/>
+                    </div>
+                    <div id="election_summary">${election.fields.summary}</div>
+                </div>
+            </div>
+        <p>
+            <button id="election_id_button">Continue</button>
+        </p>
+        <p id="credits">This scenario was made by ${e.credits}.</p>
+    `;
+
+    const electionId = document.getElementById("election_id");
+    electionId.value = e.election_id;
+    electionId.addEventListener("change", () => {
+        const selectedElection = e.election_json.find((f) => Number(f.pk) === Number(electionId.value));
+        e.election_id = selectedElection.pk;
+
+        document.getElementById("election_description_window").innerHTML = `
+            <div id="election_image">
+                <img src="${selectedElection.fields.image_url}" width="300" height="160"/>
+            </div>
+            <div id="election_summary">${selectedElection.fields.summary}</div>
+        `;
     });
-    $("#election_id_button").click(candSel);
+
+    document.getElementById("election_id_button").addEventListener("click", candSel);
 };
 
-$("#game_start").click(gameStart);
-$("#skip_to_final").click(() => {
+// $("#game_start").click(gameStart);
+document.getElementById("game_start").addEventListener("click", gameStart);
+document.getElementById("skip_to_final")?.addEventListener("click", () => {
     e.final_state_results = A(1);
     electionNight();
 });
