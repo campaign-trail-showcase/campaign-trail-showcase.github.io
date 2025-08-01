@@ -3603,8 +3603,6 @@ function T(t) {
 }
 
 function A(t) {
-    // let candIdOpponents = [e.candidate_id, ...e.opponents_list];
-    // candIdOpponents = [...new Set(candIdOpponents.filter((x) => Number(x)))];
     const candIdOpponents = [...new Set([e.candidate_id, ...e.opponents_list].filter((x) => Number(x)))];
     // global answer scores
     const gAnsScoresMap = new Map();
