@@ -2038,12 +2038,14 @@ function election_HTML(id, cand, running_mate) {
 /* eslint-disable no-use-before-define */
 function candSel(a) {
     a.preventDefault();
+
     const numElect = Number(e.election_id) ?? Number(e.election_json[0].pk);
-    if (!modded) e.shining = e.shining_info.some((f) => f.pk === numElect);
     const n = e.candidate_json
         .filter((f) => Number(f.fields.election) === numElect && [1, true].includes(f.fields.is_active))
         .map((f) => `<option value="${f.pk}">${f.fields.first_name} ${f.fields.last_name}</option>`)
         .join("");
+
+    if (!modded) e.shining = e.shining_info.some((f) => f.pk === numElect);
 
     document.querySelector("#game_window").innerHTML = `
         <div class="game_header">${corrr}</div>
@@ -2063,7 +2065,7 @@ function candSel(a) {
         </p>
         </div>`.trim();
 
-    const candId = document.querySelector("#candidate_id");
+    const candId = document.getElementById("candidate_id");
     descHTML("#candidate_description_window", candId.value);
     candId.addEventListener("change", () => {
         descHTML("#candidate_description_window", candId.value);
@@ -3916,7 +3918,7 @@ const gameStart = (a) => {
         return `<option value="${election.id}" disabled>${election.display_year}</option>`;
     }).join("");
 
-    e.election_id = e.election_id ?? e.election_json[0].pk;
+    e.election_id ??= e.election_json[0].pk;
     const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     document.getElementById("game_window").innerHTML = `
         <div class="game_header">${corrr}</div>
@@ -3944,7 +3946,8 @@ const gameStart = (a) => {
     const electionId = document.getElementById("election_id");
     electionId.value = e.election_id;
     electionId.addEventListener("change", () => {
-        const selectedElection = e.election_json.find((f) => Number(f.pk) === Number(election_id.value));
+        const selectedElection = e.election_json.find((f) => Number(f.pk) === Number(electionId.value));
+        e.election_id = selectedElection.pk;
 
         document.getElementById("election_description_window").innerHTML = `
             <div id="election_image">
