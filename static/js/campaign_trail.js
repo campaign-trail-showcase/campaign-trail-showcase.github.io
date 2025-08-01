@@ -3430,66 +3430,64 @@ function overallDetailsHtml() {
         </tr>
     `).join("").trim();
 
-    const r = `
-            <div class="game_header">${corrr}</div>
-            <div id="main_content_area">
-                <div id="overall_details_container">
-                    <h3>Overall Election Details</h3>
-                    <div id="overall_election_details">
-                        <h4>Results - This Game</h4>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>Candidate</th>
-                                    <th>Electoral Votes</th>
-                                    <th>Popular Votes</th>
-                                    <th>Popular Vote %</th>
-                                </tr>
-                                ${a}
-                            </tbody>
-                        </table>
-                        ${l}
-                    </div>
-                    <div id="overall_election_details">
-                        <h4>Results - Historical</h4>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>Candidate</th>
-                                    <th>Electoral Votes</th>
-                                    <th>Popular Votes</th>
-                                    <th>Popular Vote %</th>
-                                </tr>
-                                ${histRes}
-                            </tbody>
-                        </table>
-                        <p>
-                            <b>
-                                <a style="font-size: 15px;" href="${game_url}">GAME LINK</a>
-                                <br>
-                                <button id="ExportFileButton" onclick="exportResults()" style="position: absolute; margin-top: 10px; margin-left: -70px;">Export Game as File</button>
-                            </b>
-                        </p>
-                        <br><br><br>
-                    </div>
+    document.getElementById("game_window").innerHTML = `
+        <div class="game_header">${corrr}</div>
+        <div id="main_content_area">
+            <div id="overall_details_container">
+                <h3>Overall Election Details</h3>
+                <div id="overall_election_details">
+                    <h4>Results - This Game</h4>
+                    <table>
+                    <tbody>
+                            <tr>
+                                <th>Candidate</th>
+                                <th>Electoral Votes</th>
+                                <th>Popular Votes</th>
+                                <th>Popular Vote %</th>
+                            </tr>
+                            ${a}
+                        </tbody>
+                    </table>
+                    ${l}
                 </div>
-                <div id="map_footer">
-                    <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-                    <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-                    <button class="final_menu_button" id="state_results_button">Results by State</button>
-                    <button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button>
-                    <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-                    <button class="final_menu_button" id="play_again_button">Play Again!</button>
+                <div id="overall_election_details">
+                    <h4>Results - Historical</h4>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Candidate</th>
+                                <th>Electoral Votes</th>
+                                <th>Popular Votes</th>
+                                <th>Popular Vote %</th>
+                            </tr>
+                            ${histRes}
+                        </tbody>
+                    </table>
+                    <p>
+                        <b>
+                            <a style="font-size: 15px;" href="${game_url}">GAME LINK</a>
+                            <br>
+                            <button id="ExportFileButton" onclick="exportResults()" style="position: absolute; margin-top: 10px; margin-left: -70px;">Export Game as File</button>
+                        </b>
+                    </p>
+                    <br><br><br>
                 </div>
+            </div>
+            <div id="map_footer">
+                <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
+                <button class="final_menu_button" id="final_election_map_button">Election Map</button>
+                <button class="final_menu_button" id="state_results_button">Results by State</button>
+                <button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button>
+                <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
+                <button class="final_menu_button" id="play_again_button">Play Again!</button>
             </div>
         </div>
     `.trim();
-    $("#game_window").html(r);
 }
 
 function furtherReadingHtml() {
     const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
-    let contentHTML = "";
+    let contentHTML;
     if (RecReading !== true && modded === true) {
         // Modded and no recommended reading
         contentHTML = `
@@ -3508,7 +3506,7 @@ function furtherReadingHtml() {
     `.trim();
     }
 
-    const i = `
+    document.getElementById("game_window").innerHTML = `
         <div class="game_header">${corrr}</div>
         <div id="main_content_area_reading">
             <h3 class="results_tab_header">Further Reading</h3>
@@ -3535,8 +3533,6 @@ function furtherReadingHtml() {
             </button>
         </div>
     `;
-
-    $("#game_window").html(i);
 }
 
 function beginNewGameHtml() {
@@ -3580,6 +3576,7 @@ function T(t) {
              const rows = result.result.map((f) => {
                 const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
                 const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
+                // if (f.percent === 0) return;
                 return `
                     <tr>
                         <td>${fullName}</td>
