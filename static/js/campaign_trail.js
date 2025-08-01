@@ -100,15 +100,9 @@ function mapCache(skip = false) {
         }
         const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
         if (
-            (
-                (e.question_number - 1) % 2 !== 0 && election.fields.has_visits === 1
-            )
-            || (
-                e.question_number === e.global_parameter_json[0].fields.question_count
-            )
-            || (
-                e.primary_code && e.primary_code.some((f) => f.breakQ === e.question_number)
-            )
+            ((e.question_number - 1) % 2 !== 0 && election.fields.has_visits === 1)
+            || (e.question_number === e.global_parameter_json[0].fields.question_count)
+            || (e.primary_code && e.primary_code.some((f) => f.breakQ === e.question_number))
         ) {
             return false;
         }
@@ -119,7 +113,7 @@ function mapCache(skip = false) {
     );
     $("#main_content_area")[0].style.display = "";
 
-    const rr = A((returnType = 2));
+    const rr = A(2);
     rFuncRes = rFunc(rr, 0);
     $("#map_container").usmap(rFuncRes);
     $("#main_content_area")[0].style.display = "none";
@@ -3900,51 +3894,58 @@ function A(t) {
 
 const gameStart = (a) => {
     a.preventDefault();
-    $("#modloaddiv")[0].style.display = "none";
-    $("#modLoadReveal")[0].style.display = "none";
+
+    document.getElementById("modloaddiv").style.display = "none";
+    document.getElementById("modLoadReveal").style.display = "none";
     document.getElementById("featured-mods-area").style.display = "none";
-    for (var a = "", n = 0; n < e.temp_election_list.length; n++) {
-        e.temp_election_list[n].is_premium == 0
-            ? (a
-                += `<option value=${e.temp_election_list[n].id
-            }>${e.temp_election_list[n].display_year
-            }</option>`)
-            : e.show_premium == 1
-                ? (a
-                    += `<option value=${e.temp_election_list[n].id
-                }>${e.temp_election_list[n].display_year
-                }</option>`)
-                : (a
-                    += `<option value=${e.temp_election_list[n].id
-                } disabled>${e.temp_election_list[n].display_year
-                }</option>`);
-    }
-    e.election_id = e.election_id ? e.election_id : e.election_json[0].pk;
-    // const inX = findFromPK(e.election_json, e.election_id);
-    const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
-    const l = `<div class="game_header">            ${corrr
-    }        </div>        <div class="inner_window_w_desc" id="inner_window_2">            <div id="election_year_form">            <form name="election_year">            <p>                <h3>${e.SelectText}</h3>    \t\t    <select name="election_id" id="election_id">${a
-    }</select>            </p>            </form>            <div class="election_description_window" id="election_description_window">                <div id="election_image">                    <img src="${election.fields.image_url
-    }" width="300" height="160"/>                </div>                <div id="election_summary">${election.fields.summary
-    }</div>            </div>        </div>        <p><button id="election_id_button">Continue</button></p> <p id="credits">This scenario was made by ${e.credits
-    }.</p>`;
-    $("#game_window").html(l);
-    $("#election_id")[0].value = e.election_id;
-    $("#election_id").change(() => {
-        for (var t = -1, i = 0; i < e.election_json.length; i++) {
-            if (e.election_json[i].pk == election_id.value) {
-                t = i;
-                e.election_id = e.election_json[i].pk;
-                break;
-            }
+
+    const tempOptions = e.temp_election_list.map((election) => {
+        if (election.is_premium === 0 || [1, true].includes(e.show_premium)) {
+            return `<option value="${election.id}">${election.display_year}</option>`;
         }
-        $("#election_description_window").html(
-            `<div id="election_image">            <img src="${e.election_json[t].fields.image_url
-            }" width="300" height="160"/>            </div>            <div id="election_summary">${e.election_json[t].fields.summary
-            }</div>`,
-        );
+
+        return `<option value="${election.id}" disabled>${election.display_year}</option>`;
     });
-    $("#election_id_button").click(candSel);
+
+    e.election_id = e.election_id ?? e.election_json[0].pk;
+    const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+    document.getElementById("game_window").innerHTML = `
+        <div class="game_header">${corrr}</div>
+        <div class="inner_window_w_desc" id="inner_window_2">
+            <div id="election_year_form">
+                <form name="election_year">
+                    <p>
+                        <h3>${e.SelectText}</h3>
+                        <select name="election_id" id="election_id">${tempOptions}</select>
+                    </p>
+                </form>
+                <div class="election_description_window" id="election_description_window">
+                    <div id="election_image">
+                        <img src="${election.fields.image_url}" width="300" height="160"/>
+                    </div>
+                    <div id="election_summary">${election.fields.summary}</div>
+                </div>
+            </div>
+        <p>
+            <button id="election_id_button">Continue</button>
+        </p>
+        <p id="credits">This scenario was made by ${e.credits}.</p>
+    `;
+
+    const electionId = document.getElementById("election_id");
+    electionId.value = e.election_id;
+    electionId.addEventListener("change", () => {
+        const selectedElection = e.election_json.find((f) => Number(f.pk) === Number(election_id.value));
+
+        document.getElementById("election_description_window").innerHTML = `
+            <div id="election_image">
+                <img src="${selectedElection.fields.image_url}" width="300" height="160"/>
+            </div>
+            <div id="election_summary">${selectedElection.fields.summary}</div>
+        `;
+    });
+
+    document.getElementById("election_id_button").addEventListener("click", candSel);
 };
 
 $("#game_start").click(gameStart);
