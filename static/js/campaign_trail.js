@@ -70,6 +70,14 @@ function debugConsole(...args) {
     }
 }
 
+function shuffle(arr) { // Fisher-Yates
+    for (let i = arr.length - 1; i >= 1; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
 function removeIssueDuplicates(array) {
     return array.filter(
         (item, index) => array.map((f) => f.issue).indexOf(item.issue) === index,
@@ -1197,14 +1205,6 @@ function onAnswerSelectButtonClicked() {
 }
 
 function questionHTML() {
-    function shuffle(arr) { // Fisher-Yates
-        for (let i = arr.length - 1; i >= 1; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-
     const ansArr = shuffle(
         e.answers_json
             .map((f, idx) => ({ f, idx }))
