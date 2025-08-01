@@ -3207,6 +3207,8 @@ function finalMapScreenHtml() {
     $("#map_container").usmap(coloredResults);
 }
 
+const k = (e) => e.map((f) => `<option value="${f.state}">${f.name}</option>`).join("");
+
 function stateResultsHtml() {
     const stateBase = [];
     const stateEVs = [];
@@ -3567,37 +3569,44 @@ function beginNewGameHtml() {
     });
 }
 
-function k(e) {
-    return e.map((f) => `<option value="${f.state}">${f.name}</option>`).join("");
-}
-
 function T(t) {
-    for (
-        var i = "        <h4>Results - This Game</h4>        <table>\t    <tr><th>Candidate</th><th>Popular Votes</th>\t    <th>Popular Vote %</th><th>Electoral Votes</th></tr>",
-            a = 0;
-        a < e.final_state_results.length;
-        a++
-    ) {
-        if (e.final_state_results[a].state == t) {
-            for (let s = 0; s < e.final_state_results[a].result.length; s++) {
-                const n = findFromPK(e.candidate_json, e.final_state_results[a].result[s].candidate);
-                i
-                    += `                    <tr><td>${e.candidate_json[n].fields.first_name
-                } ${e.candidate_json[n].fields.last_name
-                }</td><td>${formatNumbers(e.final_state_results[a].result[s].votes)
-                }</td><td>${(100 * e.final_state_results[a].result[s].percent).toFixed(e.statePercentDigits)
-                }</td><td>${e.final_state_results[a].result[s].electoral_votes
-                }</td></tr>`;
-            }
-        }
-    }
-    return (i += "</table>");
+    const numT = Number(t);
+
+    return e.final_state_results
+        .filter((result) => result.state === numT)
+        .map((result) => {
+             const rows = result.result.map((f) => {
+                const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
+                const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
+                return `
+                    <tr>
+                        <td>${fullName}</td>
+                        <td>${formatNumbers(f.votes)}</td>
+                        <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
+                        <td>${f.electoral_votes}</td>
+                    </tr>
+                `;
+            }).join("");
+
+            return `
+                <h4>Results - This Game</h4>
+                <table>
+                    <tr>
+                        <th>Candidate</th>
+                        <th>Popular Votes</th>
+                        <th>Popular Vote %</th>
+                        <th>Electoral Votes</th>
+                    </tr>
+                    ${rows}
+                </table>
+            `;
+        }).join("");
 }
 
 function A(t) {
-    let candIdOpponents = [e.candidate_id, ...e.opponents_list];
-    candIdOpponents = [...new Set(candIdOpponents.filter((x) => Number(x)))];
-    let r;
+    // let candIdOpponents = [e.candidate_id, ...e.opponents_list];
+    // candIdOpponents = [...new Set(candIdOpponents.filter((x) => Number(x)))];
+    const candIdOpponents = [...new Set([e.candidate_id, ...e.opponents_list].filter((x) => Number(x)))];
     // global answer scores
     const gAnsScoresMap = new Map();
     e.answer_score_global_json.forEach((f) => {
@@ -3905,7 +3914,7 @@ const gameStart = (a) => {
         }
 
         return `<option value="${election.id}" disabled>${election.display_year}</option>`;
-    });
+    }).join("");
 
     e.election_id = e.election_id ?? e.election_json[0].pk;
     const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
@@ -3948,8 +3957,9 @@ const gameStart = (a) => {
     document.getElementById("election_id_button").addEventListener("click", candSel);
 };
 
-$("#game_start").click(gameStart);
-$("#skip_to_final").click(() => {
+// $("#game_start").click(gameStart);
+document.getElementById("game_start").addEventListener("click", gameStart);
+document.getElementById("skip_to_final")?.addEventListener("click", () => {
     e.final_state_results = A(1);
     electionNight();
 });
