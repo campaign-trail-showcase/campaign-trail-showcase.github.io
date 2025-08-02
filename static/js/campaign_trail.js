@@ -1978,17 +1978,17 @@ function a(e) {
             break;
         case "3":
             t = `
-                    <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
-                    <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
-                    <p>
-                    - Campaign finance<br>
-                    - Staffing your campaign<br>
-                    - Interactions with lobbies<br>
-                    - Ad buys
-                    </p>
-                    <p><b>This is not the recommended experience for new players.</b></p>
-                    <p><b>Originally from New Campaign Trail, added with permission.</b></p>
-                    `;
+                <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
+                <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
+                <p>
+                - Campaign finance<br>
+                - Staffing your campaign<br>
+                - Interactions with lobbies<br>
+                - Ad buys
+                </p>
+                <p><b>This is not the recommended experience for new players.</b></p>
+                <p><b>Originally from New Campaign Trail, added with permission.</b></p>
+            `;
             break;
     }
     $("#opponent_selection_description_window").html(t);
@@ -3628,35 +3628,25 @@ function T(t) {
 function A(t) {
     const candIdOpponents = [...new Set([e.candidate_id, ...e.opponents_list].filter((x) => Number(x)))];
     // global answer scores
-    const gAnsScoresMap = new Map();
-    e.answer_score_global_json.forEach((f) => {
-        const {
-            answer, candidate, affected_candidate, global_multiplier,
-        } = f.fields;
-        const key = `${answer}_${candidate}_${affected_candidate}`;
-        gAnsScoresMap.set(key, global_multiplier);
-    });
-
     const candsGAnsScores = candIdOpponents.map((candidate) => {
-        const ansScores = e.player_answers.map((answer) => {
-            const key = `${answer}_${e.candidate_id}_${candidate}`;
-            return gAnsScoresMap.get(key) ?? 0;
-        });
-
-        const cumulScores = ansScores.reduce((acc, score) => acc + score, 0);
+        const cumulScores = e.player_answers.reduce((total, answer) => {
+            const score = e.answer_score_global_json.find((item) =>
+                item.fields.answer === answer &&
+                item.fields.candidate === e.candidate_id &&
+                item.fields.affected_candidate === candidate
+            );
+            return total + (score ? score.fields.global_multiplier : 0);
+        }, 0);
 
         const o = candidate === e.candidate_id && cumulScores < -0.4 ? 0.6 : 1 + cumulScores;
-
         const variance = e.global_parameter_json[0].fields.global_variance;
         const rand = 1 + randomNormal(candidate) * variance;
 
-        const c = candidate === e.candidate_id
-            ? o * rand * e.difficulty_level_multiplier
-            : o * rand;
-
         return {
             candidate,
-            global_multiplier: Number.isNaN(c) ? 1 : c,
+            global_multiplier: candidate === e.candidate_id
+                ? o * rand * e.difficulty_level_multiplier
+                : o * rand
         };
     });
 
