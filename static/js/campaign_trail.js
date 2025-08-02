@@ -3977,12 +3977,14 @@ document.getElementById("skip_to_final")?.addEventListener("click", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const handlers = {
-        "#candidate_id_button": (event) => vpSelect(event),
+        "#candidate_id_button": (event) => {
+            if (!document.getElementById("main_content_area")) vpSelect(event)
+        },
         "#candidate_id_back": (event) => gameStart(event),
         "#running_mate_id_button": (event) => {
             const runningMateId = document.querySelector("#running_mate_id");
             event.preventDefault();
-            if (!(document.getElementById("question_form") || document.querySelector(".visit_text"))) {
+            if (!document.getElementById("main_content_area")) {
                 renderOptions(e.election_id, e.candidate_id, runningMateId.value);
             }
         },
