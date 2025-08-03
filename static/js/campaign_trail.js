@@ -3980,13 +3980,13 @@ document.getElementById("skip_to_final")?.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const handlers = {
         "#candidate_id_button": (event) => {
-            if (e.code2Loaded) vpSelect(event)
+            if (!e.code2Loaded) vpSelect(event)
         },
         "#candidate_id_back": (event) => gameStart(event),
         "#running_mate_id_button": (event) => {
             const runningMateId = document.querySelector("#running_mate_id");
             event.preventDefault();
-            if (e.code2Loaded) {
+            if (!e.code2Loaded) {
                 renderOptions(e.election_id, e.candidate_id, runningMateId.value);
             }
         },
