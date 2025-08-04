@@ -47,6 +47,8 @@ e.statePercentDigits = 2;
 e.SelAnsContText = "Please select an answer before continuing!";
 e.numberFormat = "en-US";
 
+e.code2Loaded = false;
+
 function substitutePlaceholders(str) {
     if (!str || typeof str !== "string") return str;
     return str.replace(/\{\{(.*?)}\}/g, (_, varName) => {
@@ -3977,12 +3979,14 @@ document.getElementById("skip_to_final")?.addEventListener("click", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const handlers = {
-        "#candidate_id_button": (event) => vpSelect(event),
+        "#candidate_id_button": (event) => {
+            if (!e.code2Loaded) vpSelect(event)
+        },
         "#candidate_id_back": (event) => gameStart(event),
         "#running_mate_id_button": (event) => {
             const runningMateId = document.querySelector("#running_mate_id");
             event.preventDefault();
-            if (!(document.getElementById("question_form") || document.querySelector(".visit_text"))) {
+            if (!e.code2Loaded) {
                 renderOptions(e.election_id, e.candidate_id, runningMateId.value);
             }
         },
@@ -4066,7 +4070,10 @@ const fix1964Observer = new MutationObserver((mut, obs) => {
         curElectSelect.addEventListener("change", fix1964);
         fix1964();
     }
-    if (document.querySelector(".inner_window_question")) obs.disconnect();
+    if (document.querySelector(".inner_window_question")) {
+        e.code2Loaded = true;
+        obs.disconnect();
+    }
 });
 
 fix1964Observer.observe(document.body, {
