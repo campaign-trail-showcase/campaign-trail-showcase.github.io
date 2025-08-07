@@ -1260,10 +1260,15 @@ function renderPaginationControls(totalMods) {
   pageInput.min = "1";
   pageInput.max = totalPages;
   pageInput.value = currentPage;
+  
   pageInput.style.width = "60px";
   pageInput.style.textAlign = "center";
   pageInput.style.margin = "0 5px";
   pageInput.classList.add("pagination-input");
+
+  pageInput.style.height = "36px";
+  pageInput.style.borderRadius = "10px"; 
+  pageInput.style.fontSize = "16px";
 
   // go to page button
   const goButton = document.createElement("button");
