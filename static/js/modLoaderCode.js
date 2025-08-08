@@ -1251,6 +1251,36 @@ function renderPaginationControls(totalMods) {
   pageInfo.classList.add("pagination-info");
   paginationContainer.appendChild(pageInfo);
 
+  // page input
+  const pageInputContainer = document.createElement("span");
+  pageInputContainer.style.margin = "0 10px";
+  
+  const pageInput = document.createElement("input");
+  pageInput.type = "number";
+  pageInput.min = "1";
+  pageInput.max = totalPages;
+  pageInput.value = currentPage;
+  pageInput.classList.add("pagination-input");
+
+  // go to page button
+  const goButton = document.createElement("button");
+  goButton.innerText = "Go";
+  goButton.classList.add("mode-button");
+  goButton.addEventListener("click", () => {
+    const inputPage = parseInt(pageInput.value);
+    if (inputPage >= 1 && inputPage <= totalPages && inputPage !== currentPage) {
+      currentPage = inputPage;
+      updateModViews();
+    } else {
+      // resets new input to current input if new input is invalid page number
+      pageInput.value = currentPage; 
+    }
+  });
+
+  pageInputContainer.appendChild(pageInput);
+  pageInputContainer.appendChild(goButton);
+  paginationContainer.appendChild(pageInputContainer);
+
   // next button
   const nextButton = document.createElement("button");
   nextButton.innerText = "Next";
