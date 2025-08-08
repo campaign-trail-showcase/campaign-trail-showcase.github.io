@@ -11,6 +11,8 @@ async function evalFromUrl(url, callback = null) {
     callback?.();
 }
 
+let changeFontColour = () => {};
+
 const baseScenarioDict = {
     1844: "1844_Clay_Fillmore.html",
     1860: "1860_Douglas_Guthrie.html",
@@ -371,7 +373,7 @@ function cyoAdventure(question) {
                 ) {
                     campaignTrail_temp.questions_json[
                         campaignTrail_temp.question_number
-                        ] = campaignTrail_temp.questions_json[v];
+                    ] = campaignTrail_temp.questions_json[v];
                     break;
                 }
             }
@@ -2604,7 +2606,7 @@ function setStatePollText(s, t) {
     $("#state_info").html(f);
 }
 
-rFunc = (t, i) => {
+function rFunc(t, i) {
     for (var a = {}, s = 0; s < t.length; s++) {
         const item = t[s];
         // Find the result with the highest percent
@@ -2736,7 +2738,7 @@ rFunc = (t, i) => {
         };
     }
     return v;
-};
+}
 
 /**
  * Dictates how long it takes until the results in a particular state are called
