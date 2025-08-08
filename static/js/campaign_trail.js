@@ -2606,7 +2606,7 @@ function setStatePollText(s, t) {
     $("#state_info").html(f);
 }
 
-let rFunc = (t, i) => {
+function rFunc(t, i) {
     for (var a = {}, s = 0; s < t.length; s++) {
         const item = t[s];
         // Find the result with the highest percent
@@ -2738,7 +2738,7 @@ let rFunc = (t, i) => {
         };
     }
     return v;
-};
+}
 
 /**
  * Dictates how long it takes until the results in a particular state are called
