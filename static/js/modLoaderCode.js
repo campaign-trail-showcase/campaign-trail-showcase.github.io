@@ -1253,7 +1253,7 @@ function renderPaginationControls(totalMods) {
 
   // page input
   const pageInputContainer = document.createElement("span");
-  pageInputContainer.style.margin = "0 10px";
+  pageInputContainer.classList.add("pagination-input-container");
   
   const pageInput = document.createElement("input");
   pageInput.type = "number";
@@ -1265,7 +1265,7 @@ function renderPaginationControls(totalMods) {
   // go to page button
   const goButton = document.createElement("button");
   goButton.innerText = "Go";
-  goButton.classList.add("mode-button");
+  goButton.classList.add("mode-button", "pagination-go-button");
   goButton.addEventListener("click", () => {
     const inputPage = parseInt(pageInput.value);
     if (inputPage >= 1 && inputPage <= totalPages && inputPage !== currentPage) {
