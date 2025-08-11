@@ -2068,7 +2068,7 @@ function candSel(a) {
 
     const numElect = Number(e.election_id) ?? Number(e.election_json[0].pk);
     const n = e.candidate_json
-        .filter((f) => Number(f.fields.election) === numElect && [1, true].includes(f.fields.is_active))
+        .filter((f) => Number(f.fields.election) === numElect && f.fields.is_active)
         .map((f) => `<option value="${f.pk}">${f.fields.first_name} ${f.fields.last_name}</option>`)
         .join("");
 
