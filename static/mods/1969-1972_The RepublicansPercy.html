@@ -54278,12 +54278,7 @@ function changeCandidate(candidateName){
         
         updateHistoricalData(newVpTableHistorical4, newHistHexcolour4, newHistName4, newHistEV4, newHistPV4, newHistPVP4);
         
-        if(longOrNot == 1){
-            campaignTrail_temp.running_mate_json = JSON.parse("[{\"model\": \"campaign_trail.running_mate\", \"pk\": 150005, \"fields\": {\"candidate\": 81, \"running_mate\": 50005}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150016, \"fields\": {\"candidate\": 81, \"running_mate\": 50016}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150003, \"fields\": {\"candidate\": 81, \"running_mate\": 50003}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150004, \"fields\": {\"candidate\": 81, \"running_mate\": 50004}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150009, \"fields\": {\"candidate\": 81, \"running_mate\": 50009}}]");
-        }
-        else{
-            campaignTrail_temp.running_mate_json = JSON.parse("[{\"model\": \"campaign_trail.running_mate\", \"pk\": 150005, \"fields\": {\"candidate\": 81, \"running_mate\": 50005}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150003, \"fields\": {\"candidate\": 81, \"running_mate\": 50003}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150004, \"fields\": {\"candidate\": 81, \"running_mate\": 50004}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150009, \"fields\": {\"candidate\": 81, \"running_mate\": 50009}}]");
-        }
+        campaignTrail_temp.running_mate_json = JSON.parse("[{\"model\": \"campaign_trail.running_mate\", \"pk\": 150005, \"fields\": {\"candidate\": 81, \"running_mate\": 50005}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150003, \"fields\": {\"candidate\": 81, \"running_mate\": 50003}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150004, \"fields\": {\"candidate\": 81, \"running_mate\": 50004}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150009, \"fields\": {\"candidate\": 81, \"running_mate\": 50009}}]");
     }
     else if(candidateName == "agnew"){
         campaignTrail_temp.candidate_image_url = 'https://i.imgur.com/btM3ooK.png';
@@ -54420,7 +54415,7 @@ function changeCandidate(candidateName){
         
         updateHistoricalData(newVpTableHistorical7, newHistHexcolour7, newHistName7, newHistEV7, newHistPV7, newHistPVP7);
 
-        campaignTrail_temp.running_mate_json = JSON.parse("[{\"model\": \"campaign_trail.running_mate\", \"pk\": 150007, \"fields\": {\"candidate\": 81, \"running_mate\": 50008}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150017, \"fields\": {\"candidate\": 81, \"running_mate\": 50017}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150002, \"fields\": {\"candidate\": 81, \"running_mate\": 50002}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150003, \"fields\": {\"candidate\": 81, \"running_mate\": 50003}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150005, \"fields\": {\"candidate\": 81, \"running_mate\": 50005}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150006, \"fields\": {\"candidate\": 81, \"running_mate\": 50006}}]");
+        campaignTrail_temp.running_mate_json = JSON.parse("[{\"model\": \"campaign_trail.running_mate\", \"pk\": 150007, \"fields\": {\"candidate\": 81, \"running_mate\": 50008}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150002, \"fields\": {\"candidate\": 81, \"running_mate\": 50002}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150003, \"fields\": {\"candidate\": 81, \"running_mate\": 50003}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150005, \"fields\": {\"candidate\": 81, \"running_mate\": 50005}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150006, \"fields\": {\"candidate\": 81, \"running_mate\": 50006}}]");
     
     }
     else if(candidateName == "nixon"){
@@ -57510,7 +57505,7 @@ function selectYorty(){
         nixon_active = 0
     }
     republican = "yorty";
-    campaignTrail_temp.running_mate_json = JSON.parse("[{\"model\": \"campaign_trail.running_mate\", \"pk\": 150007, \"fields\": {\"candidate\": 81, \"running_mate\": 50008}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150017, \"fields\": {\"candidate\": 81, \"running_mate\": 50017}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150002, \"fields\": {\"candidate\": 81, \"running_mate\": 50002}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150003, \"fields\": {\"candidate\": 81, \"running_mate\": 50003}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150005, \"fields\": {\"candidate\": 81, \"running_mate\": 50005}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150006, \"fields\": {\"candidate\": 81, \"running_mate\": 50006}}]");
+    campaignTrail_temp.running_mate_json = JSON.parse("[{\"model\": \"campaign_trail.running_mate\", \"pk\": 150007, \"fields\": {\"candidate\": 81, \"running_mate\": 50008}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150002, \"fields\": {\"candidate\": 81, \"running_mate\": 50002}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150003, \"fields\": {\"candidate\": 81, \"running_mate\": 50003}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150005, \"fields\": {\"candidate\": 81, \"running_mate\": 50005}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 150006, \"fields\": {\"candidate\": 81, \"running_mate\": 50006}}]");
     closeSurrogates()
 }
 function selectNixon(){
