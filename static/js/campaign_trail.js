@@ -1,6 +1,6 @@
 /* global campaignTrail_temp, jQuery, $ */
 
-let e = campaignTrail_temp;
+e ||= campaignTrail_temp;
 e.skippingQuestion = false;
 
 async function evalFromUrl(url, callback = null) {
@@ -3923,7 +3923,7 @@ const gameStart = (a) => {
     document.getElementById("featured-mods-area").style.display = "none";
 
     const tempOptions = e.temp_election_list.map((election) => {
-        if (election.is_premium === 0 || [1, true].includes(e.show_premium)) {
+        if (!election.is_premium || e.show_premium) {
             return `<option value="${election.id}">${election.display_year}</option>`;
         }
 
