@@ -3991,10 +3991,7 @@ function setupMusicPlayer() {
             }
           }
       });
-      var masterObserver = window.masterObserver;
-      if (masterObserver && typeof masterObserver.disconnect === "function") {
-        masterObserver.disconnect();
-      }
+      masterObserver.disconnect();
     }
   }
 
