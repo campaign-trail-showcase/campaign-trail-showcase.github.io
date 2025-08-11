@@ -3983,7 +3983,10 @@ function setupMusicPlayer() {
             }
           }
       });
-      masterObserver.disconnect();
+      var masterObserver = window.masterObserver;
+      if (masterObserver && typeof masterObserver.disconnect === "function") {
+        masterObserver.disconnect();
+      }
     }
   }
 
