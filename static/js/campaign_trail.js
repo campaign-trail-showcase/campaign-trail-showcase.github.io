@@ -1,6 +1,6 @@
 /* global campaignTrail_temp, jQuery, $ */
 
-e ||= campaignTrail_temp;
+let e = campaignTrail_temp;
 e.skippingQuestion = false;
 
 async function evalFromUrl(url, callback = null) {
@@ -3630,287 +3630,307 @@ function T(t) {
 }
 
 function A(t) {
-    const candIdOpponents = [...new Set([e.candidate_id, ...e.opponents_list].filter((x) => Number(x)))];
-    // global answer scores
+    const gp = e.global_parameter_json[0];
+    const playerAnswers = e.player_answers || [];
+    const candIdOpponents = [
+        e.candidate_id,
+        ...e.opponents_list.filter((x) => Number(x)),
+    ].filter((v, i, arr) => arr.indexOf(v) === i);
+
+    const ansGlobalMap = new Map();
+    for (const item of e.answer_score_global_json) {
+        if (item.fields.candidate !== e.candidate_id) continue;
+        const key = `${item.fields.answer}|${item.fields.affected_candidate}`;
+        ansGlobalMap.set(key, item.fields.global_multiplier);
+    }
+
+    const candIssueMap = new Map();
+    for (const item of e.candidate_issue_score_json) {
+        if (!candIssueMap.has(item.fields.candidate)) candIssueMap.set(item.fields.candidate, []);
+        candIssueMap.get(item.fields.candidate).push({
+            issue: item.fields.issue,
+            issue_score: item.fields.issue_score,
+        });
+    }
+    for (const [cand, arr] of candIssueMap.entries()) {
+        const seen = new Set();
+        candIssueMap.set(
+            cand,
+            arr.filter((o) => {
+                if (seen.has(o.issue)) return false;
+                seen.add(o.issue);
+                return true;
+            }),
+        );
+    }
+
+    if (!e._cached_state_mults_filtered) {
+        e.candidate_state_multiplier_json = e.candidate_state_multiplier_json.filter(
+            (f) => f.model === "campaign_trail.candidate_state_multiplier",
+        );
+        e._cached_state_mults_filtered = true;
+    }
+    const candStateMultMap = new Map();
+    for (const sm of e.candidate_state_multiplier_json) {
+        if (!candStateMultMap.has(sm.fields.candidate)) candStateMultMap.set(sm.fields.candidate, []);
+        candStateMultMap.get(sm.fields.candidate).push(sm);
+    }
+
+    const runIssueMap = new Map();
+    for (const r of e.running_mate_issue_score_json) {
+        runIssueMap.set(r.fields.issue, r.fields);
+    }
+
+    const issueAnswerAgg = new Map();
+    if (!e._issue_answer_cache_key
+        || e._issue_answer_cache_key.length !== playerAnswers.length
+        || e._issue_answer_cache_key.some((v, i) => v !== playerAnswers[i])) {
+        // rebuild
+        issueAnswerAgg.clear();
+        for (const rec of e.answer_score_issue_json) {
+            if (!playerAnswers.includes(rec.fields.answer)) continue;
+            const iss = rec.fields.issue;
+            let agg = issueAnswerAgg.get(iss);
+            if (!agg) {
+                agg = { g: 0, b: 0 };
+                issueAnswerAgg.set(iss, agg);
+            }
+            agg.g += rec.fields.issue_score * rec.fields.issue_importance;
+            agg.b += rec.fields.issue_importance;
+        }
+        e._issue_answer_cache_key = [...playerAnswers];
+        e._issue_answer_cache = issueAnswerAgg;
+    } else {
+        // reuse cached
+        for (const [k, v] of e._issue_answer_cache.entries()) {
+            issueAnswerAgg.set(k, { ...v });
+        }
+    }
+
+    if (!e._answer_state_index
+        || e._answer_state_index_playerAnswersLen !== playerAnswers.length) {
+        const idx = new Map();
+        for (const rec of e.answer_score_state_json) {
+            if (rec.fields.candidate !== e.candidate_id) continue;
+            const key = `${rec.fields.state}|${rec.fields.affected_candidate}|${rec.fields.answer}`;
+            idx.set(key, (idx.get(key) || 0) + rec.fields.state_multiplier);
+        }
+        e._answer_state_index = idx;
+        e._answer_state_index_playerAnswersLen = playerAnswers.length;
+    }
+    const ansStateIdx = e._answer_state_index;
+
+    const stateIssueMap = new Map();
+    for (const sis of e.state_issue_score_json) {
+        const key = `${sis.fields.state}|${sis.fields.issue}`;
+        stateIssueMap.set(key, { score: sis.fields.state_issue_score, weight: sis.fields.weight });
+    }
+
+    const stateById = new Map(e.states_json.map((s) => [s.pk, s]));
+
+    const variance = gp.fields.global_variance;
     const candsGAnsScores = candIdOpponents.map((candidate) => {
-        const cumulScores = e.player_answers.reduce((total, answer) => {
-            const score = e.answer_score_global_json.find((item) =>
-                item.fields.answer === answer &&
-                item.fields.candidate === e.candidate_id &&
-                item.fields.affected_candidate === candidate
-            );
-            return total + (score ? score.fields.global_multiplier : 0);
-        }, 0);
-
-        const o = candidate === e.candidate_id && cumulScores < -0.4 ? 0.6 : 1 + cumulScores;
-        const variance = e.global_parameter_json[0].fields.global_variance;
+        let cumul = 0;
+        for (const ans of playerAnswers) {
+            const sc = ansGlobalMap.get(`${ans}|${candidate}`) || 0;
+            cumul += sc;
+        }
+        const base = candidate === e.candidate_id && cumul < -0.4 ? 0.6 : 1 + cumul;
         const rand = 1 + randomNormal(candidate) * variance;
-
         return {
             candidate,
-            global_multiplier: candidate === e.candidate_id
-                ? o * rand * e.difficulty_level_multiplier
-                : o * rand
+            global_multiplier:
+                candidate === e.candidate_id
+                    ? base * rand * e.difficulty_level_multiplier
+                    : base * rand,
         };
     });
 
-    const candsIssueScores = candIdOpponents.map((candidate) => {
-        const v = e.candidate_issue_score_json
-            .filter((item) => item.fields.candidate === candidate)
-            .map((item) => ({
-                issue: item.fields.issue,
-                issue_score: item.fields.issue_score,
-            }));
+    const candsIssueScores = candIdOpponents.map((candidate) => ({
+        candidate_id: candidate,
+        issue_scores: candIssueMap.get(candidate) || [],
+    }));
 
-        return {
-            candidate_id: candidate,
-            issue_scores: removeIssueDuplicates(v),
-        };
-    });
+    if (candsIssueScores.length > 0) {
+        candsIssueScores[0].issue_scores = candsIssueScores[0].issue_scores.map((iss) => {
+            const runIssue = runIssueMap.get(iss.issue);
+            if (!runIssue) return iss;
 
-    const candsStateMults = candIdOpponents.map((f, idx) => {
-        e.candidate_state_multiplier_json = e.candidate_state_multiplier_json.filter(
-            (f) => f.model === "campaign_trail.candidate_state_multiplier"
-        );
-        const stateMults = e.candidate_state_multiplier_json
-            .filter((g) => g.fields.candidate === f)
+            const agg = issueAnswerAgg.get(iss.issue) || { g: 0, b: 0 };
+            const denom = gp.fields.candidate_issue_weight
+                + gp.fields.running_mate_issue_weight
+                + agg.b;
+
+            const finalScore =
+                (iss.issue_score * gp.fields.candidate_issue_weight
+                    + runIssue.issue_score * gp.fields.running_mate_issue_weight
+                    + agg.g) / (denom || 1);
+
+            return {
+                ...iss,
+                issue_score: finalScore,
+            };
+        });
+    }
+
+    const candsStateMults = candIdOpponents.map((cand, idx) => {
+        const baseList = candStateMultMap.get(cand) || [];
+        const gMult = candsGAnsScores[idx].global_multiplier;
+        const state_multipliers = baseList
             .map((g) => {
                 const rand = randomNormal(g.fields.candidate);
-                const p = g.fields.state_multiplier
-                    * candsGAnsScores[idx].global_multiplier
-                    * (1 + rand * e.global_parameter_json[0].fields.global_variance);
-
                 return {
                     state: g.fields.state,
-                    state_multiplier: p,
+                    state_multiplier:
+                        g.fields.state_multiplier
+                        * gMult
+                        * (1 + rand * variance),
                 };
-            }).sort((a, b) => a.state - b.state);
-
-        return {
-            candidate_id: f,
-            state_multipliers: stateMults,
-        };
+            })
+            .sort((a, b) => a.state - b.state);
+        return { candidate_id: cand, state_multipliers };
     });
 
-    candsIssueScores[0].issue_scores = candsIssueScores[0].issue_scores.map((f) => {
-        const { issue } = f;
-        const runIssue = e.running_mate_issue_score_json.find((f) => f.fields.issue === issue);
-        if (!runIssue) {
-            console.warn(`No running mate issue for issue ${issue}`);
-            return f;
-        }
-
-        const playerAns = e.player_answers;
-
-        const { g, b } = e.answer_score_issue_json
-            .filter(
-                (answ) => answ.fields.issue === issue && playerAns.includes(answ.fields.answer),
-            )
-            .reduce((acc, answ) => {
-                acc.g += answ.fields.issue_score * answ.fields.issue_importance;
-                acc.b += answ.fields.issue_importance;
-                return acc;
-            }, { g: 0, b: 0 });
-
-        const globalParam = e.global_parameter_json[0];
-
-        const finalScore = (f.issue_score
-                * globalParam.fields.candidate_issue_weight
-                + runIssue.fields.issue_score
-                * globalParam.fields.running_mate_issue_weight
-                + g)
-            / (
-                globalParam.fields.candidate_issue_weight
-                + globalParam.fields.running_mate_issue_weight
-                + b
+    const playerStateMults = candsStateMults[0]?.state_multipliers || [];
+    playerStateMults.forEach((mult) => {
+        const stateId = mult.state;
+        for (const cand of candIdOpponents) {
+            const candIdx = candIdOpponents.indexOf(cand);
+            const stateMultObj = candsStateMults[candIdx].state_multipliers.find(
+                (m) => m.state === stateId,
             );
+            if (!stateMultObj) return;
 
-        return {
-            ...f,
-            issue_score: finalScore,
-        };
-    });
-
-    candIdOpponents.forEach((cand, idx) => {
-        candsStateMults[idx].state_multipliers.forEach((mult) => {
-            const { state } = mult;
-
-            const w = e.player_answers
-                .reduce((acc, playerAns) => acc + e.answer_score_state_json.reduce((acc2, ans) => ((
-                    ans.fields.state === state
-                    && ans.fields.answer === playerAns
-                    && ans.fields.candidate === e.candidate_id
-                    && ans.fields.affected_candidate === cand)
-                    ? acc2 + ans.fields.state_multiplier
-                    : acc2), 0), 0);
+            // sum w over answers using pre-index
+            let w = 0;
+            for (const ans of playerAnswers) {
+                const key = `${stateId}|${cand}|${ans}`;
+                const val = ansStateIdx.get(key);
+                if (val) w += val;
+            }
 
             let boost = 0;
-            if (idx === 0) {
-                if (e.running_mate_state_id === state) boost += 0.004 * mult.state_multiplier;
+            if (candIdx === 0) {
+                if (e.running_mate_state_id === stateId) {
+                    boost += 0.004 * stateMultObj.state_multiplier;
+                }
             }
-            e.player_visits.forEach((h) => {
-                if (h === state) {
-                    boost += 0.005
-                        * Math.max(0.1, mult.state_multiplier)
+            if (e.player_visits && e.player_visits.length) {
+                let visitCount = 0;
+                for (const v of e.player_visits) if (v === stateId) visitCount++;
+                if (visitCount) {
+                    boost +=
+                        0.005
+                        * visitCount
+                        * Math.max(0.1, stateMultObj.state_multiplier)
                         * (e.shining_data.visit_multiplier ?? 1);
                 }
-            });
-            // eslint-disable-next-line no-param-reassign
-            mult.state_multiplier += w + boost;
-        });
+            }
+
+            stateMultObj.state_multiplier += w + boost;
+        }
     });
 
-    const calcStatePolls = candsStateMults[0].state_multipliers.map((f) => {
-        const finalStatePoll = candIdOpponents.map((candId, r) => {
-            const hasSm = candsStateMults[r].state_multipliers.some((s) => s.state === f.state);
-            if (!hasSm) {
-                return {
-                    candidate: candId,
-                    result: 0,
-                };
-            }
-            let score = candsIssueScores[r].issue_scores.reduce((acc, iss) => {
-                const globalParam = e.global_parameter_json[0];
-                const match = e.state_issue_score_json.find(
-                    (s) => s.fields.state === f.state && s.fields.issue === iss.issue,
-                );
-
-                let stateScore = 0;
-                let issueWeight = 1;
-
-                if (match) {
-                    stateScore = match.fields.state_issue_score;
-                    issueWeight = match.fields.weight;
-                }
+    const baseStateList = candsStateMults[0].state_multipliers;
+    const calcStatePolls = baseStateList.map((smBase) => {
+        const stateId = smBase.state;
+        const result = candIdOpponents.map((candId, rIdx) => {
+            const issueScores = candsIssueScores[rIdx].issue_scores;
+            let score = 0;
+            for (const iss of issueScores) {
+                const stKey = `${stateId}|${iss.issue}`;
+                const stEntry = stateIssueMap.get(stKey);
+                const stateScore = stEntry ? stEntry.score : 0;
+                const issueWeight = stEntry ? stEntry.weight : 1;
 
                 const S = iss.issue_score * Math.abs(iss.issue_score);
                 const E = stateScore * Math.abs(stateScore);
+                score += gp.fields.vote_variable - Math.abs((S - E) * issueWeight);
+            }
 
-                return acc + (globalParam.fields.vote_variable - Math.abs((S - E) * issueWeight));
-            }, 0);
-
-            const sm = candsStateMults[r].state_multipliers.find((s) => s.state === f.state);
+            const sm = candsStateMults[rIdx].state_multipliers.find(
+                (m) => m.state === stateId,
+            );
             const C = sm ? sm.state_multiplier : 0;
-
-            if (DEBUG) {
-                console.log(`From key ${r} into f, state multiplier: ${C}`);
-            }
-
             score *= C;
-            score = Math.max(score, 0);
+            if (score < 0) score = 0;
 
-            return {
-                candidate: candId,
-                result: score,
-            };
+            return { candidate: candId, result: score };
         });
 
-        return {
-            state: f.state,
-            result: finalStatePoll,
-        };
+        return { state: stateId, result };
     });
 
-    const stateMap = new Map(e.states_json.map((f) => [f.pk, f.fields.abbr]));
+    // add abbreviations, votes & percents
+    for (const st of calcStatePolls) {
+        const stateObj = stateById.get(st.state);
+        st.abbr = stateObj ? stateObj.fields.abbr : null;
+        const popBase = stateObj
+            ? Math.floor(stateObj.fields.popular_votes * (0.95 + 0.1 * Math.random()))
+            : 0;
+        const totalScore = st.result.reduce((a, b) => a + b.result, 0) || 1;
+        for (const r of st.result) {
+            const pct = r.result / totalScore;
+            r.percent = pct;
+            r.votes = Math.floor(pct * popBase);
+        }
+    }
 
-    calcStatePolls.forEach((f) => {
-        // eslint-disable-next-line no-param-reassign
-        f.abbr = stateMap.get(f.state)
-            ?? e.states_json.find((g) => g.pk === f.state)?.fields.abbr
-            ?? null;
-    });
-
-    calcStatePolls.forEach((f) => {
-        const state = e.states_json.find((g) => g.pk === f.state);
-        const M = state ? Math.floor(state.fields.popular_votes * (0.95 + 0.1 * Math.random())) : 0;
-
-        const total = f.result.reduce((acc, g) => acc + g.result, 0);
-
-        f.result.forEach((g) => {
-            /* eslint-disable no-param-reassign */
-            const N = g.result / total;
-            g.percent = N;
-            g.votes = Math.floor(N * M);
-            /* eslint-enable no-param-reassign */
-        });
-    });
-
-    calcStatePolls.forEach((f) => {
-        const state = e.states_json.find((g) => g.pk === f.state);
-        const O = state ? state.fields.electoral_votes : 0;
-        f.result.sort((a, b) => b.percent - a.percent);
+    // assign electoral votes
+    for (const st of calcStatePolls) {
+        const stateObj = stateById.get(st.state);
+        if (!stateObj) continue;
+        st.result.sort((a, b) => b.percent - a.percent);
+        const O = stateObj.fields.electoral_votes;
         const gameType = Number(e.game_type_id);
+
         if ([1, 3].includes(gameType)) {
-            if (state.fields.winner_take_all_flg === 1) {
-                f.result.forEach((g, idx) => {
-                    g.electoral_votes = idx === 0 ? O : 0;
-                });
+            if (stateObj.fields.winner_take_all_flg === 1) {
+                st.result.forEach((r, idx) => (r.electoral_votes = idx === 0 ? O : 0));
             } else {
-                const H = f.result.reduce((acc, g) => acc + g.votes, 0);
-                const L = Math.ceil((f.result[0].votes / H) * O * 1.25);
+                const H = st.result.reduce((a, b) => a + b.votes, 0) || 1;
+                const L = Math.ceil((st.result[0].votes / H) * O * 1.25);
                 const D = O - L;
-                f.result.forEach((g, idx) => {
-                    const h = g;
-                    switch (idx) {
-                        case 0:
-                            h.electoral_votes = L;
-                            break;
-                        case 1:
-                            h.electoral_votes = D;
-                            break;
-                        default:
-                            h.electoral_votes = 0;
-                    }
+                st.result.forEach((r, idx) => {
+                    r.electoral_votes = idx === 0 ? L : idx === 1 ? D : 0;
                 });
             }
-        }
-
-        if (gameType === 2) {
-            const V = f.result.map((g) => g.percent);
+        } else if (gameType === 2) {
+            const V = st.result.map((r) => r.percent);
             const q = divideElectoralVotesProp(V, O);
-            f.result.forEach((g, idx) => {
-                // eslint-disable-next-line no-param-reassign
-                g.electoral_votes = q[idx];
-            });
+            st.result.forEach((r, idx) => (r.electoral_votes = q[idx]));
         }
-    });
+    }
 
     if (e.primary_states) {
-        const primaryStates = JSON.parse(e.primary_states);
-        // Create a new copy of the primary states array using the spread operator
-        const primM = [...primaryStates].map((f) => f.state);
-
-        calcStatePolls.forEach((f) => {
-            if (primM.includes(f.state)) {
-                const indexOfed = primM.findIndex((state) => state === f.state);
-                // eslint-disable-next-line no-param-reassign
-                f.result = primaryStates[indexOfed].result;
+        try {
+            const primaryStates = JSON.parse(e.primary_states);
+            const primMap = new Map(primaryStates.map((ps) => [ps.state, ps.result]));
+            for (const st of calcStatePolls) {
+                if (primMap.has(st.state)) st.result = primMap.get(st.state);
             }
-        });
+        } catch {
+        }
     }
 
     if (t === 1) return calcStatePolls;
     if (t === 2) {
-        return calcStatePolls.map((f) => {
-            const res = f.result.map((candidate) => {
-                const G = 1 + randomNormal() * e.global_parameter_json[0].fields.global_variance;
-                return {
-                    ...candidate,
-                    result: candidate.result * G,
-                };
+        // apply fresh variance layer
+        return calcStatePolls.map((st) => {
+            const stateObj = stateById.get(st.state);
+            const popBase = stateObj
+                ? Math.floor(stateObj.fields.popular_votes * (0.95 + 0.1 * Math.random()))
+                : 0;
+            const varied = st.result.map((r) => {
+                const G = 1 + randomNormal() * gp.fields.global_variance;
+                return { ...r, result: r.result * G };
             });
-            const stateData = e.states_json.find((state) => state.pk === f.state);
-            const M = Math.floor(stateData.fields.popular_votes * (0.95 + 0.1 * Math.random()));
-            const total = res.reduce((acc, candidate) => acc + candidate.result, 0);
-            const N = res.map((candidate) => ({
-                ...candidate,
-                percent: candidate.result / total,
-                votes: Math.floor(candidate.percent * M),
-            }));
-            return {
-                ...f,
-                result: N,
-            };
+            const tot = varied.reduce((a, b) => a + b.result, 0) || 1;
+            varied.forEach((r) => {
+                r.percent = r.result / tot;
+                r.votes = Math.floor(r.percent * popBase);
+            });
+            return { ...st, result: varied };
         });
     }
 }
@@ -3923,7 +3943,7 @@ const gameStart = (a) => {
     document.getElementById("featured-mods-area").style.display = "none";
 
     const tempOptions = e.temp_election_list.map((election) => {
-        if (!election.is_premium || e.show_premium) {
+        if (election.is_premium === 0 || [1, true].includes(e.show_premium)) {
             return `<option value="${election.id}">${election.display_year}</option>`;
         }
 
