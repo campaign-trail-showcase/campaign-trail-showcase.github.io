@@ -2607,124 +2607,159 @@ function setStatePollText(s, t) {
 }
 
 function rFunc(t, i) {
-    for (var a = {}, s = 0; s < t.length; s++) {
-        const item = t[s];
-        // Find the result with the highest percent
-        const maxResult = Math.max(...item.result.map((r) => r.percent));
-        const winner = item.result.find((r) => r.percent === maxResult).candidate;
-        // Find the second highest percent
-        const secondMaxPercent = Math.max(
-            ...item.result
-                .filter((r) => r.percent !== maxResult)
-                .map((r) => r.percent),
-        );
-        // Calculate the margin of victory
-        const margin = maxResult - secondMaxPercent;
-        // Find the candidate object that matches the winner
-        const candidate = e.candidate_json.find((c) => c.pk === winner);
-        // Add the result to the map
-
-        const latest_oppo_visit = e.opponent_visits[e.opponent_visits.length - 1];
-        if (
-            e.game_type_id === "3"
-            && i == 1
-            && Object.values(latest_oppo_visit).includes(item.state)
-        ) {
-            let cand = Object.keys(latest_oppo_visit)[
-                Object.values(latest_oppo_visit).indexOf(item.state)
-                ];
-            cand = e.candidate_json.find((f) => f.pk === Number(cand));
-
-            a[item.abbr] = {
-                fill: candidate
-                    ? r2h(
-                        _interpolateColor(
-                            h2r("#000000"),
-                            _interpolateColor(
-                                h2r(cand.fields.color_hex),
-                                h2r(candidate.fields.color_hex),
-                                gradient(Math.log(margin + 1) * 4.5, 0, 1),
-                            ),
-                            gradient(0.7, 0, 1),
-                        ),
-                    )
-                    : null,
-            };
-        } else {
-            a[item.abbr] = {
-                fill: candidate
-                    ? r2h(
-                        _interpolateColor(
-                            h2r(campaignTrail_temp.margin_format),
-                            h2r(candidate.fields.color_hex),
-                            gradient(Math.log(margin + 1) * 4.5, 0, 1),
-                        ),
-                    )
-                    : null,
-            };
-        }
+    // pre-build candidate lookup
+    const candidateMap = new Map();
+    for (let cIdx = 0; cIdx < e.candidate_json.length; cIdx++) {
+        const cand = e.candidate_json[cIdx];
+        candidateMap.set(cand.pk, cand);
     }
 
-    const c = function (i, a) {
-        res = getLatestRes(t);
-        nn2 = res[0];
-        nnn = "";
+    // build abbreviation -> state index map
+    const abbrToStateIdx = new Map();
+    for (let s = 0; s < e.states_json.length; s++) {
+        abbrToStateIdx.set(e.states_json[s].fields.abbr, s);
+    }
 
-        vv = "";
+    // latest opponent visits (Sea to Shining Sea mode)
+    let latestVisitStates = null;
+    let stateToVisitor = null;
+    if (e.game_type_id === "3" && e.opponent_visits && e.opponent_visits.length) {
+        const latest_oppo_visit = e.opponent_visits[e.opponent_visits.length - 1] || {};
+        stateToVisitor = new Map();
+        Object.entries(latest_oppo_visit).forEach(([cand, st]) => stateToVisitor.set(st, Number(cand)));
+        latestVisitStates = new Set(stateToVisitor.values());
+    }
 
-        for (zzz = 0; zzz < nn2.length; zzz++) {
-            vv
-                += `<b>${nn2[zzz].fields.last_name
-            }</b> - ${(nn2[zzz].pvp * 100).toFixed(1)
-            }%<br>`;
-            if (nn3[zzz] > 0) {
-                nnn
-                    += `<b>${nn2[zzz].fields.last_name}</b> - ${nn3[zzz]}<br>`;
+    // build state colour object
+    const stateStylesSpecific = {};
+    for (let s = 0; s < t.length; s++) {
+        const item = t[s];
+        const results = item.result;
+
+        // single pass to find top two percents + winner candidate
+        let top1 = -Infinity;
+        let top2 = -Infinity;
+        let winnerCand = null;
+        for (let r = 0; r < results.length; r++) {
+            const { percent, candidate } = results[r];
+            if (percent > top1) {
+                top2 = top1;
+                top1 = percent;
+                winnerCand = candidate;
+            } else if (percent > top2) {
+                top2 = percent;
             }
         }
+        if (top2 === -Infinity) top2 = 0; // handle edge case 1 candidate
 
-        rrr = vv;
+        const margin = top1 - top2;
+        const candidate = candidateMap.get(winnerCand);
+        if (!candidate) continue;
+
+        const logMargin = Math.log(margin + 1) * 4.5;
+        const gradVal = gradient(logMargin, 0, 1);
+
+        let fillHex;
+        if (
+            e.game_type_id === "3" &&
+            i === 1 &&
+            stateToVisitor &&
+            [...stateToVisitor.values()].includes(item.state)
+        ) {
+            // Sea to Shining Sea + visit view
+            const visitorCandId = [...stateToVisitor.entries()]
+                .find(([, st]) => st === item.state)?.[0];
+            const visitorCand = candidateMap.get(Number(visitorCandId));
+            if (visitorCand) {
+                fillHex = r2h(
+                    _interpolateColor(
+                        h2r("#000000"),
+                        _interpolateColor(
+                            h2r(visitorCand.fields.color_hex),
+                            h2r(candidate.fields.color_hex),
+                            gradVal,
+                        ),
+                        gradient(0.7, 0, 1),
+                    ),
+                );
+            }
+        }
+        if (!fillHex) {
+            fillHex = r2h(
+                _interpolateColor(
+                    h2r(campaignTrail_temp.margin_format),
+                    h2r(candidate.fields.color_hex),
+                    gradVal,
+                ),
+            );
+        }
+
+        stateStylesSpecific[item.abbr] = { fill: fillHex };
+    }
+
+    // cache expensive aggregate once per map render
+    const latestRes = getLatestRes(t);
+    const latestCandidates = latestRes[0];
+    const evArray = latestCandidates.map((c) => c.evvs || 0);
+    const cachedVV = latestCandidates.map(
+        (c) => `<b>${c.fields.last_name}</b> - ${(c.pvp * 100).toFixed(1)}%<br>`,
+    ).join("");
+    const cachedNNN = latestCandidates.reduce((acc, c, idx) => {
+        if (evArray[idx] > 0) {
+            acc += `<b>${c.fields.last_name}</b> - ${evArray[idx]}<br>`;
+        }
+        return acc;
+    }, "");
+
+    // hover/click handler
+    const hoverHandler = function (_evt, data) {
+        nn2 = latestCandidates;
+        nn3 = evArray;
+        rrr = cachedVV;
+        nnn = cachedNNN;
         evestt = 0;
 
-        for (let s = 0; s < e.states_json.length; s++) {
-            if (e.states_json[s].fields.abbr == a.name) {
-                setStatePollText(s, t);
-                break;
-            }
+        const stIdx = abbrToStateIdx.get(data.name);
+        if (stIdx !== undefined) {
+            setStatePollText(stIdx, t);
         }
     };
-    const u = findFromPK(e.election_json, e.election_id);
-    if (i == 0) {
-        var v = {
-            stateStyles: {
-                fill: "transparent",
-            },
-            stateHoverStyles: {
-                fill: "transparent",
-            },
-            stateSpecificStyles: a,
-            stateSpecificHoverStyles: a,
-            click: c,
-            mouseover: c,
+
+    const electionIndex = findFromPK(e.election_json, e.election_id);
+
+    let config;
+    if (i === 0) {
+        config = {
+            stateStyles: { fill: "transparent" },
+            stateHoverStyles: { fill: "transparent" },
+            stateSpecificStyles: stateStylesSpecific,
+            stateSpecificHoverStyles: stateStylesSpecific,
+            click: hoverHandler,
+            mouseover: hoverHandler,
         };
-    }
-    if (i == 1) {
-        v = {
-            stateStyles: {
-                fill: "transparent",
-            },
-            stateHoverStyles: {
-                fill: "transparent",
-            },
-            stateSpecificStyles: a,
-            stateSpecificHoverStyles: a,
-            click(i, a) {
-                for (var s = 0; s < e.states_json.length; s++) {
-                    if (e.states_json[s].fields.abbr == a.name) {
-                        const n = `                    <div class="overlay" id="visit_overlay"></div>    \t            <div class="overlay_window" id="visit_window">                    \t<div class="overlay_window_content" id="visit_content">                    \t<h3>Advisor Feedback</h3>                    \t<img src="${e.election_json[u].fields.advisor_url
-                        }" width="208" height="128"/>                    \t<p>You have chosen to visit ${e.states_json[s].fields.name
-                        } -- is this correct?</p>                \t    </div>                    \t<div class="overlay_buttons" id="visit_buttons">                    \t<button id="confirm_visit_button">YES</button><br>                    \t<button id="no_visit_button">NO</button>                    \t</div>                \t</div>`;
-                        $("#game_window").append(n);
+    } else {
+        config = {
+            stateStyles: { fill: "transparent" },
+            stateHoverStyles: { fill: "transparent" },
+            stateSpecificStyles: stateStylesSpecific,
+            stateSpecificHoverStyles: stateStylesSpecific,
+            click(_evt, data) {
+                for (let s = 0; s < e.states_json.length; s++) {
+                    if (e.states_json[s].fields.abbr === data.name) {
+                        const overlayHtml =
+                            `<div class="overlay" id="visit_overlay"></div>
+                             <div class="overlay_window" id="visit_window">
+                                <div class="overlay_window_content" id="visit_content">
+                                    <h3>Advisor Feedback</h3>
+                                    <img src="${e.election_json[electionIndex].fields.advisor_url}" width="208" height="128"/>
+                                    <p>You have chosen to visit ${e.states_json[s].fields.name} -- is this correct?</p>
+                                </div>
+                                <div class="overlay_buttons" id="visit_buttons">
+                                    <button id="confirm_visit_button">YES</button><br>
+                                    <button id="no_visit_button">NO</button>
+                                </div>
+                             </div>`;
+                        $("#game_window").append(overlayHtml);
                         $("#confirm_visit_button").click(() => visitState(s, questionHTML, t));
                         $("#no_visit_button").click(() => {
                             $("#visit_overlay").remove();
@@ -2734,10 +2769,10 @@ function rFunc(t, i) {
                     }
                 }
             },
-            mouseover: c,
+            mouseover: hoverHandler,
         };
     }
-    return v;
+    return config;
 }
 
 /**
