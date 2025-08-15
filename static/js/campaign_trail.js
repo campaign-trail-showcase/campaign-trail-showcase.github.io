@@ -2204,9 +2204,9 @@ function renderOptions(electionId, candId, runId) {
             }
         });
         // define ONLY if not already defined - necessary for code 1 base switching gimmicks
-        e.election_id = e.election_id || electionId;
-        e.candidate_id = e.candidate_id || candId;
-        e.running_mate_id = e.running_mate_id || runId;
+        e.election_id ||= electionId;
+        e.candidate_id ||= candId;
+        e.running_mate_id ||= runId;
 
         e.opponents_list = opponents;
         e.game_type_id = gameTypeId.value;
