@@ -3769,10 +3769,11 @@ function A(t) {
                     result: 0,
                 };
             }
-            let score = candsIssueScores[r].issue_scores.reduce((acc, iss) => {
+            let score = candsIssueScores[r].issue_scores.reduce((acc, iss, idx) => {
                 const globalParam = e.global_parameter_json[0];
+                const candsFirstEntry = candsIssueScores[0].issue_scores[idx].issue;
                 const match = e.state_issue_score_json.find(
-                    (s) => s.fields.state === f.state && s.fields.issue === iss.issue,
+                    (s) => s.fields.state === f.state && s.fields.issue === candsFirstEntry,
                 );
 
                 let stateScore = 0;
