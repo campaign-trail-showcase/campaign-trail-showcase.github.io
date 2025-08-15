@@ -112,7 +112,7 @@ function activateCheatMenu() {
 function benefitChecker() {
   try {
     questionlength =
-      document.getElementById("question_form").children[0].children.length / 3;
+      document.querySelector("#question_form > form").length;
     let content = "";
     for (v = 0; v < questionlength; v++) {
       let benefitResult = benefitCheck(v);
@@ -139,12 +139,12 @@ function showBenefitChecker() {
 const targetNode = document.getElementById("game_window");
 const config = { attributes: true, childList: true, subtree: true };
 
-function onGameWindowChanged(mutationList, observer) {
+function renderBenefitChecker(mutationList, observer) {
   benefitChecker();
 }
 
-const observer = new MutationObserver(onGameWindowChanged);
-observer.observe(targetNode, config);
+const benefitObserver = new MutationObserver(renderBenefitChecker);
+benefitObserver.observe(targetNode, config);
 
 // https://www.w3schools.com/howto/howto_js_draggable.asp
 

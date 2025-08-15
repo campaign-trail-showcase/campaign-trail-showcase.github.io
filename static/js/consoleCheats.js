@@ -629,8 +629,13 @@ const useConsoleCheats = () => {
 
   function BOOST(candidate_name) {
     let candidate_pk;
+    let playerAndOpponents = [
+      ...new Set(
+        campaignTrail_temp.opponents_default_json.find((f) => f.election === e.election_id).candidates
+      ),
+    ];
     for (const cjson of campaignTrail_temp.candidate_json.filter(
-      (e) => e.fields.election === campaignTrail_temp.election_id,
+      (e) => playerAndOpponents.includes(e.pk),
     )) {
       const full_name = `${cjson.fields.first_name} ${cjson.fields.last_name}`;
       if (full_name.toLowerCase().includes(candidate_name.toLowerCase())) {
