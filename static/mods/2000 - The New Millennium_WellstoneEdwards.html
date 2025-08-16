@@ -22,7 +22,7 @@ campaignTrail_temp.questions_json = [
         "pk": 370,
         "fields": {
             "priority": 1,
-            "description": "It appears you have selected North Carolina Senator John Edwards as your running mate, this is contrary to a lot of speculation suggesting that you were going to pick someone who more resembled Clinton in home location and ideology. Edwards is a populist bulwark who can spread your message down south. Why did you choose Edwards?",
+            "description": "It appears you have selected North Carolina Senator John Edwards as your running mate, This substantiates the idea that you were going to pick someone close to Clinton in location, but definitely sharpens the distinctively populist edge of your campaign. Edwards is a populist bulwark who can spread your message down south. Why did you choose Edwards?",
             "likelihood": 1
         }
     },
@@ -4381,7 +4381,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 1001,
             "state": 184,
-            "state_multiplier": 1
+            "state_multiplier": 0.91
         }
     },
     {
@@ -4426,7 +4426,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 1001,
             "state": 189,
-            "state_multiplier": 0.95
+            "state_multiplier": 0.89
         }
     },
     {
@@ -4507,7 +4507,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 1001,
             "state": 198,
-            "state_multiplier": 0.922
+            "state_multiplier": 0.84
         }
     },
     {
@@ -4723,7 +4723,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 1001,
             "state": 222,
-            "state_multiplier": 0.964
+            "state_multiplier": 0.89
         }
     },
     {
@@ -6791,6 +6791,56 @@ campaignTrail_temp.answer_score_issue_json = [
             "issue_score": 0.7,
             "issue_importance": 2
         }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 1221196,
+        "fields": {
+            "answer": 3373,
+            "issue": 30,
+            "issue_score": 0.8,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 1221197,
+        "fields": {
+            "answer": 3372,
+            "issue": 30,
+            "issue_score": 0.6,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 1221198,
+        "fields": {
+            "answer": 3371,
+            "issue": 30,
+            "issue_score": -0.7,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 1221199,
+        "fields": {
+            "answer": 3370,
+            "issue": 30,
+            "issue_score": 0.2,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 1221203,
+        "fields": {
+            "answer": 12506,
+            "issue": "27",
+            "issue_score": -0.8,
+            "issue_importance": 3
+        }
     }
 ]
 
@@ -7735,7 +7785,7 @@ campaignTrail_temp.answer_score_state_json = [
         "pk": 12532,
         "fields": {
             "answer": 3488,
-            "state": 181,
+            "state": 218,
             "candidate": 1001,
             "affected_candidate": 1001,
             "state_multiplier": 0.014
@@ -7746,10 +7796,10 @@ campaignTrail_temp.answer_score_state_json = [
         "pk": 12533,
         "fields": {
             "answer": 3489,
-            "state": 181,
+            "state": 218,
             "candidate": 1001,
             "affected_candidate": 1001,
-            "state_multiplier": -0.0045
+            "state_multiplier": -0.006
         }
     },
     {
@@ -7837,7 +7887,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 195,
             "candidate": 1001,
             "affected_candidate": 1001,
-            "state_multiplier": -0.002
+            "state_multiplier": -0.006
         }
     },
     {
@@ -7848,7 +7898,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 194,
             "candidate": 1001,
             "affected_candidate": 1001,
-            "state_multiplier": -0.002
+            "state_multiplier": -0.006
         }
     },
     {
@@ -7878,7 +7928,7 @@ campaignTrail_temp.answer_score_state_json = [
         "pk": 12580,
         "fields": {
             "answer": 3372,
-            "state": 181,
+            "state": 189,
             "candidate": 1001,
             "affected_candidate": 1001,
             "state_multiplier": -0.065
@@ -7889,7 +7939,7 @@ campaignTrail_temp.answer_score_state_json = [
         "pk": 12581,
         "fields": {
             "answer": 3371,
-            "state": 181,
+            "state": 189,
             "candidate": 1001,
             "affected_candidate": 1001,
             "state_multiplier": 0.18
@@ -8178,7 +8228,51 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 198,
             "candidate": 1001,
             "affected_candidate": 1001,
-            "state_multiplier": 0.0045
+            "state_multiplier": 0.0033
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 1221195,
+        "fields": {
+            "answer": 3411,
+            "state": 184,
+            "candidate": 1001,
+            "affected_candidate": 1001,
+            "state_multiplier": 0.0033
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 1221200,
+        "fields": {
+            "answer": 3487,
+            "state": 218,
+            "candidate": 1001,
+            "affected_candidate": 1001,
+            "state_multiplier": -0.004
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 1221201,
+        "fields": {
+            "answer": 3487,
+            "state": 218,
+            "candidate": 1001,
+            "affected_candidate": 1001,
+            "state_multiplier": -0.004
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 1221202,
+        "fields": {
+            "answer": 3489,
+            "state": 215,
+            "candidate": 1001,
+            "affected_candidate": 1001,
+            "state_multiplier": -0.006
         }
     }
 ]
@@ -8352,7 +8446,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3411,
             "candidate": 1001,
-            "answer_feedback": "Vilsack is a fine choice for Vice President."
+            "answer_feedback": "Edwards is a fine choice for Vice President."
         }
     },
     {
@@ -8989,4 +9083,5 @@ style.textContent = `
 
 `;
 document.head.appendChild(style);
+
 
