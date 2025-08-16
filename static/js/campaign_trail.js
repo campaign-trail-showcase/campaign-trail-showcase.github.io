@@ -1,6 +1,6 @@
 /* global campaignTrail_temp, jQuery, $ */
 
-let e = campaignTrail_temp;
+e ||= campaignTrail_temp;
 e.skippingQuestion = false;
 
 async function evalFromUrl(url, callback = null) {
@@ -2204,9 +2204,9 @@ function renderOptions(electionId, candId, runId) {
             }
         });
         // define ONLY if not already defined - necessary for code 1 base switching gimmicks
-        e.election_id = e.election_id || electionId;
-        e.candidate_id = e.candidate_id || candId;
-        e.running_mate_id = e.running_mate_id || runId;
+        e.election_id ||= electionId;
+        e.candidate_id ||= candId;
+        e.running_mate_id ||= runId;
 
         e.opponents_list = opponents;
         e.game_type_id = gameTypeId.value;
@@ -3867,13 +3867,18 @@ function A(t) {
     });
 
     const baseStateList = candsStateMults[0].state_multipliers;
+    const baseIssues = (candsIssueScores[0] && candsIssueScores[0].issue_scores)
+        ? candsIssueScores[0].issue_scores.map((i) => i.issue)
+        : [];
     const calcStatePolls = baseStateList.map((smBase) => {
         const stateId = smBase.state;
         const result = candIdOpponents.map((candId, rIdx) => {
-            const issueScores = candsIssueScores[rIdx].issue_scores;
+            const issueScores = candsIssueScores[rIdx].issue_scores || [];
             let score = 0;
-            for (const iss of issueScores) {
-                const stKey = `${stateId}|${iss.issue}`;
+            for (let idx = 0; idx < issueScores.length; idx++) {
+                const iss = issueScores[idx];
+                const baseIssue = baseIssues[idx] ?? iss.issue;
+                const stKey = `${stateId}|${baseIssue}`;
                 const stEntry = stateIssueMap.get(stKey);
                 const stateScore = stEntry ? stEntry.score : 0;
                 const issueWeight = stEntry ? stEntry.weight : 1;
@@ -3883,9 +3888,7 @@ function A(t) {
                 score += gp.fields.vote_variable - Math.abs((S - E) * issueWeight);
             }
 
-            const sm = candsStateMults[rIdx].state_multipliers.find(
-                (m) => m.state === stateId,
-            );
+            const sm = candsStateMults[rIdx].state_multipliers.find((m) => m.state === stateId);
             const C = sm ? sm.state_multiplier : 0;
             score *= C;
             if (score < 0) score = 0;
@@ -3978,7 +3981,7 @@ const gameStart = (a) => {
     document.getElementById("featured-mods-area").style.display = "none";
 
     const tempOptions = e.temp_election_list.map((election) => {
-        if (election.is_premium === 0 || [1, true].includes(e.show_premium)) {
+        if (!election.is_premium || e.show_premium) {
             return `<option value="${election.id}">${election.display_year}</option>`;
         }
 
