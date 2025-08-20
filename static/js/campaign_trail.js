@@ -2621,13 +2621,12 @@ function rFunc(t, i) {
     }
 
     // latest opponent visits (Sea to Shining Sea mode)
-    let latestVisitStates = null;
     let stateToVisitor = null;
-    if (e.game_type_id === "3" && e.opponent_visits && e.opponent_visits.length) {
-        const latest_oppo_visit = e.opponent_visits[e.opponent_visits.length - 1] || {};
-        stateToVisitor = new Map();
-        Object.entries(latest_oppo_visit).forEach(([cand, st]) => stateToVisitor.set(st, Number(cand)));
-        latestVisitStates = new Set(stateToVisitor.values());
+    if (String(e.game_type_id) === "3" && Array.isArray(e.opponent_visits) && e.opponent_visits.length) {
+        const latestVisit = e.opponent_visits[e.opponent_visits.length - 1] || {};
+        stateToVisitor = new Map(
+            Object.entries(latestVisit).map(([candPk, statePk]) => [Number(statePk), Number(candPk)])
+        );
     }
 
     // build state colour object
@@ -2660,16 +2659,16 @@ function rFunc(t, i) {
         const gradVal = gradient(logMargin, 0, 1);
 
         let fillHex;
+
         if (
-            e.game_type_id === "3" &&
+            String(e.game_type_id) === "3" &&
             i === 1 &&
             stateToVisitor &&
-            [...stateToVisitor.values()].includes(item.state)
+            stateToVisitor.has(item.state)
         ) {
             // Sea to Shining Sea + visit view
-            const visitorCandId = [...stateToVisitor.entries()]
-                .find(([, st]) => st === item.state)?.[0];
-            const visitorCand = candidateMap.get(Number(visitorCandId));
+            const visitorCandId = stateToVisitor.get(item.state);
+            const visitorCand = candidateMap.get(visitorCandId);
             if (visitorCand) {
                 fillHex = r2h(
                     _interpolateColor(
@@ -2677,10 +2676,10 @@ function rFunc(t, i) {
                         _interpolateColor(
                             h2r(visitorCand.fields.color_hex),
                             h2r(candidate.fields.color_hex),
-                            gradVal,
+                            gradVal
                         ),
-                        gradient(0.7, 0, 1),
-                    ),
+                        0.7
+                    )
                 );
             }
         }
@@ -2689,8 +2688,8 @@ function rFunc(t, i) {
                 _interpolateColor(
                     h2r(campaignTrail_temp.margin_format),
                     h2r(candidate.fields.color_hex),
-                    gradVal,
-                ),
+                    gradVal
+                )
             );
         }
 
@@ -2702,7 +2701,7 @@ function rFunc(t, i) {
     const latestCandidates = latestRes[0];
     const evArray = latestCandidates.map((c) => c.evvs || 0);
     const cachedVV = latestCandidates.map(
-        (c) => `<b>${c.fields.last_name}</b> - ${(c.pvp * 100).toFixed(1)}%<br>`,
+        (c) => `<b>${c.fields.last_name}</b> - ${(c.pvp * 100).toFixed(1)}%<br>`
     ).join("");
     const cachedNNN = latestCandidates.reduce((acc, c, idx) => {
         if (evArray[idx] > 0) {
