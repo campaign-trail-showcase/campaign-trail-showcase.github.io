@@ -3958,10 +3958,20 @@ function A(t) {
         });
     }
 
-    if (t === 1) return calcStatePolls;
+    if (t === 1) {
+        try {
+            const latest = getLatestRes(calcStatePolls);
+            window.res = latest;
+            window.nn2 = latest[0];
+            window.nn3 = window.nn2.map((c) => c.evvs || 0);
+        } catch (err) {
+            // swallow to avoid mod breakage if getLatestRes fails early
+        }
+        return calcStatePolls;
+    }
 
     if (t === 2) {
-        return calcStatePolls.map((f) => {
+        const out = calcStatePolls.map((f) => {
             const res = f.result.map((candidate) => {
                 const G = 1 + randomNormal() * variance;
                 return { ...candidate, result: candidate.result * G };
@@ -3976,6 +3986,17 @@ function A(t) {
             }));
             return { ...f, result: N };
         });
+
+        try {
+            const latest = getLatestRes(out);
+            window.res = latest;
+            window.nn2 = latest[0];
+            window.nn3 = window.nn2.map((c) => c.evvs || 0);
+        } catch (err) {
+            // swallow to avoid mod breakage if getLatestRes fails early
+        }
+
+        return out;
     }
 }
 
