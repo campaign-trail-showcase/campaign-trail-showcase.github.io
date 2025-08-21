@@ -51,6 +51,8 @@ e.numberFormat = "en-US";
 
 e.code2Loaded = false;
 
+e.stateOpacity = 1;
+
 function substitutePlaceholders(str) {
     if (!str || typeof str !== "string") return str;
     return str.replace(/\{\{(.*?)}\}/g, (_, varName) => {
@@ -2693,7 +2695,7 @@ function rFunc(t, i) {
             );
         }
 
-        stateStylesSpecific[item.abbr] = { fill: fillHex };
+        stateStylesSpecific[item.abbr] = { fill: fillHex, 'fill-opacity': e.stateOpacity };
     }
 
     // cache expensive aggregate once per map render
@@ -2812,10 +2814,12 @@ function mapResultColor(time) {
         if (f.result_time <= time) {
             stateColor[f.abbr] = {
                 fill: s.fields.color_hex,
+                'fill-opacity': e.stateOpacity,
             };
         } else {
             stateColor[f.abbr] = {
                 fill: campaignTrail_temp.global_parameter_json[0].fields.default_map_color_hex,
+                'fill-opacity': e.stateOpacity,
             };
         }
     });
@@ -4105,7 +4109,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 campaignTrail_temp.margin_format,
             );
 
-            const pollingData = A(2);
+            const pollingData = e.current_results || A(2);
             const mapOptions = rFunc(pollingData, 0);
 
             $("#map_container").remove();
