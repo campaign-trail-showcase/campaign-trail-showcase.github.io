@@ -3697,15 +3697,15 @@ function A(t) {
         for (const item of (e.answer_score_global_json || [])) {
             const f = item.fields;
             const k = `${f.answer}|${f.candidate}|${f.affected_candidate}`;
-            if (!m.has(k)) m.set(k, item);
+            m.set(k, (m.get(k) || 0) + f.global_multiplier);
         }
         return m;
     })();
 
     const candsGAnsScores = candIdOpponents.map((candidate) => {
         const cumulScores = playerAnswers.reduce((total, answer) => {
-            const hit = asgIndex.get(`${answer}|${e.candidate_id}|${candidate}`);
-            return total + (hit ? hit.fields.global_multiplier : 0);
+            const key = `${answer}|${e.candidate_id}|${candidate}`;
+            return total + (asgIndex.get(key) || 0);
         }, 0);
 
         const base = (candidate === e.candidate_id && cumulScores < -0.4) ? 0.6 : 1 + cumulScores;
