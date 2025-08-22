@@ -2431,15 +2431,33 @@ function getLatestRes(t) {
                 const primaryMap = primaryStates.map((f) => f.state);
 
                 if (primaryMap.includes(state.state)) {
-                    allocation = dHondtAllocation(
+                    const allocation = dHondtAllocation(
                         state.result.map((f) => f.votes),
                         stateElectoralVotes,
-                        0.15,
+                        0.15
                     );
-                    candidate.evvs += allocation[candidateIndex];
+                    candidate.evvs += allocation[candidateIndex] || 0;
                 }
-            } else if (candidateIndex == 0 && !e.primary) {
-                candidate.evvs += stateElectoralVotes;
+            } else if (!e.primary) {
+                const gameType = Number(e.game_type_id);
+                const stJson = e.states_json[stateIndex];
+                const isWTA = stJson.fields.winner_take_all_flg === 1;
+
+                if (gameType === 2) {
+                    const q = divideElectoralVotesProp(
+                        state.result.map((f) => f.percent),
+                        stateElectoralVotes
+                    );
+                    candidate.evvs += q[candidateIndex] || 0;
+                } else if (isWTA) {
+                    if (candidateIndex === 0) candidate.evvs += stateElectoralVotes;
+                } else {
+                    const totalVotes = state.result.reduce((sum, cr) => sum + (cr.votes || 0), 0);
+                    const topVotes = state.result[0]?.votes || 0;
+                    const [L, D] = splitEVTopTwo(stateElectoralVotes, topVotes, totalVotes);
+                    if (candidateIndex === 0) candidate.evvs += L;
+                    else if (candidateIndex === 1) candidate.evvs += D;
+                }
             }
 
             candidate.popvs += candidateResult.votes;
