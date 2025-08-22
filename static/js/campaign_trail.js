@@ -618,6 +618,19 @@ function divideElectoralVotesProp(e, t) {
     return i;
 }
 
+function splitEVTopTwo(totalEV, topVotes, totalVotes) {
+    // round winner's share of EVs, clamp to [0, totalEV], and give remainder to runner-up
+    if (!Number.isFinite(totalEV) || totalEV <= 0) return [0, 0];
+    if (!Number.isFinite(topVotes) || !Number.isFinite(totalVotes) || totalVotes <= 0) {
+        // if we can't compute a share, fall back to giving all to winner
+        return [totalEV, 0];
+    }
+    let L = Math.round((topVotes / totalVotes) * totalEV);
+    L = Math.max(0, Math.min(totalEV, L));
+    const D = totalEV - L;
+    return [L, D];
+}
+
 const shining_menu = (polling) => {
     const game_winArr = Array.from($("#game_window")[0].children);
 
@@ -3923,19 +3936,11 @@ function A(t) {
                 });
             } else {
                 const H = f.result.reduce((acc, g) => acc + g.votes, 0);
-                const L = Math.ceil((f.result[0].votes / H) * O * 1.25);
-                const D = O - L;
+                const [L, D] = splitEVTopTwo(O, f.result[0].votes, H);
                 f.result.forEach((g, idx) => {
-                    switch (idx) {
-                        case 0:
-                            g.electoral_votes = L;
-                            break;
-                        case 1:
-                            g.electoral_votes = D;
-                            break;
-                        default:
-                            g.electoral_votes = 0;
-                    }
+                    if (idx === 0) g.electoral_votes = L;
+                    else if (idx === 1) g.electoral_votes = D;
+                    else g.electoral_votes = 0;
                 });
             }
         }
