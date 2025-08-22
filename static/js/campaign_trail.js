@@ -618,6 +618,19 @@ function divideElectoralVotesProp(e, t) {
     return i;
 }
 
+function splitEVTopTwo(totalEV, topVotes, totalVotes) {
+    // round winner's share of EVs, clamp to [0, totalEV], and give remainder to runner-up
+    if (!Number.isFinite(totalEV) || totalEV <= 0) return [0, 0];
+    if (!Number.isFinite(topVotes) || !Number.isFinite(totalVotes) || totalVotes <= 0) {
+        // if we can't compute a share, fall back to giving all to winner
+        return [totalEV, 0];
+    }
+    let L = Math.round((topVotes / totalVotes) * totalEV);
+    L = Math.max(0, Math.min(totalEV, L));
+    const D = totalEV - L;
+    return [L, D];
+}
+
 const shining_menu = (polling) => {
     const game_winArr = Array.from($("#game_window")[0].children);
 
@@ -2418,15 +2431,33 @@ function getLatestRes(t) {
                 const primaryMap = primaryStates.map((f) => f.state);
 
                 if (primaryMap.includes(state.state)) {
-                    allocation = dHondtAllocation(
+                    const allocation = dHondtAllocation(
                         state.result.map((f) => f.votes),
                         stateElectoralVotes,
-                        0.15,
+                        0.15
                     );
-                    candidate.evvs += allocation[candidateIndex];
+                    candidate.evvs += allocation[candidateIndex] || 0;
                 }
-            } else if (candidateIndex == 0 && !e.primary) {
-                candidate.evvs += stateElectoralVotes;
+            } else if (!e.primary) {
+                const gameType = Number(e.game_type_id);
+                const stJson = e.states_json[stateIndex];
+                const isWTA = stJson.fields.winner_take_all_flg === 1;
+
+                if (gameType === 2) {
+                    const q = divideElectoralVotesProp(
+                        state.result.map((f) => f.percent),
+                        stateElectoralVotes
+                    );
+                    candidate.evvs += q[candidateIndex] || 0;
+                } else if (isWTA) {
+                    if (candidateIndex === 0) candidate.evvs += stateElectoralVotes;
+                } else {
+                    const totalVotes = state.result.reduce((sum, cr) => sum + (cr.votes || 0), 0);
+                    const topVotes = state.result[0]?.votes || 0;
+                    const [L, D] = splitEVTopTwo(stateElectoralVotes, topVotes, totalVotes);
+                    if (candidateIndex === 0) candidate.evvs += L;
+                    else if (candidateIndex === 1) candidate.evvs += D;
+                }
             }
 
             candidate.popvs += candidateResult.votes;
@@ -3697,15 +3728,15 @@ function A(t) {
         for (const item of (e.answer_score_global_json || [])) {
             const f = item.fields;
             const k = `${f.answer}|${f.candidate}|${f.affected_candidate}`;
-            if (!m.has(k)) m.set(k, item);
+            m.set(k, (m.get(k) || 0) + f.global_multiplier);
         }
         return m;
     })();
 
     const candsGAnsScores = candIdOpponents.map((candidate) => {
         const cumulScores = playerAnswers.reduce((total, answer) => {
-            const hit = asgIndex.get(`${answer}|${e.candidate_id}|${candidate}`);
-            return total + (hit ? hit.fields.global_multiplier : 0);
+            const key = `${answer}|${e.candidate_id}|${candidate}`;
+            return total + (asgIndex.get(key) || 0);
         }, 0);
 
         const base = (candidate === e.candidate_id && cumulScores < -0.4) ? 0.6 : 1 + cumulScores;
@@ -3923,19 +3954,11 @@ function A(t) {
                 });
             } else {
                 const H = f.result.reduce((acc, g) => acc + g.votes, 0);
-                const L = Math.ceil((f.result[0].votes / H) * O * 1.25);
-                const D = O - L;
+                const [L, D] = splitEVTopTwo(O, f.result[0].votes, H);
                 f.result.forEach((g, idx) => {
-                    switch (idx) {
-                        case 0:
-                            g.electoral_votes = L;
-                            break;
-                        case 1:
-                            g.electoral_votes = D;
-                            break;
-                        default:
-                            g.electoral_votes = 0;
-                    }
+                    if (idx === 0) g.electoral_votes = L;
+                    else if (idx === 1) g.electoral_votes = D;
+                    else g.electoral_votes = 0;
                 });
             }
         }
