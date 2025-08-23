@@ -3710,7 +3710,14 @@ function A(t) {
     const playerAnswersSet = new Set(playerAnswers);
     const gameType = Number(e.game_type_id);
 
-    const candIdOpponents = [...new Set([e.candidate_id, ...(e.opponents_list || [])].filter((x) => Number(x)))];
+    const candIdOpponents = (() => {
+        const ids = new Set([e.candidate_id, ...(e.opponents_list || [])]);
+        (e.candidate_state_multiplier_json || []).forEach((row) => {
+            if (!row || row.model !== "campaign_trail.candidate_state_multiplier") return;
+            ids.add(Number(row.fields.candidate));
+        });
+        return Array.from(ids);
+    })();
 
     const stateFieldsByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields]));
     const stateAbbrByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields.abbr]));
