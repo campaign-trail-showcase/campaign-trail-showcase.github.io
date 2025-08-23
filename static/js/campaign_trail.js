@@ -3710,7 +3710,14 @@ function A(t) {
     const playerAnswersSet = new Set(playerAnswers);
     const gameType = Number(e.game_type_id);
 
-    const candIdOpponents = [...new Set([e.candidate_id, ...(e.opponents_list || [])].filter((x) => Number(x)))];
+    const candIdOpponents = (() => {
+        const ids = new Set([e.candidate_id, ...(e.opponents_list || [])]);
+        (e.candidate_state_multiplier_json || []).forEach((row) => {
+            if (!row || row.model !== "campaign_trail.candidate_state_multiplier") return;
+            ids.add(Number(row.fields.candidate));
+        });
+        return Array.from(ids);
+    })();
 
     const stateFieldsByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields]));
     const stateAbbrByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields.abbr]));
@@ -3728,7 +3735,7 @@ function A(t) {
         for (const item of (e.answer_score_global_json || [])) {
             const f = item.fields;
             const k = `${f.answer}|${f.candidate}|${f.affected_candidate}`;
-            m.set(k, (m.get(k) || 0) + f.global_multiplier);
+            if (!m.has(k)) m.set(k, f.global_multiplier);
         }
         return m;
     })();
