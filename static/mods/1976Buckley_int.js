@@ -1,0 +1,568 @@
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+  ]
+  
+  campaignTrail_temp.election_json = [
+      {
+          "model": "campaign_trail.election",
+          "pk": 10,
+          "fields": {
+              "year": 1976,
+              "summary": "<p>James L. Buckley seeks to secure another term for the Republicans while Jimmy Carter seeks to elevate his Georgian warmth and empathy to a White House reeling from scandal.<p><ul><li>Personally Populer, Jimmy Carter must needle his opponent on the Republican decade of shame while emphasizing the contrast between that and his personal reputation as the honest outsider.<li>Contending with a disunited party, and a poor economy, James Buckley must patch up old wounds and make a respectable defense of Conservative values.</p>",
+              "image_url": "https://i.imgur.com/ExsiVx6.jpeg",
+              "winning_electoral_vote_number": 270,
+              "advisor_url": "https://i.imgur.com/cPdcyrd.png",
+              "recommended_reading": "<p>Hi this is Ohas I hope you enjoyed this mod of mine. I read his memoir for this, Freedom at Risk, do highly recomend. Thanks to Catbox for her map used in the NBC setting (hope that caught some poor redittors of guard!). Heres a in-universe picture of the 2024 election where Buckley looses for you to enjoy!<br><br><img src='https://i.imgur.com/ajvoPz6.png' width='160px' height='200px'></p>",
+              "has_visits": 1,
+              "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
+              "creator": "Dan Bryan",
+              "display_year": "1976c"
+          }
+      }
+  ]
+  campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 91,
+        "fields": {
+            "first_name": "Jimmy",
+            "last_name": "Carter",
+            "election": 10,
+            "party": "Democrat",
+            "state": "Georgia",
+            "priority": 1,
+            "description": "<p>Henry \"Scoop\" Jackson has served as a senator of Washington State since 1953 and has firmly positioned himself as a traditional liberal, supporting higher Military Spending and Labor Rights.<p>With the national mood firmly against the Republicans, many would assume that Scoop would have a layup to the White House, but current events are hampering his bid such as his strong views in support of the military funding increases, which have stirred discontent with key parts of the Democratic base. He is also not a strong speaker, coming off as dull to many people.",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/L60pyjL.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 1976 Presidential Election.</h3><p>Hopefully you can make good on your promises to clean up Washington and change the political and moral culture of the country. If you are successful, there is no reason you cannot run for reelection in 1980. Just be wary of any economic problems, or of some foreign policy crisis that could dent your popularity.</p>",
+            "electoral_loss_message": "<div style='overflow-y:scroll;'><h3>Sorry, you have lost the 1976 Presidential Election.</h3><p>As an outsider candidate, this was really your moment to make an impact on American politics and to win a national election. The beltway gossip already has it that Ted Kennedy is the frontrunner for the 1980 nomination. Perhaps you can run again for Governor of Georgia, or make an impact in some other way.</p></div>",
+            "no_electoral_majority_message": "<h3>Wow! You have won in a squeaker.</h3><p>While the Electoral College ended in a tie, the Democrats have a huge advantage in the House of Representatives and are sure to elect you in that manner. Hopefully the closeness of this election doesn't undermine your promises to clean up Washington and unite the people of this country.</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+      "model": "campaign_trail.candidate",
+      "pk": 92,
+      "fields": {
+          "first_name": "James L.",
+          "last_name": "Buckley",
+          "election": 10,
+          "party": "Conservative-Republican",
+          "state": "New York",
+          "priority": 2,
+          "description": "<div style='overflow-y:scroll;'><p>A freshman senator from New York, James L. Buckley—the younger brother of Firing Line host William F. Buckley.—was elected on the Conservative Party ticket, narrowly edging out both Republican and Democratic opponents.<br><p>In the aftermath of the hotly contested Republican primaries between incumbent President Gerald Ford and challenger Ronald Reagan, which ended with Reagan narrowly defeating Ford, the Governor squandered his advantage by choosing the liberal Richard Schweiker as his running mate. In response, Buckley has been drafted—through the efforts of Jesse Helms—to represent the Conservative wing of the party, while also offering an olive branch to Ford, with the ultimate goal of uniting the party ahead of the November election.</p></div>",
+          "color_hex": "#FF0000",
+          "secondary_color_hex": "#FFA0A0",
+          "is_active": 1,
+          "image_url": "https://i.imgur.com/IidORKP.png",
+          "electoral_victory_message": "<h3>Congratulations! You have won the 1976 Presidential Election.</h3><p>After many long and stressful hours well into the night, with your staff anxiously analyzing returns from small towns all across the Midwest and other places, you have won. Congratulations!, you are now the next president of the United States. Despite the nightmare of Watergate, the resignation of Ford, and the troubles of your own campaign, you have beat back the Democrats to secure the third consecutive Republican administration, quite the accomplishment. It's likely Republicans have eked out slim majorities in the senate in the house, meaning you will have to navigate through your tenuous relationship with liberal republicans in both chambers to have any chance of success.<br><br>But none of that is on your mind now. Instead with Will and Ann at your side, you think of the great Conservatives of the past, Barry Goldwater, Governor Reagan, Taft, and now you: President James Buckley. It has a nice ring to it, you think to yourself. Soon enough now vice president Dole strides over to you, privately you hypothesize how much more you would have won by if he had just kept his lips shut, but that's beyond the point now.<br><br>The Conservative crusade to uphold the vision of this great nation's founders, a endevor taken up by Taft, Goldwater, Helms and Regean, Will and you, James, has won a great victory, you opine as you and Ann slink into bed.<br><br>You have beat the odds. Like the old regulars you have routed the British Force. But now, winning might have been easy, governing, that's sure to be harder. But for now, Good Speed President Buckley!</p>",
+          "electoral_loss_message": "<div style='overflow-y:scroll;'><h3>You have Lost the 1976 Presidential Election.</h3><p>It took many hours into the night, but alas finally, enough states fall to crown your opponent—James Earl Carter—the next president of the United States. Soon enough you call Carter to officially concede the race, in his typical Georgia empathy he wishes you well, you do the same. Its likely Democrats have retaken the senate, and the house. Bob Dole eventually makes his way to the huddled up corner you and Ann are occupying, to offer his condolences, and although you still harbor some animosity over his performance throughout the campaign, you accept his wishes with open arms. Eventually William strides over, and embraces you with the brotherly love that no election loss can erase. You stood with him after he lost his mayoral race, now he does the same with your, albeit much bigger, loss.<br><br>In no time at all William begins to cheer you up by looking on the positive side. After the scandals of Nixon, and the subsequent challenges of Ford, many had expected the election to be a rout, but you turned that all around to mount a respectable defense of conservative values. A couple of years ago you were but a newly minted New York senator—now, William says, you're an intrinsic part of American History.<br><br>Ann chimes in, opining on the likelihood of a Republican victory in four years time—and the role you will no doubt play in that future administration. After all, the challenges of 1970s America are tough stuff for anybody to manage, no matter their party,  may as well hand over the poisoned chalice to the Democrats. At this the three of you share a laugh, after which you and Ann greet and dismiss your remaining election night party gatherers, before making both your ways to bed. You rest at night admittedly sad at how close you got to taking a transformative place in American History, but happy that what really matters to you, will be right there for the taking when the sun dawns on a new day. The Conservative crusade to uphold the vision of this great nation's founders, a endevor taken up by Taft, Goldwater, Helms and Reagan, Will and you, James, has been dampened—yes—but not defeated, not at all. Liberty will continue to fight the state—and you will be at the vanguard fighting with her.</p></div>",
+          "no_electoral_majority_message": "<h3>Sorry, you have lost the 1976 Presidential Election.</h3><p>While the Electoral College ended in a tie, the Democrats have a huge advantage in the House of Representatives and are sure to elect your opponent in that manner. Perhaps you can still play a role in 1980, or seek your old Congressional leadership positions. In any case, you can still take solace in the fact that you did the right thing by pardoning Nixon and moving the country beyond the Watergate episode.</p>",
+          "description_as_running_mate": "''",
+          "candidate_score": 1,
+          "running_mate": false
+      }
+  },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 93,
+        "fields": {
+            "first_name": "Eugene",
+            "last_name": "McCarthy",
+            "election": 10,
+            "party": "Independent",
+            "state": "Minnesota",
+            "priority": 3,
+            "description": "''",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "''",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 94,
+        "fields": {
+            "first_name": "Roger",
+            "last_name": "MacBride/Others",
+            "election": 10,
+            "party": "Independent",
+            "state": "New York",
+            "priority": 4,
+            "description": "''",
+            "color_hex": "#FFFF00",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "''",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 95,
+        "fields": {
+            "first_name": "Wendell",
+            "last_name": "Ford",
+            "election": 10,
+            "party": "Democrat",
+            "state": "Kentucky",
+            "priority": 5,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/5X72rMw.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Wendell Ford is the new Senator from Kentucky, who won office while Governor. Ford is still an unknown figure on the national scene, and might not add too much to the ticket as a result. During his Gubernatorial term he pushed for educational reform and oversaw tax increases on natural resources.<p>Ford would allow you a unique edge in that he would allow to remain competetive in both the Midwest and the Upper South, due to the geographic location of Kentucky. However, murmurs have been growing about the way that Ford ascended to the Senate while Governor.",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 96,
+        "fields": {
+            "first_name": "Dolph",
+            "last_name": "Briscoe",
+            "election": 10,
+            "party": "Democrat",
+            "state": "Texas",
+            "priority": 6,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/hWdtZsh.pngww.jetsimon.com/public/static/images/frank-church-1976.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Dolph Briscoe is the current Governor of Texas. He was swept into office on a reformist platform and implemented sweeping changes to the state's government such as revising the state's outdated penal code following the Sharpstown scandals. His resume so far includes expanding benefits for the mentally challenged, and increasing benefits for farmers.<p>Being from Texas, he would help you immensely in that state. Dolph does lack greater name recognition outside of Texas though, meaning that his efforts anywhere outside would be hampered.",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 97,
+        "fields": {
+            "first_name": "Russell",
+            "last_name": "Long",
+            "election": 10,
+            "party": "Democrat",
+            "state": "Louisiana",
+            "priority": 7,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/UOEdxXE.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Russell Long is the influential Senator from Louisiana and a member of the influential \"Long Family\" that dominates that Louisiana state politics. He has served as Senator since 1948 and is the chair of the influential Senate Finance Committee. He was an ally of Lyndon B. Johnson and his economic programs, despite opposition from his colleagues down south.<p>Being a Southerner, he hosts a complicated history on Civil Rights, and while he signed the Southern Manifesto, he has since renounced his previous views. Long would for better or worse cement yourself as an insider candidate, which could complicate your candidacy due to the \"Anti-Establishment\" mood the country holds following Watergate.",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 98,
+        "fields": {
+            "first_name": "Adlai",
+            "last_name": "Stevenson III",
+            "election": 10,
+            "party": "Democrat",
+            "state": "Illinois",
+            "priority": 8,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/4DLWnGm.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Adlai Stevenson III is one of the senators from Illinois and is something of political royalty there. He remained out of the primaries this year and would soften your stances on a lot of issues, which would be good or bad depending on your strategy. Many within the Democratic Party are pushing for Stevenson III's inclusion on the ticket as a way to balance out your more conservative viewpoints.<p>Compared to your service, however, Stevenson III comes off as very new, and his rather quiet attitude would further compound this issue. Illinois would be in play should he be picked.",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+      "model": "campaign_trail.candidate",
+      "pk": 99,
+      "fields": {
+          "first_name": "Bob",
+          "last_name": "Dole",
+          "election": 10,
+          "party": "Republican",
+          "state": "Kansas",
+          "priority": 9,
+          "description": "''",
+          "color_hex": "#FF0000",
+          "secondary_color_hex": "#FFA0A0",
+          "is_active": 0,
+          "image_url": "https://i.imgur.com/C9otcnw.png",
+          "electoral_victory_message": "''",
+          "electoral_loss_message": "''",
+          "no_electoral_majority_message": "''",
+          "description_as_running_mate": "<p>Bob Dole is a fairly uncontroversial senator from Kansas. Before then he served as chairman of the RNC. Until President Ford lost the nomination at the convention he was slated to replace Rockefeller on the ticket. Dole could help unite the Reagan and Ford wings together, while also bolstering support in the Farm Belt. He’s also known for his scathing one-liners on the campaign trail.</p>",
+          "candidate_score": 0,
+          "running_mate": true
+      }
+  },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 100,
+        "fields": {
+            "first_name": "Howard",
+            "last_name": "Baker",
+            "election": 10,
+            "party": "Republican",
+            "state": "Tennessee",
+            "priority": 10,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/howard-baker-1976.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Howard Baker is a Senator from Tennessee who has served since 1967, and who was nearly appointed to the Supreme Court by Richard Nixon. The first Republican since Reconstruction to be elected to the Senate from his state, he is heavily involved in the passage of most legislation, and is a leading voice among Congressional Republicans. He has a moderate reputation, and is not a first choice of the Reaganites.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 101,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Anderson",
+            "election": 10,
+            "party": "Republican",
+            "state": "Illinois",
+            "priority": 11,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/john-anderson-1976.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>John Anderson is a long-time Congressman from Illinois who has conservative fiscal views, moderate social views, and was a strong critic of Richard Nixon during the Watergate hearings. His presence could help win moderates and could swing the state of Illinois. He could also help mitigate, at least somewhat, against Carter's outsider reputation. He would not do much to win back the conservative, Reaganite wing of the party.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 102,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Connally",
+            "election": 10,
+            "party": "Republican",
+            "state": "Texas",
+            "priority": 12,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/john-connally-1968.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>John Connally bolted from the Democrats to the Republicans in 1973. He was Governor of Texas for six years, and could help greatly in winning that state. He is strong on defense issues and conservative on social issues, and could even be seen as an olive branch to the Reaganites. He has good name-recognition, having been wounded in Kennedy's assassination.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 103,
+        "fields": {
+            "first_name": "...",
+            "last_name": "Other",
+            "election": 10,
+            "party": "Independent",
+            "state": "Alaska",
+            "priority": 13,
+            "description": "''",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "''",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 104,
+        "fields": {
+            "first_name": "...",
+            "last_name": "Other",
+            "election": 10,
+            "party": "Independent",
+            "state": "Alaska",
+            "priority": 14,
+            "description": "''",
+            "color_hex": "#FFFF00",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "''",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50000,
+        "fields": {
+            "first_name": "Augustus",
+            "last_name": "Hawkins",
+            "election": 10,
+            "party": "Democrat",
+            "state": "California",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/1PS0dLO.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>Augustus Hawkins is a congressman from California, having served since 1963. Hawkins would no doubt make history as the first African-American on a national party's ticket, which could energize mainstream liberal support for your candidacy. He has been a key advocate in fighting racist discrimination in practices such as construction.<p>Hawkins would most likely create more controversy than it's worth, as a black man on a national ticket would destroy the ticket's chances in the south, even if Hawkins looks more light-skinned. However, if your goal is to move the Democratic party away from the old traditional ways of the South, then go ahead. He wouldn't offer any geographic balance either.",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    }
+  ]
+  
+  campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 62,
+        "fields": {
+            "candidate": 92,
+            "running_mate": 99
+        }
+    },
+  ]
+  
+  campaignTrail_temp.credits = "Ohas"
+  
+  campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 10,
+        "candidates": [
+            91,
+            92,
+            93,
+            94
+        ]
+    }
+  ]
+  
+  campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 10,
+        "candidates": [
+            91,
+            92,
+            93,
+            94
+        ]
+    }
+  ]
+  
+  campaignTrail_temp.temp_election_list = [
+    {
+        "id": 10,
+        "year": 1976,
+        "is_premium": 0,
+        "display_year": "1976 Buckley"
+    }
+  ]
+  campaignTrail_temp.modBoxTheme = {
+    "header_color": "#bfe6ff",
+    "header_text_color": "#000000",
+    "description_text_color": "#000000",
+    "description_background_color": "#e8fbff",
+    "main_color": "#bfe6ff",
+    "secondary_color": "#700016",
+    "ui_text_color": "#FFFFFF"
+}
+  
+  jet_data = {
+    "headerColor": "#700016",
+    "windowColor": "#BFE6FF",
+    "containerColor": "#FFFFFF",
+    "innerWindowColor": "#E8FBFF",
+    "bannerImageUrl": "https://i.imgur.com/1AJXMZZ.pngsimon.com/public/placeholderbanner.png",
+    "backgroundImageUrl": "https://i.imgur.com/sxbbJcW.png/coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg",
+    "endingTextColor": "#000000",
+    "customQuote": ""
+  }
+  
+  //#startcode
+  
+  campaignTrail_temp.modBoxTheme = {
+    "header_color": "#bfe6ff",
+    "header_text_color": "#000000",
+    "description_text_color": "#000000",
+    "description_background_color": "#e8fbff",
+    "main_color": "#bfe6ff",
+    "secondary_color": "#700016",
+    "ui_text_color": "#FFFFFF"
+  }
+  
+  const gameWindowNode = document.getElementById("game_window");
+  const candidateWatcherConfig = { attributes: true, childList: true, subtree: true };
+  
+  const candidateObserver = new MutationObserver(onGameWindowFixHistorical);
+  candidateObserver.observe(gameWindowNode, candidateWatcherConfig);
+  
+  // the wrapper here is the same that makes sure your music player doesn't exist twice basically
+  if(!campaignTrail_temp.observer){
+  
+    campaignTrail_temp.observer = true
+  
+    // Define the MutationObserver
+    let masterObserver = new MutationObserver(masterFunction);
+    function masterFunction() {
+        masterObserver.disconnect();
+  
+        addBunnyhopDropdown();
+  
+        masterObserver.observe(document.body, { childList: true, subtree: true });
+    }
+  
+    // Start observing the document with the master observer
+    masterObserver.observe(document.body, { childList: true, subtree: true });
+  }
+  
+  
+  document.body.style.backgroundColor = "#bfe6ff";
+  document.body.background = "";
+  $(".container")[0].style.backgroundColor = "#fff";
+  nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#700016";
+  document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+  nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#e8fbff";
+  $("#site_credits a").css({"color":"#0066cc"});
+  document.styleSheets[0].insertRule(".game_header{ height:4.1em !important;}", 0);
+  document.styleSheets[0].insertRule("#game_window{ height:41em !important;}", 0);
+  document.getElementById("inner_window_1").children[1].innerHTML = `  <li>Select a year and a candidate to find out.</li>  <li>You will answer questions about your platform and positions, and also about your campaign strategy.</li>  <li>The answers will affect your popularity for better or worse, both nationally and in individual states.</li>  <li>Walk the fine line between appealing to your base and winning a majority of the votes.</li>`
+  document.styleSheets[0].insertRule(".inner_window_w_desc{ margin:1em 1em 0 !important;padding-top: 0.5em !important;}", 0);
+  document.styleSheets[0].insertRule(".inner_window_question{ margin:1em 1em .7em !important;padding-top: 0.3em !important;}", 0);
+  document.styleSheets[0].insertRule("#main_content_area { height:82% !important;}", 0);
+  
+  function onGameWindowFixHistorical() {
+    const resultsTableHolder = document.getElementById("overall_details_container");
+  
+    if(!resultsTableHolder || resultsTableHolder.classList.contains("done")) {
+        return;
+    }
+  
+    resultsTableHolder.classList.add("done");
+    document.getElementById("overall_details_container").children[2].children[5].remove()
+    document.getElementById("overall_details_container").children[2].children[4].remove()
+    document.getElementById("overall_details_container").children[2].children[3].style.marginBottom = "0.4em"
+    console.log("DANXV FIX YOUR CODE")
+  }
+  
+  //shamelessly stole Daylight's code please don't sue me
+  
+  $(".footer a").css({"color":"#ffffff"});
+  nct_stuff.themes[nct_stuff.selectedTheme].text_col = "#ffffff"
+  
+  let style = document.createElement('style');
+  style.type = 'text/css';
+  style.id = 'dynamic-style';
+  
+  style.innerHTML = `
+  .campaign_trail_start_emphasis {
+    background-color: #000000;
+  }
+  a:-webkit-any-link {
+      color: #000000;
+  }
+  `;
+  
+  RecReading = true
+  
+  HistHexcolour=["#0000FF","#FF0000","#00C100","#FFFF00"]; 
+  HistName=["Jimmy Carter","James L. Buckley","Eugene McCarthy","Roger MacBride"]; 
+  HistEV=[350,188,0,0]; 
+  HistPV=["42,750,000","36,150,000","2,400,000","850,000"]; 
+  HistPVP=["52.0%","44.0%","3.0%","1.0%"];
+  
+  corrr=`\n<h2>THE CAMPAIGN TRAIL</h2>`
+  
+  nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#700016";
+  
+  nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#BFE6FF";
+  
+  document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+  
+  $("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+  
+  $(".container")[0].style.backgroundColor = "#FFFFFF";
+  
+  document.getElementById("header").src = "https://i.imgur.com/6E6cJB5.jpeg";
+  
+  document.body.background = "https://i.imgur.com/sxbbJcW.png/coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg";
+  
+  document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#E8FBFF!important;}</style>";
+  
+  //#endcode
