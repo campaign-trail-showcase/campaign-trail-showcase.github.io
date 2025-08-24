@@ -3860,13 +3860,15 @@ function A(t) {
             }
 
             let boost = 0;
-            if (idx === 0 && e.running_mate_state_id === state) {
-                boost += 0.004 * mult.state_multiplier;
-            }
 
-            const visits = visitCountByState.get(state) || 0;
-            if (visits > 0) {
-                boost += visits * 0.005 * Math.max(0.1, mult.state_multiplier) * shiningVisitMult;
+            if (idx === 0) {
+                if (e.running_mate_state_id === state) {
+                    boost += 0.004 * mult.state_multiplier;
+                }
+                const visits = visitCountByState.get(state) || 0;
+                if (visits > 0) {
+                    boost += visits * 0.005 * Math.max(0.1, mult.state_multiplier) * shiningVisitMult;
+                }
             }
 
             mult.state_multiplier += w + boost;
