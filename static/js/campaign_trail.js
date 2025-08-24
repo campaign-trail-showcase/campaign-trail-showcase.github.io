@@ -3833,7 +3833,7 @@ function A(t) {
             const p = g.fields.state_multiplier
                 * candsGAnsScores[idx].global_multiplier
                 * (1 + rand * variance);
-            return { state: g.fields.state, state_multiplier: p };
+            return { state: Number(g.fields.state), state_multiplier: p };
         }).sort((a, b) => a.state - b.state);
 
         return { candidate_id: candId, state_multipliers: stateMults };
