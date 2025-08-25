@@ -1227,7 +1227,7 @@ function questionHTML() {
     const ansArr = shuffle(
         e.answers_json
             .map((f, idx) => ({ f, idx }))
-            .filter(({ f }) => Number(f.fields.question) === Number(e.questions_json[e.question_number].pk))
+            .filter(({ f }) => String(f.fields.question) === String(e.questions_json[e.question_number].pk))
             .slice(0, e.answer_count)
             .map(({ idx }) => ({
                 key: idx,
