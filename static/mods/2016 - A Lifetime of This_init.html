@@ -1,7 +1,7 @@
  /*
  * @title: 2016: A Lifetime of This / 2016b / The Hillary Trail
  * @author: StrawberryMaster & Friends
- * @version: 1.0.8
+ * @version: 1.0.9
  * @description: The 2016 election in the eyes of Hillary Clinton (and a couple of others, too)
  * 
  * Coding license: Apache License 2.0
@@ -853,6 +853,13 @@ function appendStyle() {
 			#ending-stats-container > div#difficulty_mult, #ending-stats-container > div#map_footer {
 				text-align: center;
 			}
+			.button_container {
+			    display: flex;
+			    gap: 20px;
+			    left: 13px;
+			    top: 365px;
+			    position: absolute;
+			}
 			
 			/* Cheat menus/benefit check window - because people *are* gonna use this, you know? */
 			#benefitwindow {
@@ -974,6 +981,33 @@ function appendStyle() {
 				}
             }
 			
+			@media only screen and (max-width: 768px) {
+				#map_footer {
+                    display: block !important;
+					font-size: 15px !important;
+                    padding: 1em !important;
+				}
+				#map_footer button {
+					margin: 3px !important;
+				}
+				
+				#recommended_reading_box .ftab, #recommended_reading_box .ftab-active {
+					height: 50px !important;
+					width: 150px !important;
+				}
+				
+				#game_window:has(#main_content_area_reading), #game_window > #main_content_area_reading {
+					height: auto;
+				}
+				
+				.button_container {
+				  left: 23px !important;
+				  top: 385px !important;
+				}
+				#recommended_reading_box #tab-select {
+					height: 50px !important;
+				}
+   			}
         `;
         document.head.appendChild(style);
     }
@@ -1017,7 +1051,8 @@ appendStyle();
         <img src=\"${imageSrc}\" alt=\"Image\" style=\"object-fit: cover; object-position: center; width: auto\" />
       </div>
     <p>
-	  Writer Kenneth Rexroth once said that, when younger, you would expect that, someday, you would
+	  Writer Kenneth Rexroth <a href="https://www.bopsecrets.org/rexroth/henrymiller.htm" target="_blank">once said that</a>,
+	  when younger, you would expect that, someday, you would
 	  grow up and find a world of real adults — the people who ran things with ease, efficiency, the
 	  perfect members of society. But these people never existed, and never will exist. Instead, you
 	  would find yourself in a world full of tall children, some more and some less tall than others.
@@ -1048,7 +1083,7 @@ appendStyle();
 // Credits button
 (function() {
     const creditsList = [
-        "Spacecowboyguy, for creating banners for Booker and Patrick",
+        "Spacecowboyguy, for creating banners for Booker, Patrick, and other running mates",
 		"majorspud and metheguythesecond, for suggesting achievements for this scenario",
         "Many others for lending feedback on questions & in-game mechanics",
         "and many others who shared their feedback along the way!"
