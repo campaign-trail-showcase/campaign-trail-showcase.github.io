@@ -1113,32 +1113,17 @@ const useConsoleCheats = () => {
     terminalBody.scrollTop(terminalBody.prop("scrollHeight"));
   }
 
-  const ORIGINAL_GLOBAL_VARIANCE =
-    e.global_parameter_json[0].fields.global_variance;
+  // const ORIGINAL_GLOBAL_VARIANCE = e.global_parameter_json[0].fields.global_variance;
+  const ORIGINAL_MARSAGLIA = randomNormal;
   let optrng_enabled = false;
   function set_optimal_rng(enabled) {
     if (enabled && !optrng_enabled) {
-      e.global_parameter_json[0].fields.global_variance = 0;
-      add_global_modifier(e.candidate_id, 0.025);
-      for (const state_pk of e.states_json.map((e) => e.pk)) {
-        cmt_set(
-          e.candidate_id,
-          state_pk,
-          cmt_get(e.candidate_id, state_pk) - 0.05,
-        );
-      }
+      // e.global_parameter_json[0].fields.global_variance = 0;
+      randomNormal = (cand) => cand === e.candidate_id ? 3 : -3; // Values beyond 3 are rare
       optrng_enabled = true;
     } else if (!enabled && optrng_enabled) {
-      e.global_parameter_json[0].fields.global_variance =
-        ORIGINAL_GLOBAL_VARIANCE;
-      add_global_modifier(e.candidate_id, -0.05);
-      for (const state_pk of e.states_json.map((e) => e.pk)) {
-        cmt_set(
-          e.candidate_id,
-          state_pk,
-          cmt_get(e.candidate_id, state_pk) + 0.05,
-        );
-      }
+      // e.global_parameter_json[0].fields.global_variance = ORIGINAL_GLOBAL_VARIANCE;
+      randomNormal = ORIGINAL_MARSAGLIA;
       optrng_enabled = false;
     }
   }
