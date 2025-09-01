@@ -170,11 +170,17 @@ let states = [];
 const initIt = 0;
 
 function fileExists(url) {
-    const req = new XMLHttpRequest();
-    req.open("GET", url, false);
-    console.log(`trying to get file from url ${url}`);
-    req.send();
-    return req.status === 200;
+    return fetch(url, { method: "HEAD", cache: "no-store" })
+        .then((res) => {
+            if (res.ok) return true;
+            if (res.status === 405 || res.status === 501) {
+                return fetch(url, { method: "GET", cache: "no-store" })
+                    .then((r2) => r2.ok)
+                    .catch(() => false);
+            }
+            return false;
+        })
+        .catch(() => false);
 }
 
 lastUpdatedDate = "2023-08-20";
@@ -2342,18 +2348,27 @@ function renderOptions(electionId, candId, runId) {
 
                     endingUrl = `../static/mods/${theorId}_ending.html`;
 
-                    try {
-                        if (fileExists(endingUrl)) {
-                            const client2 = new XMLHttpRequest();
-                            client2.open("GET", endingUrl);
-                            client2.onreadystatechange = function () {
-                                important_info = client2.responseText;
-                            };
-                            client2.send();
-                        }
-                    } catch (err) {
-                        console.error("Error loading code 2", err);
-                    }
+                    fileExists(endingUrl)
+                        .then((exists) => {
+                            if (!exists) {
+                                console.info(`No legacy ending file found for ${theorId}, skipping`);
+                                return;
+                            }
+                            return fetch(endingUrl, { cache: "no-store" })
+                                .then((resp) => {
+                                    if (!resp.ok) throw new Error(`Failed to fetch ${endingUrl}: ${resp.status}`);
+                                    return resp.text();
+                                })
+                                .then((text) => {
+                                    important_info = text;
+                                })
+                                .catch((err) => {
+                                    console.error("Error loading code 2", err);
+                                });
+                        })
+                        .catch((err) => {
+                            console.error("Error checking file existence", err);
+                        });
                 });
             } catch (err) {
                 console.error("Error loading code 2", err);
