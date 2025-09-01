@@ -1909,7 +1909,7 @@ function answerEffects(t) {
     const numCand = Number(e.candidate_id);
 
     debugConsole(`Applying answer effects for answer pk ${t}`);
-    e.player_answers.push(numT);
+    e.player_answers.push(t);
     // const electIndex = findFromPK(e.election_json, e.election_id);
     const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     if (e.answer_feedback_flg === 1) {
