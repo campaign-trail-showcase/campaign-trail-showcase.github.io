@@ -1908,17 +1908,19 @@ function answerEffects(t) {
     const numT = Number(t);
     const numCand = Number(e.candidate_id);
 
+    const tToUse = typeof t === 'string' && Number.isNaN(numT) ? t : numT;
+
     debugConsole(`Applying answer effects for answer pk ${t}`);
-    e.player_answers.push(t);
+    e.player_answers.push(tToUse);
     // const electIndex = findFromPK(e.election_json, e.election_id);
     const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     if (e.answer_feedback_flg === 1) {
         const hasFeedback = e.answer_feedback_json.some(
-            (f) => f.fields.answer === numT && f.fields.candidate === numCand,
+            (f) => f.fields.answer === tToUse && f.fields.candidate === numCand,
         );
         if (hasFeedback) {
             const feedback = e.answer_feedback_json.find(
-                (f) => f.fields.answer === numT && f.fields.candidate === numCand,
+                (f) => f.fields.answer === tToUse && f.fields.candidate === numCand,
             );
             const n = `
                 <div class="overlay" id="visit_overlay"></div>
