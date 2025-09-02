@@ -3517,8 +3517,8 @@ function overallDetailsHtml() {
     const base_url = urlParts[2];
     const game_url = e.game_id ? `https://${base_url}/games/viewGame.html#${e.game_id}` : null;
 
-    const spaceFunction = (name) => name.startsWith(' ') || name.startsWith('⠀'); // Braille pattern blank (TTNW space in historical results)
-    const spaceToUse = HistName.find(spaceFunction)?.[0] ?? ' ';
+    const spaceFunction = (name) => /^[\s\u2800]/.test(name); // Braille pattern blank (TTNW space in historical results)
+    const spaceToUse = HistName.find(spaceFunction)?.match(/^[\s\u2800]+/)?.[0] ?? ' ';
 
     const histRes = HistName.map((name, i) => {
         const hasSpace = spaceFunction(name);
