@@ -3545,16 +3545,24 @@ function overallDetailsHtml() {
     const base_url = urlParts[2];
     const game_url = e.game_id ? `https://${base_url}/games/viewGame.html#${e.game_id}` : null;
 
-    const histRes = HistName.map((name, i) => `
-        <tr>
-            <td style="text-align: left;">
-                <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span>${name}
-            </td>
-            <td>${HistEV[i]}</td>
-            <td>${HistPV[i]}</td>
-            <td>${HistPVP[i]}</td>
-        </tr>
-    `).join("").trim();
+    const spaceFunction = (name) => /^[\s\u2800]/.test(name); // Braille pattern blank (TTNW space in historical results)
+    const spaceToUse = HistName.find(spaceFunction)?.match(/^[\s\u2800]+/)?.[0] ?? ' ';
+
+    const histRes = HistName.map((name, i) => {
+        const needsSpace = !(name === "" || spaceFunction(name));
+        const nameToUse = needsSpace ? `${spaceToUse}${name}` : name;
+
+        return `
+            <tr>
+                <td style="text-align: left;">
+                    <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span>${nameToUse}
+                </td>
+                <td>${HistEV[i]}</td>
+                <td>${HistPV[i]}</td>
+                <td>${HistPVP[i]}</td>
+            </tr>
+        `
+    }).join("").trim();
 
     document.getElementById("game_window").innerHTML = `
         <div class="game_header">${corrr}</div>
@@ -3564,7 +3572,7 @@ function overallDetailsHtml() {
                 <div id="overall_election_details">
                     <h4>Results - This Game</h4>
                     <table>
-                    <tbody>
+                        <tbody>
                             <tr>
                                 <th>Candidate</th>
                                 <th>Electoral Votes</th>
