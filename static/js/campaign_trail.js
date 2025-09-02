@@ -3521,8 +3521,8 @@ function overallDetailsHtml() {
     const spaceToUse = HistName.find(spaceFunction)?.match(/^[\s\u2800]+/)?.[0] ?? ' ';
 
     const histRes = HistName.map((name, i) => {
-        const hasSpace = spaceFunction(name);
-        const nameToUse = hasSpace ? name : `${spaceToUse}${name}`;
+        const needsSpace = !(name === "" || spaceFunction(name));
+        const nameToUse = needsSpace ? `${spaceToUse}${name}` : name;
 
         return `
             <tr>
