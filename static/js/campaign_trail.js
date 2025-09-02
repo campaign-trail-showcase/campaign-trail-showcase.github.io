@@ -2657,6 +2657,19 @@ function setStatePollText(s, t) {
 }
 
 function rFunc(t, i) {
+    // some flows store e.current_results as [getLatestRes(a)[0], a]. if passed here directly,
+    // t[0] will not have a `result` field, causing errors, so we need to detect and fix that
+    if (!Array.isArray(t) || (Array.isArray(t) && t.length > 0 && (t[0] == null || typeof t[0] !== "object" || !("result" in t[0])))) {
+        if (Array.isArray(t) && t.length === 2 && Array.isArray(t[1]) && t[1].length && t[1][0] && typeof t[1][0] === "object" && ("result" in t[1][0])) {
+            t = t[1];
+        } else {
+            try {
+                t = A(2);
+            } catch (_err) {
+                t = [];
+            }
+        }
+    }
     // pre-build candidate lookup
     const candidateMap = new Map();
     for (let cIdx = 0; cIdx < e.candidate_json.length; cIdx++) {
@@ -4118,6 +4131,36 @@ document.getElementById("skip_to_final")?.addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+    // used to change the map gradient colors
+    function updateUsMapStyles(config) {
+        const $map = $("#map_container");
+        const plugin = $map.data("plugin-usmap");
+        if (!plugin) {
+            if ($map.length) {
+                $map.usmap(config);
+            }
+            return;
+        }
+
+        if (config.stateStyles) plugin.options.stateStyles = config.stateStyles;
+        if (config.stateHoverStyles) plugin.options.stateHoverStyles = config.stateHoverStyles;
+        if (config.stateSpecificStyles) plugin.options.stateSpecificStyles = config.stateSpecificStyles;
+        if (config.stateSpecificHoverStyles) plugin.options.stateSpecificHoverStyles = config.stateSpecificHoverStyles;
+
+        const styles = plugin.options.stateSpecificStyles || {};
+        for (const abbr in styles) {
+            if (!Object.prototype.hasOwnProperty.call(styles, abbr)) continue;
+            const shape = plugin.stateShapes[abbr];
+            const st = styles[abbr] || {};
+            if (shape) {
+                const attrs = {};
+                if (st.fill) attrs.fill = st.fill;
+                if (st["fill-opacity"] != null) attrs["fill-opacity"] = st["fill-opacity"];
+                shape.attr(attrs);
+            }
+        }
+    }
+
     const handlers = {
         "#candidate_id_button": (event) => {
             if (!e.code2Loaded) vpSelect(event)
@@ -4158,13 +4201,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 campaignTrail_temp.margin_format,
             );
 
-            const pollingData = e.current_results || A(2);
+            const pollingTuple = e.current_results;
+            const stateResults = (Array.isArray(pollingTuple) && pollingTuple.length === 2 && Array.isArray(pollingTuple[1]))
+                ? pollingTuple[1]
+                : pollingTuple;
+            const pollingData = stateResults || A(2);
             const mapOptions = rFunc(pollingData, 0);
 
-            $("#map_container").remove();
-            $('#main_content_area').prepend('<div id="map_container"></div>');
-
-            $("#map_container").usmap(mapOptions);
+            if ($("#map_container").data("plugin-usmap")) {
+                updateUsMapStyles(mapOptions);
+            } else {
+                // as a fallback, if the map container doesn't exist, create it
+                if (!document.querySelector("#map_container")) {
+                    const mca = document.querySelector("#main_content_area");
+                    if (mca) {
+                        const div = document.createElement("div");
+                        div.id = "map_container";
+                        mca.insertBefore(div, mca.firstChild);
+                    }
+                }
+                $("#map_container").usmap(mapOptions);
+            }
         },
         "#overall_results_button": () => overallResultsHtml(),
         "#final_election_map_button": () => finalMapScreenHtml(),
