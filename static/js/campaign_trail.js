@@ -3121,7 +3121,7 @@ function overallResultsHtml() {
     /* let l;
     if (overallResults[0].electoral_votes >= winningNum) l = n.fields.image_url;
     else l = t.fields.no_electoral_majority_image; */
-    const l = overallResults[0].electoral_votes >= winningNum
+    const l = (overallResults[0].electoral_votes >= winningNum && n?.fields?.image_url)
         ? n.fields.image_url
         : electJson.fields.no_electoral_majority_image;
     const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
@@ -3156,6 +3156,10 @@ function overallResultsHtml() {
         .filter((f) => f.candidate !== -1)
         .map((f) => {
             const candObj2 = e.candidate_json.find((g) => g.pk === f.candidate);
+            if (!candObj2 || !candObj2.fields) {
+                // if candidate not present in candidate_json, skip row to avoid crash
+                return "";
+            }
             const colorHex = candObj2.fields.color_hex;
             const fName = `${candObj2.fields.first_name} ${candObj2.fields.last_name}`;
             return `
@@ -3168,7 +3172,7 @@ function overallResultsHtml() {
                 <td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td>
             </tr>
         `;
-        }).join("").trim();
+        }).filter(Boolean).join("").trim();
 
     const c = e.game_results_url !== "None"
         ? `
@@ -3271,20 +3275,24 @@ function overallResultsHtml() {
 function getSortedCands() {
     const candsArr = [];
     const mainCand = e.candidate_json.find((f) => f.pk === Number(e.candidate_id));
-    candsArr.push({
-        candidate: e.candidate_id,
-        priority: mainCand.fields.priority,
-        color: mainCand.fields.color_hex,
-        last_name: mainCand.fields.last_name,
-    });
+    if (mainCand && mainCand.fields) {
+        candsArr.push({
+            candidate: e.candidate_id,
+            priority: mainCand.fields.priority,
+            color: mainCand.fields.color_hex,
+            last_name: mainCand.fields.last_name,
+        });
+    }
     e.opponents_list.forEach((f) => {
         const opps = e.candidate_json.find((g) => g.pk === Number(f));
-        candsArr.push({
-            candidate: f,
-            priority: opps.fields.priority,
-            color: opps.fields.color_hex,
-            last_name: opps.fields.last_name,
-        });
+        if (opps && opps.fields) {
+            candsArr.push({
+                candidate: f,
+                priority: opps.fields.priority,
+                color: opps.fields.color_hex,
+                last_name: opps.fields.last_name,
+            });
+        }
     });
     sortByProp(candsArr, "priority");
     return candsArr;
@@ -3344,6 +3352,7 @@ function stateResultsHtml() {
 
     e.final_state_results.forEach((f) => {
         const n = e.states_json.find((g) => g.pk === f.state);
+        if (!n || !n.fields) return;
         stateBase.push({
             state: n.pk,
             name: n.fields.name,
@@ -3353,10 +3362,12 @@ function stateResultsHtml() {
             name: n.fields.name,
             electoral_votes: n.fields.electoral_votes,
         });
+        const top = f.result?.[0]?.percent ?? 0;
+        const second = f.result?.[1]?.percent ?? 0;
         statePVMargin.push({
             state: n.pk,
             name: n.fields.name,
-            pct_margin: f.result[0].percent - f.result[1].percent,
+            pct_margin: top - second,
         });
     });
 
@@ -3368,39 +3379,45 @@ function stateResultsHtml() {
     e.final_overall_results.forEach((f) => {
         const candObj = e.candidate_json.find((c) => c.pk === f.candidate);
         const d = e.final_state_results
-            .filter((r) => r.result[0].candidate === f.candidate)
+            .filter((r) => r.result?.[0]?.candidate === f.candidate)
             .map((r) => {
-                const pct_margin = r.result[0].percent - r.result[1].percent;
+                const pct_margin = (r.result?.[0]?.percent ?? 0) - (r.result?.[1]?.percent ?? 0);
                 const stateObj = e.states_json.find((g) => g.pk === r.state);
+                if (!stateObj || !stateObj.fields) return null;
                 return {
                     state: stateObj.pk,
                     name: stateObj.fields.name,
                     pct_margin,
                 };
             })
+            .filter(Boolean)
             .sort((a, b) => a.pct_margin - b.pct_margin);
         const c = e.final_state_results
-            .flatMap((g) => g.result
+            .flatMap((g) => (g.result || [])
                 .filter((h) => h.candidate === f.candidate)
                 .map((h) => {
                     const stateObj = e.states_json.find((i) => i.pk === g.state);
+                    if (!stateObj || !stateObj.fields) return null;
                     return {
                         state: stateObj.pk,
                         name: stateObj.fields.name,
                         vote_pct: h.percent,
                     };
                 }))
+            .filter(Boolean)
             .sort((a, b) => b.vote_pct - a.vote_pct);
-        l.push({
-            candidate: f.candidate,
-            last_name: candObj.fields.last_name,
-            values: d,
-        });
-        o.push({
-            candidate: f.candidate,
-            last_name: candObj.fields.last_name,
-            values: c,
-        });
+        if (candObj && candObj.fields) {
+            l.push({
+                candidate: f.candidate,
+                last_name: candObj.fields.last_name,
+                values: d,
+            });
+            o.push({
+                candidate: f.candidate,
+                last_name: candObj.fields.last_name,
+                values: c,
+            });
+        }
     });
     const m = l
         .map((f, idx) => (f.values.length > 0
@@ -3415,6 +3432,8 @@ function stateResultsHtml() {
         .filter(Boolean)
         .join("");
 
+    const initialState = stateBase[0]?.state;
+    const initialSummary = initialState ? T(initialState) : '<p>No state results available.</p>';
     const j = `
         <div class="game_header">${corrr}</div>
         <div id="main_content_area">
@@ -3438,7 +3457,7 @@ function stateResultsHtml() {
                             </p>
                         </div>
                     </div>
-                <div id="state_result_data_summary">${T(stateBase[0].state)}</div>
+                <div id="state_result_data_summary">${initialSummary}</div>
             </div>
             <div id="results_container_description"></div>
         </div>
@@ -3464,17 +3483,19 @@ function stateResultsHtml() {
         else if ($sortTabValue === 3) optionsHtml = k(statePVMargin);
         else if ($sortTabValue >= 10 && $sortTabValue <= 19) {
             candIdx = $sortTabValue - 10;
-            optionsHtml = k(l[candIdx].values);
+            optionsHtml = l[candIdx]?.values ? k(l[candIdx].values) : "";
         } else {
             candIdx = $sortTabValue - 20;
-            optionsHtml = k(o[candIdx].values);
+            optionsHtml = o[candIdx]?.values ? k(o[candIdx].values) : "";
         }
         $stateTab.html(optionsHtml);
-        const n = T($stateTab.val());
+        const selected = $stateTab.val();
+        const n = selected ? T(selected) : '<p>No state selected.</p>';
         $("#state_result_data_summary").html(n);
     });
     $stateTab.change(() => {
-        const e = T($stateTab.val());
+        const val = $stateTab.val();
+        const e = val ? T(val) : '<p>No state selected.</p>';
         $("#state_result_data_summary").html(e);
     });
 }
@@ -3483,20 +3504,24 @@ function overallDetailsHtml() {
     const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
 
     const a = e.final_overall_results.map((f) => {
-        const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
-        const colorHex = candObj.fields.color_hex;
-        return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
-                    ${candObj.fields.first_name} ${candObj.fields.last_name}
-                </td>
-                <td>${f.electoral_votes}</td>
-                <td>${formatNumbers(f.popular_votes)}</td>
-                <td>${((f.popular_votes / totalPV) * 100).toFixed(e.finalPercentDigits)}%</td>
-            </tr>
-        `;
-    }).join("").replace(/>\s+</g, "><");
+            const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
+            if (!candObj || !candObj.fields) return ""; // skip missing candidates
+            const colorHex = candObj.fields.color_hex || '#888888';
+            return `
+                <tr>
+                    <td style="text-align: left;">
+                        <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
+                        ${candObj.fields.first_name} ${candObj.fields.last_name}
+                    </td>
+                    <td>${f.electoral_votes}</td>
+                    <td>${formatNumbers(f.popular_votes)}</td>
+                    <td>${((f.popular_votes / totalPV) * 100).toFixed(e.finalPercentDigits)}%</td>
+                </tr>
+            `;
+        })
+        .filter(Boolean)
+        .join("")
+        .replace(/>\s+</g, "><");
 
     const l = e.percentile !== "None"
         ? `<p>You have done better than approximately <strong>${e.percentile}%</strong> of the games that have been played with your candidate and difficulty level.</p>`
@@ -3707,19 +3732,22 @@ function T(t) {
     return e.final_state_results
         .filter((result) => result.state === numT)
         .map((result) => {
-             const rows = result.result.map((f) => {
-                const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
-                const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
-                // if (f.percent === 0) return;
-                return `
-                    <tr>
-                        <td>${fullName}</td>
-                        <td>${formatNumbers(f.votes)}</td>
-                        <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
-                        <td>${f.electoral_votes}</td>
-                    </tr>
-                `;
-            }).join("");
+             const rows = (result.result || []).map((f) => {
+                    const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
+                    if (!candidate || !candidate.fields) return ""; // skip unknown candidates
+                    const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
+                    // if (f.percent === 0) return;
+                    return `
+                        <tr>
+                            <td>${fullName}</td>
+                            <td>${formatNumbers(f.votes)}</td>
+                            <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
+                            <td>${f.electoral_votes}</td>
+                        </tr>
+                    `;
+                })
+                .filter(Boolean)
+                .join("");
 
             return `
                 <h4>Results - This Game</h4>
