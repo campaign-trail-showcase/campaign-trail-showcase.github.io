@@ -10776,68 +10776,65 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
-//#startcode
-    "endings_enabled": false,
-    "ending_data": {
-        "1755427499545": {
-            "id": 1755427499545,
-            "variable": 0,
-            "operator": ">",
-            "value": 0,
-            "endingImage": "",
-            "endingText": "<h3> Congratulations! You have been elected the 46th President of the United States! </h3>\n<p> Wow! Nobody expected this, Governor, and for good reason. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, you thought you were done for. But somehow, some way, you've managed to come out on top. <br> <br> Congress, however, is likely to remain Democratic. Republicans did flip West Virginia, but nowhere else have they gained a seat, and they have only marginal gains in the House, where Speaker Jeffries will retain the gavel. You'll have to govern in a bipartisan fashion, Governor, but it's a necessary sacrifice. You are President of the United States. Good luck. Godspeed.</p>",
-            "amount": "270"
-        },
-        "1756481359517": {
-            "id": 1756481359517,
-            "variable": 0,
-            "operator": ">",
-            "value": 0,
-            "endingImage": "",
-            "endingText": "<h3> Congratulations! You have been elected the 46th President of the United States! </h3>\n<p> Wow! Nobody expected this, Governor, and for good reason. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, you thought you were done for. But somehow, some way, you've managed to come out on top. And that too, by a significant margin.<br> <br> Congress, however, is likely to remain Democratic. Republicans did flip West Virginia and Montana, but Democrats have kept 53 Senate seats, and they have only marginal gains in the House, where Speaker Jeffries will retain the gavel. You'll have to govern in a bipartisan fashion, Governor, but it's a necessary sacrifice. You are President of the United States. Good luck. Godspeed.</p>",
-            "amount": "300"
-        },
-        "1756481511433": {
-            "id": 1756481511433,
-            "variable": 0,
-            "operator": ">",
-            "value": 0,
-            "endingImage": "",
-            "endingText": "<h3> Congratulations! You have been elected the 46th President of the United States! </h3>\n<p> Wow! Nobody expected this, Governor, and for good reason. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, you thought you were done for. But somehow, some way, you've managed to win a landslide. Buttigieg delivers a stunned concession call.<br> <br> Congress, however, is likely to remain Democratic. Republicans did flip West Virginia and Montana, along with Ohio, but Democrats have kept 52 Senate seats, and, while they have significant gains in the House, Speaker Jeffries will retain the gavel. You'll have to govern in a bipartisan fashion, Governor, but it's a necessary sacrifice. You are President of the United States. Good luck. Godspeed.</p>",
-            "amount": "350"
-        },
-        "1756481572105": {
-            "id": 1756481572105,
-            "variable": 0,
-            "operator": "<",
-            "value": 0,
-            "endingImage": "",
-            "endingText": "<h3> I'm sorry, Glenn. </h3>\n<p> This was the expected outcome, but it does still hurt. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, they said you were done for. And they were right. Buttigieg claims victory to a raucous Miami crowd as you stew in your seat just a mile away.<br> <br> Congress is also to remain Democratic. Republicans did flip West Virginia, but Democrats have kept their majority by taking Texas, and, after some further blue flips in the House, Speaker Jeffries will retain the gavel. What's next? Well, if you performed well, then a run in 2028 isn't completely off the cards, given that you are retiring next year. Perhaps you could challenge Warner for his Senate seat come the midterms. Good luck, Governor, and godspeed.</p>",
-            "amount": "270"
-        },
-        "1756481941322": {
-            "id": 1756481941322,
-            "variable": 0,
-            "operator": "<",
-            "value": 0,
-            "endingImage": "",
-            "endingText": "<h3> Good God, Glenn. </h3>\n<p> This was the expected outcome, but it does still hurt. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, they said you were done for. And they were wrong - you were dead on arrival. Buttigieg claims victory to a raucous Miami crowd as you stew in your seat just a mile away.<br> <br> Congress is also to remain Democratic. Republicans did flip West Virginia, but Democrats have kept their majority by taking Texas, Missouri, maybe even Nebraska, and, after some further blue flips in the House, Speaker Jeffries will retain the gavel. What's next? Well, given your complete rout, it's doubtful you'll ever hold any office again. You're retiring from the governorship next year, and it's likely to be your first and only political office.</p>",
-            "amount": "150"
-        }
-    },
-    "cyoa_enabled": false,
-    "cyoa_data": {},
-    "mapping_enabled": false,
-    "mapping_data": {},
-    "cyoa_variables": {},
-    "cyoa_variable_effects": {},
-    "cyoa_answer_swaps": {}
+campaignTrail_temp.candidate_image_url = "https://i.ibb.co/jvJ3WtSk/Youngkin.jpg";
+campaignTrail_temp.running_mate_image_url = "https://i.ibb.co/kgFNp2kN/Haley.jpg";
+campaignTrail_temp.candidate_last_name = "Youngkin";
+campaignTrail_temp.running_mate_last_name = "Haley";
+
+campaignTrail_temp.multiple_endings = true;
+endingPicker = (out, totv, aa, quickstats) => {
+
+    function setImage(url) {
+        if(url == '' || url == null) return;
+        let interval = setInterval(function () {
+            img = document.getElementsByClassName("person_image")[0];
+            if (img != null) {
+                img.src = url;
+                clearInterval(interval);
+            }
+        }, 50);
+    }
+
+    if(quickstats[0] > 270) {
+        setImage("");
+        return `<h3> Congratulations! You have been elected the 46th President of the United States! </h3>
+<p> Wow! Nobody expected this, Governor, and for good reason. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, you thought you were done for. But somehow, some way, you've managed to come out on top. <br> <br> Congress, however, is likely to remain Democratic. Republicans did flip West Virginia, but nowhere else have they gained a seat, and they have only marginal gains in the House, where Speaker Jeffries will retain the gavel. You'll have to govern in a bipartisan fashion, Governor, but it's a necessary sacrifice. You are President of the United States. Good luck. Godspeed.</p>`;
+    }
+    if(quickstats[0] > 300) {
+        setImage("");
+        return `<h3> Congratulations! You have been elected the 46th President of the United States! </h3>
+<p> Wow! Nobody expected this, Governor, and for good reason. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, you thought you were done for. But somehow, some way, you've managed to come out on top. And that too, by a significant margin.<br> <br> Congress, however, is likely to remain Democratic. Republicans did flip West Virginia and Montana, but Democrats have kept 53 Senate seats, and they have only marginal gains in the House, where Speaker Jeffries will retain the gavel. You'll have to govern in a bipartisan fashion, Governor, but it's a necessary sacrifice. You are President of the United States. Good luck. Godspeed.</p>`;
+    }
+    if(quickstats[0] > 350) {
+        setImage("");
+        return `<h3> Congratulations! You have been elected the 46th President of the United States! </h3>
+<p> Wow! Nobody expected this, Governor, and for good reason. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, you thought you were done for. But somehow, some way, you've managed to win a landslide. Buttigieg delivers a stunned concession call.<br> <br> Congress, however, is likely to remain Democratic. Republicans did flip West Virginia and Montana, along with Ohio, but Democrats have kept 52 Senate seats, and, while they have significant gains in the House, Speaker Jeffries will retain the gavel. You'll have to govern in a bipartisan fashion, Governor, but it's a necessary sacrifice. You are President of the United States. Good luck. Godspeed.</p>`;
+    }
+    if(quickstats[0] < 270) {
+        setImage("");
+        return `<h3> I'm sorry, Glenn. </h3>
+<p> This was the expected outcome, but it does still hurt. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, they said you were done for. And they were right. Buttigieg claims victory to a raucous Miami crowd as you stew in your seat just a mile away.<br> <br> Congress is also to remain Democratic. Republicans did flip West Virginia, but Democrats have kept their majority by taking Texas, and, after some further blue flips in the House, Speaker Jeffries will retain the gavel. What's next? Well, if you performed well, then a run in 2028 isn't completely off the cards, given that you are retiring next year. Perhaps you could challenge Warner for his Senate seat come the midterms. Good luck, Governor, and godspeed.</p>`;
+    }
+    if(quickstats[0] < 150) {
+        setImage("");
+        return `<h3> Good God, Glenn. </h3>
+<p> This was the expected outcome, but it does still hurt. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, they said you were done for. And they were wrong - you were dead on arrival. Buttigieg claims victory to a raucous Miami crowd as you stew in your seat just a mile away.<br> <br> Congress is also to remain Democratic. Republicans did flip West Virginia, but Democrats have kept their majority by taking Texas, Missouri, maybe even Nebraska, and, after some further blue flips in the House, Speaker Jeffries will retain the gavel. What's next? Well, given your complete rout, it's doubtful you'll ever hold any office again. You're retiring from the governorship next year, and it's likely to be your first and only political office.</p>`;
+    }
 }
-]
-//#endcode
+
 
 campaignTrail_temp.jet_data = [{
-    "endings_enabled": false,
-    "ending_data": {}
-}
-]
+    "banner_enabled": true,
+    "banner_data": {
+        "canName": "Youngkin",
+        "runName": "Haley",
+        "canImage": "https://i.ibb.co/jvJ3WtSk/Youngkin.jpg",
+        "runImage": "https://i.ibb.co/kgFNp2kN/Haley.jpg"
+    },
+    "nicknames": {
+        "300": "Buttigieg",
+        "301": "Youngkin",
+        "302": "Oliver",
+        "303": "Kennedy"
+    }}]
+//#startcode
