@@ -170,11 +170,17 @@ let states = [];
 const initIt = 0;
 
 function fileExists(url) {
-    const req = new XMLHttpRequest();
-    req.open("GET", url, false);
-    console.log(`trying to get file from url ${url}`);
-    req.send();
-    return req.status === 200;
+    return fetch(url, { method: "HEAD", cache: "no-store" })
+        .then((res) => {
+            if (res.ok) return true;
+            if (res.status === 405 || res.status === 501) {
+                return fetch(url, { method: "GET", cache: "no-store" })
+                    .then((r2) => r2.ok)
+                    .catch(() => false);
+            }
+            return false;
+        })
+        .catch(() => false);
 }
 
 lastUpdatedDate = "2023-08-20";
@@ -1908,17 +1914,19 @@ function answerEffects(t) {
     const numT = Number(t);
     const numCand = Number(e.candidate_id);
 
+    const tToUse = typeof t === 'string' && Number.isNaN(numT) ? t : numT;
+
     debugConsole(`Applying answer effects for answer pk ${t}`);
-    e.player_answers.push(t);
+    e.player_answers.push(tToUse);
     // const electIndex = findFromPK(e.election_json, e.election_id);
     const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     if (e.answer_feedback_flg === 1) {
         const hasFeedback = e.answer_feedback_json.some(
-            (f) => f.fields.answer === numT && f.fields.candidate === numCand,
+            (f) => f.fields.answer === tToUse && f.fields.candidate === numCand,
         );
         if (hasFeedback) {
             const feedback = e.answer_feedback_json.find(
-                (f) => f.fields.answer === numT && f.fields.candidate === numCand,
+                (f) => f.fields.answer === tToUse && f.fields.candidate === numCand,
             );
             const n = `
                 <div class="overlay" id="visit_overlay"></div>
@@ -2340,18 +2348,27 @@ function renderOptions(electionId, candId, runId) {
 
                     endingUrl = `../static/mods/${theorId}_ending.html`;
 
-                    try {
-                        if (fileExists(endingUrl)) {
-                            const client2 = new XMLHttpRequest();
-                            client2.open("GET", endingUrl);
-                            client2.onreadystatechange = function () {
-                                important_info = client2.responseText;
-                            };
-                            client2.send();
-                        }
-                    } catch (err) {
-                        console.error("Error loading code 2", err);
-                    }
+                    fileExists(endingUrl)
+                        .then((exists) => {
+                            if (!exists) {
+                                console.info(`No legacy ending file found for ${theorId}, skipping`);
+                                return;
+                            }
+                            return fetch(endingUrl, { cache: "no-store" })
+                                .then((resp) => {
+                                    if (!resp.ok) throw new Error(`Failed to fetch ${endingUrl}: ${resp.status}`);
+                                    return resp.text();
+                                })
+                                .then((text) => {
+                                    important_info = text;
+                                })
+                                .catch((err) => {
+                                    console.error("Error loading code 2", err);
+                                });
+                        })
+                        .catch((err) => {
+                            console.error("Error checking file existence", err);
+                        });
                 });
             } catch (err) {
                 console.error("Error loading code 2", err);
@@ -2640,6 +2657,19 @@ function setStatePollText(s, t) {
 }
 
 function rFunc(t, i) {
+    // some flows store e.current_results as [getLatestRes(a)[0], a]. if passed here directly,
+    // t[0] will not have a `result` field, causing errors, so we need to detect and fix that
+    if (!Array.isArray(t) || (Array.isArray(t) && t.length > 0 && (t[0] == null || typeof t[0] !== "object" || !("result" in t[0])))) {
+        if (Array.isArray(t) && t.length === 2 && Array.isArray(t[1]) && t[1].length && t[1][0] && typeof t[1][0] === "object" && ("result" in t[1][0])) {
+            t = t[1];
+        } else {
+            try {
+                t = A(2);
+            } catch (_err) {
+                t = [];
+            }
+        }
+    }
     // pre-build candidate lookup
     const candidateMap = new Map();
     for (let cIdx = 0; cIdx < e.candidate_json.length; cIdx++) {
@@ -3091,7 +3121,7 @@ function overallResultsHtml() {
     /* let l;
     if (overallResults[0].electoral_votes >= winningNum) l = n.fields.image_url;
     else l = t.fields.no_electoral_majority_image; */
-    const l = overallResults[0].electoral_votes >= winningNum
+    const l = (overallResults[0].electoral_votes >= winningNum && n?.fields?.image_url)
         ? n.fields.image_url
         : electJson.fields.no_electoral_majority_image;
     const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
@@ -3126,6 +3156,10 @@ function overallResultsHtml() {
         .filter((f) => f.candidate !== -1)
         .map((f) => {
             const candObj2 = e.candidate_json.find((g) => g.pk === f.candidate);
+            if (!candObj2 || !candObj2.fields) {
+                // if candidate not present in candidate_json, skip row to avoid crash
+                return "";
+            }
             const colorHex = candObj2.fields.color_hex;
             const fName = `${candObj2.fields.first_name} ${candObj2.fields.last_name}`;
             return `
@@ -3138,7 +3172,7 @@ function overallResultsHtml() {
                 <td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td>
             </tr>
         `;
-        }).join("").trim();
+        }).filter(Boolean).join("").trim();
 
     const c = e.game_results_url !== "None"
         ? `
@@ -3241,20 +3275,24 @@ function overallResultsHtml() {
 function getSortedCands() {
     const candsArr = [];
     const mainCand = e.candidate_json.find((f) => f.pk === Number(e.candidate_id));
-    candsArr.push({
-        candidate: e.candidate_id,
-        priority: mainCand.fields.priority,
-        color: mainCand.fields.color_hex,
-        last_name: mainCand.fields.last_name,
-    });
+    if (mainCand && mainCand.fields) {
+        candsArr.push({
+            candidate: e.candidate_id,
+            priority: mainCand.fields.priority,
+            color: mainCand.fields.color_hex,
+            last_name: mainCand.fields.last_name,
+        });
+    }
     e.opponents_list.forEach((f) => {
         const opps = e.candidate_json.find((g) => g.pk === Number(f));
-        candsArr.push({
-            candidate: f,
-            priority: opps.fields.priority,
-            color: opps.fields.color_hex,
-            last_name: opps.fields.last_name,
-        });
+        if (opps && opps.fields) {
+            candsArr.push({
+                candidate: f,
+                priority: opps.fields.priority,
+                color: opps.fields.color_hex,
+                last_name: opps.fields.last_name,
+            });
+        }
     });
     sortByProp(candsArr, "priority");
     return candsArr;
@@ -3314,6 +3352,7 @@ function stateResultsHtml() {
 
     e.final_state_results.forEach((f) => {
         const n = e.states_json.find((g) => g.pk === f.state);
+        if (!n || !n.fields) return;
         stateBase.push({
             state: n.pk,
             name: n.fields.name,
@@ -3323,10 +3362,12 @@ function stateResultsHtml() {
             name: n.fields.name,
             electoral_votes: n.fields.electoral_votes,
         });
+        const top = f.result?.[0]?.percent ?? 0;
+        const second = f.result?.[1]?.percent ?? 0;
         statePVMargin.push({
             state: n.pk,
             name: n.fields.name,
-            pct_margin: f.result[0].percent - f.result[1].percent,
+            pct_margin: top - second,
         });
     });
 
@@ -3338,39 +3379,45 @@ function stateResultsHtml() {
     e.final_overall_results.forEach((f) => {
         const candObj = e.candidate_json.find((c) => c.pk === f.candidate);
         const d = e.final_state_results
-            .filter((r) => r.result[0].candidate === f.candidate)
+            .filter((r) => r.result?.[0]?.candidate === f.candidate)
             .map((r) => {
-                const pct_margin = r.result[0].percent - r.result[1].percent;
+                const pct_margin = (r.result?.[0]?.percent ?? 0) - (r.result?.[1]?.percent ?? 0);
                 const stateObj = e.states_json.find((g) => g.pk === r.state);
+                if (!stateObj || !stateObj.fields) return null;
                 return {
                     state: stateObj.pk,
                     name: stateObj.fields.name,
                     pct_margin,
                 };
             })
+            .filter(Boolean)
             .sort((a, b) => a.pct_margin - b.pct_margin);
         const c = e.final_state_results
-            .flatMap((g) => g.result
+            .flatMap((g) => (g.result || [])
                 .filter((h) => h.candidate === f.candidate)
                 .map((h) => {
                     const stateObj = e.states_json.find((i) => i.pk === g.state);
+                    if (!stateObj || !stateObj.fields) return null;
                     return {
                         state: stateObj.pk,
                         name: stateObj.fields.name,
                         vote_pct: h.percent,
                     };
                 }))
+            .filter(Boolean)
             .sort((a, b) => b.vote_pct - a.vote_pct);
-        l.push({
-            candidate: f.candidate,
-            last_name: candObj.fields.last_name,
-            values: d,
-        });
-        o.push({
-            candidate: f.candidate,
-            last_name: candObj.fields.last_name,
-            values: c,
-        });
+        if (candObj && candObj.fields) {
+            l.push({
+                candidate: f.candidate,
+                last_name: candObj.fields.last_name,
+                values: d,
+            });
+            o.push({
+                candidate: f.candidate,
+                last_name: candObj.fields.last_name,
+                values: c,
+            });
+        }
     });
     const m = l
         .map((f, idx) => (f.values.length > 0
@@ -3385,6 +3432,8 @@ function stateResultsHtml() {
         .filter(Boolean)
         .join("");
 
+    const initialState = stateBase[0]?.state;
+    const initialSummary = initialState ? T(initialState) : '<p>No state results available.</p>';
     const j = `
         <div class="game_header">${corrr}</div>
         <div id="main_content_area">
@@ -3408,7 +3457,7 @@ function stateResultsHtml() {
                             </p>
                         </div>
                     </div>
-                <div id="state_result_data_summary">${T(stateBase[0].state)}</div>
+                <div id="state_result_data_summary">${initialSummary}</div>
             </div>
             <div id="results_container_description"></div>
         </div>
@@ -3434,17 +3483,19 @@ function stateResultsHtml() {
         else if ($sortTabValue === 3) optionsHtml = k(statePVMargin);
         else if ($sortTabValue >= 10 && $sortTabValue <= 19) {
             candIdx = $sortTabValue - 10;
-            optionsHtml = k(l[candIdx].values);
+            optionsHtml = l[candIdx]?.values ? k(l[candIdx].values) : "";
         } else {
             candIdx = $sortTabValue - 20;
-            optionsHtml = k(o[candIdx].values);
+            optionsHtml = o[candIdx]?.values ? k(o[candIdx].values) : "";
         }
         $stateTab.html(optionsHtml);
-        const n = T($stateTab.val());
+        const selected = $stateTab.val();
+        const n = selected ? T(selected) : '<p>No state selected.</p>';
         $("#state_result_data_summary").html(n);
     });
     $stateTab.change(() => {
-        const e = T($stateTab.val());
+        const val = $stateTab.val();
+        const e = val ? T(val) : '<p>No state selected.</p>';
         $("#state_result_data_summary").html(e);
     });
 }
@@ -3453,20 +3504,24 @@ function overallDetailsHtml() {
     const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
 
     const a = e.final_overall_results.map((f) => {
-        const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
-        const colorHex = candObj.fields.color_hex;
-        return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
-                    ${candObj.fields.first_name} ${candObj.fields.last_name}
-                </td>
-                <td>${f.electoral_votes}</td>
-                <td>${formatNumbers(f.popular_votes)}</td>
-                <td>${((f.popular_votes / totalPV) * 100).toFixed(e.finalPercentDigits)}%</td>
-            </tr>
-        `;
-    }).join("").replace(/>\s+</g, "><");
+            const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
+            if (!candObj || !candObj.fields) return ""; // skip missing candidates
+            const colorHex = candObj.fields.color_hex || '#888888';
+            return `
+                <tr>
+                    <td style="text-align: left;">
+                        <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
+                        ${candObj.fields.first_name} ${candObj.fields.last_name}
+                    </td>
+                    <td>${f.electoral_votes}</td>
+                    <td>${formatNumbers(f.popular_votes)}</td>
+                    <td>${((f.popular_votes / totalPV) * 100).toFixed(e.finalPercentDigits)}%</td>
+                </tr>
+            `;
+        })
+        .filter(Boolean)
+        .join("")
+        .replace(/>\s+</g, "><");
 
     const l = e.percentile !== "None"
         ? `<p>You have done better than approximately <strong>${e.percentile}%</strong> of the games that have been played with your candidate and difficulty level.</p>`
@@ -3515,16 +3570,24 @@ function overallDetailsHtml() {
     const base_url = urlParts[2];
     const game_url = e.game_id ? `https://${base_url}/games/viewGame.html#${e.game_id}` : null;
 
-    const histRes = HistName.map((name, i) => `
-        <tr>
-            <td style="text-align: left;">
-                <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span>${name}
-            </td>
-            <td>${HistEV[i]}</td>
-            <td>${HistPV[i]}</td>
-            <td>${HistPVP[i]}</td>
-        </tr>
-    `).join("").trim();
+    const spaceFunction = (name) => /^[\s\u2800]/.test(name); // Braille pattern blank (TTNW space in historical results)
+    const spaceToUse = HistName.find(spaceFunction)?.match(/^[\s\u2800]+/)?.[0] ?? ' ';
+
+    const histRes = HistName.map((name, i) => {
+        const needsSpace = !(name === "" || spaceFunction(name));
+        const nameToUse = needsSpace ? `${spaceToUse}${name}` : name;
+
+        return `
+            <tr>
+                <td style="text-align: left;">
+                    <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span>${nameToUse}
+                </td>
+                <td>${HistEV[i]}</td>
+                <td>${HistPV[i]}</td>
+                <td>${HistPVP[i]}</td>
+            </tr>
+        `
+    }).join("").trim();
 
     document.getElementById("game_window").innerHTML = `
         <div class="game_header">${corrr}</div>
@@ -3534,7 +3597,7 @@ function overallDetailsHtml() {
                 <div id="overall_election_details">
                     <h4>Results - This Game</h4>
                     <table>
-                    <tbody>
+                        <tbody>
                             <tr>
                                 <th>Candidate</th>
                                 <th>Electoral Votes</th>
@@ -3669,19 +3732,22 @@ function T(t) {
     return e.final_state_results
         .filter((result) => result.state === numT)
         .map((result) => {
-             const rows = result.result.map((f) => {
-                const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
-                const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
-                // if (f.percent === 0) return;
-                return `
-                    <tr>
-                        <td>${fullName}</td>
-                        <td>${formatNumbers(f.votes)}</td>
-                        <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
-                        <td>${f.electoral_votes}</td>
-                    </tr>
-                `;
-            }).join("");
+             const rows = (result.result || []).map((f) => {
+                    const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
+                    if (!candidate || !candidate.fields) return ""; // skip unknown candidates
+                    const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
+                    // if (f.percent === 0) return;
+                    return `
+                        <tr>
+                            <td>${fullName}</td>
+                            <td>${formatNumbers(f.votes)}</td>
+                            <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
+                            <td>${f.electoral_votes}</td>
+                        </tr>
+                    `;
+                })
+                .filter(Boolean)
+                .join("");
 
             return `
                 <h4>Results - This Game</h4>
@@ -4101,6 +4167,36 @@ document.getElementById("skip_to_final")?.addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+    // used to change the map gradient colors
+    function updateUsMapStyles(config) {
+        const $map = $("#map_container");
+        const plugin = $map.data("plugin-usmap");
+        if (!plugin) {
+            if ($map.length) {
+                $map.usmap(config);
+            }
+            return;
+        }
+
+        if (config.stateStyles) plugin.options.stateStyles = config.stateStyles;
+        if (config.stateHoverStyles) plugin.options.stateHoverStyles = config.stateHoverStyles;
+        if (config.stateSpecificStyles) plugin.options.stateSpecificStyles = config.stateSpecificStyles;
+        if (config.stateSpecificHoverStyles) plugin.options.stateSpecificHoverStyles = config.stateSpecificHoverStyles;
+
+        const styles = plugin.options.stateSpecificStyles || {};
+        for (const abbr in styles) {
+            if (!Object.prototype.hasOwnProperty.call(styles, abbr)) continue;
+            const shape = plugin.stateShapes[abbr];
+            const st = styles[abbr] || {};
+            if (shape) {
+                const attrs = {};
+                if (st.fill) attrs.fill = st.fill;
+                if (st["fill-opacity"] != null) attrs["fill-opacity"] = st["fill-opacity"];
+                shape.attr(attrs);
+            }
+        }
+    }
+
     const handlers = {
         "#candidate_id_button": (event) => {
             if (!e.code2Loaded) vpSelect(event)
@@ -4141,13 +4237,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 campaignTrail_temp.margin_format,
             );
 
-            const pollingData = e.current_results || A(2);
+            const pollingTuple = e.current_results;
+            const stateResults = (Array.isArray(pollingTuple) && pollingTuple.length === 2 && Array.isArray(pollingTuple[1]))
+                ? pollingTuple[1]
+                : pollingTuple;
+            const pollingData = stateResults || A(2);
             const mapOptions = rFunc(pollingData, 0);
 
-            $("#map_container").remove();
-            $('#main_content_area').prepend('<div id="map_container"></div>');
-
-            $("#map_container").usmap(mapOptions);
+            if ($("#map_container").data("plugin-usmap")) {
+                updateUsMapStyles(mapOptions);
+            } else {
+                // as a fallback, if the map container doesn't exist, create it
+                if (!document.querySelector("#map_container")) {
+                    const mca = document.querySelector("#main_content_area");
+                    if (mca) {
+                        const div = document.createElement("div");
+                        div.id = "map_container";
+                        mca.insertBefore(div, mca.firstChild);
+                    }
+                }
+                $("#map_container").usmap(mapOptions);
+            }
         },
         "#overall_results_button": () => overallResultsHtml(),
         "#final_election_map_button": () => finalMapScreenHtml(),
