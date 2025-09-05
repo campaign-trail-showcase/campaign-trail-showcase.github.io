@@ -654,7 +654,7 @@ $(document).ready(async () => {
 
   // Set up from normal mods
   const modPromises = Array.from(mods).map(async (mod) => {
-    // MODIFICADO: lógica para carregar ambos os mods quando necessário
+    // MODIFIED: logic to load both mods when needed
     if (
       mod.value === "other" ||
       ( // Special case for DSA because it uses two code 1s to define achievements. So we need to load both of those to get both sets.
