@@ -173,6 +173,7 @@ function showBenefitChecker() {
   try { benefitChecker(); } catch (_) {}
 }
 
+const targetNode = document.getElementById("game_window");
 const config = { attributes: true, childList: true, subtree: true };
 
 let benefitObserver = null;
@@ -191,7 +192,6 @@ function renderBenefitChecker(mutationList, observer) {
 
 function startBenefitObserver() {
   if (benefitObserver) return;
-  const targetNode = document.getElementById("game_window");
   if (!targetNode) return;
   benefitObserver = new MutationObserver(renderBenefitChecker);
   benefitObserver.observe(targetNode, config);
