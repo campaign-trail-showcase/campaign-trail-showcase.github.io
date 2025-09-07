@@ -3302,12 +3302,17 @@ function finalMapScreenHtml() {
     const coloredResults = mapResultColor(500);
     const candsArray = getSortedCands();
     const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+    const totalPopularVotes = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
     const candResultText = candsArray.map((f) => {
         const s = e.final_overall_results.find((g) => g.candidate === f.candidate);
-        const l = s ? s.electoral_votes : 0;
+        const electoralVotes = s ? s.electoral_votes : 0;
+        const popularVotes = s ? s.popular_votes : 0;        
+        const popularVotePercent = totalPopularVotes > 0 
+            ? ((popularVotes / totalPopularVotes) * 100).toFixed(1) 
+            : "0.0";
         return `
             <li>
-                <span style="color:${f.color}; background-color: ${f.color}">--</span> ${f.last_name}: ${l}
+                <span style="color:${f.color}; background-color: ${f.color}">--</span> ${f.last_name}: ${electoralVotes} / ${popularVotePercent}%
             </li>
         `;
     }).join("");
