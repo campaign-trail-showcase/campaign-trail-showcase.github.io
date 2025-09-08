@@ -31,7 +31,7 @@ campaignTrail_temp.questions_json = [
         "pk": 1046,
         "fields": {
             "priority": 2,
-            "description": "Just prior to the convention, you selected Tim Kaine, a Senator from Virginia, as your running mate. What was your rationale behind selecting him?",
+            "description": "Just prior to the convention, you selected Tim Kaine, a Senator from Virginia, as your running mate. Some hoped for a bolder pick to energize the base. What strategic calculation led you to Kaine?",
             "likelihood": 1
         }
     },
@@ -67,7 +67,7 @@ campaignTrail_temp.questions_json = [
         "pk": 1055,
         "fields": {
             "priority": 6,
-            "description": "There’s no arguing that your husband, former President Bill Clinton, has been very interested in engaging with your campaign. Although this did not go as well in 2008, he’s been wondering if you’d like his input this time around. Do you plan to make him a part of your campaign this season? ",
+            "description": "There’s no arguing that your husband, former President Bill Clinton, has been very interested in engaging with your campaign. Although this did not go as well in 2008, he’s been wondering if you’d like his input this time around. Do you plan to make him a part of your campaign this season?",
             "likelihood": 1
         }
     },
@@ -375,7 +375,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5140,
         "fields": {
             "question": 1042,
-            "description": "I’m writing a book on the tough calls I faced as Secretary of State, and I’ll be hitting the road with paid speeches to boost the Clinton Foundation’s global work; I wanna keep my voice out there, you know."
+            "description": "I’m writing a book about the tough decisions I faced as Secretary of State, and yes, I’ll be hitting the road with paid speeches to boost the Clinton Foundation’s global work; I wanna keep my voice out there, you know."
         }
     },
     {
@@ -2132,7 +2132,7 @@ campaignTrail_temp.states_json = [
             "election": 20
         }
     },
-	{
+    {
         "model": "campaign_trail.state",
         "pk": 1051,
         "fields": {
@@ -4868,7 +4868,7 @@ campaignTrail_temp.state_issue_score_json = [
             "weight": 1.5
         }
     },
-	 {
+    {
         "model": "campaign_trail.state_issue_score",
         "pk": 21091,
         "fields": {
@@ -7188,7 +7188,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
             "state_multiplier": 0.0459
         }
     },
-	{
+    {
         "model": "campaign_trail.candidate_state_multiplier",
         "pk": 21087,
         "fields": {
@@ -9771,7 +9771,7 @@ campaignTrail_temp.answer_score_issue_json = [
             "answer": 5170,
             "issue": 100,
             "issue_score": 0.6,
-            "issue_importance": 1
+            "issue_importance": 1.5
         }
     },
     {
@@ -9781,7 +9781,7 @@ campaignTrail_temp.answer_score_issue_json = [
             "answer": 5170,
             "issue": 101,
             "issue_score": 0.5,
-            "issue_importance": 1
+            "issue_importance": 2
         }
     },
     {
@@ -9791,7 +9791,7 @@ campaignTrail_temp.answer_score_issue_json = [
             "answer": 5171,
             "issue": 100,
             "issue_score": 0.2,
-            "issue_importance": 3
+            "issue_importance": 2
         }
     },
     {
@@ -9800,8 +9800,8 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 5172,
             "issue": 100,
-            "issue_score": 0.1,
-            "issue_importance": 3
+            "issue_score": -0.1,
+            "issue_importance": 2
         }
     },
     {
@@ -11512,6 +11512,46 @@ campaignTrail_temp.answer_score_issue_json = [
             "issue": 104,
             "issue_score": 0.2,
             "issue_importance": 2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 21273,
+        "fields": {
+            "answer": 5242,
+            "issue": "100",
+            "issue_score": 0.2,
+            "issue_importance": 1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 21274,
+        "fields": {
+            "answer": 5243,
+            "issue": "100",
+            "issue_score": 0.1,
+            "issue_importance": 1.5
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 21275,
+        "fields": {
+            "answer": 5244,
+            "issue": "100",
+            "issue_score": 0.15,
+            "issue_importance": 1.5
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 21276,
+        "fields": {
+            "answer": 5245,
+            "issue": "100",
+            "issue_score": 0.175,
+            "issue_importance": 1.25
         }
     }
 ]
@@ -14766,11 +14806,6 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
-campaignTrail_temp.candidate_image_url = "https://i.imgur.com/rGazUY4.jpeg";
-campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/7TQKexe.jpeg";
-campaignTrail_temp.candidate_last_name = "Clinton";
-campaignTrail_temp.running_mate_last_name = "Kaine";
-
 
 
 campaignTrail_temp.jet_data = [{
@@ -14784,19 +14819,19 @@ campaignTrail_temp.jet_data = [{
         "202": "Johnson",
         "203": "Stein"
     },
-    "banner_enabled": true,
-    "banner_data": {
-        "canName": "Clinton",
-        "canImage": "https://i.imgur.com/rGazUY4.jpeg",
-        "runName": "Kaine",
-        "runImage": "https://i.imgur.com/7TQKexe.jpeg"
-    },
     "cyoa_enabled": false,
     "cyoa_data": {},
     "endings_enabled": false,
     "ending_data": {}
 }
 ]
+
+
+// Candidate images
+campaignTrail_temp.candidate_image_url = "https://i.imgur.com/rGazUY4.jpeg";
+campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/7TQKexe.jpeg";
+campaignTrail_temp.candidate_last_name = "Clinton";
+campaignTrail_temp.running_mate_last_name = "Kaine";
 
 // This is, in a way, fairly similar to astrohuncho's bunnyhop. (hi astro!)
 // However, using the actual bunnyhop here was not a viable option, as many of this mod's
@@ -15199,15 +15234,29 @@ function applyDataModifications() {
         mateData.questions && campaignTrail_temp.questions_json.forEach(q => { if (mateData.questions[q.pk]) q.fields.description = mateData.questions[q.pk]; });
         mateData.answers && campaignTrail_temp.answers_json.forEach(a => { if (mateData.answers[a.pk]) a.fields.description = mateData.answers[a.pk]; });
         mateData.feedback && campaignTrail_temp.answer_feedback_json.forEach(fb => { if (mateData.feedback[fb.fields.answer]) fb.fields.answer_feedback = mateData.feedback[fb.fields.answer]; });
+		
+		// update issue scores
+		if (mateData.issueScores && Array.isArray(campaignTrail_temp.answer_score_issue_json)) {
+		  const answersToReplace = Object.keys(mateData.issueScores).map(Number);
+		  campaignTrail_temp.answer_score_issue_json = campaignTrail_temp.answer_score_issue_json
+			.filter(e => !answersToReplace.includes(Number(e.fields.answer)));
 
-        // update issue scores
-        if (mateData.issueScores) {
-            const answersToReplace = Object.keys(mateData.issueScores);
-            campaignTrail_temp.answer_score_global_json = campaignTrail_temp.answer_score_global_json.filter(e => !answersToReplace.includes(String(e.fields.answer)));
-            for (const [answerId, scores] of Object.entries(mateData.issueScores)) {
-                scores.forEach(({ issue, score }) => campaignTrail_temp.answer_score_global_json.push({ model: "campaign_trail.answer_score_issue", pk: generateMockPK(), fields: { answer: parseInt(answerId), issue, issue_score: score, issue_importance: 2 } }));
-            }
-        }
+		  for (const [answerIdStr, scores] of Object.entries(mateData.issueScores)) {
+			const answerId = Number(answerIdStr);
+			scores.forEach(({ issue, score }) => {
+			  campaignTrail_temp.answer_score_issue_json.push({
+				model: "campaign_trail.answer_score_issue",
+				pk: generateMockPK(),
+				fields: {
+				  answer: answerId,
+				  issue,
+				  issue_score: score,
+				  issue_importance: 2
+				}
+			  });
+			});
+		  }
+		}
 
         // update global scores
         if (mateData.globalScores) {
@@ -15222,7 +15271,7 @@ function applyDataModifications() {
         if (mateData.stateScores) {
             const answersToReplace = mateData.stateScores.map(s => s.answer);
             campaignTrail_temp.answer_score_state_json = campaignTrail_temp.answer_score_state_json.filter(e => !answersToReplace.includes(e.fields.answer));
-            mateData.stateScores.forEach(({ answer, state }) => campaignTrail_temp.answer_score_state_json.push({ model: "campaign_trail.answer_score_state", pk: generateMockPK(), fields: { answer, state, candidate: 201, affected_candidate: 201, state_multiplier: 0.005 } }));
+            mateData.stateScores.forEach(({ answer, state }) => campaignTrail_temp.answer_score_state_json.push({ model: "campaign_trail.answer_score_state", pk: generateMockPK(), fields: { answer, state, candidate: 201, affected_candidate: 201, state_multiplier: 0.01 } }));
         }
     }
 
@@ -15445,6 +15494,237 @@ function closeOverlay(overlay) {
         processAchievementQueue();
     }, { once: true });
 }
+
+// This is for the squeaky clean no swearing option, if enabled
+(function () {
+  if (typeof window === "undefined") return;
+  const GAME_WINDOW_ID = "game_window";
+  const UI_WRAPPER_ID = "squeaky_clean_wrapper"; // don't touch anything inside this element for the love of God
+  const SCHEDULE_DEBOUNCE_MS = 100;
+
+  const gameWindow = document.getElementById(GAME_WINDOW_ID);
+  if (!gameWindow) return;
+
+  const REPLACEMENTS = [
+    // specific idioms
+    { re: /\bdeep shit\b/gi, replace: (m) => preserveCase("deep trouble", m) },
+    { re: /\ball that shit\b/gi, replace: (m) => preserveCase("all that stuff", m) },
+    { re: /\bshit in the woods\b/gi, replace: (m) => preserveCase("poop in the woods", m) },
+    { re: /\bshit in the liquor tent\b/gi, replace: (m) => preserveCase("relieve themselves in the liquor tent", m) },
+
+    // 'shit' suffixes and variants
+    { re: /\bshitty\b/gi, replace: (m) => preserveCase("poor", m) },
+    { re: /\bshitter\b/gi, replace: (m) => preserveCase("toilet", m) },
+    // standalone 'shit' — if single-word exclamation, map to Shoot; otherwise prefer 'poop'
+    { re: /\bshit\b/gi, replace: (m, ...args) => {
+        // if original is short or followed/preceded by punctuation, treat as exclamation
+        const original = m;
+        // if it's exactly "Shit" possibly with punctuation nearby, prefer "Shoot"
+        if (/^Shit[.!?]?$/i.test(original) || original.length <= 5) return preserveCase("Shoot", original);
+        return preserveCase("poop", original);
+      }
+    },
+
+    // 'fuck' forms
+    // "fucked up" or "fucked" -> "messed up" / "messed"
+    { re: /\bfucked up\b/gi, replace: (m) => preserveCase("messed up", m) },
+    { re: /\bfucked\b/gi, replace: (m) => preserveCase("messed", m) },
+    { re: /\bfucking\b/gi, replace: (m) => preserveCase("really", m) },
+    // standalone "fuck" as interjection -> "darn"/"shoot"/"well" depending on context. fallback to "fudge"
+    { re: /\bFuck yeah\b/gi, replace: (m) => preserveCase("Absolutely", m) },
+    { re: /\bFuck yes\b/gi, replace: (m) => preserveCase("Absolutely", m) },
+    { re: /\bFuck\b/gi, replace: (m) => {
+        // if followed/preceded by "yeah" keep "hell yeah" replacement
+        // otherwise use "fudge" to preserve rhythm; single-word "Well, fuck." -> "Well, fudge."
+        return preserveCase("fudge", m);
+      }
+    },
+
+    // other insults / swears
+    { re: /\bbastard\b/gi, replace: (m) => preserveCase("scoundrel", m) },
+    { re: /\bbitch(es)?\b/gi, replace: (m, s) => preserveCase(s ? "cruel people" : "jerk", m) },
+    { re: /\bdamn(ed|ing|s)?\b/gi, replace: (m, s) => {
+        // keep suffixes when natural
+        if (/damned/i.test(m) || /damn(ed)/i.test(m)) return preserveCase("darned", m);
+        if (/damning/i.test(m)) return preserveCase("darn", m);
+        return preserveCase("darn", m);
+      }
+    },
+  ];
+
+  // preserve capitalization of original string (match)
+  function preserveCase(replacement, original) {
+    if (!original) return replacement;
+    // if original is all-caps -> all caps replacement
+    if (original.toUpperCase() === original) return replacement.toUpperCase();
+    // if original starts with capital letter -> title case replacement
+    if (original[0] && original[0] === original[0].toUpperCase()) {
+      return replacement.charAt(0).toUpperCase() + replacement.slice(1);
+    }
+    // default lower-case
+    return replacement;
+  }
+
+  // walk text nodes under root and apply fn to nodeValue
+  function walkTextNodes(root, fn) {
+    if (!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        // skip empty/whitespace-only nodes
+        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        // skip nodes that are inside the UI wrapper
+        if (node.parentElement && node.parentElement.closest && node.parentElement.closest(`#${UI_WRAPPER_ID}`)) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    }, false);
+
+    const nodes = [];
+    let node;
+    while ((node = walker.nextNode())) nodes.push(node);
+
+    for (const n of nodes) {
+      try {
+        const newText = fn(n.nodeValue);
+        if (newText !== n.nodeValue) n.nodeValue = newText;
+      } catch (err) {
+        // don't let one failure stop others
+        console.warn("squeaky-clean walkTextNodes error:", err);
+      }
+    }
+  }
+
+  // apply replacements to a single string
+  function replaceSwearsInText(text) {
+    if (typeof text !== "string" || text.length === 0) return text;
+    let out = text;
+    for (const { re, replace } of REPLACEMENTS) {
+      out = out.replace(re, function () {
+        try {
+          // call replace with full match first param for convenience
+          const args = Array.prototype.slice.call(arguments);
+          // some replace functions expect only (match) or (match, g1, g2, ...)
+          return replace.apply(null, args);
+        } catch (e) {
+          return arguments[0];
+        }
+      });
+    }
+    return out;
+  }
+
+  // apply squeaky-cleaning to a root element
+  function applySqueakyClean(root) {
+    if (!root) return;
+    // skip if the UI wrapper is not present? no, just avoid touching it via walkTextNodes
+    try {
+      walkTextNodes(root, replaceSwearsInText); // text nodes
+
+      // attributes we may want to sanitize
+      const ATTRS = ["title", "alt", "placeholder", "value"];
+      const elements = root.querySelectorAll("*");
+      for (const el of elements) {
+        // skip UI wrapper descendants
+        if (el.closest && el.closest(`#${UI_WRAPPER_ID}`)) continue;
+        for (const attr of ATTRS) {
+          if (el.hasAttribute && el.hasAttribute(attr)) {
+            const val = el.getAttribute(attr);
+            if (!val) continue;
+            const newVal = replaceSwearsInText(val);
+            if (newVal !== val) el.setAttribute(attr, newVal);
+          }
+        }
+      }
+    } catch (err) {
+      console.warn("squeaky-clean apply error:", err);
+    }
+  }
+
+  let _applyingSqueaky = false; // to avoid infinite loops
+  let scheduled = false;
+
+  function scheduleApply() {
+    if (scheduled) return;
+    scheduled = true;
+    setTimeout(() => {
+      scheduled = false;
+      if (!window.campaignTrail_temp?.squeaky_clean_mode) return;
+      if (_applyingSqueaky) return;
+      _applyingSqueaky = true;
+      try {
+        const gw = document.getElementById(GAME_WINDOW_ID);
+        if (gw) applySqueakyClean(gw);
+      } finally {
+        // small timeout before releasing guard to let observer settle
+        setTimeout(() => { _applyingSqueaky = false; }, 0);
+      }
+    }, SCHEDULE_DEBOUNCE_MS);
+  }
+
+  const observr = new MutationObserver((mutationsList) => {
+    if (!window.campaignTrail_temp?.squeaky_clean_mode) return;
+    // if we are currently applying changes ourselves, bail out (guard)
+    if (_applyingSqueaky) return;
+    // if all mutations are inside the UI wrapper, ignore
+    const interesting = mutationsList.some((m) => {
+      const target = m.target;
+      if (!target) return true;
+      if (target instanceof Node && target.nodeType === Node.TEXT_NODE) {
+        const parent = target.parentElement;
+        if (parent && parent.closest && parent.closest(`#${UI_WRAPPER_ID}`)) return false;
+      } else if (target instanceof Element) {
+        if (target.closest && target.closest(`#${UI_WRAPPER_ID}`)) return false;
+      }
+      return true;
+    });
+    if (!interesting) return;
+    scheduleApply();
+  });
+
+  try {
+    observer.observe(gameWindow, { childList: true, subtree: true, characterData: true, attributes: true });
+  } catch (e) {
+    console.warn("squeaky-clean observer failed to start:", e);
+  }
+
+  // if enabled at load, do one pass
+  if (window.campaignTrail_temp && window.campaignTrail_temp.squeaky_clean_mode) {
+    try {
+      _applyingSqueaky = true;
+      applySqueakyClean(gameWindow);
+    } finally {
+      _applyingSqueaky = false;
+    }
+  }
+
+  // when enabling, run an immediate pass
+  window.enableSqueakyClean = function (enabled) {
+    if (!window.campaignTrail_temp) window.campaignTrail_temp = {};
+    campaignTrail_temp.squeaky_clean_mode = Boolean(enabled);
+    if (enabled) {
+      // run one immediate pass
+      if (_applyingSqueaky) return;
+      _applyingSqueaky = true;
+      try {
+        applySqueakyClean(document.getElementById(GAME_WINDOW_ID));
+      } finally {
+        _applyingSqueaky = false;
+      }
+    }
+  };
+
+  // allow other modules to sanitize strings before injecting them into DOM
+  window.replaceSwearsInText = replaceSwearsInText;
+
+  // export a small helper
+  window._squeakyCleanUtils = {
+    applyToRoot: applySqueakyClean,
+    isEnabled: () => Boolean(window.campaignTrail_temp?.squeaky_clean_mode),
+  };
+})();
+
+
 
 // This is fairly similar to the ending loader used in Things That Never Were.
 // Well, I don't know if it was developed for that mod or not, but I took inspiration
@@ -16656,6 +16936,12 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
         }
     }
+	
+	const winningEV =
+	  campaignTrail_temp?.election_json?.find(f => Number(f.pk) === Number(campaignTrail_temp.election_id))
+		?.fields?.winning_electoral_vote_number ?? 270;
+
+	const someoneHasMajority = aa.some(r => (r.electoral_votes || 0) >= winningEV);
     
     if (typeof CONTINGENT !== 'undefined' && CONTINGENT > 0) {
         endingPickerCONT();
@@ -16759,7 +17045,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 		}]);
     }
 	// Clinton loss - bigly!
-    else if (playerEV >= 4 && playerEV < 200) {
+    else if (playerEV >= 4 && playerEV < 200 && someoneHasMajority) {
         campaignTrail_temp.pages.push(`<div style="background: rgba(0, 0, 0, 0.5); color: white; padding: 1.2em; display: inline-block; border-radius: .5em 0 0 .5em;"><h3><span style="color:#eee;">chasing pirates</span></h3><p>The first domino was Florida, as it so often is. The second one was Ohio. But the one that broke the spell was Pennsylvania. The networks called it at 1:36 a.m. With it, the red bar for Trump nudged past the threshold, and the state on the holographic TV map flickered from toss-up gray to a deep, final crimson.<br/><br/>No one screamed. No one threw anything. The sound that followed was worse: a collective exhalation, as if a hundred people or so had been holding their breath for eighteen months and had all let it go at once. If anything, it felt like whatever energy they had was sucked out of them entirely. They had already abandoned the Javits Center hours ago, and were in a random Manhattan hotel waiting for a miracle that wasn’t coming.<br/><br/>Hillary stood before the wall of screens, her expression unreadable. She had watched the Blue Wall, the firewall she had been assured would hold, crumble brick by brick. Michigan was bleeding, Wisconsin was gone, and she didn’t even wanna think about Minnesota. This wasn’t like a normal landslide, no, it was like a death by a thousand cuts... each one a precinct in a county she’d never heard of, and each one a vote <i>she</i> was supposed to have. The final margin wouldn’t be a chasm.<br/><br/>Slowly, as if moving through water, she walked to the main television. She picked up the remote from a table littered with half-empty coffee cups and some binders. With a quiet <i>click</i>, the screen went black. It was over.<br/><br/>The sudden silence was absolute. In the dark glass of the TV, she saw not a President-elect, but a woman. Tired. Impossibly tired, too, with lines around her eyes that not even the best makeup could hide, and her reflection was so pale she looked as if she had seen a ghost.<br/><br/>Bill moved to her side and put a hand on her arm. His voice was quite low. “Hillary… Barack is on the line. He thinks… h-he says for the good of the country, we should think about a concession call.”<br/><br/>She didn’t turn to look at him. She just kept staring at the TV screen. “I want to go home, Bill.”<br/><br/>“I know,” he said gently. “But the markets, the transition… we need a smooth transfer of power, Hill. We have to show…”<br/><br/>“No,” she said. Her voice wasn’t sharp or angry, although it was quite flat. “I want to go home. Please.”<br/><br/>He looked from his wife to the stunned faces of Podesta and Huma and the rest of her inner circle, all standing frozen. They looked like figures in a wax museum. It was pathetic. And he saw the truth in her eyes. Their fight was over. There was nothing left to give them anymore. And so he nodded. “Okay,” he whispered. “Okay, honey. We’ll go home.”<br/><br/>The ride to Chappaqua was a silent, rather surreal journey through a world that no longer belonged to her. The Secret Service motorcade moved through the sleeping suburbs of New York. She didn’t even want to think about the thousands of Hillary voters in this area who were having it just as bad as her, if not worse. Hillary leaned her head against the cool glass of the window, watching the streetlights streak by in blurry lines of gold and white and some red.<br/><br/>Why? This question wasn’t just political analysis, unfortunately. What had she done? She’d built a working coalition, she’d won the debates, she’d endured every attack, every smear, and every resurrected ghost from their long, public life. She had been told, and had believed, that she was the most qualified person to ever seek the office. And it wasn’t enough. Shit. By the barest of margins, in just the right places, it wasn’t enough. Was it the emails? Was it Russia? Was it fucking James Comey? Or was it something more fundamental? Was it… <i>her</i>? The question echoed in her mind. She didn’t want to answer it.<br/><br/>They pulled into their driveway just before 3 a.m. The house was understandably dark and quiet, and it was a sanctuary that felt worlds away from the noise and the numbers of NYC. Bill unlocked the front door, and the familiar scent of home washed over them. It was hard to describe it, but it felt good.<br/><br/>Hillary walked into the living room, letting her purse slide from her shoulder and hit the floor with a soft thud. She looked at the living room couch — it was a normal couch, to be honest, but at least she could call it comfortable — and sighed. Her legs seemed to give way beneath her. She sank onto the cushions, curled into a ball, pulled a pillow into her chest and held it like a toy.<br/><br/>Bill was there in an instant. He sat on the edge of the couch, and let his hand rest on her back, rubbing slow, gentle circles between her shoulder blades. He didn’t speak. There were no words for this, no good words for it, at least. There was no talk of tomorrow; tomorrow was a foreign country. Trump threatened to lock her up. His supporters wanted her dead. Hillary didn’t know what else awaited her.<br/><br/>She didn’t cry. Her grief was probably too deep for tears. It was just a cold, heavy stone in her stomach. She lay there, thinking about all the work, all the hope, the hands she’d shaken, the babies she’d held, and all the the stories she’d listened to. All of it had, somehow, led to this. To her being in a dark room, with a silent phone, and a few questions that would haunt her for the rest of her life.<br/><br/><i>Why? Why now? What had I done to the world to deserve this?</i><br/><br/>She didn’t know. And as her husband sat beside her, she had a terrifying feeling that perhaps, she never would.</p></div>`);
         campaignTrail_temp.executable.push([0, () => { campaignTrail_temp.image = 'https://media.gettyimages.com/id/777997/pt/foto/first-lady-and-u-s-senate-candidate-hillary-rodham-clinton-appearsh-on-a-television-screen-as-she.jpg?s=612x612&w=0&k=20&c=GNPJvElysf-yudqc52g6i-KsqSZnafiXbG85aYyG0UU='; }]);
 		
@@ -16889,7 +17175,7 @@ function createTooltipProcessor(tooltipList) {
 
     function memoize(fn) {
         const cache = new Map();
-        return function(arg) { // simplified
+        return function(arg) {
             if (cache.has(arg)) {
                 return cache.get(arg);
             }
@@ -16899,19 +17185,26 @@ function createTooltipProcessor(tooltipList) {
         };
     }
 
-    // process & deduplicate tooltips
-    const uniqueTooltipsMap = new Map();
+    // process tooltips: group duplicates
+    const tooltipGroups = new Map();
     for (const tooltip of tooltipList) {
         if (tooltip && tooltip.searchString) {
-            uniqueTooltipsMap.set(tooltip.searchString, tooltip);
+            if (!tooltipGroups.has(tooltip.searchString)) {
+                tooltipGroups.set(tooltip.searchString, []);
+            }
+            tooltipGroups.get(tooltip.searchString).push(tooltip);
         }
     }
 
-    // sort for longest strings first
-    const processedTooltips = Array.from(uniqueTooltipsMap.values())
-        .sort((a, b) => b.searchString.length - a.searchString.length);
+    // for each searchString, randomly pick one tooltip
+    const processedTooltips = Array.from(tooltipGroups.entries()).map(([searchString, tooltips]) => {
+        return tooltips[Math.floor(Math.random() * tooltips.length)];
+    });
 
-    // build.
+    // sort for longest strings first
+    processedTooltips.sort((a, b) => b.searchString.length - a.searchString.length);
+
+    // build
     const groupIndexToTooltipData = new Map();
     const searchPatterns = processedTooltips.map((tooltip, index) => {
         const groupNum = index + 1;
@@ -16920,12 +17213,12 @@ function createTooltipProcessor(tooltipList) {
     });
     
     // only create a regex if there are patterns to search for
-    const TOOLTIP_REGEX = searchPatterns.length > 0 ?
-        new RegExp(
+    const TOOLTIP_REGEX = searchPatterns.length > 0
+        ? new RegExp(
             `(?<=\\b|\\s|^|“)(?:${searchPatterns.join('|')})(?=[.,;!?]?\\b|\\s|”|$)`,
             'gi'
-        ) :
-        null;
+          )
+        : null;
 
     function _applyTooltipsToString(str) {
         if (!TOOLTIP_REGEX || !str) {
@@ -16978,7 +17271,7 @@ function createTooltipProcessor(tooltipList) {
             lastIndex = m.end;
         });
 
-        // ad any remaining text after the last match
+        // add any remaining text after the last match
         if (lastIndex < str.length) {
             result.push(str.slice(lastIndex));
         }
@@ -17008,6 +17301,7 @@ function createTooltipProcessor(tooltipList) {
         }
     };
 }
+
 const tooltipProcessor = createTooltipProcessor(tooltipList);
 
 tooltipProcessor.applyToObject(campaignTrail_temp.questions_json);
@@ -17024,67 +17318,67 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 
     // The songs.
     const SONGS_DATA = [
-        { title: "Soldier of Love", artist: "Sade", coverLink: "https://lh3.googleusercontent.com/1Zb3jhBGUQHrDU6mZHOk-FGPC1mVg-AMls-bJOQBf9Wx3lG31KTbmbdUtlnkAYbsdao-b1cmXvs1tJET=w544-h544-l90-rj", videoId: "zI8YIzWltHM", youtubeLink: "https://www.youtube.com/watch?v=zI8YIzWltHM" },
-        { title: "Nothing Compares 2 U", artist: "Prince", coverLink: "https://i.discogs.com/DQEHxJMMCoAozW-09RSF-12sMKCgHB5aGco8kax0sBg/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MDQz/Nzk3LTE2Njc2OTc0/OTktMTY2NC5qcGVn.jpeg", videoId: "wyo74f6NWwY", youtubeLink: "https://www.youtube.com/watch?v=wyo74f6NWwY" },
-        { title: "Everything Is Wrong", artist: "Interpol", coverLink: "https://i.discogs.com/fajuUIPd6pzjV9sS_CLJz4f0okmvlmKvHVKGzS_--Nw/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY5MTMx/NzctMTQyOTQ1Nzcx/MS0yMTU4LmpwZWc.jpeg", videoId: "4llZXppdjCU", youtubeLink: "https://www.youtube.com/watch?v=4llZXppdjCU" }, // https://lh3.googleusercontent.com/qMHwI69wqwOoHiQdb5nGRaQh32J0DM-WoifH9KZePM-ygPIMDF_litnGhpIeYIygoc7b3nIhaFlYgLfQ=w544-h544-l90-rj"
-        { title: "Blank Generation", artist: "Richard Hell", coverLink: "https://lh3.googleusercontent.com/hDrqJI4nOVwtWGnqd2OEPmUivA50Gp19YuJPly6DUau8VTExM5MtiFezXmTiKkcGJMEQxDMrBzkz6W4=w544-h544-l90-rj", videoId: "v9FkQLjOSZ8", youtubeLink: "https://www.youtube.com/watch?v=v9FkQLjOSZ8" },
-        { title: "Girl Gone Wild", artist: "Madonna", coverLink: "https://lh3.googleusercontent.com/aCpQ5ecu6iU88aQrTkg_gk9vhhGO4sgr79Rwg55s2NQNnhuiR1X1FcBp8PZnQoe2kxtayZghDuZgFPrO=w544-h544-l90-rj", videoId: "9Hyzn5XQ-ro", youtubeLink: "https://www.youtube.com/watch?v=9Hyzn5XQ-ro" },
-        { title: "Feels Just Like it Should", artist: "Jamiroquai", coverLink: "https://lh3.googleusercontent.com/Syc0T0hpUCioc8Ky5irJxhnSLOavM4gnWjVkVCeW8IUlB2v8i-xJEkyUcmumDoojHjIV_e0vtjmdnQY=w544-h544-l90-rj", videoId: "tBZqSRqFQz0", youtubeLink: "https://www.youtube.com/watch?v=tBZqSRqFQz0" },
-		{ title: "You Bring On The Sun", artist: "Londonbeat", coverLink: "https://i.discogs.com/Do-mEAKVHtQa8RsjOI1sX2cMf4Kadbmbjj9TG9GlT94/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2Njgy/NjktMTM4NjA4NDIx/OS00NzEyLmpwZWc.jpeg", videoId: "WEBS80vNEWY", youtubeLink: "https://www.youtube.com/watch?v=WEBS80vNEWY" },
-        { title: "I Wanna Be Adored", artist: "The Stone Roses", coverLink: "https://lh3.googleusercontent.com/gsnCII7GsI0y6dG9-dvrtIgwFVqP1UTKgE4aX0cHaQ4JKyO83D8d8xGr15fWn3WtiC4e5xQdGe6vnkdxww=w544-h544-l90-rj", videoId: "aa10yl8mirk", youtubeLink: "https://www.youtube.com/watch?v=aa10yl8mirk" },
-        { title: "John the Revelator", artist: "Depeche Mode", coverLink: "https://lh3.googleusercontent.com/xf-alOlvnf8xpIHXwd7HiYCbMeSKiqOVbNqN__o7gAtZ7RtyoHO67G-0tKozXtLZMtGc-GctM2PF24Tv=w544-h544-l90-rj", videoId: "ZHI2tInxT0A", youtubeLink: "https://www.youtube.com/watch?v=ZHI2tInxT0A" },
-		{ title: "Cult of Personality", artist: "Living Color", coverLink: "https://lh3.googleusercontent.com/1xH4wgpS-Xp2-KM6fqu3R1qE6yd0Sl83SOT5VqdMrOf0RiLk2HDFJaGBgCNKcEPZ9fb6JOBsYlmI0Wp7=w544-h544-l90-rj", videoId: "8mssfWohiig", youtubeLink: "https://www.youtube.com/watch?v=8mssfWohiig" },
-		{ title: "Youth Of The Nation", artist: "P.O.D.", coverLink: "https://i.discogs.com/FKbXiFnp0Cuz3BUdSumcuerXH3yhDsmowUGS-FB95jM/rs:fit/g:sm/q:90/h:600/w:591/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU4OTE0/Ny0xMjExMTI4NzA4/LmpwZWc.jpeg", videoId: "Pb7Kg1hT-1A", youtubeLink: "https://www.youtube.com/watch?v=Pb7Kg1hT-1A" },
-        { title: "Too Much Love", artist: "LCD Soundsystem", coverLink: "https://lh3.googleusercontent.com/OT3SutN5ptlnj-fQGc2LSuikM1tbKv2RsRf6jRLh9xqYLn62DiSSZyjQ4SdQVgrCmE2JCX4Si5f4XyIr=w544-h544-l90-rj", videoId: "CcEC5r0xzt8", youtubeLink: "https://www.youtube.com/watch?v=CcEC5r0xzt8" },
-        { title: "Natural One", artist: "The Folk Implosion", coverLink: "https://i.discogs.com/TZXSFqXeiXbmoeH31CKTeIB5C-Eo2UeCBTQ86bC_cvI/rs:fit/g:sm/q:90/h:527/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ5ODk5/LTEzMzUzMDExMDku/anBlZw.jpeg", videoId: "V4w6GcCoTPQ", youtubeLink: "https://www.youtube.com/watch?v=V4w6GcCoTPQ" },
-        { title: "Haunt You Every Day (Demo)", artist: "Weezer", coverLink: "https://i.ytimg.com/vi/VNoRB57yLak/maxresdefault.jpg", videoId: "VNoRB57yLak", youtubeLink: "https://www.youtube.com/watch?v=VNoRB57yLak" }, // original video: JMYJ-gxlKwc
-		{ title: "Gardenhead / Leave Me Alone", artist: "Neutral Milk Hotel", coverLink: "https://lh3.googleusercontent.com/Cy-w6XXRmh7yLUKglZ05FpdEAu_ySP98JS85JFCuRbMOp2SbJn73CMZ-ngGY5WxeSOGMLx3-CLAL_uPg=w544-h544-l90-rj", videoId: "svxUvcwFYBs", youtubeLink: "https://www.youtube.com/watch?v=svxUvcwFYBs" },
-		{ title: "Always", artist: "Tom Verlaine", coverLink: "https://i.discogs.com/eYXKSCUz7FhVLBuyhUc_-sG8yrEVtbeBtMoA4Gv7ffw/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NzIx/OTUtMTMwNDk4NDYw/OS5qcGVn.jpeg", videoId: "9X8SEnCGCKE", youtubeLink: "https://www.youtube.com/watch?v=9X8SEnCGCKE" },
-        { title: "Well I Wonder", artist: "The Smiths", coverLink: "https://lh3.googleusercontent.com/3MqgtN5ZbbMB48TGTkHnlHTRlHNh1SVy_8MN-LByI4iAT-cza4eGiuFvPT243IyyEz0vSaItp432DgU=w544-h544-l90-rj", videoId: "zUbCkPdBNHg", youtubeLink: "https://www.youtube.com/watch?v=zUbCkPdBNHg" },
-        { title: "The Killing Moon", artist: "Echo & The Bunnymen", coverLink: "https://lh3.googleusercontent.com/mbomD0JAl6L_sVTLgSesBNqD0A_roeGlh9ciz_Tq0qaL-ojnaFmx_MY5aWfVQwYx6LD01451ex6XhIE=w544-h544-l90-rj", videoId: "aVD1HRV8NqA", youtubeLink: "https://www.youtube.com/watch?v=aVD1HRV8NqA" },
-        { title: "You Have Been Loved", artist: "George Michael", coverLink: "https://i.discogs.com/XDh2r_xwLYty258j7oROTAqxqCLtj65gwRLGY_v6dV8/rs:fit/g:sm/q:90/h:538/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQzMzE3/OS0xNDcxMzkwMTIw/LTU5MjAuanBlZw.jpeg", videoId: "SXRz-ZT0MIE", youtubeLink: "https://www.youtube.com/watch?v=SXRz-ZT0MIE" } // https://lh3.googleusercontent.com/FRCiQ0ZVpamP79z4l2xBWjmA6RimF_gPnOLEGp3pl2J8b4bGf4cGs3-i8WyraqFaE-krGHk-ytSLUAj4=w544-h544-l90-rj
+        { title: "Soldier of Love", artist: "Sade", coverLink: "https://lh3.googleusercontent.com/1Zb3jhBGUQHrDU6mZHOk-FGPC1mVg-AMls-bJOQBf9Wx3lG31KTbmbdUtlnkAYbsdao-b1cmXvs1tJET=w544-h544-l90-rj", videoIds: ["zI8YIzWltHM"] },
+        { title: "Nothing Compares 2 U", artist: "Prince", coverLink: "https://i.discogs.com/DQEHxJMMCoAozW-09RSF-12sMKCgHB5aGco8kax0sBg/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MDQz/Nzk3LTE2Njc2OTc0/OTktMTY2NC5qcGVn.jpeg", videoIds: ["wyo74f6NWwY"] },
+        { title: "Everything Is Wrong", artist: "Interpol", coverLink: "https://i.discogs.com/fajuUIPd6pzjV9sS_CLJz4f0okmvlmKvHVKGzS_--Nw/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY5MTMx/NzctMTQyOTQ1Nzcx/MS0yMTU4LmpwZWc.jpeg", videoIds: ["4llZXppdjCU"] },
+        { title: "Blank Generation", artist: "Richard Hell", coverLink: "https://lh3.googleusercontent.com/hDrqJI4nOVwtWGnqd2OEPmUivA50Gp19YuJPly6DUau8VTExM5MtiFezXmTiKkcGJMEQxDMrBzkz6W4=w544-h544-l90-rj", videoIds: ["v9FkQLjOSZ8"] },
+        { title: "Girl Gone Wild", artist: "Madonna", coverLink: "https://lh3.googleusercontent.com/aCpQ5ecu6iU88aQrTkg_gk9vhhGO4sgr79Rwg55s2NQNnhuiR1X1FcBp8PZnQoe2kxtayZghDuZgFPrO=w544-h544-l90-rj", videoIds: ["9Hyzn5XQ-ro"] },
+        { title: "Feels Just Like it Should", artist: "Jamiroquai", coverLink: "https://lh3.googleusercontent.com/Syc0T0hpUCioc8Ky5irJxhnSLOavM4gnWjVkVCeW8IUlB2v8i-xJEkyUcmumDoojHjIV_e0vtjmdnQY=w544-h544-l90-rj", videoIds: ["tBZqSRqFQz0"] },
+		{ title: "You Bring On The Sun", artist: "Londonbeat", coverLink: "https://i.discogs.com/Do-mEAKVHtQa8RsjOI1sX2cMf4Kadbmbjj9TG9GlT94/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI2Njgy/NjktMTM4NjA4NDIx/OS00NzEyLmpwZWc.jpeg", videoIds: ["WEBS80vNEWY", "1dsdVlkkuzk"] },
+        { title: "I Wanna Be Adored", artist: "The Stone Roses", coverLink: "https://lh3.googleusercontent.com/gsnCII7GsI0y6dG9-dvrtIgwFVqP1UTKgE4aX0cHaQ4JKyO83D8d8xGr15fWn3WtiC4e5xQdGe6vnkdxww=w544-h544-l90-rj", videoIds: ["aa10yl8mirk"] },
+        { title: "John the Revelator", artist: "Depeche Mode", coverLink: "https://lh3.googleusercontent.com/xf-alOlvnf8xpIHXwd7HiYCbMeSKiqOVbNqN__o7gAtZ7RtyoHO67G-0tKozXtLZMtGc-GctM2PF24Tv=w544-h544-l90-rj", videoIds: ["ZHI2tInxT0A"] },
+		{ title: "Cult of Personality", artist: "Living Color", coverLink: "https://lh3.googleusercontent.com/1xH4wgpS-Xp2-KM6fqu3R1qE6yd0Sl83SOT5VqdMrOf0RiLk2HDFJaGBgCNKcEPZ9fb6JOBsYlmI0Wp7=w544-h544-l90-rj", videoIds: ["8mssfWohiig"] },
+		{ title: "Youth Of The Nation", artist: "P.O.D.", coverLink: "https://i.discogs.com/FKbXiFnp0Cuz3BUdSumcuerXH3yhDsmowUGS-FB95jM/rs:fit/g:sm/q:90/h:600/w:591/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTU4OTE0/Ny0xMjExMTI4NzA4/LmpwZWc.jpeg", videoIds: ["Pb7Kg1hT-1A"] },
+        { title: "Too Much Love", artist: "LCD Soundsystem", coverLink: "https://lh3.googleusercontent.com/OT3SutN5ptlnj-fQGc2LSuikM1tbKv2RsRf6jRLh9xqYLn62DiSSZyjQ4SdQVgrCmE2JCX4Si5f4XyIr=w544-h544-l90-rj", videoIds: ["CcEC5r0xzt8"] },
+        { title: "Natural One", artist: "The Folk Implosion", coverLink: "https://i.discogs.com/TZXSFqXeiXbmoeH31CKTeIB5C-Eo2UeCBTQ86bC_cvI/rs:fit/g:sm/q:90/h:527/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ5ODk5/LTEzMzUzMDExMDku/anBlZw.jpeg", videoIds: ["V4w6GcCoTPQ"] },
+        { title: "Haunt You Every Day (Demo)", artist: "Weezer", coverLink: "https://i.ytimg.com/vi/VNoRB57yLak/maxresdefault.jpg", videoIds: ["VNoRB57yLak", "JMYJ-gxlKwc"] },
+		{ title: "Gardenhead / Leave Me Alone", artist: "Neutral Milk Hotel", coverLink: "https://lh3.googleusercontent.com/Cy-w6XXRmh7yLUKglZ05FpdEAu_ySP98JS85JFCuRbMOp2SbJn73CMZ-ngGY5WxeSOGMLx3-CLAL_uPg=w544-h544-l90-rj", videoIds: ["svxUvcwFYBs", "_s41RrvH1lQ"] },
+		{ title: "Always", artist: "Tom Verlaine", coverLink: "https://i.discogs.com/eYXKSCUz7FhVLBuyhUc_-sG8yrEVtbeBtMoA4Gv7ffw/rs:fit/g:sm/q:90/h:597/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI4NzIx/OTUtMTMwNDk4NDYw/OS5qcGVn.jpeg", videoIds: ["9X8SEnCGCKE"] },
+        { title: "Well I Wonder", artist: "The Smiths", coverLink: "https://lh3.googleusercontent.com/3MqgtN5ZbbMB48TGTkHnlHTRlHNh1SVy_8MN-LByI4iAT-cza4eGiuFvPT243IyyEz0vSaItp432DgU=w544-h544-l90-rj", videoIds: ["zUbCkPdBNHg"] },
+        { title: "The Killing Moon", artist: "Echo & The Bunnymen", coverLink: "https://lh3.googleusercontent.com/mbomD0JAl6L_sVTLgSesBNqD0A_roeGlh9ciz_Tq0qaL-ojnaFmx_MY5aWfVQwYx6LD01451ex6XhIE=w544-h544-l90-rj", videoIds: ["aVD1HRV8NqA"] },
+        { title: "You Have Been Loved", artist: "George Michael", coverLink: "https://i.discogs.com/XDh2r_xwLYty258j7oROTAqxqCLtj65gwRLGY_v6dV8/rs:fit/g:sm/q:90/h:538/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQzMzE3/OS0xNDcxMzkwMTIw/LTU5MjAuanBlZw.jpeg", videoIds: ["SXRz-ZT0MIE"] }
     ];
     const PLAYLIST_TWO_DATA = [
-        { title: "Stronger Than Me", artist: "Amy Winehouse", coverLink: "https://lh3.googleusercontent.com/ERQwzDcTEBrcy8aUU0s-NcYnbcgJOu_-BwBB-A4Z_nRrtbfS2BhMqTovWvLSIfjAtJD_RERUokB2ze_-=w544-h544-l90-rj", videoId: "eQpINcpE-Wo", youtubeLink: "https://www.youtube.com/watch?v=eQpINcpE-Wo" },
-		{ title: "We Don’t Have That Much Time Together", artist: "Sananda Maitreya", coverLink: "https://lh3.googleusercontent.com/vhd98YlgS1Sh4FCmoJ3e2zi4eyAnOtKjp-aiNpcxJ94eYA-VAzAUMPwuQ1aI_MctD18JXtdPP8Rky0tj_g=w544-h544-l90-rj", videoId: "Et6Grrm1OLk", youtubeLink: "https://www.youtube.com/watch?v=Et6Grrm1OLk" },
-		{ title: "Sappy (1990 Studio Demo)", artist: "Nirvana", coverLink: "https://lh3.googleusercontent.com/aUSTL4p5gGFiKesMYQnYLqqQ8534TVY9A0A-4IbrZgGBVDKAmLbHsO2VFBYAhXDyDHa0hh2Ozs9FgyPF9A=w544-h544-s-l90-rj", videoId: "1MjAZSEprQU", youtubeLink: "https://www.youtube.com/watch?v=1MjAZSEprQU" },
-		{ title: "Millennium", artist: "Robbie Williams", coverLink: "https://lh3.googleusercontent.com/eXVDuIRMQKHl6uyR-nWf3yLDfSD5rWNPh0bUMu0OdCn6ZlyOdLen3HyrmJGtCTWnY04WUvivct4YVNI=w544-h544-l90-rj", videoId: "sGDzkz3rKV4", youtubeLink: "https://www.youtube.com/watch?v=sGDzkz3rKV4" },
-		{ title: "Heaven Can Wait", artist: "Michael Jackson", coverLink: "https://i.discogs.com/2RH0GWmw-gLbNTQ-GTImSYuLLZvJOFA2AkJu8A7mylc/rs:fit/g:sm/q:90/h:592/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTM2/MTEtMTQ0MDYwODM5/My02MDA5LmpwZWc.jpeg", videoId: "8Gl9h5FZdxk", youtubeLink: "https://www.youtube.com/watch?v=8Gl9h5FZdxk" },
-		{ title: "Kid Who Stays in the Picture", artist: "Hot Hot Heat", coverLink: "https://lh3.googleusercontent.com/0mSHh8MlTKSq1LfjThZa4DRqGtLXCNetxH_lFlbPPOUlcoKRysPW_kb1YicROxpes3uNTu0ZYegCMMut=w544-h544-l90-rj", videoId: "xyBCenRonTc", youtubeLink: "https://www.youtube.com/watch?v=xyBCenRonTc" },
-		{ title: "Traveling at the Speed of Light", artist: "Joywave", coverLink: "https://lh3.googleusercontent.com/1Yqi0xIJndmpKyyQfkhswNMuFaVjENQr_yMj0uR6oi-LA-iQX-DrS5sPBJ02b6qUUHhESfmjaExLLF4k=w544-h544-l90-rj", videoId: "yZAj7LZh8fs", youtubeLink: "https://www.youtube.com/watch?v=yZAj7LZh8fs" },
-		{ title: "Numb", artist: "Linkin Park", coverLink: "https://lh3.googleusercontent.com/Rqh2HDAD-Fj1-oHYqVklPGklMHIV3r6SMPMZmFE3FlLiWeBBnP3SCESfgeNdzQ-DmpCIvOGE4J0hzVxa=w544-h544-s-l90-rj", videoId: "dxp9w9Ggehc", youtubeLink: "https://www.youtube.com/watch?v=dxp9w9Ggehc" },
-        { title: "I Might Be Wrong", artist: "Radiohead", coverLink: "https://lh3.googleusercontent.com/IztVMgq0rRLUhtQa6IxD4Vx145SQYQjnUQtuSHUl12b4B6Oyf-e-M0S1lrtIBnXCQFSeNABeanlxcdk=w544-h544-l90-rj", videoId: "_Qvlh_dvmkk", youtubeLink: "https://www.youtube.com/watch?v=_Qvlh_dvmkk" },
-		{ title: "Sin", artist: "Nine Inch Nails", coverLink: "https://lh3.googleusercontent.com/lgi0zaHlbZC6stXi73LlAKkN-sdNTYSGJ0h4TNrG35TGTCOc7i47C4BDaXH7KboZWvKfGaLLPJ2tv50Y=w544-h544-l90-rj", videoId: "lIvzTlAdcUE", youtubeLink: "https://www.youtube.com/watch?v=lIvzTlAdcUE" },
-        { title: "Looking For Strange", artist: "KMFDM", coverLink: "https://lh3.googleusercontent.com/JaQfxrFps-mW0HeyZRuzNE2sTJopn9jpEvrL-72swg2_n59ecYNwKH_tU-tIg3jEVYhmAFsDdHoVz57-iA=w544-h544-l90-rj", videoId: "Y1dGwI8uiwc", youtubeLink: "https://www.youtube.com/watch?v=Y1dGwI8uiwc" },
-		{ title: "Red Flags And Long Nights", artist: "She Wants Revenge", coverLink: "https://lh3.googleusercontent.com/N-J6DkwVQ_5QP4f4eyeC-2RXVwB1DvO3FUkLVFGioq46LVGFRuzgQBijjp8TKtfIG-a_q-8sTftUt-s=w544-h544-s-l90-rj", videoId: "ENZy7f_v6Fs", youtubeLink: "https://www.youtube.com/watch?v=ENZy7f_v6Fs" },
-        { title: "Sub-culture", artist: "New Order", coverLink: "https://lh3.googleusercontent.com/D9wKilSquMzsqc9qdyw4Gu1rtJPvZ82WqvlJHu1dkOb0R2ncLduK2SLOCuGCH4qjJohVAvogj2-G9Zw=w544-h544-l90-rj", videoId: "Exoyet7OoWA", youtubeLink: "https://www.youtube.com/watch?v=Exoyet7OoWA" },
-		{ title: "Where the Streets Have No Name (I Can’t Take My Eyes off You)", artist: "Pet Shop Boys", coverLink: "https://i.discogs.com/LFHv3FkAHQlhLo--6e5kUcHJMFpSAUnlYPh_6PXrxGs/rs:fit/g:sm/q:90/h:600/w:595/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyODQ3/MTktMTM4NzU4OTY0/MS0zNDUwLmpwZWc.jpeg", videoId: "sm36_lWAviQ", youtubeLink: "https://www.youtube.com/watch?v=sm36_lWAviQ" },
-		{ title: "I Ran (So Far Away)", artist: "A Flock Of Seagulls", coverLink: "https://lh3.googleusercontent.com/1T7FD-g00b1ioKn7-L12x9o8cracdGJ5s2mWhlTqbXQMwF0v-9E9BucDCY6Vnr4g0aQA2wdUOuKFsXan=w544-h544-l90-rj", videoId: "8UqlM0ki0Cc", youtubeLink: "https://www.youtube.com/watch?v=8UqlM0ki0Cc" },
-		{ title: "Blessed State", artist: "The Wire", coverLink: "https://lh3.googleusercontent.com/Neurxtu-LF58Br8vc2I-VHFnPLKW8JqhZpW9Hdq11diLALnwTTMJ1-qQ03-kRcAtxa_31Ymu5JJG5ps=w544-h544-l90-rj", videoId: "LeCI9kww3Dk", youtubeLink: "https://www.youtube.com/watch?v=LeCI9kww3Dk" },
-		{ title: "Sleep Apnea", artist: "Beach Fossils", coverLink: "https://a2.cdn.hhv.de/items/images/generated/475x475/01054/1054978/1-beach-fossils-clash-the-truth-demos-colored-vinyl-edition.webp", videoId: "nuvJSl24wAw", youtubeLink: "https://www.youtube.com/watch?v=nuvJSl24wAw" },
-		{ title: "Dream a Little Dream of Me", artist: "Michael Bublé", coverLink: "https://lh3.googleusercontent.com/57IJIYVLm6YTr9a1Wly4WGffKj3kn3s-5JFxCJ7LkRPWT5hLVrV21LDaT0I-7l6-djgF7-71zWvQZcc=w544-h544-l90-rj", videoId: "0QgM7lNgFnA", youtubeLink: "https://www.youtube.com/watch?v=0QgM7lNgFnA" },
-        { title: "Humiliation", artist: "Yoñlu", coverLink: "https://lh3.googleusercontent.com/fecmzZxLj4SvYNp-6e5TrbLoWFqkIsmnJz0Z41CmHFClnoCHCBE3Wpn4Obg0aubsCzomD01OWASsPK-inw=w544-h544-l90-rj", videoId: "uQH85xHXnYQ", youtubeLink: "https://www.youtube.com/watch?v=uQH85xHXnYQ" },
+        { title: "Stronger Than Me", artist: "Amy Winehouse", coverLink: "https://lh3.googleusercontent.com/ERQwzDcTEBrcy8aUU0s-NcYnbcgJOu_-BwBB-A4Z_nRrtbfS2BhMqTovWvLSIfjAtJD_RERUokB2ze_-=w544-h544-l90-rj", videoIds: ["eQpINcpE-Wo"] },
+		{ title: "We Don’t Have That Much Time Together", artist: "Sananda Maitreya", coverLink: "https://lh3.googleusercontent.com/vhd98YlgS1Sh4FCmoJ3e2zi4eyAnOtKjp-aiNpcxJ94eYA-VAzAUMPwuQ1aI_MctD18JXtdPP8Rky0tj_g=w544-h544-l90-rj", videoIds: ["Et6Grrm1OLk"] },
+		{ title: "Sappy (1990 Studio Demo)", artist: "Nirvana", coverLink: "https://lh3.googleusercontent.com/aUSTL4p5gGFiKesMYQnYLqqQ8534TVY9A0A-4IbrZgGBVDKAmLbHsO2VFBYAhXDyDHa0hh2Ozs9FgyPF9A=w544-h544-s-l90-rj", videoIds: ["1MjAZSEprQU"] },
+		{ title: "Millennium", artist: "Robbie Williams", coverLink: "https://lh3.googleusercontent.com/eXVDuIRMQKHl6uyR-nWf3yLDfSD5rWNPh0bUMu0OdCn6ZlyOdLen3HyrmJGtCTWnY04WUvivct4YVNI=w544-h544-l90-rj", videoIds: ["sGDzkz3rKV4"] },
+		{ title: "Heaven Can Wait", artist: "Michael Jackson", coverLink: "https://i.discogs.com/2RH0GWmw-gLbNTQ-GTImSYuLLZvJOFA2AkJu8A7mylc/rs:fit/g:sm/q:90/h:592/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTM2/MTEtMTQ0MDYwODM5/My02MDA5LmpwZWc.jpeg", videoIds: ["8Gl9h5FZdxk"] },
+		{ title: "Kid Who Stays in the Picture", artist: "Hot Hot Heat", coverLink: "https://lh3.googleusercontent.com/0mSHh8MlTKSq1LfjThZa4DRqGtLXCNetxH_lFlbPPOUlcoKRysPW_kb1YicROxpes3uNTu0ZYegCMMut=w544-h544-l90-rj", videoIds: ["xyBCenRonTc"] },
+		{ title: "Traveling at the Speed of Light", artist: "Joywave", coverLink: "https://lh3.googleusercontent.com/1Yqi0xIJndmpKyyQfkhswNMuFaVjENQr_yMj0uR6oi-LA-iQX-DrS5sPBJ02b6qUUHhESfmjaExLLF4k=w544-h544-l90-rj", videoIds: ["yZAj7LZh8fs"] },
+		{ title: "Numb", artist: "Linkin Park", coverLink: "https://lh3.googleusercontent.com/Rqh2HDAD-Fj1-oHYqVklPGklMHIV3r6SMPMZmFE3FlLiWeBBnP3SCESfgeNdzQ-DmpCIvOGE4J0hzVxa=w544-h544-s-l90-rj", videoIds: ["dxp9w9Ggehc"] },
+        { title: "I Might Be Wrong", artist: "Radiohead", coverLink: "https://lh3.googleusercontent.com/IztVMgq0rRLUhtQa6IxD4Vx145SQYQjnUQtuSHUl12b4B6Oyf-e-M0S1lrtIBnXCQFSeNABeanlxcdk=w544-h544-l90-rj", videoIds: ["_Qvlh_dvmkk"] },
+		{ title: "Sin", artist: "Nine Inch Nails", coverLink: "https://lh3.googleusercontent.com/lgi0zaHlbZC6stXi73LlAKkN-sdNTYSGJ0h4TNrG35TGTCOc7i47C4BDaXH7KboZWvKfGaLLPJ2tv50Y=w544-h544-l90-rj", videoIds: ["lIvzTlAdcUE"] },
+        { title: "Looking For Strange", artist: "KMFDM", coverLink: "https://lh3.googleusercontent.com/JaQfxrFps-mW0HeyZRuzNE2sTJopn9jpEvrL-72swg2_n59ecYNwKH_tU-tIg3jEVYhmAFsDdHoVz57-iA=w544-h544-l90-rj", videoIds: ["Y1dGwI8uiwc"] },
+		{ title: "Red Flags And Long Nights", artist: "She Wants Revenge", coverLink: "https://lh3.googleusercontent.com/N-J6DkwVQ_5QP4f4eyeC-2RXVwB1DvO3FUkLVFGioq46LVGFRuzgQBijjp8TKtfIG-a_q-8sTftUt-s=w544-h544-s-l90-rj", videoIds: ["ENZy7f_v6Fs"] },
+        { title: "Sub-culture", artist: "New Order", coverLink: "https://lh3.googleusercontent.com/D9wKilSquMzsqc9qdyw4Gu1rtJPvZ82WqvlJHu1dkOb0R2ncLduK2SLOCuGCH4qjJohVAvogj2-G9Zw=w544-h544-l90-rj", videoIds: ["Exoyet7OoWA"] },
+		{ title: "Where the Streets Have No Name (I Can’t Take My Eyes off You)", artist: "Pet Shop Boys", coverLink: "https://i.discogs.com/LFHv3FkAHQlhLo--6e5kUcHJMFpSAUnlYPh_6PXrxGs/rs:fit/g:sm/q:90/h:600/w:595/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyODQ3/MTktMTM4NzU4OTY0/MS0zNDUwLmpwZWc.jpeg", videoIds: ["sm36_lWAviQ"] },
+		{ title: "I Ran (So Far Away)", artist: "A Flock Of Seagulls", coverLink: "https://lh3.googleusercontent.com/1T7FD-g00b1ioKn7-L12x9o8cracdGJ5s2mWhlTqbXQMwF0v-9E9BucDCY6Vnr4g0aQA2wdUOuKFsXan=w544-h544-l90-rj", videoIds: ["8UqlM0ki0Cc"] },
+		{ title: "Blessed State", artist: "The Wire", coverLink: "https://lh3.googleusercontent.com/Neurxtu-LF58Br8vc2I-VHFnPLKW8JqhZpW9Hdq11diLALnwTTMJ1-qQ03-kRcAtxa_31Ymu5JJG5ps=w544-h544-l90-rj", videoIds: ["LeCI9kww3Dk"] },
+		{ title: "Sleep Apnea", artist: "Beach Fossils", coverLink: "https://a2.cdn.hhv.de/items/images/generated/475x475/01054/1054978/1-beach-fossils-clash-the-truth-demos-colored-vinyl-edition.webp", videoIds: ["nuvJSl24wAw"] },
+		{ title: "Dream a Little Dream of Me", artist: "Michael Bublé", coverLink: "https://lh3.googleusercontent.com/57IJIYVLm6YTr9a1Wly4WGffKj3kn3s-5JFxCJ7LkRPWT5hLVrV21LDaT0I-7l6-djgF7-71zWvQZcc=w544-h544-l90-rj", videoIds: ["0QgM7lNgFnA"] },
+        { title: "Humiliation", artist: "Yoñlu", coverLink: "https://lh3.googleusercontent.com/fecmzZxLj4SvYNp-6e5TrbLoWFqkIsmnJz0Z41CmHFClnoCHCBE3Wpn4Obg0aubsCzomD01OWASsPK-inw=w544-h544-l90-rj", videoIds: ["uQH85xHXnYQ"] },
     ];
     const PLAYLIST_THREE_DATA = [
-        { title: "Someday Is Tonight", artist: "Janet Jackson", coverLink: "https://lh3.googleusercontent.com/LjZePM9GvoVF88nE4UKJvpH71-yXHGKsGnmt77imOV6bth_6E3pAlnQizYYDgX1Fl9j7k6vzHw0OPTkP=w544-h544-l90-rj", videoId: "jHoP9UACqaQ", youtubeLink: "https://www.youtube.com/watch?v=jHoP9UACqaQ" },
-		{ title: "Absolutely Nothing’s Changed", artist: "Tina Turner", coverLink: "https://lh3.googleusercontent.com/dWc6ruKtj-SAHS6qm_pa10SqLkjjZ_sRhzXjyS2SwFtooy2wdIf4nQ0XkclbU5XgIlf6qV58R13maUA=w544-h544-l90-rj", videoId: "lq1jdjxObrk", youtubeLink: "https://www.youtube.com/watch?v=lq1jdjxObrk" },
-		{ title: "Low", artist: "Lenny Kravitz", coverLink: "https://lh3.googleusercontent.com/-QE8g4sUkiTgVXV8LYJ4VqwlcDL49GUyrzOu63cf5sRmIhq0mdAweVQ7EmMCGPGmi4CszL08UvIgrzKZ=w544-h544-l90-rj", videoId: "_zghpPDQ2y8", youtubeLink: "https://www.youtube.com/watch?v=_zghpPDQ2y8" },
-		{ title: "Marilyn Monroe", artist: "Pharrell Williams", coverLink: "https://lh3.googleusercontent.com/n1BU7liMVsgA5dZnk020PEoWyjjZECDqYR26DbV8osH6wJB2OPbw_8H13O-x7AwEK-4i_LJeHHQM6BFi=w544-h544-s-l90-rj", videoId: "xUPiYEhs3lw", youtubeLink: "https://www.youtube.com/watch?v=xUPiYEhs3lw" },
-        { title: "Valentine’s Day", artist: "David Bowie", coverLink: "https://lh3.googleusercontent.com/dpM4jPTAa84rJ0hkkp3nPdn2lNdPmWXa1isLJu2A8HQXOBfMLmb3lJXH0c0UYj_c0DPBxen6TmOpH_U=w544-h544-l90-rj", videoId: "nbSdOIZhD5Y", youtubeLink: "https://www.youtube.com/watch?v=nbSdOIZhD5Y" },
-        { title: "Marquee Moon", artist: "Television", coverLink: "https://lh3.googleusercontent.com/lRzsgg9OZ8asdYhy47O0xix5umxrJJh6g3cbqGKmeWdz1jzZiUoH0fC0SDNzcBrIKNZqdr6SC3v1xz9K=w544-h544-s-l90-rj", videoId: "g4myghLPLZc", youtubeLink: "https://www.youtube.com/watch?v=g4myghLPLZc" },
-		{ title: "Me, I Disconnect from You", artist: "Tubeway Army", coverLink: "https://lh3.googleusercontent.com/0XD-Nt5289-YT_mp6YzVWUOH1kZ-BW9d-utBv4VCxjoyEgYZ2TVZIloROXYHH7Q4THNmddM9Of77MLoTTQ=w544-h544-l90-rj", videoId: "6SCrfZPMeWg", youtubeLink: "https://www.youtube.com/watch?v=6SCrfZPMeWg" },
-        { title: "Darkness", artist: "The Human League", coverLink: "https://lh3.googleusercontent.com/5UgvTLEebZkbRH9fiGuJajPDSur-nJXHpHKCJUDkQd3LR-hJBAsqeKevMhPKQnyNX7MbBRnQWWabh0u0=w544-h544-l90-rj", videoId: "vPfk7ktdqo4", youtubeLink: "https://www.youtube.com/watch?v=vPfk7ktdqo4" },
-		{ title: "Fall Into Place", artist: "Apartment", coverLink: "https://lh3.googleusercontent.com/G5iK-2BALHx_hHwB1LBmzHthvtt3BF8NB428Ub4sTkTYUv3bT6bI6lN9N1SZyIlzKTps58GudSFHWPXo=w544-h544-l90-rj", videoId: "IQaEg6GguLk", youtubeLink: "https://www.youtube.com/watch?v=IQaEg6GguLk" },
-        { title: "Fight Song", artist: "Rachel Platten", coverLink: "https://lh3.googleusercontent.com/AxQrFKHbt5jU_DiZihMhlJ3bxGLBy3rN6yfLlb0SJ68ay4FpnciNHNkD9WTXPBfbX1gCCZI5pFs2bJzU=w544-h544-l90-rj", videoId: "y5h_dukaB1I", youtubeLink: "https://www.youtube.com/watch?v=y5h_dukaB1I" },
-		{ title: "The Ballad of Harambe", artist: "c a n d i d !", coverLink: "https://lh3.googleusercontent.com/F3ub3Ot4uC_HiLYe9RW-nxvMI__N7S5OkyGf_4bgU1MSIW4wp05es_6DF2GBAueUM-LVzIqxz8YuI1rY=w120-h120-l90-rj", videoId: "VX8omFoNHdQ", youtubeLink: "https://www.youtube.com/watch?v=VX8omFoNHdQ" },
-		{ title: "Set Adrift on Memory Bliss", artist: "P.M. Dawn", coverLink: "https://lh3.googleusercontent.com/51qmaba8irr1qqXAcVc5CGV6bTiNNlevjEgh4cCDCntbqZP4dc1gcVlcf_lxA42D8CkZxDTW3L3SnPa4=w544-h544-l90-rj", videoId: "MurZoAE40VA", youtubeLink: "https://www.youtube.com/watch?v=MurZoAE40VA" },
-		{ title: "Woke Up This Morning (Chosen One Mix)", artist: "Alabama 3", coverLink: "https://lh3.googleusercontent.com/EHKdWSYR9Kenl61Gu87krAIFBJCRmrHdTGISW46gHmiAjuElSW18fCpkvVTlGYnKn3lzmartBT_7K3t6mQ=w544-h544-l90-rj", videoId: "slpCmg53qkU", youtubeLink: "https://www.youtube.com/watch?v=slpCmg53qkU" },
-		{ title: "What’s on Your Mind (Pure Energy)", artist: "Information Society", coverLink: "https://lh3.googleusercontent.com/ZWMW9K6oQVxTOOfPAy-7NLsta-kxbLXWEWgG7o4ZuO8c25KMs07dkGc-lHY0Udg9J9jdsSVsYJTgjq8=w544-h544-l90-rj", videoId: "lCrD81j6OD0", youtubeLink: "https://www.youtube.com/watch?v=lCrD81j6OD0" },
-		{ title: "Dirty Dreamer (XXX)", artist: "Hot Flash Heat Wave", coverLink: "https://lh3.googleusercontent.com/1hBYdeKS2xmwKgfhmRTqN18V0fMgu4PBc_Rg2UkcQY2W8KnFe5Csu2cQE4h8LAgNn21XGERhJXvnVH97=w544-h544-l90-rj", videoId: "Xyo5SKE5mpU", youtubeLink: "https://www.youtube.com/watch?v=Xyo5SKE5mpU" },
-		{ title: "Bad Habit", artist: "The Kooks", coverLink: "https://i.scdn.co/image/ab67616d0000b273c8fcda98c93a02df95dec4ae", videoId: "VYfv5qcX5vo", youtubeLink: "https://www.youtube.com/watch?v=VYfv5qcX5vo" },
-		{ title: "Good Clean Fun", artist: "Kaiser Chiefs", coverLink: "https://lh3.googleusercontent.com/1WYR7vOnMx8sbUbBHEI-3Q8YFfQOqvtTovFZnsUvcLnVGR2nmLegDLguykg8kgKiQi6OL6ZLNhag1_NY=w544-h544-l90-rj", videoId: "zcMX8fQ7buU", youtubeLink: "https://www.youtube.com/watch?v=zcMX8fQ7buU" },
-		{ title: "Stop The World I Wanna Get Off With You", artist: "Arctic Monkeys", coverLink: "https://lh3.googleusercontent.com/D2kk6n8VH8YTwZoY9Vczdmrm74WvvkWgiCgIVVLcMv-NXyzZFgL-J64Mwls0p9P7x1aqM1xovqry5JM=w544-h544-l90-rj", videoId: "H8oiojAmKCI", youtubeLink: "https://www.youtube.com/watch?v=H8oiojAmKCI" },
-		{ title: "Saving All My Love For You", artist: "Whitney Houston", coverLink: "https://lh3.googleusercontent.com/qRoa7SdWC7qa13JLpgK5wrqJc7HsJAGfDlRzyJPBpiF8zY8sgQ4YSocEqlwRZpM8_JtJcWxaKAb2d_kerQ=w544-h544-l90-rj", videoId: "GpQbMAIZVn8", youtubeLink: "https://www.youtube.com/watch?v=GpQbMAIZVn8" },
+        { title: "Someday Is Tonight", artist: "Janet Jackson", coverLink: "https://lh3.googleusercontent.com/LjZePM9GvoVF88nE4UKJvpH71-yXHGKsGnmt77imOV6bth_6E3pAlnQizYYDgX1Fl9j7k6vzHw0OPTkP=w544-h544-l90-rj", videoIds: ["jHoP9UACqaQ", "PEFLGA6zFaQ"] },
+		{ title: "Absolutely Nothing’s Changed", artist: "Tina Turner", coverLink: "https://lh3.googleusercontent.com/dWc6ruKtj-SAHS6qm_pa10SqLkjjZ_sRhzXjyS2SwFtooy2wdIf4nQ0XkclbU5XgIlf6qV58R13maUA=w544-h544-l90-rj", videoIds: ["lq1jdjxObrk"] },
+		{ title: "Low", artist: "Lenny Kravitz", coverLink: "https://lh3.googleusercontent.com/-QE8g4sUkiTgVXV8LYJ4VqwlcDL49GUyrzOu63cf5sRmIhq0mdAweVQ7EmMCGPGmi4CszL08UvIgrzKZ=w544-h544-l90-rj", videoIds: ["_zghpPDQ2y8"] },
+		{ title: "Marilyn Monroe", artist: "Pharrell Williams", coverLink: "https://lh3.googleusercontent.com/n1BU7liMVsgA5dZnk020PEoWyjjZECDqYR26DbV8osH6wJB2OPbw_8H13O-x7AwEK-4i_LJeHHQM6BFi=w544-h544-s-l90-rj", videoIds: ["xUPiYEhs3lw"] },
+        { title: "Valentine’s Day", artist: "David Bowie", coverLink: "https://lh3.googleusercontent.com/dpM4jPTAa84rJ0hkkp3nPdn2lNdPmWXa1isLJu2A8HQXOBfMLmb3lJXH0c0UYj_c0DPBxen6TmOpH_U=w544-h544-l90-rj", videoIds: ["nbSdOIZhD5Y"] },
+        { title: "Marquee Moon", artist: "Television", coverLink: "https://lh3.googleusercontent.com/lRzsgg9OZ8asdYhy47O0xix5umxrJJh6g3cbqGKmeWdz1jzZiUoH0fC0SDNzcBrIKNZqdr6SC3v1xz9K=w544-h544-s-l90-rj", videoIds: ["g4myghLPLZc"] },
+		{ title: "Me, I Disconnect from You", artist: "Tubeway Army", coverLink: "https://lh3.googleusercontent.com/0XD-Nt5289-YT_mp6YzVWUOH1kZ-BW9d-utBv4VCxjoyEgYZ2TVZIloROXYHH7Q4THNmddM9Of77MLoTTQ=w544-h544-l90-rj", videoIds: ["6SCrfZPMeWg"] },
+        { title: "Darkness", artist: "The Human League", coverLink: "https://lh3.googleusercontent.com/5UgvTLEebZkbRH9fiGuJajPDSur-nJXHpHKCJUDkQd3LR-hJBAsqeKevMhPKQnyNX7MbBRnQWWabh0u0=w544-h544-l90-rj", videoIds: ["vPfk7ktdqo4"] },
+		{ title: "Fall Into Place", artist: "Apartment", coverLink: "https://lh3.googleusercontent.com/G5iK-2BALHx_hHwB1LBmzHthvtt3BF8NB428Ub4sTkTYUv3bT6bI6lN9N1SZyIlzKTps58GudSFHWPXo=w544-h544-l90-rj", videoIds: ["IQaEg6GguLk"] },
+        { title: "Fight Song", artist: "Rachel Platten", coverLink: "https://lh3.googleusercontent.com/AxQrFKHbt5jU_DiZihMhlJ3bxGLBy3rN6yfLlb0SJ68ay4FpnciNHNkD9WTXPBfbX1gCCZI5pFs2bJzU=w544-h544-l90-rj", videoIds: ["y5h_dukaB1I"] },
+		{ title: "The Ballad of Harambe", artist: "c a n d i d !", coverLink: "https://lh3.googleusercontent.com/F3ub3Ot4uC_HiLYe9RW-nxvMI__N7S5OkyGf_4bgU1MSIW4wp05es_6DF2GBAueUM-LVzIqxz8YuI1rY=w120-h120-l90-rj", videoIds: ["VX8omFoNHdQ"] },
+		{ title: "Set Adrift on Memory Bliss", artist: "P.M. Dawn", coverLink: "https://lh3.googleusercontent.com/51qmaba8irr1qqXAcVc5CGV6bTiNNlevjEgh4cCDCntbqZP4dc1gcVlcf_lxA42D8CkZxDTW3L3SnPa4=w544-h544-l90-rj", videoIds: ["MurZoAE40VA"] },
+		{ title: "Woke Up This Morning (Chosen One Mix)", artist: "Alabama 3", coverLink: "https://lh3.googleusercontent.com/EHKdWSYR9Kenl61Gu87krAIFBJCRmrHdTGISW46gHmiAjuElSW18fCpkvVTlGYnKn3lzmartBT_7K3t6mQ=w544-h544-l90-rj", videoIds: ["slpCmg53qkU", "EvCdCKyLo_I", "6_0nDHcrrtE"] },
+		{ title: "What’s on Your Mind (Pure Energy)", artist: "Information Society", coverLink: "https://lh3.googleusercontent.com/ZWMW9K6oQVxTOOfPAy-7NLsta-kxbLXWEWgG7o4ZuO8c25KMs07dkGc-lHY0Udg9J9jdsSVsYJTgjq8=w544-h544-l90-rj", videoIds: ["lCrD81j6OD0"] },
+		{ title: "Dirty Dreamer (XXX)", artist: "Hot Flash Heat Wave", coverLink: "https://lh3.googleusercontent.com/1hBYdeKS2xmwKgfhmRTqN18V0fMgu4PBc_Rg2UkcQY2W8KnFe5Csu2cQE4h8LAgNn21XGERhJXvnVH97=w544-h544-l90-rj", videoIds: ["Xyo5SKE5mpU"] },
+		{ title: "Bad Habit", artist: "The Kooks", coverLink: "https://i.scdn.co/image/ab67616d0000b273c8fcda98c93a02df95dec4ae", videoIds: ["VYfv5qcX5vo", "3tUh-x-fp8Q"] },
+		{ title: "Good Clean Fun", artist: "Kaiser Chiefs", coverLink: "https://lh3.googleusercontent.com/1WYR7vOnMx8sbUbBHEI-3Q8YFfQOqvtTovFZnsUvcLnVGR2nmLegDLguykg8kgKiQi6OL6ZLNhag1_NY=w544-h544-l90-rj", videoIds: ["zcMX8fQ7buU"] },
+		{ title: "Stop The World I Wanna Get Off With You", artist: "Arctic Monkeys", coverLink: "https://lh3.googleusercontent.com/D2kk6n8VH8YTwZoY9Vczdmrm74WvvkWgiCgIVVLcMv-NXyzZFgL-J64Mwls0p9P7x1aqM1xovqry5JM=w544-h544-l90-rj", videoIds: ["H8oiojAmKCI"] },
+		{ title: "Saving All My Love For You", artist: "Whitney Houston", coverLink: "https://lh3.googleusercontent.com/qRoa7SdWC7qa13JLpgK5wrqJc7HsJAGfDlRzyJPBpiF8zY8sgQ4YSocEqlwRZpM8_JtJcWxaKAb2d_kerQ=w544-h544-l90-rj", videoIds: ["GpQbMAIZVn8"] },
     ];
     let PLAYLISTS_DATA = [];
 
@@ -17140,8 +17434,42 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 	const ICON_SHUFFLE_ON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' width='24' viewBox='0 0 24 24' fill='%233F51B5'%3E%3Cpath d='M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm0.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z'/%3E%3C/svg%3E";
 
     class Song {
-        constructor(title, artist, coverLink, videoId, youtubeLink) { this.title = title; this.artist = artist; this.coverLink = coverLink; this.videoId = videoId; this.youtubeLink = youtubeLink; }
-        getTitle() { return this.title; } getArtist() { return this.artist; } getCoverLink() { return this.coverLink; } getVideoId() { return this.videoId; } getYoutubeLink() { return this.youtubeLink; }
+        constructor(title, artist, coverLink, videoIds) {
+            this.title = title;
+            this.artist = artist;
+            this.coverLink = coverLink;
+            this.videoIds = Array.isArray(videoIds) ? videoIds : [videoIds];
+            this.currentVideoIndex = 0; // to track which video to try
+        }
+        getTitle() { return this.title; }
+        getArtist() { return this.artist; }
+        getCoverLink() { return this.coverLink; }
+        
+        // gets the video ID for the current attempt
+        getCurrentVideoId() {
+            return this.videoIds && this.videoIds.length > 0 ? this.videoIds[this.currentVideoIndex] : null;
+        }
+
+        // gets the YouTube link for the video that is currently being attempted
+        getYoutubeLink() {
+            const videoId = this.getCurrentVideoId();
+            return videoId ? `https://www.youtube.com/watch?v=${videoId}` : '#';
+        }
+
+        // tries to switch to the next available video ID
+        // returns true if there is a next video, false otherwise
+        tryNextVideo() {
+            if (this.currentVideoIndex < this.videoIds.length - 1) {
+                this.currentVideoIndex++;
+                return true;
+            }
+            return false;
+        }
+
+        // resets the video index to the primary one (the first in the array)
+        resetVideoIndex() {
+            this.currentVideoIndex = 0;
+        }
     }
     class Playlist {
         constructor(songs = []) { this.songs = songs; this.currentSongIndex = 0; }
@@ -17249,9 +17577,15 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
         durationElement.textContent = formatTime(duration);
     }
 
-    function loadCurrentSong(autoplay = false) {
-        console.debug(`loadCurrentSong called, autoplay=${autoplay}`);
+    function loadCurrentSong(autoplay = false, isRetry = false) {
+        console.debug(`loadCurrentSong called, autoplay=${autoplay}, isRetry=${isRetry}`);
         const currentSong = playlist?.getCurrentSong();
+
+        // if this is a fresh attempt to play a song (not a retry from an error),
+        // reset its video index to the primary one
+        if (currentSong && !isRetry) {
+            currentSong.resetVideoIndex();
+        }
 
         updateUI();
         stopRafUpdater();
@@ -17272,9 +17606,16 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
             return;
         }
 
-        //console.log(`Loading video: ${currentSong.getVideoId()} - ${currentSong.getTitle()}`);
+        const videoIdToLoad = currentSong.getCurrentVideoId();
+        if (!videoIdToLoad) {
+            console.error(`No video ID found for "${currentSong.getTitle()}". Skipping.`);
+            onPlayerError({ data: 100 }); // simulate a "not found" error
+            return;
+        }
+        
+        console.log(`Loading video: ${videoIdToLoad} - ${currentSong.getTitle()}`);
         ytPlayer.loadVideoById({
-            videoId: currentSong.getVideoId(),
+            videoId: videoIdToLoad,
             startSeconds: 0,
             suggestedQuality: 'small'
         });
@@ -17289,22 +17630,20 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
         activePlaylistIndex = newPlaylistIndex;
         const selectedPlaylistData = PLAYLISTS_DATA[activePlaylistIndex];
 
-        //console.log(`Switching to playlist: "${selectedPlaylistData.name}" (index: ${activePlaylistIndex})`);
-
         if (playerReady && ytPlayer && typeof ytPlayer.stopVideo === 'function' && hasUserInitiatedPlayback) {
             ytPlayer.stopVideo();
         }
         stopRafUpdater();
 
-        const newSongs = selectedPlaylistData.songs.map(d => new Song(d.title, d.artist, d.coverLink, d.videoId, d.youtubeLink));
+        const newSongs = selectedPlaylistData.songs.map(d => new Song(d.title, d.artist, d.coverLink, d.videoIds || d.videoId));
         originalSongOrderForCurrentPlaylist = [...newSongs];
         
         if (isShuffleActive) {
-            const currentSongVideoId = playlist?.getCurrentSong()?.getVideoId();
+            const currentSongVideoId = playlist?.getCurrentSong()?.getCurrentVideoId();
             const shuffledNewSongs = shuffleArray(newSongs);
             playlist = new Playlist(shuffledNewSongs);
             if (currentSongVideoId) {
-                const newIdx = playlist.getSongs().findIndex(s => s.videoId === currentSongVideoId);
+                const newIdx = playlist.getSongs().findIndex(s => s.videoIds.includes(currentSongVideoId));
                 if (newIdx !== -1) playlist.setCurrentSongIndex(newIdx);
                 else playlist.setCurrentSongIndex(0);
             } else {
@@ -17322,7 +17661,6 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
             let shouldAutoplayThisLoad = autoplayOverride === null ? true : autoplayOverride;
             loadCurrentSong(shouldAutoplayThisLoad);
         }
-        // updateUI() is called by loadCurrentSong, or directly if not loading.
     }
 
     function togglePlayPause() {
@@ -17434,8 +17772,6 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
         playerReady = true;
         setVolumeFromSlider(false);
         
-        // don't load song - just update UI to show first song's metadata
-        // playback will be initiated by user action
         updateUI();
 		updateVolumeIcon();
 		
@@ -17456,9 +17792,7 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
         const stateName = Object.keys(YT.PlayerState).find(key => YT.PlayerState[key] === state) || 'UNKNOWN';
         //console.log(`Player state changed: ${state} (${stateName})`);
 
-        // ensure hasUserInitiatedPlayback is true if we get any meaningful state change after initial load
         if (state !== YT.PlayerState.UNSTARTED && state !== -1) {
-             // if a video is cued or playing, it implies some form of initiation or readiness
         }
 
         updateDurationDisplay();
@@ -17481,8 +17815,8 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
                     currentTimeElement.textContent = formatTime(ytPlayer.getDuration());
                 }
 
-                if (!hasUserInitiatedPlayback) { // should not happen.
-                    updateUI(); // just update UI, don't proceed to next song
+                if (!hasUserInitiatedPlayback) {
+                    updateUI();
                     return;
                 }
 
@@ -17532,9 +17866,27 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
         }
     }
     function onPlayerError(event) { 
+        const recoverableErrorCodes = [2, 5, 100, 101, 150];
         const errorCodes = { 2: 'Invalid parameter.', 5: 'HTML5 error.', 100: 'Not found/private.', 101: 'Embedding disallowed.', 150: 'Embedding disallowed.' };
         const errorMsg = errorCodes[event.data] || `Unknown error (${event.data})`;
         console.error(`YouTube Player Error: ${errorMsg}`);
+
+        const currentSong = playlist?.getCurrentSong();
+
+        // if the error is recoverable (e.g., video blocked), try the next available video ID
+        if (currentSong && recoverableErrorCodes.includes(event.data)) {
+            console.log(`Video failed for "${currentSong.getTitle()}". Checking for alternatives...`);
+            if (currentSong.tryNextVideo()) {
+                console.log(`Found an alternative. Attempting to play video ID: ${currentSong.getCurrentVideoId()}`);
+                // reload the song with the next video ID. isRetry=true prevents resetting the video index
+                loadCurrentSong(window._musicPlayerAutoplayIntent, true);
+                return; // stop further error processing for this event
+            } else {
+                console.warn(`No more alternative videos for "${currentSong.getTitle()}".`);
+            }
+        }
+
+        // handle final/unrecoverable errors
         if (playPauseButton) updatePlayPauseButton(true);
         stopRafUpdater();
         if (titleElement) titleElement.textContent = "Error";
@@ -17547,11 +17899,9 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 
 		if (playerReady && ytPlayer && typeof ytPlayer.setVolume === 'function') {
 			ytPlayer.setVolume(newVolumePercent);
-			// if user drags slider up from 0, it should unmute the player.
 			if (shouldUnmute && newVolumePercent > 0 && typeof ytPlayer.isMuted === 'function' && ytPlayer.isMuted()) {
 				ytPlayer.unMute();
 			}
-			// if user drags to 0, it should mute the player.
 			if (newVolumePercent === 0 && typeof ytPlayer.mute === 'function' && !ytPlayer.isMuted()) {
 				ytPlayer.mute();
 			}
@@ -17566,16 +17916,12 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 
 		if (isCurrentlyMuted) {
 			ytPlayer.unMute();
-
 			const restoreVolume = (volumeBeforeMute > 0) ? volumeBeforeMute : 0.5;
-
 			ytPlayer.setVolume(restoreVolume * 100);
-
 			volumeSlider.value = restoreVolume;
 			if (volumePercentageElement) {
 				volumePercentageElement.textContent = `${Math.round(restoreVolume * 100)}%`;
 			}
-
 			volumeIconElement.src = ICON_VOLUME;
 			volumeIconElement.alt = "Mute";
 			volumeIconElement.title = "Mute";
@@ -17587,7 +17933,6 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 			}
 			
 			ytPlayer.mute();
-
 			volumeSlider.value = 0;
 			if (volumePercentageElement) {
 				volumePercentageElement.textContent = `0%`;
@@ -17649,7 +17994,7 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
         }
 
         if (currentSongBeforeToggle) {
-            const newIndex = playlist.getSongs().findIndex(song => song.videoId === currentSongBeforeToggle.videoId);
+            const newIndex = playlist.getSongs().findIndex(song => song.getCurrentVideoId() === currentSongBeforeToggle.getCurrentVideoId());
             playlist.setCurrentSongIndex(newIndex !== -1 ? newIndex : 0);
         } else {
             playlist.setCurrentSongIndex(0);
@@ -17926,12 +18271,11 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
         playlistSelectorElement.addEventListener("change", (event) => {
             const newIndex = parseInt(event.target.value, 10);
             if (!isNaN(newIndex)) {
-                // autoplay depends on whether user has played before
                 if (!hasUserInitiatedPlayback) {
-                    loadNewPlaylistByIndex(newIndex, false); // load new playlist, cue first song, don't play
+                    loadNewPlaylistByIndex(newIndex, false);
                 } else {
                     const wasPlaying = playerReady && ytPlayer && typeof ytPlayer.getPlayerState === 'function' && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING;
-                    loadNewPlaylistByIndex(newIndex, wasPlaying); // normal behavior
+                    loadNewPlaylistByIndex(newIndex, wasPlaying);
                 }
             }
         });
@@ -18042,7 +18386,6 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
             #${VOLUME_SLIDER_ID}::-moz-range-thumb { height: 14px; width: 14px; }
 			#${YOUTUBE_PLAYER_DIV_ID} { position: absolute !important; top: 0 !important; left: 0 !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important; }
             
-            /* queue styles */
             #${QUEUE_CONTAINER_ID} { 
                 margin-top: var(--spacing-md); 
                 padding-top: var(--spacing-sm); 
@@ -18057,7 +18400,6 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
                  overflow-y: auto;
                  max-height: calc(150px - 2em - var(--spacing-sm));
              }
-
             #${QUEUE_TITLE_ID} { 
                 font-size: var(--artist-font-size); 
                 color: var(--text-secondary); 
@@ -18090,7 +18432,6 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
             .player-queue-item-title { font-weight: 500; color: var(--text-primary); }
             .player-queue-item-artist { color: var(--text-secondary); font-size: 12px; }
             .player-queue-empty { color: var(--text-secondary); font-style: italic; cursor: default; padding: var(--spacing-xs) var(--spacing-sm); }
-
             #${QUEUE_CONTAINER_ID}.queue-collapsed {
                 max-height: calc(var(--artist-font-size) + var(--spacing-sm) + 2px);
             }
@@ -18100,8 +18441,6 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
             #${QUEUE_CONTAINER_ID}.queue-collapsed #${QUEUE_TOGGLE_ICON_ID} {
                 transform: rotate(-90deg);
             }
-
-            /* responsive elements */
             @media (max-width: 600px) { 
                 :root { 
                     --cover-art-size: 100%;
@@ -18143,7 +18482,7 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
             } else {
                 activePlaylistIndex = 0;
                 const initialPlaylistSongsData = PLAYLISTS_DATA[activePlaylistIndex].songs;
-                const initialSongs = initialPlaylistSongsData.map(d => new Song(d.title, d.artist, d.coverLink, d.videoId, d.youtubeLink));
+                const initialSongs = initialPlaylistSongsData.map(d => new Song(d.title, d.artist, d.coverLink, d.videoIds || d.videoId));
                 originalSongOrderForCurrentPlaylist = [...initialSongs];
                 playlist = new Playlist(initialSongs);
             }
