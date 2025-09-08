@@ -1346,9 +1346,9 @@ function openMap(_e) {
     }
 }
 
-function visitState(s, o, t) {
+function visitState(state, o, t) {
     setTimeout(() => mapCache(true), 0); // cache the correct map and prevent visit glitch
-    e.player_visits.push(e.states_json[s].pk);
+    e.player_visits.push(state.pk);
     o(t);
 }
 
@@ -2535,7 +2535,7 @@ function setStatePollText(s, t) {
 
     const _ = formattedResults.join("");
     slrr = _;
-    if (!doPrimaryMode && !e.primary) {
+    /*if (!doPrimaryMode && !e.primary) {
         var c = `<h3>ESTIMATED SUPPORT</h3>                    <ul id='switchingEst'>${_
         }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Electoral Vote Estimate</button>`;
     } else if (e.primary && !doPrimaryMode) {
@@ -2544,7 +2544,13 @@ function setStatePollText(s, t) {
     } else {
         var c = `<h3>PRIMARY/CAUCUS RESULT</h3>                    <ul id='switchingEst'>${_
         }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Current Delegate Count</button>`;
-    }
+    }*/
+    const c = `
+        <h3>${!doPrimaryMode && !e.primary || e.primary && !doPrimaryMode ? "ESTIMATED SUPPORT" : "PRIMARY/CAUCUS RESULT"}</h3>
+        <ul id='switchingEst'>${_}</ul>
+        <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button>
+        <button onclick='evest()' id='ev_est'>${!doPrimaryMode && !e.primary ? "Electoral Vote Estimate" : "Current Delegate Count"}</button>
+    `;
 
     $("#overall_result").html(c);
     let u = "";
@@ -2806,15 +2812,15 @@ function rFunc(t, i) {
             stateSpecificStyles: stateStylesSpecific,
             stateSpecificHoverStyles: stateStylesSpecific,
             click(_evt, data) {
-                for (let s = 0; s < e.states_json.length; s++) {
-                    if (e.states_json[s].fields.abbr === data.name) {
+                for (const state of e.states_json) {
+                    if (state.fields.abbr === data.name) {
                         const overlayHtml =
                             `<div class="overlay" id="visit_overlay"></div>
                              <div class="overlay_window" id="visit_window">
                                 <div class="overlay_window_content" id="visit_content">
                                     <h3>Advisor Feedback</h3>
                                     <img src="${e.election_json[electionIndex].fields.advisor_url}" width="208" height="128"/>
-                                    <p>You have chosen to visit ${e.states_json[s].fields.name} -- is this correct?</p>
+                                    <p>You have chosen to visit ${state.fields.name} -- is this correct?</p>
                                 </div>
                                 <div class="overlay_buttons" id="visit_buttons">
                                     <button id="confirm_visit_button">YES</button><br>
@@ -2822,7 +2828,7 @@ function rFunc(t, i) {
                                 </div>
                              </div>`;
                         $("#game_window").append(overlayHtml);
-                        $("#confirm_visit_button").click(() => visitState(s, questionHTML, t));
+                        $("#confirm_visit_button").click(() => visitState(state, questionHTML, t));
                         $("#no_visit_button").click(() => {
                             $("#visit_overlay").remove();
                             $("#visit_window").remove();
@@ -3136,12 +3142,12 @@ function overallResultsHtml() {
         candResults.popular_votes,
     ]; // format: electoral vote count, popular vote proportion, popular vote vote count
 
-    const testTest = endingPicker(e.final_outcome, totalPV, e.final_overall_results, quickstats);
+    const pickedEnding = endingPicker(e.final_outcome, totalPV, e.final_overall_results, quickstats);
     getResults(e.final_outcome, totalPV, e.final_overall_results, quickstats);
 
     if (campaignTrail_temp.multiple_endings) {
-        if (testTest) {
-            s = testTest;
+        if (pickedEnding) {
+            s = pickedEnding;
         }
     }
 
@@ -3738,21 +3744,21 @@ function T(t) {
         .filter((result) => result.state === numT)
         .map((result) => {
              const rows = (result.result || []).map((f) => {
-                    const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
-                    if (!candidate || !candidate.fields) return ""; // skip unknown candidates
-                    const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
-                    // if (f.percent === 0) return;
-                    return `
-                        <tr>
-                            <td>${fullName}</td>
-                            <td>${formatNumbers(f.votes)}</td>
-                            <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
-                            <td>${f.electoral_votes}</td>
-                        </tr>
-                    `;
-                })
-                .filter(Boolean)
-                .join("");
+                 const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
+                 if (!candidate || !candidate.fields) return ""; // skip unknown candidates
+                 const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
+                 // if (f.percent === 0) return;
+                 return `
+                     <tr>
+                         <td>${fullName}</td>
+                         <td>${formatNumbers(f.votes)}</td>
+                         <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
+                         <td>${f.electoral_votes}</td>
+                     </tr>
+                 `;
+             })
+             .filter(Boolean)
+             .join("");
 
             return `
                 <h4>Results - This Game</h4>
