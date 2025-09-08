@@ -631,7 +631,7 @@ const useConsoleCheats = () => {
     let candidate_pk;
     let playerAndOpponents = [
       ...new Set(
-        campaignTrail_temp.opponents_default_json.find((f) => f.election === e.election_id).candidates
+        [e.candidate_id, ...e.opponents_default_json.find((f) => f.election === e.election_id).candidates]
       ),
     ];
     for (const cjson of campaignTrail_temp.candidate_json.filter(
