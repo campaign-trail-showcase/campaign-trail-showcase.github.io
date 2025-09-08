@@ -2434,13 +2434,11 @@ function getLatestRes(t) {
 
         t.forEach((state) => {
             const stateIndex = e.states_json
-                .map((f) => Number(f.pk))
-                .indexOf(Number(state.state));
+                .findIndex((f) => Number(f.pk) === Number(state.state))
             const stateElectoralVotes = e.states_json[stateIndex].fields.electoral_votes;
 
             const candidateIndex = state.result
-                .map((f) => Number(f.candidate))
-                .indexOf(Number(candidate.pk));
+                .findIndex((f) => Number(f.candidate) === Number(candidate.pk));
             const candidateResult = state.result[candidateIndex];
 
             if (e.primary_states) {
@@ -2622,6 +2620,7 @@ function setStatePollText(s, t) {
               </li>`;
         }
     }
+    let onQText = "";
     if (e.primary) {
         /*
         e.primary_code = [
@@ -2635,31 +2634,21 @@ function setStatePollText(s, t) {
             }
         ]
         */
-        statesM = e.primary_code.map((f) => f.states).flatMap((f) => f);
+        const statesM = e.primary_code.map((f) => f.states).flatMap((f) => f);
         if (statesM.includes(e.states_json[s].pk)) {
-            for (i = 0; i < e.primary_code.length; i++) {
-                if (e.primary_code[i].states.includes(e.states_json[s].pk)) {
-                    break;
-                }
-            }
-            onQText = `Primary on Question ${e.primary_code[i].breakQ + 1}`;
-        } else {
-            onQText = "";
+            const match = e.primary_code.find((f) => f.states.includes(e.states_json[s].pk));
+            if (match) onQText = `Primary on Question ${match.breakQ + 1}`;
         }
-        var f = `                    <h3>STATE SUMMARY</h3>                    <p>${e.states_json[s].fields.name
-        }</p>                    <ul>${u
-        }</ul>                    <p>Delegates: ${e.states_json[s].fields.electoral_votes
-        }</p><p>${onQText
-        }</p>`;
-    } else {
-        var f = `                    <h3>STATE SUMMARY</h3>                    <p>${e.states_json[s].fields.name
-            }</p>                    <ul>${u
-            }</ul>                    <p>Electoral Votes: ${e.states_json[s].fields.electoral_votes
-            }</p>`
-            + `                    <p>Popular Votes: ${e.states_json[s].fields.popular_votes.toLocaleString()
-            }</p>`;
     }
-    $("#state_info").html(f);
+
+    // $("#state_info").html(f);
+    document.getElementById("state_info").innerHTML = `
+        <h3>STATE SUMMARY</h3>
+        <p>${e.states_json[s].fields.name}</p>
+        <ul>${u}</ul>
+        <p>${e.primary ? `Delegates: ${e.states_json[s].fields.electoral_votes}` : `Electoral Votes: ${e.states_json[s].fields.electoral_votes}`}</p>
+        ${e.primary ? `<p>${onQText}</p>` : ""}
+    `.trim().replace(/>\s+</g, "><");
 }
 
 function rFunc(t, i) {
