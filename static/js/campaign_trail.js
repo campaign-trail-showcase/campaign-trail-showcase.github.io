@@ -2646,7 +2646,7 @@ function setStatePollText(s, t) {
         <h3>STATE SUMMARY</h3>
         <p>${e.states_json[s].fields.name}</p>
         <ul>${u}</ul>
-        <p>${e.primary ? "Delegates:" : "Electoral Votes":} ${e.states_json[s].fields.electoral_votes}</p>
+        <p>${e.primary ? "Delegates:" : "Electoral Votes:"} ${e.states_json[s].fields.electoral_votes}</p>
         <p>${e.primary ? onQText : `Popular Votes: ${e.states_json[s].fields.popular_votes.toLocaleString()}`}</p>
     `.trim().replace(/>\s+</g, "><");
 }
