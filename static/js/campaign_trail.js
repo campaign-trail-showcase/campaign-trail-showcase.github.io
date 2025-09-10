@@ -1646,6 +1646,10 @@ function electionNight() {
     const s = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     const winningEV = s.fields.winning_electoral_vote_number;
     const formattedWinningEV = formatNumbers(winningEV);
+    const evsToWin = `${allStatesHaveEVs ? `</br>${formattedWinningEV} to win` : ""}`;
+
+    const removeElectionNightWindows = () => $("#election_night_overlay, #election_night_window").remove();
+
     $("#game_window").html(`
         <div class="game_header">${corrr}</div>        
         <div id="main_content_area">            
@@ -1657,7 +1661,7 @@ function electionNight() {
                         <ul>${i}</ul>                        
                         <p>
                             0% complete
-                            ${allStatesHaveEVs ? `</br>${formattedWinningEV} to win` : ""}
+                            ${evsToWin}
                         </p>                    
                     </div>                
                 </div>                
@@ -1707,160 +1711,133 @@ function electionNight() {
     };
     $("#map_container").usmap(lTemp);
     $("#final_result_button").click(finalResListener);
-    e.final_overall_results = [];
-    e.final_state_results[0].result.forEach((f) => {
-        e.final_overall_results.push({
-            candidate: f.candidate,
-            electoral_votes: 0,
-            popular_votes: 0,
-        });
-    });
+    e.final_overall_results = e.final_state_results[0].result.map((f) => ({
+        candidate: f.candidate,
+        electoral_votes: 0,
+        popular_votes: 0,
+    }));
     e.final_state_results.forEach((f) => {
         f.result_time = marginTime(f.result, e.states_json.find((g) => g.pk === f.state).fields.poll_closing_time)
     });
     $("#ok_button").click(() => {
         $("#election_night_overlay, #election_night_window").remove();
         results_timeout = setTimeout(() => {
-            !(function t(i, a) {
+            (function t(i, a) {
+                const timeout2e3 = setTimeout(() => t(i, a), 2e3);
                 const s = [0, 0];
-                for (var n = 0; n < e.final_overall_results.length; n++) {
-                    e.final_overall_results[n].electoral_votes > s[0]
-                    && (s[0] = e.final_overall_results[n].electoral_votes);
-                }
-                total_votes = 0;
-                for (
-                    iterator = 0;
-                    iterator < e.final_overall_results.length;
-                    iterator++
-                ) {
-                    total_votes += e.final_overall_results[iterator].popular_votes;
-                }
-                pop_vs = [];
-                for (
-                    iterator = 0;
-                    iterator < e.final_overall_results.length;
-                    iterator++
-                ) {
-                    if (
-                        e.final_overall_results[iterator].popular_votes / total_votes
-                        > 0
-                    ) {
-                        pop_vs.push(
-                            e.final_overall_results[iterator].popular_votes / total_votes,
-                        );
-                    } else {
-                        pop_vs.push(0);
-                    }
-                }
+                const total_votes = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
+                const pop_vs = [];
+                e.final_overall_results.forEach((f) => {
+                    const percent = f.popular_votes / total_votes;
+                    if (percent > 0) pop_vs.push(percent);
+                    else pop_vs.push(0);
+
+                    if (f.electoral_votes > s[0]) s[0] = f.electoral_votes;
+                })
                 var a = handleFinalResults(i);
                 const l = findFromPK(e.election_json, e.election_id);
-                const o = e.election_json[l].fields.winning_electoral_vote_number;
                 const _ = getSortedCands();
-                let r = "";
-                for (var n = 0; n < _.length; n++) {
-                    for (let d = 0; d < e.final_overall_results.length; d++) {
-                        const can1 = e.final_overall_results[d].candidate;
-                        const can2 = _[n].candidate;
+                const r = _.map((f) => {
+                    let c;
+                    let popvthing;
 
-                        if (DEBUG) {
-                            console.log(
-                                "final_overall_results. d:",
-                                d,
-                                "n: ",
-                                n,
-                                "_: ",
-                                _,
-                                " e:",
-                                e,
-                                can1,
-                                can2,
-                            );
-                        }
+                    e.final_overall_results.forEach((g, idx) => {
+                        const can1 = g.candidate;
+                        const can2 = f.candidate;
 
-                        if (can1 == can2) {
-                            var c = e.final_overall_results[d].electoral_votes;
-                            var popvthing = (pop_vs[d] * 100).toFixed(1);
+                        debugConsole(e, can1, can2);
+
+                        if (can1 === can2) {
+                            c = g.electoral_votes;
+                            popvthing = (pop_vs[idx] * 100).toFixed(1);
                         }
-                    }
-                    r += `
-                            <span style="color:${_[n].color}; background-color: ${_[n].color}">--</span>
-                            <b>${_[n].last_name}</b>:  ${c} / ${popvthing}%<br>
-                        `;
-                }
+                    });
+
+                    return `
+                        <li>
+                            <span style="color:${f.color}; background-color:${f.color}">--</span> ${f.last_name}: ${allStatesHaveEVs ? `${formatNumbers(c)} / ` : ""}${popvthing}%
+                        </li>
+                    `
+                }).join("");
                 const p = mapResultColor(i);
                 let h = Math.floor((i / 480) * 100);
                 const g = $("#state_result_container").html();
                 $("#game_window").html(`
-                        <div class="game_header">${corrr}</div>
-                        <div id="main_content_area">
-                            <div id="map_container"></div>
-                            <div id="menu_container">
-                                <div id="overall_result_container">
-                                    <div id="overall_result">
-                                        <h3>ELECTION TALLY</h3>
-                                        <ul>${r}</ul>
-                                        <p>
-                                            ${h}% complete
-                                            ${allStatesHaveEVs ? `</br>${formattedWinningEV} to win` : ""}
-                                        </p>
-                                    </div>
+                    <div class="game_header">${corrr}</div>
+                    <div id="main_content_area">
+                        <div id="map_container"></div>
+                        <div id="menu_container">
+                            <div id="overall_result_container">
+                                <div id="overall_result">
+                                    <h3>ELECTION TALLY</h3>
+                                    <ul>${r}</ul>
+                                    <p>
+                                        ${h}% complete
+                                        ${evsToWin}
+                                    </p>
                                 </div>
-                                <div id="state_result_container">${g}</div>
                             </div>
+                            <div id="state_result_container">${g}</div>
                         </div>
-                        <div id="map_footer">
-                            <button id="final_result_button">Go to Final Results</button>
-                        </div>
-                    `);
+                    </div>
+                    <div id="map_footer">
+                        <button id="final_result_button">Go to Final Results</button>
+                    </div>
+                `);
 
                 $("#map_container").usmap(p);
                 $("#final_result_button").click(finalResListener);
-                for (var n = 0; n < e.final_overall_results.length; n++) {
-                    e.final_overall_results[n].electoral_votes > s[1]
-                    && (s[1] = e.final_overall_results[n].electoral_votes);
-                }
-                if (s[0] < o && s[1] >= o) {
-                    if (e.final_overall_results[0].candidate == e.candidate_id) var b = `${e.WinPopup}`;
-                    else if (e.final_overall_results[0].candidate != e.candidate_id) var b = `${e.LosePopup}`;
-                    $("#game_window").append(
-                        `            <div class="overlay" id="election_night_overlay"></div>            <div class="overlay_window" id="election_night_window">                <div class="overlay_window_content" id="election_night_content">                <h3>Advisor Feedback</h3>                <img src="${e.election_json[l].fields.advisor_url
-                        }" width="208" height="128"/><p>${b
-                        }</p></div>                <div class="overlay_buttons" id="winner_buttons">                <button id="ok_button">OK</button><br>                <button id="overlay_result_button">Go to Final Results</button>                </div>            </div>`,
-                    ),
-                        $("#ok_button").click(() => {
-                            $("#election_night_overlay").remove(),
-                                $("#election_night_window").remove(),
-                                (results_timeout = setTimeout(() => {
-                                    t(i, a);
-                                }, 2e3));
-                        }),
-                        $("#overlay_result_button").click(() => {
-                            $("#election_night_overlay").remove(),
-                                $("#election_night_window").remove(),
-                                clearTimeout(results_timeout),
-                                $("#map_footer").html(
-                                    "<i>Processing Results, wait one moment...</i>",
-                                );
-                            handleFinalResults(500);
-                            m();
-                        });
+                e.final_overall_results.forEach((f) => {
+                    if (f.electoral_votes > s[1]) s[1] = f.electoral_votes
+                });
+                if (s[0] < winningEV && s[1] >= winningEV) {
+                    const b = e.final_overall_results[0].candidate === e.candidate_id ? `${e.WinPopup}` : `${e.LosePopup}`;
+                    $("#game_window").append(`
+                        <div class="overlay" id="election_night_overlay"></div>
+                        <div class="overlay_window" id="election_night_window">
+                            <div class="overlay_window_content" id="election_night_content">
+                                <h3>Advisor Feedback</h3>
+                                <img src="${e.election_json[l].fields.advisor_url}" width="208" height="128"/>
+                                <p>${b}</p>
+                            </div>
+                            <div class="overlay_buttons" id="winner_buttons">
+                                <button id="ok_button">OK</button>
+                                <br>
+                                <button id="overlay_result_button">Go to Final Results</button>
+                            </div>
+                        </div>
+                    `);
+                    $("#ok_button").click(() => {
+                        removeElectionNightWindows();
+                        results_timeout = timeout2e3;
+                    });
+                    $("#overlay_result_button").click(() => {
+                        removeElectionNightWindows();
+                        finalResListener();
+                    });
                 } else {
-                    i >= 480 || a >= e.states_json.length
-                        ? ((h = 100),
-                            $("#overall_result").html(
-                                `            <h3>ELECTION TALLY</h3>            <ul>${r
-                                }</ul>            <p>${h
-                                }% complete</br>${o
-                                } to win</p>`,
-                            ))
-                        : (results_timeout = setTimeout(() => {
-                            t(i, a);
-                        }, 2e3));
+                    if (i > 480 || a >= e.states_json.length) {
+                        h = 100;
+                        $("#overall_result").html(`
+                            <h3>ELECTION TALLY</h3>
+                            <ul>${r}</ul>
+                            <p>
+                                ${h}% complete
+                                ${evsToWin}
+                            </p>
+                        `);
+                    } else {
+                        results_timeout = timeout2e3;
+                    }
                 }
                 i += 10;
             }(0, 0));
         }, 2e3);
     });
+}
+
+function displayResults(primaryMode) {
+
 }
 
 function nextQuestion() {
