@@ -1625,13 +1625,6 @@ function primaryFunction(execute, breaks) {
 }
 
 function electionNight() {
-    /* for (var t = getSortedCands(), i = "", a = 0; a < t.length; a++) {
-        i
-            += `            <li><span style="color:${t[a].color
-        }; background-color: ${t[a].color
-        }">--</span> ${t[a].last_name
-        }:  0</li>`;
-    } */
     const globalParam = e.global_parameter_json?.[0]?.fields || {};
     const sortedCands = getSortedCands();
     const allStatesHaveEVs = e.states_json.every((f) => f.fields.electoral_votes > 0);
@@ -1723,7 +1716,6 @@ function electionNight() {
         $("#election_night_overlay, #election_night_window").remove();
         results_timeout = setTimeout(() => {
             (function t(i, a) {
-                const timeout2e3 = setTimeout(() => t(i, a), 2e3);
                 const s = [0, 0];
                 const total_votes = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
                 const pop_vs = [];
@@ -1809,14 +1801,14 @@ function electionNight() {
                     `);
                     $("#ok_button").click(() => {
                         removeElectionNightWindows();
-                        results_timeout = timeout2e3;
+                        results_timeout = setTimeout(() => t(i, a), 2e3);
                     });
                     $("#overlay_result_button").click(() => {
                         removeElectionNightWindows();
                         finalResListener();
                     });
                 } else {
-                    if (i > 480 || a >= e.states_json.length) {
+                    if (i >= 480 || a >= e.states_json.length) {
                         h = 100;
                         $("#overall_result").html(`
                             <h3>ELECTION TALLY</h3>
@@ -1827,7 +1819,7 @@ function electionNight() {
                             </p>
                         `);
                     } else {
-                        results_timeout = timeout2e3;
+                        results_timeout = setTimeout(() => t(i, a), 2e3);
                     }
                 }
                 i += 10;
