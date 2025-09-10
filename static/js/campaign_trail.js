@@ -2411,97 +2411,93 @@ function importgame(code) {
 }
 
 function getLatestRes(t) {
-    total_v = 0;
-    cand_evs = [];
-    cand_pvs = [];
-    // goes through every state
-    // converts the n object to an array of elements
-    const nArray = Object.entries(answerEffects).map(([key, value]) => ({ key, value }));
+    // a map of all state data, keyed by state PK
+    const stateDataMap = new Map(e.states_json.map(s => [s.pk, s.fields]));
 
-    // goes through every state
-    for (let s = 0; s < e.states_json.length; s++) {
-        const state = e.states_json[s];
-
-        // finds the matching state in the array
-
-        // reverses and sorts the array by percent
-        nArray.sort((a, b) => b.value - a.value);
-
-        // updates the total popular votes
-        // total_v += campaignTrail_temp.states_json[s].fields.popular_votes;
-    }
-
-    // Use Array.prototype.filter() method to filter e.candidate_json
-    const filteredCandidates = e.candidate_json.filter(
-        (candidate) => e.opponents_list.includes(candidate.pk)
-            || candidate.pk === e.candidate_id,
+    // get a list of all active candidates (player + opponents)
+    const activeCandidates = e.candidate_json.filter(
+        (candidate) => e.opponents_list.includes(candidate.pk) || candidate.pk === e.candidate_id
     );
 
-    // Use Array.prototype.forEach() method to update filteredCandidates
-    filteredCandidates.forEach((candidate) => {
-        candidate.popvs = 0;
-        candidate.evvs = 0;
+    const candidateTotals = new Map();
+    activeCandidates.forEach(cand => {
+        candidateTotals.set(cand.pk, { popvs: 0, evvs: 0 });
+    });
 
-        t.forEach((state) => {
-            const stateIndex = e.states_json
-                .findIndex((f) => Number(f.pk) === Number(state.state));
-            const stateElectoralVotes = e.states_json[stateIndex].fields.electoral_votes;
+    let total_v = 0;
 
-            const candidateIndex = state.result
-                .findIndex((f) => Number(f.candidate) === Number(candidate.pk));
-            const candidateResult = state.result[candidateIndex];
+    for (const state of t) {
+        const stateFields = stateDataMap.get(state.state);
+        if (!stateFields) continue; // skip if state data not found
 
-            if (e.primary_states) {
-                const primaryStates = JSON.parse(e.primary_states);
-                const primaryMap = primaryStates.map((f) => f.state);
+        const stateElectoralVotes = stateFields.electoral_votes;
 
-                if (primaryMap.includes(state.state)) {
-                    const allocation = dHondtAllocation(
-                        state.result.map((f) => f.votes),
-                        stateElectoralVotes,
-                        0.15,
-                    );
-                    candidate.evvs += allocation[candidateIndex] || 0;
-                }
-            } else if (!e.primary) {
-                const gameType = Number(e.game_type_id);
-                const stJson = e.states_json[stateIndex];
-                const isWTA = stJson.fields.winner_take_all_flg === 1;
+        // determine the electoral vote allocation for this state
+        let evAllocation = new Map();
 
-                if (gameType === 2) {
-                    const q = divideElectoralVotesProp(
-                        state.result.map((f) => f.percent),
-                        stateElectoralVotes,
-                    );
-                    candidate.evvs += q[candidateIndex] || 0;
-                } else if (isWTA) {
-                    if (candidateIndex === 0) candidate.evvs += stateElectoralVotes;
+        if (e.primary_states) {
+            const primaryStates = JSON.parse(e.primary_states);
+            const isPrimaryState = primaryStates.some(ps => ps.state === state.state);
+            if (isPrimaryState) {
+                const voteCounts = state.result.map(r => r.votes);
+                const allocations = dHondtAllocation(voteCounts, stateElectoralVotes, 0.15);
+                state.result.forEach((res, i) => {
+                    evAllocation.set(res.candidate, allocations[i] || 0);
+                });
+            }
+        } 
+        else if (!e.primary) {
+            const gameType = Number(e.game_type_id);
+            if (gameType === 2) { // Proportional
+                const percentages = state.result.map(r => r.percent);
+                const allocations = divideElectoralVotesProp(percentages, stateElectoralVotes);
+                state.result.forEach((res, i) => {
+                    evAllocation.set(res.candidate, allocations[i] || 0);
+                });
+            } else { // Winner-Take-All
+                if (stateFields.winner_take_all_flg === 1) {
+                    const winnerPk = state.result[0]?.candidate;
+                    if (winnerPk) evAllocation.set(winnerPk, stateElectoralVotes);
                 } else {
                     const totalVotes = state.result.reduce((sum, cr) => sum + (cr.votes || 0), 0);
                     const topVotes = state.result[0]?.votes || 0;
-                    const [L, D] = splitEVTopTwo(stateElectoralVotes, topVotes, totalVotes);
-                    if (candidateIndex === 0) candidate.evvs += L;
-                    else if (candidateIndex === 1) candidate.evvs += D;
+                    const [winnerEVs, runnerUpEVs] = splitEVTopTwo(stateElectoralVotes, topVotes, totalVotes);
+
+                    const winnerPk = state.result[0]?.candidate;
+                    const runnerUpPk = state.result[1]?.candidate;
+                    if (winnerPk) evAllocation.set(winnerPk, winnerEVs);
+                    if (runnerUpPk) evAllocation.set(runnerUpPk, runnerUpEVs);
                 }
             }
+        }
+        
+        for (const candidateResult of state.result) {
+            const candidatePk = candidateResult.candidate;
+            const totals = candidateTotals.get(candidatePk);
 
-            candidate.popvs += candidateResult.votes;
+            if (totals) {
+                totals.popvs += candidateResult.votes;
+                totals.evvs += (evAllocation.get(candidatePk) || 0);
+            }
             total_v += candidateResult.votes;
-        });
+        }
+    }
+
+    const finalCandidates = activeCandidates.map(candidate => {
+        const totals = candidateTotals.get(candidate.pk) || { popvs: 0, evvs: 0 };
+        candidate.popvs = totals.popvs;
+        candidate.evvs = totals.evvs;
+        candidate.pvp = total_v > 0 ? (totals.popvs / total_v) : 0;
+        return candidate;
     });
-    filteredCandidates.forEach((candidate) => {
-        candidate.pvp = candidate.popvs / total_v;
-        candidate.popvs = 0;
-    });
 
-    // Use Array.prototype.sort() method to sort filteredCandidates in descending order of pvp
-    const sortedCandidates = filteredCandidates.sort((a, b) => b.pvp - a.pvp);
+    // sort the final list by popular vote percentage, descending
+    const sortedCandidates = finalCandidates.sort((a, b) => b.pvp - a.pvp);
 
-    // Use Array.prototype.map() method to create nn2 and nn3 arrays
-    nn2 = sortedCandidates.map((candidate) => candidate);
-    nn3 = sortedCandidates.map((candidate) => candidate.evvs || 0);
-
-    return [nn2, answerEffects];
+    nn2 = sortedCandidates;
+    nn3 = sortedCandidates.map(c => c.evvs || 0);
+    
+    return [sortedCandidates, answerEffects];
 }
 
 function setStatePollText(state, t) {
