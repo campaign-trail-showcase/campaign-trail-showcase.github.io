@@ -1983,6 +1983,7 @@ const windowCheck = localStorage.getItem('astroWindow');
 function addColor() {
     var difficultyDiv = document.getElementById("difficulty_level");
     if (storedChar != 21 && difficultyDiv && !document.getElementById("bunnyhopDropdown")) {
+        campaignTrail_temp.global_parameter_json [0]["fields"].question_count = "25"
             console.log("test")
               var questionCounter = ["25 (Randomized Questions)", "25 (Static Question Set)", "30 (Expanded)", "35 (Full)"];
               var questions = [25, 25, 30, 35];
@@ -2035,17 +2036,17 @@ function addColor() {
   
               colourCheckbox.addEventListener("change", function() {
                   if (this.checked){
-                      campaignTrail_temp.candidate_json[11].fields.color_hex = '#b31200'
-                      campaignTrail_temp.candidate_json[12].fields.color_hex = '#052e71'
-                      campaignTrail_temp.candidate_json[13].fields.color_hex = '#ffc677'
-                      campaignTrail_temp.candidate_json[14].fields.color_hex = '#669c35'
+                      campaignTrail_temp.candidate_json[12].fields.color_hex = '#b31200'
+                      campaignTrail_temp.candidate_json[13].fields.color_hex = '#052e71'
+                      campaignTrail_temp.candidate_json[14].fields.color_hex = '#ffc677'
+                      campaignTrail_temp.candidate_json[15].fields.color_hex = '#669c35'
 
                   }
                   else{          
-                    campaignTrail_temp.candidate_json[11].fields.color_hex = '#FF0000'
-                    campaignTrail_temp.candidate_json[12].fields.color_hex = '#0000FF'
-                    campaignTrail_temp.candidate_json[13].fields.color_hex = '#FFFF00'
-                    campaignTrail_temp.candidate_json[14].fields.color_hex = '#00C100'
+                    campaignTrail_temp.candidate_json[12].fields.color_hex = '#FF0000'
+                    campaignTrail_temp.candidate_json[13].fields.color_hex = '#0000FF'
+                    campaignTrail_temp.candidate_json[14].fields.color_hex = '#FFFF00'
+                    campaignTrail_temp.candidate_json[15].fields.color_hex = '#00C100'
                   }
               });
   
@@ -2062,6 +2063,7 @@ function addColor() {
   
     }
     if (storedCan == 301 && done == false && (localStorage.getItem("hasDiedWon")) && difficultyDiv && !document.getElementById("bunnyhopDropdown")) {
+    campaignTrail_temp.global_parameter_json [0]["fields"].question_count = "35";
               console.log("Butler Button")
               campaignTrail_temp.bunnyhop = false;
               done = true;
@@ -2100,6 +2102,7 @@ function addColor() {
   
     }
     if ((storedCan == 301 || storedCan == 300) && done2 == false && difficultyDiv) {
+    campaignTrail_temp.global_parameter_json [0]["fields"].question_count = "35";
               console.log("HQ button")
               campaignTrail_temp.bunnyhop = false;
               done2 = true;
