@@ -2494,9 +2494,9 @@ function getLatestRes(t) {
     return [nn2, answerEffects];
 }
 
-function setStatePollText(s, t) {
+function setStatePollText(state, t) {
     const results = t.filter(
-        ({ abbr }) => abbr === e.states_json[s].fields.abbr,
+        ({ abbr }) => abbr === state.fields.abbr,
     );
     let doPrimaryMode = false;
 
@@ -2533,93 +2533,61 @@ function setStatePollText(s, t) {
 
     const _ = formattedResults.join("");
     slrr = _;
-    /*if (!doPrimaryMode && !e.primary) {
-        var c = `<h3>ESTIMATED SUPPORT</h3>                    <ul id='switchingEst'>${_
-        }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Electoral Vote Estimate</button>`;
-    } else if (e.primary && !doPrimaryMode) {
-        var c = `<h3>ESTIMATED SUPPORT</h3>                    <ul id='switchingEst'>${_
-        }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Current Delegate Count</button>`;
-    } else {
-        var c = `<h3>PRIMARY/CAUCUS RESULT</h3>                    <ul id='switchingEst'>${_
-        }</ul>                    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button><button onclick='evest()' id='ev_est'>Current Delegate Count</button>`;
-    }*/
-    const c = `
+
+    // $("#overall_result").html(c);
+    document.getElementById("overall_result").innerHTML = `
         <h3>${!doPrimaryMode && !e.primary || e.primary && !doPrimaryMode ? "ESTIMATED SUPPORT" : "PRIMARY/CAUCUS RESULT"}</h3>
         <ul id='switchingEst'>${_}</ul>
         <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button>
         <button onclick='evest()' id='ev_est'>${!doPrimaryMode && !e.primary ? "Electoral Vote Estimate" : "Current Delegate Count"}</button>
     `;
-
-    $("#overall_result").html(c);
     let u = "";
-    for (l = 0; l < e.state_issue_score_json.length; l++) {
-        if (e.state_issue_score_json[l].fields.state == e.states_json[s].pk) {
-            // Find the issue object that matches the current state_issue_score
-            const issue = e.issues_json.find(
-                (i) => i.pk == e.state_issue_score_json[l].fields.issue,
-            );
+    const globalParam = e.global_parameter_json?.[0]?.fields || {};
+
+    e.state_issue_score_json.forEach(({ fields }) => {
+        if (fields.state === state.pk) {
+            const issue = e.issues_json.find((i) => i.pk === fields.issue);
+            let pickedStance = null;
             let stanceDesc = null;
-            // Use a switch statement to determine the stance based on the state_issue_score
-            switch (true) {
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_1_max:
-                    var v = issue.fields.stance_1;
-                    stanceDesc = issue.fields.stance_desc_1;
+
+            const borders = [
+                globalParam.issue_stance_1_max,
+                globalParam.issue_stance_2_max,
+                globalParam.issue_stance_3_max,
+                globalParam.issue_stance_4_max,
+                globalParam.issue_stance_5_max,
+                globalParam.issue_stance_6_max,
+            ]
+
+            for (let i = 0; i < borders.length; i++) {
+                if (fields.state_issue_score <= borders[i]) {
+                    pickedStance = issue.fields[`stance_${i + 1}`];
+                    stanceDesc = issue.fields[`stance_desc_${i + 1}`];
                     break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_2_max:
-                    v = issue.fields.stance_2;
-                    stanceDesc = issue.fields.stance_desc_2;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_3_max:
-                    v = issue.fields.stance_3;
-                    stanceDesc = issue.fields.stance_desc_3;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_4_max:
-                    v = issue.fields.stance_4;
-                    stanceDesc = issue.fields.stance_desc_4;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_5_max:
-                    v = issue.fields.stance_5;
-                    stanceDesc = issue.fields.stance_desc_5;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                <= e.global_parameter_json[0].fields.issue_stance_6_max:
-                    v = issue.fields.stance_6;
-                    stanceDesc = issue.fields.stance_desc_6;
-                    break;
-                case e.state_issue_score_json[l].fields.state_issue_score
-                > e.global_parameter_json[0].fields.issue_stance_6_max:
-                    v = issue.fields.stance_7;
-                    stanceDesc = issue.fields.stance_desc_7;
-                    break;
+                }
             }
 
-            if (stanceDesc == "'" || stanceDesc == null || !isNaN(stanceDesc)) {
-                stanceDesc = "";
-            }
+            pickedStance ??= issue.fields.stance_7;
+            stanceDesc ??= issue.fields.stance_desc_7;
+
+            if (stanceDesc === "'" || stanceDesc == null || !isNaN(stanceDesc)) stanceDesc = "";
 
             let issueDescription = issue.fields.description ?? "";
-            if (
-                issueDescription == "'"
-                || issueDescription == null
-                || !isNaN(issueDescription)
-            ) {
-                issueDescription = "";
-            }
+            if (issueDescription === "'" || issueDescription == null || !isNaN(issueDescription)) issueDescription = "";
 
-            // Add the issue name and stance to the list
             u += `
-              <li ${campaignTrail_temp.issue_font_size != null ? `style="font-size: ${campaignTrail_temp.issue_font_size};"` : ""}>
-                <span class=${issueDescription ? "tooltip" : ""}>${issue.fields.name}<span style="font-size: 10.4px;" class="tooltiptext">${issueDescription}</span></span>
-                <span> -- </span>
-                <span class=${stanceDesc ? "tooltip" : ""}>${v}<span style="font-size: 10.4px;" class="tooltiptext">${stanceDesc}</span></span>
-              </li>`;
+                <li ${campaignTrail_temp.issue_font_size != null ? `style="font-size: ${campaignTrail_temp.issue_font_size};"` : ""}>
+                    <span ${issueDescription ? "class=tooltip" : ""}>${issue.fields.name}
+                        <span style="font-size: 10.4px;" class="tooltiptext">${issueDescription}</span>
+                    </span>
+                    <span> -- </span>
+                    <span ${stanceDesc ? "class=tooltip" : ""}>${pickedStance}
+                        <span style="font-size: 10.4px;" class="tooltiptext">${stanceDesc}</span>
+                    </span>
+                </li>
+            `.trim().replace(/>\s+</g, "><");
         }
-    }
+    });
     let onQText = "";
     if (e.primary) {
         /*
@@ -2635,8 +2603,8 @@ function setStatePollText(s, t) {
         ]
         */
         const statesM = e.primary_code.map((f) => f.states).flatMap((f) => f);
-        if (statesM.includes(e.states_json[s].pk)) {
-            const match = e.primary_code.find((f) => f.states.includes(e.states_json[s].pk));
+        if (statesM.includes(state.pk)) {
+            const match = e.primary_code.find((f) => f.states.includes(state.pk));
             if (match) onQText = `Primary on Question ${match.breakQ + 1}`;
         }
     }
@@ -2644,10 +2612,10 @@ function setStatePollText(s, t) {
     // $("#state_info").html(f);
     document.getElementById("state_info").innerHTML = `
         <h3>STATE SUMMARY</h3>
-        <p>${e.states_json[s].fields.name}</p>
+        <p>${state.fields.name}</p>
         <ul>${u}</ul>
-        <p>${e.primary ? "Delegates:" : "Electoral Votes:"} ${e.states_json[s].fields.electoral_votes}</p>
-        <p>${e.primary ? onQText : `Popular Votes: ${e.states_json[s].fields.popular_votes.toLocaleString()}`}</p>
+        ${state.fields.electoral_votes === 0 ? "" : `<p>${e.primary ? "Delegates:" : "Electoral Votes:"} ${formatNumbers(state.fields.electoral_votes)}</p>`}
+        <p>${e.primary ? onQText : `Popular Votes: ${formatNumbers(state.fields.popular_votes)}`}</p>
     `.trim().replace(/>\s+</g, "><");
 }
 
@@ -2673,9 +2641,11 @@ function rFunc(t, i) {
     }
 
     // build abbreviation -> state index map
-    const abbrToStateIdx = new Map();
+    const abbrToState = new Map();
+    // I'm sorry, StrawberryMaster.
     for (let s = 0; s < e.states_json.length; s++) {
-        abbrToStateIdx.set(e.states_json[s].fields.abbr, s);
+        const state = e.states_json[s];
+        abbrToState.set(e.states_json[s].fields.abbr, state);
     }
 
     // latest opponent visits (Sea to Shining Sea mode)
@@ -2776,9 +2746,9 @@ function rFunc(t, i) {
         nnn = cachedNNN;
         evestt = 0;
 
-        const stIdx = abbrToStateIdx.get(data.name);
-        if (stIdx !== undefined) {
-            setStatePollText(stIdx, t);
+        const stObj = abbrToState.get(data.name);
+        if (stObj !== undefined) {
+            setStatePollText(stObj, t);
         }
     };
 
@@ -3307,7 +3277,7 @@ function finalMapScreenHtml() {
             : "0.0";
         return `
             <li>
-                <span style="color:${f.color}; background-color: ${f.color}">--</span> ${f.last_name}: ${electoralVotes} / ${popularVotePercent}%
+                <span style="color:${f.color}; background-color: ${f.color}">--</span> ${f.last_name}: ${formatNumbers(electoralVotes)} / ${popularVotePercent}%
             </li>
         `;
     }).join("");
@@ -3320,7 +3290,7 @@ function finalMapScreenHtml() {
                     <div id="overall_result">
                         <h3>ELECTORAL VOTES</h3>
                         <ul>${candResultText}</ul>
-                        <p>${election.fields.winning_electoral_vote_number} to win</p>
+                        <p>${formatNumbers(election.fields.winning_electoral_vote_number)} to win</p>
                     </div>
                 </div>
                 <div id="state_result_container">
@@ -3513,7 +3483,7 @@ function overallDetailsHtml() {
                         <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
                         ${candObj.fields.first_name} ${candObj.fields.last_name}
                     </td>
-                    <td>${f.electoral_votes}</td>
+                    <td>${formatNumbers(f.electoral_votes)}</td>
                     <td>${formatNumbers(f.popular_votes)}</td>
                     <td>${((f.popular_votes / totalPV) * 100).toFixed(e.finalPercentDigits)}%</td>
                 </tr>
