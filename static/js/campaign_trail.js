@@ -11,8 +11,7 @@ async function evalFromUrl(url, callback = null) {
     callback?.();
 }
 
-let changeFontColour = () => {
-};
+let changeFontColour = () => {};
 
 const baseScenarioDict = {
     1844: "1844_Clay_Fillmore.html",
@@ -1826,10 +1825,6 @@ function electionNight() {
             }(0, 0));
         }, 2e3);
     });
-}
-
-function displayResults(primaryMode) {
-
 }
 
 function nextQuestion() {
