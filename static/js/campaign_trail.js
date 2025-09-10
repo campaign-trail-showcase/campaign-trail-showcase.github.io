@@ -1,4 +1,4 @@
-/* global campaignTrail_temp, jQuery, $ */
+/* global e, campaignTrail_temp, jQuery, $ */
 
 e ||= campaignTrail_temp;
 e.skippingQuestion = false;
@@ -11,6 +11,7 @@ async function evalFromUrl(url, callback = null) {
     callback?.();
 }
 
+// eslint-disable-next-line prefer-const
 let changeFontColour = () => {};
 
 const baseScenarioDict = {
@@ -170,11 +171,11 @@ let states = [];
 const initIt = 0;
 
 function fileExists(url) {
-    return fetch(url, {method: "HEAD", cache: "no-store"})
+    return fetch(url, { method: "HEAD", cache: "no-store" })
         .then((res) => {
             if (res.ok) return true;
             if (res.status === 405 || res.status === 501) {
-                return fetch(url, {method: "GET", cache: "no-store"})
+                return fetch(url, { method: "GET", cache: "no-store" })
                     .then((r2) => r2.ok)
                     .catch(() => false);
             }
@@ -201,177 +202,177 @@ function histFunction() {
     if (modded === false) {
         // eslint-disable-next-line default-case
         switch (campaignTrail_temp.election_id) {
-            case 21: // 2020
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Joe Biden",
-                    " Donald Trump",
-                    " Jo Jorgensen",
-                    " Howie Hawkins",
-                ];
-                HistEV = [306, 232, 0, 0];
-                HistPV = ["81,268,924", "74,216,154", "1,865,724", "405,035"];
-                HistPVP = ["51.3%", "46.9%", "1.2%", "0.4%"];
-                break;
-            case 20: // 2016
-            case 16: // 2016a
-                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Donald Trump",
-                    " Hillary Clinton",
-                    " Gary Johnson",
-                    " Jill Stein",
-                ];
-                HistEV = [306, 232, 0, 0];
-                HistPV = ["62,984,828", "65,853,514", "4,489,341", "405,035"];
-                HistPVP = ["46.1%", "48.2%", "3.3%", "1.1%"];
-                break;
-            case 3: // 2012
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Barack Obama",
-                    " Mitt Romney",
-                    " Gary Johnson",
-                    " Jill Stein",
-                ];
-                HistEV = [332, 206, 0, 0];
-                HistPV = ["65,915,795", "60,933,504", "1,275,971", "469,627"];
-                HistPVP = ["51.1%", "47.2%", "1.0%", "0.4%"];
-                break;
-            case 9: // 2000
-                HistHexcolour = ["#FF0000", "#0000FF", "#00C100", "#FFFF00"];
-                HistName = [" George W. Bush", " Al Gore", " Ralph Nader", " Pat Buchanan"];
-                HistEV = [271, 267, 0, 0];
-                HistPV = ["50,456,002", "50,999,897", "2,882,955", "448,895"];
-                HistPVP = ["47.9%", "48.4%", "2.7%", "0.4%"];
-                break;
-            case 15: // 1988
-                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
-                HistName = [
-                    " George Bush",
-                    " Michael Dukakis",
-                    " Ron Paul",
-                    " Lenora Fulani",
-                ];
-                HistEV = [426, 112, 0, 0];
-                HistPV = ["48,886,597", "41,809,476", "431,750", "217,221"];
-                HistPVP = ["53.4%", "45.7%", "0.5%", "0.2%"];
-                break;
-            case 10: // 1976
-                HistHexcolour = ["#0000FF", "#FF0000", "#00C100", "#FFFF00"];
-                HistName = [
-                    " Jimmy Carter",
-                    " Gerald Ford",
-                    " Eugene McCarthy",
-                    " Roger MacBride",
-                ];
-                HistEV = [297, 241, 0, 0];
-                HistPV = ["40,831,881", "39,148,634", "744,763", "172,557"];
-                HistPVP = ["50.1%", "48.0%", "0.9%", "0.2%"];
-                break;
-            case 4: // 1968
-                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FFFFFF"];
-                HistName = [
-                    " Richard Nixon",
-                    " Hubert Humphrey",
-                    " George Wallace",
-                    " Other",
-                ];
-                HistEV = [302, 191, 45, 0];
-                HistPV = ["31,783,783", "31,271,839", "9,901,118", "243,259"];
-                HistPVP = ["43.4%", "42.7%", "13.5%", "0.3%"];
-                break;
-            case 69: // 1964
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Lyndon B. Johnson",
-                    " Barry Goldwater",
-                    " Unpledged electors",
-                    " Eric Hass",
-                ];
-                HistEV = [486, 52, 0, 0];
-                HistPV = ["43,129,040", "27,175,754", "210,732", "45,189"];
-                HistPVP = ["61.1%", "38.5%", "0.3%", ">0.1%"];
-                break;
-            case 11: // 1960
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#FFFFFF"];
-                HistName = [
-                    " John Kennedy",
-                    " Richard Nixon",
-                    " Harry Byrd",
-                    " Unpledged",
-                ];
-                HistEV = [303, 219, 15, 0];
-                HistPV = ["34,220,984", "34,108,157", "0", "286,359"];
-                HistPVP = ["49.7%", "49.5%", "0", "0.4%"];
-                break;
-            case 12: // 1948
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Harry Truman",
-                    " Thomas Dewey",
-                    " Strom Thurmond",
-                    " Henry Wallace",
-                ];
-                HistEV = [303, 189, 39, 0];
-                HistPV = ["24,179,347", "21,991,292", "1,175,930", "1,157,328"];
-                HistPVP = ["49.6%", "45.1%", "2.4%", "2.4%"];
-                break;
-            case 14: // 1916
-                HistHexcolour = ["#0000FF", "#FF0000", "#00C100", "#FFFF00"];
-                HistName = [
-                    " Woodrow Wilson",
-                    " Charles Evans Hughes",
-                    " Allan Benson",
-                    " James Hanly",
-                ];
-                HistEV = [277, 254, 0, 0];
-                HistPV = ["9,126,868", "8,548,728", "590,524", "221,302"];
-                HistPVP = ["49.2%", "46.1%", "3.2%", "1.2%"];
-                break;
-            case 5: // 1896
-                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FF00FF"];
-                HistName = [
-                    " William McKinley",
-                    " William Jennings Bryan",
-                    " John Palmer",
-                    " Joshua Levering",
-                ];
-                HistEV = [271, 176, 0, 0];
-                HistPV = ["7,111,607", "6,509,052", "134,645", "131,312"];
-                HistPVP = ["51.0%", "46.7%", "1.0%", "0.9%"];
-                break;
-            case 8: // 1860
-                HistHexcolour = ["#FF0000", "#FFFF00", "#00C100", "#0000FF"];
-                HistName = [
-                    " Abraham Lincoln",
-                    " John C. Breckinridge",
-                    " John Bell",
-                    " Stephen Douglas",
-                ];
-                HistEV = [180, 72, 39, 12];
-                HistPV = ["1,865,908", "848,019", "590,901", "1,380,202"];
-                HistPVP = ["39.8%", "18.1%", "12.6%", "29.5%"];
-                break;
-            case 13: // 1844
-                HistHexcolour = ["#0000FF", "#F0C862", "#FFFF00"];
-                HistName = [
-                    " James K. Polk",
-                    " Henry Clay",
-                    " James Birney",
-                ];
-                HistEV = [170, 105, 0];
-                HistPV = ["1,339,494", "1,300,004", "62,103"];
-                HistPVP = ["49.5%", "48.1%", "2.3%"];
-                break;
+        case 21: // 2020
+            HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
+            HistName = [
+                " Joe Biden",
+                " Donald Trump",
+                " Jo Jorgensen",
+                " Howie Hawkins",
+            ];
+            HistEV = [306, 232, 0, 0];
+            HistPV = ["81,268,924", "74,216,154", "1,865,724", "405,035"];
+            HistPVP = ["51.3%", "46.9%", "1.2%", "0.4%"];
+            break;
+        case 20: // 2016
+        case 16: // 2016a
+            HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
+            HistName = [
+                " Donald Trump",
+                " Hillary Clinton",
+                " Gary Johnson",
+                " Jill Stein",
+            ];
+            HistEV = [306, 232, 0, 0];
+            HistPV = ["62,984,828", "65,853,514", "4,489,341", "405,035"];
+            HistPVP = ["46.1%", "48.2%", "3.3%", "1.1%"];
+            break;
+        case 3: // 2012
+            HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
+            HistName = [
+                " Barack Obama",
+                " Mitt Romney",
+                " Gary Johnson",
+                " Jill Stein",
+            ];
+            HistEV = [332, 206, 0, 0];
+            HistPV = ["65,915,795", "60,933,504", "1,275,971", "469,627"];
+            HistPVP = ["51.1%", "47.2%", "1.0%", "0.4%"];
+            break;
+        case 9: // 2000
+            HistHexcolour = ["#FF0000", "#0000FF", "#00C100", "#FFFF00"];
+            HistName = [" George W. Bush", " Al Gore", " Ralph Nader", " Pat Buchanan"];
+            HistEV = [271, 267, 0, 0];
+            HistPV = ["50,456,002", "50,999,897", "2,882,955", "448,895"];
+            HistPVP = ["47.9%", "48.4%", "2.7%", "0.4%"];
+            break;
+        case 15: // 1988
+            HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
+            HistName = [
+                " George Bush",
+                " Michael Dukakis",
+                " Ron Paul",
+                " Lenora Fulani",
+            ];
+            HistEV = [426, 112, 0, 0];
+            HistPV = ["48,886,597", "41,809,476", "431,750", "217,221"];
+            HistPVP = ["53.4%", "45.7%", "0.5%", "0.2%"];
+            break;
+        case 10: // 1976
+            HistHexcolour = ["#0000FF", "#FF0000", "#00C100", "#FFFF00"];
+            HistName = [
+                " Jimmy Carter",
+                " Gerald Ford",
+                " Eugene McCarthy",
+                " Roger MacBride",
+            ];
+            HistEV = [297, 241, 0, 0];
+            HistPV = ["40,831,881", "39,148,634", "744,763", "172,557"];
+            HistPVP = ["50.1%", "48.0%", "0.9%", "0.2%"];
+            break;
+        case 4: // 1968
+            HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FFFFFF"];
+            HistName = [
+                " Richard Nixon",
+                " Hubert Humphrey",
+                " George Wallace",
+                " Other",
+            ];
+            HistEV = [302, 191, 45, 0];
+            HistPV = ["31,783,783", "31,271,839", "9,901,118", "243,259"];
+            HistPVP = ["43.4%", "42.7%", "13.5%", "0.3%"];
+            break;
+        case 69: // 1964
+            HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
+            HistName = [
+                " Lyndon B. Johnson",
+                " Barry Goldwater",
+                " Unpledged electors",
+                " Eric Hass",
+            ];
+            HistEV = [486, 52, 0, 0];
+            HistPV = ["43,129,040", "27,175,754", "210,732", "45,189"];
+            HistPVP = ["61.1%", "38.5%", "0.3%", ">0.1%"];
+            break;
+        case 11: // 1960
+            HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#FFFFFF"];
+            HistName = [
+                " John Kennedy",
+                " Richard Nixon",
+                " Harry Byrd",
+                " Unpledged",
+            ];
+            HistEV = [303, 219, 15, 0];
+            HistPV = ["34,220,984", "34,108,157", "0", "286,359"];
+            HistPVP = ["49.7%", "49.5%", "0", "0.4%"];
+            break;
+        case 12: // 1948
+            HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
+            HistName = [
+                " Harry Truman",
+                " Thomas Dewey",
+                " Strom Thurmond",
+                " Henry Wallace",
+            ];
+            HistEV = [303, 189, 39, 0];
+            HistPV = ["24,179,347", "21,991,292", "1,175,930", "1,157,328"];
+            HistPVP = ["49.6%", "45.1%", "2.4%", "2.4%"];
+            break;
+        case 14: // 1916
+            HistHexcolour = ["#0000FF", "#FF0000", "#00C100", "#FFFF00"];
+            HistName = [
+                " Woodrow Wilson",
+                " Charles Evans Hughes",
+                " Allan Benson",
+                " James Hanly",
+            ];
+            HistEV = [277, 254, 0, 0];
+            HistPV = ["9,126,868", "8,548,728", "590,524", "221,302"];
+            HistPVP = ["49.2%", "46.1%", "3.2%", "1.2%"];
+            break;
+        case 5: // 1896
+            HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FF00FF"];
+            HistName = [
+                " William McKinley",
+                " William Jennings Bryan",
+                " John Palmer",
+                " Joshua Levering",
+            ];
+            HistEV = [271, 176, 0, 0];
+            HistPV = ["7,111,607", "6,509,052", "134,645", "131,312"];
+            HistPVP = ["51.0%", "46.7%", "1.0%", "0.9%"];
+            break;
+        case 8: // 1860
+            HistHexcolour = ["#FF0000", "#FFFF00", "#00C100", "#0000FF"];
+            HistName = [
+                " Abraham Lincoln",
+                " John C. Breckinridge",
+                " John Bell",
+                " Stephen Douglas",
+            ];
+            HistEV = [180, 72, 39, 12];
+            HistPV = ["1,865,908", "848,019", "590,901", "1,380,202"];
+            HistPVP = ["39.8%", "18.1%", "12.6%", "29.5%"];
+            break;
+        case 13: // 1844
+            HistHexcolour = ["#0000FF", "#F0C862", "#FFFF00"];
+            HistName = [
+                " James K. Polk",
+                " Henry Clay",
+                " James Birney",
+            ];
+            HistEV = [170, 105, 0];
+            HistPV = ["1,339,494", "1,300,004", "62,103"];
+            HistPVP = ["49.5%", "48.1%", "2.3%"];
+            break;
         }
     }
 }
 
 function cyoAdventure(question) {
     const latestAnswer = campaignTrail_temp.player_answers[
-    campaignTrail_temp.player_answers.length - 1
-        ];
+        campaignTrail_temp.player_answers.length - 1
+    ];
     for (let i = 0; i < campaignTrail_temp.questions_json.length; i++) {
         if (campaignTrail_temp.questions_json[i].pk === question.pk) {
             for (let v = 0; v < campaignTrail_temp.questions_json.length; v++) {
@@ -381,7 +382,7 @@ function cyoAdventure(question) {
                 ) {
                     campaignTrail_temp.questions_json[
                         campaignTrail_temp.question_number
-                        ] = campaignTrail_temp.questions_json[v];
+                    ] = campaignTrail_temp.questions_json[v];
                     break;
                 }
             }
@@ -552,7 +553,7 @@ function exportResults() {
     const fileName = `election_results_${campaignTrail_temp.election_id}.json`;
 
     const element = document.createElement("a");
-    const fileBlob = new Blob([fileContent], {type: "application/json"});
+    const fileBlob = new Blob([fileContent], { type: "application/json" });
     element.href = URL.createObjectURL(fileBlob);
     element.download = fileName;
     document.body.appendChild(element);
@@ -1232,10 +1233,10 @@ function onAnswerSelectButtonClicked() {
 function questionHTML() {
     const ansArr = shuffle(
         e.answers_json
-            .map((f, idx) => ({f, idx}))
-            .filter(({f}) => String(f.fields.question) === String(e.questions_json[e.question_number].pk))
+            .map((f, idx) => ({ f, idx }))
+            .filter(({ f }) => String(f.fields.question) === String(e.questions_json[e.question_number].pk))
             .slice(0, e.answer_count)
-            .map(({idx}) => ({
+            .map(({ idx }) => ({
                 key: idx,
             })),
     );
@@ -1361,220 +1362,6 @@ function formatNumbers(num) {
 }
 
 e.answer_count = 4;
-
-function primaryResults(states) {
-    const t = getSortedCands();
-    const stateMap = new Map(states.map((s) => [s.pk, s]));
-
-    const i = t
-        .map((item) => {
-            const {color} = item;
-            return `<li><span style="color:${color}; background-color:${color}">--</span> ${item.last_name}: 0</li>`;
-        })
-        .join("");
-    const s = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
-    const n = s.fields.winning_electoral_vote_number;
-    $("#game_window").html(`
-        <div class="game_header">${corrr}</div>
-        <div id="main_content_area">
-            <div id="map_container"></div>
-            <div id="menu_container">
-                <div id="overall_result_container">
-                    <div id="overall_result">
-                        <h3>ELECTORAL VOTES</h3>
-                        <ul>${i}</ul>
-                        <p>0% complete
-                            <br>
-                            ${n} to win
-                        </p>
-                    </div>
-                </div>
-                <div id="state_result_container">
-                    <div id="state_result">
-                        <h3>STATE RESULTS</h3>
-                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="map_footer">
-            <button id="final_result_button">Go back to questions</button>
-        </div>
-        <div class="overlay" id="election_night_overlay"></div>
-        <div class="overlay_window" id="election_night_window">
-            <div class="overlay_window_content" id="election_night_content">
-                <h3>Advisor Feedback</h3>
-                <img src="${s.fields.advisor_url}" width="208" height="128"/>
-                <p>One of many election nights has arrived. Winning the delegates in these races will be vital to your primary victory.</p>
-            </div>
-            <div class="overlay_buttons" id="election_night_buttons">
-                <button id="ok_button">OK</button>
-                <br>
-            </div>
-        </div>`.trim());
-
-    const stateColorArr = {};
-    states.forEach((f) => {
-        stateColorArr[f.fields.abbr] = {
-            fill: campaignTrail_temp.global_parameter_json[0].fields.default_map_color_hex,
-        };
-    });
-
-    const lTemp = {
-        stateStyles: {
-            fill: "transparent",
-        },
-        stateHoverStyles: {
-            fill: "transparent",
-        },
-        stateSpecificStyles: stateColorArr,
-        stateSpecificHoverStyles: stateColorArr,
-    };
-    $("#map_container").usmap(lTemp);
-    const $okButton = $("#ok_button");
-    $okButton.click(() => {
-        $("#election_night_overlay, #election_night_window").remove();
-    });
-    $("#final_result_button").click(() => {
-        clearTimeout(results_timeout);
-        $("#map_footer").html("<i>Processing Results, wait one moment...</i>");
-        // HELPFUL CODE HERE
-        // campaignTrail_temp.question_number = 0
-        // ee = A(return_type=2)
-        // o(ee)
-        e.question_number++;
-        nextQuestion();
-    });
-    e.final_overall_results = e.final_state_results[0].result.map((f) => ({
-        candidate: f.candidate,
-        electoral_votes: 0,
-        popular_votes: 0,
-    }));
-    e.final_state_results = e.final_state_results.map((f) => {
-        const stObj = stateMap.get(Number(f.state)) ?? states.find((g) => g.pk === Number(f.state));
-        if (!stObj) return f;
-
-        return {
-            ...f,
-            result_time: marginTime(f.result, stObj.fields.poll_closing_time),
-        };
-    });
-
-    $okButton.click(() => {
-        results_timeout = setTimeout(() => {
-            !(function t(i, a) {
-                const s = [0, 0];
-                for (var n = 0; n < e.final_overall_results.length; n++) {
-                    e.final_overall_results[n].electoral_votes > s[0]
-                    && (s[0] = e.final_overall_results[n].electoral_votes);
-                }
-                total_votes = 0;
-                for (
-                    iterator = 0;
-                    iterator < e.final_overall_results.length;
-                    iterator++
-                ) {
-                    total_votes += e.final_overall_results[iterator].popular_votes;
-                }
-                pop_vs = [];
-                for (
-                    iterator = 0;
-                    iterator < e.final_overall_results.length;
-                    iterator++
-                ) {
-                    if (
-                        e.final_overall_results[iterator].popular_votes / total_votes
-                        > 0
-                    ) {
-                        pop_vs.push(
-                            e.final_overall_results[iterator].popular_votes / total_votes,
-                        );
-                    } else {
-                        pop_vs.push(0);
-                    }
-                }
-                var a = handleFinalResults(i);
-                const _ = getSortedCands();
-                let r = "";
-                const o = "";
-                for (var n = 0; n < _.length; n++) {
-                    for (let d = 0; d < e.final_overall_results.length; d++) {
-                        if (e.final_overall_results[d].candidate == _[n].candidate) {
-                            var c = e.final_overall_results[d].electoral_votes;
-                            const popvthing = (pop_vs[d] * 100).toFixed(1);
-                        }
-                    }
-                    r
-                        += `            <span style="color:${_[n].color
-                    }; background-color: ${_[n].color
-                    }">--</span> <b>${_[n].last_name
-                    }</b> -  ${c
-                    }<br>`;
-                }
-                const p = mapResultColor(i);
-                let h = Math.floor((i / 480) * 100);
-                const g = $("#state_result_container").html();
-                $("#game_window").html("");
-                $("#game_window").html(`
-                    <div class="game_header">${corrr}</div>
-                    <div id="main_content_area">
-                        <div id="map_container"></div>
-                        <div id="menu_container">
-                            <div id="overall_result_container">
-                                <div id="overall_result">
-                                    <h3>ELECTION TALLY</h3>
-                                    <ul>${r}</ul>
-                                    <p>${h}% complete</p>
-                                </div>
-                            </div>
-                        <div id="state_result_container">${g}</div>
-                        </div>
-                    </div>
-                    <div id="map_footer">
-                        <button id="final_result_button">Go back to questions</button>
-                    </div>
-                `);
-
-                $("#map_container").usmap(p);
-                $("#final_result_button").click(() => {
-                    clearTimeout(results_timeout),
-                        $("#map_footer").html(
-                            "<i>Processing Results, wait one moment...</i>",
-                        );
-                    e.question_number++;
-                    nextQuestion();
-                });
-                for (var n = 0; n < e.final_overall_results.length; n++) {
-                    e.final_overall_results[n].electoral_votes > s[1]
-                    && (s[1] = e.final_overall_results[n].electoral_votes);
-                }
-                if (s[0] < o && s[1] >= o) {
-                    $("#overlay_result_button").click(() => {
-                        clearTimeout(results_timeout),
-                            $("#map_footer").html(
-                                "<i>Processing Results, wait one moment...</i>",
-                            );
-                        e.question_number++;
-                        nextQuestion();
-                    });
-                } else {
-                    i >= 480 || a >= states.length
-                        ? ((h = 100),
-                            $("#overall_result").html(
-                                `            <h3>ELECTION TALLY</h3>            <ul>${r
-                                }</ul>            <p>${h
-                                }% complete</br>${o
-                                } to win</p>`,
-                            ))
-                        : (results_timeout = setTimeout(() => {
-                            t(i, a);
-                        }, 2e3));
-                }
-                i += 120;
-            }(0, 0));
-        }, 2e3);
-    });
-}
 
 function primaryFunction(execute, breaks) {
     if (!execute) {
@@ -1709,7 +1496,7 @@ function electionNight() {
         popular_votes: 0,
     }));
     e.final_state_results.forEach((f) => {
-        f.result_time = marginTime(f.result, e.states_json.find((g) => g.pk === f.state).fields.poll_closing_time)
+        f.result_time = marginTime(f.result, e.states_json.find((g) => g.pk === f.state).fields.poll_closing_time);
     });
     $("#ok_button").click(() => {
         $("#election_night_overlay, #election_night_window").remove();
@@ -1724,7 +1511,7 @@ function electionNight() {
                     else pop_vs.push(0);
 
                     if (f.electoral_votes > s[0]) s[0] = f.electoral_votes;
-                })
+                });
                 var a = handleFinalResults(i);
                 const l = findFromPK(e.election_json, e.election_id);
                 const _ = getSortedCands();
@@ -1748,7 +1535,7 @@ function electionNight() {
                         <li>
                             <span style="color:${f.color}; background-color:${f.color}">--</span> ${f.last_name}: ${allStatesHaveEVs ? `${formatNumbers(c)} / ` : ""}${popvthing}%
                         </li>
-                    `
+                    `;
                 }).join("");
                 const p = mapResultColor(i);
                 let h = Math.floor((i / 480) * 100);
@@ -1779,7 +1566,7 @@ function electionNight() {
                 $("#map_container").usmap(p);
                 $("#final_result_button").click(finalResListener);
                 e.final_overall_results.forEach((f) => {
-                    if (f.electoral_votes > s[1]) s[1] = f.electoral_votes
+                    if (f.electoral_votes > s[1]) s[1] = f.electoral_votes;
                 });
                 if (s[0] < winningEV && s[1] >= winningEV) {
                     const b = e.final_overall_results[0].candidate === e.candidate_id ? `${e.WinPopup}` : `${e.LosePopup}`;
@@ -1806,10 +1593,9 @@ function electionNight() {
                         removeElectionNightWindows();
                         finalResListener();
                     });
-                } else {
-                    if (i >= 480 || a >= e.states_json.length) {
-                        h = 100;
-                        $("#overall_result").html(`
+                } else if (i >= 480 || a >= e.states_json.length) {
+                    h = 100;
+                    $("#overall_result").html(`
                             <h3>ELECTION TALLY</h3>
                             <ul>${r}</ul>
                             <p>
@@ -1817,9 +1603,8 @@ function electionNight() {
                                 ${evsToWin}
                             </p>
                         `);
-                    } else {
-                        results_timeout = setTimeout(() => t(i, a), 2e3);
-                    }
+                } else {
+                    results_timeout = setTimeout(() => t(i, a), 2e3);
                 }
                 i += 10;
             }(0, 0));
@@ -2008,14 +1793,14 @@ function a(e) {
     let t;
     // eslint-disable-next-line default-case
     switch (e) {
-        case "1":
-            t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candiate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
-            break;
-        case "2":
-            t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
-            break;
-        case "3":
-            t = `
+    case "1":
+        t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candiate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
+        break;
+    case "2":
+        t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
+        break;
+    case "3":
+        t = `
                 <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
                 <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
                 <p>
@@ -2027,7 +1812,7 @@ function a(e) {
                 <p><b>This is not the recommended experience for new players.</b></p>
                 <p><b>Originally from New Campaign Trail, added with permission.</b></p>
             `;
-            break;
+        break;
     }
     $("#opponent_selection_description_window").html(t);
 }
@@ -2054,10 +1839,10 @@ function election_HTML(id, cand, running_mate) {
                 yearbit = ree.election_json[findFromPK(ree.election_json, id)].fields.year;
                 lastnamebit = ree.candidate_json[
                     findFromPK(ree.candidate_json, campaignTrail_temp.candidate_id)
-                    ].fields.last_name;
+                ].fields.last_name;
                 veeplastname = ree.candidate_json[
                     findFromPK(ree.candidate_json, campaignTrail_temp.running_mate_id)
-                    ].fields.last_name;
+                ].fields.last_name;
                 // eslint-disable-next-line no-empty
             } catch {
             }
@@ -2085,10 +1870,10 @@ function election_HTML(id, cand, running_mate) {
         return (
             `2016a_${campaignTrail_temp.candidate_json[
                 findFromPK(campaignTrail_temp.candidate_json, cand)
-                ].fields.last_name
+            ].fields.last_name
             }_${campaignTrail_temp.candidate_json[
                 findFromPK(campaignTrail_temp.candidate_json, running_mate)
-                ].fields.last_name
+            ].fields.last_name
             }.html`
         );
     }
@@ -2365,7 +2150,7 @@ function renderOptions(electionId, candId, runId) {
                                 console.info(`No legacy ending file found for ${theorId}, skipping`);
                                 return;
                             }
-                            return fetch(endingUrl, {cache: "no-store"})
+                            return fetch(endingUrl, { cache: "no-store" })
                                 .then((resp) => {
                                     if (!resp.ok) throw new Error(`Failed to fetch ${endingUrl}: ${resp.status}`);
                                     return resp.text();
@@ -2417,7 +2202,7 @@ function getLatestRes(t) {
     cand_pvs = [];
     // goes through every state
     // converts the n object to an array of elements
-    const nArray = Object.entries(answerEffects).map(([key, value]) => ({key, value}));
+    const nArray = Object.entries(answerEffects).map(([key, value]) => ({ key, value }));
 
     // goes through every state
     for (let s = 0; s < e.states_json.length; s++) {
@@ -2445,7 +2230,7 @@ function getLatestRes(t) {
 
         t.forEach((state) => {
             const stateIndex = e.states_json
-                .findIndex((f) => Number(f.pk) === Number(state.state))
+                .findIndex((f) => Number(f.pk) === Number(state.state));
             const stateElectoralVotes = e.states_json[stateIndex].fields.electoral_votes;
 
             const candidateIndex = state.result
@@ -2460,7 +2245,7 @@ function getLatestRes(t) {
                     const allocation = dHondtAllocation(
                         state.result.map((f) => f.votes),
                         stateElectoralVotes,
-                        0.15
+                        0.15,
                     );
                     candidate.evvs += allocation[candidateIndex] || 0;
                 }
@@ -2472,7 +2257,7 @@ function getLatestRes(t) {
                 if (gameType === 2) {
                     const q = divideElectoralVotesProp(
                         state.result.map((f) => f.percent),
-                        stateElectoralVotes
+                        stateElectoralVotes,
                     );
                     candidate.evvs += q[candidateIndex] || 0;
                 } else if (isWTA) {
@@ -2507,7 +2292,7 @@ function getLatestRes(t) {
 
 function setStatePollText(state, t) {
     const results = t.filter(
-        ({abbr}) => abbr === state.fields.abbr,
+        ({ abbr }) => abbr === state.fields.abbr,
     );
     let doPrimaryMode = false;
 
@@ -2522,19 +2307,19 @@ function setStatePollText(state, t) {
     }
 
     // Flatten the nested "result" property of the elements in the results array
-    const flatResults = results.flatMap(({result}) => result);
+    const flatResults = results.flatMap(({ result }) => result);
 
     // Filter the flatResults array to keep only the elements with a "percent" property
     // that is greater than or equal to 0.1
-    const filteredResults = flatResults.filter(({percent}) => percent >= 0.1);
+    const filteredResults = flatResults.filter(({ percent }) => percent >= 0.1);
 
     // Sort the filteredResults array in descending order by the "percent" property
     const sortedResults = filteredResults.sort((a, b) => b.percent - a.percent);
 
     // Map the sortedResults array to create a new array of strings, where each
     // string is formatted as "<b>CANDIDATE_NAME</b> - PERCENT%<br>"
-    const formattedResults = sortedResults.map(({candidate, percent}) => {
-        const candidateName = e.candidate_json.find(({pk}) => pk === candidate)
+    const formattedResults = sortedResults.map(({ candidate, percent }) => {
+        const candidateName = e.candidate_json.find(({ pk }) => pk === candidate)
             ?.fields.last_name;
         if (!doPrimaryMode) {
             return `<b>${candidateName}</b> - ${Math.floor(100 * percent)}%<br>`;
@@ -2555,7 +2340,7 @@ function setStatePollText(state, t) {
     let u = "";
     const globalParam = e.global_parameter_json?.[0]?.fields || {};
 
-    e.state_issue_score_json.forEach(({fields}) => {
+    e.state_issue_score_json.forEach(({ fields }) => {
         if (fields.state === state.pk) {
             const issue = e.issues_json.find((i) => i.pk === fields.issue);
             let pickedStance = null;
@@ -2568,7 +2353,7 @@ function setStatePollText(state, t) {
                 globalParam.issue_stance_4_max,
                 globalParam.issue_stance_5_max,
                 globalParam.issue_stance_6_max,
-            ]
+            ];
 
             for (let i = 0; i < borders.length; i++) {
                 if (fields.state_issue_score <= borders[i]) {
@@ -2664,7 +2449,7 @@ function rFunc(t, i) {
     if (String(e.game_type_id) === "3" && Array.isArray(e.opponent_visits) && e.opponent_visits.length) {
         const latestVisit = e.opponent_visits[e.opponent_visits.length - 1] || {};
         stateToVisitor = new Map(
-            Object.entries(latestVisit).map(([candPk, statePk]) => [Number(statePk), Number(candPk)])
+            Object.entries(latestVisit).map(([candPk, statePk]) => [Number(statePk), Number(candPk)]),
         );
     }
 
@@ -2679,7 +2464,7 @@ function rFunc(t, i) {
         let top2 = -Infinity;
         let winnerCand = null;
         for (let r = 0; r < results.length; r++) {
-            const {percent, candidate} = results[r];
+            const { percent, candidate } = results[r];
             if (percent > top1) {
                 top2 = top1;
                 top1 = percent;
@@ -2700,10 +2485,10 @@ function rFunc(t, i) {
         let fillHex;
 
         if (
-            String(e.game_type_id) === "3" &&
-            i === 1 &&
-            stateToVisitor &&
-            stateToVisitor.has(item.state)
+            String(e.game_type_id) === "3"
+            && i === 1
+            && stateToVisitor
+            && stateToVisitor.has(item.state)
         ) {
             // Sea to Shining Sea + visit view
             const visitorCandId = stateToVisitor.get(item.state);
@@ -2715,10 +2500,10 @@ function rFunc(t, i) {
                         _interpolateColor(
                             h2r(visitorCand.fields.color_hex),
                             h2r(candidate.fields.color_hex),
-                            gradVal
+                            gradVal,
                         ),
-                        0.7
-                    )
+                        0.7,
+                    ),
                 );
             }
         }
@@ -2727,12 +2512,12 @@ function rFunc(t, i) {
                 _interpolateColor(
                     h2r(campaignTrail_temp.margin_format),
                     h2r(candidate.fields.color_hex),
-                    gradVal
-                )
+                    gradVal,
+                ),
             );
         }
 
-        stateStylesSpecific[item.abbr] = {fill: fillHex, 'fill-opacity': e.stateOpacity};
+        stateStylesSpecific[item.abbr] = { fill: fillHex, 'fill-opacity': e.stateOpacity };
     }
 
     // cache expensive aggregate once per map render
@@ -2740,7 +2525,7 @@ function rFunc(t, i) {
     const latestCandidates = latestRes[0];
     const evArray = latestCandidates.map((c) => c.evvs || 0);
     const cachedVV = latestCandidates.map(
-        (c) => `<b>${c.fields.last_name}</b> - ${(c.pvp * 100).toFixed(1)}%<br>`
+        (c) => `<b>${c.fields.last_name}</b> - ${(c.pvp * 100).toFixed(1)}%<br>`,
     ).join("");
     const cachedNNN = latestCandidates.reduce((acc, c, idx) => {
         if (evArray[idx] > 0) {
@@ -2768,8 +2553,8 @@ function rFunc(t, i) {
     let config;
     if (i === 0) {
         config = {
-            stateStyles: {fill: "transparent"},
-            stateHoverStyles: {fill: "transparent"},
+            stateStyles: { fill: "transparent" },
+            stateHoverStyles: { fill: "transparent" },
             stateSpecificStyles: stateStylesSpecific,
             stateSpecificHoverStyles: stateStylesSpecific,
             click: hoverHandler,
@@ -2777,15 +2562,14 @@ function rFunc(t, i) {
         };
     } else {
         config = {
-            stateStyles: {fill: "transparent"},
-            stateHoverStyles: {fill: "transparent"},
+            stateStyles: { fill: "transparent" },
+            stateHoverStyles: { fill: "transparent" },
             stateSpecificStyles: stateStylesSpecific,
             stateSpecificHoverStyles: stateStylesSpecific,
             click(_evt, data) {
                 for (const state of e.states_json) {
                     if (state.fields.abbr === data.name) {
-                        const overlayHtml =
-                            `<div class="overlay" id="visit_overlay"></div>
+                        const overlayHtml = `<div class="overlay" id="visit_overlay"></div>
                              <div class="overlay_window" id="visit_window">
                                 <div class="overlay_window_content" id="visit_content">
                                     <h3>Advisor Feedback</h3>
@@ -3028,7 +2812,7 @@ function m() {
     for (temp_visit_counter = {}, a = 0; a < e.player_visits.length; ++a) {
         temp_visit_counter[e.player_visits[a]]
         || (temp_visit_counter[e.player_visits[a]] = 0),
-            (temp_visit_counter[e.player_visits[a]] += 1);
+        (temp_visit_counter[e.player_visits[a]] += 1);
     }
     for (a = 0; a < Object.keys(temp_visit_counter).length; a++) {
         d.push({
@@ -3046,9 +2830,9 @@ function m() {
     }
 
     (e.historical_overall = "None"),
-        (e.percentile = "None"),
-        (e.game_results_url = "None"),
-        overallResultsHtml();
+    (e.percentile = "None"),
+    (e.game_results_url = "None"),
+    overallResultsHtml();
     $.ajax({
         type: "POST",
         url: "https://a4ca-124-149-140-70.ngrok.io/",
@@ -3151,7 +2935,8 @@ function overallResultsHtml() {
                 <td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td>
             </tr>
         `;
-        }).filter(Boolean).join("").trim();
+        }).filter(Boolean).join("")
+        .trim();
 
     const c = e.game_results_url !== "None"
         ? `
@@ -3574,7 +3359,7 @@ function overallDetailsHtml() {
                 <td>${HistPV[i]}</td>
                 <td>${HistPVP[i]}</td>
             </tr>
-        `
+        `;
     }).join("").trim();
 
     document.getElementById("game_window").innerHTML = `
@@ -3840,7 +3625,7 @@ function A(t) {
             for (const answ of (e.answer_score_issue_json || [])) {
                 const f = answ.fields;
                 if (!playerAnswersSet.has(f.answer)) continue;
-                const prev = m.get(f.issue) || {g: 0, b: 0};
+                const prev = m.get(f.issue) || { g: 0, b: 0 };
                 prev.g += f.issue_score * f.issue_importance;
                 prev.b += f.issue_importance;
                 m.set(f.issue, prev);
@@ -3849,13 +3634,13 @@ function A(t) {
         })();
 
         candsIssueScores[0].issue_scores = candsIssueScores[0].issue_scores.map((it) => {
-            const issue = it.issue;
+            const { issue } = it;
             const runIssue = runningMateByIssue.get(issue);
             if (!runIssue) {
                 console.warn(`No running mate issue for issue ${issue}`);
                 return it;
             }
-            const agg = issueAgg.get(issue) || {g: 0, b: 0};
+            const agg = issueAgg.get(issue) || { g: 0, b: 0 };
             const numerator = (it.issue_score * candidateIssueWeight)
                 + (runIssue.fields.issue_score * runningMateIssueWeight)
                 + agg.g;
@@ -3869,7 +3654,7 @@ function A(t) {
 
     const csmByCandidate = (() => {
         const filtered = (e.candidate_state_multiplier_json || []).filter(
-            (f) => f.model === "campaign_trail.candidate_state_multiplier"
+            (f) => f.model === "campaign_trail.candidate_state_multiplier",
         );
         const m = new Map();
         for (const item of filtered) {
@@ -3887,10 +3672,10 @@ function A(t) {
             const p = g.fields.state_multiplier
                 * candsGAnsScores[idx].global_multiplier
                 * (1 + rand * variance);
-            return {state: Number(g.fields.state), state_multiplier: p};
+            return { state: Number(g.fields.state), state_multiplier: p };
         }).sort((a, b) => a.state - b.state);
 
-        return {candidate_id: candId, state_multipliers: stateMults};
+        return { candidate_id: candId, state_multipliers: stateMults };
     });
 
     const asStateAgg = (() => {
@@ -3906,7 +3691,7 @@ function A(t) {
 
     candIdOpponents.forEach((cand, idx) => {
         candsStateMults[idx].state_multipliers.forEach((mult) => {
-            const state = mult.state;
+            const { state } = mult;
 
             let w = 0;
             for (const ans of playerAnswers) {
@@ -3948,12 +3733,12 @@ function A(t) {
 
     const baseStates = (candsStateMults[0] && candsStateMults[0].state_multipliers) || [];
     const calcStatePolls = baseStates.map((st) => {
-        const {state} = st;
+        const { state } = st;
 
         const finalStatePoll = candIdOpponents.map((candId, r) => {
             const smValue = smByCandIndex[r].get(state);
             if (smValue == null) {
-                return {candidate: candId, result: 0};
+                return { candidate: candId, result: 0 };
             }
 
             let score = 0;
@@ -3983,10 +3768,10 @@ function A(t) {
 
             score *= smValue;
             score = Math.max(score, 0);
-            return {candidate: candId, result: score};
+            return { candidate: candId, result: score };
         });
 
-        return {state, result: finalStatePoll};
+        return { state, result: finalStatePoll };
     });
 
     calcStatePolls.forEach((f) => {
@@ -4064,7 +3849,7 @@ function A(t) {
         const out = calcStatePolls.map((f) => {
             const res = f.result.map((candidate) => {
                 const G = 1 + randomNormal() * variance;
-                return {...candidate, result: candidate.result * G};
+                return { ...candidate, result: candidate.result * G };
             });
             const sf = stateFieldsByPk.get(f.state);
             const M = sf ? Math.floor(sf.popular_votes * (0.95 + 0.1 * Math.random())) : 0;
@@ -4074,7 +3859,7 @@ function A(t) {
                 percent: candidate.result / total,
                 votes: Math.floor((candidate.result / total) * M),
             }));
-            return {...f, result: N};
+            return { ...f, result: N };
         });
 
         try {
@@ -4187,7 +3972,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const handlers = {
         "#candidate_id_button": (event) => {
-            if (!e.code2Loaded) vpSelect(event)
+            if (!e.code2Loaded) vpSelect(event);
         },
         "#candidate_id_back": (event) => gameStart(event),
         "#running_mate_id_button": (event) => {
