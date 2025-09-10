@@ -1515,14 +1515,26 @@ function primaryResults(states) {
                 let h = Math.floor((i / 480) * 100);
                 const g = $("#state_result_container").html();
                 $("#game_window").html("");
-                $("#game_window").html(
-                    `        <div class="game_header">            ${corrr
-                    }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTION TALLY</h3>                        <ul>${r
-                    }</ul>                        <p>${h
-                    }% complete</br>`
-                    + `</div>                </div>                <div id="state_result_container">${g
-                    }</div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go back to questions</button>        </div>`,
-                );
+                $("#game_window").html(`
+                    <div class="game_header">${corrr}</div>
+                    <div id="main_content_area">
+                        <div id="map_container"></div>
+                        <div id="menu_container">
+                            <div id="overall_result_container">
+                                <div id="overall_result">
+                                    <h3>ELECTION TALLY</h3>
+                                    <ul>${r}</ul>
+                                    <p>${h}% complete</p>
+                                </div>
+                            </div>
+                        <div id="state_result_container">${g}</div>
+                        </div>
+                    </div>
+                    <div id="map_footer">
+                        <button id="final_result_button">Go back to questions</button>
+                    </div>
+                `);
+
                 $("#map_container").usmap(p);
                 $("#final_result_button").click(() => {
                     clearTimeout(results_timeout),
@@ -1622,12 +1634,44 @@ function electionNight() {
     const s = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     const n = s.fields.winning_electoral_vote_number;
     $("#game_window").html(
-        `        <div class="game_header">            ${corrr
-        }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTORAL VOTES</h3>                        <ul>${i
-        }</ul>                        <p>0% complete</br>${n
-        } to win</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_result">                        <h3>STATE RESULTS</h3>                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    </div>                </div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>        <div class="overlay" id="election_night_overlay"></div>        <div class="overlay_window" id="election_night_window">            <div class="overlay_window_content" id="election_night_content">            <h3>Advisor Feedback</h3>            <img src="${s.fields.advisor_url
-        }" width="208" height="128"/>            <p>${e.ElectionPopup}</p>            </div>            <div class="overlay_buttons" id="election_night_buttons">            <button id="ok_button">OK</button><br>            </div>        </div>`,
-    );
+        `<div class="game_header">${corrr}</div>        
+        <div id="main_content_area">            
+            <div id="map_container"></div>            
+            <div id="menu_container">                
+                <div id="overall_result_container">                    
+                    <div id="overall_result">                        
+                        <h3>ELECTORAL VOTES</h3>                        
+                        <ul>${i}</ul>                        
+                        <p>
+                            0% complete
+                            </br>
+                            ${n} to win
+                        </p>                    
+                    </div>                
+                </div>                
+                <div id="state_result_container">                    
+                    <div id="state_result">                        
+                        <h3>STATE RESULTS</h3>                        
+                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    
+                    </div>                
+                </div>            
+            </div>        
+        </div>        
+        <div id="map_footer">        
+            <button id="final_result_button">Go to Final Results</button>        
+        </div>        
+        <div class="overlay" id="election_night_overlay"></div>        
+        <div class="overlay_window" id="election_night_window">            
+            <div class="overlay_window_content" id="election_night_content">            
+                <h3>Advisor Feedback</h3>            
+                <img src="${s.fields.advisor_url}" width="208" height="128"/>            
+                <p>${e.ElectionPopup}</p>            
+            </div>            
+            <div class="overlay_buttons" id="election_night_buttons">            
+                <button id="ok_button">OK</button><br>            
+            </div>        
+        </div>
+    `);
     const lTemp = (function () {
         for (var t = {}, i = 0; i < e.states_json.length; i++) {
             t[e.states_json[i].fields.abbr] = {
@@ -1739,26 +1783,39 @@ function electionNight() {
                                 var popvthing = (pop_vs[d] * 100).toFixed(1);
                             }
                         }
-                        r
-                            += `            <span style="color:${_[n].color
-                        }; background-color: ${_[n].color
-                        }">--</span> <b>${_[n].last_name
-                        }</b> -  ${c
-                        } / ${popvthing
-                        }%<br>`;
+                        r += `
+                            <span style="color:${_[n].color}; background-color: ${_[n].color}">--</span>
+                            <b>${_[n].last_name}</b>:  ${c} / ${popvthing}%<br>
+                        `;
                     }
                     const p = mapResultColor(i);
                     let h = Math.floor((i / 480) * 100);
                     const g = $("#state_result_container").html();
                     $("#game_window").html("");
-                    $("#game_window").html(
-                        `        <div class="game_header">            ${corrr
-                        }        </div>        <div id="main_content_area">            <div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ELECTION TALLY</h3>                        <ul>${r
-                        }</ul>                        <p>${h
-                        }% complete</br>${o
-                        } to win</p>                    </div>                </div>                <div id="state_result_container">${g
-                        }</div>            </div>        </div>        <div id="map_footer">        <button id="final_result_button">Go to Final Results</button>        </div>`,
-                    );
+                    $("#game_window").html(`
+                        <div class="game_header">${corrr}</div>
+                        <div id="main_content_area">
+                            <div id="map_container"></div>
+                            <div id="menu_container">
+                                <div id="overall_result_container">
+                                    <div id="overall_result">
+                                        <h3>ELECTION TALLY</h3>
+                                        <ul>${r}</ul>
+                                        <p>
+                                            ${h}% complete
+                                            </br>
+                                            ${formatNumbers(o)} to win
+                                        </p>
+                                    </div>
+                                </div>
+                                <div id="state_result_container">${g}</div>
+                            </div>
+                        </div>
+                        <div id="map_footer">
+                            <button id="final_result_button">Go to Final Results</button>
+                        </div>
+                    `);
+
                     $("#map_container").usmap(p);
                     $("#final_result_button").click(() => {
                         clearTimeout(results_timeout),
@@ -2614,7 +2671,7 @@ function setStatePollText(state, t) {
         <h3>STATE SUMMARY</h3>
         <p>${state.fields.name}</p>
         <ul>${u}</ul>
-        ${state.fields.electoral_votes === 0 ? "" : `<p>${e.primary ? "Delegates:" : "Electoral Votes:"} ${formatNumbers(state.fields.electoral_votes)}</p>`}
+        ${!state.fields.electoral_votes ? "" : `<p>${e.primary ? "Delegates:" : "Electoral Votes:"} ${formatNumbers(state.fields.electoral_votes)}</p>`}
         <p>${e.primary ? onQText : `Popular Votes: ${formatNumbers(state.fields.popular_votes)}`}</p>
     `.trim().replace(/>\s+</g, "><");
 }
@@ -2883,10 +2940,11 @@ function mapResultColor(time) {
                         `;
                 }).join("");
             const evField = e.primary ? "Delegates:" : "Electoral Votes:";
+            const stateHasEVs = stateObj.fields.electoral_votes > 0;
             const returnStr = `
                 <h3>STATE RESULTS</h3>
                 <p>${stateObj.fields.name}</p>
-                <p>${evField} ${stateObj.fields.electoral_votes}
+                <p>${!stateHasEVs ? "" : `${evField} ${stateObj.fields.electoral_votes}`}
                     <ul>${resultHtml}</ul>
                 </p>
             `;
@@ -3117,6 +3175,8 @@ function overallResultsHtml() {
 
     const difficulty_string = `<div id='difficulty_mult'><br><b>Difficulty Multiplier:</b> ${diff_mult_string}</div><br>`;
 
+    const noElectoralVotes = e.final_overall_results.every((f) => !f.electoral_votes);
+
     const r = e.final_overall_results
         .filter((f) => f.candidate !== -1)
         .map((f) => {
@@ -3127,12 +3187,12 @@ function overallResultsHtml() {
             }
             const colorHex = candObj2.fields.color_hex;
             const fName = `${candObj2.fields.first_name} ${candObj2.fields.last_name}`;
-            return `
+            return !f.popular_votes ? "" : `
             <tr>
                 <td style="text-align: left;">
                     <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}
                 </td>
-                <td>${f.electoral_votes}</td>
+                ${noElectoralVotes ? "" : `<td>${f.electoral_votes}</td>`}
                 <td>${formatNumbers(f.popular_votes)}</td>
                 <td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td>
             </tr>
@@ -3161,7 +3221,7 @@ function overallResultsHtml() {
                         <br>
                         <tr>
                             <th>Candidate</th>
-                            <th>${e.primary ? "Delegates" : "Electoral Votes"}</th>
+                            ${noElectoralVotes ? "" : `<th>${e.primary ? "Delegates" : "Electoral Votes"}</th>`}
                             <th>Popular Votes</th>
                             <th>Popular Vote %</th>
                         </tr>
@@ -3268,6 +3328,7 @@ function finalMapScreenHtml() {
     const candsArray = getSortedCands();
     const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
     const totalPopularVotes = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
+    const noElectoralVotes = e.final_overall_results.every((f) => !f.electoral_votes);
     const candResultText = candsArray.map((f) => {
         const s = e.final_overall_results.find((g) => g.candidate === f.candidate);
         const electoralVotes = s ? s.electoral_votes : 0;
@@ -3275,9 +3336,9 @@ function finalMapScreenHtml() {
         const popularVotePercent = totalPopularVotes > 0 
             ? ((popularVotes / totalPopularVotes) * 100).toFixed(1) 
             : "0.0";
-        return `
+        return !popularVotes ? "" : `
             <li>
-                <span style="color:${f.color}; background-color: ${f.color}">--</span> ${f.last_name}: ${formatNumbers(electoralVotes)} / ${popularVotePercent}%
+                <span style="color:${f.color}; background-color: ${f.color}">--</span> ${f.last_name}: ${noElectoralVotes ? "" :  formatNumbers(electoralVotes)}${!electoralVotes ? "" : " / "}${popularVotePercent}%
             </li>
         `;
     }).join("");
@@ -3290,7 +3351,7 @@ function finalMapScreenHtml() {
                     <div id="overall_result">
                         <h3>ELECTORAL VOTES</h3>
                         <ul>${candResultText}</ul>
-                        <p>${formatNumbers(election.fields.winning_electoral_vote_number)} to win</p>
+                        ${noElectoralVotes ? "" : `<p>${formatNumbers(election.fields.winning_electoral_vote_number)} to win</p>`}
                     </div>
                 </div>
                 <div id="state_result_container">
@@ -3472,18 +3533,19 @@ function stateResultsHtml() {
 
 function overallDetailsHtml() {
     const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
+    const noElectoralVotes = e.final_overall_results.every((f) => !f.electoral_votes);
 
     const a = e.final_overall_results.map((f) => {
             const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
             if (!candObj || !candObj.fields) return ""; // skip missing candidates
             const colorHex = candObj.fields.color_hex || '#888888';
-            return `
+            return !f.popular_votes ? "" : `
                 <tr>
                     <td style="text-align: left;">
                         <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
                         ${candObj.fields.first_name} ${candObj.fields.last_name}
                     </td>
-                    <td>${formatNumbers(f.electoral_votes)}</td>
+                    ${noElectoralVotes ? "" : `<td>${formatNumbers(f.electoral_votes)}</td>`}
                     <td>${formatNumbers(f.popular_votes)}</td>
                     <td>${((f.popular_votes / totalPV) * 100).toFixed(e.finalPercentDigits)}%</td>
                 </tr>
@@ -3543,6 +3605,8 @@ function overallDetailsHtml() {
     const spaceFunction = (name) => /^[\s\u2800]/.test(name); // Braille pattern blank (TTNW space in historical results)
     const spaceToUse = HistName.find(spaceFunction)?.match(/^[\s\u2800]+/)?.[0] ?? ' ';
 
+    const allHistResZero = !HistEV || HistEV.every((f) => !Number(f));
+
     const histRes = HistName.map((name, i) => {
         const needsSpace = !(name === "" || spaceFunction(name));
         const nameToUse = needsSpace ? `${spaceToUse}${name}` : name;
@@ -3552,7 +3616,7 @@ function overallDetailsHtml() {
                 <td style="text-align: left;">
                     <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span>${nameToUse}
                 </td>
-                <td>${HistEV[i]}</td>
+                ${allHistResZero ? "" : `<td>${HistEV[i]}</td>`}
                 <td>${HistPV[i]}</td>
                 <td>${HistPVP[i]}</td>
             </tr>
@@ -3570,7 +3634,7 @@ function overallDetailsHtml() {
                         <tbody>
                             <tr>
                                 <th>Candidate</th>
-                                <th>Electoral Votes</th>
+                                ${noElectoralVotes ? "" : `<th>Electoral Votes</th>`}
                                 <th>Popular Votes</th>
                                 <th>Popular Vote %</th>
                             </tr>
@@ -3585,7 +3649,7 @@ function overallDetailsHtml() {
                         <tbody>
                             <tr>
                                 <th>Candidate</th>
-                                <th>Electoral Votes</th>
+                                ${allHistResZero ? "" : `<th>Electoral Votes</th>`}
                                 <th>Popular Votes</th>
                                 <th>Popular Vote %</th>
                             </tr>
