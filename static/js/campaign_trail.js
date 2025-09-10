@@ -1363,6 +1363,220 @@ function formatNumbers(num) {
 
 e.answer_count = 4;
 
+function primaryResults(states) {
+    const t = getSortedCands();
+    const stateMap = new Map(states.map((s) => [s.pk, s]));
+
+    const i = t
+        .map((item) => {
+            const { color } = item;
+            return `<li><span style="color:${color}; background-color:${color}">--</span> ${item.last_name}: 0</li>`;
+        })
+        .join("");
+    const s = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+    const n = s.fields.winning_electoral_vote_number;
+    $("#game_window").html(`
+        <div class="game_header">${corrr}</div>
+        <div id="main_content_area">
+            <div id="map_container"></div>
+            <div id="menu_container">
+                <div id="overall_result_container">
+                    <div id="overall_result">
+                        <h3>ELECTORAL VOTES</h3>
+                        <ul>${i}</ul>
+                        <p>0% complete
+                            <br>
+                            ${n} to win
+                        </p>
+                    </div>
+                </div>
+                <div id="state_result_container">
+                    <div id="state_result">
+                        <h3>STATE RESULTS</h3>
+                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map_footer">
+            <button id="final_result_button">Go back to questions</button>
+        </div>
+        <div class="overlay" id="election_night_overlay"></div>
+        <div class="overlay_window" id="election_night_window">
+            <div class="overlay_window_content" id="election_night_content">
+                <h3>Advisor Feedback</h3>
+                <img src="${s.fields.advisor_url}" width="208" height="128"/>
+                <p>One of many election nights has arrived. Winning the delegates in these races will be vital to your primary victory.</p>
+            </div>
+            <div class="overlay_buttons" id="election_night_buttons">
+                <button id="ok_button">OK</button>
+                <br>
+            </div>
+        </div>`.trim());
+
+    const stateColorArr = {};
+    states.forEach((f) => {
+        stateColorArr[f.fields.abbr] = {
+            fill: campaignTrail_temp.global_parameter_json[0].fields.default_map_color_hex,
+        };
+    });
+
+    const lTemp = {
+        stateStyles: {
+            fill: "transparent",
+        },
+        stateHoverStyles: {
+            fill: "transparent",
+        },
+        stateSpecificStyles: stateColorArr,
+        stateSpecificHoverStyles: stateColorArr,
+    };
+    $("#map_container").usmap(lTemp);
+    const $okButton = $("#ok_button");
+    $okButton.click(() => {
+        $("#election_night_overlay, #election_night_window").remove();
+    });
+    $("#final_result_button").click(() => {
+        clearTimeout(results_timeout);
+        $("#map_footer").html("<i>Processing Results, wait one moment...</i>");
+        // HELPFUL CODE HERE
+        // campaignTrail_temp.question_number = 0
+        // ee = A(return_type=2)
+        // o(ee)
+        e.question_number++;
+        nextQuestion();
+    });
+    e.final_overall_results = e.final_state_results[0].result.map((f) => ({
+        candidate: f.candidate,
+        electoral_votes: 0,
+        popular_votes: 0,
+    }));
+    e.final_state_results = e.final_state_results.map((f) => {
+        const stObj = stateMap.get(Number(f.state)) ?? states.find((g) => g.pk === Number(f.state));
+        if (!stObj) return f;
+
+        return {
+            ...f,
+            result_time: marginTime(f.result, stObj.fields.poll_closing_time),
+        };
+    });
+
+    $okButton.click(() => {
+        results_timeout = setTimeout(() => {
+            !(function t(i, a) {
+                const s = [0, 0];
+                for (var n = 0; n < e.final_overall_results.length; n++) {
+                    e.final_overall_results[n].electoral_votes > s[0]
+                    && (s[0] = e.final_overall_results[n].electoral_votes);
+                }
+                total_votes = 0;
+                for (
+                    iterator = 0;
+                    iterator < e.final_overall_results.length;
+                    iterator++
+                ) {
+                    total_votes += e.final_overall_results[iterator].popular_votes;
+                }
+                pop_vs = [];
+                for (
+                    iterator = 0;
+                    iterator < e.final_overall_results.length;
+                    iterator++
+                ) {
+                    if (
+                        e.final_overall_results[iterator].popular_votes / total_votes
+                        > 0
+                    ) {
+                        pop_vs.push(
+                            e.final_overall_results[iterator].popular_votes / total_votes,
+                        );
+                    } else {
+                        pop_vs.push(0);
+                    }
+                }
+                var a = handleFinalResults(i);
+                const _ = getSortedCands();
+                let r = "";
+                const o = "";
+                for (var n = 0; n < _.length; n++) {
+                    for (let d = 0; d < e.final_overall_results.length; d++) {
+                        if (e.final_overall_results[d].candidate == _[n].candidate) {
+                            var c = e.final_overall_results[d].electoral_votes;
+                            const popvthing = (pop_vs[d] * 100).toFixed(1);
+                        }
+                    }
+                    r
+                        += `            <span style="color:${_[n].color
+                        }; background-color: ${_[n].color
+                        }">--</span> <b>${_[n].last_name
+                        }</b> -  ${c
+                        }<br>`;
+                }
+                const p = mapResultColor(i);
+                let h = Math.floor((i / 480) * 100);
+                const g = $("#state_result_container").html();
+                $("#game_window").html("");
+                $("#game_window").html(`
+                    <div class="game_header">${corrr}</div>
+                    <div id="main_content_area">
+                        <div id="map_container"></div>
+                        <div id="menu_container">
+                            <div id="overall_result_container">
+                                <div id="overall_result">
+                                    <h3>ELECTION TALLY</h3>
+                                    <ul>${r}</ul>
+                                    <p>${h}% complete</p>
+                                </div>
+                            </div>
+                        <div id="state_result_container">${g}</div>
+                        </div>
+                    </div>
+                    <div id="map_footer">
+                        <button id="final_result_button">Go back to questions</button>
+                    </div>
+                `);
+
+                $("#map_container").usmap(p);
+                $("#final_result_button").click(() => {
+                    clearTimeout(results_timeout),
+                    $("#map_footer").html(
+                        "<i>Processing Results, wait one moment...</i>",
+                    );
+                    e.question_number++;
+                    nextQuestion();
+                });
+                for (var n = 0; n < e.final_overall_results.length; n++) {
+                    e.final_overall_results[n].electoral_votes > s[1]
+                    && (s[1] = e.final_overall_results[n].electoral_votes);
+                }
+                if (s[0] < o && s[1] >= o) {
+                    $("#overlay_result_button").click(() => {
+                        clearTimeout(results_timeout),
+                        $("#map_footer").html(
+                            "<i>Processing Results, wait one moment...</i>",
+                        );
+                        e.question_number++;
+                        nextQuestion();
+                    });
+                } else {
+                    i >= 480 || a >= states.length
+                        ? ((h = 100),
+                        $("#overall_result").html(
+                            `            <h3>ELECTION TALLY</h3>            <ul>${r
+                            }</ul>            <p>${h
+                            }% complete</br>${o
+                            } to win</p>`,
+                        ))
+                        : (results_timeout = setTimeout(() => {
+                            t(i, a);
+                        }, 2e3));
+                }
+                i += 120;
+            }(0, 0));
+        }, 2e3);
+    });
+}
+
 function primaryFunction(execute, breaks) {
     if (!execute) {
         return false;
