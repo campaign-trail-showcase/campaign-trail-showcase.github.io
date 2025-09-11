@@ -2880,7 +2880,7 @@ function mapResultColor(time) {
             if (!stateObj) return;
             const resultHtml = stateResults.result
                 .slice(0, 4)
-                .filter((f) => f.votes > 0)
+                .filter((f) => f.percent > 0)
                 .map((f) => {
                     const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
                     if (!candObj) return "";
@@ -3139,7 +3139,8 @@ function overallResultsHtml() {
             }
             const colorHex = candObj2.fields.color_hex;
             const fName = `${candObj2.fields.first_name} ${candObj2.fields.last_name}`;
-            return !f.popular_votes ? "" : `
+            if (!f.popular_votes) return "";
+            return `
             <tr>
                 <td style="text-align: left;">
                     <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}
@@ -3492,7 +3493,8 @@ function overallDetailsHtml() {
         const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
         if (!candObj || !candObj.fields) return ""; // skip missing candidates
         const colorHex = candObj.fields.color_hex || '#888888';
-        return !f.popular_votes ? "" : `
+        if (!f.popular_votes) return "";
+        return `
                 <tr>
                     <td style="text-align: left;">
                         <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
@@ -3719,17 +3721,18 @@ function T(t) {
     return e.final_state_results
         .filter((result) => result.state === numT)
         .map((result) => {
+            const noElectoralVotes = (result.result || []).every((f) => !f.electoral_votes);
             const rows = (result.result || []).map((f) => {
                 const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
                 if (!candidate || !candidate.fields) return ""; // skip unknown candidates
                 const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
-                // if (f.percent === 0) return;
+                if (!f.percent) return "";
                 return `
                      <tr>
                          <td>${fullName}</td>
                          <td>${formatNumbers(f.votes)}</td>
                          <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
-                         <td>${f.electoral_votes}</td>
+                         ${noElectoralVotes ? "" : `<td>${f.electoral_votes}</td>`}
                      </tr>
                  `;
             })
@@ -3743,7 +3746,7 @@ function T(t) {
                         <th>Candidate</th>
                         <th>Popular Votes</th>
                         <th>Popular Vote %</th>
-                        <th>Electoral Votes</th>
+                        ${noElectoralVotes ? "" : `<th>Electoral Votes</th>`}
                     </tr>
                     ${rows}
                 </table>
@@ -3763,14 +3766,7 @@ function A(t) {
     const playerAnswersSet = new Set(playerAnswers);
     const gameType = Number(e.game_type_id);
 
-    const candIdOpponents = (() => {
-        const ids = new Set([e.candidate_id, ...(e.opponents_list || [])]);
-        (e.candidate_state_multiplier_json || []).forEach((row) => {
-            if (!row || row.model !== "campaign_trail.candidate_state_multiplier") return;
-            ids.add(Number(row.fields.candidate));
-        });
-        return Array.from(ids);
-    })();
+    const candIdOpponents = [...new Set([e.candidate_id, ...e.opponents_list])];
 
     const stateFieldsByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields]));
     const stateAbbrByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields.abbr]));
