@@ -202,177 +202,177 @@ function histFunction() {
     if (modded === false) {
         // eslint-disable-next-line default-case
         switch (campaignTrail_temp.election_id) {
-            case 21: // 2020
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Joe Biden",
-                    " Donald Trump",
-                    " Jo Jorgensen",
-                    " Howie Hawkins",
-                ];
-                HistEV = [306, 232, 0, 0];
-                HistPV = ["81,268,924", "74,216,154", "1,865,724", "405,035"];
-                HistPVP = ["51.3%", "46.9%", "1.2%", "0.4%"];
-                break;
-            case 20: // 2016
-            case 16: // 2016a
-                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Donald Trump",
-                    " Hillary Clinton",
-                    " Gary Johnson",
-                    " Jill Stein",
-                ];
-                HistEV = [306, 232, 0, 0];
-                HistPV = ["62,984,828", "65,853,514", "4,489,341", "405,035"];
-                HistPVP = ["46.1%", "48.2%", "3.3%", "1.1%"];
-                break;
-            case 3: // 2012
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Barack Obama",
-                    " Mitt Romney",
-                    " Gary Johnson",
-                    " Jill Stein",
-                ];
-                HistEV = [332, 206, 0, 0];
-                HistPV = ["65,915,795", "60,933,504", "1,275,971", "469,627"];
-                HistPVP = ["51.1%", "47.2%", "1.0%", "0.4%"];
-                break;
-            case 9: // 2000
-                HistHexcolour = ["#FF0000", "#0000FF", "#00C100", "#FFFF00"];
-                HistName = [" George W. Bush", " Al Gore", " Ralph Nader", " Pat Buchanan"];
-                HistEV = [271, 267, 0, 0];
-                HistPV = ["50,456,002", "50,999,897", "2,882,955", "448,895"];
-                HistPVP = ["47.9%", "48.4%", "2.7%", "0.4%"];
-                break;
-            case 15: // 1988
-                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
-                HistName = [
-                    " George Bush",
-                    " Michael Dukakis",
-                    " Ron Paul",
-                    " Lenora Fulani",
-                ];
-                HistEV = [426, 112, 0, 0];
-                HistPV = ["48,886,597", "41,809,476", "431,750", "217,221"];
-                HistPVP = ["53.4%", "45.7%", "0.5%", "0.2%"];
-                break;
-            case 10: // 1976
-                HistHexcolour = ["#0000FF", "#FF0000", "#00C100", "#FFFF00"];
-                HistName = [
-                    " Jimmy Carter",
-                    " Gerald Ford",
-                    " Eugene McCarthy",
-                    " Roger MacBride",
-                ];
-                HistEV = [297, 241, 0, 0];
-                HistPV = ["40,831,881", "39,148,634", "744,763", "172,557"];
-                HistPVP = ["50.1%", "48.0%", "0.9%", "0.2%"];
-                break;
-            case 4: // 1968
-                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FFFFFF"];
-                HistName = [
-                    " Richard Nixon",
-                    " Hubert Humphrey",
-                    " George Wallace",
-                    " Other",
-                ];
-                HistEV = [302, 191, 45, 0];
-                HistPV = ["31,783,783", "31,271,839", "9,901,118", "243,259"];
-                HistPVP = ["43.4%", "42.7%", "13.5%", "0.3%"];
-                break;
-            case 69: // 1964
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Lyndon B. Johnson",
-                    " Barry Goldwater",
-                    " Unpledged electors",
-                    " Eric Hass",
-                ];
-                HistEV = [486, 52, 0, 0];
-                HistPV = ["43,129,040", "27,175,754", "210,732", "45,189"];
-                HistPVP = ["61.1%", "38.5%", "0.3%", ">0.1%"];
-                break;
-            case 11: // 1960
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#FFFFFF"];
-                HistName = [
-                    " John Kennedy",
-                    " Richard Nixon",
-                    " Harry Byrd",
-                    " Unpledged",
-                ];
-                HistEV = [303, 219, 15, 0];
-                HistPV = ["34,220,984", "34,108,157", "0", "286,359"];
-                HistPVP = ["49.7%", "49.5%", "0", "0.4%"];
-                break;
-            case 12: // 1948
-                HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
-                HistName = [
-                    " Harry Truman",
-                    " Thomas Dewey",
-                    " Strom Thurmond",
-                    " Henry Wallace",
-                ];
-                HistEV = [303, 189, 39, 0];
-                HistPV = ["24,179,347", "21,991,292", "1,175,930", "1,157,328"];
-                HistPVP = ["49.6%", "45.1%", "2.4%", "2.4%"];
-                break;
-            case 14: // 1916
-                HistHexcolour = ["#0000FF", "#FF0000", "#00C100", "#FFFF00"];
-                HistName = [
-                    " Woodrow Wilson",
-                    " Charles Evans Hughes",
-                    " Allan Benson",
-                    " James Hanly",
-                ];
-                HistEV = [277, 254, 0, 0];
-                HistPV = ["9,126,868", "8,548,728", "590,524", "221,302"];
-                HistPVP = ["49.2%", "46.1%", "3.2%", "1.2%"];
-                break;
-            case 5: // 1896
-                HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FF00FF"];
-                HistName = [
-                    " William McKinley",
-                    " William Jennings Bryan",
-                    " John Palmer",
-                    " Joshua Levering",
-                ];
-                HistEV = [271, 176, 0, 0];
-                HistPV = ["7,111,607", "6,509,052", "134,645", "131,312"];
-                HistPVP = ["51.0%", "46.7%", "1.0%", "0.9%"];
-                break;
-            case 8: // 1860
-                HistHexcolour = ["#FF0000", "#FFFF00", "#00C100", "#0000FF"];
-                HistName = [
-                    " Abraham Lincoln",
-                    " John C. Breckinridge",
-                    " John Bell",
-                    " Stephen Douglas",
-                ];
-                HistEV = [180, 72, 39, 12];
-                HistPV = ["1,865,908", "848,019", "590,901", "1,380,202"];
-                HistPVP = ["39.8%", "18.1%", "12.6%", "29.5%"];
-                break;
-            case 13: // 1844
-                HistHexcolour = ["#0000FF", "#F0C862", "#FFFF00"];
-                HistName = [
-                    " James K. Polk",
-                    " Henry Clay",
-                    " James Birney",
-                ];
-                HistEV = [170, 105, 0];
-                HistPV = ["1,339,494", "1,300,004", "62,103"];
-                HistPVP = ["49.5%", "48.1%", "2.3%"];
-                break;
+        case 21: // 2020
+            HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
+            HistName = [
+                " Joe Biden",
+                " Donald Trump",
+                " Jo Jorgensen",
+                " Howie Hawkins",
+            ];
+            HistEV = [306, 232, 0, 0];
+            HistPV = ["81,268,924", "74,216,154", "1,865,724", "405,035"];
+            HistPVP = ["51.3%", "46.9%", "1.2%", "0.4%"];
+            break;
+        case 20: // 2016
+        case 16: // 2016a
+            HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
+            HistName = [
+                " Donald Trump",
+                " Hillary Clinton",
+                " Gary Johnson",
+                " Jill Stein",
+            ];
+            HistEV = [306, 232, 0, 0];
+            HistPV = ["62,984,828", "65,853,514", "4,489,341", "405,035"];
+            HistPVP = ["46.1%", "48.2%", "3.3%", "1.1%"];
+            break;
+        case 3: // 2012
+            HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
+            HistName = [
+                " Barack Obama",
+                " Mitt Romney",
+                " Gary Johnson",
+                " Jill Stein",
+            ];
+            HistEV = [332, 206, 0, 0];
+            HistPV = ["65,915,795", "60,933,504", "1,275,971", "469,627"];
+            HistPVP = ["51.1%", "47.2%", "1.0%", "0.4%"];
+            break;
+        case 9: // 2000
+            HistHexcolour = ["#FF0000", "#0000FF", "#00C100", "#FFFF00"];
+            HistName = [" George W. Bush", " Al Gore", " Ralph Nader", " Pat Buchanan"];
+            HistEV = [271, 267, 0, 0];
+            HistPV = ["50,456,002", "50,999,897", "2,882,955", "448,895"];
+            HistPVP = ["47.9%", "48.4%", "2.7%", "0.4%"];
+            break;
+        case 15: // 1988
+            HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#00C100"];
+            HistName = [
+                " George Bush",
+                " Michael Dukakis",
+                " Ron Paul",
+                " Lenora Fulani",
+            ];
+            HistEV = [426, 112, 0, 0];
+            HistPV = ["48,886,597", "41,809,476", "431,750", "217,221"];
+            HistPVP = ["53.4%", "45.7%", "0.5%", "0.2%"];
+            break;
+        case 10: // 1976
+            HistHexcolour = ["#0000FF", "#FF0000", "#00C100", "#FFFF00"];
+            HistName = [
+                " Jimmy Carter",
+                " Gerald Ford",
+                " Eugene McCarthy",
+                " Roger MacBride",
+            ];
+            HistEV = [297, 241, 0, 0];
+            HistPV = ["40,831,881", "39,148,634", "744,763", "172,557"];
+            HistPVP = ["50.1%", "48.0%", "0.9%", "0.2%"];
+            break;
+        case 4: // 1968
+            HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FFFFFF"];
+            HistName = [
+                " Richard Nixon",
+                " Hubert Humphrey",
+                " George Wallace",
+                " Other",
+            ];
+            HistEV = [302, 191, 45, 0];
+            HistPV = ["31,783,783", "31,271,839", "9,901,118", "243,259"];
+            HistPVP = ["43.4%", "42.7%", "13.5%", "0.3%"];
+            break;
+        case 69: // 1964
+            HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
+            HistName = [
+                " Lyndon B. Johnson",
+                " Barry Goldwater",
+                " Unpledged electors",
+                " Eric Hass",
+            ];
+            HistEV = [486, 52, 0, 0];
+            HistPV = ["43,129,040", "27,175,754", "210,732", "45,189"];
+            HistPVP = ["61.1%", "38.5%", "0.3%", ">0.1%"];
+            break;
+        case 11: // 1960
+            HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#FFFFFF"];
+            HistName = [
+                " John Kennedy",
+                " Richard Nixon",
+                " Harry Byrd",
+                " Unpledged",
+            ];
+            HistEV = [303, 219, 15, 0];
+            HistPV = ["34,220,984", "34,108,157", "0", "286,359"];
+            HistPVP = ["49.7%", "49.5%", "0", "0.4%"];
+            break;
+        case 12: // 1948
+            HistHexcolour = ["#0000FF", "#FF0000", "#FFFF00", "#00C100"];
+            HistName = [
+                " Harry Truman",
+                " Thomas Dewey",
+                " Strom Thurmond",
+                " Henry Wallace",
+            ];
+            HistEV = [303, 189, 39, 0];
+            HistPV = ["24,179,347", "21,991,292", "1,175,930", "1,157,328"];
+            HistPVP = ["49.6%", "45.1%", "2.4%", "2.4%"];
+            break;
+        case 14: // 1916
+            HistHexcolour = ["#0000FF", "#FF0000", "#00C100", "#FFFF00"];
+            HistName = [
+                " Woodrow Wilson",
+                " Charles Evans Hughes",
+                " Allan Benson",
+                " James Hanly",
+            ];
+            HistEV = [277, 254, 0, 0];
+            HistPV = ["9,126,868", "8,548,728", "590,524", "221,302"];
+            HistPVP = ["49.2%", "46.1%", "3.2%", "1.2%"];
+            break;
+        case 5: // 1896
+            HistHexcolour = ["#FF0000", "#0000FF", "#FFFF00", "#FF00FF"];
+            HistName = [
+                " William McKinley",
+                " William Jennings Bryan",
+                " John Palmer",
+                " Joshua Levering",
+            ];
+            HistEV = [271, 176, 0, 0];
+            HistPV = ["7,111,607", "6,509,052", "134,645", "131,312"];
+            HistPVP = ["51.0%", "46.7%", "1.0%", "0.9%"];
+            break;
+        case 8: // 1860
+            HistHexcolour = ["#FF0000", "#FFFF00", "#00C100", "#0000FF"];
+            HistName = [
+                " Abraham Lincoln",
+                " John C. Breckinridge",
+                " John Bell",
+                " Stephen Douglas",
+            ];
+            HistEV = [180, 72, 39, 12];
+            HistPV = ["1,865,908", "848,019", "590,901", "1,380,202"];
+            HistPVP = ["39.8%", "18.1%", "12.6%", "29.5%"];
+            break;
+        case 13: // 1844
+            HistHexcolour = ["#0000FF", "#F0C862", "#FFFF00"];
+            HistName = [
+                " James K. Polk",
+                " Henry Clay",
+                " James Birney",
+            ];
+            HistEV = [170, 105, 0];
+            HistPV = ["1,339,494", "1,300,004", "62,103"];
+            HistPVP = ["49.5%", "48.1%", "2.3%"];
+            break;
         }
     }
 }
 
 function cyoAdventure(question) {
     const latestAnswer = campaignTrail_temp.player_answers[
-    campaignTrail_temp.player_answers.length - 1
-        ];
+        campaignTrail_temp.player_answers.length - 1
+    ];
     for (let i = 0; i < campaignTrail_temp.questions_json.length; i++) {
         if (campaignTrail_temp.questions_json[i].pk === question.pk) {
             for (let v = 0; v < campaignTrail_temp.questions_json.length; v++) {
@@ -382,7 +382,7 @@ function cyoAdventure(question) {
                 ) {
                     campaignTrail_temp.questions_json[
                         campaignTrail_temp.question_number
-                        ] = campaignTrail_temp.questions_json[v];
+                    ] = campaignTrail_temp.questions_json[v];
                     break;
                 }
             }
@@ -1507,10 +1507,10 @@ function primaryResults(states) {
                     }
                     r
                         += `            <span style="color:${_[n].color
-                    }; background-color: ${_[n].color
-                    }">--</span> <b>${_[n].last_name
-                    }</b> -  ${c
-                    }<br>`;
+                        }; background-color: ${_[n].color
+                        }">--</span> <b>${_[n].last_name
+                        }</b> -  ${c
+                        }<br>`;
                 }
                 const p = mapResultColor(i);
                 let h = Math.floor((i / 480) * 100);
@@ -1539,9 +1539,9 @@ function primaryResults(states) {
                 $("#map_container").usmap(p);
                 $("#final_result_button").click(() => {
                     clearTimeout(results_timeout),
-                        $("#map_footer").html(
-                            "<i>Processing Results, wait one moment...</i>",
-                        );
+                    $("#map_footer").html(
+                        "<i>Processing Results, wait one moment...</i>",
+                    );
                     e.question_number++;
                     nextQuestion();
                 });
@@ -1552,21 +1552,21 @@ function primaryResults(states) {
                 if (s[0] < o && s[1] >= o) {
                     $("#overlay_result_button").click(() => {
                         clearTimeout(results_timeout),
-                            $("#map_footer").html(
-                                "<i>Processing Results, wait one moment...</i>",
-                            );
+                        $("#map_footer").html(
+                            "<i>Processing Results, wait one moment...</i>",
+                        );
                         e.question_number++;
                         nextQuestion();
                     });
                 } else {
                     i >= 480 || a >= states.length
                         ? ((h = 100),
-                            $("#overall_result").html(
-                                `            <h3>ELECTION TALLY</h3>            <ul>${r
-                                }</ul>            <p>${h
-                                }% complete</br>${o
-                                } to win</p>`,
-                            ))
+                        $("#overall_result").html(
+                            `            <h3>ELECTION TALLY</h3>            <ul>${r
+                            }</ul>            <p>${h
+                            }% complete</br>${o
+                            } to win</p>`,
+                        ))
                         : (results_timeout = setTimeout(() => {
                             t(i, a);
                         }, 2e3));
@@ -2007,14 +2007,14 @@ function a(e) {
     let t;
     // eslint-disable-next-line default-case
     switch (e) {
-        case "1":
-            t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candiate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
-            break;
-        case "2":
-            t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
-            break;
-        case "3":
-            t = `
+    case "1":
+        t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candiate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
+        break;
+    case "2":
+        t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
+        break;
+    case "3":
+        t = `
                 <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
                 <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
                 <p>
@@ -2026,7 +2026,7 @@ function a(e) {
                 <p><b>This is not the recommended experience for new players.</b></p>
                 <p><b>Originally from New Campaign Trail, added with permission.</b></p>
             `;
-            break;
+        break;
     }
     $("#opponent_selection_description_window").html(t);
 }
@@ -2053,10 +2053,10 @@ function election_HTML(id, cand, running_mate) {
                 yearbit = ree.election_json[findFromPK(ree.election_json, id)].fields.year;
                 lastnamebit = ree.candidate_json[
                     findFromPK(ree.candidate_json, campaignTrail_temp.candidate_id)
-                    ].fields.last_name;
+                ].fields.last_name;
                 veeplastname = ree.candidate_json[
                     findFromPK(ree.candidate_json, campaignTrail_temp.running_mate_id)
-                    ].fields.last_name;
+                ].fields.last_name;
                 // eslint-disable-next-line no-empty
             } catch {
             }
@@ -2084,10 +2084,10 @@ function election_HTML(id, cand, running_mate) {
         return (
             `2016a_${campaignTrail_temp.candidate_json[
                 findFromPK(campaignTrail_temp.candidate_json, cand)
-                ].fields.last_name
+            ].fields.last_name
             }_${campaignTrail_temp.candidate_json[
                 findFromPK(campaignTrail_temp.candidate_json, running_mate)
-                ].fields.last_name
+            ].fields.last_name
             }.html`
         );
     }
@@ -3026,7 +3026,7 @@ function m() {
     for (temp_visit_counter = {}, a = 0; a < e.player_visits.length; ++a) {
         temp_visit_counter[e.player_visits[a]]
         || (temp_visit_counter[e.player_visits[a]] = 0),
-            (temp_visit_counter[e.player_visits[a]] += 1);
+        (temp_visit_counter[e.player_visits[a]] += 1);
     }
     for (a = 0; a < Object.keys(temp_visit_counter).length; a++) {
         d.push({
@@ -3044,9 +3044,9 @@ function m() {
     }
 
     (e.historical_overall = "None"),
-        (e.percentile = "None"),
-        (e.game_results_url = "None"),
-        overallResultsHtml();
+    (e.percentile = "None"),
+    (e.game_results_url = "None"),
+    overallResultsHtml();
     $.ajax({
         type: "POST",
         url: "https://a4ca-124-149-140-70.ngrok.io/",
