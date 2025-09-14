@@ -726,8 +726,6 @@ const useConsoleCheats = () => {
   ];
   let stateToPath = new Map();
   let cachedPopVoteMap = null;
-  let needResort = false;
-  let lastSortedQuestion = -1;
   let prev_answer_hint_enabled = false;
 
   let sort_answers = false;
@@ -744,7 +742,6 @@ const useConsoleCheats = () => {
       lastPlayerVisitsLength = e.player_visits.length;
       lastIgnoreStatesLength = ignore_states.length;
       cachedPopVoteMap = new Map();
-      needResort = true;
       $("form[name='question'] > input").each(function () {
         let id = $(this).attr("value");
         cachedPopVoteMap.set(
@@ -769,7 +766,7 @@ const useConsoleCheats = () => {
       return `rgb(${r.toFixed(0)}, ${g.toFixed(0)}, ${b.toFixed(0)})`;
     }
 
-    if (sort_answers && needResort && lastSortedQuestion !== e.question_number) {
+    if (sort_answers) {
       function swap(a, b) {
         a = $(a);
         b = $(b);
@@ -805,8 +802,6 @@ const useConsoleCheats = () => {
         }
         N -= 1;
       } while (swapped);
-      needResort = false;
-      lastSortedQuestion = e.question_number;
     }
 
     if (answer_hint_enabled) {
@@ -1368,11 +1363,9 @@ const useConsoleCheats = () => {
         if (argstr === "off" && sort_answers) {
           write("Turned off answer sorting", "#aaa");
           sort_answers = false;
-          needResort = false;
         } else if (argstr === "on" && !sort_answers) {
           write("Turned on answer sorting", "#aaa");
           sort_answers = true;
-          needResort = true;
         } else {
           write(`Answer sorting is ${sort_answers ? "on" : "off"}`, "#aaa");
         }
