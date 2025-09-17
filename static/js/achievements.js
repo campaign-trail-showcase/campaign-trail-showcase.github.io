@@ -50,6 +50,25 @@ function getFavoriteMods() {
   return new Set();
 }
 
+// some mods are combined together, but use only one mod link (e.g. 2024 with 2024 DSA)
+// ensure that when a user favorites one, the linked counterpart is treated as favorite as well
+function expandFavoriteSet(favSet) {
+  if (!favSet || !(favSet instanceof Set)) return new Set();
+
+  const expanded = new Set(favSet);
+
+  const linkedPairs = [
+    ["2024", "2024 Divided States"],
+  ];
+
+  for (const [a, b] of linkedPairs) {
+    if (expanded.has(a) && !expanded.has(b)) expanded.add(b);
+    if (expanded.has(b) && !expanded.has(a)) expanded.add(a);
+  }
+
+  return expanded;
+}
+
 let achievementsCache = null;
 
 function buildAchievementsCache() {
@@ -620,8 +639,10 @@ function addAllAchievements() {
 
     if (showOnlyFavoriteMods) {
       const favMods = getFavoriteMods();
-      if (favMods.size > 0 || pinnedAchMods.size > 0) {
-        namesToShow = namesToShow.filter(modName => favMods.has(modName) || pinnedAchMods.has(modName));
+      // expand favorites to include linked mods (e.g., 2024 <-> 2024 Divided States)
+      const expandedFavs = expandFavoriteSet(favMods);
+      if (expandedFavs.size > 0 || pinnedAchMods.size > 0) {
+        namesToShow = namesToShow.filter(modName => expandedFavs.has(modName) || pinnedAchMods.has(modName));
       }
     }
 
