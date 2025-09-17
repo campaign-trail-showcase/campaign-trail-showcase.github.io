@@ -17,6 +17,7 @@
 }
 
 .tablinks {
+  font-family: Arial, sans-serif;
   font-size: 10px;
 }
 
@@ -381,6 +382,7 @@
 }
 
 .mode-button {
+  font-family: Arial, sans-serif;
   font-size: medium;
   font-weight: bolder;
   flex-grow: 1;
