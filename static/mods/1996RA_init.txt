@@ -1,0 +1,435 @@
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01005,
+            "state_variance": 0.005025,
+            "question_count": 30,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 9,
+        "fields": {
+            "year": 1996,
+            "display_year": "1996 - Remaking America",
+            "summary": "</p>1992 looked to be the year Democrats returned to the White House. Instead, Bill Clinton was attacked by the President during the campaign, with his character repeatedly called into question. Despite that, he pulled close, but not enough as George H.W. Bush narrowly won both the Electoral College and the Popular Vote. As the calendar turns to 1996, both parties have their own issues to deal with.</p>\n</p>On one side the Democrats, coming out of the midterms with minimal gains and <b><b>a lot</b></b> of pushback with the President. Al Gore looks to take charge of the party and return them to the White House.</p>\n\n</p>On the other side, the Republicans. They face an uphill fight as 16 years of dominance leave many wanting change. George Voinovich, despite some reservations, has taken up the challenge to lead the Republicans into the 21st Century.",
+            "image_url": "https://i.imgur.com/WtodIOu.jpeg",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://imgur.com/YbVQU08.jpg",
+            "recommended_reading": "Thank You For Playing This Mod. Considering This Is My First Real Effort, I'm Glad You Took The Time To Play It.",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 9,
+        "year": 1996,
+        "is_premium": 0,
+        "display_year": "1996RA"
+    }
+]
+
+campaignTrail_temp.credits = "KoKo"
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 12355,
+        "fields": {
+            "first_name": "Al",
+            "last_name": "Gore",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Tennessee",
+            "priority": 1,
+            "description": "<p>With Clinton too damaged from 1992 to realistically run again, the clear front-runner for the Democrats has been the Vice Presidential nominee from last time, Senator Al Gore. Autopsies of the failed campaign have mostly been kind to Gore, only citing his drier and less charismatic personality as a negative. Still, the campaign was too passive and questions are being asked about whether he truly has the mettle to lead a winning campaign.</p></p>Critics of the failed '92 campaign also haven't held back that the ticket's focus on more centrist policies likely helped lead to the narrow loss, whether that's actually the case is up for debate. Regardless, Al Gore will need to not only shore up support from his left flank, but also maintain enough voters from last time to finally get the Democrats back into the White House.</p></p> Is this a task that he'll be able to manage or will the Democrats have to settle for four more years in opposition?\n",
+            "color_hex": "#000091",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://imgur.com/6PBDZxt.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 12412,
+        "fields": {
+            "first_name": "George",
+            "last_name": "Voinovich",
+            "election": 9,
+            "party": "Republican",
+            "state": "Ohio",
+            "priority": 1,
+            "description": "<p>Governor George Voinovich by all accounts is not the man who anyone thought would be standing as the nominee. He was hesitant to even throw his hat in the ring even with many party insiders begging him to. Yet here he is. The idea was simple, with Bush's floundering popularity and the economy only treading water, the Republican Party needed someone far away from Washington. Someone detached enough from the President to not appear as more of the same.</p></p>Voinovich carries strong approval ratings and was reelected in Ohio in a veritable landslide, giving him a strong region of support, but  he must tread carefully. The headwinds against the Republicans this year are strong and many in America long for change after 16 years.</p><p>Is this an uphill battle that he can win or is this the year where Republicans finally get voted out of the White House?",
+            "color_hex": "#ab0e0e",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://imgur.com/6XBUFR2.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 10003,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Kerry",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Massachusetts",
+            "priority": 1,
+            "description": "<p>If shoring up your left flank is what you want, there might be few options better than John Kerry. Having entered the Senate the same year you did, you've managed to build a good rapport with him.</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://imgur.com/vc55H71.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>If shoring up your left flank is what you want while still keeping moderates on your side, there might be few options better than Senator John Kerry. Having entered the Senate the same year you did, you've managed to build a good rapport with him. Kerry also is dedicated politician, having sponsored nearly 200 bills just on his own which could show that your administration would be dedicated to getting things done.</p>\n<p>He also has military experience which would bolster foreign policy credentials, though this could also be a risk given his later outspoken opposition to the Vietnam War which could be used to portray him as weak on foreign powers. Kerry is also prone to gaffes at times and can sometimes come off as wishy-washy. You also were the liberal counterbalance for Clinton so having Kerry could have the ticket painted as too liberal to be elected if you aren't careful. Kerry is a good man for the job though, and is the guy you want for shoring up the more liberal voters.",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 10004,
+        "fields": {
+            "first_name": "Dick",
+            "last_name": "Gephardt",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Missouri",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/kYA5FI5.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>Representative Dick Gephardt would certainly be a good running mate option if you're looking to maintain a united party after you're elected. This goes without saying, but picking the House Majority Leader would show that your administration would have the tools to get things done right from day one. In addition, his more moderate stances do stand to give you more inroads with more moderate and undecided voters.</p><p>That said, Dick is not without his flaws. He isn't the most energetic speaker, similar to you, which could diminish voter enthusiasm if not dealt with properly. He also, while having shifted more to the left since being elected, has had a track record of more conservative votes, like voting in favors of Reagan's tax cuts, which might turn away more liberal and left-wing minded voters. Gephardt is a strong candidate and might be a good contender for keeping the voters who chose you and Clinton last time.",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 10005,
+        "fields": {
+            "first_name": "Barbara",
+            "last_name": "Boxer",
+            "election": 9,
+            "party": "Democrat",
+            "state": "California",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://imgur.com/1pCh91t.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>Then there's Senator Barbara Boxer. The freshman Senator from California was elected in a tight race in 1992, but has plenty of experience from a decade of being in the House of Representatives. Choosing her would certainly be a bold pick, especially as she is viewed as a much more progressive politician. She would also be only the second woman chosen for the Vice Presidential nomination on a major party ticket.</p><p>The downsides to her are very clear though. For one, picking a woman might be seen as too bold a choice, especially after how 1984 went for Mondale. Two, her progressive stances will require a good deal of handling if you want to keep the moderates on your side. Finally, there are some criticisms that will come up such as her outspoken nature and her implication in the House Banking Scandal. Overall though, Senator Boxer is a good choice if you intend to make this administration about taking properly bold action.</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 11005,
+        "fields": {
+            "first_name": "Arlen",
+            "last_name": "Specter",
+            "election": 9,
+            "party": "Republican",
+            "state": "Pennsylvania",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/aOMER54.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>If you're going to claw your way to victory, then Senator Arlen Specter might just be the man to help you do it. Having been narrowly elected to the Senate in 1980 and reelected in 1986 & 1992, Specter has managed to cultivate a good set of moderate credentials. He also would provide some connections in Washington if you win without necessarily alienating the Democrats you might need to work with. It also doesn't hurt that Pennsylvania is electorally rich.</p><p>Specter's more moderate views on issues and his willingness to sometimes vote with the Democrats is likely to lose you more conservative voters as much as you'd gain with moderates if you make that a focal point of the campaign. He also has a tendency to sometimes flip-flop on his positions, which could make the ticket seem indecisive. If you're looking to make inroads with Clinton voters though, Specter has the record to draw them in.</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 11006,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Engler",
+            "election": 9,
+            "party": "Republican",
+            "state": "Michigan",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/b5QK4o8.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>Much like you being reelected in a landslide, so has Governor John Engler. His story being that of a man who won a longshot bid for Governor in 1990 and narrowly pulling off the upset also would make a good narrative for the ticket of being underdogs willing to fight to another term. Engler also has managed to attain a good amount of successes like privatizing services in Michigan and income tax reductions, which would bolster the ticket's fiscal credentials.</p><p>For people that care though, Engler is from the state right to the north of yours and brings little to the ticket in terms of geographical balance. NAFTA is also not expected to be the most major issue of the election, but both of you being pro-NAFTA could depress turnout in your own region. It should also be noted that a Governor-Governor ticket hasn't won a presidential election since 1912 and provides little in terms of connections to Washington. If you want disconnect from the President though, Engler might just be the man for the job.</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 11007,
+        "fields": {
+            "first_name": "Newt",
+            "last_name": "Gingrich",
+            "election": 9,
+            "party": "Republican",
+            "state": "Georgia",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/cagNhTs.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>Of course, if you'd like to take a more aggressive route, then perhaps getting the support of Newt Gingrich might be the best play for your ticket. The House Minority Leader has spent the last two years stirring up a fuss and hasn't been afraid to call out President Bush for caving to the Democrats. Having him as your Vice President would certainly do wonders for your connections with Congress, especially if you can net yourself a majority in either chamber.</p><p>Gingrich does have drawbacks though. For one, his aggressive style of conservatism could hurt your ability to appeal to moderates. Secondly, Gingrich has refused to stand down from running for reelection in his House Seat, which will call into question your ticket's ability to actually win this election. If you want to double down with the base though, there aren't many better men for the job.",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 12469,
+        "fields": {
+            "first_name": "Harry",
+            "last_name": "Browne",
+            "election": 9,
+            "party": "Libertarian",
+            "state": "Tennessee",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#fbdd37",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "Hahaha. Very funny, you used the funny code tool to cheat and see what would happen.\n\nYou get nothing. You will enjoy nothing. Nothing is what you deserve here. Have a nice day.",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 14922,
+        "fields": {
+            "first_name": "Jo",
+            "last_name": "Jorgenson",
+            "election": 9,
+            "party": "Libertarian",
+            "state": "South Carolina",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "Hahaha. Very funny, you used the funny code tool to cheat and see what would happen.\n\nYou get nothing. You will enjoy nothing. Nothing is what you deserve here. Have a nice day.",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 12526,
+        "fields": {
+            "first_name": "Ralph",
+            "last_name": "Nader/Others",
+            "election": 9,
+            "party": "Green/Others",
+            "state": "Connecticut",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#35ca3d",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 89958,
+        "fields": {
+            "candidate": 12355,
+            "running_mate": 10003
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 116762,
+        "fields": {
+            "candidate": 12355,
+            "running_mate": 10004
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 159798,
+        "fields": {
+            "candidate": 12412,
+            "running_mate": 11005
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 99935,
+        "fields": {
+            "candidate": 12412,
+            "running_mate": 11006
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 172940,
+        "fields": {
+            "candidate": 12412,
+            "running_mate": 11007
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 126889,
+        "fields": {
+            "candidate": 12355,
+            "running_mate": 10005
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 117853,
+        "fields": {
+            "candidate": 12469,
+            "running_mate": 14922
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 9,
+        "candidates": [
+            12355,
+            12412,
+            12469,
+            12526
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 9,
+        "candidates": [
+            12355,
+            12412,
+            12469,
+            12526
+        ]
+    }
+]
+
+jet_data = {
+    "headerColor": "#1b155b",
+    "windowColor": "#721818",
+    "containerColor": "#150ea3",
+    "innerWindowColor": "#8e0f0f",
+    "bannerImageUrl": "https://i.imgur.com/wkAgYQK.jpeg",
+    "backgroundImageUrl": "https://live.staticflickr.com/3458/3199846142_6ef904928d_o.jpg",
+    "endingTextColor": "#000000",
+    "customQuote": ""
+}
+
+//#startcode
+
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#1b155b";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#721818";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#150ea3";
+
+document.getElementById("header").src = "https://i.imgur.com/wkAgYQK.jpeg";
+
+document.body.background = "https://live.staticflickr.com/3458/3199846142_6ef904928d_o.jpg";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#8e0f0f!important;}</style>";
+
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#1b155b",
+     "header_text_color": "#000000",
+     "description_text_color": "#000000",
+     "description_background_color": "#901818",
+     "main_color": "#150ea3",
+     "secondary_color": "#556fb0",
+     "ui_text_color": "#FFFFFF"
+}
+
+//#endcode
