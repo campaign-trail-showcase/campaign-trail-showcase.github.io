@@ -1,0 +1,257 @@
+{
+  "1962 Sweet Home": {
+    "4368": [{ "var": "Segregation", "change": "+2" }],
+    "4366": [{ "var": "Segregation", "change": "-1" }],
+    "4370": [{ "var": "Segregation", "change": "+1" }],
+    "55691": [{ "var": "Segregation", "change": "+1" }],
+    "4372": [{ "var": "Segregation", "change": "+2" }],
+    "4373": [
+      { "var": "Segregation", "change": "+2" }, 
+      { "var": "Dixieland", "change": "+1" }
+    ],
+    "4374": [
+      { "var": "Segregation", "change": "-2" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "4375": [{ "var": "Segregation", "change": "+1" }],
+    "4402": [{ "var": "Segregation", "change": "+1" }],
+    "4403": [{ "var": "Segregation", "change": "-1" }],
+    "4371": [
+      { "var": "Segregation", "change": "-2" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "15497": [{ "var": "Segregation", "change": "-1" }],
+    "15499": [{ "var": "Segregation", "change": "+2" }],
+    "55689": [
+      { "var": "Segregation", "change": "-2" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "55695": [
+      { "var": "Segregation", "change": "+2" }, 
+      { "var": "Dixieland", "change": "+1" }
+    ],
+    "4378": [{ "var": "Gaffe", "change": "+1" }],
+    "4384": [{ "var": "Gaffe", "change": "+1" }],
+    "4390": [
+      { "var": "Gaffe", "change": "+1" }, 
+      { "var": "Dixieland", "change": "+1" }
+    ],
+    "4385": [{ "var": "Segregation", "change": "+1" }],
+    "4386": [{ "var": "Segregation", "change": "-1" }],
+    "15540": [{ "var": "NominationScore", "change": "+2" }],
+    "15545": [{ "var": "NominationScore", "change": "+2" }],
+    "15547": [
+      { "var": "NominationScore", "change": "+1" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "4394": [{ "var": "NominationScore", "change": "+1" }],
+    "4480": [{ "var": "NominationScore", "change": "+1" }],
+    "4481": [{ "var": "NominationScore", "change": "+1" }],
+    "4484": [
+      { "var": "NominationScore", "change": "-1" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "15506": [
+      { "var": "NominationScore", "change": "+2" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "55793": [{ "var": "TemptingFate", "change": "+1" }],
+    "55808": [{ "var": "TemptingFate", "change": "+1" }]
+  },
+  "1972Romney": {
+    "1673": [{"var": "economyLevel", "change": "-2"}],
+    "3227": [{"var": "vietnamLevel", "change": "+1"}],
+    "3228": [{"var": "vietnamLevel", "change": "+3"}],
+    "3230": [
+      { "var": "vietnamLevel", "change": "-2" },
+      { "var": "economyLevel", "change": "+3" }
+    ],
+    "3231": [{"var": "singlaubLevel", "change": "+1"}],
+    "3238": [{"var": "economyLevel", "change": "-2"}],
+    "3292": [{"var": "nixonLevel", "change": "+2"}],
+    "3293": [{"var": "nixonLevel", "change": "+1"}],
+    "9274": [{"var": "vietnamLevel", "change": "-1"}],
+    "9278": [{"var": "vietnamLevel", "change": "-2"}],
+    "9259": [
+      { "var": "economyLevel", "change": "-3" },
+      { "var": "vietnamLevel", "change": "+4" }
+    ],
+    "9260": [{"var": "vietnamLevel", "change": "+1"}],
+    "9261": [
+      { "var": "economyLevel", "change": "+4" },
+      { "var": "vietnamLevel", "change": "-10" }
+    ],
+    "9540": [
+      { "var": "vietnamLevel", "change": "+2" },
+      { "var": "economyLevel", "change": "-2" }
+    ],
+    "9534": [
+      { "var": "vietnamLevel", "change": "+1" },
+      { "var": "economyLevel", "change": "-1" }
+    ],
+    "9535": [
+      { "var": "vietnamLevel", "change": "-2" },
+      { "var": "economyLevel", "change": "+1" }
+    ],
+    "9537": [{"var": "economyLevel", "change": "-2"}],
+    "9538": [{"var": "economyLevel", "change": "-2"}],
+    "9146": [{ "var": "economyLevel", "change": "-2" }],
+    "9147": [{ "var": "economyLevel", "change": "+2" }],
+    "9148": [{ "var": "economyLevel", "change": "+2" }],
+    "9081": [{"var": "economyLevel", "change": "+1"}],
+    "9078": [{"var": "economyLevel", "change": "+1"}],
+    "9100": [{"var": "economyLevel", "change": "-2"}],
+    "9098": [{"var": "economyLevel", "change": "-2"}],
+    "9140": [{"var": "economyLevel", "change": "+1"}],
+    "9139": [{"var": "economyLevel", "change": "-2"}],
+    "9192": [{"var": "economyLevel", "change": "+1"}],
+    "9362": [{"var": "economyLevel", "change": "-2"}],
+    "9363": [{"var": "economyLevel", "change": "-2"}],
+    "9365": [{"var": "economyLevel", "change": "+1"}],
+    "9460": [{"var": "economyLevel", "change": "+2"}],
+    "9230": [{"var": "economyLevel", "change": "+1"}],
+    "9285": [{"var": "priceLevel", "change": "+2"}],
+    "9289": [{"var": "priceLevel", "change": "+1"}],
+    "9293": [{"var": "veepLevel", "change": "+2"}],
+    "9294": [{"var": "singlaubLevel", "change": "+1"}],
+    "9295": [{"var": "singlaubLevel", "change": "+1"}, {"var": "veepLevel", "change": "+1"}],
+    "9360": [{"var": "economyLevel", "change": "-1"}]
+  },
+  "1983": {
+    "5001": [{ "var": "haroldpoints", "change": "+1" }],
+    "5013": [{ "var": "haroldpoints", "change": "+1" }],
+    "5057": [{ "var": "haroldpoints", "change": "+1" }],
+    "5016": [{ "var": "haroldpoints", "change": "+1" }],
+    "5128": [{ "var": "haroldpoints", "change": "+1" }],
+    "5109": [{ "var": "haroldpoints", "change": "+1" }],
+    "5067": [{ "var": "haroldpoints", "change": "+1" }],
+    "5059": [{ "var": "haroldpoints", "change": "+1" }],
+    "1559944": [{ "var": "haroldpoints", "change": "+1" }],
+    "5018": [{ "var": "haroldpoints", "change": "+2" }],
+    "5056": [{ "var": "haroldpoints", "change": "+2" }],
+    "5058": [{ "var": "haroldpoints", "change": "+2" }],
+    "5004": [{ "var": "haroldpoints", "change": "-1" }],
+    "5127": [{ "var": "haroldpoints", "change": "-1" }],
+    "5069": [{ "var": "haroldpoints", "change": "-1" }],
+    "5104": [{ "var": "haroldpoints", "change": "-1" }],
+    "3559944": [{ "var": "haroldpoints", "change": "-1" }],
+    "5017": [{ "var": "jesse", "change": "+1" }],
+    "5108": [{ "var": "jesse", "change": "+1" }]
+  },
+  "2000-IL01": {
+    "12763": [{ "var": "nice", "change": "+1" }],
+    "12764": [{ "var": "nice", "change": "+1" }],
+    "12774": [{ "var": "nice", "change": "+1" }],
+    "12875": [{ "var": "nice", "change": "+1" }],
+    "128951": [{ "var": "nice", "change": "+1" }],
+    "12861": [{ "var": "nice", "change": "+1" }],
+    "12836": [{ "var": "nice", "change": "+1" }],
+    "12828": [{ "var": "nice", "change": "+1" }],
+    "12823": [{ "var": "nice", "change": "+1" }],
+    "12812": [{ "var": "nice", "change": "+1" }],
+    "12803": [{ "var": "nice", "change": "+1" }],
+    "128071": [{ "var": "nice", "change": "-5" }],
+    "127992": [{ "var": "nice", "change": "+1" }],
+    "12777": [{ "var": "nice", "change": "+1" }],
+    "12781": [{ "var": "primaryloss", "change": "+1" }]
+  },
+  "2008 - Lieberman": {
+    "12515": [{ "var": "joementum", "change": "+1" }],
+    "12516": [{ "var": "hawk", "change": "+1" }],
+    "12517": [{ "var": "con", "change": "+1" }],
+    "12518": [{ "var": "lib", "change": "+1" }],
+    "12535": [{ "var": "con", "change": "+1" }],
+    "12536": [{ "var": "lib", "change": "+1" }],
+    "12587": [{ "var": "econ", "change": "+1" }],
+    "12602": [{ "var": "joementum", "change": "+1" }],
+    "12607": [{ "var": "hawk", "change": "+1" }],
+    "12643": [{ "var": "joementum", "change": "+1" }],
+    "12644": [{ "var": "hawk", "change": "+1" }],
+    "12692": [{ "var": "con", "change": "+1" }],
+    "12717": [
+      { "var": "lib", "change": "+1" },
+      { "var": "hawk", "change": "-1" }
+    ],
+    "12718": [{ "var": "con", "change": "+1" }],
+    "12719": [
+      { "var": "con", "change": "+2" },
+      { "var": "hawk", "change": "+1" }
+    ],
+    "12677": [{ "var": "joementum", "change": "+1" }],
+    "12679": [{ "var": "lib", "change": "+1" }],
+    "12680": [{ "var": "con", "change": "+1" }],
+    "12668": [{ "var": "econ", "change": "+1" }],
+    "12732": [
+      { "var": "hawk", "change": "-1" },
+      { "var": "joementum", "change": "+1" }
+    ],
+    "12746": [{ "var": "con", "change": "+1" }],
+    "12747": [{ "var": "lib", "change": "+1" }],
+    "12695": [{ "var": "lib", "change": "+1" }],
+    "12749": [{ "var": "con", "change": "+1" }],
+    "13148": [{ "var": "lib", "change": "+1" }],
+    "13156": [{ "var": "con", "change": "+1" }],
+    "13152": [{ "var": "joementum", "change": "+1" }],
+    "13172": [{ "var": "lib", "change": "+1" }],
+    "13168": [
+      { "var": "con", "change": "+1" },
+      { "var": "joementum", "change": "+1" }
+    ],
+    "13103": [{ "var": "lib", "change": "+1" }],
+    "13105": [
+      { "var": "con", "change": "+1" },
+      { "var": "joementum", "change": "+1" }
+    ],
+    "13183": [
+      { "var": "lib", "change": "+1" },
+      { "var": "joementum", "change": "+1" }
+    ],
+    "13187": [{ "var": "con", "change": "+1" }],
+    "12696": [{ "var": "lib", "change": "+2" }],
+    "12752": [{ "var": "lib", "change": "+1" }],
+    "12754": [{ "var": "con", "change": "+1" }],
+    "12697": [{ "var": "lib", "change": "+2" }],
+    "12755": [{ "var": "lib", "change": "+1" }],
+    "12756": [{ "var": "lib", "change": "+1" }],
+    "12757": [{ "var": "con", "change": "+1" }],
+    "12698": [{ "var": "joementum", "change": "+1" }],
+    "12761": [{ "var": "joementum", "change": "+1" }],
+    "12762": [{ "var": "hawk", "change": "+1" }],
+    "12700": [{ "var": "con", "change": "+1" }],
+    "12764": [{ "var": "con", "change": "+2" }],
+    "12765": [{ "var": "lib", "change": "+1" }],
+    "12766": [{ "var": "lib", "change": "+2" }],
+    "12702": [{ "var": "lib", "change": "+1" }],
+    "12771": [{ "var": "con", "change": "+1" }],
+    "12703": [{ "var": "con", "change": "+1" }],
+    "12773": [
+      { "var": "lib", "change": "+2" },
+      { "var": "hawk", "change": "-1" }
+    ],
+    "12774": [
+      { "var": "con", "change": "+2" },
+      { "var": "hawk", "change": "+1" }
+    ],
+    "12775": [{ "var": "lib", "change": "+1" }],
+    "12704": [{ "var": "joementum", "change": "+1" }],
+    "12705": [
+      { "var": "lib", "change": "+2" },
+      { "var": "hawk", "change": "-2" }
+    ],
+    "12779": [
+      { "var": "lib", "change": "+1" },
+      { "var": "hawk", "change": "-1" }
+    ],
+    "12780": [
+      { "var": "con", "change": "+1" },
+      { "var": "hawk", "change": "+1" }
+    ],
+    "12781": [
+      { "var": "con", "change": "+2" },
+      { "var": "hawk", "change": "+2" }
+    ],
+    "13043": [{ "var": "joementum", "change": "+1" }],
+    "12786": [{ "var": "joementum", "change": "+1" }],
+    "13205": [{ "var": "econ", "change": "+1" }]
+  }
+}
