@@ -95,5 +95,104 @@
     "127992": [{ "var": "nice", "change": "+1" }],
     "12777": [{ "var": "nice", "change": "+1" }],
     "12781": [{ "var": "primaryloss", "change": "+1" }]
+  },
+  "2008 - Lieberman": {
+    "12515": [{ "var": "joementum", "change": "+1" }],
+    "12516": [{ "var": "hawk", "change": "+1" }],
+    "12517": [{ "var": "con", "change": "+1" }],
+    "12518": [{ "var": "lib", "change": "+1" }],
+    "12535": [{ "var": "con", "change": "+1" }],
+    "12536": [{ "var": "lib", "change": "+1" }],
+    "12587": [{ "var": "econ", "change": "+1" }],
+    "12602": [{ "var": "joementum", "change": "+1" }],
+    "12607": [{ "var": "hawk", "change": "+1" }],
+    "12643": [{ "var": "joementum", "change": "+1" }],
+    "12644": [{ "var": "hawk", "change": "+1" }],
+    "12692": [{ "var": "con", "change": "+1" }],
+    "12717": [
+      { "var": "lib", "change": "+1" },
+      { "var": "hawk", "change": "-1" }
+    ],
+    "12718": [{ "var": "con", "change": "+1" }],
+    "12719": [
+      { "var": "con", "change": "+2" },
+      { "var": "hawk", "change": "+1" }
+    ],
+    "12677": [{ "var": "joementum", "change": "+1" }],
+    "12679": [{ "var": "lib", "change": "+1" }],
+    "12680": [{ "var": "con", "change": "+1" }],
+    "12668": [{ "var": "econ", "change": "+1" }],
+    "12732": [
+      { "var": "hawk", "change": "-1" },
+      { "var": "joementum", "change": "+1" }
+    ],
+    "12746": [{ "var": "con", "change": "+1" }],
+    "12747": [{ "var": "lib", "change": "+1" }],
+    "12695": [{ "var": "lib", "change": "+1" }],
+    "12749": [{ "var": "con", "change": "+1" }],
+    "13148": [{ "var": "lib", "change": "+1" }],
+    "13156": [{ "var": "con", "change": "+1" }],
+    "13152": [{ "var": "joementum", "change": "+1" }],
+    "13172": [{ "var": "lib", "change": "+1" }],
+    "13168": [
+      { "var": "con", "change": "+1" },
+      { "var": "joementum", "change": "+1" }
+    ],
+    "13103": [{ "var": "lib", "change": "+1" }],
+    "13105": [
+      { "var": "con", "change": "+1" },
+      { "var": "joementum", "change": "+1" }
+    ],
+    "13183": [
+      { "var": "lib", "change": "+1" },
+      { "var": "joementum", "change": "+1" }
+    ],
+    "13187": [{ "var": "con", "change": "+1" }],
+    "12696": [{ "var": "lib", "change": "+2" }],
+    "12752": [{ "var": "lib", "change": "+1" }],
+    "12754": [{ "var": "con", "change": "+1" }],
+    "12697": [{ "var": "lib", "change": "+2" }],
+    "12755": [{ "var": "lib", "change": "+1" }],
+    "12756": [{ "var": "lib", "change": "+1" }],
+    "12757": [{ "var": "con", "change": "+1" }],
+    "12698": [{ "var": "joementum", "change": "+1" }],
+    "12761": [{ "var": "joementum", "change": "+1" }],
+    "12762": [{ "var": "hawk", "change": "+1" }],
+    "12700": [{ "var": "con", "change": "+1" }],
+    "12764": [{ "var": "con", "change": "+2" }],
+    "12765": [{ "var": "lib", "change": "+1" }],
+    "12766": [{ "var": "lib", "change": "+2" }],
+    "12702": [{ "var": "lib", "change": "+1" }],
+    "12771": [{ "var": "con", "change": "+1" }],
+    "12703": [{ "var": "con", "change": "+1" }],
+    "12773": [
+      { "var": "lib", "change": "+2" },
+      { "var": "hawk", "change": "-1" }
+    ],
+    "12774": [
+      { "var": "con", "change": "+2" },
+      { "var": "hawk", "change": "+1" }
+    ],
+    "12775": [{ "var": "lib", "change": "+1" }],
+    "12704": [{ "var": "joementum", "change": "+1" }],
+    "12705": [
+      { "var": "lib", "change": "+2" },
+      { "var": "hawk", "change": "-2" }
+    ],
+    "12779": [
+      { "var": "lib", "change": "+1" },
+      { "var": "hawk", "change": "-1" }
+    ],
+    "12780": [
+      { "var": "con", "change": "+1" },
+      { "var": "hawk", "change": "+1" }
+    ],
+    "12781": [
+      { "var": "con", "change": "+2" },
+      { "var": "hawk", "change": "+2" }
+    ],
+    "13043": [{ "var": "joementum", "change": "+1" }],
+    "12786": [{ "var": "joementum", "change": "+1" }],
+    "13205": [{ "var": "econ", "change": "+1" }]
   }
 }
