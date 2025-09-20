@@ -58,6 +58,65 @@
     "55793": [{ "var": "TemptingFate", "change": "+1" }],
     "55808": [{ "var": "TemptingFate", "change": "+1" }]
   },
+  "1972Romney": {
+    "1673": [{"var": "economyLevel", "change": "-2"}],
+    "3227": [{"var": "vietnamLevel", "change": "+1"}],
+    "3228": [{"var": "vietnamLevel", "change": "+3"}],
+    "3230": [
+      { "var": "vietnamLevel", "change": "-2" },
+      { "var": "economyLevel", "change": "+3" }
+    ],
+    "3231": [{"var": "singlaubLevel", "change": "+1"}],
+    "3238": [{"var": "economyLevel", "change": "-2"}],
+    "3292": [{"var": "nixonLevel", "change": "+2"}],
+    "3293": [{"var": "nixonLevel", "change": "+1"}],
+    "9274": [{"var": "vietnamLevel", "change": "-1"}],
+    "9278": [{"var": "vietnamLevel", "change": "-2"}],
+    "9259": [
+      { "var": "economyLevel", "change": "-3" },
+      { "var": "vietnamLevel", "change": "+4" }
+    ],
+    "9260": [{"var": "vietnamLevel", "change": "+1"}],
+    "9261": [
+      { "var": "economyLevel", "change": "+4" },
+      { "var": "vietnamLevel", "change": "-10" }
+    ],
+    "9540": [
+      { "var": "vietnamLevel", "change": "+2" },
+      { "var": "economyLevel", "change": "-2" }
+    ],
+    "9534": [
+      { "var": "vietnamLevel", "change": "+1" },
+      { "var": "economyLevel", "change": "-1" }
+    ],
+    "9535": [
+      { "var": "vietnamLevel", "change": "-2" },
+      { "var": "economyLevel", "change": "+1" }
+    ],
+    "9537": [{"var": "economyLevel", "change": "-2"}],
+    "9538": [{"var": "economyLevel", "change": "-2"}],
+    "9146": [{ "var": "economyLevel", "change": "-2" }],
+    "9147": [{ "var": "economyLevel", "change": "+2" }],
+    "9148": [{ "var": "economyLevel", "change": "+2" }],
+    "9081": [{"var": "economyLevel", "change": "+1"}],
+    "9078": [{"var": "economyLevel", "change": "+1"}],
+    "9100": [{"var": "economyLevel", "change": "-2"}],
+    "9098": [{"var": "economyLevel", "change": "-2"}],
+    "9140": [{"var": "economyLevel", "change": "+1"}],
+    "9139": [{"var": "economyLevel", "change": "-2"}],
+    "9192": [{"var": "economyLevel", "change": "+1"}],
+    "9362": [{"var": "economyLevel", "change": "-2"}],
+    "9363": [{"var": "economyLevel", "change": "-2"}],
+    "9365": [{"var": "economyLevel", "change": "+1"}],
+    "9460": [{"var": "economyLevel", "change": "+2"}],
+    "9230": [{"var": "economyLevel", "change": "+1"}],
+    "9285": [{"var": "priceLevel", "change": "+2"}],
+    "9289": [{"var": "priceLevel", "change": "+1"}],
+    "9293": [{"var": "veepLevel", "change": "+2"}],
+    "9294": [{"var": "singlaubLevel", "change": "+1"}],
+    "9295": [{"var": "singlaubLevel", "change": "+1"}, {"var": "veepLevel", "change": "+1"}],
+    "9360": [{"var": "economyLevel", "change": "-1"}]
+  },
   "1983": {
     "5001": [{ "var": "haroldpoints", "change": "+1" }],
     "5013": [{ "var": "haroldpoints", "change": "+1" }],
@@ -194,64 +253,5 @@
     "13043": [{ "var": "joementum", "change": "+1" }],
     "12786": [{ "var": "joementum", "change": "+1" }],
     "13205": [{ "var": "econ", "change": "+1" }]
-  },
-  "1972Romney": {
-    "1673": [{"var": "economyLevel", "change": "-2"}],
-    "3227": [{"var": "vietnamLevel", "change": "+1"}],
-    "3228": [{"var": "vietnamLevel", "change": "+3"}],
-    "3230": [
-      { "var": "vietnamLevel", "change": "-2" },
-      { "var": "economyLevel", "change": "+3" }
-    ],
-    "3231": [{"var": "singlaubLevel", "change": "+1"}],
-    "3238": [{"var": "economyLevel", "change": "-2"}],
-    "3292": [{"var": "nixonLevel", "change": "+2"}],
-    "3293": [{"var": "nixonLevel", "change": "+1"}],
-    "9274": [{"var": "vietnamLevel", "change": "-1"}],
-    "9278": [{"var": "vietnamLevel", "change": "-2"}],
-    "9259": [
-      { "var": "economyLevel", "change": "-3" },
-      { "var": "vietnamLevel", "change": "+4" }
-    ],
-    "9260": [{"var": "vietnamLevel", "change": "+1"}],
-    "9261": [
-      { "var": "economyLevel", "change": "+4" },
-      { "var": "vietnamLevel", "change": "-10" }
-    ],
-    "9540": [
-      { "var": "vietnamLevel", "change": "+2" },
-      { "var": "economyLevel", "change": "-2" }
-    ],
-    "9534": [
-      { "var": "vietnamLevel", "change": "+1" },
-      { "var": "economyLevel", "change": "-1" }
-    ],
-    "9535": [
-      { "var": "vietnamLevel", "change": "-2" },
-      { "var": "economyLevel", "change": "+1" }
-    ],
-    "9537": [{"var": "economyLevel", "change": "-2"}],
-    "9538": [{"var": "economyLevel", "change": "-2"}],
-    "9146": [{ "var": "economyLevel", "change": "-2" }],
-    "9147": [{ "var": "economyLevel", "change": "+2" }],
-    "9148": [{ "var": "economyLevel", "change": "+2" }],
-    "9081": [{"var": "economyLevel", "change": "+1"}],
-    "9078": [{"var": "economyLevel", "change": "+1"}],
-    "9100": [{"var": "economyLevel", "change": "-2"}],
-    "9098": [{"var": "economyLevel", "change": "-2"}],
-    "9140": [{"var": "economyLevel", "change": "+1"}],
-    "9139": [{"var": "economyLevel", "change": "-2"}],
-    "9192": [{"var": "economyLevel", "change": "+1"}],
-    "9362": [{"var": "economyLevel", "change": "-2"}],
-    "9363": [{"var": "economyLevel", "change": "-2"}],
-    "9365": [{"var": "economyLevel", "change": "+1"}],
-    "9460": [{"var": "economyLevel", "change": "+2"}],
-    "9230": [{"var": "economyLevel", "change": "+1"}],
-    "9285": [{"var": "priceLevel", "change": "+2"}],
-    "9289": [{"var": "priceLevel", "change": "+1"}],
-    "9293": [{"var": "veepLevel", "change": "+2"}],
-    "9294": [{"var": "singlaubLevel", "change": "+1"}],
-    "9295": [{"var": "singlaubLevel", "change": "+1"}, {"var": "veepLevel", "change": "+1"}],
-    "9360": [{"var": "economyLevel", "change": "-1"}]
   }
 }
