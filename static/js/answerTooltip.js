@@ -7,7 +7,6 @@ async function activateAnswerTooltip() {
     const modName = modUrl.get("modName");
 
     answerTooltipActive = !answerTooltipActive;
-    console.log("Answer hover is", answerTooltipActive ? "ON" : "OFF");
     if (!answerTooltipActive) return; 
 
     if (!jsonLoaded) {
@@ -15,9 +14,7 @@ async function activateAnswerTooltip() {
             const res = await fetch('../static/json/answer_variables.json');
             answerTooltipData = await res.json();
             jsonLoaded = true;
-            console.log("Loaded answer_variables.json:", answerTooltipData);
         } catch (error) {
-            console.error("Couldn't load answer_variables.json:", error);
             return;
         }
     }
