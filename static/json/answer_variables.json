@@ -1,0 +1,99 @@
+{
+  "1962 Sweet Home": {
+    "4368": [{ "var": "Segregation", "change": "+2" }],
+    "4366": [{ "var": "Segregation", "change": "-1" }],
+    "4370": [{ "var": "Segregation", "change": "+1" }],
+    "55691": [{ "var": "Segregation", "change": "+1" }],
+    "4372": [{ "var": "Segregation", "change": "+2" }],
+    "4373": [
+      { "var": "Segregation", "change": "+2" }, 
+      { "var": "Dixieland", "change": "+1" }
+    ],
+    "4374": [
+      { "var": "Segregation", "change": "-2" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "4375": [{ "var": "Segregation", "change": "+1" }],
+    "4402": [{ "var": "Segregation", "change": "+1" }],
+    "4403": [{ "var": "Segregation", "change": "-1" }],
+    "4371": [
+      { "var": "Segregation", "change": "-2" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "15497": [{ "var": "Segregation", "change": "-1" }],
+    "15499": [{ "var": "Segregation", "change": "+2" }],
+    "55689": [
+      { "var": "Segregation", "change": "-2" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "55695": [
+      { "var": "Segregation", "change": "+2" }, 
+      { "var": "Dixieland", "change": "+1" }
+    ],
+    "4378": [{ "var": "Gaffe", "change": "+1" }],
+    "4384": [{ "var": "Gaffe", "change": "+1" }],
+    "4390": [
+      { "var": "Gaffe", "change": "+1" }, 
+      { "var": "Dixieland", "change": "+1" }
+    ],
+    "4385": [{ "var": "Segregation", "change": "+1" }],
+    "4386": [{ "var": "Segregation", "change": "-1" }],
+    "15540": [{ "var": "NominationScore", "change": "+2" }],
+    "15545": [{ "var": "NominationScore", "change": "+2" }],
+    "15547": [
+      { "var": "NominationScore", "change": "+1" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "4394": [{ "var": "NominationScore", "change": "+1" }],
+    "4480": [{ "var": "NominationScore", "change": "+1" }],
+    "4481": [{ "var": "NominationScore", "change": "+1" }],
+    "4484": [
+      { "var": "NominationScore", "change": "-1" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "15506": [
+      { "var": "NominationScore", "change": "+2" }, 
+      { "var": "KlanAggravation", "change": "+1" }
+    ],
+    "55793": [{ "var": "TemptingFate", "change": "+1" }],
+    "55808": [{ "var": "TemptingFate", "change": "+1" }]
+  },
+  "1983": {
+    "5001": [{ "var": "haroldpoints", "change": "+1" }],
+    "5013": [{ "var": "haroldpoints", "change": "+1" }],
+    "5057": [{ "var": "haroldpoints", "change": "+1" }],
+    "5016": [{ "var": "haroldpoints", "change": "+1" }],
+    "5128": [{ "var": "haroldpoints", "change": "+1" }],
+    "5109": [{ "var": "haroldpoints", "change": "+1" }],
+    "5067": [{ "var": "haroldpoints", "change": "+1" }],
+    "5059": [{ "var": "haroldpoints", "change": "+1" }],
+    "1559944": [{ "var": "haroldpoints", "change": "+1" }],
+    "5018": [{ "var": "haroldpoints", "change": "+2" }],
+    "5056": [{ "var": "haroldpoints", "change": "+2" }],
+    "5058": [{ "var": "haroldpoints", "change": "+2" }],
+    "5004": [{ "var": "haroldpoints", "change": "-1" }],
+    "5127": [{ "var": "haroldpoints", "change": "-1" }],
+    "5069": [{ "var": "haroldpoints", "change": "-1" }],
+    "5104": [{ "var": "haroldpoints", "change": "-1" }],
+    "3559944": [{ "var": "haroldpoints", "change": "-1" }],
+    "5017": [{ "var": "jesse", "change": "+1" }],
+    "5108": [{ "var": "jesse", "change": "+1" }]
+  },
+  "2000-IL01": {
+    "12763": [{ "var": "nice", "change": "+1" }],
+    "12764": [{ "var": "nice", "change": "+1" }],
+    "12774": [{ "var": "nice", "change": "+1" }],
+    "12875": [{ "var": "nice", "change": "+1" }],
+    "128951": [{ "var": "nice", "change": "+1" }],
+    "12861": [{ "var": "nice", "change": "+1" }],
+    "12836": [{ "var": "nice", "change": "+1" }],
+    "12828": [{ "var": "nice", "change": "+1" }],
+    "12823": [{ "var": "nice", "change": "+1" }],
+    "12812": [{ "var": "nice", "change": "+1" }],
+    "12803": [{ "var": "nice", "change": "+1" }],
+    "128071": [{ "var": "nice", "change": "-5" }],
+    "127992": [{ "var": "nice", "change": "+1" }],
+    "12777": [{ "var": "nice", "change": "+1" }],
+    "12781": [{ "var": "primaryloss", "change": "+1" }]
+  }
+}
