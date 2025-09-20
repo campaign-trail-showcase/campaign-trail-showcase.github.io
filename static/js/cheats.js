@@ -2,27 +2,51 @@ let cheatsActive = false;
 
 // Most of this benefit checker stuff is adapted from NCT. Thanks!
 
+// fast lookup index for answer effects
+let _answerEffectsIndex = null;
+function buildAnswerEffectsIndex() {
+  _answerEffectsIndex = new Map();
+
+  const push = (type, arr) => {
+    if (!Array.isArray(arr)) return;
+    for (const item of arr) {
+      const ans = item?.fields?.answer;
+      if (ans == null) continue;
+      if (!_answerEffectsIndex.has(ans)) _answerEffectsIndex.set(ans, []);
+      _answerEffectsIndex.get(ans).push([type, item]);
+    }
+  };
+
+  try {
+    push("global", campaignTrail_temp?.answer_score_global_json);
+    push("state", campaignTrail_temp?.answer_score_state_json);
+    push("issue", campaignTrail_temp?.answer_score_issue_json);
+  } catch (_) {
+    // leave index null on failure; benefitCheck will fall back to scanning if needed
+  }
+}
+
 function benefitCheck(objectid) {
   const object =
     document.getElementById("question_form").children[0].children[objectid * 3];
-  const answerid = object.value;
-  const effects = [];
-
-  for (const item of campaignTrail_temp.answer_score_global_json) {
-    if (item.fields.answer == answerid) {
-      effects.push(["global", item]);
-    }
+  const answerid = Number(object.value);
+  let effects = [];
+  if (_answerEffectsIndex == null) {
+    // build once on first use
+    buildAnswerEffectsIndex();
   }
-
-  for (const item of campaignTrail_temp.answer_score_state_json) {
-    if (item.fields.answer == answerid) {
-      effects.push(["state", item]);
+  if (_answerEffectsIndex && _answerEffectsIndex.has(answerid)) {
+    effects = _answerEffectsIndex.get(answerid);
+  } else {
+    // fallback: scan arrays if index not available
+    for (const item of campaignTrail_temp.answer_score_global_json || []) {
+      if (item.fields.answer == answerid) effects.push(["global", item]);
     }
-  }
-
-  for (const item of campaignTrail_temp.answer_score_issue_json) {
-    if (item.fields.answer == answerid) {
-      effects.push(["issue", item]);
+    for (const item of campaignTrail_temp.answer_score_state_json || []) {
+      if (item.fields.answer == answerid) effects.push(["state", item]);
+    }
+    for (const item of campaignTrail_temp.answer_score_issue_json || []) {
+      if (item.fields.answer == answerid) effects.push(["issue", item]);
     }
   }
 
@@ -49,7 +73,7 @@ function benefitCheck(objectid) {
   let answerfeedback = "";
   for (
     let index = 0;
-    index < campaignTrail_temp.answer_feedback_json.length - 1;
+    index < (campaignTrail_temp.answer_feedback_json?.length || 0);
     index++
   ) {
     if (
@@ -60,21 +84,31 @@ function benefitCheck(objectid) {
     }
   }
 
-  return `<p><b>Answer: </b>'${findAnswer(answerid)[1]}'<br>Feedback: ${answerfeedback}'<br>${mods}</p><br><br>`;
+  return `<p><b>Answer: </b>'${findAnswer(answerid)[1]}'<br>Feedback: ${answerfeedback}<br>${mods}</p><br><br>`;
 }
 
 let benefitCheckAlreadyActivated = false;
+let benefitCheckerEnabled = false;
 function activateBenefitCheck() {
   if (benefitCheckAlreadyActivated) {
+    // ensure it's turned on and observing if re-invoked
+    benefitCheckerEnabled = true;
+    showBenefitChecker();
+    startBenefitObserver();
+    // render once immediately in case the DOM is already ready
+    try { benefitChecker(); } catch (_) {}
     return;
   }
   benefitCheckAlreadyActivated = true;
   cheatsActive = true;
   const benefitWindow = document.getElementById("benefitwindow");
-  benefitWindow.style.display =
-    benefitWindow.style.display != "none" ? "none" : "block";
-  document.getElementById("showBenefitCheckButton").style.display =
-    "inline-block";
+  if (benefitWindow) benefitWindow.style.display = "block";
+  const showBtn = document.getElementById("showBenefitCheckButton");
+  if (showBtn) showBtn.style.display = "inline-block";
+  benefitCheckerEnabled = true;
+  startBenefitObserver();
+  // render once immediately to populate the window
+  try { benefitChecker(); } catch (_) {}
 }
 
 let cheatMenuAlreadyActivated = false;
@@ -111,45 +145,71 @@ function activateCheatMenu() {
 
 function benefitChecker() {
   try {
-    questionlength =
-      document.getElementById("question_form").children[0].children.length / 3;
+    const formEl = document.querySelector("#question_form > form");
+    if (!formEl) return;
+    const questionlength = formEl.length;
     let content = "";
-    for (v = 0; v < questionlength; v++) {
-      let benefitResult = benefitCheck(v);
-      content += benefitResult;
+    for (let v = 0; v < questionlength; v++) {
+      content += benefitCheck(v);
     }
 
-    content += "<br>Benefit Checker code partially adapted from NCT`";
+    content += "<br>Benefit Checker code partially adapted from NCT";
 
     const benefitContent = document.getElementById("benefitcontent");
-    benefitContent.innerHTML = content;
+    if (benefitContent) benefitContent.innerHTML = content;
   } catch {}
 }
 
 function hideBenefitChecker() {
   const benefitWindow = document.getElementById("benefitwindow");
   benefitWindow.style.display = "none";
+  stopBenefitObserver();
 }
 
 function showBenefitChecker() {
   const benefitWindow = document.getElementById("benefitwindow");
   benefitWindow.style.display = "block";
+  if (benefitCheckerEnabled) startBenefitObserver();
+  try { benefitChecker(); } catch (_) {}
 }
 
 const targetNode = document.getElementById("game_window");
 const config = { attributes: true, childList: true, subtree: true };
 
-function onGameWindowChanged(mutationList, observer) {
-  benefitChecker();
+let benefitObserver = null;
+let benefitRenderScheduled = false;
+function renderBenefitChecker(mutationList, observer) {
+  if (!benefitCheckerEnabled) return;
+  const benefitWindow = document.getElementById("benefitwindow");
+  if (!benefitWindow || benefitWindow.style.display === "none") return;
+  if (benefitRenderScheduled) return;
+  benefitRenderScheduled = true;
+  requestAnimationFrame(() => {
+    benefitRenderScheduled = false;
+    benefitChecker();
+  });
 }
 
-const observer = new MutationObserver(onGameWindowChanged);
-observer.observe(targetNode, config);
+function startBenefitObserver() {
+  if (benefitObserver) return;
+  if (!targetNode) return;
+  benefitObserver = new MutationObserver(renderBenefitChecker);
+  benefitObserver.observe(targetNode, config);
+}
+
+function stopBenefitObserver() {
+  if (!benefitObserver) return;
+  benefitObserver.disconnect();
+  benefitObserver = null;
+}
 
 // https://www.w3schools.com/howto/howto_js_draggable.asp
 
 // Make the DIV element draggable:
-dragElement(document.getElementById("benefitwindow"));
+(() => {
+  const bw = document.getElementById("benefitwindow");
+  if (bw) dragElement(bw);
+})();
 
 function dragElement(elmnt) {
   var pos1 = 0,

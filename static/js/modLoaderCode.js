@@ -236,6 +236,7 @@ function mixColor(hex, mixWith, percent) {
   let b = Math.round(b1 * (1 - percent) + b2 * percent);
   return rgbToHex(r, g, b);
 }
+
 function getContrastRatio(hex1, hex2) {
   // so we can calculate the contrast ratio between two hex colors (WCAG) 
   function luminance([r, g, b]) {
@@ -251,6 +252,39 @@ function getContrastRatio(hex1, hex2) {
   let darkest = Math.min(lum1, lum2);
   return (brightest + 0.05) / (darkest + 0.05);
 }
+
+function adjustThemeContrast(themeBaseColor, themeTextColor) {
+  let ratio = getContrastRatio(themeBaseColor, themeTextColor);
+  let tries = 0;
+
+  while (ratio < 4.5 && tries < 5) {
+    if (themeBaseColor=== '#fff') {
+      themeBaseColor = mixColor(themeBaseColor, '#000', 0.2);
+    } else {
+      themeBaseColor = mixColor(themeBaseColor, '#fff', 0.2);
+    }
+    const contrastWhite2 = getContrastRatio(themeBaseColor, '#fff');
+    const contrastBlack2 = getContrastRatio(themeBaseColor, '#222');
+    themeTextColor = contrastWhite2 > contrastBlack2 ? '#fff' : '#222';
+    ratio = getContrastRatio(themeBaseColor, themeTextColor);
+    tries++;
+  }
+
+  return {themeBaseColor, themeTextColor};
+}
+
+function lightenDarkenContrast(themeBaseColor, themeTextColor) {
+  let lum = getContrastRatio(themeBaseColor, '#fff');
+  if (themeTextColor === '#222' && lum < 2.5) {
+    themeBaseColor = mixColor(themeBaseColor, '#fff', 0.3);
+    themeTextColor = getContrastYIQ(themeBaseColor);
+  } else if (themeTextColor === '#fff' && lum > 6) {
+    themeBaseColor = mixColor(themeBaseColor, '#000', 0.3);
+    themeTextColor = getContrastYIQ(themeBaseColor);
+  }
+  return { themeBaseColor, themeTextColor };
+}
+
 function ensureThemeContrast(theme) {
   if (theme._isFallback) {
     // adjust text color for header contrast
@@ -258,78 +292,43 @@ function ensureThemeContrast(theme) {
       const contrastWhite = getContrastRatio(theme.header_color, '#fff');
       const contrastBlack = getContrastRatio(theme.header_color, '#222');
       theme.header_text_color = contrastWhite > contrastBlack ? '#fff' : '#222';
-      let ratio = getContrastRatio(theme.header_color, theme.header_text_color);
-      let tries = 0;
-      while (ratio < 4.5 && tries < 5) {
-        if (theme.header_text_color === '#fff') {
-          theme.header_color = mixColor(theme.header_color, '#000', 0.2);
-        } else {
-          theme.header_color = mixColor(theme.header_color, '#fff', 0.2);
-        }
-        const contrastWhite2 = getContrastRatio(theme.header_color, '#fff');
-        const contrastBlack2 = getContrastRatio(theme.header_color, '#222');
-        theme.header_text_color = contrastWhite2 > contrastBlack2 ? '#fff' : '#222';
-        ratio = getContrastRatio(theme.header_color, theme.header_text_color);
-        tries++;
-      }
+      
+      const { themeBaseColor, themeTextColor } = adjustThemeContrast(
+        theme.header_color,theme.header_text_color
+      );
+
+      theme.header_color = themeBaseColor;
+      theme.header_text_color = themeTextColor;
     }
     // adjust text color for description contrast
     if (theme.description_background_color) {
       const contrastWhite = getContrastRatio(theme.description_background_color, '#fff');
       const contrastBlack = getContrastRatio(theme.description_background_color, '#222');
       theme.description_text_color = contrastWhite > contrastBlack ? '#fff' : '#222';
-      let ratio = getContrastRatio(theme.description_background_color, theme.description_text_color);
-      let tries = 0;
-      while (ratio < 4.5 && tries < 5) {
-        if (theme.description_text_color === '#fff') {
-          theme.description_background_color = mixColor(theme.description_background_color, '#000', 0.2);
-        } else {
-          theme.description_background_color = mixColor(theme.description_background_color, '#fff', 0.2);
-        }
-        const contrastWhite2 = getContrastRatio(theme.description_background_color, '#fff');
-        const contrastBlack2 = getContrastRatio(theme.description_background_color, '#222');
-        theme.description_text_color = contrastWhite2 > contrastBlack2 ? '#fff' : '#222';
-        ratio = getContrastRatio(theme.description_background_color, theme.description_text_color);
-        tries++;
-      }
+
+      const { themeBaseColor, themeTextColor } = adjustThemeContrast(
+        theme.description_background_color,theme.description_text_color
+      );
+
       // for mod description backgrounds; we lighten/darken based on text color
-      let lum = getContrastRatio(theme.description_background_color, '#fff');
-      if (theme.description_text_color === '#222' && lum < 2.5) {
-        theme.description_background_color = mixColor(theme.description_background_color, '#fff', 0.3);
-        theme.description_text_color = getContrastYIQ(theme.description_background_color);
-      } else if (theme.description_text_color === '#fff' && lum > 6) {
-        theme.description_background_color = mixColor(theme.description_background_color, '#000', 0.3);
-        theme.description_text_color = getContrastYIQ(theme.description_background_color);
-      }
+      const finalContrast = lightenDarkenContrast(themeBaseColor, themeTextColor);
+      theme.description_background_color = finalContrast.themeBaseColor;
+      theme.description_text_color = finalContrast.themeTextColor;
     }
     // adjust text color for secondary contrast
     if (theme.secondary_color) {
       const contrastWhite = getContrastRatio(theme.secondary_color, '#fff');
       const contrastBlack = getContrastRatio(theme.secondary_color, '#222');
       theme.ui_text_color = contrastWhite > contrastBlack ? '#fff' : '#000';
-      let ratio = getContrastRatio(theme.secondary_color, theme.ui_text_color);
-      let tries = 0;
-      while (ratio < 4.5 && tries < 5) {
-        if (theme.ui_text_color === '#fff') {
-          theme.secondary_color = mixColor(theme.secondary_color, '#000', 0.2);
-        } else {
-          theme.secondary_color = mixColor(theme.secondary_color, '#fff', 0.2);
-        }
-        const contrastWhite2 = getContrastRatio(theme.secondary_color, '#fff');
-        const contrastBlack2 = getContrastRatio(theme.secondary_color, '#222');
-        theme.ui_text_color = contrastWhite2 > contrastBlack2 ? '#fff' : '#000';
-        ratio = getContrastRatio(theme.secondary_color, theme.ui_text_color);
-        tries++;
-      }
+
+      const { themeBaseColor, themeTextColor } = adjustThemeContrast(
+        theme.secondary_color,theme.ui_text_color
+      );
+
       // for secondary colors; we lighten/darken based on text color
-      let lum = getContrastRatio(theme.secondary_color, '#fff');
-      if (theme.ui_text_color === '#222' && lum < 2.5) {
-        theme.secondary_color = mixColor(theme.secondary_color, '#fff', 0.3);
-        theme.ui_text_color = getContrastYIQ(theme.secondary_color);
-      } else if (theme.ui_text_color === '#fff' && lum > 6) {
-        theme.secondary_color = mixColor(theme.secondary_color, '#000', 0.3);
-        theme.ui_text_color = getContrastYIQ(theme.secondary_color);
-      }
+      const finalContrast = lightenDarkenContrast(themeBaseColor, themeTextColor);
+      theme.secondary_color = finalContrast.themeBaseColor;
+      theme.ui_text_color = finalContrast.themeTextColor;
     }
   }
 }
@@ -654,7 +653,7 @@ $(document).ready(async () => {
 
   // Set up from normal mods
   const modPromises = Array.from(mods).map(async (mod) => {
-    // MODIFICADO: lógica para carregar ambos os mods quando necessário
+    // MODIFIED: logic to load both mods when needed
     if (
       mod.value === "other" ||
       ( // Special case for DSA because it uses two code 1s to define achievements. So we need to load both of those to get both sets.
