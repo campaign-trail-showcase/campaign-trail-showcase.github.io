@@ -6,11 +6,6 @@ async function activateAnswerTooltip() {
     const modUrl = new URLSearchParams(window.location.search);
     const modName = modUrl.get("modName");
 
-    if (!modName) {
-        alert("Mod doesn't have variables or it hasn't been added to answer hover yet!");
-        return;
-    }
-
     answerTooltipActive = !answerTooltipActive;
     console.log("Answer hover is", answerTooltipActive ? "ON" : "OFF");
     if (!answerTooltipActive) return; 
