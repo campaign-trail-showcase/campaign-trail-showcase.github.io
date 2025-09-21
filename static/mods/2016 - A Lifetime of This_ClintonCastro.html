@@ -599,7 +599,7 @@ campaignTrail_temp.answers_json = [
         "pk": 5184,
         "fields": {
             "question": 1055,
-            "description": "Uh-duh. Bill’s still got it — the charm, the command of policy, that ability to make anyone feel heard… his approval’s through the roof. Like, wow, he has the approval rating of He’ll behave this time, he promised me. Plus, the economy was actually good under him, unlike during Bush…"
+            "description": "Uh-duh. Bill’s still got it — the charm, the command of policy, that ability to make anyone feel heard… his approval’s through the roof. Like, wow, he has the approval rating of Jesus or something. He’ll behave this time, he promised me. Plus, the economy was actually good under him, unlike during Bush…"
         }
     },
     {
@@ -15895,6 +15895,8 @@ function closeOverlay(overlay) {
 // This is for the squeaky clean no swearing option, if enabled
 (function () {
   if (typeof window === "undefined") return;
+
+  function initializeSqueakyClean() {
   const GAME_WINDOW_ID = "game_window";
   const UI_WRAPPER_ID = "squeaky_clean_wrapper"; // don't touch anything inside this element for the love of God
   const SCHEDULE_DEBOUNCE_MS = 100;
@@ -16059,7 +16061,7 @@ function closeOverlay(overlay) {
     }, SCHEDULE_DEBOUNCE_MS);
   }
 
-  const observr = new MutationObserver((mutationsList) => {
+  const observer = new MutationObserver((mutationsList) => {
     if (!window.campaignTrail_temp?.squeaky_clean_mode) return;
     // if we are currently applying changes ourselves, bail out (guard)
     if (_applyingSqueaky) return;
@@ -16098,30 +16100,36 @@ function closeOverlay(overlay) {
   // when enabling, run an immediate pass
   window.enableSqueakyClean = function (enabled) {
     if (!window.campaignTrail_temp) window.campaignTrail_temp = {};
-    campaignTrail_temp.squeaky_clean_mode = Boolean(enabled);
+    window.campaignTrail_temp.squeaky_clean_mode = Boolean(enabled);
     if (enabled) {
-      // run one immediate pass
-      if (_applyingSqueaky) return;
-      _applyingSqueaky = true;
-      try {
-        applySqueakyClean(document.getElementById(GAME_WINDOW_ID));
-      } finally {
-        _applyingSqueaky = false;
+        // run one immediate pass
+        if (_applyingSqueaky) return;
+        _applyingSqueaky = true;
+        try {
+          applySqueakyClean(document.getElementById(GAME_WINDOW_ID));
+        } finally {
+          _applyingSqueaky = false;
+        }
       }
-    }
-  };
+    };
 
-  // allow other modules to sanitize strings before injecting them into DOM
-  window.replaceSwearsInText = replaceSwearsInText;
+    // allow other modules to sanitize strings before injecting them into DOM
+    window.replaceSwearsInText = replaceSwearsInText;
 
-  // export a small helper
-  window._squeakyCleanUtils = {
-    applyToRoot: applySqueakyClean,
-    isEnabled: () => Boolean(window.campaignTrail_temp?.squeaky_clean_mode),
-  };
+    // export a small helper
+    window._squeakyCleanUtils = {
+      applyToRoot: applySqueakyClean,
+      isEnabled: () => Boolean(window.campaignTrail_temp?.squeaky_clean_mode),
+    };
+  }
+  
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', initializeSqueakyClean);
+  } else {
+    initializeSqueakyClean();
+  }
+  
 })();
-
-
 
 // This is fairly similar to the ending loader used in Things That Never Were.
 // Well, I don't know if it was developed for that mod or not, but I took inspiration
@@ -17752,12 +17760,12 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
         { title: "You Have Been Loved", artist: "George Michael", coverLink: "https://i.discogs.com/XDh2r_xwLYty258j7oROTAqxqCLtj65gwRLGY_v6dV8/rs:fit/g:sm/q:90/h:538/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQzMzE3/OS0xNDcxMzkwMTIw/LTU5MjAuanBlZw.jpeg", videoIds: ["SXRz-ZT0MIE"] }
     ];
     const PLAYLIST_TWO_DATA = [
-        { title: "Stronger Than Me", artist: "Amy Winehouse", coverLink: "https://lh3.googleusercontent.com/ERQwzDcTEBrcy8aUU0s-NcYnbcgJOu_-BwBB-A4Z_nRrtbfS2BhMqTovWvLSIfjAtJD_RERUokB2ze_-=w544-h544-l90-rj", videoIds: ["eQpINcpE-Wo"] },
+        { title: "Stronger Than Me", artist: "Amy Winehouse", coverLink: "https://lh3.googleusercontent.com/ERQwzDcTEBrcy8aUU0s-NcYnbcgJOu_-BwBB-A4Z_nRrtbfS2BhMqTovWvLSIfjAtJD_RERUokB2ze_-=w544-h544-l90-rj", videoIds: ["eQpINcpE-Wo", "6N6IjW-2fb4"] },
 		{ title: "We Don’t Have That Much Time Together", artist: "Sananda Maitreya", coverLink: "https://lh3.googleusercontent.com/vhd98YlgS1Sh4FCmoJ3e2zi4eyAnOtKjp-aiNpcxJ94eYA-VAzAUMPwuQ1aI_MctD18JXtdPP8Rky0tj_g=w544-h544-l90-rj", videoIds: ["Et6Grrm1OLk"] },
 		{ title: "Sappy (1990 Studio Demo)", artist: "Nirvana", coverLink: "https://lh3.googleusercontent.com/aUSTL4p5gGFiKesMYQnYLqqQ8534TVY9A0A-4IbrZgGBVDKAmLbHsO2VFBYAhXDyDHa0hh2Ozs9FgyPF9A=w544-h544-s-l90-rj", videoIds: ["1MjAZSEprQU"] },
 		{ title: "Millennium", artist: "Robbie Williams", coverLink: "https://lh3.googleusercontent.com/eXVDuIRMQKHl6uyR-nWf3yLDfSD5rWNPh0bUMu0OdCn6ZlyOdLen3HyrmJGtCTWnY04WUvivct4YVNI=w544-h544-l90-rj", videoIds: ["sGDzkz3rKV4"] },
 		{ title: "Heaven Can Wait", artist: "Michael Jackson", coverLink: "https://i.discogs.com/2RH0GWmw-gLbNTQ-GTImSYuLLZvJOFA2AkJu8A7mylc/rs:fit/g:sm/q:90/h:592/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM0NTM2/MTEtMTQ0MDYwODM5/My02MDA5LmpwZWc.jpeg", videoIds: ["8Gl9h5FZdxk"] },
-		{ title: "Kid Who Stays in the Picture", artist: "Hot Hot Heat", coverLink: "https://lh3.googleusercontent.com/0mSHh8MlTKSq1LfjThZa4DRqGtLXCNetxH_lFlbPPOUlcoKRysPW_kb1YicROxpes3uNTu0ZYegCMMut=w544-h544-l90-rj", videoIds: ["xyBCenRonTc"] },
+		{ title: "Kid Who Stays in the Picture", artist: "Hot Hot Heat", coverLink: "https://lh3.googleusercontent.com/0mSHh8MlTKSq1LfjThZa4DRqGtLXCNetxH_lFlbPPOUlcoKRysPW_kb1YicROxpes3uNTu0ZYegCMMut=w544-h544-l90-rj", videoIds: ["xyBCenRonTc", "fOn3WjSIcMY"] },
 		{ title: "Traveling at the Speed of Light", artist: "Joywave", coverLink: "https://lh3.googleusercontent.com/1Yqi0xIJndmpKyyQfkhswNMuFaVjENQr_yMj0uR6oi-LA-iQX-DrS5sPBJ02b6qUUHhESfmjaExLLF4k=w544-h544-l90-rj", videoIds: ["yZAj7LZh8fs"] },
 		{ title: "Numb", artist: "Linkin Park", coverLink: "https://lh3.googleusercontent.com/Rqh2HDAD-Fj1-oHYqVklPGklMHIV3r6SMPMZmFE3FlLiWeBBnP3SCESfgeNdzQ-DmpCIvOGE4J0hzVxa=w544-h544-s-l90-rj", videoIds: ["dxp9w9Ggehc"] },
         { title: "I Might Be Wrong", artist: "Radiohead", coverLink: "https://lh3.googleusercontent.com/IztVMgq0rRLUhtQa6IxD4Vx145SQYQjnUQtuSHUl12b4B6Oyf-e-M0S1lrtIBnXCQFSeNABeanlxcdk=w544-h544-l90-rj", videoIds: ["_Qvlh_dvmkk"] },
@@ -17770,7 +17778,7 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 		{ title: "Blessed State", artist: "The Wire", coverLink: "https://lh3.googleusercontent.com/Neurxtu-LF58Br8vc2I-VHFnPLKW8JqhZpW9Hdq11diLALnwTTMJ1-qQ03-kRcAtxa_31Ymu5JJG5ps=w544-h544-l90-rj", videoIds: ["LeCI9kww3Dk"] },
 		{ title: "Sleep Apnea", artist: "Beach Fossils", coverLink: "https://a2.cdn.hhv.de/items/images/generated/475x475/01054/1054978/1-beach-fossils-clash-the-truth-demos-colored-vinyl-edition.webp", videoIds: ["nuvJSl24wAw"] },
 		{ title: "Dream a Little Dream of Me", artist: "Michael Bublé", coverLink: "https://lh3.googleusercontent.com/57IJIYVLm6YTr9a1Wly4WGffKj3kn3s-5JFxCJ7LkRPWT5hLVrV21LDaT0I-7l6-djgF7-71zWvQZcc=w544-h544-l90-rj", videoIds: ["0QgM7lNgFnA"] },
-        { title: "Humiliation", artist: "Yoñlu", coverLink: "https://lh3.googleusercontent.com/fecmzZxLj4SvYNp-6e5TrbLoWFqkIsmnJz0Z41CmHFClnoCHCBE3Wpn4Obg0aubsCzomD01OWASsPK-inw=w544-h544-l90-rj", videoIds: ["uQH85xHXnYQ"] },
+        { title: "Humiliation", artist: "Yoñlu", coverLink: "https://lh3.googleusercontent.com/fecmzZxLj4SvYNp-6e5TrbLoWFqkIsmnJz0Z41CmHFClnoCHCBE3Wpn4Obg0aubsCzomD01OWASsPK-inw=w544-h544-l90-rj", videoIds: ["uQH85xHXnYQ", "6o1iNoUZdwI", "kQJSehvmen0"] },
     ];
     const PLAYLIST_THREE_DATA = [
         { title: "Someday Is Tonight", artist: "Janet Jackson", coverLink: "https://lh3.googleusercontent.com/LjZePM9GvoVF88nE4UKJvpH71-yXHGKsGnmt77imOV6bth_6E3pAlnQizYYDgX1Fl9j7k6vzHw0OPTkP=w544-h544-l90-rj", videoIds: ["jHoP9UACqaQ", "PEFLGA6zFaQ"] },
