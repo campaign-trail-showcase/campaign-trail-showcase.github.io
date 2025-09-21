@@ -10088,7 +10088,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 20736,
             "candidate": 201,
-            "answer_feedback": "Oprah does help mitigate the damage from this, but "
+            "answer_feedback": "Oprah does help mitigate the damage from this and defends you publicly, but you are still hurt by this."
         }
     }
 ]
