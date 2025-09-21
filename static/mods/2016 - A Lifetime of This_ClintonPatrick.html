@@ -15895,6 +15895,8 @@ function closeOverlay(overlay) {
 // This is for the squeaky clean no swearing option, if enabled
 (function () {
   if (typeof window === "undefined") return;
+
+  function initializeSqueakyClean() {
   const GAME_WINDOW_ID = "game_window";
   const UI_WRAPPER_ID = "squeaky_clean_wrapper"; // don't touch anything inside this element for the love of God
   const SCHEDULE_DEBOUNCE_MS = 100;
@@ -16098,30 +16100,36 @@ function closeOverlay(overlay) {
   // when enabling, run an immediate pass
   window.enableSqueakyClean = function (enabled) {
     if (!window.campaignTrail_temp) window.campaignTrail_temp = {};
-    campaignTrail_temp.squeaky_clean_mode = Boolean(enabled);
+    window.campaignTrail_temp.squeaky_clean_mode = Boolean(enabled);
     if (enabled) {
-      // run one immediate pass
-      if (_applyingSqueaky) return;
-      _applyingSqueaky = true;
-      try {
-        applySqueakyClean(document.getElementById(GAME_WINDOW_ID));
-      } finally {
-        _applyingSqueaky = false;
+        // run one immediate pass
+        if (_applyingSqueaky) return;
+        _applyingSqueaky = true;
+        try {
+          applySqueakyClean(document.getElementById(GAME_WINDOW_ID));
+        } finally {
+          _applyingSqueaky = false;
+        }
       }
-    }
-  };
+    };
 
-  // allow other modules to sanitize strings before injecting them into DOM
-  window.replaceSwearsInText = replaceSwearsInText;
+    // allow other modules to sanitize strings before injecting them into DOM
+    window.replaceSwearsInText = replaceSwearsInText;
 
-  // export a small helper
-  window._squeakyCleanUtils = {
-    applyToRoot: applySqueakyClean,
-    isEnabled: () => Boolean(window.campaignTrail_temp?.squeaky_clean_mode),
-  };
+    // export a small helper
+    window._squeakyCleanUtils = {
+      applyToRoot: applySqueakyClean,
+      isEnabled: () => Boolean(window.campaignTrail_temp?.squeaky_clean_mode),
+    };
+  }
+  
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', initializeSqueakyClean);
+  } else {
+    initializeSqueakyClean();
+  }
+  
 })();
-
-
 
 // This is fairly similar to the ending loader used in Things That Never Were.
 // Well, I don't know if it was developed for that mod or not, but I took inspiration
