@@ -9989,7 +9989,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 5225,
             "candidate": 201,
-            "answer_feedback": "It may have been an off-the-cuff statement, but it has erupted onto the headlines, likely to your detriment."
+            "answer_feedback": "Your rallies go off without a hitch."
         }
     },
     {
