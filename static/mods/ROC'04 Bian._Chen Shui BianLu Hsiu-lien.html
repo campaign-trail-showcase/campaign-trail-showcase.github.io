@@ -1,8 +1,19 @@
 e=campaignTrail_temp // this is redundant, but Decstar uses this because it looks nicer in the code.
 campaignTrail_temp.multiple_endings=true
 campaignTrail_temp.cyoa = true
+// ✅ 终极简洁：陈水扁难度调整
+if(campaignTrail_temp.candidate_id===67){
+    // 所有难度基础调整
+    let mult=1.0;
+    if(campaignTrail_temp.difficulty_level_multiplier>1)mult=0.83;  // 容易难度×0.9
+    if(campaignTrail_temp.difficulty_level_multiplier<1)mult=0.79; // 困难难度×0.85
+    if(campaignTrail_temp.difficulty_level_multiplier<0.8)mult=0.74; // 地狱难度×0.75
+    
+    campaignTrail_temp.difficulty_level_multiplier*=mult;
+    console.log("陈水扁调整:",mult);
+}
 
-function ctsAchievement(achievement, difficultyChecker = true){
+function ctsAchievement(achievement, difficultyChecker = true) {
 	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier <= 1)||!difficultyChecker)
 		if(campaignTrail_temp.CTS){
 		unlockAchievement(achievement);
@@ -4696,7 +4707,6 @@ campaignTrail_temp.running_mate_issue_score_json = [
         }
         }
     ]
-
 campaignTrail_temp.candidate_state_multiplier_json = [
        //台南市
        {
@@ -4705,7 +4715,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 67,
             "state": 251,
-            "state_multiplier": 0.38
+            "state_multiplier": 0.37
         }
     },
     {
@@ -4714,7 +4724,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 68,
             "state": 251,
-            "state_multiplier": 0.38
+            "state_multiplier": 0.36
         }
     },
 
@@ -4725,7 +4735,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 67,
             "state": 256,
-            "state_multiplier": 0.35
+            "state_multiplier": 0.37
         }
     },
     {
@@ -4734,7 +4744,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 68,
             "state": 256,
-            "state_multiplier": 0.38
+            "state_multiplier": 0.35
         }
     },
       //花莲县
@@ -4744,7 +4754,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 67,
             "state": 255,
-            "state_multiplier": 0.35
+            "state_multiplier": 0.36
         }
     },
     {
@@ -4763,7 +4773,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 67,
             "state": 253,
-            "state_multiplier": 0.38
+            "state_multiplier": 0.36
         }
     },
     {
@@ -4772,7 +4782,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 68,
             "state": 253,
-            "state_multiplier": 0.34
+            "state_multiplier": 0.35
         }
     },
     //高雄
@@ -4782,7 +4792,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 67,
             "state": 252,
-            "state_multiplier": 0.37
+            "state_multiplier": 0.36
         }
     },
     {
@@ -4801,7 +4811,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
       "fields": {
           "candidate": 67,
           "state": 200403,
-          "state_multiplier": 0.37
+          "state_multiplier": 0.36
       }
   },
   {
@@ -4830,7 +4840,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 68,
             "state": 200401,
-            "state_multiplier": 0.33
+            "state_multiplier": 0.35
         }
     },
        //台南县
@@ -4840,7 +4850,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 67,
             "state": 200402,
-            "state_multiplier": 0.32
+            "state_multiplier": 0.36
         }
     },
     {
@@ -4849,7 +4859,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 68,
             "state": 200402,
-            "state_multiplier": 0.38
+            "state_multiplier": 0.33
         }
     },
     //台东
@@ -4859,7 +4869,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 67,
             "state": 254,
-            "state_multiplier": 0.36
+            "state_multiplier": 0.35
         }
     },
     {
@@ -4878,7 +4888,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
             "fields": {
                 "candidate": 67,
                 "state": 257,
-                "state_multiplier": 0.37
+                "state_multiplier": 0.36
             }
         },
         {
@@ -4898,7 +4908,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                     "fields": {
                         "candidate": 67,
                         "state": 258,
-                        "state_multiplier": 0.37
+                        "state_multiplier": 0.36
                     }
                 },
                 {
@@ -4907,7 +4917,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                     "fields": {
                         "candidate": 68,
                         "state": 258,
-                        "state_multiplier": 0.33
+                        "state_multiplier": 0.34
                     }
                 },
               
@@ -4918,7 +4928,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                     "fields": {
                         "candidate": 67,
                         "state": 260,
-                        "state_multiplier": 0.3755
+                        "state_multiplier": 0.38
                     }
                 },
                 {
@@ -4978,7 +4988,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                     "fields": {
                         "candidate": 67,
                         "state": 262,
-                        "state_multiplier": 0.375
+                        "state_multiplier": 0.36
                     }
                 },
                 {
@@ -4998,7 +5008,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                     "fields": {
                         "candidate": 67,
                         "state": 264,
-                        "state_multiplier": 0.38
+                        "state_multiplier": 0.36
                     }
                 },
                 {
@@ -5018,7 +5028,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                     "fields": {
                         "candidate": 67,
                         "state": 265,
-                        "state_multiplier": 0.38
+                        "state_multiplier": 0.37
                     }
                 },
                 {
@@ -5038,7 +5048,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                     "fields": {
                         "candidate": 67,
                         "state": 266,
-                        "state_multiplier": 0.38
+                        "state_multiplier": 0.37
                     }
                 },
                 {
@@ -5098,7 +5108,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                     "fields": {
                         "candidate": 67,
                         "state": 269,
-                        "state_multiplier": 0.37
+                        "state_multiplier": 0.35
                     }
                 },
                 {
@@ -5118,7 +5128,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                     "fields": {
                         "candidate": 67,
                         "state": 270,
-                        "state_multiplier": 0.37
+                        "state_multiplier": 0.35
                     }
                 },
                 {
@@ -5188,27 +5198,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                         "state": 272,
                         "state_multiplier": 0.6
                     }
-                },
-               
-                    //高雄县
-                    {
-                      "model": "campaign_trail.candidate_state_multiplier",
-                      "pk": 1958121,
-                      "fields": {
-                          "candidate": 67,
-                          "state": 200403,
-                          "state_multiplier": 0.37
-                      }
-                  },
-                  {
-                      "model": "campaign_trail.candidate_state_multiplier",
-                      "pk": 1958221,
-                      "fields": {
-                          "candidate": 68,
-                          "state": 200403,
-                          "state_multiplier": 0.38
-                      }
-                  }
+                }
 ]
 
 
@@ -15051,6 +15041,7 @@ function switcheroo4() {
     e.candidate_json[id].fields.last_name = "Lu Hsiu lien" 
 }
 cyoAdventure = function (a) {
+    if (campaignTrail_temp.player_answers.length === 0) return;
     ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
     e.noCounter += 1
     let pop_vote = e.current_results[0];
