@@ -5,6 +5,12 @@ function ctsAchievement(achievement, difficultyChecker = true){
 	}
 }
 
+campaignTrail_temp.cyoa = true;
+
+function getQuestionNumberFromPk(pk) {
+    return campaignTrail_temp.questions_json.map(q=>q.pk).indexOf(pk)-1;
+}
+		
 cyoAdventure = function (a) {
 ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 if (ans == 12383) {
@@ -315,7 +321,7 @@ campaignTrail_temp.answers_json = [
         "pk": 3331,
         "fields": {
             "question": 348,
-            "description": "I am personally opposed to abortion. If it passed Congress, I would sign a bill into law banning late term abortions. I am also in full support of the Hughes Amendment and would support similar legislation on this issue. Bill Clinton vetoing a bill banning \"partial-birth\" abortions just shows how radical the left has become."
+            "description": "I am personally opposed to abortion. If it passed Congress, I would sign a bill into law banning late term abortions. I am also in full support of the Hyde Amendment and would support similar legislation on this issue. Bill Clinton vetoing a bill banning \"partial-birth\" abortions just shows how radical the left has become."
         }
     },
     {
