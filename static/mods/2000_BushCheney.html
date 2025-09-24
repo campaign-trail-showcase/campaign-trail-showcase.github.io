@@ -1,3 +1,22 @@
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
+cyoAdventure = function (a) {
+ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
+if (ans == 12383) {
+        campaignTrail_temp.candidate_json[0]["fields"].last_name = "Trump";
+        campaignTrail_temp.candidate_image_url = 'https://i.imgur.com/Hr1NxYw.png'
+ }
+        
+if(ans == 12506) {
+ctsAchievement("Buchanan Land");
+    }
+}
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -1618,7 +1637,7 @@ campaignTrail_temp.issues_json = [
         "fields": {
             "name": "Clinton Opinion",
             "description": 0,
-            "stance_1": 0,
+            "stance_1": "Very Unpopular",
             "stance_desc_1": 0,
             "stance_2": "Unpopular",
             "stance_desc_2": 0,
@@ -10176,7 +10195,7 @@ campaignTrail_temp.jet_data = [{
             "operator": ">",
             "value": 0,
             "endingImage": "",
-            "endingText": "<h3>A Fresh Start</h3><p>Election Day was intense, to say the least. Al Gore had already secured several key states early in the evening, and pundits across several news networks said Gore had a clear path to victory. You and your team nervously watched as victory slipped further and further away from your grasp.<br><br>Then, something remarkable happened. As the night wore on, you edged out narrow wins in states like Colorado, Florida, and Nevada. The tallying stretches well into midnight. Finally, after a long night, it happens.. <i>George Bush, Governor of Texas, will become the 43rd President of the United States.</i> The adrenaline kicks in. You’ve never been this happy since Laura agreed to marry you. After hearing the news, she and you embrace each other. Gore calls you to concede the race. You two seemed to get along much better then you did during the debates. Your supporters are ecstatic with your victory. You're thankful to God, your dad, your wife, your brother, but most of all, the common, honest, hardworking Americans who made this possible. Democrats are already trying to fathom how they lost an election they were supposed to win. Many are already blaming Nader for throwing the election to you. You’ve won Republicans their first victory since your father more than a decade ago. Even though you (probably) didn't win the popular vote, you should still be proud of this victory. After 8 years of partisanship under President Clinton, it’s time for a fresh start. Good luck, President-elect Bush!</p>",
+            "endingText": "<h3>A Fresh Start</h3><div style=\"max-height: 200px; overflow-y: auto;\"><p>Election Day was intense, to say the least. Al Gore had already secured several key states early in the evening, and pundits across several news networks said Gore had a clear path to victory. You and your team nervously watched as victory slipped further and further away from your grasp.<br><br>Then, something remarkable happened. As the night wore on, you edged out narrow wins in states like Colorado, Florida, and Nevada. The tallying stretches well into midnight. Finally, after a long night, it happens.. <i>George Bush, Governor of Texas, will become the 43rd President of the United States.</i> The adrenaline kicks in. You’ve never been this happy since Laura agreed to marry you. After hearing the news, she and you embrace each other. Gore calls you to concede the race. You two seemed to get along much better then you did during the debates. Your supporters are ecstatic with your victory. You're thankful to God, your dad, your wife, your brother, but most of all, the common, honest, hardworking Americans who made this possible. Democrats are already trying to fathom how they lost an election they were supposed to win. Many are already blaming Nader for throwing the election to you. You’ve won Republicans their first victory since your father more than a decade ago. Even though you (probably) didn't win the popular vote, you should still be proud of this victory. After 8 years of partisanship under President Clinton, it’s time for a fresh start. Good luck, President-elect Bush!</p>",
             "amount": "269"
         },
         "1751136476887": {
