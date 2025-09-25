@@ -101,6 +101,8 @@
 
   let loadedGameData = null;
   let loadedModData = null;
+  let candidateMeta = { colors: {}, order: [] };
+  const stateNameCache = new Map();
 
   document.getElementById("load_game_data_btn").onclick = async function () {
     try {
@@ -145,58 +147,179 @@
     return defaultColors[idx % defaultColors.length];
   }
 
-  function renderOverallTable(data, candidateColors) {
-    let candidates = {};
-    let total_popular = 0;
-    let total_ev = 0;
-    data.results.forEach(stateRes => {
-      stateRes.results.forEach(res => {
-        if (!candidates[res.candidate_name]) {
-          candidates[res.candidate_name] = { popular_votes: 0, electoral_votes: 0 };
-        }
-        candidates[res.candidate_name].popular_votes += res.popular_votes;
-        candidates[res.candidate_name].electoral_votes += res.electoral_votes;
-        total_popular += res.popular_votes;
-        total_ev += res.electoral_votes;
-      });
-    });
-    let rows = `<table style="margin:auto;"><tr><th>Candidate</th><th>Popular Votes</th><th>Popular Vote %</th><th>Electoral Votes</th></tr>`;
-    for (const cand in candidates) {
-      const pop = candidates[cand].popular_votes;
-      const ev = candidates[cand].electoral_votes;
-      const color = candidateColors[cand] || "#EAFDFF";
-      rows += `<tr>
-        <td style="text-align:left;">
-          <span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:${color};margin-right:6px;border:1px solid #aaa;vertical-align:middle;"></span>
-          ${cand}
-        </td>
-        <td>${formatNumber(pop)}</td>
-        <td>${((pop / total_popular) * 100).toFixed(2)}%</td>
-        <td>${ev}</td>
-      </tr>`;
+  function resolveStateName(abbr) {
+    if (!abbr) return "";
+    const upper = abbr.toUpperCase();
+    if (stateNameCache.has(upper)) return stateNameCache.get(upper);
+
+    let resolved = upper;
+    const statesSource = loadedModData && Array.isArray(loadedModData.states_json)
+      ? loadedModData.states_json
+      : null;
+
+    if (statesSource) {
+      const match = statesSource.find((s) => s.fields?.abbr === upper);
+      if (match?.fields?.name) resolved = match.fields.name;
     }
-    rows += "</table>";
-    return rows;
+
+    stateNameCache.set(upper, resolved);
+    return resolved;
   }
 
-  function renderStateTable(stateAbbr, candidateColors) {
-    let stateRes = loadedGameData.results.find(s => s.state === stateAbbr);
-    if (!stateRes) return;
-    let rows = `<table style="margin:auto;"><tr><th>Candidate</th><th>Popular Votes</th><th>Popular Vote %</th><th>Electoral Votes</th></tr>`;
-    stateRes.results.forEach(res => {
-      const color = candidateColors[res.candidate_name] || "#EAFDFF";
-      rows += `<tr>
-        <td style="text-align:left;">
-          <span style="display:inline-block;width:16px;height:16px;border-radius:4px;background:${color};margin-right:6px;border:1px solid #aaa;vertical-align:middle;"></span>
-          ${res.candidate_name}
-        </td>
-        <td>${formatNumber(res.popular_votes)}</td>
-        <td>${res.vote_percentage.toFixed(2)}%</td>
-        <td>${res.electoral_votes}</td>
-      </tr>`;
+  let viewStylesRegistered = false;
+  function ensureViewStyles() {
+    if (viewStylesRegistered) return;
+    const style = document.createElement("style");
+    style.id = "view-game-styles";
+    style.textContent = `
+      .result_panel{background-color:#F8F8F8;border:3px double #C9C9C9;padding:16px 20px;box-sizing:border-box;}
+      .results_overview{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;margin-bottom:24px;}
+      .results_map_panel{flex:1 1 720px;max-width:980px;}
+      .results_map_header{background-color:#E1EAEB;border-bottom:2px solid #C9C9C9;margin:-16px -20px 16px;padding:8px 0;font-weight:700;font-size:1.3em;text-align:center;}
+      .results_map_canvas{width:100%;height:260px;border:3px double #C9C9C9;background-color:#E8FBFF;margin:0 auto;}
+      .results_detail_row{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:24px;justify-content:center;}
+      .general_results_panel{flex:1 1 360px;max-width:420px;}
+      .state_results_panel{flex:1 1 460px;max-width:520px;}
+      .tab_content_box{display:block;background:#F8F8F8;border:3px double #C9C9C9;border-radius:12px;padding:20px;}
+      .state_results_controls{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:16px;}
+      .state_results_controls label{font-weight:700;display:flex;flex-direction:column;gap:6px;}
+      .state_results_controls select{min-width:180px;padding:4px;}
+      .state_results_card{display:inline-block;background:#FAFAFA;border:1px solid #C9C9C9;padding:16px 20px;}
+      .state_results_card h4{margin-top:0;margin-bottom:12px;text-align:center;}
+      .state_results_table{width:100%;background:#F9F9F9;}
+    `;
+    document.head.appendChild(style);
+    viewStylesRegistered = true;
+  }
+
+  function buildCandidateMeta(gameData) {
+    const meta = { order: [], colors: {} };
+    const overall = Array.isArray(gameData.overall_results) ? gameData.overall_results : [];
+    const colorLookup = new Map();
+
+    overall.forEach((entry) => {
+      if (!entry) return;
+      const name = entry.candidate_name || null;
+      if (name && !meta.order.includes(name)) meta.order.push(name);
+      if (name && entry.candidate_color) colorLookup.set(name, entry.candidate_color);
     });
-    rows += "</table>";
-    return rows;
+
+    if (Array.isArray(gameData.results)) {
+      gameData.results.forEach((stateRes) => {
+        stateRes.results.forEach((res) => {
+          if (res.candidate_name && !meta.order.includes(res.candidate_name)) {
+            meta.order.push(res.candidate_name);
+          }
+        });
+      });
+    }
+
+    meta.order.forEach((name, idx) => {
+      meta.colors[name] = colorLookup.get(name) || defaultColors[idx % defaultColors.length];
+    });
+
+    return meta;
+  }
+
+  function resolveCandidateColor(candidateName) {
+    if (!candidateName) return defaultColors[0];
+    if (!candidateMeta.order.includes(candidateName)) {
+      candidateMeta.order.push(candidateName);
+    }
+    if (!candidateMeta.colors[candidateName]) {
+      const idx = candidateMeta.order.indexOf(candidateName);
+      candidateMeta.colors[candidateName] = defaultColors[idx % defaultColors.length];
+    }
+    return candidateMeta.colors[candidateName];
+  }
+
+  function renderOverallTable(overallResults, containerId = "overall_vote_statistics") {
+    if (!Array.isArray(overallResults) || !overallResults.length) {
+      return "<em>No overall results available.</em>";
+    }
+
+    const totalPopular = overallResults.reduce(
+      (sum, cand) => sum + (cand.popular_votes || 0),
+      0,
+    );
+    const showEV = overallResults.some((cand) => (cand.electoral_votes || 0) > 0);
+
+    const rows = overallResults.map((cand) => {
+      const name = cand.candidate_name || "Unknown Candidate";
+      const color = resolveCandidateColor(name);
+      const popularVotes = formatNumber(cand.popular_votes || 0);
+      const percent = totalPopular
+        ? ((cand.popular_votes || 0) / totalPopular) * 100
+        : 0;
+      const evCell = showEV ? `<td>${cand.electoral_votes || 0}</td>` : "";
+
+      return `
+        <tr>
+          <td style="text-align:left;">
+            <span style="color:${color}; background-color:${color}">--</span> ${name}
+          </td>
+          ${evCell}
+          <td>${popularVotes}</td>
+          <td>${percent.toFixed(1)}%</td>
+        </tr>
+      `;
+    }).join("");
+
+    const containerAttr = containerId
+      ? `id="${containerId}"`
+      : 'class="overall_vote_statistics"';
+
+    return `
+      <div ${containerAttr}>
+        <table class="final_results_table">
+          <tr>
+            <th>Candidate</th>
+            ${showEV ? "<th>Electoral Votes</th>" : ""}
+            <th>Popular Votes</th>
+            <th>Popular Vote %</th>
+          </tr>
+          ${rows}
+        </table>
+      </div>
+    `;
+  }
+
+  function renderStateTable(stateAbbr) {
+    const stateRes = loadedGameData.results.find((s) => s.state === stateAbbr);
+    if (!stateRes || !Array.isArray(stateRes.results)) return "";
+
+    const showEV = stateRes.results.some((res) => res.electoral_votes);
+    const rows = stateRes.results.map((res) => {
+      const color = resolveCandidateColor(res.candidate_name);
+      const popularVotes = formatNumber(res.popular_votes || 0);
+      const percent = Number.isFinite(res.vote_percentage)
+        ? res.vote_percentage.toFixed(2)
+        : "0.00";
+      const evCell = showEV ? `<td>${res.electoral_votes}</td>` : "";
+
+      return `
+        <tr>
+          <td style="text-align:left;">
+            <span style="color:${color}; background-color:${color}">--</span> ${res.candidate_name}
+          </td>
+          ${evCell}
+          <td>${popularVotes}</td>
+          <td>${percent}%</td>
+        </tr>
+      `;
+    }).join("");
+
+    return `
+      <table class="final_results_table state_results_table">
+        <tr>
+          <th>Candidate</th>
+          ${showEV ? "<th>Electoral Votes</th>" : ""}
+          <th>Popular Votes</th>
+          <th>Popular Vote %</th>
+        </tr>
+        ${rows}
+      </table>
+    `;
   }
 
   function showGameResults() {
@@ -206,74 +329,62 @@
     }
     document.getElementById("game_res_title").innerHTML = "Game results:";
 
-    const candidateNames = [];
-    loadedGameData.results.forEach(stateRes => {
-      stateRes.results.forEach(res => {
-        if (!candidateNames.includes(res.candidate_name)) {
-          candidateNames.push(res.candidate_name);
-        }
-      });
-    });
-    const candidateColors = {};
-    candidateNames.forEach((name, idx) => {
-      let color = null;
-      if (loadedModData && loadedModData.candidate_json) {
-        let candObj = loadedModData.candidate_json.find(c => c.fields.first_name + " " + c.fields.last_name === name);
-        if (candObj) color = candObj.fields.color_hex;
-      }
-      candidateColors[name] = color || getDefaultCandidateColor(name, candidateNames);
-    });
+    ensureViewStyles();
+    stateNameCache.clear();
+    candidateMeta = buildCandidateMeta(loadedGameData);
 
-    let html = `
-      <div style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center;">
-        <div id="map_container" style="flex:1 1 350px;min-width:320px;max-width:480px;height:320px;"></div>
-        <div id="overall_table_container" style="flex:1 1 320px;min-width:280px;">
-          <h2 style="margin-bottom:8px;">General Results</h2>
-          ${renderOverallTable(loadedGameData, candidateColors)}
+    const generalTableHtml = renderOverallTable(loadedGameData.overall_results || [], null);
+    const closestOptions = candidateMeta.order
+      .map((cand, idx) => `<option value="${10 + idx}">Closest ${cand} Wins</option>`)
+      .join("");
+    const highestOptions = candidateMeta.order
+      .map((cand, idx) => `<option value="${20 + idx}">Highest ${cand} %</option>`)
+      .join("");
+
+    const html = `
+      <div class="results_overview">
+        <div class="results_map_panel result_panel">
+          <div class="results_map_header">ELECTORAL OVERVIEW</div>
+          <div id="map_container" class="results_map_canvas" style="height:260px;"></div>
         </div>
       </div>
-      <div style="margin-top:32px;display:flex;justify-content:center;">
-        <div id="results_tabs" style="display:flex;gap:0;">
-          <button id="tab_general" class="tab-btn" style="padding:10px 32px;border:1px solid #bbb;border-bottom:none;border-radius:12px 12px 0 0;background:#eafdfd;cursor:pointer;font-size:1.1em;margin-right:2px;" onclick="activateResultsTab('general')">General Results</button>
-          <button id="tab_states" class="tab-btn" style="padding:10px 32px;border:1px solid #bbb;border-bottom:none;border-radius:12px 12px 0 0;background:#f4f4f8;cursor:pointer;font-size:1.1em;" onclick="activateResultsTab('states')">State Results</button>
+      <div class="results_detail_row">
+        <div class="general_results_panel tab_content_box result_panel">
+          <h3 style="margin-top:0;">General Results</h3>
+          ${generalTableHtml}
         </div>
-      </div>
-      <div style="display:flex;justify-content:center;">
-        <div id="tab_content_general" style="margin-top:0px;width:100%;max-width:700px;text-align:center;"></div>
-        <div id="tab_content_states" style="margin-top:0px;width:100%;max-width:700px;text-align:center;display:none;"></div>
+        <div class="state_results_panel tab_content_box result_panel" id="state_results_panel"></div>
       </div>
     `;
     document.getElementById("display_window").innerHTML = html;
 
-    renderMap(candidateColors);
-
-    document.getElementById("tab_content_general").innerHTML = "";
-
-    document.getElementById("tab_content_states").innerHTML = `
-      <div id="drop_down_area_state" style="margin-inline: auto;">
-        <div id="sort_tab_area" style="display:inline-block;margin-right:24px;">
-          <label for="sort_tab"><b>View states by:</b></label>
+    const statePanel = document.getElementById("state_results_panel");
+    statePanel.innerHTML = `
+      <h3 style="margin-top:0;">State Results</h3>
+      <div class="state_results_controls">
+        <label for="sort_tab">View states by:
           <select id="sort_tab">
             <option value="1">Alphabetical</option>
             <option value="2">Most Electoral Votes</option>
             <option value="3">Closest States</option>
-            ${candidateNames.map((cand, idx) => `<option value="${10 + idx}">Closest ${cand} Wins</option>`).join("")}
-            ${candidateNames.map((cand, idx) => `<option value="${20 + idx}">Higest ${cand} %</option>`).join("")}
+            ${closestOptions}
+            ${highestOptions}
           </select>
-        </div>
-        <div id="state_tab_area" style="display:inline-block;">
-          <label for="state_tab"><b>Select a state:</b></label>
+        </label>
+        <label for="state_tab">Select a state:
           <select id="state_tab"></select>
-        </div>
+        </label>
       </div>
-      <div id="state_results_area" style="text-align:center;"></div>
+      <div id="state_results_area"></div>
     `;
 
+    renderMap();
+
     const stateTab = document.getElementById("state_tab");
-    loadedGameData.results.forEach((stateRes, idx) => {
-      let opt = document.createElement("option");
+    loadedGameData.results.forEach((stateRes) => {
+      const opt = document.createElement("option");
       opt.value = stateRes.state;
-      opt.innerText = stateRes.state;
+      opt.innerText = resolveStateName(stateRes.state);
       stateTab.appendChild(opt);
     });
 
@@ -281,52 +392,65 @@
       updateStateDropdown(this.value);
     };
     stateTab.onchange = function () {
-      showStateResults(this.value, candidateColors);
+      showStateResults(this.value);
     };
 
     updateStateDropdown("1");
-    showStateResults(loadedGameData.results[0].state, candidateColors);
-
-    activateResultsTab('general');
+    if (stateTab.value) {
+      showStateResults(stateTab.value);
+    }
   }
 
-  window.activateResultsTab = function (tab) {
-    document.getElementById("tab_general").style.background = tab === "general" ? "#eafdfd" : "#f4f4f8";
-    document.getElementById("tab_general").style.fontWeight = tab === "general" ? "bold" : "normal";
-    document.getElementById("tab_states").style.background = tab === "states" ? "#eafdfd" : "#f4f4f8";
-    document.getElementById("tab_states").style.fontWeight = tab === "states" ? "bold" : "normal";
-    document.getElementById("tab_content_general").style.display = tab === "general" ? "block" : "none";
-    document.getElementById("tab_content_states").style.display = tab === "states" ? "block" : "none";
-  };
+  function renderMap() {
+    if (!loadedGameData || !Array.isArray(loadedGameData.results)) return;
 
-  function renderMap(candidateColors) {
-    let stateStyles = {};
-    loadedGameData.results.forEach(stateRes => {
-      let winner = stateRes.results.reduce((a, b) => a.popular_votes > b.popular_votes ? a : b);
-      const color = candidateColors[winner.candidate_name] || "#EAFDFF";
+    const stateStyles = {};
+    loadedGameData.results.forEach((stateRes) => {
+      if (!Array.isArray(stateRes.results) || !stateRes.results.length) return;
+      const winner = stateRes.results.reduce((a, b) => (
+        (a.popular_votes || 0) >= (b.popular_votes || 0) ? a : b
+      ));
+      const color = resolveCandidateColor(winner.candidate_name);
       stateStyles[stateRes.state] = { fill: color };
     });
+
     $("#map_container").usmap({
       stateStyles: { fill: "#EAFDFF" },
       stateHoverStyles: { fill: "#EAFDFF" },
       stateSpecificStyles: stateStyles,
       stateSpecificHoverStyles: stateStyles,
       click: function (_, shape) {
-        showStateResults(shape.name, candidateColors);
-        document.getElementById("state_tab").value = shape.name;
-      }
+        showStateResults(shape.name);
+        const stateTab = document.getElementById("state_tab");
+        if (stateTab) stateTab.value = shape.name;
+      },
     });
   }
 
-  window.showStateResults = function (stateAbbr, candidateColors) {
+  window.showStateResults = function (stateAbbr) {
     const area = document.getElementById("state_results_area");
-    area.innerHTML = `<h3>Results in ${stateAbbr}</h3>${renderStateTable(stateAbbr, candidateColors)}`;
+    if (!area) return;
+    const tableHtml = renderStateTable(stateAbbr);
+    const stateTitle = resolveStateName(stateAbbr) || stateAbbr;
+    if (!tableHtml) {
+      area.innerHTML = `<div class="state_results_card"><h4>${stateTitle} (${stateAbbr})</h4><em>No data available.</em></div>`;
+      return;
+    }
+    area.innerHTML = `
+      <div class="state_results_card">
+        <h4>${stateTitle} (${stateAbbr})</h4>
+        ${tableHtml}
+      </div>
+    `;
   };
 
   function updateStateDropdown(sortType) {
     const stateTab = document.getElementById("state_tab");
+    if (!stateTab) return;
+
     const prevValue = stateTab.value;
-    let states = [...loadedGameData.results];
+    let states = Array.isArray(loadedGameData.results) ? [...loadedGameData.results] : [];
+
     if (sortType == "1") {
       states.sort((a, b) => a.state.localeCompare(b.state));
     } else if (sortType == "2") {
@@ -339,65 +463,56 @@
       states.sort((a, b) => {
         const aSorted = [...a.results].sort((x, y) => y.popular_votes - x.popular_votes);
         const bSorted = [...b.results].sort((x, y) => y.popular_votes - x.popular_votes);
-        const aDiff = aSorted.length > 1 ? aSorted[0].popular_votes - aSorted[1].popular_votes : 9999999;
-        const bDiff = bSorted.length > 1 ? bSorted[0].popular_votes - bSorted[1].popular_votes : 9999999;
+        const aDiff = aSorted.length > 1 ? aSorted[0].popular_votes - aSorted[1].popular_votes : Number.POSITIVE_INFINITY;
+        const bDiff = bSorted.length > 1 ? bSorted[0].popular_votes - bSorted[1].popular_votes : Number.POSITIVE_INFINITY;
         return aDiff - bDiff;
       });
     } else if (sortType >= 10 && sortType < 20) {
       const candIdx = sortType - 10;
-      const candName = loadedGameData.results[0].results[candIdx]?.candidate_name || "";
-      states = states.filter(s => {
-        const sorted = [...s.results].sort((x, y) => y.popular_votes - x.popular_votes);
-        return sorted[0]?.candidate_name === candName;
-      });
-      states.sort((a, b) => {
-        const aSorted = [...a.results].sort((x, y) => y.popular_votes - x.popular_votes);
-        const bSorted = [...b.results].sort((x, y) => y.popular_votes - x.popular_votes);
-        const aDiff = aSorted.length > 1 ? aSorted[0].popular_votes - aSorted[1].popular_votes : 9999999;
-        const bDiff = bSorted.length > 1 ? bSorted[0].popular_votes - bSorted[1].popular_votes : 9999999;
-        return aDiff - bDiff;
-      });
+      const candName = candidateMeta.order[candIdx];
+      if (candName) {
+        states = states.filter((s) => {
+          const sorted = [...s.results].sort((x, y) => y.popular_votes - x.popular_votes);
+          return sorted[0]?.candidate_name === candName;
+        });
+        states.sort((a, b) => {
+          const aSorted = [...a.results].sort((x, y) => y.popular_votes - x.popular_votes);
+          const bSorted = [...b.results].sort((x, y) => y.popular_votes - x.popular_votes);
+          const aDiff = aSorted.length > 1 ? aSorted[0].popular_votes - aSorted[1].popular_votes : Number.POSITIVE_INFINITY;
+          const bDiff = bSorted.length > 1 ? bSorted[0].popular_votes - bSorted[1].popular_votes : Number.POSITIVE_INFINITY;
+          return aDiff - bDiff;
+        });
+      }
     } else if (sortType >= 20 && sortType < 30) {
       const candIdx = sortType - 20;
-      const candName = loadedGameData.results[0].results[candIdx]?.candidate_name || "";
-      states.sort((a, b) => {
-        const aCand = a.results.find(r => r.candidate_name === candName);
-        const bCand = b.results.find(r => r.candidate_name === candName);
-        return (bCand?.vote_percentage ?? 0) - (aCand?.vote_percentage ?? 0);
-      });
+      const candName = candidateMeta.order[candIdx];
+      if (candName) {
+        states.sort((a, b) => {
+          const aCand = a.results.find((r) => r.candidate_name === candName);
+          const bCand = b.results.find((r) => r.candidate_name === candName);
+          return (bCand?.vote_percentage ?? 0) - (aCand?.vote_percentage ?? 0);
+        });
+      }
     }
+
     stateTab.innerHTML = "";
-    states.forEach((stateRes, idx) => {
-      let opt = document.createElement("option");
+    states.forEach((stateRes) => {
+      const opt = document.createElement("option");
       opt.value = stateRes.state;
-      opt.innerText = stateRes.state;
+      opt.innerText = resolveStateName(stateRes.state);
       stateTab.appendChild(opt);
     });
-    if ([...stateTab.options].some(o => o.value === prevValue)) {
+
+    if ([...stateTab.options].some((o) => o.value === prevValue)) {
       stateTab.value = prevValue;
     }
-    showStateResults(stateTab.value, getCandidateColors());
-  }
 
-  function getCandidateColors() {
-    const candidateNames = [];
-    loadedGameData.results.forEach(stateRes => {
-      stateRes.results.forEach(res => {
-        if (!candidateNames.includes(res.candidate_name)) {
-          candidateNames.push(res.candidate_name);
-        }
-      });
-    });
-    const candidateColors = {};
-    candidateNames.forEach((name, idx) => {
-      let color = null;
-      if (loadedModData && loadedModData.candidate_json) {
-        let candObj = loadedModData.candidate_json.find(c => c.fields.first_name + " " + c.fields.last_name === name);
-        if (candObj) color = candObj.fields.color_hex;
-      }
-      candidateColors[name] = color || getDefaultCandidateColor(name, candidateNames);
-    });
-    return candidateColors;
+    if (stateTab.value) {
+      showStateResults(stateTab.value);
+    } else {
+      const area = document.getElementById("state_results_area");
+      if (area) area.innerHTML = "<em>No state data available.</em>";
+    }
   }
 </script>
 
