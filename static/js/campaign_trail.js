@@ -518,6 +518,19 @@ function exportResults() {
     const results = {
         election_id: campaignTrail_temp.election_id,
         player_candidate: campaignTrail_temp.candidate_id,
+        overall_results: (campaignTrail_temp.final_overall_results || []).map((r) => {
+            const candidateObj = campaignTrail_temp.candidate_json.find((c) => c.pk === r.candidate);
+            const candidateName = candidateObj ? `${candidateObj.fields.first_name} ${candidateObj.fields.last_name}` : null;
+            const candidateColor = candidateObj && candidateObj.fields ? candidateObj.fields.color_hex || null : null;
+
+            return {
+                candidate_name: candidateName,
+                candidate_color: candidateColor,
+                candidate: r.candidate, // ID
+                electoral_votes: r.electoral_votes,
+                popular_votes: r.popular_votes,
+            };
+        }),
         results: campaignTrail_temp.final_state_results.map((stateResult) => {
             // Get state abbreviation
             const stateAbbreviation = stateResult.abbr;
@@ -536,7 +549,7 @@ function exportResults() {
                     );
 
                     return {
-                        candidate_name: `${candidate.fields.first_name} ${candidate.fields.last_name}`,
+                        candidate_name: candidate ? `${candidate.fields.first_name} ${candidate.fields.last_name}` : null,
                         electoral_votes: candidateResult.electoral_votes,
                         popular_votes: candidateResult.votes || 0,
                         vote_percentage: totalPopularVotes
