@@ -44,7 +44,7 @@ async function activateAnswerTooltip() {
     if (!gameLabel || !gameWindow.contains(gameLabel)) return;
 
     // get input associated with answer text
-    const answerInput = document.getElementById(event.target.getAttribute('for'));
+    const answerInput = document.getElementById(gameLabel.getAttribute('for'));
     if (!answerInput) return;
 
     const answerPk = answerInput.value;
