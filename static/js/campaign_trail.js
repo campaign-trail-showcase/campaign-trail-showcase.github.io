@@ -1792,9 +1792,6 @@ function electionNight() {
                 $("#overall_result ul").html(r);
                 $("#overall_result p").html(`${h}% complete ${evsToWin}`);
                 $("#final_result_button").click(finalResListener);
-                e.final_overall_results.forEach((f) => {
-                    if (f.electoral_votes > s[1]) s[1] = f.electoral_votes;
-                });
                 if (prevMax < winningEV && currentMax >= winningEV) {
                     const b = e.final_overall_results[0].candidate === e.candidate_id ? `${e.WinPopup}` : `${e.LosePopup}`;
                     $("#game_window").append(`
