@@ -1747,12 +1747,12 @@ function electionNight() {
     $("#ok_button").click(() => {
         $("#election_night_overlay, #election_night_window").remove();
         results_timeout = setTimeout(() => {
-            (function t(i, a) {
+            (function t(i) {
                 let prevMax = 0;
                 e.final_overall_results.forEach((f) => {
                     if (f.electoral_votes > prevMax) prevMax = f.electoral_votes;
                 });
-                var a = handleFinalResults(i);
+                let calledStates = handleFinalResults(i);
                 let currentMax = 0;
                 const total_votes = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
                 const pop_vs = [];
@@ -1763,8 +1763,7 @@ function electionNight() {
                     if (f.electoral_votes > currentMax) currentMax = f.electoral_votes;
                 });
                 const l = findFromPK(e.election_json, e.election_id);
-                const _ = getSortedCands();
-                const r = _.map((f) => {
+                const r = sortedCands.map((f) => {
                     let c;
                     let popvthing;
 
@@ -1811,13 +1810,13 @@ function electionNight() {
                     `);
                     $("#ok_button").click(() => {
                         removeElectionNightWindows();
-                        results_timeout = setTimeout(() => t(i, a), 2e3);
+                        results_timeout = setTimeout(() => t(i), 2e3);
                     });
                     $("#overlay_result_button").click(() => {
                         removeElectionNightWindows();
                         finalResListener();
                     });
-                } else if (i >= 480 || a >= e.states_json.length) {
+                } else if (i >= 480 || calledStates >= e.states_json.length) {
                     h = 100;
                     $("#overall_result").html(`
                             <h3>ELECTION TALLY</h3>
@@ -1828,7 +1827,7 @@ function electionNight() {
                             </p>
                         `);
                 } else {
-                    results_timeout = setTimeout(() => t(i, a), 2e3);
+                    results_timeout = setTimeout(() => t(i), 2e3);
                 }
                 i += 10;
             }(0, 0));
