@@ -1746,9 +1746,12 @@ function electionNight() {
     });
     $("#ok_button").click(() => {
         $("#election_night_overlay, #election_night_window").remove();
-        let prevMax = 0;
         results_timeout = setTimeout(() => {
             (function t(i, a) {
+                let prevMax = 0;
+                e.final_overall_results.forEach((f) => {
+                    if (f.electoral_votes > prevMax) prevMax = f.electoral_votes;
+                });
                 var a = handleFinalResults(i);
                 let currentMax = 0;
                 const total_votes = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
@@ -1828,7 +1831,6 @@ function electionNight() {
                             </p>
                         `);
                 } else {
-                    prevMax = currentMax;
                     results_timeout = setTimeout(() => t(i, a), 2e3);
                 }
                 i += 10;
