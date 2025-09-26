@@ -1716,17 +1716,16 @@ function electionNight() {
         $("#election_night_overlay, #election_night_window").remove();
         results_timeout = setTimeout(() => {
             (function t(i, a) {
+                var a = handleFinalResults(i);
                 const s = [0, 0];
                 const total_votes = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
                 const pop_vs = [];
                 e.final_overall_results.forEach((f) => {
-                    const percent = f.popular_votes / total_votes;
-                    if (percent > 0) pop_vs.push(percent);
-                    else pop_vs.push(0);
+                    const percent = total_votes > 0 ? f.popular_votes / total_votes : 0;
+                    pop_vs.push(percent);
 
                     if (f.electoral_votes > s[0]) s[0] = f.electoral_votes;
                 });
-                var a = handleFinalResults(i);
                 const l = findFromPK(e.election_json, e.election_id);
                 const _ = getSortedCands();
                 const r = _.map((f) => {
