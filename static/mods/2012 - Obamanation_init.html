@@ -724,6 +724,18 @@ function appendStyle() {
 			  opacity: 1;
 			  appearance: auto;
 			}
+
+            @media only screen and (max-width: 768px) {
+                /* baseline */
+                #player {
+                    margin: clamp(10dvh, calc(35vh + 3rem), 77dvh) auto auto;
+                }
+
+                /* when #game_window contains the question */
+                #game_window:has(.inner_window_question) + #player {
+                    margin: clamp(65dvh, calc(60vh + 8rem), 80dvh) auto auto;
+                }
+            }
 				`;
         document.head.appendChild(style);
     }
