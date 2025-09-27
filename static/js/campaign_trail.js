@@ -1624,6 +1624,38 @@ function primaryFunction(execute, breaks) {
     return true;
 }
 
+// used to change the map gradient colors
+// taken out of the DOMContentLoaded listener. Forgive me SM!
+function updateUsMapStyles(config) {
+    const $map = $("#map_container");
+    const plugin = $map.data("plugin-usmap");
+    if (!plugin) {
+        if ($map.length) {
+            $map.usmap(config);
+        }
+        return;
+    }
+
+    if (config.stateStyles) plugin.options.stateStyles = config.stateStyles;
+    if (config.stateHoverStyles) plugin.options.stateHoverStyles = config.stateHoverStyles;
+    if (config.stateSpecificStyles) plugin.options.stateSpecificStyles = config.stateSpecificStyles;
+    if (config.stateSpecificHoverStyles) plugin.options.stateSpecificHoverStyles = config.stateSpecificHoverStyles;
+    if (config.click) plugin.options.click = config.click;
+
+    const styles = plugin.options.stateSpecificStyles || {};
+    for (const abbr in styles) {
+        if (!Object.prototype.hasOwnProperty.call(styles, abbr)) continue;
+        const shape = plugin.stateShapes[abbr];
+        const st = styles[abbr] || {};
+        if (shape) {
+            const attrs = {};
+            if (st.fill) attrs.fill = st.fill;
+            if (st["fill-opacity"] != null) attrs["fill-opacity"] = st["fill-opacity"];
+            shape.attr(attrs);
+        }
+    }
+}
+
 function electionNight() {
     const globalParam = e.global_parameter_json?.[0]?.fields || {};
     const sortedCands = getSortedCands();
@@ -1715,21 +1747,23 @@ function electionNight() {
     $("#ok_button").click(() => {
         $("#election_night_overlay, #election_night_window").remove();
         results_timeout = setTimeout(() => {
-            (function t(i, a) {
-                const s = [0, 0];
+            (function t(i) {
+                let prevMax = 0;
+                e.final_overall_results.forEach((f) => {
+                    if (f.electoral_votes > prevMax) prevMax = f.electoral_votes;
+                });
+                let calledStates = handleFinalResults(i);
+                let currentMax = 0;
                 const total_votes = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
                 const pop_vs = [];
                 e.final_overall_results.forEach((f) => {
-                    const percent = f.popular_votes / total_votes;
-                    if (percent > 0) pop_vs.push(percent);
-                    else pop_vs.push(0);
+                    const percent = total_votes > 0 ? f.popular_votes / total_votes : 0;
+                    pop_vs.push(percent);
 
-                    if (f.electoral_votes > s[0]) s[0] = f.electoral_votes;
+                    if (f.electoral_votes > currentMax) currentMax = f.electoral_votes;
                 });
-                var a = handleFinalResults(i);
                 const l = findFromPK(e.election_json, e.election_id);
-                const _ = getSortedCands();
-                const r = _.map((f) => {
+                const r = sortedCands.map((f) => {
                     let c;
                     let popvthing;
 
@@ -1753,36 +1787,11 @@ function electionNight() {
                 }).join("");
                 const p = mapResultColor(i);
                 let h = Math.floor((i / 480) * 100);
-                const g = $("#state_result_container").html();
-                $("#game_window").html(`
-                    <div class="game_header">${corrr}</div>
-                    <div id="main_content_area">
-                        <div id="map_container"></div>
-                        <div id="menu_container">
-                            <div id="overall_result_container">
-                                <div id="overall_result">
-                                    <h3>ELECTION TALLY</h3>
-                                    <ul>${r}</ul>
-                                    <p>
-                                        ${h}% complete
-                                        ${evsToWin}
-                                    </p>
-                                </div>
-                            </div>
-                            <div id="state_result_container">${g}</div>
-                        </div>
-                    </div>
-                    <div id="map_footer">
-                        <button id="final_result_button">Go to Final Results</button>
-                    </div>
-                `);
-
-                $("#map_container").usmap(p);
+                updateUsMapStyles(p);
+                $("#overall_result ul").html(r);
+                $("#overall_result p").html(`${h}% complete ${evsToWin}`);
                 $("#final_result_button").click(finalResListener);
-                e.final_overall_results.forEach((f) => {
-                    if (f.electoral_votes > s[1]) s[1] = f.electoral_votes;
-                });
-                if (s[0] < winningEV && s[1] >= winningEV) {
+                if (prevMax < winningEV && currentMax >= winningEV) {
                     const b = e.final_overall_results[0].candidate === e.candidate_id ? `${e.WinPopup}` : `${e.LosePopup}`;
                     $("#game_window").append(`
                         <div class="overlay" id="election_night_overlay"></div>
@@ -1801,13 +1810,13 @@ function electionNight() {
                     `);
                     $("#ok_button").click(() => {
                         removeElectionNightWindows();
-                        results_timeout = setTimeout(() => t(i, a), 2e3);
+                        results_timeout = setTimeout(() => t(i), 2e3);
                     });
                     $("#overlay_result_button").click(() => {
                         removeElectionNightWindows();
                         finalResListener();
                     });
-                } else if (i >= 480 || a >= e.states_json.length) {
+                } else if (i >= 480 || calledStates >= e.states_json.length) {
                     h = 100;
                     $("#overall_result").html(`
                             <h3>ELECTION TALLY</h3>
@@ -1818,7 +1827,7 @@ function electionNight() {
                             </p>
                         `);
                 } else {
-                    results_timeout = setTimeout(() => t(i, a), 2e3);
+                    results_timeout = setTimeout(() => t(i), 2e3);
                 }
                 i += 10;
             }(0, 0));
@@ -4146,36 +4155,6 @@ document.getElementById("skip_to_final")?.addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    // used to change the map gradient colors
-    function updateUsMapStyles(config) {
-        const $map = $("#map_container");
-        const plugin = $map.data("plugin-usmap");
-        if (!plugin) {
-            if ($map.length) {
-                $map.usmap(config);
-            }
-            return;
-        }
-
-        if (config.stateStyles) plugin.options.stateStyles = config.stateStyles;
-        if (config.stateHoverStyles) plugin.options.stateHoverStyles = config.stateHoverStyles;
-        if (config.stateSpecificStyles) plugin.options.stateSpecificStyles = config.stateSpecificStyles;
-        if (config.stateSpecificHoverStyles) plugin.options.stateSpecificHoverStyles = config.stateSpecificHoverStyles;
-
-        const styles = plugin.options.stateSpecificStyles || {};
-        for (const abbr in styles) {
-            if (!Object.prototype.hasOwnProperty.call(styles, abbr)) continue;
-            const shape = plugin.stateShapes[abbr];
-            const st = styles[abbr] || {};
-            if (shape) {
-                const attrs = {};
-                if (st.fill) attrs.fill = st.fill;
-                if (st["fill-opacity"] != null) attrs["fill-opacity"] = st["fill-opacity"];
-                shape.attr(attrs);
-            }
-        }
-    }
-
     const handlers = {
         "#candidate_id_button": (event) => {
             if (!e.code2Loaded) vpSelect(event);
