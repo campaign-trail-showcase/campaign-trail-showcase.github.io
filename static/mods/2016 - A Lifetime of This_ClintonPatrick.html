@@ -16066,7 +16066,7 @@ function closeOverlay(overlay) {
     }, SCHEDULE_DEBOUNCE_MS);
   }
 
-  const observr = new MutationObserver((mutationsList) => {
+  const observer = new MutationObserver((mutationsList) => {
     if (!window.campaignTrail_temp?.squeaky_clean_mode) return;
     // if we are currently applying changes ourselves, bail out (guard)
     if (_applyingSqueaky) return;
@@ -16105,7 +16105,7 @@ function closeOverlay(overlay) {
   // when enabling, run an immediate pass
   window.enableSqueakyClean = function (enabled) {
     if (!window.campaignTrail_temp) window.campaignTrail_temp = {};
-    campaignTrail_temp.squeaky_clean_mode = Boolean(enabled);
+    window.campaignTrail_temp.squeaky_clean_mode = Boolean(enabled);
     if (enabled) {
       // run one immediate pass
       if (_applyingSqueaky) return;
