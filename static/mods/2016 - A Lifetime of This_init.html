@@ -355,25 +355,39 @@ campaignTrail_temp.modBoxTheme = {
     "ui_text_color": "#FFFFFF"
 }
 
-// Note: this was initially taken from the Things That Never Were scenario,
-// and lightly adapted to work here. I'm not sure who actually wrote this, and
-// this probably *wasn't* made for that scenario only, so this is embarrassing.
-// Regardless, all attributions go to the respective authors of the respective
-// mods who coined this rather useful feature.
+// Originally, this was the appendStyle() function borrowered from the
+// Things That Never Were scenario, and lightly adapted to work here.
+// Eventually, this was replaced by a more optimized function.
 
-function appendStyle() {
+function ensureMetaViewport() {
     if (!document.querySelector('meta[name="viewport"]')) {
-        const metaTag = document.createElement('meta');
-        metaTag.name = "viewport";
-        metaTag.content = "width=device-width, initial-scale=1";
-        document.head.appendChild(metaTag);
+        const m = document.createElement('meta');
+        m.name = 'viewport';
+        m.content = 'width=device-width, initial-scale=1';
+        document.head.appendChild(m);
+    }
+}
+
+function applyGlobalStyles(css, id = 'app-theme') {
+    if ('adoptedStyleSheets' in document && 'replaceSync' in CSSStyleSheet.prototype) {
+        if (!applyGlobalStyles.sheet) {
+            applyGlobalStyles.sheet = new CSSStyleSheet();
+            document.adoptedStyleSheets = [...document.adoptedStyleSheets, applyGlobalStyles.sheet];
+        }
+        applyGlobalStyles.sheet.replaceSync(css);
+        return;
     }
 
-    // Custom styles here
-    if (!document.querySelector('#radio-option-style')) {
-        const style = document.createElement('style');
-        style.id = 'radio-option-style';
-        style.textContent = `
+    let el = document.getElementById(id);
+    if (!el) {
+        el = document.createElement('style');
+        el.id = id;
+        document.head.appendChild(el);
+    }
+    el.textContent = css;
+}
+
+const css = `
             /* Candidate/running mate images */
             #candidate_image, #running_mate_image {
                 border: none;
@@ -997,12 +1011,10 @@ function appendStyle() {
 					height: 50px !important;
 				}
    			}
-        `;
-        document.head.appendChild(style);
-    }
-}
+`;
 
-appendStyle();
+ensureMetaViewport();
+applyGlobalStyles(css);
 
 // Psst: this is for replacing the site_description with this custom modal.
 (() => {
@@ -1272,7 +1284,7 @@ tooltipList = [
     { searchString: "Condi Rice", explanationText: "<img src=https://media.gettyimages.com/id/97284175/pt/foto/united-states-national-security-adviser-dr-condoleezza-rice-speaks-during-a-press-briefing-at.jpg?s=612x612&w=0&k=20&c=RK5bT6mkIc09-Dk2TrDae7CW1mJpbwpVh46m_I7nc_0=> Condoleezza Rice; former Secretary of State and your predecessor. She also could’ve been President once." },
     { searchString: "JFK", explanationText: "<img src=https://cdn.theatlantic.com/thumbor/Q-9L9Fup_vxhdXDURGTPiHmTQ-8=/0x104:2000x1229/960x540/media/img/mt/2023/12/GettyImages_515582630/original.jpg> John F. Kennedy; the 35th President of the United States." },
     { searchString: "FDR", explanationText: "<img src=https://media.npr.org/assets/img/2015/02/12/50372357edit_wide-dc9d486a6f4a2ff2e20627e6ffbd7604d596718d.jpg?s=800&c=85&f=webp> Franklin D. Roosevelt; the 32nd President of the United States." },
-	{ searchString: "Joe Lieberman", explanationText: "<img src=https://media.gettyimages.com/id/140244132/pt/foto/washington-dc-sen-jim-webb-holds-a-news-conference-to-announce-legislation-to-overhaul-the.jpg?s=612x612&w=0&k=20&c=wF6ZC5nFXtasnDviWDKO3GYxM2BTvGvN7iSCDlRgnwE=> Loserman; the former Connecticut Senator and Al Gore’s running mate in 2000." },
+	{ searchString: "Joe Lieberman", explanationText: "<img src=https://media.gettyimages.com/id/94471346/pt/foto/washington-sen-joseph-lieberman-walks-off-the-capitol-subway-after-speaking-to-reporters-about.jpg?s=612x612&w=0&k=20&c=yy1uOvAJR5XSFe-AQDH8ODO5RaQZgpr5noDL26izd-Y=> Loserman; the former Connecticut Senator and Al Gore’s running mate in 2000." },
 	{ searchString: "Max Baucus", explanationText: "<img src=https://media.gettyimages.com/id/97242903/pt/foto/washington-senator-max-baucus-meets-with-staff-concerning-healthcare-on-capitol-hill-on-thursday.jpg?s=612x612&w=0&k=20&c=3xnDEzk9PRJNbSZ9e4bMyfjOXVdbwMocQJevTPuMz0w=> The former Montana Senator. Currently getting cozy with Xi in China." },
     { searchString: "Gary Johnson", explanationText: "<img src=https://i.kym-cdn.com/photos/images/original/001/176/401/ca6.jpg> Hell yeah I’m ready." },
     { searchString: "George Pataki", explanationText: "<img src=https://media.gettyimages.com/id/50803178/pt/foto/new-york-new-york-state-governor-george-pataki-speaks-at-a-luncheon-for-the-association-for-a.jpg?s=612x612&w=0&k=20&c=STndDn2bU-8gmHFj5DExDdIT_tin6-HutoCtxO7z58w=> The former governor of New York. He couldn’t have been President once." },
