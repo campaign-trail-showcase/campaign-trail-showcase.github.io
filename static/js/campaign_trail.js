@@ -1916,7 +1916,7 @@ function nextQuestion() {
         }
     }
 
-    if (e.question_number === e.global_parameter_json[0].fields.question_count) {
+    if (e.question_number === Number(e.global_parameter_json[0].fields.question_count)) {
         e.final_state_results = A(1);
         electionNight();
         if (e.primary) {
