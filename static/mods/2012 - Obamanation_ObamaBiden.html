@@ -45811,46 +45811,63 @@ function refreshSurrogates() {
 }
 
 function makeDraggable(element, handle) {
+  const dragHandle = handle || element;
   let isDragging = false;
   let offsetX, offsetY;
-
-  // if no handle is provided, the whole element is the handle
-  const dragHandle = handle || element;
-
-  dragHandle.onmousedown = function(event) {
-    // prevent dragging from form elements or buttons
-    if (event.target.tagName === 'BUTTON' || event.target.tagName === 'INPUT' || event.target.tagName === 'UL') {
+  
+  const updatePosition = (clientX, clientY) => {
+    element.style.left = `${clientX - offsetX}px`;
+    element.style.top = `${clientY - offsetY}px`;
+    savedX = clientX - offsetX;
+    savedY = clientY - offsetY;
+  };
+  
+  const onMove = (e) => {
+    if (!isDragging) return;
+    const clientX = e.clientX ?? e.touches[0].clientX;
+    const clientY = e.clientY ?? e.touches[0].clientY;
+    updatePosition(clientX, clientY);
+  };
+  
+  const onEnd = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    document.body.classList.remove('is-dragging');
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onEnd);
+    document.removeEventListener('touchmove', onMove);
+    document.removeEventListener('touchend', onEnd);
+  };
+  
+  const onStart = (e) => {
+    const target = e.target;
+    if (['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA', 'A'].includes(target.tagName)) {
       return;
     }
     
     isDragging = true;
-    offsetX = event.clientX - element.getBoundingClientRect().left;
-    offsetY = event.clientY - element.getBoundingClientRect().top;
+    const rect = element.getBoundingClientRect();
+    const clientX = e.clientX ?? e.touches[0].clientX;
+    const clientY = e.clientY ?? e.touches[0].clientY;
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
     
     document.body.classList.add('is-dragging');
-
-    document.onmousemove = function(event) {
-      if (isDragging) {
-        const newX = event.clientX - offsetX;
-        const newY = event.clientY - offsetY;
-
-        element.style.left = newX + 'px';
-        element.style.top = newY + 'px';
-
-        savedX = newX;
-        savedY = newY;
-      }
-    };
-
-    document.onmouseup = function() {
-      isDragging = false;
-      document.body.classList.remove('is-dragging');
-      document.onmousemove = null;
-      document.onmouseup = null;
-    };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('touchend', onEnd);
     
-    // prevent default browser drag behavior
-    event.preventDefault();
+    e.preventDefault();
+  };
+  
+  dragHandle.addEventListener('mousedown', onStart);
+  dragHandle.addEventListener('touchstart', onStart, { passive: false });
+  
+  return () => {
+    dragHandle.removeEventListener('mousedown', onStart);
+    dragHandle.removeEventListener('touchstart', onStart);
+    onEnd();
   };
 }
 
