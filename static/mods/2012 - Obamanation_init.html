@@ -561,19 +561,37 @@ function ensureStylesheet(url, id) {
 
 ensureStylesheet('https://unpkg.com/7.css', 'unpkg-7css');
 
-function appendStyle() {
+function ensureMetaViewport() {
     if (!document.querySelector('meta[name="viewport"]')) {
-        const metaTag = document.createElement('meta');
-        metaTag.name = "viewport";
-        metaTag.content = "width=device-width, initial-scale=1";
-        document.head.appendChild(metaTag);
+        const m = document.createElement('meta');
+        m.name = 'viewport';
+        m.content = 'width=device-width, initial-scale=1';
+        document.head.appendChild(m);
+    }
+}
+
+applyGlobalStyles.sheets = {};
+
+function applyGlobalStyles(css, id = 'app-theme') {
+    if ('adoptedStyleSheets' in document && 'replaceSync' in CSSStyleSheet.prototype) {
+        if (!applyGlobalStyles.sheets[id]) {
+            applyGlobalStyles.sheets[id] = new CSSStyleSheet();
+            document.adoptedStyleSheets = [...document.adoptedStyleSheets, applyGlobalStyles.sheets[id]];
+        }
+        applyGlobalStyles.sheets[id].replaceSync(css);
+        return;
     }
 
-    // Custom styles here
-    if (!document.querySelector('#radio-option-style')) {
-        const style = document.createElement('style');
-        style.id = 'radio-option-style';
-        style.textContent = `		
+    let el = document.getElementById(id);
+    if (!el) {
+        el = document.createElement('style');
+        el.id = id;
+        document.head.appendChild(el);
+    }
+    el.textContent = css;
+}
+
+const css = `		
 					#closeButton {
 						background: none;
 						border: none;
@@ -585,6 +603,9 @@ function appendStyle() {
 						background-color: #E8EFFF;
 						background: linear-gradient(to bottom, #637c94, #768fa6, #8fa7bd);
 					}
+					#opponent_selection_id_button_p {
+						color: #fff;
+					}						
 
 					/* Override xp.css focus and hover styles */
 					#closeButton:focus,
@@ -700,10 +721,16 @@ function appendStyle() {
 				max-width: 240px;
 				height: auto;
 			}
+
 	
 			.mytooltip:hover .mytooltiptext {
 				opacity: 1;
 				transition-delay: 0.5s;
+			}			
+			
+			/* this is specifically for tooltips inside the advisor feedback module */
+			#visit_window .mytooltiptext {
+			  padding: .1em 1.2em .75em .75em;
 			}
   
 			#final_results_description p {
@@ -724,6 +751,28 @@ function appendStyle() {
 			  opacity: 1;
 			  appearance: auto;
 			}
+			
+			/* 7.css overrides */
+			#bottomBar::before, #bottomBar::after {
+				content: none;
+			}
+			
+			/* Other accessibility fixes */
+			#state_info {
+				height: auto;
+			}
+			#overall_result h3 {
+			  padding: .2em 0;
+			}
+			#menu_container, #overall_result_container, #state_result_container {
+			  background: #08043d;
+			}
+			#visit_buttons, #election_night_buttons, #winner_buttons {
+				margin-bottom: 1em;
+			}
+			.overlay_window h3 {
+				background: linear-gradient(to left, #d9f0ff, #abcde3, #ccebff);
+			}
 
             @media only screen and (max-width: 768px) {
                 /* baseline */
@@ -736,45 +785,37 @@ function appendStyle() {
                     margin: clamp(65dvh, calc(60vh + 8rem), 80dvh) auto auto;
                 }
             }
-				`;
-        document.head.appendChild(style);
-    }
-}
+`;
 
-appendStyle();
+ensureMetaViewport();
+applyGlobalStyles(css, 'mod-style');
 
 let contentBox = document.getElementsByClassName("content_box")[0];
 let contentSingle = document.getElementsByClassName("content_single")[0];
-
 let containerRef = document.getElementsByClassName("container")[0];
 
 function createBanner(url, sibling, isLeft) {
-    let div = document.createElement("DIV");
-    let img = document.createElement("IMG");
-    div.style.position = "relative";
-    div.style.margin = "auto";
+    let div = document.createElement("div");
+    let img = document.createElement("img");
+    
+    div.style.cssText = "position: relative; margin: auto;";
     img.src = url;
-
-
-    let x = document.createElement("DIV");
+    
+    let x = document.createElement("div");
     x.innerText = "_";
-    x.style.position = "absolute";
-    x.style.padding = "2px";
-    x.style.fontSize = "2pt";
-    x.style.cursor = "pointer";
-
+    x.style.cssText = "position: absolute; padding: 5px; font-size: 2pt; cursor: pointer;";
+    
     div.appendChild(x);
-
     div.appendChild(img);
-
+    
     if (isLeft) {
         sibling.parentNode.insertBefore(div, sibling);
+    } else {
+        sibling.parentNode.insertBefore(div, sibling.nextSibling);
     }
-    else {
-        sibling.parentNode.appendChild(div);
-    }
+    
     x.onclick = () => div.style.visibility = "hidden";
-    x.onclick = () => img.style.visibility = "hidden";
+    
     return img;
 }
 
@@ -918,7 +959,7 @@ function createBanner(url, sibling, isLeft) {
       if (cb) cb.checked = Boolean(window.campaignTrail_temp?.hidden_mode);
       const note = document.getElementById("hidden_label");
       if (note) note.textContent = window.campaignTrail_temp?.hidden_label
-        ?? "Hides common swear words from displayed text.";
+        ?? "Congratulations on completing THE OBAMANATION! Please enjoy this exclusive endgame mode.";
       return;
     }
 
@@ -1387,7 +1428,7 @@ function createBanner(url, sibling, isLeft) {
                 border-width: 5px;
                 background: transparent;
                 padding: 0;
-                margin: 1em .3em 1em 2em;
+                margin: 1em .3em 1em 1em;
                 position: relative;
                 overflow: hidden;
                 cursor: pointer;
@@ -1945,8 +1986,7 @@ function setupMusicPlayer() {
     });
 }
 
-const style = document.createElement("style");
-style.textContent = `
+const musicPlayer = `
 		#player {
 			font-family: 'Segoe UI', sans-serif;
 			display: flex;
@@ -2085,6 +2125,7 @@ style.textContent = `
 			cursor: pointer;
 			border-radius: 50%;
 			border: 1px solid #777;
+			margin-top: 2px;
 		}
 
 		#volumeSlider::-moz-range-thumb {
@@ -2097,7 +2138,7 @@ style.textContent = `
 		}
 	`;
 
-document.head.appendChild(style);
+applyGlobalStyles(musicPlayer, 'music-player');
 
 const gameWindow_player = document.getElementById("game_window");
 setupMusicPlayer();

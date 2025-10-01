@@ -41788,9 +41788,10 @@ const ads = [
   };
 })();
 	
-	function tunnel(new_q){
-		return e.questions_json[e.questions_json.map(f=>f.pk).indexOf(new_q)];
-	}  
+	const questionsMap = new Map(e.questions_json.map(q => [q.pk, q]));
+	function tunnel(new_q) {
+	  return questionsMap.get(new_q);
+	}
 	
     function switcheroo1() {
         var id = e.candidate_json.map(p=>p.pk).indexOf(78)
@@ -43344,7 +43345,7 @@ const ads = [
 	
 	cyoAdventure = function(a) {
         ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
-        e.noCounter += 1
+		e.noCounter = campaignTrail_temp.player_answers.length;
 		
 		if(newAd) {
 		  newAd = false;
@@ -45126,66 +45127,53 @@ const ads = [
 		  }
 
 		  // For noCounter == 32
-		  if (e.noCounter == 32) {
-			// remove unless Rep equals specific code
-			const keepIfRep = [
-			  ['RICE_A',        1],
-              ['MCCAIN_B',     38],
-			  ['HUNTSMAN_B',   26],
-			  ['BLOOMBERG_A',   2],
-			  ['ROMNEY_A',     22],
-              ['BUSH_A',       28],
-			  ['TRUMP_A',      25],
-			  ['GINGRICH_A',    5],
-			  ['ARPAIO_A',     24],
-			  ['BACHMANN_A',   21],
-			  ['PAUL_C',       20],
-			  ['PETRAEUS_A',    4],
-			  ['MCCHRYSTAL_A',  3],
-			];
-			for (const [id, code] of keepIfRep) {
-			  if (Rep != code) removeById(id);
+			if (e.noCounter == 32) {
+				const nomineeMap = {
+					1: { id: 'RICE_A', data: RiceCand },
+					2: { id: 'BLOOMBERG_A', data: BloombergCand },
+					3: { id: 'MCCHRYSTAL_A', data: McChrytalCand },
+					4: { id: 'PETRAEUS_A', data: PetraeusCand },
+					5: { id: 'GINGRICH_A', data: GingrichCand },
+					6: { id: 'CHENEY_A', data: CheneyCand },
+					7: { id: 'CHRISTIE_A', data: ChristieCand },
+					20: { id: 'PAUL_C', data: PaulCan },
+					21: { id: 'BACHMANN_A', data: BachmannCand },
+					22: { id: 'ROMNEY_A', data: RomneyCand },
+					24: { id: 'ARPAIO_A', data: ArpaioCand },
+					25: { id: 'TRUMP_A', data: TrumpCand },
+					26: { id: 'HUNTSMAN_B', data: HuntsmanCand },
+					28: { id: 'BUSH_A', data: BushCand },
+					29: { id: 'EASTWOOD_A', data: EastwoodCand },
+					38: { id: 'MCCAIN_B', data: McCainCand },
+					41: { id: 'ZOMBIE_A', data: ZombieCand },
+				};
+				
+				// get the nominee object based on their Rep value
+				const nominee = nomineeMap[Rep];
+
+				// identify which candidates to keep
+				const thirdPartyCandidates = ['BECK_A', 'SANDERS_B', 'PAUL_D', 'LIEBERMAN_A'];
+				const itemsToKeep = menuItemsA.filter(item => thirdPartyCandidates.includes(item.id));
+
+				// clear the original menuItemsA array
+				menuItemsA.length = 0;
+
+				// add back the items we wanted to keep
+				itemsToKeep.forEach(item => menuItemsA.push(item));
+
+				// if a valid nominee was found, add them to the front of the list.
+				if (nominee) {
+					menuItemsA.unshift(nominee.data);
+				}
+				
+				// Special case for Zombie Reagan removing Christie
+				if (Rep == 41) {
+					const christieIndex = menuItemsA.findIndex(item => item.id === 'CHRISTIE_A');
+					if (christieIndex > -1) {
+						menuItemsA.splice(christieIndex, 1);
+					}
+				}
 			}
-
-			// unconditional removals
-			removeEach(['HUNTSMAN_C', 'CAIN_A', 'PERRY_A', 'SANTORUM_A', 'SCHWARZENEGGER_A', 'PALIN_A', 'MCCAIN_A']);
-			
-			// Romney add in case of early removal
-			if (Rep == 22) {
-			  addFrontIfMissing('ROMNEY_A', RomneyCand);
-			}
-
-            // Bush add in case of early removal
-            if (Rep == 28) {
-              addFrontIfMissing('BUSH_A', BushCand);
-            }
-
-            // Gingrich add in case of early removal
-			if (Rep == 5) {
-			  addFrontIfMissing('GINGRICH_A', GingrichCand);
-			}
-
-            // Trump add in case of early removal
-            if (Rep == 25) {
-              addFrontIfMissing('TRUMP_A', TrumpCand);
-            }
-
-            // Eastwood add
-			if (Rep == 29) {
-			  addFrontIfMissing('EASTWOOD_A', EastwoodCand);
-			}
-
-            // secret add
-			if (Rep == 41) {
-			  addFrontIfMissing('ZOMBIE_A', ZombieCand);
-              removeById('CHRISTIE_A');
-			}
-
-			// Cheney add
-			if (Rep == 6) {
-			  addFrontIfMissing('CHENEY_A', CheneyCand);
-			}
-		  }
 
 		  // Cheney impeachment (noCounter == 37)
 		  if (e.noCounter == 37 && has(9415)) {
@@ -45193,8 +45181,8 @@ const ads = [
 		  }
 		}
 				
-		refreshSurrogates()
 		applyCandidateRules(e)
+		refreshSurrogates()
 	}
 
 let vpName = "ERROR YOU DIDN'T SET ME";
@@ -45312,6 +45300,8 @@ let BachmannCand = { photo: 'https://imgur.com/NWD5Got.png', name: 'Michele Bach
 let TrumpCand = { photo: 'https://imgur.com/rnjfBX6.png', name: 'Donald Trump', text: 'He\'s flirted with a presidential run many times before, but always backed down from it. However, this time, with your failure to save the working class, it seems a wave of populism may carry Trump to the nomination.', button: 'Defer', id: 'TRUMP_A'}
 let PaulCand = { photo: 'https://imgur.com/Ku6HQf0.png', name: 'Ron Paul', text: 'Thanks to you bailing out the banks, Ron Paul has gained enormous momentum among Tea Party conservatives and online social media. If there\'s no one else to oppose you, Paul will surely get the nomination.', button: 'Defer', id: 'PAUL_B'}
 let PaulCan = { photo: 'https://imgur.com/Ku6HQf0.png', name: 'Ron Paul', text: 'Thanks to you bailing out the banks, Ron Paul has gained enormous momentum among Tea Party conservatives and online social media. If there\'s no one else to oppose you, Paul will surely get the nomination.', button: 'Defer', id: 'PAUL_C'}
+let PetraeusCand = { photo: 'https://imgur.com/pLJzf7f.png', name: 'David Petraeus', text: 'The popular General Petraeus could be coaxed into staging a run against you if your administration grows unpopular at home and abroad.', button: 'Defer', id: 'PETRAEUS_A'}
+let ArpaioCand = { photo: 'https://imgur.com/V3FjFMn.png', name: 'Joe Arpaio', text: 'Arpaio hopes to inherit the nativist mantle Pat Buchanan once held in his role as the chaotic and controversial sheriff of Tent City. Only a directionless and fearful GOP would ever see the likes of him nominated.', button: 'Defer', id: 'ARPAIO_A'}
 let McChrytalCand = { photo: 'https://imgur.com/oWWMhHL.png', name: 'Stanley McChrystal', text: 'Bush\'s former Iraq military governor, General Stanley McChrystal fumes after your decision to terminate him. Rumor is he may seek revenge on you this November.', button: 'Defer', id: 'MCCHRYSTAL_A'}
 let BloombergCand = { photo: 'https://imgur.com/nxlFCha.png', name: 'Michael Bloomberg', text: 'Alarmed by your administration\'s radical anti-police agenda, Mayor Bloomberg offers himself up as a bipartisan voice who\'ll bring stability back to America like he brought to New York.', button: 'Defer', id: 'BLOOMBERG_A'}
 let RiceCand = { photo: 'https://imgur.com/ZdVGNjU.png', name: 'Condoleezza Rice', text: 'The neoconservatives have returned following your administration\'s failure to intervene in the Middle East. If a rift were to form in the Democratic Party, they may just take advantage.', button: 'Defer', id: 'RICE_A'}
@@ -45821,46 +45811,63 @@ function refreshSurrogates() {
 }
 
 function makeDraggable(element, handle) {
+  const dragHandle = handle || element;
   let isDragging = false;
   let offsetX, offsetY;
-
-  // if no handle is provided, the whole element is the handle
-  const dragHandle = handle || element;
-
-  dragHandle.onmousedown = function(event) {
-    // prevent dragging from form elements or buttons
-    if (event.target.tagName === 'BUTTON' || event.target.tagName === 'INPUT' || event.target.tagName === 'UL') {
+  
+  const updatePosition = (clientX, clientY) => {
+    element.style.left = `${clientX - offsetX}px`;
+    element.style.top = `${clientY - offsetY}px`;
+    savedX = clientX - offsetX;
+    savedY = clientY - offsetY;
+  };
+  
+  const onMove = (e) => {
+    if (!isDragging) return;
+    const clientX = e.clientX ?? e.touches[0].clientX;
+    const clientY = e.clientY ?? e.touches[0].clientY;
+    updatePosition(clientX, clientY);
+  };
+  
+  const onEnd = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    document.body.classList.remove('is-dragging');
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onEnd);
+    document.removeEventListener('touchmove', onMove);
+    document.removeEventListener('touchend', onEnd);
+  };
+  
+  const onStart = (e) => {
+    const target = e.target;
+    if (['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA', 'A'].includes(target.tagName)) {
       return;
     }
     
     isDragging = true;
-    offsetX = event.clientX - element.getBoundingClientRect().left;
-    offsetY = event.clientY - element.getBoundingClientRect().top;
+    const rect = element.getBoundingClientRect();
+    const clientX = e.clientX ?? e.touches[0].clientX;
+    const clientY = e.clientY ?? e.touches[0].clientY;
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
     
     document.body.classList.add('is-dragging');
-
-    document.onmousemove = function(event) {
-      if (isDragging) {
-        const newX = event.clientX - offsetX;
-        const newY = event.clientY - offsetY;
-
-        element.style.left = newX + 'px';
-        element.style.top = newY + 'px';
-
-        savedX = newX;
-        savedY = newY;
-      }
-    };
-
-    document.onmouseup = function() {
-      isDragging = false;
-      document.body.classList.remove('is-dragging');
-      document.onmousemove = null;
-      document.onmouseup = null;
-    };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+    document.addEventListener('touchmove', onMove, { passive: false });
+    document.addEventListener('touchend', onEnd);
     
-    // prevent default browser drag behavior
-    event.preventDefault();
+    e.preventDefault();
+  };
+  
+  dragHandle.addEventListener('mousedown', onStart);
+  dragHandle.addEventListener('touchstart', onStart, { passive: false });
+  
+  return () => {
+    dragHandle.removeEventListener('mousedown', onStart);
+    dragHandle.removeEventListener('touchstart', onStart);
+    onEnd();
   };
 }
 
