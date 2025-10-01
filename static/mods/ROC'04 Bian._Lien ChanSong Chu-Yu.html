@@ -1,6 +1,12 @@
 e=campaignTrail_temp // this is redundant, but Decstar uses this because it looks nicer in the code.
 campaignTrail_temp.multiple_endings=true
 campaignTrail_temp.cyoa = true
+if(campaignTrail_temp.candidate_id===68){
+    let mult=1.025;  // 所有难度统一加强2.5%
+    campaignTrail_temp.difficulty_level_multiplier*=mult;
+    console.log("连战加强调整:+2.5%");
+}
+
 function ctsAchievement(achievement, difficultyChecker = true){
 	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier <= 1)||!difficultyChecker)
 		if(campaignTrail_temp.CTS){
@@ -4589,53 +4595,7 @@ campaignTrail_temp.running_mate_issue_score_json = [
             "issue": 36,
             "issue_score": 0.5
         }
-        },
-        //郑村琪
-                        {
-                            "model": "campaign_trail.candidate_issue_score",
-                            "pk": 410110,
-                            "fields": {
-                                "candidate": 50003,
-                                "issue": 32,
-                                "issue_score": 0
-                            }
-                        },
-                        {
-                            "model": "campaign_trail.candidate_issue_score",
-                            "pk": 410111,
-                            "fields": {
-                                "candidate": 50003,
-                                "issue": 33,
-                                "issue_score": 0
-                            }
-                        },
-                        {
-                            "model": "campaign_trail.candidate_issue_score",
-                            "pk": 410112,
-                            "fields": {
-                                "candidate": 50003,
-                                "issue": 34,
-                                "issue_score": 0
-                        },
-                    },
-                        {
-                            "model": "campaign_trail.candidate_issue_score",
-                            "pk": 410113,
-                            "fields": {
-                                "candidate": 50003,
-                                "issue": 35,
-                                "issue_score": 0
-                            }
-                        },
-                            {
-                            "model": "campaign_trail.candidate_issue_score",
-                            "pk": 410114,
-                            "fields": {
-                                "candidate": 50003,
-                                "issue": 36,
-                                "issue_score": 0
-                            }
-                            }
+        }
     ]
 
 campaignTrail_temp.candidate_state_multiplier_json = [
@@ -4781,7 +4741,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 67,
             "state": 200402,
-            "state_multiplier": 0.37
+            "state_multiplier": 0.35
         }
     },
     {
@@ -4859,7 +4819,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                     "fields": {
                         "candidate": 67,
                         "state": 260,
-                        "state_multiplier": 0.36
+                        "state_multiplier": 0.35
                     }
                 },
                 {
@@ -5129,27 +5089,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
                         "state": 272,
                         "state_multiplier": 0.6
                     }
-                },
-               
-                    //高雄县
-                    {
-                      "model": "campaign_trail.candidate_state_multiplier",
-                      "pk": 1958121,
-                      "fields": {
-                          "candidate": 67,
-                          "state": 200403,
-                          "state_multiplier": 0.37
-                      }
-                  },
-                  {
-                      "model": "campaign_trail.candidate_state_multiplier",
-                      "pk": 1958221,
-                      "fields": {
-                          "candidate": 68,
-                          "state": 200403,
-                          "state_multiplier": 0.37
-                      }
-                  }
+                }
 ]
 
 

@@ -45,6 +45,7 @@
       <div id="achwindowheader"><button onclick="closeAchievements()" id="achclose">X</button> Achievements</div>
       <div id="achcontent"></div>
     </div>
+    <div style="display:none" id="answerHoverTooltip"></div>
     <div id="wittyquote" style="display:none"></div>
     <div class="container">
       <center>
@@ -80,7 +81,7 @@
             </div>
             <div id="bottomBar" class="inner_window_front" style="display:none;height:30px;font-size: 12px;border-style: solid;border-width: 5px;width:95%;position:absolute;bottom:10px;"></div>
           </div>
-          <div  class="footer">
+          <div class="footer">
             <div id="cheatMenu" style="display:none">
               <div class="slidecontainer"  style="padding-right: 20px; padding: 10px; border-radius:5px; background-color: white;">
                 <label style="font-weight:bold">Difficulty Slider</label>
@@ -95,6 +96,7 @@
               <div style="margin-top:10px">
                 <button onclick="addSTSSMoney()" style="border-radius:5px; font-weight:bold;padding:10px;">"Borrow" $1000000 (STSS Only)</button>
                 <button onclick="useConsoleCheats()" style="border-radius:5px; font-weight:bold;padding:10px;">Open Console</button>
+                <button onclick="activateAnswerTooltip()" style="border-radius:5px; font-weight:bold;padding:10px;">Answer Variable Tooltip (ALPHA)</button>
               </div>
             </div>
             <div id="autoplayMenu" style="display:none">
@@ -212,7 +214,7 @@
               </div>
               <div id="mod-grid" class="community-grid"></div>
             </div>
-            </div>      
+          </div>      
             
             <div id="site_credits" style="text-align: center;">
               <a href="https://discord.gg/cqgVSNRKDP" style="color:#FF6B6B">We have a Discord server here.</a><br><br>
@@ -247,5 +249,6 @@
   <script src="../static/js/campaign_trail.js"></script>
   <script src="../static/js/remote.js"></script>
   <script src="../static/js/mobileStyle.js"></script>
+  <script src="../static/js/answerTooltip.js"></script>
   <script>campaignTrail_temp.CTS = true</script>
 </html>
