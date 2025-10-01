@@ -3346,7 +3346,7 @@ function finalMapScreenHtml() {
         const popularVotePercent = totalPopularVotes > 0
             ? ((popularVotes / totalPopularVotes) * 100).toFixed(1)
             : "0.0";
-        return !popularVotes ? "" : `
+        return !popularVotes && !electoralVotes ? "" : `
             <li>
                 <span style="color:${f.color}; background-color: ${f.color}">--</span> ${f.last_name}: ${noElectoralVotes ? "" : `${formatNumbers(electoralVotes)} / `}${popularVotePercent}%
             </li>
@@ -3782,8 +3782,7 @@ function T(t) {
                 const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
                 if (!candidate || !candidate.fields) return ""; // skip unknown candidates
                 const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
-                if (!f.percent) return "";
-                return `
+                return !f.percent && !f.electoral_votes ? "" : `
                      <tr>
                          <td>${fullName}</td>
                          <td>${formatNumbers(f.votes)}</td>
