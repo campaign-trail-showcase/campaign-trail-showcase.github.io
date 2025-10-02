@@ -761,8 +761,14 @@ const css = `
 			#state_info {
 				height: auto;
 			}
+			#recommended_reading_box {
+			  padding: .5em;
+			}
 			#overall_result h3 {
 			  padding: .2em 0;
+			}
+			#election_id, #candidate_id, #running_mate_id, #game_type_id, #difficulty_level_id {
+			  color: #000;
 			}
 			#menu_container, #overall_result_container, #state_result_container {
 			  background: #08043d;
@@ -772,6 +778,17 @@ const css = `
 			}
 			.overlay_window h3 {
 				background: linear-gradient(to left, #d9f0ff, #abcde3, #ccebff);
+			}
+			#state_result_data_summary table td:first-child span,
+			#overall_details_container table td:first-child span,
+			.final_results_table td:first-child span {
+				border: 1px solid rgba(0, 0, 0, 0.2);
+				display: inline-flex;
+				height: 1em;
+				margin-right: .25em;
+				text-indent: -9999px;
+				vertical-align: sub;
+				width: 1em;
 			}
 
             @media only screen and (max-width: 768px) {
