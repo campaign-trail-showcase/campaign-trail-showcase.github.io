@@ -41342,13 +41342,6 @@ const ads = [
 	campaignTrail_temp.player_visits = [];
 	campaignTrail_temp.answer_feedback_flg = 1;
 	campaignTrail_temp.game_start_logging_id = '3662479';
-    const customStyling = document.createElement("style");
-        customStyling.innerHTML = `
-        h4 {
-            font-size: 1.2rem;
-        }
-        `;
-    document.head.appendChild(customStyling);
 
     let style = document.createElement('style');
     style.type = 'text/css';
@@ -45007,10 +45000,12 @@ const ads = [
 		  }
 		  
 		  // Rice nomination
-		  if (e.noCounter == 29 && Cred < 5 && hasAny(G_RICE_TRIGGERS)) {
-		    addFrontIfMissing('RICE_A', RiceCand);
-		  } else {
-		    removeById('RICE_A');
+		  if (inRange(e.noCounter, 27, 31)) {
+			if (Cred < 5 && hasAny(G_RICE_TRIGGERS)) {
+				addFrontIfMissing('RICE_A', RiceCand);
+			} else {
+				removeById('RICE_A');
+			}
 		  }
 
 		  // Huntsman B logic (noCounter == 28)
@@ -45187,107 +45182,96 @@ const ads = [
 
 let vpName = "ERROR YOU DIDN'T SET ME";
 
-vpTable = {
-    "Barack Obama" : vpName,
-	
-    "Chris Christie" : "Haley Barbour",
-    "Jon Huntsman" : "Nikki Haley",
-    "Stanley McChrystal" : "Rick Perry",
-    "Condoleezza Rice" : "John Thune",
+const vpTable = {
+    "Barack Obama": vpName,
+    "Chris Christie": "Haley Barbour",
+    "Jon Huntsman": "Nikki Haley",
+    "Stanley McChrystal": "Rick Perry",
+    "Condoleezza Rice": "John Thune",
     "Michael Bloomberg": "Charlie Crist",
-    "Mitt Romney" : "Paul Ryan",
-    "Newt Gingrich" : "Rick Santorum",
-    "David Petraeus" : "John Kasich",
-    "Donald Trump" : "Lou Barletta",
-    "Michele Bachmann" : "Tom Tancredo",
-    "Ron Paul" : vpName,
-    "Joe Arpaio" : "Bobby Jindal",
-    "Dick Cheney" : "Michael Steele",
-    "Jeb Bush" : "Susana Martinez",
-    "Clint Eastwood" : "<i>Various</i>",
-    "Ben Carson" : "Marco Rubio",
-    "John McCain" : "Joe Lieberman",
-	
-	
-	"Gary Johnson" : "Mark B. Madsen",
-	"Gary Sinise" : "Andrew Napolitano",
-	"Glenn Beck" : "Virgil Goode",
-	"Jimmy McMillan" : "Vermin Supreme",
-	"Penn Jillette" : "Adam Carolla",
-    "Curtis Sliwa" : "Rupert Boneham",
-    "Pat Buchanan" : vpName,
-    "David Lynch" : "Kyle MacLachlan",
-	
-	"Chelsea Manning" : "Cindy Sheehan",
-    "Cenk Uygur" : "Matt Taibbi",
-    "Chris Matthews" : "Alan Greenspan",
-    "Jill Stein" : "Cynthia Nixon",
-    "Dennis Kucinich" : "Steve Kubby",
-    "Joe Lieberman" : "Lincoln Chafee",
-    "Bernie Sanders" : "Cornel West",
+    "Mitt Romney": "Paul Ryan",
+    "Newt Gingrich": "Rick Santorum",
+    "David Petraeus": "John Kasich",
+    "Donald Trump": "Lou Barletta",
+    "Michele Bachmann": "Tom Tancredo",
+    "Ron Paul": vpName,
+    "Joe Arpaio": "Bobby Jindal",
+    "Dick Cheney": "Michael Steele",
+    "Jeb Bush": "Susana Martinez",
+    "Clint Eastwood": "<i>Various</i>",
+    "Ben Carson": "Marco Rubio",
+    "John McCain": "Joe Lieberman",
+    "Gary Johnson": "Mark B. Madsen",
+    "Gary Sinise": "Andrew Napolitano",
+    "Glenn Beck": "Virgil Goode",
+    "Jimmy McMillan": "Vermin Supreme",
+    "Penn Jillette": "Adam Carolla",
+    "Curtis Sliwa": "Rupert Boneham",
+    "Pat Buchanan": vpName,
+    "David Lynch": "Kyle MacLachlan",
+    "Chelsea Manning": "Cindy Sheehan",
+    "Cenk Uygur": "Matt Taibbi",
+    "Chris Matthews": "Alan Greenspan",
+    "Jill Stein": "Cynthia Nixon",
+    "Dennis Kucinich": "Steve Kubby",
+    "Joe Lieberman": "Lincoln Chafee",
+    "Bernie Sanders": "Cornel West",
+    "Zombie Reagan": "Howard Baker",
+};
 
-    "Zombie Reagan" : "Howard Baker",
+const vpTableHistorical = {
+    "Chris Christie": "Haley Barbour",
+    "Barack Hussein Obama": "Joe Biden",
+    "Dennis Kucinich": "Steve Kubby",
+    "Penn Jillette": "Adam Carolla",
+};
 
-}
-
-vpTableHistorical = {
-    "Chris Christie" : "Haley Barbour",
-    "Barack Hussein Obama" : "Joe Biden",
-    "Dennis Kucinich" : "Steve Kubby",
-    "Penn Jillette" : "Adam Carolla",
-}
-HistHexcolour=["#590205","#20788c","#5d0a61","#ab076c"];
-HistName=[" Chris Christie"," Barack Hussein Obama"," Dennis Kucinich"," Penn Jillette"];
-HistEV=[370,168,0,0];
-HistPV=["68,672,437","56,492,526","1,725,647","1,195,818"];
-HistPVP=["53.6%","44.1%","1.3%","0.9%"];
+HistHexcolour = ["#590205", "#20788c", "#5d0a61", "#ab076c"];
+HistName = ["Chris Christie", "Barack Hussein Obama", "Dennis Kucinich", "Penn Jillette"];
+HistEV = [370, 168, 0, 0];
+HistPV = ["68,672,437", "56,492,526", "1,725,647", "1,195,818"];
+HistPVP = ["53.6%", "44.1%", "1.3%", "0.9%"];
 
 function onGameWindowChangeCandidates() {
-        const resultsTableHolder = document.getElementById("overall_details_container");
-
-        if(!resultsTableHolder || resultsTableHolder.classList.contains("done")) {
-            return;
-        }
-
-        resultsTableHolder.classList.add("done");
-
-        const resultsTable = resultsTableHolder.childNodes[3].childNodes[3].children[0];
-        
-        for(let i = 0; i < resultsTable.children.length; i++) {
+    const resultsTableHolder = document.getElementById("overall_details_container");
+    
+    if (!resultsTableHolder || resultsTableHolder.classList.contains("done")) {
+        return;
+    }
+    
+    resultsTableHolder.classList.add("done");
+    
+    const resultsTable = resultsTableHolder.childNodes[3]?.childNodes[3]?.children[0];
+    if (resultsTable) {
+        for (let i = 0; i < resultsTable.children.length; i++) {
             const row = resultsTable.children[i];
-            let name = row.firstChild.innerText;
+            const name = row.firstChild?.innerText?.replaceAll("-", "").trim();
+            
             row.insertCell(1);
-            if(name) {
-                name = name.replaceAll("-", "").trim();
-                console.log("name is:" + name)
-            }
-
-            if(i == 0) {
-                row.children[1].innerHTML = `<span style="font-weight:bold">Running Mate<span>`;
-            }
-            else {
-                row.children[1].innerHTML = vpTable[name];
+            
+            if (i === 0) {
+                row.children[1].innerHTML = '<span style="font-weight:bold">Running Mate</span>';
+            } else if (name) {
+                row.children[1].innerHTML = vpTable[name] || "";
             }
         }
-
-        
-        const resultsTableHistorical = resultsTableHolder.childNodes[5].childNodes[3].children[0];
-        
-        for(let i = 0; i < resultsTableHistorical.children.length; i++) {
+    }
+    
+    const resultsTableHistorical = resultsTableHolder.childNodes[5]?.childNodes[3]?.children[0];
+    if (resultsTableHistorical) {
+        for (let i = 0; i < resultsTableHistorical.children.length; i++) {
             const row = resultsTableHistorical.children[i];
-            let name = row.childNodes[1].innerText;
+            const name = row.childNodes[1]?.innerText?.replaceAll("-", "").trim();
+            
             row.insertCell(1);
-            if(name) {
-                name = name.replaceAll("-", "").trim();
-            }
-
-            if(i == 0) {
-                row.children[1].innerHTML = `<span style="font-weight:bold">Running Mate<span>`;
-            }
-            else {
-                row.children[1].innerHTML = vpTableHistorical[name];
+            
+            if (i === 0) {
+                row.children[1].innerHTML = '<span style="font-weight:bold">Running Mate</span>';
+            } else if (name) {
+                row.children[1].innerHTML = vpTableHistorical[name] || "";
             }
         }
+    }
 }
 
 let RomneyCand = { photo: 'https://imgur.com/SDY67Tf.png', name: 'Mitt Romney', text: 'Despite a failed bid in 2008, Romney plans to run again. If your administration makes an enemy out of big business, Romney will certainly be the one to face you in November.', button: 'Defer', id: 'ROMNEY_A'}
@@ -46305,79 +46289,94 @@ const chartEnhancer = new ChartEnhancer();
 
 // constructs endings based on header and pages
 construct = (a = 1) => {
-	
-e.page = e.page + a < e.pages.length ? e.page + a : 0
-let html = e.header;
-html += e.pages[e.page] + "<br>";
-if (e.page > 0) {
+    e.page = e.page + a < e.pages.length ? e.page + a : 0;
+    
+    const parts = [e.header, e.pages[e.page], "<br>"];
+    
+    if (e.page > 0) {
+        parts.push(`<button onclick='endingConstructor(-1)'>Back</button>`);
+    }
+    if (e.page < e.pages.length - 1) {
+        parts.push(`<button onclick='endingConstructor(1)'>Next</button>`);
+    }
+    
+    for (let i = 0; i < e.executable.length; i++) {
+        if (e.executable[i][0] === e.page) {
+            e.executable[i][1]();
+        }
+    }
+    
+    if (e.image !== false) {
+        handleImageUpdate();
+    }
+    
+    return parts.join('');
+};
 
-html += `<button onclick='endingConstructor(a = -1)'>Back</button>`
-}
-if (e.page < e.pages.length - 1) {
-
-html += `<button onclick='endingConstructor(a = 1)'>Next</button>`
-}
-
-for (i in e.executable) {
-if (e.executable[i][0] == e.page) {
-    e.executable[i][1]();
-	
-}
-}
-
-if (e.image == true)
-setTimeout(()=>{
-  candImg = $(".person_image")[0]
-  if (candImg) {
-    candImg.remove()
-	console.log("TRYING");
-    $("#final_results_description")[0].style = `
-      text-align:left;
-      width: 72%;
-	  height:71%;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-	  overflow: auto;
-    `
-	 console.log("RESULTS UPDATED");
-  }
-}, 10)
-else if (e.image)
-setTimeout(()=>{
-  candImg = $(".person_image")[0];
-  if (candImg) {
-    candImg.src = e.image;
-	console.log("TRYING");
-    $("#final_results_description")[0].style = `
-      text-align:left;
-      width: 72%;
-	  height:71%;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-	  overflow: auto;
-    `
-    // Make sure final results uses 7.css scrollbar
-    $("#final_results_description")[0].classList.add("has-scrollbar");
-	 console.log("RESULTS UPDATED");
-  }		
-}, 10)
-
-return html;
-}
+// to handle ending images
+const handleImageUpdate = () => {
+    const updateImage = () => {
+        const candImg = $(".person_image")[0];
+        const resultsDesc = $("#final_results_description")[0];
+        
+        if (candImg && resultsDesc) {
+            if (e.image === true) {
+                candImg.remove();
+            } else {
+                candImg.src = e.image;
+                resultsDesc.classList.add("has-scrollbar");
+            }
+            
+            resultsDesc.style.cssText = `
+                text-align: left;
+                width: 72%;
+                height: 71%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                overflow: auto;
+            `;
+            
+            return true;
+        }
+        return false;
+    };
+    
+    if (updateImage()) return;
+    
+    const resultsDesc = $("#final_results_description")[0];
+    if (!resultsDesc) {
+        setTimeout(updateImage, 10);
+        return;
+    }
+    
+    const observer = new MutationObserver((mutations, obs) => {
+        if (updateImage()) {
+            obs.disconnect();
+        }
+    });
+    
+    observer.observe(resultsDesc, {
+        childList: true,
+        subtree: true
+    });
+    
+    setTimeout(() => observer.disconnect(), 1000);
+};
 
 endingConstructor = (a = 1) => {
-$("#final_results_description")[0].innerHTML = construct(a);
-}
+    const resultsDesc = $("#final_results_description")[0];
+    if (resultsDesc) {
+        resultsDesc.innerHTML = construct(a);
+    }
+};
 
 // ENDINGS -- this is slightly more reliable than the ending code method
-
 e.multiple_endings = true;
-
 e.header = "<h1>error</h1>";
 e.pages = ["<p>This is an error handler</p>"];
 e.page = 0;
+e.executable = e.executable || [];
 
 endingPicker = (out, totv, aa, quickstats) => {
 //out = "win", "loss", or "tie" for your candidate
@@ -47363,7 +47362,7 @@ e.pages.push(`<h3>Deserved of Their Scorn</h3>
 e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/BU86eOr.png"})])
 }
 
-if (quickstats[0] < 150 && (Rep != 6) && (Neolib == 1||e.player_answers.includes(9187)||e.player_answers.includes(9188)||e.player_answers.includes(9189)||e.player_answers.includes(9190)||e.player_answers.includes(9191)||e.player_answers.includes(9192)||e.player_answers.includes(9193)||e.player_answers.includes(9194)||e.player_answers.includes(9195)||e.player_answers.includes(9196)||e.player_answers.includes(9197)||e.player_answers.includes(9198)) && (Carrington == 0) && (Reagan == 0)) { // Landslide Betrayal Defeat
+if (quickstats[0] < 150 && (Rep != 6) && (Rep != 1) && (Neolib == 1||e.player_answers.includes(9187)||e.player_answers.includes(9188)||e.player_answers.includes(9189)||e.player_answers.includes(9190)||e.player_answers.includes(9191)||e.player_answers.includes(9192)||e.player_answers.includes(9193)||e.player_answers.includes(9194)||e.player_answers.includes(9195)||e.player_answers.includes(9196)||e.player_answers.includes(9197)||e.player_answers.includes(9198)) && (Carrington == 0) && (Reagan == 0)) { // Landslide Betrayal Defeat - but no Cheney or Rice
 e.pages.push(`<h3>Compromised to a Permanent End</h3>
           <p>Pandemonium.</p><p>It was pandemonium in Chicago.</p><p>Obama was taking calls from several people, none of which were from his opponent, as he had anticipated. Instead, they were donors, governors, Senators, party bosses, his running mate, all in his ear screaming in a bloody panic about the crisis. Democrats were being electorally and systemically slaughtered. Analysts and experts had thought the midterm gains for the Republicans would stop at 2010, but they were wrong. It was open season.</p><p>Obama flung his Samsung across the room, as Axelrod ducked before it could careen at his forehead. “Mr. President!”</p><p>“Sorry, David. Hadn't seen you there.”</p><p>Axelrod picked up the cracked phone. “Christ's sakes, you nearly took my head off.” He tossed in it a nearby bin. “You're not the first president to lose badly, you won't be the last.”</p><p>“No. I've just, uh, just got the taint of humiliating landslide loss is all. I'll be lucky if I'm just relegated to that little, uh, you know, that nice factoid in the future, first Black president, when I expect folks are going to rather forget I existed. I can't imagine a post-racial America would look too good having dumped their first Black man like this.”</p><p>“Yeah.”</p><p>“Won't look too good in the history textbooks. Not much of a feel good story.”</p><p>“Right, well I've got people on my lines, too. I don't know how in the name of God this could happen. I really don't. Jesus Christ, ever since Lehman it has just been shit.”</p><p>Obama leaned back in his chair and huffed. “I'd rather not think about that right now, David. About, uh, legacy. I don't have that luxury anymore. In your case I can only hope you've got some, um, Plan B after all this. At least for you, maybe most Americans don't know who you are. I don't know how I will avoid the infamy.”</p><p>Axelrod combed his sausage fingers through his receding hair. “Well, I came in, because for some reason, I don't know, I got a line on this Obama phone here.” He picked it out of his suit jacket, dangling it in the air. “Some...guy. He dropped it on my desk at the beginning of the day. Wouldn't say his name either. They were even using some voice modifier, I think. Jesus, Barry, what is this? Are you...you're not actually some kind of...I don't know... too be frank, I probably don't want to.”</p><p>Rolling his eyes, Obama reached out an open hand. “Just give it here, David. Some things you were kept out of the loop for, for your, uh, own peace of mind.”</p><p>Rubbing his temples with one hand, Axelrod dropped the cheap, throwaway phone in his boss's, before leaving the room, defeatedly. Pulling the phone to his ear, Obama nonchalantly answered.</p><p>“Speaking.”</p><p>“I'm sure you saw the returns.”</p><p>“No, it slipped my mind. How's it looking?”</p><p>“I don't think you need me to tell you this mission's been a failure. Your association with us is terminated, effective immediately. We do offer thanks. Thanks that you wiped your hands of us before you could flameout and bring us down with you.”</p><p>“That's a shame, you, you know. You've been such great help, always, um, pitching in. Doing nothing. Just sitting there, complaining, like children, when you were upset, or what have you. I mean with friends like these why need enem...”</p><p>“Just a question, Barry. Why the turn? Did their allure of money break you? Were you always a double agent? Have you ever really believed in <i>anything</i>?”</p><p>Obama stopped what he had been thinking and allowed himself to ponder on their inquiries. The answer seemed relatively obvious, only, under the circumstances, he couldn't exactly say it without looking like an ass.</p><p>“Did we disconnect...”</p><p>“Your, uh, system, set of beliefs. They're incompatible with how things work. If I had gone in lockstep with you, never become my own man, well I'd be a, um, uh, doing far worse than how I am now. I can promise you that. You would've destroyed me.” In the background, Anderson Cooper was reporting on staffers being talked off the ledge at the Obama watch party.</p><p>“I don't even know what to say...except...well, I want you to hear this, Barry. Put the phone as close to your ear as possible.”</p><p>Obama was intrigued if not a bit dreadful, but he did as he was told.</p><p>“It there? Okay, good. Now, hear this.”</p><p>The phone caught fire.</p><p>Obama backed away from it immediately, crashing into some curtains and cabinets. The fire alarm picked up the flaming object and began wailing. He could hear the screams and surprise from outside the room as the faucets shot water down. The combusted phone began to get drenched, and eventually, nothing was left of it but chared bits and pieces of electronics.</p><p>Michelle rushed in under the doorway. “Barry, Barry! Are you okay?”</p><p>Obama was now soaked. His crisp, well-tailored suit. Wet. The cusps of his right sleeve. Slightly burnt.</p><p>He stood there, under the pouring rain from up above.</p><p>“I'm fine, Michelle.”</p><p>Michelle walked up and lightly fixed him up, pointlessly. “Well, from my eyes, you're standing here. Under an active fire alarm, with water in your shoe and,” she glanced at the floor, “a broken, burnt phone?”</p><p>Obama picked up Michelle's wrists and pulled her in close, kissing her forehead as he did so. “It's not important anymore, Michelle. This, uh, this, a, endeavor, didn't work out like I thought it would. It's not the end. Me, you, Sasha, Malia, bring Bo and Sunny along, we're getting out of here.”</p><p>“Where we going?”</p><p>“Anywhere. Anywhere, but, uh, here. Let's go.”</p><p>Skipping his concession speech, Obama took Michelle by the hand, and fled the scene as interns and administration staff wildly raced around, jostling papers, and entered into the dead of night, into the great unknown.</p>`)
           // idk how to add playlists but to do that you create a new playlist in code1 with just that song and put changePlaylist(nameOfYourEndingPlaylist) right here
@@ -47371,7 +47370,7 @@ e.pages.push(`<h3>Compromised to a Permanent End</h3>
 e.executable.push([0, (() => {e.image = e.image = "https://i.imgur.com/70rfgIS.png"})])
 }
 
-if (quickstats[0] < 150 && quickstats[0] != 7 && Rep == 1 && (Neolib == 1||e.player_answers.includes(9187)||e.player_answers.includes(9188)||e.player_answers.includes(9189)||e.player_answers.includes(9190)||e.player_answers.includes(9191)||e.player_answers.includes(9192)||e.player_answers.includes(9193)||e.player_answers.includes(9194)||e.player_answers.includes(9195)||e.player_answers.includes(9196)||e.player_answers.includes(9197)||e.player_answers.includes(9198)) && (Carrington == 0) && (Reagan == 0)) { // Landslide Betrayal Defeat - Rice
+if (quickstats[0] >= 8 && quickstats[0] < 150 && quickstats[0] != 7 && Rep == 1 && (Neolib == 1||e.player_answers.includes(9187)||e.player_answers.includes(9188)||e.player_answers.includes(9189)||e.player_answers.includes(9190)||e.player_answers.includes(9191)||e.player_answers.includes(9192)||e.player_answers.includes(9193)||e.player_answers.includes(9194)||e.player_answers.includes(9195)||e.player_answers.includes(9196)||e.player_answers.includes(9197)||e.player_answers.includes(9198)) && (Carrington == 0) && (Reagan == 0)) { // Landslide Betrayal Defeat - Rice
 e.pages.push(`<h3>Compromised to a Permanent End</h3>
           <p>Pandemonium.</p><p>It was pandemonium in Chicago.</p><p>Obama was taking calls from several people, none of which were from his opponent, as he had anticipated. Instead, they were donors, governors, Senators, party bosses, his running mate, all in his ear screaming in a bloody panic about the crisis. Democrats were being electorally and systemically slaughtered. Analysts and experts had thought the midterm gains for the Republicans would stop at 2010, but they were wrong. It was open season.</p><p>Obama flung his Samsung across the room, as Axelrod ducked before it could careen at his forehead. “Mr. President!”</p><p>“Sorry, David. Hadn't seen you there.”</p><p>Axelrod picked up the cracked phone. “Christ's sakes, you nearly took my head off.” He tossed in it a nearby bin. “You're not the first president to lose badly, you won't be the last.”</p><p>“No. I've just, uh, just got the taint of humiliating landslide loss is all. I'll be lucky if I'm just relegated to that little, uh, you know, that nice factoid in the future, first Black president, when I expect folks are going to rather forget I existed. I can't imagine a post-racial America would look too good having dumped their first Black man like this.”</p><p>“Yeah.”</p><p>“Won't look too good in the history textbooks. Not much of a feel good story.”</p><p>“Right, well I've got people on my lines, too. I don't know how in the name of God this could happen. I really don't. Jesus Christ, ever since Lehman it has just been shit.”</p><p>Obama leaned back in his chair and huffed. “I'd rather not think about that right now, David. About, uh, legacy. I don't have that luxury anymore. In your case I can only hope you've got some, um, Plan B after all this. At least for you, maybe most Americans don't know who you are. I don't know how I will avoid the infamy.”</p><p>Axelrod combed his sausage fingers through his receding hair. “Well, I came in, because for some reason, I don't know, I got a line on this Obama phone here.” He picked it out of his suit jacket, dangling it in the air. “Some...guy. He dropped it on my desk at the beginning of the day. Wouldn't say his name either. They were even using some voice modifier, I think. Jesus, Barry, what is this? Are you...you're not actually some kind of...I don't know... too be frank, I probably don't want to.”</p><p>Rolling his eyes, Obama reached out an open hand. “Just give it here, David. Some things you were kept out of the loop for, for your, uh, own peace of mind.”</p><p>Rubbing his temples with one hand, Axelrod dropped the cheap, throwaway phone in his boss's, before leaving the room, defeatedly. Pulling the phone to his ear, Obama nonchalantly answered.</p><p>“Speaking.”</p><p>“I'm sure you saw the returns.”</p><p>“No, it slipped my mind. How's it looking?”</p><p>“I don't think you need me to tell you this mission's been a failure. Your association with us is terminated, effective immediately. We do offer thanks. Thanks that you wiped your hands of us before you could flameout and bring us down with you.”</p><p>“That's a shame, you, you know. You've been such great help, always, um, pitching in. Doing nothing. Just sitting there, complaining, like children, when you were upset, or what have you. I mean with friends like these why need enem...”</p><p>“Just a question, Barry. Why the turn? Did their allure of money break you? Were you always a double agent? Have you ever really believed in <i>anything</i>?”</p><p>Obama stopped what he had been thinking and allowed himself to ponder on their inquiries. The answer seemed relatively obvious, only, under the circumstances, he couldn't exactly say it without looking like an ass.</p><p>“Did we disconnect...”</p><p>“Your, uh, system, set of beliefs. They're incompatible with how things work. If I had gone in lockstep with you, never become my own man, well I'd be a, um, uh, doing far worse than how I am now. I can promise you that. You would've destroyed me.” In the background, Anderson Cooper was reporting on staffers being talked off the ledge at the Obama watch party.</p><p>“I don't even know what to say...except...well, I want you to hear this, Barry. Put the phone as close to your ear as possible.”</p><p>Obama was intrigued if not a bit dreadful, but he did as he was told.</p><p>“It there? Okay, good. Now, hear this.”</p><p>The phone caught fire.</p><p>Obama backed away from it immediately, crashing into some curtains and cabinets. The fire alarm picked up the flaming object and began wailing. He could hear the screams and surprise from outside the room as the faucets shot water down. The combusted phone began to get drenched, and eventually, nothing was left of it but chared bits and pieces of electronics.</p><p>Michelle rushed in under the doorway. “Barry, Barry! Are you okay?”</p><p>Obama was now soaked. His crisp, well-tailored suit. Wet. The cusps of his right sleeve. Slightly burnt.</p><p>He stood there, under the pouring rain from up above.</p><p>“I'm fine, Michelle.”</p><p>Michelle walked up and lightly fixed him up, pointlessly. “Well, from my eyes, you're standing here. Under an active fire alarm, with water in your shoe and,” she glanced at the floor, “a broken, burnt phone?”</p><p>Obama picked up Michelle's wrists and pulled her in close, kissing her forehead as he did so. “It's not important anymore, Michelle. This, uh, this, a, endeavor, didn't work out like I thought it would. It's not the end. Me, you, Sasha, Malia, bring Bo and Sunny along, we're getting out of here.”</p><p>“Where we going?”</p><p>“Anywhere. Anywhere, but, uh, here. Let's go.”</p><p>Skipping his concession speech, Obama took Michelle by the hand, and fled the scene as interns and administration staff wildly raced around, jostling papers, and entered into the dead of night, into the great unknown.</p>`)
           // idk how to add playlists but to do that you create a new playlist in code1 with just that song and put changePlaylist(nameOfYourEndingPlaylist) right here
