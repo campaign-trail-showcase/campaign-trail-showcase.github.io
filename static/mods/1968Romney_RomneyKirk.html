@@ -1,9 +1,3 @@
-function ctsAchievement(achievement, difficultyChecker = true){
-	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
-		if(campaignTrail_temp.CTS){
-		unlockAchievement(achievement);
-	}
-}
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -13342,7 +13336,7 @@ cyoAdventure = function(a) {
     ctsAchievement("Yes, Mr. Vice President<br> ");  
     }
     if (ans == 9346 || ans == 9342 ) {
-            ctsAchievement("Proselytize<br>⠀");  
+            ctsAchievement("Proselytize<br> ");  
     }          
 
 }
@@ -13553,7 +13547,7 @@ if (principles >= 0 && out == "loss") {
 }
 
 if (principles >= 6) {
-    ctsAchievement("Saint George<br>⠀");  
+    ctsAchievement("Saint George<br> ");  
 }
 if(out == "win" && (e.player_answers.includes(3249))){
     ctsAchievement("... of Lydda"); 
@@ -13562,7 +13556,7 @@ if (principles < 0) {
     ctsAchievement("Laman<br> ");  
 }
 if (principles == 0 && ideology == 0 && out == "win") {
-    ctsAchievement("Pitch Perfect<br>⠀");  
+    ctsAchievement("Pitch Perfect<br> ");  
 }
 if(quickstats[0] >= 320 && out == "win" && (e.player_answers.includes(9474))){
     ctsAchievement("In Control"); 
