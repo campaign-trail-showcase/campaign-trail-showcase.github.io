@@ -70,14 +70,17 @@ function expandFavoriteSet(favSet) {
 }
 
 let achievementsCache = null;
+let modCompletionCache = null;
+let lastCacheUpdate = 0;
+const CACHE_TTL = 5000; // 5 seconds
 
 function buildAchievementsCache() {
   if (achievementsCache) return achievementsCache;
 
-  achievementsCache = {};
+  achievementsCache = new Map();
   for (const mod in allAch) {
     for (const a in allAch[mod]) {
-      achievementsCache[a] = allAch[mod][a];
+      achievementsCache.set(a, allAch[mod][a]);
     }
   }
   return achievementsCache;
@@ -85,7 +88,7 @@ function buildAchievementsCache() {
 
 function findAchievementByName(name) {
   const cache = buildAchievementsCache();
-  return cache[name] || null;
+  return cache.get(name) || null;
 }
 
 function unlockAchievement(name) {
@@ -111,6 +114,11 @@ function unlockAchievement(name) {
   } catch (e) {
     console.error("Error while saving achievements:", e);
   }
+  
+  // invalidate cache
+  modCompletionCache = null;
+  lastCacheUpdate = 0;
+  
   addAllAchievements();
 }
 
@@ -370,7 +378,7 @@ function getContrastingTextColor(bgColor) {
 }
 
 // Returns true if the achievement is unlocked
-function addAchivement(achName, achData, parent, theme) {
+function addAchivement(achName, achData, parent, theme, lazyLoad = false) {
   const ach = document.createElement("div");
   const locked = unlockedAch[achName] == null;
 
@@ -391,12 +399,15 @@ function addAchivement(achName, achData, parent, theme) {
     themeStyles.mainBg = theme.main_color ? theme.main_color : "";
   }
 
+  const imgSrc = lazyLoad ? 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' : achData.image;
+  const imgDataSrc = lazyLoad ? `data-src="${achData.image}"` : '';
+
   ach.innerHTML = `
     <div class="achTitle" style="${themeStyles.titleColor}">
         ${achName}
     </div>
     <div class="achImageHolder">
-        <img class="achImage" src=${achData.image}></img>
+        <img class="achImage" src="${imgSrc}" ${imgDataSrc}></img>
     </div>
     <div class="achText" style="${themeStyles.textBg}; ${themeStyles.textColor}">
         ${achData.description}
@@ -412,6 +423,30 @@ function addAchivement(achName, achData, parent, theme) {
   return !locked;
 }
 
+// lazy lad images using Intersection Observer
+function setupLazyLoading(container) {
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            observer.unobserve(img);
+          }
+        }
+      });
+    }, {
+      rootMargin: '50px'
+    });
+
+    container.querySelectorAll('img[data-src]').forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
+}
+
 function togglePinnedMod(modName) {
   if (pinnedAchMods.has(modName)) {
     pinnedAchMods.delete(modName);
@@ -425,6 +460,26 @@ function togglePinnedMod(modName) {
 }
 
 function addSortingControls() {
+  if (sortingControlsElement) {
+    const buttons = sortingControlsElement.querySelectorAll('button');
+    buttons.forEach(button => {
+      const buttonText = button.innerText;
+      if (buttonText === "Default") {
+        button.classList.toggle("active", achSortMethod === "default");
+      } else if (buttonText === "Most Complete") {
+        button.classList.toggle("active", achSortMethod === "percentComplete");
+      } else if (buttonText === "Most Achievements") {
+        button.classList.toggle("active", achSortMethod === "mostAch");
+      } else if (buttonText === "Least Achievements") {
+        button.classList.toggle("active", achSortMethod === "leastAch");
+      } else if (buttonText === "Show Favorites Only") {
+        button.classList.toggle("active", showOnlyFavoriteMods);
+        button.disabled = showAllModsLegacyAch;
+      }
+    });
+    return sortingControlsElement;
+  }
+
   const controlsContainer = document.createElement("div");
   controlsContainer.classList.add("ach-controls");
 
@@ -447,7 +502,7 @@ function addSortingControls() {
   const favoritesButton = document.createElement("button");
   favoritesButton.innerText = "Show Favorites Only";
   favoritesButton.classList.toggle("active", showOnlyFavoriteMods);
-  favoritesButton.disabled = showAllModsLegacy;
+  favoritesButton.disabled = showAllModsLegacyAch;
   favoritesButton.addEventListener("click", () => {
     showOnlyFavoriteMods = !showOnlyFavoriteMods;
     currentAchPage = 1;
@@ -455,10 +510,19 @@ function addSortingControls() {
   });
   controlsContainer.appendChild(favoritesButton);
 
-  return controlsContainer;
+  sortingControlsElement = controlsContainer;
+  return sortingControlsElement;
 }
 
 function addLegacyViewControls() {
+  if (legacyViewControlsElement) {
+    const checkbox = legacyViewControlsElement.querySelector('#legacyViewCheckbox');
+    if (checkbox) {
+      checkbox.checked = showAllModsLegacyAch;
+    }
+    return legacyViewControlsElement;
+  }
+
   const container = document.createElement("div");
   container.style.display = "flex";
   container.style.justifyContent = "center";
@@ -469,14 +533,14 @@ function addLegacyViewControls() {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.id = "legacyViewCheckbox";
-  checkbox.checked = showAllModsLegacy;
+  checkbox.checked = showAllModsLegacyAch;
   checkbox.style.cursor = "pointer";
   checkbox.addEventListener("change", () => {
-    showAllModsLegacy = checkbox.checked;
+    showAllModsLegacyAch = checkbox.checked;
     try {
-      localStorage.setItem("showAllModsLegacyAch", showAllModsLegacy);
+      localStorage.setItem("showAllModsLegacyAch", showAllModsLegacyAch);
     } catch (e) { }
-    if (showAllModsLegacy) {
+    if (showAllModsLegacyAch) {
       showOnlyFavoriteMods = false;
     }
     currentAchPage = 1;
@@ -498,14 +562,29 @@ function addLegacyViewControls() {
   container.appendChild(label);
   container.appendChild(loadingSpan);
 
-  return container;
+  legacyViewControlsElement = container;
+  return legacyViewControlsElement;
 }
 
 let achievementSearchText = "";
 let achSearchQuery = "";
 
+let searchBarElement = null;
+let sortingControlsElement = null;
+let legacyViewControlsElement = null;
+let contentContainerElement = null;
+
 // search bar for achievements
 function addSearchBar() {
+  if (searchBarElement) {
+    // update the input value if query changed externally
+    const searchInput = searchBarElement.querySelector('.ach-search-input');
+    if (searchInput && searchInput.value !== achSearchQuery) {
+      searchInput.value = achSearchQuery;
+    }
+    return searchBarElement;
+  }
+
   const searchContainer = document.createElement("div");
   searchContainer.classList.add("ach-search-container");
 
@@ -527,10 +606,43 @@ function addSearchBar() {
   });
 
   searchContainer.appendChild(searchInput);
-  return searchContainer;
+  searchBarElement = searchContainer;
+  return searchBarElement;
 }
 
-function renderModList(modNamesToRender, modCompletionData) {
+function getModCompletionData(forceRefresh = false) {
+  const now = Date.now();
+  
+  if (!forceRefresh && modCompletionCache && (now - lastCacheUpdate < CACHE_TTL)) {
+    return modCompletionCache;
+  }
+
+  const allModNames = Object.keys(allAch);
+  modCompletionCache = allModNames.map(modName => {
+    let count = 0;
+    let total = 0;
+    if (allAch[modName]) {
+      total = Object.keys(allAch[modName]).length;
+      for (const achName in allAch[modName]) {
+        if (unlockedAch[achName] != null) count++;
+      }
+    }
+    const percentComplete = total > 0 ? (count / total) * 100 : 0;
+    return { 
+      modName, 
+      count, 
+      total, 
+      percentComplete, 
+      isPinned: pinnedAchMods.has(modName), 
+      isFavorite: getFavoriteMods().has(modName) 
+    };
+  });
+  
+  lastCacheUpdate = now;
+  return modCompletionCache;
+}
+
+function renderModList(modNamesToRender, modCompletionData, useLazyLoading = false) {
   const fragment = document.createDocumentFragment();
   let achAvail = false;
 
@@ -574,7 +686,7 @@ function renderModList(modNamesToRender, modCompletionData) {
         ach.toLowerCase().includes(achSearchQuery) ||
         (achObj.description && achObj.description.toLowerCase().includes(achSearchQuery))
       ) {
-        addAchivement(ach, achObj, subHolder, theme);
+        addAchivement(ach, achObj, subHolder, theme, useLazyLoading);
       }
     }
 
@@ -603,11 +715,17 @@ function renderModList(modNamesToRender, modCompletionData) {
     toggle.classList.add("achToggle");
     labelHolder.appendChild(toggle);
     toggle.innerText = "+";
+    
     labelHolder.onclick = () => {
       const isVisible = subHolder.classList.contains("visible");
       toggle.innerText = isVisible ? "+" : "-";
       subHolder.classList.toggle("visible");
+      
+      if (!isVisible && useLazyLoading) {
+        requestAnimationFrame(() => setupLazyLoading(subHolder));
+      }
     };
+    
     holder.appendChild(labelHolder);
     holder.appendChild(subHolder);
     fragment.appendChild(holder);
@@ -655,27 +773,40 @@ function getCurrentModName() {
   return null;
 }
 
+let renderTimeout;
 function addAllAchievements() {
-  achContent.innerHTML = "";
+  clearTimeout(renderTimeout);
+  renderTimeout = setTimeout(() => {
+    performRender();
+  }, 10);
+}
 
-  achContent.appendChild(addSearchBar());
-  achContent.appendChild(addSortingControls());
-  achContent.appendChild(addLegacyViewControls());
+function performRender() {
+  if (!contentContainerElement) {
+    contentContainerElement = document.createElement("div");
+    contentContainerElement.id = "ach-content-container";
+  }
 
-  // prepare data for all mods first
-  let allModNames = Object.keys(allAch);
-  const modCompletionData = allModNames.map(modName => {
-    let count = 0;
-    let total = 0;
-    if (allAch[modName]) {
-      total = Object.keys(allAch[modName]).length;
-      for (const achName in allAch[modName]) {
-        if (unlockedAch[achName] != null) count++;
-      }
-    }
-    const percentComplete = total > 0 ? (count / total) * 100 : 0;
-    return { modName, count, total, percentComplete, isPinned: pinnedAchMods.has(modName), isFavorite: getFavoriteMods().has(modName) };
-  });
+  const searchBar = addSearchBar();
+  const sortingControls = addSortingControls();
+  const legacyViewControls = addLegacyViewControls();
+
+  if (!searchBar.parentElement) {
+    achContent.appendChild(searchBar);
+  }
+  if (!sortingControls.parentElement) {
+    achContent.appendChild(sortingControls);
+  }
+  if (!legacyViewControls.parentElement) {
+    achContent.appendChild(legacyViewControls);
+  }
+  if (!contentContainerElement.parentElement) {
+    achContent.appendChild(contentContainerElement);
+  }
+
+  contentContainerElement.innerHTML = "";
+
+  const modCompletionData = getModCompletionData();
 
   // sort the entire dataset
   switch (achSortMethod) {
@@ -691,7 +822,8 @@ function addAllAchievements() {
   // get mod name
   const currentMod = getCurrentModName();
 
-  if (currentMod) {
+  // only filter to current mod if NOT in legacy view
+  if (!showAllModsLegacyAch && currentMod) {
     // special case: when playing 2024, also show 2024 Divided States achievements
     if (currentMod === "2024" || currentMod === "2024 Divided States") {
       namesToShow = namesToShow.filter(modName => modName === "2024" || modName === "2024 Divided States");
@@ -726,7 +858,7 @@ function addAllAchievements() {
     });
   }
 
-  if (showAllModsLegacy) {
+  if (showAllModsLegacyAch) {
     const loadingMessageSpan = document.getElementById("legacy-view-loading-message");
     const checkbox = document.getElementById("legacyViewCheckbox");
 
@@ -734,8 +866,10 @@ function addAllAchievements() {
     if (checkbox) checkbox.disabled = true;
 
     setTimeout(() => {
-      const fragment = renderModList(namesToShow, modCompletionData);
-      achContent.appendChild(fragment);
+      const fragment = renderModList(namesToShow, modCompletionData, true);
+      contentContainerElement.appendChild(fragment);
+      
+      requestAnimationFrame(() => setupLazyLoading(contentContainerElement));
 
       if (loadingMessageSpan) loadingMessageSpan.style.display = "none";
       if (checkbox) checkbox.disabled = false;
@@ -749,8 +883,8 @@ function addAllAchievements() {
     const endIndex = Math.min(startIndex + achievementsPerPage, namesToShow.length);
     const currentPageNames = namesToShow.slice(startIndex, endIndex);
 
-    const fragment = renderModList(currentPageNames, modCompletionData);
-    achContent.appendChild(fragment);
+    const fragment = renderModList(currentPageNames, modCompletionData, false);
+    contentContainerElement.appendChild(fragment);
 
     if (totalAchPages > 1) {
       addAchievementPaginationControls();
@@ -781,7 +915,7 @@ function addAchievementPaginationControls() {
   paginationContainer.appendChild(pageInfo);
   paginationContainer.appendChild(nextButton);
 
-  achContent.appendChild(paginationContainer);
+  contentContainerElement.appendChild(paginationContainer);
 }
 
 addAllAchievements();

@@ -233,7 +233,7 @@
   outline-style: solid;
   margin-top: 32px;
   margin-bottom: 16px;
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
