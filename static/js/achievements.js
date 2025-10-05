@@ -23,6 +23,7 @@ try {
 } catch (e) {
   showAllModsLegacyAch = false;
 }
+let isAchUIInitialized = false;
 let pinnedAchMods = new Set();
 
 try {
@@ -126,211 +127,41 @@ const achWindow = document.getElementById("achwindow");
 const achButton = document.getElementById("achButton");
 const achContent = document.getElementById("achcontent");
 
-const styleElement = document.createElement("style");
-styleElement.textContent = `
-  .achSubHolder {
-    overflow: auto;
-    transition: opacity 0.3s ease-out;
-    max-height: none;
-    opacity: 0;
-    display: none;
-  }
-  .achSubHolder.visible {
-    opacity: 1;
-    display: inline-flex;
-    flex-wrap: wrap;
-  }
-  .ach-pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-    gap: 10px;
-  }
-  .ach-pagination button, .ach-controls button, .pin-button, .fav-icon {
-    padding: 5px 10px;
-    background-color: #4a6ea9;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 2px;
-  }
-  .ach-pagination button:disabled, .ach-controls button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  .ach-pagination-info {
-    padding: 5px 10px;
-  }
-  .ach-controls {
-    display: flex;
-    justify-content: center;
-    margin: 15px 0 0 0;
-    flex-wrap: wrap;
-  }
-  .ach-controls button.active {
-    background-color: #2a4e89;
-    font-weight: bold;
-  }
-  .mod-actions {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    display: flex;
-    gap: 5px;
-    z-index: 10;
-  }
-  .pin-button, .fav-icon {
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 16px;
-  }
-  .pin-button.pinned {
-    background-color: #f0ad4e;
-  }
-  .fav-icon {
-    background-color: #f0ad4e;
-    cursor: default;
-  }
-  .achLabel {
-    position: relative;
-  }
-  .mod-completion {
-    color: white;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-  }
-  .ach-search-container {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
-    padding: 0 10px;
-  }
-  .ach-search-input {
-    width: 100%;
-    max-width: 400px;
-    padding: 8px 12px;
-    border: 2px solid #4a6ea9;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  .ach-search-input:focus {
-    outline: none;
-    border-color: #2a4e89;
-  }
-  .search-highlight {
-    background-color: yellow;
-    font-weight: bold;
-  }
-
-  /* Mobile and small screen responsive styles */
-  @media (max-width: 768px) {
-    #achwindow {
-      width: 95vw !important;
-      height: 90vh !important;
-      max-width: 95vw !important;
-      max-height: 90vh !important;
-    }
-    
-    #achcontent {
-      max-height: calc(90vh - 80px);
-    }
-    
-    .ach-controls button {
-      padding: 12px 6px;
-      font-size: 16px;
-      min-height: 44px;
-    }
-    
-    .ach-pagination {
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 20px;
-    }
-    
-    .ach-pagination button {
-      padding: 12px 20px;
-      font-size: 16px;
-      min-height: 44px;
-      touch-action: manipulation;
-    }
-    
-    .ach-pagination-info {
-      text-align: center;
-      padding: 12px;
-      font-size: 16px;
-    }
-    
-    .achBox {
-      margin: 8px 4px;
-      min-width: calc(50% - 8px);
-    }
-    
-    .achBox img {
-      width: calc(50% - 8px);      
-    }
-    
-    .achLabel {
-      padding: 12px;
-      min-height: 40px;
-      cursor: pointer;
-    }
-    
-    .achLabel p {
-      font-size: 16px;
-      margin: 0;
-      padding-right: 80px;
-    }
-    
-  }
-
-  @media (max-width: 480px) {
-    .achBox {
-      min-width: calc(60% - 8px);
-    }
-    
-    .ach-controls {
-      padding: 0 5px;
-    }
-    
-    .ach-pagination {
-      padding: 0 5px;
-    }
-    
-    .achLabel p {
-      font-size: 14px;
-      padding-right: 60px;
-    }
-    
-    .mod-completion {
-      font-size: 10px;
-      padding: 4px;
-    }
-    
-    .achBox img {
-      width: calc(40% - 8px);      
-    }
-    
-    .pin-button, .fav-icon {
-      width: 32px;
-      height: 32px;
-      font-size: 16px;
-    }
-  }
-`;
-document.head.appendChild(styleElement);
-
 function openAchievements() {
-  addAllAchievements();
+  // If the UI hasn't been built yet, build it once.
+  if (!isAchUIInitialized) {
+    setupAchievementUI();
+  }
+  
+  // Now, just run the render logic.
+  addAllAchievements(); // This will call performRender
 
   achWindow.style.display = "block";
-
   centerAchievementsWindow();
+}
+
+// --- NEW: One-time UI setup function ---
+function setupAchievementUI() {
+  // Clear the main content area ONCE.
+  achContent.innerHTML = "";
+
+  // Create and cache the static control elements
+  searchBarElement = addSearchBar();
+  sortingControlsElement = addSortingControls();
+  legacyViewControlsElement = addLegacyViewControls();
+  
+  // Create and cache the container for the dynamic list of mods and pagination
+  contentContainerElement = document.createElement("div");
+  contentContainerElement.id = "ach-content-container";
+  contentContainerElement.style.width = "100%"; // Ensure it takes full width in the flex layout
+
+  // Append all the static pieces to the DOM in the correct order.
+  achContent.appendChild(searchBarElement);
+  achContent.appendChild(sortingControlsElement);
+  achContent.appendChild(legacyViewControlsElement);
+  achContent.appendChild(contentContainerElement);
+
+  isAchUIInitialized = true;
 }
 
 function centerAchievementsWindow() {
@@ -642,33 +473,26 @@ function getModCompletionData(forceRefresh = false) {
   return modCompletionCache;
 }
 
-function renderModList(modNamesToRender, modCompletionData, useLazyLoading = false) {
+function renderModList(modsToRender, useLazyLoading = false) {
   const fragment = document.createDocumentFragment();
-  let achAvail = false;
 
-  for (const modName of modNamesToRender) {
-    if (!allAch[modName]) continue;
+  if (modsToRender.length === 0) {
+    const message = document.createElement("p");
+    message.style.textAlign = "center";
+    message.style.marginTop = "20px";
+    message.textContent = achSearchQuery.trim().length > 0
+      ? "No achievements or mods match your search."
+      : (showOnlyFavoriteMods
+        ? "No achievements found for favorite mods. Uncheck the filter or pin some mods to see them here!"
+        : "No achievements are currently added yet! Check back later!");
+    fragment.appendChild(message);
+    return fragment;
+  }
+
+  for (const modData of modsToRender) {
+    const { modName, count, total, percentComplete } = modData;
+    
     const modDisplayName = namesOfModsFromValue[modName] || modName;
-    let modMatches = achSearchQuery.trim().length === 0 ||
-      modDisplayName.toLowerCase().includes(achSearchQuery);
-
-    let achMatches = false;
-    for (const ach in allAch[modName]) {
-      const achObj = allAch[modName][ach];
-      if (
-        ach.toLowerCase().includes(achSearchQuery) ||
-        (achObj.description && achObj.description.toLowerCase().includes(achSearchQuery))
-      ) {
-        achMatches = true;
-        break;
-      }
-    }
-
-    if (!modMatches && !achMatches) continue;
-
-    achAvail = true;
-    const modData = modCompletionData.find(data => data.modName === modName);
-    const { count, total, percentComplete } = modData;
     const holder = document.createElement("div");
     holder.classList.add("achHolder");
     const subHolder = document.createElement("div");
@@ -742,17 +566,6 @@ function renderModList(modNamesToRender, modCompletionData, useLazyLoading = fal
     }
   }
 
-  if (!achAvail) {
-    const message = document.createElement("p");
-    message.style.textAlign = "center";
-    message.style.marginTop = "20px";
-    message.textContent = achSearchQuery.trim().length > 0
-      ? "No achievements match your search."
-      : (showOnlyFavoriteMods
-        ? "No achievements found for favorite mods. Uncheck the filter or pin some mods to see them here!"
-        : "No achievements are currently added yet! Check back later!");
-    fragment.appendChild(message);
-  }
   return fragment;
 }
 
@@ -782,74 +595,39 @@ function addAllAchievements() {
 }
 
 function performRender() {
-  if (!contentContainerElement) {
-    contentContainerElement = document.createElement("div");
-    contentContainerElement.id = "ach-content-container";
-  }
+  if (!contentContainerElement) return;
 
-  const searchBar = addSearchBar();
-  const sortingControls = addSortingControls();
-  const legacyViewControls = addLegacyViewControls();
+  // update the state of the static controls
+  addSortingControls(); 
+  addLegacyViewControls();
 
-  if (!searchBar.parentElement) {
-    achContent.appendChild(searchBar);
-  }
-  if (!sortingControls.parentElement) {
-    achContent.appendChild(sortingControls);
-  }
-  if (!legacyViewControls.parentElement) {
-    achContent.appendChild(legacyViewControls);
-  }
-  if (!contentContainerElement.parentElement) {
-    achContent.appendChild(contentContainerElement);
-  }
-
-  contentContainerElement.innerHTML = "";
-
+  // get the base data
   const modCompletionData = getModCompletionData();
+  let processedData = [...modCompletionData];
 
-  // sort the entire dataset
-  switch (achSortMethod) {
-    case "percentComplete": modCompletionData.sort((a, b) => (a.isPinned !== b.isPinned) ? (a.isPinned ? -1 : 1) : b.percentComplete - a.percentComplete); break;
-    case "mostAch": modCompletionData.sort((a, b) => (a.isPinned !== b.isPinned) ? (a.isPinned ? -1 : 1) : b.total - a.total); break;
-    case "leastAch": modCompletionData.sort((a, b) => (a.isPinned !== b.isPinned) ? (a.isPinned ? -1 : 1) : a.total - b.total); break;
-    default: modCompletionData.sort((a, b) => (a.isPinned !== b.isPinned) ? (a.isPinned ? -1 : 1) : a.modName.localeCompare(b.modName));
-  }
-  let sortedNames = modCompletionData.map(data => data.modName);
-
-  let namesToShow = sortedNames;
-
-  // get mod name
+  // filter the data
   const currentMod = getCurrentModName();
 
   // only filter to current mod if NOT in legacy view
   if (!showAllModsLegacyAch && currentMod) {
     // special case: when playing 2024, also show 2024 Divided States achievements
-    if (currentMod === "2024" || currentMod === "2024 Divided States") {
-      namesToShow = namesToShow.filter(modName => modName === "2024" || modName === "2024 Divided States");
-    } else {
-      namesToShow = namesToShow.filter(modName => modName === currentMod);
-    }
-  }
-
-  if (showOnlyFavoriteMods) {
-    const favMods = getFavoriteMods();
+    const linkedMods = (currentMod === "2024" || currentMod === "2024 Divided States") 
+        ? ["2024", "2024 Divided States"] 
+        : [currentMod];
+    processedData = processedData.filter(mod => linkedMods.includes(mod.modName));
+  } else if (showOnlyFavoriteMods) {
+    const expandedFavs = expandFavoriteSet(getFavoriteMods());
     // expand favorites to include linked mods (e.g., 2024 <-> 2024 Divided States)
-    const expandedFavs = expandFavoriteSet(favMods);
-    if (expandedFavs.size > 0 || pinnedAchMods.size > 0) {
-      namesToShow = namesToShow.filter(modName => expandedFavs.has(modName) || pinnedAchMods.has(modName));
-    }
+    processedData = processedData.filter(mod => expandedFavs.has(mod.modName) || mod.isPinned);
   }
 
   if (achSearchQuery) {
-    namesToShow = namesToShow.filter(modName => {
+    processedData = processedData.filter(modData => {
       // search in mod name
-      if (namesOfModsFromValue[modName]?.toLowerCase().includes(achSearchQuery)) {
-        return true;
-      }
+      if (namesOfModsFromValue[modData.modName]?.toLowerCase().includes(achSearchQuery)) return true;
       // search in achievement names and descriptions
-      if (allAch[modName]) {
-        return Object.entries(allAch[modName]).some(([achName, achData]) =>
+      if (allAch[modData.modName]) {
+        return Object.entries(allAch[modData.modName]).some(([achName, achData]) =>
           achName.toLowerCase().includes(achSearchQuery) ||
           achData.description?.toLowerCase().includes(achSearchQuery)
         );
@@ -858,32 +636,31 @@ function performRender() {
     });
   }
 
+  // sort the filtered data
+  switch (achSortMethod) {
+    case "percentComplete": processedData.sort((a, b) => (b.isPinned - a.isPinned) || b.percentComplete - a.percentComplete); break;
+    case "mostAch": processedData.sort((a, b) => (b.isPinned - a.isPinned) || b.total - a.total); break;
+    case "leastAch": processedData.sort((a, b) => (b.isPinned - a.isPinned) || a.total - b.total); break;
+    default: processedData.sort((a, b) => (b.isPinned - a.isPinned) || a.modName.localeCompare(b.modName));
+  }
+
+  // clear the dynamic content container
+  contentContainerElement.innerHTML = "";
+
+  // paginate and Render into the clean container
   if (showAllModsLegacyAch) {
-    const loadingMessageSpan = document.getElementById("legacy-view-loading-message");
-    const checkbox = document.getElementById("legacyViewCheckbox");
-
-    if (loadingMessageSpan) loadingMessageSpan.style.display = "inline";
-    if (checkbox) checkbox.disabled = true;
-
-    setTimeout(() => {
-      const fragment = renderModList(namesToShow, modCompletionData, true);
-      contentContainerElement.appendChild(fragment);
-      
-      requestAnimationFrame(() => setupLazyLoading(contentContainerElement));
-
-      if (loadingMessageSpan) loadingMessageSpan.style.display = "none";
-      if (checkbox) checkbox.disabled = false;
-    }, 0);
-
+    const fragment = renderModList(processedData, true);
+    contentContainerElement.appendChild(fragment);
+    requestAnimationFrame(() => setupLazyLoading(contentContainerElement));
   } else {
-    // standard view: filter and paginate
-    totalAchPages = Math.ceil(namesToShow.length / achievementsPerPage);
+    totalAchPages = Math.ceil(processedData.length / achievementsPerPage);
     if (currentAchPage > totalAchPages && totalAchPages > 0) currentAchPage = totalAchPages;
+    
     const startIndex = (currentAchPage - 1) * achievementsPerPage;
-    const endIndex = Math.min(startIndex + achievementsPerPage, namesToShow.length);
-    const currentPageNames = namesToShow.slice(startIndex, endIndex);
+    const endIndex = Math.min(startIndex + achievementsPerPage, processedData.length);
+    const currentPageData = processedData.slice(startIndex, endIndex);
 
-    const fragment = renderModList(currentPageNames, modCompletionData, false);
+    const fragment = renderModList(currentPageData, false);
     contentContainerElement.appendChild(fragment);
 
     if (totalAchPages > 1) {
