@@ -800,24 +800,24 @@ const shining_menu = (polling) => {
                 <h2>Current Ad Spends</h2>
                 <em>Note: will <b>all</b> automatically be cancelled in the event of your campaign running a debt.</em>
                 <p>
-                <center> <!-- This tag can be explained by laziness -->
+                <div style='text-align: center;'>
                 ${adSpendTable}
-                </center>
+                </div>
                 </p>
             </div>
             <div id="staff" class="tabcontent">
                 <h2>Staff</h2>
-                <center> <!-- This tag can be explained by laziness -->
+                <div style='text-align: center;'>
                 ${staffTable}
-                </center>
+                </div>
             </div>
             <div id="lobbies" class="tabcontent">
                 <h2>Lobbies</h2>
                 <em>Align your answers with an organisation's values in order to have them contribute to fundraising.</em>
                 <p>
-                <center> <!-- This tag can be explained by laziness -->
+                <div style='text-align: center;'>
                 ${lobbyTable}
-                </center>
+                </div>
                 </p>
             </div>
         </div>
