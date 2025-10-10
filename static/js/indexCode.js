@@ -218,7 +218,19 @@ async function loadJSON(path, varr, callback = null) {
   const res = await fetch(path);
   if (!res.ok) return;
   const responseText = await res.text();
-  eval(varr + "=JSON.parse(" + JSON.stringify(responseText.trim()) + ")");
+  
+  // parse nested property path and assign
+  const parts = varr.split('.');
+  let obj = window;
+  
+  // navigate to the parent object
+  for (let i = 0; i < parts.length - 1; i++) {
+    obj = obj[parts[i]];
+  }
+  
+  // assign to the final property
+  obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
+  
   if (callback) callback();
 }
 
