@@ -1151,7 +1151,7 @@ function updateModViews(event) {
     if (loadingMessage) loadingMessage.style.display = 'inline';
     if (checkbox) checkbox.disabled = true;
 
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       const fragment = document.createDocumentFragment();
       modList.forEach((modView) => {
         modView.style.display = "flex";
@@ -1164,7 +1164,7 @@ function updateModViews(event) {
 
       if (loadingMessage) loadingMessage.style.display = 'none';
       if (checkbox) checkbox.disabled = false;
-    }, 0);
+    });
 
   } else {
     toggleFilterControls(false); // re-enable filters
