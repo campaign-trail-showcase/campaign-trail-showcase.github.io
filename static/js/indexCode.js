@@ -123,9 +123,21 @@ const campaignTrailMusic = document.getElementById("campaigntrailmusic");
 const dynamicStyle = document.createElement("style");
 document.head.appendChild(dynamicStyle);
 
+// Not removed because used by 2023 WOKE
 function updateBannerAndStyling() {
   header.src = selectedTheme.banner;
   header.width = 1000;
+  document.body.background = selectedTheme.background;
+  gameWindow.style.backgroundColor = selectedTheme.coloring_window;
+  container.style.backgroundColor = selectedTheme.coloring_container;
+  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+  if (selectedTheme.text_col != null) {
+    container.style.color = selectedTheme.text_col;
+    gameWindow.style.color = "black";
+  }
+}
+
+function updateStyling() {
   document.body.background = selectedTheme.background;
   gameWindow.style.backgroundColor = selectedTheme.coloring_window;
   container.style.backgroundColor = selectedTheme.coloring_container;
@@ -185,7 +197,7 @@ setInterval(() => {
     nct_stuff.themes[nct_stuff.selectedTheme] = strCopy(nct_stuff.custom_override);
     selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
     gameWindow.style.backgroundImage = "";
-    updateBannerAndStyling();
+    updateStyling();
   } else if (
     !nct_stuff.custom_override &&
     nct_stuff.selectedTheme == "custom" &&
@@ -249,4 +261,4 @@ campaignTrail_temp.show_premium = true;
 campaignTrail_temp.premier_ab_test_version = -1;
 campaignTrail_temp.credits = "Dan Bryan";
 
-updateBannerAndStyling();
+updateStyling();
