@@ -589,11 +589,23 @@
   padding: 10px;
   background: #ff9595;
   width: fit-content;
-  position: absolute;
+  position: fixed;
   border-radius: 0 .5em .5em 0;
   font-size: large;
   font-weight: bold;
   z-index: 999;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cheatIndicator:hover {
+  opacity: 0.90;
+  transform: scale(1.02);
+}
+
+.cheatIndicator:active {
+  transform: scale(0.98);
 }
 
 .mode-button {
