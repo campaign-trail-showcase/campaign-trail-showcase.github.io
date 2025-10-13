@@ -73,13 +73,13 @@ async function benefitCheck(objectid) {
   // variable effects for answer in benefit checker
   let variableChanges = "";
   try {
-    if (!window.variableData) {
-      const answerVariableResult = await fetch('../static/json/answer_variables.json');
-      window.variableData = await answerVariableResult.json();
-    }
-
     const modUrl = new URLSearchParams(window.location.search);
     const modName = modUrl.get("modName");
+
+    if (!window.variableData) {
+      const answerVariableResult = await fetch(`../static/json/variablechanges/${modName}.json`);
+      window.variableData = await answerVariableResult.json();
+    }
 
     const candidateId = window.e?.candidate_id;
     const runningMateId = window.e?.running_mate_id;
