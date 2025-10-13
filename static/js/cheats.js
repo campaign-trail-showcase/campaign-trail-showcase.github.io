@@ -26,7 +26,7 @@ function buildAnswerEffectsIndex() {
   }
 }
 
-async function benefitCheck(objectid) {
+function benefitCheck(objectid) {
   const object =
     document.getElementById("question_form").children[0].children[objectid * 3];
   const answerid = Number(object.value);
@@ -70,32 +70,6 @@ async function benefitCheck(objectid) {
     }
   }
 
-  // variable effects for answer in benefit checker
-  let variableChanges = "";
-  try {
-    const modUrl = new URLSearchParams(window.location.search);
-    const modName = modUrl.get("modName");
-
-    if (!window.variableData) {
-      const answerVariableResult = await fetch(`../static/json/variablechanges/${modName}.json`);
-      window.variableData = await answerVariableResult.json();
-    }
-
-    const candidateId = window.e?.candidate_id;
-    const runningMateId = window.e?.running_mate_id;
-
-    if (window.variableData[modName] && window.variableData[modName][candidateId] 
-      && window.variableData[modName][candidateId][runningMateId] 
-      && window.variableData[modName][candidateId][runningMateId][answerid]
-    ) {
-      const changes = window.variableData[modName][candidateId][runningMateId][answerid];
-      const variableChangeText = changes.map(c => `<br/><em>Variable:</em> ${c.var} ${c.change}`).join("");
-      variableChanges += `${variableChangeText}`;
-    }
-  } catch (error) {
-    console.log("Couldn't get answer variable changes: ", error);
-  }
-
   let answerfeedback = "";
   for (
     let index = 0;
@@ -110,7 +84,7 @@ async function benefitCheck(objectid) {
     }
   }
 
-  return `<p><b>Answer: </b>'${findAnswer(answerid)[1]}'<br>Feedback: ${answerfeedback}<br>${mods}${variableChanges}</p><br><br>`;
+  return `<p><b>Answer: </b>'${findAnswer(answerid)[1]}'<br>Feedback: ${answerfeedback}<br>${mods}</p><br><br>`;
 }
 
 let benefitCheckAlreadyActivated = false;
@@ -176,7 +150,7 @@ async function benefitChecker() {
     const questionlength = formEl.length;
     let content = "";
     for (let v = 0; v < questionlength; v++) {
-      content += await benefitCheck(v);
+      content += benefitCheck(v);
     }
 
     content += "<br>Benefit Checker code partially adapted from NCT";
