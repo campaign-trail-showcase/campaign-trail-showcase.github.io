@@ -6,9 +6,27 @@ e.skippingQuestion = false;
 async function evalFromUrl(url, callback = null) {
   const evalRes = await fetch(url);
   const code = await evalRes.text();
-  eval(code);
+
+  executeMod(code, {
+    campaignTrail_temp,
+    window,
+    document,
+    $,
+    jQuery
+  });
 
   callback?.();
+}
+
+function executeMod(code, context = {}) {
+  const { e, ...safeContext } = context;
+
+  const fn = new Function(
+    ...Object.keys(safeContext),
+    code
+  );
+
+  return fn(...Object.values(safeContext));
 }
 
 // eslint-disable-next-line prefer-const
@@ -598,7 +616,13 @@ $("#submitMod").click(() => {
     }
     if (!moddercheckeror) {
       e = campaignTrail_temp;
-      eval($("#codeset1")[0].value);
+      executeMod($("#codeset1")[0].value, {
+        campaignTrail_temp,
+        window,
+        document,
+        $,
+        jQuery
+      });
       moddercheckeror = true;
     }
   } else {
@@ -2412,7 +2436,13 @@ function renderOptions(electionId, candId, runId) {
               tempFuncO(e);
             });
           } else {
-            eval(localStorage.getItem(`${customMod}_code2`));
+            executeMod(localStorage.getItem(`${customMod}_code2`), {
+              campaignTrail_temp,
+              window,
+              document,
+              $,
+              jQuery
+            });
             tempFuncO(e);
           }
 
@@ -2446,7 +2476,13 @@ function renderOptions(electionId, candId, runId) {
     } else {
       // other block case
       $("#game_window").load(aaa, () => {
-        eval($("#codeset2")[0].value);
+        executeMod($("#codeset2")[0].value, {
+          campaignTrail_temp,
+          window,
+          document,
+          $,
+          jQuery
+        });
         tempFuncO(e);
       });
     }
