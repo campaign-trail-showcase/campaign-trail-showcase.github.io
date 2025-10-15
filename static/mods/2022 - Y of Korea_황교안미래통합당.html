@@ -24459,56 +24459,73 @@ cyoAdventure = function (a) {
 
     if (ans == 4019) {
             ctsAchievement("이단심문관"); 
+            ctsAchievement("Inquisitor"); 
     }
     if (ans == 4061) {
             ctsAchievement("대연정"); 
+            ctsAchievement("Grand Coalition"); 
     }
     if (ans == 4084) {
             ctsAchievement("언주야, 이게 정치야"); 
+            ctsAchievement("This is Politics"); 
     }
     if (ans == 4075 || ans == 4076 || ans == 4080 || ans == 4085) {
             ctsAchievement("살아있네"); 
+            ctsAchievement("Still Alive"); 
     }
     if (ans == 4144) {
             ctsAchievement("정감록"); 
+            ctsAchievement("Apostle"); 
     }
     if (ans == 4153) {
             ctsAchievement("일과 이분의 일"); 
+            ctsAchievement("One and a Half"); 
     }
     if (ans == 4359) {
             ctsAchievement("카르마"); 
+            ctsAchievement("Karma"); 
     }
     if (ans == 4113) {
             ctsAchievement("노원의 돌"); 
+            ctsAchievement("Stone of Nowon"); 
     }
     if (ans == 4130) {
             ctsAchievement("즐기는 자 모드"); 
+            ctsAchievement("Enjoyer Mode"); 
     }
     if (ans == 4166) {
             ctsAchievement("프론트맨"); 
+            ctsAchievement("Frontman"); 
     }
     if (ans == 4202) {
             ctsAchievement("주먹왕 황프"); 
+            ctsAchievement("Wreck-It Hwang"); 
     }
     if (ans == 4153 && (Opponent == 3)) {
             ctsAchievement("현실 1000% 반영"); 
+            ctsAchievement("1000% Reflective of Reality"); 
     }
     if (ans == 4237) {
             ctsAchievement("황카,, 풍성하시다,,"); 
+            ctsAchievement("What Rich Hair");  
     }
     if (ans == 4267) {
             ctsAchievement("당 뽀개버리기"); 
+            ctsAchievement("Destroying the Party"); 
     }
     if (ans == 4277) {
             ctsAchievement("그 7글자"); 
+            ctsAchievement("Those 7 Letters"); 
     }
     if (ans == 4281) {
         if (campaignTrail_temp.player_answers.includes(4357)) {
             ctsAchievement("유레카"); 
+            ctsAchievement("Yoo-reka"); 
         }
     }
     if (ans == 4332) {
             ctsAchievement("카르텔 해체"); 
+            ctsAchievement("Disbanding the Cartel"); 
     }
 
     if (e.noCounter == 13) {
@@ -24945,6 +24962,7 @@ cyoAdventure = function (a) {
             campaignTrail_temp.questions_json[32] = tunnel(3032);
             campaignTrail_temp.election_json[0].fields.advisor_url = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./yearlyvoting.png"
             ctsAchievement("민노당의 추억"); 
+            ctsAchievement("Memories of the KDLP"); 
             }    else {
                     NoSim += 1;
                     campaignTrail_temp.election_json[0].fields.advisor_url = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./yparksim.png"
@@ -26001,6 +26019,7 @@ e.executable = []
      songChange = 1
     changePlaylist(WinNY);
     ctsAchievement("파멸적 엄중");
+    ctsAchievement("Damnatory Severity");
     localStorage.setItem("beatNY", "true");
     }}
 
@@ -26082,6 +26101,7 @@ e.executable = []
      songChange = 1
     changePlaylist(WinJM);
     ctsAchievement("도지사 잔혹사");
+    ctsAchievement("Spirit of Governor");
     localStorage.setItem("beatJM", "true");
     }}
 
@@ -26170,6 +26190,7 @@ e.executable = []
      songChange = 1
     changePlaylist(WinChoo);
     ctsAchievement("미애로 합의 못봐");
+    ctsAchievement("Can't agree on Mi-ae");
     localStorage.setItem("beatChoo", "true");
     }}
 
@@ -26251,6 +26272,7 @@ e.executable = []
      songChange = 1
     changePlaylist(WinCho);
     ctsAchievement("양파깡");
+    ctsAchievement("Onion Ring");
     localStorage.setItem("beatCho", "true");
     }}
 
@@ -26337,6 +26359,7 @@ e.executable = []
      songChange = 1
     changePlaylist(WinYoon);
     ctsAchievement("역전세계");
+    ctsAchievement("Reversed World");
     localStorage.setItem("beatYoon", "true");
     }}
 
@@ -26427,6 +26450,7 @@ e.executable = []
      songChange = 1
     changePlaylist(WinPark);
     ctsAchievement("비명횡사");
+    ctsAchievement("Untimely Death");
     localStorage.setItem("beatPark", "true");
     }}
 
@@ -26541,6 +26565,7 @@ e.executable = []
      songChange = 1
     changePlaylist(WinRyu);
     ctsAchievement("코리안 브레인롯");
+    ctsAchievement("Korean Brainrot");
     localStorage.setItem("beatRyu", "true");
     }}
 
@@ -26626,6 +26651,7 @@ if (Opponent == 0) { //Cheat
      songChange = 1
     changePlaylist(DamnCheater);
     ctsAchievement("빙칠링"); 
+    ctsAchievement("Bing Chilling"); 
     }}
 
     if (Opponent == 0) { //Cheat
@@ -26642,10 +26668,12 @@ if (Opponent == 0) { //Cheat
 
     if (Opponent == 2 && campaignTrail_temp.player_answers.includes(4153) && aa[0].candidate == campaignTrail_temp.candidate_id) {
     ctsAchievement("데자뷔");
+    ctsAchievement("Deja vu");
     }
 
     if (Opponent == 4 && Hongcacola == 1 && aa[0].candidate == campaignTrail_temp.candidate_id) {
     ctsAchievement("조국수홍");
+    ctsAchievement("Protect the Fatherland");
     }
 
     let SeoulResult = campaignTrail_temp.final_state_results.find((x) => x.state == 101);
@@ -26662,26 +26690,32 @@ if (Opponent == 0) { //Cheat
     let JejuResult = campaignTrail_temp.final_state_results.find((x) => x.state == 117);
     if (Opponent == 4 && BusanResult.result[0].candidate == 92) {
     ctsAchievement("고마 치아라 마");
+    ctsAchievement("Now Stop Dude");
     }
 
     if (SeoulResult.result[0].candidate == 92 && BusanResult.result[0].candidate == 92 && IncheonResult.result[0].candidate == 92 && DaejeonResult.result[0].candidate == 92 && UlsanResult.result[0].candidate == 92 && SejongResult.result[0].candidate == 92 && GyeonggiResult.result[0].candidate == 92 && GangwonResult.result[0].candidate == 92 && NChungcheongResult.result[0].candidate == 92 && SChungcheongResult.result[0].candidate == 92 && SGyeongsangResult.result[0].candidate == 92 && JejuResult.result[0].candidate == 92) {
     ctsAchievement("온 세상이 전라도야");
+    ctsAchievement("The whole world is Jeolla");
     }
 
     if (SeoulResult.result[0].candidate == 91 && BusanResult.result[0].candidate == 91 && IncheonResult.result[0].candidate == 91 && DaejeonResult.result[0].candidate == 91 && UlsanResult.result[0].candidate == 91 && SejongResult.result[0].candidate == 91 && GyeonggiResult.result[0].candidate == 91 && GangwonResult.result[0].candidate == 91 && NChungcheongResult.result[0].candidate == 91 && SChungcheongResult.result[0].candidate == 91 && SGyeongsangResult.result[0].candidate == 91 && JejuResult.result[0].candidate == 91) {
     ctsAchievement("온 세상이 경상도야");
+    ctsAchievement("The whole world is Gyeongsang");
     }
 
     if (Opponent == 6 && campaignTrail_temp.player_answers.includes(4303) && aa[0].candidate == campaignTrail_temp.candidate_id) {
     ctsAchievement("역사를 잊은 민족에게...");
+    ctsAchievement("To a nation that forgets its history...");
     }
 
     if (Opponent == 7 && campaignTrail_temp.player_answers.includes(4339) && aa[0].candidate == campaignTrail_temp.candidate_id) {
     ctsAchievement("세계가 불타버린 밤");
+    ctsAchievement("The Night the World Burned");
     }
 
     if (aa[0].candidate == campaignTrail_temp.candidate_id && quickstats[1] >=50) {
     ctsAchievement("공명선거");
+    ctsAchievement("Fair Election");
     }
 
     endFileArray();
