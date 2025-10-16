@@ -2744,10 +2744,9 @@ function rFunc(t, i) {
 
   // build abbreviation -> state index map
   const abbrToState = new Map();
-  // I'm sorry, StrawberryMaster.
   for (let s = 0; s < e.states_json.length; s++) {
     const state = e.states_json[s];
-    abbrToState.set(e.states_json[s].fields.abbr, state);
+    abbrToState.set(String(e.states_json[s].fields.abbr), state);
   }
 
   // latest opponent visits (Sea to Shining Sea mode)
