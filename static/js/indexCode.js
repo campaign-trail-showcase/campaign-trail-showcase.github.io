@@ -38,58 +38,6 @@ function findState(pk) {
   return findByPk(campaignTrail_temp.states_json, pk, "name");
 }
 
-function benefitCheck(objectid) {
-  const object = document.getElementById("question_form").children[0].children[objectid * 3];
-  const answerid = object.value;
-  const effects = [];
-
-  campaignTrail_temp.answer_score_global_json.forEach(item => {
-    if (item.fields.answer == answerid) effects.push(["global", item]);
-  });
-  campaignTrail_temp.answer_score_state_json.forEach(item => {
-    if (item.fields.answer == answerid) effects.push(["state", item]);
-  });
-  campaignTrail_temp.answer_score_issue_json.forEach(item => {
-    if (item.fields.answer == answerid) effects.push(["issue", item]);
-  });
-
-  let mods = "";
-  for (const [type, effect] of effects) {
-    if (type === "global") {
-      const affected = findCandidate(effect.fields.candidate);
-      const affected1 = findCandidate(effect.fields.affected_candidate);
-      mods += `<br><em>Global:</em> Affects ${affected1[1]} for ${affected[1]} by ${effect.fields.global_multiplier}`;
-    }
-    if (type === "issue") {
-      const affected = findIssue(effect.fields.issue);
-      mods += `<br><em>Issue:</em> Affects ${affected[1]} by ${effect.fields.issue_score} with a importance of ${effect.fields.issue_importance}`;
-    }
-    if (type === "state") {
-      const affected = findState(effect.fields.state);
-      const candidatething = findCandidate(effect.fields.affected_candidate);
-      const candidatething2 = findCandidate(effect.fields.candidate);
-      mods += `<br><em>State:</em> Affects ${candidatething[1]} for ${candidatething2[1]} in ${affected[1]} by ${effect.fields.state_multiplier}`;
-    }
-  }
-
-  let answerfeedback = "";
-  for (const item of campaignTrail_temp.answer_feedback_json) {
-    if (answerid == item.fields.answer) {
-      answerfeedback = `<b>${item.fields.answer_feedback}</b>`;
-      break;
-    }
-  }
-  if (!answerfeedback) {
-    answerfeedback = "'";
-  }
-  return (
-    `<font size="2"><b>Answer: </b>${findAnswer(answerid)[1]}<br>` +
-    `Feedback: ${answerfeedback}<br>` +
-    mods +
-    "</font><br><br>"
-  );
-}
-
 document.head = document.head || document.getElementsByTagName("head")[0];
 
 function changeFavicon(src) {
@@ -175,9 +123,21 @@ const campaignTrailMusic = document.getElementById("campaigntrailmusic");
 const dynamicStyle = document.createElement("style");
 document.head.appendChild(dynamicStyle);
 
+// Not removed because used by 2023 WOKE
 function updateBannerAndStyling() {
   header.src = selectedTheme.banner;
   header.width = 1000;
+  document.body.background = selectedTheme.background;
+  gameWindow.style.backgroundColor = selectedTheme.coloring_window;
+  container.style.backgroundColor = selectedTheme.coloring_container;
+  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+  if (selectedTheme.text_col != null) {
+    container.style.color = selectedTheme.text_col;
+    gameWindow.style.color = "black";
+  }
+}
+
+function updateStyling() {
   document.body.background = selectedTheme.background;
   gameWindow.style.backgroundColor = selectedTheme.coloring_window;
   container.style.backgroundColor = selectedTheme.coloring_container;
@@ -237,7 +197,7 @@ setInterval(() => {
     nct_stuff.themes[nct_stuff.selectedTheme] = strCopy(nct_stuff.custom_override);
     selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
     gameWindow.style.backgroundImage = "";
-    updateBannerAndStyling();
+    updateStyling();
   } else if (
     !nct_stuff.custom_override &&
     nct_stuff.selectedTheme == "custom" &&
@@ -258,7 +218,19 @@ async function loadJSON(path, varr, callback = null) {
   const res = await fetch(path);
   if (!res.ok) return;
   const responseText = await res.text();
-  eval(varr + "=JSON.parse(" + JSON.stringify(responseText.trim()) + ")");
+  
+  // parse nested property path and assign
+  const parts = varr.split('.');
+  let obj = window;
+  
+  // navigate to the parent object
+  for (let i = 0; i < parts.length - 1; i++) {
+    obj = obj[parts[i]];
+  }
+  
+  // assign to the final property
+  obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
+  
   if (callback) callback();
 }
 
@@ -301,4 +273,4 @@ campaignTrail_temp.show_premium = true;
 campaignTrail_temp.premier_ab_test_version = -1;
 campaignTrail_temp.credits = "Dan Bryan";
 
-updateBannerAndStyling();
+updateStyling();

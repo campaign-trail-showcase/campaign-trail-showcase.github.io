@@ -2,31 +2,31 @@ const mobileMode = localStorage.getItem("mobileMode") === "true";
 const mobileModeButton = document.getElementById("mobileModeButton");
 
 function toggleMobileMode() {
-    const enabled = localStorage.getItem("mobileMode") === "true";
-    localStorage.setItem("mobileMode", enabled ? "false" : "true");
-    applyMobileStyle();
-    mobileModeButton.innerText = enabled
-        ? "Turn On Mobile Compatibility (Beta)"
-        : "Turn Off Mobile Compatibility (Beta)";
+  const enabled = localStorage.getItem("mobileMode") === "true";
+  localStorage.setItem("mobileMode", enabled ? "false" : "true");
+  applyMobileStyle();
+  mobileModeButton.innerText = enabled
+    ? "Turn On Mobile Compatibility (Beta)"
+    : "Turn Off Mobile Compatibility (Beta)";
 }
 
 function applyMobileStyle() {
-    const enabled = localStorage.getItem("mobileMode") === "true";
-    const prevStyle = document.getElementById("mobile-style");
-    if (prevStyle) prevStyle.remove();
-    const prevMeta = document.getElementById("mobile-viewport");
-    if (prevMeta) prevMeta.remove();
+  const enabled = localStorage.getItem("mobileMode") === "true";
+  const prevStyle = document.getElementById("mobile-style");
+  if (prevStyle) prevStyle.remove();
+  const prevMeta = document.getElementById("mobile-viewport");
+  if (prevMeta) prevMeta.remove();
 
-    if (enabled) {
-        const meta = document.createElement("meta");
-        meta.name = "viewport";
-        meta.content = "width=device-width, initial-scale=1";
-        meta.id = "mobile-viewport";
-        document.head.appendChild(meta);
+  if (enabled) {
+    const meta = document.createElement("meta");
+    meta.name = "viewport";
+    meta.content = "width=device-width, initial-scale=1";
+    meta.id = "mobile-viewport";
+    document.head.appendChild(meta);
 
-        const style = document.createElement("style");
-        style.id = "mobile-style";
-        style.innerHTML = `
+    const style = document.createElement("style");
+    style.id = "mobile-style";
+    style.innerHTML = `
         @media only screen and (max-width: 768px) {
 
             #benefitwindow {
@@ -131,13 +131,13 @@ function applyMobileStyle() {
         #drop_down_area_state { margin-left: auto; margin-right: auto; }
       }
     `;
-        document.head.appendChild(style);
-    }
+    document.head.appendChild(style);
+  }
 }
 
 mobileModeButton.innerText = mobileMode
-    ? "Turn Off Mobile Compatibility (Beta)"
-    : "Turn On Mobile Compatibility (Beta)";
+  ? "Turn Off Mobile Compatibility (Beta)"
+  : "Turn On Mobile Compatibility (Beta)";
 
 applyMobileStyle();
 

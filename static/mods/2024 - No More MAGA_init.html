@@ -1,0 +1,728 @@
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2016,
+            "display_year": "2024 - No More MAGA",
+            "summary": "<p> After Trump's victory by the House of Representatives in 2020, the nation stands at a crossroads similar to the one it found itself at sixteen years ago. <ul> <li> Senator Pete Buttigieg rode a wave of economic progressivism to the Democratic nomination, and hopes to expand the electoral map for his party as the easy favorite.</li> <li> Governor Glenn Youngkin, meanwhile, starts off on the backfoot and the complete hate of the dwindling MAGA Republicans. Can he balance his party before pulling off the upset of the century? </li> </ul>",
+            "image_url": "https://i.ibb.co/k6B4Ws8M/Buttigieg-Youngkin.png",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://www.apa.org/images/stress-in-america-2024-hero_tcm7-332659.jpg",
+            "recommended_reading": "<ul>\n<li><a href=https://www.chicagotribune.com/opinion/editorials/ct-edit-chicago-tribune-biden-endorsement-20200925-lnyxsb5qvrftnjjmj3rnzj33jy-story.html>Our Case For Joe Biden</a></li>\n<li><a href=https://nationalinterest.org/feature/case-trump-166808>The Case For Trump</a></li>\n<li><a href=https://www.npr.org/2020/11/18/935730100/how-biden-won-ramping-up-the-base-and-expanding-margins-in-the-suburbs>How Biden Won: Ramping Up The Base And Expanding Margins In The Suburbs</a></li>\n<li><a href=https://www.prospectmagazine.co.uk/politics/donald-trump-joe-biden-us-election-almost-win-votes-concede>Why Did Trump Almost Win?</a></li>\n<li><a href=https://www.hoover.org/research/no-evidence-voter-fraud-guide-statistical-claims-about-2020-election>No Evidence For Voter Fraud: A Guide To Statistical Claims About The 2020 Election</a></li>\n</ul>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2016,
+        "is_premium": 0,
+        "display_year": "2024 - No More MAGA",
+
+    }
+]
+
+campaignTrail_temp.credits = "baker_street.221b on Discord"
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 301,
+        "fields": {
+            "first_name": "Glenn",
+            "last_name": "Youngkin",
+            "election": 20,
+            "party": "Republican",
+            "state": "Virginia",
+            "priority": 1,
+            "description": "<p>Elected by a squeaker in the controversial 2021 gubernatorial race, Glenn Youngkin is one of the few Republicans who had been consistently critical of President Trump well before inflation and non-support for Ukraine tainted the Grand Old Party's electoral prospects. Thus, in an election many have compared to 2008, Youngkin remained the frontrunner in a Republican primary filled with either ambivalent or anti-Trump figures (with the exception of Senator Hawley), winning with some competition from Hawley and Governor Hogan. <br> <br> He starts this campaign badly trailing his opponent, Senator Buttigieg, who seeks to hammer on Youngkin for alignment with Trump on some policy. To win, Youngkin will have to first balance the warring neoconservatives and MAGAts in his party (all while distancing from Trump), before taking the attack to Buttigieg.</p>",
+            "color_hex": "#990f0f",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://i.ibb.co/jvJ3WtSk/Youngkin.jpg",
+            "electoral_victory_message": "<h3> Congratulations! You have been elected the 46th President of the United States! </h3>\n<p> Wow! Nobody expected this, Governor, and for good reason. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, you thought you were done for. But somehow, some way, you've managed to come out on top. <br> <br> Congress, however, is likely to remain Democratic. Republicans did flip West Virginia, but nowhere else have they gained a seat, and they have only marginal gains in the House, where Speaker Jeffries will retain the gavel. You'll have to govern in a bipartisan fashion, Governor, but it's a necessary sacrifice. You are President of the United States. Good luck. Godspeed.</p>",
+            "electoral_loss_message": "<h3> I'm sorry, Glenn. </h3>\n<p> This was the expected outcome, but it does still hurt. <br> <br> Ever since Hawley walked out of the convention and started that damned third-party, ever since Buttigieg began to stump like hell through red territory, they said you were done for. And they were right. Buttigieg claims victory to a raucous Miami crowd as you stew in your seat just a mile away.<br> <br> Congress is also to remain Democratic. Republicans did flip West Virginia, but Democrats have kept their majority by taking Texas, and, after some further blue flips in the House, Speaker Jeffries will retain the gavel. What's next? Well, if you performed well, then a run in 2028 isn't completely off the cards, given that you are retiring next year. Perhaps you could challenge Warner for his Senate seat come the midterms. Good luck, Governor, and godspeed.</p>",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 300,
+        "fields": {
+            "first_name": "Pete",
+            "last_name": "Buttigieg",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Indiana",
+            "priority": 1,
+            "description": "<p>Perhaps the most prominent post-2010 example of a red-state Democrat, Pete Buttigieg has been a name familiar to many political analysts for a time now - despite being mayor of a small city in Indiana, Buttigieg performed quite admirably in the heated 2020 Democratic primaries, before then positioning himself as a great communicator to red-state voters after Biden's defeat, culminating in his shock upset of Senator Todd Young at the 2022 midterms. <br> <br> Politically, Buttigieg ran on a neoliberal platform in 2020, though he has taken a sharp left turn on economics since then, supporting many popular proposals of the progressive Democrats. Given the nature of his constituents, he has also towed the line on social issues, maintaining the standard Democratic platform. He starts out with a wide advantage over Youngkin, and as such, this year proves a perfect chance for Democrats to expand the electoral map.</p>",
+            "color_hex": "#2a2a93",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://i.ibb.co/5xRL9YkF/Buttigieg.jpg",
+            "electoral_victory_message": "<h3> Congratulations! You have been elected the 46th President of the United States! </h3>\n<p> Well, Senator, this was the expected outcome, but it still feels good. <br> <br> Ever since Hawley walked out of the convention and started his third-party, hell, ever since you were elected to the Senate, you knew this was your destiny. And today, you were vindicated, though your victory has been below expected margins. <br> <br> Congress is also likely to remain Democratic. While Joe Manchin's Senate seat in West Virginia has flipped red - as expected - Democrats have kept 54 seats (soon to be 53, once you vacate yours), and Speaker Jeffries will retain the gavel, with Democratic House gains in the ballpark of 5 to 10. Either way, you clearly have a mandate to get something done over the next two years before the midterms - go get it done, Mr. President-elect. Godspeed.</p>",
+            "electoral_loss_message": "<h3> Oh, dear, Pete. Oh, dear. </h3>\n<p> Well, Senator, how did we get here? <br> <br> Ever since Hawley walked out of the convention and started his third-party, hell, ever since you were elected to the Senate, you knew this was your destiny. And today, you were somehow proven wrong - as Glenn Youngkin has pulled off a narrow win. <br> <br> Congress is, however, to remain Democratic. While Joe Manchin's Senate seat in West Virginia has flipped red - as expected - Democrats still have 54 seats (including your own). And Speaker Jeffries will retain the gavel, with Republican gains only in the ballpark of 5 to 10. Either way, you've lost a very easy election, and your history in presidential politics is most likely over. Perhaps you could get a VP slot in 2028, or maybe run for Governor.</p>",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 304,
+        "fields": {
+            "first_name": "Nikki",
+            "last_name": "Haley",
+            "election": 20,
+            "party": "Republican",
+            "state": "South Carolina",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#990f0f",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.ibb.co/kgFNp2kN/Haley.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>One of your hardest tasks in the primaries was shielding yourself from the right-wing elements of the Republican Party, and Nikki Haley would be a perfect remedy to this issue. Having served as Trump's ambassador to the United Nations and later his Secretary of State, she enforced many of his foreign policy decisions and strongly aligns with him on fiscal and social policy, while leaning neoconservative on foreign issues. Previously, she was Governor in her home state - South Carolina. <br> <br> However, these strengths may also be weaknesses, as Haley pushed through many of Trump's unpopular foreign decisions, such as his steadfast support for Israel and his continual cutting back on aid for Ukraine. Further, her domestic policies are unpopular due to alignment with Trump and she might find herself an easy target for the left.</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 305,
+        "fields": {
+            "first_name": "Ron",
+            "last_name": "DeSantis",
+            "election": 20,
+            "party": "Republican",
+            "state": "Florida",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#990f0f",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.ibb.co/dw1zzXCy/DeSantis.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>In what was otherwise a dismal midterm for the Republican Party, Ron DeSantis narrowly defeated Andrew Gillum to hold the Governor's Mansion in Tallahassee, even as Democrats regained the governorship in places like Illinois, Michigan, Nevada, and even Kansas. He also held firm in the otherwise abysmal 2022 midterms, beating his opponent by 12 points as he cruised to re-election. <br> <br> Politically, DeSantis is a bit of a culture warrior, well known for his attempts to fight the spread of 'woke' in Florida, though he sticks with the party orthodoxy on fiscal concerns. As such, he also toes the line between Trump and neoconservative, and he is noted for his outreach to Latino voters, who will be key in states like Florida, Arizona, and Nevada if you hope to pull off the upset.</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 309,
+        "fields": {
+            "first_name": "Stacey",
+            "last_name": "Abrams",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Georgia",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#2a2a93",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.ibb.co/9ktpnbTg/Abrams.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>Even in what was otherwise a blue tsunami, Democrats around the nation were stunned to see Stacey Abrams unseat incumbent Brian Kemp in the 2022 Georgia gubernatorial election. Her efforts were highly credited in helping Jon Ossoff squeeze to victory in the 2020 Senate election there - though Warnock's concurrent defeat to incumbent Kelly Loeffler and Trump's narrow victory in the state mean that no real effect came of Ossoff's win. <br> <br> Politically, she aligns with the Democrats on numerous issues, most notably her steadfast support of voting rights and other issues pertinent to the Black community such as criminal justice reform (indeed, Abrams will likely be the first ever person of color and the first ever female Vice President should you win), and will virtually guarantee you Georgia. However, her unwavering support for Israel in the ongoing war in Gaza might rattle progressives.</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 310,
+        "fields": {
+            "first_name": "Catherine",
+            "last_name": "Cortez Masto",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Nevada",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#2a2a93",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.ibb.co/Xr90K0Ft/Masto.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>The situation at the Mexican border naturally pushes Americans to support the firm, iron-fisted stance the Republicans have on it: so perhaps you'll need a running mate of Latina descent to help you in border and border-adjacent states like Nevada, Arizona, or even Texas? Catherine Cortez Masto, a Senator from Nevada re-elected by a nine-point margin in 2022, certainly ticks all these boxes. <br> <br> Known for her expertise in the legal field (having previously served as Attorney General of Nevada), this could help among middle class voters particularly those concerned with Republican rhetoric on Democrats' weakness in the face of urban crime. She would make a strong running mate, although some will say that the disapproval of Trump's border policy and its overly draconian nature would negate any positive impact Cortez might have.</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 302,
+        "fields": {
+            "first_name": "Chase",
+            "last_name": "Oliver",
+            "election": 20,
+            "party": "Libertarian",
+            "state": "Georgia",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#ecef2e",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9mOHWl3R77MdAL4SvD0w8iTmqGD_maZCDOw&s",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 311,
+        "fields": {
+            "first_name": "Mike",
+            "last_name": "ter Maat",
+            "election": 20,
+            "party": "Libertarian",
+            "state": "Virginia",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#ecef2e",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 303,
+        "fields": {
+            "first_name": "Robert F.",
+            "last_name": "Kennedy",
+            "election": 20,
+            "party": "Independent",
+            "state": "California",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#2d004c",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://npr.brightspotcdn.com/dims3/default/strip/false/crop/5773x7697+0+0/resize/1100/quality/50/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F0c%2F3d%2Fd8674f82488d973c0ced084c52c7%2Fgettyimages-2177164103.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 312,
+        "fields": {
+            "first_name": "Nicole",
+            "last_name": "Shanahan",
+            "election": 20,
+            "party": "Independent",
+            "state": "California",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#7a039b",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 98070,
+        "fields": {
+            "candidate": 303,
+            "running_mate": 312
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 81753,
+        "fields": {
+            "candidate": 302,
+            "running_mate": 311
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 142306,
+        "fields": {
+            "candidate": 301,
+            "running_mate": 304
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 86893,
+        "fields": {
+            "candidate": 301,
+            "running_mate": 305
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 166429,
+        "fields": {
+            "candidate": 300,
+            "running_mate": 309
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 176476,
+        "fields": {
+            "candidate": 300,
+            "running_mate": 310
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            301,
+            300,
+            302,
+            303
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            301,
+            300,
+            302,
+            303
+        ]
+    }
+]
+
+jet_data = {
+    "headerColor": "#700016",
+    "windowColor": "#BFE6FF",
+    "containerColor": "#FFFFFF",
+    "innerWindowColor": "#E8FBFF",
+    "bannerImageUrl": "https://i.ibb.co/dssxM370/NOMOREMAGA.png",
+    "backgroundImageUrl": "https://i.ibb.co/DHt48bTX/2024asg.png",
+    "endingTextColor": "#000000",
+    "customQuote": "“Mr. Trump, tear down this wall!”"
+}
+
+//#startcode
+
+HistHexcolour=["#2a2a93","#990f0f","#2d004c","#ecef2e"];
+HistName=[" Pete Buttigieg"," Glenn Youngkin"," Robert F. Kennedy Jr."," Chase Oliver"];
+HistEV=["390","148","0","0"];
+HistPV=["81,502,377","63,368,344","7,956,548","1,958,005"];
+HistPVP=["52.7%","40.9%","5.1%","1.3%"];
+
+
+corrr = '\n              <h2>THE CAMPAIGN TRAIL</h2><font id="wittyquote" size="4" color="white"><em>“Mr. Trump, tear down this wall!”</em></font>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#700016";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#BFE6FF";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#FFFFFF";
+
+document.getElementById("header").src = "https://i.ibb.co/dssxM370/NOMOREMAGA.png";
+
+document.body.background = "https://i.ibb.co/DHt48bTX/2024asg.png";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#E8FBFF!important;}</style>";
+
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#ba4f4f",
+     "header_text_color": "#ffffff",
+     "description_text_color": "#000000",
+     "description_background_color": "#88c9f1",
+     "main_color": "#ffffff",
+     "secondary_color": "#556fb0",
+     "ui_text_color": "#FFFFFF"
+}
+campaignTrail_temp.musicOn = true
+
+// -- Enlarge the sliders horizontally ---------------------------------
+;(function() {
+  const css = `
+    /* make both volume & progress bars longer */
+    #volume_slider,
+    #progress_slider {
+      width: 400px !important;
+    }
+  `;
+  const style = document.createElement("style");
+  style.textContent = css;
+  document.head.appendChild(style);
+})();
+
+// -- Enlarge track title & artist text --------------------------------
+;(function() {
+  const css = `
+    /* make the main title bigger */
+    #track_name {
+      font-size: 28px !important;
+      line-height: 1.2 !important;
+    }
+    /* make the artist name bigger */
+    #artist_name {
+      font-size: 20px !important;
+      line-height: 1.2 !important;
+    }
+  `;
+  const style = document.createElement("style");
+  style.textContent = css;
+  document.head.appendChild(style);
+})();
+
+// -- Make the Volume/Progress labels white ----------------------------
+;(function() {
+  const css = `
+    /* target the labels for your sliders */
+    label[for="volume_slider"],
+    label[for="progress_slider"] {
+      color: #fff !important;
+    }
+  `;
+  const style = document.createElement("style");
+  style.textContent = css;
+  document.head.appendChild(style);
+})();
+
+// -- Hide original controls --------------------------------------------
+$("#music_player")[0].children[0].style.display = "none";
+$("#music_player")[0].children[1].style.display = "none";
+document.getElementById("modLoadReveal").style.display = "none";
+document.getElementById("modloaddiv").style.display = "none";
+
+// -- Style the container like your mockup ------------------------------
+const musicBox = document.getElementById("music_player");
+musicBox.style.cssText = `
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: #161616;
+  border: 5px solid #A30000;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+`;
+
+// -- Utility -----------------------------------------------------------
+function clamp(idx, max, min = 0) {
+  return idx > max ? min : idx < min ? max : idx;
+}
+
+// -- Game state bootstrap ----------------------------------------------
+e = campaignTrail_temp;
+e.selectedSoundtrack = 0;
+
+// -- Build the custom player -------------------------------------------
+function newMusicPlayer() {
+  // remove old UI
+  const old = document.getElementById("custom_player_wrapper");
+  if (old) old.remove();
+
+  const audio = document.getElementById("campaigntrailmusic");
+  audio.preload = "metadata";
+
+  // flex wrapper: small gap so text sits right next to image
+  const wrapper = document.createElement("div");
+  wrapper.id = "custom_player_wrapper";
+  wrapper.style.cssText = `
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  `;
+
+  // 1) Album cover (left)
+  const cover = document.createElement("div");
+  cover.id = "album_cover";
+  cover.style.cssText = `
+    width: 150px;
+    height: 150px;
+    background: #ddd;
+    border: 3px solid #A30000;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+  `;
+
+  // 2) Details column (right of cover), centered
+  const details = document.createElement("div");
+  details.style.cssText = `
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  `;
+
+  // 2a) Track info (now centered)
+  const info = document.createElement("div");
+  info.style.cssText = "margin-bottom: 10px; text-align: center; width: 100%;";
+  const titleEl = document.createElement("div");
+  titleEl.id = "track_name";
+  titleEl.style.cssText = "font-size:20px; color:#fff; font-weight:bold;";
+  const artistEl = document.createElement("div");
+  artistEl.id = "artist_name";
+  artistEl.style.cssText = "font-size:14px; color:#fff;";
+  info.append(titleEl, artistEl);
+
+  // 2b) Sliders
+  const sliders = document.createElement("div");
+  sliders.style.cssText = "display:flex; flex-direction:column; gap:8px; margin-bottom:10px;";
+
+  // volume
+  const volRow = document.createElement("div");
+  volRow.style.cssText = "display:flex; align-items:center; gap:10px;";
+  const volLabel = document.createElement("label");
+  volLabel.htmlFor = "volume_slider";
+  volLabel.innerText = "Volume:";
+  volLabel.style.width = "70px";
+  const volumeSlider = document.createElement("input");
+  volumeSlider.id = "volume_slider";
+  volumeSlider.type = "range";
+  volumeSlider.min = 0;
+  volumeSlider.max = 1;
+  volumeSlider.step = 0.01;
+  volumeSlider.value = 0.5;
+  volumeSlider.style.flex = "1";  // size controlled by injected CSS
+  volRow.append(volLabel, volumeSlider);
+
+  // progress
+  const progRow = document.createElement("div");
+  progRow.style.cssText = "display:flex; align-items:center; gap:10px;";
+  const progLabel = document.createElement("label");
+  progLabel.htmlFor = "progress_slider";
+  progLabel.innerText = "Progress:";
+  progLabel.style.width = "70px";
+  const progressSlider = document.createElement("input");
+  progressSlider.id = "progress_slider";
+  progressSlider.type = "range";
+  progressSlider.min = 0;
+  progressSlider.max = 1;
+  progressSlider.step = 0.001;
+  progressSlider.value = 0;
+  progressSlider.style.flex = "1"; // size controlled by injected CSS
+  progRow.append(progLabel, progressSlider);
+
+  sliders.append(volRow, progRow);
+
+  // 2c) Controls row
+  const controlsWrap = document.createElement("div");
+  controlsWrap.style.cssText = "display:flex; align-items:center;";
+  const prevBtn = document.createElement("button");
+  prevBtn.id = "prev_btn";
+  prevBtn.innerText = "Prev";
+  prevBtn.style.cssText = "padding:5px 10px; margin-right:5px; font-size:16px; cursor:pointer;";
+  const playBtn = document.createElement("button");
+  playBtn.id = "play_pause_btn";
+  playBtn.innerText = "Play";
+  playBtn.style.cssText = "padding:5px 10px; margin-right:5px; font-size:16px; cursor:pointer;";
+  const nextBtn = document.createElement("button");
+  nextBtn.id = "next_btn";
+  nextBtn.innerText = "Next";
+  nextBtn.style.cssText = "padding:5px 10px; margin-right:5px; font-size:16px; cursor:pointer;";
+  const dropdown = document.createElement("select");
+  dropdown.id = "track_dropdown";
+  dropdown.style.cssText = "padding:5px; font-size:14px; margin-left:10px; cursor:pointer;";
+  controlsWrap.append(prevBtn, playBtn, nextBtn, dropdown);
+
+  // assemble
+  details.append(info, sliders, controlsWrap);
+  wrapper.append(cover, details);
+  musicBox.insertBefore(wrapper, audio);
+
+  // populate & hook up
+  const tracks = soundtracks[e.selectedSoundtrack].tracklist;
+  tracks.forEach((t, i) => {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = `${t.name} - ${t.artist}`;
+    dropdown.append(opt);
+  });
+
+  let currentIndex = 0;
+  function loadTrack(i) {
+    const t = tracks[i];
+    audio.src = t.url;
+    cover.style.backgroundImage = `url('${t.cover}')`;
+    titleEl.innerText = t.name;
+    artistEl.innerText = t.artist;
+    dropdown.value = i;
+    audio.currentTime = 0;
+    audio.loop = false;
+    audio.play();
+    playBtn.innerText = "Pause";
+    currentIndex = i;
+  }
+  loadTrack(0);
+
+  playBtn.onclick = () => {
+    if (audio.paused) {
+      audio.play();
+      playBtn.innerText = "Pause";
+    } else {
+      audio.pause();
+      playBtn.innerText = "Play";
+    }
+  };
+  prevBtn.onclick = () => loadTrack(clamp(currentIndex - 1, tracks.length - 1));
+  nextBtn.onclick = () => loadTrack(clamp(currentIndex + 1, tracks.length - 1));
+  dropdown.onchange = e => loadTrack(+e.target.value);
+  volumeSlider.oninput = e => (audio.volume = +e.target.value);
+  progressSlider.oninput = e => {
+    if (audio.duration) audio.currentTime = +e.target.value * audio.duration;
+  };
+  audio.ontimeupdate = () => {
+    if (audio.duration) progressSlider.value = audio.currentTime / audio.duration;
+  };
+  audio.onended = () => nextBtn.click();
+}
+
+// -- Your playlists ----------------------------------------------------
+var soundtracks = [
+  {
+    name: "New Age for America",
+    tracklist: [
+      {
+        name: "The American Dream is Killing Me",
+        artist: "Green Day",
+        url:  "https://audio.jukehost.co.uk/xVflzX2agfU70s5rmti5BfQncpqLOCjw",
+        cover: "https://upload.wikimedia.org/wikipedia/en/c/c9/Green_Day_-_Saviors.png"
+      },
+      {
+        name: "Rich Men North of Richmond",
+        artist: "Oliver Anthony",
+        url:  "https://audio.jukehost.co.uk/Po5eKwlVG0M4wQ3oOG9otBNFevRmkpPC",
+        cover: "https://upload.wikimedia.org/wikipedia/en/d/d4/Oliver_Anthony_-_Rich_Men_North_of_Richmond.png"
+      },
+      {
+        name: "If I Can Dream",
+        artist: "Elvis Presley",
+        url:  "https://audio.jukehost.co.uk/SOXH6LMirjYFqNHPLKbWYo7UwkYNAWY9",
+        cover: "https://i.scdn.co/image/ab67616d0000b273bd203dd3964d591637975d24"
+      },
+      {
+        name: "Solidarity Forever",
+        artist: "Pete Seeger",
+        url:  "https://audio.jukehost.co.uk/DWT5a5mhtWAterfxYN77Y50BVfcyGEui",
+        cover: "https://i.scdn.co/image/ab67616d0000b2736528dcc259ef64aea8630ae3"
+      },
+      {
+        name: "Power to the People",
+        artist: "John Lennon",
+        url:  "https://audio.jukehost.co.uk/Hiuh9OUEkhKWsgC2dERB8SSazIeEj8I3",
+        cover: "https://upload.wikimedia.org/wikipedia/en/2/22/John-lennon-plastic-ono-band-power-to-the-people-apple-2-s.jpg"
+      },
+      {
+        name: "Teach Your Children",
+        artist: "Crosby, Stills, Nash & Young",
+        url:  "https://audio.jukehost.co.uk/RfNxA3Z90yi0KBv9f16Yh12Sd93ODUiH",
+        cover: "https://upload.wikimedia.org/wikipedia/en/e/e3/Teach_Your_Children_-_Crosby%2C_Stills%2C_Nash_%26_Young.jpg"
+      },
+      {
+        name: "Richmond is a Hard Road to Travel",
+        artist: "2nd South Carolina String Band",
+        url:  "https://audio.jukehost.co.uk/svXhF6pVK2BemNfADutSgBdPruedzpbC",
+        cover: "https://images.genius.com/58cec65cd6d2076c1226378facefe1cf.600x600x1.jpg"
+      },
+      {
+        name: "The Times They Are A-Changin’",
+        artist: "Bob Dylan",
+        url:  "https://audio.jukehost.co.uk/rN85OrFQM8sFrEOzti0FB464gWPb01VR",
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROx0Cl133iMCvwy5v0SFcRfEU_M_3k0FPL-A&s"
+      },
+      {
+        name: "America",
+        artist: "Simon & Garfunkel",
+        url:  "https://audio.jukehost.co.uk/4NzuBy0SvEVUMKNCjBpRWSWu1B5dJ1u9",
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5xRm01ew4L36WX8TOg_ACWnddZQy6ko9t8A&s"
+      },
+      {
+        name: "God Bless the USA",
+        artist: "Lee Greenwood",
+        url:  "https://audio.jukehost.co.uk/O9s2XzBUiHJaFcO8OuMQqBm3sYszEAh3",
+        cover: "https://upload.wikimedia.org/wikipedia/en/5/5a/God_Bless_the_USA_1984.jpg"
+      }
+    ]
+  }
+];
+
+// -- Launch it ---------------------------------------------------------
+newMusicPlayer();
+
+//#endcode
