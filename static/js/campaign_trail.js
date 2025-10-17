@@ -2958,14 +2958,14 @@ function mapResultColor(time) {
     stateSpecificHoverStyles: stateColor,
     click(i, a) {
       const stateResElement = $("#state_result");
-      const stateResults = e.final_state_results.find((f) => f.abbr === a.name);
+      const stateResults = e.final_state_results.find((f) => String(f.abbr) === String(a.name));
       if (!stateResults) return;
       if (stateResults.result_time > time) {
         const returnStr = "<h3>STATE RESULTS</h3><p>Returns for this state are not yet available!</p>";
         stateResElement.html(returnStr);
         return;
       }
-      const stateObj = e.states_json.find((f) => f.fields.abbr === a.name);
+      const stateObj = e.states_json.find((f) => String(f.fields.abbr) === String(a.name));
       if (!stateObj) return;
       const resultHtml = stateResults.result
         .slice(0, 4)
