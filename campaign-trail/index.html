@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<html lang="en-US">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out." />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out.">
     <title>Campaign Trail Showcase</title>
-    <link rel="stylesheet" href="../static/amusa_main_2016032801.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="../static/css/community.css" type="text/css" media="screen" />
-    <link rel="shortcut icon" href="/static/34starcircle-2.png" type="image/png" />
-    <link rel="canonical" href="index.html" />
-    <meta property="og:title" content="Campaign Trail Showcase" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="../static/34starcircle-2.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="200" />
-    <meta property="og:image:height" content="200" />
-    <meta property="og:url" content="index.html" />
-    <meta property="og:description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out." />
-    <meta property="og:site_name" content="Campaign Trail Showcase" />
+    <link rel="stylesheet" href="../static/amusa_main_2016032801.css" media="screen">
+    <link rel="stylesheet" href="../static/css/community.css" media="screen">
+    <link rel="icon" href="/static/34starcircle-2.png" type="image/png">
+    <link rel="canonical" href="index.html">
+    <meta property="og:title" content="Campaign Trail Showcase">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../static/34starcircle-2.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="200">
+    <meta property="og:image:height" content="200">
+    <meta property="og:url" content="index.html">
+    <meta property="og:description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out.">
+    <meta property="og:site_name" content="Campaign Trail Showcase">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
@@ -27,28 +27,25 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-H6KK5MD763');
     </script>
   </head>
   <body class="base" style="position:relative">
-    <div style="display:none" id="announcement" class="announcement"><span>📣 ANNOUNCEMENT:</span> Do you like CTS but want to save your highscores and play better on mobile? Check out <a href="https://thecommunitytrail.com/">The Community Trail</a></div>
-    <div style="display:none" id="cheatIndicator" class="cheatIndicator">AUTO-PLAY ENABLED</div>
-    <div style="display:none" id="benefitwindow">
-      <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+    <div hidden id="announcement" class="announcement"><span>📣 ANNOUNCEMENT:</span> Do you like CTS but want to save your highscores and play better on mobile? Check out <a href="https://thecommunitytrail.com/">The Community Trail</a></div>
+    <div hidden id="cheatIndicator" class="cheatIndicator">AUTO-PLAY ENABLED</div>
+    <div hidden id="benefitwindow">
       <div id="benefitwindowheader"><button onclick="hideBenefitChecker()" id="benefitclose">X</button> Benefit Checker</div>
       <div id="benefitcontent"></div>
     </div>
-    <div style="display:none" id="achwindow">
-      <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+    <div hidden id="achwindow">
       <div id="achwindowheader"><button onclick="closeAchievements()" id="achclose">X</button> Achievements</div>
       <div id="achcontent"></div>
     </div>
-    <div style="display:none" id="answerHoverTooltip"></div>
-    <div id="wittyquote" style="display:none"></div>
+    <div hidden id="answerHoverTooltip"></div>
+    <div id="wittyquote" hidden></div>
     <div class="container">
       <div class="center">
-        <img src="../static/images/banners/tct_banner.webp" id="header" width=1080 alt="Campaign Trail Showcase Head Banner"/>
+        <img src="../static/images/banners/tct_banner.webp" id="header" style="width: 100%" alt="Campaign Trail Showcase Head Banner">
       </div>
       <div class="menu_bar_login"></div>
       <div class="content_box">
@@ -74,22 +71,20 @@
                     <strong>Click here to begin!</strong>
                   </button>
                 </span>
-                <span style="font-weight: bolder;position:absolute;right:10px;top:10px;">
-                  </li>
               </div>
             </div>
-            <div id="bottomBar" class="inner_window_front" style="display:none;height:30px;font-size: 12px;border-style: solid;border-width: 5px;width:95%;position:absolute;bottom:10px;"></div>
+            <div id="bottomBar" class="inner_window_front" hidden style="height:30px;font-size: 12px;border-style: solid;border-width: 5px;width:95%;position:absolute;bottom:10px;"></div>
           </div>
           <div class="footer">
-            <div id="cheatMenu" style="display:none">
+            <div id="cheatMenu" hidden>
               <div class="slidecontainer"  style="padding-right: 20px; padding: 10px; border-radius:5px; background-color: white;">
                 <label style="font-weight:bold">Difficulty Slider</label>
                 <input type="range" min="0.0" max="100.0" step="0.25" value="1.0" class="slider" id="difficultySlider" style="vertical-align: middle">
-                <input style="display:inline-block" step="any" type="number" id="difficultyValue"></input>
+                <input style="display:inline-block" step="any" type="number" id="difficultyValue">
               </div>
               <div style="margin-top:10px; display:inline-block;">
                 <button onclick="turnOffVisits()" style="border-radius:5px; font-weight:bold;padding:10px;">Turn Off Visits</button>
-                <input style="border-radius:5px; font-weight:bold;padding:10px;"  type="number" id="skipQuestionValue" placeholder="Enter question to skip to"></input>
+                <input style="border-radius:5px; font-weight:bold;padding:10px;"  type="number" id="skipQuestionValue" placeholder="Enter question to skip to">
                 <button onclick="skipQuestion(event)" style="border-radius:5px; font-weight:bold;padding:10px;">Skip To Question</button>
               </div>
               <div style="margin-top:10px">
@@ -98,7 +93,7 @@
                 <button onclick="activateAnswerTooltip()" style="border-radius:5px; font-weight:bold;padding:10px;">Variable Tooltip</button>
               </div>
             </div>
-            <div id="autoplayMenu" style="display:none">
+            <div id="autoplayMenu" hidden>
               <label style="font-weight: bolder;" for="autoplayYes">Autoplay Settings</label><br><br>
               <label style="font-weight:bold">Always Pick</label><br>
               <textarea  placeholder="Put PKs of answers you always want here separated by spaces. Ex: 451 467 232" id="autoplayYes" name="autoplayYes" rows="4" cols="25"></textarea><br>
@@ -106,27 +101,27 @@
               <textarea  placeholder="Put PKs of answers you never want here separated by spaces. Ex: 651 367 2332" id="autoplayNo" name="autoplayNo" rows="4" cols="25"></textarea><br>
               <br>
               <button onclick="printAllAnswersAutoplayPicked()">View Autoplay Answers</button><br><br>
-              <textarea style="display:none"  placeholder="Put PKs of answers you never want here separated by spaces. Ex: 651 367 2332" id="autoplayAnswers" rows="25" cols="25"></textarea><br>
+              <textarea hidden placeholder="Put PKs of answers you never want here separated by spaces. Ex: 651 367 2332" id="autoplayAnswers" rows="25" cols="25"></textarea><br>
             </div>
             <h4>Theme Picker</h4>
             <div id="theme_picker">
               <span class="campaign_trail_start_emphasis">
-                <button id="game_start" onclick=creatorChange()>
+                <button id="game_start" onclick="creatorChange()">
                   <strong>Button</strong>
                 </button>
               </span>
             </div>
             <br>
-            <div id="music_player" style="display:none">
+            <div id="music_player" hidden>
               <button onclick="document.getElementById('campaigntrailmusic').play()">Play Soundtrack</button>
-              <button onClick="document.getElementById('campaigntrailmusic').pause()">Pause</button>
-              <audio id="campaigntrailmusic" loop="true" style="display:none" src="" autoplay="false"></audio>
+              <button onclick="document.getElementById('campaigntrailmusic').pause()">Pause</button>
+              <audio id="campaigntrailmusic" loop hidden src=""></audio>
             </div>
-            <button style="display:none" onclick="showBenefitChecker()" id="showBenefitCheckButton">Show Benefit Check Window</button>
+            <button hidden onclick="showBenefitChecker()" id="showBenefitCheckButton">Show Benefit Check Window</button>
             <button id="modLoadReveal" onclick="if(document.getElementById('modloaddiv').style.display != 'none'){document.getElementById('modloaddiv').style.display = 'none'}else{document.getElementById('modloaddiv').style.display = 'block'}"> Custom Mod Loader </button>
             <br>
-            <div id="modloaddiv" style="display:none">
-              <div style="display:none" id="tagContainer">
+            <div id="modloaddiv" hidden>
+              <div hidden id="tagContainer">
                 <label>
                   <input type="checkbox" class="tagCheckbox" value="historical">Historical </label>
                 <label>
@@ -136,21 +131,21 @@
                 <label>
                   <input type="checkbox" class="tagCheckbox" value="international">International </label>
               </div>
-              <select style="display:none" name="mod" id="modSelect" onchange="modSelectChange()"></select>
+              <select hidden name="mod" id="modSelect" onchange="modSelectChange()"></select>
               <div id="customMenu">
                 <br>
                 <b>Code Set 1:</b>
                 <br>
-                <textarea id="codeset1" width=400 height=300></textarea>
+                <textarea id="codeset1"></textarea>
                 <br>
                 <b>Code Set 2:</b>
                 <br>
-                <textarea id="codeset2" width=400 height=300></textarea>
+                <textarea id="codeset2"></textarea>
                 <br>
                 <b>ENDINGS CODE:</b>
                 <br>
-                <textarea id="codeset3" width=400 height=300></textarea>
-                <div style="display:none" id="fileimp">
+                <textarea id="codeset3"></textarea>
+                <div hidden id="fileimp">
                   <br>
                   <b>File importer:</b>
                   <br>
@@ -165,7 +160,7 @@
                 <button id="submitMod">Play Custom Mod</button>
                 <br>
                 <br>
-                <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName"></input>
+                <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName">
                 <button onclick="addCustomModButton()" id="saveMod">Save Custom Mod</button>
                 <div>
                   <p style="font-size: smaller; font-style: italic">(To update a custom mod just submit a new mod again with an identical name. This includes switching candidates/running mates.)</p>
@@ -174,8 +169,8 @@
             </div>
             <br>
             <button id="achButton" onclick="openAchievements()">Achievements</button>
-            <div id="copyLinkButton" style="display:none; margin:10px 0;"><button onclick="copyModLink()">Copy Mod Link</button></div>
-            <button id="goBackButton" style="display:none" onclick="window.location.href = 'index.html'">Go Back To Main Page</button>
+            <div id="copyLinkButton" hidden style="margin:10px 0;"><button onclick="copyModLink()">Copy Mod Link</button></div>
+            <button id="goBackButton" hidden onclick="window.location.href = 'index.html'">Go Back To Main Page</button>
             <div id="bonus_menu_area"></div>
             <br>
             <hr>
@@ -199,7 +194,7 @@
               </div>
               <div id="tags" class="tags-grid"></div>
               <div style="color:white;margin:auto; display:flex;align-items: center;justify-content: center; margin-bottom:10px; gap:10px;">
-                <input placeholder="Filter by mod name" oninput="filterMods(event)" type="text" id="modSearch" name="modSearch"></input>
+                <input placeholder="Filter by mod name" oninput="filterMods(event)" type="text" id="modSearch" name="modSearch">
                 
                 <div>
                 <label for="sorting">Sort by:</label>
@@ -216,11 +211,11 @@
           </div>      
             
             <div id="site_credits" style="text-align: center;">
-              <a href="https://discord.gg/cqgVSNRKDP" style="color:#FF6B6B">Campaign Trail Showcase Discord</a><br/>
-              <a href="https://discord.gg/CfS6yTtjZj" style="color:#FF6B6B">The Campaign Trail Discord</a><br/><br/>
+              <a href="https://discord.gg/cqgVSNRKDP" style="color:#FF6B6B">Campaign Trail Showcase Discord</a><br>
+              <a href="https://discord.gg/CfS6yTtjZj" style="color:#FF6B6B">The Campaign Trail Discord</a><br><br>
               <a href="https://github.com/campaign-trail-showcase/campaign-trail-showcase.github.io/blob/main/How%20Tos/How%20to%20Get%20Your%20Mod%20in%20The%20Showcase.md" style="color:#FF6B6B">How to submit a mod to Campaign Trail Showcase</a><br>
               <a href="https://www.newcampaigntrail.com/campaign-trail/index.html" style="color:#FF6B6B">This site is a fork of The New Campaign Trail created by Decstar and NCT Staff</a><br>
-              <a href="http://www.americanhistoryusa.com" style="color:#FF6B6B">Original site created by Dan Bryan &copy; 2012- <testf id="year">2022</testf></a>
+              <a href="https://www.americanhistoryusa.com" style="color:#FF6B6B">Original site created by Dan Bryan &copy; 2012-<span id="year">2022</span></a>
               <p style="color:#FF6B6B">All DBA award images created by cherrymeringue. Thanks so much!</p>
               <div>
                 <div style="margin-top:10px; display:inline-block;">
@@ -235,8 +230,9 @@
           </div>
         </div>
         <br>
+      </div>
+    </div>
   </body>
-  <!-- <script src="../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
   <script src="../static/js/lib/raphael.js"></script>
   <script src="../static/js/indexCode.js"></script>
   <script src="../static/js/modLoaderCode.js"></script>

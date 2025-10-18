@@ -64,7 +64,7 @@ const nct_stuff = {
     tct: {
       name: "Campaign Trail Showcase",
       background: "../static/images/backgrounds/tct_background.jpg",
-      banner: "../static/images/banners/tct_banner.png",
+      banner: "../static/images/banners/tct_banner.webp",
       coloring_window: "#727C96",
       coloring_container: "#222449",
       coloring_title: "#3A3360",
@@ -427,7 +427,7 @@ function updateDynamicStyle() {
   if (nct_stuff.dynamicOverride) return;
   const background_size_css = selectedTheme.background_cover ? "background-size: cover" : "";
   const dynaStyle = `
-    #header { src: ${selectedTheme.banner}; width: 1000px; }
+    #header { src: ${selectedTheme.banner}; }
     body { background: ${selectedTheme.background}; ${background_size_css}; }
     #game_window {
       background-color: ${selectedTheme.coloring_window};
