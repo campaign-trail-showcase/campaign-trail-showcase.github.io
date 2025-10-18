@@ -888,17 +888,10 @@ const useConsoleCheats = () => {
         plugin.options.click({ target: null }, { name: abbr });
         document.getElementById('confirm_visit_button')?.click();
       };
-      // we don't need any flooring since visits are triggered on even Qs
-      // some of the logic here is probably flawed, but It Just Works
-      const questionNumberDivBy2 = e.question_number / 2;
-      const normalizedVisits = e.player_visits.length * questionNumberDivBy2;
-      const normalizedStateLength = e.states_json.length * questionNumberDivBy2;
       if (auto_visit === "all") {
         const firstPath = availableStates[0];
         for (const state of availableStates) {
-          if (state !== firstPath && normalizedVisits <= normalizedStateLength) {
-            e.player_visits.push(stateAbbrToPk.get(state));
-          }
+          if (state !== firstPath) e.player_visits.push(stateAbbrToPk.get(state));
         }
         visitAndConfirm(firstPath);
       } else if (auto_visit != null) {
