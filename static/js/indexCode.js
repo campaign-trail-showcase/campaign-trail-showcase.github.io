@@ -123,9 +123,21 @@ const campaignTrailMusic = document.getElementById("campaigntrailmusic");
 const dynamicStyle = document.createElement("style");
 document.head.appendChild(dynamicStyle);
 
+// Not removed because used by 2023 WOKE
 function updateBannerAndStyling() {
   header.src = selectedTheme.banner;
   header.width = 1000;
+  document.body.background = selectedTheme.background;
+  gameWindow.style.backgroundColor = selectedTheme.coloring_window;
+  container.style.backgroundColor = selectedTheme.coloring_container;
+  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+  if (selectedTheme.text_col != null) {
+    container.style.color = selectedTheme.text_col;
+    gameWindow.style.color = "black";
+  }
+}
+
+function updateStyling() {
   document.body.background = selectedTheme.background;
   gameWindow.style.backgroundColor = selectedTheme.coloring_window;
   container.style.backgroundColor = selectedTheme.coloring_container;
@@ -185,7 +197,7 @@ setInterval(() => {
     nct_stuff.themes[nct_stuff.selectedTheme] = strCopy(nct_stuff.custom_override);
     selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
     gameWindow.style.backgroundImage = "";
-    updateBannerAndStyling();
+    updateStyling();
   } else if (
     !nct_stuff.custom_override &&
     nct_stuff.selectedTheme == "custom" &&
@@ -206,7 +218,19 @@ async function loadJSON(path, varr, callback = null) {
   const res = await fetch(path);
   if (!res.ok) return;
   const responseText = await res.text();
-  eval(varr + "=JSON.parse(" + JSON.stringify(responseText.trim()) + ")");
+  
+  // parse nested property path and assign
+  const parts = varr.split('.');
+  let obj = window;
+  
+  // navigate to the parent object
+  for (let i = 0; i < parts.length - 1; i++) {
+    obj = obj[parts[i]];
+  }
+  
+  // assign to the final property
+  obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
+  
   if (callback) callback();
 }
 
@@ -249,4 +273,4 @@ campaignTrail_temp.show_premium = true;
 campaignTrail_temp.premier_ab_test_version = -1;
 campaignTrail_temp.credits = "Dan Bryan";
 
-updateBannerAndStyling();
+updateStyling();
