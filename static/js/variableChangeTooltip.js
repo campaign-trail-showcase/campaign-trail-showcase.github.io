@@ -13,7 +13,7 @@ async function activateAnswerTooltip() {
 
   if (!jsonLoaded) {
     try {
-      const res = await fetch('../static/json/answer_variables.json');
+      const res = await fetch(`../static/json/variablechanges/${modName}.json`);
       answerTooltipData = await res.json();
       jsonLoaded = true;
     } catch (error) {
@@ -55,8 +55,6 @@ async function activateAnswerTooltip() {
       && answerTooltipData[modName][startingCandidateId][startingRunningMateId][answerPk]) {
       const changes = answerTooltipData[modName][startingCandidateId][startingRunningMateId][answerPk];
       answerTooltipText = changes.map(c => `${c.var} ${c.change}`).join(', ');
-    } else if (!answerTooltipData[modName]) {
-      answerTooltipText = "No data for this mod";
     }
 
     answerHoverTooltip.innerHTML = answerTooltipText;

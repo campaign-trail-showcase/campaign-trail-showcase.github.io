@@ -1,11 +1,5 @@
 campaignTrail_temp.global_parameter_json = JSON.parse("[{\"model\": \"campaign_trail.global_parameter\", \"pk\": 1, \"fields\": {\"vote_variable\": 1.125, \"max_swing\": 0.0, \"start_point\": 1.00, \"candidate_issue_weight\": 10.0, \"running_mate_issue_weight\": 3.0, \"issue_stance_1_max\": -0.71, \"issue_stance_2_max\": -0.3, \"issue_stance_3_max\": -0.125, \"issue_stance_4_max\": 0.125, \"issue_stance_5_max\": 0.3, \"issue_stance_6_max\": 0.71, \"global_variance\": 0.001, \"state_variance\": 0.001, \"question_count\": 24, \"default_map_color_hex\": \"#fffcf5\", \"no_state_map_color_hex\": \"#999999\"}}]");
 
-function ctsAchievement(achievement, difficultyChecker = true){
-	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
-		if(campaignTrail_temp.CTS){
-		unlockAchievement(achievement);
-	}
-}
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -13672,7 +13666,7 @@ cyoAdventure = function(a) {
     }
            
     if (ans == 9346 || ans == 9342 ) {
-            ctsAchievement("Proselytize<br>⠀");  
+            ctsAchievement("Proselytize<br> ");  
     }
        
 
@@ -13796,7 +13790,7 @@ if (out == "tie") {
 
 
 if (principles >= 6) {
-    ctsAchievement("Saint George<br>⠀");  
+    ctsAchievement("Saint George<br> ");  
 }
 if(out == "win" && (e.player_answers.includes(3249))){
     ctsAchievement("... of Lydda"); 
@@ -13805,7 +13799,7 @@ if (principles < 0) {
     ctsAchievement("Laman<br> ");  
 }
 if (principles == 0 && ideology == 0 && out == "win") {
-    ctsAchievement("Pitch Perfect<br>⠀");  
+    ctsAchievement("Pitch Perfect<br> ");  
 }
 if(quickstats[0] >= 320 && out == "win" && (e.player_answers.includes(9474))){
     ctsAchievement("In Control"); 

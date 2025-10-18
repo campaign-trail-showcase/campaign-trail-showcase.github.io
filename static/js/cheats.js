@@ -143,7 +143,7 @@ function activateCheatMenu() {
   };
 }
 
-function benefitChecker() {
+async function benefitChecker() {
   try {
     const formEl = document.querySelector("#question_form > form");
     if (!formEl) return;
