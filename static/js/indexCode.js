@@ -78,13 +78,26 @@ const nct_stuff = {
       coloring_container: "",
       coloring_title: "",
     },
+    custom: {
+      name: "Custom",
+      background: "../static/images/backgrounds/tct_background.jpg",
+      banner: "../static/images/banners/tct_banner.webp",
+      coloring_window: "#727C96",
+      coloring_container: "#222449",
+      coloring_title: "#3A3360",
+      text_col: "",
+      window_url: "",
+      background_cover: false,
+      mod_override: false,
+    },
   },
   selectedTheme: "",
+  customThemes: {},
 };
 
 var theme = window.localStorage.getItem("theme");
 nct_stuff.selectedTheme = theme || "tct";
-let selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
+var selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
 
 const themePickerEl = document.getElementById("theme_picker");
 themePickerEl.innerHTML = "<select id='themePicker' onchange='themePicked()'></select>";
@@ -97,13 +110,59 @@ for (const key in nct_stuff.themes) {
 }
 
 function themePicked() {
-  const sel = document.getElementById("themePicker").value;
-  window.localStorage.setItem("theme", sel);
-  nct_stuff.selectedTheme = sel;
-  selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
-  updateBannerAndStyling();
-  updateDynamicStyle();
-  updateGameHeaderContentAndStyling();
+  const themePicker = document.getElementById("themePicker");
+  const sel = themePicker.value;
+  const customMenuButton = document.getElementById("open_custom_theme");
+
+  // check if a specific custom theme was selected from the dropdown
+  if (sel.startsWith("custom_")) {
+    window.localStorage.setItem("theme", "custom");
+    window.localStorage.setItem("active_custom_theme_id", sel);
+    nct_stuff.selectedTheme = "custom";
+    
+    loadCustomTheme(sel);
+
+    // make sure the "Add custom theme" button is visible
+    if (!customMenuButton) {
+      ensureCustomThemeButton();
+    }
+
+  } else if (sel === "custom") {
+    // if "Custom" option selected, show button and optionally open modal
+    window.localStorage.setItem("theme", "custom");
+    nct_stuff.selectedTheme = "custom";
+    
+    if (!customMenuButton) {
+      ensureCustomThemeButton();
+    }
+    
+    // check if there's an active theme, otherwise open modal
+    const activeThemeId = window.localStorage.getItem("active_custom_theme_id");
+    if (!activeThemeId || !nct_stuff.customThemes[activeThemeId]) {
+      // no active theme, open modal to create one
+      setTimeout(() => openCustomThemeMenu(), 100);
+    } else {
+      loadCustomTheme(activeThemeId);
+      // update the selected theme
+      selectedTheme = nct_stuff.themes.custom;
+      updateBannerAndStyling();
+      updateDynamicStyle();
+      updateGameHeaderContentAndStyling();
+    }
+
+  } else {
+    window.localStorage.setItem("theme", sel);
+    nct_stuff.selectedTheme = sel;
+    selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
+    updateBannerAndStyling();
+    updateDynamicStyle();
+    updateGameHeaderContentAndStyling();
+
+    // remove the custom theme button
+    if (customMenuButton) {
+      customMenuButton.parentElement.remove();
+    }
+  }
 }
 
 const susnum = Math.floor(Math.random() * 8 + 1);
@@ -450,6 +509,9 @@ function updateDynamicStyle() {
 }
 
 setInterval(() => {
+  // skip updates while theme menu is open
+  if (nct_stuff.pauseThemeUpdates) return;
+
   if (
     JSON.stringify(nct_stuff.custom_override) != JSON.stringify(selectedTheme) &&
     !nct_stuff.dynamicOverride &&
