@@ -1,3 +1,28 @@
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
+campaignTrail_temp.cyoa = true;
+
+function getQuestionNumberFromPk(pk) {
+    return campaignTrail_temp.questions_json.map(q=>q.pk).indexOf(pk)-1;
+}
+		
+cyoAdventure = function (a) {
+ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
+if (ans == 12383) {
+        campaignTrail_temp.candidate_json[0]["fields"].last_name = "Trump";
+        campaignTrail_temp.candidate_image_url = 'https://i.imgur.com/Hr1NxYw.png'
+ }
+        
+if(ans == 12506) {
+ctsAchievement("Buchanan Land");
+    }
+}
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
