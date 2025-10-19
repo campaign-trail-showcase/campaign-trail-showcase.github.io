@@ -1,3 +1,28 @@
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
+campaignTrail_temp.cyoa = true;
+
+function getQuestionNumberFromPk(pk) {
+    return campaignTrail_temp.questions_json.map(q=>q.pk).indexOf(pk)-1;
+}
+		
+cyoAdventure = function (a) {
+ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
+if (ans == 12383) {
+        campaignTrail_temp.candidate_json[0]["fields"].last_name = "Trump";
+        campaignTrail_temp.candidate_image_url = 'https://i.imgur.com/Hr1NxYw.png'
+ }
+        
+if(ans == 12506) {
+ctsAchievement("Buchanan Land");
+    }
+}
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -157,7 +182,7 @@ campaignTrail_temp.questions_json = [
         "pk": 372,
         "fields": {
             "priority": 3,
-            "description": "As the Vice Presidential debate between Kasich and Lieberman arrives, is there any remark you want to make?",
+            "description": "As the Vice Presidential debate between Danforth and Lieberman arrives, is there any remark you want to make?",
             "likelihood": 1
         }
     },
@@ -288,7 +313,7 @@ campaignTrail_temp.answers_json = [
         "pk": 3330,
         "fields": {
             "question": 348,
-            "description": "It's sad how we even have to ask this question. Abortion, or as it really is, baby murder, is a blight on our beautiful country, causing millions of the unborn to be killed every year. I will do anything in my power to sign a national abortion ban."
+            "description": "It's sad how we even have to ask this question. Abortion, or as it really is, baby murder, is a blight on our beautiful country, causing millions of the unborn to be killed every year. I will do anything in my power to overturn Roe v. Wade."
         }
     },
     {
@@ -624,7 +649,7 @@ campaignTrail_temp.answers_json = [
         "pk": 12378,
         "fields": {
             "question": 372,
-            "description": "I'm confident that Kasich will win. Godspeed."
+            "description": "I'm confident that Danforth will win. Godspeed."
         }
     },
     {
@@ -5103,7 +5128,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 78,
             "state": 205,
-            "state_multiplier": 0.999
+            "state_multiplier": 0.987
         }
     },
     {
@@ -7039,19 +7064,9 @@ campaignTrail_temp.answer_score_issue_json = [
         "pk": 12510,
         "fields": {
             "answer": 12389,
-            "issue": 27,
+            "issue": "27",
             "issue_score": -0.95,
             "issue_importance": 1
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_issue",
-        "pk": 12511,
-        "fields": {
-            "answer": 12378,
-            "issue": "27",
-            "issue_score": -0.99,
-            "issue_importance": 2
         }
     }
 ]
@@ -9540,7 +9555,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3475,
             "candidate": 77,
-            "answer_feedback": "You give a speech to a frenzied crowd in Los Angeles, and it is overall well-received. While you're there, you buy a newspaper from the LA Times and are delighted by how biased it was against you."
+            "answer_feedback": "You give a speech to a frenzied crowd in Los Angeles, and it is overall well-received. While you're there, you buy a newspaper from the LA Times and are delighted by how biased it was."
         }
     },
     {
@@ -9819,7 +9834,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 12364,
             "candidate": 77,
-            "answer_feedback": "This is exactly the OPPOSITE of what your supporters want to hear."
+            "answer_feedback": "This is exactly the OPPOSITE of what your supporters want to here."
         }
     },
     {
@@ -9846,7 +9861,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 12378,
             "candidate": 77,
-            "answer_feedback": "Kasich was doing well, until he makes a blunder on healthcare reform. Fortunately most people don't really care about the VP debates."
+            "answer_feedback": "Danforth managed to nail Lieberman on foreign policy, and most pundits agree that he won."
         }
     },
     {
@@ -10113,9 +10128,9 @@ campaignTrail_temp.answer_feedback_json = [
 ]
 
 campaignTrail_temp.candidate_image_url = "https://i.postimg.cc/cCTQffvP/Bush-portrait-3.png";
-campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/jLWel0y.jpeg";
+campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/iZY5fzw.png";
 campaignTrail_temp.candidate_last_name = "Bush";
-campaignTrail_temp.running_mate_last_name = "Kasich";
+campaignTrail_temp.running_mate_last_name = "Danforth";
 
 campaignTrail_temp.multiple_endings = true;
 endingPicker = (out, totv, aa, quickstats) => {
@@ -10165,8 +10180,8 @@ campaignTrail_temp.jet_data = [{
     "banner_enabled": true,
     "banner_data": {
         "canName": "Bush",
-        "runName": "Kasich",
-        "runImage": "https://i.imgur.com/jLWel0y.jpeg",
+        "runName": "Danforth",
+        "runImage": "https://i.imgur.com/iZY5fzw.png",
         "canImage": "https://i.postimg.cc/cCTQffvP/Bush-portrait-3.png"
     },
     "endings_enabled": true,
