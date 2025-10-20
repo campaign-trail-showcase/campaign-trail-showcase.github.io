@@ -64,7 +64,7 @@ const nct_stuff = {
     tct: {
       name: "Campaign Trail Showcase",
       background: "../static/images/backgrounds/tct_background.jpg",
-      banner: "../static/images/banners/tct_banner.png",
+      banner: "../static/images/banners/tct_banner.webp",
       coloring_window: "#727C96",
       coloring_container: "#222449",
       coloring_title: "#3A3360",
