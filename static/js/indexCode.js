@@ -112,6 +112,267 @@ const stassenyear = [
   "1944", "1948", "1952", "1964", "1968", "1980", "1984", "1988", "1992",
 ];
 
+// keyboard shortcuts handler
+const keyboardShortcutsHandler = (event) => {
+  // only handle shortcuts if #game_window exists and has content
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow || gameWindow.children.length === 0) {
+    return;
+  }
+
+  // check if we should skip (e.g., if user is typing in an input field)
+  if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+    return;
+  }
+
+  // opening menu - Start Game
+  if (document.querySelector("#game_start") && document.getElementById("modloaddiv")?.style.display === "none") {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      document.getElementById("game_start")?.click();
+      return;
+    }
+  }
+
+  // election year selection
+  if (document.querySelector("#election_year_form")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      document.getElementById("election_id_button")?.click();
+      return;
+    }
+
+    const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
+    if (arrowKey) {
+      event.preventDefault();
+      
+      const electionSelect = document.getElementById("election_id");
+      if (!electionSelect) return;
+      
+      const options = Array.from(electionSelect.children);
+      const currentIndex = electionSelect.selectedIndex;
+      let newIndex;
+      
+      if (event.key === "ArrowDown") {
+        newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
+      } else {
+        newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
+      }
+      
+      electionSelect.selectedIndex = newIndex;
+      electionSelect.dispatchEvent(new Event('change'));
+    }
+    return;
+  }
+
+  // candidate selection
+  if (document.querySelector("#candidate_form")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      document.getElementById("candidate_id_button")?.click();
+      return;
+    }
+    if (event.key === "Backspace" || event.key === "ArrowLeft") {
+      document.getElementById("candidate_id_back")?.click();
+      return;
+    }
+
+    const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
+    if (arrowKey) {
+      event.preventDefault();
+      
+      const candidateSelect = document.getElementById("candidate_id");
+      if (!candidateSelect) return;
+      
+      const options = Array.from(candidateSelect.children);
+      const currentIndex = candidateSelect.selectedIndex;
+      let newIndex;
+      
+      if (event.key === "ArrowDown") {
+        newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
+      } else {
+        newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
+      }
+      
+      candidateSelect.selectedIndex = newIndex;
+      candidateSelect.dispatchEvent(new Event('change'));
+    }
+    return;
+  }
+
+  // running mate selection
+  if (document.querySelector("#running_mate_form")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      document.getElementById("running_mate_id_button")?.click();
+      return;
+    }
+    if (event.key === "Backspace" || event.key === "ArrowLeft") {
+      document.getElementById("running_mate_id_back")?.click();
+      return;
+    }
+
+    const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
+    if (arrowKey) {
+      event.preventDefault();
+      
+      const runningMateSelect = document.getElementById("running_mate_id");
+      if (!runningMateSelect) return;
+      
+      const options = Array.from(runningMateSelect.children);
+      const currentIndex = runningMateSelect.selectedIndex;
+      let newIndex;
+      
+      if (event.key === "ArrowDown") {
+        newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
+      } else {
+        newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
+      }
+      
+      runningMateSelect.selectedIndex = newIndex;
+      runningMateSelect.dispatchEvent(new Event('change'));
+    }
+    return;
+  }
+
+  // difficulty/game mode selection
+  if (document.querySelector("#opponent_selection_description_window")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      document.getElementById("opponent_selection_id_button")?.click();
+      return;
+    }
+    if (event.key === "Backspace" || event.key === "ArrowLeft") {
+      document.getElementById("opponent_selection_id_back")?.click();
+      return;
+    }
+
+    const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
+    if (arrowKey) {
+      event.preventDefault();
+      
+      const difficultySelect = document.getElementById("difficulty_level_id");
+      if (!difficultySelect) return;
+      
+      const options = Array.from(difficultySelect.children);
+      const currentIndex = difficultySelect.selectedIndex;
+      let newIndex;
+      
+      if (event.key === "ArrowDown") {
+        newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
+      } else {
+        newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
+      }
+      
+      difficultySelect.selectedIndex = newIndex;
+      difficultySelect.dispatchEvent(new Event('change'));
+    }
+    return;
+  }
+
+  // question/answer selection
+  if (document.querySelector("#question_form")) {
+    const answers = Array.from(document.querySelectorAll(".game_answers"));
+    
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      // if there's an OK button (feedback), click it
+      const okButton = document.getElementById("ok_button");
+      if (okButton) {
+        okButton.click();
+        return;
+      }
+      
+      // otherwise, submit the answer
+      document.getElementById("answer_select_button")?.click();
+      return;
+    }
+    
+    if (event.key === "ArrowLeft") {
+      document.getElementById("view_electoral_map")?.click();
+      return;
+    }
+
+    // don't handle other keys if feedback window is open
+    if (document.getElementById("ok_button")) {
+      return;
+    }
+
+    // handle number keys (1-5) to select answers
+    const numKey = parseInt(event.key);
+    if (numKey >= 1 && numKey <= answers.length) {
+      event.preventDefault();
+      answers[numKey - 1]?.click();
+      return;
+    }
+
+    // handle arrow keys to navigate answers
+    if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+      event.preventDefault();
+      
+      let currentIndex = answers.findIndex(a => a.checked);
+      
+      if (event.key === "ArrowDown") {
+        currentIndex = currentIndex + 1 >= answers.length ? 0 : currentIndex + 1;
+      } else {
+        currentIndex = currentIndex - 1 < 0 ? answers.length - 1 : currentIndex - 1;
+      }
+      
+      answers[currentIndex]?.click();
+    }
+    return;
+  }
+
+  // map view
+  if (document.getElementById("AdvisorButton")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      document.getElementById("resume_questions_button")?.click();
+    }
+    return;
+  }
+
+  // election night
+  if (document.getElementById("final_result_button")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      // handle overlay buttons first
+      const electionNightButton = document.querySelector("#election_night_buttons #ok_button");
+      if (electionNightButton) {
+        electionNightButton.click();
+        return;
+      }
+      
+      const winnerButton = document.querySelector("#winner_buttons #ok_button");
+      if (winnerButton) {
+        winnerButton.click();
+        return;
+      }
+      
+      document.getElementById("final_result_button")?.click();
+    }
+    return;
+  }
+
+  // final results screen navigation
+  const finalMenuButtons = Array.from(document.querySelectorAll(".final_menu_button"));
+  if (finalMenuButtons.length > 0) {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      
+      // exclude the "Play Again" button from navigation
+      const navButtons = finalMenuButtons.slice(0, -1);
+      const currentIndex = navButtons.findIndex(b => b.disabled);
+      
+      if (currentIndex === -1) return;
+      
+      let newIndex;
+      if (event.key === "ArrowRight") {
+        newIndex = currentIndex + 1 >= navButtons.length ? 0 : currentIndex + 1;
+      } else {
+        newIndex = currentIndex - 1 < 0 ? navButtons.length - 1 : currentIndex - 1;
+      }
+      
+      navButtons[newIndex]?.click();
+    }
+    return;
+  }
+};
+
+document.addEventListener("keydown", keyboardShortcutsHandler);
+
 // DOM cache
 const correctbannerpar = document.getElementsByClassName("game_header")[0];
 var corrr = correctbannerpar.innerHTML;
