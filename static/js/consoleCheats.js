@@ -724,7 +724,6 @@ const useConsoleCheats = () => {
   let [lastQuestionNumber, lastPlayerVisitsLength, lastIgnoreStatesLength] = [
     -1, -1, -1,
   ];
-  let stateToPath = new Map();
   let cachedPopVoteMap = null;
   let prev_answer_hint_enabled = false;
 
@@ -876,53 +875,31 @@ const useConsoleCheats = () => {
     }
 
     if (document.activeElement.type === "radio") document.activeElement.blur();
+    const plugin = $('#map_container').data('plugin-usmap');
 
-    // Compute state SVG paths
-    if (
-      stateToPath.size < 1 ||
-      !document.body.contains(stateToPath.values().next().value)
-    ) {
-      stateToPath = new Map();
-      const stateNameToAttr = new Map();
-      for (const state of e.states_json) {
-        stateNameToAttr.set(state.fields.name, state.fields.abbr);
-      }
-      const get_tooltip = () => $("#state_info")?.children()[1]?.innerHTML;
-      for (const path of $("path")) {
-        path.dispatchEvent(new MouseEvent("mouseover", { cancelable: true }));
-        const tooltip = get_tooltip();
-        const state = stateNameToAttr.get(tooltip);
-        if (state == null) continue;
-        if (stateToPath.has(state)) continue;
-        path.setAttribute("id", state);
-        stateToPath.set(state, path);
-      }
-    }
+    const availableStates = e.states_json.map((st) => st.fields.abbr);
 
     const stateAbbrToPk = new Map();
     for (const state of e.states_json) {
       stateAbbrToPk.set(state.fields.abbr, state.pk);
     }
     if ($(".visit_text").length > 0) {
-      if (auto_visit == "all") {
-        const visitables = Array.from(stateToPath.keys());
-        const path = stateToPath.get(visitables[0]);
-        for (let i = 1; i < visitables.length; i++) {
-          e.player_visits.push(stateAbbrToPk.get(visitables[i]));
+      const visitAndConfirm = (abbr) => {
+        plugin.options.click({ target: null }, { name: abbr });
+        document.getElementById('confirm_visit_button')?.click();
+      };
+      if (auto_visit === "all") {
+        const firstPath = availableStates[0];
+        for (const state of availableStates) {
+          if (state !== firstPath) e.player_visits.push(stateAbbrToPk.get(state));
         }
-        path.dispatchEvent(new MouseEvent("click", { cancelable: true }));
-        $("#confirm_visit_button")[0]?.dispatchEvent(
-          new MouseEvent("click", { cancelable: true }),
-        );
+        visitAndConfirm(firstPath);
       } else if (auto_visit != null) {
-        const path = stateToPath.get(auto_visit);
-        if (path == null) {
-          console.warn(`State not found on map: ${auto_visit}`);
+        const stateExists = availableStates.includes(auto_visit);
+        if (stateExists) {
+          visitAndConfirm(auto_visit);
         } else {
-          path.dispatchEvent(new MouseEvent("click", { cancelable: true }));
-          $("#confirm_visit_button")[0]?.dispatchEvent(
-            new MouseEvent("click", { cancelable: true }),
-          );
+          console.warn(`State not found on map: ${auto_visit}`);
         }
       }
     }

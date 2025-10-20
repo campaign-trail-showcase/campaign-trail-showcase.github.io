@@ -131,7 +131,7 @@ campaignTrail_temp.election_json = [
             "site_description": "<p>In 2000 Redux, play as George Bush and attempt to win, running a moderate or aggressive campaign. This was my first mod, and obviously there's many problems with it, including alot of AI writing, and randomly being decimated/surging in the polls, but it was a good learning experience, and I hope you find some enjoyment out of it.</p>",
             "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
             "creator": "Dan Bryan",
-            "display_year": "2000"
+            "display_year": "2000BushRedux"
         }
     }
 ]
@@ -699,7 +699,7 @@ campaignTrail_temp.temp_election_list = [
         "id": 9,
         "year": 2000,
         "is_premium": 0,
-        "display_year": "2000"
+        "display_year": "2000BushRedux"
     }
 ]
 
@@ -751,7 +751,8 @@ document.head.innerHTML += "<style>#results_container {color:#ffff;} .inner_wind
 
 //#endcode
 
-                let style = document.createElement('style');
+// Create and inject base style
+let style = document.createElement('style');
 style.type = 'text/css';
 style.id = 'dynamic-style';
 
@@ -770,22 +771,151 @@ style.innerHTML = `
     color: #FFFFFF !important;
   }
 
-  .overlay_window h3 {
-    background: linear-gradient(to bottom, darkblue, #1E1D8C) !important;
-    color: #FFFFFF !important;
+  #closeButton {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
   }
 
-  #map_container {
-    background: linear-gradient(to bottom, #f9f7fc, #ffffff) !important;
-    background-size: 150% 150%;
-    border-radius: 0.75px;
-    color: #000 !important;
+  #closeButton:focus,
+  #closeButton:active,
+  #closeButton:hover {
+    outline: none;
+    box-shadow: none;
+    border: none;
   }
 
-  .game_header h2 {
-    color: #FFFFFF;
+  h3 {
+    font-size: 1.17em !important;
   }
+
+  label {
+    font-size: 1em !important;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+  }
+
+  body { display: flex !important; }
+
+  #game_window { max-width: 1000px; }
 `;
 
-// Append the style to the document
 document.head.appendChild(style);
+
+
+// Reference elements
+let contentBox = document.getElementsByClassName("content_box")[0];
+let contentSingle = document.getElementsByClassName("content_single")[0];
+let containerRef = document.getElementsByClassName("container")[0];
+
+
+// Create banner with close button
+function createBanner(url, sibling, isLeft) {
+  let div = document.createElement("DIV");
+  let img = document.createElement("IMG");
+  div.style.position = "relative";
+  div.style.margin = "auto";
+  img.src = url;
+
+  let x = document.createElement("DIV");
+  x.innerText = "_";
+  x.style.position = "absolute";
+  x.style.padding = "2px";
+  x.style.fontSize = "2pt";
+  x.style.cursor = "pointer";
+
+  div.appendChild(x);
+  div.appendChild(img);
+
+  if (sibling && sibling.parentNode) {
+    if (isLeft) sibling.parentNode.insertBefore(div, sibling);
+    else sibling.parentNode.appendChild(div);
+  }
+
+  x.onclick = () => {
+    div.style.visibility = "hidden";
+    img.style.visibility = "hidden";
+  };
+
+  return img;
+}
+
+
+// Additional dynamic CSS injector
+function addDynamicCSS() {
+  var css = `
+    #closeButton {
+      outline: none;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      width: 16px;
+      height: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    #closeButton:hover,
+    #closeButton:focus,
+    #closeButton:active {
+      outline: none;
+      box-shadow: none;
+      border: none;
+    }
+
+    #closeIcon {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 16px;
+      height: 15px;
+    }
+
+    .overlay_window h3 {
+      background: linear-gradient(to bottom, darkblue, #1E1D8C) !important;
+      color: #FFFFFF !important;
+    }
+#final_results_description h3 {
+			color: white;
+		}
+		#overall_details_container h3 {
+			color: white;
+		}
+		#overall_election_details h4 {
+			color: white;
+		}
+		#main_content_area_reading p {
+			color: white;
+		}
+		#main_content_area_reading h3.results_tab_header {
+			color: white;
+		}
+		.inner_window_w_desc h3 {
+			color: white;
+		}
+	p#credits {
+		color: white;
+	}
+	#final_results_description p {
+		color: white;
+	}
+    #map_container {
+      background: linear-gradient(to bottom, #f9f7fc, #ffffff) !important;
+      background-size: 150% 150%;
+      border-radius: 0.75px;
+      color: #000 !important;
+    }
+
+    .game_header h2 {
+      color: #FFFFFF;
+    }
+  `;
+
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  style.innerHTML = css;
+  document.head.appendChild(style);
+}
+
