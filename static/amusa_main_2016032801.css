@@ -23,6 +23,14 @@
 	background-image: url(American-History-USA-Banner-4.jpg)
 }
 
+#header {
+	width: 100%;
+	width: -moz-available;
+	width: -webkit-fill-available;
+	width: stretch;
+	height: auto;
+}
+
 .front_page_container {
 	margin: .6em 0 0
 }
