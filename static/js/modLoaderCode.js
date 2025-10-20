@@ -585,6 +585,7 @@ function createLegacyViewControls() {
   const label = document.createElement("label");
   label.htmlFor = "modMenuLegacyViewCheckbox";
   label.innerText = "View all mods";
+  label.className = "mod-legacy-view-label";
   label.style.cursor = "pointer";
   label.style.userSelect = "none";
 

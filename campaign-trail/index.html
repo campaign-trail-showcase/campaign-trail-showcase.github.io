@@ -134,20 +134,20 @@
               <select hidden name="mod" id="modSelect" onchange="modSelectChange()"></select>
               <div id="customMenu">
                 <br>
-                <b>Code Set 1:</b>
+                <b class="custom-mod-label">Code Set 1:</b>
                 <br>
-                <textarea id="codeset1"></textarea>
+                <textarea id="codeset1" class="custom-mod-input"></textarea>
                 <br>
-                <b>Code Set 2:</b>
+                <b class="custom-mod-label">Code Set 2:</b>
                 <br>
-                <textarea id="codeset2"></textarea>
+                <textarea id="codeset2" class="custom-mod-input"></textarea>
                 <br>
-                <b>ENDINGS CODE:</b>
+                <b class="custom-mod-label">ENDINGS CODE:</b>
                 <br>
-                <textarea id="codeset3"></textarea>
+                <textarea id="codeset3" class="custom-mod-input"></textarea>
                 <div hidden id="fileimp">
                   <br>
-                  <b>File importer:</b>
+                  <b class="custom-mod-label">File importer:</b>
                   <br>
                   <form action="/action_page.php">
                     <p>Upload your result JSON files to view previous games by clicking the button below:</p>
@@ -160,10 +160,10 @@
                 <button id="submitMod">Play Custom Mod</button>
                 <br>
                 <br>
-                <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName">
+                <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName" class="custom-mod-input">
                 <button onclick="addCustomModButton()" id="saveMod">Save Custom Mod</button>
                 <div>
-                  <p style="font-size: smaller; font-style: italic">(To update a custom mod just submit a new mod again with an identical name. This includes switching candidates/running mates.)</p>
+                  <p class="custom-mod-note" style="font-size: smaller; font-style: italic">(To update a custom mod just submit a new mod again with an identical name. This includes switching candidates/running mates.)</p>
                 </div>
               </div>
             </div>
@@ -195,16 +195,15 @@
               <div id="tags" class="tags-grid"></div>
               <div style="color:white;margin:auto; display:flex;align-items: center;justify-content: center; margin-bottom:10px; gap:10px;">
                 <input placeholder="Filter by mod name" oninput="filterMods(event)" type="text" id="modSearch" name="modSearch">
-                
                 <div>
-                <label for="sorting">Sort by:</label>
-                <select onchange="onChangeModSorter(event)" name="sorting" id="modSorting">
-                  <option value="chrono">Year</option>
-                  <option value="mostFav">Popularity</option>
-                  <option value="leastFav">Nicheness</option>
-                  <option value="mostPlays">Plays</option>
-                </select>
-              </div>
+                  <label for="sorting" class="mod-sort-label">Sort by:</label>
+                  <select onchange="onChangeModSorter(event)" name="sorting" id="modSorting" class="mod-sort-select">
+                    <option value="chrono">Year</option>
+                    <option value="mostFav">Popularity</option>
+                    <option value="leastFav">Nicheness</option>
+                    <option value="mostPlays">Plays</option>
+                  </select>
+                </div>
               </div>
               <div id="mod-grid" class="community-grid"></div>
             </div>
