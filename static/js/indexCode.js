@@ -407,6 +407,13 @@ function updateStyling() {
     container.style.color = selectedTheme.text_col;
     gameWindow.style.color = "black";
   }
+  // classes for theme styling
+  document.body.classList.remove('cts-theme', 'classic-theme');
+  if (nct_stuff.selectedTheme === "classic") {
+    document.body.classList.add('classic-theme');
+  } else {
+    document.body.classList.add('cts-theme');
+  }
 }
 
 function updateInnerWindowsStyling() {
