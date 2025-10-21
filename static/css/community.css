@@ -809,3 +809,16 @@
   max-width: 500px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
+
+/* CTS theme readability fixes */
+.cts-theme .custom-mod-label,
+.cts-theme .custom-mod-note,
+.cts-theme .footer h4 {
+  color: #fff !important;
+}
+
+/* Classic theme readability fixes */
+.classic-theme .mod-sort-label,
+.classic-theme .mod-legacy-view-label {
+  color: #000 !important;
+}

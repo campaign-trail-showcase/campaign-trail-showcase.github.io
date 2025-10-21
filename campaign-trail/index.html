@@ -48,7 +48,7 @@
     <div id="wittyquote" style="display:none"></div>
     <div class="container">
       <div class="center">
-        <img src="../static/images/banners/tct_banner.webp" id="header" alt="Campaign Trail Showcase Head Banner" width="900" height="299"/>
+                 <img src="../static/images/banners/tct_banner.webp" id="header" alt="Campaign Trail Showcase Head Banner" width="900" height="299"/>
       </div>
       <div class="menu_bar_login"></div>
       <div class="content_box">
@@ -139,20 +139,20 @@
               <select style="display:none" name="mod" id="modSelect" onchange="modSelectChange()"></select>
               <div id="customMenu">
                 <br>
-                <b>Code Set 1:</b>
+                <b class="custom-mod-label">Code Set 1:</b>
                 <br>
-                <textarea id="codeset1" width=400 height=300></textarea>
+                <textarea id="codeset1" width=400 height=300 class="custom-mod-input"></textarea>
                 <br>
-                <b>Code Set 2:</b>
+                <b class="custom-mod-label">Code Set 2:</b>
                 <br>
-                <textarea id="codeset2" width=400 height=300></textarea>
+                <textarea id="codeset2" width=400 height=300 class="custom-mod-input"></textarea>
                 <br>
-                <b>ENDINGS CODE:</b>
+                <b class="custom-mod-label">ENDINGS CODE:</b>
                 <br>
-                <textarea id="codeset3" width=400 height=300></textarea>
+                <textarea id="codeset3" class="custom-mod-input"></textarea>
                 <div style="display:none" id="fileimp">
                   <br>
-                  <b>File importer:</b>
+                  <b class="custom-mod-label">File importer:</b>
                   <br>
                   <form action="/action_page.php">
                     <p>Upload your result JSON files to view previous games by clicking the button below:</p>
@@ -165,10 +165,10 @@
                 <button id="submitMod">Play Custom Mod</button>
                 <br>
                 <br>
-                <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName"></input>
+                <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName" class="custom-mod-input"></input>
                 <button onclick="addCustomModButton()" id="saveMod">Save Custom Mod</button>
                 <div>
-                  <p style="font-size: smaller; font-style: italic">(To update a custom mod just submit a new mod again with an identical name. This includes switching candidates/running mates.)</p>
+                  <p class="custom-mod-note" style="font-size: smaller; font-style: italic">(To update a custom mod just submit a new mod again with an identical name. This includes switching candidates/running mates.)</p>
                 </div>
               </div>
             </div>
@@ -202,25 +202,25 @@
                 <input placeholder="Filter by mod name" oninput="filterMods(event)" type="text" id="modSearch" name="modSearch"></input>
                 
                 <div>
-                <label for="sorting">Sort by:</label>
-                <select onchange="onChangeModSorter(event)" name="sorting" id="modSorting">
-                  <option value="chrono">Year</option>
-                  <option value="mostFav">Popularity</option>
-                  <option value="leastFav">Nicheness</option>
-                  <option value="mostPlays">Plays</option>
-                </select>
-              </div>
+                  <label for="sorting" class="mod-sort-label">Sort by:</label>
+                  <select onchange="onChangeModSorter(event)" name="sorting" id="modSorting" class="mod-sort-select">
+                    <option value="chrono">Year</option>
+                    <option value="mostFav">Popularity</option>
+                    <option value="leastFav">Nicheness</option>
+                    <option value="mostPlays">Plays</option>
+                  </select>
+                </div>
               </div>
               <div id="mod-grid" class="community-grid"></div>
             </div>
           </div>      
             
             <div id="site_credits" style="text-align: center;">
-              <a href="https://discord.gg/cqgVSNRKDP" style="color:#FF6B6B">Campaign Trail Showcase Discord</a><br/>
+               <a href="https://discord.gg/cqgVSNRKDP" style="color:#FF6B6B">Campaign Trail Showcase Discord</a><br/>
               <a href="https://discord.gg/CfS6yTtjZj" style="color:#FF6B6B">The Campaign Trail Discord</a><br/><br/>
               <a href="https://github.com/campaign-trail-showcase/campaign-trail-showcase.github.io/blob/main/How%20Tos/How%20to%20Get%20Your%20Mod%20in%20The%20Showcase.md" style="color:#FF6B6B">How to submit a mod to Campaign Trail Showcase</a><br>
               <a href="https://www.newcampaigntrail.com/campaign-trail/index.html" style="color:#FF6B6B">This site is a fork of The New Campaign Trail created by Decstar and NCT Staff</a><br>
-              <a href="http://www.americanhistoryusa.com" style="color:#FF6B6B">Original site created by Dan Bryan &copy; 2012- <testf id="year">2022</testf></a>
+              <a href="https://www.americanhistoryusa.com" style="color:#FF6B6B">Original site created by Dan Bryan &copy; 2012- <testf id="year">2022</testf></a>
               <p style="color:#FF6B6B">All DBA award images created by cherrymeringue. Thanks so much!</p>
               <div>
                 <div style="margin-top:10px; display:inline-block;">
@@ -239,6 +239,7 @@
   <!-- <script src="../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
   <script src="../static/js/lib/raphael.js"></script>
   <script src="../static/js/indexCode.js"></script>
+  <script src="../static/js/customThemeCode.js"></script>
   <script src="../static/js/modLoaderCode.js"></script>
   <script src="../static/js/cheats.js"></script>
   <script src="../static/js/consoleCheats.js"></script>
