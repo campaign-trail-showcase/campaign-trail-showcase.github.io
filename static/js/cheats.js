@@ -460,7 +460,7 @@ function startAutoplayWhenReady() {
       autoplayHandle = setInterval(autoplay, 10);
       autoplayPending = false;
       enableAutoplayUI(true);
-    }, 3000);
+    }, 1500);
     return;
   }
 

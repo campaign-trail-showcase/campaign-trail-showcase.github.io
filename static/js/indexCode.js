@@ -78,8 +78,21 @@ const nct_stuff = {
       coloring_container: "",
       coloring_title: "",
     },
+    custom: {
+      name: "Custom",
+      background: "../static/images/backgrounds/tct_background.jpg",
+      banner: "../static/images/banners/tct_banner.webp",
+      coloring_window: "#727C96",
+      coloring_container: "#222449",
+      coloring_title: "#3A3360",
+      text_col: "",
+      window_url: "",
+      background_cover: false,
+      mod_override: false,
+    },
   },
   selectedTheme: "",
+  customThemes: {},
 };
 
 var theme = window.localStorage.getItem("theme");
@@ -97,13 +110,59 @@ for (const key in nct_stuff.themes) {
 }
 
 function themePicked() {
-  const sel = document.getElementById("themePicker").value;
-  window.localStorage.setItem("theme", sel);
-  nct_stuff.selectedTheme = sel;
-  selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
-  updateBannerAndStyling();
-  updateDynamicStyle();
-  updateGameHeaderContentAndStyling();
+  const themePicker = document.getElementById("themePicker");
+  const sel = themePicker.value;
+  const customMenuButton = document.getElementById("open_custom_theme");
+
+  // check if a specific custom theme was selected from the dropdown
+  if (sel.startsWith("custom_")) {
+    window.localStorage.setItem("theme", "custom");
+    window.localStorage.setItem("active_custom_theme_id", sel);
+    nct_stuff.selectedTheme = "custom";
+    
+    loadCustomTheme(sel);
+
+    // make sure the "Add custom theme" button is visible
+    if (!customMenuButton) {
+      ensureCustomThemeButton();
+    }
+
+  } else if (sel === "custom") {
+    // if "Custom" option selected, show button and optionally open modal
+    window.localStorage.setItem("theme", "custom");
+    nct_stuff.selectedTheme = "custom";
+    
+    if (!customMenuButton) {
+      ensureCustomThemeButton();
+    }
+    
+    // check if there's an active theme, otherwise open modal
+    const activeThemeId = window.localStorage.getItem("active_custom_theme_id");
+    if (!activeThemeId || !nct_stuff.customThemes[activeThemeId]) {
+      // no active theme, open modal to create one
+      setTimeout(() => openCustomThemeMenu(), 100);
+    } else {
+      loadCustomTheme(activeThemeId);
+      // update the selected theme
+      selectedTheme = nct_stuff.themes.custom;
+      updateBannerAndStyling();
+      updateDynamicStyle();
+      updateGameHeaderContentAndStyling();
+    }
+
+  } else {
+    window.localStorage.setItem("theme", sel);
+    nct_stuff.selectedTheme = sel;
+    selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
+    updateBannerAndStyling();
+    updateDynamicStyle();
+    updateGameHeaderContentAndStyling();
+
+    // remove the custom theme button
+    if (customMenuButton) {
+      customMenuButton.parentElement.remove();
+    }
+  }
 }
 
 const susnum = Math.floor(Math.random() * 8 + 1);
@@ -396,6 +455,13 @@ function updateBannerAndStyling() {
     container.style.color = selectedTheme.text_col;
     gameWindow.style.color = "black";
   }
+  // classes for theme styling
+  document.body.classList.remove('cts-theme', 'classic-theme');
+  if (nct_stuff.selectedTheme === "classic") {
+    document.body.classList.add('classic-theme');
+  } else {
+    document.body.classList.add('cts-theme');
+  }
 }
 
 function updateStyling() {
@@ -406,6 +472,13 @@ function updateStyling() {
   if (selectedTheme.text_col != null) {
     container.style.color = selectedTheme.text_col;
     gameWindow.style.color = "black";
+  }
+  // classes for theme styling
+  document.body.classList.remove('cts-theme', 'classic-theme');
+  if (nct_stuff.selectedTheme === "classic") {
+    document.body.classList.add('classic-theme');
+  } else {
+    document.body.classList.add('cts-theme');
   }
 }
 
@@ -449,7 +522,15 @@ function updateDynamicStyle() {
   if (dynamicStyle.innerHTML != dynaStyle) dynamicStyle.innerHTML = dynaStyle;
 }
 
-setInterval(() => {
+let themeUpdateObserver = null;
+let headerObserver = null;
+let documentObserver = null;
+
+// this handles theme updates
+function handleThemeUpdates() {
+  // skip updates while theme menu is open
+  if (nct_stuff.pauseThemeUpdates) return;
+
   if (
     JSON.stringify(nct_stuff.custom_override) != JSON.stringify(selectedTheme) &&
     !nct_stuff.dynamicOverride &&
@@ -468,12 +549,130 @@ setInterval(() => {
   ) {
     selectedTheme.window_url = null;
   }
-  const gameHeader = $(".game_header")[0];
-  if (gameHeader.innerHTML != corrr) gameHeader.innerHTML = corrr;
-  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+  
+  const gameHeader = document.getElementsByClassName("game_header")[0];
+  if (gameHeader) {
+    if (gameHeader.innerHTML != corrr) {
+      gameHeader.innerHTML = corrr;
+    }
+    gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+    corrr = gameHeader.innerHTML;
+  }
+  
   updateDynamicStyle();
-  corrr = gameHeader.innerHTML;
-}, 100);
+}
+
+// observe game header changes
+function observeGameHeader() {
+  const gameHeader = document.getElementsByClassName("game_header")[0];
+  
+  if (!gameHeader) {
+    return;
+  }
+  
+  if (headerObserver) {
+    headerObserver.disconnect();
+  }
+  
+  headerObserver = new MutationObserver((mutations) => {
+    let shouldUpdate = false;
+    
+    for (const mutation of mutations) {
+      // check for any changes that would require theme updates
+      if (mutation.type === 'childList' || 
+          mutation.type === 'characterData' ||
+          (mutation.type === 'attributes' && mutation.attributeName === 'style')) {
+        shouldUpdate = true;
+        break;
+      }
+    }
+    
+    if (shouldUpdate) {
+      handleThemeUpdates();
+    }
+  });
+  
+  // observe the game header for all types of changes
+  headerObserver.observe(gameHeader, {
+    childList: true,
+    characterData: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['style', 'class']
+  });
+  
+  handleThemeUpdates();
+}
+
+// watch for game_header being added/removed
+documentObserver = new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
+    if (mutation.type === 'childList') {
+      const gameHeaders = document.getElementsByClassName("game_header");
+      if (gameHeaders.length > 0) {
+        observeGameHeader();
+      }
+    }
+  }
+});
+
+documentObserver.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+themeUpdateObserver = new MutationObserver(() => {
+  handleThemeUpdates();
+});
+if (gameWindow) {
+  themeUpdateObserver.observe(gameWindow, {
+    attributes: true,
+    attributeFilter: ['style']
+  });
+}
+
+observeGameHeader();
+
+// also set up a proxy to detect changes to nct_stuff properties
+const nct_stuff_proxy = new Proxy(nct_stuff, {
+  set(target, property, value) {
+    target[property] = value;
+    
+    if (property === 'pauseThemeUpdates' || 
+        property === 'custom_override' || 
+        property === 'dynamicOverride' ||
+        property === 'selectedTheme') {
+      handleThemeUpdates();
+    }
+    
+    return true;
+  }
+});
+
+Object.keys(window).forEach(key => {
+  if (window[key] === nct_stuff) {
+    window[key] = nct_stuff_proxy;
+  }
+});
+
+// fallback interval with longer delay for edge cases
+// this ensures compatibility with code that might bypass this
+let fallbackInterval = setInterval(() => {
+  const gameHeader = document.getElementsByClassName("game_header")[0];
+  if (gameHeader && !headerObserver) {
+    observeGameHeader();
+  }
+  
+  if (gameHeader && gameHeader.innerHTML !== corrr && !nct_stuff.pauseThemeUpdates) {
+    handleThemeUpdates();
+  }
+}, 1000);
+
+window.addEventListener('beforeunload', () => {
+  if (headerObserver) headerObserver.disconnect();
+  if (documentObserver) documentObserver.disconnect();
+  if (themeUpdateObserver) themeUpdateObserver.disconnect();
+  if (fallbackInterval) clearInterval(fallbackInterval);
+});
 
 async function loadJSON(path, varr, callback = null) {
   const res = await fetch(path);
