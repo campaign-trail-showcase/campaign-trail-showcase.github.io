@@ -1275,6 +1275,164 @@ display: none;
 
 document.head.appendChild(style);
 
+
+function addDynamicCSS() {
+    var css = `
+        .inner_window_question h3 .mytooltip{
+            color: #EF426F;
+        }
+
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: #EF426F;
+        }
+
+        .mytooltip .mytooltiptext {
+            width: 240px;
+            background-color: #2D3A29;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 110%;
+            left: 50%;
+            margin-left: -130px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 2px solid black;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+
+        .mytooltip .mytooltiptext img {
+            max-width: 240px;
+            height: auto;
+            border: 2px solid black;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+
+    styleElem.appendChild(document.createTextNode(css));
+
+    document.head.appendChild(styleElem);
+}
+
+addDynamicCSS();
+
+tooltipList = [
+    { searchString: "출구조사", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./texitpoll.png\">이보다도 더 크게 패할 줄 누가 알았으랴." },
+    { searchString: "네이버", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tnaver.png\">대한민국 최대의 인터넷 포털 사이트." },
+    { searchString: "민경욱", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmin.png\">언론인 출신의 전 미래통합당 국회의원. 인천 연수구 을에서 재선에 도전했다가 간발의 차로 패배한 뒤 부정선거 음모론의 선봉장으로 탈바꿈했음." },
+    { searchString: "도널드 트럼프", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ttrump.png\">미합중국 제45대 대통령." },
+    { searchString: "전광훈", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjeon.png\">정계 진출을 꿈꾸는 사랑제일교회 목사. 유명한 발언으로는 '하나님, 까불면 나한테 죽어'가 있음." },
+    { searchString: "문재인 대통령", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmoon.png\">대한민국 제19대 대통령. 자유주의 성향 정당인 더불어민주당 소속." },
+    { searchString: "국민의당", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tpeoples.png\">제3지대 중도우파 정치인 안철수가 창당한 사실상의 1인 정당. 초기 가칭은 '안철수신당'이었음." },
+    { searchString: "월터 미베인", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmebane.png\">정치학과 통계학을 연구하며, 세계 각국의 투표 조작 탐지법에 대하여 탐구한 바 있음." },
+    { searchString: "디시인사이드", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tdcinside.png\">매우 다양한 주제의 게시판이 존재하는 거대 커뮤니티로, 영미권의 레딧과 유사함." },
+    { searchString: "하태경", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./thatae.png\">2020년 총선에서 살아남은 정말 몇 안 되는 당내 온건파 중 한 명." },
+    { searchString: "이준석", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tstone.png\">서울 노원구 병에서 세 번 낙선한 청년 정치인." },
+    { searchString: "개혁보수", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./treform.png\">박근혜 탄핵에 찬성했던 온건 보수 세력." },
+    { searchString: "홍준표", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./thong.png\">전 경상남도지사, 2017년 대선의 보수 대통령 후보. 2020년 총선 시기 황교안의 험지 출마 요구에 반발하여 미래통합당을 탈당함." },
+    { searchString: "박근혜", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgeunhye.png\">대한민국 제18대 대통령. 공적 권한이 없는 민간인 측근에게 비밀리에 국정을 위임했다는 것이 알려진 뒤 역대 대통령 중 최초로 헌법재판소에서 탄핵이 인용되어 파면됨." },
+    { searchString: "Y.", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./typose.png\">" },
+    { searchString: "개성공단", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tkaesong.png\">남북한의 경제 협력을 촉진하고자 설립되었던 공업지구. 2016년 이후 가동 중단 상태." },
+    { searchString: "남북공동연락사무소를 폭파", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tbomb.png\">" },
+    { searchString: "대북전단", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tleaflet.png\">북한 정권에 반대하는 선전물이 풍선을 통해 북한에 살포됨." },
+    { searchString: "임대차 3법", explanationText: "임대차 계약 기간 연장, 임대료 상승폭 제한, 임대차 계약 신고 의무화를 담은 법안." },
+    { searchString: "종합부동산세", explanationText: "일정 금액 이상 부동산을 보유한 자에게 부과되는 세금." },
+    { searchString: "윤희숙", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./theesuk.png\">한국개발연구원 출신의 경제 전문가 국회의원." },
+    { searchString: "질병관리청", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tkdca.png\">감염병과 각종 질병에 대응하는 기관. 코로나19 대응 과정에서 중요도가 급격히 상승함." },
+    { searchString: "윤석열 검찰총장", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoon.png\">문재인은 그를 개혁 파트너로 쓰려고 뽑았지만, 이제는 정권의 내부 반대자일 뿐." },
+    { searchString: "조국 전 법무부장관", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcho.png\">문재인 밑에서 딱 한 달 동안 법무부장관을 지낸 전직 교수. 장관직 지명과 동시에 가족의 입시비리 등 여러 스캔들이 불거진 결과 정권의 지지율을 많이 깎아먹었음." },
+    { searchString: "추미애 법무부장관", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tchoo.png\">더불어민주당 대표 출신의 현 법무부장관." },
+    { searchString: "이명박", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmb.png\">대한민국 제17대 대통령. 뇌물수수 등의 혐의로 징역 17년형을 선고받음." },
+    { searchString: "세 곳의 거대 언론사", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./toutlets.png\">디지털 시대에도 조금이나마 영향력을 유지하는 신문사들. 셋이 묶여서 '조중동'으로 불리기도 함." },
+    { searchString: "홍콩 국가보안법", explanationText: "홍콩 내 반정부 활동을 금지하는 법안으로, 2020년 통과되었으며 홍콩의 모든 지역 법률에 우선함." },
+    { searchString: "박영선", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoungsun.png\">서울 구로구에서 여러 차례 국회의원에 당선되었고, 문재인 정부에서 중소벤처기업부장관을 역임함." },
+    { searchString: "김영춘", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoungchoon.png\">부산 출신으로 문재인 정부에서 해양수산부장관으로 일했으나, 그가 당선될 가망은 없어 보임." },
+    { searchString: "오세훈", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./toh.png\">2006년부터 2011년까지 서울시장을 지냈으며, 이번 재보궐선거를 통해 복귀를 시도하고 있음." },
+    { searchString: "박형준", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./theongjoon.png\">2000년대에 부산에서 국회의원에 당선되었고, 지난 총선에서 미래통합당의 공동선대위원장을 맡았음." },
+    { searchString: "조은희", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./teunhee.png\">서초구민들 사이에서 인기가 좋지만, 그 외에는 그녀가 누군지 아무도 모름. 어쩌면 이게 장점일 수도?" },
+    { searchString: "박성훈", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsunghoon.png\">주로 예산 분야에서 30년 가까이 활동한 공무원 출신의 정치 신인." },
+    { searchString: "나경원", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tna.png\">2019년에 야당 원내대표를 지냈음. 인지도는 매우 높으나 평판은 매우 양극화된 인물." },
+    { searchString: "이언주", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tunju.png\">더불어민주당에서 미래통합당으로 전향한 정치인. 2019년에 문재인 정부에 반대하며 삭발을 감행하기도 했음." },
+    { searchString: "'나다르크'", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tnadarc.png\">일본의 한 방송국이 나경원에게 지어준 별명." },
+    { searchString: "LH", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tlh.png\">공공주택 공급부터 신도시 개발까지 다양한 부동산 관련 사업을 담당하는 공기업." },
+    { searchString: "KTX", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tktx.png\">서울에서 부산까지 2시간 만에 보내주는 고속철도." },
+    { searchString: "2021년 직업 등급표", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./t2021meme.png\">가족이 LH 직원이기만 해도 변호사, 의사와 동급!!" },
+    { searchString: "청와대 국민청원", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tpetition.png\">문재인 정부가 국민과의 소통을 강화하겠다는 명분으로 2017년 시행한 청원 제도. 20만 명 이상이 동의한 청원에는 정부가 직접 답변함." },
+    { searchString: "시민들의 편", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcitizens.png\">기성 언론과 전문가보다 음모론자 유튜버를 믿는 사람들." },
+    { searchString: "조국 사태", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tchoscandal.png\">조국 전 법무부장관의 수많은 비리 논란이 촉발시킨 일련의 사건. 당시 한국 사회는 조국 임명의 찬반을 둘러싸고 반으로 나뉘어 치열한 대립을 벌였으며, 조국이 결국 자진 사퇴를 선택하면서 일단락되었음." },
+    { searchString: "유승민", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoo.png\">새누리당(미래통합당의 전신)에서 원내대표를 지냈으나, 2016년 탄핵 찬성파들을 이끌고 탈당한 뒤로 배신자라는 오명을 얻은 정치인." },
+    { searchString: "통합진보당", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tupp.png\">2014년 헌법재판소에서 위헌정당 해산 심판이 인용되어 해산된 진보정당." },
+    { searchString: "컴퓨터 천재", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tv3.png\">안철수는 정계 입문 전까지 컴퓨터 안티바이러스 소프트웨어 개발자로 활동하며 인기를 얻었음." },
+    { searchString: "전두환", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tchun.png\">대한민국 제11, 12대 대통령. 머리가 텅 빈 독재자." },
+    { searchString: "광주 시민 수백 명을 학살", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./t518.png\">1980년 5월 광주와 전남 일대의 시민들이 전두환의 불법적 권력 장악에 반대하는 민주화 운동을 벌이자, 전두환은 계엄군을 동원하여 항쟁을 진압하는 과정에서 수백 명의 시민들을 학살하였음. 오늘날까지 전라도에서 보수 정당이 지리멸렬한 주요 원인 중 하나." },
+    { searchString: "양대림", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyang.png\">문재인을 살인미수 혐의로 검찰에 고발한 고등학교 3학년 유튜버." },
+    { searchString: "국가조찬기도회", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tprayer.png\">" },
+    { searchString: "촛불집회", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcandle.png\">박근혜의 퇴진을 요구하며 일어난 평화 시위. 2016년 말부터 2017년 초까지 누적 1600만 명 이상의 인원이 참여했음." },
+    { searchString: "김문수", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmoonsoo.png\">노동운동으로 사회 활동을 시작해서 어느덧 기독교 우파가 된 특이한 인물." },
+    { searchString: "서울 공화국", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tseoul.png\">한국은 서울과 수도권에 거주하는 인구가 그 외 모든 지역의 인구를 다 합친 것보다 더 많음." },
+    { searchString: "대학로", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tdaehang.png\">한국 연극 문화의 중심지." },
+    { searchString: "광화문 광장", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgwang.png\">" },
+    { searchString: "강남역", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgangnam.png\">" },
+    { searchString: "국회의사당", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tassembly.png\">" },
+    { searchString: "굴욕적인 패배", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjongno.png\">그야말로 참패." },
+    { searchString: "심상정", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsim.png\">진보 성향인 정의당의 대통령 후보. 2017년 대통령 선거에도 출마해서 6%를 득표한 적 있음." },
+    { searchString: "택시운전사", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ttaxi.png\">이 사람이 보수의 당대표를 거쳐 대통령 선거까지 출마한다고? 소설 쓰시네." },
+    { searchString: "종로구가 경합", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ttossup.png\">뭐, 8%포인트 차이를 '경합'으로 볼 수 있다면야..." },
+    { searchString: "색소폰을 부는 사진", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tboo.png\">황교안은 기타와 색소폰 등 6가지의 악기를 다룰 수 있다고 스스로 밝힌 바 있음." },
+    { searchString: "SNL 코리아", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsnl.png\">미국판 SNL의 포맷을 가져와서 2011년부터 방영되고 있는 코미디 프로그램." },
+    { searchString: "삼프로TV", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsampro.png\">경제와 금융 관련 이슈를 전반적으로 다루는 거대 유튜브 채널." },
+    { searchString: "오징어 게임", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsquid.png\">세계적으로 대흥행한 서바이벌 게임 드라마." },
+    { searchString: "찢는다는 욕설", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tslang.png\">2014년 이재명이 형수와 전화로 다투는 도중 한 욕설이 녹음되어 유출되면서 발생한 논란. 당시 이재명은 '여성기를 찢는다'는 표현을 사용하여 비판을 받았음." },
+    { searchString: "대장동 특혜 의혹", explanationText: "이재명은 경기도 성남시에서 시장으로 재임하던 시기 대장동 지역의 개발 사업을 벌였는데, 그 수익금 대부분이 화천대유라는 기업에게 돌아갔으며 이를 감추기 위한 로비가 진행되었다는 의혹." },
+    { searchString: "국회 난입", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tstorming.png\">2019년 12월 국회 앞에서 집회를 벌이던 보수 지지자들 중 일부가 불법으로 국회 진입을 시도하면서 경찰과 충돌한 사건." },
+    { searchString: "손으로 쳐서 뒤집는", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./trobotdog.gif\">" },
+    { searchString: "민주당 정치인들의 성범죄", explanationText: "박원순 전 서울시장의 비서 성추행 논란, 오거돈 전 부산시장의 여성 보좌진 성추행 사건 등." },
+    { searchString: "여성시대", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgirl.png\">20대 이상, 40대 이하의 여성들만 가입할 수 있는 커뮤니티. 2009년 개설되어 수십만 명의 회원을 보유하고 있음." },
+    { searchString: "여성가족부", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgender.png\">여성정책 기획, 청소년 보호 및 가족기능 지원 등을 담당하는 정부 부처. 2015년 이후 본격화된 젠더 갈등을 해소하지 못하고 오히려 심화시킨다는 비판을 받았음." },
+    { searchString: "검찰개혁", explanationText: "한국 정치의 유서 깊은 주요 담론. 한국에서는 수사권과 기소권을 모두 검찰이 보유함에 따라 검찰의 권한이 매우 강력해졌고, 주로 민주당 측 정권들이 수사권을 분리하는 등 검찰을 약화시키기 위한 개혁을 추진하였음." },
+    { searchString: "노무현 전 대통령", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./troh.png\">대한민국 제16대 대통령." },
+    { searchString: "탄핵 시도", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./timpeach.png\">노무현 정부 시기 민주당은 기존의 새천년민주당과 노무현을 지지하는 열린우리당으로 갈라진 상태였는데, 2004년 노무현이 열린우리당을 지지하는 발언을 하자 새천년민주당이 보수 야당과 손잡고 노무현 대통령의 탄핵소추안을 국회에서 가결시킨 사건. 이후 노무현은 헌법재판소에서 탄핵이 기각되면서 직무에 복귀하였음." },
+    { searchString: "쉬지 않고 고개를 젓는", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tshake.gif\">" },
+    { searchString: "그린벨트", explanationText: "자연환경을 보존하기 위해서 설정되는 개발제한구역. 한국에서는 대부분의 주요 도시권 외곽에 그린벨트가 설치되어 있음." },
+    { searchString: "국군기무사령부", explanationText: "군내 방첩업무를 담당했던 국방부 직할부대. 계엄 모의 사건의 여파로 2018년 해체되었음." },
+    { searchString: "주사파", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjuche.png\">북한의 주체사상을 신봉하는 정신병자들. 1980-90년대 학생운동 세력의 핵심 중 하나였음." },
+    { searchString: "김대중", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tdj.png\">대한민국 제15대 대통령. 한국 최초로 민주적 정권교체를 이뤘음." },
+    { searchString: "삭발을 결행", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tshave.png\">한국 정치권에서 삭발은 결의를 드러내는 하나의 투쟁 수단으로 여겨짐." },
+    { searchString: "김영삼", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tys.png\">대한민국 제14대 대통령." },
+    { searchString: "김어준", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./toujoon.png\">딴지일보 총수 겸 김어준의 뉴스공장 진행자. 진보 진영의 여론 형성에 매우 큰 영향력을 행사함." },
+    { searchString: "계란말이를 만드는", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcook.png\">윤석열이 만든 계란말이." },
+    { searchString: "자기 손바닥에", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tking.png\">" },
+    { searchString: "2012년 대선", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./t2012.png\">박근혜와 문재인의 진검승부 끝에 박근혜가 제18대 대통령으로 당선되었음." },
+    { searchString: "박정희", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tpch.png\">대한민국 제5, 6, 7, 8, 9대 대통령. 성공한 경제 발전의 토대를 마련한 독재자." },
+    { searchString: "RE100", explanationText: "재생에너지 100%" },
+    { searchString: "삼성", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsamsung.png\">시가총액 기준 대한민국에서 압도적 1위의 자리를 차지하고 있는 대기업." },
+    { searchString: "현대자동차", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./thyundai.png\">자동차 생산 등 제조업을 주력으로 삼는 대기업." },
+    { searchString: "평창 올림픽", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tolympic.png\">문재인 정부 초반인 2018년에 강원도 평창군에서 개최된 동계 올림픽. 대체로 성공적으로 운영되었다는 평가를 받았음." },
+    { searchString: "이석기", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tseokki.png\">2010년대 초반 통합진보당에서 국회의원으로 활동했던 정치인. 내란선동 혐의가 인정되어 징역 9년형을 선고받았음." },
+    { searchString: "유치원 3법", explanationText: "유치원의 회계 투명성 향상, 아동학대 방지, 급식 기준 강화 등을 골자로 하는 법안. 박용진이 2018년 해당 법안의 발의를 주도하였음." },
+    { searchString: "천안함 폭침 사건", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcheonan.png\">대한민국 해군 함정인 천안함이 2010년 북한 잠수정의 어뢰에 공격당해 침몰한 사건. 이 사건으로 46명의 승조원이 전사하였음." },
+    { searchString: "이승만", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./trhee.png\">대한민국 초대 대통령. 한국전쟁 시기 나라를 이끌었으며, 연이은 개헌을 통하여 장기 독재를 시도한 끝에 1960년 부정선거 사태의 책임을 지고 하야함." },
+    { searchString: "진중권", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjin.png\">'모두 까는' 성향으로 유명한 논객." }
+]
+
+
 document.head.innerHTML += `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">

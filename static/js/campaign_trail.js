@@ -1720,12 +1720,10 @@ function showOutcomePopup(election, results) {
     `);
 }
 
-const minifyHTML = (str) => str.replace(/>\s+</g, "><");
-
 function generateCandidateList(cands, results, total, statesHaveEVs) {
   if (!cands || !results || total == null) return "";
 
-  return minifyHTML(cands.map((f) => {
+  return cands.map((f) => {
     const {
       electoral_votes: candEVs,
       popular_votes: candPV,
@@ -1733,12 +1731,12 @@ function generateCandidateList(cands, results, total, statesHaveEVs) {
     const candPVP = total > 0 ? ((candPV / total) * 100).toFixed(1) : "0.0";
 
     return `
-            <li>
-                <span style="color:${f.color}; background-color:${f.color}">--</span>
-                ${f.last_name}: ${statesHaveEVs ? `${formatNumbers(candEVs)} / ` : ""}${candPVP}%
-            </li>
-        `;
-  }).join(""));
+      <li>
+        <span style="color:${f.color}; background-color:${f.color}">--</span>
+          ${f.last_name}: ${statesHaveEVs ? `${formatNumbers(candEVs)} / ` : ""}${candPVP}%
+      </li>
+    `;
+  }).join("");
 }
 
 function electionNight() {
@@ -2678,16 +2676,16 @@ function setStatePollText(state, t) {
       if (issueDescription === "'" || issueDescription == null || !isNaN(issueDescription)) issueDescription = "";
 
       u += `
-                <li ${campaignTrail_temp.issue_font_size != null ? `style="font-size: ${campaignTrail_temp.issue_font_size};"` : ""}>
-                    <span ${issueDescription ? "class=tooltip" : ""}>${issue.fields.name}
-                        <span style="font-size: 10.4px;" class="tooltiptext">${issueDescription}</span>
-                    </span>
-                    <span> -- </span>
-                    <span ${stanceDesc ? "class=tooltip" : ""}>${pickedStance}
-                        <span style="font-size: 10.4px;" class="tooltiptext">${stanceDesc}</span>
-                    </span>
-                </li>
-            `.trim().replace(/>\s+</g, "><");
+        <li ${campaignTrail_temp.issue_font_size != null ? `style="font-size: ${campaignTrail_temp.issue_font_size};"` : ""}>
+          <span ${issueDescription ? "class=tooltip" : ""}>${issue.fields.name}
+            <span style="font-size: 10.4px;" class="tooltiptext">${issueDescription}</span>
+          </span>
+          <span> -- </span>
+            <span ${stanceDesc ? "class=tooltip" : ""}>${pickedStance}
+              <span style="font-size: 10.4px;" class="tooltiptext">${stanceDesc}</span>
+            </span>
+        </li>
+      `.trim().replace(/>\s+</g, "><");
     }
   });
   let onQText = "";
@@ -2718,7 +2716,7 @@ function setStatePollText(state, t) {
         <ul>${u}</ul>
         ${!state.fields.electoral_votes ? "" : `<p>${e.primary ? "Delegates:" : "Electoral Votes:"} ${formatNumbers(state.fields.electoral_votes)}</p>`}
         <p>${e.primary ? onQText : `Popular Votes: ${formatNumbers(state.fields.popular_votes)}`}</p>
-    `.trim().replace(/>\s+</g, "><");
+    `.trim();
 }
 
 function rFunc(t, i) {
@@ -2744,10 +2742,9 @@ function rFunc(t, i) {
 
   // build abbreviation -> state index map
   const abbrToState = new Map();
-  // I'm sorry, StrawberryMaster.
   for (let s = 0; s < e.states_json.length; s++) {
     const state = e.states_json[s];
-    abbrToState.set(e.states_json[s].fields.abbr, state);
+    abbrToState.set(String(e.states_json[s].fields.abbr), state);
   }
 
   // latest opponent visits (Sea to Shining Sea mode)
@@ -2961,14 +2958,14 @@ function mapResultColor(time) {
     stateSpecificHoverStyles: stateColor,
     click(i, a) {
       const stateResElement = $("#state_result");
-      const stateResults = e.final_state_results.find((f) => f.abbr === a.name);
+      const stateResults = e.final_state_results.find((f) => String(f.abbr) === String(a.name));
       if (!stateResults) return;
       if (stateResults.result_time > time) {
         const returnStr = "<h3>STATE RESULTS</h3><p>Returns for this state are not yet available!</p>";
         stateResElement.html(returnStr);
         return;
       }
-      const stateObj = e.states_json.find((f) => f.fields.abbr === a.name);
+      const stateObj = e.states_json.find((f) => String(f.fields.abbr) === String(a.name));
       if (!stateObj) return;
       const resultHtml = stateResults.result
         .slice(0, 4)
@@ -3587,20 +3584,26 @@ function overallDetailsHtml() {
     const colorHex = candObj.fields.color_hex || '#888888';
     if (!f.popular_votes) return "";
     return `
-                <tr>
-                    <td style="text-align: left;">
-                        <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
-                        ${candObj.fields.first_name} ${candObj.fields.last_name}
-                    </td>
-                    ${noElectoralVotes ? "" : `<td>${formatNumbers(f.electoral_votes)}</td>`}
-                    <td>${formatNumbers(f.popular_votes)}</td>
-                    <td>${((f.popular_votes / totalPV) * 100).toFixed(e.finalPercentDigits)}%</td>
-                </tr>
-            `;
+      <tr>
+        <td style="text-align: left;">
+          <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
+          ${candObj.fields.first_name} ${candObj.fields.last_name}
+        </td>
+        ${noElectoralVotes ? "" : `<td>${formatNumbers(f.electoral_votes)}</td>`}
+        <td>${formatNumbers(f.popular_votes)}</td>
+        <td>${((f.popular_votes / totalPV) * 100).toFixed(e.finalPercentDigits)}%</td>
+      </tr>
+    `;
   })
     .filter(Boolean)
     .join("")
-    .replace(/>\s+</g, "><");
+    .replace(/>(\s+)</g, (match, p1, offset, string) => {
+      const before = string.slice(0, offset);
+      const lastTdOpen = before.lastIndexOf("<td");
+      const lastTdClose = before.lastIndexOf("</td>");
+      if (lastTdOpen > lastTdClose) return `> <`;
+      return "><";
+    });
 
   const l = e.percentile !== "None"
     ? `<p>You have done better than approximately <strong>${e.percentile}%</strong> of the games that have been played with your candidate and difficulty level.</p>`

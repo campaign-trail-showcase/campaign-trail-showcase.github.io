@@ -1287,6 +1287,168 @@ display: none;
 
 document.head.appendChild(style);
 
+
+
+function addDynamicCSS() {
+    var css = `
+        .inner_window_question h3 .mytooltip{
+            color: #EF426F;
+        }
+
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: #EF426F;
+        }
+
+        .mytooltip .mytooltiptext {
+            width: 240px;
+            background-color: #2D3A29;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 110%;
+            left: 50%;
+            margin-left: -130px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 2px solid black;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+
+        .mytooltip .mytooltiptext img {
+            max-width: 240px;
+            height: auto;
+            border: 2px solid black;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+
+    styleElem.appendChild(document.createTextNode(css));
+
+    document.head.appendChild(styleElem);
+}
+
+addDynamicCSS();
+
+tooltipList = [
+    { searchString: "exit polls", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./texitpoll.png\">Who could have predicted a more crushing defeat than this?" },
+    { searchString: "Naver", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tnaver.png\">Korea’s largest internet portal site." },
+    { searchString: "Min Kyung-wook", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmin.png\">A former United Future Party lawmaker and ex-journalist. After narrowly losing reelection in Incheon Yeonsu B district, he became a leading figure in election fraud conspiracy theories." },
+    { searchString: "Donald Trump", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ttrump.png\">The 45th President of the United States." },
+    { searchString: "Jeon Kwang-hoon", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjeon.png\">A pastor from Sarang Jeil Church who dreams of entering politics. Famous for the quote, 'God, if you mess with me, you’ll die by my hand.'" },
+    { searchString: "President Moon", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmoon.png\">The 19th President of Korea, affiliated with the liberal Democratic Party of Korea." },
+    { searchString: "People’s Party", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tpeoples.png\">A de facto one-man party founded by centrist-right politician Ahn Cheol-soo. Its initial working name was 'New Ahn Cheol-soo Party'." },
+    { searchString: "Walter Mebane", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmebane.png\">A scholar who studies political science and statistics, with research on detecting election fraud across countries." },
+    { searchString: "DC Inside", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tdcinside.png\">A massive online community with boards on countless topics, similar to Reddit in the Western world." },
+    { searchString: "Ha Tae-keung", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./thatae.png\">One of the very few moderates who survived the 2020 general election within the UFP." },
+    { searchString: "Lee Jun-seok", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tstone.png\">A young politician who lost three times in Seoul Nowon C district." },
+    { searchString: "'reformists'", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./treform.png\">Moderate conservatives who supported President Park’s impeachment." },
+    { searchString: "Hong Joon-pyo", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./thong.png\">Former Governor of South Gyeongsang Province and conservative presidential candidate in 2017. He left the UFP after resisting Hwang Kyo-ahn’s demand to run in a tough district during the 2020 election." },
+    { searchString: "Park Geun-hye", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgeunhye.png\">The 18th President of Korea. After secretly delegating state affairs to a civilian confidant without official authority, she became the first president to be removed from office by the Constitutional Court." },
+    { searchString: "Y. ", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./typose.png\">" },
+    { searchString: "Kaesong Industrial Complex", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tkaesong.png\">An industrial complex established to promote inter-Korean economic cooperation. Operations have been suspended since 2016." },
+    { searchString: "Inter-Korean Liaison Office", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tbomb.png\">" },
+    { searchString: "leaflets", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tleaflet.png\">Propaganda materials opposing the North Korean regime are sent via balloons across the border." },
+    { searchString: "Three Lease Laws", explanationText: "A bill that extends lease terms, limits rent increases, and mandates reporting of lease contracts." },
+    { searchString: "comprehensive real estate tax", explanationText: "A tax imposed on individuals owning real estate above a certain value." },
+    { searchString: "Yun Hee-suk", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./theesuk.png\">An economist and lawmaker formerly with the Korea Development Institute (KDI)." },
+    { searchString: "Korea Disease Control and Prevention Agency", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tkdca.png\">An agency that responds to infectious diseases and public health threats. Its importance surged during the COVID-19 pandemic." },
+    { searchString: "Prosecutor General Yoon Suk-yeol", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoon.png\">Moon Jae-in appointed him as a reform partner, but now he’s merely an internal critic of the administration." },
+    { searchString: "former Justice Minister Cho Kuk", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcho.png\">A former professor who served as Minister of Justice for just one month under Moon Jae-in. His nomination sparked multiple scandals, including his daughter’s fraudulent university admission, which severely hurt the administration’s popularity." },
+    { searchString: "college admissions corruption", explanationText: "Cho Kuk, a former professor, served as Minister of Justice for just one month under Moon Jae-in. His nomination sparked multiple scandals, including his daughter’s fraudulent university admission, which severely hurt the administration’s popularity." },
+    { searchString: "newly appointed Justice Minister Choo Mi-ae", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tchoo.png\">Former Democratic Party leader and current Minister of Justice." },
+    { searchString: "Lee Myung-bak", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmb.png\">The 17th President of Korea. Sentenced to 17 years in prison for bribery and other charges." },
+    { searchString: "three major outlets", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./toutlets.png\">Newspapers that retain some influence even in the digital era. Often grouped together as 'Cho-Joong-Dong'." },
+    { searchString: "National Security Law", explanationText: "A law passed in 2020 that bans anti-government activities in Hong Kong and overrides all local laws." },
+    { searchString: "Park Young-sun", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoungsun.png\">A politician elected multiple times in Seoul’s Guro district and served as Minister of SMEs and Startups under Moon Jae-in." },
+    { searchString: "Kim Young-choon", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoungchoon.png\">A Busan native who served as Minister of Oceans and Fisheries under Moon Jae-in, but seems unlikely to win this election." },
+    { searchString: "Oh Se-hoon", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./toh.png\">Served as Mayor of Seoul from 2006 to 2011 and is attempting a comeback through the current by-election." },
+    { searchString: "Park Heong-joon", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./theongjoon.png\">Elected as a lawmaker in Busan during the 2000s and served as co-chair of the UFP’s election campaign in the last general election." },
+    { searchString: "Cho Eun-hee", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./teunhee.png\">Popular among residents of the Seocho district, but virtually unknown elsewhere. Well, perhaps that’s her strength." },
+    { searchString: "Park Sung-hoon", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsunghoon.png\">A political newcomer and former civil servant with nearly 30 years of experience in budget affairs." },
+    { searchString: "Na Kyung-won", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tna.png\">Served as floor leader of the opposition party in 2019. Highly recognizable but deeply polarizing." },
+    { searchString: "Lee Un-ju", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tunju.png\">A politician who switched from the Democratic Party to the UFP. Famously shaved her head in protest against the Moon administration in 2019." },
+    { searchString: "Na d’Arc", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tnadarc.png\">A nickname given to Na by a Japanese TV station." },
+    { searchString: "LH", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tlh.png\">A public corporation responsible for housing supply and new town development projects." },
+    { searchString: "KTX", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tktx.png\">A high-speed rail that connects Seoul to Busan in just two hours." },
+    { searchString: "2021 Job Ranking Chart", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./t2021meme.png\">If your family member works at the Land and Housing Corporation, you’re basically on par with lawyers and doctors!!" },
+    { searchString: "petition on the Cheong Wa Dae website", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tpetition.png\">A petition system was introduced in 2017 by the Moon administration to enhance communication with the public. Petitions with over 200,000 signatures receive a direct government response." },
+    { searchString: "citizens demanding answers", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcitizens.png\">People who trust conspiracy YouTubers more than mainstream media or experts." },
+    { searchString: "Cho Kuk scandal", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tchoscandal.png\">A series of events triggered by numerous corruption allegations against Cho Kuk, the former Justice Minister. Korean society was fiercely divided over his appointment, and the controversy ended with his voluntary resignation." },
+    { searchString: "Yoo Seong-min", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoo.png\">A politician who once led the Saenuri Party (predecessor of the UFP), but was branded a traitor after leading pro-impeachment lawmakers to leave the party in 2016." },
+    { searchString: "Unified Progressive Party", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tupp.png\">A progressive party dissolved in 2014 after the Constitutional Court ruled it unconstitutional." },
+    { searchString: "computer genius", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tv3.png\">Before entering politics, Ahn Cheol-soo gained popularity as a developer of antivirus software." },
+    { searchString: "Chun Doo-hwan", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tchun.png\">The 11th and 12th President of Korea. An empty-headed dictator." },
+    { searchString: "slaughter of hundreds of Gwangju citizens", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./t518.png\">In May 1980, citizens in Gwangju and South Jeolla protested Chun’s illegal seizure of power. He deployed martial law troops to suppress the uprising, resulting in the massacre of hundreds. This remains a major reason why conservative parties struggle in Jeolla nowadays." },
+    { searchString: "Yang Dae-rim", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyang.png\">A high school senior YouTuber who filed attempted murder charges against Moon Jae-in." },
+    { searchString: "National Prayer Breakfast", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tprayer.png\">" },
+    { searchString: "candlelight rallies", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcandle.png\">A peaceful protest that demanded Park’s resignation. Over 16 million people participated between late 2016 and early 2017." },
+    { searchString: "Kim Moon-soo", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmoonsoo.png\">A unique figure who began as a labor activist and later became a Christian conservative." },
+    { searchString: "republic of Seoul", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tseoul.png\">More people live in Seoul and the surrounding metropolitan area than in all other regions of Korea combined." },
+    { searchString: "Daehangno", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tdaehang.png\">The heart of Korea’s theater culture." },
+    { searchString: "Gwanghwamun Square", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgwang.png\">" },
+    { searchString: "Gangnam Station", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgangnam.png\">" },
+    { searchString: "National Assembly in Yeouido", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tassembly.png\">" },
+    { searchString: "humiliating defeat", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjongno.png\">A complete and utter defeat." },
+    { searchString: "Sim Sang-jung", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsim.png\">The presidential candidate of the progressive Justice Party. Also ran in the 2017 election and received 6% of the vote." },
+    { searchString: "taxi driver", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ttaxi.png\">This guy went from leading our party to running for president? What an unrealistic fiction." },
+    { searchString: "as a close race", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ttossup.png\">Well, if an 8-point margin counts as a 'close'…" },
+    { searchString: "playing saxophone", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tboo.png\">Hwang Kyo-ahn once said he can play six musical instruments, including guitar and saxophone." },
+    { searchString: "SNL Korea", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsnl.png\">A comedy show based on the American SNL format, airing since 2011." },
+    { searchString: "Sampro TV", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsampro.png\">A massive YouTube channel covering a wide range of economic and financial issues." },
+    { searchString: "Squid Game", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsquid.png\">A globally successful survival game drama." },
+    { searchString: "tearing body parts", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tslang.png\">In 2014, a phone call fight between Lee Jae-myung and his sister-in-law was leaked, revealing his vulgar language. He was criticized for using the phrase 'tear apart female genitals'." },
+    { searchString: "profanity scandal", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tslang.png\">In 2014, a phone call fight between Lee Jae-myung and his sister-in-law was leaked, revealing his vulgar language. He was criticized for using the phrase 'tear apart female genitals'." },
+    { searchString: "Daejang-dong scandal", explanationText: "During his tenure as mayor of Seongnam, Lee Jae-myung oversaw the Daejang-dong development project. Most of the profits allegedly went to a company called Hwacheon Daeyu, sparking suspicions of lobbying to cover it up." },
+    { searchString: "2019 storming of the National Assembly", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tstorming.png\">In December 2019, some conservative protesters attempted to illegally enter the National Assembly, leading to clashes with police." },
+    { searchString: "flipping a robot dog", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./trobotdog.gif\">" },
+    { searchString: "sexual misconduct scandals", explanationText: "Sexual harassment scandals involving the former Mayor of Seoul Mayor Park Won-soon, and former Busan Mayor Oh Keo-don." },
+    { searchString: "Women’s Generation", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgirl.png\">An online community exclusively for women aged 20 to 49. Founded in 2009, and has hundreds of thousands of members." },
+    { searchString: "Ministry of Gender Equality and Family", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgender.png\">A government ministry responsible for women’s policy planning, youth protection, and family support. Criticized for worsening gender conflicts since 2015." },
+    { searchString: "prosecutorial reform", explanationText: "A long-standing issue in Korean politics. In Korea, prosecutors hold both investigative and prosecutorial powers, leading to strong authority. Democratic administrations have often tried to weaken prosecutors by separating those powers." },
+    { searchString: "Prosecutorial reform", explanationText: "A long-standing issue in Korean politics. In Korea, prosecutors hold both investigative and prosecutorial powers, leading to strong authority. Democratic administrations have often tried to weaken prosecutors by separating those powers." },
+    { searchString: "President Roh Moo-hyun", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./troh.png\">The 16th President of Korea." },
+    { searchString: "supported impeaching", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./timpeach.png\">During the Roh administration, the Democratic Party split into the Millennium Democratic Party and the pro-Roh Uri Party. In 2004, Roh’s support for the Uri Party led the Millennium Democrats to join conservatives in passing an impeachment motion. The Constitutional Court later dismissed the impeachment, and Roh returned to office." },
+    { searchString: "constant head-shaking", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tshake.gif\">" },
+    { searchString: "greenbelt", explanationText: "In Korea, development-restricted zones are established to preserve the natural environment. Located on the outskirts of most major cities." },
+    { searchString: "Defense Security Command", explanationText: "A military unit that was under the Ministry of National Defense, responsible for counterintelligence. Disbanded in 2018 following the martial law simulation scandal." },
+    { searchString: "Juche factions", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjuche.png\">Fanatics who worship North Korea’s Juche ideology. A core part of student activism in the 1980s and 1990s." },
+    { searchString: "Kim Dae-jung", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tdj.png\">The 15th President of Korea. Achieved the country’s first democratic transition of power." },
+    { searchString: "shaved my head", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tshave.png\">In Korean politics, shaving one’s head is considered a symbolic act of protest and determination." },
+    { searchString: "Kim Young-sam", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tys.png\">The 14th President of Korea." },
+    { searchString: "Kim Ou-joon", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./toujoon.png\">Head of Ddanzi Ilbo and host of 'Kim’s News Factory'. Highly influential in shaping liberal public opinion." },
+    { searchString: "making rolled omelets", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcook.png\">A rolled omelet made by Yoon." },
+    { searchString: "on his palm", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tking.png\">" },
+    { searchString: "2012 presidential election", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./t2012.png\">After a fierce showdown between Park and Moon, Park was elected as the 18th President of Korea." },
+    { searchString: "Park Chung-hee", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tpch.png\">The 5th through 9th President of Korea. A dictator who laid the foundation for economic development." },
+    { searchString: "RE100", explanationText: "100% renewable energy" },
+    { searchString: "Samsung", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsamsung.png\">The largest corporation in Korea by market capitalization." },
+    { searchString: "Hyundai", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./thyundai.png\">A major corporation focused on manufacturing, including automobile production." },
+    { searchString: "PyeongChang Olympics", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tolympic.png\">The Winter Olympics held in Pyeongchang, Gangwon, in 2018 during the early Moon administration. Generally considered a successful event." },
+    { searchString: "Lee Seok-ki", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tseokki.png\">A politician who served as a lawmaker in the early 2010s with the UPP. Sentenced to nine years in prison for inciting rebellion." },
+    { searchString: "Three Kindergarten Laws", explanationText: "A bill aimed at improving transparency in kindergarten accounting, preventing child abuse, and strengthening meal standards. Proposed by Park Yong-jin in 2018." },
+    { searchString: "sinking of the ROKS Cheonan", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcheonan.png\">The South Korean Navy’s Cheonan warship was sunk in 2010 by a North Korean submarine torpedo. 46 crew members were killed." },
+    { searchString: "Syngman Rhee", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./trhee.png\">The first President of Korea. Led the country during the Korean War, attempted a long-term dictatorship through repeated constitutional amendments, and resigned after the 1960 election fraud attempt." },
+    { searchString: "Jin Joong-kwon", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjin.png\">A commentator known for criticizing 'everyone indiscriminately'." }
+]
+
+
 document.head.innerHTML += `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">

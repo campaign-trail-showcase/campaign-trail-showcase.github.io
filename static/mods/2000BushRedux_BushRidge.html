@@ -1,3 +1,28 @@
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
+campaignTrail_temp.cyoa = true;
+
+function getQuestionNumberFromPk(pk) {
+    return campaignTrail_temp.questions_json.map(q=>q.pk).indexOf(pk)-1;
+}
+		
+cyoAdventure = function (a) {
+ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
+if (ans == 12383) {
+        campaignTrail_temp.candidate_json[0]["fields"].last_name = "Trump";
+        campaignTrail_temp.candidate_image_url = 'https://i.imgur.com/Hr1NxYw.png'
+ }
+        
+if(ans == 12506) {
+ctsAchievement("Buchanan Land");
+    }
+}
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -157,7 +182,7 @@ campaignTrail_temp.questions_json = [
         "pk": 372,
         "fields": {
             "priority": 3,
-            "description": "As the Vice Presidential debate between Danforth and Lieberman arrives, is there any remark you want to make?",
+            "description": "As the Vice Presidential debate between Ridge and Lieberman arrives, is there any remark you want to make?",
             "likelihood": 1
         }
     },
@@ -624,7 +649,7 @@ campaignTrail_temp.answers_json = [
         "pk": 12378,
         "fields": {
             "question": 372,
-            "description": "I'm confident that Danforth will win. Godspeed."
+            "description": "I'm confident that Ridge will win. Godspeed."
         }
     },
     {
@@ -2074,7 +2099,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 189,
             "issue": 30,
-            "state_issue_score": -1,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -2724,7 +2749,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 202,
             "issue": 30,
-            "state_issue_score": 0.14,
+            "state_issue_score": 0,
             "weight": 1
         }
     },
@@ -5220,7 +5245,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 78,
             "state": 218,
-            "state_multiplier": 0.999
+            "state_multiplier": 0.987
         }
     },
     {
@@ -7041,6 +7066,16 @@ campaignTrail_temp.answer_score_issue_json = [
             "answer": 12389,
             "issue": "27",
             "issue_score": -0.95,
+            "issue_importance": 1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 12511,
+        "fields": {
+            "answer": 12378,
+            "issue": "27",
+            "issue_score": -0.1,
             "issue_importance": 1
         }
     }
@@ -9836,7 +9871,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 12378,
             "candidate": 77,
-            "answer_feedback": "Danforth managed to nail Lieberman on foreign policy, and most pundits agree that he won."
+            "answer_feedback": "Ridge and Lieberman ended up holding each other to a draw in your eyes, while most news outlets declare Lieberman the winner. It could always be worse."
         }
     },
     {
@@ -10103,9 +10138,9 @@ campaignTrail_temp.answer_feedback_json = [
 ]
 
 campaignTrail_temp.candidate_image_url = "https://i.postimg.cc/cCTQffvP/Bush-portrait-3.png";
-campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/iZY5fzw.png";
+campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/X9zLFL6.jpeg";
 campaignTrail_temp.candidate_last_name = "Bush";
-campaignTrail_temp.running_mate_last_name = "Danforth";
+campaignTrail_temp.running_mate_last_name = "Ridge";
 
 campaignTrail_temp.multiple_endings = true;
 endingPicker = (out, totv, aa, quickstats) => {
@@ -10155,8 +10190,8 @@ campaignTrail_temp.jet_data = [{
     "banner_enabled": true,
     "banner_data": {
         "canName": "Bush",
-        "runName": "Danforth",
-        "runImage": "https://i.imgur.com/iZY5fzw.png",
+        "runName": "Ridge",
+        "runImage": "https://i.imgur.com/X9zLFL6.jpeg",
         "canImage": "https://i.postimg.cc/cCTQffvP/Bush-portrait-3.png"
     },
     "endings_enabled": true,
