@@ -326,6 +326,7 @@ const keyboardShortcutsHandler = (event) => {
 
   // question/answer selection
   if (document.querySelector("#question_form")) {
+    event.preventDefault();
     const answers = Array.from(document.querySelectorAll(".game_answers"));
     
     if (event.key === "Enter" || event.key === "ArrowRight") {
