@@ -522,7 +522,12 @@ function updateDynamicStyle() {
   if (dynamicStyle.innerHTML != dynaStyle) dynamicStyle.innerHTML = dynaStyle;
 }
 
-setInterval(() => {
+let themeUpdateObserver = null;
+let headerObserver = null;
+let documentObserver = null;
+
+// this handles theme updates
+function handleThemeUpdates() {
   // skip updates while theme menu is open
   if (nct_stuff.pauseThemeUpdates) return;
 
@@ -544,12 +549,130 @@ setInterval(() => {
   ) {
     selectedTheme.window_url = null;
   }
-  const gameHeader = $(".game_header")[0];
-  if (gameHeader.innerHTML != corrr) gameHeader.innerHTML = corrr;
-  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+  
+  const gameHeader = document.getElementsByClassName("game_header")[0];
+  if (gameHeader) {
+    if (gameHeader.innerHTML != corrr) {
+      gameHeader.innerHTML = corrr;
+    }
+    gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+    corrr = gameHeader.innerHTML;
+  }
+  
   updateDynamicStyle();
-  corrr = gameHeader.innerHTML;
-}, 100);
+}
+
+// observe game header changes
+function observeGameHeader() {
+  const gameHeader = document.getElementsByClassName("game_header")[0];
+  
+  if (!gameHeader) {
+    return;
+  }
+  
+  if (headerObserver) {
+    headerObserver.disconnect();
+  }
+  
+  headerObserver = new MutationObserver((mutations) => {
+    let shouldUpdate = false;
+    
+    for (const mutation of mutations) {
+      // check for any changes that would require theme updates
+      if (mutation.type === 'childList' || 
+          mutation.type === 'characterData' ||
+          (mutation.type === 'attributes' && mutation.attributeName === 'style')) {
+        shouldUpdate = true;
+        break;
+      }
+    }
+    
+    if (shouldUpdate) {
+      handleThemeUpdates();
+    }
+  });
+  
+  // observe the game header for all types of changes
+  headerObserver.observe(gameHeader, {
+    childList: true,
+    characterData: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['style', 'class']
+  });
+  
+  handleThemeUpdates();
+}
+
+// watch for game_header being added/removed
+documentObserver = new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
+    if (mutation.type === 'childList') {
+      const gameHeaders = document.getElementsByClassName("game_header");
+      if (gameHeaders.length > 0) {
+        observeGameHeader();
+      }
+    }
+  }
+});
+
+documentObserver.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+themeUpdateObserver = new MutationObserver(() => {
+  handleThemeUpdates();
+});
+if (gameWindow) {
+  themeUpdateObserver.observe(gameWindow, {
+    attributes: true,
+    attributeFilter: ['style']
+  });
+}
+
+observeGameHeader();
+
+// also set up a proxy to detect changes to nct_stuff properties
+const nct_stuff_proxy = new Proxy(nct_stuff, {
+  set(target, property, value) {
+    target[property] = value;
+    
+    if (property === 'pauseThemeUpdates' || 
+        property === 'custom_override' || 
+        property === 'dynamicOverride' ||
+        property === 'selectedTheme') {
+      handleThemeUpdates();
+    }
+    
+    return true;
+  }
+});
+
+Object.keys(window).forEach(key => {
+  if (window[key] === nct_stuff) {
+    window[key] = nct_stuff_proxy;
+  }
+});
+
+// fallback interval with longer delay for edge cases
+// this ensures compatibility with code that might bypass this
+let fallbackInterval = setInterval(() => {
+  const gameHeader = document.getElementsByClassName("game_header")[0];
+  if (gameHeader && !headerObserver) {
+    observeGameHeader();
+  }
+  
+  if (gameHeader && gameHeader.innerHTML !== corrr && !nct_stuff.pauseThemeUpdates) {
+    handleThemeUpdates();
+  }
+}, 1000);
+
+window.addEventListener('beforeunload', () => {
+  if (headerObserver) headerObserver.disconnect();
+  if (documentObserver) documentObserver.disconnect();
+  if (themeUpdateObserver) themeUpdateObserver.disconnect();
+  if (fallbackInterval) clearInterval(fallbackInterval);
+});
 
 async function loadJSON(path, varr, callback = null) {
   const res = await fetch(path);
