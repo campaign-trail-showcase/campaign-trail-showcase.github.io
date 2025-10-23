@@ -649,11 +649,7 @@ const nct_stuff_proxy = new Proxy(nct_stuff, {
   }
 });
 
-Object.keys(window).forEach(key => {
-  if (window[key] === nct_stuff) {
-    window[key] = nct_stuff_proxy;
-  }
-});
+window.nct_stuff = nct_stuff_proxy;
 
 // fallback interval with longer delay for edge cases
 // this ensures compatibility with code that might bypass this
