@@ -187,7 +187,7 @@ function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
     }
 
     try {
-      eval("temp" + codeSnippet);
+      executeMod("temp" + codeSnippet, { temp });
     } catch (e) {
       // console.log("FAILED" + e)
       codeSnippet = null;
@@ -1445,7 +1445,14 @@ async function loadModFromButton(modValue) {
   e = campaignTrail_temp;
 
   if (customMods.has(modValue)) {
-    eval(localStorage.getItem(modValue + "_code1"));
+    const customModCode = localStorage.getItem(modValue + "_code1");
+    executeMod(customModCode, {
+      campaignTrail_temp,
+      window,
+      document,
+      $,
+      jQuery
+    });
     diff_mod = true;
     customMod = modValue;
   } else {
@@ -1456,7 +1463,13 @@ async function loadModFromButton(modValue) {
     try {
       const res = await fetch(`../static/mods/${modValue}_init.html`);
       const modCode = await res.text();
-      eval(modCode);
+      executeMod(modCode, {
+        campaignTrail_temp,
+        window,
+        document,
+        $,
+        jQuery
+      });
       diff_mod = true;
     } catch (error) {
       console.error(`Failed to load mod ${modValue}:`, error);
