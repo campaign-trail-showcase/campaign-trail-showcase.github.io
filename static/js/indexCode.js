@@ -173,6 +173,11 @@ const stassenyear = [
 
 // keyboard shortcuts handler
 const keyboardShortcutsHandler = (event) => {
+  // allow system keys (F1-F12, Ctrl+*, etc.)
+  if (event.key.startsWith('F') || event.ctrlKey || event.metaKey || event.altKey) {
+    return;
+  }
+
   // only handle shortcuts if #game_window exists and has content
   const gameWindow = document.getElementById("game_window");
   if (!gameWindow || gameWindow.children.length === 0) {
@@ -187,6 +192,7 @@ const keyboardShortcutsHandler = (event) => {
   // opening menu - Start Game
   if (document.querySelector("#game_start") && document.getElementById("modloaddiv")?.style.display === "none") {
     if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
       document.getElementById("game_start")?.click();
       return;
     }
@@ -195,6 +201,7 @@ const keyboardShortcutsHandler = (event) => {
   // election year selection
   if (document.querySelector("#election_year_form")) {
     if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
       document.getElementById("election_id_button")?.click();
       return;
     }
@@ -225,10 +232,12 @@ const keyboardShortcutsHandler = (event) => {
   // candidate selection
   if (document.querySelector("#candidate_form")) {
     if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
       document.getElementById("candidate_id_button")?.click();
       return;
     }
     if (event.key === "Backspace" || event.key === "ArrowLeft") {
+      event.preventDefault();
       document.getElementById("candidate_id_back")?.click();
       return;
     }
@@ -259,10 +268,12 @@ const keyboardShortcutsHandler = (event) => {
   // running mate selection
   if (document.querySelector("#running_mate_form")) {
     if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
       document.getElementById("running_mate_id_button")?.click();
       return;
     }
     if (event.key === "Backspace" || event.key === "ArrowLeft") {
+      event.preventDefault();
       document.getElementById("running_mate_id_back")?.click();
       return;
     }
@@ -293,10 +304,12 @@ const keyboardShortcutsHandler = (event) => {
   // difficulty/game mode selection
   if (document.querySelector("#opponent_selection_description_window")) {
     if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
       document.getElementById("opponent_selection_id_button")?.click();
       return;
     }
     if (event.key === "Backspace" || event.key === "ArrowLeft") {
+      event.preventDefault();
       document.getElementById("opponent_selection_id_back")?.click();
       return;
     }
@@ -326,10 +339,10 @@ const keyboardShortcutsHandler = (event) => {
 
   // question/answer selection
   if (document.querySelector("#question_form")) {
-    event.preventDefault();
     const answers = Array.from(document.querySelectorAll(".game_answers"));
     
     if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
       // if there's an OK button (feedback), click it
       const okButton = document.getElementById("ok_button");
       if (okButton) {
@@ -343,6 +356,7 @@ const keyboardShortcutsHandler = (event) => {
     }
     
     if (event.key === "ArrowLeft") {
+      event.preventDefault();
       document.getElementById("view_electoral_map")?.click();
       return;
     }
@@ -380,6 +394,7 @@ const keyboardShortcutsHandler = (event) => {
   // map view
   if (document.getElementById("AdvisorButton")) {
     if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
       document.getElementById("resume_questions_button")?.click();
     }
     return;
@@ -388,6 +403,7 @@ const keyboardShortcutsHandler = (event) => {
   // election night
   if (document.getElementById("final_result_button")) {
     if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
       // handle overlay buttons first
       const electionNightButton = document.querySelector("#election_night_buttons #ok_button");
       if (electionNightButton) {
@@ -649,11 +665,7 @@ const nct_stuff_proxy = new Proxy(nct_stuff, {
   }
 });
 
-Object.keys(window).forEach(key => {
-  if (window[key] === nct_stuff) {
-    window[key] = nct_stuff_proxy;
-  }
-});
+window.nct_stuff = nct_stuff_proxy;
 
 // fallback interval with longer delay for edge cases
 // this ensures compatibility with code that might bypass this

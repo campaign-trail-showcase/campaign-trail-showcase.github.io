@@ -202,37 +202,41 @@ e.collect_results = true;
 e = campaignTrail_temp
 
 const startScreenUpdater = setInterval(function() {
-	const goBackButton = document.getElementById("candidate_id_back");
-	const candidateButton = document.getElementById("candidate_id_button");
-	const runningMateButton = document.getElementById("running_mate_id_button");
-	const finalScreenBB = document.getElementById("opponent_selection_id_back");
-	const finalScreenID = document.getElementById("opponent_selection_id_button");
-	const difficultySlider = document.getElementById("difficulty_level");
-	const gameType = document.getElementById("game_type_id");
+    const goBackButton = document.getElementById("candidate_id_back");
+    const candidateButton = document.getElementById("candidate_id_button");
+    const runningMateButton = document.getElementById("running_mate_id_button");
+    const finalScreenBB = document.getElementById("opponent_selection_id_back");
+    const finalScreenID = document.getElementById("opponent_selection_id_button");
+    const candidateSelect = document.getElementById("candidate_id");    
+    const gameType = document.getElementById("game_type_id");
 
-	if(gameType){
-    	const difficultySlider = document.getElementById("difficulty_level");
-    	difficultySlider.style.display = 'none';
-   	 
-    	multiplier = 1;
-	}
-    
-	if((candidateButton || c != 0)&& !runningMateButton){ // change theme on candidate viewing
-    	var c = document.getElementById("candidate_id").value;
-    	if(c == 200 && !(candidateButton) && !(runningMateButton)) {
-        	goBackButton.click();
-        	const initContinue = document.getElementById("election_id_button");
-        	initContinue.click();
-    	}
-    	else if(c == 201 || c == 23) {
-        	if(candidateButton) {
-            	candidateButton.remove();
-        	}
-    	}
-	}
+    if (gameType) {
+        const difficultySlider = document.getElementById("difficulty_level");
+        if (difficultySlider) {
+            difficultySlider.style.display = 'none';
+        }
+        multiplier = 1;
+    }
 
-	if(finalScreenID) { // delete back button and delete the interval
-    	finalScreenBB.remove();
-    	clearInterval(startScreenUpdater);
-	}
-}, 1);
+    if (candidateSelect && !runningMateButton) { // change theme on candidate viewing
+        const c = candidateSelect.value;
+
+        if (c == 200 && !candidateButton) {
+            if (goBackButton) goBackButton.click();
+            const initContinue = document.getElementById("election_id_button");
+            if (initContinue) initContinue.click();
+        }
+        else if (c == 201 || c == 23) {
+            if (candidateButton) {
+                candidateButton.remove();
+            }
+        }
+    }
+
+    if (finalScreenID) { // delete back button and delete the interval
+        if (finalScreenBB) {
+            finalScreenBB.remove();
+        }
+        clearInterval(startScreenUpdater);
+    }
+}, 100);

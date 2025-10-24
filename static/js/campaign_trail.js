@@ -2014,11 +2014,11 @@ function answerEffects(t) {
   const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
   if (e.answer_feedback_flg === 1) {
     const hasFeedback = e.answer_feedback_json.some(
-      (f) => f.fields.answer === tToUse && f.fields.candidate === numCand,
+      (f) => String(f.fields.answer) === String(tToUse) && String(f.fields.candidate) === String(numCand),
     );
     if (hasFeedback) {
       const feedback = e.answer_feedback_json.find(
-        (f) => f.fields.answer === tToUse && f.fields.candidate === numCand,
+        (f) => String(f.fields.answer) === String(tToUse) && String(f.fields.candidate) === String(numCand),
       );
       const n = `
                 <div class="overlay" id="visit_overlay"></div>
