@@ -3648,7 +3648,7 @@ function overallDetailsHtml() {
   }
 
   const currentURL = new URL(window.location.href);
-  const game_url = e.game_id ? `https://${currentURL.hostname}/games/viewGame.html#${e.game_id}` : null;
+  const game_url = e.game_id ? `${currentURL.origin}/games/viewGame.html#${e.game_id}` : null;
 
   const spaceFunction = (name) => /^[\s\u2800]/.test(name); // Braille pattern blank (TTNW space in historical results)
   const spaceToUse = HistName.find(spaceFunction)?.match(/^[\s\u2800]+/)?.[0] ?? ' ';
