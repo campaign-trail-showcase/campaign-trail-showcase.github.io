@@ -3656,7 +3656,7 @@ function overallDetailsHtml() {
   const allHistResZero = !HistEV || HistEV.every((f) => !Number(f));
 
   const histRes = HistName.map((name, i) => {
-    const needsSpace = !(name === "" || spaceFunction(name));
+    const needsSpace = name !== "" && !spaceFunction(name);
     const nameToUse = needsSpace ? `${spaceToUse}${name}` : name;
 
     return `
