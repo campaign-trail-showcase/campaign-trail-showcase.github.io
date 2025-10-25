@@ -1442,7 +1442,6 @@ async function loadModFromButton(modValue) {
   }
 
   loadingFromModButton = true;
-  e = campaignTrail_temp;
 
   if (customMods.has(modValue)) {
     const customModCode = localStorage.getItem(modValue + "_code1");
@@ -1456,8 +1455,10 @@ async function loadModFromButton(modValue) {
     diff_mod = true;
     customMod = modValue;
   } else {
-    if (!location.href.includes("?modName")) {
-      history.replaceState(null, "", "?modName=" + modValue);
+    const pageURL = new URL(window.location.href);
+    if (!pageURL.searchParams.has("modName")) {
+      pageURL.searchParams.set("modName", modValue);
+      window.history.replaceState(null, "", pageURL.href);
     }
 
     try {
@@ -1504,14 +1505,14 @@ async function loadModFromButton(modValue) {
 }
 
 async function copyModLink() {
-  let modLink = document.location.href;
+  const modLink = new URL(window.location.href);
 
-  if (!modLink.includes("?modName")) {
-    modLink = modLink + "?modName=" + modBeingPlayed.replaceAll(" ", "%20");
+  if (!modLink.searchParams.has("modName")) {
+    modLink.searchParams.set("modName", encodeURIComponent(modBeingPlayed));
   }
 
   try {
-    await window.navigator.clipboard.writeText(modLink);
+    await window.navigator.clipboard.writeText(modLink.href);
     alert("Copied link to clipboard!");
   } catch (err) {
     console.error("Failed to copy: ", err);
@@ -1529,7 +1530,7 @@ async function updateModViewCount(modName) {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ modName: modName }),
+      body: JSON.stringify({ modName }),
     });
   } catch (error) {
     console.error(`Failed to update play count for ${modName}:`, error);
