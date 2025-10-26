@@ -12048,14 +12048,8 @@ cyoAdventure = function(a) {
 	if(ans == 12602) {
 		joementum += 1;
 	}
-	if(ans == 12607) {
-		hawk += 1;
-	}
 	if(ans == 12643) {
 		joementum += 1;
-	}
-	if(ans == 12644) {
-		hawk += 1;
 	}
 	if(ans == 12692) {
 		con += 1;
@@ -12084,7 +12078,6 @@ cyoAdventure = function(a) {
 		econ += 1;
 	}
 	if(ans == 12732) {
-		hawk -= 1;
 		joementum += 1;
 	}
 	if(ans == 12746) {
@@ -12216,11 +12209,11 @@ cyoAdventure = function(a) {
 	}
 	if(ans == 12780) {
 		con += 1;
-		hawk += 1;
+		hawk += 2;
 	}
 	if(ans == 12781) {
-		con += 2;
-		hawk += 2;
+		con += 1;
+		hawk += 1;
 	}
 	if(ans == 13043) {
 		joementum += 1;
@@ -12465,7 +12458,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 	} else if(quickstats[0] >= 350) { // bigwin
 		e.pages.push(`<h3>Independence and Accomplishment</h3><p>“This wasn't supposed to happen,” the president thought.<br><br>Because it wasn’t supposed to happen. At one point, it seemed like everybody was against him–the world, the party, the voters, the system itself–but, despite it all, he had persevered. Indeed, Joe had not simply won the election. He had just won in a landslide.<br><br>After the president delivered his victory speech–a triumphant address, touching on the importance of moderation and bipartisanship–he waited and waited for either of his opponents to give him a call and congratulate him.<br><br>No one bothered to call.<br><br>But Joe didn’t need them. He didn’t need their spiteful approval. After all, he was the president, and they were nothing. The night continued, and he basked in the cheers, the lights–all for him. All for America.</p>`);
 		e.executable.push([0, (() => {e.image = e.image = 'https://file.garden/aNxawo8jlVkymd8s/joe%2008/endings/slide%201/S6HwCZ0%20-%20Imgur.png'})])
-		if(hawk == 8) { //superhawk
+		if(hawk == 6) { //superhawk
 			const hawkWin = new Playlist(); 
 			const hawkWinSong = new Song(
 				"Bomb Iran",
@@ -12476,7 +12469,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 			hawkWin.addSong(hawkWinSong);
 			changePlaylist(hawkWin);
 			ctsAchievement("Power of the Dark Side");
-		} else if(hawk == -5) { //superdove
+		} else if(hawk ==  -4) { //superdove
 			const doveWin = new Playlist(); 
 			const doveWinSong = new Song(
 				"Imagine",
@@ -12520,7 +12513,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 	} else if(quickstats[0] < 350 && quickstats[0] >= 270) { //win
 		e.pages.push(`<h3>Courage and Capability</h3><p>The president truly had a sight to behold.<br><br>After all that had gone against him, every setback, he still won. It wasn’t a huge victory, by any means, but he won. He pulled off the greatest third-party performance in history and secured a second term. That’s what mattered.<br><br>After the president delivered his victory speech–a heartfelt address about unity in America–he waited and waited for either of his opponents to give him a call and congratulate him. All he got was dry, unenthusiastic congratulations from Kucinich and empty, bitter praise from Tancredo. No advice, no words of wisdom, just thinly veiled anger.<br><br>As the night continued, Joe couldn’t help but think about what happened to politics. Weren’t your opponents supposed to concede gracefully? He tried to say something, but his voice was drowned out by the crowd.</p>`);
 		e.executable.push([0, (() => {e.image = e.image = 'https://file.garden/aNxawo8jlVkymd8s/joe%2008/endings/slide%201/VsJ2k2F%20-%20Imgur.png'})])
-		if(hawk == 8) { //superhawk
+		if(hawk ==  6) { //superhawk
 			const hawkWin = new Playlist(); 
 			const hawkWinSong = new Song(
 				"Bomb Iran",
@@ -12531,7 +12524,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 			hawkWin.addSong(hawkWinSong);
 			changePlaylist(hawkWin);
 			ctsAchievement("Power of the Dark Side");
-		} else if(hawk == -5) { //superdove
+		} else if(hawk ==  -4) { //superdove
 			const doveWin = new Playlist(); 
 			const doveWinSong = new Song(
 				"Imagine",
@@ -12685,10 +12678,10 @@ endingPicker = (out, totv, aa, quickstats) => {
 	} else if(quickstats[0] >= 535) { //50 shades
 		e.pages.push(`<h3>50 SHADES OF GREY - How Lieberman Conquered America, And A Racist Conquered My Heart</h3><p>By James Carhardt<br><br>Most people remember where they were when it happened. Like 9/11, the JFK Assasnation, and Pearl Harbor before it, it was a moment so shocking, so altogether horrifying, that it is forever carved into the public psyche.<br><br>Joe Lieberman winning all 50 states.<br><br>I, for one, was in a bar, drowning my sorrows in a non-alcoholic beer, talking to a fellow campaign strategist, one from the Tancredo campaign. It wasn’t typical at all, especially not for our two campaigns, so diametrically opposed to each other in values and goals. Yet here we were, a pansexual Democratic Socialist twink from the Bronx, and a muscular ex-corporate lobbyist with a confederate flag in his man cave, sharing a drink. It was only the most bizarre national circumstances that brought us together, and it was only the most dull feeling of total and utter defeat that forged our bond.<br><br>The idea seemed ridiculous - Joe Lieberman, perhaps the least interesting president in history, had revived Washington’s mandate. A man cast out by pundits only months prior, seen as a lame duck, a bureaucrat, scrambling and clinging to power he was doomed to lose, had conquered the world. Other men, of greater and more terrifying stature, had come close. Nixon, the scheming bastard, came within a few thousand votes, and the more grandiose presence of Reagan came even closer, yet the one to seal the deal was a moderate Jewish senator running a third party bid.<br><br>In that way, he was similar to Washington. Not in that he was Jewish, but in that he ran as an independent. It was unheard of. But so was the intense relationship that quickly formed between me and Jerry, the Republican I met at the bar. Nobody expected Lieberman to win Nebraska, and nobody expected me and Jerry to be anything more than a one-night stand, a blink in the eye of our lives. He would go back into the closet, back to his self-hatred, and I to mine, back to the shell of my career, picking up the pieces of my reputation burned to the ground by Kucinich’s grand failure.<br><br>But the flame burned on. Lieberman began passing legislation at a rate not seen since the days of LBJ, and yet little seemed to change. Some healthcare reform here, a minor bombing campaign there. It was managerial, boring, and yet we loved each other. That was what mattered. Even when he told his parents, and they disowned him, even when I told my friends, and they told me I was insane to date a Tancredo staffer, we loved each other.<br><br>Lieberman passed a housing bill in 2010, and it was difficult adjusting to life living with someone who had spent so long diametrically opposed to my ideals. He was still conservative, still shaking off biases, still passionately against welfare. I had to get him to swallow his pride when the bills were tight, and he made me reconsider that extra expense. America was in an era of unprecedented bipartisanship.<br><br>Four years later, Lieberman’s number two again found independent success, winning in an (albeit less impressive) landslide. Our wedding went well, even though his side was mostly empty. Friends came along to compensate, and a major spending bill passed by the thinnest of margins.<br><br>The president suffered a major scandal within his administration, and that began to break down a lot of the “independent, non-partisan” attitude the Lieberman years had created.  It’s now 2020. We both changed our party registration to independent last year, and picked her up from the hospital yesterday. Our lesbian friend was the surrogate.<br><br>We are naming her Liela Berman Carhardt.</p>`);
 		e.executable.push([1, (() => {e.image = e.image = 'https://file.garden/aNxawo8jlVkymd8s/joe%2008/endings/slide%202/c9PmsGq%20-%20Imgur.png'})])
-	} else if(quickstats[0] >= 270 && hawk == -5) { // superdove
+	} else if(quickstats[0] >= 270 && hawk ==  -4) { // superdove
 		e.pages.push(`<h3>Lieberman finally endorses Dean–albeit tepidly - CNN</h3><p>Tue April 24, 2012<br><br>President Lieberman announced his support for Howard Dean earlier today, an important move as the president has been holding his breath on an official endorsement ever since primary season began.<br><br>The president has stated that Dean, now the presumptive Democratic nominee, is the best candidate in the race. Lieberman has expressed agreement with his 2004 opponent on some of his fiscal policies, going so far as to praise him for his work as Governor of Vermont.<br><br>The key area where the president and Dean disagree, however, is foreign policy. Eight years ago, Dean ran a strongly anti-war presidential campaign, though he was defeated for the nomination by Lieberman, who, up until his second term, had taken hawkish stances on foreign affairs.<br><br>Despite Lieberman achieving full withdrawals from Iraq and Afghanistan during his second term, he is still an icon among hawkish Democrats and has expressed reservations about Dean’s candidacy. Regardless, with the president’s backing, Dean may be able to unify the party and avoid another 2008.</p>`);
 		e.executable.push([1, (() => {e.image = e.image = 'https://file.garden/aNxawo8jlVkymd8s/joe%2008/endings/slide%202/V3L2fOy%20-%20Imgur.png'})])
-	} else if(quickstats[0] >= 270 && hawk == 8) { // superhawk
+	} else if(quickstats[0] >= 270 && hawk ==  6) { // superhawk
 		e.pages.push(`<h3>Threat of World War III: Escalation in Syria - The Schiller Institute</h3><p>by Lyndon H. LaRouche, Jr.<br><br>June 21, 2011<br><br>In the opinion of certain higher placed circles in the trans-Atlantic region, America’s extraordinary intervention in the Syrian Civil War on behalf of the British puppet known as U.S. President Joe Lieberman signals a potential for an early outbreak of more general warfare within Europe, the Middle-Eastern region, and beyond: potentially a new general state of warfare throughout much of this planet.<br><br>The war in Syria is merely a part of an ongoing trend of increasing British influence over the United States and its political-parties system, which was set into motion by the postwar agreement between Truman and Churchill following Franklin Roosevelt’s death. With the assassination of President John F. Kennedy, the grip of British imperial power became strategically critical in its grip on the destiny of the U.S.A. The Indo-China war was a war which was conducted for the purpose of overcoming President Kennedy’s and General Douglas MacArthur’s shared intention in Kennedy’s policy of forbidding any pending actions and blocking any U.S. participation in an unnecessary, British-demanded war in Southeast Asia.<br><br>That decade of warfare by the U.S.A. in Southeast Asia, as followed by the “long wars” of the luring of Soviet forces into a similarly foolish war in Southwest Asia, and by, more recently, the luring of a foolish U.S.A. Presidency into exemplary long wars in Iraq, Afghanistan, and now Syria under George W. Bush and Joe Lieberman: wars which have largely wrecked the morals and the economy of both the U.S.A. and the Soviet Union, and others.<br><br>In this presently global strategic crisis-situation, it is urgent that I take advantage of my position as a private authority in economic and related strategic scientific matters, to examine some of the crucial features of the threat of general warfare, and worse, which is now hanging above us all. The safety of the U.S.A. and the wider world can only be ensured by a leader willing to act outside of the two-party duopoly that has become corrupted by the interests of the trans-Atlantic monetary system and the British elite that it represents. It is for this reason that I am announcing my independent candidacy for President of these United States.</p>`);
 		e.executable.push([1, (() => {e.image = e.image = 'https://file.garden/aNxawo8jlVkymd8s/joe%2008/endings/slide%202/5y7NgtH%20-%20Imgur.png'})])
 	} else if(aa[0].electoral_votes >= 270 && aa[0].candidate == 2000 && aa[1].candidate == 1000 && e.player_answers.includes(12707)) { //fnaf
