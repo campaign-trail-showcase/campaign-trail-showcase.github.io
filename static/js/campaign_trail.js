@@ -29,7 +29,7 @@ function executeMod(code, context = {}) {
   return fn(...Object.values(safeContext));
 }
 
-// eslint-disable-next-line prefer-const
+// eslint-disable-next-line prefer-const, no-unused-vars
 let changeFontColour = () => { };
 
 const baseScenarioDict = {
@@ -95,7 +95,7 @@ function debugConsole(...args) {
   }
 }
 
-function shuffle(arr) { // Fisher-Yates
+function shuffleAnswers(arr) { // Fisher-Yates
   for (let i = arr.length - 1; i >= 1; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -1268,7 +1268,7 @@ function onAnswerSelectButtonClicked() {
 }
 
 function questionHTML() {
-  const ansArr = shuffle(
+  const ansArr = shuffleAnswers(
     e.answers_json
       .map((f, idx) => ({ f, idx }))
       .filter(({ f }) => String(f.fields.question) === String(e.questions_json[e.question_number].pk))
@@ -3647,10 +3647,8 @@ function overallDetailsHtml() {
         `;
   }
 
-  const currentURL = window.location.href;
-  const urlParts = currentURL.split("/");
-  const base_url = urlParts[2];
-  const game_url = e.game_id ? `https://${base_url}/games/viewGame.html#${e.game_id}` : null;
+  const currentURL = new URL(window.location.href);
+  const game_url = e.game_id ? `${currentURL.origin}/games/viewGame.html#${e.game_id}` : null;
 
   const spaceFunction = (name) => /^[\s\u2800]/.test(name); // Braille pattern blank (TTNW space in historical results)
   const spaceToUse = HistName.find(spaceFunction)?.match(/^[\s\u2800]+/)?.[0] ?? ' ';
@@ -3658,7 +3656,7 @@ function overallDetailsHtml() {
   const allHistResZero = !HistEV || HistEV.every((f) => !Number(f));
 
   const histRes = HistName.map((name, i) => {
-    const needsSpace = !(name === "" || spaceFunction(name));
+    const needsSpace = name !== "" && !spaceFunction(name);
     const nameToUse = needsSpace ? `${spaceToUse}${name}` : name;
 
     return `
