@@ -831,7 +831,7 @@ function createModView(mod, imageUrl, description, isCustom) {
         <p>${mod.innerText}</p>
     </div>
     <div class = "mod-img-desc">
-      <img class="mod-image" data-src="${imageUrl}" loading="lazy" alt="${mod.value}BoxImage"></img>
+      <img class="mod-image" data-src="${imageUrl}" loading="lazy" alt="${mod.value} Box Image"></img>
       <div class="mod-desc">${description}</div>
     </div>
     <div class="hover-button-holder">
@@ -856,13 +856,13 @@ function createModView(mod, imageUrl, description, isCustom) {
 
 function renderAwards(awards, rawAwardUrls) {
   let awardUrls = rawAwardUrls.split(", ");
-
+  const awardNames = awards.split(",").map(award => award.trim());
   // create an image tag for each URL. the first is visible, the rest are hidden
   let awardImagesHTML = awardUrls.map((url, index) => {
     // if the primary URL fails, load the alternative URL
     const altUrl = getAlternativeIconUrl(url);
     const style = index === 0 ? 'opacity: 1; transition: opacity 0.3s ease-in-out;' : 'opacity: 0; transition: opacity 0.3s ease-in-out;';
-    return `<img class="mod-trophy" src="${url}" style="${style}"${altUrl ? ` onerror="this.onerror=null;this.src='${altUrl}'"` : ""}>`;
+    return `<img class="mod-trophy" src="${url}" alt="${awardNames[index]} Trophy" style="${style}"${altUrl ? ` onerror="this.onerror=null;this.src='${altUrl}'"` : ""}>`;
   }).join('');
 
   return `
