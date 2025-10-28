@@ -1260,7 +1260,13 @@ function renderPaginationControls(totalMods) {
   pageInput.min = "1";
   pageInput.max = totalPages;
   pageInput.value = currentPage;
+  pageInput.id = "pageInput";
   pageInput.classList.add("pagination-input");
+
+  const pageInputLabel = document.createElement("label");
+  pageInputLabel.setAttribute("for", "pageInput");
+  pageInputLabel.classList.add("sr-only");
+  pageInputLabel.textContent = "Page number";
 
   // go to page button
   const goButton = document.createElement("button");
@@ -1278,6 +1284,7 @@ function renderPaginationControls(totalMods) {
   });
 
   pageInputContainer.appendChild(pageInput);
+  pageInputContainer.appendChild(pageInputLabel);
   pageInputContainer.appendChild(goButton);
   paginationContainer.appendChild(pageInputContainer);
 
