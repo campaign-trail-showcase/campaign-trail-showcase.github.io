@@ -831,7 +831,7 @@ function createModView(mod, imageUrl, description, isCustom) {
         <p>${mod.innerText}</p>
     </div>
     <div class = "mod-img-desc">
-      <img class="mod-image" data-src="${imageUrl}" loading="lazy"></img>
+      <img class="mod-image" data-src="${imageUrl}" loading="lazy" alt="${mod.value}BoxImage"></img>
       <div class="mod-desc">${description}</div>
     </div>
     <div class="hover-button-holder">
