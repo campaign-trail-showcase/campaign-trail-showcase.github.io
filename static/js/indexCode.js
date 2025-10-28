@@ -100,7 +100,8 @@ nct_stuff.selectedTheme = theme || "tct";
 let selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
 
 const themePickerEl = document.getElementById("theme_picker");
-themePickerEl.innerHTML = "<select id='themePicker' onchange='themePicked()'></select>";
+themePickerEl.innerHTML = `<label for="themePicker" class="sr-only">Theme Picker</label>
+                           <select id="themePicker" onchange="themePicked()"></select>`;
 const themePicker = document.getElementById("themePicker");
 themePicker.innerHTML += `<option value='${nct_stuff.selectedTheme}'>${selectedTheme.name}</option>`;
 for (const key in nct_stuff.themes) {
