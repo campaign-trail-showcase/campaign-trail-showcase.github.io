@@ -2624,9 +2624,10 @@ function rFunc(t, i) {
   const latestRes = getLatestRes(t);
   const latestCandidates = latestRes[0];
   const evArray = latestCandidates.map((c) => c.evvs || 0);
-  const cachedVV = latestCandidates.map(
-    (c) => `<b>${c.fields.last_name}</b> - ${(c.pvp * 100).toFixed(1)}%<br>`,
-  ).join("");
+  const cachedVV = latestCandidates.map((c) => {
+    const hasNoVotes = c.popvs === 0;
+    return hasNoVotes ? '' : `<b>${c.fields.last_name}</b> - ${(c.pvp * 100).toFixed(1)}%<br>`
+  }).join("");
   const cachedNNN = latestCandidates.reduce((acc, c, idx) => {
     if (evArray[idx] > 0) {
       acc += `<b>${c.fields.last_name}</b> - ${evArray[idx]}<br>`;
