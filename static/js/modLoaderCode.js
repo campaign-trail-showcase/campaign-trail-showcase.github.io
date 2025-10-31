@@ -238,7 +238,7 @@ function mixColor(hex, mixWith, percent) {
 }
 
 function getContrastRatio(hex1, hex2) {
-  // so we can calculate the contrast ratio between two hex colors (WCAG) 
+  // so we can calculate the contrast ratio between two hex colors (WCAG)
   function luminance([r, g, b]) {
     let a = [r, g, b].map(function (v) {
       v /= 255;
@@ -292,7 +292,7 @@ function ensureThemeContrast(theme) {
       const contrastWhite = getContrastRatio(theme.header_color, '#fff');
       const contrastBlack = getContrastRatio(theme.header_color, '#222');
       theme.header_text_color = contrastWhite > contrastBlack ? '#fff' : '#222';
-      
+
       const { themeBaseColor, themeTextColor } = adjustThemeContrast(
         theme.header_color,theme.header_text_color
       );
@@ -398,7 +398,7 @@ function extractFallbackTheme(rawModText, nameOfMod) {
     theme.header_text_color = textColMatch[1] === 'white' ? '#fff' : (textColMatch[1] === 'black' ? '#222' : textColMatch[1]);
   }
 
-  // ensure contrast for the theme colors 
+  // ensure contrast for the theme colors
   ensureThemeContrast(theme);
 
   // if at least one color was found, save it as a theme
@@ -1254,7 +1254,7 @@ function renderPaginationControls(totalMods) {
   // page input
   const pageInputContainer = document.createElement("span");
   pageInputContainer.classList.add("pagination-input-container");
-  
+
   const pageInput = document.createElement("input");
   pageInput.type = "number";
   pageInput.min = "1";
@@ -1279,7 +1279,7 @@ function renderPaginationControls(totalMods) {
       updateModViews();
     } else {
       // resets new input to current input if new input is invalid page number
-      pageInput.value = currentPage; 
+      pageInput.value = currentPage;
     }
   });
 
@@ -1465,7 +1465,7 @@ async function loadModFromButton(modValue) {
     const pageURL = new URL(window.location.href);
     if (!pageURL.searchParams.has("modName")) {
       pageURL.searchParams.set("modName", modValue);
-      window.history.replaceState(null, "", pageURL.href);
+      window.history.replaceState(null, "", `${pageURL.pathname}?${pageURL.searchParams.toString().replaceAll("+", "%20")}`);
     }
 
     try {
@@ -1515,7 +1515,8 @@ async function copyModLink() {
   const modLink = new URL(window.location.href);
 
   if (!modLink.searchParams.has("modName")) {
-    modLink.searchParams.set("modName", encodeURIComponent(modBeingPlayed));
+    modLink.searchParams.set("modName", modBeingPlayed);
+    window.history.replaceState(null, "", `${modLink.pathname}?${modLink.searchParams.toString().replaceAll("+", "%20")}`);
   }
 
   try {
