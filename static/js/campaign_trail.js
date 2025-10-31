@@ -1541,7 +1541,7 @@ function electionNight(type = 'general', timestep = 10, states = []) {
   const globalParam = PROPS.PARAMS;
   const sortedCands = getSortedCands();
   const activeStates = isGeneral ? e.states_json : states;
-  const allStatesHaveEVs = activeStates.every((f) => f.fields.electoral_votes > 0);
+  const someStatesHaveEVs = activeStates.some((f) => f.fields.electoral_votes > 0);
   const stateMap = mapPkToFields(activeStates);
 
   const i = sortedCands.map((f) => {
@@ -1553,7 +1553,7 @@ function electionNight(type = 'general', timestep = 10, states = []) {
     return hasNoVotes ? '' : `
       <li>
         <span style="color:${f.color}; background-color:${f.color}">--</span>
-        ${f.last_name}: ${allStatesHaveEVs ? "0 / " : ""}0.0%
+        ${f.last_name}: ${someStatesHaveEVs ? "0 / " : ""}0.0%
       </li>
     `
   }).join("");
@@ -1561,7 +1561,7 @@ function electionNight(type = 'general', timestep = 10, states = []) {
   const s = PROPS.ELECTIONS.get(String(e.election_id));
   const winningEV = s.winning_electoral_vote_number;
   const formattedWinningEV = formatNumbers(winningEV);
-  const evsToWin = `${allStatesHaveEVs ? `</br>${formattedWinningEV} to win` : ""}`;
+  const evsToWin = `${someStatesHaveEVs ? `</br>${formattedWinningEV} to win` : ""}`;
   const footerText = isGeneral ? 'Go to Final Results' : 'Go back to questions';
 
   const removeElectionNightWindows = () => $("#election_night_overlay, #election_night_window").remove();
@@ -1675,7 +1675,7 @@ function electionNight(type = 'general', timestep = 10, states = []) {
           overallRes,
           e.final_state_results,
           totalVotes,
-          allStatesHaveEVs,
+          someStatesHaveEVs,
         );
 
         let h = Math.floor((time / 480) * 100);
