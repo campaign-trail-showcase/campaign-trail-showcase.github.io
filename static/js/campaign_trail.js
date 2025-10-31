@@ -3,6 +3,16 @@
 e ||= campaignTrail_temp;
 e.skippingQuestion = false;
 
+const mapPkToFields = (json) => new Map(json?.map((f) => [String(f.pk), f.fields]) ?? []);
+
+const stringsEqual = (a, b) => String(a) === String(b);
+
+const PROPS = {
+  get PARAMS() { return e.global_parameter_json?.[0]?.fields ?? {}; },
+  get ELECTIONS() { return mapPkToFields(e.election_json); }, // Map<string, object>
+  get CANDIDATES() { return mapPkToFields(e.candidate_json); }, // Map<string, object>
+}
+
 async function evalFromUrl(url, callback = null) {
   const evalRes = await fetch(url);
   const code = await evalRes.text();
@@ -131,10 +141,10 @@ function mapCache(skip = false) {
     if (!$("#main_content_area")[0]) {
       return false;
     }
-    const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+    const election = PROPS.ELECTIONS.get(String(e.election_id));
     if (
-      ((e.question_number - 1) % 2 !== 0 && election.fields.has_visits === 1)
-      || (e.question_number === e.global_parameter_json[0].fields.question_count)
+      ((e.question_number - 1) % 2 !== 0 && election.has_visits)
+      || (e.question_number === Number(PROPS.PARAMS.question_count))
       || (e.primary_code && e.primary_code.some((f) => f.breakQ === e.question_number))
     ) {
       return false;
@@ -533,13 +543,14 @@ function download(content, fileName, contentType) {
 }
 
 function exportResults() {
+  const cands = PROPS.CANDIDATES;
   const results = {
     election_id: campaignTrail_temp.election_id,
     player_candidate: campaignTrail_temp.candidate_id,
     overall_results: (campaignTrail_temp.final_overall_results || []).map((r) => {
-      const candidateObj = campaignTrail_temp.candidate_json.find((c) => c.pk === r.candidate);
-      const candidateName = candidateObj ? `${candidateObj.fields.first_name} ${candidateObj.fields.last_name}` : null;
-      const candidateColor = candidateObj && candidateObj.fields ? candidateObj.fields.color_hex || null : null;
+      const candidateObj = cands.get(String(r.candidate));
+      const candidateName = candidateObj ? `${candidateObj.first_name} ${candidateObj.last_name}` : null;
+      const candidateColor = candidateObj?.color_hex || null;
 
       return {
         candidate_name: candidateName,
@@ -562,12 +573,10 @@ function exportResults() {
       return {
         state: stateAbbreviation,
         results: stateResult.result.map((candidateResult) => {
-          const candidate = campaignTrail_temp.candidate_json.find(
-            (cand) => cand.pk === candidateResult.candidate,
-          );
+          const candidate = cands.get(String(candidateResult.candidate));
 
           return {
-            candidate_name: candidate ? `${candidate.fields.first_name} ${candidate.fields.last_name}` : null,
+            candidate_name: candidate ? `${candidate.first_name} ${candidate.last_name}` : null,
             electoral_votes: candidateResult.electoral_votes,
             popular_votes: candidateResult.votes || 0,
             vote_percentage: totalPopularVotes
@@ -678,9 +687,7 @@ function splitEVTopTwo(totalEV, topVotes, totalVotes) {
 const shining_menu = (polling) => {
   const game_winArr = Array.from($("#game_window")[0].children);
 
-  const inflation_factor = 1.04 ** (
-    2020 - e.election_json.find((f) => f.pk === e.election_id).fields.year
-  );
+  const inflation_factor = 1.04 ** (2020 - PROPS.ELECTIONS.get(String(e.election_id)).year);
 
   const uninflatedBalance = e.shining_data.balance / inflation_factor;
   const uninflatedPrev = e.shining_data.prev_balance / inflation_factor;
@@ -1102,11 +1109,11 @@ const shining_cal = (polling) => {
 
   // opponent visit logic
   if (
-    (e.question_number + 1) % 2 == 0
-    && e.election_json.find((f) => f.pk === e.election_id).fields.has_visits == 1
+    (e.question_number + 1) % 2 === 0
+    && PROPS.ELECTIONS.get(String(e.election_id)).has_visits
   ) {
     const active_opps = e.opponents_list.filter(
-      (f) => e.candidate_json.find((_f) => _f.pk === f).fields.is_active === 1,
+      (f) => PROPS.CANDIDATES.get(String(f)).fields.is_active === 1,
     );
 
     // calculate closest state for each oppo
@@ -1271,7 +1278,7 @@ function questionHTML() {
   const ansArr = shuffleAnswers(
     e.answers_json
       .map((f, idx) => ({ f, idx }))
-      .filter(({ f }) => String(f.fields.question) === String(e.questions_json[e.question_number].pk))
+      .filter(({ f }) => stringsEqual(f.fields.question, e.questions_json[e.question_number].pk))
       .slice(0, e.answer_count)
       .map(({ idx }) => ({
         key: idx,
@@ -1280,49 +1287,46 @@ function questionHTML() {
 
   const gameWindow = document.querySelector("#game_window");
   const s = ansArr.map((f, idx) => `
-            <input type="radio" name="game_answers" class="game_answers" id="game_answers[${idx}]" value = "${e.answers_json[f.key].pk}"/>
-            <label for="game_answers[${idx}]">${substitutePlaceholders(e.answers_json[f.key].fields.description)}</label><br>
-        `).join("").trim();
+    <input type="radio" name="game_answers" class="game_answers" id="game_answers[${idx}]" value="${e.answers_json[f.key].pk}"/>
+    <label for="game_answers[${idx}]">${substitutePlaceholders(e.answers_json[f.key].fields.description)}</label><br>
+  `).join("").trim();
   const l = `
-        <img id="candidate_pic" src="${e.candidate_image_url}">
-        <img id="running_mate_pic" src="${e.running_mate_image_url}">
-        <div class="inner_window_sign_display">
-            <div id="progress_bar">
-                <h3>Question ${e.question_number + 1} of ${e.global_parameter_json[0].fields.question_count}</h3>
-            </div>
-            <div id="campaign_sign">
-                <p>${e.candidate_last_name}</p>
-                <p>${e.running_mate_last_name}</p>
-            </div>
-        </div>
-    `.trim();
+    <img id="candidate_pic" src="${e.candidate_image_url}">
+    <img id="running_mate_pic" src="${e.running_mate_image_url}">
+    <div class="inner_window_sign_display">
+      <div id="progress_bar">
+        <h3>Question ${e.question_number + 1} of ${PROPS.PARAMS.question_count}</h3>
+      </div>
+      <div id="campaign_sign">
+        <p>${e.candidate_last_name}</p>
+        <p>${e.running_mate_last_name}</p>
+      </div>
+    </div>
+  `.trim();
   const shining_button = Number(e.game_type_id) === 3
-    ? `
-            <button id="shining_menu_button" class="answer_select_button" style='color:navy;font-weight:bolder;margin-left:1.5em;'>The Campaign</button>
-        `
+    ? '<button id="shining_menu_button" class="answer_select_button" style="color:navy;font-weight:bolder;margin-left:1.5em;">The Campaign</button>'
     : "";
   const z = `
-        <div class="inner_inner_window">
-            <h3>${substitutePlaceholders(e.questions_json[e.question_number].fields.description)}</h3>
-            <div id="question_form">
-                <form name="question">${s}</form>
-            </div>
-        </div>
-        <p>
-            <button id="answer_select_button" class="answer_select_button">CONTINUE</button>
-            <button id="view_electoral_map">Latest Polls/Electoral Map</button>
-            ${shining_button}
-        </p>
-        `;
-  gameWindow.querySelectorAll(":scope > *:not(#main_content_area):not(.game_header)")
-    .forEach((el) => el.remove());
-  const mainContentArea = document.querySelector("#main_content_area");
+    <div class="inner_inner_window">
+      <h3>${substitutePlaceholders(e.questions_json[e.question_number].fields.description)}</h3>
+      <div id="question_form">
+        <form name="question">${s}</form>
+      </div>
+    </div>
+    <p>
+      <button id="answer_select_button" class="answer_select_button">CONTINUE</button>
+      <button id="view_electoral_map">Latest Polls/Electoral Map</button>
+      ${shining_button}
+    </p>
+  `;
+  gameWindow.querySelectorAll(":scope > *:not(#main_content_area):not(.game_header)").forEach((el) => el.remove());
+  const mainContentArea = document.getElementById("main_content_area");
   if (mainContentArea) mainContentArea.style.display = "none";
 
-  const inner_window_question = document.createElement("div");
-  inner_window_question.setAttribute("class", "inner_window_question");
-  inner_window_question.innerHTML = z;
-  gameWindow.appendChild(inner_window_question);
+  const innerWindowQuestion = document.createElement("div");
+  innerWindowQuestion.className = "inner_window_question";
+  innerWindowQuestion.innerHTML = z;
+  gameWindow.appendChild(innerWindowQuestion);
 
   const ports = document.createElement("g");
   ports.innerHTML = l;
@@ -1343,10 +1347,10 @@ function openMap(_e) {
       .forEach((el) => el.remove());
 
     const footer_html = `
-            <button id="resume_questions_button">Back to the game</button>
-            <button id="margin_switcher">Switch margin colouring gradient</button>
-            <button id="AdvisorButton">${advisorButtonText}</button>
-        </div>`.trim();
+      <button id="resume_questions_button">Back to the game</button>
+      <button id="margin_switcher">Switch margin colouring gradient</button>
+      <button id="AdvisorButton">${advisorButtonText}</button>
+    `.trim();
     const ftH = document.createElement("div");
     ftH.id = "map_footer";
     ftH.innerHTML = footer_html;
@@ -1354,33 +1358,33 @@ function openMap(_e) {
     $("#main_content_area").show();
   } else {
     $("#game_window").html(`
-            <div class="game_header">${corrr}</div>
-            <div id="main_content_area">
-                <div id="map_container"></div>
-                <div id="menu_container">
-                    <div id="overall_result_container">
-                        <div id="overall_result">
-                            <h3>ESTIMATED SUPPORT</h3>
-                            <p>Click on a state to view more info.</p>
-                        </div>
-                    </div>
-                    <div id="state_result_container">
-                        <div id="state_info">
-                            <h3>STATE SUMMARY</h3>
-                            <p>Click/hover on a state to view more info.</p>
-                            <p>Precise results will be available on election night.</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="game_header">${corrr}</div>
+      <div id="main_content_area">
+        <div id="map_container"></div>
+        <div id="menu_container">
+          <div id="overall_result_container">
+            <div id="overall_result">
+              <h3>ESTIMATED SUPPORT</h3>
+              <p>Click on a state to view more info.</p>
             </div>
-            <div id="map_footer">
-                <button id="resume_questions_button">Back to the game</button>
-                <button id="margin_switcher">Switch margin colouring gradient</button>
-                <button id="AdvisorButton">${advisorButtonText}</button>
-            </div>`.trim());
-    const t = rFunc(_e, 0);
+          </div>
+          <div id="state_result_container">
+            <div id="state_info">
+              <h3>STATE SUMMARY</h3>
+              <p>Click/hover on a state to view more info.</p>
+              <p>Precise results will be available on election night.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="map_footer">
+        <button id="resume_questions_button">Back to the game</button>
+        <button id="margin_switcher">Switch margin colouring gradient</button>
+        <button id="AdvisorButton">${advisorButtonText}</button>
+      </div>
+    `.trim());
 
-    $("#map_container").usmap(t);
+    $("#map_container").usmap(rFunc(_e, 0));
   }
 }
 
@@ -1400,220 +1404,6 @@ function formatNumbers(num) {
 
 e.answer_count = 4;
 
-function primaryResults(states) {
-  const t = getSortedCands();
-  const stateMap = new Map(states.map((s) => [s.pk, s]));
-
-  const i = t
-    .map((item) => {
-      const { color } = item;
-      return `<li><span style="color:${color}; background-color:${color}">--</span> ${item.last_name}: 0</li>`;
-    })
-    .join("");
-  const s = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
-  const n = s.fields.winning_electoral_vote_number;
-  $("#game_window").html(`
-        <div class="game_header">${corrr}</div>
-        <div id="main_content_area">
-            <div id="map_container"></div>
-            <div id="menu_container">
-                <div id="overall_result_container">
-                    <div id="overall_result">
-                        <h3>ELECTORAL VOTES</h3>
-                        <ul>${i}</ul>
-                        <p>0% complete
-                            <br>
-                            ${n} to win
-                        </p>
-                    </div>
-                </div>
-                <div id="state_result_container">
-                    <div id="state_result">
-                        <h3>STATE RESULTS</h3>
-                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="map_footer">
-            <button id="final_result_button">Go back to questions</button>
-        </div>
-        <div class="overlay" id="election_night_overlay"></div>
-        <div class="overlay_window" id="election_night_window">
-            <div class="overlay_window_content" id="election_night_content">
-                <h3>Advisor Feedback</h3>
-                <img src="${s.fields.advisor_url}" width="208" height="128"/>
-                <p>One of many election nights has arrived. Winning the delegates in these races will be vital to your primary victory.</p>
-            </div>
-            <div class="overlay_buttons" id="election_night_buttons">
-                <button id="ok_button">OK</button>
-                <br>
-            </div>
-        </div>`.trim());
-
-  const stateColorArr = {};
-  states.forEach((f) => {
-    stateColorArr[f.fields.abbr] = {
-      fill: campaignTrail_temp.global_parameter_json[0].fields.default_map_color_hex,
-    };
-  });
-
-  const lTemp = {
-    stateStyles: {
-      fill: "transparent",
-    },
-    stateHoverStyles: {
-      fill: "transparent",
-    },
-    stateSpecificStyles: stateColorArr,
-    stateSpecificHoverStyles: stateColorArr,
-  };
-  $("#map_container").usmap(lTemp);
-  const $okButton = $("#ok_button");
-  $okButton.click(() => {
-    $("#election_night_overlay, #election_night_window").remove();
-  });
-  $("#final_result_button").click(() => {
-    clearTimeout(results_timeout);
-    $("#map_footer").html("<i>Processing Results, wait one moment...</i>");
-    // HELPFUL CODE HERE
-    // campaignTrail_temp.question_number = 0
-    // ee = A(return_type=2)
-    // o(ee)
-    e.question_number++;
-    nextQuestion();
-  });
-  e.final_overall_results = e.final_state_results[0].result.map((f) => ({
-    candidate: f.candidate,
-    electoral_votes: 0,
-    popular_votes: 0,
-  }));
-  e.final_state_results = e.final_state_results.map((f) => {
-    const stObj = stateMap.get(Number(f.state)) ?? states.find((g) => g.pk === Number(f.state));
-    if (!stObj) return f;
-
-    return {
-      ...f,
-      result_time: marginTime(f.result, stObj.fields.poll_closing_time),
-    };
-  });
-
-  $okButton.click(() => {
-    results_timeout = setTimeout(() => {
-      !(function t(i, a) {
-        const s = [0, 0];
-        for (var n = 0; n < e.final_overall_results.length; n++) {
-          e.final_overall_results[n].electoral_votes > s[0]
-            && (s[0] = e.final_overall_results[n].electoral_votes);
-        }
-        total_votes = 0;
-        for (
-          iterator = 0;
-          iterator < e.final_overall_results.length;
-          iterator++
-        ) {
-          total_votes += e.final_overall_results[iterator].popular_votes;
-        }
-        pop_vs = [];
-        for (
-          iterator = 0;
-          iterator < e.final_overall_results.length;
-          iterator++
-        ) {
-          if (
-            e.final_overall_results[iterator].popular_votes / total_votes
-            > 0
-          ) {
-            pop_vs.push(
-              e.final_overall_results[iterator].popular_votes / total_votes,
-            );
-          } else {
-            pop_vs.push(0);
-          }
-        }
-        var a = handleFinalResults(i);
-        const _ = getSortedCands();
-        let r = "";
-        const o = "";
-        for (var n = 0; n < _.length; n++) {
-          for (let d = 0; d < e.final_overall_results.length; d++) {
-            if (e.final_overall_results[d].candidate == _[n].candidate) {
-              var c = e.final_overall_results[d].electoral_votes;
-              const popvthing = (pop_vs[d] * 100).toFixed(1);
-            }
-          }
-          r
-            += `            <span style="color:${_[n].color
-            }; background-color: ${_[n].color
-            }">--</span> <b>${_[n].last_name
-            }</b> -  ${c
-            }<br>`;
-        }
-        const p = mapResultColor(i);
-        let h = Math.floor((i / 480) * 100);
-        const g = $("#state_result_container").html();
-        $("#game_window").html("");
-        $("#game_window").html(`
-                    <div class="game_header">${corrr}</div>
-                    <div id="main_content_area">
-                        <div id="map_container"></div>
-                        <div id="menu_container">
-                            <div id="overall_result_container">
-                                <div id="overall_result">
-                                    <h3>ELECTION TALLY</h3>
-                                    <ul>${r}</ul>
-                                    <p>${h}% complete</p>
-                                </div>
-                            </div>
-                        <div id="state_result_container">${g}</div>
-                        </div>
-                    </div>
-                    <div id="map_footer">
-                        <button id="final_result_button">Go back to questions</button>
-                    </div>
-                `);
-
-        $("#map_container").usmap(p);
-        $("#final_result_button").click(() => {
-          clearTimeout(results_timeout),
-            $("#map_footer").html(
-              "<i>Processing Results, wait one moment...</i>",
-            );
-          e.question_number++;
-          nextQuestion();
-        });
-        for (var n = 0; n < e.final_overall_results.length; n++) {
-          e.final_overall_results[n].electoral_votes > s[1]
-            && (s[1] = e.final_overall_results[n].electoral_votes);
-        }
-        if (s[0] < o && s[1] >= o) {
-          $("#overlay_result_button").click(() => {
-            clearTimeout(results_timeout),
-              $("#map_footer").html(
-                "<i>Processing Results, wait one moment...</i>",
-              );
-            e.question_number++;
-            nextQuestion();
-          });
-        } else {
-          i >= 480 || a >= states.length
-            ? ((h = 100),
-              $("#overall_result").html(
-                `            <h3>ELECTION TALLY</h3>            <ul>${r
-                }</ul>            <p>${h
-                }% complete</br>${o
-                } to win</p>`,
-              ))
-            : (results_timeout = setTimeout(() => {
-              t(i, a);
-            }, 2e3));
-        }
-        i += 120;
-      }(0, 0));
-    }, 2e3);
-  });
-}
-
 function primaryFunction(execute, breaks) {
   if (!execute) {
     return false;
@@ -1629,7 +1419,7 @@ function primaryFunction(execute, breaks) {
 
   states = [];
 
-  stateMap.forEach((f, it, arr) => {
+  stateMap.forEach((f) => {
     const correctState = stateMap2.indexOf(f);
     states.push(e.states_json[correctState]);
   });
@@ -1657,7 +1447,8 @@ function primaryFunction(execute, breaks) {
   e.primary_states = JSON.stringify(e.primary_states);
 
   // Call the primaryResults function and pass it the array of states
-  primaryResults(states);
+  // primaryResults(states);
+  electionNight('primary', 120, states);
   return true;
 }
 
@@ -1701,7 +1492,7 @@ function updateUsMapStyles(config) {
 
 function showOutcomePopup(election, results) {
   if (!election || !results) return;
-  const electionUsed = e.election_json?.find((f) => f.pk === election)?.fields;
+  const electionUsed = PROPS.ELECTIONS.get(String(election));
   console.log(results);
   $("#game_window").append(`
         <div class="overlay" id="election_night_overlay"></div>
@@ -1720,17 +1511,22 @@ function showOutcomePopup(election, results) {
     `);
 }
 
-function generateCandidateList(cands, results, total, statesHaveEVs) {
+function generateCandidateList(cands, results, stateResults, total, statesHaveEVs) {
   if (!cands || !results || total == null) return "";
 
   return cands.map((f) => {
-    const {
-      electoral_votes: candEVs,
-      popular_votes: candPV,
-    } = results.find((g) => g.candidate === f.candidate);
-    const candPVP = total > 0 ? ((candPV / total) * 100).toFixed(1) : "0.0";
+    const candResult = results.find((g) => g.candidate === f.candidate)
+      || { electoral_votes: 0, popular_votes: 0 };
+    const candEVs = candResult.electoral_votes;
+    const candPVs = candResult.popular_votes;
+    const candPVP = total > 0 ? ((candPVs / total) * 100).toFixed(1) : "0.0";
+    const hasNoVotes = stateResults.every(
+      (st) => st.result.every(
+        (c) => (c.candidate !== f.candidate) || (c.votes === 0 && c.electoral_votes === 0)
+      )
+    );
 
-    return `
+    return hasNoVotes ? '' : `
       <li>
         <span style="color:${f.color}; background-color:${f.color}">--</span>
           ${f.last_name}: ${statesHaveEVs ? `${formatNumbers(candEVs)} / ` : ""}${candPVP}%
@@ -1739,67 +1535,78 @@ function generateCandidateList(cands, results, total, statesHaveEVs) {
   }).join("");
 }
 
-function electionNight() {
-  const globalParam = e.global_parameter_json?.[0]?.fields || {};
+// type: 'general' | 'primary'
+function electionNight(type = 'general', timestep = 10, states = []) {
+  const isGeneral = type === 'general';
+  const globalParam = PROPS.PARAMS;
   const sortedCands = getSortedCands();
-  const stateJson = e.states_json;
-  const allStatesHaveEVs = stateJson.every((f) => f.fields.electoral_votes > 0);
+  const activeStates = isGeneral ? e.states_json : states;
+  const someStatesHaveEVs = activeStates.some((f) => f.fields.electoral_votes > 0);
+  const stateMap = mapPkToFields(activeStates);
 
-  const i = sortedCands.map((f) => `
-        <li>
-            <span style="color:${f.color}; background-color:${f.color}">--</span>
-            ${f.last_name}: ${allStatesHaveEVs ? "0 / " : ""}0.0%
-        </li>
-    `).join("");
+  const i = sortedCands.map((f) => {
+    const hasNoVotes = e.final_state_results.every(
+      (st) => st.result.every(
+        (c) => c.candidate !== f.candidate || (c.votes === 0 && c.electoral_votes === 0)
+      )
+    );
+    return hasNoVotes ? '' : `
+      <li>
+        <span style="color:${f.color}; background-color:${f.color}">--</span>
+        ${f.last_name}: ${someStatesHaveEVs ? "0 / " : ""}0.0%
+      </li>
+    `
+  }).join("");
 
-  const s = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
-  const winningEV = s.fields.winning_electoral_vote_number;
+  const s = PROPS.ELECTIONS.get(String(e.election_id));
+  const winningEV = s.winning_electoral_vote_number;
   const formattedWinningEV = formatNumbers(winningEV);
-  const evsToWin = `${allStatesHaveEVs ? `</br>${formattedWinningEV} to win` : ""}`;
+  const evsToWin = `${someStatesHaveEVs ? `</br>${formattedWinningEV} to win` : ""}`;
+  const footerText = isGeneral ? 'Go to Final Results' : 'Go back to questions';
 
   const removeElectionNightWindows = () => $("#election_night_overlay, #election_night_window").remove();
 
   $("#game_window").html(`
-        <div class="game_header">${corrr}</div>        
-        <div id="main_content_area">            
-            <div id="map_container"></div>            
-            <div id="menu_container">                
-                <div id="overall_result_container">                    
-                    <div id="overall_result">                        
-                        <h3>ELECTORAL VOTES</h3>                        
-                        <ul>${i}</ul>                        
-                        <p>
-                            0% complete
-                            ${evsToWin}
-                        </p>                    
-                    </div>                
-                </div>                
-                <div id="state_result_container">                    
-                    <div id="state_result">                        
-                        <h3>STATE RESULTS</h3>                        
-                        <p>Click on a state to view detailed results (once returns for that state arrive).</p>                    
-                    </div>                
-                </div>            
-            </div>        
-        </div>        
-        <div id="map_footer">        
-            <button id="final_result_button">Go to Final Results</button>        
-        </div>        
-        <div class="overlay" id="election_night_overlay"></div>        
-        <div class="overlay_window" id="election_night_window">            
-            <div class="overlay_window_content" id="election_night_content">            
-                <h3>Advisor Feedback</h3>            
-                <img src="${s.fields.advisor_url}" width="208" height="128"/>            
-                <p>${e.ElectionPopup}</p>            
-            </div>            
-            <div class="overlay_buttons" id="election_night_buttons">            
-                <button id="ok_button">OK</button><br>            
-            </div>        
+    <div class="game_header">${corrr}</div>
+    <div id="main_content_area">
+      <div id="map_container"></div>
+      <div id="menu_container">
+        <div id="overall_result_container">
+          <div id="overall_result">
+            <h3>${isGeneral ? 'ELECTORAL VOTES' : 'DELEGATES'}</h3>
+            <ul>${i}</ul>
+            <p>
+              0% complete
+              ${evsToWin}
+            </p>
+          </div>
         </div>
-    `);
+        <div id="state_result_container">
+          <div id="state_result">
+            <h3>STATE RESULTS</h3>
+            <p>Click on a state to view detailed results (once returns for that state arrive).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="map_footer">
+      <button id="final_result_button">${footerText}</button>
+    </div>
+      <div class="overlay" id="election_night_overlay"></div>
+      <div class="overlay_window" id="election_night_window">
+        <div class="overlay_window_content" id="election_night_content">
+          <h3>Advisor Feedback</h3>
+          <img src="${s.advisor_url}" width="208" height="128"/>
+          <p>${isGeneral ? e.ElectionPopup : 'One of many election nights has arrived. Winning the delegates in these races will be vital to your primary victory.'}</p>
+        </div>
+      <div class="overlay_buttons" id="election_night_buttons">
+        <button id="ok_button">OK</button><br>
+      </div>
+    </div>
+  `);
   const lTemp = (() => {
     const t = Object.fromEntries(
-      stateJson.map(
+      activeStates.map(
         ({ fields: f }) => [f.abbr, { fill: globalParam.default_map_color_hex, "fill-opacity": e.stateOpacity }],
       ),
     );
@@ -1816,10 +1623,15 @@ function electionNight() {
     };
   })();
   const finalResListener = () => {
-    clearTimeout(results_timeout);
+    clearTimeout(window.results_timeout);
     $("#map_footer").html("<i>Processing Results, wait one moment...</i>");
-    handleFinalResults(500);
-    m();
+    if (isGeneral) {
+      handleFinalResults(500);
+      m();
+    } else {
+      e.question_number++;
+      nextQuestion();
+    }
   };
   $("#map_container").usmap(lTemp);
   $("#final_result_button").click(finalResListener);
@@ -1833,22 +1645,23 @@ function electionNight() {
   const overallRes = e.final_overall_results;
 
   e.final_state_results.forEach((f) => {
+    const stateObj = stateMap.get(String(f.state));
     f.result_time = marginTime(
       f.result,
-      stateJson.find((g) => g.pk === f.state).fields.poll_closing_time
+      stateObj.poll_closing_time,
     );
   });
 
   $("#ok_button").click(() => {
     removeElectionNightWindows();
     window.results_timeout = setTimeout(() => {
-      (function t(i) {
+      (function loop(time, step) { // general: 10, primary: 120
         let prevMax = 0;
         overallRes.forEach((f) => {
           if (f.electoral_votes > prevMax) prevMax = f.electoral_votes;
         });
 
-        const calledStates = handleFinalResults(i);
+        const calledStates = handleFinalResults(time);
 
         const totalVotes = overallRes.reduce((sum, f) => sum + f.popular_votes, 0);
 
@@ -1860,36 +1673,35 @@ function electionNight() {
         const candList = generateCandidateList(
           sortedCands,
           overallRes,
+          e.final_state_results,
           totalVotes,
-          allStatesHaveEVs,
+          someStatesHaveEVs,
         );
 
-        let h = Math.floor((i / 480) * 100);
+        let h = Math.floor((time / 480) * 100);
 
-        const p = mapResultColor(i);
+        const p = mapResultColor(time);
         updateUsMapStyles(p);
 
-        $("#overall_result ul").html(candList);
-        $("#overall_result p").html(`${h}% complete ${evsToWin}`);
+        $("#overall_result > ul").html(candList);
+        $("#overall_result > p").html(`${h}% complete ${evsToWin}`);
 
-        if (prevMax < winningEV && currentMax >= winningEV) {
+        if (isGeneral && prevMax < winningEV && currentMax >= winningEV) {
           showOutcomePopup(e.election_id, overallRes);
           $("#ok_button").click(() => {
             removeElectionNightWindows();
-            window.results_timeout = setTimeout(() => t(i), 2e3);
+            window.results_timeout = setTimeout(() => loop(time + step, step), 2e3);
           });
           $("#overlay_result_button").click(() => {
             removeElectionNightWindows();
             finalResListener();
           });
-        } else if (i >= 480 || calledStates >= stateJson.length) {
+        } else if (time >= 480 || calledStates >= activeStates.length) {
           h = 100;
-          $("#overall_result h3").text("ELECTION TALLY");
-          $("#overall_result ul").html(candList);
-          $("#overall_result p").html(`${h}% complete ${evsToWin}`);
-        } else window.results_timeout = setTimeout(() => t(i), 2e3);
-        i += 10;
-      }(0));
+          $("#overall_result > ul").html(candList);
+          $("#overall_result > p").html(`${h}% complete ${evsToWin}`);
+        } else window.results_timeout = setTimeout(() => loop(time + step, step), 2e3);
+      }(0, timestep));
     }, 2e3);
   });
 }
@@ -1938,7 +1750,7 @@ function nextQuestion() {
 
   // in some mods, the map cache breaks election night after answering the final question
   // we should skip it in that case.
-  if (e.question_number < e.global_parameter_json[0].fields.question_count - 1) {
+  if (e.question_number < PROPS.PARAMS.question_count - 1) {
     setTimeout(() => mapCache(false), 0); // starts new thread for poll map preloading
   }
 
@@ -1951,7 +1763,7 @@ function nextQuestion() {
     }
   }
 
-  if (e.question_number === Number(e.global_parameter_json[0].fields.question_count)) {
+  if (e.question_number === Number(PROPS.PARAMS.question_count)) {
     e.final_state_results = A(1);
     electionNight();
     if (e.primary) {
@@ -1959,7 +1771,7 @@ function nextQuestion() {
       m();
     }
   } else if (e.question_number % 2 === 0) {
-    const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id)).fields;
+    const election = PROPS.ELECTIONS.get(String(e.election_id));
     if (election.has_visits) {
       $("#game_window").html(`
                 <div class="game_header">${corrr}</div>
@@ -1997,8 +1809,8 @@ function nextQuestion() {
 
 function answerEffects(t) {
   // eslint-disable-next-line prefer-const
-  let stopSpacebar = false;
-  if (stopSpacebar && $("#visit_overlay")[0]) {
+  window.stopSpacebar = false;
+  if (window.stopSpacebar && $("#visit_overlay")[0]) {
     debugConsole("Visit overlay is showing, not applying answer effects");
     return;
   }
@@ -2006,27 +1818,23 @@ function answerEffects(t) {
   const numT = Number(t);
   const numCand = Number(e.candidate_id);
 
-  const tToUse = typeof t === 'string' && Number.isNaN(numT) ? t : numT;
+  const tToUse = t != null && Number.isNaN(numT) ? t : numT;
 
   debugConsole(`Applying answer effects for answer pk ${t}`);
   e.player_answers.push(tToUse);
-  // const electIndex = findFromPK(e.election_json, e.election_id);
-  const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+  const election = PROPS.ELECTIONS.get(String(e.election_id));
   if (e.answer_feedback_flg === 1) {
-    const hasFeedback = e.answer_feedback_json.some(
-      (f) => String(f.fields.answer) === String(tToUse) && String(f.fields.candidate) === String(numCand),
-    );
-    if (hasFeedback) {
-      const feedback = e.answer_feedback_json.find(
-        (f) => String(f.fields.answer) === String(tToUse) && String(f.fields.candidate) === String(numCand),
-      );
+    const feedback = e.answer_feedback_json.find(
+      (f) => stringsEqual(f.fields.answer, tToUse) && stringsEqual(f.fields.candidate, numCand),
+    )?.fields;
+    if (feedback) {
       const n = `
                 <div class="overlay" id="visit_overlay"></div>
                 <div class="overlay_window" id="visit_window">
                     <div class="overlay_window_content" id="visit_content">
                         <h3>Advisor Feedback</h3>
-                        <img src="${election.fields.advisor_url}" width="208" height="128"/>
-                        <p>${substitutePlaceholders(feedback.fields.answer_feedback)}</p>
+                        <img src="${election.advisor_url}" width="208" height="128"/>
+                        <p>${substitutePlaceholders(feedback.answer_feedback)}</p>
                     </div>
                     <div class="overlay_buttons" id="visit_buttons">
                         <button id="ok_button">OK</button>
@@ -2040,18 +1848,18 @@ function answerEffects(t) {
         e.answer_feedback_flg = 0;
         nextQuestion();
       });
-    } else if (!hasFeedback) nextQuestion();
+    } else if (!feedback) nextQuestion();
   } else nextQuestion();
 }
 
 function advisorFeedback() {
-  const i = findFromPK(e.election_json, e.election_id);
+  const election = PROPS.ELECTIONS.get(String(e.election_id));
   const advDiv = `
         <div class="overlay" id="feedback_overlay"></div>
         <div class="overlay_window" id="feedback_window">
             <div class="overlay_window_content" id="feedback_content">
                 <h3>Advisor Feedback</h3>
-                <img src="${e.election_json[i].fields.advisor_url}" width="208" height="128"/>
+                <img src="${election.advisor_url}" width="208" height="128"/>
                 <p>${e.SelAnsContText}</p>
             </div>
             <div id="visit_buttons">
@@ -2065,24 +1873,25 @@ function advisorFeedback() {
 }
 
 function descHTML(descWindow, id) {
-  const candObj = e.candidate_json.find((f) => Number(f.pk) === Number(id));
+  const cands = PROPS.CANDIDATES;
+  const candObj = cands.get(String(id));
   const isRM = descWindow === "#running_mate_description_window";
   const idx = isRM ? "running_mate_summary" : "candidate_summary";
   const desc = isRM ? "description_as_running_mate" : "description";
   const imageId = isRM ? "running_mate_image" : "candidate_image";
 
   $(descWindow).html(`
-        <div class="person_image" id="${imageId}">
-            <img src="${candObj.fields.image_url}" width="210" height="250"/>
-        </div>
-        <div class="person_summary" id="${idx}">
-            <ul>
-                <li>Name: ${candObj.fields.first_name} ${candObj.fields.last_name}</li>
-                <li>${e.PartyText} ${candObj.fields.party}</li>
-                <li>${e.HomeStateText} ${candObj.fields.state}</li>
-            </ul>
-        ${candObj.fields[desc]}
-        </div>`.trim());
+    <div class="person_image" id="${imageId}">
+      <img src="${candObj.image_url}" width="210" height="250"/>
+    </div>
+    <div class="person_summary" id="${idx}">
+      <ul>
+        <li>Name: ${candObj.first_name} ${candObj.last_name}</li>
+         <li>${e.PartyText} ${candObj.party}</li>
+         <li>${e.HomeStateText} ${candObj.state}</li>
+      </ul>
+      ${candObj[desc]}
+    </div>`.trim());
 }
 
 function a(e) {
@@ -2124,6 +1933,7 @@ function realityCheck(cand, running_mate) {
 // Important for mods because it will load the base scenario code 2 for the mod before loading the custom code 2.
 // That way you have less boilerplate
 function election_HTML(id, cand, running_mate) {
+  const cands = PROPS.CANDIDATES;
   const numId = Number(id);
   if (numId !== 16) {
     if (modded) {
@@ -2153,9 +1963,9 @@ function election_HTML(id, cand, running_mate) {
       return baseScenarioDict[yearbit];
     }
     // If it's not modded then it must bea real base scenario so just return the real info
-    const yearNM = campaignTrail_temp.election_json.find((f) => f.pk === Number(id)).fields.year;
-    const candNM = campaignTrail_temp.candidate_json.find((f) => f.pk === Number(cand)).fields.last_name;
-    const runNM = campaignTrail_temp.candidate_json.find((f) => f.pk === Number(running_mate)).fields.last_name;
+    const yearNM = PROPS.ELECTIONS.get(String(id)).year;
+    const candNM = cands.get(String(cand)).last_name;
+    const runNM = cands.get(String(running_mate)).last_name;
     return `${yearNM}_${candNM}_${runNM}.html`;
   }
   if (numId === 16) {
@@ -2164,13 +1974,7 @@ function election_HTML(id, cand, running_mate) {
       return baseScenarioDict["2016a"];
     }
     return (
-      `2016a_${campaignTrail_temp.candidate_json[
-        findFromPK(campaignTrail_temp.candidate_json, cand)
-      ].fields.last_name
-      }_${campaignTrail_temp.candidate_json[
-        findFromPK(campaignTrail_temp.candidate_json, running_mate)
-      ].fields.last_name
-      }.html`
+      `2016a_${cands.get(String(cand)).fields.last_name}_${cands.get(String(running_mate)).fields.last_name}.html`
     );
   }
 
@@ -2181,13 +1985,13 @@ function election_HTML(id, cand, running_mate) {
 function candSel(a) {
   a.preventDefault();
 
-  const numElect = Number(e.election_id) ?? Number(e.election_json[0].pk);
+  const stringElect = String(e.election_id ?? e.election_json[0].pk);
   const n = e.candidate_json
-    .filter((f) => Number(f.fields.election) === numElect && f.fields.is_active)
+    .filter((f) => stringsEqual(f.fields.election, stringElect) && f.fields.is_active)
     .map((f) => `<option value="${f.pk}">${f.fields.first_name} ${f.fields.last_name}</option>`)
     .join("");
 
-  if (!modded) e.shining = e.shining_info.some((f) => f.pk === numElect);
+  if (!modded) e.shining = e.shining_info.some((f) => f.pk === stringElect);
 
   document.querySelector("#game_window").innerHTML = `
         <div class="game_header">${corrr}</div>
@@ -2224,8 +2028,9 @@ function vpSelect(t) {
   const n = e.running_mate_json
     .filter((f) => f.fields.candidate === e.candidate_id)
     .map((f) => {
-      const runObj = e.candidate_json.find((g) => g.pk === Number(f.fields.running_mate));
-      return `<option value="${runObj.pk}">${runObj.fields.first_name} ${runObj.fields.last_name}</option>`;
+      const mate = f.fields.running_mate;
+      const runObj = PROPS.CANDIDATES.get(String(mate));
+      return `<option value="${mate}">${runObj.first_name} ${runObj.last_name}</option>`;
     })
     .join("");
 
@@ -2288,13 +2093,13 @@ function renderOptions(electionId, candId, runId) {
                 <p>
                     <h3>Please choose your difficulty level:</h3>
                     <select name="difficulty_level_id" id="difficulty_level_id"> ${difficultyStr} </select>
-                </p>            
+                </p>
                 </form>
             </div>
             <p id="opponent_selection_id_button_p">
                 <button class="person_button" id="opponent_selection_id_back">Back</button>
                 <button class="person_button" id="opponent_selection_id_button">Continue</button>
-            </p>        
+            </p>
         </div>`.trim();
   const gameTypeId = document.querySelector("#game_type_id");
   const difficultyLevelId = document.querySelector("#difficulty_level_id");
@@ -2335,7 +2140,7 @@ function renderOptions(electionId, candId, runId) {
       const default_init = 50000000;
       const boost = randomNormal(e.candidate_id)
         * default_init
-        * e.global_parameter_json[0].fields.global_variance
+        * PROPS.PARAMS.global_variance
         * 4;
 
       e.shining_data = {
@@ -2412,19 +2217,10 @@ function renderOptions(electionId, candId, runId) {
     ) {
       try {
         $("#game_window").load(aaa, () => {
-          e = campaignTrail_temp;
-          const eArr = e.temp_election_list.findIndex(
-            (a) => a.id === Number(e.election_id),
-          );
-          const candIdx = e.candidate_json.findIndex(
-            (a) => a.pk === Number(e.candidate_id),
-          );
-          const runIdx = e.candidate_json.findIndex(
-            (a) => a.pk === Number(e.running_mate_id),
-          );
-          const year = e.temp_election_list[eArr].display_year;
-          const cand = e.candidate_json[candIdx].fields.last_name;
-          const run = e.candidate_json[runIdx].fields.last_name;
+          const cands = PROPS.CANDIDATES;
+          const year = e.temp_election_list.find((f) => stringsEqual(f.id, e.election_id)).display_year;
+          const cand = cands.get(String(e.candidate_id)).last_name;
+          const run = cands.get(String(e.running_mate_id)).last_name;
 
           const theorId = `${year}_${cand}${run}`;
           // theorId = $("#modSelect")[0].value
@@ -2620,15 +2416,16 @@ function setStatePollText(state, t) {
   // Sort the filteredResults array in descending order by the "percent" property
   const sortedResults = filteredResults.sort((a, b) => b.percent - a.percent);
 
+  const cands = PROPS.CANDIDATES;
+
   // Map the sortedResults array to create a new array of strings, where each
   // string is formatted as "<b>CANDIDATE_NAME</b> - PERCENT%<br>"
   const formattedResults = sortedResults.map(({ candidate, percent }) => {
-    const candidateName = e.candidate_json.find(({ pk }) => pk === candidate)
-      ?.fields.last_name;
+    const candidateName = cands.get(String(candidate))?.last_name;
     if (!doPrimaryMode) {
-      return `<b>${candidateName}</b> - ${Math.floor(100 * percent)}%<br>`;
+      return `<b>${candidateName}</b> - ${Math.round(100 * percent)}%<br>`;
     }
-    return `<b>${candidateName}</b> - ${(100 * percent).toFixed(2)}%<br>`;
+    return `<b>${candidateName}</b> - ${(100 * percent).toFixed(1)}%<br>`;
   });
 
   const _ = formattedResults.join("");
@@ -2636,13 +2433,13 @@ function setStatePollText(state, t) {
 
   // $("#overall_result").html(c);
   document.getElementById("overall_result").innerHTML = `
-        <h3>${!doPrimaryMode && !e.primary || e.primary && !doPrimaryMode ? "ESTIMATED SUPPORT" : "PRIMARY/CAUCUS RESULT"}</h3>
+        <h3>${((!doPrimaryMode && !e.primary) || (e.primary && !doPrimaryMode)) ? "ESTIMATED SUPPORT" : "PRIMARY/CAUCUS RESULT"}</h3>
         <ul id='switchingEst'>${_}</ul>
         <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button>
         <button onclick='evest()' id='ev_est'>${!doPrimaryMode && !e.primary ? "Electoral Vote Estimate" : "Current Delegate Count"}</button>
     `;
   let u = "";
-  const globalParam = e.global_parameter_json?.[0]?.fields || {};
+  const globalParam = PROPS.PARAMS;
 
   e.state_issue_score_json.forEach(({ fields }) => {
     if (fields.state === state.pk) {
@@ -2827,9 +2624,10 @@ function rFunc(t, i) {
   const latestRes = getLatestRes(t);
   const latestCandidates = latestRes[0];
   const evArray = latestCandidates.map((c) => c.evvs || 0);
-  const cachedVV = latestCandidates.map(
-    (c) => `<b>${c.fields.last_name}</b> - ${(c.pvp * 100).toFixed(1)}%<br>`,
-  ).join("");
+  const cachedVV = latestCandidates.map((c) => {
+    const hasNoVotes = c.popvs === 0 && c.evvs === 0;
+    return hasNoVotes ? '' : `<b>${c.fields.last_name}</b> - ${(c.pvp * 100).toFixed(1)}%<br>`
+  }).join("");
   const cachedNNN = latestCandidates.reduce((acc, c, idx) => {
     if (evArray[idx] > 0) {
       acc += `<b>${c.fields.last_name}</b> - ${evArray[idx]}<br>`;
@@ -2851,7 +2649,7 @@ function rFunc(t, i) {
     }
   };
 
-  const electionIndex = findFromPK(e.election_json, e.election_id);
+  const election = PROPS.ELECTIONS.get(String(e.election_id));
 
   let config;
   if (i === 0) {
@@ -2872,23 +2670,24 @@ function rFunc(t, i) {
       click(_evt, data) {
         for (const state of e.states_json) {
           if (state.fields.abbr === data.name) {
-            const overlayHtml = `<div class="overlay" id="visit_overlay"></div>
-                             <div class="overlay_window" id="visit_window">
-                                <div class="overlay_window_content" id="visit_content">
-                                    <h3>Advisor Feedback</h3>
-                                    <img src="${e.election_json[electionIndex].fields.advisor_url}" width="208" height="128"/>
-                                    <p>You have chosen to visit ${state.fields.name} -- is this correct?</p>
-                                </div>
-                                <div class="overlay_buttons" id="visit_buttons">
-                                    <button id="confirm_visit_button">YES</button><br>
-                                    <button id="no_visit_button">NO</button>
-                                </div>
-                             </div>`;
+            const overlayHtml = `
+              <div class="overlay" id="visit_overlay"></div>
+              <div class="overlay_window" id="visit_window">
+                <div class="overlay_window_content" id="visit_content">
+                  <h3>Advisor Feedback</h3>
+                  <img src="${election.advisor_url}" width="208" height="128"/>
+                  <p>You have chosen to visit ${state.fields.name} -- is this correct?</p>
+                </div>
+                <div class="overlay_buttons" id="visit_buttons">
+                    <button id="confirm_visit_button">YES</button><br>
+                    <button id="no_visit_button">NO</button>
+                </div>
+              </div>
+            `;
             $("#game_window").append(overlayHtml);
             $("#confirm_visit_button").click(() => visitState(state, questionHTML, t));
             $("#no_visit_button").click(() => {
-              $("#visit_overlay").remove();
-              $("#visit_window").remove();
+              $("#visit_overlay, #visit_window").remove();
             });
             break;
           }
@@ -2902,17 +2701,13 @@ function rFunc(t, i) {
 
 /**
  * Dictates how long it takes until the results in a particular state are called
- * @param results The parameter used for this is e.final_state_results[t].result
- * @param time The parameter used for this is e.states_json[i].fields.poll_closing_time
+ * @param {Array<{votes: number}>} results The election results in the state
+ * @param {number} time The time at which the state's polls close
  * @returns {number} Time at which the state's results are called
  */
 function marginTime(results, time) {
   results.sort((a, b) => b.votes - a.votes);
-  const voteMargin = (
-    results[0].votes - results[1].votes
-  ) / (
-      results[0].votes + results[1].votes
-    );
+  const voteMargin = (results[0].votes - results[1].votes) / (results[0].votes + results[1].votes);
   if (voteMargin < 0.0025) return 480;
   if (voteMargin < 0.005) return 460;
   if (voteMargin < 0.01) return time > 200 ? 440 : time + 240;
@@ -2932,17 +2727,18 @@ function marginTime(results, time) {
 }
 
 function mapResultColor(time) {
+  const cands = PROPS.CANDIDATES;
   const stateColor = {};
   e.final_state_results.forEach((f) => {
-    const s = e.candidate_json.find((g) => g.pk === f.result[0].candidate);
+    const s = cands.get(String(f.result[0].candidate));
     if (f.result_time <= time) {
       stateColor[f.abbr] = {
-        fill: s.fields.color_hex,
+        fill: s.color_hex,
         'fill-opacity': e.stateOpacity,
       };
     } else {
       stateColor[f.abbr] = {
-        fill: campaignTrail_temp.global_parameter_json[0].fields.default_map_color_hex,
+        fill: PROPS.PARAMS.default_map_color_hex,
         'fill-opacity': e.stateOpacity,
       };
     }
@@ -2971,24 +2767,24 @@ function mapResultColor(time) {
         .slice(0, 4)
         .filter((f) => f.percent > 0)
         .map((f) => {
-          const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
+          const candObj = cands.get(String(f.candidate));
           if (!candObj) return "";
           return `
-                        <li>
-                            <span style="color:${candObj.fields.color_hex}; background-color: ${candObj.fields.color_hex}">--</span> 
-                            ${candObj.fields.last_name}: ${(100 * f.percent).toFixed(1)}%
-                        </li>
-                        `;
+            <li>
+              <span style="color:${candObj.color_hex}; background-color: ${candObj.color_hex}">--</span>
+              ${candObj.last_name}: ${(100 * f.percent).toFixed(1)}%
+            </li>
+          `;
         }).join("");
       const evField = e.primary ? "Delegates:" : "Electoral Votes:";
       const stateHasEVs = stateObj.fields.electoral_votes > 0;
       const returnStr = `
-                <h3>STATE RESULTS</h3>
-                <p>${stateObj.fields.name}</p>
-                <p>${!stateHasEVs ? "" : `${evField} ${stateObj.fields.electoral_votes}`}
-                    <ul>${resultHtml}</ul>
-                </p>
-            `;
+        <h3>STATE RESULTS</h3>
+        <p>${stateObj.fields.name}</p>
+        <p>${!stateHasEVs ? "" : `${evField} ${stateObj.fields.electoral_votes}`}
+          <ul>${resultHtml}</ul>
+        </p>
+      `;
       stateResElement.html(returnStr);
     },
   };
@@ -2999,7 +2795,7 @@ function m() {
     const t = e.final_state_results;
     const filteredCandidates = e.candidate_json.filter(
       (candidate) => e.opponents_list.includes(candidate.pk)
-        || candidate.pk === e.candidate_id,
+        || stringsEqual(candidate.pk, e.candidate_id),
     );
 
     const total_v = e.final_state_results
@@ -3165,32 +2961,30 @@ function m() {
 }
 
 function overallResultsHtml() {
-  const candObj = e.candidate_json.find((f) => f.pk === e.candidate_id);
-  const electJson = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+  const cands = PROPS.CANDIDATES;
+  const candObj = cands.get(String(e.candidate_id));
+  const electJson = PROPS.ELECTIONS.get(String(e.election_id));
   const overallResults = e.final_overall_results;
-  const winningNum = electJson.fields.winning_electoral_vote_number;
+  const winningNum = electJson.winning_electoral_vote_number;
   let s;
   if (overallResults[0].candidate === e.candidate_id
     && overallResults[0].electoral_votes >= winningNum) {
-    s = candObj.fields.electoral_victory_message;
+    s = candObj.electoral_victory_message;
     e.final_outcome = "win";
   } else if (overallResults[0].electoral_votes >= winningNum) {
-    s = candObj.fields.electoral_loss_message;
+    s = candObj.electoral_loss_message;
     e.final_outcome = "loss";
   } else {
-    s = candObj.fields.no_electoral_majority_message;
+    s = candObj.no_electoral_majority_message;
     e.final_outcome = "tie";
   }
-  const n = e.candidate_json.find((f) => f.pk === overallResults[0].candidate);
-  /* let l;
-  if (overallResults[0].electoral_votes >= winningNum) l = n.fields.image_url;
-  else l = t.fields.no_electoral_majority_image; */
-  const l = (overallResults[0].electoral_votes >= winningNum && n?.fields?.image_url)
-    ? n.fields.image_url
-    : electJson.fields.no_electoral_majority_image;
+  const n = cands.get(String(overallResults[0].candidate));
+  const l = (overallResults[0].electoral_votes >= winningNum && n?.image_url)
+    ? n.image_url
+    : electJson.no_electoral_majority_image;
   const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
 
-  if (Number(important_info.indexOf("<html>")) === -1 && important_info !== "") {
+  if (important_info.indexOf("<html>") === -1 && important_info !== "") {
     campaignTrail_temp.multiple_endings = true;
   }
   const candResults = e.final_overall_results.find((f) => f.candidate === e.candidate_id);
@@ -3200,8 +2994,8 @@ function overallResultsHtml() {
     candResults.popular_votes,
   ]; // format: electoral vote count, popular vote proportion, popular vote vote count
 
-  const pickedEnding = endingPicker(e.final_outcome, totalPV, e.final_overall_results, quickstats);
-  getResults(e.final_outcome, totalPV, e.final_overall_results, quickstats);
+  const pickedEnding = endingPicker(e.final_outcome, totalPV, e.final_overall_results, window.quickstats);
+  getResults(e.final_outcome, totalPV, e.final_overall_results, window.quickstats);
 
   if (campaignTrail_temp.multiple_endings) {
     if (pickedEnding) {
@@ -3219,15 +3013,15 @@ function overallResultsHtml() {
   const noElectoralVotes = e.final_overall_results.every((f) => !f.electoral_votes);
 
   const r = e.final_overall_results
-    .filter((f) => f.candidate !== -1)
+    .filter(Boolean)
     .map((f) => {
-      const candObj2 = e.candidate_json.find((g) => g.pk === f.candidate);
-      if (!candObj2 || !candObj2.fields) {
+      const candObj2 = cands.get(String(f.candidate));
+      if (!candObj2) {
         // if candidate not present in candidate_json, skip row to avoid crash
         return "";
       }
-      const colorHex = candObj2.fields.color_hex;
-      const fName = `${candObj2.fields.first_name} ${candObj2.fields.last_name}`;
+      const colorHex = candObj2.color_hex;
+      const fName = `${candObj2.first_name} ${candObj2.last_name}`;
       if (!f.popular_votes) return "";
       return `
             <tr>
@@ -3245,7 +3039,7 @@ function overallResultsHtml() {
   const c = e.game_results_url !== "None"
     ? `
             <h4>
-                Final Results: 
+                Final Results:
                 <a target="_blank" href="${e.game_results_url}">Game Link</a> (use link to view this result on its own page)
             </h4>
         `.trim()
@@ -3314,8 +3108,8 @@ function overallResultsHtml() {
     });
   }
 
-  const electYear = electJson.fields.year;
-  const candFName = `${candObj.fields.first_name} ${candObj.fields.last_name}`;
+  const electYear = electJson.year;
+  const candFName = `${candObj.first_name} ${candObj.last_name}`;
   let p;
 
   if (e.final_outcome === "win") p = `I won the ${electYear} election as ${candFName}. How would you do?`;
@@ -3341,24 +3135,25 @@ function overallResultsHtml() {
 }
 
 function getSortedCands() {
+  const cands = PROPS.CANDIDATES;
   const candsArr = [];
-  const mainCand = e.candidate_json.find((f) => f.pk === Number(e.candidate_id));
-  if (mainCand && mainCand.fields) {
+  const mainCand = cands.get(String(e.candidate_id));
+  if (mainCand) {
     candsArr.push({
       candidate: e.candidate_id,
-      priority: mainCand.fields.priority,
-      color: mainCand.fields.color_hex,
-      last_name: mainCand.fields.last_name,
+      priority: mainCand.priority,
+      color: mainCand.color_hex,
+      last_name: mainCand.last_name,
     });
   }
   e.opponents_list.forEach((f) => {
-    const opps = e.candidate_json.find((g) => g.pk === Number(f));
-    if (opps && opps.fields) {
+    const opps = cands.get(String(f));
+    if (opps) {
       candsArr.push({
         candidate: f,
-        priority: opps.fields.priority,
-        color: opps.fields.color_hex,
-        last_name: opps.fields.last_name,
+        priority: opps.priority,
+        color: opps.color_hex,
+        last_name: opps.last_name,
       });
     }
   });
@@ -3369,7 +3164,7 @@ function getSortedCands() {
 function finalMapScreenHtml() {
   const coloredResults = mapResultColor(500);
   const candsArray = getSortedCands();
-  const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+  const election = PROPS.ELECTIONS.get(String(e.election_id));
   const totalPopularVotes = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
   const noElectoralVotes = e.final_overall_results.every((f) => !f.electoral_votes);
   const candResultText = candsArray.map((f) => {
@@ -3380,10 +3175,10 @@ function finalMapScreenHtml() {
       ? ((popularVotes / totalPopularVotes) * 100).toFixed(1)
       : "0.0";
     return !popularVotes && !electoralVotes ? "" : `
-            <li>
-                <span style="color:${f.color}; background-color: ${f.color}">--</span> ${f.last_name}: ${noElectoralVotes ? "" : `${formatNumbers(electoralVotes)} / `}${popularVotePercent}%
-            </li>
-        `;
+      <li>
+        <span style="color:${f.color}; background-color: ${f.color}">--</span> ${f.last_name}: ${noElectoralVotes ? "" : `${formatNumbers(electoralVotes)} / `}${popularVotePercent}%
+      </li>
+    `;
   }).join("");
   const resHtml = `
         <div class="game_header">${corrr}</div>
@@ -3392,9 +3187,9 @@ function finalMapScreenHtml() {
             <div id="menu_container">
                 <div id="overall_result_container">
                     <div id="overall_result">
-                        <h3>ELECTORAL VOTES</h3>
+                        <h3>${e.primary ? 'DELEGATES' : 'ELECTORAL VOTES'}</h3>
                         <ul>${candResultText}</ul>
-                        ${noElectoralVotes ? "" : `<p>${formatNumbers(election.fields.winning_electoral_vote_number)} to win</p>`}
+                        ${noElectoralVotes ? "" : `<p>${formatNumbers(election.winning_electoral_vote_number)} to win</p>`}
                     </div>
                 </div>
                 <div id="state_result_container">
@@ -3450,8 +3245,9 @@ function stateResultsHtml() {
   sortByProp(statePVMargin, "pct_margin");
   const l = [];
   const o = [];
+  const cands = PROPS.CANDIDATES;
   e.final_overall_results.forEach((f) => {
-    const candObj = e.candidate_json.find((c) => c.pk === f.candidate);
+    const candObj = cands.get(String(f.candidate));
     const d = e.final_state_results
       .filter((r) => r.result?.[0]?.candidate === f.candidate)
       .map((r) => {
@@ -3480,15 +3276,15 @@ function stateResultsHtml() {
         }))
       .filter(Boolean)
       .sort((a, b) => b.vote_pct - a.vote_pct);
-    if (candObj && candObj.fields) {
+    if (candObj) {
       l.push({
         candidate: f.candidate,
-        last_name: candObj.fields.last_name,
+        last_name: candObj.last_name,
         values: d,
       });
       o.push({
         candidate: f.candidate,
-        last_name: candObj.fields.last_name,
+        last_name: candObj.last_name,
         values: c,
       });
     }
@@ -3577,17 +3373,17 @@ function stateResultsHtml() {
 function overallDetailsHtml() {
   const totalPV = e.final_overall_results.reduce((sum, f) => sum + f.popular_votes, 0);
   const noElectoralVotes = e.final_overall_results.every((f) => !f.electoral_votes);
+  const cands = PROPS.CANDIDATES;
 
   const a = e.final_overall_results.map((f) => {
-    const candObj = e.candidate_json.find((g) => g.pk === f.candidate);
-    if (!candObj || !candObj.fields) return ""; // skip missing candidates
-    const colorHex = candObj.fields.color_hex || '#888888';
-    if (!f.popular_votes) return "";
-    return `
+    const candObj = cands.get(String(f.candidate));
+    if (!candObj) return ""; // skip missing candidates
+    const colorHex = candObj.color_hex || '#888888';
+    return !f.popular_votes ? "" : `
       <tr>
         <td style="text-align: left;">
           <span style="background-color: ${colorHex}; color: ${colorHex};">----</span>
-          ${candObj.fields.first_name} ${candObj.fields.last_name}
+          ${candObj.first_name} ${candObj.last_name}
         </td>
         ${noElectoralVotes ? "" : `<td>${formatNumbers(f.electoral_votes)}</td>`}
         <td>${formatNumbers(f.popular_votes)}</td>
@@ -3727,63 +3523,63 @@ function overallDetailsHtml() {
 }
 
 function furtherReadingHtml() {
-  const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+  const election = PROPS.ELECTIONS.get(String(e.election_id));
   let contentHTML;
   if (RecReading !== true && modded === true) {
     // Modded and no recommended reading
     contentHTML = `
-        <p>This election has no further reading.</p>
+      <p>This election has no further reading.</p>
     `.trim();
   } else {
     // Has recommended reading (modded or base game)
     contentHTML = `
-        <p>
-            Are you interested in exploring the ${election.fields.year} election further?
-            This page contains some further reading to get you up to speed.
-        </p>
-        <div id="recommended_reading_box">
-            ${election.fields.recommended_reading}
-        </div>
+      <p>
+        Are you interested in exploring the ${election.year} election further?
+        This page contains some further reading to get you up to speed.
+      </p>
+      <div id="recommended_reading_box">
+        ${election.recommended_reading}
+      </div>
     `.trim();
   }
 
   document.getElementById("game_window").innerHTML = `
-        <div class="game_header">${corrr}</div>
-        <div id="main_content_area_reading">
-            <h3 class="results_tab_header">Further Reading</h3>
-            ${contentHTML}
-        </div>
-        <div id="map_footer" style="margin-top:-35px">
-            <button class="final_menu_button" id="overall_results_button">
-                Final Election Results
-            </button>
-            <button class="final_menu_button" id="final_election_map_button">
-                Election Map
-            </button>
-            <button class="final_menu_button" id="state_results_button">
-                Results by State
-            </button>
-            <button class="final_menu_button" id="overall_details_button">
-                Overall Results Details
-            </button>
-            <button class="final_menu_button" id="recommended_reading_button" disabled="disabled">
-                Further Reading
-            </button>
-            <button class="final_menu_button" id="play_again_button">
-                Play Again!
-            </button>
-        </div>
-    `;
+    <div class="game_header">${corrr}</div>
+    <div id="main_content_area_reading">
+      <h3 class="results_tab_header">Further Reading</h3>
+      ${contentHTML}
+    </div>
+    <div id="map_footer" style="margin-top:-35px">
+      <button class="final_menu_button" id="overall_results_button">
+        Final Election Results
+      </button>
+      <button class="final_menu_button" id="final_election_map_button">
+        Election Map
+      </button>
+      <button class="final_menu_button" id="state_results_button">
+        Results by State
+      </button>
+      <button class="final_menu_button" id="overall_details_button">
+        Overall Results Details
+      </button>
+      <button class="final_menu_button" id="recommended_reading_button" disabled="disabled">
+        Further Reading
+      </button>
+      <button class="final_menu_button" id="play_again_button">
+        Play Again!
+      </button>
+    </div>
+  `;
 }
 
 function beginNewGameHtml() {
-  const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+  const election = PROPS.ELECTIONS.get(String(e.election_id));
   $("#game_window").append(`
         <div class="overlay" id="new_game_overlay"></div>
         <div class="overlay_window" id="new_game_window">
             <div class="overlay_window_content" id="election_night_content">
                 <h3>Advisor Feedback</h3>
-                <img src="${election.fields.advisor_url}" width="208" height="128"/>
+                <img src="${election.advisor_url}" width="208" height="128"/>
                 <p>Are you sure you want to begin a new game?</p>
             </div>
             <div class="overlay_buttons" id="new_game_buttons">
@@ -3816,9 +3612,9 @@ function T(t) {
     .map((result) => {
       const noElectoralVotes = (result.result || []).every((f) => !f.electoral_votes);
       const rows = (result.result || []).map((f) => {
-        const candidate = e.candidate_json.find((g) => g.pk === Number(f.candidate));
-        if (!candidate || !candidate.fields) return ""; // skip unknown candidates
-        const fullName = `${candidate.fields.first_name} ${candidate.fields.last_name}`;
+        const candidate = PROPS.CANDIDATES.get(String(f.candidate));
+        if (!candidate) return ""; // skip unknown candidates
+        const fullName = `${candidate.first_name} ${candidate.last_name}`;
         return !f.percent && !f.electoral_votes ? "" : `
                      <tr>
                          <td>${fullName}</td>
@@ -3847,7 +3643,7 @@ function T(t) {
 }
 
 function A(t) {
-  const gp = (e.global_parameter_json && e.global_parameter_json[0] && e.global_parameter_json[0].fields) || {};
+  const gp = PROPS.PARAMS;
   const variance = gp.global_variance;
   const candidateIssueWeight = gp.candidate_issue_weight;
   const runningMateIssueWeight = gp.running_mate_issue_weight;
@@ -4193,42 +3989,42 @@ const gameStart = (a) => {
   }).join("");
 
   e.election_id ??= e.election_json[0].pk;
-  const election = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
+  const election = PROPS.ELECTIONS.get(String(e.election_id));
   document.getElementById("game_window").innerHTML = `
-        <div class="game_header">${corrr}</div>
-        <div class="inner_window_w_desc" id="inner_window_2">
-            <div id="election_year_form">
-                <form name="election_year">
-                    <p>
-                        <h3>${e.SelectText}</h3>
-                        <select name="election_id" id="election_id">${tempOptions}</select>
-                    </p>
-                </form>
-                <div class="election_description_window" id="election_description_window">
-                    <div id="election_image">
-                        <img src="${election.fields.image_url}" width="300" height="160"/>
-                    </div>
-                    <div id="election_summary">${election.fields.summary}</div>
-                </div>
-            </div>
-        <p>
-            <button id="election_id_button">Continue</button>
-        </p>
-        <p id="credits">This scenario was made by ${e.credits}.</p>
-    `;
+    <div class="game_header">${corrr}</div>
+    <div class="inner_window_w_desc" id="inner_window_2">
+      <div id="election_year_form">
+        <form name="election_year">
+          <p>
+            <h3>${e.SelectText}</h3>
+            <select name="election_id" id="election_id">${tempOptions}</select>
+          </p>
+        </form>
+      <div class="election_description_window" id="election_description_window">
+        <div id="election_image">
+          <img src="${election.image_url}" width="300" height="160"/>
+        </div>
+        <div id="election_summary">${election.summary}</div>
+      </div>
+    </div>
+    <p>
+      <button id="election_id_button">Continue</button>
+    </p>
+    <p id="credits">This scenario was made by ${e.credits}.</p>
+  `;
 
   const electionId = document.getElementById("election_id");
   electionId.value = e.election_id;
   electionId.addEventListener("change", () => {
-    const selectedElection = e.election_json.find((f) => Number(f.pk) === Number(electionId.value));
-    e.election_id = selectedElection.pk;
+    e.election_id = Number(electionId.value);
+    const selectedElection = PROPS.ELECTIONS.get(String(e.election_id));
 
     document.getElementById("election_description_window").innerHTML = `
-            <div id="election_image">
-                <img src="${selectedElection.fields.image_url}" width="300" height="160"/>
-            </div>
-            <div id="election_summary">${selectedElection.fields.summary}</div>
-        `;
+      <div id="election_image">
+        <img src="${selectedElection.image_url}" width="300" height="160"/>
+      </div>
+      <div id="election_summary">${selectedElection.summary}</div>
+    `;
   });
 
   document.getElementById("election_id_button").addEventListener("click", candSel);
