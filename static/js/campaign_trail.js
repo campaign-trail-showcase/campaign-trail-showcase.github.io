@@ -1547,7 +1547,7 @@ function electionNight(type = 'general', timestep = 10, states = []) {
   const i = sortedCands.map((f) => {
     const hasNoVotes = e.final_state_results.every(
       (st) => st.result.every(
-        (c) => (c.candidate !== f.candidate) || (c.votes === 0 && c.electoral_votes === 0)
+        (c) => c.candidate !== f.candidate || (c.votes === 0 && c.electoral_votes === 0)
       )
     );
     return hasNoVotes ? '' : `
