@@ -633,71 +633,6 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-const initCustomThemeMenu = () => {
-    // always ensure custom theme button exists if Custom theme is active
-    if (nct_stuff.selectedTheme === "custom") {
-        ensureCustomThemeButton();
-    }
-
-    setupLiveThemePreview();
-    makeDraggable();
-    refreshSavedThemesList();
-};
-
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initCustomThemeMenu);
-} else {
-    initCustomThemeMenu();
-}
-
-const loadSavedThemesFromStorage = () => {
-    const savedThemes = JSON.parse(window.localStorage.getItem("custom_themes") || "{}");
-    nct_stuff.customThemes = savedThemes;
-};
-
-const loadCustomThemeFromStorage = () => {
-    if (nct_stuff.selectedTheme === "custom") {
-        const activeThemeId = window.localStorage.getItem("active_custom_theme_id");
-
-        if (activeThemeId && nct_stuff.customThemes[activeThemeId]) {
-            const theme = nct_stuff.customThemes[activeThemeId];
-            nct_stuff.themes.custom = theme;
-            selectedTheme = theme;
-            updateBannerAndStyling();
-            updateDynamicStyle();
-            if (theme.mod_override) {
-                nct_stuff.custom_override = JSON.parse(JSON.stringify(theme));
-            }
-            return activeThemeId;
-        }
-
-        // load old "custom_theme" just in case
-        const th = window.localStorage.getItem("custom_theme");
-        if (th) {
-            const theme = JSON.parse(th);
-            nct_stuff.themes.custom = theme;
-            selectedTheme = theme;
-            updateBannerAndStyling();
-            updateDynamicStyle();
-            if (theme.mod_override) {
-                nct_stuff.custom_override = JSON.parse(JSON.stringify(theme));
-            }
-            return true;
-        }
-    }
-    return null;
-};
-
-loadSavedThemesFromStorage();
-populateCustomThemesInPicker();
-const activeThemeId = loadCustomThemeFromStorage();
-if (activeThemeId) {
-    const themePicker = document.getElementById("themePicker");
-    if (themePicker) {
-        themePicker.value = activeThemeId;
-    }
-}
-
 // setup color sync between picker and hex input
 const setupColorSync = (colorPickerId, hexInputId, updatePreviewFn) => {
     const colorPicker = document.getElementById(colorPickerId);
@@ -818,3 +753,68 @@ const makeDraggable = () => {
         document.onmousemove = null;
     }
 };
+
+const initCustomThemeMenu = () => {
+    // always ensure custom theme button exists if Custom theme is active
+    if (nct_stuff.selectedTheme === "custom") {
+        ensureCustomThemeButton();
+    }
+
+    setupLiveThemePreview();
+    makeDraggable();
+    refreshSavedThemesList();
+};
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCustomThemeMenu);
+} else {
+    initCustomThemeMenu();
+}
+
+const loadSavedThemesFromStorage = () => {
+    const savedThemes = JSON.parse(window.localStorage.getItem("custom_themes") || "{}");
+    nct_stuff.customThemes = savedThemes;
+};
+
+const loadCustomThemeFromStorage = () => {
+    if (nct_stuff.selectedTheme === "custom") {
+        const activeThemeId = window.localStorage.getItem("active_custom_theme_id");
+
+        if (activeThemeId && nct_stuff.customThemes[activeThemeId]) {
+            const theme = nct_stuff.customThemes[activeThemeId];
+            nct_stuff.themes.custom = theme;
+            selectedTheme = theme;
+            updateBannerAndStyling();
+            updateDynamicStyle();
+            if (theme.mod_override) {
+                nct_stuff.custom_override = JSON.parse(JSON.stringify(theme));
+            }
+            return activeThemeId;
+        }
+
+        // load old "custom_theme" just in case
+        const th = window.localStorage.getItem("custom_theme");
+        if (th) {
+            const theme = JSON.parse(th);
+            nct_stuff.themes.custom = theme;
+            selectedTheme = theme;
+            updateBannerAndStyling();
+            updateDynamicStyle();
+            if (theme.mod_override) {
+                nct_stuff.custom_override = JSON.parse(JSON.stringify(theme));
+            }
+            return true;
+        }
+    }
+    return null;
+};
+
+loadSavedThemesFromStorage();
+populateCustomThemesInPicker();
+const activeThemeId = loadCustomThemeFromStorage();
+if (activeThemeId) {
+    const themePicker = document.getElementById("themePicker");
+    if (themePicker) {
+        themePicker.value = activeThemeId;
+    }
+}
