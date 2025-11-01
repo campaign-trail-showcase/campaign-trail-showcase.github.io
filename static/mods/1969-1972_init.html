@@ -3238,18 +3238,18 @@ function setupMusicPlayer() {
 
   function addAltColorDropDown() {
     var difficultyDiv = document.getElementById("difficulty_level");
-    if (difficultyDiv && !AltColors){
-      var AltColors = document.createElement("form");
-      AltColors.name = "realistic_polls_selection";
+    if (difficultyDiv && !document.getElementById("AltColorsCheckbox")){
+      var altColorsForm = document.createElement("form");
+      altColorsForm.name = "realistic_polls_selection";
       var AltColorsHeader = document.createElement("h3");
       AltColorsHeader.textContent = "⠀⠀Alt. Colors⠀⠀";
-      AltColors.appendChild(AltColorsHeader);
+      altColorsForm.appendChild(AltColorsHeader);
       var AltColorsCheckbox = document.createElement("input");
       AltColorsCheckbox.type = "checkbox";
       AltColorsCheckbox.id = "AltColorsCheckbox";
       AltColorsCheckbox.checked = e.altcolors;
-      AltColors.appendChild(AltColorsCheckbox);
-      difficultyDiv.appendChild(AltColors);
+      altColorsForm.appendChild(AltColorsCheckbox);
+      difficultyDiv.appendChild(altColorsForm);
       difficultyDiv.style.display = "flex";
       difficultyDiv.style.flexDirection = "row";
       difficultyDiv.style.justifyContent = "center"; 
