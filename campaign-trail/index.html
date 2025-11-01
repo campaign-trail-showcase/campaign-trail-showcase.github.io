@@ -251,5 +251,11 @@
   <script src="../static/js/remote.js" defer></script>
   <script src="../static/js/mobileStyle.js" defer></script>
   <script src="../static/js/variableChangeTooltip.js" defer></script>
-  <script>campaignTrail_temp.CTS = true</script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      if (typeof campaignTrail_temp !== 'undefined') {
+        campaignTrail_temp.CTS = true;
+      }
+    });
+  </script>
 </html>
