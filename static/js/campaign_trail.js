@@ -1113,7 +1113,7 @@ const shining_cal = (polling) => {
     && PROPS.ELECTIONS.get(String(e.election_id)).has_visits
   ) {
     const active_opps = e.opponents_list.filter(
-      (f) => PROPS.CANDIDATES.get(String(f)).fields.is_active === 1,
+      (f) => PROPS.CANDIDATES.get(String(f)).is_active === 1,
     );
 
     // calculate closest state for each oppo
