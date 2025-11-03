@@ -1991,7 +1991,7 @@ function candSel(a) {
     .map((f) => `<option value="${f.pk}">${f.fields.first_name} ${f.fields.last_name}</option>`)
     .join("");
 
-  e.shining = e.shining_info.some((f) => stringsEqual(f.pk, stringElect));
+  if (!modded) e.shining = e.shining_info.some((f) => stringsEqual(f.pk, stringElect));
 
   document.querySelector("#game_window").innerHTML = `
         <div class="game_header">${corrr}</div>
