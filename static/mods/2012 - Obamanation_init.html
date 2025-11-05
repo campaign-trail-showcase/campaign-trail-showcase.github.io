@@ -1138,6 +1138,7 @@ function createBanner(url, sibling, isLeft) {
     const wrapper = document.createElement("div");
     wrapper.id = "hidden_wrapper";
     wrapper.style.margin = "1em 0 -1em 0";
+    wrapper.style.position = "relative";
 
     const label = document.createElement("label");
     label.htmlFor = "hidden_checkbox";
