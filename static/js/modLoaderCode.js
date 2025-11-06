@@ -1654,13 +1654,24 @@ async function loadModFromButton(modValue) {
       return;
     }
     
-    executeMod(modData.code1, {
+    const execCtx = {
       campaignTrail_temp,
       window,
       document,
       $,
       jQuery
-    });
+    };
+
+    executeMod(modData.code1, execCtx);
+
+    if (modData.code2 && typeof modData.code2 === "string" && modData.code2.trim().length > 0) {
+      try {
+        executeMod(modData.code2, execCtx);
+      } catch (e) {
+        console.error(`Failed to execute Code 2 for ${modValue}:`, e);
+      }
+    }
+
     diff_mod = true;
     customMod = modValue;
   } else {
