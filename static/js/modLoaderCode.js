@@ -15,6 +15,194 @@ let favoriteMods = new Set();
 
 let onlyFavorites = false;
 let showAllModsLegacy = false;
+
+// IndexedDB setup
+const DB_NAME = "CTSUserMods";
+const DB_VERSION = 1;
+const STORE_NAME = "customMods";
+let db = null;
+let useIndexedDB = true;
+
+// initialize IndexedDB
+async function initDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    
+    request.onerror = () => {
+      console.warn("IndexedDB failed to open, falling back to localStorage");
+      useIndexedDB = false;
+      resolve(null);
+    };
+    
+    request.onsuccess = (event) => {
+      db = event.target.result;
+      useIndexedDB = true;
+      resolve(db);
+    };
+    
+    request.onupgradeneeded = (event) => {
+      const database = event.target.result;
+      if (!database.objectStoreNames.contains(STORE_NAME)) {
+        database.createObjectStore(STORE_NAME, { keyPath: "name" });
+      }
+    };
+  });
+}
+
+// save mod to IndexedDB
+async function saveModToDB(modName, code1, code2) {
+  if (!useIndexedDB || !db) {
+    // fallback to localStorage
+    localStorage.setItem(modName + "_code1", code1);
+    localStorage.setItem(modName + "_code2", code2);
+    return;
+  }
+  
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction([STORE_NAME], "readwrite");
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.put({
+      name: modName,
+      code1: code1,
+      code2: code2
+    });
+    
+    request.onsuccess = () => resolve();
+    request.onerror = () => {
+      console.warn(`Failed to save ${modName} to IndexedDB, using localStorage`);
+      localStorage.setItem(modName + "_code1", code1);
+      localStorage.setItem(modName + "_code2", code2);
+      resolve();
+    };
+  });
+}
+
+// get mod from IndexedDB
+async function getModFromDB(modName) {
+  if (!useIndexedDB || !db) {
+    // fallback to localStorage
+    const code1 = localStorage.getItem(modName + "_code1");
+    const code2 = localStorage.getItem(modName + "_code2");
+    return code1 ? { name: modName, code1, code2 } : null;
+  }
+  
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction([STORE_NAME], "readonly");
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.get(modName);
+    
+    request.onsuccess = () => {
+      if (request.result) {
+        resolve(request.result);
+      } else {
+        // fallback to localStorage
+        const code1 = localStorage.getItem(modName + "_code1");
+        const code2 = localStorage.getItem(modName + "_code2");
+        resolve(code1 ? { name: modName, code1, code2 } : null);
+      }
+    };
+    request.onerror = () => {
+      // fallback to localStorage
+      const code1 = localStorage.getItem(modName + "_code1");
+      const code2 = localStorage.getItem(modName + "_code2");
+      resolve(code1 ? { name: modName, code1, code2 } : null);
+    };
+  });
+}
+
+// delete mod from IndexedDB
+async function deleteModFromDB(modName) {
+  if (!useIndexedDB || !db) {
+    // fallback to localStorage
+    localStorage.removeItem(modName + "_code1");
+    localStorage.removeItem(modName + "_code2");
+    return;
+  }
+  
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction([STORE_NAME], "readwrite");
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.delete(modName);
+    
+    request.onsuccess = () => {
+      // also remove from localStorage as cleanup
+      localStorage.removeItem(modName + "_code1");
+      localStorage.removeItem(modName + "_code2");
+      resolve();
+    };
+    request.onerror = () => {
+      console.warn(`Failed to delete ${modName} from IndexedDB`);
+      localStorage.removeItem(modName + "_code1");
+      localStorage.removeItem(modName + "_code2");
+      resolve();
+    };
+  });
+}
+
+// get all custom mod names from IndexedDB
+async function getAllCustomModNames() {
+  if (!useIndexedDB || !db) {
+    // fallback to localStorage
+    const stored = localStorage.getItem("customMods");
+    return stored ? stored.split(",") : [];
+  }
+  
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction([STORE_NAME], "readonly");
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.getAllKeys();
+    
+    request.onsuccess = () => {
+      resolve(request.result || []);
+    };
+    request.onerror = () => {
+      // Fallback to localStorage
+      const stored = localStorage.getItem("customMods");
+      resolve(stored ? stored.split(",") : []);
+    };
+  });
+}
+
+// save custom mod names list
+async function saveCustomModNames(modNames) {
+  // always keep in localStorage for quick access
+  if (modNames.length === 0) {
+    localStorage.removeItem("customMods");
+  } else {
+    localStorage.setItem("customMods", Array.from(modNames));
+  }
+}
+
+// migrate localStorage mods to IndexedDB
+async function migrateLocalStorageToIndexedDB() {
+  const migrationDone = localStorage.getItem("indexedDBMigrationDone");
+  if (migrationDone === "true") {
+    return; // already migrated
+  }
+  
+  const customModsStr = localStorage.getItem("customMods");
+  if (!customModsStr) {
+    localStorage.setItem("indexedDBMigrationDone", "true");
+    return;
+  }
+  
+  const modNames = customModsStr.split(",");
+  console.log(`Migrating ${modNames.length} mods from localStorage to IndexedDB...`);
+  
+  for (const modName of modNames) {
+    const code1 = localStorage.getItem(modName + "_code1");
+    const code2 = localStorage.getItem(modName + "_code2");
+    
+    if (code1) {
+      await saveModToDB(modName, code1, code2 || "");
+      console.log(`Migrated ${modName} to IndexedDB`);
+    }
+  }
+  
+  localStorage.setItem("indexedDBMigrationDone", "true");
+  console.log("Migration complete!");
+}
+
 try {
   const legacyView = localStorage.getItem("showAllModsLegacy");
   if (legacyView !== null) {
@@ -603,6 +791,12 @@ function createLegacyViewControls() {
 
 
 $(document).ready(async () => {
+  // Initialize IndexedDB first
+  await initDB();
+  
+  // Migrate localStorage mods to IndexedDB
+  await migrateLocalStorageToIndexedDB();
+  
   // show loading indicator while mods load
   const gridEl = document.getElementById("mod-grid");
   if (gridEl) gridEl.innerHTML = `<div id="loading-mods-text" style="text-align:center;margin:20px;">Loading mods...</div>`;
@@ -612,7 +806,10 @@ $(document).ready(async () => {
   favoriteMods = new Set(
     localStorage.getItem("favoriteMods")?.split(",") || [],
   );
-  customMods = new Set(localStorage.getItem("customMods")?.split(",") || []);
+  
+  // Load custom mods list from IndexedDB
+  const customModNames = await getAllCustomModNames();
+  customMods = new Set(customModNames);
 
   const $modSelect = $("#modSelect");
   const originalOptions = $modSelect.find("option").clone();
@@ -730,7 +927,14 @@ $(document).ready(async () => {
   // Set up from custom mods
   let customModsLoaded = [];
   for (const customModName of customMods) {
-    const rawModText = localStorage.getItem(customModName + "_code1");
+    const modData = await getModFromDB(customModName);
+    
+    if (!modData || !modData.code1) {
+      console.warn(`Custom mod ${customModName} not found, skipping`);
+      continue;
+    }
+    
+    const rawModText = modData.code1;
 
     const temp = extractElectionDetails(rawModText, customModName);
 
@@ -975,14 +1179,8 @@ function addCustomModButton() {
 
 function deleteCustomMod(event, modValue) {
   customMods.delete(modValue);
-  localStorage.removeItem(modValue + "_code1");
-  localStorage.removeItem(modValue + "_code2");
-
-  if (customMods.size === 0) {
-    localStorage.removeItem("customMods");
-  } else {
-    localStorage.setItem("customMods", Array.from(customMods));
-  }
+  deleteModFromDB(modValue);
+  saveCustomModNames(customMods);
 
   // remove from the grid
   const modView = document.getElementById(modValue);
@@ -997,7 +1195,7 @@ function deleteCustomMod(event, modValue) {
   updateModViews();
 }
 
-function addCustomMod(code1, code2) {
+async function addCustomMod(code1, code2) {
   const temp = extractElectionDetails(code1, "custom mod being added");
 
   if (!temp) {
@@ -1011,9 +1209,8 @@ function addCustomMod(code1, code2) {
 
   // save/update custom mod
   customMods.add(modName);
-  localStorage.setItem("customMods", Array.from(customMods));
-  localStorage.setItem(modName + "_code1", code1);
-  localStorage.setItem(modName + "_code2", code2);
+  await saveCustomModNames(customMods);
+  await saveModToDB(modName, code1, code2);
 
   // remove old mod if it exists
   const oldModView = document.getElementById(modName);
@@ -1451,8 +1648,13 @@ async function loadModFromButton(modValue) {
   loadingFromModButton = true;
 
   if (customMods.has(modValue)) {
-    const customModCode = localStorage.getItem(modValue + "_code1");
-    executeMod(customModCode, {
+    const modData = await getModFromDB(modValue);
+    if (!modData || !modData.code1) {
+      alert(`Custom mod ${modValue} not found!`);
+      return;
+    }
+    
+    executeMod(modData.code1, {
       campaignTrail_temp,
       window,
       document,
