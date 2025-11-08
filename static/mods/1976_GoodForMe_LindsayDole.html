@@ -1,5 +1,6 @@
 //Code2LindsayDole
 
+$("#game_window")[0].style.backgroundColor = "#b8b8b8"
 const customStyling = document.createElement("style");
 customStyling.innerHTML = `
 #campaign_sign {
@@ -62,6 +63,9 @@ e = campaignTrail_temp
     }
 
 e.cyoa = true
+
+campaignTrail_temp.candidate_image_url = "https://i.imgur.com/WF449Zq.jpeg";
+campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/LTS55j1.jpeg";
 
 // Variables below
 
@@ -5876,7 +5880,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 1002,
             "state": 132,
-            "state_multiplier": 0.86
+            "state_multiplier": 1
         }
     },
     {
@@ -6245,7 +6249,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 1003,
             "state": 102,
-            "state_multiplier": 0.65
+            "state_multiplier": 0.62
         }
     },
     {
@@ -6443,7 +6447,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 1003,
             "state": 124,
-            "state_multiplier": 0.65
+            "state_multiplier": 0.6
         }
     },
     {
@@ -6470,7 +6474,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 1003,
             "state": 127,
-            "state_multiplier": 0.65
+            "state_multiplier": 0.55
         }
     },
     {
@@ -9624,7 +9628,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 120,
             "candidate": 1001,
             "affected_candidate": 1001,
-            "state_multiplier": 0.12
+            "state_multiplier": 0.07
         }
     },
     {
@@ -10364,9 +10368,6 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
-campaignTrail_temp.candidate_image_url = "https://i.imgur.com/WF449Zq.jpeg";
-campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/LTS55j1.jpeg";
-
   const ideologyLabel ={
     "-10": `<span style="color: #ebebeb;">Lindsay is perceived as a<span style="color: #ff0f0f;"> <i><span style="color: #ff0f0f;">Liberal</i></span>. (<span style="color:#ff0f0f;">-10</span>)`,
     "-9": `<span style="color: #ebebeb;">Lindsay is perceived as a<span style="color: #ff0f0f;"> <i><span style="color: #ff0f0f;">Liberal</i></span>. (<span style="color:#ff0f0f;">-9</span>)`,
@@ -10569,31 +10570,8 @@ function toggleSimplePopup() {
 createSimplePopup();
 observeGameStats();
 
-async function handleFooter() {
-    const gameWindow = document.getElementById('game_window');
-    addHeadquarterButton();
-}
-
-let observerRunning = false;
-
-async function handleMutations(mutationsList, observer) {
-    if (observerRunning) return;
-    observerRunning = true;
-    observer.disconnect();
-    addHeadquarterButton();
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-    observerRunning = false;
-}
-
-var element = document.getElementById('controlElement');
-if (!element) {
-    let singleObserver = new MutationObserver(handleMutations);
-    singleObserver.observe(document.documentElement, { childList: true, subtree: true });
-    var controlElement = document.createElement('div');
-    controlElement.style.display = 'none';
-    controlElement.id = 'controlElement';
-    document.body.appendChild(controlElement);
-}
+campaignTrail_temp.candidate_image_url = "https://i.imgur.com/WF449Zq.jpeg";
+campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/LTS55j1.jpeg";
 
 // constructs endings based on header and pages
 construct = (a = 1) => {
@@ -11254,7 +11232,7 @@ e.pages.push(`
 <div style="color: #a6192e; font-weight: bold; font-size: 12px; margin-bottom: 0.5rem; text-transform: uppercase;">Ideas</div>
 <h2 style="font-size: 26px; font-weight: bold;"><span style="background-color: #ffffff;">Donald Trump is not Ronald Reagan</span></h2>
 <div style="background-color: #ffffff; font-family: 'Georgia', serif; color: #000000;">
-<p style="font-size: 14px;"><span style="color: #000000;"><em>by<span style="color: #000000;"> </span><span style="color: #000000;">David Frum</span></em></span></p>
+<p style="font-size: 14px;"><span style="color: #000000;"><em>by<span style="color: #000000;"> </span><span style="color: #000000;">David Frum</span></em></span></p>
 <p>Nostalgia smooths the past and flatters the present. It also supplies lazy analogies. The laziest in 2020: <em>Donald Trump is Ronald Reagan</em>.</p>
 <p>Don’t buy it. The comparison misreads the man, the moment, and the movement. It trades structure for vibes and a governing program for a traveling show.</p>
 <p><strong>The history first.</strong> In 1976, after President John Lindsay alienated much of his party, Ronald Reagan ran outside the Republican tent on the new Conservative Party line. He finished ahead of Lindsay, second to Henry Jackson, and pulled the GOP’s center of gravity to the right. Then he did the patient work that turns protest into power: recruit candidates, cultivate donors, stitch coalitions. When stagflation, crime, and exhaustion finally toppled Democratic dominance, Reagan’s movement had a bench, a program, and a theory of government. He won in 1980 and governed on purpose.</p>
@@ -11262,7 +11240,7 @@ e.pages.push(`
 <p>“But the energy!” Yes—flags, chants, ratings. Energy is not a governing philosophy. Reagan’s coalition rested on three intelligible commitments: deter adversaries and end American retreat; revive growth through deregulation and lower taxes; restore civic confidence by returning to norms and civics. Agree or disagree—you could measure promise against result.</p>
 <p>What is the Trump program beyond Trump? On immigration, maximal rhetoric meets minimal competence. On trade, tariffs tax Americans while leaving competitors unbothered. On fiscal policy, the loudest “populist” champions more cuts for the very top. On institutions, the instinct is corrosion, not renewal. Personnel is policy; chaos is not.</p>
 <p><strong>Reagan rose because conditions allowed a statesman to lead.</strong> First, a party ready to be led: by the mid-1970s, the GOP’s governing wing had lost intellectual steam. Reagan supplied an alternative; Trump offers grievance and improvisation—useful for a news cycle, thin for a governing majority.</p>
-<p><strong>Second, a rival ready to lose.</strong> Henry Jackson’s 1976 victory did not bring stability. Stagflation eroded everything. In 2020—even if the virus in China brings some economic uncertainty—the landscape is different. Trump’s best hope is fragmentation on the other side. That isn’t strategy; it’s roulette.</p>
+<p><strong>Second, a rival ready to lose.</strong> Henry Jackson’s 1976 victory did not bring stability. Stagflation eroded everything. In 2020—even if the virus in China brings some economic uncertainty—the landscape is different. Trump’s best hope is fragmentation on the other side. That isn’t strategy; it’s roulette.</p>
 <p><strong>Third, a movement able to govern.</strong> Reagan arrived with a staffed-up project—think tanks, statehouses, congressional partners. A second Trump act? A short list of loyalists: some indicted, some embittered, some famous only for being famous. A cabinet is not a casting call.</p>
 <p><strong>Character mattered.</strong> Reagan could lose a cycle to win an era. He delegated, prepared, chose, and let competent people execute. He measured his words because he knew their weight. Trump craves spectacle now. The campaign never ends because the campaign is the point. Permanent disruption yields permanent drama. That builds audiences; it does not build a mortgage market, an alliance system, or a public-health response.</p>
 <p><strong>Abroad, the analogy collapses.</strong> Reagan married idealism to prudence: alliance solidarity, defense from strength, arms control that constrained the adversary, a moral argument that eroded Soviet legitimacy. The aim was to widen the free world, not withdraw from it. Trump confuses strength with spectacle—tariff spasms that alienate allies, photo-ops that flatter adversaries, contempt for the professional culture on which statecraft relies. Deterrence is a system, not an instinct.</p>
@@ -11510,15 +11488,6 @@ e.pages.push(`
 }
   return construct(0);
   
-}
-
-HistHexcolour=["#ad0c0c","#4382b3","#d4b611","#278f1e"];
-HistName=["Henry M. Jackson","John Lindsay","Ronald Reagan","Eugene McCarthy"];
-HistEV=[352,115,71,0];
-HistPV=["30,193,982","26,921,081","18,852,707","5,016,763"];
-HistPVP=["37.3%","33.2%","23.3%","6.2%"];
-
-
 // ACHIEVEMENTS
 
 if (quickstats[0]>=270) {
@@ -11549,5 +11518,296 @@ if (quickstats[0]>=270 && economy==0){
 if (aa[0].electoral_votes >= 270 && aa[0].candidate !=1001){
   ctsAchievement("Slipped away");
 }
+  
+}
 
+HistHexcolour=["#ad0c0c","#4382b3","#d4b611","#278f1e"];
+HistName=["Henry M. Jackson","John Lindsay","Ronald Reagan","Eugene McCarthy"];
+vpTableHistorical = {    "⠀Henry M. Jackson" : "Reubin Askew",
+    "⠀John Lindsay" : "Bob Dole",
+    "⠀Ronald Reagan" : "John Wayne",
+    "⠀Eugene McCarthy" : "Phil Ochs",
+}
+HistEV=[352,115,71,0];
+HistPV=["30,193,982","26,921,081","18,852,707","5,016,763"];
+HistPVP=["37.3%","33.2%","23.3%","6.2%"];
+
+
+campaignTrail_temp.jet_data = [{
+    "banner_enabled": true,
+    "banner_data": {
+        "canName": "Lindsay",
+        "runName": "Dole",
+        "canImage": "https://i.imgur.com/WF449Zq.jpeg",
+        "runImage": "https://i.imgur.com/LTS55j1.jpeg"
+    },
+    "nicknames": {
+        "1001": "John Lindsay",
+        "1002": "Henry M. Jackson",
+        "1003": "Ronald Reagan",
+        "8889": "Eugene McCarthy"
+    },
+    "cyoa_enabled": true,
+    "cyoa_data": {
+        "1760977689937": {
+            "answer": 9016,
+            "question": "9026",
+            "id": 1760977689937
+        },
+        "1760977696267": {
+            "answer": "9020",
+            "question": "9026",
+            "id": 1760977696267
+        },
+        "1761125468161": {
+            "answer": "9027",
+            "question": "9044",
+            "id": 1761125468161
+        },
+        "1761125480490": {
+            "answer": "9028",
+            "question": "9044",
+            "id": 1761125480490
+        },
+        "1761125481125": {
+            "answer": "9029",
+            "question": "9044",
+            "id": 1761125481125
+        },
+        "1761140929842": {
+            "answer": "9045",
+            "question": "9067",
+            "id": 1761140929842
+        },
+        "1761140943118": {
+            "answer": "9046",
+            "question": "9067",
+            "id": 1761140943118
+        },
+        "1761140943503": {
+            "answer": "9047",
+            "question": "9067",
+            "id": 1761140943503
+        },
+        "1761140943821": {
+            "answer": "9068",
+            "question": "9112",
+            "id": 1761140943821
+        },
+        "1761140943970": {
+            "answer": "9069",
+            "question": "9112",
+            "id": 1761140943970
+        },
+        "1761140944112": {
+            "answer": "9070",
+            "question": "9112",
+            "id": 1761140944112
+        },
+        "1761140944249": {
+            "answer": "9113",
+            "question": "9139",
+            "id": 1761140944249
+        },
+        "1761145831912": {
+            "answer": "9114",
+            "question": "9139",
+            "id": 1761145831912
+        },
+        "1761145832449": {
+            "answer": "9115",
+            "question": "9139",
+            "id": 1761145832449
+        },
+        "1761145832900": {
+            "answer": "9116",
+            "question": "9139",
+            "id": 1761145832900
+        },
+        "1761145833364": {
+            "answer": "9142",
+            "question": "9140",
+            "id": 1761145833364
+        },
+        "1761145835290": {
+            "answer": "9143",
+            "question": "9140",
+            "id": 1761145835290
+        },
+        "1761149686963": {
+            "answer": "9153",
+            "question": "9141",
+            "id": 1761149686963
+        },
+        "1761149687101": {
+            "answer": "9154",
+            "question": "9141",
+            "id": 1761149687101
+        },
+        "1761149687251": {
+            "answer": "9155",
+            "question": "9141",
+            "id": 1761149687251
+        },
+        "1761167760105": {
+            "answer": "9167",
+            "question": "9171",
+            "id": 1761167760105
+        },
+        "1761205183221": {
+            "answer": "9172",
+            "question": "9184",
+            "id": 1761205183221
+        },
+        "1761205183368": {
+            "answer": "9173",
+            "question": "9184",
+            "id": 1761205183368
+        },
+        "1761205183542": {
+            "answer": "9174",
+            "question": "9184",
+            "id": 1761205183542
+        },
+        "1761236251271": {
+            "answer": "9185",
+            "question": "9214",
+            "id": 1761236251271
+        },
+        "1761236251557": {
+            "answer": "9186",
+            "question": "9214",
+            "id": 1761236251557
+        },
+        "1761236251867": {
+            "answer": "9187",
+            "question": "9214",
+            "id": 1761236251867
+        },
+        "1761236252027": {
+            "answer": "9217",
+            "question": "9215",
+            "id": 1761236252027
+        },
+        "1761236252180": {
+            "answer": "9218",
+            "question": "9215",
+            "id": 1761236252180
+        },
+        "1761236252328": {
+            "answer": "9231",
+            "question": "9216",
+            "id": 1761236252328
+        },
+        "1761236252469": {
+            "answer": "9232",
+            "question": "9216",
+            "id": 1761236252469
+        },
+        "1761236354678": {
+            "answer": "9233",
+            "question": "9216",
+            "id": 1761236354678
+        },
+        "1761236354818": {
+            "answer": "9234",
+            "question": "9216",
+            "id": 1761236354818
+        },
+        "1761236354964": {
+            "answer": "9250",
+            "question": "9269",
+            "id": 1761236354964
+        },
+        "1761236355108": {
+            "answer": "9251",
+            "question": "9269",
+            "id": 1761236355108
+        },
+        "1761236355264": {
+            "answer": "9252",
+            "question": "9269",
+            "id": 1761236355264
+        },
+        "1761236355442": {
+            "answer": "9253",
+            "question": "9269",
+            "id": 1761236355442
+        },
+        "1761403774633": {
+            "answer": "9272",
+            "question": "9270",
+            "id": 1761403774633
+        },
+        "1761403774780": {
+            "answer": "9273",
+            "question": "9270",
+            "id": 1761403774780
+        },
+        "1761403774945": {
+            "answer": "9274",
+            "question": "9270",
+            "id": 1761403774945
+        },
+        "1761405870958": {
+            "answer": "9275",
+            "question": "9304",
+            "id": 1761405870958
+        },
+        "1761405871216": {
+            "answer": "9276",
+            "question": "9304",
+            "id": 1761405871216
+        },
+        "1761405871510": {
+            "answer": "9277",
+            "question": "9304",
+            "id": 1761405871510
+        },
+        "1761405871776": {
+            "answer": "9278",
+            "question": "9304",
+            "id": 1761405871776
+        },
+        "1761419096467": {
+            "answer": "9327",
+            "question": "9352",
+            "id": 1761419096467
+        },
+        "1761419096814": {
+            "answer": "9328",
+            "question": "9352",
+            "id": 1761419096814
+        },
+        "1761419097049": {
+            "answer": "9329",
+            "question": "9352",
+            "id": 1761419097049
+        },
+        "1761419143581": {
+            "answer": "9363",
+            "question": "9353",
+            "id": 1761419143581
+        },
+        "1761419143850": {
+            "answer": "9364",
+            "question": "9358",
+            "id": 1761419143850
+        }
+    },
+    "endings_enabled": false,
+    "ending_data": {
+        "1760977894898": {
+            "id": 1760977894898,
+            "variable": 0,
+            "operator": ">",
+            "value": 0,
+            "endingImage": "",
+            "endingText": "Put ending text here, you can and should use <p>HTML tags</p>!"
+        }
+    },
+    "mapping_enabled": false,
+    "mapping_data": {}
+}
+]
 
