@@ -1,7 +1,7 @@
  /*
  * @title: 2016: A Lifetime of This / 2016b / The Hillary Trail
  * @author: StrawberryMaster & Friends
- * @version: 1.1.4
+ * @version: 1.1.5
  * @description: The 2016 election in the eyes of Hillary Clinton (and a couple of others, too)
  * 
  * Coding license: Apache License 2.0
@@ -326,8 +326,6 @@ campaignTrail_temp.temp_election_list = [
 
 campaignTrail_temp.difficulty_level_json = JSON.parse("[{\"model\": \"campaign_trail.difficulty_level\", \"pk\": 0.5, \"fields\": {\"name\": \"Easy-Peasy\", \"multiplier\": 1.2}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 1, \"fields\": {\"name\": \"Quite Easy\", \"multiplier\": 1.1}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 3, \"fields\": {\"name\": \"Normal\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 4, \"fields\": {\"name\": \"Challenging\", \"multiplier\": 0.95}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 5, \"fields\": {\"name\": \"Hard-Boiled\", \"multiplier\": 0.93}}]");
 
-//#startcode
-
 // Actual code here
 corrr = "<h2>A Lifetime of This…</h2>";
 
@@ -511,6 +509,7 @@ const css = `
 				text-transform: lowercase;
             }
 			.visit_text {
+				display: flex;
 				background: #eaeaea;
 				border-radius: .3em;
 				width: fit-content;
@@ -866,6 +865,9 @@ const css = `
 			    top: 365px;
 			    position: absolute;
 			}
+			#drop_down_area_state {
+				margin-inline: auto;
+			}
 			
 			/* Cheat menus/benefit check window - because people *are* gonna use this, you know? */
 			#benefitwindow {
@@ -981,6 +983,7 @@ const css = `
 			@media (max-width: 1250px) {
 				#election_description_window, .person_description_window, .description_window_small {
 					padding: 0 1em;
+					min-height: 85dvh;
 				}
 				#candidate_image, #running_mate_image {
 					margin: 2em 1em 1em 0;
@@ -1014,6 +1017,152 @@ const css = `
 					height: 50px !important;
 				}
    			}
+			
+			/* Mobile compatibility fixes - partially inspired by those of TTNW */
+			@media only screen and (max-width: 768px) {
+			
+			 /* necessary to ensure the music player stays in position */
+			  #game_window {
+				flex: 1 1 auto;
+				min-height: clamp(360px, 40vh, 587px);
+				height: auto;
+				align-self: stretch;
+				overflow: visible;
+				box-sizing: border-box;
+				background-position: center bottom;
+				background-repeat: no-repeat;
+				background-size: cover;
+			  }
+			
+			  #question_form button, #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
+				font-size: clamp(16px, 4.2vw, 20px);
+				line-height: 1.2;
+				padding: 10px 16px;
+				min-height: 44px;
+			  }
+			  
+			  #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
+				font-size: 1em;
+				line-height: 2em;
+			  }
+
+			.inner_window_question button, #visit_window button, #map_footer {
+				line-height: 2.5em;
+			  }
+			  
+			  #map_footer {
+				padding-right: 10em;
+			  }
+			  .inner_window_question, #results_container, #map_footer, #overall_details_container, #main_content_area_reading, #inner_window_2, #inner_window_3, #inner_window_4, #advisors {
+				font-size: 1.8em;
+			  }
+
+			  .inner_window_question {
+				height: auto !important;
+				min-height: 0 !important;
+				max-height: none !important;
+				position: static !important;
+				top: auto !important;
+				bottom: auto !important;
+				flex: 0 1 auto !important;
+				align-self: auto !important;
+				grid-row: auto !important;
+				grid-column: auto !important;
+				justify-self: auto !important;
+				display: flow-root !important;
+				overflow: visible !important;
+				box-sizing: border-box !important;
+				max-height: 395px;
+			  }
+
+				#question_form input[type="radio"] {
+					width: 1.3em;
+					height: 1.3em;
+					margin: 0 10px 0 0;
+					transform: none;
+					align-self: center;
+				}
+
+				#question_form input[type="radio"] + label {
+					font-size: clamp(16px, 5.2vw, 20px);
+					line-height: 1.3;
+					padding: 10px 12px;
+					min-height: 44px;
+				}
+
+				#question_form button,
+				#inner_window_2 button,
+				#inner_window_3 button,
+				#inner_window_4 button,
+				#game_window button,
+				#headquarter button,
+				#advisorsDiv button {
+					font-size: clamp(16px, 4.2vw, 20px);
+					line-height: 1.2;
+					padding: 10px 16px;
+					min-height: 44px;
+				}
+
+				#question_form input[type="radio"] + label:hover,
+				#question_form input[type="radio"] + label:focus {
+					font-size: clamp(16px, 5.2vw, 20px);
+					line-height: 1.3;
+					padding: 10px 12px;
+					font-weight: 400;
+					background: #eeebde; /* only change background */
+				}
+				
+				.overlay_window img {
+				  width: 15em;
+				  height: auto;
+				}
+				
+				.overlay_window h3 {
+				  padding: .5rem x .5rem;
+				  font-size: 24px;
+				}
+				
+			/* for the default CTS/NCT footer */
+			  #game_window g {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: center;
+				align-items: center;
+				gap: 8px;
+				padding: 10px 5px;
+			  }
+			  
+			  #candidate_pic, img#candidate_pic {
+				order: 1;
+				width: 15dvh;
+				height: auto;
+				flex-shrink: 0;
+			  }
+			  
+			  .inner_window_sign_display {
+				order: 2;
+				flex: 1;
+				min-width: 180px;
+				max-width: 250px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			  }
+			  
+			  #running_mate_pic, img#running_mate_pic {
+				order: 3;
+				width: 15dvh;
+				height: auto;
+				flex-shrink: 0;
+			  }
+				
+			/* other fixes to not break things */
+			#map_container {
+			  height: 30.78em;
+			}
+			
+				
+			}
 `;
 
 ensureMetaViewport();
@@ -2654,5 +2803,3 @@ campaignTrail_temp.achievements = {
         "cannotBeCheated": true
     }
 }
-
-//#endcode

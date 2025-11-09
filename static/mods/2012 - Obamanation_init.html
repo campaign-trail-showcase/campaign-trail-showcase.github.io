@@ -635,13 +635,17 @@ const css = `
 
                 .container {
                     background-color: #1d2754 !important;;
-                    border: .2em double #cccccc;
+                    border: 0em;
+                    border-left: .2em double #cccccc !important;
+                    border-right: .2em double #cccccc !important;
+                    padding: 0.0em;
+                    width: 100em !important;
                 }
 				
 				#game_window {
                     background-color: #1d2754 !important;;
                     background-image: url(https://file.garden/aNtAfG887DiA_7lO/Obamanation/Code1/ENrcfdQ.png);
-                    border: .2em double #ffffff;
+                    border: .1em double #ffffff;
                     max-width: 1000px;
                 }
 
@@ -649,7 +653,7 @@ const css = `
                     color: #fff;
                 }
                 .inner_window_w_desc {
-                    background-color: #040c42 !important;
+                    background: rgba(10, 20, 60, 0.6) !important;
                 }
 
                 .campaign_trail_start_emphasis {
@@ -793,18 +797,6 @@ const css = `
 				width: 1em;
 			}
 
-            @media only screen and (max-width: 768px) {
-                /* baseline */
-                #player {
-                    margin: clamp(10dvh, calc(35vh + 3rem), 77dvh) auto auto;
-                }
-
-                /* when #game_window contains the question */
-                #game_window:has(.inner_window_question) + #player {
-                    margin: clamp(65dvh, calc(60vh + 8rem), 80dvh) auto auto;
-                }
-            }
-			
 			/* Vista-like styling by weedsoldier */
 			:root {
 				--glass-bg: rgba(10, 20, 60, 0.6);
@@ -860,6 +852,10 @@ const css = `
 				position: absolute;
 				inset: 0;
 				background: var(--sheen-gradient);
+                mix-blend-mode: screen;
+                pointer-events: none;
+                opacity: 1;
+                z-index: -100;
 			}
 
 			.overlay_window h3::before {
@@ -869,6 +865,7 @@ const css = `
 					rgba(187, 224, 255, 0.25) 55%,
 					rgba(204, 226, 255, 0.5) 100%);
 				border-radius: var(--glass-radius) var(--glass-radius) 0 0;
+                z-index: -100;
 			}
 
 			.overlay_window,
@@ -887,8 +884,8 @@ const css = `
 
 			.overlay_window h3 {
 				position: relative;
-				top: -25px;
-				left: -1px;
+				top: -1.84em;
+				left: -0.09em;
 				padding: 0.15em 1em 0.25em;
 				font-weight: normal !important;
 				text-align: left;
@@ -897,7 +894,7 @@ const css = `
 				text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 30px #000;
 				border: var(--glass-border);
 				border-bottom: 0.1em double #C9C9C9;
-				width: 450.75px;
+				width: 29.7em;
 				box-shadow: var(--glass-shadow);
 				backdrop-filter: var(--glass-backdrop);
 				border-radius: var(--glass-radius) var(--glass-radius) 0 0;
@@ -956,6 +953,167 @@ const css = `
 				text-shadow: none;
 			}
 			
+			/* Mobile compatibility fixes - partially inspired by those of TTNW */
+			@media only screen and (max-width: 768px) {
+			
+			 /* necessary to ensure the music player stays in position */
+			  #game_window {
+				flex: 1 1 auto;
+				min-height: clamp(360px, 40vh, 587px);
+				height: auto;
+				align-self: stretch;
+				overflow: visible;
+				box-sizing: border-box;
+				background-position: center bottom;
+				background-repeat: no-repeat;
+				background-size: cover;
+			  }
+			
+			  #question_form button, #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
+				font-size: clamp(16px, 4.2vw, 20px);
+				line-height: 1.2;
+				padding: 10px 16px;
+				min-height: 44px;
+			  }
+			  
+			  #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
+				font-size: 1em;
+				line-height: 2em;
+			  }
+
+			.inner_window_question button, #visit_window button, #map_footer {
+				line-height: 2.5em;
+			  }
+			  
+			  #map_footer {
+				padding-right: 10em;
+			  }
+			  .inner_window_question, #results_container, #map_footer, #overall_details_container, #main_content_area_reading, #inner_window_2, #inner_window_3, #inner_window_4, #advisors {
+				font-size: 1.8em;
+			  }
+
+			  .inner_window_question {
+				height: auto !important;
+				min-height: 0 !important;
+				max-height: none !important;
+				position: static !important;
+				top: auto !important;
+				bottom: auto !important;
+				flex: 0 1 auto !important;
+				align-self: auto !important;
+				grid-row: auto !important;
+				grid-column: auto !important;
+				justify-self: auto !important;
+				display: flow-root !important;
+				overflow: visible !important;
+				box-sizing: border-box !important;
+				max-height: 395px;
+			  }
+
+				#question_form input[type="radio"] {
+					width: 1.3em;
+					height: 1.3em;
+					margin: 0 10px 0 0;
+					transform: none;
+					align-self: center;
+				}
+
+				#question_form input[type="radio"] + label {
+				    display: inline-block;
+					font-size: clamp(16px, 5.2vw, 20px);
+					line-height: 1.3;
+					padding: 10px 12px;
+					min-height: 44px;
+				}
+
+				#question_form button,
+				#inner_window_2 button,
+				#inner_window_3 button,
+				#inner_window_4 button,
+				#game_window button,
+				#headquarter button,
+				#advisorsDiv button {
+					font-size: clamp(16px, 4.2vw, 20px);
+					line-height: 1.2;
+					padding: 10px 16px;
+					min-height: 44px;
+				}
+
+				#question_form input[type="radio"] + label:hover,
+				#question_form input[type="radio"] + label:focus {
+				    display: inline-block;
+					font-size: clamp(16px, 5.2vw, 20px);
+					line-height: 1.3;
+					padding: 10px 12px;
+					font-weight: 400;
+					background: #e8e8e8; /* only change background */
+				}
+				
+				.overlay_window img {
+				  width: 15em;
+				  height: auto;
+				}
+				
+				.overlay_window h3 {
+				  padding: .5rem x .5rem;
+				  font-size: 24px;
+				}
+				
+			/* for the default CTS/NCT footer */
+			  #game_window g {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: center;
+				align-items: center;
+				gap: 8px;
+				padding: 10px 5px;
+			  }
+			  
+			  #candidate_pic, img#candidate_pic {
+				order: 1;
+				width: 19dvh;
+				height: auto;
+				flex-shrink: 0;
+			  }
+			  
+			  .inner_window_sign_display {
+				order: 2;
+				flex: 1;
+				min-width: 180px;
+				max-width: 285px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			  }
+			  
+			  #running_mate_pic, img#running_mate_pic {
+				order: 3;
+				width: 19dvh;
+				height: auto;
+				flex-shrink: 0;
+			  }
+			  
+			  .inner_window_sign_display img {
+				max-width: 258px;
+			  }
+				
+			/* other fixes to not break things */
+			#map_container {
+			  height: 30.78em;
+			}
+			
+			.visit_text {
+			  display: inline-flex;
+			}
+			
+			#results_container {
+			  display: flex;
+			  flex-flow: column wrap;
+			  max-height: 80dvh;
+			  overflow: hidden;
+			}
+							
+			}
 			
 `;
 
