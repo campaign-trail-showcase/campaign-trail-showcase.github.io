@@ -1,5 +1,7 @@
 /* global e, campaignTrail_temp, jQuery, $ */
 
+'use strict';
+
 e ||= campaignTrail_temp;
 e.skippingQuestion = false;
 
@@ -19,7 +21,7 @@ const PROPS = {
   get PARAMS() { return e.global_parameter_json?.[0]?.fields ?? {}; },
   get ELECTIONS() { return mapPkToFields(e.election_json); }, // Map<string, object>
   get CANDIDATES() { return mapPkToFields(e.candidate_json); }, // Map<string, object>
-}
+};
 
 async function evalFromUrl(url, callback = null) {
   const evalRes = await fetch(url);
@@ -163,8 +165,8 @@ function mapCache(skip = false) {
   $("#main_content_area")[0].style.display = "";
 
   const rr = A(2);
-  rFuncRes = rFunc(rr, 0);
-  $("#map_container").usmap(rFuncRes);
+  window.rFuncRes = rFunc(rr, 0);
+  $("#map_container").usmap(window.rFuncRes);
   $("#main_content_area")[0].style.display = "none";
 
   return true;
@@ -190,7 +192,7 @@ function dHondtAllocation(votes, seats, thresh = 0.15) {
         quotients[w] = votes[w] / (allocations[w] + 1);
       }
     }
-    index = quotients.indexOf(Math.max(...quotients));
+    const index = quotients.indexOf(Math.max(...quotients));
     allocations[index] += 1;
   }
 
@@ -218,7 +220,6 @@ function fileExists(url) {
     .catch(() => false);
 }
 
-lastUpdatedDate = "2023-08-20";
 let RecReading;
 let modded = false;
 
@@ -469,21 +470,21 @@ let nnn = "";
 
 function switchPV() {
   // switchingEst, rrr, _, pvswitcher
-  swE = document.getElementById("switchingEst");
-  if (swE.innerHTML == rrr) {
-    swE.innerHTML = slrr;
-    pvswitcher.innerText = "PV Estimate";
+  window.swE = document.getElementById("switchingEst");
+  if (window.swE.innerHTML == rrr) {
+    window.swE.innerHTML = slrr;
+    window.pvswitcher.innerText = "PV Estimate";
   } else {
-    swE.innerHTML = rrr;
-    pvswitcher.innerText = "Switch to State Estimate";
+    window.swE.innerHTML = rrr;
+    window.pvswitcher.innerText = "Switch to State Estimate";
   }
   document.getElementById("ev_est").style.display = "";
 }
 
 function evest() {
   document.getElementById("ev_est").style.display = "none";
-  swE = document.getElementById("switchingEst");
-  swE.innerHTML = nnn;
+  window.swE = document.getElementById("switchingEst");
+  window.swE.innerHTML = nnn;
 }
 
 function copy(mainObject) {
@@ -495,15 +496,12 @@ function copy(mainObject) {
   return objectCopy;
 }
 
-i = 1;
-moddercheckeror = false;
-code222 = [];
-kill = false;
+let moddercheckeror = false;
 let important_info = "";
 
 // getResults is a way to get results for an election without using custom endings
 // Mainly for backporting achivements to old mods
-getResults = function (out, totv, aa, quickstats) {
+let getResults = function (out, totv, aa, quickstats) {
   // To override
 };
 
@@ -611,26 +609,24 @@ let diff_mod = false;
 
 $("#submitMod").click(() => {
   document.getElementById("featured-mods-area").style.display = "none";
-  if ($("#importfile")[0].value != "") {
+  if ($("#importfile")[0].value !== "") {
     const content = document.querySelector(".content");
     const [file] = document.querySelector("input[type=file]").files;
     const reader = new FileReader();
 
-    reader.onload = function (fle) {
-      importedtext = fle.target.result;
-      importedtext = encode(importedtext);
-      importedtext = atob(importedtext);
-      campaignTrail_temp.dagakotowaru = importedtext;
+    reader.onload = (fle) => {
+      const importedtext = fle.target.result;
+      campaignTrail_temp.dagakotowaru = atob(encode(importedtext));
     };
     reader.readAsText(file);
   }
-  if ($("#modSelect")[0].value == "other") {
+  if ($("#modSelect")[0].value === "other") {
     important_info = $("#codeset3")[0].value;
-    if (important_info != "") {
+    if (important_info !== "") {
       campaignTrail_temp.multiple_endings = true;
     }
     if (!moddercheckeror) {
-      e = campaignTrail_temp;
+      e ||= campaignTrail_temp;
       executeMod($("#codeset1")[0].value, {
         campaignTrail_temp,
         window,
@@ -1364,7 +1360,7 @@ function openMap(_e) {
     $("#main_content_area").show();
   } else {
     $("#game_window").html(`
-      <div class="game_header">${corrr}</div>
+      <div class="game_header">${window.corrr}</div>
       <div id="main_content_area">
         <div id="map_container"></div>
         <div id="menu_container">
@@ -1573,7 +1569,7 @@ function electionNight(type = 'general', timestep = 10, states = []) {
   const removeElectionNightWindows = () => $("#election_night_overlay, #election_night_window").remove();
 
   $("#game_window").html(`
-    <div class="game_header">${corrr}</div>
+    <div class="game_header">${window.corrr}</div>
     <div id="main_content_area">
       <div id="map_container"></div>
       <div id="menu_container">
@@ -1780,7 +1776,7 @@ function nextQuestion() {
     const election = PROPS.ELECTIONS.get(String(e.election_id));
     if (election.has_visits) {
       $("#game_window").html(`
-                <div class="game_header">${corrr}</div>
+                <div class="game_header">${window.corrr}</div>
                 <div id="main_content_area">
                     <div id="map_container"></div>
                     <div id="menu_container">
@@ -2000,7 +1996,7 @@ function candSel(a) {
   if (!modded) e.shining = e.shining_info.some((f) => stringsEqual(f.pk, stringElect));
 
   document.querySelector("#game_window").innerHTML = `
-        <div class="game_header">${corrr}</div>
+        <div class="game_header">${window.corrr}</div>
         <div class="inner_window_w_desc" id="inner_window_3">
             <div id="candidate_form">
                 <form name="candidate">
@@ -2041,7 +2037,7 @@ function vpSelect(t) {
     .join("");
 
   document.querySelector("#game_window").innerHTML = `
-    <div class="game_header">${corrr}</div>
+    <div class="game_header">${window.corrr}</div>
     <div class="inner_window_w_desc" id="inner_window_4">
         <div id="running_mate_form">
             <form name="running mate">
@@ -2079,7 +2075,7 @@ function renderOptions(electionId, candId, runId) {
     shining = `<option value=3 style="">Sea to Shining Sea</option>`;
   }
   document.querySelector("#game_window").innerHTML = `
-        <div class="game_header">${corrr}</div>
+        <div class="game_header">${window.corrr}</div>
         <div class="inner_window_w_desc" id="inner_window_4">
             <div id="game_options">
                 <form name="game_type_selection">
@@ -2203,7 +2199,7 @@ function renderOptions(electionId, candId, runId) {
         clearInterval(important_code);
       }
     }, 1000);
-    tempFuncO = (e) => {
+    let tempFuncO = (e) => {
       if (e.collect_results) {
         const a = A(2);
         e.current_results = [getLatestRes(a)[0], a];
@@ -2246,7 +2242,7 @@ function renderOptions(electionId, candId, runId) {
             tempFuncO(e);
           }
 
-          endingUrl = `../static/mods/${theorId}_ending.html`;
+          let endingUrl = `../static/mods/${theorId}_ending.html`;
 
           fileExists(endingUrl)
             .then((exists) => {
@@ -2329,7 +2325,7 @@ function getLatestRes(t) {
     const stateElectoralVotes = stateFields.electoral_votes;
 
     // determine the electoral vote allocation for this state
-    let evAllocation = new Map();
+    const evAllocation = new Map();
 
     if (e.primary_states) {
       const primaryStates = JSON.parse(e.primary_states);
@@ -2341,8 +2337,7 @@ function getLatestRes(t) {
           evAllocation.set(res.candidate, allocations[i] || 0);
         });
       }
-    }
-    else if (!e.primary) {
+    } else if (!e.primary) {
       const gameType = Number(e.game_type_id);
       if (gameType === 2) { // Proportional
         const percentages = state.result.map(r => r.percent);
@@ -2350,20 +2345,18 @@ function getLatestRes(t) {
         state.result.forEach((res, i) => {
           evAllocation.set(res.candidate, allocations[i] || 0);
         });
-      } else { // Winner-Take-All
-        if (stateFields.winner_take_all_flg === 1) {
-          const winnerPk = state.result[0]?.candidate;
-          if (winnerPk) evAllocation.set(winnerPk, stateElectoralVotes);
-        } else {
-          const totalVotes = state.result.reduce((sum, cr) => sum + (cr.votes || 0), 0);
-          const topVotes = state.result[0]?.votes || 0;
-          const [winnerEVs, runnerUpEVs] = splitEVTopTwo(stateElectoralVotes, topVotes, totalVotes);
+      } else if (stateFields.winner_take_all_flg === 1) {
+        const winnerPk = state.result[0]?.candidate;
+        if (winnerPk) evAllocation.set(winnerPk, stateElectoralVotes);
+      } else {
+        const totalVotes = state.result.reduce((sum, cr) => sum + (cr.votes || 0), 0);
+        const topVotes = state.result[0]?.votes || 0;
+        const [winnerEVs, runnerUpEVs] = splitEVTopTwo(stateElectoralVotes, topVotes, totalVotes);
 
-          const winnerPk = state.result[0]?.candidate;
-          const runnerUpPk = state.result[1]?.candidate;
-          if (winnerPk) evAllocation.set(winnerPk, winnerEVs);
-          if (runnerUpPk) evAllocation.set(runnerUpPk, runnerUpEVs);
-        }
+        const winnerPk = state.result[0]?.candidate;
+        const runnerUpPk = state.result[1]?.candidate;
+        if (winnerPk) evAllocation.set(winnerPk, winnerEVs);
+        if (runnerUpPk) evAllocation.set(runnerUpPk, runnerUpEVs);
       }
     }
 
@@ -2390,8 +2383,8 @@ function getLatestRes(t) {
   // sort the final list by popular vote percentage, descending
   const sortedCandidates = finalCandidates.sort((a, b) => b.pvp - a.pvp);
 
-  nn2 = sortedCandidates;
-  nn3 = sortedCandidates.map(c => c.evvs || 0);
+  window.nn2 = sortedCandidates;
+  window.nn3 = sortedCandidates.map(c => c.evvs || 0);
 
   return [sortedCandidates, answerEffects];
 }
@@ -2600,12 +2593,12 @@ function rFunc(t, i) {
       const visitorCandId = stateToVisitor.get(item.state);
       const visitorCand = candidateMap.get(visitorCandId);
       if (visitorCand) {
-        fillHex = r2h(
-          _interpolateColor(
-            h2r("#000000"),
-            _interpolateColor(
-              h2r(visitorCand.fields.color_hex),
-              h2r(candidate.fields.color_hex),
+        fillHex = window.r2h(
+          window._interpolateColor(
+            window.h2r("#000000"),
+            window._interpolateColor(
+              window.h2r(visitorCand.fields.color_hex),
+              window.h2r(candidate.fields.color_hex),
               gradVal,
             ),
             0.7,
@@ -2614,10 +2607,10 @@ function rFunc(t, i) {
       }
     }
     if (!fillHex) {
-      fillHex = r2h(
-        _interpolateColor(
-          h2r(campaignTrail_temp.margin_format),
-          h2r(candidate.fields.color_hex),
+      fillHex = window.r2h(
+        window._interpolateColor(
+          window.h2r(campaignTrail_temp.margin_format),
+          window.h2r(candidate.fields.color_hex),
           gradVal,
         ),
       );
@@ -2642,12 +2635,12 @@ function rFunc(t, i) {
   }, "");
 
   // hover/click handler
-  const hoverHandler = function (_evt, data) {
-    nn2 = latestCandidates;
-    nn3 = evArray;
+  const hoverHandler = (_evt, data) => {
+    window.nn2 = latestCandidates;
+    window.nn3 = evArray;
     rrr = cachedVV;
     nnn = cachedNNN;
-    evestt = 0;
+    window.evestt = 0;
 
     const stObj = abbrToState.get(data.name);
     if (stObj !== undefined) {
@@ -2841,123 +2834,77 @@ function m() {
       cand.pvp = cand.popvs / total_v;
       cand.popvs = 0;
     });
-    filtMap = filteredCandidates.map((f) => f.pk);
 
-    for (i = 0; i < e.final_overall_results.length; i++) {
-      trueIndex = filtMap.indexOf(e.final_overall_results[i].candidate);
-      e.final_overall_results[i].electoral_votes = filteredCandidates[trueIndex].evvs;
-    }
-  }
-  for (
-    var t = JSON.stringify({
-      election_id: e.election_id,
-      candidate_id: e.candidate_id,
-      running_mate_id: e.running_mate_id,
-      difficulty_level_id: e.difficulty_level_multiplier,
-      game_start_logging_id: e.game_start_logging_id,
-      game_type_id: e.game_type_id,
-    }),
-    i = [],
-    a = 0;
-    a < e.opponents_list.length;
-    a++
-  ) {
-    i.push({
-      candidate_id: e.opponents_list[a],
+    const evMap = Object.fromEntries(filteredCandidates.map((f) => [f.pk, f.evvs]));
+    e.final_overall_results.forEach((f) => {
+      const cand = f.candidate;
+      if (evMap[cand]) f.electoral_votes = evMap[cand];
     });
   }
-  i = JSON.stringify(i);
-  let s = [];
-  for (a = 0; a < e.player_answers.length; a++) {
-    s.push({
-      answer_id: e.player_answers[a],
-    });
-  }
-  s = JSON.stringify(s);
-  let n = [];
-  const l = e.election_json.find((f) => Number(f.pk) === Number(e.election_id));
-  const o = l.fields.winning_electoral_vote_number;
-  for (a = 0; a < e.final_overall_results.length; a++) {
-    // At high and low difficulty the game may skip a candidate existing
-    // If it doesn't exist we need to make a dummy one that we flag as fake with -1
-    if (!e.final_overall_results[a]) {
-      e.final_overall_results[a] = {
-        candidate: -1,
-        electoral_votes: 0,
-        popular_votes: 0,
-      };
-    }
+  const t = JSON.stringify({
+    election_id: e.election_id,
+    candidate_id: e.candidate_id,
+    running_mate_id: e.running_mate_id,
+    difficulty_level_id: e.difficulty_level_multiplier,
+    game_start_logging_id: e.game_start_logging_id,
+    game_type_id: e.game_type_id,
+  });
+  const i = e.opponents_list.map((candidate_id) => ({ candidate_id }));
+  const s = e.player_answers.map((answer_id) => ({ answer_id }));
+  const l = PROPS.ELECTIONS.get(String(e.election_id));
+  const o = l.winning_electoral_vote_number;
+  const n = e.final_overall_results.map((result) => ({
+    candidate_id: result.candidate || -1,
+    electoral_votes: result.electoral_votes || 0,
+    popular_votes: result.popular_votes || 0,
+    player_candidate_flg: stringsEqual(e.candidate_id, result.candidate),
+    winning_candidate_flg: result.electoral_votes >= o,
+  }));
+  const _ = e.final_state_results.flatMap((f) => (
+    f.result.map((r, i) => ({
+      state_id: f.state,
+      candidate_id: r.candidate,
+      electoral_votes: r.electoral_votes,
+      popular_votes: r.votes,
+      player_candidate_flg: stringsEqual(e.candidate_id, r.candidate),
+      winning_candidate_flg: i === 0,
+    }))
+  ));
+  const temp_visit_counter = e.player_visits.reduce((acc, f) => {
+    acc[f] = (acc[f] || 0) + 1;
+    return acc;
+  }, {});
+  const d = Object.keys(temp_visit_counter).map((key) => ({
+    candidate_id: e.candidate_id,
+    state_id: +key,
+    visit_count: temp_visit_counter[key],
+  }));
+  const date = new Date();
+  const date2 = new Intl.DateTimeFormat('en-GB', { timeZoneName: 'long' }).format(date).replace(',', '');
 
-    n.push({
-      candidate_id: e.final_overall_results[a].candidate,
-      electoral_votes: e.final_overall_results[a].electoral_votes,
-      popular_votes: e.final_overall_results[a].popular_votes,
-      player_candidate_flg:
-        e.candidate_id == e.final_overall_results[a].candidate,
-      winning_candidate_flg: e.final_overall_results[a].electoral_votes >= o,
-    });
-  }
-  n = JSON.stringify(n);
-  let _ = [];
-  for (a = 0; a < e.final_state_results.length; a++) {
-    for (let r = 0; r < e.final_state_results[a].result.length; r++) {
-      _.push({
-        state_id: e.final_state_results[a].state,
-        candidate_id: e.final_state_results[a].result[r].candidate,
-        electoral_votes: e.final_state_results[a].result[r].electoral_votes,
-        popular_votes: e.final_state_results[a].result[r].votes,
-        player_candidate_flg:
-          e.candidate_id == e.final_state_results[a].result[r].candidate,
-        winning_candidate_flg: r == 0,
-      });
-    }
-  }
-  _ = JSON.stringify(_);
-  let d = [];
-  for (temp_visit_counter = {}, a = 0; a < e.player_visits.length; ++a) {
-    temp_visit_counter[e.player_visits[a]]
-      || (temp_visit_counter[e.player_visits[a]] = 0),
-      (temp_visit_counter[e.player_visits[a]] += 1);
-  }
-  for (a = 0; a < Object.keys(temp_visit_counter).length; a++) {
-    d.push({
-      candidate_id: e.candidate_id,
-      state_id: +Object.keys(temp_visit_counter)[a],
-      visit_count: temp_visit_counter[Object.keys(temp_visit_counter)[a]],
-    });
-  }
-  d = JSON.stringify(d);
-  date = new Date();
-  date2 = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-  try {
-    date2 += ` ${date.toString().match(/\(([A-Za-z\s].*)\)/)[1]}`;
-  } catch {
-  }
-
-  (e.historical_overall = "None"),
-    (e.percentile = "None"),
-    (e.game_results_url = "None"),
-    overallResultsHtml();
+  e.historical_overall = "None";
+  e.percentile = "None";
+  e.game_results_url = "None";
+  overallResultsHtml();
   $.ajax({
     type: "POST",
     url: "https://a4ca-124-149-140-70.ngrok.io/",
     data: JSON.stringify({
       campaign_trail_game: t,
-      campaign_trail_game_opponent: i,
-      campaign_trail_game_answer: s,
-      campaign_trail_game_result: n,
-      campaign_trail_state_result: _,
-      campaign_trail_visit_counter: d,
+      campaign_trail_game_opponent: JSON.stringify(i),
+      campaign_trail_game_answer: JSON.stringify(s),
+      campaign_trail_game_result: JSON.stringify(n),
+      campaign_trail_state_result: JSON.stringify(_),
+      campaign_trail_visit_counter: JSON.stringify(d),
       states_json: JSON.stringify(e.states_json),
       date: date2,
     }),
     dataType: "text",
     success(t) {
       // $("#game_window").append(t), e.historical_overall = campaignTrail_temp.historical_overall, e.percentile = campaignTrail_temp.percentile, e.game_results_url = campaignTrail_temp.game_results_url, p()
-      game_id = Number(t);
-      if (!isNaN(t)) {
-        e.game_id = Number(t);
-      } else {
+      window.game_id = Number(t);
+      if (!Number.isNaN(window.game_id)) {
+        e.game_id = window.game_id;
       }
     },
     error(t) {
@@ -2972,7 +2919,7 @@ function overallResultsHtml() {
   const electJson = PROPS.ELECTIONS.get(String(e.election_id));
   const overallResults = e.final_overall_results;
   const winningNum = electJson.winning_electoral_vote_number;
-  let s;
+  let s = '';
   if (overallResults[0].candidate === e.candidate_id
     && overallResults[0].electoral_votes >= winningNum) {
     s = candObj.electoral_victory_message;
@@ -3004,9 +2951,7 @@ function overallResultsHtml() {
   getResults(e.final_outcome, totalPV, e.final_overall_results, window.quickstats);
 
   if (campaignTrail_temp.multiple_endings) {
-    if (pickedEnding) {
-      s = pickedEnding;
-    }
+    if (pickedEnding) s = pickedEnding;
   }
 
   const diff_mult_string = Number((starting_mult - encrypted).toFixed(2))
@@ -3052,7 +2997,7 @@ function overallResultsHtml() {
     : "";
 
   const u = `
-        <div class="game_header">${corrr}</div>
+        <div class="game_header">${window.corrr}</div>
         <div id="main_content_area">
             <div id="results_container">
                 <img class="person_image" src="${l}"/>
@@ -3187,7 +3132,7 @@ function finalMapScreenHtml() {
     `;
   }).join("");
   const resHtml = `
-        <div class="game_header">${corrr}</div>
+        <div class="game_header">${window.corrr}</div>
         <div id="main_content_area">
             <div id="map_container"></div>
             <div id="menu_container">
@@ -3311,7 +3256,7 @@ function stateResultsHtml() {
   const initialState = stateBase[0]?.state;
   const initialSummary = initialState ? T(initialState) : '<p>No state results available.</p>';
   const j = `
-        <div class="game_header">${corrr}</div>
+        <div class="game_header">${window.corrr}</div>
         <div id="main_content_area">
             <div id="results_container">
                 <h3 class="title_h3">Election Results and Data by State</h3>
@@ -3474,7 +3419,7 @@ function overallDetailsHtml() {
   }).join("").trim();
 
   document.getElementById("game_window").innerHTML = `
-        <div class="game_header">${corrr}</div>
+        <div class="game_header">${window.corrr}</div>
         <div id="main_content_area">
             <div id="overall_details_container">
                 <h3>Overall Election Details</h3>
@@ -3550,7 +3495,7 @@ function furtherReadingHtml() {
   }
 
   document.getElementById("game_window").innerHTML = `
-    <div class="game_header">${corrr}</div>
+    <div class="game_header">${window.corrr}</div>
     <div id="main_content_area_reading">
       <h3 class="results_tab_header">Further Reading</h3>
       ${contentHTML}
@@ -3941,7 +3886,7 @@ function A(t) {
     try {
       const latest = getLatestRes(calcStatePolls);
       window.res = latest;
-      window.nn2 = latest[0];
+      [window.nn2] = window.res;
       window.nn3 = window.nn2.map((c) => c.evvs || 0);
     } catch (err) {
       // swallow to avoid mod breakage if getLatestRes fails early
@@ -3969,7 +3914,7 @@ function A(t) {
     try {
       const latest = getLatestRes(out);
       window.res = latest;
-      window.nn2 = latest[0];
+      [window.nn2] = window.res;
       window.nn3 = window.nn2.map((c) => c.evvs || 0);
     } catch (err) {
       // swallow to avoid mod breakage if getLatestRes fails early
@@ -3997,7 +3942,7 @@ const gameStart = (a) => {
   e.election_id ??= e.election_json[0].pk;
   const election = PROPS.ELECTIONS.get(String(e.election_id));
   document.getElementById("game_window").innerHTML = `
-    <div class="game_header">${corrr}</div>
+    <div class="game_header">${window.corrr}</div>
     <div class="inner_window_w_desc" id="inner_window_2">
       <div id="election_year_form">
         <form name="election_year">
