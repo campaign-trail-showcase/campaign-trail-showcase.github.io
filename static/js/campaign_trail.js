@@ -235,6 +235,7 @@ let HistPVP = [0, 0, 0, 0];
 
 function histFunction() {
   if (modded === false) {
+    /* eslint-disable indent */
     // eslint-disable-next-line default-case
     switch (campaignTrail_temp.election_id) {
       case 21: // 2020
@@ -401,6 +402,7 @@ function histFunction() {
         HistPVP = ["49.5%", "48.1%", "2.3%"];
         break;
     }
+    /* eslint-enable indent */
   }
 }
 
@@ -471,7 +473,7 @@ let nnn = "";
 function switchPV() {
   // switchingEst, rrr, _, pvswitcher
   window.swE = document.getElementById("switchingEst");
-  if (window.swE.innerHTML == rrr) {
+  if (window.swE.innerHTML === rrr) {
     window.swE.innerHTML = slrr;
     window.pvswitcher.innerText = "PV Estimate";
   } else {
@@ -516,7 +518,7 @@ function endingPicker(out, totv, aa, quickstats) {
   }
 
   if (important_info != "") {
-    a = new Function("out", "totv", "aa", "quickstats", important_info)(
+    const a = new Function("out", "totv", "aa", "quickstats", important_info)(
       out,
       totv,
       aa,
@@ -2199,7 +2201,7 @@ function renderOptions(electionId, candId, runId) {
         clearInterval(important_code);
       }
     }, 1000);
-    let tempFuncO = (e) => {
+    const tempFuncO = (e) => {
       if (e.collect_results) {
         const a = A(2);
         e.current_results = [getLatestRes(a)[0], a];
@@ -2215,7 +2217,7 @@ function renderOptions(electionId, candId, runId) {
     } else if (
       $("#modSelect")[0].value != "other"
       || e.hotload
-      || loadingFromModButton
+      || window.loadingFromModButton
     ) {
       try {
         $("#game_window").load(aaa, () => {
@@ -2227,12 +2229,12 @@ function renderOptions(electionId, candId, runId) {
           const theorId = `${year}_${cand}${run}`;
           // theorId = $("#modSelect")[0].value
 
-          if (customMod === false) {
+          if (window.customMod === false) {
             evalFromUrl(`../static/mods/${theorId}.html`, () => {
               tempFuncO(e);
             });
           } else {
-            executeMod(localStorage.getItem(`${customMod}_code2`), {
+            executeMod(localStorage.getItem(`${window.customMod}_code2`), {
               campaignTrail_temp,
               window,
               document,
@@ -2242,7 +2244,7 @@ function renderOptions(electionId, candId, runId) {
             tempFuncO(e);
           }
 
-          let endingUrl = `../static/mods/${theorId}_ending.html`;
+          const endingUrl = `../static/mods/${theorId}_ending.html`;
 
           fileExists(endingUrl)
             .then((exists) => {
@@ -2291,7 +2293,7 @@ function renderOptions(electionId, candId, runId) {
 function importgame(code) {
   starting_mult = encrypted + campaignTrail_temp.difficulty_level_multiplier;
   A(1);
-  campaigntrail = JSON.parse(code);
+  const campaigntrail = JSON.parse(code);
   e.election_id = campaigntrail.election_id;
   e.candidate_id = campaigntrail.player_candidate;
   e.player_answers = campaigntrail.player_answers;
