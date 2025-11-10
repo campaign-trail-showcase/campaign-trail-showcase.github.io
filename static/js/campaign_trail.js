@@ -3,7 +3,15 @@
 e ||= campaignTrail_temp;
 e.skippingQuestion = false;
 
-const mapPkToFields = (json) => new Map(json?.map((f) => [String(f.pk), f.fields]) ?? []);
+function mapPkToFields(json) {
+  const map = new Map();
+  if (!json) return map;
+  for (const member of json) {
+    const casted = String(member.pk);
+    if (!map.has(casted)) map.set(casted, member.fields);
+  }
+  return map;
+}
 
 const stringsEqual = (a, b) => String(a) === String(b);
 
