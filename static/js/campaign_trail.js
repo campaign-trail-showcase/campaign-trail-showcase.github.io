@@ -2445,7 +2445,7 @@ function setStatePollText(state, t) {
 
   e.state_issue_score_json.forEach(({ fields }) => {
     if (fields.state === state.pk) {
-      const issue = e.issues_json.find((i) => i.pk === fields.issue);
+      const issue = e.issues_json.find((i) => stringsEqual(i.pk, fields.issue));
       let pickedStance = null;
       let stanceDesc = null;
 
