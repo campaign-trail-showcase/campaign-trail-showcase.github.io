@@ -2215,10 +2215,11 @@ function renderOptions(electionId, candId, runId) {
         questionHTML(e);
       });
     } else if (
-      $("#modSelect")[0].value != "other"
+      $("#modSelect")[0].value !== "other"
       || e.hotload
-      || window.loadingFromModButton
+      || loadingFromModButton
     ) {
+      console.log('ttrying');
       try {
         $("#game_window").load(aaa, () => {
           const cands = PROPS.CANDIDATES;
@@ -2229,12 +2230,12 @@ function renderOptions(electionId, candId, runId) {
           const theorId = `${year}_${cand}${run}`;
           // theorId = $("#modSelect")[0].value
 
-          if (window.customMod === false) {
+          if (customMod === false) {
             evalFromUrl(`../static/mods/${theorId}.html`, () => {
               tempFuncO(e);
             });
           } else {
-            executeMod(localStorage.getItem(`${window.customMod}_code2`), {
+            executeMod(localStorage.getItem(`${customMod}_code2`), {
               campaignTrail_temp,
               window,
               document,
