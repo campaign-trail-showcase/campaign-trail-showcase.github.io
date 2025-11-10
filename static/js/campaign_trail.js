@@ -122,9 +122,7 @@ function shuffleAnswers(arr) { // Fisher-Yates
 }
 
 function removeIssueDuplicates(array) {
-  return array.filter(
-    (item, index) => array.map((f) => f.issue).indexOf(item.issue) === index,
-  );
+  return array.filter((f, i) => array.findIndex((g) => g.issue === f.issue) === i);
 }
 
 function openTab(evt, tabName) {
