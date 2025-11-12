@@ -480,11 +480,13 @@ function switchPV() {
     window.swE.innerHTML = rrr;
     window.pvswitcher.innerText = "Switch to State Estimate";
   }
-  document.getElementById("ev_est").style.display = "";
+  const evEst = document.getElementById("ev_est");
+  if (evEst) evEst.style.display = "";
 }
 
 function evest() {
-  document.getElementById("ev_est").style.display = "none";
+  const evEst = document.getElementById("ev_est");
+  if (evEst) evEst.style.display = "none";
   window.swE = document.getElementById("switchingEst");
   window.swE.innerHTML = nnn;
 }
@@ -2433,13 +2435,15 @@ function setStatePollText(state, t) {
   const _ = formattedResults.join("");
   slrr = _;
 
+  const someStatesHaveEVs = e.states_json.some((state) => state.fields.electoral_votes > 0);
+
   // $("#overall_result").html(c);
   document.getElementById("overall_result").innerHTML = `
-        <h3>${((!doPrimaryMode && !e.primary) || (e.primary && !doPrimaryMode)) ? "ESTIMATED SUPPORT" : "PRIMARY/CAUCUS RESULT"}</h3>
-        <ul id='switchingEst'>${_}</ul>
-        <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button>
-        <button onclick='evest()' id='ev_est'>${!doPrimaryMode && !e.primary ? "Electoral Vote Estimate" : "Current Delegate Count"}</button>
-    `;
+    <h3>${((!doPrimaryMode && !e.primary) || (e.primary && !doPrimaryMode)) ? "ESTIMATED SUPPORT" : "PRIMARY/CAUCUS RESULT"}</h3>
+    <ul id='switchingEst'>${_}</ul>
+    <button id='pvswitcher' onclick='switchPV()'>PV Estimate</button>
+    ${someStatesHaveEVs ? `<button onclick='evest()' id='ev_est'>${!doPrimaryMode && !e.primary ? "Electoral Vote Estimate" : "Current Delegate Count"}</button>` : ""}
+  `;
   let u = "";
   const globalParam = PROPS.PARAMS;
 
