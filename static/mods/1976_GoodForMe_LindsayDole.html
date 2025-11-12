@@ -55,12 +55,12 @@ document.head.appendChild(customStyling);
 campaignTrail_temp.cyoa = true;
 
 e = campaignTrail_temp
-    function ctsAchievement(achievement, difficultyChecker = true){
-      if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
-        if(campaignTrail_temp.CTS){
-        unlockAchievement(achievement);
-      }
+function ctsAchievement(achievement, difficultyChecker = true){
+  if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+    if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
     }
+}
 
 e.cyoa = true
 
@@ -11184,8 +11184,8 @@ e.pages.push(`
 <div style="background-color: #ffffff;">
 <div style="background-color: #102039; font-family: 'Georgia', serif; color: #000;"> <img style="width: 100px;" src="https://upload.wikimedia.org/wikipedia/commons/6/65/NBC_News_%282023%3B_App_Icon%29.svg" alt="NBC" />
 <div style="background-color: #102039; height: 75px;">
-<h2 style="font-size: 26px; font-weight: bold;"><span style="background-color: ##102039;"><span style="color: #ffffff;">Petraeus drops Cain from the ticket, touts Scott as replacement</span> </span></h2>
-<p><span style="background-color: ##102039;"><span style="color: #ffffff;">The Republican Presidential candidate has expressed his "discomfort" over the sexual assault allegations and plans to announce his new running mate on Friday&nbsp;</span></span></p>
+<h2 style="font-size: 26px; font-weight: bold;"><span style="background-color: #102039;"><span style="color: #ffffff;">Petraeus drops Cain from the ticket, touts Scott as replacement</span> </span></h2>
+<p><span style="background-color: #102039;"><span style="color: #ffffff;">The Republican Presidential candidate has expressed his "discomfort" over the sexual assault allegations and plans to announce his new running mate on Friday&nbsp;</span></span></p>
 </div>
 <div style="background-color: #ffffff; font-family: 'Bahnschrift', serif; color: #000;">
 <p><span style="background-color: #ffffff;"> <strong> By Ron Fournier </strong> </span> <br /> <span style="background-color: #ffffff;"> 03/09/2016 06:48 AM EDT </span></p>
@@ -11561,39 +11561,39 @@ e.pages.push(`
                 );
             }
 }
-  return construct(0);
-  
-// ACHIEVEMENTS
 
-if (quickstats[0]>=270) {
-  ctsAchievement("Found love");
-}
-if (quickstats[0]>=270 && ideology<=-2){
-  ctsAchievement("Words cannot recall");
-}
-if (quickstats[0]>=400){
-  ctsAchievement("Our souls were singin'");
-}
-if (quickstats[0]>=400 && ideology<=-2){
-  ctsAchievement("Glory shall rest on us all");
-}
-if (bills==2){
-  ctsAchievement("We never lost control");
-}
-let alabamaResult = campaignTrail_temp.final_state_results.find((x) => x.state == 97);
-if (alabamaResult.result[0].candidate == 1001){
-  ctsAchievement("She just needs someone to change her");
-}
-if (quickstats[0]>=270 && economy==2){
-  ctsAchievement("In good shape for the shape she's in");
-}
-if (quickstats[0]>=270 && economy==0){
-  ctsAchievement("Been through the fire before");
-}
-if (aa[0].electoral_votes >= 270 && aa[0].candidate !=1001){
-  ctsAchievement("Slipped away");
-}
-  
+	// ACHIEVEMENTS
+	if (quickstats[0]>=270) {
+	  ctsAchievement("Found love");
+	}
+	if (quickstats[0]>=270 && ideology<=-2){
+	  ctsAchievement("Words cannot recall");
+	}
+	if (quickstats[0]>=400){
+	  ctsAchievement("Our souls were singin'");
+	}
+	if (quickstats[0]>=400 && ideology<=-2){
+	  ctsAchievement("Glory shall rest on us all");
+	}
+	if (bills==2){
+	  ctsAchievement("We never lost control");
+	}
+	let alabamaResult = campaignTrail_temp.final_state_results.find((x) => x.state == 97);
+	if (alabamaResult.result[0].candidate == 1001){
+	  ctsAchievement("She just needs someone to change her");
+	}
+	if (quickstats[0]>=270 && economy==2){
+	  ctsAchievement("In good shape for the shape she's in");
+	}
+	if (quickstats[0]>=270 && economy==0){
+	  ctsAchievement("Been through the fire before");
+	}
+	if (aa[0].electoral_votes >= 270 && aa[0].candidate !=1001){
+	  ctsAchievement("Slipped away");
+	}
+
+  return construct(0);
+    
 }
 
 HistHexcolour=["#ad0c0c","#4382b3","#d4b611","#278f1e"];
