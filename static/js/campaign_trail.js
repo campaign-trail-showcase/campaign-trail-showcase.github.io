@@ -2229,7 +2229,7 @@ function renderOptions(electionId, candId, runId) {
           const cand = cands.get(String(e.candidate_id)).last_name;
           const run = cands.get(String(e.running_mate_id)).last_name;
 
-          const theorId = `${year}_${cand}${run}`;
+          const theorId = `${e.code2_id || year}_${cand}${run}`;
           // theorId = $("#modSelect")[0].value
 
           if (customMod === false) {
