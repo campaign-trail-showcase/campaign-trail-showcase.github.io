@@ -4641,3 +4641,18 @@ campaignTrail_temp.jet_data = [{
 }
 ]
 
+//Achievements
+function ctsAchievement(achievement, difficultyChecker = true){
+  if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+    if(campaignTrail_temp.CTS){
+    unlockAchievement(achievement);
+  }
+}
+
+if (quickstats[1] >= 51.04) {
+        ctsAchievement("Maryland Changed");
+    }
+
+if (campaignTrail_temp.player_answers[5] == 4164 && quickstats[1] >= 48.85) {
+        ctsAchievement("The Birtherist State");
+    }
