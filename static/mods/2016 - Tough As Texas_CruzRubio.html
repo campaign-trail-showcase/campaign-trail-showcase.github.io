@@ -964,7 +964,7 @@ if (ans == 5126 || ans == 5125 || ans == 5123 || ans == 5124) {
  e.candidate_json[0]["fields"].last_name = "Cruz";
     }
 
-if (CorruptBargain == 1) {
+if (CorruptBargain == 1 && (e.noCounter < 23)) {
 e.questions_json[26] = tunnel(51622); 
 }
 
@@ -11631,13 +11631,6 @@ e.jet_data = [{
 ]
 
 
-
-
-
-
-
-// ENDINGS -- this is slightly more reliable than the ending code method
-
 construct = (a = 1) => {
     
     e.page = e.page + a < e.pages.length ? e.page + a : 0
@@ -11986,72 +11979,6 @@ else if (quickstats[0] >= 259 && quickstats[0] < 269 && (SpecialEnding != 1)) { 
 else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] < 3 && (SpecialEnding != 1)) { // trump loses everything
         e.pages.push(`<h3>Basket of Deplorables</h3><p>“I know there are only 60 days left to make our case – and don't get complacent; don't see the latest outrageous, offensive, inappropriate comment and think, "Well, he's done this time". We are living in a volatile political environment. You know, to just be grossly generalistic, you could put half of Trump's supporters into what I call the basket of deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables. - Hillary Clinton, CBS News</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/DZslERA.png'; }]);
-    }
-
-// -------------------
-// IT'S RUBIO!111!
-       else if ((campaignTrail_temp.player_answers[4] === 51119) && quickstats[0] >= 535 && (SpecialEnding != 1)) { // RUBIOSLIDE
-        e.pages.push(`<h3>“RUBIO WINS 50 STATES!”</h3><p>Let's dispel once and for all with this fiction that Barack Obama doesn't know what he's doing. He knows EXACTLY what he's doing. Barack Obama is undertaking a systematic effort to change this country, to make America more like the rest of the world. That's why he passed Obamacare and the stimulus and Dodd-Frank and the deal with Iran. It is a systematic effort to change America. When I'm president of the United States, we are going to re-embrace all the things that made America the greatest nation in the world and we are going to leave our children with what they deserve: the single greatest nation in the history of the world.</p>`);
-        e.executable.push([0, () => { e.image = 'https://i.imgur.com/5NquPN6.png'; }]);
-    }
-
-// Rubio victory
-
-       else if ((campaignTrail_temp.player_answers[4] === 51119) && quickstats[0] >= 270 && (SpecialEnding != 1)) { // Rubio wins the election!
-        e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>“We can now project that Marco Rubio has won 270 electoral votes, and with it, the presidency.”<br><br>America has been preserved! Senator Rubio has won the election, and prevented one of the worst women in history from becoming Commander-in-Chief. Clinton gives her muted concession speech, and Rubio's victory speech in Miami talks about the need for unity in our country.<br><br>Under Rubio's presidency, the conservative majority will be solidified or expanded. Hillary Clinton's career is all but over, and when Rubio is inaugurated, he promises he will choose you as his Secretary of State. Trump can keep whining, but he doesn't matter now.</p>`);
-        e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>Rubio has already begun planning out his cabinet, and he has said that you will be his Secretary of State, which you gladly accept. Rubio has promised to appoint Neil Gorsuch to fill Antonin Scalia's open seat, and Democrats are furious that Clinton lost.<br><br>Hopefully Rubio can win in 2020. If he does, either you or Kasich will be in a great position to succeed him in 2024. Republicans have won both the Senate and the House, and Rubio will hopefully be able to pass much of his moderate-conservative agenda.<br><br>Rubio shifted a surprising amount to the center during the election, but hopefully he will come back to the right when he is inaugurated. Apart from that, it seems like this election has ended. Get ready to become Secretary of State!</p>`);
-        e.executable.push([0, () => { e.image = 'https://i.imgur.com/5NquPN6.png'; }]);
-        e.executable.push([1, () => { e.image = 'https://i.imgur.com/5NquPN6.png'; }]);
-    if (songChange != 1) {
-    songChange = 1
-    const rubiovictory = new Playlist();
-      const rubiovictorySong = new Song(
-        "Songs About Me",
-        "Trace Adkins",
-        "https://i.imgur.com/xuESpzn.png",
-        "https://audio.jukehost.co.uk/txC7Vp5l0lGgwvF3b9RNhQQ4bXGpaKlxj"
-      );
-      rubiovictory.addSong(rubiovictorySong);
-    changePlaylist(rubiovictory);
-     }
-    }
-
-       else if ((campaignTrail_temp.player_answers[4] === 51119) && quickstats[0] == 269 && (SpecialEnding != 1)) { // Rubio deadlocks the election
-        e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>“We can now project that no candidate has won a majority.”<br><br>Those words from the TV were rather surprising, but Republicans control Congress, meaning both Rubio and Kasich have won the election. Clinton gives her muted concession speech, and Rubio's victory speech in Miami talks about the need for unity in our country.<br><br>Under Rubio's presidency, the conservative majority will be solidified or expanded. Hillary Clinton's career is all but over, and when Rubio is inaugurated, 8 years of disaster under Barack Obama will finally be ended. Trump can keep whining, but he doesn't matter now.</p>`);
-        e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>Rubio has already begun planning out his cabinet, and he has said that you will be his Secretary of State, which you gladly accept. Rubio has promised to appoint Neil Gorsuch to fill Antonin Scalia's open seat, and Democrats are furious that Clinton lost.<br><br>Hopefully Rubio can win in 2020. If he does, either you or Kasich will be in a great position to succeed him in 2024. Republicans have won both the Senate and the House, and Rubio will hopefully be able to pass much of his moderate-conservative agenda.<br><br>Rubio shifted a surprising amount to the center during the election, but hopefully he will come back to the right when he is inaugurated. Apart from that, it seems like this election has ended. Get ready to become Secretary of State!</p>`);
-        e.executable.push([0, () => { e.image = 'https://i.imgur.com/5NquPN6.png'; }]);
-        e.executable.push([1, () => { e.image = 'https://i.imgur.com/5NquPN6.png'; }]);
-    if (songChange != 1) {
-    songChange = 1
-    const rubiovictory = new Playlist();
-      const rubiovictorySong = new Song(
-        "Songs About Me",
-        "Trace Adkins",
-        "https://i.imgur.com/xuESpzn.png",
-        "https://audio.jukehost.co.uk/txC7Vp5l0lGgwvF3b9RNhQQ4bXGpaKlxj"
-      );
-      rubiovictory.addSong(rubiovictorySong);
-    changePlaylist(rubiovictory);
-     }
-    }
-
-       else if ((campaignTrail_temp.player_answers[4] === 51119) && quickstats[0] < 269) { // Rubio loses the election
-        e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>“We can now project that Hillary Rodham Clinton has reached 270 electoral votes, and will become the 45th President of the United States.”<br><br>Damned be. The people of this country were given a choice, and they chose not to opt for decency. Hillary Clinton has won the election, must to the RNC's dismay, who had favorited Rubio over you and Trump. Trump is already slamming Rubio relentlessly. He gives a muted concession speech, Clinton declares her victory, and the next 4 years will be frustrating.<br><br>Trump said Crooked Hillary was 'terrible' but that he was 'totally unsurprised' Rubio lost. He's kicking the battered guy while he's down, it seems.</p>`);
-        e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>Clinton has already said she will back Merrick Garland to be the next Supreme Court justice, and the conservative majority is at jeopardy. Hopefully it can last long enough for a Republican to win back the White House and undo the amount of damage 'judges' like Sotomayor have done to our country. <br><br>Where does this leave you? It's hard to tell. You do have a great shot at winning the nomination in 2020, especially given people are likely to be worn out by 12 years of Democratic rule, but it'll be tough to win the nomination, with Trump and his cronies ready to nominate him in 2020. <br><br> Whatever happens, it's sure to be an interesting ride. Godspeed, and good luck with re-election in 2018.</p>`);
-        e.executable.push([0, () => { e.image = 'https://i.imgur.com/kg7ymVb.jpeg'; }]);
-        e.executable.push([1, () => { e.image = 'https://i.imgur.com/kg7ymVb.jpeg'; }]);
-    if (songChange != 1) {
-    songChange = 1
-    const rubiodefeat = new Playlist();
-      const rubiodefeatSong = new Song(
-        "Stuck In The Middle With You",
-        "Stealers Wheel",
-        "https://i.imgur.com/EedzXtu.png",
-        "https://audio.jukehost.co.uk/KWrHBYwAV9iVb6ZjYfvNeNW8ShcRmqIJ"
-      );
-      rubiodefeat.addSong(rubiodefeatSong);
-    changePlaylist(rubiodefeat);
-     }
     }
 
 // -------------------------------------------- NORMAL ENDINGS --------------------------------------------------------------------
@@ -12439,5 +12366,6 @@ applyTooltipsToObject(e.answer_feedback_json);
     };
   }
 })(jQuery, "tooltipPlugin", {}, null, ["getValue"]);
+
 
 
