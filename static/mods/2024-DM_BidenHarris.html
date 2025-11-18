@@ -966,13 +966,22 @@ function deantime() {
                 }
                 resultsTable()
                 var button1 = document.getElementById('view_electoral_map');
-
-                button1.click();
-
-                setTimeout(function () {
-                    var button2 = document.getElementById('resume_questions_button');
-                    button2.click();
-                }, 50);
+				if (button1) {
+					button1.click();
+					
+					const resumeObserver = new MutationObserver((mutations, obs) => {
+						const button2 = document.getElementById('resume_questions_button');
+						if (button2) {
+							button2.click();
+							obs.disconnect();
+						}
+					});
+					
+					resumeObserver.observe(document.getElementById('game_window'), {
+						childList: true,
+						subtree: true
+					});
+				}
                 console.log(campaignTrail_temp.questions_json[7]);
 
                 $("#inner_window_4").remove();
@@ -1539,26 +1548,33 @@ Thank you so much, everyone.</p>
             }
         }
     ]
-    setTimeout(() => {
-        var mapButton = document.getElementById('view_electoral_map');
-        if (mapButton) {
-            var parentElement = mapButton.parentNode;
-            if (parentElement) {
-                parentElement.removeChild(mapButton);
-            } else {
-                console.error('Parent element not found.');
-            }
-        } else {
-            console.error('Map button not found.');
-        }
+	const cleanUpMapButton = () => {
+		const mapButton = document.getElementById('view_electoral_map');
+		if (mapButton && mapButton.parentNode) {
+			mapButton.parentNode.removeChild(mapButton);
+		}
+		
+		const continueButton = document.getElementById('answer_select_button');
+		if (continueButton) {
+			continueButton.style.display = 'block';
+			continueButton.style.margin = '0 auto';
+		}
+	};
 
-        // Additional styling for centering the "Continue" button
-        var continueButton = document.getElementById('answer_select_button');
-        if (continueButton) {
-            continueButton.style.display = 'block';
-            continueButton.style.margin = '0 auto';
-        }
-    }, 100); // Adjust the delay as needed
+	cleanUpMapButton();
+
+	const mapButtonObserver = new MutationObserver((mutations) => {
+		for (const mutation of mutations) {
+			if (mutation.addedNodes.length) {
+				cleanUpMapButton();
+			}
+		}
+	});
+
+	const buttonContainer = document.getElementById('game_window'); 
+	if(buttonContainer) {
+		mapButtonObserver.observe(buttonContainer, { childList: true, subtree: true });
+	}
     document.body.background = "https://i.imgur.com/nMc8oq1.jpg"
     document.getElementById("header").src = "https://i.imgur.com/eq4MIaX.png"
     quotes = [
@@ -1829,6 +1845,13 @@ function runningforpresident() {
     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 8] = tunnel(2008);
 
     running = true;
+	
+	campaignTrail_temp.candidate_first_name = "Denis";
+    campaignTrail_temp.candidate_last_name = "McDonough";
+    demcandidate = "Denis McDonough";
+    campaignTrail_temp.candidate_json.find(candidate => candidate.pk == 201).fields.first_name = "Denis";
+    campaignTrail_temp.candidate_json.find(candidate => candidate.pk == 201).fields.last_name = "McDonough";	
+	
     campaignTrail_temp.candidate_image_url =
         "https://i.imgur.com/NPMq6aP.png";
     e.global_parameter_json = [
@@ -2012,34 +2035,7 @@ function coding() {
   }
   `;
     document.head.appendChild(customStyling);
-    setTimeout(() => {
-        var mapButton = document.getElementById('view_electoral_map');
-        if (mapButton) {
-            // Disable the button
-            mapButton.disabled = true;
-
-            var parentElement = mapButton.parentNode;
-            if (parentElement) {
-                // Remove the button after a short delay (adjust as needed)
-                setTimeout(() => {
-                    parentElement.removeChild(mapButton);
-                }, 0o1);
-            } else {
-                console.error('Parent element not found.');
-            }
-        } else {
-            console.error('Map button not found.');
-        }
-
-        // Additional styling for centering the "Continue" button
-        var continueButton = document.getElementById('answer_select_button');
-        if (continueButton) {
-            continueButton.style.display = 'block';
-            continueButton.style.margin = '0 auto';
-        }
-    }, 100); // Adjust the delay as needed
-
-
+    
 }
 function resultsTable() {
     vpTable = {
@@ -2060,7 +2056,8 @@ function resultsTable() {
 function createButton() {
     // Create a button element 
     var button = document.createElement('button');
-    button.textContent = 'OK'; button.id = 'ok_button';
+    button.textContent = 'OK';
+    button.id = 'cutscene_ok_button'; 
     // Set initial styles (perpetually invisible and positioned) 
     button.style.position = 'fixed';
     button.style.bottom = '20px'; // Adjust as needed
@@ -2070,13 +2067,18 @@ function createButton() {
     // Append button to the body 
     document.body.appendChild(button);
 }
+
 function deleteButton() {
-    setTimeout(function () {
-        var button = document.getElementById('ok_button');
+    const cleanup = () => {
+        var button = document.getElementById('cutscene_ok_button');
         if (button && button.parentNode) {
             button.parentNode.removeChild(button);
         }
-    }, 8000); // 8000 milliseconds = 8 seconds
+        document.body.style.overflow = '';
+        document.body.style.zoom = '100%';
+    };
+
+    setTimeout(cleanup, 8000);
 }
 let generalElectionStarted = false;
 runthisonlyonce2 = 0;
