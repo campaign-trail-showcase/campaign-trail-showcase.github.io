@@ -11705,6 +11705,8 @@ endingConstructor = (a = 1) => {
     $("#final_results_description")[0].innerHTML = construct(a);
 }
 
+// ENDINGS -- this is slightly more reliable than the ending code method
+		
 e.multiple_endings = true;
 
 e.header = "<h1>This is an error handler</h1>";
@@ -11718,17 +11720,17 @@ endingPicker = (out, totv, aa, quickstats) => {
     e.header = "";
     e.executable = [];
 
-if (e.player_answers.includes(51531)) {
+if (campaignTrail_temp.player_answers.includes(51531)) {
     SpecialEnding = 1 // basically this is used to make sure normal achievements or normal endings don't trigger on killer klinton ending
 }
 
 // --------------------------------------------------------------- Special Endings  -------------------------------------------------------------------------------------------
 
 // Killary, 50 state sweep 
-if (e.player_answers.includes(51531) && quickstats[0] >= 535) { // Full Sweep against Klinton
+if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] >= 535) { // Full Sweep against Klinton
         e.pages.push(`<h3>Vindication.</h3><p>50 states. 50 shades of red. New York, Hawaii, Massachusetts, all red. Your erstwhile rival Clinton is nowhere to be found, not in Chappaqua, not anywhere within view. Even after state after state voted for you, you didn't feel glory. You felt empty. Hollow. <br><br> Nobody is surprised by your victory. Nobody even talks about it. Everybody's only talking about Hillary Clinton's crimes. How she got away for so long. The fact the establishment was so corrupt, the things you had been trying to warn them about for years. <br><br> Where do you go from here? Democrats are in complete disarray, but it's not like the rest of Washington is any more stable. Who else was behind these crimes? Her spineless husband, obviously, but who else? Obama? Schumer? Pelosi? You're going to need to start investigations into all of them. Best of luck these next few years. </p>`);
         e.pages.push(`<h3>July 20th, 1993 - Washington D.C, 1600 Pennsylvania Ave </h3><p> Hillary felt happy, relieved. That snake was finally going to be killed today. She had been planning this for months — and tonight her efforts would finally bear fruit. He cannot be allowed to survive, no matter the price. She had even recorded herself ordering his death, so she could look back and laugh at it later. <br><br> It didn't matter that she had worked with him for years, or that he had helped her become a lawyer in the first place. All that matters is that she must protect herself. She has no other choice.  <br><br> She had done stuff typical of a First Lady today — giving speeches, attending schools, making millions illegally for her own pleasure. Sitting on the White House couch, flicking through meaningless television channels, she began to get worried. Had the plan failed? Had that rat managed to get away? <br><br> Just then, someone knocked on the door. It was the agents tasked with killing him. <br><br> “Target neutralized, Madame'.” <br><br> Grinning, she replied “Excellent.” <br><br> “And did you get that tape I asked for?” Hillary really hoped they recorded it. She would get to watch that loser die in real time, entertainment far beyond her wildest dreams. <br><br> “Of course” an agent replied. <br><br> “Perfect!” she said, trying her best to contain her excitement. <br><br> She quickly ran to the oven and put in a batch of chocolate-chip cookies. If she was quick, she and Bill could even get a midnight snack to go alongside her night-time entertainment. <br><br> She called her husband downstairs as she put the tape inside the television. Bill laughed, and she cackled. They couldn't stop replaying the 2 hour long video of his suffering.  They dragged him all the way to Virginia and shot the bastard dead. <br><br> Just then her advisors walked in. They had already written a script for her to say when she “learns” of Foster's death, and already wrote an eulogy for Bill to say at his funeral. Hillary said she couldn't be bothered to attend, just make up some excuse about her being sick that day. The press was already at the White House that night, and she feigned horror, crying about how tragic it was. The media used it as ''proof'' of her humbleness.<br><br> The entire cabinet was far too spineless to ever report her crimes. Spinelessness was a trait Clinton always looked for in cabinet appointments, and she always made sure her crimes never got in contact with people who still had some of their guts left. <br><br> The brutality of her acts stimulated her. It made her satisfied, fulfilled, relieved. This was the best smile she's had in years. Apart from wearing fancy dresses, it was her favorite coping mechanism. <br><br> Just then, midnight struck, it was their bedtime. She called Bill upstairs, and they slept soundly in the White House bedroom, knowing they would never have to bear the consequences of their actions.  </p>`);
-        e.pages.push(`<h3>August 17th, 2018 - Federal Bureau of Investigation catches Hillary Clinton in New York | <i>Syracuse Register</i> </h3><p> <i>This article has been updated to include further details. </i> <br><br> The former First Lady and 2016 presidential candidate has been on the run for years ever since an anonymous person leaked a video clip of her ordering her the murder of <u>Vince Foster</u>. That changed today, where the FBI coordinated with local authorities and the state of Virginia to capture Clinton, who had been hiding in a mansion in upstate New York. <br><br> Raiding her home, she quickly surrendered. Authorities found she was armed with weapons and had written a note about fleeing to Canada. <br><br>  The whereabouts of her husband Bill Clinton are unknown, though she was still wearing her wedding ring when she was caught, and she appeared to be living in luxury, with many amenities. <br><br> Given the murder of Foster was successful, she could be tried for first degree murder under Virginia law. Prosecutors say they will try to push for the death penalty. Former President Barack Obama condemned Clinton harshly in a post on Twitter, saying “I once called Hillary Clinton a friend. But after what she did, I can't even bare to look at her anymore. I unequivocally denounce her, and I hope she will be prosecuted to the fullest extent under law.“  <br><br> The death penalty is still legal under Virginia law, though opposition has been mounting, as of late. She will be extradited to the police of Fairfax County, Virginia. <br><br> <i> This article was written by Shamar Marco. </i> </p>`);
+        e.pages.push(`<h3>August 17th, 2018 - Federal Bureau of Investigation catches Hillary Clinton in New York | <i>Syracuse Register</i> </h3><p> <i>This article has been updated to include further details. </i> <br><br> The former First Lady and 2016 presidential candidate has been on the run for years ever since an anonymous person leaked a video clip of her ordering her the murder of <u>Vince Foster</u>. That changed today, where the FBI coordinated with local authorities and the state of Virginia to capture Clinton, who had been hiding in a mansion in upstate New York. <br><br> Raiding her home, she quickly surrendered. Authorities found she was armed with weapons and had written a note about fleeing to Canada. <br><br>  The whereabouts of her husband Bill Clinton are unknown, though she was still wearing her wedding ring when she was caught, and she appeared to be living in luxury, with many amenities. <br><br> Given the murder of Foster was successful, she could be tried for first degree murder under Virginia law. Prosecutors say they will try to push for the death penalty. Former President Barack Obama condemned Clinton harshly in a post on Twitter, saying “I once called Hillary Clinton a friend. But after what she did, I can't even bare to look at her anymore. I unequivocally denounce her, and I hope she will be prosecuted to the fullest extent under law.“  <br><br> The death penalty is still legal under Virginia law, though opposition has been mounting, as of late. She will be extradited to the police of Fairfax County, Virginia. <br><br> <i> This article was written by Shamar Scott. </i> </p>`);
         e.pages.push(`<h3>November 21st, 2020 - Court sentences Hillary Clinton to death - <u>Newsmax</u> </h3><p>It's not looking good for Hillary Clinton. <br><br> The former First Lady, Senator, Secretary of State and 2016 presidential candidate Hillary Clinton was recently found guilty of the murder of Vince Foster, and sentenced to death. A trail of phone calls, video tapes, confessions, and clear evidence has led to the jury and judge sentencing her to execution via lethal injection. <br><br> Hillary Rodham Clinton has continued to profess her innocence, but her legal team, despite being very prestigious, has struggled to find good routes of defense. The system also railroaded her execution date to just 1 year from now, in 2020. Virginia Governor Ralph Northam has been neutral in the endeavor, though his ally Terry McAullife, has been strongly opposed, and has even called on Governor Northam to pardon Clinton. <br><br> This revalation is a major turning point in the accountability of our government. When asked about it on Saturday, President-elect Bernie Sanders said <i>''I believe the political violence that Clinton engaged in was despicable. That said, the solution to violence is not violence. I oppose the death penalty, and I believe she should be given a life sentence. Furthermore, I urge her to reveal who else was behind these crimes.''</i> Clinton has still refused to do so. <br><br> <i> Updated 12/5/2020 </i> </p>`);
         e.pages.push(`<h3>Hillary Clinton - Wikipedia </h3><p> <b>Hillary Diane Rodham Clinton (October 26, 1947 - December 9th, 2021)</b> was an American politician who served as the Secretary of State of the United States of America from 2009 to 2013. She is also a former Democratic member of the U.S. Senate from the state of New York. Clinton served in the Senate from 2001 to 2009. She was the first former First Lady to serve in the U.S. Senate and in a president's cabinet. <br><br> In 2016, Hillary Clinton was exposed for murder and fraud. She was apprehended by authorities in 2018, and following a long legal battle, executed in 2021. A bill banning the death penalty in Virginia passed soon after her execution. Governor Ralph Northam declined to make a comment, whilst Governor-elect Glenn Youngkin did not comment on her execution but called her actions ''disgusting.'' Her husband Bill Clinton was sentenced to 10 years in prison for fraud and conspiracy to murder.</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/Ozm0Se4.png'; }]); // read below
@@ -11807,7 +11809,7 @@ else if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] >= 2
      }
     }
 
-else if (e.player_answers.includes(51531) && quickstats[0] == 269) { // Killary, deadlock
+else if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] == 269) { // Killary, deadlock
         e.pages.push(`<h3>Deadlocked</h3><p>seems like you deadlocked the election facing Killary, really didn't feel like writing an ending for this lmao so yeah i admire your dedication using console to deadlock this but all you get for it is this lame line of text </p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/DZslERA.png'; }]); // read below
     if (songChange != 1) {
@@ -11826,13 +11828,11 @@ else if (e.player_answers.includes(51531) && quickstats[0] == 269) { // Killary,
 
 
 // Killary loss
-else if (e.player_answers.includes(51531) && quickstats[0] < 269) { // Killary, lost by cheating
+else if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] < 269) { // Killary, lost by cheating
         e.pages.push(`<h3>Jesus Christ</h3><p>It's been a week since Hillary Clinton won the 2016 election, despite everything. She has already proclaimed that she's broken the glass ceiling despite the so called ''witch hunt'' against her, and has already laid out her agenda. She doesn't even give a victory speech. Why should she? <br><br> She gave another speech to Goldman Sachs today, where she laughed with them. She says that under her term, the unborn will be killed at a rate never thought possible, that she would ''finish the job'' in Afghanistan, and set the populist movement and the working mass ''back 50 years''. The speech was leaked by an unknown source, though President-elect Clinton has refused to apologize. <br><br> You were chosen to defend America from this monster, and you failed. Some even speculate you lost intentionally, or that the player somehow used cheats, as ridiculous as these claims may be. Either way, your career is over. </p>`);
-        e.pages.push(`<h3> Marco Brown announces 2020 presidential bid | Massachusetts Enquirer </h3><p> Marco Brown, the Massachusetts senator who narrowly defeated Elizabeth Warren in 2018 to win back his Senate seat, launched his bid against President Hillary Rodham Clinton 1 week ago, to the surprise of many observers. <br><br> <i>''She's a truly remarkable woman. Wrong on almost every issue, and completely in the pocket of the Washington establishment. We need a change this November.''</i> Brown said. <br><br> <i> ''Whether it be her troop surge in Afghanistan, her pardoning of Anthony Weiner after he did inappropriate acts with a minor, her new authoritarian ''National Mental Hygiene Act'', her murder of Vince Foster, or any of the other dozen things she's done to harm our country. She is slowly turning America into a dictatorship. If you're mad with what she's doing to our country, join me in our crusade as we take it back.'' </i> <br><br> Republican Senate Minority leader Tim Marco endorsed Brown's run. Tim Marco said on Saturday <i>''You can notice Clinton slowly becoming more and more authoritarian. I hope we can put our differences aside this November and vote against her. She's too dangerous to keep in the White House.'' </i> You can learn more about how the situation is developing <a href="https://www.reddit.com/r/imaginaryelections/comments/1is30bx/the_wolf_in_sheeps_clothing/" target="_blank">here</a>. </p>`);
-        e.pages.push(`<h3> Marco Brown announces 2020 presidential bid | Massachusetts Enquirer </h3><p>  </p>`);
+        e.pages.push(`<h3> Scott Brown announces 2020 presidential bid | Massachusetts Enquirer </h3><p> Scott Brown, the Massachusetts senator who narrowly defeated Elizabeth Warren in 2018 to win back his Senate seat, launched his bid against President Hillary Rodham Clinton 1 week ago, to the surprise of many observers. <br><br> <i>''She's a truly remarkable woman. Wrong on almost every issue, and completely in the pocket of the Washington establishment. We need a change this November.''</i> Brown said. <br><br> <i> ''Whether it be her troop surge in Afghanistan, her pardoning of Anthony Weiner after he did inappropriate acts with a minor, her new authoritarian ''National Mental Hygiene Act'', her murder of Vince Foster, or any of the other dozen things she's done to harm our country. She is slowly turning America into a dictatorship. If you're mad with what she's doing to our country, join me in our crusade as we take it back.'' </i> <br><br> Republican Senate Minority leader Tim Scott endorsed Brown's run. Tim Scott said on Saturday <i>''You can notice Clinton slowly becoming more and more authoritarian. I hope we can put our differences aside this November and vote against her. She's too dangerous to keep in the White House.'' </i> You can learn more about how the situation is developing <a href="https://www.reddit.com/r/imaginaryelections/comments/1is30bx/the_wolf_in_sheeps_clothing/" target="_blank">here</a>. </p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/kg7ymVb.jpeg'; }]); 
         e.executable.push([1, () => { e.image = 'https://i.imgur.com/Ce5ckGP.png'; }]);
-        e.executable.push([2, () => { e.image = 'https://i.imgur.com/Ce5ckGP.png'; }]);
 
 
     if (songChange != 1) {
@@ -11852,7 +11852,7 @@ else if (e.player_answers.includes(51531) && quickstats[0] < 269) { // Killary, 
 
 
 // Trump wins 50 states
- else if ((e.player_answers[4] === 51271) && quickstats[0] >= 535 && (SpecialEnding != 1)) { // trump
+ else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] >= 535 && (SpecialEnding != 1)) { // trump
         e.pages.push(`<h3>Hillary, you're fired.</h3><p>Orange Man<marquee scrollamount='65'><h1>MAKE AMERICA GREAT AGAIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</marquee></p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/Bs5xDUA.png'; }]);
     if (songChange != 1) {
@@ -11872,7 +11872,7 @@ else if (e.player_answers.includes(51531) && quickstats[0] < 269) { // Killary, 
 
 // Trump wins
 
-       else if ((e.player_answers[4] === 51271) && quickstats[0] < 535 && quickstats[0] > 269 && (SpecialEnding != 1)) { // Trump wins the election!
+       else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] < 535 && quickstats[0] > 269 && (SpecialEnding != 1)) { // Trump wins the election!
         e.pages.push(`<h3>My folks, we are going to Make America Great Again!</h3><p>Out of all the ways this election could have gone, you did not expect it to go this way. Yet here we are. Donald Trump is already calling his victory “the greatest victory in the history of America” and how terrible Crooked Hillary is. Clinton is left to give her last-minute defeat speech to an emptying hall. Good riddance. The best positive you can take from this is her career is over.<br><br>Like it or not, the country has been changed forever. Trump managed to flip states that hadn't gone red since the eighties, and pundits are stunned by such an upset. With his victory, the Republican Party has become the party of tariffs and the working man, not the party of big business it was a year ago.</p>`);
         e.pages.push(`<h3>My folks, we are going to Make America Great Again!</h3><p>Fortunately, Trump has promised to appoint several conservative justices, and the conservative majority will be preserved or even expanded under his presidency. An overturning of Roe v. Wade isn't off the table, and could likely happen sometime around the early 2020s.<br><br>You definitely still have a chance to win the presidency in the future, but you'll also need to start gearing up for re-election. Surely you won't almost lose in a Republican stronghold like Texas, right?<br><br>For now though, you can just sit back and relax. This might not have been the best possible outcome, nor the outcome you hoped for, but it could've always been much worse.</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/gvmGNyb.png'; }]);
@@ -11894,8 +11894,8 @@ else if (e.player_answers.includes(51531) && quickstats[0] < 269) { // Killary, 
 
 // Trump deadlock
 
-       else if ((e.player_answers[4] === 51271) && quickstats[0] > 268 && quickstats[0] < 270 && (SpecialEnding != 1)) { // Trump deadlocks the election
-      e.election_json[0]["fields"].advisor_url = "https://i.imgur.com/5cfyftc.png";
+       else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] > 268 && quickstats[0] < 270 && (SpecialEnding != 1)) { // Trump deadlocks the election
+      campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/5cfyftc.png";
         e.pages.push(`<h3>A Contingent War</h3><p>The election has deadlocked. For the first time since 1824, Congress will decide the winner. It's a war in the house, but Republicans control a majority of state delegations, meaning they will almost certainly elevate Donald Trump to the presidency. The Senate will be closer, although Mike Pence will still be elevated to the role of Vice President. Clinton's campaign will try in vein to win in a last-ditch attempt, but it's obvious her career is over. Good riddance.<br><br>What would his administration even look like? He's already promising to appoint his own family to cabinet positions, and while mainstream media derides the idea, it's looking like there will be little in the way to stop him. It's unlikely you'll get a cabinet position, given the heated exchanges you had with Trump in the primary, but who knows?</p>`);
         e.pages.push(`<h3>A Contingent War</h3><p>Fortunately, Trump has promised to appoint several conservative justices, and the conservative majority could be preserved or even expanded under his presidency. An overturning of Roe v. Wade isn't out of the ordinary, and could likely happen sometime around the early 2020s.<br><br>You definitely still have a chance to win the presidency in the future, but you'll also need to start gearing up for re-election. Surely you won't almost lose in a Republican stronghold like Texas, right?<br><br>For now though, you can just sit back and relax. This might not have been the best possible outcome, nor the outcome you hoped for, it could've always been much worse.</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/gvmGNyb.png'; }]);
@@ -11940,7 +11940,7 @@ else if (quickstats[0] == 269 && (SpecialEnding != 1)) { // Deadlocked election 
 
 // Trump loses
 
-       else if ((e.player_answers[4] === 51271) && quickstats[0] < 269 && quickstats[0] > 3 && (SpecialEnding != 1)) { // Trump LOSES the election...
+       else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] < 269 && quickstats[0] > 3 && (SpecialEnding != 1)) { // Trump LOSES the election...
         e.pages.push(`<h3>A Rise and Fall</h3><p>You had hoped that what they had been saying was true, that Trump had 'blue collar appeal,' as all his campaign managers said, but as you warned them, it didn't work out. The RNC is absolutely livid that Trump screwed up such a winnable election. Trump calls the election rigged, Clinton declares victory, and the upshot is mass confusion and anger amongst the voters. Paul Ryan says the election result was 'unsurprising, especially after the Hollywood access tape.' Marco Rubio called the result 'disapointing but expected.'<br><br>Some Trump supporters even called for a march on Washington to demand a recount, though fortunately nobody actually attempted an attack. In any case, the debate stretches well into the night. The conservative majority in the Supreme Court will likely be diminished or gone by the end of Hillary's first term. McConnell has already backed down, and the process to confirm Merrick Garland is underway. Ruth Bader Ginsburg has said she plans to retire as soon as Clinton is inaugurated.</p>`);
         e.pages.push(`<h3>A Rise and Fall</h3><p>Hillary Clinton, the most corrupt, pro-choice, disastrous woman to ever bear the face of Earth, has been elected President. She picked the Javits Center in Manhattan to hold her victory speech, mainly because it had a massive glass ceiling on it. She shatters it and the crowd erupts into celebration. She keeps gloating during her victory speech. Talk of ''reproductive freedom'' and the ''glass ceiling'' are the only words coming out of her mouth. Eventually, you just turn off the TV. You don't want to hear her insufferable voice anymore.<br><br> You're already planning to run for the nomination again in 2020. The damage to this country will be irreversible if a woman is allowed to serve 2 terms. Donald Trump is still on the line of fire, and establishment Republicans continue to dunk on him. For now though, you can't be bothered to deal with the circus happening on Twitter anymore. You turn off the lights in your hotel room and head to bed.</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/kg7ymVb.jpeg'; }]);
@@ -11983,21 +11983,21 @@ else if (quickstats[0] >= 259 && quickstats[0] < 269 && (SpecialEnding != 1)) { 
 
 // Trump loses everything
 
-else if ((e.player_answers[4] === 51271) && quickstats[0] < 3 && (SpecialEnding != 1)) { // trump loses everything
+else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] < 3 && (SpecialEnding != 1)) { // trump loses everything
         e.pages.push(`<h3>Basket of Deplorables</h3><p>“I know there are only 60 days left to make our case – and don't get complacent; don't see the latest outrageous, offensive, inappropriate comment and think, "Well, he's done this time". We are living in a volatile political environment. You know, to just be grossly generalistic, you could put half of Trump's supporters into what I call the basket of deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables. - Hillary Clinton, CBS News</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/DZslERA.png'; }]);
     }
 
 // -------------------
 // IT'S RUBIO!111!
-       else if ((e.player_answers[4] === 51119) && quickstats[0] >= 535 && (SpecialEnding != 1)) { // RUBIOSLIDE
+       else if ((campaignTrail_temp.player_answers[4] === 51119) && quickstats[0] >= 535 && (SpecialEnding != 1)) { // RUBIOSLIDE
         e.pages.push(`<h3>“RUBIO WINS 50 STATES!”</h3><p>Let's dispel once and for all with this fiction that Barack Obama doesn't know what he's doing. He knows EXACTLY what he's doing. Barack Obama is undertaking a systematic effort to change this country, to make America more like the rest of the world. That's why he passed Obamacare and the stimulus and Dodd-Frank and the deal with Iran. It is a systematic effort to change America. When I'm president of the United States, we are going to re-embrace all the things that made America the greatest nation in the world and we are going to leave our children with what they deserve: the single greatest nation in the history of the world.</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/5NquPN6.png'; }]);
     }
 
 // Rubio victory
 
-       else if ((e.player_answers[4] === 51119) && quickstats[0] >= 270 && (SpecialEnding != 1)) { // Rubio wins the election!
+       else if ((campaignTrail_temp.player_answers[4] === 51119) && quickstats[0] >= 270 && (SpecialEnding != 1)) { // Rubio wins the election!
         e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>“We can now project that Marco Rubio has won 270 electoral votes, and with it, the presidency.”<br><br>America has been preserved! Senator Rubio has won the election, and prevented one of the worst women in history from becoming Commander-in-Chief. Clinton gives her muted concession speech, and Rubio's victory speech in Miami talks about the need for unity in our country.<br><br>Under Rubio's presidency, the conservative majority will be solidified or expanded. Hillary Clinton's career is all but over, and when Rubio is inaugurated, he promises he will choose you as his Secretary of State. Trump can keep whining, but he doesn't matter now.</p>`);
         e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>Rubio has already begun planning out his cabinet, and he has said that you will be his Secretary of State, which you gladly accept. Rubio has promised to appoint Neil Gorsuch to fill Antonin Scalia's open seat, and Democrats are furious that Clinton lost.<br><br>Hopefully Rubio can win in 2020. If he does, either you or Kasich will be in a great position to succeed him in 2024. Republicans have won both the Senate and the House, and Rubio will hopefully be able to pass much of his moderate-conservative agenda.<br><br>Rubio shifted a surprising amount to the center during the election, but hopefully he will come back to the right when he is inaugurated. Apart from that, it seems like this election has ended. Get ready to become Secretary of State!</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/5NquPN6.png'; }]);
@@ -12016,7 +12016,7 @@ else if ((e.player_answers[4] === 51271) && quickstats[0] < 3 && (SpecialEnding 
      }
     }
 
-       else if ((e.player_answers[4] === 51119) && quickstats[0] == 269 && (SpecialEnding != 1)) { // Rubio deadlocks the election
+       else if ((campaignTrail_temp.player_answers[4] === 51119) && quickstats[0] == 269 && (SpecialEnding != 1)) { // Rubio deadlocks the election
         e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>“We can now project that no candidate has won a majority.”<br><br>Those words from the TV were rather surprising, but Republicans control Congress, meaning both Rubio and Kasich have won the election. Clinton gives her muted concession speech, and Rubio's victory speech in Miami talks about the need for unity in our country.<br><br>Under Rubio's presidency, the conservative majority will be solidified or expanded. Hillary Clinton's career is all but over, and when Rubio is inaugurated, 8 years of disaster under Barack Obama will finally be ended. Trump can keep whining, but he doesn't matter now.</p>`);
         e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>Rubio has already begun planning out his cabinet, and he has said that you will be his Secretary of State, which you gladly accept. Rubio has promised to appoint Neil Gorsuch to fill Antonin Scalia's open seat, and Democrats are furious that Clinton lost.<br><br>Hopefully Rubio can win in 2020. If he does, either you or Kasich will be in a great position to succeed him in 2024. Republicans have won both the Senate and the House, and Rubio will hopefully be able to pass much of his moderate-conservative agenda.<br><br>Rubio shifted a surprising amount to the center during the election, but hopefully he will come back to the right when he is inaugurated. Apart from that, it seems like this election has ended. Get ready to become Secretary of State!</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/5NquPN6.png'; }]);
@@ -12035,7 +12035,7 @@ else if ((e.player_answers[4] === 51271) && quickstats[0] < 3 && (SpecialEnding 
      }
     }
 
-       else if ((e.player_answers[4] === 51119) && quickstats[0] < 269) { // Rubio loses the election
+       else if ((campaignTrail_temp.player_answers[4] === 51119) && quickstats[0] < 269) { // Rubio loses the election
         e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>“We can now project that Hillary Rodham Clinton has reached 270 electoral votes, and will become the 45th President of the United States.”<br><br>Damned be. The people of this country were given a choice, and they chose not to opt for decency. Hillary Clinton has won the election, must to the RNC's dismay, who had favorited Rubio over you and Trump. Trump is already slamming Rubio relentlessly. He gives a muted concession speech, Clinton declares her victory, and the next 4 years will be frustrating.<br><br>Trump said Crooked Hillary was 'terrible' but that he was 'totally unsurprised' Rubio lost. He's kicking the battered guy while he's down, it seems.</p>`);
         e.pages.push(`<h3>“We have a big announcement to make...”</h3><p>Clinton has already said she will back Merrick Garland to be the next Supreme Court justice, and the conservative majority is at jeopardy. Hopefully it can last long enough for a Republican to win back the White House and undo the amount of damage 'judges' like Sotomayor have done to our country. <br><br>Where does this leave you? It's hard to tell. You do have a great shot at winning the nomination in 2020, especially given people are likely to be worn out by 12 years of Democratic rule, but it'll be tough to win the nomination, with Trump and his cronies ready to nominate him in 2020. <br><br> Whatever happens, it's sure to be an interesting ride. Godspeed, and good luck with re-election in 2018.</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/kg7ymVb.jpeg'; }]);
@@ -12092,9 +12092,6 @@ else if (quickstats[0] > 339 && quickstats[0] < 535 && (SpecialEnding != 1)) { /
       moderatedefeat.addSong(moderatedefeatSong);
     changePlaylist(moderatedefeat);
      }
-
-ctsAchievement("Tough as Texas");
-
     }
 
 
@@ -12281,30 +12278,55 @@ else if (quickstats[0] > 2 && quickstats[0] <= 134 && (SpecialEnding != 1)) { //
     }
 }
 
-// End of Game achievements
+// End of Game Achievements
 
+	  function easyAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1.33)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+} // Achievements unlockable on cakewalk or above
+
+
+		var cakewalk = false;
+		if (campaignTrail_temp.difficulty_level_multiplier >= 1.22){
+    cakewalk = true;
+}
+
+
+	  
 if (Trump == 1 && quickstats[0] > 269 && (SpecialEnding != 1)) {
 ctsAchievement("Darker Vision"); // Ally with trump
 }
-if (CorruptBargain == 1 && quickstats[0] > 269 && (SpecialEnding != 1) && (campaignTrail_temp.player_answers.includes(51203))) {
-ctsAchievement("Soul Sold");  // Work with rubio to steal the nomination from Trump and sell out to the lobbyists
+if (campaignTrail_temp.player_answers.includes(51228) && quickstats[0] > 269 && (SpecialEnding != 1)) {
+ctsAchievement("Valid Crashout"); // Crash out and win
 }
-if (e.player_answers.includes(51228) && quickstats[0] > 269 && (SpecialEnding != 1)) {
-ctsAchievement("Valid Crashout"); // Crash out
-}
-if (quickstats[0] == 305 && (SpecialEnding != 1)) { // Historical victory
-ctsAchievement("History Arrives All The Same");
-}
-if (e.player_answers.includes(51531) && quickstats[0] > 269) { // Expose her and win
+if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] > 269) { // Expose her and win
 ctsAchievement("Karmic Retribution");
 }
-let TexasResult = e.final_state_results.find((x) => x.state == 1042); // Lose Texas
+if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] < 269) { // Expose her and lose (by cheating)
+unlockAchievement("''Fren'' For The End Of The World");
+}
+if (quickstats[0] > 269) {
+ctsAchievement("Tough as Texas");
+}
+if (quickstats[0] < 269 && cakewalk == true) {
+easyAchievement("For Shame");
+}
+let TexasResult = campaignTrail_temp.final_state_results.find((x) => x.state == 1042); // Lose Texas
 if(TexasResult.result[0].candidate == 201) {
 ctsAchievement("Texas Toast");
-}
+    }
+let WisconsinResult = campaignTrail_temp.final_state_results.find(x => x.state == 1049); 
+let MichiganResult = campaignTrail_temp.final_state_results.find(x => x.state == 1021); 
+let PennsylvaniaResult = campaignTrail_temp.final_state_results.find(x => x.state == 1037); 
+if (WisconsinResult.result[0].candidate == 200 && MichiganResult.result[0].candidate == 200 && PennsylvaniaResult.result[0].candidate == 200) {  
+easyAchievement("History Arrives All The Same");
+     }
+  
 let JerseyResult = campaignTrail_temp.final_state_results.find(x => x.state == 1029);
-if (JerseyResult && JerseyResult.result[0].candidate == 200 && SpecialEnding != 1) {
-    ctsAchievement("Expanding The Map");
+if (JerseyResult && JerseyResult.result[0].candidate == 200) {
+    easyAchievement("Expanding The Map"); // not using ctsAchievement so you can unlock it on easier difficulties
 }
 
     return construct(0);
@@ -12417,4 +12439,5 @@ applyTooltipsToObject(e.answer_feedback_json);
     };
   }
 })(jQuery, "tooltipPlugin", {}, null, ["getValue"]);
+
 
