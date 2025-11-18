@@ -1378,42 +1378,54 @@ function boomexplosiontime() {
         "https://i.imgur.com/1yG57BO.png";
     campaignTrail_temp.candidate_json[1]["fields"].first_name = "Denis";
     campaignTrail_temp.candidate_json[1]["fields"].last_name = "???";
-    window.setTimeout(function () {
-        const introCutscene = document.createElement("iframe");
-        introCutscene.src = "https://www.youtube.com/embed/yD8k0nf5xpU?start=2&end=9&autoplay=1&controls=0&fs=0&rel=0&loop=0&modestbranding=1&showinfo=0&disablekb=1&iv_load_policy=3&fs=0&vq=hd720&playsinline=1&mute=1&speed=0.75";
-        introCutscene.style.width = "100%";
-        introCutscene.style.height = "100%";
-        introCutscene.style.border = "none";
-        introCutscene.style.position = "absolute";
-        introCutscene.style.top = "0";
-        introCutscene.style.left = "0";
-        introCutscene.id = "introCutsceneVideo";
-        document.getElementById("game_window").appendChild(introCutscene);
+    // create observer to watch for game_window element
+	const observer = new MutationObserver(function(mutations, obs) {
+		const gameWindow = document.getElementById("game_window");
+		if (gameWindow) {
+			// disconnect observer since we found what we need
+			obs.disconnect();
+			
+			const introCutscene = document.createElement("iframe");
+			introCutscene.src = "https://www.youtube.com/embed/yD8k0nf5xpU?start=2&end=9&autoplay=1&controls=0&fs=0&rel=0&loop=0&modestbranding=1&showinfo=0&disablekb=1&iv_load_policy=3&fs=0&vq=hd720&playsinline=1&mute=1&speed=0.75";
+			introCutscene.style.width = "100%";
+			introCutscene.style.height = "100%";
+			introCutscene.style.border = "none";
+			introCutscene.style.position = "absolute";
+			introCutscene.style.top = "0";
+			introCutscene.style.left = "0";
+			introCutscene.id = "introCutsceneVideo";
+			gameWindow.appendChild(introCutscene);
 
-        const topBar = document.createElement("div");
-        topBar.id = "topBlackBar";
-        topBar.style.position = "absolute";
-        topBar.style.top = "0";
-        topBar.style.left = "0";
-        topBar.style.width = "100%";
-        topBar.style.height = "10%";
-        topBar.style.backgroundColor = "black";
-        document.getElementById("game_window").appendChild(topBar);
+			const topBar = document.createElement("div");
+			topBar.id = "topBlackBar";
+			topBar.style.position = "absolute";
+			topBar.style.top = "0";
+			topBar.style.left = "0";
+			topBar.style.width = "100%";
+			topBar.style.height = "10%";
+			topBar.style.backgroundColor = "black";
+			gameWindow.appendChild(topBar);
 
-        const bottomBar = document.createElement("div");
-        bottomBar.id = "bottomBlackBar"; // Assign ID
-        bottomBar.style.position = "absolute";
-        bottomBar.style.bottom = "0";
-        bottomBar.style.left = "0";
-        bottomBar.style.width = "100%";
-        bottomBar.style.height = "10%";
-        bottomBar.style.backgroundColor = "black";
-        document.getElementById("game_window").appendChild(bottomBar);
+			const bottomBar = document.createElement("div");
+			bottomBar.id = "bottomBlackBar";
+			bottomBar.style.position = "absolute";
+			bottomBar.style.bottom = "0";
+			bottomBar.style.left = "0";
+			bottomBar.style.width = "100%";
+			bottomBar.style.height = "10%";
+			bottomBar.style.backgroundColor = "black";
+			gameWindow.appendChild(bottomBar);
 
-        document.getElementsByTagName("audio")[0].currentTime = 56;
-        // musicBox.style.display = "";
-        videoPlay(); // Play the video automatically when it's loaded
-    }, 50);
+			document.getElementsByTagName("audio")[0].currentTime = 56;
+			videoPlay();
+		}
+	});
+
+	// start observing the document body for changes
+	observer.observe(document.body, {
+		childList: true,
+		subtree: true
+	});
     nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#A52A2A"
     nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#050505"
     $(".container")[0].style.backgroundColor = "#0a0a0a"
@@ -1703,7 +1715,7 @@ function notrunning() {
         campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 7] = tunnel(3007);
     }
     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 9] = tunnel(3009);
-    campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 11] = tunnel(3011);
+    campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 10] = tunnel(3011);
     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 14] = tunnel(6006);
     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 15] = tunnel(6007);
     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 20] = tunnel(3013);
@@ -1788,9 +1800,6 @@ function notrunning() {
     customquote = quotes[Math.floor((Math.random() * quotes.length))
     ]
     corrr = `\n<h2>THE PRESIDENT OF THE UNITED STATES</h2><font id='wittyquote' size='3' color='white'><em>` + customquote + `</em></font>`
-
-
-
 }
 
 
