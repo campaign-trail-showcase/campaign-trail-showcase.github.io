@@ -45314,1121 +45314,542 @@ scrollbarObserver.observe(observeTarget, {
 			campaignTrail_temp.questions_json[7] = tunnel(6968);
 		}
 		
-        if((Daschle > 0) && (e.noCounter == 5)){
-            campaignTrail_temp.questions_json[5] = tunnel(7000);   
-        }
-	else if((Cred > 1) && (Daschle == 0) && (e.noCounter == 5)){
-            campaignTrail_temp.questions_json[5] = tunnel(8912);   
-        }
-        else if((Cred < 2) && (Daschle == 0) && (e.noCounter == 5)){
-            campaignTrail_temp.questions_json[5] = tunnel(6969);   
-        }
+		// ============= helper functions =============
+		const isQuestion = (num) => e.noCounter === num;
+		const hasAnswer = (...answerIds) => answerIds.some(id => e.player_answers.includes(id));
+		const hasAllAnswers = (...answerIds) => answerIds.every(id => e.player_answers.includes(id));
 
-        if((Chauvinism == -1) && (Quidpro == 0) && (e.noCounter == 7)){
-            campaignTrail_temp.questions_json[7] = tunnel(6968);   
-        }
-        else if((Quidpro == 1) && (Chauvinism > -1) && (e.noCounter == 7)){
-            campaignTrail_temp.questions_json[7] = tunnel(8915);   
-        }
-        else if((Quidpro == 0) && (Chauvinism > -1) && (e.noCounter == 7)){
-            campaignTrail_temp.questions_json[7] = tunnel(6968);   
-        }
-        else if((Quidpro == 0) && (Chauvinism == -1) && (e.noCounter == 7)){
-            campaignTrail_temp.questions_json[7] = tunnel(6968);   
-        }
-        else if((Quidpro == 1) && (Chauvinism == -1) && (e.noCounter == 7)){
-            campaignTrail_temp.questions_json[7] = tunnel(6968);   
-        }
+		const setQuestion = (index, tunnelId, pictureUrl = null, callback = null) => {
+			campaignTrail_temp.questions_json[index] = tunnel(tunnelId);
+			if (pictureUrl) pictureDict[index] = pictureUrl;
+			if (callback) callback();
+		};
 
-        if((Socdem == 1) && (Cred == 1) && (e.noCounter == 8)){
-            campaignTrail_temp.questions_json[8] = tunnel(8916);   
-        }
-        else if((Socdem == 1) && (Cred <= 0) && (e.noCounter == 8)){
-            campaignTrail_temp.questions_json[8] = tunnel(6967);   
-        }
-        else if((Socdem == 1) && (Cred >= 2) && (e.noCounter == 8)){
-            campaignTrail_temp.questions_json[8] = tunnel(6966);   
-        }
-        else if((Neolib == 1) && (Cred == 1) && (e.noCounter == 8)){
-            campaignTrail_temp.questions_json[8] = tunnel(6929);   
-        }
-        else if((Neolib == 1) && (Cred <= 0) && (e.noCounter == 8)){
-            campaignTrail_temp.questions_json[8] = tunnel(6928);   
-        }
-        else if((Neolib == 1) && (Cred >= 2) && (e.noCounter == 8)){
-            campaignTrail_temp.questions_json[8] = tunnel(6927);   
-        }
+		// ============= question config =============
+		const questionConfig = {
+			5: [
+				{ when: () => Daschle > 0, tunnel: 7000 },
+				{ when: () => Cred > 1 && Daschle == 0, tunnel: 8912 },
+				{ when: () => Cred < 2 && Daschle == 0, tunnel: 6969 }
+			],
+			
+			7: [
+				{ when: () => Quidpro == 1 && Chauvinism > -1, tunnel: 8915 },
+				{ when: () => true, tunnel: 6968 } // everything else goes here
+			],
+			
+			8: [
+				{ when: () => Socdem == 1 && Cred == 1, tunnel: 8916 },
+				{ when: () => Socdem == 1 && Cred <= 0, tunnel: 6967 },
+				{ when: () => Socdem == 1 && Cred >= 2, tunnel: 6966 },
+				{ when: () => Neolib == 1 && Cred == 1, tunnel: 6929 },
+				{ when: () => Neolib == 1 && Cred <= 0, tunnel: 6928 },
+				{ when: () => Neolib == 1 && Cred >= 2, tunnel: 6927 }
+			],
+			
+			10: [
+				{ when: () => Cred >= 2, tunnel: 8919 },
+				{ when: () => Cred < 2, tunnel: 6964 }
+			],
+			
+			13: [
+				{ when: () => Cred == 4 && Daschle == 1 && Compromise == 1 && Public == 0, tunnel: 4000 },
+				{ when: () => Cred >= 3 && Daschle == 1 && Compromise == 1 && Public == 0, tunnel: 6963 },
+				{ when: () => Cred == 4 && Daschle == 0 && Compromise == 1 && Public == 0, tunnel: 4000 },
+				{ when: () => Cred < 3 && Daschle == 0 && Compromise == 1 && Public == 0, tunnel: 6961 },
+				{ when: () => Cred >= 4 && Compromise == 0 && Public == 0, tunnel: 6962 }, // Daschle doesn't matter
+				{ when: () => Cred < 4 && Daschle == 1 && Compromise == 0 && Public == 0, tunnel: 6960 },
+				{ when: () => Cred < 3 && Daschle == 0 && Compromise == 0 && Public == 0, tunnel: 6959 },
+				{ when: () => Cred >= 5 && Compromise == 0 && Public == 1, tunnel: 6958 }, // Daschle doesn't matter
+				{ when: () => Cred < 5 && Compromise == 0 && Public == 1, tunnel: 6957 } // Daschle doesn't matter
+			],
+			
+			14: [
+				{ when: () => Neolib == 1 && Wins > 2 && Healthcare == 1, tunnel: 4001 },
+				{ when: () => Socdem == 1 && Wins > 2 && Healthcare == 1, tunnel: 6956 },
+				{ when: () => Healthcare == 0, tunnel: 6955, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/8xqwAws.png" },
+				{ when: () => Socdem == 1 && Wins < 3 && Healthcare == 1, tunnel: 6954, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/zzDMqwu.png" },
+				{ when: () => Neolib == 1 && Wins < 3 && Healthcare == 1, tunnel: 6953, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/zzDMqwu.png" }
+			],
+			
+			15: [
+				{ when: () => Neolib == 1 && Wins >= 3, tunnel: 6777 },
+				{ when: () => Neolib == 1 && Wins < 3, tunnel: 8913 },
+				{ when: () => Socdem == 1 && Wins >= 3, tunnel: 6775 },
+				{ when: () => Socdem == 1 && Wins < 3, tunnel: 6776 }
+			],
+			
+			16: [
+				{ when: () => Neolib == 1 && Cred <= 5 && Kagan == 1, tunnel: 4002 },
+				{ when: () => Neolib == 1 && Cred <= 5 && Garland == 1, tunnel: 6952 },
+				{ when: () => Neolib == 1 && Cred <= 5 && Sotomayor == 1, tunnel: 6951 },
+				{ when: () => Neolib == 1 && Cred <= 5 && Napolitano == 1, tunnel: 6950 },
+				{ when: () => Neolib == 1 && Cred > 5 && Kagan == 1, tunnel: 6949 },
+				{ when: () => Neolib == 1 && Cred > 5 && Napolitano == 1, tunnel: 6948 },
+				{ when: () => Neolib == 1 && Cred > 5 && Garland == 1, tunnel: 6947 },
+				{ when: () => Neolib == 1 && Cred > 5 && Sotomayor == 1, tunnel: 6946 },
+				{ when: () => Socdem == 1 && Cred <= 5 && Kagan == 1, tunnel: 6945 },
+				{ when: () => Socdem == 1 && Cred <= 5 && Wood == 1, tunnel: 6944 },
+				{ when: () => Socdem == 1 && Cred <= 5 && Garland == 1, tunnel: 6943 },
+				{ when: () => Socdem == 1 && Cred <= 5 && Sotomayor == 1, tunnel: 6942 },
+				{ when: () => Socdem == 1 && Cred > 5 && Kagan == 1, tunnel: 6941 },
+				{ when: () => Socdem == 1 && Cred > 5 && Wood == 1, tunnel: 6940 },
+				{ when: () => Socdem == 1 && Cred > 5 && Garland == 1, tunnel: 6939 },
+				{ when: () => Socdem == 1 && Cred > 5 && Sotomayor == 1, tunnel: 6938 }
+			],
+			
+			18: [
+				{ when: () => Socdem == 1 && Cred >= 6 && hasAllAnswers(8999, 8938), tunnel: 6931, callback: switcheroo13 },
+				{ when: () => Neolib == 1 && Cred >= 6 && hasAllAnswers(8999, 8938), tunnel: 6930, callback: switcheroo13 },
+				{ when: () => Neolib == 1 && Cred >= 6, tunnel: 6935, callback: switcheroo14 },
+				{ when: () => Neolib == 1 && Cred < 6 && Huntsman == 1 && hasAnswer(8980, 8984), tunnel: 6935, callback: switcheroo14 },
+				{ when: () => Socdem == 1 && Cred >= 6, tunnel: 6934, callback: switcheroo18 },
+				{ when: () => Socdem == 1 && Cred < 4, tunnel: 6933, callback: switcheroo19 },
+				{ when: () => Neolib == 1 && Cred < 4, tunnel: 6932, callback: switcheroo16 },
+				{ when: () => Socdem == 1 && Cred < 6, tunnel: 6937, callback: switcheroo15 },
+				{ when: () => Neolib == 1 && Cred < 6, tunnel: 4004, callback: switcheroo15 }
+			],
+			
+			19: [
+				{ when: () => Socdem == 1 && Cred >= 6 && Wood == 1 && Sears == 1 && hasAnswer(8994, 8980, 8984) && hasAnswer(9098), 
+				  tunnel: 4005, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AT7IQFC.png" },
+				{ when: () => Neolib == 1 && Cred >= 6, tunnel: 6926, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BFRDJVv.png" },
+				{ when: () => true, tunnel: 4006 } // All other cases
+			],
+			
+			20: [
+				{ when: () => hasAnswer(9122, 9123, 9124, 9121) && Midterms == 1 && hasAllAnswers(8925, 8927, 8936), 
+				  tunnel: 6774, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/W7WM5im.png " },
+				{ when: () => Midterms == 1 && (Econ >= -2 || Econ <= -7) && Cred >= 6, 
+				  tunnel: 6779, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/gnLy369.png" },
+				{ when: () => Midterms == 1 && (Econ >= -2 || Econ <= -7) && Cred < 6, 
+				  tunnel: 6778, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/gnLy369.png" },
+				{ when: () => Midterms == 1, tunnel: 6835, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/peEPJt8.png" },
+				{ when: () => Midterms == 0 && (Econ >= -2 || Econ <= -7) && Cred >= 6, 
+				  tunnel: 6779, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/gnLy369.png" },
+				{ when: () => Midterms == 0 && (Econ >= -2 || Econ <= -7) && Cred < 6, 
+				  tunnel: 6778, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/gnLy369.png" },
+				{ when: () => Midterms == 0, tunnel: 4007 }
+			],
+			
+			21: [
+				{ when: () => hasAnswer(9122), tunnel: 6925 }
+			],
+			
+			22: [
+				{ when: () => Neolib == 1, tunnel: 4009, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/G7zxnD7.png" },
+				{ when: () => Socdem == 1, tunnel: 6924, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/cVnEd9C.png" }
+			],
+			
+			23: [
+				{ when: () => hasAnswer(9142), tunnel: 6923, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/U15nANn.png" },
+				{ when: () => hasAnswer(9146), tunnel: 6922, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GBgBI5V.png" },
+				{ when: () => hasAnswer(9144), tunnel: 4010, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GBgBI5V.png" },
+				{ when: () => hasAnswer(9145), tunnel: 6921, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/jHb7xWi.png" },
+				{ when: () => hasAnswer(9141), tunnel: 6920, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/7cafJ1i.png" },
+				{ when: () => hasAnswer(9143), tunnel: 6919, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/7cafJ1i.png" }
+			],
+			
+			24: [
+				{ when: () => hasAnswer(8936) && Wins >= 3, tunnel: 6918 },
+				{ when: () => hasAnswer(8936) && Wins < 3, tunnel: 4011 },
+				{ when: () => Wins >= 2, tunnel: 6918 },
+				{ when: () => Wins < 2, tunnel: 4011 }
+			],
+			
+			25: [
+				{ when: () => hasAnswer(9158), tunnel: 4012 },
+				{ when: () => hasAnswer(9160) && Chauvinism == 1, tunnel: 6917, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/bz4lAvO.png" },
+				{ when: () => hasAnswer(9160) && Chauvinism < 1, tunnel: 6916, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/bz4lAvO.png" },
+				{ when: () => hasAnswer(9159, 9161), tunnel: 6915, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/h8Ks9BR.png" }
+			],
+			
+			26: [
+				{ when: () => window.VPisCandidate == 0, tunnel: 4013 },
+				{ when: () => window.VPisCandidate == 1, tunnel: 6914 }
+			],
+			
+			27: [
+				{ when: () => hasAnswer(9151, 9149, 9153) && hasAnswer(8998), tunnel: 4014 },
+				{ when: () => hasAnswer(9151, 9149, 9153) && hasAnswer(8999, 9000), tunnel: 6913, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/rfd3mUi.png" },
+				{ when: () => hasAnswer(9152, 9150), tunnel: 6912, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/1UfVd8f.png" },
+				{ when: () => hasAnswer(9155, 9157), tunnel: 6911, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/qAAAz2s.png" },
+				{ when: () => hasAnswer(9154, 9156), tunnel: 6910, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/NB0EG3F.png" },
+				{ when: () => hasAnswer(9147), tunnel: 6909, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/NB0EG3F.png" },
+				{ when: () => hasAnswer(9148), tunnel: 1234, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/yqA2igC.png" }
+			],
+			
+			28: [
+				{ when: () => Cred >= 4, tunnel: 4015 },
+				{ when: () => Cred < 4 && hasAnswer(9122, 9123, 9124, 9121), tunnel: 4015 },
+				{ when: () => Cred < 4 && hasAnswer(8994) && hasAnswer(8995, 9073), tunnel: 4015 },
+				{ when: () => Cred < 4 && hasAnswer(8994), tunnel: 6908, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BOY3Ngj.png" },
+				{ when: () => Cred < 4 && hasAnswer(9664, 9661), tunnel: 6907, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BOY3Ngj.png" },
+				{ when: () => Cred < 4 && hasAllAnswers(8925, 8927), tunnel: 6907, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BOY3Ngj.png" },
+				{ when: () => Cred < 4 && hasAnswer(8986), tunnel: 6906, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BOY3Ngj.png" },
+				{ when: () => Cred < 4, tunnel: 6905, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BOY3Ngj.png" }
+			],
+			
+			29: [
+				{ when: () => hasAnswer(8972), tunnel: 6904 },
+				{ when: () => true, tunnel: 4016 }
+			],
+			
+			30: [
+				{ when: () => hasAnswer(8994, 8980, 8984) && hasAnswer(8999) && 
+							  (hasAnswer(9122, 9123, 9124, 9121) || 
+							   (Sotomayor == 1 && Napolitano == 1 && hasAnswer(9175)) || 
+							   (hasAnswer(9109, 9117) && Kagan == 1 && hasAllAnswers(9125, 9137))) && 
+							  hasAnswer(9159, 9161) && Wins >= 4, 
+				  tunnel: 6900, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/VNQYsIq.png" },
+				{ when: () => hasAnswer(8979, 8981, 8983, 8988, 8991) && hasAnswer(9158), tunnel: 6903 },
+				{ when: () => hasAnswer(8980, 8984, 8994) && hasAnswer(9158, 9159, 9161), tunnel: 6902 },
+				{ when: () => hasAnswer(8980, 8984, 8994, 8979, 8981, 8983, 8988, 8991) && hasAnswer(9160), tunnel: 6901 },
+				{ when: () => Healthcare == 0, tunnel: 4017 }
+			],
+			
+			31: [
+				{ when: () => Reagan === 1, tunnel: 6785, callback: () => setupReagan() },
+				{ when: () => hasAllAnswers(9017, 9162), tunnel: 6895, callback: () => setupRep(7, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/qm5EgUg.png") },
+				{ when: () => hasAnswer(9221), tunnel: 6885, callback: () => setupRep(6, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/rQEE7ui.png") },
+				{ when: () => Neolib == 1 && hasAnswer(8942) && hasAnswer(9153, 9149, 9151) && Cred < 4, 
+				  tunnel: 6887, callback: () => setupRep(26, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BdZ6EYq.png") },
+				{ when: () => Socdem == 1 && hasAnswer(8942) && hasAnswer(9147) && Cred < 4, 
+				  tunnel: 6886, callback: () => setupRep(26, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BdZ6EYq.png") },
+				{ when: () => window.VPisCandidate == 1 && Cred < 1 && hasAllAnswers(8907, 8943) && Chauvinism > 0, 
+				  tunnel: 6810, callback: () => setupRep(29, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/sjUQhC8.png") },
+				{ when: () => window.VPisCandidate == 1 && Cred >= 1 && hasAllAnswers(8907, 8943) && Chauvinism > 0, 
+				  tunnel: 6815, callback: () => setupRep(29, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/sjUQhC8.png") },
+				{ when: () => window.VPisCandidate == 0 && Wins > 3 && hasAllAnswers(8907, 8943) && Chauvinism > 0, 
+				  tunnel: 6802, callback: () => setupRep(29, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/sjUQhC8.png") },
+				{ when: () => window.VPisCandidate == 0 && Wins <= 3 && hasAllAnswers(8907, 8943) && Chauvinism > 0, 
+				  tunnel: 6819, callback: () => setupRep(29, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/sjUQhC8.png") },
+				{ when: () => hasAnswer(9173, 9174, 9179) && hasAnswer(9187, 9190, 9193, 9196) && Cred < 5, 
+				  tunnel: 6892, callback: () => setupRep(1, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/cgq9KUQ.png") },
+				{ when: () => hasAllAnswers(8972, 9203, 9162, 8938, 9184) && Cred < 6, 
+				  tunnel: 6787, callback: () => setupRep(2, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5Oym94K.png") },
+				{ when: () => hasAllAnswers(8972, 9203, 9162) && Cred < 6, 
+				  tunnel: 6896, callback: () => setupRep(2, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5Oym94K.png") },
+				{ when: () => hasAnswer(9131, 9665) && hasAnswer(9178, 9179, 9180, 9181), 
+				  tunnel: 6888, callback: () => setupRep(21, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/2vyFMrM.png") },
+				{ when: () => hasAnswer(8998) && hasAnswer(9173, 9174, 9179) && Cred >= 5, 
+				  tunnel: 6792, callback: () => setupRep(38, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/yrwKUtR.png") },
+				{ when: () => hasAllAnswers(8926, 8929) && hasAnswer(8994, 8980, 8984) && 
+							  hasAnswer(9086, 9088, 9090, 9096, 9099, 9102, 9105, 9107) && hasAnswer(9160), 
+				  tunnel: 6793, callback: () => { setupRep(20, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/o6HqZpf.png"); 
+												  vpTable["Ron Paul"] = "Herman Cain"; switcheroo33(); } },
+				{ when: () => hasAllAnswers(8926, 8929) && hasAnswer(8994, 8980, 8984) && hasAnswer(9160) && 
+							  hasAnswer(9098, 9101, 9089, 9097, 9100, 9108) && hasAnswer(9184), 
+				  tunnel: 6893, callback: () => { setupRep(20, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/o6HqZpf.png"); 
+												  vpTable["Ron Paul"] = "Herman Cain"; switcheroo20(); } },
+				{ when: () => Cred > 8 && hasAnswer(8964) && Chauvinism > 0, 
+				  tunnel: 6879, callback: () => setupRep(24, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AIdT59D.png", switcheroo34) },
+				{ when: () => Cred > 8, tunnel: 6879, callback: () => setupRep(24, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AIdT59D.png", switcheroo24) },
+				{ when: () => Cred <= 4 && hasAllAnswers(8925, 9137), 
+				  tunnel: 6820, callback: () => setupRep(28, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/JExoKTP.png", switcheroo28) },
+				{ when: () => hasAllAnswers(8936, 9084) && Cred < 4, 
+				  tunnel: 6881, callback: () => setupRep(3, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/q3zVCi5.png", switcheroo3) },
+				{ when: () => hasAnswer(9084) && Cred < 4, 
+				  tunnel: 6880, callback: () => setupRep(3, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/q3zVCi5.png", switcheroo3) },
+				{ when: () => hasAllAnswers(9085, 9122) && Cred < 4, 
+				  tunnel: 6869, callback: () => setupRep(4, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/KEbEiaj.png", switcheroo4) },
+				{ when: () => hasAnswer(9085) && Cred < 4, 
+				  tunnel: 6870, callback: () => setupRep(4, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/KEbEiaj.png", switcheroo4) },
+				{ when: () => hasAnswer(9166) && Cred >= 7, 
+				  tunnel: 6800, callback: () => setupRep(5, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/J8AcWxq.png", switcheroo5) },
+				{ when: () => hasAnswer(9166) && Cred >= 4, 
+				  tunnel: 6899, callback: () => setupRep(5, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/J8AcWxq.png", switcheroo36) },
+				{ when: () => hasAnswer(8965) && Cred >= 7, 
+				  tunnel: 6799, callback: () => setupRep(22, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/VyTrYTy.png", switcheroo22) },
+				{ when: () => hasAnswer(8965) && Cred >= 4, 
+				  tunnel: 6891, callback: () => setupRep(22, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/VyTrYTy.png", switcheroo35) },
+				{ when: () => hasAnswer(8964) && Cred >= 7, 
+				  tunnel: 6798, callback: () => setupRep(25, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/MU8yQrY.png", switcheroo25) },
+				{ when: () => hasAnswer(8964) && Cred >= 4, 
+				  tunnel: 6890, callback: () => setupRep(25, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/MU8yQrY.png", switcheroo37) }
+			],
+			
+			32: [
+				{ when: () => Wins < 1 && hasAnswer(9567, 9570), tunnel: 4019, callback: () => setupRep(31, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lCJTyjw.png", () => { switcheroo31(); switcheroo32(); }) },
+				{ when: () => Wins > 3 && hasAnswer(9567, 9570), tunnel: 6897, callback: () => setupRep(31, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lCJTyjw.png", () => { switcheroo31(); switcheroo32(); }) },
+				{ when: () => Wins > 1 && hasAnswer(9567, 9570), tunnel: 6898, callback: () => setupRep(31, "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lCJTyjw.png", () => { switcheroo31(); switcheroo32(); }) },
+				{ when: () => Wins < 1, tunnel: 4019 },
+				{ when: () => Wins > 3, tunnel: 6897 },
+				{ when: () => Wins > 1, tunnel: 6898 }
+			],
+			
+			33: [
+				{ when: () => Rep == 41, tunnel: 6783 },
+				{ when: () => Rep == 5, tunnel: 6894 },
+				{ when: () => Rep == 2, tunnel: 6889 },
+				{ when: () => Rep == 6, tunnel: 6884 },
+				{ when: () => Rep == 1 && hasAnswer(9179), tunnel: 6883 },
+				{ when: () => Rep == 1, tunnel: 6882 },
+				{ when: () => Rep == 7, tunnel: 6878 },
+				{ when: () => Rep == 20, tunnel: 6877 },
+				{ when: () => Rep == 4 && hasAnswer(9331), tunnel: 6865, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/pWSBg5L.png" },
+				{ when: () => Rep == 4, tunnel: 6866 },
+				{ when: () => Rep == 24, tunnel: 6858 },
+				{ when: () => Rep == 25, tunnel: 6857 },
+				{ when: () => Rep == 26, tunnel: 6850 },
+				{ when: () => Rep == 22, tunnel: 6848 },
+				{ when: () => Rep == 21, tunnel: 6840 },
+				{ when: () => Rep == 3, tunnel: 6836 },
+				{ when: () => Rep == 28, tunnel: 6817 },
+				{ when: () => Rep == 31, tunnel: 6801 },
+				{ when: () => Rep == 29 && hasAllAnswers(8926, 8929), tunnel: 6812 },
+				{ when: () => Rep == 29, tunnel: 6816 },
+				{ when: () => Rep == 38 && hasAnswer(9018, 9656, 9659, 9662), tunnel: 6791 },
+				{ when: () => Rep == 38 && hasAnswer(9019, 9657, 9660, 9663, 9664), tunnel: 6790 }
+			],
+			
+			34: [
+				{ when: () => Carrington == 1 && Wins <= 3, tunnel: 6809, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/fY5r2R9.png" },
+				{ when: () => Carrington == 1 && Wins > 3, tunnel: 6807, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/fY5r2R9.png" },
+				{ when: () => hasAnswer(9179), tunnel: 6873, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/9yT8g6k.png" },
+				{ when: () => hasAnswer(9175, 9176), tunnel: 4021 },
+				{ when: () => hasAnswer(9182), tunnel: 6876, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/r7s1fkN.png" },
+				{ when: () => hasAnswer(9180, 9181, 9183), tunnel: 6875, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/FwEbcVi.png" },
+				{ when: () => hasAnswer(9178), tunnel: 6874, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/FwEbcVi.png" },
+				{ when: () => hasAnswer(9173, 9174), tunnel: 6872, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/sDr0plG.png" },
+				{ when: () => hasAnswer(9177), tunnel: 6871, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/yiw7aGs.png" },
+				{ when: () => hasAnswer(9503), tunnel: 1235, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/U15nANn.png" }
+			],
+			
+			35: [
+				{ when: () => Instability <= -3 && Carrington == 1, tunnel: 6808, 
+				  picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/tDJ0ai7.png",
+				  callback: () => { e.global_parameter_json[0].fields.question_count = 36; } },
+				{ when: () => Instability >= -2 && Wins <= 3 && Carrington == 1, tunnel: 6806, 
+				  picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/oKYAsxo.png" },
+				{ when: () => Instability >= -2 && Wins > 3 && Carrington == 1, tunnel: 6805, 
+				  picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/oKYAsxo.png" },
+				{ when: () => Rep == 41, tunnel: 6782 },
+				{ when: () => Rep == 5, tunnel: 6868 },
+				{ when: () => Rep == 20, tunnel: 6867 },
+				{ when: () => Rep == 24, tunnel: 6828 },
+				{ when: () => Rep == 1, tunnel: 6859 },
+				{ when: () => Rep == 3, tunnel: 6831 },
+				{ when: () => Rep == 7, tunnel: 6854 },
+				{ when: () => Rep == 4 && hasAnswer(9331), tunnel: 6856 },
+				{ when: () => Rep == 4, tunnel: 6852 },
+				{ when: () => Rep == 25, tunnel: 6845 },
+				{ when: () => Rep == 2 && hasAllAnswers(8938, 9184, 9019), tunnel: 6786 },
+				{ when: () => Rep == 2, tunnel: 6834 },
+				{ when: () => Rep == 21, tunnel: 6832 },
+				{ when: () => Rep == 6 && hasAnswer(9665, 9666, 9667) && hasAnswer(9018, 9656, 9659, 9662) && hasAnswer(9286), tunnel: 6822 },
+				{ when: () => Rep == 38 && hasAnswer(9608) && hasAnswer(9665, 9666, 9667), tunnel: 6789 },
+				{ when: () => (Rep == 6 || Rep == 38) && hasAnswer(9018, 9656, 9659, 9662) && hasAnswer(9286), 
+				  tunnel: 6847, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/7u950x2.png" },
+				{ when: () => Rep == 38 && hasAnswer(9608), tunnel: 6847, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/7u950x2.png" },
+				{ when: () => Rep == 6, tunnel: 6822 },
+				{ when: () => Rep == 26 && hasAnswer(9147), tunnel: 6844, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/J4HVwVz.png" },
+				{ when: () => Rep == 26, tunnel: 6826 },
+				{ when: () => Rep == 22 && (Neolib == 1 || hasAnswer(9187, 9188, 9189, 9190, 9191, 9192, 9193, 9194, 9195, 9196, 9197, 9198)), tunnel: 6839 },
+				{ when: () => Rep == 22 && Socdem == 1 && hasAnswer(9184, 9185, 9186), tunnel: 6838 },
+				{ when: () => Rep == 31, tunnel: 6797 },
+				{ when: () => Rep == 29 && Carrington == 0, tunnel: 6818 },
+				{ when: () => Rep == 28, tunnel: 6814 },
+				{ when: () => Rep == 38, tunnel: 6789 }
+			],
+			
+			36: [
+				{ when: () => Instability >= -2 && Cred >= 1 && Carrington == 1, tunnel: 6803, 
+				  picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/RbyRnKi.png" },
+				{ when: () => Instability >= -2 && Cred < 1 && Carrington == 1, tunnel: 6804, 
+				  picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/RbyRnKi.png" },
+				{ when: () => Instability <= -3 && Over == 0 && Carrington == 1, tunnel: 6808, 
+				  picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/tDJ0ai7.png",
+				  callback: () => { e.global_parameter_json[0].fields.question_count = 37; } },
+				{ when: () => Rep == 41, tunnel: 6781 },
+				{ when: () => Rep == 20, tunnel: 6864 },
+				{ when: () => Rep == 5, tunnel: 6863 },
+				{ when: () => Rep == 3, tunnel: 6830 },
+				{ when: () => Rep == 21, tunnel: 6829 },
+				{ when: () => Rep == 24, tunnel: 6827 },
+				{ when: () => Rep == 26, tunnel: 6825 },
+				{ when: () => Rep == 7, tunnel: 6853 },
+				{ when: () => Rep == 4 && hasAllAnswers(9343, 9382), tunnel: 6855, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/y1cI717.png" },
+				{ when: () => Rep == 4, tunnel: 6851 },
+				{ when: () => Rep == 1, tunnel: 6843 },
+				{ when: () => Rep == 25, tunnel: 6841 },
+				{ when: () => Rep == 22, tunnel: 6837 },
+				{ when: () => Rep == 2, tunnel: 6833 },
+				{ when: () => (Rep == 6 || Rep == 38) && hasAnswer(9413), tunnel: 6846, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/e4QchUb.png" },
+				{ when: () => Rep == 6, tunnel: 6821 },
+				{ when: () => Rep == 28, tunnel: 6813 },
+				{ when: () => Rep == 38, tunnel: 6788 },
+				{ when: () => Rep == 31, tunnel: 6796 },
+				{ when: () => Rep == 29 && Carrington == 0, tunnel: 6811 }
+			],
+			
+			37: [
+				{ when: () => Instability >= -2 && Carrington == 1, tunnel: 6795, 
+				  picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/gywkB8I.png",
+				  callback: () => { e.global_parameter_json[0].fields.question_count = 38; } },
+				{ when: () => Instability <= -3 && Over == 0 && Carrington == 1, tunnel: 6808, 
+				  picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/tDJ0ai7.png",
+				  callback: () => { e.global_parameter_json[0].fields.question_count = 38; } },
+				{ when: () => Rep == 7, tunnel: 6849 },
+				{ when: () => window.VPisCandidate == 0 && Cred < 8, tunnel: 4023 },
+				{ when: () => window.VPisCandidate == 0 && Cred > 8, tunnel: 6862 },
+				{ when: () => window.VPisCandidate == 1 && Cred < 8, tunnel: 6861 },
+				{ when: () => window.VPisCandidate == 1 && Cred > 8, tunnel: 6860 }
+			],
+			
+			38: [
+				{ when: () => Rep == 41, tunnel: 6780 },
+				{ when: () => Rep == 1 && hasAllAnswers(9000, 9158, 9289, 9321), tunnel: 6842, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/6Xg5G2R.png" },
+				{ when: () => window.VPisCandidate == 1 && Reagan == 0 && hasAnswer(8980, 8984) && hasAllAnswers(9125, 9170, 9175), 
+				  tunnel: 6824, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/S6SjlDZ.png" },
+				{ when: () => window.VPisCandidate == 0 && Reagan == 0 && hasAllAnswers(8925, 8927, 8936, 8994) && 
+							  hasAnswer(9122, 9123, 9124, 9121) && hasAllAnswers(9168, 9318) && hasAnswer(9184, 9185, 9186), 
+				  tunnel: 6823, picture: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/0E6YEdF.png" },
+				{ when: () => true, tunnel: 4024 }
+			]
+		};
 
-        if((Cred >= 2) && (e.noCounter == 10)){
-            campaignTrail_temp.questions_json[10] = tunnel(8919);   
-        }
-        else if((Cred < 2) && (e.noCounter == 10)){
-            campaignTrail_temp.questions_json[10] = tunnel(6964);   
-        }
+		// ============= special handlers =============
+		// these need to run before the main question routing because they affect other variables
 
-        if((Cred >= 3) && (Daschle == 1) && (Compromise == 1) && (Public == 0) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(6963);   
-        }
-        else if((Cred == 4) && (Daschle == 1) && (Compromise == 1) && (Public == 0) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(4000);   
-        }
-        else if((Cred < 3) && (Daschle == 0) && (Compromise == 1) && (Public == 0) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(6961);   
-        }
-        else if((Cred == 4) && (Daschle == 0) && (Compromise == 1) && (Public == 0) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(4000);   
-        }
-        else if((Cred >= 4) && (Daschle == 1) && (Compromise == 0) && (Public == 0) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(6962);   
-        }
-        else if((Cred >= 4) && (Daschle == 0) && (Compromise == 0) && (Public == 0) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(6962);   
-        }
-        else if((Cred < 4) && (Daschle == 1) && (Compromise == 0) && (Public == 0) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(6960);   
-        }
-        else if((Cred < 3) && (Daschle == 0) && (Compromise == 0) && (Public == 0) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(6959);   
-        }
-        else if((Cred >= 5) && (Daschle == 1) && (Compromise == 0) && (Public == 1) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(6958);   
-        }
-        else if((Cred >= 5) && (Daschle == 0) && (Compromise == 0) && (Public == 1) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(6958);   
-        }
-        else if((Cred < 5) && (Daschle == 1) && (Compromise == 0) && (Public == 1) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(6957);   
-        }
-        else if((Cred < 5) && (Daschle == 0) && (Compromise == 0) && (Public == 1) && (e.noCounter == 13)){
-            campaignTrail_temp.questions_json[13] = tunnel(6957);   
-        }
+		// Question 24 VP changes
+		if (isQuestion(24)) {
+			if (hasAnswer(9147)) {
+				switcheroo10();
+			} else if (Cred < 8 && hasAllAnswers(8938, 8972)) {
+				switcheroo30();
+				vpTable["Pat Buchanan"] = "Christine O'Donnell";
+			} else if (Chauvinism == 0) {
+				switcheroo8();
+			} else if (Neolib == 1 && Chauvinism > 0 && (Garland == 1 || Napolitano == 1) && Sullivan == 1) {
+				switcheroo12();
+			} else if (Socdem == 1 && Chauvinism > 0 && hasAnswer(9005)) {
+				switcheroo27();
+			} else if (Chauvinism > 0) {
+				switcheroo9();
+			} else if (Chauvinism < 0) {
+				switcheroo11();
+			}
+		}
 
-        if((Neolib == 1) && (Wins > 2) && (Healthcare == 1) && (e.noCounter == 14)){
-            campaignTrail_temp.questions_json[14] = tunnel(4001);
-        }
-        else if((Socdem == 1) && (Wins > 2) && (Healthcare == 1) && (e.noCounter == 14)){
-            campaignTrail_temp.questions_json[14] = tunnel(6956);
-        }
-        else if((Healthcare == 0) && (e.noCounter == 14)){
-            campaignTrail_temp.questions_json[14] = tunnel(6955);
-			pictureDict[14] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/8xqwAws.png";
-        }
-        else if((Socdem == 1) && (Wins < 3) && (Healthcare == 1) && (e.noCounter == 14)){
-            campaignTrail_temp.questions_json[14] = tunnel(6954);
-			pictureDict[14] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/zzDMqwu.png";
-        }
-        else if((Neolib == 1) && (Wins < 3) && (Healthcare == 1) && (e.noCounter == 14)){
-            campaignTrail_temp.questions_json[14] = tunnel(6953);
-			pictureDict[14] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/zzDMqwu.png";
-        }
+		// Question 25 VP changes
+		if (ans == 9162 || ans == 9163 || ans == 9165 || ans == 9166) {
+			vpTable["Barack Obama"] = "Joe Biden";
+		}
 
-        if((Neolib == 1) && (Wins >= 3) && (e.noCounter == 15)){
-            campaignTrail_temp.questions_json[15] = tunnel(6777);
-        }
-        else if((Neolib == 1) && (Wins < 3) && (e.noCounter == 15)){
-            campaignTrail_temp.questions_json[15] = tunnel(8913);
-        }
-        else if((Socdem == 1) && (Wins >= 3) && (e.noCounter == 15)){
-            campaignTrail_temp.questions_json[15] = tunnel(6775);
-        }
-        else if((Socdem == 1) && (Wins < 3) && (e.noCounter == 15)){
-            campaignTrail_temp.questions_json[15] = tunnel(6776);
-        }
-
-        if((Neolib == 1) && (Cred <= 5) && (Kagan == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(4002);
-        }
-        else if((Neolib == 1) && (Cred <= 5) && (Garland == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6952);
-        }
-        else if((Neolib == 1) && (Cred <= 5) && (Sotomayor == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6951);
-        }
-        else if((Neolib == 1) && (Cred <= 5) && (Napolitano == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6950);
-        }
-        else if((Neolib == 1) && (Cred > 5) && (Kagan == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6949);
-        }
-        else if((Neolib == 1) && (Cred > 5) && (Napolitano == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6948);
-        }
-        else if((Neolib == 1) && (Cred > 5) && (Garland == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6947);
-        }
-        else if((Neolib == 1) && (Cred > 5) && (Sotomayor == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6946);
-        }
-        else if((Socdem == 1) && (Cred <= 5) && (Kagan == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6945);
-        }
-        else if((Socdem == 1) && (Cred <= 5) && (Wood == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6944);
-        }
-        else if((Socdem == 1) && (Cred <= 5) && (Garland == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6943);
-        }
-        else if((Socdem == 1) && (Cred <= 5) && (Sotomayor == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6942);
-        }
-        else if((Socdem == 1) && (Cred > 5) && (Kagan == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6941);
-        }
-        else if((Socdem == 1) && (Cred > 5) && (Wood == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6940);
-        }
-        else if((Socdem == 1) && (Cred > 5) && (Garland == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6939);
-        }
-        else if((Socdem == 1) && (Cred > 5) && (Sotomayor == 1) && (e.noCounter == 16)){
-            campaignTrail_temp.questions_json[16] = tunnel(6938);
-        }
-
-        if((Socdem == 1) && (Cred >= 6) && (e.player_answers.includes(8999) && e.player_answers.includes(8938)) && (e.noCounter == 18)){//Manning
-            campaignTrail_temp.questions_json[18] = tunnel(6931);
-            switcheroo13();
-        }
-        else if((Neolib == 1) && (Cred >= 6) && (e.player_answers.includes(8999) && e.player_answers.includes(8938)) && (e.noCounter == 18)){//Manning
-            campaignTrail_temp.questions_json[18] = tunnel(6930);
-            switcheroo13();
-        }
-        else if((Neolib == 1) && (Cred >= 6) && (e.noCounter == 18)){//Cenk
-            campaignTrail_temp.questions_json[18] = tunnel(6935);
-            switcheroo14();
-        }
-        else if((Neolib == 1) && (Cred < 6) && (Huntsman == 1) && (e.player_answers.includes(8980) || e.player_answers.includes(8984)) && (e.noCounter == 18)){//Cenk
-            campaignTrail_temp.questions_json[18] = tunnel(6935);
-            switcheroo14();
-        }
-        else if((Socdem == 1) && (Cred >= 6) && (e.noCounter == 18)){//Matthews
-            campaignTrail_temp.questions_json[18] = tunnel(6934);
-            switcheroo18();
-        }
-        else if((Socdem == 1) && (Cred < 4) && (e.noCounter == 18)){//Lieberman
-            campaignTrail_temp.questions_json[18] = tunnel(6933);
-            switcheroo19();
-        }
-        else if((Neolib == 1) && (Cred < 4) && (e.noCounter == 18)){//Kucinich
-            campaignTrail_temp.questions_json[18] = tunnel(6932);
-            switcheroo16();
-        }
-        else if((Socdem == 1) && (Cred < 6) && (e.noCounter == 18)){//Stein
-            campaignTrail_temp.questions_json[18] = tunnel(6937);
-            switcheroo15();
-        }
-        else if((Neolib == 1) && (Cred < 6) && (e.noCounter == 18)){//Stein
-            campaignTrail_temp.questions_json[18] = tunnel(4004);
-            switcheroo15();
-        }
-
-        if((Socdem == 1) && (Cred >= 6) && (Wood == 1) && (Sears == 1) && (e.player_answers.includes(8994) || e.player_answers.includes(8980) || e.player_answers.includes(8984)) && (e.player_answers.includes(9098)) && (e.noCounter == 19)){
-            campaignTrail_temp.questions_json[19] = tunnel(4005);
-			pictureDict[19] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AT7IQFC.png";
-        }
-        else if((Neolib == 1) && (Cred < 6) && (e.noCounter == 19)){
-            campaignTrail_temp.questions_json[19] = tunnel(4006);
-        }
-        else if((Socdem == 1) && (Cred < 6) && (e.noCounter == 19)){
-            campaignTrail_temp.questions_json[19] = tunnel(4006);
-        }
-        else if((Socdem == 1) && (Cred >= 6) && (e.noCounter == 19)){
-            campaignTrail_temp.questions_json[19] = tunnel(4006);
-        }
-        else if((Neolib == 1) && (Cred >= 6) && (e.noCounter == 19)){
-            campaignTrail_temp.questions_json[19] = tunnel(6926);
-			pictureDict[19] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BFRDJVv.png";
-        }
-
-        if((e.player_answers.includes(9122) || e.player_answers.includes(9123) || e.player_answers.includes(9124) || e.player_answers.includes(9121)) && (Midterms == 1) && (e.player_answers.includes(8925) && e.player_answers.includes(8927)) && (e.player_answers.includes(8936)) && (e.noCounter == 20)){
-            campaignTrail_temp.questions_json[20] = tunnel(6774);
-            pictureDict[20] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/W7WM5im.png ";
-        }
-        else if((Midterms == 1) && (Econ >= -2 || Econ <= -7) && (Cred >= 6) && (e.noCounter == 20)){
-            campaignTrail_temp.questions_json[20] = tunnel(6779);
-            pictureDict[20] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/gnLy369.png";
-        }
-        else if((Midterms == 1) && (Econ >= -2 || Econ <= -7) && (Cred < 6) && (e.noCounter == 20)){
-            campaignTrail_temp.questions_json[20] = tunnel(6778);
-            pictureDict[20] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/gnLy369.png";
-        }
-        else if((Midterms == 1) && (e.noCounter == 20)){
-            campaignTrail_temp.questions_json[20] = tunnel(6835);
-            pictureDict[20] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/peEPJt8.png";
-        }
-        else if((Midterms == 0) && (Econ >= -2 || Econ <= -7) && (Cred >= 6) && (e.noCounter == 20)){
-            campaignTrail_temp.questions_json[20] = tunnel(6779);
-            pictureDict[20] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/gnLy369.png";
-        }
-        else if((Midterms == 0) && (Econ >= -2 || Econ <= -7) && (Cred < 6) && (e.noCounter == 20)){
-            campaignTrail_temp.questions_json[20] = tunnel(6778);
-            pictureDict[20] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/gnLy369.png";
-        }
-        else if((Midterms == 0) && (e.noCounter == 20)){
-            campaignTrail_temp.questions_json[20] = tunnel(4007);
-        }
-
-        if((e.player_answers.includes(9122)) && (e.noCounter == 21)){
-            campaignTrail_temp.questions_json[21] = tunnel(6925);
-        }
-
-        if((Neolib == 1) && (e.noCounter == 22)){
-            campaignTrail_temp.questions_json[22] = tunnel(4009);
-			pictureDict[22] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/G7zxnD7.png";
-        }
-        else if((Socdem == 1) && (e.noCounter == 22)){
-            campaignTrail_temp.questions_json[22] = tunnel(6924);
-			pictureDict[22] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/cVnEd9C.png";
-        }
-
-        if((e.player_answers.includes(9142)) && (e.noCounter == 23)){
-            campaignTrail_temp.questions_json[23] = tunnel(6923);
-			pictureDict[23] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/U15nANn.png";
-        }
-        else if((e.player_answers.includes(9146)) && (e.noCounter == 23)){
-            campaignTrail_temp.questions_json[23] = tunnel(6922);
-			pictureDict[23] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GBgBI5V.png";
-        }
-        else if((e.player_answers.includes(9144)) && (e.noCounter == 23)){
-            campaignTrail_temp.questions_json[23] = tunnel(4010);
-			pictureDict[23] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GBgBI5V.png";
-        }
-        else if((e.player_answers.includes(9145)) && (e.noCounter == 23)){
-            campaignTrail_temp.questions_json[23] = tunnel(6921);
-			pictureDict[23] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/jHb7xWi.png";
-        }
-        else if((e.player_answers.includes(9141)) && (e.noCounter == 23)){
-            campaignTrail_temp.questions_json[23] = tunnel(6920);
-			pictureDict[23] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/7cafJ1i.png";
-        }
-        else if((e.player_answers.includes(9143)) && (e.noCounter == 23)){
-            campaignTrail_temp.questions_json[23] = tunnel(6919);
-			pictureDict[23] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/7cafJ1i.png";
-        }
-
-        if((e.player_answers.includes(9147)) && (e.noCounter == 24)){
-            switcheroo10();
-        }
-        else if((Cred < 8) && (e.player_answers.includes(8938)) && (e.player_answers.includes(8972)) && (e.noCounter == 24)){
-            switcheroo30();
-            vpTable["Pat Buchanan"] = "Christine O'Donnell";
-        }
-        else if((Chauvinism == 0) && (e.noCounter == 24)){
-            switcheroo8();
-        }
-        else if((Neolib == 1) && (Chauvinism > 0) && (Garland == 1 || Napolitano == 1) && (Sullivan == 1) && (e.noCounter == 24)){
-            switcheroo12();
-        }
-        else if((Socdem == 1) && (Chauvinism > 0) && (e.player_answers.includes(9005)) && (e.noCounter == 24)){
-            switcheroo27();
-        }
-        else if((Chauvinism > 0) && (e.noCounter == 24)){
-            switcheroo9();
-        }
-        else if((Chauvinism < 0) && (e.noCounter == 24)){
-            switcheroo11();
-        }
-
-        if((e.player_answers.includes(8936)) && (Wins >= 3) && (e.noCounter == 24)){
-            campaignTrail_temp.questions_json[24] = tunnel(6918);
-        }
-        else if((e.player_answers.includes(8936)) && (Wins < 3) && (e.noCounter == 24)){
-            campaignTrail_temp.questions_json[24] = tunnel(4011);
-        }
-        else if((Wins >= 2) && (e.noCounter == 24)){
-            campaignTrail_temp.questions_json[24] = tunnel(6918);
-        }
-        else if((Wins < 2) && (e.noCounter == 24)){
-            campaignTrail_temp.questions_json[24] = tunnel(4011);
-        }
-
-        if((e.player_answers.includes(9158)) && (e.noCounter == 25)){
-            campaignTrail_temp.questions_json[25] = tunnel(4012);
-        }
-        else if((e.player_answers.includes(9160)) && (Chauvinism == 1) && (e.noCounter == 25)){
-            campaignTrail_temp.questions_json[25] = tunnel(6917);
-			pictureDict[25] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/bz4lAvO.png";
-        }
-        else if((e.player_answers.includes(9160)) && (Chauvinism < 1) && (e.noCounter == 25)){
-            campaignTrail_temp.questions_json[25] = tunnel(6916);
-			pictureDict[25] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/bz4lAvO.png";
-        }
-        else if((e.player_answers.includes(9159) || e.player_answers.includes(9161)) && (e.noCounter == 25)){
-            campaignTrail_temp.questions_json[25] = tunnel(6915);
-			pictureDict[25] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/h8Ks9BR.png";
-        }
-
-        if(ans == 9162 || ans == 9163 || ans == 9165 || ans == 9166){
-            vpTable["Barack Obama"] = "Joe Biden";
-        }
-
-        if(ans == 9164){
+		if (ans == 9164) {
 			campaignTrail_temp.running_mate_image_url = portraits.clinton;
-            
-            vpTable["Barack Obama"] = "Hillary Clinton";
-                        window.VPisCandidate += 1;
-        }
+			vpTable["Barack Obama"] = "Hillary Clinton";
+			window.VPisCandidate += 1;
+		}
 
-        if((window.VPisCandidate == 0) && (e.noCounter == 26)){
-            campaignTrail_temp.questions_json[26] = tunnel(4013);
-        }
-        else if((window.VPisCandidate == 1) && (e.noCounter == 26)){
-            campaignTrail_temp.questions_json[26] = tunnel(6914);
-        }
-
-        if((e.player_answers.includes(9151) || e.player_answers.includes(9149) || e.player_answers.includes(9153)) && (e.player_answers.includes(8998)) && (e.noCounter == 27)){
-            campaignTrail_temp.questions_json[27] = tunnel(4014);
-        }
-        else if((e.player_answers.includes(9151) || e.player_answers.includes(9149) || e.player_answers.includes(9153)) && (e.player_answers.includes(8999) || e.player_answers.includes(9000)) && (e.noCounter == 27)){
-            campaignTrail_temp.questions_json[27] = tunnel(6913);
-			pictureDict[27] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/rfd3mUi.png";
-        }
-        else if((e.player_answers.includes(9152) || e.player_answers.includes(9150)) && (e.noCounter == 27)){
-            campaignTrail_temp.questions_json[27] = tunnel(6912);
-			pictureDict[27] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/1UfVd8f.png";
-        }
-        else if((e.player_answers.includes(9155) || e.player_answers.includes(9157)) && (e.noCounter == 27)){
-            campaignTrail_temp.questions_json[27] = tunnel(6911);
-			pictureDict[27] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/qAAAz2s.png";
-        }
-        else if((e.player_answers.includes(9154) || e.player_answers.includes(9156)) && (e.noCounter == 27)){
-            campaignTrail_temp.questions_json[27] = tunnel(6910);
-			pictureDict[27] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/NB0EG3F.png";
-        }
-        else if((e.player_answers.includes(9147)) && (e.noCounter == 27)){
-            campaignTrail_temp.questions_json[27] = tunnel(6909);
-			pictureDict[27] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/NB0EG3F.png";
-        }
-        else if((e.player_answers.includes(9148)) && (e.noCounter == 27)){
-            campaignTrail_temp.questions_json[27] = tunnel(1234);
-			pictureDict[27] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/yqA2igC.png";
-        }
-
-        if((Cred >= 4) && (e.noCounter == 28)){
-            campaignTrail_temp.questions_json[28] = tunnel(4015);
-        }
-        else if((Cred < 4) && (e.player_answers.includes(9122) || e.player_answers.includes(9123) || e.player_answers.includes(9124) || e.player_answers.includes(9121)) && (e.noCounter == 28)){
-            campaignTrail_temp.questions_json[28] = tunnel(4015);
-        }
-        else if((Cred < 4) && (e.player_answers.includes(8994)) && (e.player_answers.includes(8995) || e.player_answers.includes(9073)) && (e.noCounter == 28)){
-            campaignTrail_temp.questions_json[28] = tunnel(4015);
-        }
-        else if((Cred < 4) && (e.player_answers.includes(8994)) && (e.noCounter == 28)){
-            campaignTrail_temp.questions_json[28] = tunnel(6908);
-			pictureDict[28] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BOY3Ngj.png";
-        }
-        else if((Cred < 4) && (e.player_answers.includes(9664) || e.player_answers.includes(9661)) && (e.noCounter == 28)){
-            campaignTrail_temp.questions_json[28] = tunnel(6907);
-			pictureDict[28] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BOY3Ngj.png";
-        }
-        else if((Cred < 4) && (e.player_answers.includes(8925) && e.player_answers.includes(8927)) && (e.noCounter == 28)){
-            campaignTrail_temp.questions_json[28] = tunnel(6907);
-			pictureDict[28] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BOY3Ngj.png";
-        }
-        else if((Cred < 4) && (e.player_answers.includes(8986)) && (e.noCounter == 28)){
-            campaignTrail_temp.questions_json[28] = tunnel(6906);
-			pictureDict[28] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BOY3Ngj.png";
-        }
-        else if((Cred < 4) && (e.noCounter == 28)){
-            campaignTrail_temp.questions_json[28] = tunnel(6905);
-			pictureDict[28] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BOY3Ngj.png";
-        }
-
-        if((e.player_answers.includes(9187) || e.player_answers.includes(9190) || e.player_answers.includes(9193) || e.player_answers.includes(9196)) && (e.noCounter == 29)){
-            switcheroo17();
+		// Question 29 Sanders tracking
+		if (isQuestion(29) && hasAnswer(9187, 9190, 9193, 9196)) {
+			switcheroo17();
 			Sanders += 1;
-        }
+		}
 
-        if((e.player_answers.includes(8972)) && (e.noCounter == 29)){
-            campaignTrail_temp.questions_json[29] = tunnel(6904);
-        }
-        else if((e.noCounter == 29)){
-            campaignTrail_temp.questions_json[29] = tunnel(4016);
-        }
+		// Question 31 special post-processing
+		if (isQuestion(31)) {
+			if (Rep == 29 && Sanders == 0) {
+				switcheroo15();
+			}
+			
+			if (Rep == 38) {
+				switcheroo39();
+				vpTable["Pat Buchanan"] = "Tucker Carlson";
+				removeById('BECK_A');
+			}
+			
+			if (Rep == 2 && hasAllAnswers(8938, 9184)) {
+				switcheroo40();
+				vpTable["Ron Paul"] = "Michael Render";
+				addEndIfMissing('PAUL_D', PaulSpoil);
+				removeById('BECK_A');
+			}
+		}
 
-        if((e.player_answers.includes(8994) || e.player_answers.includes(8980) || e.player_answers.includes(8984)) && (e.player_answers.includes(8999)) && (e.player_answers.includes(9122) || e.player_answers.includes(9123) || e.player_answers.includes(9124) || e.player_answers.includes(9121) || (Sotomayor == 1) && (Napolitano == 1) && e.player_answers.includes(9175) || e.player_answers.includes(9109) && (Kagan == 1) && e.player_answers.includes(9125) && e.player_answers.includes(9137)|| e.player_answers.includes(9117) && (Kagan == 1) && e.player_answers.includes(9125) && e.player_answers.includes(9137)) && (e.player_answers.includes(9159) || e.player_answers.includes(9161)) && (Wins >= 4) && (e.noCounter == 30)){
-            campaignTrail_temp.questions_json[30] = tunnel(6900);
-			pictureDict[30] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/VNQYsIq.png";
-        }
-        else if((e.player_answers.includes(8979) || e.player_answers.includes(8981) || e.player_answers.includes(8983) || e.player_answers.includes(8988) || e.player_answers.includes(8991)) && (e.player_answers.includes(9158)) && (e.noCounter == 30)){
-            campaignTrail_temp.questions_json[30] = tunnel(6903);
-        }
-        else if((e.player_answers.includes(8980) || e.player_answers.includes(8984) || e.player_answers.includes(8994)) && (e.player_answers.includes(9158) || e.player_answers.includes(9159) || e.player_answers.includes(9161)) && (e.noCounter == 30)){
-            campaignTrail_temp.questions_json[30] = tunnel(6902);
-        }
-        else if((e.player_answers.includes(8980) || e.player_answers.includes(8984) || e.player_answers.includes(8994) || e.player_answers.includes(8979) || e.player_answers.includes(8981) || e.player_answers.includes(8983) || e.player_answers.includes(8988) || e.player_answers.includes(8991)) && (e.player_answers.includes(9160)) && (e.noCounter == 30)){
-            campaignTrail_temp.questions_json[30] = tunnel(6901);
-        }
-        else if((Healthcare == 0) && (e.noCounter == 30)){
-            campaignTrail_temp.questions_json[30] = tunnel(4017);
-        }
+		Object.entries(questionConfig).forEach(([qNum, conditions]) => {
+			if (isQuestion(+qNum)) {
+				const match = conditions.find(c => c.when());
+				if (match) {
+					setQuestion(+qNum, match.tunnel, match.picture, match.callback);
+				}
+			}
+		});
 
-		if ((Reagan === 1) && (e.noCounter === 31)) {
-			campaignTrail_temp.questions_json[31] = tunnel(6785);
+		function setupReagan() {
 			switcheroo41();
 			Rep = 41;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/p0aLOVz.png";
-			pictureDict[32] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LERbHCG.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Ohh7HEE.png";
-			pictureDict[34] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/wNClMjk.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Tua1sBK.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/DuP7JnL.png";
-			pictureDict[37] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/aYuxF60.png";
-			pictureDict[38] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/ISUgCCS.png";
-
-            campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/vTG5uTX.png";
-
-			const extrasong1 = new Song(
-				"",
-				"",
-				"",
-				"https://file.garden/aNtAfG887DiA_7lO/Obamanation/3mYYz3S.jpeg",
-				"https://file.garden/aGMtX3HRbS8W-RJ6/Zombie%20Reagan%20Raised%20From%20Grave%20To%20Lead%20GOP.mp3"
-			);
+			
+			const reaganPictures = {
+				31: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/p0aLOVz.png",
+				32: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LERbHCG.png",
+				33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Ohh7HEE.png",
+				34: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/wNClMjk.png",
+				35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Tua1sBK.png",
+				36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/DuP7JnL.png",
+				37: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/aYuxF60.png",
+				38: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/ISUgCCS.png"
+			};
+			
+			Object.entries(reaganPictures).forEach(([q, url]) => pictureDict[q] = url);
+			
+			campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/vTG5uTX.png";
+			
+			const extrasong1 = new Song("", "", "", "https://file.garden/aNtAfG887DiA_7lO/Obamanation/3mYYz3S.jpeg",
+				"https://file.garden/aGMtX3HRbS8W-RJ6/Zombie%20Reagan%20Raised%20From%20Grave%20To%20Lead%20GOP.mp3");
 			addAndPlaySong(extrasong1);
-
-            campaignTrail_temp.banner1.src = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Kjqxvqq.png";
-            campaignTrail_temp.banner2.src = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/jEOpIWv.png";
-
-            document.body.style.setProperty("background", "url('https://file.garden/aNtAfG887DiA_7lO/Obamanation/DPpB3R6.jpeg')", "important");
+			
+			campaignTrail_temp.banner1.src = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Kjqxvqq.png";
+			campaignTrail_temp.banner2.src = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/jEOpIWv.png";
+			
+			document.body.style.setProperty("background", "url('https://file.garden/aNtAfG887DiA_7lO/Obamanation/DPpB3R6.jpeg')", "important");
 		}
-		else if((e.player_answers.includes(9017)) && (e.player_answers.includes(9162)) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6895);
-            switcheroo7();
-            Rep = 7;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/qm5EgUg.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/HfJxzHu.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/nwKS5v0.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AiXsyzM.png";
-        }
-        else if((e.player_answers.includes(9221)) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6885);
-            switcheroo6();
-            Rep = 6;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/rQEE7ui.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/klpjxMC.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LaBdZAY.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/cUMs9UF.png";
-        }
-        else if((Neolib == 1) && (e.player_answers.includes(8942)) && (e.player_answers.includes(9153) || e.player_answers.includes(9149) || e.player_answers.includes(9151)) && (Cred < 4) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6887);
-            switcheroo26();
-            Rep = 26;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BdZ6EYq.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Ffy6gaT.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/9d1joGE.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/iMrn82q.png";
-        }
-        else if((Socdem == 1) && (e.player_answers.includes(8942)) && (e.player_answers.includes(9147)) && (Cred < 4) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6886);
-            switcheroo26();
-            Rep = 26;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/BdZ6EYq.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Ffy6gaT.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/9d1joGE.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/iMrn82q.png";
-        }
-        else if((window.VPisCandidate == 1) && (Cred < 1) && (e.player_answers.includes(8907)) && (e.player_answers.includes(8943)) && (Chauvinism > 0) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6810);
-            switcheroo29();
-            Rep = 29;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/sjUQhC8.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LkglyXQ.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LafbdUr.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/1cjvCXs.png";
-        }
-        else if((window.VPisCandidate == 1) && (Cred >= 1) && (e.player_answers.includes(8907)) && (e.player_answers.includes(8943)) && (Chauvinism > 0) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6815);
-            switcheroo29();
-            Rep = 29;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/sjUQhC8.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LkglyXQ.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LafbdUr.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/1cjvCXs.png";
-        }
-        else if((window.VPisCandidate == 0) && (Wins > 3) && (e.player_answers.includes(8907)) && (e.player_answers.includes(8943)) && (Chauvinism > 0) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6802);
-            switcheroo29();
-            Rep = 29;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/sjUQhC8.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LkglyXQ.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LafbdUr.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/1cjvCXs.png";
-        }
-        else if((window.VPisCandidate == 0) && (Wins <= 3) && (e.player_answers.includes(8907)) && (e.player_answers.includes(8943)) && (Chauvinism > 0) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6819);
-            switcheroo29();
-            Rep = 29;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/sjUQhC8.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LkglyXQ.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LafbdUr.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/1cjvCXs.png";
-        }
-        else if((e.player_answers.includes(9173) || e.player_answers.includes(9174) || e.player_answers.includes(9179)) && (e.player_answers.includes(9187) || e.player_answers.includes(9190) || e.player_answers.includes(9193) || e.player_answers.includes(9196)) && (Cred < 5) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6892);
-            switcheroo1();
-            Rep = 1;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/cgq9KUQ.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Vf2NPOA.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/S3beKYS.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/CBuLfIk.png";
-        }
-        else if((e.player_answers.includes(8972) && e.player_answers.includes(9203)) && (e.player_answers.includes(9162)) && (e.player_answers.includes(8938)) && (e.player_answers.includes(9184)) && (Cred < 6) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6787);
-            switcheroo2();
-            Rep = 2;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5Oym94K.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/CnVfalr.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/v47eEee.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/C0KXHww.png";
-        }
-        else if((e.player_answers.includes(8972) && e.player_answers.includes(9203)) && (e.player_answers.includes(9162)) && (Cred < 6) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6896);
-            switcheroo2();
-            Rep = 2;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5Oym94K.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/CnVfalr.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/v47eEee.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/C0KXHww.png";
-        }
-        else if((e.player_answers.includes(9131) || e.player_answers.includes(9665)) && (e.player_answers.includes(9178) || e.player_answers.includes(9179) || e.player_answers.includes(9180) || e.player_answers.includes(9181)) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6888);
-            switcheroo21();
-            Rep = 21;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/2vyFMrM.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/eZg8pbJ.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/HKUKZoo.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/1wH0JjH.png";
-        }
-        else if((e.player_answers.includes(8998)) && (e.player_answers.includes(9173) || e.player_answers.includes(9174) || e.player_answers.includes(9179)) && (Cred >= 5) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6792);
-            switcheroo38();
-            Rep = 38;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/yrwKUtR.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/JaPxFnG.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Rp96Rum.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/UMNNu5K.png";
-        }
-        else if((e.player_answers.includes(8926) && e.player_answers.includes(8929)) && (e.player_answers.includes(8994) || e.player_answers.includes(8980) || e.player_answers.includes(8984)) && (e.player_answers.includes(9086) || e.player_answers.includes(9088) || e.player_answers.includes(9090) || e.player_answers.includes(9096) || e.player_answers.includes(9099) || e.player_answers.includes(9102) || e.player_answers.includes(9105) || e.player_answers.includes(9107)) && (e.player_answers.includes(9160)) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6793);
-            switcheroo33();
-            Rep = 20;
-            vpTable["Ron Paul"] = "Herman Cain";
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/o6HqZpf.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AnsBwYT.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/3KLqIAw.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/i8zCd9b.png";
-        }
-        else if((e.player_answers.includes(8926) && e.player_answers.includes(8929)) && (e.player_answers.includes(8994) || e.player_answers.includes(8980) || e.player_answers.includes(8984)) && (e.player_answers.includes(9160)) && (e.player_answers.includes(9098) || e.player_answers.includes(9101) || e.player_answers.includes(9089) || e.player_answers.includes(9097) || e.player_answers.includes(9100) || e.player_answers.includes(9108)) && (e.player_answers.includes(9184)) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6893);
-            switcheroo20();
-            Rep = 20;
-            vpTable["Ron Paul"] = "Herman Cain";
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/o6HqZpf.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AnsBwYT.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/3KLqIAw.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/i8zCd9b.png";
-        }
-        else if((Cred > 8) && (e.player_answers.includes(8964)) && (Chauvinism > 0) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6879);
-            switcheroo34();
-            Rep = 24;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AIdT59D.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5yLFfkV.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/k5JDAEU.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/ZmhZ3eT.png";
-        }
-        else if((Cred > 8) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6879);
-            switcheroo24();
-            Rep = 24;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AIdT59D.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5yLFfkV.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/k5JDAEU.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/ZmhZ3eT.png";
-        }
-        else if((Cred <= 4) && (e.player_answers.includes(8925)) && (e.player_answers.includes(9137)) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6820);
-            switcheroo28();
-            Rep = 28;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/JExoKTP.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/CkKemx9.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/vQuaJAh.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/JzExdZ7.png";
-        }
-        else if((e.player_answers.includes(8936)) && (e.player_answers.includes(9084)) && (Cred < 4) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6881);
-            switcheroo3();
-            Rep = 3;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/q3zVCi5.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/EcIvZje.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/yq2Wm7w.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/TMVCFo2.png";
-        }
-        else if((e.player_answers.includes(9084)) && (Cred < 4) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6880);
-            switcheroo3();
-            Rep = 3;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/q3zVCi5.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/EcIvZje.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/yq2Wm7w.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/TMVCFo2.png";
-        }
-        else if((e.player_answers.includes(9085) && e.player_answers.includes(9122)) && (Cred < 4) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6869);
-            switcheroo4();
-            Rep = 4;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/KEbEiaj.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/stLfmQJ.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lYgoz4r.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/0R0gJ40.png";
-        }
-        else if((e.player_answers.includes(9085)) && (Cred < 4) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6870);
-            switcheroo4();
-            Rep = 4;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/KEbEiaj.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/stLfmQJ.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lYgoz4r.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/0R0gJ40.png";
-        }
-        else if((e.player_answers.includes(9166)) && (Cred >= 7) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6800);
-            switcheroo5();
-            Rep = 5;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/J8AcWxq.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/qEf8QWf.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/PXAc6Fp.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/NoGj8Ek.png";
-        }
-        else if((e.player_answers.includes(9166)) && (Cred >= 4) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6899);
-            switcheroo36();
-            Rep = 5;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/J8AcWxq.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/qEf8QWf.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/PXAc6Fp.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/NoGj8Ek.png";
-        }
-        else if((e.player_answers.includes(8965)) && (Cred >= 7) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6799);
-            switcheroo22();
-            Rep = 22;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/VyTrYTy.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/W5GFinf.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GLKekfX.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/bQ5AsJ9.png";
-        }
-        else if((e.player_answers.includes(8965)) && (Cred >= 4) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6891);
-            switcheroo35();
-            Rep = 22;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/VyTrYTy.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/W5GFinf.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GLKekfX.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/bQ5AsJ9.png";
-        }
-        else if((e.player_answers.includes(8964)) && (Cred >= 7) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6798);
-            switcheroo25();
-            Rep = 25;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/MU8yQrY.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lMOQZNl.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/natZubQ.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/kswvOkr.png";
-        }
-        else if((e.player_answers.includes(8964)) && (Cred >= 4) && (e.noCounter == 31)){
-            campaignTrail_temp.questions_json[31] = tunnel(6890);
-            switcheroo37();
-            Rep = 25;
-			pictureDict[31] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/MU8yQrY.png";
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lMOQZNl.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/natZubQ.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/kswvOkr.png";
-        }
 
-        if((Rep == 29) && (Sanders == 0) && (e.noCounter == 31)){
-            switcheroo15();
-        }
-
-        if((Rep == 38) && (e.noCounter == 31)){
-            switcheroo39();
-            vpTable["Pat Buchanan"] = "Tucker Carlson";
-            removeById('BECK_A');
-        }
-
-        if((Rep == 2) && (e.player_answers.includes(8938)) && (e.player_answers.includes(9184)) && (e.noCounter == 31)){
-            switcheroo40();
-            vpTable["Ron Paul"] = "Michael Render";
-            addEndIfMissing('PAUL_D', PaulSpoil);
-            removeById('BECK_A');
-        }
-
-        if((Wins < 1) && (e.player_answers.includes(9567) || e.player_answers.includes(9570)) && (e.noCounter == 32)){
-            campaignTrail_temp.questions_json[32] = tunnel(4019);
-            switcheroo31();
-            switcheroo32();
-            Rep = 31;
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lCJTyjw.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5qR4mud.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GLtQWkH.png";
-        }
-        else if((Wins > 3) && (e.player_answers.includes(9567) || e.player_answers.includes(9570)) && (e.noCounter == 32)){
-            campaignTrail_temp.questions_json[32] = tunnel(6897);
-            switcheroo31();
-            switcheroo32();
-            Rep = 31;
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lCJTyjw.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5qR4mud.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GLtQWkH.png";
-        }
-        else if((Wins > 1) && (e.player_answers.includes(9567) || e.player_answers.includes(9570)) && (e.noCounter == 32)){
-            campaignTrail_temp.questions_json[32] = tunnel(6898);
-            switcheroo31();
-            switcheroo32();
-            Rep = 31;
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lCJTyjw.png";
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5qR4mud.png";
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GLtQWkH.png";
-        }
-        else if((Wins < 1) && (e.noCounter == 32)){
-            campaignTrail_temp.questions_json[32] = tunnel(4019);
-        }
-        else if((Wins > 3) && (e.noCounter == 32)){
-            campaignTrail_temp.questions_json[32] = tunnel(6897);
-        }
-        else if((Wins > 1) && (e.noCounter == 32)){
-            campaignTrail_temp.questions_json[32] = tunnel(6898);
-        }
-
-        if((Rep == 41) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6783);
-        }
-        else if((Rep == 5) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6894);
-        }
-        else if((Rep == 2) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6889);
-        }
-        else if((Rep == 6) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6884);
-        }
-        else if((Rep == 1) && (e.player_answers.includes(9179)) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6883);
-        }
-        else if((Rep == 1) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6882);
-        }
-        else if((Rep == 7) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6878);
-        }
-        else if((Rep == 20) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6877);
-        }
-        else if((Rep == 4) && (e.player_answers.includes(9331)) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6865);
-			pictureDict[33] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/pWSBg5L.png";
-        }
-        else if((Rep == 4) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6866);
-        }
-        else if((Rep == 24) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6858);
-        }
-        else if((Rep == 25) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6857);
-        }
-        else if((Rep == 26) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6850);
-        }
-        else if((Rep == 22) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6848);
-        }
-        else if((Rep == 21) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6840);
-        }
-        else if((Rep == 3) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6836);
-        }
-        else if((Rep == 28) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6817);
-        }
-        else if((Rep == 31) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6801);
-        }
-        else if((Rep == 29) && (e.player_answers.includes(8926)) && (e.player_answers.includes(8929)) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6812);
-        }
-        else if((Rep == 29) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6816);
-        }
-        else if((Rep == 38) && (e.player_answers.includes(9018) || e.player_answers.includes(9656) || e.player_answers.includes(9659) || e.player_answers.includes(9662)) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6791);
-        }
-        else if((Rep == 38) && (e.player_answers.includes(9019)) && (e.noCounter == 33)){
-            campaignTrail_temp.questions_json[33] = tunnel(6790);
-        }
-
-        if((Carrington == 1) && (Wins <= 3) && (e.noCounter == 34)){
-            campaignTrail_temp.questions_json[34] = tunnel(6809);
-			pictureDict[34] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/fY5r2R9.png";
-        }
-        else if((Carrington == 1) && (Wins > 3) && (e.noCounter == 34)){
-            campaignTrail_temp.questions_json[34] = tunnel(6807);
-			pictureDict[34] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/fY5r2R9.png";
-        }
-        else if((e.player_answers.includes(9179)) && (e.noCounter == 34)){
-            campaignTrail_temp.questions_json[34] = tunnel(6873);
-			pictureDict[34] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/9yT8g6k.png";
-        }
-        else if((e.player_answers.includes(9175) || e.player_answers.includes(9176)) && (e.noCounter == 34)){
-            campaignTrail_temp.questions_json[34] = tunnel(4021);
-        }
-        else if((e.player_answers.includes(9182)) && (e.noCounter == 34)){
-            campaignTrail_temp.questions_json[34] = tunnel(6876);
-			pictureDict[34] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/r7s1fkN.png";
-        }
-        else if((e.player_answers.includes(9180) || e.player_answers.includes(9181) || e.player_answers.includes(9183)) && (e.noCounter == 34)){
-            campaignTrail_temp.questions_json[34] = tunnel(6875);
-			pictureDict[34] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/FwEbcVi.png";
-        }
-        else if((e.player_answers.includes(9178)) && (e.noCounter == 34)){
-            campaignTrail_temp.questions_json[34] = tunnel(6874);
-			pictureDict[34] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/FwEbcVi.png";
-        }
-        else if((e.player_answers.includes(9173) || e.player_answers.includes(9174)) && (e.noCounter == 34)){
-            campaignTrail_temp.questions_json[34] = tunnel(6872);
-			pictureDict[34] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/sDr0plG.png";
-        }
-        else if((e.player_answers.includes(9177)) && (e.noCounter == 34)){
-            campaignTrail_temp.questions_json[34] = tunnel(6871);
-			pictureDict[34] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/yiw7aGs.png";
-        }
-        else if((e.player_answers.includes(9503)) && (e.noCounter == 34)){
-            campaignTrail_temp.questions_json[34] = tunnel(1235);
-			pictureDict[34] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/U15nANn.png";
-        }
-
-        if((Rep == 41) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6782);
-        }
-        else if((Rep == 5) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6868);
-        }
-        else if((Rep == 20) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6867);
-        }
-        else if((Rep == 24) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6828);
-        }
-        else if((Rep == 1) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6859);
-        }
-        else if((Rep == 3) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6831);
-        }
-        else if((Rep == 7) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6854);
-        }
-        else if((Rep == 4) && (e.player_answers.includes(9331)) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6856);
-        }
-        else if((Rep == 4) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6852);
-        }
-        else if((Rep == 25) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6845);
-        }
-        else if((Rep == 2) && (e.player_answers.includes(8938) && e.player_answers.includes(9184)) && (e.player_answers.includes(9019)) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6786);
-        }
-        else if((Rep == 2) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6834);
-        }
-        else if((Rep == 21) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6832);
-        }
-        else if((Rep == 6) && (e.player_answers.includes(9665) || e.player_answers.includes(9666) || e.player_answers.includes(9667)) && (e.player_answers.includes(9018) && e.player_answers.includes(9286) || e.player_answers.includes(9656) && e.player_answers.includes(9286) || e.player_answers.includes(9659) && e.player_answers.includes(9286) || e.player_answers.includes(9662) && e.player_answers.includes(9286)) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6822);
-        }
-        else if((Rep == 38) && (e.player_answers.includes(9608)) && (e.player_answers.includes(9665) || e.player_answers.includes(9666) || e.player_answers.includes(9667)) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6789);
-        }
-        else if((Rep == 6) && (e.player_answers.includes(9018) && e.player_answers.includes(9286) || e.player_answers.includes(9656) && e.player_answers.includes(9286) || e.player_answers.includes(9659) && e.player_answers.includes(9286) || e.player_answers.includes(9662) && e.player_answers.includes(9286)) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6847);
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/7u950x2.png";
-        }
-        else if((Rep == 38) && (e.player_answers.includes(9608)) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6847);
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/7u950x2.png";
-        }
-        else if((Rep == 6) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6822);
-        }
-        else if((Rep == 26) && (e.player_answers.includes(9147)) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6844);
-			pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/J4HVwVz.png";
-        }
-        else if((Rep == 26) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6826);
-        }
-        else if((Rep == 22) && (Neolib == 1||e.player_answers.includes(9187)||e.player_answers.includes(9188)||e.player_answers.includes(9189)||e.player_answers.includes(9190)||e.player_answers.includes(9191)||e.player_answers.includes(9192)||e.player_answers.includes(9193)||e.player_answers.includes(9194)||e.player_answers.includes(9195)||e.player_answers.includes(9196)||e.player_answers.includes(9197)||e.player_answers.includes(9198)) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6839);
-        }
-        else if((Rep == 22) && (Socdem == 1) && (e.player_answers.includes(9184)||e.player_answers.includes(9185)||e.player_answers.includes(9186)) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6838);
-        }
-        else if((Rep == 31) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6797);
-        }
-        else if((Rep == 29) && (Carrington == 0) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6818);
-        }
-        else if((Rep == 28) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6814);
-        }
-        else if((Rep == 38) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[35] = tunnel(6789);
-        }
-
-        if((Rep == 41) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6781);
-        }
-        else if((Rep == 20) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6864);
-        }
-        else if((Rep == 5) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6863);
-        }
-        else if((Rep == 3) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6830);
-        }
-        else if((Rep == 21) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6829);
-        }
-        else if((Rep == 24) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6827);
-        }
-        else if((Rep == 26) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6825);
-        }
-        else if((Rep == 7) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6853);
-        }
-        else if((Rep == 4) && (e.player_answers.includes(9343) && e.player_answers.includes(9382)) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6855);
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/y1cI717.png";
-        }
-        else if((Rep == 4) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6851);
-        }
-        else if((Rep == 1) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6843);
-        }
-        else if((Rep == 25) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6841);
-        }
-        else if((Rep == 22) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6837);
-        }
-        else if((Rep == 2) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6833);
-        }
-        else if((Rep == 6 || Rep == 38) && (e.player_answers.includes(9413)) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6846);
-			pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/e4QchUb.png";
-        }
-        else if((Rep == 6) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6821);
-        }
-        else if((Rep == 28) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6813);
-        }
-        else if((Rep == 38) && (e.noCounter == 36)){
-            campaignTrail_temp.questions_json[36] = tunnel(6788);
-        }
-        else if((Rep == 31) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[36] = tunnel(6796);
-        }
-        else if((Rep == 29) && (Carrington == 0) && (e.noCounter == 35)){
-            campaignTrail_temp.questions_json[36] = tunnel(6811);
-        }
-
-        if((Rep == 7) && (e.noCounter == 37)){
-            campaignTrail_temp.questions_json[37] = tunnel(6849);
-        }
-        else if((window.VPisCandidate == 0) && (Cred < 8) && (e.noCounter == 37)){
-            campaignTrail_temp.questions_json[37] = tunnel(4023);
-        }
-        else if((window.VPisCandidate == 0) && (Cred > 8) && (e.noCounter == 37)){
-            campaignTrail_temp.questions_json[37] = tunnel(6862);
-        }
-        else if((window.VPisCandidate == 1) && (Cred < 8) && (e.noCounter == 37)){
-            campaignTrail_temp.questions_json[37] = tunnel(6861);
-        }
-        else if((window.VPisCandidate == 1) && (Cred > 8) && (e.noCounter == 37)){
-            campaignTrail_temp.questions_json[37] = tunnel(6860);
-        }
-
-        if((Rep == 41) && (e.noCounter == 38)){
-            campaignTrail_temp.questions_json[38] = tunnel(6780);
-        }
-        else if((Rep == 1) && (e.player_answers.includes(9000)) && (e.player_answers.includes(9158)) && (e.player_answers.includes(9289)) && (e.player_answers.includes(9321)) && (e.noCounter == 38)){
-            campaignTrail_temp.questions_json[38] = tunnel(6842);
-			pictureDict[38] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/6Xg5G2R.png";
-        }
-        else if((window.VPisCandidate == 1) && (Reagan == 0) && (e.player_answers.includes(8980) || e.player_answers.includes(8984)) && (e.player_answers.includes(9125)) && (e.player_answers.includes(9170)) && (e.player_answers.includes(9175)) && (e.noCounter == 38)){
-            campaignTrail_temp.questions_json[38] = tunnel(6824);
-			pictureDict[38] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/S6SjlDZ.png";
-        }
-        else if((window.VPisCandidate == 0) && (Reagan == 0) && (e.player_answers.includes(8925)) && (e.player_answers.includes(8927)) && (e.player_answers.includes(8936)) && (e.player_answers.includes(8994)) && (e.player_answers.includes(9122) || e.player_answers.includes(9123) || e.player_answers.includes(9124) || e.player_answers.includes(9121)) && (e.player_answers.includes(9168)) && (e.player_answers.includes(9318)) && (e.player_answers.includes(9184)||e.player_answers.includes(9185)||e.player_answers.includes(9186)) && (e.noCounter == 38)){
-            campaignTrail_temp.questions_json[38] = tunnel(6823);
-			pictureDict[38] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/0E6YEdF.png";
-        }
-        else if((e.noCounter == 38)){
-            campaignTrail_temp.questions_json[38] = tunnel(4024);
-        }
-
-        if (e.noCounter == 35) { // question 35
-            if ((Instability <= -3) && (Carrington == 1)) {
-                campaignTrail_temp.questions_json[35] = tunnel(6808);
-                e.global_parameter_json[0].fields.question_count = 36;
-                pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/tDJ0ai7.png";
-            } else {
-                if ((Instability >= -2) && (Wins <= 3) && (Carrington == 1)) {
-                    campaignTrail_temp.questions_json[35] = tunnel(6806);
-                    pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/oKYAsxo.png";
-                } else if ((Instability >= -2) && (Wins > 3) && (Carrington == 1)) {
-                    campaignTrail_temp.questions_json[35] = tunnel(6805);
-                    pictureDict[35] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/oKYAsxo.png";
-                }
-            }
-        }
-
-        if (e.noCounter == 36) { // question 36
-            if ((Instability >= -2) && (Cred >= 1) && (Carrington == 1)) {
-                campaignTrail_temp.questions_json[36] = tunnel(6803);
-                pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/RbyRnKi.png";
-            } else if ((Instability >= -2) && (Cred < 1) && (Carrington == 1)) {
-                campaignTrail_temp.questions_json[36] = tunnel(6804);
-                pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/RbyRnKi.png";
-            } else if ((Instability <= -3) && (Over == 0) && (Carrington == 1)) {
-                campaignTrail_temp.questions_json[36] = tunnel(6808);
-                e.global_parameter_json[0].fields.question_count = 37;
-                pictureDict[36] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/tDJ0ai7.png";
-            }
-        }
-
-        if (e.noCounter == 37) { // question 37
-            if ((Instability >= -2) && (Carrington == 1)) {
-                campaignTrail_temp.questions_json[37] = tunnel(6795);
-                e.global_parameter_json[0].fields.question_count = 38;
-                pictureDict[37] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/gywkB8I.png";
-            } else if ((Instability <= -3) && (Over == 0) && (Carrington == 1)) {
-                campaignTrail_temp.questions_json[37] = tunnel(6808);
-                e.global_parameter_json[0].fields.question_count = 38;
-                pictureDict[37] = "https://file.garden/aNtAfG887DiA_7lO/Obamanation/tDJ0ai7.png";
-            }
-        }
+		// basically setting up the pictures for the Rep opponents at some questions
+		function setupRep(repNum, basePicture, switcherooFunc = null) {
+			Rep = repNum;
+			
+			const repPictures = {
+				1: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Vf2NPOA.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/S3beKYS.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/CBuLfIk.png" },
+				2: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/CnVfalr.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/v47eEee.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/C0KXHww.png" },
+				3: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/EcIvZje.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/yq2Wm7w.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/TMVCFo2.png" },
+				4: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/stLfmQJ.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lYgoz4r.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/0R0gJ40.png" },
+				5: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/qEf8QWf.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/PXAc6Fp.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/NoGj8Ek.png" },
+				6: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/klpjxMC.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LaBdZAY.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/cUMs9UF.png" },
+				7: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/HfJxzHu.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/nwKS5v0.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AiXsyzM.png" },
+				20: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/AnsBwYT.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/3KLqIAw.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/i8zCd9b.png" },
+				21: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/eZg8pbJ.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/HKUKZoo.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/1wH0JjH.png" },
+				22: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/W5GFinf.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GLKekfX.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/bQ5AsJ9.png" },
+				24: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5yLFfkV.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/k5JDAEU.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/ZmhZ3eT.png" },
+				25: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lMOQZNl.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/natZubQ.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/kswvOkr.png" },
+				26: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Ffy6gaT.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/9d1joGE.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/iMrn82q.png" },
+				28: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/CkKemx9.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/vQuaJAh.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/JzExdZ7.png" },
+				29: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LkglyXQ.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/LafbdUr.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/1cjvCXs.png" },
+				31: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/lCJTyjw.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/5qR4mud.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/GLtQWkH.png" },
+				38: { 33: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/JaPxFnG.png", 35: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Rp96Rum.png", 36: "https://file.garden/aNtAfG887DiA_7lO/Obamanation/UMNNu5K.png" }
+			};
+			
+			pictureDict[31] = basePicture;
+			if (repPictures[repNum]) {
+				Object.entries(repPictures[repNum]).forEach(([q, url]) => pictureDict[q] = url);
+			}
+			
+			if (switcherooFunc) switcherooFunc();
+			
+			// maps the switcheroos to the candidate IDs
+			const switcherooMap = {
+				1: switcheroo1, 2: switcheroo2, 3: switcheroo3, 4: switcheroo4,
+				5: switcheroo5, 6: switcheroo6, 7: switcheroo7, 20: switcheroo20,
+				21: switcheroo21, 22: switcheroo22, 24: switcheroo24, 25: switcheroo25,
+				26: switcheroo26, 28: switcheroo28, 29: switcheroo29, 38: switcheroo38
+			};
+			
+			if (switcherooMap[repNum] && !switcherooFunc) {
+				switcherooMap[repNum]();
+			}
+		}
 
         //achievements
 

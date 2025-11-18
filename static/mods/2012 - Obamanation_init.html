@@ -2142,27 +2142,6 @@ corrr = `
 	</div>
 	`;
 
-// Select the node that will be observed for mutations
-const windowsAdvisorTargetNode = document.getElementById("game_window");
-
-// Options for the observer (which mutations to observe)
-const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
-
-// Callback function to execute when mutations are observed
-const callback = (mutationList, observer) => {
-    visitWindow = document.getElementsByClassName("overlay_window")[0];
-
-    if (visitWindow == null || visitWindow.classList.contains("done")) {
-        return;
-    }
-    visitWindow.classList.add("done");
-    visitWindow.classList.add("window");
-    let titleBar = visitWindow.querySelector("h3");
-    titleBar.classList.add("title-bar");
-    titleBar.classList.add("title-bar-text")
-    titleBar.style.paddingLeft = "3px";
-};
-
 // the music player
 class Song {
     constructor(title, artist, genre, coverLink, audioLink) {
