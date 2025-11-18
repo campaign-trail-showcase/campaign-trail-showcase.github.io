@@ -706,10 +706,16 @@ function disableKeys(e) {
 
 var toggle = true;
 
-window.setTimeout(function () {
-    // Pause audio
-    document.getElementsByTagName("audio")[0].pause();
-}, 50);
+const audioObserver = new MutationObserver((mutations, obs) => {
+    const audio = document.getElementsByTagName("audio")[0];
+    
+    if (audio) {
+        audio.pause();
+        obs.disconnect(); 
+    }
+});
+
+audioObserver.observe(document.body, { childList: true, subtree: true });
 function lameduck() {
     const style_overwrite = document.createElement("style");
     nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#41270e";
@@ -1315,7 +1321,10 @@ function hideNoFeedbackButton() {
 
 function removeMapButton() {
     const mapButton = document.getElementById('view_electoral_map');
-    if (mapButton && happened == false && campaignTrail_temp.question_number > 0 && campaignTrail_temp.question_number < 13) {
+    
+    if (mapButton && happened === false && campaignTrail_temp.question_number > 0 && campaignTrail_temp.question_number < 13) {
+        
+        mapButton.remove();
         coding();
     }
 }
@@ -1333,7 +1342,7 @@ const observer = new MutationObserver((mutationsList) => {
                     if (node.id === 'no_feedback_button' || node.querySelector('#no_feedback_button')) {
                         hideNoFeedbackButton();
                     }
-                    if (node.id === 'mapButton' || node.querySelector('#mapButton')) {
+                    if (node.id === 'view_electoral_map' || node.querySelector('#view_electoral_map')) {
                         removeMapButton();
                     }
                 }
@@ -1548,33 +1557,7 @@ Thank you so much, everyone.</p>
             }
         }
     ]
-	const cleanUpMapButton = () => {
-		const mapButton = document.getElementById('view_electoral_map');
-		if (mapButton && mapButton.parentNode) {
-			mapButton.parentNode.removeChild(mapButton);
-		}
-		
-		const continueButton = document.getElementById('answer_select_button');
-		if (continueButton) {
-			continueButton.style.display = 'block';
-			continueButton.style.margin = '0 auto';
-		}
-	};
 
-	cleanUpMapButton();
-
-	const mapButtonObserver = new MutationObserver((mutations) => {
-		for (const mutation of mutations) {
-			if (mutation.addedNodes.length) {
-				cleanUpMapButton();
-			}
-		}
-	});
-
-	const buttonContainer = document.getElementById('game_window'); 
-	if(buttonContainer) {
-		mapButtonObserver.observe(buttonContainer, { childList: true, subtree: true });
-	}
     document.body.background = "https://i.imgur.com/nMc8oq1.jpg"
     document.getElementById("header").src = "https://i.imgur.com/eq4MIaX.png"
     quotes = [
@@ -1703,6 +1686,8 @@ function playasMcDonough() {
 
 
 function notrunning() {
+	happened = true;
+
     document.getElementById("header").src = "https://www.rollingstone.com/wp-content/uploads/2021/06/GettyImages-1231517220.jpg"
     if (nato == true) {
         campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 3] = tunnel(8012);
@@ -1735,6 +1720,12 @@ function notrunning() {
     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 14] = tunnel(6006);
     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 15] = tunnel(6007);
     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 20] = tunnel(3013);
+	
+	demcandidate = "Denis McDonough";
+    campaignTrail_temp.candidate_first_name = "Denis";
+    campaignTrail_temp.candidate_last_name = "McDonough";
+    campaignTrail_temp.candidate_json.find(candidate => candidate.pk == 201).fields.first_name = "Denis";
+    campaignTrail_temp.candidate_json.find(candidate => candidate.pk == 201).fields.last_name = "McDonough";
 
     campaignTrail_temp.candidate_image_url =
         "https://i.imgur.com/3HhNKl1.png";
@@ -1945,98 +1936,109 @@ function runningforpresident() {
 }
 
 function coding() {
-    document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title
-    $(".container")[0].style.backgroundColor = "#181716"
-    document.body.background = "https://i.imgur.com/nMc8oq1.jpg"
-    $("#game_window")[0].style.backgroundImage = "url()"
-    window.setTimeout(function () {
-        // Continue with the cutscene logic
-        var introCutscene = document.createElement("video");
-        introCutscene.src = "https://www.youtube.com/watch?v=yfRkdbw-cOM";
-        introCutscene.style.display = "none";
-        introCutscene.preload = true;
-        introCutscene.id = "introCutsceneVideo";
-        introCutscene.onplaying = function () {
-            // Video has started playing, now remove the "Latest Polls" button
-            removeButton();
-        };
-        introCutscene.style.width = "100%";
-        introCutscene.style.margin = 0;
-        introCutscene.style.position = "relative";
-        introCutscene.style.top = "40%";
-        introCutscene.style.msTransform = "translateY(-50%)";
-        introCutscene.style.transform = "translateY(-50%)";
-        document.getElementById("game_window").appendChild(introCutscene);
+    document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+    $(".container")[0].style.backgroundColor = "#181716";
+    document.body.background = "https://i.imgur.com/nMc8oq1.jpg";
+    $("#game_window")[0].style.backgroundImage = "url()";
 
-        // Function to remove the "Latest Polls" button
-        function removeButton() {
-            // Assuming 'mapButton' is the id of the button to be removed
-            var mapButton = document.getElementById('mapButton');
+    const introObserver = new MutationObserver((mutations, obs) => {
+        const gameWindow = document.getElementById("game_window");
+        const mapButton = document.getElementById('mapButton');
 
-            // Check if the button exists before removing it
-            if (mapButton) {
-                mapButton.parentNode.removeChild(mapButton);
+        // we wait until the game_window exists to append the video
+        // and we watch for the mapButton to remove it immediately
+        if (gameWindow) {
+            // check if video already exists to prevent duplicates
+            if (!document.getElementById("introCutsceneVideo")) {
+                var introCutscene = document.createElement("video");
+                introCutscene.src = "https://www.youtube.com/watch?v=yfRkdbw-cOM";
+                introCutscene.style.display = "none";
+                introCutscene.preload = true;
+                introCutscene.id = "introCutsceneVideo";
+                
+                introCutscene.style.width = "100%";
+                introCutscene.style.margin = 0;
+                introCutscene.style.position = "relative";
+                introCutscene.style.top = "40%";
+                introCutscene.style.msTransform = "translateY(-50%)";
+                introCutscene.style.transform = "translateY(-50%)";
+                
+                gameWindow.appendChild(introCutscene);
 
-                // Continue with the cutscene logic after button removal
-                introCutscene.play();
+                // handle playback and button removal
+                introCutscene.oncanplay = function() {
+                    // if the map button exists now, remove it
+                    const currentMapBtn = document.getElementById('mapButton');
+                    if (currentMapBtn) {
+                        currentMapBtn.remove();
+                    }
+                    introCutscene.style.display = "block";
+                    introCutscene.play();
+                    
+                    const audio = document.getElementsByTagName("audio")[0];
+                    if(audio) audio.currentTime = 56;
+                    
+                    z = true;
+                };
             }
-
-            // Additional code...
-            document.getElementsByTagName("audio")[0].currentTime = 56;
-            // musicBox.style.display = "";
-            z = true;
         }
-    }, 0o1);
 
+        if (mapButton) {
+            mapButton.remove();
+            if(document.getElementById("introCutsceneVideo")) {
+                obs.disconnect();
+            }
+        }
+    });
+
+    // Start observing the body for changes (childList) and subtree changes
+    introObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 
     const style_overwrite = document.createElement("style");
-    style_overwrite.innerHTML =
-        `#campaign_sign {
-    background-color: #000000;
-    border-color: #3F3F3F;
-  }
-  #menu_container {
-    background-color: #ECECEC;
-  }
-  #overall_result_container {
-    background-color: #ECECEC;
-  }
-  #state_info h3 {
-    background-color: #ECECEC;
-  }
-  #overall_result h3 {
-    background-color: #ECECEC;
-  }`
-        ;
+    style_overwrite.innerHTML = `#campaign_sign {
+        background-color: #000000;
+        border-color: #3F3F3F;
+    }
+    #menu_container {
+        background-color: #ECECEC;
+    }
+    #overall_result_container {
+        background-color: #ECECEC;
+    }
+    #state_info h3 {
+        background-color: #ECECEC;
+    }
+    #overall_result h3 {
+        background-color: #ECECEC;
+    }`;
     document.head.appendChild(style_overwrite);
 
     let style = document.createElement('style');
     style.type = 'text/css';
     style.id = 'dynamic-style';
-
     style.innerHTML = `
-    .inner_window_question h3 {
-      background-color: #ECECEC;
-    }
-    .overlay_window h3 {
-      background-color: #ECECEC;
-    }
-  `;
-
+        .inner_window_question h3 {
+          background-color: #ECECEC;
+        }
+        .overlay_window h3 {
+          background-color: #ECECEC;
+        }
+    `;
     document.head.appendChild(style);
-
-
 
     const customStyling = document.createElement("style");
     customStyling.innerHTML = `
-  #map_container {
-      background-image: url("https://i.imgur.com/atU4EWz.jpeg");
-      background-size: cover;
-  }
-  `;
+      #map_container {
+          background-image: url("https://i.imgur.com/atU4EWz.jpeg");
+          background-size: cover;
+      }
+    `;
     document.head.appendChild(customStyling);
-    
 }
+
 function resultsTable() {
     vpTable = {
         "Joe Biden": demvp,
@@ -3725,24 +3727,21 @@ cyoAdventure = function (a) {
         window.setTimeout(e.vpSwitcher, 20)
         resultsTable()
     }
-    if (ans == 600671 || ans == 60672) {
+	if (ans == 600671 || ans == 600672) {
         if (running == false) {
             if (un == true) {
                 if (unfail >= 2) {
                     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 1] = tunnel(8019);
-                }
-                if (unfail < 2) {
+                } else {
                     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 1] = tunnel(8018);
                 }
             }
             if (nato == true) {
                 if (natofail >= 2) {
                     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 1] = tunnel(8021);
-                }
-                if (natofail < 2) {
+                } else {
                     campaignTrail_temp.questions_json[campaignTrail_temp.question_number + 1] = tunnel(8020);
                 }
-
             }
             if (usa == true) {
                 if (usafail >= 2 && intervention1 == true) {
@@ -3759,14 +3758,15 @@ cyoAdventure = function (a) {
                 }
             }
         }
+
         if (ans == 600671) {
             congress = "GOP";
         }
         if (ans == 600672) {
             congress = "Dem";
             wins += 1;
-            console.log("Patriotic?")
-            console.log(bipartisanmeter)
+            console.log("Patriotic?");
+            console.log(bipartisanmeter);
         }
     }
     if (internationalmeter >= 1 || securitymeter >= 1) {
@@ -4810,13 +4810,21 @@ function moveMapFooter() {
     const mapFooter = document.getElementById('map_footer');
 
     if (mainContentArea && mapFooter) {
-        // Check if mapFooter is a child of mainContentArea
+        // only move it if it is currently inside main_content_area
         if (mainContentArea.contains(mapFooter)) {
-            // Move map_footer out of main_content_area
             mainContentArea.parentNode.insertBefore(mapFooter, mainContentArea.nextSibling);
         }
     }
 }
 
-// Run the function every 100 milliseconds (adjust as needed)
-setInterval(moveMapFooter, 100);
+const footerObserver = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+        if (mutation.addedNodes.length > 0) {
+            moveMapFooter();
+            break;
+        }
+    }
+});
+
+footerObserver.observe(document.body, { childList: true, subtree: true });
+moveMapFooter();
