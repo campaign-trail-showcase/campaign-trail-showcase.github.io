@@ -16630,6 +16630,8 @@ function endingPickerCONT() {
 // but probably wouldn't fit well here. Well, we had to resort to
 // another idea.
 
+window.generatedCabinetCache = window.generatedCabinetCache || {}; // store confirmation dates
+
 // for announcement dates
 function generateAnnouncementDate(tier) {
     const baseDate = new Date('2016-11-09T12:00:00Z'); // day after election
@@ -16709,6 +16711,16 @@ function generateCabinetCells(member, victoryType) {
 
 // the main function generator
 function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
+    // create a unique key for this specific contingent outcome
+    const cacheKey = `contingent_${window.CONTINGENT}`;
+
+    // if we've already generated a cabinet for this outcome, use the cached version
+    if (window.generatedCabinetCache[cacheKey]) {
+        const cachedData = window.generatedCabinetCache[cacheKey];
+        // re-use the cached HTML directly to ensure everything is identical
+        return cachedData.html;
+    }
+		
     const { sandersRelations, wallStreetScore, globalistScore, hawkScore, obamaLoyalty } = scores;
     let cabinet = [];
     let president, vicePresident, party, headerColor;
@@ -17031,8 +17043,8 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
         const transportPicks = [
 			(runningMateID === 215 && candidates.transportation.technocrat),
 			(playerEV < 290 && candidates.transportation.unity),
-			(runningMateID !== 215 && candidates.transportation.infrastructure),
-			candidates.transportation.establishment
+			(obamaLoyalty >= 3 && candidates.transportation.establishment),
+			candidates.transportation.infrastructure
         ].filter(Boolean);
         pickAndAssign("Secretary of Transportation", transportPicks, seals.transportation, 2);
 
@@ -17080,7 +17092,7 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
         const hudPicks = [
 			([211, 214].includes(runningMateID) && candidates.hud.booker_vp_loyalist),
 			(sandersRelations >= 4 && candidates.hud.progressive),
-			(runningMateID !== 214 && candidates.hud.establishment),
+			(obamaLoyalty >= 2 && runningMateID !== 214 && candidates.hud.establishment),
 			candidates.hud.mayor
         ].filter(Boolean);
         pickAndAssign("Secretary of Housing & Urban Development", hudPicks, seals.hud, 3);
@@ -17294,6 +17306,9 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 	}
 
 	html += `</tbody></table></div>`;
+	
+	window.generatedCabinetCache[cacheKey] = { html };
+	 
 	return html;
 }
 
@@ -17356,7 +17371,6 @@ endingPicker = (out, totv, aa, quickstats) => {
 	if (out === "win") {
 		checkAndApplyUnlocks(playerEV, campaignTrail_temp.running_mate_id);
 		unlockAchievement("Just Like Heaven");
-		if (playerEV >= 535) unlockAchievement("In Present Tense");
 		if (playerEV >= 332) unlockAchievement("Mother's Pride");
 		if (campaignTrail_temp.player_answers.includes(5184)) unlockAchievement("If I Was Your Girlfriend");
 		if (campaignTrail_temp.player_answers.includes(20988)) unlockAchievement("I Could Never Take The Place of Your Man");
@@ -17790,7 +17804,7 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
         { title: "Darkness", artist: "The Human League", coverLink: "https://lh3.googleusercontent.com/5UgvTLEebZkbRH9fiGuJajPDSur-nJXHpHKCJUDkQd3LR-hJBAsqeKevMhPKQnyNX7MbBRnQWWabh0u0=w544-h544-l90-rj", videoIds: ["vPfk7ktdqo4"] },
 		{ title: "Fall Into Place", artist: "Apartment", coverLink: "https://lh3.googleusercontent.com/G5iK-2BALHx_hHwB1LBmzHthvtt3BF8NB428Ub4sTkTYUv3bT6bI6lN9N1SZyIlzKTps58GudSFHWPXo=w544-h544-l90-rj", videoIds: ["IQaEg6GguLk"] },
         { title: "Fight Song", artist: "Rachel Platten", coverLink: "https://lh3.googleusercontent.com/AxQrFKHbt5jU_DiZihMhlJ3bxGLBy3rN6yfLlb0SJ68ay4FpnciNHNkD9WTXPBfbX1gCCZI5pFs2bJzU=w544-h544-l90-rj", videoIds: ["y5h_dukaB1I"] },
-		{ title: "The Ballad of Harambe", artist: "c a n d i d !", coverLink: "https://lh3.googleusercontent.com/F3ub3Ot4uC_HiLYe9RW-nxvMI__N7S5OkyGf_4bgU1MSIW4wp05es_6DF2GBAueUM-LVzIqxz8YuI1rY=w120-h120-l90-rj", videoIds: ["VX8omFoNHdQ"] },
+		{ title: "The Ballad of Harambe", artist: "c a n d i d !", coverLink: "https://lh3.googleusercontent.com/F3ub3Ot4uC_HiLYe9RW-nxvMI__N7S5OkyGf_4bgU1MSIW4wp05es_6DF2GBAueUM-LVzIqxz8YuI1rY=w544-h544-l90-rj", videoIds: ["VX8omFoNHdQ"] },
 		{ title: "Set Adrift on Memory Bliss", artist: "P.M. Dawn", coverLink: "https://lh3.googleusercontent.com/51qmaba8irr1qqXAcVc5CGV6bTiNNlevjEgh4cCDCntbqZP4dc1gcVlcf_lxA42D8CkZxDTW3L3SnPa4=w544-h544-l90-rj", videoIds: ["MurZoAE40VA"] },
 		{ title: "Woke Up This Morning (Chosen One Mix)", artist: "Alabama 3", coverLink: "https://lh3.googleusercontent.com/EHKdWSYR9Kenl61Gu87krAIFBJCRmrHdTGISW46gHmiAjuElSW18fCpkvVTlGYnKn3lzmartBT_7K3t6mQ=w544-h544-l90-rj", videoIds: ["slpCmg53qkU", "EvCdCKyLo_I", "6_0nDHcrrtE"] },
 		{ title: "What’s on Your Mind (Pure Energy)", artist: "Information Society", coverLink: "https://lh3.googleusercontent.com/ZWMW9K6oQVxTOOfPAy-7NLsta-kxbLXWEWgG7o4ZuO8c25KMs07dkGc-lHY0Udg9J9jdsSVsYJTgjq8=w544-h544-l90-rj", videoIds: ["lCrD81j6OD0"] },
