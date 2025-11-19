@@ -1,10 +1,10 @@
 function ctsAchievement(achievement, difficultyChecker = true){
 	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
 		if(campaignTrail_temp.CTS){
-		unlockAchievement(achievement);
+		unlockAchievement(achievement); // unlockable on normal or above
 	}
 }
-
+		
 // Further reading tabs
 (function() {
     'use strict';
@@ -10602,17 +10602,6 @@ campaignTrail_temp.answer_score_state_json = [
     },
     {
         "model": "campaign_trail.answer_score_state",
-        "pk": 51607,
-        "fields": {
-            "answer": 51271,
-            "state": 1043,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": 0.6
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_state",
         "pk": 51608,
         "fields": {
             "answer": 51084,
@@ -11693,13 +11682,6 @@ campaignTrail_temp.jet_data = [{
 }
 ]
 
-
-
-
-
-
-// ENDINGS -- this is slightly more reliable than the ending code method
-
 construct = (a = 1) => {
     
     e.page = e.page + a < e.pages.length ? e.page + a : 0
@@ -11767,6 +11749,8 @@ endingConstructor = (a = 1) => {
     $("#final_results_description")[0].innerHTML = construct(a);
 }
 
+// ENDINGS -- this is slightly more reliable than the ending code method
+		
 e.multiple_endings = true;
 
 e.header = "<h1>This is an error handler</h1>";
@@ -11891,10 +11875,8 @@ else if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] == 2
 else if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] < 269) { // Killary, lost by cheating
         e.pages.push(`<h3>Jesus Christ</h3><p>It's been a week since Hillary Clinton won the 2016 election, despite everything. She has already proclaimed that she's broken the glass ceiling despite the so called ''witch hunt'' against her, and has already laid out her agenda. She doesn't even give a victory speech. Why should she? <br><br> She gave another speech to Goldman Sachs today, where she laughed with them. She says that under her term, the unborn will be killed at a rate never thought possible, that she would ''finish the job'' in Afghanistan, and set the populist movement and the working mass ''back 50 years''. The speech was leaked by an unknown source, though President-elect Clinton has refused to apologize. <br><br> You were chosen to defend America from this monster, and you failed. Some even speculate you lost intentionally, or that the player somehow used cheats, as ridiculous as these claims may be. Either way, your career is over. </p>`);
         e.pages.push(`<h3> Scott Brown announces 2020 presidential bid | Massachusetts Enquirer </h3><p> Scott Brown, the Massachusetts senator who narrowly defeated Elizabeth Warren in 2018 to win back his Senate seat, launched his bid against President Hillary Rodham Clinton 1 week ago, to the surprise of many observers. <br><br> <i>''She's a truly remarkable woman. Wrong on almost every issue, and completely in the pocket of the Washington establishment. We need a change this November.''</i> Brown said. <br><br> <i> ''Whether it be her troop surge in Afghanistan, her pardoning of Anthony Weiner after he did inappropriate acts with a minor, her new authoritarian ''National Mental Hygiene Act'', her murder of Vince Foster, or any of the other dozen things she's done to harm our country. She is slowly turning America into a dictatorship. If you're mad with what she's doing to our country, join me in our crusade as we take it back.'' </i> <br><br> Republican Senate Minority leader Tim Scott endorsed Brown's run. Tim Scott said on Saturday <i>''You can notice Clinton slowly becoming more and more authoritarian. I hope we can put our differences aside this November and vote against her. She's too dangerous to keep in the White House.'' </i> You can learn more about how the situation is developing <a href="https://www.reddit.com/r/imaginaryelections/comments/1is30bx/the_wolf_in_sheeps_clothing/" target="_blank">here</a>. </p>`);
-        e.pages.push(`<h3> Scott Brown announces 2020 presidential bid | Massachusetts Enquirer </h3><p>  </p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/kg7ymVb.jpeg'; }]); 
         e.executable.push([1, () => { e.image = 'https://i.imgur.com/Ce5ckGP.png'; }]);
-        e.executable.push([2, () => { e.image = 'https://i.imgur.com/Ce5ckGP.png'; }]);
 
 
     if (songChange != 1) {
@@ -12154,9 +12136,6 @@ else if (quickstats[0] > 339 && quickstats[0] < 535 && (SpecialEnding != 1)) { /
       moderatedefeat.addSong(moderatedefeatSong);
     changePlaylist(moderatedefeat);
      }
-
-ctsAchievement("Tough as Texas");
-
     }
 
 
@@ -12343,26 +12322,55 @@ else if (quickstats[0] > 2 && quickstats[0] <= 134 && (SpecialEnding != 1)) { //
     }
 }
 
+// End of Game Achievements
+
+	  function easyAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1.33)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+} // Achievements unlockable on cakewalk or above
+
+
+		var cakewalk = false;
+		if (campaignTrail_temp.difficulty_level_multiplier >= 1.22){
+    cakewalk = true;
+}
+
+
+	  
 if (Trump == 1 && quickstats[0] > 269 && (SpecialEnding != 1)) {
 ctsAchievement("Darker Vision"); // Ally with trump
 }
 if (campaignTrail_temp.player_answers.includes(51228) && quickstats[0] > 269 && (SpecialEnding != 1)) {
-ctsAchievement("Valid Crashout"); // Crash out
-}
-if (quickstats[0] == 305 && (SpecialEnding != 1)) { // Historical victory
-ctsAchievement("History Arrives All The Same");
+ctsAchievement("Valid Crashout"); // Crash out and win
 }
 if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] > 269) { // Expose her and win
 ctsAchievement("Karmic Retribution");
+}
+if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] < 269) { // Expose her and lose (by cheating)
+unlockAchievement("''Fren'' For The End Of The World");
+}
+if (quickstats[0] > 269) {
+ctsAchievement("Tough as Texas");
+}
+if (quickstats[0] < 269 && cakewalk == true) {
+easyAchievement("For Shame");
 }
 let TexasResult = campaignTrail_temp.final_state_results.find((x) => x.state == 1042); // Lose Texas
 if(TexasResult.result[0].candidate == 201) {
 ctsAchievement("Texas Toast");
     }
-
+let WisconsinResult = campaignTrail_temp.final_state_results.find(x => x.state == 1049); 
+let MichiganResult = campaignTrail_temp.final_state_results.find(x => x.state == 1021); 
+let PennsylvaniaResult = campaignTrail_temp.final_state_results.find(x => x.state == 1037); 
+if (WisconsinResult.result[0].candidate == 200 && MichiganResult.result[0].candidate == 200 && PennsylvaniaResult.result[0].candidate == 200) {  
+easyAchievement("History Arrives All The Same");
+     }
+  
 let JerseyResult = campaignTrail_temp.final_state_results.find(x => x.state == 1029);
-if (JerseyResult && JerseyResult.result[0].candidate == 200 && SpecialEnding != 1) {
-    ctsAchievement("Expanding The Map");
+if (JerseyResult && JerseyResult.result[0].candidate == 200) {
+    easyAchievement("Expanding The Map"); // not using ctsAchievement so you can unlock it on easier difficulties
 }
 
     return construct(0);
@@ -12475,3 +12483,5 @@ applyTooltipsToObject(campaignTrail_temp.answer_feedback_json);
     };
   }
 })(jQuery, "tooltipPlugin", {}, null, ["getValue"]);
+
+
