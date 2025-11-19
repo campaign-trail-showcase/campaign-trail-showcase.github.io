@@ -4,7 +4,7 @@ campaignTrail_temp.election_json = [
         "pk": 9,
         "fields": {
             "year": 2012,
-            "summary": `Barack Hussein Obama. The first Black president. The Antichrist. The demagogic liar has succeeded in advancing himself to the highest office in the land on the premise he'd fulfill the hopes and channel the grievances of all the extremists and victims who've placed him there. Under the ever-present eyes of his teachers, the time has come to take his place as the fourth horseman of the apocalypse that will ring in a new America.<p></p>Tasked with truly defining himself and exposing his innermost ambitions, he must act upon events most extraordinary, all conveniently placed before him as if by the cruel hand of fate itself. Will he maintain the radical tutelage instilled in him from his swinging Chicago days, or betray them all at the risk of a tarnished legacy? Whatever he decides to do, it'll take all his wits, snake oil charm, and manipulative cunning to not go down with the ship he's sinking.`,
+            "summary": `Barack Hussein Obama. The first Black president. The Antichrist. The demagogic liar has succeeded in advancing himself to the highest office in the land on the premise he'd fulfill the hopes and channel the grievances of all the extremists and victims who've placed him there. Under the ever-present eyes of his teachers, the time has come to take his place as the fourth horseman of the apocalypse that will ring in a new America.<br><br>Tasked with truly defining himself and exposing his innermost ambitions, he must act upon events most extraordinary, all conveniently placed before him as if by the cruel hand of fate itself. Will he maintain the radical tutelage instilled in him from his swinging Chicago days, or betray them all at the risk of a tarnished legacy? Whatever he decides to do, it'll take all his wits, snake oil charm, and manipulative cunning to not go down with the ship he's sinking.`,
             "site_description": `<p>Barack Hussein Obama. The first Black president. <b>The Antichrist.</b> The demagogic liar has succeeded in advancing himself to the highest office in the land on the premise he'd fulfill the hopes and channel the grievances of all the extremists and victims who've placed him there. Under the ever-present eyes of his teachers, the time has come to take his place as the fourth horseman of the apocalypse that will ring in a new America.</p><p>Tasked with truly defining himself and exposing his innermost ambitions, he must act upon events most extraordinary, all conveniently placed before him as if by the cruel hand of fate itself. Will he maintain the radical tutelage instilled in him from his swinging Chicago days, or betray them all at the risk of a tarnished legacy? Whatever he decides to do, it'll take all his wits, snake oil charm, and manipulative cunning to not go down with the ship he's sinking.</p>`,
             "image_url": "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Code1/AZJd8oG.gif",
             "winning_electoral_vote_number": 270,
@@ -1077,9 +1077,10 @@ const css = `
 			  
 			  #candidate_pic, img#candidate_pic {
 				order: 1;
-				width: 19dvh;
+				width: 13.5em;
 				height: auto;
 				flex-shrink: 0;
+				margin: 0;
 			  }
 			  
 			  .inner_window_sign_display {
@@ -1090,13 +1091,15 @@ const css = `
 				display: flex;
 				flex-direction: column;
 				align-items: center;
+				margin: 0;
 			  }
 			  
 			  #running_mate_pic, img#running_mate_pic {
 				order: 3;
-				width: 19dvh;
+				width: 13.5em;
 				height: auto;
 				flex-shrink: 0;
+				margin: 0;
 			  }
 			  
 			  .inner_window_sign_display img {
@@ -2141,27 +2144,6 @@ corrr = `
 	</h2>
 	</div>
 	`;
-
-// Select the node that will be observed for mutations
-const windowsAdvisorTargetNode = document.getElementById("game_window");
-
-// Options for the observer (which mutations to observe)
-const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
-
-// Callback function to execute when mutations are observed
-const callback = (mutationList, observer) => {
-    visitWindow = document.getElementsByClassName("overlay_window")[0];
-
-    if (visitWindow == null || visitWindow.classList.contains("done")) {
-        return;
-    }
-    visitWindow.classList.add("done");
-    visitWindow.classList.add("window");
-    let titleBar = visitWindow.querySelector("h3");
-    titleBar.classList.add("title-bar");
-    titleBar.classList.add("title-bar-text")
-    titleBar.style.paddingLeft = "3px";
-};
 
 // the music player
 class Song {
