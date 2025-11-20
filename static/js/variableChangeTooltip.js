@@ -1,4 +1,4 @@
-const variableTooltip = {
+const variableChangeTooltip = {
   data: null,
   jsonLoaded: false,
   active: false,
@@ -9,21 +9,21 @@ const variableTooltip = {
 }
 
 function onAnswerEnter(e) {
-  if (!variableTooltip.active) return;
+  if (!variableChangeTooltip.active) return;
 
   const gameLabel = e.target.closest('label');
   if (!gameLabel) return;
 
-  const hoverTooltip = document.getElementById("answerHoverTooltip");
+  const hoverTooltip = document.getElementById("variableTooltip");
 
   // get input associated with answer text
   const answerInput = document.getElementById(gameLabel.getAttribute('for'));
   if (!answerInput) return;
 
   const answerPk = answerInput.value;
-  const modName = variableTooltip.modName;
+  const modName = variableChangeTooltip.modName;
 
-  const changes = variableTooltip.data?.[modName]?.[variableTooltip.candidateId]?.[variableTooltip.runningMateId]?.[answerPk];
+  const changes = variableChangeTooltip.data?.[modName]?.[variableChangeTooltip.candidateId]?.[variableChangeTooltip.runningMateId]?.[answerPk];
   const variableChangeText = changes ? changes.map(c => `${c.var}: ${c.change}`).join(", "): "No variable changes";
 
   hoverTooltip.innerHTML = variableChangeText;
@@ -36,30 +36,30 @@ function onAnswerEnter(e) {
 }
 
 function onAnswerLeave() {
-  document.getElementById("answerHoverTooltip").style.display = "none";
+  document.getElementById("variableTooltip").style.display = "none";
 }
 
 async function activateVariableTooltip() {
-  variableTooltip.modName = new URLSearchParams(window.location.search).get("modName");
+  variableChangeTooltip.modName = new URLSearchParams(window.location.search).get("modName");
 
-  variableTooltip.active = !variableTooltip.active;
-  if (!variableTooltip.active) return;
+  variableChangeTooltip.active = !variableChangeTooltip.active;
+  if (!variableChangeTooltip.active) return;
 
-  if (!variableTooltip.jsonLoaded) {
+  if (!variableChangeTooltip.jsonLoaded) {
     try {
-      const res = await fetch(`../static/json/variablechanges/${variableTooltip.modName}.json`);
-      variableTooltip.data = await res.json();
-      variableTooltip.jsonLoaded = true;
+      const res = await fetch(`../static/json/variablechanges/${variableChangeTooltip.modName}.json`);
+      variableChangeTooltip.data = await res.json();
+      variableChangeTooltip.jsonLoaded = true;
     } catch (error) {
       return;
     }
   }
 
   // get candidate and running mate ids
-  if (!variableTooltip.candidateId || !variableTooltip.runningMateId) {
+  if (!variableChangeTooltip.candidateId || !variableChangeTooltip.runningMateId) {
     if (window.e?.candidate_id && window.e?.running_mate_id) {
-      variableTooltip.candidateId = e.candidate_id;
-      variableTooltip.runningMateId = e.running_mate_id;
+      variableChangeTooltip.candidateId = e.candidate_id;
+      variableChangeTooltip.runningMateId = e.running_mate_id;
     } else {
       return;
     }
@@ -67,11 +67,11 @@ async function activateVariableTooltip() {
 
   // game_window used for delegation for new questions
   const gameWindow = document.getElementById("game_window");
-  const tooltip = document.getElementById("answerHoverTooltip");
-  if (!gameWindow || !tooltip) return;
+  const hoverTooltip = document.getElementById("variableTooltip");
+  if (!gameWindow || !hoverTooltip) return;
 
-  if (!variableTooltip.listenersAttached) {
-    variableTooltip.listenersAttached = true;
+  if (!variableChangeTooltip.listenersAttached) {
+    variableChangeTooltip.listenersAttached = true;
 
     gameWindow.addEventListener("mouseenter", onAnswerEnter, true);
     gameWindow.addEventListener("mouseleave", onAnswerLeave, true);
