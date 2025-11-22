@@ -12099,8 +12099,8 @@ ctsAchievement("Tough as Texas");
 if (quickstats[0] < 269 && cakewalk == true) {
 easyAchievement("For Shame");
 }
-if (quickstats[0] < 269 && (CorruptBargain == 1)) {
-ctsAchievement("For Shame");
+if (quickstats[0] > 269 && (CorruptBargain == 1)) {
+ctsAchievement("Soul Sold");
 }
 let TexasResult = campaignTrail_temp.final_state_results.find((x) => x.state == 1042); // Lose Texas
 if(TexasResult.result[0].candidate == 201) {
@@ -12228,4 +12228,5 @@ applyTooltipsToObject(e.answer_feedback_json);
     };
   }
 })(jQuery, "tooltipPlugin", {}, null, ["getValue"]);
+
 
