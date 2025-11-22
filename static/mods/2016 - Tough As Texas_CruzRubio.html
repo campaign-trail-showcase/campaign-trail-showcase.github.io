@@ -1856,14 +1856,6 @@ e.answers_json = [
     },
     {
         "model": "campaign_trail.answer",
-        "pk": 51119,
-        "fields": {
-            "question": 1008,
-            "description": "It's time to admit that we're going to lose at the convention to Trump. I'm going to back Rubio there, which will hopefully stop Trump from winning. Even if I'm exiting the race, conservatism will benefit at the end. We don't want 2 New York elitists as the only choices this election."
-        }
-    },
-    {
-        "model": "campaign_trail.answer",
         "pk": 51121,
         "fields": {
             "question": 3198,
@@ -8099,16 +8091,7 @@ e.answer_score_global_json = [
         }
     },
     {
-        "model": "campaign_trail.answer_score_global",
-        "pk": 51133,
-        "fields": {
-            "answer": 51119,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "global_multiplier": 0.15
-        }
-    },
-    {
+
         "model": "campaign_trail.answer_score_global",
         "pk": 51134,
         "fields": {
@@ -9486,50 +9469,8 @@ e.answer_score_state_json = [
         }
     },
     {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51148,
-        "fields": {
-            "answer": 51119,
-            "state": 1018,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": 0.05
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51149,
-        "fields": {
-            "answer": 51119,
-            "state": 1028,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": 0.05
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51150,
-        "fields": {
-            "answer": 51119,
-            "state": 1022,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": 0.148
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51151,
-        "fields": {
-            "answer": 51119,
-            "state": 1005,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": 0.05
-        }
-    },
-    {
+  
+   
         "model": "campaign_trail.answer_score_state",
         "pk": 51234,
         "fields": {
@@ -9684,61 +9625,7 @@ e.answer_score_state_json = [
         }
     },
     {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51348,
-        "fields": {
-            "answer": 51119,
-            "state": 1021,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": -0.03
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51349,
-        "fields": {
-            "answer": 51119,
-            "state": 1037,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": -0.03
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51350,
-        "fields": {
-            "answer": 51119,
-            "state": 1027,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": 0.05
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51351,
-        "fields": {
-            "answer": 51119,
-            "state": 1014,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": 0.04
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51352,
-        "fields": {
-            "answer": 51119,
-            "state": 1049,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": 0.04
-        }
-    },
-    {
+    
         "model": "campaign_trail.answer_score_state",
         "pk": 51353,
         "fields": {
@@ -10443,17 +10330,7 @@ e.answer_score_state_json = [
         }
     },
     {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51515,
-        "fields": {
-            "answer": 51119,
-            "state": 1008,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": 0.07
-        }
-    },
-    {
+  
         "model": "campaign_trail.answer_score_state",
         "pk": 51555,
         "fields": {
@@ -10531,17 +10408,7 @@ e.answer_score_state_json = [
         }
     },
     {
-        "model": "campaign_trail.answer_score_state",
-        "pk": 51601,
-        "fields": {
-            "answer": 51119,
-            "state": 1034,
-            "candidate": 200,
-            "affected_candidate": 200,
-            "state_multiplier": 0.05
-        }
-    },
-    {
+  
         "model": "campaign_trail.answer_score_state",
         "pk": 51609,
         "fields": {
@@ -11024,15 +10891,7 @@ e.answer_feedback_json = [
         }
     },
     {
-        "model": "campaign_trail.answer_feedback",
-        "pk": 51132,
-        "fields": {
-            "answer": 51119,
-            "candidate": 200,
-            "answer_feedback": "Rubio is thankful to have your support here. With your help, he is able to narrowly defeat Trump at the convention. He offers you the role of Secretary of State if he wins, which you accept."
-        }
-    },
-    {
+  
         "model": "campaign_trail.answer_feedback",
         "pk": 51157,
         "fields": {
@@ -11845,7 +11704,7 @@ else if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] < 26
 
 
 // Trump wins 50 states
- else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] >= 535 && (SpecialEnding != 1)) { // trump
+ else if ((campaignTrail_temp.player_answers[4] === 51271) && quickstats[0] >= 535 && (SpecialEnding != 1)) { // trump
         e.pages.push(`<h3>Hillary, you're fired.</h3><p>Orange Man<marquee scrollamount='65'><h1>MAKE AMERICA GREAT AGAIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</marquee></p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/Bs5xDUA.png'; }]);
     if (songChange != 1) {
@@ -11865,7 +11724,7 @@ else if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] < 26
 
 // Trump wins
 
-       else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] < 535 && quickstats[0] > 269 && (SpecialEnding != 1)) { // Trump wins the election!
+       else if ((campaignTrail_temp.player_answers[4] === 51271) && quickstats[0] < 535 && quickstats[0] > 269 && (SpecialEnding != 1)) { // Trump wins the election!
         e.pages.push(`<h3>My folks, we are going to Make America Great Again!</h3><p>Out of all the ways this election could have gone, you did not expect it to go this way. Yet here we are. Donald Trump is already calling his victory “the greatest victory in the history of America” and how terrible Crooked Hillary is. Clinton is left to give her last-minute defeat speech to an emptying hall. Good riddance. The best positive you can take from this is her career is over.<br><br>Like it or not, the country has been changed forever. Trump managed to flip states that hadn't gone red since the eighties, and pundits are stunned by such an upset. With his victory, the Republican Party has become the party of tariffs and the working man, not the party of big business it was a year ago.</p>`);
         e.pages.push(`<h3>My folks, we are going to Make America Great Again!</h3><p>Fortunately, Trump has promised to appoint several conservative justices, and the conservative majority will be preserved or even expanded under his presidency. An overturning of Roe v. Wade isn't off the table, and could likely happen sometime around the early 2020s.<br><br>You definitely still have a chance to win the presidency in the future, but you'll also need to start gearing up for re-election. Surely you won't almost lose in a Republican stronghold like Texas, right?<br><br>For now though, you can just sit back and relax. This might not have been the best possible outcome, nor the outcome you hoped for, but it could've always been much worse.</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/gvmGNyb.png'; }]);
@@ -11887,7 +11746,7 @@ else if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] < 26
 
 // Trump deadlock
 
-       else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] > 268 && quickstats[0] < 270 && (SpecialEnding != 1)) { // Trump deadlocks the election
+       else if ((campaignTrail_temp.player_answers[4] === 51271) && quickstats[0] > 268 && quickstats[0] < 270 && (SpecialEnding != 1)) { // Trump deadlocks the election
       campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/5cfyftc.png";
         e.pages.push(`<h3>A Contingent War</h3><p>The election has deadlocked. For the first time since 1824, Congress will decide the winner. It's a war in the house, but Republicans control a majority of state delegations, meaning they will almost certainly elevate Donald Trump to the presidency. The Senate will be closer, although Mike Pence will still be elevated to the role of Vice President. Clinton's campaign will try in vein to win in a last-ditch attempt, but it's obvious her career is over. Good riddance.<br><br>What would his administration even look like? He's already promising to appoint his own family to cabinet positions, and while mainstream media derides the idea, it's looking like there will be little in the way to stop him. It's unlikely you'll get a cabinet position, given the heated exchanges you had with Trump in the primary, but who knows?</p>`);
         e.pages.push(`<h3>A Contingent War</h3><p>Fortunately, Trump has promised to appoint several conservative justices, and the conservative majority could be preserved or even expanded under his presidency. An overturning of Roe v. Wade isn't out of the ordinary, and could likely happen sometime around the early 2020s.<br><br>You definitely still have a chance to win the presidency in the future, but you'll also need to start gearing up for re-election. Surely you won't almost lose in a Republican stronghold like Texas, right?<br><br>For now though, you can just sit back and relax. This might not have been the best possible outcome, nor the outcome you hoped for, it could've always been much worse.</p>`);
@@ -11933,7 +11792,7 @@ else if (quickstats[0] == 269 && (SpecialEnding != 1)) { // Deadlocked election 
 
 // Trump loses
 
-       else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] < 269 && quickstats[0] > 3 && (SpecialEnding != 1)) { // Trump LOSES the election...
+       else if ((campaignTrail_temp.player_answers[4] === 51271) && quickstats[0] < 269 && quickstats[0] > 3 && (SpecialEnding != 1)) { // Trump LOSES the election...
         e.pages.push(`<h3>A Rise and Fall</h3><p>You had hoped that what they had been saying was true, that Trump had 'blue collar appeal,' as all his campaign managers said, but as you warned them, it didn't work out. The RNC is absolutely livid that Trump screwed up such a winnable election. Trump calls the election rigged, Clinton declares victory, and the upshot is mass confusion and anger amongst the voters. Paul Ryan says the election result was 'unsurprising, especially after the Hollywood access tape.' Marco Rubio called the result 'disapointing but expected.'<br><br>Some Trump supporters even called for a march on Washington to demand a recount, though fortunately nobody actually attempted an attack. In any case, the debate stretches well into the night. The conservative majority in the Supreme Court will likely be diminished or gone by the end of Hillary's first term. McConnell has already backed down, and the process to confirm Merrick Garland is underway. Ruth Bader Ginsburg has said she plans to retire as soon as Clinton is inaugurated.</p>`);
         e.pages.push(`<h3>A Rise and Fall</h3><p>Hillary Clinton, the most corrupt, pro-choice, disastrous woman to ever bear the face of Earth, has been elected President. She picked the Javits Center in Manhattan to hold her victory speech, mainly because it had a massive glass ceiling on it. She shatters it and the crowd erupts into celebration. She keeps gloating during her victory speech. Talk of ''reproductive freedom'' and the ''glass ceiling'' are the only words coming out of her mouth. Eventually, you just turn off the TV. You don't want to hear her insufferable voice anymore.<br><br> You're already planning to run for the nomination again in 2020. The damage to this country will be irreversible if a woman is allowed to serve 2 terms. Donald Trump is still on the line of fire, and establishment Republicans continue to dunk on him. For now though, you can't be bothered to deal with the circus happening on Twitter anymore. You turn off the lights in your hotel room and head to bed.</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/kg7ymVb.jpeg'; }]);
@@ -11976,7 +11835,7 @@ else if (quickstats[0] >= 259 && quickstats[0] < 269 && (SpecialEnding != 1)) { 
 
 // Trump loses everything
 
-else if ((campaignTrail_temp.player_answers[4] === 51271 || campaignTrail_temp.player_answers[4] === 51084) && quickstats[0] < 3 && (SpecialEnding != 1)) { // trump loses everything
+else if ((campaignTrail_temp.player_answers[4] === 51271) && quickstats[0] < 3 && (SpecialEnding != 1)) { // trump loses everything
         e.pages.push(`<h3>Basket of Deplorables</h3><p>“I know there are only 60 days left to make our case – and don't get complacent; don't see the latest outrageous, offensive, inappropriate comment and think, "Well, he's done this time". We are living in a volatile political environment. You know, to just be grossly generalistic, you could put half of Trump's supporters into what I call the basket of deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables deplorables. - Hillary Clinton, CBS News</p>`);
         e.executable.push([0, () => { e.image = 'https://i.imgur.com/DZslERA.png'; }]);
     }
@@ -12232,7 +12091,7 @@ if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] > 269) { 
 ctsAchievement("Karmic Retribution");
 }
 if (campaignTrail_temp.player_answers.includes(51531) && quickstats[0] < 269) { // Expose her and lose (by cheating)
-unlockAchievement("''Fren'' For The End Of The World");
+ctsAchievement("''Fren'' For The End Of The World");
 }
 if (quickstats[0] > 269) {
 ctsAchievement("Tough as Texas");
@@ -12366,6 +12225,3 @@ applyTooltipsToObject(e.answer_feedback_json);
     };
   }
 })(jQuery, "tooltipPlugin", {}, null, ["getValue"]);
-
-
-
