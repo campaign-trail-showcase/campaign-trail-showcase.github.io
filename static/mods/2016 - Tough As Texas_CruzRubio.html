@@ -1603,7 +1603,7 @@ e.answers_json = [
         "pk": 5124,
         "fields": {
             "question": 1037,
-            "description": "It's obvious, no? The Blue Wall. They're tired of the failure of the Democrats for the past 8 years. We're going to campaign with Senator Portman and Governor Kasich in Ohio, Speaker Ryan and Governor Rubio in Wisconsin, and Governor Pawlenty in Minnesota. The whole wall is coming down."
+            "description": "It's obvious, no? The Blue Wall. They're tired of the failure of the Democrats for the past 8 years. We're going to campaign with Senator Portman and Governor Kasich in Ohio, Speaker Ryan and Governor Walker in Wisconsin, and Governor Pawlenty in Minnesota. The whole wall is coming down."
         }
     },
     {
@@ -12099,6 +12099,9 @@ ctsAchievement("Tough as Texas");
 if (quickstats[0] < 269 && cakewalk == true) {
 easyAchievement("For Shame");
 }
+if (quickstats[0] < 269 && (CorruptBargain == 1)) {
+ctsAchievement("For Shame");
+}
 let TexasResult = campaignTrail_temp.final_state_results.find((x) => x.state == 1042); // Lose Texas
 if(TexasResult.result[0].candidate == 201) {
 ctsAchievement("Texas Toast");
@@ -12225,3 +12228,4 @@ applyTooltipsToObject(e.answer_feedback_json);
     };
   }
 })(jQuery, "tooltipPlugin", {}, null, ["getValue"]);
+
