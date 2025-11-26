@@ -30,9 +30,9 @@ campaignTrail_temp.election_json = [
         "fields": {
             "year": 1976,
             "summary": "The 1976 election stands as one of the most interesting in modern history. <p>Republican John Lindsay is seeking a second term after a presidency full of ups and downs and a divided party. Henry M. Jackson hopes to channel the energy of the Democrats’ 1974 midterm victory to return the party to the White House, but the shadow of Robert Kennedy still hangs over him. And Ronald Reagan, once a political “has-been,” is leading an independent bid with the backing of the conservative movement—and a real shot at power.<p> In this broken, strange, fast-moving world, can Lindsay hang on to his job a while longer, or is this the end of Republican liberalism once and for all?",
-            "image_url": "https://i.imgur.com/oJVFkZD.jpeg",
+            "image_url": "https://i.imgur.com/LAiK9X4.jpeg",
             "winning_electoral_vote_number": 270,
-            "advisor_url": "https://th-thumbnailer.cdn-si-edu.com/CNJuylmb044FHEngdSttbkxcGes=/fit-in/1072x0/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/f8/46/f8465780-c8e4-428e-885d-c2f3a1a41329/1968_poorpeoplescampaign_og.jpg",
+            "advisor_url": "https://i.imgur.com/oJVFkZD.jpeg",
             "recommended_reading": `<h2>About This Mod</h2>
 <p>I've always been fascinated by candidates who, though they belong to one party, seem unmistakably like members of the other. John Lindsay, Nelson Rockefeller, Jacob Javits&mdash;but also John Connally, Joe Lieberman, and George Wallace. It's a very American phenomenon, and it makes for a very interesting game. This mod (my first) is an attempt to use a scenario based on such a figure to create a fun, replayable game. I hope you enjoyed it.</p>
 <p>I'd like to thank Thatchmaster (for the coding of the endings, especially the Wikipedia, the Newspapers and the Reddit ones), and ItsAstronomical (for the explanations in his codes and the tutorial) . Their code has been very helpful in tackling the hard work of modding, and any mistakes I made trying to emulate them are mine. I also want to thank obummer (for the codes on the soundtrack of the game and his displaying), Jet (for Jet's TCT Mod Tool, without this mod wouldn't have happened), and Tom1923 (for the campaign sign display).</p>
@@ -44,6 +44,16 @@ campaignTrail_temp.election_json = [
         }
     }
 ]
+
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#4382b3",
+     "header_text_color": "#000000",
+     "description_text_color": "#000000",
+     "description_background_color": "#96c2e3",
+     "main_color": "#ddeffd",
+     "secondary_color": "#50679f",
+     "ui_text_color": "#ffffff"
+}
 
 campaignTrail_temp.candidate_json = [
     {
@@ -155,6 +165,46 @@ campaignTrail_temp.candidate_json = [
     },
     {
         "model": "campaign_trail.candidate",
+        "pk": 1005,
+        "fields": {
+            "first_name": "Richard",
+            "last_name": "Nixon",
+            "election": 4,
+            "party": "Republican Party",
+            "state": "California",
+            "priority": 6,
+            "description": "<p><strong>General William C. Westmoreland</strong> – war hero, strategist, and",
+            "color_hex": "#7A3E00",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/wAFIstb.jpeg",
+            "description_as_running_mate": "<p>It was truly comical. The eternal loser, consumed by an endless hatred of Washington’s great dynasties, had to beg like a dog for a spot in the new administration. His campaign appearances were sporadic, pitiful, scorned. Richard Nixon is a hateful, repugnant man, and his position as National Security Advisor has done nothing to soften that perception in Lindsay’s mind.<p>\n\nBut he may be an asset. Nixon would play the same role Dole did four years earlier, and might even bring back some disillusioned conservatives. His appeal to the silent majority would steal voters from Jackson in the North and from Reagan in the South. Taking him out of foreign policy would let Mr. Kissinger implement all his ideas without interruptions from this farm boy, and it would sate his ego enough to keep him on Lindsay’s side. The question is, John: <i>are you willing to share a presidential ticket with Richard Nixon?",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1006,
+        "fields": {
+            "first_name": "Edward",
+            "last_name": "Brooke",
+            "election": 4,
+            "party": "Republican Party",
+            "state": "Massachussets",
+            "priority": 7,
+            "description": "<p><strong>George H. W. Bush</strong> – youthful Congressman, Navy veteran, and",
+            "color_hex": "#005A8E",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/Ov01g4W.jpeg",
+            "description_as_running_mate": "<p>No. No. Not a chance. Don’t even think about it, John.\n\n<p><i>It could work. Look at it this way: every racist in this country is going to vote for Reagan. If any are left over, they’ll go to Jackson. Right now we’re at, what, 30% of the Black vote? Imagine if we could push it to 50%. To 70%! It’s perfect. Brooke is perfect. We could peel off some Democratic progressives—the ones who criticize Jackson when he opposes busing. And look at him. He’s a good politician. He’s charismatic. Everybody loves him.</i>\n\n<p>He’s Black.\n\n<p>—Sigh— Do whatever you want, but don’t say I didn’t warn you.",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
         "pk": 1007,
         "fields": {
             "first_name": "Reubin",
@@ -222,6 +272,22 @@ campaignTrail_temp.running_mate_json = [
         "fields": {
             "candidate": 1001,
             "running_mate": 1004
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 302,
+        "fields": {
+            "candidate": 1001,
+            "running_mate": 1005
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 304,
+        "fields": {
+            "candidate": 1001,
+            "running_mate": 1006
         }
     },
     {
@@ -863,7 +929,7 @@ campaignTrail_temp.achievements = {
   },
   "She just needs someone to change her" : {
     "image" : "https://i.imgur.com/XOcHSPO.jpeg",
-    "description" : "Win the state of Alabama",
+    "description" : "Win all the states of the Confederacy",
       "cannotBeCheated" : true
   },
   "In good shape for the shape she's in" : {
@@ -884,6 +950,41 @@ campaignTrail_temp.achievements = {
   "Stronger Together" : {
     "image" : "https://i.imgur.com/NxLTwbf.jpeg",
     "description" : "Meet a future president",
+      "cannotBeCheated" : true
+  },
+  "A factory of despair" : {
+    "image" : "https://i.imgur.com/JRmZKLb.jpeg",
+    "description" : "Win with Nixon as your VP",
+      "cannotBeCheated" : true
+  },
+  "And the calendar is lying" : {
+    "image" : "https://i.imgur.com/Y4v1Fjk.jpeg",
+    "description" : "Correct the timeline, 12 years later",
+      "cannotBeCheated" : true
+  },
+  "In which God they can trust" : {
+    "image" : "https://i.imgur.com/BsvDAds.jpeg",
+    "description" : "Correct the timeline, 8 years later",
+      "cannotBeCheated" : true
+  },
+  "I'm bound to cross the line" : {
+    "image" : "https://i.imgur.com/4aUxmSj.jpeg",
+    "description" : "Win with Brooke as your VP",
+      "cannotBeCheated" : true
+  },
+  "From north to south" : {
+    "image" : "https://i.imgur.com/KUmhUeC.jpeg",
+    "description" : "Form an anti-fascist front",
+      "cannotBeCheated" : true
+  },
+  "A will and a self-restraint" : {
+    "image" : "https://i.imgur.com/CzzZVTO.jpeg",
+    "description" : "Stand into the abyss and tell the tale",
+      "cannotBeCheated" : true
+  },
+  "Only as tall as we stand" : {
+    "image" : "https://i.imgur.com/cFE35B0.jpeg",
+    "description" : "First as a tragedy, then as a triumph",
       "cannotBeCheated" : true
   },
 }

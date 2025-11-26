@@ -49,6 +49,10 @@ customStyling.innerHTML = `
   position: relative;
   clear: both;
 }
+.overlay_window {
+  min-height: 62%;
+  height: auto;
+}
 `;
 document.head.appendChild(customStyling);
 
@@ -11578,8 +11582,18 @@ e.pages.push(`
 	if (bills==2){
 	  ctsAchievement("We never lost control");
 	}
-	let alabamaResult = campaignTrail_temp.final_state_results.find((x) => x.state == 97);
-	if (alabamaResult.result[0].candidate == 1001){
+	let aResult = campaignTrail_temp.final_state_results.find((x) => x.state == 97);
+	let bResult = campaignTrail_temp.final_state_results.find((x) => x.state == 100);
+	let cResult = campaignTrail_temp.final_state_results.find((x) => x.state == 105);
+	let dResult = campaignTrail_temp.final_state_results.find((x) => x.state == 106);
+	let eResult = campaignTrail_temp.final_state_results.find((x) => x.state == 114);
+	let fResult = campaignTrail_temp.final_state_results.find((x) => x.state == 129);
+	let gResult = campaignTrail_temp.final_state_results.find((x) => x.state == 120);
+	let hResult = campaignTrail_temp.final_state_results.find((x) => x.state == 136);
+	let iResult = campaignTrail_temp.final_state_results.find((x) => x.state == 138);
+	let jResult = campaignTrail_temp.final_state_results.find((x) => x.state == 139);
+	let kResult = campaignTrail_temp.final_state_results.find((x) => x.state == 142);
+	if (aResult.result[0].candidate == 1001 && bResult.result[0].candidate == 1001 && cResult.result[0].candidate == 1001 && dResult.result[0].candidate == 1001 && eResult.result[0].candidate == 1001 && fResult.result[0].candidate == 1001 && gResult.result[0].candidate == 1001 && hResult.result[0].candidate == 1001 && iResult.result[0].candidate == 1001 && jResult.result[0].candidate == 1001 && kResult.result[0].candidate == 1001){
 	  ctsAchievement("She just needs someone to change her");
 	}
 	if (quickstats[0]>=270 && economy==2){
@@ -11885,6 +11899,8 @@ campaignTrail_temp.jet_data = [{
     "mapping_data": {}
 }
 ]
+
+
 
 
 
