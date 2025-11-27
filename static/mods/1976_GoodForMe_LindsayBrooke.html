@@ -189,7 +189,7 @@ function getQuestionNumberFromPk(pk) {
 
 cyoAdventure = function (a) {
   const r = Number(radical);
-  const pTrue = Math.max(0,Math.exp(-r)*0.8);
+  const pTrue = Math.min(0.8,Math.exp(-r)*0.8);
   const leak = Math.random() < pTrue;
 
 function drawCand(p0, p1, p2 = 1 - p0 - p1) {
@@ -252,7 +252,8 @@ else{
 // var CYOA here
 //racism
 if( ans == 9895 || ans == 9879){
-  reagan1=0.99;
+  reagan2=0.99;
+  byrd2=0.01;
 }
  // RNC
  if(ans == 9020 || ans == 9029){
