@@ -161,6 +161,8 @@ campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/e2zHIb7.jpeg";
 var Candid = "Lindsay";
 var done=false;
 var done2=false;
+var done3=false;
+var done4=false;
 var byrd=true;
 var nixon = false;
 var RNC=0;
@@ -358,10 +360,13 @@ if (ans == 9546){
       reagan1=0.5;
     }
     if ((ans == 9330 || ans == 9331 || ans == 9332 || ans == 9327 || ans == 9328 || ans == 9329) && leak==false){
-        campaignTrail_temp.questions_json[16] = tunnel(9848);      
+        campaignTrail_temp.questions_json[16] = tunnel(9848);
+        done3=true;
     }
     else if (ans == 9330 || ans == 9331 || ans == 9332 || ans == 9327 || ans == 9328 || ans == 9329){
-        campaignTrail_temp.questions_json[16] = tunnel(9352);      
+        campaignTrail_temp.questions_json[16] = tunnel(9352);
+        done3=true;
+
     }
     if ((ans == 9027 || ans == 9028 || ans == 9029) && RNC==2) {
         campaignTrail_temp.questions_json[2] = tunnel(9539);
@@ -500,10 +505,12 @@ ${textsign}`
     }
     else if ((ans == 9874 || ans == 9875 || ans == 9876 || ans == 9877 || ans == 9878 || ans == 9879 || ans == 9880 || ans == 9881 || ans == 9882 || ans == 9883 || ans == 9884 || ans == 9885 || ans == 9890 || ans == 9891 || ans == 9892 || ans == 9893 || ans == 9895 || ans == 9896 || ans == 9897 || ans == 9898 || ans == 9900 || ans == 9901 || ans == 9902 || ans == 9903) && shot==0){
       campaignTrail_temp.questions_json[19] = tunnel(9358);
+      done4=true;
       byrd=false;
     }
     else if ((ans == 9874 || ans == 9875 || ans == 9876 || ans == 9877 || ans == 9878 || ans == 9879 || ans == 9880 || ans == 9881 || ans == 9882 || ans == 9883 || ans == 9884 || ans == 9885 || ans == 9890 || ans == 9891 || ans == 9892 || ans == 9893 || ans == 9895 || ans == 9896 || ans == 9897 || ans == 9898 || ans == 9900 || ans == 9901 || ans == 9902 || ans == 9903) && shot==1){
       campaignTrail_temp.questions_json[19] = tunnel(9357);
+      done4=true;
       campaignTrail_temp.candidate_json[2]["fields"].first_name = "James";
       campaignTrail_temp.candidate_json[2]["fields"].last_name = "Buckley";
       campaignTrail_temp.candidate_json[2]["fields"].color_hex = "#f0e27d";
@@ -512,6 +519,7 @@ ${textsign}`
     }
     else if (ans == 9874 || ans == 9875 || ans == 9876 || ans == 9877 || ans == 9878 || ans == 9879 || ans == 9880 || ans == 9881 || ans == 9882 || ans == 9883 || ans == 9884 || ans == 9885 || ans == 9890 || ans == 9891 || ans == 9892 || ans == 9893 || ans == 9895 || ans == 9896 || ans == 9897 || ans == 9898 || ans == 9900 || ans == 9901 || ans == 9902 || ans == 9903){
       campaignTrail_temp.questions_json[19] = tunnel(9359);
+      done4=true;
       ctsAchievement("A will and a self-restraint");
     }
     if (ans == 9886 || ans == 9887 || ans == 9888){
@@ -14733,6 +14741,50 @@ campaignTrail_temp.answer_feedback_json = [
     "3": `<span style="color: #ebebeb;">The economy is in</span> <i><span style="color: #28a63a;">a Revival</i></span>. <span style="color: #ebebeb;">(<span style="color:#28a63a;">3</span>)`,
 };
 
+  const scandalLabel ={
+    "0.8": `<span style="color: #ebebeb;">Brooke's infidelity has a <i><span style="color: #e62517;"> high </span></i>chance of being revealed. <span style="color: #ebebeb;">(<span style="color:#e62517;">80</span>%</span>)`,
+    "0.29": `<span style="color: #ebebeb;">Brooke's infidelity has a <i><span style="color: #f7bebe;"> lower </span></i>chance of being revealed. <span style="color: #ebebeb;">(<span style="color:#f7bebe;">27</span>%)</span>`,
+    "0.14": `<span style="color: #ebebeb;">Brooke's infidelity has a <i><span style="color: #f7bebe;"> lower </span></i>chance of being revealed. <span style="color: #ebebeb;">(<span style="color:#f7bebe;">14</span>%)</span>`,
+    "0.05": `<span style="color: #ebebeb;">Brooke's infidelity has a <i><span style="color: #fadcdc;"> extremely low </span></i>chance of being revealed. <span style="color: #ebebeb;">(<span style="color:#fadcdc;">5</span>%)</span>`,
+    "0.02": `<span style="color: #ebebeb;">Brooke's infidelity has a <i><span style="color: #fadcdc;"> extremely low </span></i>chance of being revealed. <span style="color: #ebebeb;">(<span style="color:#fadcdc;">2</span>%)</span>`,
+    "0.01": `<span style="color: #ebebeb;">Brooke's infidelity has a <i><span style="color: #fadcdc;"> extremely low </span></i>chance of being revealed. <span style="color: #ebebeb;">(<span style="color:#fadcdc;">1</span>%)</span>`,
+    "0": `<span style="color: #ebebeb;">Brooke's infidelity is going to be a secret.</span>`,    
+  }
+
+  const reaganLabel ={
+    "0.16": `<span style="color: #ebebeb;">Will <span style="color: #99cc00;"><em>probably not</em></span> shoot <span style="color: #d4b611;">Reagan</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #99cc00;">16</span>%)</span></span>`,
+    "0.21": `<span style="color: #ebebeb;">Will <span style="color: #99cc00;"><em>probably not</em></span> shoot <span style="color: #d4b611;">Reagan</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #99cc00;">21</span>%)</span></span>`,
+    "0.27": `<span style="color: #ebebeb;">Are <span style="color: #cfc106;"><em>thinking about</em></span> shooting <span style="color: #d4b611;">Reagan</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #cfc106;">27</span>%)</span></span>`,
+    "0.33": `<span style="color: #ebebeb;">Are <span style="color: #cfc106;"><em>thinking about</em></span> shooting <span style="color: #d4b611;">Reagan</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #cfc106;">33</span>%)</span></span>`,
+    "0.39": `<span style="color: #ebebeb;">Are <span style="color: #cfc106;"><em>thinking about</em></span> shooting <span style="color: #d4b611;">Reagan</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #cfc106;">39</span>%)</span></span>`,
+    "0.44": `<span style="color: #ebebeb;">Will <span style="color: #c98806;"><em>try to</em></span> shoot <span style="color: #d4b611;">Reagan</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #c98806;">44</span>%)</span></span>`,
+    "0.5": `<span style="color: #ebebeb;">Will <span style="color: #c98806;"><em>try to</em></span> shoot <span style="color: #d4b611;">Reagan</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #c98806;">50</span>%)</span></span>`,
+    "default": `<span style="color: #ebebeb;">Do not care about Reagan.</span>`
+  }
+
+  const byrdLabel ={
+    "0.16": `<span style="color: #ebebeb;">Will <span style="color: #99cc00;"><em>probably not</em></span> shoot <span style="color: #cc492f;">Byrd</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #99cc00;">16</span>%)</span></span>`,
+    "0.21": `<span style="color: #ebebeb;">Will <span style="color: #99cc00;"><em>probably not</em></span> shoot <span style="color: #cc492f;">Byrd</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #99cc00;">21</span>%)</span></span>`,
+    "0.27": `<span style="color: #ebebeb;">Are <span style="color: #cfc106;"><em>thinking about</em></span> shooting <span style="color: #cc492f;">Byrd</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #cfc106;">27</span>%)</span></span>`,
+    "0.33": `<span style="color: #ebebeb;">Are <span style="color: #cfc106;"><em>thinking about</em></span> shooting <span style="color: #cc492f;">Byrd</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #cfc106;">33</span>%)</span></span>`,
+    "0.39": `<span style="color: #ebebeb;">Are <span style="color: #cfc106;"><em>thinking about</em></span> shooting <span style="color: #cc492f;">Byrd</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #cfc106;">39</span>%)</span></span>`,
+    "0.44": `<span style="color: #ebebeb;">Will <span style="color: #c98806;"><em>try to</em></span> shoot <span style="color: #cc492f;">Byrd</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #c98806;">44</span>%)</span></span>`,
+    "0.5": `<span style="color: #ebebeb;">Will <span style="color: #c98806;"><em>try to</em></span> shoot <span style="color: #cc492f;">Byrd</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #c98806;">50</span>%)</span></span>`,
+    "0.99": `<span style="color: #ebebeb;">Will <span style="color: #e02d09;"><em>kill </em></span><span style="color: #cc492f;">Byrd</span>.&nbsp;<span style="color: #ebebeb;">(<span style="color: #cc492f;">99</span>%)</span></span>`,
+    "default": `<span style="color: #ebebeb;">Do not care about Byrd.</span>`
+  }
+
+  const lindsayLabel ={
+    "0.12": `<span style="color: #ebebeb;">Will <span style="color: #99cc00;"><em>probably not</em></span> shoot <span style="color: #4382b3;">Lindsay</span>&nbsp;<span style="color: #ebebeb;">(<span style="color: #99cc00;">12</span>%)</span></span>`,
+    "0.21": `<span style="color: #ebebeb;">Will <span style="color: #99cc00;"><em>probably not</em></span> shoot <span style="color: #4382b3;">Lindsay</span>&nbsp;<span style="color: #ebebeb;">(<span style="color: #99cc00;">21</span>%)</span></span>`,
+    "0.34": `<span style="color: #ebebeb;">Are <span style="color: #cfc106;"><em>thinking about</em></span> shooting <span style="color: #4382b3;">Lindsay</span>&nbsp;<span style="color: #ebebeb;">(<span style="color: #cfc106;">34</span>%)</span></span>`,
+    "0.46": `<span style="color: #ebebeb;">Are <span style="color: #cfc106;"><em>thinking about</em></span> shooting <span style="color: #4382b3;">Lindsay</span>&nbsp;<span style="color: #ebebeb;">(<span style="color: #cfc106;">46</span>%)</span></span>`,
+    "0.58": `<span style="color: #ebebeb;">Are <span style="color: #cfc106;"><em>thinking about</em></span> shooting <span style="color: #4382b3;">Lindsay</span>&nbsp;<span style="color: #ebebeb;">(<span style="color: #cfc106;">58</span>%)</span></span>`,
+    "0.68": `<span style="color: #ebebeb;">Will <span style="color: #c98806;"><em>try to</em></span> shoot <span style="color: #4382b3;">Lindsay</span>&nbsp;(<span style="color: #c98806;">68</span>%)</span>`,
+    "0.8": `<span style="color: #ebebeb;">Will <span style="color: #e02d09;"><em>shoot </em></span><span style="color: #4382b3;">Lindsay</span>&nbsp;<span style="color: #ebebeb;">(<span style="color: #cc492f;">80</span>%)</span></span>`,
+    "default": `<span style="color: #ebebeb;">Do not care about Lindsay.</span>`
+  }
+
 function getIdeologyText(v) {
   // Limita a [-10, 10] y usa clave string
   const key = String(Math.max(-10, Math.min(10, Math.round(v))));
@@ -14749,6 +14801,55 @@ function getRadicalText(v) {
   // Limita a [-10, 10] y usa clave string
   const key = String(Math.max(-10, Math.min(10, Math.round(v))));
   return radicalLabel[key] ?? `${Candid} is perceived as <i>Unknown</i> (${v})`;
+}
+
+function getByrdText(v){
+  const r = Number(v);
+  if (r >= 0.99) return byrdLabel["0.99"];
+  if (r >= 0.5) return byrdLabel["0.5"];
+  if (r >= 0.44) return byrdLabel["0.44"];
+  if (r >= 0.39) return byrdLabel["0.39"];
+  if (r >= 0.33) return byrdLabel["0.33"];
+  if (r >= 0.27) return byrdLabel["0.27"];
+  if (r >= 0.21) return byrdLabel["0.21"];
+  if (r >= 0.16) return byrdLabel["0.16"];
+  return byrdLabel["default"]?? `There seems to be a problem. Text me about it.`;  
+}
+
+function getReaganText(v){
+  const r = Number(v);
+  if (r >= 0.99) return reaganLabel["0.99"];
+  if (r >= 0.5) return  reaganLabel["0.5"];
+  if (r >= 0.44) return reaganLabel["0.44"];
+  if (r >= 0.39) return reaganLabel["0.39"];
+  if (r >= 0.33) return reaganLabel["0.33"];
+  if (r >= 0.27) return reaganLabel["0.27"];
+  if (r >= 0.21) return reaganLabel["0.21"];
+  if (r >= 0.16) return reaganLabel["0.16"];
+  return reaganLabel["default"]?? `There seems to be a problem. Text me about it.`;  
+}
+
+function getLindsayText(v){
+  const pTrue = Number(v);
+  if (pTrue >= 0.8) return  lindsayLabel["0.8"];
+  if (pTrue >= 0.68) return lindsayLabel["0.68"];
+  if (pTrue >= 0.58) return lindsayLabel["0.58"];
+  if (pTrue >= 0.46) return lindsayLabel["0.46"];
+  if (pTrue >= 0.34) return lindsayLabel["0.34"];
+  if (pTrue >= 0.21) return lindsayLabel["0.21"];
+  if (pTrue >= 0.12) return lindsayLabel["0.12"];
+  return lindsayLabel["default"]?? `There seems to be a problem. Text me about it.`;  
+}
+function getScandalText(v) {
+  const r = Number(v);
+  const pTrue = Math.min(0.8,Math.exp(-r)*0.8);
+  if (pTrue >= 0.8)  return scandalLabel["0.8"];
+  if (pTrue >= 0.29) return scandalLabel["0.29"];
+  if (pTrue >= 0.14) return scandalLabel["0.14"];
+  if (pTrue >= 0.05) return scandalLabel["0.05"];
+  if (pTrue >= 0.02) return scandalLabel["0.02"];
+  if (pTrue >= 0.01) return scandalLabel["0.01"];
+  return scandalLabel["0"] ?? `Brooke's infidelity has a <i>Unknown</i> chance of being revealed(${v})`;
 }
 
 function getRNCText(v) {
@@ -14880,6 +14981,10 @@ function updateSimplePopup() {
     const ideologyText = getIdeologyText(ideology);
     const economyText  = getEconomyText(economy);
     const radicalText = getRadicalText(radical);
+    const scandalText = getScandalText(radical);
+    const lindsayText = getLindsayText(1-Number(reagan2)-Number(byrd2));
+    const reaganText = getReaganText(reagan2);
+    const byrdText = getByrdText(byrd2);
     const RNCText=getRNCText(RNC);
     const VT = `<h3 style="margin: 0 0 4px 0; font-weight: 700;">Variable Tracker</h3>`;
     if(ideology>-10){
@@ -14892,6 +14997,12 @@ function updateSimplePopup() {
     else{
     content.innerHTML =
     VT+"<br>• " + radicalText + "<br>• " + economyText + "<br>";
+    if(localStorage.getItem("Wokeslide") && done3==false){
+    content.innerHTML += "• " + scandalText + "<br>";
+    }
+    if(localStorage.getItem("Wokeslide") && done4==false){
+    content.innerHTML += `<strong>The radicals</strong>` + "<br>" + " ◦ " + lindsayText + "<br>" + " ◦ " + reaganText + "<br>" + " ◦ " + byrdText + "<br>";      
+    }
     if(ans==9330||ans==9331||ans==9332 || done==true){
       content.innerHTML += "• " +`Lindsay has been endorsed by <span style="color: #339966;"><em>McCarthy</em></span>.` + "<br>";
       done=true;
@@ -15059,6 +15170,8 @@ endingPicker = (out, totv, aa, quickstats) => {
 // Page 1 - Lindsay in the Election
   
 if (quickstats[0]>=335 && brooke==true && radical>=2) {//landslide
+alert('Wow! \n\n You’ve gotten the golden ending.!\n The scandal and shooting system is now visible in your game.');
+localStorage.getItem("Wokeslide","true");
 ctsAchievement("Only as tall as we stand");
 nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#ede49d";
 e.pages.push(`<h3>I WILL SHOW A YOUNG MAN</h3>
@@ -15750,9 +15863,3 @@ HistName=["Henry M. Jackson","John Lindsay","Ronald Reagan","Eugene McCarthy"];
 HistEV=[352,115,71,0];
 HistPV=["30,193,982","26,921,081","18,852,707","5,016,763"];
 HistPVP=["37.3%","33.2%","23.3%","6.2%"];
-
-
-
-
-
-
