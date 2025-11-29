@@ -12084,6 +12084,9 @@ else if (quickstats[0] > 2 && quickstats[0] <= 134 && (SpecialEnding != 1)) { //
 if (Trump == 1 && quickstats[0] > 269 && (SpecialEnding != 1)) {
 ctsAchievement("Darker Vision"); // Ally with trump
 }
+if (CorruptBargain == 1 && quickstats[0] > 269 && (SpecialEnding != 1)) {
+ctsAchievement("Soul Sold"); 
+}
 if (campaignTrail_temp.player_answers.includes(51228) && quickstats[0] > 269 && (SpecialEnding != 1)) {
 ctsAchievement("Valid Crashout"); // Crash out and win
 }
@@ -12225,3 +12228,4 @@ applyTooltipsToObject(e.answer_feedback_json);
     };
   }
 })(jQuery, "tooltipPlugin", {}, null, ["getValue"]);
+
