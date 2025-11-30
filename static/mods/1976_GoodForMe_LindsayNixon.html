@@ -10714,8 +10714,46 @@ function toggleSimplePopup() {
     popup.style.display = (popup.style.display === "none") ? "block" : "none";
 }
 
+function addHeadquarterButton() {
+    if (document.getElementById('headquarter_button')) return;
+    const refButton = document.getElementById('view_electoral_map');
+    if (!refButton) return;
+    const newButton = document.createElement('button');
+    newButton.id = 'headquarter_button';
+    newButton.style.marginLeft = '1.5em';
+    newButton.innerHTML = 'Game Stats';
+    newButton.addEventListener('click', toggleSimplePopup);
+    refButton.insertAdjacentElement('afterend', newButton);
+}
+
 createSimplePopup();
 observeGameStats();
+
+async function handleFooter() {
+    const gameWindow = document.getElementById('game_window');
+    addHeadquarterButton();
+}
+
+let observerRunning = false;
+
+async function handleMutations(mutationsList, observer) {
+    if (observerRunning) return;
+    observerRunning = true;
+    observer.disconnect();
+    addHeadquarterButton();
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    observerRunning = false;
+}
+
+var element = document.getElementById('controlElement');
+if (!element) {
+    let singleObserver = new MutationObserver(handleMutations);
+    singleObserver.observe(document.documentElement, { childList: true, subtree: true });
+    var controlElement = document.createElement('div');
+    controlElement.style.display = 'none';
+    controlElement.id = 'controlElement';
+    document.body.appendChild(controlElement);
+}
 
 campaignTrail_temp.candidate_image_url = "https://i.imgur.com/WF449Zq.jpeg";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/BlkdAk0.jpeg";
