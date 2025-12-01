@@ -4617,7 +4617,7 @@ campaignTrail_temp.jet_data = [{
             "value": 0,
             "endingImage": "https://i.postimg.cc/gJHXMh3Y/4-YCCTNDEWUI6-JH642-Q5-QKPWLJU.avif",
             "endingText": "<h3>Congratulations, you won the election!</h3><p>Wow, you have pulled of an incredible victory. Across the nation, it has been a dismal night for Democrats. And your victory only got upstaged by Charlie Baker's miracle win in Massachusetts. Governor Chris Christie of New Jersey is the first to call you and congratulate, no doubt he will be in your corner throughout your tenure. Right now, you have to start preparing for office. The legislature will not be friendly to you, let's hope you can maintain your promise of unity and bipartisanship. All the best come Janurary!</p>",
-            "amount": "846658"
+            "amount": "851000"
         },
         "1757504199731": {
             "id": 1757504199731,
@@ -4626,7 +4626,7 @@ campaignTrail_temp.jet_data = [{
             "value": 0,
             "endingImage": "https://i.postimg.cc/7LXmp53N/Swearing-in-AG-Anthony-Brown-52606582261.jpg",
             "endingText": "<h3>Sorry! You have lost the election.</h3><p>Despite your efforts, Anthony Brown has won the election and will succeed Governor O'Malley come Janurary. Depending on how well you went, a leadership role in the RNC may not be too far out of the picture. Or maybe even you could tip your hat for a senate run or another gubernatorial run in four years time. You call Brown to concede, he thanks you and wishes you all the best. Right now, you have a lot to reflect and contemplate on. So don't rush it. It will be interesting to see what you do in the future.</p>",
-            "amount": "846655"
+            "amount": "850999"
         },
         "1757504385495": {
             "id": 1757504385495,
@@ -4641,6 +4641,10 @@ campaignTrail_temp.jet_data = [{
 }
 ]
 
+// Initialize quickstats array for custom endings
+var quickstats = [0, 0, 0];
+
+                
 //Achievements
 function ctsAchievement(achievement, difficultyChecker = true){
   if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
