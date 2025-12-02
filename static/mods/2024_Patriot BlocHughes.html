@@ -13736,7 +13736,7 @@ cyoAdventure = function (a) {
         console.log(infinita_tristeza_answers)
     }
 	if ( ( infinita_tristeza_answers === 6 ) && !InfinitaTristeza ) {
-        e.questions_json.splice(13, 0 , getQuestionFromPk(10361))
+        e.questions_json.splice(15, 0 , getQuestionFromPk(10361))
         e.global_parameter_json[0].fields.question_count++
 		InfinitaTristeza = true;
         console.log("infinita_tristeza_answers") 
@@ -14542,4 +14542,5 @@ if (!element) {
 	controlElement.id = 'controlElement';
 	document.body.appendChild(controlElement);
 }
+
 
