@@ -97065,36 +97065,37 @@ function refreshSurrogates() {
     }
 }
 
-function makeDraggable(element) {
-    let isDragging = false;
-    let offsetX, offsetY;
+function makeDraggable(elmnt) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
-    element.onmousedown = function(event) {
-        isDragging = true;
-        offsetX = event.clientX - element.getBoundingClientRect().left;
-        offsetY = event.clientY - element.getBoundingClientRect().top;
+    elmnt.addEventListener('mousedown', dragMouseDown);
+    function dragMouseDown(o) {
+        if (["SELECT", "INPUT", "TEXTAREA"].includes(o.target.tagName)) return;
 
-        document.onmousemove = function(event) {
-            if (isDragging) {
-                const newX = event.clientX - offsetX;
-                const newY = event.clientY - offsetY;
+        o.preventDefault();
+        pos3 = o.clientX;
+        pos4 = o.clientY;
+        document.addEventListener('mousemove', elementDrag);
+        document.addEventListener('mouseup', closeDragElement);
+        document.body.style.userSelect = "none";
+    }
 
-                // Update the position of the element
-                element.style.left = newX + 'px';
-                element.style.top = newY + 'px';
 
-                // Save the position in global variables
-                savedX = newX;
-                savedY = newY;
-            }
-        };
+    function elementDrag(o) {
+        o.preventDefault();
+        pos1 = pos3 - o.clientX;
+        pos2 = pos4 - o.clientY;
+        pos3 = o.clientX;
+        pos4 = o.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
 
-        document.onmouseup = function() {
-            isDragging = false;
-            document.onmousemove = null;
-            document.onmouseup = null;
-        };
-    };
+    function closeDragElement() {
+        document.removeEventListener('mousemove', elementDrag);
+        document.removeEventListener('mouseup', closeDragElement);
+        document.body.style.userSelect = "auto";
+    }
 }
 
 e.initDC = false
