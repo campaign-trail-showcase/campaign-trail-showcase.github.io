@@ -59,21 +59,30 @@ async function saveModToDB(modName, code1, code2) {
   }
   
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction([STORE_NAME], "readwrite");
-    const store = transaction.objectStore(STORE_NAME);
-    const request = store.put({
-      name: modName,
-      code1: code1,
-      code2: code2
-    });
-    
-    request.onsuccess = () => resolve();
-    request.onerror = () => {
-      console.warn(`Failed to save ${modName} to IndexedDB, using localStorage`);
-      localStorage.setItem(modName + "_code1", code1);
-      localStorage.setItem(modName + "_code2", code2);
-      resolve();
-    };
+    try {
+        const transaction = db.transaction([STORE_NAME], "readwrite");
+        const store = transaction.objectStore(STORE_NAME);
+        const request = store.put({
+          name: modName,
+          code1: code1,
+          code2: code2 || "" // safety fallback
+        });
+        
+        transaction.oncomplete = () => {
+            resolve();
+        };
+        
+        transaction.onerror = (e) => {
+          console.warn(`Transaction failed for ${modName}:`, e);
+          // fallback to localStorage
+          localStorage.setItem(modName + "_code1", code1);
+          localStorage.setItem(modName + "_code2", code2 || "");
+          resolve(); 
+        };
+    } catch (e) {
+        console.error("DB error during save:", e);
+        resolve(); // resolve anyway to prevent app hang
+    }
   });
 }
 
@@ -791,10 +800,9 @@ function createLegacyViewControls() {
 
 
 $(document).ready(async () => {
-  // Initialize IndexedDB first
   await initDB();
   
-  // Migrate localStorage mods to IndexedDB
+  // migrate localStorage mods to IndexedDB
   await migrateLocalStorageToIndexedDB();
   
   // show loading indicator while mods load
@@ -899,6 +907,7 @@ $(document).ready(async () => {
     }
   });
 
+  // wait for standard mods to fetch
   await Promise.all(modPromises);
 
   // if we are not loading a specific mod, preload all award icons
@@ -924,48 +933,58 @@ $(document).ready(async () => {
     }
   }
 
-  // Set up from custom mods
-  let customModsLoaded = [];
-  for (const customModName of customMods) {
-    const modData = await getModFromDB(customModName);
-    
-    if (!modData || !modData.code1) {
-      console.warn(`Custom mod ${customModName} not found, skipping`);
-      continue;
+  // create an array of Promises; each one retrieves and processes one custom mod
+  const customModPromises = Array.from(customMods).map(async (customModName) => {
+    try {
+      // async fetch from DB
+      const modData = await getModFromDB(customModName);
+      
+      if (!modData || !modData.code1) {
+        console.warn(`Custom mod ${customModName} not found in storage.`);
+        return null;
+      }
+      
+      const rawModText = modData.code1;
+      const temp = extractElectionDetails(rawModText, customModName);
+
+      if (!temp?.election_json?.[0]?.fields) {
+        return null;
+      }
+
+      // populate themes/achievements cache
+      getAllAchievements(rawModText, customModName);
+      getCustomTheme(rawModText, customModName);
+
+      const imageUrl =
+        temp.election_json[0].fields.site_image ??
+        temp.election_json[0].fields.image_url;
+      const description =
+        temp.election_json[0].fields.site_description ??
+        temp.election_json[0].fields.summary;
+
+      const modView = createModView(
+        {
+          value: customModName,
+          innerText: customModName,
+          dataset: { tags: "Custom" },
+        },
+        imageUrl,
+        description,
+      );
+      
+      return modView;
+    } catch (e) {
+      console.error(`Error loading custom mod ${customModName}:`, e);
+      return null;
     }
-    
-    const rawModText = modData.code1;
+  });
 
-    const temp = extractElectionDetails(rawModText, customModName);
+  // wait for all DB requests to finish
+  const customModResults = await Promise.all(customModPromises);
 
-    if (
-      !temp?.election_json?.[0]?.fields
-    ) {
-      continue;
-    }
-
-    getAllAchievements(rawModText, customModName);
-    getCustomTheme(rawModText, customModName);
-
-    const imageUrl =
-      temp.election_json[0].fields.site_image ??
-      temp.election_json[0].fields.image_url;
-    const description =
-      temp.election_json[0].fields.site_description ??
-      temp.election_json[0].fields.summary;
-
-    const modView = createModView(
-      {
-        value: customModName,
-        innerText: customModName,
-        dataset: { tags: "Custom" },
-      },
-      imageUrl,
-      description,
-    );
-    customModsLoaded.push(modView);
-    modList.push(modView);
-  }
+  // filtrr out the failures and add them to the global list
+  let customModsLoaded = customModResults.filter(result => result !== null);
+  modList.push(...customModsLoaded);
 
   // push custom mods to the mod grid first
   const modGrid = document.getElementById("mod-grid");
@@ -1196,29 +1215,44 @@ function deleteCustomMod(event, modValue) {
 }
 
 async function addCustomMod(code1, code2) {
+  if (!code1) {
+    alert("Code 1 is required!");
+    return;
+  }
+
+  // Ensure code2 is a string to prevent DB errors
+  const safeCode2 = code2 || "";
+
   const temp = extractElectionDetails(code1, "custom mod being added");
 
   if (!temp) {
-    alert("Could not add mod from code provided!");
+    alert("Could not add mod from code provided! Check the console for errors.");
     return;
   }
 
   const modName =
-    document.getElementById("customModName").value ??
+    document.getElementById("customModName").value ||
     temp.election_json[0].fields.year;
 
   // save/update custom mod
   customMods.add(modName);
-  await saveCustomModNames(customMods);
-  await saveModToDB(modName, code1, code2);
+  
+  // save to storage
+  try {
+    await saveCustomModNames(customMods);
+    await saveModToDB(modName, code1, safeCode2);
+  } catch (e) {
+    console.error("Failed to save mod to DB:", e);
+    alert("There was an error saving the mod to the database. We will try to load it anyway.");
+  }
 
   // remove old mod if it exists
-  const oldModView = document.getElementById(modName);
-  if (oldModView && oldModView.parentNode) {
-    oldModView.parentNode.removeChild(oldModView);
-  }
   const oldIdx = modList.findIndex(mv => mv.id === modName);
   if (oldIdx !== -1) {
+    const oldModView = document.getElementById(modName);
+    if (oldModView && oldModView.parentNode) {
+      oldModView.parentNode.removeChild(oldModView);
+    }
     modList.splice(oldIdx, 1);
   }
 
@@ -1243,17 +1277,17 @@ async function addCustomMod(code1, code2) {
     description,
   );
 
-  const modGrid = document.getElementById("mod-grid");
-  modGrid.insertBefore(modView, modGrid.firstChild);
   modList.unshift(modView);
 
   // ensure "Custom" tag is checked so the new mod is visible
+  let customTagFound = false;
   for (const tagCheckbox of tagList) {
     if (tagCheckbox.value === "Custom") {
       tagCheckbox.checked = true;
+      customTagFound = true;
     }
   }
-
+  
   updateModViews();
   applyModBoxThemes();
 }
