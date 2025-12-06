@@ -1220,19 +1220,16 @@ async function addCustomMod(code1, code2) {
     return;
   }
 
-  // Ensure code2 is a string to prevent DB errors
+  // ensure code2 is a string to prevent DB errors
   const safeCode2 = code2 || "";
-
   const temp = extractElectionDetails(code1, "custom mod being added");
 
   if (!temp) {
-    alert("Could not add mod from code provided! Check the console for errors.");
+    alert("Could not add mod from code provided!");
     return;
   }
 
-  const modName =
-    document.getElementById("customModName").value ||
-    temp.election_json[0].fields.year;
+  const modName = document.getElementById("customModName").value || temp.election_json[0].fields.year;
 
   // save/update custom mod
   customMods.add(modName);
@@ -1260,19 +1257,11 @@ async function addCustomMod(code1, code2) {
   getAllAchievements(code1, modName);
   getCustomTheme(code1, modName);
 
-  const imageUrl =
-    temp.election_json[0].fields.site_image ??
-    temp.election_json[0].fields.image_url;
-  const description =
-    temp.election_json[0].fields.site_description ??
-    temp.election_json[0].fields.summary;
+  const imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
+  const description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
 
   const modView = createModView(
-    {
-      value: modName,
-      innerText: modName,
-      dataset: { tags: "Custom" },
-    },
+    { value: modName, innerText: modName, dataset: { tags: "Custom" } },
     imageUrl,
     description,
   );
@@ -1280,14 +1269,14 @@ async function addCustomMod(code1, code2) {
   modList.unshift(modView);
 
   // ensure "Custom" tag is checked so the new mod is visible
-  let customTagFound = false;
   for (const tagCheckbox of tagList) {
-    if (tagCheckbox.value === "Custom") {
-      tagCheckbox.checked = true;
-      customTagFound = true;
-    }
+    if (tagCheckbox.value === "Custom") tagCheckbox.checked = true;
   }
   
+  // cached code 2
+  window.campaignTrail_temp = window.campaignTrail_temp || {};
+  window.campaignTrail_temp.custom_code_2 = safeCode2;
+
   updateModViews();
   applyModBoxThemes();
 }
@@ -1682,10 +1671,21 @@ async function loadModFromButton(modValue) {
   loadingFromModButton = true;
 
   if (customMods.has(modValue)) {
-    const modData = await getModFromDB(modValue);
+    let modData = null;
+    try {
+        modData = await getModFromDB(modValue);
+    } catch(e) {
+        console.error("DB error:", e);
+    }
+
     if (!modData || !modData.code1) {
       alert(`Custom mod ${modValue} not found!`);
       return;
+    }
+    
+    if (modData.code2) {
+        window.campaignTrail_temp = window.campaignTrail_temp || {};
+        window.campaignTrail_temp.custom_code_2 = modData.code2;
     }
     
     const execCtx = {
@@ -1696,14 +1696,11 @@ async function loadModFromButton(modValue) {
       jQuery
     };
 
-    executeMod(modData.code1, execCtx);
-
-    if (modData.code2 && typeof modData.code2 === "string" && modData.code2.trim().length > 0) {
-      try {
-        executeMod(modData.code2, execCtx);
-      } catch (e) {
-        console.error(`Failed to execute Code 2 for ${modValue}:`, e);
-      }
+    try {
+      executeMod(modData.code1, execCtx);
+    } catch (e) {
+      console.error(`Failed to execute Code 1 for ${modValue}:`, e);
+      return;
     }
 
     diff_mod = true;
@@ -1717,6 +1714,7 @@ async function loadModFromButton(modValue) {
 
     try {
       const res = await fetch(`../static/mods/${modValue}_init.html`);
+      if (!res.ok) throw new Error("Network response was not ok");
       const modCode = await res.text();
       executeMod(modCode, {
         campaignTrail_temp,
@@ -1755,7 +1753,7 @@ async function loadModFromButton(modValue) {
   }
 
   setTimeout(() => updateModViewCount(modValue), 10000);
-  window.scrollTo(0, 0); // Scroll to top
+  window.scrollTo(0, 0);
 }
 
 async function copyModLink() {
