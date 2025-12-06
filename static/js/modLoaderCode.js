@@ -360,43 +360,97 @@ function applyModBoxThemes() {
   });
 }
 
-function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
-  if (!rawModText) {
-    return null;
-  }
+// finds the end index of a code block by balancing brackets/parentheses,
+// while ignoring characters inside strings or regex
+function findSnippetEnd(text, startIndex, openChar, closeChar) {
+  let count = 1;
+  let inString = false;
+  let inComment = false;
+  let stringChar = null; // ' or " or `
+  let isEscaped = false;
 
-  if (!rawModText.includes(includes)) {
-    return null;
-  }
+  for (let i = startIndex; i < text.length; i++) {
+    const char = text[i];
 
-  const possibleEndIndices = getAllIndexes(rawModText, end);
-  let codeSnippet = null;
-  let temp = {};
-
-  for (let i = 0; i < possibleEndIndices.length; i++) {
-    codeSnippet = rawModText.slice(
-      rawModText.indexOf(start),
-      possibleEndIndices[i] + 1,
-    );
-
-    if (!codeSnippet || codeSnippet.length <= 0) {
+    // handle escaping (e.g. \" inside a string)
+    if (isEscaped) {
+      isEscaped = false;
+      continue;
+    }
+    if (char === "\\") {
+      isEscaped = true;
       continue;
     }
 
-    try {
-      executeMod("temp" + codeSnippet, { temp });
-    } catch (e) {
-      // console.log("FAILED" + e)
-      codeSnippet = null;
+    // handle strings
+    if (inString) {
+      if (char === stringChar) {
+        inString = false; // closed the string
+      }
+      continue;
     }
 
-    if (codeSnippet) {
-      break;
+    // handle single line comments
+    if (inComment) {
+      if (char === '\n') inComment = false;
+      continue;
+    }
+    if (!inString && char === '/' && text[i + 1] === '/') {
+      inComment = true;
+      i++; // skip next slash
+      continue;
+    }
+
+    // enter string mode
+    if (char === '"' || char === "'" || char === "`") {
+      inString = true;
+      stringChar = char;
+      continue;
+    }
+
+    // handle brackets
+    if (char === openChar) {
+      count++;
+    } else if (char === closeChar) {
+      count--;
+      if (count === 0) {
+        return i; // found the matching closing bracket
+      }
     }
   }
 
-  if (!codeSnippet) {
-    console.log(`Could not extract ${includes} from ${nameOfMod}`);
+  return -1; // likely unclosed bracket
+}
+
+function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
+  if (!rawModText || !rawModText.includes(includes)) {
+    return null;
+  }
+
+  const startIndex = rawModText.indexOf(start);
+  if (startIndex === -1) return null;
+
+  // Determine the character mapping based on the 'end' param provided
+  const openChar = end === "}" ? "{" : (end === "]" ? "[" : "(");
+
+  const contentStartIndex = startIndex + start.length;
+  const endIndex = findSnippetEnd(rawModText, contentStartIndex, openChar, end);
+
+  if (endIndex === -1) {
+    console.log(`Could not find closing '${end}' for ${nameOfMod}`);
+    return null;
+  }
+
+  const codeSnippet = rawModText.slice(startIndex, endIndex + 1);
+
+  let temp = {};
+
+  try {
+    const runner = new Function("temp", "temp" + codeSnippet);
+    runner(temp);
+  } catch (e) {
+    console.warn(`Error parsing metadata for ${nameOfMod}:`, e);
+    return null;
   }
 
   return temp;
@@ -611,7 +665,7 @@ function getCustomTheme(rawModText, nameOfMod) {
     "}",
     rawModText,
     nameOfMod,
-  );
+  );  
   if (temp?.modBoxTheme && Object.keys(temp.modBoxTheme).length > 0) {
     customModBoxThemes[nameOfMod] = temp.modBoxTheme;
   } else {
@@ -634,50 +688,45 @@ function getAllAchievements(rawModText, nameOfMod) {
 }
 
 function extractElectionDetails(rawModText, nameOfMod) {
-  if (!rawModText) {
-    return null;
-  }
+  if (!rawModText) return null;
 
-  let start, end;
+  // determine which format the mod uses
+  let start = "";
+  let openChar = "";
+  let closeChar = "";
 
   if (rawModText.includes(".election_json = JSON.parse(")) {
     start = ".election_json = JSON.parse(";
-    end = ")";
+    openChar = "(";
+    closeChar = ")";
   } else if (rawModText.includes(".election_json = [")) {
     start = ".election_json = [";
-    end = "]";
+    openChar = "[";
+    closeChar = "]";
   } else {
-    console.log(`Could not extract metadata for mod: ${nameOfMod}`);
+    // console.log(`Could not find election_json start for: ${nameOfMod}`);
     return null;
   }
 
-  const possibleEndIndices = getAllIndexes(rawModText, end);
-  let codeSnippet = null;
-  let temp = {};
+  const startIndex = rawModText.indexOf(start);
+  const contentStartIndex = startIndex + start.length;
 
-  for (let i = 0; i < possibleEndIndices.length; i++) {
-    codeSnippet = rawModText.slice(
-      rawModText.indexOf(start),
-      possibleEndIndices[i] + 1,
-    );
+  const endIndex = findSnippetEnd(rawModText, contentStartIndex, openChar, closeChar);
 
-    if (!codeSnippet || codeSnippet.length <= 0) {
-      continue;
-    }
-
-    try {
-      eval("temp" + codeSnippet);
-    } catch {
-      codeSnippet = null;
-    }
-
-    if (codeSnippet) {
-      break;
-    }
+  if (endIndex === -1) {
+    console.log(`Could not extract election details (unclosed) for ${nameOfMod}`);
+    return null;
   }
 
-  if (!codeSnippet || Object.keys(temp).length === 0) {
-    console.log(`Could not extract from ${nameOfMod}`);
+  const codeSnippet = rawModText.slice(startIndex, endIndex + 1);
+  let temp = {};
+
+  try {
+    const runner = new Function("temp", "temp" + codeSnippet);
+    runner(temp);
+  } catch (e) {
+    console.warn(`Error parsing election details for ${nameOfMod}:`, e);
+    return null;
   }
 
   return temp;
