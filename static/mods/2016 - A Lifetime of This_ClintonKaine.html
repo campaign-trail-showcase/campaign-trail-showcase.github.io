@@ -15225,8 +15225,8 @@ campaignTrail_temp.jet_data = [{
 
 
 // Candidate images
-campaignTrail_temp.candidate_image_url = "https://i.imgur.com/rGazUY4.jpeg";
-campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/7TQKexe.jpeg";
+campaignTrail_temp.candidate_image_url = "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/hillary.jpg";
+campaignTrail_temp.running_mate_image_url = "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/tim.jpg";
 campaignTrail_temp.candidate_last_name = "Clinton";
 campaignTrail_temp.running_mate_last_name = "Kaine";
 
@@ -15245,71 +15245,78 @@ function shuffle(array) {
 }
 
 const questionCount = campaignTrail_temp.global_parameter_json[0].fields.question_count;
+const originalQuestions = campaignTrail_temp.questions_json;
 
 if (questionCount == 40) {
-	// questions 1-10
-    const fixedStart = campaignTrail_temp.questions_json.slice(0, 10);
+	// questions 1-10 (indices 0-9)
+    const fixedStart = originalQuestions.slice(0, 10);
 
     // create the main randomized batch
     // this pool has questions 11-21 AND questions 30-40
-    const mainRandomPoolSource = campaignTrail_temp.questions_json.slice(10, 21); // Q11-21
-    const extraRandomPoolSource = campaignTrail_temp.questions_json.slice(29, 40); // Q30-40
-    const combinedRandomPool = mainRandomPoolSource.concat(extraRandomPoolSource);
-    shuffle(combinedRandomPool); // shuffle the combined pool
+    const mainPool = [
+        ...originalQuestions.slice(10, 21), // Q11-21
+        ...originalQuestions.slice(29, 40)  // Q30-40
+    ];
+    shuffle(mainPool);
 
     // create the second randomized batch for questions 22-25
-    const midRandomPool = campaignTrail_temp.questions_json.slice(21, 25); // Q22-25
-    shuffle(midRandomPool);
+    const midPool = originalQuestions.slice(21, 25); // Q22-25
+    shuffle(midPool);
 
     // questions 26-29 (fixed at the end)
-    const fixedEnd = campaignTrail_temp.questions_json.slice(25, 29); // Q26-29
+    const fixedEnd = originalQuestions.slice(25, 29); // Q26-29
 
     // assemble the new, final question list
     const newQuestionsList = [
         ...fixedStart,
-        ...combinedRandomPool,
-        ...midRandomPool,
+        ...mainPool,
+        ...midPool,
         ...fixedEnd
     ];
 
     // replace the old question list with the newly constructed one
     campaignTrail_temp.questions_json = newQuestionsList;
 
+    // update the game's question count to match the new array length
+	// this is so we don't crash before going to election night
+    campaignTrail_temp.global_parameter_json[0].fields.question_count = newQuestionsList.length;
+
 } else {
-    // configuration for segments to be shuffled
-	// each object defines the 'start' index (0-based) of the segment in the original array
-	// and the 'count' of elements in that segment
-    const segmentsToShuffle = [
-        { start: 10, count: 11, extra: [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] },   // questions 11-21 (indices 10-20) + post-29 questions
-        { start: 25, count: 2 }   // questions 26-27 (indices 25-26) are shuffled amongst themselves
+    // questions 1-10 (indices 0-9)
+    const fixedStart = originalQuestions.slice(0, 10);
+
+    // first shuffle pool (questions 11-21 + extras)
+    const mainPool = [
+      ...originalQuestions.slice(10, 21), // Q11-21
+      ...[29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39].map(i => originalQuestions[i]).filter(Boolean)
+    ];
+    shuffle(mainPool);
+    const shuffledMainBlock = mainPool.slice(0, 11); // take 11
+
+    // fixed middle questions (22-25, indices 21-24)
+    const fixedMiddle = originalQuestions.slice(21, 25);
+
+    // second shuffle pool (questions 26-27)
+    const midPool = originalQuestions.slice(25, 27); // Q26-27
+    shuffle(midPool);
+
+    // fixed end (questions 28 onwards)
+	const fixedEnd = originalQuestions.slice(27, 29);
+
+    // assemble the final list
+    const newQuestionsList = [
+        ...fixedStart,
+        ...shuffledMainBlock,
+        ...fixedMiddle,
+        ...midPool,
+        ...fixedEnd
     ];
 
-    // iterate over the configuration and shuffle the specified segments
-    segmentsToShuffle.forEach(segment => {
-      // grab the contiguous block
-      let block = campaignTrail_temp.questions_json
-        .slice(segment.start, segment.start + segment.count);
+    // replace the old question list
+    campaignTrail_temp.questions_json = newQuestionsList;
 
-      // if there are extras, pull them in too
-      if (Array.isArray(segment.extra)) {
-        segment.extra.forEach(idx => {
-          // only pull if the question exists
-          if (campaignTrail_temp.questions_json[idx]) {
-            block.push(campaignTrail_temp.questions_json[idx]);
-          }
-        });
-      }
-
-      // shuffle the combined pool
-      shuffle(block);
-
-      // take only as many as the original segment count to fill the space
-      const toWrite = block.slice(0, segment.count);
-
-      // splice those back into the main list
-      campaignTrail_temp.questions_json
-        .splice(segment.start, segment.count, ...toWrite);
-    });
+    // update the question count for consistency
+    campaignTrail_temp.global_parameter_json[0].fields.question_count = newQuestionsList.length;
 }
 
 console.log("Question re-ordering applied. At least this is working.");
@@ -15341,9 +15348,9 @@ const STATE_IDS = {
 const RUNNING_MATE_DATA = {
     [RUNNING_MATE_IDS.BOOKER]: {
         name: "Booker",
-        bannerUrl: 'https://i.imgur.com/TaaPEfy.png',
-        mateImageUrl: 'https://i.imgur.com/Hu0XBpc.jpeg',
-        advisorUrl: 'https://i.imgur.com/FGwBSzI.jpeg',
+		bannerUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/hillarybooker.png',
+        mateImageUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/cory.jpg',
+        advisorUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016b_advisors_booker.jpg',
         questions: {
             1046: "Just prior to the convention, you selected Cory Booker, a Senator from New Jersey, as your running mate. What was your rationale behind selecting him?",
             1077: "Progressive activists wanted a more left-wing choice than Cory Booker, and don’t feel very enthusiastic about your new running mate. How do you respond to those who feel he’s too centrist?"
@@ -15404,9 +15411,9 @@ const RUNNING_MATE_DATA = {
     },
     [RUNNING_MATE_IDS.PATRICK]: {
         name: "Patrick",
-        bannerUrl: 'https://i.imgur.com/T5HdnXI.png',
-        mateImageUrl: 'https://i.imgur.com/fhNuRLE.jpeg',
-        advisorUrl: 'https://i.imgur.com/iAZtKqW.jpeg',
+		bannerUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/hillarypatrick.png',
+        mateImageUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/deval.jpg',
+        advisorUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016b_advisors_patrick.jpg',
         questions: {
             1046: "Unexpectedly, you’ve chosen former Massachusetts Governor Deval Patrick as your running mate. As he was on none of the rumored shortlists for your running mate pick, what was your rationale behind selecting him?",
             1077: "It’s not easy to say this, but there are a lot on the left who feel deflated by your choice of Deval Patrick as your running mate, finding him to be an “Obama pick” and nothing else. What’s your message to those critics?"
@@ -15461,9 +15468,9 @@ const RUNNING_MATE_DATA = {
     },
 	[RUNNING_MATE_IDS.BIDEN]: {
         name: "Biden",
-        bannerUrl: 'https://i.imgur.com/39gse3c.png',
-        mateImageUrl: 'https://i.imgur.com/ReeSbxO.jpeg',
-        advisorUrl: 'https://i.imgur.com/d65IjTu.jpeg',
+		bannerUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/hillarybiden.png',
+        mateImageUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/biden.jpg',
+        advisorUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016b_advisors_biden.jpg',
         questions: {
             1046: "In an interesting move, you’ve selected sitting Vice President Joe Biden as your running mate. What was the thinking behind this highly unusual ‘continuity’ ticket?",
             1077: "The progressive wing of the party is underwhelmed, to say the least. They see Joe Biden as a relic of a bygone era and feel your ticket lacks any forward-looking energy. How do you respond to them?"
@@ -15513,9 +15520,9 @@ const RUNNING_MATE_DATA = {
     },
     [RUNNING_MATE_IDS.CASTRO]: {
         name: "Castro",
-        bannerUrl: 'https://i.imgur.com/RSS4S6V.png',
-        mateImageUrl: 'https://i.imgur.com/4Qy26rt.jpeg',
-        advisorUrl: 'https://i.imgur.com/3PpIhC2.jpeg',
+		bannerUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/hillarycastro.png',
+        mateImageUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/castro.jpg',
+        advisorUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016b_advisors_castro.jpg',
         questions: {
             1046: "Just prior to the convention, you selected Julian Castro, the Secretary of Housing and Urban Development, as your running mate. What was your rationale behind selecting him?",
             1077: "Some pundits and voters are questioning Castro’s national experience, with some calling him a ‘lightweight’ choice. How do you counter the narrative that he’s not ready for the national stage?"
@@ -15562,9 +15569,9 @@ const RUNNING_MATE_DATA = {
     },
     [RUNNING_MATE_IDS.GARCETTI]: {
         name: "Garcetti",
-        bannerUrl: 'https://i.imgur.com/P21TOxd.png',
-        mateImageUrl: 'https://i.imgur.com/dCqP9Bm.jpeg',
-        advisorUrl: 'https://i.imgur.com/ukgNXdi.jpeg',
+        bannerUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/hillarygarcetti.png',
+        mateImageUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/garcetti.jpg',
+        advisorUrl: 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016b_advisors_garcetti.jpg',
         questions: {
             1046: "In an unexpected move, you’ve pulled a true dark horse, selecting Los Angeles Mayor Eric Garcetti as your running mate. What was your rationale behind selecting him?",
             1077: "The main criticism of Garcetti is that he’s a ‘coastal elite’ whose experience running liberal Los Angeles won’t play in places like Peoria. How do you convince swing voters he’s on their side?"
@@ -15680,7 +15687,7 @@ function updateDynamicUI() {
     const mateData = RUNNING_MATE_DATA[runningMateId];
 
     // default info for 1st running mate (Kaine)
-    let bannerUrl = 'https://i.imgur.com/wjOkEfA.png';
+    let bannerUrl = 'https://file.garden/aNtAfG887DiA_7lO/2016ALOT/hillarykaine.png';
     let mateImageUrl = campaignTrail_temp.running_mate_image_url;
     let advisorUrl = campaignTrail_temp.election_json[0].fields.advisor_url;
 
@@ -15895,8 +15902,6 @@ function closeOverlay(overlay) {
 // This is for the squeaky clean no swearing option, if enabled
 (function () {
   if (typeof window === "undefined") return;
-
-  function initializeSqueakyClean() {
   const GAME_WINDOW_ID = "game_window";
   const UI_WRAPPER_ID = "squeaky_clean_wrapper"; // don't touch anything inside this element for the love of God
   const SCHEDULE_DEBOUNCE_MS = 100;
@@ -16102,34 +16107,28 @@ function closeOverlay(overlay) {
     if (!window.campaignTrail_temp) window.campaignTrail_temp = {};
     window.campaignTrail_temp.squeaky_clean_mode = Boolean(enabled);
     if (enabled) {
-        // run one immediate pass
-        if (_applyingSqueaky) return;
-        _applyingSqueaky = true;
-        try {
-          applySqueakyClean(document.getElementById(GAME_WINDOW_ID));
-        } finally {
-          _applyingSqueaky = false;
-        }
+      // run one immediate pass
+      if (_applyingSqueaky) return;
+      _applyingSqueaky = true;
+      try {
+        applySqueakyClean(document.getElementById(GAME_WINDOW_ID));
+      } finally {
+        _applyingSqueaky = false;
       }
-    };
+    }
+  };
 
-    // allow other modules to sanitize strings before injecting them into DOM
-    window.replaceSwearsInText = replaceSwearsInText;
+  // allow other modules to sanitize strings before injecting them into DOM
+  window.replaceSwearsInText = replaceSwearsInText;
 
-    // export a small helper
-    window._squeakyCleanUtils = {
-      applyToRoot: applySqueakyClean,
-      isEnabled: () => Boolean(window.campaignTrail_temp?.squeaky_clean_mode),
-    };
-  }
-  
-  if (document.readyState === 'loading') {
-    window.addEventListener('DOMContentLoaded', initializeSqueakyClean);
-  } else {
-    initializeSqueakyClean();
-  }
-  
+  // export a small helper
+  window._squeakyCleanUtils = {
+    applyToRoot: applySqueakyClean,
+    isEnabled: () => Boolean(window.campaignTrail_temp?.squeaky_clean_mode),
+  };
 })();
+
+
 
 // This is fairly similar to the ending loader used in Things That Never Were.
 // Well, I don't know if it was developed for that mod or not, but I took inspiration
@@ -16631,6 +16630,8 @@ function endingPickerCONT() {
 // but probably wouldn't fit well here. Well, we had to resort to
 // another idea.
 
+window.generatedCabinetCache = window.generatedCabinetCache || {}; // store confirmation dates
+
 // for announcement dates
 function generateAnnouncementDate(tier) {
     const baseDate = new Date('2016-11-09T12:00:00Z'); // day after election
@@ -16710,6 +16711,16 @@ function generateCabinetCells(member, victoryType) {
 
 // the main function generator
 function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
+    // create a unique key for this specific contingent outcome
+    const cacheKey = `contingent_${window.CONTINGENT}`;
+
+    // if we've already generated a cabinet for this outcome, use the cached version
+    if (window.generatedCabinetCache[cacheKey]) {
+        const cachedData = window.generatedCabinetCache[cacheKey];
+        // re-use the cached HTML directly to ensure everything is identical
+        return cachedData.html;
+    }
+		
     const { sandersRelations, wallStreetScore, globalistScore, hawkScore, obamaLoyalty } = scores;
     let cabinet = [];
     let president, vicePresident, party, headerColor;
@@ -16787,7 +16798,7 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 			hawk: { name: "Victoria Nuland", img: "https://upload.wikimedia.org/wikipedia/commons/8/89/Victoria_Nuland_State_Department.jpg", formerRole: "Assistant Secretary of State", state: "Connecticut" },
 			establishment: { name: "Bill Burns", img: "https://upload.wikimedia.org/wikipedia/commons/9/91/Assignment-_59-CF-DS-22432-05%29_Official_portrait_of_William_Burns%2C_U.S._Ambassador-designate_to_Russia_%28Photographer-_Ann_Thomas--State%29_%2859-CF-DS-22432-05_Amb_BillBurns0086_fromPSD_-_DPLA_-_24e3adb7aadd75ad1930cff23ef02645.jpg", formerRole: "Deputy Secretary of State", state: "Pennsylvania" },
 			loyalist: { name: "Jake Sullivan", img: "https://ballotpedia.s3.amazonaws.com/images/thumb/f/fb/Jake_Sullivan.jpg/150px-Jake_Sullivan.jpg", formerRole: "National Security Advisor to the VP", state: "Minnesota" },
-			progressive: { name: "Chris Murphy", img: "https://www.govtrack.us/static/legislator-photos/412194-200px.jpeg", formerRole: "U.S. Senator", state: "Connecticut" },
+			progressive: { name: "Chris Murphy", img: "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/412194-200px.jpeg", formerRole: "U.S. Senator", state: "Connecticut" },
 			biden_vp_loyalist: { name: "Anthony Blinken", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Secretary_Blinken%27s_Official_Department_Photo_%28cropped%29.jpg/220px-Secretary_Blinken%27s_Official_Department_Photo_%28cropped%29.jpg", formerRole: "Deputy National Security Advisor", state: "New York" }
 		},
 		treasury: {
@@ -16806,7 +16817,8 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 		},
 		attorneyGeneral: {
 			progressive: { name: "Xavier Becerra", img: "https://upload.wikimedia.org/wikipedia/commons/6/61/Xavier_Becerra%2C_Official_Portrait.JPG", formerRole: "U.S. Representative", state: "California" },
-			establishment: { name: "Tom Perez", img: "https://cwa-union.org/sites/default/files/migrated/cwafiles.org/national/issues/PolicyIssues/NLRB/Perez_photo2.jpg", formerRole: "Secretary of Labor", state: "Maryland" },
+			loyalist: { name: "Jennifer Granholm", img: "https://upload.wikimedia.org/wikipedia/commons/4/42/Secretary_Jennifer_Granholm_%28June_2021%29.jpg", formerRole: "Former Governor", state: "Michigan" },
+			incumbent: { name: "Loretta Lynch", img: "https://www.justice.gov/usao/biographies/images/spotlight-lynch-full.jpg", formerRole: "Attorney General", state: "New York" },
 			prosecutor: { name: "Preet Bharara", img: "https://static01.nyt.com/images/2013/06/10/world/asia/10-preet-interview-IndiaInk/10-preet-interview-IndiaInk-articleInline.jpg", formerRole: "U.S. Attorney, SDNY", state: "New York" },
 			biden_vp_loyalist: { name: "Sally Yates", img: "https://upload.wikimedia.org/wikipedia/commons/4/49/Sally_Yates.jpg", formerRole: "Deputy Attorney General", state: "Georgia" },
 			unity: { name: "Brian Sandoval", img: "https://www.ontheissues.org/Governor/Brian_Sandoval.jpg", formerRole: "Governor of Nevada (R)", state: "Nevada" }
@@ -16833,7 +16845,8 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 			union: { name: "Richard Trumka", img: "https://aflcio.org/sites/default/files/migrate/files/Trumka-Bad-Trade-Deals-Kill-American-Jobs.jpg", formerRole: "President, AFL-CIO", state: "Pennsylvania" },
 			progressive_unity: { name: "Bernie Sanders", img: "https://cdn.mos.cms.futurecdn.net/ZMoRE73eiomr8gfjR2PPv5.jpg", formerRole: "U.S. Senator", state: "Vermont" },
 			establishment: { name: "Tom Perez", img: "https://cwa-union.org/sites/default/files/migrated/cwafiles.org/national/issues/PolicyIssues/NLRB/Perez_photo2.jpg", formerRole: "Secretary of Labor", state: "Maryland" },
-			biden_vp_loyalist: { name: "Seth Harris", img: "https://upload.wikimedia.org/wikipedia/commons/9/94/Seth_Harris_DOL.jpg", formerRole: "Deputy Secretary of Labor", state: "New York" }
+			biden_vp_loyalist: { name: "Seth Harris", img: "https://upload.wikimedia.org/wikipedia/commons/9/94/Seth_Harris_DOL.jpg", formerRole: "Deputy Secretary of Labor", state: "New York" },
+			corporate: { name: "Howard Schultz", img: "https://images.ctfassets.net/dkn3vuwtp1le/58JROkU1mUq4lNEWl8UDXP/3dd2e6e7b743004e5a1836bf2bd2c97d/howardschultz.jpg", formerRole: "CEO of Starbucks", state: "Washington" }
 		},
 		hhs: {
 			loyalist: { name: "Neera Tanden", img: "https://static.wikia.nocookie.net/althistory/images/b/b2/Tanden_neera.jpg", formerRole: "President, Center for American Progress", state: "Massachusetts" },
@@ -17013,11 +17026,12 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 
         // Tier 2 appointments
 		const agPicks = [
-			(runningMateID === 212 && candidates.attorneyGeneral.establishment),
-			(playerEV < 290 && candidates.attorneyGeneral.unity),
-			(wallStreetScore >= 2 && candidates.attorneyGeneral.prosecutor),
-			(sandersRelations >= 3 && candidates.attorneyGeneral.progressive),
-			candidates.attorneyGeneral.biden_vp_loyalist
+			(runningMateID === 212 && candidates.attorneyGeneral.incumbent),
+            (runningMateID === 213 && candidates.attorneyGeneral.biden_vp_loyalist),
+            (playerEV < 290 && candidates.attorneyGeneral.unity),
+            (wallStreetScore >= 2 && candidates.attorneyGeneral.prosecutor),
+            (sandersRelations >= 3 && candidates.attorneyGeneral.progressive),
+            candidates.attorneyGeneral.loyalist
         ].filter(Boolean);
         pickAndAssign("Attorney General", agPicks, seals.attorneyGeneral, 2);
 
@@ -17032,8 +17046,8 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
         const transportPicks = [
 			(runningMateID === 215 && candidates.transportation.technocrat),
 			(playerEV < 290 && candidates.transportation.unity),
-			(runningMateID !== 215 && candidates.transportation.infrastructure),
-			candidates.transportation.establishment
+			(obamaLoyalty >= 3 && candidates.transportation.establishment),
+			candidates.transportation.infrastructure
         ].filter(Boolean);
         pickAndAssign("Secretary of Transportation", transportPicks, seals.transportation, 2);
 
@@ -17072,16 +17086,17 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
         
         const laborPicks = [
 			(sandersRelations >= 5 && playerEV > 330 && candidates.labor.progressive_unity),
-			(sandersRelations >= 3 && candidates.labor.union),
-			(runningMateID === 213 && candidates.labor.biden_vp_loyalist),
-			candidates.labor.establishment
+            (sandersRelations >= 3 && candidates.labor.union),
+            (runningMateID === 213 && candidates.labor.biden_vp_loyalist),
+            (wallStreetScore >= 1 && candidates.labor.corporate),
+            candidates.labor.establishment
         ].filter(Boolean);
         pickAndAssign("Secretary of Labor", laborPicks, seals.labor, 3);
 
         const hudPicks = [
 			([211, 214].includes(runningMateID) && candidates.hud.booker_vp_loyalist),
 			(sandersRelations >= 4 && candidates.hud.progressive),
-			(runningMateID !== 214 && candidates.hud.establishment),
+			(obamaLoyalty >= 2 && runningMateID !== 214 && candidates.hud.establishment),
 			candidates.hud.mayor
         ].filter(Boolean);
         pickAndAssign("Secretary of Housing & Urban Development", hudPicks, seals.hud, 3);
@@ -17295,6 +17310,9 @@ function generateCabinetTimeline(victoryType, playerEV, runningMateID, scores) {
 	}
 
 	html += `</tbody></table></div>`;
+	
+	window.generatedCabinetCache[cacheKey] = { html };
+	 
 	return html;
 }
 
@@ -17357,7 +17375,6 @@ endingPicker = (out, totv, aa, quickstats) => {
 	if (out === "win") {
 		checkAndApplyUnlocks(playerEV, campaignTrail_temp.running_mate_id);
 		unlockAchievement("Just Like Heaven");
-		if (playerEV >= 535) unlockAchievement("In Present Tense");
 		if (playerEV >= 332) unlockAchievement("Mother's Pride");
 		if (campaignTrail_temp.player_answers.includes(5184)) unlockAchievement("If I Was Your Girlfriend");
 		if (campaignTrail_temp.player_answers.includes(20988)) unlockAchievement("I Could Never Take The Place of Your Man");
@@ -17551,7 +17568,7 @@ endingPicker = (out, totv, aa, quickstats) => {
     }
 	
 	if (playerEV >= 270 && campaignTrail_temp.running_mate_id == 211) { // Booker
-		campaignTrail_temp.pages.push(`<div style="background: #ffffff; color: #111111; padding: 20px; display: inline-block; border-radius: 3px; max-width: 580px; border: 1px solid #e3e3e3; text-align: left;"> <head> <meta charset="UTF-8"> <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=PT+Serif:wght@400&display=swap" rel="stylesheet"> <style> .politico-article-container { font-family: 'Roboto', sans-serif; } .politico-category { color: #d71e25; font-weight: 700; font-size: 14px; text-transform: uppercase; margin-bottom: 8px; } .politico-headline { font-family: 'Roboto', sans-serif; font-size: 32px; font-weight: 700; line-height: 1.1; margin-bottom: 10px; color: #000000; } .politico-byline { font-size: 13px; color: #6c6c6c; margin-bottom: 15px; } .politico-body { font-family: 'PT Serif', serif; font-size: 18px; line-height: 1.6; color: #333333; } .politico-body a { color: #0065a4; text-decoration: none; } .politico-social-btn { display: inline-block; padding: 8px 12px; margin-right: 8px; border-radius: 4px; color: white; text-decoration: none; font-size: 14px; font-weight: bold; } .facebook { background-color: #3b5998; } .twitter { background-color: #1da1f2; } .politico-tags-container { border-top: 1px solid #e3e3e3; padding-top: 15px; margin-top: 20px; } .politico-tag { display: inline-block; background-color: #f1f1f1; color: #555; padding: 5px 10px; border-radius: 15px; font-size: 12px; margin: 3px; text-decoration: none; } </style> </head> <div class="politico-article-container"> <div class="politico-category">WHITE HOUSE</div> <h1 class="politico-headline">The First 'Second Girlfriend'</h1> <p class="politico-byline">By <b>TARA PALMERI</b> and <b>JAKE SHERMAN</b> | 04/12/2017 06:12 AM EDT</p> <div style="margin-bottom: 20px;"> <a href="#" class="politico-social-btn facebook">Share on Facebook</a> <a href="#" class="politico-social-btn twitter">Share on Twitter</a> </div> <div class="politico-body"> <p>While President Clinton is busy wrangling Congress over judicial nominees, the real drama in Washington isn’t at 1600 Pennsylvania Avenue — it’s actually few miles away at Number One Observatory Circle, where the official residence of the Vice President has a new, and historically unofficial, occupant: ROSARIO DAWSON.</p> <p>The celebrated actress and activist, currently dating VICE PRESIDENT CORY BOOKER, has become a fixture in the administration’s social scene, but her undefined role is causing heartburn on both sides of the aisle. The White House has yet to issue official guidance on her title, with internal memos reportedly referring to her simply as “the Vice President’s partner.”</p> <p>Social conservatives are having a field day. “The Vice President’s residence is a symbol of the American family, not a co-ed dorm room,” said Mark Fields of the American Heritage Council in a blistering press release. The criticism has become a constant hum on conservative talk radio, but also on networks such as Fox News.</p> <p>More surprising, perhaps, is the consternation on the left. Dawson, who was a fiery surrogate for Bernie Sanders during the 2016 primary, has found herself at the heart of the establishment she once railed against. “It’s jarring,” one former Sanders staffer told POLITICO. “Everyone thought she’d be pushing for a $15 minimum wage from inside the Naval Observatory, but it seems like she's just having fun?”</p> <p>The tension boiled over last month when Dawson went off-script at a charity gala, calling the administration’s position on charter schools “a little too cozy with Wall Street for my taste.” The comment, which directly contradicted remarks by the Education Secretary, sent the VP’s comms shop into a five-alarm fire drill. For a White House that values message discipline above all, perhaps an engagement might be the cleanest way to solve its Rosario problem.</p> </div> <div class="politico-tags-container"> <span style="font-size: 14px; font-weight: bold; color: #333;">This article tagged under:</span><br> <a href="#" class="politico-tag">White House</a> <a href="#" class="politico-tag">Hillary Clinton</a> <a href="#" class="politico-tag">Cory Booker</a> <a href="#" class="politico-tag">Rosario Dawson</a> <a href="#" class="politico-tag">Clinton Administration</a> </div> </div> </div>`);
+		campaignTrail_temp.pages.push(`<div style="background: #ffffff; color: #111111; padding: 20px; display: inline-block; border-radius: 3px; border: 1px solid #e3e3e3; text-align: left;"> <head> <meta charset="UTF-8"> <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=PT+Serif:wght@400&display=swap" rel="stylesheet"> <style> .politico-article-container { font-family: 'Roboto', sans-serif; } .politico-category { color: #d71e25; font-weight: 700; font-size: 14px; text-transform: uppercase; margin-bottom: 8px; } .politico-headline { font-family: 'Roboto', sans-serif; font-size: 32px; font-weight: 700; line-height: 1.1; margin-bottom: 10px; color: #000000; } .politico-byline { font-size: 13px; color: #6c6c6c; margin-bottom: 15px; } .politico-body { font-family: 'PT Serif', serif; font-size: 18px; line-height: 1.6; color: #333333; } .politico-body a { color: #0065a4; text-decoration: none; } .politico-social-btn { display: inline-block; padding: 8px 12px; margin-right: 8px; border-radius: 4px; color: white; text-decoration: none; font-size: 14px; font-weight: bold; } .facebook { background-color: #3b5998; } .twitter { background-color: #1da1f2; } .politico-tags-container { border-top: 1px solid #e3e3e3; padding-top: 15px; margin-top: 20px; } .politico-tag { display: inline-block; background-color: #f1f1f1; color: #555; padding: 5px 10px; border-radius: 15px; font-size: 12px; margin: 3px; text-decoration: none; } </style> </head> <div class="politico-article-container"> <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/POLITICOLOGO.svg" alt="Politico logo"> <div class="politico-category">WHITE HOUSE</div> <h1 class="politico-headline">The First 'Second Girlfriend'</h1> <p class="politico-byline">By <b>TARA PALMERI</b> and <b>JAKE SHERMAN</b> | 04/12/2017 06:12 AM EDT</p> <div style="margin-bottom: 20px;"> <a href="#" class="politico-social-btn facebook">Share on Facebook</a> <a href="#" class="politico-social-btn twitter">Share on Twitter</a> </div> <div class="politico-body"> <p>While President Clinton is busy wrangling Congress over judicial nominees, the real drama in Washington isn’t at 1600 Pennsylvania Avenue — it’s actually few miles away at Number One Observatory Circle, where the official residence of the Vice President has a new, and historically unofficial, occupant: ROSARIO DAWSON.</p> <p>The celebrated actress and activist, currently dating VICE PRESIDENT CORY BOOKER, has become a fixture in the administration’s social scene, but her undefined role is causing heartburn on both sides of the aisle. The White House has yet to issue official guidance on her title, with internal memos reportedly referring to her simply as “the Vice President’s partner.”</p> <p>Social conservatives are having a field day. “The Vice President’s residence is a symbol of the American family, not a co-ed dorm room,” said Mark Fields of the American Heritage Council in a blistering press release. The criticism has become a constant hum on conservative talk radio, but also on networks such as Fox News.</p> <p>More surprising, perhaps, is the consternation on the left. Dawson, who was a fiery surrogate for Bernie Sanders during the 2016 primary, has found herself at the heart of the establishment she once railed against. “It’s jarring,” one former Sanders staffer told POLITICO. “Everyone thought she’d be pushing for a $15 minimum wage from inside the Naval Observatory, but it seems like she's just having fun?”</p> <p>The tension boiled over last month when Dawson went off-script at a charity gala, calling the administration’s position on charter schools “a little too cozy with Wall Street for my taste.” The comment, which directly contradicted remarks by the Education Secretary, sent the VP’s comms shop into a five-alarm fire drill. For a White House that values message discipline above all, perhaps an engagement might be the cleanest way to solve its Rosario problem.</p> </div> <div class="politico-tags-container"> <span style="font-size: 14px; font-weight: bold; color: #333;">This article tagged under:</span><br> <a href="#" class="politico-tag">White House</a> <a href="#" class="politico-tag">Hillary Clinton</a> <a href="#" class="politico-tag">Cory Booker</a> <a href="#" class="politico-tag">Rosario Dawson</a> <a href="#" class="politico-tag">Clinton Administration</a> </div> </div> </div>`);
 		campaignTrail_temp.executable.push([2, () => { campaignTrail_temp.image = 'https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/UVBZC6HQFQI6TCPL5RLM2QKHGI.jpg'; }]);
 	}
     
@@ -17741,7 +17758,7 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
     const SONGS_DATA = [
         { title: "Soldier of Love", artist: "Sade", coverLink: "https://lh3.googleusercontent.com/1Zb3jhBGUQHrDU6mZHOk-FGPC1mVg-AMls-bJOQBf9Wx3lG31KTbmbdUtlnkAYbsdao-b1cmXvs1tJET=w544-h544-l90-rj", videoIds: ["zI8YIzWltHM"] },
         { title: "Nothing Compares 2 U", artist: "Prince", coverLink: "https://i.discogs.com/DQEHxJMMCoAozW-09RSF-12sMKCgHB5aGco8kax0sBg/rs:fit/g:sm/q:90/h:595/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTI1MDQz/Nzk3LTE2Njc2OTc0/OTktMTY2NC5qcGVn.jpeg", videoIds: ["wyo74f6NWwY"] },
-        { title: "Everything Is Wrong", artist: "Interpol", coverLink: "https://i.discogs.com/fajuUIPd6pzjV9sS_CLJz4f0okmvlmKvHVKGzS_--Nw/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY5MTMx/NzctMTQyOTQ1Nzcx/MS0yMTU4LmpwZWc.jpeg", videoIds: ["4llZXppdjCU"] },
+        { title: "Everything Is Wrong", artist: "Interpol", coverLink: "https://i.discogs.com/fajuUIPd6pzjV9sS_CLJz4f0okmvlmKvHVKGzS_--Nw/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTY5MTMx/NzctMTQyOTQ1Nzcx/MS0yMTU4LmpwZWc.jpeg", videoIds: ["4llZXppdjCU", "NiraiT0a4Rs"] },
         { title: "Blank Generation", artist: "Richard Hell", coverLink: "https://lh3.googleusercontent.com/hDrqJI4nOVwtWGnqd2OEPmUivA50Gp19YuJPly6DUau8VTExM5MtiFezXmTiKkcGJMEQxDMrBzkz6W4=w544-h544-l90-rj", videoIds: ["v9FkQLjOSZ8"] },
         { title: "Girl Gone Wild", artist: "Madonna", coverLink: "https://lh3.googleusercontent.com/aCpQ5ecu6iU88aQrTkg_gk9vhhGO4sgr79Rwg55s2NQNnhuiR1X1FcBp8PZnQoe2kxtayZghDuZgFPrO=w544-h544-l90-rj", videoIds: ["9Hyzn5XQ-ro"] },
         { title: "Feels Just Like it Should", artist: "Jamiroquai", coverLink: "https://lh3.googleusercontent.com/Syc0T0hpUCioc8Ky5irJxhnSLOavM4gnWjVkVCeW8IUlB2v8i-xJEkyUcmumDoojHjIV_e0vtjmdnQY=w544-h544-l90-rj", videoIds: ["tBZqSRqFQz0"] },
@@ -17791,7 +17808,7 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
         { title: "Darkness", artist: "The Human League", coverLink: "https://lh3.googleusercontent.com/5UgvTLEebZkbRH9fiGuJajPDSur-nJXHpHKCJUDkQd3LR-hJBAsqeKevMhPKQnyNX7MbBRnQWWabh0u0=w544-h544-l90-rj", videoIds: ["vPfk7ktdqo4"] },
 		{ title: "Fall Into Place", artist: "Apartment", coverLink: "https://lh3.googleusercontent.com/G5iK-2BALHx_hHwB1LBmzHthvtt3BF8NB428Ub4sTkTYUv3bT6bI6lN9N1SZyIlzKTps58GudSFHWPXo=w544-h544-l90-rj", videoIds: ["IQaEg6GguLk"] },
         { title: "Fight Song", artist: "Rachel Platten", coverLink: "https://lh3.googleusercontent.com/AxQrFKHbt5jU_DiZihMhlJ3bxGLBy3rN6yfLlb0SJ68ay4FpnciNHNkD9WTXPBfbX1gCCZI5pFs2bJzU=w544-h544-l90-rj", videoIds: ["y5h_dukaB1I"] },
-		{ title: "The Ballad of Harambe", artist: "c a n d i d !", coverLink: "https://lh3.googleusercontent.com/F3ub3Ot4uC_HiLYe9RW-nxvMI__N7S5OkyGf_4bgU1MSIW4wp05es_6DF2GBAueUM-LVzIqxz8YuI1rY=w120-h120-l90-rj", videoIds: ["VX8omFoNHdQ"] },
+		{ title: "The Ballad of Harambe", artist: "c a n d i d !", coverLink: "https://lh3.googleusercontent.com/F3ub3Ot4uC_HiLYe9RW-nxvMI__N7S5OkyGf_4bgU1MSIW4wp05es_6DF2GBAueUM-LVzIqxz8YuI1rY=w544-h544-l90-rj", videoIds: ["VX8omFoNHdQ"] },
 		{ title: "Set Adrift on Memory Bliss", artist: "P.M. Dawn", coverLink: "https://lh3.googleusercontent.com/51qmaba8irr1qqXAcVc5CGV6bTiNNlevjEgh4cCDCntbqZP4dc1gcVlcf_lxA42D8CkZxDTW3L3SnPa4=w544-h544-l90-rj", videoIds: ["MurZoAE40VA"] },
 		{ title: "Woke Up This Morning (Chosen One Mix)", artist: "Alabama 3", coverLink: "https://lh3.googleusercontent.com/EHKdWSYR9Kenl61Gu87krAIFBJCRmrHdTGISW46gHmiAjuElSW18fCpkvVTlGYnKn3lzmartBT_7K3t6mQ=w544-h544-l90-rj", videoIds: ["slpCmg53qkU", "EvCdCKyLo_I", "6_0nDHcrrtE"] },
 		{ title: "What’s on Your Mind (Pure Energy)", artist: "Information Society", coverLink: "https://lh3.googleusercontent.com/ZWMW9K6oQVxTOOfPAy-7NLsta-kxbLXWEWgG7o4ZuO8c25KMs07dkGc-lHY0Udg9J9jdsSVsYJTgjq8=w544-h544-l90-rj", videoIds: ["lCrD81j6OD0"] },
@@ -18869,7 +18886,7 @@ tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
                     --title-font-size: 15px; 
                     --artist-font-size: 13px; 
                 } 
-                #${PLAYER_ELEMENT_ID} { padding: var(--spacing-sm); margin-top: clamp(30rem, 50vw, 50rem); margin-inline: auto }
+                #${PLAYER_ELEMENT_ID} { padding: var(--spacing-sm); margin-inline: auto }
                 #${PLAYER_MAIN_CONTENT_WRAPPER_ID} { flex-direction: column; gap: var(--spacing-md); }
                 #${DISPLAY_BOX_ID} { width: 100%; } 
                 #${COVER_ID} { max-width: 250px; margin: 0 auto; display: block; }
@@ -20974,11 +20991,11 @@ cyoAdventure = function (a) {
 
     const SPECIAL_CASES = {
         5176: {
-            imageUrl: "https://i.imgur.com/zHD8eKr.png",
+            imageUrl: "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/lunar_bears.png",
             condition: () => true
         },
         5179: {
-            imageUrl: "https://i.imgur.com/oglH2YP.jpeg",
+            imageUrl: "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016b_ram.jpg",
             condition: () => window.campaignTrail_temp && window.campaignTrail_temp.running_mate_id == 215
         }
     };
@@ -21024,16 +21041,21 @@ cyoAdventure = function (a) {
         }
     }
 
-    const observerConfig = {
-        childList: true,
-        subtree: true
-    };
+    function initObserver() {
+        const gameWindow = document.getElementById("game_window");
+        
+        if (gameWindow) {
+            const observer = new MutationObserver(() => {
+                handleAdvisorUpdate();
+            });
 
-    const observer = new MutationObserver(() => {
-        handleAdvisorUpdate();
-    });
+            observer.observe(gameWindow, { childList: true, subtree: true });
+        } else {
+            setTimeout(initObserver, 200);
+        }
+    }
 
-    observer.observe(document.body, observerConfig);
+    initObserver();
 
 })();
 

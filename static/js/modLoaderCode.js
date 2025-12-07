@@ -187,7 +187,7 @@ function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
     }
 
     try {
-      eval("temp" + codeSnippet);
+      executeMod("temp" + codeSnippet, { temp });
     } catch (e) {
       // console.log("FAILED" + e)
       codeSnippet = null;
@@ -238,7 +238,7 @@ function mixColor(hex, mixWith, percent) {
 }
 
 function getContrastRatio(hex1, hex2) {
-  // so we can calculate the contrast ratio between two hex colors (WCAG) 
+  // so we can calculate the contrast ratio between two hex colors (WCAG)
   function luminance([r, g, b]) {
     let a = [r, g, b].map(function (v) {
       v /= 255;
@@ -292,7 +292,7 @@ function ensureThemeContrast(theme) {
       const contrastWhite = getContrastRatio(theme.header_color, '#fff');
       const contrastBlack = getContrastRatio(theme.header_color, '#222');
       theme.header_text_color = contrastWhite > contrastBlack ? '#fff' : '#222';
-      
+
       const { themeBaseColor, themeTextColor } = adjustThemeContrast(
         theme.header_color,theme.header_text_color
       );
@@ -398,7 +398,7 @@ function extractFallbackTheme(rawModText, nameOfMod) {
     theme.header_text_color = textColMatch[1] === 'white' ? '#fff' : (textColMatch[1] === 'black' ? '#222' : textColMatch[1]);
   }
 
-  // ensure contrast for the theme colors 
+  // ensure contrast for the theme colors
   ensureThemeContrast(theme);
 
   // if at least one color was found, save it as a theme
@@ -585,6 +585,7 @@ function createLegacyViewControls() {
   const label = document.createElement("label");
   label.htmlFor = "modMenuLegacyViewCheckbox";
   label.innerText = "View all mods";
+  label.className = "mod-legacy-view-label";
   label.style.cursor = "pointer";
   label.style.userSelect = "none";
 
@@ -830,7 +831,7 @@ function createModView(mod, imageUrl, description, isCustom) {
         <p>${mod.innerText}</p>
     </div>
     <div class = "mod-img-desc">
-      <img class="mod-image" data-src="${imageUrl}" loading="lazy"></img>
+      <img class="mod-image" data-src="${imageUrl}" loading="lazy" alt="${mod.value} Box Image"></img>
       <div class="mod-desc">${description}</div>
     </div>
     <div class="hover-button-holder">
@@ -855,13 +856,13 @@ function createModView(mod, imageUrl, description, isCustom) {
 
 function renderAwards(awards, rawAwardUrls) {
   let awardUrls = rawAwardUrls.split(", ");
-
+  const awardNames = awards.split(",").map(award => award.trim());
   // create an image tag for each URL. the first is visible, the rest are hidden
   let awardImagesHTML = awardUrls.map((url, index) => {
     // if the primary URL fails, load the alternative URL
     const altUrl = getAlternativeIconUrl(url);
     const style = index === 0 ? 'opacity: 1; transition: opacity 0.3s ease-in-out;' : 'opacity: 0; transition: opacity 0.3s ease-in-out;';
-    return `<img class="mod-trophy" src="${url}" style="${style}"${altUrl ? ` onerror="this.onerror=null;this.src='${altUrl}'"` : ""}>`;
+    return `<img class="mod-trophy" src="${url}" alt="${awardNames[index]} Trophy" style="${style}"${altUrl ? ` onerror="this.onerror=null;this.src='${altUrl}'"` : ""}>`;
   }).join('');
 
   return `
@@ -1151,7 +1152,7 @@ function updateModViews(event) {
     if (loadingMessage) loadingMessage.style.display = 'inline';
     if (checkbox) checkbox.disabled = true;
 
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       const fragment = document.createDocumentFragment();
       modList.forEach((modView) => {
         modView.style.display = "flex";
@@ -1164,7 +1165,7 @@ function updateModViews(event) {
 
       if (loadingMessage) loadingMessage.style.display = 'none';
       if (checkbox) checkbox.disabled = false;
-    }, 0);
+    });
 
   } else {
     toggleFilterControls(false); // re-enable filters
@@ -1253,13 +1254,19 @@ function renderPaginationControls(totalMods) {
   // page input
   const pageInputContainer = document.createElement("span");
   pageInputContainer.classList.add("pagination-input-container");
-  
+
   const pageInput = document.createElement("input");
   pageInput.type = "number";
   pageInput.min = "1";
   pageInput.max = totalPages;
   pageInput.value = currentPage;
+  pageInput.id = "pageInput";
   pageInput.classList.add("pagination-input");
+
+  const pageInputLabel = document.createElement("label");
+  pageInputLabel.setAttribute("for", "pageInput");
+  pageInputLabel.classList.add("sr-only");
+  pageInputLabel.textContent = "Page number";
 
   // go to page button
   const goButton = document.createElement("button");
@@ -1272,11 +1279,12 @@ function renderPaginationControls(totalMods) {
       updateModViews();
     } else {
       // resets new input to current input if new input is invalid page number
-      pageInput.value = currentPage; 
+      pageInput.value = currentPage;
     }
   });
 
   pageInputContainer.appendChild(pageInput);
+  pageInputContainer.appendChild(pageInputLabel);
   pageInputContainer.appendChild(goButton);
   paginationContainer.appendChild(pageInputContainer);
 
@@ -1441,21 +1449,35 @@ async function loadModFromButton(modValue) {
   }
 
   loadingFromModButton = true;
-  e = campaignTrail_temp;
 
   if (customMods.has(modValue)) {
-    eval(localStorage.getItem(modValue + "_code1"));
+    const customModCode = localStorage.getItem(modValue + "_code1");
+    executeMod(customModCode, {
+      campaignTrail_temp,
+      window,
+      document,
+      $,
+      jQuery
+    });
     diff_mod = true;
     customMod = modValue;
   } else {
-    if (!location.href.includes("?modName")) {
-      history.replaceState(null, "", "?modName=" + modValue);
+    const pageURL = new URL(window.location.href);
+    if (!pageURL.searchParams.has("modName")) {
+      pageURL.searchParams.set("modName", modValue);
+      window.history.replaceState(null, "", `${pageURL.pathname}?${pageURL.searchParams.toString().replaceAll("+", "%20")}`);
     }
 
     try {
       const res = await fetch(`../static/mods/${modValue}_init.html`);
       const modCode = await res.text();
-      eval(modCode);
+      executeMod(modCode, {
+        campaignTrail_temp,
+        window,
+        document,
+        $,
+        jQuery
+      });
       diff_mod = true;
     } catch (error) {
       console.error(`Failed to load mod ${modValue}:`, error);
@@ -1490,14 +1512,15 @@ async function loadModFromButton(modValue) {
 }
 
 async function copyModLink() {
-  let modLink = document.location.href;
+  const modLink = new URL(window.location.href);
 
-  if (!modLink.includes("?modName")) {
-    modLink = modLink + "?modName=" + modBeingPlayed.replaceAll(" ", "%20");
+  if (!modLink.searchParams.has("modName")) {
+    modLink.searchParams.set("modName", modBeingPlayed);
+    window.history.replaceState(null, "", `${modLink.pathname}?${modLink.searchParams.toString().replaceAll("+", "%20")}`);
   }
 
   try {
-    await window.navigator.clipboard.writeText(modLink);
+    await window.navigator.clipboard.writeText(modLink.href);
     alert("Copied link to clipboard!");
   } catch (err) {
     console.error("Failed to copy: ", err);
@@ -1515,7 +1538,7 @@ async function updateModViewCount(modName) {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ modName: modName }),
+      body: JSON.stringify({ modName }),
     });
   } catch (error) {
     console.error(`Failed to update play count for ${modName}:`, error);

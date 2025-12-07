@@ -38,58 +38,6 @@ function findState(pk) {
   return findByPk(campaignTrail_temp.states_json, pk, "name");
 }
 
-function benefitCheck(objectid) {
-  const object = document.getElementById("question_form").children[0].children[objectid * 3];
-  const answerid = object.value;
-  const effects = [];
-
-  campaignTrail_temp.answer_score_global_json.forEach(item => {
-    if (item.fields.answer == answerid) effects.push(["global", item]);
-  });
-  campaignTrail_temp.answer_score_state_json.forEach(item => {
-    if (item.fields.answer == answerid) effects.push(["state", item]);
-  });
-  campaignTrail_temp.answer_score_issue_json.forEach(item => {
-    if (item.fields.answer == answerid) effects.push(["issue", item]);
-  });
-
-  let mods = "";
-  for (const [type, effect] of effects) {
-    if (type === "global") {
-      const affected = findCandidate(effect.fields.candidate);
-      const affected1 = findCandidate(effect.fields.affected_candidate);
-      mods += `<br><em>Global:</em> Affects ${affected1[1]} for ${affected[1]} by ${effect.fields.global_multiplier}`;
-    }
-    if (type === "issue") {
-      const affected = findIssue(effect.fields.issue);
-      mods += `<br><em>Issue:</em> Affects ${affected[1]} by ${effect.fields.issue_score} with a importance of ${effect.fields.issue_importance}`;
-    }
-    if (type === "state") {
-      const affected = findState(effect.fields.state);
-      const candidatething = findCandidate(effect.fields.affected_candidate);
-      const candidatething2 = findCandidate(effect.fields.candidate);
-      mods += `<br><em>State:</em> Affects ${candidatething[1]} for ${candidatething2[1]} in ${affected[1]} by ${effect.fields.state_multiplier}`;
-    }
-  }
-
-  let answerfeedback = "";
-  for (const item of campaignTrail_temp.answer_feedback_json) {
-    if (answerid == item.fields.answer) {
-      answerfeedback = `<b>${item.fields.answer_feedback}</b>`;
-      break;
-    }
-  }
-  if (!answerfeedback) {
-    answerfeedback = "'";
-  }
-  return (
-    `<font size="2"><b>Answer: </b>${findAnswer(answerid)[1]}<br>` +
-    `Feedback: ${answerfeedback}<br>` +
-    mods +
-    "</font><br><br>"
-  );
-}
-
 document.head = document.head || document.getElementsByTagName("head")[0];
 
 function changeFavicon(src) {
@@ -116,7 +64,7 @@ const nct_stuff = {
     tct: {
       name: "Campaign Trail Showcase",
       background: "../static/images/backgrounds/tct_background.jpg",
-      banner: "../static/images/banners/tct_banner.png",
+      banner: "../static/images/banners/tct_banner.webp",
       coloring_window: "#727C96",
       coloring_container: "#222449",
       coloring_title: "#3A3360",
@@ -130,8 +78,21 @@ const nct_stuff = {
       coloring_container: "",
       coloring_title: "",
     },
+    custom: {
+      name: "Custom",
+      background: "../static/images/backgrounds/tct_background.jpg",
+      banner: "../static/images/banners/tct_banner.webp",
+      coloring_window: "#727C96",
+      coloring_container: "#222449",
+      coloring_title: "#3A3360",
+      text_col: "",
+      window_url: "",
+      background_cover: false,
+      mod_override: false,
+    },
   },
   selectedTheme: "",
+  customThemes: {},
 };
 
 var theme = window.localStorage.getItem("theme");
@@ -139,7 +100,8 @@ nct_stuff.selectedTheme = theme || "tct";
 let selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
 
 const themePickerEl = document.getElementById("theme_picker");
-themePickerEl.innerHTML = "<select id='themePicker' onchange='themePicked()'></select>";
+themePickerEl.innerHTML = `<label for="themePicker" class="sr-only">Theme Picker</label>
+                           <select id="themePicker" onchange="themePicked()"></select>`;
 const themePicker = document.getElementById("themePicker");
 themePicker.innerHTML += `<option value='${nct_stuff.selectedTheme}'>${selectedTheme.name}</option>`;
 for (const key in nct_stuff.themes) {
@@ -149,13 +111,59 @@ for (const key in nct_stuff.themes) {
 }
 
 function themePicked() {
-  const sel = document.getElementById("themePicker").value;
-  window.localStorage.setItem("theme", sel);
-  nct_stuff.selectedTheme = sel;
-  selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
-  updateBannerAndStyling();
-  updateDynamicStyle();
-  updateGameHeaderContentAndStyling();
+  const themePicker = document.getElementById("themePicker");
+  const sel = themePicker.value;
+  const customMenuButton = document.getElementById("open_custom_theme");
+
+  // check if a specific custom theme was selected from the dropdown
+  if (sel.startsWith("custom_")) {
+    window.localStorage.setItem("theme", "custom");
+    window.localStorage.setItem("active_custom_theme_id", sel);
+    nct_stuff.selectedTheme = "custom";
+    
+    loadCustomTheme(sel);
+
+    // make sure the "Add custom theme" button is visible
+    if (!customMenuButton) {
+      ensureCustomThemeButton();
+    }
+
+  } else if (sel === "custom") {
+    // if "Custom" option selected, show button and optionally open modal
+    window.localStorage.setItem("theme", "custom");
+    nct_stuff.selectedTheme = "custom";
+    
+    if (!customMenuButton) {
+      ensureCustomThemeButton();
+    }
+    
+    // check if there's an active theme, otherwise open modal
+    const activeThemeId = window.localStorage.getItem("active_custom_theme_id");
+    if (!activeThemeId || !nct_stuff.customThemes[activeThemeId]) {
+      // no active theme, open modal to create one
+      setTimeout(() => openCustomThemeMenu(), 100);
+    } else {
+      loadCustomTheme(activeThemeId);
+      // update the selected theme
+      selectedTheme = nct_stuff.themes.custom;
+      updateBannerAndStyling();
+      updateDynamicStyle();
+      updateGameHeaderContentAndStyling();
+    }
+
+  } else {
+    window.localStorage.setItem("theme", sel);
+    nct_stuff.selectedTheme = sel;
+    selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
+    updateBannerAndStyling();
+    updateDynamicStyle();
+    updateGameHeaderContentAndStyling();
+
+    // remove the custom theme button
+    if (customMenuButton) {
+      customMenuButton.parentElement.remove();
+    }
+  }
 }
 
 const susnum = Math.floor(Math.random() * 8 + 1);
@@ -163,6 +171,284 @@ const stassennum = Math.floor(Math.random() * 8 + 1);
 const stassenyear = [
   "1944", "1948", "1952", "1964", "1968", "1980", "1984", "1988", "1992",
 ];
+
+// keyboard shortcuts handler
+const keyboardShortcutsHandler = (event) => {
+  // allow system keys (F1-F12, Ctrl+*, etc.)
+  if (event.key.startsWith('F') || event.ctrlKey || event.metaKey || event.altKey) {
+    return;
+  }
+
+  // only handle shortcuts if #game_window exists and has content
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow || gameWindow.children.length === 0) {
+    return;
+  }
+
+  // check if we should skip (e.g., if user is typing in an input field)
+  if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+    return;
+  }
+
+  // opening menu - Start Game
+  if (document.querySelector("#game_start") && document.getElementById("modloaddiv")?.style.display === "none") {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
+      document.getElementById("game_start")?.click();
+      return;
+    }
+  }
+
+  // election year selection
+  if (document.querySelector("#election_year_form")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
+      document.getElementById("election_id_button")?.click();
+      return;
+    }
+
+    const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
+    if (arrowKey) {
+      event.preventDefault();
+      
+      const electionSelect = document.getElementById("election_id");
+      if (!electionSelect) return;
+      
+      const options = Array.from(electionSelect.children);
+      const currentIndex = electionSelect.selectedIndex;
+      let newIndex;
+      
+      if (event.key === "ArrowDown") {
+        newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
+      } else {
+        newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
+      }
+      
+      electionSelect.selectedIndex = newIndex;
+      electionSelect.dispatchEvent(new Event('change'));
+    }
+    return;
+  }
+
+  // candidate selection
+  if (document.querySelector("#candidate_form")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
+      document.getElementById("candidate_id_button")?.click();
+      return;
+    }
+    if (event.key === "Backspace" || event.key === "ArrowLeft") {
+      event.preventDefault();
+      document.getElementById("candidate_id_back")?.click();
+      return;
+    }
+
+    const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
+    if (arrowKey) {
+      event.preventDefault();
+      
+      const candidateSelect = document.getElementById("candidate_id");
+      if (!candidateSelect) return;
+      
+      const options = Array.from(candidateSelect.children);
+      const currentIndex = candidateSelect.selectedIndex;
+      let newIndex;
+      
+      if (event.key === "ArrowDown") {
+        newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
+      } else {
+        newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
+      }
+      
+      candidateSelect.selectedIndex = newIndex;
+      candidateSelect.dispatchEvent(new Event('change'));
+    }
+    return;
+  }
+
+  // running mate selection
+  if (document.querySelector("#running_mate_form")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
+      document.getElementById("running_mate_id_button")?.click();
+      return;
+    }
+    if (event.key === "Backspace" || event.key === "ArrowLeft") {
+      event.preventDefault();
+      document.getElementById("running_mate_id_back")?.click();
+      return;
+    }
+
+    const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
+    if (arrowKey) {
+      event.preventDefault();
+      
+      const runningMateSelect = document.getElementById("running_mate_id");
+      if (!runningMateSelect) return;
+      
+      const options = Array.from(runningMateSelect.children);
+      const currentIndex = runningMateSelect.selectedIndex;
+      let newIndex;
+      
+      if (event.key === "ArrowDown") {
+        newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
+      } else {
+        newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
+      }
+      
+      runningMateSelect.selectedIndex = newIndex;
+      runningMateSelect.dispatchEvent(new Event('change'));
+    }
+    return;
+  }
+
+  // difficulty/game mode selection
+  if (document.querySelector("#opponent_selection_description_window")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
+      document.getElementById("opponent_selection_id_button")?.click();
+      return;
+    }
+    if (event.key === "Backspace" || event.key === "ArrowLeft") {
+      event.preventDefault();
+      document.getElementById("opponent_selection_id_back")?.click();
+      return;
+    }
+
+    const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
+    if (arrowKey) {
+      event.preventDefault();
+      
+      const difficultySelect = document.getElementById("difficulty_level_id");
+      if (!difficultySelect) return;
+      
+      const options = Array.from(difficultySelect.children);
+      const currentIndex = difficultySelect.selectedIndex;
+      let newIndex;
+      
+      if (event.key === "ArrowDown") {
+        newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
+      } else {
+        newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
+      }
+      
+      difficultySelect.selectedIndex = newIndex;
+      difficultySelect.dispatchEvent(new Event('change'));
+    }
+    return;
+  }
+
+  // question/answer selection
+  if (document.querySelector("#question_form")) {
+    const answers = Array.from(document.querySelectorAll(".game_answers"));
+    
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
+      // if there's an OK button (feedback), click it
+      const okButton = document.getElementById("ok_button");
+      if (okButton) {
+        okButton.click();
+        return;
+      }
+      
+      // otherwise, submit the answer
+      document.getElementById("answer_select_button")?.click();
+      return;
+    }
+    
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      document.getElementById("view_electoral_map")?.click();
+      return;
+    }
+
+    // don't handle other keys if feedback window is open
+    if (document.getElementById("ok_button")) {
+      return;
+    }
+
+    // handle number keys (1-5) to select answers
+    const numKey = parseInt(event.key);
+    if (numKey >= 1 && numKey <= answers.length) {
+      event.preventDefault();
+      answers[numKey - 1]?.click();
+      return;
+    }
+
+    // handle arrow keys to navigate answers
+    if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+      event.preventDefault();
+      
+      let currentIndex = answers.findIndex(a => a.checked);
+      
+      if (event.key === "ArrowDown") {
+        currentIndex = currentIndex + 1 >= answers.length ? 0 : currentIndex + 1;
+      } else {
+        currentIndex = currentIndex - 1 < 0 ? answers.length - 1 : currentIndex - 1;
+      }
+      
+      answers[currentIndex]?.click();
+    }
+    return;
+  }
+
+  // map view
+  if (document.getElementById("AdvisorButton")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
+      document.getElementById("resume_questions_button")?.click();
+    }
+    return;
+  }
+
+  // election night
+  if (document.getElementById("final_result_button")) {
+    if (event.key === "Enter" || event.key === "ArrowRight") {
+      event.preventDefault();
+      // handle overlay buttons first
+      const electionNightButton = document.querySelector("#election_night_buttons #ok_button");
+      if (electionNightButton) {
+        electionNightButton.click();
+        return;
+      }
+      
+      const winnerButton = document.querySelector("#winner_buttons #ok_button");
+      if (winnerButton) {
+        winnerButton.click();
+        return;
+      }
+      
+      document.getElementById("final_result_button")?.click();
+    }
+    return;
+  }
+
+  // final results screen navigation
+  const finalMenuButtons = Array.from(document.querySelectorAll(".final_menu_button"));
+  if (finalMenuButtons.length > 0) {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      
+      // exclude the "Play Again" button from navigation
+      const navButtons = finalMenuButtons.slice(0, -1);
+      const currentIndex = navButtons.findIndex(b => b.disabled);
+      
+      if (currentIndex === -1) return;
+      
+      let newIndex;
+      if (event.key === "ArrowRight") {
+        newIndex = currentIndex + 1 >= navButtons.length ? 0 : currentIndex + 1;
+      } else {
+        newIndex = currentIndex - 1 < 0 ? navButtons.length - 1 : currentIndex - 1;
+      }
+      
+      navButtons[newIndex]?.click();
+    }
+    return;
+  }
+};
+
+document.addEventListener("keydown", keyboardShortcutsHandler);
 
 // DOM cache
 const correctbannerpar = document.getElementsByClassName("game_header")[0];
@@ -175,6 +461,7 @@ const campaignTrailMusic = document.getElementById("campaigntrailmusic");
 const dynamicStyle = document.createElement("style");
 document.head.appendChild(dynamicStyle);
 
+// Not removed because used by 2023 WOKE
 function updateBannerAndStyling() {
   header.src = selectedTheme.banner;
   header.width = 1000;
@@ -185,6 +472,31 @@ function updateBannerAndStyling() {
   if (selectedTheme.text_col != null) {
     container.style.color = selectedTheme.text_col;
     gameWindow.style.color = "black";
+  }
+  // classes for theme styling
+  document.body.classList.remove('cts-theme', 'classic-theme');
+  if (nct_stuff.selectedTheme === "classic") {
+    document.body.classList.add('classic-theme');
+  } else {
+    document.body.classList.add('cts-theme');
+  }
+}
+
+function updateStyling() {
+  document.body.background = selectedTheme.background;
+  gameWindow.style.backgroundColor = selectedTheme.coloring_window;
+  container.style.backgroundColor = selectedTheme.coloring_container;
+  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+  if (selectedTheme.text_col != null) {
+    container.style.color = selectedTheme.text_col;
+    gameWindow.style.color = "black";
+  }
+  // classes for theme styling
+  document.body.classList.remove('cts-theme', 'classic-theme');
+  if (nct_stuff.selectedTheme === "classic") {
+    document.body.classList.add('classic-theme');
+  } else {
+    document.body.classList.add('cts-theme');
   }
 }
 
@@ -228,7 +540,15 @@ function updateDynamicStyle() {
   if (dynamicStyle.innerHTML != dynaStyle) dynamicStyle.innerHTML = dynaStyle;
 }
 
-setInterval(() => {
+let themeUpdateObserver = null;
+let headerObserver = null;
+let documentObserver = null;
+
+// this handles theme updates
+function handleThemeUpdates() {
+  // skip updates while theme menu is open
+  if (nct_stuff.pauseThemeUpdates) return;
+
   if (
     JSON.stringify(nct_stuff.custom_override) != JSON.stringify(selectedTheme) &&
     !nct_stuff.dynamicOverride &&
@@ -237,7 +557,7 @@ setInterval(() => {
     nct_stuff.themes[nct_stuff.selectedTheme] = strCopy(nct_stuff.custom_override);
     selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
     gameWindow.style.backgroundImage = "";
-    updateBannerAndStyling();
+    updateStyling();
   } else if (
     !nct_stuff.custom_override &&
     nct_stuff.selectedTheme == "custom" &&
@@ -247,18 +567,144 @@ setInterval(() => {
   ) {
     selectedTheme.window_url = null;
   }
-  const gameHeader = $(".game_header")[0];
-  if (gameHeader.innerHTML != corrr) gameHeader.innerHTML = corrr;
-  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+  
+  const gameHeader = document.getElementsByClassName("game_header")[0];
+  if (gameHeader) {
+    if (gameHeader.innerHTML != corrr) {
+      gameHeader.innerHTML = corrr;
+    }
+    gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+    corrr = gameHeader.innerHTML;
+  }
+  
   updateDynamicStyle();
-  corrr = gameHeader.innerHTML;
-}, 100);
+}
+
+// observe game header changes
+function observeGameHeader() {
+  const gameHeader = document.getElementsByClassName("game_header")[0];
+  
+  if (!gameHeader) {
+    return;
+  }
+  
+  if (headerObserver) {
+    headerObserver.disconnect();
+  }
+  
+  headerObserver = new MutationObserver((mutations) => {
+    let shouldUpdate = false;
+    
+    for (const mutation of mutations) {
+      // check for any changes that would require theme updates
+      if (mutation.type === 'childList' || 
+          mutation.type === 'characterData' ||
+          (mutation.type === 'attributes' && mutation.attributeName === 'style')) {
+        shouldUpdate = true;
+        break;
+      }
+    }
+    
+    if (shouldUpdate) {
+      handleThemeUpdates();
+    }
+  });
+  
+  // observe the game header for all types of changes
+  headerObserver.observe(gameHeader, {
+    childList: true,
+    characterData: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['style', 'class']
+  });
+  
+  handleThemeUpdates();
+}
+
+// watch for game_header being added/removed
+documentObserver = new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
+    if (mutation.type === 'childList') {
+      const gameHeaders = document.getElementsByClassName("game_header");
+      if (gameHeaders.length > 0) {
+        observeGameHeader();
+      }
+    }
+  }
+});
+
+documentObserver.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+themeUpdateObserver = new MutationObserver(() => {
+  handleThemeUpdates();
+});
+if (gameWindow) {
+  themeUpdateObserver.observe(gameWindow, {
+    attributes: true,
+    attributeFilter: ['style']
+  });
+}
+
+observeGameHeader();
+
+// also set up a proxy to detect changes to nct_stuff properties
+const nct_stuff_proxy = new Proxy(nct_stuff, {
+  set(target, property, value) {
+    target[property] = value;
+    
+    if (property === 'pauseThemeUpdates' || 
+        property === 'custom_override' || 
+        property === 'dynamicOverride' ||
+        property === 'selectedTheme') {
+      handleThemeUpdates();
+    }
+    
+    return true;
+  }
+});
+
+window.nct_stuff = nct_stuff_proxy;
+
+// fallback interval with longer delay for edge cases
+// this ensures compatibility with code that might bypass this
+let fallbackInterval = setInterval(() => {
+  const gameHeader = document.getElementsByClassName("game_header")[0];
+  if (gameHeader && !headerObserver) {
+    observeGameHeader();
+  }
+  
+  if (gameHeader && gameHeader.innerHTML !== corrr && !nct_stuff.pauseThemeUpdates) {
+    handleThemeUpdates();
+  }
+}, 1000);
+
+window.addEventListener('beforeunload', () => {
+  if (headerObserver) headerObserver.disconnect();
+  if (documentObserver) documentObserver.disconnect();
+  if (themeUpdateObserver) themeUpdateObserver.disconnect();
+  if (fallbackInterval) clearInterval(fallbackInterval);
+});
 
 async function loadJSON(path, varr, callback = null) {
   const res = await fetch(path);
   if (!res.ok) return;
   const responseText = await res.text();
-  eval(varr + "=JSON.parse(" + JSON.stringify(responseText.trim()) + ")");
+  
+  // parse nested property path and assign
+  const parts = varr.split('.');
+  let obj = window;
+  
+  // navigate to the parent object
+  for (let i = 0; i < parts.length - 1; i++) {
+    obj = obj[parts[i]];
+  }
+  
+  // assign to the final property
+  obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
+  
   if (callback) callback();
 }
 
@@ -301,4 +747,4 @@ campaignTrail_temp.show_premium = true;
 campaignTrail_temp.premier_ab_test_version = -1;
 campaignTrail_temp.credits = "Dan Bryan";
 
-updateBannerAndStyling();
+updateStyling();

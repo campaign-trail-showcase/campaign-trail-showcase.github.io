@@ -1,0 +1,1484 @@
+campaignTrail_temp.election_json = JSON.parse("[{\"model\": \"campaign_trail.election\", \"pk\": 10, \"fields\": {\"year\": 2022, \"summary\": \"<p><i>'인천 동-미추홀 을, 더불어민주당 남영희 후보 41.1%로 현재 1위!' '다음은 서울 용산입니다. 더불어민주당 강태웅 후보, 957표차로 당선됐습니다...'</i><p>2020년 4월 15일, 대한민국 국회의원 선거에서 보수 야당인 미래통합당은 위성정당의 비례 의석과 친야 무소속을 모두 포함하여 총 300석 중 불과 99석을 차지하며 역사적인 참패를 거뒀습니다. 국민들이 문재인 정부의 국정 운영에 힘을 실어준 것입니다. 그러나 야당의 총선 승리를 철썩같이 믿던 보수층이 보기에 이 정도로 큰 패배는 납득하기 어려웠습니다. <i>그것도 좀 많이요.</i><br>기막힐 정도로 절묘한 99석이라는 의석 수는 극우 세력이 주장한 부정선거 음모론에 활력을 불어넣기에 충분했습니다. 거기에 몇 가지 조잡한 '증거'가 더해진 결과, 부정선거 여부를 둘러싸고 대한민국 국민은 두 쪽으로 갈리기에 이르렀습니다.</p><p>그리고 마침내, 4월 15일 밤에 정치적으로 죽을 운명이었던 한 인물이 살아났습니다.</p>\", \"image_url\": \"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ymain.png\", \"winning_electoral_vote_number\": 1, \"advisor_url\": \"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./yadvisor.png\", \"recommended_reading\": \"<div id=\\\"tab-select\\\" style=\\\"width: 100%;height: 49px;border: 0;display: flex;justify-content: center;margin-bottom:1em;\\\"></div>\", \"has_visits\": 0, \"no_electoral_majority_image\": \"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./hwangpic.png\", \"site_image\": \"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ymainnew.gif\"}}]");
+campaignTrail_temp.candidate_json = JSON.parse("[{\"model\": \"campaign_trail.candidate\", \"pk\": 91, \"fields\": {\"first_name\": \"\", \"last_name\": \"황교안\", \"election\": 10, \"party\": \"미래통합당\", \"state\": \"서울특별시\", \"priority\": 1, \"description\": \"<p>하나님 맙소사.</p><p>황교안은 1957년 서울특별시에서 태어나 성균관대학교에서 법학을 전공하였고, 사법시험에 합격하여 검사가 된 뒤 박근혜 정부에서 법무부장관, 국무총리, 심지어는 대통령 권한대행까지 역임한 엘리트 중의 엘리트입니다. 그는 2019년 초 정계에 입문하자마자 야당의 당대표로 선출되었고, 1년 넘게 국회와 광장을 오가며 문재인 정부에 맞서는 선봉장으로 활동하였습니다. 그 과정에서 적지 않은 부정적 인상을 쌓긴 했지만, 어쨌든 보수 유권자들은 대체로 그를 차기 대통령감으로 봅니다.</p><p>그랬던 그가, 이제는 자신의 선거 패배를 납득하지 못하고 보수 진영 전체에 부정선거를 설파하는 음모론자가 되었습니다. 더욱 나쁜 점을 말씀드리자면, 그는 총선을 망치고 나서도 대표직 사퇴를 거부하였기 때문에 여전히 그의 영향력은 너무나 강합니다. 민주주의 체제를 위협할 정도로요.</p><p>대체 이 남자는 어디서부터 잘못된 걸까요.</p>\", \"color_hex\": \"#EF426F\", \"secondary_color_hex\": \"#EF426F\", \"is_active\": 1, \"image_url\": \"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./hwangintro.png\", \"electoral_victory_message\": \"\", \"electoral_loss_message\": \"\", \"no_electoral_majority_message\": \"\", \"description_as_running_mate\": \"''\", \"candidate_score\": 1.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 92, \"fields\": {\"first_name\": \"\", \"last_name\": \"더불어민주당\", \"election\": 10, \"party\": \"더불어민주당\", \"state\": \"서울특별시\", \"priority\": 2, \"description\": \"\", \"color_hex\": \"#004EA2\", \"secondary_color_hex\": \"#004EA2\", \"is_active\": 0, \"image_url\": \"\", \"electoral_victory_message\": \"\", \"electoral_loss_message\": \"\", \"no_electoral_majority_message\": \"\", \"description_as_running_mate\": \"''\", \"candidate_score\": 1.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 93, \"fields\": {\"first_name\": \"\", \"last_name\": \"좌파 떨거지들\", \"election\": 10, \"party\": \"Independent\", \"state\": \"Gyeonggi\", \"priority\": 3, \"description\": \"''\", \"color_hex\": \"#FFED00\", \"secondary_color_hex\": \"#FFED00\", \"is_active\": 0, \"image_url\": \"''\", \"electoral_victory_message\": \"''\", \"electoral_loss_message\": \"''\", \"no_electoral_majority_message\": \"''\", \"description_as_running_mate\": \"''\", \"candidate_score\": 1.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 94, \"fields\": {\"first_name\": \"\", \"last_name\": \"간잽이\", \"election\": 10, \"party\": \"Independent\", \"state\": \"Jeju\", \"priority\": 4, \"description\": \"''\", \"color_hex\": \"#EA5504\", \"secondary_color_hex\": \"#EA5504\", \"is_active\": 0, \"image_url\": \"''\", \"electoral_victory_message\": \"''\", \"electoral_loss_message\": \"''\", \"no_electoral_majority_message\": \"''\", \"description_as_running_mate\": \"''\", \"candidate_score\": 1.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 95, \"fields\": {\"first_name\": \"\", \"last_name\": \"미래통합당\", \"election\": 10, \"party\": \"UFP\", \"state\": \"서울특별시\", \"priority\": 5, \"description\": \"''\", \"color_hex\": \"#0000FF\", \"secondary_color_hex\": \"#90C0FF\", \"is_active\": 0, \"image_url\": \"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ufp.png\", \"electoral_victory_message\": \"''\", \"electoral_loss_message\": \"''\", \"no_electoral_majority_message\": \"''\", \"description_as_running_mate\": \"<p>2017년 박근혜 전 대통령의 탄핵이 헌법재판소에서 인용된 이후, 당시 여당이었던 새누리당은 나락으로 떨어진 보수의 이미지를 쇄신하기 위해서 여러 시도를 해왔습니다. 당명도 바꿔봤고, 당대표도 여러 번 갈아치웠으며, 탄핵 정국 시기에 당을 떠났던 온건 보수 세력과의 통합을 이루기도 했죠. 그 결과물이 현재의 미래통합당입니다.</p><p>미래통합당이 탄생한 이후, 보수 정치인들은 자신들이 더는 탄핵 문제에 연연하지 않는다며 소위 '탄핵의 강'을 건넜다고 주장해 왔습니다. 물론 그들이 과거와의 연결고리를 끊고 싶어한다고 해서 실제로 국민들까지 그렇게 믿어준 건 아니었고, 총선에서 보수는 개헌저지선 붕괴라는 충격적인 결과를 받아들었습니다.</p><p>그리고 이제서야 그들은 탄핵의 강을 건너는 데 성공한 것 같습니다. 왜냐하면 더는 아무도 탄핵 따위를 언급하지 않으니까요.</p>\", \"candidate_score\": 0.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 96, \"fields\": {\"first_name\": \"\", \"last_name\": \"더불어민주당\", \"election\": 10, \"party\": \"Democratic\", \"state\": \"Seoul\", \"priority\": 6, \"description\": \"''\", \"color_hex\": \"#0000FF\", \"secondary_color_hex\": \"#90C0FF\", \"is_active\": 0, \"image_url\": \"\", \"electoral_victory_message\": \"''\", \"electoral_loss_message\": \"''\", \"no_electoral_majority_message\": \"''\", \"description_as_running_mate\": \"\", \"candidate_score\": 0.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 103, \"fields\": {\"first_name\": \"...\", \"last_name\": \"Other\", \"election\": 10, \"party\": \"Independent\", \"state\": \"Alaska\", \"priority\": 13, \"description\": \"''\", \"color_hex\": \"#00C100\", \"secondary_color_hex\": \"#A1FFA1\", \"is_active\": 0, \"image_url\": \"''\", \"electoral_victory_message\": \"''\", \"electoral_loss_message\": \"''\", \"no_electoral_majority_message\": \"''\", \"description_as_running_mate\": \"''\", \"candidate_score\": 0.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 104, \"fields\": {\"first_name\": \"...\", \"last_name\": \"Other\", \"election\": 10, \"party\": \"Independent\", \"state\": \"Alaska\", \"priority\": 14, \"description\": \"''\", \"color_hex\": \"#FFFF00\", \"secondary_color_hex\": \"#FFFFC0\", \"is_active\": 0, \"image_url\": \"''\", \"electoral_victory_message\": \"''\", \"electoral_loss_message\": \"''\", \"no_electoral_majority_message\": \"''\", \"description_as_running_mate\": \"''\", \"candidate_score\": 0.0}}]");
+campaignTrail_temp.running_mate_json = JSON.parse("[{\"model\": \"campaign_trail.running_mate\", \"pk\": 66, \"fields\": {\"candidate\": 93, \"running_mate\": 103}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 67, \"fields\": {\"candidate\": 94, \"running_mate\": 104}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 58, \"fields\": {\"candidate\": 91, \"running_mate\": 95}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 59, \"fields\": {\"candidate\": 92, \"running_mate\": 96}}]");
+campaignTrail_temp.opponents_default_json = JSON.parse("[{\"election\": 10, \"candidates\": [93, 94, 91, 92]}]");
+campaignTrail_temp.opponents_weighted_json = JSON.parse("[{\"election\": 10, \"candidates\": [91, 92, 93, 94]}]");        
+campaignTrail_temp.difficulty_level_json = JSON.parse("[{\"model\": \"campaign_trail.difficulty_level\", \"pk\": 1, \"fields\": {\"name\": \"FRAUD\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 2, \"fields\": {\"name\": \"FRAUD\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 3, \"fields\": {\"name\": \"FRAUD\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 4, \"fields\": {\"name\": \"Normal\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 5, \"fields\": {\"name\": \"FRAUD\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 6, \"fields\": {\"name\": \"FRAUD\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 7, \"fields\": {\"name\": \"FRAUD\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 8, \"fields\": {\"name\": \"FRAUD\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 9, \"fields\": {\"name\": \"FRAUD\", \"multiplier\": 0.97}}]");
+campaignTrail_temp.global_parameter_json = JSON.parse("[{\"model\": \"campaign_trail.global_parameter\", \"pk\": 1, \"fields\": {\"vote_variable\": 1.125, \"max_swing\": 0.0, \"start_point\": 1.0, \"candidate_issue_weight\": 10.0, \"running_mate_issue_weight\": 3.0, \"issue_stance_1_max\": -0.71, \"issue_stance_2_max\": -0.3, \"issue_stance_3_max\": -0.125, \"issue_stance_4_max\": 0.125, \"issue_stance_5_max\": 0.3, \"issue_stance_6_max\": 0.71, \"global_variance\": 0.0, \"state_variance\": 0.0, \"question_count\": 34, \"default_map_color_hex\": \"#C8C0D6\", \"no_state_map_color_hex\": \"#999999\"}}]");
+campaignTrail_temp.candidate_dropout_json = JSON.parse("[{\"model\": \"campaign_trail.candidate_dropout\", \"pk\": 1, \"fields\": {\"candidate\": 36, \"affected_candidate\": 18, \"probability\": 1.0}}]");
+function updateElectionForm() {
+      const heading = document.querySelector("#election_year_form form h3");
+      if (heading) {
+        heading.textContent = "This is your election:";
+      }
+}
+function updateCandidateForm() {
+      const heading = document.querySelector("#candidate_form form h3");
+      if (heading) {
+        heading.textContent = "This is your candidate:";
+      }
+}
+function updateRunningMateForm() {
+      const heading = document.querySelector("#running_mate_form form h3");
+      if (heading) {
+        heading.textContent = "This is your party:";
+      }
+}
+function updateDifficultyForm() {
+      const heading = document.querySelector("#difficulty_level form h3");
+      if (heading) {
+        heading.textContent = "This is your difficulty level:";
+      }
+}
+function updateCreditForm() {
+      const heading = document.querySelector("#credits");
+      if (heading) {
+        heading.innerHTML = "<button onclick='credits()'>This mod was made by <b>FlongydOlson</b>, and...</button>";
+      }
+}
+function modifyAllocationForm() {
+        const form = document.querySelector('form[name="game_type_selection"]');
+            if(form){
+            const select = form.querySelector('select[name="game_type_id"]');
+            const option = select.querySelector('option[value="1"]');
+            option.textContent = 'Default (Plurality Voting)';
+            var optionToRemove = document.querySelector('option[value="2"]');
+            if (optionToRemove) {
+              optionToRemove.style.display = 'none';
+            }
+            const h3 = form.querySelector('h3');
+            h3.textContent = 'This is your game mode:';
+            }
+}
+function changeOpponentSelectionDescription() {
+            const opponentSelectionDescription = document.getElementById("opponent_selection_description_window");
+            if (opponentSelectionDescription) {
+            opponentSelectionDescription.innerHTML = '<p><strong>Use the default method of deciding the winner in the Korean presidential election.</strong></p><p>In the Korean presidential election, the candidate who receives votes more than any other opponents is elected president. Regardless of the majority, you just need to have the most to win. For example, in the historical 2022 presidential election, Yoon Suk-yeol won 48.6 percent of the vote, beating Lee Jae-myung, who won only 47.8 percent of the vote.</p>';
+            }
+}
+
+let changesInProgress = false;
+let masterObserver = new MutationObserver(masterFunction);
+function masterFunction() {
+        if (changesInProgress) return;
+        changesInProgress = true;
+        masterObserver.disconnect();
+
+        // Call all the functions here
+        updateElectionForm();
+        updateCreditForm();
+        updateCandidateForm();
+        updateRunningMateForm();
+        updateDifficultyForm();
+        modifyAllocationForm();
+        changeOpponentSelectionDescription();
+
+        // Re-observe the document
+        changesInProgress = false;
+        masterObserver.observe(document.body, { childList: true, subtree: true });
+}
+masterObserver.observe(document.body, { childList: true, subtree: true });
+
+RecReading=true
+
+campaignTrail_temp.temp_election_list = [{"id": 10, "year": 2022, "is_premium": 0, "display_year": "2022 - Y of Korea"}];
+campaignTrail_temp.show_premium = true;
+campaignTrail_temp.premier_ab_test_version = -1;
+campaignTrail_temp.ElectionPopup = "영남과 호남의 시골 지역부터 개표가 진행되고 있습니다. 함께 보시죠."
+
+  window.credits = function() {
+    const text = "CODE CREDITS:\nNina and Decstar for many, really many codes\nAnd many other mods, including Thing That Never Were, American Carnage, and 2023 Netherlands\n\nWONDERFUL PLAYTESTERS:\nKorean version - Rosie, (Untitled (red) ,1969), Krauterlikor, anakinskywalker, 사야만, jebfor2024\nEnglish version - duplicator, SkyBlue\n\n\nHAVE FUN!";
+  alert(text);
+}
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#000000";
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#330E18";
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+$(".container")[0].style.backgroundColor = "#112A3F";
+$("#game_window")[0].style.borderColor = "#EF426F"
+bannerlist=["https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ybanner.png"]
+document.getElementById("header").src = bannerlist[Math.floor((Math.random() * bannerlist.length))] 
+document.body.background = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ybackpic.png";
+document.body.style.backgroundRepeat = "no-repeat";
+document.body.style.backgroundSize = "cover";
+$("#game_window")[0].style.backgroundImage = "url(https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ybackimg.png)"
+
+$(".footer a").css({"color":"#ffffff"});
+nct_stuff.themes[nct_stuff.selectedTheme].text_col = "#FFFFFF"
+
+corrr=`<img src="https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./yofkorea.png" alt="Y_of_Korea" style="height: 50px;">`
+
+HistHexcolour=["#EF426F","#004EA2","#FFED00","#E7141A"];
+HistName=[" 황교안"," 이낙연"," 심상정"," 허경영"];
+HistEV=[0,0,0,0];
+HistPV=["16,223,112","15,388,449","1,846,478","609,814"];
+HistPVP=["47.6%","45.2%","5.4%","1.8%"];
+
+campaignTrail_temp.achievements = {
+    "살아있네" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach1.png",
+      "description" : "서울시장 선거를 3파전으로 만들고 승리하십시오",
+      "cannotBeCheated" : true
+    },
+    "이단심문관" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach2.png",
+      "description" : "(실수로) 방역 체계를 무너뜨리십시오",
+      "cannotBeCheated" : true
+    },  
+    "대연정" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach3.png",
+      "description" : "민트동맹을 체결하십시오",
+      "cannotBeCheated" : true
+    },
+    "언주야, 이게 정치야" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach4.png",
+      "description" : "언니는 시장이고~ 너는 막장이고~",
+      "cannotBeCheated" : true
+    },
+    "정감록" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach5.png",
+      "description" : "예언에 성공하십시오",
+      "cannotBeCheated" : true
+    },
+    "일과 이분의 일" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach6.png",
+      "description" : "안철수와 단일화를 이루십시오",
+      "cannotBeCheated" : true
+    },
+    "파멸적 엄중" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach7.png",
+      "description" : "이낙연을 물리치십시오",
+      "cannotBeCheated" : true
+    },
+    "도지사 잔혹사" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach8.png",
+      "description" : "이재명을 물리치십시오",
+      "cannotBeCheated" : true
+    },
+    "미애로 합의 못봐" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach9.png",
+      "description" : "추미애를 물리치십시오",
+      "cannotBeCheated" : true
+    },
+    "양파깡" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach10.png",
+      "description" : "조국을 물리치십시오",
+      "cannotBeCheated" : true
+    },
+    "역전세계" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach11.png",
+      "description" : "윤석열을 물리치십시오",
+      "cannotBeCheated" : true
+    },
+    "비명횡사" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach12.png",
+      "description" : "박용진을 물리치십시오",
+      "cannotBeCheated" : true
+    },
+    "코리안 브레인롯" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach13.png",
+      "description" : "유시민을 물리치십시오",
+      "cannotBeCheated" : true
+    },
+    "카르마" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach34.png",
+      "description" : "코로나에 걸리십시오",
+      "cannotBeCheated" : true
+    },
+    "노원의 돌" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach14.png",
+      "description" : "택시기사의 행방을 알아내십시오",
+      "cannotBeCheated" : true
+    },
+    "즐기는 자 모드" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach15.png",
+      "description" : "색소폰을 부십시오",
+      "cannotBeCheated" : true
+    },
+    "프론트맨" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach16.png",
+      "description" : "오징어 게임을 샤라웃하십시오",
+      "cannotBeCheated" : true
+    },
+    "데자뷔" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach17.png",
+      "description" : "안철수와 단일화하고 이재명을 이기십시오",
+      "cannotBeCheated" : true
+    },
+    "주먹왕 황프" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach32.png",
+      "description" : "어퍼컷을 날리십시오",
+      "cannotBeCheated" : true
+    },  
+    "현실 1000% 반영" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach18.png",
+      "description" : "안철수 지지자들이 손가락을 자르고 싶게 만드십시오",
+      "cannotBeCheated" : true
+    },
+    "황카,, 풍성하시다,," : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach19.png",
+      "description" : "삭발하십시오",
+      "cannotBeCheated" : true
+    },
+    "조국수홍" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach20.png",
+      "description" : "홍준표가 출마한 상태에서 조국을 꺾으십시오",
+      "cannotBeCheated" : true
+    },
+    "고마 치아라 마" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach21.png",
+      "description" : "부산에서 조국에게 털리십시오",
+      "cannotBeCheated" : true
+    },
+    "당 뽀개버리기" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach22.png",
+      "description" : "민주당에 운석을 하나 떨구십시오",
+      "cannotBeCheated" : true
+    },
+    "그 7글자" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach23.png",
+      "description" : "윤석열이 무언가를 공약하도록 만드십시오",
+      "cannotBeCheated" : true
+    },
+    "유레카" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach33.png",
+      "description" : "배신자와 손잡고 옛 주군을 버리십시오",
+      "cannotBeCheated" : true
+    },
+    "민노당의 추억" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach24.png",
+      "description" : "좌파 단일화를 저지하십시오",
+      "cannotBeCheated" : true
+    },
+    "역사를 잊은 민족에게..." : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach25.png",
+      "description" : "국정교과서 재도입을 주장한 뒤 승리하십시오",
+      "cannotBeCheated" : true
+    },
+    "카르텔 해체" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach26.png",
+      "description" : "의사들의 미래를 짓밟으십시오",
+      "cannotBeCheated" : true
+    },
+    "세계가 불타버린 밤" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach31.png",
+      "description" : "단일화 없이 유시민을 꺾으십시오",
+      "cannotBeCheated" : true
+    },
+    "온 세상이 전라도야" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach27.png",
+      "description" : "대구경북 외의 모든 지역에서 패배하십시오",
+      "cannotBeCheated" : true
+    },
+    "온 세상이 경상도야" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach28.png",
+      "description" : "전라도 외의 모든 지역에서 승리하십시오",
+      "cannotBeCheated" : true
+    },
+    "공명선거" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach29.png",
+      "description" : "과반을 득표하십시오",
+      "cannotBeCheated" : true
+    },
+    "빙칠링" : {
+      "image" : "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ach30.png",
+      "description" : "치트를 쓰십시오",
+      "cannotBeCheated" : false
+    }
+}
+
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#000000",
+     "header_text_color": "#EF426F",
+     "header_image_url": "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./yheaderimage.png",
+     "description_text_color": "#FFFFFF",
+     "description_background_color": "#112A3F",
+     "main_color": "#112A3F",
+     "secondary_color": "#000000",
+     "ui_text_color": "#EF426F"
+}
+
+    
+  // Select the node that will be observed for mutations
+  const windowsAdvisorTargetNode = document.getElementById("game_window");
+  
+  // Options for the observer (which mutations to observe)
+  const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
+  
+  // Callback function to execute when mutations are observed
+  const callback = (mutationList, observer) => {
+      visitWindow = document.getElementsByClassName("overlay_window")[0];
+  
+      if(visitWindow == null || visitWindow.classList.contains("done")) {
+          return;
+      }
+      visitWindow.classList.add("done");
+      visitWindow.classList.add("window");
+      let titleBar = visitWindow.querySelector("h3");
+      titleBar.classList.add("title-bar");
+      titleBar.classList.add("title-bar-text")
+      titleBar.style.paddingLeft = "3px";
+  };
+  
+  class Song {
+    constructor(title, artist, coverLink, audioLink) {
+      this.title = title;
+      this.artist = artist;
+      this.coverLink = coverLink;
+      this.audioLink = audioLink;
+    }
+    getTitle() {
+      return this.title;
+    }
+  
+    getArtist() {
+      return this.artist;
+    }
+  
+    getCoverLink() {
+      return this.coverLink;
+    }
+  
+    getAudioLink() {
+      return this.audioLink;
+    }
+  }
+  
+  class Playlist {
+    constructor() {
+      this.songs = [];
+      this.currentSongIndex = 0;
+    }
+  
+    addSong(song) {
+      this.songs.push(song);
+    }
+  
+    getCurrentSong() {
+      return this.songs[this.currentSongIndex];
+    }
+  
+    playNext() {
+      this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+    }
+  
+    playPrevious() {
+      this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+    }
+  }
+  window.Playlist=Playlist
+  window.Song=Song
+  
+  function changePlaylist(newPlaylist) {
+    playlist = newPlaylist;
+    playlist.currentSongIndex = 0;
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+  }
+  window.changePlaylist=changePlaylist
+  
+  function updateUI(playlist) {
+      const currentSong = playlist.getCurrentSong();
+      var player = document.getElementById("player");
+      player.querySelector("#cover").src = currentSong.getCoverLink();
+      player.querySelector("#title").textContent = currentSong.getTitle();
+      player.querySelector("#artist").textContent = currentSong.getArtist();
+  }
+  
+  window.updateUI=updateUI
+  
+  
+  function setupMusicPlayer() {
+    playlist = new Playlist();
+  
+  
+   
+    const song1 = new Song(
+      "크게 라디오를 켜고",
+      "시나위",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track1.png",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track1.mp3"
+    );
+
+    const song2 = new Song(
+      "지구가 왜 돌까",
+      "산울림",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track2.png",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track2.mp3"
+    );
+
+   const song3 = new Song(
+      "희야",
+      "부활",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track3.png",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track3.mp3"
+    );
+  
+    const song4 = new Song(
+      "다이너마이트 소녀",
+      "인희",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track4.png",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track4.mp3"
+    );
+    
+    const song5 = new Song(
+      "세계로 가는 기차",
+      "들국화",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track5.png",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track5.mp3"
+    );  
+
+    const song6 = new Song(
+      "환희",
+      "정수라",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track6.png",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track6.mp3"
+    );
+
+    const song7 = new Song(
+      "손에 손잡고",
+      "코리아나",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track7.png",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track7.mp3"
+    );
+
+    const song8 = new Song(
+      "정신차려",
+      "김수철",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track8.png",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track8.mp3"
+    );
+
+    const song9 = new Song(
+      "아름다운 강산",
+      "이선희",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track9.png",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track9.mp3"
+    );
+
+    const song10 = new Song(
+      "어허야 둥기둥기",
+      "이문세",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track10.png",
+      "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./track10.mp3"
+    );
+
+    playlist.addSong(song1);
+    playlist.addSong(song2);
+    playlist.addSong(song4);
+    playlist.addSong(song5);
+    playlist.addSong(song3);
+    playlist.addSong(song6);
+    playlist.addSong(song7);
+    playlist.addSong(song9);
+    playlist.addSong(song8);
+    playlist.addSong(song10);
+  
+    const playerContainer = document.createElement("div");
+    playerContainer.id = "player";
+  
+   const displayBox = document.createElement("div");
+  displayBox.id = "display-box";
+  
+  const coverElement = document.createElement("img");
+  coverElement.id = "cover";
+  displayBox.appendChild(coverElement);
+  
+  const infoContainer = document.createElement("div");
+  infoContainer.id = "info-container";
+  infoContainer.style.backgroundImage = "url('https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./transparent.png')";
+  infoContainer.style.backgroundSize = "cover"; // Optional: adjust based on your needs
+  infoContainer.style.color = "#00CD3B"; // Set text color to white
+  
+  const songInfo = document.createElement("div");
+  songInfo.id = "song-info";
+  
+  const titleElement = document.createElement("h3");
+  titleElement.id = "title";
+  titleElement.style.fontWeight = 'bold'; // Make it normal as per previous request
+  songInfo.appendChild(titleElement);
+  
+  const artistElement = document.createElement("p");
+  artistElement.id = "artist";
+  songInfo.appendChild(artistElement);
+  
+  infoContainer.appendChild(songInfo);
+  displayBox.appendChild(infoContainer);
+  
+  playerContainer.appendChild(displayBox);
+  
+  const controlsContainer = document.createElement("div");
+  controlsContainer.id = "controls-container";
+  
+  const controls = document.createElement("div");
+  controls.id = "controls";
+  
+  const prevButton = document.createElement("img");
+  prevButton.id = "prevButton";
+  prevButton.src = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/2025%20Korea/backward.png";
+  prevButton.alt = "Previous";
+  controls.appendChild(prevButton);
+  
+  const playPauseButton = document.createElement("img");
+  playPauseButton.id = "playPauseButton";
+  playPauseButton.src = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/2025%20Korea/pause.png"; // Set the default play image
+  playPauseButton.alt = "Play/Pause";
+  controls.appendChild(playPauseButton);
+  
+  const nextButton = document.createElement("img");
+  nextButton.id = "nextButton";
+  nextButton.src = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/2025%20Korea/forward.png";
+  nextButton.alt = "Next";
+  controls.appendChild(nextButton);
+  
+  controlsContainer.appendChild(controls);
+  
+  playPauseButton.addEventListener("click", function () {
+    const audio = document.getElementById("audio");
+    if (audio.paused) {
+      audio.play();
+      playPauseButton.src = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/2025%20Korea/pause.png"; // Set the pause image
+    } else {
+      audio.pause();
+      playPauseButton.src = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/2025%20Korea/play.png"; // Set the play image
+    }
+  });
+  
+  nextButton.addEventListener("click", function () {
+    playlist.playNext();
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+  });
+  
+  prevButton.addEventListener("click", function () {
+    playlist.playPrevious();
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+  });
+  
+    const progressBarContainer = document.createElement("div");
+    progressBarContainer.id = "progress-bar-container";
+  
+    const progressBar = document.createElement("progress");
+    progressBar.type = "range";
+    progressBar.id = "progress-bar";
+    progressBar.value = "0";
+    progressBar.max = "100";
+  
+  
+    progressBarContainer.appendChild(progressBar);
+    controlsContainer.appendChild(progressBarContainer);
+    playerContainer.appendChild(controlsContainer);
+  
+   const volumeContainer = document.createElement("div");
+    volumeContainer.id = "volume-container";
+  
+  const volumeLabel = document.createElement("img");
+  volumeLabel.src = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/2025%20Korea/volume.png";
+  volumeLabel.alt = "Volume";
+  volumeContainer.appendChild(volumeLabel);
+  
+    const volumeSliderContainer = document.createElement("div");
+    volumeSliderContainer.classList.add("is-horizontal");
+    volumeSliderContainer.style.marginLeft = "1%";
+    volumeSliderContainer.style.height = "126px";
+  
+    const volumeSlider = document.createElement("input");
+    volumeSlider.id = "volume-slider";
+    volumeSlider.type = "range";
+    volumeSlider.min = 0;
+    volumeSlider.max = 9;
+    volumeSlider.step = 1;
+    volumeSlider.value = 1; // Initial volume
+  
+    volumeSliderContainer.appendChild(volumeSlider);
+  
+    const volumeDisplay = document.createElement("span");
+    volumeDisplay.id = "volume-display";
+    volumeDisplay.style.fontWeight = 'bold'; 
+    volumeDisplay.style.display = 'none';
+    volumeDisplay.textContent = "1";
+  
+    volumeContainer.appendChild(volumeSliderContainer);
+    volumeContainer.appendChild(volumeDisplay);
+  
+    playerContainer.appendChild(volumeContainer);
+  
+    gameWindow_player.insertAdjacentElement("afterend", playerContainer);
+  
+  
+    function updateProgressBar() {
+      const audio = document.getElementById("audio");
+      const progress = (audio.currentTime / audio.duration) * 100;
+      try{progressBar.value = progress}
+    catch{}
+    }
+  
+   
+    progressBar.addEventListener("input", function () {
+      const audio = document.getElementById("audio");
+      const seekTime = (progressBar.value / 100) * audio.duration;
+      audio.currentTime = seekTime;
+    });
+  
+    const audio = document.createElement("audio");
+    audio.id = "audio";
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.volume = 1/9;
+  
+    audio.addEventListener("timeupdate", updateProgressBar);
+    audio.addEventListener("ended", function () {
+      // Play the next song when the current song ends
+      playlist.playNext();
+      updateUI(playlist);
+      audio.src = playlist.getCurrentSong().audioLink;
+      audio.play();
+    });
+  
+      let currentVolume = 1; // Initial volume
+  
+    volumeSlider.addEventListener("input", function () {
+      currentVolume = parseInt(volumeSlider.value, 10);
+      updateVolumeDisplay();
+      updateAudioVolume();
+    });
+  
+    function updateVolumeDisplay() {
+      volumeDisplay.textContent = currentVolume;
+    }
+  
+     function updateAudioVolume() {
+      const audio = document.getElementById("audio");
+      audio.volume = currentVolume / 9; // Set volume between 0 and 1
+    }
+  
+    document.body.appendChild(audio);
+    audio.play();
+  
+    // Update the UI when the page loads
+    updateUI(playlist);
+  }
+  
+  const style = document.createElement("style");
+  style.textContent = `
+  #player {
+      border: 3px solid #00CD3B; /* Add your desired border style */
+      display: flex;
+      flex-direction: row;
+    height:60px;
+      background-Image: url("https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/2025%20Korea/soundback.png");
+    }
+  
+    #display-box {
+      display: flex;
+      align-items: center;
+      width: 50%;
+    }
+  
+    #cover {
+      width: 60px;
+    height: 60px;
+    }
+  
+    #info-container {
+      display: flex;
+      flex-direction: row;
+      height:100px;
+    width:240px;
+    margin-top: 3px;
+    }
+  
+    #song-info {
+      width: 100%;
+    padding:5px;
+    }
+  
+    #controls-container {
+      display: flex;
+      flex-direction: row;
+      align-items: left;
+      margin: 5px;
+      width:100%;
+  
+    }
+    .is-horizontal #volumeSlider {
+    width: 150px;
+    appearance: slider-horizontal;
+  }
+  
+    #controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      width: 80%;
+    }
+  
+    #progress-bar-container {
+      width: 300%;
+    }
+  
+    #progress-bar {
+      width: 80%;
+      margin: auto;
+      display: flex;
+      margin-Top: 23px;
+      height: 5px;
+      background-color: #E3E3E3;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    #progress-bar::-webkit-progress-bar {
+      background-color: #E3E3E3;
+    }
+
+    #progress-bar::-webkit-progress-value {
+      background-color: #00CD3B;
+    }
+
+    #progress-bar::-moz-progress-bar {
+      background-color: #00CD3B;
+    }
+
+    #volume-container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      margin: 5px;
+      margin-Top: 10px;
+      width:50%;
+    }
+
+    #volume-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 150px;
+      height: 5px;
+      margin-Top: 19px;
+      background-color: #E3E3E3;
+      border: 0px solid buttonborder;
+      border-radius: 3px;
+      display: flex;
+      padding: 0;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+
+    #volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 13px;
+      height: 13px;
+      background: buttonface;
+      background-color: #121212;
+      border: 2px solid #00CD3B;
+      border-radius: 25%;
+      cursor: pointer;
+      box-sizing: border-box;
+      margin-top: -2px;
+    }
+
+    #volume-slider::-moz-range-thumb {
+      width: 13px;
+      height: 13px;
+      background: buttonface;
+      background-color: #121212;
+      border: 2px solid #00CD3B;
+      border-radius: 25%;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    #menu_container {
+        background-color: transparent;
+    }
+
+    #overall_result_container {
+        background-color: transparent;
+    }
+
+    #state_result_container {
+        background-color: transparent;
+    }
+
+    #map_container {
+        background-color: #f6f6f6;
+    }
+
+    #overall_election_details b {
+        display: none;
+    }
+
+     .rounded-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 2px solid black;
+        margin: 10px;
+        background-color: white;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+     .square-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-color: #000000;
+        border-top-width: 0px;
+        border-bottom-width: 2px;
+        border-left-width: 2px;
+        border-right-width: 2px;
+        border-top-right-radius: 0.8em;
+        border-bottom-right-radius: 0.8em;
+        border-style: solid;
+        background-color: white;
+        overflow: hidden;
+      }
+
+     .opponent-square-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-color: #000000;
+        border-top-width: 0px;
+        border-bottom-width: 2px;
+        border-left-width: 2px;
+        border-right-width: 2px;
+        border-top-left-radius: 0.8em;
+        border-bottom-left-radius: 0.8em;
+        border-style: solid;
+        background-color: white;
+        overflow: hidden;
+      }
+
+     .blue-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-color: #000000;
+        border-top-width: 0px;
+        border-bottom-width: 2px;
+        border-left-width: 0px;
+        border-right-width: 2px;
+        border-top-right-radius: 0.8em;
+        border-bottom-right-radius: 0.8em;
+        border-style: solid;
+        background-color: white;
+        overflow: hidden;
+      }
+
+     .pink-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-color: #000000;
+        border-top-width: 0px;
+        border-bottom-width: 2px;
+        border-left-width: 2px;
+        border-right-width: 0px;
+        border-top-left-radius: 0.8em;
+        border-bottom-left-radius: 0.8em;
+        border-style: solid;
+        background-color: white;
+        overflow: hidden;
+      }
+
+     input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+      }
+
+      input[type="radio"] {
+              position: relative;
+              display: inline-block;
+              width: 16px;
+              height: 16px !important;
+              border: 2px solid #6A7C61;
+              background-color: #BBDDA8 !important;
+              border-radius: 10%;
+      }
+
+      /* Create the cross icon (hidden when not checked) */
+      input[type="radio"]:after {
+              content: "";
+              position: absolute;
+              display: none;
+      }
+
+       /* Show the cross icon when checked */
+      input[type="radio"]:checked:after {
+              display: block;
+      }
+
+      input[type="radio"]:checked:after {
+                content: "";
+                display: inline-block;
+                background-image: url("https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./yanswerselect.png");
+                background-repeat: no-repeat;
+                background-size: contain; /* Or use a specific size like '10px 10px' */
+                width: 18px;
+                height: 18px;
+                position: absolute; /* This takes the pseudo-element out of the document flow */
+                left: -2px;
+                top: -2px;
+                z-index: 1;
+      }
+
+      #election_description_window {
+        background-color: #0D2133;
+        color: white;
+        height: 250px;
+    border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+      }
+
+      #candidate_description_window {
+        background-color: #0D2133;
+        color: white;
+        height: 352px;
+    border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+      }
+
+      #running_mate_description_window {
+        background-color: #0D2133;
+        color: white;
+        height: 352px;
+    border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+      }
+
+      #opponent_selection_description_window {
+        background-color: #0D2133;
+        color: white;
+    border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+      }
+
+      #inner_window_1 {
+        background-color: #0D2133;
+        color: white;
+    border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+      }
+
+      #inner_window_2 {
+        background-color: #330E18;
+        color: white;
+    border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+      }
+
+      #inner_window_3 {
+        background-color: #330E18;
+        color: white;
+    border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+      }
+
+      #inner_window_4 {
+        background-color: #330E18;
+        color: white;
+    border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+      }
+
+      #election_image {
+            margin-left: 0px;
+            margin-top: 0px;
+            width: 350px;
+            height: 250px;
+            background-image: 
+              linear-gradient(to right, transparent, rgba(13, 33, 51, 1)), 
+              url('https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ymaingif.gif'); 
+            background-size: cover; 
+            z-index: 1;
+      }
+      #election_image img{
+            padding: 1px 1px; 
+            border: 1px solid #C9C9C9;
+            z-index: 0;
+            opacity: 0;
+      }
+
+      #candidate_image {
+            margin-left: 0px;
+            margin-top: 0px;
+            width: 300px;
+            height: 352px;
+            background-image: 
+              linear-gradient(to right, transparent, rgba(13, 33, 51, 1)), 
+              url('https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./hwangintro.png'); 
+            background-size: cover; 
+            z-index: 1;
+            border:none;
+            outline:none;
+      }
+      #candidate_image img{
+            padding: 1px 1px; 
+            border: 1px solid #C9C9C9;
+            z-index: 0;
+            opacity: 0;
+      }
+
+      #running_mate_image {
+            margin-left: 0px;
+            margin-top: 0px;
+            width: 300px;
+            height: 352px;
+            background-image: 
+              linear-gradient(to right, transparent, rgba(13, 33, 51, 1)), 
+              url('https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ufp.png'); 
+            background-size: cover; 
+            z-index: 1;
+            border:none;
+            outline:none;
+      }
+      #running_mate_image img{
+            padding: 1px 1px; 
+            border: 1px solid #C9C9C9;
+            z-index: 0;
+            opacity: 0;
+      }
+
+button {
+    appearance: none;
+    background-color: #000000;
+    border-color: #EF426F;
+    color: #EF426F;
+    border-radius: 3px;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+}
+
+button:active {
+    appearance: none;
+    background-color: #000000;
+    border-color: #AF3153;
+    color: #AF3153;
+    border-radius: 3px;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+}
+
+button:hover {
+    appearance: none;
+    background-color: #000000;
+    border-color: #AF3153;
+    color: #EF426F;
+    border-radius: 3px;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+}
+
+button:disabled,
+button[disabled]{
+    appearance: none;
+    background-color: #000000;
+    border-color: #AF3153;
+    color: #AF3153;
+    border-radius: 3px;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+}
+
+select {
+    color: #EF426F;
+    background-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #AF3153;
+    border-image: initial;
+    border-radius: 3px;
+}
+
+table, th, td {
+  box-sizing: border-box;
+  border: 2px solid #AF3153;
+  background-color: #000000;
+  color: #EF426F;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table tr:hover td {
+  background-color: #000000;
+  color: #AF3153;
+}
+
+#overall_details_container table td:first-child span {
+  margin-left: .2em;
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+::-webkit-scrollbar-track { 
+    background-color: #000000;
+}
+
+::-webkit-scrollbar-thumb { 
+    background-color: #EF426F;
+    border-radius: 10px;
+    border: 3px solid #000000;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #AF3153;
+}
+
+      .game_header {
+        padding: 0px;
+        border-color: #EF426F;
+        background-color: #000000;
+      }
+
+      .inner_window_w_desc {
+        height: 88%;
+      }
+
+      #election_id_button {
+    margin-top: 2.5em;
+      }
+
+      #credits {
+    margin-top: 2.5em;
+      }
+
+      #theme_picker, .footer h4 {
+    display: none;
+      }
+
+      .footer {
+    border-color: #112A3F;
+      }
+
+      .container {
+    border-color: #000000;
+      }
+
+      .content_single {
+    border-color: #000000;
+      }
+
+      #site_credits p, div#site_credits a {
+    color: darkslateblue !important;
+      }
+
+      .footer hr {
+    border-color: darkslateblue;
+      }
+
+      #question_form input[type="radio"] + label:hover,
+      #question_form input[type="radio"] + label:focus {
+    font-size: 1em;
+    font-weight: 400; 
+    background: #173956;
+      }
+
+      #question_form input[type="radio"]:checked + label {
+    background: #1E4B72;
+    transition: 1s ease-out;
+      }
+
+     .inner_window_question h3 {
+  line-height: 1.4em;
+      }
+
+  .overlay_window h3 {
+    display: none;
+  }
+
+.overlay_window img {
+    margin-top: 1.5em;
+}
+
+#menu_container h3 {
+    line-height: 1.15em;
+}
+
+  .base {
+    font-family: IBM Plex Sans KR, Ariel, "Helvetica Neue", Helvetica, sans-serif;
+  }
+
+  button {
+    font-family: IBM Plex Sans KR, Ariel, "Helvetica Neue", Helvetica, sans-serif;
+line-height: 1.3em;
+  }
+
+  #site_credits {
+line-height: 1.25em;
+  }
+
+  #difficulty_mult {
+display: none;
+  }
+
+  #state_result_data_summary table td:first-child span, #overall_details_container table td:first-child span, .final_results_table td:first-child span {
+    border: .1rem solid rgba(0,0,0,0.2);
+    border-radius: 100%;
+    display: inline-flex;
+    height: 0.7em;
+    text-indent: -9999px;
+    vertical-align: middle;
+    width: 0.7em;
+   }
+
+  #overall_result span, #state_result span {
+    border: .1rem solid rgba(0,0,0,0.2);
+    border-radius: 100%;
+    display: inline-flex;
+    height: 0.7em;
+    text-indent: -9999px;
+    vertical-align: middle;
+    width: 0.7em;
+   }
+
+  `;
+
+document.head.appendChild(style);
+
+
+function addDynamicCSS() {
+    var css = `
+        .inner_window_question h3 .mytooltip{
+            color: #EF426F;
+        }
+
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: #EF426F;
+        }
+
+        .mytooltip .mytooltiptext {
+            width: 240px;
+            background-color: #2D3A29;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 110%;
+            left: 50%;
+            margin-left: -130px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 2px solid black;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+
+        .mytooltip .mytooltiptext img {
+            max-width: 240px;
+            height: auto;
+            border: 2px solid black;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+
+    styleElem.appendChild(document.createTextNode(css));
+
+    document.head.appendChild(styleElem);
+}
+
+addDynamicCSS();
+
+tooltipList = [
+    { searchString: "출구조사", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./texitpoll.png\">이보다도 더 크게 패할 줄 누가 알았으랴." },
+    { searchString: "네이버", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tnaver.png\">대한민국 최대의 인터넷 포털 사이트." },
+    { searchString: "민경욱", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmin.png\">언론인 출신의 전 미래통합당 국회의원. 인천 연수구 을에서 재선에 도전했다가 간발의 차로 패배한 뒤 부정선거 음모론의 선봉장으로 탈바꿈했음." },
+    { searchString: "도널드 트럼프", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ttrump.png\">미합중국 제45대 대통령." },
+    { searchString: "전광훈", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjeon.png\">정계 진출을 꿈꾸는 사랑제일교회 목사. 유명한 발언으로는 '하나님, 까불면 나한테 죽어'가 있음." },
+    { searchString: "문재인 대통령", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmoon.png\">대한민국 제19대 대통령. 자유주의 성향 정당인 더불어민주당 소속." },
+    { searchString: "국민의당", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tpeoples.png\">제3지대 중도우파 정치인 안철수가 창당한 사실상의 1인 정당. 초기 가칭은 '안철수신당'이었음." },
+    { searchString: "월터 미베인", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmebane.png\">정치학과 통계학을 연구하며, 세계 각국의 투표 조작 탐지법에 대하여 탐구한 바 있음." },
+    { searchString: "디시인사이드", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tdcinside.png\">매우 다양한 주제의 게시판이 존재하는 거대 커뮤니티로, 영미권의 레딧과 유사함." },
+    { searchString: "하태경", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./thatae.png\">2020년 총선에서 살아남은 정말 몇 안 되는 당내 온건파 중 한 명." },
+    { searchString: "이준석", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tstone.png\">서울 노원구 병에서 세 번 낙선한 청년 정치인." },
+    { searchString: "개혁보수", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./treform.png\">박근혜 탄핵에 찬성했던 온건 보수 세력." },
+    { searchString: "홍준표", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./thong.png\">전 경상남도지사, 2017년 대선의 보수 대통령 후보. 2020년 총선 시기 황교안의 험지 출마 요구에 반발하여 미래통합당을 탈당함." },
+    { searchString: "박근혜", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgeunhye.png\">대한민국 제18대 대통령. 공적 권한이 없는 민간인 측근에게 비밀리에 국정을 위임했다는 것이 알려진 뒤 역대 대통령 중 최초로 헌법재판소에서 탄핵이 인용되어 파면됨." },
+    { searchString: "Y.", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./typose.png\">" },
+    { searchString: "개성공단", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tkaesong.png\">남북한의 경제 협력을 촉진하고자 설립되었던 공업지구. 2016년 이후 가동 중단 상태." },
+    { searchString: "남북공동연락사무소를 폭파", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tbomb.png\">" },
+    { searchString: "대북전단", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tleaflet.png\">북한 정권에 반대하는 선전물이 풍선을 통해 북한에 살포됨." },
+    { searchString: "임대차 3법", explanationText: "임대차 계약 기간 연장, 임대료 상승폭 제한, 임대차 계약 신고 의무화를 담은 법안." },
+    { searchString: "종합부동산세", explanationText: "일정 금액 이상 부동산을 보유한 자에게 부과되는 세금." },
+    { searchString: "윤희숙", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./theesuk.png\">한국개발연구원 출신의 경제 전문가 국회의원." },
+    { searchString: "질병관리청", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tkdca.png\">감염병과 각종 질병에 대응하는 기관. 코로나19 대응 과정에서 중요도가 급격히 상승함." },
+    { searchString: "윤석열 검찰총장", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoon.png\">문재인은 그를 개혁 파트너로 쓰려고 뽑았지만, 이제는 정권의 내부 반대자일 뿐." },
+    { searchString: "조국 전 법무부장관", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcho.png\">문재인 밑에서 딱 한 달 동안 법무부장관을 지낸 전직 교수. 장관직 지명과 동시에 가족의 입시비리 등 여러 스캔들이 불거진 결과 정권의 지지율을 많이 깎아먹었음." },
+    { searchString: "추미애 법무부장관", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tchoo.png\">더불어민주당 대표 출신의 현 법무부장관." },
+    { searchString: "이명박", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmb.png\">대한민국 제17대 대통령. 뇌물수수 등의 혐의로 징역 17년형을 선고받음." },
+    { searchString: "세 곳의 거대 언론사", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./toutlets.png\">디지털 시대에도 조금이나마 영향력을 유지하는 신문사들. 셋이 묶여서 '조중동'으로 불리기도 함." },
+    { searchString: "홍콩 국가보안법", explanationText: "홍콩 내 반정부 활동을 금지하는 법안으로, 2020년 통과되었으며 홍콩의 모든 지역 법률에 우선함." },
+    { searchString: "박영선", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoungsun.png\">서울 구로구에서 여러 차례 국회의원에 당선되었고, 문재인 정부에서 중소벤처기업부장관을 역임함." },
+    { searchString: "김영춘", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoungchoon.png\">부산 출신으로 문재인 정부에서 해양수산부장관으로 일했으나, 그가 당선될 가망은 없어 보임." },
+    { searchString: "오세훈", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./toh.png\">2006년부터 2011년까지 서울시장을 지냈으며, 이번 재보궐선거를 통해 복귀를 시도하고 있음." },
+    { searchString: "박형준", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./theongjoon.png\">2000년대에 부산에서 국회의원에 당선되었고, 지난 총선에서 미래통합당의 공동선대위원장을 맡았음." },
+    { searchString: "조은희", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./teunhee.png\">서초구민들 사이에서 인기가 좋지만, 그 외에는 그녀가 누군지 아무도 모름. 어쩌면 이게 장점일 수도?" },
+    { searchString: "박성훈", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsunghoon.png\">주로 예산 분야에서 30년 가까이 활동한 공무원 출신의 정치 신인." },
+    { searchString: "나경원", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tna.png\">2019년에 야당 원내대표를 지냈음. 인지도는 매우 높으나 평판은 매우 양극화된 인물." },
+    { searchString: "이언주", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tunju.png\">더불어민주당에서 미래통합당으로 전향한 정치인. 2019년에 문재인 정부에 반대하며 삭발을 감행하기도 했음." },
+    { searchString: "'나다르크'", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tnadarc.png\">일본의 한 방송국이 나경원에게 지어준 별명." },
+    { searchString: "LH", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tlh.png\">공공주택 공급부터 신도시 개발까지 다양한 부동산 관련 사업을 담당하는 공기업." },
+    { searchString: "KTX", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tktx.png\">서울에서 부산까지 2시간 만에 보내주는 고속철도." },
+    { searchString: "2021년 직업 등급표", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./t2021meme.png\">가족이 LH 직원이기만 해도 변호사, 의사와 동급!!" },
+    { searchString: "청와대 국민청원", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tpetition.png\">문재인 정부가 국민과의 소통을 강화하겠다는 명분으로 2017년 시행한 청원 제도. 20만 명 이상이 동의한 청원에는 정부가 직접 답변함." },
+    { searchString: "시민들의 편", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcitizens.png\">기성 언론과 전문가보다 음모론자 유튜버를 믿는 사람들." },
+    { searchString: "조국 사태", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tchoscandal.png\">조국 전 법무부장관의 수많은 비리 논란이 촉발시킨 일련의 사건. 당시 한국 사회는 조국 임명의 찬반을 둘러싸고 반으로 나뉘어 치열한 대립을 벌였으며, 조국이 결국 자진 사퇴를 선택하면서 일단락되었음." },
+    { searchString: "유승민", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyoo.png\">새누리당(미래통합당의 전신)에서 원내대표를 지냈으나, 2016년 탄핵 찬성파들을 이끌고 탈당한 뒤로 배신자라는 오명을 얻은 정치인." },
+    { searchString: "통합진보당", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tupp.png\">2014년 헌법재판소에서 위헌정당 해산 심판이 인용되어 해산된 진보정당." },
+    { searchString: "컴퓨터 천재", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tv3.png\">안철수는 정계 입문 전까지 컴퓨터 안티바이러스 소프트웨어 개발자로 활동하며 인기를 얻었음." },
+    { searchString: "전두환", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tchun.png\">대한민국 제11, 12대 대통령. 머리가 텅 빈 독재자." },
+    { searchString: "광주 시민 수백 명을 학살", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./t518.png\">1980년 5월 광주와 전남 일대의 시민들이 전두환의 불법적 권력 장악에 반대하는 민주화 운동을 벌이자, 전두환은 계엄군을 동원하여 항쟁을 진압하는 과정에서 수백 명의 시민들을 학살하였음. 오늘날까지 전라도에서 보수 정당이 지리멸렬한 주요 원인 중 하나." },
+    { searchString: "양대림", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tyang.png\">문재인을 살인미수 혐의로 검찰에 고발한 고등학교 3학년 유튜버." },
+    { searchString: "국가조찬기도회", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tprayer.png\">" },
+    { searchString: "촛불집회", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcandle.png\">박근혜의 퇴진을 요구하며 일어난 평화 시위. 2016년 말부터 2017년 초까지 누적 1600만 명 이상의 인원이 참여했음." },
+    { searchString: "김문수", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tmoonsoo.png\">노동운동으로 사회 활동을 시작해서 어느덧 기독교 우파가 된 특이한 인물." },
+    { searchString: "서울 공화국", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tseoul.png\">한국은 서울과 수도권에 거주하는 인구가 그 외 모든 지역의 인구를 다 합친 것보다 더 많음." },
+    { searchString: "대학로", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tdaehang.png\">한국 연극 문화의 중심지." },
+    { searchString: "광화문 광장", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgwang.png\">" },
+    { searchString: "강남역", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgangnam.png\">" },
+    { searchString: "국회의사당", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tassembly.png\">" },
+    { searchString: "굴욕적인 패배", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjongno.png\">그야말로 참패." },
+    { searchString: "심상정", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsim.png\">진보 성향인 정의당의 대통령 후보. 2017년 대통령 선거에도 출마해서 6%를 득표한 적 있음." },
+    { searchString: "택시운전사", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ttaxi.png\">이 사람이 보수의 당대표를 거쳐 대통령 선거까지 출마한다고? 소설 쓰시네." },
+    { searchString: "종로구가 경합", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./ttossup.png\">뭐, 8%포인트 차이를 '경합'으로 볼 수 있다면야..." },
+    { searchString: "색소폰을 부는 사진", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tboo.png\">황교안은 기타와 색소폰 등 6가지의 악기를 다룰 수 있다고 스스로 밝힌 바 있음." },
+    { searchString: "SNL 코리아", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsnl.png\">미국판 SNL의 포맷을 가져와서 2011년부터 방영되고 있는 코미디 프로그램." },
+    { searchString: "삼프로TV", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsampro.png\">경제와 금융 관련 이슈를 전반적으로 다루는 거대 유튜브 채널." },
+    { searchString: "오징어 게임", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsquid.png\">세계적으로 대흥행한 서바이벌 게임 드라마." },
+    { searchString: "찢는다는 욕설", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tslang.png\">2014년 이재명이 형수와 전화로 다투는 도중 한 욕설이 녹음되어 유출되면서 발생한 논란. 당시 이재명은 '여성기를 찢는다'는 표현을 사용하여 비판을 받았음." },
+    { searchString: "대장동 특혜 의혹", explanationText: "이재명은 경기도 성남시에서 시장으로 재임하던 시기 대장동 지역의 개발 사업을 벌였는데, 그 수익금 대부분이 화천대유라는 기업에게 돌아갔으며 이를 감추기 위한 로비가 진행되었다는 의혹." },
+    { searchString: "국회 난입", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tstorming.png\">2019년 12월 국회 앞에서 집회를 벌이던 보수 지지자들 중 일부가 불법으로 국회 진입을 시도하면서 경찰과 충돌한 사건." },
+    { searchString: "손으로 쳐서 뒤집는", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./trobotdog.gif\">" },
+    { searchString: "민주당 정치인들의 성범죄", explanationText: "박원순 전 서울시장의 비서 성추행 논란, 오거돈 전 부산시장의 여성 보좌진 성추행 사건 등." },
+    { searchString: "여성시대", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgirl.png\">20대 이상, 40대 이하의 여성들만 가입할 수 있는 커뮤니티. 2009년 개설되어 수십만 명의 회원을 보유하고 있음." },
+    { searchString: "여성가족부", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tgender.png\">여성정책 기획, 청소년 보호 및 가족기능 지원 등을 담당하는 정부 부처. 2015년 이후 본격화된 젠더 갈등을 해소하지 못하고 오히려 심화시킨다는 비판을 받았음." },
+    { searchString: "검찰개혁", explanationText: "한국 정치의 유서 깊은 주요 담론. 한국에서는 수사권과 기소권을 모두 검찰이 보유함에 따라 검찰의 권한이 매우 강력해졌고, 주로 민주당 측 정권들이 수사권을 분리하는 등 검찰을 약화시키기 위한 개혁을 추진하였음." },
+    { searchString: "노무현 전 대통령", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./troh.png\">대한민국 제16대 대통령." },
+    { searchString: "탄핵 시도", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./timpeach.png\">노무현 정부 시기 민주당은 기존의 새천년민주당과 노무현을 지지하는 열린우리당으로 갈라진 상태였는데, 2004년 노무현이 열린우리당을 지지하는 발언을 하자 새천년민주당이 보수 야당과 손잡고 노무현 대통령의 탄핵소추안을 국회에서 가결시킨 사건. 이후 노무현은 헌법재판소에서 탄핵이 기각되면서 직무에 복귀하였음." },
+    { searchString: "쉬지 않고 고개를 젓는", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tshake.gif\">" },
+    { searchString: "그린벨트", explanationText: "자연환경을 보존하기 위해서 설정되는 개발제한구역. 한국에서는 대부분의 주요 도시권 외곽에 그린벨트가 설치되어 있음." },
+    { searchString: "국군기무사령부", explanationText: "군내 방첩업무를 담당했던 국방부 직할부대. 계엄 모의 사건의 여파로 2018년 해체되었음." },
+    { searchString: "주사파", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjuche.png\">북한의 주체사상을 신봉하는 정신병자들. 1980-90년대 학생운동 세력의 핵심 중 하나였음." },
+    { searchString: "김대중", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tdj.png\">대한민국 제15대 대통령. 한국 최초로 민주적 정권교체를 이뤘음." },
+    { searchString: "삭발을 결행", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tshave.png\">한국 정치권에서 삭발은 결의를 드러내는 하나의 투쟁 수단으로 여겨짐." },
+    { searchString: "김영삼", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tys.png\">대한민국 제14대 대통령." },
+    { searchString: "김어준", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./toujoon.png\">딴지일보 총수 겸 김어준의 뉴스공장 진행자. 진보 진영의 여론 형성에 매우 큰 영향력을 행사함." },
+    { searchString: "계란말이를 만드는", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcook.png\">윤석열이 만든 계란말이." },
+    { searchString: "자기 손바닥에", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tking.png\">" },
+    { searchString: "2012년 대선", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./t2012.png\">박근혜와 문재인의 진검승부 끝에 박근혜가 제18대 대통령으로 당선되었음." },
+    { searchString: "박정희", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tpch.png\">대한민국 제5, 6, 7, 8, 9대 대통령. 성공한 경제 발전의 토대를 마련한 독재자." },
+    { searchString: "RE100", explanationText: "재생에너지 100%" },
+    { searchString: "삼성", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tsamsung.png\">시가총액 기준 대한민국에서 압도적 1위의 자리를 차지하고 있는 대기업." },
+    { searchString: "현대자동차", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./thyundai.png\">자동차 생산 등 제조업을 주력으로 삼는 대기업." },
+    { searchString: "평창 올림픽", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tolympic.png\">문재인 정부 초반인 2018년에 강원도 평창군에서 개최된 동계 올림픽. 대체로 성공적으로 운영되었다는 평가를 받았음." },
+    { searchString: "이석기", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tseokki.png\">2010년대 초반 통합진보당에서 국회의원으로 활동했던 정치인. 내란선동 혐의가 인정되어 징역 9년형을 선고받았음." },
+    { searchString: "유치원 3법", explanationText: "유치원의 회계 투명성 향상, 아동학대 방지, 급식 기준 강화 등을 골자로 하는 법안. 박용진이 2018년 해당 법안의 발의를 주도하였음." },
+    { searchString: "천안함 폭침 사건", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tcheonan.png\">대한민국 해군 함정인 천안함이 2010년 북한 잠수정의 어뢰에 공격당해 침몰한 사건. 이 사건으로 46명의 승조원이 전사하였음." },
+    { searchString: "이승만", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./trhee.png\">대한민국 초대 대통령. 한국전쟁 시기 나라를 이끌었으며, 연이은 개헌을 통하여 장기 독재를 시도한 끝에 1960년 부정선거 사태의 책임을 지고 하야함." },
+    { searchString: "진중권", explanationText: "<img src=\"https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./tjin.png\">'모두 까는' 성향으로 유명한 논객." }
+]
+
+
+document.head.innerHTML += `<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+<style>
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .overlay_window {
+    animation: fadeInScale 0.3s cubic-bezier(0.3, 1.2, 0.2, 1) forwards;
+    opacity: 0;
+    border-radius: 0.5rem;
+    box-shadow:
+      0 0 0.5em rgba(51, 14, 24, 0.5),
+      0 0 0.75em rgba(51, 14, 24, 0.3),
+      0 0 1em rgba(175, 49, 83, 0.1);
+    display: flex;
+    flex-flow: column;
+  }
+</style>`
+
+const gameWindow_player = document.getElementById("game_window");
+//use this function directly or put it in an event listener to start the music on the press of a certain button
+setupMusicPlayer();
+
+  document.getElementById("inner_window_1").children[0].innerHTML = `문재인 대통령은 대한민국 통치에 필요한 자질을 갖추고 있을까요?`
+  document.getElementById("inner_window_1").children[1].style.marginLeft = "-40px";
+  document.getElementById("inner_window_1").children[1].innerHTML = `<img src="https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./yopening.png" alt="Image" style="width: %;"><li>그럴 리가 있나요, 그는 사기꾼에 지나지 않습니다. 그렇기에 당신이 한국을 구하기 위해 싸우는 겁니다.</li><li>당신은 보수의 정당한 지도자, 부정선거 전도사, 그리고 국민의 선지자인 황교안입니다.</li><li>부정선거에 맞서 싸우고, 문재인 정권의 폭정을 드러내며, 끝내는 대통령직을 거머쥐십시오.</li><li>경고: 이 모드는 음모론자들의 관점에서 사회를 바라보고 있으며, 따라서 바로 위의 문장들을 포함해 완전히 거짓된 내용이 다수 등장합니다.</li><li>또한 본작 내 모든 서술 및 인물들의 행적은 대체역사를 기반으로 한 가상의 내용이며, 실존하는 특정인을 공격하는 것이 아님을 알립니다.</li>`
+  document.getElementById("game_start").innerHTML = "<strong>시작해봅시다.</strong>";
+
+let babyt = document.createElement('style');
+babyt.type = 'text/css';
+babyt.id = 'dynamic-style';
+
+babyt.innerHTML = `
+  .campaign_trail_start_emphasis {
+    background-color: #0D2133;
+  }
+      #recommended_reading_box { margin-left: auto; margin-right: auto; border-width: 2px; border-style: none none double; width: auto; background-image: url('https://raw.githubusercontent.com/FlongydOlson/OlsonMods/refs/heads/main/Y./recread.png'); height: 27em; }
+`;
+
+document.head.appendChild(babyt);

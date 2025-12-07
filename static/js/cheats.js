@@ -143,7 +143,7 @@ function activateCheatMenu() {
   };
 }
 
-function benefitChecker() {
+async function benefitChecker() {
   try {
     const formEl = document.querySelector("#question_form > form");
     if (!formEl) return;
@@ -381,6 +381,102 @@ function clickIfAvailable(i, noAnswerSet) {
 
 let autoplayCount = 0;
 let autoplayHandle = null;
+let autoplayWaitHandle = null;
+let autoplayPending = false;
+let autoplayRequested = false;
+
+function isQuestionSetReady() {
+  // if code 2 loaded or if there are real inputs on the page, consider ready
+  try {
+    if (typeof campaignTrail_temp !== "undefined" && campaignTrail_temp?.code2Loaded) return true;
+    if (document.querySelectorAll("input.game_answers").length > 0) return true;
+    const qf = document.querySelector("#question_form > form");
+    if (qf && qf.children && qf.children.length > 0) return true;
+  } catch (_) {}
+  return false;
+}
+
+function enableAutoplayUI(active = false) {
+  try {
+    const indicator = document.getElementById("cheatIndicator");
+    const menu = document.getElementById("autoplayMenu");
+    if (indicator) {
+      indicator.style.display = "block";
+      indicator.dataset.autoplayActive = active ? "1" : "0";
+      indicator.style.cursor = "pointer";
+      if (active) {
+        indicator.style.backgroundColor = "#ff9595";
+        indicator.textContent = "AUTO-PLAY ENABLED";
+      } else {
+        indicator.style.backgroundColor = "#fff59d";
+        indicator.textContent = "AUTO-PLAY PENDING...";
+      }
+    }
+    if (menu) menu.style.display = "inline-block";
+  } catch (_) {}
+}
+
+function disableAutoplayUI() {
+  try {
+    const indicator = document.getElementById("cheatIndicator");
+    const menu = document.getElementById("autoplayMenu");
+    if (indicator) {
+      indicator.style.display = "block";
+      indicator.style.backgroundColor = "#9e9e9e";
+      indicator.style.cursor = "pointer";
+      indicator.textContent = "AUTO-PLAY DISABLED";
+      delete indicator.dataset.autoplayActive;
+    }
+    if (menu) menu.style.display = "none";
+  } catch (_) {}
+}
+
+function stopAutoplay() {
+  autoplayRequested = false;
+  
+  if (autoplayWaitHandle != null) {
+    clearInterval(autoplayWaitHandle);
+    autoplayWaitHandle = null;
+  }
+  
+  if (autoplayHandle != null) {
+    clearInterval(autoplayHandle);
+    autoplayHandle = null;
+  }
+  
+  autoplayPending = false;
+  disableAutoplayUI();
+}
+
+function startAutoplayWhenReady() {
+  if (autoplayRequested || autoplayPending || autoplayHandle != null) return;
+  
+  autoplayPending = true;
+  autoplayRequested = true;
+  enableAutoplayUI(false);
+
+  if (isQuestionSetReady()) {
+    setTimeout(() => {
+      autoplayHandle = setInterval(autoplay, 10);
+      autoplayPending = false;
+      enableAutoplayUI(true);
+    }, 1500);
+    return;
+  }
+
+  autoplayWaitHandle = setInterval(() => {
+    if (isQuestionSetReady()) {
+      clearInterval(autoplayWaitHandle);
+      autoplayWaitHandle = null;
+      
+      setTimeout(() => {
+        autoplayHandle = setInterval(autoplay, 10);
+        autoplayPending = false;
+        enableAutoplayUI(true);
+      }, 3000);
+    }
+  }, 100);
+}
 
 window.addEventListener("keydown", (e) => {
   if (!e.repeat) {
@@ -391,17 +487,21 @@ window.addEventListener("keydown", (e) => {
     } else if (e.key == "@") {
       autoplayCount++;
       if (autoplayCount % 3 == 0) {
-        document.getElementById("cheatIndicator").style.display = "block";
-        document.getElementById("autoplayMenu").style.display = "inline-block";
-        autoplayHandle = setInterval(autoplay, 10);
+        startAutoplayWhenReady();
       }
+    } else if (e.key == "$") {
+      stopAutoplay();
     }
-    else if (e.key == "$") {
-      if(autoplayHandle != null) {
-        document.getElementById("cheatIndicator").style.display = "none";
-        clearInterval(autoplayHandle);
-        autoplayHandle = null;
-      }
+  }
+});
+
+// click handler for the autoplay indicator banner
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.id === "cheatIndicator") {
+    if (autoplayRequested || autoplayHandle != null) {
+      stopAutoplay();
+    } else {
+      startAutoplayWhenReady();
     }
   }
 });

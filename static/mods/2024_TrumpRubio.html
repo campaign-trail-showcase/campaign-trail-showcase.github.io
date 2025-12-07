@@ -10393,6 +10393,12 @@ function ctsAchievement(achievement, difficultyChecker = true){
 	}
 }
 
+function cheatAchievement(achievement){
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
 const gameThemes = {
   "AmericanHistoryUSA" : function() {
       corrr = '\n              <h2>THE CAMPAIGN TRAIL</h2>\n            '; 
@@ -10491,6 +10497,7 @@ e=campaignTrail_temp // this is redundant, but Decstar uses this because it look
 campaignTrail_temp.cyoa = true
 ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 campaignTrail_temp.player_answers = [];
+var cakewalk = false;
 
 if (campaignTrail_temp.global_parameter_json[0].fields.question_count == 25 && campaignTrail_temp.staticQuestions == true) {
     // Basically just a static question list
@@ -10845,8 +10852,11 @@ cyoAdventure = function (a) {
     ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 // Q1 - 6, 7, 7
 // Q2 - 14, 15, 18
+if(campaignTrail_temp.difficulty_level_multiplier >= 1.22){
+    cakewalk = true;
+}
 
-if (campaignTrail_temp.candidate_json[1].fields.color_hex == '#052e71') {
+if (campaignTrail_temp.candidate_json[12].fields.color_hex == '#052e71') {
   const customStyling = document.createElement("style");
   customStyling.innerHTML = `
   #campaign_sign {
@@ -11022,9 +11032,8 @@ if(out=="win" && e.player_answers.includes(5016) && e.player_answers.includes(20
      ctsAchievement("Posted It Again Award");
   }  
   
-  if(out=="lose" && campaignTrail_temp.difficulty_level_multiplier >= 1.33){
-      ctsAchievement("Teflon Don? More like Tesla Don.");
-  }
+if(quickstats[0] < 269 && cakewalk == true){    cheatAchievement("Teflon Don? More like Tesla Don.");
+}
   
 if (quickstats[0] < 3) {
  setImage("https://itsastronomical.com/assets/2024/endings/trumpmao.png");

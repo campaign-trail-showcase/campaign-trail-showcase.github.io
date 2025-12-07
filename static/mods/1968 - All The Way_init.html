@@ -667,8 +667,18 @@ window.updateUI=updateUI
 
 let getAudioAmplitude = (time) => 0;
 
+async function isBraveBrowser() {
+  if (window.navigator.brave && await window.navigator.brave.isBrave()) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 async function decodeAudio(audioSrc) {
 try {
+  if (await isBraveBrowser()) return null; 
+
   const audioContext = new AudioContext();
   const response = await fetch(audioSrc);
   const arrayBuffer = await response.arrayBuffer();
@@ -1083,7 +1093,8 @@ padding-top:15px;
 }
 .is-vertical #volumeSlider {
 width: 16px;
-appearance: slider-vertical;
+writing-mode: vertical-rl;
+direction: rtl;
 }
 
 #controls {

@@ -10396,6 +10396,12 @@ function ctsAchievement(achievement, difficultyChecker = true){
 	}
 }
 
+function cheatAchievement(achievement){
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
 const gameThemes = {
   "AmericanHistoryUSA" : function() {
       corrr = '\n              <h2>THE CAMPAIGN TRAIL</h2>\n            '; 
@@ -10494,6 +10500,7 @@ e=campaignTrail_temp // this is redundant, but Decstar uses this because it look
 campaignTrail_temp.cyoa = true
 ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 campaignTrail_temp.player_answers = [];
+var cakewalk = false;
 
 if (campaignTrail_temp.global_parameter_json[0].fields.question_count == 25 && campaignTrail_temp.staticQuestions == true) {
     // Basically just a static question list
@@ -10849,7 +10856,12 @@ cyoAdventure = function (a) {
 // Q1 - 6, 7, 7
 // Q2 - 14, 15, 18
 
-if (campaignTrail_temp.candidate_json[1].fields.color_hex == '#052e71') {
+if (campaignTrail_temp.difficulty_level_multiplier >= 1.22){
+    cakewalk = true;
+    console.log("cakewalk is set to true");
+}
+
+if (campaignTrail_temp.candidate_json[12].fields.color_hex == '#052e71') {
   const customStyling = document.createElement("style");
   customStyling.innerHTML = `
   #campaign_sign {
@@ -11024,8 +11036,9 @@ if (out=="win" && stcount(demStates, 201) && stcount(trumpStates, 200)) {
    ctsAchievement("Posted It Again Award");
 }  
 
-if(out=="lose" && campaignTrail_temp.difficulty_level_multiplier >= 1.3){
-    ctsAchievement("Teflon Don? More like Tesla Don.");
+if(quickstats[0] < 269 && cakewalk == true){
+    console.log("you should get the cakewalk achievement now");
+    cheatAchievement("Teflon Don? More like Tesla Don.");
 }
 
 if (quickstats[0] < 3) {
