@@ -2223,7 +2223,7 @@ function renderOptions(electionId, candId, runId) {
     ) {
       console.log('ttrying');
       try {
-        $("#game_window").load(aaa, () => {
+        $("#game_window").load(aaa, async () => {
           const cands = PROPS.CANDIDATES;
           const year = e.temp_election_list.find((f) => stringsEqual(f.id, e.election_id)).display_year;
           const cand = cands.get(String(e.candidate_id)).last_name;
@@ -2237,13 +2237,38 @@ function renderOptions(electionId, candId, runId) {
               tempFuncO(e);
             });
           } else {
-            executeMod(localStorage.getItem(`${customMod}_code2`), {
-              campaignTrail_temp,
-              window,
-              document,
-              $,
-              jQuery
-            });
+            // check memory cache
+            let code2 = window.campaignTrail_temp ? window.campaignTrail_temp.custom_code_2 : null;
+            
+            // check localStorage
+            if (!code2) {
+                code2 = localStorage.getItem(`${customMod}_code2`);
+            }
+            
+            // check indexedDB
+            if (!code2 && window.getModFromDB) {
+                try {
+                    const modData = await window.getModFromDB(customMod);
+                    if (modData && modData.code2) {
+                        code2 = modData.code2;
+                    }
+                } catch(e) {
+                    console.error("Could not fetch code 2 from DB:", e);
+                }
+            }
+
+            if (code2) {
+                executeMod(code2, {
+                  campaignTrail_temp,
+                  window,
+                  document,
+                  $,
+                  jQuery
+                });
+            } else {
+                console.error("Code 2 was not found for custom mod: " + customMod);
+            }
+            
             tempFuncO(e);
           }
 
