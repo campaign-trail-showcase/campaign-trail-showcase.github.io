@@ -204,12 +204,23 @@ async function migrateLocalStorageToIndexedDB() {
     
     if (code1) {
       await saveModToDB(modName, code1, code2 || "");
+      
+      // check if DB is active, then remove legacy data to free up quota
+      if (useIndexedDB && db) {
+          localStorage.removeItem(modName + "_code1");
+          localStorage.removeItem(modName + "_code2");
+      }
+      
       console.log(`Migrated ${modName} to IndexedDB`);
     }
   }
   
-  localStorage.setItem("indexedDBMigrationDone", "true");
-  console.log("Migration complete!");
+  try {
+      localStorage.setItem("indexedDBMigrationDone", "true");
+      console.log("Migration complete!");
+  } catch (e) {
+      console.warn("Could not set migration flag after cleanup:", e);
+  }
 }
 
 try {
