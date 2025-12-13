@@ -14013,6 +14013,94 @@ let changeChartRunning = false;
 let mcaHeightRunning = false;
 let processedNodes = new Set();
 
+const touched = new WeakSet();
+const prevContent = new WeakMap();
+
+const replaceTextContent = (el, find, replace) => {
+    el.textContent = el.textContent.replace(find, replace);
+}
+
+const changeTextObs = new MutationObserver(() => {
+    const els = [
+        { selector: "#state_info > h3", change: (el) => el.textContent = "SEAT SUMMARY" },
+        { selector: "#state_info > p:nth-of-type(2)", change: (el) => replaceTextContent(el, "Electoral Votes:", "Alcade:") },
+        { selector: "#pvswitcher", change: (el) => replaceTextContent(el, "State", "Municipio"), persist: true },
+        { selector: "#ev_est", change: (el) => replaceTextContent(el, "Electoral Vote", "Total Alcadeships:") },
+    ];
+	
+	const overallResult = document.getElementById('overall_result');
+    if (overallResult && !processedNodes.has(overallResult)) {
+        overallResult.style.overflow = 'auto';
+        const buttons = document.querySelectorAll('#view_electoral_map, #answer_select_button, #ok_button, #final_election_map_button');
+        const handleClick = () => {
+            overallResult.style.overflow = 'auto';
+        };
+        buttons.forEach(button => button.addEventListener('click', handleClick));
+        processedNodes.add(overallResult);
+    }
+
+    // changechart
+    if (!changeChartRunning) {
+        changeChartRunning = true;
+        const elementIDs = ["overall_vote_statistics", "state_result_data_summary", "overall_details_container"];
+        for(let id of elementIDs) {
+            let element = document.getElementById(id);
+            if (element && !processedNodes.has(element)) {
+                let overallthing = element.innerHTML;
+                overallthing = overallthing.replace("Electoral Votes","Municipios Won");
+				overallthing = overallthing.replace("Candidate","Candidate - Party");
+                element.innerHTML = overallthing;
+                processedNodes.add(element);
+            }
+        }
+        changeChartRunning = false;
+    }
+ // mcaHeight
+    if (!mcaHeightRunning) {
+        mcaHeightRunning = true;
+        let results_container = document.getElementById("results_container");
+        let chart = document.getElementById("myChart");
+        if (results_container && !processedNodes.has(results_container)) {
+            if (!chart){
+                results_container.style.height = "98%";
+                results_container.style.overflow = "scroll";
+            } else {
+                let mca = document.getElementById("main_content_area");
+                if (mca) {
+                    mca.style.height = "80%";
+                }
+            }
+            processedNodes.add(results_container);
+        }
+        mcaHeightRunning = false;
+    }
+
+    for (const { selector, change, persist = false } of els) {
+        const el = document.querySelector(selector);
+        if (!el) continue;
+
+        if (persist) {
+            const prev = prevContent.get(el);
+            if (el.textContent !== prev) {
+                change(el);
+                prevContent.set(el, el.textContent);
+            }
+        }
+        else if (!touched.has(el)) {
+            change(el);
+            touched.add(el);
+        }
+    }
+});
+
+const target = document.getElementById("game_window");
+
+changeTextObs.observe(target, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+});
+
 async function handleMutations(mutationsList, observer) {
     if (observerRunning) return;
     observerRunning = true;
@@ -14073,47 +14161,6 @@ async function handleMutations(mutationsList, observer) {
     observerRunning = false;
 }
 
-const touched = new WeakSet();
-const prevContent = new WeakMap();
-
-const replaceTextContent = (el, find, replace) => {
-    el.textContent = el.textContent.replace(find, replace);
-}
-
-const changeTextObs = new MutationObserver(() => {
-    const els = [
-        { selector: "#state_info > h3", change: (el) => el.textContent = "SEAT SUMMARY" },
-        { selector: "#state_info > p:nth-of-type(2)", change: (el) => replaceTextContent(el, "Electoral Votes:", "Alcade:") },
-        { selector: "#pvswitcher", change: (el) => replaceTextContent(el, "State", "Municipio"), persist: true },
-        { selector: "#ev_est", change: (el) => replaceTextContent(el, "Electoral Vote", "Total Alcadeships:") },
-    ];
-
-    for (const { selector, change, persist = false } of els) {
-        const el = document.querySelector(selector);
-        if (!el) continue;
-
-        if (persist) {
-            const prev = prevContent.get(el);
-            if (el.textContent !== prev) {
-                change(el);
-                prevContent.set(el, el.textContent);
-            }
-        }
-        else if (!touched.has(el)) {
-            change(el);
-            touched.add(el);
-        }
-    }
-});
-
-const target = document.getElementById("game_window");
-
-changeTextObs.observe(target, {
-    childList: true,
-    subtree: true,
-    characterData: true,
-});
-	  
 let singleObserver = new MutationObserver(handleMutations);
 singleObserver.observe(document.documentElement, { childList: true, subtree: true });
 
@@ -14587,6 +14634,7 @@ if (!element) {
 	controlElement.id = 'controlElement';
 	document.body.appendChild(controlElement);
 }
+
 
 
 
