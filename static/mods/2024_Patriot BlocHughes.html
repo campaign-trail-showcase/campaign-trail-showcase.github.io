@@ -14073,6 +14073,47 @@ async function handleMutations(mutationsList, observer) {
     observerRunning = false;
 }
 
+const touched = new WeakSet();
+const prevContent = new WeakMap();
+
+const replaceTextContent = (el, find, replace) => {
+    el.textContent = el.textContent.replace(find, replace);
+}
+
+const changeTextObs = new MutationObserver(() => {
+    const els = [
+        { selector: "#state_info > h3", change: (el) => el.textContent = "SEAT SUMMARY" },
+        { selector: "#state_info > p:nth-of-type(2)", change: (el) => replaceTextContent(el, "Electoral Votes:", "Alcade:") },
+        { selector: "#pvswitcher", change: (el) => replaceTextContent(el, "State", "Municipio"), persist: true },
+        { selector: "#ev_est", change: (el) => replaceTextContent(el, "Electoral Vote", "Total Alcadeships:") },
+    ];
+
+    for (const { selector, change, persist = false } of els) {
+        const el = document.querySelector(selector);
+        if (!el) continue;
+
+        if (persist) {
+            const prev = prevContent.get(el);
+            if (el.textContent !== prev) {
+                change(el);
+                prevContent.set(el, el.textContent);
+            }
+        }
+        else if (!touched.has(el)) {
+            change(el);
+            touched.add(el);
+        }
+    }
+});
+
+const target = document.getElementById("game_window");
+
+changeTextObs.observe(target, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+});
+	  
 let singleObserver = new MutationObserver(handleMutations);
 singleObserver.observe(document.documentElement, { childList: true, subtree: true });
 
@@ -14546,6 +14587,7 @@ if (!element) {
 	controlElement.id = 'controlElement';
 	document.body.appendChild(controlElement);
 }
+
 
 
 
