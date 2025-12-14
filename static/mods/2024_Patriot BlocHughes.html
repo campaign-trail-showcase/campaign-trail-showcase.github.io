@@ -14013,6 +14013,94 @@ let changeChartRunning = false;
 let mcaHeightRunning = false;
 let processedNodes = new Set();
 
+const touched = new WeakSet();
+const prevContent = new WeakMap();
+
+const replaceTextContent = (el, find, replace) => {
+    el.textContent = el.textContent.replace(find, replace);
+}
+
+const changeTextObs = new MutationObserver(() => {
+    const els = [
+        { selector: "#state_info > h3", change: (el) => el.textContent = "SEAT SUMMARY" },
+        { selector: "#state_info > p:nth-of-type(2)", change: (el) => replaceTextContent(el, "Electoral Votes:", "Alcade:") },
+        { selector: "#pvswitcher", change: (el) => replaceTextContent(el, "State", "Municipio"), persist: true },
+        { selector: "#ev_est", change: (el) => replaceTextContent(el, "Electoral Vote", "Total Alcadeships:") },
+    ];
+	
+	const overallResult = document.getElementById('overall_result');
+    if (overallResult && !processedNodes.has(overallResult)) {
+        overallResult.style.overflow = 'auto';
+        const buttons = document.querySelectorAll('#view_electoral_map, #answer_select_button, #ok_button, #final_election_map_button');
+        const handleClick = () => {
+            overallResult.style.overflow = 'auto';
+        };
+        buttons.forEach(button => button.addEventListener('click', handleClick));
+        processedNodes.add(overallResult);
+    }
+
+    // changechart
+    if (!changeChartRunning) {
+        changeChartRunning = true;
+        const elementIDs = ["overall_vote_statistics", "state_result_data_summary", "overall_details_container"];
+        for(let id of elementIDs) {
+            let element = document.getElementById(id);
+            if (element && !processedNodes.has(element)) {
+                let overallthing = element.innerHTML;
+                overallthing = overallthing.replace("Electoral Votes","Municipios Won");
+				overallthing = overallthing.replace("Candidate","Candidate - Party");
+                element.innerHTML = overallthing;
+                processedNodes.add(element);
+            }
+        }
+        changeChartRunning = false;
+    }
+ // mcaHeight
+    if (!mcaHeightRunning) {
+        mcaHeightRunning = true;
+        let results_container = document.getElementById("results_container");
+        let chart = document.getElementById("myChart");
+        if (results_container && !processedNodes.has(results_container)) {
+            if (!chart){
+                results_container.style.height = "98%";
+                results_container.style.overflow = "scroll";
+            } else {
+                let mca = document.getElementById("main_content_area");
+                if (mca) {
+                    mca.style.height = "80%";
+                }
+            }
+            processedNodes.add(results_container);
+        }
+        mcaHeightRunning = false;
+    }
+
+    for (const { selector, change, persist = false } of els) {
+        const el = document.querySelector(selector);
+        if (!el) continue;
+
+        if (persist) {
+            const prev = prevContent.get(el);
+            if (el.textContent !== prev) {
+                change(el);
+                prevContent.set(el, el.textContent);
+            }
+        }
+        else if (!touched.has(el)) {
+            change(el);
+            touched.add(el);
+        }
+    }
+});
+
+const target = document.getElementById("game_window");
+
+changeTextObs.observe(target, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+});
+
 async function handleMutations(mutationsList, observer) {
     if (observerRunning) return;
     observerRunning = true;
@@ -14167,7 +14255,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                     used = true;
                     imgg = document.getElementsByClassName("person_image")[0];
                     if (imgg != null) {
-                        imgg.src = "https://imgur.com/9CfV7N9";
+                        imgg.src = "https://imgur.com/9CfV7N9.png";
                     }
                 }, 100);
 				unlockAchievement("False Prophet");
@@ -14258,7 +14346,7 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
 	return "<h3>Glory, Glory, Hallelujah!</h3><p>\"<i>\Even when opportunity knocks, a man still has to get up off his seat and open the door.\"</i> - <b>Douglas MacArthur</b></p><p><i>\"O’Malley election confirmed by Supreme Court after stand-off, tensions begin to dissipate.\"</i> - <b>San Juan Star</b></p><p><i>\"Texans express interest in free movement, common market.\"</i> - <b>International Herald Tribune</b></p><p><i>\"CS opens Restitution Tribunal, émigrés begin filing claims.\"</i> - <b>Christian Science Monitor</b></p><p>At 12:00, 4 July, 2025, the pall bearers lift the casket from its funerary carriage and carry it to its final destination.<p>After more than 80 years in exile, Douglas MacArthur has at last arrived in Arlington. With more than half the heads of state in America in attendance and an aged Arthur MacArthur watching from a wheelchair, Presidents Grammer and Crist raise their respective flags to flutter in the summer breeze.<p>The old United States may be buried, but for the first time since the Civil War, its people seem to be on the road to another union."
 	}
-	else if (quickstats[1] >= 56) {
+	else if (quickstats[1] >= 54) {
             if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14269,7 +14357,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                 }, 100);
 				unlockAchievement("Cheers to That");
             }
-    return "<h3>ISLANDER WAVE DROWNS DALMAU</h3><p><li>\"</i>I was brought up to never lie. Sure, I have. But in the final mix, the lies I’ve told are far outweighed by the truths I’ve lived.\"</i> - Kelsey Grammer</p><p>This is an astonishing victory! As the final votes are tallied, it quickly becomes apparent that you’ve won a landslide victory. If there were any doubts about your candidacy before, they’ve been wiped out by a performance not equalled since the 1988 election. </p>Whether it was your own appeal, the NPP’s disaster year or Dalmau’s inability to control his campaign, the result is clear. You now stand nigh unopposed in your dreams of  facilitating \"government of the people, for the people, by the people\". </p>The time has come for you to stamp your vision on the country. Let the chips fall where they may!"
+    return "<h3>ISLANDER WAVE DROWNS DALMAU</h3><p>\"<i>\I was brought up to never lie. Sure, I have. But in the final mix, the lies I’ve told are far outweighed by the truths I’ve lived.\"</i> - Kelsey Grammer</p><p>This is an astonishing victory! As the final votes are tallied, it quickly becomes apparent that you’ve won a landslide victory. If there were any doubts about your candidacy before, they’ve been wiped out by a performance not equalled since the 1988 election. </p>Whether it was your own appeal, the NPP’s disaster year or Dalmau’s inability to control his campaign, the result is clear. You now stand nigh unopposed in your dreams of  facilitating \"government of the people, for the people, by the people\". </p>The time has come for you to stamp your vision on the country. Let the chips fall where they may!"
 	} else if (aa[0].candidate == 200) {
         if (used != true) {
             setInterval(function () {
@@ -14546,6 +14634,9 @@ if (!element) {
 	controlElement.id = 'controlElement';
 	document.body.appendChild(controlElement);
 }
+
+
+
 
 
 
