@@ -44,7 +44,13 @@ function addColor() { // Change color checkbox, thank you astro
                 c[1].fields.color_hex = '#960218';
                 c[1].fields.secondary_color_hex = '#0222c4';
             }
-        });
+                  else {
+                c[0].fields.color_hex = '#8E3B3B';
+                c[0].fields.secondary_color_hex = '#D17A7A';
+                c[1].fields.color_hex = '#3A5DAE';
+                c[1].fields.secondary_color_hex = '#6F9EEB';
+        }
+             });
 
         // Adjust difficulty header safely
         var difficultyForm = document.querySelector('form[name="difficulty_level_selection"]');
@@ -2177,5 +2183,6 @@ tooltipList = [
   {searchString: "Placeholder 2", explanationText: "<img src=https://i.imgur.com/PUT IMGUR LINK HERE> Put the Text Here"}
       
 ];
+
 
 
