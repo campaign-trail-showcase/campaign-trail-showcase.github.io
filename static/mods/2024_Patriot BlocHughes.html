@@ -13450,14 +13450,14 @@ cyoAdventure = function (a) {
 	console.log("ans is:")
 	console.log(ans)
 	 if (ans === 5072 ) {
-        e.questions_json.splice(16, 0 , getQuestionFromPk(10220))
+        e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10220))
         e.global_parameter_json[0].fields.question_count++
         console.log("golden passport 1")   
         console.log("american_trilogy_answers count:")
         console.log(american_trilogy_answers)
     }
 	if (ans === 5077 ) {
-        e.questions_json.splice(20, 0 , getQuestionFromPk(10221))
+        e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10221))
         e.global_parameter_json[0].fields.question_count++
         console.log("golden passport 2")   
         console.log("american_trilogy_answers count:")
@@ -13470,7 +13470,7 @@ cyoAdventure = function (a) {
         console.log(american_trilogy_answers)
     }
 	if (ans === 5097 ) {
-        e.questions_json.splice(21, 0 , getQuestionFromPk(10222))
+        e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10222))
         e.global_parameter_json[0].fields.question_count++
         console.log("CS trade")   
         console.log("american_trilogy_answers count:")
@@ -13486,7 +13486,7 @@ cyoAdventure = function (a) {
         console.log(dixie_normalisation_answers)
     }
 	if (ans === 5031 ) {
-        e.questions_json.splice(10, 0 , getQuestionFromPk(10223))
+        e.questions_json.splice(campaignTrail_temp.question_number + 2, 0 , getQuestionFromPk(10223))
         e.global_parameter_json[0].fields.question_count++
         console.log("Cross-Caribbean intel")   
         console.log("american_trilogy_answers count:")
@@ -13515,7 +13515,7 @@ cyoAdventure = function (a) {
         console.log(dixie_normalisation_answers)
     }
 	if ( ( american_trilogy_answers === 4 ) && !AmericanTrilogyPrecondition ) {
-        e.questions_json.splice(25, 0 , getQuestionFromPk(10225))
+        e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10225))
         e.global_parameter_json[0].fields.question_count++
 		AmericanTrilogyPrecondition = true;
         console.log("Arlington meeting")   
@@ -13528,7 +13528,7 @@ cyoAdventure = function (a) {
     }
 	if (ans === 5032) {
         console.log("Pacific States sympathy") 
-        e.questions_json.splice(7, 0 , getQuestionFromPk(10271))
+        e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10271))
         e.global_parameter_json[0].fields.question_count++
     }
 	if (ans === 50321) {
@@ -13550,7 +13550,7 @@ cyoAdventure = function (a) {
 		console.log(zaibatsu_deal_answers)		
     } 
 	if ( ( zaibatsu_deal_answers === 3 ) && !ZaibatsuDeal ) {
-        e.questions_json.splice(22, 0 , getQuestionFromPk(10272))
+        e.questions_json.splice(campaignTrail_temp.question_number + 2, 0 , getQuestionFromPk(10272))
         e.global_parameter_json[0].fields.question_count++
 		ZaibatsuDeal = true;
         console.log("zaibatsu_deal_offer") 
@@ -13580,7 +13580,7 @@ cyoAdventure = function (a) {
         console.log(carlist_cooperation_answers)
     }
 	if ( ( mitteleuropa_agrideal_answers === 3 ) && !MitteleuropaAgriDeal ) {
-        e.questions_json.splice(22, 0 , getQuestionFromPk(10291))
+        e.questions_json.splice(campaignTrail_temp.question_number + 2, 0 , getQuestionFromPk(10291))
         e.global_parameter_json[0].fields.question_count++
 		MitteleuropaAgriDeal = true;
         console.log("mitteleuropa_agrideal_offer") 
@@ -13652,7 +13652,7 @@ cyoAdventure = function (a) {
         console.log(prot_endorse_answers)
     }
 	if ( ( prot_endorse_answers === 2 ) && !ProtsEndorsed ) {
-		e.questions_json.splice(13, 0 , getQuestionFromPk(10381))
+		e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10381))
         e.global_parameter_json[0].fields.question_count++
 		ProtsEndorsed = true;
 		console.log("Hughes Interfaith")
@@ -13673,7 +13673,7 @@ cyoAdventure = function (a) {
         console.log(interfaith_answers)
     }
 	if ( ( interfaith_answers === 2 ) && !RastasEndorsed ) {
-		e.questions_json.splice(22, 0 , getQuestionFromPk(10211))
+		e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10211))
 		e.global_parameter_json[0].fields.question_count++
 		RastasEndorsed = true;
 		console.log("Rastas Happy")
@@ -13692,7 +13692,7 @@ cyoAdventure = function (a) {
 		unlockAchievement("The Business of America is Business");
     }
 	if ( ( rainbow_democracy_answers === 8 ) && !RainbowDemocracy ) {
-        e.questions_json.splice(29, 0 , getQuestionFromPk(10341))
+        e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10341))
         e.global_parameter_json[0].fields.question_count++
 		RainbowDemocracy = true;
         console.log("rainbow_democracy_answers") 
@@ -13736,7 +13736,7 @@ cyoAdventure = function (a) {
         console.log(infinita_tristeza_answers)
     }
 	if ( ( infinita_tristeza_answers === 6 ) && !InfinitaTristeza ) {
-        e.questions_json.splice(15, 0 , getQuestionFromPk(10361))
+        e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10361))
         e.global_parameter_json[0].fields.question_count++
 		InfinitaTristeza = true;
         console.log("infinita_tristeza_answers") 
@@ -13753,7 +13753,7 @@ cyoAdventure = function (a) {
 		campaignTrail_temp.candidate_json[5]["fields"].first_name = "Mexican Intelligence -";
         campaignTrail_temp.candidate_json[5]["fields"].last_name = "Leftist Insurgents";
 		switcheroo_coup();
-        campaignTrail_temp.question_number = 27;
+		e.question_number = e.questions_json.length - 1;
     }
 	if (ans === 5017) {
         caesarism_answers++
@@ -13807,12 +13807,16 @@ cyoAdventure = function (a) {
         console.log(caesarism_answers)
     }
 	if ( ( caesarism_answers === 8 ) && !ElPresidentePrecondition ) {
-		e.questions_json.splice(23, 0 , getQuestionFromPk(10251))
+		e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10251))
         e.global_parameter_json[0].fields.question_count++
 		ElPresidentePrecondition = true;
         console.log("caesarism_answers") 
 		console.log("caesarism_answers count")   
 		console.log(caesarism_answers)
+    }
+	if (ans === 50841 ) {
+		ElPresidente = true;
+		console.log("Self Coup ending") 
     }
 	if (ans === 5129) {
         karen_mad_answers++
@@ -13821,7 +13825,7 @@ cyoAdventure = function (a) {
         console.log(karen_mad_answers)
     }
 	if ( ( karen_mad_answers === 3 ) && !KarenLeft ) {
-		e.questions_json.splice(15, 0 , getQuestionFromPk(160001))
+		e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(160001))
         e.global_parameter_json[0].fields.question_count++
 		KarenLeft = true;
         console.log("karen_mad_answers") 
@@ -13877,7 +13881,7 @@ cyoAdventure = function (a) {
         console.log(carlist_cooperation_answers)
     }
 	if ( ( carlist_cooperation_answers === 8 ) && !CarlistCooperationPrecondition ) {
-		e.questions_json.splice(26, 0 , getQuestionFromPk(10293))
+		e.questions_json.splice(campaignTrail_temp.question_number + 1, 0 , getQuestionFromPk(10293))
         e.global_parameter_json[0].fields.question_count++
 		CarlistCooperationPrecondition = true;
         console.log("carlist_cooperation_answers") 
@@ -14008,6 +14012,94 @@ let observerRunning = false;
 let changeChartRunning = false;
 let mcaHeightRunning = false;
 let processedNodes = new Set();
+
+const touched = new WeakSet();
+const prevContent = new WeakMap();
+
+const replaceTextContent = (el, find, replace) => {
+    el.textContent = el.textContent.replace(find, replace);
+}
+
+const changeTextObs = new MutationObserver(() => {
+    const els = [
+        { selector: "#state_info > h3", change: (el) => el.textContent = "SEAT SUMMARY" },
+        { selector: "#state_info > p:nth-of-type(2)", change: (el) => replaceTextContent(el, "Electoral Votes:", "Alcade:") },
+        { selector: "#pvswitcher", change: (el) => replaceTextContent(el, "State", "Municipio"), persist: true },
+        { selector: "#ev_est", change: (el) => replaceTextContent(el, "Electoral Vote", "Total Alcadeships:") },
+    ];
+	
+	const overallResult = document.getElementById('overall_result');
+    if (overallResult && !processedNodes.has(overallResult)) {
+        overallResult.style.overflow = 'auto';
+        const buttons = document.querySelectorAll('#view_electoral_map, #answer_select_button, #ok_button, #final_election_map_button');
+        const handleClick = () => {
+            overallResult.style.overflow = 'auto';
+        };
+        buttons.forEach(button => button.addEventListener('click', handleClick));
+        processedNodes.add(overallResult);
+    }
+
+    // changechart
+    if (!changeChartRunning) {
+        changeChartRunning = true;
+        const elementIDs = ["overall_vote_statistics", "state_result_data_summary", "overall_details_container"];
+        for(let id of elementIDs) {
+            let element = document.getElementById(id);
+            if (element && !processedNodes.has(element)) {
+                let overallthing = element.innerHTML;
+                overallthing = overallthing.replace("Electoral Votes","Municipios Won");
+				overallthing = overallthing.replace("Candidate","Candidate - Party");
+                element.innerHTML = overallthing;
+                processedNodes.add(element);
+            }
+        }
+        changeChartRunning = false;
+    }
+ // mcaHeight
+    if (!mcaHeightRunning) {
+        mcaHeightRunning = true;
+        let results_container = document.getElementById("results_container");
+        let chart = document.getElementById("myChart");
+        if (results_container && !processedNodes.has(results_container)) {
+            if (!chart){
+                results_container.style.height = "98%";
+                results_container.style.overflow = "scroll";
+            } else {
+                let mca = document.getElementById("main_content_area");
+                if (mca) {
+                    mca.style.height = "80%";
+                }
+            }
+            processedNodes.add(results_container);
+        }
+        mcaHeightRunning = false;
+    }
+
+    for (const { selector, change, persist = false } of els) {
+        const el = document.querySelector(selector);
+        if (!el) continue;
+
+        if (persist) {
+            const prev = prevContent.get(el);
+            if (el.textContent !== prev) {
+                change(el);
+                prevContent.set(el, el.textContent);
+            }
+        }
+        else if (!touched.has(el)) {
+            change(el);
+            touched.add(el);
+        }
+    }
+});
+
+const target = document.getElementById("game_window");
+
+changeTextObs.observe(target, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+});
 
 async function handleMutations(mutationsList, observer) {
     if (observerRunning) return;
@@ -14163,7 +14255,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                     used = true;
                     imgg = document.getElementsByClassName("person_image")[0];
                     if (imgg != null) {
-                        imgg.src = "https://imgur.com/9CfV7N9";
+                        imgg.src = "https://imgur.com/9CfV7N9.png";
                     }
                 }, 100);
 				unlockAchievement("False Prophet");
@@ -14254,7 +14346,7 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
 	return "<h3>Glory, Glory, Hallelujah!</h3><p>\"<i>\Even when opportunity knocks, a man still has to get up off his seat and open the door.\"</i> - <b>Douglas MacArthur</b></p><p><i>\"O’Malley election confirmed by Supreme Court after stand-off, tensions begin to dissipate.\"</i> - <b>San Juan Star</b></p><p><i>\"Texans express interest in free movement, common market.\"</i> - <b>International Herald Tribune</b></p><p><i>\"CS opens Restitution Tribunal, émigrés begin filing claims.\"</i> - <b>Christian Science Monitor</b></p><p>At 12:00, 4 July, 2025, the pall bearers lift the casket from its funerary carriage and carry it to its final destination.<p>After more than 80 years in exile, Douglas MacArthur has at last arrived in Arlington. With more than half the heads of state in America in attendance and an aged Arthur MacArthur watching from a wheelchair, Presidents Grammer and Crist raise their respective flags to flutter in the summer breeze.<p>The old United States may be buried, but for the first time since the Civil War, its people seem to be on the road to another union."
 	}
-	else if (quickstats[1] >= 56) {
+	else if (quickstats[1] >= 54) {
             if (used != true) {
                 setInterval(function () {
                     used = true;
@@ -14265,7 +14357,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                 }, 100);
 				unlockAchievement("Cheers to That");
             }
-    return "<h3>ISLANDER WAVE DROWNS DALMAU</h3><p><li>\"</i>I was brought up to never lie. Sure, I have. But in the final mix, the lies I’ve told are far outweighed by the truths I’ve lived.\"</i> - Kelsey Grammer</p><p>This is an astonishing victory! As the final votes are tallied, it quickly becomes apparent that you’ve won a landslide victory. If there were any doubts about your candidacy before, they’ve been wiped out by a performance not equalled since the 1988 election. </p>Whether it was your own appeal, the NPP’s disaster year or Dalmau’s inability to control his campaign, the result is clear. You now stand nigh unopposed in your dreams of  facilitating \"government of the people, for the people, by the people\". </p>The time has come for you to stamp your vision on the country. Let the chips fall where they may!"
+    return "<h3>ISLANDER WAVE DROWNS DALMAU</h3><p>\"<i>\I was brought up to never lie. Sure, I have. But in the final mix, the lies I’ve told are far outweighed by the truths I’ve lived.\"</i> - Kelsey Grammer</p><p>This is an astonishing victory! As the final votes are tallied, it quickly becomes apparent that you’ve won a landslide victory. If there were any doubts about your candidacy before, they’ve been wiped out by a performance not equalled since the 1988 election. </p>Whether it was your own appeal, the NPP’s disaster year or Dalmau’s inability to control his campaign, the result is clear. You now stand nigh unopposed in your dreams of  facilitating \"government of the people, for the people, by the people\". </p>The time has come for you to stamp your vision on the country. Let the chips fall where they may!"
 	} else if (aa[0].candidate == 200) {
         if (used != true) {
             setInterval(function () {
@@ -14542,5 +14634,10 @@ if (!element) {
 	controlElement.id = 'controlElement';
 	document.body.appendChild(controlElement);
 }
+
+
+
+
+
 
 

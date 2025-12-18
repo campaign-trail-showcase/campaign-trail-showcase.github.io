@@ -2154,13 +2154,14 @@ const startScreenUpdater = setInterval(function() {
   const candbackb = document.getElementById("candidate_id_back");
   var selectElement = document.getElementById('candidate_id');
   var gamemodElem = document.getElementById('game_type_id');
-  if(!(localStorage.getItem("hasWon"))){
-    for (let i = selectElement.options.length - 1; i >= 0; i--) {
-      if (selectElement.options[i].value === '81') {
-          selectElement.remove(i);
-      }
+  
+  if(selectElement && !(localStorage.getItem("hasWon"))){
+        for (let i = selectElement.options.length - 1; i >= 0; i--) {
+            if (selectElement.options[i].value === '81') {
+                selectElement.remove(i);
+            }
+        }
     }
-  }
 
 	if(initialButton) { // reset theme at main menu
 		document.getElementById("header").src = "https://i.imgur.com/o3dxdIc.png";
@@ -2603,10 +2604,13 @@ const startScreenUpdater = setInterval(function() {
           }
         }
     }, 15);
-    for (let i = gamemodElem.options.length - 1; i >= 0; i--) {
-      if (gamemodElem.options[i].value === '2') {
-          gamemodElem.remove(i);
-      }
+	
+	if(gamemodElem) {
+        for (let i = gamemodElem.options.length - 1; i >= 0; i--) {
+            if (gamemodElem.options[i].value === '2') {
+                gamemodElem.remove(i);
+            }
+        }
     }
   }
 	if(finalScreenID) { // delete back button and delete the interval
