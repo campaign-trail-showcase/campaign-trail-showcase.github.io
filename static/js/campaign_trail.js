@@ -452,7 +452,7 @@ function csrfToken() {
     let t = null;
     if (document.cookie && document.cookie != "") {
       for (let i = document.cookie.split(";"), a = 0; a < i.length; a++) {
-        const s = jQuery.trim(i[a]);
+        const s = i[a].trim();
         if (s.substring(0, e.length + 1) == `${e}=`) {
           t = decodeURIComponent(s.substring(e.length + 1));
           break;
