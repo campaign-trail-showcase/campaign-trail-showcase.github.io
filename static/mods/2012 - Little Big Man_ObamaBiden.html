@@ -29701,9 +29701,9 @@ function applySwitcheroo(config) {
 const NOMINEE_MODIFICATIONS = {
     "Newt Gingrich": {
 		issueScores: { 
-            1: -0.05,
-            3: -0.08,
-            4: -0.08  
+            1: -0.02,
+            3: -0.03,
+            4: -0.03  
         },
         regionMultipliers: {
             "Deep South": 1.065,
@@ -29721,8 +29721,8 @@ const NOMINEE_MODIFICATIONS = {
     },
     "Rick Santorum": {
 		issueScores: { 
-            1: -0.075,
-            4: -0.08
+            1: -0.02,
+            4: -0.03
         },
         regionMultipliers: {
             "Rust Belt": 1.03,
@@ -29742,10 +29742,10 @@ const NOMINEE_MODIFICATIONS = {
     },
     "Jon Huntsman": {
 		issueScores: { 
-            1: -0.075,
-            3: 0.075,
-            4: 0.05,
-            5: 0.05
+            1: -0.02,
+            3: 0.02,
+            4: 0.02,
+            5: 0.02
         },
         regionMultipliers: {
             "Northeast": 1.020,
@@ -29765,10 +29765,10 @@ const NOMINEE_MODIFICATIONS = {
     },
     "Ron Paul": {
 		issueScores: { 
-            1: 0.01,
-            2: -0.05,
-            3: -0.075,
-            4: -0.05
+            1: 0.005,
+            2: -0.02,
+            3: -0.03,
+            4: -0.02
         },
         regionMultipliers: {
             "Mountain West": 1.085,
@@ -29785,9 +29785,9 @@ const NOMINEE_MODIFICATIONS = {
     },
     "Rick Perry": {
 		issueScores: { 
-            1: -0.05,
-            3: -0.08,
-            5: -0.06
+            1: -0.02,
+            3: -0.03,
+            5: -0.02
         },
         regionMultipliers: {
             "Sun Belt": 1.028,
@@ -29806,9 +29806,9 @@ const NOMINEE_MODIFICATIONS = {
     },
     "Michele Bachmann": {
 		issueScores: { 
-            1: -0.09,
-            3: -0.075,
-            4: -0.08
+            1: -0.03,
+            3: -0.02,
+            4: -0.03
         },
         regionMultipliers: {
             "Midwest": 1.038,
@@ -31586,6 +31586,47 @@ if (!window.hasInitializedNewFooter) {
 
 // Observer to fix EV/PV estimate buttons on polling map
 // @todo: fix
+window.fixEstimateButtons = function() {
+    // 1. Fix the PV Switcher Text
+    const pvBtn = document.getElementById('pvswitcher');
+    if (pvBtn && pvBtn.textContent === 'PV Estimate') {
+        pvBtn.textContent = 'Popular Vote Estimate';
+    }
+
+    // 2. Fix the EV Estimate Button
+    const evBtn = document.getElementById('ev_est');
+    
+    // Check if button exists AND if we haven't already fixed it
+    if (evBtn && !evBtn.dataset.bobertFixed) {
+        
+        // Clone the node to strip existing game event listeners
+        const newBtn = evBtn.cloneNode(true);
+        evBtn.parentNode.replaceChild(newBtn, evBtn);
+        
+        // Mark it as fixed so Bobert ignores it next time (Prevents Infinite Loop)
+        newBtn.dataset.bobertFixed = "true";
+
+        // Add the new toggling logic
+        newBtn.addEventListener('click', () => {
+            const switchingEst = document.getElementById('switchingEst');
+            const currentText = newBtn.textContent;
+            
+            // Check for the global variables used in the mod (slrr / nnn)
+            // Using typeof checks to prevent crashes if variables aren't loaded yet
+            const stateEstContent = (typeof slrr !== 'undefined') ? slrr : "";
+            const evEstContent = (typeof nnn !== 'undefined') ? nnn : "";
+
+            if (currentText.includes('Switch to State Estimate')) {
+                if (switchingEst) switchingEst.innerHTML = stateEstContent;
+                newBtn.textContent = 'Electoral Vote Estimate';
+            } else {
+                if (switchingEst) switchingEst.innerHTML = evEstContent;
+                newBtn.textContent = 'Switch to State Estimate';
+            }
+        });
+    }
+};
+
 function setupEstimateButtonFixes() {
   let pvswitcher = null;
   let evEst = null;
@@ -32622,7 +32663,7 @@ function getCityEffectsHtml(stateName, cityName) {
   
   for (const [issuePk, val] of entries) {
     const iName = getIssueName(issuePk);
-    const direction = val > 0 ? "right" : "left";
+    const direction = val > 0 ? "left" : "right";
     const sign = val > 0 ? "+" : "";
     html += `<li>${iName}: <b>${sign}${val}</b> <span style="color:#666">(${direction})</span></li>`;
   }
@@ -43351,6 +43392,11 @@ if (gameWindowNode) {
 		// headquarter/Jeeves function
 		if (typeof window.addHeadquarterButton === 'function') {
             window.addHeadquarterButton();
+        }
+		
+		// attempt at fixing the EV/PV estimate buttons
+		if (typeof window.fixEstimateButtons === 'function') {
+            window.fixEstimateButtons();
         }
     };
 	
