@@ -686,6 +686,7 @@ vpTable = {
     "Henry M. Jackson" : "Reubin Askew",
     "George Wallace" : vpName,
     "George McGovern" : vpName,
+    "Jimmy Carter" : "Walter Mondale",
     // Conservatives
     "Ronald Reagan" : vpName,
     "John Ashbrook" : "William Dyke",
@@ -929,8 +930,6 @@ mcgovernshift=function(){
         e.candidate_state_multiplier_json[id].fields.state_multiplier -= 0.18;
         }
       }
-                  var id = e.candidate_state_multiplier_json.map(p=>p.pk).indexOf(401)
-                e.candidate_state_multiplier_json[id].fields.state_multiplier += 0.25;
                   var id = e.candidate_state_multiplier_json.map(p=>p.pk).indexOf(418)
                 e.candidate_state_multiplier_json[id].fields.state_multiplier -= 0.2;
                   var id = e.candidate_state_multiplier_json.map(p=>p.pk).indexOf(424)
@@ -1249,8 +1248,6 @@ var Text6 = "";
 var Text7 = "";
 var Text8 = "";
 var Text9 = "";
-var used = false;
-
 
 function getQuestionNumberFromPk(pk) {
     return campaignTrail_temp.questions_json.map(q=>q.pk).indexOf(pk)-1;
@@ -10458,7 +10455,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
     },
     {
         "model": "campaign_trail.candidate_state_multiplier",
-        "pk": ,
+        "pk": 401,
         "fields": {
             "candidate": 1002,
             "state": 137,
@@ -34632,10 +34629,10 @@ const tooltipList = [
   { searchString: "Bozell", explanationText: "<img src=https://i.imgur.com/ui5rpAa.jpeg> After your speech endorsing abortion, he called you \"the Antichrist.\"" },
   { searchString: "Reagan", explanationText: "<img src=https://i.imgur.com/4eRPyEH.jpeg> A bitter loser." },
   { searchString: "Ronald Reagan", explanationText: "<img src=https://i.imgur.com/4eRPyEH.jpeg> A bitter loser." },
-  { searchString: "RFK", explanationText: "<img src=https://i.imgur.com/fSbC1Gz.jpeg> The 37th President of the United States." },
-  { searchString: "Robert Kennedy", explanationText: "<img src=https://i.imgur.com/fSbC1Gz.jpeg> The 37th President of the United States." },
-  { searchString: "Kennedy", explanationText: "<img src=https://i.imgur.com/fSbC1Gz.jpeg> The 37th President of the United States." },
-  { searchString: "Bobby", explanationText: "<img src=https://i.imgur.com/fSbC1Gz.jpeg> The 37th President of the United States." },
+  { searchString: "RFK", explanationText: "<img src=https://i.imgur.com/fSbC1Gz.jpeg> The 38th President of the United States." },
+  { searchString: "Robert Kennedy", explanationText: "<img src=https://i.imgur.com/fSbC1Gz.jpeg> The 38th President of the United States." },
+  { searchString: "Kennedy", explanationText: "<img src=https://i.imgur.com/fSbC1Gz.jpeg> The 38th President of the United States." },
+  { searchString: "Bobby", explanationText: "<img src=https://i.imgur.com/fSbC1Gz.jpeg> The 38th President of the United States." },
   { searchString: "Jack", explanationText: "<img src=https://i.imgur.com/m0MalrK.jpeg> Sometimes they compare you to him, but you can't tell whether they mean it as a compliment or the opposite." },
   { searchString: "McCarthy", explanationText: "<img src=https://i.imgur.com/gZzeuCo.jpeg> Is this guy still around?" },
   { searchString: "Eugene McCarthy", explanationText: "<img src=https://i.imgur.com/gZzeuCo.jpeg> Is this guy still around?" },
@@ -35643,7 +35640,7 @@ endingPicker = (out, totv, aa, quickstats) => {
         }
 
 // Page 1 - Lindsay in the Election
-
+  
 if (quickstats[0]>=335 && brooke==true && radical>=3) {//landslide
 alert('Wow! \n\n You’ve gotten the golden ending!\n The scandal and shooting system is now visible in your game.');
 localStorage.setItem("Wokeslide","true");
@@ -35662,7 +35659,6 @@ e.pages.push(`<h3>I WILL SHOW A YOUNG MAN</h3>
   )
 //e.image = ""
 e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/mfAU36y.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Power and Glory",
@@ -35671,8 +35667,6 @@ e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/mfAU36y.j
                     "https://audio.jukehost.co.uk/PuhCPz33RcXrjtqJTaYkQajNZd5TMtF3"
                 );
             }
-    used = true;
-    }
 }
 else if (quickstats[0]>=270 && campaignTrail_temp.candidate_json[0]["fields"].first_name == "John") {//win
 e.pages.push(`<h3>A TINY RIPPLE</h3><p>Hyannis Port was not Washington. It simply wasn’t. Some would call the comparison unfair, the preference unfeeling; Robert did not care. In Washington he had felt like a king. Yes—the hectoring senators, the swarms of lobbyists—men who could trample you, bait you, drag you into the mud. But there you could fight. You wanted to fight. And you knew that if you kept your footing, the end of the struggle was victory—rightful, necessary victory over the forces of darkness. No man worth the name could pass through that war and then fill the emptiness with picnics in the country, with changing diapers, with tending a stupid son.</p>
@@ -35686,7 +35680,6 @@ e.pages.push(`<h3>A TINY RIPPLE</h3><p>Hyannis Port was not Washington. It simpl
     <p>The man who had pitched him into the dustbin of history.</p>`)
 //e.image = ""
 e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/bzUnEWT.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Shelter from the Storm (Take 1)",
@@ -35695,8 +35688,6 @@ e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/bzUnEWT.j
                     "https://audio.jukehost.co.uk/WtqKY8N5Ie4Ql3xC8xGxzWO355pvxDDc"
                 );
             }
-    used = true;
-    }
 }
 
 else if (quickstats[0]>=500 && campaignTrail_temp.candidate_json[0]["fields"].first_name == "Richard") {//LANDSLIDE Nixon
@@ -35794,7 +35785,6 @@ e.pages.push(`<h3>IN THE ARENA</h3><p><em>I have just called Senator McGovern to
 `)
 //e.image = ""
 e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/ZUfe5s5.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Here's to the State of Richard Nixon",
@@ -35803,8 +35793,6 @@ e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/ZUfe5s5.j
                     "https://audio.jukehost.co.uk/SxEKuXLifbooavHljmTaaaNT1CB1KNVe"
                 );
             }
-    used = true;
-    }
 }
 
 else if (quickstats[0]>=270 && campaignTrail_temp.candidate_json[0]["fields"].first_name == "Richard") {//win Nixon
@@ -35824,7 +35812,6 @@ e.pages.push(`<h3>IN THE ARENA</h3><p><em>I have just called ${Text8} and Mr. Re
 `)
 //e.image = ""
 e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/ZUfe5s5.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Here's to the State of Richard Nixon",
@@ -35833,8 +35820,6 @@ e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/ZUfe5s5.j
                     "https://audio.jukehost.co.uk/SxEKuXLifbooavHljmTaaaNT1CB1KNVe"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes < 270 && aa[1].electoral_votes < 270 && aa[2].electoral_votes < 270 && aa[3].electoral_votes < 270 && byrd==false) {//deadlock
 e.pages.push(`<h3>THE SUBURBAN ROUTINE</h3><p>The reporter had been tracking the returns from the very first bell. The polls weren&rsquo;t even open yet and he was already there&mdash;watching, parsing, prowling for the most curious voter he could find. In Montgomery he hunted for someone who&rsquo;d cast a ballot for the president, in Massachusetts, for a supporter of Ronald Reagan. In a Black neighborhood in Los Angeles, he looked for the person brazen enough to proclaim his admiration for the governor of Alabama.</p>
@@ -35902,7 +35887,6 @@ e.pages.push(`<h3>EARTH-9768</h3>
 <p>Mortals are, without question, fascinating.</p>`)
 //e.image = ""
 e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/zNdLR4A.jpeg'})])
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Down Under",
@@ -35910,8 +35894,7 @@ e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/zNdLR4A.j
                     "https://i.imgur.com/zV98ojH.jpeg",
                     "https://audio.jukehost.co.uk/RoEGShzcYsEsE3cEwUJDH38M2PVKdAcB"                );
             }
-    used = true;
-    }
+
 }
 
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate !=1001 && campaignTrail_temp.candidate_json[0]["fields"].first_name == "John") {//min 100EV
@@ -35947,6 +35930,14 @@ e.pages.push(`<h3>HE WAS A CROOK</h3>
   `)
 //e.image = ""
 e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/q0l8rFb.jpeg'})])
+            if (songChange !== 1) {
+                playEndingMusic(
+                    "Down Under",
+                    "Men at Work",
+                    "https://i.imgur.com/zV98ojH.jpeg",
+                    "https://audio.jukehost.co.uk/RoEGShzcYsEsE3cEwUJDH38M2PVKdAcB"
+                );
+            }
 }
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate !=1001 && vp==0 && campaignTrail_temp.candidate_json[0]["fields"].last_name == "Nixon") {//NIXON LOSES WITH PERCY
 e.pages.push(`<h3>OUT OF THE ARENA</h3>
@@ -36126,7 +36117,6 @@ e.pages.push(`
 </div>
 </div>`)
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/eWo0qVc.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Main Theme - Victory at Sea",
@@ -36135,8 +36125,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/RPS65UoeS2rsaEDU2pevdCrfiWAdAkrp"
                 );
             }
-    used = true;
-    }
 }
 
 else if (quickstats[0] >= 270 && campaignTrail_temp.candidate_json[0]["fields"].last_name == "Nixon" && campaignTrail_temp.candidate_json[1]["fields"].last_name == "McGovern" && ideology>9) { // NIXON WINS CONSERVATIVE
@@ -36232,7 +36220,6 @@ e.pages.push(`
   </div>
 </div>`)
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/Ms8DXYj.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "World on a String",
@@ -36241,8 +36228,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/HTCm7fHlN0x8exv7jtuy79HjYlLWMEFF"
                 );
             }
-    used = true;
-    }
 }
 else if (quickstats[0] >= 270 && campaignTrail_temp.candidate_json[0]["fields"].last_name == "Reagan") { // REAGAN WINS
 e.pages.push(`
@@ -36260,7 +36245,6 @@ e.pages.push(`
 <p>For now, early polling has not shown a clear shift in vote preference following the vote, though several analysts warned it was too soon to draw firm conclusions. Nate Silver, the election forecaster, noted that immediate reactions often fade and that the political impact will depend on how both campaigns frame the outcome in the coming days.</p>
 </div>`)
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/Lv2VyQY.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "World on a String",
@@ -36269,8 +36253,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/HTCm7fHlN0x8exv7jtuy79HjYlLWMEFF"
                 );
             }
-    used = true;
-    }
 }
 else if (quickstats[0] >= 270 && campaignTrail_temp.candidate_json[0]["fields"].last_name == "Percy") { // PERCY WINS
 e.pages.push(`
@@ -36289,7 +36271,6 @@ e.pages.push(`
 <p>So yeah: this is all strong evidence that our politicians aren&rsquo;t quite as &ldquo;gamer&rdquo; as they want you to believe. Still, it&rsquo;s fascinating watching them try. We&rsquo;d love to hear what other members of Congress think about games as an art form (and not just whatever Senator Cruz is doing with <em>Candy Crush</em>). We just hope public duties aren&rsquo;t being delayed by a few &ldquo;one more mission&rdquo; sessions &mdash; even if the missions are as good as Kojima&rsquo;s.</p>
 </div>`)
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/VW5xTPO.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Somebody to Love",
@@ -36298,8 +36279,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/QME6haPdqkOGvo0lSfj7c1RXBlD0iJti"
                 );
             }
-    used = true;
-    }
 }
 else if (quickstats[0] >= 270 && campaignTrail_temp.candidate_json[0]["fields"].last_name == "Rockefeller") { // ROCKY WINS
 e.pages.push(`
@@ -36332,7 +36311,6 @@ e.pages.push(`
 <p>Either way, none of this changes the fact that we&rsquo;re still counting the days until New Ultimates lands in September. If you haven&rsquo;t already, you might want to get that first issue on preorder now.</p>
 </div>`)
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/Jz4deqN.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Rasputin",
@@ -36341,8 +36319,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/VYc7ZbqLxVSYaEjzJm7yZsAOMhzkxAfi"
                 );
             }
-    used = true;
-    }
 }
 else if (quickstats[0] >= 270 && campaignTrail_temp.candidate_json[0]["fields"].last_name == "Ford") { // FORD WINS
 e.pages.push(`
@@ -36366,7 +36342,6 @@ e.pages.push(`
 </div>
   </div>`)
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/8COAweK.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Wonderful Tonight",
@@ -36375,8 +36350,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/ESPhe7GD8X6YRwde0M34fYEePG5d84aI"
                 );
             }
-    used = true;
-    }
 }
 else if (quickstats[0] >= 270 && scandal==true && radical>=3 && campaignTrail_temp.candidate_json[0]["fields"].last_name == "Lindsay") { // PROGSCANDALWINS
 e.pages.push(`
@@ -36601,7 +36574,6 @@ e.pages.push(`
 </div>
 </div>  `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/9FoxdHZ.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Ragged Old Flag",
@@ -36610,8 +36582,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/BmvVKLxoHqXOQufTnnIjA6dyAuWjfWxT"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes < 270 && aa[1].electoral_votes < 270 && aa[2].electoral_votes < 270 && aa[3].electoral_votes < 270 && byrd==false) { // DEADLOCK WITHOUT BYRD
 e.pages.push(`
@@ -36637,7 +36607,6 @@ e.pages.push(`
 </div>
 </div>`);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/uyj4ZlU.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Stayin' Alive",
@@ -36646,8 +36615,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/eHaSMuFMs6yZc10wx9kJywaijmLxiv7u"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes < 270 && aa[1].electoral_votes < 270 && aa[2].electoral_votes < 270 && aa[3].electoral_votes < 270 && campaignTrail_temp.candidate_json[0]["fields"].first_name == "Charles") { // DEADLOCK WITH PERCY
 e.pages.push(`
@@ -36673,7 +36640,6 @@ e.pages.push(`
 </div>
 </div>`);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/6IGbGRC.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Ragged Old Flag",
@@ -36682,8 +36648,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/BmvVKLxoHqXOQufTnnIjA6dyAuWjfWxT"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes < 270 && aa[1].electoral_votes < 270 && aa[2].electoral_votes < 270 && aa[3].electoral_votes < 270 && campaignTrail_temp.candidate_json[0]["fields"].last_name == "McGovern" && vpo == 3) { // DEADLOCK WITH MCGOVERN (Chisolm)
 e.pages.push(`
@@ -36703,7 +36667,6 @@ e.pages.push(`
 <p class="bbc-footer" style="font-size: 12px; border-top: 1px solid #999; padding-top: 0.5rem; color: #666;">E-mail this to a friend | Printable version</p>
 </div>`);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/i52vjUN.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "The Devil Went Down to Georgia",
@@ -36712,8 +36675,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/GnwmxqyUF6rlDvI2PIqNmRPFhXpFgXqK"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes < 270 && aa[1].electoral_votes < 270 && aa[2].electoral_votes < 270 && aa[3].electoral_votes < 270 && campaignTrail_temp.candidate_json[0]["fields"].last_name == "McGovern") { // DEADLOCK WITH MCGOVERN
 e.pages.push(`
@@ -36811,7 +36772,6 @@ e.pages.push(`
 </div>
 `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/6IGbGRC.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "The Devil Went Down to Georgia",
@@ -36820,8 +36780,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/GnwmxqyUF6rlDvI2PIqNmRPFhXpFgXqK"
                 );
             }
-    used = true;
-    }
 }
 
 
@@ -36863,7 +36821,6 @@ e.pages.push(`
 </div>
 </div>  `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/6IGbGRC.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "The Devil Went Down to Georgia",
@@ -36872,8 +36829,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/GnwmxqyUF6rlDvI2PIqNmRPFhXpFgXqK"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes >= 400 && aa[0].candidate ==1002 && campaignTrail_temp.candidate_json[1]["fields"].last_name == "McGovern") { // MCGOVERN LANDSLIDE
 e.pages.push(`
@@ -36895,7 +36850,6 @@ e.pages.push(`
 </div>
 </div>`)
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/m7Vs1pE.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Mr. Blue Sky",
@@ -36904,8 +36858,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/NJsCtHQEzxuvF6kczx5tz0s0NI9v9UJb"
                 );
             }
-    used = true;
-    }
 }
 
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate ==1002 && campaignTrail_temp.candidate_json[1]["fields"].color_hex == "#4d6da1") { // THE TRUTH ENDING
@@ -37016,7 +36968,6 @@ e.pages.push(`
 </div>
   `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/kl4Y8ef.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Sweet Talkin' Woman",
@@ -37025,8 +36976,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/FVt2dihsbytSGeXfg84aXfNyg4IIFlHD"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate ==1002 && campaignTrail_temp.candidate_json[1]["fields"].color_hex == "#8db1eb" && vpo == 2) { // MCGOVERN WIN FULBRIGHT
 e.pages.push(`
@@ -37117,17 +37066,14 @@ e.pages.push(`
 </table>
   </div> `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/kl4Y8ef.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Sweet Talkin' Woman",
                     "Electric Light Orchestra",
                     "https://i.imgur.com/NrHdAOr.jpeg",
                     "https://audio.jukehost.co.uk/FVt2dihsbytSGeXfg84aXfNyg4IIFlHD"
-                );
+              );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate ==1002 && campaignTrail_temp.candidate_json[1]["fields"].color_hex == "#8db1eb" && vpo == 3) { // MCGOVERN WIN CHISOLM
 e.pages.push(`
@@ -37218,7 +37164,6 @@ e.pages.push(`
 </table>
 </div>  `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/kl4Y8ef.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Sweet Talkin' Woman",
@@ -37227,8 +37172,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/FVt2dihsbytSGeXfg84aXfNyg4IIFlHD"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate ==1002 && campaignTrail_temp.candidate_json[1]["fields"].color_hex == "#8db1eb" && vpo == 4) { // MCGOVERN WIN CARTER
 e.pages.push(`
@@ -37314,7 +37257,6 @@ e.pages.push(`
 </div>
   `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/kl4Y8ef.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Sweet Talkin' Woman",
@@ -37323,8 +37265,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/FVt2dihsbytSGeXfg84aXfNyg4IIFlHD"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate ==1002 && campaignTrail_temp.candidate_json[1]["fields"].color_hex == "#8db1eb") { // MCGOVERN WIN HUGHES
 e.pages.push(`
@@ -37416,7 +37356,6 @@ e.pages.push(`
 </div>
   `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/kl4Y8ef.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Sweet Talkin' Woman",
@@ -37425,8 +37364,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/FVt2dihsbytSGeXfg84aXfNyg4IIFlHD"
                 );
             }
-    used = true;
-    }
 }
 
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate ==1002 && campaignTrail_temp.candidate_json[1]["fields"].color_hex == "#4572ba") { // JACKSON WIN
@@ -37443,7 +37380,6 @@ e.pages.push(`
 </div>
   `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/VTXfTmL.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "One Piece at a Time",
@@ -37452,8 +37388,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/OBGC6SKBkenXR2MQjaQSuedHfb4IQRde"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate ==1002 && byrd==true) { // WALLACE-BYRD
 e.pages.push(`
@@ -37473,7 +37407,6 @@ e.pages.push(`
 </div>
   `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/U2t115X.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Wake Up, My People",
@@ -37482,8 +37415,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/y7DZcmCJtLrkXWpacO3vRkrJ6EEbMKyW"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate ==1002) { // WALLACE-UNRUH
 e.pages.push(`
@@ -37509,7 +37440,6 @@ e.pages.push(`
 <p style="font-size: 14px; color: #000000;"><span style="color: #ffffff;">If Wallace declines to pursue a segregationist agenda&mdash;entirely possible if the player emphasizes economic or foreign-policy focuses&mdash; a special event will trigger. In it, Wallace reflects that, though part of him will never be fully at ease with integration, he takes pride in being remembered as the man who brought America together. This epilogue nods to Wallace&rsquo;s late-in-life renunciation of his segregationist views and his eventual support for racial integration.</span></p>
 </div> `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/Mvqenmw.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Stand Up for America",
@@ -37518,8 +37448,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/QpIaUWHCE7L4wpBZoRhenhACf7Z7DLko"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate ==1003 && campaignTrail_temp.candidate_json[2]["fields"].last_name == "Buckley") { //REAGAN-BUCKLEY WIN
 e.pages.push(`
@@ -37541,7 +37469,6 @@ e.pages.push(`
 </div>
 </div>  `);
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/fuRDghE.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Time Of The Season",
@@ -37550,8 +37477,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/7dzsRgh2HuUyXuCCTtyfe88A3IEBpIDr"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes >= 270 && aa[0].candidate ==1003) { // BUCKLEY-ASHBROOK
 e.pages.push(`
@@ -37575,7 +37500,6 @@ e.pages.push(`
 </div>
 </div>  `)
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/fEy5k7E.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Time Of The Season",
@@ -37584,8 +37508,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/7dzsRgh2HuUyXuCCTtyfe88A3IEBpIDr"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes>=270 && aa[0].candidate==8889 && campaignTrail_temp.candidate_json[3]["fields"].first_name == "Frank") { // ZIEDLER WINS
 e.pages.push(`
@@ -37608,7 +37530,6 @@ e.pages.push(`
 </div>
   `)
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/CIyXgw0.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Song of the Old Communist",
@@ -37617,8 +37538,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/zEFqMWLKNIuaRg8b1iBNzFDeW1EwSziW"
                 );
             }
-    used = true;
-    }
 }
 else if (aa[0].electoral_votes>=270 && aa[0].candidate==8889) { // MCCARTHY WINS
 e.pages.push(`
@@ -37641,7 +37560,6 @@ e.pages.push(`
 </div>
   `)
   e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/CIyXgw0.jpeg'})]);
-  if (used != true) {
             if (songChange !== 1) {
                 playEndingMusic(
                     "Power and Glory",
@@ -37650,8 +37568,6 @@ e.pages.push(`
                     "https://audio.jukehost.co.uk/kPyAXYlk8gBF3rCUlaTyg55Oy2nKzmFQ"
                 );
             }
-    used = true;
-    }
 }
 
 	// ACHIEVEMENTS
@@ -37687,3 +37603,225 @@ HistName=["Henry M. Jackson","John Lindsay","Ronald Reagan","Eugene McCarthy"];
 HistEV=[352,115,71,0];
 HistPV=["30,193,982","26,921,081","18,852,707","5,016,763"];
 HistPVP=["37.3%","33.2%","23.3%","6.2%"];
+
+// This is for the recommended reading box. Specifically, it sets up
+// the styling for the tab system we have here.
+(function() {
+    'use strict';
+
+    let stylesAdded = false;
+    let tabSystemInitializedForCurrentBox = false;
+
+    function addStyles() {
+        if (stylesAdded) return;
+
+        const styleElement = document.createElement('style');
+        document.head.appendChild(styleElement);
+        const sheet = styleElement.sheet;
+
+        const styles = [
+            "#recommended_reading_box { overflow-y: auto; border-style: double none; margin-inline: auto; width: 95%; background: linear-gradient(rgb(247, 247, 247), rgb(241, 241, 241)); height: 30em;}",
+			"#recommended_reading_box #tab-select {width:100%;height:32px;display:flex;justify-content:center;margin-bottom:1em;border-bottom:5px solid #1b146c;border-image:linear-gradient(#3c3ff6,#9f0c0c) 40}",
+            "#recommended_reading_box .ftab, #recommended_reading_box .ftab-active {width: 98px;height: 32px;margin-top: 0px;padding-top: 7px;box-sizing: border-box; cursor: pointer; user-select:none; -webkit-user-select: none; background: linear-gradient(to bottom, #f7f7f7, #e0e0e0); border: 1px solid #ccc; border-radius: 10px 10px 0 0; }",
+			"#recommended_reading_box .ftab:hover { background: linear-gradient(to bottom, #fff, #ddd);}",
+            "#recommended_reading_box .ftab-active { background: #ffeded; border-color: #aa2525; cursor: default; }",
+            "#recommended_reading_box #start.ftab {width: 100px;}",
+            "#recommended_reading_box #start.ftab-active {width: 100px;}",
+        ];
+
+        styles.forEach(rule => {
+            try {
+                sheet.insertRule(rule, sheet.cssRules.length);
+            } catch (e) {
+                console.warn('Could not insert CSS rule:', rule, e);
+            }
+        });
+        stylesAdded = true;
+        //console.log('Styles for recommended reading added.');
+    }
+
+    function initializeTabs() {
+        const recommendedReadingBox = document.getElementById('recommended_reading_box');
+        if (!recommendedReadingBox) {
+            tabSystemInitializedForCurrentBox = false;
+            return;
+        }
+
+        if (recommendedReadingBox._tabsInitialized) {
+            const tabContainer = recommendedReadingBox.querySelector('#tab-select');
+            const contentContainer = tabContainer ? tabContainer.nextElementSibling : null;
+            if(tabContainer && contentContainer) {
+                 const tabs = Array.from(tabContainer.children).filter(child => child.tagName === 'P');
+                 const activeTabElement = tabs.find(tab => tab.classList.contains('ftab-active'));
+                 if (activeTabElement) {
+                    const activeIndex = tabs.indexOf(activeTabElement);
+                    const contentPanes = [];
+                    tabs.forEach((_t, idx) => {
+                        const pane = contentContainer.querySelector(`#rpage${idx}`);
+                        if(pane) contentPanes.push(pane);
+                    });
+                    contentPanes.forEach((pane, index) => {
+                        if(pane) pane.style.display = (index === activeIndex) ? 'inline-block' : 'none';
+                    });
+                 }
+            }
+            return;
+        }
+
+        const tabContainer = recommendedReadingBox.querySelector('#tab-select');
+        if (!tabContainer) {
+            console.error('Element with ID "tab-select" not found within "recommended_reading_box".');
+            return;
+        }
+
+        const contentContainer = tabContainer.nextElementSibling;
+        if (!contentContainer) {
+            console.error('Content container not found. Expected as next sibling of "tab-select".');
+            return;
+        }
+
+        // get all tab elements (p tags) and content panes
+        const tabs = Array.from(tabContainer.children).filter(child => child.tagName === 'P');
+        const contentPanes = [];
+        tabs.forEach((tab, index) => {
+            const paneId = `rpage${index}`;
+            const pane = contentContainer.querySelector(`#${paneId}`);
+            if (pane) {
+                contentPanes.push(pane);
+            } else {
+                console.warn(`Content pane #${paneId} not found.`);
+            }
+        });
+
+        if (tabs.length === 0) {
+            console.error('No tab elements found in #tab-select.');
+            return;
+        }
+        if (contentPanes.length === 0 && tabs.length > 0) {
+            console.warn('No content panes found. Tabs will not function correctly.');
+        }
+
+        function setActiveTab(activeIndex) {
+            tabs.forEach((tab, index) => {
+                if (!tab) return;
+                tab.classList.toggle('ftab-active', index === activeIndex);
+                tab.classList.toggle('ftab', index !== activeIndex);
+            });
+
+            contentPanes.forEach((pane, index) => {
+                if (!pane) return;
+                pane.style.display = (index === activeIndex) ? 'inline-block' : 'none';
+            });
+        }
+
+        if (tabContainer._delegatedTabClickHandler) {
+            tabContainer.removeEventListener('click', tabContainer._delegatedTabClickHandler);
+        }
+
+        tabContainer._delegatedTabClickHandler = function(event) {
+            // find the <p> element that was clicked, or its <p> ancestor if a child inside p was clicked
+            const clickedTabElement = event.target.closest('p.ftab, p.ftab-active');
+
+            // ensure the clicked element is one of our direct tab children
+            if (clickedTabElement && tabContainer.contains(clickedTabElement) && tabs.includes(clickedTabElement)) {
+                const clickedIndex = tabs.indexOf(clickedTabElement);
+                if (clickedIndex !== -1) {
+                    if (clickedIndex < contentPanes.length && contentPanes[clickedIndex]) {
+                        setActiveTab(clickedIndex);
+                    } else if (clickedIndex >= contentPanes.length) {
+                        console.warn(`Tab at index ${clickedIndex} clicked, but no content pane found. Tab made active visually.`);
+                    }
+                }
+            }
+        };
+        tabContainer.addEventListener('click', tabContainer._delegatedTabClickHandler);
+
+        // remove inline onclick attributes from HTML if they exist
+        tabs.forEach(tab => {
+            if (tab.hasAttribute('onclick')) {
+                tab.removeAttribute('onclick');
+            }
+        });
+
+        // determine and set the initial active tab
+        let initialActiveIndex = tabs.findIndex(tab => tab && tab.classList.contains('ftab-active'));
+        if (initialActiveIndex === -1 && tabs.length > 0) {
+            initialActiveIndex = 0;
+        }
+
+        if (initialActiveIndex !== -1) {
+            if (initialActiveIndex < contentPanes.length && contentPanes[initialActiveIndex]) {
+                setActiveTab(initialActiveIndex);
+            } else {
+                tabs.forEach((tab, index) => {
+                    if (!tab) return;
+                    tab.classList.toggle('ftab-active', index === initialActiveIndex);
+                    tab.classList.toggle('ftab', index !== initialActiveIndex);
+                });
+                contentPanes.forEach(pane => { if (pane) pane.style.display = 'none'; });
+                if (tabs.length > 0 && contentPanes.length === 0) {
+                     //console.log(`Initial tab set to index ${initialActiveIndex} visually, but no content panes available.`);
+                } else if (tabs.length > 0) {
+                     //console.log(`Initial tab set to index ${initialActiveIndex} visually, corresponding content pane missing.`);
+                }
+            }
+        } else if (tabs.length > 0) {
+            contentPanes.forEach(pane => { if (pane) pane.style.display = 'none'; });
+        }
+
+        recommendedReadingBox._tabsInitialized = true;
+        tabSystemInitializedForCurrentBox = true;
+        console.log('Recommended reading tabs initialized.');
+    }
+
+    function setupObserver() {
+        const targetNode = document.body;
+        if (!targetNode) {
+            console.error("Cannot set up MutationObserver: document.body not found.");
+            return;
+        }
+
+        const config = { childList: true, subtree: true };
+
+        const callback = function(mutationsList, observer) {
+            const recommendedReadingBox = document.getElementById('recommended_reading_box');
+
+            if (recommendedReadingBox) {
+                if (!stylesAdded) {
+                    addStyles();
+                }
+                if (!recommendedReadingBox._tabsInitialized) {
+                    initializeTabs();
+                }
+            } else {
+                if (tabSystemInitializedForCurrentBox) {
+                    //console.log('Recommended reading box removed from DOM.');
+                    tabSystemInitializedForCurrentBox = false;
+                }
+            }
+        };
+
+        const observer = new MutationObserver(callback);
+        observer.observe(targetNode, config);
+        //console.log('MutationObserver set up to watch for recommended_reading_box appearance/disappearance.');
+
+        const existingBox = document.getElementById('recommended_reading_box');
+        if (existingBox) {
+            //console.log('recommended_reading_box already in DOM. Initializing immediately.');
+            if (!stylesAdded) {
+                addStyles();
+            }
+            if (!existingBox._tabsInitialized) {
+                initializeTabs();
+            }
+        }
+    }
+
+    // start the process
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupObserver);
+    } else {
+        // DOMContentLoaded has already fired
+        setupObserver();
+    }
+})();
