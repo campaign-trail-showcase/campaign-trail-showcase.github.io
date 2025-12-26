@@ -23395,21 +23395,7 @@ function closeOverlay(overlay) {
         }
     }
 
-    function initObserver() {
-        const gameWindow = document.getElementById("game_window");
-        
-        if (gameWindow) {
-            const observer = new MutationObserver(() => {
-                handleAdvisorUpdate();
-            });
-
-            observer.observe(gameWindow, { childList: true, subtree: true });
-        } else {
-            setTimeout(initObserver, 200);
-        }
-    }
-
-    initObserver();
+    window.handleAdvisorUpdate = handleAdvisorUpdate;
 
 })();
 
@@ -29715,9 +29701,9 @@ function applySwitcheroo(config) {
 const NOMINEE_MODIFICATIONS = {
     "Newt Gingrich": {
 		issueScores: { 
-            1: -0.1,
-            3: -0.2,
-            4: -0.2  
+            1: -0.05,
+            3: -0.08,
+            4: -0.08  
         },
         regionMultipliers: {
             "Deep South": 1.065,
@@ -29730,13 +29716,13 @@ const NOMINEE_MODIFICATIONS = {
         stateMultipliers: { 
             "GA": 1.09,
             "FL": 1.00,
-			"DC": 0.27
+			"DC": 0.02
         }
     },
     "Rick Santorum": {
 		issueScores: { 
-            1: -0.15,
-            4: -0.2
+            1: -0.075,
+            4: -0.08
         },
         regionMultipliers: {
             "Rust Belt": 1.03,
@@ -29751,15 +29737,15 @@ const NOMINEE_MODIFICATIONS = {
             "IA": 1.035,
             "NJ": 1.01,
             "NH": 0.96,
-			"DC": 0.15
+			"DC": 0.015
         }
     },
     "Jon Huntsman": {
 		issueScores: { 
             1: -0.075,
-            3: 0.2,
-            4: 0.1,
-            5: 0.1
+            3: 0.075,
+            4: 0.05,
+            5: 0.05
         },
         regionMultipliers: {
             "Northeast": 1.020,
@@ -29774,15 +29760,15 @@ const NOMINEE_MODIFICATIONS = {
             "ID": 1.15,
             "NH": 1.025, 
             "SC": 0.98,
-			"DC": 0.30
+			"DC": 0.03
         }
     },
     "Ron Paul": {
 		issueScores: { 
-            1: -0.25,
-            2: -0.2,
-            3: -0.15,
-            4: -0.1
+            1: 0.01,
+            2: -0.05,
+            3: -0.075,
+            4: -0.05
         },
         regionMultipliers: {
             "Mountain West": 1.085,
@@ -29794,14 +29780,14 @@ const NOMINEE_MODIFICATIONS = {
             "TX": 1.03, 
             "NH": 1.06,
             "AK": 1.15,
-			"DC": 0.20
+			"DC": 0.02
         }
     },
     "Rick Perry": {
 		issueScores: { 
-            1: -0.1,
-            3: -0.25,
-            5: -0.2
+            1: -0.05,
+            3: -0.08,
+            5: -0.06
         },
         regionMultipliers: {
             "Sun Belt": 1.028,
@@ -29815,14 +29801,14 @@ const NOMINEE_MODIFICATIONS = {
             "OK": 1.05,
             "IA": 0.98,
             "NH": 0.95,
-			"DC": 0.17
+			"DC": 0.07
         }
     },
     "Michele Bachmann": {
 		issueScores: { 
-            1: -0.2,
-            3: -0.15,
-            4: -0.25
+            1: -0.09,
+            3: -0.075,
+            4: -0.08
         },
         regionMultipliers: {
             "Midwest": 1.038,
@@ -29834,7 +29820,7 @@ const NOMINEE_MODIFICATIONS = {
             "MN": 1.06,
             "IA": 1.04,
             "VA": 0.96,
-			"DC": 0.13
+			"DC": 0.03
         }
     }
 };
@@ -32061,7 +32047,6 @@ const CITIES_BY_STATE_NAME = {
     { name: "Vancouver", lat: 45.6387, lon: -122.6615 },
     { name: "Bellevue",  lat: 47.6101, lon: -122.2015 },
   ],
-  // West Virginia
   "West Virginia": [
     { name: "Charleston",  lat: 38.3498, lon: -81.6326 },
     { name: "Huntington",  lat: 38.4192, lon: -82.4452 },
@@ -32446,7 +32431,7 @@ const CITY_ISSUE_EFFECTS = {
   }
 };
 
-const MAX_ISSUE_SCORE_MAGNITUDE = 0.75;
+const MAX_ISSUE_SCORE_MAGNITUDE = 1.00;
 
 function applyCityIssueEffects(statePk, cityName) {
   const stateName = getStateNameByPk(statePk);
@@ -32620,6 +32605,31 @@ function parseSelectedStatePkFromOverlayText(textContent) {
   return st ? st.pk : null;
 }
 
+function getIssueName(issuePk) {
+  const issue = window.campaignTrail_temp?.issues_json?.find(i => i.pk === parseInt(issuePk));
+  return issue ? issue.fields.name : "Issue " + issuePk;
+}
+
+function getCityEffectsHtml(stateName, cityName) {
+  if (!CITY_ISSUE_EFFECTS[stateName] || !CITY_ISSUE_EFFECTS[stateName][cityName]) {
+    return "<em>No known specific effects for this city.</em>";
+  }
+  const effects = CITY_ISSUE_EFFECTS[stateName][cityName];
+  const entries = Object.entries(effects);
+  if (entries.length === 0) return "<em>No known specific effects for this city.</em>";
+
+  let html = `<div style="font-size: 0.85em; font-weight: bold; margin: .5em 1em .5em 0">Projected impact:</div><ul style="font-size: 0.85em; margin: 0 0 0 15px; padding: 0;">`;
+  
+  for (const [issuePk, val] of entries) {
+    const iName = getIssueName(issuePk);
+    const direction = val > 0 ? "right" : "left";
+    const sign = val > 0 ? "+" : "";
+    html += `<li>${iName}: <b>${sign}${val}</b> <span style="color:#666">(${direction})</span></li>`;
+  }
+  html += `</ul>`;
+  return html;
+}
+
 function buildCitySelect(statePk, preselectedName, onChange) {
   const list = getCitiesForState(statePk);
   if (!list.length || CITY_SELECTION_MODE !== 'choose') return null;
@@ -32641,11 +32651,38 @@ function buildCitySelect(statePk, preselectedName, onChange) {
     if (c.name === preselectedName) opt.selected = true;
     select.appendChild(opt);
   }
-  select.addEventListener('change', (e) => {
-    onChange?.(e.target.value);
-  });
   wrap.appendChild(select);
 
+  const toggleLink = document.createElement('span');
+  toggleLink.textContent = `see effects for ${preselectedName}`;
+  toggleLink.style.cssText = "margin-left: 10px; cursor: pointer; border-bottom: 1px dotted #333; font-size: 0.9em;";
+  wrap.appendChild(toggleLink);
+
+  const effectContainer = document.createElement('div');
+  effectContainer.id = 'tct_city_effect_display';
+  effectContainer.style.cssText = "display: none; justify-content: center; margin-top: 8px; background: #eee; padding: 6px; border-radius: 4px; border: 1px solid #ccc;";
+  
+  effectContainer.innerHTML = getCityEffectsHtml(getStateNameByPk(statePk), preselectedName);
+  wrap.appendChild(effectContainer);
+
+  toggleLink.addEventListener('click', () => {
+    if (effectContainer.style.display === 'none') {
+        effectContainer.style.display = 'flex';
+    } else {
+        effectContainer.style.display = 'none';
+    }
+  });
+
+  select.addEventListener('change', (e) => {
+    const newCity = e.target.value;
+    
+    toggleLink.textContent = `see effects for ${newCity}`;
+    
+    effectContainer.innerHTML = getCityEffectsHtml(getStateNameByPk(statePk), newCity);
+    
+    onChange?.(newCity);
+  });
+  
   return wrap;
 }
 
@@ -32701,6 +32738,10 @@ function updateVisitOverlayWithCities() {
       messageHtml = `We can arrange a ${mode} from ${fromStateName} to ${toStateName}.<br/>Do you confirm?`;
     }
   }
+  
+  if (!window.TCT_HAS_SHOWN_CITY_TUTORIAL) {
+	  messageHtml += `<br/><small style="font-style: italic; color: #555;">(Psst: click on the city names to see the issue effect shifts your visits will cause there!)</small>`;
+  }
 
   // replace text with our HTML
   contentP.innerHTML = messageHtml;
@@ -32713,16 +32754,22 @@ function updateVisitOverlayWithCities() {
 
       // update message inline when selection changes
       if (!fromPk) {
-        contentP.innerHTML = `You are about to travel to ${toCity}, ${toStateName}.<br/>Do you confirm?`;
+		let updatedHtml;
+        updatedHtml = `You are about to travel to ${toCity}, ${toStateName}.<br/>Do you confirm?`;
       } else if (fromPk === toPk) {
         const fromCityDisp = fromCitySaved || getOrPickCity(fromPk);
-        contentP.innerHTML = `We can arrange a car for you within ${toStateName}: from ${fromCityDisp} to ${toCity}.<br/>Do you confirm?`;
+        updatedHtml = `We can arrange a car for you within ${toStateName}: from ${fromCityDisp} to ${toCity}.<br/>Do you confirm?`;
       } else {
         const fromCityDisp = fromCitySaved || getOrPickCity(fromPk);
         const mode = computeTravelModeFromCities(fromPk, fromCityDisp, toPk, toCity);
         const fromSt = getStateNameByPk(fromPk);
-        contentP.innerHTML = `We can arrange a ${mode} from ${fromCityDisp}, ${fromSt} to ${toCity}, ${toStateName}.<br/>Do you confirm?`;
+        updatedHtml = `We can arrange a ${mode} from ${fromCityDisp}, ${fromSt} to ${toCity}, ${toStateName}.<br/>Do you confirm?`;
       }
+	  
+	  if (!window.TCT_HAS_SHOWN_CITY_TUTORIAL) {
+		  updatedHtml += `<br><br><small style="font-style: italic; color: #555;">(Psst: click on the city names to see the issue effect shifts your visits will cause there!)</small>`;
+      }
+	  contentP.innerHTML = updatedHtml;	  
     });
     if (citySelect) {
       contentP.parentElement?.appendChild(citySelect);
@@ -32736,6 +32783,8 @@ function updateVisitOverlayWithCities() {
     // avoid double-binding
     if (!confirmBtn.dataset.tctCityBound) {
       confirmBtn.addEventListener('click', () => {
+        window.TCT_HAS_SHOWN_CITY_TUTORIAL = true; // mark tutorial as shown
+		  
         if (toCity) {
           window.TCT_SELECTED_CITY_BY_STATE.set(toPk, toCity);
           
@@ -41226,7 +41275,7 @@ function getAvailableOperations() {
     return available;
 }
 
-function openHeadquarter() {
+window.openHeadquarter = function() {
     const topOpponents = selectTopOpponents();
     
     const liberalismFeedback = getFeedbackForScore(window.liberalismScore, liberalismTextMap);
@@ -42317,7 +42366,7 @@ function executeOperation(operation, cost, successChance, targetStateName = null
 }
 
 // adds the HQ button to the UI
-function addHeadquarterButton() {
+window.addHeadquarterButton = function() {	
     if (document.getElementById('hq_button')) return;
 
     const refButton = document.getElementById('view_electoral_map');
@@ -42336,34 +42385,6 @@ function addHeadquarterButton() {
         refButton.insertAdjacentElement('afterend', newButton);
     }
 }
-
-// the observer.
-function initObserver() {
-    const gameWindow = document.getElementById('game_window');
-    
-    if (!gameWindow) {
-        const bodyObserver = new MutationObserver((mutations, obs) => {
-            if (document.getElementById('game_window')) {
-                obs.disconnect();
-                initObserver();
-            }
-        });
-        bodyObserver.observe(document.body, { childList: true, subtree: true });
-        return;
-    }
-
-    const observer = new MutationObserver((mutations) => {
-        if (!document.getElementById('hq_button')) {
-            const refButton = document.getElementById('view_electoral_map');
-            if (refButton) {
-                addHeadquarterButton();
-            }
-        }
-    });
-
-    observer.observe(gameWindow, { childList: true, subtree: true });
-}
-initObserver();
 
 // data for the House 2012 calculation
 const HOUSE_2012_DATA = {
@@ -43309,6 +43330,53 @@ if (gameWindowNode) {
 } else {
     console.error("Game window element not found for VP script.");
 }
+
+// This is a catch-all mutation observer so that
+// we keep one having them all run at once
+(function() {
+    'use strict';
+
+    if (window.bobert) {
+        window.bobert.disconnect();
+    }
+	
+	window.bobertTasks = [];
+	
+	const initialTasks = () => {		
+		// trevor mooresies
+		if (typeof window.handleAdvisorUpdate === 'function') {
+			window.handleAdvisorUpdate();
+		}
+		
+		// headquarter/Jeeves function
+		if (typeof window.addHeadquarterButton === 'function') {
+            window.addHeadquarterButton();
+        }
+    };
+	
+	window.bobertTasks.push(initialTasks);
+	
+	const handleMutations = (mutationsList) => {
+        if (!window.bobertTasks) return;
+        
+        for (let i = 0; i < window.bobertTasks.length; i++) {
+            try {
+                window.bobertTasks[i]();
+            } catch (e) {
+                console.error("Zoinks! Error in bobert task:", e);
+            }
+        }
+    };
+
+    const targetNode = document.getElementById("game_window");
+    const config = { childList: true, subtree: true };
+
+    window.bobert = new MutationObserver(handleMutations);
+    window.bobert.observe(targetNode, config);
+
+    handleMutations();
+    //console.log("bobert...");
+})();
 
 // Separate from the tooltips, this is just the hover tooltips when
 // checking the map. Taken from TTNW, rewritten for OBN Deluxe, and used here.
