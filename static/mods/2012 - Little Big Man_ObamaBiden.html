@@ -31556,32 +31556,23 @@ if (!window.hasInitializedNewFooter) {
 // Observer to fix EV/PV estimate buttons on polling map
 // @todo: fix
 window.fixEstimateButtons = function() {
-    // 1. Fix the PV Switcher Text
     const pvBtn = document.getElementById('pvswitcher');
     if (pvBtn && pvBtn.textContent === 'PV Estimate') {
         pvBtn.textContent = 'Popular Vote Estimate';
     }
 
-    // 2. Fix the EV Estimate Button
     const evBtn = document.getElementById('ev_est');
     
-    // Check if button exists AND if we haven't already fixed it
-    if (evBtn && !evBtn.dataset.bobertFixed) {
-        
-        // Clone the node to strip existing game event listeners
+    if (evBtn && !evBtn.dataset.bobertFixed) {    
         const newBtn = evBtn.cloneNode(true);
         evBtn.parentNode.replaceChild(newBtn, evBtn);
         
-        // Mark it as fixed so Bobert ignores it next time (Prevents Infinite Loop)
         newBtn.dataset.bobertFixed = "true";
 
-        // Add the new toggling logic
         newBtn.addEventListener('click', () => {
             const switchingEst = document.getElementById('switchingEst');
             const currentText = newBtn.textContent;
             
-            // Check for the global variables used in the mod (slrr / nnn)
-            // Using typeof checks to prevent crashes if variables aren't loaded yet
             const stateEstContent = (typeof slrr !== 'undefined') ? slrr : "";
             const evEstContent = (typeof nnn !== 'undefined') ? nnn : "";
 
@@ -31595,83 +31586,6 @@ window.fixEstimateButtons = function() {
         });
     }
 };
-
-function setupEstimateButtonFixes() {
-  let pvswitcher = null;
-  let evEst = null;
-
-  // function to fix the PV switcher text
-  const fixPVSwitcher = () => {
-    const btn = document.getElementById('pvswitcher');
-    if (btn && btn.textContent === 'PV Estimate') {
-      btn.textContent = 'Popular Vote Estimate';
-      pvswitcher = btn;
-    }
-  };
-
-  // function to fix the EV estimate button
-  const fixEVEstButton = () => {
-    const btn = document.getElementById('ev_est');
-    if (!btn || evEst === btn) return;
-    
-    evEst = btn;
-    const currentText = btn.textContent;
-    
-    // Clone button to remove old handlers
-    const newButton = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newButton, btn);
-    
-    if (currentText.includes('Switch to State Estimate')) {
-      newButton.addEventListener('click', () => {
-        const switchingEst = document.getElementById('switchingEst');
-        if (switchingEst && typeof slrr !== 'undefined') {
-          switchingEst.innerHTML = slrr;
-          newButton.textContent = 'Electoral Vote Estimate';
-        }
-      });
-    } else if (currentText.includes('Electoral Vote Estimate')) {
-      newButton.addEventListener('click', () => {
-        const switchingEst = document.getElementById('switchingEst');
-        if (switchingEst && typeof nnn !== 'undefined') {
-          switchingEst.innerHTML = nnn;
-          newButton.textContent = 'Switch to State Estimate';
-        }
-      });
-    }
-    
-    evEst = newButton;
-  };
-
-  // only observe the specific container that holds these buttons
-  const observer = new MutationObserver(() => {
-    fixPVSwitcher();
-    fixEVEstButton();
-  });
-
-  // wait for overall_result to exist, then observe only that element
-  const checkForContainer = setInterval(() => {
-    const container = document.getElementById('overall_result');
-    if (container) {
-      clearInterval(checkForContainer);
-      
-      // run fixes immediately
-      fixPVSwitcher();
-      fixEVEstButton();
-      
-      observer.observe(container, {
-        childList: true,
-        subtree: true,
-        characterData: true,
-      });
-    }
-  }, 100);
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', setupEstimateButtonFixes);
-} else {
-  setupEstimateButtonFixes();
-}
 
 // This is a mechanism for visit feedbacks. Essentially,
 // depending on the state's distances to each other, your
