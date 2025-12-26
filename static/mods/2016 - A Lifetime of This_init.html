@@ -1,7 +1,7 @@
  /*
  * @title: 2016: A Lifetime of This / 2016b / The Hillary Trail
  * @author: StrawberryMaster & Friends
- * @version: 1.1.8
+ * @version: 1.1.9
  * @description: The 2016 election in the eyes of Hillary Clinton (and a couple of others, too)
  * 
  * Coding license: Apache License 2.0
@@ -1566,99 +1566,68 @@ HistPV = ["62,985,153", "65,853,677", "4,489,359", "1,457,288"];
 HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 
 // This is to replace the existing voting system descriptions.
-(() => {
+(function() {
     'use strict';
+
+    const METHOD_VALUE = {
+        SAINTE_LAGUE: "4",
+        DHONDT: "5",
+        HUNTINGTON_HILL: "6",
+        LR_HARE: "7",
+        APPROVAL_SL: "8",
+        BORDA_SL: "9",
+        COPELAND_SL: "10",
+    };
 
     const DESCRIPTIONS = {
         "1": `<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>
           <p>In the winner-take-all system, the candidate who wins the popular vote in a state receives <em>all</em> of that state’s electoral votes, regardless of the margin of victory. For instance, if Candidate A defeats Candidate B in a state worth 20 electoral votes, Candidate A will win the 20 electoral votes. In the United States, this is how 48 out of 50 states currently operate (Maine and Nebraska use a district method).</p>
           <p>This system amplifies the importance of swing states while making “safe” states less influential in campaign strategy. It also makes it extremely difficult for third-party candidates to win any electoral votes, and has also resulted in popular vote winners losing the election. A good example of this is the election of 2000, where a razor-thin lead gave George Bush the state of Florida’s 25 electoral votes and the election, even as he lost the popular vote to Al Gore.</p>`,
-
         "2": `<p><strong>Allocate each state’s electoral votes proportionally.</strong></p>
           <p>Under the proportional system, each state’s electoral votes are distributed proportionally based on the popular vote percentage each candidate receives. If a candidate wins 60% of a state’s vote, they receive approximately 60% of that state’s electoral votes.</p>
-          <p>The winner of a state still maintains an advantage due to rounding (in a state with 4 electoral votes, 51% of the vote typically yields 3 electoral votes), but the system much more closely reflects the will of the voters. It also makes every state more competitive, as candidates could gain electoral votes even in states they don’t win outright. This system would have changed the outcomes of several elections, including 1860, 1948, 1968, 1992, and 2000.</p>`
+          <p>The winner of a state still maintains an advantage due to rounding (in a state with 4 electoral votes, 51% of the vote typically yields 3 electoral votes), but the system much more closely reflects the will of the voters. It also makes every state more competitive, as candidates could gain electoral votes even in states they don’t win outright. This system would have changed the outcomes of several elections, including 1860, 1948, 1968, 1992, and 2000.</p>`,
+        "3": `<p><strong style='color:navy'>From sea to shining sea!</strong> – you know how it is. Do the Bartman.</p>`,
     };
 
-    let isInitialized = false;
-    let currentSelect = null;
-	let globalObserver = null;
-
     function updateDescription(value) {
-        const descriptionEl = document.getElementById("opponent_selection_description_window");
-        if (descriptionEl) {
-            const text = DESCRIPTIONS[value] || DESCRIPTIONS["1"];
-            requestAnimationFrame(() => {
-                descriptionEl.innerHTML = text;
-            });
+        const descBox = document.getElementById("opponent_selection_description_window");
+        if (descBox) {
+            descBox.innerHTML = DESCRIPTIONS[value] || DESCRIPTIONS["1"];
         }
     }
 
-    function handleSelectionChange(event) {
-        updateDescription(event.target.value);
-    }
+    function modifySelector() {
+        const select = document.getElementById("game_type_id");
+        if (!select || select.dataset.enhanced) return;
 
-    function modifyInterface() {
-        const form = document.querySelector('form[name="game_type_selection"]');
-        if (!form) return false;
-
-        const select = form.querySelector('select[name="game_type_id"]');
+        const optionsArr = Array.from(select.options);
+        const propIndex = optionsArr.findIndex(o => o.value === "2");
         
-        if (!select || select.dataset.enhanced === "true") return false;
+        // since we want the array order to be preserved, we should increment the index as we add
+        let insertIndex = propIndex !== -1 ? propIndex + 1 : select.length;
 
-        if (currentSelect && currentSelect !== select) {
-            currentSelect.removeEventListener('change', handleSelectionChange);
-        }
-        currentSelect = select;
+        // rename existing options
+        const wta = select.querySelector('option[value="1"]');
+        if (wta) wta.textContent = "Winner‑Take‑All (default)";
+        
+        const prop = select.querySelector('option[value="2"]');
+        if (prop) prop.textContent = "Proportional";
 
-        // 0 - WTA, 1 - Proportional
-        const wtaOption = select.querySelector('option[value="1"]');
-        if (wtaOption) wtaOption.textContent = 'Winner-Take-All (default)';
-
-        const propOption = select.querySelector('option[value="2"]');
-        if (propOption) propOption.textContent = 'Proportional';
-
-        const h3 = form.querySelector('h3');
-        if (h3) {
-            h3.textContent = 'How would you like electoral votes to be allocated?';
+        // update header
+        const form = select.closest("form");
+        if (form) {
+            const h3 = form.querySelector("h3");
+            if (h3) h3.textContent = "How would you like electoral votes to be allocated?";
         }
 
-        select.addEventListener('change', handleSelectionChange, { passive: true });
-        
+        select.addEventListener("change", (e) => updateDescription(e.target.value));
+
         updateDescription(select.value);
 
         select.dataset.enhanced = "true";
-
-        return true;
     }
-
-    function initObserver() {
-        const gameWindow = document.getElementById("game_window");
-        
-        if (!gameWindow) {
-            setTimeout(initObserver, 200);
-            return;
-        }
-
-        modifyInterface();
-
-        globalObserver = new MutationObserver((mutations) => {
-            modifyInterface();
-        });
-
-        globalObserver.observe(gameWindow, {
-            childList: true,
-            subtree: true
-        });
-    }
-
-    initObserver();
-
-    window.cleanupElectoralSystemModifier = () => {
-        if (globalObserver) {
-            globalObserver.disconnect();
-            globalObserver = null;
-        }
-    };
+	
+	window.modifySelector = modifySelector;
 })();
 
 // Funny test. Probably won't last long.
@@ -2466,18 +2435,8 @@ try {
 
     difficultyEl.appendChild(wrapper);
   }
-
-  try { createSqueakyCheckbox(); } catch (e) { /* ignore */ }
-
-  const observer = new MutationObserver(() => {
-    try {
-      if (!document.getElementById("squeaky_clean_wrapper") && document.getElementById("difficulty_level")) {
-        createSqueakyCheckbox();
-      }
-    } catch (e) { /* ignore */ }
-  });
-
-  observer.observe(gameWindow, { childList: true, subtree: true });
+  
+  window.createSqueakyCheckbox = createSqueakyCheckbox;
 })();
 
 // This is, essentially, for preventing candidates or running mates
@@ -2550,13 +2509,8 @@ function automateStartSequence() {
         }
     };
 	
-    const targetNode = document.getElementById(IDS.gameWindow) || document.body;
-    
-    const observer = new MutationObserver(handleDomChange);
-    observer.observe(targetNode, { childList: true, subtree: true });
+    window.automateStartSequence = automateStartSequence;
 }
-
-automateStartSequence();
 
 // Useful if you have a mod series!
 // Here, it lets you switch easily to 2012LBM.
@@ -2571,6 +2525,7 @@ automateStartSequence();
         containerId: 'game_window', 
         baseUrl: 'https://campaigntrailshowcase.com/campaign-trail/',
         modsToAdd: [
+			{ value: '1992', text: '1992 - Every Brilliant Thing', modName: '1992 - Every Brilliant Thing' },
             { value: '2012', text: '2012 - Little Big Man', modName: '2012 - Little Big Man' },
         ],
     };
@@ -2628,27 +2583,66 @@ automateStartSequence();
         attemptAutoStart();
     }
 
-    function initObserver() {
-        const targetNode = document.getElementById(CONFIG.containerId) || document.body;
+    window.modifyElectionSelect = modifyElectionSelect;
+})();
 
-        onDomChange();
+// This is a catch-all mutation observer so that
+// we keep one having them all run at once
+(function() {
+    'use strict';
 
-        const observer = new MutationObserver((mutations) => {
-            onDomChange();
-        });
-
-        observer.observe(targetNode, {
-            childList: true,
-            subtree: true
-        });
+    if (window.glorble) {
+        window.glorble.disconnect();
     }
+	
+	window.glorbleTasks = [];
+	
+	const initialTasks = () => {
+        // voting method selector
+        const gameTypeSelect = document.getElementById("game_type_id");
+		if (gameTypeSelect && !gameTypeSelect.dataset.enhanced && typeof window.modifySelector === 'function') {
+            window.modifySelector(); 
+        }
+		
+		// candidate blocking
+		if (!document.getElementById("squeaky_clean_wrapper") && document.getElementById("difficulty_level")) {
+			createSqueakyCheckbox();
+		}
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initObserver);
-    } else {
-        initObserver();
-    }
+        // candidate blocking
+		if (typeof automateStartSequence === 'function') {
+            automateStartSequence(); 
+        }
 
+        // mod switcher
+        const electionSelect = document.querySelector('select[name="election_id"]');
+        if (electionSelect && !electionSelect.dataset.modifiedByScript && typeof window.modifyElectionSelect === 'function') {
+            window.modifyElectionSelect(electionSelect);
+        }
+    };
+	
+	window.glorbleTasks.push(initialTasks);
+	
+	const handleMutations = (mutationsList) => {
+        if (!window.glorbleTasks) return;
+        
+        for (let i = 0; i < window.glorbleTasks.length; i++) {
+            try {
+                window.glorbleTasks[i]();
+            } catch (e) {
+                console.error("Zoinks! Error in glorble task:", e);
+            }
+        }
+    };
+
+    const targetNode = document.getElementById("game_window");
+    const config = { childList: true, subtree: true };
+
+    window.glorble = new MutationObserver(handleMutations);
+    window.glorble.observe(targetNode, config);
+
+    handleMutations();
+    //console.log("glorble...");
 })();
 
 // Achievements?
