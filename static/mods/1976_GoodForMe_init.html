@@ -16,7 +16,7 @@ campaignTrail_temp.global_parameter_json = [
             "issue_stance_6_max": 0.71,
             "global_variance": 0.01,
             "state_variance": 0.005,
-            "question_count": 21,
+            "question_count": 25,
             "default_map_color_hex": "#C9C9C9",
             "no_state_map_color_hex": "#999999"
         }
@@ -30,20 +30,22 @@ campaignTrail_temp.election_json = [
         "fields": {
             "year": 1976,
             "summary": "<u> <p style=\"font-family: oblique; font-size: 0.9rem;\"><strong>The 1976 election stands as one of the most interesting in modern history.</u></p></strong> <p>Republican John Lindsay is seeking a second term after a presidency full of ups and downs and a divided party. Henry M. Jackson hopes to channel the energy of the Democrats’ 1974 midterm victory to return the party to the White House, but the shadow of Robert Kennedy still hangs over him. And Ronald Reagan, once a political “has-been,” is leading an independent bid with the backing of the conservative movement, and a real shot at power.</p><p> In this broken, strange, fast-moving world, can Lindsay hang on to his job a while longer, or is this the end of Republican liberalism once and for all?</p>",
-            "image_url": "https://i.imgur.com/LAiK9X4.jpeg",
+            "image_url": "https://i.imgur.com/hbn6rAD.jpeg",
             "winning_electoral_vote_number": 270,
             "advisor_url": "https://i.imgur.com/oJVFkZD.jpeg",
             "recommended_reading": "<h2>About This Mod</h2>\n<p>I've always been fascinated by candidates who, though they belong to one party, seem unmistakably like members of the other. John Lindsay, Nelson Rockefeller, Jacob Javits&mdash;but also John Connally, Joe Lieberman, and George Wallace. It's a very American phenomenon, and it makes for a very interesting game. This mod (my first) is an attempt to use a scenario based on such a figure to create a fun, replayable game. I hope you enjoyed it.</p>\n<p>I'd like to thank Thatchmaster (for the coding of the endings, especially the Wikipedia, the Newspapers and the Reddit ones), and ItsAstronomical (for the explanations in his codes and the tutorial) . Their code has been very helpful in tackling the hard work of modding, and any mistakes I made trying to emulate them are mine. I also want to thank obummer (for the codes on the soundtrack of the game and his displaying), Jet (for Jet's TCT Mod Tool, without this mod wouldn't have happened), and Tom1923 (for the campaign sign display).</p>\n<p>And to the rest of you politics obsessives who made it this far, thank you for spending your time on this mini-project that kept me entertained for a few weeks. See you around.</p>",
             "has_visits": 1,
             "no_electoral_majority_image": "../static/images/2012-no-majority.jpg",
             "creator": "Trystant",
-            "display_year": "1976_GoodForMe"
+            "display_year": "1976_GoodForMe",
+	        "site_description":"<p>Republican John Lindsay is seeking a second term after a presidency full of ups and downs and a divided party. Henry M. Jackson hopes to channel the energy of the Democrats’ 1974 midterm victory to return the party to the White House, but the shadow of Robert Kennedy still hangs over him. And Ronald Reagan, once a political “has-been,” is leading an independent bid with the backing of the conservative movement, and a real shot at power.</p><p>In this broken, strange, fast-moving world, can Lindsay hang on to his job a while longer, or is this the end of Republican liberalism once and for all?</p>"
         }
     }
 ]
 
 campaignTrail_temp.modBoxTheme = {
     "header_color": "#4382b3",
+  "header_image_url": "https://i.imgur.com/URT6CP6.jpeg",
     "header_text_color": "#000000",
     "description_text_color": "#000000",
     "description_background_color": "#96c2e3",
@@ -111,7 +113,7 @@ campaignTrail_temp.candidate_json = [
             "color_hex": "#d4b611",
             "secondary_color_hex": null,
             "is_active": 1,
-            "image_url": "https://i.imgur.com/kgkVljg.jpeg[/img]",
+            "image_url": "https://i.imgur.com/4hIQmFe.jpeg",
             "electoral_victory_message": "<h3>Johnson wins.</h3>",
             "electoral_loss_message": "<h3>Johnson loses.</h3>",
             "no_electoral_majority_message": "<h3>Deadlock!</h3>",
@@ -126,14 +128,14 @@ campaignTrail_temp.candidate_json = [
             "first_name": "Eugene",
             "last_name": "McCarthy",
             "election": 4,
-            "party": "Independent",
+            "party": "Progressive",
             "state": "Minnesota",
             "priority": 1,
-            "description": "<p>Placeholder LBJ description.</p>",
+            "description": "<div style='overflow-y: scroll; height: 200px;'><u> <p style=\"font-family: oblique; font-size: 0.9rem;\"><strong>Why is he running? He's running for himself. </strong></p></u><p>Eugene McCarthy is a man starving for recognition, forever scratching at the door of history. From the day Bobby Kennedy stole the Democratic nomination from him to the quiet sabotage that pushed him into staying out in &rsquo;72, the world has seemed determined to forget the one-time lone figure with the nerve to stand up to Jimbo and his big sword.</p><p>This election, though, cracks open a window for McCarthy&mdash;despite a miserable showing in the Democratic primaries (his private hope is that no one remembers it). With no progressive on the two parties, a slice of stubborn holdouts may drift toward a third party. McCarthy knows his bid is protest politics, and he&rsquo;s built it accordingly: a popular folk singer as his running mate. He doesn&rsquo;t want to win. He wants his name back in the papers&mdash;interviews, cameras, maybe even a debate podium. And after that? A book deal, a tour, and a quiet wait for the next set of primaries.</p><p>The campus flame and the upheaval of eight years ago have cooled to embers, and the country is tilting toward a new conservatism. <em><strong>McCarthy wants to convince America that hope still has a future. The problem is, he may not believe it.</strong></em></p></div>",
             "color_hex": "#278f1e",
             "secondary_color_hex": null,
-            "is_active": 0,
-            "image_url": "../static/images/barack-obama-2012.jpg",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/s0rIZNR.jpeg",
             "electoral_victory_message": "<h3>Johnson wins.</h3>",
             "electoral_loss_message": "<h3>Johnson loses.</h3>",
             "no_electoral_majority_message": "<h3>Deadlock!</h3>",
@@ -281,7 +283,7 @@ campaignTrail_temp.running_mate_json = [
     },
     {
         "model": "campaign_trail.running_mate",
-        "pk": 304,
+        "pk": 303,
         "fields": {
             "candidate": 1001,
             "running_mate": 1006
@@ -421,7 +423,7 @@ if (c == 1001 && !candidateButton && !runningMateButton) {
   }
 } 
 
-else if ((c == 1002 || c == 1003) && candidateButton && !runningMateButton) { 
+else if ((c == 1002 || c == 1003 || c == 8889) && candidateButton && !runningMateButton) { 
   candidateButton.remove();
 }
 
@@ -446,508 +448,17 @@ if (finalScreenID) {
   }
   clearInterval(startScreenUpdater);  
 }
-}, 100);  
-
-
- // MUSIC MODE
-
-
-    RecReading = true;
-
-    const windowsAdvisorTargetNode = document.getElementById("game_window");
-    const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
-    const callback = (mutationList, observer) => {
-        let visitWindow = document.getElementsByClassName("overlay_window")[0];
-        if (!visitWindow || visitWindow.classList.contains("done")) return;
-        visitWindow.classList.add("done", "window");
-        let titleBar = visitWindow.querySelector("h3");
-        titleBar.classList.add("title-bar", "title-bar-text");
-        titleBar.style.paddingLeft = "3px";
-    };
-    // const observer = new MutationObserver(callback);
-    // observer.observe(windowsAdvisorTargetNode, windowsAdvisorConfig);
-    
-    class Song {
-        constructor(title, artist, coverLink, audioLink) {
-            this.title = title;
-            this.artist = artist;
-            this.coverLink = coverLink; 
-            this.audioLink = audioLink;
-        }
-        getTitle()     { return this.title; }
-        getArtist()    { return this.artist; }
-        getCoverLink() { return this.coverLink; }
-        getAudioLink() { return this.audioLink; }
-    }
-    
-    class Playlist {
-        constructor() {
-            this.songs = [];
-            this.currentSongIndex = 0;
-        }
-        addSong(song) {
-            this.songs.push(song);
-        }
-        getCurrentSong() {
-            return this.songs[this.currentSongIndex];
-        }
-        playNext() {
-            this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
-        }
-        playPrevious() {
-            this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
-        }
-    }
-    window.Playlist = Playlist;
-    window.Song = Song;
-    
-    function changePlaylist(newPlaylist) {
-        playlist = newPlaylist;
-        playlist.currentSongIndex = 0;
-        updateUI();
-        const audio = document.getElementById("audio");
-        audio.src = playlist.getCurrentSong().getAudioLink();
-        audio.play();
-    }
-    window.changePlaylist = changePlaylist;
-    
-    function updateUI() {
-        const currentSong = playlist.getCurrentSong();
-        document.getElementById("track-title").textContent  = currentSong.getTitle();
-        document.getElementById("track-artist").textContent = currentSong.getArtist();
-        const coverArtElem = document.getElementById("cover-art");
-        if (coverArtElem) {
-            coverArtElem.src = currentSong.getCoverLink();
-        }
-    }
-    
-    function setupMusicPlayer() {
-        playlist = new Playlist();
-    
-        const newSong1 = new Song(
-            "El Presidente", 
-            "Herb Alpert",   
-            "https://i.imgur.com/DEqMoQp.jpeg",
-            "https://audio.jukehost.co.uk/5frfkXT0F7DzPlklwGG2vUn5wO09CApU"
-        );    
-        const newSong2 = new Song(
-            "The Naughty Lady of Shady Lane",  
-            "Dean Martin",            
-            "https://i.imgur.com/CoNAepo.jpeg",
-            "https://audio.jukehost.co.uk/r4rnyeweyQGSshTAadAJCmyfktaUZf0c"
-        );
-        const newSong3 = new Song(
-            "A Horse With No Name",  
-            "America",            
-            "https://i.imgur.com/kkQ3Mcz.jpeg",
-            "https://audio.jukehost.co.uk/dpui8W61ppJOf3QvgS7QDW5IfVLIDqTo"
-        );
-        const newSong4 = new Song(
-            "Political Science",  
-            "Randy Newman",            
-            "https://i.imgur.com/cuhyzpZ.jpeg",
-            "https://audio.jukehost.co.uk/uUZ0kCigCGapRIlxmivqcqVHw3owxEtq"
-        );
-        const newSong5 = new Song(
-            "The Sun Ain't Gonna Shine Anymore",  
-            "The Walker Brothers",            
-            "https://i.imgur.com/FgyWhvT.jpeg",
-            "https://audio.jukehost.co.uk/K0mx8h37C0f1NgcgPRCJeMcrP4B21NGy"
-        );
-    
-        playlist.addSong(newSong1);
-        playlist.addSong(newSong2);
-        playlist.addSong(newSong3);
-        playlist.addSong(newSong4);
-        playlist.addSong(newSong5);    
-        let audio = document.getElementById("audio");
-        if (!audio) {
-            audio = document.createElement("audio");
-            audio.id = "audio";
-            document.body.appendChild(audio);
-        }
-        audio.src = playlist.getCurrentSong().getAudioLink();
-    
-        const tapeRecorder = document.createElement("div");
-        tapeRecorder.id = "tape-recorder";
-        const gameWindow_player = document.getElementById("game_window");
-        gameWindow_player.insertAdjacentElement("afterend", tapeRecorder);
-    
-        const infoOverlay = document.createElement("div");
-        infoOverlay.id = "info-overlay";
-    
-        const titleDiv = document.createElement("div");
-        titleDiv.id = "track-title";
-    
-        const artistDiv = document.createElement("div");
-        artistDiv.id = "track-artist";
-    
-        infoOverlay.appendChild(titleDiv);
-        infoOverlay.appendChild(artistDiv);
-        tapeRecorder.appendChild(infoOverlay);
-    
-        const coverWrapper = document.createElement("div");
-        coverWrapper.id = "cover-wrapper";
-        tapeRecorder.appendChild(coverWrapper);
-    
-        const coverBG = document.createElement("img");
-        coverBG.id = "cover-bg";
-        coverBG.src = "https://i.imgur.com/E2mOaNa.png";
-    
-        const coverArt = document.createElement("img");
-        coverArt.id = "cover-art";
-        coverArt.src = playlist.getCurrentSong().getCoverLink();
-    
-        coverWrapper.appendChild(coverBG);
-        coverWrapper.appendChild(coverArt);
-    
-        const playerBottom = document.createElement("div");
-        playerBottom.id = "player-bottom";
-        tapeRecorder.appendChild(playerBottom);
-    
-        const controlsOverlay = document.createElement("div");
-        controlsOverlay.id = "controls-overlay";
-    
-        const prevButton = document.createElement("button");
-        prevButton.id = "prev-button";
-        prevButton.textContent = "←";
-        prevButton.addEventListener("click", () => {
-            playlist.playPrevious();
-            updateUI();
-            audio.src = playlist.getCurrentSong().getAudioLink();
-            audio.currentTime = 0;
-            audio.play();
-            tapeRecorder.style.backgroundImage = "url('https://i.imgur.com/9r84LOy.png')";
-            toggleButton.textContent = "Stop";
-        });
-    
-        const nextButton = document.createElement("button");
-        nextButton.id = "next-button";
-        nextButton.textContent = "→";
-        nextButton.addEventListener("click", () => {
-            playlist.playNext();
-            updateUI();
-            audio.src = playlist.getCurrentSong().getAudioLink();
-            audio.currentTime = 0;
-            audio.play();
-            tapeRecorder.style.backgroundImage = "url('https://i.imgur.com/9r84LOy.png')";
-            toggleButton.textContent = "Stop";
-        });
-    
-        const volumeSlider = document.createElement("input");
-        volumeSlider.id = "volume-slider";
-        volumeSlider.type = "range";
-        volumeSlider.min = "0";
-        volumeSlider.max = "100";
-        volumeSlider.value = "50";
-        volumeSlider.addEventListener("input", function() {
-            const volumeValue = parseFloat(this.value) / 100;
-            audio.volume = volumeValue;
-        });
-    
-        const toggleButton = document.createElement("button");
-        toggleButton.id = "toggle-button";
-        tapeRecorder.style.backgroundImage = "url('https://i.imgur.com/9r84LOy.png')";
-        toggleButton.textContent = "Stop";
-        toggleButton.addEventListener("click", () => {
-            if (audio.paused) {
-                audio.play();
-                tapeRecorder.style.backgroundImage = "url('https://i.imgur.com/9r84LOy.png')";
-                toggleButton.textContent = "Stop";
-            } else {
-                audio.pause();
-                tapeRecorder.style.backgroundImage = "url('https://i.imgur.com/9r84LOy.png')";
-                toggleButton.textContent = "Start";
-            }
-        });
-    
-        controlsOverlay.appendChild(prevButton);
-        controlsOverlay.appendChild(nextButton);
-        controlsOverlay.appendChild(volumeSlider);
-        controlsOverlay.appendChild(toggleButton);
-        playerBottom.appendChild(controlsOverlay);
-    
-        const progressContainer = document.createElement("div");
-        progressContainer.id = "progress-container";
-    
-        const progressBar = document.createElement("input");
-        progressBar.id = "progress-bar";
-        progressBar.type = "range";
-        progressBar.min = 0;
-        progressBar.value = 0;
-        progressBar.step = 1;
-    
-        progressBar.addEventListener("input", (e) => {
-            audio.currentTime = parseFloat(e.target.value);
-        });
-    
-        progressContainer.appendChild(progressBar);
-        playerBottom.appendChild(progressContainer);
-    
-        audio.addEventListener("ended", () => {
-            playlist.playNext();
-            updateUI();
-            audio.src = playlist.getCurrentSong().getAudioLink();
-            audio.currentTime = 0;
-            audio.play();
-            tapeRecorder.style.backgroundImage = "url('https://i.imgur.com/9r84LOy.png')";
-            toggleButton.textContent = "Stop";
-        });
-    
-        updateUI();
-    
-        audio.addEventListener("timeupdate", () => {
-            if (!audio.duration || isNaN(audio.duration)) return;
-            progressBar.max = audio.duration;
-            progressBar.value = audio.currentTime;
-        });
-    
-        audio.play().then(() => {
-            tapeRecorder.style.backgroundImage = "url('https://i.imgur.com/9r84LOy.png')";
-            toggleButton.textContent = "Stop";
-        }).catch(() => {
-            console.log("Autoplay blocked. Waiting for user interaction...");
-            tapeRecorder.style.backgroundImage = "url('https://i.imgur.com/9r84LOy.png')";
-            toggleButton.textContent = "Start";
-        });
-    }
-    
-    const style = document.createElement("style");
-    style.textContent = `
-    #tape-recorder {
-      width: 495px;
-      height: 325px;
-      transform: scale(0.85);
-      background-position: center;
-      background-size: cover;
-      position: absolute;
-      display: block;
-      margin: 0 auto;
-    }
-    
-    #info-overlay {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      color: #fff;
-      font-family: sans-serif;
-      text-shadow: 1px 1px 2px black;
-    }
-    #track-title {
-      font-size: 18px;
-      font-weight: bold;
-    }
-    #track-artist {
-      font-size: 14px;
-      margin-top: 3px;
-    }
-    
-    #cover-wrapper {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-      pointer-events: none;
-    }
-    #cover-bg {
-      position: absolute;
-      width: 200px;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    #cover-art {
-      position: absolute;
-      width: 180px;
-      bottom: 50px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    
-    #player-bottom {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      z-index: 2;
-    }
-    #controls-overlay {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    #prev-button,
-    #next-button,
-    #toggle-button {
-      appearance: auto;
-      font-style: normal;
-      font-variant: normal;
-      font-weight: normal;
-      font-stretch: normal;
-      font-size: 1rem;
-      font-family: inherit;
-      text-rendering: auto;
-      color: buttontext;
-      letter-spacing: normal;
-      word-spacing: normal;
-      line-height: normal;
-      text-transform: none;
-      text-indent: 0px;
-      text-shadow: none;
-      display: inline-block;
-      text-align: center;
-      align-items: flex-start;
-      cursor: pointer;
-      box-sizing: border-box;
-      background-color: buttonface;
-      margin: 0em;
-      border-width: 2px;
-      border-style: outset;
-      border-color: buttonborder;
-      border-image: initial;
-      padding: 6px 10px;
-      min-width: 60px;
-    }
-    #prev-button:hover,
-    #next-button:hover,
-    #toggle-button:hover {
-      border-style: inset;
-      background-color: #e0e0e0;
-    }
-    
-    #volume-slider {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100px;
-      height: 14px;
-      background-color: buttonface;
-      border: 2px solid buttonborder;
-      border-radius: 0;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      cursor: pointer;
-    }
-    #volume-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 14px;
-      height: 24px;
-      background: buttonface;
-      border: 2px solid buttonborder;
-      border-radius: 0;
-      cursor: pointer;
-      box-sizing: border-box;
-      margin-top: -5px;
-    }
-    #volume-slider::-moz-range-thumb {
-      width: 14px;
-      height: 24px;
-      background: buttonface;
-      border: 2px solid buttonborder;
-      border-radius: 0;
-      cursor: pointer;
-      box-sizing: border-box;
-    }
-    
-    #progress-container {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      justify-content: center;
-    }
-    #progress-bar {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 200px;
-      height: 14px;
-      background-color: #515151;
-      border: 2px solid buttonborder;
-      border-radius: 0;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      cursor: pointer;
-    }
-    #progress-bar::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 14px;
-      height: 24px;
-      background: #d0d0d0;
-      border: 2px solid buttonborder;
-      border-radius: 0;
-      cursor: pointer;
-      box-sizing: border-box;
-      margin-top: -5px;
-    }
-    #progress-bar::-moz-range-thumb {
-      width: 14px;
-      height: 24px;
-      background: #d0d0d0;
-      border: 2px solid buttonborder;
-      border-radius: 0;
-      cursor: pointer;
-      box-sizing: border-box;
-    }
-    
-    #bonus_menu_area {
-      margin-top: 120px;
-    }
-#candidate_description_window {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 15px;
-
-  height: auto;
-  overflow: visible;
-  line-height: 1.5;
-  padding: 10px;
-  box-sizing: border-box;
-}
-#candidate_description_window ul {
-  margin-left: 0;
-  padding-left: 0;
-  list-style-position: inside;
-}
-.campaign_trail_start_emphasis {
-    background-color: #a84832;
-  }
-  #election_summary {
-	padding-top: 0 !important;
-  }
-  
-	.custom-p button {
-	  background: initial;
-	}
-	.custom-p button:hover {
-	  background: #2c446e !important;
-	}
-	.custom-p button:before {
-	  content: none;
-	}
-	.custom-p button:disabled {
-	  background: #242a33 !important;
-	  cursor: auto !important;
-	}
-    `;
-    document.head.appendChild(style);
-    
-    setupMusicPlayer();
-
+}, 100);
 
 campaignTrail_temp.achievements = {
   "Found love" : {
     "image" : "https://i.imgur.com/n7j90FZ.jpeg",
     "description" : "Win",
+      "cannotBeCheated" : true
+  },
+  "Up, up to the sky" : {
+    "image" : "https://i.imgur.com/KnjI1Pa.jpeg",
+    "description" : "Win the midterms",
       "cannotBeCheated" : true
   },
   "Words cannot recall" : {
@@ -1012,12 +523,27 @@ campaignTrail_temp.achievements = {
   },
   "In which God they can trust" : {
     "image" : "https://i.imgur.com/BsvDAds.jpeg",
-    "description" : "Correct the timeline, 8 years later",
+    "description" : "Win as Richard Nixon",
+      "cannotBeCheated" : true
+  },
+  "Somebody to Love" : {
+    "image" : "https://i.imgur.com/aHOanNs.jpeg",
+    "description" : "Win with the secret candidates",
       "cannotBeCheated" : true
   },
   "I'm bound to cross the line" : {
     "image" : "https://i.imgur.com/4aUxmSj.jpeg",
     "description" : "Win with Brooke as your VP",
+      "cannotBeCheated" : true
+  },
+  "The love of your mother" : {
+    "image" : "https://i.imgur.com/1LGslrN.jpeg",
+    "description" : "Win as Richard Nixon in a landslide",
+      "cannotBeCheated" : true
+  },
+  "The world on your shoulders" : {
+    "image" : "https://i.imgur.com/TszJfZn.jpeg",
+    "description" : "Correct the timeline",
       "cannotBeCheated" : true
   },
   "One of toil and blood" : {
