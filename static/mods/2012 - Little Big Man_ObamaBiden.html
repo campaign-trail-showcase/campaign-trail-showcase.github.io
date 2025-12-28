@@ -29700,11 +29700,6 @@ function applySwitcheroo(config) {
 // to reflect their strengths and weaknesses compared to the default
 const NOMINEE_MODIFICATIONS = {
     "Newt Gingrich": {
-		issueScores: { 
-            1: -0.05,
-            3: -0.08,
-            4: -0.08  
-        },
         regionMultipliers: {
             "Deep South": 1.065,
             "Appalachia": 1.032,
@@ -29720,10 +29715,6 @@ const NOMINEE_MODIFICATIONS = {
         }
     },
     "Rick Santorum": {
-		issueScores: { 
-            1: -0.075,
-            4: -0.08
-        },
         regionMultipliers: {
             "Rust Belt": 1.03,
             "Appalachia": 1.04,
@@ -29741,12 +29732,6 @@ const NOMINEE_MODIFICATIONS = {
         }
     },
     "Jon Huntsman": {
-		issueScores: { 
-            1: -0.075,
-            3: 0.075,
-            4: 0.05,
-            5: 0.05
-        },
         regionMultipliers: {
             "Northeast": 1.020,
             "West Coast": 1.021,
@@ -29764,12 +29749,6 @@ const NOMINEE_MODIFICATIONS = {
         }
     },
     "Ron Paul": {
-		issueScores: { 
-            1: 0.01,
-            2: -0.05,
-            3: -0.075,
-            4: -0.05
-        },
         regionMultipliers: {
             "Mountain West": 1.085,
             "Plains": 1.065,
@@ -29784,11 +29763,6 @@ const NOMINEE_MODIFICATIONS = {
         }
     },
     "Rick Perry": {
-		issueScores: { 
-            1: -0.05,
-            3: -0.08,
-            5: -0.06
-        },
         regionMultipliers: {
             "Sun Belt": 1.028,
             "Deep South": 1.035,
@@ -29805,11 +29779,6 @@ const NOMINEE_MODIFICATIONS = {
         }
     },
     "Michele Bachmann": {
-		issueScores: { 
-            1: -0.09,
-            3: -0.075,
-            4: -0.08
-        },
         regionMultipliers: {
             "Midwest": 1.038,
             "Plains": 1.043,
@@ -31586,82 +31555,37 @@ if (!window.hasInitializedNewFooter) {
 
 // Observer to fix EV/PV estimate buttons on polling map
 // @todo: fix
-function setupEstimateButtonFixes() {
-  let pvswitcher = null;
-  let evEst = null;
-
-  // function to fix the PV switcher text
-  const fixPVSwitcher = () => {
-    const btn = document.getElementById('pvswitcher');
-    if (btn && btn.textContent === 'PV Estimate') {
-      btn.textContent = 'Popular Vote Estimate';
-      pvswitcher = btn;
+window.fixEstimateButtons = function() {
+    const pvBtn = document.getElementById('pvswitcher');
+    if (pvBtn && pvBtn.textContent === 'PV Estimate') {
+        pvBtn.textContent = 'Popular Vote Estimate';
     }
-  };
 
-  // function to fix the EV estimate button
-  const fixEVEstButton = () => {
-    const btn = document.getElementById('ev_est');
-    if (!btn || evEst === btn) return;
+    const evBtn = document.getElementById('ev_est');
     
-    evEst = btn;
-    const currentText = btn.textContent;
-    
-    // Clone button to remove old handlers
-    const newButton = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newButton, btn);
-    
-    if (currentText.includes('Switch to State Estimate')) {
-      newButton.addEventListener('click', () => {
-        const switchingEst = document.getElementById('switchingEst');
-        if (switchingEst && typeof slrr !== 'undefined') {
-          switchingEst.innerHTML = slrr;
-          newButton.textContent = 'Electoral Vote Estimate';
-        }
-      });
-    } else if (currentText.includes('Electoral Vote Estimate')) {
-      newButton.addEventListener('click', () => {
-        const switchingEst = document.getElementById('switchingEst');
-        if (switchingEst && typeof nnn !== 'undefined') {
-          switchingEst.innerHTML = nnn;
-          newButton.textContent = 'Switch to State Estimate';
-        }
-      });
+    if (evBtn && !evBtn.dataset.bobertFixed) {    
+        const newBtn = evBtn.cloneNode(true);
+        evBtn.parentNode.replaceChild(newBtn, evBtn);
+        
+        newBtn.dataset.bobertFixed = "true";
+
+        newBtn.addEventListener('click', () => {
+            const switchingEst = document.getElementById('switchingEst');
+            const currentText = newBtn.textContent;
+            
+            const stateEstContent = (typeof slrr !== 'undefined') ? slrr : "";
+            const evEstContent = (typeof nnn !== 'undefined') ? nnn : "";
+
+            if (currentText.includes('Switch to State Estimate')) {
+                if (switchingEst) switchingEst.innerHTML = stateEstContent;
+                newBtn.textContent = 'Electoral Vote Estimate';
+            } else {
+                if (switchingEst) switchingEst.innerHTML = evEstContent;
+                newBtn.textContent = 'Switch to State Estimate';
+            }
+        });
     }
-    
-    evEst = newButton;
-  };
-
-  // only observe the specific container that holds these buttons
-  const observer = new MutationObserver(() => {
-    fixPVSwitcher();
-    fixEVEstButton();
-  });
-
-  // wait for overall_result to exist, then observe only that element
-  const checkForContainer = setInterval(() => {
-    const container = document.getElementById('overall_result');
-    if (container) {
-      clearInterval(checkForContainer);
-      
-      // run fixes immediately
-      fixPVSwitcher();
-      fixEVEstButton();
-      
-      observer.observe(container, {
-        childList: true,
-        subtree: true,
-        characterData: true,
-      });
-    }
-  }, 100);
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', setupEstimateButtonFixes);
-} else {
-  setupEstimateButtonFixes();
-}
+};
 
 // This is a mechanism for visit feedbacks. Essentially,
 // depending on the state's distances to each other, your
@@ -32622,7 +32546,7 @@ function getCityEffectsHtml(stateName, cityName) {
   
   for (const [issuePk, val] of entries) {
     const iName = getIssueName(issuePk);
-    const direction = val > 0 ? "right" : "left";
+    const direction = val > 0 ? "left" : "right";
     const sign = val > 0 ? "+" : "";
     html += `<li>${iName}: <b>${sign}${val}</b> <span style="color:#666">(${direction})</span></li>`;
   }
@@ -43351,6 +43275,11 @@ if (gameWindowNode) {
 		// headquarter/Jeeves function
 		if (typeof window.addHeadquarterButton === 'function') {
             window.addHeadquarterButton();
+        }
+		
+		// attempt at fixing the EV/PV estimate buttons
+		if (typeof window.fixEstimateButtons === 'function') {
+            window.fixEstimateButtons();
         }
     };
 	
