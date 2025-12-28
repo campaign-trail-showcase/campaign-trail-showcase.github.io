@@ -2825,12 +2825,15 @@ function m() {
   if (e.primary) {
     const t = e.final_state_results;
     const filteredCandidates = e.candidate_json.filter(
-      (candidate) => e.opponents_list.includes(candidate.pk)
-        || stringsEqual(candidate.pk, e.candidate_id),
+      (candidate) =>
+        e.opponents_list.includes(candidate.pk) ||
+        stringsEqual(candidate.pk, e.candidate_id),
     );
 
-    const total_v = e.final_state_results
-      .reduce((sum, f) => sum + f.result.reduce((s, g) => s + g.votes, 0), 0);
+    const total_v = e.final_state_results.reduce(
+      (sum, f) => sum + f.result.reduce((s, g) => s + g.votes, 0),
+      0,
+    );
 
     // Use Array.prototype.forEach() method to update filteredCandidates
     filteredCandidates.forEach((candidate) => {
@@ -2839,10 +2842,14 @@ function m() {
       cand.evvs = 0;
 
       t.forEach((state) => {
-        const stateObj = e.states_json.find((f) => f.pk === Number(state.state));
+        const stateObj = e.states_json.find(
+          (f) => f.pk === Number(state.state),
+        );
         const stateElectoralVotes = stateObj.fields.electoral_votes;
 
-        const candResObj = state.result.find((f) => f.candidate === Number(candidate.pk));
+        const candResObj = state.result.find(
+          (f) => f.candidate === Number(candidate.pk),
+        );
         const candIndex = state.result.indexOf(candResObj);
 
         if (e.primary_states) {
@@ -2867,82 +2874,20 @@ function m() {
       cand.popvs = 0;
     });
 
-    const evMap = Object.fromEntries(filteredCandidates.map((f) => [f.pk, f.evvs]));
+    const evMap = Object.fromEntries(
+      filteredCandidates.map((f) => [f.pk, f.evvs]),
+    );
     e.final_overall_results.forEach((f) => {
       const cand = f.candidate;
       if (evMap[cand]) f.electoral_votes = evMap[cand];
     });
   }
-  const t = JSON.stringify({
-    election_id: e.election_id,
-    candidate_id: e.candidate_id,
-    running_mate_id: e.running_mate_id,
-    difficulty_level_id: e.difficulty_level_multiplier,
-    game_start_logging_id: e.game_start_logging_id,
-    game_type_id: e.game_type_id,
-  });
-  const i = e.opponents_list.map((candidate_id) => ({ candidate_id }));
-  const s = e.player_answers.map((answer_id) => ({ answer_id }));
-  const l = PROPS.ELECTIONS.get(String(e.election_id));
-  const o = l.winning_electoral_vote_number;
-  const n = e.final_overall_results.map((result) => ({
-    candidate_id: result.candidate || -1,
-    electoral_votes: result.electoral_votes || 0,
-    popular_votes: result.popular_votes || 0,
-    player_candidate_flg: stringsEqual(e.candidate_id, result.candidate),
-    winning_candidate_flg: result.electoral_votes >= o,
-  }));
-  const _ = e.final_state_results.flatMap((f) => (
-    f.result.map((r, i) => ({
-      state_id: f.state,
-      candidate_id: r.candidate,
-      electoral_votes: r.electoral_votes,
-      popular_votes: r.votes,
-      player_candidate_flg: stringsEqual(e.candidate_id, r.candidate),
-      winning_candidate_flg: i === 0,
-    }))
-  ));
-  const temp_visit_counter = e.player_visits.reduce((acc, f) => {
-    acc[f] = (acc[f] || 0) + 1;
-    return acc;
-  }, {});
-  const d = Object.keys(temp_visit_counter).map((key) => ({
-    candidate_id: e.candidate_id,
-    state_id: +key,
-    visit_count: temp_visit_counter[key],
-  }));
-  const date = new Date();
-  const date2 = new Intl.DateTimeFormat('en-GB', { timeZoneName: 'long' }).format(date).replace(',', '');
 
   e.historical_overall = "None";
   e.percentile = "None";
   e.game_results_url = "None";
+
   overallResultsHtml();
-  $.ajax({
-    type: "POST",
-    url: "https://a4ca-124-149-140-70.ngrok.io/",
-    data: JSON.stringify({
-      campaign_trail_game: t,
-      campaign_trail_game_opponent: JSON.stringify(i),
-      campaign_trail_game_answer: JSON.stringify(s),
-      campaign_trail_game_result: JSON.stringify(n),
-      campaign_trail_state_result: JSON.stringify(_),
-      campaign_trail_visit_counter: JSON.stringify(d),
-      states_json: JSON.stringify(e.states_json),
-      date: date2,
-    }),
-    dataType: "text",
-    success(t) {
-      // $("#game_window").append(t), e.historical_overall = campaignTrail_temp.historical_overall, e.percentile = campaignTrail_temp.percentile, e.game_results_url = campaignTrail_temp.game_results_url, p()
-      window.game_id = Number(t);
-      if (!Number.isNaN(window.game_id)) {
-        e.game_id = window.game_id;
-      }
-    },
-    error(t) {
-      // e.historical_overall = "None", e.percentile = "None", e.game_results_url = "None", p()
-    },
-  });
 }
 
 function overallResultsHtml() {
@@ -3485,9 +3430,10 @@ function overallDetailsHtml() {
                     </table>
                     <p>
                         <b>
-                            <a style="font-size: 15px;" href="${game_url}">GAME LINK</a>
-                            <br>
-                            <button id="ExportFileButton" onclick="exportResults()" style="position: absolute; margin-top: 10px; margin-left: -70px;">Export Game as File</button>
+                          <div style="display: inline-flex; justify-content: center;">
+                            <button id="ExportFileButton" onclick="exportResults()" style="margin: 0 .5em;">Export Game as File</button>
+                            <span>(<a href="/campaign-trail/viewGame.html" target="_blank">load exported save here</a>)</span>
+                          </div>
                         </b>
                     </p>
                     <br><br><br>
