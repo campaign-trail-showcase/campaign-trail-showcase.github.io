@@ -18,7 +18,7 @@ campaignTrail_temp.election_json = [
             "has_visits": 1,
             "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/1968-no-majority.jpg",
             "creator": "Dan Bryan",
-            "display_year": "Stand Up For America"
+            "display_year": "1968 - Stand Up For America"
         }
     }
 ]
@@ -245,7 +245,7 @@ campaignTrail_temp.temp_election_list = [
         "id": 4,
         "year": 1968,
         "is_premium": 0,
-        "display_year": "Stand Up For America"
+        "display_year": "1968 - Stand Up For America"
     }
 ]
 
