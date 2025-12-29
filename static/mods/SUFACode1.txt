@@ -1,0 +1,309 @@
+e=campaignTrail_temp
+if (!e.done) {
+e.done = true;
+
+RecReading = true
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 4,
+        "fields": {
+            "year": 1968,
+            "summary": "<div style=\"font-family:Garamond\"> <b style=\"font-size:16px\">America is a betrayed nation. </b>\n\n<p style=\"line-height:12px;font-size:14px;margin:5px\"> The common man has been forced to deal with the mess that the intellectuals, bureaucrats, and out-of-touch media have made in the wake of their self-righteous crusade that happily paid the cost that is America's values. Millions across the nation feel hopeless and despair at this seemingly ascendent and unstoppable force that has gripped the nation. </p>\n\n<b style=\"font-size:16px;\"> There is, however, one man who cares. </b>\n\n<p style=\"line-height:12px;font-size:14px;margin:5px\"> George Corely Wallace, the former Governor of Alabama, has launched a campaign dedicated to fighting back against these forces. He knows it is a losing battle - the dice are weighed against him in every way, institutionally and materially - but that does not matter. What matters to him, and his supporters, is the fight, and the message that this campaign brings: His America will not go quietly into the night that the radicals wish to bring it into.",
+            "image_url": "https://i.imgur.com/E92OGEF.png",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://i.imgur.com/V6pROWy.png",
+            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">Sources</h4><a href=\"https://www.amazon.com/Politics-Rage-Conservatism-Transformation-American/dp/0807125970\" target=\"_blank\">The Politics of Rage by Dan. T Carter</a> <p style=\"font-size:7px\">I get my books from a library and while I would have loved to use <i> An American Populist </i> as a second source focused on Wallace, my library doesn't have it and I'm not shelling $15 for a TCT mod</p> <a href=\"https://www.amazon.com/Nixonland-Rise-President-Fracturing-America/dp/074324303X?crid=3YFSFEU02QJX&amp;dib=eyJ2IjoiMSJ9.GNpNA6EVobjnezBXQwHxya06aVkS9Q4OEuB_s8Dik4HT9EYJTEyccj4Aq6-I28YPqCSai5tLMOPHIhlg9w3i3JuYSfSwy8mxLtHpzTiQV80YMDoHeL8XwtnrPnyxAgd3BCBpTm4GkV8MxiUugrZgcA8JjQYt0b7dPwH_6ZhT5FacTtAtxz4ZW5y35pN53IfvhOoGFJXhRQU6ENWUVcuUERnD65JFTE39KQCrb8xY-ZQ.NRyM7x0WWRByaQxqfxL9RrtJjjTJliuCRY57DhQUArw&amp;dib_tag=se&amp;keywords=Nixonland&amp;qid=1763839747&amp;s=books&amp;sprefix=nixonland%2Cstripbooks%2C175&amp;sr=1-1\" target=\"_blank\"> Nixonland </a> <p style=\"font-size:7px\"> Mandatory reading for anyone looking to make a mod about the late 1960s in general, but especially 1968. This is where I got most of my information about how Nixon played around with and countered Wallace's campaign. </p> <h4> Author Notes </h4> <p> I will address this particular matter, since I do believe that it is a aspect of the mod that should be called out. </p><p>Yes, this mod sucks. This is because it was made last minute as a school project. It also does neglect a large part of Wallace's appeal, that being his racist beliefs and policies. The reason for this is because this mod is intended to educate about the specifics of Wallace's campaign; everyone knows that he was a violent bigot who exploited racial tensions for his own gain, and I felt as though nothing would be gained if I beat that proverbial dead horse into the player's head. With that being said, I do think it is worth acknowledging, on my part, that this mod does have that as a blind spot. If you believe that I neglected the racial aspects of this campaign too much, that is perfectly valid and I will take the criticism earnestly and in good faith. </p><p> I hope you had fun playing the mod. If you didn't have fun, I hope you at least learned something. If neither of those things occurred, I apologize for wasting several minutes of your life. If both of those things happened, I am glad you enjoyed it. </p> ",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/1968-no-majority.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "Stand Up For America"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 23,
+        "fields": {
+            "first_name": "Richard",
+            "last_name": "Nixon",
+            "election": 4,
+            "party": "Republican",
+            "state": "New York",
+            "priority": 1,
+            "description": "<div style=\"font-family:Garamond\">\n\n<b style=\"font-size:15px\">Alright, let's make something clear about this man.</b>\n\n<p style=\"line-height:12px;font-size:14px;margin:5px\">George Wallace is not in this race for his America, or any America, or any of his supporters. He is in this race for himself, his ambitions, and his ego. It's always been in his nature to get power and immediately begin dreaming of the next position to climb to; why else would he have thrown his hat into the Presidential ring only a year into his governorship? </p>\n\n<p style=\"line-height:12px;font-size:14px;margin:15px\"> Unlike that valiant but ultimately futile effort, this campaign has teeth. There is a large chunk of America that yearns for someone like Wallace - they pray every day for someone to say how they feel and - simultaneously - validate and promise to alleviate their fears. Like a personal angel sent to each one of his supporters, Wallace has answered these calls. Unlike an angel, Wallace has his own desires that he keeps hidden from those who pray for him.</p>\n\n<p style=\"line-height:11px;font-size:14px;margin:-1px\"> He won't win this election; the best he can do is deadlock it. But that alone is good enough for him - it gives him national clout, and sets him up nicely for something in 1972. That's all he can hope to accomplish today. Even if that falls through, it will surely earn him a nice spot in the South for as long as he's in the political sphere - something he intends to be in for as long as possible.",
+            "color_hex": "#c42766",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/richard-nixon-1968.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 1968 election!</h3><p>In one of the great turnarounds of American politics, you have salvaged your once-wrecked political career and shed your label as a 'loser' once and for all. As it turns out, the press <em>will</em> have Nixon to kick around.</p><p>If you can end the War in Vietnam and roll back the excesses of the Great Society, you may just go down as a truly great President. Good luck working with a Democratic Congress, however...</p>",
+            "electoral_loss_message": "<h3>Sorry, you have lost the 1968 election.</h3><p>Never has a candidate been so far ahead in a Presidential election, only to come up short. After your heartbreaking loss in 1960, it's going to take a long while for you to recover from this new defeat.</p><p>The American public will never know what might have transpired with you in the Oval Office. As it is, you are sure to enjoy a long retirement after this one...</p>",
+            "no_electoral_majority_message": "<h3>Wow! No candidate holds a majority in the electoral college.</h3><p>Wallace's machinations have succeeded. The election will go to the House of Representatives where the Democrats hold a clear majority.</p><p>You do hold some cards however -- Humphrey would certainly rather make concessions to you, rather than deal with George Wallace. Perhaps you could obtain a place in his Administration, or some assurances on a policy issue of your choice.</p>",
+            "description_as_running_mate": null,
+            "candidate_score": 0.666,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 24,
+        "fields": {
+            "first_name": "Hubert H.",
+            "last_name": "Humphrey",
+            "election": 4,
+            "party": "Democrat",
+            "state": "Minnesota",
+            "priority": 2,
+            "description": "<p>For years, Humphrey has been seen as Johnson's natural successor. This both helped and hurt him in the bitter nomination struggle.</p><p>Humphrey is fighting a war on many fronts. He must present a clear case for liberal ideals, bring back the activist wing of the party, head off Wallace's efforts, and still succeed in his primary task of defeating the odious Nixon.</p>",
+            "color_hex": "#2e93d1",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/hubert-humphrey-1968.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 1968 election!</h3><p>It looked like a hopeless case as you accepted the nomination, but you have run an outstanding campaign in the interval.</p><p>Now you must press forward with your efforts to defend the Great Society and to end the war in Vietnam. Failure in the latter case could be devastating when you seek reelection in 1972. After all, just look at what happened to the once-lustrous reputation of Lyndon Johnson over the past four years...</p>",
+            "electoral_loss_message": "<h3>Sorry, you have lost the 1968 election.</h3><p>You may have performed admirably under trying circumstances, but it was always a tough sell for you after the chaos at the Democratic Convention in Chicago.</p><p>Your only consolation is that Nixon himself is a former loser. Even so, this is a horrednous turn of events for Democrats after the landslide of 1964. The best you can do now is to plot a comeback to the Senate, or as a candidate for President in 1972.</p>",
+            "no_electoral_majority_message": "<h3>Wow! No candidate achieved a majority in the electoral college.</h3><p>Fortunately for you the Democrats have won a majority of the nation's Congressional delegations. Unfortunately, you also have to deal with George Wallace. He will not allow the Southern states to support any candidate who advocates desegregation.</p><p>Your best chance, sadly, is to try to broker a deal with Nixon or with other moderate Republicans.</p><p>You are the likely winner, but who knows where this all ends?</p>",
+            "description_as_running_mate": null,
+            "candidate_score": 0.7,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 25,
+        "fields": {
+            "first_name": "George",
+            "last_name": "Wallace",
+            "election": 4,
+            "party": "American Independent",
+            "state": "Alabama",
+            "priority": 3,
+            "description": "<div style=\"font-family:Garamond\">\n\n<b style=\"font-size:15px\">Alright, let's make something clear about this man.</b>\n\n<p style=\"line-height:12px;font-size:14px;margin:5px\">George Wallace is not in this race for his America, or any America, or any of his supporters. He is in this race for himself, his ambitions, and his ego. It's always been in his nature to get power and immediately begin dreaming of the next position to climb to; why else would he have thrown his hat into the Presidential ring only a year into his governorship? </p>\n\n<p style=\"line-height:12px;font-size:14px;margin:15px\"> Unlike that valiant but ultimately futile effort, this campaign has teeth. There is a large chunk of America that yearns for someone like Wallace - they pray every day for someone to say how they feel and - simultaneously - validate and promise to alleviate their fears. Like a personal angel sent to each one of his supporters, Wallace has answered these calls. Unlike an angel, Wallace has his own desires that he keeps hidden from those who pray for him.</p>\n\n<p style=\"line-height:11px;font-size:14px;margin:-1px\"> He won't win this election; the best he can do is deadlock it. But that alone is good enough for him - it gives him national clout, and sets him up nicely for something in 1972. That's all he can hope to accomplish today. Even if that falls through, it will surely earn him a nice spot in the South for as long as he's in the political sphere - something he intends to be in for as long as possible.",
+            "color_hex": "#5d2255",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/uzxQZS9.png",
+            "electoral_victory_message": "<h3>Wow! You have won the 1968 election in a shocker!</h3><p>Dixie forever! Even with the Long Hot Summer of 1967, nobody guessed that you could do well enough in the Northern states to win the election outright. You have instantly become most polarizing President-elect since Abraham Lincoln.</p>",
+            "electoral_loss_message": "<h3>Sorry, you did not prevent an electoral college majority.</h3><p>You put in a good effort, but your dream of brokering an end to desegregation will not come to fruition in 1968. No winning candidate will negotiate that point with you unless they absolutely have no choice.</p><p>The best you can do for now is continue to sound the call for a return to sanity in American politics. Perhaps if the riots and discord continue, you will have a better chance of making your voice heard in 1972.</p>",
+            "no_electoral_majority_message": "<h3>Congratulations! You have deadlocked the electoral college with your votes in the South.</h3><p>In a close election, your electoral votes in the South have prevented either candidate from winning a majority. Get ready to put the squeeze on Humphrey and Nixon.</p><p>Of course, you still have to deal with the possibility that Humphrey and Nixon dislike you so much that they will simply strike a deal with each other. Whatever happens, it's sure to be interesting.</p>",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 55,
+        "fields": {
+            "first_name": "Spiro",
+            "last_name": "Agnew",
+            "election": 4,
+            "party": "Republican",
+            "state": "Maryland",
+            "priority": 29,
+            "description": "n/a",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/spiro-agnew-1968.jpg",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "<p>Spiro Agnew has served as the Governor of Maryland since 1967, and he brings a reputation as a moderate on many issues including civil rights and the environment.</p><p>Agnew's Maryland background and his Greek heritage can help Nixon appeal both to Southern moderates and to blue collar workers who might otherwise be drawn to Wallace.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 58,
+        "fields": {
+            "first_name": "Edmund",
+            "last_name": "Muskie",
+            "election": 4,
+            "party": "Democrat",
+            "state": "Maine",
+            "priority": 33,
+            "description": "n/a",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/edmund-muskie-1968.jpg",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "<p>Muskie is a Senator from Maine, and although he has a low national profile he could help Humphrey solidify his base and carry the Northeastern states.</p><p>By going with Muskie, Humphrey would probably be writing off most of the South and also would be giving Nixon an opening among moderate voters.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 62,
+        "fields": {
+            "first_name": "Curtis",
+            "last_name": "LeMay",
+            "election": 4,
+            "party": "Republican",
+            "state": "Ohio",
+            "priority": 37,
+            "description": "n/a",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/curtis-lemay-1968.jpg",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "https://www.archiviokubrick.it/opere/film/ds/script/ds-script.pdf",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 41,
+        "fields": {
+            "candidate": 25,
+            "running_mate": 62
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 37,
+        "fields": {
+            "candidate": 24,
+            "running_mate": 58
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 33,
+        "fields": {
+            "candidate": 23,
+            "running_mate": 55
+        }
+    }
+]
+
+campaignTrail_temp.credits = "Wallacites"
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.52,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 27,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 4,
+        "candidates": [
+            23,
+            24,
+            25
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 4,
+        "candidates": [
+            23,
+            24,
+            25
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 4,
+        "year": 1968,
+        "is_premium": 0,
+        "display_year": "Stand Up For America"
+    }
+]
+
+jet_data = {
+    "headerColor": "#683772",
+    "windowColor": "#6e3b78",
+    "containerColor": "#37223a",
+    "innerWindowColor": "#d08743",
+    "bannerImageUrl": "https://i.imgur.com/TgVr5i6.png",
+    "backgroundImageUrl": "https://i.imgur.com/Po0WrWK.png",
+    "endingTextColor": "#000000",
+    "customQuote": "",
+    "gameTitle": "WALLACE 1968"
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>WALLACE 1968</h2>\n            ';
+
+
+e.ElectionPopup = "You blow the smoke out of your mouth as the returns begin coming in."
+e.WinPopup = "Say, the fuck?"
+e.LosePopup = "Well, hopefully we'll deadlock it."
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#683772";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#6e3b78";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#37223a";
+
+document.getElementById("header").src = "https://i.imgur.com/TgVr5i6.png";
+
+document.body.background = "https://i.imgur.com/Po0WrWK.png";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#d08743!important;}</style>";
+
+HistHexcolour = ["#c42766", "#2e93d1", "#5d2255", "#D1D1D1"];
+HistName = ["Richard Nixon", "Hubert Humphrey", "George Wallace", "N/A"];
+HistEV = [301, 191, 46, 0];
+HistPV = ["31,783,783", "31,271,839", "9,901,118", "0"];
+HistPVP = ["43.4%", "42.7%", "13.5%", "0%"];
+
+let z = new MutationObserver((mutationsList, observer) => {
+    let runningMateSummary = document.querySelector("#running_mate_summary");
+    if (runningMateSummary) {
+        $("#running_mate_id_button").click();
+        observer.disconnect()
+    }
+});
+
+
+  z.observe(document, { subtree: true, childList: true });
+} 
+
+//#endcode
