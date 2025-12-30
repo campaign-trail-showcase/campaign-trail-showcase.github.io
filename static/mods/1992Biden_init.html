@@ -342,7 +342,7 @@ const startScreenUpdater = setInterval(function() {
         multiplier = 1;
     }
 
-    if (candidateSelect && !runningMateButton) { // change theme on candidate viewing
+    if (candidateSelect && !runningMateButton) { 
         const c = candidateSelect.value;
 
         if (c == 78 && !candidateButton) {
@@ -357,7 +357,11 @@ const startScreenUpdater = setInterval(function() {
         }
     }
 
-    if (finalScreenID) { // delete back button and delete the interval
+    if (!candidateButton && runningMateButton) {
+        runningMateButton.click();
+    }
+    
+    if (finalScreenID) { 
         if (finalScreenBB) {
             finalScreenBB.remove();
         }
