@@ -41,13 +41,14 @@ function findState(pk) {
 document.head = document.head || document.getElementsByTagName("head")[0];
 
 function changeFavicon(src) {
-  let link = document.createElement("link"),
-    oldLink = document.getElementById("dynamic-favicon");
-  link.id = "dynamic-favicon";
-  link.rel = "shortcut icon";
+  let link = document.getElementById("dynamic-favicon");
+  if (!link) {
+    link = document.createElement("link");
+    link.id = "dynamic-favicon";
+    link.rel = "shortcut icon";
+    document.head.appendChild(link);
+  }
   link.href = src;
-  if (oldLink) document.head.removeChild(oldLink);
-  document.head.appendChild(link);
 }
 
 changeFavicon("/static/showcase-fav.png");
@@ -103,12 +104,13 @@ const themePickerEl = document.getElementById("theme_picker");
 themePickerEl.innerHTML = `<label for="themePicker" class="sr-only">Theme Picker</label>
                            <select id="themePicker" onchange="themePicked()"></select>`;
 const themePicker = document.getElementById("themePicker");
-themePicker.innerHTML += `<option value='${nct_stuff.selectedTheme}'>${selectedTheme.name}</option>`;
+const options = [`<option value='${nct_stuff.selectedTheme}'>${selectedTheme.name}</option>`];
 for (const key in nct_stuff.themes) {
   if (nct_stuff.themes[key] !== selectedTheme) {
-    themePicker.innerHTML += `<option value='${key}'>${nct_stuff.themes[key].name}</option>`;
+    options.push(`<option value='${key}'>${nct_stuff.themes[key].name}</option>`);
   }
 }
+themePicker.innerHTML = options.join('');
 
 function themePicked() {
   const themePicker = document.getElementById("themePicker");
@@ -171,6 +173,24 @@ const stassennum = Math.floor(Math.random() * 8 + 1);
 const stassenyear = [
   "1944", "1948", "1952", "1964", "1968", "1980", "1984", "1988", "1992",
 ];
+
+const handleSelectNavigation = (event, selectId) => {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+    
+    event.preventDefault();
+    const optionsLen = select.options.length;
+    let newIndex = select.selectedIndex;
+
+    if (event.key === "ArrowDown") {
+        newIndex = (newIndex + 1) % optionsLen;
+    } else {
+        newIndex = (newIndex - 1 + optionsLen) % optionsLen;
+    }
+    
+    select.selectedIndex = newIndex;
+    select.dispatchEvent(new Event('change'));
+};
 
 // keyboard shortcuts handler
 const keyboardShortcutsHandler = (event) => {
@@ -243,25 +263,9 @@ const keyboardShortcutsHandler = (event) => {
       return;
     }
 
-    const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
-    if (arrowKey) {
-      event.preventDefault();
-      
-      const candidateSelect = document.getElementById("candidate_id");
-      if (!candidateSelect) return;
-      
-      const options = Array.from(candidateSelect.children);
-      const currentIndex = candidateSelect.selectedIndex;
-      let newIndex;
-      
-      if (event.key === "ArrowDown") {
-        newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
-      } else {
-        newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
-      }
-      
-      candidateSelect.selectedIndex = newIndex;
-      candidateSelect.dispatchEvent(new Event('change'));
+    if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+        handleSelectNavigation(event, "candidate_id");
+        return;
     }
     return;
   }
