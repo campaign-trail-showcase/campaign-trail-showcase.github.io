@@ -15353,7 +15353,7 @@ function getSafePvp(id) {
     return c ? c.pvp : 0;
 }
 
-var ach_chen_pvp = getSafePvp(ach_ID_CHEN);
+var ach_chen_pvp = campaignTrail_temp.candidate_json[0].pvp * 100;
 var ach_lien_pvp = getSafePvp(ach_ID_LIEN);
 var ach_soong_pvp = getSafePvp(ach_ID_SOONG);
 
