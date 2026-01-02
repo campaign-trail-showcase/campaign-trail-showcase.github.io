@@ -1,7 +1,7 @@
  /*
  * @title: 2012: Little Big Man / Little Big Man / 2012a
  * @author: StrawberryMaster & Friends
- * @version: 1.0.5
+ * @version: 1.0.6
  * @description: The 2012 election in the eyes of Barack Obama (and a couple of others, too)
  * 
  * Coding license: Apache License 2.0
@@ -380,6 +380,7 @@ const recommendedReadingContent = `
 			busy with other things. I did consider it for a couple of months but dropped it entirely when <a href="https://www.reddit.com/r/thecampaigntrail/comments/1m8ihet/mod_announcement_biden_08/" target="_blank">the same idea</a> was taken by another person.</li>
 			<li>A very alpha version of Little Big Man, way before I was fully set on making it an actual mod, was posted on June 29, 2025, just six days after the release of A Lifetime of This. It had some similarities to the final design. <img src="https://file.garden/aNtAfG887DiA_7lO/2012LBM/lbm_alpha.png" width="75%" /></li>
 			<li>The music player was based off a scrapped, buggy music player I considered for 2016ALOT. It was so broken that it looked like this. Curiously, some of the sample songs in here were re-used this for mod, although not all of them. Amen to that! I think the other unlisted songs here were The Greatest Romance Ever Been Gold, I Wanna Sex You Up (confirming this mod was initially made on freaky principles) and C'Est La Vie. <img src="https://file.garden/aNtAfG887DiA_7lO/2012LBM/lbm_alpha2.png" width="75%" /></li>
+			<li>You might be wondering why Trevor Moore appears in this mod many, many, many times. This is a good question, one which I don't know the answer to. He was a last-minute addition to A Lifetime of This (and mostly as part of the polar bears gag), but here you can see that, perhaps, he and Obama have more in common than you'd think. A similar rationale was used for adding Gray Davis as a running mod, except this one was based on 'historical' facts; there have been a few reports from 2010-2012 showing that the two had their similarities and, given that I was looking for a Garcetti-esque running mate for this mod, he fit in nicely.			
             </li>
         </ul>
 		
@@ -784,9 +785,9 @@ changeFavicon("https://file.garden/aNtAfG887DiA_7lO/2012LBM/Code1/XOvMKWj.png");
 document.title = "little big man.";
 
 // Election night descs
-e.ElectionPopup = "Election night is here. Hope you have your speeches ready, Mr. President."
+e.ElectionPopup = "Election night is here. Hope you have your speeches ready, Barry."
 e.WinPopup = "You feel as if there’s a beacon of light shining in on you. You smile."
-e.LosePopup = "No."
+e.LosePopup = "Oh no. Oh no. Oh no."
 e.SelAnsContText = "You haven’t selected your answer yet, Barack."
 
 HistHexcolour = ["#194A9F", "#f20d0d", "#f9f91f", "#0ac21a"];
@@ -1607,11 +1608,6 @@ const css = `
 			    display: flex;
 			}
  
-            /** Game Link button - this never really worked afaik **/
-            #overall_election_details p a {
-                display: none;
-            }
-
             /* Text tooltips - experimental */
             /* kindly borrowed from the folks @ campaigntrailshowcase.com
             and adapted to opapeldetrouxa.neocities.org */

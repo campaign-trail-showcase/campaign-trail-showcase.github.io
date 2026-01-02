@@ -4557,6 +4557,46 @@ campaignTrail_temp.candidate_image_url = "https://i.imgur.com/0C1WNWg.jpeg";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/VanbHpb.jpeg";
 campaignTrail_temp.candidate_last_name = "Hogan";
 campaignTrail_temp.running_mate_last_name = "Rutherford";
+campaignTrail_temp.multiple_endings = true;
+endingPicker = (out, totv, aa, quickstats) => {
+
+        function setImage(url) {
+        if(url == '' || url == null) return;
+        let interval = setInterval(function () {
+            img = document.getElementsByClassName("person_image")[0];
+            if (img != null) {
+                img.src = url;
+                clearInterval(interval);
+            }
+        }, 50);
+    }
+
+    e.final_overall_results.sort((a, b) => b.popular_votes - a.popular_votes);
+
+    if (aa[0].candidate === 132) {
+        setImage("https://i.imgur.com/0C1WNWg.jpeg");
+        return `
+            <h3>'Congrautlations! You Won The Gubernatorial Election!'</h3><br>
+            Many pundits and amateurs alike were quick to call this as on of the biggest upsets in Maryland's history and the biggest upset of the 2014 midterms. Nobody thought that this would happen. People are already starting to speculate about you launching a presidential run in 2016, or in 2020. But for now, the work begins to fix Maryland. You will be remembered for more than just a businessman.
+        `;
+    }
+
+    if (aa[0].candidate === 131) {
+        setImage("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Anthony_G._Brown_Official_State_Photo.jpg/250px-Anthony_G._Brown_Official_State_Photo.jpg");
+        return `
+            <h3>'Sorry! You Have Lost The Gubernatorial Election!'</h3><br>
+            While this was the expected outcome, many in your own party were amazed by how competitive of a race you were able to make it. Maybe in two years you could run for the Senate, try for the governorship again, or even get a leadership role in the RNC. Regardless, you have built up a national profile for yourself – even if that is just in Republican circles and a couple people on something called r/yapms subreddit, someone may even make a game about this campaign. Who knows?
+        `;
+    }
+
+    if (aa[0].candidate === 133) {
+        setImage("https://i.imgur.com/XikgLVU.png");
+        return `
+            <h3>'Seriously'</h3><br>
+            I literally couldnt be arsed to write an ending so enjoy this picture of whoever the third party candidate was in 2006 tennessee.
+        `;
+    }
+};
 
 campaignTrail_temp.jet_data = [{
     "mapping_enabled": true,
