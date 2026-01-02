@@ -10325,6 +10325,7 @@ campaignTrail_temp.cyoa = true
 function tunnel(new_q){
     return campaignTrail_temp.questions_json[campaignTrail_temp.questions_json.map(f=>f.pk).indexOf(new_q)];
 }
+var DarthJarJar = 0;
 sabotageCount = (array, call = a => a.fields.sabotage) => { 
 	array = array.filter(a=>a);
 	let answers = campaignTrail_temp.answers_json.map(f=>f.pk);
@@ -10376,6 +10377,7 @@ cyoAdventure = function (a) {
 campaignTrail_temp.ElectionPopup = "Lookee, Sheev. Ebberybody is votin' per uss-ens. Dissen mesa power."
 campaignTrail_temp.WinPopup = "Finally, da birth of da Sith Empire!!"
 campaignTrail_temp.LosePopup = "HOW??????????"
+        DarthJarJar += 1;
     }
     else if (ans == 4093)
     {
@@ -10419,7 +10421,7 @@ playerID = campaignTrail_temp.candidate_id;
 playerEV = quickstats[0]
 
     let CTResult = campaignTrail_temp.final_state_results.find((x) => x.state == 185);
-    if (CTResult.result[0].candidate == 77) {
+    if (CTResult.result[0].candidate == 77 && DarthJarJar == 0) {
     ctsAchievement("Justice for Luuwuu");
     }
 
