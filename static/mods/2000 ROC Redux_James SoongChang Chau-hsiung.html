@@ -966,6 +966,14 @@ campaignTrail_temp.answers_json = [
             "question": 19991640,
             "description": "I must immediately issue the sternest and calmest warning to the nation. This is not the time for stubbornness; Lien Chan is out, but Chen Shui-bian is the true threat! I will deliver a national address, publicly acknowledging our predicament, and demanding that all KMT members and Pan-Blue voters supporting Lien, for the future of the Republic of China, immediately cease emotional voting and concentrate their ballots on me to prevent a disastrous deviation of national policy! This is our last moment to stop the DPP's election!"
         }
+    },
+	  {
+        "model": "campaign_trail.answer",
+        "pk": 19992277,
+        "fields": {
+            "question": 19992276,
+            "description": "We decided to immediately convene a top-level press conference, led by core members and a team of professional lawyers, to angrily denounce the actions of Ma Ying-jeou and Liu Chao-shiuan as blatant fraud and political assassination. The team simultaneously released our internal tracking data, asserting that the candidate remains within the leading or winning margin, and called on all supporters not to be misled by lies and to firmly stand by their voting commitment."
+        }
     }
 ]
 
@@ -3819,7 +3827,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 19991147,
             "candidate": 69,
             "affected_candidate": 67,
-            "global_multiplier": -0.015
+            "global_multiplier": -0.022
         }
     },
     {
@@ -3829,7 +3837,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 19991147,
             "candidate": 69,
             "affected_candidate": 68,
-            "global_multiplier": 0.03
+            "global_multiplier": 0.05
         }
     },
     {
@@ -3890,6 +3898,56 @@ campaignTrail_temp.answer_score_global_json = [
             "candidate": 67,
             "affected_candidate": 69,
             "global_multiplier": 0.05
+        }
+    },
+		 {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 19992286,
+        "fields": {
+            "answer": 19992277,
+            "candidate": 69,
+            "affected_candidate": 69,
+            "global_multiplier": -0.22
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 19992287,
+        "fields": {
+            "answer": 19992277,
+            "candidate": 69,
+            "affected_candidate": 68,
+            "global_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 19992288,
+        "fields": {
+            "answer": 19992277,
+            "candidate": 69,
+            "affected_candidate": 67,
+            "global_multiplier": 0.02
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 19992289,
+        "fields": {
+            "answer": 19992277,
+            "candidate": 69,
+            "affected_candidate": 1921,
+            "global_multiplier": -0.6
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 19992290,
+        "fields": {
+            "answer": 19992277,
+            "candidate": 69,
+            "affected_candidate": 1942,
+            "global_multiplier": -0.6
         }
     }
 ]
@@ -5291,6 +5349,72 @@ campaignTrail_temp.answer_score_state_json = [
             "affected_candidate": 68,
             "state_multiplier": 0.035
         }
+    },
+		  {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 19992291,
+        "fields": {
+            "answer": 19992277,
+            "state": 251,
+            "candidate": 69,
+            "affected_candidate": 68,
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 19992292,
+        "fields": {
+            "answer": 19992277,
+            "state": 253,
+            "candidate": 69,
+            "affected_candidate": 68,
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 19992293,
+        "fields": {
+            "answer": 19992277,
+            "state": 259,
+            "candidate": 69,
+            "affected_candidate": 68,
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 19992294,
+        "fields": {
+            "answer": 19992277,
+            "state": 260,
+            "candidate": 69,
+            "affected_candidate": 68,
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 19992295,
+        "fields": {
+            "answer": 19992277,
+            "state": 200401,
+            "candidate": 69,
+            "affected_candidate": 68,
+            "state_multiplier": 0.03
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 19992296,
+        "fields": {
+            "answer": 19992277,
+            "state": 267,
+            "candidate": 69,
+            "affected_candidate": 68,
+            "state_multiplier": 0.03
+        }
     }
 ]
 
@@ -6065,6 +6189,15 @@ campaignTrail_temp.answer_feedback_json = [
             "answer_feedback": "The Resolution on Taiwan's Future was drafted by the DPP's key writers and Chen Shui-bian's staff, aiming to help A-Bian shed his image as an extreme pro-independence figure. Although their promotion hasn't been entirely successful, he is clearly trying to attract more moderate voters."
         }
     },
+		        {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 19992278,
+        "fields": {
+            "answer": 19992277,
+            "candidate": 69,
+            "answer_feedback": "The nightmare has arrived... Upon seeing this news, the base we spent the last year building is fleeing to the KMT camp like water buffaloes running from a lion! That damn Ma Ying-jeou and Lee Teng-hui will pay the price for this..."
+        }
+    },
         {
         "model": "campaign_trail.answer_feedback",
         "pk": 19991642,
@@ -6812,11 +6945,23 @@ else if (e.player_answers.includes(19991064) && diff > 0) {
 
 // --- 最終情景：連戰領先/平手 或 未滿足先決條件 ---
 // 情景 6: 連戰領先/平手，或未滿足先決條件而落入此處
-else { 
+else if(e.player_answers.includes(19991064) && diff < 0){ 
     // 觸發連戰領先或平手時的統一處理邏輯
-    campaignTrail_temp.questions_json[24] = {
+    campaignTrail_temp.questions_json[24] =         {
         "model": "campaign_trail.question",
-        "pk": 19991115, // 使用與情景 4 相同的 PK 作為默認
+        "pk": 19992276,
+        "fields": {
+            "priority": 0,
+            "description": "Damn it! In the final countdown before the election, the KMT launched its most lethal 'strategic voting' operation. Taipei Mayor Ma Ying-jeou and Vice Premier Liu Chao-shiuan jointly held a press conference to release a poll claiming Chen Shui-bian was first, Lien Chan second, and Soong Chu-yu third, publicly appealing to Pan-Blue voters to concentrate all their firepower on Lien Chan. This is Lee Teng-hui's goddamn conspiracy! That old bastard will stop at nothing to prevent Soong Chu-yu from being elected president! We can only rely on fate...",
+            "likelihood": 1
+        }
+    }
+}
+else{ 
+
+    campaignTrail_temp.questions_json[24] =         {
+        "model": "campaign_trail.question",
+        "pk": 19992276,
         "fields": {
             "priority": 0,
             "description": "Damn it! In the final countdown before the election, the KMT launched its most lethal 'strategic voting' operation. Taipei Mayor Ma Ying-jeou and Vice Premier Liu Chao-shiuan jointly held a press conference to release a poll claiming Chen Shui-bian was first, Lien Chan second, and Soong Chu-yu third, publicly appealing to Pan-Blue voters to concentrate all their firepower on Lien Chan. This is Lee Teng-hui's goddamn conspiracy! That old bastard will stop at nothing to prevent Soong Chu-yu from being elected president! We can only rely on fate...",
