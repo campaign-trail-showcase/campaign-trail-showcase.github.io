@@ -2368,6 +2368,13 @@ const css = `
 				  margin-inline: auto;
 				}
 				
+				#mod_options_container {
+				  width: 300px;
+				}
+				#difficulty_level {
+				  flex-flow: revert;
+				}
+								
 			}
 				
 `;
@@ -3376,6 +3383,7 @@ tooltipList = [
     const CONFIG = {
         targetId: 'difficulty_level',
         containerId: 'mod_options_container',
+		storageKey: 'lbm_custom_preferences', 
         features: [
             {
                 id: 'city_visits',
@@ -3426,6 +3434,20 @@ tooltipList = [
         `;
         document.head.appendChild(style);
     }
+	
+	// storage
+	const getSavedSettings = () => {
+        try {
+            return JSON.parse(localStorage.getItem(CONFIG.storageKey)) || {};
+        } catch (e) { return {}; }
+    };
+
+    const saveSettingToStorage = (flag, value) => {
+        const current = getSavedSettings();
+        current[flag] = value;
+        localStorage.setItem(CONFIG.storageKey, JSON.stringify(current));
+    };
+
 
     // helpers
     const getFlag = (key, def) => {
@@ -3471,9 +3493,19 @@ tooltipList = [
             ])
         ]);
 
+        const savedSettings = getSavedSettings();
+
         CONFIG.features.forEach((f, i) => {
             dropdown.add(new Option(f.text, i));
-            getFlag(f.flag, f.default);
+            
+            let initialValue;
+            if (savedSettings.hasOwnProperty(f.flag)) {
+                initialValue = savedSettings[f.flag];
+            } else {
+                initialValue = f.default;
+            }
+            
+            setFlag(f.flag, initialValue);
         });
 
         const updateState = () => {
@@ -3489,8 +3521,14 @@ tooltipList = [
         };
 
         dropdown.addEventListener('change', updateState);
+        
         toggleInput.addEventListener('change', (e) => {
-            setFlag(e.target.dataset.flag, e.target.checked);
+            const flag = e.target.dataset.flag;
+            const isChecked = e.target.checked;
+            
+            setFlag(flag, isChecked);
+            saveSettingToStorage(flag, isChecked);
+            
             updateState();
         });
 
