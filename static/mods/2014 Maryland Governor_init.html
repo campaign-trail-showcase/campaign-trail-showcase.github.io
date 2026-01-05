@@ -34,7 +34,7 @@ campaignTrail_temp.election_json = [
             "winning_electoral_vote_number": 138,
             "advisor_url": "https://i.imgur.com/Dil0gLC.png",
             "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">General Resources</h4>\nWalter Borneman - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0812976746/amhius20-20\">Polk: The Man Who Transformed the Presidency and America</a><br>\nRobert Merry - <a href=\"http://www.amazon.com/exec/obidos/ASIN/074329744X/amhius20-20\">A Country of Vast Designs: James K. Polk, the Mexican War and the Conquest of the American Continent</a><br>\nDavid Heidler and Joanne Heidler - <a href=\"http://www.amazon.com/exec/obidos/ASIN/0812978951/amhius20-20\">Henry Clay: The Essential American</a>",
-            "has_visits": 0,
+            "has_visits": 1,
             "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/1896-no-majority.jpg",
             "creator": "Dan Bryan",
             "display_year": "2014 Maryland Governor"
@@ -262,13 +262,13 @@ jet_data = {
     "backgroundImageUrl": "https://cdn.britannica.com/30/116630-050-1A399B0D/National-Aquarium-Baltimore-Maryland.jpg",
     "endingTextColor": "#000000",
     "customQuote": "",
-    "gameTitle": "THE MARYLAND TRAIL"
+    "gameTitle": "The Maryland Campaign Trail"
 }
 HistHexcolour=["#ff0000","#0000ff","#FFFF00"];
         HistName=["Larry Hogan","Anthony Brown","Shawn Quinn"];
         HistEV=[20,4,0];
         HistPV=["884,400","818,890","25,382"];
-        HistPVP=["51.03%","47.25%","1.46%"];
+        HistPVP=["51.0%","47.3%","1.5%"];
 
 
 $("#music_player")[0].children[0].style.display="none"
@@ -511,7 +511,7 @@ newMusicPlayer()
 //#startcode
 
 
-corrr = '\n              <h2>THE MARYLAND TRAIL</h2>\n            ';
+corrr = '\n              <h2>The Maryland Campaign Trail</h2>\n            ';
 
 
 nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#eaaa00";
@@ -531,3 +531,151 @@ document.body.background = "https://cdn.britannica.com/30/116630-050-1A399B0D/Na
 document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#9d2235!important;}</style>";
 
 //#endcode
+
+//Achievements
+campaignTrail_temp.achievements = {
+    "Maryland Changed" : {
+        "image" : "https://www.themsuspokesman.com/wp-content/uploads/2014/11/Larry-Hogan.crop_.jpg",
+        "description" : "As Larry Hogan, win the election.",
+        "cannotBeCheated" : true
+    }
+}
+
+//Css
+function addDynamicCSS() {
+    var css = `
+
+        #campaign_sign p {
+            margin: .1em;
+            color: #eaaa00;
+            font-size: 2.7em;
+            padding: .2em;
+            font-weight: 700;
+            line-height: .5em;
+        }
+
+        #final_results_description {
+            font-size: 16px;
+        }
+
+        #menu_container {
+            background-color: transparent;
+        }
+
+        #overall_result_container {
+            background-color: transparent;
+        }
+
+        .campaign_trail_start_emphasis {
+            padding: .8em;
+            background-color: transparent;
+        }
+
+        button {
+            background: #964B00;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #election_id {
+            background: #964B00;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #candidate_id {
+            background: #964B00;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #sort_tab {
+            background: #964B00;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #state_tab_area {
+            background: #964B00;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #running_mate_id {
+            background: #964B00;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #game_type_id {
+            background: #964B00;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #difficulty_level_id {
+            background: #964B00;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #themePicker {
+            background: #964B00;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #campaign_sign {
+            background-color: darkred;
+            border-style: solid;
+            border-width: .5em;
+            border-color: #700016;
+            width: 90%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+    `;
+
+    var styleElem = document.createElement("style");
+    styleElem.appendChild(document.createTextNode(css));
+    document.head.appendChild(styleElem);
+}
+
+addDynamicCSS();
