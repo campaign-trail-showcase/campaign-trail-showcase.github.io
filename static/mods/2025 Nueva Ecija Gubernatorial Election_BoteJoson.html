@@ -1,0 +1,1217 @@
+
+// Generated mapping code
+(function(e,t,n,r,i){function s(e,t,n,r){r=r instanceof Array?r:[];var i={};for(var s=0;s<r.length;s++){i[r[s]]=true}var o=function(e){this.element=e};o.prototype=n;e.fn[t]=function(){var n=arguments;var r=this;this.each(function(){var s=e(this);var u=s.data("plugin-"+t);if(!u){u=new o(s);s.data("plugin-"+t,u);if(u._init){u._init.apply(u,n)}}else if(typeof n[0]=="string"&&n[0].charAt(0)!="_"&&typeof u[n[0]]=="function"){var a=Array.prototype.slice.call(n,1);var f=u[n[0]].apply(u,a);if(n[0]in i){r=f}}});return r}}var o=370,u=215,a=10;var f={stateStyles:{fill:"#333",stroke:"#666","stroke-width":1,"stroke-linejoin":"round",scale:[1,1]},stateHoverStyles:{fill:"#33c",stroke:"#000",scale:[1.1,1.1]},stateSpecificStyles:{},stateSpecificHoverStyles:{},click:null,mouseover:null,mouseout:null,clickState:{},mouseoverState:{},mouseoutState:{},showLabels:true,labelWidth:20,labelHeight:15,labelGap:6,labelRadius:3,labelBackingStyles:{fill:"#333",stroke:"#666","stroke-width":1,"stroke-linejoin":"round",scale:[1,1]},labelBackingHoverStyles:{fill:"#33c",stroke:"#000"},stateSpecificLabelBackingStyles:{},stateSpecificLabelBackingHoverStyles:{},labelTextStyles:{fill:"#fff",stroke:"none","font-weight":300,"stroke-width":0,"font-size":"10px"},labelTextHoverStyles:{},stateSpecificLabelTextStyles:{},stateSpecificLabelTextHoverStyles:{}};var l={_init:function(t){this.options={};e.extend(this.options,f,t);var n=this.element.width();var i=this.element.height();var s=this.element.width()/o;var l=this.element.height()/u;this.scale=Math.min(s,l);this.labelAreaWidth=Math.ceil(a/this.scale);var c=o+Math.max(0,this.labelAreaWidth-a);this.paper=r(this.element.get(0),c,u);this.paper.setSize(n,i);this.paper.setViewBox(-112, 18, 249.99999999999983, 249.99999999999983, false);this.stateHitAreas={};this.stateShapes={};this.topShape=null;this._initCreateStates();this.labelShapes={};this.labelTexts={};this.labelHitAreas={};if(this.options.showLabels){this._initCreateLabels()}},_initCreateStates:function(){var t=this.options.stateStyles;var n=this.paper;var r={"NE":"m 53.054684,234.53875 2.827281,-6.5379 -0.250869,-4.01661 -8.882288,-5.43746 0.639277,-1.39189 -0.07481,-11.73312 1.453443,-4.3283 2.054122,-2.98939 0.757478,-3.42479 -3.082988,-2.15279 -1.476361,-2.57808 0.604294,-4.16805 1.821327,-3.15975 -6.118934,-14.00453 1.908173,-3.0336 0.162839,-2.63861 -0.208655,-1.35779 3.543744,-2.57808 1.133809,-3.16734 -6.438573,-3.26453 -3.71623,-0.64606 -9.844814,-10.92929 -0.507803,-4.139 -3.142093,-3.22414 -0.200221,-4.59834 -2.104779,-2.78125 -0.890161,-18.55236 -0.01459,-3.0336 14.568207,-1.24929 7.760541,-4.247501 1.874397,-0.0382 3.952643,1.034721 6.232316,5.15864 5.490515,6.90132 1.299056,0.10492 2.601723,-3.19638 3.213255,-2.53639 1.424495,-4.10118 2.66565,-4.094841 1.447413,-8.473635 7.747275,-8.331034 0.440241,-5.631811 1.720009,-4.37122 0.570522,-16.566156 -6.987381,-8.264167 -0.72853,-2.435429 -0.431807,-3.585038 5.033375,-0.440212 7.08989,-4.015377 11.164353,-2.492233 11.86637,2.172971 10.71568,3.091647 9.12476,-0.09825 3.31455,1.183661 3.71746,1.606418 3.42068,5.008455 0.53675,2.228486 3.16862,35.895874 2.76217,6.50885 4.27349,5.89556 9.54809,19.078611 19.63776,66.01099 1.17603,3.48283 -7.32633,20.44017 -2.35442,17.42678 -6.46996,25.49909 -8.97035,-0.0782 -5.38679,-1.29722 -6.84743,-3.87401 -5.50016,-6.03316 -7.51091,-5.99776 -3.79701,-0.39872 -8.77013,2.71811 -1.83217,-2.42913 -4.88022,1.80954 -6.08757,0.93885 -6.31673,4.03179 -8.188752,0.0606 -6.95599,7.22435 -1.207383,-0.0544 -2.285704,-0.48839 -3.295276,0.6007 0.211071,3.09795 -2.048086,3.26453 -4.543671,1.47894 -4.483358,2.61843 -1.713978,-6.07098 -2.910502,-2.63612 -3.687286,-0.49339 -1.028867,-0.95397 -0.99751,0.98802 -2.58966,1.3679 -0.0036,-2.84555 -2.485929,-1.63923 0.106128,-4.03297 z"};var i={};for(var s in r){i={};if(this.options.stateSpecificStyles[s]){e.extend(i,t,this.options.stateSpecificStyles[s])}else{i=t}this.stateShapes[s]=n.path(r[s]).attr(i);this.topShape=this.stateShapes[s];this.stateHitAreas[s]=n.path(r[s]).attr({fill:"#000","stroke-width":0,opacity:0,cursor:"pointer"});this.stateHitAreas[s].node.dataState=s}this._onClickProxy=e.proxy(this,"_onClick");this._onMouseOverProxy=e.proxy(this,"_onMouseOver"),this._onMouseOutProxy=e.proxy(this,"_onMouseOut");for(var s in this.stateHitAreas){this.stateHitAreas[s].toFront();e(this.stateHitAreas[s].node).bind("mouseout",this._onMouseOutProxy);e(this.stateHitAreas[s].node).bind("click",this._onClickProxy);e(this.stateHitAreas[s].node).bind("mouseover",this._onMouseOverProxy)}},_initCreateLabels:function(){var t=this.paper;var n=[];var r=860;var i=220;var s=this.options.labelWidth;var o=this.options.labelHeight;var u=this.options.labelGap;var a=this.options.labelRadius;var f=s/this.scale;var l=o/this.scale;var c=(s+u)/this.scale;var h=(o+u)/this.scale*.5;var p=a/this.scale;var d=this.options.labelBackingStyles;var v=this.options.labelTextStyles;var m={};for(var g=0,y,b,w;g<n.length;++g){w=n[g];y=(g+1)%2*c+r;b=g*h+i,m={};if(this.options.stateSpecificLabelBackingStyles[w]){e.extend(m,d,this.options.stateSpecificLabelBackingStyles[w])}else{m=d}this.labelShapes[w]=t.rect(y,b,f,l,p).attr(m);m={};if(this.options.stateSpecificLabelTextStyles[w]){e.extend(m,v,this.options.stateSpecificLabelTextStyles[w])}else{e.extend(m,v)}if(m["font-size"]){m["font-size"]=parseInt(m["font-size"])/this.scale+"px"}this.labelTexts[w]=t.text(y+f/2,b+l/2,w).attr(m);this.labelHitAreas[w]=t.rect(y,b,f,l,p).attr({fill:"#000","stroke-width":0,opacity:0,cursor:"pointer"});this.labelHitAreas[w].node.dataState=w}for(var w in this.labelHitAreas){this.labelHitAreas[w].toFront();e(this.labelHitAreas[w].node).bind("mouseout",this._onMouseOutProxy);e(this.labelHitAreas[w].node).bind("click",this._onClickProxy);e(this.labelHitAreas[w].node).bind("mouseover",this._onMouseOverProxy)}},_getStateFromEvent:function(e){var t=e.target&&e.target.dataState||e.dataState;return this._getState(t)},_getState:function(e){var t=this.stateShapes[e];var n=this.stateHitAreas[e];var r=this.labelShapes[e];var i=this.labelTexts[e];var s=this.labelHitAreas[e];return{shape:t,hitArea:n,name:e,labelBacking:r,labelText:i,labelHitArea:s}},_onMouseOut:function(e){var t=this._getStateFromEvent(e);if(!t.hitArea){return}return!this._triggerEvent("mouseout",e,t)},_defaultMouseOutAction:function(t){var n={};if(this.options.stateSpecificStyles[t.name]){e.extend(n,this.options.stateStyles,this.options.stateSpecificStyles[t.name])}else{n=this.options.stateStyles}t.shape.animate(n,this.options.stateHoverAnimation);if(t.labelBacking){var n={};if(this.options.stateSpecificLabelBackingStyles[t.name]){e.extend(n,this.options.labelBackingStyles,this.options.stateSpecificLabelBackingStyles[t.name])}else{n=this.options.labelBackingStyles}t.labelBacking.animate(n,this.options.stateHoverAnimation)}},_onClick:function(e){var t=this._getStateFromEvent(e);if(!t.hitArea){return}return!this._triggerEvent("click",e,t)},_onMouseOver:function(e){var t=this._getStateFromEvent(e);if(!t.hitArea){return}return!this._triggerEvent("mouseover",e,t)},_defaultMouseOverAction:function(t){this.bringShapeToFront(t.shape);this.paper.safari();var n={};if(this.options.stateSpecificHoverStyles[t.name]){e.extend(n,this.options.stateHoverStyles,this.options.stateSpecificHoverStyles[t.name])}else{n=this.options.stateHoverStyles}t.shape.animate(n,this.options.stateHoverAnimation);if(t.labelBacking){var n={};if(this.options.stateSpecificLabelBackingHoverStyles[t.name]){e.extend(n,this.options.labelBackingHoverStyles,this.options.stateSpecificLabelBackingHoverStyles[t.name])}else{n=this.options.labelBackingHoverStyles}t.labelBacking.animate(n,this.options.stateHoverAnimation)}},_triggerEvent:function(t,n,r){var i=r.name;var s=false;var o=e.Event("usmap"+t+i);o.originalEvent=n;if(this.options[t+"State"][i]){s=this.options[t+"State"][i](o,r)===false}if(o.isPropagationStopped()){this.element.trigger(o,[r]);s=s||o.isDefaultPrevented()}if(!o.isPropagationStopped()){var u=e.Event("usmap"+t);u.originalEvent=n;if(this.options[t]){s=this.options[t](u,r)===false||s}if(!u.isPropagationStopped()){this.element.trigger(u,[r]);s=s||u.isDefaultPrevented()}}if(!s){switch(t){case"mouseover":this._defaultMouseOverAction(r);break;case"mouseout":this._defaultMouseOutAction(r);break}}return!s},trigger:function(e,t,n){t=t.replace("usmap","");e=e.toUpperCase();var r=this._getState(e);this._triggerEvent(t,n,r)},bringShapeToFront:function(e){if(this.topShape){e.insertAfter(this.topShape)}this.topShape=e}};var c=[];s(e,"usmap",l,c)})(jQuery,document,window,Raphael)
+
+campaignTrail_temp.questions_json = [
+    {
+        "model": "campaign_trail.question",
+        "pk": 393,
+        "fields": {
+            "description": "It's March 28, 2025. You are speaking in your proclamation rally for Team Bote-Joson to officially start your Gubernatorial campaign. What will you say to your loyal supporters?"
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 369,
+        "fields": {
+            "description": "What is your overall strategy to win? You need a Herculean on this one. Everyone perceives you a weak candidate and can't take down the incumbent, proven in your defeat in 2019."
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 366,
+        "fields": {
+            "description": "How can you convince Novo Ecijanos you are their candidate? Sure, you have grand plans for this province, but will they even vote for you?"
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 343,
+        "fields": {
+            "description": "Do you have any plans to curb inflation or any relief to the citizens who are currently suffering from it?"
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 347,
+        "fields": {
+            "description": "What will you say on the current Administration of President Bongbong Marcos Jr.?"
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 388,
+        "fields": {
+            "description": "Finally, you got the attention you want to put your campaign on the map. However, this one is a bad headline. While campaigning, you made fun of General Tinio Mayor Isidro Pajarillaga, your rival in 2022 mayoral election, over his kidney cancer. You said you don't need to gun him down and your team felt relieved. The COMELEC has given you a show-cause order to or else you will face a disqualification case."
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 372,
+        "fields": {
+            "description": "Where would you like to campaign in Nueva Ecija?"
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 387,
+        "fields": {
+            "description": "What are your thoughts on your opponent, Governor Umali?"
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 389,
+        "fields": {
+            "description": "Bad news. People are still not convinced you are winning this election despite endorsements from those who oppose Governor Umali? What is your finale plea to the people?"
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 381,
+        "fields": {
+            "priority": -1,
+            "description": "It's Miting de avance Day. Let's hope you mustered enough voters to vote for you on election day. Where will you hold your last campaign?"
+        }
+    }
+]
+
+campaignTrail_temp.answers_json = [
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3310,
+        "fields": {
+            "question": 343,
+            "description": "Umali's Food Council is good but it needs to be better. I will expand this and reach to the poor farmers that are struggling. We need to feed the entire province!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3311,
+        "fields": {
+            "question": 343,
+            "description": "Well uh... That's for the matter of the President to bring down prices, not the Governor. There is little much I can do."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3326,
+        "fields": {
+            "question": 347,
+            "description": "He should not have arrested Rodrigo Duterte to the ICC. The President broke his promise to not surrender to the ICC. You know, I feel bad for our former president. We need to Bring Him Home!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3328,
+        "fields": {
+            "question": 347,
+            "description": "I am not going to say anything to the President right now. I need funds from the PFP. We need to be silent amidst the Marcos-Duterte drama. "
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3393,
+        "fields": {
+            "question": 366,
+            "description": "NERA will revive our province. Umali has been sitting there for many years and yet so little has been done. You need to vote for me or else this province stays stunted."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3394,
+        "fields": {
+            "question": 366,
+            "description": "I have been Mayor of Gen. Tinio. I know how to make things run. It's a good plus I have the former Vice Governor on my ticket. Together, my leadership will be smart and bring change."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3405,
+        "fields": {
+            "question": 369,
+            "description": "I will appear with Jay Vergara in CabTV. The Vergaras are mortal enemies of the Umalis and they are holding Cabanatuan and District III against them. We need to make an alliance."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3406,
+        "fields": {
+            "question": 369,
+            "description": "I know my running mate still has their family's party, BALANE. Ask him if he can revive it."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3407,
+        "fields": {
+            "question": 369,
+            "description": "We will keep hitting the Umalis on their corruption. Hit them hard. We will remind the people their corruption made Nueva Ecija lagging behind."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3408,
+        "fields": {
+            "question": 369,
+            "description": "The Umalis have a huge war chest to make it rain. I do too. We need to outmatch them. Drown Nueva Ecija with sacks of rice and money. Make it look like it is a kind donation so COMELEC can't spot us."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3417,
+        "fields": {
+            "question": 372,
+            "description": "Campaign in my home turf. We need to lock General Tinio so Umali can't take away my hometown. I need to campaign with my allies there."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3418,
+        "fields": {
+            "question": 372,
+            "description": "Let's focus on District III. There are too many voters in this area, and it is hotly contested right now. Tie my name to the Vergaras."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3419,
+        "fields": {
+            "question": 372,
+            "description": "Head down to Gapan City. Congressmen Emeng Pascual is not a fan of Umali so we need to get his endorsement."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3453,
+        "fields": {
+            "question": 381,
+            "description": "We'll campaign together with the Vergaras in Cabanatuan City. Remind Novo Ecijanos again that we have a replacement to the inept Governor we have in Palayan!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3456,
+        "fields": {
+            "question": 381,
+            "description": "Hold the Miting de avance in Gen. Tinio. Invite everyone in my hometown. We need to appear strong."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3474,
+        "fields": {
+            "question": 387,
+            "description": "We need to focus on what I can do than bringing down my opponent. People are still unconvinced to me."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3475,
+        "fields": {
+            "question": 387,
+            "description": "Governor Umali has not delivered his promises and still suspended from his corruption charges. We need to change leadership now!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3478,
+        "fields": {
+            "question": 388,
+            "description": "The Umalis control the COMELEC, I tell you! They are trying to stop the Nueva Ecija Rise Again movement! Do not believe whatever the media and TV48 is saying against me!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3479,
+        "fields": {
+            "question": 388,
+            "description": "Putang ina. Okay, we need to deflect and issue a statement to the COMELEC. Get my staffers to write a draft to respond to the order."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3480,
+        "fields": {
+            "question": 388,
+            "description": "I apologize for my statements. It was just a joke to entertain the crowd. I did not intend to kill him and make fun of his grave illness."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3481,
+        "fields": {
+            "question": 389,
+            "description": "I have done everything to convince them. There is nothing I can really do."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3493,
+        "fields": {
+            "question": 393,
+            "description": "When I am Governor, I will make Nueva Ecija Rise Again! Look at Tarlac and Pampanga, they are more developed than us. What does Nueva Ecija have? Broken roads? Well, no more of that! I will build an expressway in connecting us to Manila once I am elected as Governor!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 3494,
+        "fields": {
+            "question": 393,
+            "description": "We can bring change together if you vote for me. The current Governor let our province rot. Don't forget he was involved in the Pork barrel scam!"
+        }
+    }
+]
+
+campaignTrail_temp.states_json = [
+    {
+        "model": "campaign_trail.state",
+        "pk": 12250,
+        "fields": {
+            "name": "Nueva Ecija",
+            "abbr": "NE",
+            "electoral_votes": 0,
+            "popular_votes": 1204764,
+            "poll_closing_time": 120,
+            "winner_take_all_flg": 1,
+            "election": 9
+        },
+        "d": "m 53.054684,234.53875 2.827281,-6.5379 -0.250869,-4.01661 -8.882288,-5.43746 0.639277,-1.39189 -0.07481,-11.73312 1.453443,-4.3283 2.054122,-2.98939 0.757478,-3.42479 -3.082988,-2.15279 -1.476361,-2.57808 0.604294,-4.16805 1.821327,-3.15975 -6.118934,-14.00453 1.908173,-3.0336 0.162839,-2.63861 -0.208655,-1.35779 3.543744,-2.57808 1.133809,-3.16734 -6.438573,-3.26453 -3.71623,-0.64606 -9.844814,-10.92929 -0.507803,-4.139 -3.142093,-3.22414 -0.200221,-4.59834 -2.104779,-2.78125 -0.890161,-18.55236 -0.01459,-3.0336 14.568207,-1.24929 7.760541,-4.247501 1.874397,-0.0382 3.952643,1.034721 6.232316,5.15864 5.490515,6.90132 1.299056,0.10492 2.601723,-3.19638 3.213255,-2.53639 1.424495,-4.10118 2.66565,-4.094841 1.447413,-8.473635 7.747275,-8.331034 0.440241,-5.631811 1.720009,-4.37122 0.570522,-16.566156 -6.987381,-8.264167 -0.72853,-2.435429 -0.431807,-3.585038 5.033375,-0.440212 7.08989,-4.015377 11.164353,-2.492233 11.86637,2.172971 10.71568,3.091647 9.12476,-0.09825 3.31455,1.183661 3.71746,1.606418 3.42068,5.008455 0.53675,2.228486 3.16862,35.895874 2.76217,6.50885 4.27349,5.89556 9.54809,19.078611 19.63776,66.01099 1.17603,3.48283 -7.32633,20.44017 -2.35442,17.42678 -6.46996,25.49909 -8.97035,-0.0782 -5.38679,-1.29722 -6.84743,-3.87401 -5.50016,-6.03316 -7.51091,-5.99776 -3.79701,-0.39872 -8.77013,2.71811 -1.83217,-2.42913 -4.88022,1.80954 -6.08757,0.93885 -6.31673,4.03179 -8.188752,0.0606 -6.95599,7.22435 -1.207383,-0.0544 -2.285704,-0.48839 -3.295276,0.6007 0.211071,3.09795 -2.048086,3.26453 -4.543671,1.47894 -4.483358,2.61843 -1.713978,-6.07098 -2.910502,-2.63612 -3.687286,-0.49339 -1.028867,-0.95397 -0.99751,0.98802 -2.58966,1.3679 -0.0036,-2.84555 -2.485929,-1.63923 0.106128,-4.03297 z"
+    }
+]
+
+campaignTrail_temp.issues_json = [
+    {
+        "model": "campaign_trail.issue",
+        "pk": 27,
+        "fields": {
+            "name": "Inflation",
+            "description": "",
+            "stance_1": "Hurting wallets",
+            "stance_desc_1": "",
+            "stance_2": "Conservative",
+            "stance_desc_2": "",
+            "stance_3": "Conservative",
+            "stance_desc_3": "",
+            "stance_4": "Moderate",
+            "stance_desc_4": "",
+            "stance_5": "Liberal",
+            "stance_desc_5": "",
+            "stance_6": "Liberal",
+            "stance_desc_6": "",
+            "stance_7": "Very Liberal",
+            "stance_desc_7": "",
+            "election": 9
+        }
+    },
+    {
+        "model": "campaign_trail.issue",
+        "pk": 28,
+        "fields": {
+            "name": "Corruption",
+            "description": "",
+            "stance_1": "Sick of it",
+            "stance_desc_1": "",
+            "stance_2": "Conservative",
+            "stance_desc_2": "",
+            "stance_3": "Conservative",
+            "stance_desc_3": "",
+            "stance_4": "Moderate",
+            "stance_desc_4": "",
+            "stance_5": "Liberal",
+            "stance_desc_5": "",
+            "stance_6": "Liberal",
+            "stance_desc_6": "",
+            "stance_7": "Very Liberal",
+            "stance_desc_7": "",
+            "election": 9
+        }
+    },
+    {
+        "model": "campaign_trail.issue",
+        "pk": 29,
+        "fields": {
+            "name": "Change",
+            "description": "",
+            "stance_1": "Now!",
+            "stance_desc_1": "",
+            "stance_2": "Conservative",
+            "stance_desc_2": "",
+            "stance_3": "Conservative",
+            "stance_desc_3": "",
+            "stance_4": "Moderate",
+            "stance_desc_4": "",
+            "stance_5": "Liberal",
+            "stance_desc_5": "",
+            "stance_6": "Liberal",
+            "stance_desc_6": "",
+            "stance_7": "Very Liberal",
+            "stance_desc_7": "",
+            "election": 9
+        }
+    },
+    {
+        "model": "campaign_trail.issue",
+        "pk": 31,
+        "fields": {
+            "name": "Governor Umali",
+            "description": "",
+            "stance_1": "Somewhat Disappointing",
+            "stance_desc_1": "",
+            "stance_2": "Unpopular",
+            "stance_desc_2": "",
+            "stance_3": "Unpopular",
+            "stance_desc_3": "",
+            "stance_4": "Neutral",
+            "stance_desc_4": "",
+            "stance_5": "Popular",
+            "stance_desc_5": "",
+            "stance_6": "Popular",
+            "stance_desc_6": "",
+            "stance_7": "Very Popular",
+            "stance_desc_7": "",
+            "election": 9
+        }
+    }
+]
+
+campaignTrail_temp.state_issue_score_json = [
+    {
+        "model": "campaign_trail.state_issue_score",
+        "pk": 12255,
+        "fields": {
+            "state": 12250,
+            "issue": 27,
+            "state_issue_score": -0.71,
+            "weight": 1.5
+        }
+    },
+    {
+        "model": "campaign_trail.state_issue_score",
+        "pk": 12256,
+        "fields": {
+            "state": 12250,
+            "issue": 28,
+            "state_issue_score": -0.71,
+            "weight": 1.5
+        }
+    },
+    {
+        "model": "campaign_trail.state_issue_score",
+        "pk": 12257,
+        "fields": {
+            "state": 12250,
+            "issue": 29,
+            "state_issue_score": -0.71,
+            "weight": 1.5
+        }
+    },
+    {
+        "model": "campaign_trail.state_issue_score",
+        "pk": 12259,
+        "fields": {
+            "state": 12250,
+            "issue": 31,
+            "state_issue_score": -0.71,
+            "weight": 1.5
+        }
+    }
+]
+
+campaignTrail_temp.candidate_issue_score_json = [
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 258,
+        "fields": {
+            "candidate": 77,
+            "issue": 27,
+            "issue_score": -0.5
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 259,
+        "fields": {
+            "candidate": 77,
+            "issue": 28,
+            "issue_score": -0.45
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 260,
+        "fields": {
+            "candidate": 77,
+            "issue": 29,
+            "issue_score": -0.1
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 262,
+        "fields": {
+            "candidate": 77,
+            "issue": 31,
+            "issue_score": -0.2
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 263,
+        "fields": {
+            "candidate": 78,
+            "issue": 27,
+            "issue_score": 0.4
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 264,
+        "fields": {
+            "candidate": 78,
+            "issue": 28,
+            "issue_score": 0.5
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 265,
+        "fields": {
+            "candidate": 78,
+            "issue": 29,
+            "issue_score": 0.4
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 267,
+        "fields": {
+            "candidate": 78,
+            "issue": 31,
+            "issue_score": 0.333
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_issue_score_json = [
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 278,
+        "fields": {
+            "candidate": 81,
+            "issue": 27,
+            "issue_score": -0.6
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 279,
+        "fields": {
+            "candidate": 81,
+            "issue": 28,
+            "issue_score": -0.6
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 280,
+        "fields": {
+            "candidate": 81,
+            "issue": 29,
+            "issue_score": -0.5
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_issue_score",
+        "pk": 282,
+        "fields": {
+            "candidate": 81,
+            "issue": 31,
+            "issue_score": -0.1
+        }
+    }
+]
+
+campaignTrail_temp.candidate_state_multiplier_json = [
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12251,
+        "fields": {
+            "candidate": 77,
+            "state": 12250,
+            "state_multiplier": 0.035
+        }
+    },
+    {
+        "model": "campaign_trail.candidate_state_multiplier",
+        "pk": 12252,
+        "fields": {
+            "candidate": 78,
+            "state": 12250,
+            "state_multiplier": 1
+        }
+    }
+]
+
+campaignTrail_temp.answer_score_global_json = [
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 995,
+        "fields": {
+            "answer": 3493,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.2
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1016,
+        "fields": {
+            "answer": 3394,
+            "candidate": 77,
+            "affected_candidate": 78,
+            "global_multiplier": 0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1031,
+        "fields": {
+            "answer": 3407,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": -0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1032,
+        "fields": {
+            "answer": 3407,
+            "candidate": 77,
+            "affected_candidate": 78,
+            "global_multiplier": -0.0125
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1033,
+        "fields": {
+            "answer": 3408,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.005
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1071,
+        "fields": {
+            "answer": 3453,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.009
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1074,
+        "fields": {
+            "answer": 3456,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1083,
+        "fields": {
+            "answer": 3478,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": -0.3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1084,
+        "fields": {
+            "answer": 3480,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": -0.009
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1128,
+        "fields": {
+            "answer": 3326,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": -0.0125
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1161,
+        "fields": {
+            "answer": 3310,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.08
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1173,
+        "fields": {
+            "answer": 3326,
+            "candidate": 78,
+            "affected_candidate": 78,
+            "global_multiplier": -0.035
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1174,
+        "fields": {
+            "answer": 3326,
+            "candidate": 78,
+            "affected_candidate": 79,
+            "global_multiplier": 0.075
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1231,
+        "fields": {
+            "answer": 3311,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": -0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12262,
+        "fields": {
+            "answer": 3494,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.008
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12263,
+        "fields": {
+            "answer": 3479,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": -0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12264,
+        "fields": {
+            "answer": 3417,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.003
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12265,
+        "fields": {
+            "answer": 3418,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.09
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12266,
+        "fields": {
+            "answer": 3419,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.006
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12267,
+        "fields": {
+            "answer": 3475,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": -0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12269,
+        "fields": {
+            "answer": 3474,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.004
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12270,
+        "fields": {
+            "answer": 3405,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12271,
+        "fields": {
+            "answer": 3393,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": 0.0003
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12272,
+        "fields": {
+            "answer": 3481,
+            "candidate": 77,
+            "affected_candidate": 77,
+            "global_multiplier": -0.01
+        }
+    }
+]
+
+campaignTrail_temp.answer_score_issue_json = [
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 810,
+        "fields": {
+            "answer": 3393,
+            "issue": 27,
+            "issue_score": -0.625,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 811,
+        "fields": {
+            "answer": 3393,
+            "issue": 28,
+            "issue_score": -0.625,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 812,
+        "fields": {
+            "answer": 3393,
+            "issue": 29,
+            "issue_score": -0.625,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 813,
+        "fields": {
+            "answer": 3393,
+            "issue": 30,
+            "issue_score": -0.625,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 814,
+        "fields": {
+            "answer": 3393,
+            "issue": 31,
+            "issue_score": -0.045,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 815,
+        "fields": {
+            "answer": 3394,
+            "issue": 27,
+            "issue_score": -0.625,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 816,
+        "fields": {
+            "answer": 3394,
+            "issue": 28,
+            "issue_score": -0.625,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 817,
+        "fields": {
+            "answer": 3394,
+            "issue": 29,
+            "issue_score": -0.625,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 818,
+        "fields": {
+            "answer": 3394,
+            "issue": 30,
+            "issue_score": -0.625,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 819,
+        "fields": {
+            "answer": 3394,
+            "issue": 31,
+            "issue_score": -0.7,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 993,
+        "fields": {
+            "answer": 3310,
+            "issue": 27,
+            "issue_score": -0.55,
+            "issue_importance": 1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 994,
+        "fields": {
+            "answer": 3311,
+            "issue": 27,
+            "issue_score": 0,
+            "issue_importance": 7
+        }
+    }
+]
+
+campaignTrail_temp.answer_score_state_json = []
+
+campaignTrail_temp.answer_feedback_json = [
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 708,
+        "fields": {
+            "answer": 3310,
+            "candidate": 77,
+            "answer_feedback": "That is very nice of you slightly praising Umali there. At least you got a plan to the starving population."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 709,
+        "fields": {
+            "answer": 3311,
+            "candidate": 77,
+            "answer_feedback": "Don't bite the fucking hand that feeds you. You are in the President's party. And what do you mean you can't do shit as Governor?"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 724,
+        "fields": {
+            "answer": 3326,
+            "candidate": 77,
+            "answer_feedback": "Banat By and other DDS vloggers are making soundbites out from you and great for milking their brainrotting content. I mean, Duterte is popular in Nueva Ecija and maybe it's good for you to try court them? Also, PFP contacted you and now they cut ties to your campaign. You need to grift harder now."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 726,
+        "fields": {
+            "answer": 3328,
+            "candidate": 77,
+            "answer_feedback": "Good. You need to keep your mouth shut or you blow this campaign. (How do we tell him it is already over?)"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 771,
+        "fields": {
+            "answer": 3393,
+            "candidate": 77,
+            "answer_feedback": "No one but your loyal supporters in General Tinio is eating this up. Your vanity campaign needs more grifting."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 772,
+        "fields": {
+            "answer": 3394,
+            "candidate": 77,
+            "answer_feedback": "Good way to bring up your past experience as small town Mayor because you have been out from government since 2022."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 775,
+        "fields": {
+            "answer": 3405,
+            "candidate": 77,
+            "answer_feedback": "You and Mayor Jay made a productive day in the studio. Your plan to build an expressway made him impressed and it is highlighted in his talk show. They are now plastering campaign materials in Cabanatuan City to support you."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 776,
+        "fields": {
+            "answer": 3406,
+            "candidate": 77,
+            "answer_feedback": "BALANE is heard once again in the countryside. Maybe this moribund political party of your running mate is enough to set up your political machinery."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 777,
+        "fields": {
+            "answer": 3407,
+            "candidate": 77,
+            "answer_feedback": "Governor Umali hits back, dredging your past violent politics and businesses. Wow."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 778,
+        "fields": {
+            "answer": 3408,
+            "candidate": 77,
+            "answer_feedback": "One voter however complained you only gave them 200 Pesos while the Umali team gave1000 Pesos. District III is now flooded with rice and money."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 779,
+        "fields": {
+            "answer": 3417,
+            "candidate": 77,
+            "answer_feedback": "Thousands of residents cheer your name and still remember their former Mayor."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 780,
+        "fields": {
+            "answer": 3418,
+            "candidate": 77,
+            "answer_feedback": "Smart. Putting your name in an intense battleground would recognize you. Campaign rallies with Mayor Jay helped you a bit for your numbers."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 781,
+        "fields": {
+            "answer": 3419,
+            "candidate": 77,
+            "answer_feedback": "You campaigned in the city. People there are shocked there is someone who can oppose Umali. This is the fate of perennial candidates."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 791,
+        "fields": {
+            "answer": 3453,
+            "candidate": 77,
+            "answer_feedback": "Many attend, not for you, but for the Vergaras. You gave your usual speech to vote for Bote-Joson. I just want this campaign to be over, boss."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 794,
+        "fields": {
+            "answer": 3456,
+            "candidate": 77,
+            "answer_feedback": "Your loyal supporters shouted your name throughout the night. Gen. Tinio should hopefully under you on election day!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 799,
+        "fields": {
+            "answer": 3474,
+            "candidate": 77,
+            "answer_feedback": "Maybe it is best to fix your image after what you did."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 800,
+        "fields": {
+            "answer": 3475,
+            "candidate": 77,
+            "answer_feedback": "He again hits back your past scandals. You might try to fix your own image. Especially your \"joke\" you made."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 803,
+        "fields": {
+            "answer": 3478,
+            "candidate": 77,
+            "answer_feedback": "You're so funny trying to become Filipino Trump."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 804,
+        "fields": {
+            "answer": 3479,
+            "candidate": 77,
+            "answer_feedback": "Your campaign staff is trying their best to keep your campaign afloat."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 805,
+        "fields": {
+            "answer": 3480,
+            "candidate": 77,
+            "answer_feedback": "At least this minimizes the damage you have done with your mouth."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 806,
+        "fields": {
+            "answer": 3481,
+            "candidate": 77,
+            "answer_feedback": "Don't forgot to pay me after your vanity campaign is over!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 12260,
+        "fields": {
+            "answer": 3493,
+            "candidate": 77,
+            "answer_feedback": "Will only happen if you win the election which you don't. Some Novo Ecijanos who are dissatisfied with the Governor look to your campaign. Question is how many of them are convinced of you?"
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 12261,
+        "fields": {
+            "answer": 3494,
+            "candidate": 77,
+            "answer_feedback": "Very rich coming from you who got sued in the Supreme Court because your company doing shady and corrupt business practices."
+        }
+    }
+]
+
+campaignTrail_temp.candidate_image_url = "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Bote.png";
+campaignTrail_temp.running_mate_image_url = "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Joson.png";
+campaignTrail_temp.candidate_last_name = "Bote";
+campaignTrail_temp.running_mate_last_name = "Joson";
+
+campaignTrail_temp.multiple_endings = true;
+endingPicker = (out, totv, aa, quickstats) => {
+
+    function setImage(url) {
+        if(url == '' || url == null) return;
+        let interval = setInterval(function () {
+            img = document.getElementsByClassName("person_image")[0];
+            if (img != null) {
+                img.src = url;
+                clearInterval(interval);
+            }
+        }, 50);
+    }
+
+    if(quickstats[1] < 700000) {
+        setImage("https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/ending1.png");
+        return `<h2>As expected, you have lost the 2025 Nueva Ecija Gubernatorial Election</h2><p>This was expected. Novo Ecijanos rather vote for the suspended Governor than a perennial candidate. Governor Umali and his brother will be proclaimed in the Provincial Capitol as Governor and Vice Governor respectively. There is nothing you can do but wrap up your campaign materials and file your SOCE to the COMELEC. Maybe you can retake your Mayoral seat in Gen. Tinio in 2028?</p>`;
+    }
+    if(quickstats[1] > 700000) {
+        setImage("https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/gorge.png");
+        return `<h2>Congratulations! You came here for the "secret"!</h2><p>Lmfao did you use bigshot? Ok cool here is a video for you as reward https://youtu.be/q-YyKGoBHh8?si=RexOhrRbWUHYRM2U</p>`;
+    }
+    if(quickstats[1] == 0) {
+        setImage("https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/vecia.png");
+        return `<h2>Mr. Whatsit?</h2><p>Never go into the woods, Holly</p>`;
+    }
+}
+
+
+campaignTrail_temp.jet_data = [{
+    "mapping_enabled": true,
+    "mapping_data": {
+        "dx": -112,
+        "dy": 18,
+        "mapSvg": "",
+        "x": 249.99999999999983,
+        "y": 249.99999999999983
+    },
+    "nicknames": {
+        "77": "Bote",
+        "78": "Umali"
+    },
+    "endings_enabled": true,
+    "ending_data": {
+        "1767525551297": {
+            "id": 1767525551297,
+            "variable": "1",
+            "operator": "<",
+            "amount": "602382",
+            "endingImage": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/ending1.png",
+            "endingText": "<h2>As expected, you have lost the 2025 Nueva Ecija Gubernatorial Election</h2><p>This was expected. Novo Ecijanos rather vote for the suspended Governor than a perennial candidate. Governor Umali and his brother will be proclaimed in the Provincial Capitol as Governor and Vice Governor respectively. There is nothing you can do but wrap up your campaign materials and file your SOCE to the COMELEC. Maybe you can retake your Mayoral seat in Gen. Tinio in 2028?</p>"
+        },
+        "1767526962839": {
+            "id": 1767526962839,
+            "variable": "1",
+            "operator": ">",
+            "amount": "602382",
+            "endingImage": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/gorge.png",
+            "endingText": "<h2>Congratulations! You came here for the \"secret\"!</h2><p>Lmfao did you use bigshot? Ok cool here is a video for you as reward https://youtu.be/q-YyKGoBHh8?si=RexOhrRbWUHYRM2U</p>"
+        },
+        "1767526966423": {
+            "id": 1767526966423,
+            "variable": "1",
+            "operator": "==",
+            "amount": 0,
+            "endingImage": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/vecia.png",
+            "endingText": "<h2>Mr. Whatsit?</h2><p>Never go into the woods, Holly</p>"
+        }
+    },
+    "banner_data": {
+        "canName": "Bote",
+        "canImage": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Bote.png",
+        "runName": "Joson",
+        "runImage": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Joson.png"
+    },
+    "banner_enabled": true
+}
+]
+

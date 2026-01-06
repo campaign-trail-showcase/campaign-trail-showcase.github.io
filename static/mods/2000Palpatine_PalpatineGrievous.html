@@ -7570,7 +7570,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 4092,
             "candidate": 77,
             "affected_candidate": 77,
-            "global_multiplier": -0.111
+            "global_multiplier": -0.085
         }
     },
     {
@@ -7580,7 +7580,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 4093,
             "candidate": 77,
             "affected_candidate": 77,
-            "global_multiplier": -0.111
+            "global_multiplier": -0.085
         }
     },
     {
@@ -7590,7 +7590,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 4094,
             "candidate": 77,
             "affected_candidate": 77,
-            "global_multiplier": -0.111
+            "global_multiplier": -0.085
         }
     },
     {
@@ -7600,7 +7600,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 4095,
             "candidate": 77,
             "affected_candidate": 77,
-            "global_multiplier": -0.111
+            "global_multiplier": -0.085
         }
     },
     {
@@ -9543,33 +9543,85 @@ campaignTrail_temp.jet_data = [{}
 
 campaignTrail_temp.candidate_image_url = 'https://raw.githubusercontent.com/FlongydOlson/OlsonMods/main/2000%20Palpatine/sheev.png';
 campaignTrail_temp.running_mate_image_url = 'https://raw.githubusercontent.com/FlongydOlson/OlsonMods/main/2000%20Palpatine/grievous.png';
-campaignTrail_temp.candidate_last_name = "<font color='#FFE701'>Palpatine</font>"
-campaignTrail_temp.running_mate_last_name = "<font color='#FFE701'>Grievous</font>"
 campaignTrail_temp.running_mate_state_id = '185';
 campaignTrail_temp.player_answers = [];
 campaignTrail_temp.player_visits = [];
 campaignTrail_temp.answer_feedback_flg = 1;
 campaignTrail_temp.game_start_logging_id = '3660822';
 campaignTrail_temp.election_json[0].fields.advisor_url = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/main/2000%20Palpatine/grievousadvisor.png"
+campaignTrail_temp.ElectionPopup = "Election night has arrived. Let's see who the Natives chose, my Lord."
+campaignTrail_temp.WinPopup = "Well, that little Gore couldn't break you, as expected. Congratulations."
+campaignTrail_temp.LosePopup = "Uh oh. I'm sorry, but I think you'll have to prepare a concession speech."
 
 const style_overwrite = document.createElement("style");
 style_overwrite.innerHTML = 
-`#campaign_sign {
-  background-color: #000000;
-  border-color: #F9CA02;
-}
-#menu_container {
-  background-color: #000000;
+`#menu_container {
+  background-color: rgb(0, 0, 0, 0);
 }
 #overall_result_container {
-  background-color: #000000;
+  background-color: rgb(0, 0, 0, 0);
+}
+#game_window{
+    color: #FFE701;
 }
 #state_info h3 {
-  background-color: #F4E192;
+  background-color: #F2B5CF;
+    border-color: #000000;
+    border-top-width: 0px;
+    border-bottom-width: 2px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-style: solid;
+    border-image: initial;
+}
+#state_info {
+    background-color: #FFFAD8;
+    border-color: #FFFFFF;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
 }
 #overall_result h3 {
-  background-color: #F4E192;
-}`
+  background-color: #F2B5CF;
+    border-color: #000000;
+    border-top-width: 0px;
+    border-bottom-width: 2px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-style: solid;
+    border-image: initial;
+}
+#overall_result {
+    background-color: #FFFAD8;
+    border-color: #FFFFFF;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+}
+#state_result h3 {
+    background-color: #F2B5CF;
+    border-color: #000000;
+    border-top-width: 0px;
+    border-bottom-width: 2px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-style: solid;
+    border-image: initial;
+}
+#state_result {
+    background-color: #FFFAD8;
+    border-color: #FFFFFF;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+}
+#state_result_container h3 {
+  background-color: #F2B5CF;
+}
+#state_result_container {
+    background-color: #FFFAD8;
+}
+`
 ;
 document.head.appendChild(style_overwrite);
 
@@ -9581,9 +9633,36 @@ style.id = 'dynamic-style';
 style.innerHTML = `
   .inner_window_question h3 {
     background-color: #F2B5CF;
+    border: 2px solid #AF577E;
+    color: black;
   }
-  .overlay_window h3 {
-    background-color: #D8A4B6;
+
+.inner_window_question {
+    background-color: #FFFAD8;
+    border: 2px solid black;
+    height: 55%;
+    color: black;
+}
+
+  .overlay_window {
+    background: #FFFAD8;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+    color: black !important;
+  }
+  .overlay_window img {
+    border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
+  }
+  .person_image {
+    border-color: #F9CA02;
+    border-width: 2px;
+    border-style: solid;
+    border-image: initial;
   }
 `;
 
@@ -9592,8 +9671,9 @@ document.head.appendChild(style);
 const customStyling = document.createElement("style");
 customStyling.innerHTML = `
 #map_container {
-    background-image: url("https://raw.githubusercontent.com/FlongydOlson/OlsonMods/main/2000%20Palpatine/2000Pmapground.png");
-    background-size: cover;
+    background: transparent;
+    border: 2px solid #F9CA02;
+    border-radius: 1.5em;
 }
 `;
 document.head.appendChild(customStyling);
@@ -9654,19 +9734,44 @@ cyoAdventure = function (a) {
         campaignTrail_temp.running_mate_image_url = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/main/2000%20Palpatine/indicted2.png"
         quotes = ["I will make it legal."]
         customquote = quotes[Math.floor((Math.random() * quotes.length))]
-        corrr=`\n<h2><font color='#FFE701'>PALPATINE INDICTED</font></h2><font id='wittyquote' size='4' color='#FFE701'><em>`+customquote+`</em></font>`
+        corrr=`\n<font id='wittyquote' size='4' color='#FFE701'><em>`+customquote+`</em></font>`
         document.getElementById("header").src = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/main/2000%20Palpatine/judiciary.png"
+ candidatestat = "Indicted"
+ partystat = "Indicted"
+        indicted();
     }
     else 
     {
         return false
     }
+
+function playAudioindicted() {
+document.getElementById("campaigntrailmusic").play()   
+campaignTrail_temp.musicSrc = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/main/2000%20Palpatine/indicted.mp3"
+document.getElementById('campaigntrailmusic').src = campaignTrail_temp.musicSrc
+}
+function indicted() {
+document.getElementById("campaigntrailmusic").pause()
+document.getElementById("music_player").style.display = "none"
+playAudioindicted()
+} 
+}
+
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
 }
 
 endingPicker = (out, totv, aa, quickstats) => {
 orderID = [aa[0].candidate, aa[1].candidate, aa[2].candidate, aa[3].candidate];
 playerID = campaignTrail_temp.candidate_id;
 playerEV = quickstats[0]
+
+    if(out=="win" && campaignTrail_temp.difficulty_level_multiplier<=0.9){
+    ctsAchievement("Sheev Rules");
+    }
 
 if (ans == 4106 || ans == 4107 || ans == 4108 || ans == 4109 ) {
 if (out == 'win' ) {
@@ -9679,7 +9784,7 @@ if (out == 'win' ) {
 			}
 		}, 100);
 	}
-	unlockAchievement("Make Al Gore Awkward");
+	ctsAchievement("Make Al Gore Awkward");
 	return "<h3>Side Story C1 - SWEET AFTER BITTER</h3><p> What a miracle. You have succeeded in setting two records that will go down in the history of this country. One is that you became the first major presidential candidate to be indicted, and the other is that you won the presidency in such a worst-case scenario. It was possible because of a very effective election strategy...and really extreme luck. </p><p> I have a lot to say about the future of our administration and the aftermath of the prosecution, but for now, I will just say this one thing. Congratulations, Lord Sidious. You have proved once again that you are the wisest politician in the galaxy. </p>"
     }
 else {
@@ -9699,6 +9804,19 @@ else {
 else if (aa[0].candidate == 79 && aa[0].electoral_votes > 269 ) {
 
 	return "<h3>Side Story C3 - Darth Nader Is Real</h3><p> The day after the election, Palpatine and Grievous's residence </p><p> 'My lord, are we...dreaming now?' </p><p> 'General, is this possible? Nader, who seemed certain that wouldn't get even 5% of the votes...won the election? There is something wrong with this. He couldn't have been elected the new president of the United States, unless some supernatural and powerful force was involved - Nader??? How the hell did you get here?' </p><p> 'No, I am your president. Your Force power is quite powerful. Even I can't help but admit it. But...you have not realized the ultimate knowledge that can control the votes of tens of millions of people, named <i>a bigshot</i>, which is incomparable to the Force. That's why you lost, Palpatine.' </p>"
+    }
+else if (aa[0].candidate == 80 && aa[0].electoral_votes > 269 ) {
+	if (used != true) {
+		setInterval(function () {
+			used = true;
+			imgg = document.getElementsByClassName("person_image")[0];
+			if (imgg != null) {
+				imgg.src = "https://raw.githubusercontent.com/FlongydOlson/OlsonMods/main/2000%20Palpatine/lucasgod.png";
+			}
+		}, 100);
+	}
+
+	return "<h3>Side Story C4 - Here Comes Our Greatest Creator</h3><p> Oh, I don't know how it happened, but anyway, our mighty creator has triumphed. All the effort we invested in the election campaign has gone to waste, but it doesn't matter. From now on, under the rule of a great film director, only a bright future awaits this nation.</p><p> Wait, what? The rights to the masterpiece he possessed have been transferred elsewhere?</p><p>No, no, hold on! You're telling me a self-destruct attack through hyperdrive is possible... what the kriff does that mean? Why on Naboo did I die only to be resurrected for no reason??? No!!!!!!!</p>"
     }
 else if (quickstats[0] == 538 ) {
 	if (used != true) {
@@ -9754,3 +9872,200 @@ else {
     }
 }
 campaignTrail_temp.multiple_endings=true
+
+
+
+// Mutation observer setup
+let observerRunning = false;
+let element = document.getElementById('controlElement');
+if (!element) {
+    let singleObserver = new MutationObserver(handleMutations);
+    singleObserver.observe(document.documentElement, { childList: true, subtree: true });
+    var controlElement = document.createElement('div');
+    controlElement.style.display = 'none';
+    controlElement.id = 'controlElement';
+    document.body.appendChild(controlElement);
+}
+
+function handleMutations(mutationsList, observer) {
+    if (observerRunning) return;
+    observerRunning = true;
+    handleFooter();
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    observerRunning = false;
+}
+
+var candidatestat = "Chancellor"
+var candidatename = "Sheev<br>Palpatine"
+var partystat = "Cyborg"
+var partyname = "General<br>Grievous"
+
+ function handleFooter() {
+    var gameWindow = document.getElementById('game_window');
+    var existingFooter = document.getElementById('new_footer');
+    if (existingFooter) {
+        return;
+    }
+
+    var oldCandidatePic = document.getElementById('candidate_pic');
+
+    if(oldCandidatePic){
+        var candidatePicSrc = oldCandidatePic.src;
+        oldCandidatePic.remove();
+    }
+    else{
+        return
+    }
+
+    var oldRunningMatePic = document.getElementById('running_mate_pic');
+
+    if(oldRunningMatePic) {
+        var runningMatePicSrc = oldRunningMatePic.src;
+        oldRunningMatePic.remove();
+    }
+    else{
+        return
+    }
+
+    var new_footer = document.createElement("div");
+    new_footer.id = "new_footer";
+    new_footer.style.display = "flex";
+    new_footer.style.justifyContent = "center";
+    new_footer.style.alignItems = "center";
+    new_footer.style.marginTop = "0.6em";
+
+    var candidatePic = createNewImageElement(candidatePicSrc, 'borderRight');
+    var runningMatePic = createNewImageElement(runningMatePicSrc, 'borderLeft');
+
+    var candidateImage = createCandidateImage(candidatePic);
+    var candidateBox = createCandidateBox(candidatestat, candidatename);
+    var partyImage = createPartyImage(runningMatePic);
+    var partyBox = createPartyBox(partystat, partyname);
+
+    var questionInfo = "Question " + (campaignTrail_temp.question_number + 1) + " / " + campaignTrail_temp.global_parameter_json[0].fields.question_count;
+    var questionBox = createQuestionBox(questionInfo);
+
+    new_footer.appendChild(candidateBox);
+    new_footer.appendChild(candidateImage);
+    new_footer.appendChild(questionBox);
+    new_footer.appendChild(partyImage);
+    new_footer.appendChild(partyBox);
+
+    gameWindow.appendChild(new_footer);
+
+    var signDisplay = document.getElementsByClassName('inner_window_sign_display')[0];
+    signDisplay.style.display = "none";
+};
+
+function createNewImageElement(src, border) {
+    var newImage = document.createElement('img');
+    newImage.src = src;
+    newImage.style.height = '182px';
+    return newImage;
+}
+
+function createCandidateImage(imageElement) {
+    var container = document.createElement('div');
+    container.classList.add('square-box');
+
+    container.style.borderColor = '#F9CA02';
+    container.style.backgroundColor  = '#000000';
+    container.style.height = '182px';
+
+    container.appendChild(imageElement);
+
+    return container;
+}
+
+function createPartyImage(imageElement) {
+    var container = document.createElement('div');
+    container.classList.add('party-square-box');
+
+    container.style.borderColor = '#F9CA02';
+    container.style.backgroundColor  = '#000000';
+    container.style.height = '182px';
+
+    container.appendChild(imageElement);
+
+    return container;
+}
+
+function createCandidateBox(role, text) {
+    var container = document.createElement('div');
+    container.classList.add('candidate-box');
+
+    container.style.borderColor = '#F9CA02';
+    container.style.backgroundColor  = '#000000';
+    container.style.height = '182px';
+    container.style.width = '100px';
+
+    var textBox = document.createElement('div');
+    var textBox2 = document.createElement('div');
+    textBox.style.fontSize = '12px';
+    textBox.style.padding = '2px';
+    textBox.style.textAlign = 'center';
+    textBox.style.marginTop = '-6px';
+    textBox.style.marginBottom = '12px';
+    textBox.innerHTML = '<h3 style="font-family: IBM Plex Sans KR, Ariel, sans-serif; color: #FFE701;">' + role + '</h3>';
+    textBox2.style.fontSize = '16px';
+    textBox2.style.padding = '2px';
+    textBox2.style.textAlign = 'center';
+    textBox2.style.marginTop  = '-16px';
+    textBox2.style.marginBottom = '-12px';
+    textBox2.innerHTML = '<h3 style="font-family: IBM Plex Sans KR, Ariel, sans-serif; color: #FFE701;">' + text + '</h3>';
+
+    container.appendChild(textBox);
+    container.appendChild(textBox2);
+
+    return container;
+}
+
+function createPartyBox(role, text) {
+    var container = document.createElement('div');
+    container.classList.add('party-box');
+
+    container.style.borderColor = '#F9CA02';
+    container.style.backgroundColor  = '#000000';
+    container.style.height = '182px';
+    container.style.width = '100px';
+
+    var textBox = document.createElement('div');
+    var textBox2 = document.createElement('div');
+    textBox.style.fontSize = '12px';
+    textBox.style.padding = '2px';
+    textBox.style.textAlign = 'center';
+    textBox.style.marginTop = '-6px';
+    textBox.style.marginBottom = '12px';
+    textBox.innerHTML = '<h3 style="font-family: IBM Plex Sans KR, Ariel, sans-serif; color: #FFE701;">' + role + '</h3>';
+    textBox2.style.fontSize = '16px';
+    textBox2.style.padding = '2px';
+    textBox2.style.textAlign = 'center';
+    textBox2.style.marginTop  = '-16px';
+    textBox2.style.marginBottom = '-12px';
+    textBox2.innerHTML = '<h3 style="font-family: IBM Plex Sans KR, Ariel, sans-serif; color: #FFE701;">' + text + '</h3>';
+
+    container.appendChild(textBox);
+    container.appendChild(textBox2);
+
+    return container;
+}
+
+function createQuestionBox(text) {
+    var container = document.createElement('div');
+    container.classList.add('rounded-box');
+
+    container.style.borderColor = '#F9CA02';
+    container.style.backgroundColor  = '#000000';
+    container.style.marginLeft = '30px';
+    container.style.marginRight = '30px';
+
+    var textBox = document.createElement('div');
+    textBox.style.fontSize = '16px';
+    textBox.style.padding = '3px';
+    textBox.style.textAlign = 'center';
+    textBox.innerHTML = '<h3 style="font-family: IBM Plex Sans KR, Ariel, sans-serif; color: #FFE701;">' + text + '</h3>';
+
+    container.appendChild(textBox);
+
+    return container;
+}
