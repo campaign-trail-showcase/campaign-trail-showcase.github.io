@@ -1,0 +1,228 @@
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#00a841",
+     "header_text_color": "#000000",
+     "description_text_color": "#000000",
+     "description_background_color": "#a0d0ee",
+     "main_color": "#489fd5",
+     "secondary_color": "#556fb0",
+     "ui_text_color": "#FFFFFF"
+}
+campaignTrail_temp.achievements = {
+    "First Time in 40 Years!": {
+        "image": "https://i.imgur.com/yxCgnbI.png",
+        "description": "Give Kansas a Democratic Senator",
+        "cannotBeCheated": true
+    },
+    "We're Going Straight To Miami, Kansas?": {
+        "image": "https://i.imgur.com/jig8iGQ.png",
+        "description": "Flip Miami County",
+        "cannotBeCheated": true
+    },
+    "Up In The Cloud": {
+        "image": "https://i.imgur.com/3fvEdoZ.png",
+        "description": "Flip Cloud County While Losing",
+        "cannotBeCheated": true
+    }, 
+    "Utter Devastation": {
+        "image": "https://i.imgur.com/UJOIsq5.png",
+        "description": "Have Roy Win In Kansas And Clark In New York. North Dakota soon",
+        "cannotBeCheated": true
+    }
+}
+HistHexcolour=["#df4e43","#188ed8"];
+HistName=["Robert J. Dole","William R. Roy"];
+HistEV=[83,22];
+HistPV=["403,983","390,451"];
+HistPVP=["50.85%","49.15%"];
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2016,
+            "display_year": "1974 Kansas Senate",
+            "summary": "What had seemed to have been an average midterm has been flipped on over by the wake of the Watergate Scandal - The biggest scandal in American history. The public, furious by this, are looking to get rid of establishment candidiates as well as many Republicans.\n<ul><li>Bob Dole must distance himself from his role as Chairman of the RNC and hit Roy on the issue of abortion.</li><li>Roy must get his name out and find someway to thread the needle on the state's conservatism.</li></ul>",
+            "image_url": "https://i.imgur.com/WGENwMW.png",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://i.imgur.com/JdtGKBQ.png",
+            "recommended_reading": "<ul>\n<li><a href=https://www.chicagotribune.com/opinion/editorials/ct-edit-chicago-tribune-biden-endorsement-20200925-lnyxsb5qvrftnjjmj3rnzj33jy-story.html>Our Case For Joe Biden</a></li>\n<li><a href=https://nationalinterest.org/feature/case-trump-166808>The Case For Trump</a></li>\n<li><a href=https://www.npr.org/2020/11/18/935730100/how-biden-won-ramping-up-the-base-and-expanding-margins-in-the-suburbs>How Biden Won: Ramping Up The Base And Expanding Margins In The Suburbs</a></li>\n<li><a href=https://www.prospectmagazine.co.uk/politics/donald-trump-joe-biden-us-election-almost-win-votes-concede>Why Did Trump Almost Win?</a></li>\n<li><a href=https://www.hoover.org/research/no-evidence-voter-fraud-guide-statistical-claims-about-2020-election>No Evidence For Voter Fraud: A Guide To Statistical Claims About The 2020 Election</a></li>\n</ul>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2016,
+        "is_premium": 0,
+        "display_year": "1974 Kansas Senate"
+    }
+]
+
+campaignTrail_temp.credits = "Wah Guy"
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 91,
+        "fields": {
+            "first_name": "William R.",
+            "last_name": "Roy",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Topeka",
+            "priority": 1,
+            "description": "William Robert Roy is the incumbent representative for Kansas' 2nd district, having been elected back in 1970. His time in the House has been uncontroversial with him being a standard Democrat in a conservative. He has shown fiscal conservatism with a hint of being somewhat liberal on social issues. Besides that, Roy is also a obstetrician, having received his Doctor of Medicine in 1949 from Northwestern University and his residency soon after, and he joined the Air Force for 2 years. He then practiced medicine before his entry in politics in 1970 as already discussed.\n<br><br>Now normally, someone like Roy would not have a shot at defeating a popular incumbent like Dole, however, Roy has the perfect opportunity. Public backlash towards the Watergate Scandal has propelled numerous Democrats towards many competitive races. It also helps Roy that Dole was Chairman of Republican National Committee during Watergate. That being said, victory will not be easy. Kansas hasn't elected a Democrat to the Senate in 40 years as well as having only carried the state 2 times during that same period. However, if Roy plays his cards right, he may be able to pull this off.",
+            "color_hex": "#188ed8",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/W3Tafxl.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1002,
+        "fields": {
+            "first_name": "Kansas ",
+            "last_name": "Democrats",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Kansas",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/gugXVkb.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "The Kansas Democratic Party is the state party for the national Democratic Party. The party has struggled deeply here. Ever since it was admitted to the Union over 100 years ago, the Republicans has always dominated, controlling most of the statewide offices and its congressional delegations with Democrats having the reigns for brief moments. Perhaps you can finally breathe some life into the party.",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 92,
+        "fields": {
+            "first_name": "Robert J. ",
+            "last_name": "Dole ",
+            "election": 20,
+            "party": "Republican",
+            "state": "Idaho",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#df4e43",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 92187,
+        "fields": {
+            "candidate": 91,
+            "running_mate": 1002
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            91,
+            92
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            91,
+            92
+        ]
+    }
+]
+
+jet_data = {
+    "headerColor": "#3a7082",
+    "windowColor": "#0e222f",
+    "containerColor": "#1b5e03",
+    "innerWindowColor": "#eeff00",
+    "bannerImageUrl": "https://i.imgur.com/oYSTmof.png",
+    "backgroundImageUrl": "https://i.imgur.com/395YyhL.png",
+    "endingTextColor": "#000000",
+    "customQuote": "Can We Just Get A Democratic Senator Here?",
+    "gameTitle": "THE 1974 KANSAS TRAIL"
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>THE 1974 KANSAS TRAIL</h2><font id="wittyquote" size="4" color="white"><em>Can We Just Get A Democratic Senator Here?</em></font>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#3a7082";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#0e222f";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#1b5e03";
+
+document.getElementById("header").src = "https://i.imgur.com/oYSTmof.png";
+
+document.body.background = "https://i.imgur.com/395YyhL.png";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#eeff00!important;}</style>";
+
+//#endcode

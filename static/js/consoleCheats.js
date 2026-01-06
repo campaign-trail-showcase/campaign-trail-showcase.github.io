@@ -629,8 +629,13 @@ const useConsoleCheats = () => {
 
   function BOOST(candidate_name) {
     let candidate_pk;
+    let playerAndOpponents = [
+      ...new Set(
+        [e.candidate_id, ...e.opponents_default_json.find((f) => f.election === e.election_id).candidates]
+      ),
+    ];
     for (const cjson of campaignTrail_temp.candidate_json.filter(
-      (e) => e.fields.election === campaignTrail_temp.election_id,
+      (e) => playerAndOpponents.includes(e.pk),
     )) {
       const full_name = `${cjson.fields.first_name} ${cjson.fields.last_name}`;
       if (full_name.toLowerCase().includes(candidate_name.toLowerCase())) {
@@ -719,8 +724,8 @@ const useConsoleCheats = () => {
   let [lastQuestionNumber, lastPlayerVisitsLength, lastIgnoreStatesLength] = [
     -1, -1, -1,
   ];
-  let stateToPath = new Map();
   let cachedPopVoteMap = null;
+  let prev_answer_hint_enabled = false;
 
   let sort_answers = false;
   let answer_hint_enabled = false;
@@ -746,14 +751,12 @@ const useConsoleCheats = () => {
     }
     const popVoteMap = cachedPopVoteMap;
 
-    let minVotes = Array.from(popVoteMap.values()).reduce(
-      (acc, val) => (val < acc ? val : acc),
-      Infinity,
-    );
-    let maxVotes = Array.from(popVoteMap.values()).reduce(
-      (acc, val) => (val > acc ? val : acc),
-      -Infinity,
-    );
+    let minVotes = Infinity;
+    let maxVotes = -Infinity;
+    for (const v of popVoteMap.values()) {
+      if (v < minVotes) minVotes = v;
+      if (v > maxVotes) maxVotes = v;
+    }
 
     function colorLerp(r1, g1, b1, r2, g2, b2, n) {
       let r = r1 + (r2 - r1) * n;
@@ -800,155 +803,107 @@ const useConsoleCheats = () => {
       } while (swapped);
     }
 
-    $("form[name='question'] > input").each(function () {
-      let id = $(this).attr("value");
-      let answer = answers[id];
-      let str = "";
+    if (answer_hint_enabled) {
+      $("form[name='question'] > input").each(function () {
+        let id = $(this).attr("value");
+        let answer = answers[id];
+        let str = "";
 
-      str += "Feedback: " + answer.feedback + "\n";
-      str += "\n";
+        str += "Feedback: " + answer.feedback + "\n\n";
 
-      const numVotes = popVoteMap.get(id);
+        const numVotes = popVoteMap.get(id);
 
-      str += "Popular vote (after selecting): " + numVotes + "\n";
-      str += "\n";
+        str += "Popular vote (after selecting): " + numVotes + "\n\n";
 
-      let n = ((numVotes - minVotes + 1) / (maxVotes - minVotes + 1)) ** 2;
-      if (n < 1) n *= 0.9;
-      const hintColor = colorLerp(255, 0, 0, 0, 255, 0, n);
-      if (answer_hint_enabled) {
-        $(this).css({
-          appearance: "none",
-          height: "10px",
-          backgroundColor: hintColor,
-        });
-      } else {
-        $(this).css({
-          appearance: "",
-          height: "",
-          backgroundColor: "",
-        });
-      }
+        let n = ((numVotes - minVotes + 1) / (maxVotes - minVotes + 1)) ** 2;
+        if (n < 1) n *= 0.9;
+        const hintColor = colorLerp(255, 0, 0, 0, 255, 0, n);
+        $(this).css({ appearance: "none", height: "10px", backgroundColor: hintColor });
 
-      if (answer.issue_effects.length > 0) {
-        str += "Issue effects:" + "\n";
-        for (let effect of answer.issue_effects) {
-          let issue = effect.issue;
-          let importance = effect.importance;
-          let score = effect.score;
-
-          str +=
-            "\t" +
-            "Issue: " +
-            issue +
-            ", Importance: " +
-            importance +
-            ", Score: " +
-            score +
-            "\n";
+        if (answer.issue_effects.length > 0) {
+          str += "Issue effects:" + "\n";
+          for (let effect of answer.issue_effects) {
+            str +=
+              "\tIssue: " +
+              effect.issue +
+              ", Importance: " +
+              effect.importance +
+              ", Score: " +
+              effect.score +
+              "\n";
+          }
+          str += "\n";
         }
-        str += "\n";
-      }
 
-      if (answer.global_effects.length > 0) {
-        str += "Global effects:" + "\n";
-        for (let effect of answer.global_effects) {
-          let affected = effect.affected_candidate;
-          let multiplier = effect.global_multiplier;
-
-          str +=
-            "\t" +
-            "Candidate: " +
-            affected +
-            ", Multiplier: " +
-            multiplier +
-            "\n";
+        if (answer.global_effects.length > 0) {
+          str += "Global effects:" + "\n";
+          for (let effect of answer.global_effects) {
+            str +=
+              "\tCandidate: " +
+              effect.affected_candidate +
+              ", Multiplier: " +
+              effect.global_multiplier +
+              "\n";
+          }
+          str += "\n";
         }
-        str += "\n";
-      }
 
-      if (answer.state_effects.length > 0) {
-        str += "State effects:" + "\n";
-        for (let effect of answer.state_effects) {
-          let affected = effect.affected_candidate;
-          let state = effect.state;
-          let multiplier = effect.state_multiplier;
-
-          str +=
-            "\t" +
-            "Candidate: " +
-            affected +
-            ", State: " +
-            state +
-            ", Multiplier: " +
-            multiplier +
-            "\n";
+        if (answer.state_effects.length > 0) {
+          str += "State effects:" + "\n";
+          for (let effect of answer.state_effects) {
+            str +=
+              "\tCandidate: " +
+              effect.affected_candidate +
+              ", State: " +
+              effect.state +
+              ", Multiplier: " +
+              effect.state_multiplier +
+              "\n";
+          }
+          str += "\n";
         }
-        str += "\n";
-      }
 
-      if (answer_hint_enabled) {
         $(this).attr("title", str);
-      } else {
+      });
+      prev_answer_hint_enabled = true;
+    } else if (prev_answer_hint_enabled) {
+      $("form[name='question'] > input").each(function () {
+        $(this).css({ appearance: "", height: "", backgroundColor: "" });
         $(this).attr("title", "");
-      }
-    });
+      });
+      prev_answer_hint_enabled = false;
+    }
 
     if (document.activeElement.type === "radio") document.activeElement.blur();
+    const plugin = $('#map_container').data('plugin-usmap');
 
-    // Compute state SVG paths
-    if (
-      stateToPath.size < 1 ||
-      !document.body.contains(stateToPath.values().next().value)
-    ) {
-      stateToPath = new Map();
-      const stateNameToAttr = new Map();
-      for (const state of e.states_json) {
-        stateNameToAttr.set(state.fields.name, state.fields.abbr);
-      }
-      const get_tooltip = () => $("#state_info")?.children()[1]?.innerHTML;
-      for (const path of $("path")) {
-        if (
-          !path.dispatchEvent(new MouseEvent("mouseover", { cancelable: true }))
-        ) {
-          const tooltip = get_tooltip();
-          const state = stateNameToAttr.get(tooltip);
-          if (state == null) continue;
-          if (stateToPath.has(state)) continue;
-          path.setAttribute("id", state);
-          stateToPath.set(state, path);
-        }
-      }
-    }
+    const availableStates = e.states_json.map((st) => st.fields.abbr);
 
     const stateAbbrToPk = new Map();
     for (const state of e.states_json) {
       stateAbbrToPk.set(state.fields.abbr, state.pk);
     }
     if ($(".visit_text").length > 0) {
-      if (auto_visit == "all") {
-        const visitables = Array.from(stateToPath.keys());
-        const path = stateToPath.get(visitables[0]);
-        for (let i = 1; i < visitables.length; i++) {
-          e.player_visits.push(stateAbbrToPk.get(visitables[i]));
+      const visitAndConfirm = (abbr) => {
+        plugin.options.click({ target: null }, { name: abbr });
+        document.getElementById('confirm_visit_button')?.click();
+      };
+      if (auto_visit === "all") {
+        const firstPath = availableStates[0];
+        for (const state of availableStates) {
+          if (state !== firstPath) e.player_visits.push(stateAbbrToPk.get(state));
         }
-        path.dispatchEvent(new MouseEvent("click", { cancelable: true }));
-        $("#confirm_visit_button")[0]?.dispatchEvent(
-          new MouseEvent("click", { cancelable: true }),
-        );
+        visitAndConfirm(firstPath);
       } else if (auto_visit != null) {
-        const path = stateToPath.get(auto_visit);
-        if (path == null) {
-          console.warn(`State not found on map: ${auto_visit}`);
+        const stateExists = availableStates.includes(auto_visit);
+        if (stateExists) {
+          visitAndConfirm(auto_visit);
         } else {
-          path.dispatchEvent(new MouseEvent("click", { cancelable: true }));
-          $("#confirm_visit_button")[0]?.dispatchEvent(
-            new MouseEvent("click", { cancelable: true }),
-          );
+          console.warn(`State not found on map: ${auto_visit}`);
         }
       }
     }
-  }, 10);
+  }, 100);
 
   // == CHEATS ==
 
@@ -977,7 +932,7 @@ const useConsoleCheats = () => {
         pk: -1, // hopefully this doesn't matter
       };
       e.candidate_state_multiplier_json.push(new_entry);
-      gcsmj_map.get(candidate_pk).set(state_pk, {});
+      gcsmj_map.get(candidate_pk).set(state_pk, new_entry);
     }
     return gcsmj_map.get(candidate_pk).get(state_pk);
   }
@@ -1007,6 +962,7 @@ const useConsoleCheats = () => {
     if (isNaN(obj.fields.state_multiplier)) {
       throw new Error("NaN found");
     }
+    cachedPopVoteMap = null;
   }
 
   function add_global_modifier(candidate_pk, amt) {
@@ -1025,6 +981,7 @@ const useConsoleCheats = () => {
         );
       }
     }
+    cachedPopVoteMap = null;
   }
 
   // Convert string (ex. "AK" or "Alaska") into a state_pk
@@ -1082,6 +1039,7 @@ const useConsoleCheats = () => {
       return false;
     }
   }
+  window.toggleCampaignTerminal = toggleTerminal;
 
   const terminalBody = $("<div></div>")
     .addClass("terminal-body")
@@ -1108,31 +1066,20 @@ const useConsoleCheats = () => {
     terminalBody.scrollTop(terminalBody.prop("scrollHeight"));
   }
 
-  const ORIGINAL_GLOBAL_VARIANCE =
-    e.global_parameter_json[0].fields.global_variance;
+  // const ORIGINAL_GLOBAL_VARIANCE = e.global_parameter_json[0].fields.global_variance;
+  const ORIGINAL_MARSAGLIA = randomNormal;
   let optrng_enabled = false;
   function set_optimal_rng(enabled) {
     if (enabled && !optrng_enabled) {
-      e.global_parameter_json[0].fields.global_variance = 0;
-      add_global_modifier(e.candidate_id, 0.025);
-      for (const state_pk of e.states_json.map((e) => e.pk)) {
-        cmt_set(
-          e.candidate_id,
-          state_pk,
-          cmt_get(e.candidate_id, state_pk) - 0.05,
-        );
+      // e.global_parameter_json[0].fields.global_variance = 0;
+      if (typeof randomNormal === "function") {
+        randomNormal = (cand) => (cand === e.candidate_id ? 3 : -3); // Values beyond 3 are rare
       }
       optrng_enabled = true;
     } else if (!enabled && optrng_enabled) {
-      e.global_parameter_json[0].fields.global_variance =
-        ORIGINAL_GLOBAL_VARIANCE;
-      add_global_modifier(e.candidate_id, -0.05);
-      for (const state_pk of e.states_json.map((e) => e.pk)) {
-        cmt_set(
-          e.candidate_id,
-          state_pk,
-          cmt_get(e.candidate_id, state_pk) + 0.05,
-        );
+      // e.global_parameter_json[0].fields.global_variance = ORIGINAL_GLOBAL_VARIANCE;
+      if (typeof ORIGINAL_MARSAGLIA === "function") {
+        randomNormal = ORIGINAL_MARSAGLIA;
       }
       optrng_enabled = false;
     }
@@ -1508,7 +1455,10 @@ const useConsoleCheats = () => {
     cmd.usage.forEach((msg) => write(msg, "#aaa"));
   }
 
-  const styleTag = $("<style>").text(`
+  if (!document.getElementById("campaign-terminal-style")) {
+    const styleTag = $("<style>")
+      .attr("id", "campaign-terminal-style")
+      .text(`
             .terminal-container {
                 position: absolute;
                 top: 260px;
@@ -1595,11 +1545,23 @@ const useConsoleCheats = () => {
             }
         `);
 
-  $("head").append(styleTag);
+    $("head").append(styleTag);
+  }
 };
 
 window.addEventListener("keypress", (e) => {
-  if (e.key === "$") useConsoleCheats();
+  if (e.key === "$") {
+    if (window.UsingConsoleCheats === true && typeof window.toggleCampaignTerminal === "function") {
+      const expanded = window.toggleCampaignTerminal();
+      if (expanded) {
+        $(".terminal-input")[0]?.focus({ focusVisible: true });
+      } else {
+        $(".terminal-input")[0]?.blur();
+      }
+    } else {
+      useConsoleCheats();
+    }
+  }
 });
 
 // QOL: play game with keyboard
@@ -1610,13 +1572,7 @@ $(document).ready(() => {
     const key = e.key;
 
     if (key === "$") {
-      const expanded = toggleTerminal();
-      if (expanded) {
-        $(".terminal-input")[0].focus({ focusVisible: true });
-      } else {
-        $(".terminal-input")[0].blur();
-      }
-      e.preventDefault();
+      if (window.UsingConsoleCheats === true) e.preventDefault();
     }
 
     if (document.activeElement !== document.body) return;

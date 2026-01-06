@@ -326,47 +326,48 @@ appendStyle();
 e = campaignTrail_temp
 
 const startScreenUpdater = setInterval(function() {
-	const goBackButton = document.getElementById("candidate_id_back");
-	const candidateButton = document.getElementById("candidate_id_button");
-	const runningMateButton = document.getElementById("running_mate_id_button");
-	const finalScreenBB = document.getElementById("opponent_selection_id_back");
-	const finalScreenID = document.getElementById("opponent_selection_id_button");
-    const difficultySlider = document.getElementById("difficulty_level");
+    const goBackButton = document.getElementById("candidate_id_back");
+    const candidateButton = document.getElementById("candidate_id_button");
+    const runningMateButton = document.getElementById("running_mate_id_button");
+    const finalScreenBB = document.getElementById("opponent_selection_id_back");
+    const finalScreenID = document.getElementById("opponent_selection_id_button");
+    const candidateSelect = document.getElementById("candidate_id");    
     const gameType = document.getElementById("game_type_id");
 
-    if(gameType){
+    if (gameType) {
         const difficultySlider = document.getElementById("difficulty_level");
-        difficultySlider.style.display = 'none';
-        
-		multiplier = 1;
+        if (difficultySlider) {
+            difficultySlider.style.display = 'none';
+        }
+        multiplier = 1;
     }
-    
-    if((candidateButton || c != 0)&& !runningMateButton){ // change theme on candidate viewing
-		var c = document.getElementById("candidate_id").value;
-		if(c == 78 && !(candidateButton) && !(runningMateButton)) {
-            goBackButton.click();
+
+    if (candidateSelect && !runningMateButton) { 
+        const c = candidateSelect.value;
+
+        if (c == 78 && !candidateButton) {
+            if (goBackButton) goBackButton.click();
             const initContinue = document.getElementById("election_id_button");
-            initContinue.click();
-		}
-		else if(c == 77 || c == 79) {
-            if(candidateButton) {
+            if (initContinue) initContinue.click();
+        }
+        else if (c == 77 || c == 79) {
+            if (candidateButton) {
                 candidateButton.remove();
             }
-		}
-	}
-    
-	else if(!candidateButton && runningMateButton) { 
-	    runningMateButton.click();
-        const finalBack = document.getElementById("opponent_selection_id_back");
-        finalBack.remove();
-        observer.disconnect()
-	}
+        }
+    }
 
-	if(finalScreenID) { // delete back button and delete the interval
-		finalScreenBB.remove();
-		clearInterval(startScreenUpdater);
-	}
-}, 1);
+    if (!candidateButton && runningMateButton) {
+        runningMateButton.click();
+    }
+    
+    if (finalScreenID) { 
+        if (finalScreenBB) {
+            finalScreenBB.remove();
+        }
+        clearInterval(startScreenUpdater);
+    }
+}, 100);
 
 campaignTrail_temp.modBoxTheme = {
     "header_color": "#8e1818",

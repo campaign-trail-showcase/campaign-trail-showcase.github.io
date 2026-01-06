@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
-  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out." />
     <title>Campaign Trail Showcase</title>
     <link rel="stylesheet" href="../static/amusa_main_2016032801.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../static/css/community.css" type="text/css" media="screen" />
     <link rel="shortcut icon" href="/static/34starcircle-2.png" type="image/png" />
-    <link rel="canonical" href="index.html" />
-    <meta name="description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out." />
+    <link rel="canonical" href="https://campaigntrailshowcase.com/campaign-trail/" />
     <meta property="og:title" content="Campaign Trail Showcase" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="../static/34starcircle-2.png" />
@@ -17,10 +18,9 @@
     <meta property="og:url" content="index.html" />
     <meta property="og:description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out." />
     <meta property="og:site_name" content="Campaign Trail Showcase" />
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://malsup.github.io/jquery.blockUI.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-H6KK5MD763"></script>
     <script>
@@ -32,7 +32,7 @@
     </script>
   </head>
   <body class="base" style="position:relative">
-    <div style="" id="announcement" class="announcement"><span>📣 ANNOUNCEMENT:</span> Do you like CTS but want to save your highscores and play better on mobile? Check out <a href="https://thecommunitytrail.com/">The Community Trail</a></div>
+    <div style="display:none" id="announcement" class="announcement"><span>📣 ANNOUNCEMENT:</span> Do you like CTS but want to save your highscores and play better on mobile? Check out <a href="https://thecommunitytrail.com/">The Community Trail</a></div>
     <div style="display:none" id="cheatIndicator" class="cheatIndicator">AUTO-PLAY ENABLED</div>
     <div style="display:none" id="benefitwindow">
       <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
@@ -44,11 +44,12 @@
       <div id="achwindowheader"><button onclick="closeAchievements()" id="achclose">X</button> Achievements</div>
       <div id="achcontent"></div>
     </div>
+    <div style="display:none" id="variableTooltip"></div>
     <div id="wittyquote" style="display:none"></div>
     <div class="container">
-      <center>
-        <img src="" id="header" width=1080></img>
-      </center>
+      <div class="center">
+                 <img src="../static/images/banners/tct_banner.webp" id="header" alt="Campaign Trail Showcase Head Banner" width="900" height="299"/>
+      </div>
       <div class="menu_bar_login"></div>
       <div class="content_box">
         <div class="content_single">
@@ -79,11 +80,11 @@
             </div>
             <div id="bottomBar" class="inner_window_front" style="display:none;height:30px;font-size: 12px;border-style: solid;border-width: 5px;width:95%;position:absolute;bottom:10px;"></div>
           </div>
-          <div  class="footer">
+          <div class="footer">
             <div id="cheatMenu" style="display:none">
               <div class="slidecontainer"  style="padding-right: 20px; padding: 10px; border-radius:5px; background-color: white;">
                 <label style="font-weight:bold">Difficulty Slider</label>
-                <input type="range" min="0.0" max="100.0" step="0.25" value="1.0"  class="slider" id="difficultySlider">
+                <input type="range" min="0.0" max="100.0" step="0.25" value="1.0" class="slider" id="difficultySlider" style="vertical-align: middle">
                 <input style="display:inline-block" step="any" type="number" id="difficultyValue"></input>
               </div>
               <div style="margin-top:10px; display:inline-block;">
@@ -94,6 +95,7 @@
               <div style="margin-top:10px">
                 <button onclick="addSTSSMoney()" style="border-radius:5px; font-weight:bold;padding:10px;">"Borrow" $1000000 (STSS Only)</button>
                 <button onclick="useConsoleCheats()" style="border-radius:5px; font-weight:bold;padding:10px;">Open Console</button>
+                <button onclick="activateVariableTooltip()" style="border-radius:5px; font-weight:bold;padding:10px;">Variable Tooltip</button>
               </div>
             </div>
             <div id="autoplayMenu" style="display:none">
@@ -137,20 +139,20 @@
               <select style="display:none" name="mod" id="modSelect" onchange="modSelectChange()"></select>
               <div id="customMenu">
                 <br>
-                <b>Code Set 1:</b>
+                <b class="custom-mod-label">Code Set 1:</b>
                 <br>
-                <textarea id="codeset1" width=400 height=300></textarea>
+                <textarea id="codeset1" width=400 height=300 class="custom-mod-input"></textarea>
                 <br>
-                <b>Code Set 2:</b>
+                <b class="custom-mod-label">Code Set 2:</b>
                 <br>
-                <textarea id="codeset2" width=400 height=300></textarea>
+                <textarea id="codeset2" width=400 height=300 class="custom-mod-input"></textarea>
                 <br>
-                <b>ENDINGS CODE:</b>
+                <b class="custom-mod-label">ENDINGS CODE:</b>
                 <br>
-                <textarea id="codeset3" width=400 height=300></textarea>
+                <textarea id="codeset3" class="custom-mod-input"></textarea>
                 <div style="display:none" id="fileimp">
                   <br>
-                  <b>File importer:</b>
+                  <b class="custom-mod-label">File importer:</b>
                   <br>
                   <form action="/action_page.php">
                     <p>Upload your result JSON files to view previous games by clicking the button below:</p>
@@ -163,17 +165,17 @@
                 <button id="submitMod">Play Custom Mod</button>
                 <br>
                 <br>
-                <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName"></input>
+                <input placeholder="Custom mod name here" type="text" id="customModName" name="customModName" class="custom-mod-input"></input>
                 <button onclick="addCustomModButton()" id="saveMod">Save Custom Mod</button>
                 <div>
-                  <p style="font-size: smaller; font: italic">(To update a custom mod just submit a new mod again with an identical name. This includes switching candidates/running mates.)</p>
+                  <p class="custom-mod-note" style="font-size: smaller; font-style: italic">(To update a custom mod just submit a new mod again with an identical name. This includes switching candidates/running mates.)</p>
                 </div>
               </div>
             </div>
             <br>
             <button id="achButton" onclick="openAchievements()">Achievements</button>
-            <div id="copyLinkButton" style="display:none; margin-top:10px;" ><button onclick="copyModLink()">Copy Mod Link</button></div>
-            <button id="goBackButton" style="display:none" onclick="window.location.href = 'https://campaigntrailshowcase.com/campaign-trail/index.html'">Go Back To Main Page</button>
+            <div id="copyLinkButton" style="display:none; margin:10px 0;"><button onclick="copyModLink()">Copy Mod Link</button></div>
+            <button id="goBackButton" style="display:none" onclick="window.location.href = 'index.html'">Go Back To Main Page</button>
             <div id="bonus_menu_area"></div>
             <br>
             <hr>
@@ -189,33 +191,36 @@
                 <button class="tablinks" onclick="setCategory(event, new RegExp('1[7-8][0-9][0-9]'))">1700s-1800s</button>
                 <button class="tablinks" onclick="setCategory(event, new RegExp('19[0-3][0-9]'))">1900s-1930s</button>
                 <button class="tablinks" onclick="setCategory(event, new RegExp('19[4-5][0-9]'))">1940s-1950s</button>
-                <button class="tablinks" onclick="setCategory(event, new RegExp('19[6-7][0-9]'))">1960s-1970s</button>
+                <button class="tablinks" onclick="setCategory(event, new RegExp('19[6-7][0-9]|1969-1972'))">1960s-1970s</button>
                 <button class="tablinks" onclick="setCategory(event, new RegExp('19[8-9][0-9]'))">1980s-1990s</button>
-                <button class="tablinks" onclick="setCategory(event, new RegExp('[2-9][0-9][0-9][0-9][^(BCE)]|2008'))">2000s and Beyond</button>
+                <button class="tablinks" onclick="setCategory(event, new RegExp('200[0-9][^(BCE)]?|2008'))">2000s</button>
+                <button class="tablinks" onclick="setCategory(event, new RegExp('201[0-9][^(BCE)]?'))">2010s</button>
+                <button class="tablinks" onclick="setCategory(event, new RegExp('20[2-9][0-9][^(BCE)]?'))">2020s and Beyond</button>
               </div>
               <div id="tags" class="tags-grid"></div>
               <div style="color:white;margin:auto; display:flex;align-items: center;justify-content: center; margin-bottom:10px; gap:10px;">
                 <input placeholder="Filter by mod name" oninput="filterMods(event)" type="text" id="modSearch" name="modSearch"></input>
                 
                 <div>
-                <label for="sorting">Sort by:</label>
-                <select onchange="onChangeModSorter(event)" name="sorting" id="modSorting">
-                  <option value="chrono">Year</option>
-                  <option value="mostFav">Popularity</option>
-                  <option value="leastFav">Nicheness</option>
-                  <option value="mostPlays">Plays</option>
-                </select>
-              </div>
+                  <label for="modSorting" class="mod-sort-label">Sort by:</label>
+                  <select onchange="onChangeModSorter(event)" name="sorting" id="modSorting" class="mod-sort-select">
+                    <option value="chrono">Year</option>
+                    <option value="mostFav">Popularity</option>
+                    <option value="leastFav">Nicheness</option>
+                    <option value="mostPlays">Plays</option>
+                  </select>
+                </div>
               </div>
               <div id="mod-grid" class="community-grid"></div>
             </div>
-            </div>      
+          </div>      
             
             <div id="site_credits" style="text-align: center;">
-              <a href="https://discord.gg/cqgVSNRKDP" style="color:#FF6B6B">We have a Discord server here.</a><br><br>
+               <a href="https://discord.gg/cqgVSNRKDP" style="color:#FF6B6B">Campaign Trail Showcase Discord</a><br/>
+              <a href="https://discord.gg/CfS6yTtjZj" style="color:#FF6B6B">The Campaign Trail Discord</a><br/><br/>
               <a href="https://github.com/campaign-trail-showcase/campaign-trail-showcase.github.io/blob/main/How%20Tos/How%20to%20Get%20Your%20Mod%20in%20The%20Showcase.md" style="color:#FF6B6B">How to submit a mod to Campaign Trail Showcase</a><br>
               <a href="https://www.newcampaigntrail.com/campaign-trail/index.html" style="color:#FF6B6B">This site is a fork of The New Campaign Trail created by Decstar and NCT Staff</a><br>
-              <a href="http://www.americanhistoryusa.com" style="color:#FF6B6B">Original site created by Dan Bryan &copy; 2012- <testf id="year">2022</testf></a>
+              <a href="https://www.americanhistoryusa.com" style="color:#FF6B6B">Original site created by Dan Bryan &copy; 2012- <testf id="year">2022</testf></a>
               <p style="color:#FF6B6B">All DBA award images created by cherrymeringue. Thanks so much!</p>
               <div>
                 <div style="margin-top:10px; display:inline-block;">
@@ -232,17 +237,25 @@
         <br>
   </body>
   <!-- <script src="../../ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
-  <script src="../static/js/lib/raphael.js"></script>
-  <script src="../static/js/indexCode.js"></script>
-  <script src="../static/js/modLoaderCode.js"></script>
-  <script src="../static/js/cheats.js"></script>
-  <script src="../static/js/consoleCheats.js"></script>
-  <script src="../static/js/achievements.js"></script>
-  <script src="../static/js/lib/md5.js"></script>
-  <script src="../static/js/lib/gradient.js"></script>
-  <script src="../static/js/sea_to_sea.js"></script>
-  <script src="../static/js/campaign_trail.js"></script>
-  <script src="../static/js/remote.js"></script>
-  <script src="../static/js/mobileStyle.js"></script>
-  <script>campaignTrail_temp.CTS = true</script>
+  <script src="../static/js/lib/raphael.js" defer></script>
+  <script src="../static/js/indexCode.js" defer></script>
+  <script src="../static/js/customThemeCode.js" defer></script>
+  <script src="../static/js/modLoaderCode.js" defer></script>
+  <script src="../static/js/cheats.js" defer></script>
+  <script src="../static/js/consoleCheats.js" defer></script>
+  <script src="../static/js/achievements.js" defer></script>
+  <script src="../static/js/lib/md5.js" defer></script>
+  <script src="../static/js/lib/gradient.js" defer></script>
+  <script src="../static/js/sea_to_sea.js" defer></script>
+  <script src="../static/js/campaign_trail.js" defer></script>
+  <script src="../static/js/remote.js" defer></script>
+  <script src="../static/js/mobileStyle.js" defer></script>
+  <script src="../static/js/variableChangeTooltip.js" defer></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      if (typeof campaignTrail_temp !== 'undefined') {
+        campaignTrail_temp.CTS = true;
+      }
+    });
+  </script>
 </html>

@@ -5,6 +5,14 @@ function ctsAchievement(achievement, difficultyChecker = true){
 	}
 }
 
+const style_overwrite = document.createElement("style");
+style_overwrite.innerHTML = 
+`#campaign_sign {
+  background-color: #d46f5b;
+  border-color: #b13a1a;
+}`
+;
+document.head.appendChild(style_overwrite);
 
 campaignTrail_temp.questions_json = [
     {
@@ -584,7 +592,7 @@ campaignTrail_temp.answers_json = [
         "pk": 8043,
         "fields": {
             "question": 4012,
-            "description": "My time at the Commission for Relief in Belgium helped feed millions during the Great War, and recieved support by both Democrats and Republicans."
+            "description": "My time at the Commission for Relief in Belgium helped feed millions during the Great War, and received support by both Democrats and Republicans."
         }
     },
     {
@@ -13148,7 +13156,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 8028,
             "candidate": 143,
-            "answer_feedback": "Sit back, let your surrogates do the talking, and win. It's a safe, simple strategy, but should work. This is what your advisors have been reccomending."
+            "answer_feedback": "Sit back, let your surrogates do the talking, and win. It's a safe, simple strategy, but should work. This is what your advisors have been recommending."
         }
     },
     {
@@ -13166,7 +13174,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 8030,
             "candidate": 143,
-            "answer_feedback": "Your limited speeches are well recieved, and minimize the opportunity to make some embarassing blunders. Sometimes, less is more."
+            "answer_feedback": "Your limited speeches are well received, and minimize the opportunity to make some embarassing blunders. Sometimes, less is more."
         }
     },
     {
@@ -13418,7 +13426,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 8058,
             "candidate": 143,
-            "answer_feedback": "Florida is very strongly against a anti-Prohibition Catholic from becoming President, so your visit is well recieved."
+            "answer_feedback": "Florida is very strongly against a anti-Prohibition Catholic from becoming President, so your visit is well received."
         }
     },
     {

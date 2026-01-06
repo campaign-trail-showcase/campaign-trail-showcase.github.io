@@ -1,102 +1,111 @@
 .community-grid {
-    display: flex;
-    flex-wrap:wrap;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .tags-grid {
-    display: flex;
-    flex-wrap:wrap;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.tablinks {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
 }
 
 .mod-image {
-    width:80%;
-    border: 4px solid white;
-    height: auto;
+  width: 80%;
+  border: 4px solid white;
+  height: auto;
 }
 
 .mod-title {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 10px 10px 0 0;
-    padding-top: 10px;
-    margin-bottom: 10px;
-    height: 15%;
-    display:flex;
-    font-size: 18px;
-    font-weight: bolder;
-    width:100%;
-    position:relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  height: 15%;
+  display: flex;
+  font-size: 18px;
+  font-weight: bolder;
+  width: 100%;
+  position: relative;
 }
 
 .trophy-holder {
-  height:32px;
-  width:32px;
+  height: 32px;
+  width: 32px;
   position: absolute;
-  right:8px;
-  bottom:8px;
+  right: 8px;
+  bottom: 8px;
 }
 
 .mod-trophy {
   position: absolute;
-  right:0px;
-  bottom:0px;
-  transition: transform .2s; /* Animation */
+  right: 0px;
+  bottom: 0px;
+  transition: transform .2s;
+  /* Animation */
 }
 
 .mod-trophy:hover {
   position: relative;
-  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.1);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
 .mod-title p {
-  padding:10px;
+  padding: 10px;
 }
+
 .mod-img-desc {
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
+
 .mod-desc {
-    flex: 1;
+  flex: 1;
   height: auto;
-    text-align: center;
-    font-size: 12px;
-    width: 89%;
-    margin: 5px auto;
-    border-radius: 5px;
-    padding: 5px;
-    overflow-y: clip;
+  text-align: center;
+  font-size: 12px;
+  width: 89%;
+  margin: 5px auto;
+  border-radius: 5px;
+  padding: 5px;
+  overflow-y: clip;
 }
 
 .tag-button {
-    padding: 10px;
-    font-weight: bold;
-    background-color : #BFE6FF;
-    margin : 5px 5px 10px 10px;
-    border-radius: 10px;
+  padding: 10px;
+  font-weight: bold;
+  background-color: #BFE6FF;
+  margin: 5px 5px 10px 10px;
+  border-radius: 10px;
 }
 
 .tag-button:hover {
-    background-color : #aacee2;
-  }
+  background-color: #aacee2;
+}
 
 .community-grid-element {
-    width: 23%;
-    height: 25rem;
-    background-color : #BFE6FF;
-    margin : 5px 5px 10px 10px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction : column;
-    align-items: center;
-    justify-content: center;
+  width: 23%;
+  height: 25rem;
+  background-color: #BFE6FF;
+  margin: 5px 5px 10px 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .hover-button-holder {
@@ -109,8 +118,8 @@
 }
 
 .hover-button {
-  font-size:x-large;
-  font-weight:bolder;
+  font-size: x-large;
+  font-weight: bolder;
   flex-grow: 1;
   display: inline-block;
   cursor: pointer;
@@ -124,7 +133,9 @@
   margin: 5px;
 }
 
-.hover-button:hover {background-color: rgb(76, 98, 154);}
+.hover-button:hover {
+  background-color: rgb(76, 98, 154);
+}
 
 .hover-button:active {
   background-color: rgb(85, 111, 176);
@@ -132,11 +143,16 @@
   transform: translateY(4px);
 }
 
-  /* Style the tab */
+/* Style the tab */
 .tab {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -198,7 +214,7 @@
   height: auto;
   overflow-y: scroll;
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   max-height: 50vh;
@@ -215,8 +231,7 @@
   outline: #3d3b46;
   outline-width: 2px;
   outline-style: solid;
-  margin-top: 32px;
-  margin-bottom: 16px;
+  margin: 32px auto 16px auto;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -233,7 +248,7 @@
 }
 
 .achLabel {
-  display:flex;
+  display: flex;
   justify-content: center;
   padding-left: 5%;
   padding-right: 5%;
@@ -252,17 +267,17 @@
   max-height: 250px;
   max-width: 150px;
   margin: 5%;
-  display:flex;
+  display: flex;
   outline-color: #3d3b46;
   outline-style: auto;
   justify-content: center;
   text-align: center;
   justify-items: center;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   background-color: #BFE6FF;
   border-radius: 5px;
-  padding:16px;
-  padding-bottom:32px;
+  padding: 16px;
+  padding-bottom: 32px;
 }
 
 .achImageHolder {
@@ -293,7 +308,7 @@
 
 .achTitle {
   width: 100%;
-  height:auto;
+  height: auto;
   max-height: 25%;
   font-size: 16pt;
   font-weight: bolder;
@@ -305,15 +320,233 @@
 
 .achText {
   overflow-y: auto;
-  overflow-x:hidden;
+  overflow-x: hidden;
   height: 10%;
   font-size: 12px;
   border-radius: 5px;
   padding: 5px;
 }
 
+.achSubHolder {
+  overflow: auto;
+  transition: opacity 0.3s ease-out;
+  max-height: none;
+  opacity: 0;
+  display: none;
+}
+
+.achSubHolder.visible {
+  opacity: 1;
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.ach-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.ach-pagination button,
+.ach-controls button,
+.pin-button,
+.fav-icon {
+  padding: 5px 10px;
+  background-color: #4a6ea9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.ach-pagination button:disabled,
+.ach-controls button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.ach-pagination-info {
+  padding: 5px 10px;
+}
+
+.ach-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ach-controls button.active {
+  background-color: #2a4e89;
+  font-weight: bold;
+}
+
+.mod-actions {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: flex;
+  gap: 5px;
+  z-index: 10;
+}
+
+.pin-button,
+.fav-icon {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+.pin-button.pinned {
+  background-color: #f0ad4e;
+}
+
+.fav-icon {
+  background-color: #f0ad4e;
+  cursor: default;
+}
+
+.achLabel {
+  position: relative;
+}
+
+.mod-completion {
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.ach-search-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  padding: 0 10px;
+}
+
+.ach-search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px 12px;
+  border: 2px solid #4a6ea9;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.ach-search-input:focus {
+  outline: none;
+  border-color: #2a4e89;
+}
+
+.search-highlight {
+  background-color: yellow;
+  font-weight: bold;
+}
+
+/* Mobile and small screen responsive styles */
+@media (max-width: 768px) {
+  #achwindow {
+    width: 95vw !important;
+    height: 90vh !important;
+    max-width: 95vw !important;
+    max-height: 90vh !important;
+  }
+
+  #achcontent {
+    max-height: calc(90vh - 80px);
+  }
+
+  .ach-controls button {
+    padding: 12px 6px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  .ach-pagination {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .ach-pagination button {
+    padding: 12px 20px;
+    font-size: 16px;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .ach-pagination-info {
+    text-align: center;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .achBox {
+    margin: 8px 4px;
+    min-width: calc(50% - 8px);
+  }
+
+  .achBox img {
+    width: calc(50% - 8px);
+  }
+
+  .achLabel {
+    padding: 12px;
+    min-height: 40px;
+    cursor: pointer;
+  }
+
+  .achLabel p {
+    font-size: 16px;
+    margin: 0;
+    padding-right: 80px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .achBox {
+    min-width: calc(60% - 8px);
+  }
+
+  .ach-controls {
+    padding: 0 5px;
+  }
+
+  .ach-pagination {
+    padding: 0 5px;
+  }
+
+  .achLabel p {
+    font-size: 14px;
+    padding-right: 60px;
+  }
+
+  .mod-completion {
+    font-size: 10px;
+    padding: 4px;
+  }
+
+  .achBox img {
+    width: calc(40% - 8px);
+  }
+
+  .pin-button,
+  .fav-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+}
+
 .locked {
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0 */
   filter: grayscale(100%);
 }
 
@@ -342,7 +575,6 @@
   margin: 10px;
   height: 90%;
   overflow-y: scroll;
-  justify-items: top;
 }
 
 #benefitclose {
@@ -353,17 +585,33 @@
 }
 
 .cheatIndicator {
-  position:sticky;
-  top:0;
-  padding:10px;
+  top: 0;
+  padding: 10px;
+  background: #ff9595;
+  width: fit-content;
+  position: fixed;
+  border-radius: 0 .5em .5em 0;
   font-size: large;
   font-weight: bold;
-  z-index:999
+  z-index: 999;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cheatIndicator:hover {
+  opacity: 0.90;
+  transform: scale(1.02);
+}
+
+.cheatIndicator:active {
+  transform: scale(0.98);
 }
 
 .mode-button {
-  font-size:medium;
-  font-weight:bolder;
+  font-family: Arial, sans-serif;
+  font-size: medium;
+  font-weight: bolder;
   flex-grow: 1;
   display: inline-block;
   cursor: pointer;
@@ -376,27 +624,80 @@
   border-radius: 10px;
   margin: 5px;
   padding: 10px 10px;
+  vertical-align: middle;
 }
 
-.mode-button:hover {background-color: rgb(76, 98, 154);}
+.mode-button:hover {
+  background-color: rgb(76, 98, 154);
+}
 
 .mode-button:active {
   background-color: rgb(53, 70, 113);
 }
 
+.mode-button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  display: inline-block;
+  margin: 0 15px;
+  padding: 10px 15px;
+  font-weight: bold;
+  vertical-align: middle;
+  background-color: #BFE6FF;
+  color: #000;
+  border-radius: 10px;
+}
+
+.pagination-input-container {
+  display: inline-flex;
+  vertical-align: middle;
+  margin: 0px 15px 0 -5px;
+}
+
+.pagination-input {
+  width: 60px;
+  height: 36px;
+  text-align: center;
+  margin: 0;
+  border-radius: 10px 0 0 10px;
+  font-size: 16px;
+  border: 2px solid rgb(85, 111, 176);
+  border-right: none;
+}
+
+.pagination-go-button {
+  margin: 0;
+  border-radius: 0 10px 10px 0;
+  flex-grow: 0;
+}
+
+.no-favorites-message {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 40px;
+  color: #fff;
+}
+
 .pressed {
-  background-color: rgb(53, 70, 113)!important;
+  background-color: rgb(53, 70, 113) !important;
 }
 
 /* Tooltip container */
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  border-bottom: 1px dotted black;
+  /* If you want dots under the hoverable text */
 }
 
 /* Tooltip text */
-.tooltip .tooltiptext, .trophy-holder .tooltiptext {
+.tooltip .tooltiptext,
+.trophy-holder .tooltiptext {
   visibility: hidden;
   width: 120px;
   background-color: rgb(255, 255, 255);
@@ -404,12 +705,12 @@
   outline-color: black;
   outline-width: 1px;
   outline-style: solid;
-  color:black;
+  color: black;
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
   padding: 3px;
- 
+
   /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
@@ -420,7 +721,8 @@
   visibility: visible;
 }
 
-.trophy-holder:hover .tooltiptext, .trophy-holder:active .tooltiptext{
+.trophy-holder:hover .tooltiptext,
+.trophy-holder:active .tooltiptext {
   visibility: visible;
   font-size: small;
 }
@@ -440,19 +742,21 @@
   background-color: rgb(85, 111, 176);
   width: 100%;
   border-radius: 0px 0px 10px 10px;
-  color:white;
+  color: white;
   padding-top: 10px;
   position: relative;
   padding-bottom: 5px;
 }
 
 .rating-holder {
-  display:flex; gap: 5px; margin:5px;
+  display: flex;
+  gap: 5px;
+  margin: 5px;
   justify-content: center;
 }
 
 .rate-button {
-  overflow:hidden;
+  overflow: hidden;
   background-size: cover;
   outline-style: solid;
   outline-width: 3px;
@@ -479,11 +783,55 @@
   font-size: larger;
 }
 
-.announcement > a {
+.announcement>a {
   color: red;
 }
 
-.announcement > span {
+.announcement>span {
   color: red;
   font-weight: bolder;
+}
+
+.center {
+  text-align: center;
+}
+
+#variableTooltip {
+  position: absolute;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  z-index: 9999;
+  pointer-events: none;
+  max-width: 500px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* CTS theme readability fixes */
+.cts-theme .custom-mod-label,
+.cts-theme .custom-mod-note,
+.cts-theme .footer h4 {
+  color: #fff !important;
+}
+
+/* Classic theme readability fixes */
+.classic-theme .mod-sort-label,
+.classic-theme .mod-legacy-view-label {
+  color: #000 !important;
+}
+
+/* Hidden for accessbility */
+.mod-sort-label, .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

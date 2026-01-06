@@ -1,0 +1,423 @@
+  RecReading=true
+let music; 
+let e = campaignTrail_temp;
+
+if (!e.done) {
+    e.done = true;
+    RecReading = true;
+
+    if (!e.runIntro) {
+        music = new Audio('https://audio.jukehost.co.uk/mV9HQX9FkDVxDV8JgS7dqQwH1pVz8BC3');
+        music.loop = false;
+        music.volume = 0.5;
+        music.play();
+        e.runIntro = true;
+    }
+}
+
+document.getElementById('opponent_selection_id_button')?.addEventListener('click', function () {
+    if (music) music.pause();
+});
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 28,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2020,
+            "display_year": "2020 BI",
+            "summary": "Mike Bloomberg and Donald Trump face off in a heated 2020 election campaign. In the wake of the COVID-19 pandemic and nationwide protests, most people might assume that turnout would be through the roof. But with two unlikeable candidates, the American electorate is left demoralized.</p>\n<ul><li>Mike Bloomberg, after a close Democratic primary, trails behind Donald Trump. Can he convince the party that he can provide enough momentum to bring the Democrats across the finish line? Or will his campaign be dead on arrival?</li>\n\n<li> Donald Trump, facing crisis after crisis, thinks he's struck gold with Bloomberg's nomination. Can he easily ride his way through reelection? Or will his hubris come to bite him?</li></ul>",
+            "image_url": "https://i.imgur.com/3PeHRye.png",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://i.imgur.com/JeYppDk.gif",
+            "recommended_reading": "<ul>\n<li><a href=https://i.imgur.com/z7MemkN.jpeg>Next Mod</a></li>\n</ul>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2020,
+        "is_premium": 0,
+        "display_year": "2020 BI"
+    }
+]
+
+campaignTrail_temp.credits = "Burrito2045"
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 300,
+        "fields": {
+            "first_name": "Michael",
+            "last_name": "Bloomberg",
+            "election": 20,
+            "party": "Democratic",
+            "state": "New York",
+            "priority": 1,
+            "description": "<p> <strong>For Bloomberg</Strong>, it felt like an act from God granted him the Democratic nomination. He never expected to do well in the Democratic primaries, hell, he thought he was practically a joke after suffering from two dismal performances at the televised debates. But when Super Tuesday came, a flicker of hope burned inside him as state after state fell in his favor.</p>\n\n<p>His candidacy was a major disappointment to most, as many progressive and liberal voters tuned out from the election once he received his nomination. Bloomberg must reenergize the base, work around his many scandals, and be the one to destroy Donald Trump once and for all.</p>",
+            "color_hex": "#0000a3",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/pDcOlGP.png",
+            "electoral_victory_message": "<h3> END OF DEMO </h3>",
+            "electoral_loss_message": "<h3> END OF DEMO </h3>",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1002,
+        "fields": {
+            "first_name": "Hillary",
+            "last_name": "Clinton",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Illinois",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000ff",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/inDN3oj.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>Even though Hillary Clinton is your most expected running mate, it would be unwise to choose her. With her extensive career as a senator from New York and as secretary of state under Barack Obama, Clinton is recognized as <i>the</i> mainstream Democrat. However, she is also recognized as the candidate who squandered a significant lead against Donald Trump, largely because of her voting record as a senator, along with the controversies surrounding her email scandal.<p>\n\n<p>While her nomination can energize the \"suburban wine mom\" types, most see it as a massive disappointment that could be the death knell for your support with progressives. <strong>No matter what, she'll always be by your side, remember that...</strong></p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 301,
+        "fields": {
+            "first_name": "Donald",
+            "last_name": "Trump",
+            "election": 20,
+            "party": "Republican",
+            "state": "Florida",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#b30000",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/xA1Lv7B.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50000,
+        "fields": {
+            "first_name": "Stacey",
+            "last_name": "Abrams",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Georgia",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/xEpMEQ2.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p> It would be a surprise if Stacey Abrams ran with you in the first place, let alone be your potential vice president. While she had a failed run against Brian Kemp in the 2018 Georgia gubernatorial election, she could still be a crucial lifeline in your campaign.</p>\n\n<p> Her selection would satisfy supporters who expect an African-American running mate in light of this summer's protests. She can also reel back liberal voters who would otherwise sit out this election because of your candidacy. However, she isn't a well-known national figure and is rather inexperienced, having only been a Georgia state representative. <strong> Reeling in Abrams will be risky and it could be a waste of time asking her.</strong></p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 302,
+        "fields": {
+            "first_name": "Bernie",
+            "last_name": "Sanders",
+            "election": 20,
+            "party": "Independent",
+            "state": "Vermont",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#009431",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 303,
+        "fields": {
+            "first_name": "Jo",
+            "last_name": "Jorgensen/Others",
+            "election": 20,
+            "party": "Libertarian",
+            "state": "Idaho",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#ffea00",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 113197,
+        "fields": {
+            "candidate": 300,
+            "running_mate": 1002
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 159771,
+        "fields": {
+            "candidate": 300,
+            "running_mate": 50000
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            300,
+            301,
+            302,
+            303
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            300,
+            301,
+            302,
+            303
+        ]
+    }
+]
+
+jet_data = {
+    "headerColor": "#171717",
+    "windowColor": "#2b2b2b",
+    "containerColor": "#262626",
+    "innerWindowColor": "#f8f8f8",
+    "bannerImageUrl": "https://i.imgur.com/UiNB81j.png",
+    "backgroundImageUrl": "https://i.imgur.com/XwVTLiQ.png",
+    "endingTextColor": "#ffffff",
+    "customQuote": "",
+    "gameTitle": "THE BLOOMBERG TRAIL"
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>THE BLOOMBERG TRAIL</h2>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#171717";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#2b2b2b";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#262626";
+
+document.getElementById("header").src = "https://i.imgur.com/UiNB81j.png";
+
+document.body.background = "https://i.imgur.com/XwVTLiQ.png";
+
+$("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/6IOrvzw.png)" 
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#f8f8f8!important;}</style>";
+
+document.head.innerHTML += `
+<style>
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .overlay_window {
+    animation: fadeInScale 0.3s cubic-bezier(0.3, 1.2, 0.2, 1) forwards;
+    opacity: 0;
+    background: #ededed;
+    border-radius: 0.2rem;
+    box-shadow:
+      0 0 0.5em rgba(226, 224, 255, 0.5),
+      0 0 0.75em rgba(224, 224, 255, 0.3),
+      0 0 1em rgba(224, 226, 255, 0.1);
+    display: flex;
+    flex-flow: column;
+
+  }
+.overlay_window h3 {
+  background-color: #ababab;
+</style>
+}`;
+
+
+campaignTrail_temp.modBoxTheme = {
+        "header_color": "#171717",
+        "header_text_color": "#ffffff",
+        "description_text_color": "#ffffff",
+        "description_background_color": "#171717",
+        "main_color": "#2b2b2b",
+        "secondary_color": "#171717"
+        
+   }
+
+document.head.innerHTML +=`
+<style>
+.inner_window_question h3 {
+  background-color: #c4c4c4;
+  border-color: #6e6e6e;
+}
+</style>`
+
+  async function appendStyle() {
+    var metaTag = document.createElement('meta');
+    metaTag.name = "viewport";
+    metaTag.content = "width=device-width, initial-scale=1";
+    document.getElementsByTagName('head')[0].appendChild(metaTag);
+
+    if (!document.querySelector('#radio-option-style')) {
+        let style = document.createElement('style');
+        style.type = 'text/css';
+        style.id = 'radio-option-style';
+        style.innerHTML = `
+        h3 {
+            font-size: 1.08em !important;
+            line-height: 17px;
+        }
+        input {
+            font-size: 0.9em !important; 
+            line-height: 17px; 
+        }
+
+        #visit_window {
+            height: auto;
+        }
+        #visit_content {
+            height: 79%;
+        }
+
+        .person_button {
+            margin-top: 0.2em;
+        }
+
+        @media only screen and (max-width: 768px) {
+            #inner_window_2,
+            #inner_window_3,
+            #inner_window_4 {
+                overflow: auto;
+            }
+            #visit_window {
+                font-size: 1.8em;
+                width: 90%;
+                left: 5%;
+            }
+            .inner_window_question button,
+            #visit_window button,
+            #map_footer {
+                line-height: 2.5em;
+            }
+            #drop_down_area_state {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        `;
+        document.head.appendChild(style);
+    }
+}
+appendStyle();
+
+HistHexcolour=["#b30000","#009431","#0000a3", "#ffea00"];
+HistName=["Donald Trump","Bernie Sanders","Michael Bloomberg", "Jo Jorgensen/Others" ];
+HistEV=[376,130,32,0];
+HistPV=["71,278,728","33,769,593","53,808,326", "794,621", ];
+HistPVP=["44.6%","21.2%","33.7%", "0.5%"]; 
+
+campaignTrail_temp.achievements = {
+  "Bloomberg Inc.": {
+    image: "https://i.imgur.com/WQ6uPuL.png",
+    description: "Win",
+    cannotBeCheated: true
+  },
+  "Bully!": {
+    image: "https://i.imgur.com/OJEttTX.png",
+    description: "Create a New Party",
+    cannotBeCheated: true
+  }
+};
+
+//#endcode

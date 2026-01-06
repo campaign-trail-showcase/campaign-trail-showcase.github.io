@@ -1,0 +1,574 @@
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 4,
+        "fields": {
+            "year": 1976,
+            "summary": "<u> <p style=\"font-family: oblique; font-size: 0.9rem;\"><strong>The 1976 election stands as one of the most interesting in modern history.</u></p></strong> <p>Republican John Lindsay is seeking a second term after a presidency full of ups and downs and a divided party. Henry M. Jackson hopes to channel the energy of the Democrats’ 1974 midterm victory to return the party to the White House, but the shadow of Robert Kennedy still hangs over him. And Ronald Reagan, once a political “has-been,” is leading an independent bid with the backing of the conservative movement, and a real shot at power.</p><p> In this broken, strange, fast-moving world, can Lindsay hang on to his job a while longer, or is this the end of Republican liberalism once and for all?</p>",
+            "image_url": "https://i.imgur.com/XDhKjNX.gif",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://i.imgur.com/oJVFkZD.jpeg",
+            "recommended_reading": "<h2>About This Mod</h2><p>I've always been fascinated by candidates who, though they belong to one party, seem unmistakably like members of the other. John Lindsay, Nelson Rockefeller, Jacob Javits&mdash;but also John Connally, Joe Lieberman, and George Wallace. It's a very American phenomenon, and it makes for a very interesting game. This mod (my first) is an attempt to use a scenario based on such a figure to create a fun, replayable game. I hope you enjoyed it.</p><p>I'd like to thank Thatchmaster (for the coding of the endings, especially the Wikipedia, the Newspapers and the Reddit ones), and ItsAstronomical (for the explanations in his codes and the tutorial) . Their code has been very helpful in tackling the hard work of modding, and any mistakes I made trying to emulate them are mine. I also want to thank obummer (for the codes on the soundtrack of the game and his displaying), Burrito 2045 (for the updated Code 1), Jet (for Jet's TCT Mod Tool, without this mod wouldn't have happened), and Tom1923 (for the campaign sign display).</p><p>And to the rest of you politics obsessives who made it this far, thank you for spending your time on this mini-project that kept me entertained for a few weeks. See you around.</p>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg",
+            "creator": "Trystant",
+            "display_year": "1976_GoodForMe",
+	        "site_description":"<p>Republican John Lindsay is seeking a second term after a presidency full of ups and downs and a divided party. Henry M. Jackson hopes to channel the energy of the Democrats’ 1974 midterm victory to return the party to the White House, but the shadow of Robert Kennedy still hangs over him. And Ronald Reagan, once a political “has-been,” is leading an independent bid with the backing of the conservative movement, and a real shot at power.</p><p>In this broken, strange, fast-moving world, can Lindsay hang on to his job a while longer, or is this the end of Republican liberalism once and for all?</p>"
+        }
+    }
+]
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#4382b3",
+  "header_image_url": "https://i.imgur.com/tROAzVj.jpeg",
+    "header_text_color": "#ffffff",
+    "description_text_color": "#000000",
+    "description_background_color": "#96c2e3",
+    "main_color": "#ddeffd",
+    "secondary_color": "#50679f",
+    "ui_text_color": "#ffffff"
+}
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1001,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Lindsay",
+            "election": 4,
+            "party": "Republican",
+            "state": "New York",
+            "priority": 1,
+            "description": "<div style='overflow-y:scroll;height:200px;'><u> <p style=\"font-family: oblique; font-size: 0.9rem;\"><strong> John Lindsay shouldn’t be president.</strong> </p> </u><p>Not a day goes by without suspicion of a party switch, or even an open embrace of the donkey. But here we are. After a decade of consecutive defeats, Republicans sidelined their juiciest prospects—their Reagans and their Agnews—and nominated a New York liberal against Camelot’s second king. And what first looked like a sure loss turned into a remarkable campaign, especially after Robert Kennedy decided to impose Robert “Klansman” Byrd as vice president. Lindsay became the first Republican since Coolidge to win the presidency without a single vote from the former Confederacy. </p> <p> Republicans cheered and danced on RFK’s grave, but the joy didn’t last. Whether it was the trip to China, the deals with Congress, the fall of Vietnam, or the presidential pardon for Kennedy, Republicans have learned to hate their leader. They hate him, and he knows it.<br> The bigger question is: <i> <strong>Can a man win an election without the support of his own party?</strong></i></div></p>",
+            "color_hex": "#4382b3",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://files.catbox.moe/xpe7nf.png",
+            "electoral_victory_message": "<h3>Reagan sweeps the nation!</h3>",
+            "electoral_loss_message": "<h3>Reagan falters.</h3>",
+            "no_electoral_majority_message": "<h3>House must decide.</h3>",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1002,
+        "fields": {
+            "first_name": "Henry M.",
+            "last_name": "Jackson",
+            "election": 4,
+            "party": "Democratic",
+            "state": "Washington",
+            "priority": 2,
+            "description": "<u> <p style=\"font-family: oblique; font-size: 0.9rem;\"><strong> When the truth came out, Jackson couldn’t believe it.</strong> </p> </u><p> Yes, it’s true that he had criticized Kennedy—especially for his abrupt withdrawals of troops from Vietnam—but the FBI? A committee for re-election? Had Jack’s brother really contemplated assassinating the governor of Alabama? But quickly, his grief eased. After the debacle, with Moynihan and Shriver tainted by collaboration, old “Scoop” seems to be the only man capable of navigating this new Democratic Party. <p> After tough primaries against old Wallace and McGovern, Jackson secured the nomination, with crucial votes from the unions and Dixie. With Republicans divided, victory looks almost certain—but beware. <i><strong> If Jackson cannot reassure the two souls of his party and distance himself from the RFK affair, his campaign could sink quickly.</i></strong>",
+            "color_hex": "#ad0c0c",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/C9xzJ4z.jpeg",
+            "electoral_victory_message": "<h3>Johnson wins.</h3>",
+            "electoral_loss_message": "<h3>Johnson loses.</h3>",
+            "no_electoral_majority_message": "<h3>Deadlock!</h3>",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1003,
+        "fields": {
+            "first_name": "Ronald",
+            "last_name": "Reagan",
+            "election": 4,
+            "party": "Conservative",
+            "state": "California",
+            "priority": 3,
+            "description": "<div style='overflow-y:scroll;height:200px;'><u> <p style=\"font-family: oblique; font-size: 0.9rem;\"><strong>After losing his bid for gubernatorial re-election, the death of Ronald Reagan’s political career was proclaimed. </strong> </p> </u><p> The ex-actor turned conservative star was cast aside, and those who had once adored him almost mock him. But the old Gipper has fought to return to the arena, and the current moment seems to offer the perfect opening. <p> Everyone wanted Agnew, until he himself pleaded guilty to taking bribes. Then they looked to Goldwater—until President Kennedy’s files mentioned an illegal abortion. Desperate, the conservative movement fixes its gaze on its former darling, the new figure who will crush the violent and the agitators, the communists and their allies. <p> Though he bears more wrinkles and gray hair than when he first set out on this path, Reagan has no intention of letting this chance slip away. <i><strong> 1976 could be the year America finally finds its savior… or an even more dreadful failure that ruins his life completely.</strong></div>",
+            "color_hex": "#d4b611",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/4hIQmFe.jpeg",
+            "electoral_victory_message": "<h3>Johnson wins.</h3>",
+            "electoral_loss_message": "<h3>Johnson loses.</h3>",
+            "no_electoral_majority_message": "<h3>Deadlock!</h3>",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 8889,
+        "fields": {
+            "first_name": "Eugene",
+            "last_name": "McCarthy",
+            "election": 4,
+            "party": "Progressive",
+            "state": "Minnesota",
+            "priority": 1,
+            "description": "<div style='overflow-y: scroll; height: 200px;'><u> <p style=\"font-family: oblique; font-size: 0.9rem;\"><strong>Why is he running? He's running for himself. </strong></p></u><p>Eugene McCarthy is a man starving for recognition, forever scratching at the door of history. From the day Bobby Kennedy stole the Democratic nomination from him to the quiet sabotage that pushed him into staying out in &rsquo;72, the world has seemed determined to forget the one-time lone figure with the nerve to stand up to Jimbo and his big sword.</p><p>This election, though, cracks open a window for McCarthy&mdash;despite a miserable showing in the Democratic primaries (his private hope is that no one remembers it). With no progressive on the two parties, a slice of stubborn holdouts may drift toward a third party. McCarthy knows his bid is protest politics, and he&rsquo;s built it accordingly: a popular folk singer as his running mate. He doesn&rsquo;t want to win. He wants his name back in the papers&mdash;interviews, cameras, maybe even a debate podium. And after that? A book deal, a tour, and a quiet wait for the next set of primaries.</p><p>The campus flame and the upheaval of eight years ago have cooled to embers, and the country is tilting toward a new conservatism. <em><strong>McCarthy wants to convince America that hope still has a future. The problem is, he may not believe it.</strong></em></p></div>",
+            "color_hex": "#278f1e",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/s0rIZNR.jpeg",
+            "electoral_victory_message": "<h3>Johnson wins.</h3>",
+            "electoral_loss_message": "<h3>Johnson loses.</h3>",
+            "no_electoral_majority_message": "<h3>Deadlock!</h3>",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1004,
+        "fields": {
+            "first_name": "Bob",
+            "last_name": "Dole",
+            "election": 4,
+            "party": "Republican Party",
+            "state": "Kansas",
+            "priority": 5,
+            "description_as_running_mate": "<p> Every time the GOP was about to leave you in the lurch, there was Bob Dole. When Thurmond threatened to switch sides again and take half the party with him, there was Bob Dole. When you tried to create a Department of the Arts and Barry Goldwater had a heart attack, there was Bob Dole. And he doesn’t seem tired. The establishment figure <i>par excellence</i>, Dole appears to be the only link between the Republican base and you—the voice whispering the oil tycoons’ interests when you get close to a ghetto.</p><p>But Dole is tired, and the world is tired of him. Set against Reagan’s showmanship, it doesn’t look like the old Midwesterner can persuade the silent majority to grant you the slightest trust. Changing your vice president may be risky and a sign of weakness, but in this world,<strong> <i>you either change or you die.</p></strong>",
+            "color_hex": "#970016",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://files.catbox.moe/q3y68n.png",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1005,
+        "fields": {
+            "first_name": "Richard",
+            "last_name": "Nixon",
+            "election": 4,
+            "party": "Republican Party",
+            "state": "California",
+            "priority": 6,
+            "description": "<p><strong>General William C. Westmoreland</strong> – war hero, strategist, and",
+            "color_hex": "#7A3E00",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/wAFIstb.jpeg",
+            "description_as_running_mate": "<p>It was truly comical. The eternal loser, consumed by an endless hatred of Washington’s great dynasties, had to beg like a dog for a spot in the new administration. His campaign appearances were sporadic, pitiful, scorned. Richard Nixon is a hateful, repugnant man, and his position as National Security Advisor has done nothing to soften that perception in Lindsay’s mind.</p><p>\n\nBut he may be an asset. Nixon would play the same role Dole did four years earlier, and might even bring back some disillusioned conservatives. His appeal to the silent majority would steal voters from Jackson in the North and from Reagan in the South. Taking him out of foreign policy would let Mr. Kissinger implement all his ideas without interruptions from this farm boy, and it would sate his ego enough to keep him on Lindsay’s side.<br> The question is, John: <strong><i>are you willing to share a presidential ticket with Richard Nixon?</strong></i></p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1006,
+        "fields": {
+            "first_name": "Edward",
+            "last_name": "Brooke",
+            "election": 4,
+            "party": "Republican Party",
+            "state": "Massachussets",
+            "priority": 7,
+            "description": "<p><strong>George H. W. Bush</strong> – youthful Congressman, Navy veteran, and",
+            "color_hex": "#005A8E",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/Ov01g4W.jpeg",
+            "description_as_running_mate": "<p style=\"text-shadow:0.06em 0.06em 0.12em red;\">No. No. Not a chance. Don’t even think about it, John.</p><p style=\"text-shadow:0.06em 0.06em 0.12em blue;\">It could work. Look at it this way: every racist in this country is going to vote for Reagan. If any are left over, they’ll go to Jackson. Right now we’re at, what, 30% of the Black vote? Imagine if we could push it to 50%. To 70%! It’s perfect. Brooke is perfect. We could peel off some Democratic progressives—the ones who criticize Jackson when he opposes busing. And look at him. He’s a good politician. He’s charismatic. Everybody loves him.</p><p style=\"text-shadow:0.06em 0.06em 0.12em red;\">He’s Black.</p><p style=\"text-shadow:0.06em 0.06em 0.12em red;\">—Sigh— Do whatever you want, but don’t say I didn’t warn you.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1007,
+        "fields": {
+            "first_name": "Reubin",
+            "last_name": "Askew",
+            "election": 4,
+            "party": "Democratic Party",
+            "state": "Minnesota",
+            "priority": 8,
+            "description": "<p><strong>George H. W. Bush</strong> – youthful Congressman, Navy veteran, and",
+            "color_hex": "#005A8E",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/gBHmPoM.jpeg[/img]",
+            "description_as_running_mate": "<p><strong>George H. W. Bush</strong> – Geor",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1008,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Wayne",
+            "election": 4,
+            "party": "Independent",
+            "state": "Ohio",
+            "priority": 9,
+            "description": "<p><strong>George H. W. Bush</strong> – youthful Congressman, Navy veteran, and",
+            "color_hex": "#005A8E",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/wlQCDCV.jpeg",
+            "description_as_running_mate": "<p><strong>George H. W. Bush</strong> – George Bush –",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1009,
+        "fields": {
+            "first_name": "Phil",
+            "last_name": "Ochs",
+            "election": 4,
+            "party": "Independent",
+            "state": "Ohio",
+            "priority": 10,
+            "description": "<p><strong>George H. W. Bush</strong> – youthful Congressman, Navy veteran, and",
+            "color_hex": "#005A8E",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/QwyKPDD.jpeg",
+            "description_as_running_mate": "<p><strong>George H. W. Bush</strong> – George Bush – ",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 301,
+        "fields": {
+            "candidate": 1001,
+            "running_mate": 1004
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 302,
+        "fields": {
+            "candidate": 1001,
+            "running_mate": 1005
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 303,
+        "fields": {
+            "candidate": 1001,
+            "running_mate": 1006
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 304,
+        "fields": {
+            "candidate": 1002,
+            "running_mate": 1007
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 305,
+        "fields": {
+            "candidate": 1003,
+            "running_mate": 1008
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 306,
+        "fields": {
+            "candidate": 8889,
+            "running_mate": 1009
+        }
+    }
+]
+
+campaignTrail_temp.credits = "Trystant"
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 4,
+        "candidates": [
+            1001,
+            1002,
+            1003,
+            8889
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 4,
+        "candidates": [
+            1001,
+            1002,
+            1003,
+            8889
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 4,
+        "year": 1976,
+        "is_premium": 0,
+        "display_year": "1976_GoodForMe"
+    }
+]
+
+jet_data = {
+    "headerColor": "#700016",
+    "windowColor": "#376481",
+    "containerColor": "#411512",
+    "innerWindowColor": "#beae70",
+    "bannerImageUrl": "https://i.imgur.com/RskciI7.jpeg",
+    "backgroundImageUrl": "https://i.imgur.com/WtAhw2T.jpeg",
+    "endingTextColor": "#000000",
+    "customQuote": "\"das eine Mal als Tragödie, das andere Mal als Farce\""
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>𝔡𝔞𝔰 𝔢𝔦𝔫𝔢 𝔐𝔞𝔩 𝔞𝔩𝔰 𝔗𝔯𝔞𝔤𝔬𝔡𝔦𝔢, 𝔡𝔞𝔰 𝔞𝔫𝔡𝔢𝔯𝔢 𝔐𝔞𝔩 𝔞𝔩𝔰 𝔉𝔞𝔯𝔠𝔢</h2> \n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#700016";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#376481";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#411512";
+
+document.getElementById("header").src = "https://i.imgur.com/RskciI7.jpeg";
+
+document.body.background = "https://i.imgur.com/WtAhw2T.jpeg";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#beae70!important;}</style>";
+
+$("#game_window")[0].style.borderColor = "#A98E01";
+
+$(".container")[0].style.borderColor = "#572100";
+
+$(".footer")[0].style.borderColor = "#A98E01";
+
+$("#game_window")[0].style.backgroundImage = "url(https://files.catbox.moe/g2c1eh.png)";
+
+//#endcode
+
+
+e = campaignTrail_temp;
+
+const startScreenUpdater = setInterval(function() {
+const goBackButton = document.getElementById("candidate_id_back");
+const candidateButton = document.getElementById("candidate_id_button");
+const runningMateButton = document.getElementById("running_mate_id_button");
+const finalScreenBB = document.getElementById("opponent_selection_id_back");
+const finalScreenID = document.getElementById("opponent_selection_id_button");
+const gameType = document.getElementById("game_type_id");
+
+// Check if the candidate_id element exists to avoid errors
+const candidateElement = document.getElementById("candidate_id");
+if (!candidateElement) {
+  return;  
+}
+
+var c = candidateElement.value;
+
+if (c == 1001 && !candidateButton && !runningMateButton) {
+  if (goBackButton) {
+    goBackButton.click();
+  }
+  
+  const initContinue = document.getElementById("election_id_button");
+  if (initContinue) {
+    initContinue.click();  
+  }
+} 
+
+else if ((c == 1002 || c == 1003 || c == 8889) && candidateButton && !runningMateButton) { 
+  candidateButton.remove();
+}
+
+if (!candidateButton && runningMateButton) { 
+  runningMateButton.click();
+
+  const finalBack = document.getElementById("opponent_selection_id_back");
+  if (finalBack) {
+    finalBack.remove();  
+  }
+
+
+  if (window.observer) {
+    window.observer.disconnect();
+  }
+}
+
+
+if (finalScreenID) {
+  if (finalScreenBB) {
+    finalScreenBB.remove();  
+  }
+  clearInterval(startScreenUpdater);  
+}
+}, 100);
+
+campaignTrail_temp.achievements = {
+  "Found love" : {
+    "image" : "https://i.imgur.com/n7j90FZ.jpeg",
+    "description" : "Win",
+      "cannotBeCheated" : true
+  },
+  "Up, up to the sky" : {
+    "image" : "https://i.imgur.com/KnjI1Pa.jpeg",
+    "description" : "Win the midterms",
+      "cannotBeCheated" : true
+  },
+  "Words cannot recall" : {
+    "image" : "https://i.imgur.com/SNsl2IE.jpeg",
+    "description" : "Win without a right-wing pivot",
+      "cannotBeCheated" : true
+  },
+  "Our souls were singin'" : {
+    "image" : "https://i.imgur.com/DHesDuA.jpeg",
+    "description" : "Win in a landslide",
+      "cannotBeCheated" : true
+  },
+  "Glory shall rest on us all" : {
+    "image" : "https://i.imgur.com/2kayVLP.jpeg",
+    "description" : "Win in a landslide without a right-wing pivot",
+      "cannotBeCheated" : true
+  },
+  "We never lost control" : {
+    "image" : "https://i.imgur.com/pQw3C0Z.jpeg",
+    "description" : "Pass one bill and block another",
+      "cannotBeCheated" : true
+  },
+  "She just needs someone to change her" : {
+    "image" : "https://i.imgur.com/XOcHSPO.jpeg",
+    "description" : "Win all the states of the Confederacy",
+      "cannotBeCheated" : true
+  },
+  "In good shape for the shape she's in" : {
+    "image" : "https://i.imgur.com/CpIUL2f.jpeg",
+    "description" : "Make Morning in America",
+      "cannotBeCheated" : true
+  },
+  "Been through the fire before" : {
+    "image" : "https://i.imgur.com/kZSkHPc.jpeg",
+    "description" : "Win despite Evening in America",
+      "cannotBeCheated" : true
+  },
+  "Slipped away" : {
+    "image" : "https://i.imgur.com/SCKHQU0.jpeg",
+    "description" : "Lose",
+      "cannotBeCheated" : true
+  },
+  "Stronger Together" : {
+    "image" : "https://i.imgur.com/NxLTwbf.jpeg",
+    "description" : "Meet a future president",
+      "cannotBeCheated" : true
+  },
+  "A factory of despair" : {
+    "image" : "https://i.imgur.com/JRmZKLb.jpeg",
+    "description" : "Win with Nixon as your VP",
+      "cannotBeCheated" : true
+  },
+  "And the calendar is lying" : {
+    "image" : "https://i.imgur.com/Y4v1Fjk.jpeg",
+    "description" : "Correct the timeline, 12 years later",
+      "cannotBeCheated" : true
+  },
+  "Heaven knows we try" : {
+    "image" : "https://i.imgur.com/bYKKJvw.jpeg",
+    "description" : "Make Nixon get three out of three",
+      "cannotBeCheated" : true
+  },
+  "In which God they can trust" : {
+    "image" : "https://i.imgur.com/BsvDAds.jpeg",
+    "description" : "Win as Richard Nixon",
+      "cannotBeCheated" : true
+  },
+  "Somebody to Love" : {
+    "image" : "https://i.imgur.com/aHOanNs.jpeg",
+    "description" : "Win with the secret candidates",
+      "cannotBeCheated" : true
+  },
+  "I'm bound to cross the line" : {
+    "image" : "https://i.imgur.com/4aUxmSj.jpeg",
+    "description" : "Win with Brooke as your VP",
+      "cannotBeCheated" : true
+  },
+  "The love of your mother" : {
+    "image" : "https://i.imgur.com/1LGslrN.jpeg",
+    "description" : "Win as Richard Nixon in a landslide",
+      "cannotBeCheated" : true
+  },
+  "The world on your shoulders" : {
+    "image" : "https://i.imgur.com/TszJfZn.jpeg",
+    "description" : "Correct the timeline",
+      "cannotBeCheated" : true
+  },
+  "One of toil and blood" : {
+    "image" : "https://i.imgur.com/bzBUKjR.jpeg",
+    "description" : "Win and make history repeat itself",
+      "cannotBeCheated" : true
+  },
+  "'Twas in another lifetime" : {
+    "image" : "https://i.imgur.com/g8WlyPz.jpeg",
+    "description" : "Win and make history repeat itself, in a good way",
+      "cannotBeCheated" : true
+  },
+  "From north to south" : {
+    "image" : "https://i.imgur.com/KUmhUeC.jpeg",
+    "description" : "Form an anti-fascist front",
+      "cannotBeCheated" : true
+  },
+  "A will and a self-restraint" : {
+    "image" : "https://i.imgur.com/CzzZVTO.jpeg",
+    "description" : "Stand into the abyss and tell the tale",
+      "cannotBeCheated" : true
+  },
+  "Only as tall as we stand" : {
+    "image" : "https://i.imgur.com/cFE35B0.jpeg",
+    "description" : "First as a tragedy, then as a triumph",
+      "cannotBeCheated" : true
+  },
+}
