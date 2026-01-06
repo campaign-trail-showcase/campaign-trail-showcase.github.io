@@ -1,0 +1,1532 @@
+RecReading=true
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 27,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+  ]
+  
+  campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 9,
+        "fields": {
+            "year": 2000,
+            "summary": 
+            `
+                <p>
+                    In early 1991, George H.W. Bush appeared invincible. 
+                    Coming off of the high of Desert Storm with an 89% approval rating to show for it, his respectable challengers dropped out one by one, leaving the Democratic nomination for president a group of has-beens, never-weres, and never-will-bes. 
+                    From this circus emerged one man: former California Governor Jerry Brown, Moonbeam himself, back to protect the Earth from the scourge of Bush.
+                </p>
+                <p>
+                    But the times have changed since Brown's last appearance on the national scene, and he has changed with them.
+                    Though always something of a realist, any idealism he once possessed has been replaced by a searing rage against everything wrong with modern America, manifesting itself into an unrelenting drive to capture the presidency. Governor Moonbeam has already tried for the presidency twice before, and this is his last shot. He may win, he may lose, but he'll be damned if he's not going to give it everything he's got.
+                </p>
+            `,
+            "image_url": "https://i.imgur.com/3WfZ1qm.jpeg",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://i.imgur.com/TviIh01.jpeg",
+            "recommended_reading": "<h1 style='text-align: center;'><strong>Moonbeam Credits</strong></h1><p>Head Writer: Shockonomics</p><p>Head Coder: Ohas</p><p>Coding work: Girlie, StrawberryMaster</p><p>Dev Team: John Arizona, Dyson, LP</p><p>Help With Values and Margins: Martha</p><p>Promotional Material, Advice: LiterallyNelsonRockefeller</p><p>Much thanks to Mack A. Rony, TerryJerry, Kaylee, Nidoras, DayDoveRomantic, Librasaurusx, Karton, and DKing for useful advice</p><p>Special thanks to Vetulicolia for incredibly helpful advice on the Yugoslavia path and endings</p><p>Special thanks to Halligan Elysium for incredibly helpful advice on the Britain path and writing endings</p><p>Special thanks to MeWhenTheAgain, ThisGuy, and SteamedHams501 for writing endings</p><p>Extra special thanks to Franko the Tea King for his consistent support of the project and writing endings</p><p>Extra special thanks to Jerry Brown, as despite his imperfections, this mod would not exist without his strength of character and willingness to fight for his beliefs</p>",
+            "has_visits": 1,
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://i.imgur.com/ns2gtKG.png",
+            "creator": "Dan Bryan",
+            "display_year": "Moonbeam"
+        }
+    }
+  ]
+  
+  campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 78,
+        "fields": {
+            "first_name": "Jerry",
+            "last_name": "Brown",
+            "election": 9,
+            "party": "Democrat",
+            "state": "California",
+            "priority": 1,
+            "description": `
+                <p>
+                    Jerry Brown doesn’t need America. 
+                    Jerry Brown doesn’t need anything. 
+                    In another universe, Jerry could’ve easily spent his whole life in solitude learning the truths of the world through meditation, or perhaps helping the poor through their struggles on the mortal plane. 
+                    He already avenged his father and took California back, already showed the people how to govern as a truly honest citizen, already embraced the limelight of political celebrity, and already proved that he could throw it all away for a higher calling.
+                </p>
+                <p>
+                    America, however? America needs Jerry Brown. 
+                    Since he last vied for the presidency, the dark forces that his father failed to contain have swept across the nation and laid waste to the great nation he once knew. 
+                    The great capital of Washington D.C. has been transformed into a citadel of corruption, with Reagan’s pawn, Bush, serving as the false king of a uniparty Congress whose only goals are to enrich themselves and their decadent corporate overlords. 
+                    With nobody else left to challenge this new oligarchy, the man they call Moonbeam knows that he is the nation’s last hope. 
+                    As he begins his fight to take back America, Brown knows that the only way to win is not to campaign for the people–it’s to enlighten them.
+                </p>
+            `,
+            "color_hex": "#00487c",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/bir35b3.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 77,
+        "fields": {
+            "first_name": "George",
+            "last_name": "Bush",
+            "election": 9,
+            "party": "Republican",
+            "state": "Texas",
+            "priority": 1,
+            "description": "<p>NO NEW TAXES?!?!?!</p>",
+            "color_hex": "#7b000c", 
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/nXGrFXX.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 79,
+        "fields": {
+            "first_name": "Ross",
+            "last_name": "Perot",
+            "election": 9,
+            "party": "Independent",
+            "state": "Texas",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#9e5300",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/4hRqb64.png",
+            "electoral_victory_message": "WHITE BOY SUMMER HAS BEEN UNLEASHED",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+      "model": "campaign_trail.candidate",
+      "pk": 80,
+      "fields": {
+          "first_name": "Andre",
+          "last_name": "Marrou",
+          "election": 9,
+          "party": "Lolbertarian",
+          "state": "Ala$KKKa",
+          "priority": 1,
+          "description": "<p>Mr. Marrou, if you break my code again I am going to flip out.</p>",
+          "color_hex": "#e4b81d",
+          "secondary_color_hex": null,
+          "is_active": 0,
+          "image_url": "https://i.imgur.com/4hRqb64.png",
+          "electoral_victory_message": "ron paul 08",
+          "electoral_loss_message": "This guy loses!",
+          "no_electoral_majority_message": "We all win?",
+          "description_as_running_mate": null,
+          "candidate_score": 1,
+          "running_mate": false
+      }
+  },
+    {
+      "model": "campaign_trail.candidate",
+      "pk": 155,
+      "fields": {
+          "first_name": "Paul",
+          "last_name": "Tsongas",
+          "election": 9,
+          "party": "Democrat",
+          "state": "Massachusetts",
+          "priority": 1,
+          "description": "<p>Put description here</p>",
+          "color_hex": "#0000c7",
+          "secondary_color_hex": null,
+          "is_active": 0,
+          "image_url": "https://i.imgur.com/Is9GRlR.jpg",
+          "electoral_victory_message": "This guy wins!",
+          "electoral_loss_message": "This guy loses!",
+          "no_electoral_majority_message": "We all win?",
+          "description_as_running_mate": `
+            <p>
+                Just when America thought it had beaten its addiction to Massachusetts liberals of Greek descent, they got pulled back in when Paul Tsongas did far better than anyone had expected in the primaries. 
+                Tsongas has an interesting mindset, matching you step for step in your social liberalism and populist worries about the state of the nation. 
+                But if people called you fiscally conservative, Tsongas seems like a Republican with his fervent belief that Reaganomics has succeeded and that businesses, even dangerous, soulless, conglomerates, are the solution to America’s problems and not the problem itself.
+            </p>
+            <p>
+                Still, Tsongas just has a certain je sais ne quoi: for whatever the reason, people just really want to vote for the guy. 
+                Yet behind his political strengths, substantial health concerns remain about his ability to survive the next four years. 
+                Additionally, the regional appeal of a New Englander works directly against your interests, leaving Middle America wide open for the “Texan” Bush and Hoosier Quayle to carve up. 
+                Ultimately, Tsongas is a gamble, one with the possibility to send you to the White House or to send you to the same electoral fate as the last Massachusetts Greek.
+            </p>
+          `,
+          "candidate_score": 1,
+          "running_mate": true
+      }
+  },
+  {
+      "model": "campaign_trail.candidate",
+      "pk": 156,
+      "fields": {
+          "first_name": "Dick",
+          "last_name": "Gephardt",
+          "election": 9,
+          "party": "Democrat",
+          "state": "Missouri",
+          "priority": 1,
+          "description": "<p>Put description here</p>",
+          "color_hex": "#0000c7",
+          "secondary_color_hex": null,
+          "is_active": 0,
+          "image_url": "https://i.imgur.com/ifAfkLb.png",
+          "electoral_victory_message": "This guy wins!",
+          "electoral_loss_message": "This guy loses!",
+          "no_electoral_majority_message": "We all win?",
+          "description_as_running_mate": `
+          <p>
+            There may be no more loyal soldier to the Democratic party than Dick Gephardt. 
+            Gephardt has a few ideas that he genuinely believes in–specifically, his opposition to NAFTA–but beyond that, he will do absolutely anything if it means helping the party. 
+            Unlike any number of party loyalists in safe districts, though, Gephardt is the House Majority Leader and a former presidential candidate, and easily has both the polish to share the national spotlight with you and the mettle to actually work with you should you win the election.
+          </p>
+          <p>
+            The benefits don’t end there: as a Missourian and a representative from a working-class district of St. Louis, Gephardt will help counter the image of you as a coastal elite and put you on the inner track towards sweeping the industrial Midwest. 
+            However, there’s a certain air to Gephardt that suggests he’s maybe a little too close to the party establishment. 
+            Maybe it’s the flip-flops, maybe it’s his evolving relationship with money, and maybe it’s the hair and eyebrow combination, but something tells you that while Dick might be willing to be on the ticket should you play your cards right, you’ll never truly be on the same wavelength.
+          <p>
+          `,
+          "candidate_score": 1,
+          "running_mate": true
+      }
+  },
+  {
+      "model": "campaign_trail.candidate",
+      "pk": 157,
+      "fields": {
+          "first_name": "Bill",
+          "last_name": "Bradley",
+          "election": 9,
+          "party": "Democrat",
+          "state": "New Jersey",
+          "priority": 1,
+          "description": "<p>Put description here</p>",
+          "color_hex": "#0000c7",
+          "secondary_color_hex": null,
+          "is_active": 0,
+          "image_url": "https://i.imgur.com/OL62Lw0.jpg",
+          "electoral_victory_message": "This guy wins!",
+          "electoral_loss_message": "This guy loses!",
+          "no_electoral_majority_message": "We all win?",
+          "description_as_running_mate": `
+            <p>
+            Calling Bill Bradley a winner seemingly devalues the word: Bradley is a champion on the level of Hercules, an unstoppable combination of brain and brawn. 
+            Bradley was the best high school basketball player in the country before becoming the best college player at Princeton, squeezing in an Olympic gold medal somewhere along the way. 
+            Following a quick stint as a Rhodes scholar, where he won a European basketball title while playing on the weekends, he then went to the NBA and carved out a Hall of Fame career, winning two championships. 
+            Then, the year after he retired, he was elected to the United States Senate from New Jersey.
+            </p>
+            <p>
+            And yet, after an embarrassingly close reelection in 1990, Bradley’s career is at a crossroads. 
+            He’s ambitious, but has doubts about the presidency. 
+            He’s strong, but often comes off as cold. 
+            He’s smart, but he’s operating at such a high level that he often seems aloof. 
+            Still, he offers a desperately-needed balance to Governor Moonbeam. 
+            By becoming your running mate, Bradley can offer a reasoned, rational balance to your idealism and make those ideas seem practical. 
+            Once he gets in front of the national spotlight, he can finally show the people what a real winner looks like.
+            </p>
+          `,
+          "candidate_score": 1,
+          "running_mate": true
+      }
+  },
+  {
+      "model": "campaign_trail.candidate",
+      "pk": 158,
+      "fields": {
+          "first_name": "David",
+          "last_name": "Pryor",
+          "election": 9,
+          "party": "Democrat",
+          "state": "Arkansas",
+          "priority": 1,
+          "description": "<p>Put description here</p>",
+          "color_hex": "#0000c7",
+          "secondary_color_hex": null,
+          "is_active": 0,
+          "image_url": "https://i.imgur.com/3ScPFF4.png",
+          "electoral_victory_message": "This guy wins!",
+          "electoral_loss_message": "This guy loses!",
+          "no_electoral_majority_message": "We all win?",
+          "description_as_running_mate": 
+          `
+          <p>
+          David Pryor is a true public servant, having served in just about every possible elected position in his home state of Arkansas, spanning both chambers of the state and federal legislature and the governorship. 
+          Boasting a witty, homespun style of retail politics combined with careful moderation, he’s an electoral juggernaut, winning his last Senate race with 99.83% of the vote. 
+          He would not only bring you Arkansas, but would also help you be competitive in much of the South in November while still being mainstream enough to fit the rest of the country.
+          </p>
+          <p>
+          With that being said, there’s one especially good reason to pick Pryor: it would be the perfect opportunity to spite Bill Clinton. 
+          Pryor and Clinton are allies, but Pryor, like any normal career politician, desires power, enough to the point where it would take nothing more than the promise of the White House and a moderate amount of cajoling to get him on board with the program. 
+          Wouldn’t it be the perfect rebuke of Slick Willie to see a white, middle-aged Arkansan former governor sharing the stage with Jerry Brown? 
+          Pryor’s an appealing candidate in his own right, but the opportunity to screw Clinton with a man from his own backyard is incredibly tantalizing.
+          </p>
+          `,
+          "candidate_score": 1,
+          "running_mate": true
+      }
+  },
+  {
+      "model": "campaign_trail.candidate",
+      "pk": 159,
+      "fields": {
+          "first_name": "Jesse",
+          "last_name": "Jackson",
+          "election": 9,
+          "party": "Democrat",
+          "state": "District of Columbia",
+          "priority": 1,
+          "description": "<p>Put description here</p>",
+          "color_hex": "#0000c7",
+          "secondary_color_hex": null,
+          "is_active": 0,
+          "image_url": "https://i.imgur.com/LErguMi.jpeg",
+          "electoral_victory_message": "This guy wins!",
+          "electoral_loss_message": "This guy loses!",
+          "no_electoral_majority_message": "We all win?",
+          "description_as_running_mate": 
+          `
+          <p>
+          There are few living men more admirable for black America than the Reverend Jesse Jackson, and none of them are as politically engaged. 
+          Two separate times, he was counted out for the Democratic nomination, and two separate times, he did dramatically better than anyone expected, with his unashamed liberalism providing an antidote to those who claim the dream has died. 
+          He’s a phenomenal speaker who’s more than happy to be your running mate, and he will do whatever it takes to support the ticket.
+          </p>
+          <p>
+          The issue with Jesse isn’t that he’s a liberal, or that he’s hard on abortion, or that he’s soft on crime. 
+          Few will say it out loud, but all of black America knows it: white America, in 1992, will never really support a self-assertive minority like himself. 
+          They’ll say they might vote for him, will nicely talk about what a good leader he is for the black community, and will dodge the question until November comes and they pull the lever for Bush. 
+          Underneath Jerry Brown, Jesse will be shielded from the worst of it, and even the most pessimistic wouldn’t automatically assign them defeat, but it’s going to be an uphill battle.
+          </p>
+          `,
+          "candidate_score": 1,
+          "running_mate": true
+      }
+  },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 160,
+        "fields": {
+            "first_name": "Dan",
+            "last_name": "Quayle",
+            "election": 9,
+            "party": "Republican",
+            "state": "Indiana",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#c70000",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/KEUz01Q.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>potatoe</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 162,
+        "fields": {
+            "first_name": "Pat",
+            "last_name": "Buchanan",
+            "election": 9,
+            "party": "Republican",
+            "state": "Virgina",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#c70000",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/YHhy4rh.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>BUSH LIED!</p>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 163,
+        "fields": {
+            "first_name": "Jack",
+            "last_name": "Kemp",
+            "election": 9,
+            "party": "Republican",
+            "state": "New York",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#c70000",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/cpmZLRS.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    }
+  ]
+  
+  campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 90229,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 155
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 89390,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 156
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 142830,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 157
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 98357,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 158
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 120502,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 159
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 151554,
+        "fields": {
+            "candidate": 77,
+            "running_mate": 160
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 172418,
+        "fields": {
+            "candidate": 77,
+            "running_mate": 161
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 178499,
+        "fields": {
+            "candidate": 77,
+            "running_mate": 162
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 115165,
+        "fields": {
+            "candidate": 77,
+            "running_mate": 163
+        }
+    }
+  ]
+  
+  campaignTrail_temp.credits = "THE MOONBEAM TEAM"
+  
+  campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 9,
+        "candidates": [
+            78,
+            77,
+            79,
+            80,
+        ]
+    }
+  ]
+  
+  campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 9,
+        "candidates": [
+            78,
+            77,
+            79,
+            80,
+        ]
+    }
+  ]
+  
+  campaignTrail_temp.temp_election_list = [
+    {
+        "id": 9,
+        "year": 2000,
+        "is_premium": 0,
+        "display_year": "Moonbeam"
+    }
+  ]
+  
+  jet_data = {
+    "headerColor": "#0b2740",
+    "windowColor": "#00386a",
+    "containerColor": "#004888",
+    "innerWindowColor": "#001e38",
+    "bannerImageUrl": "https://i.imgur.com/Lv0EL9w.png",
+    "backgroundImageUrl": "https://i.imgur.com/rw36dRm.jpeg",
+    "endingTextColor": "#000000",
+    "customQuote": "We are not disorganized. Our campaign transcends understanding.",
+    "gameTitle": "MOONBEAM - Take Back America!"
+  }
+  
+  
+  //#startcode
+  
+  
+  corrr = '\n              <h2>MOONBEAM - Take Back America!</h2>\n            ';
+  
+  
+  nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#0b2740";
+  
+  nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#2d4f6b";
+  
+  document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+  
+  $("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+  
+  $(".container")[0].style.backgroundColor = "#001e38";
+  
+  document.getElementById("header").src = "https://i.imgur.com/xj7rSmb.png";
+  
+  document.body.background = "https://i.imgur.com/ACtGvLA.png";
+  
+// Polling CYOA
+e.collect_results = true;
+  
+changeFavicon("https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico");
+
+e.WinPopup = "Continue"
+e.LosePopup = "Continue" 
+e.HomeStateText = "Home State:"
+e.PartyText = "Party:"
+e.SelAnsContText = "You forgot to select an answer choice!"
+e.SelectText = "<span style='color:#ffffff;'>It is the 1992 Presidential Election</span>"
+e.CandidText = "<span style='color:#ffffff;'>Take Back America!</span>"
+e.VpText = "<span style='color:#ffffff;'>Pick a Running Mate!</span>"
+
+// helper to ensure a stylesheet is appended only once
+function ensureMetaViewport() {
+    if (!document.querySelector('meta[name="viewport"]')) {
+        const m = document.createElement('meta');
+        m.name = 'viewport';
+        m.content = 'width=device-width, initial-scale=1';
+        document.head.appendChild(m);
+    }
+}
+
+applyGlobalStyles.sheets = {};
+
+function applyGlobalStyles(css, id = 'app-theme') {
+    if ('adoptedStyleSheets' in document && 'replaceSync' in CSSStyleSheet.prototype) {
+        if (!applyGlobalStyles.sheets[id]) {
+            applyGlobalStyles.sheets[id] = new CSSStyleSheet();
+            document.adoptedStyleSheets = [...document.adoptedStyleSheets, applyGlobalStyles.sheets[id]];
+        }
+        applyGlobalStyles.sheets[id].replaceSync(css);
+        return;
+    }
+
+    let el = document.getElementById(id);
+    if (!el) {
+        el = document.createElement('style');
+        el.id = id;
+        document.head.appendChild(el);
+    }
+    el.textContent = css;
+}
+
+const pile = `
+  @font-face {
+    font-family: 'Claremont';
+    src: url('https://file.garden/aKoRqbLZKBsHizSA/moonbeam/claremontrr-medium.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  .container {
+    font-family: 'Claremont', sans-serif;
+  }
+  
+  body {
+    background-image: url('https://i.imgur.com/ACtGvLA.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+  }  
+  #election_summary {
+  padding-top: 1em;
+  padding-right: 1em;
+  text-align: left;
+  font-size: 13px;
+  overflow-y: scroll;
+  height: 100%;
+  }
+  #election_description_window {
+  background-color: #F8F8F8;
+  height: 87%;
+  margin: 1em;
+  border-style: double;
+  border-color: #C9C9C9;
+  }
+  #candidate_summary {
+  background-color: #F8F8F8;
+  height: 85%;
+  margin: 1em;
+  border-style: double;
+  border-color: #C9C9C9;
+  overflow-y: scroll;
+  padding-top: 1em;
+  padding-right: 1em;
+}
+  .person_summary {
+  text-align: left;
+  background-color: #F8F8F8;
+  height: 85%;
+  margin: 1em;
+  border-style: double;
+  border-color: #C9C9C9;
+  overflow-y: scroll;
+  padding-top: 1em;
+  padding-right: 1em;
+}
+  .inner_window_w_desc p {
+  margin-bottom: 1em;
+  margin-top: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
+}
+  #credits {
+    color:#ffffff;
+  }
+  .inner_window_w_desc h3 {
+    color:#ffffff;
+  }
+  
+  #results_container {color:#000;} .inner_window_w_desc {background-color:#315a7f!important;}
+  
+  #visit_window {
+        height: 75%;
+    }
+    .inner_window_question {
+        height: 62%;
+    }
+  
+    .inner_window_question h3 .mytooltip{
+        background-color: lightskyblue;
+    }
+  
+    .mytooltip {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        background-color: lightblue;
+    }
+  
+    .mytooltip .mytooltiptext {
+        width: 150;
+        background-color: lightgray;
+        color: black;
+        text-align: center;
+        border-radius: 6px;
+        padding: 10px;
+        position: absolute;
+        z-index: 99;
+        bottom: 20%;
+        left: 20%;
+        margin-left: -90px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        border: 1px solid black;
+        pointer-events: none;
+        font-size: 13px !important;
+        line-height: 1.5em !important;
+        font-weight: normal !important;
+        font-style: normal !important;
+    }
+  
+    .mytooltip .mytooltiptext img {
+        max-width: 150;
+        height: auto;
+    }
+  
+    .mytooltip:hover .mytooltiptext {
+        opacity: 1;
+        transition-delay: 0.5s;
+    }
+  
+  
+  .mytooltip:hover .bubble {
+  opacity: 1;
+  transition-delay: 0.5s;
+  }
+  .bubble {
+    width: 150px;
+    background-color: lightgray;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 11px;
+    position: absolute;
+    z-index: 99;
+    bottom: 20%;
+    left: 20%;
+    margin-left: -90px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border: 1px solid black;
+    pointer-events: none;
+    font-size: 13px !important;
+    line-height: 1.5em !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+  }
+  
+  .mytooltip:hover .bubble-bottom-left:before,
+  .mytooltip:hover .bubble-bottom-left:after {
+  opacity: 1;
+  }
+  
+`;
+
+ensureMetaViewport();
+applyGlobalStyles(pile, 'mod-style');
+  
+  //#endcode
+  
+  HistHexcolour=["#00487c","#7b000c","#e4b81d","#016300"];
+  HistName=[" Jerry Brown"," George Bush"," Andre Marrou", " Bo Gritz"];
+  HistEV=[274,264,0,0];
+  HistPV=["50,261,112 ","50,452,809","510,193","157,264"];
+  HistPVP=["49.6%","49.8%","0.5%","0.2%"];
+  
+  campaignTrail_temp.modBoxTheme = {
+     "header_color": "#0b2740",
+     "header_text_color": "#ffffff",
+     "description_text_color": "#000000",
+     "description_background_color": "#f8f8f8",
+     "main_color": "#2d4f6b",
+     "secondary_color": "#001e38",
+     "ui_text_color": "#FFFFFF"
+}
+  
+campaignTrail_temp.achievements = {
+    "Operation BUSH" : {
+    "image" : "https://i.imgur.com/mpxJ5aM.png",
+     "description" : "Defeat Bush and Quayle with Jesse Jackson as your running mate.",
+     "cannotBeCheated" : true
+   },
+   "Party Unity" : {
+    "image" : "https://i.imgur.com/4v50hPL.png",
+    "description" : "Reconcile with Bill Clinton",
+    "cannotBeCheated" : true
+   },
+    "California and Coal Country" : {
+    "image" : "https://i.imgur.com/edxeGrb.png",
+    "description" : "Win Kentucky.",
+    "cannotBeCheated" : true
+   },
+   "Profit and Ross" : {
+    "image" : "https://i.imgur.com/14kqvGj.png",
+    "description" : "Reinvent your thoughts on NAFTA.",
+    "cannotBeCheated" : true
+   },
+   "2137" : {
+    "image" : "https://i.imgur.com/PYzgLIQ.png",
+    "description" : "Find your faith.",
+    "cannotBeCheated" : true
+  },
+    "Bunga Bunga" : {
+    "image" : "https://i.imgur.com/TjiuSqd.png",
+    "description" : "Make a deal with il Diavolo.",
+    "cannotBeCheated" : true
+  },
+   "Liebe ist für alle da" : {
+    "image" : "https://i.imgur.com/gURgOk3.png",
+    "description" : "Conquer the Berlin nightlife.",
+    "cannotBeCheated" : true
+  },
+  "Slapshot" : {
+   "image" : "https://i.imgur.com/sjBQJDs.png",
+   "description" : "Enlist the help of the GOAT.",
+   "cannotBeCheated" : true
+  },
+  "Man of Tomorrow" : {
+   "image" : "https://i.imgur.com/w0Aiozy.png",
+   "description" : "Win at least 340 electoral votes.",
+   "cannotBeCheated" : true
+  }
+}
+  
+// Soundtrack
+class Song {
+    constructor(title, artist, coverLink, audioLink) {
+        this.title = title;
+        this.artist = artist;
+        this.coverLink = coverLink;
+        this.audioLink = audioLink;
+    }
+}
+
+class Playlist {
+    constructor(songs = []) {
+        this.songs = songs;
+        this.currentSongIndex = 0;
+    }
+
+    addSong(song) {
+        this.songs.push(song);
+    }
+
+    getCurrentSong() {
+        if (this.songs.length === 0) {
+            return new Song("No Songs", "Add songs to a playlist", "https://itsastronomical.com/assets/music/buttons.png", "");
+        }
+        return this.songs[this.currentSongIndex];
+    }
+
+    playNext() {
+        if (this.songs.length === 0) return;
+        this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+    }
+
+    playPrevious() {
+        if (this.songs.length === 0) return;
+        this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+    }
+}
+
+// player logic
+const WalkmanPlayer = {
+    playlist: null,
+    audio: null,
+    isPlaying: false,
+    dom: {},
+
+    init(targetSelector, initialPlaylist) {
+        const targetElement = document.querySelector(targetSelector);
+        if (!targetElement) {
+            console.error("Zoinks! Target element not found.", targetSelector);
+            return;
+        }
+
+        this._createPlayerHTML(targetElement);
+        this._injectCSS();
+        this._cacheDOMElements();
+
+        this.audio = new Audio();
+        document.body.appendChild(this.audio);
+
+        this._bindEvents();
+        this._setVolume(this.dom.volumeSlider.value);
+        this.loadPlaylist(initialPlaylist);
+    },
+    
+    loadPlaylist(newPlaylist) {
+        this.playlist = newPlaylist;
+        this.playlist.currentSongIndex = 0;
+        this._playSongAtIndex(0, true);
+    },
+
+    _createPlayerHTML(targetElement) {
+        const playerHTML = `
+            <div class="player">
+                <div class="player__body">
+                    <div class="player__header">
+                        <span class="player__brand-sony">SONY</span>
+                        <div class="player__features">
+                            <span>DOLBY B NR</span>
+                            <span>EX DBB</span>
+                        </div>
+                    </div>
+                    <div class="player__window">
+                         <div class="player__window-inner">
+                            <img src="" alt="Album Cover" class="player__album-art">
+                         </div>
+                    </div>
+                     <div class="player__lcd-display">
+                        <div class="player__song-info">
+                            <div class="player__song-title"></div>
+                            <div class="player__song-artist"></div>
+                        </div>
+                        <div class="player__progress-container">
+                            <span class="player__time-current">00:00</span>
+                            <div class="progress-bar-stack">
+                                <progress class="progress-bar--display" value="0" max="100"></progress>
+                                <input type="range" class="progress-bar--interactive" value="0" min="0" max="100" step="0.1">
+                            </div>
+                            <span class="player__time-duration">00:00</span>
+                        </div>
+                    </div>
+                    <div class="player__controls-area">
+                        <div class="player__brand-walkman">WALKMAN</div>
+                        <div class="player__controls">
+                            <button class="player__btn player__btn--prev" title="Previous">
+                                <svg class="icon-prev" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
+                            </button>
+                            <button class="player__btn player__btn--playpause" title="Play/Pause">
+                                <svg class="icon-play" viewBox="0 0 24 24"><path d="M7.5 5v14l11-7z"></path></svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+                            </button>
+                            <button class="player__btn player__btn--next" title="Next">
+                                <svg class="icon-next" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path></svg>
+                            </button>
+                            <button class="player__btn player__btn--stop" title="Stop">
+                                <svg class="icon-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="player__side-panel">
+                    <div class="player__volume-group">
+                         <span class="player__side-label">VOLUME</span>
+                        <div class="player__volume-area">
+                            <input type="range" class="player__volume-slider" min="0" max="10" step="1" value="5">
+                        </div>
+                    </div>
+                    <div class="player__lock">
+                        <span class="player__lock-label">HOLD</span>
+                        <div class="player__lock-switch"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+        targetElement.insertAdjacentHTML('afterend', playerHTML);
+    },
+
+    _cacheDOMElements() {
+        const player = document.querySelector('.player');
+        this.dom = {
+            player,
+            albumArt: player.querySelector('.player__album-art'),
+            songTitle: player.querySelector('.player__song-title'),
+            songArtist: player.querySelector('.player__song-artist'),
+            prevBtn: player.querySelector('.player__btn--prev'),
+            playPauseBtn: player.querySelector('.player__btn--playpause'),
+            nextBtn: player.querySelector('.player__btn--next'),
+            stopBtn: player.querySelector('.player__btn--stop'),
+            progressBarDisplay: player.querySelector('.progress-bar--display'),
+            progressBarInteractive: player.querySelector('.progress-bar--interactive'),
+            currentTime: player.querySelector('.player__time-current'),
+            durationTime: player.querySelector('.player__time-duration'),
+            volumeSlider: player.querySelector('.player__volume-slider'),
+            lockSwitch: player.querySelector('.player__lock-switch'),
+        };
+    },
+
+    _bindEvents() {
+        this.dom.playPauseBtn.addEventListener('click', () => this.togglePlay());
+        this.dom.nextBtn.addEventListener('click', () => this.playNext());
+        this.dom.prevBtn.addEventListener('click', () => this.playPrev());
+        this.dom.stopBtn.addEventListener('click', () => this.stop());
+        
+        this.audio.addEventListener('timeupdate', () => this._updateProgress());
+        this.audio.addEventListener('loadedmetadata', () => this._updateProgress());
+        this.audio.addEventListener('ended', () => this.playNext());
+
+        this.dom.progressBarInteractive.addEventListener('input', (e) => this._seek(e));
+        this.dom.volumeSlider.addEventListener('input', (e) => this._setVolume(e.target.value));
+        
+        this.dom.lockSwitch.addEventListener('click', () => this.toggleLayout());
+    },
+
+    toggleLayout() {
+        this.dom.player.classList.toggle('player--horizontal');
+        this.dom.lockSwitch.classList.toggle('active');
+    },
+
+    _playSongAtIndex(index, autoplay = false) {
+        this.playlist.currentSongIndex = index;
+        const song = this.playlist.getCurrentSong();
+        this.audio.src = song.audioLink;
+        this._updateUI();
+
+        if (autoplay) {
+            this.isPlaying = true;
+            this.audio.play().catch(e => {
+                this.isPlaying = false;
+                console.warn("Autoplay is currently blocked; the user must interact with the page first.");
+                this._updatePlayPauseIcon();
+            });
+        }
+        this._updatePlayPauseIcon();
+    },
+
+    _setVolume(value) {
+        this.audio.volume = value / 10;
+    },
+
+    _updateUI() {
+        const song = this.playlist.getCurrentSong();
+        this.dom.albumArt.src = song.coverLink;
+        this.dom.songTitle.textContent = song.title;
+        this.dom.songArtist.textContent = song.artist;
+    },
+
+    togglePlay() {
+        if (!this.playlist || this.playlist.songs.length === 0) return;
+        this.isPlaying = !this.isPlaying;
+        if (this.isPlaying) {
+            this.audio.play();
+        } else {
+            this.audio.pause();
+        }
+        this._updatePlayPauseIcon();
+    },
+
+    stop() {
+        this.audio.pause();
+        this.audio.currentTime = 0;
+        this.isPlaying = false;
+        this._updatePlayPauseIcon();
+    },
+    
+    playNext() {
+        if (!this.playlist || this.playlist.songs.length === 0) return;
+        this.playlist.playNext();
+        this._playSongAtIndex(this.playlist.currentSongIndex, this.isPlaying);
+    },
+
+    playPrev() {
+        if (!this.playlist || this.playlist.songs.length === 0) return;
+        this.playlist.playPrevious();
+        this._playSongAtIndex(this.playlist.currentSongIndex, this.isPlaying);
+    },
+
+    _updatePlayPauseIcon() {
+        if (this.isPlaying) {
+            this.dom.playPauseBtn.classList.add('is-playing');
+            this.dom.playPauseBtn.title = 'Pause';
+        } else {
+            this.dom.playPauseBtn.classList.remove('is-playing');
+            this.dom.playPauseBtn.title = 'Play';
+        }
+    },
+    
+    _formatTime(seconds) {
+        if (isNaN(seconds)) return "00:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    },
+
+    _updateProgress() {
+        const progressPercent = (this.audio.currentTime / this.audio.duration) * 100;
+        const safePercent = isNaN(progressPercent) ? 0 : progressPercent;
+        
+        this.dom.progressBarDisplay.value = safePercent;
+        this.dom.progressBarInteractive.value = safePercent;
+        
+        this.dom.currentTime.textContent = this._formatTime(this.audio.currentTime);
+        this.dom.durationTime.textContent = this._formatTime(this.audio.duration);
+    },
+
+    _seek(e) {
+        const seekTime = (e.target.value / 100) * this.audio.duration;
+        if (!isNaN(seekTime)) {
+            this.audio.currentTime = seekTime;
+        }
+    },
+
+    _injectCSS() {
+        const style = document.createElement('style');
+        style.textContent = `
+            :root {
+                --player-bg: #212121;
+                --player-border: #1a1a1a;
+                --lcd-bg: #20372f;
+                --lcd-text: #a1d8a3;
+                --text-primary: #d1d1d1;
+                --text-secondary: #888;
+                --accent-color: #e0e0e0;
+                --button-bg: #4d4d4d;
+                --button-border: #353535;
+                --icon-color: #d1d1d1;
+            }
+            .player {
+                display: flex;
+                background: var(--player-bg);
+                border: 2px solid var(--player-border);
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1);
+                font-family: 'Consolas', Arial, sans-serif;
+                width: 100%;
+                max-width: 360px; /* Default Vertical Width */
+                margin: 15px auto;
+                color: var(--text-primary);
+                overflow: hidden;
+                transition: max-width 0.3s ease, height 0.3s ease; /* Smooth size transition */
+            }
+            .player__body {
+                flex-grow: 1; padding: 8px;
+                display: flex; flex-direction: column; gap: 8px;
+            }
+            .player__header {
+                display: flex; justify-content: space-between; align-items: center;
+                font-size: 9px; color: var(--text-secondary);
+                text-transform: uppercase; letter-spacing: 0.5px;
+            }
+            .player__brand-sony { font-weight: bold; font-size: 14px; color: var(--accent-color); }
+            .player__features { display: flex; gap: 8px; }
+            
+            .player__window {
+                background: #111; border: 1px solid #000;
+                border-radius: 4px; padding: 10px;
+                box-shadow: inset 0 0 10px rgba(0,0,0,0.7);
+                display: flex; align-items: center; justify-content: center;
+            }
+            .player__window-inner { background: #333; border: 1px solid #444; width: 100%; }
+            .player__album-art { display: block; width: 100%; height: auto; object-fit: cover; max-height: 260px; }
+            
+            .player__lcd-display {
+                background: var(--lcd-bg); border: 2px solid #1a2924;
+                border-radius: 4px; padding: 6px 10px;
+                box-shadow: inset 0 0 5px rgba(0,0,0,0.5); color: var(--lcd-text);
+            }
+            .player__song-info {
+                text-align: center; padding-bottom: 4px;
+                border-bottom: 1px solid #2a4b3e; margin-bottom: 4px;
+            }
+            .player__song-title { font-size: 14px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .player__song-artist { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .player__progress-container { display: flex; align-items: center; gap: 6px; width: 100%; }
+            .player__time-current, .player__time-duration { font-size: 11px; min-width: 35px; text-align: center; }
+            
+            .progress-bar-stack { position: relative; width: 100%; height: 8px; display: flex; align-items: center; }
+            .progress-bar--display, .progress-bar--interactive { position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 0; }
+            .progress-bar--display { -webkit-appearance: none; appearance: none; }
+            .progress-bar--display::-webkit-progress-bar { background-color: #1a2924; border-radius: 4px; }
+            .progress-bar--display::-webkit-progress-value { background-color: var(--lcd-text); border-radius: 4px; }
+            .progress-bar--interactive { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; z-index: 2; }
+            .progress-bar--interactive::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0; height: 8px; }
+            
+            .player__controls-area { margin-top: 3px; text-align: center; }
+            .player__brand-walkman {
+                font-size: 12px; font-style: italic; font-weight: bold; color: var(--text-secondary);
+                letter-spacing: 1.5px; margin-bottom: 8px;
+            }
+            .player__controls { display: flex; align-items: center; justify-content: center; gap: 12px; }
+            .player__btn {
+                border: none; padding: 0;
+                width: 32px; height: 32px;
+                cursor: pointer; background: var(--button-bg);
+                border-radius: 50%; border: 2px solid var(--button-border);
+                box-shadow: 0 2px 2px #111, inset 0 -1px 1px rgba(255,255,255,0.1);
+                transition: all 0.1s ease-out;
+                display: flex; align-items: center; justify-content: center;
+            }
+            .player__btn:hover { background-color: #606060; }
+            .player__btn:active { transform: translateY(1px); box-shadow: 0 1px 1px #111, inset 0 1px 2px rgba(0,0,0,0.5); }
+            .player__btn svg { width: 60%; height: 60%; fill: var(--icon-color); transition: fill 0.2s; }
+            .player__btn:hover svg { fill: #fff; }
+            .player__btn--playpause { width: 38px; height: 38px; }
+            .player__btn--playpause .icon-pause { display: none; }
+            .player__btn--playpause.is-playing .icon-play { display: none; }
+            .player__btn--playpause.is-playing .icon-pause { display: block; }
+
+            .player__side-panel {
+                background: #1c1c1c; border-left: 2px solid #111;
+                display: flex; flex-direction: column; align-items: center;
+                justify-content: space-between;
+                padding: 15px 6px;
+                width: 50px; box-sizing: border-box;
+            }
+            .player__volume-group {
+                display: flex; flex-direction: column;
+                align-items: center; gap: 8px;
+                flex-grow: 1;
+            }
+            .player__side-label {
+                font-size: 9px; color: var(--text-secondary);
+                transform: rotate(90deg);
+                letter-spacing: 0.5px;
+                margin: 0.5em 0 1.5em 0;
+            }
+            .player__volume-area {
+                width: 100%; height: 170px; 
+                display: flex; align-items: center; justify-content: center; position: relative;
+            }
+            
+            input[type=range].player__volume-slider {
+                -webkit-appearance: none; appearance: none;
+                width: 150px; height: 20px; 
+                background: transparent; transform: rotate(-90deg); cursor: pointer;
+            }
+            input[type=range].player__volume-slider::-webkit-slider-runnable-track {
+                width: 100%; height: 6px; background: #050505;
+                border: 1px solid #333; border-radius: 3px;
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.9), 0 1px 0 rgba(255,255,255,0.05);
+            }
+            input[type=range].player__volume-slider::-webkit-slider-thumb {
+                -webkit-appearance: none; height: 16px; width: 24px; margin-top: -6px;
+                background: repeating-linear-gradient(90deg, #4a4a4a, #4a4a4a 2px, #2a2a2a 3px, #2a2a2a 4px);
+                border: 1px solid #111; border-radius: 2px; box-shadow: 0 2px 4px #000;
+            }
+            input[type=range].player__volume-slider::-moz-range-track {
+                width: 100%; height: 6px; background: #050505; border: 1px solid #333; border-radius: 3px;
+            }
+            input[type=range].player__volume-slider::-moz-range-thumb {
+                height: 16px; width: 24px; border: 1px solid #111; border-radius: 2px;
+                background: repeating-linear-gradient(90deg, #4a4a4a, #4a4a4a 2px, #2a2a2a 3px, #2a2a2a 4px);
+            }
+
+            .player__lock { text-align: center; margin-bottom: 5px; cursor: pointer; }
+            .player__lock-label { font-size: 9px; color: var(--text-secondary); }
+            
+            .player__lock-switch {
+                width: 22px; height: 10px; background: #000;
+                border-radius: 8px; border: 1px solid #333;
+                margin: 3px auto 0; position: relative;
+                transition: background 0.2s;
+            }
+            .player__lock-switch::after {
+                content: ''; position: absolute;
+                width: 10px; height: 10px; background: #d32f2f;
+                border-radius: 50%; top: -1px; left: -1px;
+                border: 1px solid #555; box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+                transition: left 0.2s, background 0.2s;
+            }
+            
+            .player__lock-switch.active::after {
+                left: 11px;
+                background: #4caf50;
+            }
+
+            .player.player--horizontal {
+                max-width: 600px;
+            }
+
+            .player.player--horizontal .player__body {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto 1fr;
+                gap: 12px;
+                grid-template-areas: 
+                    "window header"
+                    "window lcd"
+                    "window controls";
+                align-items: center;
+                padding-right: 15px;
+            }
+
+            .player.player--horizontal .player__window {
+                grid-area: window;
+                height: 100%;
+                margin: 0;
+            }
+
+            .player.player--horizontal .player__header {
+                grid-area: header;
+                align-self: end;
+                border-bottom: 1px solid #333;
+                padding-bottom: 5px;
+            }
+
+            .player.player--horizontal .player__lcd-display {
+                grid-area: lcd;
+            }
+
+            .player.player--horizontal .player__controls-area {
+                grid-area: controls;
+                align-self: start;
+            }
+            
+            .player.player--horizontal .player__album-art {
+                max-height: 100%;
+                aspect-ratio: 1/1;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+};
+
+// the observer.
+const windowsAdvisorTargetNode = document.getElementById("game_window");
+if (windowsAdvisorTargetNode) {
+    const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
+    const callback = (mutationList, observer) => {
+        const visitWindow = document.getElementsByClassName("overlay_window")[0];
+        if (visitWindow && !visitWindow.classList.contains("done")) {
+            visitWindow.classList.add("done", "window");
+            let titleBar = visitWindow.querySelector("h3");
+            if (titleBar) {
+                titleBar.classList.add("title-bar", "title-bar-text");
+                titleBar.style.paddingLeft = "3px";
+            }
+        }
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(windowsAdvisorTargetNode, windowsAdvisorConfig);
+}
+
+// the songs.
+const mainPlaylist = new Playlist([
+
+	new Song(
+      "California Über Alles",
+      "Dead Kennedys",      
+      "https://i.imgur.com/f2VqI0S.jpeg",
+      "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/Dead%20Kennedys%20-%20California%20%C3%9Cber%20Alles.mp3"
+    ),
+	new Song(
+      "100%",
+      "Sonic Youth",
+	  "https://i.imgur.com/OV76VvQ.jpeg",
+      "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/Sonic%20Youth%20-%20100%20(Official%20Music%20Video).mp3"
+    ),
+	new Song(
+      "Who Wrote Holden Caulfield",
+      "Green Day",
+      "https://i.imgur.com/y636VVk.jpeg",
+      "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/Who%20Wrote%20Holden%20Caulfield_%20-%20Green%20Day%20-%20HQ.mp3"
+    ),
+	new Song(
+      "In Bloom",
+      "Nirvana",
+      "https://i.imgur.com/21gOVWE.jpeg",
+      "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/In%20Bloom%20-%20Nirvana.mp3"
+    ),
+	new Song(
+      "Only Shallow",
+      "My Bloody Valentine",
+      "https://i.imgur.com/J9uKRNc.jpeg",
+      "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/my%20bloody%20valentine%20%20only%20shallow%20(official%20video).mp3"
+    ),
+	new Song(
+      "Gratitude",
+      "Beastie Boys",
+      "https://i.imgur.com/RaFQsZz.jpeg",
+      "https://file.garden/aUjAupxGEFbQH4RI/YTDown.com_YouTube_Beastie-Boys-Gratitude_Media_ZdJ5e70Q8mw_001_1080p.mp4"
+    ),
+]);
+
+// kick it off!
+WalkmanPlayer.init("#game_window", mainPlaylist);
+
+// VP skipper from 2012LBM  
+(function() {
+    'use strict';
+
+    function handleNavigation() {
+        const gameWindow = document.getElementById("game_window");
+        if (!gameWindow) return;
+
+        // detect VP screen
+        const summary = document.getElementById("running_mate_summary");
+        
+        if (summary) {
+            // check if we are moving backwards (triggered by the opponent screen back button)
+            const isGoingBack = window.sessionStorage.getItem("moonbeam_skip_direction") === "backward";
+
+            if (isGoingBack) {
+                const backBtn = document.getElementById("running_mate_id_back");
+                if (backBtn && !backBtn.dataset.autoClicked) {
+                    //console.log("VP selection screen detected. Skipping...");
+                    // clear the flag so forward movement works next time
+                    window.sessionStorage.removeItem("moonbeam_skip_direction");
+                    backBtn.dataset.autoClicked = "true";
+                    backBtn.click();
+                }
+            } else {
+                // move forward
+                const nextBtn = document.getElementById("running_mate_id_button");
+                // ensure we don't click buttons with custom switchers
+                if (nextBtn && !nextBtn.hasAttribute("data-custom-switcher") && !nextBtn.dataset.autoClicked) {
+                   //console.log("VP selection screen detected. Skipping...");
+                    nextBtn.dataset.autoClicked = "true"; 
+                    nextBtn.click();
+                }
+            }
+        }
+
+        // detect opponent selection screen
+        const opponentBack = document.getElementById("opponent_selection_id_back");
+        if (opponentBack && !opponentBack.dataset.skipListener) {
+            // when user clicks Back, set flag to 'backward'
+            opponentBack.addEventListener("click", () => {
+                window.sessionStorage.setItem("moonbeam_skip_direction", "backward");
+            });
+            opponentBack.dataset.skipListener = "true";
+        }
+    }
+
+    window.handleNavigation = handleNavigation;
+})();
+
+// This is the catch-all mutation observer from 2012LBM
+// so that we keep one observer doing everything
+(function() {
+    'use strict';
+
+    if (window.glorble) {
+        window.glorble.disconnect();
+    }
+	
+	window.glorbleTasks = [];
+	
+	const initialTasks = () => {
+        // VP screen skipper
+        if (document.getElementById("game_window") && typeof window.handleNavigation === 'function') {
+            window.handleNavigation();
+        }
+    };
+	
+	window.glorbleTasks.push(initialTasks);
+	
+	const handleMutations = (mutationsList) => {
+        if (!window.glorbleTasks) return;
+        
+        for (let i = 0; i < window.glorbleTasks.length; i++) {
+            try {
+                window.glorbleTasks[i]();
+            } catch (e) {
+                console.error("Zoinks! Error in glorble task:", e);
+            }
+        }
+    };
+
+    const targetNode = document.getElementById("game_window");
+    const config = { childList: true, subtree: true };
+
+    window.glorble = new MutationObserver(handleMutations);
+    window.glorble.observe(targetNode, config);
+
+    handleMutations();
+    //console.log("glorble...");
+})();
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // tooltips  
+
+  tooltipList = [
+    
+    {searchString: "Jodie Evans", explanationText: " <img src=https://i.imgur.com/7pfrqZu.png>Your campaign manager"},
+    {searchString: "Jacques Barzaghi", explanationText: "<img src=https://i.imgur.com/PZcUVY4.png> Your close personal aide. He's been with you every step of the way, from your governorship to your Buddhist trips."},
+    {searchString: "Pete Wilson", explanationText: " <img src=https://i.imgur.com/WYHzfaH.png>Foiled your previous Senate bid ten years ago. Resigned to become Governor."},
+    {searchString: "John Seymour", explanationText: " <img src=https://i.imgur.com/ibOEjQ6.png>Wilson's appointee to the seat that he himself vacated."},
+    {searchString: "Paul Simon", explanationText: " <img src=https://i.imgur.com/MtrLrdd.png>Illinois Senator. Bringing bowties back in fashion."},
+    {searchString: "Grant,", explanationText: " <img src=https://i.imgur.com/fhoHQuG.png>Won more states in the South than you're projected to"},
+    {searchString: "Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as 'that woman'"},
+    {searchString: "Ann Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as 'that woman'"},
+    {searchString: "Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida"},
+    {searchString: "Bob Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida"},
+    {searchString: "New Democrats", explanationText: " <img src=https://i.imgur.com/fkFiuxp.png>Centrist Democrats that arose after the resounding defeats of liberals like Mondale and Dukakis."},
+    {searchString: "mayor Bradley", explanationText: " <img src=https://i.imgur.com/sqhM8lw.png>First black mayor of Los Angeles. Perhaps more infamous for the 'Bradley Effect'."},
+    {searchString: "Magic Johnson", explanationText: " <img src=https://i.imgur.com/SjZ0CRO.png>'Cause you can get through anything if Magic made it. Basketball player on the Lakers and perhaps one of the most famous AIDS activists out there."},
+    {searchString: "Hyde Amendment", explanationText: "Amendment banning the use of federal funding for abortions, with a few exceptions."},
+    {searchString: "Zbigniew Brzezinski", explanationText: "<img src=https://i.imgur.com/cjp9dlu.png> Carter's national security advisor, well known foreign policy Realist"},
+    {searchString: "Nayirah", explanationText: "<img src=https://i.imgur.com/Jeyz8R3.png> Daughter of the former Kuwaiti ambassador to the United States, famous for her false testimony to Congress about Iraqi war crimes"},
+    {searchString: "UNSCOM", explanationText: "United Nations Special Commission to ensure Iraqi compliance with WMD guidelines."},
+    {searchString: "Tom Hayden", explanationText: "<img src=https://imgur.com/ypIHmm9.png> California State Assemblyman and candidate for State Senate this year. Better known for other work."},
+    {searchString: "Chuck D", explanationText: "<img src =https://imgur.com/HSChsP1.png> Rapper and political activist"},
+    {searchString: "Mussolini", explanationText: "<img src =https://imgur.com/gjfIfgN.png> O con noi o contro di noi"},
+    {searchString: "Cranston", explanationText: "<img src =https://i.imgur.com/FTonFxA.png> Dignified liberal serving since 1969. Also a less-dignified member of the Keating Five."},
+    {searchString: "Rush Limbaugh", explanationText: "<img src =https://i.imgur.com/VW0l8xC.png> Big fat idiot"},
+    {searchString: "Gennifer Flowers-", explanationText: "<img src =https://i.imgur.com/taAJjuD.png> Arkansan government employee who accused Bill Clinton of having extramarital sex with her"},
+    {searchString: "NAFTA", explanationText: "<img src =https://i.imgur.com/zpuCi3G.jpeg> The North American Free Trade Agreement is a proposal to establish free trade between USA, Canada, and Mexico"},
+    {searchString: "Pat Robertson", explanationText: "<img src =https://i.imgur.com/JmmnG6L.png> Televangelist with a huge number of followers. Thinks that prayer can stop hurricanes."},
+    {searchString: "the ribbon", explanationText: "<img src =https://i.imgur.com/GlLMbKy.png> Used to signify solidarity with those living with AIDS. Pictured here as part of Laura Dern's outfit."},
+    {searchString: "Iran-Contra", explanationText: "<img src =https://i.imgur.com/yixmsxO.png> A scandal in which the Reagan administration sold arms to far-right Nicaraguan militants, in which Bush was deeply involved."},
+    {searchString: "Bible Belt", explanationText: "<img src =https://i.imgur.com/eS2ITwB.png> Highly evangelical region of the country, located mostly in the Deep South."},
+    {searchString: "dual monarchy", explanationText: "<img src =https://i.imgur.com/E4ppY2v.png>  Two kingdoms are ruled by the same monarch, but are otherwise self-governing."},
+    {searchString: "diarchy", explanationText: "<img src =https://i.imgur.com/1Xsx0fx.png>  One singular kingdom is ruled by two monarchs."},
+    {searchString: "Bob Casey", explanationText: "<img src =https://i.imgur.com/yJDzM4X.png>  Immensely popular governor of Pennsylvania whose hardcore stance on abortion even frightens some Republicans."},
+    {searchString: "'potato'", explanationText: "<img src =https://i.imgur.com/YY95I7L.png>"},
+    {searchString: "Kinnock", explanationText: "<img src =https://i.imgur.com/Oww1l2q.png> Neil Kinnock, recently elected this summer in a surprise upset"},
+    {searchString: "Bush fidgets with his tie and poutily crosses his arms", explanationText: "<img src =https://i.imgur.com/2WfLCxA.png> <p? I'm sure he's just bored"},
+    {searchString: "John Prescott", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>"},
+    {searchString: "scanner", explanationText: "<img src =https://i.imgur.com/Jjv6kfp.png> 'Bush Encounters the Supermarket, Amazed'"},
+    {searchString: "SPAM", explanationText: "<img src =https://i.imgur.com/CikzB57.png> Not just for poor people, according to Hormel"},
+    {searchString: "egghead", explanationText: "<img src =https://i.imgur.com/A07khql.png> You called?"},
+    {searchString: "Silvio Berlusconi", explanationText: "<img src =https://i.imgur.com/Hr3GIK7.png> The richest man in Italy and the nation's most prolific womanizer "},
+    {searchString: "bisexuality", explanationText: "<img src =https://i.imgur.com/eqFXard.png> The cutting edge of human sexuality"},
+    {searchString: "Evelle Younger the second", explanationText: "<img src =https://i.imgur.com/MjREl9c.png> ???... Oh yeah, that one guy who you beat in '78"},
+    {searchString: "Geraldine Ferraro", explanationText: "<img src =https://i.imgur.com/mrmJZ60.png> Picked to energize the base, flopped miserably"},
+    {searchString: "William Miller", explanationText: "<img src =https://i.imgur.com/yh2jNo5.png> Also picked to energize the base, also flopped miserably"},
+    {searchString: "rape and murder", explanationText: "<img src =https://i.imgur.com/wHGmWJv.gif>"},
+    {searchString: "Phil Donahue", explanationText: "<img src =https://i.imgur.com/EdRNTlL.png> The king of daytime talk shows, well known for not shying away from divisive topics"},
+    {searchString: "Max Pavlevsky", explanationText: "<img src =https://i.imgur.com/eDnsDFO.png> Husband of Jodie Evans and millionaire, pictured wrestling with the weight of being one of only a few wealthy McGovern backers back in ‘72 "},
+    {searchString: "George Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland's favorite Lebanese-American"},
+    {searchString: "Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland's favorite Lebanese-American"},
+    {searchString: "Tom Foley", explanationText: "<img src =https://i.imgur.com/hhgl0ic.png> 6'4 House Speaker from the great state of Washington"},
+    {searchString: "Brock Adams", explanationText: "<img src =https://i.imgur.com/SeLjt8k.png> Senator from Washington state who looks and sounds like Bush. Like Bush, has some Capitol Hill rumors of being a little handsy..."},
+    {searchString: "Murphy Brown", explanationText: "<img src =https://i.imgur.com/qLcvaSF.png> Television show staring Candice Bergen as the eponymous main character, a hard-nosed journalist and news anchor who often deals with real-world problems "},
+    {searchString: "Scoop Jackson", explanationText: "<img src =https://i.imgur.com/l98VyPw.png> 'At home, a liberal supportive of labor, civil rights, and the environment. Abroad, there's a minimum 20% chance that he would've started a nuclear war had he been president.'"},
+    {searchString: "Senator Dole and Representative Gingrich", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>"}, ///funnily enough this was actually in order to help troubleshoot another mod and I never neded up taking it out, it can stay for posterity 
+  
+    ///////////////////////////
+  ];
+  campaignTrail_temp.modBoxTheme = {
+     "header_color": "#0b2740",
+     "header_text_color": "#000000",
+     "description_text_color": "#000000",
+     "description_background_color": "#00386a",
+     "main_color": "#001e38",
+     "secondary_color": "#004888",
+     "ui_text_color": "#FFFFFF"
+}
