@@ -24,12 +24,53 @@ campaignTrail_temp.global_parameter_json = [
     }
   ]
   
+  const recommendedReadingContent = `
+  <h1 style="text-align: center;"><strong>Moonbeam Credits</strong></h1>
+
+<ul style="list-style: none; padding: 0; max-width: 700px; margin: 0 auto;">
+  <li><strong>Head Writer:</strong> Shockonomics</li>
+  <li><strong>Head Coder:</strong> Ohas</li>
+  <li><strong>Coding Work:</strong> Girlie, StrawberryMaster</li>
+  <li><strong>Dev Team:</strong> John Arizona, Dyson, LP</li>
+  <li><strong>Help with Values and Margins:</strong> Martha</li>
+  <li><strong>Promotional Material & Advice:</strong> LiterallyNelsonRockefeller</li>
+
+  <li style="margin-top: 1em;">
+    <strong>Much thanks to:</strong><br>
+    Mack A. Rony, TerryJerry, Kaylee, Nidoras, DayDoveRomantic, Librasaurusx, Karton, and DKing  
+    for useful advice
+  </li>
+
+  <li style="margin-top: 1em;">
+    <strong>Special thanks:</strong><br>
+    Vetulicolia — incredibly helpful advice on the Yugoslavia path and endings
+  </li>
+
+  <li>
+    Halligan Elysium — incredibly helpful advice on the Britain path and writing endings
+  </li>
+
+  <li>
+    MeWhenTheAgain, ThisGuy, and SteamedHams501 — writing endings
+  </li>
+
+  <li style="margin-top: 1em;">
+    <strong>Extra special thanks:</strong><br>
+    Franko the Tea King — consistent support of the project and writing endings
+  </li>
+
+  <li>
+    Jerry Brown — despite his imperfections, this mod would not exist without his strength of character and willingness to fight for his beliefs
+  </li>
+</ul>
+`;
+  
   campaignTrail_temp.election_json = [
     {
         "model": "campaign_trail.election",
         "pk": 9,
         "fields": {
-            "year": 2000,
+            "year": 1992,
             "summary": 
             `
                 <p>
@@ -53,6 +94,8 @@ campaignTrail_temp.global_parameter_json = [
         }
     }
   ]
+  
+  campaignTrail_temp.election_json[0].fields.recommended_reading = recommendedReadingContent;
   
   campaignTrail_temp.candidate_json = [
     {
@@ -516,7 +559,7 @@ campaignTrail_temp.global_parameter_json = [
   campaignTrail_temp.temp_election_list = [
     {
         "id": 9,
-        "year": 2000,
+        "year": 1992,
         "is_premium": 0,
         "display_year": "1992 - Moonbeam"
     }
@@ -716,13 +759,23 @@ const pile = `
 	  background: #cad5ff;
 	  padding: .1em 0;
 	}
+	#state_result {
+	  min-height: 75px;
+	}
 
 	#state_info {
 	  height: auto;
 	}
 
-	#results_container {
+	#results_container, #overall_details_container, #main_content_area_reading {
+	  color: #fff;
+	}
+	#recommended_reading_box {
 	  color: #000;
+	}
+	#overall_details_container a {
+	  color: #f7ff00;
+	  font-weight: normal;
 	}
 
 	#election_summary {
