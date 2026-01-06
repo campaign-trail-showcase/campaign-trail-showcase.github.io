@@ -47,7 +47,6 @@ campaignTrail_temp.global_parameter_json = [
             "advisor_url": "https://i.imgur.com/TviIh01.jpeg",
             "recommended_reading": "<h1 style='text-align: center;'><strong>Moonbeam Credits</strong></h1><p>Head Writer: Shockonomics</p><p>Head Coder: Ohas</p><p>Coding work: Girlie, StrawberryMaster</p><p>Dev Team: John Arizona, Dyson, LP</p><p>Help With Values and Margins: Martha</p><p>Promotional Material, Advice: LiterallyNelsonRockefeller</p><p>Much thanks to Mack A. Rony, TerryJerry, Kaylee, Nidoras, DayDoveRomantic, Librasaurusx, Karton, and DKing for useful advice</p><p>Special thanks to Vetulicolia for incredibly helpful advice on the Yugoslavia path and endings</p><p>Special thanks to Halligan Elysium for incredibly helpful advice on the Britain path and writing endings</p><p>Special thanks to MeWhenTheAgain, ThisGuy, and SteamedHams501 for writing endings</p><p>Extra special thanks to Franko the Tea King for his consistent support of the project and writing endings</p><p>Extra special thanks to Jerry Brown, as despite his imperfections, this mod would not exist without his strength of character and willingness to fight for his beliefs</p>",
             "has_visits": 1,
-            "has_visits": 1,
             "no_electoral_majority_image": "https://i.imgur.com/ns2gtKG.png",
             "creator": "Dan Bryan",
             "display_year": "1992 - Moonbeam"
@@ -540,21 +539,8 @@ campaignTrail_temp.global_parameter_json = [
   
   
   corrr = '\n              <h2>MOONBEAM - Take Back America!</h2>\n            ';
-  
-  
-  nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#0b2740";
-  
-  nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#2d4f6b";
-  
-  document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
-  
-  $("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
-  
-  $(".container")[0].style.backgroundColor = "#001e38";
-  
+        
   document.getElementById("header").src = "https://i.imgur.com/xj7rSmb.png";
-  
-  document.body.background = "https://i.imgur.com/ACtGvLA.png";
   
 // Polling CYOA
 e.collect_results = true;
@@ -566,9 +552,20 @@ e.LosePopup = "Continue"
 e.HomeStateText = "Home State:"
 e.PartyText = "Party:"
 e.SelAnsContText = "You forgot to select an answer choice!"
-e.SelectText = "<span style='color:#ffffff;'>It is the 1992 Presidential Election</span>"
+e.SelectText = "<span style='color:#ffffff;'>It is the 1992 presidential election.</span>"
 e.CandidText = "<span style='color:#ffffff;'>Take Back America!</span>"
-e.VpText = "<span style='color:#ffffff;'>Pick a Running Mate!</span>"
+e.VpText = "<span style='color:#ffffff;'>Pick a running mate!</span>"
+
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#0b2740",
+     "header_text_color": "#000000",
+     "description_text_color": "#000000",
+     "description_background_color": "#00386a",
+     "main_color": "#001e38",
+     "secondary_color": "#004888",
+     "ui_text_color": "#FFFFFF"
+}
+
 
 // helper to ensure a stylesheet is appended only once
 function ensureMetaViewport() {
@@ -609,8 +606,42 @@ const pile = `
     font-style: normal;
   }
   .container {
+	background-color: #001e38;
+	border: 4px solid rgba(166, 163, 255, 0.5);
     font-family: 'Claremont', sans-serif;
   }
+  #game_window {
+	  background-color: #2d4f6b !important;
+	  border: 3px solid rgba(38, 136, 240, 0.5);
+	}
+	.inner_window_w_desc {
+	  border: .2em groove #1e1e52;
+	}
+	.content_single {
+	  border-top: .15em solid rgba(108, 89, 244, 0.55);
+	}
+	.game_header {
+	  background-color: #0b2740;
+	  border-bottom: .2em solid rgba(151, 178, 240, 0.55);
+	}
+	.footer {
+	  border-top: .15em solid rgba(108, 89, 244, 0.55);
+	  margin-top: .5em;
+	}
+	.inner_inner_window h3 {
+	  padding: 5px 2px;
+	  background-color: #DFE3EC;
+	  border: 2px solid rgba(13, 10, 89, 0.64);
+	  margin: 0 .5em .5em .5em;
+	  border-radius: 0 0 .15em .15em;
+	}
+	
+	#state_info {
+	  height: auto;
+	}
+	#overall_result_container, #menu_container {
+	  background-color: #0E5888;
+	}
   
   body {
     background-image: url('https://i.imgur.com/ACtGvLA.png');
@@ -752,6 +783,160 @@ const pile = `
   opacity: 1;
   }
   
+  /* Mobile compatibility fixes - taken from TTNW, ported to 2016ALOT, and used here */
+			@media only screen and (max-width: 768px) {
+			
+			 /* necessary to ensure the music player stays in position */
+			  #game_window {
+				flex: 1 1 auto;
+				min-height: clamp(360px, 40vh, 587px);
+				height: auto;
+				align-self: stretch;
+				overflow: visible;
+				box-sizing: border-box;
+				background-position: center bottom;
+				background-repeat: no-repeat;
+				background-size: cover;
+			  }
+			
+			  #question_form button, #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
+				font-size: clamp(16px, 4.2vw, 20px);
+				line-height: 1.2;
+				padding: 10px 16px;
+				min-height: 44px;
+			  }
+			  
+			  #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
+				font-size: 1em;
+				line-height: 2em;
+			  }
+
+			.inner_window_question button, #visit_window button, #map_footer {
+				line-height: 2.5em;
+			  }
+			  
+			  /*#map_footer {
+				padding-right: 10em;
+			  }*/
+			  .inner_window_question, #results_container, #map_footer, #overall_details_container, #main_content_area_reading, #inner_window_2, #inner_window_3, #inner_window_4, #advisors {
+				font-size: 1.8em;
+			  }
+
+			  .inner_window_question {
+				height: auto !important;
+				min-height: 0 !important;
+				max-height: none !important;
+				position: static !important;
+				top: auto !important;
+				bottom: auto !important;
+				flex: 0 1 auto !important;
+				align-self: auto !important;
+				grid-row: auto !important;
+				grid-column: auto !important;
+				justify-self: auto !important;
+				display: flow-root !important;
+				overflow: visible !important;
+				box-sizing: border-box !important;
+				max-height: 395px;
+			  }
+
+				#question_form input[type="radio"] {
+					width: 1.3em;
+					height: 1.3em;
+					margin: 0 10px 0 0;
+					transform: none;
+					align-self: center;
+				}
+
+				#question_form input[type="radio"] + label {
+					font-size: clamp(16px, 5.2vw, 20px);
+					line-height: 1.3;
+					padding: 10px 12px;
+					min-height: 44px;
+				}
+
+				#question_form button,
+				#inner_window_2 button,
+				#inner_window_3 button,
+				#inner_window_4 button,
+				#game_window button,
+				#headquarter button,
+				#advisorsDiv button {
+					font-size: clamp(16px, 4.2vw, 20px);
+					line-height: 1.2;
+					padding: 10px 16px;
+					min-height: 44px;
+				}
+
+				#question_form input[type="radio"] + label:hover,
+				#question_form input[type="radio"] + label:focus {
+					font-size: clamp(16px, 5.2vw, 20px);
+					line-height: 1.3;
+					padding: 10px 12px;
+					font-weight: 400;
+					background: #eeebde; /* only change background */
+				}
+				
+				.overlay_window img {
+				  width: 15em;
+				  height: auto;
+				}
+				
+				.overlay_window h3 {
+				  padding: .5rem x .5rem;
+				  font-size: 24px;
+				}
+				
+			/* for the default CTS/NCT footer */
+			  #game_window g {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: center;
+				align-items: center;
+				gap: 8px;
+				padding: 10px 5px;
+			  }
+			  
+			  #candidate_pic, img#candidate_pic {
+				order: 1;
+				width: 13em;
+				height: auto;
+				flex-shrink: 0;
+				margin: 0;
+			  }
+			  
+			  .inner_window_sign_display {
+				order: 2;
+				flex: 1;
+				min-width: 180px;
+				max-width: 250px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin: 0 2em;
+			  }
+			  
+			  #running_mate_pic, img#running_mate_pic {
+				order: 3;
+				width: 13em;
+				height: auto;
+				flex-shrink: 0;
+				margin: 0;
+			  }
+				
+			/* other fixes to not break things */
+			#map_container {
+			  height: 30.78em;
+			}
+			
+			.overlay_window {
+				font-size: clamp(16px, 5.2vw, 20px);
+				left: 20%;
+				width: 60%;
+			}
+			
+			}
+  
 `;
 
 ensureMetaViewport();
@@ -824,7 +1009,7 @@ campaignTrail_temp.achievements = {
 }
   
 // Soundtrack
-class Song {
+window.Song = class Song {
     constructor(title, artist, coverLink, audioLink) {
         this.title = title;
         this.artist = artist;
@@ -833,7 +1018,7 @@ class Song {
     }
 }
 
-class Playlist {
+window.Playlist = class Playlist {
     constructor(songs = []) {
         this.songs = songs;
         this.currentSongIndex = 0;
@@ -862,7 +1047,7 @@ class Playlist {
 }
 
 // player logic
-const WalkmanPlayer = {
+window.WalkmanPlayer = {
     playlist: null,
     audio: null,
     isPlaying: false,
@@ -1366,7 +1551,7 @@ const mainPlaylist = new Playlist([
 ]);
 
 // kick it off!
-WalkmanPlayer.init("#game_window", mainPlaylist);
+window.WalkmanPlayer.init("#game_window", mainPlaylist);
 
 // VP skipper from 2012LBM  
 (function() {
@@ -1521,12 +1706,3 @@ WalkmanPlayer.init("#game_window", mainPlaylist);
   
     ///////////////////////////
   ];
-  campaignTrail_temp.modBoxTheme = {
-     "header_color": "#0b2740",
-     "header_text_color": "#000000",
-     "description_text_color": "#000000",
-     "description_background_color": "#00386a",
-     "main_color": "#001e38",
-     "secondary_color": "#004888",
-     "ui_text_color": "#FFFFFF"
-}
