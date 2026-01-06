@@ -38,15 +38,14 @@ campaignTrail_temp.global_parameter_json = [
                     From this circus emerged one man: former California Governor Jerry Brown, Moonbeam himself, back to protect the Earth from the scourge of Bush.
                 </p>
                 <p>
-                    But the times have changed since Brown's last appearance on the national scene, and he has changed with them.
-                    Though always something of a realist, any idealism he once possessed has been replaced by a searing rage against everything wrong with modern America, manifesting itself into an unrelenting drive to capture the presidency. Governor Moonbeam has already tried for the presidency twice before, and this is his last shot. He may win, he may lose, but he'll be damned if he's not going to give it everything he's got.
+                    But the times have changed since Brown’s last appearance on the national scene, and he has changed with them.
+                    Though always something of a realist, any idealism he once possessed has been replaced by a searing rage against everything wrong with modern America, manifesting itself into an unrelenting drive to capture the presidency. Governor Moonbeam has already tried for the presidency twice before, and this is his last shot. He may win, he may lose, but he’ll be damned if he’s not going to give it everything he’s got.
                 </p>
             `,
             "image_url": "https://i.imgur.com/3WfZ1qm.jpeg",
             "winning_electoral_vote_number": 270,
             "advisor_url": "https://i.imgur.com/TviIh01.jpeg",
             "recommended_reading": "<h1 style='text-align: center;'><strong>Moonbeam Credits</strong></h1><p>Head Writer: Shockonomics</p><p>Head Coder: Ohas</p><p>Coding work: Girlie, StrawberryMaster</p><p>Dev Team: John Arizona, Dyson, LP</p><p>Help With Values and Margins: Martha</p><p>Promotional Material, Advice: LiterallyNelsonRockefeller</p><p>Much thanks to Mack A. Rony, TerryJerry, Kaylee, Nidoras, DayDoveRomantic, Librasaurusx, Karton, and DKing for useful advice</p><p>Special thanks to Vetulicolia for incredibly helpful advice on the Yugoslavia path and endings</p><p>Special thanks to Halligan Elysium for incredibly helpful advice on the Britain path and writing endings</p><p>Special thanks to MeWhenTheAgain, ThisGuy, and SteamedHams501 for writing endings</p><p>Extra special thanks to Franko the Tea King for his consistent support of the project and writing endings</p><p>Extra special thanks to Jerry Brown, as despite his imperfections, this mod would not exist without his strength of character and willingness to fight for his beliefs</p>",
-            "has_visits": 1,
             "has_visits": 1,
             "no_electoral_majority_image": "https://i.imgur.com/ns2gtKG.png",
             "creator": "Dan Bryan",
@@ -540,35 +539,31 @@ campaignTrail_temp.global_parameter_json = [
   
   
   corrr = '\n              <h2>MOONBEAM - Take Back America!</h2>\n            ';
-  
-  
-  nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#0b2740";
-  
-  nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#2d4f6b";
-  
-  document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
-  
-  $("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
-  
-  $(".container")[0].style.backgroundColor = "#001e38";
-  
+        
   document.getElementById("header").src = "https://i.imgur.com/xj7rSmb.png";
-  
-  document.body.background = "https://i.imgur.com/ACtGvLA.png";
   
 // Polling CYOA
 e.collect_results = true;
   
 changeFavicon("https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico");
 
-e.WinPopup = "Continue"
-e.LosePopup = "Continue" 
 e.HomeStateText = "Home State:"
 e.PartyText = "Party:"
 e.SelAnsContText = "You forgot to select an answer choice!"
-e.SelectText = "<span style='color:#ffffff;'>It is the 1992 Presidential Election</span>"
+e.SelectText = "<span style='color:#ffffff;'>It is the 1992 presidential election.</span>"
 e.CandidText = "<span style='color:#ffffff;'>Take Back America!</span>"
-e.VpText = "<span style='color:#ffffff;'>Pick a Running Mate!</span>"
+e.VpText = "<span style='color:#ffffff;'>Pick a running mate!</span>"
+
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#0b2740",
+     "header_text_color": "#ffffff",
+     "description_text_color": "#000000",
+     "description_background_color": "#f8f8f8",
+     "main_color": "#2d4f6b",
+     "secondary_color": "#001e38",
+     "ui_text_color": "#FFFFFF"
+}
+
 
 // helper to ensure a stylesheet is appended only once
 function ensureMetaViewport() {
@@ -609,148 +604,434 @@ const pile = `
     font-style: normal;
   }
   .container {
-    font-family: 'Claremont', sans-serif;
-  }
+	  background-color: #001e38;
+	  border: 4px solid rgba(166, 163, 255, 0.5);
+	  font-family: 'Claremont', sans-serif;
+	}
+
+	#game_window {
+	  background-color: #2d4f6b !important;
+	  border: 3px solid rgba(38, 136, 240, 0.5);
+	  display: flex;
+	  flex-direction: column;
+	  min-height: 587px;
+	  height: auto;
+	}
+
+	/* for the default CTS/NCT footer */
+	#game_window g {
+	  display: flex;
+	  flex-flow: row wrap;
+	  justify-content: center;
+	  align-items: center;
+	  gap: 8px;
+	  padding: 5px 0;
+	}
+
+	.inner_window_w_desc {
+	  border: .2em groove #1e1e52;
+	  background-color: #315a7f !important;
+	}
+
+	.inner_window_w_desc p {
+	  margin: 1em;
+	}
+
+	.inner_window_w_desc h3 {
+	  color: #ffffff;
+	}
+
+	.inner_inner_window h3 {
+	  padding: 5px 2px;
+	  background-color: #DFE3EC;
+	  border: 2px solid rgba(13, 10, 89, 0.64);
+	  margin: 0 .5em .5em;
+	  border-radius: 0 0 .15em .15em;
+	}
+
+	.inner_window_question {
+	  min-height: 321px;
+	  height: auto !important;
+	  display: flex;
+	  flex-direction: column;
+	}
+
+	.inner_window_question p:last-of-type {
+	  margin: .5rem;
+	}
+
+	.inner_window_question h3 .mytooltip {
+	  background-color: lightskyblue;
+	}
+
+	.content_single {
+	  border-top: .15em solid rgba(108, 89, 244, 0.55);
+	}
+
+	.footer {
+	  border-top: .15em solid rgba(108, 89, 244, 0.55);
+	  margin-top: .5em;
+	}
+
+	.game_header {
+	  background-color: #0b2740;
+	  border-bottom: .2em solid rgba(151, 178, 240, 0.55);
+	}
+
+	.overlay_window p {
+	  font-weight: normal;
+	}
+
+	.overlay_window h3 {
+	  background-color: #2b3f6e;
+	  border-radius: .1em .1em 0 0;
+	  color: #fff;
+	}
+
+	.overlay_window img {
+	  border: none;
+	  outline: 3px double #115a9a;
+	}
+
+	#visit_window {
+	  height: auto;
+	  outline: 2px solid #8f8fd6;
+	  border: none;
+	  border-radius: .2em;
+	}
+
+	#overall_result_container,
+	#menu_container {
+	  background-color: #0E5888;
+	}
+
+	#overall_result,
+	#state_info {
+	  border: 3px solid rgba(38, 136, 240, 0.5);
+	}
+
+	#overall_result h3,
+	#state_info h3,
+	#state_result h3 {
+	  background: #cad5ff;
+	  padding: .1em 0;
+	}
+
+	#state_info {
+	  height: auto;
+	}
+
+	#results_container {
+	  color: #000;
+	}
+
+	#election_summary {
+	  padding-top: 1em;
+	  padding-right: 1em;
+	  text-align: left;
+	  font-size: 13px;
+	  overflow-y: scroll;
+	  height: 100%;
+	}
+
+	#election_description_window,
+	#candidate_summary,
+	.person_summary {
+	  background-color: #F8F8F8;
+	  margin: 1em;
+	  border-style: double;
+	  border-color: #C9C9C9;
+	}
+
+	#election_description_window {
+	  height: 87%;
+	}
+
+	#candidate_summary,
+	.person_summary {
+	  height: 85%;
+	  overflow-y: scroll;
+	  padding-top: 1em;
+	  padding-right: 1em;
+	}
+
+	.person_summary {
+	  text-align: left;
+	}
+
+	.mytooltip {
+	  position: relative;
+	  display: inline-block;
+	  cursor: pointer;
+	  background-color: lightblue;
+	}
+
+	.mytooltip .mytooltiptext,
+	.bubble {
+	  background-color: lightgray;
+	  color: black;
+	  text-align: center;
+	  border-radius: 6px;
+	  position: absolute;
+	  z-index: 99;
+	  bottom: 20%;
+	  left: 20%;
+	  margin-left: -90px;
+	  opacity: 0;
+	  transition: opacity 0.3s;
+	  border: 1px solid black;
+	  pointer-events: none;
+	  font-size: 13px !important;
+	  line-height: 1.5em !important;
+	  font-weight: normal !important;
+	  font-style: normal !important;
+	}
+
+	.mytooltip .mytooltiptext {
+	  width: 150px;
+	  padding: 10px;
+	}
+
+	.mytooltip .mytooltiptext img {
+	  max-width: 150px;
+	  height: auto;
+	}
+
+	.bubble {
+	  width: 150px;
+	  padding: 11px;
+	}
+
+	.mytooltip:hover .mytooltiptext,
+	.mytooltip:hover .bubble {
+	  opacity: 1;
+	  transition-delay: 0.5s;
+	}
+
+	.mytooltip:hover .bubble-bottom-left:before,
+	.mytooltip:hover .bubble-bottom-left:after {
+	  opacity: 1;
+	}
+
+	#candidate_pic,
+	img#candidate_pic {
+	  order: 1;
+	  width: 13em;
+	  height: auto;
+	  flex-shrink: 0;
+	  margin: 0;
+	}
+
+	.inner_window_sign_display {
+	  order: 2;
+	  flex: 1;
+	  min-width: 180px;
+	  max-width: 300px;
+	  min-height: 150px;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  margin: .5em;
+	}
+
+	#running_mate_pic,
+	img#running_mate_pic {
+	  order: 3;
+	  width: 13em;
+	  height: auto;
+	  flex-shrink: 0;
+	  margin: 0;
+	}
+
+	#map_container {
+	  height: 30.78em;
+	  border: 3px solid rgba(38, 136, 240, 0.5);
+	  background: #def1ff;
+	}
+
+	.visit_text {
+	  background: #0e0e4e;
+	  color: #fff;
+	  border-radius: .2em;
+	  display: inline-flex;
+	  width: fit-content;
+	  margin-inline: auto;
+	  padding: .5em;
+	  position: initial;
+	  transform: initial;
+	  font-weight: normal;
+	}
+
+	#credits {
+	  color: #ffffff;
+	}
+	
+	#map_footer {
+	  margin-top: clamp(1em, 2vw, 4em) !important;
+	}
+
+	body {
+	  background-image: url('https://i.imgur.com/ACtGvLA.png');
+	  background-repeat: no-repeat;
+	  background-position: center center;
+	  background-size: cover;
+	  background-attachment: fixed;
+	}
+
   
-  body {
-    background-image: url('https://i.imgur.com/ACtGvLA.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-  }  
-  #election_summary {
-  padding-top: 1em;
-  padding-right: 1em;
-  text-align: left;
-  font-size: 13px;
-  overflow-y: scroll;
-  height: 100%;
-  }
-  #election_description_window {
-  background-color: #F8F8F8;
-  height: 87%;
-  margin: 1em;
-  border-style: double;
-  border-color: #C9C9C9;
-  }
-  #candidate_summary {
-  background-color: #F8F8F8;
-  height: 85%;
-  margin: 1em;
-  border-style: double;
-  border-color: #C9C9C9;
-  overflow-y: scroll;
-  padding-top: 1em;
-  padding-right: 1em;
-}
-  .person_summary {
-  text-align: left;
-  background-color: #F8F8F8;
-  height: 85%;
-  margin: 1em;
-  border-style: double;
-  border-color: #C9C9C9;
-  overflow-y: scroll;
-  padding-top: 1em;
-  padding-right: 1em;
-}
-  .inner_window_w_desc p {
-  margin-bottom: 1em;
-  margin-top: 1em;
-  margin-right: 1em;
-  margin-left: 1em;
-}
-  #credits {
-    color:#ffffff;
-  }
-  .inner_window_w_desc h3 {
-    color:#ffffff;
-  }
-  
-  #results_container {color:#000;} .inner_window_w_desc {background-color:#315a7f!important;}
-  
-  #visit_window {
-        height: 75%;
-    }
-    .inner_window_question {
-        height: 62%;
-    }
-  
-    .inner_window_question h3 .mytooltip{
-        background-color: lightskyblue;
-    }
-  
-    .mytooltip {
-        position: relative;
-        display: inline-block;
-        cursor: pointer;
-        background-color: lightblue;
-    }
-  
-    .mytooltip .mytooltiptext {
-        width: 150;
-        background-color: lightgray;
-        color: black;
-        text-align: center;
-        border-radius: 6px;
-        padding: 10px;
-        position: absolute;
-        z-index: 99;
-        bottom: 20%;
-        left: 20%;
-        margin-left: -90px;
-        opacity: 0;
-        transition: opacity 0.3s;
-        border: 1px solid black;
-        pointer-events: none;
-        font-size: 13px !important;
-        line-height: 1.5em !important;
-        font-weight: normal !important;
-        font-style: normal !important;
-    }
-  
-    .mytooltip .mytooltiptext img {
-        max-width: 150;
-        height: auto;
-    }
-  
-    .mytooltip:hover .mytooltiptext {
-        opacity: 1;
-        transition-delay: 0.5s;
-    }
-  
-  
-  .mytooltip:hover .bubble {
-  opacity: 1;
-  transition-delay: 0.5s;
-  }
-  .bubble {
-    width: 150px;
-    background-color: lightgray;
-    color: black;
-    text-align: center;
-    border-radius: 6px;
-    padding: 11px;
-    position: absolute;
-    z-index: 99;
-    bottom: 20%;
-    left: 20%;
-    margin-left: -90px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    border: 1px solid black;
-    pointer-events: none;
-    font-size: 13px !important;
-    line-height: 1.5em !important;
-    font-weight: normal !important;
-    font-style: normal !important;
-  }
-  
-  .mytooltip:hover .bubble-bottom-left:before,
-  .mytooltip:hover .bubble-bottom-left:after {
-  opacity: 1;
-  }
+  /* Mobile compatibility fixes - taken from TTNW, ported to 2016ALOT, and used here */
+			@media only screen and (max-width: 768px) {
+			
+			 /* necessary to ensure the music player stays in position */
+			  #game_window {
+				flex: 1 1 auto;
+				min-height: clamp(360px, 40vh, 587px);
+				height: auto;
+				align-self: stretch;
+				overflow: visible;
+				box-sizing: border-box;
+				background-position: center bottom;
+				background-repeat: no-repeat;
+				background-size: cover;
+			  }
+			
+			  #question_form button, #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
+				font-size: clamp(16px, 4.2vw, 20px);
+				line-height: 1.2;
+				padding: 10px 16px;
+				min-height: 44px;
+			  }
+			  
+			  #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
+				font-size: 1em;
+				line-height: 2em;
+			  }
+
+			.inner_window_question button, #visit_window button, #map_footer {
+				line-height: 2.5em;
+			  }
+			  
+			  /*#map_footer {
+				padding-right: 10em;
+			  }*/
+			  .inner_window_question, #results_container, #map_footer, #overall_details_container, #main_content_area_reading, #inner_window_2, #inner_window_3, #inner_window_4, #advisors {
+				font-size: 1.8em;
+			  }
+
+			  .inner_window_question {
+				height: auto !important;
+				min-height: 0 !important;
+				max-height: none !important;
+				position: static !important;
+				top: auto !important;
+				bottom: auto !important;
+				flex: 0 1 auto !important;
+				align-self: auto !important;
+				grid-row: auto !important;
+				grid-column: auto !important;
+				justify-self: auto !important;
+				display: flow-root !important;
+				overflow: visible !important;
+				box-sizing: border-box !important;
+				max-height: 395px;
+			  }
+
+				#question_form input[type="radio"] {
+					width: 1.3em;
+					height: 1.3em;
+					margin: 0 10px 0 0;
+					transform: none;
+					align-self: center;
+				}
+
+				#question_form input[type="radio"] + label {
+					font-size: clamp(16px, 5.2vw, 20px);
+					line-height: 1.3;
+					padding: 10px 12px;
+					min-height: 44px;
+				}
+
+				#question_form button,
+				#inner_window_2 button,
+				#inner_window_3 button,
+				#inner_window_4 button,
+				#game_window button,
+				#headquarter button,
+				#advisorsDiv button {
+					font-size: clamp(16px, 4.2vw, 20px);
+					line-height: 1.2;
+					padding: 10px 16px;
+					min-height: 44px;
+				}
+
+				#question_form input[type="radio"] + label:hover,
+				#question_form input[type="radio"] + label:focus {
+					font-size: clamp(16px, 5.2vw, 20px);
+					line-height: 1.3;
+					padding: 10px 12px;
+					font-weight: 400;
+					background: #eeebde; /* only change background */
+				}
+				
+				.overlay_window img {
+				  width: 15em;
+				  height: auto;
+				}
+				
+				.overlay_window h3 {
+				  padding: .5rem x .5rem;
+				  font-size: 24px;
+				}
+				
+			/* for the default CTS/NCT footer */
+			  #game_window g {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: center;
+				align-items: center;
+				gap: 8px;
+				padding: 10px 5px;
+			  }
+			  
+			  #candidate_pic, img#candidate_pic {
+				order: 1;
+				width: 13em;
+				height: auto;
+				flex-shrink: 0;
+				margin: 0;
+			  }
+			  
+			  .inner_window_sign_display {
+				order: 2;
+				flex: 1;
+				min-width: 180px;
+				max-width: 250px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin: 0 2em;
+			  }
+			  
+			  #running_mate_pic, img#running_mate_pic {
+				order: 3;
+				width: 13em;
+				height: auto;
+				flex-shrink: 0;
+				margin: 0;
+			  }
+				
+			/* other fixes to not break things */
+			#map_container {
+			  height: 30.78em;
+			}
+			
+			.overlay_window {
+				font-size: clamp(16px, 5.2vw, 20px);
+				left: 20%;
+				width: 60%;
+			}
+			
+			}
   
 `;
 
@@ -824,7 +1105,7 @@ campaignTrail_temp.achievements = {
 }
   
 // Soundtrack
-class Song {
+window.Song = class Song {
     constructor(title, artist, coverLink, audioLink) {
         this.title = title;
         this.artist = artist;
@@ -833,7 +1114,7 @@ class Song {
     }
 }
 
-class Playlist {
+window.Playlist = class Playlist {
     constructor(songs = []) {
         this.songs = songs;
         this.currentSongIndex = 0;
@@ -862,7 +1143,7 @@ class Playlist {
 }
 
 // player logic
-const WalkmanPlayer = {
+window.WalkmanPlayer = {
     playlist: null,
     audio: null,
     isPlaying: false,
@@ -1366,7 +1647,7 @@ const mainPlaylist = new Playlist([
 ]);
 
 // kick it off!
-WalkmanPlayer.init("#game_window", mainPlaylist);
+window.WalkmanPlayer.init("#game_window", mainPlaylist);
 
 // VP skipper from 2012LBM  
 (function() {
@@ -1466,20 +1747,20 @@ WalkmanPlayer.init("#game_window", mainPlaylist);
   tooltipList = [
     
     {searchString: "Jodie Evans", explanationText: " <img src=https://i.imgur.com/7pfrqZu.png>Your campaign manager"},
-    {searchString: "Jacques Barzaghi", explanationText: "<img src=https://i.imgur.com/PZcUVY4.png> Your close personal aide. He's been with you every step of the way, from your governorship to your Buddhist trips."},
+    {searchString: "Jacques Barzaghi", explanationText: "<img src=https://i.imgur.com/PZcUVY4.png> Your close personal aide. He’s been with you every step of the way, from your governorship to your Buddhist trips."},
     {searchString: "Pete Wilson", explanationText: " <img src=https://i.imgur.com/WYHzfaH.png>Foiled your previous Senate bid ten years ago. Resigned to become Governor."},
-    {searchString: "John Seymour", explanationText: " <img src=https://i.imgur.com/ibOEjQ6.png>Wilson's appointee to the seat that he himself vacated."},
+    {searchString: "John Seymour", explanationText: " <img src=https://i.imgur.com/ibOEjQ6.png>Wilson’s appointee to the seat that he himself vacated."},
     {searchString: "Paul Simon", explanationText: " <img src=https://i.imgur.com/MtrLrdd.png>Illinois Senator. Bringing bowties back in fashion."},
-    {searchString: "Grant,", explanationText: " <img src=https://i.imgur.com/fhoHQuG.png>Won more states in the South than you're projected to"},
-    {searchString: "Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as 'that woman'"},
+    {searchString: "Grant,", explanationText: " <img src=https://i.imgur.com/fhoHQuG.png>Won more states in the South than you’re projected to"},
+    {searchString: "Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as ‘that woman’"},
     {searchString: "Ann Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as 'that woman'"},
     {searchString: "Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida"},
     {searchString: "Bob Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida"},
     {searchString: "New Democrats", explanationText: " <img src=https://i.imgur.com/fkFiuxp.png>Centrist Democrats that arose after the resounding defeats of liberals like Mondale and Dukakis."},
     {searchString: "mayor Bradley", explanationText: " <img src=https://i.imgur.com/sqhM8lw.png>First black mayor of Los Angeles. Perhaps more infamous for the 'Bradley Effect'."},
-    {searchString: "Magic Johnson", explanationText: " <img src=https://i.imgur.com/SjZ0CRO.png>'Cause you can get through anything if Magic made it. Basketball player on the Lakers and perhaps one of the most famous AIDS activists out there."},
+    {searchString: "Magic Johnson", explanationText: " <img src=https://i.imgur.com/SjZ0CRO.png>’Cause you can get through anything if Magic made it. Basketball player on the Lakers and perhaps one of the most famous AIDS activists out there."},
     {searchString: "Hyde Amendment", explanationText: "Amendment banning the use of federal funding for abortions, with a few exceptions."},
-    {searchString: "Zbigniew Brzezinski", explanationText: "<img src=https://i.imgur.com/cjp9dlu.png> Carter's national security advisor, well known foreign policy Realist"},
+    {searchString: "Zbigniew Brzezinski", explanationText: "<img src=https://i.imgur.com/cjp9dlu.png> Carter’s national security advisor, well known foreign policy Realist"},
     {searchString: "Nayirah", explanationText: "<img src=https://i.imgur.com/Jeyz8R3.png> Daughter of the former Kuwaiti ambassador to the United States, famous for her false testimony to Congress about Iraqi war crimes"},
     {searchString: "UNSCOM", explanationText: "United Nations Special Commission to ensure Iraqi compliance with WMD guidelines."},
     {searchString: "Tom Hayden", explanationText: "<img src=https://imgur.com/ypIHmm9.png> California State Assemblyman and candidate for State Senate this year. Better known for other work."},
@@ -1490,7 +1771,7 @@ WalkmanPlayer.init("#game_window", mainPlaylist);
     {searchString: "Gennifer Flowers-", explanationText: "<img src =https://i.imgur.com/taAJjuD.png> Arkansan government employee who accused Bill Clinton of having extramarital sex with her"},
     {searchString: "NAFTA", explanationText: "<img src =https://i.imgur.com/zpuCi3G.jpeg> The North American Free Trade Agreement is a proposal to establish free trade between USA, Canada, and Mexico"},
     {searchString: "Pat Robertson", explanationText: "<img src =https://i.imgur.com/JmmnG6L.png> Televangelist with a huge number of followers. Thinks that prayer can stop hurricanes."},
-    {searchString: "the ribbon", explanationText: "<img src =https://i.imgur.com/GlLMbKy.png> Used to signify solidarity with those living with AIDS. Pictured here as part of Laura Dern's outfit."},
+    {searchString: "the ribbon", explanationText: "<img src =https://i.imgur.com/GlLMbKy.png> Used to signify solidarity with those living with AIDS. Pictured here as part of Laura Dern’s outfit."},
     {searchString: "Iran-Contra", explanationText: "<img src =https://i.imgur.com/yixmsxO.png> A scandal in which the Reagan administration sold arms to far-right Nicaraguan militants, in which Bush was deeply involved."},
     {searchString: "Bible Belt", explanationText: "<img src =https://i.imgur.com/eS2ITwB.png> Highly evangelical region of the country, located mostly in the Deep South."},
     {searchString: "dual monarchy", explanationText: "<img src =https://i.imgur.com/E4ppY2v.png>  Two kingdoms are ruled by the same monarch, but are otherwise self-governing."},
@@ -1498,35 +1779,26 @@ WalkmanPlayer.init("#game_window", mainPlaylist);
     {searchString: "Bob Casey", explanationText: "<img src =https://i.imgur.com/yJDzM4X.png>  Immensely popular governor of Pennsylvania whose hardcore stance on abortion even frightens some Republicans."},
     {searchString: "'potato'", explanationText: "<img src =https://i.imgur.com/YY95I7L.png>"},
     {searchString: "Kinnock", explanationText: "<img src =https://i.imgur.com/Oww1l2q.png> Neil Kinnock, recently elected this summer in a surprise upset"},
-    {searchString: "Bush fidgets with his tie and poutily crosses his arms", explanationText: "<img src =https://i.imgur.com/2WfLCxA.png> <p? I'm sure he's just bored"},
+    {searchString: "Bush fidgets with his tie and poutily crosses his arms", explanationText: "<img src =https://i.imgur.com/2WfLCxA.png> <p? I’m sure he’s just bored"},
     {searchString: "John Prescott", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>"},
     {searchString: "scanner", explanationText: "<img src =https://i.imgur.com/Jjv6kfp.png> 'Bush Encounters the Supermarket, Amazed'"},
     {searchString: "SPAM", explanationText: "<img src =https://i.imgur.com/CikzB57.png> Not just for poor people, according to Hormel"},
     {searchString: "egghead", explanationText: "<img src =https://i.imgur.com/A07khql.png> You called?"},
-    {searchString: "Silvio Berlusconi", explanationText: "<img src =https://i.imgur.com/Hr3GIK7.png> The richest man in Italy and the nation's most prolific womanizer "},
+    {searchString: "Silvio Berlusconi", explanationText: "<img src =https://i.imgur.com/Hr3GIK7.png> The richest man in Italy and the nation’s most prolific womanizer "},
     {searchString: "bisexuality", explanationText: "<img src =https://i.imgur.com/eqFXard.png> The cutting edge of human sexuality"},
-    {searchString: "Evelle Younger the second", explanationText: "<img src =https://i.imgur.com/MjREl9c.png> ???... Oh yeah, that one guy who you beat in '78"},
+    {searchString: "Evelle Younger the second", explanationText: "<img src =https://i.imgur.com/MjREl9c.png> ???... Oh yeah, that one guy who you beat in ’78"},
     {searchString: "Geraldine Ferraro", explanationText: "<img src =https://i.imgur.com/mrmJZ60.png> Picked to energize the base, flopped miserably"},
     {searchString: "William Miller", explanationText: "<img src =https://i.imgur.com/yh2jNo5.png> Also picked to energize the base, also flopped miserably"},
     {searchString: "rape and murder", explanationText: "<img src =https://i.imgur.com/wHGmWJv.gif>"},
     {searchString: "Phil Donahue", explanationText: "<img src =https://i.imgur.com/EdRNTlL.png> The king of daytime talk shows, well known for not shying away from divisive topics"},
     {searchString: "Max Pavlevsky", explanationText: "<img src =https://i.imgur.com/eDnsDFO.png> Husband of Jodie Evans and millionaire, pictured wrestling with the weight of being one of only a few wealthy McGovern backers back in ‘72 "},
-    {searchString: "George Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland's favorite Lebanese-American"},
-    {searchString: "Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland's favorite Lebanese-American"},
-    {searchString: "Tom Foley", explanationText: "<img src =https://i.imgur.com/hhgl0ic.png> 6'4 House Speaker from the great state of Washington"},
+    {searchString: "George Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American"},
+    {searchString: "Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American"},
+    {searchString: "Tom Foley", explanationText: "<img src =https://i.imgur.com/hhgl0ic.png> 6’4 House Speaker from the great state of Washington"},
     {searchString: "Brock Adams", explanationText: "<img src =https://i.imgur.com/SeLjt8k.png> Senator from Washington state who looks and sounds like Bush. Like Bush, has some Capitol Hill rumors of being a little handsy..."},
     {searchString: "Murphy Brown", explanationText: "<img src =https://i.imgur.com/qLcvaSF.png> Television show staring Candice Bergen as the eponymous main character, a hard-nosed journalist and news anchor who often deals with real-world problems "},
-    {searchString: "Scoop Jackson", explanationText: "<img src =https://i.imgur.com/l98VyPw.png> 'At home, a liberal supportive of labor, civil rights, and the environment. Abroad, there's a minimum 20% chance that he would've started a nuclear war had he been president.'"},
+    {searchString: "Scoop Jackson", explanationText: "<img src =https://i.imgur.com/l98VyPw.png> 'At home, a liberal supportive of labor, civil rights, and the environment. Abroad, there’s a minimum 20% chance that he would’ve started a nuclear war had he been president.'"},
     {searchString: "Senator Dole and Representative Gingrich", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>"}, ///funnily enough this was actually in order to help troubleshoot another mod and I never neded up taking it out, it can stay for posterity 
   
     ///////////////////////////
   ];
-  campaignTrail_temp.modBoxTheme = {
-     "header_color": "#0b2740",
-     "header_text_color": "#000000",
-     "description_text_color": "#000000",
-     "description_background_color": "#00386a",
-     "main_color": "#001e38",
-     "secondary_color": "#004888",
-     "ui_text_color": "#FFFFFF"
-}
