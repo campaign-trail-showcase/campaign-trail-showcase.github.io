@@ -131,7 +131,7 @@ campaignTrail_temp.questions_json = [
         "pk": 629,
         "fields": {
             "priority": 4,
-            "description": "The debate has now moved onto the economy – specifically tax policy.How will you address the issue?",
+            "description": "After several more questions, the debate has moved onto the issue of the economy and specifically tax policy. How will you address the issue?",
             "likelihood": 1
         }
     },
@@ -185,7 +185,7 @@ campaignTrail_temp.questions_json = [
         "pk": 651,
         "fields": {
             "priority": -1,
-            "description": "You only have time to visit one more city before polls close. So which of these do you want to visit?",
+            "description": "Finally, election day. The polls will shortly be closing – giving you the opportunity to only make one more campaign stop. Where across this wonderful state would you like to travel to?",
             "likelihood": 1
         }
     }
@@ -322,6 +322,14 @@ campaignTrail_temp.answers_json = [
     },
     {
         "model": "campaign_trail.answer",
+        "pk": 50000,
+        "fields": {
+            "question": 632,
+            "description": "No, I would rather continue attacking the O'Malley/Brown Administration and their failures."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
         "pk": 4182,
         "fields": {
             "question": 632,
@@ -349,7 +357,7 @@ campaignTrail_temp.answers_json = [
         "pk": 4185,
         "fields": {
             "question": 634,
-            "description": "I know that it is in DC, but maybe we can try showcase some of our liberal policies with the release of an Environmental plan at the National Arboretum."
+            "description": "I know that it is located within DC, but maybe we can try showcase some of our liberal policies with the release of an Environmental plan at the National Arboretum."
         }
     },
     {
@@ -581,7 +589,7 @@ campaignTrail_temp.answers_json = [
         "pk": 4232,
         "fields": {
             "question": 650,
-            "description": "Push hard on the failures of the O'Malley/Brown administration, keep talking about the tax hikes and the bungled healthcare rollout."
+            "description": "I will hard on the failures of the O'Malley/Brown administration, keep talking about the tax hikes and the bungled healthcare rollout."
         }
     },
     {
@@ -2977,6 +2985,16 @@ campaignTrail_temp.answer_score_global_json = [
     },
     {
         "model": "campaign_trail.answer_score_global",
+        "pk": 50001,
+        "fields": {
+            "answer": 50000,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": 0.009
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
         "pk": 2042,
         "fields": {
             "answer": 4186,
@@ -4104,7 +4122,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 4229,
             "candidate": 132,
-            "answer_feedback": "This is a good proposal."
+            "answer_feedback": "Parents are very happy to see you make a commitment to improving Maryland's education system."
         }
     },
     {
@@ -4186,6 +4204,15 @@ campaignTrail_temp.answer_feedback_json = [
             "answer": 4165,
             "candidate": 132,
             "answer_feedback": "While most were expecting some condemnation of Trump’s statements, this will do."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 50003,
+        "fields": {
+            "answer": 50000,
+            "candidate": 132,
+            "answer_feedback": "Governor O'Malley's administration is continually growing unpopular, good decision."
         }
     },
     {
@@ -4329,7 +4356,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 4194,
             "candidate": 132,
-            "answer_feedback": "YOU SAID WHAT?!"
+            "answer_feedback": "YOU SAID WHAT?! We are in Maryland, not Mississippi."
         }
     },
     {
@@ -4559,6 +4586,30 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
+//Variables for Achievements
+var Governor = 0;
+var Birth = 0;
+
+cyoAdventure = function(a) {
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1];
+    e.noCounter += 1
+
+    if (ans == 4171 || ans == 4232 || ans == 14781 || ans == 50000) {
+        Governor += 1;
+    }
+
+    if (ans == 14715) {
+        Birth += 1;
+    }
+
+    // Check achievement immediately after increment
+    if (Governor === 4) {
+        ctsAchievement("Who Am I Running Against?");
+    }
+
+};
+
+campaignTrail_temp.cyoa = true
 campaignTrail_temp.candidate_image_url = "https://i.imgur.com/0C1WNWg.jpeg";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/VanbHpb.jpeg";
 campaignTrail_temp.candidate_last_name = "Hogan";
@@ -4581,10 +4632,10 @@ endingPicker = (out, totv, aa, quickstats) => {
 
     if (aa[0].candidate === 132) {
         setImage("https://i.imgur.com/0C1WNWg.jpeg");
-ctsAchievement("Maryland Changed")
+        ctsAchievement("Maryland Changed");
         return `
             <h3>Congratulations! You Won The Gubernatorial Election!</h3><br>
-            Many pundits and amateurs alike were quick to call this as on of the biggest upsets in Maryland's history and the biggest upset of the 2014 midterms. Nobody thought that this would happen. People are already starting to speculate about you launching a presidential run in 2016, or in 2020. But for now, the work begins to fix Maryland. You will be remembered for more than just a businessman.
+            Many pundits and amateurs alike were quick to call this one of the biggest upsets in Maryland's history and the biggest upset of the 2014 midterms. Nobody thought that this would happen. People are already starting to speculate about you launching a presidential run in 2016, or in 2020. But for now, the work begins to fix Maryland. You will be remembered for more than just a businessman.
         `;
     }
 
@@ -4604,6 +4655,8 @@ ctsAchievement("Maryland Changed")
         `;
     }
 };
+
+
 
 campaignTrail_temp.jet_data = [{
     "mapping_enabled": true,
@@ -4628,3 +4681,45 @@ campaignTrail_temp.jet_data = [{
     },
 }
 ]
+
+
+//Randomiser from ALOT
+// standard Fisher-Yates shuffle function
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+const questionCount = campaignTrail_temp.global_parameter_json[0].fields.question_count;
+const originalQuestions = campaignTrail_temp.questions_json;
+
+if (questionCount == 20) {
+    const fixedStart = originalQuestions.slice(0, 2);
+
+    // create the main randomized batch
+    const mainPool = [
+        ...originalQuestions.slice(2, 12)
+    ];
+    shuffle(mainPool);
+
+    // questions 13-20 (fixed at the end)
+    const fixedEnd = originalQuestions.slice(12, 20);
+
+    // assemble the new, final question list
+    const newQuestionsList = [
+        ...fixedStart,
+        ...mainPool,
+        ...fixedEnd
+    ];
+
+    // replace the old question list with the newly constructed one
+    campaignTrail_temp.questions_json = newQuestionsList;
+
+    // update the game's question count to match the new array length
+	// this is so we don't crash before going to election night
+    campaignTrail_temp.global_parameter_json[0].fields.question_count = newQuestionsList.length;
+
+} 
+console.log("Question re-ordering applied. At least this is working.");
