@@ -538,12 +538,47 @@ campaignTrail_temp.achievements = {
         "image" : "https://www.themsuspokesman.com/wp-content/uploads/2014/11/Larry-Hogan.crop_.jpg",
         "description" : "As Larry Hogan, win the election.",
         "cannotBeCheated" : true
+    },
+    "Who Am I Running Against?" : {
+        "image" : "https://file.garden/aQrk4ZgQJCx_hnkl/Achievements/Omalley2014",
+        "description" : "As Larry Hogan, attack Governor O'Malley as much as possible.",
+        "cannotBeCheated" : true
     }
 }
 
-//Css
+//Css and UI
+document.getElementById("inner_window_1").children[0].innerHTML="<h3>Do you have what it takes to win a Gubernatorial Election?</i></h3>"
+
 function addDynamicCSS() {
     var css = `
+
+        .inner_window_question h3 {
+            margin: 0 1em .5em;
+            border: double;
+            border-color: #c9c9c9;
+            background-color: antiquewhite;
+        }
+
+        #map_container {
+            height: 90%;
+            width: 75%;
+            float: left;
+            margin-top: 1em;
+            margin-left: 1em;
+            border-style: double;
+            border-color: #C9C9C9;
+            background-color: antiquewhite;
+        }
+
+        .overlay_window h3 {
+            margin: 0;
+            padding: .3em 0 .1em;
+            font-weight: 700;
+            font-size: 1.5em;
+            background-color: antiquewhite;
+            border-bottom: double;
+            border-color: #C9C9C9;
+        }
 
         #campaign_sign p {
             margin: .1em;
@@ -573,6 +608,26 @@ function addDynamicCSS() {
 
         button {
             background: #964B00;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #733a01;
+            color: #FFFFFF;
+            border: 2px solid #DAA520;
+            font-family: "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:active {
+            background: #4a2601;
             color: #FFFFFF;
             border: 2px solid #DAA520;
             font-family: "Arial", sans-serif;
