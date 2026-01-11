@@ -25931,7 +25931,7 @@ const mainEndings = [
     },
 	{
         id: "thekidsarealright",
-		condition: (rightThirdEV, leftThirdEV, leftNomineeName) => leftThirdEV > 269 && (leftNomineeName === "Soleil Moon Frye" || leftNomineeName === "Susan Sarandon"),
+		condition: (ev, op, rightThirdEV, leftThirdEV, leftNomineeName) => leftThirdEV > 269 && (leftNomineeName === "Soleil Moon Frye" || leftNomineeName === "Susan Sarandon"),
         image: "https://file.garden/aNtAfG887DiA_7lO/2012LBM/soleil-and-justin.jpg",
         html: `<div style="background: linear-gradient(to bottom, #f9f6f0, #f4f0e8); color: #2c2824; font-family: 'Garamond', 'Georgia', serif; padding: 36px 40px; line-height: 1.9; font-size: 0.95em; border: 1px solid #e0d8c8; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
         
@@ -26004,7 +26004,7 @@ const mainEndings = [
 	},
 	{
         id: "generic_3rdparty_win",
-		condition: (ev, rightThirdEV, leftThirdEV) => ev < 269 && (rightThirdEV > 269 || leftThirdEV > 269),
+		condition: (ev, op, rightThirdEV, leftThirdEV) => ev < 269 && (rightThirdEV > 269 || leftThirdEV > 269),
         image: "https://pbs.twimg.com/media/G9lAI6aX0AAqTZe?format=jpg&name=large",
         html: `<div style="background: linear-gradient(to bottom, #FDF8E7, #F5EED6); color: #4A4236; border: 1px solid #C9B99A; border-radius: 8px; padding: 20px; font-family: Georgia, serif; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
 
@@ -29819,6 +29819,13 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
         }
     }
+	const rightThirdResult = aa.find(r => r.candidate === 18); 
+	const leftThirdResult = aa.find(r => r.candidate === 19);
+
+	const rightThirdEV = rightThirdResult ? rightThirdResult.electoral_votes : 0;
+	const leftThirdEV = leftThirdResult ? leftThirdResult.electoral_votes : 0;
+	const leftCandidateData = campaignTrail_temp.candidate_json.find(c => c.pk === 19);
+	const leftNomineeName = leftCandidateData ? (leftCandidateData.first_name + " " + leftCandidateData.last_name).trim() : "";
 	
 	// for the achievements
 	if (out === "win") {
@@ -29928,7 +29935,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 	}
     
     // select main ending (slide 0)
-    const selectedScenario = mainEndings.find(ending => ending.condition(playerEV, opponentEVs));
+	const selectedScenario = mainEndings.find(ending => ending.condition(playerEV, opponentEVs, rightThirdEV, leftThirdEV, leftNomineeName));
 
     if (!selectedScenario) {
         console.error("No ending scenario matched.");
