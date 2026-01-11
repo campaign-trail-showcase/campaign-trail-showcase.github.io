@@ -36108,67 +36108,90 @@ e.vpSwitcher = () => {
   
   const candidateObserver = new MutationObserver(onGameWindowChangeCandidates);
   candidateObserver.observe(gameWindowNode, candidateWatcherConfig);
-  // constructs endings based on header and pages
-  construct = (a = 1) => {
-      e.page = e.page + a < e.pages.length ? e.page + a : 0
-      let html = e.header;
-      html += e.pages[e.page] + "<br>";
-      if (e.page > 0) {
-      html += `<button style="color:white;background-color:rgb(45, 79, 107);border-color:white;" onclick="endingConstructor(a = 1)">Back</button>`
-      }
-      if (e.page < e.pages.length - 1) {
-      html += `<button style="color:white;background-color:rgb(45, 79, 107);border-color:white;" onclick="endingConstructor(a = 1)">Next</button>`
-      }
   
-      for (i in e.executable) {
-          if (e.executable[i][0] == e.page) {
-              e.executable[i][1]();
-          }
-      }
-  
-      if (e.image == true)
-      setTimeout(()=>{
-          candImg = $(".person_image")[0]
-          if (candImg) {
-          candImg.remove()
-          $("#final_results_description")[0].style = `
-              text-align:center;
-              width: 62%;
-              height:69%;
-              text-overflow: ellipsis;
-              display: block;
-              margin-left: auto;
-              margin-right: auto;
-              overflow: auto;
-          `
-          console.log("RESULTS UPDATED");
-          }
-      }, 10)
-      else if (e.image)
-      setTimeout(()=>{
-          candImg = $(".person_image")[0];
-          if (candImg) {
-          candImg.src = e.image;
-          console.log("TRYING");
-          $("#final_results_description")[0].style = `
-              text-align:center;
-              width: 62%;
-              height:69%;
-              display: block;
-              margin-left: auto;
-              margin-right: auto;
-              overflow: auto;
-          `
-          console.log("RESULTS UPDATED");
-          }		
-      }, 10)
-  
-      return html;
-  }
-  
-  endingConstructor = (a = 1) => {
-      $("#final_results_description")[0].innerHTML = construct(a);
-  }
+// constructs endings based on header and pages
+construct = (a = 1) => {
+    e.page = e.page + a < e.pages.length ? e.page + a : 0;
+    
+    const parts = [e.header, e.pages[e.page], "<br>"];
+    
+    if (e.page > 0) {
+        parts.push(`<button style="background-color: rgb(45, 79, 107); color: #fff; border-color: #fff" onclick='endingConstructor(-1)'>Back</button>`);
+    }
+    if (e.page < e.pages.length - 1) {
+        parts.push(`<button style="background-color: rgb(45, 79, 107); color: #fff; border-color: #fff" onclick='endingConstructor(1)'>Next</button>`);
+    }
+    
+    for (let i = 0; i < e.executable.length; i++) {
+        if (e.executable[i][0] === e.page) {
+            e.executable[i][1]();
+        }
+    }
+    
+    if (e.image !== false) {
+        handleImageUpdate();
+    }
+    
+    return parts.join('');
+};
+
+// to handle ending images
+const handleImageUpdate = () => {
+    const updateImage = () => {
+        const candImg = $(".person_image")[0];
+        const resultsDesc = $("#final_results_description")[0];
+        
+        if (candImg && resultsDesc) {
+            if (e.image === true) {
+                candImg.remove();
+            } else {
+                candImg.src = e.image;
+                resultsDesc.classList.add("has-scrollbar");
+            }
+            
+            resultsDesc.style.cssText = `
+                text-align: left;
+                width: 72%;
+                height: 71%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                overflow: auto;
+            `;
+            
+            return true;
+        }
+        return false;
+    };
+    
+    if (updateImage()) return;
+    
+    const resultsDesc = $("#final_results_description")[0];
+    if (!resultsDesc) {
+        setTimeout(updateImage, 10);
+        return;
+    }
+    
+    const observer = new MutationObserver((mutations, obs) => {
+        if (updateImage()) {
+            obs.disconnect();
+        }
+    });
+    
+    observer.observe(resultsDesc, {
+        childList: true,
+        subtree: true
+    });
+    
+    setTimeout(() => observer.disconnect(), 1000);
+};
+
+endingConstructor = (a = 1) => {
+    const resultsDesc = $("#final_results_description")[0];
+    if (resultsDesc) {
+        resultsDesc.innerHTML = construct(a);
+    }
+};
   
   e.multiple_endings = true;
   
@@ -36224,7 +36247,7 @@ e.vpSwitcher = () => {
       var endingstuff = {
           "Win Type": (function(val) { return (aa[0].electoral_votes >= 270 && aa[0].candidate == 79) ? "Perot" : val >= 348 ? "Massive Win" : val >= 310 ? "Decent Win" : val >= 270 ? "Close Win" : val === 269 ? "Deadlock" : val >= 230 ? "Close Loss" : val >= 190 ? "Decent Loss" : val < 190 ? "Massive Loss" : "error";})(playerEV),
           "Answer Check": true,
-          "Establishment Use": estab,
+		  "Establishment Use": (function(val) { return val >= 0 ? "High" : "Low"; })(estab),
           "Running Mate": e.running_mate_last_name
   }
   applyFaithlessElectors(80);  
@@ -38323,82 +38346,105 @@ e.vpSwitcher = () => {
                       "Running Mate": e.running_mate_last_name
               },            
               "ending text": `
-                  Dayton, Ohio. November 8th, 2016
-  
-                  6:00 pm
-                  Away at college, Charlie had been dreading the fall semester in early 2016. She had graduated with her art degree, and had to move back in with her parents. That meant hearing a whole bunch of political discussion, with them constantly taking shots at her more liberal views. As much as she loved her folks, and tolerated her brother, they were very stupid. They said that college had brainwashed her, but she had always been sharper than them. Her parents were really just simple laborers. Unthinking denizens of Middle America. The vast silent majority. Cruz voters. Morons.
-  
-                  Charlie’s ruminations were interrupted by her dipshit brother. “Charlotte!” He knew it was Charlie, the asshole. “You coming down for the results?” She considered staying in her room, chatting online with fellow Brownshirts, hoping for a miracle. Beyond her phone, it was really just the My Chemical Romance posters in her room, though dated, still provided comfort. But she couldn’t resist. Poking her head out the door and pottering down the stairs; the election spread awaited her on the coffee table like a feast at a royal table. Chips and cookies and beer, oh my. Her portly father smiled and patted the seat next to him. “Now Charlie, I know you may not like the results, but we’re family first and foremost.”
-  
-                  Charlie smiled and nodded gingerly. “You uh, really don’t think Jerry will pull it off?” From behind, Charlie's mother scoffed and sauntered in, holding a tray of pretzels and cocktail sausages, before plopping down at the table. She chewed on a pretzel like a cow, letting her two brain cells rub together as she collected her thoughts.
-  
-                  “Now, Charlie, I know that Mr. Cruz isn’t quite the same as President Romney. Maybe a little less charming, sure. Maybe he has a few issues. But he’s a strong man, and he’s going to be a good president. Especially with how just… peculiar that Brown fellow is, I mean, I just don’t see how Cruz loses. Besides, Brown already lost back in the day, and Cruz has been leading in all of the polls, after all. That thing with the documents, people don’t really care about that. The polling is never this wrong.”
-  
-                  7:00 pm
-                  And we can call Kentucky for Cruz, and Vermont for Brown
-  
-                  “See, look at that lead. Sorry Charlotte, but it’s, it’s academic. It’s over for Jerry.” Charlie smiled and nodded at her brother’s insistence. “It’s difficult to see a path to victory without Kentucky, sure. It’s like losing West Virginia. Devastating.”
-  
-                  The matriarch dipped her chip into the dip, savoring it slowly. The newscasters noted how Brown had won 45% of the vote in Warren County. “Hey,” said the mother, “that’s funny. I have some cousins down in Bowling Green. Wonder what’s going on down there, heh.”
-  
-                  That was an interesting result, wasn’t it? Indeed, as the results came in, it seemed like Kentucky was a shade bluer than last time. West Virginia, called as soon as the polls closed, also seemed a shade bluer. But would it be enough? Charlie was unsure. The Brownshirts faced strong odds, after all.
-  
-                  8:00 pm
-                  Ted Cruz has won Alabama, Mississippi, Tennessee, Oklahoma; Jerry Brown has won Connecticut, Delaware, Illinois, Maryland, Massachusetts, New Jersey, Rhode Island.
-  
-                  Charlie’s brother looked at the screen, confused. “The South Carolina results, shouldn’t those have been called already?” 
-  
-                  The father just nodded. He cast his ballot for Cruz, of course, but he’s not quite as invested as the rest of his family. The way he sees it, most of politics is tricks by crooks anyway. “Well, maybe they’re just taking their time. Cruz is going to win that one anyway. Everybody knows that.”
-  
-                  9:00 pm
-                  Ted Cruz wins North Dakota, South Dakota, Wyoming, Louisiana; Jerry Brown wins New York, New Mexico.
-                      The matriarch massaged her temples. “Indiana, why haven’t they called Indiana? Cruz has been leading the polls there by a ton. They should’ve called that one the second the polls closed, along with Kentucky.”
-  
-                      Charlie just looked at the results. The margin in New Mexico was impressive, really impressive. Brown had doubled what Feingold had got there in 2012. The Dakotas had only shown a little bit of movement, but Louisiana seemed to have a purpler tone than usual, even if it had been called immediately.
-  
-                      She finally relented and helped herself to a pretzel, washing it down with a glass of water. It wasn’t half bad, really. It was a pretty decent attempt at a pretzel.
-  
-                      Later, the television sounded. “And now, we can project that Jerry Brown has won the state of Colorado.”
-  
-                      Charlie’s eyes darted up, as did those of her brother. What time was it? 9:45? Colorado was supposed to be a swing state; Romney had won it by a hair. The camera cut to a shot of Brown’s election night rally, where people were cheering and chanting. Was this the start of something?
-  
-                  10:00 pm
-                  We can now call Indiana, South Carolina, and Louisiana for Ted Cruz.
-  
-                      The brother roared. “There we go, there we go! See, they came back home, they always come back home!”
-  
-                      The mother nodded in approval. “That’s good. It’s a good start. I feel like they should’ve called Texas by now, right? Cruz is a Texan, so you know that they’ll all turn out to elect one of their own.”
-  
-                      Charlie, meanwhile, was watching the Ohio results. She felt like she had been one tiny blue vote in a sea of red, but as the results came in, the map was starting to look funny. Hamilton County was going blue. It never went blue. Something was happening. 
-  
-                  11:00 pm
-                  With 80% of the vote in, we can safely project Florida going to Jerry Brown.
-  
-                      Charlie jumped in the air. Florida! Hell yeah! 
-  
-                      The other three people in the room just sat there in stunned silence. This couldn’t be happening. Jerry Brown was too much of a kook, too far outside of the mainstream, to win. This guy? Seriously? This loser had won Florida?
-  
-                      The brother ran his fingers through his hair. “That can’t be correct. They still haven’t counted the votes in the panhandle. That’s deep Cruz country, very religious people. I mean it’s… it’s just not possible. Romney won the state by four. Cruz is a Cuban! Hispanics love him! You just wait for a bit, once they count all of the votes, it’ll be just like 2000. They’ll retract the call… they have to retract the call.”
-  
-                      The mother had moved from eating to frantically chewing her nails. “Cruz can’t have lost Florida. No way. They love him down there. He’s the perfect candidate for the state.”
-  
-                      The television flashed that Cruz had won Idaho while Brown had won Oregon. Charlie yelled, “Oh, damn, Cruz got Idaho! Call the whole election, it’s all over now!”
-  
-                      The father just sat there and cracked open a beer as North Carolina, Michigan, and Pennsylvania were called for Brown. 
-  
-                  12:00 pm
-                  Jerry Brown has won the state of Ohio and exceeded 270 electoral votes. Jerry Brown has been elected the next president of the United States.
-  
-                      The father had passed out on the couch. The mother had a Bible in her hand and was fervently praying, asking how this had happened. The brother was beside himself, asking how this could possibly have happened.
-  
-                      Charlie just sat there smugly, reveling in all of it. “Now everybody, we’re all family here. 
-                  You guys might not like the results, but it’s just politics, right?”
-  
-                      “Fuck you!” screamed her dipshit brother, as her mom completely ignored her.
-  
-                      “Hey, there’s virtue in being gracious in defeat, right? Isn’t that what you guys told me four years ago? Suck it up, buttercup.” Laughing to herself, Charlie walked back up the stairs and went back to her room, back to the My Chemical Romance posters. Suddenly, Ohio didn’t seem so bad at all. The world didn’t seem so bad at all.
-  
-                      She laid back on her bed, put her headphones in, letting the soothing sounds of Fall Out Boy wash over her. It still didn’t feel real, but she was happy nonetheless. Sure, she was happy for the prospect of Jerry Brown. It was true. But really, what had made her day wasn’t the results of the election, but that she had gotten a chance to get one over on her idiot family. That made all of it worthwhile. 
+                  <h1>Dayton, Ohio. November 8th, 2016</h1>
+
+					<div class="timestamp">6:00 pm</div>
+
+					<p>Away at college, Charlie had been dreading the fall semester in early 2016. She had graduated with her art degree, and had to move back in with her parents. That meant hearing a whole bunch of political discussion, with them constantly taking shots at her more liberal views. As much as she loved her folks, and tolerated her brother, they were very stupid. They said that college had brainwashed her, but she had always been sharper than them. Her parents were really just simple laborers. Unthinking denizens of Middle America. The vast silent majority. Cruz voters. Morons.</p>
+
+					<p>Charlie’s ruminations were interrupted by her dipshit brother. “Charlotte!” He knew it was Charlie, the asshole. “You coming down for the results?” She considered staying in her room, chatting online with fellow Brownshirts, hoping for a miracle. Beyond her phone, it was really just the My Chemical Romance posters in her room, though dated, still provided comfort. But she couldn’t resist. Poking her head out the door and pottering down the stairs; the election spread awaited her on the coffee table like a feast at a royal table. Chips and cookies and beer, oh my. Her portly father smiled and patted the seat next to him. “Now Charlie, I know you may not like the results, but we’re family first and foremost.”</p>
+
+					<p>Charlie smiled and nodded gingerly. “You uh, really don’t think Jerry will pull it off?” From behind, Charlie's mother scoffed and sauntered in, holding a tray of pretzels and cocktail sausages, before plopping down at the table. She chewed on a pretzel like a cow, letting her two brain cells rub together as she collected her thoughts.</p>
+
+					<p>“Now, Charlie, I know that Mr. Cruz isn’t quite the same as President Romney. Maybe a little less charming, sure. Maybe he has a few issues. But he’s a strong man, and he’s going to be a good president. Especially with how just… peculiar that Brown fellow is, I mean, I just don’t see how Cruz loses. Besides, Brown already lost back in the day, and Cruz has been leading in all of the polls, after all. That thing with the documents, people don’t really care about that. The polling is never this wrong.”</p>
+
+					<div class="timestamp">7:00 pm</div>
+
+					<div class="news-flash">
+						And we can call Kentucky for Cruz, and Vermont for Brown
+					</div>
+
+					<p>“See, look at that lead. Sorry Charlotte, but it’s, it’s academic. It’s over for Jerry.” Charlie smiled and nodded at her brother’s insistence. “It’s difficult to see a path to victory without Kentucky, sure. It’s like losing West Virginia. Devastating.”</p>
+
+					<p>The matriarch dipped her chip into the dip, savoring it slowly. The newscasters noted how Brown had won 45% of the vote in Warren County. “Hey,” said the mother, “that’s funny. I have some cousins down in Bowling Green. Wonder what’s going on down there, heh.”</p>
+
+					<p>That was an interesting result, wasn’t it? Indeed, as the results came in, it seemed like Kentucky was a shade bluer than last time. West Virginia, called as soon as the polls closed, also seemed a shade bluer. But would it be enough? Charlie was unsure. The Brownshirts faced strong odds, after all.</p>
+
+					<div class="timestamp">8:00 pm</div>
+
+					<div class="news-flash">
+						Ted Cruz has won Alabama, Mississippi, Tennessee, Oklahoma; Jerry Brown has won Connecticut, Delaware, Illinois, Maryland, Massachusetts, New Jersey, Rhode Island.
+					</div>
+
+					<p>Charlie’s brother looked at the screen, confused. “The South Carolina results, shouldn’t those have been called already?”</p>
+
+					<p>The father just nodded. He cast his ballot for Cruz, of course, but he’s not quite as invested as the rest of his family. The way he sees it, most of politics is tricks by crooks anyway. “Well, maybe they’re just taking their time. Cruz is going to win that one anyway. Everybody knows that.”</p>
+
+					<div class="timestamp">9:00 pm</div>
+
+					<div class="news-flash">
+						Ted Cruz wins North Dakota, South Dakota, Wyoming, Louisiana; Jerry Brown wins New York, New Mexico.
+					</div>
+
+					<p>The matriarch massaged her temples. “Indiana, why haven’t they called Indiana? Cruz has been leading the polls there by a ton. They should’ve called that one the second the polls closed, along with Kentucky.”</p>
+
+					<p>Charlie just looked at the results. The margin in New Mexico was impressive, really impressive. Brown had doubled what Feingold had got there in 2012. The Dakotas had only shown a little bit of movement, but Louisiana seemed to have a purpler tone than usual, even if it had been called immediately.</p>
+
+					<p>She finally relented and helped herself to a pretzel, washing it down with a glass of water. It wasn’t half bad, really. It was a pretty decent attempt at a pretzel.</p>
+
+					<p>Later, the television sounded.</p> 
+					
+					<div class="news-flash">
+						“And now, we can project that Jerry Brown has won the state of Colorado.”
+					</div>
+
+					<p>Charlie’s eyes darted up, as did those of her brother. What time was it? 9:45? Colorado was supposed to be a swing state; Romney had won it by a hair. The camera cut to a shot of Brown’s election night rally, where people were cheering and chanting. Was this the start of something?</p>
+
+					<div class="timestamp">10:00 pm</div>
+
+					<div class="news-flash">
+						We can now call Indiana, South Carolina, and Louisiana for Ted Cruz.
+					</div>
+
+					<p>The brother roared. “There we go, there we go! See, they came back home, they always come back home!”</p>
+
+					<p>The mother nodded in approval. “That’s good. It’s a good start. I feel like they should’ve called Texas by now, right? Cruz is a Texan, so you know that they’ll all turn out to elect one of their own.”</p>
+
+					<p>Charlie, meanwhile, was watching the Ohio results. She felt like she had been one tiny blue vote in a sea of red, but as the results came in, the map was starting to look funny. Hamilton County was going blue. It never went blue. Something was happening.</p>
+
+					<div class="timestamp">11:00 pm</div>
+
+					<div class="news-flash">
+						With 80% of the vote in, we can safely project Florida going to Jerry Brown.
+					</div>
+
+					<p>Charlie jumped in the air. Florida! Hell yeah!</p>
+
+					<p>The other three people in the room just sat there in stunned silence. This couldn’t be happening. Jerry Brown was too much of a kook, too far outside of the mainstream, to win. This guy? Seriously? This loser had won Florida?</p>
+
+					<p>The brother ran his fingers through his hair. “That can’t be correct. They still haven’t counted the votes in the panhandle. That’s deep Cruz country, very religious people. I mean it’s… it’s just not possible. Romney won the state by four. Cruz is a Cuban! Hispanics love him! You just wait for a bit, once they count all of the votes, it’ll be just like 2000. They’ll retract the call… they have to retract the call.”</p>
+
+					<p>The mother had moved from eating to frantically chewing her nails. “Cruz can’t have lost Florida. No way. They love him down there. He’s the perfect candidate for the state.”</p>
+
+					<p>The television flashed that Cruz had won Idaho while Brown had won Oregon. Charlie yelled, “Oh, damn, Cruz got Idaho! Call the whole election, it’s all over now!”</p>
+
+					<p>The father just sat there and cracked open a beer as North Carolina, Michigan, and Pennsylvania were called for Brown.</p>
+
+					<div class="timestamp">12:00 pm</div>
+
+					<div class="news-flash">
+						Jerry Brown has won the state of Ohio and exceeded 270 electoral votes. Jerry Brown has been elected the next president of the United States.
+					</div>
+
+					<p>The father had passed out on the couch. The mother had a Bible in her hand and was fervently praying, asking how this had happened. The brother was beside himself, asking how this could possibly have happened.</p>
+
+					<p>Charlie just sat there smugly, reveling in all of it. “Now everybody, we’re all family here. You guys might not like the results, but it’s just politics, right?”</p>
+
+					<p>“Fuck you!” screamed her dipshit brother, as her mom completely ignored her.</p>
+
+					<p>“Hey, there’s virtue in being gracious in defeat, right? Isn’t that what you guys told me four years ago? Suck it up, buttercup.” Laughing to herself, Charlie walked back up the stairs and went back to her room, back to the My Chemical Romance posters. Suddenly, Ohio didn’t seem so bad at all. The world didn’t seem so bad at all.</p>
+
+					<p>She laid back on her bed, put her headphones in, letting the soothing sounds of Fall Out Boy wash over her. It still didn’t feel real, but she was happy nonetheless. Sure, she was happy for the prospect of Jerry Brown. It was true. But really, what had made her day wasn’t the results of the election, but that she had gotten a chance to get one over on her idiot family. That made all of it worthwhile.</p>
   
               `
           },
@@ -38417,50 +38463,53 @@ e.vpSwitcher = () => {
                       "Running Mate": e.running_mate_last_name
               },            
               "ending text": `
-                  <img src='https://i.imgur.com/yoztVdp.png'>
-                  US Government
-                  Twenty-eighth Amendment
-                  The 28th amendment requires the United States government to balance its annual budget. It was first introduced to Congress in 1878, but wasn't ratified until over 41 years later on August 18, 1920.
-  
-                  From the Constitution
-  
-                  Here is the text of the Nineteenth Amendment from the Constitution:
-  
-                  “Total outlays may not exceed total receipts for a fiscal year, unless three-fifths of the members of each House of Congress provide by law for a specific excess of outlays over receipts by a roll call vote.
-  
-                  There is a permanent limit on the amount of the public debt. This limit may not increase unless approved by a three-fifths majority in each House by roll call vote.
-  
-                  Any bill to increase revenue may not become law unless approved by a majority in each House by roll call vote.
-  
-                  The provisions of this amendment do not apply for any fiscal year in which a declaration of war is in effect, or if the United States faces an imminent and serious military threat to national security as declared by a joint resolution which becomes law.”
-  
-                  The Balanced Budget
-  
-                  A movement to balance the United States’ budget began in the 1980s, when the public began to get increasingly worried that the country was spending too much money compared to what it was earning. In 1992, President Jerry Brown was elected largely because of his popular promise to create an amendment to balance the budget, making it required for the government to spend no more than it earns. 
-  
-                  The Original Proposal
-  
-                  The amendment was first introduced by Senator Milard Tydings of Maryland in 1935, but it was mostly ignored at the time. Later, in 1982, a vote for the amendment passed in the Senate, but failed to get ⅔ of the vote in the House. 
-  
-                  Finally Passing Congress
-  
-                  The momentum for passing the amendment then stopped for many years. It wasn't until the early 1990s that Congress once again began to look at the amendment. In 1992, both candidates for president, Republican George Bush and Democrat Jerry Brown, supported the amendment. After Brown was inaugurated as president, the Senate voted in early 1993 after the House passed it, but failed to pass the amendment by one vote. President Brown, who had supported this amendment throughout his whole political career, called a special session of Congress in the Spring of 1994. He urged them to pass the amendment. Finally, on May 10, 1994, the Senate passed the amendment.
-  
-                  Ratification of the States
-  
-                  Since many states already had their own balanced budget amendments, and because the idea had gained popularity, the amendment was quickly ratified by a large number of states. By March of 1995, thirty-seven states had ratified the amendment. However, one more state was needed to meet the three-fourths requirement of the Constitution. Several states had also rejected the amendment and the final decision came down to the state of Nevada.
-  
-                  When the Nevada state legislature voted on the amendment, it first appeared to be deadlocked in a tie. Then state senator Dina Titus changed her vote and voted for the amendment on December 6, 1995. She later said that although she was against the amendment, everyone in her community was in favor of it, making her realize that it was better to pass it for the common good. 
-  
-                  The Balanced Budget
-  
-                  The year of 1996 was the first time that the U.S. government was required to balance its budget. This was mostly achieved by spending less on the military.
-  
-                  Interesting Facts about the Twenty-Eighth Amendment
-                  It is sometimes referred to as Amendment XXVIII. It has the nickname the "Brown Amendment" after President Brown.
-                  The only state that has not ratified the amendment is Vermont.
-                  The government has only spent more than it has earned in two years since the amendment was passed, in 2014 and 2015, when President Chet Culver and Congress agreed to spend extra money to help the struggling economy.
-                  In his successful re-election campaign in 1996, President Jerry Brown nicknamed himself “Slash,’ after a famous guitarist, due to his willingness to cut spending. 
+                  <div style="overflow: hidden;">
+					<img src='https://i.imgur.com/yoztVdp.png' alt="ducksters" style="float: right; width: 250px; margin: 0 0 20px 20px;">
+					
+					<p style="text-transform: uppercase; font-weight: bold; color: #555; margin-bottom: 5px;">US Government</p>
+					
+					<h1 style="margin-top: 0;">Twenty-eighth Amendment</h1>
+					
+					<p>The 28th amendment requires the United States government to balance its annual budget. It was first introduced to Congress in 1878, but wasn't ratified until over 41 years later on August 18, 1920.</p>
+				</div>
+
+				<h2>From the Constitution</h2>
+				<p>Here is the text of the Nineteenth Amendment from the Constitution:</p>
+
+				<blockquote style="background-color: #f4f4f4; border-left: 5px solid #333; color: #000; padding: 15px; font-family: serif; margin: 20px 0;">
+					<p>“Total outlays may not exceed total receipts for a fiscal year, unless three-fifths of the members of each House of Congress provide by law for a specific excess of outlays over receipts by a roll call vote.</p>
+
+					<p>There is a permanent limit on the amount of the public debt. This limit may not increase unless approved by a three-fifths majority in each House by roll call vote.</p>
+
+					<p>Any bill to increase revenue may not become law unless approved by a majority in each House by roll call vote.</p>
+
+					<p>The provisions of this amendment do not apply for any fiscal year in which a declaration of war is in effect, or if the United States faces an imminent and serious military threat to national security as declared by a joint resolution which becomes law.”</p>
+				</blockquote>
+
+				<h2>The Balanced Budget</h2>
+				<p>A movement to balance the United States’ budget began in the 1980s, when the public began to get increasingly worried that the country was spending too much money compared to what it was earning. In 1992, President Jerry Brown was elected largely because of his popular promise to create an amendment to balance the budget, making it required for the government to spend no more than it earns.</p>
+
+				<h2>The Original Proposal</h2>
+				<p>The amendment was first introduced by Senator Milard Tydings of Maryland in 1935, but it was mostly ignored at the time. Later, in 1982, a vote for the amendment passed in the Senate, but failed to get ⅔ of the vote in the House.</p>
+
+				<h2>Finally Passing Congress</h2>
+				<p>The momentum for passing the amendment then stopped for many years. It wasn't until the early 1990s that Congress once again began to look at the amendment. In 1992, both candidates for president, Republican George Bush and Democrat Jerry Brown, supported the amendment. After Brown was inaugurated as president, the Senate voted in early 1993 after the House passed it, but failed to pass the amendment by one vote. President Brown, who had supported this amendment throughout his whole political career, called a special session of Congress in the Spring of 1994. He urged them to pass the amendment. Finally, on May 10, 1994, the Senate passed the amendment.</p>
+
+				<h2>Ratification of the States</h2>
+				<p>Since many states already had their own balanced budget amendments, and because the idea had gained popularity, the amendment was quickly ratified by a large number of states. By March of 1995, thirty-seven states had ratified the amendment. However, one more state was needed to meet the three-fourths requirement of the Constitution. Several states had also rejected the amendment and the final decision came down to the state of Nevada.</p>
+
+				<p>When the Nevada state legislature voted on the amendment, it first appeared to be deadlocked in a tie. Then state senator Dina Titus changed her vote and voted for the amendment on December 6, 1995. She later said that although she was against the amendment, everyone in her community was in favor of it, making her realize that it was better to pass it for the common good.</p>
+
+				<h2>The Balanced Budget</h2>
+				<p>The year of 1996 was the first time that the U.S. government was required to balance its budget. This was mostly achieved by spending less on the military.</p>
+
+				<h2>Interesting Facts about the Twenty-Eighth Amendment</h2>
+				<ul>
+					<li>It is sometimes referred to as Amendment XXVIII. It has the nickname the "Brown Amendment" after President Brown.</li>
+					<li>The only state that has not ratified the amendment is Vermont.</li>
+					<li>The government has only spent more than it has earned in two years since the amendment was passed, in 2014 and 2015, when President Chet Culver and Congress agreed to spend extra money to help the struggling economy.</li>
+					<li>In his successful re-election campaign in 1996, President Jerry Brown nicknamed himself “Slash,” after a famous guitarist, due to his willingness to cut spending.</li>
+				</ul>
               `
           },
           {
@@ -38735,150 +38784,75 @@ e.vpSwitcher = () => {
               },
               "ending text": 
               `
-                  Eyewitness account from Irina M. Samoylova, translated into English by D. K. Robertson
-                  It was at this time that I decided that it was my turn to do what I suppose you could call my own
-                  version of a “walkabout.” Somewhere in my family, one of my ancestors on my mother’s side
-                  had been Evenki, an ancient Siberian tribe who lived in the far north of Russia. We seemed 100%
-                  Russian to me, but it had long been ingrained in my mother’s family that every woman, once
-                  they come of age, must go on a journey in the wild in order to better connect with nature, for it
-                  was the natural spirits who made up the structure of the universe. I wasn’t sure how much I
-                  believed that, but my mother and my aunt had done it, as had their mother, and so on and so
-                  forth.
-                  Finally, when I turned 22, my mother sat down with me and suggested that it was my time.
-                  Although I wasn’t looking forward to such an experience, I wasn’t dreading it either, and I let her
-                  guide me on where to go. Our family had lived in Krasnoyarsk for hundreds of years, and
-                  according to family legend, these journeys had occurred all over the Krai. We explored a great
-                  number of virtual maps together, until she finally landed on a journey through the sheer
-                  wilderness. I was to start from the town of Vanavara, which had its own small airport I could fly
-                  into, and make my way on skis to the settlement of Oskoba, 80 kilometers away. From there,
-                  they had a landing strip that I could use to call in a plane that would take me back to
-                  Krasnoyarsk. We were fortunate, very fortunate, that airfare in Siberia was so cheap.
-                  In the depths of January, with the temperature far into the negatives and snow blanketing the
-                  ground, I found myself in Vanavara. The local people were quite amused at me doing such a
-                  thing, but most of them seemed more impressed than anything. After all, I had a navigation
-                  system and satellite connection, and if the absolute worst came, I could get out of it. Rather than
-                  worry, people were just fascinated that I had the audacity to even try in the first place, and
-                  several wished me luck.
-                  And so, after a night of solyanka and vodka, I found myself setting out the next morning, ready
-                  for a grueling two days of skiing. Still, the snow covering everything gave the world a sense of
-                  wonder and beauty, and it gave me the energy to keep on going onwards. The first day passed in
-                  solemn, solitary wonder, and although I would be lying if I said that I felt like I was getting in
-                  touch with those Evenki spirits, it was a truly cleansing experience, me and my body and nature
-                  all moving in synchronization. As night approached quite early in January at that latitude, I
-                  started looking for a place to make camp for the evening.
-                  After I had pitched a tent and made a fire, I took the chance to look at where I was using
-                  geolocation. That was when the bad news started: somehow, instead of going roughly along the
-                  course of the Podkamennaya Tunguska river, on a fairly straight shot to Oskoba, I had veered
-                  farther north, going into the Tunguska basin and the northern marshes. I was far, far away from
-                  Oskoba, decidedly in the middle of nowhere and with a minimum of two extra days of skiing,
-                  maybe even three. I was decidedly screwed.
-                  Then, things got even worse and it started snowing. The snow started to come down harder,
-                  threatening to cover my entire tent. Desperately, I got out of the tent and tried to see how bad it
-                  was. I quickly realized that it was even worse than I had thought, and that the snow was
-                  somehow more heavy than I had realized. Now was definitely the time to make a call. I quickly
-                  tried to get my satellite phone working, but my hands were too cold, even through my gloves,
-                  and I slipped with it several times. Finally, I was able to actually touch the buttons on the phone,
-                  only to realize that they didn’t work.
-                  Dejected, I crawled back in my tent and curled up for warmth. I was probably about to die, and I
-                  sat there crying, trying to make my peace with it. I was just 22; I wasn’t ready for it. And so
-                  there I sat, on the path to an early rendezvous with fate. Was this really how it was going to end?
-                  After sitting there for some time, I heard a set of footsteps crunching through the snow. Maybe it
-                  was a bear or something, here to put me out of my misery. Maybe I was, for real, about to die,
-                  not from the cold but from the appetite of a grizzly. Whatever it was, I turned my eyes to the
-                  tent’s entrance as it slowly unzipped, and as a white, blinding light filled my vision, I fainted
-                  from fear.
-                  When I woke up, I didn’t recognize my surroundings at all. I was sitting in a lounge chair inside
-                  some sort of cabin, rough-hewed but clearly made with love and care. In the corner, a large fire
-                  burned, giving me the warmth I so desperately needed. Over the fire hung some sort of flag, with
-                  a picture of a bear over some words in English that didn’t make any sense to me. The rest of the
-                  cabin was simple, consisting of a wardrobe, a bed, a table, a cabinet, and a stove. The only other
-                  decoration I could see was a picture of a family, a black-and-white one, with a father and mother
-                  lovingly looking at three girls and one boy.
-                  Suddenly, the cabin’s door opened, and in walked a man wearing a fur coat, matched with a fur
-                  hat and leather boots. As he shut the door and restored the room’s warmth, I got a better look at
-                  him. He looked to be a youngish man in his mid-30s or so, with piercing brown eyes, a strong,
-                  slightly thin face, and styled dark hair whose graying sideburns gave him a touch of authority. He
-                  took off his coat and sat down across from me, his eyes piercing through my skin into my
-                  Siberian soul.
-                  “Welcome to my home. I’ve been called a few things over the years, but you can call me
-                  Edmund.” His Russian was grammatically perfect, but it was betrayed by a strong foreign accent
-                  that made it sound like he was almost launching the words out of his mouth. “You’re really lucky
-                  that I happened across you out in the woods like that. I don’t know if you would have survived
-                  much longer.”
-                  “Thank you, thank you so much,” I responded, “but what… what is this? This is Siberia. We’re
-                  so far away from everything. How do you live out here? What even is this?”
-                  Edmund’s eyes lit up, although he didn’t quite form a full smile. “Yeah, that’s a question that I’ve
-                  asked myself a lot over the years. You can either hear the short version, which will be confusing
-                  but will be fairly easy to digest, or you can hear the long version, which will make perfect sense
-                  only if you, who I’m guessing is a college aged girl from Siberia, having an encyclopedia
-                  understanding of some old history of the United States.”
-                  “Is there a middle path? Maybe one where I get an explanation but I’m not confused?”
-                  This time, he really did laugh. “I don’t know that there really is one, but I’ll try my best here. A
-                  long time ago, in America, there used to be 50 states joined together by one federal government.
-                  It was like that when I was growing up, but as I became an adult, it got worse and worse. There
-                  was a group of people dedicated to hoarding as much wealth and power as possible for
-                  themselves, and they slowly began seeping into every corner of American society, infecting the
-                  nation.”
-                  “But, there was still some hope. You see, I was the leader of one of these states, they elected
-                  me–yes, we used to have actual elections back then–and I tried my hardest to resist this group of
-                  people, this cabal. I failed, then failed again, then failed again so hard that I went on a journey
-                  around the world to see if there was any hope left at all. And in India, deep inside the bustling
-                  city of Calcutta, I met a holy man who told me that if there was truly no hope left, that my only
-                  salvation was to travel north, to the land that had been punished by God himself. There, in the
-                  midst of His destruction, would I find humanity’s last chance.”
-                  “I paid no mind, and on that journey, I met some people, did some things, that made me think
-                  that I still had a chance. And so I returned to America, where I made my last stand against this
-                  cabal. For a moment, I thought that I was to be victorious, but I miscalculated. I miscalculated
-                  terribly, and lost a stunning loss, the type of ground-shattering type of event that makes you
-                  realize that nothing is ever really going to be the same after it.”
-                  “So I left America for good, and in that time that I left, the cabal grew and grew and grew until it
-                  had engulfed the whole government, swallowing it whole. If you know about America’s Time of
-                  Troubles, that’s when it really started. But I wasn’t in America: I was traveling across Asia, in
-                  search of this Northern land the holy man had spoken of. First, I scaled the icy peaks of the
-                  Himalayas, scouring Nepal and Tibet for a sign, but to no avail. Then, I scoured the vast
-                  emptiness of the Gobi Desert and the Mongol steppes, searching for any evidence of this
-                  punished land, but still without a resolution.”
-                  “In that time, my bones began to grow weary, and my body began to break down. As the world
-                  fell deeper into a panic, as the markets and systems crashed, I found myself up here, in Siberia,
-                  in search of this punished land. And then, in a place not too far from here… I found it.”
-                  “And what was it? You’ve told such a dramatic story.”
-                  “What was it? Even if I told you, you wouldn’t believe me. Just know that out there, tucked away
-                  deep within the forests, is proof that we’re not alone in this mortal realm. Whatever it is, it gave
-                  me the strength to carry on, to regain my energy, my vigor, that I had lost in my search.”
-                  “And here in Siberia? Why stay? What else could you possibly have to do if you found it.”
-                  Edmund laughed again. “That is a question for me, and me only, to know. All you should know
-                  is that one day, when I’m needed the most, I’ll come back to society. Until then, I’m quite
-                  content to enjoy some nature here. It’s really lovely, if you didn’t already know.”
-                  I was completely bewildered at this man’s story. More likely, he was just some sort of hermit
-                  from some insane sect who had decided to throw it all away and live by himself. Maybe he
-                  planned to slit my throat in his sleep, for all I knew. Still, I had to play nice.
-                  “So, what now?”
-                  “Now, we make sure that you get your rest up, and I’ll make sure that you get sent in the right
-                  direction.”
-                  Edmund got the stove working and made me a soup which was surprisingly enjoyable. Then, we
-                  sat around the fire and started a new conversation, this time about Russian history, that segued its
-                  way into a whole host of other things until we finally arrived at modern Siberian techno music,
-                  which he was surprisingly well-versed in, just as he had been on every topic. Perhaps the story
-                  had just been something to mess with me.
-                  The next morning, Edmund gave me the most efficient directions possible and sent me on my
-                  way, cheerfully waving me off. I gave him one last glance, him and his little hut, and by the next
-                  time I turned my head, they were completely gone in the snow. I fought through the snow like
-                  my life depended on it, and somehow reached Oskoba that very night, which came as quite a
-                  surprise to the locals. None of them had ever met Edmund or heard of him.
-                  The next day, the plane came to pick me up, and I was back in Krasnoyarsk like nothing had
-                  happened, right on schedule. I tried to shake the whole experience off, but it was just too much to
-                  bear, and I went to my mother to talk about it. When she saw me, she turned as white as a sheet,
-                  slowly touching my skin, as if she was trying to tell if I was real. She explained to me that my
-                  aura had the mark of the Evenki spirits in the same manner that one would be marked for death,
-                  but I was somehow fine despite that. I told her about my experience, and she was just as
-                  confused as I was, musing that perhaps Edmund was on the run from the law in some sense.
-                  That summer, when all of the snow had melted, I went back up to the Podkamennaya Tunguska
-                  area, this time with my mother, in search of the mysterious man. We chartered a plane which
-                  covered the entire area that I could have possibly travelled by ski and used the newest technology
-                  to search it down to the smallest rock, but there was just nothing. He wasn’t there. Despite that, I
-                  always had a feeling, a feeling that my mother began to share, somehow based on the spirits or
-                  the like, that I hadn’t seen the last of this Edmund. And indeed, as we all learned later, I hadn’t.
-                  Irina M. Samoylova, 2083
+                  <div style="background: linear-gradient(to bottom, #FDF8E7, #F5EED6); color: #4A4236; border: 1px solid #C9B99A; border-radius: 8px; padding: 30px; font-family: Georgia, serif; box-shadow: 0 1px 3px rgba(0,0,0,0.15); line-height: 1.6;">
+
+					<h3 style="text-align: center; font-weight: normal; font-style: italic; color: #7A6B52; letter-spacing: 1px; margin-bottom: 30px;">
+						Eyewitness account from Irina M. Samoylova,<br>translated into English by D. K. Robertson
+					</h3>
+
+					<p style="text-indent: 20px;">It was at this time that I decided that it was my turn to do what I suppose you could call my own version of a “walkabout.” Somewhere in my family, one of my ancestors on my mother’s side had been Evenki, an ancient Siberian tribe who lived in the far north of Russia. We seemed 100% Russian to me, but it had long been ingrained in my mother’s family that every woman, once they come of age, must go on a journey in the wild in order to better connect with nature, for it was the natural spirits who made up the structure of the universe. I wasn’t sure how much I believed that, but my mother and my aunt had done it, as had their mother, and so on and so forth.</p>
+
+					<p style="text-indent: 20px;">Finally, when I turned 22, my mother sat down with me and suggested that it was my time. Although I wasn’t looking forward to such an experience, I wasn’t dreading it either, and I let her guide me on where to go. Our family had lived in Krasnoyarsk for hundreds of years, and according to family legend, these journeys had occurred all over the Krai. We explored a great number of virtual maps together, until she finally landed on a journey through the sheer wilderness. I was to start from the town of Vanavara, which had its own small airport I could fly into, and make my way on skis to the settlement of Oskoba, 80 kilometers away. From there, they had a landing strip that I could use to call in a plane that would take me back to Krasnoyarsk. We were fortunate, very fortunate, that airfare in Siberia was so cheap.</p>
+
+					<p style="text-indent: 20px;">In the depths of January, with the temperature far into the negatives and snow blanketing the ground, I found myself in Vanavara. The local people were quite amused at me doing such a thing, but most of them seemed more impressed than anything. After all, I had a navigation system and satellite connection, and if the absolute worst came, I could get out of it. Rather than worry, people were just fascinated that I had the audacity to even try in the first place, and several wished me luck.</p>
+
+					<p style="text-indent: 20px;">And so, after a night of solyanka and vodka, I found myself setting out the next morning, ready for a grueling two days of skiing. Still, the snow covering everything gave the world a sense of wonder and beauty, and it gave me the energy to keep on going onwards. The first day passed in solemn, solitary wonder, and although I would be lying if I said that I felt like I was getting in touch with those Evenki spirits, it was a truly cleansing experience, me and my body and nature all moving in synchronization. As night approached quite early in January at that latitude, I started looking for a place to make camp for the evening.</p>
+
+					<p style="text-indent: 20px;">After I had pitched a tent and made a fire, I took the chance to look at where I was using geolocation. That was when the bad news started: somehow, instead of going roughly along the course of the Podkamennaya Tunguska river, on a fairly straight shot to Oskoba, I had veered farther north, going into the Tunguska basin and the northern marshes. I was far, far away from Oskoba, decidedly in the middle of nowhere and with a minimum of two extra days of skiing, maybe even three. I was decidedly screwed.</p>
+
+					<p style="text-indent: 20px;">Then, things got even worse and it started snowing. The snow started to come down harder, threatening to cover my entire tent. Desperately, I got out of the tent and tried to see how bad it was. I quickly realized that it was even worse than I had thought, and that the snow was somehow more heavy than I had realized. Now was definitely the time to make a call. I quickly tried to get my satellite phone working, but my hands were too cold, even through my gloves, and I slipped with it several times. Finally, I was able to actually touch the buttons on the phone, only to realize that they didn’t work.</p>
+
+					<p style="text-indent: 20px;">Dejected, I crawled back in my tent and curled up for warmth. I was probably about to die, and I sat there crying, trying to make my peace with it. I was just 22; I wasn’t ready for it. And so there I sat, on the path to an early rendezvous with fate. Was this really how it was going to end?</p>
+					
+					<p style="text-indent: 20px;">After sitting there for some time, I heard a set of footsteps crunching through the snow. Maybe it was a bear or something, here to put me out of my misery. Maybe I was, for real, about to die, not from the cold but from the appetite of a grizzly. Whatever it was, I turned my eyes to the tent’s entrance as it slowly unzipped, and as a white, blinding light filled my vision, I fainted from fear.</p>
+
+					<p style="text-indent: 20px;">When I woke up, I didn’t recognize my surroundings at all. I was sitting in a lounge chair inside some sort of cabin, rough-hewed but clearly made with love and care. In the corner, a large fire burned, giving me the warmth I so desperately needed. Over the fire hung some sort of flag, with a picture of a bear over some words in English that didn’t make any sense to me. The rest of the cabin was simple, consisting of a wardrobe, a bed, a table, a cabinet, and a stove. The only other decoration I could see was a picture of a family, a black-and-white one, with a father and mother lovingly looking at three girls and one boy.</p>
+
+					<p style="text-indent: 20px;">Suddenly, the cabin’s door opened, and in walked a man wearing a fur coat, matched with a fur hat and leather boots. As he shut the door and restored the room’s warmth, I got a better look at him. He looked to be a youngish man in his mid-30s or so, with piercing brown eyes, a strong, slightly thin face, and styled dark hair whose graying sideburns gave him a touch of authority. He took off his coat and sat down across from me, his eyes piercing through my skin into my Siberian soul.</p>
+
+					<p style="text-indent: 20px;">“Welcome to my home. I’ve been called a few things over the years, but you can call me Edmund.” His Russian was grammatically perfect, but it was betrayed by a strong foreign accent that made it sound like he was almost launching the words out of his mouth. “You’re really lucky that I happened across you out in the woods like that. I don’t know if you would have survived much longer.”</p>
+
+					<p style="text-indent: 20px;">“Thank you, thank you so much,” I responded, “but what… what is this? This is Siberia. We’re so far away from everything. How do you live out here? What even is this?”</p>
+
+					<p style="text-indent: 20px;">Edmund’s eyes lit up, although he didn’t quite form a full smile. “Yeah, that’s a question that I’ve asked myself a lot over the years. You can either hear the short version, which will be confusing but will be fairly easy to digest, or you can hear the long version, which will make perfect sense only if you, who I’m guessing is a college aged girl from Siberia, having an encyclopedia understanding of some old history of the United States.”</p>
+
+					<p style="text-indent: 20px;">“Is there a middle path? Maybe one where I get an explanation but I’m not confused?”</p>
+
+					<p style="text-indent: 20px;">This time, he really did laugh. “I don’t know that there really is one, but I’ll try my best here. A long time ago, in America, there used to be 50 states joined together by one federal government. It was like that when I was growing up, but as I became an adult, it got worse and worse. There was a group of people dedicated to hoarding as much wealth and power as possible for themselves, and they slowly began seeping into every corner of American society, infecting the nation.”</p>
+
+					<p style="text-indent: 20px;">“But, there was still some hope. You see, I was the leader of one of these states, they elected me–yes, we used to have actual elections back then–and I tried my hardest to resist this group of people, this cabal. I failed, then failed again, then failed again so hard that I went on a journey around the world to see if there was any hope left at all. And in India, deep inside the bustling city of Calcutta, I met a holy man who told me that if there was truly no hope left, that my only salvation was to travel north, to the land that had been punished by God himself. There, in the midst of His destruction, would I find humanity’s last chance.”</p>
+
+					<p style="text-indent: 20px;">“I paid no mind, and on that journey, I met some people, did some things, that made me think that I still had a chance. And so I returned to America, where I made my last stand against this cabal. For a moment, I thought that I was to be victorious, but I miscalculated. I miscalculated terribly, and lost a stunning loss, the type of ground-shattering type of event that makes you realize that nothing is ever really going to be the same after it.”</p>
+
+					<p style="text-indent: 20px;">“So I left America for good, and in that time that I left, the cabal grew and grew and grew until it had engulfed the whole government, swallowing it whole. If you know about America’s Time of Troubles, that’s when it really started. But I wasn’t in America: I was traveling across Asia, in search of this Northern land the holy man had spoken of. First, I scaled the icy peaks of the Himalayas, scouring Nepal and Tibet for a sign, but to no avail. Then, I scoured the vast emptiness of the Gobi Desert and the Mongol steppes, searching for any evidence of this punished land, but still without a resolution.”</p>
+
+					<p style="text-indent: 20px;">“In that time, my bones began to grow weary, and my body began to break down. As the world fell deeper into a panic, as the markets and systems crashed, I found myself up here, in Siberia, in search of this punished land. And then, in a place not too far from here… I found it.”</p>
+
+					<p style="text-indent: 20px;">“And what was it? You’ve told such a dramatic story.”</p>
+
+					<p style="text-indent: 20px;">“What was it? Even if I told you, you wouldn’t believe me. Just know that out there, tucked away deep within the forests, is proof that we’re not alone in this mortal realm. Whatever it is, it gave me the strength to carry on, to regain my energy, my vigor, that I had lost in my search.”</p>
+
+					<p style="text-indent: 20px;">“And here in Siberia? Why stay? What else could you possibly have to do if you found it.”</p>
+
+					<p style="text-indent: 20px;">Edmund laughed again. “That is a question for me, and me only, to know. All you should know is that one day, when I’m needed the most, I’ll come back to society. Until then, I’m quite content to enjoy some nature here. It’s really lovely, if you didn’t already know.”</p>
+
+					<p style="text-indent: 20px;">I was completely bewildered at this man’s story. More likely, he was just some sort of hermit from some insane sect who had decided to throw it all away and live by himself. Maybe he planned to slit my throat in his sleep, for all I knew. Still, I had to play nice.</p>
+
+					<p style="text-indent: 20px;">“So, what now?”</p>
+
+					<p style="text-indent: 20px;">“Now, we make sure that you get your rest up, and I’ll make sure that you get sent in the right direction.”</p>
+
+					<p style="text-indent: 20px;">Edmund got the stove working and made me a soup which was surprisingly enjoyable. Then, we sat around the fire and started a new conversation, this time about Russian history, that segued its way into a whole host of other things until we finally arrived at modern Siberian techno music, which he was surprisingly well-versed in, just as he had been on every topic. Perhaps the story had just been something to mess with me.</p>
+
+					<p style="text-indent: 20px;">The next morning, Edmund gave me the most efficient directions possible and sent me on my way, cheerfully waving me off. I gave him one last glance, him and his little hut, and by the next time I turned my head, they were completely gone in the snow. I fought through the snow like my life depended on it, and somehow reached Oskoba that very night, which came as quite a surprise to the locals. None of them had ever met Edmund or heard of him.</p>
+
+					<p style="text-indent: 20px;">The next day, the plane came to pick me up, and I was back in Krasnoyarsk like nothing had happened, right on schedule. I tried to shake the whole experience off, but it was just too much to bear, and I went to my mother to talk about it. When she saw me, she turned as white as a sheet, slowly touching my skin, as if she was trying to tell if I was real. She explained to me that my aura had the mark of the Evenki spirits in the same manner that one would be marked for death, but I was somehow fine despite that. I told her about my experience, and she was just as confused as I was, musing that perhaps Edmund was on the run from the law in some sense.</p>
+
+					<p style="text-indent: 20px;">That summer, when all of the snow had melted, I went back up to the Podkamennaya Tunguska area, this time with my mother, in search of the mysterious man. We chartered a plane which covered the entire area that I could have possibly travelled by ski and used the newest technology to search it down to the smallest rock, but there was just nothing. He wasn’t there. Despite that, I always had a feeling, a feeling that my mother began to share, somehow based on the spirits or the like, that I hadn’t seen the last of this Edmund. And indeed, as we all learned later, I hadn’t.</p>
+
+					<p style="text-align: right; font-style: italic; margin-top: 20px; font-weight: bold;">Irina M. Samoylova, 2083</p>
+
+				</div>
               `
           },
           {
@@ -38896,21 +38870,19 @@ e.vpSwitcher = () => {
                       "Running Mate": e.running_mate_last_name
               },
               "ending text": `
-                  The other day I was at a yard sale, looking at all the objects that my neighbor seemingly didn't want anymore. As I was looking, my eyes landed on something peculiar: a copy of Moonbeam 92 for the Nintendo Gamecube. I remember my parents gifting it to me for a birthday, but after I finished middle school, the game seemingly vanished. Oh, how I'd dreamed of playing Moonbeam 92 again! And there it was, right in front of my eyes. I asked my neighbor about it, and when I did, he suddenly seemed to tense up a little, and I noticed that his eyes avoided my gaze, even if for a single second. Anyway, after purchasing the game, I went home to start playing it. I pulled out my old Nintendo Gamecube, inserted the disc in, and got ready to have a blast.
-  
-                  Immediately, however, things seemed off. Instead of being assaulted by the Dead Kennedys blaring at full volume, my ears were instead met with silence. Still, I thought nothing of it, thinking that maybe my old Gamecube was glitching out.
-  
-                  I pressed forward, playing the mod and having much fun doing so. However, halfway trough it, the game suddenly crashed. I quickly powered off the console and removed the disk, to check if perhaps it was scratched. The disk, however, was spotless, like it had just been bought.
-  
-                  After inserting the disk inside the console again, things got even weirder. All of a sudden, the music was back, seemingly louder than before. I decided to continue playing the mod, thinking that it was just a glitch. However, on the same question as before, something horrible happened. The advisor feedback image was telling me to "open the door", with a picture of Jerry Brown staring at me. I was confounded. Then, all of a sudden, Jerry Brown's eyes began bleeding hyper-realistic blood! I could not take it anymore and I shut the game off, shaking and crying. I decided to head to bed for the night, but as I did that, I heard a noise behind me. I turned around and... I saw him.
-  
-                  Jerry Brown. In my living room. His eyes were black like charcoal, his face contorted into a sickly grin. In his left hand, he held a drawing of two fictional women kissing, in the other he had a knife.
-  
-                  After snapping out of my trance, I ran up the stairs to my room, where I locked myself in. Once I did, I had to block the door with my whole body to keep Brown from entering. Thankfully, I had brought my phone with me and was able to dial 911. My heart was pounding, and so was my bedroom door. However, I was relieved when I heard the police arrive at my door. They broke down the entrance and swarmed the house, eventually getting me to leave my room… 
-  
-                  However, they had found no one. Had I just imagined things? After they left, I grabbed the Moonbeam disc, got into my car, drove to the nearest river, and dropped it in. And there it lies to this day, untouched by anyone. However, I’m scared that Brown will one day come back, and stab me under the Moon’s beam.
-  
-  
+				<p>The other day I was at a yard sale, looking at all the objects that my neighbor seemingly didn't want anymore. As I was looking, my eyes landed on something peculiar: a copy of <strong>Moonbeam 92</strong> for the Nintendo Gamecube. I remember my parents gifting it to me for a birthday, but after I finished middle school, the game seemingly vanished. Oh, how I'd dreamed of playing <em>Moonbeam 92</em> again! And there it was, right in front of my eyes. I asked my neighbor about it, and when I did, he suddenly seemed to tense up a little, and I noticed that his eyes avoided my gaze, even if for a single second. Anyway, after purchasing the game, I went home to start playing it. I pulled out my old Nintendo Gamecube, inserted the disc in, and got ready to have a blast.</p>
+
+				<p>Immediately, however, things seemed off. Instead of being assaulted by the Dead Kennedys blaring at full volume, my ears were instead met with silence. Still, I thought nothing of it, thinking that maybe my old Gamecube was glitching out.</p>
+
+				<p>I pressed forward, playing the mod and having much fun doing so. However, halfway trough it, the game suddenly crashed. I quickly powered off the console and removed the disk, to check if perhaps it was scratched. The disk, however, was spotless, like it had just been bought.</p>
+
+				<p>After inserting the disk inside the console again, things got even weirder. All of a sudden, the music was back, seemingly louder than before. I decided to continue playing the mod, thinking that it was just a glitch. However, on the same question as before, something horrible happened. The advisor feedback image was telling me to <em>"open the door"</em>, with a picture of Jerry Brown staring at me. I was confounded. Then, all of a sudden, Jerry Brown's eyes began bleeding <strong>hyper-realistic blood!</strong> I could not take it anymore and I shut the game off, shaking and crying. I decided to head to bed for the night, but as I did that, I heard a noise behind me. I turned around and... I saw him.</p>
+
+				<p class="scary-text">Jerry Brown. In my living room. His eyes were black like charcoal, his face contorted into a sickly grin. In his left hand, he held a drawing of two fictional women kissing, in the other he had a knife.</p>
+
+				<p>After snapping out of my trance, I ran up the stairs to my room, where I locked myself in. Once I did, I had to block the door with my whole body to keep Brown from entering. Thankfully, I had brought my phone with me and was able to dial 911. My heart was pounding, and so was my bedroom door. However, I was relieved when I heard the police arrive at my door. They broke down the entrance and swarmed the house, eventually getting me to leave my room…</p>
+
+				<p>However, they had found no one. Had I just imagined things? After they left, I grabbed the <em>Moonbeam</em> disc, got into my car, drove to the nearest river, and dropped it in. And there it lies to this day, untouched by anyone. However, I’m scared that Brown will one day come back, and stab me under the Moon’s beam.</p>
               `
           },
           {
@@ -38928,30 +38900,51 @@ e.vpSwitcher = () => {
                       "Running Mate": e.running_mate_last_name
               },
               "ending text": `
-                  IMDB: For Queen and Country, 1994
-                  Rating: 7.7/10, 286k reviews
-  
-                  Director: John Woo
-                  Writers: Ian Fleming, Michael France
-                  Stars: Timothy Dalton, Anthony Hopkins, Famke Janssen
-  
-                  Synopsis: James Bond (Timothy Dalton) is part of a governmental team of observers dispatched to Edinburgh, Scotland, to tour a new weapons facility set to produce field equipment for M16. As the group makes its way through the tour, Bond notices that the guide doesn’t use proper British measurements and becomes suspicious that he is an enemy agent. After the guide shows off the factory’s crown jewel, a new computer-powered ball bearing used for the aerospace industry, he confirms Bond’s suspicions by stealing the computer bearing and locking the group in a testing room in the facility, making his escape by glider. Bond is able to escape the room and chases after the glider on the ground using his Aston Martin. After a lengthy chase in which Bond attempts to shoot the glider down by pistol, to no avail, he’s able to land a shot on the glider with the last bullet in his chamber, just as it appears to have outpaced him, sending it crashing to the ground in a fireball.
-  
-                  In London, the newly-appointed female M (Judi Dench) assigns Bond the job of working as bodyguard for British billionaire Mark Henley (Michael Billington), the owner of the Scottish weapons facility, as several attempts have been made on his life. M suspects that the attempted theft of the computer bearing and the assassination attempts are correlated and that someone is attempting to undermine British national security. After a brief meeting with Q (Desmond Llewelyn) and receiving a special laser watch, Bond gets acquainted with Henley at his country manor before the two of them set out to Hong Kong, where Henley is set to give the keynote address as a technology expo. At the expo, Bond accompanies Henley to a private meeting with U.S. Senator Harold Braun (Anthony Hopkins), a hugely popular devoted pacifist and practitioner of Buddhism who questions Henley on the ethics of producing deadly weapons and raises alarm as to their environmental impact, finding his answers unsatisfying. During the meeting, Bond attempts to make small talk with the head of Braun’s security team, Dieter Kessler (Ferdy Mayne), who despite appearing to be in his 70’s, possesses the strength and reflexes of a man in peak physical condition.
-  
-                  While walking through the expo, Henley goads Bond into trying a game meant to show off new biofeedback technology in which two opponents are pitted against each other to see who can concentrate harder, staring straight into each other’s eyes while doing so. Bond easily defeats the first two opponents before finding himself stymied by the third, Tatiana Solntseva (Famke Janssen), a Russian chess grandmaster attending the expo in order to play against a new chess computer. Although Tatiana nearly defeats him, Bond is able to get the edge by winking at an inopportune moment, flustering her. After a speech by Senator Braun in which he talks about the opportunity to create a world perfectly in balance with the end of the Cold War, Henley takes the stage. Bond, watching the audience for threats, notices a suspicious potential shooter perched on the upper balcony of the speech hall, and attempts to warn Henley, who ignores him and promptly is shot, with the shooter fleeing on foot. 
-  
-                  Bond chases the shooter throughout Hong Kong, first on the rooftops before transitioning to a motorcycle on foot throughout a city market. Midway through the chase, he’s surprised to see Tatiana also chasing after the shooter, and fights with her for leverage in the pursuit. Eventually, the shooter makes his way to Kowloon Walled City, where he engages in a fistfight with Bond and Tatiana simultaneously before falling to his death. However, Bond is able to reach the shooter’s body, discovering a lanyard identifying him as an aide to Senator Braun, though he loses all trace of Tatiana. 
-  
-                  Bond, suspicious of Senator Braun, tracks him to Los Angeles, where Braun has a large mansion. After breaking in, Bond witnesses a meeting between Braun, Kessler, and Ukrainian computer scientist Boris Glushko (Alan Cumming), who reports that he is in dire need of a few specialized components in order to complete what he refers to as Operation Zen. After Glushko leaves, Kessler catches Bond and brings him to Braun, who explains to Bond that the collapse of the Soviet Union has created a unipolar world where the United States, by adding Eastern Europe and Russia to its hegemony, will be able to hold onto global superpower status indefinitely, destroying all notions of planetary balance, from the environment to the population to global politics, suppressing all movements that speak out against the “corrupt hivemind” in Washington. Braun explains that he will re-balance the Earth, but purposefully neglects to tell Bond how, before leaving him to die at the hands of Kessler, who drugs Bond and drives him out to Compton, planning to drop Bond on the street and kill him and a mock “drive-by” shooting.
-  
-                  Just as a still-drugged Bond appears certain to die as Kessler’s hands, Tatiana, driving a Ferrari F355, reappears and gets Bond into the car. As the effects of the drugs wear off on Bond, Tatiana lures Kessler’s henchmen into a shootout, accidentally also attracting fire from local gangsters, with chaos ensuing as Bond, Tatiana, and Kessler all manage to escape. That night, as Bond is recuperating from a bullet graze, Tatiana confides to him that she’s a former KGB agent who is now a part of the FSK. As part of her mission, she was tasked with keeping account of nuclear warheads on former Soviet territory, only to discover that 30 had gone missing, which she was able to trace back to Senator Braun. Before Bond and Tatiana can enjoy their time together, Bond gets a call from M, who reveals that every model of the computerized bearings has been stolen from the deceased Henley’s Scottish factory.
-  
-                  Breaking back into Braun’s mansion, Bond and Tatiana are able to deduce that Braun has flown to Krakow, Poland. After they arrive in Krakow, Tatiana finds an old KGB contact, Dmitri Pavlovich (Robbie Coltrane), who reveals that many former Red Army and Polish soldiers have been recruited by new employer, working at an abandoned former Soviet air force base. The pair drive to the base, which seems initially uneventful, only to discover a massive nuclear missile bunker and silo underground. Once there, they’re caught by a backstabbing Dmitri, who takes them to the bunker’s central control room, where Senator Braun, Kessler, and Glushko are meeting. Senator Braun explains that his plan to rebalance the world zen is to launch a massive missile strike using the lost Ukrainian missiles, using the computer bearing technology to aim them precisely and to avoid defense systems, on the capitals of the world’s “debalancers” (listing the USA, Britain, France, and Iran as a few examples of many) and the world’s biggest polluters, creating a new multipolar, non-consumption focused world. Bond criticizes his plan as madness, but Braun simply laughs him off before ordering that Bond and Tatiana be chained to a missile.
-  
-                  While chained to the missile, Bond and Tatiana struggle before Tatiana is able to activate Bond’s laser watch, enabling them to cut through the chains and escape. Making their way through the bunker and taking out many of Braun’s henchmen, Tatiana is able to decalibrate the missiles by breaking onto Glushko’s computer, disarming the payload and sending them to the middle of the ocean. Senator Braun, unaware that the missiles have failed, is meditating in a private room when Bond and Tatiana walk in on him. Braun challenges Bond, contrasting his ideals of peace with Bond’s crude violence and claiming that Bond shooting him would only prove his point. Before Bond gets the chance to answer, Tatiana pulls the trigger. 
-  
-                  Throughout the rest of the bunker, the henchmen are in panic as Polish special forces swarm the area, but Kessler is able to make his escape, making it to the surface. Bond and Tatiana make it to the surface soon after, seeing Kessler running across the air base’s runway. Bond, realizing that he’s too far, sees an old Mig-29 and has an idea. He and Tatiana get in the plane and, flying at a low altitude, impale Kessler on the jet’s nose. Once the pair are fully in the air, Bond makes contact with M16, proclaiming that the job is finished. Although M presses Bond for more details, he turns her off and switches the plane on autopilot as he and Tatiana consummate their relationship in the sky.
+                  <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; background-color: #ffffff; border: 1px solid #ddd; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+
+					<div style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px;">
+						<h1 style="margin: 0; color: #333; font-size: 24px;">For Queen and Country <span style="color: #777; font-weight: normal;">(1994)</span></h1>
+						
+						<div style="margin-top: 10px; color: #555; font-size: 14px;">
+							<span style="color: #f5c518; font-size: 18px;">&#9733;</span> 
+							<strong>7.7</strong>/10 <span style="color: #999;">|</span> 286k reviews
+						</div>
+					</div>
+
+					<div style="background-color: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 25px; font-size: 14px; line-height: 1.8;">
+						<div style="margin-bottom: 5px;">
+							<strong style="color: #333;">Director:</strong> <span style="color: #0066cc;">John Woo</span>
+						</div>
+						<div style="margin-bottom: 5px;">
+							<strong style="color: #333;">Writers:</strong> <span style="color: #0066cc;">Ian Fleming, Michael France</span>
+						</div>
+						<div>
+							<strong style="color: #333;">Stars:</strong> <span style="color: #0066cc;">Timothy Dalton, Anthony Hopkins, Famke Janssen</span>
+						</div>
+					</div>
+
+					<h3 style="color: #d1b11b; text-transform: uppercase; font-size: 14px; margin-bottom: 10px; letter-spacing: 1px; border-left: 4px solid #d1b11b; padding-left: 10px;">Synopsis</h3>
+
+					<div style="color: #333; line-height: 1.6; font-size: 15px;">
+						<p>James Bond (Timothy Dalton) is part of a governmental team of observers dispatched to Edinburgh, Scotland, to tour a new weapons facility set to produce field equipment for M16. As the group makes its way through the tour, Bond notices that the guide doesn’t use proper British measurements and becomes suspicious that he is an enemy agent. After the guide shows off the factory’s crown jewel, a new computer-powered ball bearing used for the aerospace industry, he confirms Bond’s suspicions by stealing the computer bearing and locking the group in a testing room in the facility, making his escape by glider. Bond is able to escape the room and chases after the glider on the ground using his Aston Martin. After a lengthy chase in which Bond attempts to shoot the glider down by pistol, to no avail, he’s able to land a shot on the glider with the last bullet in his chamber, just as it appears to have outpaced him, sending it crashing to the ground in a fireball.</p>
+
+						<p>In London, the newly-appointed female M (Judi Dench) assigns Bond the job of working as bodyguard for British billionaire Mark Henley (Michael Billington), the owner of the Scottish weapons facility, as several attempts have been made on his life. M suspects that the attempted theft of the computer bearing and the assassination attempts are correlated and that someone is attempting to undermine British national security. After a brief meeting with Q (Desmond Llewelyn) and receiving a special laser watch, Bond gets acquainted with Henley at his country manor before the two of them set out to Hong Kong, where Henley is set to give the keynote address as a technology expo. At the expo, Bond accompanies Henley to a private meeting with U.S. Senator Harold Braun (Anthony Hopkins), a hugely popular devoted pacifist and practitioner of Buddhism who questions Henley on the ethics of producing deadly weapons and raises alarm as to their environmental impact, finding his answers unsatisfying. During the meeting, Bond attempts to make small talk with the head of Braun’s security team, Dieter Kessler (Ferdy Mayne), who despite appearing to be in his 70’s, possesses the strength and reflexes of a man in peak physical condition.</p>
+
+						<p>While walking through the expo, Henley goads Bond into trying a game meant to show off new biofeedback technology in which two opponents are pitted against each other to see who can concentrate harder, staring straight into each other’s eyes while doing so. Bond easily defeats the first two opponents before finding himself stymied by the third, Tatiana Solntseva (Famke Janssen), a Russian chess grandmaster attending the expo in order to play against a new chess computer. Although Tatiana nearly defeats him, Bond is able to get the edge by winking at an inopportune moment, flustering her. After a speech by Senator Braun in which he talks about the opportunity to create a world perfectly in balance with the end of the Cold War, Henley takes the stage. Bond, watching the audience for threats, notices a suspicious potential shooter perched on the upper balcony of the speech hall, and attempts to warn Henley, who ignores him and promptly is shot, with the shooter fleeing on foot.</p>
+
+						<p>Bond chases the shooter throughout Hong Kong, first on the rooftops before transitioning to a motorcycle on foot throughout a city market. Midway through the chase, he’s surprised to see Tatiana also chasing after the shooter, and fights with her for leverage in the pursuit. Eventually, the shooter makes his way to Kowloon Walled City, where he engages in a fistfight with Bond and Tatiana simultaneously before falling to his death. However, Bond is able to reach the shooter’s body, discovering a lanyard identifying him as an aide to Senator Braun, though he loses all trace of Tatiana.</p>
+
+						<p>Bond, suspicious of Senator Braun, tracks him to Los Angeles, where Braun has a large mansion. After breaking in, Bond witnesses a meeting between Braun, Kessler, and Ukrainian computer scientist Boris Glushko (Alan Cumming), who reports that he is in dire need of a few specialized components in order to complete what he refers to as Operation Zen. After Glushko leaves, Kessler catches Bond and brings him to Braun, who explains to Bond that the collapse of the Soviet Union has created a unipolar world where the United States, by adding Eastern Europe and Russia to its hegemony, will be able to hold onto global superpower status indefinitely, destroying all notions of planetary balance, from the environment to the population to global politics, suppressing all movements that speak out against the “corrupt hivemind” in Washington. Braun explains that he will re-balance the Earth, but purposefully neglects to tell Bond how, before leaving him to die at the hands of Kessler, who drugs Bond and drives him out to Compton, planning to drop Bond on the street and kill him and a mock “drive-by” shooting.</p>
+
+						<p>Just as a still-drugged Bond appears certain to die as Kessler’s hands, Tatiana, driving a Ferrari F355, reappears and gets Bond into the car. As the effects of the drugs wear off on Bond, Tatiana lures Kessler’s henchmen into a shootout, accidentally also attracting fire from local gangsters, with chaos ensuing as Bond, Tatiana, and Kessler all manage to escape. That night, as Bond is recuperating from a bullet graze, Tatiana confides to him that she’s a former KGB agent who is now a part of the FSK. As part of her mission, she was tasked with keeping account of nuclear warheads on former Soviet territory, only to discover that 30 had gone missing, which she was able to trace back to Senator Braun. Before Bond and Tatiana can enjoy their time together, Bond gets a call from M, who reveals that every model of the computerized bearings has been stolen from the deceased Henley’s Scottish factory.</p>
+
+						<p>Breaking back into Braun’s mansion, Bond and Tatiana are able to deduce that Braun has flown to Krakow, Poland. After they arrive in Krakow, Tatiana finds an old KGB contact, Dmitri Pavlovich (Robbie Coltrane), who reveals that many former Red Army and Polish soldiers have been recruited by new employer, working at an abandoned former Soviet air force base. The pair drive to the base, which seems initially uneventful, only to discover a massive nuclear missile bunker and silo underground. Once there, they’re caught by a backstabbing Dmitri, who takes them to the bunker’s central control room, where Senator Braun, Kessler, and Glushko are meeting. Senator Braun explains that his plan to rebalance the world zen is to launch a massive missile strike using the lost Ukrainian missiles, using the computer bearing technology to aim them precisely and to avoid defense systems, on the capitals of the world’s “debalancers” (listing the USA, Britain, France, and Iran as a few examples of many) and the world’s biggest polluters, creating a new multipolar, non-consumption focused world. Bond criticizes his plan as madness, but Braun simply laughs him off before ordering that Bond and Tatiana be chained to a missile.</p>
+
+						<p>While chained to the missile, Bond and Tatiana struggle before Tatiana is able to activate Bond’s laser watch, enabling them to cut through the chains and escape. Making their way through the bunker and taking out many of Braun’s henchmen, Tatiana is able to decalibrate the missiles by breaking onto Glushko’s computer, disarming the payload and sending them to the middle of the ocean. Senator Braun, unaware that the missiles have failed, is meditating in a private room when Bond and Tatiana walk in on him. Braun challenges Bond, contrasting his ideals of peace with Bond’s crude violence and claiming that Bond shooting him would only prove his point. Before Bond gets the chance to answer, Tatiana pulls the trigger.</p>
+
+						<p>Throughout the rest of the bunker, the henchmen are in panic as Polish special forces swarm the area, but Kessler is able to make his escape, making it to the surface. Bond and Tatiana make it to the surface soon after, seeing Kessler running across the air base’s runway. Bond, realizing that he’s too far, sees an old Mig-29 and has an idea. He and Tatiana get in the plane and, flying at a low altitude, impale Kessler on the jet’s nose. Once the pair are fully in the air, Bond makes contact with M16, proclaiming that the job is finished. Although M presses Bond for more details, he turns her off and switches the plane on autopilot as he and Tatiana consummate their relationship in the sky.</p>
+					</div>
+				</div>
               `
           },
           {
@@ -39144,53 +39137,114 @@ e.vpSwitcher = () => {
                       "Running Mate": e.running_mate_last_name
               },
               "ending text": `
-                  VOICEOVER: Live from Oakland, California, it’s We the People with Jerry Brown.
-  
-                  JERRY BROWN: Welcome to another edition of We The People. This is a radio program dedicated to exposing the follies of the political class, that privileged and arrogant group that runs our country like a private club. We take apart the conventional wisdom; at least we do our best to take it apart, the wrongheaded and the dumb ideas that are dragging us all down. By the nature of what we do, politicians have to lie to us, and we the people have to call them on it. As for the greed of the corporate high and mighty and the phoniness of the wannabe liberals–we’re taking them on, too. There are no sacred cows on the show. Yesterday we talked about the latest political scam: George Bush’s balanced budget amendment. It’s really quite pathetic: you have a man who was vice president during some of our biggest deficits ever, never said a word about it, and now that he’s wrapping up a presidency that was completely stillborn, suddenly we’re trying to pretend that Bush is the great consensus-builder when he’s really just piggybacking off of ideas I’ve been fighting for, ideas that others have been fighting for, for much longer than he has.
-  
-                  (Jerry pauses to inhale and exhale)
-  
-                  JERRY BROWN: Well, and if you’ve listened to me, if you’ve followed my political career, then you know that I’ve supported such an amendment, many times in the past, so this next part might seem like it’s going to be something of a surprise, which is that the Balanced Budget Amendment is a stupid idea put forth by stupid people. Now, a lot of people might ask me what happened to the person preaching fiscal responsibility? Well, here’s what I’m going to tell them: I am. I've just gotten a lot less arrogant about this, taken the time to study some actual economists, like what’s his name, William Vickrey, really brilliant Canadian who I’ve had the privilege of meeting last year. And when you run the data, and look at how other countries, like Denmark, other places, how they model their approach, it becomes clear: forcing a requirement for a balanced budget is dense, just plain dumb. Running a balanced budget, that’s great, something we should try to do, but it creates perverse incentives, the type of incentives that George Bush is all too familiar with, him and our Congress, to purge the wrong types of spending, increase inequality.
-  
-                  (Jerry takes another pause to inhale and exhale)
-  
-                  JERRY BROWN: Before we talk about just why this amendment is garbage, we need to talk about who’s passing it, and why the Democrats, my party, aren’t standing in the door opposing it. Congress, I mean, they’re worrying about what's good for the corporations and not for us. Well let me just add a point to that. You know you have two parties, a Republican and a Democrat in Congress. There's one independent, Bernie Sanders from Vermont, a great guy. But you have to look at the Democratic House incumbents. The ones that were there in ‘90, who ran in ‘92, that’s fifty percent of the money for those House Democratic incumbents that came from political action committees, and of the top forty recipients of PAC money, thirty seven were Democrats. So yeah it makes it look like we have one party with two wings. You know you have the Democratic wing and the Republican wing. But the money which buys the T.V. ads in the computer letters and keeps the incumbents there at a rate better than eighty percent. The same people. Well, just until you actually do change the face of the Congress. Nothing's really going to get done
-  
-                  (Jerry talks about the cons of the balanced budget amendment for 24 minutes)
-  
-                  JERRY BROWN: And so now we have a caller, Mike from Indianapolis. Hi, Mike from Indianapolis, you’re on the line. 
-  
-                  MIKE FROM INDIANAPOLIS: Hi, Jerry, thanks for having me on. So I’m a steelworker, worked as part of a union for over 20 years now, and I have to ask, how exactly does the balanced budget hurt me? Because as far as I understand it, this national debt of ours is just going to keep growing, and we’re going to have to keep paying more and more, which means that we’ll either have to jack up our taxes or cut all of the things that help guys like me. I don’t want to lose my Social Security, Jerry.
-  
-                  JERRY BROWN: Mike, you’ve been reading too much Hayek. Isn’t that what steelworkers do in their spare time? But in all seriousness, it’s not about the budget so much as it’s about allocating money properly. Because we’re the world’s reserve currency, okay? We’re the only superpower. If the going ever gets tough, we can press a button, and all of that will fix itself. It’s not a problem at the existential level. But it is a problem to some degree, you’re right. Really, though, stupidity with the money we spend, though, that’s the problem.
-  
-                  MIKE FROM INDIANAPOLIS: Well, what are we being stupid about? I watched the ABC news report the other night, and they say that ever since the communists fell apart, we’ve been spending a lot less on our military. And that money has been going into paying off the debt, which is what we need to worry about. That doesn’t sound stupid to me.
-  
-                  JERRY BROWN: Mike, do you ever wonder why you’re afraid to go to some places downtown in Indianapolis? But you’re not scared to go there if you’ve had a chance to go fly abroad to, I don’t know, let’s say, Belgium? It’s our inequality. This money, how we’re spending it, it’s reinforcing the current country club and not going back to the people. Without radical wealth redistribution, the types of things that FDR was able to do with his taxes, you can’t fix these problems. 
-  
-                  MIKE FROM INDIANAPOLIS: What does that have to do with the budget?
-  
-                  JERRY BROWN: I wanna tell you something else, Mike. Everything is about the budget. You can’t do a thing without spending money, just like Newton’s laws. You need force. So when we allocate the budget, we make choices on how to spend and not spend. And our system right now, we’re making poor choices over and over.
-  
-                  MIKE FROM INDIANAPOLIS: But why should I listen to you and not like, uh, Ron Paul? I have a friend at work who sent me this guy’s freedom report, and it talks about how the debt is what’s causing these inequalities?
-  
-                  JERRY BROWN: Well, I’m a credible politician and Ron Paul isn’t.
-  
-                  MIKE FROM INDIANAPOLIS: Are you? You lost to Bush pretty badly, after all.
-  
-                  JERRY BROWN: Yeah, I mean, the oligarchy saw that its golden boy was being threatened, that it stood to lose everything, so I had to go. They really pulled out all the stops there. 
-  
-                  MIKE FROM INDIANAPOLIS: What’s wrong with Bush?
-  
-                  JERRY BROWN: Mike? What do you mean what’s wrong with Bush? Do you not listen to the show? I mean, you’re a what, a union member? Do you really think he has your best interests at heart?
-  
-                  MIKE FROM INDIANAPOLIS: I don’t think he’s such a bad guy, especially when you look at how he’s trying to balance the budget. He even got my vote back a few years ago, and–
-  
-                  (Jerry turns off Mike’s voice)
-  
-                  JERRY BROWN: Okay, I think we’ve had enough of that. Let’s move on to another caller. Sheryl from Santa Monica. 
-  
-                  SHERYL FROM SANTA MONICA: Hi, Jerry, I just want to say that I miss your time as governor, and that I’ve listened to your show for a while. Anyway, I was just wondering about the balanced budget…
+                  <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f9f9f9; color: #333; max-width: 800px; margin: 20px auto; border: 1px solid #e0e0e0; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+
+					<div style="background-color: #2c3e50; color: #ffffff; padding: 20px; text-align: center;">
+						<h1 style="margin: 0; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">We The People</h1>
+						<h3 style="margin: 5px 0 0 0; font-weight: 300; font-size: 1.2em; color: #bdc3c7;">with Jerry Brown</h3>
+						<div style="font-size: 0.8em; margin-top: 10px; color: #95a5a6;">TRANSCRIPT: OAKLAND BROADCAST</div>
+					</div>
+
+					<div style="padding: 30px; line-height: 1.6;">
+
+						<p style="background-color: #eaeaea; padding: 10px; border-left: 4px solid #7f8c8d; font-style: italic; margin-bottom: 25px;">
+							<strong style="color: #2c3e50; font-style: normal;">VOICEOVER:</strong> Live from Oakland, California, it’s We the People with Jerry Brown.
+						</p>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> Welcome to another edition of We The People. This is a radio program dedicated to exposing the follies of the political class, that privileged and arrogant group that runs our country like a private club. We take apart the conventional wisdom; at least we do our best to take it apart, the wrongheaded and the dumb ideas that are dragging us all down. By the nature of what we do, politicians have to lie to us, and we the people have to call them on it. As for the greed of the corporate high and mighty and the phoniness of the wannabe liberals–we’re taking them on, too. There are no sacred cows on the show. Yesterday we talked about the latest political scam: George Bush’s balanced budget amendment. It’s really quite pathetic: you have a man who was vice president during some of our biggest deficits ever, never said a word about it, and now that he’s wrapping up a presidency that was completely stillborn, suddenly we’re trying to pretend that Bush is the great consensus-builder when he’s really just piggybacking off of ideas I’ve been fighting for, ideas that others have been fighting for, for much longer than he has.
+						</p>
+
+						<p style="text-align: center; color: #7f8c8d; font-style: italic; margin: 20px 0;">
+							(Jerry pauses to inhale and exhale)
+						</p>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> Well, and if you’ve listened to me, if you’ve followed my political career, then you know that I’ve supported such an amendment, many times in the past, so this next part might seem like it’s going to be something of a surprise, which is that the Balanced Budget Amendment is a stupid idea put forth by stupid people. Now, a lot of people might ask me what happened to the person preaching fiscal responsibility? Well, here’s what I’m going to tell them: I am. I've just gotten a lot less arrogant about this, taken the time to study some actual economists, like what’s his name, William Vickrey, really brilliant Canadian who I’ve had the privilege of meeting last year. And when you run the data, and look at how other countries, like Denmark, other places, how they model their approach, it becomes clear: forcing a requirement for a balanced budget is dense, just plain dumb. Running a balanced budget, that’s great, something we should try to do, but it creates perverse incentives, the type of incentives that George Bush is all too familiar with, him and our Congress, to purge the wrong types of spending, increase inequality.
+						</p>
+
+						<p style="text-align: center; color: #7f8c8d; font-style: italic; margin: 20px 0;">
+							(Jerry takes another pause to inhale and exhale)
+						</p>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> Before we talk about just why this amendment is garbage, we need to talk about who’s passing it, and why the Democrats, my party, aren’t standing in the door opposing it. Congress, I mean, they’re worrying about what's good for the corporations and not for us. Well let me just add a point to that. You know you have two parties, a Republican and a Democrat in Congress. There's one independent, Bernie Sanders from Vermont, a great guy. But you have to look at the Democratic House incumbents. The ones that were there in ‘90, who ran in ‘92, that’s fifty percent of the money for those House Democratic incumbents that came from political action committees, and of the top forty recipients of PAC money, thirty seven were Democrats. So yeah it makes it look like we have one party with two wings. You know you have the Democratic wing and the Republican wing. But the money which buys the T.V. ads in the computer letters and keeps the incumbents there at a rate better than eighty percent. The same people. Well, just until you actually do change the face of the Congress. Nothing's really going to get done
+						</p>
+
+						<div style="border-top: 1px dashed #bbb; border-bottom: 1px dashed #bbb; padding: 15px; margin: 30px 0; text-align: center; color: #555; background-color: #f4f4f4; font-style: italic;">
+							[Jerry talks about the cons of the balanced budget amendment for 24 minutes]
+						</div>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> And so now we have a caller, Mike from Indianapolis. Hi, Mike from Indianapolis, you’re on the line.
+						</p>
+
+						<p>
+							<strong style="color: #d35400;">MIKE FROM INDIANAPOLIS:</strong> Hi, Jerry, thanks for having me on. So I’m a steelworker, worked as part of a union for over 20 years now, and I have to ask, how exactly does the balanced budget hurt me? Because as far as I understand it, this national debt of ours is just going to keep growing, and we’re going to have to keep paying more and more, which means that we’ll either have to jack up our taxes or cut all of the things that help guys like me. I don’t want to lose my Social Security, Jerry.
+						</p>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> Mike, you’ve been reading too much Hayek. Isn’t that what steelworkers do in their spare time? But in all seriousness, it’s not about the budget so much as it’s about allocating money properly. Because we’re the world’s reserve currency, okay? We’re the only superpower. If the going ever gets tough, we can press a button, and all of that will fix itself. It’s not a problem at the existential level. But it is a problem to some degree, you’re right. Really, though, stupidity with the money we spend, though, that’s the problem.
+						</p>
+
+						<p>
+							<strong style="color: #d35400;">MIKE FROM INDIANAPOLIS:</strong> Well, what are we being stupid about? I watched the ABC news report the other night, and they say that ever since the communists fell apart, we’ve been spending a lot less on our military. And that money has been going into paying off the debt, which is what we need to worry about. That doesn’t sound stupid to me.
+						</p>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> Mike, do you ever wonder why you’re afraid to go to some places downtown in Indianapolis? But you’re not scared to go there if you’ve had a chance to go fly abroad to, I don’t know, let’s say, Belgium? It’s our inequality. This money, how we’re spending it, it’s reinforcing the current country club and not going back to the people. Without radical wealth redistribution, the types of things that FDR was able to do with his taxes, you can’t fix these problems.
+						</p>
+
+						<p>
+							<strong style="color: #d35400;">MIKE FROM INDIANAPOLIS:</strong> What does that have to do with the budget?
+						</p>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> I wanna tell you something else, Mike. Everything is about the budget. You can’t do a thing without spending money, just like Newton’s laws. You need force. So when we allocate the budget, we make choices on how to spend and not spend. And our system right now, we’re making poor choices over and over.
+						</p>
+
+						<p>
+							<strong style="color: #d35400;">MIKE FROM INDIANAPOLIS:</strong> But why should I listen to you and not like, uh, Ron Paul? I have a friend at work who sent me this guy’s freedom report, and it talks about how the debt is what’s causing these inequalities?
+						</p>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> Well, I’m a credible politician and Ron Paul isn’t.
+						</p>
+
+						<p>
+							<strong style="color: #d35400;">MIKE FROM INDIANAPOLIS:</strong> Are you? You lost to Bush pretty badly, after all.
+						</p>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> Yeah, I mean, the oligarchy saw that its golden boy was being threatened, that it stood to lose everything, so I had to go. They really pulled out all the stops there.
+						</p>
+
+						<p>
+							<strong style="color: #d35400;">MIKE FROM INDIANAPOLIS:</strong> What’s wrong with Bush?
+						</p>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> Mike? What do you mean what’s wrong with Bush? Do you not listen to the show? I mean, you’re a what, a union member? Do you really think he has your best interests at heart?
+						</p>
+
+						<p>
+							<strong style="color: #d35400;">MIKE FROM INDIANAPOLIS:</strong> I don’t think he’s such a bad guy, especially when you look at how he’s trying to balance the budget. He even got my vote back a few years ago, and–
+						</p>
+
+						<p style="text-align: center; color: #c0392b; font-weight: bold; margin: 20px 0;">
+							(Jerry turns off Mike’s voice)
+						</p>
+
+						<p>
+							<strong style="color: #2980b9;">JERRY BROWN:</strong> Okay, I think we’ve had enough of that. Let’s move on to another caller. Sheryl from Santa Monica.
+						</p>
+
+						<p>
+							<strong style="color: #d35400;">SHERYL FROM SANTA MONICA:</strong> Hi, Jerry, I just want to say that I miss your time as governor, and that I’ve listened to your show for a while. Anyway, I was just wondering about the balanced budget…
+						</p>
+
+					</div>
+				</div>
               `
           },
           {
@@ -39208,86 +39262,238 @@ e.vpSwitcher = () => {
                       "Running Mate": e.running_mate_last_name
               },
               "ending text": `
-                  Alternatehistory.com
-  
-                  MasterSplintered
-                  WI Jerry Brown had won the presidency in 1992?
-  
-                  IRL, Jerry Brown lost pretty badly in 1992. But, when you look closer at the race, some of the early polling made him seem a lot more competitive than it actually turned out to be. So, assuming that he got a few more lucky breaks and that Bush got a few more bad ones, leading to him winning, what would he have looked like in office?
-  
-                  Sazerac
-                  It all depends on how he changed his campaign style. It’s hard to remember these days, but he was decidedly the outsider candidate during the Democratic primaries, and it wasn't until the convention that he really absorbed himself into what was then the mainstream Democratic structure. It’s hard to say, because we really haven’t had anyone of his particular brand run since, but you probably see a pretty moderate Brown administration, conservative on the economy and trade but moderate to liberal on the stuff that he was talking about promoting like women’s rights and diversity.
-  
-                  HornsFlared
-                  Replying to: Sazerac
-                  So, I’m unclear on what the mainstream Democratic structure at the time was. Can you expand on that? Just don’t understand what the difference was between him and your average Democrat beyond having obviously not held office for ten years.
-  
-                  Sazerac
-                  Replying to: HornsFlared
-                  So it was a weird historical moment. At that point, what we’ll call the establishment was backing Bill Clinton at first. The establishment ideals that he really summed up were a very small-l liberalism. It was still mostly supply-side economics, but with more progressive tendencies than Reagan was fighting for, like not completely throwing unions under the bus and focusing on diversity. At the same time, though, trade was sort of up in the air, so even though you had some guys who were 100% part of the establishment like Dick Gephardt who were anti-NAFTA, they were mixed with pro-NAFTA guys like Clinton or Bill Bradley or Al Gore. But a large part of the establishment was just vibe-based: they didn’t want to move beyond Reagan and Bush, just fit somewhere into their reality.
-  
-                  Laplander
-                  If Jerry Brown won the presidency, based on what he was campaigning on (though lord knows he could change his mind on a dime), you would’ve seen
-                  -A balanced budget, whether through an amendment or just because he did it himself
-                  -Moderate tax reform
-                  -Welfare is cut a bit but also makes it a lot better and more efficiency
-                  -NAFTA goes whichever way he thinks has the most support at the time
-                  -He doesn’t do much for healthcare
-                  -He doesn’t really rock the boat on corporate money (even though he hinted at it early in his campaign)
-                  -Appoints a bunch of female and minority judges? That was something he was huge on as governor, even though he didn’t talk about it too much while campaigning…
-  
-                  MagicalPedro
-                  If Jerry Brown had been elected president, we would’ve gotten high-speed rail between every city by 2000 and a man on Mars by 2005 at the latest
-  
-                  HornsFlared
-                  Replying to: Sazerac
-                  Interesting. So how did it happen that somebody like Gephardt was able to go from that more conservative type of thought (even with the NAFTA caveat) to the neo-New Dealer type who dominates the party these days?
-  
-                  SecretFrog28
-                  I’ve actually done a bit of research on the Brown campaign (here in California he’s still pretty fondly remembered now that people have had enough time to put him in context), and he probably just does what he did as CA gov. Changes his positions on taxes but ultimately doesn’t try to increase them (might even try a flat tax), definitely passes a balanced budget amendment, and definitely does a lot to fight climate change. Beyond that, it’s hard to say. As governor, he alternated between being his own worst enemy or his own greatest ally, and based on how well he plays Congress, he either cruises to victory in 1996 or he gets wounded in the midterms and just peters out. But yeah, it would be nothing like Gephardt was. 
-  
-                  EntenteLoss
-                  I agree with what some of the other people are saying, but I’d be really interested to see how Bush is remembered as a one-termer. Today, he’s like an Eisenhower-lite, generally pretty popular but also not super notable legislatively (seriously, their second terms with a strongly Democratic Congress where the country mostly ran itself for four years are like MIRROR IMAGES of each other). With only one term, I’m guessing people think he’s a total loser like they do with Carter.
-  
-                  Anadyr
-                  Replying to: EntenteLoss
-                  Since the USSR collapsed during his time I think that he only is remembered for that. Maybe then people think of him highly because he’s associated with such a victory?
-  
-                  VroomOnTheYamaha
-                  Replying to: Laplander
-                  How do you think the midterms go for President Jerry?
-  
-                  Laplander
-                  Replying to: VroomOnTheYamaha
-                  Probably not that badly. He loses pretty big (look at how Bush got screwed worse in 1994 than in 1990), but he had a lot of Democrats in Congress as a cushion. I can’t imagine how ANY Democrat would lose it.
-  
-                  VroomOnTheYamaha
-                  Relying to: Laplander
-                  Do you think that Jeb Bush makes it across the finish line in a Brown midterm? He didn’t do great against Chiles, but based on what I’ve read, Chiles was weak enough that he had a shot.
-  
-                  Sazerac
-                  Replying to: HornsFlared
-                  It was a strategic thing. In 1984, the Democrats try running a New Dealer in Mondale and get steamrolled. In 1988, they run Dukakis, who is mostly a New Dealer but is notably more conservative than Mondale in a few ways, and he gets steamrolled. Then, in 1992, they try running Jerry Brown, who has a bit of New Deal in him but is also very “modern,” and he gets steamrolled. So in 1996, Dick Gephardt crosses the Rubicon and says, “I’ve been mostly okay with the drift the party is taking, but it’s clearly not working. If we lose, we lose fighting for old-school principles.” Then, he fixates on what he calls “working man issues,” smashes Clinton and Cuomo, and then gets vindicated against Steve Forbes. That’s basically how we got our system today.
-  
-                  Laplander
-                  Replying to: VroomOnTheYamaha
-                  Not only do I think that Jeb Bush had a shot, based on a lot of talk at the time, George Jr. (yes, THAT George, the Rangers owner) was seriously flirting with running for Texas governor, based on how Richards lowkey underperformed in 1988.
-  
-                  VroomOnTheYamaha
-                  Replying to: Laplander
-                  Lol how have I never heard about this? Can’t imagine him being anything other than the Rangers guy. 
-  
-                  HornsFlared
-                  Replying to: Sazerac
-                  Thanks for explaining it so well! Feels crazy to imagine someone like Brown or Clinton as president, but it’s so interesting to hear how that happened. I had always just kinda thought of Reagan and Bush as being this weird 16-year blip of conservatism that we moved on from, but it’s interesting to read about the impact that it had on the Democrats at the time. 
-  
-                  Laplander
-                  Replying to: VroomOnTheYamaha
-                  It was an open secret that he really wanted to run in 1990 but got talked out of it by Barbara. Assuming typical midterm conditions, I definitely think he makes a go at it in 94.
-  
-                  VroomOnTheYamaha
-                  Replying to: Laplander
-                  Wow, that’s a timeline I want to see. 
+                  <div style="background-color: #E1E4F2; padding: 20px; font-family: Verdana, Arial, sans-serif; color: #000; max-width: 800px; margin: 0 auto; border: 1px solid #ccc;">
+
+					<div style="margin-bottom: 20px;">
+						<h2 style="margin: 0; color: #1A3E6E;">Alternatehistory.com</h2>
+						<div style="font-size: 0.8em; color: #555;">> Discussion > Alternate History Discussion: After 1900</div>
+					</div>
+
+					<div style="background-color: #5C7099; color: white; padding: 10px; font-weight: bold; border-radius: 5px 5px 0 0; border-bottom: 1px solid #1A3E6E;">
+						WI Jerry Brown had won the presidency in 1992?
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							MasterSplintered
+							<span style="float: right; font-size: 0.7em; font-weight: normal; color: #666;">Yesterday, 10:42 AM</span>
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							<p>IRL, Jerry Brown lost pretty badly in 1992. But, when you look closer at the race, some of the early polling made him seem a lot more competitive than it actually turned out to be. So, assuming that he got a few more lucky breaks and that Bush got a few more bad ones, leading to him winning, what would he have looked like in office?</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							Sazerac
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							<p>It all depends on how he changed his campaign style. It’s hard to remember these days, but he was decidedly the outsider candidate during the Democratic primaries, and it wasn't until the convention that he really absorbed himself into what was then the mainstream Democratic structure. It’s hard to say, because we really haven’t had anyone of his particular brand run since, but you probably see a pretty moderate Brown administration, conservative on the economy and trade but moderate to liberal on the stuff that he was talking about promoting like women’s rights and diversity.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							HornsFlared
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							<div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: Sazerac
+							</div>
+							<p>So, I’m unclear on what the mainstream Democratic structure at the time was. Can you expand on that? Just don’t understand what the difference was between him and your average Democrat beyond having obviously not held office for ten years.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							Sazerac
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: HornsFlared
+							</div>
+							<p>So it was a weird historical moment. At that point, what we’ll call the establishment was backing Bill Clinton at first. The establishment ideals that he really summed up were a very small-l liberalism. It was still mostly supply-side economics, but with more progressive tendencies than Reagan was fighting for, like not completely throwing unions under the bus and focusing on diversity. At the same time, though, trade was sort of up in the air, so even though you had some guys who were 100% part of the establishment like Dick Gephardt who were anti-NAFTA, they were mixed with pro-NAFTA guys like Clinton or Bill Bradley or Al Gore. But a large part of the establishment was just vibe-based: they didn’t want to move beyond Reagan and Bush, just fit somewhere into their reality.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							Laplander
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							<p>If Jerry Brown won the presidency, based on what he was campaigning on (though lord knows he could change his mind on a dime), you would’ve seen:</p>
+							<ul style="margin-top: 5px;">
+								<li>A balanced budget, whether through an amendment or just because he did it himself</li>
+								<li>Moderate tax reform</li>
+								<li>Welfare is cut a bit but also makes it a lot better and more efficiency</li>
+								<li>NAFTA goes whichever way he thinks has the most support at the time</li>
+								<li>He doesn’t do much for healthcare</li>
+								<li>He doesn’t really rock the boat on corporate money (even though he hinted at it early in his campaign)</li>
+								<li>Appoints a bunch of female and minority judges? That was something he was huge on as governor, even though he didn’t talk about it too much while campaigning…</li>
+							</ul>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							MagicalPedro
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							<p>If Jerry Brown had been elected president, we would’ve gotten high-speed rail between every city by 2000 and a man on Mars by 2005 at the latest</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							HornsFlared
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: Sazerac
+							</div>
+							<p>Interesting. So how did it happen that somebody like Gephardt was able to go from that more conservative type of thought (even with the NAFTA caveat) to the neo-New Dealer type who dominates the party these days?</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							SecretFrog28
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							<p>I’ve actually done a bit of research on the Brown campaign (here in California he’s still pretty fondly remembered now that people have had enough time to put him in context), and he probably just does what he did as CA gov. Changes his positions on taxes but ultimately doesn’t try to increase them (might even try a flat tax), definitely passes a balanced budget amendment, and definitely does a lot to fight climate change. Beyond that, it’s hard to say. As governor, he alternated between being his own worst enemy or his own greatest ally, and based on how well he plays Congress, he either cruises to victory in 1996 or he gets wounded in the midterms and just peters out. But yeah, it would be nothing like Gephardt was.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							EntenteLoss
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							<p>I agree with what some of the other people are saying, but I’d be really interested to see how Bush is remembered as a one-termer. Today, he’s like an Eisenhower-lite, generally pretty popular but also not super notable legislatively (seriously, their second terms with a strongly Democratic Congress where the country mostly ran itself for four years are like MIRROR IMAGES of each other). With only one term, I’m guessing people think he’s a total loser like they do with Carter.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							Anadyr
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: EntenteLoss
+							</div>
+							<p>Since the USSR collapsed during his time I think that he only is remembered for that. Maybe then people think of him highly because he’s associated with such a victory?</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							VroomOnTheYamaha
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: Laplander
+							</div>
+							<p>How do you think the midterms go for President Jerry?</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							Laplander
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: VroomOnTheYamaha
+							</div>
+							<p>Probably not that badly. He loses pretty big (look at how Bush got screwed worse in 1994 than in 1990), but he had a lot of Democrats in Congress as a cushion. I can’t imagine how ANY Democrat would lose it.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							VroomOnTheYamaha
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: Laplander
+							</div>
+							<p>Do you think that Jeb Bush makes it across the finish line in a Brown midterm? He didn’t do great against Chiles, but based on what I’ve read, Chiles was weak enough that he had a shot.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							Sazerac
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: HornsFlared
+							</div>
+							<p>It was a strategic thing. In 1984, the Democrats try running a New Dealer in Mondale and get steamrolled. In 1988, they run Dukakis, who is mostly a New Dealer but is notably more conservative than Mondale in a few ways, and he gets steamrolled. Then, in 1992, they try running Jerry Brown, who has a bit of New Deal in him but is also very “modern,” and he gets steamrolled. So in 1996, Dick Gephardt crosses the Rubicon and says, “I’ve been mostly okay with the drift the party is taking, but it’s clearly not working. If we lose, we lose fighting for old-school principles.” Then, he fixates on what he calls “working man issues,” smashes Clinton and Cuomo, and then gets vindicated against Steve Forbes. That’s basically how we got our system today.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							Laplander
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: VroomOnTheYamaha
+							</div>
+							<p>Not only do I think that Jeb Bush had a shot, based on a lot of talk at the time, George Jr. (yes, THAT George, the Rangers owner) was seriously flirting with running for Texas governor, based on how Richards lowkey underperformed in 1988.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							VroomOnTheYamaha
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: Laplander
+							</div>
+							<p>Lol how have I never heard about this? Can’t imagine him being anything other than the Rangers guy.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							HornsFlared
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: Sazerac
+							</div>
+							<p>Thanks for explaining it so well! Feels crazy to imagine someone like Brown or Clinton as president, but it’s so interesting to hear how that happened. I had always just kinda thought of Reagan and Bush as being this weird 16-year blip of conservatism that we moved on from, but it’s interesting to read about the impact that it had on the Democrats at the time.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							Laplander
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: VroomOnTheYamaha
+							</div>
+							<p>It was an open secret that he really wanted to run in 1990 but got talked out of it by Barbara. Assuming typical midterm conditions, I definitely think he makes a go at it in 94.</p>
+						</div>
+					</div>
+
+					<div style="background-color: #F5F5FF; border: 1px solid #D1D1E1; margin-bottom: 10px; padding: 15px;">
+						<div style="color: #1A3E6E; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px;">
+							VroomOnTheYamaha
+						</div>
+						<div style="font-size: 0.95em; line-height: 1.5;">
+							 <div style="background-color: #E8E8E8; border: 1px solid #ccc; padding: 8px; font-size: 0.85em; margin-bottom: 10px; font-style: italic;">
+								Replying to: Laplander
+							</div>
+							<p>Wow, that’s a timeline I want to see.</p>
+						</div>
+					</div>
+
+				</div>
               `
           },
           {
@@ -39306,19 +39512,34 @@ e.vpSwitcher = () => {
               },
               "ending text": 
                   `
-                      Specter Hosts Rally at the Indiana State Fairgrounds to Mixed Reviews
-                      The Indianapolis Star
-                      Charles Fairfax, October 2, 1996
-  
-                      At the Specter campaign rally last night in Indianapolis, the mood was uncharacteristic of a presidential campaign, even a losing one. Far removed from the freewheeling, maniacal energy of the Brown campaign, or the uncertain march towards destruction of the Dukakis campaign, it instead felt desperate in a way that no other campaign in living memory has ever felt. Even in the fabled flops of presidential lore, such as Goldwater or McGovern, there was a sense of ideological purity, a sense that although their man wasn’t likely to win the White House, he was at least going to authentically represent a movement who had the possibility of a future vindication. Instead, the crowds gathered at the Indiana State Fairgrounds seemed completely aware of the sobering reality that they were heading towards defeat. “I’m not going to sit here and say that Clinton’s going to run away with it, but I will say that I don’t think that Specter is in the best position right now,” said Vivian Jankowski, a 43-year-old accountant who travelled from Noblesville to watch Senator Specter speak. “I think that we just have to get to Election Day and see what happens… who knows, we might see something.” 
-  
-                      If Jankowski seemed unenthusiastic, she was at least an authentic supporter of Specter, saying that she widely agreed with his policy and was proud that he “helped get a grip on” the conservative elements in his party. Such enthusiasm was not shared by other rally goers, such as Michael Kraft of Indianapolis, who “mostly came to hear President Bush speak.” An exceedingly high number of rallygoers listed either Bush or other convention speakers, such as Dan Coats, as primary reasons for their attendance instead of the actual nominee. Specter himself seemed to realize this, giving his standard stump speech in flat, unenthused fashion, receiving a few scattered handfuls of claps occasionally. The speech, which mostly focused on broad, agreeable rhetoric, drew its loudest applause when Specter highlighted his opposition to gun control, pointing to his opposition of the Brady Bill as proof of his gun rights bonafides. Although it cannot be said that many left the rally disappointed, based on how post-rally discussions quickly switched from political matters to generalized small talk.
-  
-                      The larger question, of course, is why Specter felt the need to campaign in Indiana, a state that wasn’t competitive last election. When reached for comment, a Specter campaign representative pointed out that his stop in Indiana was in between stops in Michigan and Ohio, long considered to be more competitive states. “Regardless of the poll numbers, the Specter campaign is confident of a victory in November,” claimed the representative, “Indiana just represents a geographically convenient location to spread our campaign’s values nationally, well beyond the swing states.” When asked if they thought that Indiana was a swing state this election, the representative declined to answer.
-  
-                      The wider question at hand is if the Specter campaign can even salvage Indiana as is, with polls showing Clinton consistently leading Specter by anywhere between 2-7 points in the state. The race for the governor’s mansion looks even more difficult for Republicans, with Stephen Goldsmith trailing Frank O’Bannon by 12 points in the latest round of polls. In a reversal from four years ago, when Republicans were able to make inroads into the Democrats’ House majority and maintain a draw in the Senate, most Republican consultants and advisors see preventing Democratic supermajorities in the House and Senate as their main objective, warning that seats previously thought safe, such as South Carolina and Wyoming, may be up for grabs. “The fundamentals were never going to be in favor of us this year, but Specter is having a difficult time winning over our typical base, and it doesn’t seem like Keyes is helping him,” says one consultant granted the privilege to speak anonymously. “Next week, you have Bill Clinton set to campaign in Laramie, Rapid City, and Bismarck, and when absolutely nobody is questioning that move… that’s when you know that things have gotten really tough. At a basic level, Clinton and Graham have very positive favorables, Specter has sub-average favorables, and Keyes has subterranean favorables.”
-  
-                      When asked if there were any positive signs for the Republicans in the month remaining before the election, another consultant, also granted the privilege to speak anonymously, was somewhat more positive. “In this country, public opinion is very thermostatic. When you have 16 years of the same people in office, people are going to want change, and love him or hate him, Bill Clinton has made himself represent that idea very clearly. Although I’m not going to sit here and tell you that this campaign is in an enviable position, Specter has two debates to reintroduce himself to the nation and prove that he’s just as much of a change candidate, if but a different, less radical type of change. And I think that he can do it.” Among rallygoers, though, such promises of change were decidedly elusive. Sanda Reddick, of Indianapolis, classified herself as a swing voter who had gone for Bush four years ago but was undecided going into the rally. “Honestly, I mainly went out of curiosity, especially because I didn’t really know what Specter stood for.” Upon being asked if Specter had managed to make an effective case for himself, Reddick was very blunt: “No, he did not… things could change, but if the election was held today, I think that I would probably vote for Clinton.”
+                      <div style="font-family: 'Georgia', 'Times New Roman', serif; background-color: #fcfcfc; color: #222; max-width: 720px; margin: 20px auto; padding: 25px; border: 1px solid #dcdcdc; box-shadow: 2px 2px 8px rgba(0,0,0,0.1);">
+
+						<div style="text-align: center; border-bottom: 3px double #004b8d; padding-bottom: 10px; margin-bottom: 20px;">
+							<div style="color: #004b8d; font-family: 'Impact', 'Arial Black', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 24px; margin-bottom: 5px;">The Indianapolis Star</div>
+							<div style="font-size: 14px; color: #555;">Serving Indiana since 1903</div>
+						</div>
+
+						<h1 style="font-size: 28px; line-height: 1.2; margin-bottom: 10px; font-weight: bold; color: #111;">Specter Hosts Rally at the Indiana State Fairgrounds to Mixed Reviews</h1>
+						
+						<div style="font-size: 14px; color: #444; margin-bottom: 25px; border-bottom: 1px solid #ccc; padding-bottom: 10px; display: flex; justify-content: space-between;">
+							<span style="font-weight: bold; text-transform: uppercase;">By Charles Fairfax</span>
+							<span style="font-style: italic;">October 2, 1996</span>
+						</div>
+
+						<div style="line-height: 1.6; font-size: 16px; text-align: justify;">
+							
+							<p><span style="float: left; font-size: 3.2em; line-height: 0.85; padding-right: 10px; font-weight: bold; color: #004b8d;">A</span>t the Specter campaign rally last night in Indianapolis, the mood was uncharacteristic of a presidential campaign, even a losing one. Far removed from the freewheeling, maniacal energy of the Brown campaign, or the uncertain march towards destruction of the Dukakis campaign, it instead felt desperate in a way that no other campaign in living memory has ever felt. Even in the fabled flops of presidential lore, such as Goldwater or McGovern, there was a sense of ideological purity, a sense that although their man wasn’t likely to win the White House, he was at least going to authentically represent a movement who had the possibility of a future vindication. Instead, the crowds gathered at the Indiana State Fairgrounds seemed completely aware of the sobering reality that they were heading towards defeat. “I’m not going to sit here and say that Clinton’s going to run away with it, but I will say that I don’t think that Specter is in the best position right now,” said Vivian Jankowski, a 43-year-old accountant who travelled from Noblesville to watch Senator Specter speak. “I think that we just have to get to Election Day and see what happens… who knows, we might see something.”</p>
+					  
+							<p>If Jankowski seemed unenthusiastic, she was at least an authentic supporter of Specter, saying that she widely agreed with his policy and was proud that he “helped get a grip on” the conservative elements in his party. Such enthusiasm was not shared by other rally goers, such as Michael Kraft of Indianapolis, who “mostly came to hear President Bush speak.” An exceedingly high number of rallygoers listed either Bush or other convention speakers, such as Dan Coats, as primary reasons for their attendance instead of the actual nominee. Specter himself seemed to realize this, giving his standard stump speech in flat, unenthused fashion, receiving a few scattered handfuls of claps occasionally. The speech, which mostly focused on broad, agreeable rhetoric, drew its loudest applause when Specter highlighted his opposition to gun control, pointing to his opposition of the Brady Bill as proof of his gun rights bonafides. Although it cannot be said that many left the rally disappointed, based on how post-rally discussions quickly switched from political matters to generalized small talk.</p>
+					  
+							<p>The larger question, of course, is why Specter felt the need to campaign in Indiana, a state that wasn’t competitive last election. When reached for comment, a Specter campaign representative pointed out that his stop in Indiana was in between stops in Michigan and Ohio, long considered to be more competitive states. “Regardless of the poll numbers, the Specter campaign is confident of a victory in November,” claimed the representative, “Indiana just represents a geographically convenient location to spread our campaign’s values nationally, well beyond the swing states.” When asked if they thought that Indiana was a swing state this election, the representative declined to answer.</p>
+					  
+							<p>The wider question at hand is if the Specter campaign can even salvage Indiana as is, with polls showing Clinton consistently leading Specter by anywhere between 2-7 points in the state. The race for the governor’s mansion looks even more difficult for Republicans, with Stephen Goldsmith trailing Frank O’Bannon by 12 points in the latest round of polls. In a reversal from four years ago, when Republicans were able to make inroads into the Democrats’ House majority and maintain a draw in the Senate, most Republican consultants and advisors see preventing Democratic supermajorities in the House and Senate as their main objective, warning that seats previously thought safe, such as South Carolina and Wyoming, may be up for grabs. “The fundamentals were never going to be in favor of us this year, but Specter is having a difficult time winning over our typical base, and it doesn’t seem like Keyes is helping him,” says one consultant granted the privilege to speak anonymously. “Next week, you have Bill Clinton set to campaign in Laramie, Rapid City, and Bismarck, and when absolutely nobody is questioning that move… that’s when you know that things have gotten really tough. At a basic level, Clinton and Graham have very positive favorables, Specter has sub-average favorables, and Keyes has subterranean favorables.”</p>
+					  
+							<p>When asked if there were any positive signs for the Republicans in the month remaining before the election, another consultant, also granted the privilege to speak anonymously, was somewhat more positive. “In this country, public opinion is very thermostatic. When you have 16 years of the same people in office, people are going to want change, and love him or hate him, Bill Clinton has made himself represent that idea very clearly. Although I’m not going to sit here and tell you that this campaign is in an enviable position, Specter has two debates to reintroduce himself to the nation and prove that he’s just as much of a change candidate, if but a different, less radical type of change. And I think that he can do it.” Among rallygoers, though, such promises of change were decidedly elusive. Sanda Reddick, of Indianapolis, classified herself as a swing voter who had gone for Bush four years ago but was undecided going into the rally. “Honestly, I mainly went out of curiosity, especially because I didn’t really know what Specter stood for.” Upon being asked if Specter had managed to make an effective case for himself, Reddick was very blunt: “No, he did not… things could change, but if the election was held today, I think that I would probably vote for Clinton.”</p>
+
+						</div>
+					</div>
                   `
           },
           {
@@ -39401,20 +39622,13 @@ e.vpSwitcher = () => {
               },
               "ending text": 
                   `
-                      Published using Google Docs
-                      Report abuseLearn more
-                      2008 US Election
-                      Updated automatically every 5 minutes
-                      2008 US Election
+                      2008 United States presidential election<br/><br/>
   
+                      From Wikipedia, the free encyclopedia.<br/><br/>
   
+                      Presidential elections were held in the United States on November 4, 2008. The Democratic ticket of Joe Biden, the senior senator from Delaware, and Bill Clinton, the junior Senator from Arkansas, defeated the Republican ticket of Mike Huckabee, the governor from Arkansas, and Donald Rumsfeld, the former secretary of defense under the Ford administration.This was the first election since 1952 in which neither the incumbent president nor vice president was on the ballot.<br/><br/>
   
-                      From Wikipedia, the free encyclopedia.
-  
-  
-                      Presidential elections were held in the United States on November 4, 2008. The Democratic ticket of Joe Biden, the senior senator from Delaware, and Bill Clinton, the junior Senator from Arkansas, defeated the Republican ticket of Mike Huckabee, the governor from Arkansas, and Donald Rumsfeld, the former secretary of defense under the Ford administration.This was the first election since 1952 in which neither the incumbent president nor vice president was on the ballot.
-  
-                      Incumbent Republican President Jeb Bush was ineligible to pursue a third term due to the term limits established by the Twenty-second Amendment. Huckabee secured the Republican nomination by March 2008, defeating his main challengers Senator John McCain and Vice-President John Danforth, and selected Rumsfeld as his running mate. The Democratic primaries were marked by a crowded field; as well as Biden and Clinton, John Kerry, Barack Obama and Mike Gravel all held leads for a period of time. Biden became the presumed nominee in June, and chose primary rival Clinton to be his running mate.
+                      Incumbent Republican President Jeb Bush was ineligible to pursue a third term due to the term limits established by the Twenty-second Amendment. Huckabee secured the Republican nomination by March 2008, defeating his main challengers Senator John McCain and Vice-President John Danforth, and selected Rumsfeld as his running mate. The Democratic primaries were marked by a crowded field; as well as Biden and Clinton, John Kerry, Barack Obama and Mike Gravel all held leads for a period of time. Biden became the presumed nominee in June, and chose primary rival Clinton to be his running mate.<br/><br/>
   
                       Bush's popularity had significantly declined during his second term, which was attributed to the growing disdain for the Iraq war, his response to Hurricane Irene and the Camp Bucca torture controversy. Despite this, Huckabee chose to campaign closely with Bush, and make frequent media appearances with the President, to try and heal the divide after defeating Danforth. Biden supported the war, but felt as though Bush and Huckabee had flawed approaches on it. Huckabee campaigned on the theme of “A moral government, a small government”, while Biden emphasized his experience. There were some concerns over a lagging economy, but most pundits agree foreign policy was the most relevant issue of the election.[5]
                   `
@@ -39435,21 +39649,35 @@ e.vpSwitcher = () => {
               },
               "ending text": 
                   `
-                      Inside the Chaotic Halls of the White House
-  
-                      Washington Post
-                      Nancy Redfield
-                      September 3, 1994
-  
-                      At first glance, the question “who runs the White House” should have a very simple answer: the President of the United States, Jerry Brown. And to some extent, that’s true, as like all presidents, Jerry Brown is the center of the universe around which all things revolve. After that, though, how does Brown translate his thoughts and decisions into tangible actions? Who even advises him on these thoughts and decisions? Over 18 months into his presidency, it’s extremely unclear. On paper, at least, Richard Goodwin, Kennedy and LBJ speechwriter-turned political exile-turned comeback kid, works as chief of staff and is the de jure second-in-command, with all sorts of official advisors and speech writers and bureaucrats ranking below him. In reality, it’s more complicated, as exemplified by an incident where Goodwin was infuriated to learn that Pat Caddell, who has no official role in the administration, had changed Brown’s mind on the decision to send troops to intervene in the Somali Civil War after Goodwin had thought that he and Brown had reached a decision. 
-  
-                      Although several individuals working at the White House are assured that Brown is fully in control, nobody can quite agree how the practical chain of command works, with several different parallel power structures being identified. For instance, although the aforementioned Pat Caddell is technically unemployed at the moment, he has moved back to Washington from California and meets with Brown in person at least once every two weeks. Likewise, old Brown friend Jacques Barghazi, who many thought had been neutralized after a scandal centered around his chauvinistic comments briefly threatened to derail Brown’s campaign, is back in a low-key advisory position, often conducting one-on-one meetings with Brown in the Oval Office. But Brown isn’t limited to soliciting the advice of sycophants, either: Gore Vidal, who ran against him for Senate in 1982, had Brown reach out to him after Vidal criticized his position on taxes. Somehow, the two of them patched things up, and they now have a phone call once a week. 
-  
-                      Those looking for answers in Brown’s Cabinet will likely be left disappointed. Faced with a Senate of a vastly different ideology than him, Brown has mostly toed the line with his appointments, settling for technocratic moderates who are good at their job. Dick Riley, Secretary of Education and establishment favorite (many had him tapped as a potential Clinton pick), is the foremost of these technocrats, with Brown (who had threatened to abolish the Department of Education during his campaign) taking keen interest in developing policies to establish what he calls the “best school system in the world,” working more closely with Riley than the other secretaries. However, by the nature of his de facto lower-ranking Cabinet position, Riley often finds himself surpassed by Secretary of State Howard Berman, described by many as the most clever member of the Cabinet and the one who understands Brown the best, who has sacrificed trying to influence Brown on major policy initiatives in a successful effort to get Brown to advocate for a wide variety of less-publicized policies, such as successful efforts to protect whistleblowers. Berman’s opposite is Secretary of Commerce Ralph Nader, a bleeding-heart ideologue who believes that Brown has a once-in-a-generation chance to remake the federal government into being a people-first institution. At Cabinet meetings, not entirely to Brown’s displeasure, Nader’s voice is often the loudest. 
-  
-                      Above all else, the biggest reason that the Brown administration is so dysfunctional is none other than Jerry Brown himself. Although Brown is, by all accounts, an extremely intelligent and hardworking president, he is also blissfully unmoored to the concept of political capital and strategy, letting his ambitions take him wherever he pleases. Early in his term, Brown pushed for large lower-class income cuts while the House was formulating a budget bill and then suddenly completely abandoned this position after being faced with moderate pushback, with his public address the literal next day after the first sign of House resistance revolving entirely around his efforts to diversify the federal judiciary, with no mention of the budget. Perhaps no single accomplishment better reflects this style than Brown’s guidance on 1993’s crime bill. After spending weeks carefully helping shape the bill, Brown suddenly announced that he would veto it unless the amount of new mandatory minimum sentences was slashed by 90% and the bill refused to expand the federal death penalty beyond its existing limits, nearly tanking it entirely before an 11th-hour effort from Senator Joe Biden (D-DE) saved it. Other bills focusing on welfare reform and environmental regulation have been completely abandoned, with Brown resolving to work on them after the midterms.
-  
-                      At the moment, it’s unclear if anything can restore immediate order to the White House, with Brown saddled with low approval ratings and headed for a large defeat in the midterms, if polling and historical precedent are to be believed. Inside and outside the administration, it is widely believed that come January, there will be a mass executive branch turnaround, with many already plotting their exits. Yet, one close presidential aide who prefers to go unnamed believes that there may yet be room for hope, stating that “the president knows what the situation looks like with Congress, with how he’s perceived publicly, and with the elections. He’s not naive; he’s not stupid. The midterms have already started spurring him into action, and he’s learning to delegate a lot more and to message a lot more publicly. If you give him a chance, he’ll turn it around.” The American people are currently unlikely to agree with that statement, with polls showing Republicans leading Democrats by six points on the generic ballot. Still, according to the same unnamed source, “Jerry is the president. He’s going to do what he wants to do. Either the people are going to acquiesce to him, or he’s going to acquiesce to them, but things will eventually come to a head. Personally, I’m backing the president.”
+                      <div style="font-family: 'Times New Roman', Times, serif; background-color: #fdfdfd; color: #2a2a2a; max-width: 700px; margin: 20px auto; padding: 30px; border: 1px solid #dcdcdc; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+
+						<div style="text-align: center; margin-bottom: 20px;">
+							<div style="font-family: 'Georgia', serif; font-size: 1.8rem; font-weight: bold; margin-bottom: 5px;">The Washington Post</div>
+							<div style="border-top: 2px solid #000; border-bottom: 1px solid #000; padding: 5px 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+								September 3, 1994
+							</div>
+						</div>
+
+						<h1 style="font-size: 2.2rem; line-height: 1.1; margin-bottom: 10px; font-weight: 700; font-family: 'Georgia', serif;">Inside the Chaotic Halls of the White House</h1>
+						
+						<div style="font-style: italic; font-size: 1rem; color: #555; margin-bottom: 25px; border-bottom: 1px solid #ccc; padding-bottom: 15px;">
+							By <strong>Nancy Redfield</strong>
+						</div>
+
+						<div style="font-size: 1.1rem; line-height: 1.6; text-align: justify;">
+							
+							<p><span style="float: left; font-size: 3.5rem; line-height: 0.8; padding-top: 5px; padding-right: 8px; font-weight: bold; font-family: 'Georgia', serif;">A</span>t first glance, the question “who runs the White House” should have a very simple answer: the President of the United States, Jerry Brown. And to some extent, that’s true, as like all presidents, Jerry Brown is the center of the universe around which all things revolve. After that, though, how does Brown translate his thoughts and decisions into tangible actions? Who even advises him on these thoughts and decisions? Over 18 months into his presidency, it’s extremely unclear. On paper, at least, Richard Goodwin, Kennedy and LBJ speechwriter-turned political exile-turned comeback kid, works as chief of staff and is the de jure second-in-command, with all sorts of official advisors and speech writers and bureaucrats ranking below him. In reality, it’s more complicated, as exemplified by an incident where Goodwin was infuriated to learn that Pat Caddell, who has no official role in the administration, had changed Brown’s mind on the decision to send troops to intervene in the Somali Civil War after Goodwin had thought that he and Brown had reached a decision.</p>
+
+							<p>Although several individuals working at the White House are assured that Brown is fully in control, nobody can quite agree how the practical chain of command works, with several different parallel power structures being identified. For instance, although the aforementioned Pat Caddell is technically unemployed at the moment, he has moved back to Washington from California and meets with Brown in person at least once every two weeks. Likewise, old Brown friend Jacques Barghazi, who many thought had been neutralized after a scandal centered around his chauvinistic comments briefly threatened to derail Brown’s campaign, is back in a low-key advisory position, often conducting one-on-one meetings with Brown in the Oval Office. But Brown isn’t limited to soliciting the advice of sycophants, either: Gore Vidal, who ran against him for Senate in 1982, had Brown reach out to him after Vidal criticized his position on taxes. Somehow, the two of them patched things up, and they now have a phone call once a week.</p>
+
+							<p>Those looking for answers in Brown’s Cabinet will likely be left disappointed. Faced with a Senate of a vastly different ideology than him, Brown has mostly toed the line with his appointments, settling for technocratic moderates who are good at their job. Dick Riley, Secretary of Education and establishment favorite (many had him tapped as a potential Clinton pick), is the foremost of these technocrats, with Brown (who had threatened to abolish the Department of Education during his campaign) taking keen interest in developing policies to establish what he calls the “best school system in the world,” working more closely with Riley than the other secretaries. However, by the nature of his de facto lower-ranking Cabinet position, Riley often finds himself surpassed by Secretary of State Howard Berman, described by many as the most clever member of the Cabinet and the one who understands Brown the best, who has sacrificed trying to influence Brown on major policy initiatives in a successful effort to get Brown to advocate for a wide variety of less-publicized policies, such as successful efforts to protect whistleblowers. Berman’s opposite is Secretary of Commerce Ralph Nader, a bleeding-heart ideologue who believes that Brown has a once-in-a-generation chance to remake the federal government into being a people-first institution. At Cabinet meetings, not entirely to Brown’s displeasure, Nader’s voice is often the loudest.</p>
+
+							<p>Above all else, the biggest reason that the Brown administration is so dysfunctional is none other than Jerry Brown himself. Although Brown is, by all accounts, an extremely intelligent and hardworking president, he is also blissfully unmoored to the concept of political capital and strategy, letting his ambitions take him wherever he pleases. Early in his term, Brown pushed for large lower-class income cuts while the House was formulating a budget bill and then suddenly completely abandoned this position after being faced with moderate pushback, with his public address the literal next day after the first sign of House resistance revolving entirely around his efforts to diversify the federal judiciary, with no mention of the budget. Perhaps no single accomplishment better reflects this style than Brown’s guidance on 1993’s crime bill. After spending weeks carefully helping shape the bill, Brown suddenly announced that he would veto it unless the amount of new mandatory minimum sentences was slashed by 90% and the bill refused to expand the federal death penalty beyond its existing limits, nearly tanking it entirely before an 11th-hour effort from Senator Joe Biden (D-DE) saved it. Other bills focusing on welfare reform and environmental regulation have been completely abandoned, with Brown resolving to work on them after the midterms.</p>
+
+							<p>At the moment, it’s unclear if anything can restore immediate order to the White House, with Brown saddled with low approval ratings and headed for a large defeat in the midterms, if polling and historical precedent are to be believed. Inside and outside the administration, it is widely believed that come January, there will be a mass executive branch turnaround, with many already plotting their exits. Yet, one close presidential aide who prefers to go unnamed believes that there may yet be room for hope, stating that “the president knows what the situation looks like with Congress, with how he’s perceived publicly, and with the elections. He’s not naive; he’s not stupid. The midterms have already started spurring him into action, and he’s learning to delegate a lot more and to message a lot more publicly. If you give him a chance, he’ll turn it around.” The American people are currently unlikely to agree with that statement, with polls showing Republicans leading Democrats by six points on the generic ballot. Still, according to the same unnamed source, “Jerry is the president. He’s going to do what he wants to do. Either the people are going to acquiesce to him, or he’s going to acquiesce to them, but things will eventually come to a head. Personally, I’m backing the president.”</p>
+						</div>
+
+					</div>
                   `
           },
           {
@@ -39468,29 +39696,37 @@ e.vpSwitcher = () => {
               },
               "ending text": 
                   `
-                      Waiting for Perot
-                      The Dallas Morning News
-                      Hal Doda, June 19, 1995
-  
-                      Three years later, any conversation with Ross Perot follows a steady, predetermined pattern: as the conversation goes on, the chances of Perot talking about his aborted presidential bid in 1992 reach 100%. Although he initially led both Jerry Brown and George Bush in polling, Perot eventually dropped his candidacy after a sharp decline caused by repeated self-inflicted wounds. At the time, many attributed his dropout to deep hubris, a charge that Perot denied. Now, with three years of perspective, he’s fully aware that responsibility for his flameout lays squarely on his shoulders.
-                          
-                      “What can I say,” laughs Perot, sitting in his office in Plano, Texas, “I was my own worst enemy.”
-  
-                      Initially, after Brown’s victory over Bush, there was some hope from Perot that Brown would be able to enact the types of systematic changes to Congress that Perot was advocating for. Although Brown’s campaign tacked more towards mainstream Democratic talking points as time went on, he had focused on many of the same issues that Perot had: the need to balance the budget (or at the very least, massively reduce the deficit), the need for a healthy skepticism of NAFTA, and the need for long-entrenched Congress members to be cleared out to reduce corruption. In office, though, Brown has done a substandard job, in Brown’s eyes.
-  
-                      “He’s gone one for three,” says Perot. “I like the angle that he’s taken on the budget, but he’s moving too slow for my tastes. Then, letting NAFTA get passed, not doing anything about taking care of Congress critters, he’s been woefully inadequate. I’d give him a C-minus: he’s passing and barely holding it together right now, but if anything jumps up, we’re looking at serious failure.”
-  
-                      Although Perot’s criticism of Brown might lead one to think that he holds the Republicans in higher regard, the opposite is true. For Perot, Republican frontrunners Bob Dole and Lamar Alexander are little better, an “arrogant loudmouth” and a “boring shill” respectively. Though he notes that there are some Republicans who have “a few half-decent ideas,” they are about equal with the Democrats. 
-  
-                      “No doubt, if Jerry Brown is a C-minus, then the Republicans are a straight F. If you’re out there offering no alternative, and that’s the best you can do, the absolute best, then you’re just plain not good enough. I mean, they need to be able to peel off just one Democrat in the Senate and five in the House, but they can’t even do that? Come on.”
-  
-                      If all sides of Brown’s extremely narrow trifecta and opposition are accounted for as being not up to the challenges of the times, then who does that leave? The answer, of course, is Perot. For now, he remains coy about running for president in 1996, saying that he will “need to have some talks with the family and look at where my businesses are.” But behind the scenes, the machinations of a campaign are slowly and precisely coming together. Ed Rollins, who was co-chair of the 1992 campaign alongside Hamilton Jordan before resigning after accusing Perot of not being suited to be president, has been coaxed back to the fold with the promise that he will have much greater power in the event of a second run (Jordan is nowhere to be seen). Thomas Luce, who organized the massive draft Perot campaign, has promised to orchestrate an even larger operation. Perot has reached a preliminary agreement with Norman Schwarzkopf for the running mate slot.
-  
-                      If Perot really is to be the next president, though, he will need to not only take responsibility for his past shortcomings on the campaign trail, but will also need to address them and improve. Although Perot makes a show of bristling over needing to “tone himself down,” privately, he has made several promises to Rollins about how a second campaign will be conducted. Among other various pledges, Perot has promised Rollins that he will not make any mention of conspiracies, will take outside donations while spending as much of his own money as necessary to win, and most importantly, will treat running for the presidency as a full-time job, spending the entirety of election season campaigning instead of trying to balance it with his business duties in Dallas. 
-  
-                      Although the road to the White House may be long and treacherous, there is ample reason to think that Perot could win a general election–or at the very least, deadlock it–if he chooses to run. Many voters feel that he left something on the table by dropping out, and are chomping at the bit at a chance for him to redeem himself. In the latest ABC News poll on the 1996 presidential election, Perot led Brown and Dole 38% to 33% and 26%, respectively (the poll found the exact same results when Lamar Alexander was given as the Republican candidate). But for now, Perot’s campaign exists purely in the realm of hypotheticals, even if those hypotheticals are quickly becoming reality.
-  
-                      “Heck, I could run, I could not run, it’s all on the table,” Perot says to close out his interview. “But one day, my grandchildren are going to get old enough to have a real understanding of politics, and they’re going to ask me where I was when Jerry Brown and his GOP friends were mucking up our government. What am I going to tell them?”
+                      <div style="font-family: 'Georgia', 'Times New Roman', serif; background-color: #fdfdfd; color: #111; max-width: 700px; margin: 20px auto; padding: 30px; border: 1px solid #ccc; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+
+						<div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 15px; margin-bottom: 25px;">
+							<h3 style="font-family: 'Arial', sans-serif; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; color: #555; margin: 0;">The Dallas Morning News</h3>
+							<h1 style="font-size: 36px; line-height: 1.1; margin: 10px 0;">Waiting for Perot</h1>
+							<div style="font-style: italic; font-size: 14px; margin-top: 5px;">
+								<strong>By Hal Doda</strong> &nbsp;|&nbsp; June 19, 1995
+							</div>
+						</div>
+
+						<div style="line-height: 1.6; font-size: 16px; text-align: justify;">
+							
+							<p><span style="float: left; font-size: 3.5em; line-height: 0.8; padding-right: 8px; font-weight: bold;">T</span>hree years later, any conversation with Ross Perot follows a steady, predetermined pattern: as the conversation goes on, the chances of Perot talking about his aborted presidential bid in 1992 reach 100%. Although he initially led both Jerry Brown and George Bush in polling, Perot eventually dropped his candidacy after a sharp decline caused by repeated self-inflicted wounds. At the time, many attributed his dropout to deep hubris, a charge that Perot denied. Now, with three years of perspective, he’s fully aware that responsibility for his flameout lays squarely on his shoulders.</p>
+
+							<p>“What can I say,” laughs Perot, sitting in his office in Plano, Texas, “I was my own worst enemy.”</p>
+
+							<p>Initially, after Brown’s victory over Bush, there was some hope from Perot that Brown would be able to enact the types of systematic changes to Congress that Perot was advocating for. Although Brown’s campaign tacked more towards mainstream Democratic talking points as time went on, he had focused on many of the same issues that Perot had: the need to balance the budget (or at the very least, massively reduce the deficit), the need for a healthy skepticism of NAFTA, and the need for long-entrenched Congress members to be cleared out to reduce corruption. In office, though, Brown has done a substandard job, in Brown’s eyes.</p>
+
+							<p>“He’s gone one for three,” says Perot. “I like the angle that he’s taken on the budget, but he’s moving too slow for my tastes. Then, letting NAFTA get passed, not doing anything about taking care of Congress critters, he’s been woefully inadequate. I’d give him a C-minus: he’s passing and barely holding it together right now, but if anything jumps up, we’re looking at serious failure.”</p>
+
+							<p>Although Perot’s criticism of Brown might lead one to think that he holds the Republicans in higher regard, the opposite is true. For Perot, Republican frontrunners Bob Dole and Lamar Alexander are little better, an “arrogant loudmouth” and a “boring shill” respectively. Though he notes that there are some Republicans who have “a few half-decent ideas,” they are about equal with the Democrats.</p>
+
+							<p>“No doubt, if Jerry Brown is a C-minus, then the Republicans are a straight F. If you’re out there offering no alternative, and that’s the best you can do, the absolute best, then you’re just plain not good enough. I mean, they need to be able to peel off just one Democrat in the Senate and five in the House, but they can’t even do that? Come on.”</p>
+
+							<p>If all sides of Brown’s extremely narrow trifecta and opposition are accounted for as being not up to the challenges of the times, then who does that leave? The answer, of course, is Perot. For now, he remains coy about running for president in 1996, saying that he will “need to have some talks with the family and look at where my businesses are.” But behind the scenes, the machinations of a campaign are slowly and precisely coming together. Ed Rollins, who was co-chair of the 1992 campaign alongside Hamilton Jordan before resigning after accusing Perot of not being suited to be president, has been coaxed back to the fold with the promise that he will have much greater power in the event of a second run (Jordan is nowhere to be seen). Thomas Luce, who organized the massive draft Perot campaign, has promised to orchestrate an even larger operation. Perot has reached a preliminary agreement with Norman Schwarzkopf for the running mate slot.</p>
+
+							<p>If Perot really is to be the next president, though, he will need to not only take responsibility for his past shortcomings on the campaign trail, but will also need to address them and improve. Although Perot makes a show of bristling over needing to “tone himself down,” privately, he has made several promises to Rollins about how a second campaign will be conducted. Among other various pledges, Perot has promised Rollins that he will not make any mention of conspiracies, will take outside donations while spending as much of his own money as necessary to win, and most importantly, will treat running for the presidency as a full-time job, spending the entirety of election season campaigning instead of trying to balance it with his business duties in Dallas.</p>
+
+							<p>Although the road to the White House may be long and treacherous, there is ample reason to think that Perot could win a general election–or at the very least, deadlock it–if he chooses to run. Many voters feel that he left something on the table by dropping out, and are chomping at the bit at a chance for him to redeem himself. In the latest ABC News poll on the 1996 presidential election, Perot led Brown and Dole 38% to 33% and 26%, respectively (the poll found the exact same results when Lamar Alexander was given as the Republican candidate). But for now, Perot’s campaign exists purely in the realm of hypotheticals, even if those hypotheticals are quickly becoming reality.</p>
+
+							<p>“Heck, I could run, I could not run, it’s all on the table,” Perot says to close out his interview. “But one day, my grandchildren are going to get old enough to have a real understanding of politics, and they’re going to ask me where I was when Jerry Brown and his GOP friends were mucking up our government. What am I going to tell them?”</p>
                   `
           },
           {
@@ -41067,88 +41303,79 @@ Euro Disney Begins Considering Exiting French Market
     "Running Mate": e.running_mate_last_name
         },            
         "ending text": `
-        <h2> FOR THE LAST TIME, THESE CHARACTER ARE ANTHROPOMORPHIC REPRESENTATIONS OF COUNTRIES, BUT THEY STILL FUNCTION AS INDIVIDUAL PEOPLE WITH NAMES. MARTINA=CZECHIA, ZOFIA=POLAND, AND SO ON AND SO FORTH. I WILL NOT BE ANSWERING THIS QUESTION AGAIN.</h2>
-        <p>The dark waters of the Black Sea flashed in a hundred different shades of darkness as Valentina and Ophelia walked along the Sochi beachfront, hand in hand. Snow was lightly falling, blanketing the beach city in an ethereal white blanket.</p>
+		<h2>FOR THE LAST TIME, THESE CHARACTERS ARE ANTHROPOMORPHIC REPRESENTATIONS OF COUNTRIES, BUT THEY STILL FUNCTION AS INDIVIDUAL PEOPLE WITH NAMES. MARTINA=CZECHIA, ZOFIA=POLAND, AND SO ON AND SO FORTH. I WILL NOT BE ANSWERING THIS QUESTION AGAIN.</h2>
+        <p>The dark waters of the Black Sea flashed in a hundred different shades of darkness as Valentina and Ophelia walked along the Sochi beachfront, hand in hand. Snow was lightly falling, blanketing the beach city in an ethereal white covering.</p>
 
-<p>As the two of them walked together, Valentina looked at Ophelia and blushed. The American woman was so beautiful, so powerful, with crimson red lipstick and thick black makeup that provided an alluring edge to her soft green eyes, All-American pigtails and relaxed demeanor. She was innocent and dangerous, loud and careful, confident and bashful. Ophelia truly was everything America represented: a big bundle of contradictions wrapped up into something breathtakingly stunning.</p>
+		<p>As the two of them walked together, Valentina looked at Ophelia and blushed. The American woman was so beautiful, so powerful, with crimson red lipstick and thick black makeup that provided an alluring edge to her soft green eyes, all-American pigtails and relaxed demeanor. She was innocent and dangerous, loud and careful, confident and bashful. Ophelia truly was everything America represented: a big bundle of contradictions wrapped up into something breathtakingly stunning.</p>
 
-<p>As Valentina was smiling to herself, Ophelia took the chance to look at her and blushed even harder. The Russian woman was big and strong, with long ballerina legs which were bookended by unspeakably hypnotizing thighs. She looked at Valentina and saw how she had been broken, hurt so badly by so many people, her alabaster white skin traced with centuries worth of pale scars. But she stood straight: her blonde hair shone brightly against the snow, her face, seemingly chiseled from rock, looked beautifully strong rather than utterly cruel, and her full lips curled upwards with the hint of a smile.</p>
+		<p>As Valentina was smiling to herself, Ophelia took the chance to look at her and blushed even harder. The Russian woman was tall and strong, with long ballerina legs and a graceful bearing. She looked at Valentina and saw how she had been broken, hurt so badly by so many people, her alabaster white skin traced with centuries worth of pale scars. But she stood straight: her blonde hair shone brightly against the snow, her face, seemingly chiseled from stone, looked beautifully strong rather than utterly cruel, and her full lips curled upward with the hint of a smile.</p>
 
-<p>“You are strong and beautiful woman, you know that?” asked Valentina, interrupting Ophelia’s thoughts.</p>
+		<p>“You are a strong and beautiful woman, you know that?” asked Valentina, interrupting Ophelia’s thoughts.</p>
 
-<p>Ophelia blushed even harder, her face becoming red as the old Soviet Union’s flag. “Aww, Valentina, you’re so nice! You don’t have to say all of these pleasantries about me just to get on my good side. I already love you!” She plopped a wet, juicy kiss on the side of Valentina’s face, her crimson lipstick leaving a bright stain. Valentina didn’t wipe it off,</p>
+		<p>Ophelia blushed even harder, her face becoming as red as the old Soviet Union’s flag. “Aww, Valentina, you’re so nice! You don’t have to say all of these pleasantries about me just to get on my good side. I already love you!” She planted a kiss on the side of Valentina’s face, her crimson lipstick leaving a bright stain. Valentina didn’t wipe it off.</p>
 
-<p>The two of them walked some more as the snow grew thicker and thicker, their boots leaving prints that were quickly swallowed up. Ophelia shivered. “Brr, how are you Russians able to live in this weather? Sochi isn’t even that cold, compared to other cities–I’d be freezing to death if we were in Murmansk.”</p>
+		<p>The two of them walked some more as the snow grew thicker and thicker, their boots leaving prints that were quickly swallowed up. Ophelia shivered. “Brr, how are you Russians able to live in this weather? Sochi isn’t even that cold compared to other cities — I’d be freezing to death if we were in Murmansk.”</p>
 
-<p>Valentina laughed, a big, hearty sound that made Ophelia’s heart sing. “You Americans, you have misconception about us. We hate the cold! Life in winter is very hard. We just… adjust. Bundle up tighter.”</p>
+		<p>Valentina laughed, a big, hearty sound that made Ophelia’s heart sing. “You Americans, you have misconceptions about us. We hate the cold! Life in winter is very hard. We just… adjust. Bundle up tighter.”</p>
 
-<p>Ophelia smiled. “That sounds so nice. But tell me, what’s the proper etiquette for a girl’s date out in the snow? Do you even have hot chocolate?”</p>
+		<p>Ophelia smiled. “That sounds so nice. But tell me, what’s the proper etiquette for a girl’s date out in the snow? Do you even have hot chocolate?”</p>
 
-<p>“It is very rare,” responded Valentina. “Usually, we just drink vodka. But really, when two girls love each other, they focus on staying warm.”</p>
+		<p>“It is very rare,” responded Valentina. “Usually, we just drink tea or warm ourselves by the fire. But really, when two people love each other, they focus on staying warm together.”</p>
 
-<p>“Oh,” asked Ophelia, raising an eyebrow, “how do you like to stay warm?” Valentina didn’t respond, instead letting her hand slide down Ophelia’s back until it reached the top of her ass. Then, she leaned over and whispered in Ophelia’s ear:</p>
+		<p>“Oh,” asked Ophelia, raising an eyebrow, “and how do you like to stay warm?” </p>
 
-<p>“In bed.” Now it was Valentina who was blushing, shocked by her own audacity as she quickly retracted her hand from Ophelia’s ample American ass. “I’m sorry, Ophelia, I move too fast. I make mistake.”</p>
+		<p>Valentina smiled warmly. “I have apartment close by. We should go there, get out of this cold.”</p>
 
-<p>Ophelia brought her finger to Valentina’s lips and shushed her, then wrapped her other arm around Valentina’s waist. “Nonsense,” she purred, “you were right on time.” She kissed Valentina again, this time right on the lips, and leaned into the kiss. Valentina leaned back, and the two savored each other’s tastes for a moment.</p>
+		<p>“I love the sound of that,” said Ophelia. “Lead the way!”</p>
 
-<p>The women broke their kiss and looked deep into each other’s eyes. Valentina interjected, “I have apartment close. We should go there.”</p>
+		<p>The women walked through the snow until they arrived at Valentina’s apartment. On the surface, it was a normal five-story Khrushchevka. But when they stepped inside, Ophelia was taken aback at how charming it was. It was lit with candles, with books — Pushkin, Dostoevsky, Tolstoy — stacked up everywhere and ornamental carpets lining the walls. Ophelia walked over to a picture of Valentina with two other girls, taken in the summertime. Valentina was in the middle, with a girl wearing a white-and-red swimsuit on the left and a girl wearing a yellow-and-blue swimsuit on the right.</p>
 
-<p>“I love the sound of that,” said Ophelia. “Lead the way!”</p>
+		<p>“What’s this,” Ophelia asked, “competition?”</p>
 
-<p>The women walked through the snow until they arrived at Valentina’s apartment. On the surface, it was a normal five-story beat-up Khrushchevka. But when they stepped inside, Ophelia was taken aback at how charming it was. It was lit with candles, with books–Pushkin, Dostoevsky, Tolstoy–stacked up everywhere and ornamental carpets lining the walls. Ophelia walked over to a picture of Valentina with two other girls, taken in the summertime. Valentina was in the middle, with a girl wearing a white-red bikini on the left and a girl wearing a yellow-blue bikini on the right.</p>
+		<p>Valentina just laughed again. “It’s not romantic. These women are my sisters. Ulyana is on the left and Oksana is on the right.”</p>
 
-<p>“What’s this,” Ophelia asked, “competition?”</p>
+		<p>“I would love to meet them someday.”</p>
 
-<p>Valentina just laughed again. “Is not romantic. These women are my sisters. Ulyana is on left and Oksana is on right.”</p>
+		<p>“Maybe, maybe.” Valentina sat down on her couch, and Ophelia moved to sit beside her. “These things about family make me… feel scared. Our relationship. I don’t know what we are.”</p>
 
-<p>“I would love to meet them someday.”</p>
+		<p>Ophelia thought back on it. She thought about how she and Valentina had hated each other during that one super-left phase Valentina had gone through. How their friends Jerry and Boris had reintroduced them to each other. How they had grown over the past few years.</p>
 
-<p>“Maybe, maybe.” Valentina sat down on her couch, and Ophelia moved to sit beside her. “These things about family make me… feel scared. Our relationship. I not know what we are.”</p>
+		<p>Valentina jumped in front of Ophelia’s train of thought. “We were enemies, then friends. Now we are lovers. But what comes next?”</p>
 
-<p>Ophelia thought back on it. She thought about how she and Valentina had initially hated each other during that one super-left phase Valentina had gone through. How their friends Jerry and Boris had reintroduced them to each other. How they had grown over the past few years.</p>
+		<p>Ophelia stroked Valentina’s hand carefully. “Are you ready to use the m-word?”</p>
 
-<p>Valentina jumped in front of Ophelia’s train of thought. “We were enemies, then friends. Now we are lovers. But what comes next?”</p>
+		<p>Valentina looked confused. “My English is not so good, Ophelia. Which ‘m’ word?”</p>
 
-<p>Ophelia stroked Valentina’s skin carefully. “Are you ready to use the m-word?”</p>
+		<p>“Marriage,” Ophelia said. “The two of us entwined in eternal companionship, bound by the power of love.”</p>
 
-<p>Valentina looked confused. “My English not so good, Ophelia. Which “m” word?”</p>
+		<p>Valentina looked worried. “Ophelia, you’ve been in serious relationships before. That British girl, the one you said you had a ‘special relationship’ with. That Israeli girl you were engaged to before you broke up. How am I different?”</p>
 
-<p>“Marriage,” Ophelia said. “The two of us entwined in eternal companionship, bound by the power of love.”</p>
+		<p>Ophelia looked at Valentina deep in her icy blue eyes. “Because you’re not like the other girls. You’re stronger, smarter. But above all else, it is your soul, your beautiful soul, which is special. Together, we can travel the world, do whatever we please.” She took Valentina’s hands in hers. “We can build a life together.”</p>
 
-<p>Valentina looked worried. “Ophelia, you’ve been married before. That British girl, the one you said you had “special relationship” with. That Israeli girl you were engaged to before you broke up. How am I different?”</p>
+		<p>Valentina looked at her lovingly. “Am I really so special? I feel so… weak sometimes. Like I cannot do it.”</p>
 
-<p>Ophelia looked at Valentina deep in her icy blue eyes. “Because you’re not like the other girls. You’re stronger. Smarter. But above all else, it is your soul, your beautiful Russian soul, which is special. Together, we can travel the world, do whatever we please.” Then, smirking, she loosened the clasps on her bra. “We can make beautiful love, every night.” She let the bra fall down, only the thin layer of her dress remaining on her chest.</p>
+		<p>“No,” said Ophelia, “you’re beautiful the way you are.” She squeezed Valentina’s hands. “You’re the strongest person I know.”</p>
 
-<p>Valentina looked at her lovingly. “Am I really so great? I feel so… weak sometimes. Like I cannot do it.”</p>
+		<p>Valentina leaned in closer. “Oh, I cannot hide it. I love you, my American darling.” </p>
 
-<p>“No,” said Ophelia, “you’re beautiful the way you are.” She moved her hand down to Valentina’s skirt, sliding under until she felt Valentina’s womanhood. “You’re wet for me.”</p>
+		<p>The two women drew closer together, about to share a tender moment, when suddenly a terrible racket started outside, and they heard the sound of people yelling at each other. Going up to the window, Ophelia could see the familiar faces of Ana the Serbian, Farah the Bosniak, and Marta the Croatian out in the snow, throwing snowballs at each other with violent intent. First, Farah and Marta were teaming up on Ana, before Marta switched sides, as the girls hollered with delight at the scene they were making, paying no attention to their surroundings as snowballs went whizzing everywhere.</p>
 
-<p>Valentina swooned. “Oh, I cannot hide. I love you, my American darling.” She started taking off her blouse as Ophelia worked on taking off the rest of her clothing, until soon, there was nothing between the women but skin.</p>
+		<p>Ophelia opened the window and called out, “Hey, knock it off, kids! We’re trying to get some peace and quiet!”</p>
 
-<p>“Now, are you ready?” asked Ophelia, her finger tracing circles around Valentina’s nipple.</p>
+		<p>The three girls hid their snowballs behind their backs and innocently looked back at Ophelia. “What do you mean?” yelled Ana. “There’s nothing to see here!”</p>
 
-<p>“Always ready,” responded Valentina.</p>
+		<p>Valentina came up to the window and gave the girls a stern look. “Listen up, ladies. Ophelia and I are together now. She’s too busy to worry about little people like you. We’d appreciate some quiet, so please, be silent!”</p>
 
-<p>Suddenly, a terrible racket started outside, and the two women heard the sound of people yelling at each other. Throwing a blanket around herself, Ophelia went up to the window. In the apartment’s courtyard, she could see the familiar faces of Ana the Serbian, Farah the Bosniak, and Marta the Croatian out in the snow, throwing snowballs at each other with violent intent. First, Farah and Marta were teaming up on Ana, before Marta switched sides, as the girls hollered with delight at the scene they were making, paying no attention to their surroundings as snowballs went whizzing everywhere.</p>
+		<p>The girls stared down, ashamed. They went back to throwing snowballs at each other, but tried their best to remain quiet.</p>
 
-<p>Ophelia screamed, “Hey, knock it off, kids! We’re trying to get some peace and quiet!”</p>
+		<p>Ophelia and Valentina just laughed and closed the window. They walked back to the couch, hand in hand, and Valentina laid her head on Ophelia’s shoulder as they sat together in comfortable silence, watching the snow fall outside through the candlelit window.</p>
 
-<p>The three girls hid their snowballs behind their backs and innocently looked back at Ophelia. “What do you mean?” yelled Ana. “There’s nothing to see here!”</p>
+		<p>“This is perfect,” Ophelia whispered.</p>
 
-<p>Valentina came up to the window, completely naked, and gave the sisters a death stare. “Listen up, ladies. Ophelia and I are together now. She’s too busy to worry about little people like you. So be silent!”</p>
+		<p>“Yes,” Valentina agreed, wrapping her arms around her love. “This is exactly where I want to be.”</p>
 
-<p>The girls started down, ashamedly. They went back to throwing snowballs at each other, but tried their best to remain quiet.</p>
-
-<p>Ophelia and Valentina just laughed and walked to the bed, hand in hand. Valentina laid down first, arching her back up as she presented herself to Ophelia. “You like what you see, baby?”</p>
-
-<p>Ophelia just smiled. “Oh, you don’t even know how much I love it.” She let her hands take Valentina’s body as her head went right between those long Russian legs, and Valentina started to gasp.</p>
-
-<p>“My God! My God! My God!”</p>
-
-<p>That entire night, Valentina and Ophelia’s cries could be heard around the world, as they gave in to their passion for each other completely.</p>
-`
-},
+		<p>They sat together like that for a few hours, talking about their future, sharing their hopes and dreams, until eventually, they both fell asleep in each other’s arms — warm, safe, and deeply in love.</p>`
+	  },
 
       {
         "pk": "Special Relationship",
@@ -41237,8 +41464,8 @@ Euro Disney Begins Considering Exiting French Market
 "Running Mate": e.running_mate_last_name
     },            
     "ending text": `
-    <p style="text-align:left;">The New York Times/p>
-    <p style="text-align:left;">December 12, 1994/p>
+    <p style="text-align:left;">The New York Times</p>
+    <p style="text-align:left;">December 12, 1994</p>
    <h2><b>President Brown Delivers Historic Speech in Spanish at Miami Summit of the Americas</h2></b>
    <p style="text-align:left;">By Michael Gordon</p>
    <p style="text-align:left;">Staff Writer</p>
