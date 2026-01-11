@@ -301,14 +301,6 @@ campaignTrail_temp.answers_json = [
     },
     {
         "model": "campaign_trail.answer",
-        "pk": 3325,
-        "fields": {
-            "question": 346,
-            "description": "We should be taking active action to remove oppressors and dictators from their seats of power, such as Saddam Hussein. What defenders of human rights are we if we allow atrocities to happen?"
-        }
-    },
-    {
-        "model": "campaign_trail.answer",
         "pk": 3326,
         "fields": {
             "question": 347,
@@ -6579,16 +6571,6 @@ campaignTrail_temp.answer_score_global_json = [
     },
     {
         "model": "campaign_trail.answer_score_global",
-        "pk": 12678,
-        "fields": {
-            "answer": 3325,
-            "candidate": 12240,
-            "affected_candidate": 12240,
-            "global_multiplier": -0.04
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_global",
         "pk": 12680,
         "fields": {
             "answer": 3330,
@@ -7328,16 +7310,6 @@ campaignTrail_temp.answer_score_issue_json = [
             "issue": 30,
             "issue_score": -0.1,
             "issue_importance": 1
-        }
-    },
-    {
-        "model": "campaign_trail.answer_score_issue",
-        "pk": 1016,
-        "fields": {
-            "answer": 3325,
-            "issue": 30,
-            "issue_score": -0.7,
-            "issue_importance": 2
         }
     },
     {
@@ -10123,15 +10095,6 @@ campaignTrail_temp.answer_feedback_json = [
     },
     {
         "model": "campaign_trail.answer_feedback",
-        "pk": 12677,
-        "fields": {
-            "answer": 3325,
-            "candidate": 12240,
-            "answer_feedback": "A very hawkish answer, one that is to the right of even Pat Buchanan. Good lord."
-        }
-    },
-    {
-        "model": "campaign_trail.answer_feedback",
         "pk": 12679,
         "fields": {
             "answer": 3330,
@@ -10501,10 +10464,127 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
+campaignTrail_temp.candidate_image_url = "https://i.imgur.com/Uto354F.jpeg";
+campaignTrail_temp.running_mate_image_url = "https://www.newcampaigntrail.com/static/images/colin-powell-2000.jpg";
+campaignTrail_temp.candidate_last_name = 'Jordan'; 
+campaignTrail_temp.running_mate_last_name = 'Powell'; 
+
+campaignTrail_temp.multiple_endings = true;
+endingPicker = (out, totv, aa, quickstats) => {
+
+    function setImage(url) {
+        if(url == '' || url == null) return;
+        let interval = setInterval(function () {
+            img = document.getElementsByClassName("person_image")[0];
+            if (img != null) {
+                img.src = url;
+                clearInterval(interval);
+            }
+        }, 50);
+    }
+
+    if(quickstats[0] >= 350) {
+        setImage("");
+        return `<div style='overflow-y:scroll;height:200px;'><strong>How is President Jordan doing it?</strong>
+<p><em>The Washington Post, 29th October 2004</em></p>
+
+<p>Sometimes, we just don't know how he does it. President Michael Jordan is running for election alongside his running-mate Colin Powell in 2004, and polling has him winning nearly 50% of the vote against partisan challengers Howard Dean and John Ashcroft respectively; somehow improving upon his electoral landslide in 2000. So, one question on everybody's minds: How?</p>
+
+<p>When he took over the White House with his independent landslide in 2000, nobody knew what to expect, because this was supposed to be impossible in a partisan duopoly. An independent candidate winning the election, let alone winning as many states as he did, was nothing more to a fantasy to many, many Americans. Well, until his Airness showed up. Captivating the American people on his message of perfectionism and hard work, he swept through America not like a wind, but like a hurricane, leaving Gore staring and Bush reflecting as the map turned purple and purpler. And so, there was President Jordan and Vice-President Powell, ready to be inaugurated in the chilly frost of January 2001.</p>
+
+<p>And over the past four years, Michael Jordan has done nothing but win.</p>
+
+<p>Dealing with a Republican Senate (his running-mate Colin Powell was a Republican at the time of his inauguration, and therefore made the tied Senate Republican) and a Democratic House, the President managed to find a way to avoid aligning too much with each party and govern in a truly bipartisan manner, one that was thought to be impossible just a year after the Gingrich Era. Ending 2001 with a major promise of his already achieved - the National Education Expansion Bill he passed in August - he managed to keep a surplus of 175 billion, even after starting the first stages of Operation Liberty Dawn, and entered 2002 with a bang, managing to eliminate Osama Bin Laden at the Battle of Tora Bora and passing the National Security Act of 2002 which created the Department of Internal Security. In the wake of the political capital afforded to him by 9/11, he also did various government efficiency and modernization acts - the most notable of which was the Military Modernization Act of 2002, spearheaded by Vice-President Powell - and various military-related reforms also spearheaded by the Vice-President, leaving Jordan with a pretty damn successful mandate as moderate members of both parties were swept into Congress in the midterms.</p>
+
+<p>As the United States worked with the Northern Alliance to start withdrawing from Afghanistan in 2003, he worked on campaign finance reforms that almost certainly benefitted him this election, working with Secretary McCain to pass and sign the Campaign Finance Reform Act. At the end of 2003, the Jordan Administration approached an astonishing 300 billion surplus - largely due to downsizing the military following the successful Afghan intervention - and expanded healthcare benefits for seniors, veterans and youth in 2004.</p>
+
+<p>Now, as President Jordan looks to be approaching a landslide on a scale not seen since Ronald Reagan, it's time to ask: Just how much more can we expect from the Jordan administration? And what's coming in the next 4 years? But one thing's for sure: Michael Jordan is currently a top-tier President.</p></div>`;
+    }
+    if(quickstats[0] >= 310) {
+        setImage("");
+        return `<div style='overflow-y:scroll;height:200px;'><strong>Gasol signs six-year extension with Wizards</strong>
+<p><em>Associated Press, October 4th 2004</em></p>
+
+<p>WASHINGTON, D.C. - Pau Gasol has been in the NBA for three seasons. That's been long enough for the 7-foot Spaniard to realize he wants to keep working with Wes Unseld and Doug Collins. The Washington Wizards agreed to terms with the 2002 NBA rookie of the year on a six-year contract extension. He still has one year left on his rookie contract.</p>
+
+<p>Gasol, 24, led the Wizards last year with 21.6 points, 9.4 rebounds and 2.08 blocks per game. He ranked 18th in the NBA in field goal percentage and 12th in blocks.</p>
+
+<p>Gasol changed agents last spring hoping to find someone who could help him work out a deal keeping him with Unseld, the Wizards' president of basketball operations, and Collins, the current Head Coach of the Washington Wizards. "I know those two are hard workers and true competitors and two of the greatest guys in the league," Gasol said Friday by telephone during a Wizards Dungeons and Dragons tournament.</p>
+
+<p>The first overall pick in the 2001 draft by Washington, Gasol has stayed his entire career in Washington so far and did not disappoint, putting up great performances that is reminding Wizards' fans of their current President of Basketball Operations. The Wizards went 31-51 that first season and did not qualify for the playoffs, and Gasol was one of the sole bright spots in that season as he led Washington in scoring and rebounding and did not miss a game.</p>
+
+<p>The following year, Unseld and Brown added Amare Stoudamire to the roster using their first round pick at 7th, and the Wizards' record improved, qualifying for the playoffs in 2002-03 at 41-41 before getting sweeped by the San Antonio Spurs in the first round. In 2003-04, the Wizards improved to 48-34 and qualified for the playoffs again, defeating the New York Knicks in the first round before getting defeated 4-3 in the semifinals by eventual 2004 NBA champion Detroit Pistons.</p>
+
+<p>"It's a great situation for a player to be here, and I'm looking for it to be a better situation to win and go deeper in the playoffs," Pau said. Gasol impressed Unseld with his play for Spain in the Athens Olympics, leading Spain to its best Olympic finish since 1988. The Spaniards went 6-1, with their only loss coming to the United States in the quarterfinals. Gasol went 14-of-16 for 37 points in beating China and Yao Ming for seventh overall.</p>
+
+<p>"His play in the Olympic Games this summer showed his worth, while displaying his talent to people throughout the world. Pau is a exciting player, and we are happy to have him in Memphis as the cornerstone of our franchise," Unseld said in a statement.</p>
+
+<p>Contract terms were not immediately available.</p>
+
+<p>Gasol missed the first game of his three-year NBA career on April 5 with a sore right foot, snapping a streak of 240 straight games that had been sixth longest in the league. Now he can concentrate on earning a third straight playoff berth for the Wizards, who open training camp Friday.</p>
+
+<p>"We want to try to get a better team every year and get to another level in the playoffs," he said.</p>
+
+<p><strong>Other News</strong></p>
+
+<p>- President Jordan in dead heat with Kerry, Kemp left behind</p>
+
+<p>- U.S. Army prepares to withdraw from Afghanistan as Powell says 'Mission completed'</p>
+
+<p>- Bulls' Brown says 'Trying to live up to Pippen'</div>`;
+    }
+    if(quickstats[0] >= 270) {
+        setImage("");
+        return `<div style='overflow-y:scroll;height:200px;'><strong>Clark: 'Hopeful in the House'</strong>
+<p><em>The New York Times, November 4th 2004</em></p>
+
+<p>Following Tuesday's electoral deadlock in the election, first-place Wesley Clark of the Democratic Party is positive that he has a good chance of winning in the House. "You know, I'm, um, hopeful in the House, that I'll win the whole thing." General Clark said as he answered the Press yesterday. "And I hope that Landrieu wins in the Senate as well." The 2004 House elections resulted in a slim Democratic majority of 219-215, while the Senate elections sees a 50-50 tie take shape as Republicans lose a seat to Democrats.</p>
+
+<p>The Presidential election on Tuesday saw the first electoral deadlock to take shape since 1824, with Clark's victory in a hotly-contested California sealing the election's fate. The deadlock saw incumbent independent President Michael Jordan take second place, leaving the third to the ticket of Jeb Bush and John McCain, whom the latter is unelectable due to constitutional rules saying that only the top two vice-presidents qualify for a election in the Senate. Jordan's administration has reportedly been a mixed bag, with the continuing war in Afghanistan hindering him greatly as he nearly fell to third place on election day.</p>
+
+<p>Some Republicans already say that Jeb Bush's campaign was a disaster, and failed to take advantage of the weak incumbent President. "Wesley Clark only went first because his campaign wasn't a complete mess." One anonymous Republican said in an interview. "Jeb had the oratory of a brick wall, and McCain's selection caused some people to defect to Tancredo, placing him in third. Don't even get me started on the multiple leaks from Bush staffers during the campaign itself." He continued on, saying that: "Mike Huckabee would've been better than this." Huckabee had dropped out before the Republican National Convention when it was clear that Bush had clinched the nomination, being his main competitor.</p>
+
+</p>Meanwhile, the Jordan campaign had it's fair share of scandals, including a leak from a staffer that claimed that Jordan had become brash and abrasive in the days leading up to the election, constantly losing his temper. An iconic picture of Powell panicking in the situation room also came out, in what many say has defined the Jordan administration in the last 4 years.</p>
+
+<p>The contingent Presidential election is set for February of 2005, which means that the vice-President elected in the Senate will become the temporary President for about a month. At the moment, this means either Mary Landrieu or Colin Powell will be the next temporary President.</div>`;
+    }
+}
 
 
 campaignTrail_temp.jet_data = [{
-    "cyoa_variables": {}
+    "cyoa_variables": {},
+    "endings_enabled": true,
+    "ending_data": {
+        "1768138108483": {
+            "id": 1768138108483,
+            "variable": 0,
+            "operator": ">=",
+            "amount": "350",
+            "endingImage": "",
+            "endingText": "<strong>How is President Jordan doing it?</strong>\n<p><em>The Washington Post, 29th October 2004</em></p>\n\n<p>Sometimes, we just don't know how he does it. President Michael Jordan is running for election alongside his running-mate Colin Powell in 2004, and polling has him winning nearly 50% of the vote against partisan challengers Howard Dean and John Ashcroft respectively; somehow improving upon his electoral landslide in 2000. So, one question on everybody's minds: How?</p>\n\n<p>When he took over the White House with his independent landslide in 2000, nobody knew what to expect, because this was supposed to be impossible in a partisan duopoly. An independent candidate winning the election, let alone winning as many states as he did, was nothing more to a fantasy to many, many Americans. Well, until his Airness showed up. Captivating the American people on his message of perfectionism and hard work, he swept through America not like a wind, but like a hurricane, leaving Gore staring and Bush reflecting as the map turned purple and purpler. And so, there was President Jordan and Vice-President Powell, ready to be inaugurated in the chilly frost of January 2001.</p>\n\n<p>And over the past four years, Michael Jordan has done nothing but win.</p>\n\n<p>Dealing with a Republican Senate (his running-mate Colin Powell was a Republican at the time of his inauguration, and therefore made the tied Senate Republican) and a Democratic House, the President managed to find a way to avoid aligning too much with each party and govern in a truly bipartisan manner, one that was thought to be impossible just a year after the Gingrich Era. Ending 2001 with a major promise of his already achieved - the National Education Expansion Bill he passed in August - he managed to keep a surplus of 175 billion, even after starting the first stages of Operation Liberty Dawn, and entered 2002 with a bang, managing to eliminate Osama Bin Laden at the Battle of Tora Bora and passing the National Security Act of 2002 which created the Department of Internal Security. In the wake of the political capital afforded to him by 9/11, he also did various government efficiency and modernization acts - the most notable of which was the Military Modernization Act of 2002, spearheaded by Vice-President Powell - and various military-related reforms also spearheaded by the Vice-President, leaving Jordan with a pretty damn successful mandate as moderate members of both parties were swept into Congress in the midterms.</p>\n\n<p>As the United States worked with the Northern Alliance to start withdrawing from Afghanistan in 2003, he worked on campaign finance reforms that almost certainly benefitted him this election, working with Secretary McCain to pass and sign the Campaign Finance Reform Act. At the end of 2003, the Jordan Administration approached an astonishing 300 billion surplus - largely due to downsizing the military following the successful Afghan intervention - and expanded healthcare benefits for seniors, veterans and youth in 2004.</p>\n\n<p>Now, as President Jordan looks to be approaching a landslide on a scale not seen since Ronald Reagan, it's time to ask: Just how much more can we expect from the Jordan administration? And what's coming in the next 4 years? But one thing's for sure: Michael Jordan is currently a top-tier President.</p>"
+        },
+        "1768138237867": {
+            "id": 1768138237867,
+            "variable": 0,
+            "operator": ">=",
+            "amount": "310",
+            "endingImage": "",
+            "endingText": "<strong>Gasol signs six-year extension with Wizards</strong>\n<p><em>Associated Press, October 4th 2004</em></p>\n\n<p>WASHINGTON, D.C. - Pau Gasol has been in the NBA for three seasons. That's been long enough for the 7-foot Spaniard to realize he wants to keep working with Wes Unseld and Doug Collins. The Washington Wizards agreed to terms with the 2002 NBA rookie of the year on a six-year contract extension. He still has one year left on his rookie contract.</p>\n\n<p>Gasol, 24, led the Wizards last year with 21.6 points, 9.4 rebounds and 2.08 blocks per game. He ranked 18th in the NBA in field goal percentage and 12th in blocks.</p>\n\n<p>Gasol changed agents last spring hoping to find someone who could help him work out a deal keeping him with Unseld, the Wizards' president of basketball operations, and Collins, the current Head Coach of the Washington Wizards. \"I know those two are hard workers and true competitors and two of the greatest guys in the league,\" Gasol said Friday by telephone during a Wizards Dungeons and Dragons tournament.</p>\n\n<p>The first overall pick in the 2001 draft by Washington, Gasol has stayed his entire career in Washington so far and did not disappoint, putting up great performances that is reminding Wizards' fans of their current President of Basketball Operations. The Wizards went 31-51 that first season and did not qualify for the playoffs, and Gasol was one of the sole bright spots in that season as he led Washington in scoring and rebounding and did not miss a game.</p>\n\n<p>The following year, Unseld and Brown added Amare Stoudamire to the roster using their first round pick at 7th, and the Wizards' record improved, qualifying for the playoffs in 2002-03 at 41-41 before getting sweeped by the San Antonio Spurs in the first round. In 2003-04, the Wizards improved to 48-34 and qualified for the playoffs again, defeating the New York Knicks in the first round before getting defeated 4-3 in the semifinals by eventual 2004 NBA champion Detroit Pistons.</p>\n\n<p>\"It's a great situation for a player to be here, and I'm looking for it to be a better situation to win and go deeper in the playoffs,\" Pau said. Gasol impressed Unseld with his play for Spain in the Athens Olympics, leading Spain to its best Olympic finish since 1988. The Spaniards went 6-1, with their only loss coming to the United States in the quarterfinals. Gasol went 14-of-16 for 37 points in beating China and Yao Ming for seventh overall.</p>\n\n<p>\"His play in the Olympic Games this summer showed his worth, while displaying his talent to people throughout the world. Pau is a exciting player, and we are happy to have him in Memphis as the cornerstone of our franchise,\" Unseld said in a statement.</p>\n\n<p>Contract terms were not immediately available.</p>\n\n<p>Gasol missed the first game of his three-year NBA career on April 5 with a sore right foot, snapping a streak of 240 straight games that had been sixth longest in the league. Now he can concentrate on earning a third straight playoff berth for the Wizards, who open training camp Friday.</p>\n\n<p>\"We want to try to get a better team every year and get to another level in the playoffs,\" he said.</p>\n\n<p><strong>Other News</strong></p>\n\n<p>- President Jordan in dead heat with Kerry, Kemp left behind</p>\n\n<p>- U.S. Army prepares to withdraw from Afghanistan as Powell says 'Mission completed'</p>\n\n<p>- Bulls' Brown says 'Trying to live up to Pippen'"
+        },
+        "1768138242757": {
+            "id": 1768138242757,
+            "variable": 0,
+            "operator": ">=",
+            "amount": "270",
+            "endingImage": "",
+            "endingText": "<strong>Clark: 'Hopeful in the House'</strong>\n<p><em>The New York Times, November 4th 2004</em></p>\n\n<p>Following Tuesday's electoral deadlock in the election, first-place Wesley Clark of the Democratic Party is positive that he has a good chance of winning in the House. \"You know, I'm, um, hopeful in the House, that I'll win the whole thing.\" General Clark said as he answered the Press yesterday. \"And I hope that Landrieu wins in the Senate as well.\" The 2004 House elections resulted in a slim Democratic majority of 219-215, while the Senate elections sees a 50-50 tie take shape as Republicans lose a seat to Democrats.</p>\n\n<p>The Presidential election on Tuesday saw the first electoral deadlock to take shape since 1824, with Clark's victory in a hotly-contested California sealing the election's fate. The deadlock saw incumbent independent President Michael Jordan take second place, leaving the third to the ticket of Jeb Bush and John McCain, whom the latter is unelectable due to constitutional rules saying that only the top two vice-presidents qualify for a election in the Senate. Jordan's administration has reportedly been a mixed bag, with the continuing war in Afghanistan hindering him greatly as he nearly fell to third place on election day.</p>\n\n<p>Some Republicans already say that Jeb Bush's campaign was a disaster, and failed to take advantage of the weak incumbent President. \"Wesley Clark only went first because his campaign wasn't a complete mess.\" One anonymous Republican said in an interview. \"Jeb had the oratory of a brick wall, and McCain's selection caused some people to defect to Tancredo, placing him in third. Don't even get me started on the multiple leaks from Bush staffers during the campaign itself.\" He continued on, saying that: \"Mike Huckabee would've been better than this.\" Huckabee had dropped out before the Republican National Convention when it was clear that Bush had clinched the nomination, being his main competitor.</p>\n\n</p>Meanwhile, the Jordan campaign had it's fair share of scandals, including a leak from a staffer that claimed that Jordan had become brash and abrasive in the days leading up to the election, constantly losing his temper. An iconic picture of Powell panicking in the situation room also came out, in what many say has defined the Jordan administration in the last 4 years.</p>\n\n<p>The contingent Presidential election is set for February of 2005, which means that the vice-President elected in the Senate will become the temporary President for about a month. At the moment, this means either Mary Landrieu or Colin Powell will be the next temporary President."
+        }
+    },
+    "endings_order": [
+        1768138108483,
+        1768138237867,
+        1768138242757
+    ]
 }
 ]
 
