@@ -936,7 +936,7 @@ const pile = `
 	  color: #0f1a29;
 	  border: 1.5px solid #243f63;
 	  border-radius: 0.2em;
-    text-transform: none;
+      text-transform: none;
 	}
 
 	button:hover {
@@ -949,6 +949,55 @@ const pile = `
 	  transform: translateY(1px);
 	  box-shadow:
 		inset 0 2px 3px rgba(0,0,0,0.25);
+	}
+	
+	table {
+	  border-collapse: collapse;
+	  font-family: "Bahnschrift", "Source Serif 4", sans-serif;
+	  color: #0f1a29;
+	  background: #f3f6fb;
+	  outline: 1.5px solid #243f63;
+	  border-radius: 0.25em;
+	}
+	table th {
+	  background: linear-gradient(#e7ecf3, #dbe3ef);
+	  color: #0f1a29;
+	  font-weight: 600;
+	  padding: 0.5em 0.6em;
+	  border-bottom: 1.5px solid #243f63;
+	  text-align: center;
+	  letter-spacing: 0.02em;
+	}
+	table td {
+	  padding: 0.4em 0.6em;
+	  border-bottom: 1px solid #c9d3e1;
+	  text-align: center;
+	  background: #f8fafd;
+	}
+
+	table tr:last-child td {
+	  border-bottom: none;
+	}
+	table tbody tr:nth-child(even) td {
+	  background: #eef3fa;
+	}
+	table tbody tr:hover td {
+	  background: #dde7f3;
+	}
+	table td:first-child {
+	  text-align: center;
+	  white-space: nowrap;
+	}
+
+	table td span {
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		border-radius: 2px;
+		display: inline-flex;
+		height: 0.9em;
+        margin: 0 .4em 0 .2em;
+		text-indent: -9999px;
+		vertical-align: top;
+		width: 0.9em;
 	}
 
   
