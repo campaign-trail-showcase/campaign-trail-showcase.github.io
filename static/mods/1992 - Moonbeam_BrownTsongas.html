@@ -34605,6 +34605,7 @@ changeState = (statePK, candidateId, amount = true) => {
         ALwinnerOverall.electoral_votes -= change
     }
 }
+
 // Complete Faithless Electors Module
 // Standalone code for managing faithless elector mechanics
 
@@ -34687,68 +34688,6 @@ function displayFaithlessElectorInfo() {
     });
     console.log(`Total Electoral Votes: ${getFaithlessElectoralVotes()}`);
 }
-
-// Faithless electors module
-// taken from 2012 Shattered, rewritten for here
-const FaithlessElectors = (function() {
-    const config = {
-        enabled: true,
-        hasRun: false,
-        defaultCandidate: 80,
-        states: [
-            { id: 182, ev: 2, name: "Alaska" },
-            { id: 216, ev: 1, name: "Oklahoma" },
-            { id: 223, ev: 3, name: "Texas" },
-            { id: 196, ev: 1, name: "Kansas" }
-        ]
-    };
-
-    function executeFaithlessSwap(statePK, recipientId, evAmount) {
-        const ct = window.campaignTrail_temp;
-        if (!ct || !ct.final_state_results) return console.error("Campaign Trail data not found.");
-
-        const stateData = ct.final_state_results.find(s => s.state === statePK);
-        if (!stateData) return console.warn(`State ${statePK} results not found.`);
-
-        const currentWinnerId = [...stateData.result].sort((a, b) => b.votes - a.votes)[0].candidate;
-
-        const winnerEntry = ct.final_overall_results.find(r => r.candidate === currentWinnerId);
-        const recipientEntry = ct.final_overall_results.find(r => r.candidate === recipientId);
-
-        if (winnerEntry) winnerEntry.electoral_votes -= evAmount;
-        
-        if (recipientEntry) {
-            recipientEntry.electoral_votes += evAmount;
-        } else {
-            ct.final_overall_results.push({
-                candidate: recipientId,
-                electoral_votes: evAmount,
-                popular_votes: 0
-            });
-        }
-
-        console.log(`%c Moved ${evAmount} EV(s) from ${currentWinnerId} to ${recipientId} in state ${statePK}`, 'color: red; font-weight: bold;');
-    }
-
-    return {
-        run: function(candidateId = config.defaultCandidate) {
-            if (config.hasRun) return console.log("Faithless logic already executed.");
-            if (!config.enabled) return console.log("Faithless logic disabled.");
-
-            config.hasRun = true;
-
-            const target = config.states[Math.floor(Math.random() * config.states.length)];
-            
-            executeFaithlessSwap(target.id, candidateId, target.ev);
-            
-            return target.ev;
-        },
-        enable: (val) => config.enabled = val,
-        getStatus: () => Object.assign({}, config)
-    };
-})();
-
-window.applyFaithlessElectors = FaithlessElectors.run;
 
 e = campaignTrail_temp
 campaignTrail_temp.cyoa = true;
