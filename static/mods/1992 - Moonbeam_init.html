@@ -777,6 +777,9 @@ const pile = `
 	  color: #f7ff00;
 	  font-weight: normal;
 	}
+	#visit_buttons {
+	  margin: 1em 0;
+	}
 
 	#election_summary {
 	  padding-top: 1em;
@@ -817,14 +820,16 @@ const pile = `
 	  display: inline-block;
 	  cursor: pointer;
 	  background-color: lightblue;
+	  padding: 0 .2em;
+	  border-radius: .2em;
 	}
 
 	.mytooltip .mytooltiptext,
 	.bubble {
-	  background-color: lightgray;
-	  color: black;
+	  background-color: #9aaacd;
+	  color: #000;
 	  text-align: center;
-	  border-radius: 6px;
+	  border-radius: .2em;
 	  position: absolute;
 	  z-index: 99;
 	  bottom: 20%;
@@ -832,7 +837,7 @@ const pile = `
 	  margin-left: -90px;
 	  opacity: 0;
 	  transition: opacity 0.3s;
-	  border: 1px solid black;
+	  outline: 1px solid black;
 	  pointer-events: none;
 	  font-size: 13px !important;
 	  line-height: 1.5em !important;
@@ -1333,7 +1338,7 @@ window.WalkmanPlayer = {
                                 <svg class="icon-prev" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
                             </button>
                             <button class="player__btn player__btn--playpause" title="Play/Pause">
-                                <svg class="icon-play" viewBox="0 0 24 24"><path d="M7.5 5v14l11-7z"></path></svg>
+                                <svg class="icon-play" viewBox="0 0 24 24"><path d="M7.5 5v15l11-7z"></path></svg>
                                 <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
                             </button>
                             <button class="player__btn player__btn--next" title="Next">
