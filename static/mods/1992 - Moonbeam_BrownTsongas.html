@@ -36103,7 +36103,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 
     if (playerEV >= 340 && !campaignTrail_temp.player_answers.includes(12240)) ctsAchievement("Man of Tomorrow");
     if (playerEV >= 270 && vpcheck == 1) ctsAchievement("Operation BUSH");
-    if (campaignTrail_temp.final_state_results[197]["result"][0]["candidate"] == 78) ctsAchievement("California and Coal Country");
+    if (campaignTrail_temp.final_state_results[42]["result"][0]["candidate"] == 197) ctsAchievement("California and Coal Country");
 
     var endingstuff = {
         "Win Type": (function (val) { return (aa[0].electoral_votes >= 270 && aa[0].candidate == 79) ? "Perot" : val >= 348 ? "Massive Win" : val >= 310 ? "Decent Win" : val >= 270 ? "Close Win" : val === 269 ? "Deadlock" : val >= 230 ? "Close Loss" : val >= 190 ? "Decent Loss" : val < 190 ? "Massive Loss" : "error"; })(playerEV),
