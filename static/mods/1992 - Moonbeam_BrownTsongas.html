@@ -30592,7 +30592,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 12240,
             "candidate": 78,
-            "answer_feedback": "Your instincts prove correct. Though your first try at the Senate a decade ago was foiled by Pete Wilson, his appointee John Seymour* is a hapless lackey who you crush by 20 points as Clinton wins the presidency. You embark to Congress on a new mission to take back America from within the system rather than outside of it."
+            "answer_feedback": "Your instincts prove correct. Though your first try at the Senate a decade ago was foiled by Pete Wilson, his appointee John Seymour is a hapless lackey who you crush by 20 points as Clinton wins the presidency. You embark to Congress on a new mission to take back America from within the system rather than outside of it."
         }
     },
     {
@@ -36338,7 +36338,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 
     const playerEV = quickstats[0];
 
-    if (playerEV >= 340) ctsAchievement("Man of Tomorrow");
+    if (playerEV >= 340 && !campaignTrail_temp.player_answers.includes(12240)) ctsAchievement("Man of Tomorrow");
     if (playerEV >= 270 && vpcheck == 1) ctsAchievement("Operation BUSH");
     if (campaignTrail_temp.final_state_results[42]["result"][0]["candidate"] == 197) ctsAchievement("California and Coal Country");
 
