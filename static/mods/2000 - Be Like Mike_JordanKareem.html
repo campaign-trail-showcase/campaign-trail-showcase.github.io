@@ -10491,10 +10491,136 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
+campaignTrail_temp.candidate_image_url = "https://i.imgur.com/Uto354F.jpeg";
+campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/r8HbQ0l.jpeg";
+campaignTrail_temp.candidate_last_name = 'Jordan'; 
+campaignTrail_temp.running_mate_last_name = 'Kareem'; 
+
+campaignTrail_temp.multiple_endings = true;
+endingPicker = (out, totv, aa, quickstats) => {
+
+    function setImage(url) {
+        if(url == '' || url == null) return;
+        let interval = setInterval(function () {
+            img = document.getElementsByClassName("person_image")[0];
+            if (img != null) {
+                img.src = url;
+                clearInterval(interval);
+            }
+        }, 50);
+    }
+
+    if(quickstats[0] > 350) {
+        setImage("");
+        return `<div style='overflow-y:scroll;height:200px;'><strong>Kareem on Pau Gasol: 'Get him the ball!'</strong>
+<br><em>ESPN, December 12th 2009</em>
+
+<p>Following Pau Gasol's astonishing 31-20 double-double performance last night against the Minnesota Timberwolves, Lakers legend Kareem Abdul-Jabbar had nothing but good things to say about the Spaniard center - who some fans say has been a reminder of the legendary big-man that anchored the Showtime Lakers just two decades earlier. </p>
+
+<p>"Pau is doing things that leads to championships, I'll tell you this." Kareem said while talking with fellow ESPN analysts. "Did you see the play he had last night? It was a cinema, screens upon screens lined up for people like Kobe Bryant to take advantage of. For Metta World Peace to take advantage of. Hell, even Bynum scored off his screen, and he went 2-9! But this is not the only thing Pau does; he also scores efficiently when he needs to. It reminds me of myself all those years ago, when I had the skyhook, and Gasol is doing it through all types of moves in the post, or backing down his defender. And I'll say it right now - You need to get him the ball! Pau Gasol could easily be putting up thirty a night, maybe even forty, if he had the ball in the post, because he is just so optimized in what he does - it's insane, it's really insane. Pau Gasol is easily, for me, the best center in the NBA, above Dwight Howard."</p>
+
+<p>Gasol, who is currently putting up 22.1 points and 14.6 rebounds for the season, has offered no comment on Abdul-Jabbar's words, although there's no doubt that he has to be happy receiving such praise from the one of the greatest centers of all time.</p>
+
+<p>Kareem, meanwhile, has had a star-studded career both in sport and politics - alongside Magic Johnson, he led the Lakers to 6 championships and won 6 MVP awards, placing him tied for MVPs alongside his ticket-mate Michael Jordan, whom he won re-election with as vice-President in 2000 and 2004. His accomplishments as vice-President include successfully expanding voting rights, reducing religious violence rates, and improving the national education system through a series of reforms. Famously, he was also seen posing on a chair below a portrait of Founding Father Alexander Hamilton in 2007, in his second term.</p>
+
+<p>The Los Angeles Lakers are predicted to go all the way this year and win their third consecutive chip, a move that would establish them as one more of their storied history of dynasties. Their win last night against the Minnesota Timberwolves also furthers their astonishing 12-game winning streak, with only the Mavericks and the Nuggets defeating them early in the season. Fellow co-star Kobe Bryant is currently leading the polls for MVP early in the season, and suspicions of the Lakers' 19-2 record aiding his quest may not go unfounded.</p>
+
+<p>Read more...</p>
+
+<p>Also see:</p>
+
+<p>- Button to stay with Honda Racing following 2009 Championship</p>
+
+<p>- Will Columbus go on to win the Champions League?</p>
+
+<p>- President Obama says he cannot revive the 3-9 Bears</p></div>`;
+    }
+    if(quickstats[0] > 310) {
+        setImage("");
+        return `<div style='overflow-y:scroll;height:200px;'><strong>Vice-President speaks out against anti-Muslim hate</strong>
+<br><em>The Washington Post, October 11th 2001</em>
+
+<p>In the month since September 11th, vice-President Kareem Abdul-Jabbar has taken a stand against the hate that was generated from the tragedy that happened in New York, where a disasterous terrorist attack was carried out by the terror organization Al-Qaeda, an attack that ended thousands of American lives. The vice-President, who is a Muslim himself, has said that anti-Muslim hate is 'ignorant and undeserved'.</p>
+
+<p>"This... agenda promoted by certain people inside America, an agenda which promotes anti-Muslim violence and hate because of the tragedy that happened a few weeks back. It is an ignorant and undeserved agenda, that claims all Muslims are responsible for 9/11. This is not true. As a Muslim myself, I will never ever claim that Al-Qaeda are part of my religion. They are not. They are, as what we call them, haram, or sinners of the Islamic faith, and they are an organization formed to inflict terror worldwide. No true Muslim would ever commit such a grievous crime against humanity, for it is a sin. Al-Qaeda are not truly Muslim."</p>
+
+<p>"I know that, in the weeks since the attack, Americans desire revenge against Al-Qaeda. I, too, desire revenge, for they have not only massacred citizens of the country I love, but have also brought dishonor and shame onto my religion. I'm sure that many Muslims nationwide feel the same as I do, which is why I ask of Americans: Do not hate your neighbor for their religion, but hate those who seek to bring devastation onto the world. Al-Qaeda does not represent American Muslims."</p>
+
+<p>The Department of Justice has reported a nearly 300% increase in hate crimes against Muslims since the attack in New York, with a wave of backlash coalescing against American Muslims. Vice-President Abdul-Jabbar has seen one attempted assassination against him since, when a man tried to shoot him at close range while he was talking to reporters amongst the debris-filled streets of the Big Apple just days after the tragedy. Multiple police cases involving Muslim victims nationwide have also appeared since then, with murders and attempted murders being increasingly more frequent as the weeks go by.</p>
+
+<p>One anonymous Muslim whom we contacted says: "We have liven in fear since the events in New York. I receive threats against my life now when I walk on the street, or during shopping, or even when I pick up my kids from school. I stay in my house these days mostly. We are being attacked for an attack which we had no involvement in." Other Muslims we interviewed also agreed with the sentiment.</p>
+
+<p>The Department of Justice has also released a statement vowing to crack down on the increased rates of murders and crime that have occurred since 9/11. We attempted to reach out to President Jordan for a statement on this statement, but he was unavailable for the press.</p>
+
+<strong>Other News</strong>
+
+<p>- Al Gore: 'People are going to live...'</p>
+
+<p>- 2000 Republican candidate George W. Bush 'considering golfing'</p>
+
+<p>- Can Reform still reform?</p></div>`;
+    }
+    if(quickstats[0] > 270) {
+        setImage("");
+        return `<div style='overflow-y:scroll;height:200px;'><strong>His Airness returns</strong>
+<br><em>The New York Times, March 10th 2010</em>
+
+<p>In a move that has stunned basically every single basketball fan in the entire world, the Los Angeles Clippers have announced the appointment of legendary basketball player and former President Michael Jordan as the new coach and owner for the Clippers, just a few days after the firing of previous coach Mike Dunleavy by previous owner Donald Sterling. Jordan, who has been unemployed since leaving the Oval Office in 2005, bought out the team for an undisclosed price, said Donald Sterling after admitting that he was looking to sell the team for years.</p>
+
+<p>With this move, Jordan continues his record-setter trend: He becomes the first former NBA player to own a team in the NBA, and is also the first African-American majority owner of an NBA team in it's history. He also becomes only the second person to both own and coach a team, the first being Eddie 'Mr. Basketball' Gottlieb, who coached and owned the Philadelphia (now Golden State) Warriors simultaneously from 1952 to 1955. Jordan had reportedly been in talks with Mr. Sterling since February 27th, but somehow managed to avoid the entire press before announcing his purchase.</p>
+
+<p>The purchase and appointment by and of such a legendary basketball icon will no doubt be a boost for the morale of the Clippers, the laughingstock of the league under Sterling's tenure as owner. Sterling was notoriously known for being fiscally conservative, a stark contrast to Jordan, who was known for being fiscally liberal during his Presidency.</p>
+
+<p>The Clippers have announced this statement just a few hours before they were set to play against the Dwayne Wade-led Miami Heat in Florida, shocking every basketball fan on planet Earth. Even as we post this just around two hours after the announcement, the hashtag #JordanIsBack has already become the number one trending hashtag on Twitter. The Clippers currently stand at a 29-35 record ahead of the game, while the Miami Heat stand at 40-24.</p>
+
+<p>This starts another chapter for Michael Jordan, who has no doubt had one of the most interesting lifetimes of perhaps any human being, dead or alive. A six-time NBA champion and MVP, Jordan ran and won the 2000 United States Presidential election just 2 years after his retirement, becoming only the second Independent to become President after 1st President George Washington over 200 years ago. At his side was an equally legendary basketballer: Kareem Abdul-Jabbar, who became vice-President of the United States. However, their Presidency was struck by multiple crises, including 9/11 and the war in Afghanistan, which dragged on their popularity and eventually led to Jordan's loss in the 2004 contingent election to Rick Perry, who himself lost 2008 to Senator Hillary Clinton. We reached out to Madam President for a statement, but she was unavailable at this time.</p>
+
+<p>The Clippers lineup is, safe to say, something. After missing out on the first overall pick (which Sacramento used to pick James Harden) in 2009, the Clippers fell all the way to 5th, where they picked up Davidson point guard Stephen Curry, who led the college on a magical run to the National Championship Game before falling to Derrick Rose and Memphis, who then had their records invalidated due to a grading scandal involving Rose, giving Davidson and Curry the 08' championship.</p>
+
+<p>But let's stop talking about Stephen Curry, who is currently the team's points leader and a ROTY contender, for a moment. Alongside Curry stands Chris Kaman, the breakout center who made the All-Star game back in February, Eric Gordon, the sophomore shooting guard averaging 15.2 points for the season, and Baron Davis, the experienced 30-y/o point guard who's been sort of a mentor to Stephen, and a four-time all star.</p>
+
+<p>Read more...</p>
+
+<p>Also see:</p>
+
+<p>- Vice-President Obama says 'Healthcare is at hand'</p>
+
+<p>- President Clinton is... working with Senator Sanders?</p>
+
+<p>- Chile: Moving on from the Earthquake</p></div>`;
+    }
+}
 
 
 campaignTrail_temp.jet_data = [{
-    "cyoa_variables": {}
+    "cyoa_variables": {},
+    "endings_enabled": true,
+    "ending_data": {
+        "1768301999105": {
+            "id": 1768301999105,
+            "variable": 0,
+            "operator": ">",
+            "amount": "350",
+            "endingImage": "",
+            "endingText": "<div style='overflow-y:scroll;height:200px;'><strong>Kareem on Pau Gasol: 'Get him the ball!'</strong>\n<br><em>ESPN, December 12th 2009</em>\n\n<p>Following Pau Gasol's astonishing 31-20 double-double performance last night against the Minnesota Timberwolves, Lakers legend Kareem Abdul-Jabbar had nothing but good things to say about the Spaniard center - who some fans say has been a reminder of the legendary big-man that anchored the Showtime Lakers just two decades earlier. </p>\n\n<p>\"Pau is doing things that leads to championships, I'll tell you this.\" Kareem said while talking with fellow ESPN analysts. \"Did you see the play he had last night? It was a cinema, screens upon screens lined up for people like Kobe Bryant to take advantage of. For Metta World Peace to take advantage of. Hell, even Bynum scored off his screen, and he went 2-9! But this is not the only thing Pau does; he also scores efficiently when he needs to. It reminds me of myself all those years ago, when I had the skyhook, and Gasol is doing it through all types of moves in the post, or backing down his defender. And I'll say it right now - You need to get him the ball! Pau Gasol could easily be putting up thirty a night, maybe even forty, if he had the ball in the post, because he is just so optimized in what he does - it's insane, it's really insane. Pau Gasol is easily, for me, the best center in the NBA, above Dwight Howard.\"</p>\n\n<p>Gasol, who is currently putting up 22.1 points and 14.6 rebounds for the season, has offered no comment on Abdul-Jabbar's words, although there's no doubt that he has to be happy receiving such praise from the one of the greatest centers of all time.</p>\n\n<p>Kareem, meanwhile, has had a star-studded career both in sport and politics - alongside Magic Johnson, he led the Lakers to 6 championships and won 6 MVP awards, placing him tied for MVPs alongside his ticket-mate Michael Jordan, whom he won re-election with as vice-President in 2000 and 2004. His accomplishments as vice-President include successfully expanding voting rights, reducing religious violence rates, and improving the national education system through a series of reforms. Famously, he was also seen posing on a chair below a portrait of Founding Father Alexander Hamilton in 2007, in his second term.</p>\n\n<p>The Los Angeles Lakers are predicted to go all the way this year and win their third consecutive chip, a move that would establish them as one more of their storied history of dynasties. Their win last night against the Minnesota Timberwolves also furthers their astonishing 12-game winning streak, with only the Mavericks and the Nuggets defeating them early in the season. Fellow co-star Kobe Bryant is currently leading the polls for MVP early in the season, and suspicions of the Lakers' 19-2 record aiding his quest may not go unfounded.</p>\n\n<p>Read more...</p>\n\n<p>Also see:</p>\n\n<p>- Button to stay with Honda Racing following 2009 Championship</p>\n\n<p>- Will Columbus go on to win the Champions League?</p>\n\n<p>- President Obama says he cannot revive the 3-9 Bears</p></div>"
+        },
+        "1768301999709": {
+            "id": 1768301999709,
+            "variable": 0,
+            "operator": ">",
+            "amount": "310",
+            "endingImage": "",
+            "endingText": "<div style='overflow-y:scroll;height:200px;'><strong>Vice-President speaks out against anti-Muslim hate</strong>\n<br><em>The Washington Post, October 11th 2001</em>\n\n<p>In the month since September 11th, vice-President Kareem Abdul-Jabbar has taken a stand against the hate that was generated from the tragedy that happened in New York, where a disasterous terrorist attack was carried out by the terror organization Al-Qaeda, an attack that ended thousands of American lives. The vice-President, who is a Muslim himself, has said that anti-Muslim hate is 'ignorant and undeserved'.</p>\n\n<p>\"This... agenda promoted by certain people inside America, an agenda which promotes anti-Muslim violence and hate because of the tragedy that happened a few weeks back. It is an ignorant and undeserved agenda, that claims all Muslims are responsible for 9/11. This is not true. As a Muslim myself, I will never ever claim that Al-Qaeda are part of my religion. They are not. They are, as what we call them, haram, or sinners of the Islamic faith, and they are an organization formed to inflict terror worldwide. No true Muslim would ever commit such a grievous crime against humanity, for it is a sin. Al-Qaeda are not truly Muslim.\"</p>\n\n<p>\"I know that, in the weeks since the attack, Americans desire revenge against Al-Qaeda. I, too, desire revenge, for they have not only massacred citizens of the country I love, but have also brought dishonor and shame onto my religion. I'm sure that many Muslims nationwide feel the same as I do, which is why I ask of Americans: Do not hate your neighbor for their religion, but hate those who seek to bring devastation onto the world. Al-Qaeda does not represent American Muslims.\"</p>\n\n<p>The Department of Justice has reported a nearly 300% increase in hate crimes against Muslims since the attack in New York, with a wave of backlash coalescing against American Muslims. Vice-President Abdul-Jabbar has seen one attempted assassination against him since, when a man tried to shoot him at close range while he was talking to reporters amongst the debris-filled streets of the Big Apple just days after the tragedy. Multiple police cases involving Muslim victims nationwide have also appeared since then, with murders and attempted murders being increasingly more frequent as the weeks go by.</p>\n\n<p>One anonymous Muslim whom we contacted says: \"We have liven in fear since the events in New York. I receive threats against my life now when I walk on the street, or during shopping, or even when I pick up my kids from school. I stay in my house these days mostly. We are being attacked for an attack which we had no involvement in.\" Other Muslims we interviewed also agreed with the sentiment.</p>\n\n<p>The Department of Justice has also released a statement vowing to crack down on the increased rates of murders and crime that have occurred since 9/11. We attempted to reach out to President Jordan for a statement on this statement, but he was unavailable for the press.</p>\n\n<strong>Other News</strong>\n\n<p>- Al Gore: 'People are going to live...'</p>\n\n<p>- 2000 Republican candidate George W. Bush 'considering golfing'</p>\n\n<p>- Can Reform still reform?</p></div>"
+        },
+        "1768301999842": {
+            "id": 1768301999842,
+            "variable": 0,
+            "operator": ">",
+            "amount": "270",
+            "endingImage": "",
+            "endingText": "<div style='overflow-y:scroll;height:200px;'><strong>His Airness returns</strong>\n<br><em>The New York Times, March 10th 2010</em>\n\n<p>In a move that has stunned basically every single basketball fan in the entire world, the Los Angeles Clippers have announced the appointment of legendary basketball player and former President Michael Jordan as the new coach and owner for the Clippers, just a few days after the firing of previous coach Mike Dunleavy by previous owner Donald Sterling. Jordan, who has been unemployed since leaving the Oval Office in 2005, bought out the team for an undisclosed price, said Donald Sterling after admitting that he was looking to sell the team for years.</p>\n\n<p>With this move, Jordan continues his record-setter trend: He becomes the first former NBA player to own a team in the NBA, and is also the first African-American majority owner of an NBA team in it's history. He also becomes only the second person to both own and coach a team, the first being Eddie 'Mr. Basketball' Gottlieb, who coached and owned the Philadelphia (now Golden State) Warriors simultaneously from 1952 to 1955. Jordan had reportedly been in talks with Mr. Sterling since February 27th, but somehow managed to avoid the entire press before announcing his purchase.</p>\n\n<p>The purchase and appointment by and of such a legendary basketball icon will no doubt be a boost for the morale of the Clippers, the laughingstock of the league under Sterling's tenure as owner. Sterling was notoriously known for being fiscally conservative, a stark contrast to Jordan, who was known for being fiscally liberal during his Presidency.</p>\n\n<p>The Clippers have announced this statement just a few hours before they were set to play against the Dwayne Wade-led Miami Heat in Florida, shocking every basketball fan on planet Earth. Even as we post this just around two hours after the announcement, the hashtag #JordanIsBack has already become the number one trending hashtag on Twitter. The Clippers currently stand at a 29-35 record ahead of the game, while the Miami Heat stand at 40-24.</p>\n\n<p>This starts another chapter for Michael Jordan, who has no doubt had one of the most interesting lifetimes of perhaps any human being, dead or alive. A six-time NBA champion and MVP, Jordan ran and won the 2000 United States Presidential election just 2 years after his retirement, becoming only the second Independent to become President after 1st President George Washington over 200 years ago. At his side was an equally legendary basketballer: Kareem Abdul-Jabbar, who became vice-President of the United States. However, their Presidency was struck by multiple crises, including 9/11 and the war in Afghanistan, which dragged on their popularity and eventually led to Jordan's loss in the 2004 contingent election to Rick Perry, who himself lost 2008 to Senator Hillary Clinton. We reached out to Madam President for a statement, but she was unavailable at this time.</p>\n\n<p>The Clippers lineup is, safe to say, something. After missing out on the first overall pick (which Sacramento used to pick James Harden) in 2009, the Clippers fell all the way to 5th, where they picked up Davidson point guard Stephen Curry, who led the college on a magical run to the National Championship Game before falling to Derrick Rose and Memphis, who then had their records invalidated due to a grading scandal involving Rose, giving Davidson and Curry the 08' championship.</p>\n\n<p>But let's stop talking about Stephen Curry, who is currently the team's points leader and a ROTY contender, for a moment. Alongside Curry stands Chris Kaman, the breakout center who made the All-Star game back in February, Eric Gordon, the sophomore shooting guard averaging 15.2 points for the season, and Baron Davis, the experienced 30-y/o point guard who's been sort of a mentor to Stephen, and a four-time all star.</p>\n\n<p>Read more...</p>\n\n<p>- Vice-President Obama says 'Healthcare is at hand'</p>\n\n<p>- President Clinton is... working with Senator Sanders?</p>\n\n<p>- Chile: Moving on from the Earthquake</p></div>"
+        }
+    }
 }
 ]
 

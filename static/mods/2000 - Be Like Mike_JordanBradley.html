@@ -10521,10 +10521,106 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
+campaignTrail_temp.candidate_image_url = "https://i.imgur.com/Uto354F.jpeg";
+campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/kgefZU8.jpeg";
+campaignTrail_temp.candidate_last_name = 'Jordan'; 
+campaignTrail_temp.running_mate_last_name = 'Bradley'; 
+
+campaignTrail_temp.multiple_endings = true;
+endingPicker = (out, totv, aa, quickstats) => {
+
+    function setImage(url) {
+        if(url == '' || url == null) return;
+        let interval = setInterval(function () {
+            img = document.getElementsByClassName("person_image")[0];
+            if (img != null) {
+                img.src = url;
+                clearInterval(interval);
+            }
+        }, 50);
+    }
+
+    if(quickstats[0] >= 350) {
+        setImage("");
+        return `<div style='overflow-y:scroll;height:200px;'><strong>Ted Kennedy: 'Finally!'</strong>
+<br><em>The Boston Globe, August 30th 2003</em>
+
+<p>Senator Ted Kennedy (D-MA) was all smiles and cheers as the National Healthcare Expansion Act (NHEA) passed both chambers of Congress and received the signature of President Jordan. Ted, the last of the famed Kennedy trio, was seen hugging Vice-President Bill Bradley in the Senate after the NHEA was passed with a 60-40 vote, a tally that officially, finally, implements Ted's lifelong goal of universal healthcare coverage by 2007. When asked for a statement, the 71-year-old said that: "This is, most probably, the greatest achievement of my Senate career, if not my entire life. I have fought so long and so hard for universal healthcare, and to see it finally implemented... it's like life is complete for me. Finally, I've done it. Finally!" The Senator had advocated for universal healthcare for nearly four decades at the time of this bill's passing.</p>
+
+<p>Another man who was ecstatic about the bill's passing was vice-President Bill Bradley, a progressive Democrat who was elected alongside the independent incumbent Michael Jordan in 2000. When asked for a statement, he gave one of few words: "We did it! We did it!", before running off to hug a fellow Democratic senator of his. The vice-President had challenged Al Gore for the Democratic nomination in 2000, but defected to the Jordan campaign after Gore's controversial selection of blue maverick Joe Lieberman, in what many say is a tactical mistake which ultimately led to Jordan's landslide victory in 2000.</p>
+
+<p>Public reaction to the bill's passing has been mixed. Conservative commentators nationwide has hailed this as 'the first step on the road to Communism', while liberal commentators have started calling Jordan by one of his basketball nicknames: 'His Airness'. However, this has not affected Jordan's popularity, with an astonishing 83% of Americans still approving of his Presidency after his successful capture and trial of Osama bin Laden in December 2001, and the war in Afghanistan ending by 2002 with the Taliban and Al-Qaeda eliminated. This string of victories left no mercy for the Republicans as they were massacred in the 2002 midterms, giving Jordan a strong Democratic majority in both houses.</p>
+
+<p>Read more...</p>
+
+<p><strong>Other News</strong></p>
+
+<p>- Early convention polling shows Jordan securing the Democratic nomination, Whitman leads amongst Republicans</p>
+
+<p>- A month on: How is LeBron doing in Denver?</p>
+
+<p>- FC Porto beats AC Milan in UEFA Super Cup, 3-0</p></div>`;
+    }
+    if(quickstats[0] >= 310) {
+        setImage("");
+        return `<div style='overflow-y:scroll;height:200px;'><strong>Derrick Rose declares independent candidacy for Presidency</strong>
+<br><em>The Onion, January 29th 2024</em>
+
+<p>To the shock of Americans nationwide, Chicago Bulls legend Derrick Rose declared an independent candidacy for the Presidency last Thursday, leaving various pollsters scrambling to give him Jordan-style landslide polling. At the press conference convened at the United Center, the four-time MVP said: "I mean, well, it's a tradition in Chicago at this point that all legendary Chicago Bulls point guards have to run an independent candidacy for the Presidency. I know that I can reach a higher level by declaring such a thing, and hopefully live up to the legacy of Michael Jordan." Rose, who turned 35 last October, also announced his shortlist of potential vice-presidents, which included New York's LeBron James, Toronto's Kawhi Leonard, and former vice-President Elizabeth Warren.</p>
+
+<p>Living up to the legacy of Michael Jordan is no small feat. After massacring the league for 14 years, Rose must also send American soldiers to build McDonald's in Afghanistan, pass legislation prescribing health medication to be delivered to every American daily, and set a daily requirement for push-ups during physical education classes. However, Rose believes he can achieve all this, and more. "I mean, it can't be that hard." His Roseness said. "As President, I would sign legislation outlawing the existance of Kwame Brown." At press time, Rose was reportedly informed that the former President had already done that.</p>
+
+<p><strong>More News</strong></p>
+
+<p>- Bill Bradley declares another run for the Senate</p>
+
+<p>- Ja Morant reportedly out for four weeks with gang war, says Hawks</p>
+
+<p>- President Trump attempts to nationalize Michael Jordan</p></div>`;
+    }
+    if(quickstats[0] >= 270) {
+        setImage("");
+        return `<div style='overflow-y:scroll;height:200px;'><strong>BIDEN WINS 453-85</strong>
+<br><em>The Washington Post, November 5th 2008</em>
+
+<p>From the start of the night, President Gramm knew he was doomed. As returns and calls came in early - <em>far</em> too early - for Democratic challenger Joe Biden, he knew it was time to make the concession call, and at just 9 p.m, the election was called for Joe Biden as Georgia went blue. President Gramm's policy on the recession - one that was far too lax on the free market - led to a complete collapse of American life overnight, with economic upon economic blunder giving President Gramm an approval rating of 18% just a few months after the Great Recession begun. Therefore, when the Democratic convention spewed out a ticket of experienced Senator Joe Biden (D-DE) and Governor Brian Schweitzer (D-MT), every pollster knew that the election was over.</p>
+
+<p>Biden-Schweitzer had run a stellar campaign throughout election season, consistently criticizing Gramm on his failures to tackle the recession effectively, while Gramm had run a campaign promising growth through deregulation, a position that angered his vice-President Rudy Giuliani, leading to leaks of the increasing rift between the two which only tanked their polling further. Gramm's refusal to give some form of stimulus to the American economy - despite the begging of his vice-President - ultimately contributed to the Democrat's massive win, a major return after the contingent election of 2004, which saw Hillary Clinton lose in the House.</p>
+
+<p>Biden and Schweitzer are set to be sworn in early January 2009, and rumours swirl around their potential cabinet appointments, including a return of former vice-President Bill Bradley being appointed as the Secretary of Education.</p></div>`;
+    }
+}
 
 
 campaignTrail_temp.jet_data = [{
-    "cyoa_variables": {}
+    "cyoa_variables": {},
+    "endings_enabled": true,
+    "ending_data": {
+        "1768225138965": {
+            "id": 1768225138965,
+            "variable": 0,
+            "operator": ">=",
+            "amount": "350",
+            "endingImage": "",
+            "endingText": "<div style='overflow-y:scroll;height:200px;'><strong>Ted Kennedy: 'Finally!'</strong>\n<br><em>The Boston Globe, 30 August 2003</em>\n\n<p>Senator Ted Kennedy (D-MA) was all smiles and cheers as the National Healthcare Expansion Act (NHEA) passed both chambers of Congress and received the signature of President Jordan. Ted, the last of the famed Kennedy trio, was seen hugging Vice-President Bill Bradley in the Senate after the NHEA was passed with a 60-40 vote, a tally that officially, finally, implements Ted's lifelong goal of universal healthcare coverage by 2007. When asked for a statement, the 71-year-old said that: \"This is, most probably, the greatest achievement of my Senate career, if not my entire life. I have fought so long and so hard for universal healthcare, and to see it finally implemented... it's like life is complete for me. Finally, I've done it. Finally!\" The Senator had advocated for universal healthcare for nearly four decades at the time of this bill's passing.</p>\n\n<p>Another man who was ecstatic about the bill's passing was vice-President Bill Bradley, a progressive Democrat who was elected alongside the independent incumbent Michael Jordan in 2000. When asked for a statement, he gave one of few words: \"We did it! We did it!\", before running off to hug a fellow Democratic senator of his. The vice-President had challenged Al Gore for the Democratic nomination in 2000, but defected to the Jordan campaign after Gore's controversial selection of blue maverick Joe Lieberman, in what many say is a tactical mistake which ultimately led to Jordan's landslide victory in 2000.</p>\n\n<p>Public reaction to the bill's passing has been mixed. Conservative commentators nationwide has hailed this as 'the first step on the road to Communism', while liberal commentators have started calling Jordan by one of his basketball nicknames: 'His Airness'. However, this has not affected Jordan's popularity, with an astonishing 83% of Americans still approving of his Presidency after his successful capture and trial of Osama bin Laden in December 2001, and the war in Afghanistan ending by 2002 with the Taliban and Al-Qaeda eliminated. This string of victories left no mercy for the Republicans as they were massacred in the 2002 midterms, giving Jordan a strong Democratic majority in both houses.</p>\n\n<p>Read more...</p>\n\n<p><strong>Other News</strong></p>\n\n<p>- Early convention polling shows Jordan securing the Democratic nomination, Whitman leads amongst Republicans</p>\n\n<p>- A month on: How is LeBron doing in Denver?</p>\n\n<p>- FC Porto beats AC Milan in UEFA Super Cup, 3-0</p></div>"
+        },
+        "1768225139391": {
+            "id": 1768225139391,
+            "variable": 0,
+            "operator": ">=",
+            "amount": "310",
+            "endingImage": "",
+            "endingText": "<div style='overflow-y:scroll;height:200px;'><strong>Derrick Rose declares independent candidacy for Presidency</strong>\n<br><em>The Onion, 29 January 2024</em>\n\n<p>To the shock of Americans nationwide, Chicago Bulls legend Derrick Rose declared an independent candidacy for the Presidency last Thursday, leaving various pollsters scrambling to give him Jordan-style landslide polling. At the press conference convened at the United Center, the four-time MVP said: \"I mean, well, it's a tradition in Chicago at this point that all legendary Chicago Bulls point guards have to run an independent candidacy for the Presidency. I know that I can reach a higher level by declaring such a thing, and hopefully live up to the legacy of Michael Jordan.\" Rose, who turned 35 last October, also announced his shortlist of potential vice-presidents, which included New York's LeBron James, Toronto's Kawhi Leonard, and former vice-President Elizabeth Warren.</p>\n\n<p>Living up to the legacy of Michael Jordan is no small feat. After massacring the league for 14 years, Rose must also send American soldiers to build McDonald's in Afghanistan, pass legislation prescribing health medication to be delivered to every American daily, and set a daily requirement for push-ups during physical education classes. However, Rose believes he can achieve all this, and more. \"I mean, it can't be that hard.\" His Roseness said. \"As President, I would sign legislation outlawing the existance of Kwame Brown.\" At press time, Rose was reportedly informed that the former President had already done that.</p>\n\n<p><strong>More News</strong></p>\n\n<p>- Bill Bradley declares another run for the Senate</p>\n\n<p>- Ja Morant reportedly out for four weeks with gang war, says Hawks</p>\n\n<p>- President Trump attempts to nationalize Michael Jordan</p></div>"
+        },
+        "1768225139578": {
+            "id": 1768225139578,
+            "variable": 0,
+            "operator": ">=",
+            "amount": "270",
+            "endingImage": "",
+            "endingText": "<div style='overflow-y:scroll;height:200px;'><strong>BIDEN WINS 453-85</strong>\n<br><em>The Washington Post, 5 November 2008</em>\n\n<p>From the start of the night, President Gramm knew he was doomed. As returns and calls came in early - <em>far</em> too early - for Democratic challenger Joe Biden, he knew it was time to make the concession call, and at just 9 p.m, the election was called for Joe Biden as Georgia went blue. President Gramm's policy on the recession - one that was far too lax on the free market - led to a complete collapse of American life overnight, with economic upon economic blunder giving President Gramm an approval rating of 18% just a few months after the Great Recession begun. Therefore, when the Democratic convention spewed out a ticket of experienced Senator Joe Biden (D-DE) and Governor Brian Schweitzer (D-MT), every pollster knew that the election was over.</p>\n\n<p>Biden-Schweitzer had run a stellar campaign throughout election season, consistently criticizing Gramm on his failures to tackle the recession effectively, while Gramm had run a campaign promising growth through deregulation, a position that angered his vice-President Rudy Giuliani, leading to leaks of the increasing rift between the two which only tanked their polling further. Gramm's refusal to give some form of stimulus to the American economy - despite the begging of his vice-President - ultimately contributed to the Democrat's massive win, a major return after the contingent election of 2004, which saw Hillary Clinton lose in the House.</p>\n\n<p>Biden and Schweitzer are set to be sworn in early January 2009, and rumours swirl around their potential cabinet appointments, including a return of former vice-President Bill Bradley being appointed as the Secretary of Education.</p></div>"
+        }
+    }
 }
 ]
 
