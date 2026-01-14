@@ -22992,11 +22992,11 @@ function ensureUnlockCSS() {
       position: fixed; left: 50%; right: 20px; bottom: 20px;
       background: #0e3280; color: #fff; padding: 12px 16px;
       border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,.25);
-      opacity: 0; transform: translateY(10px); font-size: 15px;
+      opacity: 0; transform: translateX(-50%) translateY(10px); font-size: 15px;
       transition: opacity .25s ease, transform .25s ease; z-index: 99999;
-      max-width: 300px; line-height: 1.3; text-align: center;
+      max-width: 300px; line-height: 1.3; text-align: center; pointer-events: none;
     }
-    .unlock-notification.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .unlock-notification.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
   `;
   document.head.appendChild(style);
 }
@@ -25931,7 +25931,7 @@ const mainEndings = [
     },
 	{
         id: "thekidsarealright",
-		condition: (rightThirdEV, leftThirdEV, leftNomineeName) => leftThirdEV > 269 && (leftNomineeName === "Soleil Moon Frye" || leftNomineeName === "Susan Sarandon"),
+		condition: (ev, op, rightThirdEV, leftThirdEV, leftNomineeName) => leftThirdEV > 269 && (leftNomineeName === "Soleil Moon Frye" || leftNomineeName === "Susan Sarandon"),
         image: "https://file.garden/aNtAfG887DiA_7lO/2012LBM/soleil-and-justin.jpg",
         html: `<div style="background: linear-gradient(to bottom, #f9f6f0, #f4f0e8); color: #2c2824; font-family: 'Garamond', 'Georgia', serif; padding: 36px 40px; line-height: 1.9; font-size: 0.95em; border: 1px solid #e0d8c8; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
         
@@ -26004,7 +26004,7 @@ const mainEndings = [
 	},
 	{
         id: "generic_3rdparty_win",
-		condition: (ev, rightThirdEV, leftThirdEV) => ev < 269 && (rightThirdEV > 269 || leftThirdEV > 269),
+		condition: (ev, op, rightThirdEV, leftThirdEV) => ev < 269 && (rightThirdEV > 269 || leftThirdEV > 269),
         image: "https://pbs.twimg.com/media/G9lAI6aX0AAqTZe?format=jpg&name=large",
         html: `<div style="background: linear-gradient(to bottom, #FDF8E7, #F5EED6); color: #4A4236; border: 1px solid #C9B99A; border-radius: 8px; padding: 20px; font-family: Georgia, serif; box-shadow: 0 1px 3px rgba(0,0,0,0.15);">
 
@@ -29819,6 +29819,13 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
         }
     }
+	const rightThirdResult = aa.find(r => r.candidate === 18); 
+	const leftThirdResult = aa.find(r => r.candidate === 19);
+
+	const rightThirdEV = rightThirdResult ? rightThirdResult.electoral_votes : 0;
+	const leftThirdEV = leftThirdResult ? leftThirdResult.electoral_votes : 0;
+	const leftCandidateData = campaignTrail_temp.candidate_json.find(c => c.pk === 19);
+	const leftNomineeName = leftCandidateData ? (leftCandidateData.first_name + " " + leftCandidateData.last_name).trim() : "";
 	
 	// for the achievements
 	if (out === "win") {
@@ -29928,7 +29935,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 	}
     
     // select main ending (slide 0)
-    const selectedScenario = mainEndings.find(ending => ending.condition(playerEV, opponentEVs));
+	const selectedScenario = mainEndings.find(ending => ending.condition(playerEV, opponentEVs, rightThirdEV, leftThirdEV, leftNomineeName));
 
     if (!selectedScenario) {
         console.error("No ending scenario matched.");
@@ -30769,18 +30776,18 @@ const changeGameDisp = (hide) => {
 e.vpSwitcher = () => {
     const candidateMap = new Map(e.candidate_json.map(c => [c.pk, c]));
 
-    const potentialeftVPs = e.running_mate_json
+    const potentialVPs = e.running_mate_json
         .filter(f => f.fields.candidate == e.candidate_id)
         .map(f => candidateMap.get(f.fields.running_mate))
         .filter(Boolean);
 
-    if (potentialeftVPs.length === 0) {
+    if (potentialVPs.length === 0) {
         console.error("No potential running mates found.");
         return;
     }
 
     // generate dropdown options
-    const runningMateOptions = potentialeftVPs.map(vp => 
+    const runningMateOptions = potentialVPs.map(vp => 
         `<option value="${vp.pk}">${vp.fields.first_name} ${vp.fields.last_name}</option>`
     ).join('');
 
@@ -30823,20 +30830,20 @@ e.vpSwitcher = () => {
     gameWindow.appendChild(vpScreen);
 
     // initialize display with the first option
-    updateVpDisplay(potentialeftVPs[0]);
+    updateVpDisplay(potentialVPs[0]);
 
     const selectElement = vpScreen.querySelector("#running_mate_id");
     const continueButton = vpScreen.querySelector("#running_mate_id_button");
 
     selectElement.addEventListener("change", (event) => {
         const selectedPk = Number(event.target.value);
-        const selectedVP = potentialeftVPs.find(vp => vp.pk === selectedPk);
+        const selectedVP = potentialVPs.find(vp => vp.pk === selectedPk);
         if (selectedVP) updateVpDisplay(selectedVP);
     });
 
     continueButton.addEventListener("click", () => {
         const finalPk = Number(selectElement.value);
-        const chosenVP = potentialeftVPs.find(vp => vp.pk === finalPk);
+        const chosenVP = potentialVPs.find(vp => vp.pk === finalPk);
         
         if (chosenVP) {
             e.running_mate_last_name = chosenVP.fields.last_name;
@@ -41517,10 +41524,10 @@ const liberalismTextMap = {
     default: "are wary of",
     ranges: [
         { min: 12, max: Infinity, text: 'have <font color="#71bc92"><strong>have built a shrine to</strong></font>' },
-        { min: 10, max: 11, text: 'are <font color="#71bc92"><strong>are ready to rename Vermont after</strong></font>' },
-        { min: 8, max: 9, text: 'are <font color="#71bc92"><strong>are madly in love</strong></font> with' },
-        { min: 5, max: 7, text: 'are <font color="#71bc92"><strong>are ecstatic</strong></font> about' },
-        { min: 2, max: 4, text: '<font color="#71bc92">are warming up to</font>' },
+        { min: 10, max: 11, text: 'are <font color="#71bc92"><strong>ready to rename Vermont after</strong></font>' },
+        { min: 8, max: 9, text: 'are <font color="#71bc92"><strong>madly in love</strong></font> with' },
+        { min: 5, max: 7, text: 'are <font color="#71bc92"><strong>ecstatic</strong></font> about' },
+        { min: 2, max: 4, text: 'are <font color="#71bc92">warming up to</font>' },
         { min: -1, max: 1, text: 'are wary of' },
         { min: -4, max: -2, text: '<font color="#e9a34b">have a distrusting view of</font>' },
         { min: -7, max: -5, text: '<font color="#e94b4b">feel abandoned by</font>' },
@@ -42161,6 +42168,8 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
     
     const opponentTitleText = opponentIsLocked ? "Republican nominee" : "The other side";
     opponentContainer.innerHTML = `<h3 style="border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; margin-top:0;">${opponentTitleText}</h3>`;
+	
+	const opponentsFragment = document.createDocumentFragment();
     
     // display top 2 opponents as cards
     topOpponents.slice(0, 2).forEach((opponent, index) => {
@@ -42217,8 +42226,11 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
         profileRow.appendChild(img);
         profileRow.appendChild(textDiv);
         opponentCard.appendChild(profileRow);
-        opponentContainer.appendChild(opponentCard);
+        
+        opponentsFragment.appendChild(opponentCard);
     });
+
+    opponentContainer.appendChild(opponentsFragment);
 
     // show third contender as smaller mention if available
     if (topOpponents[2]) {
@@ -42263,6 +42275,8 @@ function buildOperationsTab(container) {
     `;
 
     const availableOps = getAvailableOperations();
+    const opsFragment = document.createDocumentFragment();
+
     if (availableOps.length === 0) {
         const emptyCard = document.createElement('div');
         emptyCard.style.cssText = `
@@ -42279,7 +42293,7 @@ function buildOperationsTab(container) {
             <h3 style="margin: 0 0 8px 0;">No active operations</h3>
             <p style="margin: 0; font-size: 0.9em; opacity: 0.8;">Tough luck, buddy. Your team is awaiting new opportunities. Check back after the next question.</p>
         `;
-        operationsListContainer.appendChild(emptyCard);
+        opsFragment.appendChild(emptyCard);
     } else {
         for (const op of availableOps) {
             const opCard = document.createElement('div');
@@ -42298,7 +42312,6 @@ function buildOperationsTab(container) {
                 text-shadow: 0 1px 2px #000;
             `;
             
-            // Add hover effect
             opCard.onmouseenter = () => {
                 opCard.style.background = 'rgba(0, 0, 0, 0.6)';
                 opCard.style.transform = 'translateY(-2px)';
@@ -42383,9 +42396,12 @@ function buildOperationsTab(container) {
 
             opCard.appendChild(opDetails);
             opCard.appendChild(executeBtn);
-            operationsListContainer.appendChild(opCard);
+            
+            opsFragment.appendChild(opCard);
         }
     }
+
+    operationsListContainer.appendChild(opsFragment);
 
     contentRow.appendChild(operationsListContainer);
 
@@ -42436,6 +42452,8 @@ function buildOperationsTab(container) {
     cooldownsCard.appendChild(cooldownTitle);
     
     let hasCooldowns = false;
+    const cooldownsFragment = document.createDocumentFragment(); 
+    
     for (const [key, value] of Object.entries(operationsState.cooldowns)) {
         if (value > 0) {
             hasCooldowns = true;
@@ -42454,7 +42472,7 @@ function buildOperationsTab(container) {
                 <strong style="display: block; margin-bottom: 2px;">${categoryName}</strong>
                 <span style="opacity: 0.8;">${value} turn(s) remaining</span>
             `;
-            cooldownsCard.appendChild(cooldownItem);
+            cooldownsFragment.appendChild(cooldownItem);
         }
     }
     
@@ -42467,9 +42485,10 @@ function buildOperationsTab(container) {
             opacity: 0.7;
         `;
         noCooldownDiv.innerHTML = `All categories ready`;
-        cooldownsCard.appendChild(noCooldownDiv);
+        cooldownsFragment.appendChild(noCooldownDiv);
     }
     
+    cooldownsCard.appendChild(cooldownsFragment);
     statusContainer.appendChild(cooldownsCard);
     contentRow.appendChild(statusContainer);
     container.appendChild(contentRow);
