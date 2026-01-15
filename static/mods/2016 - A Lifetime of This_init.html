@@ -1,18 +1,18 @@
  /*
  * @title: 2016: A Lifetime of This / 2016b / The Hillary Trail
  * @author: StrawberryMaster & Friends
- * @version: 1.2.0
+ * @version: 1.2.1
  * @description: The 2016 election in the eyes of Hillary Clinton (and a couple of others, too)
- * 
+ *
  * Coding license: Apache License 2.0
  * Writing license: Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
- * 
+ *
  * For the coding in this mod, I hereby release the code under the terms and conditions of the Apache License 2.0. The full text of the license can be found at:
  * https://choosealicense.com/licenses/apache-2.0/
- * 
+ *
  * For the writing in this mod, including documentation, text files, and other non-software written works, I hereby release the content under the terms and conditions of the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license. The full text of the license can be found at:
  * https://creativecommons.org/licenses/by-nc/4.0/legalcode
- * 
+ *
  * By using, distributing, or modifying this mod, you agree to abide by the terms and conditions of both the Apache License 2.0 and the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license.
 */
 RecReading = true
@@ -324,7 +324,64 @@ campaignTrail_temp.temp_election_list = [
     }
 ]
 
-campaignTrail_temp.difficulty_level_json = JSON.parse("[{\"model\": \"campaign_trail.difficulty_level\", \"pk\": 0.5, \"fields\": {\"name\": \"Easy-Peasy\", \"multiplier\": 1.2}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 1, \"fields\": {\"name\": \"Quite Easy\", \"multiplier\": 1.1}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 3, \"fields\": {\"name\": \"Normal\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 4, \"fields\": {\"name\": \"Challenging\", \"multiplier\": 0.95}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 5, \"fields\": {\"name\": \"Hard-Boiled\", \"multiplier\": 0.93}}]");
+campaignTrail_temp.difficulty_level_json = [
+	{
+        "model": "campaign_trail.difficulty_level",
+        "pk": 0.25,
+        "fields": {
+            "name": "A Walk in the Park",
+            "multiplier": 1.225
+        }
+    },
+    {
+        "model": "campaign_trail.difficulty_level",
+        "pk": 0.5,
+        "fields": {
+            "name": "Easy-Peasy",
+            "multiplier": 1.15
+        }
+    },
+    {
+        "model": "campaign_trail.difficulty_level",
+        "pk": 1,
+        "fields": {
+            "name": "Quite Easy",
+            "multiplier": 1.05
+        }
+    },
+    {
+        "model": "campaign_trail.difficulty_level",
+        "pk": 3,
+        "fields": {
+            "name": "Normal",
+            "multiplier": 0.97
+        }
+    },
+    {
+        "model": "campaign_trail.difficulty_level",
+        "pk": 4,
+        "fields": {
+            "name": "Challenging",
+            "multiplier": 0.95
+        }
+    },
+    {
+        "model": "campaign_trail.difficulty_level",
+        "pk": 5,
+        "fields": {
+            "name": "Hard-Boiled",
+            "multiplier": 0.93
+        }
+    },
+	{
+        "model": "campaign_trail.difficulty_level",
+        "pk": 6,
+        "fields": {
+            "name": "Dead on Arrival",
+            "multiplier": 0.915
+        }
+    }
+];
 
 // Actual code here
 corrr = "<h2>A Lifetime of This…</h2>";
@@ -332,14 +389,77 @@ corrr = "<h2>A Lifetime of This…</h2>";
 // Header image
 document.getElementById("header").src = "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016banner.jpg";
 
-// Custom favicon
-$("#dynamic-favicon").attr("href", "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/favicon.jpg");
+// Custom favicon & page title
+changeFavicon("https://file.garden/aNtAfG887DiA_7lO/2016ALOT/favicon.jpg");
+document.title = "a lifetime of this...";
 
 // Election night descs
 e.ElectionPopup = "Well, election night is here. This is it. Hang in there, Hill."
 e.WinPopup = "You feel as if there’s a beacon of light shining in on you. You smile."
 e.LosePopup = "Oh no. Oh no. Oh no."
 e.SelAnsContText = "You gotta pick something first, you know."
+
+HistHexcolour = ["#cf1321", "#0e3280", "#f7f70e", "#14bd14"];
+HistName = ["Donald Trump", "Hillary Clinton", "Gary Johnson/Others", "Jill Stein"];
+HistEV = [304, 227, 7, 0];
+HistPV = ["62,985,153", "65,853,677", "4,489,359", "1,457,288"];
+HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
+
+// This causes some variation between the candidate colors. In other words,
+// in every playthrough, the candidate colors will be different from the rest!
+
+// convert “#RRGGBB” → [R,G,B]
+function hexToRgb(hex) {
+  hex = hex.replace(/^#/, '');
+  if (hex.length === 3) {
+    hex = hex.split('').map(c => c + c).join('');
+  }
+  const num = parseInt(hex, 16);
+  return [(num >> 16) & 0xff, (num >> 8) & 0xff, num & 0xff];
+}
+
+// convert [R,G,B] → “#RRGGBB”
+function rgbToHex(r, g, b) {
+  const pad = x => x.toString(16).padStart(2, '0');
+  return `#${pad(r)}${pad(g)}${pad(b)}`;
+}
+
+// linear interpolate two RGB arrays
+function interpolateColor(c1, c2, factor = 0.5) {
+  return c1.map((v, i) =>
+    Math.round(v + factor * (c2[i] - v))
+  );
+}
+
+// vary a single hex color by up to ±variationFrac (e.g. 0.1 = ±10%)
+function varyHexColor(hex, variationFrac = 0.1) {
+  const rgb = hexToRgb(hex);
+  const newRgb = rgb.map(channel => {
+    // random offset between -variationFrac*255 … +variationFrac*255
+    const delta = (Math.random() * 2 - 1) * variationFrac * 255;
+    return Math.max(0, Math.min(255, Math.round(channel + delta)));
+  });
+  return rgbToHex(...newRgb);
+}
+
+campaignTrail_temp.candidate_json.forEach(candidate => {
+  const f = candidate.fields;
+
+  // simple random tint/shade of the original primary
+  f.color_hex = varyHexColor(f.color_hex, 0.05);
+
+  // or interpolate towards the secondary by a random small factor:
+  const primaryRGB   = hexToRgb(f.color_hex);
+  const secondaryRGB = hexToRgb(f.secondary_color_hex);
+  const randFactor   = 0.4 + Math.random() * 0.2; // between 0.4–0.6
+  const blendedRGB   = interpolateColor(primaryRGB, secondaryRGB, randFactor);
+  f.secondary_color_hex = rgbToHex(...blendedRGB);
+});
+
+HistHexcolour = HistHexcolour.map(hex =>
+  // pass the desired max variation fraction (e.g. 0.05 = +/-5%)
+  varyHexColor(hex, 0.05)
+);
 
 // Mod box theme
 campaignTrail_temp.modBoxTheme = {
@@ -400,7 +520,7 @@ const css = `
             }
             #candidate_image img { outline-color: #5B84E3; }
             #running_mate_image img { outline-color: #DB4141; }
-			
+
             /* Background & stuff */
             body {
                 background-image: url(https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016b_backgroundmain.jpg);
@@ -452,6 +572,7 @@ const css = `
                 background: linear-gradient(to bottom, #172d86, #0D0533, #550202);
                 border-radius: .1rem .1rem 0 0;
                 box-shadow: inset 0 .25rem .5rem rgba(255, 255, 255, 0.1), 0 .1rem .5rem rgba(0, 0, 0, 0.4);
+				border-bottom: 2px solid rgba(128, 6, 6, 0.75);
                 display: flex;
                 justify-content: center;
                 height: 2.75rem;
@@ -595,7 +716,7 @@ const css = `
                 color: #d23535;
                 font-size: 2.5rem;
             }
-			
+
 			/* Adds the campaign banner on top of our existing custom sign */
 			#campaign_sign {
 				background-image: url("https://file.garden/aNtAfG887DiA_7lO/2016ALOT/hillarykaine.png");
@@ -604,8 +725,8 @@ const css = `
 				border-color: #c9c9c9;
 				margin-inline: auto;
 				margin-left: -0.09em;
-				height: 80px; 
-				width: 100%; 
+				height: 80px;
+				width: 100%;
 			}
 			#campaign_sign p {
 				color: rgba(0, 0, 0, 0) !important;
@@ -741,7 +862,7 @@ const css = `
 			    margin: 0 2em;
 			    display: flex;
 			}
- 
+
             /* Text tooltips - experimental */
             /* kindly borrowed from the folks @ campaigntrailshowcase.com
             and adapted to opapeldetrouxa.neocities.org */
@@ -831,7 +952,7 @@ const css = `
 				width: 90%;
 			}
 
-			/* Ending screens tweaks */			
+			/* Ending screens tweaks */
 			#final_results_description {
 				display: flex !important; // remove this tag once debugging is finished
 			}
@@ -864,7 +985,7 @@ const css = `
 			#drop_down_area_state {
 				margin-inline: auto;
 			}
-			
+
 			/* Cheat menus/benefit check window - because people *are* gonna use this, you know? */
 			#benefitwindow {
 				overflow: auto;
@@ -876,7 +997,7 @@ const css = `
 			#benefitcontent {
 				margin: 5px 10px;
 				overflow-x: clip;
-			}			
+			}
 			#achwindow {
 				top: 5%;
 				left: 25%;
@@ -891,7 +1012,7 @@ const css = `
 			#cheatMenu, #showBenefitCheckButton {
 				margin-top: 1em;
 			}
-			
+
 			/* Start new game screen */
 			#new_game_buttons {
 				display: flex;
@@ -899,13 +1020,13 @@ const css = `
 				justify-content: center;
 				padding-bottom: 1rem;
 			}
-			
+
 			/* a fix for the US map - no outline showing up on Edge */
 			[tabindex]:focus:not(:focus-visible) {
 			    outline: none;
 			    box-shadow: none;
 			}
-			
+
 			/* for the achievement notifications */
 			.unlock-notification {
 				position: fixed;
@@ -945,7 +1066,7 @@ const css = `
 				font-family: Arial, sans-serif;
 				z-index: 9999;
 				max-width: 450px;
-				
+
 				/* initial animation state */
 				opacity: 0;
 				transform: translateX(-50%) scale(0.9);
@@ -975,7 +1096,7 @@ const css = `
 				line-height: 1.4;
 				color: #000;
 			}
-			
+
 			@media (max-width: 1250px) {
 				#election_description_window, .person_description_window, .description_window_small {
 					padding: 0 1em;
@@ -985,7 +1106,7 @@ const css = `
 					margin: 2em 1em 1em 0;
 				}
             }
-			
+
 			@media only screen and (max-width: 768px) {
 				#map_footer {
                     display: block !important;
@@ -995,16 +1116,16 @@ const css = `
 				#map_footer button {
 					margin: 3px !important;
 				}
-				
+
 				#recommended_reading_box .ftab, #recommended_reading_box .ftab-active {
 					height: 50px !important;
 					width: 150px !important;
 				}
-				
+
 				#game_window:has(#main_content_area_reading), #game_window > #main_content_area_reading {
 					height: auto;
 				}
-				
+
 				.button_container {
 				  left: 23px !important;
 				  top: 385px !important;
@@ -1013,10 +1134,10 @@ const css = `
 					height: 50px !important;
 				}
    			}
-			
+
 			/* Mobile compatibility fixes - partially inspired by those of TTNW */
 			@media only screen and (max-width: 768px) {
-			
+
 			 /* necessary to ensure the music player stays in position */
 			  #game_window {
 				flex: 1 1 auto;
@@ -1029,14 +1150,14 @@ const css = `
 				background-repeat: no-repeat;
 				background-size: cover;
 			  }
-			
+
 			  #question_form button, #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
 				font-size: clamp(16px, 4.2vw, 20px);
 				line-height: 1.2;
 				padding: 10px 16px;
 				min-height: 44px;
 			  }
-			  
+
 			  #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
 				font-size: 1em;
 				line-height: 2em;
@@ -1045,7 +1166,7 @@ const css = `
 			.inner_window_question button, #visit_window button, #map_footer {
 				line-height: 2.5em;
 			  }
-			  
+
 			  /*#map_footer {
 				padding-right: 10em;
 			  }*/
@@ -1107,17 +1228,17 @@ const css = `
 					font-weight: 400;
 					background: #eeebde; /* only change background */
 				}
-				
+
 				.overlay_window img {
 				  width: 15em;
 				  height: auto;
 				}
-				
+
 				.overlay_window h3 {
 				  padding: .5rem x .5rem;
 				  font-size: 24px;
 				}
-				
+
 			/* for the default CTS/NCT footer */
 			  #game_window g {
 				display: flex;
@@ -1127,7 +1248,7 @@ const css = `
 				gap: 8px;
 				padding: 10px 5px;
 			  }
-			  
+
 			  #candidate_pic, img#candidate_pic {
 				order: 1;
 				width: 13em;
@@ -1135,7 +1256,7 @@ const css = `
 				flex-shrink: 0;
 				margin: 0;
 			  }
-			  
+
 			  .inner_window_sign_display {
 				order: 2;
 				flex: 1;
@@ -1145,7 +1266,7 @@ const css = `
 				flex-direction: column;
 				align-items: center;
 			  }
-			  
+
 			  #running_mate_pic, img#running_mate_pic {
 				order: 3;
 				width: 13em;
@@ -1153,18 +1274,18 @@ const css = `
 				flex-shrink: 0;
 				margin: 0;
 			  }
-				
+
 			/* other fixes to not break things */
 			#map_container {
 			  height: 30.78em;
 			}
-			
+
 			.overlay_window {
 				font-size: clamp(16px, 5.2vw, 20px);
 				left: 20%;
 				width: 60%;
 			}
-			
+
 			}
 `;
 
@@ -1468,14 +1589,14 @@ tooltipList = [
     { searchString: "Buddy Dyer", explanationText: "<img src=https://media.gettyimages.com/id/542888402/pt/foto/in-a-one-on-one-interview-orlando-mayor-buddy-dyer-talks-to-the-orlando-sentinel-on-friday-june.jpg?s=612x612&w=0&k=20&c=UpMzmnbNt8ndhRsDxjUDpDgrW9IS4aIMSAV4Xfzk_ek=> Buddy Dyer; the Mayor of Orlando. I hope you’re not thinking of someone else." },
     { searchString: "Tim Kaine", explanationText: "<img src=https://media.gettyimages.com/id/583834664/pt/foto/philadelphia-pa-us-vice-president-nominee-tim-kaine-acknowledges-the-crowd-on-the-third-day-of.jpg?s=612x612&w=0&k=20&c=zWJYy7np2XSHMX4X-IES7rDknRDqHQ9tTJvkU4g4o4A=> Kaine!" },
 	{ searchString: "Manchin", explanationText: "<img src=https://media.gettyimages.com/id/181915523/pt/foto/u-s-senator-joe-manchin-a-democrat-from-west-virginia-speaks-during-an-interview-in-washington.jpg?s=612x612&w=0&k=20&c=2s_fzetZf29MOqSWQrUWBojXARirhh84rjotpB_Lki4=> Joe Manchin; the Senator from West Virginia. Not like Byrd, for better or worse." },
-	{ searchString: "Eric Garcetti", explanationText: "<img src=https://media.gettyimages.com/id/464111903/pt/foto/los-angeles-ca-los-angeles-mayor-eric-garcetti-serves-as-grand-marshal-in-the-29th-annual.jpg?s=612x612&w=0&k=20&c=JJrs81y1UhugdyqsLurLYGpnbdqoRbu26lnT4xqAzTU=> Garcetti!" },	
+	{ searchString: "Eric Garcetti", explanationText: "<img src=https://media.gettyimages.com/id/464111903/pt/foto/los-angeles-ca-los-angeles-mayor-eric-garcetti-serves-as-grand-marshal-in-the-29th-annual.jpg?s=612x612&w=0&k=20&c=JJrs81y1UhugdyqsLurLYGpnbdqoRbu26lnT4xqAzTU=> Garcetti!" },
 	{ searchString: "Julian Castro", explanationText: "<img src=https://media.gettyimages.com/id/1258285218/pt/foto/texas-state-rep-joaquin-castro-front-gestures-toward-his-brother-san-antonio-mayor-julian.jpg?s=612x612&w=0&k=20&c=0qH-D2pUSTSvb1Fhv1tFayX51OpnrFXJRLrXwjRpwwI=> Castro! (and Castro.)" },
 	{ searchString: "Kamala Harris", explanationText: "<img src=https://content.time.com/time/2011/time_100_walkup/kamala_harris.jpg> Attorney General of California; currently running for Senate there, but stands no chance against the popular Loretta Sanchez, who dabs just like you do." },
 	{ searchString: "Cuomo", explanationText: "<img src=https://media.gettyimages.com/id/915811220/pt/foto/american-politician-new-york-governor-andrew-cuomo-addresses-the-democratic-national-convention.jpg?s=612x612&w=0&k=20&c=i4UbRPZ431L6gN7JekQFsYBYYVvztwy0dU1ADqclKIY=> Andrew Cuomo; current Governor of New York and son of “Super Mario” Cuomo." },
 	{ searchString: "McConnell", explanationText: "<img src=https://media.gettyimages.com/id/1328364269/pt/foto/portrait-of-american-politician-and-us-senator-mitch-mcconnell-as-he-poses-against-a-white.jpg?s=612x612&w=0&k=20&c=cNIQG9HCsAVPdWCs3p9YT2jEwAJqUX6ZEtP1usWEJf0=> Angry." },
 
     // Former politicians
-	{ searchString: "Bill Clinton", explanationText: "<img src=https://media.gettyimages.com/id/1850828552/pt/foto/us-president-bill-clinton-and-his-daughter-chelsea-stop-for-an-ice-cream-break-30-june-while.jpg?s=612x612&w=0&k=20&c=y46VJkUYjQ5eliCbh17oYCU4rg4nRkg-nMkXM1iH624=> Hmm, ice cream." },	
+	{ searchString: "Bill Clinton", explanationText: "<img src=https://media.gettyimages.com/id/1850828552/pt/foto/us-president-bill-clinton-and-his-daughter-chelsea-stop-for-an-ice-cream-break-30-june-while.jpg?s=612x612&w=0&k=20&c=y46VJkUYjQ5eliCbh17oYCU4rg4nRkg-nMkXM1iH624=> Hmm, ice cream." },
     { searchString: "Bill Clinton", explanationText: "<img src=https://www.usatoday.com/gcdn/authoring/authoring-images/2024/10/14/USAT/75674911007-51562422.jpg?width=1358&height=2049&fit=crop&format=pjpg&auto=webp> Hmm, Sprite." },
     { searchString: "Bill", explanationText: "<img src=https://media.gettyimages.com/id/1850844964/pt/foto/us-president-bill-clinton-shows-off-a-brand-new-saxophone-given-by-japanese-jazz-musician.jpg?s=612x612&w=0&k=20&c=itYiAnFYrb64xLVuSW56GPDlGckYAHNRxdzUo2X5Fj0=> Husband." },
     { searchString: "Deval Patrick", explanationText: "<img src=https://media.gettyimages.com/id/179198746/pt/foto/boston-in-the-absence-of-the-lt-governor-governor-deval-patrick-chairs-the-meeting-of-the-gc-on.jpg?s=612x612&w=0&k=20&c=8rih3jgAisJVd2i1g_tM2PMYdle8jvN6QcFrBo9Kz9Q=> Patrick!" },
@@ -1521,7 +1642,7 @@ tooltipList = [
 	{ searchString: "Magaziner", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2016ALOT/magaziner.png> Ira Magaziner; former Senior Advisor for Policy Development in the Clinton administration. He helped you create Hillarycare, and also helped Al Gore found the internet. Plus, you two were on LIFE once." },
 	{ searchString: "Lester", explanationText: "<img src=https://media.gettyimages.com/id/610598268/pt/foto/debate-moderator-lester-holt-speaks-during-the-first-presidential-debate-at-hofstra-university.jpg?s=612x612&w=0&k=20&c=dXjTcDE1qXIRFJd7q7QppiO5Amv4CGUW2PAcrBhUK8s=> Lester Holt; a journalist and anchor for NBC Nightly News. He’s also moderating the debates between you and Trump." },
     { searchString: "Jon Arbuckle", explanationText: "<img src=https://pbs.twimg.com/media/GrLfvPHW4AArZF2?format=jpg&name=large> Jon Arbuckle; one of the protagonists of the <i>Garfield</i> comic strip." },
-	{ searchString: "Islamic State", explanationText: "<img src=https://media.gettyimages.com/id/590679987/pt/foto/islamic-state-fighter-waving-a-flag-while-standing-on-captured-government-fighter-jet-in-raqqa.jpg?s=612x612&w=0&k=20&c=wZDNl-CwitzImx9BT8YWyCjUA_6xNO0J-fqTGjOuWvo=> A jihadist organisation that currently holds control over significant portions of Syria and Iraq." },	
+	{ searchString: "Islamic State", explanationText: "<img src=https://media.gettyimages.com/id/590679987/pt/foto/islamic-state-fighter-waving-a-flag-while-standing-on-captured-government-fighter-jet-in-raqqa.jpg?s=612x612&w=0&k=20&c=wZDNl-CwitzImx9BT8YWyCjUA_6xNO0J-fqTGjOuWvo=> A jihadist organisation that currently holds control over significant portions of Syria and Iraq." },
     { searchString: "The Beatles", explanationText: "<img src=https://miro.medium.com/v2/resize:fit:1200/1*rvQQn_CSX8qoENogE-mriA.jpeg> The notorious terrorist cell. Unrelated picture: the British band they were nicknamed after." },
     { searchString: "Keystone XL", explanationText: "<img src=https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/1/31/1391176834990/e8e52b2a-0b15-4314-8958-173cd7db28b9-418x540.png?width=445&dpr=1&s=none&crop=none> A pipeline stretching from Alberta, Canada, to oil refineries in the Midwest. A proposed expansion would take it all the way to Port Arthur, Texas, and has been opposed on several environmental grounds." },
 	{ searchString: "Affordable Care Act", explanationText: "<img src=https://content.time.com/time/magazine/archive/covers/2009/1101090810_400.jpg> Obamacare! A law whose aims include expanding health insurance coverage, reducing costs, and protecting people with preexisting conditions. It was passed in 2010 by the Democratic-led House and Senate and named after you know who." },
@@ -1554,12 +1675,6 @@ tooltipList = [
     { searchString: "Madonna", explanationText: "<img src=https://pbs.twimg.com/media/Cut3qCTWYAAxYIU.jpg> Gonna help you snatch that Presidency, so watch out! She’s A GIRL GONE WILD!" }
 ];
 
-HistHexcolour = ["#cf1321", "#0e3280", "#f7f70e", "#14bd14"];
-HistName = ["Donald Trump", "Hillary Clinton", "Gary Johnson/Others", "Jill Stein"];
-HistEV = [304, 227, 7, 0];
-HistPV = ["62,985,153", "65,853,677", "4,489,359", "1,457,288"];
-HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
-
 // This is to replace the existing voting system descriptions.
 (function() {
     'use strict';
@@ -1582,7 +1697,24 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
           <p>Under the proportional system, each state’s electoral votes are distributed proportionally based on the popular vote percentage each candidate receives. If a candidate wins 60% of a state’s vote, they receive approximately 60% of that state’s electoral votes.</p>
           <p>The winner of a state still maintains an advantage due to rounding (in a state with 4 electoral votes, 51% of the vote typically yields 3 electoral votes), but the system much more closely reflects the will of the voters. It also makes every state more competitive, as candidates could gain electoral votes even in states they don’t win outright. This system would have changed the outcomes of several elections, including 1860, 1948, 1968, 1992, and 2000.</p>`,
         "3": `<p><strong style='color:navy'>From sea to shining sea!</strong> – you know how it is. Do the Bartman.</p>`,
+        [METHOD_VALUE.DHONDT]: `<p><strong>D'Hondt/Jefferson method</strong></p><p>Similar to Sainte-Laguë, the D’Hondt method is a “highest averages” system that allocates seats one by one. However, it uses a different formula: a candidate’s total vote is divided by the number of seats they have already won, plus one (divisors: 1, 2, 3, etc.). The seat goes to the candidate with the highest average in each round.</p><p>This divisor sequence has a notable mathematical property: it tends to slightly favor larger parties and coalitions over smaller, more fragmented ones. This can encourage strategic alliances but may underrepresent minor parties compared to their vote share. It is named after Victor D'Hondt and, in the U.S., Thomas Jefferson.</p>`,
+        [METHOD_VALUE.HUNTINGTON_HILL]: `<p><strong>Huntington-Hill method</strong></p><p>This is the method currently used to apportion the 435 seats of the U.S. House of Representatives among the states. Like other “highest averages” systems, it awards seats one by one to the party with the highest “priority value.”</p><p>Its unique formula (dividing votes by the geometric mean of seats currently held and the next seat) is designed to minimize the relative percentage difference in representation between any two parties. This means if one party gets twice the votes, it should have as close to twice the seats as mathematically possible. It generally produces very proportional results, somewhere between D'Hondt and Sainte-Laguë in its treatment of smaller parties.</p>`,
+        [METHOD_VALUE.LR_HARE]: `<p><strong>Largest remainder method (Hare quota)</strong></p><p>This method works differently from “highest averages.” First, it establishes a “quota” — the price of a single electoral vote (calculated as Total Votes / Total EVs). Each candidate is immediately awarded a number of EVs equal to how many full quotas they achieved.</p><p>After this initial allocation, any remaining EVs are awarded one by one to the candidates with the largest <em>fractional remainder</em> of votes. This system is very intuitive and tends to be highly proportional, often giving smaller parties a better chance to win representation if they can consolidate their support to earn a large remainder.</p>`,
+        [METHOD_VALUE.SAINTE_LAGUE]: `<p><strong>Sainte-Laguë/Webster method</strong></p><p>This is a “highest averages” method that allocates a state’s electoral votes one by one. In each round, a candidate’s total popular vote is divided by a number (specifically, twice their current number of seats, plus one: 1, 3, 5, etc.). The seat is awarded to the candidate with the highest resulting average.</p><p>The Sainte-Laguë method is renowned for its high degree of proportionality. Unlike some other systems, it does not systematically favor larger or smaller parties, making it one of the most balanced apportionment methods available.</p>`,
+        [METHOD_VALUE.APPROVAL_SL]: `<p><strong>Approval + Sainte-Laguë</strong></p><p>This is an advanced, model-based method that does <em>not</em> use the popular vote directly. Instead, it first calculates a “utility score” for each candidate based on their policy alignment with a state’s profile. A state then “approves” of all candidates whose utility is within a certain threshold of the top-scoring candidate.</p><p>The number of approvals each candidate receives becomes their new score; the Sainte-Laguë method is used to apportion electoral votes based on these approval counts. This system rewards candidates with broad ideological appeal who are considered a “good fit” by the state, not just the single best one.</p>`,
+        [METHOD_VALUE.BORDA_SL]: `<p><strong>Borda count + Sainte-Laguë</strong></p><p>This model-based method first ranks candidates in a state from best to worst based on their policy alignment (creating a utility score for them). Candidates are then awarded Borda points based on their rank: the top-ranked candidate gets the most points, the second-ranked gets fewer, and so on.</p><p>These Borda points — and not popular votes — are then used as the input for the Sainte-Laguë apportionment method. This system heavily favors consensus candidates who are consistently ranked highly and penalizes polarizing figures who may be ranked first by some but last by others. It rewards being broadly acceptable over being a niche favorite.</p>`,
+        [METHOD_VALUE.COPELAND_SL]: `<p><strong>Condorcet/Copeland + Sainte-Laguë</strong></p><p>This advanced method simulates a round-robin tournament in each state. Based on policy utility scores, every candidate is compared head-to-head against every other candidate. A candidate’s “Copeland score” is the total number of these pairwise matchups they win.</p><p>A candidate who can defeat every other opponent in a one-on-one contest is a “Condorcet winner” and will have the highest possible score. The Copeland scores are then used with the Sainte-Laguë method to allocate electoral votes. This system strongly favors candidates with the broadest appeal who are most likely to be preferred over their direct competitors.</p>`,
     };
+
+    const NEW_OPTIONS = [
+        { val: METHOD_VALUE.DHONDT, text: "D’Hondt/Jefferson" },
+        { val: METHOD_VALUE.HUNTINGTON_HILL, text: "Huntington–Hill" },
+        { val: METHOD_VALUE.LR_HARE, text: "Largest remainder" },
+        { val: METHOD_VALUE.SAINTE_LAGUE, text: "Sainte‑Laguë/Webster" },
+        { val: METHOD_VALUE.APPROVAL_SL, text: "Approval + Sainte‑Laguë" },
+        { val: METHOD_VALUE.BORDA_SL, text: "Borda + Sainte‑Laguë" },
+        { val: METHOD_VALUE.COPELAND_SL, text: "Condorcet/Copeland + Sainte‑Laguë" },
+    ];
 
     function updateDescription(value) {
         const descBox = document.getElementById("opponent_selection_description_window");
@@ -1597,14 +1729,29 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 
         const optionsArr = Array.from(select.options);
         const propIndex = optionsArr.findIndex(o => o.value === "2");
-        
+
         // since we want the array order to be preserved, we should increment the index as we add
         let insertIndex = propIndex !== -1 ? propIndex + 1 : select.length;
+
+        NEW_OPTIONS.forEach(optData => {
+            if (!select.querySelector(`option[value="${optData.val}"]`)) {
+                const opt = document.createElement("option");
+                opt.value = optData.val;
+                opt.textContent = optData.text;
+
+                if (insertIndex >= select.length) {
+                    select.add(opt);
+                } else {
+                    select.add(opt, select.options[insertIndex]);
+                }
+                insertIndex++;
+            }
+        });
 
         // rename existing options
         const wta = select.querySelector('option[value="1"]');
         if (wta) wta.textContent = "Winner‑Take‑All (default)";
-        
+
         const prop = select.querySelector('option[value="2"]');
         if (prop) prop.textContent = "Proportional";
 
@@ -1621,11 +1768,11 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 
         select.dataset.enhanced = "true";
     }
-	
+
 	window.modifySelector = modifySelector;
 })();
 
-// Funny test. Probably won't last long.
+// Pretty much a banner system.
 (function() {
     const gameWindow = document.getElementById("game_window");
     if (!gameWindow) return;
@@ -1640,8 +1787,66 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
         hoverEffect: true,
         clickCooldown: 150,
         maxCacheSize: 20,
-        useRequestIdleCallback: true
+        useRequestIdleCallback: true,
+        maxRetries: 2,
+        failedBannerTimeout: 5 * 60 * 1000
     };
+
+	if(!document.getElementById('banner-system-styles')) {
+        const style = document.createElement('style');
+        style.id = 'banner-system-styles';
+        style.textContent = `
+            #bottomBar {
+                height: ${CONFIG.bannerHeight}px;
+                font-size: 12px;
+                background-color: transparent;
+                margin: 1em auto;
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+                user-select: none;
+                border-radius: 3px;
+                width: 100%;
+                max-width: 800px; /* Safe default */
+            }
+            #bottomBar:hover {
+                transform: scale(1.02);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            #bottomBar img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+                transition: opacity ${CONFIG.fadeTransition}ms ease-in-out;
+                pointer-events: none;
+            }
+            #bannerIndicator {
+                position: absolute;
+                top: 2px; right: 4px;
+                width: 16px; height: 16px;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 50%;
+                display: flex;
+                align-items: center; justify-content: center;
+                font-size: 10px; font-weight: bold;
+                color: #333;
+                opacity: 0;
+                transition: opacity 200ms ease-in-out, transform 150ms ease-in-out;
+                pointer-events: none;
+                z-index: 10;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            }
+            #bottomBar:hover #bannerIndicator {
+                opacity: 1;
+            }
+            .indicator-pop {
+                transform: scale(1.2);
+            }
+        `;
+        document.head.appendChild(style);
+    }
 
     // banner list
     const banners = [{
@@ -1786,8 +1991,9 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
         constructor() {
             this.imageCache = new Map();
             this.loadedUrls = new Set();
+            this.failedUrls = new Map();
             this.storageKey = 'vintageBannerCache_v2';
-            this.maxCacheAge = 7 * 24 * 60 * 60 * 1000; // 7 days
+            this.maxCacheAge = 7 * 24 * 60 * 60 * 1000;
             this.cacheAccessOrder = [];
 
             if (CONFIG.enableLocalStorage) {
@@ -1801,11 +2007,12 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             try {
                 const cacheData = {
                     timestamp: Date.now(),
-                    urls: Array.from(this.loadedUrls)
+                    urls: Array.from(this.loadedUrls),
+                    failed: Array.from(this.failedUrls.entries())
                 };
                 localStorage.setItem(this.storageKey, JSON.stringify(cacheData));
             } catch (e) {
-                // silent fail
+                console.warn('Banner cache save failed:', e);
             }
         }
 
@@ -1813,30 +2020,72 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             try {
                 const cached = localStorage.getItem(this.storageKey);
                 if (!cached) return;
-                
+
                 const data = JSON.parse(cached);
                 const age = Date.now() - data.timestamp;
 
                 if (age < this.maxCacheAge) {
                     this.loadedUrls = new Set(data.urls);
+                    if (data.failed) {
+                        this.failedUrls = new Map(data.failed);
+                    }
                 } else {
                     localStorage.removeItem(this.storageKey);
                 }
             } catch (e) {
-                // silent fail
+                console.warn('Banner cache load failed:', e);
             }
         }
 
+        isRecentlyFailed(url) {
+            if (!this.failedUrls.has(url)) return false;
+
+            const failedTime = this.failedUrls.get(url);
+            const timeSinceFailed = Date.now() - failedTime;
+
+            // allow retry after timeout
+            if (timeSinceFailed > CONFIG.failedBannerTimeout) {
+                this.failedUrls.delete(url);
+                return false;
+            }
+
+            return true;
+        }
+
+        markAsFailed(url) {
+            this.failedUrls.set(url, Date.now());
+            this.imageCache.delete(url);
+            this.loadedUrls.delete(url);
+            this.saveToStorage();
+        }
+
+        isCachedImageValid(img) {
+            return img &&
+                   img.complete &&
+                   img.naturalHeight !== 0 &&
+                   img.naturalWidth !== 0;
+        }
+
         preloadImage(url) {
+            if (this.isRecentlyFailed(url)) {
+                return Promise.reject(new Error(`Recently failed: ${url}`));
+            }
+
             if (this.imageCache.has(url)) {
-                this.updateCacheOrder(url);
-                return Promise.resolve(this.imageCache.get(url));
+                const cachedImg = this.imageCache.get(url);
+                if (this.isCachedImageValid(cachedImg)) {
+                    this.updateCacheOrder(url);
+                    return Promise.resolve(cachedImg);
+                } else {
+                    this.imageCache.delete(url);
+                    this.loadedUrls.delete(url);
+                }
             }
 
             return new Promise((resolve, reject) => {
                 const img = new Image();
                 let timeoutId;
-                
+
                 const cleanup = () => {
                     clearTimeout(timeoutId);
                     img.onload = img.onerror = null;
@@ -1844,46 +2093,51 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 
                 timeoutId = setTimeout(() => {
                     cleanup();
+                    this.markAsFailed(url);
                     reject(new Error(`Timeout: ${url}`));
                 }, 8000);
 
                 img.onload = () => {
                     cleanup();
-                    this.addToCache(url, img);
-                    resolve(img);
+                    if (this.isCachedImageValid(img)) {
+                        this.addToCache(url, img);
+                        resolve(img);
+                    } else {
+                        this.markAsFailed(url);
+                        reject(new Error(`Invalid image: ${url}`));
+                    }
                 };
 
                 img.onerror = () => {
                     cleanup();
+                    this.markAsFailed(url);
                     reject(new Error(`Failed: ${url}`));
                 };
 
-                // set image loading priority to low
                 img.fetchPriority = "low";
                 img.src = url;
             });
         }
 
-        addToCache(url, img) {
-            // LRU cache eviction policy
-            if (this.imageCache.size >= CONFIG.maxCacheSize && !this.imageCache.has(url)) {
-                const lruUrl = this.cacheAccessOrder.shift();
-                this.imageCache.delete(lruUrl);
-            }
-            
-            this.imageCache.set(url, img);
-            this.updateCacheOrder(url);
-            this.loadedUrls.add(url);
-            this.saveToStorage();
-        }
+		addToCache(url, img) {
+		  if (!this.isCachedImageValid(img)) return;
+
+		  if (this.imageCache.has(url)) this.imageCache.delete(url); // refresh order
+		  this.imageCache.set(url, img);
+
+		  while (this.imageCache.size > CONFIG.maxCacheSize) {
+			const lruUrl = this.imageCache.keys().next().value;
+			this.imageCache.delete(lruUrl);
+		  }
+
+		  this.saveToStorage();
+		}
 
         updateCacheOrder(url) {
-            // remove url if it exists in the order array
             const index = this.cacheAccessOrder.indexOf(url);
             if (index > -1) {
                 this.cacheAccessOrder.splice(index, 1);
             }
-            // add to the end (most recently used)
             this.cacheAccessOrder.push(url);
         }
 
@@ -1893,33 +2147,41 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
                 return new Promise(resolve => {
                     window.requestIdleCallback(() => {
-                        const promises = urls.map(url => 
+                        const promises = urls.map(url =>
                             this.preloadImage(url).catch(() => null)
                         );
                         Promise.allSettled(promises).then(resolve);
                     }, { timeout: 2000 });
                 });
             } else {
-                const promises = urls.map(url => 
+                const promises = urls.map(url =>
                     this.preloadImage(url).catch(() => null)
                 );
                 return Promise.allSettled(promises);
             }
         }
 
-        getCachedImage(url) {
-            const img = this.imageCache.get(url);
-            if (img) {
-                this.updateCacheOrder(url);
-            }
-            return img || null;
+		getCachedImage(url) {
+		  const img = this.imageCache.get(url);
+		  if (!this.isCachedImageValid(img)) {
+			this.imageCache.delete(url);
+			return null;
+		  }
+		  // refresh order
+		  this.imageCache.delete(url);
+		  this.imageCache.set(url, img);
+		  return img;
+		}
+
+        getAvailableBanners(bannerList) {
+            return bannerList.filter(banner => !this.isRecentlyFailed(banner.url));
         }
     }
 
-    // weighted random selection with memoization
+    // weighted random selection
     const bannerSelector = (() => {
         let weightSum = null;
-        
+
         const getTotalWeight = () => {
             if (weightSum === null) {
                 weightSum = banners.reduce((sum, banner) => sum + banner.weight, 0);
@@ -1928,26 +2190,36 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
         };
 
         return {
-            getRandomBanner(excludeRecent = []) {
-                const availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
-                
-                if (availableBanners.length === 0) {
-                    const currentUrl = excludeRecent[excludeRecent.length - 1];
-                    return banners.find(b => b.url !== currentUrl) || banners[0];
+            // accept cache to filter failed banners
+            getRandomBanner(excludeRecent = [], cache = null) {
+                let availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+
+                // filter out failed banners
+                if (cache) {
+                    availableBanners = availableBanners.filter(b => !cache.isRecentlyFailed(b.url));
                 }
-                
+
+                if (availableBanners.length === 0) {
+                    // if all banners failed or recent, try any banner not in exclude list
+                    availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+
+                    if (availableBanners.length === 0) {
+                        // last resort: return any banner
+                        return banners[0];
+                    }
+                }
+
                 const totalWeight = availableBanners.reduce((sum, banner) => sum + banner.weight, 0);
                 let random = Math.random() * totalWeight;
-                
+
                 for (const banner of availableBanners) {
                     random -= banner.weight;
                     if (random <= 0) return banner;
                 }
-                
+
                 return availableBanners[0];
             },
-            
-            // precompute weighted selection table
+
             initializeSelectionTable() {
                 getTotalWeight();
             }
@@ -1958,13 +2230,14 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
     class ClickableBannerSystem {
         constructor() {
             this.createElements();
-            
+
             this.cache = new BannerCache();
             this.currentBanner = null;
             this.recentBanners = [];
             this.isTransitioning = false;
             this.lastClickTime = 0;
             this.rafId = null;
+            this.retryCount = 0;
 
             this.init();
         }
@@ -1972,82 +2245,48 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
         init() {
             this.setupEventListeners();
             bannerSelector.initializeSelectionTable();
-            
+
             Promise.resolve()
                 .then(() => this.preloadInitialBanners())
                 .then(() => this.displayRandomBanner())
                 .catch(() => {
-                    // fallback if preloading fails
                     this.displayRandomBanner();
                 });
 
-            // cleanup on page unload
             window.addEventListener('beforeunload', () => {
                 this.destroy();
             });
         }
 
-        createElements() {
+		createElements() {
             this.container = document.createElement("div");
-            this.imageElement = document.createElement("img");
-            this.clickIndicator = document.createElement("div");
-
             this.container.id = "bottomBar";
             this.container.setAttribute('tabindex', '0');
             this.container.setAttribute('role', 'button');
             this.container.setAttribute('aria-label', 'Click to change banner');
 
-            this.container.style.cssText = `
-                height: ${CONFIG.bannerHeight}px;
-                font-size: 12px;
-                border-style: none;
-                border-width: 5px;
-                background-color: transparent;
-                padding: 0;
-                margin: 0 .3em 1em 2em;
-                position: relative;
-                overflow: hidden;
-                cursor: pointer;
-                transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
-                user-select: none;
-                border-radius: 3px;
-            `;
-
-            this.imageElement.style.cssText = `
-                width: 100%; 
-                height: 100%; 
-                object-fit: contain; 
-                display: block;
-                transition: opacity ${CONFIG.fadeTransition}ms ease-in-out;
-                pointer-events: none;
-            `;
-
-            this.clickIndicator.style.cssText = `
-                position: absolute;
-                top: 2px;
-                right: 4px;
-                width: 16px;
-                height: 16px;
-                background: rgba(255, 255, 255, 0.8);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 10px;
-                font-weight: bold;
-                color: #333;
-                opacity: 0;
-                transition: opacity 200ms ease-in-out, transform 150ms ease-in-out;
-                pointer-events: none;
-                z-index: 10;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-            `;
+            this.imageElement = document.createElement("img");
+            this.clickIndicator = document.createElement("div");
+            this.clickIndicator.id = "bannerIndicator";
             this.clickIndicator.textContent = "↻";
 
-            // append elements
-            this.container.appendChild(this.imageElement);
-            this.container.appendChild(this.clickIndicator);
+            const frag = document.createDocumentFragment();
+            frag.appendChild(this.imageElement);
+            frag.appendChild(this.clickIndicator);
+            this.container.appendChild(frag);
+
             gameWindow.insertAdjacentElement("afterend", this.container);
+
+            this.imageElement.onerror = () => {
+                console.warn('Banner display failed:', this.imageElement.src);
+                if (this.currentBanner) this.cache.markAsFailed(this.currentBanner.url);
+				// try to load another banner
+                if (this.retryCount < CONFIG.maxRetries) {
+                    this.retryCount++;
+                    setTimeout(() => this.displayRandomBanner(), 100);
+                }
+            };
+            this.imageElement.onload = () => { this.retryCount = 0; }; // reset retry count on successful load
         }
 
         setupEventListeners() {
@@ -2058,47 +2297,26 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
                     return;
                 }
                 this.lastClickTime = now;
+                this.retryCount = 0;
                 this.nextBanner();
             };
 
-            // hover effects
-            if (CONFIG.hoverEffect) {
-                this.container.onmouseenter = () => {
-                    if (this.isTransitioning) return;
-                    
-                    cancelAnimationFrame(this.rafId);
-                    this.rafId = requestAnimationFrame(() => {
-                        this.container.style.transform = 'scale(1.02)';
-                        this.container.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
-                        this.clickIndicator.style.opacity = '1';
-                    });
-                };
-
-                this.container.onmouseleave = () => {
-                    cancelAnimationFrame(this.rafId);
-                    this.rafId = requestAnimationFrame(() => {
-                        this.container.style.transform = 'scale(1)';
-                        this.container.style.boxShadow = 'none';
-                        this.clickIndicator.style.opacity = '0';
-                    });
-                };
-            }
-
-            // keyboard accessibility
-            this.container.onkeydown = (e) => {
+			this.container.onkeydown = (e) => {
                 if (e.code === 'Space' || e.code === 'Enter') {
                     e.preventDefault();
+                    this.retryCount = 0;
                     this.nextBanner();
                 }
             };
         }
 
         async preloadInitialBanners() {
-            // prioritize preloading based on banner weights
+            // only preload non-failed banners
             const sortedBanners = [...banners]
+                .filter(b => !this.cache.isRecentlyFailed(b.url))
                 .sort((a, b) => b.weight - a.weight)
                 .slice(0, CONFIG.preloadCount);
-                
+
             const urlsToPreload = sortedBanners.map(b => b.url);
             return this.cache.preloadBatch(urlsToPreload);
         }
@@ -2120,9 +2338,7 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
                             this.imageElement.src = banner.url;
                         }
                         this.imageElement.alt = banner.alt;
-                        
-                        // force reflow to ensure transition works
-                        void this.imageElement.offsetWidth;
+
                         this.imageElement.style.opacity = '1';
                         this.isTransitioning = false;
                     });
@@ -2139,35 +2355,37 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             }
 
             this.currentBanner = banner;
-
-            // track recent banners
             this.recentBanners.push(banner.url);
             if (this.recentBanners.length > 3) {
                 this.recentBanners.shift();
             }
 
-            // preload next banner if not cached
+            // preload if not cached
             if (!cachedImg) {
-                this.cache.preloadImage(banner.url).catch(() => {
-                    // silent fail
+                this.cache.preloadImage(banner.url).catch((err) => {
+                    console.warn('Preload failed:', err.message);
                 });
             }
 
-            // opportunistically preload next potential banners
+            // opportunistically preload next banners
             if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
                 window.requestIdleCallback(() => {
                     const nextBanners = banners
-                        .filter(b => !this.recentBanners.includes(b.url) && !this.cache.imageCache.has(b.url))
+                        .filter(b =>
+                            !this.recentBanners.includes(b.url) &&
+                            !this.cache.imageCache.has(b.url) &&
+                            !this.cache.isRecentlyFailed(b.url)
+                        )
                         .sort((a, b) => b.weight - a.weight)
                         .slice(0, 2);
-                        
+
                     this.cache.preloadBatch(nextBanners.map(b => b.url));
                 }, { timeout: 5000 });
             }
         }
 
         displayRandomBanner() {
-            const banner = bannerSelector.getRandomBanner(this.recentBanners);
+            const banner = bannerSelector.getRandomBanner(this.recentBanners, this.cache);
             this.displayBanner(banner, this.currentBanner !== null);
         }
 
@@ -2175,30 +2393,33 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             this.displayRandomBanner();
 
             requestAnimationFrame(() => {
-                this.clickIndicator.style.transform = 'scale(1.2)';
-                
+                this.clickIndicator.classList.add('indicator-pop');
+
                 setTimeout(() => {
-                    requestAnimationFrame(() => {
-                        this.clickIndicator.style.transform = 'scale(1)';
-                    });
+                    this.clickIndicator.classList.remove('indicator-pop');
                 }, 150);
             });
         }
 
         destroy() {
             cancelAnimationFrame(this.rafId);
-            
+
             if (this.container) {
                 this.container.onclick = null;
                 this.container.onmouseenter = null;
                 this.container.onmouseleave = null;
                 this.container.onkeydown = null;
-                
+
                 if (this.container.parentNode) {
                     this.container.parentNode.removeChild(this.container);
                 }
             }
-            
+
+            if (this.imageElement) {
+                this.imageElement.onload = null;
+                this.imageElement.onerror = null;
+            }
+
             this.container = null;
             this.imageElement = null;
             this.clickIndicator = null;
@@ -2209,7 +2430,13 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 
     window.vintageBannerSystem = {
         next: () => bannerSystem.nextBanner(),
-        current: () => bannerSystem.currentBanner?.alt || 'Loading...'
+        current: () => bannerSystem.currentBanner?.alt || 'Loading...',
+        clearFailedCache: () => {
+            bannerSystem.cache.failedUrls.clear();
+            bannerSystem.cache.saveToStorage();
+            console.log('Failed banner cache cleared');
+        },
+        getFailedBanners: () => Array.from(bannerSystem.cache.failedUrls.keys())
     };
 })();
 
@@ -2218,7 +2445,7 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 (function() {
     const STORAGE_KEY = 'hillary2016_unlocked_rms';
     const UNLOCKABLE_RM_IDS = [213, 214, 215]; // Biden, Castro, Garcetti
-    
+
     // attempt at a cross-browser solution. check if localStorage is available
     function isLocalStorageAvailable() {
         try {
@@ -2230,14 +2457,14 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             return false;
         }
     }
-    
+
     // get unlocked running mates from storage
     function getUnlockedRunningMates() {
         if (!isLocalStorageAvailable()) {
             console.warn("localStorage not available - running mates will be hidden");
             return [];
         }
-        
+
         try {
             const storedData = localStorage.getItem(STORAGE_KEY);
             return storedData ? JSON.parse(storedData) : [];
@@ -2246,7 +2473,7 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
             return [];
         }
     }
-    
+
     // apply visibility using both hidden attribute and style
     function applyRunningMateVisibility() {
         const selectElement = document.getElementById('running_mate_id');
@@ -2254,28 +2481,28 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 
         const unlockedPks = getUnlockedRunningMates();
         const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-        
+
         Array.from(selectElement.options).forEach(option => {
             const optionPk = parseInt(option.value, 10);
-            
+
             if (UNLOCKABLE_RM_IDS.includes(optionPk)) {
                 const isUnlocked = unlockedPks.includes(optionPk);
-                
+
                 // use both hidden attribute and style.display for maximum compatibility
                 option.hidden = !isUnlocked;
-                
+
                 // for Safari, apply inline style as well
                 if (isSafari) {
                     option.style.display = isUnlocked ? '' : 'none';
                 }
-                
+
                 // if running on iOS Safari, force-refresh the select element
                 if (isSafari && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
                     option.disabled = !isUnlocked; // additional Safari-specific attribute
                 }
             }
         });
-        
+
         // force Safari to redraw the select element if needed
         if (isSafari && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
             selectElement.style.display = 'none';
@@ -2300,7 +2527,7 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
     // apply visibility immediately and also when the DOM is fully loaded
     applyRunningMateVisibility();
     document.addEventListener('DOMContentLoaded', applyRunningMateVisibility);
-    
+
     // apply one more time after a short delay to catch any late rendering
     setTimeout(applyRunningMateVisibility, 500);
 
@@ -2308,61 +2535,82 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 })();
 
 // This is for the question count selector.
-const gameWindowNode = document.getElementById("game_window");
-const createQuestionSelector = function() {
-    if (document.getElementById("difficulty_level") && !document.getElementById("question_select")) {
-        
-        const questionOptions = [
-            ["29 (Best)", 29],
-            ["40 (Full)", 40]
-        ];
+(function() {
+    'use strict';
 
-        let dropdown = document.createElement("select");
-        dropdown.id = "question_select";
+    const CONFIG = {
+        containerId: 'game_window',
+        targetSectionId: 'difficulty_level',
+        selectorId: 'question_select',
+        options: [
+            { text: "29 (Best)", value: 29 },
+            { text: "40 (Full)", value: 40 }
+        ]
+    };
 
-        questionOptions.forEach(opt => {
-            let optionElement = document.createElement("option");
-            optionElement.text = opt[0];
-            optionElement.value = opt[1];
-            if (opt[0] === "29 (Best)") {
-                optionElement.selected = true;
+	if (!document.getElementById("question_select_style")) {
+        const style = document.createElement("style");
+        style.id = "question_select_style";
+        style.textContent = `
+            #${CONFIG.targetSectionId} {
+                flex-wrap: wrap;
+                gap: 2.5em;
+                align-items: flex-start;
             }
-            dropdown.options.add(optionElement);
+            #${CONFIG.targetSectionId} form {
+                flex: 1 1 auto;
+				display: inline-block !important;
+				padding: 0px 1em !important;
+            }
+            #${CONFIG.targetSectionId} form p {
+                margin: 0;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // update global var safely
+    function setGlobalQuestionCount(val) {
+        if (window.campaignTrail_temp?.global_parameter_json?.[0]) {
+            window.campaignTrail_temp.global_parameter_json[0].fields.question_count = Number(val);
+        }
+    }
+
+    function manageQuestionSelector() {
+        // if "difficulty_level" is missing (which it is while playing),
+        // this returns null and the function stops instantly
+        const container = document.getElementById(CONFIG.targetSectionId);
+
+        if (!container) return;
+        if (document.getElementById(CONFIG.selectorId)) return;
+
+		const frag = document.createDocumentFragment();
+
+        const formContainer = document.createElement("form");
+        formContainer.name = "question_select_form";
+        const heading = document.createElement("h3");
+        heading.textContent = "Select the number of questions:";
+
+        const dropdown = document.createElement("select");
+        dropdown.id = CONFIG.selectorId;
+
+        CONFIG.options.forEach((opt, index) => {
+            const isSelected = index === 0;
+            dropdown.add(new Option(opt.text, opt.value, isSelected, isSelected));
         });
 
-        let formContainer = document.createElement("form");
-        formContainer.name = "question_select_form";
-        let heading = document.createElement("h3");
-        heading.textContent = "Select the number of questions:";
+        dropdown.addEventListener("change", (e) => setGlobalQuestionCount(e.target.value));
+
         formContainer.appendChild(heading);
         formContainer.appendChild(dropdown);
+        frag.appendChild(formContainer);
+        container.appendChild(frag);
 
-        document.getElementById("difficulty_level").appendChild(formContainer);
-
-        const updateQuestionCount = (value) => {
-            if (campaignTrail_temp.global_parameter_json && campaignTrail_temp.global_parameter_json[0]) {
-                campaignTrail_temp.global_parameter_json[0].fields.question_count = value;
-            }
-        };
-
-        dropdown.addEventListener("change", function () {
-            updateQuestionCount(this.value);
-        });
-        
-        updateQuestionCount(dropdown.value);
+        setGlobalQuestionCount(dropdown.value);
     }
-};
 
-const diffWatcherConfig = { attributes: true, childList: true, subtree: true };
-const diffObserver = new MutationObserver(createQuestionSelector);
-diffObserver.observe(gameWindowNode, diffWatcherConfig);
-
-try {
-    document.styleSheets[0].insertRule("#difficulty_level form {display: inline-block !important; padding: 0 1em !important;}", 0);
-    document.styleSheets[0].insertRule("#difficulty_level form p {margin: 0 !important;}", 0);
-} catch (e) {
-    console.error("Could not apply selector styling:", e);
-}
+    window.manageQuestionSelector = manageQuestionSelector;
+})();
 
 // for the No swearing checkbox
 (function () {
@@ -2430,17 +2678,17 @@ try {
 
     difficultyEl.appendChild(wrapper);
   }
-  
+
   window.createSqueakyCheckbox = createSqueakyCheckbox;
 })();
 
 // This is, essentially, for preventing candidates or running mates
 // from being selected. Very useful if you're having a one-candidate
 // mod but still want to list the other candidates
-// taken from 2012LBM
-function automateStartSequence() {
+// A somewhat more optimized version compared to the ALOT one
+(function () {
     const BAD_CANDIDATE_IDS = new Set(['200', '202', '203']);
-    const RESET_CANDIDATE_ID = '201'; 
+    const RESET_CANDIDATE_ID = '201';
 
     const IDS = {
         gameWindow: "game_window",
@@ -2455,29 +2703,37 @@ function automateStartSequence() {
     };
 
     let lastSelectedCandidateId = null;
-	
-	const handleDomChange = (mutationsList, observer) => {
+
+	function automateStartSequence() {
 		// check for the candidate input
-        const candidateInput = document.getElementById(IDS.candidateInput);
-        const finalNext = document.getElementById(IDS.finalNext);
-        const finalBack = document.getElementById(IDS.finalBack);
-        const gameMap = document.getElementById(IDS.gameMapHeader);
+		const candidateInput = document.getElementById(IDS.candidateInput);
+		const finalNext = document.getElementById(IDS.finalNext);
+		const finalBack = document.getElementById(IDS.finalBack);
+		const gameMap = document.getElementById(IDS.gameMapHeader);
 
         // if the map/transport box is loaded, we are done with setup
-        if (gameMap) {
-            observer.disconnect();
-            return;
-        }
+		if (gameMap) {
+			finished = true;
+			return;
+		}
 
-        // if we are on the opponent selection screen, clean up and stop.
-        if (finalNext && finalBack) {
-            // remove back button only if we managed to sneak a bad candidate through
-            if (BAD_CANDIDATE_IDS.has(lastSelectedCandidateId)) {
-                finalBack.remove();
-            }
-            return;
-        }
-		
+		// if we are on the opponent selection screen, clean up and stop.
+		if (finalNext && finalBack) {
+			let candidateId = lastSelectedCandidateId;
+
+			// try to read candidate_id directly if available
+			const candidateInput = document.getElementById(IDS.candidateInput);
+			if (candidateInput?.value) {
+				candidateId = candidateInput.value;
+				lastSelectedCandidateId = candidateId;
+			}
+
+			if (BAD_CANDIDATE_IDS.has(candidateId)) {
+				finalBack.remove();
+			}
+			return;
+		}
+
         // candidate selection screen check
         if (candidateInput) {
             const currentId = candidateInput.value;
@@ -2490,11 +2746,11 @@ function automateStartSequence() {
             if (BAD_CANDIDATE_IDS.has(currentId) && candidateButton) {
                 candidateButton.remove();
             }
-            
+
             // if a specific candidate should force a Back click
             else if (currentId === RESET_CANDIDATE_ID && backButton && !candidateButton) {
                 backButton.click();
-				
+
                 // try to click the initial continue button if we got sent back to start
                 const initialContinue = document.getElementById(IDS.initialContinue);
                 if (initialContinue) {
@@ -2502,10 +2758,11 @@ function automateStartSequence() {
                 }
             }
         }
-    };
-	
-    window.automateStartSequence = automateStartSequence;
-}
+	}
+
+	window.tctAutoStart = { tick: automateStartSequence };
+
+})();
 
 // Useful if you have a mod series!
 // Here, it lets you switch easily to 2012LBM.
@@ -2517,7 +2774,7 @@ function automateStartSequence() {
         autoStartValue: 'othernlmod',
         startButtonId: 'game_start',
         electionSelectQuery: 'select[name="election_id"]',
-        containerId: 'game_window', 
+        containerId: 'game_window',
         baseUrl: 'https://campaigntrailshowcase.com/campaign-trail/',
         modsToAdd: [
 			{ value: '1992', text: '1992 - Every Brilliant Thing', modName: '1992 - Every Brilliant Thing' },
@@ -2589,25 +2846,30 @@ function automateStartSequence() {
     if (window.glorble) {
         window.glorble.disconnect();
     }
-	
+
 	window.glorbleTasks = [];
-	
+
 	const initialTasks = () => {
         // voting method selector
         const gameTypeSelect = document.getElementById("game_type_id");
 		if (gameTypeSelect && !gameTypeSelect.dataset.enhanced && typeof window.modifySelector === 'function') {
-            window.modifySelector(); 
+            window.modifySelector();
         }
-		
-		// candidate blocking
+
+		// question count selector
+        if (document.getElementById("difficulty_level") && typeof window.manageQuestionSelector === 'function') {
+            window.manageQuestionSelector();
+        }
+
+		// squeaky clean checkbox
 		if (!document.getElementById("squeaky_clean_wrapper") && document.getElementById("difficulty_level")) {
 			createSqueakyCheckbox();
 		}
 
-        // candidate blocking
-		if (typeof automateStartSequence === 'function') {
-            automateStartSequence(); 
-        }
+		// candidate blocking
+		if (window.tctAutoStart?.tick) {
+			window.tctAutoStart.tick();
+		}
 
         // mod switcher
         const electionSelect = document.querySelector('select[name="election_id"]');
@@ -2615,12 +2877,12 @@ function automateStartSequence() {
             window.modifyElectionSelect(electionSelect);
         }
     };
-	
+
 	window.glorbleTasks.push(initialTasks);
-	
+
 	const handleMutations = (mutationsList) => {
         if (!window.glorbleTasks) return;
-        
+
         for (let i = 0; i < window.glorbleTasks.length; i++) {
             try {
                 window.glorbleTasks[i]();
