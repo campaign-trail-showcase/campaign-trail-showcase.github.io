@@ -282,7 +282,6 @@ jet_data = {
     "windowColor": "#7d0808",
     "containerColor": "#FFFFFF",
     "innerWindowColor": "#000000",
-    "bannerImageUrl": "https://i.imgur.com/tqmnhio.jpeg",
     "backgroundImageUrl": "https://i.imgur.com/t3Ss8vr.jpeg",
     "endingTextColor": "#0d0c0c",
     "customQuote": "Maybe I led you to believe that my game was built on flash, not fire.",
@@ -490,6 +489,21 @@ clamp = function(a, max, min, overflow=true) {
   }
   return a > max ? max : a < min ? min : a;
 }
+
+bannerArr=0
+bannerlist=["https://i.imgur.com/tqmnhio.jpeg", "https://i.imgur.com/dEbwgJa.png"]
+var changeBanner = () =>
+{
+bannerArr+=1
+document.getElementById("header").src=bannerlist[bannerArr % bannerlist.length]
+}
+document.getElementById("header").src=bannerlist[0]
+footer = $(".footer")[0]
+var button = document.createElement("button") // <button onclick="changeBanner()" style="font-weight: bold; height:19.49px; position: static; right: 770px; top: 0px;">Change banner</button>
+button.style = `font-weight: bold; height:19.49px; position: static; right: 770px; top: 0px;`
+button.innerHTML = "Change banner"
+footer.insertBefore(button, footer.firstChild);
+button.onclick = changeBanner;
 
 // Track list
 
