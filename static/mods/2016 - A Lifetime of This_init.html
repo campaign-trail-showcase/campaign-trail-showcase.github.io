@@ -3,16 +3,16 @@
  * @author: StrawberryMaster & Friends
  * @version: 1.2.1
  * @description: The 2016 election in the eyes of Hillary Clinton (and a couple of others, too)
- *
+ * 
  * Coding license: Apache License 2.0
  * Writing license: Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
- *
+ * 
  * For the coding in this mod, I hereby release the code under the terms and conditions of the Apache License 2.0. The full text of the license can be found at:
  * https://choosealicense.com/licenses/apache-2.0/
- *
+ * 
  * For the writing in this mod, including documentation, text files, and other non-software written works, I hereby release the content under the terms and conditions of the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license. The full text of the license can be found at:
  * https://creativecommons.org/licenses/by-nc/4.0/legalcode
- *
+ * 
  * By using, distributing, or modifying this mod, you agree to abide by the terms and conditions of both the Apache License 2.0 and the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license.
 */
 RecReading = true
@@ -384,7 +384,7 @@ campaignTrail_temp.difficulty_level_json = [
 ];
 
 // Actual code here
-corrr = "<h2>A Lifetime of This…</h2>";
+corrr = "A Lifetime of This…";
 
 // Header image
 document.getElementById("header").src = "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016banner.jpg";
@@ -456,7 +456,7 @@ campaignTrail_temp.candidate_json.forEach(candidate => {
   f.secondary_color_hex = rgbToHex(...blendedRGB);
 });
 
-HistHexcolour = HistHexcolour.map(hex =>
+HistHexcolour = HistHexcolour.map(hex => 
   // pass the desired max variation fraction (e.g. 0.05 = +/-5%)
   varyHexColor(hex, 0.05)
 );
@@ -471,6 +471,95 @@ campaignTrail_temp.modBoxTheme = {
     "main_color": "#403b79",
     "secondary_color": "#19191E",
     "ui_text_color": "#FFFFFF"
+}
+
+// Game themes
+const themeData = {
+    "Midnight Blue": {
+        headerSrc: "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016banner.jpg",
+        coloring_title: "#1e2262",
+        coloring_window: "linear-gradient(#0b4c73 70%, #dda01e)",
+        containerColor: "#352b64",
+        footerColor: "",
+        extraCss: `
+            body {
+                background: url(https://file.garden/aNtAfG887DiA_7lO/2012LBM/Code1/lbm_background2.webp) !important;
+                background-size: cover !important;
+                background-position: center !important;
+            }
+        `
+    },
+    "Rust": {
+        headerSrc: "https://media.gettyimages.com/id/672839780/pt/foto/washington-dc-senator-hillary-rodham-clinton-is-reflected-in-her-office-table-on-july-19-2001.jpg?s=612x612&w=0&k=20&c=ea3dB3TXOeF9AzHvt7m_c5-4qO5QQJR7JH__pS-QdYA=",
+        coloring_title: "#1e2262",
+        coloring_window: "linear-gradient(#0b3d73 70%, #530505)",
+        containerColor: "#953202",
+        footerColor: "",
+        extraCss: `
+            body {
+                background: url(https://file.garden/aNtAfG887DiA_7lO/2016ALOT/alotbackground.webp) !important;
+                background-position: center !important;
+                background-size: cover !important;
+            }
+			#header { height: 290px; object-fit: cover; object-position: center 30%; }
+			.container { background-image: initial !important; }
+			.game_header { background: linear-gradient(to bottom, #d48b00, #381811) !important; }
+			#inner_window_2, .inner_window_w_desc { background: linear-gradient(#e7c7ab, #e7cece) !important; }
+			.inner_window_question h3 { background: linear-gradient(#fff8eb, #eebeaf) !important; }
+        `
+    },
+};
+
+const el = {
+    headerImg: document.getElementById("header"),
+    gameHeader: document.querySelector(".game_header"),
+    gameWindow: document.getElementById("game_window"),
+    container: document.querySelector(".container"),
+    footer: document.querySelector(".footer")
+};
+
+function applyTheme(themeName) {
+    const config = themeData[themeName];
+    if (!config) return;
+
+    let styleElement = document.getElementById("custom-theme-styles");
+    if (!styleElement) {
+        styleElement = document.createElement("style");
+        styleElement.id = "custom-theme-styles";
+        document.head.appendChild(styleElement);
+    }
+
+    if (el.headerImg) el.headerImg.src = config.headerSrc;
+
+    if (typeof nct_stuff !== 'undefined' && nct_stuff.themes) {
+        nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = config.coloring_title;
+        nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = config.coloring_window;
+    }
+
+    if (el.gameHeader) el.gameHeader.style.backgroundColor = config.coloring_title;
+    if (el.gameWindow) el.gameWindow.style.background = config.coloring_window;
+    if (el.container) el.container.style.backgroundColor = config.containerColor;
+    if (el.footer) el.footer.style.color = config.footerColor || "";
+
+    styleElement.textContent = config.extraCss;
+}
+
+const oldPicker = document.getElementById("themePicker");
+if (oldPicker) {
+    const newPicker = document.createElement("select");
+    newPicker.id = "themePicker";
+    
+    Object.keys(themeData).forEach(key => {
+        const option = document.createElement("option");
+        option.value = key;
+        option.textContent = key;
+        newPicker.appendChild(option);
+    });
+
+    newPicker.addEventListener("change", (e) => applyTheme(e.target.value));
+    oldPicker.replaceWith(newPicker);
+    
+    applyTheme(newPicker.value);
 }
 
 // Originally, this was the appendStyle() function borrowered from the
@@ -520,7 +609,7 @@ const css = `
             }
             #candidate_image img { outline-color: #5B84E3; }
             #running_mate_image img { outline-color: #DB4141; }
-
+			
             /* Background & stuff */
             body {
                 background-image: url(https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016b_backgroundmain.jpg);
@@ -537,9 +626,6 @@ const css = `
 			.content_single, .footer {
 				border-top: .15em solid #ffffff63;
 				padding: 0 .5em 1em;
-			}
-			#theme_picker, .footer h4 {
-				display: none;
 			}
 			#election_description_window, .person_description_window, .description_window_small {
 				border: 3px double #800b0b;
@@ -576,10 +662,12 @@ const css = `
                 display: flex;
                 justify-content: center;
                 height: 2.75rem;
-            }
-            .game_header h2 {
-                font-family: Georgia, Arial, serif;
-                font-size: 22pt;
+				
+				color: #fff;
+			    font-family: Georgia, Arial, sans-serif;
+			    font-size: 2.25em;
+			    font-style: italic;
+			    font-weight: bold;
             }
             #election_id, #candidate_id, #running_mate_id, #game_type_selection, #game_type_id, #difficulty_level_id, #question_select {
                 border-width: .1rem; /* on Firefox, button borders are different compared to Chrome & friends */
@@ -716,7 +804,7 @@ const css = `
                 color: #d23535;
                 font-size: 2.5rem;
             }
-
+			
 			/* Adds the campaign banner on top of our existing custom sign */
 			#campaign_sign {
 				background-image: url("https://file.garden/aNtAfG887DiA_7lO/2016ALOT/hillarykaine.png");
@@ -725,8 +813,8 @@ const css = `
 				border-color: #c9c9c9;
 				margin-inline: auto;
 				margin-left: -0.09em;
-				height: 80px;
-				width: 100%;
+				height: 80px; 
+				width: 100%; 
 			}
 			#campaign_sign p {
 				color: rgba(0, 0, 0, 0) !important;
@@ -787,7 +875,7 @@ const css = `
             }
             /** for default NCT - this is fine on NCTS **/
             #main_content_area, #main_content_area_reading {
-                color: #000;
+                color: #fff;
             }
 			#bottomBar.inner_window_front {
 				display: none;
@@ -862,7 +950,7 @@ const css = `
 			    margin: 0 2em;
 			    display: flex;
 			}
-
+ 
             /* Text tooltips - experimental */
             /* kindly borrowed from the folks @ campaigntrailshowcase.com
             and adapted to opapeldetrouxa.neocities.org */
@@ -928,7 +1016,6 @@ const css = `
             .final_results_table td {
                 padding: .4rem .8rem;
                 border: .1rem solid #dcdcdc;
-                text-align: right;
             }
             #state_result_data_summary table td:first-child span, #overall_details_container table td:first-child span, .final_results_table td:first-child span {
                 border: .1rem solid rgba(0,0,0,0.2);
@@ -952,12 +1039,12 @@ const css = `
 				width: 90%;
 			}
 
-			/* Ending screens tweaks */
+			/* Ending screens tweaks */			
 			#final_results_description {
-				display: flex !important; // remove this tag once debugging is finished
+				display: flex !important;
 			}
-			#results_container {
-				color: #000;
+			#results_container, #overall_details_container {
+				color: #fff;
 			}
 			#results_container > .person_image {
 				border-color: #9d0000;
@@ -985,7 +1072,7 @@ const css = `
 			#drop_down_area_state {
 				margin-inline: auto;
 			}
-
+			
 			/* Cheat menus/benefit check window - because people *are* gonna use this, you know? */
 			#benefitwindow {
 				overflow: auto;
@@ -997,7 +1084,7 @@ const css = `
 			#benefitcontent {
 				margin: 5px 10px;
 				overflow-x: clip;
-			}
+			}			
 			#achwindow {
 				top: 5%;
 				left: 25%;
@@ -1012,7 +1099,7 @@ const css = `
 			#cheatMenu, #showBenefitCheckButton {
 				margin-top: 1em;
 			}
-
+			
 			/* Start new game screen */
 			#new_game_buttons {
 				display: flex;
@@ -1020,13 +1107,7 @@ const css = `
 				justify-content: center;
 				padding-bottom: 1rem;
 			}
-
-			/* a fix for the US map - no outline showing up on Edge */
-			[tabindex]:focus:not(:focus-visible) {
-			    outline: none;
-			    box-shadow: none;
-			}
-
+						
 			/* for the achievement notifications */
 			.unlock-notification {
 				position: fixed;
@@ -1066,7 +1147,7 @@ const css = `
 				font-family: Arial, sans-serif;
 				z-index: 9999;
 				max-width: 450px;
-
+				
 				/* initial animation state */
 				opacity: 0;
 				transform: translateX(-50%) scale(0.9);
@@ -1096,7 +1177,42 @@ const css = `
 				line-height: 1.4;
 				color: #000;
 			}
+			
+			/* drop-caps */
+			#inner_window_3 p:first-of-type:first-letter, #running_mate_description_window p:first-of-type:first-letter {
+			  float: left; font-weight: bold; line-height: 0.7em; margin-top: 0.1em; color: #110d84;
+			}
+			#inner_window_3 p:first-of-type:first-letter,
+			#running_mate_description_window p:first-of-type:first-letter {
+			  font-size: 3.5em; margin-right: 0.15em;
+			}			
 
+			/* styling for candidate lists */
+			.person_summary ul {
+				display: flex;
+				flex-flow: column;
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.person_summary li {
+				padding-bottom: .5em;
+				margin: .25em 0 0 0;
+				border-bottom: 1px solid rgba(80, 44, 44, 0.2);
+				color: #530707;
+			}
+
+			.person_summary li:last-child {
+				border-bottom: none;
+			}
+
+			.person_summary li::before {
+				content: "▸ ";
+				color: #db3434;
+				font-weight: bold;
+			}
+			
 			@media (max-width: 1250px) {
 				#election_description_window, .person_description_window, .description_window_small {
 					padding: 0 1em;
@@ -1106,7 +1222,7 @@ const css = `
 					margin: 2em 1em 1em 0;
 				}
             }
-
+			
 			@media only screen and (max-width: 768px) {
 				#map_footer {
                     display: block !important;
@@ -1116,16 +1232,16 @@ const css = `
 				#map_footer button {
 					margin: 3px !important;
 				}
-
+				
 				#recommended_reading_box .ftab, #recommended_reading_box .ftab-active {
 					height: 50px !important;
 					width: 150px !important;
 				}
-
+				
 				#game_window:has(#main_content_area_reading), #game_window > #main_content_area_reading {
 					height: auto;
 				}
-
+				
 				.button_container {
 				  left: 23px !important;
 				  top: 385px !important;
@@ -1134,10 +1250,10 @@ const css = `
 					height: 50px !important;
 				}
    			}
-
+			
 			/* Mobile compatibility fixes - partially inspired by those of TTNW */
 			@media only screen and (max-width: 768px) {
-
+			
 			 /* necessary to ensure the music player stays in position */
 			  #game_window {
 				flex: 1 1 auto;
@@ -1150,14 +1266,14 @@ const css = `
 				background-repeat: no-repeat;
 				background-size: cover;
 			  }
-
+			
 			  #question_form button, #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
 				font-size: clamp(16px, 4.2vw, 20px);
 				line-height: 1.2;
 				padding: 10px 16px;
 				min-height: 44px;
 			  }
-
+			  
 			  #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
 				font-size: 1em;
 				line-height: 2em;
@@ -1166,7 +1282,7 @@ const css = `
 			.inner_window_question button, #visit_window button, #map_footer {
 				line-height: 2.5em;
 			  }
-
+			  
 			  /*#map_footer {
 				padding-right: 10em;
 			  }*/
@@ -1228,17 +1344,17 @@ const css = `
 					font-weight: 400;
 					background: #eeebde; /* only change background */
 				}
-
+				
 				.overlay_window img {
 				  width: 15em;
 				  height: auto;
 				}
-
+				
 				.overlay_window h3 {
 				  padding: .5rem x .5rem;
 				  font-size: 24px;
 				}
-
+				
 			/* for the default CTS/NCT footer */
 			  #game_window g {
 				display: flex;
@@ -1248,7 +1364,7 @@ const css = `
 				gap: 8px;
 				padding: 10px 5px;
 			  }
-
+			  
 			  #candidate_pic, img#candidate_pic {
 				order: 1;
 				width: 13em;
@@ -1256,7 +1372,7 @@ const css = `
 				flex-shrink: 0;
 				margin: 0;
 			  }
-
+			  
 			  .inner_window_sign_display {
 				order: 2;
 				flex: 1;
@@ -1266,7 +1382,7 @@ const css = `
 				flex-direction: column;
 				align-items: center;
 			  }
-
+			  
 			  #running_mate_pic, img#running_mate_pic {
 				order: 3;
 				width: 13em;
@@ -1274,18 +1390,78 @@ const css = `
 				flex-shrink: 0;
 				margin: 0;
 			  }
-
+				
 			/* other fixes to not break things */
 			#map_container {
 			  height: 30.78em;
 			}
-
+			
 			.overlay_window {
 				font-size: clamp(16px, 5.2vw, 20px);
 				left: 20%;
 				width: 60%;
 			}
-
+			
+			/* election summary page */
+			@media only screen and (max-width: 768px) {
+  #election_summary {
+			  display: flex;
+			  flex-flow: column;
+			  margin: 0 1em 0 0;
+			  padding: .5em;
+			}
+			#election_description_window {
+			  display: flex;
+			  height: auto;
+			}
+			#election_image {
+			  display: flex;
+			  flex-flow: column;
+			  justify-content: center;
+			  margin: 1em 0.75em 1em 1.25em;
+			}
+			#election_image img {
+			  height: 90%;
+			  object-fit: cover;
+			  object-position: -36px 0px;
+			}
+			#election_year_form + p:first-of-type {
+			  padding-top: 1em;
+			}
+  
+			  #election_description_window {
+				flex-flow: column;
+			  }
+			  
+			  #election_summary {
+				padding: 0 1em 0 1em;
+				text-align: center;
+			  }
+				
+				#election_summary p {
+				  margin: .5em 0 1em 0;
+				}
+				  
+				#election_image {
+				  flex-flow: row;
+				  margin: inherit;
+				}
+				  
+				#election_year_form+p:first-of-type {
+				  padding-top: 0;
+				}
+				  
+				#election_image img {
+					object-position: center;
+					width: 100%;
+				}
+				
+				.inner_window_w_desc p {
+				  margin: 1em;
+				}
+				
+			}
+			
 			}
 `;
 
@@ -1589,14 +1765,14 @@ tooltipList = [
     { searchString: "Buddy Dyer", explanationText: "<img src=https://media.gettyimages.com/id/542888402/pt/foto/in-a-one-on-one-interview-orlando-mayor-buddy-dyer-talks-to-the-orlando-sentinel-on-friday-june.jpg?s=612x612&w=0&k=20&c=UpMzmnbNt8ndhRsDxjUDpDgrW9IS4aIMSAV4Xfzk_ek=> Buddy Dyer; the Mayor of Orlando. I hope you’re not thinking of someone else." },
     { searchString: "Tim Kaine", explanationText: "<img src=https://media.gettyimages.com/id/583834664/pt/foto/philadelphia-pa-us-vice-president-nominee-tim-kaine-acknowledges-the-crowd-on-the-third-day-of.jpg?s=612x612&w=0&k=20&c=zWJYy7np2XSHMX4X-IES7rDknRDqHQ9tTJvkU4g4o4A=> Kaine!" },
 	{ searchString: "Manchin", explanationText: "<img src=https://media.gettyimages.com/id/181915523/pt/foto/u-s-senator-joe-manchin-a-democrat-from-west-virginia-speaks-during-an-interview-in-washington.jpg?s=612x612&w=0&k=20&c=2s_fzetZf29MOqSWQrUWBojXARirhh84rjotpB_Lki4=> Joe Manchin; the Senator from West Virginia. Not like Byrd, for better or worse." },
-	{ searchString: "Eric Garcetti", explanationText: "<img src=https://media.gettyimages.com/id/464111903/pt/foto/los-angeles-ca-los-angeles-mayor-eric-garcetti-serves-as-grand-marshal-in-the-29th-annual.jpg?s=612x612&w=0&k=20&c=JJrs81y1UhugdyqsLurLYGpnbdqoRbu26lnT4xqAzTU=> Garcetti!" },
+	{ searchString: "Eric Garcetti", explanationText: "<img src=https://media.gettyimages.com/id/464111903/pt/foto/los-angeles-ca-los-angeles-mayor-eric-garcetti-serves-as-grand-marshal-in-the-29th-annual.jpg?s=612x612&w=0&k=20&c=JJrs81y1UhugdyqsLurLYGpnbdqoRbu26lnT4xqAzTU=> Garcetti!" },	
 	{ searchString: "Julian Castro", explanationText: "<img src=https://media.gettyimages.com/id/1258285218/pt/foto/texas-state-rep-joaquin-castro-front-gestures-toward-his-brother-san-antonio-mayor-julian.jpg?s=612x612&w=0&k=20&c=0qH-D2pUSTSvb1Fhv1tFayX51OpnrFXJRLrXwjRpwwI=> Castro! (and Castro.)" },
 	{ searchString: "Kamala Harris", explanationText: "<img src=https://content.time.com/time/2011/time_100_walkup/kamala_harris.jpg> Attorney General of California; currently running for Senate there, but stands no chance against the popular Loretta Sanchez, who dabs just like you do." },
 	{ searchString: "Cuomo", explanationText: "<img src=https://media.gettyimages.com/id/915811220/pt/foto/american-politician-new-york-governor-andrew-cuomo-addresses-the-democratic-national-convention.jpg?s=612x612&w=0&k=20&c=i4UbRPZ431L6gN7JekQFsYBYYVvztwy0dU1ADqclKIY=> Andrew Cuomo; current Governor of New York and son of “Super Mario” Cuomo." },
 	{ searchString: "McConnell", explanationText: "<img src=https://media.gettyimages.com/id/1328364269/pt/foto/portrait-of-american-politician-and-us-senator-mitch-mcconnell-as-he-poses-against-a-white.jpg?s=612x612&w=0&k=20&c=cNIQG9HCsAVPdWCs3p9YT2jEwAJqUX6ZEtP1usWEJf0=> Angry." },
 
     // Former politicians
-	{ searchString: "Bill Clinton", explanationText: "<img src=https://media.gettyimages.com/id/1850828552/pt/foto/us-president-bill-clinton-and-his-daughter-chelsea-stop-for-an-ice-cream-break-30-june-while.jpg?s=612x612&w=0&k=20&c=y46VJkUYjQ5eliCbh17oYCU4rg4nRkg-nMkXM1iH624=> Hmm, ice cream." },
+	{ searchString: "Bill Clinton", explanationText: "<img src=https://media.gettyimages.com/id/1850828552/pt/foto/us-president-bill-clinton-and-his-daughter-chelsea-stop-for-an-ice-cream-break-30-june-while.jpg?s=612x612&w=0&k=20&c=y46VJkUYjQ5eliCbh17oYCU4rg4nRkg-nMkXM1iH624=> Hmm, ice cream." },	
     { searchString: "Bill Clinton", explanationText: "<img src=https://www.usatoday.com/gcdn/authoring/authoring-images/2024/10/14/USAT/75674911007-51562422.jpg?width=1358&height=2049&fit=crop&format=pjpg&auto=webp> Hmm, Sprite." },
     { searchString: "Bill", explanationText: "<img src=https://media.gettyimages.com/id/1850844964/pt/foto/us-president-bill-clinton-shows-off-a-brand-new-saxophone-given-by-japanese-jazz-musician.jpg?s=612x612&w=0&k=20&c=itYiAnFYrb64xLVuSW56GPDlGckYAHNRxdzUo2X5Fj0=> Husband." },
     { searchString: "Deval Patrick", explanationText: "<img src=https://media.gettyimages.com/id/179198746/pt/foto/boston-in-the-absence-of-the-lt-governor-governor-deval-patrick-chairs-the-meeting-of-the-gc-on.jpg?s=612x612&w=0&k=20&c=8rih3jgAisJVd2i1g_tM2PMYdle8jvN6QcFrBo9Kz9Q=> Patrick!" },
@@ -1642,7 +1818,7 @@ tooltipList = [
 	{ searchString: "Magaziner", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2016ALOT/magaziner.png> Ira Magaziner; former Senior Advisor for Policy Development in the Clinton administration. He helped you create Hillarycare, and also helped Al Gore found the internet. Plus, you two were on LIFE once." },
 	{ searchString: "Lester", explanationText: "<img src=https://media.gettyimages.com/id/610598268/pt/foto/debate-moderator-lester-holt-speaks-during-the-first-presidential-debate-at-hofstra-university.jpg?s=612x612&w=0&k=20&c=dXjTcDE1qXIRFJd7q7QppiO5Amv4CGUW2PAcrBhUK8s=> Lester Holt; a journalist and anchor for NBC Nightly News. He’s also moderating the debates between you and Trump." },
     { searchString: "Jon Arbuckle", explanationText: "<img src=https://pbs.twimg.com/media/GrLfvPHW4AArZF2?format=jpg&name=large> Jon Arbuckle; one of the protagonists of the <i>Garfield</i> comic strip." },
-	{ searchString: "Islamic State", explanationText: "<img src=https://media.gettyimages.com/id/590679987/pt/foto/islamic-state-fighter-waving-a-flag-while-standing-on-captured-government-fighter-jet-in-raqqa.jpg?s=612x612&w=0&k=20&c=wZDNl-CwitzImx9BT8YWyCjUA_6xNO0J-fqTGjOuWvo=> A jihadist organisation that currently holds control over significant portions of Syria and Iraq." },
+	{ searchString: "Islamic State", explanationText: "<img src=https://media.gettyimages.com/id/590679987/pt/foto/islamic-state-fighter-waving-a-flag-while-standing-on-captured-government-fighter-jet-in-raqqa.jpg?s=612x612&w=0&k=20&c=wZDNl-CwitzImx9BT8YWyCjUA_6xNO0J-fqTGjOuWvo=> A jihadist organisation that currently holds control over significant portions of Syria and Iraq." },	
     { searchString: "The Beatles", explanationText: "<img src=https://miro.medium.com/v2/resize:fit:1200/1*rvQQn_CSX8qoENogE-mriA.jpeg> The notorious terrorist cell. Unrelated picture: the British band they were nicknamed after." },
     { searchString: "Keystone XL", explanationText: "<img src=https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/1/31/1391176834990/e8e52b2a-0b15-4314-8958-173cd7db28b9-418x540.png?width=445&dpr=1&s=none&crop=none> A pipeline stretching from Alberta, Canada, to oil refineries in the Midwest. A proposed expansion would take it all the way to Port Arthur, Texas, and has been opposed on several environmental grounds." },
 	{ searchString: "Affordable Care Act", explanationText: "<img src=https://content.time.com/time/magazine/archive/covers/2009/1101090810_400.jpg> Obamacare! A law whose aims include expanding health insurance coverage, reducing costs, and protecting people with preexisting conditions. It was passed in 2010 by the Democratic-led House and Senate and named after you know who." },
@@ -1699,7 +1875,7 @@ tooltipList = [
         "3": `<p><strong style='color:navy'>From sea to shining sea!</strong> – you know how it is. Do the Bartman.</p>`,
         [METHOD_VALUE.DHONDT]: `<p><strong>D'Hondt/Jefferson method</strong></p><p>Similar to Sainte-Laguë, the D’Hondt method is a “highest averages” system that allocates seats one by one. However, it uses a different formula: a candidate’s total vote is divided by the number of seats they have already won, plus one (divisors: 1, 2, 3, etc.). The seat goes to the candidate with the highest average in each round.</p><p>This divisor sequence has a notable mathematical property: it tends to slightly favor larger parties and coalitions over smaller, more fragmented ones. This can encourage strategic alliances but may underrepresent minor parties compared to their vote share. It is named after Victor D'Hondt and, in the U.S., Thomas Jefferson.</p>`,
         [METHOD_VALUE.HUNTINGTON_HILL]: `<p><strong>Huntington-Hill method</strong></p><p>This is the method currently used to apportion the 435 seats of the U.S. House of Representatives among the states. Like other “highest averages” systems, it awards seats one by one to the party with the highest “priority value.”</p><p>Its unique formula (dividing votes by the geometric mean of seats currently held and the next seat) is designed to minimize the relative percentage difference in representation between any two parties. This means if one party gets twice the votes, it should have as close to twice the seats as mathematically possible. It generally produces very proportional results, somewhere between D'Hondt and Sainte-Laguë in its treatment of smaller parties.</p>`,
-        [METHOD_VALUE.LR_HARE]: `<p><strong>Largest remainder method (Hare quota)</strong></p><p>This method works differently from “highest averages.” First, it establishes a “quota” — the price of a single electoral vote (calculated as Total Votes / Total EVs). Each candidate is immediately awarded a number of EVs equal to how many full quotas they achieved.</p><p>After this initial allocation, any remaining EVs are awarded one by one to the candidates with the largest <em>fractional remainder</em> of votes. This system is very intuitive and tends to be highly proportional, often giving smaller parties a better chance to win representation if they can consolidate their support to earn a large remainder.</p>`,
+        [METHOD_VALUE.LR_HARE]: `<p><strong>Largest remainder method (Hare quota)</strong></p><p>This method works differently from “highest averages.” First, it establishes a “quota” — the price of a single electoral vote (calculated as Total Votes / Total EVs). Each candidate is immediately awarded a number of EVs equal to how many full quotas they achieved.</p><p>After this initial allocation, any remaining EVs are awarded one by one to the candidates with the largest <em>fractional remainder</em> of votes. This system is very intuitive and tends to be highly proportional, often giving smaller parties a better chance to win representation if they can consolidate their support to earn a large remainder.</p>`,		
         [METHOD_VALUE.SAINTE_LAGUE]: `<p><strong>Sainte-Laguë/Webster method</strong></p><p>This is a “highest averages” method that allocates a state’s electoral votes one by one. In each round, a candidate’s total popular vote is divided by a number (specifically, twice their current number of seats, plus one: 1, 3, 5, etc.). The seat is awarded to the candidate with the highest resulting average.</p><p>The Sainte-Laguë method is renowned for its high degree of proportionality. Unlike some other systems, it does not systematically favor larger or smaller parties, making it one of the most balanced apportionment methods available.</p>`,
         [METHOD_VALUE.APPROVAL_SL]: `<p><strong>Approval + Sainte-Laguë</strong></p><p>This is an advanced, model-based method that does <em>not</em> use the popular vote directly. Instead, it first calculates a “utility score” for each candidate based on their policy alignment with a state’s profile. A state then “approves” of all candidates whose utility is within a certain threshold of the top-scoring candidate.</p><p>The number of approvals each candidate receives becomes their new score; the Sainte-Laguë method is used to apportion electoral votes based on these approval counts. This system rewards candidates with broad ideological appeal who are considered a “good fit” by the state, not just the single best one.</p>`,
         [METHOD_VALUE.BORDA_SL]: `<p><strong>Borda count + Sainte-Laguë</strong></p><p>This model-based method first ranks candidates in a state from best to worst based on their policy alignment (creating a utility score for them). Candidates are then awarded Borda points based on their rank: the top-ranked candidate gets the most points, the second-ranked gets fewer, and so on.</p><p>These Borda points — and not popular votes — are then used as the input for the Sainte-Laguë apportionment method. This system heavily favors consensus candidates who are consistently ranked highly and penalizes polarizing figures who may be ranked first by some but last by others. It rewards being broadly acceptable over being a niche favorite.</p>`,
@@ -1729,7 +1905,7 @@ tooltipList = [
 
         const optionsArr = Array.from(select.options);
         const propIndex = optionsArr.findIndex(o => o.value === "2");
-
+        
         // since we want the array order to be preserved, we should increment the index as we add
         let insertIndex = propIndex !== -1 ? propIndex + 1 : select.length;
 
@@ -1738,7 +1914,7 @@ tooltipList = [
                 const opt = document.createElement("option");
                 opt.value = optData.val;
                 opt.textContent = optData.text;
-
+                
                 if (insertIndex >= select.length) {
                     select.add(opt);
                 } else {
@@ -1751,7 +1927,7 @@ tooltipList = [
         // rename existing options
         const wta = select.querySelector('option[value="1"]');
         if (wta) wta.textContent = "Winner‑Take‑All (default)";
-
+        
         const prop = select.querySelector('option[value="2"]');
         if (prop) prop.textContent = "Proportional";
 
@@ -1768,7 +1944,7 @@ tooltipList = [
 
         select.dataset.enhanced = "true";
     }
-
+	
 	window.modifySelector = modifySelector;
 })();
 
@@ -1789,9 +1965,9 @@ tooltipList = [
         maxCacheSize: 20,
         useRequestIdleCallback: true,
         maxRetries: 2,
-        failedBannerTimeout: 5 * 60 * 1000
+        failedBannerTimeout: 5 * 60 * 1000 
     };
-
+	
 	if(!document.getElementById('banner-system-styles')) {
         const style = document.createElement('style');
         style.id = 'banner-system-styles';
@@ -1815,9 +1991,9 @@ tooltipList = [
                 box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             }
             #bottomBar img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
+                width: 100%; 
+                height: 100%; 
+                object-fit: contain; 
                 display: block;
                 transition: opacity ${CONFIG.fadeTransition}ms ease-in-out;
                 pointer-events: none;
@@ -2020,7 +2196,7 @@ tooltipList = [
             try {
                 const cached = localStorage.getItem(this.storageKey);
                 if (!cached) return;
-
+                
                 const data = JSON.parse(cached);
                 const age = Date.now() - data.timestamp;
 
@@ -2039,16 +2215,16 @@ tooltipList = [
 
         isRecentlyFailed(url) {
             if (!this.failedUrls.has(url)) return false;
-
+            
             const failedTime = this.failedUrls.get(url);
             const timeSinceFailed = Date.now() - failedTime;
-
+            
             // allow retry after timeout
             if (timeSinceFailed > CONFIG.failedBannerTimeout) {
                 this.failedUrls.delete(url);
                 return false;
             }
-
+            
             return true;
         }
 
@@ -2060,9 +2236,9 @@ tooltipList = [
         }
 
         isCachedImageValid(img) {
-            return img &&
-                   img.complete &&
-                   img.naturalHeight !== 0 &&
+            return img && 
+                   img.complete && 
+                   img.naturalHeight !== 0 && 
                    img.naturalWidth !== 0;
         }
 
@@ -2085,7 +2261,7 @@ tooltipList = [
             return new Promise((resolve, reject) => {
                 const img = new Image();
                 let timeoutId;
-
+                
                 const cleanup = () => {
                     clearTimeout(timeoutId);
                     img.onload = img.onerror = null;
@@ -2147,20 +2323,20 @@ tooltipList = [
             if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
                 return new Promise(resolve => {
                     window.requestIdleCallback(() => {
-                        const promises = urls.map(url =>
+                        const promises = urls.map(url => 
                             this.preloadImage(url).catch(() => null)
                         );
                         Promise.allSettled(promises).then(resolve);
                     }, { timeout: 2000 });
                 });
             } else {
-                const promises = urls.map(url =>
+                const promises = urls.map(url => 
                     this.preloadImage(url).catch(() => null)
                 );
                 return Promise.allSettled(promises);
             }
         }
-
+		
 		getCachedImage(url) {
 		  const img = this.imageCache.get(url);
 		  if (!this.isCachedImageValid(img)) {
@@ -2181,7 +2357,7 @@ tooltipList = [
     // weighted random selection
     const bannerSelector = (() => {
         let weightSum = null;
-
+        
         const getTotalWeight = () => {
             if (weightSum === null) {
                 weightSum = banners.reduce((sum, banner) => sum + banner.weight, 0);
@@ -2193,33 +2369,33 @@ tooltipList = [
             // accept cache to filter failed banners
             getRandomBanner(excludeRecent = [], cache = null) {
                 let availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
-
+                
                 // filter out failed banners
                 if (cache) {
                     availableBanners = availableBanners.filter(b => !cache.isRecentlyFailed(b.url));
                 }
-
+                
                 if (availableBanners.length === 0) {
                     // if all banners failed or recent, try any banner not in exclude list
                     availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
-
+                    
                     if (availableBanners.length === 0) {
                         // last resort: return any banner
                         return banners[0];
                     }
                 }
-
+                
                 const totalWeight = availableBanners.reduce((sum, banner) => sum + banner.weight, 0);
                 let random = Math.random() * totalWeight;
-
+                
                 for (const banner of availableBanners) {
                     random -= banner.weight;
                     if (random <= 0) return banner;
                 }
-
+                
                 return availableBanners[0];
             },
-
+            
             initializeSelectionTable() {
                 getTotalWeight();
             }
@@ -2230,7 +2406,7 @@ tooltipList = [
     class ClickableBannerSystem {
         constructor() {
             this.createElements();
-
+            
             this.cache = new BannerCache();
             this.currentBanner = null;
             this.recentBanners = [];
@@ -2245,7 +2421,7 @@ tooltipList = [
         init() {
             this.setupEventListeners();
             bannerSelector.initializeSelectionTable();
-
+            
             Promise.resolve()
                 .then(() => this.preloadInitialBanners())
                 .then(() => this.displayRandomBanner())
@@ -2257,7 +2433,7 @@ tooltipList = [
                 this.destroy();
             });
         }
-
+		
 		createElements() {
             this.container = document.createElement("div");
             this.container.id = "bottomBar";
@@ -2300,7 +2476,7 @@ tooltipList = [
                 this.retryCount = 0;
                 this.nextBanner();
             };
-
+			
 			this.container.onkeydown = (e) => {
                 if (e.code === 'Space' || e.code === 'Enter') {
                     e.preventDefault();
@@ -2316,7 +2492,7 @@ tooltipList = [
                 .filter(b => !this.cache.isRecentlyFailed(b.url))
                 .sort((a, b) => b.weight - a.weight)
                 .slice(0, CONFIG.preloadCount);
-
+                
             const urlsToPreload = sortedBanners.map(b => b.url);
             return this.cache.preloadBatch(urlsToPreload);
         }
@@ -2338,7 +2514,7 @@ tooltipList = [
                             this.imageElement.src = banner.url;
                         }
                         this.imageElement.alt = banner.alt;
-
+						
                         this.imageElement.style.opacity = '1';
                         this.isTransitioning = false;
                     });
@@ -2371,14 +2547,14 @@ tooltipList = [
             if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
                 window.requestIdleCallback(() => {
                     const nextBanners = banners
-                        .filter(b =>
-                            !this.recentBanners.includes(b.url) &&
+                        .filter(b => 
+                            !this.recentBanners.includes(b.url) && 
                             !this.cache.imageCache.has(b.url) &&
                             !this.cache.isRecentlyFailed(b.url)
                         )
                         .sort((a, b) => b.weight - a.weight)
                         .slice(0, 2);
-
+                        
                     this.cache.preloadBatch(nextBanners.map(b => b.url));
                 }, { timeout: 5000 });
             }
@@ -2391,10 +2567,10 @@ tooltipList = [
 
         nextBanner() {
             this.displayRandomBanner();
-
+			
             requestAnimationFrame(() => {
                 this.clickIndicator.classList.add('indicator-pop');
-
+				
                 setTimeout(() => {
                     this.clickIndicator.classList.remove('indicator-pop');
                 }, 150);
@@ -2403,23 +2579,23 @@ tooltipList = [
 
         destroy() {
             cancelAnimationFrame(this.rafId);
-
+            
             if (this.container) {
                 this.container.onclick = null;
                 this.container.onmouseenter = null;
                 this.container.onmouseleave = null;
                 this.container.onkeydown = null;
-
+                
                 if (this.container.parentNode) {
                     this.container.parentNode.removeChild(this.container);
                 }
             }
-
+            
             if (this.imageElement) {
                 this.imageElement.onload = null;
                 this.imageElement.onerror = null;
             }
-
+            
             this.container = null;
             this.imageElement = null;
             this.clickIndicator = null;
@@ -2445,7 +2621,7 @@ tooltipList = [
 (function() {
     const STORAGE_KEY = 'hillary2016_unlocked_rms';
     const UNLOCKABLE_RM_IDS = [213, 214, 215]; // Biden, Castro, Garcetti
-
+    
     // attempt at a cross-browser solution. check if localStorage is available
     function isLocalStorageAvailable() {
         try {
@@ -2457,14 +2633,14 @@ tooltipList = [
             return false;
         }
     }
-
+    
     // get unlocked running mates from storage
     function getUnlockedRunningMates() {
         if (!isLocalStorageAvailable()) {
             console.warn("localStorage not available - running mates will be hidden");
             return [];
         }
-
+        
         try {
             const storedData = localStorage.getItem(STORAGE_KEY);
             return storedData ? JSON.parse(storedData) : [];
@@ -2473,7 +2649,7 @@ tooltipList = [
             return [];
         }
     }
-
+    
     // apply visibility using both hidden attribute and style
     function applyRunningMateVisibility() {
         const selectElement = document.getElementById('running_mate_id');
@@ -2481,28 +2657,28 @@ tooltipList = [
 
         const unlockedPks = getUnlockedRunningMates();
         const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
+        
         Array.from(selectElement.options).forEach(option => {
             const optionPk = parseInt(option.value, 10);
-
+            
             if (UNLOCKABLE_RM_IDS.includes(optionPk)) {
                 const isUnlocked = unlockedPks.includes(optionPk);
-
+                
                 // use both hidden attribute and style.display for maximum compatibility
                 option.hidden = !isUnlocked;
-
+                
                 // for Safari, apply inline style as well
                 if (isSafari) {
                     option.style.display = isUnlocked ? '' : 'none';
                 }
-
+                
                 // if running on iOS Safari, force-refresh the select element
                 if (isSafari && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
                     option.disabled = !isUnlocked; // additional Safari-specific attribute
                 }
             }
         });
-
+        
         // force Safari to redraw the select element if needed
         if (isSafari && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
             selectElement.style.display = 'none';
@@ -2527,7 +2703,7 @@ tooltipList = [
     // apply visibility immediately and also when the DOM is fully loaded
     applyRunningMateVisibility();
     document.addEventListener('DOMContentLoaded', applyRunningMateVisibility);
-
+    
     // apply one more time after a short delay to catch any late rendering
     setTimeout(applyRunningMateVisibility, 500);
 
@@ -2547,7 +2723,7 @@ tooltipList = [
             { text: "40 (Full)", value: 40 }
         ]
     };
-
+	
 	if (!document.getElementById("question_select_style")) {
         const style = document.createElement("style");
         style.id = "question_select_style";
@@ -2577,13 +2753,13 @@ tooltipList = [
     }
 
     function manageQuestionSelector() {
-        // if "difficulty_level" is missing (which it is while playing),
+        // if "difficulty_level" is missing (which it is while playing), 
         // this returns null and the function stops instantly
         const container = document.getElementById(CONFIG.targetSectionId);
-
+        
         if (!container) return;
         if (document.getElementById(CONFIG.selectorId)) return;
-
+		
 		const frag = document.createDocumentFragment();
 
         const formContainer = document.createElement("form");
@@ -2678,7 +2854,7 @@ tooltipList = [
 
     difficultyEl.appendChild(wrapper);
   }
-
+  
   window.createSqueakyCheckbox = createSqueakyCheckbox;
 })();
 
@@ -2686,9 +2862,9 @@ tooltipList = [
 // from being selected. Very useful if you're having a one-candidate
 // mod but still want to list the other candidates
 // A somewhat more optimized version compared to the ALOT one
-(function () {
+(function () {	
     const BAD_CANDIDATE_IDS = new Set(['200', '202', '203']);
-    const RESET_CANDIDATE_ID = '201';
+    const RESET_CANDIDATE_ID = '201'; 
 
     const IDS = {
         gameWindow: "game_window",
@@ -2703,7 +2879,7 @@ tooltipList = [
     };
 
     let lastSelectedCandidateId = null;
-
+	
 	function automateStartSequence() {
 		// check for the candidate input
 		const candidateInput = document.getElementById(IDS.candidateInput);
@@ -2716,7 +2892,7 @@ tooltipList = [
 			finished = true;
 			return;
 		}
-
+		
 		// if we are on the opponent selection screen, clean up and stop.
 		if (finalNext && finalBack) {
 			let candidateId = lastSelectedCandidateId;
@@ -2733,7 +2909,7 @@ tooltipList = [
 			}
 			return;
 		}
-
+		
         // candidate selection screen check
         if (candidateInput) {
             const currentId = candidateInput.value;
@@ -2746,11 +2922,11 @@ tooltipList = [
             if (BAD_CANDIDATE_IDS.has(currentId) && candidateButton) {
                 candidateButton.remove();
             }
-
+            
             // if a specific candidate should force a Back click
             else if (currentId === RESET_CANDIDATE_ID && backButton && !candidateButton) {
                 backButton.click();
-
+				
                 // try to click the initial continue button if we got sent back to start
                 const initialContinue = document.getElementById(IDS.initialContinue);
                 if (initialContinue) {
@@ -2759,9 +2935,9 @@ tooltipList = [
             }
         }
 	}
-
+	
 	window.tctAutoStart = { tick: automateStartSequence };
-
+	
 })();
 
 // Useful if you have a mod series!
@@ -2774,7 +2950,7 @@ tooltipList = [
         autoStartValue: 'othernlmod',
         startButtonId: 'game_start',
         electionSelectQuery: 'select[name="election_id"]',
-        containerId: 'game_window',
+        containerId: 'game_window', 
         baseUrl: 'https://campaigntrailshowcase.com/campaign-trail/',
         modsToAdd: [
 			{ value: '1992', text: '1992 - Every Brilliant Thing', modName: '1992 - Every Brilliant Thing' },
@@ -2846,26 +3022,26 @@ tooltipList = [
     if (window.glorble) {
         window.glorble.disconnect();
     }
-
+	
 	window.glorbleTasks = [];
-
+	
 	const initialTasks = () => {
         // voting method selector
         const gameTypeSelect = document.getElementById("game_type_id");
 		if (gameTypeSelect && !gameTypeSelect.dataset.enhanced && typeof window.modifySelector === 'function') {
-            window.modifySelector();
+            window.modifySelector(); 
         }
-
+		
 		// question count selector
         if (document.getElementById("difficulty_level") && typeof window.manageQuestionSelector === 'function') {
             window.manageQuestionSelector();
         }
-
+		
 		// squeaky clean checkbox
 		if (!document.getElementById("squeaky_clean_wrapper") && document.getElementById("difficulty_level")) {
 			createSqueakyCheckbox();
 		}
-
+		
 		// candidate blocking
 		if (window.tctAutoStart?.tick) {
 			window.tctAutoStart.tick();
@@ -2877,12 +3053,12 @@ tooltipList = [
             window.modifyElectionSelect(electionSelect);
         }
     };
-
+	
 	window.glorbleTasks.push(initialTasks);
-
+	
 	const handleMutations = (mutationsList) => {
         if (!window.glorbleTasks) return;
-
+        
         for (let i = 0; i < window.glorbleTasks.length; i++) {
             try {
                 window.glorbleTasks[i]();
@@ -3011,7 +3187,7 @@ campaignTrail_temp.achievements = {
     },
     "Spitting Off The Edge of The World": {
         "image": "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/a14.jpg",
-        "description": "As Hillary Clinton, win on Hard-Boiled difficulty.",
+        "description": "As Hillary Clinton, win on Hard-Boiled or Dead on Arrival difficulty.",
         "cannotBeCheated": true
     },
 	"Before My Telephone Rings": {
