@@ -144,7 +144,7 @@ campaignTrail_temp.candidate_json = [
             "election": 9,
             "party": "Republican",
             "state": "Texas",
-            "priority": 1,
+            "priority": 2,
             "description": "<p>NO NEW TAXES?!?!?!</p>",
             "color_hex": "#7b000c",
             "secondary_color_hex": null,
@@ -167,7 +167,7 @@ campaignTrail_temp.candidate_json = [
             "election": 9,
             "party": "Independent",
             "state": "Texas",
-            "priority": 1,
+            "priority": 3,
             "description": "<p>Put description here</p>",
             "color_hex": "#9e5300",
             "secondary_color_hex": null,
@@ -190,7 +190,7 @@ campaignTrail_temp.candidate_json = [
             "election": 9,
             "party": "Lolbertarian",
             "state": "Ala$KKKa",
-            "priority": 1,
+            "priority": 4,
             "description": "<p>Mr. Marrou, if you break my code again I am going to flip out.</p>",
             "color_hex": "#e4b81d",
             "secondary_color_hex": null,
@@ -728,7 +728,9 @@ const pile = `
 	.overlay_window h3 {
 	  background-color: #2b3f6e;
 	  border-radius: .1em .1em 0 0;
+	  border-bottom: 3px groove #4268af;
 	  color: #fff;
+	  font-weight: normal;
 	}
 
 	.overlay_window img {
@@ -758,6 +760,8 @@ const pile = `
 	#state_result h3 {
 	  background: #cad5ff;
 	  padding: .1em 0;
+	  font-weight: normal;
+	  text-transform: lowercase;
 	}
 	#state_result {
 	  min-height: 75px;
@@ -954,6 +958,51 @@ const pile = `
 	  transform: translateY(1px);
 	  box-shadow:
 		inset 0 2px 3px rgba(0,0,0,0.25);
+	}
+	
+	input[type="radio"] {
+	  appearance: none;
+	  -webkit-appearance: none;
+	  width: 16px;
+	  height: 16px;
+	  border-radius: 25%;
+	  border: 1px solid #6c7a8c;
+	  background-color: #f4f5f6;
+	  display: inline-flex;
+	  align-items: center;
+	  justify-content: center;
+	  margin-right: 6px;
+	  vertical-align: baseline;
+	  cursor: pointer;
+	}
+
+	input[type="radio"]::before {
+	  content: '';
+	  width: 8px;
+	  height: 8px;
+	  border-radius: 25%;
+	  background-color: #3a4e71;
+	  transform: scale(0);
+	  transition: transform 0.15s ease-in-out;
+	}
+
+	input[type="radio"]:checked::before {
+	  transform: scale(1);
+	}
+
+	input[type="radio"]:active {
+	  transform: scale(0.97);
+	  transition: transform 0.1s ease-out;
+	}
+
+	input[type="radio"]:focus {
+	  outline: 1px solid #6079a0;
+	  outline-offset: 2px;
+	}
+	
+	#question_form label:hover {
+	  background: #eee;
+	  font-weight: normal;
 	}
 	
 	table {
@@ -1191,7 +1240,7 @@ campaignTrail_temp.achievements = {
     },
     "Party Unity": {
         "image": "https://i.imgur.com/4v50hPL.png",
-        "description": "Reconcile with Bill Clinton",
+        "description": "Reconcile with Bill Clinton.",
         "cannotBeCheated": true
     },
     "California and Coal Country": {
@@ -1227,6 +1276,96 @@ campaignTrail_temp.achievements = {
     "Man of Tomorrow": {
         "image": "https://i.imgur.com/w0Aiozy.png",
         "description": "Win at least 340 electoral votes.",
+        "cannotBeCheated": true
+    },
+	"Code Brown": {
+        "image": "https://i.imgur.com/w0Aiozy.png",
+        "description": "Lose with under 100 electoral votes.",
+        "cannotBeCheated": true
+    },
+	"Chasity": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Win the Natural State without needing to debase yourself.",
+        "cannotBeCheated": true
+    },
+	"Jerry Does Dallas": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Win the support of <i>two</i> Texans.",
+        "cannotBeCheated": true
+    },	
+	"Message: I Care": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Summon the Great Communicator.",
+        "cannotBeCheated": true
+    },
+	"Like Father, Like Son": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Lose to an old family foe.",
+        "cannotBeCheated": true
+    },
+	"Mourning in America": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Extinguish the Reagan Revolution.",
+        "cannotBeCheated": true
+    },
+	"America First, Second, and Third": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Unleash the American people’s worst instincts.",
+        "cannotBeCheated": true
+    },
+	"This Is Who We Are": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "America reveals her true self.",
+        "cannotBeCheated": true
+    },
+	"Cordon Sanitaire": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Reject extremism.",
+        "cannotBeCheated": true
+    },
+	"Operation Paperclip": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Rehabilitate a Nazi.",
+        "cannotBeCheated": true
+    },
+	"For Spanish, Press One": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Be forced to embrace multiculturalism.",
+        "cannotBeCheated": true
+    },
+	"Rust in Peace": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Win without winning Michigan or Ohio.",
+        "cannotBeCheated": true
+    },
+	"¡Viva Brown!": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Hold the line for the working man.",
+        "cannotBeCheated": true
+    },
+	"Gaullist Fever": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Support Frexit.",
+        "cannotBeCheated": true
+    },
+	"From Linda to Lizzie": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Meet the Queen.",
+        "cannotBeCheated": true
+    },
+	"Disney Über Alles": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Become an agent of the Mouse.",
+        "cannotBeCheated": true
+    },
+	"Long May You Run": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Heal a broken relationship.",
+        "cannotBeCheated": true
+    },
+	"Mr. Universe": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Become tabloid fodder.",
         "cannotBeCheated": true
     }
 }

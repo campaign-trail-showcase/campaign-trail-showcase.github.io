@@ -2123,7 +2123,15 @@ campaignTrail_temp.answers_json = [
         "pk": 113528,
         "fields": {
             "question": 113522,
-            "description": "The reason why their convention was such a mess was because Buchanan wasn’t there to fire them up. Well, we can build off of that: we can’t win him over, but let’s send some signals to Pat suggesting that a Brown administration would be much less radical than he thinks–just get him to not endorse Bush"
+            "description": "The reason why their convention was such a mess was because Buchanan wasn’t there to fire them up. Well, we can build off of that: we can’t win him over, but let’s send some signals to Pat suggesting that a Brown administration would be much less radical than he thinks–just get him to not endorse Bush."
+        }
+    },
+	{
+        "model": "campaign_trail.answer",
+        "pk": 113528.1,
+        "fields": {
+            "question": 15000,
+            "description": "The reason why their convention was such a mess was because Buchanan wasn’t there to fire them up. Well, we can build off of that: we can’t win him over, but let’s send some signals to Pat suggesting that a Brown administration would be much less radical than he thinks–just get him to not endorse Bush."
         }
     },
     {
@@ -4219,7 +4227,7 @@ campaignTrail_temp.answers_json = [
         "pk": 115142,
         "fields": {
             "question": 115131,
-            "description": "Lula de Silva was the guy that Collor beat last time around, and it looks like he’s going to come back eventually in some form. He’s a smidge on the left, but the people seem to really like him; it’s better to get to know him now, rather than later."
+            "description": "Lula da Silva was the guy that Collor beat last time around, and it looks like he’s going to come back eventually in some form. He’s a smidge on the left, but the people seem to really like him; it’s better to get to know him now, rather than later."
         }
     },
     {
@@ -4263,6 +4271,14 @@ campaignTrail_temp.answers_json = [
         }
     },
     {
+        "model": "campaign_trail.answer",
+        "pk": 115168.1,
+        "fields": {
+            "question": 15000,
+            "description": "Venezuela is going through some hard times right now, a lot like what we’re dealing with at home. Let’s schedule some meetings with community leaders in Caracas where we can discuss solutions to these problems, here and at home."
+        }
+    },
+	{
         "model": "campaign_trail.answer",
         "pk": 115174,
         "fields": {
@@ -4435,7 +4451,7 @@ campaignTrail_temp.answers_json = [
         "pk": 1114869,
         "fields": {
             "question": 11112031,
-            "description": "Lula de Silva was the guy that Collor beat last time around, and it looks like he’s going to come back eventually in some form. He’s a smidge on the left, but the people seem to really like him; it’s better to get to know him now, rather than later."
+            "description": "Lula da Silva was the guy that Collor beat last time around, and it looks like he’s going to come back eventually in some form. He’s a smidge on the left, but the people seem to really like him; it’s better to get to know him now, rather than later."
         }
     },
     {
@@ -12449,7 +12465,7 @@ campaignTrail_temp.answer_score_global_json = [
         "model": "campaign_trail.answer_score_global",
         "pk": 1159.1,
         "fields": {
-            "answer": 15000,
+            "answer": 3389.1,
             "candidate": 78,
             "affected_candidate": 78,
             "global_multiplier": 0.0025,
@@ -13341,6 +13357,28 @@ campaignTrail_temp.answer_score_global_json = [
         "pk": 113531,
         "fields": {
             "answer": 113528,
+            "candidate": 78,
+            "affected_candidate": 77,
+            "global_multiplier": 0.02,
+            "volatility_range": [0.009, 0.031]
+        }
+    },
+	{
+        "model": "campaign_trail.answer_score_global",
+        "pk": 113530.1,
+        "fields": {
+            "answer": 113528.1,
+            "candidate": 78,
+            "affected_candidate": 78,
+            "global_multiplier": -0.001,
+            "volatility_range": [-0.0021, 0.0001]
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 113531.1,
+        "fields": {
+            "answer": 113528.1,
             "candidate": 78,
             "affected_candidate": 77,
             "global_multiplier": 0.02,
@@ -16822,6 +16860,16 @@ campaignTrail_temp.answer_score_global_json = [
             "global_multiplier": 0.005
         }
     },
+	{
+        "model": "campaign_trail.answer_score_global",
+        "pk": 11112057.1,
+        "fields": {
+            "answer": 115168.1,
+            "candidate": 78,
+            "affected_candidate": 78,
+            "global_multiplier": 0.005
+        }
+    },
     {
         "model": "campaign_trail.answer_score_global",
         "pk": 11112067,
@@ -19550,6 +19598,16 @@ campaignTrail_temp.answer_score_issue_json = [
         "pk": 113532,
         "fields": {
             "answer": 113528,
+            "issue": 29,
+            "issue_score": 0.7,
+            "issue_importance": 5
+        }
+    },
+	{
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 113532.1,
+        "fields": {
+            "answer": 113528.1,
             "issue": 29,
             "issue_score": 0.7,
             "issue_importance": 5
@@ -22469,7 +22527,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "model": "campaign_trail.answer_score_issue",
         "pk": 114931,
         "fields": {
-            "answer": 15000,
+            "answer": 3389.1,
             "issue": 32,
             "issue_score": 1.1,
             "issue_importance": 3
@@ -23550,6 +23608,26 @@ campaignTrail_temp.answer_score_issue_json = [
         "pk": 11112059,
         "fields": {
             "answer": 115168,
+            "issue": 28,
+            "issue_score": 0.5,
+            "issue_importance": 3
+        }
+    },
+	{
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 11112058.1,
+        "fields": {
+            "answer": 115168.1,
+            "issue": 29,
+            "issue_score": 0.3,
+            "issue_importance": 3
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 11112059.1,
+        "fields": {
+            "answer": 115168.1,
             "issue": 28,
             "issue_score": 0.5,
             "issue_importance": 3
@@ -29601,7 +29679,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1907464,
             "candidate": 78,
-            "answer_feedback": "The old world calls, with you feeling relieved as you see the continent for the first time in far too long."
+            "answer_feedback": "The old world calls, and as you catch your first glimpse of the continent, the morning sun illuminating Europe in its full glory, you realize that you’re glad to be back. It’s time to get down to business."
         }
     },
     {
@@ -29725,7 +29803,7 @@ campaignTrail_temp.answer_feedback_json = [
         "model": "campaign_trail.answer_feedback",
         "pk": 870.1,
         "fields": {
-            "answer": 15000,
+            "answer": 3389.1,
             "candidate": 78,
             "answer_feedback": "Jacques Barzaghi, master of all things Jerry Brown, seizes the reins of your defense and weaves a conniving tale, composed of personal anecdotes, directed to the networks that casts you as being the biggest square there is in regards to drugs. Not only does he defuse the scandal, but he also makes you look like a saint."
         }
@@ -30513,6 +30591,15 @@ campaignTrail_temp.answer_feedback_json = [
             "answer_feedback": "Everything about this decision screams “bad idea,” and sure enough, after a brief effort by your team to contact Buchanan, he responds with a resounding endorsement of Bush and a call for a crusade against liberalism."
         }
     },
+	{
+        "model": "campaign_trail.answer_feedback",
+        "pk": 113529.1,
+        "fields": {
+            "answer": 113528.1,
+            "candidate": 78,
+            "answer_feedback": "In theory, trying to get Pat Buchanan to make peace with a liberal is a terrible idea. In practice, he’s strangely receptive to your overtures after reading through your policy proposals and record. In a public appearance, he outright states he will never endorse Bush while deferring to answer on your candidacy."
+        }
+    },
     {
         "model": "campaign_trail.answer_feedback",
         "pk": 113534,
@@ -31086,7 +31173,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 113890,
             "candidate": 78,
-            "answer_feedback": "Standing pat with Bush sends worried Democrats into a frenzy, with some openly wondering when you’re going to put the foot down and take advantage of your cash. The real believers know that there must be a plan for it. There’s always a plan."
+            "answer_feedback": "Standing pat with Bush sends worried Democrats into a frenzy, with some openly wondering when you’re going to take advantage of your cash and put your foot down. The real believers know that there must be a plan for it. There’s always a plan. Right?"
         }
     },
     {
@@ -31122,7 +31209,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 113907,
             "candidate": 78,
-            "answer_feedback": "Standing pat with Bush sends worried Democrats into a frenzy, with some openly wondering when you’re going to put the foot down and take advantage of your cash. The real believers know that there must be a plan for it. There’s always a plan."
+            "answer_feedback": "Standing pat with Bush sends worried Democrats into a frenzy, with some openly wondering when you’re going to take advantage of your cash and put your foot down. The real believers know that there must be a plan for it. There’s always a plan. Right?"
         }
     },
     {
@@ -31158,7 +31245,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 113924,
             "candidate": 78,
-            "answer_feedback": "Standing pat with Bush sends worried Democrats into a frenzy, with some openly wondering when you’re going to put the foot down and take advantage of your cash. The real believers know that there must be a plan for it. There’s always a plan."
+            "answer_feedback": "Standing pat with Bush sends worried Democrats into a frenzy, with some openly wondering when you’re going to take advantage of your cash and put your foot down. The real believers know that there must be a plan for it. There’s always a plan. Right?"
         }
     },
     {
@@ -31194,7 +31281,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 113941,
             "candidate": 78,
-            "answer_feedback": "Standing pat with Bush sends worried Democrats into a frenzy, with some openly wondering when you’re going to put the foot down and take advantage of your cash. The real believers know that there must be a plan for it. There’s always a plan."
+            "answer_feedback": "Standing pat with Bush sends worried Democrats into a frenzy, with some openly wondering when you’re going to take advantage of your cash and put your foot down. The real believers know that there must be a plan for it. There’s always a plan. Right?"
         }
     },
     {
@@ -31914,7 +32001,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 114562,
             "candidate": 78,
-            "answer_feedback": "The old world calls, with you feeling relieved as you see the continent for the first time in far too long."
+            "answer_feedback": "The old world calls, and as you catch your first glimpse of the continent, the morning sun illuminating Europe in its full glory, you realize that you’re glad to be back. It’s time to get down to business."
         }
     },
     {
@@ -31923,7 +32010,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 114564,
             "candidate": 78,
-            "answer_feedback": "As you head in the direction of the sunrise, you wonder if the people you’re about to meet feel as much hope as you do."
+            "answer_feedback": "As your plane skips the traditional capitals of Western Europe and crosses over the shattered Iron Curtain, you wonder if the people you’re about to meet feel as much hope as you do in a better future, if they can imagine it."
         }
     },
     {
@@ -31932,7 +32019,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 114568,
             "candidate": 78,
-            "answer_feedback": "Soon, you cross the International Date Line and go back in time to the Far East…"
+            "answer_feedback": "As you fly west, it feels like you’re taking a step back in time–literally, when you cross the International Date Line. As you touch down to your destination, you wonder how one man like yourself could possibly influence the fates of the billions of souls on this vast continent."
         }
     },
     {
@@ -31941,7 +32028,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 114572,
             "candidate": 78,
-            "answer_feedback": "And just like that, you’re heading south on a redeye to the forgotten continent…"
+            "answer_feedback": "And just like that, you’re heading south on a redeye to the forgotten continent, hoping that you can get back to the important business as soon as possible. Maybe, just maybe, you can make something out of it."
         }
     },
     {
@@ -31950,7 +32037,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 114579,
             "candidate": 78,
-            "answer_feedback": "The old world calls, with you feeling relieved as you see the continent for the first time in far too long."
+            "answer_feedback": "The old world calls, and as you catch your first glimpse of the continent, the morning sun illuminating Europe in its full glory, you realize that you’re glad to be back. It’s time to get down to business."
         }
     },
     {
@@ -31959,7 +32046,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 114581,
             "candidate": 78,
-            "answer_feedback": "As you head in the direction of the sunrise, you wonder if the people you’re about to meet feel as much hope as you do."
+            "answer_feedback": "As your plane skips the traditional capitals of Western Europe and crosses over the shattered Iron Curtain, you wonder if the people you’re about to meet feel as much hope as you do in a better future, if they can imagine it."
         }
     },
     {
@@ -31968,7 +32055,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 114585,
             "candidate": 78,
-            "answer_feedback": "Soon, you cross the International Date Line and go back in time to the Far East…"
+            "answer_feedback": "As you fly west, it feels like you’re taking a step back in time–literally, when you cross the International Date Line. As you touch down to your destination, you wonder how one man like yourself could possibly influence the fates of the billions of souls on this vast continent."
         }
     },
     {
@@ -31977,7 +32064,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 114589,
             "candidate": 78,
-            "answer_feedback": "And just like that, you’re heading south on a redeye to the forgotten continent…"
+            "answer_feedback": "And just like that, you’re heading south on a redeye to the forgotten continent, hoping that you can get back to the important business as soon as possible. Maybe, just maybe, you can make something out of it."
         }
     },
     {
@@ -32337,7 +32424,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 114817,
             "candidate": 78,
-            "answer_feedback": "This vote that’s coming up, for whether the Europeans want to get closer with each other, is a watershed moment in establishing peace and laying aside past conflicts. In other words, it sounds like something I would’ve come up with. I think I can make a positive difference here by taking a stand for it."
+            "answer_feedback": "In Strasbourg, located directly on the German border, the French cheer as you shout about the world entering a new era of peace, the crowd waving European flags with cosmopolitan fervor. You manage to sneak in a quick meeting with Helmut Kohl across the border before flying home."
         }
     },
     {
@@ -32952,6 +33039,15 @@ campaignTrail_temp.answer_feedback_json = [
             "answer_feedback": "Caracas, streets filled with obvious signs of struggle, is similar enough to a destitute American street to be good commercial fodder, and your limited Spanish knowledge is enough to both endear you to the locals and Latinos back home."
         }
     },
+	{
+        "model": "campaign_trail.answer_feedback",
+        "pk": 115169.1,
+        "fields": {
+            "answer": 115168.1,
+            "candidate": 78,
+            "answer_feedback": "Your trip around Caracas is largely uneventful until you link up with Irene Sáez, former Miss Universe, who is running for mayor of Chacao. You find yourself largely agreeing with her, and the cameras catch the two of you laughing and smiling together. Magazines at home, in a loving, playful way, start suggesting a possible romance between you two, giving your campaign a new streak of Kennedyesque intrigue."
+        }
+    },
     {
         "model": "campaign_trail.answer_feedback",
         "pk": 115175,
@@ -33102,7 +33198,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 2113710,
             "candidate": 78,
-            "answer_feedback": "A large, organized crowd walks across the Edmund Pettus Bridge, triumphantly marching towards a future of equality as the camera pans to Jesse Jackson at its head as a voiceover talks about the need for politicians with actual leadership skills. People get the message, although contrasting Jackson with Quayle only emboldens dissident elements in the GOP"
+            "answer_feedback": "A large, organized crowd walks across the Edmund Pettus Bridge, triumphantly marching towards a future of equality as the camera pans to Jesse Jackson at its head while a voiceover talks about the need for politicians with actual leadership skills. People get the message, although the Bush team is quick to counter with a message showing Quayle at home with his family."
         }
     },
     {
@@ -33156,7 +33252,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1114869,
             "candidate": 78,
-            "answer_feedback": "Lula is ambitious and seeks an overthrow of the ruling class, things you can get behind, but sometimes veers off a little far leftwards. After your meeting, you take 30 minutes to kick around a football with some kids, which is what the media ends up covering."
+            "answer_feedback": "Lula is an animated man ready to discuss political philosophy with you, and you find yourself vocally agreeing with him. When you get home, you’re horrified to see that the media has fixated on Lula’s relationship with Fidel Castro, turning you into an outright communist who’s worse than Stalin."
         }
     },
     {
@@ -33165,7 +33261,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1114870,
             "candidate": 78,
-            "answer_feedback": "On such a short notice, you can’t find anyone willing to fly to Brazil other than the B-52s. While “Love Shack” absolutely brings down the substantial crowd, it’s not as big as you had hoped, and American audiences take little note before turning back to Boyz II Men."
+            "answer_feedback": "The excitement around your candidacy has excited quite a few former hippies, and to your shock, Crosby, Stills, & Nash agree to play Copacabana–with Neil Young. Their rendition of Rockin’ in the Free World, directly aimed at Bush, is played before a crowd of millions, as every Baby Boomer in the U.S. tunes in."
         }
     },
     {
@@ -34726,7 +34822,6 @@ var estabMap = {
     3502: -1,
     3105: -1,
     3102: -2,
-    3502: -1,
     3397: -1,
     3398: 1,
     3399: 1,
@@ -34883,7 +34978,7 @@ cyoAdventure = function (a) {
     if (estabMap.hasOwnProperty(ans)) {
         estab += estabMap[ans];
         console.log("estab work")
-        console.log("Direct test:", tunnel(359));
+        //console.log("Direct test:", tunnel(359));
         console.log(estab)
     }
 
@@ -34954,33 +35049,26 @@ cyoAdventure = function (a) {
     //////////BUSHINATOR//////////
     //OPERATION: DESTROY AMERICA//
     //////////////////////////////
-    let pop_vote = e.current_results[0];
-    pop_vote.sort((a, b) => {
-        return a.pk - b.pk;
-    });
-    let playerPolling = (pop_vote.find(p => p.pk === e.candidate_id)).pvp;
+	const pop_vote = e.current_results[0];
 
+	const candidate = pop_vote.find(p => p.pk === e.candidate_id);
+	if (!candidate) return;
 
-    if (playerPolling < 0.47) {
-        var momentum = 0
-        console.log(playerPolling)
-        console.log(momentum)
-        console.log("below 47%")
-    }
+	const playerPolling = candidate.pvp;
+	let momentum;
 
-    else if (playerPolling < 0.49 && playerPolling > 0.47) {
-        var momentum = 1
-        console.log(playerPolling)
-        console.log(momentum)
-        console.log("close race")
-    }
-
-    else if (playerPolling > 0.49) {
-        var momentum = 2
-        console.log(playerPolling)
-        console.log(momentum)
-        console.log("above 49%")
-    }
+	if (playerPolling < 0.47) {
+	  momentum = 0;
+	  console.log("below 47%");
+	} else if (playerPolling < 0.485) {
+	  momentum = 1;
+	  console.log("close race");
+	} else {
+	  momentum = 2;
+	  console.log("above 49%");
+	}
+	console.log(playerPolling);
+	console.log(momentum);
 
 
 
@@ -35281,7 +35369,7 @@ cyoAdventure = function (a) {
         } else {  /// England Normal
             campaignTrail_temp.questions_json[20] = tunnel(114676);
         }
-    } else if ((ans === 1907464 || ans === 114562 || ans === 115255 || ans === 114579) && hawktuah == 2) {
+    } else if ((ans === 1907464 || ans === 114562 || ans === 115255 || ans === 114579) && hawktuah >= 1) {
         if (moonbeam > 2) {  /// Germany Moonbeam Luck
             campaignTrail_temp.questions_json[20] = tunnel(114745);
         } else {  /// Germany Normal
@@ -35429,7 +35517,7 @@ cyoAdventure = function (a) {
 
     /// Buchanan
 
-    if (pattycake > 3 && vpcheck == 5) {
+    if (pattycake >= 3 && vpcheck == 5) {
         campaignTrail_temp.questions_json[13] = tunnel(2113709);
         console.log("I'm moving in silence, big things coming")
     }
@@ -35455,7 +35543,7 @@ cyoAdventure = function (a) {
     }
 
     /// Reagan     
-    if (reaganattack > 2 && momentum == 2) {
+    if (reaganattack >= 2 && momentum == 2) {
         campaignTrail_temp.questions_json[14] = tunnel(11112612);
         console.log("LAND OF CONFUSION | WOE BETIDE ANY WHO DARE")
     }
@@ -35477,11 +35565,14 @@ cyoAdventure = function (a) {
         barzaghover = true;
     }
     if (barzaghover == true) {
-        answerSwapper(3389, 15000, false);
+        answerSwapper(3389, 3389.1, false);
     }
-
-
-
+	if (moonbeam >= 2) {
+        answerSwapper(115168, 115168.1, false);
+    }
+	if (orange >= 3) {
+        answerSwapper(113528, 113528.1, false);
+    }
 
     //These tell the game after the convention which VPs to make available
 
@@ -35574,13 +35665,39 @@ cyoAdventure = function (a) {
     }
 
     // achievement stuff
-    if (campaignTrail_temp.player_answers.includes(21395)) ctsAchievement("Party Unity");
-    if (campaignTrail_temp.player_answers.includes(115221)) ctsAchievement("Slapshot");
-    if (campaignTrail_temp.player_answers.some(ans => [114261, 114189, 114165].includes(ans))) { ctsAchievement("Profit and Ross"); }
-    if (campaignTrail_temp.player_answers.includes(114615)) ctsAchievement("2137");
-    if (campaignTrail_temp.player_answers.includes(114650)) ctsAchievement("Bunga Bunga");
-    if (campaignTrail_temp.player_answers.some(ans => [114755, 114774].includes(ans))) { ctsAchievement("Liebe ist für alle da"); }
+    const answers = campaignTrail_temp.player_answers;
+	const ansSet = new Set(answers);
 
+	const anyOf = [
+	  { ids: [114261, 114189, 114165], name: "Profit and Ross" },
+	  { ids: [114755, 114774], name: "Liebe ist für alle da" },
+	  { ids: [114784, 114806], name: "Disney Über Alles" },
+	  { ids: [3412, 3341], name: "Jerry Does Dallas" },
+	  { ids: [1114958, 1114959, 1114960, 1114961], name: "Message: I Care" },
+	];
+
+	const single = [
+	  [21395, "Party Unity"],
+	  [114615, "2137"],
+	  [114650, "Bunga Bunga"],
+	  [114715, "From Linda to Lizzie"],
+	  [1114870, "Long May You Run"],
+	  [115168.1, "Mr. Universe"],
+	  [115221, "Slapshot"],
+	  [1114874, "¡Viva Brown!"],
+	  [114788, "Gaullist Fever"],
+	  [113528.1, "Operation Paperclip"],
+	  [113528, "For Spanish, Press One"],
+	  [2113710, "America First, Second, and Third"],
+	];
+
+	for (const [id, name] of single) {
+	  if (ansSet.has(id)) ctsAchievement(name);
+	}
+	for (const { ids, name } of anyOf) {
+	  if (ids.some(id => ansSet.has(id))) ctsAchievement(name);
+	}
+	
 }
 
 // these are for the VP switcher functions
@@ -36039,10 +36156,22 @@ endingPicker = (out, totv, aa, quickstats) => {
     orderID = [aa[0].candidate, aa[1].candidate, aa[2].candidate];
 
     const playerEV = quickstats[0];
+	
+	const stateWinners = new Map(
+        e.final_state_results.map(s => [s.state, s.result[0].candidate])
+    );
+    const stcount = (stateList, cid) => stateList.every(stId => stateWinners.get(stId) === cid);
 
     if (playerEV >= 340 && !campaignTrail_temp.player_answers.includes(12240)) ctsAchievement("Man of Tomorrow");
-    if (playerEV >= 270 && vpcheck == 1) ctsAchievement("Operation BUSH");
-    if (campaignTrail_temp.final_state_results[42]["result"][0]["candidate"] == 197) ctsAchievement("California and Coal Country");
+	if (playerEV < 100 && !campaignTrail_temp.player_answers.includes(12240)) ctsAchievement("Code Brown");
+    if (playerEV >= 270 && vpcheck == 5) ctsAchievement("Operation BUSH");
+    if (campaignTrail_temp.final_state_results[197]?.result[0]?.candidate === 78) ctsAchievement("California and Coal Country");	
+    if (campaignTrail_temp.final_state_results[197]?.result[0]?.candidate === 78 && (!vpcheck == 4)) ctsAchievement("Chastity");
+	if (playerEV >= 270 && (stateWinners.get(197) !== 78 && stateWinners.get(215) !== 78)) ctsAchievement("Rust in Peace");
+	if (playerEV >= 270 && campaignTrail_temp.player_answers.some(ans => [1114958, 1114959, 1114960, 1114961].includes(ans))) ctsAchievement("Mourning in America");
+	if (playerEV < 270 && campaignTrail_temp.player_answers.some(ans => [1114958, 1114959, 1114960, 1114961].includes(ans))) ctsAchievement("Like Father, Like Son");	
+	if (playerEV >= 270 && campaignTrail_temp.player_answers.some(ans => [2113710].includes(ans))) ctsAchievement("This Is Who We Are");
+	if (playerEV < 270 && campaignTrail_temp.player_answers.some(ans => [2113710].includes(ans))) ctsAchievement("Cordon Sanitaire");
 
     var endingstuff = {
         "Win Type": (function (val) { return (aa[0].electoral_votes >= 270 && aa[0].candidate == 79) ? "Perot" : val >= 348 ? "Massive Win" : val >= 310 ? "Decent Win" : val >= 270 ? "Close Win" : val === 269 ? "Deadlock" : val >= 230 ? "Close Loss" : val >= 190 ? "Decent Loss" : val < 190 ? "Massive Loss" : "error"; })(playerEV),
@@ -36065,9 +36194,9 @@ endingPicker = (out, totv, aa, quickstats) => {
             },
             "ending text": `
                   <h2>CLINTON ELECTED IN LANDSLIDE</h2>
-                      <p><p><em>Nov. 4, 1992</em><br>Gov. Bill Clinton of Arkansas was elected the 42d President of the United States yesterday, breaking a 12-year Republican hold on the White House.<br>Mr. Clinton shattered the Republicans' political base with a promise of change to an electorate clearly discontented with President Bush.<br>With Bush’s high approval ratings, many pundits assumed that he would sail to reelection. Many speculated potential Democratic candidates chose not to run, with Mario Cuomo focusing on his governorship and Jerry Brown choosing to run a successful Senate campaign instead. This sparse field of candidates allowed Governor Clinton to run for the nomination practically uncontested, with his most prominent opposition in the form of Senator Paul Tsongas dropping out after underperforming on Super Tuesday.
+                      <p><em>Nov. 4, 1992</em></p><p>Gov. Bill Clinton of Arkansas was elected the 42d President of the United States yesterday, breaking a 12-year Republican hold on the White House.</p><p>Mr. Clinton shattered the Republicans’ political base with a promise of change to an electorate clearly discontented with President Bush.</p><p>With Bush’s high approval ratings, many pundits assumed that he would sail to reelection. Many speculated potential Democratic candidates chose not to run, with Mario Cuomo focusing on his governorship and Jerry Brown choosing to run a successful Senate campaign instead. This sparse field of candidates allowed Governor Clinton to run for the nomination practically uncontested, with his most prominent opposition in the form of Senator Paul Tsongas dropping out after underperforming on Super Tuesday.</p>
                       
-                      <br>Clinton’s ability to easily unite the party behind him has been cited as a large contributor in his strong performance yesterday.<br><br>Ross Perot, the Texas billionaire who roiled this race throughout, finished third, drawing roughly equally from both major party candidates, according to Voter Research & Surveys, the television polling consortium. His share of the popular vote had the potential to exceed any third-party candidate's in more than half a century.<br><br>The Governor from Arkansas won such big, closely contested states as Michigan, Missouri, Pennsylvania, New Jersey and Illinois. As polls closed across the nation, networks announced projected winners based on voter surveys. It was Ohio that put him over the top shortly before 11 P.M., followed closely by California. Based on those projections, Mr. Bush prevailed in his adopted state of Texas and other pockets of Republican states around the country.<br><br>In a victory speech to a joyous crowd in Little Rock, Mr. Clinton declared, 'On this day, with high hopes and brave hearts, in massive numbers, the American people have voted to make a new beginning.'  
+                      <p>Clinton’s ability to easily unite the party behind him has been cited as a large contributor in his strong performance yesterday.<br><br>Ross Perot, the Texas billionaire who roiled this race throughout, finished third, drawing roughly equally from both major party candidates, according to Voter Research & Surveys, the television polling consortium. His share of the popular vote had the potential to exceed any third-party candidate’s in more than half a century.</p><p>The Governor from Arkansas won such big, closely contested states as Michigan, Missouri, Pennsylvania, New Jersey and Illinois. As polls closed across the nation, networks announced projected winners based on voter surveys. It was Ohio that put him over the top shortly before 11 P.M., followed closely by California. Based on those projections, Mr. Bush prevailed in his adopted state of Texas and other pockets of Republican states around the country.</p><p>In a victory speech to a joyous crowd in Little Rock, Mr. Clinton declared, ‘On this day, with high hopes and brave hearts, in massive numbers, the American people have voted to make a new beginning.’</p>
               `
         },
         {
@@ -36085,7 +36214,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text":
-                `<img src='https://i.imgur.com/xrpdlkA.jpeg'>
+                `<img src='https://i.imgur.com/xrpdlkA.jpeg' style="margin: 1em; float: left; width: 35%">
                   <p>
                   Tucked away in the penthouse suite at the Fairmont in San Francisco, Jerry Brown was incapable of talking about politics, and although he thought about it, obsessed over it, nonstop, he flatly refused to talk about anything related to the election. Jacques called from France, occupied with personal business that required his presence in Paris, and the two of them talked about cinema for 30 minutes, not mentioning the election once. Even when Pat came around, touting the extremely promising exit polls, and Jodie brought forth a massive collection of anecdotes showcasing sky-high enthusiasm at the polling booths, Jerry waved them off, instead choosing to focus on Showdown at Gucci Gulch, an interesting book a reporter in New Hampshire had recommended to him.
                   </p>
@@ -36151,7 +36280,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-              <img src='https://i.imgur.com/xrpdlkA.jpeg'>
+              <img src='https://i.imgur.com/xrpdlkA.jpeg' style="margin: 1em; float: left; width: 35%">
                   <p>
                   Tucked away in the penthouse suite at the Fairmont in San Francisco, Jerry Brown was incapable of talking about politics, and although he thought about it, obsessed over it, nonstop, he flatly refused to talk about anything related to the election. Jacques called from France, occupied with personal business that required his presence in Paris, and the two of them talked about their interpretation of The Satanic Verses for 30 minutes, not mentioning the election once. Even when Pat came around, reporting good news from the Michigan exit poll, and Jodie came in asking if he had any ideas what a victory speech might look like, he waved them off and focused on watching the JFK movie, which he somehow had missed in theaters.
                   </p>
@@ -36208,7 +36337,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-              <img src='https://i.imgur.com/xrpdlkA.jpeg'>
+              <img src='https://i.imgur.com/xrpdlkA.jpeg' style="margin: 1em; float: left; width: 35%">
               <p>    
               Tucked away in the penthouse suite at the Fairmont in San Francisco, Jerry Brown was incapable of talking about politics, and although he thought about it, obsessed over it, nonstop, he flatly refused to talk about anything related to the election. Jacques called from France, occupied with personal business that required his presence in Paris, and the two of them talked about their thoughts on the next year’s most like Nobel Prize winners for 30 minutes, not mentioning the election once. Even when Pat came around, claiming that the microdata had some positive trends, and Jodie came in asking if there was anything he’d like to record for posterity , he waved them off and focused on the new Madonna album, which two of his staffers had begged him to listen to.
               </p>
@@ -36264,7 +36393,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-              <img src='https://i.imgur.com/xrpdlkA.jpeg'>
+              <img src='https://i.imgur.com/xrpdlkA.jpeg' style="margin: 1em; float: left; width: 35%">
                   <p>
                   The Brown team had checked themselves into the penthouse of the Fairmont in downtown San Francisco, but Jerry  himself was nowhere to be seen. Ever since they had arrived from the airport, he went straight to the master bedroom and shut himself in. Jacques tried calling him, and Jerry hung up immediately. Jodie and Pat both came by to give him different variations of telling him that the race would be tight, and that he would likely have to stay up late. He nodded briefly and shooed them away.
                   </p>
@@ -36327,7 +36456,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-              <img src='https://i.imgur.com/xrpdlkA.jpeg'>
+              <img src='https://i.imgur.com/xrpdlkA.jpeg' style="margin: 1em; float: left; width: 35%">
                   <p>
                   Tucked away in the penthouse suite at the Fairmont in San Francisco, Jerry Brown was incapable of talking about politics, and although he thought about it, obsessed over it, nonstop, he flatly refused to talk about anything related to the election. Jacques called from France, occupied with personal business that required his presence in Paris, and the two of them talked about the World Series and its implications on the wider realm of baseball for 30 minutes, not mentioning the election once. Even when Pat came around, trying to start a discussion on how some of the folks on the ground were seeing odd signs, and Jodie came in discussing what he would have to do in the case of a tight victory, he waved them off and focused on reading some Camus, who had always intrigued him.
                   </p>
@@ -36381,7 +36510,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-              <img src='https://i.imgur.com/xrpdlkA.jpeg'>
+              <img src='https://i.imgur.com/xrpdlkA.jpeg' style="margin: 1em; float: left; width: 35%">
                   <p>
                   Tucked away in the penthouse suite at the Fairmont in San Francisco, Jerry Brown was incapable of talking about politics, and although he thought about it, obsessed over it, nonstop, he flatly refused to talk about anything related to the election. Jacques called from France, occupied with personal business that required his presence in Paris, and the two of them talked about the Sinead O’Connor incident for 30 minutes, not mentioning the election once. Even when Pat came around, trying to start a discussion on how some of the exit polls looked a bit worrying, and Jodie came in discussing how his paths to victory might work, he waved them off and focused on watching Feed, a new documentary chronicling the Democratic primaries earlier in the year.
                   </p>
@@ -36391,6 +36520,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                   <p>
                   For hours, Jerry alternated between watching the returns on television and taking phone calls, as his chances of pulling it off got narrower, narrower, and narrower. Then, the last state necessary for 270 flipped red, and his chances completely extinguished. That was it: Jerry Brown was not going to be the president. The mood of the suite sunk into a deep depression as people tried to figure out just where they had gone wrong. Jodie had her head in her hands, and Pat was muttering about how he couldn’t possibly understand how Jerry had failed, even after following his advice. Most people in the room, including the celebrities and various personal friends, had a palpable sense of anxiety sitting deep in their stomach, as they tried to wrestle with their grief.
                   </p>
+				  <p>
                   Jerry had that exact same sense of grief, but he worked on shoving it down as far as possible, deep into the inner reaches of his soul, until the only thing left was his mind, unhindered by bothersome emotions. Wordlessly, he held his arm out for the phone, and someone was perceptive enough to hand it to him. One by one, he punched the numbers until Houston was on the line.
                   </p>
                   <p>
@@ -36438,7 +36568,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-              <img src='https://i.imgur.com/xrpdlkA.jpeg'>
+              <img src='https://i.imgur.com/xrpdlkA.jpeg' style="margin: 1em; float: left; width: 35%">
               <p>    
               Tucked away in the penthouse suite at the Fairmont in San Francisco, Jerry Brown was incapable of talking about politics, and although he thought about it, obsessed over it, nonstop, he flatly refused to talk about anything related to the election. Jacques called from France, occupied with personal business that required his presence in Paris, and the two of them talked about the World Series and its implications on the wider realm of baseball for 30 minutes, not mentioning the election once. Even when Pat came around, trying to start a discussion on how some of the folks on the ground were seeing odd signs, and Jodie came in discussing what he would have to do in the case of a tight victory, he waved them off and focused on reading some Camus, who had always intrigued him.
               </p>
@@ -38012,7 +38142,7 @@ endingPicker = (out, totv, aa, quickstats) => {
             "ending text": `
                     <h3 style="text-align:center;">President Clinton’s address following the attacks on the United Kingdom on 9th November 2001</h3>
                     
-                    <img src="https://i.imgur.com/8UvkRAc.png" style="width:300px;float: left;margin: 0 20px 20px 0;">                 
+                    <img src="https://i.imgur.com/8UvkRAc.png" style="width:300px;float: left;margin: 1em;">                 
                     
                     <p>Good morning.</p>
   
@@ -41128,7 +41258,7 @@ Euro Disney Begins Considering Exiting French Market
                 "Establishment Use": endingstuff["Establishment Use"],
                 "Running Mate": e.running_mate_last_name
             },
-            "ending text": `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Old_Riga_%28Vecr%C4%ABga%29.JPG/2560px-Old_Riga_%28Vecr%C4%ABga%29.JPG" style="margin: 0 20px 20px 0; float: left; width: 35%">
+            "ending text": `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Old_Riga_%28Vecr%C4%ABga%29.JPG/2560px-Old_Riga_%28Vecr%C4%ABga%29.JPG" style="margin: 1em; float: left; width: 35%">
               <h2> Patrick Reaffirms NATO Commitment in Riga </h2>
 				<p style="text-align: left">Associated Press</p>
 				<p style="text-align: left">July 21, 2025</p>

@@ -6301,8 +6301,8 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 1051,
             "issue": 4,
-            "state_issue_score": -0.15,
-            "weight": 0.8
+            "state_issue_score": 0.2,
+            "weight": 1
         }
     },
     {
@@ -6352,7 +6352,7 @@ campaignTrail_temp.state_issue_score_json = [
             "state": 1052,
             "issue": 4,
             "state_issue_score": 0.2,
-            "weight": 0.8
+            "weight": 1.1
         }
     },
     {
@@ -6392,7 +6392,7 @@ campaignTrail_temp.state_issue_score_json = [
             "state": 1053,
             "issue": 3,
             "state_issue_score": -0.4,
-            "weight": 0.9
+            "weight": 1
         }
     },
     {
@@ -6401,8 +6401,8 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 1053,
             "issue": 4,
-            "state_issue_score": -0.6,
-            "weight": 0.8
+            "state_issue_score": -0.15,
+            "weight": 0.9
         }
     },
     {
@@ -13377,7 +13377,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 85,
             "issue": 4,
-            "issue_score": 0.65,
+            "issue_score": 0.6,
             "issue_importance": 3
         }
     },
@@ -13487,7 +13487,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 97,
             "issue": 1,
-            "issue_score": 0.75,
+            "issue_score": 0.55,
             "issue_importance": 3
         }
     },
@@ -13497,7 +13497,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 98,
             "issue": 1,
-            "issue_score": 0.3,
+            "issue_score": 0.15,
             "issue_importance": 2
         }
     },
@@ -13507,7 +13507,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 99,
             "issue": 1,
-            "issue_score": -0.1,
+            "issue_score": -0.15,
             "issue_importance": 3
         }
     },
@@ -14057,7 +14057,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 167,
             "issue": 2,
-            "issue_score": 0.4,
+            "issue_score": 0.15,
             "issue_importance": 2.5
         }
     },
@@ -14067,7 +14067,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 168,
             "issue": 2,
-            "issue_score": 0.65,
+            "issue_score": 0.6,
             "issue_importance": 3
         }
     },
@@ -15967,7 +15967,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 21521,
             "issue": 3,
-            "issue_score": 0.4,
+            "issue_score": -0.4,
             "issue_importance": 2
         }
     },
@@ -15977,7 +15977,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 21526,
             "issue": 3,
-            "issue_score": -0.1,
+            "issue_score": 0.2,
             "issue_importance": 2
         }
     },
@@ -22568,6 +22568,137 @@ if (questionCount === 26) {
     console.log(`Question re-ordering applied for ${questionCount} questions. At least this is working.`);
 }
 
+// This is so that ME and NE's districts are not counted
+// towards the popular vote total, pretty Much
+campaignTrail_temp.ignored_pv_states = new Set([1051, 1052, 1053, 1054, 1055]);
+
+handleFinalResults = function(t) {
+  let i = 0;
+  // reset totals
+  campaignTrail_temp.final_overall_results.forEach((f) => {
+    f.popular_votes = 0;
+    f.electoral_votes = 0;
+  });
+  
+  // tally up states that have come in
+  campaignTrail_temp.final_state_results.forEach((f) => {
+    if (f.result_time <= t) {
+      i++;
+      f.result.forEach((g) => {
+        campaignTrail_temp.final_overall_results.forEach((h) => {
+          if (h.candidate === g.candidate) {
+            // check if state is in ignored set before adding PV
+            if (!campaignTrail_temp.ignored_pv_states.has(f.state)) {
+                h.popular_votes += g.votes;
+            }
+            h.electoral_votes += g.electoral_votes;
+          }
+        });
+      });
+    }
+  });
+
+  // sort results
+  campaignTrail_temp.final_overall_results.sort((a, b) => {
+    if (b.electoral_votes !== a.electoral_votes) {
+      return b.electoral_votes - a.electoral_votes;
+    }
+    return b.popular_votes - a.popular_votes;
+  });
+  
+  return i;
+};
+
+getLatestRes = function(t) {
+  const e = campaignTrail_temp;
+  const stateDataMap = new Map(e.states_json.map(s => [s.pk, s.fields]));
+
+  const activeCandidates = e.candidate_json.filter(
+    (candidate) => e.opponents_list.includes(candidate.pk) || candidate.pk === e.candidate_id
+  );
+
+  const candidateTotals = new Map();
+  activeCandidates.forEach(cand => {
+    candidateTotals.set(cand.pk, { popvs: 0, evvs: 0 });
+  });
+
+  let total_v = 0;
+
+  for (const state of t) {
+    const stateFields = stateDataMap.get(state.state);
+    if (!stateFields) continue;
+
+    const stateElectoralVotes = stateFields.electoral_votes;
+    const evAllocation = new Map();
+
+    // standard EV allocation logic
+    if (e.primary_states) {
+        const primaryStates = JSON.parse(e.primary_states);
+        if (primaryStates.some(ps => ps.state === state.state)) {
+            const voteCounts = state.result.map(r => r.votes);
+            const allocations = dHondtAllocation(voteCounts, stateElectoralVotes, 0.15);
+            state.result.forEach((res, i) => {
+                evAllocation.set(res.candidate, allocations[i] || 0);
+            });
+        }
+    } else if (!e.primary) {
+      const gameType = Number(e.game_type_id);
+      if (gameType === 2) { // Proportional
+        const percentages = state.result.map(r => r.percent);
+        const allocations = divideElectoralVotesProp(percentages, stateElectoralVotes);
+        state.result.forEach((res, i) => {
+          evAllocation.set(res.candidate, allocations[i] || 0);
+        });
+      } else if (stateFields.winner_take_all_flg === 1) {
+        const winnerPk = state.result[0]?.candidate;
+        if (winnerPk) evAllocation.set(winnerPk, stateElectoralVotes);
+      } else {
+        const totalVotes = state.result.reduce((sum, cr) => sum + (cr.votes || 0), 0);
+        const topVotes = state.result[0]?.votes || 0;
+        const [winnerEVs, runnerUpEVs] = splitEVTopTwo(stateElectoralVotes, topVotes, totalVotes);
+        
+        if (state.result[0]?.candidate) evAllocation.set(state.result[0].candidate, winnerEVs);
+        if (state.result[1]?.candidate) evAllocation.set(state.result[1].candidate, runnerUpEVs);
+      }
+    }
+
+    // check if this state should be excluded from PV counts
+    const isIgnored = campaignTrail_temp.ignored_pv_states.has(state.state);
+
+    for (const candidateResult of state.result) {
+      const candidatePk = candidateResult.candidate;
+      const totals = candidateTotals.get(candidatePk);
+
+      if (totals) {
+        // only add PV if not ignored
+        if (!isIgnored) {
+            totals.popvs += candidateResult.votes;
+        }
+        totals.evvs += (evAllocation.get(candidatePk) || 0);
+      }
+      
+      if (!isIgnored) {
+        total_v += candidateResult.votes;
+      }
+    }
+  }
+
+  const finalCandidates = activeCandidates.map(candidate => {
+    const totals = candidateTotals.get(candidate.pk) || { popvs: 0, evvs: 0 };
+    candidate.popvs = totals.popvs;
+    candidate.evvs = totals.evvs;
+    candidate.pvp = total_v > 0 ? (totals.popvs / total_v) : 0;
+    return candidate;
+  });
+
+  const sortedCandidates = finalCandidates.sort((a, b) => b.pvp - a.pvp);
+
+  window.nn2 = sortedCandidates;
+  window.nn3 = sortedCandidates.map(c => c.evvs || 0);
+
+  return [sortedCandidates, answerEffects];
+};
+
 // This is used to replace a series of question data for each running mate. Taken from 2016ALOT.
 // 30 = Biden, 34 = Clinton, 35 = Gregoire, 36 = Schweitzer
 // 37 = Dodd, 38 = Bayh, 39 = Davis, 40 = Sebelius
@@ -25911,12 +26042,12 @@ const mainEndings = [
     {
         id: "contingent_tie",
         condition: (ev, opEV) => ev < 270 && opEV < 270,
-        image: "https://media.gettyimages.com/id/504723292/pt/foto/washington-dc-u-s-president-barack-obama-delivers-the-state-of-the-union-speech-before-members.jpg?s=612x612&w=0&k=20&c=2QxqRxKwm0XDen8DDZAm4oi3aqb_vNI0CfEirHi_Yrs=",
+        image: "https://cdn.mos.cms.futurecdn.net/eVzEUpaKg48czq3HHxwQqW.jpg",
         // this is a special flag because the Tie ending behaves differently
         isContingent: true, 
         html: (playerEV, opponentEVs, opLast) => `
-            <div style="background: rgba(0, 0, 0, 0.5); color: white; padding: 1.2em; display: inline-block; border-radius: .5em 0 0 .5em;">
-            <h3><span style="color:#eee; font-family: Comic Sans MS, cursive;">awkward…!</span></h3>
+			<div style="background: linear-gradient(to bottom, #15223C, #20335B); color: #fff; border: 1px solid #777; border-radius: 8px 0; padding: 20px; font-family: Georgia, serif; box-shadow: 0 1px 3px rgba(0,0,0,0.2), inset 0 1px 0 rgba(100, 100, 100, 0.7);">
+			<h3><span style="color:#aaccff; font-weight: normal; font-style: italic; font-family: Comic Sans MS, cursive;">burner phone</span></h3>
             <p style="text-align:center; margin-bottom:1.5em;">
               <strong>Final Results:</strong><br>
               Obama: ${playerEV} • ${opLast}: ${opponentEVs || 0}
@@ -31455,8 +31586,8 @@ function updateOpponentQuestions() {
     console.log(`Question set updated for: ${opponentKey}`);
 }
 
-// This pretty much implements multiple allocation methods, including the model-based
-// Approval/Borda/Condorcet. That's really it.
+// This pretty much implements multiple allocation methods, including
+// the model-based Approval/Borda/Condorcet. That's really it.
 (() => {
   const METHOD = {
     SAINTE_LAGUE: 4,
@@ -31515,10 +31646,16 @@ function updateOpponentQuestions() {
       let best = -1, bestScore = -Infinity;
       for (let i = 0; i < n; i++) {
         const a = alloc[i];
-        const priority = (a === 0) ? Infinity : votes[i] / Math.sqrt(a * (a + 1));
+        // ensure candidates with 0 votes don't get priority even if seats are 0
+        const priority = (votes[i] <= 0) ? -Infinity : (a === 0) ? Infinity : votes[i] / Math.sqrt(a * (a + 1));
         if (priority > bestScore) { bestScore = priority; best = i; }
       }
-      alloc[best]++;
+      if (best !== -1) {
+          alloc[best]++;
+      } else {
+          // fallback if all valid candidates have 0 votes but seats remain
+          break; 
+      }
     }
     return alloc;
   }
@@ -31559,7 +31696,7 @@ function updateOpponentQuestions() {
   // context builder
   function buildContext(e) {
     const gp = e.global_parameter_json?.[0]?.fields || {};
-    const voteVar = gp.vote_variable ?? 1.0; // FIX: Safer default
+    const voteVar = gp.vote_variable ?? 1.0; 
     const cIW = gp.candidate_issue_weight ?? 1;
     const rIW = gp.running_mate_issue_weight ?? 1;
 
@@ -31809,6 +31946,56 @@ function updateOpponentQuestions() {
 
     return out;
   };
+
+  const __origGetLatestRes = window.getLatestRes;
+  window.getLatestRes = function patchedGetLatestRes(t) {
+    const e = window.campaignTrail_temp || window.e;
+    const mode = Number(e.game_type_id);
+    
+    if (Object.values(METHOD).includes(mode)) {
+        const activeCandidates = e.candidate_json.filter(
+            (candidate) => e.opponents_list.includes(candidate.pk) || candidate.pk === e.candidate_id
+        );
+
+        const candidateTotals = new Map();
+        activeCandidates.forEach(cand => {
+            candidateTotals.set(cand.pk, { popvs: 0, evvs: 0 });
+        });
+
+        let total_v = 0;
+
+        for (const state of t) {
+            for (const candidateResult of state.result) {
+                const candidatePk = candidateResult.candidate;
+                const totals = candidateTotals.get(candidatePk);
+                
+                if (totals) {
+                    totals.popvs += (candidateResult.votes || 0);
+                    totals.evvs += (candidateResult.electoral_votes || 0);
+                }
+                total_v += (candidateResult.votes || 0);
+            }
+        }
+        
+        const finalCandidates = activeCandidates.map(candidate => {
+            const totals = candidateTotals.get(candidate.pk) || { popvs: 0, evvs: 0 };
+            candidate.popvs = totals.popvs;
+            candidate.evvs = totals.evvs;
+            candidate.pvp = total_v > 0 ? (totals.popvs / total_v) : 0;
+            return candidate;
+        });
+
+        const sortedCandidates = finalCandidates.sort((a, b) => b.pvp - a.pvp);
+
+        window.nn2 = sortedCandidates;
+        window.nn3 = sortedCandidates.map(c => c.evvs || 0);
+
+        return [sortedCandidates, window.answerEffects];
+    }
+    
+    return __origGetLatestRes.apply(this, arguments);
+  };
+
 })();
 
 // The footer - taken from TTNW* and rewritten for this mod
