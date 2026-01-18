@@ -36255,12 +36255,14 @@ endingPicker = (out, totv, aa, quickstats) => {
     );
     const stcount = (stateList, cid) => stateList.every(stId => stateWinners.get(stId) === cid);
 
-    if (playerEV >= 340 && !campaignTrail_temp.player_answers.includes(12240)) ctsAchievement("Man of Tomorrow");
-	if (playerEV < 100 && !campaignTrail_temp.player_answers.includes(12240)) ctsAchievement("Code Brown");
+	const clintonNom = campaignTrail_temp.player_answers.includes(12240);
+
+    if (playerEV >= 340 && !clintonNom) ctsAchievement("Man of Tomorrow");
+	if (playerEV < 100 && !clintonNom) ctsAchievement("Code Brown");
     if (playerEV >= 270 && vpcheck == 5) ctsAchievement("Operation BUSH");
-    if (campaignTrail_temp.final_state_results[16]?.result[0]?.candidate === 78) ctsAchievement("California and Coal Country");
-    if (campaignTrail_temp.final_state_results[3]?.result[0]?.candidate === 78 && vpcheck !== 4) ctsAchievement("Chastity");
-	if (playerEV >= 270 && (stateWinners.get(21) !== 78 && stateWinners.get(34) !== 78)) ctsAchievement("Rust in Peace");
+    if (campaignTrail_temp.final_state_results[16]?.result[0]?.candidate === 78 && !clintonNom) ctsAchievement("California and Coal Country");
+    if (campaignTrail_temp.final_state_results[3]?.result[0]?.candidate === 78 && vpcheck !== 4 && !clintonNom) ctsAchievement("Chastity");
+	if (playerEV >= 270 && (stateWinners.get(202) !== 78 && stateWinners.get(215) !== 78)) ctsAchievement("Rust in Peace");
 	if (playerEV >= 270 && campaignTrail_temp.player_answers.some(ans => [1114958, 1114959, 1114960, 1114961].includes(ans))) ctsAchievement("Mourning in America");
 	if (playerEV < 270 && campaignTrail_temp.player_answers.some(ans => [1114958, 1114959, 1114960, 1114961].includes(ans))) ctsAchievement("Like Father, Like Son");
 	if (playerEV >= 270 && campaignTrail_temp.player_answers.some(ans => [2113710].includes(ans))) ctsAchievement("This Is Who We Are");
