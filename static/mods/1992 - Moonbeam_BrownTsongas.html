@@ -6,41 +6,6 @@ new MutationObserver(() => {
 var dncKeynoteSpeaker = "Chris Dodd"
 
 const Dialog = {
-    questionOne:
-        `
-        After shouldering the blame for a series of close statewide losses in the 1990 midterm elections, you have abruptly resigned your post as chairman of the California Democratic Party. Still, there’s some good news: Senator Cranston is retiring, and your people have carried out some polls: his seat is yours if you want it. Yet a higher office is calling your name. The field is weak for the Democratic nomination this year, and you can feel in your soul that you have a shot at the presidency.
-    `
-    ,
-    questionTwo:
-        `
-        The wind whips through your hair, exposing your bald spot for a brief moment, as you stare at a crowd of onlookers in San Francisco’s Union Square, awaiting your announcement that you’re running for the presidency. Before starting your speech, you look closer into their eyes, desperately searching for something more than mild curiosity as to your newest stunt.
-    `
-    ,
-    questionThree:
-        `
-        The economic boom of the 1980’s has seemingly faded away, with unemployment up and productivity down. Despite Bush’s high approval rating, every news report showing starving children and destitute parents fuels the Democratic primary candidates, as does the insurgent candidacy of independent billionaire Ross Perot. How do you take advantage of this situation?
-    `
-    ,
-    questionFour:
-        `
-        After Harkin expectedly won the Iowa caucuses, the big story of the primary was a quite lackluster 60 Minutes interview where odds-on-favorite Bill Clinton denied having sexual relations with Gennifer Flowers. Now, as the numbers come in from New Hampshire, the nation is shocked: Jerry Brown has come out on top. As the other candidates fade, it’s a three-way race between you, Clinton, and a stumbling Tsongas.
-    `
-    ,
-    primaryQ1:
-        `
-        base primary Q, loadbearing. If this shows up during gameplay, either something has gone very wrong or you cheated.
-    `
-    ,
-    conventionDNC:
-        `
-        As bright lights shine directly into your face, a sea of Democrats fills Madison Square Garden, dressed in shades of red, white, and blue. After a keynote speech by Paul Wellstone, they eagerly await you. The hard feelings of the primary have been replaced with unbridled enthusiasm for making you the president, and as you stand backstage, the raw emotions at play almost make you tear up. How do you address them?
-    `
-    ,
-    tsongas:
-        `
-        Your second-greatest rival for the Democratic nomination, Paul Tsongas, now has a spot on your ticket. Together, you span a broad ideological spectrum among different policy issues, especially converging on the environment and especially diverging on the economy, but so far, you’ve both proven adept at tapping into anti-establishment consensus.
-    `
-    ,
     perotDropout:
         `
         Once a serious threat to capture the presidency, Ross Perot’s campaign has sputtered into terminal decline, especially given that you’ve echoed many of his major talking points. On Larry King Live, Perot abruptly announces that he’s dropping out of the race, refusing to endorse either candidate but vaguely suggesting you’re more of a force for change than Bush is. How do you react to this development?
@@ -141,42 +106,42 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 397,
         "fields": {
-            "description": Dialog.questionOne
+            "description": "After shouldering the blame for a series of close statewide losses in the 1990 midterm elections, you have abruptly resigned your post as chairman of the California Democratic Party. Still, there’s some good news: Senator Cranston is retiring, and your people have carried out some polls: his seat is yours if you want it. Yet a higher office is calling your name. The field is weak for the Democratic nomination this year, and you can feel in your soul that you have a shot at the presidency."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 317,
         "fields": {
-            "description": Dialog.questionTwo
+            "description": "The wind whips through your hair, exposing your bald spot for a brief moment, as you stare at a crowd of onlookers in San Francisco’s Union Square, awaiting your announcement that you’re running for the presidency. Before starting your speech, you look closer into their eyes, desperately searching for something more than mild curiosity as to your newest stunt."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 367,
         "fields": {
-            "description": Dialog.questionThree
+            "description": "The economic boom of the 1980’s has seemingly faded away, with unemployment up and productivity down. Despite Bush’s high approval rating, every news report showing starving children and destitute parents fuels the Democratic primary candidates, as does the insurgent candidacy of independent billionaire Ross Perot. How do you take advantage of this situation?"
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 370,
         "fields": {
-            "description": Dialog.questionFour
+            "description": "After Harkin expectedly won the Iowa caucuses, the big story of the primary was a quite lackluster 60 Minutes interview where odds-on-favorite Bill Clinton denied having sexual relations with Gennifer Flowers. Now, as the numbers come in from New Hampshire, the nation is shocked: Jerry Brown has come out on top. As the other candidates fade, it’s a three-way race between you, Clinton, and a stumbling Tsongas."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 344,
         "fields": {
-            "description": Dialog.primaryQ1
+            "description": "base primary Q, loadbearing. If this shows up during gameplay, either something has gone very wrong or you cheated."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 349,
         "fields": {
-            "description": Dialog.conventionDNC
+            "description": "As bright lights shine directly into your face, a sea of Democrats fills Madison Square Garden, dressed in shades of red, white, and blue. After a keynote speech by Paul Wellstone, they eagerly await you. The hard feelings of the primary have been replaced with unbridled enthusiasm for making you the president, and as you stand backstage, the raw emotions at play almost make you tear up. How do you address them?"
         }
     },
     {
@@ -35270,7 +35235,7 @@ cyoAdventure = function (a) {
 	else if (bonzo === true) {
 		if (estab <= 1) {
 			campaignTrail_temp.questions_json[15] = tunnel(11112639); // High priority
-		} else if (estab >= 1) {
+		} else {
 			campaignTrail_temp.questions_json[15] = tunnel(11112661); // High priority
 		}
 	}
@@ -35376,12 +35341,19 @@ cyoAdventure = function (a) {
 	}
 	else if (bonzo === true) {
 		campaignTrail_temp.questions_json[19] = tunnel(11112756);
+		campaignTrail_temp.questions_json[19].fields.description =
+		"Bush is running like a man assured of victory; no small part of that is the full weight of the Reagan White House behind him. One day, Jodie and Pat corner you with a new poll: voters don’t just think Bush understands foreign policy, they think Reagan is lending him credibility you can’t match. They give you an ultimatum: break that spell and do something, anything, about foreign policy, or they walk the plank.";
 	}
 	else if (momentum === 1) {
 		campaignTrail_temp.questions_json[19] = tunnel(114561);
 	}
 	else if (momentum === 2) {
 		campaignTrail_temp.questions_json[19] = tunnel(114578);
+	}
+	else if (momentum < 1) {
+		campaignTrail_temp.questions_json[19] = tunnel(114561);
+		campaignTrail_temp.questions_json[19].fields.description =
+		"Right now, George Bush is running like a man assured of victory, eager to repeat his landslide against Dukakis. One day, Jodie and Pat corner you and force you to look at a new poll whose findings claim that your poor polling performance is due to the widespread perception that Bush knows how to lead the nation on the world stage better than you do. They issue an ultimatum: do something, anything, about foreign policy, or they leave the campaign.";
 	}
 
 
@@ -35459,6 +35431,7 @@ cyoAdventure = function (a) {
     } else if ((ans === 3361 || ans === 114568 || ans === 114585) && hawktuah === 2) {
         if (ans === 3464 || ans === 3564 || ans === 21395 || ans === 21317 || ans === 21423) {
             /// Japan Buddhism
+			answerSwapper(114973, 114992, false);
             campaignTrail_temp.questions_json[20] = tunnel(114963);
         } else {  /// Japan Normal
             campaignTrail_temp.questions_json[20] = tunnel(115025);
@@ -35707,6 +35680,9 @@ cyoAdventure = function (a) {
 	  [114715, "From Linda to Lizzie"],
 	  [1114870, "Long May You Run"],
 	  [115168.1, "Mr. Universe"],
+	  [114879, "Good Intentions"],
+	  [114926, "Damned Foolish Thing in the Balkans"],
+	  [114992, "Shinnichi"],
 	  [114887.1, "Специальная операция"],
 	  [114919, "За ваше здоровье!"],
 	  [115221, "Slapshot"],
@@ -35997,7 +35973,10 @@ HistEV = [274, 264, 0, 0];
 HistPV = ["50,261,112 ", "50,452,809", "510,193", "157,264 "];
 HistPVP = ["49.6%", "49.8%", "0.5%", "0.2%"];
 
-function onGameWindowChangeCandidates() {
+let observerRunning = false;
+let processedNodes = new Set();
+
+function handleCandidateTables() {
     const resultsTableHolder = document.getElementById("overall_details_container");
 
     if (!resultsTableHolder || resultsTableHolder.classList.contains("done")) {
@@ -36008,27 +35987,29 @@ function onGameWindowChangeCandidates() {
 
     const processTable = (table, lookupData) => {
         if (!table) return;
+
         const tbody = table.tBodies[0];
         if (!tbody) return;
 
         const rows = tbody.rows;
-        if (rows.length === 0) return;
+        if (!rows.length) return;
 
+        // header
         const headerRow = rows[0];
         const th = document.createElement("th");
-        th.innerHTML = '<span style="font-weight:bold">Running Mate</span>';
+        th.innerHTML = "Running Mate";
 
-        if (headerRow.cells.length > 0) {
+        if (headerRow.cells.length > 1) {
             headerRow.insertBefore(th, headerRow.cells[1]);
         } else {
             headerRow.appendChild(th);
         }
 
+        // rows
         for (let i = 1; i < rows.length; i++) {
             const row = rows[i];
             const nameCell = row.cells[0];
             const rawName = nameCell ? nameCell.innerText : "";
-
             const name = rawName.replace(/-/g, "").trim();
 
             const cell = row.insertCell(1);
@@ -36040,20 +36021,106 @@ function onGameWindowChangeCandidates() {
 
     const tables = resultsTableHolder.getElementsByTagName("table");
 
-    if (tables.length > 0) {
-        processTable(tables[0], window.vpTable);
+    if (tables[0]) processTable(tables[0], window.vpTable);
+    if (tables[1]) processTable(tables[1], window.vpTableHistorical);
+}
+
+// For the faithless electors table change
+// taken from 2012 Shattered, adapted to here
+function handleFaithlessElectorsAndLayout() {
+    const overallDetails = document.getElementById("overall_election_details");
+    const finalResultsTable = document.querySelector("table.final_results_table");
+
+    // only run on results screens
+    if (overallDetails || finalResultsTable) {
+
+        const updateTableFlourish = (tableElement, evCellIndex) => {
+            const rows = tableElement.querySelectorAll("tbody > tr");
+            let marrouEv = 0;
+
+            rows.forEach(row => {
+                const name = row.cells[0]?.textContent || "";
+                if (name.includes("Andre Marrou") || name.includes("Marrou")) {
+                    marrouEv = parseInt(row.cells[evCellIndex]?.textContent) || 0;
+                }
+            });
+
+            if (marrouEv > 0) {
+                rows.forEach(row => {
+                    const cell = row.cells[0];
+                    const evCell = row.cells[evCellIndex];
+
+                    if (
+                        cell &&
+                        evCell &&
+                        cell.textContent.includes("Andre Marrou") &&
+                        !evCell.innerHTML.includes("<sup")
+                    ) {
+                        evCell.innerHTML = `${marrouEv} <sup style="color:#231de4; text-decoration:underline; cursor:help;" title="Electoral votes adjusted due to faithless electors.">[*]</sup>`;
+                    }
+                });
+            }
+        };
+
+        if (overallDetails) updateTableFlourish(overallDetails, 2);
+        if (finalResultsTable) updateTableFlourish(finalResultsTable, 1);
     }
 
-    if (tables.length > 1) {
-        processTable(tables[1], window.vpTableHistorical);
+    // cleanup overflow
+    const overallResult = document.getElementById("overall_result");
+    if (overallResult && !processedNodes.has(overallResult)) {
+        overallResult.style.overflow = "auto";
+        processedNodes.add(overallResult);
+    }
+
+    // mark processed elements
+    const elementIDs = [
+        "overall_vote_statistics",
+        "state_result_data_summary",
+        "overall_details_container"
+    ];
+
+    elementIDs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && !processedNodes.has(el)) {
+            processedNodes.add(el);
+        }
+    });
+
+    // container sizing
+    const resultsContainer = document.getElementById("results_container");
+    const chart = document.getElementById("myChart");
+
+    if (resultsContainer && !processedNodes.has(resultsContainer)) {
+        if (!chart) {
+            resultsContainer.style.height = "98%";
+            resultsContainer.style.overflow = "scroll";
+        } else {
+            const mca = document.getElementById("main_content_area");
+            if (mca) mca.style.height = "80%";
+        }
+        processedNodes.add(resultsContainer);
     }
 }
 
-const gameWindowNode = document.getElementById("game_window");
-const candidateWatcherConfig = { attributes: true, childList: true, subtree: true };
+function handleGameWindowMutations(mutationsList, observer) {
+    if (observerRunning) return;
+    observerRunning = true;
 
-const candidateObserver = new MutationObserver(onGameWindowChangeCandidates);
-candidateObserver.observe(gameWindowNode, candidateWatcherConfig);
+    handleCandidateTables();
+    handleFaithlessElectorsAndLayout();
+
+    observerRunning = false;
+}
+
+const gameWindowNode = document.getElementById("game_window");
+
+const unifiedObserver = new MutationObserver(handleGameWindowMutations);
+unifiedObserver.observe(gameWindowNode, {
+    attributes: true,
+    childList: true,
+    subtree: true
+});
 
 // constructs endings based on header and pages
 construct = (a = 1) => {
