@@ -703,9 +703,9 @@ const pile = `
 	  flex-direction: column;
 	}
 
-	.inner_window_question p:last-of-type {
-	  margin: .5rem;
-	}
+	.inner_window_question p:last-of-type { /* so this doesn't overlap with the candidate images */
+      margin: 3.5em auto .5em auto;
+    }
 
 	.inner_window_question h3 .mytooltip {
 	  background-color: lightskyblue;
@@ -1211,6 +1211,10 @@ const pile = `
 				width: 60%;
 			}
 
+			.inner_window_question p:last-of-type {
+                margin: .5em auto;
+            }
+
 			}
 
 `;
@@ -1287,7 +1291,7 @@ campaignTrail_temp.achievements = {
         "description": "Lose with under 100 electoral votes.",
         "cannotBeCheated": true
     },
-	"Chasity": {
+	"Chastity": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Win the Natural State without needing to debase yourself.",
         "cannotBeCheated": true

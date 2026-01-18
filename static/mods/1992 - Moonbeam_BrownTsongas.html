@@ -35027,7 +35027,7 @@ function tunnel(new_q) {
 
     if (!e.questions_json) return undefined;
 
-    const match = e.questions_json.find(f => f.pk === new_q);
+    const match = e.questions_json.find(f => f && f.pk === new_q);
 
     if (!match) {
         console.error(`pk value ${new_q} not found in questions_json`);
@@ -35155,30 +35155,26 @@ cyoAdventure = function (a) {
 
 
 
-
 	/// Working with Clinton
-	if (patvp === true) {
-		campaignTrail_temp.questions_json[23] = tunnel(11112574);
-	}
-	else if (bonzo === true) {
-		if (moonbeam > 1) {
-			campaignTrail_temp.questions_json[23] = tunnel(11112885);
-		} else {
-			campaignTrail_temp.questions_json[23] = tunnel(11112864);
-		}
-	}
-	else if (ans === 3410) {
-		campaignTrail_temp.questions_json[4] = tunnel(384);
-		campaignTrail_temp.questions_json[23] = tunnel(11112233);
-	}
-	else if (estab < 1) {
-		campaignTrail_temp.questions_json[4] = tunnel(383);
-		//// campaignTrail_temp.questions_json[23] = tunnel(392);
-	}
-	else {
-		campaignTrail_temp.questions_json[4] = tunnel(21379);
-		campaignTrail_temp.questions_json[23] = tunnel(11112233);
-	}
+    if (patvp === true) {
+        campaignTrail_temp.questions_json[23] = tunnel(11112574);
+    } else if (bonzo === true) {
+        if (moonbeam > 1) {
+        campaignTrail_temp.questions_json[23] = tunnel(11112885);
+        } else {
+        campaignTrail_temp.questions_json[23] = tunnel(11112864);
+        }
+    } else if (ans === 3410) {
+        campaignTrail_temp.questions_json[4] = tunnel(384);
+        campaignTrail_temp.questions_json[23] = tunnel(11112233);
+    } else if ((estab < 1)) {
+        campaignTrail_temp.questions_json[4] = tunnel(383);
+    	//// campaignTrail_temp.questions_json[23] = tunnel(392);
+    } else {
+        campaignTrail_temp.questions_json[4] = tunnel(21379);
+        campaignTrail_temp.questions_json[23] = tunnel(11112233);
+    }
+
 
 
     /// Democrip Convention (Wellstone is default)
@@ -35391,15 +35387,13 @@ cyoAdventure = function (a) {
 
 	if (patvp === true) {
 		campaignTrail_temp.questions_json[20] = tunnel(11112532);
-		return;
 	}
 	else if (bonzo === true) {
 		campaignTrail_temp.questions_json[20] = tunnel(11112778);
-		return;
 	}
     // INTERNATIONAL SHIT VERSION 0.3 (why tf did we add this system)
     //WE
-    if ((ans === 1907464 || ans === 114562 || ans === 115255 || ans === 114579) && hawktuah < -1) {
+    else if ((ans === 1907464 || ans === 114562 || ans === 115255 || ans === 114579) && hawktuah < -1) {
         if (romanpopery > 2) {  /// Italy Catholic
             campaignTrail_temp.questions_json[20] = tunnel(114610);
         } else if (!donationcap) {  /// Italy Berlusconi
@@ -35427,7 +35421,7 @@ cyoAdventure = function (a) {
         }
     }
     //EE
-    if ((ans === 3360 || ans === 114564 || ans === 114581) && hawktuah < -1) {
+    else if ((ans === 3360 || ans === 114564 || ans === 114581) && hawktuah < -1) {
         if (estab > 0) {  /// Russia High Estab
             campaignTrail_temp.questions_json[20] = tunnel(114886);
         } else {  /// Russia Low Estab
@@ -35447,7 +35441,7 @@ cyoAdventure = function (a) {
         campaignTrail_temp.questions_json[20] = tunnel(114858);
     }
     //AS
-    if ((ans === 3361 || ans === 114568 || ans === 114585) && hawktuah === -3) {
+    else if ((ans === 3361 || ans === 114568 || ans === 114585) && hawktuah === -3) {
         if (e.running_mate_last_name == "Pryor") {  /// Socialism with Arkansas Characteristics
             campaignTrail_temp.questions_json[20] = tunnel(115025);
         } else {  /// China
@@ -35471,7 +35465,7 @@ cyoAdventure = function (a) {
         }
     }
     //NA
-    if ((ans === 3362 || ans === 114572 || ans === 114589) && hawktuah === -3) {
+    else if ((ans === 3362 || ans === 114572 || ans === 114589) && hawktuah === -3) {
         if (e.running_mate_last_name == "Tsongas") {  /// Canada UNDISPUTED UNREFUTED G O A T
             campaignTrail_temp.questions_json[20] = tunnel(115215);
         } else {  /// Canada normal
@@ -35509,19 +35503,21 @@ cyoAdventure = function (a) {
 			rossvar > 0 ? tunnel(11112181) : tunnel(11112155);
 	}
 	else {
-		campaignTrail_temp.questions_json[21] = tunnel(393);
+		campaignTrail_temp.questions_json[21] = tunnel(11112155);
 	}
 
 
 
     //// Reagan shit that I want here for structural reasons
-	if (bonzo === true) {
+	if (patvp == true) {
+		campaignTrail_temp.questions_json[22] = tunnel(11112554);
+	  } else if (bonzo == true) {
 		if (estab > 1) {
-			campaignTrail_temp.questions_json[22] = tunnel(11112822);
-		} else if (estab < 1) {
-			campaignTrail_temp.questions_json[22] = tunnel(11112843);
+		  campaignTrail_temp.questions_json[22] = tunnel(11112822);
+		} else {
+		  campaignTrail_temp.questions_json[22] = tunnel(11112843);
 		}
-	}
+	  }
 
 
     /// BUSHINATOR 2
@@ -35621,10 +35617,6 @@ cyoAdventure = function (a) {
 	if (moonbeam >= 2) {
         answerSwapper(115168, 115168.1, false);
     }
-	if (orange >= 3) {
-        answerSwapper(113528, 113528.1, false);
-    }
-
 	if (orange >= 3) {
         answerSwapper(113528, 113528.1, false);
     }
@@ -36200,7 +36192,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 	if (playerEV < 100 && !campaignTrail_temp.player_answers.includes(12240)) ctsAchievement("Code Brown");
     if (playerEV >= 270 && vpcheck == 5) ctsAchievement("Operation BUSH");
     if (campaignTrail_temp.final_state_results[16]?.result[0]?.candidate === 78) ctsAchievement("California and Coal Country");
-    if (campaignTrail_temp.final_state_results[3]?.result[0]?.candidate === 78 && (!vpcheck == 4)) ctsAchievement("Chasity");
+    if (campaignTrail_temp.final_state_results[3]?.result[0]?.candidate === 78 && vpcheck !== 4) ctsAchievement("Chastity");
 	if (playerEV >= 270 && (stateWinners.get(21) !== 78 && stateWinners.get(34) !== 78)) ctsAchievement("Rust in Peace");
 	if (playerEV >= 270 && campaignTrail_temp.player_answers.some(ans => [1114958, 1114959, 1114960, 1114961].includes(ans))) ctsAchievement("Mourning in America");
 	if (playerEV < 270 && campaignTrail_temp.player_answers.some(ans => [1114958, 1114959, 1114960, 1114961].includes(ans))) ctsAchievement("Like Father, Like Son");
