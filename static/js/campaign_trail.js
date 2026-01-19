@@ -1346,6 +1346,28 @@ function questionHTML() {
   ports.innerHTML = l;
   gameWindow.appendChild(ports);
 
+  e.code2Loaded = true;
+
+  const $answerButton = $("#answer_select_button");
+  $answerButton.off('click').on('click', (evt) => {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+    onAnswerSelectButtonClicked(evt);
+  });
+
+  $("#view_electoral_map").off("click").on("click", (evt) => {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+    openMap(A(2));
+  });
+
+  if (Number(e.game_type_id) === 3) {
+      $("#shining_menu_button").off("click").on("click", (evt) => {
+          evt.preventDefault();
+          shining_menu(A(2));
+      });
+  }
+
   // $("#game_window").html(l)
 }
 
@@ -2186,31 +2208,7 @@ function renderOptions(electionId, candId, runId) {
       difficulty_level_id: Number(campaignTrail_temp.difficulty_level_id),
       game_start_logging_id: Number(campaignTrail_temp.game_start_logging_id),
     });
-    // Set up the interval for adding event listeners
-    const important_code = setInterval(() => {
-      const answerButton = document.querySelector("#answer_select_button");
-      if (answerButton) {
-        // Use jQuery's off() to remove all click handlers
-        const $answerButton = $(answerButton);
-        $answerButton.off('click');
-
-        // Add the click handler using jQuery
-        $answerButton.on('click', (e) => {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          onAnswerSelectButtonClicked(e);
-        });
-
-        // Set up map view click handler
-        $("#view_electoral_map").off("click").on("click", (e) => {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          openMap(A(2));
-        });
-
-        clearInterval(important_code);
-      }
-    }, 1000);
+    
     const tempFuncO = (e) => {
       if (e.collect_results) {
         const a = A(2);
@@ -3951,7 +3949,23 @@ const gameStart = (a) => {
   `;
 
   const electionId = document.getElementById("election_id");
+  const credits = document.getElementById("credits");
+
+  const updateCredits = () => {
+    const val = Number(electionId.value);
+    if (val === 69) {
+      credits.innerHTML = "This scenario was made by Tex.";
+    } else if (val > -1 && !modded) {
+      credits.innerHTML = "This scenario was made by Dan Bryan.";
+    } else {
+      credits.innerHTML = `This scenario was made by ${e.credits}.`;
+    }
+  };
+
   electionId.value = e.election_id;
+  
+  updateCredits();
+
   electionId.addEventListener("change", () => {
     e.election_id = Number(electionId.value);
     const selectedElection = PROPS.ELECTIONS.get(String(e.election_id));
@@ -3962,6 +3976,8 @@ const gameStart = (a) => {
       </div>
       <div id="election_summary">${selectedElection.summary}</div>
     `;
+    
+    updateCredits();
   });
 
   document.getElementById("election_id_button").addEventListener("click", candSel);
@@ -4056,38 +4072,4 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     });
   });
-});
-
-let curElectSelect = null;
-
-const fix1964 = () => {
-  const electionSelect = document.querySelector("#election_id");
-  const electionId = Number(electionSelect.value);
-  const credits = document.querySelector("#credits");
-  if (electionId === 69) {
-    credits.innerHTML = "This scenario was made by Tex.";
-  } else if (electionId > -1 && !modded) {
-    credits.innerHTML = "This scenario was made by Dan Bryan.";
-  }
-};
-
-const fix1964Observer = new MutationObserver((mut, obs) => {
-  const newElectSelect = document.querySelector("#election_id");
-  if (newElectSelect && newElectSelect !== curElectSelect) {
-    if (curElectSelect) {
-      curElectSelect.removeEventListener("change", fix1964);
-    }
-    curElectSelect = newElectSelect;
-    curElectSelect.addEventListener("change", fix1964);
-    fix1964();
-  }
-  if (document.querySelector(".inner_window_question")) {
-    e.code2Loaded = true;
-    obs.disconnect();
-  }
-});
-
-fix1964Observer.observe(document.body, {
-  childList: true,
-  subtree: true,
 });
