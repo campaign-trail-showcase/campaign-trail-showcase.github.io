@@ -1,4 +1,4 @@
-RecReading=true
+RecReading = true
 campaignTrail_temp.global_parameter_json = [
     {
         "model": "campaign_trail.global_parameter",
@@ -22,9 +22,9 @@ campaignTrail_temp.global_parameter_json = [
             "no_state_map_color_hex": "#999999"
         }
     }
-  ]
-  
-  const recommendedReadingContent = `
+]
+
+const recommendedReadingContent = `
   <h1 style="text-align: center;"><strong>Moonbeam Credits</strong></h1>
 
 <ul style="list-style: none; padding: 0; max-width: 700px; margin: 0 auto;">
@@ -37,7 +37,7 @@ campaignTrail_temp.global_parameter_json = [
 
   <li style="margin-top: 1em;">
     <strong>Much thanks to:</strong><br>
-    Mack A. Rony, TerryJerry, Kaylee, Nidoras, DayDoveRomantic, Librasaurusx, Karton, and DKing  
+    Mack A. Rony, TerryJerry, Kaylee, Nidoras, DayDoveRomantic, Librasaurusx, Karton, and DKing
     for useful advice
   </li>
 
@@ -60,22 +60,26 @@ campaignTrail_temp.global_parameter_json = [
   </li>
 
   <li>
+    EmpiresUnited — for helping us fix issues with the achievements & other tunneling issues
+  </li>
+
+  <li>
     Jerry Brown — despite his imperfections, this mod would not exist without his strength of character and willingness to fight for his beliefs
   </li>
 </ul>
 `;
-  
-  campaignTrail_temp.election_json = [
+
+campaignTrail_temp.election_json = [
     {
         "model": "campaign_trail.election",
         "pk": 9,
         "fields": {
             "year": 1992,
-            "summary": 
-            `
+            "summary":
+                `
                 <p>
-                    In early 1991, George H.W. Bush appeared invincible. 
-                    Coming off of the high of Desert Storm with an 89% approval rating to show for it, his respectable challengers dropped out one by one, leaving the Democratic nomination for president a group of has-beens, never-weres, and never-will-bes. 
+                    In early 1991, George H.W. Bush appeared invincible.
+                    Coming off of the high of Desert Storm with an 89% approval rating to show for it, his respectable challengers dropped out one by one, leaving the Democratic nomination for president a group of has-beens, never-weres, and never-will-bes.
                     From this circus emerged one man: former California Governor Jerry Brown, Moonbeam himself, back to protect the Earth from the scourge of Bush.
                 </p>
                 <p>
@@ -93,11 +97,11 @@ campaignTrail_temp.global_parameter_json = [
             "display_year": "1992 - Moonbeam"
         }
     }
-  ]
-  
-  campaignTrail_temp.election_json[0].fields.recommended_reading = recommendedReadingContent;
-  
-  campaignTrail_temp.candidate_json = [
+]
+
+campaignTrail_temp.election_json[0].fields.recommended_reading = recommendedReadingContent;
+
+campaignTrail_temp.candidate_json = [
     {
         "model": "campaign_trail.candidate",
         "pk": 78,
@@ -110,16 +114,16 @@ campaignTrail_temp.global_parameter_json = [
             "priority": 1,
             "description": `
                 <p>
-                    Jerry Brown doesn’t need America. 
-                    Jerry Brown doesn’t need anything. 
-                    In another universe, Jerry could’ve easily spent his whole life in solitude learning the truths of the world through meditation, or perhaps helping the poor through their struggles on the mortal plane. 
+                    Jerry Brown doesn’t need America.
+                    Jerry Brown doesn’t need anything.
+                    In another universe, Jerry could’ve easily spent his whole life in solitude learning the truths of the world through meditation, or perhaps helping the poor through their struggles on the mortal plane.
                     He already avenged his father and took California back, already showed the people how to govern as a truly honest citizen, already embraced the limelight of political celebrity, and already proved that he could throw it all away for a higher calling.
                 </p>
                 <p>
-                    America, however? America needs Jerry Brown. 
-                    Since he last vied for the presidency, the dark forces that his father failed to contain have swept across the nation and laid waste to the great nation he once knew. 
-                    The great capital of Washington D.C. has been transformed into a citadel of corruption, with Reagan’s pawn, Bush, serving as the false king of a uniparty Congress whose only goals are to enrich themselves and their decadent corporate overlords. 
-                    With nobody else left to challenge this new oligarchy, the man they call Moonbeam knows that he is the nation’s last hope. 
+                    America, however? America needs Jerry Brown.
+                    Since he last vied for the presidency, the dark forces that his father failed to contain have swept across the nation and laid waste to the great nation he once knew.
+                    The great capital of Washington D.C. has been transformed into a citadel of corruption, with Reagan’s pawn, Bush, serving as the false king of a uniparty Congress whose only goals are to enrich themselves and their decadent corporate overlords.
+                    With nobody else left to challenge this new oligarchy, the man they call Moonbeam knows that he is the nation’s last hope.
                     As he begins his fight to take back America, Brown knows that the only way to win is not to campaign for the people–it’s to enlighten them.
                 </p>
             `,
@@ -144,9 +148,9 @@ campaignTrail_temp.global_parameter_json = [
             "election": 9,
             "party": "Republican",
             "state": "Texas",
-            "priority": 1,
+            "priority": 2,
             "description": "<p>NO NEW TAXES?!?!?!</p>",
-            "color_hex": "#7b000c", 
+            "color_hex": "#7b000c",
             "secondary_color_hex": null,
             "is_active": 0,
             "image_url": "https://i.imgur.com/nXGrFXX.png",
@@ -167,7 +171,7 @@ campaignTrail_temp.global_parameter_json = [
             "election": 9,
             "party": "Independent",
             "state": "Texas",
-            "priority": 1,
+            "priority": 3,
             "description": "<p>Put description here</p>",
             "color_hex": "#9e5300",
             "secondary_color_hex": null,
@@ -182,208 +186,208 @@ campaignTrail_temp.global_parameter_json = [
         }
     },
     {
-      "model": "campaign_trail.candidate",
-      "pk": 80,
-      "fields": {
-          "first_name": "Andre",
-          "last_name": "Marrou",
-          "election": 9,
-          "party": "Lolbertarian",
-          "state": "Ala$KKKa",
-          "priority": 1,
-          "description": "<p>Mr. Marrou, if you break my code again I am going to flip out.</p>",
-          "color_hex": "#e4b81d",
-          "secondary_color_hex": null,
-          "is_active": 0,
-          "image_url": "https://i.imgur.com/4hRqb64.png",
-          "electoral_victory_message": "ron paul 08",
-          "electoral_loss_message": "This guy loses!",
-          "no_electoral_majority_message": "We all win?",
-          "description_as_running_mate": null,
-          "candidate_score": 1,
-          "running_mate": false
-      }
-  },
+        "model": "campaign_trail.candidate",
+        "pk": 80,
+        "fields": {
+            "first_name": "Andre",
+            "last_name": "Marrou",
+            "election": 9,
+            "party": "Lolbertarian",
+            "state": "Ala$KKKa",
+            "priority": 4,
+            "description": "<p>Mr. Marrou, if you break my code again I am going to flip out.</p>",
+            "color_hex": "#e4b81d",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/4hRqb64.png",
+            "electoral_victory_message": "ron paul 08",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
     {
-      "model": "campaign_trail.candidate",
-      "pk": 155,
-      "fields": {
-          "first_name": "Paul",
-          "last_name": "Tsongas",
-          "election": 9,
-          "party": "Democrat",
-          "state": "Massachusetts",
-          "priority": 1,
-          "description": "<p>Put description here</p>",
-          "color_hex": "#0000c7",
-          "secondary_color_hex": null,
-          "is_active": 0,
-          "image_url": "https://i.imgur.com/Is9GRlR.jpg",
-          "electoral_victory_message": "This guy wins!",
-          "electoral_loss_message": "This guy loses!",
-          "no_electoral_majority_message": "We all win?",
-          "description_as_running_mate": `
+        "model": "campaign_trail.candidate",
+        "pk": 155,
+        "fields": {
+            "first_name": "Paul",
+            "last_name": "Tsongas",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Massachusetts",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000c7",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/Is9GRlR.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": `
             <p>
-                Just when America thought it had beaten its addiction to Massachusetts liberals of Greek descent, they got pulled back in when Paul Tsongas did far better than anyone had expected in the primaries. 
-                Tsongas has an interesting mindset, matching you step for step in your social liberalism and populist worries about the state of the nation. 
+                Just when America thought it had beaten its addiction to Massachusetts liberals of Greek descent, they got pulled back in when Paul Tsongas did far better than anyone had expected in the primaries.
+                Tsongas has an interesting mindset, matching you step for step in your social liberalism and populist worries about the state of the nation.
                 But if people called you fiscally conservative, Tsongas seems like a Republican with his fervent belief that Reaganomics has succeeded and that businesses, even dangerous, soulless, conglomerates, are the solution to America’s problems and not the problem itself.
             </p>
             <p>
-                Still, Tsongas just has a certain je sais ne quoi: for whatever the reason, people just really want to vote for the guy. 
-                Yet behind his political strengths, substantial health concerns remain about his ability to survive the next four years. 
-                Additionally, the regional appeal of a New Englander works directly against your interests, leaving Middle America wide open for the “Texan” Bush and Hoosier Quayle to carve up. 
+                Still, Tsongas just has a certain je sais ne quoi: for whatever the reason, people just really want to vote for the guy.
+                Yet behind his political strengths, substantial health concerns remain about his ability to survive the next four years.
+                Additionally, the regional appeal of a New Englander works directly against your interests, leaving Middle America wide open for the “Texan” Bush and Hoosier Quayle to carve up.
                 Ultimately, Tsongas is a gamble, one with the possibility to send you to the White House or to send you to the same electoral fate as the last Massachusetts Greek.
             </p>
           `,
-          "candidate_score": 1,
-          "running_mate": true
-      }
-  },
-  {
-      "model": "campaign_trail.candidate",
-      "pk": 156,
-      "fields": {
-          "first_name": "Dick",
-          "last_name": "Gephardt",
-          "election": 9,
-          "party": "Democrat",
-          "state": "Missouri",
-          "priority": 1,
-          "description": "<p>Put description here</p>",
-          "color_hex": "#0000c7",
-          "secondary_color_hex": null,
-          "is_active": 0,
-          "image_url": "https://i.imgur.com/ifAfkLb.png",
-          "electoral_victory_message": "This guy wins!",
-          "electoral_loss_message": "This guy loses!",
-          "no_electoral_majority_message": "We all win?",
-          "description_as_running_mate": `
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 156,
+        "fields": {
+            "first_name": "Dick",
+            "last_name": "Gephardt",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Missouri",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000c7",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/ifAfkLb.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": `
           <p>
-            There may be no more loyal soldier to the Democratic party than Dick Gephardt. 
-            Gephardt has a few ideas that he genuinely believes in–specifically, his opposition to NAFTA–but beyond that, he will do absolutely anything if it means helping the party. 
+            There may be no more loyal soldier to the Democratic party than Dick Gephardt.
+            Gephardt has a few ideas that he genuinely believes in–specifically, his opposition to NAFTA–but beyond that, he will do absolutely anything if it means helping the party.
             Unlike any number of party loyalists in safe districts, though, Gephardt is the House Majority Leader and a former presidential candidate, and easily has both the polish to share the national spotlight with you and the mettle to actually work with you should you win the election.
           </p>
           <p>
-            The benefits don’t end there: as a Missourian and a representative from a working-class district of St. Louis, Gephardt will help counter the image of you as a coastal elite and put you on the inner track towards sweeping the industrial Midwest. 
-            However, there’s a certain air to Gephardt that suggests he’s maybe a little too close to the party establishment. 
+            The benefits don’t end there: as a Missourian and a representative from a working-class district of St. Louis, Gephardt will help counter the image of you as a coastal elite and put you on the inner track towards sweeping the industrial Midwest.
+            However, there’s a certain air to Gephardt that suggests he’s maybe a little too close to the party establishment.
             Maybe it’s the flip-flops, maybe it’s his evolving relationship with money, and maybe it’s the hair and eyebrow combination, but something tells you that while Dick might be willing to be on the ticket should you play your cards right, you’ll never truly be on the same wavelength.
           <p>
           `,
-          "candidate_score": 1,
-          "running_mate": true
-      }
-  },
-  {
-      "model": "campaign_trail.candidate",
-      "pk": 157,
-      "fields": {
-          "first_name": "Bill",
-          "last_name": "Bradley",
-          "election": 9,
-          "party": "Democrat",
-          "state": "New Jersey",
-          "priority": 1,
-          "description": "<p>Put description here</p>",
-          "color_hex": "#0000c7",
-          "secondary_color_hex": null,
-          "is_active": 0,
-          "image_url": "https://i.imgur.com/OL62Lw0.jpg",
-          "electoral_victory_message": "This guy wins!",
-          "electoral_loss_message": "This guy loses!",
-          "no_electoral_majority_message": "We all win?",
-          "description_as_running_mate": `
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 157,
+        "fields": {
+            "first_name": "Bill",
+            "last_name": "Bradley",
+            "election": 9,
+            "party": "Democrat",
+            "state": "New Jersey",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000c7",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/OL62Lw0.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": `
             <p>
-            Calling Bill Bradley a winner seemingly devalues the word: Bradley is a champion on the level of Hercules, an unstoppable combination of brain and brawn. 
-            Bradley was the best high school basketball player in the country before becoming the best college player at Princeton, squeezing in an Olympic gold medal somewhere along the way. 
-            Following a quick stint as a Rhodes scholar, where he won a European basketball title while playing on the weekends, he then went to the NBA and carved out a Hall of Fame career, winning two championships. 
+            Calling Bill Bradley a winner seemingly devalues the word: Bradley is a champion on the level of Hercules, an unstoppable combination of brain and brawn.
+            Bradley was the best high school basketball player in the country before becoming the best college player at Princeton, squeezing in an Olympic gold medal somewhere along the way.
+            Following a quick stint as a Rhodes scholar, where he won a European basketball title while playing on the weekends, he then went to the NBA and carved out a Hall of Fame career, winning two championships.
             Then, the year after he retired, he was elected to the United States Senate from New Jersey.
             </p>
             <p>
-            And yet, after an embarrassingly close reelection in 1990, Bradley’s career is at a crossroads. 
-            He’s ambitious, but has doubts about the presidency. 
-            He’s strong, but often comes off as cold. 
-            He’s smart, but he’s operating at such a high level that he often seems aloof. 
-            Still, he offers a desperately-needed balance to Governor Moonbeam. 
-            By becoming your running mate, Bradley can offer a reasoned, rational balance to your idealism and make those ideas seem practical. 
+            And yet, after an embarrassingly close reelection in 1990, Bradley’s career is at a crossroads.
+            He’s ambitious, but has doubts about the presidency.
+            He’s strong, but often comes off as cold.
+            He’s smart, but he’s operating at such a high level that he often seems aloof.
+            Still, he offers a desperately-needed balance to Governor Moonbeam.
+            By becoming your running mate, Bradley can offer a reasoned, rational balance to your idealism and make those ideas seem practical.
             Once he gets in front of the national spotlight, he can finally show the people what a real winner looks like.
             </p>
           `,
-          "candidate_score": 1,
-          "running_mate": true
-      }
-  },
-  {
-      "model": "campaign_trail.candidate",
-      "pk": 158,
-      "fields": {
-          "first_name": "David",
-          "last_name": "Pryor",
-          "election": 9,
-          "party": "Democrat",
-          "state": "Arkansas",
-          "priority": 1,
-          "description": "<p>Put description here</p>",
-          "color_hex": "#0000c7",
-          "secondary_color_hex": null,
-          "is_active": 0,
-          "image_url": "https://i.imgur.com/3ScPFF4.png",
-          "electoral_victory_message": "This guy wins!",
-          "electoral_loss_message": "This guy loses!",
-          "no_electoral_majority_message": "We all win?",
-          "description_as_running_mate": 
-          `
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 158,
+        "fields": {
+            "first_name": "David",
+            "last_name": "Pryor",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Arkansas",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000c7",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/3ScPFF4.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate":
+                `
           <p>
-          David Pryor is a true public servant, having served in just about every possible elected position in his home state of Arkansas, spanning both chambers of the state and federal legislature and the governorship. 
-          Boasting a witty, homespun style of retail politics combined with careful moderation, he’s an electoral juggernaut, winning his last Senate race with 99.83% of the vote. 
+          David Pryor is a true public servant, having served in just about every possible elected position in his home state of Arkansas, spanning both chambers of the state and federal legislature and the governorship.
+          Boasting a witty, homespun style of retail politics combined with careful moderation, he’s an electoral juggernaut, winning his last Senate race with 99.83% of the vote.
           He would not only bring you Arkansas, but would also help you be competitive in much of the South in November while still being mainstream enough to fit the rest of the country.
           </p>
           <p>
-          With that being said, there’s one especially good reason to pick Pryor: it would be the perfect opportunity to spite Bill Clinton. 
-          Pryor and Clinton are allies, but Pryor, like any normal career politician, desires power, enough to the point where it would take nothing more than the promise of the White House and a moderate amount of cajoling to get him on board with the program. 
-          Wouldn’t it be the perfect rebuke of Slick Willie to see a white, middle-aged Arkansan former governor sharing the stage with Jerry Brown? 
+          With that being said, there’s one especially good reason to pick Pryor: it would be the perfect opportunity to spite Bill Clinton.
+          Pryor and Clinton are allies, but Pryor, like any normal career politician, desires power, enough to the point where it would take nothing more than the promise of the White House and a moderate amount of cajoling to get him on board with the program.
+          Wouldn’t it be the perfect rebuke of Slick Willie to see a white, middle-aged Arkansan former governor sharing the stage with Jerry Brown?
           Pryor’s an appealing candidate in his own right, but the opportunity to screw Clinton with a man from his own backyard is incredibly tantalizing.
           </p>
           `,
-          "candidate_score": 1,
-          "running_mate": true
-      }
-  },
-  {
-      "model": "campaign_trail.candidate",
-      "pk": 159,
-      "fields": {
-          "first_name": "Jesse",
-          "last_name": "Jackson",
-          "election": 9,
-          "party": "Democrat",
-          "state": "District of Columbia",
-          "priority": 1,
-          "description": "<p>Put description here</p>",
-          "color_hex": "#0000c7",
-          "secondary_color_hex": null,
-          "is_active": 0,
-          "image_url": "https://i.imgur.com/LErguMi.jpeg",
-          "electoral_victory_message": "This guy wins!",
-          "electoral_loss_message": "This guy loses!",
-          "no_electoral_majority_message": "We all win?",
-          "description_as_running_mate": 
-          `
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 159,
+        "fields": {
+            "first_name": "Jesse",
+            "last_name": "Jackson",
+            "election": 9,
+            "party": "Democrat",
+            "state": "District of Columbia",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000c7",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/LErguMi.jpeg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate":
+                `
           <p>
-          There are few living men more admirable for black America than the Reverend Jesse Jackson, and none of them are as politically engaged. 
-          Two separate times, he was counted out for the Democratic nomination, and two separate times, he did dramatically better than anyone expected, with his unashamed liberalism providing an antidote to those who claim the dream has died. 
+          There are few living men more admirable for black America than the Reverend Jesse Jackson, and none of them are as politically engaged.
+          Two separate times, he was counted out for the Democratic nomination, and two separate times, he did dramatically better than anyone expected, with his unashamed liberalism providing an antidote to those who claim the dream has died.
           He’s a phenomenal speaker who’s more than happy to be your running mate, and he will do whatever it takes to support the ticket.
           </p>
           <p>
-          The issue with Jesse isn’t that he’s a liberal, or that he’s hard on abortion, or that he’s soft on crime. 
-          Few will say it out loud, but all of black America knows it: white America, in 1992, will never really support a self-assertive minority like himself. 
-          They’ll say they might vote for him, will nicely talk about what a good leader he is for the black community, and will dodge the question until November comes and they pull the lever for Bush. 
+          The issue with Jesse isn’t that he’s a liberal, or that he’s hard on abortion, or that he’s soft on crime.
+          Few will say it out loud, but all of black America knows it: white America, in 1992, will never really support a self-assertive minority like himself.
+          They’ll say they might vote for him, will nicely talk about what a good leader he is for the black community, and will dodge the question until November comes and they pull the lever for Bush.
           Underneath Jerry Brown, Jesse will be shielded from the worst of it, and even the most pessimistic wouldn’t automatically assign them defeat, but it’s going to be an uphill battle.
           </p>
           `,
-          "candidate_score": 1,
-          "running_mate": true
-      }
-  },
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
     {
         "model": "campaign_trail.candidate",
         "pk": 160,
@@ -453,9 +457,9 @@ campaignTrail_temp.global_parameter_json = [
             "running_mate": true
         }
     }
-  ]
-  
-  campaignTrail_temp.running_mate_json = [
+]
+
+campaignTrail_temp.running_mate_json = [
     {
         "model": "campaign_trail.running_mate",
         "pk": 90229,
@@ -528,11 +532,11 @@ campaignTrail_temp.global_parameter_json = [
             "running_mate": 163
         }
     }
-  ]
-  
-  campaignTrail_temp.credits = "THE MOONBEAM TEAM"
-  
-  campaignTrail_temp.opponents_default_json = [
+]
+
+campaignTrail_temp.credits = "THE MOONBEAM TEAM"
+
+campaignTrail_temp.opponents_default_json = [
     {
         "election": 9,
         "candidates": [
@@ -542,9 +546,9 @@ campaignTrail_temp.global_parameter_json = [
             80,
         ]
     }
-  ]
-  
-  campaignTrail_temp.opponents_weighted_json = [
+]
+
+campaignTrail_temp.opponents_weighted_json = [
     {
         "election": 9,
         "candidates": [
@@ -554,18 +558,18 @@ campaignTrail_temp.global_parameter_json = [
             80,
         ]
     }
-  ]
-  
-  campaignTrail_temp.temp_election_list = [
+]
+
+campaignTrail_temp.temp_election_list = [
     {
         "id": 9,
         "year": 1992,
         "is_premium": 0,
         "display_year": "1992 - Moonbeam"
     }
-  ]
-  
-  jet_data = {
+]
+
+jet_data = {
     "headerColor": "#0b2740",
     "windowColor": "#00386a",
     "containerColor": "#004888",
@@ -575,19 +579,19 @@ campaignTrail_temp.global_parameter_json = [
     "endingTextColor": "#000000",
     "customQuote": "We are not disorganized. Our campaign transcends understanding.",
     "gameTitle": "MOONBEAM - Take Back America!"
-  }
-  
-  
-  //#startcode
-  
-  
-  corrr = '\n              <h2>MOONBEAM - Take Back America!</h2>\n            ';
-        
-  document.getElementById("header").src = "https://i.imgur.com/xj7rSmb.png";
-  
+}
+
+
+//#startcode
+
+
+corrr = '\n              <h2>MOONBEAM - Take Back America!</h2>\n            ';
+
+document.getElementById("header").src = "https://i.imgur.com/xj7rSmb.png";
+
 // Polling CYOA
 e.collect_results = true;
-  
+
 changeFavicon("https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico");
 
 e.HomeStateText = "Home State:"
@@ -598,13 +602,13 @@ e.CandidText = "<span style='color:#ffffff;'>Take Back America!</span>"
 e.VpText = "<span style='color:#ffffff;'>Pick a running mate!</span>"
 
 campaignTrail_temp.modBoxTheme = {
-     "header_color": "#0b2740",
-     "header_text_color": "#ffffff",
-     "description_text_color": "#000000",
-     "description_background_color": "#f8f8f8",
-     "main_color": "#2d4f6b",
-     "secondary_color": "#001e38",
-     "ui_text_color": "#FFFFFF"
+    "header_color": "#0b2740",
+    "header_text_color": "#ffffff",
+    "description_text_color": "#000000",
+    "description_background_color": "#f8f8f8",
+    "main_color": "#2d4f6b",
+    "secondary_color": "#001e38",
+    "ui_text_color": "#FFFFFF"
 }
 
 
@@ -699,9 +703,9 @@ const pile = `
 	  flex-direction: column;
 	}
 
-	.inner_window_question p:last-of-type {
-	  margin: .5rem;
-	}
+	.inner_window_question p:last-of-type { /* so this doesn't overlap with the candidate images */
+      margin: 3.5em auto .5em auto;
+    }
 
 	.inner_window_question h3 .mytooltip {
 	  background-color: lightskyblue;
@@ -728,7 +732,9 @@ const pile = `
 	.overlay_window h3 {
 	  background-color: #2b3f6e;
 	  border-radius: .1em .1em 0 0;
+	  border-bottom: 3px groove #4268af;
 	  color: #fff;
+	  font-weight: normal;
 	}
 
 	.overlay_window img {
@@ -758,6 +764,8 @@ const pile = `
 	#state_result h3 {
 	  background: #cad5ff;
 	  padding: .1em 0;
+	  font-weight: normal;
+	  text-transform: lowercase;
 	}
 	#state_result {
 	  min-height: 75px;
@@ -776,6 +784,9 @@ const pile = `
 	#overall_details_container a {
 	  color: #f7ff00;
 	  font-weight: normal;
+	}
+	#visit_buttons {
+	  margin: 1em 0;
 	}
 
 	#election_summary {
@@ -817,14 +828,16 @@ const pile = `
 	  display: inline-block;
 	  cursor: pointer;
 	  background-color: lightblue;
+	  padding: 0 .2em;
+	  border-radius: .2em;
 	}
 
 	.mytooltip .mytooltiptext,
 	.bubble {
-	  background-color: lightgray;
-	  color: black;
+	  background-color: #9aaacd;
+	  color: #000;
 	  text-align: center;
-	  border-radius: 6px;
+	  border-radius: .2em;
 	  position: absolute;
 	  z-index: 99;
 	  bottom: 20%;
@@ -832,7 +845,7 @@ const pile = `
 	  margin-left: -90px;
 	  opacity: 0;
 	  transition: opacity 0.3s;
-	  border: 1px solid black;
+	  outline: 1px solid black;
 	  pointer-events: none;
 	  font-size: 13px !important;
 	  line-height: 1.5em !important;
@@ -918,7 +931,7 @@ const pile = `
 	#credits {
 	  color: #ffffff;
 	}
-	
+
 	#map_footer {
 	  margin-top: clamp(1em, 2vw, 4em) !important;
 	}
@@ -931,10 +944,124 @@ const pile = `
 	  background-attachment: fixed;
 	}
 
-  
+	button {
+	  background: #e7ecf3;
+	  color: #0f1a29;
+	  border: 1.5px solid #243f63;
+	  border-radius: 0.2em;
+      text-transform: none;
+	}
+
+	button:hover {
+	  background: #2d4f6b;
+	  color: #fff;
+	  border-color: #ccc;
+	}
+
+	button:active {
+	  transform: translateY(1px);
+	  box-shadow:
+		inset 0 2px 3px rgba(0,0,0,0.25);
+	}
+
+	input[type="radio"] {
+	  appearance: none;
+	  -webkit-appearance: none;
+	  width: 16px;
+	  height: 16px;
+	  border-radius: 25%;
+	  border: 1px solid #6c7a8c;
+	  background-color: #f4f5f6;
+	  display: inline-flex;
+	  align-items: center;
+	  justify-content: center;
+	  margin-right: 6px;
+	  vertical-align: baseline;
+	  cursor: pointer;
+	}
+
+	input[type="radio"]::before {
+	  content: '';
+	  width: 8px;
+	  height: 8px;
+	  border-radius: 25%;
+	  background-color: #3a4e71;
+	  transform: scale(0);
+	  transition: transform 0.15s ease-in-out;
+	}
+
+	input[type="radio"]:checked::before {
+	  transform: scale(1);
+	}
+
+	input[type="radio"]:active {
+	  transform: scale(0.97);
+	  transition: transform 0.1s ease-out;
+	}
+
+	input[type="radio"]:focus {
+	  outline: 1px solid #6079a0;
+	  outline-offset: 2px;
+	}
+
+	#question_form label:hover {
+	  background: #eee;
+	  font-weight: normal;
+	}
+
+	table {
+	  border-collapse: collapse;
+	  font-family: "Bahnschrift", "Source Serif 4", sans-serif;
+	  color: #0f1a29;
+	  background: #f3f6fb;
+	  outline: 1.5px solid #243f63;
+	  border-radius: 0.25em;
+	}
+	table th {
+	  background: linear-gradient(#e7ecf3, #dbe3ef);
+	  color: #0f1a29;
+	  font-weight: 600;
+	  padding: 0.5em 0.6em;
+	  border-bottom: 1.5px solid #243f63;
+	  text-align: center;
+	  letter-spacing: 0.02em;
+	}
+	table td {
+	  padding: 0.4em 0.6em;
+	  border-bottom: 1px solid #c9d3e1;
+	  text-align: center;
+	  background: #f8fafd;
+	}
+
+	table tr:last-child td {
+	  border-bottom: none;
+	}
+	table tbody tr:nth-child(even) td {
+	  background: #eef3fa;
+	}
+	table tbody tr:hover td {
+	  background: #dde7f3;
+	}
+	table td:first-child {
+	  text-align: center;
+	  white-space: nowrap;
+	}
+
+	table td span {
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		border-radius: 2px;
+		display: inline-flex;
+		height: 0.9em;
+        margin: 0 .4em 0 .2em;
+		text-indent: -9999px;
+		vertical-align: top;
+		width: 0.9em;
+	}
+
+
   /* Mobile compatibility fixes - taken from TTNW, ported to 2016ALOT, and used here */
 			@media only screen and (max-width: 768px) {
-			
+
 			 /* necessary to ensure the music player stays in position */
 			  #game_window {
 				flex: 1 1 auto;
@@ -947,14 +1074,14 @@ const pile = `
 				background-repeat: no-repeat;
 				background-size: cover;
 			  }
-			
+
 			  #question_form button, #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
 				font-size: clamp(16px, 4.2vw, 20px);
 				line-height: 1.2;
 				padding: 10px 16px;
 				min-height: 44px;
 			  }
-			  
+
 			  #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
 				font-size: 1em;
 				line-height: 2em;
@@ -963,7 +1090,7 @@ const pile = `
 			.inner_window_question button, #visit_window button, #map_footer {
 				line-height: 2.5em;
 			  }
-			  
+
 			  /*#map_footer {
 				padding-right: 10em;
 			  }*/
@@ -1025,17 +1152,17 @@ const pile = `
 					font-weight: 400;
 					background: #eeebde; /* only change background */
 				}
-				
+
 				.overlay_window img {
 				  width: 15em;
 				  height: auto;
 				}
-				
+
 				.overlay_window h3 {
 				  padding: .5rem x .5rem;
 				  font-size: 24px;
 				}
-				
+
 			/* for the default CTS/NCT footer */
 			  #game_window g {
 				display: flex;
@@ -1045,7 +1172,7 @@ const pile = `
 				gap: 8px;
 				padding: 10px 5px;
 			  }
-			  
+
 			  #candidate_pic, img#candidate_pic {
 				order: 1;
 				width: 13em;
@@ -1053,7 +1180,7 @@ const pile = `
 				flex-shrink: 0;
 				margin: 0;
 			  }
-			  
+
 			  .inner_window_sign_display {
 				order: 2;
 				flex: 1;
@@ -1064,7 +1191,7 @@ const pile = `
 				align-items: center;
 				margin: 0 2em;
 			  }
-			  
+
 			  #running_mate_pic, img#running_mate_pic {
 				order: 3;
 				width: 13em;
@@ -1072,91 +1199,210 @@ const pile = `
 				flex-shrink: 0;
 				margin: 0;
 			  }
-				
+
 			/* other fixes to not break things */
 			#map_container {
 			  height: 30.78em;
 			}
-			
+
 			.overlay_window {
 				font-size: clamp(16px, 5.2vw, 20px);
 				left: 20%;
 				width: 60%;
 			}
-			
+
+			.inner_window_question p:last-of-type {
+                margin: .5em auto;
+            }
+
 			}
-  
+
 `;
 
 ensureMetaViewport();
 applyGlobalStyles(pile, 'mod-style');
-  
-  //#endcode
-  
-  HistHexcolour=["#00487c","#7b000c","#e4b81d","#016300"];
-  HistName=[" Jerry Brown"," George Bush"," Andre Marrou", " Bo Gritz"];
-  HistEV=[274,264,0,0];
-  HistPV=["50,261,112 ","50,452,809","510,193","157,264"];
-  HistPVP=["49.6%","49.8%","0.5%","0.2%"];
-  
-  campaignTrail_temp.modBoxTheme = {
-     "header_color": "#0b2740",
-     "header_text_color": "#ffffff",
-     "description_text_color": "#000000",
-     "description_background_color": "#f8f8f8",
-     "main_color": "#2d4f6b",
-     "secondary_color": "#001e38",
-     "ui_text_color": "#FFFFFF"
+
+//#endcode
+
+HistHexcolour = ["#00487c", "#7b000c", "#e4b81d", "#016300"];
+HistName = [" Jerry Brown", " George Bush", " Andre Marrou", " Bo Gritz"];
+HistEV = [274, 264, 0, 0];
+HistPV = ["50,261,112 ", "50,452,809", "510,193", "157,264"];
+HistPVP = ["49.6%", "49.8%", "0.5%", "0.2%"];
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#0b2740",
+    "header_text_color": "#ffffff",
+    "description_text_color": "#000000",
+    "description_background_color": "#f8f8f8",
+    "main_color": "#2d4f6b",
+    "secondary_color": "#001e38",
+    "ui_text_color": "#FFFFFF"
 }
-  
+
 campaignTrail_temp.achievements = {
-    "Operation BUSH" : {
-    "image" : "https://i.imgur.com/mpxJ5aM.png",
-     "description" : "Defeat Bush and Quayle with Jesse Jackson as your running mate.",
-     "cannotBeCheated" : true
-   },
-   "Party Unity" : {
-    "image" : "https://i.imgur.com/4v50hPL.png",
-    "description" : "Reconcile with Bill Clinton",
-    "cannotBeCheated" : true
-   },
-    "California and Coal Country" : {
-    "image" : "https://i.imgur.com/edxeGrb.png",
-    "description" : "Win Kentucky.",
-    "cannotBeCheated" : true
-   },
-   "Profit and Ross" : {
-    "image" : "https://i.imgur.com/14kqvGj.png",
-    "description" : "Reinvent your thoughts on NAFTA.",
-    "cannotBeCheated" : true
-   },
-   "2137" : {
-    "image" : "https://i.imgur.com/PYzgLIQ.png",
-    "description" : "Find your faith.",
-    "cannotBeCheated" : true
-  },
-    "Bunga Bunga" : {
-    "image" : "https://i.imgur.com/TjiuSqd.png",
-    "description" : "Make a deal with il Diavolo.",
-    "cannotBeCheated" : true
-  },
-   "Liebe ist für alle da" : {
-    "image" : "https://i.imgur.com/gURgOk3.png",
-    "description" : "Conquer the Berlin nightlife.",
-    "cannotBeCheated" : true
-  },
-  "Slapshot" : {
-   "image" : "https://i.imgur.com/sjBQJDs.png",
-   "description" : "Enlist the help of the GOAT.",
-   "cannotBeCheated" : true
-  },
-  "Man of Tomorrow" : {
-   "image" : "https://i.imgur.com/w0Aiozy.png",
-   "description" : "Win at least 340 electoral votes.",
-   "cannotBeCheated" : true
-  }
+    "Operation BUSH": {
+        "image": "https://i.imgur.com/mpxJ5aM.png",
+        "description": "Defeat Bush and Quayle with Jesse Jackson as your running mate.",
+        "cannotBeCheated": true
+    },
+    "Party Unity": {
+        "image": "https://i.imgur.com/4v50hPL.png",
+        "description": "Reconcile with Bill Clinton.",
+        "cannotBeCheated": true
+    },
+    "California and Coal Country": {
+        "image": "https://i.imgur.com/edxeGrb.png",
+        "description": "Win Kentucky.",
+        "cannotBeCheated": true
+    },
+    "Profit and Ross": {
+        "image": "https://i.imgur.com/14kqvGj.png",
+        "description": "Reinvent your thoughts on NAFTA.",
+        "cannotBeCheated": true
+    },
+    "2137": {
+        "image": "https://i.imgur.com/PYzgLIQ.png",
+        "description": "Find your faith.",
+        "cannotBeCheated": true
+    },
+    "Bunga Bunga": {
+        "image": "https://i.imgur.com/TjiuSqd.png",
+        "description": "Make a deal with il Diavolo.",
+        "cannotBeCheated": true
+    },
+    "Liebe ist für alle da": {
+        "image": "https://i.imgur.com/gURgOk3.png",
+        "description": "Conquer the Berlin nightlife.",
+        "cannotBeCheated": true
+    },
+    "Slapshot": {
+        "image": "https://i.imgur.com/sjBQJDs.png",
+        "description": "Enlist the help of the GOAT.",
+        "cannotBeCheated": true
+    },
+    "Man of Tomorrow": {
+        "image": "https://i.imgur.com/w0Aiozy.png",
+        "description": "Win at least 340 electoral votes.",
+        "cannotBeCheated": true
+    },
+	"Code Brown": {
+        "image": "https://i.imgur.com/w0Aiozy.png",
+        "description": "Lose with under 100 electoral votes.",
+        "cannotBeCheated": true
+    },
+	"Chastity": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Win the Natural State without needing to debase yourself.",
+        "cannotBeCheated": true
+    },
+	"Jerry Does Dallas": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Win the support of <i>two</i> Texans.",
+        "cannotBeCheated": true
+    },
+	"Message: I Care": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Summon the Great Communicator.",
+        "cannotBeCheated": true
+    },
+	"Like Father, Like Son": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Lose to an old family foe.",
+        "cannotBeCheated": true
+    },
+	"Mourning in America": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Extinguish the Reagan Revolution.",
+        "cannotBeCheated": true
+    },
+	"America First, Second, and Third": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Unleash the American people’s worst instincts.",
+        "cannotBeCheated": true
+    },
+	"This Is Who We Are": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "America reveals her true self.",
+        "cannotBeCheated": true
+    },
+	"Cordon Sanitaire": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Reject extremism.",
+        "cannotBeCheated": true
+    },
+	"Operation Paperclip": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Rehabilitate a Nazi.",
+        "cannotBeCheated": true
+    },
+	"For Spanish, Press One": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Be forced to embrace multiculturalism.",
+        "cannotBeCheated": true
+    },
+	"Rust in Peace": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Win without winning Michigan or Ohio.",
+        "cannotBeCheated": true
+    },
+	"¡Viva Brown!": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Hold the line for the working man.",
+        "cannotBeCheated": true
+    },
+	"Gaullist Fever": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Support Frexit.",
+        "cannotBeCheated": true
+    },
+	"From Linda to Lizzie": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Meet the Queen.",
+        "cannotBeCheated": true
+    },
+	"Disney Über Alles": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Become an agent of the Mouse.",
+        "cannotBeCheated": true
+    },
+	"Good Intentions": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Get serious about denuclearization.",
+        "cannotBeCheated": true
+    },
+	"Damned Foolish Thing in the Balkans": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Dodge a bullet.",
+        "cannotBeCheated": true
+    },
+	"Специальная операция": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Strangle a monster in its cradle.",
+        "cannotBeCheated": true
+    },
+	"За ваше здоровье!": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Start a beautiful friendship.",
+        "cannotBeCheated": true
+    },
+	"Shinnichi": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Achieve nirvana.",
+        "cannotBeCheated": true
+    },
+	"Long May You Run": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Heal a broken relationship.",
+        "cannotBeCheated": true
+    },
+	"Mr. Universe": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Become tabloid fodder.",
+        "cannotBeCheated": true
+    }
 }
-  
+
 // Soundtrack
 window.Song = class Song {
     constructor(title, artist, coverLink, audioLink) {
@@ -1220,7 +1466,7 @@ window.WalkmanPlayer = {
         this._setVolume(this.dom.volumeSlider.value);
         this.loadPlaylist(initialPlaylist);
     },
-    
+
     loadPlaylist(newPlaylist) {
         this.playlist = newPlaylist;
         this.playlist.currentSongIndex = 0;
@@ -1264,7 +1510,7 @@ window.WalkmanPlayer = {
                                 <svg class="icon-prev" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
                             </button>
                             <button class="player__btn player__btn--playpause" title="Play/Pause">
-                                <svg class="icon-play" viewBox="0 0 24 24"><path d="M7.5 5v14l11-7z"></path></svg>
+                                <svg class="icon-play" viewBox="0 0 24 24"><path d="M7.5 5v15l11-7z"></path></svg>
                                 <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
                             </button>
                             <button class="player__btn player__btn--next" title="Next">
@@ -1318,14 +1564,14 @@ window.WalkmanPlayer = {
         this.dom.nextBtn.addEventListener('click', () => this.playNext());
         this.dom.prevBtn.addEventListener('click', () => this.playPrev());
         this.dom.stopBtn.addEventListener('click', () => this.stop());
-        
+
         this.audio.addEventListener('timeupdate', () => this._updateProgress());
         this.audio.addEventListener('loadedmetadata', () => this._updateProgress());
         this.audio.addEventListener('ended', () => this.playNext());
 
         this.dom.progressBarInteractive.addEventListener('input', (e) => this._seek(e));
         this.dom.volumeSlider.addEventListener('input', (e) => this._setVolume(e.target.value));
-        
+
         this.dom.lockSwitch.addEventListener('click', () => this.toggleLayout());
     },
 
@@ -1379,7 +1625,7 @@ window.WalkmanPlayer = {
         this.isPlaying = false;
         this._updatePlayPauseIcon();
     },
-    
+
     playNext() {
         if (!this.playlist || this.playlist.songs.length === 0) return;
         this.playlist.playNext();
@@ -1401,7 +1647,7 @@ window.WalkmanPlayer = {
             this.dom.playPauseBtn.title = 'Play';
         }
     },
-    
+
     _formatTime(seconds) {
         if (isNaN(seconds)) return "00:00";
         const mins = Math.floor(seconds / 60);
@@ -1412,10 +1658,10 @@ window.WalkmanPlayer = {
     _updateProgress() {
         const progressPercent = (this.audio.currentTime / this.audio.duration) * 100;
         const safePercent = isNaN(progressPercent) ? 0 : progressPercent;
-        
+
         this.dom.progressBarDisplay.value = safePercent;
         this.dom.progressBarInteractive.value = safePercent;
-        
+
         this.dom.currentTime.textContent = this._formatTime(this.audio.currentTime);
         this.dom.durationTime.textContent = this._formatTime(this.audio.duration);
     },
@@ -1467,7 +1713,7 @@ window.WalkmanPlayer = {
             }
             .player__brand-sony { font-weight: bold; font-size: 14px; color: var(--accent-color); }
             .player__features { display: flex; gap: 8px; }
-            
+
             .player__window {
                 background: #111; border: 1px solid #000;
                 border-radius: 4px; padding: 10px;
@@ -1476,7 +1722,7 @@ window.WalkmanPlayer = {
             }
             .player__window-inner { background: #333; border: 1px solid #444; width: 100%; }
             .player__album-art { display: block; width: 100%; height: auto; object-fit: cover; max-height: 260px; }
-            
+
             .player__lcd-display {
                 background: var(--lcd-bg); border: 2px solid #1a2924;
                 border-radius: 4px; padding: 6px 10px;
@@ -1490,7 +1736,7 @@ window.WalkmanPlayer = {
             .player__song-artist { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
             .player__progress-container { display: flex; align-items: center; gap: 6px; width: 100%; }
             .player__time-current, .player__time-duration { font-size: 11px; min-width: 35px; text-align: center; }
-            
+
             .progress-bar-stack { position: relative; width: 100%; height: 8px; display: flex; align-items: center; }
             .progress-bar--display, .progress-bar--interactive { position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 0; }
             .progress-bar--display { -webkit-appearance: none; appearance: none; }
@@ -1498,7 +1744,7 @@ window.WalkmanPlayer = {
             .progress-bar--display::-webkit-progress-value { background-color: var(--lcd-text); border-radius: 4px; }
             .progress-bar--interactive { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; z-index: 2; }
             .progress-bar--interactive::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0; height: 8px; }
-            
+
             .player__controls-area { margin-top: 3px; text-align: center; }
             .player__brand-walkman {
                 font-size: 12px; font-style: italic; font-weight: bold; color: var(--text-secondary);
@@ -1542,13 +1788,13 @@ window.WalkmanPlayer = {
                 margin: 0.5em 0 1.5em 0;
             }
             .player__volume-area {
-                width: 100%; height: 170px; 
+                width: 100%; height: 170px;
                 display: flex; align-items: center; justify-content: center; position: relative;
             }
-            
+
             input[type=range].player__volume-slider {
                 -webkit-appearance: none; appearance: none;
-                width: 150px; height: 20px; 
+                width: 150px; height: 20px;
                 background: transparent; transform: rotate(-90deg); cursor: pointer;
             }
             input[type=range].player__volume-slider::-webkit-slider-runnable-track {
@@ -1571,7 +1817,7 @@ window.WalkmanPlayer = {
 
             .player__lock { text-align: center; margin-bottom: 5px; cursor: pointer; }
             .player__lock-label { font-size: 9px; color: var(--text-secondary); }
-            
+
             .player__lock-switch {
                 width: 22px; height: 10px; background: #000;
                 border-radius: 8px; border: 1px solid #333;
@@ -1585,7 +1831,7 @@ window.WalkmanPlayer = {
                 border: 1px solid #555; box-shadow: 0 1px 2px rgba(0,0,0,0.5);
                 transition: left 0.2s, background 0.2s;
             }
-            
+
             .player__lock-switch.active::after {
                 left: 11px;
                 background: #4caf50;
@@ -1600,7 +1846,7 @@ window.WalkmanPlayer = {
                 grid-template-columns: 1fr 1fr;
                 grid-template-rows: auto auto 1fr;
                 gap: 12px;
-                grid-template-areas: 
+                grid-template-areas:
                     "window header"
                     "window lcd"
                     "window controls";
@@ -1629,7 +1875,7 @@ window.WalkmanPlayer = {
                 grid-area: controls;
                 align-self: start;
             }
-            
+
             .player.player--horizontal .player__album-art {
                 max-height: 100%;
                 aspect-ratio: 1/1;
@@ -1661,49 +1907,49 @@ if (windowsAdvisorTargetNode) {
 // the songs.
 const mainPlaylist = new Playlist([
 
-	new Song(
-      "California Über Alles",
-      "Dead Kennedys",      
-      "https://i.imgur.com/f2VqI0S.jpeg",
-      "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/Dead%20Kennedys%20-%20California%20%C3%9Cber%20Alles.mp3"
+    new Song(
+        "California Über Alles",
+        "Dead Kennedys",
+        "https://i.imgur.com/f2VqI0S.jpeg",
+        "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/Dead%20Kennedys%20-%20California%20%C3%9Cber%20Alles.mp3"
     ),
-	new Song(
-      "100%",
-      "Sonic Youth",
-	  "https://i.imgur.com/OV76VvQ.jpeg",
-      "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/Sonic%20Youth%20-%20100%20(Official%20Music%20Video).mp3"
+    new Song(
+        "100%",
+        "Sonic Youth",
+        "https://i.imgur.com/OV76VvQ.jpeg",
+        "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/Sonic%20Youth%20-%20100%20(Official%20Music%20Video).mp3"
     ),
-	new Song(
-      "Who Wrote Holden Caulfield",
-      "Green Day",
-      "https://i.imgur.com/y636VVk.jpeg",
-      "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/Who%20Wrote%20Holden%20Caulfield_%20-%20Green%20Day%20-%20HQ.mp3"
+    new Song(
+        "Who Wrote Holden Caulfield",
+        "Green Day",
+        "https://i.imgur.com/y636VVk.jpeg",
+        "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/Who%20Wrote%20Holden%20Caulfield_%20-%20Green%20Day%20-%20HQ.mp3"
     ),
-	new Song(
-      "In Bloom",
-      "Nirvana",
-      "https://i.imgur.com/21gOVWE.jpeg",
-      "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/In%20Bloom%20-%20Nirvana.mp3"
+    new Song(
+        "In Bloom",
+        "Nirvana",
+        "https://i.imgur.com/21gOVWE.jpeg",
+        "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/In%20Bloom%20-%20Nirvana.mp3"
     ),
-	new Song(
-      "Only Shallow",
-      "My Bloody Valentine",
-      "https://i.imgur.com/J9uKRNc.jpeg",
-      "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/my%20bloody%20valentine%20%20only%20shallow%20(official%20video).mp3"
+    new Song(
+        "Only Shallow",
+        "My Bloody Valentine",
+        "https://i.imgur.com/J9uKRNc.jpeg",
+        "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/my%20bloody%20valentine%20%20only%20shallow%20(official%20video).mp3"
     ),
-	new Song(
-      "Gratitude",
-      "Beastie Boys",
-      "https://i.imgur.com/RaFQsZz.jpeg",
-      "https://file.garden/aUjAupxGEFbQH4RI/YTDown.com_YouTube_Beastie-Boys-Gratitude_Media_ZdJ5e70Q8mw_001_1080p.mp4"
+    new Song(
+        "Gratitude",
+        "Beastie Boys",
+        "https://i.imgur.com/RaFQsZz.jpeg",
+        "https://file.garden/aUjAupxGEFbQH4RI/YTDown.com_YouTube_Beastie-Boys-Gratitude_Media_ZdJ5e70Q8mw_001_1080p.mp4"
     ),
 ]);
 
 // kick it off!
 window.WalkmanPlayer.init("#game_window", mainPlaylist);
 
-// VP skipper from 2012LBM  
-(function() {
+// VP skipper from 2012LBM
+(function () {
     'use strict';
 
     function handleNavigation() {
@@ -1712,7 +1958,7 @@ window.WalkmanPlayer.init("#game_window", mainPlaylist);
 
         // detect VP screen
         const summary = document.getElementById("running_mate_summary");
-        
+
         if (summary) {
             // check if we are moving backwards (triggered by the opponent screen back button)
             const isGoingBack = window.sessionStorage.getItem("moonbeam_skip_direction") === "backward";
@@ -1731,8 +1977,8 @@ window.WalkmanPlayer.init("#game_window", mainPlaylist);
                 const nextBtn = document.getElementById("running_mate_id_button");
                 // ensure we don't click buttons with custom switchers
                 if (nextBtn && !nextBtn.hasAttribute("data-custom-switcher") && !nextBtn.dataset.autoClicked) {
-                   //console.log("VP selection screen detected. Skipping...");
-                    nextBtn.dataset.autoClicked = "true"; 
+                    //console.log("VP selection screen detected. Skipping...");
+                    nextBtn.dataset.autoClicked = "true";
                     nextBtn.click();
                 }
             }
@@ -1754,27 +2000,27 @@ window.WalkmanPlayer.init("#game_window", mainPlaylist);
 
 // This is the catch-all mutation observer from 2012LBM
 // so that we keep one observer doing everything
-(function() {
+(function () {
     'use strict';
 
     if (window.glorble) {
         window.glorble.disconnect();
     }
-	
-	window.glorbleTasks = [];
-	
-	const initialTasks = () => {
+
+    window.glorbleTasks = [];
+
+    const initialTasks = () => {
         // VP screen skipper
         if (document.getElementById("game_window") && typeof window.handleNavigation === 'function') {
             window.handleNavigation();
         }
     };
-	
-	window.glorbleTasks.push(initialTasks);
-	
-	const handleMutations = (mutationsList) => {
+
+    window.glorbleTasks.push(initialTasks);
+
+    const handleMutations = (mutationsList) => {
         if (!window.glorbleTasks) return;
-        
+
         for (let i = 0; i < window.glorbleTasks.length; i++) {
             try {
                 window.glorbleTasks[i]();
@@ -1794,64 +2040,170 @@ window.WalkmanPlayer.init("#game_window", mainPlaylist);
     //console.log("glorble...");
 })();
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // tooltips  
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// tooltips
 
-  tooltipList = [
-    
-    {searchString: "Jodie Evans", explanationText: " <img src=https://i.imgur.com/7pfrqZu.png>Your campaign manager"},
-    {searchString: "Jacques Barzaghi", explanationText: "<img src=https://i.imgur.com/PZcUVY4.png> Your close personal aide. He’s been with you every step of the way, from your governorship to your Buddhist trips."},
-    {searchString: "Pete Wilson", explanationText: " <img src=https://i.imgur.com/WYHzfaH.png>Foiled your previous Senate bid ten years ago. Resigned to become Governor."},
-    {searchString: "John Seymour", explanationText: " <img src=https://i.imgur.com/ibOEjQ6.png>Wilson’s appointee to the seat that he himself vacated."},
-    {searchString: "Paul Simon", explanationText: " <img src=https://i.imgur.com/MtrLrdd.png>Illinois Senator. Bringing bowties back in fashion."},
-    {searchString: "Grant,", explanationText: " <img src=https://i.imgur.com/fhoHQuG.png>Won more states in the South than you’re projected to"},
-    {searchString: "Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as ‘that woman’"},
-    {searchString: "Ann Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as 'that woman'"},
-    {searchString: "Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida"},
-    {searchString: "Bob Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida"},
-    {searchString: "New Democrats", explanationText: " <img src=https://i.imgur.com/fkFiuxp.png>Centrist Democrats that arose after the resounding defeats of liberals like Mondale and Dukakis."},
-    {searchString: "mayor Bradley", explanationText: " <img src=https://i.imgur.com/sqhM8lw.png>First black mayor of Los Angeles. Perhaps more infamous for the 'Bradley Effect'."},
-    {searchString: "Magic Johnson", explanationText: " <img src=https://i.imgur.com/SjZ0CRO.png>’Cause you can get through anything if Magic made it. Basketball player on the Lakers and perhaps one of the most famous AIDS activists out there."},
-    {searchString: "Hyde Amendment", explanationText: "Amendment banning the use of federal funding for abortions, with a few exceptions."},
-    {searchString: "Zbigniew Brzezinski", explanationText: "<img src=https://i.imgur.com/cjp9dlu.png> Carter’s national security advisor, well known foreign policy Realist"},
-    {searchString: "Nayirah", explanationText: "<img src=https://i.imgur.com/Jeyz8R3.png> Daughter of the former Kuwaiti ambassador to the United States, famous for her false testimony to Congress about Iraqi war crimes"},
-    {searchString: "UNSCOM", explanationText: "United Nations Special Commission to ensure Iraqi compliance with WMD guidelines."},
-    {searchString: "Tom Hayden", explanationText: "<img src=https://imgur.com/ypIHmm9.png> California State Assemblyman and candidate for State Senate this year. Better known for other work."},
-    {searchString: "Chuck D", explanationText: "<img src =https://imgur.com/HSChsP1.png> Rapper and political activist"},
-    {searchString: "Mussolini", explanationText: "<img src =https://imgur.com/gjfIfgN.png> O con noi o contro di noi"},
-    {searchString: "Cranston", explanationText: "<img src =https://i.imgur.com/FTonFxA.png> Dignified liberal serving since 1969. Also a less-dignified member of the Keating Five."},
-    {searchString: "Rush Limbaugh", explanationText: "<img src =https://i.imgur.com/VW0l8xC.png> Big fat idiot"},
-    {searchString: "Gennifer Flowers-", explanationText: "<img src =https://i.imgur.com/taAJjuD.png> Arkansan government employee who accused Bill Clinton of having extramarital sex with her"},
-    {searchString: "NAFTA", explanationText: "<img src =https://i.imgur.com/zpuCi3G.jpeg> The North American Free Trade Agreement is a proposal to establish free trade between USA, Canada, and Mexico"},
-    {searchString: "Pat Robertson", explanationText: "<img src =https://i.imgur.com/JmmnG6L.png> Televangelist with a huge number of followers. Thinks that prayer can stop hurricanes."},
-    {searchString: "the ribbon", explanationText: "<img src =https://i.imgur.com/GlLMbKy.png> Used to signify solidarity with those living with AIDS. Pictured here as part of Laura Dern’s outfit."},
-    {searchString: "Iran-Contra", explanationText: "<img src =https://i.imgur.com/yixmsxO.png> A scandal in which the Reagan administration sold arms to far-right Nicaraguan militants, in which Bush was deeply involved."},
-    {searchString: "Bible Belt", explanationText: "<img src =https://i.imgur.com/eS2ITwB.png> Highly evangelical region of the country, located mostly in the Deep South."},
-    {searchString: "dual monarchy", explanationText: "<img src =https://i.imgur.com/E4ppY2v.png>  Two kingdoms are ruled by the same monarch, but are otherwise self-governing."},
-    {searchString: "diarchy", explanationText: "<img src =https://i.imgur.com/1Xsx0fx.png>  One singular kingdom is ruled by two monarchs."},
-    {searchString: "Bob Casey", explanationText: "<img src =https://i.imgur.com/yJDzM4X.png>  Immensely popular governor of Pennsylvania whose hardcore stance on abortion even frightens some Republicans."},
-    {searchString: "'potato'", explanationText: "<img src =https://i.imgur.com/YY95I7L.png>"},
-    {searchString: "Kinnock", explanationText: "<img src =https://i.imgur.com/Oww1l2q.png> Neil Kinnock, recently elected this summer in a surprise upset"},
-    {searchString: "Bush fidgets with his tie and poutily crosses his arms", explanationText: "<img src =https://i.imgur.com/2WfLCxA.png> <p? I’m sure he’s just bored"},
-    {searchString: "John Prescott", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>"},
-    {searchString: "scanner", explanationText: "<img src =https://i.imgur.com/Jjv6kfp.png> 'Bush Encounters the Supermarket, Amazed'"},
-    {searchString: "SPAM", explanationText: "<img src =https://i.imgur.com/CikzB57.png> Not just for poor people, according to Hormel"},
-    {searchString: "egghead", explanationText: "<img src =https://i.imgur.com/A07khql.png> You called?"},
-    {searchString: "Silvio Berlusconi", explanationText: "<img src =https://i.imgur.com/Hr3GIK7.png> The richest man in Italy and the nation’s most prolific womanizer "},
-    {searchString: "bisexuality", explanationText: "<img src =https://i.imgur.com/eqFXard.png> The cutting edge of human sexuality"},
-    {searchString: "Evelle Younger the second", explanationText: "<img src =https://i.imgur.com/MjREl9c.png> ???... Oh yeah, that one guy who you beat in ’78"},
-    {searchString: "Geraldine Ferraro", explanationText: "<img src =https://i.imgur.com/mrmJZ60.png> Picked to energize the base, flopped miserably"},
-    {searchString: "William Miller", explanationText: "<img src =https://i.imgur.com/yh2jNo5.png> Also picked to energize the base, also flopped miserably"},
-    {searchString: "rape and murder", explanationText: "<img src =https://i.imgur.com/wHGmWJv.gif>"},
-    {searchString: "Phil Donahue", explanationText: "<img src =https://i.imgur.com/EdRNTlL.png> The king of daytime talk shows, well known for not shying away from divisive topics"},
-    {searchString: "Max Pavlevsky", explanationText: "<img src =https://i.imgur.com/eDnsDFO.png> Husband of Jodie Evans and millionaire, pictured wrestling with the weight of being one of only a few wealthy McGovern backers back in ‘72 "},
-    {searchString: "George Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American"},
-    {searchString: "Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American"},
-    {searchString: "Tom Foley", explanationText: "<img src =https://i.imgur.com/hhgl0ic.png> 6’4 House Speaker from the great state of Washington"},
-    {searchString: "Brock Adams", explanationText: "<img src =https://i.imgur.com/SeLjt8k.png> Senator from Washington state who looks and sounds like Bush. Like Bush, has some Capitol Hill rumors of being a little handsy..."},
-    {searchString: "Murphy Brown", explanationText: "<img src =https://i.imgur.com/qLcvaSF.png> Television show staring Candice Bergen as the eponymous main character, a hard-nosed journalist and news anchor who often deals with real-world problems "},
-    {searchString: "Scoop Jackson", explanationText: "<img src =https://i.imgur.com/l98VyPw.png> 'At home, a liberal supportive of labor, civil rights, and the environment. Abroad, there’s a minimum 20% chance that he would’ve started a nuclear war had he been president.'"},
-    {searchString: "Senator Dole and Representative Gingrich", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>"}, ///funnily enough this was actually in order to help troubleshoot another mod and I never neded up taking it out, it can stay for posterity 
-  
+tooltipList = [
+
+    { searchString: "Jodie Evans", explanationText: " <img src=https://i.imgur.com/7pfrqZu.png>Your campaign manager" },
+    { searchString: "Jacques Barzaghi", explanationText: "<img src=https://i.imgur.com/PZcUVY4.png> Your close personal aide. He’s been with you every step of the way, from your governorship to your Buddhist trips." },
+    { searchString: "Pete Wilson", explanationText: " <img src=https://i.imgur.com/WYHzfaH.png>Foiled your previous Senate bid ten years ago. Resigned to become Governor." },
+    { searchString: "John Seymour", explanationText: " <img src=https://i.imgur.com/ibOEjQ6.png>Wilson’s appointee to the seat that he himself vacated." },
+    { searchString: "Paul Simon", explanationText: " <img src=https://i.imgur.com/MtrLrdd.png>Illinois Senator. Bringing bowties back in fashion." },
+    { searchString: "Grant,", explanationText: " <img src=https://i.imgur.com/fhoHQuG.png>Won more states in the South than you’re projected to" },
+    { searchString: "Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as ‘that woman’" },
+    { searchString: "Ann Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as 'that woman'" },
+    { searchString: "Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida" },
+    { searchString: "Bob Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida" },
+    { searchString: "New Democrats", explanationText: " <img src=https://i.imgur.com/fkFiuxp.png>Centrist Democrats that arose after the resounding defeats of liberals like Mondale and Dukakis." },
+    { searchString: "mayor Bradley", explanationText: " <img src=https://i.imgur.com/sqhM8lw.png>First black mayor of Los Angeles. Perhaps more infamous for the 'Bradley Effect'." },
+    { searchString: "Magic Johnson", explanationText: " <img src=https://i.imgur.com/SjZ0CRO.png>’Cause you can get through anything if Magic made it. Basketball player on the Lakers and perhaps one of the most famous AIDS activists out there." },
+    { searchString: "Hyde Amendment", explanationText: "Amendment banning the use of federal funding for abortions, with a few exceptions." },
+    { searchString: "Zbigniew Brzezinski", explanationText: "<img src=https://i.imgur.com/cjp9dlu.png> Carter’s national security advisor, well known foreign policy Realist" },
+    { searchString: "Nayirah", explanationText: "<img src=https://i.imgur.com/Jeyz8R3.png> Daughter of the former Kuwaiti ambassador to the United States, famous for her false testimony to Congress about Iraqi war crimes" },
+    { searchString: "UNSCOM", explanationText: "United Nations Special Commission to ensure Iraqi compliance with WMD guidelines." },
+    { searchString: "Tom Hayden", explanationText: "<img src=https://imgur.com/ypIHmm9.png> California State Assemblyman and candidate for State Senate this year. Better known for other work." },
+    { searchString: "Chuck D", explanationText: "<img src =https://imgur.com/HSChsP1.png> Rapper and political activist" },
+    { searchString: "Mussolini", explanationText: "<img src =https://imgur.com/gjfIfgN.png> O con noi o contro di noi" },
+    { searchString: "Cranston", explanationText: "<img src =https://i.imgur.com/FTonFxA.png> Dignified liberal serving since 1969. Also a less-dignified member of the Keating Five." },
+    { searchString: "Rush Limbaugh", explanationText: "<img src =https://i.imgur.com/VW0l8xC.png> Big fat idiot" },
+    { searchString: "Gennifer Flowers-", explanationText: "<img src =https://i.imgur.com/taAJjuD.png> Arkansan government employee who accused Bill Clinton of having extramarital sex with her" },
+    { searchString: "NAFTA", explanationText: "<img src =https://i.imgur.com/zpuCi3G.jpeg> The North American Free Trade Agreement is a proposal to establish free trade between USA, Canada, and Mexico" },
+    { searchString: "Pat Robertson", explanationText: "<img src =https://i.imgur.com/JmmnG6L.png> Televangelist with a huge number of followers. Thinks that prayer can stop hurricanes." },
+    { searchString: "the ribbon", explanationText: "<img src =https://i.imgur.com/GlLMbKy.png> Used to signify solidarity with those living with AIDS. Pictured here as part of Laura Dern’s outfit." },
+    { searchString: "Iran-Contra", explanationText: "<img src =https://i.imgur.com/yixmsxO.png> A scandal in which the Reagan administration sold arms to far-right Nicaraguan militants, in which Bush was deeply involved." },
+    { searchString: "Bible Belt", explanationText: "<img src =https://i.imgur.com/eS2ITwB.png> Highly evangelical region of the country, located mostly in the Deep South." },
+    { searchString: "dual monarchy", explanationText: "<img src =https://i.imgur.com/E4ppY2v.png>  Two kingdoms are ruled by the same monarch, but are otherwise self-governing." },
+    { searchString: "diarchy", explanationText: "<img src =https://i.imgur.com/1Xsx0fx.png>  One singular kingdom is ruled by two monarchs." },
+    { searchString: "Bob Casey", explanationText: "<img src =https://i.imgur.com/yJDzM4X.png>  Immensely popular governor of Pennsylvania whose hardcore stance on abortion even frightens some Republicans." },
+    { searchString: "'potato'", explanationText: "<img src =https://i.imgur.com/YY95I7L.png>" },
+    { searchString: "Kinnock", explanationText: "<img src =https://i.imgur.com/Oww1l2q.png> Neil Kinnock, recently elected this summer in a surprise upset" },
+    { searchString: "Bush fidgets with his tie and poutily crosses his arms", explanationText: "<img src =https://i.imgur.com/2WfLCxA.png> <p? I’m sure he’s just bored" },
+    { searchString: "John Prescott", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>" },
+    { searchString: "scanner", explanationText: "<img src =https://i.imgur.com/Jjv6kfp.png> 'Bush Encounters the Supermarket, Amazed'" },
+    { searchString: "SPAM", explanationText: "<img src =https://i.imgur.com/CikzB57.png> Not just for poor people, according to Hormel" },
+    { searchString: "egghead", explanationText: "<img src =https://i.imgur.com/A07khql.png> You called?" },
+    { searchString: "Silvio Berlusconi", explanationText: "<img src =https://i.imgur.com/Hr3GIK7.png> The richest man in Italy and the nation’s most prolific womanizer " },
+    { searchString: "bisexuality", explanationText: "<img src =https://i.imgur.com/eqFXard.png> The cutting edge of human sexuality" },
+    { searchString: "Evelle Younger the second", explanationText: "<img src =https://i.imgur.com/MjREl9c.png> ???... Oh yeah, that one guy who you beat in ’78" },
+    { searchString: "Geraldine Ferraro", explanationText: "<img src =https://i.imgur.com/mrmJZ60.png> Picked to energize the base, flopped miserably" },
+    { searchString: "William Miller", explanationText: "<img src =https://i.imgur.com/yh2jNo5.png> Also picked to energize the base, also flopped miserably" },
+    { searchString: "rape and murder", explanationText: "<img src =https://i.imgur.com/wHGmWJv.gif>" },
+    { searchString: "Phil Donahue", explanationText: "<img src =https://i.imgur.com/EdRNTlL.png> The king of daytime talk shows, well known for not shying away from divisive topics" },
+    { searchString: "Max Pavlevsky", explanationText: "<img src =https://i.imgur.com/eDnsDFO.png> Husband of Jodie Evans and millionaire, pictured wrestling with the weight of being one of only a few wealthy McGovern backers back in ‘72 " },
+    { searchString: "George Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American" },
+    { searchString: "Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American" },
+    { searchString: "Tom Foley", explanationText: "<img src =https://i.imgur.com/hhgl0ic.png> 6’4 House Speaker from the great state of Washington" },
+    { searchString: "Brock Adams", explanationText: "<img src =https://i.imgur.com/SeLjt8k.png> Senator from Washington state who looks and sounds like Bush. Like Bush, has some Capitol Hill rumors of being a little handsy..." },
+    { searchString: "Murphy Brown", explanationText: "<img src =https://i.imgur.com/qLcvaSF.png> Television show staring Candice Bergen as the eponymous main character, a hard-nosed journalist and news anchor who often deals with real-world problems " },
+    { searchString: "Scoop Jackson", explanationText: "<img src =https://i.imgur.com/l98VyPw.png> 'At home, a liberal supportive of labor, civil rights, and the environment. Abroad, there’s a minimum 20% chance that he would’ve started a nuclear war had he been president.'" },
+    { searchString: "Senator Dole and Representative Gingrich", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>" }, ///funnily enough this was actually in order to help troubleshoot another mod and I never neded up taking it out, it can stay for posterity
+	{ searchString: "Chuck D", explanationText: "<img src=https://i.imgur.com/zEClE8O.jpeg> Public Enemy frontman and one of the realest motherfuckers on the planet." },
+    { searchString: "Tom Hayden", explanationText: "<img src=https://i.imgur.com/WDiBATS.jpeg> Lefty activist and California state legislator better known to the public for his recently-ended marriage to Jane Fonda." },
+    { searchString: "Astrodome", explanationText: "<img src=https://i.imgur.com/OTZ49eD.jpeg> One of the greatest engineering marvels in the world when it opened, now just kind of a big concrete building." },
+    { searchString: "J.C. Watts", explanationText: "<img src=https://i.imgur.com/2m1fTQ1.jpeg> Black!" },
+    { searchString: "Lynn Martin", explanationText: "<img src=https://i.imgur.com/cKvmI8D.jpeg> Woman!" },
+    { searchString: "Clarence Thomas", explanationText: "<img src=https://i.imgur.com/RAIHucu.jpeg> Black, sex pest!" },
+    { searchString: "Elizabeth Dole", explanationText: "<img src=https://i.imgur.com/z5MJYFZ.jpeg> Woman!" },
+    { searchString: "Manuel Lujan", explanationText: "<img src=https://i.imgur.com/4Df3EAL.jpeg> Latino!" },
+    { searchString: "Dewey", explanationText: "<img scr=https://i.imgur.com/skKsCkK.jpeg> Generational election fumbler to the point where the DNC would be chomping at the bit to recruit him if he were still alive." },
+    { searchString: "Alan Keyes", explanationText: "<img src=https://i.imgur.com/yJYT8SF.jpeg> The standard-bearer of the <em>weird unlovable loser</em> wing of the GOP." },
+    { searchString: "Phil Gramm", explanationText: "<img src=https://i.imgur.com/2qF3UqX.jpeg> Conservative Texan evangelical, loves himself a good porno!" },
+    { searchString: "Hitler", explanationText: "<img src=https://i.imgur.com/IWjAfVM.jpeg> Commander of the Third Reich, generally accepted as a pretty bad guy." },
+    { searchString: "Stalin", explanationText: "<img src=https://i.imgur.com/RqWX0P6.jpeg> F̶i̶v̶e̶ ̶t̶e̶n̶ ̶t̶w̶e̶n̶t̶y̶-̶f̶i̶v̶e̶ ̶f̶i̶f̶t̶y̶ ̶ One hundred million dead." },
+    { searchString: "apple pie and baseball", explanationText: "<img src=https://i.imgur.com/vUEm4py.jpeg> 'Murica!" },
+    { searchString: "Bain Capital", explanationText: "<img src=https://i.imgur.com/CQKZqgy.jpeg> Posted 47% returns in the last fiscal year." },
+    { searchString: "Ron Brown", explanationText: "<img src=https://i.imgur.com/8iyhfjt.jpeg> DNC chairman, quite possibly the most DNC man to ever DNC." },
+    { searchString: "Roseanne", explanationText: "<img src=https://i.imgur.com/kovtd6e.jpeg> BLUE COLLAR American show about BLUE COLLAR Midwesterners who live a BLUE COLLAR lifestyle!" },
+    { searchString: "Prop 18", explanationText: "<img src=https://i.imgur.com/nY4UWop.jpeg> Proposition for a right-to-work law in California, soundly defeated." },
+    { searchString: "Robert Rubin", explanationText: "<img src=https://i.imgur.com/KBGME3K.jpeg> Goldman Sachs banker, absolutely adores Bill Clinton." },
+    { searchString: "Schwarzenegger", explanationText: "<img src=https://i.imgur.com/vUEm4py.jpeg> Bush's favorite actor, pictured here about a half second before breaking Barbara Bush's leg." },
+    { searchString: "Brutuses", explanationText: "<img src=https://i.imgur.com/kdVnbAl.png>" },
+    { searchString: "Caesar", explanationText: "<img src=https://i.imgur.com/1yzA1fj.jpeg> The original Jerry Brown, if you really think about it." },
+    { searchString: "Knowland", explanationText: "<img src=https://i.imgur.com/uC0FwoO.jpeg> Once-mighty Republican Senate Majority Leader, reduced to an elephant-riding caricature of himself before your dad put him out of his misery." },
+    { searchString: "Thomas Donahue", explanationText: "<img src=https://i.imgur.com/K3xQXK0.jpeg> Influential AFL-CIO leader and organized labor's biggest NAFTA opponent." },
+    { searchString: "Strom Thurmond", explanationText: "<img src=https://i.imgur.com/wVOkIGH.jpeg> Segregationist, reactionary, rapist, pedophile, respected Republican elder statesman." },
+    { searchString: "Harris Wofford", explanationText: "<img src=https://i.imgur.com/tmQkcJ6.jpeg> GoldmanFormer JFK aide and true-blue liberal Pennsylvania senator. Could run for president in 1996 if you were to blow it..." },
+    { searchString: "Lamar Alexander", explanationText: "<img src=https://i.imgur.com/RG2NTB8.jpeg> Secretary of Education, run-of-the-mill conservative Tennessean who wants Christian schools." },
+
+	// russia + eastern europe + balkans + one buchanan
+	{ searchString: "Buchanan", explanationText: "<img src=https://i.imgur.com/JmUeSwR.jpeg> The only thing he hates more than Jewish people is immigration."},
+	{ searchString: "Yeltsin", explanationText: "<img src=https://i.imgur.com/33AMtKC.jpeg> Fat drunk idiot in charge of the world's largest nuclear arsenal"},
+	{ searchString: "Gorbachev", explanationText: "<img src=https://i.imgur.com/nGShCNw.jpeg> A shell of himself."},
+	{ searchString: "Vladimir", explanationText: "<img src=https://i.imgur.com/StjFTeW.jpeg> He'll be dearly missed."},
+	{ searchString: "Sobchak", explanationText: "<img src=https://i.imgur.com/cubauWP.jpeg> Not extremely corrupt by Russian standards."},
+	{ searchString: "Saint Petersburg", explanationText: "<img src=https://i.imgur.com/uZZhI3f.jpeg> A cold, gray, miserable, oppressing city which is nicer than 99% of the towns in the former USSR."},
+	{ searchString: "Moscow", explanationText: "<img src=https://i.imgur.com/DN8UILL.jpeg> A cold, gray, miserable, oppressing city which is the nicest town in the former USSR."},
+	{ searchString: "Yegor Gaidar", explanationText: "<img src=https://i.imgur.com/TACpStI.jpeg> The face of a trustworthy man if there ever was one."},
+	{ searchString: "vodka", explanationText: "<img src=https://i.imgur.com/6iGZ2tO.jpeg> In Russia, any time is a good time for vodka!"},
+	{ searchString: "Rancho del Cielo", explanationText: "<img src=https://i.imgur.com/VWyxs6g.jpeg> Only the 2nd-most-infamous ranch in California."},
+	{ searchString: "Smolyakov", explanationText: "<img src=https://i.imgur.com/O9RQh0H.jpeg> Who?"},
+	{ searchString: "Kravchuk", explanationText: "<img src=https://i.imgur.com/5QaHtCW.jpeg> Soviet apparatchik who very quickly and conveniently discovered the twin gospels of nationalism and capitalism"},
+	{ searchString: "chicken Kiev", explanationText: "<img src=https://i.imgur.com/521ycuW.jpeg> The namesake of a 1991 Bush speech; your babushka makes it better than anyone else does!"},
+	{ searchString: "Tiraspol", explanationText: "<img src=https://i.imgur.com/SszgUAL.jpeg> The last remaining Soviet city."},
+	{ searchString: "Transnistria", explanationText: "<img src=https://i.imgur.com/Q2QYKki.jpeg> Breakaway state from Moldova dominated by ethnic Russians and Ukrainians."},
+	{ searchString: "Yalta", explanationText: "<img src=https://i.imgur.com/4h5xrJq.jpeg> A lovely spot both for a beach vacation and a conference to decide the fast of postwar Europe."},
+	{ searchString: "autonomous republic", explanationText: "<img src=https://i.imgur.com/j3pmyRX.png> A dime a dozen in the post-Soviet world."},
+	{ searchString: "partitions", explanationText: "<img src=https://i.imgur.com/uRFnbIc.jpeg> An injustice that the Poles will never stop bitching about."},
+	{ searchString: "Katyn", explanationText: "<img src=https://i.imgur.com/JeeK7a1.jpeg> Another injustice that the Poles with never stop bitching about."},
+	{ searchString: "Uprising", explanationText: "<img src=https://i.imgur.com/wa166Oa.jpeg> Yet ANOTHER injustice that the Poles will never stop bitching about."},
+	{ searchString: "Polish-American", explanationText: "<img src=https://i.imgur.com/oZyzUp6.jpeg> They love pierogi, the Pope, and changing their last names to be pronounceable- in that order!"},
+	{ searchString: "Krakow", explanationText: "<img src=https://i.imgur.com/qkdOyu8.jpeg> Like Prague, if Prague was harder to get to and had worse beer (but better vodka)."},
+	{ searchString: "Auschwitz", explanationText: "<img src=https://i.imgur.com/TE4k9g9.jpeg> For normal people, the world's most notorious death camp. For idiots, an unremarkable locale that coincidentally has gas chambers and human remains in it."},
+	{ searchString: "AIPAC", explanationText: "<img src=https://i.imgur.com/LDik7YX.png> Some of the best lobbyists and worst people in the country."},
+	{ searchString: "Lenin Shipyard", explanationText: "<img src=https://i.imgur.com/9JW7MXI.jpeg> Ground zero of the end of Polish communism."},
+	{ searchString: "Lech Walesa", explanationText: "<img src=https://i.imgur.com/sulBxlB.jpeg> Light on political brainpower, but by God, he can tell the West everything it wants to hear!"},
+	{ searchString: "JNA barracks", explanationText: "<img src=https://i.imgur.com/kf3v5fw.jpeg> One of the first places where the war crimes ball really got rolling."},
+	{ searchString: "Tudjman", explanationText: "<img src=https://i.imgur.com/lTIRedl.jpeg> Egomaniac and war criminal who... wait, are we sure this guy is much better than Milosevic?"},
+	{ searchString: "Yugoslavia", explanationText: "<img src=https://i.imgur.com/kjGL2JD.jpeg> Rapidly dissolving"},
+	{ searchString: "Mitterrand", explanationText: "<img src=https://i.imgur.com/uKHO5Oj.jpeg> A dark, cutthroat soul who will stop at nothing to give his people a decent social safety net."},
+	{ searchString: "Sarajevo", explanationText: "<img src=https://i.imgur.com/qshk3LS.jpeg> Every 80 years or so, something really bad involving gun violence always seems to happen here."},
+	{ searchString: "Franz Ferdinand", explanationText: "<img src=https://i.imgur.com/t3WAR5t.jpeg> Unlovable archreactionary who somehow started a global conflict; in the 2000s he will be forgotten in favor of a mediocre band bearing his name."},
+	{ searchString: "Milosevic", explanationText: "<img src=https://i.imgur.com/3bVOOfN.jpeg> Egomaniac and war criminal who should've thought about sucking up to the U.S. more."},
+	{ searchString: "Geneva", explanationText: "<img src=https://i.imgur.com/Z98GVqw.jpeg> A favorite spot for world leaders to meet, perhaps because its oppressive boringness keeps them from getting distracted."},
+	{ searchString: "Serb paramilitaries", explanationText: "<img src=https://i.imgur.com/farCHU4.jpeg> The only thing they love more than a good morning rape and murder session is dreaming about Greater Serbia."},
+	{ searchString: "Dubrovnik", explanationText: "<img src=https://i.imgur.com/xY6osnu.jpeg> Not quite what it used to be..."},
+	{ searchString: "Slovenian people", explanationText: "<img src=https://i.imgur.com/TZQMK0x.jpeg> Strong people, but arrogant fucking bastards."},
+	{ searchString: "Drnovsek", explanationText: "<img src=https://i.imgur.com/Af6bDZl.jpeg> Absolutely thrilled that he doesn't have to deal with the drama going on down south."},
+	{ searchString: "Mladic", explanationText: "<img src=https://i.imgur.com/rbaqmkf.jpeg> Not afraid to get his hands dirty, unlike those pussies with their complaints about 'humanity' and 'basic decorum'."},
+
+	// buchanan tooltips
+	{ searchString: "Treblinka", explanationText: "<img src=https://i.imgur.com/UP1VH14.jpeg> A death camp in which many people died."},
+	{ searchString: "Arlen Specter", explanationText: "<img src=https://i.imgur.com/hP4Smpz.jpeg> Republican from Pennsylvania who loves to change sides."},
+	{ searchString: "William Cohen", explanationText: "<img src=https://i.imgur.com/vUQiPHG.jpeg> Republican from Maine, a bit of a political maverick."},
+	{ searchString: "Wyoming", explanationText: "<img src=https://i.imgur.com/rIoH0tH.jpeg> Home of <em>Q-anon</em>, the world's biggest Dan Quayle fan."},
+	{ searchString: "Central Park Five", explanationText: "<img src=https://i.imgur.com/cTAunUI.jpeg> Guilty of being black."},
+	{ searchString: "Country Club", explanationText: "<img src=https://i.imgur.com/GXLG42g.jpeg> A vital means of shelter in the Republican ecosystem."},
+	{ searchString: "Hamptons", explanationText: "<img src=https://i.imgur.com/1KWUh3i.jpeg> One of the most evil collections of people in the country outside of death row and the average car dealership."},
+	{ searchString: "Carville", explanationText: "<img src=https://i.imgur.com/faLcsHx.jpeg> Loudmouth asshole from Louisiana who thinks he's a lot smarter than he is."},
+	{ searchString: "Chavez", explanationText: "<img src=https://i.imgur.com/PAlwlRB.jpeg> Chicano legend in the fight for fair labor practices, half the streets and parks in California will bear his name after his death."},
+	{ searchString: "To Kill a Mockingbird", explanationText: "<img src=https://i.imgur.com/Sv4OIEA.jpeg> Right proper hate speech, y'all!"},
+	{ searchString: "Atticus Finch", explanationText: "<img src=https://i.imgur.com/vHsYsPK.jpeg> Race traitor."},
+	{ searchString: "Riley", explanationText: "<img src=https://i.imgur.com/V0p0of5.jpeg> Boring-but-effective technocrat."},
+	{ searchString: "William Cohen", explanationText: "<img src=https://i.imgur.com/vUQiPHG.jpeg> Republican from Maine, a bit of a political maverick."},
+	{ searchString: "Kurt Cobain", explanationText: "<img src=https://i.imgur.com/qdFHBeO.jpeg> Talented young man, possible voice of his generation, and a Jerry Brown superfan!"},
+	{ searchString: "Packwood", explanationText: "<img src=https://i.imgur.com/BMeIfSW.jpeg> Respectable Republican moderate, rapist."},
+	{ searchString: "Hatfield", explanationText: "<img src=https://i.imgur.com/rROzXrn.jpeg> Religious weirdo with a heart of gold ."},
+	{ searchString: "Hamptons", explanationText: "<img src=https://i.imgur.com/1KWUh3i.jpeg> One of the most evil collections of people in the country outside of death row and the average car dealership."},
+	{ searchString: "Gold rush", explanationText: "<img src=https://i.imgur.com/xbk98zm.jpeg> <em>“There's gold in them thar hills!”</em>"},
+	{ searchString: "pieing", explanationText: "<img src=https://i.imgur.com/nO4AZMR.jpeg> Not the first time you've been pied!"},
+	{ searchString: "Atwater", explanationText: "<img src=https://i.imgur.com/bQaOKtt.jpeg> Evil racist bastard who's burning in hell right now."},
+	{ searchString: "John Demjanjuk", explanationText: "<img src=https://i.imgur.com/vrpOfIu.jpeg> Death camp guard known as Ivan the Terrible, and a kindred soul to Pat Buchanan."},
+	{ searchString: "Elie Wiesel", explanationText: "<img src=https://i.imgur.com/jjIhtid.jpeg> Romanian-American Holocaust survivor and Nobel Prize winner, strong defender of human rights for all... well, except for Palestinians."},
+	{ searchString: "Protestant-Catholic split", explanationText: "<img src=https://i.imgur.com/vHSU090.jpeg You could really use another one of these in the GOP campaign right about now..."},
+
+	// reagan tooltips
+	{ searchString: "leering in the background", explanationText: "<img src=https://i.imgur.com/gm9BJqR.jpeg> Mr. Steal Your Girl."},
+	{ searchString: "Jimmy Carter", explanationText: "<img src=https://i.imgur.com/qH4ATRC.jpeg> The right man at the wrong time, forever trying to make up for his shortcomings in office."},
+	{ searchString: "malaise", explanationText: "<img src=https://i.imgur.com/4CQhGgE.png>"},
+	{ searchString: "you and Ted Kennedy", explanationText: "<img src=https://i.imgur.com/l2PZ5NP.jpeg> Old foes from 1980, reunited for the first time."},
+	{ searchString: "81", explanationText: "<img src=https://i.imgur.com/yO5o7aH.jpeg> Surely nobody this old could ever seriously run for President... <em>right?</em>"},
+	{ searchString: "'66", explanationText: "<img src=https://i.imgur.com/nmcJMPA.jpeg> A most ignominious year for the Brown family."},
+	{ searchString: "Weinberger", explanationText: "<img src=https://i.imgur.com/f8i6Hk2.jpeg> One of Reagan's many fall guys."},
+	{ searchString: "Iran-Contra", explanationText: "<img src=https://i.imgur.com/Lgjinf2.jpeg> An incident in which Reagan sold missiles to Iran and sent the funds to far-right Nicaraguan rebels. Somehow mostly ignored."},
+	{ searchString: "Ayatollah", explanationText: "<img src=https://i.imgur.com/2Ulp8Xn.jpeg> It's a bit of a stereotype to say that the nation's enemies are delusional zealots who just hate America, but he really was just that!"},
+	{ searchString: "Oliver North", explanationText: "<img src=https://i.imgur.com/4uSkhyA.jpeg> Soldier, advisor, patriot, and nothing else."},
+
+
     ///////////////////////////
-  ];
+];

@@ -11,6 +11,15 @@ function ctsAchievement(achievement, difficultyChecker = true){
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
+        "pk": 1,
+        "fields": {
+            "priority": 0,
+            "description": "Let's take a step back, it is June 2013 and you have announced your campaign for Governor of Maryland. How will you position yourself for the primary election – and hopefully, the gubernatorial election?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
         "pk": 623,
         "fields": {
             "priority": 0,
@@ -83,6 +92,15 @@ campaignTrail_temp.questions_json = [
     },
     {
         "model": "campaign_trail.question",
+        "pk": 1020,
+        "fields": {
+            "priority": 3,
+            "description": "You have selected Boyd Rutherford as your running mate. Can you explain your decision and why you think he is right to serve a Lieutenant Governor if you win?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
         "pk": 635,
         "fields": {
             "priority": 4,
@@ -131,7 +149,7 @@ campaignTrail_temp.questions_json = [
         "pk": 629,
         "fields": {
             "priority": 4,
-            "description": "The debate has now moved onto the economy – specifically tax policy.How will you address the issue?",
+            "description": "After several more questions, the debate has moved onto the issue of the economy and specifically tax policy. How will you address the issue?",
             "likelihood": 1
         }
     },
@@ -141,6 +159,24 @@ campaignTrail_temp.questions_json = [
         "fields": {
             "priority": 5,
             "description": "With Brown suddenly going absent from the campaign. Your advisers have suggested to you to hold some rallies? Where will you go?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 7,
+        "fields": {
+            "priority": 5,
+            "description": "Today, the NRA has officially given you an A- grade based off of a questionnaire you did for them. How will you try to downplay this to prevent this endorsement damaging your campaign?",
+            "likelihood": 1
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 8,
+        "fields": {
+            "priority": 5,
+            "description": "The Maryland Democratic Party has today filed a complaint in regards to improper campaign benefits given to your not-for-profit Change Maryland. What is your response to this news?",
             "likelihood": 1
         }
     },
@@ -185,13 +221,85 @@ campaignTrail_temp.questions_json = [
         "pk": 651,
         "fields": {
             "priority": -1,
-            "description": "You only have time to visit one more city before polls close. So which of these do you want to visit?",
+            "description": "Finally, election day. The polls will shortly be closing – giving you the opportunity to only make one more campaign stop. Where across this wonderful state would you like to travel to?",
             "likelihood": 1
         }
     }
 ]
 
 campaignTrail_temp.answers_json = [
+    {
+        "model": "campaign_trail.answer",
+        "pk": 7.1,
+        "fields": {
+            "question": 7,
+            "description": "Quite the opposite actually, I am very proud to have been endorsed by the NRA as it is a testament to my commitment to the Second Amendment."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 7.2,
+        "fields": {
+            "question": 7,
+            "description": "Seriously. This is the last thing I need to happen to me. In these final weeks I must keep emphasising my commitment to keeping the social and gun policies of the O’Malley Administration."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 7.3,
+        "fields": {
+            "question": 7,
+            "description": "I would rather like to ignore this all together and continue with my campaign’s bread and butter – economic policy and the O'Malley Administration's failures on this issue."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 1020.1,
+        "fields": {
+            "question": 1020,
+            "description": "Boyd Rutherford has served the people of Maryland competently for three years in one of the state's most important cabinet position – Secretary of the Department of General Services. He is the most qualified person in this race to be Lieutenant Governor."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 1020.2,
+        "fields": {
+            "question": 1020,
+            "description": "To put it simply, Boyd Rutherford and I see eye to eye ideologically and both are committed to governing Maryland in a pragmatic, moderate way. Together, we will priorities lowering your taxes and making your lives better."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 1.4,
+        "fields": {
+            "question": 1,
+            "description": "I will position myself as an electable moderate in the same vein as former Governor Ehrlich. We can win in Maryland as Republicans by promoting fiscal responsibility while not pushing too far on social policy changes."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 1.3,
+        "fields": {
+            "question": 1,
+            "description": "This election is a referendum on the eight years of failed Governorship by the O'Malley/Brown Administration. From the failed healthcare rollout to the Baltimore Detention Center fiasco, we must restore competence to the Governor's Mansion!"
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 8.1,
+        "fields": {
+            "question": 8,
+            "description": "Let me make something clear, Change Maryland and the state Republican Party alongside my campaign have all acted responsibly and professionally. We rebuke these claims of mismanagement."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 8.2,
+        "fields": {
+            "question": 8,
+            "description": "I am completely unaware of any wrongdoing, but my campaign, Change Maryland and the state Republican Party will conduct an internal investigation and be fully transparent.."
+        }
+    },
     {
         "model": "campaign_trail.answer",
         "pk": 4154,
@@ -213,7 +321,7 @@ campaignTrail_temp.answers_json = [
         "pk": 4156,
         "fields": {
             "question": 624,
-            "description": "This is still a race that we can win, no matter the opponent. The people of Maryland in November will have the chance to vote and decide what is the best way forward for the state."
+            "description": "This is still a race that we can win, no matter the opponent. The people of Maryland in November will have the chance to decide for themselves what the best way forward is for this great state."
         }
     },
     {
@@ -229,7 +337,7 @@ campaignTrail_temp.answers_json = [
         "pk": 4161,
         "fields": {
             "question": 625,
-            "description": "Twitter is the beating heart of the political world. We should focus most of our efforts towards Twitter with lots of links to our policies and goals for a first term."
+            "description": "Right now Twitter is probably the beating heart of the political world. We should direct our online strategy in this direction, and help connect with voters 150 characters at a time."
         }
     },
     {
@@ -237,7 +345,7 @@ campaignTrail_temp.answers_json = [
         "pk": 4162,
         "fields": {
             "question": 625,
-            "description": "We should stick to what we know, keep posting on Facebook while running a suite of ads on the site to make people notice us."
+            "description": "I think we have built ourselves up the strongest on Facebook, and that is where we should continue to focus our online campaign. Maybe we can also set aside more funds for television commercials, instead of working on building up a new profile elsewhere."
         }
     },
     {
@@ -293,7 +401,7 @@ campaignTrail_temp.answers_json = [
         "pk": 4171,
         "fields": {
             "question": 629,
-            "description": "I should bring up the taxation policies of the last eight years under the O'Malley/Brown administration – \"Lt. Governor Brown and governor O'Malley have hiked taxes 40 times in a row...\""
+            "description": "I should bring up the taxation policies of the last eight years under the O'Malley/Brown Administration – \"Lt. Governor Brown and Governor O'Malley have hiked taxes 40 times in a row...\""
         }
     },
     {
@@ -318,6 +426,14 @@ campaignTrail_temp.answers_json = [
         "fields": {
             "question": 632,
             "description": "We have to remember where we are right? This is Maryland, a safe Democratic state, we shouldn't rock the boat with Obama too much."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 50000,
+        "fields": {
+            "question": 632,
+            "description": "No, I would rather continue attacking the O'Malley/Brown Administration and their failures."
         }
     },
     {
@@ -349,7 +465,7 @@ campaignTrail_temp.answers_json = [
         "pk": 4185,
         "fields": {
             "question": 634,
-            "description": "I know that it is in DC, but maybe we can try showcase some of our liberal policies with the release of an Environmental plan at the National Arboretum."
+            "description": "I know that it is located within DC, but maybe we can try showcase some of our liberal policies with the release of an Environmental plan at the National Arboretum."
         }
     },
     {
@@ -373,7 +489,7 @@ campaignTrail_temp.answers_json = [
         "pk": 4188,
         "fields": {
             "question": 636,
-            "description": "Let’s get former Governor Bob Ehrlich to rally with us, myself as well as my running mate did both serve in his administration after all."
+            "description": "Let’s get former Governor Ehrlich to rally with us, myself as well as my running mate did both serve in his administration after all."
         }
     },
     {
@@ -381,7 +497,7 @@ campaignTrail_temp.answers_json = [
         "pk": 4189,
         "fields": {
             "question": 636,
-            "description": "I think that we should see if Chris Christie will come down and campaign with us, I could maybe even learn a thing or two from him on how to win a race in a blue state as a moderate Republican. Also his power as Chair of the RGA could get more Governors in the network to endorse me."
+            "description": "I think that we should see if Governor Christie will come down and campaign with us, I could maybe even learn a thing or two from him on how to win a race in a blue state as a moderate Republican. Also his power as Chair of the RGA could get more Governors in the network to endorse me."
         }
     },
     {
@@ -581,7 +697,7 @@ campaignTrail_temp.answers_json = [
         "pk": 4232,
         "fields": {
             "question": 650,
-            "description": "Push hard on the failures of the O'Malley/Brown administration, keep talking about the tax hikes and the bungled healthcare rollout."
+            "description": "I will hard on the failures of the O'Malley/Brown Administration, keep talking about the tax hikes and the bungled healthcare rollout."
         }
     },
     {
@@ -653,7 +769,7 @@ campaignTrail_temp.answers_json = [
         "pk": 14789,
         "fields": {
             "question": 634,
-            "description": "Howard county is a must win for us. Let's organise a bus tour around the local towns."
+            "description": "Howard County will be highly competitive and has a lot of votes. Let's organise a bus tour around the local towns."
         }
     },
     {
@@ -2867,6 +2983,96 @@ campaignTrail_temp.candidate_state_multiplier_json = [
 campaignTrail_temp.answer_score_global_json = [
     {
         "model": "campaign_trail.answer_score_global",
+        "pk": 7.15,
+        "fields": {
+            "answer": 7.1,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": -0.035
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 7.25,
+        "fields": {
+            "answer": 7.2,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": -0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 7.35,
+        "fields": {
+            "answer": 7.3,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": -0.01
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 8.25,
+        "fields": {
+            "answer": 8.2,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": -0.015
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 8.15,
+        "fields": {
+            "answer": 8.1,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": -0.025
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1020.3,
+        "fields": {
+            "answer": 1020.2,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": 0.0095
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1020.4,
+        "fields": {
+            "answer": 1020.1,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": 0.0105
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1.33,
+        "fields": {
+            "answer": 1.3,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": -0.025
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 1.44,
+        "fields": {
+            "answer": 1.4,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": -0.025
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
         "pk": 1989,
         "fields": {
             "answer": 4192,
@@ -2973,6 +3179,16 @@ campaignTrail_temp.answer_score_global_json = [
             "candidate": 132,
             "affected_candidate": 132,
             "global_multiplier": -0.005
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 50001,
+        "fields": {
+            "answer": 50000,
+            "candidate": 132,
+            "affected_candidate": 132,
+            "global_multiplier": 0.009
         }
     },
     {
@@ -4037,6 +4253,60 @@ campaignTrail_temp.answer_score_state_json = [
 campaignTrail_temp.answer_feedback_json = [
     {
         "model": "campaign_trail.answer_feedback",
+        "pk": 1020.01,
+        "fields": {
+            "answer": 1020.1,
+            "candidate": 132,
+            "answer_feedback": "Selecting Boyd Rutherford reinforces the so-called 'Liberal Republican' image your campaign has been pushing.."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 1020.02,
+        "fields": {
+            "answer": 1020.2,
+            "candidate": 132,
+            "answer_feedback": "Selecting Boyd Rutherford reinforces the so-called 'Liberal Republican' image your campaign has been pushing.."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 1.03,
+        "fields": {
+            "answer": 1.3,
+            "candidate": 132,
+            "answer_feedback": "Governor O'Malley's failures have not been forgotten, and if you keep this up, they will not for some time."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 1.04,
+        "fields": {
+            "answer": 1.4,
+            "candidate": 132,
+            "answer_feedback": "It seems that this cycle, Republicans are looking to either a moderate or a tea party candidate. Hopefully your side prevails."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 8.01,
+        "fields": {
+            "answer": 8.1,
+            "candidate": 132,
+            "answer_feedback": "The board of elections ultimately finds the complains are mostly false, but they did say your campaign failed to disclose the value of a poll."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 8.02,
+        "fields": {
+            "answer": 8.2,
+            "candidate": 132,
+            "answer_feedback": "The board of elections ultimately finds the complains are mostly false, but they did say your campaign failed to disclose the value of a poll."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
         "pk": 1631,
         "fields": {
             "answer": 4188,
@@ -4049,7 +4319,7 @@ campaignTrail_temp.answer_feedback_json = [
         "pk": 1635,
         "fields": {
             "answer": 4192,
-            "candidate": 131,
+            "candidate": 132,
             "answer_feedback": "Brown pounces on this decision and runs commercials saying you will ban abortions. Not a good week for you."
         }
     },
@@ -4058,7 +4328,7 @@ campaignTrail_temp.answer_feedback_json = [
         "pk": 1638,
         "fields": {
             "answer": 4195,
-            "candidate": 131,
+            "candidate": 132,
             "answer_feedback": "There is nothing wrong with motivating your base to turn out, but there may not be enough people in that area to win you the election."
         }
     },
@@ -4085,7 +4355,7 @@ campaignTrail_temp.answer_feedback_json = [
         "pk": 1654,
         "fields": {
             "answer": 4216,
-            "candidate": 131,
+            "candidate": 132,
             "answer_feedback": "Brown is really off the ball tonight and stuffs up on a couple of questions regarding the healthcare rollout. You are unanimously declared the winner."
         }
     },
@@ -4104,7 +4374,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 4229,
             "candidate": 132,
-            "answer_feedback": "This is a good proposal."
+            "answer_feedback": "Parents are very happy to see you make a commitment to improving Maryland's education system."
         }
     },
     {
@@ -4140,7 +4410,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 4156,
             "candidate": 132,
-            "answer_feedback": "As Expected, Brown begins with a large lead over you."
+            "answer_feedback": "As Expected, Brown begins the race with a large lead over you."
         }
     },
     {
@@ -4186,6 +4456,42 @@ campaignTrail_temp.answer_feedback_json = [
             "answer": 4165,
             "candidate": 132,
             "answer_feedback": "While most were expecting some condemnation of Trump’s statements, this will do."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 50003,
+        "fields": {
+            "answer": 50000,
+            "candidate": 132,
+            "answer_feedback": "Governor O'Malley's administration is continually growing unpopular, good decision."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 7.11,
+        "fields": {
+            "answer": 7.1,
+            "candidate": 132,
+            "answer_feedback": "In Maryland, any mention of the NRA sends a shiver down most people’s spines. This response can only harm you."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 7.22,
+        "fields": {
+            "answer": 7.2,
+            "candidate": 132,
+            "answer_feedback": "Despite this, the NRA does not rescind their endorsement, but at least you are actively trying to distance yourself from it."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 7.33,
+        "fields": {
+            "answer": 7.3,
+            "candidate": 132,
+            "answer_feedback": "While this makes sense, ignoring the issue may cause socially progressive voters who were leaning towards your campaign to vote for someone else instead."
         }
     },
     {
@@ -4329,7 +4635,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 4194,
             "candidate": 132,
-            "answer_feedback": "YOU SAID WHAT?!"
+            "answer_feedback": "YOU SAID WHAT?! We are in Maryland, not Mississippi."
         }
     },
     {
@@ -4559,6 +4865,25 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
+//Variables for Achievements
+var Governor = 0;
+
+cyoAdventure = function(a) {
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1];
+    e.noCounter += 1
+
+    if (ans == 1.3 || ans == 7.3 || ans == 4171 || ans == 4232 || ans == 14781 || ans == 50000) {
+        Governor += 1;
+    }
+
+    // Check achievement immediately after increment
+    if (Governor === 6) {
+        ctsAchievement("Who Am I Running Against?");
+    }
+
+};
+
+campaignTrail_temp.cyoa = true
 campaignTrail_temp.candidate_image_url = "https://i.imgur.com/0C1WNWg.jpeg";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/VanbHpb.jpeg";
 campaignTrail_temp.candidate_last_name = "Hogan";
@@ -4580,11 +4905,11 @@ endingPicker = (out, totv, aa, quickstats) => {
     e.final_overall_results.sort((a, b) => b.popular_votes - a.popular_votes);
 
     if (aa[0].candidate === 132) {
-        setImage("https://i.imgur.com/0C1WNWg.jpeg");
-ctsAchievement("Maryland Changed")
+        setImage("https://file.garden/aQrk4ZgQJCx_hnkl/mdfix/0C1WNWg.jpg");
+        ctsAchievement("Maryland Changed");
         return `
             <h3>Congratulations! You Won The Gubernatorial Election!</h3><br>
-            Many pundits and amateurs alike were quick to call this as on of the biggest upsets in Maryland's history and the biggest upset of the 2014 midterms. Nobody thought that this would happen. People are already starting to speculate about you launching a presidential run in 2016, or in 2020. But for now, the work begins to fix Maryland. You will be remembered for more than just a businessman.
+            Many pundits and amateurs alike were quick to call this one of the biggest upsets in Maryland's history and the biggest upset of the 2014 midterms. Nobody thought that this would happen. People are already starting to speculate about you launching a presidential run in 2016, or in 2020. But for now, the work begins to fix Maryland. You will be remembered for more than just a businessman.
         `;
     }
 
@@ -4605,6 +4930,8 @@ ctsAchievement("Maryland Changed")
     }
 };
 
+
+
 campaignTrail_temp.jet_data = [{
     "mapping_enabled": true,
     "mapping_data": {
@@ -4623,8 +4950,123 @@ campaignTrail_temp.jet_data = [{
     "banner_data": {
         "canName": "Hogan",
         "runName": "Rutherford",
-        "canImage": "https://i.imgur.com/0C1WNWg.jpeg",
-        "runImage": "https://i.imgur.com/VanbHpb.jpeg"
+        "canImage": "https://file.garden/aQrk4ZgQJCx_hnkl/mdfix/0C1WNWg.jpg",
+        "runImage": "https://file.garden/aQrk4ZgQJCx_hnkl/mdfix/VanbHpb.jpg"
     },
 }
 ]
+
+
+//Randomiser from ALOT
+// standard Fisher-Yates shuffle function
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+const questionCount = campaignTrail_temp.global_parameter_json[0].fields.question_count;
+const originalQuestions = campaignTrail_temp.questions_json;
+
+if (questionCount == 24) {
+    const fixedStart = originalQuestions.slice(0, 3);
+
+    // create the main randomized batch
+    const mainPool = [
+        ...originalQuestions.slice(3, 14)
+    ];
+    shuffle(mainPool);
+
+    // questions 13-20 (fixed at the end)
+    const fixedMid = originalQuestions.slice(14, 17);
+
+    const midPool = [
+        ...originalQuestions.slice(17, 21)
+    ];
+    shuffle(midPool);
+
+    // questions 22-24
+    const fixedEnd = originalQuestions.slice(21, 24);
+
+    // assemble the new, final question list
+    const newQuestionsList = [
+        ...fixedStart,
+        ...mainPool,
+        ...fixedMid,
+        ...midPool,
+        ...fixedEnd
+    ];
+
+    // replace the old question list with the newly constructed one
+    campaignTrail_temp.questions_json = newQuestionsList;
+
+    // update the game's question count to match the new array length
+	// this is so we don't crash before going to election night
+    campaignTrail_temp.global_parameter_json[0].fields.question_count = newQuestionsList.length;
+
+} 
+console.log("Question re-ordering applied. At least this is working.");
+
+
+// Tooltips
+function getTooltips(str) {
+    let matches = [];
+
+    tooltipList.forEach((tooltip, index) => {
+        // Adjust the regex to match searchString potentially surrounded by “ and followed by optional punctuation
+       let regex = new RegExp(`(?<=\\b|\\s|^|“)${tooltip.searchString}(?=[.,;!?]?\\b|\\s|”|$)`, 'g');
+
+
+        let match;
+        while ((match = regex.exec(str)) !== null) {
+            matches.push({
+                start: match.index + (match[0].startsWith('“') ? 1 : 0), // Adjust for potential starting “
+                end: match.index + match[0].length - (match[0].endsWith('”') ? 1 : 0) - (match[2] ? 1 : 0), 
+                tooltipIndex: index
+            });
+        }
+    });
+
+    // Sort by starting position; if two start at the same position, longer match comes first
+    matches.sort((a, b) => a.start - b.start || b.end - b.start - (a.end - a.start));
+
+    // Filter out overlaps
+    for (let i = 0; i < matches.length - 1; ) {
+        if (matches[i + 1].start < matches[i].end) {
+            matches.splice(i + 1, 1); // Remove the next match since it overlaps
+        } else {
+            i++; // Move to next match
+        }
+    }
+
+    return matches;
+}
+function applyTooltips(str) {
+    const matches = getTooltips(str);
+    let result = '';
+    let lastIndex = 0;
+
+    matches.forEach(match => {
+        const tooltip = tooltipList[match.tooltipIndex];
+        result += str.slice(lastIndex, match.start);
+        result += `<span class='mytooltip'>${tooltip.searchString}<span class='mytooltiptext'>${tooltip.explanationText}</span></span>`;
+        lastIndex = match.end;
+    });
+
+    result += str.slice(lastIndex); // Add the remainder of the original string
+    return result;
+}
+
+function applyTooltipsToObject(obj) {
+    for (let key in obj) {
+        if (typeof obj[key] === 'string') {
+            obj[key] = applyTooltips(obj[key]);
+        } else if (typeof obj[key] === 'object') {
+            applyTooltipsToObject(obj[key]); // Recursive call
+        }
+    }
+}
+applyTooltipsToObject(campaignTrail_temp.questions_json);
+applyTooltipsToObject(campaignTrail_temp.answers_json);
+applyTooltipsToObject(campaignTrail_temp.answer_feedback_json);
