@@ -158,16 +158,24 @@ function mapCache(skip = false) {
       return false;
     }
   }
-  $("#map_container").remove();
-  $("#main_content_area").html(
-    '<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>',
-  );
-  $("#main_content_area")[0].style.display = "";
 
   const rr = A(2);
   window.rFuncRes = rFunc(rr, 0);
-  $("#map_container").usmap(window.rFuncRes);
-  $("#main_content_area")[0].style.display = "none";
+
+  const $mapContainer = $("#map_container");
+  if ($mapContainer.length > 0 && $mapContainer.data("plugin-usmap")) {
+    updateUsMapStyles(window.rFuncRes);
+  } else {
+    $mapContainer.remove();
+    $("#main_content_area").html(
+      '<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>',
+    );
+    $("#map_container").usmap(window.rFuncRes);
+  }
+
+  if ($("#main_content_area")[0]) {
+    $("#main_content_area")[0].style.display = "none";
+  }
 
   return true;
 }
