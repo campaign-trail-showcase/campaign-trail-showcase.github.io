@@ -2672,8 +2672,13 @@ function rFunc(t, i) {
     return acc;
   }, "");
 
+  let lastHoveredStateName = null;
+
   // hover/click handler
   const hoverHandler = (_evt, data) => {
+    if (lastHoveredStateName === data.name) return;
+    lastHoveredStateName = data.name;
+
     window.nn2 = latestCandidates;
     window.nn3 = evArray;
     rrr = cachedVV;
