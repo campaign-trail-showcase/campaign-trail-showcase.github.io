@@ -646,10 +646,22 @@ function applyGlobalStyles(css, id = 'app-theme') {
 const pile = `
   @font-face {
     font-family: 'Claremont';
-    src: url('https://file.garden/aKoRqbLZKBsHizSA/moonbeam/claremontrr-medium.woff2') format('woff');
+	src: url('https://file.garden/aNtAfG887DiA_7lO/Moonbeam/Claremont_woff2') format('woff2'),
+		 url('https://file.garden/aNtAfG887DiA_7lO/Moonbeam/Claremont_woff') format('woff');
     font-weight: normal;
     font-style: normal;
+	font-display: swap;
   }
+  
+  @font-face {
+    font-family: 'Claremont';
+	src: url('https://file.garden/aNtAfG887DiA_7lO/Moonbeam/ClaremontBold_woff2') format('woff2'),
+		 url('https://file.garden/aNtAfG887DiA_7lO/Moonbeam/ClaremontBold_woff') format('woff');
+    font-weight: bold;
+    font-style: bold;
+	font-display: swap;
+  }
+  
   .container {
 	  background-color: #001e38;
 	  border: 4px solid rgba(166, 163, 255, 0.5);
@@ -755,7 +767,8 @@ const pile = `
 	}
 
 	#overall_result,
-	#state_info {
+	#state_info,
+	#state_result {
 	  border: 3px solid rgba(38, 136, 240, 0.5);
 	}
 
@@ -764,7 +777,6 @@ const pile = `
 	#state_result h3 {
 	  background: #cad5ff;
 	  padding: .1em 0;
-	  font-weight: normal;
 	  text-transform: lowercase;
 	}
 	#state_result {
@@ -774,6 +786,152 @@ const pile = `
 	#state_info {
 	  height: auto;
 	}
+	
+	/* state info */
+	#state_info {
+	  background: linear-gradient(#f3f6fb, #e7ecf3);
+	  margin-top: 0.5em;
+	  font-family: "Bahnschrift", "Source Serif 4", "Claremont", sans-serif;
+	  color: #0f1a29;
+	}
+
+	#state_info h3 {
+	  margin: 0 0 0.25em 0;
+	  letter-spacing: 0.05em;
+	  border-bottom: 1px solid #243f63;
+	}
+
+	#state_info > p:first-of-type {
+	  margin: .5em 0 0.4em 0;
+	  font-weight: 600;
+	  font-size: 1.1em;
+	}
+
+	#state_info ul {
+	  font-size: .85em;
+	  list-style: none;
+	  padding: 0;
+	  margin: 0.3em 0 0.4em 0;
+	}
+
+	#state_info li {
+	  display: grid;
+	  grid-template-columns: 1fr auto 1fr;
+	  gap: 0.35em;
+	  padding: 0.2em 0;
+	  border-bottom: 1px dotted #9aaacd;
+	}
+
+	#state_info li:last-child {
+	  border-bottom: none;
+	}
+
+	#state_info li span:first-child {
+	  font-weight: 500;
+	  text-align: right;
+	  color: #243f63;
+	}
+
+	#state_info li span:nth-child(2) {
+	  opacity: 0.55;
+	}
+
+	#state_info li span:last-child {
+	  font-weight: 600;
+	  text-align: left;
+	}
+
+	#state_info p:last-of-type,
+	#state_info p:nth-last-of-type(2) {
+	  margin: .3em 0 .4em 0;
+	  font-size: 0.9em;
+	  color: #2d3f5c;
+	}
+	
+	/* overall result */
+	#overall_result {
+	  background: linear-gradient(#f3f6fb, #e7ecf3);
+	  font-family: "Bahnschrift", "Source Serif 4", "Claremont", sans-serif;
+	  color: #0f1a29;
+	}
+
+	#overall_result h3 {
+	  font-weight: 600;
+	  letter-spacing: 0.05em;
+	  border-bottom: 1px solid #243f63;
+	}
+
+	#switchingEst {
+	  list-style: none;
+	  padding: 0;
+	  margin: 0.5em 0 0.5em 0;
+	}
+	#switchingEst b {
+	  display: inline-block;
+	  min-width: 4.5em;
+	  font-weight: 600;
+	  color: #243f63;
+	}
+
+	#switchingEst br {
+	  display: block;
+	  margin-bottom: 0.2em;
+	}
+	#switchingEst b:first-of-type {
+	  color: #0f1a29;
+	}
+	
+	/* state result */
+	#state_result {
+	  background: linear-gradient(#f3f6fb, #e7ecf3);
+	  margin-top: 0.6em;
+	  font-family: "Bahnschrift", "Source Serif 4", "Claremont", sans-serif;
+	  color: #0f1a29;
+	}
+	#state_result h3 {
+	  margin: 0 0 0.35em 0;
+	  padding-bottom: 0.2em;
+	  font-weight: 600;
+	  letter-spacing: 0.05em;
+	  border-bottom: 1px solid #243f63;
+	}
+
+	#state_result p {
+	  margin: 0.25em 0;
+	}
+	#state_result p:nth-of-type(2) {
+	  font-weight: 600;
+	  font-size: 1.05em;
+	}
+	#state_result p:nth-of-type(3) {
+	  font-size: 0.85em;
+	  color: #2d3f5c;
+	}
+	#state_result ul {
+	  list-style: none;
+	  margin: 0.4em 0 0 0;
+	}
+	#state_result li {
+	  display: grid;
+	  grid-template-columns: auto 1fr;
+	  align-items: center;
+	  gap: 0.4em;
+	  padding: 0.1em 0;
+	}
+	#state_result li span {
+	  display: inline-block;
+	  width: 0.9em;
+	  height: 0.9em;
+	  border-radius: 2px;
+	  border: 1px solid rgba(0,0,0,0.25);
+	  text-indent: -9999px;
+	}
+	#state_result li:first-child {
+	  font-weight: 600;
+	}
+
+
+
 
 	#results_container, #overall_details_container, #main_content_area_reading {
 	  color: #fff;
@@ -822,61 +980,125 @@ const pile = `
 	.person_summary {
 	  text-align: left;
 	}
+	
+	#pvswitcher,
+			#ev_est {
+			  background: none;
+			  border: none;
+			  padding: 0;
+			  color: #002e75;
+			  font-size: 1em;
+			}
+			#pvswitcher {
+			  margin-top: .25em;
+			}
+      #ev_est {
+			  margin-bottom: .25em;
+			}
 
+			#pvswitcher:hover,
+			#ev_est:hover {
+			  color: #000995;
+				cursor: pointer;
+				text-decoration: underline; 
+			}	
+
+	/* tooltips */
 	.mytooltip {
 	  position: relative;
 	  display: inline-block;
-	  cursor: pointer;
-	  background-color: lightblue;
-	  padding: 0 .2em;
-	  border-radius: .2em;
+	  cursor: help;
+
+	  background: linear-gradient(#eef3fa, #dfe7f3);
+	  border: 1px solid #6c7a8c;
+	  border-radius: 0.2em;
+	  padding: 0 0.25em;
+
+	  font-weight: 500;
+	  color: #0f1a29;
+	  user-select: none;
 	}
 
 	.mytooltip .mytooltiptext,
 	.bubble {
-	  background-color: #9aaacd;
-	  color: #000;
-	  text-align: center;
-	  border-radius: .2em;
 	  position: absolute;
 	  z-index: 99;
+
+	  width: 150px;
+	  padding: 10px;
+
+	  background: linear-gradient(#b3bfdc, #9aaacd);
+	  color: #0f1a29;
+
+	  font-family: "Bahnschrift", "Source Serif 4", sans-serif;
+	  font-size: 13px;
+	  line-height: 1.45;
+	  letter-spacing: 0.01em;
+	  text-align: center;
+
+	  border: 1.5px solid #243f63;
+	  border-radius: 0.25em;
+
+	  box-shadow:
+		0 2px 6px rgba(0,0,0,0.25),
+		inset 0 1px 0 rgba(255,255,255,0.4);
+
 	  bottom: 20%;
 	  left: 20%;
 	  margin-left: -90px;
-	  opacity: 0;
-	  transition: opacity 0.3s;
-	  outline: 1px solid black;
-	  pointer-events: none;
-	  font-size: 13px !important;
-	  line-height: 1.5em !important;
-	  font-weight: normal !important;
-	  font-style: normal !important;
-	}
 
-	.mytooltip .mytooltiptext {
-	  width: 150px;
-	  padding: 10px;
+	  opacity: 0;
+	  transform: translateY(4px) scale(0.98);
+	  transition:
+		opacity 0.25s ease,
+		transform 0.25s ease;
+
+	  pointer-events: none;
 	}
 
 	.mytooltip .mytooltiptext img {
-	  max-width: 150px;
+	  max-width: 100%;
 	  height: auto;
-	}
-
-	.bubble {
-	  width: 150px;
-	  padding: 11px;
+	  border-radius: 0.15em;
 	}
 
 	.mytooltip:hover .mytooltiptext,
 	.mytooltip:hover .bubble {
 	  opacity: 1;
-	  transition-delay: 0.5s;
+	  transform: translateY(0) scale(1);
+	  transition-delay: 0.35s;
 	}
 
-	.mytooltip:hover .bubble-bottom-left:before,
-	.mytooltip:hover .bubble-bottom-left:after {
-	  opacity: 1;
+	.mytooltip:focus-visible {
+	  outline: 1px dotted #6079a0;
+	  outline-offset: 2px;
+	}
+
+	.bubble-bottom-left::after {
+	  content: "";
+	  position: absolute;
+	  bottom: -6px;
+	  left: 18px;
+
+	  border-width: 6px 6px 0 6px;
+	  border-style: solid;
+	  border-color: #243f63 transparent transparent transparent;
+	}
+
+	.bubble-bottom-left::before {
+	  content: "";
+	  position: absolute;
+	  bottom: -5px;
+	  left: 19px;
+
+	  border-width: 5px 5px 0 5px;
+	  border-style: solid;
+	  border-color: #9aaacd transparent transparent transparent;
+	}
+
+	.mytooltip .mytooltiptext,
+	.bubble {
+	  max-width: min(150px, 90vw);
 	}
 
 	#candidate_pic,
@@ -912,7 +1134,8 @@ const pile = `
 	#map_container {
 	  height: 30.78em;
 	  border: 3px solid rgba(38, 136, 240, 0.5);
-	  background: #def1ff;
+	  background: linear-gradient(#f4f6fa, #e6ebf4), repeating-linear-gradient( 90deg, rgba(0,0,0,0.015), rgba(0,0,0,0.015) 1px, transparent 1px, transparent 4px );
+	  /* linear-gradient( 135deg, rgba(255,255,255,0.85), rgba(230,236,247,0.85) ); */
 	}
 
 	.visit_text {
@@ -947,6 +1170,7 @@ const pile = `
 	button {
 	  background: #e7ecf3;
 	  color: #0f1a29;
+	  font-family: "Bahnschrift", "Source Serif 4", sans-serif;
 	  border: 1.5px solid #243f63;
 	  border-radius: 0.2em;
       text-transform: none;
@@ -1007,6 +1231,8 @@ const pile = `
 	#question_form label:hover {
 	  background: #eee;
 	  font-weight: normal;
+	  font-size: 1em;
+	  text-decoration: underline dotted #08087b;
 	}
 
 	table {
@@ -1057,6 +1283,137 @@ const pile = `
 		vertical-align: top;
 		width: 0.9em;
 	}
+	
+	/* game window background */
+	#game_window {
+	  position: relative;
+	  overflow: hidden;
+	}
+
+	#game_window::before {
+	  content: "";
+	  position: absolute;
+	  inset: 0;
+	  z-index: 0;
+
+	  background-image: url("https://i.imgur.com/ACtGvLA.png");
+	  background-size: cover;
+	  background-position: 50% 30%;
+	  background-repeat: no-repeat;
+
+	  filter: saturate(0.9) contrast(1.05);
+	}
+
+	#game_window::after {
+	  content: "";
+	  position: absolute;
+	  inset: 0;
+	  z-index: 0;
+	  box-shadow: inset 0 0 140px rgba(0,0,0,0.35);
+	  pointer-events: none;
+	}
+
+	/* Lift only the real UI */
+	.game_header,
+	.inner_window_question,
+	.inner_inner_window,
+	.inner_window_sign_display,
+	g,
+	#main_content_area,
+	#map_footer,
+	.visit_text,
+	.inner_window_w_desc,
+	#main_content_area_reading {
+	  position: relative;
+	  z-index: 1;
+	}
+	
+	/* necessary so tooltips don't break */
+	#game_window {
+	  overflow-x: visible !important;
+	  overflow-y: visible !important;
+	}
+	
+	#question_form label:hover {
+	  background: rgb(238, 238, 238);
+	  font-weight: normal;
+	  font-size: 1em;
+	  cursor: url("https://raw.githubusercontent.com/antiden/macOS-cursors-for-Windows/refs/heads/main/2.%20El%20Capitan%20and%20before/1.%20No%20Shadow/1.%20Normal/Normal.cur");
+	}
+	#question_form input[type="radio"]:checked + label {
+	  background: rgb(238, 238, 238);
+	  font-weight: normal;
+	  font-size: 1em;
+	  text-decoration: underline dotted #08087b;
+	}
+	
+	/* Tweaks for a larger election description */
+			#election_summary {
+			  display: flex;
+			  flex-flow: column;
+			  margin: 0;
+			  padding: 0;
+			}
+			#election_summary p {
+				margin: 1em 1em 1em .5em;
+			}
+			#election_description_window {
+			  display: flex;
+			  height: auto;
+			}
+			#election_image {
+			  display: flex;
+			  flex-flow: column;
+			  justify-content: center;
+			  margin: 1em 0.75em 1em 1.25em;
+			}
+      #election_image img {
+			  outline: 1px solid #012b8f;
+				outline-offset: 2px;
+				border-radius: .1em;
+			}
+			#election_image img {
+			  height: 80%;
+			  object-fit: cover;
+			}
+			#election_year_form + p:first-of-type {
+			  padding-top: 1em;
+			}
+			
+	/* for the character window */
+	.person_description_window {
+	  display: flex;
+	  padding: 0.5em;
+	  background: #f3f6fb;
+	  border: 1.5px solid #243f63;
+	  border-radius: 0.25em;
+	  color: #0f1a29;
+	  font-family: "Bahnschrift", "Source Serif 4", "Claremont", sans-serif;
+	}
+	.person_image {
+	  flex: 0 0 auto;
+	  padding: 0.3em;
+	  background: linear-gradient(#e7ecf3, #dbe3ef);
+	  border: 1px solid #243f63;
+	  border-radius: 0.2em;
+	  margin: 1.35em 1em;
+	}
+	.person_image img {
+	  display: block;
+	  border-radius: 0.15em;
+	}
+	#candidate_summary {
+	  background: #f8fafd;
+	  border: 1px solid #c9d3e1;
+	  border-radius: 0.2em; 
+	  margin: 1.35em .5em !important;
+	  padding: 0.3em .5em;
+	}
+
+	#candidate_summary ul {
+	  margin: 0;
+	  padding: 0 1em;
+	}		
 
 
   /* Mobile compatibility fixes - taken from TTNW, ported to 2016ALOT, and used here */
@@ -1369,6 +1726,26 @@ campaignTrail_temp.achievements = {
 	"Good Intentions": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Get serious about denuclearization.",
+        "cannotBeCheated": true
+    },
+	"Capitalism with Californian Characteristics": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Spread economic gospel to the unbelievers.",
+        "cannotBeCheated": true
+    },
+	"Third Temple": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Become Israel’s strongest soldier.",
+        "cannotBeCheated": true
+    },
+	"Desert Flop": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Make an extremely preventable mistake.",
+        "cannotBeCheated": true
+    },
+	"Took the Talk to Poland": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Jesse Jackson approves.",
         "cannotBeCheated": true
     },
 	"Damned Foolish Thing in the Balkans": {
