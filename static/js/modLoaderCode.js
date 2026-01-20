@@ -870,6 +870,7 @@ $(document).ready(async () => {
   if (gridEl) gridEl.innerHTML = `<div id="loading-mods-text" style="text-align:center;margin:20px;">Loading mods...</div>`;
 
   const modNameParam = getUrlParam("modName");
+  const localModParam = getUrlParam("localMod");
 
   favoriteMods = new Set(
     localStorage.getItem("favoriteMods")?.split(",") || [],
@@ -1087,7 +1088,15 @@ $(document).ready(async () => {
 
   applyModBoxThemes();
 
-  if (modNameParam) {
+  // check for localMod parameter
+  if (localModParam) {
+    customThemesButton.style.display = "none";
+    if (customMods.has(localModParam)) {
+      loadModFromButton(localModParam);
+    } else {
+      alert(`The local mod "${localModParam}" could not be found in your saved mods.`);
+    }
+  } else if (modNameParam) {
     customThemesButton.style.display = "none";
     loadModFromButton(modNameParam);
   }
