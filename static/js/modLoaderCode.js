@@ -1338,8 +1338,34 @@ async function addCustomMod(code1, code2) {
   modList.unshift(modView);
 
   // ensure "Custom" tag is checked so the new mod is visible
+  let customTagFound = false;
   for (const tagCheckbox of tagList) {
-    if (tagCheckbox.value === "Custom") tagCheckbox.checked = true;
+    if (tagCheckbox.value === "Custom") {
+      tagCheckbox.checked = true;
+      customTagFound = true;
+    }
+  }
+
+  // if the "Custom" tag button doesn't exist yet, create it
+  if (!customTagFound) {
+    const tagsGrid = document.getElementById("tags");
+    const tagButton = document.createElement("div");
+    tagButton.classList.add("tag-button");
+    
+    tagButton.innerHTML = `
+      <input type="checkbox" id="Custom" name="Custom" value="Custom" checked>
+      <label style="user-select:none" for="Custom">Custom</label><br>
+    `;
+    
+    const checkbox = tagButton.getElementsByTagName("INPUT")[0];
+    
+    tagButton.addEventListener("click", (event) => {
+      if (event.target === tagButton) checkbox.click();
+    });
+    
+    checkbox.addEventListener("change", updateModViews);
+    tagList.push(checkbox);
+    tagsGrid.appendChild(tagButton);
   }
   
   // cached code 2
