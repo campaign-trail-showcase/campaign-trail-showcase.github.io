@@ -1740,6 +1740,12 @@ async function loadModFromButton(modValue) {
   loadingFromModButton = true;
 
   if (customMods.has(modValue)) {
+    // update URL for local mods
+    const pageURL = new URL(window.location.href);
+    pageURL.searchParams.delete("modName");
+    pageURL.searchParams.set("localMod", modValue);
+    window.history.replaceState(null, "", `${pageURL.pathname}?${pageURL.searchParams.toString().replaceAll("+", "%20")}`);
+
     let modData = null;
     try {
         modData = await getModFromDB(modValue);
@@ -1776,7 +1782,13 @@ async function loadModFromButton(modValue) {
     customMod = modValue;
   } else {
     const pageURL = new URL(window.location.href);
-    if (!pageURL.searchParams.has("modName")) {
+    
+    // ensure we switch params if moving from a local mod to an official one
+    if (pageURL.searchParams.has("localMod")) {
+        pageURL.searchParams.delete("localMod");
+    }
+
+    if (!pageURL.searchParams.has("modName") || pageURL.searchParams.get("modName") !== modValue) {
       pageURL.searchParams.set("modName", modValue);
       window.history.replaceState(null, "", `${pageURL.pathname}?${pageURL.searchParams.toString().replaceAll("+", "%20")}`);
     }
