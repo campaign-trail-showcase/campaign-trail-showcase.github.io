@@ -644,579 +644,920 @@ function applyGlobalStyles(css, id = 'app-theme') {
 }
 
 const pile = `
-  @font-face {
-    font-family: 'Claremont';
-    src: url('https://file.garden/aKoRqbLZKBsHizSA/moonbeam/claremontrr-medium.woff2') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-  .container {
-	  background-color: #001e38;
-	  border: 4px solid rgba(166, 163, 255, 0.5);
-	  font-family: 'Claremont', sans-serif;
-	}
+@font-face {
+  font-family: 'Claremont';
+  src: url('https://file.garden/aNtAfG887DiA_7lO/Moonbeam/Claremont_woff2') format('woff2'),
+       url('https://file.garden/aNtAfG887DiA_7lO/Moonbeam/Claremont_woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
-	#game_window {
-	  background-color: #2d4f6b !important;
-	  border: 3px solid rgba(38, 136, 240, 0.5);
-	  display: flex;
-	  flex-direction: column;
-	  min-height: 587px;
-	  height: auto;
-	}
+@font-face {
+  font-family: 'Claremont';
+  src: url('https://file.garden/aNtAfG887DiA_7lO/Moonbeam/ClaremontBold_woff2') format('woff2'),
+       url('https://file.garden/aNtAfG887DiA_7lO/Moonbeam/ClaremontBold_woff') format('woff');
+  font-weight: bold;
+  font-style: bold;
+  font-display: swap;
+}
 
-	/* for the default CTS/NCT footer */
-	#game_window g {
-	  display: flex;
-	  flex-flow: row wrap;
-	  justify-content: center;
-	  align-items: center;
-	  gap: 8px;
-	  padding: 5px 0;
-	}
+body {
+  background-image: url('https://i.imgur.com/ACtGvLA.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
 
-	.inner_window_w_desc {
-	  border: .2em groove #1e1e52;
-	  background-color: #315a7f !important;
-	}
+.container {
+  background-color: #001e38;
+  border: 4px solid rgba(166, 163, 255, 0.5);
+  font-family: 'Claremont', sans-serif;
+}
 
-	.inner_window_w_desc p {
-	  margin: 1em;
-	}
+#game_window {
+  position: relative;
+  background-color: #2d4f6b !important;
+  border: 3px solid rgba(38, 136, 240, 0.5);
+  display: flex;
+  flex-direction: column;
+  min-height: 587px;
+  height: auto;
+  /* necessary so tooltips don't break */
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
 
-	.inner_window_w_desc h3 {
-	  color: #ffffff;
-	}
+#game_window::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("https://i.imgur.com/ACtGvLA.png");
+  background-size: cover;
+  background-position: 50% 30%;
+  background-repeat: no-repeat;
+  filter: saturate(0.9) contrast(1.05);
+}
 
-	.inner_inner_window h3 {
-	  padding: 5px 2px;
-	  background-color: #DFE3EC;
-	  border: 2px solid rgba(13, 10, 89, 0.64);
-	  margin: 0 .5em .5em;
-	  border-radius: 0 0 .15em .15em;
-	}
+#game_window::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  box-shadow: inset 0 0 140px rgba(0,0,0,0.35);
+  pointer-events: none;
+}
 
-	.inner_window_question {
-	  min-height: 321px;
-	  height: auto !important;
-	  display: flex;
-	  flex-direction: column;
-	}
+.game_header,
+.inner_window_front,
+.inner_window_question,
+.inner_inner_window,
+.inner_window_sign_display,
+#game_window g,
+#main_content_area,
+#map_footer,
+.visit_text,
+.inner_window_w_desc,
+#main_content_area_reading {
+  position: relative;
+  z-index: 1;
+}
 
-	.inner_window_question p:last-of-type { /* so this doesn't overlap with the candidate images */
-      margin: 3.5em auto .5em auto;
-    }
+.game_header {
+  background-color: #0b2740;
+  border-bottom: .2em solid rgba(151, 178, 240, 0.55);
+}
 
-	.inner_window_question h3 .mytooltip {
-	  background-color: lightskyblue;
-	}
+.footer {
+  border-top: .15em solid rgba(108, 89, 244, 0.55);
+  margin-top: .5em;
+}
 
-	.content_single {
-	  border-top: .15em solid rgba(108, 89, 244, 0.55);
-	}
+#game_window g {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+}
 
-	.footer {
-	  border-top: .15em solid rgba(108, 89, 244, 0.55);
-	  margin-top: .5em;
-	}
+/* UI elements & windows */
+.inner_window_w_desc {
+  border: .2em groove #1e1e52;
+  background-color: #315a7f !important;
+}
 
-	.game_header {
-	  background-color: #0b2740;
-	  border-bottom: .2em solid rgba(151, 178, 240, 0.55);
-	}
+.inner_window_w_desc p {
+  margin: 1em;
+}
 
-	.overlay_window p {
-	  font-weight: normal;
-	}
+.inner_window_w_desc h3 {
+  color: #ffffff;
+}
 
-	.overlay_window h3 {
-	  background-color: #2b3f6e;
-	  border-radius: .1em .1em 0 0;
-	  border-bottom: 3px groove #4268af;
-	  color: #fff;
-	  font-weight: normal;
-	}
+.inner_inner_window h3 {
+  padding: 5px 2px;
+  background-color: #DFE3EC;
+  border: 2px solid rgba(13, 10, 89, 0.64);
+  margin: 0 .5em .5em;
+  border-radius: 0 0 .15em .15em;
+}
 
-	.overlay_window img {
-	  border: none;
-	  outline: 3px double #115a9a;
-	}
+.inner_window_question {
+  min-height: 321px;
+  height: auto !important;
+  display: flex;
+  flex-direction: column;
+}
 
-	#visit_window {
-	  height: auto;
-	  outline: 2px solid #8f8fd6;
-	  border: none;
-	  border-radius: .2em;
-	}
+.inner_window_question p:last-of-type {
+  margin: 3.5em auto .5em auto;
+}
 
-	#overall_result_container,
-	#menu_container {
-	  background-color: #0E5888;
-	}
+.inner_window_question h3 .mytooltip {
+  background-color: lightskyblue;
+}
 
-	#overall_result,
-	#state_info {
-	  border: 3px solid rgba(38, 136, 240, 0.5);
-	}
+/* content & overlays */
+.content_single {
+  border-top: .15em solid rgba(108, 89, 244, 0.55);
+}
 
-	#overall_result h3,
-	#state_info h3,
-	#state_result h3 {
-	  background: #cad5ff;
-	  padding: .1em 0;
-	  font-weight: normal;
-	  text-transform: lowercase;
-	}
-	#state_result {
-	  min-height: 75px;
-	}
+.overlay_window p {
+  font-weight: normal;
+}
 
-	#state_info {
-	  height: auto;
-	}
+.overlay_window h3 {
+  background-color: #2b3f6e;
+  border-radius: .1em .1em 0 0;
+  border-bottom: 3px groove #4268af;
+  color: #fff;
+  font-weight: normal;
+}
 
-	#results_container, #overall_details_container, #main_content_area_reading {
-	  color: #fff;
-	}
-	#recommended_reading_box {
-	  color: #000;
-	}
-	#overall_details_container a {
-	  color: #f7ff00;
-	  font-weight: normal;
-	}
-	#visit_buttons {
-	  margin: 1em 0;
-	}
+.overlay_window img {
+  border: none;
+  outline: 3px double #115a9a;
+}
 
-	#election_summary {
-	  padding-top: 1em;
-	  padding-right: 1em;
-	  text-align: left;
-	  font-size: 13px;
-	  overflow-y: scroll;
-	  height: 100%;
-	}
+#visit_window {
+  height: auto;
+  outline: 2px solid #8f8fd6;
+  border: none;
+  border-radius: .2em;
+}
 
-	#election_description_window,
-	#candidate_summary,
-	.person_summary {
-	  background-color: #F8F8F8;
-	  margin: 1em;
-	  border-style: double;
-	  border-color: #C9C9C9;
-	}
+#results_container, 
+#overall_details_container, 
+#main_content_area_reading {
+  color: #fff;
+}
 
-	#election_description_window {
-	  height: 87%;
-	}
+#recommended_reading_box {
+  color: #000;
+}
 
-	#candidate_summary,
-	.person_summary {
-	  height: 85%;
-	  overflow-y: scroll;
-	  padding-top: 1em;
-	  padding-right: 1em;
-	}
+#overall_details_container a {
+  color: #f7ff00;
+  font-weight: normal;
+}
 
-	.person_summary {
-	  text-align: left;
-	}
+#credits {
+  color: #ffffff;
+}
 
-	.mytooltip {
-	  position: relative;
-	  display: inline-block;
-	  cursor: pointer;
-	  background-color: lightblue;
-	  padding: 0 .2em;
-	  border-radius: .2em;
-	}
+button, select {
+  background: #e7ecf3;
+  color: #0f1a29;
+  font-family: "Bahnschrift", "Source Serif 4", sans-serif;
+  border: 1.5px solid #243f63;
+  border-radius: 0.2em;
+  text-transform: none;
+}
 
-	.mytooltip .mytooltiptext,
-	.bubble {
-	  background-color: #9aaacd;
-	  color: #000;
-	  text-align: center;
-	  border-radius: .2em;
-	  position: absolute;
-	  z-index: 99;
-	  bottom: 20%;
-	  left: 20%;
-	  margin-left: -90px;
-	  opacity: 0;
-	  transition: opacity 0.3s;
-	  outline: 1px solid black;
-	  pointer-events: none;
-	  font-size: 13px !important;
-	  line-height: 1.5em !important;
-	  font-weight: normal !important;
-	  font-style: normal !important;
-	}
+button:hover, select:hover {
+  background: #2d4f6b;
+  color: #fff;
+  border-color: #ccc;
+}
 
-	.mytooltip .mytooltiptext {
-	  width: 150px;
-	  padding: 10px;
-	}
+button:active, select:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 3px rgba(0,0,0,0.25);
+}
 
-	.mytooltip .mytooltiptext img {
-	  max-width: 150px;
-	  height: auto;
-	}
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 25%;
+  border: 1px solid #6c7a8c;
+  background-color: #f4f5f6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  vertical-align: baseline;
+  cursor: pointer;
+}
 
-	.bubble {
-	  width: 150px;
-	  padding: 11px;
-	}
+input[type="radio"]::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 25%;
+  background-color: #3a4e71;
+  transform: scale(0);
+  transition: transform 0.15s ease-in-out;
+}
 
-	.mytooltip:hover .mytooltiptext,
-	.mytooltip:hover .bubble {
-	  opacity: 1;
-	  transition-delay: 0.5s;
-	}
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
 
-	.mytooltip:hover .bubble-bottom-left:before,
-	.mytooltip:hover .bubble-bottom-left:after {
-	  opacity: 1;
-	}
+input[type="radio"]:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease-out;
+}
 
-	#candidate_pic,
-	img#candidate_pic {
+input[type="radio"]:focus {
+  outline: 1px solid #6079a0;
+  outline-offset: 2px;
+}
+
+#question_form label:hover {
+  background: rgb(238, 238, 238);
+  font-weight: normal;
+  font-size: 1em;
+  cursor: pointer;
+  text-decoration: underline dotted #08087b;
+}
+
+#question_form input[type="radio"]:checked + label {
+  background: rgb(238, 238, 238);
+  font-weight: normal;
+  font-size: 1em;
+  text-decoration: underline dotted #08087b;
+}
+
+table {
+  border-collapse: collapse;
+  font-family: "Bahnschrift", "Source Serif 4", sans-serif;
+  color: #0f1a29;
+  background: #f3f6fb;
+  outline: 1.5px solid #243f63;
+  border-radius: 0.25em;
+}
+
+table th {
+  background: linear-gradient(#e7ecf3, #dbe3ef);
+  color: #0f1a29;
+  font-weight: 600;
+  padding: 0.5em 0.6em;
+  border-bottom: 1.5px solid #243f63;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+table td {
+  padding: 0.4em 0.6em;
+  border-bottom: 1px solid #c9d3e1;
+  text-align: center;
+  background: #f8fafd;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table tbody tr:nth-child(even) td {
+  background: #eef3fa;
+}
+
+table tbody tr:hover td {
+  background: #dde7f3;
+}
+
+table td:first-child {
+  text-align: center;
+  white-space: nowrap;
+}
+
+table td span {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  display: inline-flex;
+  height: 0.9em;
+  margin: 0 .4em 0 .2em;
+  text-indent: -9999px;
+  vertical-align: top;
+  width: 0.9em;
+}
+
+#overall_result_container,
+#menu_container {
+  background-color: #0E5888;
+}
+
+#overall_result,
+#state_info,
+#state_result {
+  border: 3px solid rgba(38, 136, 240, 0.5);
+  background: linear-gradient(#f3f6fb, #e7ecf3);
+  font-family: "Bahnschrift", "Source Serif 4", "Claremont", sans-serif;
+  color: #0f1a29;
+}
+
+#overall_result h3,
+#state_info h3,
+#state_result h3 {
+  background: #cad5ff;
+  padding: .1em 0;
+  text-transform: lowercase;
+  margin: 0 0 0.25em 0;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #243f63;
+}
+
+#state_info {
+  height: auto;
+  margin-top: 0.5em;
+}
+
+#state_info > p:first-of-type {
+  margin: .5em 0 0.4em 0;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+#state_info ul {
+  font-size: .85em;
+  list-style: none;
+  padding: 0;
+  margin: 0.3em 0 0.4em 0;
+}
+
+#state_info li {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.35em;
+  padding: 0.2em 0;
+  border-bottom: 1px dotted #9aaacd;
+}
+
+#state_info li:last-child {
+  border-bottom: none;
+}
+
+#state_info li span:first-child {
+  font-weight: 500;
+  text-align: right;
+  color: #243f63;
+}
+
+#state_info li span:nth-child(2) {
+  opacity: 0.55;
+}
+
+#state_info li span:last-child {
+  font-weight: 600;
+  text-align: left;
+}
+
+#state_info p:last-of-type,
+#state_info p:nth-last-of-type(2) {
+  margin: .3em 0 .4em 0;
+  font-size: 0.9em;
+  color: #2d3f5c;
+}
+
+#switchingEst {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em 0 0.5em 0;
+}
+
+#switchingEst b {
+  display: inline-block;
+  min-width: 4.5em;
+  font-weight: 600;
+  color: #243f63;
+}
+
+#switchingEst br {
+  display: block;
+  margin-bottom: 0.2em;
+}
+
+#switchingEst b:first-of-type {
+  color: #0f1a29;
+}
+
+#pvswitcher,
+#ev_est {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #002e75;
+  font-size: 1em;
+}
+
+#pvswitcher {
+  margin-top: .25em;
+}
+
+#ev_est {
+  margin-bottom: .25em;
+}
+
+#pvswitcher:hover,
+#ev_est:hover {
+  color: #000995;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#state_result {
+  min-height: 75px;
+  margin-top: 0.6em;
+}
+
+#state_result h3 {
+  margin: 0 0 0.35em 0;
+  padding-bottom: 0.2em;
+}
+
+#state_result p {
+  margin: 0.25em 0;
+}
+
+#state_result p:nth-of-type(2) {
+  font-weight: 600;
+  font-size: 1.05em;
+}
+
+#state_result p:nth-of-type(3) {
+  font-size: 0.85em;
+  color: #2d3f5c;
+}
+
+#state_result ul {
+  list-style: none;
+  margin: 0.4em 0 0 0;
+}
+
+#state_result li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.1em 0;
+}
+
+#state_result li span {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.25);
+  text-indent: -9999px;
+}
+
+#state_result li:first-child {
+  font-weight: 600;
+}
+
+#map_container {
+  height: 30.78em;
+  border: 3px solid rgba(38, 136, 240, 0.5);
+  background: linear-gradient(#f4f6fa, #e6ebf4), 
+              repeating-linear-gradient(90deg, rgba(0,0,0,0.015), rgba(0,0,0,0.015) 1px, transparent 1px, transparent 4px);
+}
+
+#visit_buttons {
+  margin: 1em 0;
+}
+
+.visit_text {
+  background: #0e0e4e;
+  color: #fff;
+  border-radius: .2em;
+  display: inline-flex;
+  width: fit-content;
+  margin-inline: auto;
+  padding: .5em;
+  position: initial;
+  transform: initial;
+  font-weight: normal;
+}
+
+#map_footer {
+  margin-top: clamp(1em, 2vw, 4em) !important;
+}
+
+/* tooltips */
+.mytooltip {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+  background: linear-gradient(#eef3fa, #dfe7f3);
+  border: 1px solid #6c7a8c;
+  border-radius: 0.2em;
+  padding: 0 0.25em;
+  font-weight: 500;
+  color: #0f1a29;
+  user-select: none;
+}
+
+.mytooltip .mytooltiptext,
+.bubble {
+  position: absolute;
+  z-index: 99;
+  width: 150px;
+  max-width: min(150px, 90vw);
+  padding: 10px;
+  background: linear-gradient(#b3bfdc, #9aaacd);
+  color: #0f1a29;
+  font-family: "Bahnschrift", "Source Serif 4", sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  text-align: center;
+  border: 1.5px solid #243f63;
+  border-radius: 0.25em;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.4);
+  bottom: 20%;
+  left: 20%;
+  margin-left: -90px;
+  opacity: 0;
+  transform: translateY(4px) scale(0.98);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.mytooltip .mytooltiptext img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.15em;
+}
+
+.mytooltip:hover .mytooltiptext,
+.mytooltip:hover .bubble {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.35s;
+}
+
+.mytooltip:focus-visible {
+  outline: 1px dotted #6079a0;
+  outline-offset: 2px;
+}
+
+.bubble-bottom-left::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 18px;
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #243f63 transparent transparent transparent;
+}
+
+.bubble-bottom-left::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 19px;
+  border-width: 5px 5px 0 5px;
+  border-style: solid;
+  border-color: #9aaacd transparent transparent transparent;
+}
+
+.election_description_window,
+.person_description_window {
+  padding: 0.5em;
+  background: #f3f6fb;
+  border: 1.5px solid #243f63;
+  border-radius: 0.25em;
+  color: #0f1a29;
+  font-family: "Bahnschrift", "Source Serif 4", "Claremont", sans-serif;
+}
+
+.person_description_window {
+  display: flex;
+}
+
+#election_summary,
+#candidate_summary,
+.person_summary {
+  background: #f8fafd;
+  border: 1px solid #c9d3e1;
+  border-radius: 0.2em;
+  line-height: 1.45;
+}
+
+#election_summary {
+  margin: 1.35em 0.5em;
+  padding: 0.6em 0.7em;
+  text-align: left;
+  font-size: 13px;
+  overflow-y: scroll;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+#election_summary p {
+  margin: 1em 1em 1em .5em;
+}
+
+#election_description_window {
+  display: flex;
+  height: 87%;
+  background-color: #F8F8F8;
+  margin: 1em;
+  border-style: double;
+  border-color: #C9C9C9;
+}
+
+#candidate_summary,
+.person_summary {
+  height: 85%;
+  overflow-y: scroll;
+  padding-top: 1em;
+  padding-right: 1em;
+  margin: 1.35em .5em !important;
+  padding: 0.3em .5em;
+  text-align: left;
+}
+
+#candidate_summary ul, #running_mate_summary ul {
+  margin: 0;
+  padding: 0 1em;
+}
+
+#election_image {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin: 1em 1.5em 1em 1em;
+}
+
+#election_image img {
+  outline: 1px solid #012b8f;
+  outline-offset: 2px;
+  border-radius: .1em;
+  height: 70%;
+  object-fit: cover;
+}
+
+#election_year_form + p:first-of-type {
+  padding-top: 1em;
+}
+
+.person_image {
+  flex: 0 0 auto;
+  padding: 0.3em;
+  background: linear-gradient(#e7ecf3, #dbe3ef);
+  border: 1px solid #243f63;
+  border-radius: 0.2em;
+  margin: 1.35em 1em;
+}
+
+.person_image img {
+  display: block;
+  border-radius: 0.15em;
+}
+
+.description_window_small {
+  background: #f8fafd;
+  border: 1px solid #c9d3e1;
+  border-radius: 0.2em;
+  padding: 0.5em 0.6em;
+  margin: 0.6em 1em;
+  color: #0f1a29;
+  font-family: "Bahnschrift", "Source Serif 4", "Claremont", sans-serif;
+  font-size: 1.05em;
+  line-height: 1.4;
+}
+
+.description_window_small p {
+  margin: 0;
+  padding: 0.35em 0.4em;
+  background: #fdfefe;
+  border: 1px solid #d3dceb;
+  border-radius: 0.2em;
+}
+
+.description_window_small p + p {
+  margin-top: 0.4em;
+  background: #f8fafd;
+}
+
+#candidate_pic,
+#running_mate_pic {
+  border-radius: 0.2em;
+  border: 1px solid rgba(38, 46, 164, 0.55);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.35);
+  background: #fff;
+}
+
+.inner_window_sign_display {
+  order: 2;
+  flex: 1;
+  min-width: 180px;
+  max-width: 300px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: .5em;
+  border: 2px double rgba(11, 24, 125, 0.89);
+}
+
+#progress_bar {
+  background: linear-gradient(#ffffff, #eef2f8);
+  border: 1px solid #243f63;
+  border-radius: 0.2em;
+  padding: 3px 6px;
+}
+
+#progress_bar h3 {
+  margin: 0;
+  font-size: 0.9em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #1d2e4a;
+}
+
+#campaign_sign {
+  overflow: hidden;
+}
+ 
+  #candidate_pic, img#candidate_pic {
 	  order: 1;
 	  width: 13em;
 	  height: auto;
 	  flex-shrink: 0;
-	  margin: 0;
-	}
-
-	.inner_window_sign_display {
-	  order: 2;
-	  flex: 1;
-	  min-width: 180px;
-	  max-width: 300px;
-	  min-height: 150px;
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;
-	  margin: .5em;
-	}
-
-	#running_mate_pic,
-	img#running_mate_pic {
+	  margin: 0px;
+   }
+   #running_mate_pic, img#running_mate_pic {
 	  order: 3;
 	  width: 13em;
 	  height: auto;
 	  flex-shrink: 0;
-	  margin: 0;
-	}
+	  margin: 0px;
+   }
+   
+/* question container */
+.inner_window_question {
+  display: flex;
+  flex-direction: column;
 
-	#map_container {
-	  height: 30.78em;
-	  border: 3px solid rgba(38, 136, 240, 0.5);
-	  background: #def1ff;
-	}
+  background: #f8fafd;
+  border: 1px solid #c9d3e1;
+  border-radius: 0 0 .2em .2em;
 
-	.visit_text {
-	  background: #0e0e4e;
-	  color: #fff;
-	  border-radius: .2em;
-	  display: inline-flex;
-	  width: fit-content;
-	  margin-inline: auto;
-	  padding: .5em;
-	  position: initial;
-	  transform: initial;
-	  font-weight: normal;
-	}
+  height: 100%;
+}
 
-	#credits {
-	  color: #ffffff;
-	}
+.inner_window_question > .inner_inner_window {
+  flex: 1 1 auto;
+  overflow-y: visible;
+}
 
-	#map_footer {
-	  margin-top: clamp(1em, 2vw, 4em) !important;
-	}
+.inner_window_question > p {
+  flex: 0 0 auto;
+  margin-top: auto;
 
-	body {
-	  background-image: url('https://i.imgur.com/ACtGvLA.png');
-	  background-repeat: no-repeat;
-	  background-position: center center;
-	  background-size: cover;
-	  background-attachment: fixed;
-	}
+  background: linear-gradient(#f8fafd, #eef3fa);
+  border-top: 1px solid #d3dceb;
+}
 
-	button {
-	  background: #e7ecf3;
-	  color: #0f1a29;
-	  border: 1.5px solid #243f63;
-	  border-radius: 0.2em;
-      text-transform: none;
-	}
+/* mobile/responsive styles */
+@media only screen and (max-width: 768px) {
+  
+  #game_window {
+    flex: 1 1 auto;
+    min-height: clamp(360px, 40vh, 587px);
+    height: auto;
+    align-self: stretch;
+    overflow: visible;
+    box-sizing: border-box;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
-	button:hover {
-	  background: #2d4f6b;
-	  color: #fff;
-	  border-color: #ccc;
-	}
+  .inner_window_question {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+    flex: 0 1 auto !important;
+    align-self: auto !important;
+    grid-row: auto !important;
+    grid-column: auto !important;
+    justify-self: auto !important;
+    display: flow-root !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+    max-height: 395px;
+  }
 
-	button:active {
-	  transform: translateY(1px);
-	  box-shadow:
-		inset 0 2px 3px rgba(0,0,0,0.25);
-	}
+  #question_form button, 
+  #inner_window_2 button, 
+  #inner_window_3 button, 
+  #inner_window_4 button, 
+  #game_window button, 
+  #headquarter button, 
+  #advisorsDiv button {
+    font-size: clamp(16px, 4.2vw, 20px);
+    line-height: 1.2;
+    padding: 10px 16px;
+    min-height: 44px;
+  }
 
-	input[type="radio"] {
-	  appearance: none;
-	  -webkit-appearance: none;
-	  width: 16px;
-	  height: 16px;
-	  border-radius: 25%;
-	  border: 1px solid #6c7a8c;
-	  background-color: #f4f5f6;
-	  display: inline-flex;
-	  align-items: center;
-	  justify-content: center;
-	  margin-right: 6px;
-	  vertical-align: baseline;
-	  cursor: pointer;
-	}
+  #inner_window_2 button, 
+  #inner_window_3 button, 
+  #inner_window_4 button, 
+  #game_window button, 
+  #headquarter button, 
+  #advisorsDiv button {
+    font-size: 1em;
+    line-height: 2em;
+  }
 
-	input[type="radio"]::before {
-	  content: '';
-	  width: 8px;
-	  height: 8px;
-	  border-radius: 25%;
-	  background-color: #3a4e71;
-	  transform: scale(0);
-	  transition: transform 0.15s ease-in-out;
-	}
+  .inner_window_question button, 
+  #visit_window button, 
+  #map_footer {
+    line-height: 2.5em;
+  }
 
-	input[type="radio"]:checked::before {
-	  transform: scale(1);
-	}
+  .inner_window_question, 
+  #results_container, 
+  #map_footer, 
+  #overall_details_container, 
+  #main_content_area_reading, 
+  #inner_window_2, 
+  #inner_window_3, 
+  #inner_window_4, 
+  #advisors {
+    font-size: 1.8em;
+  }
 
-	input[type="radio"]:active {
-	  transform: scale(0.97);
-	  transition: transform 0.1s ease-out;
-	}
+  #question_form input[type="radio"] {
+    width: 1.3em;
+    height: 1.3em;
+    margin: 0 10px 0 0;
+    transform: none;
+    align-self: center;
+  }
 
-	input[type="radio"]:focus {
-	  outline: 1px solid #6079a0;
-	  outline-offset: 2px;
-	}
+  #question_form input[type="radio"] + label {
+    font-size: clamp(16px, 5.2vw, 20px);
+    line-height: 1.3;
+    padding: 10px 12px;
+    min-height: 44px;
+  }
 
-	#question_form label:hover {
-	  background: #eee;
-	  font-weight: normal;
-	}
+  #question_form input[type="radio"] + label:hover,
+  #question_form input[type="radio"] + label:focus {
+    font-size: clamp(16px, 5.2vw, 20px);
+    line-height: 1.3;
+    padding: 10px 12px;
+    font-weight: 400;
+    background: #eeebde;
+  }
 
-	table {
-	  border-collapse: collapse;
-	  font-family: "Bahnschrift", "Source Serif 4", sans-serif;
-	  color: #0f1a29;
-	  background: #f3f6fb;
-	  outline: 1.5px solid #243f63;
-	  border-radius: 0.25em;
-	}
-	table th {
-	  background: linear-gradient(#e7ecf3, #dbe3ef);
-	  color: #0f1a29;
-	  font-weight: 600;
-	  padding: 0.5em 0.6em;
-	  border-bottom: 1.5px solid #243f63;
-	  text-align: center;
-	  letter-spacing: 0.02em;
-	}
-	table td {
-	  padding: 0.4em 0.6em;
-	  border-bottom: 1px solid #c9d3e1;
-	  text-align: center;
-	  background: #f8fafd;
-	}
+  .overlay_window {
+    font-size: clamp(16px, 5.2vw, 20px);
+    left: 20%;
+    width: 60%;
+  }
 
-	table tr:last-child td {
-	  border-bottom: none;
-	}
-	table tbody tr:nth-child(even) td {
-	  background: #eef3fa;
-	}
-	table tbody tr:hover td {
-	  background: #dde7f3;
-	}
-	table td:first-child {
-	  text-align: center;
-	  white-space: nowrap;
-	}
+  .overlay_window img {
+    width: 15em;
+    height: auto;
+  }
 
-	table td span {
-		border: 1px solid rgba(0, 0, 0, 0.2);
-		border-radius: 2px;
-		display: inline-flex;
-		height: 0.9em;
-        margin: 0 .4em 0 .2em;
-		text-indent: -9999px;
-		vertical-align: top;
-		width: 0.9em;
-	}
-
-
-  /* Mobile compatibility fixes - taken from TTNW, ported to 2016ALOT, and used here */
-			@media only screen and (max-width: 768px) {
-
-			 /* necessary to ensure the music player stays in position */
-			  #game_window {
-				flex: 1 1 auto;
-				min-height: clamp(360px, 40vh, 587px);
-				height: auto;
-				align-self: stretch;
-				overflow: visible;
-				box-sizing: border-box;
-				background-position: center bottom;
-				background-repeat: no-repeat;
-				background-size: cover;
-			  }
-
-			  #question_form button, #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
-				font-size: clamp(16px, 4.2vw, 20px);
-				line-height: 1.2;
-				padding: 10px 16px;
-				min-height: 44px;
-			  }
-
-			  #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
-				font-size: 1em;
-				line-height: 2em;
-			  }
-
-			.inner_window_question button, #visit_window button, #map_footer {
-				line-height: 2.5em;
-			  }
-
-			  /*#map_footer {
-				padding-right: 10em;
-			  }*/
-			  .inner_window_question, #results_container, #map_footer, #overall_details_container, #main_content_area_reading, #inner_window_2, #inner_window_3, #inner_window_4, #advisors {
-				font-size: 1.8em;
-			  }
-
-			  .inner_window_question {
-				height: auto !important;
-				min-height: 0 !important;
-				max-height: none !important;
-				position: static !important;
-				top: auto !important;
-				bottom: auto !important;
-				flex: 0 1 auto !important;
-				align-self: auto !important;
-				grid-row: auto !important;
-				grid-column: auto !important;
-				justify-self: auto !important;
-				display: flow-root !important;
-				overflow: visible !important;
-				box-sizing: border-box !important;
-				max-height: 395px;
-			  }
-
-				#question_form input[type="radio"] {
-					width: 1.3em;
-					height: 1.3em;
-					margin: 0 10px 0 0;
-					transform: none;
-					align-self: center;
-				}
-
-				#question_form input[type="radio"] + label {
-					font-size: clamp(16px, 5.2vw, 20px);
-					line-height: 1.3;
-					padding: 10px 12px;
-					min-height: 44px;
-				}
-
-				#question_form button,
-				#inner_window_2 button,
-				#inner_window_3 button,
-				#inner_window_4 button,
-				#game_window button,
-				#headquarter button,
-				#advisorsDiv button {
-					font-size: clamp(16px, 4.2vw, 20px);
-					line-height: 1.2;
-					padding: 10px 16px;
-					min-height: 44px;
-				}
-
-				#question_form input[type="radio"] + label:hover,
-				#question_form input[type="radio"] + label:focus {
-					font-size: clamp(16px, 5.2vw, 20px);
-					line-height: 1.3;
-					padding: 10px 12px;
-					font-weight: 400;
-					background: #eeebde; /* only change background */
-				}
-
-				.overlay_window img {
-				  width: 15em;
-				  height: auto;
-				}
-
-				.overlay_window h3 {
-				  padding: .5rem x .5rem;
-				  font-size: 24px;
-				}
-
-			/* for the default CTS/NCT footer */
-			  #game_window g {
-				display: flex;
-				flex-flow: row wrap;
-				justify-content: center;
-				align-items: center;
-				gap: 8px;
-				padding: 10px 5px;
-			  }
-
-			  #candidate_pic, img#candidate_pic {
-				order: 1;
-				width: 13em;
-				height: auto;
-				flex-shrink: 0;
-				margin: 0;
-			  }
-
-			  .inner_window_sign_display {
-				order: 2;
-				flex: 1;
-				min-width: 180px;
-				max-width: 250px;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				margin: 0 2em;
-			  }
-
-			  #running_mate_pic, img#running_mate_pic {
-				order: 3;
-				width: 13em;
-				height: auto;
-				flex-shrink: 0;
-				margin: 0;
-			  }
-
-			/* other fixes to not break things */
-			#map_container {
-			  height: 30.78em;
-			}
-
-			.overlay_window {
-				font-size: clamp(16px, 5.2vw, 20px);
-				left: 20%;
-				width: 60%;
-			}
-
-			.inner_window_question p:last-of-type {
-                margin: .5em auto;
-            }
-
-			}
-
+  .overlay_window h3 {
+    padding: .5rem;
+    font-size: 24px;
+  }  
+  
+  .inner_window_question p:last-of-type {
+    margin: .5em auto;
+  }
+}
 `;
 
 ensureMetaViewport();
@@ -1369,6 +1710,26 @@ campaignTrail_temp.achievements = {
 	"Good Intentions": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Get serious about denuclearization.",
+        "cannotBeCheated": true
+    },
+	"Capitalism with Californian Characteristics": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Spread economic gospel to the unbelievers.",
+        "cannotBeCheated": true
+    },
+	"Third Temple": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Become Israel’s strongest soldier.",
+        "cannotBeCheated": true
+    },
+	"Desert Flop": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Make an extremely preventable mistake.",
+        "cannotBeCheated": true
+    },
+	"Took the Talk to Poland": {
+        "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
+        "description": "Jesse Jackson approves.",
         "cannotBeCheated": true
     },
 	"Damned Foolish Thing in the Balkans": {
@@ -2045,29 +2406,29 @@ window.WalkmanPlayer.init("#game_window", mainPlaylist);
 
 tooltipList = [
 
-    { searchString: "Jodie Evans", explanationText: " <img src=https://i.imgur.com/7pfrqZu.png>Your campaign manager" },
+    { searchString: "Jodie Evans", explanationText: " <img src=https://i.imgur.com/7pfrqZu.png>Your campaign manager." },
     { searchString: "Jacques Barzaghi", explanationText: "<img src=https://i.imgur.com/PZcUVY4.png> Your close personal aide. He’s been with you every step of the way, from your governorship to your Buddhist trips." },
     { searchString: "Pete Wilson", explanationText: " <img src=https://i.imgur.com/WYHzfaH.png>Foiled your previous Senate bid ten years ago. Resigned to become Governor." },
     { searchString: "John Seymour", explanationText: " <img src=https://i.imgur.com/ibOEjQ6.png>Wilson’s appointee to the seat that he himself vacated." },
     { searchString: "Paul Simon", explanationText: " <img src=https://i.imgur.com/MtrLrdd.png>Illinois Senator. Bringing bowties back in fashion." },
-    { searchString: "Grant,", explanationText: " <img src=https://i.imgur.com/fhoHQuG.png>Won more states in the South than you’re projected to" },
-    { searchString: "Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as ‘that woman’" },
-    { searchString: "Ann Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as 'that woman'" },
-    { searchString: "Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida" },
-    { searchString: "Bob Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida" },
+    { searchString: "Grant,", explanationText: " <img src=https://i.imgur.com/fhoHQuG.png>Won more states in the South than you’re projected to." },
+    { searchString: "Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as ‘that woman.’" },
+    { searchString: "Ann Richards", explanationText: " <img src=https://i.imgur.com/qoZ96xM.png>Popular Democratic governor of Texas, known by the Bush family as ‘that woman.’" },
+    { searchString: "Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida." },
+    { searchString: "Bob Graham", explanationText: " <img src=https://i.imgur.com/SxFltdP.png>Long-serving Democratic senator from Florida." },
     { searchString: "New Democrats", explanationText: " <img src=https://i.imgur.com/fkFiuxp.png>Centrist Democrats that arose after the resounding defeats of liberals like Mondale and Dukakis." },
     { searchString: "mayor Bradley", explanationText: " <img src=https://i.imgur.com/sqhM8lw.png>First black mayor of Los Angeles. Perhaps more infamous for the 'Bradley Effect'." },
     { searchString: "Magic Johnson", explanationText: " <img src=https://i.imgur.com/SjZ0CRO.png>’Cause you can get through anything if Magic made it. Basketball player on the Lakers and perhaps one of the most famous AIDS activists out there." },
     { searchString: "Hyde Amendment", explanationText: "Amendment banning the use of federal funding for abortions, with a few exceptions." },
-    { searchString: "Zbigniew Brzezinski", explanationText: "<img src=https://i.imgur.com/cjp9dlu.png> Carter’s national security advisor, well known foreign policy Realist" },
+    { searchString: "Zbigniew Brzezinski", explanationText: "<img src=https://i.imgur.com/cjp9dlu.png> Carter’s national security advisor, well known foreign policy realist." },
     { searchString: "Nayirah", explanationText: "<img src=https://i.imgur.com/Jeyz8R3.png> Daughter of the former Kuwaiti ambassador to the United States, famous for her false testimony to Congress about Iraqi war crimes" },
     { searchString: "UNSCOM", explanationText: "United Nations Special Commission to ensure Iraqi compliance with WMD guidelines." },
     { searchString: "Tom Hayden", explanationText: "<img src=https://imgur.com/ypIHmm9.png> California State Assemblyman and candidate for State Senate this year. Better known for other work." },
-    { searchString: "Chuck D", explanationText: "<img src =https://imgur.com/HSChsP1.png> Rapper and political activist" },
-    { searchString: "Mussolini", explanationText: "<img src =https://imgur.com/gjfIfgN.png> O con noi o contro di noi" },
+    { searchString: "Chuck D", explanationText: "<img src =https://imgur.com/HSChsP1.png> Rapper and political activist." },
+    { searchString: "Mussolini", explanationText: "<img src =https://imgur.com/gjfIfgN.png> O con noi o contro di noi." },
     { searchString: "Cranston", explanationText: "<img src =https://i.imgur.com/FTonFxA.png> Dignified liberal serving since 1969. Also a less-dignified member of the Keating Five." },
-    { searchString: "Rush Limbaugh", explanationText: "<img src =https://i.imgur.com/VW0l8xC.png> Big fat idiot" },
-    { searchString: "Gennifer Flowers-", explanationText: "<img src =https://i.imgur.com/taAJjuD.png> Arkansan government employee who accused Bill Clinton of having extramarital sex with her" },
+    { searchString: "Rush Limbaugh", explanationText: "<img src =https://i.imgur.com/VW0l8xC.png> Big fat idiot." },
+    { searchString: "Gennifer Flowers", explanationText: "<img src =https://i.imgur.com/taAJjuD.png> Arkansan government employee who accused Bill Clinton of having extramarital sex with her." },
     { searchString: "NAFTA", explanationText: "<img src =https://i.imgur.com/zpuCi3G.jpeg> The North American Free Trade Agreement is a proposal to establish free trade between USA, Canada, and Mexico" },
     { searchString: "Pat Robertson", explanationText: "<img src =https://i.imgur.com/JmmnG6L.png> Televangelist with a huge number of followers. Thinks that prayer can stop hurricanes." },
     { searchString: "the ribbon", explanationText: "<img src =https://i.imgur.com/GlLMbKy.png> Used to signify solidarity with those living with AIDS. Pictured here as part of Laura Dern’s outfit." },
@@ -2076,22 +2437,22 @@ tooltipList = [
     { searchString: "dual monarchy", explanationText: "<img src =https://i.imgur.com/E4ppY2v.png>  Two kingdoms are ruled by the same monarch, but are otherwise self-governing." },
     { searchString: "diarchy", explanationText: "<img src =https://i.imgur.com/1Xsx0fx.png>  One singular kingdom is ruled by two monarchs." },
     { searchString: "Bob Casey", explanationText: "<img src =https://i.imgur.com/yJDzM4X.png>  Immensely popular governor of Pennsylvania whose hardcore stance on abortion even frightens some Republicans." },
-    { searchString: "'potato'", explanationText: "<img src =https://i.imgur.com/YY95I7L.png>" },
-    { searchString: "Kinnock", explanationText: "<img src =https://i.imgur.com/Oww1l2q.png> Neil Kinnock, recently elected this summer in a surprise upset" },
-    { searchString: "Bush fidgets with his tie and poutily crosses his arms", explanationText: "<img src =https://i.imgur.com/2WfLCxA.png> <p? I’m sure he’s just bored" },
+    { searchString: "‘potato’", explanationText: "<img src =https://i.imgur.com/YY95I7L.png>" },
+    { searchString: "Kinnock", explanationText: "<img src =https://i.imgur.com/Oww1l2q.png> Neil Kinnock, recently elected this summer in a surprise upset." },
+    { searchString: "Bush fidgets with his tie and poutily crosses his arms", explanationText: "<img src =https://i.imgur.com/2WfLCxA.png> I’m sure he’s just bored." },
     { searchString: "John Prescott", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>" },
     { searchString: "scanner", explanationText: "<img src =https://i.imgur.com/Jjv6kfp.png> 'Bush Encounters the Supermarket, Amazed'" },
-    { searchString: "SPAM", explanationText: "<img src =https://i.imgur.com/CikzB57.png> Not just for poor people, according to Hormel" },
+    { searchString: "SPAM", explanationText: "<img src =https://i.imgur.com/CikzB57.png> Not just for poor people, according to Hormel." },
     { searchString: "egghead", explanationText: "<img src =https://i.imgur.com/A07khql.png> You called?" },
-    { searchString: "Silvio Berlusconi", explanationText: "<img src =https://i.imgur.com/Hr3GIK7.png> The richest man in Italy and the nation’s most prolific womanizer " },
-    { searchString: "bisexuality", explanationText: "<img src =https://i.imgur.com/eqFXard.png> The cutting edge of human sexuality" },
-    { searchString: "Evelle Younger the second", explanationText: "<img src =https://i.imgur.com/MjREl9c.png> ???... Oh yeah, that one guy who you beat in ’78" },
-    { searchString: "Geraldine Ferraro", explanationText: "<img src =https://i.imgur.com/mrmJZ60.png> Picked to energize the base, flopped miserably" },
-    { searchString: "William Miller", explanationText: "<img src =https://i.imgur.com/yh2jNo5.png> Also picked to energize the base, also flopped miserably" },
+    { searchString: "Silvio Berlusconi", explanationText: "<img src =https://i.imgur.com/Hr3GIK7.png> The richest man in Italy and the nation’s most prolific womanizer." },
+    { searchString: "bisexuality", explanationText: "<img src =https://i.imgur.com/eqFXard.png> The cutting edge of human sexuality." },
+    { searchString: "Evelle Younger the second", explanationText: "<img src =https://i.imgur.com/MjREl9c.png> ???... oh yeah, that one guy who you beat in ’78." },
+    { searchString: "Geraldine Ferraro", explanationText: "<img src =https://i.imgur.com/mrmJZ60.png> Picked to energize the base, flopped miserably." },
+    { searchString: "William Miller", explanationText: "<img src =https://i.imgur.com/yh2jNo5.png> Also picked to energize the base, also flopped miserably." },
     { searchString: "rape and murder", explanationText: "<img src =https://i.imgur.com/wHGmWJv.gif>" },
     { searchString: "Phil Donahue", explanationText: "<img src =https://i.imgur.com/EdRNTlL.png> The king of daytime talk shows, well known for not shying away from divisive topics" },
-    { searchString: "Max Pavlevsky", explanationText: "<img src =https://i.imgur.com/eDnsDFO.png> Husband of Jodie Evans and millionaire, pictured wrestling with the weight of being one of only a few wealthy McGovern backers back in ‘72 " },
-    { searchString: "George Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American" },
+    { searchString: "Max Pavlevsky", explanationText: "<img src =https://i.imgur.com/eDnsDFO.png> Husband of Jodie Evans and millionaire, pictured wrestling with the weight of being one of only a few wealthy McGovern backers back in ‘72." },
+    { searchString: "George Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American." },
     { searchString: "Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American" },
     { searchString: "Tom Foley", explanationText: "<img src =https://i.imgur.com/hhgl0ic.png> 6’4 House Speaker from the great state of Washington" },
     { searchString: "Brock Adams", explanationText: "<img src =https://i.imgur.com/SeLjt8k.png> Senator from Washington state who looks and sounds like Bush. Like Bush, has some Capitol Hill rumors of being a little handsy..." },
@@ -2198,7 +2559,7 @@ tooltipList = [
 	{ searchString: "malaise", explanationText: "<img src=https://i.imgur.com/4CQhGgE.png>"},
 	{ searchString: "you and Ted Kennedy", explanationText: "<img src=https://i.imgur.com/l2PZ5NP.jpeg> Old foes from 1980, reunited for the first time."},
 	{ searchString: "81", explanationText: "<img src=https://i.imgur.com/yO5o7aH.jpeg> Surely nobody this old could ever seriously run for President... <em>right?</em>"},
-	{ searchString: "'66", explanationText: "<img src=https://i.imgur.com/nmcJMPA.jpeg> A most ignominious year for the Brown family."},
+	{ searchString: "‘66", explanationText: "<img src=https://i.imgur.com/nmcJMPA.jpeg> A most ignominious year for the Brown family."},
 	{ searchString: "Weinberger", explanationText: "<img src=https://i.imgur.com/f8i6Hk2.jpeg> One of Reagan's many fall guys."},
 	{ searchString: "Iran-Contra", explanationText: "<img src=https://i.imgur.com/Lgjinf2.jpeg> An incident in which Reagan sold missiles to Iran and sent the funds to far-right Nicaraguan rebels. Somehow mostly ignored."},
 	{ searchString: "Ayatollah", explanationText: "<img src=https://i.imgur.com/2Ulp8Xn.jpeg> It's a bit of a stereotype to say that the nation's enemies are delusional zealots who just hate America, but he really was just that!"},
