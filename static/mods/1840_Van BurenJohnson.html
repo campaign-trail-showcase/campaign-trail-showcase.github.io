@@ -1,4 +1,4 @@
-﻿campaignTrail_temp.questions_json = [
+campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
         "pk": 623,
@@ -225,7 +225,6 @@
         }
     }
 ]
-
 
 campaignTrail_temp.answers_json = [
     {
@@ -886,7 +885,6 @@ campaignTrail_temp.answers_json = [
     }
 ]
 
-
 campaignTrail_temp.states_json = [
     {
         "model": "campaign_trail.state",
@@ -1228,7 +1226,6 @@ campaignTrail_temp.states_json = [
     }
 ]
 
-
 campaignTrail_temp.issues_json = [
     {
         "model": "campaign_trail.issue",
@@ -1327,7 +1324,7 @@ campaignTrail_temp.issues_json = [
         "pk": 51,
         "fields": {
             "name": "Slavery",
-            "description": "The most explosive issue of the times. Never ask a woman her age, a man her salary, literally anyone's opinions on slavery.",
+            "description": "The most explosive issue of the times. Never ask a woman her age, a man his salary, literally anyone's opinions on slavery.",
             "stance_1": "Supports",
             "stance_desc_1": 0,
             "stance_2": "Supports",
@@ -1346,7 +1343,6 @@ campaignTrail_temp.issues_json = [
         }
     }
 ]
-
 
 campaignTrail_temp.state_issue_score_json = [
     {
@@ -2651,7 +2647,6 @@ campaignTrail_temp.state_issue_score_json = [
     }
 ]
 
-
 campaignTrail_temp.candidate_issue_score_json = [
     {
         "model": "campaign_trail.candidate_issue_score",
@@ -2790,7 +2785,6 @@ campaignTrail_temp.candidate_issue_score_json = [
     }
 ]
 
-
 campaignTrail_temp.running_mate_issue_score_json = [
     {
         "model": "campaign_trail.candidate_issue_score",
@@ -2838,7 +2832,6 @@ campaignTrail_temp.running_mate_issue_score_json = [
         }
     }
 ]
-
 
 campaignTrail_temp.candidate_state_multiplier_json = [
     {
@@ -3544,7 +3537,6 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         }
     }
 ]
-
 
 campaignTrail_temp.answer_score_global_json = [
     {
@@ -4369,7 +4361,6 @@ campaignTrail_temp.answer_score_global_json = [
     }
 ]
 
-
 campaignTrail_temp.answer_score_issue_json = [
     {
         "model": "campaign_trail.answer_score_issue",
@@ -4682,7 +4673,6 @@ campaignTrail_temp.answer_score_issue_json = [
         }
     }
 ]
-
 
 campaignTrail_temp.answer_score_state_json = [
     {
@@ -6942,7 +6932,6 @@ campaignTrail_temp.answer_score_state_json = [
     }
 ]
 
-
 campaignTrail_temp.answer_feedback_json = [
     {
         "model": "campaign_trail.answer_feedback",
@@ -7292,7 +7281,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 4201,
             "candidate": 132,
-            "answer_feedback": 0
+            "answer_feedback": "Well, you’ve certainly boosted yourself in the eyes of historians, but your chances in the South are severely hurt."
         }
     },
     {
@@ -7472,7 +7461,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 4177,
             "candidate": 132,
-            "answer_feedback": "This is more or less right in line with standard Democratic party platform, although of course some in the North are less than enthused."
+            "answer_feedback": "This is more or less right in line with the standard Democratic party platform, although of course some in the North are less than enthused."
         }
     },
     {
@@ -7526,7 +7515,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 4206,
             "candidate": 132,
-            "answer_feedback": "This answer"
+            "answer_feedback": "This answer is basically a betrayal of everything you’ve stood for."
         }
     },
     {
@@ -7594,16 +7583,13 @@ campaignTrail_temp.answer_feedback_json = [
     }
 ]
 
-
 campaignTrail_temp.candidate_image_url = "https://i.postimg.cc/90rQr2Sf/Screenshot-2025-12-11-9-41-59-AM.png";
 campaignTrail_temp.running_mate_image_url = "https://i.postimg.cc/3Ndxdh6Y/Screenshot-2025-12-11-11-38-33-AM.png";
 campaignTrail_temp.candidate_last_name = "Van Buren";
 campaignTrail_temp.running_mate_last_name = "Johnson";
 
-
 campaignTrail_temp.multiple_endings = true;
 endingPicker = (out, totv, aa, quickstats) => {
-
 
     function setImage(url) {
         if(url == '' || url == null) return;
@@ -7616,7 +7602,6 @@ endingPicker = (out, totv, aa, quickstats) => {
         }, 50);
     }
 
-
     if(quickstats[0] > 148) {
         setImage("");
         return `<h3> Congratulations! You've won the 1840 election! </h3> <p> Huzzah! Despite the Panic, the pernicious lies, the blithe and bluster and falsehoods that the Whig demagogues threw at you, you've managed to win the election and prove that Jacksonianism is a winning game in American politics! Henry Clay and other Whig figureheads are stunned at your victory, while Harrison is retiring to his estate and leaving public life. <br><br> On the political front, it seems you'll be dealing with a Whig congress, meaning your hopes for an independent treasury may have to be postponed for at least two years. Vice President Johnson has not gained the majority needed to win the electoral college, meaning that he will have to go to yet another contingent election, and it seems unlikely he'll win. You can stick by him, or part ways with him, it's up to you. If all goes well, maybe another Jacksonian like James Buchanan or Lewis Cass can get elected president in 1844. Best of luck these next four years!`;
@@ -7626,8 +7611,6 @@ endingPicker = (out, totv, aa, quickstats) => {
         return `<h3> You SUCK </h3> yeah so Im not gonna put anything here lol`;
     }
 }
-
-
 
 
 campaignTrail_temp.jet_data = [{
@@ -7668,3 +7651,6 @@ campaignTrail_temp.jet_data = [{
     "mapping_data": {}
 }
 ]
+
+
+F
