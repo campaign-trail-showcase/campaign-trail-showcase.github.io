@@ -35697,18 +35697,26 @@ cyoAdventure = function (a) {
 	if (ans === 3325) {
 		setCandidateIdentity(79, { first: "Bo", last: "Gritz", color: "#016300" });
 
-		// set Gritz to 1-3% of Perot's base support
-		const variationLow = 0.01;
-		const variationHigh = 0.03;
+		// Gritz should get roughly 1-3% nationally
+		const gritzLow = 0.05;
+		const gritzHigh = 0.15;
+
+		// Marrou gets a small boost from former Perot voters
+		// keeps his vote share somewhat closer to historical
+		const marrouBoostLow = 0.01;
+		const marrouBoostHigh = 0.02;
 
 		campaignTrail_temp.candidate_state_multiplier_json.forEach(item => {
-			if (item.fields.candidate === 79) {
-				const base = campaignTrail_temp.perot_base_multipliers[item.fields.state];
-				if (base) {
-					// random factor between 0.01 and 0.03
-					const factor = variationLow + (Math.random() * (variationHigh - variationLow));
-					item.fields.state_multiplier = base * factor;
-				}
+			const base = campaignTrail_temp.perot_base_multipliers[item.fields.state];
+
+			if (item.fields.candidate === 79 && base) { // Gritz
+				const factor = gritzLow + (Math.random() * (gritzHigh - gritzLow));
+				item.fields.state_multiplier = base * factor;
+			}
+
+			if (item.fields.candidate === 80 && base) { // Marrou
+				const boostFactor = marrouBoostLow + (Math.random() * (marrouBoostHigh - marrouBoostLow));
+				item.fields.state_multiplier += base * boostFactor;
 			}
 		});
 	}
@@ -39782,47 +39790,193 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-                  <h3>SNL, November 16, 1996</h3>
+                  <div class="snl-script-container">
+				  <style>
+					.snl-script-container {
+					  background-color: #fcfcfc;
+					  color: #222;
+					  font-family: 'Courier New', Courier, monospace;
+					  padding: 40px;
+					  max-width: 700px;
+					  margin: 0 auto;
+					  border: 1px solid #ccc;
+					  box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+					  line-height: 1.4;
+					}
 
-                  <h3>[ Lorne Michaels barges into Norm MacDonald’s dressing room ]</h3>
-                  <h4>Lorne Michaels:</h4> <li> I see you’re still wearing the Dan Quayle suit and the wig.</li>
-                  <h4>Norm MacDonald:</h4> <li> Oh, yeah. I was.. you know..</li>
-                  <h4>Lorne Michaels:</h4> <li> Look, Norm, we all understand how badly you wanted to play President Quayle for the next four years. But he didn’t win. You’ve got to move on.</li>
-                  <h4>Norm MacDonald:</h4> <li> [ speaking in his Dan Quayle voice ] I am moving on! Norm MacDonald is moving on!</li>
-                  <h4>Lorne Michaels:</h4> <li> Norm, I really want you to see someone.</li>
-                  <h4>Norm MacDonald:</h4> <li> Oh, you mean, like a shrink, again?</li>
-                  <h4>Lorne Michaels:</h4> <li> Not exactly. [ calling into the hall ] Mr. Vice President?</li>
-                  <h3>[ Soon-to-be Former Vice President Dan Quayle enters the dressing room ]</h3>
-                  <h4>Dan Quayle:</h4> <li> Hi, Norm. Hi, Lorne.</li>
-                  <h4>Lorne Michaels:</h4> <li> If you two kids need me, I’ll be down the hall.</li>
-                  <h4>Dan Quayle:</h4> <li> Okay, we’ll be right here.</li>
-                  <h3>[ Lorne exits the dressing room ]</h3>
-                  <h4>Norm MacDonald:</h4> <li> Well, how are you, Mr. Vice President?</li>
-                  <h4>Dan Quayle:</h4> <li> [ laughing ] Norm, I know how much it meant for you to play me on the show for the next four years. And I feel your pain.</li>
-                  <h4>Norm MacDonald:</h4> <li> Well, you know, it hasn’t been easy. But, you know what it’s like, you just lost that Presidential election. To Jerry Brown, of all people!</li>
-                  <h4>Dan Quayle:</h4> <li> Oh, now don’t worry about me, I’ve got something lined up.</li>
-                  <h4>Norm MacDonald:</h4> <li> Oh, really?</li>
-                  <h4>Dan Quayle:</h4> <li> Oh, really. My wife and I have decided to go back into practicing law. Let’s just say she pulled some strings.</li>
-                  <h4>Norm MacDonald:</h4> <li> Wow, that’s great.</li>
-                  <h4>Dan Quayle:</h4> <li> Well, it’s not rocket science, you know? [ demonstrating ] “Thank you for calling Quayle and Quayle. How may I direct your call?”</li>
-                  <h4>Norm MacDonald:</h4> <li> Well, it sounds like a lot of fun.</li>
-                  <h4>Dan Quayle:</h4> <li> Well, it keeps me out of trouble. You know, trouble like running for president.</li>
-                  <h4>Norm MacDonald:</h4> <li> Oh, really? So there’s no chance of you running for president again? </li>
-                  <h4>Dan Quayle:</h4> <li> No, I don’t think so.</li>
-                  <h4>Norm MacDonald:</h4> <li> Oh, really? Because you know, it would be good for me. Kind of help keep you on the front pages, you know?</li>
-                  <h4>Dan Quayle:</h4> <li> Well, believe me, Norm, running for president doesn’t always keep you on the front pages, unless you, of course, accidentally call for Florida to be bombed.</li>
-                  <h4>Norm MacDonald:</h4> <li> Yeah, that did get a lot of coverage, didn’t it?</li>
-                  <h4>Dan Quayle:</h4> <li> Yeah, and thanks for noticing, here on “Saturday Night Live.” I appreciate it.</li>
-                  <h4>Norm MacDonald:</h4> <li> I don’t write a lot of this stuff!</li>
-                  <h4>Dan Quayle:</h4> <li> I don’t, either.</li>
-                  <h4>Norm MacDonald:</h4> <li> But, you know, it’s kind of frustrating for me. I’ve got this great Dan Quayle impression, but I’ve got nowhere to use it.</li>
-                  <h4>Dan Quayle:</h4> <li> Well, if it’s any consolation to you, Norm, the impression isn’t that great.</li>
-                  <h4>Norm MacDonald:</h4> <li> I see that now you’re going into civilian life, you don’t pull any punches there, do you? Really? You don’t like my impression?</li>
-                  <h4>Dan Quayle:</h4> <li> No. You’re really doing an impression of a child actor who used to do an impression of me. You know it, I know it, and the American people know it.</li>
-                  <h4>Norm MacDonald:</h4> <li> Aw, come on now, Mr. Vice President, it’s a great impression. Listen to this: [ speaking in his Dan Quayle voice ] “Come November 5th, a lot of people are going to choose me to be president and be surprised by it.”</li>
-                  <h4>Dan Quayle:</h4> <li> [ shaking head ] Doesn’t sound a thing like me. First of all, I don’t run around saying comical things or making errors. That’s not something I do, it’s not something I’ve ever done, and it’s not something I will ever do!</li>
-                  <h4>Norm MacDonald:</h4> <li> Well, okay.. how about this? Listen to this: [ speaking in his Dan Quayle voice ] “Live, from New York, it’s Saturday Night..!”</li>
-                  <h4>Dan Quayle:</h4> <li> [ interrupting ] No, no. You’re still not getting it. Now, listen carefully: “Live, from New York, it’s Saturday Night!”</li>
+					.snl-script-container h3 {
+					  text-align: center;
+					  text-transform: uppercase;
+					  font-size: 1em;
+					  text-decoration: underline;
+					  margin-top: 25px;
+					  margin-bottom: 15px;
+					  color: #444;
+					  font-weight: normal;
+					}
+
+					.snl-script-container h3:first-of-type {
+					  font-weight: bold;
+					  font-size: 1.4em;
+					  text-decoration: none;
+					  border: 3px solid #000;
+					  padding: 10px;
+					  display: inline-block;
+					  margin-bottom: 30px;
+					}
+
+					.snl-script-container h4 {
+					  margin: 15px 0 2px 0;
+					  text-transform: uppercase;
+					  font-size: 1.1em;
+					  font-weight: bold;
+					  letter-spacing: 1px;
+					}
+
+					.snl-script-container li {
+					  list-style-type: none;
+					  margin-left: 0;
+					  padding-left: 0;
+					  margin-bottom: 10px;
+					  display: block;
+					}
+
+					.snl-script-container h3:not(:first-of-type) {
+					  font-style: italic;
+					  text-decoration: none;
+					  text-transform: none;
+					  font-size: 0.9em;
+					  background: #eee;
+					  padding: 5px;
+					  border-radius: 4px;
+					}
+
+					.snl-script-container li:last-child {
+					  font-weight: 900;
+					  text-align: center;
+					  margin-top: 20px;
+					  font-size: 1.2em;
+					}
+				  </style>
+
+				  <div style="text-align:center;">
+					<h3>SNL, November 16, 1996</h3>
+				  </div>
+
+				  <h3>[ Lorne Michaels barges into Norm MacDonald’s dressing room ]</h3>
+
+				  <h4>Lorne Michaels:</h4>
+				  <li>I see you’re still wearing the Dan Quayle suit and the wig.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Oh, yeah. I was.. you know..</li>
+
+				  <h4>Lorne Michaels:</h4>
+				  <li>Look, Norm, we all understand how badly you wanted to play President Quayle for the next four years. But he didn’t win. You’ve got to move on.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>[ speaking in his Dan Quayle voice ] I am moving on! Norm MacDonald is moving on!</li>
+
+				  <h4>Lorne Michaels:</h4>
+				  <li>Norm, I really want you to see someone.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Oh, you mean, like a shrink, again?</li>
+
+				  <h4>Lorne Michaels:</h4>
+				  <li>Not exactly. [ calling into the hall ] Mr. Vice President?</li>
+
+				  <h3>[ Soon-to-be Former Vice President Dan Quayle enters the dressing room ]</h3>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>Hi, Norm. Hi, Lorne.</li>
+
+				  <h4>Lorne Michaels:</h4>
+				  <li>If you two kids need me, I’ll be down the hall.</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>Okay, we’ll be right here.</li>
+
+				  <h3>[ Lorne exits the dressing room ]</h3>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Well, how are you, Mr. Vice President?</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>[ laughing ] Norm, I know how much it meant for you to play me on the show for the next four years. And I feel your pain.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Well, you know, it hasn’t been easy. But, you know what it’s like, you just lost that Presidential election. To Jerry Brown, of all people!</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>Oh, now don’t worry about me, I’ve got something lined up.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Oh, really?</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>Oh, really. My wife and I have decided to go back into practicing law. Let’s just say she pulled some strings.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Wow, that’s great.</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>Well, it’s not rocket science, you know? [ demonstrating ] “Thank you for calling Quayle and Quayle. How may I direct your call?”</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Well, it sounds like a lot of fun.</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>Well, it keeps me out of trouble. You know, trouble like running for president.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Oh, really? So there’s no chance of you running for president again?</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>No, I don’t think so.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Oh, really? Because you know, it would be good for me. Kind of help keep you on the front pages, you know?</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>Well, believe me, Norm, running for president doesn’t always keep you on the front pages, unless you, of course, accidentally call for Florida to be bombed.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Yeah, that did get a lot of coverage, didn’t it?</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>Yeah, and thanks for noticing, here on “Saturday Night Live.” I appreciate it.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>I don’t write a lot of this stuff!</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>I don’t, either.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>But, you know, it’s kind of frustrating for me. I’ve got this great Dan Quayle impression, but I’ve got nowhere to use it.</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>Well, if it’s any consolation to you, Norm, the impression isn’t that great.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>I see that now you’re going into civilian life, you don’t pull any punches there, do you? Really? You don’t like my impression?</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>No. You’re really doing an impression of a child actor who used to do an impression of me. You know it, I know it, and the American people know it.</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Aw, come on now, Mr. Vice President, it’s a great impression. Listen to this: [ speaking in his Dan Quayle voice ] “Come November 5th, a lot of people are going to choose me to be president and be surprised by it.”</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>[ shaking head ] Doesn’t sound a thing like me. First of all, I don’t run around saying comical things or making errors. That’s not something I do, it’s not something I’ve ever done, and it’s not something I will ever do!</li>
+
+				  <h4>Norm MacDonald:</h4>
+				  <li>Well, okay.. how about this? Listen to this: [ speaking in his Dan Quayle voice ] “Live, from New York, it’s Saturday Night..!”</li>
+
+				  <h4>Dan Quayle:</h4>
+				  <li>[ interrupting ] No, no. You’re still not getting it. Now, listen carefully: <strong>“Live, from New York, it’s Saturday Night!”</strong></li>
+				</div>
               `
         },
         {
@@ -42121,18 +42275,199 @@ Euro Disney Begins Considering Exiting French Market
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-    <p style="text-align:left;">Page 1:</p>
-    <p style="text-align:left;">August 25th - 2012</p>
-    <p style="text-align:left;">@elgor1 Twitter: “MOURN OUR WOOD” #SaveTheTrees #TreeJesus
-    </p>
-    <p style="text-align:left;">Page 2</p>
-    <p style="text-align:left;">September 6th 2012: How a New Fad Turned This Failed Presidential Candidate into “Tree Jesus”. </p>
-    <p style="text-align:left;">By Ben Armstrong-Lam, Oakland Speaks</p>
-    <p>On this exact day twenty years ago, Jerry Brown, the former governor of California turned improbable Democratic nominee, filmed himself in the Amazon Rainforest pleading for the preservation of the environment with the infamous phrase “mourn our wood,” mimicking the stretched arms the Christ The Redeemer statue in Rio de Janeiro. While many were touched by his passion for preserving the environment, critics likened him to an airheaded “Tree Jesus” with little insight into climate beyond performative acts.</p>
-    <p>With West Coast forest fires reaching a record new high this year, young people all over the world took matters into their own hands by “mourning”, mimicking Governor Brown’s pose in front of any tree they could find, and guarding the tree as a “Tree Jesus” with these posts appearing all over YouTube, Twitter and other online platforms.</p>
-    <p>After his political career, Brown has maintained a mostly low profile at his ranch in Colusa County. While it's unlikely that he will be pursuing a return to politics anytime soon, a “Tree Jesus” write-in movement for the 2012 election has emerged due to the popularity of his infamous tree pose. The movement is not limited to the online world, with “Mass Jesus” sessions advertised through posters all over population centres such as Los Angeles, Detroit, and New York.</p>
-    <p>While the movement mirrors the controversial KONY 2012 movement via its use of often intentionally sloppy posters to advertise events, “Mourning” lies in an ethical gray area as the participating are generally doing what they promised, guarding trees in the style of Jesus. Oddly enough, the normally less-than-media-shy Brown has made no public comment on the phenomenon as of the time of this article’s publication, with his wife, Anne Gust, telling reporters that Brown was occupied with business at a local park when reached for a statement.</p>
-`
+			<div class="viral-mod-container">
+			  <style>
+				.viral-mod-container {
+				  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+				  background-color: #e9e9e9;
+				  padding: 20px;
+				  max-width: 650px;
+				  margin: 0 auto;
+				  color: #333;
+				}
+
+				.section-label {
+				  font-size: 0.8em;
+				  text-transform: uppercase;
+				  color: #777;
+				  margin-bottom: 5px;
+				  margin-top: 15px;
+				  font-weight: bold;
+				}
+
+				.tweet-card {
+				  background-color: #fff;
+				  border: 1px solid #e1e8ed;
+				  border-radius: 5px;
+				  padding: 15px 20px;
+				  margin-bottom: 25px;
+				  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+				}
+
+				.tweet-header {
+				  display: flex;
+				  align-items: center;
+				  margin-bottom: 10px;
+				}
+
+				.tweet-avatar {
+				  width: 48px;
+				  height: 48px;
+				  background-color: #2b7bb9;
+				  border-radius: 5px;
+				  margin-right: 10px;
+				  position: relative;
+				}
+
+				.tweet-avatar::after {
+				  content: 'AG';
+				  color: white;
+				  font-weight: bold;
+				  position: absolute;
+				  top: 13px;
+				  left: 13px;
+				}
+
+				.tweet-author-box {
+				  line-height: 1.2;
+				}
+
+				.tweet-name {
+				  font-weight: bold;
+				  color: #292f33;
+				}
+
+				.tweet-handle {
+				  color: #8899a6;
+				  font-size: 0.9em;
+				}
+
+				.tweet-content {
+				  font-size: 1.25em;
+				  line-height: 1.3;
+				  color: #292f33;
+				  margin-bottom: 10px;
+				}
+
+				.tweet-content span {
+				  color: #0084B4;
+				}
+
+				.tweet-footer {
+				  font-size: 0.85em;
+				  color: #8899a6;
+				  border-bottom: 1px solid #e1e8ed;
+				  padding-bottom: 10px;
+				  margin-bottom: 10px;
+				}
+
+				.tweet-actions {
+				  color: #8899a6;
+				  font-size: 0.8em;
+				  font-weight: bold;
+				  text-transform: uppercase;
+				}
+				.tweet-actions span { margin-right: 15px; cursor: pointer; }
+				.tweet-actions span:hover { color: #0084B4; }
+
+				.news-card {
+				  background-color: #fff;
+				  border: 1px solid #ccc;
+				  padding: 30px;
+				  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+				}
+
+				.news-pub-name {
+				  font-family: 'Georgia', serif;
+				  font-style: italic;
+				  font-weight: bold;
+				  font-size: 1.8em;
+				  color: #2e7d32;
+				  border-bottom: 2px solid #2e7d32;
+				  margin-bottom: 15px;
+				  padding-bottom: 5px;
+				}
+
+				.news-headline {
+				  font-family: 'Arial', sans-serif;
+				  font-weight: 900;
+				  font-size: 1.6em;
+				  line-height: 1.1;
+				  margin-top: 0;
+				  margin-bottom: 10px;
+				}
+
+				.news-byline {
+				  font-size: 0.9em;
+				  color: #666;
+				  margin-bottom: 20px;
+				  font-family: 'Arial', sans-serif;
+				  text-transform: uppercase;
+				}
+
+				.news-body p {
+				  font-family: 'Georgia', 'Times New Roman', serif;
+				  font-size: 1.05em;
+				  line-height: 1.5;
+				  margin-bottom: 15px;
+				  color: #111;
+				}
+
+				.news-body p:first-of-type::first-letter {
+				  float: left;
+				  font-size: 3.5em;
+				  line-height: 0.8;
+				  padding-top: 4px;
+				  padding-right: 8px;
+				  padding-left: 3px;
+				  font-family: 'Georgia', serif;
+				  font-weight: bold;
+				}
+			  </style>
+
+			  <div class="section-label">Page 1: Viral Context</div>
+			  <div class="tweet-card">
+				<div class="tweet-header">
+				  <div class="tweet-avatar"></div>
+				  <div class="tweet-author-box">
+					<div class="tweet-name">Al Gore</div>
+					<div class="tweet-handle">@elgor1</div>
+				  </div>
+				  <div style="margin-left: auto; color: #0084B4; font-size: 1.2em;">🐦</div>
+				</div>
+				<div class="tweet-content">
+				  “MOURN OUR WOOD” <span>#SaveTheTrees</span> <span>#TreeJesus</span>
+				</div>
+				<div class="tweet-footer">
+				  8:42 AM - 25 Aug 2012
+				</div>
+				<div class="tweet-actions">
+				  <span>Reply</span> <span>Retweet</span> <span>Favorite</span>
+				</div>
+			  </div>
+
+			  <div class="section-label">Page 2: Media Coverage</div>
+			  <div class="news-card">
+				<div class="news-pub-name">Oakland Speaks</div>
+
+				<h1 class="news-headline">How a New Fad Turned This Failed Presidential Candidate into “Tree Jesus”</h1>
+
+				<div class="news-byline">
+				  September 6, 2012 • By Ben Armstrong-Lam
+				</div>
+
+				<div class="news-body">
+				  <p>On this exact day twenty years ago, Jerry Brown, the former governor of California turned improbable Democratic nominee, filmed himself in the Amazon Rainforest pleading for the preservation of the environment with the infamous phrase “mourn our wood,” mimicking the stretched arms the Christ The Redeemer statue in Rio de Janeiro. While many were touched by his passion for preserving the environment, critics likened him to an airheaded “Tree Jesus” with little insight into climate beyond performative acts.</p>
+
+				  <p>With West Coast forest fires reaching a record new high this year, young people all over the world took matters into their own hands by “mourning”, mimicking Governor Brown’s pose in front of any tree they could find, and guarding the tree as a “Tree Jesus” with these posts appearing all over YouTube, Twitter and other online platforms.</p>
+
+				  <p>After his political career, Brown has maintained a mostly low profile at his ranch in Colusa County. While it's unlikely that he will be pursuing a return to politics anytime soon, a “Tree Jesus” write-in movement for the 2012 election has emerged due to the popularity of his infamous tree pose. The movement is not limited to the online world, with “Mass Jesus” sessions advertised through posters all over population centres such as Los Angeles, Detroit, and New York.</p>
+
+				  <p>While the movement mirrors the controversial KONY 2012 movement via its use of often intentionally sloppy posters to advertise events, “Mourning” lies in an ethical gray area as the participating are generally doing what they promised, guarding trees in the style of Jesus. Oddly enough, the normally less-than-media-shy Brown has made no public comment on the phenomenon as of the time of this article’s publication, with his wife, Anne Gust, telling reporters that Brown was occupied with business at a local park when reached for a statement.</p>
+				</div>
+			  </div>
+			</div>
+		`
         },
         {
             "pk": "Hugo Chavez Movie",
@@ -42374,14 +42709,90 @@ Euro Disney Begins Considering Exiting French Market
                 "Establishment Use": endingstuff["Establishment Use"],
                 "Running Mate": e.running_mate_last_name
             },
-            "ending text": `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Old_Riga_%28Vecr%C4%ABga%29.JPG/2560px-Old_Riga_%28Vecr%C4%ABga%29.JPG" style="margin: 1em; float: left; width: 35%">
-              <h2> Patrick Reaffirms NATO Commitment in Riga </h2>
-				<p style="text-align: left">Associated Press</p>
-				<p style="text-align: left">July 21, 2025</p>
-				<p><b>RIGA —</b> President Deval Patrick concluded his three-day tour of the Baltic states today with a solemn address at the Freedom Monument in Riga. Facing a crowd of thousands, the President sought to reassure his Eastern European allies of continued American support amidst rising tensions on the Russian border, framing the current geopolitical struggle, pundits have noted, as a continuation of the fights for democracy that defined the late 20th century.</p>
-				<p>In a moment of candor during the subsequent press conference with the Latvian Prime Minister, Aivars Lembergs, President Patrick took a moment to reflect on the post-Cold War era and the divergent paths history has taken since the collapse of the Soviet Union. When asked about the rising tide of cynicism in Western democracies, Patrick offered a surprising historical allusion to the election of 1992.</p>
-				<p>”I am reminded often of, uh, the 1992 election back home,” Patrick said, leaning over the lectern. “We had a nominee then, Governor Jerry Brown, who spoke with great passion about a ‘broken system’ and the need to radically dismantle the establishment. Well, he didn’t win. The country wasn’t ready for that kind of disruption, and um, perhaps rightly so. But standing here, looking at the fragility of freedom, one has to wonder… if his diagnosis of our civic health was simply three decades ahead of its time. We cannot let our institutions rot from the inside while we guard the walls on the outside.”</p>
-				<p>The reference to the failed 1992 Democratic nominee caught attention from members of the press pool. While Brown receded into political obscurity following his defeat, President Patrick’s invocation of his “broken system” rhetoric suggests his administration is aware of the domestic discontent bubbling back home, even as it projects strength abroad.</p>
+            "ending text": `<div class="ap-wire-article">
+			  <style>
+				.ap-wire-article {
+				  font-family: 'Georgia', 'Times New Roman', serif;
+				  background-color: #fff;
+				  color: #111;
+				  max-width: 800px;
+				  margin: 0 auto;
+				  padding: 30px;
+				  border: 1px solid #ddd;
+				  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+				  line-height: 1.6;
+				}
+
+				.ap-wire-article img {
+				  float: left;
+				  width: 35%;
+				  margin: 0 20px 15px 0;
+				  border: 1px solid #ccc;
+				  padding: 3px;
+				  background: #fff;
+				  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+				}
+
+				.ap-wire-article h2 {
+				  font-size: 2em;
+				  font-weight: 700;
+				  line-height: 1.1;
+				  margin-top: 0;
+				  margin-bottom: 10px;
+				  color: #000;
+				}
+
+				.ap-meta {
+				  font-size: 0.85em;
+				  color: #555;
+				  margin-bottom: 20px;
+				  border-bottom: 1px solid #eee;
+				  padding-bottom: 10px;
+				}
+
+				.ap-meta strong {
+				  color: #000;
+				}
+
+				.ap-wire-article p {
+				  margin-bottom: 15px;
+				  font-size: 1.05em;
+				  text-align: left;
+				}
+
+				.ap-wire-article p:first-of-type b {
+				  color: #333;
+				  font-weight: bold;
+				}
+
+				.ap-wire-article blockquote {
+				  border-left: 4px solid #333;
+				  padding-left: 15px;
+				  margin: 20px 0;
+				  font-style: italic;
+				  color: #333;
+				  font-size: 1.1em;
+				}
+			  </style>
+
+			  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Old_Riga_%28Vecr%C4%ABga%29.JPG/2560px-Old_Riga_%28Vecr%C4%ABga%29.JPG">
+
+			  <h2>Patrick Reaffirms NATO Commitment in Riga</h2>
+
+			  <div class="ap-meta">
+				<strong>Associated Press</strong> | July 21, 2025
+			  </div>
+
+			  <p><b>RIGA —</b> President Deval Patrick concluded his three-day tour of the Baltic states today with a solemn address at the Freedom Monument in Riga. Facing a crowd of thousands, the President sought to reassure his Eastern European allies of continued American support amidst rising tensions on the Russian border, framing the current geopolitical struggle, pundits have noted, as a continuation of the fights for democracy that defined the late 20th century.</p>
+
+			  <p>In a moment of candor during the subsequent press conference with the Latvian Prime Minister, Aivars Lembergs, President Patrick took a moment to reflect on the post-Cold War era and the divergent paths history has taken since the collapse of the Soviet Union. When asked about the rising tide of cynicism in Western democracies, Patrick offered a surprising historical allusion to the election of 1992.</p>
+
+			  <blockquote>
+				“I am reminded often of, uh, the 1992 election back home. We had a nominee then, Governor Jerry Brown, who spoke with great passion about a ‘broken system’ and the need to radically dismantle the establishment. Well, he didn’t win. The country wasn’t ready for that kind of disruption, and um, perhaps rightly so. But standing here, looking at the fragility of freedom, one has to wonder… if his diagnosis of our civic health was simply three decades ahead of its time. We cannot let our institutions rot from the inside while we guard the walls on the outside.”
+			  </blockquote>
+
+			  <p>The reference to the failed 1992 Democratic nominee caught attention from members of the press pool. While Brown receded into political obscurity following his defeat, President Patrick’s invocation of his “broken system” rhetoric suggests his administration is aware of the domestic discontent bubbling back home, even as it projects strength abroad.</p>
+			</div>
               `
         },
         {
@@ -42630,27 +43041,140 @@ Euro Disney Begins Considering Exiting French Market
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-    <h2><b>Brazil Thrashes Germany 8-1, reaches World Cup final</b></h2>
-    <p style="text-align:left;">By Karl Ford, sports writer </p>
-    <p style="text-align:left;">Published 5:57 PM CDT, July 8, 2014</p>
-    <p>BELO HORIZONTE, Brazil (AP) — With star goalkeeper Manuel Neuer out injured, just about everyone in Germany knew it would be tough against Brazil.</p>
-    <p>Nobody ever expected this.</p>
-    <p>The Brazilians tore apart Germany’s porous defense time and time again Tuesday, giving their home fans a show as they inflicted an 8-1 beating, the largest margin of defeat at this stage in the history of the tournament.</p>
-    <p>“We wanted to make the people happy… and wow, did we ever,” said Brazil defender David Luiz, who had scored in each of the last two matches before adding another goal in this match. “We thank all Brazilians.”</p>
-    <p>The astounding scoreline is sure to overshadow Miroslav Klose’s record-setting 16th career World Cup goal. The strike, Germany’s only goal of the match, pushed Klose past Brazil great Ronaldo, who was at the Mineirao Stadium on Tuesday.</p>
-    <p>Brazil will face either Argentina or the Netherlands on Sunday at the Maracana Stadium in Rio de Janeiro with a chance to win for the sixth time.</p>
-    <p>Brazil was represented by Neymar, the team’s key player and the poster boy for the World Cup. He scored four goals in the group stage, but only heated up as the tournament progressed, adding another three goals in the round of 16 and the quarterfinals. He added a hat trick in this game, thrilling the home fans.</p>
-    <p>With German goalkeeper Neuer out with a strained hamstring and crucial defender Mats Hummels suspended for the game, many Germans went into the match with low expectations.</p>
-    <p>The atmosphere at the start of the match was spine-tingling, but the euphoria of the yellow-shirted thousands soon boiled over as the Brazilians scored five goals in the first 30 minutes — four of them in a seven-minute span.</p>
-    <p>“It is always crucial to stay calm, cool and courageous in facing Brazilian passion, and we just weren’t able to do it,” Germany coach Joachim Loew said.</p>
-    <p>The loss matched Germany’s most-lopsided defeat ever, as fans throughout the country watched their television screens in silent horror while Brazil’s lead continued to balloon. </p>
-    <p>“The responsibility for this result is the team’s,” Brazil coach Luiz Felipe Scolari said. “I was in charge, but they executed.”</p>
-    <p>It was the most lopsided World Cup match since Portugal’s 7-0 win over North Korea in 2010.</p>
-    <p>On Tuesday, with Neymar in top form, Brazil attacked from the start, potting their first goal 11 minutes in from Thiago Silva. But more would come as Germany’s defense buckled time and time again, with the game getting out of hand by halftime, with Brazil up 5-0. Even then, they added three more to the tally, with Germany’s sole goal coming from Klose in the 91st minute against a Brazilian team who seemed mentally uninvested in a match they had already practically won. </p>
-    <p>The game was enjoyed by former American president George Bush, who was watching the game with former Brazilian president Fernando Henrique Cardoso, a personal acquaintance of his with whom Bush has worked closely together in the charitable field. Meanwhile, current Brazilian president Lula de Silva stayed home, though he offered the team congratulations on social media after the match.</p>
-    <p>It’s the first time that Germany has allowed eight goals in a match since the 1954 World Cup, when they suffered an 8-3 defeat to Hungary before going on to beat the Hungarian team in the final. </p>
-    <p>In previous World Cup semifinal matches, the largest margin of defeat was five goals, occurring on three occasions.</p>
-    <p>“The Brazilian quality is very, very high,” Loew said. “This is not normal.”</p>`
+			<div class="sports-article-container">
+			  <style>
+				.sports-article-container {
+				  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+				  background-color: #f4f4f4;
+				  color: #333;
+				  max-width: 700px;
+				  margin: 0 auto;
+				  border: 1px solid #ddd;
+				}
+
+				.match-header {
+				  background: linear-gradient(135deg, #009c3b 50%, #ffdf00 50%);
+				  padding: 20px;
+				  color: #fff;
+				  text-align: center;
+				  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+				  border-bottom: 5px solid #002776;
+				}
+
+				.score-display {
+				  font-size: 3em;
+				  font-weight: 900;
+				  letter-spacing: 2px;
+				  background: rgba(0,0,0,0.3);
+				  display: inline-block;
+				  padding: 10px 30px;
+				  border-radius: 8px;
+				  margin-bottom: 10px;
+				}
+
+				.score-teams {
+				  font-size: 1.2em;
+				  font-weight: bold;
+				  text-transform: uppercase;
+				}
+
+				.article-content {
+				  background-color: #fff;
+				  padding: 30px;
+				}
+
+				.article-headline {
+				  font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+				  font-size: 2em;
+				  line-height: 1.1;
+				  margin-top: 0;
+				  margin-bottom: 15px;
+				  color: #111;
+				}
+
+				.article-meta {
+				  font-size: 0.85em;
+				  color: #777;
+				  border-bottom: 1px solid #eee;
+				  padding-bottom: 15px;
+				  margin-bottom: 20px;
+				  font-style: italic;
+				}
+
+				.article-body p {
+				  line-height: 1.6;
+				  margin-bottom: 15px;
+				  font-size: 1em;
+				}
+
+				.dateline {
+				  font-weight: bold;
+				  color: #444;
+				  text-transform: uppercase;
+				}
+
+				.quote-text {
+				  border-left: 4px solid #009c3b;
+				  padding-left: 15px;
+				  color: #555;
+				  font-style: italic;
+				}
+			  </style>
+
+			  <div class="match-header">
+				<div class="score-display">8 - 1</div>
+				<div class="score-teams">BRAZIL <span style="opacity:0.7; font-size:0.8em;">vs</span> GERMANY</div>
+				<div style="font-size: 0.8em; margin-top: 5px; opacity: 0.9;">SEMI-FINAL • BELO HORIZONTE</div>
+			  </div>
+
+			  <div class="article-content">
+				<h1 class="article-headline">Brazil Thrashes Germany 8-1, reaches World Cup final</h1>
+
+				<div class="article-meta">
+				  By <strong>Karl Ford</strong>, sports writer<br>
+				  Published 5:57 PM CDT, July 8, 2014
+				</div>
+
+				<div class="article-body">
+				  <p><span class="dateline">BELO HORIZONTE, Brazil (AP) —</span> With star goalkeeper Manuel Neuer out injured, just about everyone in Germany knew it would be tough against Brazil.</p>
+
+				  <p>Nobody ever expected this.</p>
+
+				  <p>The Brazilians tore apart Germany’s porous defense time and time again Tuesday, giving their home fans a show as they inflicted an 8-1 beating, the largest margin of defeat at this stage in the history of the tournament.</p>
+
+				  <p class="quote-text">“We wanted to make the people happy… and wow, did we ever,” said Brazil defender David Luiz, who had scored in each of the last two matches before adding another goal in this match. “We thank all Brazilians.”</p>
+
+				  <p>The astounding scoreline is sure to overshadow Miroslav Klose’s record-setting 16th career World Cup goal. The strike, Germany’s only goal of the match, pushed Klose past Brazil great Ronaldo, who was at the Mineirao Stadium on Tuesday.</p>
+
+				  <p>Brazil will face either Argentina or the Netherlands on Sunday at the Maracana Stadium in Rio de Janeiro with a chance to win for the sixth time.</p>
+
+				  <p>Brazil was represented by Neymar, the team’s key player and the poster boy for the World Cup. He scored four goals in the group stage, but only heated up as the tournament progressed, adding another three goals in the round of 16 and the quarterfinals. He added a hat trick in this game, thrilling the home fans.</p>
+
+				  <p>With German goalkeeper Neuer out with a strained hamstring and crucial defender Mats Hummels suspended for the game, many Germans went into the match with low expectations.</p>
+
+				  <p>The atmosphere at the start of the match was spine-tingling, but the euphoria of the yellow-shirted thousands soon boiled over as the Brazilians scored five goals in the first 30 minutes — four of them in a seven-minute span.</p>
+
+				  <p class="quote-text">“It is always crucial to stay calm, cool and courageous in facing Brazilian passion, and we just weren’t able to do it,” Germany coach Joachim Loew said.</p>
+
+				  <p>The loss matched Germany’s most-lopsided defeat ever, as fans throughout the country watched their television screens in silent horror while Brazil’s lead continued to balloon. </p>
+
+				  <p class="quote-text">“The responsibility for this result is the team’s,” Brazil coach Luiz Felipe Scolari said. “I was in charge, but they executed.”</p>
+
+				  <p>It was the most lopsided World Cup match since Portugal’s 7-0 win over North Korea in 2010.</p>
+
+				  <p>On Tuesday, with Neymar in top form, Brazil attacked from the start, potting their first goal 11 minutes in from Thiago Silva. But more would come as Germany’s defense buckled time and time again, with the game getting out of hand by halftime, with Brazil up 5-0. Even then, they added three more to the tally, with Germany’s sole goal coming from Klose in the 91st minute against a Brazilian team who seemed mentally uninvested in a match they had already practically won. </p>
+
+				  <p>The game was enjoyed by former American president George Bush, who was watching the game with former Brazilian president Fernando Henrique Cardoso, a personal acquaintance of his with whom Bush has worked closely together in the charitable field. Meanwhile, current Brazilian president Lula de Silva stayed home, though he offered the team congratulations on social media after the match.</p>
+
+				  <p>It’s the first time that Germany has allowed eight goals in a match since the 1954 World Cup, when they suffered an 8-3 defeat to Hungary before going on to beat the Hungarian team in the final. </p>
+
+				  <p>In previous World Cup semifinal matches, the largest margin of defeat was five goals, occurring on three occasions.</p>
+
+				  <p class="quote-text">“The Brazilian quality is very, very high,” Loew said. “This is not normal.”</p>
+				</div>
+			  </div>
+			</div>
+		`
         },
         {
             "pk": "SA Diplomacy",
