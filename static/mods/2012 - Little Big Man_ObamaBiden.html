@@ -24466,10 +24466,10 @@ function generateAndPushCongressSlide() {
             const state = E.states_json.find(s => s.fields.abbr === abbr);
             if (!state) return null;
             return E.final_state_results ? E.final_state_results[state.pk] : null; 
-        };        
-        const wonOhio = E.states_json.find(s => s.fields.abbr === "OH" && s.winner === E.candidate_id);
-        const wonFlorida = E.states_json.find(s => s.fields.abbr === "FL" && s.winner === E.candidate_id);
-        const wonPenn = E.states_json.find(s => s.fields.abbr === "PA" && s.winner === E.candidate_id);
+        };
+        const wonOhio = E.final_state_results.find(s => s.abbr === "OH").result[0].candidate === E.candidate_id;
+		const wonFlorida = E.final_state_results.find(s => s.abbr === "FL").result[0].candidate === E.candidate_id;
+		const wonPenn = E.final_state_results.find(s => s.abbr === "PA").result[0].candidate === E.candidate_id;
 
         let opponentLast = "Romney";
         if (typeof window.opName === 'string') {
