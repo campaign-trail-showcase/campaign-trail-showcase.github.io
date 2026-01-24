@@ -870,6 +870,7 @@ $(document).ready(async () => {
   if (gridEl) gridEl.innerHTML = `<div id="loading-mods-text" style="text-align:center;margin:20px;">Loading mods...</div>`;
 
   const modNameParam = getUrlParam("modName");
+  const localModParam = getUrlParam("localMod");
 
   favoriteMods = new Set(
     localStorage.getItem("favoriteMods")?.split(",") || [],
@@ -1087,7 +1088,15 @@ $(document).ready(async () => {
 
   applyModBoxThemes();
 
-  if (modNameParam) {
+  // check for localMod parameter
+  if (localModParam) {
+    customThemesButton.style.display = "none";
+    if (customMods.has(localModParam)) {
+      loadModFromButton(localModParam);
+    } else {
+      alert(`The local mod "${localModParam}" could not be found in your saved mods.`);
+    }
+  } else if (modNameParam) {
     customThemesButton.style.display = "none";
     loadModFromButton(modNameParam);
   }
@@ -1329,8 +1338,34 @@ async function addCustomMod(code1, code2) {
   modList.unshift(modView);
 
   // ensure "Custom" tag is checked so the new mod is visible
+  let customTagFound = false;
   for (const tagCheckbox of tagList) {
-    if (tagCheckbox.value === "Custom") tagCheckbox.checked = true;
+    if (tagCheckbox.value === "Custom") {
+      tagCheckbox.checked = true;
+      customTagFound = true;
+    }
+  }
+
+  // if the "Custom" tag button doesn't exist yet, create it
+  if (!customTagFound) {
+    const tagsGrid = document.getElementById("tags");
+    const tagButton = document.createElement("div");
+    tagButton.classList.add("tag-button");
+    
+    tagButton.innerHTML = `
+      <input type="checkbox" id="Custom" name="Custom" value="Custom" checked>
+      <label style="user-select:none" for="Custom">Custom</label><br>
+    `;
+    
+    const checkbox = tagButton.getElementsByTagName("INPUT")[0];
+    
+    tagButton.addEventListener("click", (event) => {
+      if (event.target === tagButton) checkbox.click();
+    });
+    
+    checkbox.addEventListener("change", updateModViews);
+    tagList.push(checkbox);
+    tagsGrid.appendChild(tagButton);
   }
   
   // cached code 2
@@ -1731,6 +1766,12 @@ async function loadModFromButton(modValue) {
   loadingFromModButton = true;
 
   if (customMods.has(modValue)) {
+    // update URL for local mods
+    const pageURL = new URL(window.location.href);
+    pageURL.searchParams.delete("modName");
+    pageURL.searchParams.set("localMod", modValue);
+    window.history.replaceState(null, "", `${pageURL.pathname}?${pageURL.searchParams.toString().replaceAll("+", "%20")}`);
+
     let modData = null;
     try {
         modData = await getModFromDB(modValue);
@@ -1767,7 +1808,13 @@ async function loadModFromButton(modValue) {
     customMod = modValue;
   } else {
     const pageURL = new URL(window.location.href);
-    if (!pageURL.searchParams.has("modName")) {
+    
+    // ensure we switch params if moving from a local mod to an official one
+    if (pageURL.searchParams.has("localMod")) {
+        pageURL.searchParams.delete("localMod");
+    }
+
+    if (!pageURL.searchParams.has("modName") || pageURL.searchParams.get("modName") !== modValue) {
       pageURL.searchParams.set("modName", modValue);
       window.history.replaceState(null, "", `${pageURL.pathname}?${pageURL.searchParams.toString().replaceAll("+", "%20")}`);
     }

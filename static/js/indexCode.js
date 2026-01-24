@@ -97,7 +97,14 @@ const nct_stuff = {
 };
 
 var theme = window.localStorage.getItem("theme");
-nct_stuff.selectedTheme = theme || "tct";
+// check if the theme actually exists
+if (theme && nct_stuff.themes[theme]) {
+  nct_stuff.selectedTheme = theme;
+} else if (theme && theme.startsWith("custom")) {
+  nct_stuff.selectedTheme = "custom";
+} else {
+  nct_stuff.selectedTheme = "tct";
+}
 let selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
 
 const themePickerEl = document.getElementById("theme_picker");
@@ -122,7 +129,7 @@ function themePicked() {
     window.localStorage.setItem("theme", "custom");
     window.localStorage.setItem("active_custom_theme_id", sel);
     nct_stuff.selectedTheme = "custom";
-    
+
     loadCustomTheme(sel);
 
     // make sure the "Add custom theme" button is visible
@@ -134,11 +141,11 @@ function themePicked() {
     // if "Custom" option selected, show button and optionally open modal
     window.localStorage.setItem("theme", "custom");
     nct_stuff.selectedTheme = "custom";
-    
+
     if (!customMenuButton) {
       ensureCustomThemeButton();
     }
-    
+
     // check if there's an active theme, otherwise open modal
     const activeThemeId = window.localStorage.getItem("active_custom_theme_id");
     if (!activeThemeId || !nct_stuff.customThemes[activeThemeId]) {
@@ -175,21 +182,21 @@ const stassenyear = [
 ];
 
 const handleSelectNavigation = (event, selectId) => {
-    const select = document.getElementById(selectId);
-    if (!select) return;
-    
-    event.preventDefault();
-    const optionsLen = select.options.length;
-    let newIndex = select.selectedIndex;
+  const select = document.getElementById(selectId);
+  if (!select) return;
 
-    if (event.key === "ArrowDown") {
-        newIndex = (newIndex + 1) % optionsLen;
-    } else {
-        newIndex = (newIndex - 1 + optionsLen) % optionsLen;
-    }
-    
-    select.selectedIndex = newIndex;
-    select.dispatchEvent(new Event('change'));
+  event.preventDefault();
+  const optionsLen = select.options.length;
+  let newIndex = select.selectedIndex;
+
+  if (event.key === "ArrowDown") {
+    newIndex = (newIndex + 1) % optionsLen;
+  } else {
+    newIndex = (newIndex - 1 + optionsLen) % optionsLen;
+  }
+
+  select.selectedIndex = newIndex;
+  select.dispatchEvent(new Event('change'));
 };
 
 // keyboard shortcuts handler
@@ -230,20 +237,20 @@ const keyboardShortcutsHandler = (event) => {
     const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
     if (arrowKey) {
       event.preventDefault();
-      
+
       const electionSelect = document.getElementById("election_id");
       if (!electionSelect) return;
-      
+
       const options = Array.from(electionSelect.children);
       const currentIndex = electionSelect.selectedIndex;
       let newIndex;
-      
+
       if (event.key === "ArrowDown") {
         newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
       } else {
         newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
       }
-      
+
       electionSelect.selectedIndex = newIndex;
       electionSelect.dispatchEvent(new Event('change'));
     }
@@ -264,8 +271,8 @@ const keyboardShortcutsHandler = (event) => {
     }
 
     if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-        handleSelectNavigation(event, "candidate_id");
-        return;
+      handleSelectNavigation(event, "candidate_id");
+      return;
     }
     return;
   }
@@ -286,20 +293,20 @@ const keyboardShortcutsHandler = (event) => {
     const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
     if (arrowKey) {
       event.preventDefault();
-      
+
       const runningMateSelect = document.getElementById("running_mate_id");
       if (!runningMateSelect) return;
-      
+
       const options = Array.from(runningMateSelect.children);
       const currentIndex = runningMateSelect.selectedIndex;
       let newIndex;
-      
+
       if (event.key === "ArrowDown") {
         newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
       } else {
         newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
       }
-      
+
       runningMateSelect.selectedIndex = newIndex;
       runningMateSelect.dispatchEvent(new Event('change'));
     }
@@ -322,20 +329,20 @@ const keyboardShortcutsHandler = (event) => {
     const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
     if (arrowKey) {
       event.preventDefault();
-      
+
       const difficultySelect = document.getElementById("difficulty_level_id");
       if (!difficultySelect) return;
-      
+
       const options = Array.from(difficultySelect.children);
       const currentIndex = difficultySelect.selectedIndex;
       let newIndex;
-      
+
       if (event.key === "ArrowDown") {
         newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
       } else {
         newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
       }
-      
+
       difficultySelect.selectedIndex = newIndex;
       difficultySelect.dispatchEvent(new Event('change'));
     }
@@ -345,7 +352,7 @@ const keyboardShortcutsHandler = (event) => {
   // question/answer selection
   if (document.querySelector("#question_form")) {
     const answers = Array.from(document.querySelectorAll(".game_answers"));
-    
+
     if (event.key === "Enter" || event.key === "ArrowRight") {
       event.preventDefault();
       // if there's an OK button (feedback), click it
@@ -354,12 +361,12 @@ const keyboardShortcutsHandler = (event) => {
         okButton.click();
         return;
       }
-      
+
       // otherwise, submit the answer
       document.getElementById("answer_select_button")?.click();
       return;
     }
-    
+
     if (event.key === "ArrowLeft") {
       event.preventDefault();
       document.getElementById("view_electoral_map")?.click();
@@ -382,15 +389,15 @@ const keyboardShortcutsHandler = (event) => {
     // handle arrow keys to navigate answers
     if (event.key === "ArrowUp" || event.key === "ArrowDown") {
       event.preventDefault();
-      
+
       let currentIndex = answers.findIndex(a => a.checked);
-      
+
       if (event.key === "ArrowDown") {
         currentIndex = currentIndex + 1 >= answers.length ? 0 : currentIndex + 1;
       } else {
         currentIndex = currentIndex - 1 < 0 ? answers.length - 1 : currentIndex - 1;
       }
-      
+
       answers[currentIndex]?.click();
     }
     return;
@@ -415,13 +422,13 @@ const keyboardShortcutsHandler = (event) => {
         electionNightButton.click();
         return;
       }
-      
+
       const winnerButton = document.querySelector("#winner_buttons #ok_button");
       if (winnerButton) {
         winnerButton.click();
         return;
       }
-      
+
       document.getElementById("final_result_button")?.click();
     }
     return;
@@ -432,20 +439,20 @@ const keyboardShortcutsHandler = (event) => {
   if (finalMenuButtons.length > 0) {
     if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
       event.preventDefault();
-      
+
       // exclude the "Play Again" button from navigation
       const navButtons = finalMenuButtons.slice(0, -1);
       const currentIndex = navButtons.findIndex(b => b.disabled);
-      
+
       if (currentIndex === -1) return;
-      
+
       let newIndex;
       if (event.key === "ArrowRight") {
         newIndex = currentIndex + 1 >= navButtons.length ? 0 : currentIndex + 1;
       } else {
         newIndex = currentIndex - 1 < 0 ? navButtons.length - 1 : currentIndex - 1;
       }
-      
+
       navButtons[newIndex]?.click();
     }
     return;
@@ -456,7 +463,7 @@ document.addEventListener("keydown", keyboardShortcutsHandler);
 
 // DOM cache
 const correctbannerpar = document.getElementsByClassName("game_header")[0];
-var corrr = correctbannerpar.innerHTML;
+var corrr = correctbannerpar ? correctbannerpar.innerHTML : "";
 var header = document.getElementById("header");
 var gameHeader = document.getElementsByClassName("game_header")[0];
 var gameWindow = document.getElementById("game_window");
@@ -467,16 +474,36 @@ document.head.appendChild(dynamicStyle);
 
 // Not removed because used by 2023 WOKE
 function updateBannerAndStyling() {
-  header.src = selectedTheme.banner;
-  header.width = 1000;
-  document.body.background = selectedTheme.background;
-  gameWindow.style.backgroundColor = selectedTheme.coloring_window;
-  container.style.backgroundColor = selectedTheme.coloring_container;
-  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
-  if (selectedTheme.text_col != null) {
-    container.style.color = selectedTheme.text_col;
-    gameWindow.style.color = "black";
+  header = document.getElementById("header");
+  gameWindow = document.getElementById("game_window");
+  container = document.querySelector(".container");
+  gameHeader = document.getElementsByClassName("game_header")[0];
+
+  if (header) {
+    header.src = selectedTheme.banner;
+    header.width = 1000;
   }
+
+  document.body.background = selectedTheme.background;
+
+  if (gameWindow) {
+    gameWindow.style.backgroundColor = selectedTheme.coloring_window;
+    if (selectedTheme.text_col != null) {
+      gameWindow.style.color = "black";
+    }
+  }
+
+  if (container) {
+    container.style.backgroundColor = selectedTheme.coloring_container;
+    if (selectedTheme.text_col != null) {
+      container.style.color = selectedTheme.text_col;
+    }
+  }
+
+  if (gameHeader) {
+    gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+  }
+
   // classes for theme styling
   document.body.classList.remove('cts-theme', 'classic-theme');
   if (nct_stuff.selectedTheme === "classic") {
@@ -487,14 +514,30 @@ function updateBannerAndStyling() {
 }
 
 function updateStyling() {
+  gameWindow = document.getElementById("game_window");
+  container = document.querySelector(".container");
+  gameHeader = document.getElementsByClassName("game_header")[0];
+
   document.body.background = selectedTheme.background;
-  gameWindow.style.backgroundColor = selectedTheme.coloring_window;
-  container.style.backgroundColor = selectedTheme.coloring_container;
-  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
-  if (selectedTheme.text_col != null) {
-    container.style.color = selectedTheme.text_col;
-    gameWindow.style.color = "black";
+
+  if (gameWindow) {
+    gameWindow.style.backgroundColor = selectedTheme.coloring_window;
+    if (selectedTheme.text_col != null) {
+      gameWindow.style.color = "black";
+    }
   }
+
+  if (container) {
+    container.style.backgroundColor = selectedTheme.coloring_container;
+    if (selectedTheme.text_col != null) {
+      container.style.color = selectedTheme.text_col;
+    }
+  }
+
+  if (gameHeader) {
+    gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+  }
+
   // classes for theme styling
   document.body.classList.remove('cts-theme', 'classic-theme');
   if (nct_stuff.selectedTheme === "classic") {
@@ -571,7 +614,7 @@ function handleThemeUpdates() {
   ) {
     selectedTheme.window_url = null;
   }
-  
+
   const gameHeader = document.getElementsByClassName("game_header")[0];
   if (gameHeader) {
     if (gameHeader.innerHTML != corrr) {
@@ -580,40 +623,40 @@ function handleThemeUpdates() {
     gameHeader.style.backgroundColor = selectedTheme.coloring_title;
     corrr = gameHeader.innerHTML;
   }
-  
+
   updateDynamicStyle();
 }
 
 // observe game header changes
 function observeGameHeader() {
   const gameHeader = document.getElementsByClassName("game_header")[0];
-  
+
   if (!gameHeader) {
     return;
   }
-  
+
   if (headerObserver) {
     headerObserver.disconnect();
   }
-  
+
   headerObserver = new MutationObserver((mutations) => {
     let shouldUpdate = false;
-    
+
     for (const mutation of mutations) {
       // check for any changes that would require theme updates
-      if (mutation.type === 'childList' || 
-          mutation.type === 'characterData' ||
-          (mutation.type === 'attributes' && mutation.attributeName === 'style')) {
+      if (mutation.type === 'childList' ||
+        mutation.type === 'characterData' ||
+        (mutation.type === 'attributes' && mutation.attributeName === 'style')) {
         shouldUpdate = true;
         break;
       }
     }
-    
+
     if (shouldUpdate) {
       handleThemeUpdates();
     }
   });
-  
+
   // observe the game header for all types of changes
   headerObserver.observe(gameHeader, {
     childList: true,
@@ -622,7 +665,7 @@ function observeGameHeader() {
     attributes: true,
     attributeFilter: ['style', 'class']
   });
-  
+
   handleThemeUpdates();
 }
 
@@ -658,14 +701,14 @@ observeGameHeader();
 const nct_stuff_proxy = new Proxy(nct_stuff, {
   set(target, property, value) {
     target[property] = value;
-    
-    if (property === 'pauseThemeUpdates' || 
-        property === 'custom_override' || 
-        property === 'dynamicOverride' ||
-        property === 'selectedTheme') {
+
+    if (property === 'pauseThemeUpdates' ||
+      property === 'custom_override' ||
+      property === 'dynamicOverride' ||
+      property === 'selectedTheme') {
       handleThemeUpdates();
     }
-    
+
     return true;
   }
 });
@@ -679,7 +722,7 @@ let fallbackInterval = setInterval(() => {
   if (gameHeader && !headerObserver) {
     observeGameHeader();
   }
-  
+
   if (gameHeader && gameHeader.innerHTML !== corrr && !nct_stuff.pauseThemeUpdates) {
     handleThemeUpdates();
   }
@@ -696,19 +739,19 @@ async function loadJSON(path, varr, callback = null) {
   const res = await fetch(path);
   if (!res.ok) return;
   const responseText = await res.text();
-  
+
   // parse nested property path and assign
   const parts = varr.split('.');
   let obj = window;
-  
+
   // navigate to the parent object
   for (let i = 0; i < parts.length - 1; i++) {
     obj = obj[parts[i]];
   }
-  
+
   // assign to the final property
   obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
-  
+
   if (callback) callback();
 }
 
