@@ -1362,10 +1362,10 @@ function questionHTML() {
   });
 
   if (Number(e.game_type_id) === 3) {
-      $("#shining_menu_button").off("click").on("click", (evt) => {
-          evt.preventDefault();
-          shining_menu(A(2));
-      });
+    $("#shining_menu_button").off("click").on("click", (evt) => {
+      evt.preventDefault();
+      shining_menu(A(2));
+    });
   }
 
   // $("#game_window").html(l)
@@ -1506,6 +1506,7 @@ function updateUsMapStyles(config) {
     "stateSpecificStyles",
     "stateSpecificHoverStyles",
     "click",
+    "mouseover",
   ];
 
   for (const option of options) {
@@ -2208,7 +2209,7 @@ function renderOptions(electionId, candId, runId) {
       difficulty_level_id: Number(campaignTrail_temp.difficulty_level_id),
       game_start_logging_id: Number(campaignTrail_temp.game_start_logging_id),
     });
-    
+
     const tempFuncO = (e) => {
       if (e.collect_results) {
         const a = A(2);
@@ -2245,36 +2246,36 @@ function renderOptions(electionId, candId, runId) {
           } else {
             // check memory cache
             let code2 = window.campaignTrail_temp ? window.campaignTrail_temp.custom_code_2 : null;
-            
+
             // check localStorage
             if (!code2) {
-                code2 = localStorage.getItem(`${customMod}_code2`);
+              code2 = localStorage.getItem(`${customMod}_code2`);
             }
-            
+
             // check indexedDB
             if (!code2 && window.getModFromDB) {
-                try {
-                    const modData = await window.getModFromDB(customMod);
-                    if (modData && modData.code2) {
-                        code2 = modData.code2;
-                    }
-                } catch(e) {
-                    console.error("Could not fetch code 2 from DB:", e);
+              try {
+                const modData = await window.getModFromDB(customMod);
+                if (modData && modData.code2) {
+                  code2 = modData.code2;
                 }
+              } catch (e) {
+                console.error("Could not fetch code 2 from DB:", e);
+              }
             }
 
             if (code2) {
-                executeMod(code2, {
-                  campaignTrail_temp,
-                  window,
-                  document,
-                  $,
-                  jQuery
-                });
+              executeMod(code2, {
+                campaignTrail_temp,
+                window,
+                document,
+                $,
+                jQuery
+              });
             } else {
-                console.error("Code 2 was not found for custom mod: " + customMod);
+              console.error("Code 2 was not found for custom mod: " + customMod);
             }
-            
+
             tempFuncO(e);
           }
 
@@ -3968,7 +3969,7 @@ const gameStart = (a) => {
   };
 
   electionId.value = e.election_id;
-  
+
   updateCredits();
 
   electionId.addEventListener("change", () => {
@@ -3981,7 +3982,7 @@ const gameStart = (a) => {
       </div>
       <div id="election_summary">${selectedElection.summary}</div>
     `;
-    
+
     updateCredits();
   });
 
