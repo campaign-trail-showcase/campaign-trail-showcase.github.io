@@ -1,3 +1,10 @@
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement); // unlockable on normal or above
+	}
+}
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -5794,7 +5801,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 382,
             "candidate": 132,
             "affected_candidate": 132,
-            "state_multiplier": 0.007
+            "state_multiplier": -0.007
         }
     },
     {
@@ -5805,7 +5812,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 383,
             "candidate": 132,
             "affected_candidate": 132,
-            "state_multiplier": 0.007
+            "state_multiplier": -0.007
         }
     },
     {
@@ -5860,7 +5867,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 396,
             "candidate": 132,
             "affected_candidate": 132,
-            "state_multiplier": 0.007
+            "state_multiplier": -0.007
         }
     },
     {
@@ -7065,7 +7072,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 4163,
             "candidate": 132,
-            "answer_feedback": "People are disappointed by your retentience here."
+            "answer_feedback": "People are disappointed by your reticence here."
         }
     },
     {
@@ -7101,7 +7108,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 4174,
             "candidate": 132,
-            "answer_feedback": 0
+            "answer_feedback": "It would be wiser to not double down here."
         }
     },
     {
@@ -7550,8 +7557,8 @@ campaignTrail_temp.answer_feedback_json = [
         "pk": 14527,
         "fields": {
             "answer": 4171,
-            "candidate": 131,
-            "answer_feedback": "put feedback here, don't forget to change candidate"
+            "candidate": 132,
+            "answer_feedback": "Johnson is personally offended by your remarks, and due to the divisive atmosphere in the party, no replacement is found. Johnson stays."
         }
     },
     {
@@ -7590,6 +7597,10 @@ campaignTrail_temp.running_mate_last_name = "Johnson";
 
 campaignTrail_temp.multiple_endings = true;
 endingPicker = (out, totv, aa, quickstats) => {
+
+if (campaignTrail_temp.player_answers.includes(4219) &&                 campaignTrail_temp.player_answers.includes(4212)) {
+ctsAchievement("Maverick");
+}
 
     function setImage(url) {
         if(url == '' || url == null) return;
@@ -7653,4 +7664,3 @@ campaignTrail_temp.jet_data = [{
 ]
 
 
-F
