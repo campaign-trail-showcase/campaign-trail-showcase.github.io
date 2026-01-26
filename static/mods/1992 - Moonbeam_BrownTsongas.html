@@ -35442,14 +35442,17 @@ cyoAdventure = function (a) {
         campaignTrail_temp.questions_json[20] = tunnel(114829);
     } else if ((ans === 3360 || ans === 114564 || ans === 114581) && hawktuah >= 2) {
         /// Ukraine (hello jerry its zelenskyyy i need faiv billion rockets)
-        campaignTrail_temp.questions_json[20] = tunnel(114858);
+        campaignTrail_temp.questions_json[20] = tunnel(114858);	
+		if (estab <= 1) {
+			answerSwapper(114836, 114836.1, false);
+		}
     }
     //AS
 	else if (ans === 3361 || ans === 114568 || ans === 114585) {
 		if (hawktuah === -3) {
 			if (e.running_mate_last_name == "Pryor") {  /// Socialism with Arkansas Characteristics
 				campaignTrail_temp.questions_json[20] = tunnel(115047);
-			} else {
+			} else {	
 				/// China
 				campaignTrail_temp.questions_json[20] = tunnel(115025);
 			}
@@ -35631,9 +35634,6 @@ cyoAdventure = function (a) {
 	if (ans === 3342) {
 		answerSwapper(114887, 114887.1, false);
     }
-	if (estab <= 1) {
-		answerSwapper(114836, 114836.1, false);
-    }
 
     //These tell the game after the convention which VPs to make available
 
@@ -35668,13 +35668,13 @@ cyoAdventure = function (a) {
 		cand.fields.last_name = last;
 		cand.fields.color_hex = color;
 	  }
-
+	  
 	  if (Number(e.candidate_id) === Number(candidatePk)) {
 		e.candidate_last_name = last;
 		e.candidate_first_name = first;
 	  }
 	}
-
+	
 	// backup storage for Perot's original multipliers
 	if (!campaignTrail_temp.perot_base_multipliers) {
 		campaignTrail_temp.perot_base_multipliers = {};
@@ -35700,20 +35700,20 @@ cyoAdventure = function (a) {
 		// Gritz should get roughly 1-3% nationally
 		const gritzLow = 0.05;
 		const gritzHigh = 0.15;
-
+		
 		// Marrou gets a small boost from former Perot voters
 		// keeps his vote share somewhat closer to historical
 		const marrouBoostLow = 0.01;
 		const marrouBoostHigh = 0.02;
-
+		
 		campaignTrail_temp.candidate_state_multiplier_json.forEach(item => {
 			const base = campaignTrail_temp.perot_base_multipliers[item.fields.state];
-
+			
 			if (item.fields.candidate === 79 && base) { // Gritz
 				const factor = gritzLow + (Math.random() * (gritzHigh - gritzLow));
 				item.fields.state_multiplier = base * factor;
 			}
-
+			
 			if (item.fields.candidate === 80 && base) { // Marrou
 				const boostFactor = marrouBoostLow + (Math.random() * (marrouBoostHigh - marrouBoostLow));
 				item.fields.state_multiplier += base * boostFactor;
@@ -35740,7 +35740,7 @@ cyoAdventure = function (a) {
 			}
 		});
 	}
-
+	
     if (estab > 3) {
         dncKeynoteSpeaker = "Chris Dodd"
     } else if (estab <= 3) {
@@ -35757,7 +35757,7 @@ cyoAdventure = function (a) {
 	  { ids: [114784, 114806], name: "Disney Über Alles" },
 	  { ids: [1114958, 1114959, 1114960, 1114961], name: "Message: I Care" },
 	];
-
+	
 	const allOf = [
       { ids: [3412, 3341], name: "Jerry Does Dallas" },
     ];
@@ -36368,7 +36368,7 @@ endingPicker = (out, totv, aa, quickstats) => {
     console.log(e.final_state_results)
 	const chat = e.final_state_results.find(item => item.abbr === "AR");
     const cat = e.final_state_results.find(item => item.abbr === "KY");
-
+	
     orderID = [aa[0].candidate, aa[1].candidate, aa[2].candidate];
 
     const playerEV = quickstats[0];
@@ -36377,8 +36377,8 @@ endingPicker = (out, totv, aa, quickstats) => {
         e.final_state_results.map(s => [s.state, s.result[0].candidate])
     );
     const stcount = (stateList, cid) => stateList.every(stId => stateWinners.get(stId) === cid);
-
-	const clintonNom = campaignTrail_temp.player_answers.includes(12240);
+	
+	const clintonNom = campaignTrail_temp.player_answers.includes(12240); 
 
     if (playerEV >= 340 && !clintonNom) ctsAchievement("Man of Tomorrow");
 	if (playerEV < 100 && !clintonNom) ctsAchievement("Code Brown");
@@ -36390,7 +36390,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 	if (playerEV < 270 && campaignTrail_temp.player_answers.some(ans => [1114958, 1114959, 1114960, 1114961].includes(ans))) ctsAchievement("Like Father, Like Son");
 	if (playerEV >= 270 && campaignTrail_temp.player_answers.some(ans => [2113710].includes(ans))) ctsAchievement("This Is Who We Are");
 	if (playerEV < 270 && campaignTrail_temp.player_answers.some(ans => [2113710].includes(ans))) ctsAchievement("Cordon Sanitaire");
-
+	
 	// for Win Type
     let winType = "error";
     if (aa[0].electoral_votes >= 270 && aa[0].candidate == 79) winType = "Perot";
@@ -36401,11 +36401,11 @@ endingPicker = (out, totv, aa, quickstats) => {
     else if (playerEV >= 230) winType = "Close Loss";
     else if (playerEV >= 190) winType = "Decent Loss";
     else if (playerEV < 190) winType = "Massive Loss";
-
+	
 	const requireEV = (threshold, op = 'ge') => {
 		// ge = greater/equal (>=), le = less/equal (<=), lt = less than (<)
-		const pass = op === 'ge' ? playerEV >= threshold :
-					 op === 'le' ? playerEV <= threshold :
+		const pass = op === 'ge' ? playerEV >= threshold : 
+					 op === 'le' ? playerEV <= threshold : 
 					 op === 'lt' ? playerEV < threshold : false;
 		return pass ? endingstuff["Win Type"] : "Not Matched";
 	};
@@ -36417,7 +36417,7 @@ endingPicker = (out, totv, aa, quickstats) => {
         if (!Array.isArray(ids)) ids = [ids];
         return ids.some(id => e.player_answers.includes(id));
     };
-
+	
 	const endingstuff = {
         "Win Type": winType,
         "Answer Check": true,
@@ -38069,7 +38069,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 						font-size: 0.95em;
 						box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 					}
-
+					
 					.transcript-meta {
 						text-transform: uppercase;
 						border-bottom: 2px solid #000;
@@ -38123,14 +38123,14 @@ endingPicker = (out, totv, aa, quickstats) => {
 				</style>
 
 				<div class="ending-slide-container">
-
+				
 					<div class="transcript-box">
 						<div class="transcript-meta">
 							Exhibit A: Raw Footage - "Music City Blues"<br>
 							Location: Nashville, TN<br>
 							Date: June 19, 1994
 						</div>
-
+						
 						<p><i>The following recording has been unedited from its original state.</i></p>
 
 						<p><span class="speaker">Officer Danehower:</span> So, is this like Cops?</p>
@@ -38562,7 +38562,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 					<p>
 					  Kashkari was born to Indian immigrants in Ohio in 1973 and grew up in Stow, a suburb of Akron, before receiving his bachelor’s and master’s degrees in mechanical engineering from the University of Illinois Urbana-Champaign. After a short stint working as an engineer, Kashkari earned his MBA from the Wharton School of the University of Pennsylvania before becoming a banker at Goldman Sachs, working in their San Francisco branch.
 					</p>
-
+					
 					<p>
 					  His first notable political experience was in 2008, when he took a leave of absence from Goldman Sachs to help draft economic policy for Illinois Governor John H. Cox’s failed Republican primary campaign. Although Cox dropped out of the campaign after coming in third place in New Hampshire, Republican operatives widely believed Kashkari had done well, and he stepped away from his job permanently to work as an advisor on Mitch Daniels’ 2012 campaign.
 					</p>
@@ -38682,7 +38682,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 
 					  <div class="wh-content">
 						<img src="https://i.imgur.com/8UvkRAc.png" class="clinton-portrait">
-
+						
 						<p>Good morning.</p>
 
 						<p>Last night, our closest and oldest friend the United Kingdom sustained a direct attack from terrorists. A hijacked plane crashed into Parliament during a delayed session of Question Time, killing nearly every MP present and possibly dozens of innocent people outside Parliament. This act of terror was done to try and destabilize and destroy the United Kingdom. It has failed, and the country remains secure. I recently spoke to acting Prime Minister Gerry Sutcliffe, and I can say with certainty that America will be supporting him as we work to keep the United Kingdom stable.</p>
@@ -38871,19 +38871,19 @@ endingPicker = (out, totv, aa, quickstats) => {
 
 							<div class="guardian-body">
 								<p>On a normal Monday Pentagon briefing, newly minted commander-in-chief Jerry Brown, who had finally ascended to the nation’s highest civilian and military rank on his fourth try, met with Secretary of Defense Jack Reed and other Pentagon top brass to discuss the administration’s approaches to conflict in the Middle East.</p>
-
+								
 								<p>The group was supposed to view a presentation created by an aspiring army personnel, one M. A. Milley, commander of the 3rd Armed Corps in Texas, on possible routes the Brown administration could take in regards to the inherited wars in Afghanistan and Iraq. Prior to the meeting, Brown had repeatedly stressed the need for a united roundtable discussion, which every American commander was encouraged to take part in, regarding foreign policy and the country’s approach to terror cells such as Al-Qaeda or the increasingly active Daesh, going as far as to say that the armed forces needed to “get their act together” in a closed cabinet meeting back in February.</p>
-
+								
 								<p>The presentation was submitted via URL on the White House’s confidential email server. However, when Secretary Reed clicked on the link through his laptop, which was connected to a projector in the room, instead of war plans, the president and his aides were subjected to the YouTube video of Rick Astley’s hit 1987 pop single “Never Gonna Give You Up.”</p>
-
+								
 								<p>Initially, Reed tried closing the video player window. However, the window through which the video was being broadcast was frozen and refused to budge. Reed then attempted lowering the volume, but befell a fate similar to the first attempt. Finally, Reed decided to simply go ahead and let the music video play out, but to the dismay of the officers sitting in the room, the video was set to loop every time it ended. Finally, the SOD powered off his laptop by holding down the power button. Milley swore that he had “no clue” over what may have happened, leading some to believe that the commander’s email may have been breached, allowing an unaffiliated, unidentified third-party to spy on top-secret Pentagon information.</p>
-
+								
 								<p>The incident has already been used numerous times to bash the administration for its perceived incompetence, with radio host and political pundit Rush Limbaugh stating that “the same way you can't teach an old dog new tricks, you can't expect a decrepit, old, has-been to be able to defend our country.”</p>
-
+								
 								<p>It's no secret that Brown’s old age certainly did him no favors in the election, considering the breadth of his narrow win over Republican candidate Mike Huckabee. It goes without saying that this incident only adds fuel to the fire, legitimizing the claims that Brown is too “out of touch” with the modern world and technology.</p>
-
+								
 								<p>Regardless, it appears the President won't take this lying down. On Tuesday, he already issued a sweeping investigation into the Department of Defense, aimed at maintaining OPSEC (operational security), as well as a personal investigation into this supposed third party, calling it a “vicious cybercriminal group” which “must be brought to justice.”</p>
-
+								
 								<p>As for Milley, with few in the armed forces willing to vouch for him, a demotion or dishonorable discharge is looking more and more like a serious possibility.</p>
 							</div>
 
@@ -38951,7 +38951,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 					  align-items: center;
 					  font-size: 13px;
 					}
-
+					
 					.tumblr-post-card li:first-child {
 					  margin-top: 0;
 					}
@@ -38964,10 +38964,10 @@ endingPicker = (out, totv, aa, quickstats) => {
 					}
 
 					.tumblr-post-card li:nth-child(odd)::after {
-					  content: '';
-					  display: block;
+					  content: ''; 
+					  display: block; 
 					}
-
+					
 					.tumblr-post-card li:nth-child(odd) {
 					  text-transform: lowercase;
 					}
@@ -39000,7 +39000,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 				  <div class="tumblr-post-card">
 					<ul>
 					  <li><span style="margin-right:8px; font-size:1.2em;">🎆</span> underfan-max <span style="color:#aaa; margin-left:5px; font-weight:normal;">Follow</span></li>
-
+					  
 					  <li>no because its honestly been very entertaining watching everyone theorize over sans’ true identity, but i dont think he’s ness. they're just not compatible, they have completely different personalities. one of them is a happy-go-lucky teenager and the other one is an old man (dilf btw) who lost everything he held dear like do you not see the difference</li>
 
 					  <li><span style="margin-right:8px; font-size:1.2em;">🍞🔄</span> breadman <span style="color:#aaa; margin-left:5px; font-weight:normal;">Follow</span></li>
@@ -39824,7 +39824,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 					  display: inline-block;
 					  margin-bottom: 30px;
 					}
-
+					
 					.snl-script-container h4 {
 					  margin: 15px 0 2px 0;
 					  text-transform: uppercase;
@@ -39850,7 +39850,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 					  padding: 5px;
 					  border-radius: 4px;
 					}
-
+					
 					.snl-script-container li:last-child {
 					  font-weight: 900;
 					  text-align: center;
@@ -40049,7 +40049,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 					  line-height: 1.3;
 					  padding: 0 15px;
 					}
-
+					
 					.lyrics-content b, .bracket-text {
 					  background-color: #ddd;
 					  padding: 0 4px;
@@ -40712,7 +40712,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 					.wiki-link:hover {
 						text-decoration: underline;
 					}
-
+					
 					.wiki-link-red {
 						color: #ba0000;
 						text-decoration: none;
@@ -40728,7 +40728,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 				</style>
 
 				<div class="wiki-container">
-
+					
 					<h1 class="wiki-h1">2008 United States presidential election</h1>
 					<div class="wiki-tagline">From Wikipedia, the free encyclopedia</div>
 
@@ -41666,7 +41666,7 @@ Euro Disney Begins Considering Exiting French Market
 			</style>
 
 			<div class="library-archive-container">
-
+				
 				<img src="https://i.imgur.com/vOKPmtL.png" class="archive-image" alt="Disneyland">
 
 				<div class="archive-header">
@@ -42318,7 +42318,7 @@ Euro Disney Begins Considering Exiting French Market
 				  margin-right: 10px;
 				  position: relative;
 				}
-
+				
 				.tweet-avatar::after {
 				  content: 'AG';
 				  color: white;
@@ -42412,7 +42412,7 @@ Euro Disney Begins Considering Exiting French Market
 				  margin-bottom: 15px;
 				  color: #111;
 				}
-
+				
 				.news-body p:first-of-type::first-letter {
 				  float: left;
 				  font-size: 3.5em;
@@ -42449,9 +42449,9 @@ Euro Disney Begins Considering Exiting French Market
 			  <div class="section-label">Page 2: Media Coverage</div>
 			  <div class="news-card">
 				<div class="news-pub-name">Oakland Speaks</div>
-
+				
 				<h1 class="news-headline">How a New Fad Turned This Failed Presidential Candidate into “Tree Jesus”</h1>
-
+				
 				<div class="news-byline">
 				  September 6, 2012 • By Ben Armstrong-Lam
 				</div>
@@ -42990,15 +42990,15 @@ Euro Disney Begins Considering Exiting French Market
 
 		  <div class="sun-body-text">
 			<p>In typical Kinnock form, the Prime Minister’s Ambassador to the United States, Christopher Meyer, has allegedly banned the phrase “Special Relationship” from the British Embassy in Washington D.C, on the grounds of it being <b>“hackneyed nonsense.”</b></p>
-
-			<p>This is keeping with a long line with Mr. Kinnock’s infamous anti-Americanism over the years, following his ascendancy to Number 10. After this trait first revealed itself after President Bush’s decisive decision to send arms to the Bosniaks and prevent a genocide, which Prime Minister Kinnock called “a regrettable escalation” following the strikes on the Serbians when they attempted to block the arms deal, he and Bush have openly sniped at each other for years.</p>
-
+			
+			<p>This is keeping with a long line with Mr. Kinnock’s infamous anti-Americanism over the years, following his ascendancy to Number 10. After this trait first revealed itself after President Bush’s decisive decision to send arms to the Bosniaks and prevent a genocide, which Prime Minister Kinnock called “a regrettable escalation” following the strikes on the Serbians when they attempted to block the arms deal, he and Bush have openly sniped at each other for years.</p> 
+			
 			<p>Privately, it’s known that Prime Minister Kinnock referred to <span class=”sun-highlight”>“the sudden end of the Special Relationship”</span> after the U.S. voted to lift the Bosnian arms embargo against British and French wishes, believing that German Chancellor Waigel’s willingness to cooperate with President Bush made them better partners for the special relationship– destroying over a century of close bonds.</p>
-
+			
 			<p>Leader of the opposition Peter Lilley called Meyer’s ban <i>“an absolute disgrace… that shows how far from the days of Thatcher and Reagan we’ve fallen. If Britain is to remain a global actor, it needs to maintain a close relationship with the sole superpower. The Prime Minister is destroying Britain’s credibility on the global stage.”</i></p>
-
+			
 			<p>Unfortunately, what else can we expect from the most anti-American Prime Minister since Lord Frederick North? From their first meeting in June 1992, where Kinnock emasculated the entire nation with a pink-colored tie, or the way he humiliated Britain on the global stage with the bizarre manner in which he ate a corned beef sandwich at the G7 in front of six other world leaders, his off-the-rails behavior has made it clear that British prestige is at risk of destruction.</p>
-
+			
 			<p style="font-weight: bold; border-top: 2px solid #ec1c24; padding-top: 10px;">We at the Sun hope that for the future of British respectability, Mr. Kinnock does the right thing and calls for a general election soon.</p>
 		  </div>
 		</div>
@@ -43112,7 +43112,7 @@ Euro Disney Begins Considering Exiting French Market
 				  color: #444;
 				  text-transform: uppercase;
 				}
-
+				
 				.quote-text {
 				  border-left: 4px solid #009c3b;
 				  padding-left: 15px;
@@ -43129,7 +43129,7 @@ Euro Disney Begins Considering Exiting French Market
 
 			  <div class="article-content">
 				<h1 class="article-headline">Brazil Thrashes Germany 8-1, reaches World Cup final</h1>
-
+				
 				<div class="article-meta">
 				  By <strong>Karl Ford</strong>, sports writer<br>
 				  Published 5:57 PM CDT, July 8, 2014
@@ -43137,39 +43137,39 @@ Euro Disney Begins Considering Exiting French Market
 
 				<div class="article-body">
 				  <p><span class="dateline">BELO HORIZONTE, Brazil (AP) —</span> With star goalkeeper Manuel Neuer out injured, just about everyone in Germany knew it would be tough against Brazil.</p>
-
+				  
 				  <p>Nobody ever expected this.</p>
-
+				  
 				  <p>The Brazilians tore apart Germany’s porous defense time and time again Tuesday, giving their home fans a show as they inflicted an 8-1 beating, the largest margin of defeat at this stage in the history of the tournament.</p>
-
+				  
 				  <p class="quote-text">“We wanted to make the people happy… and wow, did we ever,” said Brazil defender David Luiz, who had scored in each of the last two matches before adding another goal in this match. “We thank all Brazilians.”</p>
-
+				  
 				  <p>The astounding scoreline is sure to overshadow Miroslav Klose’s record-setting 16th career World Cup goal. The strike, Germany’s only goal of the match, pushed Klose past Brazil great Ronaldo, who was at the Mineirao Stadium on Tuesday.</p>
-
+				  
 				  <p>Brazil will face either Argentina or the Netherlands on Sunday at the Maracana Stadium in Rio de Janeiro with a chance to win for the sixth time.</p>
-
+				  
 				  <p>Brazil was represented by Neymar, the team’s key player and the poster boy for the World Cup. He scored four goals in the group stage, but only heated up as the tournament progressed, adding another three goals in the round of 16 and the quarterfinals. He added a hat trick in this game, thrilling the home fans.</p>
-
+				  
 				  <p>With German goalkeeper Neuer out with a strained hamstring and crucial defender Mats Hummels suspended for the game, many Germans went into the match with low expectations.</p>
-
+				  
 				  <p>The atmosphere at the start of the match was spine-tingling, but the euphoria of the yellow-shirted thousands soon boiled over as the Brazilians scored five goals in the first 30 minutes — four of them in a seven-minute span.</p>
-
+				  
 				  <p class="quote-text">“It is always crucial to stay calm, cool and courageous in facing Brazilian passion, and we just weren’t able to do it,” Germany coach Joachim Loew said.</p>
-
+				  
 				  <p>The loss matched Germany’s most-lopsided defeat ever, as fans throughout the country watched their television screens in silent horror while Brazil’s lead continued to balloon. </p>
-
+				  
 				  <p class="quote-text">“The responsibility for this result is the team’s,” Brazil coach Luiz Felipe Scolari said. “I was in charge, but they executed.”</p>
-
+				  
 				  <p>It was the most lopsided World Cup match since Portugal’s 7-0 win over North Korea in 2010.</p>
-
+				  
 				  <p>On Tuesday, with Neymar in top form, Brazil attacked from the start, potting their first goal 11 minutes in from Thiago Silva. But more would come as Germany’s defense buckled time and time again, with the game getting out of hand by halftime, with Brazil up 5-0. Even then, they added three more to the tally, with Germany’s sole goal coming from Klose in the 91st minute against a Brazilian team who seemed mentally uninvested in a match they had already practically won. </p>
-
+				  
 				  <p>The game was enjoyed by former American president George Bush, who was watching the game with former Brazilian president Fernando Henrique Cardoso, a personal acquaintance of his with whom Bush has worked closely together in the charitable field. Meanwhile, current Brazilian president Lula de Silva stayed home, though he offered the team congratulations on social media after the match.</p>
-
+				  
 				  <p>It’s the first time that Germany has allowed eight goals in a match since the 1954 World Cup, when they suffered an 8-3 defeat to Hungary before going on to beat the Hungarian team in the final. </p>
-
+				  
 				  <p>In previous World Cup semifinal matches, the largest margin of defeat was five goals, occurring on three occasions.</p>
-
+				  
 				  <p class="quote-text">“The Brazilian quality is very, very high,” Loew said. “This is not normal.”</p>
 				</div>
 			  </div>
@@ -43239,7 +43239,7 @@ Euro Disney Begins Considering Exiting French Market
 					margin-bottom: 5px;
 					letter-spacing: 2px;
 				}
-
+				
 				.song-subtitle {
 					color: #888;
 					font-size: 0.9em;
@@ -43275,9 +43275,9 @@ Euro Disney Begins Considering Exiting French Market
 			</style>
 
 			<div class="songbook-container">
-
+				
 				<div class="red-star">★ ★ ★</div>
-
+				
 				<div class="song-title">歌曲：月光下的智慧</div>
 				<div class="song-subtitle">Song: Wisdom Under the Moonlight</div>
 
@@ -43445,9 +43445,9 @@ Euro Disney Begins Considering Exiting French Market
 
 			<div class="cnn-container clearfix">
 				<div class="cnn-top-bar"></div>
-
+				
 				<div class="cnn-headline">Former President Brown secures release of U.S. journalists</div>
-
+				
 				<div class="cnn-meta">
 					updated 2 hours, 14 minutes ago<br>
 					August 5, 2009
