@@ -1,3 +1,11 @@
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement); // unlockable on normal or above
+	}
+}
+
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -3064,7 +3072,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 131,
             "state": 406,
-            "state_multiplier": 0.96
+            "state_multiplier": 1.4948
         }
     },
     {
@@ -3298,7 +3306,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 132,
             "state": 406,
-            "state_multiplier": 1.4948
+            "state_multiplier": 0.76
         }
     },
     {
@@ -6745,6 +6753,10 @@ campaignTrail_temp.running_mate_last_name = "Tyler";
 campaignTrail_temp.multiple_endings = true;
 endingPicker = (out, totv, aa, quickstats) => {
 
+if (campaignTrail_temp.player_answers.includes(4148) &&                 campaignTrail_temp.player_answers.includes(14496)) {
+ctsAchievement("Radical Abolitionist Tippecanoe");
+}
+
     function setImage(url) {
         if(url == '' || url == null) return;
         let interval = setInterval(function () {
@@ -6762,7 +6774,7 @@ endingPicker = (out, totv, aa, quickstats) => {
     }
     if(quickstats[0] > 234) {
         setImage("https://i.postimg.cc/4d56nwPQ/Untitled-design-(16).png");
-        return `<h3> A Large Mandate! Tippecanoe and Magnum to the White House!</h3> <p> <b> August 1841: </b> Well Mr. President, you suffered a real health scare for a moment. It seemed the ailment was inches away from taking you from this mortal plain. But, you’ve overcome it. Now, you can turn your attention to the banking bill. It’s on your desk, after years of arduous labor, playing the long game, and now is the time to sign it. <br><br> You will go down in history as a great man, and a great president. You will never be ranked in the top 5, but that won’t matter. Children will learn about you in school. You will retire to your estate in Ohio and live out the rest of your days, for four short months, dying next to your family.`;
+        return `<h3> A Large Mandate! Tippecanoe and Tyler to the White House!</h3> <p> <b> August 1841: </b> Well Mr. President, you suffered a real health scare for a moment. It seemed the ailment was inches away from taking you from this mortal plain. But, you’ve overcome it. Now, you can turn your attention to the banking bill. It’s on your desk, after years of arduous labor, playing the long game, and now is the time to sign it. <br><br> You will go down in history as a great man, and a great president. You will never be ranked in the top 5, but that won’t matter. Children will learn about you in school. You will retire to your estate in Ohio and live out the rest of your days, for four short months, dying next to your family.`;
     }
     if(quickstats[0] == 0) {
         setImage("https://i.postimg.cc/wxcPcVtQ/Untitled-design-(15).png");
@@ -6853,7 +6865,7 @@ campaignTrail_temp.jet_data = [{
             "operator": "==",
             "value": 0,
             "endingImage": "https://i.postimg.cc/pLdmCqsH/Copy-of-copy-(1).png",
-            "endingText": "<h3> With the Power of Big Shot... </h3> <p>The year is 2024. The Whig party has just won its 47th presidential election unopposed. Their only real opposition, the Democratic party, died the same day Jackson was mysteriously poisoned, circa 1840. With no spiritual leader, it was only a matter of time. <br><br> Ninth president William Henry Harrison was taken far too soon, being destined for greatness. The Whigs would quickly maintain large support, enacting internal improvements and pushing for the end of slavery, achieved despite Southern states whimpering. <br><br> And on his death bed, all Harrison could do was smile weakly and say: \"Bigshot.\"</p>",
+            "endingText": "<h3> With the Power of Big Shot... </h3> <p>The year is 2024. The Whig party has just won its 47th presidential election unopposed. Their only real opposition, the Democratic party, died the same day Jackson was mysteriously poisoned, circa 1840. With no spiritual leader, it was only a matter of time. <br><br> Ninth president William Henry Harrison was taken far too soon, being destined for greatness. The Whigs would quickly maintain large support, enacting internal improvements and pushing for the end of slavery, achieved despite Southern states whimpering. <br><br> Life is good, ain't it? And on his death bed, all Harrison could do was smile weakly and say: \"Bigshot.\"</p>",
             "amount": "294"
         },
         "1766107897232": {
