@@ -7568,6 +7568,10 @@ campaignTrail_temp.running_mate_last_name = "Polk";
 campaignTrail_temp.multiple_endings = true;
 endingPicker = (out, totv, aa, quickstats) => {
 
+if (campaignTrail_temp.player_answers.includes(4219) &&                 campaignTrail_temp.player_answers.includes(4212)) {
+ctsAchievement("Maverick");
+}
+
     function setImage(url) {
         if(url == '' || url == null) return;
         let interval = setInterval(function () {
@@ -7620,7 +7624,7 @@ campaignTrail_temp.jet_data = [{
             "operator": "==",
             "value": 0,
             "endingImage": "https://m.media-amazon.com/images/I/51VWH3J24TL._AC_UF1000,1000_QL80_.jpg",
-            "endingText": "<h3> Nothing ever happens </h3> <p> chud chud chud chud chud chud chud chud chud chud chud chud</p>",
+            "endingText": "<h3> Nothing ever happens </h3> <p> chud chud chud chud chud chud chud chud chud chud chud chud< br><br> Anyways, if you got this ending, the mod is probably broken. Contact TacoMakesThings to get it resolved.</p>",
             "amount": "3"
         }
     },
