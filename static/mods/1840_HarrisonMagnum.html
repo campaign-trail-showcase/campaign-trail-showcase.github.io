@@ -1,3 +1,12 @@
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement); // unlockable on normal or above
+	}
+}
+
+
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -6775,6 +6784,10 @@ campaignTrail_temp.running_mate_last_name = "Mangum";
 
 campaignTrail_temp.multiple_endings = true;
 endingPicker = (out, totv, aa, quickstats) => {
+
+if (campaignTrail_temp.player_answers.includes(4148) &&                 campaignTrail_temp.player_answers.includes(14496)) {
+ctsAchievement("Radical Abolitionist Tippecanoe");
+}
 
     function setImage(url) {
         if(url == '' || url == null) return;
