@@ -534,7 +534,43 @@ campaignTrail_temp.running_mate_json = [
     }
 ]
 
-campaignTrail_temp.credits = "THE MOONBEAM TEAM"
+campaignTrail_temp.credits = "<button onclick='credits()'>THE MOONBEAM TEAM</button>";
+
+window.credits = function () {
+    const creditsList = [
+        "Shockonomics",
+        "Ohas",
+        "Girlie",
+        "StrawberryMaster",
+        "John Arizona",
+        "Dyson",
+        "LP",
+        "",
+        "Much thanks to:",
+        "Martha",
+        "LiterallyNelsonRockefeller",
+        "Mack A. Rony",
+        "TerryJerry",
+        "Kaylee",
+        "Nidoras",
+        "DayDoveRomantic",
+        "Librasaurusx",
+        "Karton",
+        "DKing",
+        "Vetulicolia",
+        "Halligan Elysium",
+        "MeWhenTheAgain",
+        "ThisGuy",
+        "SteamedHams501",
+        "Franko the Tea King",
+        "EmpiresUnited",
+        "and of course, Jerry Brown."
+    ];
+
+    const text = "Brought to you with love by:\n\n" + creditsList.join('\n');
+
+    alert(text);
+}
 
 campaignTrail_temp.opponents_default_json = [
     {
@@ -688,7 +724,7 @@ body {
   border: 3px solid rgba(38, 136, 240, 0.5);
   display: flex;
   flex-direction: column;
-  min-height: 590px;
+  min-height: 595px;
   height: auto;
   /* necessary so tooltips don't break */
   overflow-x: visible !important;
@@ -792,6 +828,10 @@ body {
   border-top: .15em solid rgba(108, 89, 244, 0.55);
 }
 
+.overlay_window {
+  border: 2px double color-mix(in srgb,#fff 25%,#bfc7cf);
+}
+
 .overlay_window p {
   font-weight: normal;
 }
@@ -839,6 +879,15 @@ button, select {
   background: #e7ecf3;
   color: #0f1a29;
   font-family: "Bahnschrift", "Source Serif 4", sans-serif;
+  border: 1.5px solid #243f63;
+  border-radius: 0.2em;
+  text-transform: none;
+}
+
+#autoplayMenu textarea {
+  background: #e7ecf3;
+  color: #0f1a29;
+  font-family: IBM Courier, Consolas, monospace;
   border: 1.5px solid #243f63;
   border-radius: 0.2em;
   text-transform: none;
@@ -1450,6 +1499,10 @@ table td span {
 	color: #fff;
 }
 
+#autoplayMenu {
+	color: #fff;
+}
+
 /* mobile/responsive styles */
 @media only screen and (max-width: 768px) {
   
@@ -1637,137 +1690,137 @@ campaignTrail_temp.achievements = {
         "description": "Win at least 340 electoral votes.",
         "cannotBeCheated": true
     },
-	"Code Brown": {
+    "Code Brown": {
         "image": "https://i.imgur.com/w0Aiozy.png",
         "description": "Lose with under 100 electoral votes.",
         "cannotBeCheated": true
     },
-	"Chastity": {
+    "Chastity": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Win the Natural State without needing to debase yourself.",
         "cannotBeCheated": true
     },
-	"Jerry Does Dallas": {
+    "Jerry Does Dallas": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Win the support of <i>two</i> Texans.",
         "cannotBeCheated": true
     },
-	"Message: I Care": {
+    "Message: I Care": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Summon the Great Communicator.",
         "cannotBeCheated": true
     },
-	"Like Father, Like Son": {
+    "Like Father, Like Son": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Lose to an old family foe.",
         "cannotBeCheated": true
     },
-	"Mourning in America": {
+    "Mourning in America": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Extinguish the Reagan Revolution.",
         "cannotBeCheated": true
     },
-	"America First, Second, and Third": {
+    "America First, Second, and Third": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Unleash the American people’s worst instincts.",
         "cannotBeCheated": true
     },
-	"This Is Who We Are": {
+    "This Is Who We Are": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "America reveals her true self.",
         "cannotBeCheated": true
     },
-	"Cordon Sanitaire": {
+    "Cordon Sanitaire": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Reject extremism.",
         "cannotBeCheated": true
     },
-	"Operation Paperclip": {
+    "Operation Paperclip": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Rehabilitate a Nazi.",
         "cannotBeCheated": true
     },
-	"For Spanish, Press One": {
+    "For Spanish, Press One": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Be forced to embrace multiculturalism.",
         "cannotBeCheated": true
     },
-	"Rust in Peace": {
+    "Rust in Peace": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Win without winning Michigan or Ohio.",
         "cannotBeCheated": true
     },
-	"¡Viva Brown!": {
+    "¡Viva Brown!": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Hold the line for the working man.",
         "cannotBeCheated": true
     },
-	"Gaullist Fever": {
+    "Gaullist Fever": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Support Frexit.",
         "cannotBeCheated": true
     },
-	"From Linda to Lizzie": {
+    "From Linda to Lizzie": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Meet the Queen.",
         "cannotBeCheated": true
     },
-	"Disney Über Alles": {
+    "Disney Über Alles": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Become an agent of the Mouse.",
         "cannotBeCheated": true
     },
-	"Good Intentions": {
+    "Good Intentions": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Get serious about denuclearization.",
         "cannotBeCheated": true
     },
-	"Capitalism with Californian Characteristics": {
+    "Capitalism with Californian Characteristics": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Spread economic gospel to the unbelievers.",
         "cannotBeCheated": true
     },
-	"Third Temple": {
+    "Third Temple": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Become Israel’s strongest soldier.",
         "cannotBeCheated": true
     },
-	"Desert Flop": {
+    "Desert Flop": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Make an extremely preventable mistake.",
         "cannotBeCheated": true
     },
-	"Took the Talk to Poland": {
+    "Took the Talk to Poland": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Jesse Jackson approves.",
         "cannotBeCheated": true
     },
-	"Damned Foolish Thing in the Balkans": {
+    "Damned Foolish Thing in the Balkans": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Dodge a bullet.",
         "cannotBeCheated": true
     },
-	"Специальная операция": {
+    "Специальная операция": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Strangle a monster in its cradle.",
         "cannotBeCheated": true
     },
-	"За ваше здоровье!": {
+    "За ваше здоровье!": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Start a beautiful friendship.",
         "cannotBeCheated": true
     },
-	"Shinnichi": {
+    "Shinnichi": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Achieve nirvana.",
         "cannotBeCheated": true
     },
-	"Long May You Run": {
+    "Long May You Run": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Heal a broken relationship.",
         "cannotBeCheated": true
     },
-	"Mr. Universe": {
+    "Mr. Universe": {
         "image": "https://file.garden/aKoRqbLZKBsHizSA/moonbeam/favicon.ico",
         "description": "Become tabloid fodder.",
         "cannotBeCheated": true
@@ -2446,51 +2499,50 @@ tooltipList = [
     { searchString: "Zbigniew Brzezinski", explanationText: "<img src=https://i.imgur.com/cjp9dlu.png> Carter’s national security advisor, well known foreign policy realist." },
     { searchString: "Nayirah", explanationText: "<img src=https://i.imgur.com/Jeyz8R3.png> Daughter of the former Kuwaiti ambassador to the United States, famous for her false testimony to Congress about Iraqi war crimes" },
     { searchString: "UNSCOM", explanationText: "United Nations Special Commission to ensure Iraqi compliance with WMD guidelines." },
-    { searchString: "Tom Hayden", explanationText: "<img src=https://imgur.com/ypIHmm9.png> California State Assemblyman and candidate for State Senate this year. Better known for other work." },
-    { searchString: "Chuck D", explanationText: "<img src =https://imgur.com/HSChsP1.png> Rapper and political activist." },
-    { searchString: "Mussolini", explanationText: "<img src =https://imgur.com/gjfIfgN.png> O con noi o contro di noi." },
-    { searchString: "Cranston", explanationText: "<img src =https://i.imgur.com/FTonFxA.png> Dignified liberal serving since 1969. Also a less-dignified member of the Keating Five." },
-    { searchString: "Rush Limbaugh", explanationText: "<img src =https://i.imgur.com/VW0l8xC.png> Big fat idiot." },
-    { searchString: "Gennifer Flowers", explanationText: "<img src =https://i.imgur.com/taAJjuD.png> Arkansan government employee who accused Bill Clinton of having extramarital sex with her." },
-    { searchString: "NAFTA", explanationText: "<img src =https://i.imgur.com/zpuCi3G.jpeg> The North American Free Trade Agreement is a proposal to establish free trade between USA, Canada, and Mexico" },
-    { searchString: "Pat Robertson", explanationText: "<img src =https://i.imgur.com/JmmnG6L.png> Televangelist with a huge number of followers. Thinks that prayer can stop hurricanes." },
-    { searchString: "the ribbon", explanationText: "<img src =https://i.imgur.com/GlLMbKy.png> Used to signify solidarity with those living with AIDS. Pictured here as part of Laura Dern’s outfit." },
-    { searchString: "Iran-Contra", explanationText: "<img src =https://i.imgur.com/yixmsxO.png> A scandal in which the Reagan administration sold arms to far-right Nicaraguan militants, in which Bush was deeply involved." },
-    { searchString: "Bible Belt", explanationText: "<img src =https://i.imgur.com/eS2ITwB.png> Highly evangelical region of the country, located mostly in the Deep South." },
-    { searchString: "dual monarchy", explanationText: "<img src =https://i.imgur.com/E4ppY2v.png>  Two kingdoms are ruled by the same monarch, but are otherwise self-governing." },
-    { searchString: "diarchy", explanationText: "<img src =https://i.imgur.com/1Xsx0fx.png>  One singular kingdom is ruled by two monarchs." },
-    { searchString: "Bob Casey", explanationText: "<img src =https://i.imgur.com/yJDzM4X.png>  Immensely popular governor of Pennsylvania whose hardcore stance on abortion even frightens some Republicans." },
-    { searchString: "‘potato’", explanationText: "<img src =https://i.imgur.com/YY95I7L.png>" },
-    { searchString: "Kinnock", explanationText: "<img src =https://i.imgur.com/Oww1l2q.png> Neil Kinnock, recently elected this summer in a surprise upset." },
-    { searchString: "Bush fidgets with his tie and poutily crosses his arms", explanationText: "<img src =https://i.imgur.com/2WfLCxA.png> I’m sure he’s just bored." },
-    { searchString: "John Prescott", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>" },
-    { searchString: "scanner", explanationText: "<img src =https://i.imgur.com/Jjv6kfp.png> 'Bush Encounters the Supermarket, Amazed'" },
-    { searchString: "SPAM", explanationText: "<img src =https://i.imgur.com/CikzB57.png> Not just for poor people, according to Hormel." },
-    { searchString: "egghead", explanationText: "<img src =https://i.imgur.com/A07khql.png> You called?" },
-    { searchString: "Silvio Berlusconi", explanationText: "<img src =https://i.imgur.com/Hr3GIK7.png> The richest man in Italy and the nation’s most prolific womanizer." },
-    { searchString: "bisexuality", explanationText: "<img src =https://i.imgur.com/eqFXard.png> The cutting edge of human sexuality." },
-    { searchString: "Evelle Younger the second", explanationText: "<img src =https://i.imgur.com/MjREl9c.png> ???... oh yeah, that one guy who you beat in ’78." },
-    { searchString: "Geraldine Ferraro", explanationText: "<img src =https://i.imgur.com/mrmJZ60.png> Picked to energize the base, flopped miserably." },
-    { searchString: "William Miller", explanationText: "<img src =https://i.imgur.com/yh2jNo5.png> Also picked to energize the base, also flopped miserably." },
-    { searchString: "rape and murder", explanationText: "<img src =https://i.imgur.com/wHGmWJv.gif>" },
-    { searchString: "Phil Donahue", explanationText: "<img src =https://i.imgur.com/EdRNTlL.png> The king of daytime talk shows, well known for not shying away from divisive topics" },
-    { searchString: "Max Pavlevsky", explanationText: "<img src =https://i.imgur.com/eDnsDFO.png> Husband of Jodie Evans and millionaire, pictured wrestling with the weight of being one of only a few wealthy McGovern backers back in ‘72." },
-    { searchString: "George Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American." },
-    { searchString: "Mitchell", explanationText: "<img src =https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American" },
-    { searchString: "Tom Foley", explanationText: "<img src =https://i.imgur.com/hhgl0ic.png> 6’4 House Speaker from the great state of Washington" },
-    { searchString: "Brock Adams", explanationText: "<img src =https://i.imgur.com/SeLjt8k.png> Senator from Washington state who looks and sounds like Bush. Like Bush, has some Capitol Hill rumors of being a little handsy..." },
-    { searchString: "Murphy Brown", explanationText: "<img src =https://i.imgur.com/qLcvaSF.png> Television show staring Candice Bergen as the eponymous main character, a hard-nosed journalist and news anchor who often deals with real-world problems " },
-    { searchString: "Scoop Jackson", explanationText: "<img src =https://i.imgur.com/l98VyPw.png> 'At home, a liberal supportive of labor, civil rights, and the environment. Abroad, there’s a minimum 20% chance that he would’ve started a nuclear war had he been president.'" },
-    { searchString: "Senator Dole and Representative Gingrich", explanationText: "<img src =https://i.imgur.com/BB2gwfU.png>" }, ///funnily enough this was actually in order to help troubleshoot another mod and I never neded up taking it out, it can stay for posterity
-	{ searchString: "Chuck D", explanationText: "<img src=https://i.imgur.com/zEClE8O.jpeg> Public Enemy frontman and one of the realest motherfuckers on the planet." },
+    { searchString: "Mussolini", explanationText: "<img src=https://imgur.com/gjfIfgN.png> O con noi o contro di noi." },
+    { searchString: "Cranston", explanationText: "<img src=https://i.imgur.com/FTonFxA.png> Dignified liberal serving since 1969. Also a less-dignified member of the Keating Five." },
+    { searchString: "Rush Limbaugh", explanationText: "<img src=https://i.imgur.com/VW0l8xC.png> Big fat idiot." },
+    { searchString: "Gennifer Flowers", explanationText: "<img src=https://i.imgur.com/taAJjuD.png> Arkansan government employee who accused Bill Clinton of having extramarital sex with her." },
+    { searchString: "NAFTA", explanationText: "<img src=https://i.imgur.com/zpuCi3G.jpeg> The North American Free Trade Agreement is a proposal to establish free trade between USA, Canada, and Mexico" },
+    { searchString: "Pat Robertson", explanationText: "<img src=https://i.imgur.com/JmmnG6L.png> Televangelist with a huge number of followers. Thinks that prayer can stop hurricanes." },
+    { searchString: "the ribbon", explanationText: "<img src=https://i.imgur.com/GlLMbKy.png> Used to signify solidarity with those living with AIDS. Pictured here as part of Laura Dern’s outfit." },
+    { searchString: "Bible Belt", explanationText: "<img src=https://i.imgur.com/eS2ITwB.png> Highly evangelical region of the country, located mostly in the Deep South." },
+    { searchString: "dual monarchy", explanationText: "<img src=https://i.imgur.com/E4ppY2v.png>  Two kingdoms are ruled by the same monarch, but are otherwise self-governing." },
+    { searchString: "diarchy", explanationText: "<img src=https://i.imgur.com/1Xsx0fx.png>  One singular kingdom is ruled by two monarchs." },
+    { searchString: "Bob Casey", explanationText: "<img src=https://i.imgur.com/yJDzM4X.png>  Immensely popular governor of Pennsylvania whose hardcore stance on abortion even frightens some Republicans." },
+    { searchString: "‘potato’", explanationText: "<img src=https://i.imgur.com/YY95I7L.png>" },
+    { searchString: "Kinnock", explanationText: "<img src=https://i.imgur.com/Oww1l2q.png> Neil Kinnock, recently elected this summer in a surprise upset." },
+    { searchString: "Bush fidgets with his tie and poutily crosses his arms", explanationText: "<img src=https://i.imgur.com/2WfLCxA.png> I’m sure he’s just bored." },
+    { searchString: "John Prescott", explanationText: "<img src=https://i.imgur.com/BB2gwfU.png>" },
+    { searchString: "John Prescott", explanationText: "<img src=https://i.imgur.com/UBy31xG.jpeg> Two Jags." },
+    { searchString: "scanner", explanationText: "<img src=https://i.imgur.com/Jjv6kfp.png> 'Bush Encounters the Supermarket, Amazed'" },
+    { searchString: "SPAM", explanationText: "<img src=https://i.imgur.com/CikzB57.png> Not just for poor people, according to Hormel." },
+    { searchString: "egghead", explanationText: "<img src=https://i.imgur.com/A07khql.png> You called?" },
+    { searchString: "bisexuality", explanationText: "<img src=https://i.imgur.com/eqFXard.png> The cutting edge of human sexuality." },
+    { searchString: "Evelle Younger the second", explanationText: "<img src=https://i.imgur.com/MjREl9c.png> ???... oh yeah, that one guy who you beat in ’78." },
+    { searchString: "Geraldine Ferraro", explanationText: "<img src=https://i.imgur.com/mrmJZ60.png> Picked to energize the base, flopped miserably." },
+    { searchString: "William Miller", explanationText: "<img src=https://i.imgur.com/yh2jNo5.png> Also picked to energize the base, also flopped miserably." },
+    { searchString: "rape and murder", explanationText: "<img src=https://i.imgur.com/wHGmWJv.gif>" },
+    { searchString: "Phil Donahue", explanationText: "<img src=https://i.imgur.com/EdRNTlL.png> The king of daytime talk shows, well known for not shying away from divisive topics" },
+    { searchString: "Max Pavlevsky", explanationText: "<img src=https://i.imgur.com/eDnsDFO.png> Husband of Jodie Evans and millionaire, pictured wrestling with the weight of being one of only a few wealthy McGovern backers back in ‘72." },
+    { searchString: "George Mitchell", explanationText: "<img src=https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American." },
+    { searchString: "Mitchell", explanationText: "<img src=https://i.imgur.com/ImTi9So.png> Liberal Senate Majority Leader from Maine; Ireland’s favorite Lebanese-American" },
+    { searchString: "Tom Foley", explanationText: "<img src=https://i.imgur.com/hhgl0ic.png> 6’4 House Speaker from the great state of Washington" },
+    { searchString: "Brock Adams", explanationText: "<img src=https://i.imgur.com/SeLjt8k.png> Senator from Washington state who looks and sounds like Bush. Like Bush, has some Capitol Hill rumors of being a little handsy..." },
+    { searchString: "Murphy Brown", explanationText: "<img src=https://i.imgur.com/qLcvaSF.png> Television show staring Candice Bergen as the eponymous main character, a hard-nosed journalist and news anchor who often deals with real-world problems " },
+    { searchString: "Scoop Jackson", explanationText: "<img src=https://i.imgur.com/l98VyPw.png> 'At home, a liberal supportive of labor, civil rights, and the environment. Abroad, there’s a minimum 20% chance that he would’ve started a nuclear war had he been president.'" },
+    { searchString: "Senator Dole and Representative Gingrich", explanationText: "<img src=https://i.imgur.com/BB2gwfU.png>" }, ///funnily enough this was actually in order to help troubleshoot another mod and I never neded up taking it out, it can stay for posterity
+    { searchString: "Chuck D", explanationText: "<img src=https://i.imgur.com/zEClE8O.jpeg> Public Enemy frontman and one of the realest motherfuckers on the planet." },
+    { searchString: "Chuck D", explanationText: "<img src=https://imgur.com/HSChsP1.png> Rapper and political activist." },
     { searchString: "Tom Hayden", explanationText: "<img src=https://i.imgur.com/WDiBATS.jpeg> Lefty activist and California state legislator better known to the public for his recently-ended marriage to Jane Fonda." },
+    { searchString: "Tom Hayden", explanationText: "<img src=https://imgur.com/ypIHmm9.png> California State Assemblyman and candidate for State Senate this year. Better known for other work." },
     { searchString: "Astrodome", explanationText: "<img src=https://i.imgur.com/OTZ49eD.jpeg> One of the greatest engineering marvels in the world when it opened, now just kind of a big concrete building." },
     { searchString: "J.C. Watts", explanationText: "<img src=https://i.imgur.com/2m1fTQ1.jpeg> Black!" },
     { searchString: "Lynn Martin", explanationText: "<img src=https://i.imgur.com/cKvmI8D.jpeg> Woman!" },
     { searchString: "Clarence Thomas", explanationText: "<img src=https://i.imgur.com/RAIHucu.jpeg> Black, sex pest!" },
     { searchString: "Elizabeth Dole", explanationText: "<img src=https://i.imgur.com/z5MJYFZ.jpeg> Woman!" },
     { searchString: "Manuel Lujan", explanationText: "<img src=https://i.imgur.com/4Df3EAL.jpeg> Latino!" },
-    { searchString: "Dewey", explanationText: "<img scr=https://i.imgur.com/skKsCkK.jpeg> Generational election fumbler to the point where the DNC would be chomping at the bit to recruit him if he were still alive." },
+    { searchString: "Dewey", explanationText: "<img src=https://i.imgur.com/skKsCkK.jpeg> Generational election fumbler to the point where the DNC would be chomping at the bit to recruit him if he were still alive." },
     { searchString: "Alan Keyes", explanationText: "<img src=https://i.imgur.com/yJYT8SF.jpeg> The standard-bearer of the <em>weird unlovable loser</em> wing of the GOP." },
     { searchString: "Phil Gramm", explanationText: "<img src=https://i.imgur.com/2qF3UqX.jpeg> Conservative Texan evangelical, loves himself a good porno!" },
     { searchString: "Hitler", explanationText: "<img src=https://i.imgur.com/IWjAfVM.jpeg> Commander of the Third Reich, generally accepted as a pretty bad guy." },
@@ -2501,92 +2553,227 @@ tooltipList = [
     { searchString: "Roseanne", explanationText: "<img src=https://i.imgur.com/kovtd6e.jpeg> BLUE COLLAR American show about BLUE COLLAR Midwesterners who live a BLUE COLLAR lifestyle!" },
     { searchString: "Prop 18", explanationText: "<img src=https://i.imgur.com/nY4UWop.jpeg> Proposition for a right-to-work law in California, soundly defeated." },
     { searchString: "Robert Rubin", explanationText: "<img src=https://i.imgur.com/KBGME3K.jpeg> Goldman Sachs banker, absolutely adores Bill Clinton." },
-    { searchString: "Schwarzenegger", explanationText: "<img src=https://i.imgur.com/vUEm4py.jpeg> Bush's favorite actor, pictured here about a half second before breaking Barbara Bush's leg." },
+    { searchString: "Schwarzenegger", explanationText: "<img src=https://i.imgur.com/khN5Yd9.jpeg> Bush's favorite actor, pictured here about a half second before breaking Barbara Bush's leg." },
     { searchString: "Brutuses", explanationText: "<img src=https://i.imgur.com/kdVnbAl.png>" },
     { searchString: "Caesar", explanationText: "<img src=https://i.imgur.com/1yzA1fj.jpeg> The original Jerry Brown, if you really think about it." },
     { searchString: "Knowland", explanationText: "<img src=https://i.imgur.com/uC0FwoO.jpeg> Once-mighty Republican Senate Majority Leader, reduced to an elephant-riding caricature of himself before your dad put him out of his misery." },
     { searchString: "Thomas Donahue", explanationText: "<img src=https://i.imgur.com/K3xQXK0.jpeg> Influential AFL-CIO leader and organized labor's biggest NAFTA opponent." },
     { searchString: "Strom Thurmond", explanationText: "<img src=https://i.imgur.com/wVOkIGH.jpeg> Segregationist, reactionary, rapist, pedophile, respected Republican elder statesman." },
-    { searchString: "Harris Wofford", explanationText: "<img src=https://i.imgur.com/tmQkcJ6.jpeg> GoldmanFormer JFK aide and true-blue liberal Pennsylvania senator. Could run for president in 1996 if you were to blow it..." },
+    { searchString: "Harris Wofford", explanationText: "<img src=https://i.imgur.com/tmQkcJ6.jpeg> Former JFK aide and true-blue liberal Pennsylvania senator. Could run for president in 1996 if you were to blow it..." },
     { searchString: "Lamar Alexander", explanationText: "<img src=https://i.imgur.com/RG2NTB8.jpeg> Secretary of Education, run-of-the-mill conservative Tennessean who wants Christian schools." },
 
-	// russia + eastern europe + balkans + one buchanan
-	{ searchString: "Buchanan", explanationText: "<img src=https://i.imgur.com/JmUeSwR.jpeg> The only thing he hates more than Jewish people is immigration."},
-	{ searchString: "Yeltsin", explanationText: "<img src=https://i.imgur.com/33AMtKC.jpeg> Fat drunk idiot in charge of the world's largest nuclear arsenal"},
-	{ searchString: "Gorbachev", explanationText: "<img src=https://i.imgur.com/nGShCNw.jpeg> A shell of himself."},
-	{ searchString: "Vladimir", explanationText: "<img src=https://i.imgur.com/StjFTeW.jpeg> He'll be dearly missed."},
-	{ searchString: "Sobchak", explanationText: "<img src=https://i.imgur.com/cubauWP.jpeg> Not extremely corrupt by Russian standards."},
-	{ searchString: "Saint Petersburg", explanationText: "<img src=https://i.imgur.com/uZZhI3f.jpeg> A cold, gray, miserable, oppressing city which is nicer than 99% of the towns in the former USSR."},
-	{ searchString: "Moscow", explanationText: "<img src=https://i.imgur.com/DN8UILL.jpeg> A cold, gray, miserable, oppressing city which is the nicest town in the former USSR."},
-	{ searchString: "Yegor Gaidar", explanationText: "<img src=https://i.imgur.com/TACpStI.jpeg> The face of a trustworthy man if there ever was one."},
-	{ searchString: "vodka", explanationText: "<img src=https://i.imgur.com/6iGZ2tO.jpeg> In Russia, any time is a good time for vodka!"},
-	{ searchString: "Rancho del Cielo", explanationText: "<img src=https://i.imgur.com/VWyxs6g.jpeg> Only the 2nd-most-infamous ranch in California."},
-	{ searchString: "Smolyakov", explanationText: "<img src=https://i.imgur.com/O9RQh0H.jpeg> Who?"},
-	{ searchString: "Kravchuk", explanationText: "<img src=https://i.imgur.com/5QaHtCW.jpeg> Soviet apparatchik who very quickly and conveniently discovered the twin gospels of nationalism and capitalism"},
-	{ searchString: "chicken Kiev", explanationText: "<img src=https://i.imgur.com/521ycuW.jpeg> The namesake of a 1991 Bush speech; your babushka makes it better than anyone else does!"},
-	{ searchString: "Tiraspol", explanationText: "<img src=https://i.imgur.com/SszgUAL.jpeg> The last remaining Soviet city."},
-	{ searchString: "Transnistria", explanationText: "<img src=https://i.imgur.com/Q2QYKki.jpeg> Breakaway state from Moldova dominated by ethnic Russians and Ukrainians."},
-	{ searchString: "Yalta", explanationText: "<img src=https://i.imgur.com/4h5xrJq.jpeg> A lovely spot both for a beach vacation and a conference to decide the fast of postwar Europe."},
-	{ searchString: "autonomous republic", explanationText: "<img src=https://i.imgur.com/j3pmyRX.png> A dime a dozen in the post-Soviet world."},
-	{ searchString: "partitions", explanationText: "<img src=https://i.imgur.com/uRFnbIc.jpeg> An injustice that the Poles will never stop bitching about."},
-	{ searchString: "Katyn", explanationText: "<img src=https://i.imgur.com/JeeK7a1.jpeg> Another injustice that the Poles with never stop bitching about."},
-	{ searchString: "Uprising", explanationText: "<img src=https://i.imgur.com/wa166Oa.jpeg> Yet ANOTHER injustice that the Poles will never stop bitching about."},
-	{ searchString: "Polish-American", explanationText: "<img src=https://i.imgur.com/oZyzUp6.jpeg> They love pierogi, the Pope, and changing their last names to be pronounceable- in that order!"},
-	{ searchString: "Krakow", explanationText: "<img src=https://i.imgur.com/qkdOyu8.jpeg> Like Prague, if Prague was harder to get to and had worse beer (but better vodka)."},
-	{ searchString: "Auschwitz", explanationText: "<img src=https://i.imgur.com/TE4k9g9.jpeg> For normal people, the world's most notorious death camp. For idiots, an unremarkable locale that coincidentally has gas chambers and human remains in it."},
-	{ searchString: "AIPAC", explanationText: "<img src=https://i.imgur.com/LDik7YX.png> Some of the best lobbyists and worst people in the country."},
-	{ searchString: "Lenin Shipyard", explanationText: "<img src=https://i.imgur.com/9JW7MXI.jpeg> Ground zero of the end of Polish communism."},
-	{ searchString: "Lech Walesa", explanationText: "<img src=https://i.imgur.com/sulBxlB.jpeg> Light on political brainpower, but by God, he can tell the West everything it wants to hear!"},
-	{ searchString: "JNA barracks", explanationText: "<img src=https://i.imgur.com/kf3v5fw.jpeg> One of the first places where the war crimes ball really got rolling."},
-	{ searchString: "Tudjman", explanationText: "<img src=https://i.imgur.com/lTIRedl.jpeg> Egomaniac and war criminal who... wait, are we sure this guy is much better than Milosevic?"},
-	{ searchString: "Yugoslavia", explanationText: "<img src=https://i.imgur.com/kjGL2JD.jpeg> Rapidly dissolving"},
-	{ searchString: "Mitterrand", explanationText: "<img src=https://i.imgur.com/uKHO5Oj.jpeg> A dark, cutthroat soul who will stop at nothing to give his people a decent social safety net."},
-	{ searchString: "Sarajevo", explanationText: "<img src=https://i.imgur.com/qshk3LS.jpeg> Every 80 years or so, something really bad involving gun violence always seems to happen here."},
-	{ searchString: "Franz Ferdinand", explanationText: "<img src=https://i.imgur.com/t3WAR5t.jpeg> Unlovable archreactionary who somehow started a global conflict; in the 2000s he will be forgotten in favor of a mediocre band bearing his name."},
-	{ searchString: "Milosevic", explanationText: "<img src=https://i.imgur.com/3bVOOfN.jpeg> Egomaniac and war criminal who should've thought about sucking up to the U.S. more."},
-	{ searchString: "Geneva", explanationText: "<img src=https://i.imgur.com/Z98GVqw.jpeg> A favorite spot for world leaders to meet, perhaps because its oppressive boringness keeps them from getting distracted."},
-	{ searchString: "Serb paramilitaries", explanationText: "<img src=https://i.imgur.com/farCHU4.jpeg> The only thing they love more than a good morning rape and murder session is dreaming about Greater Serbia."},
-	{ searchString: "Dubrovnik", explanationText: "<img src=https://i.imgur.com/xY6osnu.jpeg> Not quite what it used to be..."},
-	{ searchString: "Slovenian people", explanationText: "<img src=https://i.imgur.com/TZQMK0x.jpeg> Strong people, but arrogant fucking bastards."},
-	{ searchString: "Drnovsek", explanationText: "<img src=https://i.imgur.com/Af6bDZl.jpeg> Absolutely thrilled that he doesn't have to deal with the drama going on down south."},
-	{ searchString: "Mladic", explanationText: "<img src=https://i.imgur.com/rbaqmkf.jpeg> Not afraid to get his hands dirty, unlike those pussies with their complaints about 'humanity' and 'basic decorum'."},
+    // russia + eastern europe + balkans + one buchanan
+    { searchString: "Buchanan", explanationText: "<img src=https://i.imgur.com/JmUeSwR.jpeg> The only thing he hates more than Jewish people is immigration." },
+    { searchString: "Yeltsin", explanationText: "<img src=https://i.imgur.com/33AMtKC.jpeg> Fat drunk idiot in charge of the world's largest nuclear arsenal" },
+    { searchString: "Gorbachev", explanationText: "<img src=https://i.imgur.com/nGShCNw.jpeg> A shell of himself." },
+    { searchString: "Vladimir", explanationText: "<img src=https://i.imgur.com/StjFTeW.jpeg> He'll be dearly missed." },
+    { searchString: "Sobchak", explanationText: "<img src=https://i.imgur.com/cubauWP.jpeg> Not extremely corrupt by Russian standards." },
+    { searchString: "Saint Petersburg", explanationText: "<img src=https://i.imgur.com/uZZhI3f.jpeg> A cold, gray, miserable, oppressing city which is nicer than 99% of the towns in the former USSR." },
+    { searchString: "Moscow", explanationText: "<img src=https://i.imgur.com/DN8UILL.jpeg> A cold, gray, miserable, oppressing city which is the nicest town in the former USSR." },
+    { searchString: "Yegor Gaidar", explanationText: "<img src=https://i.imgur.com/TACpStI.jpeg> The face of a trustworthy man if there ever was one." },
+    { searchString: "vodka", explanationText: "<img src=https://i.imgur.com/6iGZ2tO.jpeg> In Russia, any time is a good time for vodka!" },
+    { searchString: "Rancho del Cielo", explanationText: "<img src=https://i.imgur.com/VWyxs6g.jpeg> Only the 2nd-most-infamous ranch in California." },
+    { searchString: "Smolyakov", explanationText: "<img src=https://i.imgur.com/O9RQh0H.jpeg> Who?" },
+    { searchString: "Kravchuk", explanationText: "<img src=https://i.imgur.com/5QaHtCW.jpeg> Soviet apparatchik who very quickly and conveniently discovered the twin gospels of nationalism and capitalism" },
+    { searchString: "chicken Kiev", explanationText: "<img src=https://i.imgur.com/521ycuW.jpeg> The namesake of a 1991 Bush speech; your babushka makes it better than anyone else does!" },
+    { searchString: "Tiraspol", explanationText: "<img src=https://i.imgur.com/SszgUAL.jpeg> The last remaining Soviet city." },
+    { searchString: "Transnistria", explanationText: "<img src=https://i.imgur.com/Q2QYKki.jpeg> Breakaway state from Moldova dominated by ethnic Russians and Ukrainians." },
+    { searchString: "Yalta", explanationText: "<img src=https://i.imgur.com/4h5xrJq.jpeg> A lovely spot both for a beach vacation and a conference to decide the fast of postwar Europe." },
+    { searchString: "autonomous republic", explanationText: "<img src=https://i.imgur.com/j3pmyRX.png> A dime a dozen in the post-Soviet world." },
+    { searchString: "partitions", explanationText: "<img src=https://i.imgur.com/uRFnbIc.jpeg> An injustice that the Poles will never stop bitching about." },
+    { searchString: "Katyn", explanationText: "<img src=https://i.imgur.com/JeeK7a1.jpeg> Another injustice that the Poles with never stop bitching about." },
+    { searchString: "Uprising", explanationText: "<img src=https://i.imgur.com/wa166Oa.jpeg> Yet ANOTHER injustice that the Poles will never stop bitching about." },
+    { searchString: "Polish-American", explanationText: "<img src=https://i.imgur.com/oZyzUp6.jpeg> They love pierogi, the Pope, and changing their last names to be pronounceable- in that order!" },
+    { searchString: "Krakow", explanationText: "<img src=https://i.imgur.com/qkdOyu8.jpeg> Like Prague, if Prague was harder to get to and had worse beer (but better vodka)." },
+    { searchString: "Auschwitz", explanationText: "<img src=https://i.imgur.com/TE4k9g9.jpeg> For normal people, the world's most notorious death camp. For idiots, an unremarkable locale that coincidentally has gas chambers and human remains in it." },
+    { searchString: "AIPAC", explanationText: "<img src=https://i.imgur.com/LDik7YX.png> Some of the best lobbyists and worst people in the country." },
+    { searchString: "Lenin Shipyard", explanationText: "<img src=https://i.imgur.com/9JW7MXI.jpeg> Ground zero of the end of Polish communism." },
+    { searchString: "Lech Walesa", explanationText: "<img src=https://i.imgur.com/sulBxlB.jpeg> Light on political brainpower, but by God, he can tell the West everything it wants to hear!" },
+    { searchString: "JNA barracks", explanationText: "<img src=https://i.imgur.com/kf3v5fw.jpeg> One of the first places where the war crimes ball really got rolling." },
+    { searchString: "Tudjman", explanationText: "<img src=https://i.imgur.com/lTIRedl.jpeg> Egomaniac and war criminal who... wait, are we sure this guy is much better than Milosevic?" },
+    { searchString: "Yugoslavia", explanationText: "<img src=https://i.imgur.com/kjGL2JD.jpeg> Rapidly dissolving" },
+    { searchString: "Mitterrand", explanationText: "<img src=https://i.imgur.com/uKHO5Oj.jpeg> A dark, cutthroat soul who will stop at nothing to give his people a decent social safety net." },
+    { searchString: "Sarajevo", explanationText: "<img src=https://i.imgur.com/qshk3LS.jpeg> Every 80 years or so, something really bad involving gun violence always seems to happen here." },
+    { searchString: "Franz Ferdinand", explanationText: "<img src=https://i.imgur.com/t3WAR5t.jpeg> Unlovable archreactionary who somehow started a global conflict; in the 2000s he will be forgotten in favor of a mediocre band bearing his name." },
+    { searchString: "Milosevic", explanationText: "<img src=https://i.imgur.com/3bVOOfN.jpeg> Egomaniac and war criminal who should've thought about sucking up to the U.S. more." },
+    { searchString: "Geneva", explanationText: "<img src=https://i.imgur.com/Z98GVqw.jpeg> A favorite spot for world leaders to meet, perhaps because its oppressive boringness keeps them from getting distracted." },
+    { searchString: "Serb paramilitaries", explanationText: "<img src=https://i.imgur.com/farCHU4.jpeg> The only thing they love more than a good morning rape and murder session is dreaming about Greater Serbia." },
+    { searchString: "Dubrovnik", explanationText: "<img src=https://i.imgur.com/xY6osnu.jpeg> Not quite what it used to be..." },
+    { searchString: "Slovenian people", explanationText: "<img src=https://i.imgur.com/TZQMK0x.jpeg> Strong people, but arrogant fucking bastards." },
+    { searchString: "Drnovsek", explanationText: "<img src=https://i.imgur.com/Af6bDZl.jpeg> Absolutely thrilled that he doesn't have to deal with the drama going on down south." },
+    { searchString: "Mladic", explanationText: "<img src=https://i.imgur.com/rbaqmkf.jpeg> Not afraid to get his hands dirty, unlike those pussies with their complaints about 'humanity' and 'basic decorum'." },
 
-	// buchanan tooltips
-	{ searchString: "Treblinka", explanationText: "<img src=https://i.imgur.com/UP1VH14.jpeg> A death camp in which many people died."},
-	{ searchString: "Arlen Specter", explanationText: "<img src=https://i.imgur.com/hP4Smpz.jpeg> Republican from Pennsylvania who loves to change sides."},
-	{ searchString: "William Cohen", explanationText: "<img src=https://i.imgur.com/vUQiPHG.jpeg> Republican from Maine, a bit of a political maverick."},
-	{ searchString: "Wyoming", explanationText: "<img src=https://i.imgur.com/rIoH0tH.jpeg> Home of <em>Q-anon</em>, the world's biggest Dan Quayle fan."},
-	{ searchString: "Central Park Five", explanationText: "<img src=https://i.imgur.com/cTAunUI.jpeg> Guilty of being black."},
-	{ searchString: "Country Club", explanationText: "<img src=https://i.imgur.com/GXLG42g.jpeg> A vital means of shelter in the Republican ecosystem."},
-	{ searchString: "Hamptons", explanationText: "<img src=https://i.imgur.com/1KWUh3i.jpeg> One of the most evil collections of people in the country outside of death row and the average car dealership."},
-	{ searchString: "Carville", explanationText: "<img src=https://i.imgur.com/faLcsHx.jpeg> Loudmouth asshole from Louisiana who thinks he's a lot smarter than he is."},
-	{ searchString: "Chavez", explanationText: "<img src=https://i.imgur.com/PAlwlRB.jpeg> Chicano legend in the fight for fair labor practices, half the streets and parks in California will bear his name after his death."},
-	{ searchString: "To Kill a Mockingbird", explanationText: "<img src=https://i.imgur.com/Sv4OIEA.jpeg> Right proper hate speech, y'all!"},
-	{ searchString: "Atticus Finch", explanationText: "<img src=https://i.imgur.com/vHsYsPK.jpeg> Race traitor."},
-	{ searchString: "Riley", explanationText: "<img src=https://i.imgur.com/V0p0of5.jpeg> Boring-but-effective technocrat."},
-	{ searchString: "William Cohen", explanationText: "<img src=https://i.imgur.com/vUQiPHG.jpeg> Republican from Maine, a bit of a political maverick."},
-	{ searchString: "Kurt Cobain", explanationText: "<img src=https://i.imgur.com/qdFHBeO.jpeg> Talented young man, possible voice of his generation, and a Jerry Brown superfan!"},
-	{ searchString: "Packwood", explanationText: "<img src=https://i.imgur.com/BMeIfSW.jpeg> Respectable Republican moderate, rapist."},
-	{ searchString: "Hatfield", explanationText: "<img src=https://i.imgur.com/rROzXrn.jpeg> Religious weirdo with a heart of gold ."},
-	{ searchString: "Hamptons", explanationText: "<img src=https://i.imgur.com/1KWUh3i.jpeg> One of the most evil collections of people in the country outside of death row and the average car dealership."},
-	{ searchString: "Gold rush", explanationText: "<img src=https://i.imgur.com/xbk98zm.jpeg> <em>“There's gold in them thar hills!”</em>"},
-	{ searchString: "pieing", explanationText: "<img src=https://i.imgur.com/nO4AZMR.jpeg> Not the first time you've been pied!"},
-	{ searchString: "Atwater", explanationText: "<img src=https://i.imgur.com/bQaOKtt.jpeg> Evil racist bastard who's burning in hell right now."},
-	{ searchString: "John Demjanjuk", explanationText: "<img src=https://i.imgur.com/vrpOfIu.jpeg> Death camp guard known as Ivan the Terrible, and a kindred soul to Pat Buchanan."},
-	{ searchString: "Elie Wiesel", explanationText: "<img src=https://i.imgur.com/jjIhtid.jpeg> Romanian-American Holocaust survivor and Nobel Prize winner, strong defender of human rights for all... well, except for Palestinians."},
-	{ searchString: "Protestant-Catholic split", explanationText: "<img src=https://i.imgur.com/vHSU090.jpeg You could really use another one of these in the GOP campaign right about now..."},
+    // asia tooltips
+    { searchString: "Shamir", explanationText: "<img src=https://i.imgur.com/wJs07m5.jpeg> Paramilitary leader, covert operative, and war criminal. Has an odd choice of facial hair for a Jew." },
+    { searchString: "Rabin", explanationText: "<img src=https://i.imgur.com/9hAriE2.jpeg> The man to bring peace between Israel and Palestine?" },
+    { searchString: "Arafat", explanationText: "<img src=https://i.imgur.com/HKKACcZ.jpeg> Forced to strike a continuous balance between righteous freedom fighter and dastardly terrorist." },
+    { searchString: "Haidar Abdel-Shafi", explanationText: "<img src=https://i.imgur.com/uZAAfRR.jpeg> Not Palestine's main guy, but a sharp mind and a useful connection nonetheless." },
+    { searchString: "Netanyahu", explanationText: "<img src=https://i.imgur.com/BK1i7gO.jpeg> Conniving, evil, brilliant son of a bitch." },
+    { searchString: "Levy", explanationText: "<img src=https://i.imgur.com/ezvYgE3.jpeg> A crucial part of the right-wing Likud party and the most prominent Mizrahi politician in the country." },
+    { searchString: "Joe Lieberman", explanationText: "<img src=https://i.imgur.com/dL0lP4c.jpeg> Republicans' favorite Democrat." },
+    { searchString: "Church of the Nativity", explanationText: "<img src=https://i.imgur.com/ruOUWHy.jpeg> Jesus was born here, theoretically." },
+    { searchString: "Kyozo Yamada", explanationText: "<img src=https://i.imgur.com/wfc8cfe.jpeg> A great man who played a pivotal role in your life." },
+    { searchString: "Kamakura", explanationText: "<img src=https://i.imgur.com/h5j47E5.jpeg> A nice beachside town and a good place to study Buddhism." },
+    { searchString: "Miyazama", explanationText: "<img src=https://i.imgur.com/yiT1bqK.jpeg> The latest generic LDP suit, most famous in America for having Bush vomit in his lap" },
+    { searchString: "Toyota's factory", explanationText: "<img src=https://i.imgur.com/1g3JxHR.jpeg> Their goddamn cars are just plain better than American ones." },
+    { searchString: "Tianamen Square", explanationText: "<img src=https://i.imgur.com/uRb7rWJ.jpeg> A bit of a black eye for the CCP, to put it lightly." },
+    { searchString: "Jiang", explanationText: "<img src=https://i.imgur.com/vTJC9ql.jpeg> Hypercompetent market reformer, worshipped for his similarity to a toad." },
+    { searchString: "Taiwan", explanationText: "<img src=https://i.imgur.com/PMrdhB6.png> Who? What?" },
+    { searchString: "Eisenhower", explanationText: "<img src=https://i.imgur.com/j2Qlyrk.jpeg> Overrated president, underrated general." },
+    { searchString: "Shenzen", explanationText: "<img src=https://i.imgur.com/Iijydtb.jpeg> A fishing village only 15 years ago, it's now basking in its new role as China's stock capital." },
+    { searchString: "Beijing mall", explanationText: "<img src=https://i.imgur.com/XIzWcfJ.jpeg> Consuming its way into democracy, at least in theory." },
+    { searchString: "what happens when you screw with the Saudis", explanationText: "<img src=https://i.imgur.com/tkH8MAW.jpeg> The nadir of America's car obsession." },
+    { searchString: "Sultan bin Abdulaziz", explanationText: "<img src=https://i.imgur.com/Jspdz7k.jpeg> Uberconservative and uberambitious member of the House of Saud, like most of his family." },
+    { searchString: "King Fahd", explanationText: "<img src=https://i.imgur.com/QBf53gO.jpeg> Repressive monarch who will forever be America's best friend thanks to his oil reserves." },
+    { searchString: "Rao", explanationText: "<img src=https://i.imgur.com/9Fr3RFW.jpeg> Market liberal Indian PM who speaks a whopping 17 languages." },
+    { searchString: "hydroelectric power", explanationText: "<img src=https://i.imgur.com/GfQWbW7.jpeg> So exciting!" },
+    { searchString: "junior-level Kuwaiti diplomat", explanationText: "<img src=https://i.imgur.com/tSBqKfJ.jpeg> Cannot be shown for legal purposes, so just imagine a guy who looks vaguely like this." },
 
-	// reagan tooltips
-	{ searchString: "leering in the background", explanationText: "<img src=https://i.imgur.com/gm9BJqR.jpeg> Mr. Steal Your Girl."},
-	{ searchString: "Jimmy Carter", explanationText: "<img src=https://i.imgur.com/qH4ATRC.jpeg> The right man at the wrong time, forever trying to make up for his shortcomings in office."},
-	{ searchString: "malaise", explanationText: "<img src=https://i.imgur.com/4CQhGgE.png>"},
-	{ searchString: "you and Ted Kennedy", explanationText: "<img src=https://i.imgur.com/l2PZ5NP.jpeg> Old foes from 1980, reunited for the first time."},
-	{ searchString: "81", explanationText: "<img src=https://i.imgur.com/yO5o7aH.jpeg> Surely nobody this old could ever seriously run for President... <em>right?</em>"},
-	{ searchString: "‘66", explanationText: "<img src=https://i.imgur.com/nmcJMPA.jpeg> A most ignominious year for the Brown family."},
-	{ searchString: "Weinberger", explanationText: "<img src=https://i.imgur.com/f8i6Hk2.jpeg> One of Reagan's many fall guys."},
-	{ searchString: "Iran-Contra", explanationText: "<img src=https://i.imgur.com/Lgjinf2.jpeg> An incident in which Reagan sold missiles to Iran and sent the funds to far-right Nicaraguan rebels. Somehow mostly ignored."},
-	{ searchString: "Ayatollah", explanationText: "<img src=https://i.imgur.com/2Ulp8Xn.jpeg> It's a bit of a stereotype to say that the nation's enemies are delusional zealots who just hate America, but he really was just that!"},
-	{ searchString: "Oliver North", explanationText: "<img src=https://i.imgur.com/4uSkhyA.jpeg> Soldier, advisor, patriot, and nothing else."},
+    // america!
+    { searchString: "Mulroney", explanationText: "<img src=https://i.imgur.com/gzdn2IT.jpeg> The once-popular conservative prime minister of Canada, now about as well-regarded as artificial maple syrup." },
+    { searchString: "Cuba", explanationText: "<img src=https://i.imgur.com/Y8aqnzb.jpeg> No... Jerry, no, don't do it." },
+    { searchString: "Reform Party", explanationText: "<img src=https://i.imgur.com/hH90z8Y.png> A group of Canadians who want to be America in all of the worst ways possible." },
+    { searchString: "Oilers", explanationText: "<img src=https://i.imgur.com/lI50sn0.jpeg> It's time to oil up, baby!" },
+    { searchString: "Gretzky", explanationText: "<img src=https://i.imgur.com/cKYrKAk.jpeg> So good that he forever ruined hockey's G.O.A.T. debate." },
+    { searchString: "John Candy", explanationText: "<img src=https://i.imgur.com/dQ2AwSb.jpeg> Somewhere in the top five funniest Canadians in Hollywood, alongside his SCTV friends." },
+    { searchString: "Argonauts", explanationText: "<img src=https://i.imgur.com/KWvXicc.jpeg> 12-time Grey Cup champions, for your information." },
+    { searchString: "Ambassador Bridge", explanationText: "<img src=https://i.imgur.com/qpN1vKJ.jpeg> A crumbling suspension bridge which singlehandedly props up the Canadian and Michiganian economies." },
+    { searchString: "Quebec", explanationText: "<img src=https://i.imgur.com/L5Uzv6P.jpeg> Wants to be France so, so badly." },
+    { searchString: "Trudeau", explanationText: "<img src=https://i.imgur.com/ofT03aa.jpeg> Canadian PM for 15 years, basically JFK if JFK's Camelot mythos had time to crumble." },
+    { searchString: "Hugo Chavez", explanationText: "<img src=https://i.imgur.com/XifyDhp.jpeg> Charismatic military man with a leftist streak and a few screws loose." },
+    { searchString: "Irene Saez", explanationText: "<img src=https://i.imgur.com/XjIAQ7I.jpeg> 1981’s Miss Universe winner, she answers the ages-old question of “brains or beauty” with a resounding “both”." },
+    { searchString: "PDVSA", explanationText: "<img src=https://i.imgur.com/Ioo7ULK.png> Wants to be Aramco so, so badly." },
+    { searchString: "Perez", explanationText: "<img src=https://i.imgur.com/OVPE3d7.jpeg> Has somehow fucked up the finances of the most oil-rich country on the planet." },
+    { searchString: "Pablo Escobar", explanationText: "<img src=https://i.imgur.com/DQuV17q.jpeg> The world's most infamous drug baron and a ruthless killer. Owns a zoo with hippos, giraffes, and elephants." },
+    { searchString: "Gaviria", explanationText: "<img src=https://i.imgur.com/IF7ykYt.jpeg> Yet another Latin American neoliberal president." },
+    { searchString: "Crosby, Stills, and Nash", explanationText: "<img src=https://i.imgur.com/mGvvnYu.jpeg> The unironic peak of boomer music." },
+    { searchString: "Neil Young", explanationText: "<img src=https://i.imgur.com/9gCEnSR.jpeg> Canada's greatest American national hero." },
+    { searchString: "Baby Boomer", explanationText: "<img src=https://i.imgur.com/NEjxORF.jpeg> Look, they were still fairly young at this point, okay?" },
+    { searchString: "B-52s", explanationText: "<img src=https://i.imgur.com/tYMGDau.jpeg> Gay music icons and some of your most fervent supporters." },
+    { searchString: "Boyz II Men", explanationText: "<img src=https://i.imgur.com/CcyUWi8.jpeg> Sort of a boy band, sort of an RnB group. They're okay, I suppose?" },
+    { searchString: "Love Shack", explanationText: "<img src=https://i.imgur.com/a2FWtAi.jpeg> A little old place where we can get together." },
+    { searchString: "Lula", explanationText: "<img src=https://i.imgur.com/3jX46NL.jpeg> A leftist trade unionist who really, really has \"it\"." },
+    { searchString: "Franco", explanationText: "<img src=https://i.imgur.com/0HoEWKX.jpeg> One of the few honest men in Brazil, to the point where he unnerves his party with open displays of integrity." },
+    { searchString: "Earth Summit", explanationText: "<img src=https://i.imgur.com/yKAYiIu.jpeg> World leaders bloviating for a genuinely good cause." },
+    { searchString: "Manaus", explanationText: "<img src=https://i.imgur.com/LP8x29g.jpeg> Absolutely miserable city in the middle of a vast swath of jungle that over a million people somehow call home." },
+    { searchString: "Salinas", explanationText: "<img src=https://i.imgur.com/v1AbF8g.jpeg> A man so generic yet repulsive that he almost managed to lose a rigged election." },
+    { searchString: "Vietnamese", explanationText: "<img src=https://i.imgur.com/WlkafkB.jpeg> THEY'RE TERKIN OUR JERBS!" },
+    { searchString: "Guadalupe", explanationText: "<img src=https://i.imgur.com/OSKBVAX.jpeg> O Virgin of Guadalupe, mother of the Americas..." },
+    { searchString: "Lucha libre", explanationText: "<img src=https://i.imgur.com/8VKeX0J.jpeg> Pro wrestling is dumb when Americans do it, but utterly brilliant when Mexicans do it." },
+    { searchString: "Bonoir", explanationText: "<img src=https://i.imgur.com/KW6WezO.jpeg> Gephardt's right hand and a true friend of the blue-collar man." },
+    { searchString: "PRI", explanationText: "<img src=https://i.imgur.com/LZJy0l5.png> They are to dictatorships what Michael Jordan is to basketball." },
+
+
+    // buchanan tooltips
+    { searchString: "Treblinka", explanationText: "<img src=https://i.imgur.com/UP1VH14.jpeg> A death camp in which many people died." },
+    { searchString: "Arlen Specter", explanationText: "<img src=https://i.imgur.com/hP4Smpz.jpeg> Republican from Pennsylvania who loves to change sides." },
+    { searchString: "Wyoming", explanationText: "<img src=https://i.imgur.com/rIoH0tH.jpeg> Home of <em>Q-anon</em>, the world's biggest Dan Quayle fan." },
+    { searchString: "Central Park Five", explanationText: "<img src=https://i.imgur.com/cTAunUI.jpeg> Guilty of being black." },
+    { searchString: "Country Club", explanationText: "<img src=https://i.imgur.com/GXLG42g.jpeg> A vital means of shelter in the Republican ecosystem." },
+    { searchString: "Hamptons", explanationText: "<img src=https://i.imgur.com/1KWUh3i.jpeg> One of the most evil collections of people in the country outside of death row and the average car dealership." },
+    { searchString: "Carville", explanationText: "<img src=https://i.imgur.com/faLcsHx.jpeg> Loudmouth asshole from Louisiana who thinks he's a lot smarter than he is." },
+    { searchString: "Chavez", explanationText: "<img src=https://i.imgur.com/PAlwlRB.jpeg> Chicano legend in the fight for fair labor practices, half the streets and parks in California will bear his name after his death." },
+    { searchString: "To Kill a Mockingbird", explanationText: "<img src=https://i.imgur.com/Sv4OIEA.jpeg> Right proper hate speech, y'all!" },
+    { searchString: "Atticus Finch", explanationText: "<img src=https://i.imgur.com/vHsYsPK.jpeg> Race traitor." },
+    { searchString: "Riley", explanationText: "<img src=https://i.imgur.com/V0p0of5.jpeg> Boring-but-effective technocrat." },
+    { searchString: "William Cohen", explanationText: "<img src=https://i.imgur.com/vUQiPHG.jpeg> Republican from Maine, a bit of a political maverick." },
+    { searchString: "Kurt Cobain", explanationText: "<img src=https://i.imgur.com/qdFHBeO.jpeg> Talented young man, possible voice of his generation, and a Jerry Brown superfan!" },
+    { searchString: "Packwood", explanationText: "<img src=https://i.imgur.com/BMeIfSW.jpeg> Respectable Republican moderate, rapist." },
+    { searchString: "Hatfield", explanationText: "<img src=https://i.imgur.com/rROzXrn.jpeg> Religious weirdo with a heart of gold. " },
+    { searchString: "Gold rush", explanationText: "<img src=https://i.imgur.com/xbk98zm.jpeg> <em>“There's gold in them thar hills!”</em>" },
+    { searchString: "pieing", explanationText: "<img src=https://i.imgur.com/nO4AZMR.jpeg> Not the first time you've been pied!" },
+    { searchString: "Atwater", explanationText: "<img src=https://i.imgur.com/bQaOKtt.jpeg> Evil racist bastard who's burning in hell right now." },
+    { searchString: "John Demjanjuk", explanationText: "<img src=https://i.imgur.com/vrpOfIu.jpeg> Death camp guard known as Ivan the Terrible, and a kindred soul to Pat Buchanan." },
+    { searchString: "Elie Wiesel", explanationText: "<img src=https://i.imgur.com/jjIhtid.jpeg> Romanian-American Holocaust survivor and Nobel Prize winner, strong defender of human rights for all... well, except for Palestinians." },
+    { searchString: "Protestant-Catholic split", explanationText: "<img src=https://i.imgur.com/vHSU090.jpeg You could really use another one of these in the GOP campaign right about now..." },
+
+    // reagan tooltips
+    { searchString: "leering in the background", explanationText: "<img src=https://i.imgur.com/gm9BJqR.jpeg> Mr. Steal Your Girl." },
+    { searchString: "Jimmy Carter", explanationText: "<img src=https://i.imgur.com/qH4ATRC.jpeg> The right man at the wrong time, forever trying to make up for his shortcomings in office." },
+    { searchString: "malaise", explanationText: "<img src=https://i.imgur.com/4CQhGgE.png>" },
+    { searchString: "you and Ted Kennedy", explanationText: "<img src=https://i.imgur.com/l2PZ5NP.jpeg> Old foes from 1980, reunited for the first time." },
+    { searchString: "81", explanationText: "<img src=https://i.imgur.com/yO5o7aH.jpeg> Surely nobody this old could ever seriously run for President... <em>right?</em>" },
+    { searchString: "‘66", explanationText: "<img src=https://i.imgur.com/nmcJMPA.jpeg> A most ignominious year for the Brown family." },
+    { searchString: "Weinberger", explanationText: "<img src=https://i.imgur.com/f8i6Hk2.jpeg> One of Reagan's many fall guys." },
+    { searchString: "Iran-Contra", explanationText: "<img src=https://i.imgur.com/Lgjinf2.jpeg> An incident in which Reagan sold missiles to Iran and sent the funds to far-right Nicaraguan rebels. Somehow mostly ignored." },
+    { searchString: "Iran-Contra", explanationText: "<img src=https://i.imgur.com/yixmsxO.png> A scandal in which the Reagan administration sold arms to far-right Nicaraguan militants, in which Bush was deeply involved." },
+    { searchString: "Ayatollah", explanationText: "<img src=https://i.imgur.com/2Ulp8Xn.jpeg> It's a bit of a stereotype to say that the nation's enemies are delusional zealots who just hate America, but he really was just that!" },
+    { searchString: "Oliver North", explanationText: "<img src=https://i.imgur.com/4uSkhyA.jpeg> Soldier, advisor, patriot, and nothing else." },
+
+    // etc
+    { searchString: "Perot", explanationText: "<img src=https://i.imgur.com/Dt7wDRB.jpeg> Much like Yoda, a short old fellow with wrinkly ears who has come to save the universe from evil." },
+    { searchString: "Hillary", explanationText: "<img src=https://i.imgur.com/H9e8daV.jpeg> First Lady of Arkansas who has a knack for strongly expressing her feelings. May also be more corrupt than Agnew." },
+    { searchString: "ブッシュする", explanationText: "<img src=https://i.imgur.com/Xl6Kumt.png> Busshu-suru, or \"to do the Bush thing\". Popular term for vomiting in Japan." },
+    { searchString: "McGovern", explanationText: "<img src=https://i.imgur.com/D9zi4Zb.jpeg> A great, if occasionally flawed, man who ran a campaign against insurmountable odds." },
+    { searchString: "the Arsenio Hall show", explanationText: "<img src=https://i.imgur.com/IWRJUy9.jpeg> The post-Johnny Carson answer to the question \"what if a late night host wasn't a glib white guy?\"" },
+    { searchString: "MC Hammer", explanationText: "<img src=https://i.imgur.com/wH0qaLG.jpeg> Mediocre rapper but an incredible dancer, just goes by \"Hammer\" now." },
+    { searchString: "Ice Cube", explanationText: "<img src=https://i.imgur.com/4nrn0kg.jpeg> One of the hardest-rapping motherfuckers on the planet." },
+    { searchString: "Rose Bird", explanationText: "<img src=https://i.imgur.com/Eit7hPx.jpeg> Your appointee, the first female judge to be Chief Justice of the California Supreme Court. Later tragically lost a retention election for making rulings with a conscience." },
+    { searchString: "Bill Weld", explanationText: "<img src=https://i.imgur.com/blq03L1.jpeg> The socially liberal and economically conservative governor of Massachusetts. A nice guy, if quite naïve." },
+    { searchString: "Maya Angelou", explanationText: "<img src=https://i.imgur.com/bVMzhNN.jpeg> The closet thing to a black woman's poet laureate, more of the Clinton type of Democrat." },
+    { searchString: "Cosby", explanationText: "<img src=https://i.imgur.com/RjYO1Wf.jpeg Unproblematic, wholesome family man, one of the few universally beloved black people in America." },
+    { searchString: "Quincy Jones", explanationText: "<img src=https://i.imgur.com/ZexpImf.jpeg> The man who made Michael Jackson, do-gooder philanthropist type." },
+    { searchString: "Michael Jackson", explanationText: "<img src=https://i.imgur.com/7dFgz9T.jpeg> Getting whiter by the second." },
+    { searchString: "O.J. Simpson", explanationText: "<img src=https://i.imgur.com/iRCvtQg.jpeg> Loveable family man, famous only for good reasons such as his football and acting careers." },
+    { searchString: "R. Kelly", explanationText: "<img src=https://i.imgur.com/T7XH5QH.jpeg> The most talented voice in R&B since... well, maybe ever." },
+    { searchString: "Hamilton Jordan", explanationText: "<img src=https://i.imgur.com/Krb3y9J.jpeg> Jimmy Carter's former chief of staff, supposedly a big fan of hookers and blow." },
+    { searchString: "Chiles", explanationText: "<img src=https://i.imgur.com/R1Nwb2N.jpeg> Good-natured Southerner, loves campaigning so much that he once walked 1,003 miles for the fun of it." },
+    { searchString: "Machiavelli", explanationText: "<img src=https://i.imgur.com/48e4Kzq.jpeg> \"If I was alive in 1992, I'd vote for Jerry Brown!\"" },
+    { searchString: "FEMA", explanationText: "<img src=https://i.imgur.com/P9t8XIW.jpeg> Doing whatever the opposite of a bang-up job is handling hurricane relief." },
+    { searchString: "Richard Shelby", explanationText: "<img src=https://i.imgur.com/JHrS2Pw.jpeg> D.I.N.O." },
+    { searchString: "Slick Willie", explanationText: "<img src=https://i.imgur.com/rqqvGJF.jpeg>" },
+    { searchString: "Harry Reid", explanationText: "<img src=https://i.imgur.com/BLr8JUu.jpeg> Unironically believes in UFOs." },
+    { searchString: "Dale Bumpers", explanationText: "<img src=https://i.imgur.com/C9APwmU.jpeg> Southern liberal, one of the last stalwarts of an increasingly endangered species." },
+    { searchString: "George Romney", explanationText: "<img src=https://i.imgur.com/uSLv7wh.jpeg> Not a racist, lost." },
+    { searchString: "Yale Law", explanationText: "<img src=https://i.imgur.com/BTzsmca.jpeg> Alma mater of a few of the best people on the planet and a lot of the worst ones" },
+    { searchString: "black guy from Parliament Funkadelic", explanationText: "<img src=https://i.imgur.com/Ne1uPfZ.jpeg> Would have been a way better president than Bill Clinton." },
+    { searchString: "Mikulski", explanationText: "<img src=https://i.imgur.com/p18uQ70.jpeg> Other than the mildly interesting achievement of being the first female senator from Maryland, just a generic blue state Dem." },
+    { searchString: "Al", explanationText: "<img src=https://i.imgur.com/ltG4aMi.jpeg> Tennessee conservadem. Will always have a national career due to his smoldering good looks." },
+    { searchString: "Cuomo", explanationText: "<img src=https://i.imgur.com/LJTogKP.jpeg> New York governor who is UNDEFEATED in hypothetical presidential elections." },
+    { searchString: "Stone Mountain", explanationText: "<img src=https://i.imgur.com/3LDABLc.jpeg> Mountain with a group of traitors carved into the side where the second KKK was founded. Now home to a theme park, petting zoo, and cool laser light show." },
+    { searchString: "Clinton overseeing 40 black men", explanationText: "<img src=https://i.imgur.com/1y0SCMh.jpeg> Look, like, three or four of them were white, so it can't possibly be racist." },
+    { searchString: "speedboat", explanationText: "<img src=https://i.imgur.com/OQDa6uI.jpeg> Easily accessible to the average working-class family, right?" },
+    { searchString: "John McCain", explanationText: "<img src=https://i.imgur.com/HfZmmv8.jpeg> Member of the Keating Five who will spend the rest of his career gaslighting the American public into thinking of him as a maverick war hero instead of a corrupt ghoul." },
+    { searchString: "Garry Trudeau", explanationText: "<img src=https://i.imgur.com/6dZM7hr.jpeg> Pulitzer Prize-winning cartoonist who really, really hates you." },
+    { searchString: "Mike Doonesbury", explanationText: "<img src=https://i.imgur.com/0LjjquJ.jpeg> Main character of... look, I get nobody cares about this comic anymore. It was a big deal once, okay? People in 1992 still kind of cared about it." },
+    { searchString: "Dukakis", explanationText: "<img src=https://i.imgur.com/xtbKp6q.jpeg> Choker and loser." },
+    { searchString: "Gray Davis", explanationText: "<img src=https://i.imgur.com/eapWm3x.jpeg> Current California State Controller and your former chief of staff who not-so-secretly despises/d you." },
+    { searchString: "Willie Horton", explanationText: "<img src=https://i.imgur.com/02wCujz.jpeg> Dukakis' running mate in 1988." },
+    { searchString: "Nixon", explanationText: "<img src=https://i.imgur.com/YE4iXwA.png> One of America's worst presidents, somehow rehabilitated as a wise elder statesman." },
+
+    // europe, in general
+    { searchString: "Christoph", explanationText: "<img src=https://i.imgur.com/Hjmdj00.jpeg> A dapper young German man, says he plays the drums." },
+    { searchString: "Richard", explanationText: "<img src=https://i.imgur.com/Qlsex5R.jpeg> A nice German fellow, quite talented with the guitar." },
+    { searchString: "Ted Kennedy", explanationText: "<img src=https://i.imgur.com/IL1bDLU.jpeg> The last surviving Kennedy brother and a national figure of some renown whose 1980 campaign destroyed your chances for the Democratic nomination." },
+    { searchString: "Collor", explanationText: "<img src=https://i.imgur.com/GZNYINH.jpeg> \"Impressive, very nice. Let's see Lula da Silva's card.\"" },
+    { searchString: "Queen", explanationText: "<img src=https://i.imgur.com/yitAT1w.jpeg> Loved by (almost) all, been going strong for 40 years with no signs of stopping." },
+    { searchString: "Guinness", explanationText: "<img src=https://i.imgur.com/y2pRPXg.jpeg> Pure Genius." },
+    { searchString: "David Duke", explanationText: "<img src=https://i.imgur.com/DjDZdMk.jpeg> Former Grand Wizard of the Ku Klux Klan, now rebranded as a kool kasual kandidate for the 1990s." },
+    { searchString: "Stephens", explanationText: "<img src=https://i.imgur.com/b3BmbY7.jpeg> The richest family in Arkansas besides the Waltons and the Tysons. Nothing happens in Little Rock without their approval." },
+    { searchString: "Oberlin", explanationText: "<img src=https://i.imgur.com/b6r5vwy.jpeg> Ohio private liberal arts college famed for its hardcore liberalism, exemplified in being the first college in the country to admit women." },
+    { searchString: "Biden", explanationText: "<img src=https://i.imgur.com/Q08gUEK.jpeg> Delaware senator, real presidential material" },
+    { searchString: "Gordon Brown", explanationText: "<img src=https://i.imgur.com/AX1Mcl4.jpeg> Current Chancellor of the Exchequer, and doing great work so far. Widely seen as one of the brightest minds in Labour." },
+    { searchString: "Wolfsburg Volkswagen Plant", explanationText: "<img src=https://i.imgur.com/xdTCpbH.jpeg> The pinnacle of German efficiency and precision." },
+    { searchString: "Plattenbaus", explanationText: "<img src=https://i.imgur.com/ZY6c08s.jpeg> Monoliths of a concrete wasteland." },
+    { searchString: "Gründerzeits", explanationText: "<img src=https://i.imgur.com/wVioXlw.jpeg> Relics of a long-gone golden age." },
+    { searchString: "Kohl", explanationText: "<img src=https://i.imgur.com/HZy1ok2.jpeg> Devoid of charisma or personal touch, yet extremely successful- in other words, the perfect German man." },
+    { searchString: "Michael Jordan", explanationText: "<img src=https://i.imgur.com/c1CLqVY.jpeg> The best basketball player in the world, gunning for a three-peat this season." },
+    { searchString: "Silvio Berlusconi", explanationText: "<img src=https://i.imgur.com/hiDdYg3.jpeg> The richest man in Italy and the nation's most prolific womanizer." },
+    { searchString: "French", explanationText: "<img src=https://i.imgur.com/puiwqm7.jpeg> Cheese-eating surrender monkeys." },
+    { searchString: "Brandenburg Gate", explanationText: "<img src=https://i.imgur.com/xLBcFwk.jpeg> Germany's signature triumphal arch, finally back in service since the Berlin Wall went down." },
+    { searchString: "Disneyland", explanationText: "<img src=https://i.imgur.com/RfAE6Xo.jpeg> A theme park centered around an artificial castle in a continent with thousands of real ones. What could go wrong?" },
+    { searchString: "cultural imperialism", explanationText: "<img src=https://i.imgur.com/LSaOvXZ.jpeg> God, could you imagine a world without French culture?" },
+    { searchString: "Saint-Denis", explanationText: "<img src=https://i.imgur.com/ceqbTEB.jpeg> Paris' version of the ghetto, somebody thought it would be a great place to build a soccer stadium." },
+    { searchString: "Munster County", explanationText: "<img src=https://i.imgur.com/tLtS1xP.jpeg> Proper Irish countryside." },
+    { searchString: "Cardiff City", explanationText: "<img src=https://i.imgur.com/v2RrWky.png> Deffro mae'n ddydd!" },
+    { searchString: "Tories", explanationText: "<img src=https://i.imgur.com/78bynHE.jpeg> Comically evil and boring." },
+    { searchString: "Calabria", explanationText: "<img src=https://i.imgur.com/hPXUtMy.jpeg> Possesses an ethereal Italian beauty matched only by its extreme poverty levels." },
+    { searchString: "Pope", explanationText: "<img src=https://i.imgur.com/9Q3wWvR.jpeg> Conservative Polish pope, more popular than Jesus." },
+    { searchString: "Antonio Di Pietro", explanationText: "<img src=https://i.imgur.com/nq4oq3v.jpeg> The most flamboyant public figure in Italy, which is saying something." },
+    { searchString: "secret Freemason power cabal", explanationText: "<img src=https://i.imgur.com/UqKxljA.jpeg> ARE YOU READY FOR ZE NEW WORLD ORDER?" },
+    { searchString: "Amato", explanationText: "<img src=https://i.imgur.com/yPD0KPc.jpeg> The Christian Democrats' latest gonk." },
+    { searchString: "Scalfaro", explanationText: "<img src=https://i.imgur.com/PUJG4eI.jpeg> Just sort of there." },
+
 
 
     ///////////////////////////
