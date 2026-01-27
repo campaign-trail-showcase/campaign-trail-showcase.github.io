@@ -880,6 +880,21 @@ $(document).ready(async () => {
   const customModNames = await getAllCustomModNames();
   customMods = new Set(customModNames);
 
+  // if loading a specific mod, skip building the gallery
+  if (localModParam || modNameParam) {
+    const targetMod = localModParam || modNameParam;
+    
+    if (localModParam && !customMods.has(localModParam)) {
+      alert(`Zoinks! The local mod "${localModParam}" could not be found in your saved mods.`);
+    } else {
+      const gridEl = document.getElementById("mod-grid");
+      if (gridEl) gridEl.style.display = "none";
+      
+      loadModFromButton(targetMod);
+      return; 
+    }
+  }
+
   const $modSelect = $("#modSelect");
   const originalOptions = $modSelect.find("option").clone();
 
@@ -1087,19 +1102,6 @@ $(document).ready(async () => {
   updateModViews();
 
   applyModBoxThemes();
-
-  // check for localMod parameter
-  if (localModParam) {
-    customThemesButton.style.display = "none";
-    if (customMods.has(localModParam)) {
-      loadModFromButton(localModParam);
-    } else {
-      alert(`The local mod "${localModParam}" could not be found in your saved mods.`);
-    }
-  } else if (modNameParam) {
-    customThemesButton.style.display = "none";
-    loadModFromButton(modNameParam);
-  }
 });
 
 function createModView(mod, imageUrl, description, isCustom) {
@@ -1851,8 +1853,8 @@ async function loadModFromButton(modValue) {
 
   if (!customMods.has(modValue)) {
     document.getElementById("copyLinkButton").style.display = "block";
-    document.getElementById("goBackButton").style.display = "inline";
   }
+  document.getElementById("goBackButton").style.display = "inline";
 
   const announcement = document.getElementById("announcement");
   if (announcement) {
