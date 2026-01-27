@@ -105,7 +105,7 @@ if (theme && nct_stuff.themes[theme]) {
 } else {
   nct_stuff.selectedTheme = "tct";
 }
-let selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
+var selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
 
 const themePickerEl = document.getElementById("theme_picker");
 themePickerEl.innerHTML = `<label for="themePicker" class="sr-only">Theme Picker</label>
@@ -605,14 +605,21 @@ function handleThemeUpdates() {
     selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
     gameWindow.style.backgroundImage = "";
     updateStyling();
-  } else if (
-    !nct_stuff.custom_override &&
-    nct_stuff.selectedTheme == "custom" &&
-    typeof modded !== "undefined" &&
-    modded &&
-    selectedTheme.window_url
-  ) {
-    selectedTheme.window_url = null;
+  } else {
+    // ensure selectedTheme is synced with nct_stuff.selectedTheme
+    if (nct_stuff.themes[nct_stuff.selectedTheme]) {
+      selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
+    }
+
+    if (
+      !nct_stuff.custom_override &&
+      nct_stuff.selectedTheme == "custom" &&
+      typeof modded !== "undefined" &&
+      modded &&
+      selectedTheme.window_url
+    ) {
+      selectedTheme.window_url = null;
+    }
   }
 
   const gameHeader = document.getElementsByClassName("game_header")[0];
