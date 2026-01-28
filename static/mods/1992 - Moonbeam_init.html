@@ -1373,7 +1373,18 @@ table td span {
 #candidate_summary ul, #running_mate_summary ul {
   margin: 0;
   padding: 0 1em;
+  list-style: none;
 }
+
+#candidate_summary li, #running_mate_summary li {
+  padding: 0.2em 0;
+  border-bottom: 1px dotted #9aaacd;
+}
+
+#candidate_summary li:last-child, #running_mate_summary li:last-child {
+  border-bottom: none;
+}
+
 
 #election_image {
   display: flex;
