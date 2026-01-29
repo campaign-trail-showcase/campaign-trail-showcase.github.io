@@ -35536,6 +35536,79 @@ cyoAdventure = function (a) {
         }
     }
 
+	// international trip headers ooh-la-la
+	const internationalHeaders = {
+		// WESTERN EUROPE (WE)
+		114610: "https://i.imgur.com/w5MMofI.png",
+		114633: "https://i.imgur.com/w5MMofI.png",
+		114655: "https://i.imgur.com/w5MMofI.png",
+		114783: "https://i.imgur.com/UlfyGMG.png",
+		114805: "https://i.imgur.com/UlfyGMG.png",
+		114702: "https://i.imgur.com/ktjkfPJ.png",
+		114676: "https://i.imgur.com/ktjkfPJ.png",
+		114745: "https://i.imgur.com/nfOLodX.png",
+		114723: "https://i.imgur.com/nfOLodX.png",
+
+		// EASTERN EUROPE (EE)
+		114886: "https://i.imgur.com/X77aHJC.png",
+		114906: "https://i.imgur.com/X77aHJC.png",
+		114925: "https://i.imgur.com/vzf1c8x.png",
+		114946: "https://i.imgur.com/vzf1c8x.png",
+		114829: "https://i.imgur.com/lQNQIyM.png",
+		114858: "https://i.imgur.com/LWaIUqn.png",
+
+		// ASIA (AS)
+		115047: "https://i.imgur.com/YCRBH2v.png",
+		115025: "https://i.imgur.com/YCRBH2v.png",
+		115110: "https://i.imgur.com/1pE8Fqf.png",
+		115089: "https://i.imgur.com/1pE8Fqf.png",
+		115001: "https://i.imgur.com/0hQ0d9b.png",
+		114963: "https://i.imgur.com/7fuQsjN.png",
+
+		// NORTH & SOUTH AMERICA (NA)
+		115215: "https://i.imgur.com/WXDVYt5.jpeg",
+		115173: "https://i.imgur.com/WXDVYt5.jpeg",
+		11112031: "https://i.imgur.com/fsUDu0h.png",
+		115131: "https://i.imgur.com/fsUDu0h.png",
+		115194: "https://i.imgur.com/PvCE2Pl.png",
+		11112090: "https://i.imgur.com/PvCE2Pl.png",
+		11112110: "https://i.imgur.com/PvCE2Pl.png",
+		115152: "https://i.imgur.com/014Ody6.png"
+	};
+
+	const defaultHeader = "https://i.imgur.com/xj7rSmb.png";
+
+	const originalQuestionHTML = questionHTML;
+
+	questionHTML = function() {
+		originalQuestionHTML();
+
+		const qNum = campaignTrail_temp.question_number;
+		const header = document.getElementById("header");
+		const activeTheme = window.nct_stuff.themes[window.nct_stuff.selectedTheme];
+
+		if (qNum === 20) {
+			const branchPK = campaignTrail_temp.questions_json[20].pk;
+			const branchURL = internationalHeaders[branchPK] || defaultHeader;
+
+			activeTheme.banner = branchURL;
+			if (header) {
+				header.src = branchURL;
+
+				// to not conflict with the header
+				header.style.setProperty('height', 'inherit', 'important');
+			}
+		}
+		else if (qNum === 21) {
+			activeTheme.banner = defaultHeader;
+			if (header) {
+				header.src = defaultHeader;
+
+				header.style.height = "";
+			}
+		}
+	};
+
     /////PURE IDEOLOGY *SNIFF*
     if (bonzo === true) {
         campaignTrail_temp.questions_json[21] = tunnel(11112801);
@@ -42476,9 +42549,211 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-         <img src='https://i.redd.it/rnluh00c76x21.jpg'>
-9:59 PM
-<h1 style="text-align: center;"><strong>BROWN & DI! SECRET WHITE HOUSE ROMANCE EXPOSED!</strong></h1> <p>NATIONAL ENQUIRER</p> <p>APRIL 13, 1998</p> <p>By Dunston Hodges, Senior Correspondent</p> <p>WASHINGTON, D.C. – It's the love story that has rocked the White House!</p> <p>Forget everything you thought you knew about President Jerry Brown's love life, because THE ENQUIRER CAN NOW CONFIRM that the 42nd President of the United States is in a clandestine romance with none other than Diana, Princess of Wales!</p> <p>That's right, America's most eligible bachelor and the world's most famous royal divorcee have been carrying on a top-secret transatlantic love affair that has seen late-night White House rendezvous, sneaky Camp David weekends, and an Oval Office romance straight out of the days of Kennedy's Camelot.</p> <p>Sources deep within the White House—and we do mean deep—have confirmed to The Enquirer that the People's Princess and the People's President have been meeting under the cover of darkness, avoiding the prying eyes of the press while forging what some insiders are calling "a love for the ages."</p> <p>THE ROMANCE THAT NO ONE SAW COMING!</p> <p>Just last year, we at The Enquirer speculated that Brown might have been involved with Venezuelan beauty queen-turned-politician Irene Sáez. At the time, anonymous whispers from within the Beltway hinted that Brown and the former Miss Universe were exchanging a lot more than just diplomatic pleasantries, as the two have been in regular contact since they first met in 1992. However, we can now admit: WE GOT IT WRONG! Our apologies to Ms. Sáez, who remains simply an admirer of Brown's "political asceticism."</p> <p>But Diana? THAT'S A DIFFERENT STORY.</p> <p>SNEAKY VISITS & SECRET GETAWAYS!</p> <p>Our White House insiders report that since her tragic 1996 divorce from Prince Charles, Diana has been a frequent, though elusive, visitor to 1600 Pennsylvania Avenue.</p> <p>"Diana has been flown in on private jets, usually landing at Andrews Air Force Base in the dead of night," says a top-level source, speaking strictly under condition of anonymity. "She has a well-rehearsed routine. They take her to the White House in unmarked black cars, straight inside the gates. If you don't know what to look for, you'd never suspect a thing."</p> <p>But we do. And here's what else we know: Diana and Brown have shared secret weekends at Camp David, where they've enjoyed long walks, private dinners, and moonlit dances beneath the stars. According to confidential sources, Brown has said that she may be "the one!"</p> <p>WHY DIANA? WHY NOW?</p> <p>Some political analysts suggest that this romance makes perfect sense. Brown, the defiant intellectual, has long sought a partner who is equally independent, charismatic, and intelligent. Diana fits the bill perfectly.</p> <p>"She's the only woman alive who could understand the pressures of his position," says political relationship expert Dr. Elaine Norwood. "She has lived through the tabloids, the scandals, the intense scrutiny. She's walked that lonely path of power, just as Brown has."</p> <p>And let's not forget: Jerry Brown has never married. Although he's had many relationships with famous women, including Linda Rondstadt, Brown has remained steadfastly single—until now?</p> <p>PALACE PANIC!</p> <p>For now, Buckingham Palace is SILENT.</p> <p>Though The Enquirer reached out for comment, the Palace remains tight-lipped about Diana's alleged new American romance. However, sources within the royal family suggest that Prince Charles is FURIOUS over the possibility that his ex-wife might end up in the arms of the leader of the free world.</p> <p>"Charles always had a superiority complex," said a former royal insider. "Can you imagine how he'd feel if Diana were to become the First Lady of the United States? He'd have a fit."</p> <p>Indeed, speculation is already swirling about whether Brown and Diana will make their love public—and what that could mean for the American political scene.</p> <p>A WEDDING IN THE WEST WING?!</p> <p>Some insiders have gone so far as to speculate about a possible engagement!</p> <p>"Diana has always wanted to find true love on her own terms," says longtime friend Olivia Carlington. "If Jerry is that man, who's to say they won't make it official?"</p> <p>Imagine the scene: Diana in white, walking down the aisle of the White House Rose Garden, while Jerry Brown—the most unlikely of all Presidents—finally takes the plunge into marriage.</p> <p>Could America's most mysterious Bachelor-in-Chief finally settle down? Could Diana, the woman who defied the monarchy, become America's First Lady?</p> <p>Stay tuned, readers. Because if this love affair continues to heat up, the White House may soon need to plan a royal wedding!</p>
+			<style>
+				.tabloid-container {
+					font-family: 'Arial Narrow', 'Helvetica Condensed', sans-serif;
+					background-color: #fff;
+					color: #000;
+					max-width: 750px;
+					margin: 30px auto;
+					padding: 15px;
+					border: 1px solid #ccc;
+					box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+				}
+
+				.enquirer-header {
+					background: linear-gradient(to bottom, #d00000 0%, #990000 100%);
+					color: white;
+					padding: 10px;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					border-bottom: 3px solid #000;
+				}
+
+				.enquirer-logo {
+					font-family: 'Impact', sans-serif;
+					font-size: 2.5rem;
+					font-style: italic;
+					letter-spacing: -1px;
+					text-shadow: 2px 2px 0px #000;
+				}
+
+				.enquirer-meta {
+					font-weight: bold;
+					text-align: right;
+					font-size: 0.9rem;
+				}
+
+				.screamer-headline {
+					font-family: 'Impact', sans-serif;
+					font-size: 3.5rem;
+					line-height: 0.95;
+					color: #ffff00;
+					background-color: #d00000;
+					text-transform: uppercase;
+					padding: 10px 15px;
+					margin: 15px 0;
+					text-align: center;
+					border: 3px solid #000;
+					box-shadow: 5px 5px 0px #000;
+					transform: rotate(-1deg);
+				}
+
+				.photo-spread {
+					position: relative;
+					border: 4px solid #000;
+					margin-bottom: 20px;
+					background: #000;
+				}
+
+				.photo-spread img {
+					width: 100%;
+					height: auto;
+					display: block;
+				}
+
+				.photo-tag {
+					position: absolute;
+					top: 10px;
+					left: -10px;
+					background-color: #ffff00;
+					color: #d00000;
+					font-weight: 900;
+					padding: 5px 15px;
+					font-size: 1.2rem;
+					transform: rotate(-5deg);
+					border: 2px solid #000;
+					box-shadow: 2px 2px 0px #000;
+				}
+
+				/* Layout */
+				.article-columns {
+					column-count: 2;
+					column-gap: 25px;
+					font-family: 'Times New Roman', serif;
+					font-size: 1.05rem;
+					line-height: 1.25;
+					text-align: justify;
+				}
+
+				.tabloid-subhead {
+					font-family: 'Arial Black', sans-serif;
+					background-color: #000;
+					color: #fff;
+					display: inline-block;
+					padding: 3px 6px;
+					margin: 15px 0 5px 0;
+					text-transform: uppercase;
+					font-size: 1rem;
+					transform: skewX(-10deg);
+				}
+
+				.scoop-text {
+					font-weight: bold;
+					font-family: sans-serif;
+				}
+
+				.byline {
+					font-weight: bold;
+					border-bottom: 2px solid #000;
+					padding-bottom: 5px;
+					margin-bottom: 10px;
+					font-family: sans-serif;
+					text-transform: uppercase;
+				}
+
+				.pull-quote-box {
+					background-color: #ffffcc;
+					border: 2px dashed #d00000;
+					padding: 10px;
+					margin: 10px 0;
+					font-family: sans-serif;
+					font-weight: bold;
+					text-align: center;
+					font-size: 1.1rem;
+					color: #d00000;
+					break-inside: avoid;
+				}
+			</style>
+
+			<div class="tabloid-container">
+
+				<div class="enquirer-header">
+					<div class="enquirer-logo">NATIONAL ENQUIRER</div>
+					<div class="enquirer-meta">
+						APRIL 13, 1998<br>
+						$1.49 / CANADA $1.89
+					</div>
+				</div>
+
+				<h1 class="screamer-headline">BROWN & DI! SECRET WHITE HOUSE ROMANCE EXPOSED!</h1>
+
+				<div class="photo-spread">
+					<div class="photo-tag">WORLD EXCLUSIVE!</div>
+					<img src="https://i.redd.it/rnluh00c76x21.jpg" alt="Jerry Brown and Princess Diana">
+				</div>
+
+				<div class="article-columns">
+					<div class="byline">By Dunston Hodges, Senior Correspondent</div>
+
+					<p><span class="scoop-text">WASHINGTON, D.C. –</span> It's the love story that has rocked the White House!</p>
+
+					<p>Forget everything you thought you knew about President Jerry Brown's love life, because <span class="scoop-text">THE ENQUIRER CAN NOW CONFIRM</span> that the 42nd President of the United States is in a clandestine romance with none other than Diana, Princess of Wales!</p>
+
+					<p>That's right, America's most eligible bachelor and the world's most famous royal divorcee have been carrying on a top-secret transatlantic love affair that has seen late-night White House rendezvous, sneaky Camp David weekends, and an Oval Office romance straight out of the days of Kennedy's Camelot.</p>
+
+					<p>Sources deep within the White House—and we do mean deep—have confirmed to The Enquirer that the People's Princess and the People's President have been meeting under the cover of darkness, avoiding the prying eyes of the press while forging what some insiders are calling "a love for the ages."</p>
+
+					<div class="tabloid-subhead">THE ROMANCE NO ONE SAW COMING!</div>
+
+					<p>Just last year, we at The Enquirer speculated that Brown might have been involved with Venezuelan beauty queen-turned-politician Irene Sáez. At the time, anonymous whispers from within the Beltway hinted that Brown and the former Miss Universe were exchanging a lot more than just diplomatic pleasantries, as the two have been in regular contact since they first met in 1992. However, we can now admit: <span class="scoop-text">WE GOT IT WRONG!</span> Our apologies to Ms. Sáez, who remains simply an admirer of Brown's "political asceticism."</p>
+
+					<p>But Diana? <strong>THAT'S A DIFFERENT STORY.</strong></p>
+
+					<div class="tabloid-subhead">SNEAKY VISITS & SECRET GETAWAYS!</div>
+
+					<p>Our White House insiders report that since her tragic 1996 divorce from Prince Charles, Diana has been a frequent, though elusive, visitor to 1600 Pennsylvania Avenue.</p>
+
+					<p>"Diana has been flown in on private jets, usually landing at Andrews Air Force Base in the dead of night," says a top-level source, speaking strictly under condition of anonymity. "She has a well-rehearsed routine. They take her to the White House in unmarked black cars, straight inside the gates. If you don't know what to look for, you'd never suspect a thing."</p>
+
+					<p>But we do. And here's what else we know: Diana and Brown have shared secret weekends at Camp David, where they've enjoyed long walks, private dinners, and moonlit dances beneath the stars. According to confidential sources, Brown has said that she may be "the one!"</p>
+
+					<div class="pull-quote-box">
+						"Brown has said that she may be 'the one!'"
+					</div>
+
+					<div class="tabloid-subhead">WHY DIANA? WHY NOW?</div>
+
+					<p>Some political analysts suggest that this romance makes perfect sense. Brown, the defiant intellectual, has long sought a partner who is equally independent, charismatic, and intelligent. Diana fits the bill perfectly.</p>
+
+					<p>"She's the only woman alive who could understand the pressures of his position," says political relationship expert Dr. Elaine Norwood. "She has lived through the tabloids, the scandals, the intense scrutiny. She's walked that lonely path of power, just as Brown has."</p>
+
+					<p>And let's not forget: Jerry Brown has never married. Although he's had many relationships with famous women, including Linda Rondstadt, Brown has remained steadfastly single—until now?</p>
+
+					<div class="tabloid-subhead">PALACE PANIC!</div>
+
+					<p>For now, Buckingham Palace is <span class="scoop-text">SILENT</span>.</p>
+
+					<p>Though The Enquirer reached out for comment, the Palace remains tight-lipped about Diana's alleged new American romance. However, sources within the royal family suggest that Prince Charles is FURIOUS over the possibility that his ex-wife might end up in the arms of the leader of the free world.</p>
+
+					<p>"Charles always had a superiority complex," said a former royal insider. "Can you imagine how he'd feel if Diana were to become the First Lady of the United States? He'd have a fit."</p>
+
+					<p>Indeed, speculation is already swirling about whether Brown and Diana will make their love public—and what that could mean for the American political scene.</p>
+
+					<div class="tabloid-subhead">A WEDDING IN THE WEST WING?!</div>
+
+					<p>Some insiders have gone so far as to speculate about a possible engagement!</p>
+
+					<p>"Diana has always wanted to find true love on her own terms," says longtime friend Olivia Carlington. "If Jerry is that man, who's to say they won't make it official?"</p>
+
+					<p>Imagine the scene: Diana in white, walking down the aisle of the White House Rose Garden, while Jerry Brown—the most unlikely of all Presidents—finally takes the plunge into marriage.</p>
+
+					<p>Could America's most mysterious Bachelor-in-Chief finally settle down? Could Diana, the woman who defied the monarchy, become America's First Lady?</p>
+
+					<p>Stay tuned, readers. Because if this love affair continues to heat up, the White House may soon need to plan a royal wedding!</p>
+				</div>
+			</div>
     `
         },
         {
@@ -42490,24 +42765,171 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-        <h1 style="text-align: center;"><strong>Moscow's Royal Wedding</strong></h1>
+			<style>
+			.autostraddle-wrapper {
+				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+				background-color: #fff;
+				color: #333;
+				max-width: 700px;
+				margin: 30px auto;
+				padding: 0;
+				border: 1px solid #e0e0e0;
+			}
 
-<p>Autostraddle</p>
-<p>Autumn Hoerner</p>
-<p>March 9, 2008</p>
-<p>On March 8, the white, blue, and red of the Russian flag was mixed with the colors of the rainbow as the city's gay citizens celebrated the marriage of Lena Katina and Yulia Volkova, the two members of popular group t.A.T.u. Katina and Volkova married in a private ceremony held inside a private event space on Arbat street. After the wedding, the two women briefly appeared in front of their fans before heading to a downtown restaurant for their reception.</p>
-<p>The women's marriage comes four months after Russia's Supreme Court issued a bombshell decision on same-sex marriage, ruling that by the text of Russia's 1993 constitution, same-sex couples had the right to marriage. Although a slight majority of Russians disapprove of this decision (polling has indicated that about 55% of Russians disapprove of same-sex marriage), public backlash has not stopped thousands of couples from wedding.</p>
-<p>Katina and Volkova attracted both widespread fame and criticism after the smash success of their 2002 album 200 km/h in the Wrong Lane, anchored by the global hit "All the Things She Said." At the time, the two women were accused of playing up a lesbian relationship for the press as part of a popularity gimmick, with Volkova's 2004 pregnancy seen as evidence that the pair were deceiving the public. The group publicly apologized, stating that the nature of their relationship was personal, and promising to scale down the open displays of lesbianism–a promise they would soon break.</p>
-<p>Despite the backlash, t.A.T.u. has remained extremely popular since their victory at Eurovision 2003, with their 2007 North American tour shattering ticket sales records for Russian artists. During the tour, while performing at a show in Minneapolis, the two announced that they were dating, stating that the romantic attraction between them was not part of any stage routine. Katina and Volkova announced their engagement immediately after the Russian court ruling, scheduling their wedding to coincide with International Women's Day.</p>
-<p>Katina and Volkova opted for a lesbian spin on a traditional Russian Orthodox ceremony, with both women wearing white dresses and bridal veils. Although the formal ceremony was closed to the public, the pair released their itinerary well in advance so that well-wishers could see the married couple for the first time. Outside of the venue, an estimated 5,000 fans waited on the women, greeting them with a hearty cheer as they walked down Arbat street. The fans, who were overwhelmingly female, waved rainbow LGBT flags and sang t.A.T.u.'s songs while they waited, with many women intermittently kissing each other to repeated rounds of applause.</p>
-<p>While Russian society remains culturally conservative, the country's consistent economic progression has seemingly been matched by social progression. Even in homophobic areas of Russia, t.A.T.u.'s romance has attracted a massive amount of overwhelmingly positive media interest, with some Russian journalists comparing the public hype around their wedding to the Russian Empire's old traditions of grand royal weddings. One popular joke goes "In the time of the empire, we had a tsar, tsaritsa, and no money. Now, we've traded the marriage for two tsaritsas, but we have money!"</p>
-<p>Among the throngs of people gathered to watch the women walk down Arbat street, it was impossible to find anyone remotely questioning their right to marry. While a protest of Neo-Nazis attempted to organize in opposition to the wedding, it was sparsely attended and dissipated before the wedding had even started. Otherwise, t.A.T.u.s' fans were in high spirits. As one onlooker, Natalya, put it, "In the end, it's not very relevant who gets married. I may marry a man; I may marry a woman. Love is the only thing that matters."</p>`
+			.as-nav-bar {
+				background-color: #f8f8f8;
+				padding: 15px 20px;
+				border-bottom: 4px solid #ff7e00;
+				display: flex;
+				align-items: center;
+				margin-bottom: 30px;
+			}
+
+			.as-logo-text {
+				font-family: 'Arial Black', sans-serif;
+				font-size: 1.5rem;
+				letter-spacing: -1px;
+				color: #333;
+				text-transform: lowercase;
+				margin-right: 20px;
+			}
+
+			.as-category {
+				font-size: 0.8rem;
+				font-weight: bold;
+				text-transform: uppercase;
+				color: #ff7e00;
+				letter-spacing: 1px;
+			}
+
+			.content-padding {
+				padding: 0 30px 40px 30px;
+			}
+
+			.as-headline {
+				font-family: 'Georgia', serif;
+				font-size: 2.2rem;
+				font-weight: bold;
+				line-height: 1.1;
+				margin-bottom: 15px;
+				color: #222;
+				text-align: center;
+			}
+
+			.as-byline {
+				text-align: center;
+				font-size: 0.9rem;
+				color: #666;
+				margin-bottom: 25px;
+				border-bottom: 1px dotted #ccc;
+				padding-bottom: 20px;
+			}
+
+			.as-author {
+				font-weight: bold;
+				color: #ff7e00;
+			}
+
+			.featured-image-container {
+				margin-bottom: 30px;
+				background-color: #f9f9f9;
+				padding: 10px;
+				border: 1px solid #eee;
+			}
+
+			.featured-image-container img {
+				width: 100%;
+				height: auto;
+				display: block;
+			}
+
+			.image-caption {
+				font-size: 0.8rem;
+				color: #777;
+				margin-top: 8px;
+				text-align: center;
+				font-style: italic;
+			}
+
+			.article-body {
+				font-family: 'Georgia', serif;
+				font-size: 1.1rem;
+				line-height: 1.6;
+				color: #111;
+			}
+
+			.article-body p {
+				margin-bottom: 20px;
+			}
+
+			.article-body p:first-of-type::first-letter {
+				float: left;
+				font-size: 3.5rem;
+				line-height: 0.8;
+				padding-top: 5px;
+				padding-right: 8px;
+				color: #ff7e00;
+				font-family: 'Helvetica Neue', sans-serif;
+				font-weight: bold;
+			}
+
+			.quote-block {
+				background-color: #fffcf5;
+				border-left: 4px solid #ff7e00;
+				padding: 15px 20px;
+				font-style: italic;
+				color: #444;
+				margin: 20px 0;
+			}
+		</style>
+
+		<div class="autostraddle-wrapper">
+			<div class="as-nav-bar">
+				<div class="as-logo-text">Autostraddle</div>
+				<div class="as-category">Music & Culture</div>
+			</div>
+
+			<div class="content-padding">
+
+				<h1 class="as-headline">Moscow's Royal Wedding</h1>
+
+				<div class="as-byline">
+					By <span class="as-author">Autumn Hoerner</span> | March 9, 2008
+				</div>
+
+				<div class="featured-image-container">
+					<img src="https://i.imgur.com/BoNAsdl.jpeg" alt="Lena Katina and Yulia Volkova wedding">
+					<div class="image-caption">The happy couple celebrating on Arbat Street.</div>
+				</div>
+
+				<div class="article-body">
+					<p>On March 8, the white, blue, and red of the Russian flag was mixed with the colors of the rainbow as the city's gay citizens celebrated the marriage of Lena Katina and Yulia Volkova, the two members of popular group t.A.T.u. Katina and Volkova married in a private ceremony held inside a private event space on Arbat street. After the wedding, the two women briefly appeared in front of their fans before heading to a downtown restaurant for their reception.</p>
+
+					<p>The women's marriage comes four months after Russia's Supreme Court issued a bombshell decision on same-sex marriage, ruling that by the text of Russia's 1993 constitution, same-sex couples had the right to marriage. Although a slight majority of Russians disapprove of this decision (polling has indicated that about 55% of Russians disapprove of same-sex marriage), public backlash has not stopped thousands of couples from wedding.</p>
+
+					<p>Katina and Volkova attracted both widespread fame and criticism after the smash success of their 2002 album <em>200 km/h in the Wrong Lane</em>, anchored by the global hit "All the Things She Said." At the time, the two women were accused of playing up a lesbian relationship for the press as part of a popularity gimmick, with Volkova's 2004 pregnancy seen as evidence that the pair were deceiving the public. The group publicly apologized, stating that the nature of their relationship was personal, and promising to scale down the open displays of lesbianism–a promise they would soon break.</p>
+
+					<p>Despite the backlash, t.A.T.u. has remained extremely popular since their victory at Eurovision 2003, with their 2007 North American tour shattering ticket sales records for Russian artists. During the tour, while performing at a show in Minneapolis, the two announced that they were dating, stating that the romantic attraction between them was not part of any stage routine. Katina and Volkova announced their engagement immediately after the Russian court ruling, scheduling their wedding to coincide with International Women's Day.</p>
+
+					<p>Katina and Volkova opted for a lesbian spin on a traditional Russian Orthodox ceremony, with both women wearing white dresses and bridal veils. Although the formal ceremony was closed to the public, the pair released their itinerary well in advance so that well-wishers could see the married couple for the first time. Outside of the venue, an estimated 5,000 fans waited on the women, greeting them with a hearty cheer as they walked down Arbat street. The fans, who were overwhelmingly female, waved rainbow LGBT flags and sang t.A.T.u.'s songs while they waited, with many women intermittently kissing each other to repeated rounds of applause.</p>
+
+					<p>While Russian society remains culturally conservative, the country's consistent economic progression has seemingly been matched by social progression. Even in homophobic areas of Russia, t.A.T.u.'s romance has attracted a massive amount of overwhelmingly positive media interest, with some Russian journalists comparing the public hype around their wedding to the Russian Empire's old traditions of grand royal weddings.</p>
+
+					<div class="quote-block">
+						One popular joke goes "In the time of the empire, we had a tsar, tsaritsa, and no money. Now, we've traded the marriage for two tsaritsas, but we have money!"
+					</div>
+
+					<p>Among the throngs of people gathered to watch the women walk down Arbat street, it was impossible to find anyone remotely questioning their right to marry. While a protest of Neo-Nazis attempted to organize in opposition to the wedding, it was sparsely attended and dissipated before the wedding had even started. Otherwise, t.A.T.u.s' fans were in high spirits. As one onlooker, Natalya, put it, "In the end, it's not very relevant who gets married. I may marry a man; I may marry a woman. Love is the only thing that matters."</p>
+				</div>
+			</div>
+		</div>
+		`
         },
         {
             "pk": "Crimea Win",
             "conditions": {
                 "Win Type": requireEV(270),
-                "Answer Check": (function (val) { return val.includes(114859) })(e.player_answers),
+                "Answer Check": hasAns([114859]),
                 "Establishment Use": endingstuff["Establishment Use"],
                 "Running Mate": e.running_mate_last_name
             },
