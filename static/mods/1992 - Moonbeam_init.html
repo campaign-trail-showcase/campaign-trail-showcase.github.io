@@ -2423,10 +2423,10 @@ const mainPlaylist = new Playlist([
 // kick it off!
 window.WalkmanPlayer.init("#game_window", mainPlaylist);
 
-// VP skipper from 2012LBM
 (function () {
   'use strict';
 
+  // VP skipper from 2012LBM
   function handleNavigation() {
     const gameWindow = document.getElementById("game_window");
     if (!gameWindow) return;
@@ -2435,7 +2435,7 @@ window.WalkmanPlayer.init("#game_window", mainPlaylist);
     const summary = document.getElementById("running_mate_summary");
 
     if (summary) {
-      // check if we are moving backwards (triggered by the opponent screen back button)
+      // check if we are moving backwards
       const isGoingBack = window.sessionStorage.getItem("moonbeam_skip_direction") === "backward";
 
       if (isGoingBack) {
@@ -2470,7 +2470,65 @@ window.WalkmanPlayer.init("#game_window", mainPlaylist);
     }
   }
 
+  // for disabling custom font
+  function handleFontToggle() {
+    const slider = document.getElementById("difficulty_level");
+    const uiId = "font_toggle_ui_wrapper";
+    const styleId = "glorble-font-override";
+
+    if (slider && !document.getElementById(uiId)) {
+
+      const existingForm = slider.querySelector('form[name="difficulty_level_selection"]');
+      if (existingForm) {
+        existingForm.style.display = "inline-block";
+        existingForm.style.verticalAlign = "top";
+        existingForm.style.marginRight = "15px";
+      }
+
+      let style = document.getElementById(styleId);
+      if (!style) {
+        style = document.createElement("style");
+        style.id = styleId;
+        document.head.appendChild(style);
+      }
+      style.innerHTML = "";
+
+      const form = document.createElement('form');
+      form.id = uiId;
+
+      form.style.display = "inline-block";
+	  form.style.margin = "1em auto"
+      form.style.padding = "0 10px";
+      form.style.verticalAlign = "top";
+
+      const header = document.createElement("h3");
+      header.style.marginBottom = "5px";
+
+      const span = document.createElement("span");
+      span.textContent = "Use normal font?";
+
+      header.appendChild(span);
+      form.appendChild(header);
+
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.checked = false;
+
+      input.addEventListener("change", function () {
+        if (this.checked) {
+          style.innerHTML = ".container { font-family: inherit !important; } .overlay_window h3, .overlay_window p { font-weight: inherit !important; }";
+        } else {
+          style.innerHTML = "";
+        }
+      });
+
+      form.appendChild(input);
+      slider.appendChild(form);
+    }
+  }
+
   window.handleNavigation = handleNavigation;
+  window.handleFontToggle = handleFontToggle;
 })();
 
 // This is the catch-all mutation observer from 2012LBM
@@ -2488,6 +2546,10 @@ window.WalkmanPlayer.init("#game_window", mainPlaylist);
     // VP screen skipper
     if (document.getElementById("game_window") && typeof window.handleNavigation === 'function') {
       window.handleNavigation();
+    }
+	// font toggle
+	if (typeof window.handleFontToggle === 'function') {
+      window.handleFontToggle();
     }
   };
 
