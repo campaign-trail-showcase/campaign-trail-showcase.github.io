@@ -90,7 +90,15 @@ function buildAchievementsCache() {
 }
 
 function findAchievementByName(name) {
-  const cache = buildAchievementsCache();
+  let cache = buildAchievementsCache();
+
+  // if the achievement isn't found, the cache might be stale
+  // so we invalidate it and rebuild it from current allAch
+  if (!cache.has(name)) {
+    achievementsCache = null;
+    cache = buildAchievementsCache();
+  }
+
   return cache.get(name) || null;
 }
 
@@ -210,7 +218,7 @@ function getContrastingTextColor(bgColor) {
   // YIQ formula to determine brightness
   const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
   const result = (yiq >= 128) ? '#000000' : '#FFFFFF';
-  
+
   colorContrastCache.set(bgColor, result);
   return result;
 }

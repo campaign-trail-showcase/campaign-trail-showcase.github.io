@@ -1785,6 +1785,9 @@ async function loadModFromButton(modValue) {
       alert(`Custom mod ${modValue} not found!`);
       return;
     }
+
+    getAllAchievements(modData.code1, modValue);
+    getCustomTheme(modData.code1, modValue);
     
     if (modData.code2) {
         window.campaignTrail_temp = window.campaignTrail_temp || {};
@@ -1825,6 +1828,10 @@ async function loadModFromButton(modValue) {
       const res = await fetch(`../static/mods/${modValue}_init.html`);
       if (!res.ok) throw new Error("Network response was not ok");
       const modCode = await res.text();
+
+      getAllAchievements(modCode, modValue);
+      getCustomTheme(modCode, modValue);
+
       executeMod(modCode, {
         campaignTrail_temp,
         window,
