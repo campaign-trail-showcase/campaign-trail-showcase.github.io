@@ -158,16 +158,24 @@ function mapCache(skip = false) {
       return false;
     }
   }
-  $("#map_container").remove();
-  $("#main_content_area").html(
-    '<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>',
-  );
-  $("#main_content_area")[0].style.display = "";
 
   const rr = A(2);
   window.rFuncRes = rFunc(rr, 0);
-  $("#map_container").usmap(window.rFuncRes);
-  $("#main_content_area")[0].style.display = "none";
+
+  const $mapContainer = $("#map_container");
+  if ($mapContainer.length > 0 && $mapContainer.data("plugin-usmap")) {
+    updateUsMapStyles(window.rFuncRes);
+  } else {
+    $mapContainer.remove();
+    $("#main_content_area").html(
+      '<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>',
+    );
+    $("#map_container").usmap(window.rFuncRes);
+  }
+
+  if ($("#main_content_area")[0]) {
+    $("#main_content_area")[0].style.display = "none";
+  }
 
   return true;
 }
@@ -452,7 +460,7 @@ function csrfToken() {
     let t = null;
     if (document.cookie && document.cookie != "") {
       for (let i = document.cookie.split(";"), a = 0; a < i.length; a++) {
-        const s = jQuery.trim(i[a]);
+        const s = i[a].trim();
         if (s.substring(0, e.length + 1) == `${e}=`) {
           t = decodeURIComponent(s.substring(e.length + 1));
           break;
@@ -1338,6 +1346,28 @@ function questionHTML() {
   ports.innerHTML = l;
   gameWindow.appendChild(ports);
 
+  e.code2Loaded = true;
+
+  const $answerButton = $("#answer_select_button");
+  $answerButton.off('click').on('click', (evt) => {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+    onAnswerSelectButtonClicked(evt);
+  });
+
+  $("#view_electoral_map").off("click").on("click", (evt) => {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+    openMap(A(2));
+  });
+
+  if (Number(e.game_type_id) === 3) {
+    $("#shining_menu_button").off("click").on("click", (evt) => {
+      evt.preventDefault();
+      shining_menu(A(2));
+    });
+  }
+
   // $("#game_window").html(l)
 }
 
@@ -1476,6 +1506,7 @@ function updateUsMapStyles(config) {
     "stateSpecificStyles",
     "stateSpecificHoverStyles",
     "click",
+    "mouseover",
   ];
 
   for (const option of options) {
@@ -2178,31 +2209,7 @@ function renderOptions(electionId, candId, runId) {
       difficulty_level_id: Number(campaignTrail_temp.difficulty_level_id),
       game_start_logging_id: Number(campaignTrail_temp.game_start_logging_id),
     });
-    // Set up the interval for adding event listeners
-    const important_code = setInterval(() => {
-      const answerButton = document.querySelector("#answer_select_button");
-      if (answerButton) {
-        // Use jQuery's off() to remove all click handlers
-        const $answerButton = $(answerButton);
-        $answerButton.off('click');
 
-        // Add the click handler using jQuery
-        $answerButton.on('click', (e) => {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          onAnswerSelectButtonClicked(e);
-        });
-
-        // Set up map view click handler
-        $("#view_electoral_map").off("click").on("click", (e) => {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          openMap(A(2));
-        });
-
-        clearInterval(important_code);
-      }
-    }, 1000);
     const tempFuncO = (e) => {
       if (e.collect_results) {
         const a = A(2);
@@ -2223,7 +2230,7 @@ function renderOptions(electionId, candId, runId) {
     ) {
       console.log('ttrying');
       try {
-        $("#game_window").load(aaa, () => {
+        $("#game_window").load(aaa, async () => {
           const cands = PROPS.CANDIDATES;
           const year = e.temp_election_list.find((f) => stringsEqual(f.id, e.election_id)).display_year;
           const cand = cands.get(String(e.candidate_id)).last_name;
@@ -2237,13 +2244,38 @@ function renderOptions(electionId, candId, runId) {
               tempFuncO(e);
             });
           } else {
-            executeMod(localStorage.getItem(`${customMod}_code2`), {
-              campaignTrail_temp,
-              window,
-              document,
-              $,
-              jQuery
-            });
+            // check memory cache
+            let code2 = window.campaignTrail_temp ? window.campaignTrail_temp.custom_code_2 : null;
+
+            // check localStorage
+            if (!code2) {
+              code2 = localStorage.getItem(`${customMod}_code2`);
+            }
+
+            // check indexedDB
+            if (!code2 && window.getModFromDB) {
+              try {
+                const modData = await window.getModFromDB(customMod);
+                if (modData && modData.code2) {
+                  code2 = modData.code2;
+                }
+              } catch (e) {
+                console.error("Could not fetch code 2 from DB:", e);
+              }
+            }
+
+            if (code2) {
+              executeMod(code2, {
+                campaignTrail_temp,
+                window,
+                document,
+                $,
+                jQuery
+              });
+            } else {
+              console.error("Code 2 was not found for custom mod: " + customMod);
+            }
+
             tempFuncO(e);
           }
 
@@ -2641,8 +2673,13 @@ function rFunc(t, i) {
     return acc;
   }, "");
 
+  let lastHoveredStateName = null;
+
   // hover/click handler
   const hoverHandler = (_evt, data) => {
+    if (lastHoveredStateName === data.name) return;
+    lastHoveredStateName = data.name;
+
     window.nn2 = latestCandidates;
     window.nn3 = evArray;
     rrr = cachedVV;
@@ -2800,12 +2837,15 @@ function m() {
   if (e.primary) {
     const t = e.final_state_results;
     const filteredCandidates = e.candidate_json.filter(
-      (candidate) => e.opponents_list.includes(candidate.pk)
-        || stringsEqual(candidate.pk, e.candidate_id),
+      (candidate) =>
+        e.opponents_list.includes(candidate.pk) ||
+        stringsEqual(candidate.pk, e.candidate_id),
     );
 
-    const total_v = e.final_state_results
-      .reduce((sum, f) => sum + f.result.reduce((s, g) => s + g.votes, 0), 0);
+    const total_v = e.final_state_results.reduce(
+      (sum, f) => sum + f.result.reduce((s, g) => s + g.votes, 0),
+      0,
+    );
 
     // Use Array.prototype.forEach() method to update filteredCandidates
     filteredCandidates.forEach((candidate) => {
@@ -2814,10 +2854,14 @@ function m() {
       cand.evvs = 0;
 
       t.forEach((state) => {
-        const stateObj = e.states_json.find((f) => f.pk === Number(state.state));
+        const stateObj = e.states_json.find(
+          (f) => f.pk === Number(state.state),
+        );
         const stateElectoralVotes = stateObj.fields.electoral_votes;
 
-        const candResObj = state.result.find((f) => f.candidate === Number(candidate.pk));
+        const candResObj = state.result.find(
+          (f) => f.candidate === Number(candidate.pk),
+        );
         const candIndex = state.result.indexOf(candResObj);
 
         if (e.primary_states) {
@@ -2842,82 +2886,20 @@ function m() {
       cand.popvs = 0;
     });
 
-    const evMap = Object.fromEntries(filteredCandidates.map((f) => [f.pk, f.evvs]));
+    const evMap = Object.fromEntries(
+      filteredCandidates.map((f) => [f.pk, f.evvs]),
+    );
     e.final_overall_results.forEach((f) => {
       const cand = f.candidate;
       if (evMap[cand]) f.electoral_votes = evMap[cand];
     });
   }
-  const t = JSON.stringify({
-    election_id: e.election_id,
-    candidate_id: e.candidate_id,
-    running_mate_id: e.running_mate_id,
-    difficulty_level_id: e.difficulty_level_multiplier,
-    game_start_logging_id: e.game_start_logging_id,
-    game_type_id: e.game_type_id,
-  });
-  const i = e.opponents_list.map((candidate_id) => ({ candidate_id }));
-  const s = e.player_answers.map((answer_id) => ({ answer_id }));
-  const l = PROPS.ELECTIONS.get(String(e.election_id));
-  const o = l.winning_electoral_vote_number;
-  const n = e.final_overall_results.map((result) => ({
-    candidate_id: result.candidate || -1,
-    electoral_votes: result.electoral_votes || 0,
-    popular_votes: result.popular_votes || 0,
-    player_candidate_flg: stringsEqual(e.candidate_id, result.candidate),
-    winning_candidate_flg: result.electoral_votes >= o,
-  }));
-  const _ = e.final_state_results.flatMap((f) => (
-    f.result.map((r, i) => ({
-      state_id: f.state,
-      candidate_id: r.candidate,
-      electoral_votes: r.electoral_votes,
-      popular_votes: r.votes,
-      player_candidate_flg: stringsEqual(e.candidate_id, r.candidate),
-      winning_candidate_flg: i === 0,
-    }))
-  ));
-  const temp_visit_counter = e.player_visits.reduce((acc, f) => {
-    acc[f] = (acc[f] || 0) + 1;
-    return acc;
-  }, {});
-  const d = Object.keys(temp_visit_counter).map((key) => ({
-    candidate_id: e.candidate_id,
-    state_id: +key,
-    visit_count: temp_visit_counter[key],
-  }));
-  const date = new Date();
-  const date2 = new Intl.DateTimeFormat('en-GB', { timeZoneName: 'long' }).format(date).replace(',', '');
 
   e.historical_overall = "None";
   e.percentile = "None";
   e.game_results_url = "None";
+
   overallResultsHtml();
-  $.ajax({
-    type: "POST",
-    url: "https://a4ca-124-149-140-70.ngrok.io/",
-    data: JSON.stringify({
-      campaign_trail_game: t,
-      campaign_trail_game_opponent: JSON.stringify(i),
-      campaign_trail_game_answer: JSON.stringify(s),
-      campaign_trail_game_result: JSON.stringify(n),
-      campaign_trail_state_result: JSON.stringify(_),
-      campaign_trail_visit_counter: JSON.stringify(d),
-      states_json: JSON.stringify(e.states_json),
-      date: date2,
-    }),
-    dataType: "text",
-    success(t) {
-      // $("#game_window").append(t), e.historical_overall = campaignTrail_temp.historical_overall, e.percentile = campaignTrail_temp.percentile, e.game_results_url = campaignTrail_temp.game_results_url, p()
-      window.game_id = Number(t);
-      if (!Number.isNaN(window.game_id)) {
-        e.game_id = window.game_id;
-      }
-    },
-    error(t) {
-      // e.historical_overall = "None", e.percentile = "None", e.game_results_url = "None", p()
-    },
-  });
 }
 
 function overallResultsHtml() {
@@ -3460,9 +3442,10 @@ function overallDetailsHtml() {
                     </table>
                     <p>
                         <b>
-                            <a style="font-size: 15px;" href="${game_url}">GAME LINK</a>
-                            <br>
-                            <button id="ExportFileButton" onclick="exportResults()" style="position: absolute; margin-top: 10px; margin-left: -70px;">Export Game as File</button>
+                          <div style="display: inline-flex; justify-content: center;">
+                            <button id="ExportFileButton" onclick="exportResults()" style="margin: 0 .5em;">Export Game as File</button>
+                            <span>(<a href="/campaign-trail/viewGame.html" target="_blank">load exported save here</a>)</span>
+                          </div>
                         </b>
                     </p>
                     <br><br><br>
@@ -3972,7 +3955,23 @@ const gameStart = (a) => {
   `;
 
   const electionId = document.getElementById("election_id");
+  const credits = document.getElementById("credits");
+
+  const updateCredits = () => {
+    const val = Number(electionId.value);
+    if (val === 69) {
+      credits.innerHTML = "This scenario was made by Tex.";
+    } else if (val > -1 && !modded) {
+      credits.innerHTML = "This scenario was made by Dan Bryan.";
+    } else {
+      credits.innerHTML = `This scenario was made by ${e.credits}.`;
+    }
+  };
+
   electionId.value = e.election_id;
+
+  updateCredits();
+
   electionId.addEventListener("change", () => {
     e.election_id = Number(electionId.value);
     const selectedElection = PROPS.ELECTIONS.get(String(e.election_id));
@@ -3983,6 +3982,8 @@ const gameStart = (a) => {
       </div>
       <div id="election_summary">${selectedElection.summary}</div>
     `;
+
+    updateCredits();
   });
 
   document.getElementById("election_id_button").addEventListener("click", candSel);
@@ -4077,38 +4078,4 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     });
   });
-});
-
-let curElectSelect = null;
-
-const fix1964 = () => {
-  const electionSelect = document.querySelector("#election_id");
-  const electionId = Number(electionSelect.value);
-  const credits = document.querySelector("#credits");
-  if (electionId === 69) {
-    credits.innerHTML = "This scenario was made by Tex.";
-  } else if (electionId > -1 && !modded) {
-    credits.innerHTML = "This scenario was made by Dan Bryan.";
-  }
-};
-
-const fix1964Observer = new MutationObserver((mut, obs) => {
-  const newElectSelect = document.querySelector("#election_id");
-  if (newElectSelect && newElectSelect !== curElectSelect) {
-    if (curElectSelect) {
-      curElectSelect.removeEventListener("change", fix1964);
-    }
-    curElectSelect = newElectSelect;
-    curElectSelect.addEventListener("change", fix1964);
-    fix1964();
-  }
-  if (document.querySelector(".inner_window_question")) {
-    e.code2Loaded = true;
-    obs.disconnect();
-  }
-});
-
-fix1964Observer.observe(document.body, {
-  childList: true,
-  subtree: true,
 });

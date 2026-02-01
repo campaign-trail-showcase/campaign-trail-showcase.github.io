@@ -63133,13 +63133,19 @@
 			}
 		}
 		
+		// this fix is necessary so that autoplay works in this mod 
+		if (typeof e.bernie_exhaustion_tracker === "undefined") {
+			e.bernie_exhaustion_tracker = false;
+		}
+		if (authenticity <= -8 && ticket_status == 1) { //Bernie is ticket
+			e.election_json[0].fields.has_visits = 0; //too checked out and exhausted to campaign or appear much in public.
+			e.bernie_exhaustion_tracker = true;
+		}
+		else if (e.bernie_exhaustion_tracker) {
+			e.election_json[0].fields.has_visits = 1;  //if regain fervor or switch to Kamala, you can start campaigning again.
+			e.bernie_exhaustion_tracker = false;
+		}
 		
-		if (authenticity<=-8 && ticket_status==1) { //Bernie is ticket
-			e.election_json[0].fields.has_visits = 0 //too checked out and exhausted to campaign or appear much in public.
-		}
-		else {
-			e.election_json[0].fields.has_visits = 1 //if regain fervor or switch to Kamala, you can start campaigning again.
-		}
 		if (DPolling-RPolling<=-0.099) { //slightly smaller band than 0.1 because due to rounding it's possible that e.g. the numbers are D - 42.849% rounds to 42.8% and R -52.751% rounds to 52.8% and the player believes he should win this achievement.)
 			was_down_by_double_digits=true
 		}
