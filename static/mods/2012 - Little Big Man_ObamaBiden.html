@@ -42818,15 +42818,15 @@ function showStateSelectionForOperation(operation) {
 
   const header = document.createElement('div');
   header.className = 'hq-header';
-  header.innerHTML = `<h3 style="margin: 0; color: #444; text-shadow: 0 1px 0 #fff; text-align: center; font-size: 1.2em; width:100%;">Select Target State</h3>`;
+  header.innerHTML = `<h3 style="margin: 0; color: #444; text-shadow: 0 1px 0 #fff; text-align: center; font-size: 1.4em; width:100%;">Select Target State</h3>`;
 
   const content = document.createElement('div');
   content.className = 'hq-modal-content';
 
   content.innerHTML = `
         <div style="text-align: center; margin-bottom: 20px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">
-            <div style="font-size: 0.85em; opacity: 0.8; margin-bottom: 4px;">Operation</div>
-            <div style="font-weight: bold; font-size: 1.3em;">${operation.name}</div>
+            <div style="font-size: 1.3em; opacity: 0.8; margin-bottom: 4px;">Operation</div>
+            <div style="font-weight: bold; font-size: 1.4em;">${operation.name}</div>
         </div>
         <label style="display: block; font-size: 1.2em; margin-bottom: 8px; opacity: 0.9;">Choose a state:</label>
     `;
