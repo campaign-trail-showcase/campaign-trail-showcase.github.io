@@ -10100,19 +10100,29 @@ if (e.player_answers.includes(12500) && aa[0].candidate === 78) {
     e.pages.push(`<p>This was expected. Novo Ecijanos rather vote for the suspended Governor than a perennial candidate. Governor Umali and his brother will be proclaimed in the Provincial Capitol as Governor and Vice Governor respectively. There is nothing you can do but wrap up your campaign materials and file your SOCE to the COMELEC. Maybe you can retake your Mayoral seat in Gen. Tinio in 2028?</p>`);
     e.executable.push([0, (() => { e.image = 'https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/ending1.png'; })]);
     }
+if (e.player_answers.includes(12522) && aa[0].candidate === 78) {
+    e.header = "<h2>As expected, you have lost the 2025 Nueva Ecija Gubernatorial Election</h2>";
+    e.pages.push(`<p>This was expected. Novo Ecijanos rather vote for the suspended Governor than a perennial candidate. Governor Umali and his brother will be proclaimed in the Provincial Capitol as Governor and Vice Governor respectively. There is nothing you can do but wrap up your campaign materials and file your SOCE to the COMELEC. Maybe you can retake your Mayoral seat in Gen. Tinio in 2028?</p>`);
+    e.executable.push([0, (() => { e.image = 'https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/ending1.png'; })]);
+    }
 if (e.player_answers.includes(12500) && quickstats[1] > 50) {
     e.header = "<h2>Congratulations! You have won the Gubernatorial Election</h2>";
     e.pages.push(`<p>This was unexpected. Did you use bigshot?</p>`);
     e.executable.push([0, (() => { e.image = 'https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/gorge.png'; })]);
     }
-if (e.player_answers.includes(12516) && quickstats[1] > 50) {
+if (e.player_answers.includes(12522) && quickstats[1] > 50) {
+    e.header = "<h2>Congratulations! You have won the Gubernatorial Election</h2>";
+    e.pages.push(`<p>This was unexpected. Did you use bigshot?</p>`);
+    e.executable.push([0, (() => { e.image = 'https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/gorge.png'; })]);
+    }
+if (e.player_answers.includes(12516) && e.player_answers.includes(12623) && quickstats[1] > 50) {
     e.header = "<h2>Congratulations! You have won the Gubernatorial Election</h2>";
     e.pages.push(`<p>For the first time since 2007, a new governor will be in charge of Nueva Ecija and a Joson gaining the second highest position in the Provincial Government. Several downballot candidates aligned with you have won the Sanguniang Panlalawigan, Mayoral, and Councilor positions. On the Congressional front, Vergara, Pascual, Suansing, and surprisingly, Salvador, trounced whoever UNANG SIGAW fielded to counter them. Safe to say, your NERA agenda will go smoothly. Goodluck! Governor-elect, because the Umalis will try their worst to tear down every reform you and Ed promised to Novo Ecijanos. For tomorrow, a victory party will be held in your mansion and to be attended by your dear supporters. Revel in your victory, Mr. Bote!</p>`);
     e.executable.push([0, (() => { e.image = 'https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Botedefault.png'; })]);
     }
-if (e.player_answers.includes(12516) && quickstats[1] < 50) {
-    e.header = "<h2>Unfortunately, you have won the Gubernatorial Election</h2>";
-    e.pages.push(`<p>Despite your great efforts, Czarina Umali will replace her husband for governor. Your campaign was making gains, but fumbled the huge advantage you have. Was it because of poor coordination with your staff? Votes were rigged> Or your incompetence? Luckily for you, Edward Joson won the vice governor position in razor thin margins. He promised he will help you get a position in the provincial government once he is inagurated. Perhaps all of your work were not a waste. The margins you made is a huge improvement from your 2019 performance. Because of that, many speculate you will tandem with Edward Joson again in 2028. You still have many options in your table. A comeback bid for Mayor in Gen. Tinio sounds nice?</p>`);
+if (e.player_answers.includes(12516) && e.player_answers.includes(12623) && quickstats[1] < 50) {
+    e.header = "<h2>Unfortunately, you have lost the Gubernatorial Election</h2>";
+    e.pages.push(`<p>Despite your great efforts, Czarina Umali will replace her husband for governor. Your campaign was making gains, but fumbled the huge advantage you have. Was it because of poor coordination with your staff? Votes were rigged? Or your incompetence? Luckily for you, Edward Joson won the vice governor position in razor thin margins. He promised he will help you get a position in the provincial government once he is inagurated. Perhaps all of your work were not a waste. The margins you made is a huge improvement from your 2019 performance. Because of that, many speculate you will tandem with Edward Joson again in 2028. You still have many options in your table. A comeback bid for Mayor in Gen. Tinio sounds nice?</p>`);
     e.executable.push([0, (() => { e.image = 'https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/MG_3100.png'; })]);
     }
 if (e.player_answers.includes(12517) && quickstats[1] > 50) {
