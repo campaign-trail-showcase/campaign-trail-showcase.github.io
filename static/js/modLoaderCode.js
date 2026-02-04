@@ -935,13 +935,17 @@ $(document).ready(async () => {
 
   // Set up from normal mods
   const modPromises = Array.from(mods).map(async (mod) => {
-    // MODIFIED: logic to load both mods when needed
+    const targetMod = getUrlParam("modName");
+    const isLinked = targetMod && typeof expandFavoriteSet === 'function' && expandFavoriteSet(new Set([targetMod])).has(mod.value);
+    const isDSAClassicLink = targetMod === "2024" && mod.value === "2024 Divided States" || targetMod === "2024 Divided States" && mod.value === "2024";
+
+    // logic to load both mods when needed
     if (
       mod.value === "other" ||
       ( // Special case for DSA because it uses two code 1s to define achievements. So we need to load both of those to get both sets.
-        getUrlParam("modName") != null &&
-        getUrlParam("modName") != mod.value &&
-        !(getUrlParam("modName") === "2024" && mod.value === "2024 Divided States")
+        targetMod != null &&
+        targetMod != mod.value &&
+        !isLinked && !isDSAClassicLink
       )
     ) {
       allModsLength--;
@@ -1832,6 +1836,30 @@ async function loadModFromButton(modValue) {
 
       getAllAchievements(modCode, modValue);
       getCustomTheme(modCode, modValue);
+
+      // fetch achievements for linked mods if they aren't already loaded
+      let linkedMods = [modValue];
+      if (typeof expandFavoriteSet === 'function') {
+        linkedMods = Array.from(expandFavoriteSet(new Set([modValue])));
+      } else if (modValue === "2024" || modValue === "2024 Divided States") {
+        linkedMods = ["2024", "2024 Divided States"];
+      }
+
+      for (const linkedMod of linkedMods) {
+        if (linkedMod === modValue) continue;
+
+        if (!allAch[linkedMod]) {
+          try {
+            const linkedRes = await fetch(`../static/mods/${linkedMod}_init.html`);
+            if (linkedRes.ok) {
+              const linkedCode = await linkedRes.text();
+              getAllAchievements(linkedCode, linkedMod);
+            }
+          } catch (e) {
+            console.error(`Error loading linked achievements for ${linkedMod}:`, e);
+          }
+        }
+      }
 
       executeMod(modCode, {
         campaignTrail_temp,

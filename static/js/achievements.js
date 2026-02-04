@@ -668,10 +668,7 @@ function performRender() {
   const currentMod = getCurrentModName();
 
   if (!showAllModsLegacyAch && currentMod) {
-    const linkedMods =
-      currentMod === "2024" || currentMod === "2024 Divided States"
-        ? ["2024", "2024 Divided States"]
-        : [currentMod];
+    const linkedMods = Array.from(expandFavoriteSet(new Set([currentMod])));
     processedData = processedData.filter((mod) =>
       linkedMods.includes(mod.modName),
     );
