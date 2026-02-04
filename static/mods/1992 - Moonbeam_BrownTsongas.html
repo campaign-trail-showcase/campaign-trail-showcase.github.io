@@ -37362,6 +37362,439 @@ endingPicker = (out, totv, aa, quickstats) => {
 
               `
         },
+		{
+            "pk": "California Uber Alles IRL",
+            "conditions": {
+                "Win Type": requireEV(538);
+                "Answer Check": true,
+                "Establishment Use": endingstuff["Establishment Use"],
+                "Running Mate": e.running_mate_last_name
+            },
+			"ending text": `
+			<style>
+				.tv-broadcast-container {
+					font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+					background-color: #1a1a1a;
+					color: #e0e0e0;
+					max-width: 800px;
+					margin: 30px auto;
+					border: 2px solid #333;
+					box-shadow: 0 0 20px rgba(0,0,0,0.5);
+					position: relative;
+					overflow: hidden;
+				}
+
+				.broadcast-header {
+					background: linear-gradient(90deg, #003366 0%, #005a9c 100%);
+					color: #fff;
+					padding: 15px;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					border-bottom: 2px solid #ffd700;
+				}
+
+				.station-logo {
+					font-weight: 900;
+					font-size: 1.5rem;
+					letter-spacing: -1px;
+					text-transform: uppercase;
+					display: flex;
+					align-items: center;
+				}
+
+				.station-logo span {
+					background-color: #ffd700;
+					color: #003366;
+					padding: 2px 6px;
+					margin-right: 8px;
+					border-radius: 3px;
+				}
+
+				.live-indicator {
+					font-size: 0.8rem;
+					font-weight: bold;
+					color: #ff3333;
+					text-transform: uppercase;
+					animation: blink 2s infinite;
+				}
+
+				@keyframes blink {
+					0% { opacity: 1; }
+					50% { opacity: 0.4; }
+					100% { opacity: 1; }
+				}
+
+				.scroll-ticker {
+					background-color: #000;
+					color: #ffd700;
+					padding: 8px;
+					white-space: nowrap;
+					overflow: hidden;
+					font-family: IBM Courier, 'Courier New', monospace;
+					font-weight: bold;
+					font-size: 0.9rem;
+					border-bottom: 1px solid #333;
+				}
+
+				.script-body {
+					padding: 30px;
+					font-size: 1rem;
+					line-height: 1.5;
+				}
+
+				.speaker-label {
+					font-weight: bold;
+					color: #ffd700;
+					text-transform: uppercase;
+					margin-right: 10px;
+					display: inline-block;
+					width: 80px;
+				}
+
+				.host-1 { color: #4db8ff; }
+				.host-2 { color: #ff99cc; }
+				.reporter { color: #66ff66; }
+				.subject { color: #ffff99; }
+
+				.dialogue-line {
+					margin-bottom: 15px;
+					display: flex;
+				}
+
+				.dialogue-text {
+					flex: 1;
+				}
+
+				.scene-description {
+					background-color: #2a2a2a;
+					color: #aaa;
+					padding: 10px;
+					font-style: italic;
+					margin: 20px 0;
+					border-left: 3px solid #555;
+					font-size: 0.9rem;
+				}
+
+				.video-insert {
+					border: 2px solid #ff3333;
+					background-color: #000;
+					padding: 15px;
+					margin: 20px 0;
+				}
+
+				.video-label {
+					color: #ff3333;
+					font-weight: bold;
+					text-transform: uppercase;
+					font-size: 0.8rem;
+					margin-bottom: 10px;
+					display: block;
+				}
+			</style>
+
+			<div class="tv-broadcast-container">
+
+				<div class="broadcast-header">
+					<div class="station-logo"><span>CNT</span> California National Television</div>
+					<div class="live-indicator">● LIVE</div>
+				</div>
+
+				<div class="scroll-ticker">
+					BREAKING: PRESIDENT BROWN SET TO CELEBRATE 21ST ANNIVERSARY IN OFFICE  +++  GDP GROWTH ESTIMATED AT 8.3%  +++  NEW HIGH SPEED RAIL LINE OPENS
+				</div>
+
+				<div class="script-body">
+
+					<div class="scene-description">
+						(California National Television logo pops up on the screen, as the instrumental to “I Love You, California” plays accompanied by glowing shots of the country from coast to coast)
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-1">Ramona</span>
+						<span class="dialogue-text">Good morning everyone, I’m your host, Ramona Tsoi.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-2">David</span>
+						<span class="dialogue-text">And I’m David Zimmerman, coming to you live from California National Television.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-1">Ramona</span>
+						<span class="dialogue-text">Now, in our first story of the day, President Brown is set to celebrate his 21st anniversary in office with a parade to be held in Sacramento.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-2">David</span>
+						<span class="dialogue-text">That’s right, Ramona. The parade route will begin at the National Zen Buddhist Temple, continue next to the old U.S. Capitol building, move past the White House, and then go along Pat Brown avenue before it ends at the Volkshalle.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-1">Ramona</span>
+						<span class="dialogue-text">Wow, that sounds like a real treat! Attendance is expected to be about five million people, a 20% increase from the crowd for the President’s 20th anniversary celebration, but officials in the capital state that the city’s expanded high-speed rail connections and new metro system will be able to handle the increased traffic.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-2">David</span>
+						<span class="dialogue-text">We’ll be coming to you live that day with an exclusive look at the preparation that goes into the parade, as well as a personal sit-down interview with President Brown. Be sure not to miss it!</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-1">Ramona</span>
+						<span class="dialogue-text">Moving on, now, one of our reporters on the ground has a special report on schools in the state of South Dakota. Take it away, Mark.</span>
+					</div>
+
+					<div class="scene-description">
+						(Voiceover: “South Dakota was the last province to implement the nationally required 30 minute meditation period in its school curriculum until a special government decree in 2002 forced them to adopt it for fear of losing federal funding. Now, twelve years later, we check in on how South Dakotan children feel about getting to clear their mind)
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label reporter">Mark</span>
+						<span class="dialogue-text">I’m in Rapid City, South Dakota, one of the largest towns in the province and the closest major settlement to Mount Bernice. Today, we’ll be taking a walk around Franklin Delano Roosevelt Elementary School, to see how its kids feel about their meditation period.</span>
+					</div>
+
+					<div class="scene-description">
+						(Shots of students in class sitting on yoga mats with their eyes closed and their legs crossed, with the reporter joining in)
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label reporter">Mark</span>
+						<span class="dialogue-text">Hi, I’m Mark, and I’m here with California National Television. What’s your name?</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label subject">Ann</span>
+						<span class="dialogue-text">I’m Ann, Ann Lund.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label reporter">Mark</span>
+						<span class="dialogue-text">And how old are you, Ann?</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label subject">Ann</span>
+						<span class="dialogue-text">Eight!</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label reporter">Mark</span>
+						<span class="dialogue-text">So, you’ve been doing meditation every day in school since you were in kindergarten?</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label subject">Ann</span>
+						<span class="dialogue-text">Yes.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label reporter">Mark</span>
+						<span class="dialogue-text">And how do you like it?</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label subject">Ann</span>
+						<span class="dialogue-text">I think it’s really great. My dad didn’t like us doing it at first, because he didn’t do it when he was a kid, but I just love it so much! When we meditate, I can reach my inner zen, just like our teacher tells us to.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label reporter">Mark</span>
+						<span class="dialogue-text">Wow, impressive. How do you think meditation has helped you?</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label subject">Ann</span>
+						<span class="dialogue-text">It makes me calmer and more able to pay attention in class. It just feels… 100% natural.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label reporter">Mark</span>
+						<span class="dialogue-text">Did you know that lots of kids in other countries don’t get to meditate in school?</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label subject">Ann</span>
+						<span class="dialogue-text">No! Really?</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label reporter">Mark</span>
+						<span class="dialogue-text">Yes, really. What do you think about that?</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label subject">Ann</span>
+						<span class="dialogue-text">It just makes me glad to live in the United States of California. I feel bad for those other kids.</span>
+					</div>
+
+					<div class="scene-description">
+						(Mark interviews other children before the camera cuts to Mark standing outside of the elementary school)
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label reporter">Mark</span>
+						<span class="dialogue-text">That’s what we have right now, but we’re going to go to the high school later to do a report on its jogging club. I’m Mark Ford, and as always, mellow out.</span>
+					</div>
+
+					<div class="scene-description">
+						(Camera cuts back to the studio)
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-2">David</span>
+						<span class="dialogue-text">It’s always great to see Californian schoolkids in action, isn’t it?</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-1">Ramona</span>
+						<span class="dialogue-text">It sure is. Now, for some economic news, yearly GDP growth is estimated to reach 8.3% this year, which leading analysts ascribe to the continued strength of the technology sector as well as widespread infrastructure spending boosting the public sector. The best performing stock of the day yesterday was Uberall, who announced that they would be building a new organic gas plant in the province of Ohio.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-2">David</span>
+						<span class="dialogue-text">And additionally, the new line of the U.S.C. high speed rail system from El Paso to Austin went into effect, meaning that it is now possible to take a coast-to-coast trip without switching to normal gauge tracks. Talks are currently underway with Mexican President Lopez to connect the hub in El Paso to Monterrey, with President Brown saying that he expects an agreement by the end of the week.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-1">Ramona</span>
+						<span class="dialogue-text">Now, we’d like to shift the topic to a much more sensitive issue: political violence. An underground terror cell in Tennessee has been arrested and charged with anti-state activities after they plotted a raid on a National Guard armory. CNT has uncovered footage of their arrest, and we do want to warn you that the following content may not be suitable for all viewers.</span>
+					</div>
+
+					<div class="video-insert">
+						<span class="video-label">▶ BODYCAM FOOTAGE: TN-RAID-042</span>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent</span>
+							<span class="dialogue-text">Clear, suspects in this residence have been detained.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent 2</span>
+							<span class="dialogue-text">Copy. Doing a search of the premises now.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label subject">Terrorist</span>
+							<span class="dialogue-text">You can’t do this to us. Take me, but leave my niece. She’s just in this because of me.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent</span>
+							<span class="dialogue-text">Save it for later, ma’am.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label subject">Niece</span>
+							<span class="dialogue-text">This is… please stop, this is just uncool.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent</span>
+							<span class="dialogue-text">Frankly, miss, you’re the one who’s uncool.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label subject">Niece</span>
+							<span class="dialogue-text">Shut the fuck up, you zen fascist.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent</span>
+							<span class="dialogue-text">Calm down, miss. You’re being taken into custody.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label subject">Niece</span>
+							<span class="dialogue-text">Make me!</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent</span>
+							<span class="dialogue-text">Mellow out! Mellow out, or you will pay! Enough!</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label subject">Terrorist</span>
+							<span class="dialogue-text">Mellow out, just like he said.</span>
+						</div>
+
+						<div class="scene-description" style="background:#111; border:none; color:#777;">
+							(The other agent returns, holding a uniform)
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent 2</span>
+							<span class="dialogue-text">Finished a sweep of the house, and this is what I found hidden behind a painting of a white horse.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent 1</span>
+							<span class="dialogue-text">What is it?</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent 2</span>
+							<span class="dialogue-text">State security service uniform. See, it’s made of suede denim.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent 1</span>
+							<span class="dialogue-text">Trying to impersonate one of our colleagues, huh?</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label subject">Terrorist</span>
+							<span class="dialogue-text">I’m not going to say anything.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent 2</span>
+							<span class="dialogue-text">Oh, don’t worry, you’ll go quietly to the camp. We’ll shower you off, get you some inmate scrubs, and have you before a court in no time at all.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label subject">Niece</span>
+							<span class="dialogue-text">This is bullshit.</span>
+						</div>
+
+						<div class="dialogue-line">
+							<span class="speaker-label" style="color:#aaa;">Agent 1</span>
+							<span class="dialogue-text">Okay, that’s enough, you little clown. Get into the car.</span>
+						</div>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-2">David</span>
+						<span class="dialogue-text">Just absolutely horrible stuff. We’re very lucky that our intelligence averted a domestic terrorist attack on Californian soil.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-1">Ramona</span>
+						<span class="dialogue-text">This is a reminder to all of our viewers that if you see someone acting suspicious, you can always reach out to the authorities. You can make a difference.</span>
+					</div>
+
+					<div class="scene-description" style="text-align: center; color: #ffcc00;">
+						(A number flashes on the screen)
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-2">David</span>
+						<span class="dialogue-text">Now, before we go to commercial break, our next segment will be about the new interior design trend sweeping the nation: the drawstring lamp.</span>
+					</div>
+
+					<div class="dialogue-line">
+						<span class="speaker-label host-1">Ramona</span>
+						<span class="dialogue-text">I can’t wait to talk about this one; my face is becoming happier just thinking about it. Anyway, we’ll be right back after commercials.</span>
+					</div>
+
+					<div class="scene-description">
+						(CNT logo pops up before an ad for Taylor Swift’s new album, 1984, starts playing).
+					</div>
+				</div>
+			</div>
+			`
+		},
         {
             "pk": "Senate Ending Two",
             "conditions": {
