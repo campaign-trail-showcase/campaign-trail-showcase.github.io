@@ -268,8 +268,7 @@
   max-width: 150px;
   margin: 5%;
   display: flex;
-  outline-color: #3d3b46;
-  outline-style: auto;
+  outline: 2px solid #3d3b46;
   justify-content: center;
   text-align: center;
   justify-items: center;
@@ -283,9 +282,7 @@
 .achImageHolder {
   margin: 10%;
   object-fit: cover;
-  outline-color: white;
-  outline-style: auto;
-  outline-width: 10px;
+  outline: 10px solid white;
   position: relative;
 }
 
