@@ -282,7 +282,8 @@
 .achImageHolder {
   margin: 10%;
   object-fit: cover;
-  outline: 10px solid white;
+  border: .3em solid white;
+  border-radius: .3em;
   position: relative;
 }
 
