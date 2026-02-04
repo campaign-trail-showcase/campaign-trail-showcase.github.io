@@ -1845,6 +1845,18 @@ async function loadModFromButton(modValue) {
         linkedMods = ["2024", "2024 Divided States"];
       }
 
+      // update display name if it's not already in the cache
+      function updateDisplayNameFromCode(code, value) {
+        if (!namesOfModsFromValue[value]) {
+          const temp = extractElectionDetails(code, value);
+          if (temp?.election_json?.length > 0 && temp.election_json[0].fields) {
+            namesOfModsFromValue[value] = temp.election_json[0].fields.display_name || temp.election_json[0].fields.title || value;
+          }
+        }
+      }
+
+      updateDisplayNameFromCode(modCode, modValue);
+
       for (const linkedMod of linkedMods) {
         if (linkedMod === modValue) continue;
 
@@ -1854,6 +1866,8 @@ async function loadModFromButton(modValue) {
             if (linkedRes.ok) {
               const linkedCode = await linkedRes.text();
               getAllAchievements(linkedCode, linkedMod);
+              getCustomTheme(linkedCode, linkedMod);
+              updateDisplayNameFromCode(linkedCode, linkedMod);
             }
           } catch (e) {
             console.error(`Error loading linked achievements for ${linkedMod}:`, e);
