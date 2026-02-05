@@ -73101,6 +73101,18 @@ var resetPage = false
                 e.image = 'https://i.imgur.com/0UCVgP3.png ';
             }]);
         }
+        else if (out == "win" && veep == 2 
+        && e.player_answers.includes(13977) || e.player_answers.includes(13993) ) {//connally + Bush UN + win
+            e.pages.push(`<div class="ending-slide">
+                <h3 style="text-align: center;">
+                <span style="font-size: 24px; text-decoration: underline;">November 30, 1973</span>
+                </h3>
+               COLSON: Anyway, Mr. President, I just wanted to let you know about something I’ve observed here.<br><br>NIXON: What is it, Chuck?<br><br>COLSON: Well it’s with Bush, sir, I know he’s treasury secretary, and that he’s been very involved in talks with OPEC and-<br><br>NIXON: Oh, no I know about all that Chuck, it’s fine, I gave him the all clear. He’s got good relations with those Saudis and the other Arab states. He was an oilman you know? So I figured he’d be good to have as an envoy.<br><br>COLSON: No, I understand that part, sir, it’s not that he’s talking to him. It’s that his, ah, his kid is.<br><br>NIXON: What?<br><br>COLSON: Yeah. His son is the one doing all that shuttle diplomacy.<br><br>NIXON: What the hell? Well, wait, then where’s George when he says he’s going to the Middle East?<br><br>COLSON: Well he does go, sir, he’s in the papers photographed in Riyadh and all that-<br><br>NIXON: Right.<br><br>COLSON: -but uh, he, well, we’ve been tailing him, and he’s been taking this woman with him. Not his wife, this woman, Fitzgerald, something, let me see my notes here-<br><br>NIXON: Oh my God. Oh my God.<br><br>COLSON: Jennifer Fitzgerald, yeah that’s it. She’s an aide at Treasury, her official role is unclear, but yes, when they go on these trips, Bush, Bush Sr. I mean, he stays in his hotel the whole time with this woman.<br><br>NIXON: Jesus Christ. Is this a goddamn joke? Oh my God.<br><br>COLSON: No, sir.<br><br>NIXON: Ok. Christ. Okay. So then, hold on, then his son is the one talking with the Saudis? About the oil embargo?<br><br>COLSON: Yes, sir. He’s a student at Harvard Business School-<br><br>NIXON: This can’t be fucking real.<br><br>COLSON: -working on setting up this oil company, they don’t have a name yet, but with one of his Air National Guard buddies. Guy named James Bath. Interesting character actually, this Bath figure is a representative for a big Saudi construction firm, he’s been getting funds from them. Name’s something like-<br><br>NIXON: So the Saudis trust this kid?<br><br>COLSON: Oh, yes sir. Entirely. They think they’re getting a deal of a lifetime here. They nod along to whatever State tells them and then cut side deals with the Bush kid. It seems almost certainly illegal-<br><br>NIXON: I don’t give a damn about that. The point is that it’s Goddamn embarrassing. This snot-nosed son-of-a-bitch, makes me sick. What can we do about it?<br><br>COLSON: That’s why I came to see you sir. If we yank him out, the Saudis will walk, and the embargo will go on. And we can’t let Bush or his kid know we know.<br><br>NIXON: Right.<br><br>COLSON: But he’s doing all this shuttle diplomacy, spending a lot of time up in the sky, in that plane. Which, ah, maybe I should discuss this with you somewhere else.<br><br>[END OF TAPE]
+            `);
+            e.executable.push([2, () => {
+                e.image = 'https://i.imgur.com/m42n8pD.png';
+            }]);
+        }
         else if (out == "win" && dem == 1) {//win + mccarthy
             e.pages.push(`<div class="ending-slide">
                 <h3 style="text-align: center;">
@@ -73394,29 +73406,6 @@ var resetPage = false
             }]);
         }
 
-        else if (out == "win" && veep == 2 
-        && e.player_answers.includes(13977) || e.player_answers.includes(13993) ) {//connally + Bush UN + win
-            e.pages.push(`<div class="ending-slide">
-                <h3 style="text-align: center;">
-                <span style="font-size: 24px; text-decoration: underline;">November 30, 1973</span>
-                </h3>
-               COLSON: Anyway, Mr. President, I just wanted to let you know about something I’ve observed here.<br><br>NIXON: What is it, Chuck?<br><br>COLSON: Well it’s with Bush, sir, I know he’s treasury secretary, and that he’s been very involved in talks with OPEC and-<br><br>NIXON: Oh, no I know about all that Chuck, it’s fine, I gave him the all clear. He’s got good relations with those Saudis and the other Arab states. He was an oilman you know? So I figured he’d be good to have as an envoy.<br><br>COLSON: No, I understand that part, sir, it’s not that he’s talking to him. It’s that his, ah, his kid is.<br><br>NIXON: What?<br><br>COLSON: Yeah. His son is the one doing all that shuttle diplomacy.<br><br>NIXON: What the hell? Well, wait, then where’s George when he says he’s going to the Middle East?<br><br>COLSON: Well he does go, sir, he’s in the papers photographed in Riyadh and all that-<br><br>NIXON: Right.<br><br>COLSON: -but uh, he, well, we’ve been tailing him, and he’s been taking this woman with him. Not his wife, this woman, Fitzgerald, something, let me see my notes here-<br><br>NIXON: Oh my God. Oh my God.<br><br>COLSON: Jennifer Fitzgerald, yeah that’s it. She’s an aide at Treasury, her official role is unclear, but yes, when they go on these trips, Bush, Bush Sr. I mean, he stays in his hotel the whole time with this woman.<br><br>NIXON: Jesus Christ. Is this a goddamn joke? Oh my God.<br><br>COLSON: No, sir.<br><br>NIXON: Ok. Christ. Okay. So then, hold on, then his son is the one talking with the Saudis? About the oil embargo?<br><br>COLSON: Yes, sir. He’s a student at Harvard Business School-<br><br>NIXON: This can’t be fucking real.<br><br>COLSON: -working on setting up this oil company, they don’t have a name yet, but with one of his Air National Guard buddies. Guy named James Bath. Interesting character actually, this Bath figure is a representative for a big Saudi construction firm, he’s been getting funds from them. Name’s something like-<br><br>NIXON: So the Saudis trust this kid?<br><br>COLSON: Oh, yes sir. Entirely. They think they’re getting a deal of a lifetime here. They nod along to whatever State tells them and then cut side deals with the Bush kid. It seems almost certainly illegal-<br><br>NIXON: I don’t give a damn about that. The point is that it’s Goddamn embarrassing. This snot-nosed son-of-a-bitch, makes me sick. What can we do about it?<br><br>COLSON: That’s why I came to see you sir. If we yank him out, the Saudis will walk, and the embargo will go on. And we can’t let Bush or his kid know we know.<br><br>NIXON: Right.<br><br>COLSON: But he’s doing all this shuttle diplomacy, spending a lot of time up in the sky, in that plane. Which, ah, maybe I should discuss this with you somewhere else.<br><br>[END OF TAPE]
-            `);
-            e.executable.push([2, () => {
-                e.image = 'https://i.imgur.com/m42n8pD.png';
-            }]);
-        }
-        else if (out == "tie" ) {//generic contingent
-            e.pages.push(`<div class="ending-slide">
-                <h3 style="text-align: center;">
-                <span style="font-size: 24px; text-decoration: underline;">January 3, 1973</span>
-                </h3>
-                <i>The Election of 1972 left the United States with the first contingent election in almost 150 years. As the House went through round after round of ballots and Inauguration Day approached, President Nixon and his aides grew increasingly impatient with the lack of progress. This tape—found after Nixon’s death—reveals how far Nixon was willing to go to secure his victory. </i><br><br>HALDEMAN: This business with Congress—.<br><br>NIXON: It just won’t end. <br><br>HALDEMAN: We’ve been doing some outreach to members of the House for—.<br><br>NIXON: What? The Democrats? <br><br>HALDEMAN: Yeah.<br><br>NIXON: Jesus. We’re getting fucked by Albert.<br><br>HALDEMAN: I know.<br><br>NIXON: Who thought the whiny S.O.B.—? <br><br>HALDEMAN: I expect he’s under some pressure from the liberals in his camp. They don’t want to cede any ground.<br><br>NIXON: Cede ground? This isn’t a—. Do they think they’re playing a game? I mean, my God. The country’s going to hell and the cocksuckers are stretching this out as long as they can. It’s madness. It’s absolute madness. The Soviets, the Chinese, the French. They’re laughing at us. <br><br>HALDEMAN: I’ve thought the same.<br><br>NIXON: [Inaudible] bastards. What are our other options?<br><br>HALDEMAN: Well, we could try to run out the clock and let—.<br><br>NIXON: Absolutely not an option.<br><br>HALDEMAN: OK. Well, there’s always the Southerners, but doing that could compromise our approach on—.<br><br>NIXON: I don’t give a shit. We gave reason a chance and look where it landed us. If Albert and his people don’t think we have the guts to do what we’re doing, they’re in for a rude awakening. Set up the meetings. Get Ziegler and the rest to play interference. I’ll split the baby if that’s what it takes.<br><br>HALDEMAN: Of course, Mr. President.<br><br>NIXON: Absolutely disgraceful. <br><br>
-            `);
-            e.executable.push([2, () => {
-                e.image = 'https://i.imgur.com/7yebpEA.png ';
-            }]);
-        }
         else if (out == "tie" && dem == 7) {//Muskie contingent
             e.pages.push(`<div class="ending-slide">
                 <h3 style="text-align: center;">
@@ -73437,6 +73426,17 @@ var resetPage = false
             `);
             e.executable.push([2, () => {
                 e.image = 'https://i.imgur.com/IWFwyt8.jpeg ';
+            }]);
+        }
+        else if (out == "tie" ) {//generic contingent
+            e.pages.push(`<div class="ending-slide">
+                <h3 style="text-align: center;">
+                <span style="font-size: 24px; text-decoration: underline;">January 3, 1973</span>
+                </h3>
+                <i>The Election of 1972 left the United States with the first contingent election in almost 150 years. As the House went through round after round of ballots and Inauguration Day approached, President Nixon and his aides grew increasingly impatient with the lack of progress. This tape—found after Nixon’s death—reveals how far Nixon was willing to go to secure his victory. </i><br><br>HALDEMAN: This business with Congress—.<br><br>NIXON: It just won’t end. <br><br>HALDEMAN: We’ve been doing some outreach to members of the House for—.<br><br>NIXON: What? The Democrats? <br><br>HALDEMAN: Yeah.<br><br>NIXON: Jesus. We’re getting fucked by Albert.<br><br>HALDEMAN: I know.<br><br>NIXON: Who thought the whiny S.O.B.—? <br><br>HALDEMAN: I expect he’s under some pressure from the liberals in his camp. They don’t want to cede any ground.<br><br>NIXON: Cede ground? This isn’t a—. Do they think they’re playing a game? I mean, my God. The country’s going to hell and the cocksuckers are stretching this out as long as they can. It’s madness. It’s absolute madness. The Soviets, the Chinese, the French. They’re laughing at us. <br><br>HALDEMAN: I’ve thought the same.<br><br>NIXON: [Inaudible] bastards. What are our other options?<br><br>HALDEMAN: Well, we could try to run out the clock and let—.<br><br>NIXON: Absolutely not an option.<br><br>HALDEMAN: OK. Well, there’s always the Southerners, but doing that could compromise our approach on—.<br><br>NIXON: I don’t give a shit. We gave reason a chance and look where it landed us. If Albert and his people don’t think we have the guts to do what we’re doing, they’re in for a rude awakening. Set up the meetings. Get Ziegler and the rest to play interference. I’ll split the baby if that’s what it takes.<br><br>HALDEMAN: Of course, Mr. President.<br><br>NIXON: Absolutely disgraceful. <br><br>
+            `);
+            e.executable.push([2, () => {
+                e.image = 'https://i.imgur.com/7yebpEA.png ';
             }]);
         }
         else if (out == "win" && dem == 2 && e.player_answers.includes(14973)) {//win + yort + partridge
@@ -73930,7 +73930,7 @@ line0 = ['<div class="ending-slide"><h3 style="text-align: center;"><span style=
             `Nixon's spirit will be with us for the rest of our lives – whether you're me or Kurt Cobain or you or Bishop Tutu or Pamela Anderson or your fiancee's 16-year-old beer-drunk brother with his braided goatee and his whole life like a thundercloud out in front of him. This is not a generational thing. A shard of Nixon's ugly, Nazi spirit is embedded in all of our hearts.<br><br>He has poisoned our water forever. Nixon will be remembered as a classic case of a smart man shitting in his own nest. But he also shit in our nests, and that was the crime that history will burn on his memory like a brand. By disgracing and degrading the Presidency of the United States, by fleeing the White House like a diseased cur, Richard Nixon broke the heart of the American Dream.<br><br>`
         ];
     }   else if(
-             (out == "win" || out == "tie")
+             (out == "loss" || out == "tie")
         ) // loss
          {
         line15 = [
@@ -73964,7 +73964,7 @@ line0 = ['<div class="ending-slide"><h3 style="text-align: center;"><span style=
         <p>${line7[choice7Index]}</p>
         <p>${line8[choice8Index]}</p>
         <p>${line9[choice9Index]}</p>
-        <p>${line10[choice11Index]}</p>  
+        <p>${line10[choice10Index]}</p>  
         <p>${line11[choice11Index]}</p>   
         <p>${line12[choice12Index]}</p>  
         <p>${line13[choice13Index]}</p>
