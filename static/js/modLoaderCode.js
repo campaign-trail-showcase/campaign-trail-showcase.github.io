@@ -751,9 +751,13 @@ const failedIconUrls = {};
 // when testing CTS in forks, the award icons may not be available
 // so we provide an alternative URL to load them from
 function getAlternativeIconUrl(url) {
-  if (url.includes('/static/dba2024/')) {
-    const fileName = url.split('/').pop();
-    return `https://raw.githubusercontent.com/campaign-trail-showcase/campaign-trail-showcase.github.io/refs/heads/main/static/dba2024/${fileName}`;
+  if (url.includes('/static/dba')) {
+    const parts = url.split('/');
+    const dbaFolder = parts.find(p => p.startsWith('dba'));
+    const fileName = parts.pop();
+    if (dbaFolder && fileName) {
+      return `https://raw.githubusercontent.com/campaign-trail-showcase/campaign-trail-showcase.github.io/refs/heads/main/static/${dbaFolder}/${fileName}`;
+    }
   }
   return null;
 }
@@ -1173,9 +1177,21 @@ function renderAwards(awards, rawAwardUrls) {
 
 function cycleAwards(holder, index) {
   // ensure the element is still part of the page
-  if (!holder || !holder.isConnected) {
-    // TODO: Commented out for now because we need to add logic to check if a mod is *now* part of the page again and cycle the award images if so
-    // return;
+  if (!holder) {
+    return;
+  }
+
+  // clear any existing timeout to prevent multiple loops
+  if (holder._awardCycleTimeout) {
+    clearTimeout(holder._awardCycleTimeout);
+    holder._awardCycleTimeout = null;
+  }
+
+  // if not connected, we stop cycling - unless it's in a document fragment
+  if (!holder.isConnected && holder.getRootNode().nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
+    holder.dataset.cycleIndex = index;
+    holder.dataset.isCycling = "false";
+    return;
   }
 
   const images = holder.querySelectorAll(".mod-trophy");
@@ -1183,11 +1199,14 @@ function cycleAwards(holder, index) {
     return; // no need to cycle if there's only one image
   }
 
+  holder.dataset.isCycling = "true";
+  holder.dataset.cycleIndex = index;
+
   images[index].style.opacity = '0';
   const nextIndex = (index + 1) % images.length;
   images[nextIndex].style.opacity = '1';
 
-  setTimeout(() => {
+  holder._awardCycleTimeout = setTimeout(() => {
     cycleAwards(holder, nextIndex);
   }, 2000);
 }
@@ -1481,6 +1500,14 @@ function updateModViews(event) {
         const img = modView.querySelector(".mod-image");
         if (img) img.src = img.getAttribute("data-src") || img.src;
         fragment.appendChild(modView);
+
+        // restart award cycling if needed
+        const trophyHolder = modView.querySelector(".trophy-holder");
+        if (trophyHolder) {
+          const lastIndex = parseInt(trophyHolder.dataset.cycleIndex) || 0;
+          cycleAwards(trophyHolder, lastIndex);
+        }
+
         getFavsAndPlayCount(modView.getAttribute("mod-name"), modView);
       });
       modGrid.appendChild(fragment);
@@ -1522,6 +1549,14 @@ function updateModViews(event) {
         img.src = img.getAttribute("data-src") || img.src;
       }
       fragment.appendChild(modView);
+
+      // restart award cycling if needed
+      const trophyHolder = modView.querySelector(".trophy-holder");
+      if (trophyHolder) {
+        const lastIndex = parseInt(trophyHolder.dataset.cycleIndex) || 0;
+        cycleAwards(trophyHolder, lastIndex);
+      }
+
       // lazy load mod info
       getFavsAndPlayCount(modView.getAttribute("mod-name"), modView);
     });
