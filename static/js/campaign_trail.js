@@ -4067,8 +4067,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "#play_again_button": () => beginNewGameHtml(),
   };
 
+  const handlerEntries = Object.entries(handlers);
+
   document.body.addEventListener("click", (event) => {
-    Object.entries(handlers).some(([selector, handler]) => {
+    handlerEntries.some(([selector, handler]) => {
       if (event.target.matches(selector)) {
         event.preventDefault();
         if (handler.length === 1) handler(event);

@@ -751,9 +751,13 @@ const failedIconUrls = {};
 // when testing CTS in forks, the award icons may not be available
 // so we provide an alternative URL to load them from
 function getAlternativeIconUrl(url) {
-  if (url.includes('/static/dba2024/')) {
-    const fileName = url.split('/').pop();
-    return `https://raw.githubusercontent.com/campaign-trail-showcase/campaign-trail-showcase.github.io/refs/heads/main/static/dba2024/${fileName}`;
+  if (url.includes('/static/dba')) {
+    const parts = url.split('/');
+    const dbaFolder = parts.find(p => p.startsWith('dba'));
+    const fileName = parts.pop();
+    if (dbaFolder && fileName) {
+      return `https://raw.githubusercontent.com/campaign-trail-showcase/campaign-trail-showcase.github.io/refs/heads/main/static/${dbaFolder}/${fileName}`;
+    }
   }
   return null;
 }
@@ -935,13 +939,17 @@ $(document).ready(async () => {
 
   // Set up from normal mods
   const modPromises = Array.from(mods).map(async (mod) => {
-    // MODIFIED: logic to load both mods when needed
+    const targetMod = getUrlParam("modName");
+    const isLinked = targetMod && typeof expandFavoriteSet === 'function' && expandFavoriteSet(new Set([targetMod])).has(mod.value);
+    const isDSAClassicLink = targetMod === "2024" && mod.value === "2024 Divided States" || targetMod === "2024 Divided States" && mod.value === "2024";
+
+    // logic to load both mods when needed
     if (
       mod.value === "other" ||
       ( // Special case for DSA because it uses two code 1s to define achievements. So we need to load both of those to get both sets.
-        getUrlParam("modName") != null &&
-        getUrlParam("modName") != mod.value &&
-        !(getUrlParam("modName") === "2024" && mod.value === "2024 Divided States")
+        targetMod != null &&
+        targetMod != mod.value &&
+        !isLinked && !isDSAClassicLink
       )
     ) {
       allModsLength--;
@@ -1169,9 +1177,21 @@ function renderAwards(awards, rawAwardUrls) {
 
 function cycleAwards(holder, index) {
   // ensure the element is still part of the page
-  if (!holder || !holder.isConnected) {
-    // TODO: Commented out for now because we need to add logic to check if a mod is *now* part of the page again and cycle the award images if so
-    // return;
+  if (!holder) {
+    return;
+  }
+
+  // clear any existing timeout to prevent multiple loops
+  if (holder._awardCycleTimeout) {
+    clearTimeout(holder._awardCycleTimeout);
+    holder._awardCycleTimeout = null;
+  }
+
+  // if not connected, we stop cycling - unless it's in a document fragment
+  if (!holder.isConnected && holder.getRootNode().nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
+    holder.dataset.cycleIndex = index;
+    holder.dataset.isCycling = "false";
+    return;
   }
 
   const images = holder.querySelectorAll(".mod-trophy");
@@ -1179,11 +1199,14 @@ function cycleAwards(holder, index) {
     return; // no need to cycle if there's only one image
   }
 
+  holder.dataset.isCycling = "true";
+  holder.dataset.cycleIndex = index;
+
   images[index].style.opacity = '0';
   const nextIndex = (index + 1) % images.length;
   images[nextIndex].style.opacity = '1';
 
-  setTimeout(() => {
+  holder._awardCycleTimeout = setTimeout(() => {
     cycleAwards(holder, nextIndex);
   }, 2000);
 }
@@ -1477,6 +1500,14 @@ function updateModViews(event) {
         const img = modView.querySelector(".mod-image");
         if (img) img.src = img.getAttribute("data-src") || img.src;
         fragment.appendChild(modView);
+
+        // restart award cycling if needed
+        const trophyHolder = modView.querySelector(".trophy-holder");
+        if (trophyHolder) {
+          const lastIndex = parseInt(trophyHolder.dataset.cycleIndex) || 0;
+          cycleAwards(trophyHolder, lastIndex);
+        }
+
         getFavsAndPlayCount(modView.getAttribute("mod-name"), modView);
       });
       modGrid.appendChild(fragment);
@@ -1518,6 +1549,14 @@ function updateModViews(event) {
         img.src = img.getAttribute("data-src") || img.src;
       }
       fragment.appendChild(modView);
+
+      // restart award cycling if needed
+      const trophyHolder = modView.querySelector(".trophy-holder");
+      if (trophyHolder) {
+        const lastIndex = parseInt(trophyHolder.dataset.cycleIndex) || 0;
+        cycleAwards(trophyHolder, lastIndex);
+      }
+
       // lazy load mod info
       getFavsAndPlayCount(modView.getAttribute("mod-name"), modView);
     });
@@ -1832,6 +1871,44 @@ async function loadModFromButton(modValue) {
 
       getAllAchievements(modCode, modValue);
       getCustomTheme(modCode, modValue);
+
+      // fetch achievements for linked mods if they aren't already loaded
+      let linkedMods = [modValue];
+      if (typeof expandFavoriteSet === 'function') {
+        linkedMods = Array.from(expandFavoriteSet(new Set([modValue])));
+      } else if (modValue === "2024" || modValue === "2024 Divided States") {
+        linkedMods = ["2024", "2024 Divided States"];
+      }
+
+      // update display name if it's not already in the cache
+      function updateDisplayNameFromCode(code, value) {
+        if (!namesOfModsFromValue[value]) {
+          const temp = extractElectionDetails(code, value);
+          if (temp?.election_json?.length > 0 && temp.election_json[0].fields) {
+            namesOfModsFromValue[value] = temp.election_json[0].fields.display_name || temp.election_json[0].fields.title || value;
+          }
+        }
+      }
+
+      updateDisplayNameFromCode(modCode, modValue);
+
+      for (const linkedMod of linkedMods) {
+        if (linkedMod === modValue) continue;
+
+        if (!allAch[linkedMod]) {
+          try {
+            const linkedRes = await fetch(`../static/mods/${linkedMod}_init.html`);
+            if (linkedRes.ok) {
+              const linkedCode = await linkedRes.text();
+              getAllAchievements(linkedCode, linkedMod);
+              getCustomTheme(linkedCode, linkedMod);
+              updateDisplayNameFromCode(linkedCode, linkedMod);
+            }
+          } catch (e) {
+            console.error(`Error loading linked achievements for ${linkedMod}:`, e);
+          }
+        }
+      }
 
       executeMod(modCode, {
         campaignTrail_temp,
