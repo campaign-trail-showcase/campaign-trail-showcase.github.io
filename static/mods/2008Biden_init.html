@@ -29,7 +29,7 @@ campaignTrail_temp.election_json = [
         "pk": 9,
         "fields": {
             "year": 2000,
-            "summary": "<div style='overflow-y:scroll;height:200px;'><p>8 turbulent years under George W. Bush have left America polarized, as issues such as the Iraq War and the staggering economy ominously loom over the 2008 presidential election while the Democrats seem poised to take back the White House.</p><ul><li>Joseph R. Biden represents the ideological center, and foreign policy conscious of the Democratic Party, and hopes to win by attacking his other opponents in the primaries and offering change from the unpopular Bush.</li><p><li>John S. McCain must differentiate himself from a slate of conservative challengers while making sure his maverick positions seem palatable to most GOP voters and to emphasize that he is different from the current President.</li></ul></p>",
+            "summary": "<div style='overflow-y:auto; height:190px'><p>8 turbulent years under George W. Bush have left America polarized, as issues such as the Iraq War and the staggering economy ominously loom over the 2008 presidential election while the Democrats seem poised to take back the White House.</p><ul><li>Joseph R. Biden represents the ideological center, and foreign policy conscious of the Democratic Party, and hopes to win by attacking his other opponents in the primaries and offering change from the unpopular Bush.</li><p><li>John S. McCain must differentiate himself from a slate of conservative challengers while making sure his maverick positions seem palatable to most GOP voters and to emphasize that he is different from the current President.</li></ul></p></div>",
             "image_url": "https://paul-david-wellstone.neocities.org/bidone.png",
             "winning_electoral_vote_number": 270,
             "advisor_url": "https://i.postimg.cc/DZxB9KTL/gdsgfask-(1).jpg",
@@ -452,13 +452,11 @@ campaignTrail_temp.running_mate_json = [
 
 campaignTrail_temp.credits = "<button onclick='credits()'>Ryker & Others</button>"
 
-credits = function() {
-credits = [ "Lead Developer:", "Ryker", " ", "Coders:", "Paul David Wellstone", "StrawberryMaster", "theanswerisme", " ", "Writers:", "ThatQuayleSimp", "theanswerisme", "PingPongProductions", "Junior", "Person", " ", "Editor:", "TaviTales", " ", "Version:", "Release 1.0",]
-text = "CREDITS AND GAME VERSION:\n\n"
-for (i in credits) {
-    text += credits[i] + "\n"
-}
-alert(text)
+window.credits = function () {
+    const creditsList = ["Lead Developer:", "Ryker", " ", "Writers:", "ThatQuayleSimp", "theanswerisme", "PingPongProductions", " ", "Coders:", "Paul David Wellstone", "StrawberryMaster", "theanswerisme", " ", "Playtesters:", "Friedrich Oswald", "Junior", "Person", " ", "Editor:", "TaviTales",]
+    const text = "BIDEN '08 CREDITS:\n\n" + creditsList.join('\n');
+
+    alert(text);
 }
 
 campaignTrail_temp.opponents_default_json = [
@@ -543,24 +541,13 @@ document.head.innerHTML += `<style>
 
 function addDynamicCSS() {
 	var css = `
-		#final_results_description h3 {
-			color: white;
+		#final_results_description h3, #overall_details_container h3, .inner_window_w_desc h3  {
+			color: #fff;
 		}
-		#overall_details_container h3 {
-			color: white;
-		}
-		#overall_election_details h4 {
+		#overall_election_details h, #main_content_area_reading p, #main_content_area_reading h3.results_tab_header {
 			color: #000;
 		}
-		#main_content_area_reading p {
-			color: white;
-		}
-		#main_content_area_reading h3.results_tab_header {
-			color: black;
-		}
-		.inner_window_w_desc h3 {
-			color: white;
-		}
+		
 * so that answers work for 98/XP/7.css */
 label {
     display: inline-block !important;
@@ -652,6 +639,19 @@ input[type=radio]+label {
 		blockquote  {
             background: linear-gradient( 140deg, #FFF2F2, #FDF8F8 );
         }
+			
+		.inner_window_sign_display {
+			height: auto;
+		    border-radius: 0 0 5px 5px;
+		}
+		
+		.inner_window_question {
+			border-radius: 0 0 5px 5px;
+		}
+		
+		#game_window {
+			border-color: #8586c0;
+		}
 				
         .mytooltip .mytooltiptext {
             width: 240px;

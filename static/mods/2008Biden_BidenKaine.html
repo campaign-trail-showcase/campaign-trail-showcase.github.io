@@ -27837,14 +27837,28 @@ const _patchVPDebateQ360 = (vp) => {
   const last = String(vp.fields.last_name || "").trim();
   const full = `${first} ${last}`.trim();
 
-  const replaceForVP = (s) => {
+  const isFemale = ["Sebelius"].includes(last);
+
+  const replaceForVP = (s, skipPronouns = false) => {
     if (typeof s !== "string" || !s) return s;
 
     let out = s;
 
     out = out.replace(/\bTim Kaine\b/g, full);
-
     out = out.replace(/\bKaine\b/g, last);
+
+    if (isFemale && !skipPronouns) {
+        out = out.replace(/\bhe\b/g, "she");
+        out = out.replace(/\bHe\b/g, "She");
+        
+        out = out.replace(/\bhis\b/g, "her");
+        out = out.replace(/\bHis\b/g, "Her");
+        
+        out = out.replace(/\bhim\b/g, "her");
+        out = out.replace(/\bHim\b/g, "Her");
+        
+        out = out.replace(/\bhimself\b/g, "herself");
+    }
 
     return out;
   };
@@ -27855,10 +27869,14 @@ const _patchVPDebateQ360 = (vp) => {
   }
 
   const debateAnswerPks = new Set();
+  
   if (Array.isArray(e.answers_json)) {
     for (const a of e.answers_json) {
       if (a && a.fields && a.fields.question === 360 && typeof a.fields.description === "string") {
-        a.fields.description = replaceForVP(a.fields.description);
+        
+        const shouldSkipPronouns = (a.pk === 13318);
+
+        a.fields.description = replaceForVP(a.fields.description, shouldSkipPronouns);
         debateAnswerPks.add(a.pk);
       }
     }
@@ -28032,11 +28050,9 @@ cyoAdventure = function(a) {
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto; 
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28061,11 +28077,9 @@ cyoAdventure = function(a) {
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto; 
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28090,11 +28104,9 @@ cyoAdventure = function(a) {
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto; 
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28119,11 +28131,9 @@ cyoAdventure = function(a) {
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto; 
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28148,11 +28158,9 @@ cyoAdventure = function(a) {
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto; 
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28177,11 +28185,9 @@ cyoAdventure = function(a) {
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto; 
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28206,11 +28212,9 @@ cyoAdventure = function(a) {
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto; 
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28235,11 +28239,9 @@ cyoAdventure = function(a) {
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto; 
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28321,7 +28323,7 @@ cyoAdventure = function(a) {
 				border-width: .01em;
 				margin: 0 auto;
 				background-position: center;
-				width: 100%; 
+				width: auto; 
 				height: 128px;
 				margin: 0 auto;
 				margin-left: -0.033em;
@@ -28623,7 +28625,7 @@ style.textContent =
     border-width: .01em;
     margin: 0 auto;
     background-position: center;
-    width: 100%; 
+    width: auto; 
     height: 128px;
     margin: 0 auto;
     margin-left: -0.033em;
