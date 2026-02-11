@@ -2191,15 +2191,6 @@ cyoAdventure = function (a) {
     if (ans == 80142) {
         polis += 1
     }
-    if (ans == 600671) {
-        congress = "GOP";
-    }
-    if (ans == 600672) {
-        congress = "Dem";
-        wins += 1;
-        console.log("Patriotic?")
-        console.log(bipartisanmeter)
-    }
     if (campaignTrail_temp.question_number === 43) {
         if (trumpvp == "Doug Burgum") {
             if (demvp == "John Carney") {
@@ -4395,7 +4386,7 @@ cyoAdventure = function (a) {
                  "<p></p>"]
         */
 
-        if (out == "win" && demcandidate == "Kamala Harris" && aa[0].electoral_votes == 287 && aa[0].electoral_votes == 251 && aa[0].candidate == 200) {
+        if (out == "win" && demcandidate == "Kamala Harris" && aa[0].electoral_votes == 287 && aa[0].electoral_votes == 251 && aa[0].candidate == 201) {
             unlockAchievement("Finality")
             e.header = "<h2>Congratulations! You have unlocked the True Ending to 2024.</h2>";
             e.pages = [
@@ -4605,7 +4596,7 @@ cyoAdventure = function (a) {
             return construct(0);
         }
         else if (demcandidate == "Dean Phillips" && out == "win" && demvp == "Hillary Clinton") {
-            unlockAchievement("Interstellar Retribution")
+            unlockAchievement("Powerful Resilience")
             e.header = "<h2><style>p { color: black; }</style>2028 United States presidential election</h2>"
             e.pages = ["<p><style>p { color: black; }</style><div style='max-height: 215px; overflow-y: auto; text-align: left; padding: 0px; margin: 0px, line-height: 1.4;'><p style='margin-left: 7px; color: black;'>The 2028 United States presidential election was the 61st quadrennial presidential election, held on Tuesday, November 7, 2028.[a] The Republican ticket of Donald Trump Jr. and junior U.S. Senator from Texas Eric Johnson defeated the Democratic ticket of incumbent vice president Hillary Clinton and Representative Mondaire Jones.[9] The election was the sixth in which the winning candidate lost the popular vote, the third instance in which a child of a former President was elected President, the second in which an incumbent President seeking renomination failed to win their parties nomination, and the first in which a candidate who had previously won the popular vote won the popular vote again without winning the election.</p><p>Following the 2025 pardon of Donald Trump and a historically large defeat in the 2026 midterms, incumbent President Dean Phillips was widely ostracized from his own party, culminating in Vice President Hillary Clinton challenging the President in the 2028 Democratic primary, among others. After a lengthy primary and eventual defeat, President Phillips left the Democratic party, a move which many say helped Clinton in the election. In the 2028 Republican Primary, businessman and son of former President Donald Trump Donald Trump Jr. defeated Speaker of the House Kevin Hern and former UN ambassador Nikki Haley.</p><p>The election campaign was widely seen as a battle of personalities, with both candidates having the lowest approval rating of any Presidential candidate in modern American History. Clinton’s two past Presidential campaigns were a frequent focus of attack by the Trump Jr. campaign, with the supposed nepotism of Trump’s nomination a leading attack from Democratic forces. On election day, Trump’s victory was met with nationwide riots and a slump in American markets.</p><p>Ending 21 of 50.</p>"]
             e.image = "https://i.imgur.com/Lm2JtOs.png";
