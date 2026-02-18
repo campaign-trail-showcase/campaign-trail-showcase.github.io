@@ -158,16 +158,24 @@ function mapCache(skip = false) {
       return false;
     }
   }
-  $("#map_container").remove();
-  $("#main_content_area").html(
-    '<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>',
-  );
-  $("#main_content_area")[0].style.display = "";
 
   const rr = A(2);
   window.rFuncRes = rFunc(rr, 0);
-  $("#map_container").usmap(window.rFuncRes);
-  $("#main_content_area")[0].style.display = "none";
+
+  const $mapContainer = $("#map_container");
+  if ($mapContainer.length > 0 && $mapContainer.data("plugin-usmap")) {
+    updateUsMapStyles(window.rFuncRes);
+  } else {
+    $mapContainer.remove();
+    $("#main_content_area").html(
+      '<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>',
+    );
+    $("#map_container").usmap(window.rFuncRes);
+  }
+
+  if ($("#main_content_area")[0]) {
+    $("#main_content_area")[0].style.display = "none";
+  }
 
   return true;
 }
@@ -1338,6 +1346,28 @@ function questionHTML() {
   ports.innerHTML = l;
   gameWindow.appendChild(ports);
 
+  e.code2Loaded = true;
+
+  const $answerButton = $("#answer_select_button");
+  $answerButton.off('click').on('click', (evt) => {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+    onAnswerSelectButtonClicked(evt);
+  });
+
+  $("#view_electoral_map").off("click").on("click", (evt) => {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+    openMap(A(2));
+  });
+
+  if (Number(e.game_type_id) === 3) {
+    $("#shining_menu_button").off("click").on("click", (evt) => {
+      evt.preventDefault();
+      shining_menu(A(2));
+    });
+  }
+
   // $("#game_window").html(l)
 }
 
@@ -1476,6 +1506,7 @@ function updateUsMapStyles(config) {
     "stateSpecificStyles",
     "stateSpecificHoverStyles",
     "click",
+    "mouseover",
   ];
 
   for (const option of options) {
@@ -2178,31 +2209,7 @@ function renderOptions(electionId, candId, runId) {
       difficulty_level_id: Number(campaignTrail_temp.difficulty_level_id),
       game_start_logging_id: Number(campaignTrail_temp.game_start_logging_id),
     });
-    // Set up the interval for adding event listeners
-    const important_code = setInterval(() => {
-      const answerButton = document.querySelector("#answer_select_button");
-      if (answerButton) {
-        // Use jQuery's off() to remove all click handlers
-        const $answerButton = $(answerButton);
-        $answerButton.off('click');
 
-        // Add the click handler using jQuery
-        $answerButton.on('click', (e) => {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          onAnswerSelectButtonClicked(e);
-        });
-
-        // Set up map view click handler
-        $("#view_electoral_map").off("click").on("click", (e) => {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          openMap(A(2));
-        });
-
-        clearInterval(important_code);
-      }
-    }, 1000);
     const tempFuncO = (e) => {
       if (e.collect_results) {
         const a = A(2);
@@ -2239,36 +2246,36 @@ function renderOptions(electionId, candId, runId) {
           } else {
             // check memory cache
             let code2 = window.campaignTrail_temp ? window.campaignTrail_temp.custom_code_2 : null;
-            
+
             // check localStorage
             if (!code2) {
-                code2 = localStorage.getItem(`${customMod}_code2`);
+              code2 = localStorage.getItem(`${customMod}_code2`);
             }
-            
+
             // check indexedDB
             if (!code2 && window.getModFromDB) {
-                try {
-                    const modData = await window.getModFromDB(customMod);
-                    if (modData && modData.code2) {
-                        code2 = modData.code2;
-                    }
-                } catch(e) {
-                    console.error("Could not fetch code 2 from DB:", e);
+              try {
+                const modData = await window.getModFromDB(customMod);
+                if (modData && modData.code2) {
+                  code2 = modData.code2;
                 }
+              } catch (e) {
+                console.error("Could not fetch code 2 from DB:", e);
+              }
             }
 
             if (code2) {
-                executeMod(code2, {
-                  campaignTrail_temp,
-                  window,
-                  document,
-                  $,
-                  jQuery
-                });
+              executeMod(code2, {
+                campaignTrail_temp,
+                window,
+                document,
+                $,
+                jQuery
+              });
             } else {
-                console.error("Code 2 was not found for custom mod: " + customMod);
+              console.error("Code 2 was not found for custom mod: " + customMod);
             }
-            
+
             tempFuncO(e);
           }
 
@@ -2666,8 +2673,13 @@ function rFunc(t, i) {
     return acc;
   }, "");
 
+  let lastHoveredStateName = null;
+
   // hover/click handler
   const hoverHandler = (_evt, data) => {
+    if (lastHoveredStateName === data.name) return;
+    lastHoveredStateName = data.name;
+
     window.nn2 = latestCandidates;
     window.nn3 = evArray;
     rrr = cachedVV;
@@ -3943,7 +3955,23 @@ const gameStart = (a) => {
   `;
 
   const electionId = document.getElementById("election_id");
+  const credits = document.getElementById("credits");
+
+  const updateCredits = () => {
+    const val = Number(electionId.value);
+    if (val === 69) {
+      credits.innerHTML = "This scenario was made by Tex.";
+    } else if (val > -1 && !modded) {
+      credits.innerHTML = "This scenario was made by Dan Bryan.";
+    } else {
+      credits.innerHTML = `This scenario was made by ${e.credits}.`;
+    }
+  };
+
   electionId.value = e.election_id;
+
+  updateCredits();
+
   electionId.addEventListener("change", () => {
     e.election_id = Number(electionId.value);
     const selectedElection = PROPS.ELECTIONS.get(String(e.election_id));
@@ -3954,6 +3982,8 @@ const gameStart = (a) => {
       </div>
       <div id="election_summary">${selectedElection.summary}</div>
     `;
+
+    updateCredits();
   });
 
   document.getElementById("election_id_button").addEventListener("click", candSel);
@@ -4037,8 +4067,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "#play_again_button": () => beginNewGameHtml(),
   };
 
+  const handlerEntries = Object.entries(handlers);
+
   document.body.addEventListener("click", (event) => {
-    Object.entries(handlers).some(([selector, handler]) => {
+    handlerEntries.some(([selector, handler]) => {
       if (event.target.matches(selector)) {
         event.preventDefault();
         if (handler.length === 1) handler(event);
@@ -4048,38 +4080,4 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     });
   });
-});
-
-let curElectSelect = null;
-
-const fix1964 = () => {
-  const electionSelect = document.querySelector("#election_id");
-  const electionId = Number(electionSelect.value);
-  const credits = document.querySelector("#credits");
-  if (electionId === 69) {
-    credits.innerHTML = "This scenario was made by Tex.";
-  } else if (electionId > -1 && !modded) {
-    credits.innerHTML = "This scenario was made by Dan Bryan.";
-  }
-};
-
-const fix1964Observer = new MutationObserver((mut, obs) => {
-  const newElectSelect = document.querySelector("#election_id");
-  if (newElectSelect && newElectSelect !== curElectSelect) {
-    if (curElectSelect) {
-      curElectSelect.removeEventListener("change", fix1964);
-    }
-    curElectSelect = newElectSelect;
-    curElectSelect.addEventListener("change", fix1964);
-    fix1964();
-  }
-  if (document.querySelector(".inner_window_question")) {
-    e.code2Loaded = true;
-    obs.disconnect();
-  }
-});
-
-fix1964Observer.observe(document.body, {
-  childList: true,
-  subtree: true,
 });
