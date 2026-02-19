@@ -23065,7 +23065,7 @@ function applyDataModifications() {
       });
     });
   }
-
+  
   // reapply tooltips to text that otherwise wouldn't load
   if (window.tooltipProcessor) {
       window.tooltipProcessor.applyToObject(campaignTrail_temp.questions_json);
@@ -23508,11 +23508,11 @@ window.setImage = window.endingImageSystem.setImage;
 const extraEndingStyles = new CSSStyleSheet();
 extraEndingStyles.replaceSync(`
   #main-ending-scroll-container {
-    contain: content;
+    contain: content; 
     will-change: scroll-position;
     -webkit-overflow-scrolling: touch;
-    height: 38em;
-    overflow: auto;
+    height: 38em; 
+    overflow: auto; 
     position: relative;
   }
   .slide-wrapper {
@@ -23536,9 +23536,9 @@ document.adoptedStyleSheets = [...document.adoptedStyleSheets, extraEndingStyles
 // image preloader
 function preloadEndingAssets() {
   if (!campaignTrail_temp.pages) return;
-
+  
   const tempImg = new Image();
-
+  
   Object.values(campaignTrail_temp.executable || {}).forEach(func => {
     // this is a rough heuristic to catch image sets
     const str = func.toString();
@@ -23575,34 +23575,34 @@ window.endingConstructor = (direction = 1) => {
   if (newPage < 0 || newPage >= campaignTrail_temp.pages.length) {
     return; // out of bounds
   }
-
+  
   campaignTrail_temp.page = newPage;
 
   let finalDesc = document.getElementById("final_results_description");
   let scrollContainer = document.getElementById("main-ending-scroll-container");
   let narrativeDiv = document.getElementById("endingtxt");
   let buttonProxy = document.getElementById("ending-button-proxy");
-
+  
   if (!scrollContainer) {
     const finalDesc = document.getElementById("final_results_description");
-
+    
     const shellFragment = document.createDocumentFragment();
-
+    
     // container
     scrollContainer = document.createElement("div");
     scrollContainer.id = "main-ending-scroll-container";
-
+    
     // narrative area
     narrativeDiv = document.createElement("div");
     narrativeDiv.id = "endingtxt";
     narrativeDiv.className = "ending-narrative-content";
     scrollContainer.appendChild(narrativeDiv);
-
+    
     // stats area
     const statsContainer = document.createElement("div");
     statsContainer.id = "ending-stats-container";
     statsContainer.style.paddingTop = "1rem";
-
+    
     const statsIds = ["difficulty_mult", "overall_vote_statistics", "map_footer"];
     statsIds.forEach(id => {
       const el = document.getElementById(id);
@@ -23622,7 +23622,7 @@ window.endingConstructor = (direction = 1) => {
     shellFragment.appendChild(buttonProxy);
 
     finalDesc.style.cssText = "text-align: left; width: 72%; height: auto; margin-left: auto; margin-right: auto; display: block;";
-    finalDesc.innerHTML = "";
+    finalDesc.innerHTML = ""; 
     finalDesc.appendChild(shellFragment);
 
     preloadEndingAssets();
@@ -23644,7 +23644,7 @@ window.endingConstructor = (direction = 1) => {
     const wrapper = document.createElement("div");
     wrapper.id = slideId;
     wrapper.className = "slide-wrapper";
-
+    
     // inject content
     wrapper.innerHTML = `
       <table style='margin:0px;padding:0px;display: table;width:100%;'>
@@ -23657,14 +23657,14 @@ window.endingConstructor = (direction = 1) => {
         </tbody>
       </table>
     `;
-
+    
     narrativeDiv.appendChild(wrapper);
   }
 
   // update the buttons
   let btnHtml = "";
   const lastPage = campaignTrail_temp.pages.length - 1;
-
+  
   if (campaignTrail_temp.pages.length > 1) {
     if (newPage === 0) {
       btnHtml = `<button onclick='endingConstructor(1)'>Next</button>`;
@@ -23853,6 +23853,15 @@ function endingPickerCONT() {
   if (endingObserver) {
     endingObserver.disconnect();
     endingObserver = null;
+  }
+  
+  const oldSlide = document.getElementById("slide-wrapper-0");
+  if (oldSlide) {
+    oldSlide.remove();
+  }
+  const narrativeDiv = document.getElementById("endingtxt");
+  if (narrativeDiv) {
+    narrativeDiv.innerHTML = "";
   }
 
   // reset the temp state
@@ -27211,7 +27220,7 @@ const bonusSlides = [
   </div>
 
   <div class="action">
-    She looks at Mark. Takes another bite of the Pop-Tart. Chews slowly.
+    She looks at Mark, takes another bite of the Pop-Tart, and chews slowly.
   </div>
 
   <div class="character">CALLIE</div>
@@ -27225,11 +27234,11 @@ const bonusSlides = [
 
   <div class="character">CALLIE (CONT'D)</div>
   <div class="dialogue">
-    Mark. The gun. It's <i>empty</i>.
+    Mark, the gun. It's <i>empty</i>.
   </div>
 
   <div class="action">
-    Mark opens one eye. Looks at her.
+    Mark opens one eye and looks at her.
   </div>
 
   <div class="character">MARK</div>
@@ -27259,7 +27268,7 @@ const bonusSlides = [
   </div>
 
   <div class="action">
-    Empty.
+    Indeed, empty.
   </div>
 
   <div class="action">
@@ -27272,7 +27281,7 @@ const bonusSlides = [
 
   <div class="character">MARK</div>
   <div class="dialogue">
-    I can't even... I can't even do this right.
+    I can't even... I can't even do this shit right.
   </div>
 
   <div class="character">CALLIE</div>
@@ -27310,7 +27319,7 @@ const bonusSlides = [
 
   <div class="character">MARK</div>
   <div class="dialogue">
-    Yeah. I-I mean, all the... the doors we knocked on. The calls. Staying up all night because we thought...
+    Yeah. I-I mean, all the... the doors we knocked on. You, me, Fletch. All the calls, staying up all night because we thought...
   </div>
 
   <div class="action">
@@ -27319,11 +27328,11 @@ const bonusSlides = [
 
   <div class="character">MARK (CONT'D)</div>
   <div class="dialogue">
-    I really believed it. I know that's stupid. I know. But I really—
+    I really believed it. I know that's stupid, I know. But I really—
   </div>
 
   <div class="action">
-    His voice cracks. He stops.
+    His voice cracks, and he stops.
   </div>
 
   <div class="character">CALLIE</div>
@@ -27333,7 +27342,7 @@ const bonusSlides = [
 
   <div class="character">MARK</div>
   <div class="dialogue">
-    Is there any hope left? F-for people like us?
+    I-is there any hope left? For people like us?
   </div>
 
   <div class="action">
@@ -27426,11 +27435,7 @@ const bonusSlides = [
   </div>
 
   <div class="action">
-    She doesn't look back.
-  </div>
-
-  <div class="action">
-    The door clicks shut behind her.
+    She doesn't look back. The door clicks shut behind her.
   </div>
 
   <div class="action">
@@ -27546,7 +27551,7 @@ const bonusSlides = [
 		justify-content: center;
 		overflow: hidden;
 	  }
-
+	  
 		.pf-album-art img {
 		  width: 100%;
 		  height: 100%;
@@ -27669,7 +27674,7 @@ const bonusSlides = [
 		color: #1a1a1a;
 		padding: 0 20px;
 	  }
-
+	  
 	  .pf-pullquote::before {
 		content: "“";
 		display: block;
@@ -27683,7 +27688,7 @@ const bonusSlides = [
 		padding-top: 40px;
 		border-top: 4px solid #1a1a1a;
 	  }
-
+	  
 	  .pf-tl-header {
 		font-family: 'Lato', sans-serif;
 		font-weight: 900;
@@ -27708,7 +27713,7 @@ const bonusSlides = [
 		align-items: baseline;
 		font-size: 14px;
 	  }
-
+	  
 	  .pf-tl-num {
 		color: #999;
 		font-weight: 700;
@@ -27764,7 +27769,7 @@ const bonusSlides = [
 	  </div>
 
 	  <div class="pf-hero">
-
+		
 		<div class="pf-info-block">
 		  <span class="pf-genre">R&B / Soul</span>
 		  <div class="pf-artist">Barack Obama</div>
@@ -27792,7 +27797,7 @@ const bonusSlides = [
 
 	  <div class="pf-body-container">
 		<div class="pf-article">
-
+		  
 		  <div class="pf-byline-bar">
 			<span>By <span class="pf-author">Jayson Greene</span></span>
 			<span>Contributor</span>
@@ -27813,7 +27818,7 @@ const bonusSlides = [
 		  <p>Where the album truly ignites is, perhaps interestingly, the Prince collaboration. Their version of "Thieves in the Temple" is genuinely startling, as Prince strips the original's Minneapolis funk down to an almost skeletal arrangement of minor-key Rhodes, a single snare hit on the two, and his own ghostly multi-tracked harmonies weaving around Obama's lead vocal. The effect is less a cover than a séance, but Obama's voice, which elsewhere can sound a little too careful, or too aware of its own limitations, here sounds much darker and looser. There is a moment in the bridge where Prince drops out entirely and Obama holds a note for what feels like an impossibly long time, and you realize with some shock that the man can actually <i>sing</i> when he stops trying to sing correctly.</p>
 
 		  <p>The record's other high points cluster around its most unexpected choices. "Edith and the Kingpin," the Joni Mitchell cut from <i>The Hissing of Summer Lawns</i>, is quite the inspired selection; a song about the seductive machinery of power, sung by a man who operated that very same machinery for eight years, alongside the woman who wrote it. Mitchell's voice, weathered and low in recent years, is a natural complement to Obama's range, and their interplay feels genuinely intimate. Not only that, but the arrangement, a smoky after-hours jazz-combo setting with Herbie Hancock sitting in on piano, is impeccable. "Brother, Can You Spare a Dime?," reimagined as a slow-burn duet with John Legend, is another highlight, as we see the Depression-era standard repositioned as something contemporary.</p>
-
+		  
 		  <p>A stripped-back "Summertime" with Esperanza Spalding is lovely and light, with Spalding's bass and Obama's voice occupying the same warm middle register in a way that produces some unexpected harmonics. And the closing track, "We're Going to Make It", the Little Milton song, performed as a duet with Michelle Obama, is either the most nakedly sentimental thing you will hear all year or a genuinely moving document of a marriage, depending on your tolerance. Michelle, it should be noted, can also sing. Way better than her husband, actually, though she'd never say so.</p>
 
 		  <p>The album sags in its middle third. "What's Going On" with D'Angelo is handsomely arranged but rote, as we see two tasteful men being tasteful at each other for five minutes. A cover of Curtis Mayfield's "People Get Ready" with Smokey Robinson is pretty in a way that is also its own limitation, as neither man pushes the other anywhere interesting. "Let's Stay Together," performed with Al Green himself, commits the sin of existing in a world where Al Green's original exists and is perfect and does not need a former president singing over it, no matter how nice the microphone preamps are. An overly busy "Inner City Blues" with Janelle Monáe tries to compensate for the mismatch in vocal ability with production fireworks and ends up sounding overproduced and cluttered.</p>
@@ -27833,7 +27838,7 @@ const bonusSlides = [
 			   <div class="pf-tl-item"><span class="pf-tl-num">06</span><div><span class="pf-tl-title">Edith and the Kingpin</span> <span class="pf-tl-feat">(feat. Joni Mitchell)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">07</span><div><span class="pf-tl-title">People Get Ready</span> <span class="pf-tl-feat">(feat. Smokey Robinson)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">08</span><div><span class="pf-tl-title">Let's Stay Together</span> <span class="pf-tl-feat">(feat. Al Green)</span></div></div>
-
+			   
 			   <div class="pf-tl-item"><span class="pf-tl-num">09</span><div><span class="pf-tl-title">What's Going On</span> <span class="pf-tl-feat">(feat. D'Angelo)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">10</span><div><span class="pf-tl-title">Summertime</span> <span class="pf-tl-feat">(feat. Esperanza Spalding)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">11</span><div><span class="pf-tl-title">Lean on Me</span> <span class="pf-tl-feat">(feat. Common)</span></div></div>
@@ -27844,7 +27849,7 @@ const bonusSlides = [
 			   <div class="pf-tl-item"><span class="pf-tl-num">16</span><div><span class="pf-tl-title">We're Going to Make It</span> <span class="pf-tl-feat">(feat. Michelle Obama)</span></div></div>
 			</div>
 		  </div>
-
+		  
 		</div>
 	  </div>
 
@@ -27852,7 +27857,7 @@ const bonusSlides = [
 		© 2017 Condé Nast. All rights reserved. Pitchfork may earn a portion of sales from products that are purchased through our site as part of our Affiliate Partnerships with retailers. The material on this site may not be reproduced, distributed, transmitted, cached or otherwise used, except with the prior written permission of Condé Nast.
 	  </div>
 
-	</div>
+	</div>	
 	`
   },
   {
@@ -27991,10 +27996,10 @@ const bonusSlides = [
     html: `<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet"><style> .netflix-container { background-color: #141414; color: #fff; font-family: 'Roboto', sans-serif; border-radius: 5px; padding: 20px; text-align: left; } .netflix-header { font-family: 'Bebas Neue', sans-serif; color: #E50914; font-size: 2.5em; letter-spacing: 2px; margin-bottom: 20px; } .series-hero { position: relative; background-image: linear-gradient(to right, rgba(20, 20, 20, 1) 30%, rgba(20, 20, 20, 0)), url('https://file.garden/aNtAfG887DiA_7lO/2012LBM/es1.png'); background-size: cover; background-position: center 20%; padding: 40px 20px; border-radius: 5px; min-height: 300px; } .series-title { font-size: 3em; font-weight: 700; margin-bottom: 10px; } .series-tagline { font-size: 1.1em; max-width: 50%; margin-bottom: 20px; color: #d1d1d1; } .action-buttons button { padding: 10px 25px; border-radius: 4px; border: none; font-size: 1.1em; font-weight: 700; margin-right: 10px; cursor: pointer; } .play-button { background-color: #fff; color: #000; } .mylist-button { background-color: rgba(109, 109, 110, 0.7); color: #000; } .section-title { font-size: 1.5em; font-weight: 700; margin-top: 25px; margin-bottom: 15px; } .critics-quote { background-color: #222; padding: 15px; border-left: 4px solid #E50914; margin-bottom: 10px; font-style: italic; } .critics-source { font-style: normal; font-weight: 700; display: block; margin-top: 5px; } .cast-list { font-size: 0.9em; color: #a0a0a0; } .cast-list b { color: #fff; }</style><div class="netflix-container"> <div class="netflix-header">NETFLIX</div> <div class="series-hero"> <p style="font-size: 0.9em; color: #a0a0a0;">A HIGHER GROUND PRODUCTION</p><p style="font-size: 0.9em; color: #46d369; margin-bottom: 5px;"><b>98% Match</b> <span style="color: #a0a0a0;">• 2023 • 1 Season • TV-MA</span></p> <div class="series-title">FORWARD</div> <p class="series-tagline">He inherited a nation in crisis and faced unprecedented opposition. This is the definitive story of the Barack Obama, the president who weathered the storm and guided America into a new era.</p> <div class="action-buttons"> <button class="play-button">▶ Play</button> <button class="mylist-button">+ My List</button> </div> </div> <div> <div class="section-title">What the Critics Are Saying</div> <div class="critics-quote"> "A essential portrait of an important figure in a pivotal American decade. Sterling K. Brown delivers a career-defining performance." <span class="critics-source">- The New York Times</span> </div> <div class="critics-quote"> "For all its worth, even skeptics will find this compelling. A serious, occasionally uncomfortable look at leadership under pressure." <span class="critics-source">- The Wall Street Journal</span> </div> <div class="critics-quote"> "More than a history lesson, for most of it. The episode on the bin Laden raid will leave you breathless." <span class="critics-source">- Rolling Stone</span> </div> <div class="critics-quote"> "A masterful and, yes, hopeful narrative. It reminds us that even in the face of division, progress is possible." <span class="critics-source">- The Atlantic</span> </div> </div> <div> <div class="section-title">Cast & Crew</div> <p class="cast-list"> <b>Directed By:</b> Ava DuVernay<br> <b>Starring:</b> Sterling K. Brown (Barack Obama), Kerry Washington (Michelle Obama), Paul Giamatti (Joe Biden), Mahershala Ali (Eric Holder), Patricia Clarkson (Nancy Pelosi), John C. Reilly (John Boehner) <b>Executive Producers:</b> Barack Obama, Michelle Obama<br> <b>Written By:</b> Aaron Sorkin, Ta-Nehisi Coates <b>Music By:</b> Nicholas Britell<br> </p> </div></div>`
   },
   {
-	  id: "obama_the_woker",
-	  condition: (ev) => ev >= 379 && ev < 535 && (window.liberalismScore >= 4),
-	  image: "https://live.staticflickr.com/3469/3834570613_69356550ef_w.jpg",
-	  html: `<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet">
+	id: "obama_the_woker",
+	condition: (ev) => ev >= 379 && ev < 535 && (window.liberalismScore >= 4),
+	image: "https://live.staticflickr.com/3469/3834570613_69356550ef_w.jpg",
+	html: `<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet">
 
 	<style>
 	  .wp-wrapper {
@@ -31682,9 +31687,12 @@ endingPicker = (out, totv, aa, quickstats) => {
   if (selectedScenario.isContingent) {
     // special logic for the tie
     campaignTrail_temp.executable[0] = () => {
+      if (typeof setImage === 'function') setImage(selectedScenario.image);
+      
       const likA = Math.min(4, Math.max(0, Math.round(playerEV / 270 * 4)));
       const likB = Math.min(4, Math.max(0, Math.round((playerEV - 200) / 70 * 2)));
       const likC = Math.min(4, Math.max(0, Math.round((300 - opponentEVs) / 100 * 2)));
+      
       addContingent(likA, likB, likC);
     };
 
@@ -31760,6 +31768,11 @@ function finalizeRendering() {
   if (endingObserver) {
     endingObserver.disconnect();
     endingObserver = null;
+  }
+  
+  const narrativeDiv = document.getElementById("endingtxt");
+  if (narrativeDiv) {
+    narrativeDiv.innerHTML = "";
   }
 
   if (attemptRenderEnding()) {
@@ -32586,8 +32599,8 @@ e.vpSwitcher = () => {
       if (rmPic) {
         rmPic.src = e.running_mate_image_url;
       }
-
-      onGameChange();
+	  
+      onGameChange(); 
     }
 
     vpScreen.remove();
@@ -33869,7 +33882,7 @@ function handleFooter() {
   if (!oldCandidatePic || !oldRunningMatePic || !gameWindow) {
     return;
   }
-
+  
   // get question image
   const questionNumber = campaignTrail_temp.question_number;
   const currentQuestion = campaignTrail_temp.questions_json[questionNumber];
@@ -33948,9 +33961,9 @@ function ensureFooter() {
   const candidatePic = document.getElementById('candidate_pic');
   const runningMatePic = document.getElementById('running_mate_pic');
   const gameWindow = document.getElementById('game_window');
-
+  
   if (!candidatePic || !runningMatePic || !gameWindow) return;
-
+  
   handleFooter(candidatePic, runningMatePic, gameWindow);
 }
 
@@ -34040,7 +34053,7 @@ window.newFooter = { ensureFooter };
     return config;
   };
 
-  // logic for the first button
+  // logic for the first button 
   window.switchPV = function () {
     const swE = document.getElementById("switchingEst");
     if (!swE) return;
@@ -34892,7 +34905,7 @@ function applyCityIssueEffects(statePk, cityName) {
       if (isNaN(currentScore)) {
         currentScore = 0;
       }
-
+	  
 	  const newScore = Math.max(-MAX_ISSUE_SCORE_MAGNITUDE, Math.min(MAX_ISSUE_SCORE_MAGNITUDE, currentScore + modifier));
 
       issueRecord.fields.state_issue_score = newScore;
@@ -37134,6 +37147,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         update.shape.attr('fill', update.fill);
         if (typeof update.shape.data === 'function') {
           update.shape.data('originalFill', update.fill);
+          update.shape.data('hoverFill', update.hoverFill);
         }
       });
 
@@ -37310,15 +37324,9 @@ window.tctCityVisits = { ensureVisitOverlayCities };
           const stateData = styleCache.candidate_strength[stateAbbr][selectedCandidateIndex];
           if (stateData) {
             if (candidatePerformanceMode === 'relative') {
-              styles[stateAbbr] = {
-                fill: stateData.relativeFill,
-                hoverFill: stateData.relativeHoverFill
-              };
+              styles[stateAbbr] = { fill: stateData.relativeFill, hoverFill: stateData.relativeHoverFill };
             } else {
-              styles[stateAbbr] = {
-                fill: stateData.fill,
-                hoverFill: stateData.hoverFill
-              };
+              styles[stateAbbr] = { fill: stateData.fill, hoverFill: stateData.hoverFill };
             }
           } else {
             styles[stateAbbr] = { fill: "#EEEEEE", hoverFill: "#DDDDDD" };
@@ -37578,7 +37586,8 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       if (map.stateShapes[stateAbbr]) {
         stateUpdateQueue.push({
           shape: map.stateShapes[stateAbbr],
-          fill: styles[stateAbbr]?.fill || "#C9C9C9"
+          fill: styles[stateAbbr]?.fill || "#C9C9C9",
+          hoverFill: styles[stateAbbr]?.hoverFill || darkenColor(styles[stateAbbr]?.fill || "#C9C9C9")
         });
       }
     }
@@ -38405,70 +38414,91 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   }
 
   function updateControls() {
-    $('#map_controls').remove();
+    const existingControls = document.getElementById('map_controls');
+    
+    if (existingControls) {
+      const toggle = (id, condition) => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = condition ? 'block' : 'none';
+      };
+
+      toggle('senate_controls_container', currentMode === VISUALIZATION_MODES.SENATE_RACES);
+      toggle('candidate_selector_container', currentMode === VISUALIZATION_MODES.CANDIDATE_STRENGTH);
+      toggle('coalition_controls_container', currentMode === VISUALIZATION_MODES.COALITION_BUILDER);
+      toggle('combiner_controls_container', currentMode === VISUALIZATION_MODES.CANDIDATE_COMBINER);
+      toggle('tipping_point_controls_container', currentMode === VISUALIZATION_MODES.TIPPING_POINT);
+      
+      const isIssueMode = ['issue_stance', 'issue_weight', 'candidate_issue_alignment'].includes(currentMode);
+      toggle('issue_selector_container', isIssueMode);
+      
+      if (isIssueMode) {
+        toggle('alignment_candidate_container', currentMode === VISUALIZATION_MODES.CANDIDATE_ISSUE_ALIGNMENT);
+        toggle('single_alignment_container', alignmentComparisonMode === 'single');
+        toggle('comparison_alignment_container', alignmentComparisonMode === 'comparison');
+      }
+
+      const modeSelect = document.getElementById('visualization_mode');
+      if (modeSelect && modeSelect.value !== currentMode) {
+        modeSelect.value = currentMode;
+      }
+      
+      return; 
+    }
 
     const controls = document.createElement('div');
     controls.id = 'map_controls';
-    controls.style.position = 'absolute';
-    controls.style.background = 'rgba(255, 255, 255, 0.92)';
-    controls.style.border = '1px solid #aaa';
-    controls.style.padding = '8px';
-    controls.style.borderRadius = '4px';
-    controls.style.boxShadow = '0 1px 4px rgba(0,0,0,0.2)';
-    controls.style.zIndex = '1000';
-    controls.style.width = '180px';
+	
+    Object.assign(controls.style, {
+      position: 'absolute', background: 'rgba(255, 255, 255, 0.92)',
+      border: '1px solid #aaa', padding: '8px', borderRadius: '4px',
+      boxShadow: '0 1px 4px rgba(0,0,0,0.2)', zIndex: '1000', width: '180px'
+    });
 
     const container = document.querySelector('.container');
     const mapContainer = document.getElementById('map_container');
-
+    
     if (container && mapContainer) {
       const containerRect = container.getBoundingClientRect();
       const mapRect = mapContainer.getBoundingClientRect();
-
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
       const mapAbsoluteTop = mapRect.top + scrollTop;
-
       controls.style.left = Math.max(20, containerRect.left - 200) + 'px';
       controls.style.top = mapAbsoluteTop + 'px';
     } else if (container) {
       const containerRect = container.getBoundingClientRect();
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-
       controls.style.left = Math.max(20, containerRect.left - 200) + 'px';
       controls.style.top = Math.max(20, containerRect.top + scrollTop + 200) + 'px';
     } else {
-      controls.style.top = '200px';
+      controls.style.top = '200px'; 
       controls.style.left = '20px';
     }
 
-    const controlsHandle = document.createElement('div');
-    controlsHandle.style.height = '20px';
-    controlsHandle.style.marginBottom = '8px';
-    controlsHandle.style.display = 'flex';
-    controlsHandle.style.alignItems = 'center';
-    controlsHandle.style.justifyContent = 'center';
-    controlsHandle.style.background = 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)';
-    controlsHandle.style.borderBottom = '1px solid #ccc';
-    controlsHandle.style.cursor = 'move';
-    controlsHandle.style.marginLeft = '-8px';
-    controlsHandle.style.marginRight = '-8px';
-    controlsHandle.style.marginTop = '-8px';
-    controlsHandle.style.borderRadius = '4px 4px 0 0';
+    const mainFrag = document.createDocumentFragment();
 
+    const controlsHandle = document.createElement('div');
+    Object.assign(controlsHandle.style, {
+      height: '20px', marginBottom: '8px', display: 'flex',
+      alignItems: 'center', justifyContent: 'center',
+      background: 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)',
+      borderBottom: '1px solid #ccc', cursor: 'move',
+      marginLeft: '-8px', marginRight: '-8px', marginTop: '-8px', borderRadius: '4px 4px 0 0'
+    });
     const dragIndicator = document.createElement('span');
     dragIndicator.textContent = '⋮⋮';
-    dragIndicator.style.color = '#999';
-    dragIndicator.style.fontSize = '12px';
-    dragIndicator.style.letterSpacing = '2px';
+    Object.assign(dragIndicator.style, { color: '#999', fontSize: '12px', letterSpacing: '2px' });
     controlsHandle.appendChild(dragIndicator);
+    mainFrag.appendChild(controlsHandle);
 
-    controls.appendChild(controlsHandle);
+    let updateTimeout;
+    const triggerUpdate = (delay = 10) => {
+        clearTimeout(updateTimeout);
+        updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, delay);
+    };
 
     const modeSelector = document.createElement('select');
     modeSelector.id = 'visualization_mode';
-    modeSelector.style.marginBottom = '8px';
-    modeSelector.style.width = '100%';
-    modeSelector.style.padding = '4px';
+    Object.assign(modeSelector.style, { marginBottom: '8px', width: '100%', padding: '4px' });
 
     const modeOptions = [
       { value: VISUALIZATION_MODES.SOLID, text: 'Solid colors' },
@@ -38487,60 +38517,41 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       { value: VISUALIZATION_MODES.CANDIDATE_COMBINER, text: 'Candidate combiner' }
     ];
 
-    modeOptions.forEach(option => {
-      const optionEl = document.createElement('option');
-      optionEl.value = option.value;
-      optionEl.textContent = option.text;
-      if (option.value === currentMode) {
-        optionEl.selected = true;
-      }
-      modeSelector.appendChild(optionEl);
+    modeOptions.forEach(opt => {
+      const el = document.createElement('option');
+      el.value = opt.value; 
+      el.textContent = opt.text;
+      if (opt.value === currentMode) el.selected = true;
+      modeSelector.appendChild(el);
     });
+    
+    modeSelector.addEventListener('change', function () {
+      currentMode = this.value;
+      updateControls();
+      triggerUpdate(10);
+    });
+    mainFrag.appendChild(modeSelector);
 
-    controls.appendChild(modeSelector);
-
-    const senateControlsContainer = document.createElement('div');
-    senateControlsContainer.id = 'senate_controls_container';
-    senateControlsContainer.style.display = currentMode === VISUALIZATION_MODES.SENATE_RACES ? 'block' : 'none';
-    senateControlsContainer.style.marginBottom = '8px';
+    const senateDiv = document.createElement('div');
+    senateDiv.id = 'senate_controls_container';
+    senateDiv.style.marginBottom = '8px';
+    senateDiv.style.display = 'none';
 
     const senateModeToggle = document.createElement('select');
     senateModeToggle.id = 'senate_mode_selector';
-    senateModeToggle.style.width = '100%';
-    senateModeToggle.style.padding = '4px';
-
-    const senateModeOptions = [
-      { value: 'solid', text: 'Solid colors' },
-      { value: 'margins', text: 'Show margins' },
-      { value: 'holds_gains', text: 'Holds & gains' }
-    ];
-
-    senateModeOptions.forEach(option => {
-      const optionElement = document.createElement('option');
-      optionElement.value = option.value;
-      optionElement.textContent = option.text;
-      senateModeToggle.appendChild(optionElement);
+    Object.assign(senateModeToggle.style, { width: '100%', padding: '4px' });
+    
+    [{v:'solid', t:'Solid colors'}, {v:'margins', t:'Show margins'}, {v:'holds_gains', t:'Holds & gains'}].forEach(o => {
+        const el = document.createElement('option'); el.value = o.v; el.textContent = o.t;
+        senateModeToggle.appendChild(el);
     });
-
     senateModeToggle.value = window.currentSenateMode || 'solid';
-
     senateModeToggle.addEventListener('change', function () {
       window.currentSenateMode = this.value;
-      updateMapStyles();
-      updateLegend();
+      triggerUpdate();
     });
-
-    senateControlsContainer.appendChild(senateModeToggle);
-    controls.appendChild(senateControlsContainer);
-
-    const candidateContainer = document.createElement('div');
-    candidateContainer.id = 'candidate_selector_container';
-    candidateContainer.style.display = currentMode === VISUALIZATION_MODES.CANDIDATE_STRENGTH ? 'block' : 'none';
-
-    const candidateSelector = document.createElement('select');
-    candidateSelector.id = 'candidate_selector';
-    candidateSelector.style.width = '100%';
-    candidateSelector.style.padding = '4px';
+    senateDiv.appendChild(senateModeToggle);
+    mainFrag.appendChild(senateDiv);
 
     candidates = [];
     campaignTrail_temp.final_state_results[0].result.forEach(result => {
@@ -38548,225 +38559,195 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       if (candidate) candidates.push(candidate);
     });
 
+    const candidateContainer = document.createElement('div');
+    candidateContainer.id = 'candidate_selector_container';
+    candidateContainer.style.display = 'none';
+
+    const candidateSelector = document.createElement('select');
+    candidateSelector.id = 'candidate_selector';
+    Object.assign(candidateSelector.style, { width: '100%', padding: '4px' });
+
     candidates.forEach((candidate, idx) => {
       const option = document.createElement('option');
       option.value = idx;
       option.textContent = candidate.fields.last_name;
-      if (idx === selectedCandidateIndex) {
-        option.selected = true;
-      }
+      if (idx === selectedCandidateIndex) option.selected = true;
       candidateSelector.appendChild(option);
     });
-
+    candidateSelector.addEventListener('change', function () {
+      selectedCandidateIndex = parseInt(this.value);
+      triggerUpdate();
+    });
     candidateContainer.appendChild(candidateSelector);
 
     const perfModeToggle = document.createElement('button');
     perfModeToggle.textContent = candidatePerformanceMode === 'absolute' ? 'Show relative to national' : 'Show absolute performance';
-    perfModeToggle.style.fontSize = '10px';
-    perfModeToggle.style.padding = '2px 8px';
-    perfModeToggle.style.cursor = 'pointer';
-    perfModeToggle.style.backgroundColor = '#f0f0f0';
-    perfModeToggle.style.border = '1px solid #ccc';
-    perfModeToggle.style.borderRadius = '3px';
-    perfModeToggle.style.width = '100%';
-    perfModeToggle.style.marginTop = '4px';
-
+    Object.assign(perfModeToggle.style, {
+        fontSize: '10px', padding: '2px 8px', cursor: 'pointer',
+        backgroundColor: '#f0f0f0', border: '1px solid #ccc', borderRadius: '3px',
+        width: '100%', marginTop: '4px'
+    });
     perfModeToggle.addEventListener('click', function () {
       candidatePerformanceMode = candidatePerformanceMode === 'absolute' ? 'relative' : 'absolute';
       this.textContent = candidatePerformanceMode === 'absolute' ? 'Show relative to national' : 'Show absolute performance';
-      updateMapStyles();
-      updateLegend();
+      triggerUpdate();
     });
-
     candidateContainer.appendChild(perfModeToggle);
-    controls.appendChild(candidateContainer);
+    mainFrag.appendChild(candidateContainer);
 
     const coalitionContainer = document.createElement('div');
     coalitionContainer.id = 'coalition_controls_container';
-    coalitionContainer.style.display = currentMode === VISUALIZATION_MODES.COALITION_BUILDER ? 'block' : 'none';
     coalitionContainer.style.marginBottom = '8px';
+    coalitionContainer.style.display = 'none';
 
     const coalitionCandidateSelector = document.createElement('select');
     coalitionCandidateSelector.id = 'coalition_candidate_selector';
-    coalitionCandidateSelector.style.width = '100%';
-    coalitionCandidateSelector.style.padding = '4px';
-    coalitionCandidateSelector.style.marginBottom = '4px';
+    Object.assign(coalitionCandidateSelector.style, { width: '100%', padding: '4px', marginBottom: '4px' });
 
     candidates.forEach((candidate, idx) => {
       const option = document.createElement('option');
       option.value = idx;
       option.textContent = candidate.fields.last_name;
-      if (idx === coalitionCandidateIndex) {
-        option.selected = true;
-      }
+      if (idx === coalitionCandidateIndex) option.selected = true;
       coalitionCandidateSelector.appendChild(option);
     });
 
-    coalitionContainer.appendChild(coalitionCandidateSelector);
-
-    const currentCandidateResult = campaignTrail_temp.final_overall_results
-      .find(r => r.candidate === candidates[coalitionCandidateIndex]?.pk);
-    const totalNationalVotes = campaignTrail_temp.final_overall_results
-      .reduce((sum, r) => sum + r.popular_votes, 0);
-    const actualVoteShare = currentCandidateResult && totalNationalVotes > 0 ?
-      currentCandidateResult.popular_votes / totalNationalVotes : 0.35;
-
-    if (Math.abs(coalitionVoteShare - 0.5) < 0.01) {
-      coalitionVoteShare = actualVoteShare;
-    }
-
     const sliderContainer = document.createElement('div');
     sliderContainer.style.marginBottom = '4px';
-
+    
     const sliderLabel = document.createElement('div');
-    sliderLabel.style.fontSize = '11px';
-    sliderLabel.style.marginBottom = '3px';
-    sliderLabel.style.textAlign = 'center';
+    Object.assign(sliderLabel.style, { fontSize: '11px', marginBottom: '3px', textAlign: 'center' });
 
-    const voteShareDisplay = document.createElement('span');
-    voteShareDisplay.style.cursor = 'pointer';
-    voteShareDisplay.style.textDecoration = 'underline';
-    voteShareDisplay.style.color = '#0066cc';
-    voteShareDisplay.textContent = `${(coalitionVoteShare * 100).toFixed(1)}%`;
-
-    const currentDisplay = document.createElement('span');
-    currentDisplay.textContent = ` (Current: ${(actualVoteShare * 100).toFixed(1)}%)`;
-
-    sliderLabel.appendChild(document.createTextNode('Vote Share: '));
-    sliderLabel.appendChild(voteShareDisplay);
-    sliderLabel.appendChild(currentDisplay);
-
-    const directInput = document.createElement('input');
-    directInput.type = 'number';
-    directInput.min = '0';
-    directInput.max = '100';
-    directInput.step = '0.1';
-    directInput.style.width = '50px';
-    directInput.style.fontSize = '11px';
-    directInput.style.textAlign = 'center';
-    directInput.style.display = 'none';
-    directInput.style.position = 'absolute';
-    directInput.style.zIndex = '1001';
-
-    voteShareDisplay.addEventListener('click', function (e) {
-      e.stopPropagation();
-
-      const rect = voteShareDisplay.getBoundingClientRect();
-      directInput.style.left = rect.left + 'px';
-      directInput.style.top = rect.top + 'px';
-      directInput.style.display = 'block';
-      directInput.value = (coalitionVoteShare * 100).toFixed(1);
-
-      voteShareDisplay.style.visibility = 'hidden';
-
-      document.body.appendChild(directInput);
-      directInput.focus();
-      directInput.select();
-    });
-
-    function finishDirectEdit(updateValue = true) {
-      if (updateValue) {
-        let newPercent = parseFloat(directInput.value);
-        if (!isNaN(newPercent)) {
-          newPercent = Math.max(0, Math.min(100, newPercent));
-          coalitionVoteShare = newPercent / 100;
-          voteShareSlider.value = coalitionVoteShare;
-
-          voteShareDisplay.textContent = `${newPercent.toFixed(1)}%`;
-
-          clearTimeout(updateTimeout);
-          updateTimeout = setTimeout(() => {
-            updateMapStyles();
-            updateLegend();
-          }, 50);
+    const updateVoteShareLabelAndLogic = () => {
+        const currentCandidateResult = campaignTrail_temp.final_overall_results.find(r => r.candidate === candidates[coalitionCandidateIndex]?.pk);
+        const totalNationalVotes = campaignTrail_temp.final_overall_results.reduce((sum, r) => sum + r.popular_votes, 0);
+        const actualVoteShare = currentCandidateResult && totalNationalVotes > 0 ? currentCandidateResult.popular_votes / totalNationalVotes : 0.35;
+        
+        if (Math.abs(coalitionVoteShare - 0.5) < 0.01 && !window._coalitionVoteShareSet) {
+             coalitionVoteShare = actualVoteShare;
+             window._coalitionVoteShareSet = true;
         }
-      }
 
-      voteShareDisplay.style.visibility = 'visible';
-      if (directInput.parentNode) {
-        directInput.parentNode.removeChild(directInput);
-      }
-      directInput.style.display = 'none';
-    }
+        sliderLabel.innerHTML = '';
+        sliderLabel.appendChild(document.createTextNode('Vote Share: '));
+        
+        const voteShareDisplay = document.createElement('span');
+        voteShareDisplay.id = 'vote-share-display';
+        Object.assign(voteShareDisplay.style, { cursor: 'pointer', textDecoration: 'underline', color: '#0066cc' });
+        voteShareDisplay.textContent = `${(coalitionVoteShare * 100).toFixed(1)}%`;
+        
+        voteShareDisplay.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const directInput = document.createElement('input');
+            directInput.type = 'number';
+            directInput.min = '0'; directInput.max = '100'; directInput.step = '0.1';
+            Object.assign(directInput.style, { width: '50px', fontSize: '11px', textAlign: 'center', position: 'absolute', zIndex: '1001' });
+            
+            const rect = this.getBoundingClientRect();
+            directInput.style.left = rect.left + 'px';
+            directInput.style.top = rect.top + 'px';
+            directInput.value = (coalitionVoteShare * 100).toFixed(1);
 
-    directInput.addEventListener('blur', () => finishDirectEdit(true));
-    directInput.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') {
-        finishDirectEdit(true);
-      } else if (e.key === 'Escape') {
-        finishDirectEdit(false);
-      }
-    });
+            document.body.appendChild(directInput);
+            directInput.focus(); directInput.select();
+            this.style.visibility = 'hidden';
 
-    document.addEventListener('click', function (e) {
-      if (directInput.style.display === 'block' && !directInput.contains(e.target)) {
-        finishDirectEdit(false);
-      }
-    });
+            const finish = (save) => {
+                if (save) {
+                    let val = parseFloat(directInput.value);
+                    if (!isNaN(val)) {
+                        val = Math.max(0, Math.min(100, val));
+                        coalitionVoteShare = val / 100;
+                        const slider = document.getElementById('coalition_vote_share_slider');
+                        if (slider) slider.value = coalitionVoteShare;
+                        updateVoteShareLabelAndLogic();
+                        triggerUpdate(50);
+                    }
+                }
+                if (voteShareDisplay) voteShareDisplay.style.visibility = 'visible';
+                if (directInput.parentNode) directInput.parentNode.removeChild(directInput);
+            };
+
+            directInput.addEventListener('blur', () => finish(true));
+            directInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') finish(true);
+                if (e.key === 'Escape') finish(false);
+            });
+        });
+
+        sliderLabel.appendChild(voteShareDisplay);
+        const currentDisplay = document.createElement('span');
+        currentDisplay.textContent = ` (Current: ${(actualVoteShare * 100).toFixed(1)}%)`;
+        sliderLabel.appendChild(currentDisplay);
+    };
 
     sliderContainer.appendChild(sliderLabel);
-    coalitionContainer.appendChild(sliderContainer);
-
+    
     const voteShareSlider = document.createElement('input');
     voteShareSlider.type = 'range';
     voteShareSlider.id = 'coalition_vote_share_slider';
-    voteShareSlider.min = '0';
-    voteShareSlider.max = '1';
-    voteShareSlider.step = '0.001';
-    voteShareSlider.value = coalitionVoteShare;
+    voteShareSlider.min = '0'; voteShareSlider.max = '1'; voteShareSlider.step = '0.001';
     voteShareSlider.style.width = '100%';
     voteShareSlider.style.marginBottom = '4px';
+    
+    voteShareSlider.addEventListener('input', function () {
+        coalitionVoteShare = parseFloat(this.value);
+        updateVoteShareLabelAndLogic();
+        triggerUpdate(50);
+    });
+
+    coalitionCandidateSelector.addEventListener('change', function () {
+      coalitionCandidateIndex = parseInt(this.value);
+      const currentCandidateResult = campaignTrail_temp.final_overall_results.find(r => r.candidate === candidates[coalitionCandidateIndex]?.pk);
+      const totalNationalVotes = campaignTrail_temp.final_overall_results.reduce((sum, r) => sum + r.popular_votes, 0);
+      coalitionVoteShare = currentCandidateResult && totalNationalVotes > 0 ? currentCandidateResult.popular_votes / totalNationalVotes : 0.35;
+      voteShareSlider.value = coalitionVoteShare;
+      updateVoteShareLabelAndLogic();
+      triggerUpdate();
+    });
+
+    updateVoteShareLabelAndLogic();
+    voteShareSlider.value = coalitionVoteShare;
+
+    coalitionContainer.appendChild(coalitionCandidateSelector);
+    coalitionContainer.appendChild(sliderContainer);
     coalitionContainer.appendChild(voteShareSlider);
 
     const coalitionModeSelector = document.createElement('select');
     coalitionModeSelector.id = 'coalition_mode_selector';
-    coalitionModeSelector.style.width = '100%';
-    coalitionModeSelector.style.padding = '4px';
-
-    const coalitionModeOptions = [
-      { value: 'solid', text: 'Solid colors' },
-      { value: 'margins', text: 'Projected margins' },
-      { value: 'performance', text: 'Candidate performance' }
-    ];
-
-    coalitionModeOptions.forEach(option => {
-      const optionEl = document.createElement('option');
-      optionEl.value = option.value;
-      optionEl.textContent = option.text;
-      if (option.value === coalitionMode) {
-        optionEl.selected = true;
-      }
-      coalitionModeSelector.appendChild(optionEl);
+    Object.assign(coalitionModeSelector.style, { width: '100%', padding: '4px' });
+    [{v:'solid',t:'Solid colors'},{v:'margins',t:'Projected margins'},{v:'performance',t:'Candidate performance'}].forEach(o=>{
+        const el = document.createElement('option'); el.value=o.v; el.textContent=o.t;
+        if(o.v === coalitionMode) el.selected=true;
+        coalitionModeSelector.appendChild(el);
     });
-
+    coalitionModeSelector.addEventListener('change', function(){
+        coalitionMode = this.value;
+        triggerUpdate();
+    });
     coalitionContainer.appendChild(coalitionModeSelector);
-    controls.appendChild(coalitionContainer);
+    mainFrag.appendChild(coalitionContainer);
 
     const combinerContainer = document.createElement('div');
     combinerContainer.id = 'combiner_controls_container';
-    combinerContainer.style.display = currentMode === VISUALIZATION_MODES.CANDIDATE_COMBINER ? 'block' : 'none';
     combinerContainer.style.marginBottom = '8px';
+    combinerContainer.style.display = 'none';
 
     if (candidates.length >= 4) {
       const headToHeadToggle = document.createElement('button');
       headToHeadToggle.textContent = headToHeadMode ? 'Switch to Single Team' : 'Head-to-Head Mode';
-      headToHeadToggle.style.fontSize = '10px';
-      headToHeadToggle.style.padding = '2px 8px';
-      headToHeadToggle.style.cursor = 'pointer';
-      headToHeadToggle.style.backgroundColor = headToHeadMode ? '#e6f3ff' : '#f0f0f0';
-      headToHeadToggle.style.border = '1px solid #ccc';
-      headToHeadToggle.style.borderRadius = '3px';
-      headToHeadToggle.style.width = '100%';
-      headToHeadToggle.style.marginBottom = '6px';
-
+      Object.assign(headToHeadToggle.style, {
+          fontSize: '10px', padding: '2px 8px', cursor: 'pointer',
+          backgroundColor: headToHeadMode ? '#e6f3ff' : '#f0f0f0',
+          border: '1px solid #ccc', borderRadius: '3px', width: '100%', marginBottom: '6px'
+      });
       headToHeadToggle.addEventListener('click', function () {
         headToHeadMode = !headToHeadMode;
         this.textContent = headToHeadMode ? 'Switch to Single Team' : 'Head-to-Head Mode';
         this.style.backgroundColor = headToHeadMode ? '#e6f3ff' : '#f0f0f0';
         document.getElementById('single_team_container').style.display = headToHeadMode ? 'none' : 'block';
         document.getElementById('head_to_head_container').style.display = headToHeadMode ? 'block' : 'none';
-        updateMapStyles();
-        updateLegend();
+        triggerUpdate();
       });
       combinerContainer.appendChild(headToHeadToggle);
     }
@@ -38777,15 +38758,11 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     const combinerModeToggle = document.createElement('button');
     combinerModeToggle.textContent = combinerMode === 'two' ? 'Combine 3 candidates' : 'Combine 2 candidates';
-    combinerModeToggle.style.fontSize = '10px';
-    combinerModeToggle.style.padding = '2px 8px';
-    combinerModeToggle.style.cursor = 'pointer';
-    combinerModeToggle.style.backgroundColor = '#f0f0f0';
-    combinerModeToggle.style.border = '1px solid #ccc';
-    combinerModeToggle.style.borderRadius = '3px';
-    combinerModeToggle.style.width = '100%';
-    combinerModeToggle.style.marginBottom = '6px';
-
+    Object.assign(combinerModeToggle.style, {
+        fontSize: '10px', padding: '2px 8px', cursor: 'pointer',
+        backgroundColor: '#f0f0f0', border: '1px solid #ccc', borderRadius: '3px',
+        width: '100%', marginBottom: '6px'
+    });
     combinerModeToggle.addEventListener('click', function () {
       combinerMode = combinerMode === 'two' ? 'three' : 'two';
       this.textContent = combinerMode === 'two' ? 'Combine 3 candidates' : 'Combine 2 candidates';
@@ -38796,451 +38773,211 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         for (let i = 0; i < candidates.length; i++) {
           if (i !== combinedCandidateIndex1 && i !== combinedCandidateIndex2) {
             combinedCandidateIndex3 = i;
-            document.getElementById('combiner_candidate_selector3').value = i;
+            const sel3 = document.getElementById('combiner_candidate_selector3');
+            if(sel3) sel3.value = i;
             break;
           }
         }
       }
-      updateMapStyles();
-      updateLegend();
+      triggerUpdate();
     });
-
     singleTeamContainer.appendChild(combinerModeToggle);
 
-    const combinerLabel1 = document.createElement('div');
-    combinerLabel1.style.fontSize = '11px';
-    combinerLabel1.style.marginBottom = '3px';
-    combinerLabel1.textContent = 'Primary candidate:';
-    singleTeamContainer.appendChild(combinerLabel1);
+    const createCandidateSelect = (id, selectedIdx, callback) => {
+        const s = document.createElement('select');
+        s.id = id;
+        Object.assign(s.style, { width: '100%', padding: '4px', marginBottom: '4px' });
+        candidates.forEach((c, i) => {
+            const o = document.createElement('option'); o.value = i; o.textContent = c.fields.last_name;
+            if (i === selectedIdx) o.selected = true;
+            s.appendChild(o);
+        });
+        s.addEventListener('change', callback);
+        return s;
+    };
+    
+    const createLabel = (txt) => {
+        const d = document.createElement('div');
+        Object.assign(d.style, { fontSize: '11px', marginBottom: '3px' });
+        d.textContent = txt;
+        return d;
+    };
 
-    const combinerCandidateSelector1 = document.createElement('select');
-    combinerCandidateSelector1.id = 'combiner_candidate_selector1';
-    combinerCandidateSelector1.style.width = '100%';
-    combinerCandidateSelector1.style.padding = '4px';
-    combinerCandidateSelector1.style.marginBottom = '4px';
-    candidates.forEach((candidate, idx) => {
-      const option = document.createElement('option');
-      option.value = idx;
-      option.textContent = candidate.fields.last_name;
-      if (idx === combinedCandidateIndex1) option.selected = true;
-      combinerCandidateSelector1.appendChild(option);
-    });
-    singleTeamContainer.appendChild(combinerCandidateSelector1);
+    singleTeamContainer.appendChild(createLabel('Primary candidate:'));
+    singleTeamContainer.appendChild(createCandidateSelect('combiner_candidate_selector1', combinedCandidateIndex1, function() {
+        combinedCandidateIndex1 = parseInt(this.value); triggerUpdate();
+    }));
 
-    const combinerLabel2 = document.createElement('div');
-    combinerLabel2.style.fontSize = '11px';
-    combinerLabel2.style.marginBottom = '3px';
-    combinerLabel2.textContent = 'Combine with:';
-    singleTeamContainer.appendChild(combinerLabel2);
-
-    const combinerCandidateSelector2 = document.createElement('select');
-    combinerCandidateSelector2.id = 'combiner_candidate_selector2';
-    combinerCandidateSelector2.style.width = '100%';
-    combinerCandidateSelector2.style.padding = '4px';
-    combinerCandidateSelector2.style.marginBottom = '4px';
-    candidates.forEach((candidate, idx) => {
-      const option = document.createElement('option');
-      option.value = idx;
-      option.textContent = candidate.fields.last_name;
-      if (idx === combinedCandidateIndex2) option.selected = true;
-      combinerCandidateSelector2.appendChild(option);
-    });
-    singleTeamContainer.appendChild(combinerCandidateSelector2);
+    singleTeamContainer.appendChild(createLabel('Combine with:'));
+    singleTeamContainer.appendChild(createCandidateSelect('combiner_candidate_selector2', combinedCandidateIndex2, function() {
+        combinedCandidateIndex2 = parseInt(this.value); triggerUpdate();
+    }));
 
     const thirdCandidateContainer = document.createElement('div');
     thirdCandidateContainer.id = 'combiner_third_container';
     thirdCandidateContainer.style.display = combinerMode === 'three' ? 'block' : 'none';
-    const combinerLabel3 = document.createElement('div');
-    combinerLabel3.style.fontSize = '11px';
-    combinerLabel3.style.marginBottom = '3px';
-    combinerLabel3.textContent = 'Also combine with:';
-    thirdCandidateContainer.appendChild(combinerLabel3);
-    const combinerCandidateSelector3 = document.createElement('select');
-    combinerCandidateSelector3.id = 'combiner_candidate_selector3';
-    combinerCandidateSelector3.style.width = '100%';
-    combinerCandidateSelector3.style.padding = '4px';
-    candidates.forEach((candidate, idx) => {
-      const option = document.createElement('option');
-      option.value = idx;
-      option.textContent = candidate.fields.last_name;
-      if (idx === combinedCandidateIndex3) option.selected = true;
-      combinerCandidateSelector3.appendChild(option);
-    });
-    thirdCandidateContainer.appendChild(combinerCandidateSelector3);
+    thirdCandidateContainer.appendChild(createLabel('Also combine with:'));
+    thirdCandidateContainer.appendChild(createCandidateSelect('combiner_candidate_selector3', combinedCandidateIndex3, function() {
+        combinedCandidateIndex3 = parseInt(this.value); triggerUpdate();
+    }));
     singleTeamContainer.appendChild(thirdCandidateContainer);
     combinerContainer.appendChild(singleTeamContainer);
 
     const headToHeadContainer = document.createElement('div');
     headToHeadContainer.id = 'head_to_head_container';
     headToHeadContainer.style.display = headToHeadMode ? 'block' : 'none';
-
-    const team1Label = document.createElement('div');
-    team1Label.style.fontSize = '11px';
-    team1Label.style.marginBottom = '3px';
-    team1Label.style.fontWeight = 'bold';
-    team1Label.textContent = 'Team 1:';
-    headToHeadContainer.appendChild(team1Label);
-
-    const team1Candidate1 = document.createElement('select');
-    team1Candidate1.id = 'head_to_head_team1_candidate1';
-    team1Candidate1.style.width = '100%';
-    team1Candidate1.style.padding = '4px';
-    team1Candidate1.style.marginBottom = '2px';
-    candidates.forEach((candidate, idx) => {
-      const option = document.createElement('option');
-      option.value = idx;
-      option.textContent = candidate.fields.last_name;
-      if (idx === headToHeadTeam1Index1) option.selected = true;
-      team1Candidate1.appendChild(option);
-    });
-    headToHeadContainer.appendChild(team1Candidate1);
-
-    const team1Candidate2 = document.createElement('select');
-    team1Candidate2.id = 'head_to_head_team1_candidate2';
-    team1Candidate2.style.width = '100%';
-    team1Candidate2.style.padding = '4px';
-    team1Candidate2.style.marginBottom = '6px';
-    candidates.forEach((candidate, idx) => {
-      const option = document.createElement('option');
-      option.value = idx;
-      option.textContent = candidate.fields.last_name;
-      if (idx === headToHeadTeam1Index2) option.selected = true;
-      team1Candidate2.appendChild(option);
-    });
-    headToHeadContainer.appendChild(team1Candidate2);
-
-    const team2Label = document.createElement('div');
-    team2Label.style.fontSize = '11px';
-    team2Label.style.marginBottom = '3px';
-    team2Label.style.fontWeight = 'bold';
-    team2Label.textContent = 'Team 2:';
-    headToHeadContainer.appendChild(team2Label);
-
-    const team2Candidate1 = document.createElement('select');
-    team2Candidate1.id = 'head_to_head_team2_candidate1';
-    team2Candidate1.style.width = '100%';
-    team2Candidate1.style.padding = '4px';
-    team2Candidate1.style.marginBottom = '2px';
-    candidates.forEach((candidate, idx) => {
-      const option = document.createElement('option');
-      option.value = idx;
-      option.textContent = candidate.fields.last_name;
-      if (idx === headToHeadTeam2Index1) option.selected = true;
-      team2Candidate1.appendChild(option);
-    });
-    headToHeadContainer.appendChild(team2Candidate1);
-
-    const team2Candidate2 = document.createElement('select');
-    team2Candidate2.id = 'head_to_head_team2_candidate2';
-    team2Candidate2.style.width = '100%';
-    team2Candidate2.style.padding = '4px';
-    candidates.forEach((candidate, idx) => {
-      const option = document.createElement('option');
-      option.value = idx;
-      option.textContent = candidate.fields.last_name;
-      if (idx === headToHeadTeam2Index2) option.selected = true;
-      team2Candidate2.appendChild(option);
-    });
-    headToHeadContainer.appendChild(team2Candidate2);
+    
+    headToHeadContainer.appendChild(createLabel('Team 1:'));
+    headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team1_candidate1', headToHeadTeam1Index1, function() { headToHeadTeam1Index1 = parseInt(this.value); triggerUpdate(); }));
+    headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team1_candidate2', headToHeadTeam1Index2, function() { headToHeadTeam1Index2 = parseInt(this.value); triggerUpdate(); }));
+    
+    headToHeadContainer.appendChild(createLabel('Team 2:'));
+    headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team2_candidate1', headToHeadTeam2Index1, function() { headToHeadTeam2Index1 = parseInt(this.value); triggerUpdate(); }));
+    headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team2_candidate2', headToHeadTeam2Index2, function() { headToHeadTeam2Index2 = parseInt(this.value); triggerUpdate(); }));
+    
     combinerContainer.appendChild(headToHeadContainer);
-    controls.appendChild(combinerContainer);
+    mainFrag.appendChild(combinerContainer);
 
     const tippingPointContainer = document.createElement('div');
     tippingPointContainer.id = 'tipping_point_controls_container';
-    tippingPointContainer.style.display = currentMode === VISUALIZATION_MODES.TIPPING_POINT ? 'block' : 'none';
     tippingPointContainer.style.marginBottom = '8px';
+    tippingPointContainer.style.display = 'none';
 
-    const tippingPointLabel = document.createElement('label');
-    tippingPointLabel.textContent = 'Perspective: ';
-    tippingPointLabel.style.marginRight = '5px';
-    tippingPointLabel.style.fontSize = '11px';
-    tippingPointContainer.appendChild(tippingPointLabel);
+    const tippingLabel = document.createElement('label');
+    tippingLabel.textContent = 'Perspective: ';
+    Object.assign(tippingLabel.style, { marginRight: '5px', fontSize: '11px' });
+    tippingPointContainer.appendChild(tippingLabel);
 
-    const tippingPointCandidateSelector = document.createElement('select');
-    tippingPointCandidateSelector.id = 'tipping_point_candidate_selector';
-    tippingPointCandidateSelector.style.width = '100%';
-    tippingPointCandidateSelector.style.padding = '4px';
-
-    candidates.forEach((candidate, idx) => {
-      const option = document.createElement('option');
-      option.value = idx;
-      option.textContent = candidate.fields.last_name;
-      if (idx === selectedCandidateIndex) {
-        option.selected = true;
-      }
-      tippingPointCandidateSelector.appendChild(option);
+    const tippingSelector = document.createElement('select');
+    tippingSelector.id = 'tipping_point_candidate_selector';
+    Object.assign(tippingSelector.style, { width: '100%', padding: '4px' });
+    candidates.forEach((c, i) => {
+        const o = document.createElement('option'); o.value = i; o.textContent = c.fields.last_name;
+        if (i === selectedCandidateIndex) o.selected = true;
+        tippingSelector.appendChild(o);
     });
-
-    tippingPointContainer.appendChild(tippingPointCandidateSelector);
-    controls.appendChild(tippingPointContainer);
+    tippingSelector.addEventListener('change', function() {
+        selectedCandidateIndex = parseInt(this.value); triggerUpdate();
+    });
+    tippingPointContainer.appendChild(tippingSelector);
+    mainFrag.appendChild(tippingPointContainer);
 
     const issueContainer = document.createElement('div');
     issueContainer.id = 'issue_selector_container';
-    issueContainer.style.display = ['issue_stance', 'issue_weight', 'candidate_issue_alignment'].includes(currentMode) ? 'block' : 'none';
     issueContainer.style.marginBottom = '8px';
+    issueContainer.style.display = 'none';
 
     const issueSelector = document.createElement('select');
     issueSelector.id = 'issue_selector';
-    issueSelector.style.width = '100%';
-    issueSelector.style.padding = '4px';
-    issueSelector.style.marginBottom = '4px';
+    Object.assign(issueSelector.style, { width: '100%', padding: '4px', marginBottom: '4px' });
 
     if (campaignTrail_temp.issues_json) {
       campaignTrail_temp.issues_json.forEach((issue, idx) => {
         const option = document.createElement('option');
-        option.value = idx;
-        option.textContent = issue.fields.name;
-        if (idx === selectedIssueIndex && !showAverageIssueStance) {
-          option.selected = true;
-        }
+        option.value = idx; option.textContent = issue.fields.name;
+        if (idx === selectedIssueIndex && !showAverageIssueStance) option.selected = true;
         issueSelector.appendChild(option);
       });
-
-      const averageOption = document.createElement('option');
-      averageOption.value = 'average';
-      averageOption.textContent = 'Average of all issues';
-      if (showAverageIssueStance) {
-        averageOption.selected = true;
-      }
-      issueSelector.appendChild(averageOption);
+      const avgOpt = document.createElement('option');
+      avgOpt.value = 'average'; avgOpt.textContent = 'Average of all issues';
+      if (showAverageIssueStance) avgOpt.selected = true;
+      issueSelector.appendChild(avgOpt);
     }
-
+    issueSelector.addEventListener('change', function () {
+      if (this.value === 'average') {
+        showAverageIssueStance = true; selectedIssueIndex = 0;
+      } else {
+        showAverageIssueStance = false; selectedIssueIndex = parseInt(this.value);
+      }
+      triggerUpdate();
+    });
     issueContainer.appendChild(issueSelector);
 
     const alignmentCandidateContainer = document.createElement('div');
     alignmentCandidateContainer.id = 'alignment_candidate_container';
-    alignmentCandidateContainer.style.display = currentMode === VISUALIZATION_MODES.CANDIDATE_ISSUE_ALIGNMENT ? 'block' : 'none';
+    alignmentCandidateContainer.style.display = 'none';
 
-    const modeToggleContainer = document.createElement('div');
-    modeToggleContainer.style.marginBottom = '4px';
-    modeToggleContainer.style.textAlign = 'center';
-
-    const modeToggle = document.createElement('button');
-    modeToggle.textContent = alignmentComparisonMode === 'single' ? 'Compare multiple' : 'Single view';
-    modeToggle.style.fontSize = '10px';
-    modeToggle.style.padding = '2px 8px';
-    modeToggle.style.cursor = 'pointer';
-    modeToggle.style.backgroundColor = '#f0f0f0';
-    modeToggle.style.border = '1px solid #ccc';
-    modeToggle.style.borderRadius = '3px';
-
-    modeToggle.addEventListener('click', function () {
+    const alignModeToggleDiv = document.createElement('div');
+    Object.assign(alignModeToggleDiv.style, { marginBottom: '4px', textAlign: 'center' });
+    
+    const alignModeToggle = document.createElement('button');
+    alignModeToggle.textContent = alignmentComparisonMode === 'single' ? 'Compare multiple' : 'Single view';
+    Object.assign(alignModeToggle.style, { fontSize: '10px', padding: '2px 8px', cursor: 'pointer', backgroundColor: '#f0f0f0', border: '1px solid #ccc', borderRadius: '3px' });
+    alignModeToggle.addEventListener('click', function () {
       alignmentComparisonMode = alignmentComparisonMode === 'single' ? 'comparison' : 'single';
       this.textContent = alignmentComparisonMode === 'single' ? 'Compare multiple' : 'Single view';
-
-      document.getElementById('single_alignment_container').style.display =
-        alignmentComparisonMode === 'single' ? 'block' : 'none';
-      document.getElementById('comparison_alignment_container').style.display =
-        alignmentComparisonMode === 'comparison' ? 'block' : 'none';
-
-      updateMapStyles();
-      updateLegend();
+      document.getElementById('single_alignment_container').style.display = alignmentComparisonMode === 'single' ? 'block' : 'none';
+      document.getElementById('comparison_alignment_container').style.display = alignmentComparisonMode === 'comparison' ? 'block' : 'none';
+      triggerUpdate();
     });
+    alignModeToggleDiv.appendChild(alignModeToggle);
+    alignmentCandidateContainer.appendChild(alignModeToggleDiv);
 
-    modeToggleContainer.appendChild(modeToggle);
-    alignmentCandidateContainer.appendChild(modeToggleContainer);
-
-    const singleAlignmentContainer = document.createElement('div');
-    singleAlignmentContainer.id = 'single_alignment_container';
-    singleAlignmentContainer.style.display = alignmentComparisonMode === 'single' ? 'block' : 'none';
-
-    const alignmentCandidateSelector = document.createElement('select');
-    alignmentCandidateSelector.id = 'alignment_candidate_selector';
-    alignmentCandidateSelector.style.width = '100%';
-    alignmentCandidateSelector.style.padding = '4px';
-
-    candidates.forEach((candidate, idx) => {
-      const option = document.createElement('option');
-      option.value = idx;
-      option.textContent = candidate.fields.last_name + ' alignment';
-      if (idx === selectedAlignmentCandidateIndex) {
-        option.selected = true;
-      }
-      alignmentCandidateSelector.appendChild(option);
+    const singleAlignDiv = document.createElement('div');
+    singleAlignDiv.id = 'single_alignment_container';
+    singleAlignDiv.style.display = alignmentComparisonMode === 'single' ? 'block' : 'none';
+    const alignCandSelector = document.createElement('select');
+    alignCandSelector.id = 'alignment_candidate_selector';
+    Object.assign(alignCandSelector.style, { width: '100%', padding: '4px' });
+    candidates.forEach((c, i) => {
+        const o = document.createElement('option'); o.value = i; o.textContent = c.fields.last_name + ' alignment';
+        if (i === selectedAlignmentCandidateIndex) o.selected = true;
+        alignCandSelector.appendChild(o);
     });
+    alignCandSelector.addEventListener('change', function() {
+        selectedAlignmentCandidateIndex = parseInt(this.value); triggerUpdate();
+    });
+    singleAlignDiv.appendChild(alignCandSelector);
+    alignmentCandidateContainer.appendChild(singleAlignDiv);
 
-    singleAlignmentContainer.appendChild(alignmentCandidateSelector);
-    alignmentCandidateContainer.appendChild(singleAlignmentContainer);
-
-    const comparisonContainer = document.createElement('div');
-    comparisonContainer.id = 'comparison_alignment_container';
-    comparisonContainer.style.display = alignmentComparisonMode === 'comparison' ? 'block' : 'none';
-    comparisonContainer.style.fontSize = '10px';
-    const maxCandidatesToCompare = Math.min(candidates.length, 8);
-    const comparisonLabel = document.createElement('div');
-    comparisonLabel.textContent = `Select candidates (max ${maxCandidatesToCompare}):`;
-    comparisonLabel.style.marginBottom = '3px';
-    comparisonLabel.style.fontWeight = 'bold';
-    comparisonContainer.appendChild(comparisonLabel);
+    const compareDiv = document.createElement('div');
+    compareDiv.id = 'comparison_alignment_container';
+    compareDiv.style.display = alignmentComparisonMode === 'comparison' ? 'block' : 'none';
+    compareDiv.style.fontSize = '10px';
+    
+    const compareLabel = document.createElement('div');
+    compareLabel.textContent = `Select candidates (max ${Math.min(candidates.length, 8)}):`;
+    Object.assign(compareLabel.style, { marginBottom: '3px', fontWeight: 'bold' });
+    compareDiv.appendChild(compareLabel);
 
     selectedComparisonCandidates = selectedComparisonCandidates.filter(idx => idx < candidates.length);
+    if (selectedComparisonCandidates.length === 0 && candidates.length > 0) selectedComparisonCandidates = [0, 1].filter(i => i < candidates.length);
 
-    if (selectedComparisonCandidates.length === 0 && candidates.length > 0) {
-      selectedComparisonCandidates = [0, 1].filter(idx => idx < candidates.length);
-    }
-
-    candidates.forEach((candidate, idx) => {
-      const checkContainer = document.createElement('div');
-      checkContainer.style.marginBottom = '2px';
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.id = `cand_check_${idx}`;
-      checkbox.value = idx;
-      checkbox.checked = selectedComparisonCandidates.includes(idx);
-      checkbox.style.marginRight = '4px';
-
-      checkbox.addEventListener('change', function () {
-        const isChecked = this.checked;
-        const candIdx = parseInt(this.value);
-
-        if (isChecked) {
-          if (selectedComparisonCandidates.length < maxCandidatesToCompare) {
-            selectedComparisonCandidates.push(candIdx);
-          } else {
-            this.checked = false;
-            alert(`Maximum ${maxCandidatesToCompare} candidates can be compared`);
-          }
-        } else {
-          if (selectedComparisonCandidates.length > 1) {
-            selectedComparisonCandidates = selectedComparisonCandidates.filter(i => i !== candIdx);
-          } else {
-            this.checked = true; // Prevent unchecking the last one
-          }
-        }
-        updateMapStyles();
-        updateLegend();
-      });
-
-      const label = document.createElement('label');
-      label.htmlFor = `cand_check_${idx}`;
-      label.textContent = candidate.fields.last_name;
-      label.style.cursor = 'pointer';
-
-      checkContainer.appendChild(checkbox);
-      checkContainer.appendChild(label);
-      comparisonContainer.appendChild(checkContainer);
-    });
-
-    alignmentCandidateContainer.appendChild(comparisonContainer);
-    issueContainer.appendChild(alignmentCandidateContainer);
-
-    controls.appendChild(issueContainer);
-
-    let updateTimeout;
-    modeSelector.addEventListener('change', function () {
-      currentMode = this.value;
-      candidateContainer.style.display = currentMode === VISUALIZATION_MODES.CANDIDATE_STRENGTH ? 'block' : 'none';
-      coalitionContainer.style.display = currentMode === VISUALIZATION_MODES.COALITION_BUILDER ? 'block' : 'none';
-      combinerContainer.style.display = currentMode === VISUALIZATION_MODES.CANDIDATE_COMBINER ? 'block' : 'none';
-      tippingPointContainer.style.display = currentMode === VISUALIZATION_MODES.TIPPING_POINT ? 'block' : 'none';
-      senateControlsContainer.style.display = currentMode === VISUALIZATION_MODES.SENATE_RACES ? 'block' : 'none';
-      issueContainer.style.display = ['issue_stance', 'issue_weight', 'candidate_issue_alignment'].includes(currentMode) ? 'block' : 'none';
-      alignmentCandidateContainer.style.display = currentMode === VISUALIZATION_MODES.CANDIDATE_ISSUE_ALIGNMENT ? 'block' : 'none';
-
-      clearTimeout(updateTimeout);
-      updateTimeout = setTimeout(() => {
-        updateMapStyles();
-        updateLegend();
-      }, 10);
-    });
-
-    candidateSelector.addEventListener('change', function () {
-      selectedCandidateIndex = parseInt(this.value);
-      clearTimeout(updateTimeout);
-      updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10);
-    });
-
-    coalitionCandidateSelector.addEventListener('change', function () {
-      coalitionCandidateIndex = parseInt(this.value);
-      const newCandidateResult = campaignTrail_temp.final_overall_results.find(r => r.candidate === candidates[coalitionCandidateIndex]?.pk);
-      const totalNationalVotes = campaignTrail_temp.final_overall_results.reduce((sum, r) => sum + r.popular_votes, 0);
-      const newActualVoteShare = newCandidateResult && totalNationalVotes > 0 ? newCandidateResult.popular_votes / totalNationalVotes : 0.35;
-      coalitionVoteShare = newActualVoteShare;
-      voteShareSlider.value = coalitionVoteShare;
-      updateVoteShareLabel();
-      updateMapStyles();
-      updateLegend();
-    });
-
-    function updateVoteShareLabel() {
-      const currentCandidateResult = campaignTrail_temp.final_overall_results.find(r => r.candidate === candidates[coalitionCandidateIndex]?.pk);
-      const totalNationalVotes = campaignTrail_temp.final_overall_results.reduce((sum, r) => sum + r.popular_votes, 0);
-      const actualVoteShare = currentCandidateResult && totalNationalVotes > 0 ? currentCandidateResult.popular_votes / totalNationalVotes : 0.35;
-      sliderLabel.innerHTML = `Vote share: <span id="vote-share-display" style="cursor: pointer; color: #007acc; text-decoration: underline;">${(coalitionVoteShare * 100).toFixed(1)}%</span> (Current: ${(actualVoteShare * 100).toFixed(1)}%)`;
-
-      const voteShareDisplay = document.getElementById('vote-share-display');
-      if (voteShareDisplay) {
-        voteShareDisplay.addEventListener('click', function () {
-          const currentValue = (coalitionVoteShare * 100).toFixed(1);
-          const input = document.createElement('input');
-          input.type = 'number';
-          input.value = currentValue;
-          input.min = '0'; input.max = '100'; input.step = '0.1';
-          input.style.width = '50px'; input.style.fontSize = '11px';
-          this.replaceWith(input);
-          input.focus(); input.select();
-          function finishEdit() {
-            const newValue = parseFloat(input.value);
-            if (!isNaN(newValue) && newValue >= 0 && newValue <= 100) {
-              coalitionVoteShare = newValue / 100;
-              voteShareSlider.value = coalitionVoteShare;
-              updateMapStyles(); updateLegend();
+    candidates.forEach((c, i) => {
+        const checkDiv = document.createElement('div');
+        checkDiv.style.marginBottom = '2px';
+        const cb = document.createElement('input');
+        cb.type = 'checkbox'; cb.id = `cand_check_${i}`; cb.value = i;
+        cb.checked = selectedComparisonCandidates.includes(i);
+        cb.style.marginRight = '4px';
+        cb.addEventListener('change', function() {
+            const isChecked = this.checked;
+            const cIdx = parseInt(this.value);
+            const max = Math.min(candidates.length, 8);
+            if(isChecked) {
+                if(selectedComparisonCandidates.length < max) selectedComparisonCandidates.push(cIdx);
+                else { this.checked = false; alert(`Maximum ${max} candidates can be compared`); }
+            } else {
+                if(selectedComparisonCandidates.length > 1) selectedComparisonCandidates = selectedComparisonCandidates.filter(x => x !== cIdx);
+                else this.checked = true;
             }
-            updateVoteShareLabel();
-          }
-          input.addEventListener('blur', finishEdit);
-          input.addEventListener('keypress', (e) => { if (e.key === 'Enter') finishEdit(); });
+            triggerUpdate();
         });
-      }
-    }
-
-    voteShareSlider.addEventListener('input', function () {
-      coalitionVoteShare = parseFloat(this.value);
-      updateVoteShareLabel();
-      clearTimeout(updateTimeout);
-      updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 50);
+        const lb = document.createElement('label');
+        lb.htmlFor = `cand_check_${i}`; lb.textContent = c.fields.last_name; lb.style.cursor = 'pointer';
+        checkDiv.appendChild(cb); checkDiv.appendChild(lb);
+        compareDiv.appendChild(checkDiv);
     });
+    alignmentCandidateContainer.appendChild(compareDiv);
+    
+    issueContainer.appendChild(alignmentCandidateContainer);
+    mainFrag.appendChild(issueContainer);
 
-    coalitionModeSelector.addEventListener('change', function () {
-      coalitionMode = this.value;
-      updateMapStyles(); updateLegend();
-    });
-
-    issueSelector.addEventListener('change', function () {
-      if (this.value === 'average') {
-        showAverageIssueStance = true;
-        selectedIssueIndex = 0;
-      } else {
-        showAverageIssueStance = false;
-        selectedIssueIndex = parseInt(this.value);
-      }
-      clearTimeout(updateTimeout);
-      updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10);
-    });
-
-    alignmentCandidateSelector.addEventListener('change', function () {
-      selectedAlignmentCandidateIndex = parseInt(this.value);
-      clearTimeout(updateTimeout);
-      updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10);
-    });
-
-    combinerCandidateSelector1.addEventListener('change', () => { combinedCandidateIndex1 = parseInt(combinerCandidateSelector1.value); clearTimeout(updateTimeout); updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10); });
-    combinerCandidateSelector2.addEventListener('change', () => { combinedCandidateIndex2 = parseInt(combinerCandidateSelector2.value); clearTimeout(updateTimeout); updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10); });
-    combinerCandidateSelector3.addEventListener('change', () => { combinedCandidateIndex3 = parseInt(combinerCandidateSelector3.value); clearTimeout(updateTimeout); updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10); });
-
-    team1Candidate1.addEventListener('change', () => { headToHeadTeam1Index1 = parseInt(team1Candidate1.value); clearTimeout(updateTimeout); updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10); });
-    team1Candidate2.addEventListener('change', () => { headToHeadTeam1Index2 = parseInt(team1Candidate2.value); clearTimeout(updateTimeout); updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10); });
-    team2Candidate1.addEventListener('change', () => { headToHeadTeam2Index1 = parseInt(team2Candidate1.value); clearTimeout(updateTimeout); updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10); });
-    team2Candidate2.addEventListener('change', () => { headToHeadTeam2Index2 = parseInt(team2Candidate2.value); clearTimeout(updateTimeout); updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10); });
-
-    tippingPointCandidateSelector.addEventListener('change', function () {
-      selectedCandidateIndex = parseInt(this.value);
-      clearTimeout(updateTimeout);
-      updateTimeout = setTimeout(() => { updateMapStyles(); updateLegend(); }, 10);
-    });
-
+    controls.appendChild(mainFrag);
     document.body.appendChild(controls);
     makeDraggable(controls, controlsHandle);
+    
+    updateControls();
   }
 
   function createIssueStanceLegend(issueIndex) {
@@ -40609,139 +40346,133 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   }
 
   function updateLegend() {
-
-    $('#map_legend').remove();
-
-    if (currentMode === VISUALIZATION_MODES.SOLID) return;
-
-    const legend = document.createElement('div');
-    legend.id = 'map_legend';
-    legend.style.position = 'absolute';
-    legend.style.background = 'rgba(252, 252, 252, 0.92)';
-    legend.style.border = '1px solid #aaa';
-    legend.style.padding = '8px';
-    legend.style.borderRadius = '4px';
-    legend.style.boxShadow = '0 1px 4px rgba(0,0,0,0.2)';
-    legend.style.zIndex = '1000';
-    legend.style.fontSize = '11px';
-
-    if (currentMode === VISUALIZATION_MODES.CANDIDATE_COMBINER && headToHeadMode) {
-      legend.style.width = '200px';
-    } else {
-      legend.style.width = '180px';
+    if (currentMode === VISUALIZATION_MODES.SOLID) {
+      const existingLegend = document.getElementById('map_legend');
+      if (existingLegend) existingLegend.style.display = 'none';
+      return;
     }
 
-    const legendHandle = document.createElement('div');
-    legendHandle.style.height = '20px';
-    legendHandle.style.marginBottom = '5px';
-    legendHandle.style.display = 'flex';
-    legendHandle.style.alignItems = 'center';
-    legendHandle.style.justifyContent = 'center';
-    legendHandle.style.background = 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)';
-    legendHandle.style.borderBottom = '1px solid #ccc';
-    legendHandle.style.cursor = 'move';
-    legendHandle.style.marginLeft = '-8px';
-    legendHandle.style.marginRight = '-8px';
-    legendHandle.style.marginTop = '-8px';
-    legendHandle.style.borderRadius = '4px 4px 0 0';
+    let legend = document.getElementById('map_legend');
+    let contentContainer;
 
-    const dragIndicator = document.createElement('span');
-    dragIndicator.textContent = '⋮⋮';
-    dragIndicator.style.color = '#999';
-    dragIndicator.style.fontSize = '12px';
-    dragIndicator.style.letterSpacing = '2px';
-    legendHandle.appendChild(dragIndicator);
+    if (!legend) {
+      legend = document.createElement('div');
+      legend.id = 'map_legend';
+      Object.assign(legend.style, {
+        position: 'absolute', background: 'rgba(252, 252, 252, 0.92)',
+        border: '1px solid #aaa', padding: '8px', borderRadius: '4px',
+        boxShadow: '0 1px 4px rgba(0,0,0,0.2)', zIndex: '1000', fontSize: '11px'
+      });
 
-    legend.appendChild(legendHandle);
+      const handle = document.createElement('div');
+      Object.assign(handle.style, {
+        height: '20px', marginBottom: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)', borderBottom: '1px solid #ccc',
+        cursor: 'move', marginLeft: '-8px', marginRight: '-8px', marginTop: '-8px', borderRadius: '4px 4px 0 0'
+      });
+      
+      const dragIndicator = document.createElement('span');
+      dragIndicator.textContent = '⋮⋮';
+      Object.assign(dragIndicator.style, { color: '#999', fontSize: '12px', letterSpacing: '2px' });
+      handle.appendChild(dragIndicator);
+      legend.appendChild(handle);
 
-    if (currentMode === VISUALIZATION_MODES.MARGINS) {
-      legend.appendChild(createMarginLegend());
-    } else if (currentMode === VISUALIZATION_MODES.CANDIDATE_STRENGTH) {
-      if (candidatePerformanceMode === 'relative') {
-        const relativePerformanceLegend = createRelativePerformanceLegend(selectedCandidateIndex);
-        if (relativePerformanceLegend) legend.appendChild(relativePerformanceLegend);
+      contentContainer = document.createElement('div');
+      contentContainer.id = 'map_legend_content';
+      legend.appendChild(contentContainer);
+
+      if (legendMoved && legendPosition) {
+        legend.style.left = legendPosition.left + 'px';
+        legend.style.top = legendPosition.top + 'px';
+        document.body.appendChild(legend);
       } else {
-        const performanceLegend = createPerformanceLegend(selectedCandidateIndex);
-        if (performanceLegend) legend.appendChild(performanceLegend);
-      }
-    } else if (currentMode === VISUALIZATION_MODES.COMPETITIVENESS) {
-      legend.appendChild(createCompetitivenessLegend());
-    } else if (currentMode === VISUALIZATION_MODES.TURNOUT_CHANGE) {
-      legend.appendChild(createTurnoutChangeLegend());
-    } else if (currentMode === VISUALIZATION_MODES.VOTE_SHARE) {
-      legend.appendChild(createVoteShareLegend());
-    } else if (currentMode === VISUALIZATION_MODES.ISSUE_STANCE) {
-      const issueStanceLegend = createIssueStanceLegend(selectedIssueIndex);
-      if (issueStanceLegend) legend.appendChild(issueStanceLegend);
-    } else if (currentMode === VISUALIZATION_MODES.ISSUE_WEIGHT) {
-      const issueWeightLegend = createIssueWeightLegend(selectedIssueIndex);
-      if (issueWeightLegend) legend.appendChild(issueWeightLegend);
-    } else if (currentMode === VISUALIZATION_MODES.CANDIDATE_ISSUE_ALIGNMENT) {
-      if (alignmentComparisonMode === 'comparison') {
-        const comparisonLegend = createComparisonAlignmentLegend(selectedIssueIndex);
-        if (comparisonLegend) legend.appendChild(comparisonLegend);
-      } else {
-        const alignmentLegend = createCandidateIssueAlignmentLegend(selectedIssueIndex, selectedAlignmentCandidateIndex);
-        if (alignmentLegend) legend.appendChild(alignmentLegend);
-      }
-    } else if (currentMode === VISUALIZATION_MODES.COALITION_BUILDER) {
-      const coalitionLegend = createCoalitionBuilderLegend();
-      if (coalitionLegend) legend.appendChild(coalitionLegend);
-    } else if (currentMode === VISUALIZATION_MODES.CANDIDATE_COMBINER) {
-      if (headToHeadMode) {
-        const headToHeadLegend = createHeadToHeadLegend();
-        if (headToHeadLegend) legend.appendChild(headToHeadLegend);
-      } else {
-        const combinerLegend = createCandidateCombinerLegend();
-        if (combinerLegend) legend.appendChild(combinerLegend);
-      }
-    } else if (currentMode === VISUALIZATION_MODES.TIPPING_POINT) {
-      legend.appendChild(createTippingPointLegend());
-    } else if (currentMode === VISUALIZATION_MODES.SENATE_RACES) {
-      legend.appendChild(createSenateRacesLegend());
-    } else if (currentMode === VISUALIZATION_MODES.HOUSE_COMPOSITION) {
-      legend.appendChild(createHouseCompositionLegend());
-    }
-
-    if (legendMoved && legendPosition) {
-      legend.style.left = legendPosition.left + 'px';
-      legend.style.top = legendPosition.top + 'px';
-    } else {
-      const controlsBox = document.getElementById('map_controls');
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const LEGEND_GAP = 15;
-
-      if (controlsBox) {
-        legend.style.visibility = 'hidden';
-        document.body.appendChild(legend); // Temporarily add to measure
-        const legendHeight = legend.offsetHeight;
-        const legendWidth = legend.offsetWidth;
-        document.body.removeChild(legend); // Remove before re-positioning
-
-        const controlsRect = controlsBox.getBoundingClientRect();
-        const fitsBelow = (controlsRect.bottom + LEGEND_GAP + legendHeight) < window.innerHeight;
-        const fitsBeside = (controlsRect.right + LEGEND_GAP + legendWidth) < window.innerWidth;
-
-        if (fitsBelow) {
-          legend.style.top = (controlsRect.bottom + scrollTop + LEGEND_GAP) + 'px';
-          legend.style.left = controlsRect.left + 'px';
-        } else if (fitsBeside) {
-          legend.style.top = (controlsRect.top + scrollTop) + 'px';
-          legend.style.left = (controlsRect.right + LEGEND_GAP) + 'px';
+        const controlsBox = document.getElementById('map_controls');
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        
+        if (controlsBox) {
+          legend.style.visibility = 'hidden';
+          document.body.appendChild(legend);
+          
+          const lh = legend.offsetHeight;
+          const lw = legend.offsetWidth;
+          const rect = controlsBox.getBoundingClientRect();
+          
+          const fitsBelow = (rect.bottom + 15 + lh) < window.innerHeight;
+          const fitsBeside = (rect.right + 15 + lw) < window.innerWidth;
+          
+          if (fitsBelow) {
+            legend.style.top = (rect.bottom + scrollTop + 15) + 'px';
+            legend.style.left = rect.left + 'px';
+          } else if (fitsBeside) {
+            legend.style.top = (rect.top + scrollTop) + 'px';
+            legend.style.left = (rect.right + 15) + 'px';
+          } else {
+            const flippedTop = rect.top + scrollTop - lh - 15;
+            legend.style.top = Math.max(scrollTop + 10, flippedTop) + 'px';
+            legend.style.left = rect.left + 'px';
+          }
+          legend.style.visibility = 'visible';
         } else {
-          const flippedTop = controlsRect.top + scrollTop - legendHeight - LEGEND_GAP;
-          legend.style.top = Math.max(scrollTop + 10, flippedTop) + 'px';
-          legend.style.left = controlsRect.left + 'px';
+          legend.style.top = '350px';
+          legend.style.left = '20px';
+          document.body.appendChild(legend);
         }
-        legend.style.visibility = 'visible';
-      } else {
-        legend.style.top = '350px';
-        legend.style.left = '20px';
       }
+      makeDraggable(legend, handle);
+    } else {
+      legend.style.display = 'block';
+      contentContainer = document.getElementById('map_legend_content');
     }
 
-    document.body.appendChild(legend);
-    makeDraggable(legend, legendHandle);
+    legend.style.width = (currentMode === VISUALIZATION_MODES.CANDIDATE_COMBINER && headToHeadMode) ? '200px' : '180px';
+
+    const frag = document.createDocumentFragment();
+    let specLegend = null;
+
+    switch (currentMode) {
+      case VISUALIZATION_MODES.MARGINS:
+        specLegend = createMarginLegend();
+        break;
+      case VISUALIZATION_MODES.CANDIDATE_STRENGTH:
+        specLegend = candidatePerformanceMode === 'relative' ? createRelativePerformanceLegend(selectedCandidateIndex) : createPerformanceLegend(selectedCandidateIndex);
+        break;
+      case VISUALIZATION_MODES.COMPETITIVENESS:
+        specLegend = createCompetitivenessLegend();
+        break;
+      case VISUALIZATION_MODES.TURNOUT_CHANGE:
+        specLegend = createTurnoutChangeLegend();
+        break;
+      case VISUALIZATION_MODES.VOTE_SHARE:
+        specLegend = createVoteShareLegend();
+        break;
+      case VISUALIZATION_MODES.ISSUE_STANCE:
+        specLegend = createIssueStanceLegend(selectedIssueIndex);
+        break;
+      case VISUALIZATION_MODES.ISSUE_WEIGHT:
+        specLegend = createIssueWeightLegend(selectedIssueIndex);
+        break;
+      case VISUALIZATION_MODES.CANDIDATE_ISSUE_ALIGNMENT:
+        specLegend = alignmentComparisonMode === 'comparison' ? createComparisonAlignmentLegend(selectedIssueIndex) : createCandidateIssueAlignmentLegend(selectedIssueIndex, selectedAlignmentCandidateIndex);
+        break;
+      case VISUALIZATION_MODES.COALITION_BUILDER:
+        specLegend = createCoalitionBuilderLegend();
+        break;
+      case VISUALIZATION_MODES.CANDIDATE_COMBINER:
+        specLegend = headToHeadMode ? createHeadToHeadLegend() : createCandidateCombinerLegend();
+        break;
+      case VISUALIZATION_MODES.TIPPING_POINT:
+        specLegend = createTippingPointLegend();
+        break;
+      case VISUALIZATION_MODES.SENATE_RACES:
+        specLegend = createSenateRacesLegend();
+        break;
+      case VISUALIZATION_MODES.HOUSE_COMPOSITION:
+        specLegend = createHouseCompositionLegend();
+        break;
+    }
+
+    if (specLegend) frag.appendChild(specLegend);
+    contentContainer.replaceChildren(frag);
   }
 
   function isInElectionMapView() {
@@ -40771,45 +40502,9 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     if (map && !map._customHoverAttached) {
 
       map.options.mouseover = function (event, data) {
-        const stateAbbr = data.name;
-        let hoverFill = "#AAAAAA";
-
-        try {
-          let stateStyle = styleCache[currentMode]?.[stateAbbr];
-
-          if (currentMode === VISUALIZATION_MODES.CANDIDATE_STRENGTH) {
-            const perfStyle = stateStyle[selectedCandidateIndex];
-            hoverFill = (candidatePerformanceMode === 'relative') ? perfStyle.relativeHoverFill : perfStyle.hoverFill;
-          } else if (currentMode === VISUALIZATION_MODES.ISSUE_STANCE) {
-            const issueStyle = showAverageIssueStance ? stateStyle.average : stateStyle[selectedIssueIndex];
-            hoverFill = issueStyle.hoverFill;
-          } else if (currentMode === VISUALIZATION_MODES.ISSUE_WEIGHT) {
-            if (stateStyle && stateStyle[selectedIssueIndex]) {
-              hoverFill = stateStyle[selectedIssueIndex].hoverFill;
-            }
-          } else if (currentMode === VISUALIZATION_MODES.CANDIDATE_ISSUE_ALIGNMENT) {
-            if (alignmentComparisonMode === 'comparison') {
-              hoverFill = darkenColor(data.shape.attr('fill'));
-            } else {
-              const alignStyle = showAverageIssueStance ? stateStyle.average[selectedAlignmentCandidateIndex] : stateStyle[selectedIssueIndex][selectedAlignmentCandidateIndex];
-              hoverFill = alignStyle.hoverFill;
-            }
-          } else if (currentMode === VISUALIZATION_MODES.SENATE_RACES) {
-            const senateMode = window.currentSenateMode || 'solid';
-            if (senateMode === 'margins') hoverFill = stateStyle.marginHoverFill;
-            else if (senateMode === 'holds_gains') hoverFill = stateStyle.holdsGainsHoverFill;
-            else hoverFill = stateStyle.solidHoverFill;
-          } else if ([VISUALIZATION_MODES.TIPPING_POINT, VISUALIZATION_MODES.COALITION_BUILDER, VISUALIZATION_MODES.CANDIDATE_COMBINER, VISUALIZATION_MODES.HOUSE_COMPOSITION].includes(currentMode)) {
-            hoverFill = darkenColor(data.shape.attr('fill'));
-          } else if (stateStyle) {
-            hoverFill = stateStyle.hoverFill;
-          }
-        } catch (e) {
-          console.error("Error getting hover color for:", stateAbbr, e);
-          hoverFill = darkenColor(data.shape.attr('fill'));
-        }
-
+        const hoverFill = data.shape.data('hoverFill') || "#AAAAAA";
         data.shape.attr({ fill: hoverFill });
+        
         if (map.options.click && typeof map.options.click === 'function') {
           map.options.click(event, data);
         }
@@ -40817,16 +40512,18 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       };
 
       map.options.mouseout = function (event, data) {
-        const stateAbbr = data.name;
-        let originalFill = data.shape.data('originalFill') || "#C9C9C9";
+        const originalFill = data.shape.data('originalFill') || "#C9C9C9";
         data.shape.attr({ fill: originalFill });
         return false;
       };
 
       map._customHoverAttached = true;
+      
       for (const stateAbbr in map.stateShapes) {
         if (map.stateShapes[stateAbbr] && typeof map.stateShapes[stateAbbr].data === 'function') {
-          map.stateShapes[stateAbbr].data('originalFill', map.stateShapes[stateAbbr].attr('fill'));
+          const currentFill = map.stateShapes[stateAbbr].attr('fill');
+          map.stateShapes[stateAbbr].data('originalFill', currentFill);
+          map.stateShapes[stateAbbr].data('hoverFill', darkenColor(currentFill));
         }
       }
     }
@@ -41118,6 +40815,12 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       artist: "U2",
       coverLink: "https://lh3.googleusercontent.com/oGD5OqEmUIFFMP-qP8lyH5sDy13R2LI52NEl82c7qjdeKyoieWQUJh56Cx2wYoLNgxaOBB2cPwRoj3Cj=w544-h544-l90-rj",
       videoIds: ["udwMPDmvxGw", "fh7BJ1ylbJw", "Fg4MfA3BCyI"]
+    },
+	{
+      title: "Disparate Youth",
+      artist: "Santigold",
+      coverLink: "https://i.scdn.co/image/ab67616d0000b27381a3294d8cb52667c8701e6f",
+      videoIds: ["l44f3N0pfA0", "GTVSe5eYOio"]
     },
     {
       title: "Codex",
@@ -41553,7 +41256,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       item.style.setProperty('--tz', `${zPos}px`);
       item.style.setProperty('--rot', `${rotation}deg`);
       item.style.setProperty('--s', scale);
-
+	  
 	  item.classList.toggle('has-reflection', absOffset <= 2);
 
       let opacity = '1';
@@ -41571,7 +41274,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       }
     }
   }
-
+  
 	function createCoverFlowPool() {
 		const coverFlowContainer = document.getElementById('cover-flow-container');
 		if (!coverFlowContainer || poolItems.length > 0) return; // already created
@@ -41599,7 +41302,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 
 		coverFlowContainer.appendChild(frag);
 	}
-
+	
 	function resetCoverFlow() {
 		// invalidate all pool slots
 		for (let i = 0; i < POOL_SIZE; i++) {
@@ -41634,7 +41337,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       for (let i = start; i < end; i++) {
 		const url = songs[i].getCoverLink();
         if (preloadedUrls.has(url)) continue;
-
+       
         preloadedUrls.add(url);
         const img = new Image();
         img.decoding = 'async';
@@ -41752,9 +41455,9 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       playPauseButton._imgCache = playPauseButton.querySelector('img');
     }
     const img = playPauseButton._imgCache;
-
+	
 	const newState = isPaused ? 'paused' : 'playing';
-
+    
     if (playPauseButton.dataset.state === newState) return;
     playPauseButton.dataset.state = newState;
 
@@ -41764,7 +41467,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       img.src = isPaused ? ICON_PLAY : ICON_PAUSE;
       img.alt = "";
     }
-
+    
     playPauseButton.setAttribute('aria-label', label);
     playPauseButton.title = label;
   }
@@ -42040,7 +41743,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
     if (!volumeSlider || !volumePercentageElement) return;
     const volumeValue = parseFloat(volumeSlider.value);
     const newVolumePercent = Math.round(volumeValue * 100);
-
+	
     volumeSlider.style.setProperty('--volume-percent', `${newVolumePercent}%`);
 
     if (playerReady && ytPlayer && typeof ytPlayer.setVolume === 'function') {
@@ -42175,7 +41878,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
   }
   let lastQueuePlaylistId = null;
   let lastActiveQueueIndex = -1;
-
+  
   const queueItemTemplate = document.createElement('template');
   queueItemTemplate.innerHTML = `
     <li class="${PLAYER_QUEUE_ITEM_CLASS}" role="option">
@@ -42187,7 +41890,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
   let queueItemCache = [];
 
   let dragSrcEl = null;
-
+  
   function createQueueItem() {
     return queueItemTemplate.content.firstElementChild.cloneNode(true);
   }
@@ -42244,7 +41947,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 	  emptyItem.className = `${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty`;
 	  emptyItem.textContent = 'Queue is empty';
 	  queueListElement.replaceChildren(emptyItem);
-
+	  
       lastQueuePlaylistId = null;
       lastActiveQueueIndex = -1;
       return;
@@ -42818,7 +42521,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       });
     });
   }
-
+  
   const playerSheet = new CSSStyleSheet();
 
   function injectPlayerStyles() {
@@ -43147,8 +42850,8 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 				opacity: 0; cursor: pointer; z-index: 10; margin: 0;
 			}
-
-			/* small focus ring for accessibility */
+			
+			/* small focus ring for accessibility */			
             .${PLAYER_CONTROL_BUTTON_CLASS}:focus, #${PLAYLIST_SELECTOR_ID}:focus { outline: 2px solid #66b3ff; outline-offset: 2px; }
 			#${PLAYER_ELEMENT_ID}:focus { outline: none; }
 
@@ -43237,7 +42940,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       // render cover flow
 	  createCoverFlowPool();
 	  resetCoverFlow();
-
+	  
       // preload covers
       preloadCovers(playlist.getSongs());
 
@@ -43362,7 +43065,7 @@ function selectLeadingOpponent() {
 
 function selectTopOpponents() {
   const eligible = republicanContenders.filter(c => c.condition());
-
+  
   const priorityMap = new Map();
   eligible.forEach(c => priorityMap.set(c, c.priority()));
 
@@ -43508,10 +43211,10 @@ hqSheet.replaceSync(`
     .hq-opp-info { flex: 1; }
     .hq-opp-name { margin: 0 0 6px 0; font-size: 1.2em; font-weight: bold; }
     .hq-opp-advice { margin: 0; font-size: 0.85em; line-height: 1.4; opacity: 0.95; }
-
+    
     .hq-opp-trailing-box {
-        background: rgba(255,255,255,0.1); border-left: 3px solid #999;
-        padding: 8px 12px; margin-top: 8px; border-radius: 4px;
+        background: rgba(255,255,255,0.1); border-left: 3px solid #999; 
+        padding: 8px 12px; margin-top: 8px; border-radius: 4px; 
         font-size: 0.85em; opacity: 0.8;
     }
 
@@ -43577,12 +43280,12 @@ hqSheet.replaceSync(`
     .hq-select:focus {
         border-color: #42a5f5; box-shadow: 0 0 0 3px rgba(66,165,245,0.2), inset 0 1px 3px rgba(0,0,0,0.1);
     }
-
+    
     .hq-text-center { text-align: center; }
     .hq-dim { opacity: 0.6; }
     .hq-modal-banner {
-        text-align: center; margin-bottom: 24px; padding: 12px;
-        background: rgba(0,0,0,0.3); border-radius: 8px;
+        text-align: center; margin-bottom: 24px; padding: 12px; 
+        background: rgba(0,0,0,0.3); border-radius: 8px; 
         border: 1px solid rgba(255,255,255,0.1);
     }
 `);
@@ -44128,7 +43831,7 @@ window.openHeadquarter = function () {
     dashboardTab.style.display = 'none';
     operationsTab.style.display = 'block';
     headerText.innerText = 'Covert Operations';
-
+	
 	if (_opsTabDirty) {
         buildOperationsTab(operationsTab);
         _opsTabDirty = false;
@@ -44198,9 +43901,9 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
 
     const badge = el('div', 'hq-opp-badge', index === 0 ? 'FRONTRUNNER' : 'CONTENDER');
     badge.style.background = badgeColor;
-
+    
     const contentDiv = el('div', 'hq-opp-content');
-
+    
     const img = document.createElement('img');
     img.className = 'hq-opp-img';
     img.src = opponent.picture;
@@ -44217,7 +43920,7 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
     infoDiv.appendChild(adviceP);
     contentDiv.appendChild(img);
     contentDiv.appendChild(infoDiv);
-
+    
     opponentCard.appendChild(badge);
     opponentCard.appendChild(contentDiv);
     opponentsFragment.appendChild(opponentCard);
@@ -44233,7 +43936,7 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
 
   contentRow.appendChild(opponentContainer);
   frag.appendChild(contentRow);
-
+  
   container.replaceChildren(frag);
 }
 
@@ -44336,7 +44039,7 @@ function buildOperationsTab(container) {
   statusContainer.appendChild(cooldownsCard);
   contentRow.appendChild(statusContainer);
   frag.appendChild(contentRow);
-
+  
   container.replaceChildren(frag);
 }
 
@@ -44700,9 +44403,9 @@ const HOUSE_2012_DATA = {
     _cachedMajorIds = { demId, repId };
     return _cachedMajorIds;
   }
-
+  
 	const PARTY_COLORS = [
-	  { keywords: ['American Independent', 'Reform'], color: '#6A287E' },
+	  { keywords: ['American Independent', 'Reform'], color: '#6A287E' },	  
 	  { keywords: ['Independent American'], color: '#c49334' },
 	  { keywords: ['Independence', 'Justice'], color: '#c5991e' },
 	  { keywords: ['Democrat'], color: '#194A9F' },
@@ -45176,10 +44879,10 @@ const HOUSE_2012_DATA = {
           shouldHide = isSenOpt || isGovOpt;
         }
 
-        if (opt.hidden !== shouldHide) {
-          opt.hidden = shouldHide;
-          opt.disabled = shouldHide;
-          opt.style.display = shouldHide ? 'none' : '';
+        if (opt.hidden !== shouldHide) { 
+          opt.hidden = shouldHide; 
+          opt.disabled = shouldHide; 
+          opt.style.display = shouldHide ? 'none' : ''; 
         }
       }
 
@@ -45263,7 +44966,7 @@ const HOUSE_2012_DATA = {
 
   if (!is2012()) return;
   console.log("Initializing congress system...");
-
+  
   window.congressSystem = (() => {
     function tick() {
       injectFinalTable();
@@ -46043,7 +45746,7 @@ window.dynamicEndingTable = { tick: onGameWindowChangeCandidates };
 class ChartEnhancer {
   static sheet = new CSSStyleSheet();
   static stylesInjected = false;
-
+	
   constructor() {
     this.isProcessing = false;
     this.initializeStyles();
@@ -46111,8 +45814,8 @@ class ChartEnhancer {
         visibility: visible;
         opacity: 1;
         pointer-events: auto;
-        transition-delay: 0s;
-
+        transition-delay: 0s;		
+		
         font-family: Arial, sans-serif !important;
         font-style: normal !important;
       }
