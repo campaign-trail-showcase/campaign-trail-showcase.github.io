@@ -23065,7 +23065,7 @@ function applyDataModifications() {
       });
     });
   }
-  
+
   // reapply tooltips to text that otherwise wouldn't load
   if (window.tooltipProcessor) {
       window.tooltipProcessor.applyToObject(campaignTrail_temp.questions_json);
@@ -23508,11 +23508,11 @@ window.setImage = window.endingImageSystem.setImage;
 const extraEndingStyles = new CSSStyleSheet();
 extraEndingStyles.replaceSync(`
   #main-ending-scroll-container {
-    contain: content; 
+    contain: content;
     will-change: scroll-position;
     -webkit-overflow-scrolling: touch;
-    height: 38em; 
-    overflow: auto; 
+    height: 38em;
+    overflow: auto;
     position: relative;
   }
   .slide-wrapper {
@@ -23536,9 +23536,9 @@ document.adoptedStyleSheets = [...document.adoptedStyleSheets, extraEndingStyles
 // image preloader
 function preloadEndingAssets() {
   if (!campaignTrail_temp.pages) return;
-  
+
   const tempImg = new Image();
-  
+
   Object.values(campaignTrail_temp.executable || {}).forEach(func => {
     // this is a rough heuristic to catch image sets
     const str = func.toString();
@@ -23575,34 +23575,34 @@ window.endingConstructor = (direction = 1) => {
   if (newPage < 0 || newPage >= campaignTrail_temp.pages.length) {
     return; // out of bounds
   }
-  
+
   campaignTrail_temp.page = newPage;
 
   let finalDesc = document.getElementById("final_results_description");
   let scrollContainer = document.getElementById("main-ending-scroll-container");
   let narrativeDiv = document.getElementById("endingtxt");
   let buttonProxy = document.getElementById("ending-button-proxy");
-  
+
   if (!scrollContainer) {
     const finalDesc = document.getElementById("final_results_description");
-    
+
     const shellFragment = document.createDocumentFragment();
-    
+
     // container
     scrollContainer = document.createElement("div");
     scrollContainer.id = "main-ending-scroll-container";
-    
+
     // narrative area
     narrativeDiv = document.createElement("div");
     narrativeDiv.id = "endingtxt";
     narrativeDiv.className = "ending-narrative-content";
     scrollContainer.appendChild(narrativeDiv);
-    
+
     // stats area
     const statsContainer = document.createElement("div");
     statsContainer.id = "ending-stats-container";
     statsContainer.style.paddingTop = "1rem";
-    
+
     const statsIds = ["difficulty_mult", "overall_vote_statistics", "map_footer"];
     statsIds.forEach(id => {
       const el = document.getElementById(id);
@@ -23622,7 +23622,7 @@ window.endingConstructor = (direction = 1) => {
     shellFragment.appendChild(buttonProxy);
 
     finalDesc.style.cssText = "text-align: left; width: 72%; height: auto; margin-left: auto; margin-right: auto; display: block;";
-    finalDesc.innerHTML = ""; 
+    finalDesc.innerHTML = "";
     finalDesc.appendChild(shellFragment);
 
     preloadEndingAssets();
@@ -23644,7 +23644,7 @@ window.endingConstructor = (direction = 1) => {
     const wrapper = document.createElement("div");
     wrapper.id = slideId;
     wrapper.className = "slide-wrapper";
-    
+
     // inject content
     wrapper.innerHTML = `
       <table style='margin:0px;padding:0px;display: table;width:100%;'>
@@ -23657,14 +23657,14 @@ window.endingConstructor = (direction = 1) => {
         </tbody>
       </table>
     `;
-    
+
     narrativeDiv.appendChild(wrapper);
   }
 
   // update the buttons
   let btnHtml = "";
   const lastPage = campaignTrail_temp.pages.length - 1;
-  
+
   if (campaignTrail_temp.pages.length > 1) {
     if (newPage === 0) {
       btnHtml = `<button onclick='endingConstructor(1)'>Next</button>`;
@@ -23854,7 +23854,7 @@ function endingPickerCONT() {
     endingObserver.disconnect();
     endingObserver = null;
   }
-  
+
   const oldSlide = document.getElementById("slide-wrapper-0");
   if (oldSlide) {
     oldSlide.remove();
@@ -27551,7 +27551,7 @@ const bonusSlides = [
 		justify-content: center;
 		overflow: hidden;
 	  }
-	  
+
 		.pf-album-art img {
 		  width: 100%;
 		  height: 100%;
@@ -27674,7 +27674,7 @@ const bonusSlides = [
 		color: #1a1a1a;
 		padding: 0 20px;
 	  }
-	  
+
 	  .pf-pullquote::before {
 		content: "“";
 		display: block;
@@ -27688,7 +27688,7 @@ const bonusSlides = [
 		padding-top: 40px;
 		border-top: 4px solid #1a1a1a;
 	  }
-	  
+
 	  .pf-tl-header {
 		font-family: 'Lato', sans-serif;
 		font-weight: 900;
@@ -27713,7 +27713,7 @@ const bonusSlides = [
 		align-items: baseline;
 		font-size: 14px;
 	  }
-	  
+
 	  .pf-tl-num {
 		color: #999;
 		font-weight: 700;
@@ -27769,7 +27769,7 @@ const bonusSlides = [
 	  </div>
 
 	  <div class="pf-hero">
-		
+
 		<div class="pf-info-block">
 		  <span class="pf-genre">R&B / Soul</span>
 		  <div class="pf-artist">Barack Obama</div>
@@ -27797,7 +27797,7 @@ const bonusSlides = [
 
 	  <div class="pf-body-container">
 		<div class="pf-article">
-		  
+
 		  <div class="pf-byline-bar">
 			<span>By <span class="pf-author">Jayson Greene</span></span>
 			<span>Contributor</span>
@@ -27818,7 +27818,7 @@ const bonusSlides = [
 		  <p>Where the album truly ignites is, perhaps interestingly, the Prince collaboration. Their version of "Thieves in the Temple" is genuinely startling, as Prince strips the original's Minneapolis funk down to an almost skeletal arrangement of minor-key Rhodes, a single snare hit on the two, and his own ghostly multi-tracked harmonies weaving around Obama's lead vocal. The effect is less a cover than a séance, but Obama's voice, which elsewhere can sound a little too careful, or too aware of its own limitations, here sounds much darker and looser. There is a moment in the bridge where Prince drops out entirely and Obama holds a note for what feels like an impossibly long time, and you realize with some shock that the man can actually <i>sing</i> when he stops trying to sing correctly.</p>
 
 		  <p>The record's other high points cluster around its most unexpected choices. "Edith and the Kingpin," the Joni Mitchell cut from <i>The Hissing of Summer Lawns</i>, is quite the inspired selection; a song about the seductive machinery of power, sung by a man who operated that very same machinery for eight years, alongside the woman who wrote it. Mitchell's voice, weathered and low in recent years, is a natural complement to Obama's range, and their interplay feels genuinely intimate. Not only that, but the arrangement, a smoky after-hours jazz-combo setting with Herbie Hancock sitting in on piano, is impeccable. "Brother, Can You Spare a Dime?," reimagined as a slow-burn duet with John Legend, is another highlight, as we see the Depression-era standard repositioned as something contemporary.</p>
-		  
+
 		  <p>A stripped-back "Summertime" with Esperanza Spalding is lovely and light, with Spalding's bass and Obama's voice occupying the same warm middle register in a way that produces some unexpected harmonics. And the closing track, "We're Going to Make It", the Little Milton song, performed as a duet with Michelle Obama, is either the most nakedly sentimental thing you will hear all year or a genuinely moving document of a marriage, depending on your tolerance. Michelle, it should be noted, can also sing. Way better than her husband, actually, though she'd never say so.</p>
 
 		  <p>The album sags in its middle third. "What's Going On" with D'Angelo is handsomely arranged but rote, as we see two tasteful men being tasteful at each other for five minutes. A cover of Curtis Mayfield's "People Get Ready" with Smokey Robinson is pretty in a way that is also its own limitation, as neither man pushes the other anywhere interesting. "Let's Stay Together," performed with Al Green himself, commits the sin of existing in a world where Al Green's original exists and is perfect and does not need a former president singing over it, no matter how nice the microphone preamps are. An overly busy "Inner City Blues" with Janelle Monáe tries to compensate for the mismatch in vocal ability with production fireworks and ends up sounding overproduced and cluttered.</p>
@@ -27838,7 +27838,7 @@ const bonusSlides = [
 			   <div class="pf-tl-item"><span class="pf-tl-num">06</span><div><span class="pf-tl-title">Edith and the Kingpin</span> <span class="pf-tl-feat">(feat. Joni Mitchell)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">07</span><div><span class="pf-tl-title">People Get Ready</span> <span class="pf-tl-feat">(feat. Smokey Robinson)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">08</span><div><span class="pf-tl-title">Let's Stay Together</span> <span class="pf-tl-feat">(feat. Al Green)</span></div></div>
-			   
+
 			   <div class="pf-tl-item"><span class="pf-tl-num">09</span><div><span class="pf-tl-title">What's Going On</span> <span class="pf-tl-feat">(feat. D'Angelo)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">10</span><div><span class="pf-tl-title">Summertime</span> <span class="pf-tl-feat">(feat. Esperanza Spalding)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">11</span><div><span class="pf-tl-title">Lean on Me</span> <span class="pf-tl-feat">(feat. Common)</span></div></div>
@@ -27849,7 +27849,7 @@ const bonusSlides = [
 			   <div class="pf-tl-item"><span class="pf-tl-num">16</span><div><span class="pf-tl-title">We're Going to Make It</span> <span class="pf-tl-feat">(feat. Michelle Obama)</span></div></div>
 			</div>
 		  </div>
-		  
+
 		</div>
 	  </div>
 
@@ -27857,7 +27857,7 @@ const bonusSlides = [
 		© 2017 Condé Nast. All rights reserved. Pitchfork may earn a portion of sales from products that are purchased through our site as part of our Affiliate Partnerships with retailers. The material on this site may not be reproduced, distributed, transmitted, cached or otherwise used, except with the prior written permission of Condé Nast.
 	  </div>
 
-	</div>	
+	</div>
 	`
   },
   {
@@ -31688,11 +31688,11 @@ endingPicker = (out, totv, aa, quickstats) => {
     // special logic for the tie
     campaignTrail_temp.executable[0] = () => {
       if (typeof setImage === 'function') setImage(selectedScenario.image);
-      
+
       const likA = Math.min(4, Math.max(0, Math.round(playerEV / 270 * 4)));
       const likB = Math.min(4, Math.max(0, Math.round((playerEV - 200) / 70 * 2)));
       const likC = Math.min(4, Math.max(0, Math.round((300 - opponentEVs) / 100 * 2)));
-      
+
       addContingent(likA, likB, likC);
     };
 
@@ -31769,7 +31769,7 @@ function finalizeRendering() {
     endingObserver.disconnect();
     endingObserver = null;
   }
-  
+
   const narrativeDiv = document.getElementById("endingtxt");
   if (narrativeDiv) {
     narrativeDiv.innerHTML = "";
@@ -32599,8 +32599,8 @@ e.vpSwitcher = () => {
       if (rmPic) {
         rmPic.src = e.running_mate_image_url;
       }
-	  
-      onGameChange(); 
+
+      onGameChange();
     }
 
     vpScreen.remove();
@@ -33882,7 +33882,7 @@ function handleFooter() {
   if (!oldCandidatePic || !oldRunningMatePic || !gameWindow) {
     return;
   }
-  
+
   // get question image
   const questionNumber = campaignTrail_temp.question_number;
   const currentQuestion = campaignTrail_temp.questions_json[questionNumber];
@@ -33961,9 +33961,9 @@ function ensureFooter() {
   const candidatePic = document.getElementById('candidate_pic');
   const runningMatePic = document.getElementById('running_mate_pic');
   const gameWindow = document.getElementById('game_window');
-  
+
   if (!candidatePic || !runningMatePic || !gameWindow) return;
-  
+
   handleFooter(candidatePic, runningMatePic, gameWindow);
 }
 
@@ -34053,7 +34053,7 @@ window.newFooter = { ensureFooter };
     return config;
   };
 
-  // logic for the first button 
+  // logic for the first button
   window.switchPV = function () {
     const swE = document.getElementById("switchingEst");
     if (!swE) return;
@@ -34905,7 +34905,7 @@ function applyCityIssueEffects(statePk, cityName) {
       if (isNaN(currentScore)) {
         currentScore = 0;
       }
-	  
+
 	  const newScore = Math.max(-MAX_ISSUE_SCORE_MAGNITUDE, Math.min(MAX_ISSUE_SCORE_MAGNITUDE, currentScore + modifier));
 
       issueRecord.fields.state_issue_score = newScore;
@@ -38415,7 +38415,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
   function updateControls() {
     const existingControls = document.getElementById('map_controls');
-    
+
     if (existingControls) {
       const toggle = (id, condition) => {
         const el = document.getElementById(id);
@@ -38427,10 +38427,10 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       toggle('coalition_controls_container', currentMode === VISUALIZATION_MODES.COALITION_BUILDER);
       toggle('combiner_controls_container', currentMode === VISUALIZATION_MODES.CANDIDATE_COMBINER);
       toggle('tipping_point_controls_container', currentMode === VISUALIZATION_MODES.TIPPING_POINT);
-      
+
       const isIssueMode = ['issue_stance', 'issue_weight', 'candidate_issue_alignment'].includes(currentMode);
       toggle('issue_selector_container', isIssueMode);
-      
+
       if (isIssueMode) {
         toggle('alignment_candidate_container', currentMode === VISUALIZATION_MODES.CANDIDATE_ISSUE_ALIGNMENT);
         toggle('single_alignment_container', alignmentComparisonMode === 'single');
@@ -38441,13 +38441,13 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       if (modeSelect && modeSelect.value !== currentMode) {
         modeSelect.value = currentMode;
       }
-      
-      return; 
+
+      return;
     }
 
     const controls = document.createElement('div');
     controls.id = 'map_controls';
-	
+
     Object.assign(controls.style, {
       position: 'absolute', background: 'rgba(255, 255, 255, 0.92)',
       border: '1px solid #aaa', padding: '8px', borderRadius: '4px',
@@ -38456,7 +38456,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     const container = document.querySelector('.container');
     const mapContainer = document.getElementById('map_container');
-    
+
     if (container && mapContainer) {
       const containerRect = container.getBoundingClientRect();
       const mapRect = mapContainer.getBoundingClientRect();
@@ -38470,7 +38470,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       controls.style.left = Math.max(20, containerRect.left - 200) + 'px';
       controls.style.top = Math.max(20, containerRect.top + scrollTop + 200) + 'px';
     } else {
-      controls.style.top = '200px'; 
+      controls.style.top = '200px';
       controls.style.left = '20px';
     }
 
@@ -38519,12 +38519,12 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     modeOptions.forEach(opt => {
       const el = document.createElement('option');
-      el.value = opt.value; 
+      el.value = opt.value;
       el.textContent = opt.text;
       if (opt.value === currentMode) el.selected = true;
       modeSelector.appendChild(el);
     });
-    
+
     modeSelector.addEventListener('change', function () {
       currentMode = this.value;
       updateControls();
@@ -38540,7 +38540,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     const senateModeToggle = document.createElement('select');
     senateModeToggle.id = 'senate_mode_selector';
     Object.assign(senateModeToggle.style, { width: '100%', padding: '4px' });
-    
+
     [{v:'solid', t:'Solid colors'}, {v:'margins', t:'Show margins'}, {v:'holds_gains', t:'Holds & gains'}].forEach(o => {
         const el = document.createElement('option'); el.value = o.v; el.textContent = o.t;
         senateModeToggle.appendChild(el);
@@ -38614,7 +38614,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     const sliderContainer = document.createElement('div');
     sliderContainer.style.marginBottom = '4px';
-    
+
     const sliderLabel = document.createElement('div');
     Object.assign(sliderLabel.style, { fontSize: '11px', marginBottom: '3px', textAlign: 'center' });
 
@@ -38622,7 +38622,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         const currentCandidateResult = campaignTrail_temp.final_overall_results.find(r => r.candidate === candidates[coalitionCandidateIndex]?.pk);
         const totalNationalVotes = campaignTrail_temp.final_overall_results.reduce((sum, r) => sum + r.popular_votes, 0);
         const actualVoteShare = currentCandidateResult && totalNationalVotes > 0 ? currentCandidateResult.popular_votes / totalNationalVotes : 0.35;
-        
+
         if (Math.abs(coalitionVoteShare - 0.5) < 0.01 && !window._coalitionVoteShareSet) {
              coalitionVoteShare = actualVoteShare;
              window._coalitionVoteShareSet = true;
@@ -38630,19 +38630,19 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
         sliderLabel.innerHTML = '';
         sliderLabel.appendChild(document.createTextNode('Vote Share: '));
-        
+
         const voteShareDisplay = document.createElement('span');
         voteShareDisplay.id = 'vote-share-display';
         Object.assign(voteShareDisplay.style, { cursor: 'pointer', textDecoration: 'underline', color: '#0066cc' });
         voteShareDisplay.textContent = `${(coalitionVoteShare * 100).toFixed(1)}%`;
-        
+
         voteShareDisplay.addEventListener('click', function (e) {
             e.stopPropagation();
             const directInput = document.createElement('input');
             directInput.type = 'number';
             directInput.min = '0'; directInput.max = '100'; directInput.step = '0.1';
             Object.assign(directInput.style, { width: '50px', fontSize: '11px', textAlign: 'center', position: 'absolute', zIndex: '1001' });
-            
+
             const rect = this.getBoundingClientRect();
             directInput.style.left = rect.left + 'px';
             directInput.style.top = rect.top + 'px';
@@ -38682,14 +38682,14 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     };
 
     sliderContainer.appendChild(sliderLabel);
-    
+
     const voteShareSlider = document.createElement('input');
     voteShareSlider.type = 'range';
     voteShareSlider.id = 'coalition_vote_share_slider';
     voteShareSlider.min = '0'; voteShareSlider.max = '1'; voteShareSlider.step = '0.001';
     voteShareSlider.style.width = '100%';
     voteShareSlider.style.marginBottom = '4px';
-    
+
     voteShareSlider.addEventListener('input', function () {
         coalitionVoteShare = parseFloat(this.value);
         updateVoteShareLabelAndLogic();
@@ -38795,7 +38795,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         s.addEventListener('change', callback);
         return s;
     };
-    
+
     const createLabel = (txt) => {
         const d = document.createElement('div');
         Object.assign(d.style, { fontSize: '11px', marginBottom: '3px' });
@@ -38826,15 +38826,15 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     const headToHeadContainer = document.createElement('div');
     headToHeadContainer.id = 'head_to_head_container';
     headToHeadContainer.style.display = headToHeadMode ? 'block' : 'none';
-    
+
     headToHeadContainer.appendChild(createLabel('Team 1:'));
     headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team1_candidate1', headToHeadTeam1Index1, function() { headToHeadTeam1Index1 = parseInt(this.value); triggerUpdate(); }));
     headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team1_candidate2', headToHeadTeam1Index2, function() { headToHeadTeam1Index2 = parseInt(this.value); triggerUpdate(); }));
-    
+
     headToHeadContainer.appendChild(createLabel('Team 2:'));
     headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team2_candidate1', headToHeadTeam2Index1, function() { headToHeadTeam2Index1 = parseInt(this.value); triggerUpdate(); }));
     headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team2_candidate2', headToHeadTeam2Index2, function() { headToHeadTeam2Index2 = parseInt(this.value); triggerUpdate(); }));
-    
+
     combinerContainer.appendChild(headToHeadContainer);
     mainFrag.appendChild(combinerContainer);
 
@@ -38899,7 +38899,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     const alignModeToggleDiv = document.createElement('div');
     Object.assign(alignModeToggleDiv.style, { marginBottom: '4px', textAlign: 'center' });
-    
+
     const alignModeToggle = document.createElement('button');
     alignModeToggle.textContent = alignmentComparisonMode === 'single' ? 'Compare multiple' : 'Single view';
     Object.assign(alignModeToggle.style, { fontSize: '10px', padding: '2px 8px', cursor: 'pointer', backgroundColor: '#f0f0f0', border: '1px solid #ccc', borderRadius: '3px' });
@@ -38934,7 +38934,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     compareDiv.id = 'comparison_alignment_container';
     compareDiv.style.display = alignmentComparisonMode === 'comparison' ? 'block' : 'none';
     compareDiv.style.fontSize = '10px';
-    
+
     const compareLabel = document.createElement('div');
     compareLabel.textContent = `Select candidates (max ${Math.min(candidates.length, 8)}):`;
     Object.assign(compareLabel.style, { marginBottom: '3px', fontWeight: 'bold' });
@@ -38969,14 +38969,14 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         compareDiv.appendChild(checkDiv);
     });
     alignmentCandidateContainer.appendChild(compareDiv);
-    
+
     issueContainer.appendChild(alignmentCandidateContainer);
     mainFrag.appendChild(issueContainer);
 
     controls.appendChild(mainFrag);
     document.body.appendChild(controls);
     makeDraggable(controls, controlsHandle);
-    
+
     updateControls();
   }
 
@@ -40370,7 +40370,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         background: 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)', borderBottom: '1px solid #ccc',
         cursor: 'move', marginLeft: '-8px', marginRight: '-8px', marginTop: '-8px', borderRadius: '4px 4px 0 0'
       });
-      
+
       const dragIndicator = document.createElement('span');
       dragIndicator.textContent = '⋮⋮';
       Object.assign(dragIndicator.style, { color: '#999', fontSize: '12px', letterSpacing: '2px' });
@@ -40388,18 +40388,18 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       } else {
         const controlsBox = document.getElementById('map_controls');
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        
+
         if (controlsBox) {
           legend.style.visibility = 'hidden';
           document.body.appendChild(legend);
-          
+
           const lh = legend.offsetHeight;
           const lw = legend.offsetWidth;
           const rect = controlsBox.getBoundingClientRect();
-          
+
           const fitsBelow = (rect.bottom + 15 + lh) < window.innerHeight;
           const fitsBeside = (rect.right + 15 + lw) < window.innerWidth;
-          
+
           if (fitsBelow) {
             legend.style.top = (rect.bottom + scrollTop + 15) + 'px';
             legend.style.left = rect.left + 'px';
@@ -40504,7 +40504,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       map.options.mouseover = function (event, data) {
         const hoverFill = data.shape.data('hoverFill') || "#AAAAAA";
         data.shape.attr({ fill: hoverFill });
-        
+
         if (map.options.click && typeof map.options.click === 'function') {
           map.options.click(event, data);
         }
@@ -40518,7 +40518,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       };
 
       map._customHoverAttached = true;
-      
+
       for (const stateAbbr in map.stateShapes) {
         if (map.stateShapes[stateAbbr] && typeof map.stateShapes[stateAbbr].data === 'function') {
           const currentFill = map.stateShapes[stateAbbr].attr('fill');
@@ -41256,7 +41256,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       item.style.setProperty('--tz', `${zPos}px`);
       item.style.setProperty('--rot', `${rotation}deg`);
       item.style.setProperty('--s', scale);
-	  
+
 	  item.classList.toggle('has-reflection', absOffset <= 2);
 
       let opacity = '1';
@@ -41274,7 +41274,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       }
     }
   }
-  
+
 	function createCoverFlowPool() {
 		const coverFlowContainer = document.getElementById('cover-flow-container');
 		if (!coverFlowContainer || poolItems.length > 0) return; // already created
@@ -41302,7 +41302,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 
 		coverFlowContainer.appendChild(frag);
 	}
-	
+
 	function resetCoverFlow() {
 		// invalidate all pool slots
 		for (let i = 0; i < POOL_SIZE; i++) {
@@ -41337,7 +41337,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       for (let i = start; i < end; i++) {
 		const url = songs[i].getCoverLink();
         if (preloadedUrls.has(url)) continue;
-       
+
         preloadedUrls.add(url);
         const img = new Image();
         img.decoding = 'async';
@@ -41455,9 +41455,9 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       playPauseButton._imgCache = playPauseButton.querySelector('img');
     }
     const img = playPauseButton._imgCache;
-	
+
 	const newState = isPaused ? 'paused' : 'playing';
-    
+
     if (playPauseButton.dataset.state === newState) return;
     playPauseButton.dataset.state = newState;
 
@@ -41467,7 +41467,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       img.src = isPaused ? ICON_PLAY : ICON_PAUSE;
       img.alt = "";
     }
-    
+
     playPauseButton.setAttribute('aria-label', label);
     playPauseButton.title = label;
   }
@@ -41743,7 +41743,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
     if (!volumeSlider || !volumePercentageElement) return;
     const volumeValue = parseFloat(volumeSlider.value);
     const newVolumePercent = Math.round(volumeValue * 100);
-	
+
     volumeSlider.style.setProperty('--volume-percent', `${newVolumePercent}%`);
 
     if (playerReady && ytPlayer && typeof ytPlayer.setVolume === 'function') {
@@ -41878,7 +41878,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
   }
   let lastQueuePlaylistId = null;
   let lastActiveQueueIndex = -1;
-  
+
   const queueItemTemplate = document.createElement('template');
   queueItemTemplate.innerHTML = `
     <li class="${PLAYER_QUEUE_ITEM_CLASS}" role="option">
@@ -41890,7 +41890,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
   let queueItemCache = [];
 
   let dragSrcEl = null;
-  
+
   function createQueueItem() {
     return queueItemTemplate.content.firstElementChild.cloneNode(true);
   }
@@ -41947,7 +41947,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 	  emptyItem.className = `${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty`;
 	  emptyItem.textContent = 'Queue is empty';
 	  queueListElement.replaceChildren(emptyItem);
-	  
+
       lastQueuePlaylistId = null;
       lastActiveQueueIndex = -1;
       return;
@@ -42521,7 +42521,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       });
     });
   }
-  
+
   const playerSheet = new CSSStyleSheet();
 
   function injectPlayerStyles() {
@@ -42850,8 +42850,8 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 				opacity: 0; cursor: pointer; z-index: 10; margin: 0;
 			}
-			
-			/* small focus ring for accessibility */			
+
+			/* small focus ring for accessibility */
             .${PLAYER_CONTROL_BUTTON_CLASS}:focus, #${PLAYLIST_SELECTOR_ID}:focus { outline: 2px solid #66b3ff; outline-offset: 2px; }
 			#${PLAYER_ELEMENT_ID}:focus { outline: none; }
 
@@ -42940,7 +42940,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       // render cover flow
 	  createCoverFlowPool();
 	  resetCoverFlow();
-	  
+
       // preload covers
       preloadCovers(playlist.getSongs());
 
@@ -43065,7 +43065,7 @@ function selectLeadingOpponent() {
 
 function selectTopOpponents() {
   const eligible = republicanContenders.filter(c => c.condition());
-  
+
   const priorityMap = new Map();
   eligible.forEach(c => priorityMap.set(c, c.priority()));
 
@@ -43211,10 +43211,10 @@ hqSheet.replaceSync(`
     .hq-opp-info { flex: 1; }
     .hq-opp-name { margin: 0 0 6px 0; font-size: 1.2em; font-weight: bold; }
     .hq-opp-advice { margin: 0; font-size: 0.85em; line-height: 1.4; opacity: 0.95; }
-    
+
     .hq-opp-trailing-box {
-        background: rgba(255,255,255,0.1); border-left: 3px solid #999; 
-        padding: 8px 12px; margin-top: 8px; border-radius: 4px; 
+        background: rgba(255,255,255,0.1); border-left: 3px solid #999;
+        padding: 8px 12px; margin-top: 8px; border-radius: 4px;
         font-size: 0.85em; opacity: 0.8;
     }
 
@@ -43280,12 +43280,12 @@ hqSheet.replaceSync(`
     .hq-select:focus {
         border-color: #42a5f5; box-shadow: 0 0 0 3px rgba(66,165,245,0.2), inset 0 1px 3px rgba(0,0,0,0.1);
     }
-    
+
     .hq-text-center { text-align: center; }
     .hq-dim { opacity: 0.6; }
     .hq-modal-banner {
-        text-align: center; margin-bottom: 24px; padding: 12px; 
-        background: rgba(0,0,0,0.3); border-radius: 8px; 
+        text-align: center; margin-bottom: 24px; padding: 12px;
+        background: rgba(0,0,0,0.3); border-radius: 8px;
         border: 1px solid rgba(255,255,255,0.1);
     }
 `);
@@ -43831,7 +43831,7 @@ window.openHeadquarter = function () {
     dashboardTab.style.display = 'none';
     operationsTab.style.display = 'block';
     headerText.innerText = 'Covert Operations';
-	
+
 	if (_opsTabDirty) {
         buildOperationsTab(operationsTab);
         _opsTabDirty = false;
@@ -43901,9 +43901,9 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
 
     const badge = el('div', 'hq-opp-badge', index === 0 ? 'FRONTRUNNER' : 'CONTENDER');
     badge.style.background = badgeColor;
-    
+
     const contentDiv = el('div', 'hq-opp-content');
-    
+
     const img = document.createElement('img');
     img.className = 'hq-opp-img';
     img.src = opponent.picture;
@@ -43920,7 +43920,7 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
     infoDiv.appendChild(adviceP);
     contentDiv.appendChild(img);
     contentDiv.appendChild(infoDiv);
-    
+
     opponentCard.appendChild(badge);
     opponentCard.appendChild(contentDiv);
     opponentsFragment.appendChild(opponentCard);
@@ -43936,7 +43936,7 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
 
   contentRow.appendChild(opponentContainer);
   frag.appendChild(contentRow);
-  
+
   container.replaceChildren(frag);
 }
 
@@ -44039,7 +44039,7 @@ function buildOperationsTab(container) {
   statusContainer.appendChild(cooldownsCard);
   contentRow.appendChild(statusContainer);
   frag.appendChild(contentRow);
-  
+
   container.replaceChildren(frag);
 }
 
@@ -44403,9 +44403,9 @@ const HOUSE_2012_DATA = {
     _cachedMajorIds = { demId, repId };
     return _cachedMajorIds;
   }
-  
+
 	const PARTY_COLORS = [
-	  { keywords: ['American Independent', 'Reform'], color: '#6A287E' },	  
+	  { keywords: ['American Independent', 'Reform'], color: '#6A287E' },
 	  { keywords: ['Independent American'], color: '#c49334' },
 	  { keywords: ['Independence', 'Justice'], color: '#c5991e' },
 	  { keywords: ['Democrat'], color: '#194A9F' },
@@ -44879,10 +44879,10 @@ const HOUSE_2012_DATA = {
           shouldHide = isSenOpt || isGovOpt;
         }
 
-        if (opt.hidden !== shouldHide) { 
-          opt.hidden = shouldHide; 
-          opt.disabled = shouldHide; 
-          opt.style.display = shouldHide ? 'none' : ''; 
+        if (opt.hidden !== shouldHide) {
+          opt.hidden = shouldHide;
+          opt.disabled = shouldHide;
+          opt.style.display = shouldHide ? 'none' : '';
         }
       }
 
@@ -44966,7 +44966,7 @@ const HOUSE_2012_DATA = {
 
   if (!is2012()) return;
   console.log("Initializing congress system...");
-  
+
   window.congressSystem = (() => {
     function tick() {
       injectFinalTable();
@@ -45746,7 +45746,7 @@ window.dynamicEndingTable = { tick: onGameWindowChangeCandidates };
 class ChartEnhancer {
   static sheet = new CSSStyleSheet();
   static stylesInjected = false;
-	
+
   constructor() {
     this.isProcessing = false;
     this.initializeStyles();
@@ -45814,8 +45814,8 @@ class ChartEnhancer {
         visibility: visible;
         opacity: 1;
         pointer-events: auto;
-        transition-delay: 0s;		
-		
+        transition-delay: 0s;
+
         font-family: Arial, sans-serif !important;
         font-style: normal !important;
       }
