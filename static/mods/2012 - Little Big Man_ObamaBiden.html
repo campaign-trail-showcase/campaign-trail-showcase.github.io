@@ -31830,15 +31830,17 @@ const BALANCE_SETTINGS = {
 
 // define regions to easily build coalitions
 const REGIONS = {
-  "Deep South": ["AL", "MS", "LA", "SC", "GA"],
-  "Appalachia": ["WV", "KY", "TN", "AR"],
-  "Rust Belt": ["OH", "PA", "MI", "WI"],
-  "Sun Belt": ["FL", "AZ", "NV", "NM", "TX"],
-  "Northeast": ["ME", "NH", "VT", "MA", "CT", "RI", "NY", "NJ", "DE", "MD", "DC"],
-  "West Coast": ["CA", "OR", "WA", "HI"],
-  "Mountain West": ["ID", "MT", "WY", "UT", "CO", "AK"],
-  "Plains": ["ND", "SD", "NE", "KS", "OK"],
-  "Midwest": ["MN", "IA", "MO", "IL", "IN"]
+  "New England": ["ME", "NH", "VT", "MA", "CT", "RI"],
+  "Mid-Atlantic": ["NY", "NJ", "DE", "MD", "DC"],
+  "Upper South": ["VA", "NC", "TN", "AR"],
+  "Deep South": ["SC", "GA", "AL", "MS", "LA", "FL"],
+  "Appalachia": ["WV", "KY"],
+  "Rust Belt": ["PA", "OH", "MI", "WI"],
+  "Midwest": ["MN", "IA", "IL", "IN", "MO"],
+  "Great Plains": ["ND", "SD", "NE", "KS", "OK"],
+  "Southwest": ["TX", "AZ", "NM", "NV"],
+  "Mountain West": ["CO", "UT", "WY", "ID", "MT", "AK"],
+  "West Coast": ["CA", "OR", "WA", "HI"]
 };
 
 function precomputeSwitcherooData() {
@@ -31976,11 +31978,12 @@ function applySwitcheroo(config) {
 // to reflect their strengths and weaknesses compared to the default
 const NOMINEE_MODIFICATIONS = {
   "Newt Gingrich": {
-    regionMultipliers: {
+    regionalMultipliers: {
       "Deep South": 1.065,
+      "Upper South": 1.040,
       "Appalachia": 1.032,
-      "Rust Belt": 0.988,
-      "Northeast": 0.943,
+      "Mid-Atlantic": 0.943,
+      "New England": 0.930,
       "West Coast": 0.954,
       "Mountain West": 0.934
     },
@@ -31992,12 +31995,13 @@ const NOMINEE_MODIFICATIONS = {
     }
   },
   "Rick Santorum": {
-    regionMultipliers: {
+    regionalMultipliers: {
       "Rust Belt": 1.03,
-      "Appalachia": 1.04,
-      "Plains": 1.02,
+      "Appalachia": 1.05,
+      "Great Plains": 1.02,
       "Midwest": 1.03,
-      "Northeast": 0.96,
+      "Mid-Atlantic": 0.96,
+      "New England": 0.94,
       "West Coast": 0.95
     },
     stateMultipliers: {
@@ -32010,13 +32014,14 @@ const NOMINEE_MODIFICATIONS = {
     }
   },
   "Jon Huntsman": {
-    regionMultipliers: {
-      "Northeast": 1.020,
+    regionalMultipliers: {
+      "New England": 1.035,
+      "Mid-Atlantic": 1.020,
       "West Coast": 1.021,
-      "Midwest": 1.010,
       "Mountain West": 1.053,
-      "Deep South": 0.96,
-      "Appalachia": 0.95
+      "Deep South": 0.940,
+      "Upper South": 0.950,
+      "Appalachia": 0.930
     },
     stateMultipliers: {
       "UT": 1.30,
@@ -32028,10 +32033,11 @@ const NOMINEE_MODIFICATIONS = {
     }
   },
   "Ron Paul": {
-    regionMultipliers: {
-      "Mountain West": 1.085,
-      "Plains": 1.065,
-      "Northeast": 0.98,
+    regionalMultipliers: {
+      "Mountain West": 1.035,
+      "Great Plains": 1.025,
+      "New England": 1.020,
+      "Mid-Atlantic": 0.960,
       "Deep South": 0.928
     },
     stateMultipliers: {
@@ -32044,16 +32050,18 @@ const NOMINEE_MODIFICATIONS = {
     }
   },
   "Rick Perry": {
-    regionMultipliers: {
-      "Sun Belt": 1.028,
+	regionalMultipliers: {
+      "Southwest": 1.028,
       "Deep South": 1.035,
-      "Appalachia": 1.032,
-      "Northeast": 0.922,
+      "Upper South": 1.032,
+      "New England": 0.922,
+      "Mid-Atlantic": 0.922,
       "West Coast": 0.921
     },
     stateMultipliers: {
       "TX": 1.12,
       "OK": 1.05,
+      "FL": 1.015,
       "IA": 0.98,
       "NH": 0.95,
       "UT": 0.90,
@@ -32061,10 +32069,12 @@ const NOMINEE_MODIFICATIONS = {
     }
   },
   "Michele Bachmann": {
-    regionMultipliers: {
+    regionalMultipliers: {
       "Midwest": 1.038,
-      "Plains": 1.043,
-      "Northeast": 0.934,
+      "Great Plains": 1.043,
+      "Appalachia": 1.020,
+      "Mid-Atlantic": 0.934,
+      "New England": 0.920,
       "West Coast": 0.932
     },
     stateMultipliers: {
@@ -32110,11 +32120,11 @@ const VP_BOOSTS = {
 function calculateConfiguration(nomineeName, vpName) {
   let baseConfig = NOMINEE_MODIFICATIONS[nomineeName]
     ? JSON.parse(JSON.stringify(NOMINEE_MODIFICATIONS[nomineeName]))
-    : { issueScores: {}, regionMultipliers: {}, stateMultipliers: {} };
+    : { issueScores: {}, regionalMultipliers: {}, stateMultipliers: {} };
 
   // ensure objects exist
   if (!baseConfig.stateMultipliers) baseConfig.stateMultipliers = {};
-  if (!baseConfig.regionMultipliers) baseConfig.regionMultipliers = {};
+  if (!baseConfig.regionalMultipliers) baseConfig.regionalMultipliers = {};
 
   const vpGeo = VP_GEOGRAPHY[vpName];
   if (!vpGeo) return baseConfig;
@@ -32129,8 +32139,8 @@ function calculateConfiguration(nomineeName, vpName) {
     else {
       // find which region this state belongs to
       let regionName = Object.keys(REGIONS).find(r => REGIONS[r].includes(stateAbbr));
-      if (regionName && baseConfig.regionMultipliers[regionName]) {
-        currentMult = baseConfig.regionMultipliers[regionName];
+      if (regionName && baseConfig.regionalMultipliers[regionName]) {
+        currentMult = baseConfig.regionalMultipliers[regionName];
       }
     }
 
@@ -32211,6 +32221,11 @@ const THIRD_PARTY_MODIFICATIONS = {
     candidateId: RIGHT_CANDIDATE_ID,
     color: "#8B0000",
     issueScores: { 1: -0.9, 3: -0.7, 5: 0.8 },
+    regionalMultipliers: {
+      "Southwest": 0.04,
+      "Deep South": 0.03,
+      "Mountain West": 0.03
+    },
     stateMultipliers: {
       "AZ": 0.06, "TX": 0.05, "OK": 0.06, "ID": 0.06,
       "MS": 0.05, "AL": 0.05
@@ -32220,6 +32235,12 @@ const THIRD_PARTY_MODIFICATIONS = {
     candidateId: RIGHT_CANDIDATE_ID,
     color: "#008080",
     issueScores: { 3: 0.6, 5: -0.6 },
+    regionalMultipliers: {
+      "Midwest": 0.05,
+      "Mountain West": 0.04,
+      "Great Plains": 0.03,
+      "New England": 0.02
+    },
     stateMultipliers: {
       "MN": 0.35,
       "NH": 0.08, "ME": 0.06, "CO": 0.06, "AK": 0.08, "NM": 0.06
@@ -32229,6 +32250,11 @@ const THIRD_PARTY_MODIFICATIONS = {
     candidateId: RIGHT_CANDIDATE_ID,
     color: "#A020F0",
     issueScores: { 3: -0.95, 4: -0.8 },
+    regionalMultipliers: {
+      "Appalachia": 0.04,
+      "Deep South": 0.04,
+      "Upper South": 0.03
+    },
     stateMultipliers: {
       "VA": 0.12,
       "NC": 0.05, "SC": 0.05, "AL": 0.06, "MS": 0.06, "TN": 0.05
@@ -32238,6 +32264,11 @@ const THIRD_PARTY_MODIFICATIONS = {
     candidateId: RIGHT_CANDIDATE_ID,
     color: "#708090",
     issueScores: { 1: -0.3 },
+    regionalMultipliers: {
+      "West Coast": 0.04,
+      "Mountain West": 0.05,
+      "Southwest": 0.03
+    },
     stateMultipliers: {
       "CA": 0.06, "ID": 0.06, "WY": 0.07, "MT": 0.07, "NV": 0.05
     }
@@ -32247,6 +32278,11 @@ const THIRD_PARTY_MODIFICATIONS = {
     candidateId: LEFT_CANDIDATE_ID,
     color: "#FF4500",
     issueScores: { 1: 0.8, 5: -0.8 },
+    regionalMultipliers: {
+      "West Coast": 0.04,
+      "Midwest": 0.03,
+      "New England": 0.02
+    },
     stateMultipliers: {
       "HI": 0.08,
       "CA": 0.05,
@@ -32257,6 +32293,11 @@ const THIRD_PARTY_MODIFICATIONS = {
     candidateId: LEFT_CANDIDATE_ID,
     color: "#FF69B4",
     issueScores: { 1: 0.9, 5: -0.9 },
+    regionalMultipliers: {
+      "New England": 0.05,
+      "Mid-Atlantic": 0.04,
+      "West Coast": 0.05
+    },
     stateMultipliers: {
       "NY": 0.09, "VT": 0.08, "MA": 0.06, "CA": 0.06, "WA": 0.06
     }
@@ -32265,6 +32306,11 @@ const THIRD_PARTY_MODIFICATIONS = {
     candidateId: LEFT_CANDIDATE_ID,
     color: "#9370DB",
     issueScores: { 1: 0.95, 3: 0.95 },
+    regionalMultipliers: {
+      "Mid-Atlantic": 0.06,
+      "New England": 0.03,
+      "West Coast": 0.02
+    },
     stateMultipliers: {
       "NY": 0.15,
       "MA": 0.06, "CT": 0.06, "NJ": 0.06, "RI": 0.06
@@ -32274,6 +32320,11 @@ const THIRD_PARTY_MODIFICATIONS = {
     candidateId: LEFT_CANDIDATE_ID,
     color: "#FFD700",
     issueScores: { 1: 0.3 },
+    regionalMultipliers: {
+      "West Coast": 0.055,
+      "New England": 0.03,
+      "Southwest": 0.02
+    },
     stateMultipliers: {
       "CA": 0.05, "OR": 0.04, "WA": 0.04
     }
@@ -37645,8 +37696,8 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         const row = table.insertRow();
 
         const colorCell = row.insertCell();
-        colorCell.style.width = '16px';
-        colorCell.style.height = '11px';
+        colorCell.style.width = '14px';
+        colorCell.style.height = '12px';
         colorCell.style.backgroundColor = blendMarginColor(candidate.fields.color_hex, margin);
         colorCell.style.border = '1px solid #ddd';
 
@@ -37732,7 +37783,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       const row = table.insertRow();
 
       const colorCell = row.insertCell();
-      colorCell.style.width = '16px';
+      colorCell.style.width = '14px';
       colorCell.style.height = '12px';
 
       let displayValue;
@@ -37868,7 +37919,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       const row = table.insertRow();
 
       const colorCell = row.insertCell();
-      colorCell.style.width = '16px';
+      colorCell.style.width = '14px';
       colorCell.style.height = '12px';
 
       colorCell.style.backgroundColor = blendRelativePerformanceColor(
@@ -37944,7 +37995,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       const row = table.insertRow();
 
       const colorCell = row.insertCell();
-      colorCell.style.width = '16px';
+      colorCell.style.width = '14px';
       colorCell.style.height = '12px';
       colorCell.style.backgroundColor = color;
       colorCell.style.border = '1px solid #ddd';
@@ -38006,7 +38057,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       const row = table.insertRow();
 
       const colorCell = row.insertCell();
-      colorCell.style.width = '16px';
+      colorCell.style.width = '14px';
       colorCell.style.height = '12px';
       colorCell.style.backgroundColor = color;
       colorCell.style.border = '1px solid #ddd';
@@ -38166,7 +38217,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         const row = table.insertRow();
 
         const colorCell = row.insertCell();
-        colorCell.style.width = '16px';
+        colorCell.style.width = '14px';
         colorCell.style.height = '12px';
         colorCell.style.backgroundColor = blendPerformanceColor(
           candidate.fields.color_hex,
@@ -38207,7 +38258,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         const row = table.insertRow();
 
         const colorCell = row.insertCell();
-        colorCell.style.width = '16px';
+        colorCell.style.width = '14px';
         colorCell.style.height = '12px';
         colorCell.style.backgroundColor = color;
         colorCell.style.border = '1px solid #ddd';
@@ -38237,8 +38288,8 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         const row = table.insertRow();
 
         const colorCell = row.insertCell();
-        colorCell.style.width = '16px';
-        colorCell.style.height = '11px';
+        colorCell.style.width = '14px';
+        colorCell.style.height = '12px';
         colorCell.style.backgroundColor = blendMarginColor(candidate.fields.color_hex, margin);
         colorCell.style.border = '1px solid #ddd';
 
@@ -38250,8 +38301,8 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
       const noWinRow = table.insertRow();
       const noWinColorCell = noWinRow.insertCell();
-      noWinColorCell.style.width = '16px';
-      noWinColorCell.style.height = '11px';
+      noWinColorCell.style.width = '14px';
+      noWinColorCell.style.height = '12px';
       noWinColorCell.style.backgroundColor = "#E0E0E0";
       noWinColorCell.style.border = '1px solid #ddd';
 
@@ -38388,8 +38439,8 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         const row = table.insertRow();
 
         const colorCell = row.insertCell();
-        colorCell.style.width = '16px';
-        colorCell.style.height = '11px';
+        colorCell.style.width = '14px';
+        colorCell.style.height = '12px';
 
         colorCell.style.backgroundColor = blendVoteShareColor(candidate.fields.color_hex, midpoint);
         colorCell.style.border = '1px solid #ddd';
@@ -39025,7 +39076,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     for (let stance = 1; stance <= 7; stance++) {
       const row = table.insertRow();
       const colorCell = row.insertCell();
-      colorCell.style.width = '16px';
+      colorCell.style.width = '14px';
       colorCell.style.height = '12px';
       colorCell.style.backgroundColor = stanceColors[stance - 1];
       colorCell.style.border = '1px solid #ddd';
@@ -39614,7 +39665,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         const midpoint = (rangeMin + rangeMax) / 2;
         const row = table.insertRow();
         const colorCell = row.insertCell();
-        colorCell.style.width = '16px';
+        colorCell.style.width = '14px';
         colorCell.style.height = '12px';
         colorCell.style.backgroundColor = getIssueWeightColor(midpoint, issueIndex);
         colorCell.style.border = '1px solid #ddd';
@@ -39642,7 +39693,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       weightRanges.forEach(({ color, label }) => {
         const row = table.insertRow();
         const colorCell = row.insertCell();
-        colorCell.style.width = '16px';
+        colorCell.style.width = '14px';
         colorCell.style.height = '12px';
         colorCell.style.backgroundColor = color;
         colorCell.style.border = '1px solid #ddd';
@@ -39754,7 +39805,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       const row = table.insertRow();
 
       const colorCell = row.insertCell();
-      colorCell.style.width = '16px';
+      colorCell.style.width = '14px';
       colorCell.style.height = '12px';
       colorCell.style.backgroundColor = color;
       colorCell.style.border = '1px solid #ddd';
@@ -39909,7 +39960,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     legendItems.forEach(({ color, label }) => {
       const row = table.insertRow();
       const colorCell = row.insertCell();
-      colorCell.style.width = '16px';
+      colorCell.style.width = '14px';
       colorCell.style.height = '12px';
       colorCell.style.backgroundColor = color;
       colorCell.style.border = '1px solid #ddd';
@@ -40219,7 +40270,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     alignmentRanges.forEach(({ color, label }) => {
       const row = table.insertRow();
       const colorCell = row.insertCell();
-      colorCell.style.width = '16px'; colorCell.style.height = '12px';
+      colorCell.style.width = '14px'; colorCell.style.height = '12px';
       colorCell.style.backgroundColor = color; colorCell.style.border = '1px solid #ddd';
       const labelCell = row.insertCell();
       labelCell.textContent = label; labelCell.style.paddingLeft = '6px';
@@ -41045,6 +41096,20 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
   let cachedProgressBarWidth = 0;
   let progressBarObserver = null;
 
+  function injectYouTubeAPI() {
+	  if (document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) return;
+	  const tag = document.createElement('script');
+	  tag.src = "https://www.youtube.com/iframe_api";
+	  tag.async = true;
+	  const firstScriptTag = document.getElementsByTagName('script')[0];
+	  if (firstScriptTag && firstScriptTag.parentNode) {
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	  } else {
+		document.head.appendChild(tag);
+	  }
+	}
+	injectYouTubeAPI();
+
   function injectResourceHints() {
     if (document.getElementById('yt-preconnect')) return;
 
@@ -41252,10 +41317,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       const scaleProgress = Math.max(0, 1 - absOffset);
       const scale = SCALE_SIDE + (scaleProgress * (SCALE_CENTER - SCALE_SIDE));
 
-	  item.style.setProperty('--tx', `${xPos}px`);
-      item.style.setProperty('--tz', `${zPos}px`);
-      item.style.setProperty('--rot', `${rotation}deg`);
-      item.style.setProperty('--s', scale);
+	  item.style.transform = `translate3d(${xPos}px, 0, ${zPos}px) rotateY(${rotation}deg) scale(${scale})`;
 
 	  item.classList.toggle('has-reflection', absOffset <= 2);
 
@@ -41333,17 +41395,22 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
     const start = Math.max(0, currentIdx - preloadRange);
     const end = Math.min(songs.length, currentIdx + preloadRange + 1);
 
-    const load = () => {
-      for (let i = start; i < end; i++) {
-		const url = songs[i].getCoverLink();
-        if (preloadedUrls.has(url)) continue;
+	const load = () => {
+		const frag = document.createDocumentFragment();
+		for (let i = start; i < end; i++) {
+		  const url = songs[i].getCoverLink();
+		  if (preloadedUrls.has(url)) continue;
 
-        preloadedUrls.add(url);
-        const img = new Image();
-        img.decoding = 'async';
-        img.src = url;
-      }
-    };
+		  preloadedUrls.add(url);
+		  const link = document.createElement('link');
+		  link.rel = 'preload';
+		  link.as = 'image';
+		  link.href = url;
+		  link.fetchPriority = 'low';
+		  frag.appendChild(link);
+		}
+		document.head.appendChild(frag);
+	  };
 
     if (typeof window.requestIdleCallback === 'function') {
       requestIdleCallback(load, { timeout: 1000 });
@@ -41548,22 +41615,19 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 
       updateProgressVisuals(p, bufferPercent);
 
-      // update invisible input
-      if (progressBar && Math.abs(progressBar.value - p) > 0.1) {
-        progressBar.value = p.toFixed(2);
-        if (document.activeElement === progressBar) {
-          progressBar.setAttribute('aria-valuenow', p.toFixed(2));
-        }
-      }
-
       // text update
-      const currentSecond = Math.floor(currentTime);
-      if (lastRenderedSecond !== currentSecond) {
-        if (currentTimeElement) {
-          currentTimeElement.textContent = formatTime(currentTime);
-        }
-        lastRenderedSecond = currentSecond;
-      }
+	  const currentSecond = Math.floor(currentTime);
+		if (lastRenderedSecond !== currentSecond) {
+		  if (currentTimeElement) currentTimeElement.textContent = formatTime(currentTime);
+
+		  // update invisible input
+		  if (progressBar && document.activeElement === progressBar) {
+			progressBar.setAttribute('aria-valuenow', p.toFixed(2));
+		  }
+
+		  lastRenderedSecond = currentSecond;
+		}
+
     }
 
     if (isUpdaterRunning) {
@@ -42582,7 +42646,6 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 				will-change: transform, opacity;
 				backface-visibility: hidden;
 				transform-origin: center center;
-				transform: translateX(var(--tx, 0px)) translateZ(var(--tz, 0px)) rotateY(var(--rot, 0deg)) scale(var(--s, 1));
 				background-size: cover;
 				background-position: center;
 			    background-repeat: no-repeat;
@@ -42805,7 +42868,16 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
             .${PLAYER_QUEUE_ITEM_CLASS}:hover { background-color: rgba(255,255,255,0.1); }
             .${PLAYER_QUEUE_ITEM_CLASS}.current { background-color: rgba(102, 179, 255, 0.3); font-weight: bold; }
             .player-queue-item-title { color: #eee; } .player-queue-item-artist { color: #999; }
-            #${YOUTUBE_PLAYER_DIV_ID} { position: absolute !important; top: -9999px !important; left: -9999px !important; width: 1px !important; height: 1px !important; }
+            #${YOUTUBE_PLAYER_DIV_ID} {
+				position: absolute !important;
+				top: 0 !important;
+				left: 0 !important;
+				width: 100% !important;
+				height: 100% !important;
+				opacity: 0 !important;       /* Visually hidden */
+				pointer-events: none !important; /* Can't be clicked */
+				z-index: -1 !important;      /* Pushed behind your UI */
+			}
 
 			#${FAVORITE_BUTTON_ID} img { width: 22px; height: 22px; }
 			.player-queue-item.dragging { opacity: 0.5; background: #333; }
@@ -42861,19 +42933,12 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
     document.adoptedStyleSheets = [...document.adoptedStyleSheets, playerSheet];
   }
 
-  function loadYouTubeAPI() {
-    return new Promise((resolve, reject) => {
-      if (typeof YT !== 'undefined' && typeof YT.Player !== 'undefined') { resolve(); return; }
-      window.onYouTubeIframeAPIReady = () => { resolve(); };
-      const existingScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
-      if (existingScript) return;
-      const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
-      tag.onerror = (err) => { console.error("Failed to load YouTube API script:", err); delete window.onYouTubeIframeAPIReady; reject(err); };
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      if (firstScriptTag && firstScriptTag.parentNode) firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      else document.head.appendChild(tag);
-    });
-  }
+    function loadYouTubeAPI() {
+	  return new Promise((resolve) => {
+		if (typeof YT !== 'undefined' && typeof YT.Player !== 'undefined') { resolve(); return; }
+		window.onYouTubeIframeAPIReady = () => resolve();
+	  });
+	}
 
   function cleanup() {
     if (rafId) {
@@ -42976,8 +43041,8 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       await loadYouTubeAPI();
 
       ytPlayer = new YT.Player(YOUTUBE_PLAYER_DIV_ID, {
-        height: '1', width: '1',
-        playerVars: { 'playsinline': 1, 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'modestbranding': 1, 'origin': window.location.origin },
+        height: '200', width: '200',
+        playerVars: { 'playsinline': 1, 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'modestbranding': 1, 'origin': window.location.origin, 'rel': 0, 'iv_load_policy': 3 },
         events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': onPlayerError }
       });
     } catch (error) {
@@ -43130,7 +43195,7 @@ hqSheet.replaceSync(`
         flex-grow: 1;
         overflow-y: auto;
         overscroll-behavior: contain;
-        transform: translateZ(0); /* PERF: Promotes to GPU layer for smooth scrolling */
+        transform: translateZ(0);
         will-change: transform;
     }
 
