@@ -46,7 +46,7 @@ campaignTrail_temp.election_json = [
             "image_url": "https://file.garden/aTTSWyzGbgwzK_M1/Sunset%20Window",
             "winning_electoral_vote_number": 270,
             "advisor_url": "https://file.garden/aTTSWyzGbgwzK_M1/Trans%20AM%20Advisor",
-            "recommended_reading": "<p>Credits/Places I Got Things:</p><p>Codes: Jet's Mod Tool<p>Music Player and Campaign Sign Code: 2000 - The New Millenium (Siddhartha)</p><p>CYOA Code: Both Astro and TheMcCain's CYOA tutorials</p><p>Custom Ending Code: W. Templates</p><p>Inspiration: The Remains of the Day (Kazuo Ishiguro)</p><p>Sources: Wikipedia, my memory, 107 Days (Kamala Harris)</p><p>Plot: The 2024 Election (Joe Biden, Kamala Harris, Donald Trump)</p>",
+            "recommended_reading": "<p>Credits/Places I Got Things:</p><p>Codes: Jet's Mod Tool<p>Music Player and Campaign Sign Code: 2000 - The New Millenium (Siddhartha)</p><p>CYOA Code: Both Astro and TheMcCain's CYOA tutorials</p><p>Custom Ending Code: W.</p><p>Inspiration: The Remains of the Day (Kazuo Ishiguro)</p><p>Sources: Wikipedia, my memory, 107 Days (Kamala Harris)</p><p>Plot: The 2024 Election (Joe Biden, Kamala Harris, Donald Trump)</p>",
             "has_visits": 1,
             "no_electoral_majority_image": "https://file.garden/aTTSWyzGbgwzK_M1/Harris%20Tie"
         }
@@ -286,18 +286,37 @@ toTime = (seconds) => {
     return date.toISOString().substr(11, 8);
 }
 
-// Map track index to image URLs
-const trackImages = [
-    "https://file.garden/aTTSWyzGbgwzK_M1/Now%20and%20Then%205", // Now and Then — The Beatles
-    "https://file.garden/aTTSWyzGbgwzK_M1/Last%20Man%20Standing", // Last Man Standing — Bruce Springsteen
-    "https://file.garden/aTTSWyzGbgwzK_M1/Claw%20Hammer", // Claw Hammer — Elton John
-    "https://file.garden/aTTSWyzGbgwzK_M1/Ever%20Present%20Past", // Ever Present Past — Paul McCartney
-    "https://file.garden/aTTSWyzGbgwzK_M1/Little%20Lies", // Little Lies — Fleetwood Mac
-    "https://file.garden/aTTSWyzGbgwzK_M1/Let%20It%20Be", // Let It Be — The Beatles
-];
+// Map image id -> image URL
+const trackImages={
+    0:"https://file.garden/aTTSWyzGbgwzK_M1/Now%20and%20Then%205",
+    1:"https://file.garden/aTTSWyzGbgwzK_M1/Last%20Man%20Standing",
+    2:"https://file.garden/aTTSWyzGbgwzK_M1/Claw%20Hammer",
+    3:"https://file.garden/aTTSWyzGbgwzK_M1/Ever%20Present%20Past",
+    4:"https://file.garden/aTTSWyzGbgwzK_M1/Little%20Lies",
+    5:"https://file.garden/aTTSWyzGbgwzK_M1/Let%20It%20Be",
+    6:"https://file.garden/aTTSWyzGbgwzK_M1/Everybody%20Wants%20to%20Rule%20the%20World",
+    7:"https://file.garden/aTTSWyzGbgwzK_M1/Memories%20Fade",
+    8:"https://file.garden/aTTSWyzGbgwzK_M1/The%20Winner%20Takes%20It%20All",
+    9:"https://file.garden/aTTSWyzGbgwzK_M1/The%20Piper",
+    10:"https://file.garden/aTTSWyzGbgwzK_M1/Don't%20Stop%20Believin'",
+    11:"https://file.garden/aTTSWyzGbgwzK_M1/Pink%20Pony%20Club",
+    12:"https://file.garden/aTTSWyzGbgwzK_M1/The%20Giver",
+    13:"https://file.garden/aTTSWyzGbgwzK_M1/Get%20on%20the%20Raft%20With%20Taft",
+};
 
 function getTrackImage(trackIdx) {
     return trackImages[trackIdx] || "https://i.imgur.com/s2fy6T1.gif";
+
+}
+
+function splitTrackName(fullName) {
+    // Expected: "Title - Artist"
+    const idx = fullName.lastIndexOf(" - ");
+    if (idx === -1) return { title: fullName, artist: "" };
+    return {
+        title: fullName.slice(0, idx),
+        artist: fullName.slice(idx + 3),
+    };
 }
 
 function changeSong(direction) {
@@ -324,6 +343,9 @@ function changeSong(direction) {
     let songName = document.getElementById("song-name-display");
     songName.innerHTML = tracklist[newIndex].name;
     
+    let artistName = document.getElementById("artist-name-display");
+    if (artistName) artistName.innerHTML = artist;
+
     // Update pause/play button
     let pausePlayBtn = document.getElementById("music-pauseplay");
     pausePlayBtn.style.backgroundImage = "url('https://file.garden/aTTSWyzGbgwzK_M1/Play%20Button')";
@@ -668,31 +690,122 @@ var soundtracks = {
         name: "SunsetMain",
         tracklist: [
             {
-                "name": "Now and Then — The Beatles",
-                "url": "https://audio.jukehost.co.uk/18qQLlH3tzj2unTA5ReYA2zg5E7BO6zM"
+                id: 0,
+                name: "Now and Then — The Beatles",
+                url: "https://audio.jukehost.co.uk/18qQLlH3tzj2unTA5ReYA2zg5E7BO6zM",
             },
             {
-                "name": "Last Man Standing — Bruce Springsteen",
-                "url": "https://audio.jukehost.co.uk/97JsaWD3mPJeShFZ8q3vIZFgGyz1X4EZ"
+                id: 1,
+                name: "Last Man Standing — Bruce Springsteen",
+                url: "https://audio.jukehost.co.uk/97JsaWD3mPJeShFZ8q3vIZFgGyz1X4EZ",
             },
             {
-                "name": "Claw Hammer — Elton John",
-                "url": "https://audio.jukehost.co.uk/A9I5I5rGqqVW13JPvVkScVPllDo01j3v"
+                id: 2,
+                name: "Claw Hammer — Elton John",
+                url: "https://audio.jukehost.co.uk/A9I5I5rGqqVW13JPvVkScVPllDo01j3v",
             },
             {
-                "name": "Ever Present Past — Paul McCartney",
-                "url": "https://audio.jukehost.co.uk/BDeZOEG7fWWaDu9zqSiKD6MOjOZygALZ"
+                id: 3,
+                name: "Ever Present Past — Paul McCartney",
+                url: "https://audio.jukehost.co.uk/BDeZOEG7fWWaDu9zqSiKD6MOjOZygALZ",
             },
             {
-                "name": "Little Lies — Fleetwood Mac",
-                "url": "https://audio.jukehost.co.uk/02wOb2pWiwXddLbg2vbTUqJLPdS7sWIc"
+                id: 4,
+                name: "Little Lies — Fleetwood Mac",
+                url: "https://audio.jukehost.co.uk/02wOb2pWiwXddLbg2vbTUqJLPdS7sWIc",
             },
             {
-                "name": "Let It Be — The Beatles",
-                "url": "https://audio.jukehost.co.uk/h6nWtrWZRI1oVGD3wqAhLENDwWLLaNb7"
+                id: 5,
+                name: "Let It Be — The Beatles",
+                url: "https://audio.jukehost.co.uk/h6nWtrWZRI1oVGD3wqAhLENDwWLLaNb7",
+            },
+        ],
+    },
+    1: {
+        name: "Dusk",
+        tracklist: [
+            {
+                id: 6,
+                name: "Everybody Wants to Rule the World — Tears for Fears",
+                url: "https://audio.jukehost.co.uk/pVL9J0MEYCcgu6hqjfeXd9AOjymc3hnF",
+            },
+        ],
+    },
+    2: {
+        name: "Inertia",
+        tracklist: [
+            {
+                id: 7,
+                name: "Memories Fade — Tears for Fears",
+                url: "https://audio.jukehost.co.uk/dSQhw3dwJo368u3t5mT9Hdwzyy8aY1UM",
             }
-        ]
-    }
-}
+        ],
+    },
+    3: {
+        name: "Sienna",
+        tracklist: [
+            {
+                id: 8,
+                name: "The Winner Takes It All — ABBA",
+                url: "https://audio.jukehost.co.uk/NM1HJZQaIqEzVtmkobWOczDZQolGlQWu",
+            }
+        ],
+    },
+    4: {
+        name: "Scarlet",
+        tracklist: [
+            {
+                id: 9,
+                name: "The Piper — ABBA",
+                url: "https://audio.jukehost.co.uk/znyZF2bVOaGreqmBqCEyvvN3t1cHUZNb",
+            }
+        ],
+    },
+    5: {
+        name: "Spectrums",
+        tracklist: [
+            {
+                id: 10,
+                name: "Don’t Stop Believin’ — Journey",
+                url: "https://audio.jukehost.co.uk/UVLNRgabAi6aKbqoiuwofzqUCb4yBD56",
+            }
+        ],
+    },
+    6: {
+        name: "Cerulean",
+        tracklist: [
+            {
+                id: 11,
+                name: "Pink Pony Club (live at SNL) — Chappell Roan",
+                url: "https://audio.jukehost.co.uk/HwPY2LocHy3KUlB2W9x47klVqryHzIWm",
+            }
+        ],
+    },
+    7: {
+        name: "Sapphire",
+        tracklist: [
+            {
+                id: 12,
+                name: "The Giver (live at SNL) — Chappell Roan",
+                url: "https://audio.jukehost.co.uk/QizALqC5WpyaqB07r3NOfEtuyTpZcz8F",
+            }
+        ],
+    },
+    8: {
+        name: "Taft",
+        tracklist: [
+            {
+                id: 13,
+                name: "Get on the Raft With Taft — Harry D. Kerr",
+                url: "https://audio.jukehost.co.uk/2x2GM3h6rKH7zsDVGacqEkN1FW04uHoa",
+            }
+        ],
+    },
+};
 
-newMusicPlayer()
+// Set up new music player
+
+newMusicPlayer();
+
+window.setSoundtrack=(id)=>{e.selectedSoundtrack=id|0;e.currentTrackIndex=0;const tl=soundtracks[e.selectedSoundtrack]&&soundtracks[e.selectedSoundtrack].tracklist,t=tl&&tl[0],a=document.getElementById("campaigntrailmusic"),img=document.getElementById("musicPlayerTrackImage"),sn=document.getElementById("song-name-display"),an=document.getElementById("artist-name-display");if(t&&a){a.src=t.url;a.currentTime=0;a.play();if(img)img.src=getTrackImage(t.id);const s=splitTrackName(t.name);if(sn)sn.innerHTML=s.title;if(an)an.innerHTML=s.artist;}};
+setSoundtrack(e.selectedSoundtrack);
