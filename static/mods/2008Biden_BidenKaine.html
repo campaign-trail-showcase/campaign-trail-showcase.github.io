@@ -27650,7 +27650,7 @@ campaignTrail_temp.candidate_last_name = 'Biden';
         while ((match = regex.exec(str)) !== null) {
             matches.push({
                 start: match.index + (match[0].startsWith('“') ? 1 : 0),
-                end: match.index + match[0].length - (match[0].endsWith('”') ? 1 : 0) - (match[2] ? 1 : 0), 
+                end: match.index + match[0].length - (match[0].endsWith('”') ? 1 : 0) - (match[2] ? 1 : 0),
                 tooltipIndex: index
             });
         }
@@ -27837,14 +27837,28 @@ const _patchVPDebateQ360 = (vp) => {
   const last = String(vp.fields.last_name || "").trim();
   const full = `${first} ${last}`.trim();
 
-  const replaceForVP = (s) => {
+  const isFemale = ["Sebelius"].includes(last);
+
+  const replaceForVP = (s, skipPronouns = false) => {
     if (typeof s !== "string" || !s) return s;
 
     let out = s;
 
     out = out.replace(/\bTim Kaine\b/g, full);
-
     out = out.replace(/\bKaine\b/g, last);
+
+    if (isFemale && !skipPronouns) {
+        out = out.replace(/\bhe\b/g, "she");
+        out = out.replace(/\bHe\b/g, "She");
+
+        out = out.replace(/\bhis\b/g, "her");
+        out = out.replace(/\bHis\b/g, "Her");
+
+        out = out.replace(/\bhim\b/g, "her");
+        out = out.replace(/\bHim\b/g, "Her");
+
+        out = out.replace(/\bhimself\b/g, "herself");
+    }
 
     return out;
   };
@@ -27855,10 +27869,14 @@ const _patchVPDebateQ360 = (vp) => {
   }
 
   const debateAnswerPks = new Set();
+
   if (Array.isArray(e.answers_json)) {
     for (const a of e.answers_json) {
       if (a && a.fields && a.fields.question === 360 && typeof a.fields.description === "string") {
-        a.fields.description = replaceForVP(a.fields.description);
+
+        const shouldSkipPronouns = (a.pk === 13318);
+
+        a.fields.description = replaceForVP(a.fields.description, shouldSkipPronouns);
         debateAnswerPks.add(a.pk);
       }
     }
@@ -28001,7 +28019,7 @@ campaignTrail_temp.vpSwitcher = () => {
 };
 
 
-cyoAdventure = function(a) {	
+cyoAdventure = function(a) {
     const ans = e.player_answers[e.player_answers.length - 1];
 
   const _justAnsweredIdx = campaignTrail_temp.player_answers.length - 1;
@@ -28019,7 +28037,7 @@ cyoAdventure = function(a) {
 	if (ans === 3322) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/MG0j5KYb/timkaine08vpportrait.png';
 		campaignTrail_temp.running_mate_last_name = 'Kaine';
-		
+
 		if (!document.getElementById("kaine-style")) {
 			const style = document.createElement("style");
 			style.id = "kaine-style";
@@ -28028,15 +28046,13 @@ cyoAdventure = function(a) {
 				background-image: url("https://i.postimg.cc/4nC4TWdV/IMG-9854.png");
     			background-size: 100% 100%;
     			background-repeat: no-repeat;
-    			border-color: #c9c9c9;    
+    			border-color: #c9c9c9;
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto;
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28048,7 +28064,7 @@ cyoAdventure = function(a) {
 	if (ans === 3323) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/MG0j5KYb/timkaine08vpportrait.png';
 		campaignTrail_temp.running_mate_last_name = 'Kaine';
-		
+
 		if (!document.getElementById("kaine-style")) {
 			const style = document.createElement("style");
 			style.id = "kaine-style";
@@ -28057,15 +28073,13 @@ cyoAdventure = function(a) {
 				background-image: url("https://i.postimg.cc/4nC4TWdV/IMG-9854.png");
     			background-size: 100% 100%;
     			background-repeat: no-repeat;
-    			border-color: #c9c9c9;    
+    			border-color: #c9c9c9;
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto;
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28077,7 +28091,7 @@ cyoAdventure = function(a) {
 	if (ans === 960001) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/pdNJDZF0/barackhusseinobama2008vp.png';
 		campaignTrail_temp.running_mate_last_name = 'Obama';
-		
+
 		if (!document.getElementById("kaine-style")) {
 			const style = document.createElement("style");
 			style.id = "kaine-style";
@@ -28086,15 +28100,13 @@ cyoAdventure = function(a) {
 				background-image: url("https://i.postimg.cc/BvgcptXF/Untitled104%2020260101015333.webp");
     			background-size: 100% 100%;
     			background-repeat: no-repeat;
-    			border-color: #c9c9c9;    
+    			border-color: #c9c9c9;
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto;
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28106,7 +28118,7 @@ cyoAdventure = function(a) {
 	if (ans === 960002) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/pdNJDZF0/barackhusseinobama2008vp.png';
 		campaignTrail_temp.running_mate_last_name = 'Obama';
-		
+
 		if (!document.getElementById("kaine-style")) {
 			const style = document.createElement("style");
 			style.id = "kaine-style";
@@ -28115,15 +28127,13 @@ cyoAdventure = function(a) {
 				background-image: url("https://i.postimg.cc/BvgcptXF/Untitled104%2020260101015333.webp");
     			background-size: 100% 100%;
     			background-repeat: no-repeat;
-    			border-color: #c9c9c9;    
+    			border-color: #c9c9c9;
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto;
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28135,7 +28145,7 @@ cyoAdventure = function(a) {
 	if (ans === 960005) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/dtMhF7f3/evanbayhbiden2098.png';
 		campaignTrail_temp.running_mate_last_name = 'Bayh';
-		
+
 		if (!document.getElementById("kaine-style")) {
 			const style = document.createElement("style");
 			style.id = "kaine-style";
@@ -28144,15 +28154,13 @@ cyoAdventure = function(a) {
 				background-image: url("https://i.postimg.cc/MKM5wWrr/Untitled104%2020260101015231%20(1).webp");
     			background-size: 100% 100%;
     			background-repeat: no-repeat;
-    			border-color: #c9c9c9;    
+    			border-color: #c9c9c9;
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto;
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28164,7 +28172,7 @@ cyoAdventure = function(a) {
 	if (ans === 960006) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/dtMhF7f3/evanbayhbiden2098.png';
 		campaignTrail_temp.running_mate_last_name = 'Bayh';
-		
+
 		if (!document.getElementById("kaine-style")) {
 			const style = document.createElement("style");
 			style.id = "kaine-style";
@@ -28173,15 +28181,13 @@ cyoAdventure = function(a) {
 				background-image: url("https://i.postimg.cc/MKM5wWrr/Untitled104%2020260101015231%20(1).webp");
     			background-size: 100% 100%;
     			background-repeat: no-repeat;
-    			border-color: #c9c9c9;    
+    			border-color: #c9c9c9;
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto;
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28193,7 +28199,7 @@ cyoAdventure = function(a) {
 	if (ans === 960003) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/3r1MZzHt/kathleensebiden2008.png';
 		campaignTrail_temp.running_mate_last_name = 'Sebelius';
-		
+
 		if (!document.getElementById("kaine-style")) {
 			const style = document.createElement("style");
 			style.id = "kaine-style";
@@ -28202,15 +28208,13 @@ cyoAdventure = function(a) {
 				background-image: url("https://i.postimg.cc/nLZGqqVk/Untitled104%2020260101015311.webp");
     			background-size: 100% 100%;
     			background-repeat: no-repeat;
-    			border-color: #c9c9c9;    
+    			border-color: #c9c9c9;
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto;
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28222,7 +28226,7 @@ cyoAdventure = function(a) {
 	if (ans === 960004) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/3r1MZzHt/kathleensebiden2008.png';
 		campaignTrail_temp.running_mate_last_name = 'Sebelius';
-		
+
 		if (!document.getElementById("kaine-style")) {
 			const style = document.createElement("style");
 			style.id = "kaine-style";
@@ -28231,15 +28235,13 @@ cyoAdventure = function(a) {
 				background-image: url("https://i.postimg.cc/nLZGqqVk/Untitled104%2020260101015311.webp");
     			background-size: 100% 100%;
     			background-repeat: no-repeat;
-    			border-color: #c9c9c9;    
+    			border-color: #c9c9c9;
     			border-width: .01em;
     			margin: 0 auto;
     			background-position: center;
-    			width: 100%; 
+    			width: auto;
     			height: 128px;
     			margin: 0 auto;
-    			margin-left: -0.033em;
-    			margin-right: -0.033em;
 			  }
 			#campaign_sign p {
 				color: rgb(0 0 0 / 0%);
@@ -28248,16 +28250,16 @@ cyoAdventure = function(a) {
 			document.head.appendChild(style);
 		}
     }
- 
-    
-	
+
+
+
 	if (ohnobro >= 3) {
 		const endingQuestion = tunnel(14093);
 		if (endingQuestion) {
 			campaignTrail_temp.questions_json[5] = endingQuestion;
 		}
 	}
-	
+
 	if (ans === 14094 || ans === 3502 || ans === 12295) {
         hilltakeover = true;
 		const nahidlose = tunnel(14096);
@@ -28266,7 +28268,7 @@ cyoAdventure = function(a) {
 			campaignTrail_temp.questions_json[campaignTrail_temp.question_number] = nahidlose;
 			campaignTrail_temp.corQuestion = true;
 		}
-		
+
 		const candId = e.candidate_id;
         const cand = e.candidate_json.find(p => p.pk === candId);
 		if (cand?.fields) {
@@ -28277,14 +28279,14 @@ cyoAdventure = function(a) {
 		if (ans === 14094 || ans === 3502 || ans === 12295) {
     		campaignTrail_temp.election_json[0]["fields"].advisor_url = 'https://i.postimg.cc/T2rMm7Wv/gdsgfadask%20(1).png';
 		}
-		
+
 		// If Hillary shift the other colors a wee bit!!
 		const hillaryAltColors = {
 			"mccain": "#F43300",
 			"barr": "#F47600",
 			"nader": "#2BA81A"
 		};
-		
+
 		const applyAltColors = (list) => {
 			if (!Array.isArray(list)) return;
 			for (const c of list) {
@@ -28295,11 +28297,11 @@ cyoAdventure = function(a) {
 				if (hex) c.fields.color_hex = hex;
 			}
 		};
-		
+
 		applyAltColors(e.candidate_json);
 		applyAltColors(campaignTrail_temp.candidate_json);
-		
-		
+
+
 		Object.assign(campaignTrail_temp, {
 			candidate_last_name: 'Clinton',
 			candidate_image_url: 'https://file.garden/aNtAfG887DiA_7lO/2008Biden/clinton.jpg',
@@ -28307,7 +28309,7 @@ cyoAdventure = function(a) {
 			running_mate_last_name: 'Dodd',
 			running_mate_state_id: '187'
 		});
-		
+
 		if (!document.getElementById("dodd-style")) {
 			const style = document.createElement("style");
 			style.id = "dodd-style";
@@ -28317,11 +28319,11 @@ cyoAdventure = function(a) {
 				background-image: url("https://file.garden/aNtAfG887DiA_7lO/2008Biden/clintondodd.png");
 				background-size: contain;
 				background-repeat: no-repeat;
-				border-color: #c9c9c9;    
+				border-color: #c9c9c9;
 				border-width: .01em;
 				margin: 0 auto;
 				background-position: center;
-				width: 100%; 
+				width: auto;
 				height: 128px;
 				margin: 0 auto;
 				margin-left: -0.033em;
@@ -28332,9 +28334,9 @@ cyoAdventure = function(a) {
 				visibility: hidden;
 			}`
 			document.head.appendChild(style);
-		}		
+		}
 	}
-	
+
 	if (ans === 14097 || ans === 14099 || ans === 14100 || ans === 14101) {
 		const fields = e.global_parameter_json?.[0]?.fields;
 		if (fields) {
@@ -28344,11 +28346,11 @@ cyoAdventure = function(a) {
 			fields.global_variance = 0.005;
 			fields.state_variance = 0.002;
 		}
-		
+
 		const blueStates = new Set([
-            "WA", "OR", "CA", "NV", "MT", "CO", "NM", "HI", 
-            "MN", "IA", "MO", "AR", "WI", "IL", "MI", "IN", 
-            "OH", "PA", "NY", "VT", "NH", "ME", "MA", "RI", 
+            "WA", "OR", "CA", "NV", "MT", "CO", "NM", "HI",
+            "MN", "IA", "MO", "AR", "WI", "IL", "MI", "IN",
+            "OH", "PA", "NY", "VT", "NH", "ME", "MA", "RI",
             "CT", "NJ", "DE", "MD", "DC", "VA", "NC", "FL"
         ]);
 
@@ -28357,21 +28359,21 @@ cyoAdventure = function(a) {
         e.candidate_state_multiplier_json.forEach(mod => {
             if (mod.fields.candidate === 78) {
                 const abbr = stateAbbrMap.get(mod.fields.state);
-                
+
                 let mult = blueStates.has(abbr) ? 1.20 : 0.85;
 
                 mult += (Math.random() * 0.06) - 0.03;
 
                 if (["MT", "IN", "AR", "MO", "NC"].includes(abbr)) {
-                    mult += 0.2575; 
+                    mult += 0.2575;
                 }
 
                 mod.fields.state_multiplier = mult;
             }
         });
-		
+
 	}
-	
+
 }
 campaignTrail_temp.jet_data = [{}
 ]
@@ -28403,7 +28405,7 @@ var used=false
 
 //quickstats[0] is the default, and it tracks your electoral vote count.
 
- if (quickstats[0]<= 148) {
+ if (quickstats[0] < 188) {
 //If you want to enable replacing the image based upon your performance, copy from here....
     if (used != true) {
         setInterval(function () {
@@ -28428,7 +28430,7 @@ changePlaylist(mccainWin);
     }
     // to here!
 return "<div style='overflow-y:scroll;height:200px;'><h3>Fatality</h3><p>As you sit in the back of the headquarters, you feel uneasy. The states in the Northeast are called way later than expected, and you also win them by thinner margins too. But then… The swing states are called within minutes, and before you know it, the election is over.</p><p>You feel paralysed, instead of a landslide for the Democrats, the script has been completely flipped on it's head for the Republicans. You have a dry feeling in your mouth as you look at the electoral map… A sea of red, not a sea of blue.</p><p>When you come to your senses, everyone else is astonished. Advisors with hands in their faces, Jill crying while holding your arm, the kids looking at the screen with sadness on their faces. It feels like a nightmare, one that you wished wasn't real.</p><p>After you give the muted concession speech, you are given a phone by an advisor to speak to McCain. You can hear the utter surprise in his voice, but you're too depressed to say anything meaningful, and when you do say something you feel your childhood stutter coming back. When you're finished, you just sigh. I guess it's back to Delaware then, Joe.</p>"
-} else if (quickstats[0] >= 208 && quickstats[0]<248) {
+} else if (quickstats[0] >= 188 && quickstats[0]<248) {
 //If you want to enable replacing the image based upon your performance, copy from here....
     if (used != true) {
         setInterval(function () {
@@ -28619,11 +28621,11 @@ style.textContent =
     background-image: url("https://i.postimg.cc/BZR26sPC/IMG-98541.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    border-color: #c9c9c9;    
+    border-color: #c9c9c9;
     border-width: .01em;
     margin: 0 auto;
     background-position: center;
-    width: 100%; 
+    width: auto;
     height: 128px;
     margin: 0 auto;
     margin-left: -0.033em;
