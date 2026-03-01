@@ -101,6 +101,8 @@ e.code2Loaded = false;
 
 e.stateOpacity = 1;
 
+window.stopSpacebar = false;
+
 function substitutePlaceholders(str) {
   if (!str || typeof str !== "string") return str;
   return str.replace(/\{\{(.*?)}\}/g, (_, varName) => {
@@ -694,6 +696,13 @@ function divideElectoralVotesProp(e, t) {
   return i;
 }
 
+/**
+ * Round winner's share of EVs, clamp to [0, totalEV], and give remainder to runner-up
+ * @param {number} totalEV
+ * @param {number} topVotes
+ * @param {number} totalVotes
+ * @returns {number[]}
+ */
 function splitEVTopTwo(totalEV, topVotes, totalVotes) {
   // round winner's share of EVs, clamp to [0, totalEV], and give remainder to runner-up
   if (!Number.isFinite(totalEV) || totalEV <= 0) return [0, 0];
@@ -1582,9 +1591,10 @@ function generateCandidateList(cands, results, stateResults, total, statesHaveEV
 }
 
 /**
- * @param {'general'|'primary'} [type='general']
- * @param {number} [timestep=10]
- * @param {Object[]} [states=[]]
+ * Election night simulation
+ * @param {'general'|'primary'} [type='general'] - The type of election
+ * @param {number} [timestep=10] - How much the election night should advance after each "tick"
+ * @param {Object[]} [states=[]] - Specific states to run the election on
  */
 function electionNight(type = 'general', timestep = 10, states = []) {
   const isGeneral = type === 'general';
@@ -1824,28 +1834,28 @@ function nextQuestion() {
     const election = PROPS.ELECTIONS.get(String(e.election_id));
     if (election.has_visits) {
       $("#game_window").html(`
-                <div class="game_header">${window.corrr}</div>
-                <div id="main_content_area">
-                    <div id="map_container"></div>
-                    <div id="menu_container">
-                        <div id="overall_result_container">
-                            <div id="overall_result">
-                                <h3>ESTIMATED SUPPORT</h3>
-                                <p>Click on a state to view more info.</p>
-                            </div>
-                        </div>
-                        <div id="state_result_container">
-                            <div id="state_info">
-                                <h3>STATE SUMMARY</h3>
-                                <p>Click/hover on a state to view more info.</p>
-                                <p>Precise results will be available on election night.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p class="visit_text">
-                    <font size="2">Use this map to click on the next state you wish to visit. Choose wisely and focus your efforts where they will have the most impact.</font>
-                </p>`,
+        <div class="game_header">${window.corrr}</div>
+        <div id="main_content_area">
+          <div id="map_container"></div>
+          <div id="menu_container">
+            <div id="overall_result_container">
+              <div id="overall_result">
+                <h3>ESTIMATED SUPPORT</h3>
+                <p>Click on a state to view more info.</p>
+              </div>
+            </div>
+            <div id="state_result_container">
+              <div id="state_info">
+                <h3>STATE SUMMARY</h3>
+                <p>Click/hover on a state to view more info.</p>
+                <p>Precise results will be available on election night.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="visit_text">
+          <font size="2">Use this map to click on the next state you wish to visit. Choose wisely and focus your efforts where they will have the most impact.</font>
+        </p>`,
       );
       const visitMap = rFunc(t, 1);
       $("#map_container").usmap(visitMap);
@@ -1859,7 +1869,6 @@ function nextQuestion() {
 
 function answerEffects(t) {
   // eslint-disable-next-line prefer-const
-  window.stopSpacebar = false;
   if (window.stopSpacebar && $("#visit_overlay")[0]) {
     debugConsole("Visit overlay is showing, not applying answer effects");
     return;
@@ -3541,8 +3550,7 @@ function beginNewGameHtml() {
         <br>
         <button id="cancel_button">No</button>
       </div>
-    </div>
-  `.trim()
+    </div>`.trim()
   );
 
   $("#new_game_button").click(() => {
@@ -3560,6 +3568,11 @@ function beginNewGameHtml() {
   });
 }
 
+/**
+ * Generates and returns a result table in the form of a string
+ * @param {number} t - The id of the state to generate a results table for
+ * @returns {string}
+ */
 function T(t) {
   const numT = Number(t);
 
