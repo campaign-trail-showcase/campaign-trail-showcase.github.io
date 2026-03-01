@@ -3630,9 +3630,9 @@ function T(t) {
  */
 
 /**
- *  Handles state polling and election results
- *  @param {1|2} t - 1 for final results, 2 for state polling during game
- *  @returns {StateResult[]} Array of results for each state
+ * Handles state polling and election results
+ * @param {1|2} t - 1 for final results, 2 for state polling during game
+ * @returns {StateResult[]} Array of results for each state
  */
 function A(t) {
   const gp = PROPS.PARAMS;
