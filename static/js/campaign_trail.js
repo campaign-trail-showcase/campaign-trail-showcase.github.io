@@ -5,6 +5,10 @@
 e ||= campaignTrail_temp;
 e.skippingQuestion = false;
 
+/**
+ * @param {{pk: *, fields: Object}[]} json
+ * @returns {Map<string, Object>}
+ */
 function mapPkToFields(json) {
   const map = new Map();
   if (!json) return map;
@@ -15,6 +19,11 @@ function mapPkToFields(json) {
   return map;
 }
 
+/**
+ * @param {*} a
+ * @param {*} b
+ * @returns {boolean}
+ */
 const stringsEqual = (a, b) => String(a) === String(b);
 
 const PROPS = {
@@ -91,6 +100,8 @@ e.numberFormat = "en-US";
 e.code2Loaded = false;
 
 e.stateOpacity = 1;
+
+window.stopSpacebar = false;
 
 function substitutePlaceholders(str) {
   if (!str || typeof str !== "string") return str;
@@ -685,6 +696,13 @@ function divideElectoralVotesProp(e, t) {
   return i;
 }
 
+/**
+ * Round winner's share of EVs, clamp to [0, totalEV], and give remainder to runner-up
+ * @param {number} totalEV
+ * @param {number} topVotes
+ * @param {number} totalVotes
+ * @returns {number[]}
+ */
 function splitEVTopTwo(totalEV, topVotes, totalVotes) {
   // round winner's share of EVs, clamp to [0, totalEV], and give remainder to runner-up
   if (!Number.isFinite(totalEV) || totalEV <= 0) return [0, 0];
@@ -1572,7 +1590,12 @@ function generateCandidateList(cands, results, stateResults, total, statesHaveEV
   }).join("");
 }
 
-// type: 'general' | 'primary'
+/**
+ * Election night simulation
+ * @param {'general'|'primary'} [type='general'] - The type of election
+ * @param {number} [timestep=10] - How much the election night should advance after each "tick"
+ * @param {Object[]} [states=[]] - Specific states to run the election on
+ */
 function electionNight(type = 'general', timestep = 10, states = []) {
   const isGeneral = type === 'general';
   const globalParam = PROPS.PARAMS;
@@ -1811,28 +1834,28 @@ function nextQuestion() {
     const election = PROPS.ELECTIONS.get(String(e.election_id));
     if (election.has_visits) {
       $("#game_window").html(`
-                <div class="game_header">${window.corrr}</div>
-                <div id="main_content_area">
-                    <div id="map_container"></div>
-                    <div id="menu_container">
-                        <div id="overall_result_container">
-                            <div id="overall_result">
-                                <h3>ESTIMATED SUPPORT</h3>
-                                <p>Click on a state to view more info.</p>
-                            </div>
-                        </div>
-                        <div id="state_result_container">
-                            <div id="state_info">
-                                <h3>STATE SUMMARY</h3>
-                                <p>Click/hover on a state to view more info.</p>
-                                <p>Precise results will be available on election night.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p class="visit_text">
-                    <font size="2">Use this map to click on the next state you wish to visit. Choose wisely and focus your efforts where they will have the most impact.</font>
-                </p>`,
+        <div class="game_header">${window.corrr}</div>
+        <div id="main_content_area">
+          <div id="map_container"></div>
+          <div id="menu_container">
+            <div id="overall_result_container">
+              <div id="overall_result">
+                <h3>ESTIMATED SUPPORT</h3>
+                <p>Click on a state to view more info.</p>
+              </div>
+            </div>
+            <div id="state_result_container">
+              <div id="state_info">
+                <h3>STATE SUMMARY</h3>
+                <p>Click/hover on a state to view more info.</p>
+                <p>Precise results will be available on election night.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="visit_text">
+          <font size="2">Use this map to click on the next state you wish to visit. Choose wisely and focus your efforts where they will have the most impact.</font>
+        </p>`,
       );
       const visitMap = rFunc(t, 1);
       $("#map_container").usmap(visitMap);
@@ -1846,7 +1869,6 @@ function nextQuestion() {
 
 function answerEffects(t) {
   // eslint-disable-next-line prefer-const
-  window.stopSpacebar = false;
   if (window.stopSpacebar && $("#visit_overlay")[0]) {
     debugConsole("Visit overlay is showing, not applying answer effects");
     return;
@@ -3396,70 +3418,70 @@ function overallDetailsHtml() {
     const nameToUse = needsSpace ? `${spaceToUse}${name}` : name;
 
     return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span>${nameToUse}
-                </td>
-                ${allHistResZero ? "" : `<td>${HistEV[i]}</td>`}
-                <td>${HistPV[i]}</td>
-                <td>${HistPVP[i]}</td>
-            </tr>
-        `;
+      <tr>
+        <td style="text-align: left;">
+          <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span>${nameToUse}
+        </td>
+        ${allHistResZero ? "" : `<td>${HistEV[i]}</td>`}
+        <td>${HistPV[i]}</td>
+        <td>${HistPVP[i]}</td>
+      </tr>
+    `;
   }).join("").trim();
 
   document.getElementById("game_window").innerHTML = `
-        <div class="game_header">${window.corrr}</div>
-        <div id="main_content_area">
-            <div id="overall_details_container">
-                <h3>Overall Election Details</h3>
-                <div id="overall_election_details">
-                    <h4>Results - This Game</h4>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Candidate</th>
-                                ${noElectoralVotes ? "" : `<th>Electoral Votes</th>`}
-                                <th>Popular Votes</th>
-                                <th>Popular Vote %</th>
-                            </tr>
-                            ${a}
-                        </tbody>
-                    </table>
-                    ${l}
-                </div>
-                <div id="overall_election_details">
-                    <h4>Results - Historical</h4>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Candidate</th>
-                                ${allHistResZero ? "" : `<th>Electoral Votes</th>`}
-                                <th>Popular Votes</th>
-                                <th>Popular Vote %</th>
-                            </tr>
-                            ${histRes}
-                        </tbody>
-                    </table>
-                    <p>
-                        <b>
-                          <div style="display: inline-flex; justify-content: center;">
-                            <button id="ExportFileButton" onclick="exportResults()" style="margin: 0 .5em;">Export Game as File</button>
-                            <span>(<a href="/campaign-trail/viewGame.html" target="_blank">load exported save here</a>)</span>
-                          </div>
-                        </b>
-                    </p>
-                    <br><br><br>
-                </div>
-            </div>
-            <div id="map_footer">
-                <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-                <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-                <button class="final_menu_button" id="state_results_button">Results by State</button>
-                <button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button>
-                <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-                <button class="final_menu_button" id="play_again_button">Play Again!</button>
-            </div>
+    <div class="game_header">${window.corrr}</div>
+    <div id="main_content_area">
+      <div id="overall_details_container">
+        <h3>Overall Election Details</h3>
+        <div id="overall_election_details">
+          <h4>Results - This Game</h4>
+          <table>
+            <tbody>
+              <tr>
+                <th>Candidate</th>
+                ${noElectoralVotes ? "" : `<th>Electoral Votes</th>`}
+                <th>Popular Votes</th>
+                <th>Popular Vote %</th>
+              </tr>
+              ${a}
+            </tbody>
+          </table>
+          ${l}
         </div>
+        <div id="overall_election_details">
+          <h4>Results - Historical</h4>
+          <table>
+            <tbody>
+              <tr>
+                <th>Candidate</th>
+                ${allHistResZero ? "" : `<th>Electoral Votes</th>`}
+                <th>Popular Votes</th>
+                <th>Popular Vote %</th>
+              </tr>
+              ${histRes}
+            </tbody>
+            </table>
+            <p>
+              <b>
+                <div style="display: inline-flex; justify-content: center;">
+                  <button id="ExportFileButton" onclick="exportResults()" style="margin: 0 .5em;">Export Game as File</button>
+                  <span>(<a href="/campaign-trail/viewGame.html" target="_blank">load exported save here</a>)</span>
+                </div>
+              </b>
+            </p>
+            <br><br><br>
+        </div>
+      </div>
+      <div id="map_footer">
+        <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
+        <button class="final_menu_button" id="final_election_map_button">Election Map</button>
+        <button class="final_menu_button" id="state_results_button">Results by State</button>
+        <button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button>
+        <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
+        <button class="final_menu_button" id="play_again_button">Play Again!</button>
+      </div>
+    </div>
     `.trim();
 }
 
@@ -3516,19 +3538,20 @@ function furtherReadingHtml() {
 function beginNewGameHtml() {
   const election = PROPS.ELECTIONS.get(String(e.election_id));
   $("#game_window").append(`
-        <div class="overlay" id="new_game_overlay"></div>
-        <div class="overlay_window" id="new_game_window">
-            <div class="overlay_window_content" id="election_night_content">
-                <h3>Advisor Feedback</h3>
-                <img src="${election.advisor_url}" width="208" height="128"/>
-                <p>Are you sure you want to begin a new game?</p>
-            </div>
-            <div class="overlay_buttons" id="new_game_buttons">
-                <button id="new_game_button">Yes</button>
-                <br>
-                <button id="cancel_button">No</button>
-            </div>
-        </div>`.trim());
+    <div class="overlay" id="new_game_overlay"></div>
+    <div class="overlay_window" id="new_game_window">
+      <div class="overlay_window_content" id="election_night_content">
+        <h3>Advisor Feedback</h3>
+        <img src="${election.advisor_url}" width="208" height="128"/>
+        <p>Are you sure you want to begin a new game?</p>
+      </div>
+      <div class="overlay_buttons" id="new_game_buttons">
+        <button id="new_game_button">Yes</button>
+        <br>
+        <button id="cancel_button">No</button>
+      </div>
+    </div>`.trim()
+  );
 
   $("#new_game_button").click(() => {
     if (modded) {
@@ -3545,6 +3568,11 @@ function beginNewGameHtml() {
   });
 }
 
+/**
+ * Generates and returns a result table in the form of a string
+ * @param {number} t - The id of the state to generate a results table for
+ * @returns {string}
+ */
 function T(t) {
   const numT = Number(t);
 
@@ -3557,32 +3585,55 @@ function T(t) {
         if (!candidate) return ""; // skip unknown candidates
         const fullName = `${candidate.first_name} ${candidate.last_name}`;
         return !f.percent && !f.electoral_votes ? "" : `
-                     <tr>
-                         <td>${fullName}</td>
-                         <td>${formatNumbers(f.votes)}</td>
-                         <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
-                         ${noElectoralVotes ? "" : `<td>${f.electoral_votes}</td>`}
-                     </tr>
-                 `;
+          <tr>
+            <td>${fullName}</td>
+            <td>${formatNumbers(f.votes)}</td>
+            <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
+            ${noElectoralVotes ? "" : `<td>${f.electoral_votes}</td>`}
+          </tr>
+        `;
       })
         .filter(Boolean)
         .join("");
 
       return `
-                <h4>Results - This Game</h4>
-                <table>
-                    <tr>
-                        <th>Candidate</th>
-                        <th>Popular Votes</th>
-                        <th>Popular Vote %</th>
-                        ${noElectoralVotes ? "" : `<th>Electoral Votes</th>`}
-                    </tr>
-                    ${rows}
-                </table>
-            `;
+        <h4>Results - This Game</h4>
+        <table>
+          <tr>
+            <th>Candidate</th>
+            <th>Popular Votes</th>
+            <th>Popular Vote %</th>
+            ${noElectoralVotes ? "" : `<th>Electoral Votes</th>`}
+          </tr>
+          ${rows}
+        </table>
+      `;
     }).join("");
 }
 
+/**
+ * Object used to represent the results of a candidate in a state
+ * @typedef {Object} CandResult
+ * @property {number} candidate - The unique ID of the candidate
+ * @property {number} result - The score of the candidate in the state
+ * @property {number} percent - The amount of votes divided by the sum of all votes in the state
+ * @property {number} electoral_votes - The amount of electoral votes won by the candidate in the state
+ * @property {number} votes - The amount of votes won by the candidate in the state
+ */
+
+/**
+ * Object used to represent the election results in a state
+ * @typedef {Object} StateResult
+ * @property {number} state - Unique primary key (or ID) of the state
+ * @property {CandResult[]} result - Results of each candidate in the given state
+ * @property {string} abbr - Abbreviation of the state's name, used for quick lookups
+ */
+
+/**
+ * Handles state polling and election results
+ * @param {1|2} t - 1 for final results, 2 for state polling during game
+ * @returns {StateResult[]} Array of results for each state
+ */
 function A(t) {
   const gp = PROPS.PARAMS;
   const variance = gp.global_variance;
