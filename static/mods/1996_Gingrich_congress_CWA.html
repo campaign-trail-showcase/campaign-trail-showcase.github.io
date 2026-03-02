@@ -12992,6 +12992,7 @@ window.endingPicker = (_out, _totv, aa, quickstats) => {
 
     else if(quickstats[0] >= 270 && quickstats[0] <= 320) { 
         swapEndingPlaylist(2);
+        unlockAchievement("Demolition Man");
         if (vpName === "Jack Kemp") unlockAchievement("It's Only Money");
         else if (vpName === "Phil Gramm") unlockAchievement("Generation Swine");
         else if (vpName === "George Allen") unlockAchievement("Southern Nights");
@@ -13015,7 +13016,7 @@ window.endingPicker = (_out, _totv, aa, quickstats) => {
 
     }
     else if(quickstats[0] === 269) {
-        swapEndingPlaylist(3);
+        swapEndingPlaylist(6);
         setImage("https://file.garden/aYjZLAM7UCBtT7eY/deadlock000.png");
         return `
     <div class="ending-slide">
@@ -13034,7 +13035,7 @@ window.endingPicker = (_out, _totv, aa, quickstats) => {
 
     }
     else if(quickstats[0] < 269 && quickstats[0] >= 149) {
-        swapEndingPlaylist(4);
+        swapEndingPlaylist(3);
         setImage("https://file.garden/aYjZLAM7UCBtT7eY/theclearsky148.png");
         return `
     <div class="ending-slide">
@@ -13061,7 +13062,7 @@ window.endingPicker = (_out, _totv, aa, quickstats) => {
 
     }
     else if(quickstats[0] < 149 && quickstats[0] > 38) {
-        swapEndingPlaylist(5);
+        swapEndingPlaylist(4);
         setImage("https://file.garden/aYjZLAM7UCBtT7eY/foxnews148.png");
         return `
     <div class="ending-slide">
@@ -13091,7 +13092,7 @@ window.endingPicker = (_out, _totv, aa, quickstats) => {
 
     }
     else if(quickstats[0] <= 38) {
-        swapEndingPlaylist(6);
+        swapEndingPlaylist(5);
         unlockAchievement("Love Theme From Twin Peaks");
         setImage("https://file.garden/aYjZLAM7UCBtT7eY/forest148.png");
         return `
