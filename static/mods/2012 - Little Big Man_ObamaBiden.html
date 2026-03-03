@@ -2524,7 +2524,7 @@ campaignTrail_temp.answers_json = [
         "pk": 727,
         "fields": {
             "question": 130,
-            "description": "Most of our dilligent magic ethic is, uh, gone, and it isn’t coming back. They’re telling me Plouffe and Messina are building a billion-dollar firewall in Ohio and Florida. Crazy but, uh, it doesn’t matter how loud the Republicans scream if we simply out-organize them."
+            "description": "Most of our diligent magic ethic is, uh, gone, and it isn’t coming back. They’re telling me Plouffe and Messina are building a billion-dollar firewall in Ohio and Florida. Crazy but, uh, it doesn’t matter how loud the Republicans scream if we simply out-organize them."
         }
     },
     {
@@ -22907,7 +22907,7 @@ const RUNNING_MATE_DATA = {
     },
     feedback: {
       1650: "Independents and a few moderate Republicans praise the pick as a sign you’re willing to govern from the center, and some early polling shows a small but real bump in the Midwest. Of course, the progressive wing of your party is in open revolt, and there are some groups threatening to withhold their endorsement. Oh well.",
-      1661: "Your choice wins praise from a dozen or so business leaders and fiscal watchdog groups. Your base, however, complains that you’re adopting Republican talking points and abandoning the party’s commitment to social programs.One of them is a furious Joe Biden.<br/><br/>Sighing, you get Pete Rouse to invite him to tour the newly renovated West Wing kitchen. Of course, there is no such new renovation, aside from Biden being stuffed by two interns into an industrial dishwasher, completing a full rinse cycle before being unloaded onto a catering cart and wheeled out to the South Lawn, where he was left near the compost bins. He endorses the Obama-Bayh ticket the next day."
+      1661: "Your choice wins praise from a dozen or so business leaders and fiscal watchdog groups. Your base, however, complains that you’re adopting Republican talking points and abandoning the party’s commitment to social programs. One of them is a furious Joe Biden.<br/><br/>Sighing, you get Pete Rouse to invite him to tour the newly renovated West Wing kitchen. Of course, there is no such new renovation, aside from Biden being stuffed by two interns into an industrial dishwasher, completing a full rinse cycle before being unloaded onto a catering cart and wheeled out to the South Lawn, where he was left near the compost bins. He endorses the Obama-Bayh ticket the next day."
     },
     issueScores: {
       1650: [
@@ -23065,7 +23065,7 @@ function applyDataModifications() {
       });
     });
   }
-
+  
   // reapply tooltips to text that otherwise wouldn't load
   if (window.tooltipProcessor) {
       window.tooltipProcessor.applyToObject(campaignTrail_temp.questions_json);
@@ -23508,11 +23508,11 @@ window.setImage = window.endingImageSystem.setImage;
 const extraEndingStyles = new CSSStyleSheet();
 extraEndingStyles.replaceSync(`
   #main-ending-scroll-container {
-    contain: content;
+    contain: content; 
     will-change: scroll-position;
     -webkit-overflow-scrolling: touch;
-    height: 38em;
-    overflow: auto;
+    height: 38em; 
+    overflow: auto; 
     position: relative;
   }
   .slide-wrapper {
@@ -23536,9 +23536,9 @@ document.adoptedStyleSheets = [...document.adoptedStyleSheets, extraEndingStyles
 // image preloader
 function preloadEndingAssets() {
   if (!campaignTrail_temp.pages) return;
-
+  
   const tempImg = new Image();
-
+  
   Object.values(campaignTrail_temp.executable || {}).forEach(func => {
     // this is a rough heuristic to catch image sets
     const str = func.toString();
@@ -23575,34 +23575,34 @@ window.endingConstructor = (direction = 1) => {
   if (newPage < 0 || newPage >= campaignTrail_temp.pages.length) {
     return; // out of bounds
   }
-
+  
   campaignTrail_temp.page = newPage;
 
   let finalDesc = document.getElementById("final_results_description");
   let scrollContainer = document.getElementById("main-ending-scroll-container");
   let narrativeDiv = document.getElementById("endingtxt");
   let buttonProxy = document.getElementById("ending-button-proxy");
-
+  
   if (!scrollContainer) {
     const finalDesc = document.getElementById("final_results_description");
-
+    
     const shellFragment = document.createDocumentFragment();
-
+    
     // container
     scrollContainer = document.createElement("div");
     scrollContainer.id = "main-ending-scroll-container";
-
+    
     // narrative area
     narrativeDiv = document.createElement("div");
     narrativeDiv.id = "endingtxt";
     narrativeDiv.className = "ending-narrative-content";
     scrollContainer.appendChild(narrativeDiv);
-
+    
     // stats area
     const statsContainer = document.createElement("div");
     statsContainer.id = "ending-stats-container";
     statsContainer.style.paddingTop = "1rem";
-
+    
     const statsIds = ["difficulty_mult", "overall_vote_statistics", "map_footer"];
     statsIds.forEach(id => {
       const el = document.getElementById(id);
@@ -23622,7 +23622,7 @@ window.endingConstructor = (direction = 1) => {
     shellFragment.appendChild(buttonProxy);
 
     finalDesc.style.cssText = "text-align: left; width: 72%; height: auto; margin-left: auto; margin-right: auto; display: block;";
-    finalDesc.innerHTML = "";
+    finalDesc.innerHTML = ""; 
     finalDesc.appendChild(shellFragment);
 
     preloadEndingAssets();
@@ -23644,7 +23644,7 @@ window.endingConstructor = (direction = 1) => {
     const wrapper = document.createElement("div");
     wrapper.id = slideId;
     wrapper.className = "slide-wrapper";
-
+    
     // inject content
     wrapper.innerHTML = `
       <table style='margin:0px;padding:0px;display: table;width:100%;'>
@@ -23657,14 +23657,14 @@ window.endingConstructor = (direction = 1) => {
         </tbody>
       </table>
     `;
-
+    
     narrativeDiv.appendChild(wrapper);
   }
 
   // update the buttons
   let btnHtml = "";
   const lastPage = campaignTrail_temp.pages.length - 1;
-
+  
   if (campaignTrail_temp.pages.length > 1) {
     if (newPage === 0) {
       btnHtml = `<button onclick='endingConstructor(1)'>Next</button>`;
@@ -23854,7 +23854,7 @@ function endingPickerCONT() {
     endingObserver.disconnect();
     endingObserver = null;
   }
-
+  
   const oldSlide = document.getElementById("slide-wrapper-0");
   if (oldSlide) {
     oldSlide.remove();
@@ -26230,31 +26230,31 @@ const mainEndings = [
         </div>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
-            The apartment was thick with smoke that night. Not the kind you wave away, but the kind that just hangs there, soft and sweet, becoming part of the room. The television was the only light we had at the time, and it cast everything in a really neat pale blue glow. Justin was sprawled on the floor next to a half-empty bottle of wine, tapping his palm against his cheekbone in a weird rhythm he sometimes fell into when he was really, truly gone. <em>Tap. Tap. Tap.</em> It was like he was keeping time to music none of us could hear.
+            The apartment was thick with smoke that night. Not the kind you wave away, but the kind that just hangs there, soft and sweet, becoming part of the room. The television was the only light we had, and it cast everything in a pale blue glow. Justin was sprawled on the floor next to a half-empty bottle of wine, tapping his palm against his cheekbone in a strange rhythm he sometimes fell into when he was really, truly gone. <em>Tap. Tap. Tap.</em> Like he was keeping time to music none of us could hear.
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
-            I was buried in a quilt on the couch, one of those ugly thrift store finds that somehow became one of the most importants object in my home. The Oscars were on, and I was half-watching, half-drifting. We didn't care about most of it, to be fair, but there were a few people we rooted for.
+            I was buried in a quilt on the couch, which was an ugly thrift store find that somehow became one of the most important objects in my home. The Oscars were on, and I was half-watching and half-drifting. We didn't care about most of it, to be fair, but there were a few people we rooted for.
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
-            When they announced Susan Sarandon for <em>Dead Man Walking</em>, I threw my hands up so fast I nearly dropped the joint I was holding. "Yes! Fuck yes. Finally." I pulled the blanket tighter around me, grinning at the screen. "She's a fucking queen."
+            When they announced Susan Sarandon for <em>Dead Man Walking</em>, I threw my hands up so fast I nearly dropped the joint I was holding. "Yes! <em>Fuck</em> yes. Finally." I pulled the blanket tighter around me, grinning at the screen. "She's a fucking queen."
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
-            Justin stopped tapping. He rolled his head to the side to look at me, his eyes half-lidded and red, that loose, lopsided grin spreading across his face. He had this way of looking at you like he was seeing something you couldn't see yourself.
+            Justin stopped tapping. He rolled his head to the side to look at me, his eyes half-lidded and red, with that loose, lopsided grin spreading across his face. He had this way of looking at you like he was seeing something you couldn't see yourself.
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
-            "She's real," he said, his words slow and soft, a little slurred at the edges. "That's why she won. She, uh, actually gives a shit. She fights for stuff. Not like..." He waved his hand vaguely at the television. "Uh... plastic people."
+            "She's <em>real</em>," he said, his words slow and soft, a little slurred at the edges. "That's why she won. She, uh, actually gives a shit. She fights for stuff. Not like —" He waved his hand vaguely at the television. "Uh... plastic people."
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
-            "She actually uses her voice," I said. "That's what I love about her. She doesn't just show up and look pretty, she stands for something. I want to be like that."
+            "She actually uses her voice," I said. "That's what I love about her. She doesn't just show up and look pretty— she stands for something. I want to be like that."
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
-            Justin sat up slowly, swaying a little, and pointed a finger at me. The gesture was loose, almost theatrical. "You already are, Sol. You've got that..." He made a circular motion near his temple. "That fire thing, in your head. You care about shit. You always have."
+            Justin sat up slowly, swaying a little, and pointed a finger at me. The gesture was loose, almost theatrical. "You already <em>are</em>, Sol. You've got that..." He made a circular motion near his temple. "That fire thing, in your head. You care about shit. You always have."
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
@@ -26262,7 +26262,7 @@ const mainEndings = [
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
-            "No, no, no." He shook his head, eyes suddenly wide like he'd had a revelation. "You should <em>run</em>. For real. Like, the whole thing, President." He said smiled. "<em>President Frye.</em>" He let it hang in the air for a moment, then grinned even wider. "That sounds kinda cool, actually."
+            "No, no, no." He shook his head, eyes suddenly wide like he'd had a revelation. "You should <em>run</em>. For real. Like— the whole thing, President." He smiled. "<em>President Frye.</em>" He let it hang in the air for a moment, then grinned even wider. "That sounds kinda cool, actually."
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
@@ -26270,11 +26270,11 @@ const mainEndings = [
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
-            "I can, actually." He wasn't laughing anymore. His voice was still soft and hazy, but there was something underneath it. "You'd be good at it. You'd actually try to help people, I tell you."
+            "I <em>can</em>, actually." He wasn't laughing anymore. His voice was still soft and hazy, but there was something underneath it. "You'd be good at it. You'd actually try to help people."
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
-            On the screen, Sarandon was holding the gold statue, radiant under those light. I watched her for a long moment. Then I looked at Justin, then past him, at the smoke curling toward the ceiling, at the blue glow pulsing against the walls.
+            On the screen, Sarandon was holding the gold statue, radiant under those lights. I watched her for a long moment; she looked beautiful. Then I looked at Justin, then past him, at the smoke curling toward the ceiling and at the blue glow pulsing against the walls.
         </p>
 
         <p style="margin-bottom: 18px; text-indent: 2em;">
@@ -27456,9 +27456,9 @@ const bonusSlides = [
   },
   {
     id: "eyes_wide_shut",
-    condition: (ev) => ev < 4,
+	condition: (ev) => (ev < 4) || (ev < 200 && window.heyheyhey < 1 && window.mynutmegphantasy <= -1),
     image: "https://file.garden/aNtAfG887DiA_7lO/2012LBM/eyeswideshut.jpg",
-    html: `<link href="https://fonts.googleapis.com/css2?family=Graphik:wght@400;600;700&family=Tiempos+Text:wght@400;600&display=swap" rel="stylesheet"><style> .letterboxd-container { background-color: #14181c; color: #9ab; font-family: 'Graphik', -apple-system, sans-serif; border-radius: 4px; padding: 0; text-align: left; max-width: 900px; margin: 0 auto; } .film-header { background: linear-gradient(to bottom, #2c3440 0%, #14181c 100%); padding: 30px; border-bottom: 1px solid #456; } .film-title-block { text-align: left; } .film-title { font-family: 'Tiempos Text', Georgia, serif; font-size: 2.5em; font-weight: 600; color: #fff; margin: 0 0 5px 0; } .film-year { font-size: 2.5em; font-weight: 300; color: #678; margin-left: 15px; } .film-tagline { font-size: 1.1em; color: #9ab; font-style: italic; margin: 10px 0 20px 0; } .film-metadata { display: flex; gap: 20px; font-size: 0.85em; color: #9ab; margin-top: 15px; } .film-metadata span { display: inline-block; } .rating-summary { background-color: #1a1f29; padding: 20px 30px; border-bottom: 1px solid #456; display: flex; justify-content: space-between; align-items: center; } .avg-rating { font-size: 1.4em; color: #00e054; } .stars { color: #00c030; font-size: 1.2em; letter-spacing: 2px; } .rating-count { font-size: 0.9em; color: #678; margin-top: 5px; } .film-details { padding: 25px 30px; border-bottom: 1px solid #456; } .section-title { font-size: 0.75em; text-transform: uppercase; letter-spacing: 1.5px; color: #678; margin-bottom: 10px; font-weight: 600; } .film-synopsis { line-height: 1.7; color: #bcd; font-size: 0.95em; } .cast-crew { font-size: 0.9em; line-height: 1.8; color: #9ab; } .cast-crew a { color: #40bcf4; text-decoration: none; } .reviews-section { padding: 25px 30px; } .review { background-color: #1a2028; border-left: 3px solid #456; padding: 15px 20px; margin-bottom: 20px; border-radius: 3px; } .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; } .reviewer-name { color: #40bcf4; font-weight: 600; font-size: 0.95em; } .review-rating { color: #00c030; font-size: 1em; letter-spacing: 1px; } .review-text { color: #bcd; line-height: 1.6; font-size: 0.9em; } .review-meta { color: #678; font-size: 0.8em; margin-top: 8px; } .liked-icon { color: #ff8000; margin-right: 5px; }</style><div class="letterboxd-container"> <div class="film-header"> <div class="film-title-block"> <h1 class="film-title">Eyes Wide Shut<span class="film-year">2014</span></h1> <p class="film-tagline">"In a world of power, some secrets come at a price."</p> <div class="film-metadata"> <span>Directed by <strong>Steven Soderbergh</strong></span> <span>•</span> <span>159 minutes</span> <span>•</span> <span>🇺🇸 USA</span> </div> </div> </div> <div class="rating-summary"> <div> <div class="avg-rating">★ 2.9 average</div> <div class="rating-count">12,847 ratings • 2,304 reviews</div> </div> <div style="text-align: right;"> <div style="color: #9ab; font-size: 0.85em;">Watched by</div> <div style="color: #fff; font-size: 1.2em; font-weight: 600;">28,392</div> </div> </div> <div class="film-details"> <div class="section-title">Synopsis</div> <p class="film-synopsis">After a bitter political defeat, Dr. William Harford (Barack Obama) attempts to rebuild his life in New York alongside his wife Alice (Jennifer Aniston). When Alice confesses a long-suppressed fantasy, William spirals into an nocturnal odyssey through Manhattan's hidden underworld of wealth, power, and ritualistic excess.</p> <div class="section-title" style="margin-top: 20px;">Cast & Crew</div> <div class="cast-crew"> <strong>Directed by:</strong> Steven Soderbergh<br> <strong>Screenplay by:</strong> Steven Soderbergh, Aaron Sorkin (based on the 1999 screenplay by Stanley Kubrick and Frederic Raphael)<br> <strong>Starring:</strong> <a href="#">Barack Obama</a>, <a href="#">Jennifer Aniston</a>, <a href="#">Michael Fassbender</a>, <a href="#">Tilda Swinton</a>, <a href="#">Oscar Isaac</a> </div> </div> <div class="reviews-section"> <div class="section-title">Popular Reviews</div> <div class="review"> <div class="review-header"> <span class="reviewer-name">margaret ✨</span> <span class="review-rating">★★★★</span> </div> <div class="review-text"> honestly? weird ig but kind of fascinating? as a cultural artifact. Obama brings this wounded, dissociative quality to Harford that makes the character's unraveling feel less like sexual jealousy and more like he's having an existential crisis. the masked ball sequence is chef's kiss though </div> <div class="review-meta"><span class="liked-icon">♥</span> 1,847 likes • Review by margaret • Dec 28, 2014</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">KubrickFan1968</span> <span class="review-rating">★½</span> </div> <div class="review-text"> A desecration. Soderbergh is a talented filmmaker but this is a fundamental misunderstanding of what made Kubrick's vision work. The eroticism is replaced with politicized allegory. The dreamlike ambiguity you see at times becomes heavy-handed commentary. And the casting... I mean, come on. </div> <div class="review-meta">923 likes • Review by KubrickFan1968 • Dec 25, 2014</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">jaleel</span> <span class="review-rating">★★</span> </div> <div class="review-text"> what the hell is my boy obama doing here. brother you were president like 2 years ago and NOW you wanna do a psychosexual thriller??? i mean WHY..... well at least Aniston tried her best. that's all i'll say. </div> <div class="review-meta">4,392 likes • Review by jaleel • Dec 20, 2014</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">FilmCritHulk</span> <span class="review-rating">★★★</span> </div> <div class="review-text"> SODERBERGH UNDERSTANDS THAT OBAMA'S CASTING IS THE POINT. THIS IS A FILM ABOUT A MAN WHO BELIEVED HE COULD CHANGE THE WORLD CONFRONTING THE REALITY THAT THE WORLD CHANGED HIM. IT IS QUITE IMPERFECT, AND HONESTLY REALLY WEIRD AT TIMES. LIKE REALLY WEIRD. BUT BARACK IS DEFINITELY SWINGING FOR THE FENCES. </div> <div class="review-meta">2,103 likes • Review by FilmCritHulk • Jan 3, 2015</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">sarah_b</span> <span class="review-rating">★★★½</span> </div> <div class="review-text"> is it good? idk. is it interesting? absolutely. Obama actually commits to the role in a way I wasn't expecting. there's a scene where he just stares at himself in the mirror for like 90 seconds and you can FEEL the regret. also the cinematography is gorgeous, pure Soderbergh. </div> <div class="review-meta"><span class="liked-icon">♥</span> 1,654 likes • Review by sarah_b • Dec 30, 2014</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">TrashBoat</span> <span class="review-rating">½</span> </div> <div class="review-text"> lmaooooo remember when we thought THIS was rock bottom for American political culture </div> <div class="review-meta"><span class="liked-icon">♥</span> 8,847 likes • Review by TrashBoat • Nov 8, 2016</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">cinema_suicide</span> <span class="review-rating">★★★★</span> </div> <div class="review-text"> Certified weird. The scene where Obama's character crashes the secret society party and they're all wearing presidential masks (including HIS OWN) is genuinely haunting. Soderbergh said in an interview (I think it was to Vanity Fair) that this is about "what happens to hope when it meets the machine." and even though I have no idea what he was high on, I felt that. </div> <div class="review-meta"><span class="liked-icon">♥</span> 2,891 likes • Review by cinema_suicide • Jan 15, 2015</div> </div> </div></div>`
+    html: `<link href="https://fonts.googleapis.com/css2?family=Graphik:wght@400;600;700&family=Tiempos+Text:wght@400;600&display=swap" rel="stylesheet"><style> .letterboxd-container { background-color: #14181c; color: #9ab; font-family: 'Graphik', -apple-system, sans-serif; border-radius: 4px; padding: 0; text-align: left; max-width: 900px; margin: 0 auto; } .film-header { background: linear-gradient(to bottom, #2c3440 0%, #14181c 100%); padding: 30px; border-bottom: 1px solid #456; } .film-title-block { text-align: left; } .film-title { font-family: 'Tiempos Text', Georgia, serif; font-size: 2.5em; font-weight: 600; color: #fff; margin: 0 0 5px 0; } .film-year { font-size: 2.5em; font-weight: 300; color: #678; margin-left: 15px; } .film-tagline { font-size: 1.1em; color: #9ab; font-style: italic; margin: 10px 0 20px 0; } .film-metadata { display: flex; gap: 20px; font-size: 0.85em; color: #9ab; margin-top: 15px; } .film-metadata span { display: inline-block; } .rating-summary { background-color: #1a1f29; padding: 20px 30px; border-bottom: 1px solid #456; display: flex; justify-content: space-between; align-items: center; } .avg-rating { font-size: 1.4em; color: #00e054; } .stars { color: #00c030; font-size: 1.2em; letter-spacing: 2px; } .rating-count { font-size: 0.9em; color: #678; margin-top: 5px; } .film-details { padding: 25px 30px; border-bottom: 1px solid #456; } .section-title { font-size: 0.75em; text-transform: uppercase; letter-spacing: 1.5px; color: #678; margin-bottom: 10px; font-weight: 600; } .film-synopsis { line-height: 1.7; color: #bcd; font-size: 0.95em; } .cast-crew { font-size: 0.9em; line-height: 1.8; color: #9ab; } .cast-crew a { color: #40bcf4; text-decoration: none; } .reviews-section { padding: 25px 30px; } .review { background-color: #1a2028; border-left: 3px solid #456; padding: 15px 20px; margin-bottom: 20px; border-radius: 3px; } .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; } .reviewer-name { color: #40bcf4; font-weight: 600; font-size: 0.95em; } .review-rating { color: #00c030; font-size: 1em; letter-spacing: 1px; } .review-text { color: #bcd; line-height: 1.6; font-size: 0.9em; } .review-meta { color: #678; font-size: 0.8em; margin-top: 8px; } .liked-icon { color: #ff8000; margin-right: 5px; }</style><div class="letterboxd-container"> <div class="film-header"> <div class="film-title-block"> <h1 class="film-title">Eyes Wide Shut<span class="film-year">2014</span></h1> <p class="film-tagline">"In a world of power, some secrets come at a price."</p> <div class="film-metadata"> <span>Directed by <strong>Steven Soderbergh</strong></span> <span>•</span> <span>159 minutes</span> <span>•</span> <span>USA</span> </div> </div> </div> <div class="rating-summary"> <div> <div class="avg-rating">★ 2.9 average</div> <div class="rating-count">12,847 ratings • 2,304 reviews</div> </div> <div style="text-align: right;"> <div style="color: #9ab; font-size: 0.85em;">Watched by</div> <div style="color: #fff; font-size: 1.2em; font-weight: 600;">28,392</div> </div> </div> <div class="film-details"> <div class="section-title">Synopsis</div> <p class="film-synopsis">After a bitter political defeat, Dr. William Harford (Barack Obama) attempts to rebuild his life in New York alongside his wife Alice (Jennifer Aniston). When Alice confesses a long-suppressed fantasy, William spirals into an nocturnal odyssey through Manhattan's hidden underworld of wealth, power, and ritualistic excess.</p> <div class="section-title" style="margin-top: 20px;">Cast & Crew</div> <div class="cast-crew"> <strong>Directed by:</strong> Steven Soderbergh<br> <strong>Screenplay by:</strong> Steven Soderbergh, Aaron Sorkin (based on the 1999 screenplay by Stanley Kubrick and Frederic Raphael)<br> <strong>Starring:</strong> <a href="#">Barack Obama</a>, <a href="#">Jennifer Aniston</a>, <a href="#">Michael Fassbender</a>, <a href="#">Tilda Swinton</a>, <a href="#">Oscar Isaac</a> </div> </div> <div class="reviews-section"> <div class="section-title">Popular Reviews</div> <div class="review"> <div class="review-header"> <span class="reviewer-name">margaret ✨</span> <span class="review-rating">★★★★</span> </div> <div class="review-text"> honestly? weird ig but kind of fascinating? as a cultural artifact. Obama brings this wounded, dissociative quality to Harford that makes the character's unraveling feel less like sexual jealousy and more like he's having an existential crisis. the masked ball sequence is chef's kiss though </div> <div class="review-meta"><span class="liked-icon">♥</span> 1,847 likes • Review by margaret • Dec 28, 2014</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">KubrickFan1968</span> <span class="review-rating">★½</span> </div> <div class="review-text"> A desecration. Soderbergh is a talented filmmaker but this is a fundamental misunderstanding of what made Kubrick's vision work. The eroticism is replaced with politicized allegory. The dreamlike ambiguity you see at times becomes heavy-handed commentary. And the casting... I mean, come on. </div> <div class="review-meta">923 likes • Review by KubrickFan1968 • Dec 25, 2014</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">jaleel</span> <span class="review-rating">★★</span> </div> <div class="review-text"> what the hell is my boy obama doing here. brother you were president like 2 years ago and NOW you wanna do a psychosexual thriller??? i mean WHY..... well at least Aniston tried her best. that's all i'll say. </div> <div class="review-meta">4,392 likes • Review by jaleel • Dec 20, 2014</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">FilmCritHulk</span> <span class="review-rating">★★★</span> </div> <div class="review-text"> SODERBERGH UNDERSTANDS THAT OBAMA'S CASTING IS THE POINT. THIS IS A FILM ABOUT A MAN WHO BELIEVED HE COULD CHANGE THE WORLD CONFRONTING THE REALITY THAT THE WORLD CHANGED HIM. IT IS QUITE IMPERFECT, AND HONESTLY REALLY WEIRD AT TIMES. LIKE REALLY WEIRD. BUT BARACK IS DEFINITELY SWINGING FOR THE FENCES. </div> <div class="review-meta">2,103 likes • Review by FilmCritHulk • Jan 3, 2015</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">sarah_b</span> <span class="review-rating">★★★½</span> </div> <div class="review-text"> is it good? idk. is it interesting? absolutely. Obama actually commits to the role in a way I wasn't expecting. there's a scene where he just stares at himself in the mirror for like 90 seconds and you can FEEL the regret. also the cinematography is gorgeous, pure Soderbergh. </div> <div class="review-meta"><span class="liked-icon">♥</span> 1,654 likes • Review by sarah_b • Dec 30, 2014</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">TrashBoat</span> <span class="review-rating">½</span> </div> <div class="review-text"> lmaooooo remember when we thought THIS was rock bottom for American political culture </div> <div class="review-meta"><span class="liked-icon">♥</span> 8,847 likes • Review by TrashBoat • Nov 8, 2016</div> </div> <div class="review"> <div class="review-header"> <span class="reviewer-name">cinema_suicide</span> <span class="review-rating">★★★★</span> </div> <div class="review-text"> Certified weird. The scene where Obama's character crashes the secret society party and they're all wearing presidential masks (including HIS OWN) is genuinely haunting. Soderbergh said in an interview (I think it was to Vanity Fair) that this is about "what happens to hope when it meets the machine." and even though I have no idea what he was high on, I felt that. </div> <div class="review-meta"><span class="liked-icon">♥</span> 2,891 likes • Review by cinema_suicide • Jan 15, 2015</div> </div> </div></div>`
   },
   {
     id: "pitchfork_album",
@@ -27551,7 +27551,7 @@ const bonusSlides = [
 		justify-content: center;
 		overflow: hidden;
 	  }
-
+	  
 		.pf-album-art img {
 		  width: 100%;
 		  height: 100%;
@@ -27674,7 +27674,7 @@ const bonusSlides = [
 		color: #1a1a1a;
 		padding: 0 20px;
 	  }
-
+	  
 	  .pf-pullquote::before {
 		content: "“";
 		display: block;
@@ -27688,7 +27688,7 @@ const bonusSlides = [
 		padding-top: 40px;
 		border-top: 4px solid #1a1a1a;
 	  }
-
+	  
 	  .pf-tl-header {
 		font-family: 'Lato', sans-serif;
 		font-weight: 900;
@@ -27713,7 +27713,7 @@ const bonusSlides = [
 		align-items: baseline;
 		font-size: 14px;
 	  }
-
+	  
 	  .pf-tl-num {
 		color: #999;
 		font-weight: 700;
@@ -27769,7 +27769,7 @@ const bonusSlides = [
 	  </div>
 
 	  <div class="pf-hero">
-
+		
 		<div class="pf-info-block">
 		  <span class="pf-genre">R&B / Soul</span>
 		  <div class="pf-artist">Barack Obama</div>
@@ -27797,7 +27797,7 @@ const bonusSlides = [
 
 	  <div class="pf-body-container">
 		<div class="pf-article">
-
+		  
 		  <div class="pf-byline-bar">
 			<span>By <span class="pf-author">Jayson Greene</span></span>
 			<span>Contributor</span>
@@ -27818,7 +27818,7 @@ const bonusSlides = [
 		  <p>Where the album truly ignites is, perhaps interestingly, the Prince collaboration. Their version of "Thieves in the Temple" is genuinely startling, as Prince strips the original's Minneapolis funk down to an almost skeletal arrangement of minor-key Rhodes, a single snare hit on the two, and his own ghostly multi-tracked harmonies weaving around Obama's lead vocal. The effect is less a cover than a séance, but Obama's voice, which elsewhere can sound a little too careful, or too aware of its own limitations, here sounds much darker and looser. There is a moment in the bridge where Prince drops out entirely and Obama holds a note for what feels like an impossibly long time, and you realize with some shock that the man can actually <i>sing</i> when he stops trying to sing correctly.</p>
 
 		  <p>The record's other high points cluster around its most unexpected choices. "Edith and the Kingpin," the Joni Mitchell cut from <i>The Hissing of Summer Lawns</i>, is quite the inspired selection; a song about the seductive machinery of power, sung by a man who operated that very same machinery for eight years, alongside the woman who wrote it. Mitchell's voice, weathered and low in recent years, is a natural complement to Obama's range, and their interplay feels genuinely intimate. Not only that, but the arrangement, a smoky after-hours jazz-combo setting with Herbie Hancock sitting in on piano, is impeccable. "Brother, Can You Spare a Dime?," reimagined as a slow-burn duet with John Legend, is another highlight, as we see the Depression-era standard repositioned as something contemporary.</p>
-
+		  
 		  <p>A stripped-back "Summertime" with Esperanza Spalding is lovely and light, with Spalding's bass and Obama's voice occupying the same warm middle register in a way that produces some unexpected harmonics. And the closing track, "We're Going to Make It", the Little Milton song, performed as a duet with Michelle Obama, is either the most nakedly sentimental thing you will hear all year or a genuinely moving document of a marriage, depending on your tolerance. Michelle, it should be noted, can also sing. Way better than her husband, actually, though she'd never say so.</p>
 
 		  <p>The album sags in its middle third. "What's Going On" with D'Angelo is handsomely arranged but rote, as we see two tasteful men being tasteful at each other for five minutes. A cover of Curtis Mayfield's "People Get Ready" with Smokey Robinson is pretty in a way that is also its own limitation, as neither man pushes the other anywhere interesting. "Let's Stay Together," performed with Al Green himself, commits the sin of existing in a world where Al Green's original exists and is perfect and does not need a former president singing over it, no matter how nice the microphone preamps are. An overly busy "Inner City Blues" with Janelle Monáe tries to compensate for the mismatch in vocal ability with production fireworks and ends up sounding overproduced and cluttered.</p>
@@ -27838,7 +27838,7 @@ const bonusSlides = [
 			   <div class="pf-tl-item"><span class="pf-tl-num">06</span><div><span class="pf-tl-title">Edith and the Kingpin</span> <span class="pf-tl-feat">(feat. Joni Mitchell)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">07</span><div><span class="pf-tl-title">People Get Ready</span> <span class="pf-tl-feat">(feat. Smokey Robinson)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">08</span><div><span class="pf-tl-title">Let's Stay Together</span> <span class="pf-tl-feat">(feat. Al Green)</span></div></div>
-
+			   
 			   <div class="pf-tl-item"><span class="pf-tl-num">09</span><div><span class="pf-tl-title">What's Going On</span> <span class="pf-tl-feat">(feat. D'Angelo)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">10</span><div><span class="pf-tl-title">Summertime</span> <span class="pf-tl-feat">(feat. Esperanza Spalding)</span></div></div>
 			   <div class="pf-tl-item"><span class="pf-tl-num">11</span><div><span class="pf-tl-title">Lean on Me</span> <span class="pf-tl-feat">(feat. Common)</span></div></div>
@@ -27849,7 +27849,7 @@ const bonusSlides = [
 			   <div class="pf-tl-item"><span class="pf-tl-num">16</span><div><span class="pf-tl-title">We're Going to Make It</span> <span class="pf-tl-feat">(feat. Michelle Obama)</span></div></div>
 			</div>
 		  </div>
-
+		  
 		</div>
 	  </div>
 
@@ -27857,7 +27857,7 @@ const bonusSlides = [
 		© 2017 Condé Nast. All rights reserved. Pitchfork may earn a portion of sales from products that are purchased through our site as part of our Affiliate Partnerships with retailers. The material on this site may not be reproduced, distributed, transmitted, cached or otherwise used, except with the prior written permission of Condé Nast.
 	  </div>
 
-	</div>
+	</div>	
 	`
   },
   {
@@ -31549,7 +31549,9 @@ endingPicker = (out, totv, aa, quickstats) => {
   const rightThirdEV = rightThirdResult ? rightThirdResult.electoral_votes : 0;
   const leftThirdEV = leftThirdResult ? leftThirdResult.electoral_votes : 0;
   const leftCandidateData = campaignTrail_temp.candidate_json.find(c => c.pk === 19);
-  const leftNomineeName = leftCandidateData ? (leftCandidateData.first_name + " " + leftCandidateData.last_name).trim() : "";
+  const leftNomineeName = leftCandidateData ? (leftCandidateData.fields.first_name + " " + leftCandidateData.fields.last_name).trim() : "";
+  const rightCandidateData = campaignTrail_temp.candidate_json.find(c => c.pk === 18);
+  const rightNomineeName = rightCandidateData ? (rightCandidateData.fields.first_name + " " + rightCandidateData.fields.last_name).trim() : "";
 
   // for the achievements
   if (out === "win") {
@@ -31688,11 +31690,11 @@ endingPicker = (out, totv, aa, quickstats) => {
     // special logic for the tie
     campaignTrail_temp.executable[0] = () => {
       if (typeof setImage === 'function') setImage(selectedScenario.image);
-
+      
       const likA = Math.min(4, Math.max(0, Math.round(playerEV / 270 * 4)));
       const likB = Math.min(4, Math.max(0, Math.round((playerEV - 200) / 70 * 2)));
       const likC = Math.min(4, Math.max(0, Math.round((300 - opponentEVs) / 100 * 2)));
-
+      
       addContingent(likA, likB, likC);
     };
 
@@ -31769,7 +31771,7 @@ function finalizeRendering() {
     endingObserver.disconnect();
     endingObserver = null;
   }
-
+  
   const narrativeDiv = document.getElementById("endingtxt");
   if (narrativeDiv) {
     narrativeDiv.innerHTML = "";
@@ -32650,8 +32652,8 @@ e.vpSwitcher = () => {
       if (rmPic) {
         rmPic.src = e.running_mate_image_url;
       }
-
-      onGameChange();
+	  
+      onGameChange(); 
     }
 
     vpScreen.remove();
@@ -32709,7 +32711,7 @@ const DYNAMIC_SCENARIOS = {
           feedback: "You refuse to let him get under your skin, no matter how provocative his rhetoric becomes. Every time he launches into a moral lecture, you do your best to pivot to kitchen-table issues, making him look very, very obsessed with you."
         },
         21320: {
-          desc: "I’m going to make this debate a referendum on his extremism. Every single time he opens his mouth, I’ll remind voters that this is a man who wants to ban contraception and once compared homosexuality to bestiality on national television. ‘This isn’t the Republican party of Lincoln, folks. This is something closer to the, uh, Inquisition.’",
+          desc: "I’m going to make this debate a referendum on his extremism. Every single time he opens his mouth, I’ll remind voters that this is a man who wants to ban contraception and once compared homosexuality to bestiality on national television. ‘This isn’t the Republican Party of Lincoln, folks. This is something closer to the, uh, Inquisition.’",
           feedback: "It absolutely energizes your base, especially as donations spike during the debate. It also has the side effect of turning the evening into a shouting match about social issues rather than a substantive policy discussion. You win on points with your coalition, but you didn’t get to talk about your economic record, which was supposed to be the evening’s focus."
         }
       }
@@ -33933,7 +33935,7 @@ function handleFooter() {
   if (!oldCandidatePic || !oldRunningMatePic || !gameWindow) {
     return;
   }
-
+  
   // get question image
   const questionNumber = campaignTrail_temp.question_number;
   const currentQuestion = campaignTrail_temp.questions_json[questionNumber];
@@ -34012,9 +34014,9 @@ function ensureFooter() {
   const candidatePic = document.getElementById('candidate_pic');
   const runningMatePic = document.getElementById('running_mate_pic');
   const gameWindow = document.getElementById('game_window');
-
+  
   if (!candidatePic || !runningMatePic || !gameWindow) return;
-
+  
   handleFooter(candidatePic, runningMatePic, gameWindow);
 }
 
@@ -34104,7 +34106,7 @@ window.newFooter = { ensureFooter };
     return config;
   };
 
-  // logic for the first button
+  // logic for the first button 
   window.switchPV = function () {
     const swE = document.getElementById("switchingEst");
     if (!swE) return;
@@ -34956,7 +34958,7 @@ function applyCityIssueEffects(statePk, cityName) {
       if (isNaN(currentScore)) {
         currentScore = 0;
       }
-
+	  
 	  const newScore = Math.max(-MAX_ISSUE_SCORE_MAGNITUDE, Math.min(MAX_ISSUE_SCORE_MAGNITUDE, currentScore + modifier));
 
       issueRecord.fields.state_issue_score = newScore;
@@ -38466,7 +38468,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
   function updateControls() {
     const existingControls = document.getElementById('map_controls');
-
+    
     if (existingControls) {
       const toggle = (id, condition) => {
         const el = document.getElementById(id);
@@ -38478,10 +38480,10 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       toggle('coalition_controls_container', currentMode === VISUALIZATION_MODES.COALITION_BUILDER);
       toggle('combiner_controls_container', currentMode === VISUALIZATION_MODES.CANDIDATE_COMBINER);
       toggle('tipping_point_controls_container', currentMode === VISUALIZATION_MODES.TIPPING_POINT);
-
+      
       const isIssueMode = ['issue_stance', 'issue_weight', 'candidate_issue_alignment'].includes(currentMode);
       toggle('issue_selector_container', isIssueMode);
-
+      
       if (isIssueMode) {
         toggle('alignment_candidate_container', currentMode === VISUALIZATION_MODES.CANDIDATE_ISSUE_ALIGNMENT);
         toggle('single_alignment_container', alignmentComparisonMode === 'single');
@@ -38492,13 +38494,13 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       if (modeSelect && modeSelect.value !== currentMode) {
         modeSelect.value = currentMode;
       }
-
-      return;
+      
+      return; 
     }
 
     const controls = document.createElement('div');
     controls.id = 'map_controls';
-
+	
     Object.assign(controls.style, {
       position: 'absolute', background: 'rgba(255, 255, 255, 0.92)',
       border: '1px solid #aaa', padding: '8px', borderRadius: '4px',
@@ -38507,7 +38509,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     const container = document.querySelector('.container');
     const mapContainer = document.getElementById('map_container');
-
+    
     if (container && mapContainer) {
       const containerRect = container.getBoundingClientRect();
       const mapRect = mapContainer.getBoundingClientRect();
@@ -38521,7 +38523,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       controls.style.left = Math.max(20, containerRect.left - 200) + 'px';
       controls.style.top = Math.max(20, containerRect.top + scrollTop + 200) + 'px';
     } else {
-      controls.style.top = '200px';
+      controls.style.top = '200px'; 
       controls.style.left = '20px';
     }
 
@@ -38570,12 +38572,12 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     modeOptions.forEach(opt => {
       const el = document.createElement('option');
-      el.value = opt.value;
+      el.value = opt.value; 
       el.textContent = opt.text;
       if (opt.value === currentMode) el.selected = true;
       modeSelector.appendChild(el);
     });
-
+    
     modeSelector.addEventListener('change', function () {
       currentMode = this.value;
       updateControls();
@@ -38591,7 +38593,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     const senateModeToggle = document.createElement('select');
     senateModeToggle.id = 'senate_mode_selector';
     Object.assign(senateModeToggle.style, { width: '100%', padding: '4px' });
-
+    
     [{v:'solid', t:'Solid colors'}, {v:'margins', t:'Show margins'}, {v:'holds_gains', t:'Holds & gains'}].forEach(o => {
         const el = document.createElement('option'); el.value = o.v; el.textContent = o.t;
         senateModeToggle.appendChild(el);
@@ -38665,7 +38667,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     const sliderContainer = document.createElement('div');
     sliderContainer.style.marginBottom = '4px';
-
+    
     const sliderLabel = document.createElement('div');
     Object.assign(sliderLabel.style, { fontSize: '11px', marginBottom: '3px', textAlign: 'center' });
 
@@ -38673,7 +38675,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         const currentCandidateResult = campaignTrail_temp.final_overall_results.find(r => r.candidate === candidates[coalitionCandidateIndex]?.pk);
         const totalNationalVotes = campaignTrail_temp.final_overall_results.reduce((sum, r) => sum + r.popular_votes, 0);
         const actualVoteShare = currentCandidateResult && totalNationalVotes > 0 ? currentCandidateResult.popular_votes / totalNationalVotes : 0.35;
-
+        
         if (Math.abs(coalitionVoteShare - 0.5) < 0.01 && !window._coalitionVoteShareSet) {
              coalitionVoteShare = actualVoteShare;
              window._coalitionVoteShareSet = true;
@@ -38681,19 +38683,19 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
         sliderLabel.innerHTML = '';
         sliderLabel.appendChild(document.createTextNode('Vote Share: '));
-
+        
         const voteShareDisplay = document.createElement('span');
         voteShareDisplay.id = 'vote-share-display';
         Object.assign(voteShareDisplay.style, { cursor: 'pointer', textDecoration: 'underline', color: '#0066cc' });
         voteShareDisplay.textContent = `${(coalitionVoteShare * 100).toFixed(1)}%`;
-
+        
         voteShareDisplay.addEventListener('click', function (e) {
             e.stopPropagation();
             const directInput = document.createElement('input');
             directInput.type = 'number';
             directInput.min = '0'; directInput.max = '100'; directInput.step = '0.1';
             Object.assign(directInput.style, { width: '50px', fontSize: '11px', textAlign: 'center', position: 'absolute', zIndex: '1001' });
-
+            
             const rect = this.getBoundingClientRect();
             directInput.style.left = rect.left + 'px';
             directInput.style.top = rect.top + 'px';
@@ -38733,14 +38735,14 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     };
 
     sliderContainer.appendChild(sliderLabel);
-
+    
     const voteShareSlider = document.createElement('input');
     voteShareSlider.type = 'range';
     voteShareSlider.id = 'coalition_vote_share_slider';
     voteShareSlider.min = '0'; voteShareSlider.max = '1'; voteShareSlider.step = '0.001';
     voteShareSlider.style.width = '100%';
     voteShareSlider.style.marginBottom = '4px';
-
+    
     voteShareSlider.addEventListener('input', function () {
         coalitionVoteShare = parseFloat(this.value);
         updateVoteShareLabelAndLogic();
@@ -38846,7 +38848,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         s.addEventListener('change', callback);
         return s;
     };
-
+    
     const createLabel = (txt) => {
         const d = document.createElement('div');
         Object.assign(d.style, { fontSize: '11px', marginBottom: '3px' });
@@ -38877,15 +38879,15 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     const headToHeadContainer = document.createElement('div');
     headToHeadContainer.id = 'head_to_head_container';
     headToHeadContainer.style.display = headToHeadMode ? 'block' : 'none';
-
+    
     headToHeadContainer.appendChild(createLabel('Team 1:'));
     headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team1_candidate1', headToHeadTeam1Index1, function() { headToHeadTeam1Index1 = parseInt(this.value); triggerUpdate(); }));
     headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team1_candidate2', headToHeadTeam1Index2, function() { headToHeadTeam1Index2 = parseInt(this.value); triggerUpdate(); }));
-
+    
     headToHeadContainer.appendChild(createLabel('Team 2:'));
     headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team2_candidate1', headToHeadTeam2Index1, function() { headToHeadTeam2Index1 = parseInt(this.value); triggerUpdate(); }));
     headToHeadContainer.appendChild(createCandidateSelect('head_to_head_team2_candidate2', headToHeadTeam2Index2, function() { headToHeadTeam2Index2 = parseInt(this.value); triggerUpdate(); }));
-
+    
     combinerContainer.appendChild(headToHeadContainer);
     mainFrag.appendChild(combinerContainer);
 
@@ -38950,7 +38952,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     const alignModeToggleDiv = document.createElement('div');
     Object.assign(alignModeToggleDiv.style, { marginBottom: '4px', textAlign: 'center' });
-
+    
     const alignModeToggle = document.createElement('button');
     alignModeToggle.textContent = alignmentComparisonMode === 'single' ? 'Compare multiple' : 'Single view';
     Object.assign(alignModeToggle.style, { fontSize: '10px', padding: '2px 8px', cursor: 'pointer', backgroundColor: '#f0f0f0', border: '1px solid #ccc', borderRadius: '3px' });
@@ -38985,7 +38987,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     compareDiv.id = 'comparison_alignment_container';
     compareDiv.style.display = alignmentComparisonMode === 'comparison' ? 'block' : 'none';
     compareDiv.style.fontSize = '10px';
-
+    
     const compareLabel = document.createElement('div');
     compareLabel.textContent = `Select candidates (max ${Math.min(candidates.length, 8)}):`;
     Object.assign(compareLabel.style, { marginBottom: '3px', fontWeight: 'bold' });
@@ -39020,14 +39022,14 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         compareDiv.appendChild(checkDiv);
     });
     alignmentCandidateContainer.appendChild(compareDiv);
-
+    
     issueContainer.appendChild(alignmentCandidateContainer);
     mainFrag.appendChild(issueContainer);
 
     controls.appendChild(mainFrag);
     document.body.appendChild(controls);
     makeDraggable(controls, controlsHandle);
-
+    
     updateControls();
   }
 
@@ -40421,7 +40423,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         background: 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)', borderBottom: '1px solid #ccc',
         cursor: 'move', marginLeft: '-8px', marginRight: '-8px', marginTop: '-8px', borderRadius: '4px 4px 0 0'
       });
-
+      
       const dragIndicator = document.createElement('span');
       dragIndicator.textContent = '⋮⋮';
       Object.assign(dragIndicator.style, { color: '#999', fontSize: '12px', letterSpacing: '2px' });
@@ -40439,18 +40441,18 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       } else {
         const controlsBox = document.getElementById('map_controls');
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-
+        
         if (controlsBox) {
           legend.style.visibility = 'hidden';
           document.body.appendChild(legend);
-
+          
           const lh = legend.offsetHeight;
           const lw = legend.offsetWidth;
           const rect = controlsBox.getBoundingClientRect();
-
+          
           const fitsBelow = (rect.bottom + 15 + lh) < window.innerHeight;
           const fitsBeside = (rect.right + 15 + lw) < window.innerWidth;
-
+          
           if (fitsBelow) {
             legend.style.top = (rect.bottom + scrollTop + 15) + 'px';
             legend.style.left = rect.left + 'px';
@@ -40555,7 +40557,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       map.options.mouseover = function (event, data) {
         const hoverFill = data.shape.data('hoverFill') || "#AAAAAA";
         data.shape.attr({ fill: hoverFill });
-
+        
         if (map.options.click && typeof map.options.click === 'function') {
           map.options.click(event, data);
         }
@@ -40569,7 +40571,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       };
 
       map._customHoverAttached = true;
-
+      
       for (const stateAbbr in map.stateShapes) {
         if (map.stateShapes[stateAbbr] && typeof map.stateShapes[stateAbbr].data === 'function') {
           const currentFill = map.stateShapes[stateAbbr].attr('fill');
@@ -41095,7 +41097,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
   let progressBarContainerElement;
   let cachedProgressBarWidth = 0;
   let progressBarObserver = null;
-
+  
   function injectYouTubeAPI() {
 	  if (document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) return;
 	  const tag = document.createElement('script');
@@ -41318,7 +41320,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       const scale = SCALE_SIDE + (scaleProgress * (SCALE_CENTER - SCALE_SIDE));
 
 	  item.style.transform = `translate3d(${xPos}px, 0, ${zPos}px) rotateY(${rotation}deg) scale(${scale})`;
-
+	  
 	  item.classList.toggle('has-reflection', absOffset <= 2);
 
       let opacity = '1';
@@ -41336,7 +41338,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       }
     }
   }
-
+  
 	function createCoverFlowPool() {
 		const coverFlowContainer = document.getElementById('cover-flow-container');
 		if (!coverFlowContainer || poolItems.length > 0) return; // already created
@@ -41364,7 +41366,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 
 		coverFlowContainer.appendChild(frag);
 	}
-
+	
 	function resetCoverFlow() {
 		// invalidate all pool slots
 		for (let i = 0; i < POOL_SIZE; i++) {
@@ -41400,7 +41402,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 		for (let i = start; i < end; i++) {
 		  const url = songs[i].getCoverLink();
 		  if (preloadedUrls.has(url)) continue;
-
+		  
 		  preloadedUrls.add(url);
 		  const link = document.createElement('link');
 		  link.rel = 'preload';
@@ -41522,9 +41524,9 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       playPauseButton._imgCache = playPauseButton.querySelector('img');
     }
     const img = playPauseButton._imgCache;
-
+	
 	const newState = isPaused ? 'paused' : 'playing';
-
+    
     if (playPauseButton.dataset.state === newState) return;
     playPauseButton.dataset.state = newState;
 
@@ -41534,7 +41536,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       img.src = isPaused ? ICON_PLAY : ICON_PAUSE;
       img.alt = "";
     }
-
+    
     playPauseButton.setAttribute('aria-label', label);
     playPauseButton.title = label;
   }
@@ -41619,15 +41621,15 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 	  const currentSecond = Math.floor(currentTime);
 		if (lastRenderedSecond !== currentSecond) {
 		  if (currentTimeElement) currentTimeElement.textContent = formatTime(currentTime);
-
+		  
 		  // update invisible input
 		  if (progressBar && document.activeElement === progressBar) {
 			progressBar.setAttribute('aria-valuenow', p.toFixed(2));
 		  }
-
+		  
 		  lastRenderedSecond = currentSecond;
 		}
-
+	  
     }
 
     if (isUpdaterRunning) {
@@ -41807,7 +41809,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
     if (!volumeSlider || !volumePercentageElement) return;
     const volumeValue = parseFloat(volumeSlider.value);
     const newVolumePercent = Math.round(volumeValue * 100);
-
+	
     volumeSlider.style.setProperty('--volume-percent', `${newVolumePercent}%`);
 
     if (playerReady && ytPlayer && typeof ytPlayer.setVolume === 'function') {
@@ -41942,7 +41944,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
   }
   let lastQueuePlaylistId = null;
   let lastActiveQueueIndex = -1;
-
+  
   const queueItemTemplate = document.createElement('template');
   queueItemTemplate.innerHTML = `
     <li class="${PLAYER_QUEUE_ITEM_CLASS}" role="option">
@@ -41954,7 +41956,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
   let queueItemCache = [];
 
   let dragSrcEl = null;
-
+  
   function createQueueItem() {
     return queueItemTemplate.content.firstElementChild.cloneNode(true);
   }
@@ -42011,7 +42013,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 	  emptyItem.className = `${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty`;
 	  emptyItem.textContent = 'Queue is empty';
 	  queueListElement.replaceChildren(emptyItem);
-
+	  
       lastQueuePlaylistId = null;
       lastActiveQueueIndex = -1;
       return;
@@ -42585,7 +42587,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       });
     });
   }
-
+  
   const playerSheet = new CSSStyleSheet();
 
   function injectPlayerStyles() {
@@ -42872,8 +42874,8 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 				position: absolute !important;
 				top: 0 !important;
 				left: 0 !important;
-				width: 100% !important;
-				height: 100% !important;
+				width: 100% !important; 
+				height: 100% !important; 
 				opacity: 0 !important;       /* Visually hidden */
 				pointer-events: none !important; /* Can't be clicked */
 				z-index: -1 !important;      /* Pushed behind your UI */
@@ -42922,8 +42924,8 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 				opacity: 0; cursor: pointer; z-index: 10; margin: 0;
 			}
-
-			/* small focus ring for accessibility */
+			
+			/* small focus ring for accessibility */			
             .${PLAYER_CONTROL_BUTTON_CLASS}:focus, #${PLAYLIST_SELECTOR_ID}:focus { outline: 2px solid #66b3ff; outline-offset: 2px; }
 			#${PLAYER_ELEMENT_ID}:focus { outline: none; }
 
@@ -42932,7 +42934,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 
     document.adoptedStyleSheets = [...document.adoptedStyleSheets, playerSheet];
   }
-
+  
     function loadYouTubeAPI() {
 	  return new Promise((resolve) => {
 		if (typeof YT !== 'undefined' && typeof YT.Player !== 'undefined') { resolve(); return; }
@@ -43005,7 +43007,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       // render cover flow
 	  createCoverFlowPool();
 	  resetCoverFlow();
-
+	  
       // preload covers
       preloadCovers(playlist.getSongs());
 
@@ -43039,7 +43041,7 @@ window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
       updateFavoriteButtonUI();
 
       await loadYouTubeAPI();
-
+	  
       ytPlayer = new YT.Player(YOUTUBE_PLAYER_DIV_ID, {
         height: '200', width: '200',
         playerVars: { 'playsinline': 1, 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'modestbranding': 1, 'origin': window.location.origin, 'rel': 0, 'iv_load_policy': 3 },
@@ -43130,7 +43132,7 @@ function selectLeadingOpponent() {
 
 function selectTopOpponents() {
   const eligible = republicanContenders.filter(c => c.condition());
-
+  
   const priorityMap = new Map();
   eligible.forEach(c => priorityMap.set(c, c.priority()));
 
@@ -43276,10 +43278,10 @@ hqSheet.replaceSync(`
     .hq-opp-info { flex: 1; }
     .hq-opp-name { margin: 0 0 6px 0; font-size: 1.2em; font-weight: bold; }
     .hq-opp-advice { margin: 0; font-size: 0.85em; line-height: 1.4; opacity: 0.95; }
-
+    
     .hq-opp-trailing-box {
-        background: rgba(255,255,255,0.1); border-left: 3px solid #999;
-        padding: 8px 12px; margin-top: 8px; border-radius: 4px;
+        background: rgba(255,255,255,0.1); border-left: 3px solid #999; 
+        padding: 8px 12px; margin-top: 8px; border-radius: 4px; 
         font-size: 0.85em; opacity: 0.8;
     }
 
@@ -43345,12 +43347,12 @@ hqSheet.replaceSync(`
     .hq-select:focus {
         border-color: #42a5f5; box-shadow: 0 0 0 3px rgba(66,165,245,0.2), inset 0 1px 3px rgba(0,0,0,0.1);
     }
-
+    
     .hq-text-center { text-align: center; }
     .hq-dim { opacity: 0.6; }
     .hq-modal-banner {
-        text-align: center; margin-bottom: 24px; padding: 12px;
-        background: rgba(0,0,0,0.3); border-radius: 8px;
+        text-align: center; margin-bottom: 24px; padding: 12px; 
+        background: rgba(0,0,0,0.3); border-radius: 8px; 
         border: 1px solid rgba(255,255,255,0.1);
     }
 `);
@@ -43896,7 +43898,7 @@ window.openHeadquarter = function () {
     dashboardTab.style.display = 'none';
     operationsTab.style.display = 'block';
     headerText.innerText = 'Covert Operations';
-
+	
 	if (_opsTabDirty) {
         buildOperationsTab(operationsTab);
         _opsTabDirty = false;
@@ -43966,9 +43968,9 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
 
     const badge = el('div', 'hq-opp-badge', index === 0 ? 'FRONTRUNNER' : 'CONTENDER');
     badge.style.background = badgeColor;
-
+    
     const contentDiv = el('div', 'hq-opp-content');
-
+    
     const img = document.createElement('img');
     img.className = 'hq-opp-img';
     img.src = opponent.picture;
@@ -43985,7 +43987,7 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
     infoDiv.appendChild(adviceP);
     contentDiv.appendChild(img);
     contentDiv.appendChild(infoDiv);
-
+    
     opponentCard.appendChild(badge);
     opponentCard.appendChild(contentDiv);
     opponentsFragment.appendChild(opponentCard);
@@ -44001,7 +44003,7 @@ function buildDashboardTab(container, topOpponents, liberalismFeedback, confront
 
   contentRow.appendChild(opponentContainer);
   frag.appendChild(contentRow);
-
+  
   container.replaceChildren(frag);
 }
 
@@ -44104,7 +44106,7 @@ function buildOperationsTab(container) {
   statusContainer.appendChild(cooldownsCard);
   contentRow.appendChild(statusContainer);
   frag.appendChild(contentRow);
-
+  
   container.replaceChildren(frag);
 }
 
@@ -44468,9 +44470,9 @@ const HOUSE_2012_DATA = {
     _cachedMajorIds = { demId, repId };
     return _cachedMajorIds;
   }
-
+  
 	const PARTY_COLORS = [
-	  { keywords: ['American Independent', 'Reform'], color: '#6A287E' },
+	  { keywords: ['American Independent', 'Reform'], color: '#6A287E' },	  
 	  { keywords: ['Independent American'], color: '#c49334' },
 	  { keywords: ['Independence', 'Justice'], color: '#c5991e' },
 	  { keywords: ['Democrat'], color: '#194A9F' },
@@ -44944,10 +44946,10 @@ const HOUSE_2012_DATA = {
           shouldHide = isSenOpt || isGovOpt;
         }
 
-        if (opt.hidden !== shouldHide) {
-          opt.hidden = shouldHide;
-          opt.disabled = shouldHide;
-          opt.style.display = shouldHide ? 'none' : '';
+        if (opt.hidden !== shouldHide) { 
+          opt.hidden = shouldHide; 
+          opt.disabled = shouldHide; 
+          opt.style.display = shouldHide ? 'none' : ''; 
         }
       }
 
@@ -45031,7 +45033,7 @@ const HOUSE_2012_DATA = {
 
   if (!is2012()) return;
   console.log("Initializing congress system...");
-
+  
   window.congressSystem = (() => {
     function tick() {
       injectFinalTable();
@@ -45811,7 +45813,7 @@ window.dynamicEndingTable = { tick: onGameWindowChangeCandidates };
 class ChartEnhancer {
   static sheet = new CSSStyleSheet();
   static stylesInjected = false;
-
+	
   constructor() {
     this.isProcessing = false;
     this.initializeStyles();
@@ -45879,8 +45881,8 @@ class ChartEnhancer {
         visibility: visible;
         opacity: 1;
         pointer-events: auto;
-        transition-delay: 0s;
-
+        transition-delay: 0s;		
+		
         font-family: Arial, sans-serif !important;
         font-style: normal !important;
       }
