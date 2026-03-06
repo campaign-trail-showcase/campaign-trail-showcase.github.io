@@ -433,6 +433,26 @@ function findSnippetEnd(text, startIndex, openChar, closeChar) {
   return -1; // likely unclosed bracket
 }
 
+function findCodeSnippet(includes, start, end, rawModText, nameOfMod) {
+  if (!rawModText || !rawModText.includes(includes)) {
+    return null;
+  }
+
+  const startIndex = rawModText.indexOf(start);
+  if (startIndex === -1) return null;
+
+  const openChar = end === "}" ? "{" : (end === "]" ? "[" : "(");
+  const contentStartIndex = startIndex + start.length;
+  const endIndex = findSnippetEnd(rawModText, contentStartIndex, openChar, end);
+
+  if (endIndex === -1) {
+    console.log(`Could not find closing '${end}' for ${nameOfMod}`);
+    return null;
+  }
+
+  return rawModText.slice(startIndex, endIndex + 1);
+}
+
 function extractFromCode1(includes, start, end, rawModText, nameOfMod) {
   if (!rawModText || !rawModText.includes(includes)) {
     return null;
@@ -614,9 +634,9 @@ function extractFallbackTheme(rawModText, nameOfMod) {
 
   // skip the regex scan entirely if none of the markers exist
   if (!rawModText.includes('coloring_') &&
-      !rawModText.includes('game_header') &&
-      !rawModText.includes('game_window') &&
-      !rawModText.includes('text_col')) {
+    !rawModText.includes('game_header') &&
+    !rawModText.includes('game_window') &&
+    !rawModText.includes('text_col')) {
     return;
   }
 
@@ -676,32 +696,45 @@ function extractFallbackTheme(rawModText, nameOfMod) {
   }
 }
 
-function getCustomTheme(rawModText, nameOfMod) {
-  const temp = extractFromCode1(
-    "campaignTrail_temp.modBoxTheme = {",
-    ".modBoxTheme = {",
-    "}",
-    rawModText,
-    nameOfMod,
-  );
-  if (temp?.modBoxTheme && Object.keys(temp.modBoxTheme).length > 0) {
-    customModBoxThemes[nameOfMod] = temp.modBoxTheme;
-  } else {
-    extractFallbackTheme(rawModText, nameOfMod);
-  }
-}
+function extractModMetadata(rawModText, nameOfMod) {
+  const snippets = [];
 
-function getAllAchievements(rawModText, nameOfMod) {
-  const temp = extractFromCode1(
+  // find achievements
+  const achSnippet = findCodeSnippet(
     "campaignTrail_temp.achievements = {",
-    ".achievements = {",
-    "}",
-    rawModText,
-    nameOfMod,
+    ".achievements = {", "}",
+    rawModText, nameOfMod
   );
+  if (achSnippet) snippets.push("temp" + achSnippet);
 
-  if (temp?.achievements) {
-    allAch[nameOfMod] = temp.achievements;
+  // find mod themes
+  const themeSnippet = findCodeSnippet(
+    "campaignTrail_temp.modBoxTheme = {",
+    ".modBoxTheme = {", "}",
+    rawModText, nameOfMod
+  );
+  if (themeSnippet) snippets.push("temp" + themeSnippet);
+
+  if (snippets.length > 0) {
+    const temp = {};
+    try {
+      const runner = new Function("temp", snippets.join(";\n"));
+      runner(temp);
+    } catch (e) {
+      console.warn(`Error parsing metadata for ${nameOfMod}:`, e);
+    }
+
+    if (temp.achievements) {
+      allAch[nameOfMod] = temp.achievements;
+    }
+    if (temp.modBoxTheme && Object.keys(temp.modBoxTheme).length > 0) {
+      customModBoxThemes[nameOfMod] = temp.modBoxTheme;
+    }
+  }
+
+  // if no theme found, try regex extraction
+  if (!customModBoxThemes[nameOfMod]) {
+    extractFallbackTheme(rawModText, nameOfMod);
   }
 }
 
@@ -982,8 +1015,7 @@ $(document).ready(async () => {
       const rawModText = await modRes.text();
 
       const temp = extractElectionDetails(rawModText, mod.value);
-      getAllAchievements(rawModText, mod.value);
-      getCustomTheme(rawModText, mod.value);
+      extractModMetadata(rawModText, mod.value);
 
       let imageUrl = "";
       let description = "";
@@ -1053,8 +1085,7 @@ $(document).ready(async () => {
       }
 
       // populate themes/achievements cache
-      getAllAchievements(rawModText, customModName);
-      getCustomTheme(rawModText, customModName);
+      extractModMetadata(rawModText, customModName);
 
       const imageUrl =
         temp.election_json[0].fields.site_image ??
@@ -1415,8 +1446,7 @@ async function addCustomMod(code1, code2) {
   }
 
   // update mod box theme
-  getAllAchievements(code1, modName);
-  getCustomTheme(code1, modName);
+  extractModMetadata(code1, modName);
 
   const imageUrl = temp.election_json[0].fields.site_image ?? temp.election_json[0].fields.image_url;
   const description = temp.election_json[0].fields.site_description ?? temp.election_json[0].fields.summary;
@@ -1888,8 +1918,7 @@ async function loadModFromButton(modValue) {
       return;
     }
 
-    getAllAchievements(modData.code1, modValue);
-    getCustomTheme(modData.code1, modValue);
+    extractModMetadata(modData.code1, modValue);
 
     if (modData.code2) {
       window.campaignTrail_temp = window.campaignTrail_temp || {};
@@ -1931,8 +1960,7 @@ async function loadModFromButton(modValue) {
       if (!res.ok) throw new Error("Network response was not ok");
       const modCode = await res.text();
 
-      getAllAchievements(modCode, modValue);
-      getCustomTheme(modCode, modValue);
+      extractModMetadata(modCode, modValue);
 
       // fetch achievements for linked mods if they aren't already loaded
       let linkedMods = [modValue];
@@ -1962,8 +1990,7 @@ async function loadModFromButton(modValue) {
             const linkedRes = await fetch(`../static/mods/${linkedMod}_init.html`);
             if (linkedRes.ok) {
               const linkedCode = await linkedRes.text();
-              getAllAchievements(linkedCode, linkedMod);
-              getCustomTheme(linkedCode, linkedMod);
+              extractModMetadata(linkedCode, linkedMod);
               updateDisplayNameFromCode(linkedCode, linkedMod);
             }
           } catch (e) {
