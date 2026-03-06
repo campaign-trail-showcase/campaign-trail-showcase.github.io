@@ -596,29 +596,44 @@ function ensureThemeContrast(theme) {
 }
 
 // regex patterns to extract theme details from raw mod text
-const winColorRegex = /coloring_window\s*=\s*['"](#[A-Fa-f0-9]{6,8})['"]/;
-const titleColorRegex = /coloring_title\s*=\s*['"](#[A-Fa-f0-9]{6,8})['"]/;
-const headerImgRegex = /game_header"\)\.style="background-image: url\(([^\)]+)\)/;
-const winImgRegex = /game_window"\)\.style.backgroundImage = "url\(([^\)]+)\)/;
-const borderColorRegex = /game_window"\)\.style.borderColor = "(#[A-Fa-f0-9]{6,8})"/;
+const fallbackThemeRegex = new RegExp(
+  [
+    String.raw`coloring_window\s*=\s*['"](?<winColor>#[A-Fa-f0-9]{6,8})['"]`,
+    String.raw`coloring_title\s*=\s*['"](?<titleColor>#[A-Fa-f0-9]{6,8})['"]`,
+    String.raw`game_header"\)\.style="background-image: url\((?<headerImg>[^\)]+)\)`,
+    String.raw`game_window"\)\.style.backgroundImage = "url\((?<winImg>[^\)]+)\)`,
+    String.raw`game_window"\)\.style.borderColor = "(?<borderColor>#[A-Fa-f0-9]{6,8})"`,
+    String.raw`text_col\s*=\s*["'](?<textCol>#[A-Fa-f0-9]{6,8}|white|black)["']`,
+  ].join('|'),
+  'g'
+);
 
 function extractFallbackTheme(rawModText, nameOfMod) {
   // only create a theme if a real modBoxTheme doesn't exist
   if (customModBoxThemes[nameOfMod] && customModBoxThemes[nameOfMod].header_color) return;
 
+  // skip the regex scan entirely if none of the markers exist
+  if (!rawModText.includes('coloring_') &&
+      !rawModText.includes('game_header') &&
+      !rawModText.includes('game_window') &&
+      !rawModText.includes('text_col')) {
+    return;
+  }
+
   const theme = { _isFallback: true };
+  let winColor = null, titleColor = null, borderColor = null;
 
-  const winColorMatch = rawModText.match(winColorRegex);
-  const titleColorMatch = rawModText.match(titleColorRegex);
-  const headerImgMatch = rawModText.match(headerImgRegex);
-  const winImgMatch = rawModText.match(winImgRegex);
-  const borderColorMatch = rawModText.match(borderColorRegex);
-
-  const textColMatch = rawModText.match(/text_col\s*=\s*["'](#[A-Fa-f0-9]{6,8}|white|black)["']/);
-
-  let winColor = winColorMatch ? winColorMatch[1] : null;
-  let titleColor = titleColorMatch ? titleColorMatch[1] : null;
-  let borderColor = borderColorMatch ? borderColorMatch[1] : null;
+  for (const match of rawModText.matchAll(fallbackThemeRegex)) {
+    const g = match.groups;
+    if (g.winColor && !winColor) winColor = g.winColor;
+    if (g.titleColor && !titleColor) titleColor = g.titleColor;
+    if (g.headerImg && !theme.header_image_url) theme.header_image_url = g.headerImg;
+    if (g.winImg && !theme.description_background_color) theme.description_background_color = g.winImg;
+    if (g.borderColor && !borderColor) borderColor = g.borderColor;
+    if (g.textCol && !theme.header_text_color) {
+      theme.header_text_color = g.textCol === 'white' ? '#fff' : (g.textCol === 'black' ? '#222' : g.textCol);
+    }
+  }
 
   // if winColor and titleColor are the same, generate a lighter/darker variant
   if (winColor && titleColor && winColor === titleColor) {
@@ -630,9 +645,6 @@ function extractFallbackTheme(rawModText, nameOfMod) {
     theme.header_color = titleColor;
     theme.secondary_color = borderColor || titleColor || winColor;
   }
-
-  if (headerImgMatch) theme.header_image_url = headerImgMatch[1];
-  if (winImgMatch) theme.description_background_color = winImgMatch[1];
 
   // no background color for the description? use main_color, header_color, or white
   if (!theme.description_background_color) {
@@ -653,11 +665,6 @@ function extractFallbackTheme(rawModText, nameOfMod) {
   // if description_background_color == main_color, mix it with black
   if (theme.description_background_color === theme.main_color) {
     theme.description_background_color = mixColor(theme.main_color, '#000', 0.25);
-  }
-
-  // if header_text_color is not set, use text_col if found
-  if (textColMatch) {
-    theme.header_text_color = textColMatch[1] === 'white' ? '#fff' : (textColMatch[1] === 'black' ? '#222' : textColMatch[1]);
   }
 
   // ensure contrast for the theme colors
