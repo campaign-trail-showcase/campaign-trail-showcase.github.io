@@ -1239,6 +1239,19 @@ function cycleAwards(holder, index) {
   }, 2000);
 }
 
+// stops all active award cycling timers in the grid
+function stopAllAwardCycles(container) {
+  const holders = container.querySelectorAll('.trophy-holder');
+  for (let i = 0; i < holders.length; i++) {
+    const holder = holders[i];
+    if (holder._awardCycleTimeout) {
+      clearTimeout(holder._awardCycleTimeout);
+      holder._awardCycleTimeout = null;
+    }
+    holder.dataset.isCycling = "false";
+  }
+}
+
 function ensureTrophySrc(img) {
   if (!img || img.hasAttribute('src')) return; // already loaded or loading
 
@@ -1522,6 +1535,9 @@ function updateModViews(event) {
 
   const modGrid = document.getElementById("mod-grid");
 
+  // stop all cycling timers before removing elements
+  stopAllAwardCycles(modGrid);
+
   // clear the grid to start fresh
   while (modGrid.firstChild) {
     modGrid.removeChild(modGrid.firstChild);
@@ -1769,20 +1785,12 @@ function sortModViews(comparisonFunction) {
   const visibleMods = getVisibleMods();
   visibleMods.sort(comparisonFunction);
 
-  const otherMods = modList.filter((mod) => !visibleMods.includes(mod));
+  const visibleSet = new Set(visibleMods);
+  const otherMods = modList.filter((mod) => !visibleSet.has(mod));
 
   // re-order the main modList
   modList.length = 0;
   modList.push(...visibleMods, ...otherMods);
-
-  const modGrid = document.getElementById("mod-grid");
-  // clear the mod grid and append the sorted views
-  while (modGrid.firstChild) {
-    modGrid.removeChild(modGrid.firstChild);
-  }
-  const fragment = document.createDocumentFragment();
-  modList.forEach((modView) => fragment.appendChild(modView));
-  modGrid.appendChild(fragment);
 
   currentPage = 1;
   updateModViews();
