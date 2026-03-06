@@ -821,6 +821,18 @@ function preloadAwardIcon(url) {
   return loadPromise;
 }
 
+// preloads icons in small batches
+async function preloadInBatches(urls, batchSize = 6) {
+  const arr = [...urls];
+  let loaded = 0;
+  for (let i = 0; i < arr.length; i += batchSize) {
+    const batch = arr.slice(i, i + batchSize);
+    const results = await Promise.allSettled(batch.map(preloadAwardIcon));
+    loaded += results.filter(r => r.status === 'fulfilled').length;
+  }
+  return loaded;
+}
+
 function createLegacyViewControls() {
   const container = document.createElement("div");
   container.style.display = "inline-flex";
@@ -1009,11 +1021,9 @@ $(document).ready(async () => {
     // preload all award icons
     if (allAwardIconUrls.size > 0) {
       console.log(`Preloading ${allAwardIconUrls.size} award icons...`);
-      Promise.allSettled([...allAwardIconUrls].map(preloadAwardIcon))
-        .then(results => {
-          const loaded = results.filter(r => r.status === 'fulfilled').length;
-          console.log(`Preloaded ${loaded}/${allAwardIconUrls.size} award icons`);
-        });
+      preloadInBatches(allAwardIconUrls, 6).then(loaded => {
+        console.log(`Preloaded ${loaded}/${allAwardIconUrls.size} award icons`);
+      });
     }
   }
 
@@ -1159,12 +1169,24 @@ function createModView(mod, imageUrl, description, isCustom) {
 function renderAwards(awards, rawAwardUrls) {
   let awardUrls = rawAwardUrls.split(", ");
   const awardNames = awards.split(",").map(award => award.trim());
-  // create an image tag for each URL. the first is visible, the rest are hidden
+
   let awardImagesHTML = awardUrls.map((url, index) => {
-    // if the primary URL fails, load the alternative URL
     const altUrl = getAlternativeIconUrl(url);
-    const style = index === 0 ? 'opacity: 1; transition: opacity 0.3s ease-in-out;' : 'opacity: 0; transition: opacity 0.3s ease-in-out;';
-    return `<img class="mod-trophy" src="${url}" alt="${awardNames[index]} Trophy" style="${style}"${altUrl ? ` onerror="this.onerror=null;this.src='${altUrl}'"` : ""}>`;
+    const isFirst = index === 0;
+    const style = isFirst
+      ? 'opacity: 1; transition: opacity 0.3s ease-in-out;'
+      : 'opacity: 0; transition: opacity 0.3s ease-in-out;';
+
+    const srcAttr = isFirst ? `src="${url}"` : `data-src="${url}"`;
+
+    // store the alt URL
+    const altAttr = altUrl ? ` data-alt-url="${altUrl}"` : '';
+
+    const onerrorAttr = isFirst && altUrl
+      ? ` onerror="this.onerror=null;this.src='${altUrl}'"`
+      : '';
+
+    return `<img class="mod-trophy" ${srcAttr} alt="${awardNames[index]} Trophy" style="${style}"${altAttr}${onerrorAttr}>`;
   }).join('');
 
   return `
@@ -1195,20 +1217,44 @@ function cycleAwards(holder, index) {
   }
 
   const images = holder.querySelectorAll(".mod-trophy");
-  if (images.length <= 1) {
-    return; // no need to cycle if there's only one image
-  }
+  if (images.length <= 1) return;
 
   holder.dataset.isCycling = "true";
   holder.dataset.cycleIndex = index;
 
   images[index].style.opacity = '0';
+
   const nextIndex = (index + 1) % images.length;
-  images[nextIndex].style.opacity = '1';
+  const nextImg = images[nextIndex];
+
+  ensureTrophySrc(nextImg);
+  nextImg.style.opacity = '1';
+
+  // pre-load the image AFTER next so it's cached by the time we need it
+  const preloadIndex = (nextIndex + 1) % images.length;
+  ensureTrophySrc(images[preloadIndex]);
 
   holder._awardCycleTimeout = setTimeout(() => {
     cycleAwards(holder, nextIndex);
   }, 2000);
+}
+
+function ensureTrophySrc(img) {
+  if (!img || img.hasAttribute('src')) return; // already loaded or loading
+
+  const url = img.dataset.src;
+  if (!url) return;
+
+  // wire up fallback before setting src so the handler is ready if it fails
+  const altUrl = img.dataset.altUrl;
+  if (altUrl) {
+    img.onerror = function () {
+      this.onerror = null;
+      this.src = altUrl;
+    };
+  }
+
+  img.src = url;
 }
 
 function configureRatingButtons(modName, modView) {
