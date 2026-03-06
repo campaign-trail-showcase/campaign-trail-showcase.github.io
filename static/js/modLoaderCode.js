@@ -7,6 +7,7 @@ const NEW_RELEASE = "new";
 const ALL = "all";
 
 const modList = [];
+const modMap = new Map();
 const tagList = [];
 
 let customMods = new Set();
@@ -15,6 +16,27 @@ let favoriteMods = new Set();
 
 let onlyFavorites = false;
 let showAllModsLegacy = false;
+
+// mod view template
+const modViewTemplate = document.createElement('template');
+modViewTemplate.innerHTML = `
+  <div class="community-grid-element">
+    <div class="mod-title"><p></p></div>
+    <div class="mod-img-desc">
+      <img class="mod-image" loading="lazy" alt="">
+      <div class="mod-desc"></div>
+    </div>
+    <div class="hover-button-holder">
+      <button class="mod-play-button hover-button"><span></span></button>
+      <button class="hover-button fav-button"><span></span></button>
+      <button class="hover-button delete-button" style="display:none"><span></span></button>
+    </div>
+    <div class="rating-background">
+      <div class="modRating">LOADING FAVORITES...</div>
+      <div class="modPlayCount">LOADING PLAYS...</div>
+    </div>
+  </div>
+`;
 
 // IndexedDB setup
 const DB_NAME = "CTSUserMods";
@@ -1116,7 +1138,10 @@ $(document).ready(async () => {
 
   // filtrr out the failures and add them to the global list
   let customModsLoaded = customModResults.filter(result => result !== null);
-  modList.push(...customModsLoaded);
+  customModsLoaded.forEach(mv => {
+    modList.push(mv);
+    modMap.set(mv.id, mv);
+  });
 
   // push custom mods to the mod grid first
   const modGrid = document.getElementById("mod-grid");
@@ -1151,6 +1176,7 @@ $(document).ready(async () => {
     }
 
     modList.push(modView);
+    modMap.set(modView.id, modView);
   }
   modGrid.appendChild(fragment);
 
@@ -1160,47 +1186,62 @@ $(document).ready(async () => {
   applyModBoxThemes();
 });
 
-function createModView(mod, imageUrl, description, isCustom) {
-  const modView = document.createElement("div");
-  modView.classList.add("community-grid-element");
+function createModView(mod, imageUrl, description) {
+  const modView = modViewTemplate.content.firstElementChild.cloneNode(true);
 
-  modView.setAttribute("mode", mod.dataset.mode);
-  modView.setAttribute("tags", mod.dataset.tags);
-  modView.setAttribute("awardimageurls", mod.dataset.awardimageurls);
-  modView.setAttribute("awards", mod.dataset.awards);
+  // set data attributes
+  modView.setAttribute("mode", mod.dataset.mode || "");
+  modView.setAttribute("tags", mod.dataset.tags || "");
+  modView.setAttribute("awardimageurls", mod.dataset.awardimageurls || "");
+  modView.setAttribute("awards", mod.dataset.awards || "");
   modView.setAttribute("mod-name", mod.value);
-  modView.setAttribute("mod-display-name", mod.innerText.toLowerCase());
-  namesOfModsFromValue[mod.value] = mod.innerText;
+  modView.setAttribute("mod-display-name", (mod.innerText || mod.value).toLowerCase());
+  modView.id = mod.value;
 
+  namesOfModsFromValue[mod.value] = mod.innerText ?? mod.value;
   modView._tagsArray = mod.dataset.tags ? mod.dataset.tags.split(" ") : [];
 
-  const favText = isFavorite(mod.value) ? UNFAV : FAV;
+  // title
+  modView.querySelector(".mod-title p").textContent = mod.innerText;
 
-  modView.innerHTML = `
-    <div class="mod-title">
-        <p>${mod.innerText}</p>
-    </div>
-    <div class = "mod-img-desc">
-      <img class="mod-image" data-src="${imageUrl}" loading="lazy" alt="${mod.value} Box Image"></img>
-      <div class="mod-desc">${description}</div>
-    </div>
-    <div class="hover-button-holder">
-        <button class="mod-play-button hover-button" onclick="loadModFromButton(\`${mod.value}\`)"><span>${PLAY}</span></button>
-        <button class="hover-button" onclick="toggleFavorite(event, \`${mod.value}\`)"><span>${favText}</span></button>
-        <button style="${customMods.has(mod.value) ? "" : "display:none;"}" class="hover-button" onclick="deleteCustomMod(event, \`${mod.value}\`)"><span>${DELETE}</span></button>
-    </div>
-    ${!customMods.has(mod.value)
-      ? `
-    <div class="rating-background">
-        <div class="modRating">LOADING FAVORITES...</div>
-        <div class="modPlayCount">LOADING PLAYS...</div>
-        ${mod.dataset.awards != null && mod.dataset.awards.length > 0 ? renderAwards(mod.dataset.awards, mod.dataset.awardimageurls) : ""}
-    </div>`
-      : ""
-    }
-  `;
+  // image
+  const img = modView.querySelector(".mod-image");
+  img.dataset.src = imageUrl;
+  img.alt = mod.value + " Box Image";
 
-  modView.id = mod.value;
+  // description
+  modView.querySelector(".mod-desc").innerHTML = description;
+
+  // Play button
+  const playBtn = modView.querySelector(".mod-play-button");
+  playBtn.querySelector("span").textContent = PLAY;
+  playBtn.addEventListener("click", () => loadModFromButton(mod.value));
+
+  // Favorite button
+  const favBtn = modView.querySelector(".fav-button");
+  favBtn.querySelector("span").textContent = isFavorite(mod.value) ? UNFAV : FAV;
+  favBtn.addEventListener("click", (e) => toggleFavorite(e, mod.value));
+
+  // Delete button
+  const deleteBtn = modView.querySelector(".delete-button");
+  deleteBtn.querySelector("span").textContent = DELETE;
+  if (customMods.has(mod.value)) {
+    deleteBtn.style.display = "";
+    deleteBtn.addEventListener("click", (e) => deleteCustomMod(e, mod.value));
+  }
+
+  // Rating/statistics section
+  const isCustom = customMods.has(mod.value);
+  if (isCustom) {
+    modView.querySelector(".rating-background").remove();
+  } else if (mod.dataset.awards && mod.dataset.awards.length > 0) {
+    const ratingBg = modView.querySelector(".rating-background");
+    ratingBg.insertAdjacentHTML(
+      "beforeend",
+      renderAwards(mod.dataset.awards, mod.dataset.awardimageurls)
+    );
+  }
+
   return modView;
 }
 
@@ -1394,13 +1435,12 @@ function deleteCustomMod(event, modValue) {
   saveCustomModNames(customMods);
 
   // remove from the grid
-  const modView = document.getElementById(modValue);
+  const modView = modMap.get(modValue);
   if (modView) {
-    modView.parentNode.removeChild(modView);
-  }
-  const idx = modList.findIndex(mv => mv.id === modValue);
-  if (idx !== -1) {
-    modList.splice(idx, 1);
+    if (modView.parentNode) modView.parentNode.removeChild(modView);
+    const idx = modList.indexOf(modView);
+    if (idx !== -1) modList.splice(idx, 1);
+    modMap.delete(modValue);
   }
 
   updateModViews();
@@ -1436,13 +1476,12 @@ async function addCustomMod(code1, code2) {
   }
 
   // remove old mod if it exists
-  const oldIdx = modList.findIndex(mv => mv.id === modName);
-  if (oldIdx !== -1) {
-    const oldModView = document.getElementById(modName);
-    if (oldModView && oldModView.parentNode) {
-      oldModView.parentNode.removeChild(oldModView);
-    }
-    modList.splice(oldIdx, 1);
+  const oldModView = modMap.get(modName);
+  if (oldModView) {
+    if (oldModView.parentNode) oldModView.parentNode.removeChild(oldModView);
+    const oldIdx = modList.indexOf(oldModView);
+    if (oldIdx !== -1) modList.splice(oldIdx, 1);
+    modMap.delete(modName);
   }
 
   // update mod box theme
@@ -1458,6 +1497,7 @@ async function addCustomMod(code1, code2) {
   );
 
   modList.unshift(modView);
+  modMap.set(modName, modView);
 
   // ensure "Custom" tag is checked so the new mod is visible
   let customTagFound = false;
