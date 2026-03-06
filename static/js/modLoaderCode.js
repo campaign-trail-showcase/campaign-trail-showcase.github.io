@@ -1539,13 +1539,11 @@ function updateModViews(event) {
   stopAllAwardCycles(modGrid);
 
   // clear the grid to start fresh
-  while (modGrid.firstChild) {
-    modGrid.removeChild(modGrid.firstChild);
-  }
+  modGrid.replaceChildren();
 
   // remove pagination controls as they will be re-added if needed
   const paginationContainer = document.getElementById("pagination-controls");
-  if (paginationContainer) paginationContainer.innerHTML = "";
+  if (paginationContainer) paginationContainer.replaceChildren();
 
   if (showAllModsLegacy) {
     toggleFilterControls(true);
@@ -1560,7 +1558,10 @@ function updateModViews(event) {
       modList.forEach((modView) => {
         modView.style.display = "flex";
         const img = modView.querySelector(".mod-image");
-        if (img) img.src = img.getAttribute("data-src") || img.src;
+        if (img && img.dataset.src) {
+          img.src = img.dataset.src;
+          delete img.dataset.src;
+        }
         fragment.appendChild(modView);
 
         // restart award cycling if needed
