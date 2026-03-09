@@ -2033,7 +2033,7 @@ function election_HTML(id, cand, running_mate) {
       return baseScenarioDict["2016a"];
     }
     return (
-      `2016a_${cands.get(String(cand)).fields.last_name}_${cands.get(String(running_mate)).fields.last_name}.html`
+      `2016a_${cands.get(String(cand)).last_name}_${cands.get(String(running_mate)).last_name}.html`
     );
   }
 
