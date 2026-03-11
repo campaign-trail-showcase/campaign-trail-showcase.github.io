@@ -202,7 +202,8 @@ const handleSelectNavigation = (event, selectId) => {
 // keyboard shortcuts handler
 const keyboardShortcutsHandler = (event) => {
   // allow system keys (F1-F12, Ctrl+*, etc.)
-  if (event.key.startsWith('F') || event.ctrlKey || event.metaKey || event.altKey) {
+  const key = event && event.key;
+  if ((typeof key === 'string' && key.startsWith('F')) || event.ctrlKey || event.metaKey || event.altKey) {
     return;
   }
 
@@ -213,7 +214,8 @@ const keyboardShortcutsHandler = (event) => {
   }
 
   // check if we should skip (e.g., if user is typing in an input field)
-  if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+  const tgt = event && event.target;
+  if (tgt && (tgt.tagName === 'INPUT' || tgt.tagName === 'TEXTAREA')) {
     return;
   }
 
