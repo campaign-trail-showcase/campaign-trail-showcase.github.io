@@ -1,0 +1,3358 @@
+const recommendedReadingContent = `
+<article class="mod-foreword">
+
+  <p><strong>Believe it or not, this mod came out of a very simple joke idea amongst our friends:</strong></p>
+
+  <blockquote>
+    <p>“Wouldn’t it be funny if AOC was literally just Obama?”</p>
+  </blockquote>
+
+  <p>
+    The rhetoric of hope and change, the sense of momentum and moral righteousness,
+    the vanquishing of an all-powerful Republican presidency that had committed great
+    evils in the world over eight unbearable years. Even the election year aligned:
+    twenty years exactly after Obama’s historic landslide.
+  </p>
+
+  <p>
+    It seemed perfect. Narratively irresistible to a sensible writer. It should
+    surprise nobody, then, that irresponsible writers started on the premise
+    immediately.
+  </p>
+
+  <p>
+    To be clear, most of us are not Americans. The closest approximation of such
+    would probably be an insult to most of the collective that worked on this
+    project; we were simply bored out of our minds discussing the incompetent
+    aggression of Trump II and its subsequent effects on our collective societies.
+    Gallows humor, in a sense.
+  </p>
+
+  <p>
+    Experiencing America from outside is impossible. Nobody escapes it. There are
+    those close to God and those close to the United States; all our earthly husks
+    are precariously positioned far from Heaven. When those most peripheral to it
+    write about it, they are those experiencing it in its most honest form: its
+    tendrils burrowing into their domestic politics, its drones destroying their
+    weddings, its products and culture homogenising the human race.
+  </p>
+
+  <p>
+    To write about America from that place is to write about America not as an idea,
+    but as a colossus whose every step is inescapable.
+  </p>
+
+  <p>
+    This seed of an idea, this one joke, would latch onto both us writers, morphing
+    that joke into a more serious discussion of what exactly the idea of AOC stood
+    for. To be sure, we can never attempt to pretend our intimate knowledge of any
+    singular politician; that would almost assuredly be naivety and idiocy. All
+    politicians lie. Some simply lie better than others.
+  </p>
+
+  <p>
+    Yet still, there is a sense, from our outside perspectives, that she stood far
+    and away as a beacon of hope for American politics that nobody else could
+    capture. Her genuineness, her aggressive compassion—none of this could be taken
+    in abstract, all coming together and forming an uncomfortable visage of an
+    unbearably light figure; somebody who could heal that broken nation of theirs,
+    who could turn back the clock to past glories and unbridled love.
+  </p>
+
+  <p>
+    This is not a story wholly concerned with that. Many have already written it,
+    with far better prose and more intimacy with the idea of salvation, of finally
+    feeling a sense of accomplishment for oneself. The idea of America, that shining
+    city on the hill, is one that shall—and will—continue to endure, as it has in
+    every other country which the light of providence has touched.
+  </p>
+
+  <p>
+    What <em>is</em> concerned, however, is what exactly salvation entails.
+  </p>
+
+  <p>
+    It is easy, in our estimate, to see the cracks on the surface—the thin lines
+    gradually widening on the façade of American democracy. Most can see them, but
+    few will ever gauge the depth of those lines, the ragged indents slowly seeping
+    their way into the core of that idea. Even fewer still would question how those
+    lines formed in the first place, engaged instead in a never-ending struggle of
+    patchwork and repair.
+  </p>
+
+  <p>
+    So all we ask of you is this:
+  </p>
+
+  <h3>Why?</h3>
+
+  <p>
+    If you can find that answer, maybe we did our homework correctly. Maybe not.
+  </p>
+
+  <p>
+    As someone once said:
+  </p>
+
+  <blockquote>
+    <p><em>Mankind, be vigilant. We loved you.</em></p>
+  </blockquote>
+
+  <p>
+    See you next time.
+  </p>
+
+  <hr>
+
+  <p>
+    <strong>A warm thank you to our many friends in the Mojo Dojo Casa House.</strong>
+    Their support and insight have been invaluable to the creation of this project.
+  </p>
+
+</article>
+`;
+
+// change further reading text
+const originalFurtherReading = furtherReadingHtml;
+
+furtherReadingHtml = function() {
+    originalFurtherReading();
+
+    const gameWindow = document.getElementById("game_window");
+    const introPara = gameWindow ? gameWindow.querySelector("p") : null;
+
+    if (introPara && introPara.textContent.includes("Are you interested in exploring")) {
+        introPara.innerHTML = "Are you interested in exploring the 2032 election further? This page contains some further reading to get you up to speed.";
+    }
+};
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2028,
+            "display_year": "2028 - An Old Cycle",
+            "summary": "<p><b><u>November 8th, 2028.</u></b></p><p>It is barely even the break of sunlight, yet the atmosphere of the dawn is oppressively tense.</p><p>For the last four years, an anti-civilization death cult has hollowed out the husk of the global hegemon, a bulldozer driven by a mixture of deranged war profiteers, fascist tech conglomerates, and faith groups determined to bring American public morality back to the Dark Ages.</p><p>Caesar had the Rubicon. Donald Trump had a whole continent of rivers to traverse. His troops were not a well-disciplined Roman legion, contrary to some of their fantasies, but a long-running programme of institutional capture he happened to be the beneficiary of: lawyers, Supreme Court Justices, tax-dodging billionaires and ten thousand different corporatist beneficiaries of federal government largesse worried the teat was growing dry. Nothing has been spared.</p><p>Hate is visceral on the streets. It kills people - commentators, public personalities, random individuals - in shootings and attempts that play out across the country. A long string of martyrs that people on the other side of any given X - formerly Twitter - comment thread have nothing but contempt for. If they’re even real people.</p><p>It’s insane. It’s brazen. It’s unsustainable and blatant.</p><p>And it’s all about to end.</p><p>You hope.</p>",
+            "image_url": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/DSA.gif",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/aoc_face_2.png",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+]
+
+campaignTrail_temp.election_json[0].fields.recommended_reading = recommendedReadingContent;
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2028,
+        "is_premium": 0,
+        "display_year": "2028 - An Old Cycle"
+    }
+]
+
+RecReading = true;
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 27,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 201,
+        "fields": {
+            "first_name": "Alexandria",
+            "last_name": "Ocasio-Cortez",
+            "election": 20,
+            "party": "Democratic",
+            "state": "New York",
+            "priority": 1,
+            "description": "<p>This is the story of hope. Your story.</p><p>A waitress from the Bronx who fought her way into Congress, a Democratic Socialist who became the face of the Democratic Party, the woman who swept a hyper-competitive field of far more qualified, far more white and established men on Super Tuesday and never looked back.</p><p>You embody that anger. That outrage. The dithering complacency of Biden and Harris have crystalised into a demand for real, concrete change. A living wage, free college, a Green New Deal, some goddamn healthcare. Bread and roses.</p><p>A country that actually works, not a skeletal corpse.</p><p>You're sitting in your campaign headquarters. It's 3 AM, EST. The monitors are a dozen different feeds - CNN, MSNBC, even Fox - all anchors stand in front of a map of steely grey that is being gradually illuminated in the colours of your destiny.</p><p>\"It's closer than it ought to be,\" Fox & Friends huff bullishly, \"Margins running up in Iowa. If Vance's numbers in Texas hold steady…\"</p><p>Your phone rattles on the table.</p><p>You hit the green button without even looking at the number, nerves putting you on autopilot.</p>",
+            "color_hex": "#143a63",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/aoc_thinking_side.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 209,
+        "fields": {
+            "first_name": "Jon",
+            "last_name": "Ossoff",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Georgia",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/ossoff_thinking_side.jpg",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>To your side, you see Obama's acolyte. Jon Ossoff is a dark mirror: fresh, young, passionate, and completely inscrutable. He stands for nothing except whatever Donald Trump doesn’t. He signals his opposition loudly, vocally, at every opportunity, roaring to re-election in a Midterm window that amplified his pleasing-to-everyone political profile into a momentary ascendancy that looked worryingly like it was White House bound for a few golden months.</p><p>But Ossoff - beautiful, electable Ossoff, the swing state golden boy - ran a campaign too vague to please anyone. When you threw your hat into the ring, his attempts to ride the partisan Progressive fringe were cut short, and his campaign was summarily suspended in the dead months before Super Tuesday.</p><p>Fate has always been kind to dear Jon, though: when his name came to the top of carefully-circulated lists for the Vice-Presidential nod, it was made clear in no explicit terms that the party liked him. That Obama liked him. It was an easy decision. Have I mentioned he’s from Georgia?",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+      "model": "campaign_trail.candidate",
+      "pk": 200,
+      "fields": {
+          "first_name": "The",
+          "last_name": "Republicans",
+          "election": 20,
+          "party": "Republican",
+          "state": "MIssouri",
+          "priority": 1,
+          "description": "<p>blurb</p>",
+          "color_hex": "#be2525",
+          "secondary_color_hex": null,
+          "is_active": 0,
+          "image_url": "null",
+          "electoral_victory_message": "This guy wins!",
+          "electoral_loss_message": "This guy loses!",
+          "no_electoral_majority_message": "We all win?",
+          "description_as_running_mate": null,
+          "candidate_score": 1,
+          "running_mate": false
+      }
+    },
+    {
+    "model": "campaign_trail.candidate",
+    "pk": 202,
+    "fields": {
+        "first_name": "The",
+        "last_name": "Right-Wingers",
+        "election": 20,
+        "party": "Libertarian",
+        "state": "California",
+        "priority": 1,
+        "description": "<p>blurb</p>",
+        "color_hex": "#E5E021",
+        "secondary_color_hex": null,
+        "is_active": 0,
+        "image_url": "null",
+        "electoral_victory_message": "This guy wins!",
+        "electoral_loss_message": "This guy loses!",
+        "no_electoral_majority_message": "We all win?",
+        "description_as_running_mate": null,
+        "candidate_score": 1,
+        "running_mate": false
+    }
+    },
+    {
+  "model": "campaign_trail.candidate",
+  "pk": 203,
+  "fields": {
+      "first_name": "The",
+      "last_name": "Left-Wingers",
+      "election": 20,
+      "party": "Green",
+      "state": "California",
+      "priority": 1,
+      "description": "<p>blurb</p>",
+      "color_hex": "#1CA469",
+      "secondary_color_hex": null,
+      "is_active": 0,
+      "image_url": "null",
+      "electoral_victory_message": "This guy wins!",
+      "electoral_loss_message": "This guy loses!",
+      "no_electoral_majority_message": "We all win?",
+      "description_as_running_mate": null,
+      "candidate_score": 1,
+      "running_mate": false
+  }
+    },
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 156165,
+        "fields": {
+            "candidate": 201,
+            "running_mate": 209
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            201,
+            200,
+            202,
+            203
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+  {
+    "election": 20,
+    "candidates": [
+        201,
+        200,
+        202,
+        203
+    ]
+}
+]
+
+// actual code below
+campaignTrail_temp.modBoxTheme = {
+  "header_color": "#201e1a",
+  "header_text_color": "#fff",
+  "header_image_url": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/american_flag.png",
+  "description_text_color": "#000",
+  "description_background_color": "#eee",
+  "main_color": "#e6afa0",
+  "secondary_color": "#c01a12",
+  "ui_text_color": "#fff"
+}
+
+function applyTheme(theme) {
+    const gameHeader = document.querySelector(".game_header");
+    if (gameHeader && theme.coloring_title) {
+        gameHeader.style.backgroundColor = theme.coloring_title;
+    }
+
+    const gameWindow = document.getElementById("game_window");
+	if (gameWindow.style.backgroundColor !== theme.coloring_window) {
+		gameWindow.style.backgroundColor = theme.coloring_window;
+	}
+
+    const container = document.querySelector(".container");
+    if (container && theme.coloring_container) {
+        container.style.backgroundColor = theme.coloring_container;
+    }
+
+    const headerImg = document.getElementById("header");
+    if (headerImg && theme.header_image) {
+        headerImg.src = theme.header_image;
+    }
+
+    if (theme.body_background) {
+        document.body.style.backgroundImage = `url("${theme.body_background}")`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundAttachment = "fixed";
+    }
+}
+
+window.corrr = '';
+
+const theme = nct_stuff.themes[nct_stuff.selectedTheme];
+
+// define / override theme values
+theme.coloring_title     = "#212121";
+theme.coloring_window    = "#d3b0ab";
+theme.header_image = "https://file.garden/aNtAfG887DiA_7lO/2028AOC/ocasionation_logo_alt.png";
+applyTheme(theme);
+
+// Election night descs
+e.ElectionPopup = "The Wheel turns, but for whom?<br/>Time to pray, Alex."
+e.WinPopup = "You did it. I hope you’re proud of yourself."
+e.LosePopup = "Tomorrow belongs to them now."
+e.SelAnsContText = "You forgot to select an answer, you know."
+
+HistHexcolour = ["#143a63", "#be2525", "#e5e021", "#521212"];
+HistName = ["Alexandria Ocasio-Cortez", "Josh Hawley", "Adam Ricci", "Claudia de la Cruz"];
+HistEV = [365, 173, 0, 0];
+HistPV = ["84,258,764", "72,360,604", "463,831", "162,739"];
+HistPVP = ["53.3%", "46.0%", "0.3%", "0.1%"];
+
+//#endcode
+
+function ensureMetaViewport() {
+    if (!document.querySelector('meta[name="viewport"]')) {
+        const m = document.createElement('meta');
+        m.name = 'viewport';
+        m.content = 'width=device-width, initial-scale=1';
+        document.head.appendChild(m);
+    }
+}
+
+function applyGlobalStyles(css, id = 'app-theme') {
+    if ('adoptedStyleSheets' in document && 'replaceSync' in CSSStyleSheet.prototype) {
+        if (!applyGlobalStyles.sheet) {
+            applyGlobalStyles.sheet = new CSSStyleSheet();
+            document.adoptedStyleSheets = [...document.adoptedStyleSheets, applyGlobalStyles.sheet];
+        }
+        applyGlobalStyles.sheet.replaceSync(css);
+        return;
+    }
+
+    let el = document.getElementById(id);
+    if (!el) {
+        el = document.createElement('style');
+        el.id = id;
+        document.head.appendChild(el);
+    }
+    el.textContent = css;
+}
+
+const css = `
+    /* variables & fonts */
+    :root {
+      --stroke-color: #BB321E;
+      --fill-color: #1F1919;
+      --left-space: -434px; 
+      --from-Scroll: 340%;
+      --to-Scroll: -275.82%;
+    }
+
+    /* animations */
+    @keyframes show {
+		0% {
+			opacity: 0;
+			transform: translateY(8px) scale(.98);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+    /* main structures */
+	body {
+		background: linear-gradient(#0f1129, #2b1313);
+		background-image: url(https://file.garden/aNtAfG887DiA_7lO/2028AOC/usflag.svg);
+		background-size: cover;
+		background-position: center;
+	}
+	
+	button, select {
+	  font-family: "Bahnschrift", "Source Serif 4", "Trebuchet MS", sans-serif;
+
+	  background: #f3f6fb;
+	  color: #0f1a29;
+
+	  border: 1px solid #c7d7ef;
+	  border-radius: 0.5em;
+
+	  padding: 0.2em 0.75em;
+
+	  transition: background 120ms ease, transform 80ms ease;
+	}
+
+	button:hover, select:hover {
+	  background: #2e6fd8;
+	  color: #ffffff;
+	  border-color: #2e6fd8;
+	}
+
+	button:active, select:active {
+	  transform: translateY(1px);
+	}
+	
+	button:disabled {
+		border-color: #e4e4e4;
+		background-color: #f9f9f9;
+		color: #999;
+		cursor: help;
+	}
+	
+	.container {
+	  background-color: #05254e;
+	  border: 4px solid rgba(33, 136, 246, 0.5);
+	}
+	
+    #game_window {
+      display: flex;
+      flex-direction: column;
+      min-height: 587px;
+	  height: auto;
+	  background-color: #d3b0ab;
+	  background-image: url(https://file.garden/aNtAfG887DiA_7lO/2028AOC/aoc_sanders_thermo.jpg);
+	  border: 3px solid rgba(33, 136, 246, 0.5);
+    }
+	.inner_window_w_desc {
+	  border-radius: .5em;
+	  border: 2px ridge #252559;
+	}
+	.content_single {
+	  border-top: .2em solid rgba(255, 126, 126, 0.55);
+	}
+	.footer {
+	  border-top: .15em solid rgba(255, 126, 126, 0.55);
+	  margin-top: .5em;
+	}
+	.game_header {
+	  visibility: collapse;
+	  display: none;
+	}
+	
+	form[name="election_year"], form[name="candidate"], form[name="running mate"], form[name="game_type_selection"] {
+	  align-items: center;
+	  display: flex;
+	  justify-content: center;
+	  margin: .5rem 0 0;
+	}
+	#election_id, #candidate_id, #running_mate_id, #game_type_selection, #game_type_id, #difficulty_level_id, #question_select {
+	  margin-left: .25rem;
+	  padding: .25em .2em;
+	}
+
+
+    #inner_window_1 {
+      background: linear-gradient(#182045, #09092b);
+      height: 494px; 
+      color: #F8F8F8;
+	  margin: 1em 2.5em;
+	  line-height: 3.25;
+	  border: .3em solid rgba(255, 126, 126, 0.55);
+	  border-radius: .5em;
+    }
+    #inner_window_1 p {
+	  text-shadow: 0 0 10px #1F1919, 0 0 20px #555045, 0 0 30px #BC331E;
+    }
+
+    #inner_window_2 {
+      background-color: #F2B6B6 !important;
+	  height: auto;
+	  min-height: 610px;
+    }
+
+    #inner_window_2,
+    #inner_window_3,
+    #inner_window_4 {
+      width: 938px;
+      min-height: 562px;
+	  height: auto;
+      margin: 1em auto 1em .75em;
+      overflow: hidden;
+    }
+
+    .inner_inner_window {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      transition: height 0.3s ease;
+    }
+    .inner_inner_window h3 {
+        padding: 5px;
+        background-color: #C7D1E1;
+		border: 2px solid rgba(158, 17, 17, 0.64);
+		margin: 0 .5em .5em .5em;
+		border-radius: 0 0 .2em .2em;
+    }
+
+    /* election/candidate displays */
+    #election_image {
+      margin-left: 0px;
+      margin-top: 0px;
+      width: 448px;
+      height: 455px;
+      background-image: 
+        linear-gradient(to right, transparent, #1f1919), 
+        url('https://file.garden/aNtAfG887DiA_7lO/2028AOC/DSA.gif'); 
+      background-size: cover;
+	  background-position: center;
+      z-index: 1;
+    }
+    #election_image img {
+      padding: 1px 1px; 
+      border: 1px solid #C9C9C9;
+      z-index: 0;
+      opacity: 0;
+      float: left;
+      height: 214px;
+      width: 300px;
+      margin-right: 10px;
+      margin-bottom: -10px;
+    }
+
+    #election_description_window {
+      background-color: #1F1919;
+      font-size: 12.6px;
+      height: 455px;          
+    }
+
+    #election_summary {
+      text-align: right;
+      width: auto;
+      z-index: 0;
+      color: #DFDFD9;
+      position: absolute; 
+      left: 652px;
+      top: 30px;
+      text-shadow: 
+        0px 0px 6px rgba(32, 29, 26, 0.3),
+        0px 0px 8px rgba(32, 29, 26, 0.8),
+        0px 0px 1px rgba(32, 29, 26, 1); 
+      overflow: visible;
+      overflow-x: visible;
+      margin-left: 5px;
+      height: auto;
+    }
+	#election_summary a {
+	  color: #ffcb00;
+	}
+    #election_summary p {
+      font-size: 14px;
+      width: 645px;
+      margin-left: -400px;
+    }
+
+    #election_id_button {
+	  margin: 0;
+	  /*position: absolute; 
+      left: auto;
+      top: auto;
+      margin-left: -265px;
+      margin-top: 169px;*/
+    }
+	/*#credits {
+	  position: relative;
+	  left: -233px;
+	  bottom: -125px;
+	  color: #eee;
+	  font-size: 12px;
+	}*/
+
+    /* running mate */
+    #candidate_description_window,
+    #running_mate_description_window {
+      background: linear-gradient(#2c2323, #1a1414);
+      border: 4px ridge #5555b8;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 5px; 
+    }
+
+    #opponent_selection_description_window {
+        margin: 1em;
+        height: 317px;
+        background-color: #1F1919;
+        /* background-image: 
+             linear-gradient(to right, transparent, rgba(32, 30, 26, 1)) , 
+             url('https://i.imgur.com/1n3gWGS.png'); */
+        background-repeat: no-repeat;
+        background-size: 50% 100%, auto 100%;
+        background-position: left, left;
+        z-index: 1;
+        font-size: 13px;
+		font-family: "Bahnschrift SemiBold", "Bahnschrift", sans-serif;
+    }
+    #opponent_selection_description_window p:nth-of-type(1),
+    #opponent_selection_description_window p:nth-of-type(3) {
+      color: #DFDFD9;
+      content: "";
+    }
+    #opponent_selection_description_window p:nth-of-type(2) {
+      color: #DFDFD9;
+      position: absolute; 
+      top: 66px;
+      left: 290px;
+      width: 620px;
+      text-align: left;
+    }
+
+    /* summaries */
+	#candidate_summary, #running_mate_summary {
+      margin-top: 0;
+      z-index: 0;
+      color: #DFDFD9;
+      flex: 1;
+    }
+    #candidate_summary {
+      font-size: 15px;
+    }
+    #running_mate_summary {
+      font-size: 14.8px;
+    }
+    #candidate_summary p, #running_mate_summary p {
+      font-family: "Bahnschrift SemiBold", "Bahnschrift", sans-serif;
+      text-align: center;
+    }
+	
+	#candidate_summary ul, #running_mate_summary ul { display: none; padding-left: 0; }
+    #candidate_summary li:not(:first-child), #running_mate_summary li:not(:first-child) { display: none; }
+    #candidate_summary li, #running_mate_summary li {
+      margin-bottom: 4px;
+      display: block;
+      text-indent: -9999px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    #candidate_summary li::after, #running_mate_summary li::after {
+        content: " " attr(data-name);
+        text-indent: 0;
+        display: inline-block;
+    }
+
+    /* portraits */
+    #candidate_image, #running_mate_image {
+      width: 253px;
+      height: 341px;
+      margin-right: 20px;
+      border: none;
+      outline: none;
+    }
+    #candidate_image img, #running_mate_image img {
+      width: 253px;
+      height: 301px;
+      padding: 1px 1px; 
+      outline: 1px solid #C9C9C9;
+      margin-top: 24px;
+    }
+	#candidate_image img, #running_mate_image img {
+	  object-fit: cover;
+	  object-position: top;
+	}
+
+    /* questions */
+    #question_form {
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+        font-size: 1.12em !important;
+        line-height: 1;
+    }
+    #question_form br { display: none; }
+    
+    #question_form form {
+        display: grid;
+        grid-template-columns: auto 1fr; 
+        align-items: start;         
+        row-gap: 0;
+        max-width: 930px;
+    }
+
+    #question_form input[type="radio"] {
+        grid-column: 1;
+        margin: 0;
+        margin-right: -3px;
+        align-self: center;           
+        transform: translateY(-1px); 
+    }
+    #question_form form[name="question"] input[type="radio"][name="game_answers"] {
+        margin-left: -6px;
+    }
+
+    #question_form input[type="radio"] + label {
+        grid-column: 2;
+        display: block;                  
+        padding: 8px 10px; 
+        margin: 0 0 8px 0;      
+        line-height: 1.3;
+        border: 1px solid #ccc; 
+        border-radius: 0.5em;
+        background: #f9f9f9;
+        transition: background-color .2s, border-color .2s, box-shadow .2s;
+        cursor: pointer;
+        width: min(100%, 930px);
+        font-size: 15px;
+        font-weight: 400; 
+        vertical-align: middle;
+        max-width: 97%;
+    }
+
+    #question_form form > input[type="radio"]:last-of-type + label {
+        margin-bottom: 0;
+    }
+
+    #question_form input[type="radio"]:checked + label {
+        background: #f7eded;
+        border-color: #AD5454;
+        box-shadow: 0 0 0 1px #AD5454;
+    }
+
+    #question_form input[type="radio"] + label:hover,
+    #question_form input[type="radio"] + label:focus {
+        background: #e6edf4;
+        border-color: #9ec0ec;
+    }
+
+    .inner_window_question {
+        min-height: 321px;
+        height: auto !important;
+        display: flex;
+        flex-direction: column;
+		border: 3px double #0f0f60;
+    }
+    .inner_window_question p {
+        margin: 0;
+        padding: 0;
+        margin-top: auto;
+        transform: translateY(-4px); 
+    }
+
+    /* map container */
+    #map_container { height: 33.48em; background: #eae8ff; }
+    .map_footer { gap: 0px !important; }
+    #map_footer { margin-top: 5em !important; }
+	
+	/* for the default CTS/NCT footer */
+	/* we don't actually use this here, BUT it's necessary
+	 * so we can avoid issues like flat Hillary/Booker, like TTNW has */
+			  #game_window g {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: center;
+				align-items: center;
+				gap: 8px;
+				padding: auto;
+			  }
+			  
+			  #candidate_pic, img#candidate_pic {
+				order: 1;
+				width: 13em;
+				height: auto;
+				flex-shrink: 0;
+				margin: 0;
+			  }
+			  
+			  .inner_window_sign_display {
+				order: 2;
+				flex: 1;
+				min-width: 180px;
+				max-width: 250px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			  }
+			  
+			  #running_mate_pic,
+			img#running_mate_pic {
+			  opacity: 0;
+			  pointer-events: none;
+			  width: 0;
+			  margin: 0;
+			  border-width: 0;
+			}
+	
+	/* basically a lazy fix to increase the SVG map size without
+	 * changing the actual SVG or resort to more aggressive tactics,
+	 * as Year Zero does something kinda similar */
+	#map_container svg {
+		height: 100%;
+	}
+	#map_container svg {
+		transform: translate(5px, 0);
+	}
+	#map_container svg rect, #map_container svg text {
+		transform: translate(-100px, 0px);
+	}			
+	#main_content_area + #map_footer {
+		margin: 3em auto !important;
+	}
+    
+    .button_container {
+        position: absolute;
+        top: 265px;
+        left: 13px; 
+        display: flex; 
+        gap: 20px;
+        margin-top: 10px; 
+    }
+	
+	/* table styling */	
+	table {
+	  border-collapse: collapse;
+	  font-family: "Bahnschrift", "Source Serif 4", sans-serif;
+	  color: #0f1a29;
+
+	  background: #f3f6fb;
+	  border: 1px solid #c7d7ef;
+	  border-radius: 0.5em;
+	  overflow: hidden;
+	}
+
+	table th {
+	  background: linear-gradient(#f7f9fd, #e8eef8);
+	  color: #0f1a29;
+
+	  font-weight: 600;
+	  padding: 0.55em 0.7em;
+
+	  border-bottom: 1px solid #c7d7ef;
+
+	  text-align: center;
+	  letter-spacing: 0.02em;
+	}
+
+	table td {
+	  padding: 0.45em 0.7em;
+	  border-bottom: 1px solid #d7e2f0;
+
+	  text-align: center;
+	  background: #ffffff;
+	}
+
+	table tr:last-child td {
+	  border-bottom: none;
+	}
+
+	table tbody tr:nth-child(even) td {
+	  background: #f6f9ff;
+	}
+
+	table tbody tr:hover td {
+	  background: #e8f0fb;
+	}
+
+	table td:first-child {
+	  text-align: center;
+	  white-space: nowrap;
+	}
+
+	table td span {
+	  border: 1px solid rgba(0,0,0,0.15);
+	  border-radius: 3px;
+	  display: inline-flex;
+	  height: 0.9em;
+	  margin: 0 .4em 0 .2em;
+	  text-indent: -9999px;
+	  vertical-align: top;
+	  width: 0.9em;
+	}
+    
+    .final_results_table th, .final_results_table td {
+        padding: 2px 1px; 
+        border: 1px solid #ddd;
+    }
+
+    #overall_election_details a, #recommended_reading_box a { color: #00f; }
+    #recommended_reading_box {
+		overflow: auto;
+	    height: 30em;
+	    padding: 0px 1em;
+	    border: 3px solid rgba(246, 33, 33, 0.5);
+	}
+    
+    #overall_details_container {
+        height: 98%;
+        overflow: auto;
+		color: #fff;
+    }
+    
+    #overall_result,
+    #final_results_description {
+        overflow: auto;
+        overflow-x: hidden;
+    }
+	
+	h3.results_tab_header, .results_tab_header + p,
+	.title_h3, #drop_down_area_state, #state_result_data_summary {
+	  color: #fff;
+	}
+
+    /* tooltips */
+    .tooltip-container {
+      opacity: 1;
+      transition-delay: 0.5s;
+      border-bottom: 1px dotted blue; 
+    }
+	.tooltip .tooltiptext {
+		background-color: #333;
+		color: #fff;
+		padding: 5px;
+		border-radius: 5px 0 0 5px;
+	}
+    /*.tooltip {
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease, visibility 0s 0.3s;
+        pointer-events: none;
+        background-color: #333;
+        color: #fff;
+        padding: 8px;
+        border-radius: 6px;
+        z-index: 1;
+        max-width: 200px;
+        text-align: center;
+        left: 61%;
+        top: 4%;
+        transform: translate(-50px, 0px);
+    }*/
+    .tooltip-container:hover .tooltip {
+        pointer-events: auto; 
+        visibility: visible;
+        transition-delay: 0s; 
+        opacity: 1;
+        background-color: #201F1A;
+        background-image: url("https://i.imgur.com/sjCE31d.png");
+        background-size: cover; 
+        font-family: Arial, sans-serif !important;
+        font-style: normal !important;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: left; 
+        line-height: 1.2; 
+    }
+    .tooltip img {
+        display: block; 
+        margin: 0 auto -13px;
+        max-width: 50%;
+    }
+
+    /* special tooltips */
+    .mytooltipBLUE, .mytooltipRED {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        text-decoration: none;
+        font-style: italic; 
+        color: #1F1E19;
+    }
+    .mytooltipBLUE { text-shadow: 0px 0px 2px rgba(44, 162, 215, 0.6); }
+    .mytooltipRED { text-shadow: 0px 0px 2px rgba(187, 50, 30, 0.6); }
+
+    .mytooltipBLUE .mytooltiptext, 
+    .mytooltipRED .mytooltiptext {
+        width: 240px;
+        background: linear-gradient(rgba(81, 87, 84, 0.98), rgba(158, 168, 163, 0.95));
+        color: black;
+        text-align: center;
+        border-radius: 6px;
+        padding: 10px;
+        position: absolute;
+        z-index: 99;
+        bottom: 60%;
+        left: 30%;
+        margin-left: -90px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        border: 1px solid black;
+        pointer-events: none;
+        font-size: 13px !important;
+        line-height: 1.5em !important;
+        font-weight: normal !important;
+        font-style: normal !important;
+        color: black !important;
+        text-shadow: none !important;
+    }
+    .mytooltipBLUE:hover .mytooltiptext,
+    .mytooltipRED:hover .mytooltiptext {
+        opacity: 1;
+        transition-delay: 0.5s;
+    }
+    .mytooltipBLUE .mytooltiptext img,
+    .mytooltipRED .mytooltiptext img {
+        max-width: 240px;
+        height: auto;
+        border: 1px solid black;
+    }
+
+    /* popup tooltips */
+    .bubble {
+      position: absolute;
+      text-shadow: none;
+      width: 250px;
+      background: #fff;
+      border-radius: 40px;
+      padding: 24px;
+      text-align: center;
+      color: #000;
+      opacity: 0;
+      z-index: 99;
+      bottom: 150%;
+      left: -60px;
+      margin-bottom: 10px;
+      border: 1px solid black;
+      pointer-events: none;
+    }
+    .mytooltipBLUE:hover .bubble,
+    .mytooltipRED:hover .bubble {
+      opacity: 1;
+      transition-delay: 0.5s;
+    }
+    .bubble-bottom-left:before, .bubble-bottom-left:after {
+        content: "";
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        pointer-events: none;
+        left: 62px;
+        bottom: -28px;
+    }
+    .bubble-bottom-left:after {
+        border-left: 35px solid black;
+        border-right: 1px solid transparent;
+        border-top: 1px solid transparent;
+        border-bottom: 28px solid transparent;
+    }
+    .bubble-bottom-left:before {
+        border-left: 24px solid #fff;
+        border-right: 12px solid transparent;
+        border-top: 12px solid #fff;
+        border-bottom: 20px solid transparent;
+        left: 63px;
+        bottom: -27px;
+        z-index: 100;
+    }
+    .mytooltip:hover .bubble-bottom-left:before,
+    .mytooltip:hover .bubble-bottom-left:after {
+        opacity: 1;
+    }
+
+    /* general utility */
+    .hidden { display: none; }
+    .text-box {
+      position: relative;
+      display: inline-block;
+      color: white;
+      padding: 10px;
+    }
+    .text-box::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: black;
+      opacity: 0.5;
+      z-index: -1;
+      border-radius: 5px;
+    }
+    .rounded-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 2px solid black;
+        margin: 10px;
+        background-color: white;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+	.campaign_trail_start_emphasis {
+	  background-color: transparent;
+	  padding: 1em;
+	}
+    .person_button { margin-top: 0.2em; }
+    
+    #achievement-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 18px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 1000;
+    }
+    #achievement-box.visible { opacity: 1; }
+
+    /* visit/election night overlays */
+    #candidate_pic,
+    #running_mate_pic,
+    .inner_window_sign_display { height: 14em; }
+    #candidate_pic { margin-left: 159px; }
+    #running_mate_pic { margin-right: 159px; }
+    .inner_window_sign_display { width: 27%; }
+    
+    #visit_window { height: auto; }
+    #visit_content { height: 79%; }
+    #election_night_content h3, #visit_content h3 { display: none; }
+    
+    #election_night_window img, #visit_content img, .overlay_window img {
+        opacity: 0.95;
+        width: 260px;
+        height: auto;
+        border: 1px solid transparent;
+        outline: 1px solid #08306E;
+        box-shadow: none !important;
+    }
+	
+	.overlay_window {
+		top: 35px !important;
+		border: none !important;
+		background: none !important;
+
+		opacity: 0;
+		animation: show 125ms ease-in-out forwards;
+
+		box-shadow: 
+        0 10px 15px rgba(0,0,0,.6),
+        0 0 0 1px rgba(0,0,0,.08);
+		
+		height: auto;
+	}
+
+	.overlay_window::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+
+		background: rgba(223,223,217,.95);
+		border: none;
+		outline: 1px solid #950e0ecc;
+		border-radius: .3em;
+
+		z-index: -1;
+	}
+
+	.overlay_window_content h3 {
+		display: none;
+	}
+	
+    .description_window_small { height: 50%; }
+	
+	.overlay_buttons, #visit_buttons {
+	  margin: 1em auto;
+	}
+
+    /* new footer */
+    /*#new_footer {
+        margin: 0;
+        padding: 0;
+        margin-top: auto;
+        transform: translateY(-8px); 
+    }*/
+	
+	#results_container { color: #000; }
+	
+	.visit_text {
+		background: #fff;
+		border-radius: .2em;
+		border: .25em solid rgba(33, 136, 246, 0.5);
+		display: inline-flex;
+		width: fit-content;
+		margin-inline: auto;
+		padding: .5rem;
+		/* necessary for NCT compatibility */
+		position: initial;
+		transform: initial;
+	}
+	
+	#map_container, #overall_result, #state_info, #state_result {
+	  border: .3em solid #2188f680;
+	}
+	#menu_container {
+	  background: rgba(50, 72, 160, 0.65);
+	}
+	#overall_result h3, #state_info h3, #state_result h3 {
+	  background-color: #8d0c0c;
+	  color: #fff;
+	  padding: .2em 0;
+	}
+	#state_info {
+		height: auto;
+	}
+	#state_result {
+		min-height: 7.5em;
+	}
+	
+	#overall_result span {
+	  border: 1px solid rgba(0, 0, 0, 0.2);
+	  border-radius: 4px;
+	  display: inline-flex;
+	  height: 0.9em;
+	  margin: 0px 0.2em 0px 0.1em;
+	  text-indent: -9999px;
+	  vertical-align: sub;
+	  width: 0.9em;
+	}
+	
+	#state_result li {
+	  display: grid;
+	  grid-template-columns: auto 1fr;
+	  align-items: center;
+	  gap: 0.4em;
+	  padding: 0.05em 0px;
+	}
+
+	#state_result li span {
+	  display: inline-block;
+	  width: 0.9em;
+	  height: 0.9em;
+	  border-radius: 4px;
+	  border: 1px solid rgba(0, 0, 0, 0.25);
+	  text-indent: -9999px;
+	}
+	
+	/* for the endings! */
+	.article-intro {
+	  background: #f5f5f5;
+	  border: 1px solid #cfcfcf;
+	  border-left: 5px solid #d9d9d9;
+	  font-family: Georgia, serif;
+	  padding: 18px 22px;
+	  max-width: 720px;
+	  line-height: 1.65;
+	}
+	
+	/* tooltip styling */
+	/* partially inspired by that of 2012LBM and Year Zero */
+	.mytooltip {
+		position: relative;
+		display: inline-block;
+		cursor: help;
+		padding: 0 3px;
+		border-radius: 3px;
+		background: #fff93be6;
+	}
+
+	.mytooltip .mytooltiptext {
+		position: absolute;
+		left: 50%;
+
+		transform: translateX(-50%) translateY(6px);
+
+		width: 270px;
+
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+
+		padding: 10px;
+
+		background: #fff;
+		border: 1px solid rgba(0,0,0,.35);
+		border-radius: 8px;
+
+		box-shadow:
+			0 14px 30px rgba(0,0,0,.35),
+			0 4px 10px rgba(0,0,0,.18);
+
+		font-size: 13px;
+		line-height: 1.35em;
+
+		opacity: 0;
+		pointer-events: none;
+
+		transition:
+			opacity .18s ease,
+			transform .18s ease;
+
+		z-index: 999;
+	}
+	.mytooltip .mytooltiptext {
+		bottom: calc(100% + 14px);
+	}
+
+	.mytooltip:hover .mytooltiptext {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+
+	.mytooltip .mytooltiptext::after {
+		content: "";
+		position: absolute;
+
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+
+		border: 8px solid transparent;
+		border-top-color: #fff;
+
+		filter: drop-shadow(0 2px 2px rgba(0,0,0,.25));
+	}
+
+	.mytooltip img {
+		width: 100%;
+		max-height: 200px;
+		object-fit: contain;
+
+		border-radius: 4px;
+		border: 1px solid rgba(0,0,0,.18);
+
+		background: #f3f3f3;
+	}
+
+	.mytooltip .annotation {
+		font-size: 11px;
+		opacity: .85;
+		text-align: center;
+		font-style: italic;
+	}
+
+    /* responsive/mobile styles */
+    @media only screen and (max-width: 768px) {
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #main_content_area_reading {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            min-height: 100dvh;
+            flex: 1 1 auto;
+        }
+
+        #game_window {
+            flex: 1 1 auto;
+            min-height: clamp(360px, 40vh, 587px); 
+            height: auto;
+            align-self: stretch;
+            overflow: visible;
+            box-sizing: border-box;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* responsive text styles */
+        .inner_window_question,
+        #results_container,
+        #overall_details_container,
+        #main_content_area_reading,
+        #inner_window_2,
+        #inner_window_3,
+        #inner_window_4,
+        #advisors {
+            font-size: 1.8em;
+        }
+        #headquarter {
+            overflow: auto;
+            font-size: 1.5em;
+        }
+        #title_container { font-size: 1.2em; }
+		#election_summary {
+			top: initial;
+		}
+		#election_description_window, #election_image {
+			height: 480px;
+		}
+		#credits {
+		  left: initial;
+		  bottom: initial;
+		  color: #000;
+		}
+		#election_id_button {
+		  margin: 2em auto auto -3em;
+		}
+		#candidate_image img, #running_mate_image img {
+		  margin: 0;
+		}
+		#candidate_description_window, #running_mate_description_window {
+			overflow: auto;
+		}
+
+        /* window adjustments */
+        #inner_window_2,
+        #inner_window_3 {
+            height: 82%;
+        }
+        /*#inner_window_2,
+        #inner_window_3,
+        #inner_window_4 {
+            overflow: auto;
+        }*/
+		#map_footer { margin-top: auto !important; }
+        
+        /* opponent/descriptions */
+        #opponent_selection_description_window p { display: none !important; }
+        #opponent_selection_description_window,
+        #election_year_form,
+        #candidate_description_window,
+        #running_mate_description_window {
+            height: auto;
+            overflow: auto;
+            width: auto;
+        }
+        #candidate_description_window,
+        #running_mate_description_window {
+            flex-direction: column;
+            align-items: center;
+            padding: 1em;
+        }
+
+        /* question window */
+        .inner_window_question {
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            position: static !important;
+            top: auto !important;
+            bottom: auto !important;
+            flex: 0 1 auto !important;
+            align-self: auto !important;
+            grid-row: auto !important;
+            grid-column: auto !important;
+            justify-self: auto !important;
+            display: flow-root !important;  
+            overflow: visible !important;
+            box-sizing: border-box !important;
+        }
+        .inner_window_question > :first-child { margin-top: 0; }
+        .inner_window_question > :last-child  { margin-bottom: 0; }
+
+        /* UI elements */
+        #inner_window_2 select,
+        #inner_window_3 select,
+        #inner_window_4 select {
+            font-size: 1em;
+            padding: 10px;
+        }
+        
+        #question_form button,
+        #inner_window_2 button,
+        #inner_window_3 button,
+        #inner_window_4 button,
+        #game_window button,
+        #headquarter button,
+        #advisorsDiv button {
+            font-size: clamp(16px, 4.2vw, 20px);
+            line-height: 1.2;
+            padding: 10px 16px;
+            min-height: 44px;
+        }
+
+        #question_form input[type="radio"] {
+            width: 1.3em;
+            height: 1.3em;
+            margin: 0 10px 0 0;
+            transform: none;
+            align-self: center;
+        }
+        #question_form input[type="radio"] + label {
+            font-size: clamp(16px, 4.2vw, 20px);
+            line-height: 1.4;
+            padding: 12px 14px;
+            margin: 0 0 12px 0;
+            min-height: 44px;
+        }
+        #question_form input[type="radio"] + label:hover,
+        #question_form input[type="radio"] + label:focus {
+            background: #e6edf4; 
+        }
+
+        /* popups */
+        #visit_window {
+            font-size: 1.8em;
+            width: 90%;
+            left: 5%;
+        }
+        .mobile-hide { display: none; }
+        #drop_down_area_state {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* mobile footer */
+        /*body #new_footer {
+            order: 9999;                
+            margin-top: auto;     
+            position: static !important;   
+            display: flex !important;   
+            flex-wrap: nowrap !important;
+            justify-content: center; 
+            align-items: center;            
+            gap: 10px;                    
+            align-self: center !important;
+            width: auto !important;
+            max-width: 900px !important;
+            margin: 12px auto 0 !important;
+            padding-inline: 12px;
+            overflow: hidden;
+            box-sizing: border-box;
+            container-type: inline-size;
+        }
+        #new_footer img,
+        #new_footer video,
+        #new_footer canvas {
+            max-width: 100%;    
+            height: auto;      
+            display: block;
+            object-fit: contain; 
+        }
+        #new_footer > * {
+            min-width: 0;
+            flex: 0 1 auto;
+        }
+        #new_footer :is(p, span, a, button) {
+            white-space: nowrap;               
+            overflow: hidden;                  
+            text-overflow: ellipsis;           
+            font-size: clamp(12px, 3.2cqw, 16px);
+            line-height: 1.2;
+        }*/
+    }
+`;
+
+ensureMetaViewport();
+applyGlobalStyles(css);
+
+// call dialogue
+const originalA = window.a; // store the original function so we can fallback if necessary
+
+window.a = function(mode) {
+  const barackColor = "rgba(151, 175, 201, 1)";
+  const alexColor = "rgba(223, 223, 217, 1)";
+  
+  const rowStyle = "color: #fff; margin: 1em 1.5em; line-height: 1.8; font-size: 1.05em;";
+  
+  const dialogue = [
+    { name: "BARACK", side: "left", color: barackColor, text: "Hi, uh, Alex. Can I call you Alex?" },
+    { name: "ALEX", side: "left", color: alexColor, text: "Yes, uh… yes, Mister President, that's…" },
+    { name: "BARACK", side: "left", color: barackColor, text: "[chuckle] Call me Barack. Michelle and I, we’re, uh, staying up late to watch. It’s looking good in Iowa. I know you were, uh, probably hoping for more, with the polls, but…" },
+    { name: "ALEX", side: "left", color: alexColor, text: "No, yeah, it’s… so long as we get this thing." },
+    { name: "BARACK", side: "left", color: barackColor, text: "Yeah," },
+    { name: "BARACK", side: "left", color: barackColor, text: "[…] Look, Alex, I’ve, uh… I’ve gotta ask — Donald, he’s… he's not gonna let this slip easy. So, uh…" },
+    { name: "", side: "right", text: "<b style='color: #9ec0ec'>…are you ready for this?</b>" }
+  ];
+
+  const html = dialogue.map(line => {
+    const nameTag = line.name ? `<b style="text-shadow: -2px 2px 6px ${line.color};">${line.name}</b>: ` : "";
+    return `<div style="${rowStyle} text-align: ${line.side};">${nameTag}${line.text}</div>`;
+  }).join("");
+
+  $("#opponent_selection_description_window").html(html);
+};
+
+// music player
+class Song {
+  constructor(title, artist, coverLink, audioLink) {
+    this.title = title;
+    this.artist = artist;
+    this.coverLink = coverLink;
+    this.audioLink = audioLink;
+  }
+  getTitle() { return this.title; }
+  getArtist() { return this.artist; }
+  getCoverLink() { return this.coverLink; }
+  getAudioLink() { return this.audioLink; }
+}
+
+class Playlist {
+  constructor() {
+    this.songs = [];
+    this.currentSongIndex = 0;
+  }
+  addSong(song) { this.songs.push(song); }
+  getCurrentSong() { return this.songs[this.currentSongIndex]; }
+  
+  playNext() {
+    if (this.songs.length === 0) return;
+    this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+  }
+  
+  playPrevious() {
+    if (this.songs.length === 0) return;
+    this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+  }
+}
+
+window.Playlist = Playlist;
+window.Song = Song;
+
+let activePlaylist = new Playlist(); 
+let audioInstance = null;
+let currentVolume = 11;
+
+const playerRefs = {
+  player: null,
+  cover: null,
+  title: null,
+  artist: null,
+  playPauseBtn: null,
+  prevBtn: null,
+  nextBtn: null,
+  progressBar: null,
+  progressBarContainer: null,
+  currentTimeEl: null,
+  durationEl: null,
+  volumeSlider: null,
+  volumeIcon: null,
+  volumeDisplay: null
+};
+
+// assets
+const svgToDataUri = (svg) =>
+  `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+
+const ASSETS = {
+  btnPrev: svgToDataUri(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <path fill="#fff" d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7z"/>
+    </svg>
+  `),
+
+  btnPlay: svgToDataUri(`
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="22" fill="#1DB954"/>
+    <g transform="translate(14.8 14.8) scale(1.15)">
+      <path fill="#fff" d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288z"/>
+    </g>
+  </svg>
+`),
+
+btnPause: svgToDataUri(`
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="22" fill="#1DB954"/>
+    <g transform="translate(14.8 14.8) scale(1.15)">
+      <path fill="#fff" d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7z"/>
+    </g>
+  </svg>
+`),
+
+  btnNext: svgToDataUri(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <path fill="#fff" d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7z"/>
+    </svg>
+  `),
+
+  volMute: svgToDataUri(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <path fill="#fff" d="M13.86 5.47a.75.75 0 0 0-1.061 0l-1.47 1.47-1.47-1.47A.75.75 0 0 0 8.8 6.53L10.269 8l-1.47 1.47a.75.75 0 1 0 1.06 1.06l1.47-1.47 1.47 1.47a.75.75 0 0 0 1.06-1.06L12.39 8l1.47-1.47a.75.75 0 0 0 0-1.06"/>
+      <path fill="#fff" d="M10.116 1.5A.75.75 0 0 0 8.991.85l-6.925 4a3.64 3.64 0 0 0-1.33 4.967 3.64 3.64 0 0 0 1.33 1.332l6.925 4a.75.75 0 0 0 1.125-.649v-1.906a4.7 4.7 0 0 1-1.5-.694v1.3L2.817 9.852a2.14 2.14 0 0 1-.781-2.92c.187-.324.456-.594.78-.782l5.8-3.35v1.3c.45-.313.956-.55 1.5-.694z"/>
+    </svg>
+  `),
+
+  volLow: svgToDataUri(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <path fill="#fff" d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65l-6.925-4a3.64 3.64 0 0 1-1.33-4.967 3.64 3.64 0 0 1 1.33-1.332l6.925-4a.75.75 0 0 1 .75 0zm-6.924 5.3a2.14 2.14 0 0 0 0 3.7l5.8 3.35V2.8zm8.683 4.29V5.56a2.75 2.75 0 0 1 0 4.88"/>
+    </svg>
+  `),
+
+  volMedium: svgToDataUri(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <path fill="#fff" d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65l-6.925-4a3.64 3.64 0 0 1-1.33-4.967 3.64 3.64 0 0 1 1.33-1.332l6.925-4a.75.75 0 0 1 .75 0zm-6.924 5.3a2.14 2.14 0 0 0 0 3.7l5.8 3.35V2.8zm8.683 6.087a4.502 4.502 0 0 0 0-8.474v1.65a3 3 0 0 1 0 5.175z"/>
+    </svg>
+  `),
+
+  volHigh: svgToDataUri(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <path fill="#fff" d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65l-6.925-4a3.64 3.64 0 0 1-1.33-4.967 3.64 3.64 0 0 1 1.33-1.332l6.925-4a.75.75 0 0 1 .75 0zm-6.924 5.3a2.14 2.14 0 0 0 0 3.7l5.8 3.35V2.8zm8.683 4.29V5.56a2.75 2.75 0 0 1 0 4.88"/>
+      <path fill="#fff" d="M11.5 13.614a5.752 5.752 0 0 0 0-11.228v1.55a4.252 4.252 0 0 1 0 8.127z"/>
+    </svg>
+  `)
+};
+
+function setRangeFill(el, direction = "horizontal", fillColor = "#1DB954", restColor = "#4d4d4d") {
+  if (!el) return;
+
+  const min = Number(el.min || 0);
+  const max = Number(el.max || 100);
+  const value = Number(el.value || 0);
+  const percent = ((value - min) / (max - min)) * 100;
+  const safePercent = Math.max(0, Math.min(100, percent));
+
+  el.style.background =
+    direction === "vertical"
+      ? `linear-gradient(to top, ${fillColor} 0%, ${fillColor} ${safePercent}%, ${restColor} ${safePercent}%, ${restColor} 100%)`
+      : `linear-gradient(to right, ${fillColor} 0%, ${fillColor} ${safePercent}%, ${restColor} ${safePercent}%, ${restColor} 100%)`;
+}
+
+function isProgressBarInteractive() {
+  const bar = document.getElementById("progress-bar");
+  const container = document.getElementById("progress-bar-container");
+
+  if (!bar) return false;
+
+  return (
+    bar.matches(":hover") ||
+    bar.matches(":active") ||
+    bar.matches(":focus") ||
+    document.activeElement === bar ||
+    (container && container.matches(":hover"))
+  );
+}
+
+let lastProgressPercent = null;
+let lastProgressInteractive = null;
+
+function paintProgressBar(force = false) {
+  const bar = playerRefs.progressBar || document.getElementById("progress-bar");
+  if (!bar) return;
+
+  const min = Number(bar.min || 0);
+  const max = Number(bar.max || 100);
+  const value = Number(bar.value || 0);
+  const percent = Math.max(0, Math.min(100, ((value - min) / (max - min)) * 100));
+  const interactive = isProgressBarInteractive();
+
+  if (!force &&
+      percent === lastProgressPercent &&
+      interactive === lastProgressInteractive) {
+    return;
+  }
+
+  lastProgressPercent = percent;
+  lastProgressInteractive = interactive;
+
+  setRangeFill(
+    bar,
+    "horizontal",
+    interactive ? "#1DB954" : "#ffffff",
+    "#4d4d4d"
+  );
+}
+
+function repaintProgressBarSoon() {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      paintProgressBar();
+    });
+  });
+}
+
+function paintVolumeBar() {
+  setRangeFill(document.getElementById("volumeSlider"), "vertical", "#1DB954", "#4d4d4d");
+}
+
+function getVolumeIconByLevel(level) {
+  if (level <= 0) return ASSETS.volMute;
+  if (level <= 33) return ASSETS.volLow;
+  if (level <= 66) return ASSETS.volMedium;
+  return ASSETS.volHigh;
+}
+
+function updateVolumeIcon(level = currentVolume) {
+  const icon = document.getElementById("volumeIcon");
+  if (!icon) return;
+
+  icon.src = getVolumeIconByLevel(level);
+  icon.alt = level <= 0 ? "Muted" : "Volume";
+}
+
+function changePlaylist(newPlaylist) {
+  activePlaylist = newPlaylist;
+  activePlaylist.currentSongIndex = 0;
+
+  updateUI(activePlaylist);
+
+  // ensure audio exists before trying to access it
+  const audio = getAudioElement();
+  const song = activePlaylist.getCurrentSong();
+
+  if (song) {
+    audio.src = song.audioLink;
+
+    const progressBar = document.getElementById("progress-bar");
+    const currentTimeEl = document.getElementById("current-time");
+    const durationEl = document.getElementById("duration");
+
+    if (progressBar) {
+      progressBar.value = 0;
+      paintProgressBar();
+    }
+
+    if (currentTimeEl) currentTimeEl.textContent = "0:00";
+    if (durationEl) durationEl.textContent = "0:00";
+
+    audio.play().catch(e => console.log("Autoplay blocked or waiting for interaction", e));
+    updatePlayPauseIcon(true);
+  }
+}
+window.changePlaylist = changePlaylist;
+
+function updateUI(playlist) {
+  const currentSong = playlist.getCurrentSong();
+  if (!currentSong || !playerRefs.player) return;
+
+  playerRefs.cover.src = currentSong.getCoverLink();
+  playerRefs.title.textContent = currentSong.getTitle();
+  playerRefs.artist.textContent = currentSong.getArtist();
+}
+window.updateUI = updateUI;
+
+// helpers
+function getAudioElement() {
+  if (!audioInstance) {
+    audioInstance = document.createElement("audio");
+    audioInstance.id = "audio";
+    document.body.appendChild(audioInstance);
+  }
+  return audioInstance;
+}
+
+function updatePlayPauseIcon(isPlaying) {
+  const btn = document.getElementById("playPauseButton");
+  if (btn) {
+    btn.src = isPlaying ? ASSETS.btnPause : ASSETS.btnPlay;
+  }
+}
+
+function formatTime(seconds) {
+  if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
+
+  const hrs = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+
+  return hrs > 0
+    ? `${hrs}:${String(mins).padStart(2, "0")}:${secs}`
+    : `${mins}:${secs}`;
+}
+
+// setup
+function setupMusicPlayer() {
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow) {
+    console.warn("game_window element not found. Player will not be attached.");
+    return;
+  }
+
+  // prevent duplicate players
+  if (document.getElementById("player")) return;
+
+  const defaultSongs = [
+    ["Jesus Walks", "Kanye West", "https://i.discogs.com/0cuV2JitAM7XPXkgYP7syTign62tuxrden2HRiRb0wo/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExNDc0/MjQtMTUzMjQwMjMz/Ni03NjUzLnBuZw.jpeg", "https://file.garden/aNtAfG887DiA_7lO/2028AOC/Jesus%20Walks%20-%20Kanye%20West.ogg"],
+    ["I'm Better", "Kendrick Lamar", "https://images.genius.com/43c7fc30a6d9fd31b239bb47cf1533f4.1000x1000x1.png", "https://file.garden/aNtAfG887DiA_7lO/2028AOC/I'm%20Better%20-%20Kendrick%20Lamar.mp3"],
+    ["Soldier of Love", "Sade", "https://i.discogs.com/vntsNIVveCmaocTGQP6hXo18bg4KuyTjB1jvOcCx83g/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxMjc2/MzMtMTI2NTkwOTA0/OC5qcGVn.jpeg", "https://file.garden/aNtAfG887DiA_7lO/2028AOC/Soldier%20of%20Love%20-%20Sade.ogg"],
+    ["The Room Where It Happens", "Original Broadway Cast of “Hamilton”", "https://images.genius.com/3d49fcb34aa21fccd06f2b3c818146fd.1000x1000x1.png", "https://file.garden/aNtAfG887DiA_7lO/2028AOC/The%20Room%20Where%20It%20Happens%20-%20Leslie%20Odom%20Jr..ogg"],
+    ["LO QUE LE PASÓ A HAWAii", "Bad Bunny", "https://images.genius.com/66f08db4c1d9d323ab441ab6c04a034a.1000x1000x1.png", "https://file.garden/aNtAfG887DiA_7lO/2028AOC/LO%20QUE%20LE%20PAS%C3%93%20A%20HAWAii%20-%20Bad%20Bunny.ogg"],
+    ["Kaleidoscope", "Chappell Roan", "https://i.scdn.co/image/ab67616d0000b27300ba233051308498954daf7c", "https://file.garden/aNtAfG887DiA_7lO/2028AOC/Kaleidoscope%20-%20Chappell%20Roan.ogg"]
+  ];
+
+  if (activePlaylist.songs.length === 0) {
+    defaultSongs.forEach(data => activePlaylist.addSong(new Song(...data)));
+  }
+
+  // inject CSS
+  if (!document.getElementById("spotify-player-style")) {
+    const style = document.createElement("style");
+    style.id = "spotify-player-style";
+    style.textContent = `
+      #player, #player * { box-sizing: border-box; }
+
+      #player {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        flex-direction: row;
+        height: 191px;
+        padding: 0 .5em;
+        color: white;
+        font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background:
+          radial-gradient(circle at 12% 14%, rgba(29, 185, 84, 0.18), transparent 32%),
+          linear-gradient(180deg, #1d1d1d 0%, #121212 100%);
+        border-radius: 14px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+      }
+
+      #display-box {
+        display: flex;
+        align-items: center;
+        width: 50%;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      #cover {
+        width: 176px;
+        height: 176px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.28);
+      }
+
+      #info-container {
+	  display: flex;
+	  height: 178px;
+	  width: 127px;
+	  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+	  border: 1px solid rgba(255,255,255,0.05);
+	  border-radius: 12px;
+	  color: white;
+	  backdrop-filter: blur(4px);
+	  min-width: 0;
+	}
+
+	#song-info {
+	  width: 100%;
+	  min-width: 0;
+	  overflow: hidden;
+	  padding: 10px 8px 8px;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	}
+
+	#now-playing-label {
+	  font-size: 10px;
+	  font-weight: 700;
+	  letter-spacing: 0.14em;
+	  color: #1DB954;
+	  opacity: 0.95;
+	  margin-bottom: 8px;
+	}
+
+	#title {
+	  width: 100%;
+	  min-width: 0;
+	  margin: 0 0 6px 0;
+	  font-size: 15px;
+	  font-weight: 700;
+	  line-height: 1.18;
+	  color: #fff;
+	  display: block;
+	  white-space: normal;
+	  overflow: hidden;
+	  overflow-wrap: anywhere;
+	  word-break: break-word;
+	  hyphens: auto;
+	  max-height: 72px;
+	}
+
+	#artist {
+	  width: 100%;
+	  min-width: 0;
+	  margin: 0;
+	  font-size: 11.5px;
+	  line-height: 1.32;
+	  color: #b3b3b3;
+	  display: block;
+	  white-space: normal;
+	  overflow: hidden;
+	  overflow-wrap: anywhere;
+	  word-break: break-word;
+	  max-height: 48px;
+	}
+
+      #controls-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0;
+        width: 100%;
+        min-width: 0;
+      }
+
+      #controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+      }
+
+	#controls img {
+	  cursor: pointer;
+	  transition: transform 0.12s ease, opacity 0.12s ease, filter 0.12s ease;
+	  user-select: none;
+	  display: block;
+	}
+
+	#controls img:hover {
+	  transform: scale(1.08);
+	}
+
+	#controls img:active {
+	  transform: scale(0.95);
+	}
+
+	#prevButton,
+	#nextButton {
+	  width: 24px;
+	  height: 24px;
+	  opacity: 0.72;
+	}
+
+	#prevButton:hover,
+	#nextButton:hover,
+	#prevButton:focus-visible,
+	#nextButton:focus-visible {
+	  opacity: 1;
+	}
+
+	#playPauseButton {
+	  width: 48px;
+	  height: 48px;
+	  opacity: 1;
+	  filter: drop-shadow(0 4px 10px rgba(29,185,84,0.25));
+	}
+
+	#volumeIcon {
+	  width: 16px;
+	  height: 16px;
+	  opacity: 0.72;
+	  display: block;
+	  cursor: pointer;
+	  user-select: none;
+	  transition: transform 0.12s ease, opacity 0.12s ease, filter 0.12s ease;
+	}
+
+	#volumeIcon:hover,
+	#volumeIcon:focus-visible {
+	  transform: scale(1.08);
+	  opacity: 1;
+	}
+
+	#volumeIcon:active {
+	  transform: scale(0.95);
+	}
+	  
+	#progress-bar-container {
+	  width: 80%;
+	  margin-top: 18px;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  gap: 8px;
+	  padding: 8px 0;
+	}
+	
+	#current-time,
+	#duration {
+	  font-size: 11px;
+	  line-height: 1;
+	  color: #b3b3b3;
+	  min-width: 36px;
+	  text-align: center;
+	  font-variant-numeric: tabular-nums;
+	  user-select: none;
+	}
+
+	#progress-bar,
+	#volumeSlider {
+	  appearance: none;
+	  -webkit-appearance: none;
+	  border: none;
+	  outline: none;
+	  background: #4d4d4d;
+	}
+
+	#progress-bar {
+	  flex: 1;
+	  width: auto;
+	  height: 5px;
+	  border-radius: 999px;
+	  cursor: pointer;
+	}
+
+	#progress-bar::-webkit-slider-runnable-track {
+	  height: 5px;
+	  background: transparent;
+	  border-radius: 999px;
+	}
+
+	#progress-bar::-webkit-slider-thumb {
+	  -webkit-appearance: none;
+	  appearance: none;
+	  width: 12px;
+	  height: 12px;
+	  border-radius: 50%;
+	  background: #fff;
+	  border: none;
+	  margin-top: -4px;
+	  box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+	  opacity: 0;
+	  transition: opacity 0.12s ease;
+	}
+
+	#progress-bar-container:hover #progress-bar::-webkit-slider-thumb,
+	#progress-bar:hover::-webkit-slider-thumb,
+	#progress-bar:active::-webkit-slider-thumb,
+	#progress-bar:focus-visible::-webkit-slider-thumb {
+	  opacity: 1;
+	}
+
+	#progress-bar::-moz-range-track {
+	  height: 5px;
+	  background: transparent;
+	  border: none;
+	  border-radius: 999px;
+	}
+
+	#progress-bar::-moz-range-thumb {
+	  width: 12px;
+	  height: 12px;
+	  border-radius: 50%;
+	  background: #fff;
+	  border: none;
+	  box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+	  opacity: 0;
+	  transition: opacity 0.12s ease;
+	}
+
+	#progress-bar-container:hover #progress-bar::-moz-range-thumb,
+	#progress-bar:hover::-moz-range-thumb,
+	#progress-bar:active::-moz-range-thumb,
+	#progress-bar:focus-visible::-moz-range-thumb {
+	  opacity: 1;
+	}
+
+      #volume-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        padding-right: 10px;
+      }
+      
+	#volume-container img {
+	  width: 16px;
+	  height: 16px;
+	  opacity: 0.9;
+	  display: block;
+	}
+
+      .vol-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 126px;
+        margin-top: 8px;
+        padding: 10px 0;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.05);
+        border-radius: 999px;
+      }
+
+      #volumeSlider {
+	  --vol-track-size: 8px;
+	  --vol-thumb-size: 12px;
+
+	  width: var(--vol-track-size);
+	  height: 100%;
+	  writing-mode: vertical-lr;
+	  direction: rtl;
+	  border-radius: 999px;
+	  cursor: pointer;
+	  display: block;
+	}
+
+	#volumeSlider::-webkit-slider-runnable-track {
+	  width: var(--vol-track-size);
+	  background: transparent;
+	  border-radius: 999px;
+	}
+
+	#volumeSlider::-webkit-slider-thumb {
+	  -webkit-appearance: none;
+	  appearance: none;
+	  width: var(--vol-thumb-size);
+	  height: var(--vol-thumb-size);
+	  border-radius: 50%;
+	  background: #fff;
+	  border: none;
+	  box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+	  margin-left: calc((var(--vol-track-size) - var(--vol-thumb-size)) / 2);
+	}
+
+	#volumeSlider::-moz-range-track {
+	  width: var(--vol-track-size);
+	  background: transparent;
+	  border: none;
+	  border-radius: 999px;
+	}
+
+	#volumeSlider::-moz-range-thumb {
+	  width: var(--vol-thumb-size);
+	  height: var(--vol-thumb-size);
+	  border-radius: 50%;
+	  background: #fff;
+	  border: none;
+	}
+
+      #volume-display {
+        font-weight: bold;
+        display: none;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // create HTML
+  const playerContainer = document.createElement("div");
+  playerContainer.id = "player";
+  playerContainer.innerHTML = `
+    <div id="display-box">
+      <img id="cover" src="" alt="Album cover">
+      <div id="info-container">
+        <div id="song-info">
+          <span id="now-playing-label">NOW PLAYING</span>
+          <h3 id="title"></h3>
+          <p id="artist"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="controls-container">
+      <div id="controls">
+        <img id="prevButton" src="${ASSETS.btnPrev}" alt="Previous">
+        <img id="playPauseButton" src="${ASSETS.btnPlay}" alt="Play/Pause">
+        <img id="nextButton" src="${ASSETS.btnNext}" alt="Next">
+      </div>
+
+      <div id="progress-bar-container">
+	    <span id="current-time">0:00</span>
+	    <input type="range" id="progress-bar" value="0" max="100" step="0.1">
+	    <span id="duration">0:00</span>
+	  </div>
+    </div>
+
+    <div id="volume-container">
+      <img id="volumeIcon" src="${getVolumeIconByLevel(currentVolume)}" alt="Volume">
+      <div class="vol-wrapper">
+        <input type="range" id="volumeSlider" min="0" max="100" step="0.1" value="${currentVolume}" orient="vertical">
+      </div>
+      <span id="volume-display">${currentVolume}</span>
+    </div>
+  `;
+
+  gameWindow.insertAdjacentElement("afterend", playerContainer);
+  
+	playerRefs.player = playerContainer;
+	playerRefs.cover = playerContainer.querySelector("#cover");
+	playerRefs.title = playerContainer.querySelector("#title");
+	playerRefs.artist = playerContainer.querySelector("#artist");
+	playerRefs.playPauseBtn = playerContainer.querySelector("#playPauseButton");
+	playerRefs.prevBtn = playerContainer.querySelector("#prevButton");
+	playerRefs.nextBtn = playerContainer.querySelector("#nextButton");
+	playerRefs.progressBar = playerContainer.querySelector("#progress-bar");
+	playerRefs.progressBarContainer = playerContainer.querySelector("#progress-bar-container");
+	playerRefs.currentTimeEl = playerContainer.querySelector("#current-time");
+	playerRefs.durationEl = playerContainer.querySelector("#duration");
+	playerRefs.volumeSlider = playerContainer.querySelector("#volumeSlider");
+	playerRefs.volumeIcon = playerContainer.querySelector("#volumeIcon");
+	playerRefs.volumeDisplay = playerContainer.querySelector("#volume-display");
+
+  // set up audio & logic
+  const audio = getAudioElement();
+  const startSong = activePlaylist.getCurrentSong();
+  if (startSong) audio.src = startSong.audioLink;
+  audio.volume = currentVolume / 100;
+
+  const playPauseBtn = document.getElementById("playPauseButton");
+  const prevBtn = document.getElementById("prevButton");
+  const nextBtn = document.getElementById("nextButton");
+  const progressBar = document.getElementById("progress-bar");
+  const progressBarContainer = document.getElementById("progress-bar-container");
+  const currentTimeEl = document.getElementById("current-time");
+  const durationEl = document.getElementById("duration");
+  const volumeSlider = document.getElementById("volumeSlider");
+  const volDisplay = document.getElementById("volume-display");  
+  const volumeIcon = document.getElementById("volumeIcon");
+  
+  ["pointerenter", "pointerleave", "focus", "blur"].forEach(evt => {
+	  progressBar.addEventListener(evt, repaintProgressBarSoon);
+	});
+
+	if (progressBarContainer) {
+	  ["pointerenter", "pointerleave"].forEach(evt => {
+		progressBarContainer.addEventListener(evt, repaintProgressBarSoon);
+	  });
+	}
+
+	["pointerup", "mouseup", "touchend", "touchcancel"].forEach(evt => {
+	  document.addEventListener(evt, repaintProgressBarSoon);
+	});
+
+  volumeSlider.value = currentVolume;
+  volDisplay.textContent = currentVolume;
+  paintProgressBar();
+  paintVolumeBar();
+  updateVolumeIcon(currentVolume);
+  
+
+  // play/pause
+  playPauseBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play()
+        .then(() => updatePlayPauseIcon(true))
+        .catch(() => updatePlayPauseIcon(false));
+    } else {
+      audio.pause();
+      updatePlayPauseIcon(false);
+    }
+  });
+  
+  // next/prev
+  const playSongAtIndex = () => {
+	  const song = activePlaylist.getCurrentSong();
+	  if (!song) return;
+
+	  updateUI(activePlaylist);
+	  audio.src = song.audioLink;
+	  progressBar.value = 0;
+	  paintProgressBar();
+	  currentTimeEl.textContent = "0:00";
+	  durationEl.textContent = "0:00";
+
+	  audio.play()
+		.then(() => updatePlayPauseIcon(true))
+		.catch(() => updatePlayPauseIcon(false));
+	};
+
+  nextBtn.addEventListener("click", () => {
+    activePlaylist.playNext();
+    playSongAtIndex();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    activePlaylist.playPrevious();
+    playSongAtIndex();
+  });
+
+ // progress bar
+  audio.addEventListener("timeupdate", () => {
+	  const currentText = formatTime(audio.currentTime);
+	  if (playerRefs.currentTimeEl && playerRefs.currentTimeEl.textContent !== currentText) {
+		playerRefs.currentTimeEl.textContent = currentText;
+	  }
+
+	  if (Number.isFinite(audio.duration)) {
+		const durationText = formatTime(audio.duration);
+		if (playerRefs.durationEl && playerRefs.durationEl.textContent !== durationText) {
+		  playerRefs.durationEl.textContent = durationText;
+		}
+
+		const progress = (audio.currentTime / audio.duration) * 100;
+		if (playerRefs.progressBar) playerRefs.progressBar.value = progress;
+	  } else {
+		if (playerRefs.durationEl && playerRefs.durationEl.textContent !== "0:00") {
+		  playerRefs.durationEl.textContent = "0:00";
+		}
+		if (playerRefs.progressBar) playerRefs.progressBar.value = 0;
+	  }
+
+	  paintProgressBar();
+	});
+
+	audio.addEventListener("loadedmetadata", () => {
+	  currentTimeEl.textContent = formatTime(audio.currentTime || 0);
+	  durationEl.textContent = formatTime(audio.duration);
+	  paintProgressBar();
+	});
+
+	audio.addEventListener("durationchange", () => {
+	  durationEl.textContent = formatTime(audio.duration);
+	});
+
+  audio.addEventListener("play", () => updatePlayPauseIcon(true));
+  audio.addEventListener("pause", () => updatePlayPauseIcon(false));
+
+  audio.addEventListener("ended", () => {
+    activePlaylist.playNext();
+    playSongAtIndex();
+  });
+
+  progressBar.addEventListener("input", () => {
+	  if (Number.isFinite(audio.duration)) {
+		audio.currentTime = (progressBar.value / 100) * audio.duration;
+		paintProgressBar();
+	  }
+	});
+ 
+  // volume
+  let lastNonZeroVolume = currentVolume > 0 ? currentVolume : 50;
+
+	volumeIcon.addEventListener("click", () => {
+	  if (currentVolume === 0) {
+		currentVolume = lastNonZeroVolume;
+	  } else {
+		lastNonZeroVolume = currentVolume;
+		currentVolume = 0;
+	  }
+
+	  volumeSlider.value = currentVolume;
+	  volDisplay.textContent = currentVolume;
+	  audio.volume = currentVolume / 100;
+	  paintVolumeBar();
+	  updateVolumeIcon(currentVolume);
+	});
+
+  volumeSlider.addEventListener("input", (e) => {
+	  currentVolume = parseFloat(e.target.value);
+	  volDisplay.textContent = Math.round(currentVolume);
+	  audio.volume = currentVolume / 100;
+	  paintVolumeBar();
+	  updateVolumeIcon(currentVolume);
+	});
+
+  // initial play
+  updateUI(activePlaylist);
+
+  audio.play()
+    .then(() => updatePlayPauseIcon(true))
+    .catch(() => updatePlayPauseIcon(false));
+}
+setupMusicPlayer();
+
+// Psst: this is for replacing the site_description with this custom modal.
+// taken from 2012LBM
+(() => {
+    const CONFIG = {
+        titleColor: '#ffffff',
+        imageHeight: '125px',
+        imageSrc: 'https://file.garden/aNtAfG887DiA_7lO/2028AOC/american_flag.png',
+        margin: '-20px',
+        widthCalc: 'calc(100% - 40px)'
+    };
+
+    const inner = document.getElementById('inner_window_1');
+    if (!inner || inner.children.length < 2) return;
+    const [headingEl, contentEl] = inner.children;
+    const gameStart = document.getElementById('game_start');
+    const gameWindow = document.getElementById('game_window');
+
+    // temporary auto resize
+    if (gameWindow) gameWindow.style.height = 'auto';
+
+    headingEl.innerHTML = `<h3 style="color: #B4E2E7; letter-spacing: 2px">The Wheel Turns</h3>`;
+    Object.assign(contentEl.style, { marginLeft: CONFIG.margin, width: CONFIG.widthCalc });
+    contentEl.innerHTML = generatePrologueHTML(CONFIG);
+
+    if (gameStart) {
+        gameStart.innerHTML = '<strong>Yeah... yeah. I think I’m ready.</strong>';
+		
+		gameStart.addEventListener('click', () => { 
+            if (gameWindow) gameWindow.style.removeProperty('height'); 
+        }, { once: true });
+    }
+
+    function generatePrologueHTML({ titleColor, imageHeight, imageSrc }) {
+        return `
+	  <div style=\"align-items: center; border-radius: .3em 0 0 .3em; display: flex; height: ${imageHeight}; justify-content: center; overflow: hidden;\">
+        <img src=\"${imageSrc}\" alt=\"American flag\" />
+      </div>
+
+    <p>There is a dream of America, one told countless times, in every format possible since its creation.</p>
+    <p>It is an id, a concept told from one generation to the next, one that transcends even beyond the physical borders of Nation and Empire. 
+    It is a story with an undying passion for not the few that 'found' this new continent, but the many which populate and cloud its arteries, 
+    pumping new blood into the heart and soul of a metaphysical utopia. Its preachers are many; its fanatics disciplined. It is a tale that, 
+    despite the rot eating away upon its surface, continues to be told and believed in. It lives in the gasps of affirmation of the worker, the 
+    sweat of the newcomers, and the hopes and wishes of one <b>Alexandria Ocasio-Cortez.</b></p>
+    <p>So we ask you, for just one moment, to look beyond this New Colossus, and into the vast abyss that surrounds it.</p>
+    <p>The hand of destiny reaches out. It is calling. Calling. Still calling.</p>
+    <p>Do you pick up?</p>
+    `;
+    }
+})();
+
+// tooltips
+tooltipList = [
+
+  { searchString: "It’s closer than it ought to be", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image49.png> <div class=\"annotation\">325 - 213. You had hoped for better…</div>" },
+  { searchString: "The man in the White House", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image65.png> <div class=\"annotation\">That prick just won’t shut up.</div>" },
+  { searchString: "NYT", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image43.jpg> <div class=\"annotation\">The New York Times. Protecting the American Empire One Article At A Time.</div>" },
+  { searchString: "Gaza City", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image21.jpg> <div class=\"annotation\">A million bodies sacrificed on the sacred altar of imperialism.</div>" },
+  { searchString: "End Times", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image28.png> <div class=\"annotation\">Hell has frozen over when they’re backing you.</div>" },
+  { searchString: "Hillary Rodham Clinton", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image1.jpg> <div class=\"annotation\">Punched a wall when you won.</div>" },
+  { searchString: "Richard Milhouse Nixon", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image25.jpg> <div class=\"annotation\">America’s perennial obsession. The mirror they refuse to look at.</div>" },
+
+  { searchString: "the American border", explanationText: "<div class=\"annotation\">“Tú disparas, nosotros devolvemos el disparo.”</div>" },
+
+  { searchString: "Altman", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image33.jpg> <div class=\"annotation\">CEO of OpenAI. Made Theranos look like a joke.</div>" },
+  { searchString: "Tesla", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image16.jpg> <div class=\"annotation\">Tesla Motors. An electric car company named after a dorky Reddit obsession. Never profitable.</div>" },
+  { searchString: "FDR", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image58.jpg> <div class=\"annotation\">The American Messiah.</div>" },
+
+  { searchString: "the Mayor", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image47.jpg> <div class=\"annotation\"></div>" },
+
+  { searchString: "Greg Abbott", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image50.jpg> <div class=\"annotation\">Governor and de-facto King of Texas. Smug bastard would collapse the whole country to own a lib.</div>" },
+  { searchString: "Abbott", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image50.jpg> <div class=\"annotation\">Governor and de-facto King of Texas. Smug bastard would collapse the whole country to own a lib.</div>" },
+
+  { searchString: "Trump", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image5.jpg> <div class=\"annotation\">The modern day Alaric is a fat, orange, dying paedophile.</div>" },
+  { searchString: "Vance", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image42.jpg> <div class=\"annotation\">Weird Guy. Don’t ask him about his couch.</div>" },
+  { searchString: "Jon", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image23.jpg> <div class=\"annotation\">Vice President. Charmingly empty. Fig leaf to Obamaworld.</div>" },
+
+  { searchString: "Obama", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image8.jpg> <div class=\"annotation\">Wishes he was still here.</div>" },
+  { searchString: "Froman", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image56.jpg> <div class=\"annotation\">Secretary of State. Lizard eyes. The perfect killer.</div>" },
+  { searchString: "Rhodes", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image14.jpg> <div class=\"annotation\">National Security Advisor. As it turns out, the Pod Saved America.</div>" },
+
+  { searchString: "Ro Khanna", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image36.jpg> <div class=\"annotation\">‘Progressive capitalist’ — whatever that means. Obama's bastard child. Both of them might think he should be where you are.</div>" },
+
+  { searchString: "Schumer", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image53.jpg> <div class=\"annotation\">AIPAC Democrat. In the thrall of a Reagan Republican couple in his head.</div>" },
+  { searchString: "Jeffries", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image41.jpg> <div class=\"annotation\">Auditioning for his real job as a consultant: doing nothing.</div>" },
+  { searchString: "Sheinbaum", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image32.jpg> <div class=\"annotation\">Mexico's President. Leftist darling. Dutifully bulldozing a millenia old native culture, somewhere.</div>" },
+
+  { searchString: "Krugman", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image61.jpg> <div class=\"annotation\">US Treasury Secretary. Scruffy nerd in tweed. 'New Keynesian'.</div>" },
+  { searchString: "The Blob", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image18.jpg> <div class=\"annotation\">I AM THE NEXUS OF A WORLD VIRUS. MY TENDRILS CHOKE THE SKY. THEY BURROW INTO THE EARTH AND DRINK DEEPLY.</div>" },
+  { searchString: "Miller", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image63.jpg> <div class=\"annotation\">Former Homeland Security Advisor. Combining all of the reptilian traits of our Clintonite overlords with unabashed fascism.</div>" },
+
+  { searchString: "ICE", explanationText: "<div class=\"annotation\">'They just kidnap you [...] If I'm brown, if I'm Hispanic, they just come and catch you and take you.'</div>" },
+  { searchString: "Putin", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image54.jpg> <div class=\"annotation\">President of the Russian Federation. Hand wedged firmly on the handbrake of history.</div>" },
+  { searchString: "Bernie", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image35.jpg> <div class=\"annotation\">“A society grows great when old men plant trees in whose shade they shall never sit.”</div>" }
+
+]
+
+// achievements
+campaignTrail_temp.achievements = {
+    "American Thermidor": {
+        "image": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/thermidor.jpg",
+        "description": "Carry it as far as you can. ",
+        "cannotBeCheated": true
+    },
+    "American Brumaire": {
+        "image": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/brumaire.jpg",
+        "description": "Succumb to the call of destiny.",
+        "cannotBeCheated": true
+    },
+    "American Kerensky": {
+        "image": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/kerensky.jpg",
+        "description": "Follow in stumbling footsteps.",
+        "cannotBeCheated": true
+    },
+    "The Second Coming": {
+        "image": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/liberal_killer.png",
+        "description": "Finish what He started.",
+        "cannotBeCheated": true
+    },
+    "The Seventh Seal": {
+        "image": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/seventh_seal.jpg",
+        "description": "Break its fetters. Let it swallow the world.",
+        "cannotBeCheated": true
+    },
+    "The Great November Socialist Revolution": {
+        "image": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/oktyaber.jpg",
+        "description": "Complete the dream.",
+        "cannotBeCheated": true
+    }
+}
+
+// A collapsible Twitter-style credits panel
+;(() => {
+  const DEFAULT_AVATAR = "https://file.garden/aNtAfG887DiA_7lO/2028AOC/aoc_avatar_twitter.jpg";
+
+  campaignTrail_temp.creditsData = {
+    writers: [
+      {
+        name: "Weygand",
+        handle: "@weygand",
+        bio: "Writer. Paulden's Strongest Paladin",
+        avatar: "https://file.garden/aNtAfG887DiA_7lO/2028AOC/weygard.png",
+        verified: true
+      },
+      {
+        name: "Nachtingale",
+        handle: "@nachtingale",
+        bio: "Writer. Wumao Racialist",
+        avatar: "https://file.garden/aNtAfG887DiA_7lO/2028AOC/mao.jpg",
+        verified: true
+      }
+    ],
+    coder: [
+      {
+        name: "StrawberryMaster",
+        handle: "@strawbmast",
+        bio: "Coder. Why am I here",
+        avatar: "https://file.garden/aNtAfG887DiA_7lO/sm4.webp",
+        verified: false
+      }
+    ],
+    thanks: [
+      {
+        name: "Alexandria Ocasio-Cortez",
+        handle: "@AOC",
+        bio: "Special thanks!",
+        avatar: DEFAULT_AVATAR,
+        verified: true
+      },
+      {
+        name: "Mojo Dojo Casa House",
+        handle: "@mojodojo",
+        bio: "And its many residents.",
+        avatar: "https://file.garden/aNtAfG887DiA_7lO/2028AOC/mojo_dojo_casa_house.png",
+        verified: false
+      }
+    ]
+  };
+
+  campaignTrail_temp.credits = "";
+
+  const state = {
+    expanded: false,
+    activeTab: "writers",
+    initialized: false,
+    stopped: false
+  };
+
+  let creditsObserver = null;
+
+  const styleEl = document.createElement("style");
+  styleEl.textContent = `
+    #credits.twitter-credits {
+      width: min(720px, 94vw);
+      margin: 24px auto;
+      padding: 0;
+      background: #000;
+      color: #e7e9ea;
+      border: 1px solid #2f3336;
+      border-radius: 16px;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      text-align: left;
+    }
+
+    #credits.twitter-credits .credits-collapsed {
+      padding: 18px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    #credits.twitter-credits .credits-collapsed-text {
+      min-width: 0;
+    }
+
+    #credits.twitter-credits .credits-collapsed-title {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #e7e9ea;
+      margin: 0 0 4px;
+    }
+
+    #credits.twitter-credits .credits-collapsed-subtitle {
+      font-size: 14px;
+      color: #71767b;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    #credits.twitter-credits .credits-open-btn,
+    #credits.twitter-credits .credits-close-btn,
+    #credits.twitter-credits .credits-follow {
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    #credits.twitter-credits .credits-open-btn {
+      flex: 0 0 auto;
+      border: none;
+      background: #eff3f4;
+      color: #0f1419;
+      padding: 10px 16px;
+    }
+
+    #credits.twitter-credits .credits-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid #2f3336;
+    }
+
+    #credits.twitter-credits .credits-topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    #credits.twitter-credits .credits-back {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 auto;
+      color: #e7e9ea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #credits.twitter-credits .credits-back svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      display: block;
+    }
+
+    #credits.twitter-credits .credits-heading-wrap {
+      min-width: 0;
+    }
+
+    #credits.twitter-credits .credits-heading {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #e7e9ea;
+      margin: 0;
+    }
+
+    #credits.twitter-credits .credits-close-btn {
+      flex: 0 0 auto;
+      border: 1px solid #536471;
+      background: transparent;
+      color: #eff3f4;
+      padding: 8px 14px;
+    }
+
+    #credits.twitter-credits .credits-tabs {
+      display: flex;
+      border-bottom: 1px solid #2f3336;
+    }
+
+    #credits.twitter-credits .credits-tab {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 16px 10px;
+      text-align: center;
+      color: #71767b;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.15s ease, color 0.15s ease;
+      user-select: none;
+    }
+
+    #credits.twitter-credits .credits-tab:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+      color: #e7e9ea;
+    }
+
+    #credits.twitter-credits .credits-tab.active {
+      color: #e7e9ea;
+      font-weight: 700;
+    }
+
+    #credits.twitter-credits .credits-tab.active::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 64px;
+      max-width: 70%;
+      height: 4px;
+      border-radius: 999px;
+      background: #1d9bf0;
+    }
+
+    #credits.twitter-credits .credits-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #credits.twitter-credits .credits-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #2f3336;
+    }
+
+    #credits.twitter-credits .credits-row:last-child {
+      border-bottom: none;
+    }
+
+    #credits.twitter-credits .credits-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      object-fit: cover;
+      flex: 0 0 auto;
+      background: #1d1f23;
+    }
+
+    #credits.twitter-credits .credits-body {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    #credits.twitter-credits .credits-row-top {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      flex-wrap: wrap;
+    }
+
+    #credits.twitter-credits .credits-name {
+      font-weight: 700;
+      color: #e7e9ea;
+      line-height: 1.2;
+    }
+
+    #credits.twitter-credits .credits-handle {
+      color: #71767b;
+      line-height: 1.2;
+    }
+
+    #credits.twitter-credits .credits-bio {
+      margin-top: 4px;
+      color: #e7e9ea;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    #credits.twitter-credits .credits-follow {
+      margin-left: auto;
+      flex: 0 0 auto;
+      border: 1px solid #536471;
+      background: transparent;
+      color: #eff3f4;
+      padding: 7px 14px;
+      cursor: default;
+    }
+
+    #credits.twitter-credits .verified-icon {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+      vertical-align: middle;
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 640px) {
+      #credits.twitter-credits .credits-collapsed {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      #credits.twitter-credits .credits-heading {
+        font-size: 24px;
+      }
+
+      #credits.twitter-credits .credits-tab {
+        font-size: 13px;
+        padding: 14px 6px;
+      }
+
+      #credits.twitter-credits .credits-follow,
+      #credits.twitter-credits .credits-close-btn,
+      #credits.twitter-credits .credits-open-btn {
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+    }
+  `;
+  document.head.appendChild(styleEl);
+
+  const BACK_ICON = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <g>
+        <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
+      </g>
+    </svg>
+  `;
+
+  const VERIFIED_ICON = `
+    <svg viewBox="0 0 24 24" aria-label="Verified account" role="img" class="verified-icon">
+      <g>
+        <path
+          clip-rule="evenodd"
+          fill="#829aab"
+          fill-rule="evenodd"
+          d="M12.05 2.056c-.568-.608-1.532-.608-2.1 0l-1.393 1.49c-.284.303-.685.47-1.1.455L5.42 3.932c-.832-.028-1.514.654-1.486 1.486l.069 2.039c.014.415-.152.816-.456 1.1l-1.49 1.392c-.608.568-.608 1.533 0 2.101l1.49 1.393c.304.284.47.684.456 1.1l-.07 2.038c-.027.832.655 1.514 1.487 1.486l2.038-.069c.415-.014.816.152 1.1.455l1.392 1.49c.569.609 1.533.609 2.102 0l1.393-1.49c.283-.303.684-.47 1.099-.455l2.038.069c.832.028 1.515-.654 1.486-1.486L18 14.542c-.015-.415.152-.815.455-1.099l1.49-1.393c.608-.568.608-1.533 0-2.101l-1.49-1.393c-.303-.283-.47-.684-.455-1.1l.068-2.038c.029-.832-.654-1.514-1.486-1.486l-2.038.07c-.415.013-.816-.153-1.1-.456zm-5.817 9.367l3.429 3.428 5.683-6.206-1.347-1.247-4.4 4.795-2.072-2.072z"
+        ></path>
+      </g>
+    </svg>
+  `;
+
+  const TAB_CONFIG = {
+    writers: "Verified Followers",
+    coder: "Followers",
+    thanks: "Following"
+  };
+
+  function disconnectCreditsObserver() {
+    if (creditsObserver) {
+      creditsObserver.disconnect();
+      creditsObserver = null;
+    }
+    state.stopped = true;
+  }
+
+  function shouldDisconnect(root) {
+    return !!root.querySelector(".inner_window_question");
+  }
+
+  function getEntries(tab) {
+    return campaignTrail_temp.creditsData?.[tab] || [];
+  }
+
+  function renderEntry(entry) {
+    return `
+      <div class="credits-row">
+        <img class="credits-avatar" src="${entry.avatar || DEFAULT_AVATAR}" alt="${entry.name}">
+        <div class="credits-body">
+          <div class="credits-row-top">
+            <span class="credits-name">${entry.name}</span>
+            ${entry.verified ? VERIFIED_ICON : ""}
+            <span class="credits-handle">${entry.handle || ""}</span>
+            <button class="credits-follow" type="button">Following</button>
+          </div>
+          <div class="credits-bio">${entry.bio || ""}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderCollapsed() {
+    return `
+      <div class="credits-collapsed">
+        <div class="credits-collapsed-text">
+          <div class="credits-collapsed-title">AOC Team</div>
+          <div class="credits-collapsed-subtitle">Click to read credits</div>
+        </div>
+        <button class="credits-open-btn" id="credits_open_btn" type="button">Read credits</button>
+      </div>
+    `;
+  }
+
+  function renderExpanded() {
+    return `
+      <div class="credits-topbar">
+        <div class="credits-topbar-left">
+          <div class="credits-back">${BACK_ICON}</div>
+          <div class="credits-heading-wrap">
+            <div class="credits-heading">AOC Team</div>
+          </div>
+        </div>
+        <button class="credits-close-btn" id="credits_close_btn" type="button">Collapse</button>
+      </div>
+
+      <div class="credits-tabs">
+        <div class="credits-tab ${state.activeTab === "writers" ? "active" : ""}" data-tab="writers">${TAB_CONFIG.writers}</div>
+        <div class="credits-tab ${state.activeTab === "coder" ? "active" : ""}" data-tab="coder">${TAB_CONFIG.coder}</div>
+        <div class="credits-tab ${state.activeTab === "thanks" ? "active" : ""}" data-tab="thanks">${TAB_CONFIG.thanks}</div>
+      </div>
+
+      <div class="credits-list">
+        ${getEntries(state.activeTab).map(renderEntry).join("")}
+      </div>
+    `;
+  }
+
+  function bindCreditsEvents(creditsEl) {
+    const openBtn = creditsEl.querySelector("#credits_open_btn");
+    if (openBtn) {
+      openBtn.addEventListener("click", () => {
+        state.expanded = true;
+        renderCreditsIntoElement(creditsEl);
+      });
+    }
+
+    const closeBtn = creditsEl.querySelector("#credits_close_btn");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        state.expanded = false;
+        renderCreditsIntoElement(creditsEl);
+      });
+    }
+
+    creditsEl.querySelectorAll(".credits-tab").forEach((tabEl) => {
+      tabEl.addEventListener("click", () => {
+        state.activeTab = tabEl.dataset.tab;
+        renderCreditsIntoElement(creditsEl);
+      });
+    });
+  }
+
+  function renderCreditsIntoElement(creditsEl) {
+    if (!creditsEl || state.stopped) return;
+    creditsEl.classList.add("twitter-credits");
+    creditsEl.innerHTML = state.expanded ? renderExpanded() : renderCollapsed();
+    bindCreditsEvents(creditsEl);
+  }
+
+  function tryRenderInside(root) {
+    if (!root || state.stopped) return false;
+    if (shouldDisconnect(root)) {
+      disconnectCreditsObserver();
+      return false;
+    }
+
+    const creditsEl = root.querySelector("#credits");
+    if (!creditsEl) return false;
+
+    renderCreditsIntoElement(creditsEl);
+    state.initialized = true;
+    return true;
+  }
+
+  function initCreditsTabs() {
+    const gameWindow = document.getElementById("game_window");
+    if (!gameWindow) return;
+
+    if (shouldDisconnect(gameWindow)) {
+      disconnectCreditsObserver();
+      return;
+    }
+
+    tryRenderInside(gameWindow);
+
+    creditsObserver = new MutationObserver(() => {
+      if (state.stopped) {
+        disconnectCreditsObserver();
+        return;
+      }
+
+      if (shouldDisconnect(gameWindow)) {
+        disconnectCreditsObserver();
+        return;
+      }
+
+      const creditsEl = gameWindow.querySelector("#credits");
+      if (!creditsEl) return;
+
+      const needsRender =
+        !creditsEl.classList.contains("twitter-credits") ||
+        !creditsEl.querySelector(".credits-collapsed, .credits-topbar");
+
+      if (needsRender) {
+        renderCreditsIntoElement(creditsEl);
+      }
+    });
+
+    creditsObserver.observe(gameWindow, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCreditsTabs);
+  } else {
+    initCreditsTabs();
+  }
+})();
+
+// This is a dropdown for all the opt-in
+// or opt-out features in the mod
+(function () {
+  'use strict';
+
+  const CONFIG = {
+    targetId: 'difficulty_level',
+    containerId: 'mod_options_container',
+    storageKey: 'aoc_custom_preferences',
+    features: [
+      {
+        id: 'dynamic_en',
+        text: "Dynamic election night",
+        desc: "Enables a fluid, realistic election night simulation instead of the in-game election night. Similar to that of The Political Process.",
+        flag: 'dynamicEN',
+        default: false
+      }
+    ]
+  };
+  
+  const modMenuStyles = new CSSStyleSheet();
+	 modMenuStyles.replaceSync(`
+            #${CONFIG.targetId} { display: inline-flex; flex-wrap: wrap; gap: 2.5em; align-items: flex-start; }
+            #${CONFIG.containerId} { display: flex; flex-direction: column; width: 260px; }
+            .mod-desc-box {
+                margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.35);
+                border: 1px solid #ccc; border-radius: 4px; min-height: 90px;
+                font-size: 0.95em; display: flex; flex-direction: column; justify-content: space-between;
+            }
+            .mod-desc-box p { margin: 0 0 10px 0; line-height: 1.3em; }
+            .mod-toggle-row { display: flex; align-items: center; padding-top: 5px; border-top: 1px solid rgba(0,0,0,0.1); }
+            .switch { position: relative; display: inline-block; width: 40px; height: 20px; margin-right: 10px; }
+            .switch input { opacity: 0; width: 0; height: 0; }
+            .inner_window_w_desc .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+            .inner_window_w_desc .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+            .inner_window_w_desc input:checked + .slider { background-color: #208604; }
+            .inner_window_w_desc input:checked + .slider:before { transform: translateX(20px); }
+            .status-label { font-weight: bold; font-size: 0.9em; text-transform: uppercase; }
+            .status-enabled { color: #0d3d00; }
+            .status-disabled { color: #2d2d2d; }
+    `);
+
+  if (!document.getElementById("mod_option_styles")) {
+	document.adoptedStyleSheets = [...document.adoptedStyleSheets, modMenuStyles];
+  }
+  
+  // storage
+  const getSavedSettings = () => {
+    try {
+      return JSON.parse(localStorage.getItem(CONFIG.storageKey)) || {};
+    } catch (e) { return {}; }
+  };
+
+  const saveSettingToStorage = (flag, value) => {
+    const current = getSavedSettings();
+    current[flag] = value;
+    localStorage.setItem(CONFIG.storageKey, JSON.stringify(current));
+  };
+
+
+  // helpers
+  const getFlag = (key, def) => {
+    window.campaignTrail_temp = window.campaignTrail_temp || {};
+    if (!window.campaignTrail_temp.hasOwnProperty(key)) window.campaignTrail_temp[key] = def;
+    return window.campaignTrail_temp[key];
+  };
+  const setFlag = (key, val) => window.campaignTrail_temp[key] = val;
+
+  const createEl = (tag, props = {}, children = []) => {
+    const el = document.createElement(tag);
+    Object.entries(props).forEach(([key, val]) => {
+      if (key === 'style') Object.assign(el.style, val);
+      else if (key === 'dataset') Object.assign(el.dataset, val);
+      else el[key] = val;
+    });
+    children.forEach(child => el.appendChild(child));
+    return el;
+  };
+
+  function manageModOptions() {
+    const target = document.getElementById(CONFIG.targetId);
+    if (!target || document.getElementById(CONFIG.containerId)) return;
+
+    const frag = document.createDocumentFragment();
+
+    let descText, toggleInput, statusText, dropdown;
+
+    const wrapper = createEl('div', { id: CONFIG.containerId }, [
+      createEl('h3', { textContent: 'Special mod settings:' }),
+      dropdown = createEl('select', {
+        style: { width: '100%', padding: '5px' }
+      }),
+      createEl('div', { className: 'mod-desc-box' }, [
+        descText = createEl('p', {}),
+        createEl('div', { className: 'mod-toggle-row' }, [
+          createEl('label', { className: 'switch' }, [
+            toggleInput = createEl('input', { type: 'checkbox' }),
+            createEl('span', { className: 'slider' })
+          ]),
+          statusText = createEl('span', { className: 'status-label' })
+        ])
+      ])
+    ]);
+
+    const savedSettings = getSavedSettings();
+
+    CONFIG.features.forEach((f, i) => {
+      dropdown.add(new Option(f.text, i));
+
+      let initialValue;
+      if (savedSettings.hasOwnProperty(f.flag)) {
+        initialValue = savedSettings[f.flag];
+      } else {
+        initialValue = f.default;
+      }
+
+      setFlag(f.flag, initialValue);
+    });
+
+    const updateState = () => {
+      const feat = CONFIG.features[dropdown.value];
+      descText.textContent = feat.desc;
+
+      const isOn = getFlag(feat.flag, feat.default);
+      toggleInput.checked = isOn;
+      toggleInput.dataset.flag = feat.flag;
+
+      statusText.textContent = isOn ? "Enabled" : "Disabled";
+      statusText.className = `status-label ${isOn ? 'status-enabled' : 'status-disabled'}`;
+    };
+
+    dropdown.addEventListener('change', updateState);
+
+    toggleInput.addEventListener('change', (e) => {
+      const flag = e.target.dataset.flag;
+      const isChecked = e.target.checked;
+
+      setFlag(flag, isChecked);
+      saveSettingToStorage(flag, isChecked);
+
+      updateState();
+    });
+
+    updateState();
+    frag.appendChild(wrapper);
+    target.appendChild(frag);
+  }
+
+  window.manageModOptions = manageModOptions;
+})();
+
+// This is a catch-all mutation observer so that
+// we keep one having them all run at once
+(function () {
+  'use strict';
+
+  if (window.glorble) {
+    window.glorble.disconnect();
+  }
+
+  window.glorbleTasks = [];
+
+  const initialTasks = () => {
+	if (document.getElementById("difficulty_level")) {
+        if (typeof window.manageModOptions === 'function') window.manageModOptions();             // mod settings
+	}
+	
+	if (document.querySelector(".inner_window_question")) {
+        return true; // removes this task from the list
+    }
+    return false;
+	
+  };
+  
+  window.glorbleTasks.push(initialTasks);
+
+    let scheduled = false;
+
+    const runTasks = () => {
+        scheduled = false;
+        const tasks = window.glorbleTasks;
+
+        if (tasks.length === 0) {
+            if (window.glorble) window.glorble.disconnect();
+            return;
+        }
+
+        for (let i = tasks.length - 1; i >= 0; i--) {
+            try {
+                if (tasks[i]() === true) tasks.splice(i, 1);
+            } catch (e) {
+                console.error("glorble task failed:", e);
+            }
+        }
+
+        if (tasks.length === 0 && window.glorble) {
+            window.glorble.disconnect();
+        }
+    };
+
+    const handleMutations = () => {
+        if (scheduled || window.glorbleTasks.length === 0) return;
+        scheduled = true;
+        requestAnimationFrame(runTasks);
+    };
+
+    const targetNode = document.getElementById("game_window");
+
+    if (targetNode) {
+        window.glorble = new MutationObserver(handleMutations);
+        window.glorble.observe(targetNode, { childList: true, subtree: true });
+        handleMutations();
+		//console.log("glorble...");
+    } else {
+    console.warn("Zoinks! Glorble could not find game_window.");
+    }
+})();
