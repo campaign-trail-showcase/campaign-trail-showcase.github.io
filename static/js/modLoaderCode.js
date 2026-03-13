@@ -1840,6 +1840,9 @@ async function onChangeModSorter(e) {
       case "chrono":
         sortModViews(modCompare2);
         break;
+      case "chronoNew":
+        sortModViews((a, b) => modCompare2(b, a));
+        break;
       case "mostFav":
         sortModViews((a, b) => (b.dataset.favs ?? 0) - (a.dataset.favs ?? 0));
         break;
