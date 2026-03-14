@@ -4940,7 +4940,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 200,
             "state": 1021,
-            "state_multiplier": 0.99
+            "state_multiplier": 1.09
         }
     },
     {
@@ -4958,7 +4958,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 200,
             "state": 1023,
-            "state_multiplier": 0.96
+            "state_multiplier": 0.90
         }
     },
     {
@@ -5030,7 +5030,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 200,
             "state": 1031,
-            "state_multiplier": 1.1
+            "state_multiplier": 1.15
         }
     },
     {
@@ -5039,7 +5039,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 200,
             "state": 1032,
-            "state_multiplier": 0.96
+            "state_multiplier": 1.16
         }
     },
     {
@@ -5192,7 +5192,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 200,
             "state": 1049,
-            "state_multiplier": 0.96
+            "state_multiplier": 1.06
         }
     },
     {
@@ -5282,7 +5282,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 201,
             "state": 1008,
-            "state_multiplier": 1
+            "state_multiplier": 1.02
         }
     },
     {
@@ -5372,7 +5372,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 201,
             "state": 1018,
-            "state_multiplier": 1.175
+            "state_multiplier": 0.98
         }
     },
     {
@@ -5489,7 +5489,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 201,
             "state": 1031,
-            "state_multiplier": 1.2
+            "state_multiplier": 0.6
         }
     },
     {
@@ -5498,7 +5498,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 201,
             "state": 1032,
-            "state_multiplier": 1.09
+            "state_multiplier": 1.00
         }
     },
     {
@@ -8793,7 +8793,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "fields": {
             "answer": 22045,
             "issue": 101,
-            "issue_score": 1,
+            "issue_score": 0.5,
             "issue_importance": 3
         }
     },
@@ -10653,6 +10653,9 @@ window.addPuertoRico = function() {
 
     $.fn.usmap.patchedPR = true;
   }
+  
+  campaignTrail_temp.election_json[0].fields.winning_electoral_vote_number = 273;
+
 };
 
 // to lock specific answers
@@ -12615,7 +12618,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 	if (playerEV >= 270 && obamaworld >= 9 && presauth < 7) ctsAchievement("The Seventh Seal");
     if (playerEV <= 269) ctsAchievement("American Kerensky");
 	
-	const hospitalText = answers.includes("2013") ? "a hospital for free" : "an FHS hospital";
+	const hospitalText = e.player_answers.includes(2013) ? "a hospital for free" : "an FHS hospital";
 
     // Main slides
 	if (playerEV >= 538) { // landslide
@@ -13895,7 +13898,7 @@ endingPicker = (out, totv, aa, quickstats) => {
     }
 
     // Other slides
-	if (playerEV != 538) {
+	if (playerEV >= 538) {
 		e.endingSlides.push({
 			content: `<style>
 			.story-scene {
