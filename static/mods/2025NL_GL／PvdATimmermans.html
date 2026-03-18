@@ -155,7 +155,6 @@
         var NSCollapse = true;
         var emergencyCabinet = false;
         var otherEmergencyCabinet = false;
-        var nationalUnityCabinet = false;
         var roodVooruit = false;
         var JA21timeline = false;
 
@@ -1531,18 +1530,23 @@
             playerFate = "For you this is despite everything a little sour. You returned to the Netherlands to become prime minister, and now you had won the election. It seemed certain, except when it turned you would not get there without Dilan Yeşilgöz' VVD. And the VVD had other plans for the Netherlands. After a prolonged stalemate, eventually the party leadership decided that caving to her blockades was preferable to new elections: to get a cabinet you would be withdrawn as the candidate. Instead the more palatable former Rotterdam GL/PvdA Mayor Ahmed Aboutaleb was nominated, which proved acceptable to the VVD. You will lead GL/PvdA in the Tweede Kamer and oversee the merger to completion, but prime minister is not in the cards for you anymore."
                 leader106.leaderName = 'Aboutaleb';
                 leader106.image = 'https://i.imgur.com/ECKBuxE.png';
+                aboutalebPM = " ";
             }
             else if (leader.party == 106) {
             playerFate = "It took a bit longer than expected, but also not that much longer. You will be the Dutch left's first prime minister since 2002, and the first of the joint GL/PvdA list as well as soon the first prime minister of many to come of the new party. Congratulations Mr. Timmermans. You've worked long towards this goal."
+            aboutalebPM = " ";
             }
             else if (selectedCoalition.parties.includes(106) && GLPvdACheck.electoral_votes > D66Check.electoral_votes && quickstats[1] > 10.88) {
             playerFate = "You will be leading GL/PvdA in the Tweede Kamer, this time not as an opposition leader, but as part of the governing coalition. In addition, you will be overseeing the merger to completion, which is a task that should not be underestimated. It is likely that the new party will go into the next general elections with a new generation, but you will be the one to lead it there."
+            aboutalebPM = " ";
             }
             else if (D66Check.electoral_votes >= GLPvdACheck.electoral_votes || quickstats[1] < 10.88) {
             playerFate = "You have however taken a step back from the public spotlight, following your announcement of your retirement on election night. Jesse Klaver has taken over as party leader and will be overseeing the merger to completion. You wish him the best as you enjoy your retirement."
+            aboutalebPM = " ";
             }
             else {
             playerFate = "You will be leading GL/PvdA in the Tweede Kamer, frustratingly for another term in the opposition. In addition, you will be overseeing the merger to completion, which is a task that should not be underestimated. It is likely that the new party will go into the next general elections with a new generation, but you will be the one to lead it there."
+            aboutalebPM = " ";
             }
             voltSentence = " Volt has received a reversal of the Dutch position on Eurobonds, much to the VVD's grief."
             if (!roodVooruit) {
@@ -3242,17 +3246,17 @@
         };
         // Apply replacements
         ministers.forEach(minister => {
-            if (rereplacements[minister.ministerTitle]) {
-                Object.assign(minister, rereplacements[minister.ministerTitle]);
+            if (rererereplacements[minister.ministerTitle]) {
+                Object.assign(minister, rererereplacements[minister.ministerTitle]);
             }
         });
     }
-    if (nationalUnityCabinet) {
+    if (otherEmergencyCabinet) {
         const rereplacements = {
             'Foreign Affairs (BZ)': {
                 party: 'D66',
                 color: '#84CF84',
-                name: "<a href='https://en.wikipedia.org/wiki/Caspar_Veldkamp' target='_blank'>Caspar Veldkamp</a>"
+                name: "<a href='https://en.wikipedia.org/wiki/Jan_Paternotte' target='_blank'>Jan Paternotte</a>"
             },
             'Justice and Security (J&V)': {
                 party: 'VVD',
@@ -3307,8 +3311,8 @@
         };
         // Apply replacements
         ministers.forEach(minister => {
-            if (rereplacements[minister.ministerTitle]) {
-                Object.assign(minister, rereplacements[minister.ministerTitle]);
+            if (rererereplacements[minister.ministerTitle]) {
+                Object.assign(minister, rererereplacements[minister.ministerTitle]);
             }
         });
     }
