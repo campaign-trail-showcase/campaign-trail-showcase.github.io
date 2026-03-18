@@ -170,6 +170,8 @@ return questionSheath[index];
 
   if (!GLPvdA) {
     e.candidate_json[6].fields.last_name = "GL/PvdA"
+    e.candidate_json[6].fields.priority = "3"
+    e.candidate_json[11].fields.priority = "19"
     e.candidate_json[6].fields.color_hex = "#D90000"
     e.candidate_json[6].fields.secondary_color_hex = "#CC6868"
     GLPvdA = true;
@@ -195,7 +197,7 @@ return questionSheath[index];
       if (ans == 2115) {
         if (!CollapseUnavoidable){
           unlockAchievementSafe("Crisis Manager");
-          window.location.href = 'https://campaigntrailshowcase.com/campaign-trail/index.html?modName=2025NL';
+          window.location.href = 'https://campaigntrailshowcase.com/campaign-trail/index.html?modName=2025aNL';
         }
       }
       if (ans == 2112 || ans == 2113 || ans == 2114 || ans == 2115) {
