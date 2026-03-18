@@ -1208,7 +1208,7 @@
                 smallParty2 = " "
             }
             e.header = "<h2>“Focus op de Horizon”</h2>"
-            e.pages = [`<p>It took rather long for you to get used to this idea, but in the end, a Purple coalition has been formed by ${selectedCoalition.name}. Surprisingly, it's a somewhat classic Purple constellation, leaving Henri Bontenbal as the opposition, which, even though they act brave about it, is a massive disappointment for a party that at one time expected to deliver the prime minister. Perhaps that was too cocky an assumption while they only had five seats.${aboutalebPM}</p><p>Considering that Purple cabinets have always been D66's hobby, it is not surprising that the D66 voter is quite satisfied with the arrangement, although it is undoubtedly also helping that the agreement is the compromise between GL/PvdA and VVD and thus largely D66 policy. Some really nice progressive achievements are in the cards. The Weed experiment will be expanded and the embryo law is secured. GL/PvdA and VVD voters are less pleased with the outcome that was, however, and both are struggling in the polls now.${smallParty1}${smallparty2}</p><p>${playerFate}</p>`]
+            e.pages = [`<p>It took rather long for you to get used to this idea, but in the end, a Purple coalition has been formed by ${selectedCoalition.name}. Surprisingly, it's a somewhat classic Purple constellation, leaving Henri Bontenbal as the opposition, which, even though they act brave about it, is a massive disappointment for a party that at one time expected to deliver the prime minister. Perhaps that was too cocky an assumption while they only had five seats.${aboutalebPM}</p><p>Considering that Purple cabinets have always been D66's hobby, it is not surprising that the D66 voter is quite satisfied with the arrangement, although it is undoubtedly also helping that the agreement is the compromise between GL/PvdA and VVD and thus largely D66 policy. Some really nice progressive achievements are in the cards. The Weed experiment will be expanded and the embryo law is secured. GL/PvdA and VVD voters are less pleased with the outcome that was, however, and both are struggling in the polls now.${smallParty1}${smallParty2}</p><p>${playerFate}</p>`]
             e.image = leader.image;
             return construct(0);
         }
@@ -1599,23 +1599,27 @@
             return construct(0);
         }
         if (selectedCoalition.id >= 80) { // Right-wing
-            if(selectedCoalition.parties.includes(105)){
-                smallParty1 = BBBSentence
-                if(selectedCoalition.parties.includes(117)){
-                    smallParty2 = SGPSentence
-                }
-                else if(selectedCoalition.parties.includes(20)){
-                    smallParty2 = NSCSentence
-                }
-                else if(selectedCoalition.parties.includes(116)){
-                    smallParty2 = P50PlusSentence
-                }
-                else if(selectedCoalition.parties.includes(68)){
-                    smallParty2 = FvDSentence
-                }
-                else {
-                    smallParty2 = " "
-                }
+            if(selectedCoalition.id > 80){
+              smallParty1 = BBBSentence
+              if(selectedCoalition.id === 81){
+                  smallParty2 = SGPSentence
+              }
+              else if(selectedCoalition.id === 83){
+                  smallParty2 = NSCSentence
+              }
+              else if(selectedCoalition.id === 84){
+                  smallParty2 = P50PlusSentence
+              }
+              else if(selectedCoalition.id === 82){
+                  smallParty2 = FvDSentence
+              }
+              else {
+                  smallParty2 = " "
+              }
+            }
+            else {
+              smallParty1 = " "
+              smallParty2 = " "
             }
             e.header = "<h2>“Project 2026”</h2>"
             e.pages = [`<p>When Geert Wilders announced his intention to form a minority government by himself, eventually with the parties that were willing to govern with him, you didn't take it seriously. A minority government, after all, always still needs to be supported by the majority of the Tweede Kamer. This assumption did not account for the madness of the VVD. They have decided that this time, the populist voter would realize the incompetence if no normal party is involved. A cabinet composed only of insurgent populists. Odds are it will make the Schoof cabinet seem traditional.</p><p>To our concerns the VVD says they will not tolerate authoritarianism, but when the first act of the new cabinet was to declare the national asylum emergency that failed in the Schoof cabinet due to NSC, the VVD predictably did not do anything. This country is not going in the right direction, Rob.${smallParty1}${smallParty2}</p><p>${playerFate}</p>`]

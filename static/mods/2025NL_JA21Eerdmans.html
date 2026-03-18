@@ -1250,7 +1250,7 @@ const coalitions = [
                 smallParty2 = " "
             }
             e.header = "<h2>“Focus op de Horizon”</h2>"
-            e.pages = [`<p>It took rather long for you to get used to this idea, but in the end, a Purple coalition has been formed by ${selectedCoalition.name}. Surprisingly, it's a somewhat classic Purple constellation, leaving Henri Bontenbal as the opposition, which, even though they act brave about it, is a massive disappointment for a party that at one time expected to deliver the prime minister. Perhaps that was too cocky an assumption while they only had five seats.${aboutalebPM}</p><p>The VVD voter in any case, is rather angry with this turn of events. Most of them would rather not have governed with either GL/PvdA nor PVV, and if a choice really had to be made, they would've chosen the PVV instead. As a result, they have played hardball with our coalition partners, which means GL/PvdA is now facing its own internal scrutiny whether they didn't give too much away, while D66 is in a comfortable position, having once again built a bridge between political rivals.${smallParty1}${smallparty2}</p><p>${playerFate}</p>`]
+            e.pages = [`<p>It took rather long for you to get used to this idea, but in the end, a Purple coalition has been formed by ${selectedCoalition.name}. Surprisingly, it's a somewhat classic Purple constellation, leaving Henri Bontenbal as the opposition, which, even though they act brave about it, is a massive disappointment for a party that at one time expected to deliver the prime minister. Perhaps that was too cocky an assumption while they only had five seats.${aboutalebPM}</p><p>The VVD voter in any case, is rather angry with this turn of events. Most of them would rather not have governed with either GL/PvdA nor PVV, and if a choice really had to be made, they would've chosen the PVV instead. As a result, they have played hardball with our coalition partners, which means GL/PvdA is now facing its own internal scrutiny whether they didn't give too much away, while D66 is in a comfortable position, having once again built a bridge between political rivals.${smallParty1}${smallParty2}</p><p>${playerFate}</p>`]
             e.image = leader.image;
             return construct(0);
         }
@@ -1640,23 +1640,27 @@ const coalitions = [
             return construct(0);
         }
         if (selectedCoalition.id >= 80) { // Right-wing
-            if(selectedCoalition.parties.includes(105)){
-                smallParty1 = BBBSentence
-                if(selectedCoalition.parties.includes(117)){
-                    smallParty2 = SGPSentence
-                }
-                else if(selectedCoalition.parties.includes(20)){
-                    smallParty2 = NSCSentence
-                }
-                else if(selectedCoalition.parties.includes(116)){
-                    smallParty2 = P50PlusSentence
-                }
-                else if(selectedCoalition.parties.includes(68)){
-                    smallParty2 = FvDSentence
-                }
-                else {
-                    smallParty2 = " "
-                }
+            if(selectedCoalition.id > 80){
+              smallParty1 = BBBSentence
+              if(selectedCoalition.id === 81){
+                  smallParty2 = SGPSentence
+              }
+              else if(selectedCoalition.id === 83){
+                  smallParty2 = NSCSentence
+              }
+              else if(selectedCoalition.id === 84){
+                  smallParty2 = P50PlusSentence
+              }
+              else if(selectedCoalition.id === 82){
+                  smallParty2 = FvDSentence
+              }
+              else {
+                  smallParty2 = " "
+              }
+            }
+            else {
+              smallParty1 = " "
+              smallParty2 = " "
             }
             e.header = "<h2>“Project 2026”</h2>"
             e.pages = [`<p>When Wilders announced his intention to form a minority government by himself, eventually with the parties that were willing to govern with him, people treated it as a joke. A minority government, after all, always still needs to be supported by the majority of the Tweede Kamer. Now they aren't laughing anymore. A cabinet composed only of insurgent populists. Well, and us. Odds are it will make the Schoof cabinet seem traditional.</p><p>Unfortunately the VVD still holds leverage over us, because their vote for it made this cabinet and they can bring it down whenever they wish. This means we will have to be a bit careful that we don't alienate them. If we become too successful, they will surely become a problem, but their own voters want stability too. The first act of the new cabinet was to declare the national emergency on migration that the Schoof cabinet failed to declare. This time there will be no obstruction.${smallParty1}${smallParty2}</p><p>${playerFate}</p>`]
