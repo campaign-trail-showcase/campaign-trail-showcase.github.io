@@ -1531,6 +1531,7 @@
             }
             if (leader.party == 106 && selectedCoalition.parties.includes(23) && VVDCheck.electoral_votes >= 15) {
             playerFate = "For you this is despite everything a little sour. You returned to the Netherlands to become prime minister, and now you had won the election. It seemed certain, except when it turned you would not get there without Dilan Yeşilgöz' VVD. And the VVD had other plans for the Netherlands. After a prolonged stalemate, eventually the party leadership decided that caving to her blockades was preferable to new elections: to get a cabinet you would be withdrawn as the candidate. Instead the more palatable former Rotterdam GL/PvdA Mayor Ahmed Aboutaleb was nominated, which proved acceptable to the VVD. You will lead GL/PvdA in the Tweede Kamer and oversee the merger to completion, but prime minister is not in the cards for you anymore."
+                const leader106 = partyLeaders.find((leader) => leader.party === 106);
                 leader106.leaderName = 'Aboutaleb';
                 leader106.image = 'https://i.imgur.com/ECKBuxE.png';
                 aboutalebPM = " ";
