@@ -24535,11 +24535,11 @@ endingPicker = (out, totv, aa, quickstats) => {
 	
 	if (playerPVPercent >= 50 && playerEV >= 270 && e.running_mate_last_name === "Brown") 
             ctsAchievement("Fight the Power");    
-    if (playerEV >= 270 && e.player_answers.some(a => a == 15477 || 21162 || 21163 || 21164 || 21165 || 21166))
+    if (playerEV >= 270 && [15477, 21162, 21163, 21164, 21165, 21166].some(id => e.player_answers.includes(id)))
             ctsAchievement("Black Power");    
     if (playerEV >= 270 && e.player_answers.some(a => a == 4519))
             ctsAchievement("Rainbow Coalition");
-    if (playerEV >= 270 && e.player_answers.some(a => a == 4435 || 21191 || 21192 || 21193))
+    if (playerEV >= 270 && [4435, 21191, 21192, 21193].some(id => e.player_answers.includes(id)))
             ctsAchievement("Love is Justice");			
     if (playerEV >= 270 && e.player_answers.some(a => a == 4439))
             ctsAchievement("Red Scare");    
