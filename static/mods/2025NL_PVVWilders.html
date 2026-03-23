@@ -1189,7 +1189,7 @@
             else if (selectedCoalition.parties.includes(25)) {
                 playerFate = "As for you, you are set for another four years in the Tweede Kamer. You would've secretly preferred to have changed roles compared to the past year. Alas it was not to be, now you'll have to play coalition canon yet again. Well, at least the Tweede Kamer fits you like a glove."
             }
-            if (leader.party == 106 && selectedCoalition.parties.includes(23)) {
+            else if (leader.party == 106 && selectedCoalition.parties.includes(23)) {
                 playerFate = "As for you, you are set for another four years in the Tweede Kamer. You are glad to be returning to your old trusted position as an opposition leader. The cabinet will not be avoiding your wrath."
                 const leader106 = partyLeaders.find((leader) => leader.party === 106);
                 leader106.leaderName = 'Aboutaleb';
@@ -1719,7 +1719,7 @@
                 smallParty2 = " "
                 }
                 e.header = "<h2>“Project 2026”</h2>"
-                e.pages = [`<p>When you announced your intention to form a minority government by himself, eventually with the parties that were willing to govern with him, people treated it as a joke. A minority government, after all, always still needs to be supported by the majority of the Tweede Kamer. Now they aren't laughing anymore. A cabinet composed only of insurgent populists. Odds are it will make the Schoof cabinet seem traditional.</p><p>Unfortunately the VVD still holds leverage over us, because their vote for it made this cabinet and they can bring it down whenever they wish. This means we will have to be a bit careful that we don't alienate them. If we become too successful, they will surely become a problem, but their own voters want stability too. The first act of the new cabinet was to declare the national emergency on migration that the Schoof cabinet failed to declare. This time there will be no obstruction.${smallParty1}${smallParty2}</p><p>${playerFate}</p>`]
+                e.pages = [`<p>When you announced your intention to form a minority government by yourself, eventually with the parties that were willing to govern with him, people treated it as a joke. A minority government, after all, always still needs to be supported by the majority of the Tweede Kamer. Now they aren't laughing anymore. A cabinet composed only of insurgent populists. Odds are it will make the Schoof cabinet seem traditional.</p><p>Unfortunately the VVD still holds leverage over us, because their vote for it made this cabinet possible, and they can bring it down whenever they wish. This means we will have to be a bit careful that we don't alienate them. If we become too successful, they will surely become a problem, but their own voters want stability too. The first act of the new cabinet was to declare the national emergency on migration that the Schoof cabinet failed to declare. This time there will be no obstruction.${smallParty1}${smallParty2}</p><p>${playerFate}</p>`]
                 e.image = leader.image;
                 return construct(0);
             }
