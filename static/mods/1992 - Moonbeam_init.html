@@ -2552,30 +2552,56 @@ window.WalkmanPlayer.init("#game_window", mainPlaylist);
 	if (typeof window.handleFontToggle === 'function') {
       window.handleFontToggle();
     }
+	
+	if (document.querySelector(".inner_window_question")) {
+        return true; // removes this task from the list
+    }
+    return false;
+	
   };
-
+  
   window.glorbleTasks.push(initialTasks);
 
-  const handleMutations = (mutationsList) => {
-    if (!window.glorbleTasks) return;
+    let scheduled = false;
 
-    for (let i = 0; i < window.glorbleTasks.length; i++) {
-      try {
-        window.glorbleTasks[i]();
-      } catch (e) {
-        console.error("Zoinks! Error in glorble task:", e);
-      }
+    const runTasks = () => {
+        scheduled = false;
+        const tasks = window.glorbleTasks;
+
+        if (tasks.length === 0) {
+            if (window.glorble) window.glorble.disconnect();
+            return;
+        }
+
+        for (let i = tasks.length - 1; i >= 0; i--) {
+            try {
+                if (tasks[i]() === true) tasks.splice(i, 1);
+            } catch (e) {
+                console.error("glorble task failed:", e);
+            }
+        }
+
+        if (tasks.length === 0 && window.glorble) {
+            window.glorble.disconnect();
+        }
+    };
+
+    const handleMutations = () => {
+        if (scheduled || window.glorbleTasks.length === 0) return;
+        scheduled = true;
+        requestAnimationFrame(runTasks);
+    };
+
+    const targetNode = document.getElementById("game_window");
+
+    if (targetNode) {
+        window.glorble = new MutationObserver(handleMutations);
+        window.glorble.observe(targetNode, { childList: true, subtree: true });
+        handleMutations();
+		//console.log("glorble...");
+    } else {
+    console.warn("Zoinks! Glorble could not find game_window.");
     }
-  };
-
-  const targetNode = document.getElementById("game_window");
-  const config = { childList: true, subtree: true };
-
-  window.glorble = new MutationObserver(handleMutations);
-  window.glorble.observe(targetNode, config);
-
-  handleMutations();
-  //console.log("glorble...");
 })();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
