@@ -83,35 +83,64 @@ achList = {
     ]
 }
 
-     function changeImageSource(oldSrc, newSrc) {
-            var images = document.getElementsByTagName('img');
-            for (var i = 0; i < images.length; i++) {
-                if (images[i].src.includes(oldSrc)) {
-                    images[i].src = newSrc;
+const imageReplacements = {
+    'ridingBiden.png': 'https://i.imgur.com/rTvXLUO.png',
+    'magaa.png': 'https://i.imgur.com/5n8QreT.png',
+    'w+.png': 'https://i.redd.it/erpfiql9e9xc1.jpeg',
+    'AmericanCarnage.png': 'https://i.imgur.com/VK3ERXT.gif',
+    'whatbelt.png': 'https://i.imgur.com/9nKzcbf.jpeg',
+    'why.png': 'https://i.imgur.com/mydo797.jpeg',
+    'what.png': 'https://i.imgur.com/DjyXDGw.jpeg',
+    'Finality.png': 'https://i.imgur.com/qkuJePf.jpeg',
+    'Dewey.png': 'https://i.imgur.com/Ulri57k.jpeg',
+    'dixieDewey.png': 'https://i.imgur.com/fGcAr7i.jpeg',
+    'glory.png': 'https://i.imgur.com/XHyODSw.png',
+    'nomalarkey.png': 'https://i.imgur.com/po4NHkb.png'
+};
+
+function checkAndReplaceImage(img) {
+    // if it's not an image tag, ignore it
+    if (img.tagName !== 'IMG') return;
+
+    // check our replacement list
+    for (const [key, newUrl] of Object.entries(imageReplacements)) {
+        if (img.src.includes(key) && img.src !== newUrl) {
+            img.src = newUrl;
+            break;
+        }
+    }
+}
+
+const imageObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        // new nodes added to the DOM
+        if (mutation.type === 'childList') {
+            mutation.addedNodes.forEach((node) => {
+                // check the node itself
+                if (node.tagName === 'IMG') {
+                    checkAndReplaceImage(node);
                 }
-            }
+                // check children
+                else if (node.nodeType === Node.ELEMENT_NODE) {
+                    node.querySelectorAll('img').forEach(checkAndReplaceImage);
+                }
+            });
         }
-
-        // Call the function to change the image source for specific images
-        function updateSpecificImages() {
-changeImageSource('ridingBiden.png', 'https://i.imgur.com/rTvXLUO.png'); // Purity achievement 
-            changeImageSource('magaa.png', 'https://i.imgur.com/5n8QreT.png');  // Honesty achievement
-changeImageSource('w+.png', 'https://i.redd.it/erpfiql9e9xc1.jpeg');
-changeImageSource('AmericanCarnage.png', 'https://i.imgur.com/VK3ERXT.gif');
-changeImageSource('whatbelt.png', 'https://i.imgur.com/9nKzcbf.jpeg');  // Identity War achievement 
-changeImageSource('why.png', 'https://i.imgur.com/mydo797.jpeg');  // Interstellar Retribution achievement 
-changeImageSource('what.png', 'https://i.imgur.com/DjyXDGw.jpeg');  // Powerful resilience achievement 
-changeImageSource('Finality.png', 'https://i.imgur.com/qkuJePf.jpeg');
-changeImageSource('Dewey.png', 'https://i.imgur.com/Ulri57k.jpeg');  // The Coast Guard achievement 
-changeImageSource('dixieDewey.png', 'https://i.imgur.com/fGcAr7i.jpeg');  // Went Woke Got Broke achievement 
-changeImageSource('glory.png', 'https://i.imgur.com/XHyODSw.png');  // Glory, Glory achievement 
-changeImageSource('nomalarkey.png', 'https://i.imgur.com/po4NHkb.png'); // Peace With Honor achievement 
-
-            // Add more calls to changeImageSource for other specific images as needed
+        // an existing image changed its 'src' attribute
+        else if (mutation.type === 'attributes' && mutation.target.tagName === 'IMG') {
+            checkAndReplaceImage(mutation.target);
         }
+    });
+});
 
-        // Call the update function periodically
-        setInterval(updateSpecificImages, 001);
+imageObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['src']
+});
+
+document.querySelectorAll('img').forEach(checkAndReplaceImage);
 
 campaignTrail_temp.achievements = {
     "Purity": {

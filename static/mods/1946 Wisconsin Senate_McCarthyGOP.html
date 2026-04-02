@@ -14,6 +14,13 @@ cyoAdventure = function (a) {
 
 }
 
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -10935,7 +10942,18 @@ function getQuestionNumberFromPk(pk) {
 
 cyoAdventure = function (a) {
     ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
-
+	if (ans == 17282) {
+	ctsAchievement("Exit, Stage Right");
+		}
+	if (ans == 17283) {
+	ctsAchievement("Exit, Stage Right");
+		}
+	if (ans == 17284) {
+	ctsAchievement("Exit, Stage Right");
+		}
+	if (ans == 17286) {
+	ctsAchievement("Exit, Stage Right");
+		}
 if(ans == 16952){
 gopinfluence += 1
 }
@@ -11086,6 +11104,7 @@ campaignTrail_temp.questions_json[7] = {
               }
 	      }
    if(ans == 17250){
+	ctsAchievement("You Don't Control Me");
         //Merged Leave CYOA
 campaignTrail_temp.questions_json[25] = {
                 "model": "campaign_trail.question",
@@ -11098,6 +11117,7 @@ campaignTrail_temp.questions_json[25] = {
               }
 	      }
    if(ans == 17047){
+	ctsAchievement("Enter, Stage Right");
         //Merged Leave CYOA
 campaignTrail_temp.questions_json[10] = {
                 "model": "campaign_trail.question",

@@ -474,34 +474,35 @@ const callback = (mutationList, observer) => {
   e = campaignTrail_temp
 
 const startScreenUpdater = setInterval(function() {
-	const goBackButton = document.getElementById("candidate_id_back");
-	const candidateButton = document.getElementById("candidate_id_button");
-	const runningMateButton = document.getElementById("running_mate_id_button");
-	const finalScreenBB = document.getElementById("opponent_selection_id_back");
-	const finalScreenID = document.getElementById("opponent_selection_id_button");
-    const difficultySlider = document.getElementById("difficulty_level");
-    const gameType = document.getElementById("game_type_id");
+    const goBackButton = document.getElementById("candidate_id_back");
+    const candidateButton = document.getElementById("candidate_id_button");
+    const runningMateButton = document.getElementById("running_mate_id_button");
+    const finalScreenBB = document.getElementById("opponent_selection_id_back");
+    const finalScreenID = document.getElementById("opponent_selection_id_button");
+    const candidateSelect = document.getElementById("candidate_id");
 
-    
-    if((candidateButton || c != 0)&& !runningMateButton){ // change theme on candidate viewing
-		var c = document.getElementById("candidate_id").value;
-		if(c == 79 && !(candidateButton) && !(runningMateButton)) {
-            goBackButton.click();
+    if (candidateSelect && !runningMateButton) { // change theme on candidate viewing
+        const c = candidateSelect.value;
+
+        if (c == 79 && !candidateButton) {
+            if (goBackButton) goBackButton.click();
             const initContinue = document.getElementById("election_id_button");
-            initContinue.click();
-		}
-		else if(c == 78 || c == 77) {
-            if(candidateButton) {
+            if (initContinue) initContinue.click();
+        }
+        else if (c == 78 || c == 77) {
+            if (candidateButton) {
                 candidateButton.remove();
             }
-		}
-	}
+        }
+    }
 
-	if(finalScreenID) { // delete back button and delete the interval
-		finalScreenBB.remove();
-		clearInterval(startScreenUpdater);
-	}
-}, 1);
+    if (finalScreenID) { // delete back button and delete the interval
+        if (finalScreenBB) {
+            finalScreenBB.remove();
+        }
+        clearInterval(startScreenUpdater);
+    }
+}, 100);
 
   function addDynamicCSS() {
     var css = `

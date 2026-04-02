@@ -164,7 +164,7 @@ campaignTrail_temp.election_json = [
         "pk": 20,
         "fields": {
             "year": 2004,
-            "display_year": "ROC'04 Bian.",
+            "display_year": "2004",
             "summary": "<div style='overflow-y:scroll;height:200px;'><span style='font-size:2.5em;'>2</span>004 marks a new milestone in Taiwan’s history. <p>In 2000, when 4.97 million Taiwanese cast their ballots to send this “son of Taiwan” to Taipei’s highest office, countless hopeful eyes fixed themselves on the bespectacled young president—as if he could rescue Taiwan from all its ills. However, as the brief honeymoon period of blue–green transition faded, A-Bian found himself confronting an entirely new set of challenges. Although the Democratic Progressive Party held the largest seats in the legislature, it could not withstand the united majority of the Kuomintang and the People First Party—two erstwhile electoral adversaries, Lien Chan and Song Chu-yu, who now appeared poised to join forces once again.</p><p>Gone was the fresh aura of being the people’s darling, and the notion of a blue–green coalition government had long proven a dead end. Even after swallowing the “Four Noes and One Without” policy as a stabilizing salve for cross-strait relations, the fervor for Taiwan independence continued to course through the grassroots ranks of the DPP—a potent tool for rallying support against its political foes. Fifty-five years of Kuomintang rule had tilted most Taiwanese sentiment toward the blue camp, while Chen Shui-bian merely filched the key to the Presidential Palace amid the fierce clash between Song and Lien. Coupled with his dismal approval ratings and widespread distrust in the DPP’s economic management and governing prowess, these factors have become a formidable hurdle to effective governance. Moreover, he must also contend with the onslaught of the Red Dragon—Beijing’s unprecedented mistrust toward this once-unthinkable DPP government . Diplomatic battles for allied nations are old news, and the December 2001 Legislative Yuan elections along with the 2002 special municipal mayoral contests now loom as mid-term examinations for his presidency. In these perilous times, what course of action will President A-Bian choose?</p></div>",
              "image_url": "https://i.imgur.com/NmP1G2Q.jpeg",
             "winning_electoral_vote_number": 25,
@@ -343,7 +343,7 @@ jet_data = {
     "bannerImageUrl": "https://i.imgur.com/2FZZqTw.png",
     "backgroundImageUrl": "https://i.imgur.com/q3C6wVC.jpeg",
     "endingTextColor": "#000000",
-    "gameTitle": "Republic Of China Campaign Trail"
+    "gameTitle": "ROC'04 Bian."
 }
 
 //#startcode
@@ -372,11 +372,11 @@ document.head.innerHTML += `<style>
     label {
       font-size: 1em !important;
     }
-  
+
     body {
       display: flex !important;
     }
-  
+
     #game_window {
       max-width: 1000px;
     }
@@ -397,10 +397,10 @@ document.head.innerHTML += `<style>
     background-color: #e2e2e257;
   }
 
-  
+
   </style>`
 campaignTrail_temp.achievements = {
-  } 
+  }
   const div = document.getElementById('announcement');
   if (div) {
     div.style.display = 'none';      // 隐藏（不占位）
@@ -413,10 +413,10 @@ campaignTrail_temp.achievements = {
 
 
         setInterval(changeFontColour, 200)
-  
+
     })
   })
-  
+
 
   e.runIntro = true;
   RecReading=true
@@ -431,14 +431,14 @@ campaignTrail_temp.achievements = {
   `;
   // Select the node that will be observed for mutations
   const windowsAdvisorTargetNode = document.getElementById("game_window");
-  
+
   // Options for the observer (which mutations to observe)
   const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
-  
+
   // Callback function to execute when mutations are observed
   const callback = (mutationList, observer) => {
   visitWindow = document.getElementsByClassName("overlay_window")[0];
-  
+
   if(visitWindow == null || visitWindow.classList.contains("done")) {
   return;
   }
@@ -448,7 +448,7 @@ campaignTrail_temp.achievements = {
   titleBar.classList.add("title-bar");
   titleBar.classList.add("title-bar-text")
   titleBar.style.paddingLeft = "3px";
-  
+
   };
 
   class Song {
@@ -461,19 +461,19 @@ campaignTrail_temp.achievements = {
   getTitle() {
   return this.title;
   }
-  
+
   getArtist() {
   return this.artist;
   }
   getCoverLink() {
   return this.coverLink;
   }
-  
+
   getAudioLink() {
   return this.audioLink;
   }
   }
-  
+
   class Playlist {
     constructor() {
       // albums 数组，每个元素是一个专辑（歌曲数组）
@@ -482,18 +482,18 @@ campaignTrail_temp.achievements = {
       this.currentSongIndex = 0;
       this.loop = false; // 单曲循环状态
     }
-  
+
     addSong(song, albumIndex) {
       if (!this.albums[albumIndex]) {
         this.albums[albumIndex] = [];
       }
       this.albums[albumIndex].push(song);
     }
-  
+
     getCurrentSong() {
       return this.albums[this.currentAlbumIndex][this.currentSongIndex];
     }
-  
+
     playNext() {
       if (this.loop) {
         return; // 单曲循环时不切换歌曲
@@ -515,7 +515,7 @@ campaignTrail_temp.achievements = {
   window.Playlist = Playlist;
   window.Song = Song;
 
-  
+
   function changePlaylist(newPlaylist) {
     playlist = newPlaylist;
     playlist.currentAlbumIndex = 0;
@@ -526,7 +526,7 @@ campaignTrail_temp.achievements = {
     audio.play();
   }
   window.changePlaylist = changePlaylist;
-  
+
   function updateUI(playlist) {
     const currentSong = playlist.getCurrentSong();
     var player = document.getElementById("player");
@@ -535,8 +535,8 @@ campaignTrail_temp.achievements = {
     player.querySelector("#artist").textContent = currentSong.getArtist();
   }
   window.updateUI = updateUI;
-  
-  
+
+
   function setupMusicPlayer() {
     playlist = new Playlist();
 
@@ -807,73 +807,73 @@ playlist.addSong(song35, 4);
 
   const playerContainer = document.createElement("div");
   playerContainer.id = "player";
-  
+
   const displayBox = document.createElement("div");
   displayBox.id = "display-box";
-  
+
   const coverElement = document.createElement("img");
   coverElement.id = "cover";
   displayBox.appendChild(coverElement);
-  
+
   const infoContainer = document.createElement("div");
   infoContainer.id = "info-container";
   infoContainer.style.backgroundImage = "url('https://i.imgur.com/xyxCkA0.png')";
   infoContainer.style.backgroundSize = "cover"; // Optional: adjust based on your needs
   infoContainer.style.color = "white"; // Set text color to white
-  
+
   const songInfo = document.createElement("div");
   songInfo.id = "song-info";
-  
+
   const titleElement = document.createElement("h3");
   titleElement.id = "title";
   titleElement.style.fontWeight = 'normal'; // Make it normal as per previous request
   songInfo.appendChild(titleElement);
-  
+
   const artistElement = document.createElement("p");
   artistElement.id = "artist";
   songInfo.appendChild(artistElement);
-  
+
   infoContainer.appendChild(songInfo);
   displayBox.appendChild(infoContainer);
-  
+
   playerContainer.appendChild(displayBox);
-  
+
   const controlsContainer = document.createElement("div");
   controlsContainer.id = "controls-container";
-  
+
   const controls = document.createElement("div");
   controls.id = "controls";
-  
+
   const prevButton = document.createElement("img");
   prevButton.id = "prevButton";
   prevButton.src = "https://i.imgur.com/jdfFCvo.png";
   prevButton.alt = "Previous";
   controls.appendChild(prevButton);
-  
+
   const playPauseButton = document.createElement("img");
   playPauseButton.id = "playPauseButton";
   playPauseButton.src = "https://i.imgur.com/7ofdqdY.png"; // Set the default play image
   playPauseButton.alt = "Play/Pause";
   controls.appendChild(playPauseButton);
-  
+
   const nextButton = document.createElement("img");
   nextButton.id = "nextButton";
   nextButton.src = "https://i.imgur.com/B0ScI0A.png";
   nextButton.alt = "Next";
   controls.appendChild(nextButton);
-  
+
   const nextalbum = document.createElement("img");
   nextalbum.id = "nextalbum";
   nextalbum.src = "https://i.imgur.com/NeUObQA.png";
   nextalbum.alt = "album";
   controls.appendChild(nextalbum);
-  
+
   const loopButton = document.createElement("img"); // 单曲循环按钮
     loopButton.id = "loopButton";
     loopButton.src = "https://i.imgur.com/PGcDNau.png"; // 请替换为实际的图标
     loopButton.alt = "Loop";
     controls.appendChild(loopButton);
-  
+
   controlsContainer.appendChild(controls);
   function updateProgressBar(value) {
     const progressBar = document.getElementById('progress-bar');
@@ -897,7 +897,7 @@ setInterval(() => {
   playPauseButton.src = "https://i.imgur.com/F5Cd7o6.png"; // Set the play image
   }
   });
-  
+
   nextButton.addEventListener("click", function () {
   playlist.playNext();
   updateUI(playlist);
@@ -905,7 +905,7 @@ setInterval(() => {
   audio.src = playlist.getCurrentSong().audioLink;
   audio.play();
   });
-  
+
   nextalbum.addEventListener("click", function () {
     playlist.nextAlbum();
     updateUI(playlist);
@@ -913,7 +913,7 @@ setInterval(() => {
     audio.src = playlist.getCurrentSong().audioLink;
     audio.play();
   });
-  
+
   prevButton.addEventListener("click", function () {
     playlist.playPrevious();
     updateUI(playlist);
@@ -928,7 +928,7 @@ setInterval(() => {
   const progressBarContainer = document.createElement("div");
   progressBarContainer.id = "progress-bar-container";
 
-  
+
   const progressBar = document.createElement("input"); // 改为 input type="range"
   progressBar.type = "range";
   progressBar.id = "progress-bar";
@@ -937,25 +937,25 @@ setInterval(() => {
   progressBar.max = "100";
   progressBar.step = "0.1";
 
-  
-  
+
+
   progressBarContainer.appendChild(progressBar);
   controlsContainer.appendChild(progressBarContainer);
   playerContainer.appendChild(controlsContainer);
-  
+
   const volumeContainer = document.createElement("div");
   volumeContainer.id = "volume-container";
-  
+
   const volumeLabel = document.createElement("img");
   volumeLabel.src = "https://i.imgur.com/1iKbM8E.png";
   volumeLabel.alt = "Volume";
   volumeContainer.appendChild(volumeLabel);
-  
+
   const volumeSliderContainer = document.createElement("div");
   volumeSliderContainer.classList.add("is-vertical");
   volumeSliderContainer.style.marginLeft = "0%";
   volumeSliderContainer.style.height = "126px";
-  
+
   const volumeSlider = document.createElement("input");
   volumeSlider.type = "range";
   volumeSlider.id = "volumeSlider";
@@ -963,36 +963,36 @@ setInterval(() => {
   volumeSlider.max = 9;
   volumeSlider.step = 1;
   volumeSlider.value = 5; // Initial volume
-  
+
   volumeSliderContainer.appendChild(volumeSlider);
-  
+
   const volumeDisplay = document.createElement("span");
   volumeDisplay.id = "volume-display";
   volumeDisplay.style.fontWeight = 'bold';
   volumeDisplay.style.display = 'none';
   volumeDisplay.textContent = "1";
-  
+
   volumeContainer.appendChild(volumeSliderContainer);
   volumeContainer.appendChild(volumeDisplay);
-  
+
   playerContainer.appendChild(volumeContainer);
-  
+
   gameWindow_player.insertAdjacentElement("afterend", playerContainer);
-  
-  
+
+
   function updateProgressBar() {
     const audio = document.getElementById("audio");
     const progress = (audio.currentTime / audio.duration) * 100;
     progressBar.value = isNaN(progress) ? 0 : progress;
   }
-  
-  
+
+
   progressBar.addEventListener("input", function () { // 拖动进度条事件
   const audio = document.getElementById("audio");
   const seekTime = (progressBar.value / 100) * audio.duration;
   audio.currentTime = isNaN(seekTime) ? 0 : seekTime;
 });
-  
+
 const audio = document.createElement("audio");
 audio.id = "audio";
 audio.src = playlist.getCurrentSong().audioLink;
@@ -1003,8 +1003,8 @@ audio.play().catch(err => {
   }
   // AbortError 可以安全忽略
 });
-  
-  
+
+
   audio.addEventListener("timeupdate", updateProgressBar);
   audio.addEventListener("ended", function () {
   // Play the next song when the current song ends
@@ -1013,31 +1013,31 @@ audio.play().catch(err => {
   audio.src = playlist.getCurrentSong().audioLink;
   audio.play();
   });
-  
+
   let currentVolume = 5; // Initial volume
-  
+
   volumeSlider.addEventListener("input", function () {
   currentVolume = parseInt(volumeSlider.value, 10);
   updateVolumeDisplay();
   updateAudioVolume();
   });
-  
+
   function updateVolumeDisplay() {
   volumeDisplay.textContent = currentVolume;
   }
-  
+
   function updateAudioVolume() {
   const audio = document.getElementById("audio");
   audio.volume = currentVolume / 9; // Set volume between 0 and 1
   }
-  
+
   document.body.appendChild(audio);
   audio.play();
-  
+
   // Update the UI when the page loads
   updateUI(playlist);
   }
-  
+
   const style = document.createElement("style");
   style.textContent = `
   #player {
@@ -1049,19 +1049,19 @@ audio.play().catch(err => {
   }
   #volume-container{
       margin-top:10px
-  
+
   }
   #display-box {
   display: flex;
   align-items: center;
   width: 50%;
   }
-  
+
   #cover {
   width: 176px;
   height:176px;
   }
-  
+
   #info-container {
   display: flex;
   flex-direction: row;
@@ -1069,7 +1069,7 @@ audio.play().catch(err => {
   width:127px;
   margin-top: 3px;
   }
-  
+
   #song-info {
   width: 100%;
   padding:5px;
@@ -1087,7 +1087,7 @@ audio.play().catch(err => {
   margin: 10px;
   width:100%;
   padding-top:15px;
-  
+
   }
   .is-vertical #volumeSlider {
       margin-top: 38px;
@@ -1122,7 +1122,7 @@ audio.play().catch(err => {
     box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
     cursor: pointer;
 }
-  
+
 #overall_vote_statistics {
 
 }
@@ -1160,7 +1160,7 @@ audio.play().catch(err => {
     border-color: #C9C9C9;
     height: 250px;
 }
-  
+
 #progress-bar-container {
     width: 80%; /* 与原代码一致 */
     height: 18px; /* 调大高度，从 18px 增加到 24px */
@@ -1228,19 +1228,19 @@ audio.play().catch(err => {
 
 
   document.head.appendChild(style);
-  
+
   const gameWindow_player = document.getElementById("game_window");
   //use this function directly or put it in an event listener to start the music on the press of a certain button
   setupMusicPlayer();
-  
+
   function createBanner(url, sibling, isLeft) {
     let div = document.createElement("DIV");
     let img = document.createElement("IMG");
     div.style.position = "relative";
     div.style.margin = "auto";
     img.src = url;
-    
-    
+
+
     let x = document.createElement("DIV");
     x.innerText = "✕";
     x.style.position = "absolute";
@@ -1257,15 +1257,15 @@ audio.play().catch(err => {
     x.style.zIndex = "9999";
     x.style.userSelect = "none";
     x.style.lineHeight = "12px";
-    
+
     x.addEventListener("click", function() {
       div.removeChild(x);
     });
 
     div.appendChild(x);
-    
+
     div.appendChild(img);
-    
+
     if(isLeft) {
     sibling.parentNode.insertBefore(div, sibling);
     }
@@ -1380,7 +1380,7 @@ appendStyle();
 
 function addDynamicCSS() {
     var css = `
-        
+
         .inner_window_question h3 .mytooltip{
             background-color: lightskyblue;
         }
@@ -1448,9 +1448,9 @@ function addDynamicCSS() {
 
     var styleElem = document.createElement('style');
     styleElem.type = 'text/css';
-    
+
     styleElem.appendChild(document.createTextNode(css));
-    
+
     document.head.appendChild(styleElem);
 }
 
@@ -1460,7 +1460,7 @@ xpScrollStyle.textContent = `body *::-webkit-scrollbar {
     height: 16px;
     background: none;
   }
-  
+
   body *::-webkit-scrollbar-thumb, body *::-webkit-scrollbar-button {
     width: 16px;
     height: 16px;
@@ -1469,7 +1469,7 @@ xpScrollStyle.textContent = `body *::-webkit-scrollbar {
     border: 1px solid;
     border-color: silver #000 #000 silver;
   }
-  
+
   body *::-webkit-scrollbar-track {
     image-rendering: optimizeSpeed;
     image-rendering: pixelated;
@@ -1479,28 +1479,28 @@ xpScrollStyle.textContent = `body *::-webkit-scrollbar {
     background-repeat: repeat;
     background-size: 2px;
   }
-  
+
   body *::-webkit-scrollbar-button {
     background-repeat: no-repeat;
     background-size: 16px;
   }
-  
+
   body *::-webkit-scrollbar-button:single-button:vertical:decrement {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTcgNWgxTTYgNmgzTTUgN2g1TTQgOGg3IiAvPgo8L3N2Zz4=");
   }
-  
+
   body *::-webkit-scrollbar-button:single-button:vertical:increment {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTQgNWg3TTUgNmg1TTYgN2gzTTcgOGgxIiAvPgo8L3N2Zz4=");
   }
-  
+
   body *::-webkit-scrollbar-button:single-button:horizontal:decrement {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTggM2gxTTcgNGgyTTYgNWgzTTUgNmg0TTYgN2gzTTcgOGgyTTggOWgxIiAvPgo8L3N2Zz4=");
   }
-  
+
   body *::-webkit-scrollbar-button:single-button:horizontal:increment {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTYgM2gxTTYgNGgyTTYgNWgzTTYgNmg0TTYgN2gzTTYgOGgyTTYgOWgxIiAvPgo8L3N2Zz4=");
   }
-  
+
   body *::-webkit-scrollbar-corner {
     background: silver;
   }`;
@@ -1796,7 +1796,7 @@ tooltipList = [
         "description_background_color": "#e0e0e0",
         "main_color": "#d4d4d4",
         "secondary_color": "#198754"
-        
+
    }
 
 

@@ -11,7 +11,7 @@ campaignTrail_temp.election_json = [{
 	"pk": 4, 
 	"fields": {
 		"year": 1016, 
-		"summary": "<div id='scrollingElement' style='overflow-y:scroll;height:200px;text-align:center;font-size:20pt;background-color: #000000;'><br><br><p style='color:#00D7EC'><b>A long time ago in a galaxy far, far away....</p><br><br><br><br><p style='color:#F2B61A'>Election of 16ABY</p><p style='color:#F2B61A;font-size:26pt'>THE REPUBLIC REBORN</p><br><p style='color:#F2B61A'>The evil GALACTIC EMPIRE is now over a decade dead, and the imperial warlords who rose in its place have been all but defeated.</p><br><p style='color:#F2B61A'>CHANCELLOR ORGANA, elected overwhelmingly after Mon Mothma's retirement in 11ABY, now has the opportunity to reshape galactic institutions and bring an era of peace and prosperity.</p><br><p style='color:#F2B61A'>But all is not well. Threats linger - both in the far reaches of the galaxy and within the halls of the GALACTIC SENATE itself.....</p><p><br><br><br><br><br><br></b></div><script>var scrollingElement = document.getElementById('scrollingElement'); var scrollSpeed = 40; var scrollInterval; function scrollToBottom() { if (scrollingElement.scrollHeight - scrollingElement.scrollTop === scrollingElement.clientHeight) { clearInterval(scrollInterval); } else { scrollingElement.scrollTop += 1; } } setTimeout(function() { if (!scrollInterval) { scrollInterval = setInterval(scrollToBottom, scrollSpeed); } }, 2000) </script>", 
+		"summary": "<div id='scrollingElement' style='overflow-y:scroll;height:200px;text-align:center;font-size:20pt;background-color: #000000;'><br><br><p style='color:#00D7EC'><b>A long time ago in a galaxy far, far away....</p><br><br><br><br><p style='color:#F2B61A'>Election of 16ABY</p><p style='color:#F2B61A;font-size:26pt'>THE REPUBLIC REBORN</p><br><p style='color:#F2B61A'>The evil GALACTIC EMPIRE is now over a decade dead, and the imperial warlords who rose in its place have been all but defeated.</p><br><p style='color:#F2B61A'>CHANCELLOR ORGANA, elected overwhelmingly after Mon Mothma's retirement in 11ABY, now has the opportunity to reshape galactic institutions and bring an era of peace and prosperity.</p><br><p style='color:#F2B61A'>But all is not well. Threats linger - both in the far reaches of the galaxy and within the halls of the GALACTIC SENATE itself.....</p><p><br><br><br><br><br><br></b></div>", 
 		"image_url": "https://i.imgur.com/Gs1IlpA.png", 
 		"winning_electoral_vote_number": 3104,
 		"advisor_url": "https://i.imgur.com/dynul9H.png", 
@@ -282,6 +282,60 @@ campaignTrail_temp.temp_election_list = [{
 	"display_year": "16ABY"
 }];
 
+// CTS fix for scrolling element
+(function () {
+  const root = document.getElementById('game_window');
+  if (!root) return;
+
+  let initialized = false;
+
+  const observer = new MutationObserver(() => {
+    if (initialized) return;
+
+    const container = root.querySelector('.election_description_window');
+    if (!container) return;
+
+    const scrollingElement = container.querySelector('#scrollingElement');
+    if (!scrollingElement) return;
+
+    initialized = true;
+    observer.disconnect();
+
+    startAutoScroll(scrollingElement);
+  });
+
+  observer.observe(root, {
+    childList: true,
+    subtree: true
+  });
+
+  function startAutoScroll(el) {
+    const pixelsPerSecond = 40;
+    let lastTime = null;
+    let running = true;
+
+    function step(timestamp) {
+      if (!running) return;
+      if (!lastTime) lastTime = timestamp;
+
+      const delta = (timestamp - lastTime) / 1000;
+      lastTime = timestamp;
+
+      el.scrollTop += pixelsPerSecond * delta;
+
+      if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
+        running = false;
+        return;
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    setTimeout(() => requestAnimationFrame(step), 2000);
+  }
+})();
+
+
 //Make proportional the default
 
 function modifyForm() {
@@ -373,52 +427,51 @@ $("#game_start").click((event) => {
 
 //Main game
 
+//Music player and start theme
+var music;
+
 musicMode = () => {
     // Initialise custom music
+    $("#music_player")[0].children[0].style.display = "none";
+    $("#music_player")[0].children[1].style.display = "none";
   
-    $("#music_player")[0].children[0].style.display = "none"
-    $("#music_player")[0].children[1].style.display = "none"
+    document.getElementById("modLoadReveal").style.display = "none";
+    document.getElementById("modloaddiv").style.display = "none";
   
-    document.getElementById("modLoadReveal").style.display = "none"
-    document.getElementById("modloaddiv").style.display = "none"
+    const musicBox = document.getElementById("music_player");
+    musicBox.style.display = "";
   
-    musicBox = document.getElementById("music_player")
-    musicBox.style.display = ""
+    let trackSel;
+    const e = campaignTrail_temp;
+    e.selectedSoundtrack = 0;
   
-    var trackSel;
-    e = campaignTrail_temp
-    e.selectedSoundtrack = 0
-  
-    toTime = (seconds) => {
-        var date = new Date(null);
+    const toTime = (seconds) => {
+        const date = new Date(null);
         date.setSeconds(seconds);
         return date.toISOString().substr(11, 8);
-    }
+    };
   
-    generateTime = () => {
-        // Get the audio element
-        var audio = document.getElementById("campaigntrailmusic");
+    const generateTime = () => {
+        const audio = document.getElementById("campaigntrailmusic");
   
-        timeTracker = document.createElement("div");
+        const timeTracker = document.createElement("div");
         timeTracker.style = `
-  text-align:left;
-  border-style:solid;
-  border-width:3px;
-  height:150px;
-  width:200px;
-  background-color:#999999;
-  float:right;
-  padding: 10px;
-  `
+            text-align:left;
+            border-style:solid;
+            border-width:3px;
+            height:150px;
+            width:200px;
+            background-color:#999999;
+            float:right;
+            padding: 10px;
+        `;
         $("#trackSelParent")[0].prepend(timeTracker);
         $("#trackSelParent")[0].prepend(document.createElement("br"));
   
-        // Create a new element to display the current position of the audio
-        var positionDisplay = document.createElement("gg");
+        const positionDisplay = document.createElement("gg");
         positionDisplay.id = "position-display";
   
-        // Create a new slider element to change the time
-        var timeSlider = document.createElement("input");
+        const timeSlider = document.createElement("input");
         timeSlider.type = "range";
         timeSlider.min = 0;
         timeSlider.max = 1;
@@ -427,40 +480,32 @@ musicMode = () => {
         timeSlider.style.width = "200px";
         timeSlider.id = "time-slider";
   
-        var pausePlay = document.createElement("button");
-        pausePlay.id = "position-display";
-        pausePlay.innerHTML = "<b>Pause</b>"
+        const pausePlay = document.createElement("button");
+        pausePlay.innerHTML = "<b>Pause</b>";
         pausePlay.style.width = "100%";
-  
   
         pausePlay.addEventListener("click", event => {
             event.preventDefault();
-            updatePositionDisplay();
-            let audio = document.getElementById("campaigntrailmusic");
+            const audio = document.getElementById("campaigntrailmusic");
             if (audio.paused) {
                 audio.play();
                 event.target.innerHTML = "<b>Pause</b>";
-                return;
+            } else {
+                audio.pause();
+                event.target.innerHTML = "<b>Play</b>";
             }
-            audio.pause();
-            event.target.innerHTML = "<b>Play</b>";
-            return;
-        })
+        });
   
-        var volumeLabel = document.createElement("gg");
-        volumeLabel.id = "volume-label";
-        volumeLabel.innerHTML = "<br><b>Volume: </b>"
+        const volumeLabel = document.createElement("gg");
+        volumeLabel.innerHTML = "<br><b>Volume: </b>";
   
-        var volumeSlider = document.createElement("input");
+        const volumeSlider = document.createElement("input");
         volumeSlider.type = "range";
         volumeSlider.min = 0;
         volumeSlider.max = 1;
         volumeSlider.step = 0.001;
-        volumeSlider.value = 0;
-        volumeSlider.style.width = "200px";
-        volumeSlider.id = "volume-slider";
-  
         volumeSlider.value = audio.volume;
+        volumeSlider.style.width = "200px";
   
         timeTracker.appendChild(pausePlay);
         timeTracker.appendChild(document.createElement("br"));
@@ -470,117 +515,93 @@ musicMode = () => {
         timeTracker.appendChild(volumeLabel);
         timeTracker.appendChild(volumeSlider);
   
-        updatePositionDisplay();
-  
-        //for (let i = 0; i < 10; i++)
-        //timeTracker.append(document.createElement("br"));
-  
-  
-        // Function to update the position display
-        function updatePositionDisplay() {
+        const updatePositionDisplay = () => {
             positionDisplay.innerHTML = "<b>Time:</b> " + toTime(audio.currentTime) + "<br>";
             timeSlider.value = audio.duration ? audio.currentTime / audio.duration : 0;
-        }
+        };
   
-        // Function to change the time of the audio
-        function changeTime() {
-            positionDisplay.innerHTML = "<b>Time:</b> " + toTime(audio.currentTime) + "<br>";
+        const changeTime = () => {
             audio.currentTime = timeSlider.value * audio.duration;
-        }
+        };
   
-        updateVolume = event => {
+        const updateVolume = event => {
             audio.volume = event.target.value;
-        }
+        };
   
-        // Update the position display and slider every second
         setInterval(updatePositionDisplay, 1000);
-  
-        // Listen for changes to the time slider and change the time of the audio
         timeSlider.addEventListener("input", changeTime);
-        volumeSlider.addEventListener("input", updateVolume)
-    }
+        volumeSlider.addEventListener("input", updateVolume);
+    };
   
     function newMusicPlayer() {
         trackSel = document.createElement("div");
-        trackSel.id = "trackSelParent"
-        let z = `<br><br><br><br><br><br><br><br><br><br><div id='trackSel' style="text-align:left;border-style:solid;border-width:3px;overflow-y: scroll;overflow-x: hidden;height:200px; width:400px;background-color:#A9A9A9;float:right;">`
-        z += `<b><select id='selectSoundtrack'><option value='` + soundtracks[e.selectedSoundtrack].name + `'>` + soundtracks[e.selectedSoundtrack].name + "</option>"
-        for (i in soundtracks) {
+        trackSel.id = "trackSelParent";
+        let z = `<br><br><br><br><br><br><br><br><br><br><div id='trackSel' style="text-align:left;border-style:solid;border-width:3px;overflow-y: scroll;overflow-x: hidden;height:200px; width:400px;background-color:#A9A9A9;float:right;">`;
+        z += `<b><select id='selectSoundtrack'><option value='` + soundtracks[e.selectedSoundtrack].name + `'>` + soundtracks[e.selectedSoundtrack].name + "</option>";
+        for (let i in soundtracks) {
             if (soundtracks[e.selectedSoundtrack] != soundtracks[i]) {
-                z += `<option value='` + soundtracks[i].name + `'>` + soundtracks[i].name + `</option>`
+                z += `<option value='` + soundtracks[i].name + `'>` + soundtracks[i].name + `</option>`;
             }
         }
-        z += `</select></b><br><br>`
-            // <label><input type="radio" name="option" value="option1">Option 1</label><br>
-        for (i in soundtracks[e.selectedSoundtrack].tracklist) {
-            let a = soundtracks[e.selectedSoundtrack].tracklist[i]
-            let b = `<label><input class="trackSelector" type="radio" name="trackSelector" value="` + i + `">` + a.name + `</label><br>`
-            z += b
+        z += `</select></b><br><br>`;
+        
+        for (let i in soundtracks[e.selectedSoundtrack].tracklist) {
+            let track = soundtracks[e.selectedSoundtrack].tracklist[i];
+            z += `<label><input class="trackSelector" type="radio" name="trackSelector" value="${i}"> ${track.name}</label><br>`;
         }
-        z += "</div><br><br>"
-        trackSel.innerHTML = z
-  
-        // select correct song
+        z += "</div><br><br>";
+        trackSel.innerHTML = z;
   
         musicBox.appendChild(trackSel);
-        Array.from(document.getElementById("trackSel").children).filter(f => {
-            return f.tagName == "LABEL"
-        }).map(f => f.children[0])[0].checked = true
+        
+        // Select first track
+        const firstLabel = Array.from(document.getElementById("trackSel").children).find(f => f.tagName == "LABEL");
+        if (firstLabel) firstLabel.children[0].checked = true;
   
-        // set soundtrack changer
-  
-        soundtrackSelector = document.getElementById("selectSoundtrack")
+        const soundtrackSelector = document.getElementById("selectSoundtrack");
         soundtrackSelector.onchange = function() {
-            for (i in soundtracks) {
+            for (let i in soundtracks) {
                 if (soundtracks[i].name == soundtrackSelector.value) {
-                    e.selectedSoundtrack = i
-                    break
+                    e.selectedSoundtrack = i;
+                    break;
                 }
             }
-            document.getElementById("trackSelParent").remove()
-            newMusicPlayer()
-        }
+            document.getElementById("trackSelParent").remove();
+            newMusicPlayer();
+        };
   
-        var matches = document.querySelectorAll('.trackSelector');
+        const selectors = document.querySelectorAll('.trackSelector');
+        selectors.forEach(selector => {
+            selector.onchange = function() {
+                const audio = document.getElementById("campaigntrailmusic");
+                audio.src = soundtracks[e.selectedSoundtrack].tracklist[this.value].url;
+                audio.currentTime = 0;
+                audio.play();
+            };
+        });
   
-        for (match in matches) {
-            matches[match].onchange = function() {
-                audio = $("#campaigntrailmusic")[0];
-                audio.src = soundtracks[e.selectedSoundtrack].tracklist[this.value].url
-                audio.currentTime = 0
-            }
-        }
+        const mainAudio = document.getElementById("campaigntrailmusic");
+        mainAudio.loop = false;
+        mainAudio.src = soundtracks[e.selectedSoundtrack].tracklist[0].url;
   
-        musicBox.children[2].loop = false
-        musicBox.children[2].src = soundtracks[e.selectedSoundtrack].tracklist[0].url
-  
-        musicBox.children[2].onended = function() {
-            console.log("next track")
+        mainAudio.onended = function() {
             let selected = Number(document.querySelector('input[name="trackSelector"]:checked').value);
-            let newSel = clamp(selected + 1, soundtracks[e.selectedSoundtrack].tracklist.length - 1, 0)
-            let buttons = Array.from(document.getElementById("trackSel").children).filter(f => {
-                    return f.tagName == "LABEL"
-                }).map(f => f.children[0])
-                //let selectedIndex = buttons.map(f=>f.children[0]).map(f=>f.checked)
-            buttons[newSel].click()
-        }
+            let newSel = clamp(selected + 1, soundtracks[e.selectedSoundtrack].tracklist.length - 1, 0);
+            const buttons = Array.from(document.getElementById("trackSel").querySelectorAll(".trackSelector"));
+            buttons[newSel].click();
+        };
   
-        for (w = 0; w < 7; w++) {
-            document.getElementById("trackSelParent").appendChild(document.createElement("br"))
+        for (let w = 0; w < 7; w++) {
+            document.getElementById("trackSelParent").appendChild(document.createElement("br"));
         }
   
         generateTime();
     }
   
-    clamp = function(a, max, min, overflow = true) {
-        if (overflow) {
-            return a > max ? min : a < min ? max : a;
-        }
+    const clamp = (a, max, min, overflow = true) => {
+        if (overflow) return a > max ? min : a < min ? max : a;
         return a > max ? max : a < min ? min : a;
-    }
-  
-  
-    // Track list
+    };
   
     var soundtracks = {
         0: {
@@ -592,36 +613,35 @@ musicMode = () => {
             }
           ]
         }        
+    };
+  
+    newMusicPlayer();
+};
+
+//Swaps from intro to game.
+$(document).on('click', "#game_start", (event) => {
+    if (music) music.pause();
+    
+    music = new Audio('https://raw.githubusercontent.com/neonhydroxide/tct/main/media/swtheme_romainpennes_clip.mp3');
+    music.volume = 0.5;
+    music.loop = false;
+    music.play().catch(e => console.log("Intro music autoplay blocked:", e));
+});
+
+$(document).on('click', "#opponent_selection_id_button", (event) => {
+    if (music) {
+        music.pause();
     }
 
-  
-    // Set up new music player
-  
-    newMusicPlayer()
-  
-
-}
-
-
-//Swaps from intro to game. No clue why this nesting is necessary.
-  $("#game_start").click((event) => {
-    event.preventDefault();
-    $("#election_id_button").click((event) => {
-    $("#candidate_id_button").click((event) => {
-    $("#running_mate_id_button").click((event) => { //this is necessary because the removal doesnt actually get rid of the running mate, it just clicks the next button really fast lmao
-    $("#opponent_selection_id_button").click((event) => {
-		music.pause();
+    setTimeout(() => {
         musicMode();
 
-        if(audio !== null) {
-            audio.play();
+        const audio = document.getElementById("campaigntrailmusic");
+        if (audio) {
+            audio.play().catch(err => console.error("Game music play failed:", err));
         }
-
-    })
-    })
-	})
-	})
-  })
+    }, 300);
+});
 
 
 

@@ -1820,7 +1820,7 @@ async function appendStyle() {
         #game_window{
           display: flex;
           flex-direction: column;
-          min-height: 587px;
+          min-height: 597px;
         }
         #new_footer {
             margin: 0;
@@ -1829,7 +1829,7 @@ async function appendStyle() {
             transform: translateY(-8px); 
         }
         .inner_window_question {
-            min-height: 321px;
+            min-height: 331px;
             height: auto !important;
             display: flex;
             flex-direction: column;
@@ -2022,7 +2022,7 @@ async function appendStyle() {
 
             #game_window {
                 flex: 1 1 auto;
-                min-height: clamp(360px, 40vh, 587px); 
+                min-height: clamp(360px, 40vh, 597px); 
                 height: auto;
                 align-self: stretch;
                 overflow: visible;
@@ -2154,13 +2154,14 @@ const startScreenUpdater = setInterval(function() {
   const candbackb = document.getElementById("candidate_id_back");
   var selectElement = document.getElementById('candidate_id');
   var gamemodElem = document.getElementById('game_type_id');
-  if(!(localStorage.getItem("hasWon"))){
-    for (let i = selectElement.options.length - 1; i >= 0; i--) {
-      if (selectElement.options[i].value === '81') {
-          selectElement.remove(i);
-      }
+  
+  if(selectElement && !(localStorage.getItem("hasWon"))){
+        for (let i = selectElement.options.length - 1; i >= 0; i--) {
+            if (selectElement.options[i].value === '81') {
+                selectElement.remove(i);
+            }
+        }
     }
-  }
 
 	if(initialButton) { // reset theme at main menu
 		document.getElementById("header").src = "https://i.imgur.com/o3dxdIc.png";
@@ -2176,14 +2177,12 @@ const startScreenUpdater = setInterval(function() {
 		// if(e.candidate_id == 81) {
 			console.log("clicked");
 			runningMateButton.click();
-      observer.disconnect()
 		// }
 	}
 	if(runningMateButton) { // skip VP for Republican
 		if(e.candidate_id == 81) {
 			console.log("clicked");
 			runningMateButton.click();
-      observer.disconnect()
 		}
 	}
 	if(candidateButton) { // change theme on candidate viewing
@@ -2326,8 +2325,7 @@ const startScreenUpdater = setInterval(function() {
             }
 
             .is-vertical {
-              writing-mode: bt-lr; /* bottom to top */
-              -webkit-appearance: slider-vertical;
+              writing-mode: rl-tb; /* bottom to top */
               appearance: none;
               width: 20px;
               height: 200px;
@@ -2521,8 +2519,7 @@ const startScreenUpdater = setInterval(function() {
             }
 
             .is-vertical {
-              writing-mode: bt-lr; /* bottom to top */
-              -webkit-appearance: slider-vertical;
+              writing-mode: rl-tb; /* bottom to top */
               appearance: none;
               width: 20px;
               height: 200px;
@@ -2607,10 +2604,13 @@ const startScreenUpdater = setInterval(function() {
           }
         }
     }, 15);
-    for (let i = gamemodElem.options.length - 1; i >= 0; i--) {
-      if (gamemodElem.options[i].value === '2') {
-          gamemodElem.remove(i);
-      }
+	
+	if(gamemodElem) {
+        for (let i = gamemodElem.options.length - 1; i >= 0; i--) {
+            if (gamemodElem.options[i].value === '2') {
+                gamemodElem.remove(i);
+            }
+        }
     }
   }
 	if(finalScreenID) { // delete back button and delete the interval
@@ -3165,8 +3165,7 @@ function setupMusicPlayer() {
     }
 
     .is-vertical {
-      writing-mode: bt-lr; /* bottom to top */
-      -webkit-appearance: slider-vertical;
+      writing-mode: rl-tb; /* bottom to top */
       appearance: none;
       width: 20px;
       height: 200px;
@@ -3241,18 +3240,18 @@ function setupMusicPlayer() {
 
   function addAltColorDropDown() {
     var difficultyDiv = document.getElementById("difficulty_level");
-    if (difficultyDiv && !AltColors){
-      var AltColors = document.createElement("form");
-      AltColors.name = "realistic_polls_selection";
+    if (difficultyDiv && !document.getElementById("AltColorsCheckbox")){
+      var altColorsForm = document.createElement("form");
+      altColorsForm.name = "realistic_polls_selection";
       var AltColorsHeader = document.createElement("h3");
       AltColorsHeader.textContent = "⠀⠀Alt. Colors⠀⠀";
-      AltColors.appendChild(AltColorsHeader);
+      altColorsForm.appendChild(AltColorsHeader);
       var AltColorsCheckbox = document.createElement("input");
       AltColorsCheckbox.type = "checkbox";
       AltColorsCheckbox.id = "AltColorsCheckbox";
       AltColorsCheckbox.checked = e.altcolors;
-      AltColors.appendChild(AltColorsCheckbox);
-      difficultyDiv.appendChild(AltColors);
+      altColorsForm.appendChild(AltColorsCheckbox);
+      difficultyDiv.appendChild(altColorsForm);
       difficultyDiv.style.display = "flex";
       difficultyDiv.style.flexDirection = "row";
       difficultyDiv.style.justifyContent = "center"; 
@@ -3382,8 +3381,7 @@ function setupMusicPlayer() {
                   }
 
                   .is-vertical {
-                    writing-mode: bt-lr; /* bottom to top */
-                    -webkit-appearance: slider-vertical;
+                    writing-mode: rl-tb; /* bottom to top */
                     appearance: none;
                     width: 20px;
                     height: 200px;
@@ -3564,8 +3562,7 @@ function setupMusicPlayer() {
                   }
 
                   .is-vertical {
-                    writing-mode: bt-lr; /* bottom to top */
-                    -webkit-appearance: slider-vertical;
+                    writing-mode: rl-tb; /* bottom to top */
                     appearance: none;
                     width: 20px;
                     height: 200px;
@@ -3747,8 +3744,7 @@ function setupMusicPlayer() {
                   }
 
                   .is-vertical {
-                    writing-mode: bt-lr; /* bottom to top */
-                    -webkit-appearance: slider-vertical;
+                    writing-mode: rl-tb; /* bottom to top */
                     appearance: none;
                     width: 20px;
                     height: 200px;
@@ -3929,8 +3925,7 @@ function setupMusicPlayer() {
                   }
 
                   .is-vertical {
-                    writing-mode: bt-lr; /* bottom to top */
-                    -webkit-appearance: slider-vertical;
+                    writing-mode: rl-tb; /* bottom to top */
                     appearance: none;
                     width: 20px;
                     height: 200px;
@@ -3991,7 +3986,6 @@ function setupMusicPlayer() {
             }
           }
       });
-      masterObserver.disconnect();
     }
   }
 

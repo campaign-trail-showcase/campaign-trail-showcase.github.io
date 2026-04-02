@@ -1,0 +1,3197 @@
+RecReading=true
+
+campaignTrail_temp.achievements = {
+    "Bian Bian Bian!": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/abiana.png?v=1766168397173",
+        "description": "As Chen Shui-bian, win the presidential election.",
+        "cannotBeCheated": true
+    },
+    "Regret of the Century": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/20040280154_I001.jpg?v=1766168465696",
+        "description": "As James Soong, win the presidential election.",
+        "cannotBeCheated": true
+    },
+    "Return to Normalcy": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/51f83eb9-d307-4c71-aebb-1248f44e9bd4.jpg?v=1766168506481",
+        "description": "As Lien Chan, win the presidential election.",
+        "cannotBeCheated": true
+    },
+    "Lee's Loyal Dog": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/gougou.png?v=1766168565994",
+        "description": "As Lien Chan, win with a high closeness score to Lee Teng-hui (greater than 5).",
+        "cannotBeCheated": true
+    },
+    "Moses and Joshua": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/moses.png?v=1766168617958",
+        "description": "As Chen Shui-bian, win without offending Lee Teng-hui (score less than 0).",
+        "cannotBeCheated": true
+    },
+    "Like Father and Son": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/soonglee.png?v=1766168644358",
+        "description": "As James Soong, win without offending Lee Teng-hui (score less than 0).",
+        "cannotBeCheated": true
+    },
+    "Master of My Own Fate": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/images%20(10).jpg?v=1766168667727",
+        "description": "As Lien Chan, win without being close to Lee Teng-hui (score less than 0).",
+        "cannotBeCheated": true
+    },
+    "Bluer than Blue": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/ROC_1996_Presidential_Election_County_level.svg.png?v=1766168727283",
+        "description": "As Lien Chan, win 22 counties/cities, including Nantou County which Lee Teng-hui failed to win in 1996.",
+        "cannotBeCheated": true
+    },
+    "The Model Governor": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/jpg_00_00_92_00_cca220001-hp-cdn0085786-0001-i.jpg?v=1766168775698",
+        "description": "As James Soong, win 18 counties/cities.",
+        "cannotBeCheated": true
+    },
+    "Young Taiwan": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/cmjb82vx5009b10ktam016rl9-mobile.jpg?v=1766168818384",
+        "description": "As Chen Shui-bian, win 18 counties/cities.",
+        "cannotBeCheated": true
+    },
+        "Dreams Come True": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/Flag_of_World_Taiwanese_Congress.svg.png?v=1766168845053",
+        "description": "As Chen Shui-bian, win the election with a Pro-Independence score (Taiwan Independence points) greater than 6",
+        "cannotBeCheated": true
+    },
+     "Calm Down,Listen to Me": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/hqdefault.jpg?v=1766168864609",
+        "description": "As Chen Shui-bian, win the election with a Moderate Path (Centrist Route) score greater than 3.",
+        "cannotBeCheated": true
+    },
+    "Vanguard of Reform": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/BGB146.png?v=1766168924960",
+        "description": "As Lien Chan, win with a political reform score greater than 5.",
+        "cannotBeCheated": true
+    },
+    "New Godfather": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/jiaofu.png?v=1766168952303",
+        "description": "As Lien Chan, win with a political reform score less or equal than 0.",
+        "cannotBeCheated": true
+    },
+    "The Stainless Governor": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/265.jpg?v=1766168995159",
+        "description": "As James Soong, win with a political reform score greater than 3.",
+        "cannotBeCheated": true
+    },
+    "Birds of a Feather": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/songheijin.png?v=1766169034319",
+        "description": "As James Soong, win with a political reform score less than 0.",
+        "cannotBeCheated": true
+    },
+    "Sweeping the Universe": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/unnamed%20(4).jpg?v=1766169066146",
+        "description": "As Chen Shui-bian, win with a political reform score greater than 4.",
+        "cannotBeCheated": true
+    },
+    "Kicking Out Ma": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/%E9%99%B3%E6%B0%B4%E6%89%81.jpg?v=1766169199677",
+        "description": "As Chen Shui-bian, win Taipei City and the general election.",
+        "cannotBeCheated": true
+    },
+    "The Sinking Ship": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/pts_sli_pe_2000_005_014_001_002%5Bby-nc-sa%5D.jpg?v=1766169230672",
+        "description": "As Lien Chan, lose with less than 25% of the popular vote, just like in history.",
+        "cannotBeCheated": true
+    },
+    "Just One Step Away": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/15391402f1522ab36d9206100aa6e0eb.jpg?v=1766169254835",
+        "description": "As James Soong, lose with more than 36% of the popular vote, just like in history.",
+        "cannotBeCheated": true
+    },
+    "Trading Places": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/mofa109179cf-2020-12-ph00019-073-t.jpg?v=1766169285552",
+        "description": "As James Soong, win with over 39% of the vote, while Chen Shui-bian loses with more than 36%.",
+        "cannotBeCheated": true
+    },
+    "Continuous Victory": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/images%20(11).jpg?v=1766169337467",
+        "description": "As Lien Chan, win the election while holding Chen Shui-bian to 0 counties/cities.",
+        "cannotBeCheated": true
+    },
+    "Chung Hsing? Never Heard of It": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/aj1009-20061108124725.jpg?v=1766169376604",
+        "description": "As James Soong, successfully withstand the KMT's smear campaign and win with over 40% of the vote.",
+        "cannotBeCheated": true
+    },
+    "Blue Consolidation": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/jpg_00_01_08_76_cca220002-hp-200003150412000000l-0001-i.jpg?v=1766169538243",
+        "description": "As Lien Chan, successfully execute 'Dump Soong, Save Lien' to win the election while keeping James Soong under 25%.",
+        "cannotBeCheated": true
+    },
+    "Chan Comes Home": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/cca220002-hp-200311090020000000l-0001-w.jpg?v=1766169562912",
+        "description": "As Lien Chan, win Tainan City with more than 40% of the vote(Not PV).",
+        "cannotBeCheated": true
+    },
+    "Nothing Has Changed": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/1200x978_186543724877.jpg?v=1766169598895",
+        "description": "As Chen Shui-bian, win with a vote share between 39% and 39.5%.",
+        "cannotBeCheated": true
+    },
+    "VP > Governor": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/20160815135750-01567c792e49b533efcb4669244de9ea-mobile.jpg?v=1766169775813",
+        "description": "As Lien Chan, win the election while holding James Soong to 0 counties/cities.",
+        "cannotBeCheated": true
+    },
+    "Transcending Ethnicity": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/jpg_00_01_26_61_cca220002-hp-200111120614000000l-0001-i.jpg?v=1766169805291",
+        "description": "As James Soong, break through the DPP's southern stronghold and win Kaohsiung County.",
+        "cannotBeCheated": true
+    },
+    "The Hard Road": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/176616982375263_P9087675.jpg?v=1766169875568",
+        "description": "As James Soong, win on Harder difficulty.",
+        "cannotBeCheated": true
+    },
+    "Formosa": {
+        "image": "https://file.garden/Z9XHdyLGHwUEZPS4/20211210-030542_U18440_M731983_7565.webp?v=1766169881066",
+        "description": "As Chen Shui-bian, win on Struggle difficulty.",
+        "cannotBeCheated": true
+    }
+};
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.12,
+            "max_swing": 0.12,
+            "start_point":1,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2000,
+            "display_year": "2000 ROC Redux",
+            "summary": "<div style='overflow-y:scroll;height:200px;'><span style='font-size:2.5em;'>T</span>he dawn of the millennium is breaking. As the world eagerly awaits the arrival of the year 2000, the Republic of China, on a small island in East Asia, is preparing for a historic challenge. After 55 years of Kuomintang (KMT) rule, the people’s yearning for a change in political leadership and a new political era can no longer be ignored. Following Lee Teng-hui’s 12-year presidency, Taiwan has undergone profound transformations—from the first direct presidential election in 1996 to the Taiwan Strait missile crisis, the 1998 Asian financial crisis, and the widespread social unrest and changes throughout the 1990s. The competition among political parties has reached an unprecedented intensity since the government’s relocation to Taiwan.</P><p>The Kuomintang, the long-dominant force in Taiwan’s political landscape, has nominated Vice President Lien Chan as its candidate. Carrying the KMT’s legacy of governance experience and a promise of stability, Lien seeks to extend the party’s rule. However, internal divisions have left this political juggernaut on shaky ground. Song Chu-yu, once a key figure in the KMT and the only governor of Taiwan Province, broke away from the party due to dissatisfaction with its primary process and is now running as an independent. His candidacy has drawn significant support from loyal followers, splitting the KMT’s voter base and injecting unpredictable variables into the race. Meanwhile, the Democratic Progressive Party’s (DPP) Chen Shui-bian, a rising political star known as the “Son of Taiwan,” challenges the KMT’s dominance with his grassroots charisma and reformist agenda. His campaign slogans ignite public enthusiasm for local identity and deeper democratization, though the DPP’s lack of governing experience raises concerns.</p><p>The presidential election of 2000 will be a decisive battle that shapes Taiwan’s future destiny. The kingmakers and contenders are ready, poised for the fight that lies ahead…</p></div>",
+             "image_url": "https://i.postimg.cc/FFpD1Gn0/QQ-20250907021159.png",
+            "winning_electoral_vote_number": 25,
+            "advisor_url": "https://i.imgur.com/Vl6hvNx.gif",
+            "recommended_reading": "<div style='overflow-y:scroll; height:300px; padding: 10px;'><h3 style='text-align: center; color: #004db3;'>Author's Note & Historical Context</h3><p><b>Thank you for playing ROC 2000 Redux!</b></p><p>The 2000 Presidential Election was a watershed moment in the history of the Republic of China (Taiwan). It marked the first peaceful transfer of power in Chinese history and the end of the Kuomintang's 55-year continuous rule. This election was defined by the dramatic split within the KMT, where the internecine struggle between Lien Chan and James Soong allowed the reformist Chen Shui-bian to rise through the middle. From the 'Chung Hsing Bills Case' to the tense cross-strait atmosphere caused by threats from Beijing, this election shaped the modern political landscape of Taiwan.</p><p>This mod is a labor of love that took me about <b>two to three months</b> to create. It is a complete remake intended to capture the intensity and uncertainty of that millennium election. I sincerely appreciate everyone who helped me along the way, the creators of the original mods from whom I borrowed code, and especially the creators of the Jet tools—this wouldn't be possible without you.</p><p><b>A Note on Achievements:</b><br>Please be aware that the achievement system is currently experimental. Due to some persistent bugs in the code, you might meet the requirements but fail to unlock the achievement badge. I encountered many such issues during testing myself. If this happens, please treat the achievements merely as suggested 'challenges' or game goals to strive for! If you encounter major issues, feel free to provide feedback on my Reddit thread.</p><p><b>Candidate Introductions & Feedback:</b><br><a href='https://www.reddit.com/r/thecampaigntrail/comments/1pgr35p/mod_announcement_roc_2000_redux_a_complete_remake/' target='_blank' style='color: #FF0000; font-weight: bold;'>[Click here to visit the Reddit Announcement Post]</a></p><hr style='border: 1px dashed #999; margin: 15px 0;'><h3 style='text-align: center; color: #004db3;'>作者寄語與歷史背景</h3><p><b>感謝您遊玩 ROC 2000 Redux（千禧之戰重製版）！</b></p><p>公元2000年的這場總統大選，不僅是中華民國歷史上首次政黨輪替，更是台灣民主深化的里程碑，結束了國民黨長達55年的執政。這場選戰充滿了戲劇性：國民黨內部的分裂導致連戰與宋楚瑜兄弟鬩牆，讓高舉改革大旗的陳水扁得以在「三腳督」的險局中突圍。從震驚全台的「興票案」到選前朱鎔基的「恫嚇牌」，這場選舉的每一個轉折都深刻影響了台灣二十一世紀的政治版圖。</p><p>這個 Mod 是我花費了大概<b>兩三個月</b>的時間心血製作的完全重製版。我由衷感謝所有在製作過程中提供幫助的朋友、以及無私分享代碼的前輩們。特別感謝 Jet 工具的開發者，是你們讓這一切成為可能。</p><p><b>關於成就系統（Bug 提示）：</b><br>由於代碼似乎存在一些難以捉摸的 Bug，您可能會遇到「明明達成了條件卻無法解鎖成就」的情況。我在測試過程中也多次遇到這個問題，對此深表歉意。如果反覆嘗試仍無法解鎖，建議您可以將成就列表視為一種「自我挑戰」的遊戲目標即可！如果您有任何建議或反饋，歡迎前往我的 Reddit 帖子留言，我會盡力檢查代碼。</p><p><b>候選人介紹與反饋討論：</b><br><a href='https://www.reddit.com/r/thecampaigntrail/comments/1pgr35p/mod_announcement_roc_2000_redux_a_complete_remake/' target='_blank' style='color: #FF0000; font-weight: bold;'>【點擊此處前往 Reddit 發布帖】</a></p></div>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "",
+            "site_description": "<div style='overflow-y:scroll;height:200px;'><span style='font-size:2.5em;'>T</span>he dawn of the millennium is breaking. As the world eagerly awaits the arrival of the year 2000, the Republic of China, on a small island in East Asia, is preparing for a historic challenge. After 55 years of Kuomintang (KMT) rule, the people’s yearning for a change in political leadership and a new political era can no longer be ignored. Following Lee Teng-hui’s 12-year presidency, Taiwan has undergone profound transformations—from the first direct presidential election in 1996 to the Taiwan Strait missile crisis, the 1998 Asian financial crisis, and the widespread social unrest and changes throughout the 1990s. The competition among political parties has reached an unprecedented intensity since the government’s relocation to Taiwan.</P><p>The Kuomintang, the long-dominant force in Taiwan’s political landscape, has nominated Vice President Lien Chan as its candidate. Carrying the KMT’s legacy of governance experience and a promise of stability, Lien seeks to extend the party’s rule. However, internal divisions have left this political juggernaut on shaky ground. Song Chu-yu, once a key figure in the KMT and the only governor of Taiwan Province, broke away from the party due to dissatisfaction with its primary process and is now running as an independent. His candidacy has drawn significant support from loyal followers, splitting the KMT’s voter base and injecting unpredictable variables into the race. Meanwhile, the Democratic Progressive Party’s (DPP) Chen Shui-bian, a rising political star known as the “Son of Taiwan,” challenges the KMT’s dominance with his grassroots charisma and reformist agenda. His campaign slogans ignite public enthusiasm for local identity and deeper democratization, though the DPP’s lack of governing experience raises concerns.</p><p>The presidential election of 2000 will be a decisive battle that shapes Taiwan’s future destiny. The kingmakers and contenders are ready, poised for the fight that lies ahead…</p></div>"
+        }
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2000,
+        "is_premium": 0,
+        "display_year": "2000 ROC Redux"
+    }
+]
+e.collect_results = true;
+function changeOpponentSelectionDescription() {
+    try {
+      const opponentSelectionDescription = document.getElementById("opponent_selection_description_window");
+      opponentSelectionDescription.innerHTML = `<p><strong>Use the default method of deciding the winner in the ROC presidential election.</strong></p><p>In the ROC presidential election, the candidate who receives more votes than any other opponent is elected president. Under this plurality system, you don't need an absolute majority—you just need to have the most votes to win. For example, in the historical result of this election, <b>Chen Shui-bian won with 39.3% of the vote</b>, narrowly beating <b>James Soong (36.8%)</b> and <b>Lien Chan (23.1%)</b>.</p>`;
+    } catch {}
+  }
+  window.setInterval(changeOpponentSelectionDescription,200)
+
+campaignTrail_temp.credits = "Phone_Tall(Soyorin) and thanks for the some codes from others"
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 67,
+        "fields": {
+            "first_name": "",
+            "last_name": "Chen Shui Bian",
+            "election": 20,
+            "party": "Democratic Progressive Party",
+            "state": "Tainan County",
+            "priority": 1,
+            "description": "<div style='overflow-y:scroll;height:200px;'><p>In 1994, Chen Shui-bian emerged like the first light of dawn, dispelling the shadows over Taipei's political landscape. With unshakable resolve, he triumphed in the mayoral election, vanquishing the New Party's Jaw Shaw-kong and the Kuomintang's Huang Ta-chou, a rising star illuminating the horizon. Then, he stood as the cornerstone of the Democratic Progressive Party (DPP), the honor of Taipei's mayorship and its political capital crowning him as the destined luminary of the next generation. Yet, the tide turned in 1998: bolstered by Lee Teng-hui's formidable support, Ma Ying-jeou defeated him, forcing this once-proud leader to retreat in somber silence from the KMT's impregnable stronghold, his echoes lingering like a fading melody.</p><p>Yet, the son of a farmer from Tainan’s rustic fields, Chen Shui-bian, remained a radiant beacon undimmed by defeat. His ascent to lawyer and statesman was not born of familial privilege but forged through sweat, eloquence, and keen intellect. Even after faltering in his bid for re-election as Taipei mayor, he shone as the DPP's brightest star. As the 2000 presidential election loomed, Ah-bian stood poised, ready to seize the nomination and reclaim his place on history’s grand stage.</p><p>But the path ahead was no broad highway. The DPP’s 'four-year clause' loomed like an invisible barrier, restraining his stride. This rule demanded unwavering focus on a single office, lest voters perceive a lack of dedication, tarnishing the party’s credibility. To claim the presidency, he must persuade party chairman Lin Yi-hsiung to dismantle this internal hurdle, a move that might unravel the DPP’s pristine image. The discontent of Beautiful Island faction leader Hsu Hsin-liang simmered like a hidden tide, and the challenge of toppling the poll-leading James Soong loomed as a voyage against the current, fraught with uncertainty and trials.</p></div>",
+            "color_hex": "#1b9431",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://file.garden/Z9XHdyLGHwUEZPS4/gettyimages-51343225-612x612.jpg?v=1766076457951",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1002,
+        "fields": {
+            "first_name": "",
+            "last_name": "Lu Hsiu-lien",
+            "election": 20,
+            "party": "Democratic Progressive Party",
+            "state": "Taoyuan County",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#1b9431",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/ISRc1LN.png",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": "<div style='overflow-y:scroll;height:200px;'><P>Like Hsu Hsin-liang and Chen Shui-bian, Lu Hsiu-lien (Annette Lu), the renowned Iron Lady of Taiwanese politics, hailed from the Kaohsiung Incident Generation (Mei-li-tao Generation), those who dared to challenge the authoritarian regime with sheer individual will. During the 1970s, while Taiwan was still under strict authoritarian rule, Lu Hsiu-lien emerged as a bright light in the non-KMT opposition movement (Dangwai) through her advocacy for New Feminism and her firm belief in democracy. Her sharp rhetoric and unwavering stance made her an indispensable force within the democratic camp. However, this prominence brought her suffering: due to her participation in the Kaohsiung Incident, she was arrested and imprisoned, and her long years behind bars became the most profound forging of her political character.</P><P>After her release, Lu Hsiu-lien quickly rose within the Democratic Progressive Party (DPP), leveraging her experience in local governance (having served as Taoyuan County Magistrate) and her international perspective. As the 2000 Presidential Election approached, Chen Shui-bian selected her as his running mate to lend the DPP ticket greater completeness and symbolic relevance for the era. However, this pairing was set against a backdrop of deep internal fissures within the DPP. Hsu Hsin-liang, a fellow elder of the Kaohsiung Incident Generation, was in conflict with the party's mainstream Taiwan independence line due to his Westward to China advocacy, leading him to break away and run as an independent candidate. Hsu’s departure caused a severe loss of support among the DPP's Kaohsiung Incident old guard and some grassroots members.</P><P>At this critical juncture, Lu Hsiu-lien's role became paramount. She also possessed an undeniable record of democratic credentials and the status of a political victim, and her inclusion successfully offset the damage caused by Hsu Hsin-liang's independent bid. Lu Hsiu-lien’s grassroots influence in Taoyuan and her prestige among older democrats helped Chen Shui-bian effectively stabilize the party's morale and avert a major split. Perhaps this was the very reason for her place on the ballot.</P></div>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+        <!-- //宋楚瑜 -->
+         {
+        "model": "campaign_trail.candidate",
+        "pk": 69,
+        "fields": {
+            "first_name": "",
+            "last_name": "James Soong",
+            "election": 20,
+            "party": "Independent",
+            "state": "Hunan",
+            "priority": 1,
+            "description": "<div style='overflow-y:scroll;height:200px;'><p>In 1949, the collapse of the Chinese Civil War crashed upon Taiwan like a towering wave, bringing not only a fledgling government but also the displaced lives of millions of mainland exiles. The Soong family, rooted in Hunan’s Xiangtan, was among this tidal surge, planting their lineage in foreign soil. Beneath the shadow of authoritarian rule, this young man soared like a phoenix, rising to become a radiant confidant of President Chiang Ching-kuo. When President Lee Teng-hui’s authority teetered on unsteady ground, battered by the tempests of KMT elders, Soong stood as an unyielding pillar at his side, fortifying his political foundation. Their bond deepened into a father-son-like affinity, a poignant chapter etched into the annals of history.</p><p>In 1994, Soong’s political career reached its zenith, a sunrise illuminating Taiwan’s political stage. With unrivaled vigor, he defeated the DPP’s Chen Ding-nan in the Taiwan Provincial Governor election, ushering in a four-year tenure of governance. During this time, he wielded pragmatic skill to steer provincial affairs, earning widespread acclaim for a leadership that transcended party lines. Yet, time flows like a relentless river, and the glow of past glories began to fade. As Soong’s influence ascended like a rising star, a shadow of wariness crept into Lee Teng-hui’s heart. By 1997, amid swirling undercurrents on the political stage, Lee resolved to freeze Taiwan Province, seeking to clip the wings of this potential rival, their once-trusted bond scattering like autumn leaves.</p><p>Yet, Soong’s destiny remained unwritten. The freeze, though weakening his administrative base, could not quench his political ambition. In the storm of 1998, his relationship with Lee shattered like torn silk, compelling this once-favored protégé to seek a new path. As the 2000 election’s clarion call resounded, he broke from the KMT, aligning with Chang Chau-hsiung to challenge the blue and green camps, aiming to reshape Taiwan’s fate through a centrist vision. The road ahead was rugged, pitted against the dual pressures of Lien Chan and Chen Shui-bian. With wisdom and courage, he might transform crisis into opportunity, rising from history’s shadow—yet, for the provincial governor who had traversed over 300 townships of Taiwan, what were these challenges but mere trials? A solitary crusader now marched forth, seeking vengeance against the king who had betrayed him...</p><p><br></p></div>",
+            "color_hex": "#FF6600",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://file.garden/Z9XHdyLGHwUEZPS4/gettyimages-3109928-612x612.jpg?v=1766076385328",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    <!-- 张昭雄 -->
+         {
+        "model": "campaign_trail.candidate",
+        "pk": 70,
+        "fields": {
+            "first_name": "",
+            "last_name": "Chang Chau-hsiung",
+            "election": 20,
+            "party": "Independent",
+            "state": "Kaohsiung City",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#FF6600",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/c5Sp6uY.png",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": "<div style='overflow-y:scroll;height:200px;'><P>Chang Chao-hsiung, a preeminent cardiac surgeon and leading figure in Taiwan’s medical community, spent the majority of his life largely untouched by the clamor of politics. He commanded immense professional respect for his outstanding medical achievements and contributions to education. This Kaohsiung Qijin native graduated from National Taiwan University’s College of Medicine, served as the Superintendent of Chang Gung Memorial Hospital and President of Chang Gung University, and personally oversaw the development of the vast Chang Gung healthcare system. He was the quintessential scholar and professional elite, far removed from the dust of Kuomintang bureaucracy and factional disputes. Stepping onto the political stage in his white coat, his professional integrity was the unique color he brought to the chaotic campaign. He publicly stated that the flaws of Taiwan’s partisan politics compelled him to join James Soong’s New Taiwanese Service Team.</P><P>Yet, Chang Chao-hsiung’s political significance extended far beyond his individual medical halo. He represented not only the trust of the Chang Gung system and Wang Yung-ching, but more crucially, his family background connected him to a powerful local Taiwanese elite network. Through his wife Li Fang-hui’s family ties, this lineage traced back to the Taiwan Cultural Association and powerful local gentry during the Japanese colonial era. His presence suggested the mobilization of a local force that had previously aligned with the ruling party but was now choosing to cease singular support for the Lee Teng-hui line. Chang Chao-hsiung’s entry was thus regarded as a clear signal of a shifting political wind among local business interests, creating a profound impact on the political landscape.</P><P>In the political storm of the 2000 Presidential Election, James Soong faced questions of political morality for his independent bid. Chang Chao-hsiung’s partnership acted like an injection of fresh professional energy for the Soong-Chang ticket, skillfully diverting the campaign’s focus from Soong’s political baggage toward public welfare and policy. His medical professional halo and academic background successfully separated Soong from controversy, attracting a broad swathe of centrist voters and intellectuals weary of traditional politics. Chang Chao-hsiung was more than just a running mate; he was a crucial asset for solidifying Soong’s core support and maximizing the ticket’s vote ceiling. This dynamic posed a substantial threat to the KMT’s Lien-Siew ticket.</P></div>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 68,
+        "fields": {
+            "first_name": "",
+            "last_name": "Lien Chan",
+            "election": 20,
+            "party": "Chinese Kuomintang",
+            "state": "Tainan City(Born in Xi'an)",
+            "priority": 1,
+            "description": "<div style='overflow-y:scroll;height:200px;'><p>The acrid smoke of the campaign had thickened like autumn mist, creeping ever closer. Lien Chan could smell that pungent scent—the throne of power was within reach, just one step away. Since being elected as the Republic of China's first popularly elected vice president in 1996, he had been revered by the Kuomintang and Taiwanese society alike as Lee Teng-hui's rightful heir, the 'crown prince' of the blue camp. In an era of authoritarian rule, Lien would have needed only to bide his time: wait for President Lee to grow old and gracefully hand over the reins upon retirement, and the mantle of authority would naturally fall into his lap.</p><p>But times had shifted; he could no longer afford such patience. The Republic of China of today had transformed into a forge of democracy, and Lien's tenure as premier had been like a solitary boat battling upstream—beset by widespread criticism and obstruction. Worse still, Taiwan Provincial Governor James Soong's independent candidacy loomed like an undercurrent at the cliff's edge, unstoppable... After fifty-five years since the Kuomintang's retreat to Taiwan, Lien glimpsed the dawn of the nation's highest seat for the first time, yet he knew full well that the path ahead was tangled with thorns, beyond any single man's control. Sheltered beneath President Lee Teng-hui's patronage and wings, he must stand alone against the Democratic Progressive Party's Chen Shui-bian and his tempestuous calls for 'Taiwan independence'—not merely a political threat, but a rending of the island's soul; at the same time, Soong's defection would carve a grievous wound into the KMT's flesh, one hard to mend.</p><p>Lien must forge a bold new middle path: a tightrope suspended between the blue and green chasms, woven with wisdom and traversed with courage, to heal party rifts, rally centrist voters, and calm the cross-strait storms. Otherwise, he was fated to become a pale footnote in history's ledger. Who, after all, lingers long on the memory of a vice president? In the river of power, he might be but a fleeting ripple, vanishing in an instant. Only this election could transmute him from Lee Teng-hui's shadow into the helmsman charting Taiwan's course toward a new epoch.</p></div>",
+            "color_hex": "#1e1ec9",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://file.garden/Z9XHdyLGHwUEZPS4/taiwan-opposition-kuomintang-leader-and-presidential-candidate-lien-chan-gives-a-victory-gesture.jpg?v=1766075410613",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50001,
+        "fields": {
+            "first_name": "",
+            "last_name": "Vincent Siew",
+            "election": 20,
+            "party": "Chinese Kuomintang",
+            "state": "Chiayi City",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/HcckIqc.png",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": "<div style='overflow-y:scroll;height:200px;'><P>The sitting Premier, Vincent Siew, was a well-liked and personable figure in the political arena. Nicknamed Smiling Siew (Wēi Xiào Lǎo Xiāo), his career began not in fierce political activism, but in the rigorous realms of finance and the civil service. Utilizing his exceptional abilities in international trade and economics, Vincent Siew climbed from a low-level civil servant to the top, earning a master’s degree in International Relations from Georgetown University and becoming an indispensable policy maker during the later stages of Kuomintang rule. Vincent Siew was known for his professional image as a technocrat. Although he was not from President Lee Teng-hui’s faction, as a native Taiwanese, he steadily advanced in the political hierarchy during Lee’s tenure, becoming one of the KMT’s rare professional-minded local elites.</P><P>As the 2000 Presidential Election approached, the KMT faced a severe crisis of division caused by James Soong’s independent bid. KMT Chairman Lee Teng-hui ultimately decided that Lien Chan would partner with Vincent Siew, forming the Lien-Siew ticket. Vincent Siew’s role became critically important: he had to use his professional halo and clean image to balance Lien Chan’s traditional political persona and offset the vast amount of grassroots support defecting to Soong. His inclusion was an attempt to send a message to the electorate: despite the political turmoil, the KMT still possessed the professional competence to govern the economy and maintain cross-strait stability.</P><P>However, Vincent Siew’s reputation and standing as the sitting Premier also became a heavy liability in the campaign. The public security situation throughout the 1990s in Taiwan was widely viewed as unsatisfactory, and the entire administrative team, including Vincent Siew himself, was subject to relentless attacks from voters dissatisfied with the status quo. Choosing Vincent Siew meant that Lien Chan was fully tied to the current government’s record. Vincent Siew was not merely a running mate; he was the KMT’s last line of defense in the election, aiming to secure the support of centrist and economic-minded voters. Yet, this defensive line was simultaneously exposed to intense criticism aimed at the administration’s flaws.</P></div>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+
+    <!-- 许信良 -->
+  {
+        "model": "campaign_trail.candidate",
+        "pk": 1921,
+        "fields": {
+            "first_name": "",
+            "last_name": "Hsu Hsin-liang",
+            "election": 20,
+            "party": "Democratic Progressive Party?",
+            "state": "Taoyuan County",
+            "priority": 1,
+            "description": "<div style='overflow-y:scroll;height:200px;'><p>From Hsu Hsin-liang’s school days, he harbored a singular ambition: to become the President of the Republic of China. This vision took root amid the oppressive silence of martial law, where he emerged as a defiant flame in the 1970s democracy movement. His bold win as an independent Taoyuan County Magistrate in 1977 ignited hope, but the Kaohsiung Incident of 1979 cast him into exile in the United States, a stark testament to his unyielding stand against authoritarian rule. Returning in 1986, he co-founded the Democratic Progressive Party (DPP), yet his journey was shadowed by a deepening feud with Lin Yi-hsiung. Their clash stemmed from clashing visions—Hsu’s advocacy for a westward approach to China versus Lin’s fervent pro-independence stance—eroding their once-shared ideals into a rift of bitter contention.</p><p>As the 2000 presidential election loomed, Hsu’s dream remained elusive, and his discord with Lin Yi-hsiung reached a breaking point. Within the DPP, Lin’s influence bolstered Chen Shui-bian’s nomination, leaving Hsu sidelined despite his leadership as party chairman twice. His “westward to China” policy, advocating economic and cultural engagement with the mainland to foster peace and prosperity, clashed sharply with the DPP’s hardline independence rhetoric, widening the ideological gulf with Lin. Personal animosities and strategic differences fueled their estrangement, turning camaraderie into a battleground of wills. Disillusioned by the party’s rejection of his vision and unable to overcome Lin’s opposition, Hsu faced a pivotal choice. In 1999, after years of internal strife, he resolved to break away, leaving the DPP to forge an independent path, partnering with New Party legislator Josephine Chu to chase his presidential aspiration.</p><p>The road ahead was a labyrinth of trials. His independent run demanded the arduous task of collecting 224,000 signatures, a solitary endeavor that underscored his detachment from party support. His “westward to China” platform, though a bold call for cross-strait reconciliation, drew ire from both Pan-Green and Pan-Blue factions, while the lingering shadow of his feud with Lin cast doubt on his unity. Against the formidable trio of Lien Chan, James Soong, and Chen Shui-bian, Hsu’s campaign rested on his ability to weave a coalition from a divided electorate with promises of reform and a new cross-strait vision. Win or lose, this lone quest—born from a childhood dream and forged in the fires of democratic struggle—would etch an enduring legacy into Taiwan’s political chronicle.</p></div>",
+            "color_hex": "#90EE90",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://file.garden/Z9XHdyLGHwUEZPS4/gettyimages-1259156117-612x612.jpg?v=1766089709799",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    <!-- 朱惠良 -->
+            {
+        "model": "campaign_trail.candidate",
+        "pk": 1922,
+        "fields": {
+            "first_name": "",
+            "last_name": "Chu Hui-liang",
+            "election": 20,
+            "party": "New Party",
+            "state": "Nantou",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#90EE90",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/7EScPjM.jpeg",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": "<div style='overflow-y:scroll;height:200px;'><P>When Hsu Hsin-liang broke away from the old guard, preparing to use his Boldly Go West economic theory to take on the two Blue and Green giants alone, what he needed was more than just a running mate; he needed a balancer—someone who looked normal, looked professional, and looked genuinely concerned about your health. </P><P>The addition of Chu Hui-liang was like handing the idealist Hsu Hsin-liang a clean bill of health: Look, we aren't just talking about abstract economic forums far away; we also care if your household tap has running water, and if your National Health Insurance card is working! Her presence transformed Hsu Hsin-liang’s campaign from a revolt by an elder of the Kaohsiung Generation into an atypical challenge formed by scholars, doctors, and professional managers—a challenge that was fresh, pragmatic, and remarkably sweat-free.</P></div>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    <!-- 李敖 -->
+{
+        "model": "campaign_trail.candidate",
+        "pk": 1942,
+        "fields": {
+            "first_name": "",
+            "last_name": "Li Ao",
+            "election": 20,
+            "party": "New Party",
+            "state": "Born in Harbin",
+            "priority": 1,
+            "description": "<div style='overflow-y:scroll;height:200px;'><P>Li Ao, the literary madman and warrior, had a life as full of drama and conflict as the history of Taiwan itself. In 1949, the young man followed his family from the mainland to Taiwan. On an island overshadowed by authoritarianism, Li Ao's scholarship and ideas began to emerge, quickly unleashing astonishing power. In the 1960s, while Taiwanese society was still conservative and suppressed, Li Ao used Wen Hsing magazine as his base to launch shocking polemics. He criticized the shackles of traditional culture and attacked the Kuomintang's party-state system, advocating for radical total Westernization, becoming a symbol of the rebellious spirit of that era. His writing was like a ruthless scalpel sharp, precise, and aimed directly at the authorities' weak points.</P><P>The cost of his defiance was heavy. Due to his controversial speech, Li Ao was arrested and imprisoned twice as a political offender, spending long periods behind bars. However, prison life did not break his proud spirit; instead, it solidified his path of resistance against authoritarianism. After his release, Li Ao converted political persecution into literary fuel, continuing his eternal confrontation with the system through a vast amount of works and sarcastic humor. He proclaimed himself the writer of the best vernacular Chinese in five thousand years of China, was entangled in lawsuits throughout his life, and his unique unconventional style was unparalleled.</P><P>When Taiwan's democratic elections reached the crucial moment of the first transfer of power, Li Ao appeared on the stage of the 2000 Presidential Election in a highly unusual stance. Facing an existential crisis, the New Party nominated this writer, who fought the world single-handedly, to run for president, hoping to make their voice heard in the three-way power struggle. Li Ao's candidacy carried a strong sense of irony and rebellion from the start. He openly stated his campaign was a stunt, mainly intended to boost the New Party's overall vote count, and he even left startling phrases on the election bulletin. Regarding cross-strait relations, he advocated for One Country Two Systems, even calling himself a candidate for the leader of China's Taiwan region, an political stance that was out of step with the mainstream electorate. This was not an election fought to win, but a political performance art led by the literary warrior.</P></div>",
+            "color_hex": "#FFC300",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://file.garden/Z9XHdyLGHwUEZPS4/5aade10fa402303d5b040430_201803181146-372x500.jpg?v=1766075429602",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    <!-- 冯沪祥 -->
+            {
+        "model": "campaign_trail.candidate",
+        "pk": 1943,
+        "fields": {
+            "first_name": "",
+            "last_name": "Fung Hu-hsiang",
+            "election": 20,
+            "party": "New Party",
+            "state": "Born in Shanghai",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#FFC300",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/ZwDdEC3.jpeg",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": "<div style='overflow-y:scroll;height:200px;'><P>Fung Hu-hsiang, the philosophy professor from National Taiwan University, was the running mate with the highest theoretical grounding but the lowest chance of winning in the entire election. His partner was Li Ao, the public enemy of the literary world and political anomaly. What Li Ao wanted was not an electoral warrior, but a philosophical foundation to prove he wasn't just clowning around.</P><P>Fung Hu-hsiang's inclusion provided Li Ao's campaign—which was full of satire, scolding, and performance art—with its sole serious, unyielding Pro-Unification backbone. While Li Ao stood on stage arrogantly ridiculing every other candidate, Fung Hu-hsiang played the loyal disciple: He is genuinely talking about One Country, Two Systems and the revival of Chinese culture! You just don't understand him! His primary function was to tell the voters: Our platform is serious, even if the candidate himself looks like he’s joking. In the end, this pair contributed a spectacular farce and the record for the lowest vote percentage in Taiwan's democratic history.</P></div>",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    }
+    ]
+campaignTrail_temp.difficulty_level_json = JSON.parse
+("[{\"model\": \"campaign_trail.difficulty_level\", \"pk\": 1, \"fields\": {\"name\": \"Very Easy\", \"multiplier\":1.5}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 2, \"fields\": {\"name\": \"Easy\", \"multiplier\": 1.25}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 3, \"fields\": {\"name\": \"Minor Easy\", \"multiplier\": 1.05}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 4, \"fields\": {\"name\": \"Normal\", \"multiplier\": 0.98}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 5, \"fields\": {\"name\": \"A little difficult\", \"multiplier\": 0.9}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 6, \"fields\": {\"name\": \"Harder\", \"multiplier\": 0.85}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 7, \"fields\": {\"name\": \"Struggle\", \"multiplier\": 0.8}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 8, \"fields\": {\"name\": \"Hard\", \"multiplier\": 0.78}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 9, \"fields\": {\"name\": \"Hell\", \"multiplier\": 0.75}}]");
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 91377,
+        "fields": {
+            "candidate": 67,
+            "running_mate": 1002
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 123729,
+        "fields": {
+            "candidate": 68,
+            "running_mate": 50001
+        }
+    },
+        {
+        "model": "campaign_trail.running_mate",
+        "pk": 123829,
+        "fields": {
+            "candidate": 69,
+            "running_mate": 70
+        }
+    },
+            {
+        "model": "campaign_trail.running_mate",
+        "pk": 1234129,
+        "fields": {
+            "candidate": 1921,
+            "running_mate": 1922
+        }
+    },
+      {
+        "model": "campaign_trail.running_mate",
+        "pk": 1235129,
+        "fields": {
+            "candidate": 1942,
+            "running_mate": 1943
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            67,
+            68,
+            69,
+            1921,
+            1942
+        ]
+    }
+]
+
+
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            67,
+            68,
+            69,
+            1921,
+            1942
+        ]
+    }
+]
+
+jet_data = {
+    "headerColor": "#ffffff",
+
+    "windowColor": "#efefef",
+    "containerColor": "#ffffff",
+    "innerWindowColor": "#E8FBFF",
+    "bannerImageUrl": "https://i.imgur.com/XjMGGks.gif",
+    "backgroundImageUrl": "https://i.imgur.com/q3C6wVC.jpeg",
+    "endingTextColor": "#000000",
+    "gameTitle": "Republic Of China Campaign Trail"
+}
+
+//#startcode
+  corrr = `
+  <div style="font-size: 11px; font-family: monospace; color: white;">
+    <h2 style="font-style: normal;">
+      <img src="https://i.imgur.com/eiKuPeR.gif" alt="AMERICAN CARNAGE" style="margin-top: 5px;">
+    </h2>
+  </div>
+  `;
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#ffffff"
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#efefef";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+document.getElementById("inner_window_1").children[1].innerHTML = "<li>Welcome to ROC 2000 Redux.</li><li>A historical campaign simulation of the pivotal 10th Term Presidential Election, featuring the fierce three-way battle between Chen Shui-bian, Lien Chan, and James Soong.</li><li>You will navigate the political storms of the late 90s, answering questions about cross-strait relations, 'Black Gold' politics, and reform between 1999 and 2000.</li><li>The answers will affect your popularity across Taiwan's counties and cities, shifting the balance of power in real-time.</li><li>This is a battle for the soul of the nation—will you end the KMT's 55-year rule, or secure its legacy for a new millennium?</li><li>Additionally, the game contains Choose Your Own Adventure elements, secret endings and achievements.</li><li>Please make sure to play the game under good network conditions and do not use automatic translation on the ending page.</li><li>It is recommended that you put on headphones and turn on the sound to enjoy the best audio-visual experience.</li><li>(You can directly click the next button, as long as there is no election result table, you can freely use the automatic translation)</li>";
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+$(".container")[0].style.backgroundColor = "#ffffff";
+document.getElementById("header").src = "https://i.imgur.com/XjMGGks.gif";
+document.body.background = "https://file.garden/Z9XHdyLGHwUEZPS4/MOSHED-2025-12-20-2-13-38.gif?v=1766168191861";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;}</style>";
+document.head.innerHTML += `<style>
+    label {
+      font-size: 1em !important;
+    }
+  
+    body {
+      display: flex !important;
+    }
+      #menu_container {
+             background-color: #F8F8F8;
+            }
+
+    #state_result_container {
+             height: 95%;
+              border-style: double;
+             border-color: #C9C9C9;
+            }
+    #game_window {
+      max-width: 1000px;
+          margin-bottom:40px;
+    }
+    .overlay_window {
+      height: 65%;
+      width: 55%;
+    }
+    #inner_window_2 {
+    background-color: #e2e2e2;
+  }
+  #inner_window_3 {
+    background-color: #e2e2e2;
+  }
+  #inner_window_4 {
+    background-color: #e2e2e2;
+  }
+  .campaign_trail_start_emphasis {
+    background-color: #e2e2e257;
+  }
+
+  
+  </style>`
+campaignTrail_temp.achievements = {
+  } 
+  const div = document.getElementById('announcement');
+  if (div) {
+    div.style.display = 'none';      // 隐藏（不占位）
+    // div.style.visibility = 'hidden'; // 隐藏（占位）
+  }
+
+  $("#game_start").click((event) => {
+    event.preventDefault();
+    $("#election_id_button").click((event) => {
+
+
+        setInterval(changeFontColour, 200)
+  
+    })
+  })
+  
+
+  e.runIntro = true;
+  RecReading=true
+
+
+  corrr = `
+  <div style="font-size: 11px; font-family: monospace; color: white;">
+    <h2 style="font-style: normal;">
+      <img src="https://i.imgur.com/lwWdUco.jpeg" alt="" style="margin-top: 5px;">
+    </h2>
+  </div>
+  `;
+// Select the node that will be observed for mutations
+const windowsAdvisorTargetNode = document.getElementById("game_window");
+
+// Options for the observer (which mutations to observe)
+const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
+
+// Callback function to execute when mutations are observed
+const callback = (mutationList, observer) => {
+    visitWindow = document.getElementsByClassName("overlay_window")[0];
+
+    if (visitWindow == null || visitWindow.classList.contains("done")) {
+        return;
+    }
+    visitWindow.classList.add("done");
+    visitWindow.classList.add("window");
+    let titleBar = visitWindow.querySelector("h3");
+    if(titleBar) {
+        titleBar.classList.add("title-bar");
+        titleBar.classList.add("title-bar-text")
+        titleBar.style.paddingLeft = "3px";
+    }
+};
+
+class Song {
+    constructor(title, artist, coverLink, audioLink) {
+        this.title = title;
+        this.artist = artist;
+        this.coverLink = coverLink;
+        this.audioLink = audioLink;
+    }
+    getTitle() { return this.title; }
+    getArtist() { return this.artist; }
+    getCoverLink() { return this.coverLink; }
+    getAudioLink() { return this.audioLink; }
+}
+
+class Playlist {
+    constructor() {
+        this.albums = [];
+        this.currentAlbumIndex = 0;
+        this.currentSongIndex = 0;
+        this.loop = false;
+    }
+
+    addSong(song, albumIndex) {
+        if (!this.albums[albumIndex]) {
+            this.albums[albumIndex] = [];
+        }
+        this.albums[albumIndex].push(song);
+    }
+
+    getCurrentSong() {
+        return this.albums[this.currentAlbumIndex][this.currentSongIndex];
+    }
+    
+    getPrevSongObj() {
+        let album = this.albums[this.currentAlbumIndex];
+        let prevIndex = (this.currentSongIndex - 1 + album.length) % album.length;
+        return album[prevIndex];
+    }
+
+    getNextSongObj() {
+        let album = this.albums[this.currentAlbumIndex];
+        let nextIndex = (this.currentSongIndex + 1) % album.length;
+        return album[nextIndex];
+    }
+
+    playNext() {
+        if (this.loop) return;
+        let album = this.albums[this.currentAlbumIndex];
+        this.currentSongIndex = (this.currentSongIndex + 1) % album.length;
+    }
+
+    playPrevious() {
+        let album = this.albums[this.currentAlbumIndex];
+        this.currentSongIndex = (this.currentSongIndex - 1 + album.length) % album.length;
+    }
+
+    nextAlbum() {
+        this.currentAlbumIndex = (this.currentAlbumIndex + 1) % this.albums.length;
+        this.currentSongIndex = 0;
+    }
+}
+window.Playlist = Playlist;
+window.Song = Song;
+
+// === 辅助函数：安全播放音频，防止 AbortError ===
+function safePlay(audioElement) {
+    let playPromise = audioElement.play();
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            // 如果是因为加载新请求打断了旧请求，忽略它
+            if (error.name === "AbortError") {
+                console.log("Play interrupted by new load request (Harmless)");
+            } else {
+                console.error("Audio Play Error:", error);
+            }
+        });
+    }
+}
+
+function changePlaylist(newPlaylist) {
+    playlist = newPlaylist;
+    playlist.currentAlbumIndex = 0;
+    playlist.currentSongIndex = 0;
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    if(audio) {
+        audio.src = playlist.getCurrentSong().audioLink;
+        safePlay(audio);
+    }
+}
+window.changePlaylist = changePlaylist;
+
+function updateUI(playlist) {
+    const currentSong = playlist.getCurrentSong();
+    const prevSong = playlist.getPrevSongObj();
+    const nextSong = playlist.getNextSongObj();
+
+    var player = document.getElementById("player");
+    if(!player) return; // 防止未初始化报错
+    
+    player.querySelector("#cover").src = currentSong.getCoverLink();
+    player.querySelector("#prev-cover").src = prevSong.getCoverLink();
+    player.querySelector("#next-cover").src = nextSong.getCoverLink();
+
+    player.querySelector("#title").textContent = currentSong.getTitle();
+    player.querySelector("#artist").textContent = currentSong.getArtist();
+}
+window.updateUI = updateUI;
+
+
+function setupMusicPlayer() {
+    // === 清理旧的播放器和音频，防止重复 ===
+    const existingPlayer = document.getElementById("player");
+    if (existingPlayer) existingPlayer.remove();
+    const existingAudio = document.getElementById("audio");
+    if (existingAudio) existingAudio.remove();
+    // ======================================
+
+    playlist = new Playlist();
+
+    // --- 歌曲数据 (不变) ---
+    // 专辑 0
+    const song1 = new Song("Train", "Luo Da-you", "https://i.imgur.com/ASbLWs0.jpeg", "https://file.garden/Z9XHdyLGHwUEZPS4/%E7%81%AB%E8%BB%8A%20-%20Lo%20Ta-yu%20(youtube).mp3?v=1765039147531");
+    const song2 = new Song("Youth Dance Music 2000", "Luo Da-you", "https://i.imgur.com/ASbLWs0.jpeg", "https://file.garden/Z9XHdyLGHwUEZPS4/2000.mp3?v=1742063560494");
+    const song3 = new Song("Wahaha March", "Pig Head Skin", "https://lh3.googleusercontent.com/WdEL1J3b1WYLN9vfgG75DrTVLk-FRvDQseiXOcZtCzvzZt4mMtXJnrZN3UuG4hT8avy1T5ffB-AIFTML", "https://file.garden/Z9XHdyLGHwUEZPS4/%E5%93%87%E5%93%88%E5%93%88%E9%80%B2%E8%A1%8C%E6%9B%B2%20(%E9%9F%BF%E4%BA%AE%E5%A4%A7%E8%81%B2%E5%93%87%E5%93%88%E5%93%88)%20-%20%E8%B1%AC%E9%A0%AD%E7%9A%AE%20(youtube).mp3?v=1766078689333");
+    const song6 = new Song("The Great Citizen", "Zheng Zhi Hua", "https://i.kfs.io/album/global/18510911,1v1/fit/500x500.jpg", "https://file.garden/Z9XHdyLGHwUEZPS4/%E9%84%AD%E6%99%BA%E5%8C%96%20Zheng%20Zhi-Hua%20-%20%E5%A4%A7%E5%9C%8B%E6%B0%91%20The%20Great%20Citizen%20(official%E5%AE%98%E6%96%B9%E5%AE%8C%E6%95%B4%E7%89%88MV)%20-%20Timeless%20Music%20(youtube).mp3?v=1766076997114");
+    const song5 = new Song("Taipei Empire", "Blacklist Studio", "https://i.kfs.io/album/global/57150293,0v1/fit/500x500.jpg", "https://file.garden/Z9XHdyLGHwUEZPS4/%E9%BB%91%E5%90%8D%E5%96%AE%E5%B7%A5%E4%BD%9C%E5%AE%A4%20Black%20List%E3%80%90%E5%8F%B0%E5%8C%97%E5%B8%9D%E5%9C%8B%20Taipei%20Empire%E3%80%91Official%20Music%20Video%20-%20%E6%BB%BE%E7%9F%B3%E5%94%B1%E7%89%87%20ROCK%20RECORDS%20(youtube).mp3?v=1766076751391");
+    const song4 = new Song("Republic of China In Taiwan", "Pig Head Skin", "https://lh3.googleusercontent.com/Ofk4-1yPwv08M67VaAjiwo5B19waC2I4oxoXgWRgB2hztgZHHezwwBpEJT1et5BcNce7iAeQkXmcYiw", "https://file.garden/Z9XHdyLGHwUEZPS4/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E5%9C%A8%E5%8F%B0%E7%81%A3%20-%20%E8%B1%AC%E9%A0%AD%E7%9A%AE%20(youtube).mp3?v=1766078484561");
+    const song7 = new Song("1990 Taiwanese", "吉馬大對唱", "https://lh3.googleusercontent.com/9ILgtEm4fyBydA8rCHTuNeC8EMZNmDSCi6LCgJHQgTgX80kzEAEH_qI3UY2f-g5SJiOAWymmVZW_QIs", "https://file.garden/Z9XHdyLGHwUEZPS4/1990%E5%8F%B0%E7%81%A3%E4%BA%BA%20-%20%E5%90%89%E9%A6%AC%E5%A4%A7%E5%B0%8D%E5%94%B1%20(youtube).mp3?v=1766077770323");
+    const song16 = new Song("Fifty NTD", "Luo Da-you", "https://lh3.googleusercontent.com/AaDL5R7GKA7C-bTzpD5QxZF_5IUCsZYnxjGisAMxdYl5H8JKbUY0PUBk8lPaNM8eD-P0mBO7aL-KLSXX", "https://file.garden/Z9XHdyLGHwUEZPS4/%E4%BA%94%E5%8D%81%E5%A1%8A%E9%8C%A2%20-%20Lo%20Ta-yu%20(youtube).mp3?v=1766086387769");
+    const song17 = new Song("漂浪 Hustling", "Wu Bai & China Blue", "https://upload.wikimedia.org/wikipedia/zh/1/11/%E6%A8%B9%E6%9E%9D%E5%AD%A4%E9%B3%A5.jpg", "https://file.garden/Z9XHdyLGHwUEZPS4/%E4%BC%8D%E4%BD%B0%20Wu%20Bai%26China%20Blue%E6%BC%82%E6%B5%AA%20%20HustlingOfficial%20Music%20Video.mp3?v=1766517078359");
+    // 专辑 1
+    const song8 = new Song("Happy to Future", "謝志偉", "https://i.discogs.com/34rDE2suyXF995XVBobUX-OFeceDL5QPgq-lW4bT1bw/rs:fit/g:sm/q:40/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE5MjMz/ODY4LTE3MjcxMzA2/OTQtMTMyNS5qcGVn.jpeg", "https://file.garden/Z9XHdyLGHwUEZPS4/02%20%E6%AD%A1%E5%96%9C%E7%9C%8B%E6%9C%AA%E4%BE%86%20-%20DJ%E9%99%B3%E7%88%B8%E7%88%B8%20(youtube).mp3?v=1766082435012");
+    const song10 = new Song("With you and me", "Wang Jianjie", "https://file.garden/Z9XHdyLGHwUEZPS4/20241228221610.jpg?v=1766081048768", "https://file.garden/Z9XHdyLGHwUEZPS4/you%20and%20me?v=1766080672991");
+    const song15 = new Song("Young Taiwan", "詹宏達", "https://i.imgur.com/g176BJE.png", "https://file.garden/Z9XHdyLGHwUEZPS4/%E5%B0%91%E5%B9%B4%E5%8F%B0%E7%81%A3%20-%20DJ%E9%99%B3%E7%88%B8%E7%88%B8%20(youtube).mp3?v=1766082168842");
+    const song9 = new Song("Taipei New HomeTown", "詹宏達", "https://i.imgur.com/HEaVtqB.png", "https://file.garden/Z9XHdyLGHwUEZPS4/%E8%A9%B9%E5%AE%8F%E9%81%94-%E5%8F%B0%E5%8C%97%E6%96%B0%E6%95%85%E9%84%89.mp3");
+    const song11 = new Song("March of Taiwan", "OK 男女合唱團", "https://lh3.googleusercontent.com/0D0W16lF0zJg2Wbs-3w8r-HhlUxfI-SnwkfDt1I8HKlZZGDqFDBgeigdYPo2x6DBtDpsrGmTAWdWvJI", "https://file.garden/Z9XHdyLGHwUEZPS4/%E5%8F%B0%E7%81%A3%E9%80%B2%E8%A1%8C%E6%9B%B2%20-%20OK%20%E7%94%B7%E5%A5%B3%E5%90%88%E5%94%B1%E5%9C%98%20(youtube).mp3?v=1766081390100");
+    const song12 = new Song("Promise of Century", "周恆毅　莊佳穎", "https://i.imgur.com/g176BJE.png", "https://file.garden/Z9XHdyLGHwUEZPS4/06%20%E4%B8%96%E7%B4%80%E4%B9%8B%E7%B4%84.mp3");
+    const song13 = new Song("Dreamers are the most beautiful", "詹宏達", "https://i.imgur.com/g176BJE.png", "https://file.garden/Z9XHdyLGHwUEZPS4/%E6%9C%89%E5%A4%A2%E6%9C%80%E7%BE%8E.mp3");
+    const song14 = new Song("Happiness March", "詹宏達", "https://i.imgur.com/g176BJE.png", "https://file.garden/Z9XHdyLGHwUEZPS4/%E5%B9%B8%E7%A6%8F%E9%80%B2%E8%A1%8C%E6%9B%B2.mp3");
+    // 专辑 2
+    const song22 = new Song("Fallen Angels", "Zheng Zhi Hua", "https://lh3.googleusercontent.com/HMO4q42Sw6KzLEPPfjEFbnMkfSvyO-4hQNxBP0uKJ1yqBplCiSrNl08U5JScx1tKU4DFHMmedHcqwI0", "https://file.garden/Z9XHdyLGHwUEZPS4/%E5%A2%AE%E8%90%BD%E5%A4%A9%E4%BD%BF%20-%20Zheng%20Zhi%20Hua%20(youtube).mp3?v=1766080971862");
+    const song23 = new Song("Enemies (feat. OK Choir)", "OK 男女合唱團", "https://lh3.googleusercontent.com/DazZg61156DaluWxMt0htx9j1b4WfbTv1yNb4Z3Re5fcGohzE89E15cEOQNgvBbRB0LEyKeZQuLJ6Qh3", "https://file.garden/Z9XHdyLGHwUEZPS4/%E5%86%A4%E5%AE%B6%20(feat.%20OK%20%E7%94%B7%E5%A5%B3%E5%90%88%E5%94%B1%E5%9C%98)%20-%20Lo%20Ta-yu%20(youtube).mp3?v=1766081867602");
+    const song24 = new Song("Dow Ma Dan", "Coco Lee", "https://lh3.googleusercontent.com/rPRWAZBo7XHX896Ejw53yDM82ktfCSxvZfUvqvzAPWwGi4m5YIRcm_eaRpjiwvlf4Z6S8E05vYlNa48e", "https://file.garden/Z9XHdyLGHwUEZPS4/%E6%9D%8E%E7%8E%9F%20CoCo%20Lee%20-%20%E5%88%80%E9%A6%AC%E6%97%A6%20-%20cocoleeVEVO%20(youtube).mp3?v=1766083282163");
+    const song25 = new Song("First experience of love", "Chang Cheng-Yue", "https://lh3.googleusercontent.com/o1z9ybGkIHSJgB08cuQn4JkfwmGsenpzY5LTGHP1K8e4ttJCGaP25kqUS4ZnQ1nbJ8l02-SRassM4IY", "https://file.garden/Z9XHdyLGHwUEZPS4/%E5%BC%B5%E9%9C%87%E5%B6%BD%20A-Yue%E3%80%90%E6%84%9B%E3%81%AE%E5%88%9D%E9%AB%94%E9%A9%97%20Love's%20first%20taste%E3%80%91Official%20Music%20Video%20-%20%E6%BB%BE%E7%9F%B3%E5%94%B1%E7%89%87%20ROCK%20RECORDS%20(youtube).mp3?v=1766083662744");
+    const song26 = new Song("Di da di", "Coco Lee", "https://lh3.googleusercontent.com/nhJQeZBRfTfJgVMBkYUTLPf8zsvY7VVVU2UQJ9-nJtM-NiZ9A11PL0QEhhXyvta_u76B6UUGiFZqBB0htQ", "https://file.garden/Z9XHdyLGHwUEZPS4/%E6%9D%8E%E7%8E%9F%20Di%20DA%20Di%20%E6%AD%8C%E8%A9%9E%E7%89%88%20-%20LRCS%E7%B6%93%E5%85%B8%E6%B5%81%E8%A1%8C%E5%8F%B0%E8%8F%AF%E8%AA%9E%E6%AD%8C%E8%A9%9E%E9%83%A8%20(youtube).mp3?v=1766084461537");
+    const song27 = new Song("Courage", "Fish Leong", "https://lh3.googleusercontent.com/g1LiJ5CvxWZcNJSBa8uS7oPAle_oHfNtJs8Bhn7XObwj8EzLuhdnSr5Lmr6Elyx-bdz4E74iTpQ52I4N", "https://file.garden/Z9XHdyLGHwUEZPS4/%E5%8B%87%E6%B0%94%20%E6%A2%81%E9%9D%99%E8%8C%B9%20(%E6%AD%8C%E8%AF%8D%E7%89%88)%20-%20GM%20Lyric%20(youtube).mp3?v=1766084727971");
+    const song28 = new Song("Don't Stop", "Jolin Cai", "https://lh3.googleusercontent.com/1xT04q4t9qxtZpt6K1AqQQHgBqLlVK7BbftmsspNadHTCB33MrA0CBml5RIDUcM8PEqUSyzRtf02GlOM", "https://file.garden/Z9XHdyLGHwUEZPS4/%E8%94%A1%E4%BE%9D%E6%9E%97%20-%20Don't%20Stop%20MV%20(DVD)%20-%20Mr.%20Humburger%20(youtube).mp3?v=1766085360921");
+
+    playlist.addSong(song1, 0); playlist.addSong(song2, 0); playlist.addSong(song3, 0); playlist.addSong(song6, 0); playlist.addSong(song5, 0); playlist.addSong(song4, 0); playlist.addSong(song7, 0);playlist.addSong(song17, 0);
+    playlist.addSong(song8, 1); playlist.addSong(song16, 0);playlist.addSong(song9, 1); playlist.addSong(song10, 1); playlist.addSong(song11, 1); playlist.addSong(song12, 1); playlist.addSong(song13, 1); playlist.addSong(song14, 1);
+    playlist.addSong(song22, 2); playlist.addSong(song15, 1);playlist.addSong(song23, 2); playlist.addSong(song24, 2); playlist.addSong(song25, 2); playlist.addSong(song26, 2); playlist.addSong(song27, 2); playlist.addSong(song28, 2);
+
+    const playerContainer = document.createElement("div");
+    playerContainer.id = "player";
+
+    const displayBox = document.createElement("div");
+    displayBox.id = "display-box";
+
+    // 封面容器
+    const coversContainer = document.createElement("div");
+    coversContainer.id = "covers-container";
+
+    // 1. 上一曲封面
+    const prevCover = document.createElement("img");
+    prevCover.id = "prev-cover";
+    prevCover.className = "side-cover"; 
+    prevCover.title = "Double click to play previous"; 
+    coversContainer.appendChild(prevCover);
+
+    // 2. 当前曲封面
+    const coverElement = document.createElement("img");
+    coverElement.id = "cover";
+    coversContainer.appendChild(coverElement);
+
+    // 3. 下一曲封面
+    const nextCover = document.createElement("img");
+    nextCover.id = "next-cover";
+    nextCover.className = "side-cover";
+    nextCover.title = "Double click to play next";
+    coversContainer.appendChild(nextCover);
+
+    displayBox.appendChild(coversContainer);
+
+    const infoContainer = document.createElement("div");
+    infoContainer.id = "info-container";
+    infoContainer.style.backgroundImage = "url('https://i.imgur.com/xyxCkA0.png')";
+    infoContainer.style.backgroundSize = "cover";
+    infoContainer.style.color = "white";
+
+    const songInfo = document.createElement("div");
+    songInfo.id = "song-info";
+
+    const titleElement = document.createElement("h3");
+    titleElement.id = "title";
+    titleElement.style.fontWeight = 'normal';
+    songInfo.appendChild(titleElement);
+
+    const artistElement = document.createElement("p");
+    artistElement.id = "artist";
+    songInfo.appendChild(artistElement);
+
+    infoContainer.appendChild(songInfo);
+    displayBox.appendChild(infoContainer);
+
+    playerContainer.appendChild(displayBox);
+
+    const controlsContainer = document.createElement("div");
+    controlsContainer.id = "controls-container";
+
+    const controls = document.createElement("div");
+    controls.id = "controls";
+
+    const prevButton = document.createElement("img");
+    prevButton.id = "prevButton";
+    prevButton.src = "https://i.imgur.com/jdfFCvo.png";
+    prevButton.alt = "Previous";
+    controls.appendChild(prevButton);
+
+    const playPauseButton = document.createElement("img");
+    playPauseButton.id = "playPauseButton";
+    playPauseButton.src = "https://i.imgur.com/7ofdqdY.png";
+    playPauseButton.alt = "Play/Pause";
+    controls.appendChild(playPauseButton);
+
+    const nextButton = document.createElement("img");
+    nextButton.id = "nextButton";
+    nextButton.src = "https://i.imgur.com/B0ScI0A.png";
+    nextButton.alt = "Next";
+    controls.appendChild(nextButton);
+
+    const nextalbum = document.createElement("img");
+    nextalbum.id = "nextalbum";
+    nextalbum.src = "https://i.imgur.com/NeUObQA.png";
+    nextalbum.alt = "album";
+    controls.appendChild(nextalbum);
+
+    const loopButton = document.createElement("img");
+    loopButton.id = "loopButton";
+    loopButton.src = "https://i.imgur.com/PGcDNau.png";
+    loopButton.alt = "Loop";
+    controls.appendChild(loopButton);
+
+    controlsContainer.appendChild(controls);
+
+    // === 事件监听 (使用 safePlay) ===
+
+    // 双击上一曲封面
+    prevCover.addEventListener("dblclick", function() {
+        playlist.playPrevious();
+        updateUI(playlist);
+        const audio = document.getElementById("audio");
+        audio.src = playlist.getCurrentSong().audioLink;
+        safePlay(audio);
+        playPauseButton.src = "https://i.imgur.com/7ofdqdY.png";
+    });
+
+    // 双击下一曲封面
+    nextCover.addEventListener("dblclick", function() {
+        playlist.playNext();
+        updateUI(playlist);
+        const audio = document.getElementById("audio");
+        audio.src = playlist.getCurrentSong().audioLink;
+        safePlay(audio);
+        playPauseButton.src = "https://i.imgur.com/7ofdqdY.png";
+    });
+
+    playPauseButton.addEventListener("click", function () {
+        const audio = document.getElementById("audio");
+        if (audio.paused) {
+            safePlay(audio);
+            playPauseButton.src = "https://i.imgur.com/7ofdqdY.png";
+        } else {
+            audio.pause();
+            playPauseButton.src = "https://i.imgur.com/F5Cd7o6.png";
+        }
+    });
+
+    nextButton.addEventListener("click", function () {
+        playlist.playNext();
+        updateUI(playlist);
+        const audio = document.getElementById("audio");
+        audio.src = playlist.getCurrentSong().audioLink;
+        safePlay(audio);
+    });
+
+    nextalbum.addEventListener("click", function () {
+        playlist.nextAlbum();
+        updateUI(playlist);
+        const audio = document.getElementById("audio");
+        audio.src = playlist.getCurrentSong().audioLink;
+        safePlay(audio);
+    });
+
+    prevButton.addEventListener("click", function () {
+        playlist.playPrevious();
+        updateUI(playlist);
+        const audio = document.getElementById("audio");
+        audio.src = playlist.getCurrentSong().audioLink;
+        safePlay(audio);
+    });
+    
+    loopButton.addEventListener("click", function () {
+        playlist.loop = !playlist.loop;
+        loopButton.src = playlist.loop ? "https://i.imgur.com/Ssx40A9.png" : "https://i.imgur.com/PGcDNau.png";
+    });
+
+    const progressBarContainer = document.createElement("div");
+    progressBarContainer.id = "progress-bar-container";
+
+    const progressBar = document.createElement("input");
+    progressBar.type = "range";
+    progressBar.id = "progress-bar";
+    progressBar.value = "0";
+    progressBar.min = "0";
+    progressBar.max = "100";
+    progressBar.step = "0.1";
+
+    progressBarContainer.appendChild(progressBar);
+    controlsContainer.appendChild(progressBarContainer);
+    playerContainer.appendChild(controlsContainer);
+
+    const volumeContainer = document.createElement("div");
+    volumeContainer.id = "volume-container";
+
+    const volumeLabel = document.createElement("img");
+    volumeLabel.src = "https://i.imgur.com/1iKbM8E.png";
+    volumeLabel.alt = "Volume";
+    volumeContainer.appendChild(volumeLabel);
+
+    const volumeSliderContainer = document.createElement("div");
+    volumeSliderContainer.classList.add("is-vertical");
+    volumeSliderContainer.style.marginLeft = "0%";
+    volumeSliderContainer.style.height = "126px";
+
+    const volumeSlider = document.createElement("input");
+    volumeSlider.type = "range";
+    volumeSlider.id = "volumeSlider";
+    volumeSlider.min = 0;
+    volumeSlider.max = 9;
+    volumeSlider.step = 1;
+    volumeSlider.value = 5;
+
+    volumeSliderContainer.appendChild(volumeSlider);
+    const volumeDisplay = document.createElement("span");
+    volumeDisplay.id = "volume-display";
+    volumeDisplay.style.fontWeight = 'bold';
+    volumeDisplay.style.display = 'none';
+    volumeDisplay.textContent = "1";
+
+    volumeContainer.appendChild(volumeSliderContainer);
+    volumeContainer.appendChild(volumeDisplay);
+
+    playerContainer.appendChild(volumeContainer);
+
+    gameWindow_player.insertAdjacentElement("afterend", playerContainer);
+
+    const audio = document.createElement("audio");
+    audio.id = "audio";
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.volume = 1 / 9;
+    
+    // 初始化播放
+    safePlay(audio);
+
+    function updateProgressBarSync() {
+        const audio = document.getElementById("audio");
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = isNaN(progress) ? 0 : progress;
+    }
+
+    progressBar.addEventListener("input", function () {
+        const audio = document.getElementById("audio");
+        const seekTime = (progressBar.value / 100) * audio.duration;
+        audio.currentTime = isNaN(seekTime) ? 0 : seekTime;
+    });
+
+    audio.addEventListener("timeupdate", updateProgressBarSync);
+    audio.addEventListener("ended", function () {
+        playlist.playNext();
+        updateUI(playlist);
+        audio.src = playlist.getCurrentSong().audioLink;
+        safePlay(audio);
+    });
+
+    let currentVolume = 5;
+    volumeSlider.addEventListener("input", function () {
+        currentVolume = parseInt(volumeSlider.value, 10);
+        volumeDisplay.textContent = currentVolume;
+        const audio = document.getElementById("audio");
+        audio.volume = currentVolume / 9;
+    });
+
+    document.body.appendChild(audio);
+    
+    updateUI(playlist);
+}
+
+// CSS 样式 (去重，只需加一次)
+if(!document.getElementById("player-style")) {
+    const style = document.createElement("style");
+    style.id = "player-style";
+    style.textContent = `
+    #player {
+        border: 3px solid #C9C9C9;
+        display: flex;
+        flex-direction: row;
+        height: 191px;
+        background-Image: url("https://i.imgur.com/CweYzgR.png");
+        background-size: cover;
+    }
+    #volume-container {
+        margin-top: 10px;
+    }
+    #display-box {
+        display: flex;
+        align-items: center;
+        width: 50%;
+        padding-left: 5px; 
+    }
+
+    #covers-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        gap: 5px; 
+    }
+
+    #cover {
+        width: 120px;
+        height: 120px;
+        border: 2px solid #fff;
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        z-index: 2; 
+        object-fit: cover;
+    }
+
+    .side-cover {
+        width: 60px;
+        height: 60px;
+        opacity: 0.5; 
+        filter: grayscale(50%); 
+        border: 1px solid #888;
+        z-index: 1;
+        object-fit: cover;
+        transition: all 0.3s ease;
+        user-select: none; /* 防止双击变蓝 */
+        -webkit-user-select: none;
+    }
+    
+    .side-cover:hover {
+        opacity: 0.9;
+        filter: grayscale(0%);
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+
+    #info-container {
+        display: flex;
+        flex-direction: row;
+        height: 178px;
+        width: 127px;
+        margin-top: 3px;
+    }
+    
+    #song-info {
+        width: 100%;
+        padding: 5px;
+    }
+
+    #controls-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px;
+        width: 100%;
+        padding-top: 15px;
+    }
+    #controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 80%;
+    }
+    .is-vertical #volumeSlider {
+        margin-top: 38px;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 15%;
+        background: linear-gradient(to bottom, #d4d0c8, #f1f1f1);
+        border-radius: 5px;
+        border: 2px solid #808080;
+        box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3);
+        transform: rotate(270deg);
+        transform-origin: center center;
+    }
+    .is-vertical #volumeSlider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        background: green;
+        border-radius: 50%;
+        border: 2px solid #808080;
+        box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+    }
+    
+    #progress-bar-container {
+        width: 80%;
+        height: 24px;
+        background: linear-gradient(to bottom, #d4d0c8, #f1f1f1);
+        border: 2px solid #808080;
+        border-radius: 5px;
+        padding: 2px;
+        box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.2);
+    }
+    #progress-bar {
+        width: 100%;
+        height: 100%;
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        border: none;
+        margin: 0;
+        overflow: hidden;
+        display: block;
+    }
+    #progress-bar::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 100%;
+        background: #888;
+    }
+    #progress-bar::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 0;
+        height: 0;
+        background: transparent;
+        box-shadow: -100vw 0 0 100vw green;
+    }
+    `;
+    document.head.appendChild(style);
+}
+
+const gameWindow_player = document.getElementById("game_window");
+setupMusicPlayer();
+
+//侧边广告
+
+let contentBox = document.getElementsByClassName("content_box")[0];
+let contentSingle = document.getElementsByClassName("content_single")[0];
+
+let containerRef = document.getElementsByClassName("container")[0];
+
+function createBanner(url, sibling, isLeft) {
+let div = document.createElement("DIV");
+let img = document.createElement("IMG");
+div.style.position = "relative";
+div.style.margin = "auto";
+img.src = url;
+
+
+let x = document.createElement("DIV");
+x.innerText = "✕";
+x.style.position = "absolute";
+x.style.top = "0px";
+x.style.left = "0px";
+x.style.padding = "0px 2px";
+x.style.fontSize = "9px";
+x.style.fontWeight = "bold";
+x.style.fontFamily = "Arial, sans-serif";
+x.style.color = "black";
+x.style.backgroundColor = "#ccc";
+x.style.border = "1px solid #666";
+x.style.cursor = "pointer";
+x.style.zIndex = "9999";
+x.style.userSelect = "none";
+x.style.lineHeight = "12px";
+
+x.addEventListener("click", function() {
+  div.removeChild(x);
+});
+
+div.appendChild(x);
+
+div.appendChild(img);
+
+if(isLeft) {
+sibling.parentNode.insertBefore(div, sibling);
+}
+else {
+sibling.parentNode.appendChild(div);
+}
+// x.onclick = () => {
+//   img.remove();      // 直接把 <img> 从文档中删除
+//   // 或者，如果你还想把它的父容器也删掉：
+//   // div.remove();
+// };
+
+x.addEventListener("mousedown", function(e) {
+  e.stopPropagation();
+  if (div && div.parentNode) {
+    div.parentNode.removeChild(div);
+  }
+});
+return img;
+}
+
+//抄的，先暂时不用，版面太小而且问题跳来跳去，保留着以后备用
+async function appendStyle() {
+  var metaTag=document.createElement('meta');
+ metaTag.name = "viewport";
+  metaTag.content = "width=device-width, initial-scale=1";
+document.getElementsByTagName('head')[0].appendChild(metaTag);
+
+ if (!document.querySelector('#radio-option-style')) {
+       let style = document.createElement('style');
+     style.type = 'text/css';
+    style.id = 'radio-option-style';
+      style.innerHTML = `
+     .inner_inner_window {
+      display: flex;
+      flex-direction: column;
+   }
+
+    .inner_window_question {
+        height: 337px;
+    }
+    `;
+    document.head.appendChild(style);
+ }
+}
+
+appendStyle();
+
+
+
+function addDynamicCSS() {
+    var css = `
+        
+        .inner_window_question h3 .mytooltip{
+            background-color: lightskyblue;
+        }
+        .inner_window_question h3 {
+          background: linear-gradient(to bottom, #f9f9f9, #eff1ff, #e4e4e4);
+        }
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background-color: #d8dee8;
+        }
+
+        .mytooltip .mytooltiptext {
+            width: 240px;
+            background-color: #d8dee8;
+            color: black;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 20%;
+            left: 20%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid black;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+        #results_container {
+          color:white;
+           overflow: auto;
+        }
+        #overall_details_container h3 {
+          color: white;
+      }
+      .final_results_table tbody tr:nth-child(2) td:first-child {
+  background-image: url(https://i.imgur.com/1uBGXls.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+}
+
+#overall_election_details tbody tr:nth-child(2) td:first-child {
+  background-image: url(https://i.imgur.com/1uBGXls.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+}
+      #overall_election_details h4 {
+        color: white;
+    }
+        .mytooltip .mytooltiptext img {
+            max-width: 240px;
+            height: auto;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+        .overlay_window img {
+          border-color:black;
+        }
+        #visit_content img {
+          opacity: 0.95;
+          width: 260px;
+          height: auto;
+          border: 1px solid transparent;
+          outline: 1px solid #201F1A;
+          box-shadow: none !important;
+      }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+    
+    styleElem.appendChild(document.createTextNode(css));
+    
+    document.head.appendChild(styleElem);
+}
+
+const xpScrollStyle = document.createElement('style');
+xpScrollStyle.textContent = `body *::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+    background: none;
+  }
+  
+  body *::-webkit-scrollbar-thumb, body *::-webkit-scrollbar-button {
+    width: 16px;
+    height: 16px;
+    background: silver;
+    box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px gray;
+    border: 1px solid;
+    border-color: silver #000 #000 silver;
+  }
+  
+  body *::-webkit-scrollbar-track {
+    image-rendering: optimizeSpeed;
+    image-rendering: pixelated;
+    image-rendering: optimize-contrast;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAyIDIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+CjxtZXRhZGF0YT5NYWRlIHdpdGggUGl4ZWxzIHRvIFN2ZyBodHRwczovL2NvZGVwZW4uaW8vc2hzaGF3L3Blbi9YYnh2Tmo8L21ldGFkYXRhPgo8cGF0aCBzdHJva2U9IiNjMGMwYzAiIGQ9Ik0wIDBoMU0xIDFoMSIgLz4KPC9zdmc+");
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: 2px;
+  }
+  
+  body *::-webkit-scrollbar-button {
+    background-repeat: no-repeat;
+    background-size: 16px;
+  }
+  
+  body *::-webkit-scrollbar-button:single-button:vertical:decrement {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTcgNWgxTTYgNmgzTTUgN2g1TTQgOGg3IiAvPgo8L3N2Zz4=");
+  }
+  
+  body *::-webkit-scrollbar-button:single-button:vertical:increment {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTQgNWg3TTUgNmg1TTYgN2gzTTcgOGgxIiAvPgo8L3N2Zz4=");
+  }
+  
+  body *::-webkit-scrollbar-button:single-button:horizontal:decrement {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTggM2gxTTcgNGgyTTYgNWgzTTUgNmg0TTYgN2gzTTcgOGgyTTggOWgxIiAvPgo8L3N2Zz4=");
+  }
+  
+  body *::-webkit-scrollbar-button:single-button:horizontal:increment {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTYgM2gxTTYgNGgyTTYgNWgzTTYgNmg0TTYgN2gzTTYgOGgyTTYgOWgxIiAvPgo8L3N2Zz4=");
+  }
+  
+  body *::-webkit-scrollbar-corner {
+    background: silver;
+  }`;
+document.head.appendChild(xpScrollStyle);
+const win98BtnStyle = document.createElement('style');
+win98BtnStyle.textContent = `
+ /* 针对所有按钮及 input[type=button|submit|reset] */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  /* 字体和大小 */
+  font-family: "MS Sans Serif", Tahoma, sans-serif;
+  font-size: 12px;
+  color: #000;
+
+  /* 背景和边框 */
+  background-color: #C0C0C0;    /* Win98 系统灰 */
+  border: 2px outset #FFF;      /* 外凸边框 */
+
+  /* 内边距 & 大小 */
+  padding: 2px 8px;
+  line-height: 1.2;
+  cursor: pointer;
+
+  /* 去除浏览器默认阴影 */
+  box-shadow: none;
+}
+
+/* 鼠标悬停略微加深以示可点击 */
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background-color: #D4D0C8;
+}
+
+/* 按下时凹陷 */
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
+  border-style: inset;
+  background-color: #C0C0C0;
+}
+
+/* 获得焦点时的虚线框（Win98 风格） */
+button:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus {
+  outline: 1px dotted #000;
+}
+
+/* 可选：禁用状态 */
+button:disabled,
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+input[type="reset"]:disabled {
+  background-color: #E0E0E0;
+  color: #808080;
+  border: 2px outset #FFF;
+  cursor: default;
+}
+`;
+document.head.appendChild(win98BtnStyle);
+const win98FormStyle = document.createElement('style');
+win98FormStyle.textContent = `/* 通用字体 */
+.windows98-ui {
+  font-family: "MS Sans Serif", Tahoma, sans-serif;
+  font-size: 12px;
+  color: #000;
+}
+
+/* —— 下拉框 Select —— */
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+
+  background-color: #C0C0C0;
+  border: 2px outset #FFF;
+  /* 左右内边距，右侧留出给箭头 */
+  padding: 2px 20px 2px 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* 箭头放在更右侧 */
+  background-image:
+    url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='6'><polygon points='0,0 8,0 4,6' fill='%23000'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+}
+
+/* IE 下隐藏自带箭头 */
+select::-ms-expand {
+  display: none;
+}
+
+select:focus {
+  outline: 1px dotted #000;
+}
+select {
+  color:black;
+}
+select:disabled {
+  background-color: #E0E0E0;
+  color: #808080;
+  cursor: default;
+}
+
+/* 如果需要更平整的箭头位置，可微调内边距 */
+select::-ms-expand {
+  display: none;
+}
+
+/* —— 表格 Table —— */
+/* 让所有表格单元格都用 border-box */
+table, th, td {
+  box-sizing: border-box;
+}
+
+/* 整体表框改为 1px groove，不影响宽度 */
+table {
+  border-collapse: collapse;      /* 合并边框 */
+  border: 1px groove #C0C0C0;     /* 从 2px 改为 1px */
+  background-color: #FFF;
+}
+
+/* 交替行和 hover 样式不变 */
+table tr:nth-child(even) td {
+  background-color: #F0F0F0;
+}
+table tr:hover td {
+  background-color: #C0C0C0;
+}`;
+document.head.appendChild(win98FormStyle);
+
+const win98FontStyle = document.createElement('style');
+win98FontStyle.textContent = `
+ /* 全局 Windows 98 系统字体 */
+html, body,
+button, input, select, textarea,
+table, th, td,
+h1, h2, h3, h4, h5, h6,
+p, span, div, a, li {
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+}
+#final_results_description h3{
+  font-size: 1em;
+}
+label {
+  font-family: inherit;
+}
+/* 如果需要更像像素字体，可以加上 */
+body {
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+.content_single p{
+  line-height: 1.3em;
+}
+.css-id.css-id{
+  background-color: #ffffff;
+  padding: 24px;
+  border: 4px double #bababa;
+  font-family: 'Times New Roman', serif;
+  color: #273450;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  margin: 1rem auto;
+  max-width: 610px;
+  line-height: 1.6;
+  margin-right: 1em;
+}
+.css-id h3{
+  font-family: 'Times New Roman', serif;
+}
+.css-id p{
+  font-family: 'Times New Roman', serif;
+}
+.css-id h1{
+  font-family: 'Times New Roman', serif;
+}
+.css-id h2{
+  font-family: 'Times New Roman', serif;
+}
+.css-id span{
+  font-family: 'Times New Roman', serif;
+}
+`;
+document.head.appendChild(win98FontStyle);
+
+addDynamicCSS();
+addDynamicCSS();
+
+tooltipList = [
+    // --- 1. Lee Teng-hui (李登辉) ---
+    // 关键设定：国民党内的“独台”教父，连战的包袱，宋楚瑜的死敌。
+    {
+        searchString: "Lee Teng-hui", 
+        explanationText: JSON.stringify({
+            // 宋楚瑜 (69) 视角：父子反目
+            "69": "<img src='https://i.imgur.com/NhCuFsp.jpeg'>Once like father and son, now bitter enemies. He destroyed the KMT's soul.",
+            // 连战 (68) 视角：想摆脱的太上皇
+            "68": "<img src='https://i.imgur.com/NhCuFsp.jpeg'>The current President. Next March, his seat will be mine, and the party will return to orthodoxy.",
+            // 陈水扁 (67) 视角：暗中助力者/黑金教父
+            "67": "<img src='https://i.imgur.com/NhCuFsp.jpeg'>A godfather of black-gold politics — yet unmistakably Taiwanese in his charisma.",
+            // 许信良 (1921) 视角
+            "1921":"<img src='https://i.imgur.com/NhCuFsp.jpeg'>Fake Communist, fake Japanese, fake Taiwanese, fake Kuomintang member, fake Chinese.",
+            // 默认/其他
+            "default": "<img src='https://i.imgur.com/NhCuFsp.jpeg'>A key figure in promoting the democratization process in Taiwan, he was hailed as Mr. Democracy."
+        })
+    },
+
+    // --- 2. Ma Ying-jeou (马英九) ---
+    // 【已更新图片】使用您提供的 ma.jpg
+    {
+        searchString: "Ma Ying-jeou",
+        explanationText: JSON.stringify({
+            // 陈水扁 (67): 刚刚击败阿扁的强敌
+            "67": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/176537779266981_P8292083.jpg?v=1766038315568'>He defeated me in the 1998 Taipei mayoral election. A formidable rival within the KMT who appeals to moderate voters.",
+            
+            // 连战 (68): 连战的超级助选员
+            "68": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/176537779266981_P8292083.jpg?v=1766038315568'>The Mayor of Taipei and a rising star of our party. His 'New Taiwanese' concept is crucial for securing the youth vote for me.",
+            
+            // 宋楚瑜 (69): 感到惋惜
+            "69": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/176537779266981_P8292083.jpg?v=1766038315568'>A clean and charismatic figure. It is a pity that party discipline forces him to campaign for Lien Chan instead of the people's choice.",
+            
+            // 默认
+            "default": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/176537779266981_P8292083.jpg?v=1766038315568'>Current Mayor of Taipei. He became the KMT's 'Super Star' after defeating Chen Shui-bian in 1998."
+        })
+    },
+
+    // --- 3. Wang Jin-pyng (王金平) ---
+    // 【已确认图片】使用您提供的 wang.jpg
+    {
+        searchString: "Wang Jin-pyng",
+        explanationText: JSON.stringify({
+            // 宋楚瑜 (69): 视为黑金代表
+            "69": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/wang.jpg?v=176588410069'>The Speaker of the Legislative Yuan. He represents the KMT's 'Local Faction'—part of the 'Black Gold' politics I vow to eradicate.",
+            
+            // 连战 (68): 本土票仓的依靠
+            "68": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/wang.jpg?v=176588410069'>My right-hand man. Without him, the local faction votes in the south would drift away.",
+            
+            // 默认
+            "default": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/wang.jpg?v=176588410069'>Speaker of the Legislative Yuan and a powerful leader of the KMT's 'Local Faction'."
+        })
+    },
+
+    // --- 4. Zhu Rongji (朱镕基) ---
+    // 关键事件：选前三天恐吓
+    {
+        searchString: "Zhu Rongji",
+        explanationText: JSON.stringify({
+            "67": "The Premier of the PRC. His threats on television are actually helping us—the Taiwanese people refuse to be intimidated!",
+            "68": "The Premier of the PRC. His grim warnings remind voters that we need a rational approach to Cross-Strait relations, not recklessness.",
+            "69": "The hardline Premier of Communist China. His rhetoric proves that Taiwan needs a leader capable of dialogue, not confrontation.",
+            "default": "Premier of the People's Republic of China. His stern warning 'Do not make the wrong choice' right before the election has shocked the island."
+        })
+    },
+
+    // --- 5. Zhongli Incident (中坜事件) ---
+    {
+        searchString: "Zhongli Incident",
+        explanationText: JSON.stringify({
+            "67": "1977. The moment when the people finally stood up against KMT election fraud. The spark that lit the Dangwai movement.",
+            "68": "A regretful riot in 1977 caused by 'misunderstandings' regarding the election process.",
+            "69": "A historical incident of civil unrest in 1977. We have moved past such turbulent times.",
+            "default": "A major protest in 1977 in Zhongli, triggered by allegations of KMT election fraud. It was a turning point for Taiwan's democratization."
+        })
+    },
+
+    // --- 6. Liu Sung-pan (刘松藩) ---
+    {
+        searchString: "Liu Sung-pan",
+        explanationText: JSON.stringify({
+            "69": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/C05C08000600.jpg?v=1766053696789'>The former Legislative Speaker. A respected elder who recognizes that the party has lost its soul and chooses to stand with me.",
+            "68": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/C05C08000600.jpg?v=1766053696789'>He betrayed the party to support Soong after losing the Speakership to Wang Jin-pyng.",
+            "default": "Former Speaker of the Legislative Yuan. He defected from the KMT to support James Soong."
+        })
+    },
+
+    // --- 7. Chung Jung-chi (钟荣吉) ---
+    {
+        searchString: "Chung Rong-ji",
+        explanationText: JSON.stringify({
+            "69": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/%E9%8D%BE%E6%A6%AE%E5%90%89.jpg?v=1766053721466'>A loyal comrade and influential figure in central Taiwan who helps solidify my support base.",
+            "default": "A prominent legislator supporting James Soong's independent bid."
+        })
+    },
+
+    // --- 8. Wu Poh-hsiung (吴伯雄) ---
+    {
+        searchString: "Wu Poh-hsiung",
+        explanationText: JSON.stringify({
+            "68": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/images%20(6).jpg?v=1766053773284'>A senior advisor and heavyweight. His influence is vital for securing the Hakka vote.",
+            "69": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/images%20(6).jpg?v=1766053773284'>An old friend, but he is too entrenched in the party machinery to see the need for real change.",
+            "default": "Senior Advisor to the President and a major leader of the Hakka community. He remains loyal to the KMT."
+        })
+    },
+
+    // --- 9. Soong Mei-ling (蒋宋美龄) ---
+    {
+        searchString: "Madame Chiang",
+        explanationText: JSON.stringify({
+            "68": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/%E8%94%A3%E5%AE%8B%E7%BE%8E%E9%BD%A12.jpg?v=1766053485894'>The Eternal First Lady. Her letter from New York endorsing me proves that I am the sole orthodox successor of the Republic of China.",
+            "67": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/%E8%94%A3%E5%AE%8B%E7%BE%8E%E9%BD%A12.jpg?v=17660534858949'>A figure from a bygone era. Her influence belongs to the history books, not the 21st century.",
+            "69": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/%E8%94%A3%E5%AE%8B%E7%BE%8E%E9%BD%A12.jpg?v=1766053485894'>I have the utmost respect for her, but she may have been misled by those around her regarding the current situation in Taiwan.",
+            "default": "Madame Chiang Kai-shek. Despite being over 100 years old and living in New York, she issued a statement urging unity behind Lien Chan."
+        })
+    },
+
+    // --- 10. Chen Li-an (陈履安) ---
+    {
+        searchString: "Chen Li-an",
+        explanationText: JSON.stringify({
+            "default": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/85.jpg?v=1766053533155'>Son of former VP Chen Cheng and a 1996 presidential candidate. He has returned to the spotlight to urge pan-blue voters to unite."
+        })
+    },
+
+    // --- 11. Lin Yi-hsiung (林义雄) ---
+    {
+        searchString: "Lin Yi-hsiung",
+        explanationText: JSON.stringify({
+            "67": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/2000.12.104.01.cut.webp?v=1766053744903'>Our Party Chairman. A man of immense moral courage who suffered the ultimate tragedy for Taiwan's democracy. We must win for him.",
+            "68": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/2000.12.104.01.cut.webp?v=1766053744903'>The current Chairman of the DPP.",
+            "69": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/2000.12.104.01.cut.webp?v=1766053744903'>The DPP Chairman. While we disagree on policies, his personal sacrifices command respect.",
+            "default": "Chairman of the DPP. A revered figure in the democracy movement known for his stoic leadership and tragic family history."
+        })
+    },
+    // --- 12. Lee Yuan-tseh (李远哲) ---
+    // 【重要】世纪豪赌：诺贝尔奖得主，选前最后时刻的关键变量
+    {
+        searchString: "Lee Yuan-tseh",
+        explanationText: JSON.stringify({
+            // 陈水扁 (67): 最后的王牌
+            "67": "The Nobel Laureate. He is the conscience of Taiwan. If he steps forward to endorse me, it will prove to the middle class that I am not a dangerous choice.",
+            
+            // 连战 (68): 极度不满
+            "68": "A scientist who should stay in his laboratory. He understands chemistry, not the complexities of national security and cross-strait stability.",
+            
+            // 宋楚瑜 (69): 失望与警告
+            "69": "I respect his academic achievements, but he is being misled. Endorsing a party advocating independence will only bring disaster to the Strait.",
+            
+            // 默认
+            "default": "Nobel Prize winner in Chemistry and President of Academia Sinica. He is widely regarding as 'The Conscience of Taiwan'. Rumors say he might endorse Chen Shui-bian in the final days."
+        })
+    },
+
+    // --- 13. Chang Rong-wei (张荣味) ---
+    // 【重要】云林王：地方派系倒戈宋楚瑜的典型代表
+  {
+        searchString: "Chang Rong-wei",
+        explanationText: JSON.stringify({
+            // 宋楚瑜 (69): 认为他是识时务的盟友
+            "69": "The Magistrate of Yunlin. He is a smart man who knows which way the wind is blowing. He bets on me because he knows the KMT ship is sinking.",
+            
+            // 连战 (68): 痛斥其忘恩负义、投机
+            "68": "A typical political chameleon. He took our party's resources but defected the moment he smelled an opportunity elsewhere. Loyalty means nothing to him.",
+            
+            // 陈水扁 (67): 看穿其本质
+            "67": "The 'Yunlin King' plays his own game. Today he is with Soong; tomorrow, who knows? He follows power, not ideology.",
+            
+            // 默认
+            "default": "Magistrate of Yunlin County. A cunning faction leader known for his acute political sense. He has calculated that betting on Soong is his best move for survival and power."
+        })
+    },
+
+    // --- 14. Chiang Hsiao-yan (章孝严/蒋孝严) ---
+    // 【重要】蒋家血脉：为了正统性而疯狂攻击昔日好友宋楚瑜
+    {
+        searchString: "Chiang Hsiao-yan",
+        explanationText: JSON.stringify({
+            // 连战 (68): 血统护航
+            "68": "The illegitimate son of President Chiang Ching-kuo. His presence in my campaign confirms that I am the only orthodox successor of the Chiang legacy.",
+            
+            // 宋楚瑜 (69): 痛心疾首
+            "69": "We used to be close friends. Now, to regain his political standing in the KMT, he attacks me viciously. It is a tragedy of politics.",
+            
+            // 陈水扁 (67): 宫廷内斗
+            "67": "He represents the old palace politics of the KMT. While they fight over who is the 'true heir', we fight for the people.",
+            
+            // 默认
+            "default": "Former Secretary-General of the KMT and the illegitimate son of Chiang Ching-kuo. He campaigns fiercely for Lien Chan to uphold the 'Orthodox KMT' lineage."
+        })
+    },
+
+    // --- 15. Kaohsiung Incident (美丽岛事件) ---
+    {
+        searchString: "Kaohsiung Incident",
+        explanationText: JSON.stringify({
+            "default": "1979. A crackdown on pro-democracy demonstrations. Most DPP leaders were victims or defense lawyers in this incident, while James Soong was in the government."
+        })
+    },
+
+    // --- 16. New Party (新党) ---
+    // 关键背景：2000年时号召“弃王保宋”
+    {
+        searchString: "New Party",
+        explanationText: JSON.stringify({
+            "default": "A conservative party that split from the KMT in 1993. Anti-Lee Teng-hui and pro-unification. Their supporters are largely flocking to James Soong."
+        })
+    },
+
+    // --- 17. Chang Hui-mei (张惠妹/阿妹) ---
+    // 2000年3月前，她单纯是台湾之光，尚未发生520领唱国歌后的封杀事件
+    {
+        searchString: "Chang Hui-mei",
+        explanationText: JSON.stringify({
+            "default": "Also known as A-Mei. The pop diva of Taiwan and an icon of indigenous talent. Her concerts are more packed than any political rally."
+        })
+    },
+
+    // --- 18. Chang Yung-fa (张荣发) ---
+    // 长荣集团总裁，选前态度暧昧但倾向挺扁（反对戒急用忍）
+    {
+        searchString: "Chang Yung-fa",
+        explanationText: JSON.stringify({
+            "default": "Founder of the Evergreen Group. A shipping tycoon who opposes the 'Go Slow' policy and maintains close ties with Chen Shui-bian."
+        })
+    },
+
+ // --- 19. Wu Ze-yuan (伍泽元) ---
+    // 【修改重点】强调他的投机是为了“保命”（法律豁免），是一种亡命赌徒的下注
+    {
+        searchString: "Wu Zeyuan",
+        explanationText: JSON.stringify({
+            "default": "Former Magistrate of Pingtung and a fugitive on bail. His support for James Soong is a desperate gamble—he needs a winner who can offer him political protection from his corruption charges."
+        })
+    },
+
+    // --- 20. Go Slow, Be Patient (戒急用忍) ---
+    // 李登辉的核心两岸经济政策
+    {
+        searchString: "Go Slow, Be Patient",
+        explanationText: JSON.stringify({
+            "default": "President Lee's policy restricting Taiwanese investment in China to prevent economic dependence. The business community is increasingly frustrated by it."
+        })
+    },
+
+    // --- 21. Sun Yun-suan (孙运璿) ---
+    // 永远的行政院长，坐轮椅挺连战
+    {
+        searchString: "Sun Yun-suan",
+        explanationText: JSON.stringify({
+            "default": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/images%20(5).jpg?v=1766053547086'>Former Premier and architect of Taiwan's economic miracle. Despite his stroke, he campaigns from his wheelchair, urging voters to support Lien Chan for stability."
+        })
+    },
+
+ // --- 22. Yan Qingbiao (颜清标) ---
+    // 【修改重点】强调“黑派”利益优先，有奶便是娘
+    {
+        searchString: "Yan Qingbiao",
+        explanationText: JSON.stringify({
+            "default": "Speaker of the Taichung County Council and leader of the 'Black Faction'. A grassroots boss who treats politics as a business transaction. He currently backs Soong, believing it yields the highest return for his local empire."
+        })
+    },
+
+    // --- 23. Wu Den-yih (吴敦义) ---
+    // 1998年输给谢长廷，2000年是连战大将
+    {
+        searchString: "Wu Den-yih",
+        explanationText: JSON.stringify({
+            "default": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/jpg_00_02_77_84_cca100062-hp-kh2000_002_038_0018p-0001-i.jpg?v=1766053952799'>Former Mayor of Kaohsiung. Known for his sharp eloquence, he is a key defender of the KMT central command."
+        })
+    },
+
+    // --- 24. Wang Jianxuan (王建煊) ---
+    // 王圣人，新党大佬
+    {
+        searchString: "Wang Jianxuan",
+        explanationText: JSON.stringify({
+            "default": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/%E7%8E%8B%E5%BB%BA%E7%85%8A%E9%99%A2%E9%95%B7.jpg?v=1766053936867'>Known as 'The Saint' for his moral rigidity. A key leader of the New Party."
+        })
+    },
+
+    // --- 25. Lin Yang-kang (林洋港) ---
+    // 阿港伯，支持宋楚瑜
+    {
+        searchString: "Lin Yang-kang",
+        explanationText: JSON.stringify({
+            "default": "<img src='https://file.garden/Z9XHdyLGHwUEZPS4/jpg_00_00_92_35_cca220001-hp-cdn0089282-0001-i.jpg?v=1766053948104'>Respectfully called 'Uncle A-Gang'. A charismatic former heavyweight who challenged Lee Teng-hui in 1996. He has re-emerged to support James Soong."
+        })
+    },
+    {
+        searchString: "Hau Pei-tsun",
+        explanationText: JSON.stringify({
+            "default": "A former ROC Army general and prime minister. Known for his hardline stance against Taiwan independence and his loyalty to the Republic of China framework. Once a central figure of the military establishment, he remained an influential conservative voice in politics leading up to the year 2000."
+        })
+    },
+{
+        searchString: "Wenxing magazine",
+        explanationText: JSON.stringify({
+            "default": "A seminal cultural and political magazine in Taiwan (1957–1965), serving as a bastion for liberal intellectuals like Li Ao. It advocated for Westernization and fiercely criticized traditional Chinese culture and the KMT's authoritarian control. The magazine triggered the famous 'East-West Culture Debate' before being forced to cease publication by the authorities."
+        })
+    },
+    {
+    "searchString": "Legislative Yuan",
+    "explanationText": JSON.stringify({
+        "default": "Taiwan's highest legislative body and current unicameral parliament. Originally one of three parliamentary chambers under the ROC constitution, it became the sole legislative organ after democratic reforms in the 2000s. It is responsible for enacting laws, approving the national budget, and overseeing the central government."
+    })
+},
+{
+    "searchString": "National Assembly",
+    "explanationText": JSON.stringify({
+        "default": "A defunct powerful constitutional body (1947–2005) originally tasked with electing the President and amending the constitution. Notorious for its 'eternal deputies' who held office for decades without re-election, it was gradually stripped of its powers during Taiwan's democratization and was officially suspended in 2005."
+    })
+},
+{
+    "searchString": "Pai Hsiao-yen murder case",
+    "explanationText": JSON.stringify({
+        "default": "A shocking 1997 kidnapping and murder of celebrity Pai Bing-bing's daughter that traumatized Taiwanese society. The botched police handling and sensationalist media coverage sparked massive anti-government protests, severely damaging the KMT's reputation for maintaining law and order and leading to a major political crisis."
+    })
+},
+{
+    "searchString": "Resolution on Taiwan's Future",
+    "explanationText": JSON.stringify({
+        "default": "A pivotal 1999 DPP party document that redefined its stance on independence. It declared Taiwan an already independent sovereign state named the Republic of China, making a formal declaration of independence unnecessary. This pragmatic shift moderated the party's radical image, reassured the US, and paved the way for Chen Shui-bian's victory."
+    })
+},
+{
+    "searchString": "New Taiwanese",
+    "explanationText": JSON.stringify({
+        "default": "A political concept popularized during the 1998 Taipei Mayoral election to transcend the ethnic divide between Mainlanders and native Taiwanese. Famously cemented when President Lee Teng-hui endorsed Ma Ying-jeou, defining anyone who identifies with and fights for Taiwan as 'Taiwanese.' This inclusive rhetoric was crucial for the KMT to regain support from native voters and blunt the DPP's ethnic nationalism."
+    })
+}
+];
+
+    campaignTrail_temp.banner1 = createBanner("https://file.garden/Z9XHdyLGHwUEZPS4/zhongshi.gif?v=1766221456856", containerRef, true);
+    campaignTrail_temp.banner2 = createBanner("https://file.garden/Z9XHdyLGHwUEZPS4/olympic2000_ani.gif?v=1766221467691", containerRef, false);
+
+    campaignTrail_temp.modBoxTheme = {
+        "header_color": "#004db3",
+        "header_image_url": "https://file.garden/Z9XHdyLGHwUEZPS4/%E4%B8%8B%E8%BD%BD%20(3).png",
+        "header_text_color": "#ffffff",
+        "description_text_color": "#000000",
+        "description_background_color": "#e0e0e0",
+        "main_color": "#d4d4d4",
+        "secondary_color": "#198754"
+        
+   }
+
+// ===================================================================
+// Tooltip Toggle Logic (Final Fix: 完美对齐版)
+// ===================================================================
+
+// 1. 初始化全局变量
+campaignTrail_temp.tooltip_enabled = true;
+
+// 2. 创建监听器
+let tooltipObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+            const difficultyDiv = document.getElementById("difficulty_level");
+            // 只有当找到了难度选项，且我们的 wrapper 还没创建时，才执行
+            if (difficultyDiv && !document.getElementById("difficulty_tooltip_wrapper")) {
+                injectTooltipDropdown(difficultyDiv);
+            }
+        }
+    });
+});
+
+// 开始监听
+const targetNode = document.getElementById("game_window");
+if (targetNode) {
+    tooltipObserver.observe(targetNode, { childList: true, subtree: true });
+}
+
+// 3. 注入并排布局的函数
+function injectTooltipDropdown(referenceNode) {
+    // A. 创建包裹容器
+    const wrapper = document.createElement("div");
+    wrapper.id = "difficulty_tooltip_wrapper";
+    // 关键修改1：align-items: flex-end。这会让两个块的“底部”对齐，
+    // 也就是让两个下拉框强制处在同一条水平线上，不管上面的文字有几行。
+    wrapper.style.cssText = "display: flex; justify-content: center; align-items: flex-end; gap: 25px; width: 100%; margin-top: 5px;";
+
+    // B. 准备 Annotations 元素
+    const tooltipDiv = document.createElement("div");
+    tooltipDiv.id = "tooltip_settings_box";
+    tooltipDiv.className = "tooltip_options";
+    tooltipDiv.style.textAlign = "center"; 
+    
+    // 关键修改2：强制指定 H3 的样式，确保和左边一致
+    tooltipDiv.innerHTML = `
+        <form name="tooltip_selection_form" style="margin:0; padding:0;margin-bottom: 13px;">
+            <h3 style="margin: 0 0 5px 0; font-size: 1.17em; font-weight: bold;">Annotations:</h3>
+            <select name="tooltip_mode_id" id="tooltip_mode_id">
+                <option value="1" selected>Enable (Default)</option>
+                <option value="0">Disable</option>
+            </select>
+        </form>
+    `;
+
+    // C. 清理“难度选择”原有的样式，防止它被默认 CSS 顶得太高
+    referenceNode.style.textAlign = "center";
+    
+    // 找到难度选择里的 H3 标签，强制重置它的边距
+    const originalH3 = referenceNode.querySelector("h3");
+    if(originalH3) {
+        originalH3.style.margin = "0 0 5px 0"; // 上右下左，只留底部的间距
+        originalH3.style.padding = "0";
+        // 如果原版有 <br> 或 <p> 捣乱，这里尝试隐藏它们（可选，视具体情况）
+        // originalH3.style.display = "inline-block"; 
+    }
+    // 移除原有 form 可能带来的边距
+    const originalForm = referenceNode.querySelector("form");
+    if(originalForm) {
+        originalForm.style.margin = "0";
+        originalForm.style.padding = "0";
+    }
+
+    // D. 移动 DOM 节点
+    const parent = referenceNode.parentNode;
+    parent.insertBefore(wrapper, referenceNode);
+    wrapper.appendChild(referenceNode);
+    wrapper.appendChild(tooltipDiv);
+
+    // E. 绑定事件
+    document.getElementById("tooltip_mode_id").addEventListener("change", function(e) {
+        campaignTrail_temp.tooltip_enabled = (e.target.value === "1");
+    });
+}
+
+// ===================================================================
+// CRT Monitor Effect Module (Fixed Version)
+// ===================================================================
+
+// 1. 使用 window 全局变量，避免依赖游戏内部对象
+window.crt_enabled_global = false;
+
+// 2. 注入 CRT 样式 (确保 pointer-events: none)
+const crtStyle = document.createElement('style');
+crtStyle.innerHTML = `
+    #crt_overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99999;
+        pointer-events: none;
+        /* 修改点 1：使用更淡的黑色，并增加线条平滑度 */
+        background: linear-gradient(
+            rgba(18, 16, 16, 0) 0%, 
+            rgba(0, 0, 0, 0.08) 50%, 
+            rgba(18, 16, 16, 0) 100%
+        ),
+        /* 修改点 2：大幅淡化 RGB 分色效果，只保留一点点质感 */
+        linear-gradient(90deg, rgba(255,0,0,0.015), rgba(0,255,0,0.01), rgba(0,0,255,0.015));
+        
+        /* 修改点 3：增大扫描线间距，减少视觉压力 (从3px改为4px) */
+        background-size: 100% 4px, 4px 100%;
+        
+        /* 修改点 4：暗角（Vignette）调轻，中心更亮 */
+        box-shadow: inset 0 0 15rem rgba(0,0,0,0.3);
+        
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: none;
+    }
+
+    /* 进阶效果：增加一个极轻微的扫描移动感，让眼睛不觉得画面死板 */
+    @keyframes scanline_scroll {
+        0% { background-position: 0 0; }
+        100% { background-position: 0 100%; }
+    }
+
+    #crt_overlay.active {
+        display: block;
+        /* 如果觉得晕，可以删掉下面这一行动画 */
+        /* animation: scanline_scroll 10s linear infinite; */
+    }
+`;
+document.head.appendChild(crtStyle);
+
+// 3. 创建 Overlay
+if (!document.getElementById('crt_overlay')) {
+    const overlayDiv = document.createElement('div');
+    overlayDiv.id = 'crt_overlay';
+    document.body.appendChild(overlayDiv);
+}
+
+// 4. 定义切换函数 (挂载在 window 上)
+window.toggleCRT = function(e) {
+    // 阻止事件冒泡，防止游戏引擎误判点击
+    if(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    // 切换状态
+    window.crt_enabled_global = !window.crt_enabled_global;
+    
+    const overlay = document.getElementById('crt_overlay');
+    const btn = document.getElementById('crt_toggle_button');
+    
+    if (window.crt_enabled_global) {
+        // 开启
+        overlay.style.display = "block";
+        // 稍微延时一点点加 opacity 以触发 transition
+        setTimeout(() => { overlay.style.opacity = "1"; }, 10);
+        
+        if(btn) btn.innerHTML = "CRT Effect: <span style='color:green; font-weight:bold;'>ON</span>";
+    } else {
+        // 关闭
+        overlay.style.opacity = "0";
+        setTimeout(() => { overlay.style.display = "none"; }, 200);
+        
+        if(btn) btn.innerHTML = "CRT Effect: <span style='color:red; font-weight:bold;'>OFF</span>";
+    }
+};
+
+// 5. 监听器：检测按钮注入
+let crtObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length > 0) {
+            // 寻找包含 "Campaign Data Center" 按钮的区域
+            // 通常是 id="view_electoral_map" 的兄弟节点或父级
+            const mapButton = document.getElementById("view_electoral_map");
+            
+            if (mapButton && !document.getElementById("crt_toggle_button")) {
+                const parentP = mapButton.parentNode;
+                
+                // 创建按钮
+                const btn = document.createElement("button");
+                btn.id = "crt_toggle_button";
+                btn.className = "answer_select_button"; 
+                btn.style.marginLeft = "1.5em";
+                
+                // 根据当前状态显示文字
+                btn.innerHTML = window.crt_enabled_global ? 
+                    "CRT Effect: <span style='color:green; font-weight:bold;'>ON</span>" : 
+                    "CRT Effect: <span style='color:red; font-weight:bold;'>OFF</span>";
+                
+                // 绑定点击事件 (使用 addEventListener)
+                btn.addEventListener('click', window.toggleCRT);
+
+                // 插入按钮
+                parentP.appendChild(btn);
+            }
+        }
+    });
+});
+
+// 开始监听
+const gameWindowNode = document.getElementById("game_window");
+if (gameWindowNode) {
+    crtObserver.observe(gameWindowNode, { childList: true, subtree: true });
+}
+
+// ===================================================================
+// 2000 TAIWAN ELECTION: RETRO DOSSIER STYLE (Framed & Textured)
+// ===================================================================
+
+(function() {
+    // 1. 总统候选人配置
+    const candidateConfig = {
+        "67": { color: "#1b9431", img: "https://file.garden/Z9XHdyLGHwUEZPS4/gettyimages-51343225-612x612.jpg?v=1766076457951", name: "Chen Shui-bian" }, // DPP
+        "69": { color: "#FF6600", img: "https://file.garden/Z9XHdyLGHwUEZPS4/gettyimages-3109928-612x612.jpg?v=1766076385328", name: "James Soong" },    // Indep
+        "68": { color: "#1e1ec9", img: "https://file.garden/Z9XHdyLGHwUEZPS4/taiwan-opposition-kuomintang-leader-and-presidential-candidate-lien-chan-gives-a-victory-gesture.jpg?v=1766075410613", name: "Lien Chan" },      // KMT
+        "1921": { color: "#90EE90", img: "https://file.garden/Z9XHdyLGHwUEZPS4/gettyimages-1259156117-612x612.jpg?v=1766089709799", name: "Hsu Hsin-liang" },// Indep
+        "1942": { color: "#E6B800", img: "https://file.garden/Z9XHdyLGHwUEZPS4/5aade10fa402303d5b040430_201803181146-372x500.jpg?v=1766075429602", name: "Li Ao" }        // New Party
+    };
+
+    // 2. 副总统候选人配置
+    const runningMateConfig = {
+        "1002": { color: "#1b9431", img: "https://i.imgur.com/ISRc1LN.png", name: "Lu Hsiu-lien" },    
+        "70": { color: "#FF6600", img: "https://i.imgur.com/c5Sp6uY.png", name: "Chang Chau-hsiung" }, 
+        "50001": { color: "#1e1ec9", img: "https://i.imgur.com/HcckIqc.png", name: "Vincent Siew" },    
+        "1922": { color: "#90EE90", img: "https://i.imgur.com/7EScPjM.jpeg", name: "Chu Hui-liang" },  
+        "1943": { color: "#E6B800", img: "https://i.imgur.com/ZwDdEC3.jpeg", name: "Fung Hu-hsiang" }  
+    };
+
+    // 3. 注入 CSS样式
+    if (!document.getElementById("custom_candidate_css")) {
+        const style = document.createElement('style');
+        style.id = "custom_candidate_css";
+        style.innerHTML = `
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Oswald:wght@500;700&display=swap');
+
+
+            /* 全局背景 */
+            #game_window {
+                background-color: #e2e2e2;
+                height: auto !important;
+                overflow: visible !important;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+                border: 1px solid #ccc;
+                color: #333;
+            }
+
+            #inner_window_3, #inner_window_4 {
+                background: #f0f0f0 !important; /* 窗口背景稍微灰一点，突出卡片的白 */
+                border: 1px solid #dcdcdc !important;
+                height: auto !important;
+                padding-bottom: 30px;
+                display: block; 
+                margin-top: 10px;
+            }
+
+            /* 隐藏原生元素 */
+            #inner_window_3 #candidate_form, 
+            #inner_window_3 #candidate_description_window,
+            #inner_window_3 .person_image,
+            #inner_window_3 .person_summary,
+            #inner_window_4 #running_mate_form,
+            #inner_window_4 #running_mate_description_window,
+            #inner_window_4 .person_image,
+            #inner_window_4 .person_summary {
+                display: none !important;
+            }
+
+            /* =========================================
+               样式 A: 总统选择条
+               ========================================= */
+            .custom-selection-container {
+                width: 100%;
+                height: 400px;
+                display: flex;
+                flex-direction: row;
+                overflow: hidden;
+                background: #000;
+                margin-bottom: 0; /* 紧贴下方的框 */
+                border: 2px solid #333; /* 外框 */
+                border-bottom: none; /* 下边框由描述框接管 */
+            }
+
+            .candidate-strip {
+                flex: 1;
+                position: relative;
+                background-size: cover;
+                background-position: top center;
+                background-repeat: no-repeat;
+                cursor: pointer;
+                transition: all 0.4s ease-out;
+                border-right: 1px solid #000;
+                filter: grayscale(100%) contrast(1.2) brightness(0.6); 
+            }
+
+            /* CRT 扫描线 */
+            .candidate-strip::before {
+                content: "";
+                position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+                background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                            linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+                background-size: 100% 2px, 3px 100%;
+                pointer-events: none;
+                z-index: 2;
+            }
+
+            .candidate-strip:hover { flex: 1.3; filter: grayscale(50%) contrast(1.1) brightness(0.8); }
+            .candidate-strip.active { 
+                flex: 3 !important; 
+                filter: grayscale(0%) contrast(1.0) brightness(1.0); 
+                z-index: 10; 
+                box-shadow: 0 0 30px rgba(0,0,0,0.5); 
+            }
+
+            .strip-label {
+                position: absolute; bottom: 20px; left: 0; width: 90%; margin-left: 5%;
+                padding: 5px 0; text-align: center; 
+                font-family: "Oswald", sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+                background: rgba(255,255,255,0.95); color: #000;
+                transform: skewX(-10deg); transition: all 0.3s; opacity: 0.8;
+            }
+            .candidate-strip.active .strip-label { bottom: 40px; font-size: 26px; opacity: 1; box-shadow: 0 0 15px rgba(255,255,255,0.8); }
+
+            /* =========================================
+               样式 B: 描述框 (档案卡片风格)
+               ========================================= */
+            .desc-card-container {
+                background-color: #fcfcfc;
+                /* 微弱的网格纹理，消除死白 */
+                background-image: linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+                background-size: 20px 20px;
+                
+                border: 2px solid #333; /* 硬朗边框 */
+                /* 动态颜色条由 JS 控制 border-top */
+                border-top: 8px solid #333; 
+                
+                padding: 30px;
+                position: relative;
+                margin-top: -2px; /* 稍微上移，盖住上面的缝隙 */
+                
+                /* 硬朗的投影，更有复古感 */
+                box-shadow: 8px 8px 0px rgba(0,0,0,0.15); 
+            }
+
+            .desc-card-container::after {
+                content: "CONFIDENTIAL // ELECTION_2000";
+                position: absolute; top: 10px; right: 10px;
+                font-family: monospace; font-size: 10px; color: #999;
+                background: #fff; padding: 2px 5px; border: 1px solid #eee;
+            }
+
+            /* =========================================
+               样式 C: 副总统展示框
+               ========================================= */
+            .vp-profile-container {
+                display: flex; flex-direction: row;
+                background: #fcfcfc;
+                background-image: linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+                background-size: 20px 20px;
+                
+                border: 2px solid #333;
+                box-shadow: 8px 8px 0px rgba(0,0,0,0.15); /* 同样的硬朗投影 */
+                margin: 20px 0;
+                height: 420px; /* 固定高度 */
+                overflow: hidden;
+            }
+
+            .vp-left-col {
+                width: 280px;
+                background: #333; /* 深色底托衬图片 */
+                display: flex; flex-direction: column;
+                border-right: 2px solid #333;
+                position: relative; height: 100%;
+            }
+
+            .vp-image {
+                width: 100%; height: 360px;
+                background-size: cover; background-position: top center;
+                filter: grayscale(20%) contrast(1.1);
+                position: relative;
+            }
+            .vp-image::after {
+                content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+                background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.1) 50%);
+                background-size: 100% 4px; pointer-events: none;
+            }
+
+            .vp-name-tag {
+                width: 100%; height: 60px;
+                background: #fff; color: #000;
+                display: flex; align-items: center; justify-content: center;
+                font-family: "Oswald", sans-serif; font-size: 24px; font-weight: 700; text-transform: uppercase;
+                border-top: 2px solid #000;
+            }
+
+            .vp-right-col {
+                flex: 1; display: flex; flex-direction: column; position: relative; height: 100%;
+                /* 确保右侧也是白底 */
+                background: rgba(255,255,255,0.9); 
+            }
+
+            .vp-scroll-area {
+                padding: 30px; flex: 1; overflow-y: auto;
+            }
+            .vp-scroll-area::-webkit-scrollbar { width: 8px; }
+            .vp-scroll-area::-webkit-scrollbar-track { background: #eee; border-left: 1px solid #ccc; }
+            .vp-scroll-area::-webkit-scrollbar-thumb { background: #333; }
+
+            /* 通用文本样式 */
+            .custom-desc-text {
+                color: #333; font-family: "Noto Sans TC", sans-serif; line-height: 1.6; font-size: 15px;
+            }
+            .custom-desc-text h3 {
+                color: #000; margin-top: 0; 
+                font-family: "Noto Sans TC", sans-serif; font-weight: 700; font-size: 22px; margin-bottom: 15px;
+                border-bottom: 2px solid #eee; padding-bottom: 10px;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // -----------------------------------------------------------
+    // 逻辑 A: 总统选择
+    // -----------------------------------------------------------
+    function buildPresidentUI() {
+        const window3 = document.getElementById("inner_window_3");
+        if (!window3 || document.getElementById("custom_candidate_container")) return;
+
+        const originalSelect = document.getElementById("candidate_id");
+        if (!originalSelect) return;
+
+        // 1. 顶部图片容器
+        const container = document.createElement("div");
+        container.id = "custom_candidate_container";
+        container.className = "custom-selection-container";
+
+        // 2. 底部描述容器 (新样式: Card)
+        const descBox = document.createElement("div");
+        descBox.className = "desc-card-container"; // 使用新CSS类
+        descBox.innerHTML = "<p class='custom-desc-text'>SELECT CANDIDATE TO VIEW DOSSIER.</p>";
+
+        for (let i = 0; i < originalSelect.options.length; i++) {
+            let opt = originalSelect.options[i];
+            let id = opt.value;
+            let config = candidateConfig[id];
+            if (!config) continue; 
+
+            let strip = document.createElement("div");
+            strip.className = "candidate-strip";
+            strip.style.backgroundImage = `url('${config.img}')`;
+            
+            let label = document.createElement("div");
+            label.className = "strip-label";
+            label.innerText = config.name.toUpperCase();
+            strip.appendChild(label);
+
+            strip.addEventListener("click", function() {
+                container.querySelectorAll(".candidate-strip").forEach(s => s.classList.remove("active"));
+                this.classList.add("active");
+                originalSelect.value = id;
+                
+                // === 关键：动态修改描述框的顶部边框颜色 ===
+                descBox.style.borderTopColor = config.color;
+
+                let data = campaignTrail_temp.candidate_json.find(c => c.pk == id);
+                if (data) {
+                    let cleanDesc = data.fields.description
+                        .replace(/style=['"][^'"]*height:\s*200px[^'"]*['"]/gi, "")
+                        .replace(/style=['"][^'"]*overflow-y:[^'"]*['"]/gi, "");
+                    
+                    descBox.innerHTML = `
+                        <div class="custom-desc-text">
+                            <h3 style="color:${config.color};">${config.name}</h3>
+                            ${cleanDesc}
+                        </div>`;
+                }
+            });
+            container.appendChild(strip);
+        }
+
+        insertUI(window3, container, descBox, "candidate_id_button", "candidate_id_back");
+        const firstStrip = container.querySelector(".candidate-strip");
+        if(firstStrip) firstStrip.click();
+    }
+
+    // -----------------------------------------------------------
+    // 逻辑 B: 副总统展示
+    // -----------------------------------------------------------
+    function buildRunningMateUI() {
+        const window4 = document.getElementById("inner_window_4");
+        if (!window4 || document.getElementById("custom_vp_container")) return;
+
+        const originalSelect = document.getElementById("running_mate_id");
+        if (!originalSelect) return;
+
+        let id = originalSelect.value; 
+        let config = runningMateConfig[id];
+        if (!config) config = { color: "#333", img: "", name: originalSelect.options[originalSelect.selectedIndex].text };
+
+        let data = null;
+        if (window.campaignTrail_temp.running_mate_json) {
+            data = campaignTrail_temp.running_mate_json.find(c => c.pk == id);
+        }
+        if (!data && window.campaignTrail_temp.candidate_json) {
+            data = campaignTrail_temp.candidate_json.find(c => c.pk == id);
+        }
+
+        let descriptionHtml = "<p>NO DATA.</p>";
+        if (data) {
+            let rawDesc = data.fields.description_as_running_mate || data.fields.description;
+            if(rawDesc) {
+                descriptionHtml = rawDesc
+                    .replace(/style=['"][^'"]*height:\s*200px[^'"]*['"]/gi, "")
+                    .replace(/style=['"][^'"]*overflow-y:[^'"]*['"]/gi, "");
+            }
+        }
+
+        // 容器 (这里也应用了边框和阴影)
+        const container = document.createElement("div");
+        container.id = "custom_vp_container";
+        container.className = "vp-profile-container";
+        // 动态修改整个VP框的顶部颜色，呼应总统页
+        container.style.borderTop = `6px solid ${config.color}`;
+
+        // 左侧
+        const leftCol = document.createElement("div");
+        leftCol.className = "vp-left-col";
+        
+        const imgDiv = document.createElement("div");
+        imgDiv.className = "vp-image";
+        imgDiv.style.backgroundImage = `url('${config.img}')`;
+        
+        const nameTag = document.createElement("div");
+        nameTag.className = "vp-name-tag";
+        nameTag.innerText = config.name.toUpperCase();
+        // 名字下面的小条也跟颜色
+        nameTag.style.borderBottom = `4px solid ${config.color}`; 
+
+        leftCol.appendChild(imgDiv);
+        leftCol.appendChild(nameTag);
+
+        // 右侧
+        const rightCol = document.createElement("div");
+        rightCol.className = "vp-right-col";
+        
+        const scrollArea = document.createElement("div");
+        scrollArea.className = "vp-scroll-area";
+        
+        let contentHeader = `<h3 style="color:${config.color}">${config.name}</h3>`;
+        scrollArea.innerHTML = `<div class="custom-desc-text">${contentHeader}${descriptionHtml}</div>`;
+
+        rightCol.appendChild(scrollArea);
+        container.appendChild(leftCol);
+        container.appendChild(rightCol);
+
+        insertUI(window4, container, null, "running_mate_id_button", "running_mate_id_back");
+    }
+
+    // 辅助函数
+    function insertUI(windowNode, container, descBox, nextBtnId, backBtnId) {
+        const nextBtn = document.getElementById(nextBtnId);
+        const backBtn = document.getElementById(backBtnId);
+        let referenceNode = null;
+
+        if (nextBtn && nextBtn.parentNode && nextBtn.parentNode.parentNode === windowNode) {
+            referenceNode = nextBtn.parentNode;
+        } else if (backBtn && backBtn.parentNode && backBtn.parentNode.parentNode === windowNode) {
+            referenceNode = backBtn.parentNode;
+        }
+
+        if (referenceNode) {
+            windowNode.insertBefore(container, referenceNode);
+            if(descBox) windowNode.insertBefore(descBox, referenceNode);
+        } else {
+            windowNode.appendChild(container);
+            if(descBox) windowNode.appendChild(descBox);
+        }
+    }
+
+    const observer = new MutationObserver((mutations) => {
+        if (document.getElementById("inner_window_3")) buildPresidentUI();
+        if (document.getElementById("inner_window_4")) buildRunningMateUI();
+    });
+
+    const gameWindow = document.getElementById("game_window");
+    if(gameWindow) {
+        observer.observe(gameWindow, { childList: true, subtree: true });
+    }
+
+})();
+
+// 获取目标窗口元素
+var win98Window = document.querySelector('.inner_inner_window');
+
+if (win98Window) {
+    // 1. 创建标题栏容器
+    var titleBar = document.createElement('div');
+    titleBar.className = 'win98-title-bar';
+    
+    // 2. 创建标题文字 (左侧)
+    var titleText = document.createElement('span');
+    // 你可以改成 "Campaign Trail.exe" 或 "Decision 1996"
+    titleText.innerText = "Decision 2000 - The Campaign Trail"; 
+    
+    // 3. 创建关闭按钮 (右侧装饰)
+    var closeBtn = document.createElement('div');
+    closeBtn.className = 'win98-close-btn';
+    closeBtn.innerText = "x";
+    
+    // 4. 组装
+    titleBar.appendChild(titleText);
+    titleBar.appendChild(closeBtn);
+    
+    // 5. 插入到窗口最顶部
+    win98Window.insertBefore(titleBar, win98Window.firstChild);
+}
+
+(function() {
+    // 核心函数：初始化选举时钟
+    function initElectionClock() {
+        // 配置参数
+        const TARGET_BUTTON_ID = 'final_result_button';
+        const CONTAINER_ID = 'map_container';
+        const CLOCK_ID = 'election_clock_widget';
+        
+        // 虚拟时间设置：2000年3月18日
+        const VIRTUAL_START = new Date(2000, 2, 18, 16, 0, 0).getTime(); // 16:00
+        const VIRTUAL_END = new Date(2000, 2, 18, 22, 0, 0).getTime();   // 22:00
+        const REAL_DURATION_MS = 120 * 1000; // 2分钟 = 120,000毫秒
+
+        // 1. 注入 CSS 样式 (完全独立的样式，不依赖外部)
+        if (!document.getElementById('election_clock_css')) {
+            const style = document.createElement('style');
+            style.id = 'election_clock_css';
+            style.innerHTML = `
+                #${CLOCK_ID} {
+                    position: absolute;
+                    top: 15px;
+                    left: 15px;
+                    z-index: 9999;
+                    background-color: rgba(0, 0, 0, 0.85); /* 深黑背景 */
+                    backdrop-filter: blur(4px); /* 毛玻璃效果 */
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-left: 4px solid #ff9900; /* 装饰条 */
+                    border-radius: 4px;
+                    padding: 8px 15px;
+                    font-family: 'Courier New', monospace; /* 复古数字字体 */
+                    color: #ffffff;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    pointer-events: none; /* 让鼠标穿透，不影响地图操作 */
+                    opacity: 0;
+                    transform: translateY(-10px);
+                    transition: opacity 0.5s ease, transform 0.5s ease;
+                }
+                #${CLOCK_ID}.visible {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                .clock-label {
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    color: #aaaaaa;
+                    letter-spacing: 1px;
+                    margin-bottom: 2px;
+                }
+                .clock-digits {
+                    font-size: 24px;
+                    font-weight: bold;
+                    letter-spacing: 2px;
+                    text-shadow: 0 0 5px rgba(255, 153, 0, 0.5);
+                }
+                /* 完成时的绿色闪烁 */
+                .clock-finished .clock-digits {
+                    color: #4ade80; 
+                    text-shadow: 0 0 10px rgba(74, 222, 128, 0.8);
+                }
+                .clock-finished {
+                    border-left-color: #4ade80 !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // 2. 动画逻辑
+        function startTimer(clockElement) {
+            const timeElement = clockElement.querySelector('.clock-digits');
+            const startTimeReal = performance.now();
+            let animationFrame;
+
+            function update() {
+                const nowReal = performance.now();
+                const elapsed = nowReal - startTimeReal;
+                let progress = elapsed / REAL_DURATION_MS;
+
+                // 检测是否出现 100% complete
+                // TCT 通常会在 body 文本中出现这个字样
+                const pageText = document.body.innerText || "";
+                // 宽松匹配：包含 "100%" 且包含 "complete" 或者 "calculating"
+                const isComplete = (pageText.includes("100%") && pageText.includes("complete"));
+
+                if (isComplete) {
+                    progress = 1; // 强制完成
+                }
+
+                if (progress >= 1) {
+                    progress = 1;
+                    renderTime(VIRTUAL_END, timeElement);
+                    clockElement.classList.add('clock-finished'); // 变绿
+                    cancelAnimationFrame(animationFrame);
+                    return; // 结束动画
+                }
+
+                // 计算当前虚拟时间
+                const currentVirtualTime = VIRTUAL_START + (progress * (VIRTUAL_END - VIRTUAL_START));
+                renderTime(currentVirtualTime, timeElement);
+
+                animationFrame = requestAnimationFrame(update);
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // 3. 时间渲染辅助函数
+        function renderTime(timeMs, element) {
+            const d = new Date(timeMs);
+            let h = d.getHours();
+            let m = d.getMinutes();
+            // 补零
+            h = h < 10 ? '0' + h : h;
+            m = m < 10 ? '0' + m : m;
+            element.innerText = `${h}:${m}`;
+        }
+
+        // 4. 创建时钟元素
+        function createClock(container) {
+            if (document.getElementById(CLOCK_ID)) return; // 防止重复创建
+
+            const clockDiv = document.createElement('div');
+            clockDiv.id = CLOCK_ID;
+            clockDiv.innerHTML = `
+                <div class="clock-label">2000 MAR 18</div>
+                <div class="clock-digits">16:00</div>
+            `;
+
+            // 确保容器有定位属性，以便绝对定位生效
+            const style = window.getComputedStyle(container);
+            if (style.position === 'static') {
+                container.style.position = 'relative';
+            }
+
+            container.appendChild(clockDiv);
+            
+            // 触发重绘后添加类名以显示动画
+            requestAnimationFrame(() => clockDiv.classList.add('visible'));
+
+            // 开始计时
+            startTimer(clockDiv);
+        }
+
+        // 5. 监听页面变化 (核心触发逻辑)
+        const observer = new MutationObserver((mutations) => {
+            const button = document.getElementById(TARGET_BUTTON_ID);
+            const container = document.getElementById(CONTAINER_ID);
+
+            // 如果按钮存在，且容器存在，且时钟还没创建
+            if (button && container && !document.getElementById(CLOCK_ID)) {
+                console.log("Election Night Button Detected: Initializing Clock...");
+                createClock(container);
+            }
+        });
+
+        // 开始监听 document.body 的变化
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+
+        // 立即检查一次（防止脚本加载慢于按钮出现）
+        if (document.getElementById(TARGET_BUTTON_ID) && document.getElementById(CONTAINER_ID)) {
+            createClock(document.getElementById(CONTAINER_ID));
+        }
+    }
+
+    // 执行
+    initElectionClock();
+
+})();
+
+(function() {
+    'use strict';
+
+    // 1. 候选人配置 (关键词匹配)
+    const CANDIDATE_CONFIG = [
+        { 
+            keywords: ['Soong', 'James', 'Song'], 
+            icon: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/%E7%84%A1%E9%BB%A8%E7%B1%8D.png',
+            fallbackColor: '#FF6600'
+        },
+        { 
+            keywords: ['Chen', 'Shui', 'Bian'], 
+            icon: 'https://upload.wikimedia.org/wikipedia/zh/thumb/c/c1/Emblem_of_Democratic_Progressive_Party_%28new%29.svg/1200px-Emblem_of_Democratic_Progressive_Party_%28new%29.svg.png',
+            fallbackColor: '#1b9431'
+        },
+        { 
+            keywords: ['Lien', 'Chan'], 
+            icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Emblem_of_the_Kuomintang.svg/600px-Emblem_of_the_Kuomintang.svg.png',
+            fallbackColor: '#000099'
+        },
+        { 
+            keywords: ['Hsu', 'Hsin'], 
+            icon: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/%E7%84%A1%E9%BB%A8%E7%B1%8D.png',
+            fallbackColor: '#90EE90'
+        },
+        { 
+            keywords: ['Li Ao', 'Ao'], 
+            icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Np_logo.svg/1200px-Np_logo.svg.png',
+            fallbackColor: '#FFD700'
+        }
+    ];
+
+    // 2. 注入 CSS (视觉优化版：填充留白)
+    function injectStyles() {
+        if (document.getElementById('mod-chart-css')) return;
+        const css = `
+            /* 激活时隐藏原始内容 */
+            #overall_result.mod-active > h3,
+            #overall_result.mod-active > ul,
+            #overall_result.mod-active > p {
+                display: none !important;
+            }
+
+            /* 自定义图表容器 */
+            #mod_custom_chart {
+                display: none;
+                width: 193.23px !important;
+                height: 270.42px !important;
+                max-width: 193.23px !important;
+                max-height: 270.42px !important;
+                background-color: #fcfcfc; /*稍微亮一点的背景*/
+                border: 1px solid #666;
+                box-sizing: border-box;
+                padding: 10px 8px; /* 增加内边距 */
+                font-family: "Arial", sans-serif;
+                flex-direction: column;
+                overflow: hidden;
+            }
+            
+            #overall_result.mod-active #mod_custom_chart {
+                display: flex !important;
+            }
+
+            .mod-header {
+                font-size: 12px; /* 字体加大 */
+                font-weight: bold;
+                text-align: center;
+                border-bottom: 2px solid #333;
+                padding-bottom: 6px;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+                flex-shrink: 0;
+            }
+
+            /* 列表区域：使用 flex 均匀分布，解决留白问题 */
+            .mod-list-area {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly; /* 关键：均匀分布垂直空间 */
+                padding: 5px 0;
+            }
+
+            .mod-row {
+                display: flex;
+                flex-direction: column;
+                /* margin-bottom 移除了，改用 space-evenly 自动控制 */
+            }
+
+            .mod-row-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end; /* 底部对齐，让数字和名字看起来更整齐 */
+                margin-bottom: 4px;    /* 名字和条形图之间的距离 */
+                font-size: 11px;
+            }
+
+            .mod-info {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                overflow: hidden;
+            }
+
+            .mod-icon {
+                width: 18px;  /* 图标加大 */
+                height: 18px;
+                border-radius: 50%;
+                object-fit: contain;
+                border: 1px solid #ddd;
+                flex-shrink: 0;
+                background: white;
+            }
+
+            .mod-name {
+                font-weight: bold;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 85px;
+                font-size: 11px; /* 名字加大 */
+                color: #222;
+            }
+
+            .mod-stats {
+                font-size: 10px; /* 数字加大 */
+                color: #555;
+                font-variant-numeric: tabular-nums;
+                font-weight: 500;
+            }
+
+            .mod-bar-bg {
+                width: 100%;
+                height: 10px; /* 条形图加厚，更丰满 */
+                background-color: #e6e6e6;
+                border-radius: 5px;
+                overflow: hidden;
+                box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); /* 增加一点质感 */
+            }
+
+            .mod-bar-fill {
+                height: 100%;
+                border-radius: 5px;
+                transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); /* 更平滑的动画 */
+            }
+
+            .mod-footer {
+                margin-top: auto;
+                padding-top: 8px;
+                border-top: 1px solid #ccc;
+                font-size: 10px;
+                text-align: center;
+                color: #666;
+                line-height: 1.2;
+                flex-shrink: 0;
+            }
+        `;
+        const style = document.createElement('style');
+        style.id = 'mod-chart-css';
+        style.type = 'text/css';
+        style.appendChild(document.createTextNode(css));
+        document.head.appendChild(style);
+    }
+
+    // 3. 解析器 (保持稳健的正则)
+    function parseLiData(li) {
+        const span = li.querySelector('span');
+        let color = span ? span.style.backgroundColor : null;
+        const text = li.innerText.replace('--', '').trim();
+        
+        const regex = /(.+?)[\s:]+([\d,]+)[\s\/|(]+([\d.]+)%?/;
+        const match = text.match(regex);
+
+        if (match) {
+            const rawName = match[1].trim();
+            const votesStr = match[2].replace(/,/g, '');
+            const votes = parseInt(votesStr) || 0;
+            const percent = parseFloat(match[3]) || 0.0;
+
+            const config = CANDIDATE_CONFIG.find(c => c.keywords.some(k => rawName.includes(k)));
+            
+            return {
+                name: rawName,
+                votes: votes,
+                percent: percent,
+                color: color || (config ? config.fallbackColor : '#888'),
+                icon: config ? config.icon : ''
+            };
+        }
+        return null;
+    }
+
+    // 4. 渲染函数
+    function updateCustomChart(container, sourceUl) {
+        const lis = sourceUl.querySelectorAll('li');
+        const data = [];
+
+        lis.forEach(li => {
+            const parsed = parseLiData(li);
+            if (parsed) data.push(parsed);
+        });
+
+        // 排序：票数高在顶
+        data.sort((a, b) => b.votes - a.votes);
+
+        const originalFooter = document.querySelector('#overall_result p');
+        const footerText = originalFooter ? originalFooter.innerHTML : 'Election Night';
+
+        let html = `
+            <div class="mod-header">Live Results</div>
+            <div class="mod-list-area">
+        `;
+
+        data.forEach(p => {
+            html += `
+                <div class="mod-row">
+                    <div class="mod-row-top">
+                        <div class="mod-info">
+                            ${p.icon ? `<img src="${p.icon}" class="mod-icon">` : ''}
+                            <span class="mod-name" title="${p.name}">${p.name}</span>
+                        </div>
+                        <span class="mod-stats">${p.votes.toLocaleString()} (${p.percent.toFixed(1)}%)</span>
+                    </div>
+                    <div class="mod-bar-bg">
+                        <div class="mod-bar-fill" style="width: ${p.percent}%; background-color: ${p.color};"></div>
+                    </div>
+                </div>
+            `;
+        });
+
+        html += `</div><div class="mod-footer">${footerText}</div>`;
+        container.innerHTML = html;
+    }
+
+    // 5. 主初始化逻辑
+    function init() {
+        injectStyles();
+
+        const mainObserver = new MutationObserver((mutations) => {
+            const btn = document.getElementById('final_result_button');
+            const resultDiv = document.getElementById('overall_result');
+
+            if (btn && resultDiv) {
+                // 激活样式
+                if (!resultDiv.classList.contains('mod-active')) {
+                    console.log("[Mod] Activating Enhanced Chart.");
+                    resultDiv.classList.add('mod-active');
+                }
+
+                // 创建图表容器
+                let chartDiv = document.getElementById('mod_custom_chart');
+                if (!chartDiv) {
+                    chartDiv = document.createElement('div');
+                    chartDiv.id = 'mod_custom_chart';
+                    resultDiv.appendChild(chartDiv);
+
+                    const originalUl = resultDiv.querySelector('ul');
+                    if (originalUl) {
+                        // 初始渲染
+                        updateCustomChart(chartDiv, originalUl);
+
+                        // 持续同步
+                        const listObserver = new MutationObserver(() => {
+                            updateCustomChart(chartDiv, originalUl);
+                        });
+                        listObserver.observe(originalUl, {
+                            subtree: true,
+                            characterData: true,
+                            childList: true
+                        });
+                    }
+                }
+            }
+        });
+
+        mainObserver.observe(document.body, { childList: true, subtree: true });
+
+        // 立即触发检查
+        if (document.getElementById('final_result_button')) {
+             document.body.setAttribute('mod-check', Date.now());
+        }
+    }
+
+    init();
+})();
+
+(function() {
+    console.log("🚑 Code 1 修正补丁已启动：正在接管 UI 控制权...");
+
+    // ============================================================
+    // 1. 强力解毒：防止侧边栏消失/变白 (针对 Code 2 的副作用)
+    // ============================================================
+    function forceShowSidebar() {
+        // A. 删除那个会导致隐藏的样式表
+        var badStyle = document.getElementById('hide_sidebar_style');
+        if (badStyle) {
+            badStyle.remove();
+            console.log("🛡️ 已拦截并删除 hide_sidebar_style");
+        }
+
+        // B. 强制恢复侧边栏民调 (Overall Result)
+        var sidebar = document.getElementById('overall_result');
+        if (sidebar) {
+            sidebar.style.cssText = "display: block !important; visibility: visible !important; opacity: 1 !important;";
+            
+            // 修复文字颜色 (防止变白/透明)
+            var texts = sidebar.querySelectorAll('*');
+            for (var i = 0; i < texts.length; i++) {
+                texts[i].style.color = ""; // 清除内联颜色
+                texts[i].style.removeProperty('color'); // 移除属性
+            }
+        }
+
+        // C. 强制恢复政策栏 (State Info)
+        var stateInfo = document.getElementById('state_info');
+        if (stateInfo) {
+            stateInfo.style.cssText = "display: block !important; visibility: visible !important;";
+        }
+    }
+
+    // ============================================================
+    // 2. 功能增强：给 Data Center 加地图跳转按钮
+    // ============================================================
+    function injectMapButton() {
+        // 查找 Data Center 里的民调标题
+        var headers = document.getElementsByTagName('h2');
+        for (var i = 0; i < headers.length; i++) {
+            var h2 = headers[i];
+            
+            // 只要看到 "Official Polls" 或 "Real-time Poll Results" 且没加过按钮
+            if ((h2.innerText.includes("Poll") || h2.innerText.includes("民调")) && !h2.hasAttribute('data-patched')) {
+                
+                // 创建按钮容器
+                var wrapper = document.createElement('div');
+                wrapper.style.cssText = "display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #999; margin-bottom:10px; padding-bottom:5px;";
+                
+                h2.parentNode.insertBefore(wrapper, h2);
+                wrapper.appendChild(h2);
+                h2.style.margin = "0";
+
+                // 创建按钮
+                var btn = document.createElement('button');
+                btn.innerHTML = "🗺️ Jump to Map";
+                btn.style.cssText = "cursor:pointer; font-weight:bold; font-size:12px; padding:3px 8px; border:1px solid #000; background:#e0e0e0;";
+                
+                btn.onclick = function() {
+                    var mapBtn = document.getElementById('view_electoral_map');
+                    if(mapBtn) mapBtn.click();
+                    else alert("找不到地图按钮，可能在另一个界面");
+                };
+
+                wrapper.appendChild(btn);
+                h2.setAttribute('data-patched', 'true'); // 标记已处理
+            }
+        }
+    }
+
+    // ============================================================
+    // 3. 监控引擎：0延迟监听页面变化
+    // ============================================================
+    var observer = new MutationObserver(function(mutations) {
+        // 每次界面有变动，立刻执行两件事：
+        // 1. 修正被隐藏的 UI
+        forceShowSidebar();
+        // 2. 尝试插入按钮
+        injectMapButton();
+    });
+
+    // 启动监控 (覆盖整个 Body)
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // 立即执行一次
+    forceShowSidebar();
+
+})();
+
+
+// =================================================================
+// 布局终极补丁：透明背景 + 340px高度 + 气泡修复
+// =================================================================
+(function fixTransparentLayout() {
+    // 1. 清理旧样式
+    var oldStyle = document.querySelector('style[data-patch="layout"]');
+    if (oldStyle) oldStyle.remove();
+
+    // 2. 创建新样式
+    var style = document.createElement('style');
+    style.setAttribute('data-patch', 'layout'); 
+    style.innerHTML = `
+        /* --- 容器设置 --- */
+        #state_result_container {
+             box-sizing: border-box;
+
+            /* 背景透明化 (核心修改) */
+            background-color: transparent !important;
+            background: none !important;
+            /* 布局逻辑 (保留你觉得好的设置) */
+            min-height: 340px !important;
+            height: auto !important;
+            
+            /* 必须 visible 才能让气泡显示 */
+            overflow: visible !important; 
+            
+            /* 层级提高，防止被遮挡 */
+            position: relative !important;
+            z-index: 100 !important;
+        }
+
+        /* 内部文字容器也强制透明 */
+        #state_info {
+            background-color: transparent !important;
+            background: none !important;
+            border: none !important;
+        }
+
+        /* --- 紧凑排版 (防止太长把播放器顶太远) --- */
+        #state_info h3 { margin: 5px 0 !important; }
+        #state_info p { margin: 4px 0 !important; }
+        #state_info ul { margin: 4px 0 !important; padding-left: 20px !important; }
+        #state_info li { margin-bottom: 2px !important; line-height: 1.25 !important; }
+    `;
+    document.head.appendChild(style);
+    console.log("✅ 视觉修复完成：背景已透明，高度锁定 340px");
+})();
+
+
