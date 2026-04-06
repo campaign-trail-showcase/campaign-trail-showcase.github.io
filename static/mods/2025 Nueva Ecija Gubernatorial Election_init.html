@@ -1,0 +1,745 @@
+RecReading = true
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 9,
+        "fields": {
+            "year": 2000,
+            "summary": "Novo Ecijanos cast their ballots to elect their provincial, congressional, and municipal officials. They expect platforms to relieve inflation, agriculture, and deliver real change. However, Nepotist politics still dominate the province which can complicate their desires. How long until the Padrino system will be truly gone? <p><font color=FF0000\\\\\\\"><b><b>Virgilio Bote</b></b></font> once again enters the race after his defeat to Governor Umali in 2019. The race might be over from the start since one family controls the governorship.<p><p><font color=\\\\\\\"><b><b>Governor Aurelio \"Oyie' Umali</b></b></font> is the incumbent Governor who continues to dominate the province. His victory is certain since a perennial candidate is challenging him.<p>",
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/2025gov.png",
+            "winning_electoral_vote_number": 0,
+            "advisor_url": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/comelec2025.png",
+            "recommended_reading": "<div style=\\\"overflow-y: scroll;height: 16em;\\\"><h4 style=\\\"\&quot;margin-top:\\\" 0.5em;\\\">More information about the 2025 Philippines Midterm Election</h4><a href=\\\"\&quot;https://en.wikipedia.org/wiki/2025_Nueva_Ecija_local_elections\&quot;\\\" target=\\\"\&quot;_blank\&quot;\\\">Wikipedia article of the election</a><br><a href=\\\"\&quot;https://halalanresults.abs-cbn.com/local/nueva-ecija\&quot;\\\" target=\\\"\&quot;_blank\&quot;\\\">Results from Nueva Ecija</a><br><a href=\\\"\&quot;https://nuevaecijatoday.blogspot.com/2009/03/umali-joson-showdown-seen-in-2010-ecija.html\\\" target=\\\"\&quot;_blank\&quot;\\\">Nueva Ecija politics news from 2008-2013</a><h4>Special Thanks to:</h4><p>StrawberryMaster's code 1 and 2 tool</p><p>ItsAstronomical's music player in DSA</p><p></p><p>1962 Sweet Home codes</p><p></p><p>2000 ROC Redux codes</p><p><br>I'm Nem06 and I proudly endorse this message<br><br>This is my small mod. Big projects such as 1986PH and BP are on the works and are coming soon!</p><style='display: flex;'=\\\"\\\"></style='display:><table style=\\\"margin:0px;padding:0px;display: flex;\\\"><tbody><tr><td style=\\\"border: none;padding: 0px;display: flow-root;\\\"><p style=\\\"margin-left: 0em;margin-right: 0em;\\\"></p></td></tr></tbody></table></div>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "2025 Nueva Ecija Gubernatorial Election"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 77,
+        "fields": {
+            "first_name": "Virgilio",
+            "last_name": "Bote",
+            "election": 9,
+            "party": "Partido Federal ng Pilipinas",
+            "state": "Municipality of General Tinio",
+            "priority": 1,
+            "description": "<p>Virgilio Bote is a familiar face in Nueva Ecija. He previously served as the Mayor of General Tinio and has been actively involved in local politics for several years. It is impossible to rematch Governor Umali as he can easily sweep him in one blow. But if he can convince disastified Novo Ecijanos that he is a good horse in this race, then he can take down Umali's reign. But that is a wishful thinking. He does have shady past and can be a lose lip during campaign.</p>",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 1,
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Bote.png",
+            "electoral_victory_message": "<p>Lmfao did you use bigshot? Ok cool here is a video for you as reward https://youtu.be/q-YyKGoBHh8?si=RexOhrRbWUHYRM2U\\n\\n\n\nalso 1986 Philippines soon.</p>",
+            "electoral_loss_message": "<p>This was expected. Novo Ecijanos rather vote for the suspended Governor than a perennial candidate. Governor Umali and his brother will be proclaimed in the Provincial Capitol as Governor and Vice Governor respectively. There is nothing you can do but wrap up your campaign materials and file your SOCE to the COMELEC. Maybe you can retake your Mayoral seat in Gen. Tinio in 2028?</p>",
+            "no_electoral_majority_message": "<p>Never go into the woods, Holly</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 78,
+        "fields": {
+            "first_name": "Gov. Aurelio \"Oyie\"",
+            "last_name": "Umali",
+            "election": 9,
+            "party": "Unang Sigaw Partido ng Pagbabago",
+            "state": "City of Santa Rosa",
+            "priority": 2,
+            "description": "<p>The incumbent Governor. He has been suspended by the Department of Local and Interior Government for issuing quarrying permits without environmental compliance certificates. He was once a candidate for change and progress that took down the violent Joson Dynasty. Now, he became the corrupt dynasty he once sworn to defeat. While the governor initiated some reforms, Nueva Ecija has not progressed since and is now left behind by Tarlac and Pampanga.</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/umali.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>Though it was perhaps expected, you could have easily faltered at a number of points. Credit to you for pulling through.</p><p>On the political front, you can continue the Clinton legacy and strengthen Social Security for generations to come. Perhaps you can succeed on health care where Clinton came up short? Or maybe you can create a future of renewable energy for America. Just be wary of a (George or Jeb?) Bush challenge in 2004.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2000 election.</h3><p>Surely the second-guessing will be intense, but if things were close you could probably run again in 2004.</p><p>It seems that with George W. Bush and a Republican majority, the United States can expect some conservative policy-making over the next four years. Hopefully Bush comes through on his promise to govern in a bipartisan, conciliatory manner. A lot should depend on the margin of his victory, and whether it was large or small.</p>",
+            "no_electoral_majority_message": "<h3>Sorry! You have lost in a squeaker.</h3><p>No candidate achieved a majority of the electoral votes, for the first time since 1824. Unfortunately for you, a majority of states have Republican controlled congressional delegations.</p><p>It seems that with George W. Bush and a Republican majority, the United States can expect some conservative policy-making over the next four years. Hopefully Bush comes through on his promise to govern in a bipartisan, conciliatory manner.</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 81,
+        "fields": {
+            "first_name": "Edward",
+            "last_name": "Joson",
+            "election": 9,
+            "party": "Partido Federal ng Pilipinas-BALANE",
+            "state": "Municipality of Quezon",
+            "priority": 5,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Joson.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>A member of the dying Joson political clan, which dominated Nueva Ecija politics before Umali dethroned them. Edward Joson will team up with you once again to reclaim his family's place in the Provincial Capitol. While he can prop up some of his political machinery, it is not enough to tip the election to your favor. Maybe that is enough for you to keep the race going.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 48,
+        "fields": {
+            "candidate": 77,
+            "running_mate": 81
+        }
+    }
+]
+
+campaignTrail_temp.credits = "Nem06"
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 13,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 9,
+        "candidates": [
+            77,
+            78
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 9,
+        "candidates": [
+            77,
+            78
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 9,
+        "year": 2000,
+        "is_premium": 0,
+        "display_year": "2025 Nueva Ecija Gubernatorial Election"
+    }
+]
+
+jet_data = {
+    "headerColor": "#0033ab",
+    "windowColor": "#08314f",
+    "containerColor": "#ffffffff",
+    "innerWindowColor": "#ffffff",
+    "bannerImageUrl": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/NE%20gov.png",
+    "backgroundImageUrl": "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/San_Leonardo%2C_Nueva_Ecija_rice_fields_-_Flickr.jpg",
+    "endingTextColor": "#000000",
+    "customQuote": "",
+    "gameTitle": "OFFICE OF THE GOVERNOR"
+}
+
+//#startcode
+
+
+corrr = '\n              <h2>OFFICE OF THE GOVERNOR</h2>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#0033ab";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#ffffffff";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#08314f";
+
+document.getElementById("header").src = "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/NE%20gov.png";
+
+document.body.background = "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/San_Leonardo%2C_Nueva_Ecija_rice_fields_-_Flickr.jpg";
+document.body.style.backgroundSize = "cover";
+document.body.style.backgroundPosition = "center center";
+document.body.style.backgroundRepeat = "no-repeat";
+document.body.style.backgroundColor = "#b3e0fe";
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#ffffff!important;}</style>";
+
+document.getElementById("inner_window_1").children[1].innerHTML = "<li>Welcome to 2025 Nueva Ecija Gubernatorial Election.</li><li>This is a CYOA international election scenario set in the Philippines</li><li>The electoral system is a simple popularity contest; Whoever gets the most votes wins</li><li>You will explore the dirty politics of Nueva Ecija and the Philippines as a whole.</li><li>Now, are you ready to play?</li>";
+
+e.HomeStateText = "Hometown:";
+
+e = campaignTrail_temp
+
+const startScreenUpdater = setInterval(function() {
+    const goBackButton = document.getElementById("candidate_id_back");
+    const candidateButton = document.getElementById("candidate_id_button");
+    const runningMateButton = document.getElementById("running_mate_id_button");
+    const finalScreenBB = document.getElementById("opponent_selection_id_back");
+    const finalScreenID = document.getElementById("opponent_selection_id_button");
+    const candidateSelect = document.getElementById("candidate_id");    
+    const gameType = document.getElementById("game_type_id");
+
+    if (gameType) {
+        const difficultySlider = document.getElementById("difficulty_level");
+        if (difficultySlider) {
+            difficultySlider.style.display = 'none';
+        }
+        multiplier = 1;
+    }
+
+    if (candidateSelect && !runningMateButton) { 
+        const c = candidateSelect.value;
+
+        if (c == 77 && !candidateButton) {
+            if (goBackButton) goBackButton.click();
+            const initContinue = document.getElementById("election_id_button");
+            if (initContinue) initContinue.click();
+        }
+        else if (c == 78 || c == 78) {
+            if (candidateButton) {
+                candidateButton.remove();
+            }
+        }
+    }
+
+}, 100);
+
+// Music Player
+
+  // Select the node that will be observed for mutations
+  const windowsAdvisorTargetNode = document.getElementById("game_window");
+  
+  // Options for the observer (which mutations to observe)
+  const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
+  
+  // Callback function to execute when mutations are observed
+  const callback = (mutationList, observer) => {
+      visitWindow = document.getElementsByClassName("overlay_window")[0];
+  
+      if(visitWindow == null || visitWindow.classList.contains("done")) {
+          return;
+      }
+      visitWindow.classList.add("done");
+      visitWindow.classList.add("window");
+      let titleBar = visitWindow.querySelector("h3");
+      titleBar.classList.add("title-bar");
+      titleBar.classList.add("title-bar-text")
+      titleBar.style.paddingLeft = "3px";
+  };
+  
+  class Song {
+    constructor(title, artist, coverLink, audioLink) {
+      this.title = title;
+      this.artist = artist;
+      this.coverLink = coverLink;
+      this.audioLink = audioLink;
+    }
+    getTitle() {
+      return this.title;
+    }
+  
+    getArtist() {
+      return this.artist;
+    }
+  
+    getCoverLink() {
+      return this.coverLink;
+    }
+  
+    getAudioLink() {
+      return this.audioLink;
+    }
+  }
+  
+  class Playlist {
+    constructor() {
+      this.songs = [];
+      this.currentSongIndex = 0;
+    }
+  
+    addSong(song) {
+      this.songs.push(song);
+    }
+  
+    getCurrentSong() {
+      return this.songs[this.currentSongIndex];
+    }
+  
+    playNext() {
+      this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+    }
+  
+    playPrevious() {
+      this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+    }
+  }
+  window.Playlist=Playlist
+  window.Song=Song
+  
+  function changePlaylist(newPlaylist) {
+    playlist = newPlaylist;
+    playlist.currentSongIndex = 0;
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+  }
+  window.changePlaylist=changePlaylist
+  
+  function updateUI(playlist) {
+      const currentSong = playlist.getCurrentSong();
+      var player = document.getElementById("player");
+      player.querySelector("#cover").src = currentSong.getCoverLink();
+      player.querySelector("#title").textContent = currentSong.getTitle();
+      player.querySelector("#artist").textContent = currentSong.getArtist();
+  }
+  
+  window.updateUI=updateUI
+  
+  
+  function setupMusicPlayer() {
+    playlist = new Playlist();
+  
+  
+    const song1 = new Song(
+      "Pepe Pacheco Jingle",
+      "Apet Cruz",
+      "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Music/liked-songs-300.jpg",
+      "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Music/PEPE%20PACHECO%202023%20JINGLE%20-%20LYRICS%20VIDEO.mp3"
+    );
+    
+    const song2 = new Song(
+      "Umali Pa Tayo",
+      "Apet Cruz",
+      "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Music/liked-songs-300.jpg",
+      "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Music/UMALI%20PA%20TAYO%20CAMPAIGN%20JINGLE%20SAMPLE%20GOVERNOR%20CHERRY%20AND%20ATTY%20%20OYIE%20UMALI%202019.mp3"
+    );
+  
+    const song3 = new Song(
+      "Mukha Ng Pera",
+      "The Youth",
+      "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Music/7988628287d3458498f53d3bb413e989%20(1).png",      
+      "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Music/The%20Youth%20-%20Mukha%20Ng%20Pera.mp3"
+    );
+  
+    const song4 = new Song(
+      "Magnanakaw",
+      "Asin",
+      "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Music/81CwTZweoeL.jpg",
+      "https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/Music/Magnanakaw.mp3"
+    );
+  
+    playlist.addSong(song1);
+    playlist.addSong(song2);
+    playlist.addSong(song3);
+    playlist.addSong(song4);
+  
+    const playerContainer = document.createElement("div");
+    playerContainer.id = "player";
+  
+   const displayBox = document.createElement("div");
+  displayBox.id = "display-box";
+  
+  const coverElement = document.createElement("img");
+  coverElement.id = "cover";
+  displayBox.appendChild(coverElement);
+  
+  const infoContainer = document.createElement("div");
+  infoContainer.id = "info-container";
+  infoContainer.style.backgroundImage = "url('https://itsastronomical.com/assets/music/buttons.png')";
+  infoContainer.style.backgroundSize = "cover"; // Optional: adjust based on your needs
+  infoContainer.style.color = "white"; // Set text color to white
+  
+  const songInfo = document.createElement("div");
+  songInfo.id = "song-info";
+  
+  const titleElement = document.createElement("h3");
+  titleElement.id = "title";
+  titleElement.style.fontWeight = 'large'; // Make it normal as per previous request
+  songInfo.appendChild(titleElement);
+  
+  const artistElement = document.createElement("p");
+  artistElement.id = "artist";
+  songInfo.appendChild(artistElement);
+  
+  infoContainer.appendChild(songInfo);
+  displayBox.appendChild(infoContainer);
+  
+  playerContainer.appendChild(displayBox);
+  
+  const controlsContainer = document.createElement("div");
+  controlsContainer.id = "controls-container";
+  
+  const controls = document.createElement("div");
+  controls.id = "controls";
+  
+  const prevButton = document.createElement("img");
+  prevButton.id = "prevButton";
+  prevButton.src = "https://i.imgur.com/imIqTEA.png";
+  prevButton.alt = "Previous";
+  controls.appendChild(prevButton);
+  
+  const playPauseButton = document.createElement("img");
+  playPauseButton.id = "playPauseButton";
+  playPauseButton.src = "https://i.imgur.com/oQbfTxw.png"; // Set the default play image
+  playPauseButton.alt = "Play/Pause";
+  controls.appendChild(playPauseButton);
+  
+  const nextButton = document.createElement("img");
+  nextButton.id = "nextButton";
+  nextButton.src = "https://i.imgur.com/7TtaN04.png";
+  nextButton.alt = "Next";
+  controls.appendChild(nextButton);
+  
+  controlsContainer.appendChild(controls);
+  
+  playPauseButton.addEventListener("click", function () {
+    const audio = document.getElementById("audio");
+    if (audio.paused) {
+      audio.play();
+      playPauseButton.src = "https://i.imgur.com/oQbfTxw.png"; // Set the pause image
+    } else {
+      audio.pause();
+      playPauseButton.src = "https://i.imgur.com/ttdoyfG.png"; // Set the play image
+    }
+  });
+  
+  nextButton.addEventListener("click", function () {
+    playlist.playNext();
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+  });
+  
+  prevButton.addEventListener("click", function () {
+    playlist.playPrevious();
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+  });
+  
+    const progressBarContainer = document.createElement("div");
+    progressBarContainer.id = "progress-bar-container";
+  
+    const progressBar = document.createElement("progress");
+    progressBar.type = "range";
+    progressBar.id = "progress-bar";
+    progressBar.value = "0";
+    progressBar.max = "100";
+  
+  
+    progressBarContainer.appendChild(progressBar);
+    controlsContainer.appendChild(progressBarContainer);
+    playerContainer.appendChild(controlsContainer);
+  
+   const volumeContainer = document.createElement("div");
+    volumeContainer.id = "volume-container";
+  
+  const volumeLabel = document.createElement("img");
+  volumeLabel.src = "https://i.imgur.com/0BJYsXt.png";
+  volumeLabel.alt = "Volume";
+  volumeContainer.appendChild(volumeLabel);
+  
+    const volumeSliderContainer = document.createElement("div");
+    volumeSliderContainer.classList.add("is-vertical");
+    volumeSliderContainer.style.marginLeft = "23%";
+    volumeSliderContainer.style.height = "126px";
+  
+    const volumeSlider = document.createElement("input");
+    volumeSlider.type = "range";
+    volumeSlider.id = "volumeSlider";
+    volumeSlider.min = 0;
+    volumeSlider.max = 9;
+    volumeSlider.step = 1;
+    volumeSlider.value = 1; // Initial volume
+  
+    volumeSliderContainer.appendChild(volumeSlider);
+  
+    const volumeDisplay = document.createElement("span");
+    volumeDisplay.id = "volume-display";
+    volumeDisplay.style.fontWeight = 'bold'; 
+    volumeDisplay.style.display = 'none';
+    volumeDisplay.textContent = "1";
+  
+    volumeContainer.appendChild(volumeSliderContainer);
+    volumeContainer.appendChild(volumeDisplay);
+  
+    playerContainer.appendChild(volumeContainer);
+  
+    gameWindow_player.insertAdjacentElement("afterend", playerContainer);
+  
+  
+    function updateProgressBar() {
+      const audio = document.getElementById("audio");
+      const progress = (audio.currentTime / audio.duration) * 100;
+      try{progressBar.value = progress}
+    catch{}
+    }
+  
+   
+    progressBar.addEventListener("input", function () {
+      const audio = document.getElementById("audio");
+      const seekTime = (progressBar.value / 100) * audio.duration;
+      audio.currentTime = seekTime;
+    });
+  
+    const audio = document.createElement("audio");
+    audio.id = "audio";
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.volume = 1/9;
+  
+    audio.addEventListener("timeupdate", updateProgressBar);
+    audio.addEventListener("ended", function () {
+      // Play the next song when the current song ends
+      playlist.playNext();
+      updateUI(playlist);
+      audio.src = playlist.getCurrentSong().audioLink;
+      audio.play();
+    });
+  
+      let currentVolume = 1; // Initial volume
+  
+    volumeSlider.addEventListener("input", function () {
+      currentVolume = parseInt(volumeSlider.value, 10);
+      updateVolumeDisplay();
+      updateAudioVolume();
+    });
+  
+    function updateVolumeDisplay() {
+      volumeDisplay.textContent = currentVolume;
+    }
+  
+     function updateAudioVolume() {
+      const audio = document.getElementById("audio");
+      audio.volume = currentVolume / 9; // Set volume between 0 and 1
+    }
+  
+    document.body.appendChild(audio);
+    audio.play();
+  
+    // Update the UI when the page loads
+    updateUI(playlist);
+  }
+  
+const style = document.createElement("style");
+  style.textContent = `
+  #player {
+      border: 3px solid #C9C9C9; /* Add your desired border style */
+      display: flex;
+      flex-direction: row;
+    height:191px;
+      background-Image: url("https://itsastronomical.com/assets/music/blackbar.png");
+    }
+  
+    #display-box {
+      display: flex;
+      align-items: center;
+      width: 50%;
+    }
+  
+    #cover {
+      width: 176px;
+    height:176px;
+    }
+  
+    #info-container {
+      display: flex;
+      flex-direction: row;
+      height:178px;
+    width:127px;
+    margin-top: 3px;
+    }
+  
+    #song-info {
+      width: 100%;
+    padding:5px;
+    }
+  
+    #controls-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+      width:100%;
+    padding-top:15px;
+  
+    }
+.is-vertical #volumeSlider {
+  width: 16px;
+  height: 100%;
+  writing-mode: vertical-rl;
+  direction: rtl;
+}
+    #controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 80%;
+    }
+  
+    #progress-bar-container {
+      width: 100%;
+    }
+  
+    #progress-bar {
+      width: 80%;
+      margin: auto;
+      display: flex;
+      margin-Top: 20px;
+    }
+	#results_container, #overall_details_container {
+  height: 100%;
+  overflow-y: auto;
+}
+    
+  `;
+  
+document.head.appendChild(style);
+
+const gameWindow_player = document.getElementById("game_window");
+//use this function directly or put it in an event listener to start the music on the press of a certain button
+setupMusicPlayer();
+
+function addDynamicCSS() {
+    var css = `
+        .inner_window_question h3 .mytooltip{
+            background-color: lightskyblue;
+        }
+
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background-color: lightblue;
+        }
+
+        .mytooltip .mytooltiptext {
+            width: 240px;
+            background-color: lightblue;
+            color: black;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 20%;
+            left: 20%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid black;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+
+        .mytooltip .mytooltiptext img {
+            max-width: 240px;
+            height: auto;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+    
+    styleElem.appendChild(document.createTextNode(css));
+    
+    document.head.appendChild(styleElem);
+}
+
+
+addDynamicCSS();
+
+tooltipList = [
+    {searchString: "Governor Umali", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/a/ac/Nueva_Ecija_Governor_Aurelio_Umali_%28cropped%29.jpg>The Governor. The big man in charge"},
+    {searchString: "Cherry", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/a/a3/Nueva_Ecija_Governor_Czarina_Umali_2018.jpg>The Governor's wife."},
+    {searchString: "Doc Anthony", explanationText: "<img src=https://www.nuevaecija.ph/wp-content/uploads/2021/10/IMG-4715-1.jpg>Loser"},
+    {searchString: "HUC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/f/fc/Cabanatuan_in_Nueva_Ecija.svg>A plebescite that was suppose to happen to make Cabanatuan an independent city, free from the Umalis."},
+    {searchString: "BALANE", explanationText: "Once a dominant local political party in Nueva Ecija. Today, it's a relic from the past"},
+    {searchString: "Samuel Martires", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/a/a8/Samuel_Martires.jpg>Where are your principles?"},
+    {searchString: "COMELEC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/7/73/Commission_on_Elections_%28COMELEC%29.svg>Very useful"},
+    {searchString: "Food Council", explanationText: "<img src=https://www.nuevaecija.ph/wp-content/uploads/2022/03/PFC-logo.png>Provincial Government program created to sustain food supply and help farmers of Nueva Ecija"},
+    {searchString: "Tatang.", explanationText: "<img src=https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/tooltip/56622535_2017665398541709_451066141259857920_n.jpg>"},
+    {searchString: "TV48", explanationText: "<img src=https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/tooltip/c8e394_8c5c897adeb5739de1361774ba3dc29f.jpg>Propaganda machine of the Umalis"},
+    {searchString: "3Gs'", explanationText: "<img src=https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/tooltip/startoon021219_2019-02-11_21-13-50.jpg>Guns, Goons, and Gold. You can't win an election in the Philippines without it"},
+    {searchString: "Sandiganbayan", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/9/90/Sandiganbayan_-_Anti-Graft_Court_of_the_Philippines.svg>Anti-graft and corruption court"},
+    {searchString: "land grabbing", explanationText: "You and your goons went to the disputed property and break in. While breaking in, your men tore down the gates and clashed with the security. The guards filed criminal charges for attempted murder against you. But later, your charges were dismissed thanks to the weak Philippine Justice system."},
+    {searchString: "Capitol", explanationText: "<img src=https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/tooltip/ytfyttdgf.jpg>"},
+    {searchString: "Emeng Pascual", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/c/c1/Rep._Emerson_Pascual_%2820th_Congress%29.jpg>Representative of the 4th District of Nueva Ecija"},
+    {searchString: "Suansing", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/a/a9/Rep._Mikaela_Angela_Suansing_%2820th_Congress%29.jpg>Representative of the 2nd District of Nueva Ecija"},
+    {searchString: "Kokoy Salvador", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/5/5e/Rep._Mario_Salvador_%2820th_Congress%29.jpg>Seeking to unseat the Umali aligned Congressman"},
+    {searchString: "President Bongbong Marcos Jr.", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/c/c5/Bongbong_Marcos_20240730_crop.jpg>PBBM."},
+    {searchString: "Rodrigo Duterte", explanationText: "<img src=https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/tooltip/fprrd-icc-hearing-629x420.jpg>Currently detained in ICC. How the tables have turned"},
+    {searchString: "CabTV", explanationText: "<img src=https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/tooltip/352564215_775868530877016_1323518814279595989_n.png>Propaganda machine of the Vergaras"},
+    {searchString: "DWJJ", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/en/1/17/DWJJ_684.png>Propaganda machine of the Vergaras"},
+    {searchString: "DWNE", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/en/7/73/DWNE.jpeg>Propaganda machine of the Umalis"},
+    {searchString: "An order", explanationText: "Directing Governor Umali to be suspended from his duties"},
+    {searchString: "last name", explanationText: "Joson. For 50 years, your family held Nueva Ecija"},
+    {searchString: "Mayor Jay Vergara", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/6/6e/Rep._Julius_Cesar_Vergara_%2820th_Congress%29.jpg>Ama ng Pagbabago, Progreso"},
+    {searchString: "Vergaras", explanationText: "<img src=https://centralluzon.politiko.com.ph/wp-content/uploads/2022/05/vergs.jpg>Mortal enemies of the Umalis. They were allies until they fought against each other on the HUC issue"},
+    {searchString: "bring my family", explanationText: "<img src=https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/tooltip/avzcxwta.jpg>The killing of your brother, former Gen. Tinio Mayor Ferdinand Bote"},
+    {searchString: "DDS", explanationText: "<img src=https://legacy.senate.gov.ph/photo_release/2025/0929_09.jpg>Spineless synchopaths"},
+    {searchString: "DILG", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/c/c9/Department_of_the_Interior_and_Local_Government_%28DILG%29_Seal_-_Logo.svg>Local government body of the Philippines"},
+    {searchString: "WW2", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/e/e1/POWs_celebrate.jpg>The Great Raid"},
+    {searchString: "my father", explanationText: "<img src=https://file.garden/aLuYv5ccRlOWOior/NE%20Gub/tooltip/522618384_122176785092451735_275431417213738592_n.jpg>"},     
+];
+
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color" : "#FFFFFF",
+    "header_text_color" : "#000000",
+    "description_text_color" : "#FFFFFF",
+    "description_background_color" : "#0000ff",
+    "main_color" : "#0000FF",
+    "secondary_color" : "#f2ff00ff",
+    "ui_text_color": "#000000"
+}
+
+
+HistHexcolour = ["#000084", "#0f22bd", "#000084", "#0f22bd"];
+HistName = ["Aurelio \"Oyie\" Umali", "Virgilio \"Ginto\" Bote", "Lemon Umali", "Edward Thomas Joson"];
+HistEV = [0, 0, 0, 0];
+HistPV = ["977,349", "227,415", "806,939", "329,106"];
+HistPVP = ["81.12%", "18.88%", "71.03%", "28.97%"];
+
+//#endcode

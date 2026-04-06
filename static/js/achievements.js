@@ -90,7 +90,15 @@ function buildAchievementsCache() {
 }
 
 function findAchievementByName(name) {
-  const cache = buildAchievementsCache();
+  let cache = buildAchievementsCache();
+
+  // if the achievement isn't found, the cache might be stale
+  // so we invalidate it and rebuild it from current allAch
+  if (!cache.has(name)) {
+    achievementsCache = null;
+    cache = buildAchievementsCache();
+  }
+
   return cache.get(name) || null;
 }
 
@@ -142,22 +150,21 @@ function openAchievements() {
   centerAchievementsWindow();
 }
 
-// --- NEW: One-time UI setup function ---
 function setupAchievementUI() {
-  // Clear the main content area ONCE.
+  // clear the main content area ONCE
   achContent.innerHTML = "";
 
-  // Create and cache the static control elements
+  // create and cache the static control elements
   searchBarElement = addSearchBar();
   sortingControlsElement = addSortingControls();
   legacyViewControlsElement = addLegacyViewControls();
 
-  // Create and cache the container for the dynamic list of mods and pagination
+  // create and cache the container for the dynamic list of mods and pagination
   contentContainerElement = document.createElement("div");
   contentContainerElement.id = "ach-content-container";
-  contentContainerElement.style.width = "100%"; // Ensure it takes full width in the flex layout
+  contentContainerElement.style.width = "100%"; // ensure it takes full width in the flex layout
 
-  // Append all the static pieces to the DOM in the correct order.
+  // append all the static pieces to the DOM in the correct order
   achContent.appendChild(searchBarElement);
   achContent.appendChild(sortingControlsElement);
   achContent.appendChild(legacyViewControlsElement);
@@ -167,7 +174,6 @@ function setupAchievementUI() {
 }
 
 function centerAchievementsWindow() {
-  // Skip centering on mobile - use CSS positioning instead
   if (window.innerWidth <= 768) {
     return;
   }
@@ -210,7 +216,7 @@ function getContrastingTextColor(bgColor) {
   // YIQ formula to determine brightness
   const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
   const result = (yiq >= 128) ? '#000000' : '#FFFFFF';
-  
+
   colorContrastCache.set(bgColor, result);
   return result;
 }
@@ -223,7 +229,13 @@ function addAchivement(achName, achData, parent, theme, lazyLoad = false) {
   ach.classList.add("achBox");
   ach.classList.toggle("locked", locked);
 
-  let themeStyles = { titleColor: "", textBg: "", textColor: "", mainBg: "" };
+  let themeStyles = {
+    titleColor: "",
+    textBg: "",
+    textColor: "",
+    mainBg: "",
+    borderColor: "",
+  };
   if (theme) {
     if (theme.main_color) {
       const idealTextColor = getContrastingTextColor(theme.main_color);
@@ -241,6 +253,7 @@ function addAchivement(achName, achData, parent, theme, lazyLoad = false) {
       ? `color:${theme.description_text_color}`
       : "";
     themeStyles.mainBg = theme.main_color ? theme.main_color : "";
+    themeStyles.borderColor = theme.secondary_color ? theme.secondary_color : "";
   }
 
   const imgSrc = lazyLoad
@@ -262,6 +275,10 @@ function addAchivement(achName, achData, parent, theme, lazyLoad = false) {
 
   if (themeStyles.mainBg) {
     ach.style.backgroundColor = themeStyles.mainBg;
+  }
+
+  if (themeStyles.borderColor) {
+    ach.style.outlineColor = themeStyles.borderColor;
   }
 
   parent.appendChild(ach);
@@ -651,10 +668,7 @@ function performRender() {
   const currentMod = getCurrentModName();
 
   if (!showAllModsLegacyAch && currentMod) {
-    const linkedMods =
-      currentMod === "2024" || currentMod === "2024 Divided States"
-        ? ["2024", "2024 Divided States"]
-        : [currentMod];
+    const linkedMods = Array.from(expandFavoriteSet(new Set([currentMod])));
     processedData = processedData.filter((mod) =>
       linkedMods.includes(mod.modName),
     );

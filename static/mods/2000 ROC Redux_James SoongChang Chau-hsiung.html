@@ -6873,8 +6873,8 @@ if (e.player_answers.includes(19991064) && kmt_confidence && lien_pvp < soong_pv
 }
 
 // --- 新增情景 7: 連戰崩盤，選票流向陳水扁 (宋楚瑜視角的噩夢：棄連保扁) ---
-// 條件：連戰支持率極低（< 20%），且陳水扁支持率高（> 35%），證明連戰的票正流向陳。
-else if (e.player_answers.includes(19991064) && lien_pvp < 0.20 && chen_pvp > 0.35) { 
+// 條件：連戰支持率極低（< 22%），且陳水扁支持率高（> 35%），證明連戰的票正流向陳。
+else if (e.player_answers.includes(19991064) && lien_pvp < 0.22 && chen_pvp > 0.35) { 
     campaignTrail_temp.questions_json[24] =     {
         "model": "campaign_trail.question",
         "pk": 19991640,
@@ -10875,9 +10875,9 @@ if(!exclusive_action_executed &&  aa[0].candidate === 69 && quickstats[1] >= 35 
         changePlaylist(lienWin);
     }    
 }
-if (!exclusive_action_executed &&  aa[0].candidate === 69 && quickstats[1] >= 35 && quickstats[1] <= 40 && e.PoliticalReformPromise === -3) {
+if (!exclusive_action_executed && aa[0].candidate === 69 && quickstats[1] >= 35 && quickstats[1] <= 40 && e.PoliticalReformPromise === -3) {
     
-    // HTML Content: Historical table based on the new timeline (Scenario 21 - PFP start, KMT/DPP later). All strings embedded directly.
+    // HTML Content: Historical table with Frank Hsieh inserted (Scenario 21)
     e.pages.push(`<div class="tv-fade css-id" style='overflow-y:auto; max-height: 40em; padding: 25px; background-color: #F8F8F8; color: #111;'>
 <style>
     /* 限定樣式範圍，防止污染外部環境 */
@@ -10972,6 +10972,7 @@ if (!exclusive_action_executed &&  aa[0].candidate === 69 && quickstats[1] >= 35
             </tr>
         </thead>
         <tbody>
+            <!-- 蔣經國 -->
             <tr>
                 <th rowspan="2" class="term-number term-kmt">3</th>
                 <td rowspan="2" class="portrait party-bar-kmt">
@@ -10989,10 +10990,11 @@ if (!exclusive_action_executed &&  aa[0].candidate === 69 && quickstats[1] >= 35
                 <td>6 (1978)</td>
             </tr>
             <tr>
-                <td>Lee Teng-hui<br><span class class="party-kmt-text">(Kuomintang)</span></td>
+                <td>Lee Teng-hui<br><span class="party-kmt-text">(Kuomintang)</span></td>
                 <td>7 (1984)</td>
             </tr>
 
+            <!-- 李登輝 -->
             <tr>
                 <th rowspan="3" class="term-number term-kmt">4</th>
                 <td rowspan="3" class="portrait party-bar-kmt">
@@ -11017,7 +11019,7 @@ if (!exclusive_action_executed &&  aa[0].candidate === 69 && quickstats[1] >= 35
                 <td>9 (1996)</td>
             </tr>
 
-
+            <!-- 宋楚瑜 (2000-2008) -->
             <tr>
                 <th rowspan="2" class="term-number term-pfp">5/6</th>
                 <td rowspan="2" class="portrait party-bar-pfp">
@@ -11040,8 +11042,27 @@ if (!exclusive_action_executed &&  aa[0].candidate === 69 && quickstats[1] >= 35
                 <td>11 (2004)</td>
             </tr>
 
+            <!-- ✅ 新增：謝長廷 (2008-2012) -->
             <tr>
-                <th rowspan="2" class="term-number term-kmt">7/8</th>
+                <th class="term-number term-dpp">7</th>
+                <td class="portrait party-bar-dpp">
+                    <img src="https://file.garden/Z9XHdyLGHwUEZPS4/xie.jpg?v=1767699621846" alt="Frank Hsieh">
+                </td>
+                <td>
+                    <span class="name-en">Frank Hsieh</span>
+                    <span class="name-ch">謝長廷</span>
+                    <span class="lifespan">(Born 1946)</span>
+                </td>
+                <td>20 May 2008</td>
+                <td>20 May 2012</td>
+                <td>Democratic Progressive Party</td>
+                <td>Su Tseng-chang<br><span class="party-dpp-text">(Democratic Progressive Party)</span></td>
+                <td>12 (2008)</td>
+            </tr>
+
+            <!-- 馬英九 (2012-2020) [屆次順延] -->
+            <tr>
+                <th rowspan="2" class="term-number term-kmt">8/9</th>
                 <td rowspan="2" class="portrait party-bar-kmt">
                     <img src="https://file.garden/Z9XHdyLGHwUEZPS4/ma.jpg?v=1764178519247" alt="Ma Ying-jeou">
                 </td>
@@ -11050,21 +11071,22 @@ if (!exclusive_action_executed &&  aa[0].candidate === 69 && quickstats[1] >= 35
                     <span class="name-ch">馬英九</span>
                     <span class="lifespan">(Born 1950)</span>
                 </td>
-                <td>20 May 2008</td>
-                <td>20 May 2012</td>
-                <td rowspan="2">Kuomintang</td>
-                <td>Vincent Siew<br><span class="party-kmt-text">(Kuomintang)</span></td>
-                <td>12 (2008)</td>
-            </tr>
-            <tr>
                 <td>20 May 2012</td>
                 <td>20 May 2016</td>
-                <td>Wu Den-yih<br><span class="party-kmt-text">(Kuomintang)</span></td>
+                <td rowspan="2">Kuomintang</td>
+                <td>Vincent Siew<br><span class="party-kmt-text">(Kuomintang)</span></td>
                 <td>13 (2012)</td>
             </tr>
-
             <tr>
-                <th class="term-number term-kmt">9</th>
+                <td>20 May 2016</td>
+                <td>20 May 2020</td>
+                <td>Wu Den-yih<br><span class="party-kmt-text">(Kuomintang)</span></td>
+                <td>14 (2016)</td>
+            </tr>
+
+            <!-- 朱立倫 (2020-2024) [屆次順延] -->
+            <tr>
+                <th class="term-number term-kmt">10</th>
                 <td class="portrait party-bar-kmt">
                     <img src="https://file.garden/Z9XHdyLGHwUEZPS4/zhu.jpg?v=1764181228605" alt="Eric Chu">
                 </td>
@@ -11073,15 +11095,16 @@ if (!exclusive_action_executed &&  aa[0].candidate === 69 && quickstats[1] >= 35
                     <span class="name-ch">朱立倫</span>
                     <span class="lifespan">(Born 1961)</span>
                 </td>
-                <td>20 May 2016</td>
                 <td>20 May 2020</td>
+                <td>20 May 2024</td>
                 <td>Kuomintang</td>
                 <td>Jennifer Wang<br><span class="party-kmt-text">(Kuomintang)</span></td>
-                <td>14 (2016)</td>
+                <td>15 (2020)</td>
             </tr>
 
+            <!-- 賴清德 (2024-) [屆次順延] -->
             <tr>
-                <th class="term-number term-dpp">10</th>
+                <th class="term-number term-dpp">11</th>
                 <td class="portrait party-bar-dpp">
                     <img src="https://file.garden/Z9XHdyLGHwUEZPS4/Lie.jpg?v=1764178850816" alt="Lai Ching-te">
                 </td>
@@ -11090,33 +11113,11 @@ if (!exclusive_action_executed &&  aa[0].candidate === 69 && quickstats[1] >= 35
                     <span class="name-ch">賴清德</span>
                     <span class="lifespan">(Born 1959)</span>
                 </td>
-                <td>20 May 2020</td>
                 <td>20 May 2024</td>
+                <td>Incumbent</td>
                 <td>Democratic Progressive Party</td>
                 <td>Hsiao Bi-khim<br><span class="party-dpp-text">(Democratic Progressive Party)</span></td>
-                <td>15 (2020)</td>
-            </tr>
-            
-            <tr>
-                <th rowspan="2" class="term-number term-ind">11/12</th>
-                <td rowspan="2" class="portrait party-bar-ind">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Terry_Gou_in_Japan_20170425.jpg" style="visibility:hidden; border:none;" alt="Placeholder">
-                </td>
-                <td rowspan="2">
-                    <span class="name-en">TBD</span>
-                    <span class="name-ch">待定</span>
-                    <span class="lifespan"></span>
-                </td>
-                <td>20 May 2024</td>
-                <td>20 May 2028</td>
-                <td rowspan="2">TBD</td>
-                <td rowspan="2">TBD</td>
                 <td>16 (2024)</td>
-            </tr>
-            <tr>
-                <td>20 May 2028</td>
-                <td>Incumbent</td>
-                <td>17 (2028)</td>
             </tr>
 
         </tbody>

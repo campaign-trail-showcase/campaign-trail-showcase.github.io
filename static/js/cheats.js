@@ -96,7 +96,7 @@ function activateBenefitCheck() {
     showBenefitChecker();
     startBenefitObserver();
     // render once immediately in case the DOM is already ready
-    try { benefitChecker(); } catch (_) {}
+    try { benefitChecker(); } catch (_) { }
     return;
   }
   benefitCheckAlreadyActivated = true;
@@ -108,7 +108,7 @@ function activateBenefitCheck() {
   benefitCheckerEnabled = true;
   startBenefitObserver();
   // render once immediately to populate the window
-  try { benefitChecker(); } catch (_) {}
+  try { benefitChecker(); } catch (_) { }
 }
 
 let cheatMenuAlreadyActivated = false;
@@ -157,7 +157,7 @@ async function benefitChecker() {
 
     const benefitContent = document.getElementById("benefitcontent");
     if (benefitContent) benefitContent.innerHTML = content;
-  } catch {}
+  } catch { }
 }
 
 function hideBenefitChecker() {
@@ -170,7 +170,7 @@ function showBenefitChecker() {
   const benefitWindow = document.getElementById("benefitwindow");
   benefitWindow.style.display = "block";
   if (benefitCheckerEnabled) startBenefitObserver();
-  try { benefitChecker(); } catch (_) {}
+  try { benefitChecker(); } catch (_) { }
 }
 
 const targetNode = document.getElementById("game_window");
@@ -271,8 +271,8 @@ let noAnswerSet = new Set();
 
 function setupAutoplayInput(elementId, targetSet) {
   document.getElementById(elementId).addEventListener("input", function (e) {
-    targetSet.clear();
-    const pks = e.target.value.split(" ").filter(Boolean);
+    targetSet.clear
+    const pks = e.target.value.split(/[\s,]+/).filter(Boolean);
     for (const pk of pks) {
       targetSet.add(Number(pk));
     }
@@ -314,7 +314,7 @@ function autoplay() {
     }
 
     campaignTrail_temp.election_json[0].fields.has_visits = false;
-  } catch {}
+  } catch { }
 }
 
 let answersPickedAutoplay = new Set();
@@ -392,7 +392,7 @@ function isQuestionSetReady() {
     if (document.querySelectorAll("input.game_answers").length > 0) return true;
     const qf = document.querySelector("#question_form > form");
     if (qf && qf.children && qf.children.length > 0) return true;
-  } catch (_) {}
+  } catch (_) { }
   return false;
 }
 
@@ -413,7 +413,7 @@ function enableAutoplayUI(active = false) {
       }
     }
     if (menu) menu.style.display = "inline-block";
-  } catch (_) {}
+  } catch (_) { }
 }
 
 function disableAutoplayUI() {
@@ -428,29 +428,29 @@ function disableAutoplayUI() {
       delete indicator.dataset.autoplayActive;
     }
     if (menu) menu.style.display = "none";
-  } catch (_) {}
+  } catch (_) { }
 }
 
 function stopAutoplay() {
   autoplayRequested = false;
-  
+
   if (autoplayWaitHandle != null) {
     clearInterval(autoplayWaitHandle);
     autoplayWaitHandle = null;
   }
-  
+
   if (autoplayHandle != null) {
     clearInterval(autoplayHandle);
     autoplayHandle = null;
   }
-  
+
   autoplayPending = false;
   disableAutoplayUI();
 }
 
 function startAutoplayWhenReady() {
   if (autoplayRequested || autoplayPending || autoplayHandle != null) return;
-  
+
   autoplayPending = true;
   autoplayRequested = true;
   enableAutoplayUI(false);
@@ -468,7 +468,7 @@ function startAutoplayWhenReady() {
     if (isQuestionSetReady()) {
       clearInterval(autoplayWaitHandle);
       autoplayWaitHandle = null;
-      
+
       setTimeout(() => {
         autoplayHandle = setInterval(autoplay, 10);
         autoplayPending = false;

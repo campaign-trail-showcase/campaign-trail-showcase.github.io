@@ -51,10 +51,10 @@ campaignTrail_temp.candidate_json = [
             "party": "Nixon Campaign",
             "state": "Oakland, California",
             "priority": 2,
-            "description": "<p>The name Richard Nixon is one that inspires strong emotions.</p>On paper, it should be one of that inspires affection and awe. Nixon has only known roaring success in his political career, unseating an entrenched incumbent to enter the House, using his investigations into the spy Alger Hiss to get into the Senate in a landslide, and leapfrogging from there to become Dwight Eisenhower's vice-president.</p>What a mere recap of his career won't tell you is how he made all these grand accomplishments. Late night calls telling them their congressman is a socialist, calling another congressman ''pink, down to her underwear!'' - and critically, not ever proving Hiss was a spy. Deep in Nixon's soul is a lust for power that knows no limitations. There is no belief, no ideology, only a drive for victory. A drive unfortunately hampered by a deep personal awkardness that leaves him unwilling to have any difficult talk with his staff...",
+            "description": "<div style='overflow-y:scroll;height:200px;'><p>The Vice-President of the United States will win the 1960 election and succeed President Eisenhower. Why? Three simple reasons.</p>Firstly, he is a master of party politics. He has had precious little else to do as Vice-President but win the support of the Grand Old Party. What few voices of dissent exist are marginal egoists. Secondly, he is a man of prudence. The country is 60% registered Democrats; where he was once a hyperpartisan hitman, he has managed to surpass the repuatation and intends to run a bipartisan campaign.</p>Which comes to the third reason; his team. He has assembled a team of political experts to help him win over as many Americans as possible. He has made none of them campaign manager, to ensure he keeps his newly found bipartisan sheen, but all serve vital roles. Bob Finch, an old friend from California, serves as Nixon's primary liason and right hand operative. Second, Thurston Morton, the Kentucky Senator. A fellow modern Republican, he leads the campaigns efforts to break through the South once and for all without losing the North. And of course, there's Len W. Hall...",
             "color_hex": "#bb0707",
             "secondary_color_hex": "#FFA0A0",
-            "is_active": 0,
+            "is_active": 1,
             "image_url": "https://cdn.imgchest.com/files/8f55112e3933.png",
             "electoral_victory_message": "<h3>Congratulations! You have won the 1960 Presidential Election.</h3><p>With luck, you will be able to duplicate the eight years of peace and prosperity under Eisenhower. Unfortunately, the Democrats maintain their majority in both houses of Congress. With luck, they will be good partners in a bipartisan governing coalition. Your first order of business is to mend fences with Lyndon Johnson, who is returning to his role as Senate Majority Leader.</p>",
             "electoral_loss_message": "<h3>Sorry, you have lost the 1960 Presidential Election.</h3><p>A lot of people think this election was yours to lose, and party operatives are already whispering that Nelson Rockefeller will be the frontrunner in 1964. As such, it appears that your chances of becoming President are over. Perhaps you can return to California and run for Governor, or for the Senate again.</p>",
@@ -316,7 +316,7 @@ campaignTrail_temp.credits =  "<button onclick='credits()'>The Brave Mujahadeen 
   
 credits = function() {
   credits = [""]
-text = "Primary Coder:\nOnkel Danny\n\nPrimary Writer:\nHalligan Elysium\n\nCode:\n1972d \n W. \n1996Powell, \nNina, \nMassachussetts 4 Stockdale, \nCatbox, \nMax \nThe girl reading this!  \n\nPlaytesters:\nMax(again!)\nMassachussetts 4 Stockdale (again!)\nCatbox (again!)\nJFNixon\nNeo"
+text = "Primary Coder:\nOnkel Danny\n\nPrimary Writer:\nHalligan Elysium\n\nCode:\n1972d \n W. \n1996Powell, \nNina, \nMassachussetts 4 Stockdale, \nCatbox, \nMax \nThe girl reading this!  \n\n\n\John Connally Consultant: Pichatku\n\ \n\nPlaytesters:\nMax(again!)\nMassachussetts 4 Stockdale (again!)\nCatbox (again!)\nJFNixon\nNeo"
   for (i in credits) {
       text += credits[i]
   }
@@ -348,14 +348,14 @@ text = "Primary Coder:\nOnkel Danny\n\nPrimary Writer:\nHalligan Elysium\n\nCode
  corrr = `\n<h2>The 1960 Election</h2><font id='wittyquote' size='4' color='FFFFFF'><em>` + customquote + `</em></font>`
 
 
-
-        function changeFontColour() {
-            if (document.getElementById('final_results_description') != null) {
-                document.getElementById('final_results_description').innerHTML = `<font color="white">` + document.getElementById("final_results_description").innerHTML
-            }
-        }
-        setInterval(changeFontColour, 200)
   
     })
   })
 //#endcode
+const intervalId = setInterval(() => {
+    const el = document.getElementById('final_results_description');
+    if (el != null) {
+        el.innerHTML = `<font color="white">` + el.innerHTML;
+        clearInterval(intervalId); // stop running after first change
+    }
+}, 2000);
