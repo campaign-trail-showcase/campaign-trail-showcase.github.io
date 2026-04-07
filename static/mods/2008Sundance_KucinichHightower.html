@@ -334,7 +334,7 @@ endingPicker = (out, totv, aa, quickstats) => {
             }
 
             // Get two electors from WA; select BOTH Bail out the people answers
-            if(campaignTrail_temp.player_answers.includes(3471) && campaignTrail_temp.player_answers.includes(2103)){
+            if(campaignTrail_temp.player_answers.includes(3471) && campaignTrail_temp.player_answers.includes(2102)){
                 faithless(227, 79, 78, 2);
             }
 
@@ -354,7 +354,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 
         // The rest of these take rogue Romney electors (don't ask how that works)
         // Get an ...unnamed fan of Ron Paul... to vote for you if you laud him
-        if(quickstats[1] > 10 && campaignTrail_temp.player_answers.includes(2104)){
+        if(quickstats[1] > 10 && campaignTrail_temp.player_answers.includes(3387)){
             faithless(197, 79, 77, 1);
         }
         // Pull away a Romney elector from Ohio if you complain about the border
@@ -395,7 +395,7 @@ endingPicker = (out, totv, aa, quickstats) => {
         ach("Delayed Demolition");
     }
     const vt_result = campaignTrail_temp.final_state_results.find((a) => a.state == 225).result;
-    if(vt_result[0].candidate == 78 || vt_result[1].candidate == 78){
+    if(vt_result[0].candidate == 79 || vt_result[1].candidate == 79){
         ach("Not Him, Me");
     }
     // Jukebox reinit function
