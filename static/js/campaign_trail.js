@@ -19,6 +19,10 @@ function mapPkToFields(json) {
   return map;
 }
 
+// I also feel like we should enforce strict typing...
+// It's not really good to account for string/number strict equality problems with PKs
+// which has led to dirty hacks like this function
+
 /**
  * @param {*} a
  * @param {*} b
@@ -26,6 +30,9 @@ function mapPkToFields(json) {
  */
 const stringsEqual = (a, b) => String(a) === String(b);
 
+// Call the ELECTIONS and CANDIDATES getters sparingly or when necessary as everytime they are called,
+// they have to iterate through the entire array and return a new Map. This is O(n) where n is the
+// array length.
 const PROPS = {
   get PARAMS() { return e.global_parameter_json?.[0]?.fields ?? {}; },
   get ELECTIONS() { return mapPkToFields(e.election_json); }, // Map<string, object>
@@ -88,9 +95,9 @@ e.VpText = "Please select your running mate:";
 e.PartyText = "Party:";
 e.HomeStateText = "Home State:";
 // Ending Popups
-e.ElectionPopup = "Election night has arrived. Settle in and wait for the returns, however                 long it may take. Best of luck!";
-e.WinPopup = "Congratulations! You won this year's election! Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice victory speech prepared for your supporters.";
-e.LosePopup = "Sorry. You have lost the election this time. Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice concession speech prepared.";
+e.ElectionPopup = "Election night has arrived. Settle in and wait for the returns, however long it may take. Best of luck!";
+e.WinPopup = "Congratulations! You won this year's election! Click OK to view the rest of the returns, or skip straight to the final results. We hope you have a nice victory speech prepared for your supporters.";
+e.LosePopup = "Sorry. You have lost the election this time. Click OK to view the rest of the returns, or skip straight to the final results. We hope you have a nice concession speech prepared.";
 
 e.finalPercentDigits = 1; // for PV % in final results
 e.statePercentDigits = 2;
@@ -1450,11 +1457,12 @@ function visitState(state, o, t) {
 }
 
 function formatNumbers(num) {
+  const tmpNum = num;
   if (typeof num !== "number") {
-    num = Number(num);
-    if (Number.isNaN(num)) return "";
+    tmpNum = Number(num);
+    if (Number.isNaN(tmpNum)) return "";
   }
-  return num.toLocaleString(e.numberFormat);
+  return tmpNum.toLocaleString(e.numberFormat);
 }
 
 e.answer_count = 4;
@@ -3629,6 +3637,9 @@ function T(t) {
  * @property {CandResult[]} result - Results of each candidate in the given state
  * @property {string} abbr - Abbreviation of the state's name, used for quick lookups
  */
+
+// If only JavaScript had enums then we could use it for `t`... ughh :confounded:
+// Also, we should modularize this function sometime! It's a bit too monolithic right now
 
 /**
  * Handles state polling and election results
