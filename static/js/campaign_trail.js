@@ -432,6 +432,7 @@ function histFunction() {
   }
 }
 
+// The example CYOA function
 function cyoAdventure(question) {
   const latestAnswer = campaignTrail_temp.player_answers[
     campaignTrail_temp.player_answers.length - 1
@@ -1457,7 +1458,7 @@ function visitState(state, o, t) {
 }
 
 function formatNumbers(num) {
-  const tmpNum = num;
+  let tmpNum = num;
   if (typeof num !== "number") {
     tmpNum = Number(num);
     if (Number.isNaN(tmpNum)) return "";
