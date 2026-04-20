@@ -467,19 +467,20 @@ function gradient(interval, min, max) {
 }
 
 function csrfToken() {
-  return (function (e) {
-    let t = null;
-    if (document.cookie && document.cookie != "") {
-      for (let i = document.cookie.split(";"), a = 0; a < i.length; a++) {
-        const s = i[a].trim();
-        if (s.substring(0, e.length + 1) == `${e}=`) {
-          t = decodeURIComponent(s.substring(e.length + 1));
-          break;
-        }
-      }
-    }
-    return t;
-  }("csrftoken"));
+  let t = null;
+  if (!document.cookie || document.cookie == '') return t;
+
+  const CSRF_TOKEN = 'csrftoken';
+
+  const toks = document.cookie.split(';');
+  for (const tok of toks) {
+    const str = tok.trim();
+    if (str.substring(0, CSRF_TOKEN.length + 1) != `${CSRF_TOKEN}=`) continue;
+    t = decodeURIComponent(str.substring(CSRF_TOKEN.length + 1));
+    break;
+  }
+
+  return t;
 }
 
 let slrr = "";
@@ -3267,40 +3268,40 @@ function stateResultsHtml() {
   const initialState = stateBase[0]?.state;
   const initialSummary = initialState ? T(initialState) : '<p>No state results available.</p>';
   const j = `
-        <div class="game_header">${window.corrr}</div>
-        <div id="main_content_area">
-            <div id="results_container">
-                <h3 class="title_h3">Election Results and Data by State</h3>
-                    <div id="drop_down_area_state">
-                        <div id="sort_tab_area">
-                            <p>View states by:
-                                <select id="sort_tab">
-                                    <option value="1">Alphabetical</option>
-                                    <option value="2">Most Electoral Votes</option>
-                                    <option value="3">Closest States</option>
-                                    ${m}
-                                    ${g}
-                                </select>
-                            </p>
-                        </div>
-                        <div id="state_tab_area">
-                            <p>Select a state:
-                                <select id="state_tab">${k(stateBase)}</select>
-                            </p>
-                        </div>
-                    </div>
-                <div id="state_result_data_summary">${initialSummary}</div>
+    <div class="game_header">${window.corrr}</div>
+    <div id="main_content_area">
+      <div id="results_container">
+        <h3 class="title_h3">Election Results and Data by State</h3>
+          <div id="drop_down_area_state">
+            <div id="sort_tab_area">
+              <p>View states by:
+                <select id="sort_tab">
+                  <option value="1">Alphabetical</option>
+                  <option value="2">Most Electoral Votes</option>
+                  <option value="3">Closest States</option>
+                  ${m}
+                  ${g}
+                </select>
+              </p>
             </div>
-            <div id="results_container_description"></div>
-        </div>
-        <div id="map_footer">
-            <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-            <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-            <button class="final_menu_button" id="state_results_button" disabled="disabled">Results by State</button>
-            <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
-            <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-            <button class="final_menu_button" id="play_again_button">Play Again!</button>
-        </div>
+            <div id="state_tab_area">
+              <p>Select a state:
+                <select id="state_tab">${k(stateBase)}</select>
+              </p>
+            </div>
+          </div>
+        <div id="state_result_data_summary">${initialSummary}</div>
+      </div>
+      <div id="results_container_description"></div>
+    </div>
+    <div id="map_footer">
+      <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
+      <button class="final_menu_button" id="final_election_map_button">Election Map</button>
+      <button class="final_menu_button" id="state_results_button" disabled="disabled">Results by State</button>
+      <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
+      <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
+      <button class="final_menu_button" id="play_again_button">Play Again!</button>
+    </div>
     `.trim();
   $("#game_window").html(j);
   const $stateTab = $("#state_tab");
