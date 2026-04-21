@@ -1,7 +1,7 @@
 /*
 * @title: 2012: Little Big Man / Little Big Man / 2012a
 * @author: StrawberryMaster & Friends
-* @version: 1.2.1
+* @version: 1.2.4
 * @description: The 2012 election in the eyes of Barack Obama (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -3175,6 +3175,16 @@ tooltipList = [
     alt: "Adult Swim 2 banner",
     weight: 1
   },
+  {
+    url: "https://file.garden/aNtAfG887DiA_7lO/2012LBM/ads/computer.gif",
+    alt: "computers.com banner",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aNtAfG887DiA_7lO/2012LBM/ads/microsoftlearn.gif",
+    alt: "Microsoft banner",
+    weight: 1
+  },
   ];
 
   // caching system
@@ -4380,7 +4390,7 @@ tooltipList = [
       window.modifyElectionSelect(electionSelect);
     }
 	
-	if (document.querySelector("inner_window_question")) {
+	if (document.querySelector(".inner_window_question")) {
         return true; // removes this task from the list
     }
     return false;
