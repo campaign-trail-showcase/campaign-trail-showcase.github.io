@@ -22843,7 +22843,7 @@ const RUNNING_MATE_DATA = {
   [RUNNING_MATE_IDS.SCHWEITZER]: {
     name: "SCHWEITZER",
     questions: {
-      301: "You’ve selected Governor Governor Brian Schweitzer of Montana as your running mate. He’s a populist, a straight-talker, and honestly, a bit of a loose cannon. Why did you pick such an unconventional and potentially risky running mate?",
+      301: "You’ve selected Governor Brian Schweitzer of Montana as your running mate. He’s a populist, a straight-talker, and honestly, a bit of a loose cannon. Why did you pick such an unconventional and potentially risky running mate?",
     },
     answers: {
       1650: "Because Washington needs someone who isn’t afraid to call things what they are. We need a fighter who understands the struggles of working families, not Wall Street bankers. Now, I know Brian speaks for the forgotten corners of this country, and with him, they will be forgotten no more.",
@@ -32767,6 +32767,7 @@ e.vpSwitcher = () => {
 
     vpScreen.remove();
     changeGameDisp(false);
+	window.questionHTML(); // so the new VP data can be re-rendered
   });
 };
 
