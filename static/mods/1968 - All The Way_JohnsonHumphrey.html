@@ -56776,7 +56776,7 @@ e.candidate_json[id].fields.last_name = "Other";
 
 // Target the game window where the state visit confirmation appears
 const targetNode = document.getElementById("game_window");
-const config = { attributes: true, childList: true, subtree: true };
+const config = { childList: true, subtree: true };
 
 let customConfirmationImageUrl = 'https://i.imgur.com/Z2BvXfT.gif'; // Default confirmation image
 const targetImageUrl = "https://i.imgur.com/Un4Iodq.gif"; // The image URL to detect
@@ -57531,17 +57531,6 @@ function updateSimplePopup() {
   }
   
 
-function observeGameStats() {
-    const gameWindow = document.getElementById("game_window");
-    const config = { childList: true, subtree: true };
-    const observer = new MutationObserver(() => {
-        updateSimplePopup();
-    });
-    if (gameWindow) {
-        observer.observe(gameWindow, config);
-    }
-}
-
 function toggleSimplePopup() {
     const popup = document.getElementById("simplePopup");
     if (!popup) return;
@@ -57561,7 +57550,6 @@ function addHeadquarterButton() {
 }
 
 createSimplePopup();
-observeGameStats();
 
 async function handleFooter() {
     const gameWindow = document.getElementById('game_window');
@@ -57880,10 +57868,10 @@ if (!element) {
                 { pk: 389, multiplier: 1.10 }, // Alaska
                 { pk: 355, multiplier: 1.10 }, // Oklahoma
                 { pk: 348, multiplier: 0.98 }, // Texas
-                { pk: 358, multiplier: 0.92 }, // Arkansas
-                { pk: 358, multiplier: 0.5 }, // Arizona
-                { pk: 358, multiplier: 0.5 }, // Nevada
-                { pk: 358, multiplier: 0.3 }, // California
+                { pk: 387, multiplier: 0.92 }, // Arkansas
+				{ pk: 388, multiplier: 0.5 },  // Arizona
+				{ pk: 363, multiplier: 0.5 },  // Nevada
+				{ pk: 386, multiplier: 0.3 },  // California
         
                 { pk: 481, multiplier: 0.85 }, // Idaho (Nixon)
                 { pk: 491, multiplier: 0.85 }, // Alaska (Nixon)
@@ -57922,7 +57910,7 @@ if (!element) {
         const stateMultipliers = [
             { pk: 374, multiplier: 1.12 }, // Kentucky
             { pk: 351, multiplier: 1.1 }, // South Carolina
-            { pk: 358, multiplier: 0.92 }, // Arkansas
+            { pk: 387, multiplier: 0.92 }, // Arkansas
             { pk: 382, multiplier: 1.05 }, // Florida
             { pk: 349, multiplier: 1.12 }  // Tennessee
 
@@ -60471,6 +60459,8 @@ function updateAdvisorImage(e) {
         vpSwitcherTriggered = true; 
         window.setTimeout(e.vpSwitcher, 20);
     }
+	
+	updateSimplePopup(); 
 
     if (e.noCounter == 21) {
         // Track the current Democratic nominee dynamically based on your conditions
@@ -61014,7 +61004,7 @@ function updateAdvisorImage(e) {
         e.candidate_json[id].fields.first_name = "Pigasus J."
         e.candidate_json[id].fields.last_name = "Pig"
         var id = e.candidate_json.map(p=>p.pk).indexOf(25)
-        e.candidate_json[id].fields.first_name = "Lestor"
+        e.candidate_json[id].fields.first_name = "Lester"
         e.candidate_json[id].fields.last_name = "Maddox"
         e.candidate_json[id].fields.color_hex = "#958f74" 
         MaddoxShift();
@@ -61437,7 +61427,7 @@ function updateAdvisorImage(e) {
         "Abraham Ribicoff" : "Pat Brown",
     
         "John B. Connally" : "Samuel Yorty",
-        "Lestor Maddox" : "Theophilus Connor",
+        "Lester Maddox" : "Theophilus Connor",
     }
     vpTableHistorical = {
         "Richard M. Nixon" : "Mark Hatfield",
@@ -61519,7 +61509,7 @@ function updateAdvisorImage(e) {
     
     
     const gameWindowNode = document.getElementById("game_window");
-    const candidateWatcherConfig = { attributes: true, childList: true, subtree: true };
+    const candidateWatcherConfig = { childList: true, subtree: true };
     
     const candidateObserver = new MutationObserver(onGameWindowChangeCandidates);
     candidateObserver.observe(gameWindowNode, candidateWatcherConfig);
@@ -62524,7 +62514,7 @@ let presidentRows = `
 
 // Define your inauguration date and show flags as before
 let innaugDate = "January 20, 1969";
-let lastTermEndDate = "January 20, 1969"; // Default start date
+let lastTermEndDate = "November 22, 1963"; // Default start date
 
 let Year = null;
 let Party = null;
@@ -62651,7 +62641,7 @@ if (activeWallaceEV> 269) {
         showWallace2term = true;
         showHarvey2term = true; 
         showCheney2term = true;
-        show93JohnMcCain1term = true, 
+        show93JohnMcCain1term = true;
         showDuketerm = true; 
     } else {
         showWallace1term = true;
@@ -62922,7 +62912,7 @@ if (activeNixonEV > 269 || NixonWinContingent) {
         showMcGovern722term = true;
         Party = "D";  Year = 1981;
     }
-    else if (activeNixonEV < 269 && NVP === "John Lindsay" && !(Nominee == "Humphrey" && activeNixonEV > activeNixonEV  || activeNominee == "Johnson" && activeNixonEV > 250 && activeNixonEV < 270 && activeNixonEV < 270)) {
+    else if (activeNixonEV < 269 && NVP === "John Lindsay" && !(Nominee == "Humphrey" && activeNixonEV > activeJohnsonEV || activeNominee == "Johnson" && activeNixonEV > 250 && activeNixonEV < 270)) {
         showNixon1term = true;
         showDemWallace2term = true; //Add 1 term version
         Party = "D";  Year = 1981;
@@ -63194,7 +63184,7 @@ if (Year === 1993) {
       show41ChuckRobb2term = true;
        Party = "D";  Year = 2001; 
     }  else if (activeJohnsonEV < 269 && Peace == 1) {
-        show93LaRouche2term = true
+        show93LaRouche2term = true;
         Party = "D";  Year = 2001; 
     } else if (activeJohnsonEV > 269 && e.player_answers.includes(11191)) {
       show41BobKerrey2term = true;
@@ -63405,7 +63395,7 @@ const presidents = [
   { show: showMcCormack, acting: true, name: "John W. McCormack", term: `January 20, 1969 –<br>${innaugDate}`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/3/34/Face_detail%2C_Speaker_John_McCormack_%28cropped%29.jpg" },
   { show: showLBJ2termAlt, num: 36, name: "Lyndon B. Johnson", term: `${innaugDate} –<br>February 8, 1972`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Lyndon_B._Johnson_post-presidency_portrait_September_18%2C_1972_-_LBJ_Museum_D4717-23a.jpg/1344px-Lyndon_B._Johnson_post-presidency_portrait_September_18%2C_1972_-_LBJ_Museum_D4717-23a.jpg" },
   { show: showPigasusterm, name: "Pigasus the Immortal", term: `${innaugDate} –<br>Incumbent`, party: "Youth International Party", img: "https://i.imgur.com/484Uexa.jpeg" },
-  { show: showWallace1term, name: "George Wallace", term: `${innaugDate} –<br>May 15 1975`, party: "American Independent", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/George_Wallace_%28D-AL%29_%283x4%29.jpg/640px-George_Wallace_%28D-AL%29_%283x4%29.jpg" },
+  { show: showWallace1term, name: "George Wallace", term: `${innaugDate} –<br>May 15, 1975`, party: "American Independent", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/George_Wallace_%28D-AL%29_%283x4%29.jpg/640px-George_Wallace_%28D-AL%29_%283x4%29.jpg" },
   { show: showWallace2term, name: "George Wallace", term: `${innaugDate} –<br>January 20, 1977`, party: "American Independent", img: "https://i.imgur.com/7CSrtxf.png" },
   { show: showNixon1term, name: "Richard Nixon", term: `${innaugDate} –<br>January 20, 1973`, party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Richard_M._Nixon_%28color_3x4%29.jpg/1920px-Richard_M._Nixon_%28color_3x4%29.jpg" },
   { show: showNixon2term, name: "Richard Nixon", term: `${innaugDate} –<br>August 9, 1974`, party: "Republican", img: "https://i.imgur.com/k53e0xB.png" },
@@ -63527,7 +63517,7 @@ const presidents = [
   
   { show: showChafee1term, name: "John H. Chafee", term: "January 26, 1979 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/Jgkp4tf.png"},
   { show: showJacobRhodesterm, name: "John Jacob Rhodes", term: "June 11, 1979 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/gC19QGR.png"},
-  { show: showHufstedler1month, name: "Shirley M. Hufstedler", term: "December 24, 1980 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/rISusl2.pngImage"},
+  { show: showHufstedler1month, name: "Shirley M. Hufstedler", term: "December 24, 1980 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/rISusl2.png"},
   
   { show: show40Reagan1term, name: "Ronald Reagan", term: "January 20, 1981 –<br>January 20, 1985", party: "Republican", img: "https://i.imgur.com/jYQPyT2.png"},
   { show: show40Reagan2term, name: "Ronald Reagan", term: "January 20, 1981 –<br>January 20, 1989", party: "Republican", img: "https://i.imgur.com/4WkZMXe.png"},
@@ -63550,7 +63540,7 @@ const presidents = [
   { show: showBorman2term, name: "Frank Borman", term: "January 20, 1981 –<br>January 20, 1989", party: "Republican", img: "https://i.imgur.com/HdDAQcl.png" },
   { show: showGlenn2term, name: "John Glenn", term: "January 20, 1981 –<br>January 20, 1989", party: "Democratic", img: "https://i.imgur.com/CDQq7tH.png" },
   { show: showWeicker1term, name: "Lowell P. Weicker Jr.", term: "January 20, 1981 –<br>January 20, 1985", party: "Republican", img: "https://i.imgur.com/8Fsxjnc.png"},
-  { show: show1980Jerry2term, name: "Jerry Brown", term: "January 20, 1981 –<br>January 20, 1989", party: "Democrat", img: "https://i.imgur.com/HPchUrR.png"},
+  { show: show1980Jerry2term, name: "Jerry Brown", term: "January 20, 1981 –<br>January 20, 1989", party: "Democratic", img: "https://i.imgur.com/HPchUrR.png"},
 
   { show: showCheney2term, name: "Dick Cheney", term: "January 20, 1985 –<br>January 20, 1993", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Secretary_of_Defense_Richard_B._Cheney%2C_official_portrait_%28cropped%29.jpg"},
   { show: showCheney1term, name: "Dick Cheney", term: "January 20, 1985 –<br>January 20, 1989", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Secretary_of_Defense_Richard_B._Cheney%2C_official_portrait_%28cropped%29.jpg"},
@@ -63613,7 +63603,7 @@ const presidents = [
   { show: show42ChuckRobb2term, name: "Chuck Robb", term: "January 20, 1993 –<br>January 20, 2001", party: "Democratic", img: "https://i.imgur.com/QO5rVZZ.png"},
   { show: show42ClintEastwood2term, name: "Clint Eastwood", term: "January 20, 1993 –<br>January 20, 2001", party: "Republican", img: "https://i.imgur.com/oxjzTXe.png"},
   { show: show42JerryBrown2term, name: "Jerry Brown", term: "January 20, 1993 –<br>January 20, 2001", party: "Democratic", img: "https://i.imgur.com/YTp6LL5.png"},
-  { show: show42RossPerot2term, name: "Ross Perot", term: "January 20, 1993 –<br>January 20, 2001", party: "Reform", img: "https://i.imgur.com/cpfAWHL.pngg"},
+  { show: show42RossPerot2term, name: "Ross Perot", term: "January 20, 1993 –<br>January 20, 2001", party: "Reform", img: "https://i.imgur.com/cpfAWHL.png"},
   { show: showDeukmejian1term, name: "George Deukmejian", term: "January 20, 1993 –<br>January 20, 1997", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/George-Deukmejian-Official-Photo-Cropped.jpg/640px-George-Deukmejian-Official-Photo-Cropped.jpg"},
   { show: showPatBuchanan2term, name: "Pat Buchanan", term: "January 20, 1993 –<br>January 20, 2001", party: "Republican", img: "https://i.imgur.com/zXoxYzj.png"},
   { show: showKeyes1term, name: "Alan Keyes", term: "January 20, 1993 –<br>January 20, 1997", party: "Republican", img: "https://i.imgur.com/6FmyUJ9.png" },
