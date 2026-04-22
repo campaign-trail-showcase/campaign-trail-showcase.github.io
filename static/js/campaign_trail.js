@@ -33,6 +33,9 @@ const stringsEqual = (a, b) => String(a) === String(b);
 // Call the ELECTIONS and CANDIDATES getters sparingly or when necessary as everytime they are called,
 // they have to iterate through the entire array and return a new Map. This is O(n) where n is the
 // array length.
+//
+// These are not memoized because the candidate and election arrays are volatile and can be changed
+// midgame.
 const PROPS = {
   get PARAMS() { return e.global_parameter_json?.[0]?.fields ?? {}; },
   get ELECTIONS() { return mapPkToFields(e.election_json); }, // Map<string, object>
@@ -3741,6 +3744,7 @@ function A(t) {
   });
 
   // It is probably impossible for `candsIssueScores[0]` to be falsy.
+
   const runningMateByIssue = new Map((e.running_mate_issue_score_json || []).map((x) => [x.fields.issue, x]));
 
   const candIssueAgg = new Map();
@@ -3779,7 +3783,7 @@ function A(t) {
     prev.g += f.issue_score * f.issue_importance;
     prev.b += f.issue_importance;
 
-    if (!inner.has(f.issue)) inner.set(f.issue, prev);
+    if (!inner.has(f.issue)) inner.set(f.issue, { ...prev });
   }
 
   for (const candIssueScore of candsIssueScores) {
@@ -3829,10 +3833,10 @@ function A(t) {
     const arr = csmByCandidate.get(candId) || [];
     const stateMults = arr.map((g) => {
       const rand = randomNormal(g.fields.candidate);
-      const p = g.fields.state_multiplier
+      const effectiveMult = g.fields.state_multiplier
         * candsGAnsScores[idx].global_multiplier
         * (1 + rand * variance);
-      return { state: Number(g.fields.state), state_multiplier: p };
+      return { state: Number(g.fields.state), state_multiplier: effectiveMult };
     }).sort((a, b) => a.state - b.state);
 
     return { candidate_id: candId, state_multipliers: stateMults };
@@ -3880,7 +3884,28 @@ function A(t) {
       const f = s.fields;
       if (!m.has(f.state)) m.set(f.state, new Map());
       const inner = m.get(f.state);
+
+      // This commented out version doesn't mutate the actual JSON, which means that states will 
+      // always show their original issue stances
+      //
+      //if (!inner.has(f.issue)) inner.set(f.issue, { ...s.fields });
+
       if (!inner.has(f.issue)) inner.set(f.issue, s.fields);
+    }
+
+    for (const [stateId, issuesMap] of stateIssueAgg.entries()) {
+      if (!m.has(stateId)) continue;
+
+      const stateIssues = m.get(stateId);
+      for (const [issueId, agg] of issuesMap.entries()) {
+        const sFields = stateIssues.get(issueId);
+        if (!sFields) continue;
+
+        const numerator = (sFields.state_issue_score * sFields.weight) + agg.g;
+        const denominator = sFields.weight + agg.b;
+
+        sFields.state_issue_score = numerator / denominator;
+      }
     }
     return m;
   })();
@@ -3936,10 +3961,9 @@ function A(t) {
   calcStatePolls.forEach((f) => {
     f.abbr = stateAbbrByPk.get(f.state)
       ?? (e.states_json.find((g) => g.pk === f.state)?.fields.abbr ?? null);
-  });
 
-  calcStatePolls.forEach((f) => {
     const sf = stateFieldsByPk.get(f.state);
+
     const M = sf ? Math.floor(sf.popular_votes * (0.95 + 0.1 * Math.random())) : 0;
     const total = f.result.reduce((acc, g) => acc + g.result, 0);
     f.result.forEach((g) => {
@@ -3947,15 +3971,11 @@ function A(t) {
       g.percent = N;
       g.votes = Math.floor(N * M);
     });
-  });
-
-  calcStatePolls.forEach((f) => {
-    const sf = stateFieldsByPk.get(f.state);
     const O = sf ? sf.electoral_votes : 0;
     f.result.sort((a, b) => b.percent - a.percent);
 
     if ([1, 3].includes(gameType)) {
-      if (sf && sf.winner_take_all_flg === 1) {
+      if (sf?.winner_take_all_flg === 1) {
         f.result.forEach((g, idx) => {
           g.electoral_votes = idx === 0 ? O : 0;
         });
