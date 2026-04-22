@@ -56776,7 +56776,7 @@ e.candidate_json[id].fields.last_name = "Other";
 
 // Target the game window where the state visit confirmation appears
 const targetNode = document.getElementById("game_window");
-const config = { attributes: true, childList: true, subtree: true };
+const config = { childList: true, subtree: true };
 
 let customConfirmationImageUrl = 'https://i.imgur.com/Z2BvXfT.gif'; // Default confirmation image
 const targetImageUrl = "https://i.imgur.com/Un4Iodq.gif"; // The image URL to detect
@@ -57531,17 +57531,6 @@ function updateSimplePopup() {
   }
   
 
-function observeGameStats() {
-    const gameWindow = document.getElementById("game_window");
-    const config = { childList: true, subtree: true };
-    const observer = new MutationObserver(() => {
-        updateSimplePopup();
-    });
-    if (gameWindow) {
-        observer.observe(gameWindow, config);
-    }
-}
-
 function toggleSimplePopup() {
     const popup = document.getElementById("simplePopup");
     if (!popup) return;
@@ -57561,7 +57550,6 @@ function addHeadquarterButton() {
 }
 
 createSimplePopup();
-observeGameStats();
 
 async function handleFooter() {
     const gameWindow = document.getElementById('game_window');
@@ -57880,10 +57868,10 @@ if (!element) {
                 { pk: 389, multiplier: 1.10 }, // Alaska
                 { pk: 355, multiplier: 1.10 }, // Oklahoma
                 { pk: 348, multiplier: 0.98 }, // Texas
-                { pk: 358, multiplier: 0.92 }, // Arkansas
-                { pk: 358, multiplier: 0.5 }, // Arizona
-                { pk: 358, multiplier: 0.5 }, // Nevada
-                { pk: 358, multiplier: 0.3 }, // California
+                { pk: 387, multiplier: 0.92 }, // Arkansas
+				{ pk: 388, multiplier: 0.5 },  // Arizona
+				{ pk: 363, multiplier: 0.5 },  // Nevada
+				{ pk: 386, multiplier: 0.3 },  // California
         
                 { pk: 481, multiplier: 0.85 }, // Idaho (Nixon)
                 { pk: 491, multiplier: 0.85 }, // Alaska (Nixon)
@@ -57922,7 +57910,7 @@ if (!element) {
         const stateMultipliers = [
             { pk: 374, multiplier: 1.12 }, // Kentucky
             { pk: 351, multiplier: 1.1 }, // South Carolina
-            { pk: 358, multiplier: 0.92 }, // Arkansas
+            { pk: 387, multiplier: 0.92 }, // Arkansas
             { pk: 382, multiplier: 1.05 }, // Florida
             { pk: 349, multiplier: 1.12 }  // Tennessee
 
@@ -60471,6 +60459,8 @@ function updateAdvisorImage(e) {
         vpSwitcherTriggered = true; 
         window.setTimeout(e.vpSwitcher, 20);
     }
+	
+	updateSimplePopup(); 
 
     if (e.noCounter == 21) {
         // Track the current Democratic nominee dynamically based on your conditions
@@ -61014,7 +61004,7 @@ function updateAdvisorImage(e) {
         e.candidate_json[id].fields.first_name = "Pigasus J."
         e.candidate_json[id].fields.last_name = "Pig"
         var id = e.candidate_json.map(p=>p.pk).indexOf(25)
-        e.candidate_json[id].fields.first_name = "Lestor"
+        e.candidate_json[id].fields.first_name = "Lester"
         e.candidate_json[id].fields.last_name = "Maddox"
         e.candidate_json[id].fields.color_hex = "#958f74" 
         MaddoxShift();
@@ -61437,7 +61427,7 @@ function updateAdvisorImage(e) {
         "Abraham Ribicoff" : "Pat Brown",
     
         "John B. Connally" : "Samuel Yorty",
-        "Lestor Maddox" : "Theophilus Connor",
+        "Lester Maddox" : "Theophilus Connor",
     }
     vpTableHistorical = {
         "Richard M. Nixon" : "Mark Hatfield",
@@ -61519,7 +61509,7 @@ function updateAdvisorImage(e) {
     
     
     const gameWindowNode = document.getElementById("game_window");
-    const candidateWatcherConfig = { attributes: true, childList: true, subtree: true };
+    const candidateWatcherConfig = { childList: true, subtree: true };
     
     const candidateObserver = new MutationObserver(onGameWindowChangeCandidates);
     candidateObserver.observe(gameWindowNode, candidateWatcherConfig);
@@ -62524,7 +62514,7 @@ let presidentRows = `
 
 // Define your inauguration date and show flags as before
 let innaugDate = "January 20, 1969";
-let lastTermEndDate = "January 20, 1969"; // Default start date
+let lastTermEndDate = "November 22, 1963"; // Default start date
 
 let Year = null;
 let Party = null;
@@ -62651,7 +62641,7 @@ if (activeWallaceEV> 269) {
         showWallace2term = true;
         showHarvey2term = true; 
         showCheney2term = true;
-        show93JohnMcCain1term = true, 
+        show93JohnMcCain1term = true;
         showDuketerm = true; 
     } else {
         showWallace1term = true;
@@ -62922,7 +62912,7 @@ if (activeNixonEV > 269 || NixonWinContingent) {
         showMcGovern722term = true;
         Party = "D";  Year = 1981;
     }
-    else if (activeNixonEV < 269 && NVP === "John Lindsay" && !(Nominee == "Humphrey" && activeNixonEV > activeNixonEV  || activeNominee == "Johnson" && activeNixonEV > 250 && activeNixonEV < 270 && activeNixonEV < 270)) {
+    else if (activeNixonEV < 269 && NVP === "John Lindsay" && !(Nominee == "Humphrey" && activeNixonEV > activeJohnsonEV || activeNominee == "Johnson" && activeNixonEV > 250 && activeNixonEV < 270)) {
         showNixon1term = true;
         showDemWallace2term = true; //Add 1 term version
         Party = "D";  Year = 1981;
@@ -63194,7 +63184,7 @@ if (Year === 1993) {
       show41ChuckRobb2term = true;
        Party = "D";  Year = 2001; 
     }  else if (activeJohnsonEV < 269 && Peace == 1) {
-        show93LaRouche2term = true
+        show93LaRouche2term = true;
         Party = "D";  Year = 2001; 
     } else if (activeJohnsonEV > 269 && e.player_answers.includes(11191)) {
       show41BobKerrey2term = true;
@@ -63401,17 +63391,17 @@ show97LaRouche1term = true;
 // Define all presidents — without the number
 const presidents = [
   { show: showLBJ1term, num: 36, name: "Lyndon B. Johnson", term: "November 22, 1963 –<br>January 20, 1969", party: "Democratic", img: "https://i.imgur.com/jNmx4mx.png" },
-  { show: showLBJ2term, num: 36, name: "Lyndon B. Johnson", term: "November 22, 1963 –<br>February 8, 1972", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Lyndon_B._Johnson_post-presidency_portrait_September_18%2C_1972_-_LBJ_Museum_D4717-23a.jpg/1344px-Lyndon_B._Johnson_post-presidency_portrait_September_18%2C_1972_-_LBJ_Museum_D4717-23a.jpg" },
+  { show: showLBJ2term, num: 36, name: "Lyndon B. Johnson", term: "November 22, 1963 –<br>February 8, 1972", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Lyndon_B._Johnson_post-presidency_portrait_September_18%2C_1972_-_LBJ_Museum_D4717-23a.jpg" },
   { show: showMcCormack, acting: true, name: "John W. McCormack", term: `January 20, 1969 –<br>${innaugDate}`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/3/34/Face_detail%2C_Speaker_John_McCormack_%28cropped%29.jpg" },
-  { show: showLBJ2termAlt, num: 36, name: "Lyndon B. Johnson", term: `${innaugDate} –<br>February 8, 1972`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Lyndon_B._Johnson_post-presidency_portrait_September_18%2C_1972_-_LBJ_Museum_D4717-23a.jpg/1344px-Lyndon_B._Johnson_post-presidency_portrait_September_18%2C_1972_-_LBJ_Museum_D4717-23a.jpg" },
+  { show: showLBJ2termAlt, num: 36, name: "Lyndon B. Johnson", term: `${innaugDate} –<br>February 8, 1972`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Lyndon_B._Johnson_post-presidency_portrait_September_18%2C_1972_-_LBJ_Museum_D4717-23a.jpg" },
   { show: showPigasusterm, name: "Pigasus the Immortal", term: `${innaugDate} –<br>Incumbent`, party: "Youth International Party", img: "https://i.imgur.com/484Uexa.jpeg" },
-  { show: showWallace1term, name: "George Wallace", term: `${innaugDate} –<br>May 15 1975`, party: "American Independent", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/George_Wallace_%28D-AL%29_%283x4%29.jpg/640px-George_Wallace_%28D-AL%29_%283x4%29.jpg" },
+  { show: showWallace1term, name: "George Wallace", term: `${innaugDate} –<br>May 15, 1975`, party: "American Independent", img: "https://upload.wikimedia.org/wikipedia/commons/e/e4/George_Wallace_%28D-AL%29_%283x4%29.jpg" },
   { show: showWallace2term, name: "George Wallace", term: `${innaugDate} –<br>January 20, 1977`, party: "American Independent", img: "https://i.imgur.com/7CSrtxf.png" },
-  { show: showNixon1term, name: "Richard Nixon", term: `${innaugDate} –<br>January 20, 1973`, party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Richard_M._Nixon_%28color_3x4%29.jpg/1920px-Richard_M._Nixon_%28color_3x4%29.jpg" },
+  { show: showNixon1term, name: "Richard Nixon", term: `${innaugDate} –<br>January 20, 1973`, party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Richard_M._Nixon_%28color_3x4%29.jpg" },
   { show: showNixon2term, name: "Richard Nixon", term: `${innaugDate} –<br>August 9, 1974`, party: "Republican", img: "https://i.imgur.com/k53e0xB.png" },
   { show: showNixonfullterm, name: "Richard Nixon", term: "January 20, 1969 –<br>January 20, 1977", party: "Republican", img: "https://i.imgur.com/GeODd4U.png" },
   { show: showKennedy1term, name: "Robert F. Kennedy", term: `${innaugDate} –<br>January 20, 1973`, party: "Democratic", img: "https://i.imgur.com/jNGd18z.png" },
-  { show: showKennedy2term, name: "Robert F. Kennedy", term: `${innaugDate} –<br>January 20, 1977`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/RFK_Portrait_3x4_%28rotated%29.jpg/640px-RFK_Portrait_3x4_%28rotated%29.jpg" },
+  { show: showKennedy2term, name: "Robert F. Kennedy", term: `${innaugDate} –<br>January 20, 1977`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/0/06/RFK_Portrait_3x4_%28rotated%29.jpg" },
   { show: showHumphreyAlt1term, name: "Hubert H. Humphrey", term: `${innaugDate} –<br>January 20, 1973`, party: "Democratic", img: "https://i.imgur.com/GWG6Zua.png" },
   { show: showHumphreyAlt2term, name: "Hubert H. Humphrey", term: `${innaugDate} –<br>January 20, 1977`, party: "Democratic", img: "https://i.imgur.com/j0MtOyi.png" },
   { show: showMcCarthy1term, name: "Eugene McCarthy", term: `${innaugDate} –<br>January 20, 1973`, party: "Democratic", img: "https://i.imgur.com/VwgnkFR.png" },
@@ -63419,8 +63409,8 @@ const presidents = [
   { show: showMcCarthy2term, name: "Eugene McCarthy", term: `${innaugDate} –<br>January 20, 1977`, party: "Democratic", img: "https://i.imgur.com/tqP4Uau.png" },
   { show: showChurch1term, name: "Frank Church", term: `${innaugDate} –<br>January 20, 1973`, party: "Democratic", img: "https://i.imgur.com/gkiKY1B.png" },
   { show: showChurch2term, name: "Frank Church", term: `${innaugDate} –<br>January 20, 1977`, party: "Democratic", img: "https://i.imgur.com/bKQuUHE.png" },
-  { show: showMcGovern1term, name: "George McGovern", term: `${innaugDate} –<br>January 20, 1973`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/George_McGovern_1970s.png/640px-George_McGovern_1970s.png" },
-  { show: showMcGovern2term, name: "George McGovern", term: `${innaugDate} –<br>January 20, 1977`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/George_McGovern_%28D-SD%29_%28cropped%29.jpg/640px-George_McGovern_%28D-SD%29_%28cropped%29.jpg" },
+  { show: showMcGovern1term, name: "George McGovern", term: `${innaugDate} –<br>January 20, 1973`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/1/19/George_McGovern_1970s.png" },
+  { show: showMcGovern2term, name: "George McGovern", term: `${innaugDate} –<br>January 20, 1977`, party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/f/ff/George_McGovern_%28D-SD%29_%28cropped%29.jpg" },
   { show: showRibicoff1term, name: "Abraham Ribicoff", term: `${innaugDate} –<br>January 20, 1973`, party: "Democratic", img: "https://i.imgur.com/IFH7CuT.png" },
   { show: showConnally1term, name: "John Connally", term: `${innaugDate} –<br>January 20, 1973`, party: "Democratic", img: "https://i.imgur.com/HyDmwPN.png" },
   { show: showConnallypart1term, name: "John Connally", term: `${innaugDate} –<br>August 9, 1975`, party: "Democratic", img: "https://i.imgur.com/vI6V0su.png" },
@@ -63433,8 +63423,8 @@ const presidents = [
   { show: showHumphrey1term, name: "Hubert H. Humphrey", term: "February 8, 1972 –<br>January 20, 1973", party: "Democratic", img: "https://i.imgur.com/ozFnwve.png"},
   { show: showHumphrey2term, name: "Hubert H. Humphrey", term: "February 8, 1972 –<br>January 20, 1977", party: "Democratic", img: "https://i.imgur.com/j0MtOyi.png"},
   { show: showHumphrey3term, name: "Hubert H. Humphrey", term: "February 8, 1972 –<br>December 24, 1980", party: "Democratic", img: "https://i.imgur.com/HIHBy4m.png"},
-  { show: showInouye1term, name: "Daniel Inouye", term: "February 8, 1972 –<br>January 20, 1973", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Daniel_Inouye_official_photo_%28cropped%29.jpg/640px-Daniel_Inouye_official_photo_%28cropped%29.jpg"},
-  { show: showRocky2term, name: "Nelson Rockefeller", term: "February 8, 1972 –<br>January 26, 1979", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Nelson_Rockefeller.jpg/640px-Nelson_Rockefeller.jpg"},
+  { show: showInouye1term, name: "Daniel Inouye", term: "February 8, 1972 –<br>January 20, 1973", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/7/73/Daniel_Inouye_official_photo_%28cropped%29.jpg"},
+  { show: showRocky2term, name: "Nelson Rockefeller", term: "February 8, 1972 –<br>January 26, 1979", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/5/56/Nelson_Rockefeller.jpg"},
   { show: showBoggs1term, name: "Hale Boggs", term: "February 8, 1972 –<br>January 20, 1973", party: "Democratic", img: "https://i.imgur.com/qSNba2z.png" },
   { show: showBoggsfullterm, name: "Hale Boggs", term: "February 8, 1972 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/qSNba2z.png" },
   { show: showSandersterm, name: "Harland Sanders", term: "February 8, 1972 –<br>January 20, 1973", party: "Independent", img: "https://i.imgur.com/dksNit5.png"},
@@ -63449,7 +63439,7 @@ const presidents = [
   { show: showThurmond1term, name: "Strom Thurmond", term: "August 9, 1979 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/gDh3ARm.png" },
   { show: showAshbrook2term, name: "John M. Ashbrook", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/a1HLYJc.png"},
   { show: showBaker1term, name: "Howard Baker", term: "January 20, 1973 –<br>January 20, 1977", party: "Republican", img: "https://i.imgur.com/HB4TYC1.png"},
-  { show: showBaker2term, name: "Howard Baker", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Senator_Howard_Baker_1979.jpg/640px-Senator_Howard_Baker_1979.jpg"},
+  { show: showBaker2term, name: "Howard Baker", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/4/43/Senator_Howard_Baker_1979.jpg"},
   { show: showByrdtakeover1term, acting: true, name: "Robert Byrd", term: "January 20, 1973 –<br>January 20, 1977", party: "Democratic", img: "https://i.imgur.com/UaH9MXk.png"},
   { show: showChisolm2term, name: "Shirley Chisholm", term: "January 20, 1973 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/ssqLnMG.png"},
   { show: showEagleton1term,  name: "Thomas Eagleton",  term: "January 20, 1973 –<br>January 20, 1977", party: "Democratic", img: "https://i.imgur.com/4gJHa0v.png"},
@@ -63459,15 +63449,15 @@ const presidents = [
   { show: showHart1term,        name: "Philip Hart",             term: "January 20, 1973 –<br>April 12, 1975", party: "Democratic", img: "https://i.imgur.com/DINh3KV.png"},
   { show: showHatfield2term, name: "Mark Hatfield", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/gQwdQsU.png"},
   { show: showLaxalt1term, name: "Paul Laxalt", term: "January 20, 1973 –<br>January 20, 1977", party: "Republican", img: "https://i.imgur.com/r6zSFTm.png"},
-  { show: showLaxalt2term, name: "Paul Laxalt", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Paul_Laxalt_1980_%28cropped%29.jpg/640px-Paul_Laxalt_1980_%28cropped%29.jpg"},
+  { show: showLaxalt2term, name: "Paul Laxalt", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/e/e1/Paul_Laxalt_1980_%28cropped%29.jpg"},
   { show: showMcCarthyReturns, name: "Eugene McCarthy", term: "January 20, 1973 –<br>January 20, 1977", party: "Democratic", img: "https://i.imgur.com/tqP4Uau.png"},
   { show: showMcGovern722term, name: "George McGovern", term: "January 20, 1973 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/TcFlWwY.png"},
-  { show: showPercy1term, name: "Charles Percy", term: "January 20, 1973 –<br>January 20, 1977", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Sen._Charles_Percy_%283x4%29.jpg/640px-Sen._Charles_Percy_%283x4%29.jpg"},
+  { show: showPercy1term, name: "Charles Percy", term: "January 20, 1973 –<br>January 20, 1977", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Sen._Charles_Percy_%283x4%29.jpg"},
   { show: showPercy2term, name: "Charles Percy", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/a/a1/Senator_Charles_Percy_%283x4%29.jpg"},
-  { show: showRFK1term, name: "Robert F. Kennedy", term: "January 20, 1973 –<br>January 20, 1977", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Robert_F._Kennedy_Look_Magazine_1963.jpg/960px-Robert_F._Kennedy_Look_Magazine_1963.jpg?20190516151658"},
-  { show: showRFK2term, name: "Robert F. Kennedy", term: "January 20, 1973 –<br>January 20, 1981", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/RFK_Portrait_3x4_%28rotated%29.jpg/640px-RFK_Portrait_3x4_%28rotated%29.jpg"},
+  { show: showRFK1term, name: "Robert F. Kennedy", term: "January 20, 1973 –<br>January 20, 1977", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/9/92/Robert_F._Kennedy_Look_Magazine_1963.jpg"},
+  { show: showRFK2term, name: "Robert F. Kennedy", term: "January 20, 1973 –<br>January 20, 1981", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/0/06/RFK_Portrait_3x4_%28rotated%29.jpg"},
   { show: showReagan2term, name: "Ronald Reagan", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/8/82/Ronald_Reagan%2C_14_May_1974_%28cropped%29.jpg"},
-  { show: showRomney2term,  name: "George Romney",    term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/George_Wilcken_Romney_%28cropped%29.png/640px-George_Wilcken_Romney_%28cropped%29.png"},
+  { show: showRomney2term,  name: "George Romney",    term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/3/31/George_Wilcken_Romney_%28cropped%29.png"},
   { show: showSchafer2term, name: "Raymond P. Schafer", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/3ZrgTJ4.png"},
   { show: showScranton2term, name: "William Scranton", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/NQ1Sepu.png"},
   { show: showWestmoreland2term, name: "William Westmoreland", term: "January 20, 1973 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/zaUL4XA.png"},
@@ -63499,7 +63489,7 @@ const presidents = [
   { show: showByrd1term, name: "Robert Byrd", term: "January 20, 1977 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/e6TrKSg.png"},
   { show: showPatsyMink1term, name: "Patsy Mink", term: "January 20, 1977 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/ldRjnmM.png" },
   { show: showCallaway1term, name: "Bo Callaway", term: "January 20, 1977 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/93eHuwj.png"},
-  { show: showCarter1term, name: "Jimmy Carter", term: "January 20, 1977 –<br>January 20, 1981", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Jimmy_Carter_Portrait_by_Bernard_Gotfryd_%28cropped_2%29.jpg/640px-Jimmy_Carter_Portrait_by_Bernard_Gotfryd_%28cropped_2%29.jpg"},
+  { show: showCarter1term, name: "Jimmy Carter", term: "January 20, 1977 –<br>January 20, 1981", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/5/5f/Jimmy_Carter_Portrait_by_Bernard_Gotfryd_%28cropped_2%29.jpg"},
   { show: showChurchReturns, name: "Frank Church", term: "January 20, 1977 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/gwmmgh5.png"},
   { show: showDole1term, name: "Bob Dole", term: "January 20, 1977 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/HIocMNj.png"},
   { show: showFarenthold2term,  name: "Frances Farenthold",    term: "April 12, 1977 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/P4NaKBx.jpeg"},
@@ -63512,11 +63502,11 @@ const presidents = [
   { show: showMathias1term, name: "Charles Mathias", term: "January 20, 1977 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/5vs1v5a.png"},
   { show: showMcCarthyFordterm, name: "Gerald Ford", term: "January 20, 1977 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/Zsj7CrP.png"},
   { show: showMoUdall2term, name: "Morris K. Udall", term: "January 20, 1977 –<br>January 20, 1985", party: "Democratic", img: "https://i.imgur.com/x1vnOZM.png"},
-  { show: showMondale1term, name: "Walter Mondale", term: "January 20, 1977 –<br>January 20, 1981", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Walter_Mondale_%281%29.jpg/640px-Walter_Mondale_%281%29.jpg"},
+  { show: showMondale1term, name: "Walter Mondale", term: "January 20, 1977 –<br>January 20, 1981", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Walter_Mondale_%281%29.jpg"},
   { show: showMoynihan1term, name: "Daniel P. Moynihan", term: "January 20, 1977 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/LzdnruE.png"},
   { show: showMuskie1term,  name: "Edmund Muskie",    term: "January 20, 1977 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/3YnA6f4.png"},
   { show: showNixonReturns1term,   name: "Richard Nixon",         term: "January 20, 1977 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/xRA1RI3.png"},
-  { show: showReagan1term, name: "Ronald Reagan", term: "January 20, 1977 –<br>January 20, 1981", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Ronald_Reagan_with_cowboy_hat_12-0071M_edit.jpg/640px-Ronald_Reagan_with_cowboy_hat_12-0071M_edit.jpg"},
+  { show: showReagan1term, name: "Ronald Reagan", term: "January 20, 1977 –<br>January 20, 1981", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Ronald_Reagan_with_cowboy_hat_12-0071M_edit.jpg"},
   { show: showRichardson2term, name: "Elliot Richardson", term: "January 20, 1977 –<br>January 20, 1985", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Elliot_Richardson.png"},
   { show: showHarvey2term, name: "Paul Harvey", term: "January 20, 1977 –<br>January 20, 1985", party: "American Independent", img: "https://i.imgur.com/1ZZSf0m.png"},
   { show: showSchlafly1term, name: "Phyllis Schlafly", term: "January 20, 1977 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/WXdAnQV.png"},
@@ -63527,7 +63517,7 @@ const presidents = [
   
   { show: showChafee1term, name: "John H. Chafee", term: "January 26, 1979 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/Jgkp4tf.png"},
   { show: showJacobRhodesterm, name: "John Jacob Rhodes", term: "June 11, 1979 –<br>January 20, 1981", party: "Republican", img: "https://i.imgur.com/gC19QGR.png"},
-  { show: showHufstedler1month, name: "Shirley M. Hufstedler", term: "December 24, 1980 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/rISusl2.pngImage"},
+  { show: showHufstedler1month, name: "Shirley M. Hufstedler", term: "December 24, 1980 –<br>January 20, 1981", party: "Democratic", img: "https://i.imgur.com/rISusl2.png"},
   
   { show: show40Reagan1term, name: "Ronald Reagan", term: "January 20, 1981 –<br>January 20, 1985", party: "Republican", img: "https://i.imgur.com/jYQPyT2.png"},
   { show: show40Reagan2term, name: "Ronald Reagan", term: "January 20, 1981 –<br>January 20, 1989", party: "Republican", img: "https://i.imgur.com/4WkZMXe.png"},
@@ -63537,12 +63527,12 @@ const presidents = [
   { show: show39ReaganConservative2term, name: "Ronald Reagan", term: "January 20, 1981 –<br>January 20, 1989", party: "Conservative", img: "https://i.imgur.com/jYQPyT2.png"},
   { show: show40ReaganConservative2term, name: "Ronald Reagan", term: "January 20, 1981 –<br>January 20, 1989", party: "Conservative", img: "https://i.imgur.com/jYQPyT2.png"},
   { show: showAnderson2term, name: "John B. Anderson", term: "January 20, 1981 –<br>January 20, 1989", party: "Republican", img: "https://i.imgur.com/VeWte3J.png"},
-  { show: showBumpers2term, name: "Dale Bumpers", term: "January 20, 1981 –<br>January 20, 1989", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Bumpers77_%28cropped%29.jpg/800px-Bumpers77_%28cropped%29.jpg"},
+  { show: showBumpers2term, name: "Dale Bumpers", term: "January 20, 1981 –<br>January 20, 1989", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/0/03/Bumpers77_%28cropped%29.jpg"},
   { show: show1980Laxalt2term, name: "Paul Laxalt", term: "January 20, 1981 –<br>January 20, 1989", party: "Republican", img: "https://i.imgur.com/SofUvWd.png" },
   { show: showCarey2term, name: "Hugh Carey", term: "January 20, 1981 –<br>January 20, 1989", party: "Democratic", img: "https://i.imgur.com/gqwaBDK.png"},
   { show: showKemp2term, name: "Jack Kemp", term: "January 20, 1981 –<br>January 20, 1989", party: "Republican", img: "https://i.imgur.com/KbqtZxo.png" },
   { show: showCrane2term, name: "Philip M. Crane", term: "January 20, 1981 –<br>January 20, 1989", party: "Republican", img: "https://i.imgur.com/p6B8T2b.png"},
-  { show: showHelms2term, name: "Jesse Helms", term: "January 20, 1981 –<br>January 20, 1989", party: "American Independent", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/JesseHelmsCropped2.png/640px-JesseHelmsCropped2.png"},
+  { show: showHelms2term, name: "Jesse Helms", term: "January 20, 1981 –<br>January 20, 1989", party: "American Independent", img: "https://upload.wikimedia.org/wikipedia/commons/c/cc/JesseHelmsCropped2.png"},
   { show: showTedKennedy2term, name: "Edward M. Kennedy", term: "January 20, 1981 –<br>January 20, 1989", party: "Democratic", img: "https://i.imgur.com/d2u82fX.png"},
   { show: show39TedKennedy2term, name: "Edward M. Kennedy", term: "January 20, 1981 –<br>January 20, 1989", party: "Democratic", img: "https://i.imgur.com/d2u82fX.png"},
   { show: showTedKennedyAssassinated, name: "Edward M. Kennedy", term: "January 20, 1981 –<br>March 30, 1981", party: "Democratic", img: "https://i.imgur.com/BPdoOiH.png" },
@@ -63550,7 +63540,7 @@ const presidents = [
   { show: showBorman2term, name: "Frank Borman", term: "January 20, 1981 –<br>January 20, 1989", party: "Republican", img: "https://i.imgur.com/HdDAQcl.png" },
   { show: showGlenn2term, name: "John Glenn", term: "January 20, 1981 –<br>January 20, 1989", party: "Democratic", img: "https://i.imgur.com/CDQq7tH.png" },
   { show: showWeicker1term, name: "Lowell P. Weicker Jr.", term: "January 20, 1981 –<br>January 20, 1985", party: "Republican", img: "https://i.imgur.com/8Fsxjnc.png"},
-  { show: show1980Jerry2term, name: "Jerry Brown", term: "January 20, 1981 –<br>January 20, 1989", party: "Democrat", img: "https://i.imgur.com/HPchUrR.png"},
+  { show: show1980Jerry2term, name: "Jerry Brown", term: "January 20, 1981 –<br>January 20, 1989", party: "Democratic", img: "https://i.imgur.com/HPchUrR.png"},
 
   { show: showCheney2term, name: "Dick Cheney", term: "January 20, 1985 –<br>January 20, 1993", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Secretary_of_Defense_Richard_B._Cheney%2C_official_portrait_%28cropped%29.jpg"},
   { show: showCheney1term, name: "Dick Cheney", term: "January 20, 1985 –<br>January 20, 1989", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Secretary_of_Defense_Richard_B._Cheney%2C_official_portrait_%28cropped%29.jpg"},
@@ -63559,9 +63549,9 @@ const presidents = [
   { show: showKirkpatrickRep1term, name: "Jeane Kirkpatrick", term: "January 20, 1985 –<br>January 20, 1989", party: "Republican", img: "https://i.imgur.com/QGFpRvC.png" },
   { show: showShultz1term, name: "George Shultz", term: "January 20, 1985 –<br>January 20, 1989", party: "Republican", img: "https://i.imgur.com/9kyJajS.png" },
   { show: showMcGovern84return1term, name: "George McGovern", term: "January 20, 1985 –<br>January 20, 1989", party: "Democratic", img: "https://i.imgur.com/U6xH6Cs.png" },
-  { show: showGaryHart1term, name: "Gary Hart", term: "January 20, 1985 –<br>January 20, 1989", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Gary_Hart%2C_1984_presidential_campaign_%28cropped%29.jpg/640px-Gary_Hart%2C_1984_presidential_campaign_%28cropped%29.jpg"},
+  { show: showGaryHart1term, name: "Gary Hart", term: "January 20, 1985 –<br>January 20, 1989", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/d/da/Gary_Hart%2C_1984_presidential_campaign_%28cropped%29.jpg"},
   { show: showGaryHart2term, name: "Gary Hart", term: "January 20, 1985 –<br>January 20, 1993", party: "Democratic", img: "https://i.imgur.com/S3C4Hgt.png"},
-  { show: showHeinz1term, name: "John Heinz", term: "January 20, 1985 –<br>January 20, 1989", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/JohnHeinz.png/640px-JohnHeinz.png"},
+  { show: showHeinz1term, name: "John Heinz", term: "January 20, 1985 –<br>January 20, 1989", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/7/75/JohnHeinz.png"},
   { show: showPatSchroeder1term, name: "Pat Schroeder", term: "January 20, 1985 –<br>January 20, 1989", party: "Democratic", img: "https://i.imgur.com/uhiHGiA.png"},
   { show: show1988Reagan2term, name: "Ronald Reagan", term: "January 20, 1985 –<br>January 20, 1993", party: "Republican", img: "https://i.imgur.com/ardOBQ7.png"},
 
@@ -63572,7 +63562,7 @@ const presidents = [
   { show: show41BillWeld2term, name: "William F. Weld", term: "January 20, 1989 –<br>January 20, 1997", party: "Republican", img: "https://i.imgur.com/C0RYWjo.png"},
   { show: show41CarrollCampbell1term, name: "Carroll A. Campbell Jr.", term: "January 20, 1989 –<br>January 20, 1993", party: "Conservative", img: "https://i.imgur.com/ljNxBJx.png"},
   { show: show41MarioCuomo2term, name: "Mario M. Cuomo", term: "January 20, 1989 –<br>January 20, 1997", party: "Democratic", img: "https://i.imgur.com/lBxRqyM.png"},
-  { show: show89Mondale1term, name: "Walter Mondale", term: "January 20, 1989 –<br>January 20, 1993", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Waltermondaleasdiplomat.jpg/640px-Waltermondaleasdiplomat.jpg"},
+  { show: show89Mondale1term, name: "Walter Mondale", term: "January 20, 1989 –<br>January 20, 1993", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Waltermondaleasdiplomat.jpg"},
   { show: showAlexanderHaig1term, name: "Alexander Haig", term: "January 20, 1989 –<br>January 20, 1993", party: "Republican", img: "https://i.imgur.com/Dc7sCe9.png"},
   { show: showAnneArmstrong1term, name: "Anne Armstrong", term: "January 20, 1989 –<br>January 20, 1993", party: "Republican", img: "https://i.imgur.com/XZHqdiS.png"},
   { show: showRobertson1term, name: "Pat Robertson", term: "January 20, 1989 –<br>January 20, 1993", party: "Republican", img: "https://i.imgur.com/pv8ZbXl.png" },
@@ -63584,12 +63574,12 @@ const presidents = [
   { show: showAlexander1term, name: "Lamar Alexander", term: "January 20, 1989 –<br>January 20, 1993", party: "Republican", img: "https://i.imgur.com/NmGFaH5.png" },
   { show: showSununu2term, name: "John H. Sununu", term: "January 20, 1989 –<br>January 20, 1997", party: "Republican", img: "https://i.imgur.com/q11dkdd.png" },
   { show: showBennett1term, name: "William J. Bennett", term: "January 20, 1989 –<br>January 20, 1993", party: "Republican", img: "https://i.imgur.com/ChFW6pK.png" },
-  { show: showAshcroft2term, name: "John Ashcroft", term: "January 20, 1989 –<br>January 20, 1997", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/John_Ashcroft_official_photo_as_Governor_%28cropped%29.jpg/640px-John_Ashcroft_official_photo_as_Governor_%28cropped%29.jpg"},
+  { show: showAshcroft2term, name: "John Ashcroft", term: "January 20, 1989 –<br>January 20, 1997", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/4/47/John_Ashcroft_official_photo_as_Governor_%28cropped%29.jpg"},
   { show: showDuPont2term, name: "Pierre S. du Pont IV", term: "January 20, 1989 –<br>January 20, 1997", party: "Republican", img: "https://i.imgur.com/GHRGBcC.png"},
   { show: showDukakis1term, name: "Michael Dukakis", term: "January 20, 1989 –<br>January 20, 1993", party: "Democratic", img: "https://i.imgur.com/zTNpa1s.png"},
-  { show: showDukakis2term, name: "Michael Dukakis", term: "January 20, 1989 –<br>January 20, 1997", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Dukakis_campaign_portrait_3x4.jpg/640px-Dukakis_campaign_portrait_3x4.jpg"},
+  { show: showDukakis2term, name: "Michael Dukakis", term: "January 20, 1989 –<br>January 20, 1997", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/7/73/Dukakis_campaign_portrait_3x4.jpg"},
   { show: showFallwell2term, name: "Jerry Falwell", term: "January 20, 1989 –<br>January 20, 1997", party: "Republican", img: "https://i.imgur.com/2Myjx0R.png"},
-  { show: showFerraro1term, name: "Geraldine Ferraro", term: "January 20, 1989 –<br>January 20, 1993", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Geraldine_Ferraro_1998_%281%29.jpg/640px-Geraldine_Ferraro_1998_%281%29.jpg"},
+  { show: showFerraro1term, name: "Geraldine Ferraro", term: "January 20, 1989 –<br>January 20, 1993", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/5/52/Geraldine_Ferraro_1998_%281%29.jpg"},
   { show: showFritzHollings1term, name: "Ernest 'Fritz' Hollings", term: "January 20, 1989 –<br>January 20, 1993", party: "Democratic", img: "https://i.imgur.com/o4fIr3T.png"},
   { show: showJesseJackson2term, name: "Jesse Jackson", term: "January 20, 1989 –<br>January 20, 1997", party: "Democratic", img: "https://i.imgur.com/Z4zRPco.png"},
   { show: showMLK2term, name: "Martin Luther King", term: "January 20, 1989 –<br>January 20, 1997", party: "Independent", img: "https://i.imgur.com/IyfAgNK.png"},
@@ -63613,8 +63603,8 @@ const presidents = [
   { show: show42ChuckRobb2term, name: "Chuck Robb", term: "January 20, 1993 –<br>January 20, 2001", party: "Democratic", img: "https://i.imgur.com/QO5rVZZ.png"},
   { show: show42ClintEastwood2term, name: "Clint Eastwood", term: "January 20, 1993 –<br>January 20, 2001", party: "Republican", img: "https://i.imgur.com/oxjzTXe.png"},
   { show: show42JerryBrown2term, name: "Jerry Brown", term: "January 20, 1993 –<br>January 20, 2001", party: "Democratic", img: "https://i.imgur.com/YTp6LL5.png"},
-  { show: show42RossPerot2term, name: "Ross Perot", term: "January 20, 1993 –<br>January 20, 2001", party: "Reform", img: "https://i.imgur.com/cpfAWHL.pngg"},
-  { show: showDeukmejian1term, name: "George Deukmejian", term: "January 20, 1993 –<br>January 20, 1997", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/George-Deukmejian-Official-Photo-Cropped.jpg/640px-George-Deukmejian-Official-Photo-Cropped.jpg"},
+  { show: show42RossPerot2term, name: "Ross Perot", term: "January 20, 1993 –<br>January 20, 2001", party: "Reform", img: "https://i.imgur.com/cpfAWHL.png"},
+  { show: showDeukmejian1term, name: "George Deukmejian", term: "January 20, 1993 –<br>January 20, 1997", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/c/c9/George-Deukmejian-Official-Photo-Cropped.jpg"},
   { show: showPatBuchanan2term, name: "Pat Buchanan", term: "January 20, 1993 –<br>January 20, 2001", party: "Republican", img: "https://i.imgur.com/zXoxYzj.png"},
   { show: showKeyes1term, name: "Alan Keyes", term: "January 20, 1993 –<br>January 20, 1997", party: "Republican", img: "https://i.imgur.com/6FmyUJ9.png" },
   { show: showHarkin2term, name: "Tom Harkin", term: "January 20, 1993 –<br>January 20, 2001", party: "Democratic", img: "https://i.imgur.com/jogoRAc.png" },
@@ -63649,10 +63639,10 @@ const presidents = [
   { show: show96Glenn2term, name: "John Glenn", term: "January 20, 1997 –<br>January 20, 2005", party: "Democratic", img: "https://i.imgur.com/4emb2Fi.png"},
   { show: showGritz1term, name: "Bo Gritz", term: "January 20, 1997 –<br> January 20, 2005", party: "American Independent", img: "https://i.imgur.com/8eWJSXh.png"},
   { show: showSpringer2term, name: "Jerry Springer", term: "January 20, 1997 –<br>January 20, 2005", party: "Democratic", img: "https://i.imgur.com/Uy81mFN.png"},
-  { show: showWellstone2term, name: "Paul Wellstone", term: "January 20, 1997 –<br>January 20, 2005", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Paul_Wellstone%2C_official_Senate_photo_portrait.jpg/640px-Paul_Wellstone%2C_official_Senate_photo_portrait.jpg"},
-  { show: showWilsonIncumbent, name: "Pete Wilson", term: "January 20, 1997 –<br>January 20, 2005", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Pete_Wilson_official_portrait%2C_1991_%28cropped%29.jpg/640px-Pete_Wilson_official_portrait%2C_1991_%28cropped%29.jpg"},
+  { show: showWellstone2term, name: "Paul Wellstone", term: "January 20, 1997 –<br>January 20, 2005", party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/2/25/Paul_Wellstone%2C_official_Senate_photo_portrait.jpg"},
+  { show: showWilsonIncumbent, name: "Pete Wilson", term: "January 20, 1997 –<br>January 20, 2005", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/2/22/Pete_Wilson_official_portrait%2C_1991_%28cropped%29.jpg"},
   { show: showWofford1term, name: "Harris Wofford", term: "January 20, 1997 –<br>January 20, 2001", party: "Democratic", img: "https://i.imgur.com/oVPTmOj.png" },
-  { show: showWilson2term, name: "Pete Wilson", term: "January 20, 1997 –<br>January 20, 2005", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Pete_Wilson_official_portrait%2C_1991_%28cropped%29.jpg/640px-Pete_Wilson_official_portrait%2C_1991_%28cropped%29.jpg"},
+  { show: showWilson2term, name: "Pete Wilson", term: "January 20, 1997 –<br>January 20, 2005", party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/2/22/Pete_Wilson_official_portrait%2C_1991_%28cropped%29.jpg"},
   { show: showAnnRichards1term, name: "Ann Richards", term: "January 20, 1997 –<br>January 20, 2001", party: "Democratic", img: "https://i.imgur.com/zAK45mz.png" },
   { show: showWhitman2term, name: "Christine Todd Whitman", term: "January 20, 1997 –<br>January 20, 2005", party: "Republican", img: "https://i.imgur.com/vozzskZ.png" },
   { show: showDemColinPowell1term, name: "Colin Powell", term: "January 20, 1997 –<br>January 20, 2001", party: "Democratic", img: "https://i.imgur.com/2d61lxb.png" },
@@ -64378,7 +64368,7 @@ else if ( JohnsonEV > 269 && (e.player_answers.includes(12620) ||e.player_answer
     e.pages.push(`
     <div class="ending-slide tv-fade" style="font-family: 'Georgia', serif; color: #000; padding: 10px;">
         <div style="text-align: center;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/POLITICOLOGO.svg/1280px-POLITICOLOGO.svg.png" alt="Politico" style="height: 48px; margin-bottom: 1rem;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/POLITICOLOGO.svg" alt="Politico" style="height: 48px; margin-bottom: 1rem;">
         </div>
         <h4 style="color: #b30000;">2016</h4>
         <h2 style="font-size: 26px; font-weight: bold;">Weiner launches presidential campaign</h2>
@@ -64400,7 +64390,7 @@ else if (JohnsonEV > 269 && e.player_answers.includes(11185) ) { // James Earl R
     e.pages.push(`
     <div class="ending-slide tv-fade">
         <div style="text-align: center; margin-bottom: 1rem;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/The_Logo_of_The_Washington_Post_Newspaper.svg/800px-The_Logo_of_The_Washington_Post_Newspaper.svg.png" alt="Washington Post Logo" style="height: 86px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/The_Logo_of_The_Washington_Post_Newspaper.svg" alt="Washington Post Logo" style="height: 86px;">
         </div>
         <h3 class="locked-title" style="font-size: 24px !important;">Suspected MLK Shooter, Dies Before Trial</h3>
         <p><strong>PRETORIA, SOUTH AFRICA —</strong> James Earl Ray, the alleged assassin of Dr. Martin Luther King Jr., died yesterday in Pretoria at the age of 74, decades after fleeing American authorities.</p>
@@ -64421,7 +64411,7 @@ else if (e.player_answers.includes(13520)) { // Church Assasination
     e.pages.push(`
     <div class="ending-slide rollingstone-style" style="font-family:'Georgia', serif; background:#fff; color:#000; padding:16px; max-width:700px; margin:0 auto; line-height:1.6;">
     <div style="text-align:center; margin-bottom: 1rem;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Rolling_Stone_logo.svg/2560px-Rolling_Stone_logo.svg.png" alt="Rolling Stone Logo" style="max-height:100px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Rolling_Stone_logo.svg" alt="Rolling Stone Logo" style="max-height:100px;">
     </div>
     <div style="font-size: 12px; font-weight: bold; color: #c00; text-transform: uppercase;">Music</div>
     <h1 style="font-size: 28px; font-family: 'Georgia', serif; font-weight: bold; text-align: center; text-decoration: underline; margin-bottom: 0.5rem;">
@@ -64446,7 +64436,7 @@ else if (Nominee === "Johnson" && JohnsonEV > 470) { // LBJ 1995
     e.pages.push(`
     <div class="ending-slide tv-fade" style="background-color: #14181c; color: #d8d8d8; font-family: 'Helvetica Neue', sans-serif; padding: 20px;">
         <div style="display: flex; align-items: center; margin-bottom: 20px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Letterboxd-Logo-H-Pos-RGB.svg/2560px-Letterboxd-Logo-H-Pos-RGB.svg.png" style="height: 26px; margin-right: auto;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Letterboxd-Logo-H-Pos-RGB.svg" style="height: 26px; margin-right: auto;">
             <div style="font-size: 14px; color: #aaa; display: flex; gap: 20px;">
                 <span>Films</span>
                 <span>Lists</span>
@@ -64544,7 +64534,7 @@ else if (JohnsonEV > 400 && (NVP == "John Lindsay" || NVP == "Hiram Fong" )) { /
     e.pages.push(`
     <div class="ending-slide tv-fade" style="font-family: 'Verdana', sans-serif; font-size: 14px; padding: 10px; color: #000; max-width: 700px; margin: 0 auto;">
         <div style="background-color: #041E42; padding: 1rem; color: white; display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/NBC_Peacock_1986.svg/800px-NBC_Peacock_1986.svg.png" alt="NBC News" style="height: 28px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/NBC_Peacock_1986.svg" alt="NBC News" style="height: 28px;">
             <span style="font-weight: bold; font-size: 18px;">NBC NEWS</span>
         </div>
         <div style="margin-bottom: 1.2rem;">
@@ -64591,7 +64581,7 @@ else if (JohnsonEV > 370 && Nominee == "Johnson" && VP !== "Humphrey") { //Lyndo
     e.pages.push(`
     <div class="ending-slide tv-fade nyt-article">
         <div style="text-align: center; margin-bottom: 1rem;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/NewYorkTimes.svg/2560px-NewYorkTimes.svg.png" alt="The New York Times" style="display: block; margin: 0 auto; max-width: 450px; height: auto;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/NewYorkTimes.svg" alt="The New York Times" style="display: block; margin: 0 auto; max-width: 450px; height: auto;">
         </div>
         <h3 class="locked-title">The Triumph of Power</h3>
         <p><strong>Robert Caro’s Long-Awaited Fifth Volume Arrives</strong></p>
@@ -64607,7 +64597,7 @@ else if (JohnsonEV > 370 && Nominee == "Johnson" && VP !== "Humphrey") { //Lyndo
 else if (JohnsonEV > 269 && (e.player_answers.includes(14486) || e.player_answers.includes(14487))) { // Goldberg Dead //President Rockefeller
     e.pages.push(`
     <div class="ending-slide tv-fade nyt-article">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/NewYorkTimes.svg/2560px-NewYorkTimes.svg.png" alt="The New York Times" style="display: block; margin: 0 auto; max-width: 450px; height: auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/NewYorkTimes.svg" alt="The New York Times" style="display: block; margin: 0 auto; max-width: 450px; height: auto;">
         <p><strong>Megan Marshack, Aide to President Rockefeller, Dies at 86</strong></p>
         <p><em>New York —</em> Megan Marshack, the longtime aide and confidante to former President Nelson A. Rockefeller, who found herself at the center of decades-long speculation about the circumstances of his sudden passing in 1979, has herself passed away at the age of 86. Her death was confirmed by her family, who noted that she had written her own obituary, which included an admission that the persistent rumors about Rockefeller’s final moments were indeed true.</p>
         <p>Marshack, a discreet yet influential figure in the Rockefeller administration, had remained silent for over four decades regarding the night of January 26, 1979, when the former president suffered a fatal heart attack. Initial reports claimed that Rockefeller had died alone in the Oval Office, working late into the evening, but the rapid emergence of conflicting details led to widespread speculation. Over the years, it became an open secret that he was, in fact, in the intimate company of a close aide.</p>
@@ -64621,7 +64611,7 @@ else if (Nominee === "Johnson" && JohnsonEV > 269 && DNC <= 0 && campaignTrail_t
     e.pages.push(`
         <div class="ending-slide tv-fade" style="font-family: 'Georgia', serif; color: #000; padding: 10px; max-width: 700px; margin: 0 auto;">
             <div style="background-color: #041E42; padding: 1rem; color: white; display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/NBC_Peacock_1986.svg/800px-NBC_Peacock_1986.svg.png" alt="NBC News" style="height: 28px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/NBC_Peacock_1986.svg" alt="NBC News" style="height: 28px;">
                 <span style="font-weight: bold; font-size: 18px;">NBC NEWS</span>
             </div>
             <img src="https://media-cldnry.s-nbcnews.com/image/upload/v1683573975/firecracker/cms-images/decision2024-color.svg" alt="Decision 2024" style="max-width: 100%; height: auto; margin-bottom: 1rem;">
@@ -64782,7 +64772,7 @@ else if ((Nominee == "Connally" || USSR == 1) && NixonEV < 270 && JohnsonEV < 27
     e.pages.push(`
     <div class="ending-slide tv-fade" style="font-family: 'Georgia', serif; padding: 12px; color: #000;">
     <div style="text-align: center; margin-bottom: 1rem;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/The_Logo_of_The_Washington_Post_Newspaper.svg/800px-The_Logo_of_The_Washington_Post_Newspaper.svg.png" alt="Washington Post Logo" style="height: 86px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/The_Logo_of_The_Washington_Post_Newspaper.svg" alt="Washington Post Logo" style="height: 86px;">
     </div>
     <h3 class="locked-title" style="font-size: 24px !important; text-align: center; font-weight: bold; text-decoration: underline;">Neck and Neck and Neck</h3>
     <p><strong>By Staff Writer | The Washington Post</strong><br>Tuesday, October 3, 2000 · 7:08 PM EDT</p>
@@ -64810,7 +64800,7 @@ else if (WallaceEV > 150 && JohnsonEV < 270 && NixonEV < 270) { // Wallace-South
                 <span>Politics</span>
                 <span>Business</span>
             </div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Axios_logo_%282020%29.svg/1200px-Axios_logo_%282020%29.svg.png" alt="Axios Logo" style="height: 24px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Axios_logo_%282020%29.svg" alt="Axios Logo" style="height: 24px;">
         </div>
         <p style="margin-top: 1.5rem; font-size: 13px; color: #888;">Feb 11, 2023 – World</p>
         <h1 style="font-size: 36px; font-weight: 700; margin-bottom: 0.5rem;">Crack in US–South Africa Alliance As Airstrikes Intensify</h1>
@@ -64856,7 +64846,7 @@ else if (WallaceEV > 100 && JohnsonEV < 270 && NixonEV < 270) { // President Lax
 e.pages.push(`
 <div class="ending-slide tv-fade nyt-article">
     <div style="text-align: center; margin-bottom: 1rem;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/The_Logo_of_The_Washington_Post_Newspaper.svg/800px-The_Logo_of_The_Washington_Post_Newspaper.svg.png" alt="Washington Post Logo" style="height: 86px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/The_Logo_of_The_Washington_Post_Newspaper.svg" alt="Washington Post Logo" style="height: 86px;">
     </div>
     <h3 class="locked-title">Duke Wins</h3>
     <p><strong>BATON ROUGE, LA</strong> — In a result that has shocked the nation, David Duke (R) has been elected governor of Louisiana, defeating Lt. Governor Kathleen Blanco (D) with 51.4% of the vote. The outcome has sparked protests across the state, with thousands gathering in New Orleans and Baton Rouge to denounce Duke’s past ties to the Ku Klux Klan.</p>
@@ -64894,7 +64884,7 @@ else if (Nominee == "Kennedy" && VP !== "Long" || DeadRFK == 0 && DeadRFK == 0 &
     e.pages.push(`
         <div class="ending-slide tv-fade" style="font-family: 'Georgia', serif; color: #000; padding: 10px; max-width: 700px; margin: 0 auto;">
             <div style="background-color: #041E42; padding: 1rem; color: white; display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/NBC_Peacock_1986.svg/800px-NBC_Peacock_1986.svg.png" alt="NBC News" style="height: 28px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/NBC_Peacock_1986.svg" alt="NBC News" style="height: 28px;">
                 <span style="font-weight: bold; font-size: 18px;">NBC NEWS</span>
             </div>
             <div style="margin-bottom: 1rem;">
@@ -64946,7 +64936,7 @@ else if (Nominee == "Connally" && JohnsonEV > 269) { // Connally Win
     e.pages.push(`
     <div class="ending-slide tv-fade">
         <div style="text-align: center; margin-bottom: 1rem;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/The_Logo_of_The_Washington_Post_Newspaper.svg/800px-The_Logo_of_The_Washington_Post_Newspaper.svg.png" alt="Washington Post Logo" style="height: 86px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/The_Logo_of_The_Washington_Post_Newspaper.svg" alt="Washington Post Logo" style="height: 86px;">
         </div>
         <h3 class="locked-title" style= "padding-bottom: 3%;">A Nation Mourns</h3>
         <p><strong>AL-QUDS —</strong> As news of former U.S. President John B. Connally’s passing spread, an outpouring of grief has swept through Palestine, where he remains a towering figure for his role in securing the Arab-Israeli Peace Process. Flags in major palestinian cities of East Jerusalem and Ramallah are flying at half-mast, while crowds gathered at John B. Connally International Airport to lay wreaths in his honor.</p>
@@ -65255,7 +65245,7 @@ else if (JohnsonEV > 269 && Nominee == "Humphrey" && e.player_answers.includes(1
     e.pages.push(`
     <div class="ending-slide tv-fade" style="font-family: 'Georgia', serif; color: #000; padding: 10px; max-width: 680px; margin: auto;">
         <div style="text-align: center;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/POLITICOLOGO.svg/1280px-POLITICOLOGO.svg.png" alt="Politico" style="height: 48px; margin-bottom: 1rem;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/POLITICOLOGO.svg" alt="Politico" style="height: 48px; margin-bottom: 1rem;">
         </div>
         <h4 style="color: #b30000;">2024</h4>
         <h2 style="font-size: 26px; font-weight: bold;">Harris team weighs resignation strategy</h2>
@@ -65383,7 +65373,7 @@ else if (Nominee == "Ribicoff" && NixonEV > 269 || Nominee == "Johnson" && Johns
     e.pages.push(`
     <div class="ending-slide tv-fade" style="font-family: 'Georgia', serif; color: #000; padding: 10px;">
         <div style="text-align: center;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/POLITICOLOGO.svg/1280px-POLITICOLOGO.svg.png" alt="Politico" style="height: 48px; margin-bottom: 1rem;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/POLITICOLOGO.svg" alt="Politico" style="height: 48px; margin-bottom: 1rem;">
         </div>
         <h4 style="color: #b30000;">2016</h4>
         <h2 style="font-size: 26px; font-weight: bold;">Nixonomy</h2>
@@ -65463,7 +65453,7 @@ else if (Nominee == "McGovern" && VP == "Bayh" && JohnsonEV > 269 || Nominee == 
     e.pages.push(`
         <div class="ending-slide tv-fade">
         <div style="text-align: center; padding: 1rem 0;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Atlantic_magazine_logo.svg/1200px-The_Atlantic_magazine_logo.svg.png" alt="The Atlantic" style="height: 90px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/The_Atlantic_magazine_logo.svg" alt="The Atlantic" style="height: 90px;">
         </div>
         <div style="color: #a6192e; font-weight: bold; font-size: 12px; margin-bottom: 0.5rem; text-transform: uppercase;">Ideas</div>
         <h3 class="locked-title" style= "font-size: 1.5em !important;"> Bernie Sanders Is Not George McGovern</h3>
@@ -65556,7 +65546,7 @@ else if (Nominee == "McGovern" && NixonEV > 269) { // McGovern Loss
     e.pages.push(`
 <div class="ending-slide tv-fade">
   <div style="background-color: #cc0000; padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Jacobin_Logo.svg/1200px-Jacobin_Logo.svg.png" alt="Jacobin Logo" style="height: 32px; filter: brightness(0) invert(1);">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Jacobin_Logo.svg" alt="Jacobin Logo" style="height: 32px; filter: brightness(0) invert(1);">
     <div style="color: white; font-size: 12px; font-weight: bold;">01.21.2020</div>
   </div>
   <div style="font-weight: bold; font-size: 14px; margin-top: 0.75rem; border-bottom: 1px solid #000; padding-bottom: 0.25rem;">History</div>
@@ -65711,7 +65701,7 @@ else if (JohnsonEV > 269 && e.player_answers.includes(11183) || e.player_answers
     e.pages.push(`
     <div class="ending-slide tv-fade" style="font-family: 'Georgia', serif; padding: 10px; color: #000; max-width: 720px; margin: 0 auto;">
         <div style="text-align: center; margin-bottom: 1.5rem;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Time_Magazine_logo.svg/298px-Time_Magazine_logo.svg.png" alt="TIME Logo" style="height: 70px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Time_Magazine_logo.svg" alt="TIME Logo" style="height: 70px;">
         </div>
         <div style="color: #c00; text-transform: uppercase; font-size: 12px; font-weight: bold; letter-spacing: 0.05em; text-align: center;">History • Music</div>
         <h2 style="font-size: 26px; font-weight: bold; text-align: center; margin-top: 0.5rem; margin-bottom: 0.5rem;">
@@ -65750,7 +65740,7 @@ else if (NixonEV > 269 && (e.player_answers.includes(11625) || e.player_answers.
     e.pages.push(`
     <div class="ending-slide tv-fade" style="font-family: 'Verdana', sans-serif; font-size: 14px; padding: 10px; color: #000; max-width: 700px; margin: 0 auto;">
         <div style="background-color: #041E42; padding: 1rem; color: white; display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/NBC_Peacock_1986.svg/800px-NBC_Peacock_1986.svg.png" alt="NBC News" style="height: 28px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/NBC_Peacock_1986.svg" alt="NBC News" style="height: 28px;">
             <span style="font-weight: bold; font-size: 18px;">NBC NEWS</span>
         </div>
         <div style="margin-bottom: 1.2rem;">
@@ -65817,7 +65807,7 @@ else if (Nominee == "Johnson" && JohnsonEV > 269 && Disunity > 5) { // Secret Ho
     e.pages.push(`
     <div class="ending-slide tv-fade" style="font-family: 'Georgia', serif; padding: 10px; color: #000;">
         <div style="border-bottom: 1px solid #ccc; margin-bottom: 1rem; text-align: center;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Los_Angeles_Times_logo.svg/800px-Los_Angeles_Times_logo.svg.png" alt="Los Angeles Times" style="height: 50px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Los_Angeles_Times_logo.svg" alt="Los Angeles Times" style="height: 50px;">
             <div style="font-size: 13px; color: #666; margin-top: 0.25rem;">ENTERTAINMENT &amp; ARTS</div>
         </div>
         <h3 style="font-size: 22px !important; font-weight: bold; margin-bottom: 0.5rem;">Theater Review: ‘Secret Honor’</h3>
@@ -66009,7 +65999,7 @@ else if (e.player_answers.includes(1736)) { // Delta Dagger // Leiberman
     e.pages.push(`
     <div class="ending-slide tv-fade" style="font-family: Arial, sans-serif; background-color: #ffffff; padding: 20px;">
         <div style="display: flex; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 20px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Cnet-logo-red-2020.svg/800px-Cnet-logo-red-2020.svg.png" alt="CNET Logo" style="height: 32px; margin-right: 12px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Cnet-logo-red-2020.svg" alt="CNET Logo" style="height: 32px; margin-right: 12px;">
             <div style="color: #888; font-size: 14px;">Tech &gt; Games</div>
         </div>
         <h1 style="font-size: 26px; font-weight: bold; margin-bottom: 5px;">Game Puts Players in Bush’s Cockpit</h1>
