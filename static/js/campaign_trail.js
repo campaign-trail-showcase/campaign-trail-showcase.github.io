@@ -777,145 +777,144 @@ const shining_menu = (polling) => {
   }
 
   const adSpendTable = `
-            <table id="ad_spend_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
-                <thead>
-                    <tr>
-                        <th>State</th>
-                        <th>Amount per Turn</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Table rows will be added dynamically -->
-                </tbody>
-            </table>
-        `;
+    <table id="ad_spend_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
+      <thead>
+        <tr>
+          <th>State</th>
+          <th>Amount per Turn</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be added dynamically -->
+      </tbody>
+    </table>
+  `;
 
   const staffTable = `
-            <table id="staff_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
-                <thead>
-                    <tr>
-                        <th>Staff</th>
-                        <th style="width: 250px;">Description</th>
-                        <th>Cost (one time)</th>
-                        <th>Hired?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Table rows will be added dynamically -->
-                </tbody>
-            </table>
-        `;
+    <table id="staff_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
+      <thead>
+        <tr>
+          <th>Staff</th>
+          <th style="width: 250px;">Description</th>
+          <th>Cost (one time)</th>
+          <th>Hired?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be added dynamically -->
+      </tbody>
+    </table>
+  `;
 
   const lobbyTable = `
-            <table id="pac_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
-                <thead>
-                    <tr>
-                        <th style="width: 200px;">Organisation</th>
-                        <th style="width: 150px;">Description</th>
-                        <th>Relationship</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Table rows will be added dynamically -->
-                </tbody>
-            </table>
-        `;
+    <table id="pac_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
+      <thead>
+        <tr>
+          <th style="width: 200px;">Organisation</th>
+          <th style="width: 150px;">Description</th>
+          <th>Relationship</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be added dynamically -->
+      </tbody>
+    </table>
+  `;
 
   const z = `
-
-        <div class="inner_window_front" id="shining_menu_header" style="height: 50px; background-color:#2d2d2d">
-            <h1 style='position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; text-align: center; font-size: 3em; line-height: normal; font-style: italic; color: white; margin: 0;font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;'>
-                State of the Campaign
-            </h1>
+    <div class="inner_window_front" id="shining_menu_header" style="height: 50px; background-color:#2d2d2d">
+      <h1 style='position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; text-align: center; font-size: 3em; line-height: normal; font-style: italic; color: white; margin: 0;font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;'>
+        State of the Campaign
+      </h1>
+    </div>
+    <div class="shining_tab" style='position: absolute;bottom: 65px;left:50%;transform:translateX(-50%)'>
+      <button class="tablinks" onclick="openTab(event, 'funds')">Funds</button>
+      <button class="tablinks" onclick="openTab(event, 'campaign_time')">Campaign Time</button>
+      <button class="tablinks" onclick="openTab(event, 'ad_campaign')">Ad Campaign</button>
+      <button class="tablinks" onclick="openTab(event, 'staff')">Staff</button>
+      <button class="tablinks" onclick="openTab(event, 'lobbies')">Lobbies</button>
+    </div>
+    <div class="inner_window_front" id="shining_menu" style="height: 260px; overflow-y: auto; background-color:#2d2d2d; color:white;">
+      <div id="funds" class="tabcontent">
+        <h2>Funds</h2>
+        <p><b>Current balance:</b> <span id='shining_balance'>$${Math.floor(uninflatedBalance).toLocaleString()}</span></p>
+        <p><b>Change in balance from previous turn:</b> <span style='${change > 0 ? "color:green" : change == 0 ? "color:yellow" : "color:red"};'>${change < 0 ? "-$" : "$"}${Math.abs(Math.floor(change)).toLocaleString()}</span></p>
+        <p id='projected_change'><b>Estimated change for next turn:</b> <span style='${projected_change > 0 ? "color:green" : projected_change == 0 ? "color:yellow" : "color:red"};'>${projected_change < 0 ? "-$" : "$"}${Math.abs(Math.floor(projected_change)).toLocaleString()}</span></p>
+        ${DEBT_STRING}
+      </div>
+      <div id="campaign_time" class="tabcontent">
+        <h2>Campaign Time</h2>
+        <div class="time_slider_group">
+          <div class="time_slider">
+            <label for="campaign_time_physical">Physically Campaigning:</label>
+            <input type="range" id="campaign_time_physical" min="0" max="1" step="0.01" value="0.33">
+          </div>
+          <div class="time_slider">
+            <label for="campaign_time_fundraising">Fundraising:</label>
+            <input type="range" id="campaign_time_fundraising" min="0" max="1" step="0.01" value="0.33">
+          </div>
+          <div class="time_slider">
+            <label for="campaign_time_media">Media Engagement:</label>
+            <input type="range" id="campaign_time_media" min="0" max="1" step="0.01" value="0.34">
+          </div>
         </div>
-        <div class="shining_tab" style='position: absolute;bottom: 65px;left:50%;transform:translateX(-50%)'>
-            <button class="tablinks" onclick="openTab(event, 'funds')">Funds</button>
-            <button class="tablinks" onclick="openTab(event, 'campaign_time')">Campaign Time</button>
-            <button class="tablinks" onclick="openTab(event, 'ad_campaign')">Ad Campaign</button>
-            <button class="tablinks" onclick="openTab(event, 'staff')">Staff</button>
-            <button class="tablinks" onclick="openTab(event, 'lobbies')">Lobbies</button>
+      </div>
+      <div id="ad_campaign" class="tabcontent">
+        <h2>Ad Campaign</h2>
+        <p>Select a state to add ad spending for it:</p>
+        <select id='shining_ad_state_sel'>${a_states}</select>
+        <p>Enter ad spending amount:</p>
+        <input id="ad_spending_amount" placeholder="Amount">
+        <input type="range" id="ad_spending_slider" min="0" step="1">
+        <button id="add_ad_spending">Add Spending</button>
+        <h2>Current Ad Spends</h2>
+        <em>Note: will <b>all</b> automatically be cancelled in the event of your campaign running a debt.</em>
+        <p>
+        <div style='text-align: center;'>
+        ${adSpendTable}
         </div>
-        <div class="inner_window_front" id="shining_menu" style="height: 260px; overflow-y: auto; background-color:#2d2d2d; color:white;">
-            <div id="funds" class="tabcontent">
-                <h2>Funds</h2>
-                <p><b>Current balance:</b> <span id='shining_balance'>$${Math.floor(uninflatedBalance).toLocaleString()}</span></p>
-                <p><b>Change in balance from previous turn:</b> <span style='${change > 0 ? "color:green" : change == 0 ? "color:yellow" : "color:red"};'>${change < 0 ? "-$" : "$"}${Math.abs(Math.floor(change)).toLocaleString()}</span></p>
-                <p id='projected_change'><b>Estimated change for next turn:</b> <span style='${projected_change > 0 ? "color:green" : projected_change == 0 ? "color:yellow" : "color:red"};'>${projected_change < 0 ? "-$" : "$"}${Math.abs(Math.floor(projected_change)).toLocaleString()}</span></p>
-                ${DEBT_STRING}
-            </div>
-            <div id="campaign_time" class="tabcontent">
-                <h2>Campaign Time</h2>
-                <div class="time_slider_group">
-                    <div class="time_slider">
-                        <label for="campaign_time_physical">Physically Campaigning:</label>
-                        <input type="range" id="campaign_time_physical" min="0" max="1" step="0.01" value="0.33">
-                    </div>
-                    <div class="time_slider">
-                        <label for="campaign_time_fundraising">Fundraising:</label>
-                        <input type="range" id="campaign_time_fundraising" min="0" max="1" step="0.01" value="0.33">
-                    </div>
-                    <div class="time_slider">
-                        <label for="campaign_time_media">Media Engagement:</label>
-                        <input type="range" id="campaign_time_media" min="0" max="1" step="0.01" value="0.34">
-                    </div>
-                </div>
-            </div>
-            <div id="ad_campaign" class="tabcontent">
-                <h2>Ad Campaign</h2>
-                <p>Select a state to add ad spending for it:</p>
-                <select id='shining_ad_state_sel'>${a_states}</select>
-                <p>Enter ad spending amount:</p>
-                <input id="ad_spending_amount" placeholder="Amount">
-                <input type="range" id="ad_spending_slider" min="0" step="1">
-                <button id="add_ad_spending">Add Spending</button>
-                <h2>Current Ad Spends</h2>
-                <em>Note: will <b>all</b> automatically be cancelled in the event of your campaign running a debt.</em>
-                <p>
-                <div style='text-align: center;'>
-                ${adSpendTable}
-                </div>
-                </p>
-            </div>
-            <div id="staff" class="tabcontent">
-                <h2>Staff</h2>
-                <div style='text-align: center;'>
-                ${staffTable}
-                </div>
-            </div>
-            <div id="lobbies" class="tabcontent">
-                <h2>Lobbies</h2>
-                <em>Align your answers with an organisation's values in order to have them contribute to fundraising.</em>
-                <p>
-                <div style='text-align: center;'>
-                ${lobbyTable}
-                </div>
-                </p>
-            </div>
+        </p>
+      </div>
+      <div id="staff" class="tabcontent">
+        <h2>Staff</h2>
+        <div style='text-align: center;'>
+        ${staffTable}
         </div>
-            <button id="shining_back" style="position: relative; bottom: -13px; left: -380px; width: 150px; height: 80px; font-size: 40px; padding-top: 5px; padding-left: 8px;">
-                <b>BACK</b>
-            </button>
+      </div>
+      <div id="lobbies" class="tabcontent">
+        <h2>Lobbies</h2>
+        <em>Align your answers with an organisation's values in order to have them contribute to fundraising.</em>
+        <p>
+        <div style='text-align: center;'>
+        ${lobbyTable}
+        </div>
+        </p>
+      </div>
+    </div>
+      <button id="shining_back" style="position: relative; bottom: -13px; left: -380px; width: 150px; height: 80px; font-size: 40px; padding-top: 5px; padding-left: 8px;">
+        <b>BACK</b>
+      </button>
 
-            <style>
-                .time_slider_group {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
+      <style>
+        .time_slider_group {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
 
-                .time_slider {
-                    display: flex;
-                    align-items: center;
-                    margin-bottom: 8px;
-                }
+        .time_slider {
+          display: flex;
+          align-items: center;
+          margin-bottom: 8px;
+        }
 
-                .time_slider label {
-                    margin-right: 10px;
-                    width: 180px; /* Adjust this width as needed */
-                }
-            </style>
-            `;
+        .time_slider label {
+          margin-right: 10px;
+          width: 180px; /* Adjust this width as needed */
+        }
+      </style>
+  `;
   for (i in game_winArr) {
     if (
       game_winArr[i].getAttribute("id") != "main_content_area"
@@ -998,16 +997,19 @@ const shining_menu = (polling) => {
     for (const i in our_info.staff) {
       const targ = our_info.staff[i];
       const hire_str = targ.hired == true
-        ? `<em>Hired.</em>`
-        : `<button class="hire_button" data-pk="${targ.pk}" style='color:green'>Hire</button>`;
+        ? '<em>Hired.</em>'
+        : '<button class="hire_button" data-pk="${targ.pk}" style="color:green">Hire</button>';
       const newRow = `
-                <tr>
-                    <td><h4>${targ.name}</h4><img style='width:100px' src='${targ.image}'></img></td>
-                    <td>${targ.description}</td>
-                    <td>$${Math.floor(targ.cost / inflation_factor).toLocaleString()}</td>
-                    <td>${hire_str}</td>
-                </tr>
-                `;
+        <tr>
+          <td>
+            <h4>${targ.name}</h4>
+            <img style='width:100px' src='${targ.image}'></img>
+          </td>
+          <td>${targ.description}</td>
+          <td>$${Math.floor(targ.cost / inflation_factor).toLocaleString()}</td>
+          <td>${hire_str}</td>
+        </tr>
+      `;
       tableBody.append(newRow);
       $(`button.hire_button[data-pk="${targ.pk}"]`).click(() => {
         if (e.shining_data.balance < 0) {
@@ -1037,12 +1039,12 @@ const shining_menu = (polling) => {
     for (const i in our_info.lobby) {
       const targ = our_info.lobby[i];
       const newRow = `
-                <tr>
-                    <td><h4>${targ.name}</h4><img style='width:100px' src='${targ.image}'></img></td>
-                    <td>${targ.description}</td>
-                    <td>Opinion: ${Math.floor(targ.opinion)}<br>Max Bonus: $${Math.floor(targ.fund_base / inflation_factor).toLocaleString()}</td>
-                </tr>
-                `;
+        <tr>
+          <td><h4>${targ.name}</h4><img style='width:100px' src='${targ.image}'></img></td>
+          <td>${targ.description}</td>
+          <td>Opinion: ${Math.floor(targ.opinion)}<br>Max Bonus: $${Math.floor(targ.fund_base / inflation_factor).toLocaleString()}</td>
+        </tr>
+      `;
       tableBody.append(newRow);
     }
   };
@@ -1054,12 +1056,12 @@ const shining_menu = (polling) => {
     for (const i in e.shining_data.ad_spending) {
       const targ = e.shining_data.ad_spending[i];
       const newRow = `
-                <tr>
-                    <td>${e.states_json.find((f) => f.pk === targ.state).fields.name}</td>
-                    <td>$${Math.floor(targ.amount / inflation_factor).toLocaleString()}</td>
-                    <td><button class="remove_ad_spend" data-state-pk="${targ.state}" style='color:red'>Remove</button></td>
-                </tr>
-                `;
+        <tr>
+          <td>${e.states_json.find((f) => f.pk === targ.state).fields.name}</td>
+          <td>$${Math.floor(targ.amount / inflation_factor).toLocaleString()}</td>
+          <td><button class="remove_ad_spend" data-state-pk="${targ.state}" style='color:red'>Remove</button></td>
+        </tr>
+      `;
       tableBody.append(newRow);
       $(`button.remove_ad_spend[data-state-pk="${targ.state}"]`).click(() => {
         e.shining_data.balance += targ.amount;
@@ -1560,20 +1562,20 @@ function showOutcomePopup(election, results) {
   const electionUsed = PROPS.ELECTIONS.get(String(election));
   console.log(results);
   $("#game_window").append(`
-        <div class="overlay" id="election_night_overlay"></div>
-        <div class="overlay_window" id="election_night_window">
-            <div class="overlay_window_content" id="election_night_content">
-                <h3>Advisor Feedback</h3>
-                <img src="${electionUsed.advisor_url}" width="208" height="128"/>
-                <p>${results[0].candidate === e.candidate_id ? e.WinPopup : e.LosePopup}</p>
-            </div>
-            <div class="overlay_buttons" id="winner_buttons">
-                <button id="ok_button">OK</button>
-                <br>
-                <button id="overlay_result_button">Go to Final Results</button>
-            </div>
-        </div>
-    `);
+    <div class="overlay" id="election_night_overlay"></div>
+    <div class="overlay_window" id="election_night_window">
+      <div class="overlay_window_content" id="election_night_content">
+        <h3>Advisor Feedback</h3>
+        <img src="${electionUsed.advisor_url}" width="208" height="128"/>
+        <p>${results[0].candidate === e.candidate_id ? e.WinPopup : e.LosePopup}</p>
+      </div>
+      <div class="overlay_buttons" id="winner_buttons">
+        <button id="ok_button">OK</button>
+        <br>
+        <button id="overlay_result_button">Go to Final Results</button>
+      </div>
+    </div>
+  `);
 }
 
 function generateCandidateList(cands, results, stateResults, total, statesHaveEVs) {
@@ -1625,7 +1627,7 @@ function electionNight(type = 'general', timestep = 10, states = []) {
         <span style="color:${f.color}; background-color:${f.color}">--</span>
         ${f.last_name}: ${someStatesHaveEVs ? "0 / " : ""}0.0%
       </li>
-    `
+    `;
   }).join("");
 
   const s = PROPS.ELECTIONS.get(String(e.election_id));
@@ -1796,16 +1798,18 @@ function nextQuestion() {
   let a = false;
   if (e.primary) {
     /* Primary code format:
-    e.primary_code = [
+
+      e.primary_code = [
         {
-            "breakQ": 0,
-            "states": [1100, 1101, 1102]
+          "breakQ": 0,
+          "states": [1100, 1101, 1102]
         },
         {
-            "breakQ": 2,
-            "states": [1103, 1104, 1105]
+          "breakQ": 2,
+          "states": [1103, 1104, 1105]
         }
-    ]
+      ]
+
     */
     window.primary_breaks = e.primary_code.map((f) => f.breakQ);
     a = primaryFunction(
@@ -1898,19 +1902,20 @@ function answerEffects(t) {
     )?.fields;
     if (feedback) {
       const n = `
-                <div class="overlay" id="visit_overlay"></div>
-                <div class="overlay_window" id="visit_window">
-                    <div class="overlay_window_content" id="visit_content">
-                        <h3>Advisor Feedback</h3>
-                        <img src="${election.advisor_url}" width="208" height="128"/>
-                        <p>${substitutePlaceholders(feedback.answer_feedback)}</p>
-                    </div>
-                    <div class="overlay_buttons" id="visit_buttons">
-                        <button id="ok_button">OK</button>
-                        <br>
-                        <button id="no_feedback_button">Don't give me advice</button>
-                    </div>
-                </div>`.trim();
+        <div class="overlay" id="visit_overlay"></div>
+        <div class="overlay_window" id="visit_window">
+          <div class="overlay_window_content" id="visit_content">
+            <h3>Advisor Feedback</h3>
+            <img src="${election.advisor_url}" width="208" height="128"/>
+            <p>${substitutePlaceholders(feedback.answer_feedback)}</p>
+          </div>
+          <div class="overlay_buttons" id="visit_buttons">
+            <button id="ok_button">OK</button>
+            <br>
+            <button id="no_feedback_button">Don't give me advice</button>
+          </div>
+        </div>
+      `.trim();
       $("#game_window").append(n);
       $("#ok_button").click(() => nextQuestion());
       $("#no_feedback_button").click(() => {
@@ -1924,19 +1929,19 @@ function answerEffects(t) {
 function advisorFeedback() {
   const election = PROPS.ELECTIONS.get(String(e.election_id));
   const advDiv = `
-        <div class="overlay" id="feedback_overlay"></div>
-        <div class="overlay_window" id="feedback_window">
-            <div class="overlay_window_content" id="feedback_content">
-                <h3>Advisor Feedback</h3>
-                <img src="${election.advisor_url}" width="208" height="128"/>
-                <p>${e.SelAnsContText}</p>
-            </div>
-            <div id="visit_buttons">
-                <button id="ok_button">OK</button>
-                <br>
-            </div>
-        </div>
-    `.trim();
+    <div class="overlay" id="feedback_overlay"></div>
+    <div class="overlay_window" id="feedback_window">
+      <div class="overlay_window_content" id="feedback_content">
+        <h3>Advisor Feedback</h3>
+        <img src="${election.advisor_url}" width="208" height="128"/>
+        <p>${e.SelAnsContText}</p>
+      </div>
+      <div id="visit_buttons">
+        <button id="ok_button">OK</button>
+        <br>
+      </div>
+    </div>
+  `.trim();
   $("#game_window").append(advDiv);
   $("#ok_button").click(() => $("#feedback_overlay, #feedback_window").remove());
 }
@@ -1968,24 +1973,33 @@ function a(e) {
   // eslint-disable-next-line default-case
   switch (e) {
     case "1":
-      t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candidate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
+      t = `
+        <p><strong>Use the default method of allocating electoral votes for each state.</strong></p>
+        <p>In the vast majority of cases, states use a winner-take-all method. For instance, if Candidate A defeats Candidate B in a state, worth 20 electoral votes, Candidate A will usually win all 20 votes.</p>
+        <p>This method tends to concentrate the election into a handful of swing states. It also makes it difficult for third-party candidates to win electoral votes. On the other hand, it is easier for a single candidate to gain an overall majority of the electoral votes.</p>
+      `;
       break;
     case "2":
-      t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
+      t = `
+        <p><strong>Allocate each state's electoral votes proportionally.</strong></p>
+        <p>Under this method, all candidates split the electoral votes in a state, in proportion to their popular vote %.</p>
+        <p>There is still an advantage to winning a state -- the winner of the state will always receive a plurality of electoral votes. For instance, in a state with 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3 electoral votes.</p>
+        <p>Compared to a winner-take-all method, this method aligns the electoral vote more closely with the popular vote. It also makes it easier to third party candidates to increase their electoral vote totals. In some scenarios, this effect is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>
+      `;
       break;
     case "3":
       t = `
-                <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
-                <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
-                <p>
-                - Campaign finance<br>
-                - Staffing your campaign<br>
-                - Interactions with lobbies<br>
-                - Ad buys
-                </p>
-                <p><b>This is not the recommended experience for new players.</b></p>
-                <p><b>Originally from New Campaign Trail, added with permission.</b></p>
-            `;
+        <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
+        <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
+        <p>
+        - Campaign finance<br>
+        - Staffing your campaign<br>
+        - Interactions with lobbies<br>
+        - Ad buys
+        </p>
+        <p><b>This is not the recommended experience for new players.</b></p>
+        <p><b>Originally from New Campaign Trail, added with permission.</b></p>
+      `;
       break;
   }
   $("#opponent_selection_description_window").html(t);
@@ -2063,22 +2077,23 @@ function candSel(a) {
   if (!modded) e.shining = e.shining_info.some((f) => stringsEqual(f.pk, stringElect));
 
   document.querySelector("#game_window").innerHTML = `
-        <div class="game_header">${window.corrr}</div>
-        <div class="inner_window_w_desc" id="inner_window_3">
-            <div id="candidate_form">
-                <form name="candidate">
-                    <p>
-                        <h3>${e.CandidText}</h3>
-                        <select name="candidate_id" id="candidate_id">${n}</select>
-                    </p>
-                </form>
-            </div>
+    <div class="game_header">${window.corrr}</div>
+    <div class="inner_window_w_desc" id="inner_window_3">
+      <div id="candidate_form">
+        <form name="candidate">
+          <p>
+            <h3>${e.CandidText}</h3>
+            <select name="candidate_id" id="candidate_id">${n}</select>
+          </p>
+        </form>
+        </div>
         <div class="person_description_window" id="candidate_description_window"></div>
         <p>
-            <button class="person_button" id="candidate_id_back">Back</button>
-            <button class="person_button" id="candidate_id_button">Continue</button>
+          <button class="person_button" id="candidate_id_back">Back</button>
+          <button class="person_button" id="candidate_id_button">Continue</button>
         </p>
-        </div>`.trim();
+    </div>
+  `.trim();
 
   const candId = document.getElementById("candidate_id");
   descHTML("#candidate_description_window", candId.value);
@@ -2106,19 +2121,19 @@ function vpSelect(t) {
   document.querySelector("#game_window").innerHTML = `
     <div class="game_header">${window.corrr}</div>
     <div class="inner_window_w_desc" id="inner_window_4">
-        <div id="running_mate_form">
-            <form name="running mate">
-                <p>
-                    <h3>${e.VpText}</h3>
-                    <select name="running_mate_id" id="running_mate_id">${n}</select>
-                </p>
-            </form>
-        </div>
-        <div class="person_description_window" id="running_mate_description_window"></div>
-        <p>
-            <button class="person_button" id="running_mate_id_back">Back</button>
-            <button class="person_button" id="running_mate_id_button">Continue</button>
-        </p>
+      <div id="running_mate_form">
+        <form name="running mate">
+          <p>
+            <h3>${e.VpText}</h3>
+            <select name="running_mate_id" id="running_mate_id">${n}</select>
+          </p>
+        </form>
+      </div>
+      <div class="person_description_window" id="running_mate_description_window"></div>
+      <p>
+        <button class="person_button" id="running_mate_id_back">Back</button>
+        <button class="person_button" id="running_mate_id_button">Continue</button>
+      </p>
     </div>`.trim();
 
   const runningMateId = document.querySelector("#running_mate_id");
@@ -2142,34 +2157,35 @@ function renderOptions(electionId, candId, runId) {
     shining = `<option value=3 style="">Sea to Shining Sea</option>`;
   }
   document.querySelector("#game_window").innerHTML = `
-        <div class="game_header">${window.corrr}</div>
-        <div class="inner_window_w_desc" id="inner_window_4">
-            <div id="game_options">
-                <form name="game_type_selection">
-                    <p>
-                        <h3>Select your game mode.</h3>
-                        <select name="game_type_id" id="game_type_id">
-                            <option value="1">Default (Winner-Take-All)</option>
-                            <option value="2">Proportional</option>
-                            ${shining}
-                        </select>
-                    </p>
-                </form>
-            </div>
-            <div class="description_window_small" id="opponent_selection_description_window"></div>
-            <div id="difficulty_level">
-                <form name="difficulty_level_selection">
-                <p>
-                    <h3>Please choose your difficulty level:</h3>
-                    <select name="difficulty_level_id" id="difficulty_level_id"> ${difficultyStr} </select>
-                </p>
-                </form>
-            </div>
-            <p id="opponent_selection_id_button_p">
-                <button class="person_button" id="opponent_selection_id_back">Back</button>
-                <button class="person_button" id="opponent_selection_id_button">Continue</button>
-            </p>
-        </div>`.trim();
+    <div class="game_header">${window.corrr}</div>
+    <div class="inner_window_w_desc" id="inner_window_4">
+      <div id="game_options">
+        <form name="game_type_selection">
+          <p>
+            <h3>Select your game mode.</h3>
+            <select name="game_type_id" id="game_type_id">
+              <option value="1">Default (Winner-Take-All)</option>
+              <option value="2">Proportional</option>
+              ${shining}
+            </select>
+          </p>
+        </form>
+      </div>
+      <div class="description_window_small" id="opponent_selection_description_window"></div>
+      <div id="difficulty_level">
+        <form name="difficulty_level_selection">
+        <p>
+          <h3>Please choose your difficulty level:</h3>
+          <select name="difficulty_level_id" id="difficulty_level_id"> ${difficultyStr} </select>
+        </p>
+        </form>
+      </div>
+      <p id="opponent_selection_id_button_p">
+        <button class="person_button" id="opponent_selection_id_back">Back</button>
+        <button class="person_button" id="opponent_selection_id_button">Continue</button>
+      </p>
+    </div>
+  `.trim();
   const gameTypeId = document.querySelector("#game_type_id");
   const difficultyLevelId = document.querySelector("#difficulty_level_id");
   a(gameTypeId.value);
@@ -2578,12 +2594,12 @@ function setStatePollText(state, t) {
 
   // $("#state_info").html(f);
   document.getElementById("state_info").innerHTML = `
-        <h3>STATE SUMMARY</h3>
-        <p>${state.fields.name}</p>
-        <ul>${u}</ul>
-        ${!state.fields.electoral_votes ? "" : `<p>${e.primary ? "Delegates:" : "Electoral Votes:"} ${formatNumbers(state.fields.electoral_votes)}</p>`}
-        <p>${e.primary ? onQText : `Popular Votes: ${formatNumbers(state.fields.popular_votes)}`}</p>
-    `.trim();
+    <h3>STATE SUMMARY</h3>
+    <p>${state.fields.name}</p>
+    <ul>${u}</ul>
+    ${!state.fields.electoral_votes ? "" : `<p>${e.primary ? "Delegates:" : "Electoral Votes:"} ${formatNumbers(state.fields.electoral_votes)}</p>`}
+    <p>${e.primary ? onQText : `Popular Votes: ${formatNumbers(state.fields.popular_votes)}`}</p>
+  `.trim();
 }
 
 function rFunc(t, i) {
@@ -2754,8 +2770,8 @@ function rFunc(t, i) {
                   <p>You have chosen to visit ${state.fields.name} -- is this correct?</p>
                 </div>
                 <div class="overlay_buttons" id="visit_buttons">
-                    <button id="confirm_visit_button">YES</button><br>
-                    <button id="no_visit_button">NO</button>
+                  <button id="confirm_visit_button">YES</button><br>
+                  <button id="no_visit_button">NO</button>
                 </div>
               </div>
             `;
@@ -2776,8 +2792,8 @@ function rFunc(t, i) {
 
 /**
  * Dictates how long it takes until the results in a particular state are called
- * @param {Array<{votes: number}>} results The election results in the state
- * @param {number} time The time at which the state's polls close
+ * @param {{votes: number}[]} results - The election results in the state
+ * @param {number} time - The time at which the state's polls close
  * @returns {number} Time at which the state's results are called
  */
 function marginTime(results, time) {
@@ -2996,58 +3012,58 @@ function overallResultsHtml() {
       const fName = `${candObj2.first_name} ${candObj2.last_name}`;
       if (!f.popular_votes) return "";
       return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}
-                </td>
-                ${noElectoralVotes ? "" : `<td>${f.electoral_votes}</td>`}
-                <td>${formatNumbers(f.popular_votes)}</td>
-                <td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td>
-            </tr>
-        `;
+        <tr>
+          <td style="text-align: left;">
+            <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}
+          </td>
+          ${noElectoralVotes ? "" : `<td>${f.electoral_votes}</td>`}
+          <td>${formatNumbers(f.popular_votes)}</td>
+          <td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td>
+        </tr>
+      `;
     }).filter(Boolean).join("")
     .trim();
 
   const c = e.game_results_url !== "None"
     ? `
-            <h4>
-                Final Results:
-                <a target="_blank" href="${e.game_results_url}">Game Link</a> (use link to view this result on its own page)
-            </h4>
-        `.trim()
+      <h4>
+        Final Results:
+        <a target="_blank" href="${e.game_results_url}">Game Link</a> (use link to view this result on its own page)
+      </h4>
+    `.trim()
     : "";
 
   const u = `
-        <div class="game_header">${window.corrr}</div>
-        <div id="main_content_area">
-            <div id="results_container">
-                <img class="person_image" src="${l}"/>
-                <div id="final_results_description">${s}</div>
-                ${difficulty_string}
-                <div id="overall_vote_statistics">
-                    ${c}
-                    <table class="final_results_table">
-                        <br>
-                        <tr>
-                            <th>Candidate</th>
-                            ${noElectoralVotes ? "" : `<th>${e.primary ? "Delegates" : "Electoral Votes"}</th>`}
-                            <th>Popular Votes</th>
-                            <th>Popular Vote %</th>
-                        </tr>
-                        ${r}
-                    </table>
-                </div>
-            </div>
+    <div class="game_header">${window.corrr}</div>
+    <div id="main_content_area">
+      <div id="results_container">
+        <img class="person_image" src="${l}"/>
+        <div id="final_results_description">${s}</div>
+        ${difficulty_string}
+        <div id="overall_vote_statistics">
+          ${c}
+          <table class="final_results_table">
+            <br>
+            <tr>
+              <th>Candidate</th>
+              ${noElectoralVotes ? "" : `<th>${e.primary ? "Delegates" : "Electoral Votes"}</th>`}
+              <th>Popular Votes</th>
+              <th>Popular Vote %</th>
+            </tr>
+            ${r}
+          </table>
         </div>
-        <div id="map_footer">
-            <button class="final_menu_button" id="overall_results_button" disabled="disabled">Final Election Results</button>
-            <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-            <button class="final_menu_button" id="state_results_button">Results by State</button>
-            <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
-            <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-            <button class="final_menu_button" id="play_again_button">Play Again!</button>
-        </div>
-    `.trim();
+      </div>
+    </div>
+    <div id="map_footer">
+      <button class="final_menu_button" id="overall_results_button" disabled="disabled">Final Election Results</button>
+      <button class="final_menu_button" id="final_election_map_button">Election Map</button>
+      <button class="final_menu_button" id="state_results_button">Results by State</button>
+      <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
+      <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
+      <button class="final_menu_button" id="play_again_button">Play Again!</button>
+    </div>
+  `.trim();
 
   $("#game_window").html(u);
   const $prev = $("#difficulty_mult");
@@ -3153,33 +3169,34 @@ function finalMapScreenHtml() {
     `;
   }).join("");
   const resHtml = `
-        <div class="game_header">${window.corrr}</div>
-        <div id="main_content_area">
-            <div id="map_container"></div>
-            <div id="menu_container">
-                <div id="overall_result_container">
-                    <div id="overall_result">
-                        <h3>${e.primary ? 'DELEGATES' : 'ELECTORAL VOTES'}</h3>
-                        <ul>${candResultText}</ul>
-                        ${noElectoralVotes ? "" : `<p>${formatNumbers(election.winning_electoral_vote_number)} to win</p>`}
-                    </div>
-                </div>
-                <div id="state_result_container">
-                    <div id="state_result">
-                        <h3>STATE RESULTS</h3>
-                        <p>Click on a state to view final results.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="game_header">${window.corrr}</div>
+    <div id="main_content_area">
+      <div id="map_container"></div>
+      <div id="menu_container">
+        <div id="overall_result_container">
+          <div id="overall_result">
+            <h3>${e.primary ? 'DELEGATES' : 'ELECTORAL VOTES'}</h3>
+            <ul>${candResultText}</ul>
+            ${noElectoralVotes ? "" : `<p>${formatNumbers(election.winning_electoral_vote_number)} to win</p>`}
+          </div>
         </div>
-        <div id="map_footer">
-            <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-            <button class="final_menu_button" id="final_election_map_button" disabled="disabled">Election Map</button>
-            <button class="final_menu_button" id="state_results_button">Results by State</button>
-            <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
-            <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button>
-            <button class="final_menu_button" id="play_again_button">Play Again!</button>
-        </div>`.trim();
+        <div id="state_result_container">
+          <div id="state_result">
+            <h3>STATE RESULTS</h3>
+            <p>Click on a state to view final results.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="map_footer">
+      <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
+      <button class="final_menu_button" id="final_election_map_button" disabled="disabled">Election Map</button>
+      <button class="final_menu_button" id="state_results_button">Results by State</button>
+      <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
+      <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button>
+      <button class="final_menu_button" id="play_again_button">Play Again!</button>
+    </div>
+  `.trim();
   $("#game_window").html(resHtml);
   $("#map_container").usmap(coloredResults);
 }
@@ -3365,7 +3382,7 @@ function overallDetailsHtml() {
   })
     .filter(Boolean)
     .join("")
-    .replace(/>(\s+)</g, (match, p1, offset, string) => {
+    .replace(/>(\s+)</g, (_1, _2, offset, string) => {
       const before = string.slice(0, offset);
       const lastTdOpen = before.lastIndexOf("<td");
       const lastTdClose = before.lastIndexOf("</td>");
@@ -3376,43 +3393,45 @@ function overallDetailsHtml() {
   const l = e.percentile !== "None"
     ? `<p>You have done better than approximately <strong>${e.percentile}%</strong> of the games that have been played with your candidate and difficulty level.</p>`
     : "";
-  let _ = "";
+  //let _ = "";
   if (e.historical_overall !== "None") {
     const o = e.historical_overall.map((f) => {
       const colorHex = f.color_hex;
       return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${f.name}
-                </td>
-                <td>${f.winning_pct.toFixed(2)}</td>
-                <td>${f.electoral_votes_avg.toFixed(1)}</td>
-                <td>${formatNumbers(f.popular_votes_avg)}</td>
-                <td>${f.popular_vote_pct_avg.toFixed(2)}</td>
-                <td>${f.electoral_votes_min} - ${f.electoral_votes_max}</td>
-                <td>${formatNumbers(f.popular_votes_min)} - ${formatNumbers(f.popular_votes_max)}</td>
-            </tr>
-            `;
+        <tr>
+          <td style="text-align: left;">
+            <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${f.name}
+          </td>
+          <td>${f.winning_pct.toFixed(2)}</td>
+          <td>${f.electoral_votes_avg.toFixed(1)}</td>
+          <td>${formatNumbers(f.popular_votes_avg)}</td>
+          <td>${f.popular_vote_pct_avg.toFixed(2)}</td>
+          <td>${f.electoral_votes_min} - ${f.electoral_votes_max}</td>
+          <td>${formatNumbers(f.popular_votes_min)} - ${formatNumbers(f.popular_votes_max)}</td>
+        </tr>
+      `;
     }).join("");
 
+    /*
     _ = `
-            <div id="overall_stat_details">
-                <h4>Historical Results - Your Candidate and Difficulty Level</h4>
-                <table>
-                    <tr>
-                        <th>Candidate</th>
-                        <th>Candidate</th>
-                        <th>Win %</th>
-                        <th>EV Avg.</th>
-                        <th>PV Avg.</th>
-                        <th>PV % Avg.</th>
-                        <th>EV Range</th>
-                        <th>PV Range</th>
-                    </tr>
-                    ${o}
-                </table>
-            </div>
-        `;
+      <div id="overall_stat_details">
+        <h4>Historical Results - Your Candidate and Difficulty Level</h4>
+        <table>
+          <tr>
+            <th>Candidate</th>
+            <th>Candidate</th>
+            <th>Win %</th>
+            <th>EV Avg.</th>
+            <th>PV Avg.</th>
+            <th>PV % Avg.</th>
+            <th>EV Range</th>
+            <th>PV Range</th>
+          </tr>
+          ${o}
+        </table>
+      </div>
+    `;
+    */
   }
 
   const currentURL = new URL(window.location.href);
@@ -3492,7 +3511,7 @@ function overallDetailsHtml() {
         <button class="final_menu_button" id="play_again_button">Play Again!</button>
       </div>
     </div>
-    `.trim();
+  `.trim();
 }
 
 function furtherReadingHtml() {
@@ -3721,36 +3740,74 @@ function A(t) {
     };
   });
 
-  if (candsIssueScores[0]) {
-    const runningMateByIssue = new Map((e.running_mate_issue_score_json || []).map((x) => [x.fields.issue, x]));
-    const issueAgg = (() => {
-      const m = new Map();
-      for (const answ of (e.answer_score_issue_json || [])) {
-        const f = answ.fields;
-        if (!playerAnswersSet.has(f.answer)) continue;
-        const prev = m.get(f.issue) || { g: 0, b: 0 };
-        prev.g += f.issue_score * f.issue_importance;
-        prev.b += f.issue_importance;
-        m.set(f.issue, prev);
-      }
-      return m;
-    })();
+  // It is probably impossible for `candsIssueScores[0]` to be falsy.
+  const runningMateByIssue = new Map((e.running_mate_issue_score_json || []).map((x) => [x.fields.issue, x]));
 
-    candsIssueScores[0].issue_scores = candsIssueScores[0].issue_scores.map((it) => {
+  const candIssueAgg = new Map();
+  const stateIssueAgg = new Map();
+
+  for (const answ of (e.answer_score_issue_json || [])) {
+    const f = answ.fields;
+
+    if (Object.hasOwn(f, 'tag') && f.tag !== 'CANDIDATE' && f.tag !== 'STATE')
+      throw new Error("Tag must be either of the two strings 'CANDIDATE' or 'STATE'!");
+
+    if (
+      (f.tag === 'CANDIDATE' && f.state != null) ||
+      (f.tag === 'STATE' && f.candidate != null)
+    ) {
+      throw new Error('Answer issue score can only apply to either a candidate or a state, but not both!');
+    }
+
+    if (f.tag == null && (f.candidate != null || f.state != null))
+      throw new Error('Must explicitly specify tag!');
+
+    // The error handling is above this check such that logic errors can be detected even if the
+    // answer is not chosen
+    if (!playerAnswersSet.has(f.answer)) continue;
+
+    // If the tag of the "tagged union" is undefined, we interpret that as candidate mode with
+    // the player as the target to prevent breaking old mods
+    const [tgtMap, tgtKey] = (f.tag === 'STATE')
+      ? [stateIssueAgg, f.state]
+      : [candIssueAgg, f.candidate || e.candidate_id];
+
+    if (!tgtMap.has(tgtKey)) tgtMap.set(tgtKey, new Map());
+
+    const inner = tgtMap.get(tgtKey);
+    const prev = inner.get(f.issue) || { g: 0, b: 0 };
+    prev.g += f.issue_score * f.issue_importance;
+    prev.b += f.issue_importance;
+
+    if (!inner.has(f.issue)) inner.set(f.issue, prev);
+  }
+
+  for (const candIssueScore of candsIssueScores) {
+    const candId = candIssueScore.candidate_id;
+    const aggMap = candIssueAgg.get(candId);
+    if (!aggMap) continue;
+
+    candIssueScore.issue_scores = candIssueScore.issue_scores.map((it) => {
       const { issue } = it;
-      const runIssue = runningMateByIssue.get(issue);
-      if (!runIssue) {
-        console.warn(`No running mate issue for issue ${issue}`);
-        return it;
+      const agg = aggMap.get(issue) || { g: 0, b: 0 };
+
+      let rmScore = 0;
+      let rmWeight = 0;
+      if (candId === e.candidate_id) {
+        const runIssue = runningMateByIssue.get(issue);
+        if (runIssue) {
+          rmScore = runIssue.fields.issue_score;
+          rmWeight = runningMateIssueWeight;
+        }
       }
-      const agg = issueAgg.get(issue) || { g: 0, b: 0 };
+
       const numerator = (it.issue_score * candidateIssueWeight)
-        + (runIssue.fields.issue_score * runningMateIssueWeight)
+        + (rmScore * rmWeight)
         + agg.g;
-      const denom = (candidateIssueWeight + runningMateIssueWeight + agg.b);
+      const denominator = (candidateIssueWeight + rmWeight + agg.b);
       return {
         ...it,
-        issue_score: numerator / denom,
+        issue_score: numerator / denominator,
       };
     });
   }
@@ -3869,8 +3926,7 @@ function A(t) {
         console.log(`From key ${r} into f, state multiplier: ${smValue}`);
       }
 
-      score *= smValue;
-      score = Math.max(score, 0);
+      score = Math.max(score * smValue, 0);
       return { candidate: candId, result: score };
     });
 
