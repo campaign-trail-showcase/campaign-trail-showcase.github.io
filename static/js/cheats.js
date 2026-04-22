@@ -61,7 +61,12 @@ function benefitCheck(objectid) {
       mods += `<br><em>Global:</em> Affects ${name2} for ${name} by ${data.global_multiplier}`;
     } else if (type === "issue") {
       const name = findIssue(data.issue)[1];
-      mods += `<br><em>Issue:</em> Affects ${name} by ${data.issue_score} with a importance of ${data.issue_importance}`;
+      const target = (() => {
+        if (data.tag == null) return findCandidate(e.candidate_id)[1];
+        if (data.tag === 'CANDIDATE') return findCandidate(data.candidate)[1];
+        if (data.tag === 'STATE') return findState(data.state)[1];
+      })();
+      mods += `<br><em>Issue:</em> Affects ${target}'s stance on ${name} by ${data.issue_score} with an importance of ${data.issue_importance}`;
     } else if (type === "state") {
       const name1 = findState(data.state)[1];
       const test5 = findCandidate(data.affected_candidate)[1];
