@@ -479,7 +479,7 @@ function gradient(interval, min, max) {
 
 function csrfToken() {
   let t = null;
-  if (!document.cookie.trim()) return t;
+  if (!document.cookie?.trim()) return t;
 
   const CSRF_TOKEN = 'csrftoken';
 
