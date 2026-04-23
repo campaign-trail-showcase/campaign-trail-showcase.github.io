@@ -479,7 +479,7 @@ function gradient(interval, min, max) {
 
 function csrfToken() {
   let t = null;
-  if (!document.cookie || document.cookie == '') return t;
+  if (!document.cookie.trim()) return t;
 
   const CSRF_TOKEN = 'csrftoken';
 
@@ -999,7 +999,7 @@ const shining_menu = (polling) => {
 
     for (const i in our_info.staff) {
       const targ = our_info.staff[i];
-      const hire_str = targ.hired == true
+      const hire_str = targ.hired
         ? '<em>Hired.</em>'
         : '<button class="hire_button" data-pk="${targ.pk}" style="color:green">Hire</button>';
       const newRow = `
