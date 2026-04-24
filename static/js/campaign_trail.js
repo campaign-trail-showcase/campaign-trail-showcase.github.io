@@ -1001,7 +1001,7 @@ const shining_menu = (polling) => {
       const targ = our_info.staff[i];
       const hire_str = targ.hired
         ? '<em>Hired.</em>'
-        : '<button class="hire_button" data-pk="${targ.pk}" style="color:green">Hire</button>';
+        : `<button class="hire_button" data-pk="${targ.pk}" style="color:green">Hire</button>`;
       const newRow = `
         <tr>
           <td>
@@ -2545,8 +2545,16 @@ function setStatePollText(state, t) {
         globalParam.issue_stance_6_max,
       ];
 
+      let currentScore = fields.state_issue_score;
+      if (e.computed_state_issue_scores) {
+        const stateMap = e.computed_state_issue_scores.get(fields.state);
+        if (stateMap && stateMap.has(fields.issue)) {
+          currentScore = stateMap.get(fields.issue).state_issue_score;
+        }
+      }
+
       for (let i = 0; i < borders.length; i++) {
-        if (fields.state_issue_score <= borders[i]) {
+        if (currentScore <= borders[i]) {
           pickedStance = issue.fields[`stance_${i + 1}`];
           stanceDesc = issue.fields[`stance_desc_${i + 1}`];
           break;
@@ -3730,43 +3738,6 @@ function A(t) {
     }
     return m;
   })();
-  
-  const stateIssueAgg = new Map();
-  const candIssueAgg = new Map();
-  const playerBonusAgg = new Map();
-
-  for (const answ of (e.answer_score_issue_json || [])) {
-    const f = answ.fields;
-
-    // The error handling is above this check such that logic errors can be detected even if the
-    // answer is not chosen
-    if (!playerAnswersSet.has(f.answer)) continue;
-
-    const getAgg = (issue) => ({
-        g: f.issue_score * f.issue_importance,
-        b: f.issue_importance,
-    });
-    
-    if (f.state != null) { // a state-modifying effect
-        if (!stateIssueAgg.has(f.state)) stateIssueAgg.set(f.state, new Map());
-        const inner = stateIssueAgg.get(f.state);
-        const prev = inner.get(f.issue) || { g: 0, b: 0 };
-        const current = getAgg(f.issue);
-        inner.set(f.issue, { g: prev.g + current.g, b: prev.b + current.b });
-
-    } else if (f.candidate != null) { // a candidate-modifying effect
-        if (!candIssueAgg.has(f.candidate)) candIssueAgg.set(f.candidate, new Map());
-        const inner = candIssueAgg.get(f.candidate);
-        const prev = inner.get(f.issue) || { g: 0, b: 0 };
-        const current = getAgg(f.issue);
-        inner.set(f.issue, { g: prev.g + current.g, b: prev.b + current.b });
-
-    } else { // fallback: a player-only bonus effect
-        const prev = playerBonusAgg.get(f.issue) || { g: 0, b: 0 };
-        const current = getAgg(f.issue);
-        playerBonusAgg.set(f.issue, { g: prev.g + current.g, b: prev.b + current.b });
-    }
-  }
 
   const candsIssueScores = candIdOpponents.map((candidate) => {
     const arr = issueByCandidate.get(candidate) || [];
@@ -3783,62 +3754,77 @@ function A(t) {
   // It is probably impossible for `candsIssueScores[0]` to be falsy.
 
   const runningMateByIssue = new Map((e.running_mate_issue_score_json || []).map((x) => [x.fields.issue, x]));
+
+  const candIssueAgg = new Map();
+  const stateIssueAgg = new Map();
+
+  for (const answ of (e.answer_score_issue_json || [])) {
+    const f = answ.fields;
+
+    let tag = f.tag;
+    if (!tag) {
+      if (f.candidate != null && f.state == null) tag = 'CANDIDATE';
+      else if (f.state != null && f.candidate == null) tag = 'STATE';
+      else if (f.candidate == null && f.state == null) tag = 'CANDIDATE';
+    }
+
+    if (tag !== 'CANDIDATE' && tag !== 'STATE')
+      throw new Error("Tag must be either of the two strings 'CANDIDATE' or 'STATE'");
+
+    if (tag === 'CANDIDATE' && f.state != null)
+      throw new Error('Answer issue score can only apply to either a candidate or a state, but not both');
+
+    if (tag === 'STATE' && f.candidate != null)
+      throw new Error('Answer issue score can only apply to either a candidate or a state, but not both');
+
+    if (!playerAnswersSet.has(f.answer)) continue;
+
+    const [tgtMap, tgtKey] = (tag === 'STATE')
+      ? [stateIssueAgg, f.state]
+      : [candIssueAgg, f.candidate || e.candidate_id];
+
+    if (!tgtMap.has(tgtKey)) tgtMap.set(tgtKey, new Map());
+
+    const inner = tgtMap.get(tgtKey);
+    const prev = inner.get(f.issue) || { g: 0, b: 0 };
+    prev.g += f.issue_score * f.issue_importance;
+    prev.b += f.issue_importance;
+
+    if (!inner.has(f.issue)) inner.set(f.issue, { ...prev });
+  }
+
   for (const candIssueScore of candsIssueScores) {
     const candId = candIssueScore.candidate_id;
     const aggMap = candIssueAgg.get(candId);
-    if (!aggMap) continue;
+    
+    if (!aggMap && candId !== e.candidate_id) continue;
 
     candIssueScore.issue_scores = candIssueScore.issue_scores.map((it) => {
-        const { issue } = it;
-        const agg = aggMap.get(issue) || { g: 0, b: 0 };
+      const { issue } = it;
+      const agg = (aggMap && aggMap.get(issue)) || { g: 0, b: 0 };
 
-        const numerator = (it.issue_score * candidateIssueWeight) + agg.g;
-        const denominator = candidateIssueWeight + agg.b;
-        return { ...it, issue_score: numerator / denominator };
+      let rmScore = 0;
+      let rmWeight = 0;
+      if (candId === e.candidate_id) {
+        const runIssue = runningMateByIssue.get(issue);
+        if (!runIssue) {
+              console.warn(`No running mate issue for issue ${issue}`);
+          return it; 
+        }
+        rmScore = runIssue.fields.issue_score;
+        rmWeight = runningMateIssueWeight;
+      }
+
+      const numerator = (it.issue_score * candidateIssueWeight)
+        + (rmScore * rmWeight)
+        + agg.g;
+      const denominator = (candidateIssueWeight + rmWeight + agg.b);
+      return {
+        ...it,
+        issue_score: numerator / denominator,
+      };
     });
   }
-
-  if (candsIssueScores[0]) {
-      candsIssueScores[0].issue_scores = candsIssueScores[0].issue_scores.map((it) => {
-          const { issue } = it;
-          const runIssue = runningMateByIssue.get(issue);
-          if (!runIssue) {
-              console.warn(`No running mate issue for issue ${issue}`);
-              return it;
-          }
-          const bonus = playerBonusAgg.get(issue) || { g: 0, b: 0 };
-
-          const numerator = (it.issue_score * candidateIssueWeight)
-              + (runIssue.fields.issue_score * runningMateIssueWeight)
-              + bonus.g;
-          const denom = (candidateIssueWeight + runningMateIssueWeight + bonus.b);
-          return { ...it, issue_score: numerator / denom };
-      });
-  }
-
-  const stateIssueByState = (() => {
-    const m = new Map();
-    for (const s of (e.state_issue_score_json || [])) {
-      const f = s.fields;
-      if (!m.has(f.state)) m.set(f.state, new Map());
-      const inner = m.get(f.state);
-      if (!inner.has(f.issue)) inner.set(f.issue, { ...f });
-    }
-    
-    for (const [stateId, issuesMap] of stateIssueAgg.entries()) {
-      if (!m.has(stateId)) continue;
-      const stateIssues = m.get(stateId);
-      for (const [issueId, agg] of issuesMap.entries()) {
-        const sFields = stateIssues.get(issueId);
-        if (!sFields) continue;
-
-        const numerator = (sFields.state_issue_score * sFields.weight) + agg.g;
-        const denominator = sFields.weight + agg.b;
-        sFields.state_issue_score = numerator / denominator;
-      }
-    }
-    return m;
-  })();
 
   const csmByCandidate = (() => {
     const filtered = (e.candidate_state_multiplier_json || []).filter(
@@ -3902,6 +3888,35 @@ function A(t) {
     });
   });
 
+  const stateIssueByState = (() => {
+    const m = new Map();
+    for (const s of (e.state_issue_score_json || [])) {
+      const f = s.fields;
+      if (!m.has(f.state)) m.set(f.state, new Map());
+      const inner = m.get(f.state);
+
+      if (!inner.has(f.issue)) inner.set(f.issue, { ...s.fields });
+    }
+
+    for (const [stateId, issuesMap] of stateIssueAgg.entries()) {
+      if (!m.has(stateId)) continue;
+
+      const stateIssues = m.get(stateId);
+      for (const [issueId, agg] of issuesMap.entries()) {
+        const sFields = stateIssues.get(issueId);
+        if (!sFields) continue;
+
+        const numerator = (sFields.state_issue_score * sFields.weight) + agg.g;
+        const denominator = sFields.weight + agg.b;
+
+        sFields.state_issue_score = numerator / denominator;
+      }
+    }
+    return m;
+  })();
+
+  e.computed_state_issue_scores = stateIssueByState;
+
   const smByCandIndex = candsStateMults.map((c) => {
     const m = new Map();
     for (const s of c.state_multipliers) m.set(s.state, s.state_multiplier);
@@ -3920,14 +3935,16 @@ function A(t) {
 
       let score = 0;
       const issuesR = candsIssueScores[r].issue_scores;
+      const issues0 = candsIssueScores[0].issue_scores;
 
       for (let idx = 0; idx < issuesR.length; idx += 1) {
         const iss = issuesR[idx];
+        const refIssue = issues0[idx] && issues0[idx].issue;
         const stateIssueMap = stateIssueByState.get(state);
         let stateScore = 0;
         let issueWeight = 1;
-        if (stateIssueMap && stateIssueMap.has(iss.issue)) {
-          const sFields = stateIssueMap.get(iss.issue);
+        if (stateIssueMap && stateIssueMap.has(refIssue)) {
+          const sFields = stateIssueMap.get(refIssue);
           stateScore = sFields.state_issue_score;
           issueWeight = sFields.weight;
         }
@@ -3957,7 +3974,7 @@ function A(t) {
     const M = sf ? Math.floor(sf.popular_votes * (0.95 + 0.1 * Math.random())) : 0;
     const total = f.result.reduce((acc, g) => acc + g.result, 0);
     f.result.forEach((g) => {
-      const N = total > 0 ? (g.result / total) : 0;
+      const N = g.result / total;
       g.percent = N;
       g.votes = Math.floor(N * M);
     });
@@ -4025,8 +4042,8 @@ function A(t) {
       const total = res.reduce((acc, candidate) => acc + candidate.result, 0);
       const N = res.map((candidate) => ({
         ...candidate,
-        percent: total > 0 ? (candidate.result / total) : 0,
-        votes: Math.floor((total > 0 ? (candidate.result / total) : 0) * M),
+        percent: candidate.result / total,
+        votes: Math.floor((candidate.result / total) * M),
       }));
       return { ...f, result: N };
     });
