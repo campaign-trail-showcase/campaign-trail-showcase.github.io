@@ -49084,7 +49084,7 @@ function Obamashift() {
     function Persistanceshift() {
         const persistance = getPersistance();
 
-        if (Dem !== 20 || persistance <= 0 || !canUsePersistanceShift()) return;
+        if (Dem !== 20 || persistance <= 0 || !canGainPersistance()) return;
 
         const drainPerPoint = 0.025;
         const multiplierModifier = 1 - (persistance * drainPerPoint);
@@ -50918,7 +50918,7 @@ const newVpTableHistorical14 = {
 };
 const newHistHexcolour14 = ["#5e6578", "#8e0c10", "#7f50c7", "#14a37b"];
 const newHistName14 = ["John Delaney", "Donald J. Trump", "Don Blanekenship", "Brock Pierce"];
-const newHistEV14 = [273, 265, 5, 0];
+const newHistEV14 = [273, 265, 0, 0];
 const newHistPV14 = ["79,258,139", "75,803,033", "1,102,511", "887,229"];
 const newHistPVP14 = ["49.7%", "47.6%", "2.0%", "0.7%"];
 
@@ -54109,7 +54109,6 @@ changePlaylist(trumpLossHarris);
     <p>But you won’t take them, there’s only one call that counts now, and you need to hear it.</p>
     <p>Melania prepares to leave, she says there is no use in staying up, it’s all over. You ask if she’ll come down for the speech, but she doesn’t answer, and you realize you don’t really care. Mark says we should deliver the speech now, that the networks are all covering the empty podium, the full spread.</p>
     <p><span style="padding-left: 5em;"><strong>And then the call came.</strong></span></p>
- <p><span style="padding-left: 5em;"><strong>And then the call came.</strong></span></p>
 <p>“Mr. President, it’s Tom.”</p>
 <p>It was flat, drained of all energy. You were ready, ready for the speech, the self-righteous tone, the scolding.</p>
 <p>“Tom, great to hear from you. I was just saying to the team, you put up a hell of a fight. But people like you need to learn people don’t like windmills. They’re awful. They ruin the landscape.”</p>
@@ -54842,7 +54841,7 @@ e.pages.push(`<h3 style="text-align: center;">
 <p>The line goes dead, but you’re still smiling.</p>`);
 
     e.executable.push([0, (() => { e.image = 'https://i.imgur.com/0rgCeTt.gif'; })]);
-    if (!cheatsActive && oprahCovid == 0) {
+    if (canTrackFairAchievement() && oprahCovid == 0) {
        localStorage.setItem("j6pt12", "true");
     }
     if (songChange != 1) {
@@ -56474,7 +56473,7 @@ e.pages.push(`
 <p style="font-size: 12px; color: grey; margin-top: -2px; text-decoration: underline;">
 Americans are familiar with quiet quitting. But who is its most powerful practitioner?
 </p>
-<p>By now, most Americans are familiar with quiet quitting, the practice of doing the bare minimum at work while emotionally checking out. What’s less discussed is its most successful practitioner. His name is Howard Schultz, and it’s past time he apologizes to his boss, the electorate, you nd me, for slacking off. </p>
+<p>By now, most Americans are familiar with quiet quitting, the practice of doing the bare minimum at work while emotionally checking out. What’s less discussed is its most successful practitioner. His name is Howard Schultz, and it’s past time he apologizes to his boss, the electorate, you and me, for slacking off. </p>
 <p>This is the same President who spends much of his public time lecturing workers about post-pandemic productivity, demanding return-to-office mandates, and warning that Americans have grown too comfortable. Schultz has blamed inflation on Congress being too generous to ordinary people, scolded labor unions for “excessive demands,” and contrasted today’s workforce with the work ethic he claims to have modeled in the private sector.</p>
 <p>And yet.</p>
 <p>Schultz’s own workday has collapsed. He hasn’t chaired a single cabinet meeting in over a year. He holds fewer press conferences than any President in recent memory. He has avoided appearing in person for every State of the Union address due to COVID and security measures. He travels sparingly, delegating more responsibilities to his vice president and a tight circle of advisers. He signs fewer bills and executive orders. While the President praises his ability to delegate, insisting that “finding perfect people” is the key to success, the turnover inside the executive branch has accelerated. Increasingly, this is a Presidency that could have been an email.</p>

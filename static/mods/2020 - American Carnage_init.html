@@ -30,7 +30,7 @@ campaignTrail_temp.election_json = [
         "has_visits": 1,
         "no_electoral_majority_image": "https://file.garden/aZpOy1sRbiDb3nw_/AC%20File%20Change/load.png",
         "creator": "Dan Bryan",
-        "display_year": "2020 - Infinite Carnage"
+        "display_year": "Infinite Carnage"
     }
   },
   {
@@ -63,7 +63,7 @@ campaignTrail_temp.election_json = [
         "has_visits": 1,
         "no_electoral_majority_image": "https://file.garden/aZpOy1sRbiDb3nw_/AC%20File%20Change/load.png",
         "creator": "Dan Bryan",
-        "display_year": "2020 - American Carnage"
+        "display_year": "American Carnage"
     }
   },
     {
@@ -1017,8 +1017,6 @@ function makeCreditsDraggable(element) {
     }
 }
 
-campaignTrail_temp.global_parameter_json[0].fields.question_count = 30
-
 campaignTrail_temp.opponents_default_json = [
   {
       "election": 9,
@@ -1079,20 +1077,36 @@ campaignTrail_temp.opponents_weighted_json = [
   }
 ]
 
+campaignTrail_temp.global_parameter_json[0].fields.question_count = 30
+
 campaignTrail_temp.temp_election_list = [
   {
     "id": 10,
     "year": 2020,
     "is_premium": 0,
-    "display_year": "2020 - Infinite Carnage"
+    "display_year": "Infinite Carnage"
   },
     {
     "id": 9,
     "year": 2020,
     "is_premium": 0,
-    "display_year": "2020 - American Carnage"
+    "display_year": "American Carnage"
   }
 ];
+
+// necessary so that the right elections are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "9") {
+            campaignTrail_temp.code2_id = "2020 - American Carnage";
+        } else if (electionSelect.value === "10") {
+            campaignTrail_temp.code2_id = "2020 - Infinite Carnage";
+        } else if (electionSelect.value === "11") {
+            campaignTrail_temp.code2_id = "2024b";
+        }
+    }
+}, 100);
 
 const unlockedAch = JSON.parse(localStorage.getItem("unlockedAch") || "{}");
 
@@ -2012,7 +2026,7 @@ setInterval(astroTryAdd2024bOptions, 100);
       {searchString: "Joe Manchin", explanationText: "<img src=https://i.imgur.com/LAhzcZr.gif><br> Democrat?"},
       {searchString: "Murkowski", explanationText: "<img src=https://file.garden/aZpOy1sRbiDb3nw_/tooltip/Murkowski.gif><br> Looks like a Rhino too"},
       {searchString: "Sasse", explanationText: "<img src=https://file.garden/aZpOy1sRbiDb3nw_/tooltip/Sasse.gif><br> Dopey"},
-      {searchString: "Burr", explanationText: "<img src=https://file.garden/aZpOy1sRbiDb3nw_/tooltip/Burr.gif><br> Stock trader & Stock traitor"},
+      {searchString: "Burr", explanationText: "<img src=https://file.garden/aZpOy1sRbiDb3nw_/tooltip/burr.gif><br> Stock trader & Stock traitor"},
       {searchString: "Jerry ‘Moron’ Moran, Jeffry-The-Flake, Little Bob Corker", explanationText: "<img src=https://file.garden/aZpOy1sRbiDb3nw_/tooltip/jerryjeffbob.gif><br> Unworthy"},
       
 
@@ -2788,6 +2802,7 @@ function setupMusicPlayer() {
       new Song("Little Dark Age", "MGMT", "https://i.imgur.com/d2ctDiz.png", "https://youtu.be/ETEg-SB01QY"),
       new Song("Arrest the President", "Ice Cube", "https://i.imgur.com/BBOMLln.png", "https://youtu.be/y9oUnC8JtXY?list=RDy9oUnC8JtXY"),
       new Song("This is America", "Childish Gambino", "https://i.imgur.com/cBtRj9K.png", "https://youtu.be/ddJqNY__9U8?list=RDddJqNY__9U8"),
+      new Song("Troubled Times", "Green Day", "https://i.imgur.com/unNGqOH.png", "https://youtu.be/9cVJr3eQfXc"),
       new Song("Is This the Life We Really Want", "Roger Waters", "https://i.imgur.com/3NCgTGN.png", "https://youtu.be/Htjj7NJiNBA?list=RDHtjj7NJiNBA"),
       new Song("The Kids are Alt-Right", "Bad Religion", "https://i.imgur.com/KzlAiiO.png", "https://youtu.be/Br5VbSFtcpc?list=RDBr5VbSFtcpc"),
       new Song("Vigilante Man", "Glen Hansard", "https://i.imgur.com/SvUzGQH.png", "https://youtu.be/8EiNuYedGPk?list=RD8EiNuYedGPk"),
