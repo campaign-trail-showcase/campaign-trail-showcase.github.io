@@ -30,7 +30,7 @@ campaignTrail_temp.election_json = [
         "has_visits": 1,
         "no_electoral_majority_image": "https://file.garden/aZpOy1sRbiDb3nw_/AC%20File%20Change/load.png",
         "creator": "Dan Bryan",
-        "display_year": "2020 - Infinite Carnage"
+        "display_year": "Infinite Carnage"
     }
   },
   {
@@ -63,7 +63,7 @@ campaignTrail_temp.election_json = [
         "has_visits": 1,
         "no_electoral_majority_image": "https://file.garden/aZpOy1sRbiDb3nw_/AC%20File%20Change/load.png",
         "creator": "Dan Bryan",
-        "display_year": "2020 - American Carnage"
+        "display_year": "American Carnage"
     }
   },
     {
@@ -1084,15 +1084,29 @@ campaignTrail_temp.temp_election_list = [
     "id": 10,
     "year": 2020,
     "is_premium": 0,
-    "display_year": "2020 - Infinite Carnage"
+    "display_year": "Infinite Carnage"
   },
     {
     "id": 9,
     "year": 2020,
     "is_premium": 0,
-    "display_year": "2020 - American Carnage"
+    "display_year": "American Carnage"
   }
 ];
+
+// necessary so that the right elections are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "9") {
+            campaignTrail_temp.code2_id = "2020 - American Carnage";
+        } else if (electionSelect.value === "10") {
+            campaignTrail_temp.code2_id = "2020 - Infinite Carnage";
+        } else if (electionSelect.value === "11") {
+            campaignTrail_temp.code2_id = "2024b";
+        }
+    }
+}, 100);
 
 const unlockedAch = JSON.parse(localStorage.getItem("unlockedAch") || "{}");
 
