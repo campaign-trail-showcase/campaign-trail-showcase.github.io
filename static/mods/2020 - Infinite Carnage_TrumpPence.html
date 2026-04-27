@@ -44829,7 +44829,7 @@ const qualifyingAchs = [
   "Hunter Killer", "Bern Out", "Washington red. Skinned", "Pride Before the Fall",
   "Minnesota à trois", "Bloomberg Terminal", "Don't Stop Believ---", "Texas Told'Em",
   "Do the MATH", "Hawaii Cried-Oh", "Flat White Sharks", "Too Big? Too Fail!",
-  "Pollut-o-crat", "#TimesUp", "Manifest Destiny", "Dizzonor", "What Happened",
+  "Pollut-o-crat", "#TimesUp", "Manifest Destiny", "Dizzoner", "What Happened",
   "It's Joever", "Audacity of Nope", "Where's My Jet?", "Phantom of the O..."
 ];
 
@@ -46444,6 +46444,7 @@ function switcheroo04() {
     e.candidate_json[id].fields.first_name = "Andrew";
     e.candidate_json[id].fields.last_name = "Yang";
     e.candidate_json[id].fields.color_hex = "#ffc55e";
+    vpTable["Andrew Yang"] = "Herman Cain";
 }
 function midtermshift() {
     // Arizona
@@ -50079,7 +50080,7 @@ if (e.noCounter == 15) {
             campaignTrail_temp.election_json[0].fields.advisor_url = "https://i.imgur.com/a4SQvTe.gif";   
         }
         //Obama
-        else if (Bills >= 2 && Impeach === 0 && e.player_answers.includes(43084) && (e.player_answers.includes(43773) || e.player_answers.includes(43731))){ 
+        else if (Bills >= 2 && Impeach === 0 && e.player_answers.includes(43084) && (e.player_answers.includes(43773) || e.player_answers.includes(46401) || e.player_answers.includes(43731))){ 
             switcheroo10();
             switcheroo50();
             switcheroo30();
@@ -50733,7 +50734,7 @@ vpTable = {
     "Elizabeth Holmes" : "Katherine Gehl", 
     "Seth Moulton" : "Stanley McChrystal",
     "Ro Khanna" : "Cori Bush", 
-    "Andrew Yang" : "Herman Cain", 
+    "Andrew Yang" : "Kyrsten Sinema", 
     "Bill Ackman" : "Joe Lieberman",
     "None of the above" : "---",
 
@@ -51199,7 +51200,7 @@ construct = (a = 1) => {
 
 
     endingPicker = (out, totv, aa, quickstats) => {
-        orderID = [aa[0].candidate, aa[1].candidate, aa[2].candidate, aa[3].candidate];
+    orderID = [aa[0].candidate, aa[1].candidate, aa[2].candidate, aa[3].candidate];
     //out = "win", "loss", or "tie" for your candidate
     //totv = total votes in entire election
     //aa = all final overall results data
@@ -51210,7 +51211,6 @@ construct = (a = 1) => {
     e.pages = ["<p></p>",
             "<p></p>"]
     */
-
     function getStateResult(abbr, candidateId = e.candidate_id) {
     const state = (e.final_state_results || []).find(s => s.abbr === abbr);
     if (!state || !state.result || state.result.length === 0) return null;
@@ -51219,6 +51219,7 @@ construct = (a = 1) => {
     const winner = sorted[0];
     const ours = sorted.find(r => r.candidate === candidateId);
     const runnerUp = sorted[1] || null;
+    
 
     return {
         abbr,
@@ -54859,7 +54860,7 @@ e.pages.push(`<h3 style="text-align: center;">
     }
     }
 
-    if (quickstats[0] <= 268 && quickstats[0] >= 151 && aa[0].electoral_votes > 269 && Dem == 21 && (SecretEnding == 0 || SecretEnding == 2 || SecretEnding == 1 && quickstats[0] < 200)) { // Loss - Secret
+    if (quickstats[0] <= 268 && quickstats[0] >= 151 && aa[0].electoral_votes > 269 && Dem == 21 && aa[0].candidate === 7878 && (SecretEnding == 0 || SecretEnding == 2 || SecretEnding == 1 && quickstats[0] < 200)) { // Loss - Secret
     e.pages.push(`<h3 style="text-align: center;">
     <span style="font-size: 24px; text-decoration: underline;">Gravel Defeats Trump</span><br>
     <span style="font-size: 18px; text-decoration: underline;">President-Elect Not Expected to Speak</span>
@@ -54922,6 +54923,32 @@ e.pages.push(`<h3 style="text-align: center;">
         "DJ Smokey",
         "https://i.imgur.com/8nYLX4R.png",
         "https://youtu.be/eqSU9o-PuCU?list=RDeqSU9o-PuCU"
+        );
+        gravelWin.addSong(gravelVictorySong);
+        songChange = 1;
+        changePlaylist(gravelWin);
+    }}
+
+        if (quickstats[0] <= 268 && quickstats[0] >= 151 && aa[0].electoral_votes > 269 && Dem == 21 && aa[0].candidate === 8080 && (SecretEnding == 0 || SecretEnding == 2 || SecretEnding == 1 && quickstats[0] < 200)) { // Loss - Secret
+    e.pages.push(`<h3 style="text-align: center;">
+    <span style="font-size: 24px; text-decoration: underline;">Ackman Defeats Trump</span><br>
+    <span style="font-size: 18px; text-decoration: underline;">lol wut</span>
+    </h3>
+    <p><span style="padding-left: 5em;"><strong>And then the call came.</strong></span></p>
+        <p>“Wassup?”</p>
+        <p>“Wassup!”</p>
+        <p>“Wassup?”</p>
+        <p>“Wassup!”</p>
+        <p>“Waaassssuuup!”</p>
+    `);
+    e.executable.push([0, (() => { e.image = 'https://file.garden/aZpOy1sRbiDb3nw_/demwins/pics/ackman.png'; })]);
+    if (songChange != 1) {
+        const gravelWin = new Playlist();
+        const gravelVictorySong = new Song(
+        "FBI Raid",
+        "Eskimo",
+        "https://file.garden/aZpOy1sRbiDb3nw_/music/ackman.png",
+        "https://youtu.be/bY1yzsXnl0A?list=PLfzW_wEeYxk7ZauITIXl9_sOB-WN9Smd0"
         );
         gravelWin.addSong(gravelVictorySong);
         songChange = 1;
@@ -56518,7 +56545,7 @@ Deal underscores Gulf capital’s expanding role in reshaping global entertainme
 e.executable.push([1, (() => { e.image = 'https://file.garden/aZpOy1sRbiDb3nw_/slide2/warner.gif' })])
 }
 
-if (quickstats[0] < 269 && quickstats[0] > 150 && Dem == 19 && Midterms <= 1 && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { // Avenatti, the Dems
+if (quickstats[0] < 269 && quickstats[0] > 150 && Dem == 19 && Midterms == 1 && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { // Avenatti, the Dems
 e.pages.push(`
 <h3 style="font-weight: bold;">
   <span style="font-size: 20px; background-color: #000000; color: #FFFFFF;">Axios</span>
@@ -56547,7 +56574,7 @@ It's clear that tensions between the President and the congressional caucus have
 e.executable.push([1, (() => { e.image = 'https://file.garden/aZpOy1sRbiDb3nw_/slide2/Pelosi.gif' })])
 }
 
-if (quickstats[0] < 269 && quickstats[0] > 150 && Dem == 19 && Midterms > 1 && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { // Avenatti - Schatz
+if (quickstats[0] < 269 && quickstats[0] > 150 && Dem == 19 && Midterms == 0 && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { // Avenatti - Schatz
 e.pages.push(`
 <h3 style="font-weight: bold;">
   <span style="font-size: 20px; background-color: #000000; color: #FFFFFF;">BREITBART</span>
@@ -56630,7 +56657,7 @@ After being sidelined for much of the Winfrey era, the vice president’s allies
 e.executable.push([1, (() => { e.image = 'https://file.garden/aZpOy1sRbiDb3nw_/slide2/vpromney.gif' })])
 }
 
-if (quickstats[0] < 269 && quickstats[0] > 150 && Dem == 21 && (Win > 7) && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { // Secret - FOAM
+if (quickstats[0] < 269 && quickstats[0] > 150 && Dem == 21 && aa[0].candidate === 7878 && (Win > 7) && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { // Secret - FOAM
 e.pages.push(`
 <h3 style="font-weight: bold;">
   <span style="font-size: 20px; background-color: #003366; color: #FFFFFF;">FOX</span>
@@ -56656,7 +56683,7 @@ Senior retired and current officials signal refusal to enforce illegal White Hou
 e.executable.push([1, (() => { e.image = 'https://file.garden/aZpOy1sRbiDb3nw_/slide2/foam.gif' })])
 }
 
-if (quickstats[0] < 269 && quickstats[0] > 150 && Dem == 21 && !(Win > 7)  && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { // Secret - Seinfeld
+if (quickstats[0] < 269 && quickstats[0] > 150 && Dem == 21 && aa[0].candidate === 7878 && !(Win > 7)  && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { // Secret - Seinfeld
 e.pages.push(`
 <h3 style="font-weight: bold;">
   <span style="font-size: 20px; background-color: #003366; color: #FFFFFF;">TIMES OF ISRAEL</span>
@@ -57131,7 +57158,7 @@ e.pages.push(`<h3 style="font-weight: bold;"><span style="font-size: 20px;">Disn
 e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/CA0yrSt.gif'})])
 }
 
-if (quickstats[0] > 269 && quickstats[0] < 350 && Midterms < 2 && Dem == 11 && Bills >= 2 && SecretEnding <=1 ) { // Yang - Moon
+if (quickstats[0] > 269 && quickstats[0] < 350 && Midterms == 0 && Dem == 11 && Bills >= 2 && SecretEnding <=1 ) { // Yang - Moon
 e.pages.push(`<h3 style="font-weight: bold;"><span style="font-size: 20px; background-color: #FF0000; color: #FFFFFF;">CNN</span><span style="font-size: 20px;"> | Trump Greets NASA astronauts on Return from Moon </span></h3>
 <p style="font-size: 12px; color: grey; margin-top: -2px; text-decoration: underline;">The four astronauts, the first to make the journey from Earth to the Moon in 50 years met President Trump</p>
 <p>The four crewmen and women of Artemis 3 were hosted this Thursday at the White House, to meet with President Trump and the First Lady, in a meeting where he showed off a moon rock that the crew had brought back, which is now on display on his desk in the Oval Office. The President also praised the astronauts for doing a “top-notch job” and said that the “whole country was really proud of what you fabulous people did up there”. </p>
@@ -57149,7 +57176,7 @@ e.pages.push(`<h3 style="font-weight: bold;"><span style="font-size: 20px; backg
 e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/VHitccJ.gif'})])
 }
 
-if (quickstats[0] > 269 && quickstats[0] < 350 && Midterms < 2 && Dem == 11 && Bills < 2 && SecretEnding <=1 ) { // Yang - Forward Party
+if (quickstats[0] > 269 && quickstats[0] < 350 && Midterms == 0 && Dem == 11 && Bills < 2 && SecretEnding <=1 ) { // Yang - Forward Party
 e.pages.push(`<h3 style="font-weight: bold;"><span style="font-size: 20px; background-color: #1D1D1D; color: #FFFFFF;">NYT</span><span style="font-size: 20px;"> | The Forward Party Is a Threat To Democracy </span></h3>
 <p style="font-size: 12px; color: grey; margin-top: -2px; text-decoration: underline;">The Party Claims It Will Not Spoil Elections, But Make No Mistake It Will</p>
 <p> Let's not mince words, the new Forward Party announced by failed Presidential nominee Andrew Yang is a direct threat to American democracy, it will crash and burn as all third parties do, but not before taking down the grand American experiment with it. The odds that it will accomplish any of its goals, to de-polarize the United States are so minute that they are non-existent, the party is another flash in the pan pipedream, a vanity project of an ego-maniac who has no concern for the future of the country or the party he led to a disastrous defeat.</p>
@@ -58396,7 +58423,7 @@ e.executable.push([1, (() => {e.image = e.image = 'https://file.garden/aZpOy1sRb
 
 
 ///Slide 2 TIE
-if (quickstats[0] == 269 && !(Dem == 11 || Dem == 12 || Dem == 21) && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { //Tie
+if (quickstats[0] == 269 && Midterms <= 1 && !(Dem == 11 || Dem == 12 || Dem == 21) && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { //Tie
 e.pages.push(`<h3 style="font-weight: bold;"><span style="font-size: 20px;">REAL TIME WITH BILL MAHER </span><span style="font-size: 20px;"> | Season 18, Episode 35</span></h3>
 <p style="font-size: 12px; color: grey; margin-top: -2px; text-decoration: underline;">Thunder crashes, rain lashes the street. Pedestrians struggle against the slashing rain as heavy traffic crowds uptown.</p>
 <p>Bill wearing a coat over his pajamas drenched to the skin, his streaky grey hair plastered across his slap, clambering through the entrance to the Television City Stage. Walking haggardly through the security, he fumbles in his pockets for a pass, instead, a guard lets him through.</p>
@@ -58411,6 +58438,29 @@ e.pages.push(`<h3 style="font-weight: bold;"><span style="font-size: 20px;">REAL
 <p><strong>Showing results for <span style="color: #0097CE;"><i>contingent election</i></span></strong></p>
 <ul>
 <li style="text-decoration: underline; color: grey;">Nancy Pelosi Refuses to Seat 3 Republicans</li>
+<li style="text-decoration: underline; color: grey;">What is a Quorum Bust?</li>
+<li style="text-decoration: underline; color: grey;">An Open Letter to the Founding Fathers “We Hope You Are Fucking Happy with Yourselves”</li>
+</ul>
+`)
+//e.image = ""
+e.executable.push([1, (() => {e.image = e.image = 'https://i.imgur.com/jBPY4Fv.gif'})])
+}
+
+if (quickstats[0] == 269 && Midterms == 2 && !(Dem == 11 || Dem == 12 || Dem == 21) && (SecretEnding == 0 || SecretEnding == 1 && quickstats[0] < 200)) { //Tie
+e.pages.push(`<h3 style="font-weight: bold;"><span style="font-size: 20px;">REAL TIME WITH BILL MAHER </span><span style="font-size: 20px;"> | Season 18, Episode 35</span></h3>
+<p style="font-size: 12px; color: grey; margin-top: -2px; text-decoration: underline;">Thunder crashes, rain lashes the street. Pedestrians struggle against the slashing rain as heavy traffic crowds uptown.</p>
+<p>Bill wearing a coat over his pajamas drenched to the skin, his streaky grey hair plastered across his slap, clambering through the entrance to the Television City Stage. Walking haggardly through the security, he fumbles in his pockets for a pass, instead, a guard lets him through.</p>
+<p style="margin-left: 60px;"><strong>Maher:</strong> (Insane) I am here to make my witness</p>
+<p>Walking through the studio, people stop and stare, but Maher pays them no mind, murmuring under his breath. The production staff, pass on the news that he is here and that production may go on. Though they do not note his manner of dress.</p>
+<p style="margin-left: 60px;"><strong>Director:</strong> Get ready to roll, this is our first in-person taping, if he’s in the studio, he’s doing it, did you get that.</p>
+<p>The production staff nod, and gently usher Maher through the building, the monitors of the studio each one flickering his ghostly shambling. The people in the control room whisper back and forth, a member of the makeup desperately pad at Maher’s hair and tries suggesting a change of attire, but he seems completely out of it, totally mad. Instead leaping into the frame, and delivering his monologue to a confused production staff.</p>
+<p style="margin-left: 60px;"><strong>Maher:</strong> (To camera) I don’t have to tell you things are bad, everyone knows things are bad, it’s the election. No one knows what’s going to happen. Everyone’s talking about it and everyone knows. The streets are run riot, everyone boarding up windows and battening down hatches, stocking their shelves. While the Antifa and the Maga run wild in the streets. Nobody knows what’s going to happen. </p>
+<p style="margin-left: 60px;">We know, the elections have been rigged, by the Russians and the Chinese and Iranians, and the Post Office, and the CIA. They tell us, it’ll all be sorted out by January, we’ll all know by then. Meanwhile, everything’s falling to shit. Things are worse than bad, it’s seems like everyone is going crazy, so we can’t go out anymore, we stay at home and look at our phones, and pray that they leave us alone, leave me with my free next-day delivery, and superhero movies and just leave me alone. </p>
+<p>The people in the studio are at rapt attention including his guests each shifting uncomfortably in their seats.</p>
+<p style="margin-left: 60px;"><strong>Maher:</strong> (Continued) I’m not going to leave you alone. I want you to get angry, I want you to get mad, I want you to say “Goddammit, the election was rigged, Covid was leaked, the President's a dictator, get out of your houses right now and stick your heads out the windows and scream “I’m as mad as hell and I’m not going to take this anymore” </p>
+<p><strong>Showing results for <span style="color: #0097CE;"><i>contingent election</i></span></strong></p>
+<ul>
+<li style="text-decoration: underline; color: grey;">Karen Bass Refuses to Seat 3 Republicans</li>
 <li style="text-decoration: underline; color: grey;">What is a Quorum Bust?</li>
 <li style="text-decoration: underline; color: grey;">An Open Letter to the Founding Fathers “We Hope You Are Fucking Happy with Yourselves”</li>
 </ul>
@@ -58724,7 +58774,7 @@ e.pages.push(`<h3 style="font-weight: bold;"><span style="font-size: 20px;">r/th
 e.executable.push([2, (() => {e.image = 'https://i.imgur.com/ohIZ86e.gif'})])
 }
 
-if (quickstats[0] < 269 && quickstats[0] > 150 && aa[0].electoral_votes > 269 && Dem == 21 && (SecretEnding == 0 || SecretEnding == 2 || SecretEnding == 1 && quickstats[0] < 200)) { // Tlaib - Bread and Roses
+if (quickstats[0] < 269 && quickstats[0] > 150 && aa[0].electoral_votes > 269 && Dem == 21 && aa[0].candidate === 7878 && (SecretEnding == 0 || SecretEnding == 2 || SecretEnding == 1 && quickstats[0] < 200)) { // Tlaib - Bread and Roses
 e.pages.push(`<h3 style="font-weight: bold;"><span style="font-size: 20px;">r/thecampaigntrail </span></h3>
 <p style="font-size: 10px; margin-top: 8px;"><span style="background-color: orange;">Announcement</span></p>
 <p style="font-size: 16px;"><strong>Mod Announcement - Bread and Roses</strong></p>
@@ -59598,6 +59648,8 @@ e.pages.push(`<div style="text-align: center;">
 //e.image = ""
 e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/VZPLsxK.gif'})])
 }
+
+if (aa[0].popular_votes < 110000000) {
             
     if (quickstats[0] > 349 && SecretEnding < 4 && Dem < 21) { // win over 349
     ctsAchievement("Mask Off");  
@@ -59748,6 +59800,8 @@ e.executable.push([2, (() => {e.image = e.image = 'https://i.imgur.com/VZPLsxK.g
     if (quickstats[0] > 269 && aa[1].popular_votes - aa[0].popular_votes >= 10000000 && SecretEnding < 4) {
     ctsAchievement("But Who's Counting?");
     }
+
+}
     
     return construct(0);
     }
