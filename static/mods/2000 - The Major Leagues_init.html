@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.0.0
+* @version: 1.0.1
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -3098,7 +3098,7 @@ if (oldPicker) {
       image: "https://file.garden/aNtAfG887DiA_7lO/sm3.webp",
       aim: "thestrawb", 
       location: "make-a-point land", 
-      incept: "10/31/59 BC",
+      incept: "10/31/69 BC",
       records:[
           "'Behavior' by Pet Shop Boys", 
           "'Adventure' by Television", 
@@ -3110,7 +3110,8 @@ if (oldPicker) {
           "The Matrix", 
           "Gummo", 
           "Space Jam",
-		  "12 Angry Men",		  
+		  "12 Angry Men",
+		  "Fight Club",
 		  "BASEketball"
       ],
       books:[
@@ -4728,10 +4729,14 @@ function applyTooltipsToObject(obj) {
         const minBtn = document.getElementById(MINIMIZE_BUTTON_ID);
         if (minBtn) minBtn.title = isPlayerMinimized ? "Expand player" : "Minimize player";
     }
-
-    window.playEndingSong = (title, artist, cover, url) => {
+	
+	window.playEndingSong = (title, artist, cover, urls) => {
         if (!ytPlayer) return;
-        const endingSong = new Song(title, artist, cover, [extractYouTubeId(url)]);
+        
+        const urlArray = Array.isArray(urls) ? urls : [urls];
+        const videoIds = urlArray.map(extractYouTubeId);
+        
+        const endingSong = new Song(title, artist, cover, videoIds);
         playlist = new Playlist([endingSong]);
         playlist.setCurrentSongIndex(0);
         loadCurrentSong(true);
