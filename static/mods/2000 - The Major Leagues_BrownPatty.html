@@ -495,7 +495,7 @@ campaignTrail_temp.answers_json = [
         "pk": 3382,
         "fields": {
             "question": 362,
-            "description": "Every single time, the administration circles the wagons, protects its own, and nothing changes. There is no honor to restore, because there was never any honor to begin with.  Linus’s pretty speeches are just part of the problem."
+            "description": "Every single time, the administration circles the wagons, protects its own, and nothing changes. There is no honor to restore, because there was never any honor to begin with. Linus’s pretty speeches are just part of the problem."
         }
     },
     {
@@ -10358,7 +10358,7 @@ campaignTrail_temp.running_mate_state_id = '203';
 const _originalQuestionHTML = window.questionHTML;
 window.questionHTML = function(...args) {
     _originalQuestionHTML.apply(this, args);
-    
+
     const mapButton = document.getElementById("view_electoral_map");
 	const answerButton = document.getElementById("answer_select_button");
     if (mapButton && answerButton) {
@@ -10397,7 +10397,7 @@ const questionDateMap = [
     "October 21, 2000",
     "October 23, 2000",
     "October 27, 2000",
-    "October 30, 2000",	
+    "October 30, 2000",
     "November 1, 2000",
     "November 2, 2000",
     "November 3, 2000",
@@ -10424,7 +10424,7 @@ const peanutsFooterStyles = `
         width: 190px;
         background: #f7f3ea;
 		margin: auto .5em;
-		margin-top: -50px; 
+		margin-top: -50px;
         padding: 10px 10px 30px;
         border: 1px solid #d8d1c3;
         box-shadow:
@@ -10434,7 +10434,7 @@ const peanutsFooterStyles = `
         position: relative;
         z-index: 10;
     }
-	
+
 	.pf-polaroid.right {
 		transform: rotate(3deg);
 	}
@@ -10544,7 +10544,7 @@ function createCenterFrame({ imageSrc, counterText, dateText }) {
     inner.appendChild(date);
 
     frame.appendChild(inner);
-	
+
     return frame;
 }
 
@@ -10674,16 +10674,16 @@ function unlockAchievement(title) {
 
   // handle permanent saving
   const shouldSavePermanently = game.difficulty_level_multiplier <= 1 && !achState.permanent[title];
-  
+
   if (shouldSavePermanently) {
     achState.permanent[title] = true;
     localStorage.setItem(ACH_CONFIG.STORAGE_KEY, JSON.stringify(achState.permanent));
-    
+
     if (typeof window.addAllAchievements === 'function') {
       window.addAllAchievements();
     }
   }
-  
+
   // user options for achievements
   const popupSetting = game.achPopup || 'always';
   const isNewUnlock = shouldSavePermanently;
@@ -10875,7 +10875,7 @@ cyoAdventure = function (a) {
     if (!campaignTrail_temp.player_answers || campaignTrail_temp.player_answers.length === 0) return;
     const ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1];
 	e.noCounter = campaignTrail_temp.player_answers.length;
-		
+
     // psychological/internal traits
     if ([3310, 3316, 3323, 3324, 3342, 3359, 3366, 3386, 3411, 3430, 12401, 12379, 12390, 12431, 12448, 12465].includes(ans)) ruthlessness += 1;
     if ([3326, 3333, 3339, 3431].includes(ans)) ruthlessness += 2;
@@ -10891,9 +10891,9 @@ cyoAdventure = function (a) {
     if ([3341, 3487, 12466].includes(ans)) cynicism += 2;
     if ([3315, 3319, 3322, 3343, 3360, 3367, 3374, 3387, 3489, 3502, 12465, 12467].includes(ans)) cynicism -= 1;
 
-    if ([3310, 3311, 3314, 3319, 3327, 3330, 3331, 3337, 3344, 3367, 3368, 3382, 3385, 3398, 3409, 3489, 12423, 12431, 12465].includes(ans)) anti_establishment += 1;
+    if ([3310, 3311, 3314, 3319, 3327, 3330, 3331, 3337, 3344, 3367, 3368, 3383, 3382, 3385, 3398, 3409, 3489, 12423, 12431, 12465].includes(ans)) anti_establishment += 1;
     if ([3346, 3397, 3501].includes(ans)) anti_establishment += 2;
-    if ([3318, 3332, 3383, 3410, 12240, 12415].includes(ans)) anti_establishment -= 1;
+    if ([3318, 3332, 3381, 3410, 12240, 12415].includes(ans)) anti_establishment -= 1;
     if ([3345, 3399].includes(ans)) anti_establishment -= 2;
 
     if ([3310, 3311, 3314, 3318, 3324, 3326, 3331, 3333, 3339, 3342, 3345, 3368, 3382, 3385, 3386, 3397, 3410, 3411, 3430, 3501, 12401, 12423, 12448, 12467].includes(ans)) patty_approval += 1;
@@ -10912,12 +10912,12 @@ cyoAdventure = function (a) {
     if ([3319, 3327, 3344, 3429, 3501].includes(ans)) support_jocks -= 1;
 
     if ([3330, 3343, 3367, 3368, 3383, 3410, 12407, 12395].includes(ans)) support_arts += 1;
-    if ([3411].includes(ans)) support_arts += 2; 
+    if ([3411].includes(ans)) support_arts += 2;
     if ([3326, 3342, 3399, 3409, 12401].includes(ans)) support_arts -= 1;
 
     if ([3324, 3332, 3399, 12240, 12415].includes(ans)) support_admin += 1;
     if ([3311, 3330, 3331, 3346, 3367, 3381, 3382, 3397, 3398, 3410, 3501, 12423, 12431, 12465].includes(ans)) support_admin -= 1;
-	
+
 	// other stuff
 	// psst: noCounter value should be question no. - 1
 	if (e.noCounter === 7) {
@@ -10925,13 +10925,13 @@ cyoAdventure = function (a) {
 			questionSwapper(348, 420);
 		}
 	}
-	
+
 	if (e.noCounter === 14) {
         if (anti_establishment >= 4) {
             questionSwapper(362, 410);
         }
     }
-	
+
 	if (e.noCounter === 17) {
 		if (ruthlessness >= 4) {
 			answerSwapper(3360, 12379, true);
@@ -10940,7 +10940,7 @@ cyoAdventure = function (a) {
 			answerSwapper(3359, 12395, true);
 		}
 	}
-	
+
 	if (e.noCounter === 18) {
 		if (ruthlessness >= 5) {
 			answerSwapper(3386, 12401, true);
@@ -10948,47 +10948,47 @@ cyoAdventure = function (a) {
 			answerSwapper(3386, 12407, true);
 		}
 	}
-	
+
 	// it's royin' time
 	if (ans === 12440) {
 		window.isRoyInCharge = true;
-		
+
 		campaignTrail_temp.running_mate_image_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy.jpg";
 		campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy_advisor2.png";
-		
+
 		CENTER_IMAGE_URL = "https://i.pinimg.com/1200x/4b/38/7d/4b387d964d5502f237e4951befc19adb.jpg";
-				
+
 		// shameless rewrites to fit in Roy
         const q363 = campaignTrail_temp.questions_json.find(q => q.pk === 363);
         if (q363) {
             q363.fields.description = "It’s unbelievable. Roy somehow managed to acquire the keys to the main office PA system. You don’t ask how. “You have two minutes before the janitor finishes his rounds, dude,” he whispers to you. “Broadcast a, uh, final message to the whole school. And quick, too. Make it count. You sit down in the principal’s swivel chair, pull the microphone toward you, and click it on. As the red broadcast light glows steady in the dark room, it casts long shadows across the filing cabinets and the framed portraits of former principals, who all look vaguely disappointed in you.";
         }
-        
+
         const q360 = campaignTrail_temp.questions_json.find(q => q.pk === 360);
         if (q360) {
             q360.fields.description = "It’s Election Night, and the rain hasn’t stopped since three o’clock. Roy called from a payphone to drag you down to the watch party at the bowling alley, but you told him you were done for the night and hung up. You couldn’t stomach the noise, the plastic cups, or the anxious stares. Tired, you walked home alone in the dark.<br><br>Soaking wet, you sink into the living room couch and turn on the television. On the screen, you sigh as national anchors sweat over razor-thin margins in places you never heard of; the whole world feels like it’s fracturing. Then, you hear the soft clicking of claws on the linoleum as Snoopy walks in. He’s a bit older now, but remains as wise as always. He rests his heavy chin on your knee, looking up with quiet eyes, as the weight of the last two months finally crashes down on you.";
         }
-        
+
         // ooooh flimsy Roy, where did you go, what have you seen
 		updateFeedback(3326, "Roy lets out a low, impressed whistle from the front row. Oh, he thought this debate was going to be completely lame, but watching you metaphorically execute Linus on stage has fully captured his attention. Linus is no golden boy, and thanks to you, everyone knows it.");
 		updateFeedback(3344, "Franklin sighs, adjusting his backpack on his shoulder before walking away down the hall without another word, seemingly refusing to endorse either candidate. Curiously, Roy seems to be unbothered by your words. ‘Middle-of-the-road guys are always total narcs anyway, man.’");
 		updateFeedback(3366, "Your ability to fuck things up at a moment’s notice amazes me.");
-		updateFeedback(3368, "You don’t get it, you really don’t. Why can’t people understand it? Is the problem that Charlie Brown is too sad, or is the problem that Linus Van Pelt isn’t sad enough? Against his will, Roy writes down your words and by the next day, the school hallways are filled with flyers from so-called Brownites who appreciate your words of wisdom.");		
-		updateFeedback(3381, "Roy, who has actually slept through that particular history teacher’s class all semester, entirely agrees with you. While a few of the more strategic kids in your camp groan that you just handed Linus the moral high ground, all Roy does is tell them to ‘take a chill pill.’");		
+		updateFeedback(3368, "You don’t get it, you really don’t. Why can’t people understand it? Is the problem that Charlie Brown is too sad, or is the problem that Linus Van Pelt isn’t sad enough? Against his will, Roy writes down your words and by the next day, the school hallways are filled with flyers from so-called Brownites who appreciate your words of wisdom.");
+		updateFeedback(3381, "Roy, who has actually slept through that particular history teacher’s class all semester, entirely agrees with you. While a few of the more strategic kids in your camp groan that you just handed Linus the moral high ground, all Roy does is tell them to ‘take a chill pill.’");
 		updateFeedback(3383, "You feel like a massive hypocrite lecturing people about decency when you've spent the last two months slinging mud. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
         updateFeedback(3385, "‘Well, at least you’ve never been a buzzkill,’ Roy laughs as you both scramble out the side door before the janitor catches you. He tosses you a half-empty bag of chips as a reward once you hit the parking lot. You guess you’ve had worse speech coaches.");
 		updateFeedback(3386, "‘Damn, Chuck. Remind me never to get on your bad side,’ Roy mutters as you cut the mic. He’s laughing, but even he looks a little unnerved by how incredibly cold you sounded. It amazes a couple of students who had not seen the dark side of your campaign.");
-		updateFeedback(3387, "You click the microphone off, exhaustion written all over your face. Roy blinks, slightly out of his depth, though he seems genuinely surprised, and awkwardly offers you a sip of his Sprite®. You decline, but walk out into the empty hallway feeling a little less heavy.");		
+		updateFeedback(3387, "You click the microphone off, exhaustion written all over your face. Roy blinks, slightly out of his depth, though he seems genuinely surprised, and awkwardly offers you a sip of his Sprite®. You decline, but walk out into the empty hallway feeling a little less heavy.");
 		updateFeedback(3487, "You lie on the doghouse for a whopping six hours. Roy, who was supposed to cover for your absence at the town hall, apparently told the auditorium you got abducted by aliens or had a vision quest. Nobody believes him, but at least he tried. Kind of.");
 		updateFeedback(3338, "The truce takes effect immediately. Roy is noticeably bummed out when you tell him; he was really hoping someone would throw a punch by Friday. As the final week of the campaign is drained of venom, much to his disappointment, he wonders if there’s something else going on between you two.");
 		updateFeedback(12424, "Othmar stops drumming his fingers, and a bead of sweat forms on his temple. He may hate you, but he loves his pension more. Finally, he gives you a tight, furious nod and dismisses you. By the time you find Roy at his locker and tell him you just extorted the principal, he stares at you like you’re a rockstar. <i>His</i> rockstar.");
-		updateFeedback(3375, "The words crack in your throat, apologizing to him, but also to yourself, to Linus, to Patty, to Roy (wherever he is right now), and to the kid you once used to be. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");		
-		updateFeedback(12401, "Of course, Roy lets out a loud, obnoxious laugh as the broadcast ends. He’s eating this drama up like it’s prime-time television. Last time you saw him this happy was when you loaned him 200 bucks so he could visit his grandma in Peru. In the hallways, however, the silence of the student body is absolutely deafening.");		
+		updateFeedback(3375, "The words crack in your throat, apologizing to him, but also to yourself, to Linus, to Patty, to Roy (wherever he is right now), and to the kid you once used to be. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+		updateFeedback(12401, "Of course, Roy lets out a loud, obnoxious laugh as the broadcast ends. He’s eating this drama up like it’s prime-time television. Last time you saw him this happy was when you loaned him 200 bucks so he could visit his grandma in Peru. In the hallways, however, the silence of the student body is absolutely deafening.");
 		updateFeedback(12407, "Roy looks intensely disappointed, having tuned in hoping for a total meltdown. ‘This is… uh… a bit anti-climactic, don’t you think?’ And he sighs. But when you click the microphone off, you ignore him, feeling a massive weight lift off your chest. For the first time in weeks, you think, you can breathe.");
-				
-		questionSwapper(375, 430); // as Patty stepped down		
-	}		
-	
+
+		questionSwapper(375, 430); // as Patty stepped down
+	}
+
 	// achievement unlocks
 	const ansSet = new Set(campaignTrail_temp.player_answers);
 
@@ -11013,7 +11013,7 @@ cyoAdventure = function (a) {
             unlockAchievement(name);
         }
     }
-	
+
 	const allOfAchievements = [
         { ids: [3397, 12431], name: "Justice Aversion" },
         { ids: [12423, 3333, 3431], name: "Cherub Rock" },
@@ -11025,7 +11025,7 @@ cyoAdventure = function (a) {
             unlockAchievement(name);
         }
     }
-	
+
 }
 
 // Campaign Data popup
@@ -11037,8 +11037,8 @@ cyoAdventure = function (a) {
       bottom: 20px;
       right: 20px;
       width: 640px;
-      background-color: #f4f4f5; 
-      border: 2px solid #0f172a; 
+      background-color: #f4f4f5;
+      border: 2px solid #0f172a;
       box-shadow: 6px 6px 0px rgba(15, 23, 42, 0.15);
       z-index: 10000;
       font-family: Arial, sans-serif;
@@ -11071,7 +11071,7 @@ cyoAdventure = function (a) {
       padding: 0 4px;
     }
     #close_stats_btn:hover { color: #ef4444; }
-    
+
     #gameStatsTabs {
       display: flex;
       background-color: #e2e8f0;
@@ -11137,7 +11137,7 @@ cyoAdventure = function (a) {
       position: relative;
       width: 240px;
       height: 240px;
-      background: 
+      background:
         repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(15,23,42,0.15) 20px),
         repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(15,23,42,0.15) 20px),
         conic-gradient(
@@ -11156,7 +11156,7 @@ cyoAdventure = function (a) {
     }
     .compass-axis.vertical { width: 2px; height: 100%; left: 50%; top: 0; transform: translateX(-50%); }
     .compass-axis.horizontal { width: 100%; height: 2px; top: 50%; left: 0; transform: translateY(-50%); }
-    
+
     .compass-label {
       position: absolute;
       font-size: 9px;
@@ -11171,7 +11171,7 @@ cyoAdventure = function (a) {
     .lbl-bottom { bottom: -6px; left: 50%; transform: translateX(-50%); }
     .lbl-left { left: -6px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: center; }
     .lbl-right { right: -6px; top: 50%; transform: translateY(-50%) rotate(90deg); transform-origin: center; }
-	
+
 	#compass-marker {
       position: absolute;
       width: 24px;
@@ -11194,7 +11194,7 @@ cyoAdventure = function (a) {
       border-radius: 2px;
     }
 
-    #btn_game_stats { 
+    #btn_game_stats {
       margin-left: 1.5em;
       padding: .25em .5em;
     }
@@ -11215,7 +11215,7 @@ cyoAdventure = function (a) {
     }
     return tiers.at(-1)[1];
   }
-  
+
   function getInternalStats() {
     const roy = window.isRoyInCharge || false;
     return [
@@ -11311,7 +11311,7 @@ cyoAdventure = function (a) {
 
   // compass logic
   function getIdeologyName(x_pct, y_pct) {
-    const isPopulist = y_pct < 50; 
+    const isPopulist = y_pct < 50;
     const isRuthless = x_pct > 50;
 
     if (y_pct < 20 && x_pct > 80) return "a vengeful demagogue";
@@ -11330,7 +11330,7 @@ cyoAdventure = function (a) {
   function renderCompass() {
     let x_pct = ((ruthlessness - BAR_MIN) / (BAR_MAX - BAR_MIN)) * 100;
     let y_pct = ((BAR_MAX - anti_establishment) / (BAR_MAX - BAR_MIN)) * 100;
-    
+
     // constrain to box
     x_pct = Math.max(0, Math.min(100, x_pct));
     y_pct = Math.max(0, Math.min(100, y_pct));
@@ -11342,7 +11342,7 @@ cyoAdventure = function (a) {
         <div id="compass-container">
           <div class="compass-axis vertical"></div>
           <div class="compass-axis horizontal"></div>
-          
+
           <div class="compass-label lbl-top">POPULIST</div>
           <div class="compass-label lbl-bottom">INSTITUTIONAL</div>
           <div class="compass-label lbl-left">IDEALIST</div>
@@ -11386,7 +11386,7 @@ cyoAdventure = function (a) {
     const content = document.getElementById("gameStatsContent");
     const tabDemo = document.getElementById("tab_demo");
     const tabCompass = document.getElementById("tab_compass");
-    
+
     if (!content || !tabDemo || !tabCompass) return;
 
     if (activeTab === "demographics") {
@@ -11514,44 +11514,44 @@ function calculateCliqueResults() {
     let cur_cynicism = typeof cynicism !== 'undefined' ? cynicism : 0;
 
     // write-in sentiment goes up if the school is cynical or highly anti-establishment
-    let baseWriteInShare = 0.015; 
-    if (cur_ruthless >= 3) baseWriteInShare += 0.015; 
-    if (cur_patty <= -2) baseWriteInShare += 0.02; 
+    let baseWriteInShare = 0.015;
+    if (cur_ruthless >= 3) baseWriteInShare += 0.015;
+    if (cur_patty <= -2) baseWriteInShare += 0.02;
     if (cur_anti >= 5) baseWriteInShare += 0.02;
     if (cur_cynicism >= 5) baseWriteInShare += 0.02;
 
     // basically each clique calculates Charlie's share differently
 	// based on their specific values & traits
     const cliques = [
-        { 
-            name: "Burnouts", pop: 120, baseShare: 0.35, 
+        {
+            name: "Burnouts", pop: 120, baseShare: 0.35,
             support: typeof support_burnouts !== 'undefined' ? support_burnouts : 0,
             // burnouts love anti-establishment & Patty
-            calcCharlieMod: function() { return (this.support * 0.025) + (cur_anti * 0.015) + (cur_patty * 0.005); } 
+            calcCharlieMod: function() { return (this.support * 0.025) + (cur_anti * 0.015) + (cur_patty * 0.005); }
         },
-        { 
+        {
             name: "Honors", pop: 85, baseShare: 0.60,
             support: typeof support_honors !== 'undefined' ? support_honors : 0,
             // honors hate anti-establishment; they like Linus slightly, but mostly stick to the rules
-            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.02) - (cur_linus * 0.005); } 
+            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.02) - (cur_linus * 0.005); }
         },
-        { 
+        {
             name: "Jocks", pop: 150, baseShare: 0.30,
             support: typeof support_jocks !== 'undefined' ? support_jocks : 0,
             // jocks follow Patty's approval religiously
-            calcCharlieMod: function() { return (this.support * 0.06) + (cur_patty * 0.015) - (cur_cynicism * 0.01); } 
+            calcCharlieMod: function() { return (this.support * 0.06) + (cur_patty * 0.015) - (cur_cynicism * 0.01); }
         },
-        { 
-            name: "Arts", pop: 70, baseShare: 0.50, 
+        {
+            name: "Arts", pop: 70, baseShare: 0.50,
             support: typeof support_arts !== 'undefined' ? support_arts : 0,
             // arts students vibe with cynicism but hate ruthlessness
-            calcCharlieMod: function() { return (this.support * 0.06) + (cur_cynicism * 0.01) - (cur_ruthless * 0.015); } 
+            calcCharlieMod: function() { return (this.support * 0.06) + (cur_cynicism * 0.01) - (cur_ruthless * 0.015); }
         },
-        { 
-            name: "Admin/Faculty", pop: 25, baseShare: 0.35, 
+        {
+            name: "Admin/Faculty", pop: 25, baseShare: 0.35,
             support: typeof support_admin !== 'undefined' ? support_admin : 0,
             // admin plummets with anti-establishment and ruthlessness. hard for charlie to do good here
-            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.03) - (cur_ruthless * 0.015); } 
+            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.03) - (cur_ruthless * 0.015); }
         }
     ];
 
@@ -11561,13 +11561,13 @@ function calculateCliqueResults() {
     // calculate the raw data for all cliques
     cliques.forEach(c => {
         totalPop += c.pop;
-        
+
         let rngSwing = ((Math.random() + Math.random()) - 1) * 0.04; // -4% to +4% random noise
         let charlieShare = c.baseShare + c.calcCharlieMod() + rngSwing;
-        
+
         let cliqueWriteIn = baseWriteInShare + (((Math.random() * 2) - 1) * 0.015);
-        cliqueWriteIn = Math.max(0, cliqueWriteIn); 
-        
+        cliqueWriteIn = Math.max(0, cliqueWriteIn);
+
         // clamp shares
         charlieShare = Math.max(0, Math.min(1 - cliqueWriteIn, charlieShare));
 
@@ -11580,8 +11580,8 @@ function calculateCliqueResults() {
             if (charlieVotes > writeInVotes) charlieVotes--;
             else writeInVotes--;
         }
-        
-        let linusVotes = c.pop - charlieVotes - writeInVotes; 
+
+        let linusVotes = c.pop - charlieVotes - writeInVotes;
 
         // recalculate true percentages based strictly on rounded votes
         let dispCharlie = ((charlieVotes / c.pop) * 100).toFixed(1);
@@ -11617,7 +11617,7 @@ function calculateCliqueResults() {
         // grab 4 to 8 random names from the pool
         let numNames = Math.min(Math.floor(Math.random() * 5) + 4, possibleNames.length);
         let selectedNames = possibleNames.slice(0, numNames);
-        
+
         // create an exponential distribution so 1 or 2 names get
 		// most of the write-ins, and the rest get 1-2 votes
         let weights = selectedNames.map((_, i) => Math.pow(0.5, i) * (0.8 + Math.random() * 0.4));
@@ -11701,11 +11701,11 @@ function calculateCliqueResults() {
     `;
 
     // cache the results so they never recalculate if called again in the same run
-    fixedCliqueResults = { 
-        charlieWin: charlieTotal > linusTotal, 
-        linusWin: linusTotal > charlieTotal, 
-        itsATie: charlieTotal === linusTotal, 
-        tableHTML 
+    fixedCliqueResults = {
+        charlieWin: charlieTotal > linusTotal,
+        linusWin: linusTotal > charlieTotal,
+        itsATie: charlieTotal === linusTotal,
+        tableHTML
     };
 
     return fixedCliqueResults;
@@ -11776,8 +11776,8 @@ extraEndingStyles.replaceSync(`
   #main-ending-scroll-container {
     contain: content;
     -webkit-overflow-scrolling: touch;
-    height: 38em; 
-    overflow: auto; 
+    height: 38em;
+    overflow: auto;
     position: relative;
   }
   .slide-wrapper {
@@ -11793,7 +11793,7 @@ extraEndingStyles.replaceSync(`
     max-width: 100%;
     height: auto;
   }*/
-  
+
   #expand-ending-btn {
     position: absolute;
     bottom: 10px;
@@ -11823,7 +11823,7 @@ extraEndingStyles.replaceSync(`
     float: right;
     margin-bottom: 1em;
   }
-  
+
 `);
 
 if (!document.adoptedStyleSheets.includes(extraEndingStyles)) {
@@ -11833,7 +11833,7 @@ if (!document.adoptedStyleSheets.includes(extraEndingStyles)) {
 // image preloader
 function preloadEndingAssets() {
   if (!campaignTrail_temp.pages) return;
-    
+
   Object.values(campaignTrail_temp.executable || {}).forEach(func => {
     // this is a rough heuristic to catch image sets
     const str = func.toString();
@@ -11871,33 +11871,33 @@ window.endingConstructor = (direction = 1) => {
   if (newPage < 0 || newPage >= campaignTrail_temp.pages.length) {
     return; // out of bounds
   }
-  
+
   campaignTrail_temp.page = newPage;
 
   let scrollContainer = document.getElementById("main-ending-scroll-container");
   let narrativeDiv = document.getElementById("endingtxt");
   let buttonProxy = document.getElementById("ending-button-proxy");
-  
+
   if (!scrollContainer) {
     const finalDesc = document.getElementById("final_results_description");
-    
+
     const shellFragment = document.createDocumentFragment();
-    
+
     // container
     scrollContainer = document.createElement("div");
     scrollContainer.id = "main-ending-scroll-container";
-    
+
     // narrative area
     narrativeDiv = document.createElement("div");
     narrativeDiv.id = "endingtxt";
     narrativeDiv.className = "ending-narrative-content";
     scrollContainer.appendChild(narrativeDiv);
-    
+
     // stats area
     const statsContainer = document.createElement("div");
     statsContainer.id = "ending-stats-container";
     statsContainer.style.paddingTop = "1rem";
-    
+
     const statsIds = ["difficulty_mult", "overall_vote_statistics", "map_footer"];
     statsIds.forEach(id => {
       const el = document.getElementById(id);
@@ -11917,12 +11917,12 @@ window.endingConstructor = (direction = 1) => {
     shellFragment.appendChild(buttonProxy);
 
     finalDesc.style.cssText = "text-align: left; width: 72%; height: auto; margin-left: auto; margin-right: auto; display: block;";
-    finalDesc.innerHTML = ""; 
+    finalDesc.innerHTML = "";
     finalDesc.appendChild(shellFragment);
 
     preloadEndingAssets();
   }
-  
+
   // hide only the previous slide
   if (currentSlide) currentSlide.style.display = 'none';
 
@@ -11938,7 +11938,7 @@ window.endingConstructor = (direction = 1) => {
     nextSlide = document.createElement("div");
     nextSlide.id = slideId;
     nextSlide.className = "slide-wrapper";
-	
+
     // inject content
     nextSlide.innerHTML = `<table style='margin:0px;padding:0px;display: table;width:100%;'>
         <tbody style='display: table-row-group;'>
@@ -11957,7 +11957,7 @@ window.endingConstructor = (direction = 1) => {
   // update the buttons
   let btnHtml = "";
   const lastPage = campaignTrail_temp.pages.length - 1;
-  
+
   if (campaignTrail_temp.pages.length > 1) {
     if (newPage === 0) {
       btnHtml = `<button onclick='endingConstructor(1)'>Next</button>`;
@@ -12005,7 +12005,7 @@ function setupExpandButton() {
   const expandBtn = document.createElement("button");
   expandBtn.id = "expand-ending-btn";
   expandBtn.innerText = "Expand";
-  
+
   // create the modal
   const modal = document.createElement("div");
   modal.id = "expand-ending-modal";
@@ -12922,7 +12922,7 @@ const mainEndings = [
   <p>The rain was coming down in violent, freezing sheets, punishing the pavement and rattling the windows of the Van Pelt house.</p>
 
   <p>Inside, the victory party was long over. Deflated balloons lay scattered across the living room carpet, and empty paper cups sat abandoned on the coffee tables. Linus was alone in the entryway, quietly sweeping up a trail of muddy footprints left by departing well-wishers. The student council presidency was his, but the quiet of the empty house felt heavier than a celebration ought to. At least it was all over.</p>
-  
+
   <p>He heard the gate.</p>
 
   <p>Then footsteps on the porch, all uneven, too fast. Then the knock… well, not a knock, really. He sighed. In fact, he knew before he opened it. He didn’t know how he knew; he just did. He opened the door anyway.</p>
@@ -12932,7 +12932,7 @@ const mainEndings = [
   <p>For a moment neither of them moved.</p>
 
   <p>Then Charlie said, <span class="dialogue">“You happy?”</span></p>
-  
+
   <div class="section-break">· · ·</div>
 
   <p>Linus said, carefully, <span class="dialogue">“Charlie—”</span></p>
@@ -13032,9 +13032,9 @@ const mainEndings = [
   <p>He thought about winning. He thought about what it looked like, apparently. He thought about the small flat sound in the hallway and the blood on Charlie’s fingers and the way he’d said <em>stay away from me, please, I’m begging you,</em> like a person saying goodbye in a language that didn’t have a word for it.</p>
 
   <p>Linus closed his eyes. He let out a breath, slowly, all the way down. It didn’t help. He hadn’t thought it would.</p>
-  
+
   <p>Finally, he let out a long, trembling sigh, and eventually, Linus gently closed the door.</p>
-  
+
 </div>`,
     song: {
       title: "Motherless Child",
@@ -13876,7 +13876,7 @@ const mainEndings = [
       cover: "https://file.garden/aNtAfG887DiA_7lO/TML_2000/newgenious.webp",
       url: ["77m-RvWF2uo", "WFrd_HyHf3E"]
     }
-  },  
+  },
   {
     id: "charliebushwin",
     condition: (ev) => ev < 269 && charlieWin,
@@ -14529,7 +14529,7 @@ const bonusSlides = [
     condition: (ev, op, leftThirdEV, rightThirdEV, right2ThirdEV) => (rightThirdEV > 269),
     image: "https://i.pinimg.com/1200x/88/b0/fb/88b0fb40fb6cd6ec44de6d056561ab43.jpg",
     html: `<div style="background: linear-gradient(to bottom, #16153C, #22205B); color: #fff; border: 1px solid #777; border-radius: 8px 0; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.2), inset 0 1px 0 rgba(100, 100, 100, 0.7); overflow-y: auto;">
-    
+
   <h3><span style="color:#aaccff; font-weight: normal; font-style: italic;">the memory of direction</span></h3>
 
   <p><span style="color:#99aabb;"><em>[wind noise, camera adjusting, then sound of something being set down on a hard surface. The subject’s breath is visible in the cold air.]</em></span></p>
@@ -15196,7 +15196,7 @@ const bonusSlides = [
       <div class="rating-label">DS Rating<br>/ 10</div>
     </div>
   </div>
-  
+
   <div class="cast-strip">
     <div class="cast-strip-inner">
 
@@ -17344,9 +17344,9 @@ const bonusSlides = [
     </div>
 
     <div class="nwr-content">
-      
+
       <div class="kicker">Extended Review | Issue 214 | Nov 2003</div>
-      
+
       <h1 class="hed">The Game Where <em>Niles</em> Is on the Cover</h1>
       <div class="deck">How a licensed Frasier game came to exist, why it is starring the wrong Crane brother, and what any of this has to do with the show's ninth season.</div>
 
@@ -17373,9 +17373,9 @@ const bonusSlides = [
         <p>The development history of <em>My Dinner with Daphne</em> is not especially well-documented, but what is known is interesting. Saffire Corporation, the Salt Lake City-based developer responsible for a number of GameCube and GBA licensed titles in the early 2000s, was brought on to develop a Frasier game sometime in mid-2001, around the time the show was entering its ninth season. The contract, as far as can be determined, was negotiated by Paramount Digital Entertainment, who had licensed the show's brand and character likenesses for a number of ancillary products throughout the late nineties and into the new decade. Saffire had previously developed titles based on <em>Rugrats</em> and the <em>Powerpuff Girls</em>, which is perhaps why the resulting game has, in certain areas, a visual clarity that seems almost children's-educational — noticeably, everything in the apartment renders with some kind of a cheerful legibility, as though the game is trying very hard to make sure you know what a settee is.</p>
 
         <div class="sec">Season 9 and this game</div>
-		
+
 		<p>The connection to the show's ninth season is not exactly incidental. <em>My Dinner with Daphne</em> takes place, explicitly, in the continuity of Season 9, which means that Niles and Daphne are already together. The season ran from 2001 to 2002, depicting the early, often awkward realities of their long-anticipated relationship after years of Niles's increasingly desperate, eight-years-running romantic fixation on Daphne Moon, his father's live-in physical therapist and, crucially, his brother's employee. The game drops you into this particular emotional situation and invites you to inhabit it, which is an unusual thing for a licensed GameCube title to ask of its player. The comparison that kept occurring to me, while playing through the game's six-hour main scenario, was not to other licensed games but to visual novels — to that tradition of games that are less about what you do than about what you know and cannot say.</p>
-		
+
         <div class="aside">
           <div class="aside-hed">A note on voice acting</div>
           David Hyde Pierce does not provide the voice of Niles in this game, and the game does not pretend otherwise. The soundalike does, however,  a serviceable job of capturing the cadence without ever quite landing the vulnerability. Kelsey Grammer, by contrast, <em>does</em> voice Frasier in the game's cutscenes, and the contrast between the authentic and the ersatz is unfortunately audible.
@@ -17425,7 +17425,7 @@ const bonusSlides = [
         </div>
 
         <p>Without giving away what the game ultimately does with its ending, it is worth saying that the most affecting of the possible conclusions is not the one that resolves anything. There is an ending, which one may describe as the "good ending," where the dinner party goes beautifully. The guests leave, Niles stands alone at the cleared table, and the game's end screen is white, with a single text line: "Dr. Niles Crane had a very nice dinner party."</p>
-        
+
         <p>And then it goes back to the main menu, and the inventory screen, if you look at it before exiting, still has all those locked words and small wax figures and folded notes in it, and the scrollbar is still there, and you have no idea what the fuck just happened. It is the most Frasier thing a game has ever done. One thing I learned from My Dinner with Daphne, ultimately, is that everything right is not the same as anything being resolved.</p>
 
         <div class="clearfix"></div>
@@ -17461,7 +17461,7 @@ const bonusSlides = [
     line-height: 1.4;
     text-align: left;
   }
-  
+
   #fc-2003-wrapper::-webkit-scrollbar { width: 14px; }
   #fc-2003-wrapper::-webkit-scrollbar-track { background: #cccccc; border-left: 1px solid #999; }
   #fc-2003-wrapper::-webkit-scrollbar-thumb { background: #999999; border: 1px outset #eeeeee; }
@@ -17538,7 +17538,7 @@ const bonusSlides = [
   .fc-03-body {
     padding: 10px;
   }
-  
+
   .fc-03-left {
     float: left;
     width: 140px;
@@ -17546,7 +17546,7 @@ const bonusSlides = [
     border: 1px solid #dddddd;
     padding: 10px;
   }
-  
+
   .fc-03-right {
     float: right;
     width: 160px;
@@ -17621,7 +17621,7 @@ const bonusSlides = [
     padding-bottom: 3px;
     margin-bottom: 10px;
   }
-  
+
   .fc-03-center h1 {
     font-family: "Times New Roman", Times, serif;
     font-size: 26px;
@@ -17788,9 +17788,9 @@ const bonusSlides = [
   <div id="fc-2003-container">
 
     <div class="fc-03-util">
-      <a href="#">filmcomment.com</a> &nbsp;|&nbsp; 
-      <a href="#">Subscribe</a> &nbsp;|&nbsp; 
-      <a href="#">Archive</a> &nbsp;|&nbsp; 
+      <a href="#">filmcomment.com</a> &nbsp;|&nbsp;
+      <a href="#">Subscribe</a> &nbsp;|&nbsp;
+      <a href="#">Archive</a> &nbsp;|&nbsp;
       <a href="#">Log In</a>
     </div>
 
@@ -17868,11 +17868,11 @@ const bonusSlides = [
       </div>
 
       <div class="fc-03-center">
-        
+
         <div class="fc-03-kicker">Feature Essay &nbsp;|&nbsp; November / December 2003</div>
-        
+
         <h1>The Pure in Heart:<br><em>Blessed Are the Pure</em> and the Uses of a Controversy</h1>
-        
+
         <div class="fc-03-deck">A film about two boys and a gun, set in Littleton in 1998, arrives in the middle of a culture war that has almost nothing to do with it — and yet somehow illuminates exactly that.</div>
 
         <div class="fc-03-byline fc-03-clearfix">
@@ -17928,7 +17928,7 @@ const bonusSlides = [
         <p>Whether you call that homoerotic or not seems to me genuinely secondary. What the film is, in the end, is a film about love: about what it looks like when two people find each other in a landscape of indifference, and about the catastrophe that awaits when that love is not enough. Sherrill doesn't explain this turn, nor does he offer the massacre as an outcome, exactly; he offers it as a fact the film knows is coming and refuses to account for. And it leaves you wondering if the cut to black is an evasion, or, instead, if it's the most honest thing a film about Columbine could do.</p>
 
         <p><em>Blessed Are the Pure</em> is a serious film in a season that has not been short of them. It deserves to be discussed in serious terms, which means discussing what it actually does rather than what a C-SPAN clip suggested it might contain. See it before someone explains it to you.</p>
-        
+
         <br>
         <p style="font-family: Arial, sans-serif; font-size: 10px; color: #666; border-top: 1px dashed #ccc; padding-top: 10px;">
           <em>Amy Taubin is a contributing editor at Film Comment and a critic for Artforum. Blessed Are the Pure is in limited release through IFC Films. Wider opening November 14.</em>
@@ -17947,7 +17947,7 @@ const bonusSlides = [
       <a href="#">Archive</a> <span>|</span>
       <a href="#">Subscribe</a> <span>|</span>
       <a href="#">About</a>
-      
+
       <div class="fc-03-copy">
         &copy; 2003 Film Comment / The Film Society of Lincoln Center. All rights reserved.<br>
         Reproduction in whole or in part without permission is prohibited.
@@ -19001,7 +19001,7 @@ const bonusSlides = [
     color: #999;
     text-transform: uppercase;
   }
-  
+
   .cnn-text p {
     font-size: 13px;
     line-height: 1.65;
@@ -20172,7 +20172,7 @@ const bonusSlides = [
 
         <div class="qa-q">Any message for the people who've attended the tour?</div>
         <div class="qa-a">
-          "Thank you. From the bottom of my heart, a very large, very giving heart, thank you. To the gingers, to the Jews, to everyone I may have wronged: you are forgiven. I mean— I am sorry. You are— I forgive you for being upset. No— I am sorry. That's the message. Those two words, I'm sorry. 
+          "Thank you. From the bottom of my heart, a very large, very giving heart, thank you. To the gingers, to the Jews, to everyone I may have wronged: you are forgiven. I mean— I am sorry. You are— I forgive you for being upset. No— I am sorry. That's the message. Those two words, I'm sorry.
           <br><br>
           "And to the Cleveland Browns: I am not sorry. Not even slightly."
         </div>
@@ -20205,7 +20205,7 @@ const bonusSlides = [
   </div>
 
 </div>`
-  },  
+  },
   {
     id: "regaan",
     condition: (ev) => linusWin && anti_establishment <= 1 && ruthlessness >= 5,
@@ -21209,7 +21209,7 @@ const bonusSlides = [
     text-decoration: none;
     margin-bottom: 5px;
   }
-  
+
   .or-tabmenu {
     list-style-type: none;
     padding: 0;
@@ -21315,7 +21315,7 @@ const bonusSlides = [
   .or-usertext-body p { margin: 0 0 15px 0; }
   .or-usertext-body a { color: #336699; text-decoration: none; }
   .or-usertext-body a:hover { text-decoration: underline; }
-  
+
   .or-fake-img-box {
     background-color: #e5e5e5;
     border: 1px solid #ccc;
@@ -21359,7 +21359,7 @@ const bonusSlides = [
 </style>
 
 <div id="old-reddit-wrapper">
-  
+
   <div class="or-sr-header">
     <a href="#">my subreddits</a> | <a href="#">popular</a> | <a href="#">all</a> | <a href="#">random</a> | <a href="#">users</a> | <a href="#">askreddit</a> - <a href="#">news</a> - <a href="#">pics</a> - <a href="#">thecampaigntrail</a>
   </div>
@@ -21381,10 +21381,10 @@ const bonusSlides = [
   </div>
 
   <div class="or-body">
-    
+
     <div class="or-content">
       <div class="or-post">
-        
+
         <div class="or-midcol">
           <div class="or-arrow up">⬆</div>
           <div class="or-score">124</div>
@@ -21447,7 +21447,7 @@ const bonusSlides = [
   max-width: 900px;
   margin: 0 auto;
 }
- 
+
 .ib-topbar {
   background: #1a3a6b;
   padding: 4px 10px;
@@ -21483,7 +21483,7 @@ const bonusSlides = [
 }
 .ib-topbar-right a { color: #ccddee; text-decoration: none; }
 .ib-topbar-right a:hover { text-decoration: underline; }
- 
+
 .ib-nav {
   background: #2a4a8b;
   display: flex;
@@ -21501,7 +21501,7 @@ const bonusSlides = [
 }
 .ib-nav a:hover { background: #3a5a9b; color: #fff; }
 .ib-nav a.on { background: #ffcc00; color: #1a3a6b; }
- 
+
 .ib-breadcrumb {
   background: #f0f4f8;
   border-bottom: 1px solid #d0d8e4;
@@ -21514,13 +21514,13 @@ const bonusSlides = [
 }
 .ib-breadcrumb a { color: #2a4a8b; text-decoration: none; }
 .ib-breadcrumb a:hover { text-decoration: underline; }
- 
+
 .ib-main {
   display: flex;
   align-items: flex-start;
   gap: 0;
 }
- 
+
 .ib-left {
   width: 160px;
   flex-shrink: 0;
@@ -21551,7 +21551,7 @@ const bonusSlides = [
 }
 .ib-left a:hover { background: #e8f0f8; color: #1a3a6b; text-decoration: underline; }
 .ib-left a.on { background: #2a4a8b; color: #fff; font-weight: bold; }
- 
+
 .ib-playbill-mini {
   margin: 10px 8px;
   background: linear-gradient(160deg, #0a1628 0%, #1a2d4e 100%);
@@ -21601,13 +21601,13 @@ const bonusSlides = [
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
- 
+
 .ib-content {
   flex: 1;
   min-width: 0;
   padding: 12px 14px;
 }
- 
+
 .ib-show-header {
   border-bottom: 2px solid #2a4a8b;
   padding-bottom: 10px;
@@ -21662,14 +21662,14 @@ const bonusSlides = [
   color: #1a3a6b;
   margin-top: 5px;
 }
- 
+
 .ib-two-col {
   display: flex;
   gap: 16px;
   align-items: flex-start;
   margin-bottom: 14px;
 }
- 
+
 .ib-show-img {
   width: 170px;
   flex-shrink: 0;
@@ -21734,7 +21734,7 @@ const bonusSlides = [
   font-style: italic;
   line-height: 1.3;
 }
- 
+
 .ib-show-meta { flex: 1; }
 .ib-meta-table {
   width: 100%;
@@ -21756,7 +21756,7 @@ const bonusSlides = [
 .ib-meta-table td:last-child { color: #222; }
 .ib-meta-table a { color: #2a4a8b; text-decoration: none; }
 .ib-meta-table a:hover { text-decoration: underline; }
- 
+
 .ib-synopsis-box {
   background: #f8fafc;
   border: 1px solid #d0d8e4;
@@ -21768,7 +21768,7 @@ const bonusSlides = [
   margin-bottom: 14px;
 }
 .ib-synopsis-box em { font-style: italic; }
- 
+
 .ib-sec-head {
   background: #2a4a8b;
   color: #fff;
@@ -21785,7 +21785,7 @@ const bonusSlides = [
 }
 .ib-sec-head a { color: #aaccee; font-size: 9px; font-weight: normal; text-transform: none; text-decoration: none; }
 .ib-sec-head a:hover { text-decoration: underline; }
- 
+
 .ib-cast-table {
   width: 100%;
   border-collapse: collapse;
@@ -21834,7 +21834,7 @@ const bonusSlides = [
   vertical-align: middle;
   margin-left: 4px;
 }
- 
+
 .ib-song-table {
   width: 100%;
   border-collapse: collapse;
@@ -21866,7 +21866,7 @@ const bonusSlides = [
   padding: 3px 8px;
 }
 .ib-ghost-song td { background: #f0eef8 !important; font-style: italic; }
- 
+
 .ib-awards-table {
   width: 100%;
   border-collapse: collapse;
@@ -21906,7 +21906,7 @@ const bonusSlides = [
   vertical-align: middle;
   margin-right: 4px;
 }
- 
+
 .ib-review-box {
   border: 1px solid #d0d8e4;
   margin-top: 14px;
@@ -21941,7 +21941,7 @@ const bonusSlides = [
   display: flex;
   justify-content: space-between;
 }
- 
+
 .ib-user-reviews { margin-top: 14px; }
 .ib-user-review {
   border: 1px solid #d0d8e4;
@@ -21967,7 +21967,7 @@ const bonusSlides = [
   line-height: 1.65;
   color: #333;
 }
- 
+
 .ib-rightrail {
   width: 180px;
   flex-shrink: 0;
@@ -22014,7 +22014,7 @@ const bonusSlides = [
 .rr-box-b p:last-child { margin: 0; }
 .rr-box-b a { color: #2a4a8b; text-decoration: none; font-size: 10px; }
 .rr-box-b a:hover { text-decoration: underline; }
- 
+
 .ib-foot {
   background: #1a3a6b;
   padding: 8px 12px;
@@ -22024,12 +22024,12 @@ const bonusSlides = [
 .ib-foot a { color: #aabbdd; text-decoration: none; font-size: 10px; }
 .ib-foot a:hover { color: #fff; }
 .ib-foot-copy { color: #5577aa; font-size: 9px; border-top: 1px solid #2a4a8b; padding-top: 4px; margin-top: 4px; }
- 
+
 .cl::after { content: ''; display: table; clear: both; }
 </style>
 
 <div class="ibdb-wrap">
- 
+
 <div class="ib-topbar">
   <div class="ib-logo">
     <div class="ib-logo-ibdb">IBDB</div>
@@ -22042,7 +22042,7 @@ const bonusSlides = [
     <span>Saturday, March 12, 2005</span>
   </div>
 </div>
- 
+
 <div class="ib-nav">
   <a href="#">Home</a>
   <a href="#" class="on">Productions</a>
@@ -22054,7 +22054,7 @@ const bonusSlides = [
   <a href="#">Box Office</a>
   <a href="#">Search</a>
 </div>
- 
+
 <div class="ib-breadcrumb">
   <a href="#">Home</a> &rsaquo;
   <a href="#">Productions</a> &rsaquo;
@@ -22063,7 +22063,7 @@ const bonusSlides = [
 </div>
 
 <div class="ib-main">
- 
+
 <div class="ib-left">
   <div class="ib-playbill-mini">
     <div class="ib-pb-band"><span class="ib-pb-band-text">Playbill</span></div>
@@ -22081,14 +22081,14 @@ const bonusSlides = [
   <a href="#">Box Office</a>
   <a href="#">Photos (48)</a>
   <a href="#">Reviews</a>
- 
+
   <div class="ibl-head">Also Playing</div>
   <a href="#">Wicked</a>
   <a href="#">Assassins (Revival)</a>
   <a href="#">Avenue Q</a>
   <a href="#">Caroline, or Change</a>
   <a href="#">Spamalot</a>
- 
+
   <div class="ibl-head">Kennedy Musicals</div>
   <a href="#">Camelot (1960)</a>
   <a href="#">JFK: The Musical (1993)</a>
@@ -22096,7 +22096,7 @@ const bonusSlides = [
 </div>
 
 <div class="ib-content">
- 
+
   <div class="ib-show-header">
     <div class="ib-show-title">The Dream Shall Never Die</div>
     <div class="ib-show-type">Original Musical &nbsp;·&nbsp; <span>Broadway</span> &nbsp;·&nbsp; 2004</div>
@@ -22109,9 +22109,9 @@ const bonusSlides = [
       <span class="ib-tony-badge">🏆 Tony Award — Best Musical 2005</span>
     </div>
   </div>
- 
+
   <div class="ib-two-col">
- 
+
     <div class="ib-show-meta">
       <table class="ib-meta-table">
         <tr><td>Category</td><td>Musical (original)</td></tr>
@@ -22130,12 +22130,12 @@ const bonusSlides = [
       </table>
     </div>
   </div>
- 
+
   <div class="ib-sec-head">Synopsis</div>
   <div class="ib-synopsis-box">
     <em>Described in its own program notes as "the best musical about the best Kennedy brother," The Dream Shall Never Die</em> follows Senator Edward M. Kennedy from the night of the 1980 Democratic National Convention through his first year in the White House, as he navigates the twin burdens of the presidency and the Kennedy legacy. Haunted — literally — by the spectral presences of his brothers Jack and Bobby, who appear throughout the show to counsel, contradict, and occasionally ridicule him, Ted must contend with the Iranian hostage crisis, a fractured Democratic Party, and the persistent suspicion that the office he has always wanted is the one thing that cannot give him what he is looking for. The show's second act, set during the first summer of the Kennedy administration, is largely a meditation on grief, institutional power, and what it means to be the last one standing. It has been described by <em>The New York Times</em> as "devastating" and by <em>The Post</em> as "an evening that earns its running time."
   </div>
- 
+
   <div class="ib-sec-head">Opening Night Cast <a href="#">View replacements →</a></div>
   <table class="ib-cast-table">
     <tr>
@@ -22184,7 +22184,7 @@ const bonusSlides = [
       <td class="ib-cast-note">Allegorical figure. Appears in the prologue, Act I finale, and Act II.</td>
     </tr>
   </table>
- 
+
   <div class="ib-sec-head">Song list — Original Broadway Production</div>
   <table class="ib-song-table">
     <tr class="ib-act-divider"><td colspan="4">Act One</td></tr>
@@ -22230,9 +22230,9 @@ const bonusSlides = [
       <td class="ib-song-performer">Ted Kennedy, The American Dream</td>
       <td class="ib-song-note">Act I finale, and Menzel's first full-length scene with Mitchell.</td>
     </tr>
- 
+
     <tr class="ib-act-divider"><td colspan="4">Act Two</td></tr>
- 
+
     <tr>
       <td class="ib-song-num">8.</td>
       <td class="ib-song-title"><a href="#">January 20th</a></td>
@@ -22276,7 +22276,7 @@ const bonusSlides = [
       <td class="ib-song-note">Finale, reprise and transformation of Act I closer. The last four bars are traditionally performed in silence; the orchestra stops, cast holds position, and the lights fade.</td>
     </tr>
   </table>
- 
+
   <div class="ib-sec-head">Awards &amp; nominations</div>
   <table class="ib-awards-table">
     <tr style="background:#e8eef4;">
@@ -22331,7 +22331,7 @@ const bonusSlides = [
       </td>
     </tr>
   </table>
- 
+
   <div class="ib-review-box" style="margin-top:16px;">
     <div class="ib-review-head">
       Selected Press Review — The New York Times
@@ -22347,10 +22347,10 @@ const bonusSlides = [
       <span>★★★★★ (5/5)</span>
     </div>
   </div>
- 
+
   <div class="ib-sec-head">User Reviews <a href="#">Submit your review →</a></div>
   <div class="ib-user-reviews">
- 
+
     <div class="ib-user-review">
       <div class="ib-ur-head">
         <span class="ib-ur-title">"I came for the novelty, but there was so much more to it"</span>
@@ -22363,7 +22363,7 @@ const bonusSlides = [
         I won't pretend I bought my ticket because I expected high art. I bought it because the idea of a Kennedy presidency musical with actual ghosts sounded like the most gloriously theatrical premise imaginable and I wanted to see if they could pull it off. Turns out they can, and they do! "What Dallas Took" is the best thing Esparza has ever done and I have seen Esparza do a lot of things. "The Shape of Quiet" is genuinely a great song.
       </div>
     </div>
- 
+
     <div class="ib-user-review">
       <div class="ib-ur-head">
         <span class="ib-ur-title">"The program notes are not wrong and that is unsettling"</span>
@@ -22376,7 +22376,7 @@ const bonusSlides = [
         The program literally describes this as "the best musical about the best Kennedy brother" which I read before the show started and rolled my eyes at. I mean, come n! But by the end of Act II I was prepared to grant them, reluctantly, both claims. Bobby's ghost being more present and more accusatory than Jack's is a genuinely interesting historical argument made in musical form. "You Should Have Run in '68" has been living in my head for six weeks. I have listened to the cast recording more times than I have listened to most albums I actually own.
       </div>
     </div>
- 
+
     <div class="ib-user-review">
       <div class="ib-ur-head">
         <span class="ib-ur-title">"Still thinking about it three months later."</span>
@@ -22389,13 +22389,13 @@ const bonusSlides = [
         Took off half a star because the Chappaquiddick number has not, in my view, been fully worked out dramatically and Weidman is usually better than that. Everything else: four stars minimum. The convention floor sequence is the most exciting fifteen minutes of choreography I have seen in a decade. Mitchell has never been better, and Menzel has never been more interesting. I saw the show with my father, who actually voted for Kennedy in 1980, and he did not speak in the car home. That is not a criticism, not at all...
       </div>
     </div>
- 
+
   </div>
- 
+
 </div>
- 
+
 <div class="ib-rightrail">
- 
+
   <div class="rr-h">Cast Recording</div>
   <div class="rr-box">
     <div class="rr-box-h">Original Cast Album</div>
@@ -22406,14 +22406,14 @@ const bonusSlides = [
       <p><a href="#">iTunes →</a></p>
     </div>
   </div>
- 
+
   <div class="rr-sp"></div>
   <div class="rr-h">Related Shows</div>
   <div class="rr-it"><a href="#">Assassins (Revival, 2004)</a><div class="rr-meta">Presidential musical · Sondheim</div></div>
   <div class="rr-it"><a href="#">Caroline, or Change (2004)</a><div class="rr-meta">American history musical</div></div>
   <div class="rr-it"><a href="#">Bobby (1999)</a><div class="rr-meta">RFK musical · Off-Broadway</div></div>
   <div class="rr-it"><a href="#">1776 (Revival, 1997)</a><div class="rr-meta">Political American musical</div></div>
- 
+
   <div class="rr-sp"></div>
   <div class="rr-h">Box Office</div>
   <div class="rr-box">
@@ -22425,7 +22425,7 @@ const bonusSlides = [
       <p style="font-size:10px;color:#888;">Majestic Theatre · 1,655 seats</p>
     </div>
   </div>
- 
+
   <div class="rr-box">
     <div class="rr-box-h">IBDB User Poll</div>
     <div class="rr-box-b">
@@ -22448,11 +22448,11 @@ const bonusSlides = [
       <p style="font-size:9px;color:#aaa;margin-top:4px;">2,847 votes</p>
     </div>
   </div>
- 
+
 </div>
- 
+
 </div>
- 
+
 <div class="ib-foot">
   <div class="ib-foot-links">
     <a href="#">Home</a><a href="#">Productions</a><a href="#">People</a><a href="#">Theatres</a>
@@ -22461,7 +22461,7 @@ const bonusSlides = [
   </div>
   <div class="ib-foot-copy">© 2005 The Broadway League. IBDB is operated by the Research Department of The Broadway League. All rights reserved.</div>
 </div>
- 
+
 </div>`
   },
   {
@@ -22622,7 +22622,7 @@ const bonusSlides = [
   background: url(https://s.hdnux.com/photos/40/66/11/8610390/4/1920x0.jpg);
   background-size: cover;
   overflow: hidden;
-  position: relative;  
+  position: relative;
 }
 .ny-img-caption {
   font-family: 'Source Sans 3', sans-serif;
@@ -23180,7 +23180,7 @@ const bonusSlides = [
 </style>
 
 <div class="script-container">
-  
+
   <div class="script-title">NED'S DECLASSIFIED SCHOOL SURVIVAL GUIDE</div>
   <div class="script-subtitle">FIRST DRAFT - Episode 112-a: "Visits & Emergencies"</div>
 
@@ -23210,7 +23210,7 @@ const bonusSlides = [
 
   <div class="character">VP CRUBBS</div>
   <div class="dialogue">
-    Bigby! Are you breathing heavily? You're exhaling too much CO2! Breathe shallower... we have to win the Presidential Eco-Trophy! 
+    Bigby! Are you breathing heavily? You're exhaling too much CO2! Breathe shallower... we have to win the Presidential Eco-Trophy!
   </div>
 
   <div class="action">
@@ -23254,7 +23254,7 @@ const bonusSlides = [
   <div class="action">
     Cookie presses a button on his chest. A small spark flies out, instantly igniting a trash can next to them. <span class="sfx">[FWOOSH SOUND]</span>
   </div>
-  
+
   <div class="character">COOKIE</div>
   <div class="dialogue">
     Oops.
@@ -23299,7 +23299,7 @@ const bonusSlides = [
   <div class="character">AL GORE</div>
   <div class="parenthetical">(deadpan, dramatic stare)</div>
   <div class="dialogue">
-    Huh. A compost bomb. You know, I warned Congress about this in '98, but they called me crazy. Secret Service, secure the lockbox. 
+    Huh. A compost bomb. You know, I warned Congress about this in '98, but they called me crazy. Secret Service, secure the lockbox.
   </div>
 
   <div class="action">
@@ -23308,7 +23308,7 @@ const bonusSlides = [
 
   <div class="character">AL GORE</div>
   <div class="dialogue">
-    Ned, what you lack in botanical aptitude, you clearly make up for in desperation. We're going to save your friend. And then, we are going to ace your science class. 
+    Ned, what you lack in botanical aptitude, you clearly make up for in desperation. We're going to save your friend. And then, we are going to ace your science class.
   </div>
 
   <div class="action">
@@ -23317,7 +23317,7 @@ const bonusSlides = [
 
   <div class="character">AL GORE</div>
   <div class="dialogue">
-    I call it... the Kyoto Protocol. 
+    I call it... the Kyoto Protocol.
   </div>
 
   <div class="action">
@@ -23341,7 +23341,7 @@ const bonusSlides = [
 
   <div class="character">GORDY</div>
   <div class="dialogue">
-    But he owes me five bucks! 
+    But he owes me five bucks!
   </div>
 
   <div class="action">
@@ -23379,7 +23379,7 @@ const bonusSlides = [
 
   <div class="character">AL GORE</div>
   <div class="dialogue">
-    I'm protecting the biosphere. Ned's project isn't this dead plant, more than it. His project... is <i>action</i>. 
+    I'm protecting the biosphere. Ned's project isn't this dead plant, more than it. His project... is <i>action</i>.
   </div>
 
   <div class="action">
@@ -23407,7 +23407,7 @@ const bonusSlides = [
 
   <div class="character">MR. SWEENEY</div>
   <div class="dialogue">
-    An <i>'A-minus'.</i> This foam smells like patchouli. 
+    An <i>'A-minus'.</i> This foam smells like patchouli.
   </div>
 
   <div class="action">
@@ -23421,13 +23421,13 @@ const bonusSlides = [
 
   <div class="character">AL GORE</div>
   <div class="dialogue">
-    Don't thank me, Ned. Thank the internet. Which I invented, of course. Now, I must go. The ice caps are calling. 
+    Don't thank me, Ned. Thank the internet. Which I invented, of course. Now, I must go. The ice caps are calling.
   </div>
 
   <div class="action">
     Gore presses a button on his belt. A pair of solar-powered helicopter blades deploy from his suit jacket. With a quiet hum, he slowly ascends through a broken ceiling tile and disappears. <span class="sfx">[ANGELIC CHORUS SOUND]</span>
   </div>
-  
+
   <div class="character">MOZE</div>
   <div class="dialogue">
     Well, I guess <i>that</i> happened.
@@ -23439,14 +23439,14 @@ const bonusSlides = [
 
   <div class="character">NED</div>
   <div class="dialogue">
-    (Tip number 45:) Well, just remember... if you can't save your grades... let the Leader of the Free World do it for you. 
+    (Tip number 45:) Well, just remember... if you can't save your grades... let the Leader of the Free World do it for you.
   </div>
 
   <div class="action">
     <span class="sfx">[UPBEAT OUTRO MUSIC PLAYS]</span> IRIS OUT.
   </div>
 
-</div>`	
+</div>`
   },
   // generic slides
   {
@@ -23521,7 +23521,7 @@ const bonusSlides = [
 </style>
 
 <div class="billys-block-wrapper">
-    
+
   <h3 class="billys-block-header">Welcome to Billy's Block — Episode 1.07: "Big Feelings and Big Flavors"</h3>
 
   <p><span class="stage-direction">[The scene opens on a warm, brightly lit living room with a comfortable yellow sofa, a miniature traffic light, and a large oak bookshelf. A soft, soothing saxophone melody plays in the background.]</span></p>
@@ -23934,7 +23934,7 @@ const bonusSlides = [
       <p>“I’ll be here.”</p>
 
       <p>Jimmy walked out into the rain, and the door swung shut behind him. Inside, very faintly, he could hear the crack of a cue ball doing exactly what it was supposed to do on the very first try.</p>
-	  
+
 	  <p>Fuck.
 
       </p><p>He hailed a cab. He did not look back. He had, he decided, recalibrated enough for one evening.</p>
@@ -25000,147 +25000,147 @@ const bonusSlides = [
 </div>
 
 </div>`
-  },  
+  },
   {
     id: "hehheh",
     condition: (ev) => ev >= 64 && ev < 146,
     image: "https://i.pinimg.com/1200x/7a/33/f6/7a33f6071eeeee2925ed3f509d89e1b8.jpg",
     html: `<div style="background: linear-gradient(to bottom, #16153C, #22205B); color: #fff; border: 1px solid #777; border-radius: 8px 0; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.2), inset 0 1px 0 rgba(100, 100, 100, 0.7); overflow-y: auto;">
-    
+
   <h3><span style="color:#aaccff; font-weight: normal; font-style: italic;">unaccounted for</span></h3>
- 
+
   <p>It was almost one in the morning and the television was on, which was the same as every other night, except that they weren’t really watching it.</p>
- 
+
   <p>The curtains were drawn. In fact They had been drawn for eleven days. This had started as Butt-Head’s idea — <em>“if they can’t see us, they can’t, like, draft us”</em> — and Beavis had agreed immediately, finding this reasoning airtight. Since then, they had been in their living room.</p>
- 
+
   <p>On the television, a man in a suit was talking about something. Of course, neither of them was listening to the man in the suit.</p>
- 
+
   <p><em>“We should eat something,”</em> said Beavis.</p>
- 
+
   <p><em>“Yeah,”</em> said Butt-Head.</p>
- 
+
   <p>Neither of them moved. This was also the same as every other night.</p>
- 
+
   <p>After a while Beavis said, <em>“I could go check if there’s anything.”</em></p>
- 
+
   <p><em>“Like what.”</em></p>
- 
+
   <p><em>“I don’t know. Stuff.”</em></p>
- 
+
   <p><em>“There’s no stuff.”</em></p>
- 
+
   <p><em>“There might be stuff.”</em></p>
- 
+
   <p>Butt-Head considered this for a moment, given this was a logistical question. <em>“There’s not.”</em></p>
- 
+
   <p>But Beavis got up anyway. He went to the kitchen, opened the refrigerator and stood in front of it for a while with the door open, the cold light falling out across the linoleum. There was a jar of something that had been there since before any of this started, a half-empty bottle of ketchup, and one egg that had been kind of lonely there. He closed the refrigerator. He opened it again, as though giving it a second chance. Sighing, he closed it.</p>
- 
+
   <p>He found, in the back of a cabinet, a can of SpaghettiOs with no pull tab, and he spent a while looking for the can opener, before remembering he’d seen it last Tuesday under the couch for reasons he could no longer account for. Thus, Beavis retrieved it, and he opened the can. He did not heat the SpaghettiOs because he thought the idea of microwaving them seemed like a lot right now, and so he poured half into a bowl, brought the can into the living room and set it on the couch between them.</p>
- 
+
   <p><em>“SpaghettiOs,”</em> he said.</p>
- 
+
   <p><em>“Cool,”</em> said Butt-Head.</p>
- 
+
   <p style="text-align:center; color:#8899bb; letter-spacing:0.3em; margin: 24px 0;">· · ·</p>
- 
+
   <p>They ate with spoons from opposite ends of the arrangement, the bowl and the can, the television murmuring at them about something. At one point the man in the suit said something about troop movements and Butt-Head changed the channel, reflexively, as if he was pulling his hand from something hot. He landed on an infomercial, and left it there.</p>
- 
+
   <p><em>“Heh,”</em> said Beavis, after a while. <em>“This guy’s selling, like, a mop.”</em></p>
- 
+
   <p><em>“That mop sucks,”</em> said Butt-Head.</p>
- 
+
   <p><em>“Yeah,”</em> said Beavis. <em>“Heh heh. It really sucks.”</em></p>
- 
+
   <p>This produced, between them, something that was almost like the old rhythm. Butt-Head made a sound in the back of his throat that was adjacent to laughing, Beavis grinned at the television, and for a moment the room felt nearly normal, nearly the same as it had always been, Saturday night on the couch with nothing to do, nowhere to be, and no reason in the world to think about anything they didn’t want to think about.</p>
- 
+
   <p>Then the infomercial ended and they cut to news, just for a second before Butt-Head could change it, and there were the words across the bottom of the screen… <em>coalition forces, Baghdad, casualties</em>… and Butt-Head changed it again, fast, and found static, and left it on static.</p>
- 
+
   <p>The static hummed at them.</p>
- 
+
   <p>Beavis looked at the empty SpaghettiOs can. He picked it up, looked into it and put it back down.</p>
- 
+
   <p><em>“Hey Butt-Head,”</em> he said.</p>
- 
+
   <p><em>“What.”</em></p>
- 
+
   <p><em>“Do you think they’re, like… do you think they know where we live?”</em></p>
- 
+
   <p>Butt-Head didn’t answer right away. On the screen the static shifted, nothing more than a slow meaningless churn. <em>“I don’t know,”</em> he said, which for Butt-Head was a strange answer. Usually he had an answer.</p>
- 
+
   <p><em>“Because like,”</em> said Beavis, <em>“we got that letter.”</em></p>
- 
+
   <p><em>“We’re not talking about the letter.”</em></p>
- 
+
   <p><em>“I know, but—”</em></p>
- 
+
   <p><em>“We’re <em>not</em> talking about it, Beavis.”</em></p>
- 
+
   <p>Beavis was quiet. He pulled one knee up on the couch, looked at the static, and chewed the inside of his cheek, which he did sometimes when he was thinking about something he wasn’t sure he was allowed to think about.</p>
- 
+
   <p style="text-align:center; color:#8899bb; letter-spacing:0.3em; margin: 24px 0;">· · ·</p>
- 
+
   <p>That letter had come eight days ago. It had come in an official-looking envelope that Butt-Head had opened, read and then put face-down on the kitchen table. And then Beavis had picked it up and read it, and then they had both stood in the kitchen for a while not saying anything. Then Butt-Head had said they should close the curtains. So they had closed the curtains.</p>
- 
+
   <p>They had not talked about the letter since. But it was in the kitchen, still face-down on the table, and they both knew it was there, and they walked around it the way as if it were something on the floor in the dark that they didn’t want to step on.</p>
- 
+
   <p>On the television the static continued. Outside, a car passed, and both of them went very still until the headlights moved off the curtains and the engine sound faded. Then they relaxed, incrementally, without acknowledging that they had tensed.</p>
- 
+
   <p><em>“I don’t want to go,”</em> said Beavis. He said it very quietly, not like he was making a statement, more like he was testing whether the words were real by saying them out loud. <em>“Like. I really, really don’t want to go.”</em></p>
- 
+
   <p>Butt-Head looked at the television. <em>“Yeah,”</em> he said.</p>
- 
+
   <p><em>“Do you think it’d be… I mean, do you think guys like us even—”</em></p>
- 
+
   <p><em>“I said we’re not talking about it.”</em></p>
- 
+
   <p><em>“I know.”</em> Beavis picked at the label on an empty can. <em>“I know, I just—”</em></p>
- 
+
   <p><em>“Beavis.”</em></p>
- 
+
   <p><em>“What.”</em></p>
- 
+
   <p>Butt-Head didn’t answer. He just sat there with his arms crossed, trying to work something out that he didn’t have the vocabulary for. Beavis looked at him for a moment and then looked away.</p>
- 
+
   <p>It occurred to Beavis, sitting there, that he could not actually remember a time before this couch. Not in a, uh, sentimental way, not like he was being poetic about it; he genuinely could not locate, in his memory, a version of his life that wasn’t organized around this room, this television, and this particular configuration of the two of them. They had always been here. This was the whole shape of things! He had never thought about it before because there had never been a reason to, and now there was a reason, and thinking about it made something go strange and hollow somewhere in the middle of his chest.</p>
- 
+
   <p><em>“Hey Butt-Head,”</em> he said.</p>
- 
+
   <p><em>“What.”</em></p>
- 
+
   <p><em>“If we, like…”</em> He stopped. He tried again. <em>“If they make us go. Like, if we have to. Would we be, like… together? Or do they, like, split you up?”</em></p>
- 
+
   <p>Butt-Head was quiet for a long time. Long enough that Beavis thought he wasn’t going to answer.</p>
- 
+
   <p>Then he said, <em>“I don’t know.”</em></p>
- 
+
   <p>And Beavis nodded, slowly, like that was the answer he’d expected, and looked back at the television, and the static went on and on.</p>
- 
+
   <p style="”text-align:center;" color:#8899bb;="" letter-spacing:0.3em;="" margin:="" 24px="" 0;”="">· · ·</p>
- 
+
   <p>At some point the infomercial came back on. The man was still selling the mop, apparently. Neither of them said anything about it this time.</p>
- 
+
   <p>Beavis lay down on his side on the couch, facing the television, and Butt-Head stayed sitting the way he always sat, where the lamp in the corner made its small orange light, and the room held them the way it always had. The SpaghettiOs can sat where Beavis had left it. And outside, nothing moved.</p>
- 
+
   <p>After a long while Butt-Head said, without looking away from the screen, <em>“You should sleep.”</em></p>
- 
+
   <p><em>“I’m not tired,”</em> said Beavis, which was not true.</p>
- 
+
   <p><em>“Yeah you are.”</em></p>
- 
+
   <p>Beavis didn’t argue. He pulled the couch cushion further under his head and looked at the television with his eyes already going heavy at the edges. The mop man was demonstrating something enthusiastically. But it didn’t seem to matter what.</p>
- 
+
   <p><em>“Hey Butt-Head,”</em> he said, very quietly now.</p>
- 
+
   <p><em>“What.”</em></p>
- 
+
   <p><em>“This sucks.”</em></p>
- 
+
   <p>Butt-Head looked at the curtains. He looked at the empty cans. He then looked at the letter-shaped absence in the kitchen that they had both been navigating around for eight days. Finally, he looked at the television, at the mop man, and then at the static that lived just underneath everything.</p>
- 
+
   <p><em>“Yeah,”</em> he said.</p>
- 
+
   <p>And so Beavis closed his eyes.</p>
- 
+
 </div>`
   },
   {
@@ -25148,7 +25148,7 @@ const bonusSlides = [
     condition: (ev) => ev > 394 && ev <= 456,
     image: "https://i.pinimg.com/1200x/e2/55/de/e255de44e25e485ec28ec728b6adcdf6.jpg",
     html: `<div style="background: linear-gradient(to bottom, #16153C, #22205B); color: #fff; border: 1px solid #777; border-radius: 8px 0; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.2), inset 0 1px 0 rgba(100, 100, 100, 0.7); overflow-y: auto;">
-    
+
   <h3><span style="color:#aaccff; font-weight: normal; font-style: italic;">jennifer government</span></h3>
 
   <p>The first thing Barack Obama registered was the smell. It wasn’t the sterile, chemical bite of a standard hospital room. It smelled faintly of lavender, ozone, and… wait, was that Cool Ranch?</p>
@@ -26566,11 +26566,11 @@ ul.plain li { margin: 3px 0; }
 </div>`
   }
 ];
-  
+
 // main ending picker function
 endingPicker = (out, totv, aa, quickstats) => {
   console.log("Preparing ending data...");
-  
+
   // for the School results
   window.cliqueData = calculateCliqueResults();
   window.charlieWin = window.cliqueData.charlieWin;
@@ -26580,16 +26580,16 @@ endingPicker = (out, totv, aa, quickstats) => {
   // queue the injection to run as soon as the DOM renders
   window.bobertTasks.push(() => {
     const overallStats = document.getElementById("overall_vote_statistics");
-    
+
     // check if the container exists and we haven't already injected the table
     if (overallStats && !document.getElementById("custom-clique-table")) {
         let wrapper = document.createElement("div");
         wrapper.id = "custom-clique-table";
         wrapper.innerHTML = window.cliqueData.tableHTML;
-        
+
         // insert it right before the national results
         overallStats.parentNode.insertBefore(wrapper, overallStats);
-        
+
         return true;
     }
     return false;
@@ -26633,7 +26633,7 @@ endingPicker = (out, totv, aa, quickstats) => {
       }
     }
   }
-  
+
 	const IDS = {
 	  left: 79,
 	  right: 80,
@@ -26662,10 +26662,10 @@ endingPicker = (out, totv, aa, quickstats) => {
 	const leftNomineeName  = getName(IDS.left);
 	const rightNomineeName = getName(IDS.right);
 	const right2NomineeName = getName(IDS.right2);
-  
+
   // other achievement unlocks
   const ansSet = new Set(campaignTrail_temp.player_answers);
-  
+
     if (typeof charlieWin !== "undefined" && charlieWin) {
         unlockAchievement("Young Offender");
     }
@@ -26695,7 +26695,7 @@ endingPicker = (out, totv, aa, quickstats) => {
     console.error("No ending scenario matched.");
     return "";
   }
-  
+
   // track the ending song we should use
   let finalSong = selectedScenario.song || null;
 
@@ -26706,7 +26706,7 @@ endingPicker = (out, totv, aa, quickstats) => {
   if (typeof pageContent === 'function') {
     pageContent = pageContent(playerEV, opponentEVs, window.opLast || "Opponent");
   }
-  
+
   // push the result string
   campaignTrail_temp.pages.push(pageContent);
 
@@ -26746,7 +26746,7 @@ endingPicker = (out, totv, aa, quickstats) => {
   // play the selected ending song *once*
   if (finalSong && typeof window.playEndingSong === 'function') {
 	  const urlHash = JSON.stringify(finalSong.url);
-      
+
       if (window.currentEndingSongUrl !== urlHash) {
           window.playEndingSong(
               finalSong.title,
@@ -26756,7 +26756,7 @@ endingPicker = (out, totv, aa, quickstats) => {
           );
           window.currentEndingSongUrl = urlHash;
       }
-  }  
+  }
 
   // render.
   finalizeRendering();
@@ -26798,7 +26798,7 @@ function injectCountyMapButton() {
         btn.id = "county_map_button";
         btn.textContent = "County Map";
         btn.onclick = countyMapScreenHtml;
-        
+
         const ref = document.getElementById("final_election_map_button");
         if (ref) ref.parentNode.insertBefore(btn, ref.nextSibling);
     }
@@ -26806,10 +26806,10 @@ function injectCountyMapButton() {
 
 // monkey-patch the core endgame screen functions
 const screensToWrap = [
-    "overallResultsHtml", 
-    "finalMapScreenHtml", 
-    "stateResultsHtml", 
-    "overallDetailsHtml", 
+    "overallResultsHtml",
+    "finalMapScreenHtml",
+    "stateResultsHtml",
+    "overallDetailsHtml",
     "furtherReadingHtml"
 ];
 
@@ -26818,7 +26818,7 @@ screensToWrap.forEach(fnName => {
         const originalFn = window[fnName];
         window[fnName] = function(...args) {
             originalFn.apply(this, args);
-            setTimeout(injectCountyMapButton, 10); 
+            setTimeout(injectCountyMapButton, 10);
         };
         window[fnName].patchedForCountyMap = true;
     }
@@ -26835,7 +26835,7 @@ async function countyMapScreenHtml() {
         ${headerHtml}
         <div id="main_content_area" style="padding-bottom: 20px; position:relative;">
             <h3 style="margin-bottom: 5px; color: #000;">SIMULATED COUNTY RESULTS</h3>
-            
+
             <div id="map_controls" style="width: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 10px; font-family: Arial, sans-serif; font-size: 14px; background: rgba(0,0,0,0.08); padding: 10px; border-radius: 6px; color: #000;">
                <label style="cursor:pointer;"><input type="radio" name="map_mode" value="choropleth" checked> Margin</label>
 			   <label style="cursor:pointer;"><input type="radio" name="map_mode" value="voteshare"> Vote Share</label>
@@ -26846,10 +26846,10 @@ async function countyMapScreenHtml() {
             </div>
 
             <p id="county_map_status" style="margin-top: 0;"><i>Loading map data (this may take a moment)...</i></p>
-            
+
             <div id="county_map_container" style="position:relative; width:100%; height:350px; display:flex; justify-content:center; align-items:center; background:#e2e6ea; border:1px solid #ccc; overflow:hidden;">
                <svg id="county_svg" viewBox="0 0 975 610" style="width: 100%; height: 100%; cursor: grab;"></svg>
-               
+
                <div id="redraw_panel" style="display:none; position:absolute; top:10px; right:10px; background:rgba(255,255,255,0.95); border:2px solid #333; border-radius:6px; width:280px; max-height:330px; flex-direction:column; box-shadow: 0 4px 8px rgba(0,0,0,0.4); z-index:10; font-family:sans-serif; text-align:left;">
                    <div style="padding:10px; border-bottom:1px solid #ccc; background:#f8f9fa; border-radius:4px 4px 0 0;">
                        <h4 style="margin:0 0 4px 0; color:#000; display:flex; justify-content:space-between;">
@@ -26878,7 +26878,7 @@ async function countyMapScreenHtml() {
 				   <div id="rs_results_panel" style="border-top:1px solid #ccc; padding:6px 8px; background:#f8f9fa; font-size:11px; font-family:sans-serif; display:none;"></div>
                </div>
             </div>
-            
+
             <div id="redraw_instructions" style="margin-top:5px; font-size:12px; text-align:center; display:none; font-weight:bold; color:#0056b3;">
                 Right-Click & Drag to paint. Click to paint county, Shift+Click for state. Drag map to pan.
             </div>
@@ -26908,7 +26908,7 @@ async function countyMapScreenHtml() {
 
     try {
 		let countyResultsRaw, us;
-		
+
         if (!_countyMapCache.data || !_countyMapCache.us) {
             const countyDataUrl = "https://raw.githubusercontent.com/StrawberryMaster/StrawberryMaster.github.io/refs/heads/master/scripts/county_results_2000.min.json";
             const usMapUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json";
@@ -26920,7 +26920,7 @@ async function countyMapScreenHtml() {
             _countyMapCache.data = raw;
             _countyMapCache.us = usData;
         }
-		
+
 		// deep clone the array so Alaska pushes don't stack/pollute the cache on screen switch
         countyResultsRaw = JSON.parse(JSON.stringify(_countyMapCache.data));
         us = _countyMapCache.us;
@@ -27001,20 +27001,20 @@ async function countyMapScreenHtml() {
                 nationalTotalVotes += (c.votes_all || 0);
             }
         }
-        
+
         const candsInfo = PROPS.CANDIDATES;
         const activeCandidates = e.final_overall_results.map(r => r.candidate);
         const topCands = [...e.final_overall_results].sort((a,b) => b.popular_votes - a.popular_votes);
         if (topCands.length < 2) throw new Error("Could not find two main candidates.");
-        
+
         let demCandId = topCands[0].candidate, repCandId = topCands[1].candidate;
-        
+
         const stateNY = e.final_state_results.find(s => s.abbr === "NY");
         const stateTX = e.final_state_results.find(s => s.abbr === "TX");
         if (stateNY && stateTX && (stateTX.result.find(r => r.candidate === demCandId)?.percent || 0) > (stateNY.result.find(r => r.candidate === demCandId)?.percent || 0)) {
-            repCandId = topCands[0].candidate; demCandId = topCands[1].candidate; 
+            repCandId = topCands[0].candidate; demCandId = topCands[1].candidate;
         }
-        
+
         const stateSwings = {};
         e.final_state_results.forEach(f => {
             const base = stateBase[f.abbr];
@@ -27041,52 +27041,52 @@ async function countyMapScreenHtml() {
 		const fipsToGeomIdx = {};
 		geomFips.forEach((f, i) => fipsToGeomIdx[f] = i);
 		const neighborData = topojson.neighbors(us.objects.counties.geometries);
-		
+
         const path = d3.geoPath();
         let maxMarginVotes = 0;
         const densityScale = d3.scaleLog().domain([1000, 200000]).range([0, 1]).clamp(true);
-        
+
         // caching pass
         usCounties.forEach(d => {
             d.fips = String(d.id).padStart(5, '0');
             const c = base2000Map[d.fips];
             if (!c) return;
-            
+
             const total = c.votes_all || 1;
             const swings = stateSwings[c.state_po] || {};
-			
+
 			const countyResults = activeCandidates.map(candId => {
 				let baseVotes = (candId === demCandId) ? (c.votes_dem || 0) : (candId === repCandId ? (c.votes_rep || 0) : ((c.votes_other || 0) / Math.max(1, activeCandidates.length - 2)));
-				let basePct = baseVotes / total;				
-				let rawSwing = swings[candId] || 0;				
-				let dampenedSwing = rawSwing > 0 ? rawSwing * (1 - basePct) * 1.2 : rawSwing * basePct * 1.2;				
-				dampenedSwing = Math.max(-0.15, Math.min(0.15, dampenedSwing));				
+				let basePct = baseVotes / total;
+				let rawSwing = swings[candId] || 0;
+				let dampenedSwing = rawSwing > 0 ? rawSwing * (1 - basePct) * 1.2 : rawSwing * basePct * 1.2;
+				dampenedSwing = Math.max(-0.15, Math.min(0.15, dampenedSwing));
 				let newPct = Math.max(0, Math.min(1, basePct + dampenedSwing));
-				
+
 				return { id: candId, pct: newPct, votes: Math.round(newPct * total) };
 			});
 
             const sumPct = countyResults.reduce((sum, cr) => sum + cr.pct, 0);
             if (sumPct > 0) countyResults.forEach(cr => { cr.pct = cr.pct / sumPct; cr.votes = Math.round(cr.pct * total); });
             countyResults.sort((a, b) => b.pct - a.pct);
-            
+
             const winner = countyResults[0];
             const marginPct = winner.pct - (countyResults.length > 1 ? countyResults[1].pct : 0);
             const marginVotesEst = winner.votes - (countyResults.length > 1 ? countyResults[1].votes : 0);
 
             if (marginVotesEst > maxMarginVotes) maxMarginVotes = marginVotesEst;
-            
+
             const candColor = candsInfo.get(String(winner.id))?.color_hex || "#888";
-            
+
             // build bivariate density palette
             const dens = densityScale(total);
             const neutralColor = d3.interpolateRgb("#ffffff", "#555555")(dens); // high turnout = dark grey baseline
             const maxColor = d3.interpolateRgb("#ffffff", candColor)(dens); // high turnout = vibrant cand color
             const densityColor = d3.interpolateRgb(neutralColor, maxColor)(Math.min(marginPct * 1.5, 1)); // mix between neutral vs cand based on margin
-            
+
 			d.proj = {
                 name: c.county_name, state: c.state_po, results: countyResults, totalVotes: total, marginVotes: marginVotesEst,
-                winnerId: winner.id, 
+                winnerId: winner.id,
                 colorChoro: colorInterpolators[winner.id](Math.sqrt(marginPct)),
 				colorShare: colorInterpolators[winner.id](winner.pct),
                 colorBinary: candColor,
@@ -27095,13 +27095,13 @@ async function countyMapScreenHtml() {
             };
 
             d.proj.tooltipHtml = `<strong style="font-size:16px">${d.proj.name}, ${d.proj.state}</strong><br><br>` +
-                countyResults.slice(0,3).map(r => 
+                countyResults.slice(0,3).map(r =>
                     `<div style="display:flex; align-items:center; margin-bottom: 4px;">
                         <span style="display:inline-block; width:12px; height:12px; background-color:${candsInfo.get(String(r.id))?.color_hex || '#888'}; margin-right:8px; border: 1px solid #aaa;"></span>
                         <span style="font-weight:bold;">${candsInfo.get(String(r.id))?.last_name}: ${(r.pct * 100).toFixed(1)}%</span>
                     </div>`).join('') +
                 `<hr style="margin:6px 0; border:0; border-top:1px solid #777;"><div style="color:#ddd; font-size:13px; margin-top:4px;"><i>Margin: ${d.proj.winText}</i></div>`;
-				
+
 			const cent = path.centroid(d);
             d.centroid = (isFinite(cent[0]) && isFinite(cent[1]) && (cent[0] !== 0 || cent[1] !== 0)) ? cent : null;
         });
@@ -27116,22 +27116,22 @@ async function countyMapScreenHtml() {
         let currentZoomK = 1;
         let currentMode = "choropleth";
 
-        svg.on("contextmenu", (e) => e.preventDefault()); 
-        
+        svg.on("contextmenu", (e) => e.preventDefault());
+
         let tooltip = d3.select("#county_tooltip");
         if (tooltip.empty()) tooltip = d3.select("body").append("div").attr("id", "county_tooltip").attr("style", "position:absolute; background:rgba(0,0,0,0.9); color:#fff; padding:12px; border-radius:6px; pointer-events:none; display:none; font-size:14px; font-family:sans-serif; z-index:999999; white-space:nowrap; border:1px solid #666; box-shadow:0px 4px 8px rgba(0,0,0,0.5);");
 
         const highlightPath = g.append("path").attr("id", "county-highlight").attr("fill", "none").attr("stroke", "#000").attr("stroke-width", "1.5").attr("vector-effect", "non-scaling-stroke").style("pointer-events", "none").style("display", "none");
 
         // redraw the states special logic
-        let customStates = {}; 
+        let customStates = {};
         let countyToCustom = {};
         let activeRS = null;
         let rsCounter = 1;
         let isPainting = false;
         let allocatedEVs = 0;
         let activePaintColor = "#aaa";
-        let rsStateCentroids = {}; 
+        let rsStateCentroids = {};
 
         function recalcRSStats() {
 			Object.values(customStates).forEach(s => { s.tVotes = 0; s.cands = {}; s.ev = 0; });
@@ -27192,7 +27192,7 @@ async function countyMapScreenHtml() {
 				stateCentroids[sid].y += c.centroid[1] * w;
 				stateCentroids[sid].w += w;
 			});
-            
+
             rsStateCentroids = stateCentroids;
 
 			const labelData = Object.values(customStates).map(s => {
@@ -27235,7 +27235,7 @@ async function countyMapScreenHtml() {
 		function renderRSPanel() {
 			const list = document.getElementById("redraw_list");
 			const existing = new Map([...list.querySelectorAll("[data-rs-id]")].map(el => [el.dataset.rsId, el]));
-			
+
             const sortMode = document.getElementById("rs_sort_mode") ? document.getElementById("rs_sort_mode").value : "id";
             let statesArr = Object.values(customStates);
             if (sortMode === "name") {
@@ -27256,7 +27256,7 @@ async function countyMapScreenHtml() {
 					div = document.createElement("div");
 					div.dataset.rsId = s.id;
 					div.style.cssText = `display:flex; align-items:center; padding:6px; margin-bottom:4px; border:1px solid #ddd; background:#fff; cursor:pointer; border-radius:4px; font-size:12px;`;
-                    
+
 					div.innerHTML = `
 						<div class="rs-color-dot" title="click to pan to state" style="width:14px; height:14px; border-radius:50%; background:${s.color}; border:1px solid #777; margin-right:8px; flex-shrink:0; cursor:crosshair;"></div>
 						<div style="flex:1; min-width:0;">
@@ -27264,9 +27264,9 @@ async function countyMapScreenHtml() {
 							<div class="rs-ev-label" style="font-size:10px; color:#555;">${s.ev} EV &nbsp;|&nbsp; ${s.winName} ${s.marginText}</div>
 						</div>
 						<button data-rs-del="${s.id}" style="border:none; background:transparent; color:red; cursor:pointer; font-weight:bold; padding:2px 6px;">×</button>`;
-					
+
                     div.onclick = () => { activeRS = s.id; renderRSPanel(); };
-					
+
                     div.querySelector(".rs-color-dot").onclick = (e) => {
                         e.stopPropagation();
                         activeRS = s.id;
@@ -27283,10 +27283,10 @@ async function countyMapScreenHtml() {
                     };
 
                     const inputEl = div.querySelector(".rs-name-input");
-                    inputEl.value = s.name; 
+                    inputEl.value = s.name;
                     inputEl.onclick = (e) => e.stopPropagation();
                     inputEl.addEventListener("input", (e) => s.name = e.target.value);
-					
+
                     list.appendChild(div);
 				} else {
 					existing.delete(s.id);
@@ -27300,10 +27300,10 @@ async function countyMapScreenHtml() {
 				div.querySelector(".rs-ev-label").textContent = `${s.ev} EV \u00a0|\u00a0 ${s.winName} ${s.marginText}`;
                 div.querySelector(".rs-name-input").value = s.name;
 			});
-			
-			existing.forEach(el => el.remove()); 
+
+			existing.forEach(el => el.remove());
 		}
-		
+
 		function updateRSResults() {
 			const panel = document.getElementById("rs_results_panel");
 			if (!panel || Object.keys(customStates).length === 0) { if(panel) panel.style.display="none"; return; }
@@ -27336,12 +27336,12 @@ async function countyMapScreenHtml() {
 			panel.style.display = "block";
 		}
 
-        const deleteRS = (id) => { 
-            delete customStates[id]; 
-            if (activeRS === id) activeRS = Object.keys(customStates)[0] || null; 
-            Object.keys(countyToCustom).forEach(fips => { if (countyToCustom[fips] === id) delete countyToCustom[fips]; }); 
-            refreshMapFills(); 
-            renderRSPanel(); 
+        const deleteRS = (id) => {
+            delete customStates[id];
+            if (activeRS === id) activeRS = Object.keys(customStates)[0] || null;
+            Object.keys(countyToCustom).forEach(fips => { if (countyToCustom[fips] === id) delete countyToCustom[fips]; });
+            refreshMapFills();
+            renderRSPanel();
         };
 
         document.getElementById("redraw_list").addEventListener("click", e => {
@@ -27354,7 +27354,7 @@ async function countyMapScreenHtml() {
 
         document.getElementById("rs_btn_new").onclick = () => { const id = "rs_" + rsCounter++; customStates[id] = { id, name: "State " + (rsCounter-1), tVotes:0, cands:{}, ev:0, color:"transparent", marginText:"", winName:"" }; activeRS = id; renderRSPanel(); };
         document.getElementById("rs_btn_clear").onclick = () => { customStates = {}; countyToCustom = {}; activeRS = null; refreshMapFills(); renderRSPanel(); };
-        
+
         document.getElementById("rs_btn_existing").onclick = () => {
             customStates = {}; countyToCustom = {};
             usCounties.forEach(c => {
@@ -27368,26 +27368,26 @@ async function countyMapScreenHtml() {
 
         document.getElementById("rs_btn_random").onclick = () => {
 			customStates = {}; countyToCustom = {};
-			
+
 			const validCounties = usCounties.filter(c => c.proj);
 			const fipsToIndex = {};
 			validCounties.forEach((c, i) => fipsToIndex[c.fips] = i);
-			
+
 			const numStates = 50;
 			// pick seed counties
 			const shuffled = d3.shuffle([...validCounties]);
 			const seeds = shuffled.slice(0, numStates);
-			
+
 			seeds.forEach((seed, i) => {
 				const sid = "rs_rand_" + i;
 				customStates[sid] = { id: sid, name: seed.proj.name, tVotes: 0, cands: {}, ev: 0, color: "", marginText: "", winName: "" };
 				countyToCustom[seed.fips] = sid;
 			});
-			
+
 			// grow outward from seeds until all counties assigned
 			const assigned = new Set(seeds.map(s => s.fips));
 			let frontier = [...seeds.map(s => s.fips)];
-			
+
 			while (frontier.length > 0) {
 				const next = [];
 				d3.shuffle(frontier).forEach(fips => {
@@ -27417,7 +27417,7 @@ async function countyMapScreenHtml() {
 				});
 				if (bestId) { countyToCustom[c.fips] = bestId; assigned.add(c.fips); }
 			});
-			
+
 			activeRS = Object.keys(customStates)[0];
 			recalcAllRS(); refreshMapFills(); renderRSPanel();
 		};
@@ -27438,24 +27438,24 @@ async function countyMapScreenHtml() {
 
             countyPaths.attr("fill", d => {
                 if (currentMode === "redraw") {
-                    const sid = countyToCustom[d.fips]; 
+                    const sid = countyToCustom[d.fips];
                     return (sid && customStates[sid]) ? customStates[sid].color : "#444";
                 }
                 if (currentMode === "proportional") return "#f4f6f8"; // clean background mapping
                 if (currentMode === "density") return d.proj ? d.proj.colorDensity : "#ccc"; // bivariate mapping
 				if (currentMode === "voteshare") return d.proj ? d.proj.colorShare : "#ccc";
-                
+
                 return d.proj ? (currentMode==="binary"?d.proj.colorBinary:d.proj.colorChoro) : "#ccc";
             }).attr("stroke", d => {
                 if (currentMode === "redraw") {
                     if (showCounties) return "rgba(0,0,0,0.15)"; // subtle county lines inside the state
-                    const sid = countyToCustom[d.fips]; 
+                    const sid = countyToCustom[d.fips];
                     return (sid && customStates[sid]) ? customStates[sid].color : "#444";
                 }
                 if (currentMode === "proportional") return "none"; // hide county lines on proportional. this un-clutters the bubbles
                 return "rgba(255,255,255,0.2)";
             }).attr("stroke-width", currentMode === "redraw" ? (showCounties ? 0.2 : 0.5) : (currentMode === "proportional" ? 0 : 0.2));
-            
+
             if (currentMode === "redraw") d3.select("#custom-borders-path").style("display", "block");
             else d3.select("#custom-borders-path").style("display", "none");
         }
@@ -27478,7 +27478,7 @@ async function countyMapScreenHtml() {
             .on("mouseover", function(event, d) {
                 if (!d.proj) return;
 				highlightPath.attr("d", this.getAttribute("d")).style("display", "block").raise();
-                
+
                 if (isPainting && currentMode === "redraw" && activeRS) {
                     countyToCustom[d.fips] = activeRS;
                     this.setAttribute("fill", activePaintColor);
@@ -27486,7 +27486,7 @@ async function countyMapScreenHtml() {
                         this.setAttribute("stroke", activePaintColor);
                     }
                 }
-                
+
                 let customText = "";
                 if (currentMode === "redraw" && countyToCustom[d.fips] && customStates[countyToCustom[d.fips]]) {
                     const st = customStates[countyToCustom[d.fips]];
@@ -27499,26 +27499,26 @@ async function countyMapScreenHtml() {
             .on("mouseout", function() { highlightPath.style("display", "none"); tooltip.style("display", "none"); })
             .on("mousedown", function(event, d) {
                 if (currentMode !== "redraw" || !activeRS || !d.proj) return;
-                
-                if (event.button === 2) { 
+
+                if (event.button === 2) {
                     activePaintColor = customStates[activeRS].color || "#aaa";
-                    isPainting = true; 
-                    countyToCustom[d.fips] = activeRS; 
+                    isPainting = true;
+                    countyToCustom[d.fips] = activeRS;
                     this.setAttribute("fill", activePaintColor);
                     if (!document.getElementById("rs_toggle_counties").checked) {
                         this.setAttribute("stroke", activePaintColor);
                     }
-                } 
+                }
             })
             .on("click", function(event, d) {
                 if (currentMode !== "redraw" || !activeRS || !d.proj || event.defaultPrevented) return;
                 if (event.shiftKey) {
-                    const bs = d.proj.state; 
+                    const bs = d.proj.state;
                     usCounties.forEach(c => { if (c.proj && c.proj.state === bs) countyToCustom[c.fips] = activeRS; });
-                } else { 
-                    countyToCustom[d.fips] = activeRS; 
+                } else {
+                    countyToCustom[d.fips] = activeRS;
                 }
-                
+
                 requestAnimationFrame(() => {
                     recalcAllRS(); refreshMapFills(); renderRSPanel();
                 });
@@ -27528,14 +27528,14 @@ async function countyMapScreenHtml() {
         const circles = g.append("g").attr("class", "circles-layer")
             .selectAll("circle.symbol").data(usCounties.filter(d => d.proj && d.centroid))
             .join("circle").attr("class", "symbol")
-            .attr("transform", d => `translate(${d.centroid})`).attr("r", 0) 
+            .attr("transform", d => `translate(${d.centroid})`).attr("r", 0)
             .attr("fill", d => d.proj.colorBinary).attr("fill-opacity", 0.75).attr("stroke", "#fff")
             .attr("stroke-width", 0.5).attr("vector-effect", "non-scaling-stroke").style("pointer-events", "none");
 
         // the border layer
         const realStateBorders = g.append("g").attr("class", "state-borders-layer").append("path").datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b)).attr("fill", "none").attr("stroke", "#333").attr("stroke-linejoin", "round").attr("vector-effect", "non-scaling-stroke").attr("stroke-width", 0.8).attr("d", path).style("pointer-events", "none");
         const realNationBorders = g.append("g").attr("class", "nation-borders-layer").append("path").datum(topojson.mesh(us, us.objects.nation)).attr("fill", "none").attr("stroke", "#000").attr("stroke-linejoin", "round").attr("vector-effect", "non-scaling-stroke").attr("stroke-width", 1.5).attr("d", path).style("pointer-events", "none");
-        
+
         // the custom borders layer
         const customBordersPath = g.append("g").attr("class", "custom-borders-layer").append("path").attr("id", "custom-borders-path").attr("fill", "none").attr("stroke", "#000").attr("stroke-linejoin", "round").attr("vector-effect", "non-scaling-stroke").attr("stroke-width", 1.2).style("pointer-events", "none").style("display", "none");
 		const customLabelsG = g.append("g").attr("class", "custom-labels-layer").style("pointer-events", "none");
@@ -27551,7 +27551,7 @@ async function countyMapScreenHtml() {
 
             // toggle border visibility
             realStateBorders.style("display", isRedraw ? "none" : "block");
-            
+
             if (isRedraw) {
                 const labelsChecked = document.getElementById("rs_toggle_labels") ? document.getElementById("rs_toggle_labels").checked : true;
                 customLabelsG.style("display", labelsChecked ? "block" : "none");
@@ -27563,26 +27563,26 @@ async function countyMapScreenHtml() {
 
             refreshMapFills();
 
-            if (isProp) { const sqrtK = Math.sqrt(currentZoomK); circles.transition().duration(400).attr("r", d => d.baseR / sqrtK); } 
+            if (isProp) { const sqrtK = Math.sqrt(currentZoomK); circles.transition().duration(400).attr("r", d => d.baseR / sqrtK); }
             else circles.transition().duration(400).attr("r", 0);
         }
 
         document.getElementById("map_controls").addEventListener("change", (e) => { if (e.target.name === "map_mode") setMapMode(e.target.value); });
-		
+
 		let lastZoomK = 1;
         let zoomTicking = false;
 
         const zoom = d3.zoom().scaleExtent([1, 15])
-            .filter(event => { if (currentMode === "redraw" && event.type === "mousedown") return event.button === 0; return !event.button; }) 
+            .filter(event => { if (currentMode === "redraw" && event.type === "mousedown") return event.button === 0; return !event.button; })
             .on("zoom", (event) => {
                 currentZoomK = event.transform.k;
                 g.attr("transform", event.transform);
-                
+
                 if (!zoomTicking) {
                     requestAnimationFrame(() => {
-                        if (currentMode === "proportional" && currentZoomK !== lastZoomK) { 
-                            const sqrtK = Math.sqrt(currentZoomK); 
-                            circles.attr("r", d => d.baseR / sqrtK); 
+                        if (currentMode === "proportional" && currentZoomK !== lastZoomK) {
+                            const sqrtK = Math.sqrt(currentZoomK);
+                            circles.attr("r", d => d.baseR / sqrtK);
                         }
                         if (currentMode === "redraw" && currentZoomK !== lastZoomK) {
                             customLabelsG.selectAll(".rs-lbl-name").style("font-size", `${Math.max(4, 11 / Math.sqrt(currentZoomK))}px`);
@@ -27594,7 +27594,7 @@ async function countyMapScreenHtml() {
                     zoomTicking = true;
                 }
             });
-        
+
         svg.call(zoom);
 
         document.getElementById("county_map_status").style.display = "none";
@@ -27607,16 +27607,18 @@ async function countyMapScreenHtml() {
 }
 
 // The polling graph feature
+// The polling graph feature
 (function() {
     if (window.pollgraph) return;
 
     const POLL = window.pollgraph = {
         metric: 'pv',
+        showThirdParties: false,
         _candCache: {},
 
         init() {
             campaignTrail_temp.poll_history = [];
-            
+
             const hookFn = (origFn, callback, resetHeight) => {
                 if (!origFn) return null;
                 return function() {
@@ -27632,7 +27634,7 @@ async function countyMapScreenHtml() {
 
             window.questionHTML = hookFn(window.questionHTML, () => POLL.record(false), false);
             window.overallResultsHtml = hookFn(window.overallResultsHtml, () => POLL.record(true), true);
-            
+
             const hooks = ["finalMapScreenHtml", "stateResultsHtml", "furtherReadingHtml"];
             for (let i = 0; i < hooks.length; i++) {
                 window[hooks[i]] = hookFn(window[hooks[i]], null, true);
@@ -27657,8 +27659,8 @@ async function countyMapScreenHtml() {
             const ct = campaignTrail_temp;
             let label = isFinal ? "Final" : "Q" + (ct.question_number + 1);
             let history = ct.poll_history;
-            if (history.length === 0) POLL._candCache = {}; 
-            
+            if (history.length === 0) POLL._candCache = {};
+
             let existingIdx = history.findIndex(x => x.label === label);
             let turnData = {};
 
@@ -27681,7 +27683,7 @@ async function countyMapScreenHtml() {
             }
 
             let entry = { label, data: turnData };
-            if (existingIdx >= 0) history[existingIdx] = entry; 
+            if (existingIdx >= 0) history[existingIdx] = entry;
             else history.push(entry);
         },
 
@@ -27689,7 +27691,16 @@ async function countyMapScreenHtml() {
             POLL.metric = m;
             let radios = document.querySelectorAll('input[name="pollMetricInline"], input[name="pollMetricLarge"]');
             for (let i = 0; i < radios.length; i++) radios[i].checked = (radios[i].value === m);
-            
+
+            if (document.getElementById("inlinePollGraph")) POLL.render("inlinePollGraph", "inlinePollTooltip", 888, 140, false);
+            if (document.getElementById("largePollGraph")) POLL.render("largePollGraph", "largePollTooltip", 1050, 460, true);
+        },
+
+        toggleThirdParties(val) {
+            POLL.showThirdParties = val;
+            let cbs = document.querySelectorAll('#pollThirdPartyInline, #pollThirdPartyLarge');
+            for (let i = 0; i < cbs.length; i++) cbs[i].checked = val;
+
             if (document.getElementById("inlinePollGraph")) POLL.render("inlinePollGraph", "inlinePollTooltip", 888, 140, false);
             if (document.getElementById("largePollGraph")) POLL.render("largePollGraph", "largePollTooltip", 1050, 460, true);
         },
@@ -27710,7 +27721,8 @@ async function countyMapScreenHtml() {
                         container.innerHTML = `
                             <div style="text-align:center; margin-bottom:8px; font-family:sans-serif; font-size:13px; color:#333;">
                                 <label style="margin-right:15px; cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetricInline" value="pv" ${POLL.metric === 'pv' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('pv')"> Popular Vote %</label>
-                                <label style="cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetricInline" value="ev" ${POLL.metric === 'ev' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('ev')"> Electoral Votes</label>
+                                <label style="margin-right:25px; cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetricInline" value="ev" ${POLL.metric === 'ev' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('ev')"> Electoral Votes</label>
+                                <label style="cursor:pointer; font-weight:normal; font-size:12px; color:#555;"><input type="checkbox" id="pollThirdPartyInline" ${POLL.showThirdParties ? 'checked' : ''} onchange="window.pollgraph.toggleThirdParties(this.checked)"> Show Third Parties</label>
                             </div>
                             <div style="position:relative;">
                                 <canvas id="inlinePollGraph" style="cursor:pointer; background:#fdfdfd; border:1px solid #ccc; border-radius:6px; width:100%; max-width:888px; height:140px; box-shadow:inset 0 1px 3px rgba(0,0,0,0.05);"></canvas>
@@ -27729,7 +27741,7 @@ async function countyMapScreenHtml() {
             let canvas = document.getElementById(canvasId);
             let tooltip = document.getElementById(tooltipId);
             if (!canvas) return;
-            
+
             let history = campaignTrail_temp.poll_history || [];
             let hLen = history.length;
             if (hLen === 0) return;
@@ -27743,15 +27755,29 @@ async function countyMapScreenHtml() {
 
             let minY = 9999, maxY = -9999;
             let validCands = new Set();
-            
+
+            // find major candidates based on max PV > 15%
+            let maxPvPerCand = {};
+            for (let i = 0; i < hLen; i++) {
+                for (let pk in history[i].data) {
+                    maxPvPerCand[pk] = Math.max(maxPvPerCand[pk] || 0, history[i].data[pk].pv);
+                }
+            }
+            let majorCands = Object.keys(maxPvPerCand).filter(pk => maxPvPerCand[pk] > 15.0);
+            if (majorCands.length < 2) {
+                majorCands = Object.keys(maxPvPerCand).sort((a,b) => maxPvPerCand[b] - maxPvPerCand[a]).slice(0, 2);
+            }
+
             for (let i = 0; i < hLen; i++) {
                 let data = history[i].data;
                 for (let pk in data) {
+                    if (!POLL.showThirdParties && !majorCands.includes(pk)) continue;
                     let val = data[pk];
                     if ((mKey === 'pv' && val.pv >= 1.0) || (mKey === 'ev' && val.ev > 0)) validCands.add(pk);
                 }
             }
 
+            // fallback if somehow validCands is empty
             if (validCands.size === 0) {
                 for (let i = 0; i < hLen; i++) {
                     for (let pk in history[i].data) validCands.add(pk);
@@ -27778,13 +27804,13 @@ async function countyMapScreenHtml() {
 
             let range = Math.max(maxY - minY, 2);
             let padding = range * 0.15;
-            
+
             minY = Math.max(0, minY - padding);
             maxY += padding;
             if (mKey === 'pv' && maxY > 100) maxY = 100;
-            
-            let stepVal = mKey === 'pv' 
-                ? (range <= 10 ? 2 : (range <= 30 ? 5 : 10)) 
+
+            let stepVal = mKey === 'pv'
+                ? (range <= 10 ? 2 : (range <= 30 ? 5 : 10))
                 : (range <= 20 ? 5 : (range <= 100 ? 25 : (range <= 300 ? 50 : 100)));
 
             minY = Math.floor(minY / stepVal) * stepVal;
@@ -27802,13 +27828,13 @@ async function countyMapScreenHtml() {
 
             function draw(hoverIndex) {
                 ctx.clearRect(0, 0, cssWidth, cssHeight);
-                
+
                 ctx.fillStyle = "#333";
                 ctx.font = isLarge ? "14px Arial" : "11px Arial";
                 ctx.textAlign = "right";
                 ctx.textBaseline = "middle";
                 ctx.lineWidth = 1;
-                
+
                 ctx.beginPath();
                 for (let i = minY; i <= maxY; i += stepVal) {
                     let y = padT + plotH - ((i - minY) / yRange) * plotH;
@@ -27820,7 +27846,7 @@ async function countyMapScreenHtml() {
 
                 ctx.fillStyle = "#555";
                 ctx.textAlign = "center";
-                
+
                 ctx.beginPath();
                 for (let i = 0; i < hLen; i++) {
                     let x = padL + i * stepX;
@@ -27850,18 +27876,18 @@ async function countyMapScreenHtml() {
                     ctx.lineWidth = isLarge ? 4 : 2.5;
                     ctx.lineJoin = "round";
                     ctx.lineCap = "round";
-                    
+
                     let hasStarted = false;
                     for (let i = 0; i < hLen; i++) {
                         let cData = history[i].data[pk];
                         if (!cData) continue;
                         let x = padL + i * stepX;
                         let y = padT + plotH - ((cData[mKey] - minY) / yRange) * plotH;
-                        
+
                         if (!hasStarted) { ctx.moveTo(x, y); hasStarted = true; }
                         else ctx.lineTo(x, y);
                     }
-                    
+
                     ctx.shadowColor = "rgba(0,0,0,0.25)";
                     ctx.shadowBlur = isLarge ? 5 : 3;
                     ctx.shadowOffsetY = isLarge ? 2 : 1;
@@ -27874,7 +27900,7 @@ async function countyMapScreenHtml() {
                         if (!cData) continue;
                         let x = padL + i * stepX;
                         let y = padT + plotH - ((cData[mKey] - minY) / yRange) * plotH;
-                        
+
                         ctx.beginPath();
                         ctx.arc(x, y, pointRadius + (i === hoverIndex ? 2 : 0), 0, 2 * Math.PI);
                         ctx.fill();
@@ -27904,21 +27930,21 @@ async function countyMapScreenHtml() {
                 let scaleX = canvas.width / rect.width;
                 let mouseX = (e.clientX - rect.left) * scaleX / dpr;
                 let mouseY = (e.clientY - rect.top) * scaleX / dpr;
-                
+
                 let hoverIdx = Math.round((mouseX - padL) / stepX);
                 if (hoverIdx < 0) hoverIdx = 0;
                 else if (hoverIdx >= hLen) hoverIdx = hLen - 1;
-                
+
                 if (hoverIdx !== lastHoverIdx) {
                     lastHoverIdx = hoverIdx;
                     if (hoverFrame) cancelAnimationFrame(hoverFrame);
-                    
+
                     hoverFrame = requestAnimationFrame(() => {
                         draw(hoverIdx);
                         if (tooltip) {
                             let pt = history[hoverIdx];
                             let html = `<strong style="font-size:1.15em; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:4px; display:block; margin-bottom:6px;">${pt.label}</strong>`;
-                            
+
                             let turnCands = turnCandsCache[hoverIdx];
                             for (let i = 0; i < turnCands.length; i++) {
                                 let p = turnCands[i];
@@ -27926,8 +27952,8 @@ async function countyMapScreenHtml() {
                                 let mainText = mKey === 'pv' ? p.pv.toFixed(1) + "%" : p.ev + " EV";
                                 let subText = mKey === 'pv' ? p.ev + " EV" : p.pv.toFixed(1) + "%";
                                 html += `<div style="margin:3px 0; display:flex; align-items:center;">
-                                    <span style="color:${meta.color}; font-size:1.4em; line-height:0.8; margin-right:6px;">■</span> 
-                                    <b style="flex-grow:1; margin-right:12px;">${meta.name}</b> 
+                                    <span style="color:${meta.color}; font-size:1.4em; line-height:0.8; margin-right:6px;">■</span>
+                                    <b style="flex-grow:1; margin-right:12px;">${meta.name}</b>
                                     <span>${mainText} <span style="color:#aaa; font-size:0.85em;">(${subText})</span></span>
                                 </div>`;
                             }
@@ -27940,17 +27966,17 @@ async function countyMapScreenHtml() {
                 if (tooltip && tooltip.style.display === "block") {
                     let actualMouseX = e.clientX - rect.left;
                     let actualMouseY = e.clientY - rect.top;
-                    
+
                     let ttX = actualMouseX + 15;
                     let ttY = actualMouseY + 15;
-                    
+
                     if (ttX + tooltip.offsetWidth > rect.width) ttX = actualMouseX - tooltip.offsetWidth - 15;
                     if (ttY + tooltip.offsetHeight > rect.height) ttY = actualMouseY - tooltip.offsetHeight - 15;
-                    
+
                     tooltip.style.transform = `translate(${ttX}px, ${ttY}px)`;
                 }
             };
-            
+
             canvas.onmouseleave = function() {
                 if (lastHoverIdx !== -1) {
                     lastHoverIdx = -1;
@@ -27959,7 +27985,7 @@ async function countyMapScreenHtml() {
                     if (tooltip) tooltip.style.display = "none";
                 }
             };
-            
+
             if (!isLarge) canvas.onclick = POLL.openLargeModal;
         },
 
@@ -27968,10 +27994,10 @@ async function countyMapScreenHtml() {
             let overlay = document.createElement("div");
             overlay.id = "graphModal";
             overlay.style.cssText = "position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.85); z-index:9999; display:flex; justify-content:center; align-items:center; opacity:0; transition:opacity 0.2s;";
-            
+
             let container = document.createElement("div");
             container.style.cssText = "position:relative; width:95%; max-width:1100px; background-color:#fcfcfc; padding:25px; border-radius:10px; box-shadow:0 10px 40px rgba(0,0,0,0.6); transform:scale(0.95); transition:transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);";
-            
+
             let closeBtn = document.createElement("button");
             closeBtn.innerHTML = "&times;";
             closeBtn.style.cssText = "position:absolute; top:12px; right:15px; cursor:pointer; width:30px; height:30px; background:#e74c3c; color:#fff; border:none; border-radius:50%; font-size:20px; font-weight:bold; line-height:30px; padding:0; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.2);";
@@ -27980,37 +28006,37 @@ async function countyMapScreenHtml() {
                 container.style.transform = "scale(0.95)";
                 setTimeout(() => document.body.removeChild(overlay), 200);
             };
-            
+
             container.innerHTML = `
                 <h2 style="margin:0 0 15px 0; color:#222; border-bottom:2px solid #ddd; padding-bottom:10px; font-family:sans-serif;">Campaign Polling History</h2>
                 <div style="text-align:center; margin-bottom:15px; font-family:sans-serif; font-size:15px; color:#333;">
                     <label style="margin-right:25px; cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetricLarge" value="pv" ${POLL.metric === 'pv' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('pv')"> Popular Vote %</label>
-                    <label style="cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetricLarge" value="ev" ${POLL.metric === 'ev' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('ev')"> Electoral Votes</label>
+                    <label style="margin-right:35px; cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetricLarge" value="ev" ${POLL.metric === 'ev' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('ev')"> Electoral Votes</label>
+                    <label style="cursor:pointer; font-weight:normal; font-size:14px; color:#555;"><input type="checkbox" id="pollThirdPartyLarge" ${POLL.showThirdParties ? 'checked' : ''} onchange="window.pollgraph.toggleThirdParties(this.checked)"> Show Third Parties</label>
                 </div>
                 <div style="position:relative; width:100%;">
                     <canvas id="largePollGraph" style="width:100%; max-width:1050px; height:460px; display:block; margin:0 auto; cursor:crosshair; background:#fff; border-radius:8px; border:1px solid #ddd;"></canvas>
                     <div id="largePollTooltip" style="display:none; position:absolute; background:rgba(20,20,20,0.95); color:#fff; padding:12px; border-radius:8px; font-size:15px; font-family:sans-serif; pointer-events:none; box-shadow:0 5px 15px rgba(0,0,0,0.5); white-space:nowrap; left:0; top:0; transform:translate(0px, 0px); transition: transform 0.05s linear; z-index:100;"></div>
                 </div>
             `;
-            
+
             container.appendChild(closeBtn);
             overlay.appendChild(container);
             document.body.appendChild(overlay);
-            
+
             requestAnimationFrame(() => {
                 overlay.style.opacity = "1";
                 container.style.transform = "scale(1)";
             });
-            
+
             setTimeout(() => POLL.render("largePollGraph", "largePollTooltip", 1050, 460, true), 50);
-            
+
             overlay.onclick = (e) => { if (e.target === overlay) closeBtn.click(); };
         }
     };
 
     POLL.init();
 })();
-
 // This is for the recommended reading box. Specifically, it sets up
 // the styling for the tab system we have here. Taken from 2016ALOT
 (function () {
@@ -28151,7 +28177,7 @@ async function countyMapScreenHtml() {
 		font-size: 0.95em;
 		font-style: italic;
 	}
-	
+
 	.overview-content .overview-body {
 		display: flex;
 		justify-content: space-between;
@@ -28189,8 +28215,8 @@ async function countyMapScreenHtml() {
 		text-align: center;
 		max-width: 220px;
 	}
-	
-	
+
+
 	.overview-content .img-wrapper {
 		background: white;
 		padding: 8px;
@@ -28375,7 +28401,7 @@ async function countyMapScreenHtml() {
   let combinedCandidateIndex1 = 0, combinedCandidateIndex2 = 2, combinedCandidateIndex3 = -1, combinerMode = 'two', combinerResults = {};
   let showAverageIssueStance = false, headToHeadMode = false, headToHeadTeam1Index1 = 0, headToHeadTeam1Index2 = 1;
   let headToHeadTeam2Index1 = 2, headToHeadTeam2Index2 = 3, headToHeadResults = {}, legendPosition = null, legendMoved = false;
-  
+
   const colorCache = {}, stateUpdateQueue = [];
   let animationFrameRequested = false;
 
@@ -29172,7 +29198,7 @@ async function countyMapScreenHtml() {
     const oCnt = coalitionResults.overrideCount || 0;
     const nTxt = oCnt > 0 ? `Natl: ${(coalitionResults.newNatPct * 100).toFixed(1)}% (${oCnt} override${oCnt > 1 ? 's' : ''})` : `Natl: ${Math.round(coalitionVoteShare * 100)}%`;
     f.appendChild(cr('div', { textContent: `${c.fields.last_name} coalition - ${nTxt}` }, { fontWeight: 'bold', marginBottom: '5px', textAlign: 'center' }));
-    
+
     const tEV = coalitionResults.totalElectoralVotes, win = tEV >= (campaignTrail_temp.election_json?.[0]?.fields?.winning_electoral_vote_number || 270);
     let fS = 0, lS = 0, fmt = v => v >= 0.01 ? Math.round(v * 100) + '%' : (v * 100).toFixed(1) + '%';
     for (const a in coalitionResults.states) {
@@ -29308,7 +29334,7 @@ async function countyMapScreenHtml() {
       const c = cands[coalitionCandidateIndex];
       const nr = campaignTrail_temp.final_overall_results.find(r => r.candidate === c?.pk), tot = campaignTrail_temp.final_overall_results.reduce((s, r) => s + r.popular_votes, 0), actNat = nr && tot > 0 ? nr.popular_votes / tot : 0.35;
       let curV, actV, pre = '';
-      
+
       if (coalitionTargetState === 'National') {
         if (Math.abs(coalitionVoteShare - 0.5) < 0.01 && !window._coalitionVoteShareSet) { coalitionVoteShare = actNat; window._coalitionVoteShareSet = true; }
         curV = coalitionVoteShare; actV = actNat; pre = 'National';
@@ -29318,11 +29344,11 @@ async function countyMapScreenHtml() {
         curV = coalitionStateOverrides[coalitionTargetState] ?? coalitionResults?.states?.[coalitionTargetState]?.newVoteShare ?? actV;
         pre = coalitionTargetState;
       }
-      
+
       if (vS) vS.value = curV;
       slLbl.innerHTML = `${pre} vote share: `;
       const vD = cr('span', { innerHTML: `${(curV * 100).toFixed(1)}%` }, { cursor: 'pointer', textDecoration: 'underline', color: '#0066cc' });
-      
+
       vD.addEventListener('click', function (e) {
         e.stopPropagation();
         const inp = cr('input', { type: 'number', min: '0', max: '100', step: '0.1', value: (curV * 100).toFixed(1) }, { width: '50px', fontSize: '11px', textAlign: 'center', position: 'absolute', zIndex: '1001', left: this.getBoundingClientRect().left + 'px', top: this.getBoundingClientRect().top + 'px' });
@@ -29344,7 +29370,7 @@ async function countyMapScreenHtml() {
       });
       slLbl.appendChild(vD); slLbl.appendChild(cr('span', { textContent: ` (Actual: ${(actV * 100).toFixed(1)}%)` }));
     };
-    
+
     const vS = cr('input', { type: 'range', min: '0', max: '1', step: '0.001', value: coalitionVoteShare }, { width: '100%', marginBottom: '4px' });
     vS.addEventListener('input', function () {
       const v = parseFloat(this.value);
@@ -29439,7 +29465,7 @@ async function countyMapScreenHtml() {
     const cH = cr('div', {}, { fontWeight: 'bold', margin: '2px 0' });
     cH.innerHTML = `<span style="display:inline-block;width:12px;height:12px;background:${tp.candidate.fields.color_hex};border:1px solid #999;margin-right:4px;vertical-align:bottom;"></span>Currently won`;
     f.appendChild(cr('div', {}, { fontSize: '10px', marginBottom: '8px', padding: '3px', backgroundColor: '#f9f9f9', border: '1px solid #ddd' }, [cH]));
-    
+
     const t = cr('table', {}, { width: '100%', borderCollapse: 'collapse', marginTop: '5px' });
     const hR = t.insertRow(); hR.style.backgroundColor = '#f0f0f0';
     [{ t: 'State', a: 'left' }, { t: 'EVs', a: 'center' }, { t: 'Gap', a: 'center' }].forEach(h => { const c = hR.insertCell(); c.textContent = h.t; Object.assign(c.style, { fontWeight: 'bold', fontSize: '9px', padding: '2px 4px', textAlign: h.a }); });
@@ -29505,7 +29531,7 @@ async function countyMapScreenHtml() {
 
       const cV = r.result.find(x => x.candidate === c.pk)?.percent || 0;
       let nTV = coalitionStateOverrides[r.abbr];
-      
+
       if (nTV === undefined) {
         const cM = r.result.length >= 2 ? r.result[0].percent - r.result[1].percent : 1;
         const mod = cM < 0.05 ? 1.4 : cM < 0.10 ? 1.2 : cM < 0.20 ? 1.0 : 0.7;
@@ -29521,7 +29547,7 @@ async function countyMapScreenHtml() {
       if (wW) tEV += eV;
       stByM.push({ abbr: r.abbr, margin: wW ? nM : -nM, electoralVotes: eV, wouldWin: wW });
     });
-    
+
     let tip = null, rEV = 0; const tThresh = campaignTrail_temp.election_json?.[0]?.fields?.winning_electoral_vote_number || 270;
     stByM.filter(s => s.wouldWin).sort((a, b) => a.margin - b.margin).forEach(s => { rEV += s.electoralVotes; if (rEV >= tThresh && !tip) tip = s.abbr; });
     return { states: res, totalElectoralVotes: tEV, tippingPointState: tip, candidateIndex: idx, targetVoteShare: targetV, newNatPct: totAll > 0 ? simNat / totAll : targetV, overrideCount: Object.keys(coalitionStateOverrides).length };
@@ -29768,16 +29794,16 @@ async function countyMapScreenHtml() {
   const initialTasks = () => {
     // ending images
     try { window.endingImageSystem?.enforce?.(); } catch (e) { }
-	
+
 	// data visualizer
     try { window.dataVisualizer?.refreshVisualization?.(); } catch (e) { }
-	
+
 	// polling graph
 	try { window.pollgraph?.injectInline?.(); } catch (e) {}
-	
+
     // recommended reading section
     try { window.recommendedReading?.ensureInitialized?.(); } catch (e) { }
-	
+
   };
 
   window.bobertTasks.push(initialTasks);
@@ -29850,7 +29876,7 @@ async function countyMapScreenHtml() {
 		"https://yt3.googleusercontent.com/pvgvYRppJKsEJgbYygbFw0bMbhF4Gw5eLE3ElZFN_IU515LpEYgJRvKcdzsgxk0szxMS8XeTM6wXshg=w544-h544-l90-rj",
 		"7O1J--nOKm8"
 	);
-	  
+
     const isGeneral = type === 'general';
     const globalParam = campaignTrail_temp.global_parameter_json ? campaignTrail_temp.global_parameter_json[0].fields : {};
 
@@ -29913,7 +29939,7 @@ async function countyMapScreenHtml() {
         lastDisplayedProgress: 0,
         stagnationTicks: 0,
         // jitter the call time by +/- 15 minutes so it's not totally predictable
-        callTimeJitter: Math.floor(Math.random() * 30) - 15 
+        callTimeJitter: Math.floor(Math.random() * 30) - 15
       };
     });
 
@@ -30055,18 +30081,18 @@ async function countyMapScreenHtml() {
     // formats the in-game 'time' integer into a readable clock
     function formatClock(t) {
         // default: time=0 is 7:00 PM (19:00). this can be overridden
-        let baseHour = window.campaignTrail_temp?.en_base_hour ?? 19; 
+        let baseHour = window.campaignTrail_temp?.en_base_hour ?? 19;
         let currentMinutes = (baseHour * 60) + t;
-        
+
         while(currentMinutes < 0) currentMinutes += 24 * 60;
-        
+
         let h = Math.floor(currentMinutes / 60);
         let m = currentMinutes % 60;
-        
+
         let ampm = h % 24 >= 12 ? "PM" : "AM";
         let displayH = h % 12 || 12;
         let displayM = m.toString().padStart(2, '0');
-        
+
         return `${displayH}:${displayM} ${ampm} EST`;
     }
 
@@ -30089,10 +30115,10 @@ async function countyMapScreenHtml() {
       const isCalled = (currTime >= callTime);
       let wasCalledLastTick = prevSnapshot ? prevSnapshot.isCalled : false;
       let justCalled = isCalled && !wasCalledLastTick;
-      
+
       // give called states a brief flash time to attract the eye (about 1 second at default speed)
       let flashTicks = prevSnapshot ? prevSnapshot.flashTicks : 0;
-      if (justCalled) flashTicks = 4; 
+      if (justCalled) flashTicks = 4;
       if (flashTicks > 0) flashTicks--;
 
       // reporting %
@@ -30111,11 +30137,11 @@ async function countyMapScreenHtml() {
       if (!isCalled) {
         if (biasData.stagnationTicks > 0) {
             biasData.stagnationTicks--;
-            adjustedProgress = biasData.lastDisplayedProgress; 
+            adjustedProgress = biasData.lastDisplayedProgress;
         } else if (Math.random() < 0.15 && adjustedProgress < 0.95) {
             // chance to stall for 3-10 ticks (since ticks are fast)
             biasData.stagnationTicks = Math.floor(Math.random() * 8) + 3;
-            adjustedProgress = biasData.lastDisplayedProgress; 
+            adjustedProgress = biasData.lastDisplayedProgress;
         } else {
             biasData.lastDisplayedProgress = adjustedProgress;
         }
@@ -30128,7 +30154,7 @@ async function countyMapScreenHtml() {
 
       // vote shares with bias
       // if progress is low, bias strength is high. as progress -> 1, bias -> 0
-      let decay = Math.pow(1 - adjustedProgress, 2); 
+      let decay = Math.pow(1 - adjustedProgress, 2);
 
       let simResults = resData.result.map(r => {
         // get actual final percentage
@@ -30190,7 +30216,7 @@ async function countyMapScreenHtml() {
       // find leader
       let sortedByVotes = [...finalSimulatedVotes].sort((a,b) => b.sim_votes - a.sim_votes);
       let leader = sortedByVotes.length > 0 ? sortedByVotes[0].candidate : null;
-      
+
       // calculate active margin for map shading
       let marginPct = 0;
       if (sortedByVotes.length >= 2 && totalCounted > 0) {
@@ -30229,7 +30255,7 @@ async function countyMapScreenHtml() {
       } else {
         let sortedVotes = [...snapshot.votes].sort((a, b) => b.sim_votes - a.sim_votes);
         let statusMsg = `<p>${snapshot.pctReporting}% reporting</p>`;
-        
+
         // too close to call status
         if (snapshot.isCalled) {
           const w = sortedCands.find(c => c.candidate === snapshot.final_winner);
@@ -30312,19 +30338,19 @@ async function countyMapScreenHtml() {
 
             const candObj = PROPS.CANDIDATES.get(String(st.final_winner));
             const c = candObj ? candObj.color_hex : "#ccc";
-            
+
             // flash state brightly if it was just called
             //if (snapshot.flashTicks > 0) {
-            //    mapStyles[abbr] = { fill: "#ffffff", "fill-opacity": 0.8 }; 
+            //    mapStyles[abbr] = { fill: "#ffffff", "fill-opacity": 0.8 };
             //} else {
                 mapStyles[abbr] = { fill: c, "fill-opacity": campaignTrail_temp.stateOpacity };
             //}
-            
+
           } else {
             if (snapshot.leader) {
               const candObj = PROPS.CANDIDATES.get(String(snapshot.leader));
               const c = candObj ? candObj.color_hex : "#ccc";
-              
+
               // dynamic opacity scaling based on margin
               let dynamicOpacity = Math.min(campaignTrail_temp.stateOpacity, 0.3 + (snapshot.marginPercent * 4.5));
               mapStyles[abbr] = { fill: c, "fill-opacity": dynamicOpacity };
@@ -30358,9 +30384,9 @@ async function countyMapScreenHtml() {
 
       // progress
       let maxProgressTime = 560;
-      let prog = Math.max(0, Math.min(100, Math.floor(((time - enStartTime) / maxProgressTime) * 100))); 
+      let prog = Math.max(0, Math.min(100, Math.floor(((time - enStartTime) / maxProgressTime) * 100)));
       if (statesCalled === activeStates.length) prog = 100;
-      
+
       $("#progress_text").html(`
           <span id="sim_clock" style="display: inline; font-weight:bold; color:#555;">${formatClock(time)}</span><br/>
           ${prog}% reporting ${evsToWin}
@@ -30394,12 +30420,12 @@ async function countyMapScreenHtml() {
 
       // advance
       if (statesCalled < activeStates.length && time < 10000) {
-        
+
         let currentTickRate = tickRate;
         // top of the hour linger. if time lands exactly on an hour mark, slow down
 		// the tick rate heavily to process the flood of poll closings
         if (time >= 0 && time % 60 === 0 && tickRate > 0) {
-            currentTickRate = tickRate * 5; 
+            currentTickRate = tickRate * 5;
         }
 
         window.results_timeout = setTimeout(() => {
@@ -30476,6 +30502,3 @@ campaignTrail_temp.jet_data = [{
     "player_candidate": 78
 }
 ]
-
-
-
