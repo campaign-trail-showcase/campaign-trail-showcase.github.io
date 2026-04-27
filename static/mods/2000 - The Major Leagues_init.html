@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.0.1
+* @version: 1.0.2
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -63,7 +63,7 @@ const recommendedReadingContent = `
               James Eric (Jay) Black — <a href="https://www.jstor.org/stable/42579847" target="_blank" rel="noopener">Amoozin’ but Confoozin’: Comic Strips as a Voice of Dissent in the 1950s.</a> (<i>ETC: A Review of General Semantics</i>, vol. 66, no. 4, 2009, pp. 460–77)
             </p>
 			<blockquote class="reading-quote">
-              The main character, Charlie Brown, only aged from five to eight in over 50 years of syndication. <i>The World Encyclopedia of Comics</i> describes the strip as "the most shining example of the American success story in the comic strip field," ironically based on the theme of "the great American un-success story," because the nervous, meek, and low-self-esteemed Charlie Brown could not successfully fly a kite, win a baseball game, or even kick a football (Horn 1999, 601-602). 
+              The main character, Charlie Brown, only aged from five to eight in over 50 years of syndication. <i>The World Encyclopedia of Comics</i> describes the strip as "the most shining example of the American success story in the comic strip field," ironically based on the theme of "the great American un-success story," because the nervous, meek, and low-self-esteemed Charlie Brown could not successfully fly a kite, win a baseball game, or even kick a football (Horn 1999, 601-602).
             </blockquote>
           </li>
           <li>
@@ -679,17 +679,17 @@ const css = `
 			}
 
 			/* drop-caps */
-			#inner_window_1 p:first-of-type:first-letter, 
+			#inner_window_1 p:first-of-type:first-letter,
 			#inner_window_2 p:first-of-type:first-letter,
-			#inner_window_3 p:first-of-type:first-letter, 
+			#inner_window_3 p:first-of-type:first-letter,
 			#running_mate_description_window p:first-of-type:first-letter {
 				float: left; font-weight: bold; line-height: 0.7em;
-				margin-top: 0.05em; 
+				margin-top: 0.05em;
 				color: #d93829;
 				font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
 				text-shadow: 2px 2px 0px #222222, -1px -1px 0px #fffdf2;
 			}
-			
+
 			#inner_window_1 p:first-of-type:first-letter {
 				color: #f49b18;
 				font-size: 3.5em;
@@ -698,10 +698,10 @@ const css = `
 				padding-right: 0.02em;
 			}
 
-			#inner_window_2 p:first-of-type:first-letter, 
+			#inner_window_2 p:first-of-type:first-letter,
 			#inner_window_3 p:first-of-type:first-letter,
 			#running_mate_description_window p:first-of-type:first-letter {
-				font-size: 3.5em; 
+				font-size: 3.5em;
 				margin-right: 0.15em;
 				padding-bottom: 0.1em;
 				padding-right: 0.05em;
@@ -711,7 +711,7 @@ const css = `
 			.person_summary {
 				padding-top: 0;
 			}
-			
+
 			.person_summary ul {
 				display: flex;
 				flex-flow: column;
@@ -721,12 +721,12 @@ const css = `
 			}
 
 			.person_summary li {
-				/*padding-bottom: .5em;				
+				/*padding-bottom: .5em;
 				border-bottom: 1px solid rgba(44, 62, 80, 0.2);*/
 				margin: .1em 0 0 0;
 				color: #072d53;
 			}
-			
+
 			.person_summary li:nth-child(n+2) {
 				display: none;
 			}
@@ -740,16 +740,16 @@ const css = `
 				color: #3498db;
 				font-weight: bold;
 			}
-			
+
 			/* noteblock styling for the candidate selection */
 			.person_description_window {
 				background-color: #fffdf2;
-				background-image: 
+				background-image:
 					linear-gradient(90deg, transparent 45px, #d93829 45px, #d93829 47px, transparent 47px),
 					linear-gradient(transparent 1.4em, #b3d4ff 1.4em, #b3d4ff 1.5em, transparent 1.5em);
 				background-size: 100% 1.5em;
 				line-height: 1.5em;
-				
+
 				border-radius: 4px 15px 15px 4px;
 				box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
 				padding: 1.5em 1em 1.5em 60px;
@@ -792,11 +792,11 @@ const css = `
 				margin-top: 1.5em;
 				margin-bottom: 0;
 				line-height: 1.5;
-			}			
+			}
 
 			.inner_window_question {
 				background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-				background-blend-mode: overlay;			
+				background-blend-mode: overlay;
 				background-color: #fffdf2;
 				border: .3em double #d02222;
 				border-top: none;
@@ -816,7 +816,7 @@ const css = `
 				color: #000;
 				font-family: 'IBM Courier', Courier, 'Courier New', monospace;
             }
-			
+
 			.game_header {
 			  background-color: #d8720c !important;
 			  background-image: linear-gradient(
@@ -834,7 +834,7 @@ const css = `
 			  margin: 0 auto;
 			  width: 290px;
 			}
-			
+
 			.game_header h2 {
 			    color: #000;
 				font-style: normal;
@@ -928,7 +928,7 @@ const css = `
 				/* necessary for NCT compatibility */
 				position: initial;
 				transform: initial;
-			}			
+			}
 			#no_feedback_button {
 			  display: none;
 			}
@@ -938,7 +938,7 @@ const css = `
 			    border: 3px solid #e1c396;
 				height: 33.48em; /* 30.78em */ /* necessary for mobile compatibility */
 			}
-			
+
 			/* basically a lazy fix to increase the SVG map size without
 			 * changing the actual SVG or resort to more aggressive tactics,
 			 * as Year Zero does something kinda similar */
@@ -950,12 +950,12 @@ const css = `
 			}
 			#map_container svg rect, #map_container svg text {
 				transform: translate(-100px, 0px);
-			}			
+			}
 			#main_content_area + #map_footer {
 				margin: 3em auto !important;
 			}
-			
-			
+
+
             #overall_result h3, #state_info h3, #state_result h3 {
 				background: #fddada;
                 padding: .25em 0;
@@ -968,7 +968,7 @@ const css = `
             }
 			#state_info ul {
 				padding: .2em 1em .2em 1em;
-			}			
+			}
 			#state_info > p:first-of-type {
 			  margin: .5em 0 0.4em 0;
 			  font-weight: 600;
@@ -1013,11 +1013,11 @@ const css = `
 			  margin: .3em 0 .4em 0;
 			  color: #1a0e59;
 			}
-			
-			
+
+
 			#menu_container {
 			    border-radius: .4em .4em 0 0;
-			}			
+			}
 			#overall_result h3 {
 			    border-radius: .15em .15em 0 0;
 				border-bottom: 3px solid rgb(221, 163, 163);
@@ -1142,7 +1142,7 @@ const css = `
 				}
 
 			}
-			
+
             /* Candidate image sizes & stuff */
             img#candidate_pic {
                 border: 4px solid #970606;
@@ -1161,7 +1161,7 @@ const css = `
 				object-position: top;
 				max-width: 220px;
 			}
-			
+
 			.inner_window_sign_display {
 				align-items: center;
 				background: linear-gradient(180deg, #f4f6fb 0%, #e9edf6 100%);
@@ -1216,7 +1216,7 @@ const css = `
 				color: transparent !important;
 				visibility: hidden;
 			}
-			
+
 			/* for the default CTS/NCT footer */
 			#game_window g {
 				display: flex;
@@ -1233,10 +1233,10 @@ const css = `
 				height: 175px;
 				flex-shrink: 0;
 				margin: 0 !important;
-				
+
 				background-color: #fffdf2;
 				padding: 6px 6px 28px 6px;
-				
+
 				border-radius: 2px !important;
 				box-shadow: 4px 6px 0px rgba(34, 34, 34, 0.2);
 				object-fit: cover;
@@ -1260,22 +1260,22 @@ const css = `
 				flex-direction: column;
 				align-items: center;
 				justify-content: flex-end;
-				
+
 				min-width: 200px;
 				max-width: 350px;
 				min-height: 185px;
 				padding: 10px;
-				
+
 				background-image: url("https://file.garden/aNtAfG887DiA_7lO/TML_2000/tml_footer.webp") !important;
 				background-size: cover, 150px 150px, cover, cover !important;
 				background-position: center !important;
-				
+
 				border-radius: 2px !important;
 				box-shadow: inset 0 0 7.5px rgba(0,0,0,0.6), 4px 4px 0px rgba(34, 34, 34, 0.2) !important;
 			}
 
 			#campaign_sign {
-				display: none; 
+				display: none;
 			}
 
 			.inner_window_sign_display #progress_bar {
@@ -1283,7 +1283,7 @@ const css = `
 				color: #fffdf2;
 				border: 2px solid #222;
 				box-shadow: 2px 2px 0px rgba(0,0,0,0.6);
-				margin-bottom: auto;     
+				margin-bottom: auto;
 				padding: 6px 14px;
 				width: fit-content;
 			}
@@ -1354,7 +1354,7 @@ const css = `
 				color: #000; /* seems redundant, but is actually necessary for Safari */
 				cursor: pointer;
                 padding: .25em 1.2em;
-				
+
                 background: linear-gradient(to bottom, #fffdf2 0%, #f4eccc 48%, #e3d9b4 52%, #cfc5a1 100%);
                 box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px rgba(0, 0, 0, 0.2), 1px 1px 0px #222;
                 transition: transform 0.05s ease, box-shadow 0.05s ease;
@@ -1364,17 +1364,17 @@ const css = `
                 border-radius: 3px;
 				color: #000;
                 padding: .25em .4em;
-				
+
                 background: linear-gradient(to bottom, #fffdf2 0%, #f4eccc 48%, #e3d9b4 52%, #cfc5a1 100%);
                 box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px rgba(0, 0, 0, 0.2), 1px 1px 0px #222;
             }
 			button, select {
 				font-family: Trebuchet MS, Arial, "Helvetica Neue", Helvetica, sans-serif;
 			}
-            button:hover, select:hover {			
+            button:hover, select:hover {
                 background: linear-gradient(to bottom, #ffffff 0%, #fdf5d3 48%, #f4eccc 52%, #e3d9b4 100%);
             }
-			.container button:active {			
+			.container button:active {
                 background: linear-gradient(to bottom, #cfc5a1 0%, #e3d9b4 100%) 1;
                 box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3), inset -1px -1px 0px #ffffff, 0px 0px 0px #222222;
                 transform: translate(1px, 1px);
@@ -1462,7 +1462,7 @@ const css = `
 				display: inline-flex;
 				align-items: center;
 				justify-content: center;
-				
+
 				grid-column: 1;
 				margin: 0 10px 0 0;
 				align-self: center;
@@ -1491,16 +1491,16 @@ const css = `
 
 			#question_form input[type="radio"]:checked::after {
 				content: "";
-				position: static; 
+				position: static;
 
 				width: 5px;
 				height: 5px;
 
 				background: #000;
 				border-radius: 50%;
-				
+
 				margin: 0;
-				transform: none; 
+				transform: none;
 			}
 
 			/* layout */
@@ -1556,7 +1556,7 @@ const css = `
 			    margin: 0 2em;
 			    display: flex;
 			}
-			
+
 			/* extra buttons */
 			input[type="radio"] { /* ensure all radios share the same positioning context */
 				position: relative;
@@ -1605,7 +1605,7 @@ const css = `
 					#fde2cf 0%,
 					#f9c2a2 55%,
 					#e9a98a 100%);
-				
+
 				border: 1px solid rgba(120, 60, 30, 0.35);
 				border-radius: 10px;
 
@@ -1643,7 +1643,7 @@ const css = `
 				top: 100%;
 				left: 50%;
 				transform: translateX(-50%);
-				
+
 				border-style: solid;
 				border-width: 7px 7px 0 7px;
 				border-color: #e9a98a transparent transparent transparent;
@@ -1777,13 +1777,13 @@ const css = `
 			#final_results_description {
 				display: flex !important;
 			}
-			
+
 			#results_container {
 				color: #000;
 			}
-			
+
 			.inner_window_w_desc { background-color: #fff9e8 !important; }
-			
+
 			#results_container > .person_image {
 				border-color: #9d0000;
 				border-style: ridge;
@@ -1840,7 +1840,7 @@ const css = `
 				list-style: none;
 				margin: 0;
 			}
-			#overall_result ul {				
+			#overall_result ul {
 				padding: 0 0 5px 0;
 			}
 			#state_result ul {
@@ -1874,7 +1874,7 @@ const css = `
 				margin: 5px 10px;
 				overflow-x: clip;
 			}
-			
+
 			#benefitwindow {
 			  position: absolute;
 			  width: 420px;
@@ -1917,9 +1917,9 @@ const css = `
 			  font-weight: 600;
 			  color: #730e0e;
 			}
-			
-			
-			
+
+
+
 			#achwindow {
 				top: 5%;
 				left: 25%;
@@ -2050,7 +2050,7 @@ const css = `
 			  display: flex;
 			  flex-direction: column;
 			}
-			
+
 			.terminal-header {
 			  padding: 5px 8px;
 
@@ -2076,7 +2076,7 @@ const css = `
 
 			  text-shadow: 0 1px 1px rgba(0,0,0,0.6);
 			}
-			
+
 			.toggle-button,
 			.submit-button {
 			  width: 22px;
@@ -2113,7 +2113,7 @@ const css = `
 			  transform: translateY(1px);
 			  box-shadow: inset 0 2px 3px rgba(0,0,0,0.3);
 			}
-			
+
 			.terminal-body {
 			  padding: 10px 12px;
 			  flex: 1 1 auto;
@@ -2124,7 +2124,7 @@ const css = `
 
 			  color: #cfe3ff;
 			}
-			
+
 			.terminal-body::-webkit-scrollbar {
 			  width: 14px;
 			}
@@ -2142,7 +2142,7 @@ const css = `
 			.terminal-body::-webkit-scrollbar-thumb:hover {
 			  background: linear-gradient(to bottom, #ffffff, #cfe0f5);
 			}
-			
+
 			.terminal-footer {
 			  padding: 6px;
 
@@ -2153,7 +2153,7 @@ const css = `
 			  background: #dbe6f3;
 			  border-top: 1px solid #7f9db9;
 			}
-			
+
 			.terminal-input {
 			  width: 100%;
 			  box-sizing: border-box;
@@ -2182,11 +2182,11 @@ const css = `
 			  border-color: #3a6ea5;
 			  box-shadow: 0 0 0 1px #3a6ea5;
 			}
-			
+
 			.terminal-container.minimized {
 			  height: 30px;
 			}
-			
+
 			/* autoplay */
 			.cheatIndicator {
 				display: inline-block;
@@ -2258,8 +2258,8 @@ const css = `
 				transform: translateY(1px);
 				box-shadow: inset 0 2px 4px rgba(0,0,0,0.35);
 			}
-			
-			/* Cheat menu in general */			
+
+			/* Cheat menu in general */
 			#difficultySlider {
 			  all: unset;
 			}
@@ -2486,7 +2486,7 @@ const css = `
 
 			  box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
 			}
-			
+
 			.achievement-popup.show {
 			  opacity: 1;
 			  transform: translateX(-50%) translateY(0);
@@ -2702,14 +2702,14 @@ const css = `
 				#difficulty_level {
 				  flex-flow: revert;
 				}
-								
+
 				#main_content_area + #map_footer {
 					margin: auto !important;
 				}
 
 
 			}
-			
+
 			/* because not everyone wants animations */
 			@media (prefers-reduced-motion: reduce) {
 			  *,
@@ -2751,7 +2751,7 @@ html, body {
   border-left: none;
   border-right: none;
 }
-	
+
 `;
 
 ensureMetaViewport();
@@ -2840,7 +2840,7 @@ const themeData = {
             }
             #candidate_image img { outline-color: #42a5f5 !important; }
             #running_mate_image img { outline-color: #1565c0 !important; }
-            
+
             button, select {
                 background: linear-gradient(to bottom, #f0f8ff 0%, #bbdefb 48%, #90caf9 52%, #64b5f6 100%) !important;
                 border: 1px solid #002171 !important;
@@ -2946,7 +2946,7 @@ if (oldPicker) {
     restore.capture(gameStart, ['innerHTML']);
     gameStart.innerHTML = '<strong>It’s a living…</strong>';
   }
-  
+
   if (gameStart) {
     gameStart.addEventListener('click', () => {
       restore.restoreAll();
@@ -3096,27 +3096,27 @@ if (oldPicker) {
     {
       name: "StrawberryMaster",
       image: "https://file.garden/aNtAfG887DiA_7lO/sm3.webp",
-      aim: "thestrawb", 
-      location: "make-a-point land", 
+      aim: "thestrawb",
+      location: "make-a-point land",
       incept: "10/31/69 BC",
       records:[
-          "'Behavior' by Pet Shop Boys", 
-          "'Adventure' by Television", 
-          "'Nonsuch' by XTC", 
-          "'Older' by George Michael", 
+          "'Behavior' by Pet Shop Boys",
+          "'Adventure' by Television",
+          "'Nonsuch' by XTC",
+          "'Older' by George Michael",
           "'The Velvet Rope' by Janet Jackson"
       ],
       movies:[
-          "The Matrix", 
-          "Gummo", 
+          "The Matrix",
+          "Gummo",
           "Space Jam",
 		  "12 Angry Men",
 		  "Fight Club",
 		  "BASEketball"
       ],
       books:[
-          "'Father and Son' by Edmund Gosse", 
-          "'Strange Tales from a Chinese Studio' by Pu Songling", 
+          "'Father and Son' by Edmund Gosse",
+          "'Strange Tales from a Chinese Studio' by Pu Songling",
           "'The Porcupine' by Julian Barnes",
 		  "'God Bless You, Dr. Kevorkian' by Kurt Vonnegut"
       ],
@@ -3357,7 +3357,7 @@ if (oldPicker) {
                 content: "* ";
                 font-weight: bold;
             }
-            
+
             .aol-journal {
                 background-color: #ffffff;
                 color: #000000;
@@ -3370,7 +3370,7 @@ if (oldPicker) {
                 line-height: 1.4;
                 overflow-y: auto;
             }
-            
+
             .aol-journal::-webkit-scrollbar { width: 12px; }
             .aol-journal::-webkit-scrollbar-track { background: #dfdfdf; border-left: 1px solid #aaa; }
             .aol-journal::-webkit-scrollbar-thumb { background: #c0c0c0; border: 1px solid #fff; border-bottom-color: #888; border-right-color: #888; }
@@ -3401,10 +3401,10 @@ if (oldPicker) {
     if (profile.books && profile.books.length > 0) {
         favoritesHTML += `<h4>books:</h4><ol>${profile.books.map(b => `<li>${b}</li>`).join('')}</ol>`;
     }
-    
+
     // only wrap with the "favorite..." box if there is at least one section
-    const favSectionHTML = favoritesHTML 
-        ? `<div class="aol-favorite-header">favorite...</div><div class="aol-favorites">${favoritesHTML}</div>` 
+    const favSectionHTML = favoritesHTML
+        ? `<div class="aol-favorite-header">favorite...</div><div class="aol-favorites">${favoritesHTML}</div>`
         : '';
 
     // build conditional description
@@ -3417,7 +3417,7 @@ if (oldPicker) {
             </ul>
         `;
     }
-    
+
     // prepare journal content
     const journalContent = profile.journal ? profile.journal : '<span style="color:#666; font-style:italic;">No journal entries yet.</span>';
 
@@ -3477,11 +3477,11 @@ if (oldPicker) {
     const modal = document.createElement('div');
     modal.id = 'aolCreditsModal';
     modal.className = 'aol-modal';
-    
+
     const container = document.createElement('div');
     container.className = 'aol-container';
     container.innerHTML = renderModalContent();
-    
+
     modal.appendChild(container);
     document.body.appendChild(modal);
 
@@ -3502,7 +3502,7 @@ if (oldPicker) {
     if (modal) {
       modal.style.display = 'none';
       // reset to first tab when closed
-      currentTabIndex = 0; 
+      currentTabIndex = 0;
       document.querySelector('.aol-container').innerHTML = renderModalContent();
     }
   };
@@ -3528,9 +3528,9 @@ const originalGameModeDescFunction = window.a;
 
 window.a = function(e) {
   originalGameModeDescFunction(e);
-  
+
   const descWindow = document.getElementById("opponent_selection_description_window");
-  
+
   if (descWindow) {
     const charlieBrownDesc = `
       <p><strong>Use a simple majority vote system.</strong></p>
@@ -3541,7 +3541,7 @@ window.a = function(e) {
       <p>As every vote carries equal weight, the result comes down to who can win over the most people in the room.
 	  A simple majority of votes is all that's needed to win, but courting voters may be harder than it appears.</p>
     `;
-    
+
     descWindow.innerHTML = charlieBrownDesc;
   }
 };
@@ -3551,7 +3551,7 @@ window.a = function(e) {
 (function () {
   'use strict';
 
-  const BAD_CANDIDATE_IDS = new Set(['77', '79', '80', '81']); 
+  const BAD_CANDIDATE_IDS = new Set(['77', '79', '80', '81']);
   const RESET_CANDIDATE_ID = '78';
 
   const IDS = {
@@ -3575,12 +3575,12 @@ window.a = function(e) {
 
     // stop processing once the game actually starts
     if (document.querySelector(IDS.gameMapHeader)) {
-      return; 
+      return;
     }
 
     const candidateInput = document.getElementById(IDS.candidateInput);
     const currentCandidateId = candidateInput ? candidateInput.value : (window.campaignTrail_temp?.candidate_id || lastSelectedCandidateId);
-    
+
     if (candidateInput) {
       lastSelectedCandidateId = currentCandidateId;
       const backButton = document.getElementById(IDS.backButton);
@@ -3598,7 +3598,7 @@ window.a = function(e) {
     const summary = document.getElementById(IDS.runningMateSummary);
     if (summary) {
       const nextBtn = document.getElementById(IDS.runningMateButton);
-      
+
       // if they are playing as a "bad" candidate, remove the Continue button
       // this lets them read the VP description, but forces them to click Back
       if (BAD_CANDIDATE_IDS.has(String(currentCandidateId))) {
@@ -3654,7 +3654,7 @@ window.a = function(e) {
         flag: 'dynamicEN',
         type: 'toggle',
         default: true
-      },	  
+      },
 	  /*{
 		id: "player_autoplay",
 		text: "Music autoplay",
@@ -3671,7 +3671,7 @@ window.a = function(e) {
 	  }*/
     ]
   };
-  
+
   const modMenuStyles = new CSSStyleSheet();
   modMenuStyles.replaceSync(`
     #${CONFIG.targetId} { display: inline-flex; flex-wrap: wrap; gap: 2.5em; align-items: flex-start; }
@@ -3701,7 +3701,7 @@ window.a = function(e) {
     document.head.appendChild(styleMarker);
 	document.adoptedStyleSheets = [...document.adoptedStyleSheets, modMenuStyles];
   }
-  
+
   const getSavedSettings = () => {
     try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)) || {}; } catch (e) { return {}; }
   };
@@ -3743,7 +3743,7 @@ window.a = function(e) {
       dropdown = createEl('select', { style: { width: '100%', padding: '5px' } }),
       createEl('div', { className: 'mod-desc-box' }, [
         descText = createEl('p', {}),
-        
+
         toggleWrapper = createEl('div', { className: 'mod-ctrl-row', style: { display: 'none' } }, [
           createEl('label', { className: 'switch' }, [
             toggleInput = createEl('input', { type: 'checkbox' }),
@@ -3786,7 +3786,7 @@ window.a = function(e) {
 
           selectInput.innerHTML = '';
           feat.options.forEach(opt => selectInput.add(new Option(opt.text, opt.value)));
-          
+
           const currentVal = getFlag(feat.flag, feat.default);
           selectInput.value = currentVal;
           selectInput.dataset.flag = feat.flag;
@@ -3914,23 +3914,23 @@ window.a = function(e) {
     if (window.tctAutoStart?.tick) {
       window.tctAutoStart.tick();
     }
-	  
+
     // mod options
     try { window.manageModOptions?.(); } catch (e) { }
-	
+
 	// mod switcher
     const electionSelect = document.querySelector('select[name="election_id"]');
     if (electionSelect && !electionSelect.dataset.modifiedByScript && typeof window.modifyElectionSelect === 'function') {
       window.modifyElectionSelect(electionSelect);
     }
-	
+
 	if (document.querySelector(".inner_window_question")) {
         return true; // removes this task from the list
     }
     return false;
-	
+
   };
-  
+
   window.glorbleTasks.push(initialTasks);
 
     let scheduled = false;
@@ -4000,9 +4000,9 @@ const tooltipList = [
   { searchString: "Sparky High", image: null, text: "Sparky Memorial High, presumably named after the creator himself. Essentially, a microcosm of the world's decay." },
   { searchString: "Brownites", image: null, text: "A nickname for your supporters." },
   { searchString: "Charlie Brown", image: "https://i.pinimg.com/1200x/c4/fd/a5/c4fda5921388916b2523f87962463eda.jpg", text: "Despite everything, it's still you." },
-  
+
   { searchString: "your campaign", image: "https://i.pinimg.com/1200x/0f/a6/fe/0fa6fe4fc973a3ee8d38c370f35f5a36.jpg", text: "A disaster." },
-  
+
 ];
 
 function escapeRegex(str) {
@@ -4258,7 +4258,7 @@ function applyTooltipsToObject(obj) {
         const m = url.match(/^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
         return (m && m[2].length === 11) ? m[2] : url;
     }
-	
+
     function resetProgressUI() {
         if (progressBar && lastProgressRatio !== 0) {
             progressBar.value = 0;
@@ -4655,7 +4655,7 @@ function applyTooltipsToObject(obj) {
         if (titleElement)  { titleElement.textContent  = "Error"; lastRenderedTitle  = "Error"; }
         if (artistElement) { artistElement.textContent = msg;     lastRenderedArtist = msg; }
     }
-	
+
     function setVolumeFromSlider(shouldUnmute = true) {
         if (!volumeSlider || !volumePercentageElement) return;
         const newPercent = Math.round(parseFloat(volumeSlider.value) * 100);
@@ -4729,13 +4729,13 @@ function applyTooltipsToObject(obj) {
         const minBtn = document.getElementById(MINIMIZE_BUTTON_ID);
         if (minBtn) minBtn.title = isPlayerMinimized ? "Expand player" : "Minimize player";
     }
-	
+
 	window.playEndingSong = (title, artist, cover, urls) => {
         if (!ytPlayer) return;
-        
+
         const urlArray = Array.isArray(urls) ? urls : [urls];
         const videoIds = urlArray.map(extractYouTubeId);
-        
+
         const endingSong = new Song(title, artist, cover, videoIds);
         playlist = new Playlist([endingSong]);
         playlist.setCurrentSongIndex(0);
@@ -5283,12 +5283,12 @@ campaignTrail_temp.achievements = {
     "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a5.png",
     "description": "Confide in him.",
     "cannotBeCheated": true
-  },  
+  },
   "Price of Fame": {
     "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a6.png",
     "description": "Play dirty.",
     "cannotBeCheated": true
-  },  
+  },
   "Bastards of Young": {
     "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a7.png",
     "description": "Protect your own ego.",
@@ -5298,7 +5298,7 @@ campaignTrail_temp.achievements = {
     "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a8.png",
     "description": "Make a deal with the devil.",
     "cannotBeCheated": true
-  },  
+  },
   "Uncle Wiggily in Connecticut": {
     "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a9.png",
     "description": "Burn every bridge you ever built.",
