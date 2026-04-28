@@ -1,7 +1,7 @@
 /*
 * @title: 2012: Little Big Man / Little Big Man / 2012a
 * @author: StrawberryMaster & Friends
-* @version: 1.2.1
+* @version: 1.2.5
 * @description: The 2012 election in the eyes of Barack Obama (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -2792,7 +2792,7 @@ tooltipList = [
   { searchString: "Pell Grants", explanationText: "<img src=https://www.cbpp.org/sites/default/files/atoms/files/7-27-17bud-f1.png> Essentially, a form of federal financial aid provided by the government to help undergraduate students with financial need pay for college or career school. Unlike a student loan, money from a Pell Grant usually does not have to be repaid." },
 
   // everything else
-  { searchString: "that photo", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Obama_and_Biden_await_updates_on_bin_Laden.jpg/1024px-Obama_and_Biden_await_updates_on_bin_Laden.jpg>" },
+  { searchString: "that photo", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Obama_and_Biden_await_updates_on_bin_Laden.jpg/1280px-Obama_and_Biden_await_updates_on_bin_Laden.jpg>" },
   { searchString: "Plouffe", explanationText: "<img src=https://static01.nyt.com/images/2012/02/20/us/PLOUFFE/PLOUFFE-jumbo.jpg?quality=100&auto=webp> Nyarlathotep, and also your campaign manager last election." },
   { searchString: "Axelrod", explanationText: "<img src=https://i.guim.co.uk/img/static/sys-images/Observer/Columnist/Columnists/2012/8/4/1344074361508/David-Axelrod-006.jpg?width=465&dpr=1&s=none&crop=none> Happy." },
   { searchString: "Messina", explanationText: "<img src=https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iK47FQ9mImZU/v1/-1x-1.webp> Not happy." },
@@ -3173,6 +3173,16 @@ tooltipList = [
   {
     url: "https://file.garden/aNtAfG887DiA_7lO/2012LBM/ads/barack.png",
     alt: "Adult Swim 2 banner",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aNtAfG887DiA_7lO/2012LBM/ads/computer.gif",
+    alt: "computers.com banner",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aNtAfG887DiA_7lO/2012LBM/ads/microsoftlearn.gif",
+    alt: "Microsoft banner",
     weight: 1
   },
   ];
@@ -4008,6 +4018,7 @@ tooltipList = [
     baseUrl: 'https://campaigntrailshowcase.com/campaign-trail/',
     modsToAdd: [
       { value: '1992', text: '1992 - Every Brilliant Thing', modName: '1992 - Every Brilliant Thing' },
+	  { value: '2000', text: '2000 - The Major Leagues', modName: '2000 - The Major Leagues' },
       { value: '2016', text: '2016 - A Lifetime of This', modName: '2016 - A Lifetime of This' },
     ],
   };
@@ -4380,7 +4391,7 @@ tooltipList = [
       window.modifyElectionSelect(electionSelect);
     }
 	
-	if (document.querySelector("inner_window_question")) {
+	if (document.querySelector(".inner_window_question")) {
         return true; // removes this task from the list
     }
     return false;

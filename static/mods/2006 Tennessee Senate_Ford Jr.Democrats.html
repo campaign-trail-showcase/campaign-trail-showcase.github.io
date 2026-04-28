@@ -11590,6 +11590,21 @@ endingPicker = (out, totv, aa, quickstats) => {
 
     e.final_overall_results.sort((a, b) => b.popular_votes - a.popular_votes);
 
+    if (aa[0].candidate === 201 && unlockedAch["History In The Making"]) {
+        setImage("https://i.imgur.com/mz3nE4b.png");
+ctsAchievement("More Davids Than Goliaths")
+        return `
+            <h3>'The Change Has Come'</h3><br>
+            It was a brutal campaign throughout, but you, Harold Ford Jr., have won. 
+            Your victory has allowed the Democrats to reclaim the Senate with 52 seats plus Independent Bernie Sanders. 
+            You have become the first Democrat elected to the Senate from Tennessee since Al Gore in 1990. 
+            You are also the youngest Senator right now at age 36. Your political future seems very bright with how young you are. 
+            You have the potential to influence what shall become of the Democratic party and of politics. 
+            Maybe you could become the next president of the United States and become the new JFK. 
+            Anyways, you still haven't heard from Corker as the race was called for you, but I am sure he will come around. 
+            Regardless, enjoy your time in the Senate, and if your time there goes over well, there is no reason why you can't win reelection in 2012 as well with your strong campaign and youth.
+        `;
+    }
     if (aa[0].candidate === 201) {
         setImage("https://i.imgur.com/mz3nE4b.png");
 ctsAchievement("More Davids Than Goliaths")
@@ -11606,6 +11621,20 @@ ctsAchievement("More Davids Than Goliaths")
         `;
     }
 
+    if (aa[0].candidate === 200 && unlockedAch["History In The Making"]) {
+        setImage("https://i.imgur.com/XRXLCGv.png");
+        return `
+            <h3>'The Change Could Not Come'</h3><br>
+            It was a brutal campaign throughout, but, sadly, you just couldn't defeat Bob Corker. 
+            Thankfully, the Democrats still retook the Senate with 51 seats plus Independent Bernie Sanders. 
+            You will give your concessions soon, but where do you go from here? Maybe you could run again for this seat or the other one, 
+            but the shifting demographics and mood of the country will make that unlikely. 
+            Running for your old seat looks unlikely too for the same reasons plus the fact you are no longer the incumbent. 
+            This all means that it is probably time to retire from politics, however, you are only 36. 
+            Perhaps, you can go to the private business sector and live a quieter life or somehow remain active in politics. 
+            Regardless, good luck, Ford.
+        `;
+    }
     if (aa[0].candidate === 200) {
         setImage("https://i.imgur.com/XRXLCGv.png");
         return `
@@ -11665,4 +11694,3 @@ campaignTrail_temp.jet_data = [{
     }
 }
 ]
-
