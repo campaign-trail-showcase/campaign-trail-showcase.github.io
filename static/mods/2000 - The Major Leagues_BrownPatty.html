@@ -12729,7 +12729,7 @@ const mainEndings = [
 
   <p><span class="dialogue">“Charlie, what—”</span> Linus was pale, utterly shocked, and his hands hovering uncertainly over Charlie’s trembling shoulders. <span class="dialogue">“You’re freezing. Jesus, just come inside, please—”</span></p>
 
-  <p><span class="dialogue">“Why am I like this?”</span> Charlie wailed, shaking his head frantically, refusing to move. <span class="dialogue">“Why am I like this? W-why was I born like this? did I think hating you was a good idea?”</span></p>
+  <p><span class="dialogue">“Why am I like this?”</span> Charlie wailed, shaking his head frantically, refusing to move. <span class="dialogue">“Why am I like this? W-why was I born like this? Why did I think hating you was a good idea?”</span></p>
 
   <p>Linus froze, his heart dropping into his stomach.</p>
 
@@ -12989,7 +12989,7 @@ const mainEndings = [
 
   <div class="fold-line"></div>
 
- <p>Charlie Brown sat on the floor with one hand over his nose, blinking. A thin line of red had started down over his lip. Oh no. He stared at it on his fingers, nd something in his face changed.</p>
+  <p>Charlie Brown sat on the floor with one hand over his nose, blinking. A thin line of red had started down over his lip. Oh no. He stared at it on his fingers, nd something in his face changed.</p>
 
   <p>Linus stood very still. His arm was still half-raised, but he lowered it slowly.</p>
 
@@ -16677,7 +16677,7 @@ const bonusSlides = [
   a.wl { color: #3366cc; text-decoration: none; }
   a.wl:hover { text-decoration: underline; }
   h2.ws { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.4em; font-weight: normal; border-bottom: 1px solid #a2a9b1; margin: 20px 0 8px; padding-bottom: 2px; }
-  h3.ws { font-size: 1.1em; font-weight: bold; margin: 14px 0 6px; }
+  h3.ws { font-size: 1.1em !important; font-weight: bold !important; letter-spacing: 0 !important; margin: 4px 0 6px !important; text-align: left !important; }
   .infobox {
     float: right;
     clear: right;
@@ -16743,7 +16743,7 @@ const bonusSlides = [
   .wiki-table .row-o { background: #fafafa; }
   .wiki-table .won { font-weight: bold; }
   .result-bar-cell { width: 120px; }
-  .mini-bar-outer { background: #eaecf0; height: 8px; border-radius: 1px; overflow: hidden; }
+  .mini-bar-outer { background: #eaecf0; height: 8px; border-radius: 1px; margin: .5em auto; overflow: hidden; }
   .note-box { background: #eaf3fb; border-left: 3px solid #3685b5; padding: 8px 12px; font-size: 0.88em; font-family: sans-serif; margin: 14px 0; color: #333; }
   p.wi { margin: 0 0 12px; }
   .reflist { font-size: 0.88em; font-family: sans-serif; color: #54595d; border-top: 1px solid #a2a9b1; padding-top: 8px; margin-top: 20px; }
@@ -23960,14 +23960,20 @@ const bonusSlides = [
     </div>
 
   </div>
-</div>`
+</div>`,
+	song: {
+      title: "Monkey Business",
+      artist: "Michael Jackson",
+      cover: "https://images.genius.com/1883d45972818169043843c95ba78f12.600x600x1.png",
+      url: ["LpL0gzU2giw", "zsG5EhvnvJs"]
+    }
   },
   {
     id: "sombr",
     condition: (ev) => ev > 332 && ev <= 394,
-    image: "https://pbs.twimg.com/media/HCaewISW8AAzwJN?format=jpg&name=large",
+    image: "https://file.garden/aNtAfG887DiA_7lO/TML_2000/sombr.jpg",
     html: `<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=BBC+Reith+Sans:wght@400;700&family=Helvetica+Neue:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 .bbc-wrap {
@@ -24999,7 +25005,13 @@ const bonusSlides = [
   </div>
 </div>
 
-</div>`
+</div>`,
+	song: {
+      title: "Too Close to the Sun",
+      artist: "Alan Parsons",
+      cover: "https://i.discogs.com/E_PFhAdbnQbvA7sUGT8kb-KgL4oCiuEtwSlRxkMEQkg/rs:fit/g:sm/q:90/h:600/w:589/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE1ODM2/NjQtMTcxNjA1MjUz/MS01MDc2LmpwZWc.jpeg",
+      url: ["jZwVjrjj9J0", "wH_cnIzrExI"]
+    }
   },
   {
     id: "hehheh",
@@ -25219,133 +25231,149 @@ const bonusSlides = [
 
   <p>“Well,” Trevor chuckled, crossing his arms. “About that, Barack Comcast…”</p>
 
-</div>`
+</div>`,
+	song: {
+      title: "Architecture And Morality",
+      artist: "Orchestral Manoeuvres In The Dark",
+      cover: "https://resources.tidal.com/images/042b8cdd/89c9/4358/9066/72140578b39e/320x320.jpg",
+      url: ["XA3KTY--20g", "7Kxpa72BwsE"]
+    }
   },
   {
     id: "brandis", // shamelessly recycled from an old LBM slide what am I doing
     condition: (ev) => ev < 64,
     image: "https://i.pinimg.com/1200x/36/b0/25/36b025ad71ab2577ddcdd92b86b3b11c.jpg",
     html: `<style>
-.layout { display: flex; max-width: 1200px; margin: 0 auto; background: #eaecf0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #202122; }
-.sidebar { width: 160px; flex-shrink: 0; background: #fff; border-right: 1px solid #a2a9b1; padding: 12px 10px; font-size: 0.82em; min-height: 100vh; }
-.sidebar .logo { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.3em; margin-bottom: 4px; }
-.sidebar .logo-sub { font-size: 0.78em; color: #54595d; margin-bottom: 14px; }
-.sidebar h4 { font-size: 0.82em; text-transform: uppercase; color: #54595d; margin: 10px 0 4px; letter-spacing: 0.04em; }
-.sidebar a { display: block; color: #3366cc; text-decoration: none; padding: 2px 0; font-size: 0.88em; }
-.sidebar a:hover { text-decoration: underline; }
-.main-col { flex: 1; background: #fff; border-left: 1px solid #a2a9b1; }
-.wp-topbar { background: #fff; border-bottom: 1px solid #a2a9b1; padding: 6px 20px; display: flex; align-items: center; gap: 14px; }
-.wp-search input { padding: 4px 8px; border: 1px solid #a2a9b1; font-size: 0.88em; background: #f8f9fa; border-radius: 2px; width: 220px; }
-.wp-user { font-size: 0.82em; color: #54595d; margin-left: auto; }
-.wp-user a { color: #3366cc; text-decoration: none; }
-.wp-tabs { display: flex; align-items: flex-end; padding: 0 20px; background: #fff; border-bottom: 1px solid #a2a9b1; gap: 1px; font-size: 0.82em; }
-.wp-tab { padding: 5px 12px; border: 1px solid #a2a9b1; border-bottom: none; background: #f8f9fa; color: #3366cc; cursor: pointer; margin-bottom: -1px; text-decoration: none; }
-.wp-tab.active { background: #fff; color: #202122; border-bottom: 1px solid #fff; position: relative; z-index: 1; }
-.content { padding: 18px 28px 40px; max-width: 960px; }
-h1.title { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.95em; font-weight: normal; border-bottom: 1px solid #a2a9b1; padding-bottom: 4px; margin-bottom: 8px; color: #000; }
-.wp-subtitle { font-size: 0.82em; color: #54595d; margin-bottom: 14px; }
-h2.ws { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.4em; font-weight: normal; border-bottom: 1px solid #a2a9b1; margin: 28px 0 8px; color: #000; display: flex; justify-content: space-between; align-items: baseline; }
-h3.ws { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.12em; font-weight: bold; margin: 18px 0 6px; }
-.edit { font-size: 0.72em; font-weight: normal; font-family: sans-serif; color: #3366cc; }
-a.wl { color: #3366cc; text-decoration: none; }
-a.wl:hover { text-decoration: underline; }
-p { margin: 0 0 0.9em; line-height: 1.6; }
-sup { font-size: 0.75em; }
+  .wiki-body {
+    background: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #202122;
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+  }
+  .wiki-header-bar {
+    background: #fff;
+    border-bottom: 1px solid #a2a9b1;
+    padding: 6px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: #54595d;
+  }
+  .wiki-wordmark { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.4em; color: #202122; }
+  .wiki-content { padding: 16px 24px; max-width: 960px; margin: 0 auto; }
+  .wiki-title { font-family: 'Linux Libertine', Georgia, serif; font-size: 2em; font-weight: normal; border-bottom: 1px solid #a2a9b1; padding-bottom: 4px; margin-bottom: 12px; color: #000; }
+  .wp-subtitle { font-size: 0.88em; color: #54595d; margin-bottom: 16px; font-family: sans-serif; }
+  .hatnote { padding: 3px 0 3px 1.4em; font-style: italic; font-size: 0.9em; color: #54595d; margin-bottom: 12px; font-family: sans-serif; }
+  .hatnote::before { content: "ℹ "; }
 
-.infobox { float: right; clear: right; margin: 0 0 16px 22px; border: 1px solid #a2a9b1; background: #f8f9fa; font-size: 0.83em; width: 264px; line-height: 1.5; font-family: sans-serif; }
-.ib-title { background: #cee0f2; text-align: center; font-weight: bold; padding: 7px 8px; font-size: 1.0em; border-bottom: 1px solid #a2a9b1; }
-.ib-poster { background: #2a2a3a; width: 100%; height: 396px; display: flex; align-items: center; justify-content: center; flex-direction: column; border-bottom: 1px solid #a2a9b1; background: url(https://file.garden/aNtAfG887DiA_7lO/TML_2000/reboot_2.webp); background-size: cover; }
-.ib-captn { font-size: 0.8em; color: #54595d; text-align: center; padding: 5px 8px; border-bottom: 1px solid #e4e4e4; font-style: italic; }
-.ib-row { display: flex; border-bottom: 1px solid #e4e4e4; font-size: 0.92em; }
-.ib-lbl { width: 98px; padding: 4px 6px; color: #54595d; font-weight: bold; flex-shrink: 0; }
-.ib-val { padding: 4px 6px; }
+  .wiki-toc { background: #f8f9fa; border: 1px solid #a2a9b1; padding: 10px 16px; display: inline-block; font-size: 0.9em; margin: 0 0 16px 0; min-width: 210px; }
+  .wiki-toc-title { font-weight: bold; text-align: center; margin-bottom: 6px; }
+  .wiki-toc ol { margin: 0; padding-left: 24px; }
+  .wiki-toc li { margin: 2px 0; }
+  .toc-sub { padding-left: 16px; list-style-type: decimal; }
 
-.toc { background: #f8f9fa; border: 1px solid #a2a9b1; display: inline-block; padding: 10px 16px 12px; font-size: 0.88em; font-family: sans-serif; margin: 10px 0 16px; min-width: 210px; }
-.toc-title { text-align: center; font-weight: bold; margin-bottom: 6px; }
-.toc ol { margin: 0; padding-left: 20px; }
-.toc li { margin: 2px 0; }
-.toc-sub { padding-left: 16px; list-style-type: decimal; }
+  a.wl { color: #3366cc; text-decoration: none; }
+  a.wl:hover { text-decoration: underline; }
 
-.wikitable { border-collapse: collapse; font-size: 0.88em; font-family: sans-serif; width: 100%; margin: 10px 0 16px; }
-.wikitable th { background: #eaecf0; border: 1px solid #a2a9b1; padding: 5px 8px; text-align: left; }
-.wikitable td { border: 1px solid #a2a9b1; padding: 4px 8px; vertical-align: top; }
-.wikitable tr:nth-child(even) { background: #f8f9fa; }
-.right { text-align: right; }
+  h2.ws { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.4em; font-weight: normal; border-bottom: 1px solid #a2a9b1; margin: 20px 0 8px; padding-bottom: 2px; display: flex; justify-content: space-between; align-items: baseline; }
+  h3.ws { font-size: 1.1em; font-weight: bold; margin: 14px 0 6px; }
+  .edit { font-size: 0.72em; font-weight: normal; font-family: sans-serif; color: #3366cc; }
 
-.award-box { background: #fffff0; border: 1px solid #c8b400; padding: 10px 14px; margin: 16px 0; font-size: 0.88em; font-family: sans-serif; border-radius: 2px; }
-.award-box-title { font-weight: bold; font-size: 1.0em; margin-bottom: 8px; border-bottom: 1px solid #c8b400; padding-bottom: 5px; color: #6b5900; }
-.award-row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid #f0e88a; font-size: 0.92em; }
-.award-row:last-child { border-bottom: none; }
-.award-result-won { color: #996600; font-weight: bold; }
-.award-result-nom { color: #54595d; }
+  .infobox {
+    float: right;
+    clear: right;
+    margin: 0 0 16px 24px;
+    padding: 0;
+    border: 1px solid #a2a9b1;
+    background: #f8f9fa;
+    font-size: 12.5px;
+    line-height: 1.5;
+    width: 290px;
+    font-family: sans-serif;
+  }
+  .infobox-title {
+    background: #cee0f2;
+    text-align: center;
+    font-weight: bold;
+    padding: 6px 8px;
+    font-size: 1.05em;
+    border-bottom: 1px solid #a2a9b1;
+  }
+  .ib-poster { width: 100%; height: 434px; display: flex; align-items: center; justify-content: center; flex-direction: column; border-bottom: 1px solid #a2a9b1; background: url(https://file.garden/aNtAfG887DiA_7lO/TML_2000/reboot_2.webp); background-size: cover; background-position: center; }
+  .ib-captn { font-size: 0.85em; color: #54595d; text-align: center; padding: 6px 8px; border-bottom: 1px solid #a2a9b1; font-style: italic; }
+  .infobox table { width: 100%; border-collapse: collapse; }
+  .infobox td { padding: 4px 8px; vertical-align: top; border-bottom: 1px solid #e4e4e4; }
+  .infobox tr:last-child td { border-bottom: none; }
+  .infobox .ib-label { color: #54595d; font-size: 0.95em; font-weight: bold; width: 98px; }
 
-blockquote.wp-quote { border-left: 3px solid #a2a9b1; margin: 12px 0 12px 20px; padding: 6px 12px; color: #555; font-style: italic; font-size: 0.93em; font-family: Georgia, serif; }
+  .wiki-table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    margin: 12px 0;
+    width: 100%;
+  }
+  .wiki-table th {
+    background: #eaecf0;
+    border: 1px solid #a2a9b1;
+    padding: 6px 10px;
+    text-align: left;
+  }
+  .wiki-table td {
+    border: 1px solid #a2a9b1;
+    padding: 5px 10px;
+    vertical-align: top;
+  }
+  .wiki-table tr:nth-child(even) { background: #f8f9fa; }
 
-.reflist { font-size: 0.82em; columns: 2; gap: 20px; font-family: sans-serif; }
-.reflist ol { margin: 0; padding-left: 18px; }
-.reflist li { margin-bottom: 5px; }
+  p.wi { margin: 0 0 12px; }
 
-.navbox { border: 1px solid #a2a9b1; background: #f8f9fa; width: 100%; font-size: 0.82em; margin-top: 14px; border-collapse: collapse; font-family: sans-serif; }
-.nvtitle { background: #cee0f2; text-align: center; padding: 5px 8px; font-weight: bold; }
-.nvbody { padding: 5px 14px; line-height: 1.8; }
-.catbox { border: 1px solid #a2a9b1; background: #f8f9fa; padding: 7px 12px; font-size: 0.83em; margin-top: 10px; font-family: sans-serif; }
-.clearfix::after { content: ""; display: table; clear: both; }
-ul.plain { padding-left: 22px; font-size: 0.92em; }
-ul.plain li { margin: 3px 0; }
-.hatnote { padding: 3px 0 3px 1.4em; font-style: italic; font-size: 0.88em; color: #54595d; margin-bottom: 10px; font-family: sans-serif; }
-.hatnote::before { content: "ℹ "; }
+  .award-box { background: #fdfaf0; border: 1px solid #d4c08c; padding: 10px 14px; margin: 16px 0; font-size: 0.9em; font-family: sans-serif; }
+  .award-box-title { font-weight: bold; font-size: 1.05em; margin-bottom: 8px; border-bottom: 1px solid #d4c08c; padding-bottom: 5px; color: #8a7332; }
+  .award-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #ebe2c9; }
+  .award-row:last-child { border-bottom: none; }
+  .award-result-won { color: #8a7332; font-weight: bold; }
+  .award-result-nom { color: #54595d; }
+
+  blockquote.wp-quote { border-left: 3px solid #3971b5; margin: 14px 0 14px 24px; padding: 8px 16px; color: #333; font-style: italic; font-size: 0.95em; font-family: Georgia, serif; background: #eaf3fb; }
+
+  .reflist { font-size: 0.88em; font-family: sans-serif; color: #54595d; border-top: 1px solid #a2a9b1; padding-top: 8px; margin-top: 20px; columns: 2; gap: 20px; }
+  .reflist ol { margin: 0; padding-left: 18px; }
+  .reflist li { margin-bottom: 6px; }
+
+  .catbox { font-family: sans-serif; font-size: 0.85em; color: #54595d; border: 1px solid #a2a9b1; background: #f8f9fa; padding: 8px 12px; margin-top: 20px; }
+  ul.plain { padding-left: 24px; font-size: 0.9em; margin: 12px 0; }
+  ul.plain li { margin: 3px 0; }
+
+  .clearfix::after { content: ""; display: table; clear: both; }
 </style>
 
-<div class="layout">
-  <div class="sidebar">
-    <div class="logo">Wikipedia</div>
-    <div class="logo-sub">The Free Encyclopedia</div>
-    <h4>Navigation</h4>
-    <a href="#">Main page</a>
-    <a href="#">Contents</a>
-    <a href="#">Current events</a>
-    <a href="#">Random article</a>
-    <a href="#">About Wikipedia</a>
-    <h4>Contribute</h4>
-    <a href="#">Help</a>
-    <a href="#">Learn to edit</a>
-    <a href="#">Community portal</a>
-    <h4>Tools</h4>
-    <a href="#">What links here</a>
-    <a href="#">Related changes</a>
-    <a href="#">Special pages</a>
-    <a href="#">Cite this page</a>
-    <a href="#">Print/export</a>
+<div class="wiki-body">
+  <div class="wiki-header-bar">
+    <div class="wiki-wordmark">Wikipedia</div>
+    <div style="font-family:sans-serif;">Article &nbsp;·&nbsp; Talk &nbsp;·&nbsp; Read &nbsp;·&nbsp; Edit &nbsp;·&nbsp; View history</div>
   </div>
 
-  <div class="main-col">
-    <div class="wp-topbar">
-      <div class="wp-search"><input type="text" placeholder="Search Wikipedia" /></div>
-      <div class="wp-user"><a href="#">Create account</a> &nbsp;·&nbsp; <a href="#">Log in</a></div>
-    </div>
-    <div class="wp-tabs">
-      <a class="wp-tab active" href="#">Article</a>
-      <a class="wp-tab" href="#">Talk</a>
-      <span style="flex:1"></span>
-      <a class="wp-tab" href="#">Read</a>
-      <a class="wp-tab" href="#">Edit</a>
-      <a class="wp-tab" href="#">View history</a>
-    </div>
+  <div class="wiki-content">
+    <h1 class="wiki-title">Reboot (2005 film)</h1>
+    <div class="wp-subtitle">From Wikipedia, the free encyclopedia</div>
 
-    <div class="content">
-      <h1 class="title">Reboot (2005 film)</h1>
-      <div class="wp-subtitle">From Wikipedia, the free encyclopedia</div>
+    <div class="hatnote">Not to be confused with <a class="wl" href="#">ReBoot</a>, the Canadian animated television series, or <a class="wl" href="#">Reboot (2008 film)</a>.</div>
 
-      <div class="hatnote">Not to be confused with <a class="wl" href="#">ReBoot</a>, the Canadian animated television series, or <a class="wl" href="#">Reboot (2008 film)</a>.</div>
-
-      <div class="infobox">
-        <div class="ib-title">Reboot</div>
-        <div class="ib-poster"></div>
-        <div class="ib-captn">Theatrical release poster</div>
-        <div class="ib-row"><div class="ib-lbl">Directed by</div><div class="ib-val"><a class="wl" href="#">Marsh Kellner</a></div></div>
-        <div class="ib-row"><div class="ib-lbl">Written by</div><div class="ib-val"><a class="wl" href="#">Marsh Kellner</a><br><a class="wl" href="#">Derek Snoad</a></div></div>
-        <div class="ib-row"><div class="ib-lbl">Produced by</div><div class="ib-val"><a class="wl" href="#">ParaVox Pictures</a><br><a class="wl" href="#">Kellner/Snoad Productions</a></div></div>
-        <div class="ib-row"><div class="ib-lbl">Starring</div><div class="ib-val">
+    <div class="infobox">
+      <div class="infobox-title">Reboot</div>
+      <div class="ib-poster"></div>
+      <div class="ib-captn">Theatrical release poster</div>
+      <table>
+        <tr><td class="ib-label">Directed by</td><td><a class="wl" href="#">Marsh Kellner</a></td></tr>
+        <tr><td class="ib-label">Written by</td><td><a class="wl" href="#">Marsh Kellner</a><br><a class="wl" href="#">Derek Snoad</a></td></tr>
+        <tr><td class="ib-label">Produced by</td><td><a class="wl" href="#">ParaVox Pictures</a><br><a class="wl" href="#">Kellner/Snoad Productions</a></td></tr>
+        <tr><td class="ib-label">Starring</td><td>
           <a class="wl" href="#">Jonathan Brandis</a><br>
           <a class="wl" href="#">Tara Reid</a><br>
           <a class="wl" href="#">Pauly Shore</a><br>
@@ -25353,276 +25381,282 @@ ul.plain li { margin: 3px 0; }
           <a class="wl" href="#">Stephen Baldwin</a><br>
           <a class="wl" href="#">Jeremy London</a><br>
           <a class="wl" href="#">Cindy Margolis</a>
-        </div></div>
-        <div class="ib-row"><div class="ib-lbl">Cinematography</div><div class="ib-val"><a class="wl" href="#">Pete Oshiro</a></div></div>
-        <div class="ib-row"><div class="ib-lbl">Edited by</div><div class="ib-val"><a class="wl" href="#">T. Grumbach</a></div></div>
-        <div class="ib-row"><div class="ib-lbl">Music by</div><div class="ib-val"><a class="wl" href="#">Ryan Dolezal</a></div></div>
-        <div class="ib-row"><div class="ib-lbl">Production<br>company</div><div class="ib-val"><a class="wl" href="#">Kellner/Snoad Productions</a></div></div>
-        <div class="ib-row"><div class="ib-lbl">Distributed by</div><div class="ib-val"><a class="wl" href="#">ParaVox Pictures</a></div></div>
-        <div class="ib-row"><div class="ib-lbl">Release dates</div><div class="ib-val">
+        </td></tr>
+        <tr><td class="ib-label">Cinematography</td><td><a class="wl" href="#">Pete Oshiro</a></td></tr>
+        <tr><td class="ib-label">Edited by</td><td><a class="wl" href="#">T. Grumbach</a></td></tr>
+        <tr><td class="ib-label">Music by</td><td><a class="wl" href="#">Ryan Dolezal</a></td></tr>
+        <tr><td class="ib-label">Production<br>company</td><td><a class="wl" href="#">Kellner/Snoad Productions</a></td></tr>
+        <tr><td class="ib-label">Distributed by</td><td><a class="wl" href="#">ParaVox Pictures</a></td></tr>
+        <tr><td class="ib-label">Release dates</td><td>
           March 11, 2005 (limited)<br>
           March 18, 2005 (wide)
-        </div></div>
-        <div class="ib-row"><div class="ib-lbl">Running time</div><div class="ib-val">94 minutes</div></div>
-        <div class="ib-row"><div class="ib-lbl">Country</div><div class="ib-val">United States</div></div>
-        <div class="ib-row"><div class="ib-lbl">Language</div><div class="ib-val">English</div></div>
-        <div class="ib-row"><div class="ib-lbl">Budget</div><div class="ib-val">$11.2 million</div></div>
-        <div class="ib-row"><div class="ib-lbl">Box office</div><div class="ib-val">$884,210</div></div>
-      </div>
-
-      <p>
-        <i><b>Reboot</b></i> is a 2005 American <a class="wl" href="#">techno-thriller</a> drama film written and directed by <a class="wl" href="#">Marsh Kellner</a> and produced by <a class="wl" href="#">ParaVox Pictures</a>. The film stars <a class="wl" href="#">Jonathan Brandis</a> as Kyle Strand, a former teen actor navigating a creative and personal collapse in the early days of consumer internet culture. The supporting cast includes <a class="wl" href="#">Tara Reid</a>, <a class="wl" href="#">Pauly Shore</a>, <a class="wl" href="#">Corey Feldman</a>, <a class="wl" href="#">Stephen Baldwin</a>, <a class="wl" href="#">Jeremy London</a>, and <a class="wl" href="#">Cindy Margolis</a>.
-      </p>
-      <p>
-        Released on March 18, 2005 to a wide theatrical run of 1,844 screens, <i>Reboot</i> earned $884,210 against its reported $11.2 million production budget, making it one of the more severe box office failures of the year and among the costliest per-screen underperformances in the first quarter of 2005.<sup><a class="wl" href="#">[1]</a></sup> Critical reception was broadly hostile, with many reviewers singling out its screenplay, its heavy integration of <a class="wl" href="#">Apple Inc.</a> products, and the perceived vanity of its central premise. The film received seven nominations at the <a class="wl" href="#">26th Golden Raspberry Awards</a>, winning six, including <a class="wl" href="#">Worst Picture</a> and <a class="wl" href="#">Worst Actor</a> for Brandis, who attended the ceremony in person to collect all six awards, becoming only the fourth performer in Razzie history to do so.
-      </p>
-      <p>
-        <i>Reboot</i> attracted unusual public attention in April 2005 when President <a class="wl" href="#">Steve Jobs</a>, appearing on a <a class="wl" href="#">CNBC</a> technology segment, offered an unsolicited endorsement of the film, citing its "authentic" and "enthusiastic" use of Apple hardware as evidence that "real creativity happens on a Mac."<sup><a class="wl" href="#">[2]</a></sup> The remark was widely reported as a curiosity, and helped prompt renewed coverage of the film's commercial failure.
-      </p>
-
-      <div class="toc">
-        <div class="toc-title">Contents</div>
-        <ol>
-          <li><a class="wl" href="#">Plot</a></li>
-          <li><a class="wl" href="#">Cast</a></li>
-          <li><a class="wl" href="#">Production</a>
-            <ol class="toc-sub">
-              <li><a class="wl" href="#">Development</a></li>
-              <li><a class="wl" href="#">Casting</a></li>
-              <li><a class="wl" href="#">Apple product placement</a></li>
-            </ol>
-          </li>
-          <li><a class="wl" href="#">Release</a>
-            <ol class="toc-sub">
-              <li><a class="wl" href="#">Box office</a></li>
-              <li><a class="wl" href="#">Critical reception</a></li>
-            </ol>
-          </li>
-          <li><a class="wl" href="#">Accolades</a></li>
-          <li><a class="wl" href="#">Presidential endorsement</a></li>
-          <li><a class="wl" href="#">Legacy</a></li>
-          <li><a class="wl" href="#">See also</a></li>
-          <li><a class="wl" href="#">References</a></li>
-        </ol>
-      </div>
-
-      <div class="clearfix">
-
-      <h2 class="ws">Plot <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
-      <p>
-        <b>Kyle Strand</b> (Brandis) is a 27-year-old former child actor best known for a single moderately successful mid-1990s science fiction television series, <i>Vector Protocol</i>, which was cancelled after two seasons. Now living in a modest apartment in the <a class="wl" href="#">San Fernando Valley</a>, Kyle supplements stalled auditions by freelancing as a low-level IT consultant, a skill he acquired during the production of his old show. He is in possession of a prototype <a class="wl" href="#">Apple PowerBook G4</a> that his former co-star and on-again, off-again girlfriend <b>Dana</b> (Reid) has unknowingly loaded with a proprietary audio file belonging to a shadowy media conglomerate, <b>Centrex Meridian</b>, whose operatives, led by the sardonic <b>Gregg Solis</b> (Baldwin) — are now pursuing them across Los Angeles.
-      </p>
-      <p>
-        Enlisting the reluctant help of a conspiracy-minded web developer named <b>Pitko</b> (Shore) and a reclusive former technology journalist living in <a class="wl" href="#">Reseda</a> (Feldman), Kyle attempts to decrypt the file, expose Centrex Meridian, and reconcile with Dana, all while managing a call-back for a pilot that his agent (London) insists "could be huge". A subplot involves Kyle's estranged father (played by <a class="wl" href="#">Robert Knepper</a> in a cameo), who appears briefly in two scenes and is never mentioned again.
-      </p>
-      <p>
-        The film ends with Kyle uploading the decrypted audio file to a website using a <a class="wl" href="#">Power Mac G5</a>, destroying Centrex Meridian's corporate infrastructure.
-      </p>
-
-      <h2 class="ws">Cast <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
-      <table class="wikitable">
-        <thead>
-          <tr><th>Actor</th><th>Role</th><th>Notes</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><a class="wl" href="#">Jonathan Brandis</a></td>
-            <td><b>Kyle Strand</b>, former teen actor and IT consultant</td>
-            <td>Lead; also served as uncredited associate producer</td>
-          </tr>
-          <tr>
-            <td><a class="wl" href="#">Tara Reid</a></td>
-            <td><b>Dana Mull</b>, Kyle's girlfriend</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><a class="wl" href="#">Pauly Shore</a></td>
-            <td><b>Pitko</b>, conspiracy theorist and web developer</td>
-            <td>Billed as "Pauly Shore as PITKO"</td>
-          </tr>
-          <tr>
-            <td><a class="wl" href="#">Corey Feldman</a></td>
-            <td><b>Marcus Dunn</b>, reclusive tech journalist</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><a class="wl" href="#">Stephen Baldwin</a></td>
-            <td><b>Gregg Solis</b>, Centrex Meridian operative</td>
-            <td>Principal antagonist</td>
-          </tr>
-          <tr>
-            <td><a class="wl" href="#">Jeremy London</a></td>
-            <td><b>Neil Farris</b>, Kyle's agent</td>
-            <td>Supporting</td>
-          </tr>
-          <tr>
-            <td><a class="wl" href="#">Cindy Margolis</a></td>
-            <td><b>Sheila Voss</b>, Centrex Meridian PR director</td>
-            <td>Supporting; Margolis's feature film debut</td>
-          </tr>
-          <tr>
-            <td><a class="wl" href="#">Robert Knepper</a></td>
-            <td><b>Ray Strand</b>, Kyle's father</td>
-            <td>Cameo; appears in scenes 11 and 14</td>
-          </tr>
-          <tr>
-            <td><a class="wl" href="#">Jake Byrd</a></td>
-            <td><b>Desk clerk</b></td>
-            <td>Uncredited</td>
-          </tr>
-        </tbody>
+        </td></tr>
+        <tr><td class="ib-label">Running time</td><td>94 minutes</td></tr>
+        <tr><td class="ib-label">Country</td><td>United States</td></tr>
+        <tr><td class="ib-label">Language</td><td>English</td></tr>
+        <tr><td class="ib-label">Budget</td><td>$11.2 million</td></tr>
+        <tr><td class="ib-label">Box office</td><td>$884,210</td></tr>
       </table>
+    </div>
 
-      <h2 class="ws">Production <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
+    <p class="wi">
+      <i><b>Reboot</b></i> is a 2005 American <a class="wl" href="#">techno-thriller</a> drama film written and directed by <a class="wl" href="#">Marsh Kellner</a> and produced by <a class="wl" href="#">ParaVox Pictures</a>. The film stars <a class="wl" href="#">Jonathan Brandis</a> as Kyle Strand, a former teen actor navigating a creative and personal collapse in the early days of consumer internet culture. The supporting cast includes <a class="wl" href="#">Tara Reid</a>, <a class="wl" href="#">Pauly Shore</a>, <a class="wl" href="#">Corey Feldman</a>, <a class="wl" href="#">Stephen Baldwin</a>, <a class="wl" href="#">Jeremy London</a>, and <a class="wl" href="#">Cindy Margolis</a>.
+    </p>
+    <p class="wi">
+      Released on March 18, 2005 to a wide theatrical run of 1,844 screens, <i>Reboot</i> earned $884,210 against its reported $11.2 million production budget, making it one of the more severe box office failures of the year and among the costliest per-screen underperformances in the first quarter of 2005.<sup><a class="wl" href="#">[1]</a></sup> Critical reception was broadly hostile, with many reviewers singling out its screenplay, its heavy integration of <a class="wl" href="#">Apple Inc.</a> products, and the perceived vanity of its central premise. The film received seven nominations at the <a class="wl" href="#">26th Golden Raspberry Awards</a>, winning six, including <a class="wl" href="#">Worst Picture</a> and <a class="wl" href="#">Worst Actor</a> for Brandis, who attended the ceremony in person to collect all six awards, becoming only the fourth performer in Razzie history to do so.
+    </p>
+    <p class="wi">
+      <i>Reboot</i> attracted unusual public attention in April 2005 when President <a class="wl" href="#">Steve Jobs</a>, appearing on a <a class="wl" href="#">CNBC</a> technology segment, offered an unsolicited endorsement of the film, citing its "authentic" and "enthusiastic" use of Apple hardware as evidence that "real creativity happens on a Mac."<sup><a class="wl" href="#">[2]</a></sup> The remark was widely reported as a curiosity, and helped prompt renewed coverage of the film's commercial failure.
+    </p>
 
-      <h3 class="ws">Development</h3>
-      <p>
-        <i>Reboot</i> originated as a spec screenplay by Marsh Kellner and Derek Snoad, who had previously collaborated on the <a class="wl" href="#">direct-to-video</a> action film <i><a class="wl" href="#">Countermand</a></i> (2002). The screenplay was developed in late 2003 and early 2004, with Kellner drawing explicitly on the then-recent wave of internet-paranoia thrillers and what he described in a 2004 interview as "the untold story of what happens to child actors after the credits roll, a framing that several critics would later note was neither subtle nor particularly well-executed.<sup><a class="wl" href="#">[3]</a></sup>
-      </p>
-      <p>
-        <a class="wl" href="#">ParaVox Pictures</a>, a small Los Angeles-based production and distribution company, acquired the script in June 2004 for an undisclosed sum and committed to a theatrical release, reportedly based on confidence in the assembled cast's combined residual name recognition. Production was budgeted at $11.2 million, of which approximately $3.4 million was allocated to talent fees and $1.8 million to what the production notes describe as "tech consultation and visual effects," the latter comprising predominantly the acquisition and display of Apple hardware.<sup><a class="wl" href="#">[4]</a></sup>
-      </p>
+    <div class="wiki-toc">
+      <div class="wiki-toc-title">Contents</div>
+      <ol>
+        <li><a class="wl" href="#">Plot</a></li>
+        <li><a class="wl" href="#">Cast</a></li>
+        <li><a class="wl" href="#">Production</a>
+          <ol class="toc-sub">
+            <li><a class="wl" href="#">Development</a></li>
+            <li><a class="wl" href="#">Casting</a></li>
+            <li><a class="wl" href="#">Apple product placement</a></li>
+          </ol>
+        </li>
+        <li><a class="wl" href="#">Release</a>
+          <ol class="toc-sub">
+            <li><a class="wl" href="#">Box office</a></li>
+            <li><a class="wl" href="#">Critical reception</a></li>
+          </ol>
+        </li>
+        <li><a class="wl" href="#">Accolades</a></li>
+        <li><a class="wl" href="#">Presidential endorsement</a></li>
+        <li><a class="wl" href="#">Legacy</a></li>
+        <li><a class="wl" href="#">See also</a></li>
+        <li><a class="wl" href="#">References</a></li>
+      </ol>
+    </div>
 
-      <h3 class="ws">Casting</h3>
-      <p>
-        Jonathan Brandis, whose career had effectively stalled following the cancellation of <i><a class="wl" href="#">SeaQuest DSV</a></i> and a series of low-profile film appearances through the late 1990s and early 2000s, was drawn to the project by what he described in promotional interviews as the "uncomfortable closeness" between Kyle Strand's circumstances and his own.<sup><a class="wl" href="#">[5]</a></sup> Brandis also reportedly negotiated an informal associate producer credit in exchange for a reduced appearance fee, which the production used toward the Apple hardware budget. In a March 2005 interview with <i><a class="wl" href="#">Entertainment Weekly</a></i>, Brandis said: "Kyle is living in the exact moment I spent a lot of years in. Except he's much better at IT than I am, and he has better equipment."<sup><a class="wl" href="#">[6]</a></sup>
-      </p>
-      <p>
-        The casting of Shore, Feldman, and Baldwin drew considerable comment in the trade press, with <i><a class="wl" href="#">Variety</a></i> describing the ensemble as "a kind of informal Museum of the Early Nineties, preserved in amber at someone's evident expense."<sup><a class="wl" href="#">[7]</a></sup> Jeremy London had been attached to the project from an early stage, while Corey Feldman has stated in subsequent interviews that he accepted the role following a single phone call from Brandis, to whom he said he felt "a certain kinship".<sup><a class="wl" href="#">[8]</a></sup>
-      </p>
+    <div class="clearfix">
 
-      <h3 class="ws">Apple product placement</h3>
-      <p>
-        <i>Reboot</i> features extensive and conspicuous integration of <a class="wl" href="#">Apple Inc.</a> products, including an <a class="wl" href="#">iMac G5</a>, two <a class="wl" href="#">PowerBook G4</a> laptops, a <a class="wl" href="#">Power Mac G5</a>, three <a class="wl" href="#">iPod Mini</a> units (one white, two green), an <a class="wl" href="#">iSight</a> camera, and what appears in the background of scene 23 to be a <a class="wl" href="#">Xserve</a> rack being used as a drinks cabinet. The placement was arranged directly between ParaVox and Apple's marketing division, though Apple has never officially confirmed its involvement and the film's credits do not list Apple as a sponsor.<sup><a class="wl" href="#">[9]</a></sup>
-      </p>
-      <p>
-        Multiple reviewers noted that the Apple hardware is granted camera time disproportionate to the needs of any given scene, with <a class="wl" href="#">Roger Ebert</a> observing in his review that "the PowerBook G4 has more close-ups than anyone in the supporting cast, and frankly gives a more consistent performance."<sup><a class="wl" href="#">[10]</a></sup> In one frequently cited sequence, Kyle solves a plot-critical encryption problem using GarageBand, a use-case with no established precedent in cryptography.
-      </p>
+    <h2 class="ws">Plot <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
+    <p class="wi">
+      <b>Kyle Strand</b> (Brandis) is a 27-year-old former child actor best known for a single moderately successful mid-1990s science fiction television series, <i>Vector Protocol</i>, which was cancelled after two seasons. Now living in a modest apartment in the <a class="wl" href="#">San Fernando Valley</a>, Kyle supplements stalled auditions by freelancing as a low-level IT consultant, a skill he acquired during the production of his old show. He is in possession of a prototype <a class="wl" href="#">Apple PowerBook G4</a> that his former co-star and on-again, off-again girlfriend <b>Dana</b> (Reid) has unknowingly loaded with a proprietary audio file belonging to a shadowy media conglomerate, <b>Centrex Meridian</b>, whose operatives, led by the sardonic <b>Gregg Solis</b> (Baldwin) — are now pursuing them across Los Angeles.
+    </p>
+    <p class="wi">
+      Enlisting the reluctant help of a conspiracy-minded web developer named <b>Pitko</b> (Shore) and a reclusive former technology journalist living in <a class="wl" href="#">Reseda</a> (Feldman), Kyle attempts to decrypt the file, expose Centrex Meridian, and reconcile with Dana, all while managing a call-back for a pilot that his agent (London) insists "could be huge". A subplot involves Kyle's estranged father (played by <a class="wl" href="#">Robert Knepper</a> in a cameo), who appears briefly in two scenes and is never mentioned again.
+    </p>
+    <p class="wi">
+      The film ends with Kyle uploading the decrypted audio file to a website using a <a class="wl" href="#">Power Mac G5</a>, destroying Centrex Meridian's corporate infrastructure.
+    </p>
 
-      <h2 class="ws">Release <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
+    <h2 class="ws">Cast <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
+    <table class="wiki-table">
+      <thead>
+        <tr><th>Actor</th><th>Role</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a class="wl" href="#">Jonathan Brandis</a></td>
+          <td><b>Kyle Strand</b>, former teen actor and IT consultant</td>
+          <td>Lead; also served as uncredited associate producer</td>
+        </tr>
+        <tr>
+          <td><a class="wl" href="#">Tara Reid</a></td>
+          <td><b>Dana Mull</b>, Kyle's girlfriend</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><a class="wl" href="#">Pauly Shore</a></td>
+          <td><b>Pitko</b>, conspiracy theorist and web developer</td>
+          <td>Billed as "Pauly Shore as PITKO"</td>
+        </tr>
+        <tr>
+          <td><a class="wl" href="#">Corey Feldman</a></td>
+          <td><b>Marcus Dunn</b>, reclusive tech journalist</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><a class="wl" href="#">Stephen Baldwin</a></td>
+          <td><b>Gregg Solis</b>, Centrex Meridian operative</td>
+          <td>Principal antagonist</td>
+        </tr>
+        <tr>
+          <td><a class="wl" href="#">Jeremy London</a></td>
+          <td><b>Neil Farris</b>, Kyle's agent</td>
+          <td>Supporting</td>
+        </tr>
+        <tr>
+          <td><a class="wl" href="#">Cindy Margolis</a></td>
+          <td><b>Sheila Voss</b>, Centrex Meridian PR director</td>
+          <td>Supporting; Margolis's feature film debut</td>
+        </tr>
+        <tr>
+          <td><a class="wl" href="#">Robert Knepper</a></td>
+          <td><b>Ray Strand</b>, Kyle's father</td>
+          <td>Cameo; appears in scenes 11 and 14</td>
+        </tr>
+        <tr>
+          <td><a class="wl" href="#">Jake Byrd</a></td>
+          <td><b>Desk clerk</b></td>
+          <td>Uncredited</td>
+        </tr>
+      </tbody>
+    </table>
 
-      <h3 class="ws">Box office</h3>
-      <p>
-        <i>Reboot</i> opened on March 18, 2005 across 1,844 screens in the United States and Canada. It earned $562,000 in its opening weekend, placing 22nd at the box office — behind, among others, the fifth weekend of <i><a class="wl" href="#">Hitch</a></i> and a limited rerelease of <i><a class="wl" href="#">Ray</a></i>. By the end of its theatrical run, the film had grossed $884,210 in North America and an additional $44,000 internationally, for a worldwide total of $928,210 against its $11.2 million production budget, not including an estimated $6–8 million in marketing and distribution costs.<sup><a class="wl" href="#">[11]</a></sup>
-      </p>
-      <p>
-        <i><a class="wl" href="#">The Hollywood Reporter</a></i> named <i>Reboot</i> one of the ten worst-performing wide releases of 2005, noting that its per-screen average of $304 in opening weekend was the third-lowest of any film to open on more than 1,500 screens that year.<sup><a class="wl" href="#">[12]</a></sup> ParaVox Pictures ceased operations later that year, in August 2005.
-      </p>
+    <h2 class="ws">Production <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
 
-      <h3 class="ws">Critical reception</h3>
-      <p>
-        <i>Reboot</i> received broadly negative reviews. On <a class="wl" href="#">Rotten Tomatoes</a>, the film holds an approval rating of 4% based on 47 reviews, with an average rating of 1.8/10. The critical consensus reads: "A film that earnestly confuses product placement with storytelling, <i>Reboot</i> is ninety-four minutes of remarkably expensive futility, elevated only by the occasional accidental charm of its lead."<sup><a class="wl" href="#">[13]</a></sup> On <a class="wl" href="#">Metacritic</a>, the film has a score of 9 out of 100, based on 22 critic reviews, indicating "overwhelming dislike."
-      </p>
+    <h3 class="ws">Development</h3>
+    <p class="wi">
+      <i>Reboot</i> originated as a spec screenplay by Marsh Kellner and Derek Snoad, who had previously collaborated on the <a class="wl" href="#">direct-to-video</a> action film <i><a class="wl" href="#">Countermand</a></i> (2002). The screenplay was developed in late 2003 and early 2004, with Kellner drawing explicitly on the then-recent wave of internet-paranoia thrillers and what he described in a 2004 interview as "the untold story of what happens to child actors after the credits roll, a framing that several critics would later note was neither subtle nor particularly well-executed.<sup><a class="wl" href="#">[3]</a></sup>
+    </p>
+    <p class="wi">
+      <a class="wl" href="#">ParaVox Pictures</a>, a small Los Angeles-based production and distribution company, acquired the script in June 2004 for an undisclosed sum and committed to a theatrical release, reportedly based on confidence in the assembled cast's combined residual name recognition. Production was budgeted at $11.2 million, of which approximately $3.4 million was allocated to talent fees and $1.8 million to what the production notes describe as "tech consultation and visual effects," the latter comprising predominantly the acquisition and display of Apple hardware.<sup><a class="wl" href="#">[4]</a></sup>
+    </p>
 
-      <blockquote class="wp-quote">
-        "Watching <i>Reboot</i> is the cinematic equivalent of opening a computer only to find it full of smaller, sadder computers. Brandis brings genuine feeling to a role that did not deserve him, and everyone else brings what they can, which is, in several cases, not much."
-        <br><span style="font-size:0.85em;font-style:normal;">— <a class="wl" href="#">Roger Ebert</a>, <i>Chicago Sun-Times</i>, March 18, 2005 (1.5/4 stars)<sup><a class="wl" href="#">[10]</a></sup></span>
-      </blockquote>
+    <h3 class="ws">Casting</h3>
+    <p class="wi">
+      Jonathan Brandis, whose career had effectively stalled following the cancellation of <i><a class="wl" href="#">SeaQuest DSV</a></i> and a series of low-profile film appearances through the late 1990s and early 2000s, was drawn to the project by what he described in promotional interviews as the "uncomfortable closeness" between Kyle Strand's circumstances and his own.<sup><a class="wl" href="#">[5]</a></sup> Brandis also reportedly negotiated an informal associate producer credit in exchange for a reduced appearance fee, which the production used toward the Apple hardware budget. In a March 2005 interview with <i><a class="wl" href="#">Entertainment Weekly</a></i>, Brandis said: "Kyle is living in the exact moment I spent a lot of years in. Except he's much better at IT than I am, and he has better equipment."<sup><a class="wl" href="#">[6]</a></sup>
+    </p>
+    <p class="wi">
+      The casting of Shore, Feldman, and Baldwin drew considerable comment in the trade press, with <i><a class="wl" href="#">Variety</a></i> describing the ensemble as "a kind of informal Museum of the Early Nineties, preserved in amber at someone's evident expense."<sup><a class="wl" href="#">[7]</a></sup> Jeremy London had been attached to the project from an early stage, while Corey Feldman has stated in subsequent interviews that he accepted the role following a single phone call from Brandis, to whom he said he felt "a certain kinship".<sup><a class="wl" href="#">[8]</a></sup>
+    </p>
 
-      <blockquote class="wp-quote">
-        "The film's peculiar achievement is that it manages to be simultaneously overplotted, boring, and empty. There is a MacGuffin, but it runs on OS X."
-        <br><span style="font-size:0.85em;font-style:normal;">— <a class="wl" href="#">Dana Stevens</a>, <i>Slate</i>, March 21, 2005<sup><a class="wl" href="#">[14]</a></sup></span>
-      </blockquote>
+    <h3 class="ws">Apple product placement</h3>
+    <p class="wi">
+      <i>Reboot</i> features extensive and conspicuous integration of <a class="wl" href="#">Apple Inc.</a> products, including an <a class="wl" href="#">iMac G5</a>, two <a class="wl" href="#">PowerBook G4</a> laptops, a <a class="wl" href="#">Power Mac G5</a>, three <a class="wl" href="#">iPod Mini</a> units (one white, two green), an <a class="wl" href="#">iSight</a> camera, and what appears in the background of scene 23 to be a <a class="wl" href="#">Xserve</a> rack being used as a drinks cabinet. The placement was arranged directly between ParaVox and Apple's marketing division, though Apple has never officially confirmed its involvement and the film's credits do not list Apple as a sponsor.<sup><a class="wl" href="#">[9]</a></sup>
+    </p>
+    <p class="wi">
+      Multiple reviewers noted that the Apple hardware is granted camera time disproportionate to the needs of any given scene, with <a class="wl" href="#">Roger Ebert</a> observing in his review that "the PowerBook G4 has more close-ups than anyone in the supporting cast, and frankly gives a more consistent performance."<sup><a class="wl" href="#">[10]</a></sup> In one frequently cited sequence, Kyle solves a plot-critical encryption problem using GarageBand, a use-case with no established precedent in cryptography.
+    </p>
 
-      <blockquote class="wp-quote">
-        "I have seen films that used Apple computers as props. I have never before seen a film in which the computers appear to be the audience."
-        <br><span style="font-size:0.85em;font-style:normal;">— <a class="wl" href="#">A. O. Scott</a>, <i>The New York Times</i>, March 18, 2005<sup><a class="wl" href="#">[15]</a></sup></span>
-      </blockquote>
+    <h2 class="ws">Release <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
 
-      <h2 class="ws">Accolades <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
-      <p>
-        <i>Reboot</i> received seven nominations at the <a class="wl" href="#">26th Golden Raspberry Awards</a>, held on March 4, 2006. It won six, including <a class="wl" href="#">Worst Picture</a>, <a class="wl" href="#">Worst Director</a>, <a class="wl" href="#">Worst Actor</a> (Brandis), <a class="wl" href="#">Worst Supporting Actor</a> (Shore), <a class="wl" href="#">Worst Screenplay</a>, and <a class="wl" href="#">Worst Screen Couple</a> (Brandis and Reid). The sole nomination it did not win — <a class="wl" href="#">Worst Supporting Actress</a> for Margolis — went instead to <a class="wl" href="#">Jenny McCarthy</a> for <i><a class="wl" href="#">Dirty Love</a></i>.
-      </p>
+    <h3 class="ws">Box office</h3>
+    <p class="wi">
+      <i>Reboot</i> opened on March 18, 2005 across 1,844 screens in the United States and Canada. It earned $562,000 in its opening weekend, placing 22nd at the box office — behind, among others, the fifth weekend of <i><a class="wl" href="#">Hitch</a></i> and a limited rerelease of <i><a class="wl" href="#">Ray</a></i>. By the end of its theatrical run, the film had grossed $884,210 in North America and an additional $44,000 internationally, for a worldwide total of $928,210 against its $11.2 million production budget, not including an estimated $6–8 million in marketing and distribution costs.<sup><a class="wl" href="#">[11]</a></sup>
+    </p>
+    <p class="wi">
+      <i><a class="wl" href="#">The Hollywood Reporter</a></i> named <i>Reboot</i> one of the ten worst-performing wide releases of 2005, noting that its per-screen average of $304 in opening weekend was the third-lowest of any film to open on more than 1,500 screens that year.<sup><a class="wl" href="#">[12]</a></sup> ParaVox Pictures ceased operations later that year, in August 2005.
+    </p>
 
-      <div class="award-box">
-        <div class="award-box-title">26th Golden Raspberry Awards (2006)</div>
-        <div class="award-row"><span>Worst Picture</span><span class="award-result-won">&#x1F3C6; WON</span></div>
-        <div class="award-row"><span>Worst Actor – Jonathan Brandis</span><span class="award-result-won">&#x1F3C6; WON</span></div>
-        <div class="award-row"><span>Worst Director – Marsh Kellner</span><span class="award-result-won">&#x1F3C6; WON</span></div>
-        <div class="award-row"><span>Worst Screenplay – Kellner, Snoad</span><span class="award-result-won">&#x1F3C6; WON</span></div>
-        <div class="award-row"><span>Worst Supporting Actor – Pauly Shore</span><span class="award-result-won">&#x1F3C6; WON</span></div>
-        <div class="award-row"><span>Worst Screen Couple – Brandis &amp; Reid</span><span class="award-result-won">&#x1F3C6; WON</span></div>
-        <div class="award-row"><span>Worst Supporting Actress – Cindy Margolis</span><span class="award-result-nom">Nominated (lost to Jenny McCarthy, <i>Dirty Love</i>)</span></div>
-      </div>
+    <h3 class="ws">Critical reception</h3>
+    <p class="wi">
+      <i>Reboot</i> received broadly negative reviews. On <a class="wl" href="#">Rotten Tomatoes</a>, the film holds an approval rating of 4% based on 47 reviews, with an average rating of 1.8/10. The critical consensus reads: "A film that earnestly confuses product placement with storytelling, <i>Reboot</i> is ninety-four minutes of remarkably expensive futility, elevated only by the occasional accidental charm of its lead."<sup><a class="wl" href="#">[13]</a></sup> On <a class="wl" href="#">Metacritic</a>, the film has a score of 9 out of 100, based on 22 critic reviews, indicating "overwhelming dislike."
+    </p>
 
-      <p>
-        Unexpectedly, Brandis attended the Razzies ceremony at the <a class="wl" href="#">Barnsdall Art Park</a> in <a class="wl" href="#">Los Angeles</a> and collected all six awards himself, delivering a brief acceptance speech for each. For Worst Picture, he remarked: "I want to thank Marsh, who believed in this project, and I want to thank Apple, whose computers worked flawlessly throughout filming and deserve better than this. And I want to thank everyone who saw it. Yes, both of you."<sup><a class="wl" href="#">[16]</a></sup> The <i>Los Angeles Times</i> described his attendance as "an act of either extraordinary self-awareness or extraordinary stubbornness, possibly both."<sup><a class="wl" href="#">[17]</a></sup> Brandis became only the fourth individual in Razzie history a, er <a class="wl" href="#">Paul Verhoeven</a>, <a class="wl" href="#">Tom Green</a>, and <a class="wl" href="#">Halle Berry</a>, to accept a Razzie award in person.
-      </p>
+    <blockquote class="wp-quote">
+      "Watching <i>Reboot</i> is the cinematic equivalent of opening a computer only to find it full of smaller, sadder computers. Brandis brings genuine feeling to a role that did not deserve him, and everyone else brings what they can, which is, in several cases, not much."
+      <br><span style="font-size:0.85em;font-style:normal;">— <a class="wl" href="#">Roger Ebert</a>, <i>Chicago Sun-Times</i>, March 18, 2005 (1.5/4 stars)<sup><a class="wl" href="#">[10]</a></sup></span>
+    </blockquote>
 
-      <h2 class="ws">Presidential endorsement <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
-      <p>
-        On April 14, 2005, President <a class="wl" href="#">Steve Jobs</a>, appearing in a televised roundtable on American technology competitiveness broadcast on <a class="wl" href="#">CNBC</a>, was asked by host <a class="wl" href="#">Maria Bartiromo</a> about the role of consumer technology in popular culture. Jobs, departing from the prepared segment, remarked: "Have you seen <i>Reboot</i>? The movie? You should see it. Not because it's a great film, it's not, but because there's a scene where this kid uses a PowerBook to crack open what is essentially a media monopoly, and he does it on his own, at a kitchen table, and the machine just works. That's what we're building. That's why we do this."<sup><a class="wl" href="#">[2]</a></sup>
-      </p>
-      <p>
-        The remark attracted significant media coverage, partly for its candid acknowledgment that the film was not of high quality, and partly because it represented an unusually specific pop cultural reference from a sitting president. <a class="wl" href="#">The Wall Street Journal</a> noted that Jobs's endorsement, though qualified, constituted "perhaps the first White House recommendation of a film that had already received a Razzie nomination."<sup><a class="wl" href="#">[18]</a></sup> The White House press secretary, when asked about the statement at a briefing the following day, confirmed that it reflected the president's personal opinion and was not a formal executive endorsement. <a class="wl" href="#">Dana Perino</a> added, without elaboration, that the president "stands by his aesthetic judgment".<sup><a class="wl" href="#">[19]</a></sup>
-      </p>
-      <p>
-        Brandis, reached for comment by <i><a class="wl" href="#">Entertainment Weekly</a></i>, said: "I genuinely don't know what to do with that. I have the Razzies on my shelf and now apparently the president liked the movie. I mean, think that covers every possible critical outcome... it's quite flattering."<sup><a class="wl" href="#">[20]</a></sup> A brief spike in DVD pre-orders followed the coverage, though sales ultimately remained modest.
-      </p>
+    <blockquote class="wp-quote">
+      "The film's peculiar achievement is that it manages to be simultaneously overplotted, boring, and empty. There is a MacGuffin, but it runs on OS X."
+      <br><span style="font-size:0.85em;font-style:normal;">— <a class="wl" href="#">Dana Stevens</a>, <i>Slate</i>, March 21, 2005<sup><a class="wl" href="#">[14]</a></sup></span>
+    </blockquote>
 
-      <h2 class="ws">Legacy <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
-      <p>
-        <i>Reboot</i> has been cited in several academic and journalistic analyses of early-2000s Hollywood as an illustration of the limits of casting-driven financing strategies in the home video and fragmented-audience era.<sup><a class="wl" href="#">[21]</a></sup> The film has developed a minor cult reputation in certain online communities, partly due to repeated references in <i>so-bad-it's-good</i> film discussion spaces and partly due to Brandis's Razzie ceremony appearances, which have been circulated as video clips independently of the film itself.
-      </p>
-      <p>
-        The film was released on DVD in June 2005 by <a class="wl" href="#">Anchor Bay Entertainment</a> with no supplemental features. In a 2011 retrospective in <i><a class="wl" href="#">The A.V. Club</a></i>, <i>Reboot</i> was ranked 14th on a list of the most financially catastrophic wide releases of the 2000s, described as "the rare film that failed commercially, critically, and industrially, yet managed to be charming about it."<sup><a class="wl" href="#">[22]</a></sup>
-      </p>
+    <blockquote class="wp-quote">
+      "I have seen films that used Apple computers as props. I have never before seen a film in which the computers appear to be the audience."
+      <br><span style="font-size:0.85em;font-style:normal;">— <a class="wl" href="#">A. O. Scott</a>, <i>The New York Times</i>, March 18, 2005<sup><a class="wl" href="#">[15]</a></sup></span>
+    </blockquote>
 
-      <h2 class="ws">See also <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
-      <ul class="plain">
-        <li><a class="wl" href="#">List of biggest box office bombs</a></li>
-        <li><a class="wl" href="#">Golden Raspberry Award for Worst Picture</a></li>
-        <li><a class="wl" href="#">Jonathan Brandis</a></li>
-        <li><a class="wl" href="#">Apple product placement in media</a></li>
-        <li><a class="wl" href="#">Zzyzx (film)</a></li>
-        <li><a class="wl" href="#">Presidency of Steve Jobs</a></li>
-      </ul>
+    <h2 class="ws">Accolades <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
+    <p class="wi">
+      <i>Reboot</i> received seven nominations at the <a class="wl" href="#">26th Golden Raspberry Awards</a>, held on March 4, 2006. It won six, including <a class="wl" href="#">Worst Picture</a>, <a class="wl" href="#">Worst Director</a>, <a class="wl" href="#">Worst Actor</a> (Brandis), <a class="wl" href="#">Worst Supporting Actor</a> (Shore), <a class="wl" href="#">Worst Screenplay</a>, and <a class="wl" href="#">Worst Screen Couple</a> (Brandis and Reid). The sole nomination it did not win — <a class="wl" href="#">Worst Supporting Actress</a> for Margolis — went instead to <a class="wl" href="#">Jenny McCarthy</a> for <i><a class="wl" href="#">Dirty Love</a></i>.
+    </p>
 
-      <h2 class="ws">References <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
-      <div class="reflist">
-        <ol>
-          <li>McClintock, P. "March Madness: The Weekend's Biggest Losers." <i>The Hollywood Reporter</i>, March 21, 2005.</li>
-          <li>Bartiromo, M. (host). <i>Capital Report</i>. CNBC, April 14, 2005. Transcript archived by <a class="wl" href="#">Federal News Service</a>.</li>
-          <li>Kellner, M. Interview. <i>MovieMaker Magazine</i>, Issue 58, September 2004.</li>
-          <li>ParaVox Pictures. Production Budget Prospectus, filed with the California Film Commission, 2004.</li>
-          <li>Brandis, J. Interview. <i>Sci-Fi Wire</i>, February 14, 2005.</li>
-          <li>Ressner, J. "Jonathan Brandis, Rebooted." <i>Entertainment Weekly</i>, March 11, 2005.</li>
-          <li>"Reviews: Reboot." <i>Variety</i>, March 14, 2005.</li>
-          <li>Feldman, C. <i>Coreyography</i>. St. Martin's Press, 2013. pp. 288–289.</li>
-          <li>Pham, A. "Hollywood's Apple Obsession." <i>Los Angeles Times</i>, April 30, 2005.</li>
-          <li>Ebert, R. "Reboot." <i>Chicago Sun-Times</i>, March 18, 2005.</li>
-          <li>Box Office Mojo. <i>Reboot (2005)</i>. Retrieved 2006.</li>
-          <li>"Worst of the Best: 2005's Most Expensive Failures." <i>The Hollywood Reporter</i>, December 22, 2005.</li>
-          <li>Rotten Tomatoes. <i>Reboot (2005)</i>. Retrieved 2006.</li>
-          <li>Stevens, D. "Null Pointer." <i>Slate</i>, March 21, 2005.</li>
-          <li>Scott, A.O. "A Boy, His Laptop, and His Destiny." <i>The New York Times</i>, March 18, 2005.</li>
-          <li>Associated Press. "Actor attends own Razzie ceremony, collects six awards". March 5, 2006.</li>
-          <li>Welkos, R. "The Self-Aware and the Doomed at This Year's Razzies." <i>Los Angeles Times</i>, March 5, 2006.</li>
-          <li>Wingfield, N. "Jobs offers unsolicited film review". <i>The Wall Street Journal</i>, April 15, 2005.</li>
-          <li>White House Press Briefing, April 15, 2005. Office of the Press Secretary.</li>
-          <li>Vary, A.B. "Jonathan Brandis on Razzies, Jobs, and Moving On." <i>Entertainment Weekly</i>, May 3, 2005.</li>
-          <li>King, G. <i>American Independent Cinema</i>. I.B. Tauris, 2005. pp. 211–214.</li>
-          <li>Phipps, K. "Inventory: The Decade's Most Spectacular Wide-Release Failures." <i>The A.V. Club</i>, January 18, 2011.</li>
-        </ol>
-      </div>
+    <div class="award-box">
+      <div class="award-box-title">26th Golden Raspberry Awards (2006)</div>
+      <div class="award-row"><span>Worst Picture</span><span class="award-result-won">&#x1F3C6; WON</span></div>
+      <div class="award-row"><span>Worst Actor – Jonathan Brandis</span><span class="award-result-won">&#x1F3C6; WON</span></div>
+      <div class="award-row"><span>Worst Director – Marsh Kellner</span><span class="award-result-won">&#x1F3C6; WON</span></div>
+      <div class="award-row"><span>Worst Screenplay – Kellner, Snoad</span><span class="award-result-won">&#x1F3C6; WON</span></div>
+      <div class="award-row"><span>Worst Supporting Actor – Pauly Shore</span><span class="award-result-won">&#x1F3C6; WON</span></div>
+      <div class="award-row"><span>Worst Screen Couple – Brandis &amp; Reid</span><span class="award-result-won">&#x1F3C6; WON</span></div>
+      <div class="award-row"><span>Worst Supporting Actress – Cindy Margolis</span><span class="award-result-nom">Nominated (lost to Jenny McCarthy, <i>Dirty Love</i>)</span></div>
+    </div>
 
-      </div>
+    <p class="wi">
+      Unexpectedly, Brandis attended the Razzies ceremony at the <a class="wl" href="#">Barnsdall Art Park</a> in <a class="wl" href="#">Los Angeles</a> and collected all six awards himself, delivering a brief acceptance speech for each. For Worst Picture, he remarked: "I want to thank Marsh, who believed in this project, and I want to thank Apple, whose computers worked flawlessly throughout filming and deserve better than this. And I want to thank everyone who saw it. Yes, both of you."<sup><a class="wl" href="#">[16]</a></sup> The <i>Los Angeles Times</i> described his attendance as "an act of either extraordinary self-awareness or extraordinary stubbornness, possibly both."<sup><a class="wl" href="#">[17]</a></sup> Brandis became only the fourth individual in Razzie history a, er <a class="wl" href="#">Paul Verhoeven</a>, <a class="wl" href="#">Tom Green</a>, and <a class="wl" href="#">Halle Berry</a>, to accept a Razzie award in person.
+    </p>
 
-      <div class="catbox">
-        <b>Categories:</b>
-        <a class="wl" href="#">2005 films</a> &nbsp;·&nbsp;
-        <a class="wl" href="#">American thriller films</a> &nbsp;·&nbsp;
-        <a class="wl" href="#">Box office bombs</a> &nbsp;·&nbsp;
-        <a class="wl" href="#">Golden Raspberry Award for Worst Picture winners</a> &nbsp;·&nbsp;
-        <a class="wl" href="#">Films set in Los Angeles</a> &nbsp;·&nbsp;
-        <a class="wl" href="#">Apple Inc. in popular culture</a> &nbsp;·&nbsp;
-        <a class="wl" href="#">Alternate history</a> &nbsp;·&nbsp;
-        <a class="wl" href="#">Jonathan Brandis</a>
-      </div>
+    <h2 class="ws">Presidential endorsement <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
+    <p class="wi">
+      On April 14, 2005, President <a class="wl" href="#">Steve Jobs</a>, appearing in a televised roundtable on American technology competitiveness broadcast on <a class="wl" href="#">CNBC</a>, was asked by host <a class="wl" href="#">Maria Bartiromo</a> about the role of consumer technology in popular culture. Jobs, departing from the prepared segment, remarked: "Have you seen <i>Reboot</i>? The movie? You should see it. Not because it's a great film, it's not, but because there's a scene where this kid uses a PowerBook to crack open what is essentially a media monopoly, and he does it on his own, at a kitchen table, and the machine just works. That's what we're building. That's why we do this."<sup><a class="wl" href="#">[2]</a></sup>
+    </p>
+    <p class="wi">
+      The remark attracted significant media coverage, partly for its candid acknowledgment that the film was not of high quality, and partly because it represented an unusually specific pop cultural reference from a sitting president. <a class="wl" href="#">The Wall Street Journal</a> noted that Jobs's endorsement, though qualified, constituted "perhaps the first White House recommendation of a film that had already received a Razzie nomination."<sup><a class="wl" href="#">[18]</a></sup> The White House press secretary, when asked about the statement at a briefing the following day, confirmed that it reflected the president's personal opinion and was not a formal executive endorsement. <a class="wl" href="#">Dana Perino</a> added, without elaboration, that the president "stands by his aesthetic judgment".<sup><a class="wl" href="#">[19]</a></sup>
+    </p>
+    <p class="wi">
+      Brandis, reached for comment by <i><a class="wl" href="#">Entertainment Weekly</a></i>, said: "I genuinely don't know what to do with that. I have the Razzies on my shelf and now apparently the president liked the movie. I mean, think that covers every possible critical outcome... it's quite flattering."<sup><a class="wl" href="#">[20]</a></sup> A brief spike in DVD pre-orders followed the coverage, though sales ultimately remained modest.
+    </p>
+
+    <h2 class="ws">Legacy <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
+    <p class="wi">
+      <i>Reboot</i> has been cited in several academic and journalistic analyses of early-2000s Hollywood as an illustration of the limits of casting-driven financing strategies in the home video and fragmented-audience era.<sup><a class="wl" href="#">[21]</a></sup> The film has developed a minor cult reputation in certain online communities, partly due to repeated references in <i>so-bad-it's-good</i> film discussion spaces and partly due to Brandis's Razzie ceremony appearances, which have been circulated as video clips independently of the film itself.
+    </p>
+    <p class="wi">
+      The film was released on DVD in June 2005 by <a class="wl" href="#">Anchor Bay Entertainment</a> with no supplemental features. In a 2011 retrospective in <i><a class="wl" href="#">The A.V. Club</a></i>, <i>Reboot</i> was ranked 14th on a list of the most financially catastrophic wide releases of the 2000s, described as "the rare film that failed commercially, critically, and industrially, yet managed to be charming about it."<sup><a class="wl" href="#">[22]</a></sup>
+    </p>
+
+    <h2 class="ws">See also <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
+    <ul class="plain">
+      <li><a class="wl" href="#">List of biggest box office bombs</a></li>
+      <li><a class="wl" href="#">Golden Raspberry Award for Worst Picture</a></li>
+      <li><a class="wl" href="#">Jonathan Brandis</a></li>
+      <li><a class="wl" href="#">Apple product placement in media</a></li>
+      <li><a class="wl" href="#">Zzyzx (film)</a></li>
+      <li><a class="wl" href="#">Presidency of Steve Jobs</a></li>
+    </ul>
+
+    <h2 class="ws">References <span class="edit">[<a class="wl" href="#">edit</a>]</span></h2>
+    <div class="reflist">
+      <ol>
+        <li>McClintock, P. "March Madness: The Weekend's Biggest Losers." <i>The Hollywood Reporter</i>, March 21, 2005.</li>
+        <li>Bartiromo, M. (host). <i>Capital Report</i>. CNBC, April 14, 2005. Transcript archived by <a class="wl" href="#">Federal News Service</a>.</li>
+        <li>Kellner, M. Interview. <i>MovieMaker Magazine</i>, Issue 58, September 2004.</li>
+        <li>ParaVox Pictures. Production Budget Prospectus, filed with the California Film Commission, 2004.</li>
+        <li>Brandis, J. Interview. <i>Sci-Fi Wire</i>, February 14, 2005.</li>
+        <li>Ressner, J. "Jonathan Brandis, Rebooted." <i>Entertainment Weekly</i>, March 11, 2005.</li>
+        <li>"Reviews: Reboot." <i>Variety</i>, March 14, 2005.</li>
+        <li>Feldman, C. <i>Coreyography</i>. St. Martin's Press, 2013. pp. 288–289.</li>
+        <li>Pham, A. "Hollywood's Apple Obsession." <i>Los Angeles Times</i>, April 30, 2005.</li>
+        <li>Ebert, R. "Reboot." <i>Chicago Sun-Times</i>, March 18, 2005.</li>
+        <li>Box Office Mojo. <i>Reboot (2005)</i>. Retrieved 2006.</li>
+        <li>"Worst of the Best: 2005's Most Expensive Failures." <i>The Hollywood Reporter</i>, December 22, 2005.</li>
+        <li>Rotten Tomatoes. <i>Reboot (2005)</i>. Retrieved 2006.</li>
+        <li>Stevens, D. "Null Pointer." <i>Slate</i>, March 21, 2005.</li>
+        <li>Scott, A.O. "A Boy, His Laptop, and His Destiny." <i>The New York Times</i>, March 18, 2005.</li>
+        <li>Associated Press. "Actor attends own Razzie ceremony, collects six awards". March 5, 2006.</li>
+        <li>Welkos, R. "The Self-Aware and the Doomed at This Year's Razzies." <i>Los Angeles Times</i>, March 5, 2006.</li>
+        <li>Wingfield, N. "Jobs offers unsolicited film review". <i>The Wall Street Journal</i>, April 15, 2005.</li>
+        <li>White House Press Briefing, April 15, 2005. Office of the Press Secretary.</li>
+        <li>Vary, A.B. "Jonathan Brandis on Razzies, Jobs, and Moving On." <i>Entertainment Weekly</i>, May 3, 2005.</li>
+        <li>King, G. <i>American Independent Cinema</i>. I.B. Tauris, 2005. pp. 211–214.</li>
+        <li>Phipps, K. "Inventory: The Decade's Most Spectacular Wide-Release Failures." <i>The A.V. Club</i>, January 18, 2011.</li>
+      </ol>
+    </div>
 
     </div>
+
+    <div class="catbox">
+      <b>Categories:</b>
+      <a class="wl" href="#">2005 films</a> &nbsp;·&nbsp;
+      <a class="wl" href="#">American thriller films</a> &nbsp;·&nbsp;
+      <a class="wl" href="#">Box office bombs</a> &nbsp;·&nbsp;
+      <a class="wl" href="#">Golden Raspberry Award for Worst Picture winners</a> &nbsp;·&nbsp;
+      <a class="wl" href="#">Films set in Los Angeles</a> &nbsp;·&nbsp;
+      <a class="wl" href="#">Apple Inc. in popular culture</a> &nbsp;·&nbsp;
+      <a class="wl" href="#">Alternate history</a> &nbsp;·&nbsp;
+      <a class="wl" href="#">Jonathan Brandis</a>
+    </div>
+
   </div>
-</div>`
+</div>`,
+	song: {
+      title: "Architecture And Morality",
+      artist: "Orchestral Manoeuvres In The Dark",
+      cover: "https://resources.tidal.com/images/042b8cdd/89c9/4358/9066/72140578b39e/320x320.jpg",
+      url: ["XA3KTY--20g", "7Kxpa72BwsE"]
+    }
   },
   {
     id: "clarklandrieu",
@@ -26563,7 +26597,13 @@ ul.plain li { margin: 3px 0; }
   </div>
 </footer>
 
-</div>`
+</div>`,
+	song: {
+      title: "Impressive Instant",
+      artist: "Madonna",
+      cover: "https://resources.tidal.com/images/0a7e368b/665a/4d05/a8b4/23b6072193e9/320x320.jpg",
+      url: ["bqw5Ki3XvUc", "oqqmRwcvsP4"]
+    }
   }
 ];
 
@@ -28037,6 +28077,7 @@ async function countyMapScreenHtml() {
 
     POLL.init();
 })();
+
 // This is for the recommended reading box. Specifically, it sets up
 // the styling for the tab system we have here. Taken from 2016ALOT
 (function () {
