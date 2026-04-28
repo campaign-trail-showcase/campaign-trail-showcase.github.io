@@ -10975,19 +10975,43 @@ cyoAdventure = function (a) {
 		updateFeedback(3366, "Your ability to fuck things up at a moment’s notice amazes me.");
 		updateFeedback(3368, "You don’t get it, you really don’t. Why can’t people understand it? Is the problem that Charlie Brown is too sad, or is the problem that Linus Van Pelt isn’t sad enough? Against his will, Roy writes down your words and by the next day, the school hallways are filled with flyers from so-called Brownites who appreciate your words of wisdom.");
 		updateFeedback(3381, "Roy, who has actually slept through that particular history teacher’s class all semester, entirely agrees with you. While a few of the more strategic kids in your camp groan that you just handed Linus the moral high ground, all Roy does is tell them to ‘take a chill pill.’");
-		updateFeedback(3383, "You feel like a massive hypocrite lecturing people about decency when you've spent the last two months slinging mud. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
         updateFeedback(3385, "‘Well, at least you’ve never been a buzzkill,’ Roy laughs as you both scramble out the side door before the janitor catches you. He tosses you a half-empty bag of chips as a reward once you hit the parking lot. You guess you’ve had worse speech coaches.");
 		updateFeedback(3386, "‘Damn, Chuck. Remind me never to get on your bad side,’ Roy mutters as you cut the mic. He’s laughing, but even he looks a little unnerved by how incredibly cold you sounded. It amazes a couple of students who had not seen the dark side of your campaign.");
 		updateFeedback(3387, "You click the microphone off, exhaustion written all over your face. Roy blinks, slightly out of his depth, though he seems genuinely surprised, and awkwardly offers you a sip of his Sprite®. You decline, but walk out into the empty hallway feeling a little less heavy.");
 		updateFeedback(3487, "You lie on the doghouse for a whopping six hours. Roy, who was supposed to cover for your absence at the town hall, apparently told the auditorium you got abducted by aliens or had a vision quest. Nobody believes him, but at least he tried. Kind of.");
 		updateFeedback(3338, "The truce takes effect immediately. Roy is noticeably bummed out when you tell him; he was really hoping someone would throw a punch by Friday. As the final week of the campaign is drained of venom, much to his disappointment, he wonders if there’s something else going on between you two.");
 		updateFeedback(12424, "Othmar stops drumming his fingers, and a bead of sweat forms on his temple. He may hate you, but he loves his pension more. Finally, he gives you a tight, furious nod and dismisses you. By the time you find Roy at his locker and tell him you just extorted the principal, he stares at you like you’re a rockstar. <i>His</i> rockstar.");
-		updateFeedback(3375, "The words crack in your throat, apologizing to him, but also to yourself, to Linus, to Patty, to Roy (wherever he is right now), and to the kid you once used to be. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
 		updateFeedback(12401, "Of course, Roy lets out a loud, obnoxious laugh as the broadcast ends. He’s eating this drama up like it’s prime-time television. Last time you saw him this happy was when you loaned him 200 bucks so he could visit his grandma in Peru. In the hallways, however, the silence of the student body is absolutely deafening.");
 		updateFeedback(12407, "Roy looks intensely disappointed, having tuned in hoping for a total meltdown. ‘This is… uh… a bit anti-climactic, don’t you think?’ And he sighs. But when you click the microphone off, you ignore him, feeling a massive weight lift off your chest. For the first time in weeks, you think, you can breathe.");
 
+		if (ruthlessness >= 3) { // if you're not at all clean
+            updateFeedback(3383, "You feel like a massive hypocrite lecturing people about decency when you've spent the last two months slinging mud. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
+			updateFeedback(3375, "The words crack in your throat, apologizing to him, but also to yourself, to Linus, to Patty, to Roy (wherever he is right now), and to the kid you once used to be. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+        }
+
 		questionSwapper(375, 430); // as Patty stepped down
 	}
+
+	// narrative adjustments in general
+
+	// clean-ish? campaign
+    if (ruthlessness < 3) {
+        const q391 = campaignTrail_temp.questions_json.find(q => q.pk === 391);
+        if (q391) {
+            q391.fields.description = "It’s Sunday morning. The campaign has ground you down to powder, to calcium dust, to whatever the hell is left of a person after two months of giving everything they have to the voters. Your internal polls miraculously show, despite everything, a dead heat, even if you find Pig-Pen’s data unreliable. You are scheduled for a town hall-style forum in the cafeteria at noon, where the school paper’s editorial board and a gym full of undecided voters are waiting for you to give them a reason. It’s a gray November morning, and as you climb on top of your old red doghouse, you lie on your back and wonder if you should really go.";
+        }
+
+        if (!window.isRoyInCharge) {
+            updateFeedback(3383, "You feel exhausted lecturing people about decency when you’ve spent the last two months trying to keep your head above water in this vicious environment, but Patty assures you, with a genuine smile, that the audience really resonated with your sincerity.");
+            updateFeedback(3375, "The words crack in your throat, as you thank him for being there for you, but also thank yourself, Linus, Patty, and the kid you used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft, low whine, nudging his wet nose under your hand, as he demands to be petted. You oblige, stroking his ears as the news anchors on the television announce that it’s going to be a long, drawn-out night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+        } else {
+            updateFeedback(3383, "You feel exhausted lecturing people about decency when you’ve spent the last two months trying to keep your head above water. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
+            updateFeedback(3375, "The words crack in your throat, thanking him, but also thanking yourself, Linus, Patty, Roy (wherever he is right now), and the kid you once used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+        }
+
+        updateFeedback(3374, "The TV keeps buzzing with the sounds of pundits arguing over a lot of things, but the noise fades into the background as you bury your face in his fur. He doesn’t judge you for the stress you've carried, or the speeches you gave, or the poems they laughed at. You pull him close, wrapping your arms around him, holding on to the last pure thing you have left from childhood, until your eyes grow heavy and you fall asleep to the sound of the rain against the glass.");
+        updateFeedback(3376, "You've tried to be good, even when it was impossibly hard to do so. And Snoopy knows that. He doesn’t care about the presidency, or the student council, or the chaos unfolding on the television screen; no, he just rests his paws on your lap, licking the back of your hand. You wrap your arms around him, pulling him up to your chest as the rain lashes against the windowpane. The 20th century dies on the broadcast in front of you as you hold your friend until the screen goes to static.");
+    }
 
 	// achievement unlocks
 	const ansSet = new Set(campaignTrail_temp.player_answers);
@@ -11527,31 +11551,31 @@ function calculateCliqueResults() {
             name: "Burnouts", pop: 120, baseShare: 0.35,
             support: typeof support_burnouts !== 'undefined' ? support_burnouts : 0,
             // burnouts love anti-establishment & Patty
-            calcCharlieMod: function() { return (this.support * 0.025) + (cur_anti * 0.015) + (cur_patty * 0.005); }
+            calcCharlieMod: function() { return (this.support * 0.035) + (cur_anti * 0.02) + (cur_patty * 0.01); }
         },
         {
             name: "Honors", pop: 85, baseShare: 0.60,
             support: typeof support_honors !== 'undefined' ? support_honors : 0,
             // honors hate anti-establishment; they like Linus slightly, but mostly stick to the rules
-            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.02) - (cur_linus * 0.005); }
+            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.025) - (cur_linus * 0.01); }
         },
         {
             name: "Jocks", pop: 150, baseShare: 0.30,
             support: typeof support_jocks !== 'undefined' ? support_jocks : 0,
             // jocks follow Patty's approval religiously
-            calcCharlieMod: function() { return (this.support * 0.06) + (cur_patty * 0.015) - (cur_cynicism * 0.01); }
+            calcCharlieMod: function() { return (this.support * 0.04) + (cur_patty * 0.025) - (cur_cynicism * 0.015); }
         },
         {
             name: "Arts", pop: 70, baseShare: 0.50,
             support: typeof support_arts !== 'undefined' ? support_arts : 0,
             // arts students vibe with cynicism but hate ruthlessness
-            calcCharlieMod: function() { return (this.support * 0.06) + (cur_cynicism * 0.01) - (cur_ruthless * 0.015); }
+            calcCharlieMod: function() { return (this.support * 0.05) + (cur_cynicism * 0.015) - (cur_ruthless * 0.02); }
         },
         {
             name: "Admin/Faculty", pop: 25, baseShare: 0.35,
             support: typeof support_admin !== 'undefined' ? support_admin : 0,
             // admin plummets with anti-establishment and ruthlessness. hard for charlie to do good here
-            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.03) - (cur_ruthless * 0.015); }
+            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.04) - (cur_ruthless * 0.02); }
         }
     ];
 
@@ -11605,26 +11629,86 @@ function calculateCliqueResults() {
     });
 
     // handle write-in distribution organically
-    let writeInListHTML = "";
+	let writeInListHTML = "";
     if (writeInTotal > 0) {
-        const possibleNames = [
-            "Peppermint Patty", "Pig-Pen", "Joe Cool", "Snoopy", "Marcie", "Schroeder", "Franklin", "Woodstock", "\"The Great Pumpkin\"",
-            "Michael Parenti", "Steve Jobs", "Ralph Nader", "Eugene Debs", "Karl Marx", "Friedrich Nietzsche", "Robert Rubin",
-            "Dewey Wilkerson", "Eric Cartman", "Giant Meteor", "The Guy from Next Friday", "Monica Lewinsky", "Bill Clinton",
-            "Usama bin Laden", "Britney Spears", "Batman", "None of the above", "Deez Nuts", "Mickey Mouse", "Goku"
-        ].sort(() => 0.5 - Math.random());
+        // higher weight = more likely to appear on the final list
+        const weightedNames = [
+            // high probability
+            { name: "Snoopy", weight: 40 },
+            { name: "Peppermint Patty", weight: 35 },
+            { name: "Pig-Pen", weight: 30 },
+            { name: "Joe Cool", weight: 25 },
+            { name: "Marcie", weight: 20 },
+            { name: "Schroeder", weight: 15 },
+            { name: "Franklin", weight: 15 },
+            { name: "\"The Great Pumpkin\"", weight: 25 },
+            { name: "None of the above", weight: 30 },
+            { name: "Mickey Mouse", weight: 20 },
+            { name: "Batman", weight: 15 },
+            { name: "Deez Nuts", weight: 15 },
+
+            // medium probability
+            { name: "Ralph Nader", weight: 10 },
+            { name: "George W. Bush", weight: 10 },
+            { name: "Al Gore", weight: 10 },
+            { name: "Bill Clinton", weight: 12 },
+            { name: "Britney Spears", weight: 12 },
+            { name: "Eminem", weight: 10 },
+            { name: "Tony Hawk", weight: 10 },
+            { name: "Stone Cold Steve Austin", weight: 10 },
+            { name: "The Rock", weight: 8 },
+            { name: "Homer Simpson", weight: 10 },
+            { name: "Eric Cartman", weight: 10 },
+            { name: "Goku", weight: 8 },
+
+            // low probability
+            { name: "Karl Marx", weight: 5 },
+            { name: "Eugene Debs", weight: 4 },
+            { name: "Michael Parenti", weight: 3 },
+            { name: "Friedrich Nietzsche", weight: 4 },
+            { name: "Steve Jobs", weight: 5 },
+            { name: "Robert Rubin", weight: 2 },
+            { name: "Dewey Wilkerson", weight: 3 },
+            { name: "Giant Meteor", weight: 5 },
+            { name: "Monica Lewinsky", weight: 5 },
+            { name: "Usama bin Laden", weight: 2 },
+            { name: "The Guy from Next Friday", weight: 3 },
+            { name: "Fred Durst", weight: 4 },
+            { name: "Kurt Cobain", weight: 4 },
+            { name: "Woodstock", weight: 5 }
+        ];
+
+        // do a weighted random selection without replacement
+        function getWeightedRandom(pool, count) {
+            let result = [];
+            let currentPool = [...pool];
+            for (let i = 0; i < count && currentPool.length > 0; i++) {
+                let totalWeight = currentPool.reduce((sum, item) => sum + item.weight, 0);
+                let random = Math.random() * totalWeight;
+                let cumulative = 0;
+                for (let j = 0; j < currentPool.length; j++) {
+                    cumulative += currentPool[j].weight;
+                    if (random <= cumulative) {
+                        result.push(currentPool[j].name);
+                        currentPool.splice(j, 1); // remove so we don't pick the same name twice
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
 
         // grab 4 to 8 random names from the pool
-        let numNames = Math.min(Math.floor(Math.random() * 5) + 4, possibleNames.length);
-        let selectedNames = possibleNames.slice(0, numNames);
+        let numNames = Math.min(Math.floor(Math.random() * 5) + 4, weightedNames.length);
+        let selectedNames = getWeightedRandom(weightedNames, numNames);
 
         // create an exponential distribution so 1 or 2 names get
 		// most of the write-ins, and the rest get 1-2 votes
-        let weights = selectedNames.map((_, i) => Math.pow(0.5, i) * (0.8 + Math.random() * 0.4));
-        let totalWeight = weights.reduce((sum, w) => sum + w, 0);
+        let weightsForVotes = selectedNames.map((_, i) => Math.pow(0.5, i) * (0.8 + Math.random() * 0.4));
+        let totalVoteWeight = weightsForVotes.reduce((sum, w) => sum + w, 0);
 
         let breakdown = selectedNames.map((name, i) => {
-            return { name: name, votes: Math.round((weights[i] / totalWeight) * writeInTotal) };
+            return { name: name, votes: Math.round((weightsForVotes[i] / totalVoteWeight) * writeInTotal) };
         });
 
         // correct rounding errors by adding/subtracting from the most popular write-in
