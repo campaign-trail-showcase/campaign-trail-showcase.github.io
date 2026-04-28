@@ -10942,9 +10942,9 @@ cyoAdventure = function (a) {
 	}
 
 	if (e.noCounter === 18) {
-		if (ruthlessness >= 5) {
+		if (ruthlessness >= 5 & linus_bond < 3) {
 			answerSwapper(3386, 12401, true);
-		} else if (linus_bond >= 3) {
+		} else if (ruthlessness < 5 && linus_bond >= 3) {
 			answerSwapper(3386, 12407, true);
 		}
 	}
@@ -22133,7 +22133,7 @@ const bonusSlides = [
 
   <div class="ib-sec-head">Synopsis</div>
   <div class="ib-synopsis-box">
-    <em>Described in its own program notes as "the best musical about the best Kennedy brother," The Dream Shall Never Die</em> follows Senator Edward M. Kennedy from the night of the 1980 Democratic National Convention through his first year in the White House, as he navigates the twin burdens of the presidency and the Kennedy legacy. Haunted — literally — by the spectral presences of his brothers Jack and Bobby, who appear throughout the show to counsel, contradict, and occasionally ridicule him, Ted must contend with the Iranian hostage crisis, a fractured Democratic Party, and the persistent suspicion that the office he has always wanted is the one thing that cannot give him what he is looking for. The show's second act, set during the first summer of the Kennedy administration, is largely a meditation on grief, institutional power, and what it means to be the last one standing. It has been described by <em>The New York Times</em> as "devastating" and by <em>The Post</em> as "an evening that earns its running time."
+    Described in its own program notes as "the best musical about the best Kennedy brother," <em>The Dream Shall Never Die</em> follows Senator Edward M. Kennedy from the night of the 1980 Democratic National Convention through his first year in the White House, as he navigates the twin burdens of the presidency and the Kennedy legacy. Haunted — literally — by the spectral presences of his brothers Jack and Bobby, who appear throughout the show to counsel, contradict, and occasionally ridicule him, Ted must contend with the Iranian hostage crisis, a fractured Democratic Party, and the persistent suspicion that the office he has always wanted is the one thing that cannot give him what he is looking for. The show's second act, set during the first summer of the Kennedy administration, is largely a meditation on grief, institutional power, and what it means to be the last one standing. It has been described by <em>The New York Times</em> as "devastating" and by <em>The Post</em> as "an evening that earns its running time."
   </div>
 
   <div class="ib-sec-head">Opening Night Cast <a href="#">View replacements →</a></div>
@@ -26830,6 +26830,15 @@ function finalizeRendering() {
 }
 
 // The county map feature
+function getCustomPreference(key, defaultVal) {
+    try {
+        const prefs = JSON.parse(localStorage.getItem('tml_custom_preferences')) || {};
+        return prefs.hasOwnProperty(key) ? prefs[key] : defaultVal;
+    } catch(e) {
+        return defaultVal;
+    }
+}
+
 // inject button into DOM
 function injectCountyMapButton() {
     if (!document.getElementById("county_map_button")) {
@@ -26841,6 +26850,178 @@ function injectCountyMapButton() {
 
         const ref = document.getElementById("final_election_map_button");
         if (ref) ref.parentNode.insertBefore(btn, ref.nextSibling);
+    }
+}
+
+// shared HTML chunks
+const MAP_CONTROLS_HTML = `
+    <div id="map_controls" style="width: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 10px; font-family: Arial, sans-serif; font-size: 14px; background: rgba(0,0,0,0.08); padding: 10px; border-radius: 6px; color: #000;">
+       <label style="cursor:pointer;"><input type="radio" name="map_mode" value="choropleth" checked> Margin</label>
+       <label style="cursor:pointer;"><input type="radio" name="map_mode" value="voteshare"> Vote Share</label>
+       <label style="cursor:pointer;"><input type="radio" name="map_mode" value="binary"> Solid Colors</label>
+       <label style="cursor:pointer;" title="Bivariate palette based on total votes to highlight populous areas"><input type="radio" name="map_mode" value="density"> Margin + Density</label>
+       <label style="cursor:pointer;"><input type="radio" name="map_mode" value="proportional"> Proportional</label>
+       <label style="cursor:pointer; font-weight:bold; color:#d9381e;" title="Paint your own states!"><input type="radio" name="map_mode" value="redraw"> Redraw the States</label>
+    </div>
+    <p id="county_map_status" style="margin-top: 0; text-align:center;"><i>Loading map data (this may take a moment)...</i></p>
+`;
+
+function getMapInstructionsHtml(mode) {
+    let baseZoomText = mode === 'seamless'
+        ? "<i>Scroll to zoom, click and drag to pan. Scroll all the way out to return to State Map.</i>"
+        : "<i>Scroll to zoom, click and drag to pan.</i>";
+
+    return `
+        <div id="redraw_instructions" style="margin-top:5px; font-size:12px; text-align:center; display:none; font-weight:bold; color:#0056b3;">
+            Right-Click & Drag to paint. Click to paint county, Shift+Click for state. Drag map to pan.
+        </div>
+        <div id="normal_instructions" style="margin-top:5px; font-size:12px; text-align:center;">
+            ${baseZoomText}
+        </div>
+    `;
+}
+
+const REDRAW_PANEL_HTML = `
+    <div id="redraw_panel" style="display:none; position:absolute; top:10px; right:10px; background:rgba(255,255,255,0.95); border:2px solid #333; border-radius:6px; width:280px; max-height:330px; flex-direction:column; box-shadow: 0 4px 8px rgba(0,0,0,0.4); z-index:10; font-family:sans-serif; text-align:left;">
+        <div style="padding:10px; border-bottom:1px solid #ccc; background:#f8f9fa; border-radius:4px 4px 0 0;">
+            <h4 style="margin:0 0 4px 0; color:#000; display:flex; justify-content:space-between;">
+                <span>🖍️ Redraw the States</span>
+                <span id="rs_ev_tracker" style="font-size:12px; font-weight:normal; color:#0056b3;">0 / 538 EV</span>
+            </h4>
+            <div style="display:flex; gap:5px; flex-wrap:wrap; font-size:11px; margin-top:6px;">
+                <button id="rs_btn_new" style="flex:1; cursor:pointer;">+ New</button>
+                <button id="rs_btn_existing" style="flex:1; cursor:pointer;" title="Load actual states">Load US</button>
+                <button id="rs_btn_random" style="flex:1; cursor:pointer;" title="Generate random states">Randomize</button>
+                <button id="rs_btn_clear" style="flex:1; cursor:pointer; color:red;">Clear</button>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; margin-top:8px; color:#555;">
+                <div style="display:flex; gap:6px;">
+                    <label style="cursor:pointer;"><input type="checkbox" id="rs_toggle_labels" checked> labels</label>
+                    <label style="cursor:pointer;"><input type="checkbox" id="rs_toggle_counties"> counties</label>
+                </div>
+                <select id="rs_sort_mode" style="font-size:10px; border:1px solid #ccc; border-radius:3px; padding:1px;">
+                    <option value="id">sort: id</option>
+                    <option value="name">sort: a-z</option>
+                    <option value="ev">sort: ev</option>
+                </select>
+            </div>
+        </div>
+        <div id="redraw_list" style="flex:1; overflow-y:auto; padding:5px; background:#fff;"></div>
+        <div id="rs_results_panel" style="border-top:1px solid #ccc; padding:6px 8px; background:#f8f9fa; font-size:11px; font-family:sans-serif; display:none;"></div>
+    </div>
+`;
+
+// inject into election map screen
+function injectCountyMapInPlace(mode) {
+    const mapContainer = document.getElementById("map_container");
+    if (!mapContainer || document.getElementById("county_map_wrapper")) return;
+
+    let toggleDiv, btnState, btnCounty;
+
+    if (mode === 'together') {
+        toggleDiv = document.createElement("div");
+        toggleDiv.style.cssText = "display: flex; justify-content: center; gap: 10px; margin-bottom: 10px;";
+        toggleDiv.innerHTML = `
+            <button class="final_menu_button" id="btn_show_state_map" style="background:#ddd; color:#000;">State Map</button>
+            <button class="final_menu_button" id="btn_show_county_map">County Map</button>
+        `;
+        mapContainer.parentNode.insertBefore(toggleDiv, mapContainer);
+        btnState = toggleDiv.querySelector("#btn_show_state_map");
+        btnCounty = toggleDiv.querySelector("#btn_show_county_map");
+    }
+
+    const originalChildren = Array.from(mapContainer.children);
+
+    const countySvgContainer = document.createElement("div");
+    countySvgContainer.id = "county_map_wrapper";
+    countySvgContainer.style.display = "none";
+    countySvgContainer.style.width = "100%";
+    countySvgContainer.style.height = "100%";
+    countySvgContainer.style.position = "relative";
+    countySvgContainer.style.background = "#e2e6ea";
+    countySvgContainer.style.overflow = "hidden";
+    countySvgContainer.innerHTML = `
+        <svg id="county_svg" viewBox="0 0 975 610" style="width: 100%; height: 100%; cursor: grab;"></svg>
+        ${REDRAW_PANEL_HTML}
+    `;
+    mapContainer.appendChild(countySvgContainer);
+
+    const controlsDiv = document.createElement("div");
+    controlsDiv.id = "county_map_bottom_controls";
+    controlsDiv.style.display = "none";
+    controlsDiv.style.marginTop = "10px";
+    controlsDiv.innerHTML = MAP_CONTROLS_HTML + getMapInstructionsHtml(mode);
+
+    const mapFooter = document.getElementById("map_footer");
+    if (mapFooter) {
+        mapFooter.parentNode.insertBefore(controlsDiv, mapFooter);
+    } else {
+        mapContainer.parentNode.insertBefore(controlsDiv, mapContainer.nextSibling);
+    }
+
+    let countyLoaded = false;
+
+    window._switchToStateMap = function() {
+        originalChildren.forEach(c => c.style.display = '');
+        countySvgContainer.style.display = "none";
+        controlsDiv.style.display = "none";
+        if (mode === 'together') {
+            btnState.style.background = "#ddd";
+            btnState.style.color = "#000";
+            btnCounty.style.background = "";
+            btnCounty.style.color = "";
+        }
+    };
+
+    window._switchToCountyMap = function(zoomX, zoomY) {
+        originalChildren.forEach(c => c.style.display = 'none');
+        countySvgContainer.style.display = "block";
+        controlsDiv.style.display = "block";
+        if (mode === 'together') {
+            btnCounty.style.background = "#ddd";
+            btnCounty.style.color = "#000";
+            btnState.style.background = "";
+            btnState.style.color = "";
+        }
+
+        const handleZoom = () => {
+            if (mode === 'seamless' && zoomX !== undefined && zoomY !== undefined && window._d3zoom) {
+                const k = 2.5;
+                const tx = zoomX - zoomX * k;
+                const ty = zoomY - zoomY * k;
+                d3.select("#county_svg").transition().duration(350).call(
+                    window._d3zoom.transform,
+                    d3.zoomIdentity.translate(tx, ty).scale(k)
+                );
+            }
+        };
+
+        if (!countyLoaded) {
+            countyLoaded = true;
+            loadAndDrawCountyMap(mode).then(handleZoom);
+        } else {
+            handleZoom();
+        }
+    };
+
+    if (mode === 'together') {
+        btnState.onclick = window._switchToStateMap;
+        btnCounty.onclick = () => window._switchToCountyMap();
+    } else if (mode === 'seamless') {
+        mapContainer.addEventListener("wheel", (e) => {
+            if (countySvgContainer.style.display === "block") return;
+            if (e.deltaY < 0) {
+                e.preventDefault();
+                const rect = mapContainer.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+
+                const rx = (mouseX / rect.width) * 975;
+                const ry = (mouseY / rect.height) * 610;
+
+                window._switchToCountyMap(rx, ry);
+            }
+        }, {passive: false, capture: true});
     }
 }
 
@@ -26858,16 +27039,23 @@ screensToWrap.forEach(fnName => {
         const originalFn = window[fnName];
         window[fnName] = function(...args) {
             originalFn.apply(this, args);
-            setTimeout(injectCountyMapButton, 10);
+
+            const mode = getCustomPreference('countyZoom', 'separate');
+            if (mode === 'separate') {
+                setTimeout(injectCountyMapButton, 10);
+            } else if (mode === 'together' || mode === 'seamless') {
+                // only attach if we are exactly on the map screen
+                if (fnName === 'finalMapScreenHtml') {
+                    setTimeout(() => injectCountyMapInPlace(mode), 10);
+                }
+            }
         };
         window[fnName].patchedForCountyMap = true;
     }
 });
 
-// the actual county map rendering function
-const _countyMapCache = { data: null, us: null };
-
-async function countyMapScreenHtml() {
+// setup separate screen mode
+function countyMapScreenHtml() {
     const gameHeader = document.querySelector(".game_header");
     const headerHtml = gameHeader ? gameHeader.outerHTML : `<div class="game_header">${window.corrr}</div>`;
 
@@ -26876,55 +27064,14 @@ async function countyMapScreenHtml() {
         <div id="main_content_area" style="padding-bottom: 20px; position:relative;">
             <h3 style="margin-bottom: 5px; color: #000;">SIMULATED COUNTY RESULTS</h3>
 
-            <div id="map_controls" style="width: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 10px; font-family: Arial, sans-serif; font-size: 14px; background: rgba(0,0,0,0.08); padding: 10px; border-radius: 6px; color: #000;">
-               <label style="cursor:pointer;"><input type="radio" name="map_mode" value="choropleth" checked> Margin</label>
-			   <label style="cursor:pointer;"><input type="radio" name="map_mode" value="voteshare"> Vote Share</label>
-               <label style="cursor:pointer;"><input type="radio" name="map_mode" value="binary"> Solid Colors</label>
-               <label style="cursor:pointer;" title="Bivariate palette based on total votes to highlight populous areas"><input type="radio" name="map_mode" value="density"> Margin + Density</label>
-               <label style="cursor:pointer;"><input type="radio" name="map_mode" value="proportional"> Proportional</label>
-               <label style="cursor:pointer; font-weight:bold; color:#d9381e;" title="Paint your own states!"><input type="radio" name="map_mode" value="redraw"> Redraw the States</label>
-            </div>
-
-            <p id="county_map_status" style="margin-top: 0;"><i>Loading map data (this may take a moment)...</i></p>
+            ${MAP_CONTROLS_HTML}
 
             <div id="county_map_container" style="position:relative; width:100%; height:350px; display:flex; justify-content:center; align-items:center; background:#e2e6ea; border:1px solid #ccc; overflow:hidden;">
                <svg id="county_svg" viewBox="0 0 975 610" style="width: 100%; height: 100%; cursor: grab;"></svg>
-
-               <div id="redraw_panel" style="display:none; position:absolute; top:10px; right:10px; background:rgba(255,255,255,0.95); border:2px solid #333; border-radius:6px; width:280px; max-height:330px; flex-direction:column; box-shadow: 0 4px 8px rgba(0,0,0,0.4); z-index:10; font-family:sans-serif; text-align:left;">
-                   <div style="padding:10px; border-bottom:1px solid #ccc; background:#f8f9fa; border-radius:4px 4px 0 0;">
-                       <h4 style="margin:0 0 4px 0; color:#000; display:flex; justify-content:space-between;">
-                           <span>🖍️ Redraw the States</span>
-                           <span id="rs_ev_tracker" style="font-size:12px; font-weight:normal; color:#0056b3;">0 / 538 EV</span>
-                       </h4>
-                       <div style="display:flex; gap:5px; flex-wrap:wrap; font-size:11px; margin-top:6px;">
-                           <button id="rs_btn_new" style="flex:1; cursor:pointer;">+ New</button>
-                           <button id="rs_btn_existing" style="flex:1; cursor:pointer;" title="Load actual states">Load US</button>
-                           <button id="rs_btn_random" style="flex:1; cursor:pointer;" title="Generate random states">Randomize</button>
-                           <button id="rs_btn_clear" style="flex:1; cursor:pointer; color:red;">Clear</button>
-                       </div>
-                       <div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; margin-top:8px; color:#555;">
-                           <div style="display:flex; gap:6px;">
-                               <label style="cursor:pointer;"><input type="checkbox" id="rs_toggle_labels" checked> labels</label>
-                               <label style="cursor:pointer;"><input type="checkbox" id="rs_toggle_counties"> counties</label>
-                           </div>
-                           <select id="rs_sort_mode" style="font-size:10px; border:1px solid #ccc; border-radius:3px; padding:1px;">
-                               <option value="id">sort: id</option>
-                               <option value="name">sort: a-z</option>
-                               <option value="ev">sort: ev</option>
-                           </select>
-                       </div>
-                   </div>
-                   <div id="redraw_list" style="flex:1; overflow-y:auto; padding:5px; background:#fff;"></div>
-				   <div id="rs_results_panel" style="border-top:1px solid #ccc; padding:6px 8px; background:#f8f9fa; font-size:11px; font-family:sans-serif; display:none;"></div>
-               </div>
+               ${REDRAW_PANEL_HTML}
             </div>
 
-            <div id="redraw_instructions" style="margin-top:5px; font-size:12px; text-align:center; display:none; font-weight:bold; color:#0056b3;">
-                Right-Click & Drag to paint. Click to paint county, Shift+Click for state. Drag map to pan.
-            </div>
-            <div id="normal_instructions" style="margin-top:5px; font-size:12px; text-align:center;">
-                <i>Scroll to zoom, click and drag to pan.</i>
-            </div>
+            ${getMapInstructionsHtml('separate')}
         </div>
         <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
         <button class="final_menu_button" id="final_election_map_button">Election Map</button>
@@ -26940,14 +27087,25 @@ async function countyMapScreenHtml() {
     document.getElementById("state_results_button").onclick = window.stateResultsHtml;
     document.getElementById("overall_details_button").onclick = window.overallDetailsHtml;
     document.getElementById("play_again_button").onclick = window.beginNewGameHtml;
+    if(document.getElementById("recommended_reading_button") && window.furtherReadingHtml) {
+        document.getElementById("recommended_reading_button").onclick = window.furtherReadingHtml;
+    }
 
+    loadAndDrawCountyMap('separate');
+}
+
+// the actual county map rendering function
+const _countyMapCache = { data: null, us: null };
+
+async function loadAndDrawCountyMap(mode) {
     const scriptsToLoad = [];
     if (!window.d3) scriptsToLoad.push($.getScript("https://d3js.org/d3.v7.min.js"));
     if (!window.topojson) scriptsToLoad.push($.getScript("https://d3js.org/topojson.v3.min.js"));
     if (scriptsToLoad.length > 0) await Promise.all(scriptsToLoad);
 
     try {
-		let countyResultsRaw, us;
+        let countyResultsRaw, us;
+        const electionData = window.campaignTrail_temp || window.e;
 
         if (!_countyMapCache.data || !_countyMapCache.us) {
             const countyDataUrl = "https://raw.githubusercontent.com/StrawberryMaster/StrawberryMaster.github.io/refs/heads/master/scripts/county_results_2000.min.json";
@@ -27043,20 +27201,20 @@ async function countyMapScreenHtml() {
         }
 
         const candsInfo = PROPS.CANDIDATES;
-        const activeCandidates = e.final_overall_results.map(r => r.candidate);
-        const topCands = [...e.final_overall_results].sort((a,b) => b.popular_votes - a.popular_votes);
+        const activeCandidates = electionData.final_overall_results.map(r => r.candidate);
+        const topCands = [...electionData.final_overall_results].sort((a,b) => b.popular_votes - a.popular_votes);
         if (topCands.length < 2) throw new Error("Could not find two main candidates.");
 
         let demCandId = topCands[0].candidate, repCandId = topCands[1].candidate;
 
-        const stateNY = e.final_state_results.find(s => s.abbr === "NY");
-        const stateTX = e.final_state_results.find(s => s.abbr === "TX");
+        const stateNY = electionData.final_state_results.find(s => s.abbr === "NY");
+        const stateTX = electionData.final_state_results.find(s => s.abbr === "TX");
         if (stateNY && stateTX && (stateTX.result.find(r => r.candidate === demCandId)?.percent || 0) > (stateNY.result.find(r => r.candidate === demCandId)?.percent || 0)) {
             repCandId = topCands[0].candidate; demCandId = topCands[1].candidate;
         }
 
         const stateSwings = {};
-        e.final_state_results.forEach(f => {
+        electionData.final_state_results.forEach(f => {
             const base = stateBase[f.abbr];
             const swings = {};
             f.result.forEach(r => {
@@ -27219,7 +27377,8 @@ async function countyMapScreenHtml() {
 			}
 			Object.values(customStates).forEach(s => { allocatedEVs += s.ev; });
 
-			document.getElementById("rs_ev_tracker").innerText = `${allocatedEVs} / 538 EV`;
+			const evTracker = document.getElementById("rs_ev_tracker");
+			if (evTracker) evTracker.innerText = `${allocatedEVs} / 538 EV`;
 
 			// labels
 			const stateCentroids = {};
@@ -27274,6 +27433,7 @@ async function countyMapScreenHtml() {
 
 		function renderRSPanel() {
 			const list = document.getElementById("redraw_list");
+            if (!list) return;
 			const existing = new Map([...list.querySelectorAll("[data-rs-id]")].map(el => [el.dataset.rsId, el]));
 
             const sortMode = document.getElementById("rs_sort_mode") ? document.getElementById("rs_sort_mode").value : "id";
@@ -27384,18 +27544,25 @@ async function countyMapScreenHtml() {
             renderRSPanel();
         };
 
-        document.getElementById("redraw_list").addEventListener("click", e => {
-            const delBtn = e.target.closest("[data-rs-del]");
-            if (delBtn) {
-                e.stopPropagation();
-                deleteRS(delBtn.dataset.rsDel);
-            }
-        });
+        const redrawList = document.getElementById("redraw_list");
+        if(redrawList) {
+            redrawList.addEventListener("click", e => {
+                const delBtn = e.target.closest("[data-rs-del]");
+                if (delBtn) {
+                    e.stopPropagation();
+                    deleteRS(delBtn.dataset.rsDel);
+                }
+            });
+        }
 
-        document.getElementById("rs_btn_new").onclick = () => { const id = "rs_" + rsCounter++; customStates[id] = { id, name: "State " + (rsCounter-1), tVotes:0, cands:{}, ev:0, color:"transparent", marginText:"", winName:"" }; activeRS = id; renderRSPanel(); };
-        document.getElementById("rs_btn_clear").onclick = () => { customStates = {}; countyToCustom = {}; activeRS = null; refreshMapFills(); renderRSPanel(); };
+        const btnNew = document.getElementById("rs_btn_new");
+        if(btnNew) btnNew.onclick = () => { const id = "rs_" + rsCounter++; customStates[id] = { id, name: "State " + (rsCounter-1), tVotes:0, cands:{}, ev:0, color:"transparent", marginText:"", winName:"" }; activeRS = id; renderRSPanel(); };
 
-        document.getElementById("rs_btn_existing").onclick = () => {
+        const btnClear = document.getElementById("rs_btn_clear");
+        if(btnClear) btnClear.onclick = () => { customStates = {}; countyToCustom = {}; activeRS = null; refreshMapFills(); renderRSPanel(); };
+
+        const btnExisting = document.getElementById("rs_btn_existing");
+        if(btnExisting) btnExisting.onclick = () => {
             customStates = {}; countyToCustom = {};
             usCounties.forEach(c => {
                 if (!c.proj) return;
@@ -27406,7 +27573,8 @@ async function countyMapScreenHtml() {
             activeRS = Object.keys(customStates)[0]; recalcAllRS(); refreshMapFills(); renderRSPanel();
         };
 
-        document.getElementById("rs_btn_random").onclick = () => {
+        const btnRandom = document.getElementById("rs_btn_random");
+        if(btnRandom) btnRandom.onclick = () => {
 			customStates = {}; countyToCustom = {};
 
 			const validCounties = usCounties.filter(c => c.proj);
@@ -27460,16 +27628,21 @@ async function countyMapScreenHtml() {
 
 			activeRS = Object.keys(customStates)[0];
 			recalcAllRS(); refreshMapFills(); renderRSPanel();
-		};
+        };
 
         // attach newly added UI listeners
-        document.getElementById("rs_toggle_labels").addEventListener("change", (e) => {
+        const toggleLabels = document.getElementById("rs_toggle_labels");
+        if(toggleLabels) toggleLabels.addEventListener("change", (e) => {
             customLabelsG.style("display", e.target.checked ? "block" : "none");
         });
-        document.getElementById("rs_toggle_counties").addEventListener("change", () => {
+
+        const toggleCounties = document.getElementById("rs_toggle_counties");
+        if(toggleCounties) toggleCounties.addEventListener("change", () => {
             refreshMapFills();
         });
-        document.getElementById("rs_sort_mode").addEventListener("change", () => {
+
+        const sortModeEl = document.getElementById("rs_sort_mode");
+        if(sortModeEl) sortModeEl.addEventListener("change", () => {
             renderRSPanel();
         });
 
@@ -27522,7 +27695,7 @@ async function countyMapScreenHtml() {
                 if (isPainting && currentMode === "redraw" && activeRS) {
                     countyToCustom[d.fips] = activeRS;
                     this.setAttribute("fill", activePaintColor);
-                    if (!document.getElementById("rs_toggle_counties").checked) {
+                    if (document.getElementById("rs_toggle_counties") && !document.getElementById("rs_toggle_counties").checked) {
                         this.setAttribute("stroke", activePaintColor);
                     }
                 }
@@ -27545,7 +27718,7 @@ async function countyMapScreenHtml() {
                     isPainting = true;
                     countyToCustom[d.fips] = activeRS;
                     this.setAttribute("fill", activePaintColor);
-                    if (!document.getElementById("rs_toggle_counties").checked) {
+                    if (document.getElementById("rs_toggle_counties") && !document.getElementById("rs_toggle_counties").checked) {
                         this.setAttribute("stroke", activePaintColor);
                     }
                 }
@@ -27580,22 +27753,25 @@ async function countyMapScreenHtml() {
         const customBordersPath = g.append("g").attr("class", "custom-borders-layer").append("path").attr("id", "custom-borders-path").attr("fill", "none").attr("stroke", "#000").attr("stroke-linejoin", "round").attr("vector-effect", "non-scaling-stroke").attr("stroke-width", 1.2).style("pointer-events", "none").style("display", "none");
 		const customLabelsG = g.append("g").attr("class", "custom-labels-layer").style("pointer-events", "none");
 
-        function setMapMode(mode) {
-            currentMode = mode;
-            const isRedraw = mode === "redraw";
-            const isProp = mode === "proportional";
+        function setMapMode(uiMode) {
+            currentMode = uiMode;
+            const isRedraw = uiMode === "redraw";
+            const isProp = uiMode === "proportional";
 
-            document.getElementById("redraw_panel").style.display = isRedraw ? "flex" : "none";
-            document.getElementById("redraw_instructions").style.display = isRedraw ? "block" : "none";
-            document.getElementById("normal_instructions").style.display = isRedraw ? "none" : "block";
+            const redrawPanel = document.getElementById("redraw_panel");
+            const normalInst = document.getElementById("normal_instructions");
+            const redrawInst = document.getElementById("redraw_instructions");
 
-            // toggle border visibility
+            if (redrawPanel) redrawPanel.style.display = isRedraw ? "flex" : "none";
+            if (redrawInst) redrawInst.style.display = isRedraw ? "block" : "none";
+            if (normalInst) normalInst.style.display = isRedraw ? "none" : "block";
+
             realStateBorders.style("display", isRedraw ? "none" : "block");
 
             if (isRedraw) {
                 const labelsChecked = document.getElementById("rs_toggle_labels") ? document.getElementById("rs_toggle_labels").checked : true;
                 customLabelsG.style("display", labelsChecked ? "block" : "none");
-                if (Object.keys(customStates).length === 0) document.getElementById("rs_btn_new").click();
+                if (Object.keys(customStates).length === 0 && document.getElementById("rs_btn_new")) document.getElementById("rs_btn_new").click();
                 recalcAllRS(); renderRSPanel();
             } else {
                 customLabelsG.style("display", "none");
@@ -27607,7 +27783,12 @@ async function countyMapScreenHtml() {
             else circles.transition().duration(400).attr("r", 0);
         }
 
-        document.getElementById("map_controls").addEventListener("change", (e) => { if (e.target.name === "map_mode") setMapMode(e.target.value); });
+        const mapControls = document.getElementById("map_controls");
+        if(mapControls) {
+            mapControls.addEventListener("change", (e) => {
+                if (e.target.name === "map_mode") setMapMode(e.target.value);
+            });
+        }
 
 		let lastZoomK = 1;
         let zoomTicking = false;
@@ -27615,6 +27796,18 @@ async function countyMapScreenHtml() {
         const zoom = d3.zoom().scaleExtent([1, 15])
             .filter(event => { if (currentMode === "redraw" && event.type === "mousedown") return event.button === 0; return !event.button; })
             .on("zoom", (event) => {
+
+                // if we zoom down enough and scroll out, switch maps smoothly
+				if (mode === 'seamless' && event.transform.k <= 1.05 && event.sourceEvent && event.sourceEvent.type === 'wheel' && event.sourceEvent.deltaY > 0) {
+					if (window._switchToStateMap) {
+						window._switchToStateMap();
+						setTimeout(() => {
+							d3.select("#county_svg").call(zoom.transform, d3.zoomIdentity);
+						}, 0);
+						return;
+					}
+				}
+
                 currentZoomK = event.transform.k;
                 g.attr("transform", event.transform);
 
@@ -27635,18 +27828,20 @@ async function countyMapScreenHtml() {
                 }
             });
 
+        window._d3zoom = zoom;
         svg.call(zoom);
 
-        document.getElementById("county_map_status").style.display = "none";
+        const statusLabel = document.getElementById("county_map_status");
+        if (statusLabel) statusLabel.style.display = "none";
         setMapMode("choropleth");
 
     } catch (err) {
         console.error(err);
-        document.getElementById("county_map_status").innerHTML = "<span style='color:red'>Error processing map data. Check console.</span>";
+        const statusNode = document.getElementById("county_map_status");
+        if (statusNode) statusNode.innerHTML = "<span style='color:red'>Error processing map data. Check console.</span>";
     }
 }
 
-// The polling graph feature
 // The polling graph feature
 (function() {
     if (window.pollgraph) return;
