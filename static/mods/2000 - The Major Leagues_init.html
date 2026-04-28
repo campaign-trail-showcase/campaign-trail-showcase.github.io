@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.0.3
+* @version: 1.0.4
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -126,7 +126,7 @@ const recommendedReadingContent = `
         </ul>
         <h4>Special thanks to…</h4>
         <ul class="thanks-list">
-			<li>Our playtesters, including, but not limited to: alleightbits, CitySlicker, Confused, EmpiresUnited, Firetrucker74, glep, HMV, IngJon, Laura (Giant Rat), mumkey, Paul David Wellstone, routevenus, shushue, TheBatStory, timberwolf857, Vicx, and other people I probably forgot</li>
+			<li>Our playtesters, including, but not limited to: ahhklt, alleightbits, CitySlicker, Confused, EmpiresUnited, Firetrucker74, glep, HMV, igorsky, IngJon, Laura (Giant Rat), mumkey, Paul David Wellstone, q7, routevenus, shushue, Simple Peasant 1, Stan, TheBatStory, The Numbskull, timberwolf857, Vicx, Zach, and other people I probably forgot;</li>
             <li>Charles Schulz, for creating all these funny little characters;</li>
             <li><i>astrohuncho</i> — for his <a href="https://hunchonautilus.github.io/nct-further-reading-wizard/" target="_blank" rel="noopener">Further Reading Wizard</a>, which I have used for testing this mod’s endings, and also this message which you are reading right now</li>
             <li><i>Jet</i> — for his excellent mod tool and for being fine with my fork of it, which I used for the making of this mod</li>
@@ -3706,6 +3706,19 @@ window.a = function(e) {
 			{ value: 'newonly', text: 'Only when unlocked' }
 		],
         default: 'always'
+      },
+	  {
+        id: 'countymap_position',
+        text: "County map position",
+        desc: "Controls whether the county map feature should be in a separate tab or within the Election Results tab.",
+        flag: 'countyZoom',
+        type: 'select',
+		options: [
+			{ value: 'separate', text: 'In a separate tab' },
+			{ value: 'together', text: 'Within the Election Results map' },
+			{ value: 'seamless', text: 'Just seamlessly zoom in' }
+		],
+        default: 'separate'
       },
       {
         id: 'dynamic_en',
