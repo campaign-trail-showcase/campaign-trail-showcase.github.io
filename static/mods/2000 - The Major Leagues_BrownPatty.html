@@ -10957,6 +10957,10 @@ cyoAdventure = function (a) {
 		campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy_advisor2.png";
 
 		CENTER_IMAGE_URL = "https://i.pinimg.com/1200x/4b/38/7d/4b387d964d5502f237e4951befc19adb.jpg";
+	}
+
+	if (window.isRoyInCharge) {
+		questionSwapper(375, 430); // as Patty stepped down
 
 		// shameless rewrites to fit in Roy
         const q363 = campaignTrail_temp.questions_json.find(q => q.pk === 363);
@@ -10985,11 +10989,9 @@ cyoAdventure = function (a) {
 		updateFeedback(12407, "Roy looks intensely disappointed, having tuned in hoping for a total meltdown. ‘This is… uh… a bit anti-climactic, don’t you think?’ And he sighs. But when you click the microphone off, you ignore him, feeling a massive weight lift off your chest. For the first time in weeks, you think, you can breathe.");
 
 		if (ruthlessness >= 3) { // if you're not at all clean
-            updateFeedback(3383, "You feel like a massive hypocrite lecturing people about decency when you've spent the last two months slinging mud. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
+            updateFeedback(3383, "You feel like a massive hypocrite lecturing people about decency when you’ve spent the last two months slinging mud. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
 			updateFeedback(3375, "The words crack in your throat, apologizing to him, but also to yourself, to Linus, to Patty, to Roy (wherever he is right now), and to the kid you once used to be. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
         }
-
-		questionSwapper(375, 430); // as Patty stepped down
 	}
 
 	// narrative adjustments in general
@@ -11009,8 +11011,8 @@ cyoAdventure = function (a) {
             updateFeedback(3375, "The words crack in your throat, thanking him, but also thanking yourself, Linus, Patty, Roy (wherever he is right now), and the kid you once used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
         }
 
-        updateFeedback(3374, "The TV keeps buzzing with the sounds of pundits arguing over a lot of things, but the noise fades into the background as you bury your face in his fur. He doesn’t judge you for the stress you've carried, or the speeches you gave, or the poems they laughed at. You pull him close, wrapping your arms around him, holding on to the last pure thing you have left from childhood, until your eyes grow heavy and you fall asleep to the sound of the rain against the glass.");
-        updateFeedback(3376, "You've tried to be good, even when it was impossibly hard to do so. And Snoopy knows that. He doesn’t care about the presidency, or the student council, or the chaos unfolding on the television screen; no, he just rests his paws on your lap, licking the back of your hand. You wrap your arms around him, pulling him up to your chest as the rain lashes against the windowpane. The 20th century dies on the broadcast in front of you as you hold your friend until the screen goes to static.");
+        updateFeedback(3374, "The TV keeps buzzing with the sounds of pundits arguing over a lot of things, but the noise fades into the background as you bury your face in his fur. He doesn’t judge you for the stress you’ve carried, or the speeches you gave, or the poems they laughed at. You pull him close, wrapping your arms around him, holding on to the last pure thing you have left from childhood, until your eyes grow heavy and you fall asleep to the sound of the rain against the glass.");
+        updateFeedback(3376, "You’ve tried to be good, even when it was impossibly hard to do so. And Snoopy knows that. He doesn’t care about the presidency, or the student council, or the chaos unfolding on the television screen; no, he just rests his paws on your lap, licking the back of your hand. You wrap your arms around him, pulling him up to your chest as the rain lashes against the windowpane. The 20th century dies on the broadcast in front of you as you hold your friend until the screen goes to static.");
     }
 
 	// achievement unlocks
@@ -11289,7 +11291,7 @@ cyoAdventure = function (a) {
       {
         getValue: () => patty_approval,
         tiers: [
-          [-1, roy ? `Patty is ${bold("genuinely horrified", "#ef4444")} by what Charlie's campaign became.` : `Patty thinks Charlie Brown is a ${bold("spineless loser", "#ef4444")}.`],
+          [-1, roy ? `Patty is ${bold("genuinely horrified", "#ef4444")} by what Charlie’s campaign became.` : `Patty thinks Charlie Brown is a ${bold("spineless loser", "#ef4444")}.`],
           [0,  roy ? `Patty is ${bold("glad she jumped off", "#d97706")} this sinking ship.` : `Patty thinks Charlie Brown is a ${bold("lost cause", "#f97316")}.`],
           [1,  roy ? `Patty is watching from afar with ${bold("mixed feelings", "#ca8a04")}.` : `Patty finds Charlie Brown ${bold("frustrating", "#ca8a04")}.`],
           [4,  roy ? `Patty admits Charlie is doing ${bold("okay without her", "#10b981")}.` : `Patty is ${bold("surprisingly satisfied", "#22c55e")} with the Charlie Brown campaign.`],
@@ -11306,7 +11308,7 @@ cyoAdventure = function (a) {
     "Honors Kids": ["Plebeian", "Waitlisted", "Acceptable", "Valedictorian"],
     "The Jocks": ["Waterboy", "Benchwarmer", "Varsity", "Quarterback"],
     "Arts & Theatre": ["Philistine", "Understudy", "Leading Role", "Auteur"],
-    "Administration": ["Expelled", "Detention", "Hall Monitor", "Principal's Pet"]
+    "Administration": ["Expelled", "Detention", "Hall Monitor", "Principal’s Pet"]
   };
 
   function getFactionStatus(label, value) {
@@ -11551,31 +11553,31 @@ function calculateCliqueResults() {
             name: "Burnouts", pop: 120, baseShare: 0.35,
             support: typeof support_burnouts !== 'undefined' ? support_burnouts : 0,
             // burnouts love anti-establishment & Patty
-            calcCharlieMod: function() { return (this.support * 0.035) + (cur_anti * 0.02) + (cur_patty * 0.01); }
+            calcCharlieMod: function() { return (this.support * 0.025) + (cur_anti * 0.015) + (cur_patty * 0.005); }
         },
         {
             name: "Honors", pop: 85, baseShare: 0.60,
             support: typeof support_honors !== 'undefined' ? support_honors : 0,
             // honors hate anti-establishment; they like Linus slightly, but mostly stick to the rules
-            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.025) - (cur_linus * 0.01); }
+            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.02) - (cur_linus * 0.005); }
         },
         {
             name: "Jocks", pop: 150, baseShare: 0.30,
             support: typeof support_jocks !== 'undefined' ? support_jocks : 0,
             // jocks follow Patty's approval religiously
-            calcCharlieMod: function() { return (this.support * 0.04) + (cur_patty * 0.025) - (cur_cynicism * 0.015); }
+            calcCharlieMod: function() { return (this.support * 0.06) + (cur_patty * 0.015) - (cur_cynicism * 0.01); }
         },
         {
             name: "Arts", pop: 70, baseShare: 0.50,
             support: typeof support_arts !== 'undefined' ? support_arts : 0,
             // arts students vibe with cynicism but hate ruthlessness
-            calcCharlieMod: function() { return (this.support * 0.05) + (cur_cynicism * 0.015) - (cur_ruthless * 0.02); }
+            calcCharlieMod: function() { return (this.support * 0.06) + (cur_cynicism * 0.01) - (cur_ruthless * 0.015); }
         },
         {
             name: "Admin/Faculty", pop: 25, baseShare: 0.35,
             support: typeof support_admin !== 'undefined' ? support_admin : 0,
             // admin plummets with anti-establishment and ruthlessness. hard for charlie to do good here
-            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.04) - (cur_ruthless * 0.02); }
+            calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.03) - (cur_ruthless * 0.015); }
         }
     ];
 
@@ -13615,7 +13617,7 @@ const mainEndings = [
 
   <p>There was a sound on the other end that looked like he was trying to swallow a cactus.</p>
 
-  <p><span class="dialogue">“I,”</span> repleid Charlie, <span class="dialogue">“did not <em>say</em>—”</span></p>
+  <p><span class="dialogue">“I,”</span> replied Charlie, <span class="dialogue">“did not <em>say</em>—”</span></p>
 
   <p><span class="dialogue">“I know,”</span> said Linus, pleasantly. <span class="dialogue">“I know exactly what you said, Charlie Brown. And I want you to know I hear you. I hear all of it.”</span></p>
 
