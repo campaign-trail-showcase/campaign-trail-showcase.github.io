@@ -10950,18 +10950,18 @@ cyoAdventure = function (a) {
 	}
 
 	// it's royin' time
-	if (ans === 12440) {
+	if (ans === 12440 && !window.isRoyInCharge) {
 		window.isRoyInCharge = true;
 
 		campaignTrail_temp.running_mate_image_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy.jpg";
 		campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy_advisor2.png";
 
 		CENTER_IMAGE_URL = "https://i.pinimg.com/1200x/4b/38/7d/4b387d964d5502f237e4951befc19adb.jpg";
-	}
-
-	if (window.isRoyInCharge) {
+		
 		questionSwapper(375, 430); // as Patty stepped down
-
+	}
+	
+	if (window.isRoyInCharge) {
 		// shameless rewrites to fit in Roy
         const q363 = campaignTrail_temp.questions_json.find(q => q.pk === 363);
         if (q363) {
@@ -11565,13 +11565,13 @@ function calculateCliqueResults() {
             name: "Jocks", pop: 150, baseShare: 0.30,
             support: typeof support_jocks !== 'undefined' ? support_jocks : 0,
             // jocks follow Patty's approval religiously
-            calcCharlieMod: function() { return (this.support * 0.06) + (cur_patty * 0.015) - (cur_cynicism * 0.01); }
+            calcCharlieMod: function() { return (this.support * 0.05) + (cur_patty * 0.015) - (cur_cynicism * 0.01) - (cur_anti * 0.005); }
         },
         {
             name: "Arts", pop: 70, baseShare: 0.50,
             support: typeof support_arts !== 'undefined' ? support_arts : 0,
             // arts students vibe with cynicism but hate ruthlessness
-            calcCharlieMod: function() { return (this.support * 0.06) + (cur_cynicism * 0.01) - (cur_ruthless * 0.015); }
+            calcCharlieMod: function() { return (this.support * 0.04) + (cur_cynicism * 0.01) - (cur_ruthless * 0.015) - (cur_patty * 0.005); }
         },
         {
             name: "Admin/Faculty", pop: 25, baseShare: 0.35,
@@ -11763,7 +11763,7 @@ function calculateCliqueResults() {
     let tableHTML = `
         <div style="margin: 0 0 20px 0; font-family: Arial, sans-serif; padding: 10px; color: inherit;">
             <h4 style="text-align:center; margin-bottom: 10px; font-weight:bold; text-decoration: underline;">Final Election Results</h4>
-            <table style="width: 100%; border-collapse: collapse; text-align: center; border: 2px solid #222449;">
+            <table class="final_results_table" style="width: 100%; border-collapse: collapse; text-align: center; border: 2px solid #222449;">
                 <tr style="background-color: #727C96; color: white;">
                     <th style="padding: 8px;">Clique</th>
                     <th style="padding: 8px;">Pop.</th>
@@ -13927,7 +13927,7 @@ const mainEndings = [
 
   <div class="section-break">· · ·</div>
 
-  <p>After a while, the crying stopped, mostly because he ran out of tears. Charlie Brown straightened up and wiped his face with his sleeve and looked, he was certain, absolutely terrible, and Patty looked at him with an expression that contained neither pity nor embarrassment on his behal. It was one of the things about her that he had never fully known how to account for.</p>
+  <p>After a while, the crying stopped, mostly because he ran out of tears. Charlie Brown straightened up and wiped his face with his sleeve and looked, he was certain, absolutely terrible, and Patty looked at him with an expression that contained neither pity nor embarrassment on his behalf. It was one of the things about her that he had never fully known how to account for.</p>
 
   <p><span class="dialogue">“Okay,”</span> she said.</p>
 
