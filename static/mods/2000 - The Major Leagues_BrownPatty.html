@@ -73,7 +73,7 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 351,
         "fields": {
-            "description": "Somebody broke into your locker overnight. They pried the latch with a flathead screwdriver, from the look of it, and stole the a black notebook you keep shoved behind your chemistry textbook, one you’ve never shown to a single living soul. Inside it is a poem you wrote about Heather, the Little Red-Haired Girl, and it is exactly as pathetic and desperate as you’d expect from a seventeen-year-old boy. To your displeasure, photocopies of it have been taped to just about every locker,, and by second period the entire school has read it. As you move through the hallways tearing them down with shaking hands, thinking you can unmake what’s already been seen, Heather rounds the corner, holding one of the flyers in both hands. Oh God."
+            "description": "Somebody broke into your locker overnight. They pried the latch with a flathead screwdriver, from the look of it, and stole the a black notebook you keep shoved behind your chemistry textbook, one you’ve never shown to a single living soul. Inside it is a poem you wrote about Heather, the Little Red-Haired Girl, and it is exactly as pathetic and desperate as you’d expect from a seventeen-year-old boy. To your displeasure, photocopies of it have been taped to just about every locker, and by second period the entire school has read it. As you move through the hallways tearing them down with shaking hands, thinking you can unmake what’s already been seen, Heather rounds the corner, holding one of the flyers in both hands. Oh God."
         }
     },
     {
@@ -10949,6 +10949,106 @@ cyoAdventure = function (a) {
 		}
 	}
 
+	// spooky variable changes
+	// Lucy's offer
+	if (e.noCounter === 4) {
+		const q349 = campaignTrail_temp.questions_json.find(q => q.pk === 349);
+		if (q349) {
+			if (ruthlessness >= 2) {
+				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>“I’ve been watching you, blockhead,” she smirks, stirring her coffee. “You’ve got a bit more bite this semester. I like it, I really do. My brother thinks he’s a philosopher king destined to rule over us morons, but I have some dirt on him that would end his pathetic campaign. I know you have the guts to use it now. You want it?”";
+			} else {
+				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>‘You’re too soft, Charlie Brown,’ she sighs, stirring her coffee with visible disappointment. ‘But my brother is an arrogant prick who thinks he’s Mr. Big, or something. I have dirt on him that would end his pathetic little campaign. The question is: do you actually have the spine to use it, blockhead?’";
+			}
+		}
+	}
+
+	// approaching the debate
+	if (e.noCounter === 9) {
+		const q347 = campaignTrail_temp.questions_json.find(q => q.pk === 347);
+		if (q347) {
+			if (linus_bond <= -2) {
+				q347.fields.description = "You and Linus agreed to a debate in the gym. It’s the only debate, too, since Linus’s camp refused to agree to any others after their internal polling showed he had more to lose than gain from sharing a stage with you. He’s standing at his podium in a goddamn sweater vest, talking about “leaving childish things behind” and “stepping into the future of our school,” yet you spend no time listening to his nonsense. He does not deserve your attention. After a round of applause, the moderator turns to you. You have the floor.";
+			} else if (linus_bond >= 2) {
+				q347.fields.description = "You and Linus agreed to a debate in the gym. He’s standing at his podium in a goddamn sweater vest, talking about “leaving childish things behind” and “stepping into the future of our school,” among other stuff. He actually gives you a polite, somewhat melancholic nod before he begins. It makes it a lot harder to be angry at him. In fact, you don’t even think his sweater is that bad in the first place. <i>Damn.</i> After a round of applause, the moderator turns to you. You have the floor.";
+			}
+		}
+	}
+
+	// approaching the rumors
+	if (e.noCounter === 13) {
+		const q358 = campaignTrail_temp.questions_json.find(q => q.pk === 358);
+		if (q358) {
+			if (ruthlessness >= 4) {
+				q358.fields.description = "A rumor’s been making the rounds, slipping from bathroom stalls to lunch tables, to the back rows where people think teachers can’t hear them: Charlie Brown’s been seeing a shrink. They say you’ve got a “depressive disorder,” that you’re not fit to be Council President, that you’re volatile, vindictive, dangerous, a school shooter-in-the-making. You know exactly where this originated; you should’ve never trusted Lucy and that five-cent psychiatric booth she used to run. No way she ever tossed your file. And meanwhile, Linus’s camp is quietly fanning the flames, painting you as a ticking time bomb.";
+
+				updateFeedback(3366, "Patty doesn’t even bother calling your name this time, as she lunges, with her fingers clamping around your arm with a grip that feels wrong, too tight, too absolute, like you couldn’t pull away if you tried. She drags you into an empty classroom before you make it to the cafeteria. Her eyes search yours, frantic. “You’re out of your mind. You wanna prove them right!?” she hisses to you. And sure enough, your ruthless streak has made the rumors of your instability terrifyingly plausible to the voters.");
+			} else if (ruthlessness <= 0) {
+				q358.fields.description = "A rumor’s been making the rounds, slipping from bathroom stalls to lunch tables, to the back rows where people think teachers can’t hear them: Charlie Brown’s been seeing a shrink. They say you’ve got a “depressive disorder,” that you’re not fit to be Council President, that you’re too fragile, soft, and damaged to lead. They think you’re <i>weak</i>. You know exactly where this originated; you should’ve never trusted Lucy and that five-cent psychiatric booth she used to run. No way she ever tossed your file. And meanwhile, Linus’s camp is playing the pity card, acting ‘concerned’ about your mental well-being to make you look incredibly weak.";
+			}
+		}
+	}
+
+	// approaching the locker break-in
+	if (e.noCounter === 10) {
+		if (patty_approval >= 3 && !window.isRoyInCharge) {
+			const q351 = campaignTrail_temp.questions_json.find(q => q.pk === 351);
+			if (q351) {
+				q351.fields.description = "Somebody broke into your locker overnight. They pried the latch with a flathead screwdriver, from the look of it, and stole the a black notebook you keep shoved behind your chemistry textbook, one you’ve never shown to a single living soul. Inside it is a poem you wrote about Heather, the Little Red-Haired Girl, and it is exactly as pathetic and desperate as you’d expect from a seventeen-year-old boy. To your displeasure, photocopies of it have been taped to just about every locker. The good news is that, thanks to Patty’s well-oiled campaign machine, she and your supporters are already tearing them down before second period. Still, as you round the corner, Heather is holding one of the surviving flyers. Oh God.";
+			}
+		}
+	}
+
+	// Franklin's endorsement
+	if (e.noCounter === 12) {
+		const q352 = campaignTrail_temp.questions_json.find(q => q.pk === 352);
+		if (q352) {
+			// damn patty, back at it again with the campaign sabotage
+			let pattyGlare = (patty_approval >= 3 && !window.isRoyInCharge)
+				? " Over his shoulder, you can see Patty leaning against the cinderblock wall, glaring daggers at him and mouthing something probably close to ‘don’t do it!’. Huh. You’ve got a choice to make."
+				: "";
+
+			if (ruthlessness >= 3 && anti_establishment <= 1) {
+				// generally dirty campaign
+				q352.fields.description = "Franklin stops you by the lockers after third period. He’s the current Student Council Vice President, and perhaps one of the few people in this building which you can trust. Even the administration respects his authority, which is more than you can say for anyone else under the age of forty in this building. ”Charlie, I want to endorse you,” he says, his voice low enough that the passing students can’t hear. “But you’re like, playing too dirty. You’re terrorizing Linus and half the school thinks you’re a bully now. What’s happening? Here, tone down all the mudslinging, and I’ll bring the moderates to your side. No daylight, <i>capiche</i>?”" + pattyGlare;
+
+				const a3344 = campaignTrail_temp.answers_json.find(a => a.pk === 3344);
+				if (a3344) a3344.fields.description = "I can’t do that, Frank, I’m sorry. Linus and the administration have been playing dirty for years while you did nothing. If I stop hitting him now, I’m just letting them get away with it.";
+
+				const a3346 = campaignTrail_temp.answers_json.find(a => a.pk === 3346);
+				if (a3346) a3346.fields.description = "What!? You’re Vice President and you do nothing while Othmar walks all over us. Just stop being a coward for once, dammit. I really would appreciate if you helped me crush Linus once and for all.";
+
+				updateFeedback(3344, "Franklin shakes his head, clearly disgusted by your vindictiveness. He can’t believe how you’ve turned into <i>this</i>. He adjusts his backpack and walks away without another word. Patty tells you later that Franklin is officially staying neutral, but he insists that your aggressive base loves that you refused to bow down.");
+				updateFeedback(3346, "Franklin’s eyes widen slightly at your sheer ruthlessness. He genuinely cannot believe you’re sayng all of this. He’s quiet for a long time, long enough that a bell rings and the hallway empties around you. You find him the next day in the exact same place and position. Yeah, he’s definitely not endorsing you now.");
+
+			} else if (anti_establishment >= 3 && ruthlessness < 3) {
+				// more revolutionary-like
+				q352.fields.description = "Franklin stops you by the lockers after third period. He’s the current Student Council Vice President, and perhaps one of the few people in this building which you can trust. Even the administration respects his authority, which is more than you can say for anyone else under the age of forty in this building. “Charlie, I want to endorse you,” he says, his voice low enough that the passing students can’t hear. ‘But I think your platform is too radical. Really, like half the kids think you’re going to dismantle the entire council system if you win. If you cut down on your revolutionary talk, and promise some stability, then I’ll bring the moderates to your side. No daylight, <i>capiche</i>?’";
+
+				// Update Feedback
+				updateFeedback(3344, "Franklin sighs, adjusting his backpack. He respects your integrity, surely, but he thinks you’re committing political suicide. Many times, actually. He walks away down the hall without another word. When she finds out there was no deal, Patty groans that you just threw away the easiest endorsement of the campaign, but your die-hard supporters are thrilled you didn’t sell out.");
+				updateFeedback(3345, "Remarkably, Franklin is relieved, and he publicly endorses you the next morning. However, your pivot to the center is not received so well by your more populist base. The burnouts and idealists who flocked to your campaign because you promised real change now see you as just another fake politician. Looks like we’re gonna have to brush up your reputation again.");
+
+			} else {
+				// fallback
+				if (pattyGlare !== "") {
+					q352.fields.description = "Franklin stops you by the lockers after third period. He’s the current Student Council Vice President, and perhaps one of the few people in this building which you can trust. Even the administration respects his authority, which is more than you can say for anyone else under the age of forty in this building. “Charlie, I want to endorse you,” he says, his voice low enough that the passing students can’t hear. “But you’re like, scaring a bunch of kids. Half of them think you’re going to burn the school down if you win or something. You gotta tone it down a bit, you know, and I’ll bring the moderates to your side. No daylight, <i>capiche</i>?”"; // + pattyGlare;
+				}
+			}
+		}
+	}
+
+	// Sunday town hall
+	if (e.noCounter === 16) {
+		const q391 = campaignTrail_temp.questions_json.find(q => q.pk === 391);
+		if (q391) {
+			if (cynicism >= 4) {
+				q391.fields.description = "It’s Sunday morning. The campaign has ground you down to powder, to calcium dust, to whatever the hell is left of a person after two months of whoring themselves to the voters. Your internal polls (courtesy of Pig-Pen) miraculously show a dead heat, but honestly? You don’t even care anymore. You are scheduled for a town hall-style forum in the cafeteria at noon, where the school paper’s editorial board and a gym full of undecided voters are waiting for you to give them a reason. The thought of looking at another voter makes you want to crawl out of your own skin. As you climb on top of your old red doghouse, you wonder: why even go?";
+			} else if (cynicism <= 0) {
+				q391.fields.description = "It’s Sunday morning. The campaign has let you very much exhausted, despite everything. Your internal polls (courtesy of Pig-Pen) miraculously show a dead heat, as hard as it is to believe. It fills you up with hope, though. You are scheduled for a town hall-style forum in the cafeteria at noon, where the school paper’s editorial board and a gym full of undecided voters are waiting for you to give them a reason. It’s a gray November morning, and as you climb on top of your old red doghouse, you look up at the clouds and gather your strength. Do you really need to go?";
+			}
+		}
+	}
+
 	// it's royin' time
 	if (ans === 12440 && !window.isRoyInCharge) {
 		window.isRoyInCharge = true;
@@ -10957,10 +11057,10 @@ cyoAdventure = function (a) {
 		campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy_advisor2.png";
 
 		CENTER_IMAGE_URL = "https://i.pinimg.com/1200x/4b/38/7d/4b387d964d5502f237e4951befc19adb.jpg";
-		
+
 		questionSwapper(375, 430); // as Patty stepped down
 	}
-	
+
 	if (window.isRoyInCharge) {
 		// shameless rewrites to fit in Roy
         const q363 = campaignTrail_temp.questions_json.find(q => q.pk === 363);
@@ -13127,6 +13227,224 @@ const mainEndings = [
       artist: "Martin L. Gore",
       cover: "https://resources.tidal.com/images/ed0a54b8/9094/4319/821e/e6e13cdeafaf/320x320.jpg",
       url: "ZJn1VukFa4E"
+    }
+  },
+  {
+    id: "lonelynight",
+    condition: (ev) => charlieWin && ruthlessness >= 4,
+    image: "https://i.pinimg.com/1200x/c8/ed/27/c8ed273eda12f3ca73527ecd74d82a60.jpg",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  .letter-page {
+    background: linear-gradient(160deg, #fdf9ed 0%, #f5eecc 30%, #ede3b8 60%, #f2ebca 100%);
+    border: 1px solid #c8b882;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #b8a862, 4px 4px 0 #a89852, 1px 1px 8px rgba(0,0,0,0.18);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Crimson Text', 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #2a200a;
+  }
+
+  .letter-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        rgba(160, 130, 60, 0.09) 27px,
+        rgba(160, 130, 60, 0.09) 28px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .letter-page::after {
+    content: '';
+    position: absolute;
+    top: 48px; bottom: 48px;
+    left: 88px;
+    width: 1px;
+    background: rgba(190, 100, 100, 0.18);
+    pointer-events: none;
+  }
+
+  .fold-line {
+    border-top: 1px dashed rgba(150,120,50,0.25);
+    margin: 32px -54px;
+    position: relative;
+  }
+
+  .letter-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(160,130,60,0.3);
+  }
+
+  .letter-dateline {
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #7a6030;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .letter-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #5a4418;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .chapter-mark {
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+    color: #8a6828;
+    font-size: 15px;
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  .letter-page p {
+    margin: 0 0 16px 0;
+    text-indent: 2em;
+  }
+
+  .letter-page p:first-of-type {
+    text-indent: 0;
+  }
+
+  .dialogue {
+    font-style: italic;
+  }
+
+  .section-break {
+    text-align: center;
+    color: #9a7830;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin: 24px 0 20px;
+  }
+
+  .letter-footer {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(160,130,60,0.3);
+    text-align: right;
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #7a6030;
+  }
+
+  .stamp-area {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 1.5px solid #b09050;
+    border-radius: 1px;
+    background: linear-gradient(135deg, #f0e8c8, #e8dab0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #7a5828;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+  }
+
+  .stamp-perfs {
+    position: absolute;
+    top: 23px; right: 31px;
+    width: 54px; height: 64px;
+    border: 1px dotted rgba(150,110,40,0.5);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+</style>
+
+<div class="letter-page">
+  <div class="stamp-area">★</div>
+  <div class="stamp-perfs"></div>
+
+  <div class="letter-header">
+    <div class="letter-title">we can funk</div>
+  </div>
+
+  <p>The campaign buttons were still sitting in a cardboard box by the front door, staring up at him like hundreds of tiny, accusatory eyes.</p>
+
+  <p>Charlie Brown had won. It was official as of two hours ago. He was the new student council president, as hard as it was to imagine. But as he sat on the edge of his bed, looking at the wall, he didn’t feel the rush of validation he had spent the last two months chasing. He mostly just felt completely, hollowly exhausted.</p>
+
+  <p>He had played dirty. Terribly, ruthlessly dirty. When the polls had started slipping in October, it was like something inside him had simply snapped. He had done things tha he never thought he would do to win, that he <i>hated</i> to do, and yet, he won. He finally won.</p>
+
+  <p>By the time the doorbell rang, he didn’t jump. He just stood up, slowly, feeling like he was moving underwater, and walked downstairs to open it.</p>
+
+  <p>Peppermint Patty was leaning against the porch railing, twirling a set of car keys around her index finger. She was wearing her dad’s old leather jacket, and the brisk night wind was messing with her hair. When she looked up at him, her expression was an unusual mix of awe, unease, and a strange sort of pity.</p>
+
+  <div class="fold-line"></div>
+
+  <p><span class="dialogue">“Well,”</span> she said, catching the keys in her palm. <span class="dialogue">“You did it, Chuck.”</span></p>
+
+  <p><span class="dialogue">“Yeah,”</span> he said softly. <span class="dialogue">“I did.”</span></p>
+
+  <p>She studied his face for a long moment, taking in the dark circles under his eyes and the completely defeated slope of his shoulders. <span class="dialogue">“I gotta admit,”</span> she murmured, stepping a little closer. <span class="dialogue">“I didn’t know you had it in you. This whole campaign… it was brutal, Chuck. It was like watching a completely different person.”</span></p>
+
+  <p>Charlie swallowed the lump of ash in his throat and looked away. <span class="dialogue">“It’s politics, Patty. People do what they have to do.”</span></p>
+
+  <p>Patty didn’t argue. She just jingled her keys again, letting the metallic sound cut through the quiet suburban street. <span class="dialogue">“Well, grab your coat. We’re going for a ride.”</span></p>
+
+  <p>He blinked. <span class="dialogue">“A ride? Where?”</span></p>
+
+  <p><span class="dialogue">“Anywhere that isn’t this house,”</span> she told him firmly. <span class="dialogue">“You won an election! You’re like the president now. The least we can do is get some food and celebrate before you turn into a ghost completely.”</span></p>
+
+  <div class="section-break">· · ·</div>
+
+  <p>Twenty minutes later, they were cruising down the interstate in Patty’s battered old sedan; poor Todd, despite news to the contrary, was still kicking it. The heating vents were blasting warm air, smelling faintly of dust and old vanilla air fresheners. Between them, on the center console, sat an assortment of cheap victories: two large sodas, a crushed bag of sour gummies, and a greasy paper sleeve of lukewarm french fries. It was good.</p>
+
+  <p>Patty had the radio tuned to a classic rock station, with the volume dialed down just enough to allow the hum of the engine to fill the space between them. She was doing most of the talking, keeping up a steady, one-sided stream of chatter about baseball spring training and how much she hated her chemistry teacher.</p>
+
+  <p>But Charlie was half-empty. He was zoned out, his head resting against the cool glass of the passenger window, watching the yellow streetlights blur past. He was physically there, sure, but mentally, he felt untethered, for the lack of a better word, drifting somewhere far above the car.</p>
+
+  <p>Every now and then, Patty would toss a fry in his direction or nudge his shoulder, and he would manage to lend her a slight, vague smile. It wasn’t a real smile, given it didn’t reach his eyes, but it was enough to keep her from pressing the issue. But he was trying. He really was.</p>
+
+  <p><span class="dialogue">“…so I told her, look, if you want me to memorize the periodic table, you’re gonna have to make it rhyme,”</span> Patty was saying, taking a long pull from her soda straw. <span class="dialogue">“Otherwise, it’s just alphabet soup. Right, Chuck?”</span></p>
+
+  <p><span class="dialogue">“Right,”</span> he murmured, his breath fogging the glass slightly. His slight smile lingered a bit; it was a weak, automatic reflex.</p>
+
+  <p>Eventually Patty signaled, taking the off-ramp that curved back toward their side of town. The commercial glow of the highway faded, replaced by the quiet, tree-lined darkness of the far more boring residential neighborhoods. Charlie watched the houses roll by, his mind blank, just letting the motion of the car carry him.</p>
+
+  <div class="fold-line"></div>
+
+  <p>And then, they turned onto Elm Street.</p>
+
+  <p>Charlie didn’t realize where they were until they were already halfway down the block. Patty hadn’t done it on purpose, it was just the fastest route back to his place, but as the familiar shape of the Van Pelt house materialized out of the dark, Charlie felt his stomach drop into his shoes.</p>
+
+  <p>He sat up slightly, pulling his head away from the window. God, the house was pitch black. Not a single light was on, inside or out. Even the porch light, which Linus’s mother always kept burning until midnight, was extinguished. It looked abandoned. What a nightmare…</p>
+
+  <p>In his mind’s eye, Charlie could see exactly what was happening behind those dark windows. He could see Linus, sitting in his room, humiliated and betrayed, holding onto his blanket in the absolute quiet of a devastating loss. A loss that Charlie had orchestrated, too.</p>
+
+  <p>The slight smile that had been keeping his face together instantly vanished. It was replaced by a heavy, crushing frown, as the full weight of what he had done crashed down on him all at once in the passenger seat of Patty’s car. He hadn’t just defeated an opponent, he had destroyed someone who once was his best friend. And for what? For a title? For a stupid badge that meant nothing in the dark?</p>
+
+  <p>Patty noticed this shift. She glanced over, following his line of sight to the dark house, and her grip tightened slightly on the steering wheel. She didn’t say anything. There was nothing for either of them to say anymore.</p>
+
+</div>`,
+    song: {
+      title: "A Question of Time (Remix)",
+      artist: "Depeche Mode",
+      cover: "https://yt3.googleusercontent.com/rrU_3mlqZTDSalQ9h2Rh0hKB6wRnPeCb_P8mN-d1cxyaAgENV_ckxPy4aiissPtP9TsI9Va5432qG-nnkA=w544-h544-l90-rj",
+      url: "RlyOV_6551Q"
     }
   },
   {
@@ -15369,7 +15687,7 @@ const bonusSlides = [
 
     <tr class="ep-finale">
       <td class="ep-num">3×06</td>
-      <td class="ep-title"><a href="#"><strong>★ THE SERIES FINALE ★<br>"Ah, F... This"</strong></a></td>
+      <td class="ep-title"><a href="#"><strong>THE SERIES FINALE<br>"Ah, F... This"</strong></a></td>
       <td class="ep-desc">
         A water leak, a misplaced fax from their manager, and an inexplicably large delivery of artisan cheese push the household to its limit. Midway through act two, during a scene in which Damon attempts to explain to a plumber that the band's record royalties technically make them all joint homeowners and therefore the plumber should negotiate with all four of them simultaneously, <strong>Graham puts down his mug, says "Ah, fuck this," and walks out of the front door.</strong> He does not return. The live audience response is, by all accounts, the longest sustained applause in BBC Two history. The episode ends with Damon, Alex and Dave standing in silence in the kitchen, looking at where Graham was, as Dave begins, slowly, to drum on the counter.
       </td>
@@ -15424,11 +15742,11 @@ const bonusSlides = [
         </div>
       </div>
 
-      <p>It has become fashionable, in certain quarters, to treat <em>Common People</em> as a curiosity: that is, as a Britpop-era novelty that somehow survived the death of Britpop by being, against all reasonable expectation, funnier than most of the actual sitcoms on television. Series Three does nothing to discourage this view and a great deal to confirm it.</p>
+      <p>It has become fashionable, in certain quarters, to treat <em>Common People</em> as a curiosity: that is, as a Britpop-era novelty that somehow survived the death of Britpop by being, against all reasonable expectation, funnier than most of the actual sitcoms on television. The thing is, Series Three does nothing to discourage this view and a great deal to confirm it.</p>
 
-      <p>The engine of the thing remains, as ever, the four-way dynamic between its leads. Damon Albarn plays Damon as a man in the grip of a continuous and self-renewing confidence that has never once made contact with evidence. Alex James plays Alex as someone for whom charm is a kind of passive climate. Dave Rowntree plays Dave as though acting is, well, a thing he is just doing with his body while his mind is elsewhere, which, by this point, seems less like a choice and more like an accurate account of the situation. And Graham Coxon plays Graham as a person who has been watching the other three for two and a half series and has arrived at a conclusion.</p>
+      <p>The engine of the thing remains, as ever, the four-way dynamic between its leads. Damon Albarn plays Damon as a man in the grip of a continuous and self-renewing confidence, that has never once made contact with evidence. Alex James plays Alex, as someone for whom charm is, to be fir, a kind of passive climate. Dave Rowntree plays Dave as though acting is, well, a thing he is just doing with his body while his mind is elsewhere, as unusual as it occasionally seems. And Graham Coxon plays Graham, as a person who has been watching the other three for two and a half series and has arrived at a conclusion.</p>
 
-      <p>This conclusion arrives in episode six. The scene, in which Graham infamously puts down his mug and says, "Ah, fuck this" and walks out, had been, according to the Radio Times, written into the script three series ago as a placeholder joke that was never meant to air. (Ben Elton has declined to explain why it was kept.) Our review of the scene is that it is the funniest and most affecting thing BBC Two has broadcast this year, and that the audience's responsek, about eleven seconds of cheering that the laugh track barely contains, constitutes a genuine cultural event. Everyone, on some level, recognised something.</p>
+      <p>This conclusion arrives in episode six. The scene, in which Graham infamously puts down his mug and says, "Ah, fuck this" and walks out, had been, according to the Radio Times, written into the script three series ago as a placeholder joke that was never meant to air. (Ben Elton has declined to explain why it was kept.) Our review of the scene is that it is one of the most unusual things BBC Two has broadcast this year, and that the audience's response, which was about eleven seconds of cheering that the laugh track barely contains, constitutes a genuine cultural event. Everyone, on some level, recognised something.</p>
 
       <p>The final image, of Dave drumming on the counter in the empty kitchen, will stay with this reviewer for some time.</p>
 
@@ -15549,6 +15867,612 @@ const bonusSlides = [
       cover: "https://lh3.googleusercontent.com/aovas6mvuRwzzr5PD3dUFKLEFIG402lAnky4dHsTRI8J2sn9B9vnVCW1uuLm-VqzJ95yBSaC-RufXixoBw=w544-h544-l90-rj",
       url: "GMnZXcCjFio"
     }
+  },
+  {
+    id: "homersimpson_good",
+    condition: (ev) => charlieWin && cynicism >= 4 && ruthlessness >= 6,
+    image: "https://i.pinimg.com/1200x/3c/33/9e/3c339e5453035d82f27cc8e63f06512d.jpg",
+    html: `<style>
+.site {
+  max-width: 980px;
+  margin: 0 auto;
+  background: #fff;
+  border-left: 1px solid #999;
+  border-right: 1px solid #999;
+  min-height: 100vh;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'GNU Unifont', Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #2a2a2a;
+  line-height: 1.5;
+}
+
+.site-header {
+  background: #ffcc00;
+  border-bottom: 4px solid #cc6600;
+  padding: 0;
+}
+.site-header-inner {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.site-logo-block {
+  background: #cc6600;
+  background: url('https://deadhomersociety.wordpress.com/wp-content/uploads/2009/04/wordpresslogo41.png');
+  background-size: cover;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.dhs-logo-text {
+  font-family: 'Arial Black', 'Arial', sans-serif;
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #ffcc00;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.dhs-logo-text span { color: #fff; }
+.dhs-tagline {
+  font-family: Verdana, sans-serif;
+  font-size: 0.65em;
+  color: rgba(255,204,0,0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-top: 3px;
+  font-style: italic;
+}
+.site-header-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8px 18px 0;
+}
+.site-nav {
+  display: flex;
+  gap: 2px;
+  align-items: flex-end;
+}
+.site-nav a {
+  background: #e6b800;
+  color: #3a2200;
+  font-family: Verdana, sans-serif;
+  font-size: 0.76em;
+  font-weight: bold;
+  padding: 5px 12px 6px;
+  text-decoration: none;
+  border: 1px solid #cc9900;
+  border-bottom: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.site-nav a:hover, .site-nav a.active {
+  background: #fff;
+  color: #2a2a2a;
+  border-color: #cc9900;
+}
+.site-search {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 0;
+  margin-top: 4px;
+  border-top: 1px solid rgba(180,120,0,0.3);
+  font-size: 0.75em;
+  color: #6a4400;
+}
+.site-search input {
+  padding: 3px 8px;
+  border: 1px solid #cc9900;
+  background: #fffdf0;
+  font-size: 1em;
+  width: 180px;
+  font-family: Verdana, sans-serif;
+}
+.site-search button {
+  background: #cc6600;
+  color: #fff;
+  border: none;
+  padding: 3px 10px;
+  font-size: 0.95em;
+  font-family: Verdana, sans-serif;
+  cursor: pointer;
+  font-weight: bold;
+}
+.user-block {
+  font-size: 0.75em;
+  color: #5a3a00;
+  margin-left: auto;
+  align-self: center;
+}
+.user-block a { color: #cc6600; text-decoration: none; font-weight: bold; }
+.user-block a:hover { text-decoration: underline; }
+
+.page-inner {
+  display: flex;
+  gap: 0;
+}
+.main-content {
+  flex: 1;
+  padding: 22px 26px 40px;
+  border-right: 1px solid #ddd;
+  min-width: 0;
+}
+.sidebar {
+  width: 210px;
+  flex-shrink: 0;
+  padding: 18px 14px;
+  background: #fafaf5;
+}
+
+.breadcrumb {
+  font-size: 0.8em;
+  color: #888;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.breadcrumb a { color: #cc6600; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { margin: 0 5px; color: #bbb; }
+
+.work-title {
+  font-family: Georgia, serif;
+  font-size: 1.75em;
+  font-weight: normal;
+  margin-bottom: 5px;
+  color: #1a1a1a;
+  line-height: 1.25;
+}
+.work-author {
+  font-size: 0.9em;
+  margin-bottom: 14px;
+  color: #555;
+}
+.work-author a { color: #cc6600; text-decoration: none; font-weight: bold; }
+.work-author a:hover { text-decoration: underline; }
+
+.work-meta {
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e0e0e0;
+}
+dl.tags {
+  display: grid;
+  grid-template-columns: 140px auto;
+  gap: 8px 6px;
+  font-size: 0.88em;
+}
+dt {
+  font-weight: bold;
+  color: #666;
+  text-align: right;
+  padding-right: 10px;
+  line-height: 1.45;
+}
+dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  line-height: 1.45;
+}
+.tag {
+  color: #2a2a2a;
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  font-size: 0.95em;
+}
+.tag:hover { background: #f0e8d0; border-bottom-color: #cc9900; }
+.tag-bold { font-weight: bold; }
+.tag-comma::after { content: ','; margin-right: 4px; color: #666; }
+.stats-row {
+  font-size: 0.85em;
+  color: #666;
+  background: #f5f2e8;
+  padding: 6px 10px;
+  border: 1px solid #e0d8c0;
+  margin-top: 2px;
+  border-radius: 2px;
+  letter-spacing: 0.01em;
+}
+
+.module {
+  background: #f5f2e8;
+  border: 1px solid #ddd8c8;
+  padding: 14px 16px;
+  margin: 16px 0;
+  border-radius: 2px;
+}
+.module-heading {
+  font-size: 0.82em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #666;
+  border-bottom: 1px solid #ccc8b8;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+.module p {
+  font-family: Georgia, serif;
+  font-size: 0.96em;
+  margin: 0;
+  line-height: 1.6;
+}
+.module p + p { margin-top: 0.8em; }
+
+.chapter-text {
+  font-family: Georgia, serif;
+  font-size: 1.05em;
+  line-height: 1.7;
+  color: #111;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+.chapter-text p { margin-bottom: 1.4em; }
+.chapter-text p:last-child { margin-bottom: 0; }
+
+.kudos-block {
+  margin-top: 28px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+  font-size: 0.88em;
+  color: #555;
+  line-height: 1.65;
+}
+.kudos-heart { color: #cc0000; font-size: 1.1em; }
+.kudos-block a { color: #2a2a2a; text-decoration: none; }
+.kudos-block a:hover { background: #f0e8d0; }
+
+.sidebar-section {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0d8c0;
+}
+.sidebar-section:last-child { border-bottom: none; }
+.sidebar-title {
+  font-size: 0.78em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #cc6600;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #cc6600;
+}
+.sidebar-link {
+  display: block;
+  font-size: 0.82em;
+  color: #cc6600;
+  text-decoration: none;
+  padding: 3px 0;
+  border-bottom: 1px dotted #e0d8c0;
+  line-height: 1.4;
+}
+.sidebar-link:hover { text-decoration: underline; }
+.sidebar-link:last-child { border-bottom: none; }
+.sidebar-text {
+  font-size: 0.8em;
+  color: #666;
+  line-height: 1.55;
+}
+.sidebar-text p { margin-bottom: 0.6em; }
+.sidebar-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.s-tag {
+  background: #f0e8d0;
+  border: 1px solid #d8c890;
+  color: #5a3a00;
+  font-size: 0.75em;
+  padding: 2px 7px;
+  text-decoration: none;
+  border-radius: 2px;
+}
+.s-tag:hover { background: #e0d4b0; }
+
+.site-footer {
+  background: #cc6600;
+  color: rgba(255,255,255,0.7);
+  padding: 10px 22px;
+  font-size: 0.75em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 3px solid #ffcc00;
+}
+.site-footer a { color: #ffcc00; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+</style>
+
+<div class="site">
+
+  <div class="site-header">
+    <div class="site-header-inner">
+      <div class="site-logo-block">
+      </div>
+      <div class="site-header-right">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <nav class="site-nav">
+            <a href="#" class="active">Archive</a>
+            <a href="#">Reviews</a>
+            <a href="#">Essays</a>
+            <a href="#">Forum</a>
+            <a href="#">Submit</a>
+          </nav>
+          <div class="user-block">
+            Hi, <a href="#">doctorsphincter67</a> | <a href="#">My Bookmarks</a> | <a href="#">Log Out</a>
+          </div>
+        </div>
+        <div class="site-search">
+          <label>Search the archive:</label>
+          <input type="text" placeholder="e.g. Homer, Burns, season 3…" />
+          <button>Go</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-inner">
+
+    <div class="main-content">
+
+      <div class="breadcrumb">
+        <a href="#">Home</a><span class="sep">›</span>
+        <a href="#">Fanfic Archive</a><span class="sep">›</span>
+        <a href="#">The Simpsons</a><span class="sep">›</span>
+        <a href="#">Homer Simpson (POV)</a><span class="sep">›</span>
+        the sky is yellow here, just so you know
+      </div>
+
+      <h2 class="work-title">the sky is yellow here, just so you know</h2>
+      <div class="work-author">by <a href="#">margeCentral</a></div>
+
+      <div class="work-meta">
+        <dl class="tags">
+          <dt>Rating:</dt>
+          <dd><span class="tag tag-bold">General Audiences</span></dd>
+
+          <dt>Archive Warning:</dt>
+          <dd><span class="tag tag-bold">No Archive Warnings Apply</span></dd>
+
+          <dt>Fandom:</dt>
+          <dd>
+            <a class="tag tag-comma" href="#">The Simpsons</a>
+            <a class="tag" href="#">The Simpsons (Early Seasons)</a>
+          </dd>
+
+          <dt>Characters:</dt>
+          <dd>
+            <a class="tag tag-comma" href="#">Homer Simpson</a>
+            <a class="tag tag-comma" href="#">Marge Simpson</a>
+            <a class="tag tag-comma" href="#">Bart Simpson</a>
+            <a class="tag tag-comma" href="#">Lisa Simpson</a>
+            <a class="tag tag-comma" href="#">Santa's Little Helper</a>
+            <a class="tag tag-comma" href="#">Kent Brockman</a>
+            <a class="tag" href="#">Mr. Burns (mentioned, conspicuously)</a>
+          </dd>
+
+          <dt>Additional Tags:</dt>
+          <dd>
+            <a class="tag tag-comma" href="#">Missing Scene</a>
+            <a class="tag tag-comma" href="#">Homer's Inner Monologue</a>
+            <a class="tag tag-comma" href="#">Springfield Nuclear Power Plant</a>
+            <a class="tag tag-comma" href="#">Slow Morning</a>
+            <a class="tag tag-comma" href="#">early seasons vibes</a>
+            <a class="tag tag-comma" href="#">impending doom</a>
+            <a class="tag tag-comma" href="#">no beta we die like rod and todd might honestly</a>
+            <a class="tag tag-comma" href="#">the news is never good</a>
+            <a class="tag" href="#">Oh No Bro</a>
+          </dd>
+
+          <dt>Stats:</dt>
+          <dd>
+            <div class="stats-row">
+              Published: 2004-11-03 &nbsp;|&nbsp; Words: 1,604 &nbsp;|&nbsp; Chapters: 1/1 &nbsp;|&nbsp; Kudos: 341 &nbsp;|&nbsp; Bookmarks: 67 &nbsp;|&nbsp; Hits: 5,218
+            </div>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="module">
+        <div class="module-heading">Author's Note</div>
+        <p>okay so i've been sitting on this one for a while and i kept thinking it wasn't done but then i read it again tonight and i think this is just what it is. it's a small thing. a slice of nothing, really. i promise!</p>
+        <p>i wanted to write Homer the way he was in like seasons 2-4, before he got flanderized into, uh, you know. we need a homer that's well-meaning and confused rather than actively stupid. in other words, a guy who genuinely doesn't understand a lot of things but isn't <em>proud</em> of it. there's a difference and i think it matters a lot actually</p>
+        <p>no beta. this is set vaguely in the early 90s. title from the depths of my puny brain. enjoy!</p>
+      </div>
+
+      <div class="module">
+        <div class="module-heading">Summary</div>
+        <p><em>It is a Tuesday morning in Springfield. Homer Simpson wakes up, makes the most of it, and then watches the news.</em></p>
+        <p><em>Mr. Burns could not be reached for comment. Neither could Smithers. Nobody, in fact, could be reached for comment. This seems like it might be important.</em></p>
+      </div>
+
+      <div class="chapter-text">
+
+        <p>The first thing Homer Simpson was aware of, on the morning of the last ordinary Tuesday he would have for some time, was that the ceiling had a new crack in it.</p>
+
+        <p>He lay on his back and looked at the crack. It ran from the light fixture to a point roughly above his left knee, which was sticking out from under the covers in a way that suggested his body had, during the night, made several decisions he had not been consulted on. Welp. The crack was new. Or maybe it was old and he had never noticed it? Either way, these were, for practical purposes, the same thing.</p>
+
+        <p>“Marge,” he said.</p>
+
+        <p>Marge’s side of the bed was empty, indicating she had been up for a while… which meant it was later than he thought… which meant he should probably be getting up. Homer processed all of this information some deliberateness, as if he were trying to reassemble complex machinery in the dark, and realized both things would be a waste of his time.</p>
+
+        <p>He sat up and placed his feet on the floor. He looked at his feet; they were still his feet. So far so good!</p>
+
+        <p>Downstairs, something smelled like bacon, which was probably a good thing. It could’ve been either breakfast or a fire, though, and either way he needed to go find out.</p>
+
+        <p>The bacon, luckily, was breakfast. Marge was standing at the stove in her green dress, seemingly managing over three things at once and choosing not to remark on it. Lisa was reading something at the table. Bart was eating with his left hand, and doing something with his right hand that Homer decided, at seven-fourteen in the morning, not to investigate. Santa’s Little Helper was under the table. Homer could not see him, but assumed he was sleeping anyway. Though perhaps not for long… who could resist bacon?</p>
+
+        <p>“Morning, everyone,” Homer said.</p>
+
+        <p>“Morning, Dad,” said Lisa, without looking up.</p>
+
+        <p>“Hey,” said Bart.</p>
+
+        <p>Marge smiled at him over her shoulder. “There’s juice.”</p>
+
+        <p>Indeed, there was juice. Homer sat down, poured juice, drank some juice, and thought about nothing in particular for a moment. It was one of the things he was genuinely best at in the world. The juice was pineapple juice, too, which was very refreshing! Outside, a bird was making a noise. Probably one of those Springfield birds. Not that they were special, uh, nor that there were few of them, but um, tThey tended to sound like that?</p>
+
+        <p>Homer ate four pieces of bacon, and most of a piece of toast that had been buttered to an extent he considered, privately, slightly conservative. He thought about mentioning the butter situation, but ultimately decided against it. After all, he had been married long enough to know that some battles were not battles so much as they were announcements of intent, and that the appropriate response to an announcement of intent, at this time in the morning, was usually silence.</p>
+
+        <p>“Dad,” Lisa said, “did you know the average American consumes enough nitrate-treated meat products in a year to —”</p>
+
+        <p>“Mmm,” said Homer, in a tone he had developed specifically for this situation. “Meat…”</p>
+
+        <p>Lisa looked at him for a moment. She appeared to be deciding something, but she went back to her book.</p>
+
+        <p>Bart was the first to leave, followed shortly by Lisa with her saxophone case. The last one to leave was Marge, who kissed Homer on the cheek on her way to the laundry and said something about dinner that he only caught approximately the first and last word of, the middle having passed through him like light through a window. He nodded at a frequency he judged appropriate.</p>
+
+        <p>It seems he had forty minutes before he needed to leave for the plant. This was, in Homer’s view, a gift from the universe, and he intended to honor it in the traditional fashion: he went to the couch, arranged himself, found the remote (which was behind the left cushion where it always was) and, eventually, he turned on the television.</p>
+
+        <p>The television gave him Channel 4, which was showing a commercial for a mattress company featuring a man in a suit, sitting on a mattress. He had a funny expression; perhaps he learned not to underestimate mattresses… Homer watched this with mild interest. He had some opinions about mattresses, and had been meaning to form them into a more coherent position for several years now.</p>
+
+        <p>Then the commercial ended, and Kent Brockman’s face filled the screen.</p>
+
+        <p>Kent Brockman always looked the same. Square jaw, excellent hair, the slightly glazed confidence of a man who had been telling people things on television for, well, long enough that he had forgotten how to have an expression that wasn’t for cameras… but there was a specific version of Kent Brockman that appeared when the news was a bit different, and required different graphic behind him. The thing is that version had appeared now: the graphic behind him was blood red.</p>
+
+        <p>A little unnerved, Homer sat up a little.</p>
+
+        <p>“—developing situation,” Kent was saying, “at the Springfield Nuclear Power Plant, where emergency crews were dispatched in the early morning hours following what officials are describing as, and I want to read this carefully, a” — he paused — “’significant radiological containment event affecting sectors seven-G through twelve-C.’ Now, to be clear, and we want to be very clear here at Newschannel 6, officials are emphasizing that Springfield residents in the immediate vicinity of the plant should not be alarmed.”</p>
+
+        <p>Homer stared at the screen. “Sector seven-G,” he said, to no one. “Hmm…”</p>
+
+        <p>Brockman straightened his papers. “We reached out this morning to Springfield Nuclear Power Plant management for comment. A representative for the plant said that—” he paused again, briefly, — “no statement would be forthcoming at this time. Attempts to reach plant owner C. Montgomery Burns were unsuccessful, and so were attempt to reach executive assistant Waylon Smithers. In a… related development, attempts to reach anyone at the plant above the level of, ah—” he glanced sideways at something off-camera, “cooling tower maintenance were, similarly, unsuccessful.”</p>
+
+        <p>Behind him, a live helicopter shot appeared, split-screen: he could see the plant’s towers, and something that was coming out of them that was not, as far as Homer could determine, the thing that was usually coming out of them. This was bad.</p>
+
+        <p>“Again,” Kent said, “there is no cause for alarm.”</p>
+
+        <p>Homer looked at the television for a long moment. He didn’t seem to believe him for a moment. Then he looked at his hands. Well, his hands looked fine, he knew that well. They were the same hands they had always been, slightly yellow-ish/pink, no notable changes. Hmm. This seemed like it should be more comforting than it was.</p>
+
+        <p>He got up and walked to the living room window, and pulled the curtain aside. Outside, there was nothing particularly unusual of notice. He could see that prick Ned Flanders’s sprinklers were running to his right. He could also spot a kid on a bicycle (that was not Bart) was going past. The sky was its regular yellow, too. Things seemed fine.</p>
+
+        <p>Homer looked at the sky for a while. He then looked back at the television, where this time, Brockman had moved on to a story about a dog that had learned to do something, probably something exciting,, and the anchor was smiling, and everything about the segment said: <em>see, here is a thing that is fine.</em></p>
+
+        <p>And so Homer looked at the sky again.</p>
+
+        <p>First, he thought about Sector 7-G. He thought about his chair, specifically: the one he sat in, the one with the good armrests, and the one that was arguably the best chair in Sector 7-G and possibly in the greater Springfield area. He then thought about the donut he had been planning to eat at approximately ten forty-five, which was when Lenny usually had his, and which Homer used as a kind of scheduling anchor for his own. Homer thought about Mr. Burns, who was not available for comment. Finally, he thought about Smithers, who was also not available for comment. That was unusual; in his experience, when people were not available for comment, it was rarely because they were having a nice morning.</p>
+
+        <p>Outside, the sprinklers reached the end of their arc and started back the other way.</p>
+
+        <p>“Oh no.”</p>
+
+      </div>
+
+      <div class="module" style="margin-top:28px;">
+        <div class="module-heading">End Notes</div>
+        <p>anyway i hope this was okay. i don't usually do the short quiet ones but sometimes you just have to</p>
+      </div>
+
+      <div class="kudos-block">
+        <span class="kudos-heart">♥</span>
+        <a href="#">Springfieldonian</a>, <a href="#">burnsMeUp</a>, <a href="#">meeseven</a>, <a href="#">redskywatcher</a>, <a href="#">LightstarH</a>, <a href="#">itsCosmonautical</a>, and <a href="#">335 others</a> left kudos on this work!
+        <br>
+        <span style="font-size:0.85em;color:#aaa;margin-top:6px;display:block;">[ <a href="#" style="color:#cc6600;">Leave a comment</a> · <a href="#" style="color:#cc6600;">Bookmark</a> · <a href="#" style="color:#cc6600;">Subscribe</a> ]</span>
+      </div>
+
+      <div style="margin-top:24px;border-top:1px solid #e0e0e0;padding-top:18px;">
+        <div style="font-size:0.82em;font-weight:bold;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:14px;">Comments (12)</div>
+
+        <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee;font-family:Georgia,serif;font-size:0.9em;line-height:1.65;">
+          <div style="font-size:0.78em;font-family:Verdana,sans-serif;color:#888;margin-bottom:5px;"><strong style="color:#333;">sector7g_forever</strong> — 2004-11-03</div>
+          <p>"he thought about his chair, the one with the good armrests" has destroyed me. oh my god homer i wanna hug him so bad</p>
+        </div>
+
+        <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee;font-family:Georgia,serif;font-size:0.9em;line-height:1.65;">
+          <div style="font-size:0.78em;font-family:Verdana,sans-serif;color:#888;margin-bottom:5px;"><strong style="color:#333;">LightstarH</strong> — 2004-11-03</div>
+          <p>the thing about using Kent's no-comment-from-Burns-or-Smithers as the actual horror of the piece is more unsettling tan it appears. In fact there is no need to say what happened, Homer figured it out and so did I. It's weird to think about it</p>
+        </div>
+
+        <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee;font-family:Georgia,serif;font-size:0.9em;line-height:1.65;">
+          <div style="font-size:0.78em;font-family:Verdana,sans-serif;color:#888;margin-bottom:5px;"><strong style="color:#333;">Springfieldonian</strong> — 2004-11-04</div>
+          <p>I love the way this was written!!! lisa going back to her book after "mmm" every time gets me thinking because she knows. like she has always known this is how her average day goes, there is no point fighting it before 7:30am, and she seems like she just accepted it. A timeline where she didn't tho... that would be cool to watch.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">About DHS</div>
+        <div class="sidebar-text">
+          <p>Dead Homer Society is a fanfiction archive and criticism blog for fans of The Simpsons who remember what it was like when it was the best show on television.</p>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">More by margeCentral</div>
+        <a class="sidebar-link" href="#">"the thing about saturdays" (2004)</a>
+        <a class="sidebar-link" href="#">"a reasonable man" — Burns character study (2003)</a>
+        <a class="sidebar-link" href="#">"donut shop au: an apology" (2004)</a>
+        <a class="sidebar-link" href="#">"what lisa knows" — series (2003–2004)</a>
+        <a class="sidebar-link" href="#">View all 14 works →</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Recently Archived</div>
+        <a class="sidebar-link" href="#">"The Burns Monologues" by archivistOfDoom</a>
+        <a class="sidebar-link" href="#">"Maggie Studies the Room" by quietobserver_s4</a>
+        <a class="sidebar-link" href="#">"Flanders Counts His Blessings, 1–44" by nextdoor_ned</a>
+        <a class="sidebar-link" href="#">"Kent Brockman's Notes" by newschannel_6</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Archive Tags</div>
+        <div class="sidebar-tag-cloud">
+          <a class="s-tag" href="#">Homer POV</a>
+          <a class="s-tag" href="#">Marge</a>
+          <a class="s-tag" href="#">Early Seasons</a>
+          <a class="s-tag" href="#">Burns</a>
+          <a class="s-tag" href="#">Lisa Studies Things</a>
+          <a class="s-tag" href="#">Slow</a>
+          <a class="s-tag" href="#">the plant</a>
+          <a class="s-tag" href="#">Springfield</a>
+          <a class="s-tag" href="#">Missing Scene</a>
+          <a class="s-tag" href="#">Bart Being Bart</a>
+          <a class="s-tag" href="#">no beta</a>
+          <a class="s-tag" href="#">yellow sky</a>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Site Poll</div>
+        <div class="sidebar-text">
+          <p><strong>Best early-season Homer episode?</strong></p>
+          <p style="margin-top:8px;">
+            ○ Homer vs. Lisa and the 8th Commandment<br>
+            ○ Homer the Heretic<br>
+            ○ Deep Space Homer<br>
+            ○ Homer's Barbershop Quartet<br>
+            ○ Other (comments)
+          </p>
+          <p style="margin-top:8px;font-size:0.85em;color:#aaa;">231 votes · closes Nov 15</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="site-footer">
+    <span>Dead Homer Society · fanfiction archive &amp; criticism · est. 2002</span>
+    <span><a href="#">About</a> · <a href="#">Rules</a> · <a href="#">Contact</a> · <a href="#">RSS</a></span>
+    <span>The Simpsons © Fox / Gracie Films · Fan use only</span>
+  </div>
+
+</div>`
   },
   {
     id: "shamone",
@@ -18823,7 +19747,7 @@ const bonusSlides = [
   },
   {
     id: "columbine",
-    condition: (ev) => ev > 269 && linusWin && cynicism < 3 && ruthlessness < 5,
+    condition: (ev) => linusWin && ev > 269 && cynicism < 3 && ruthlessness < 5,
     image: "https://i.pinimg.com/1200x/99/2b/9f/992b9f23dcfc0dfa0ae4af01c02a8b0c.jpg",
     html: `<style>
   .cnn {
@@ -24879,7 +25803,7 @@ const bonusSlides = [
       </div>
 
       <p class="bbc-synopsis">
-        In the tradition of the great outsider documentary, <em>Krombo: On the Streets of Chicago</em> follows television presenter Krombopulos Michael as he sets out to understand the political legacy of President Rahm Emanuel through conversations with academics, political scientists, former staffers, and assorted members of the Chicago public, most of whom immediately regret agreeing to be filmed. Over four episodes, Krombopulos crisscrosses the city in search of answers to questions that range from the genuinely probing to the cosmically wrongheaded, while pausing regularly to purchase and consume food from whatever street vendor happens to be nearby.
+        In the tradition of the great outsider documentary, <em>Krombo: On the Streets of Chicago</em> follows television presenter Krombopulos Michael as he sets out to understand the political legacy of President Rahm Emanuel through conversations with academics, political scientists, former staffers, and assorted members of the Chicago public, most of whom immediately regret agreeing to be filmed. Over four episodes, Krombopulos crisscrosses the city in search of answers to questions that range from the genuinely probing to the cosmically wrongheaded, while pausing regularly to purchase and consume food from whatever street vendor happens to be nearby.<br><br>Krombopulos Michael first came to public attention performing impersonations of then-President John McCain at regional comedy nights throughout 2008 and 2009.
       </p>
 
       <div class="bbc-presenter-quote">

@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.0.7
+* @version: 1.0.8
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -126,7 +126,7 @@ const recommendedReadingContent = `
         </ul>
         <h4>Special thanks to…</h4>
         <ul class="thanks-list">
-			<li>Our playtesters, including, but not limited to: ahhklt, alleightbits, blur, CitySlicker, Confused, EmpiresUnited, Felosia, Firetrucker74, glep, HMV, Ianwubby, igorsky, Inferno, IngJon, Laura (Giant Rat), Lemon, Momentum, mumkey, Paul David Wellstone, q7, RealTrey17, routevenus, Rubix, Sam, shushue, Simple Peasant 1, Stan, TheBatStory, The Numbskull, timberwolf857, Vicx, William, Zach, and other people I probably forgot</li>
+			<li>Our playtesters, including, but not limited to: ahhklt, alleightbits, ashraf177, blur, CitySlicker, Confused, EmpiresUnited, Felosia, Firetrucker74, glep, HMV, Ianwubby, igorsky, Inferno, IngJon, Laura (Giant Rat), Lemon, Momentum, mumkey, Nem06, Paul David Wellstone, Penny, q7, RealTrey17, Richard Gephardt, routevenus, Rubix, Sam, shushue, Simple Peasant 1, Stan, TheBatStory, The Numbskull, timberwolf857, Vicx, William, Zach, and other people I probably forgot</li>
             <li>Charles Schulz, for creating all these funny little characters</li>
             <li><i>astrohuncho</i> — for his <a href="https://hunchonautilus.github.io/nct-further-reading-wizard/" target="_blank" rel="noopener">Further Reading Wizard</a>, which I have used for testing this mod’s endings, and also this message which you are reading right now</li>
             <li><i>Jet</i> — for his excellent mod tool and for being fine with my fork of it, which I used for the making of this mod</li>
@@ -2857,6 +2857,7 @@ const themeData = {
                 background-position: center !important;
                 background-size: cover !important;
             }
+			#header { object-position: 0 70%;}
 			.container { background-color: #312860 !important; }
             .game_header {
                 background-color: #0d47a1 !important;
@@ -2915,6 +2916,167 @@ const themeData = {
                 background: #64b5f6 !important;
             }
         `
+  },
+  "Poppy": {
+    headerSrc: "https://i.pinimg.com/1200x/26/3b/9c/263b9c23af1bc23de0c0b5be174c508e.jpg",
+    coloring_title: "#2e6b2e",
+    coloring_window: "linear-gradient(135deg, #f0faf0, #a5d6a7)",
+    containerColor: "",
+    footerColor: "#fff",
+    extraCss: `
+        body {
+            background-image: url(https://file.garden/aNtAfG887DiA_7lO/TML_2000/poppy.png) !important;
+            background-color: #1b3a1b !important;
+			background-size: cover !important;
+        }
+        #header { object-position: center 55%; }
+        .container { background-color: #1e3a1e !important; }
+        .game_header {
+            background-color: #2e6b2e !important;
+            background-image: linear-gradient(
+                to right,
+                #81c784,
+                #388e3c calc(50% - 250px),
+                #1b5e20 calc(50% - 150px) calc(50% + 150px),
+                #388e3c calc(50% + 250px),
+                #81c784
+            ) !important;
+            border-bottom: 2px solid #b71c1c !important;
+        }
+        #game_window {
+            background: linear-gradient(135deg, #f0faf0, #a5d6a7) !important;
+            border: .1em solid #b71c1c !important;
+        }
+        #inner_window_2, #inner_window_3, #inner_window_4, .inner_window_w_desc {
+            background: linear-gradient(#c8e6c9, #81c784) !important;
+            border: 1px solid #b71c1c !important;
+        }
+        .inner_window_question h3 {
+            background: linear-gradient(to bottom, #f0faf0, #81c784) !important;
+            border: 2px solid #388e3c !important;
+        }
+        #menu_container {
+            background: linear-gradient(#b71c1c 50%, transparent) !important;
+        }
+        #state_result_container {
+            background: linear-gradient(0.20turn, transparent, #b71c1c) !important;
+        }
+        .overlay_window {
+            background: repeating-linear-gradient(#f0faf0, #c8e6c9 3px) !important;
+            border: .2em solid rgba(56, 142, 60, 0.8) !important;
+        }
+        .overlay_window h3 {
+            background: #81c784 !important;
+            border-bottom: .1em solid #b71c1c !important;
+        }
+        .overlay_window img {
+            border: 3px solid rgba(183, 28, 28, 0.72) !important;
+        }
+        #candidate_image img { outline-color: #e53935 !important; }
+        #running_mate_image img { outline-color: #388e3c !important; }
+        button, select {
+            background: linear-gradient(to bottom, #f9fbe7 0%, #c8e6c9 48%, #a5d6a7 52%, #81c784 100%) !important;
+            border: 1px solid #1b5e20 !important;
+        }
+        button:hover, select:hover {
+            background: linear-gradient(to bottom, #ffffff 0%, #f0faf0 48%, #c8e6c9 52%, #a5d6a7 100%) !important;
+        }
+        .container button:active {
+            background: linear-gradient(to bottom, #81c784 0%, #66bb6a 100%) !important;
+        }
+        .campaign_trail_start_emphasis {
+            background: #ef9a9a !important;
+        }
+        #election_description_window, .person_description_window, .description_window_small {
+            border: 2px solid #388e3cd9 !important;
+        }
+        #overall_result, #state_result, #state_info {
+            border: 3px solid #a5d6a7 !important;
+        }
+        #overall_result h3, #state_result h3 { background: #ffcdd2 !important; }
+        #state_info h3 { background: #b71c1c !important; }
+    `
+  },
+  "Flint": {
+    headerSrc: "https://i.pinimg.com/1200x/0c/3d/31/0c3d3159eaa31f72f619e5facbcb4e45.jpg",
+    coloring_title: "#37474f",
+    coloring_window: "linear-gradient(135deg, #ecebe4, #cfd0cc)",
+    containerColor: "",
+    footerColor: "#fff",
+    extraCss: `
+        body {
+            background-color: #2b2b2b !important;
+            background-image: url(https://file.garden/aNtAfG887DiA_7lO/TML_2000/flint_background.webp) !important;
+    		background-repeat: repeat !important;
+			background-size: 250px 250px !important;
+        }
+        #header { object-position: center 60%; }
+        .container { background-color: #3a3a3a !important; }
+        .game_header {
+            background-color: #455a64 !important;
+            background-image: linear-gradient(
+                to right,
+                #b0bec5,
+                #78909c calc(50% - 250px),
+                #37474f calc(50% - 150px) calc(50% + 150px),
+                #78909c calc(50% + 250px),
+                #b0bec5
+            ) !important;
+            border-bottom: 2px solid #263238 !important;
+        }
+        #game_window {
+            background: linear-gradient(135deg, #ecebe4, #cfd0cc) !important;
+            border: .1em solid #546e7a !important;
+        }
+        #inner_window_2, #inner_window_3, #inner_window_4, .inner_window_w_desc {
+            background: linear-gradient(#e8e4da, #cdc9be) !important;
+            border: 1px solid #78909c !important;
+        }
+        .inner_window_question h3 {
+            background: linear-gradient(to bottom, #ecebe4, #cdc9be) !important;
+            border: 2px solid #607d8b !important;
+        }
+        #menu_container {
+            background: linear-gradient(#455a64 50%, transparent) !important;
+        }
+        #state_result_container {
+            background: linear-gradient(0.20turn, transparent, #455a64) !important;
+        }
+        .overlay_window {
+            background: repeating-linear-gradient(#f5f4f0, #e0ddd4 3px) !important;
+            border: .2em solid rgba(96, 125, 139, 0.8) !important;
+        }
+        .overlay_window h3 {
+            background: #b0bec5 !important;
+            border-bottom: .1em solid #37474f !important;
+        }
+        .overlay_window img {
+            border: 3px solid rgba(84, 110, 122, 0.72) !important;
+        }
+        #candidate_image img { outline-color: #78909c !important; }
+        #running_mate_image img { outline-color: #455a64 !important; }
+        button, select {
+            background: linear-gradient(to bottom, #f5f4f0 0%, #dddbd3 48%, #cdc9be 52%, #b8b4a8 100%) !important;
+            border: 1px solid #78909c !important;
+        }
+        button:hover, select:hover {
+            background: linear-gradient(to bottom, #ffffff 0%, #ecebe4 48%, #dddbd3 52%, #cdc9be 100%) !important;
+        }
+        .container button:active {
+            background: linear-gradient(to bottom, #b0bec5 0%, #90a4ae 100%) !important;
+        }
+        .campaign_trail_start_emphasis {
+            background: #cdc9be !important;
+        }
+        #election_description_window, .person_description_window, .description_window_small {
+            border: 2px solid #607d8bd9 !important;
+        }
+        #overall_result, #state_result, #state_info {
+            border: 3px solid #b0bec5 !important;
+        }
+        #overall_result h3, #state_result h3 { background: #dddbd3 !important; }
+        #state_info h3 { background: #37474f !important; }
+    `
   }
 };
 
