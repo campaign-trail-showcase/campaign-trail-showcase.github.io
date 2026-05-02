@@ -45,7 +45,7 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 346,
         "fields": {
-            "description": "Sally, your freshman sister, catches you at your locker between classes, grabbing your sleeve and pulling you into the space between the school’s trophy case and the wall. It’s not good; her eyes are red-rimmed and glassy. “My friends are making fun of me because my brother is running a joke campaign,” she hisses, her voice cracking on the word ‘joke.’ “They say Linus is going to crush you and everyone knows it and I’m going to have to spend the rest of high school being the sister of the kid who lost. Why do you always have to embarrass me? Why can’t you just be normal for <i>once</i>?”"
+            "description": "Sally, your freshman sister, catches you at your locker between classes, grabbing your sleeve and pulling you into the space between the school’s trophy case and the wall. It’s not good; her eyes are red-rimmed and glassy. “My friends are making fun of me because my brother is running a joke campaign,” she hisses, her voice cracking on the word “joke.” “They say Linus is going to crush you and everyone knows it and I’m going to have to spend the rest of high school being the sister of the kid who lost. Why do you always have to embarrass me? Why can’t you just be normal for <i>once</i>?”"
         }
     },
     {
@@ -59,7 +59,7 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 343,
         "fields": {
-            "description": "Today, Linus is holding a rally in the courtyard during lunch, standing on the crumbling edge of dried-up fountain while a crowd of roughly eighty students gathers on the dead grass to watch him. His speech is boring; Linus is using some sort of “Great Pumpkin of our Potential,” metaphor, talking about how the student body must demonstrate “sincerity” in order to be rewarded by the administration, and delivering it with the cadence of a youth pastor. It’s sickeningly poetic, which amuses you, but also entirely hollow, and the worst part is that half the crowd is actually nodding along. Maybe you could say something."
+            "description": "Today, Linus is holding a rally in the courtyard during lunch, standing on the crumbling edge of dried-up fountain while a crowd of roughly eighty students gathers on the dead grass to watch him. His speech is boring; Linus is using some sort of “Great Pumpkin of our Potential” metaphor, talking about how the student body must demonstrate “sincerity” in order to be rewarded by the administration, and delivering it with the cadence of a youth pastor. It’s sickeningly poetic, which amuses you, but also entirely hollow, and the worst part is that half the crowd is actually nodding along. Maybe you could say something."
         }
     },
     {
@@ -9692,7 +9692,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3316,
             "candidate": 78,
-            "answer_feedback": "You promptly swat the recorder away. To your displeasure, the next day the paper runs the headline: ‘BROWN TO PRESS: DROP DEAD’, forcing Patty to spend the next three days doing agonizing damage control. You look like an absolute maniac to the rest of the school, with only the kids currently serving detention finding any sort of grim amusement in your outburst. Feeling pity or worse, Marcie sends her <i>consigliere</i>, Thibault, to soothe your fears one lonely afternoon. But why…?"
+            "answer_feedback": "You promptly swat the recorder away. To your displeasure, the next day the paper runs the headline: ‘BROWN TO PRESS: DROP DEAD’, forcing Patty to spend the next three days doing agonizing damage control. You look like an absolute maniac to the rest of the school, with only the kids currently serving detention finding any sort of grim amusement in your outburst.<br><br>Feeling pity or worse, Marcie sends her <i>consigliere</i>, Thibault, to soothe your fears one lonely afternoon. But why…?"
         }
     },
     {
@@ -10196,7 +10196,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3338,
             "candidate": 78,
-            "answer_feedback": "Linus looks genuinely surprised at your words. He studies your face for a long moment, searching for the angle, the trap, the hidden knife you’re holding, and when he doesn’t find one, he nods slowly and extends his hand to you. The truce takes effect immediately, draining some of the venom from the final week of the campaign in a way that frustrates Patty enormously."
+            "answer_feedback": "Linus looks genuinely surprised at your words. He studies your face for a long moment, searching for the angle, the trap, the hidden knife you’re holding, and when he doesn’t find one, he nods slowly and extends his hand to you.<br><br>The truce takes effect immediately, draining some of the venom from the final week of the campaign in a way that frustrates Patty enormously."
         }
     },
     {
@@ -10957,7 +10957,7 @@ cyoAdventure = function (a) {
 			if (ruthlessness >= 2) {
 				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>“I’ve been watching you, blockhead,” she smirks, stirring her coffee. “You’ve got a bit more bite this semester. I like it, I really do. My brother thinks he’s a philosopher king destined to rule over us morons, but I have some dirt on him that would end his pathetic campaign. I know you have the guts to use it now. You want it?”";
 			} else {
-				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>‘You’re too soft, Charlie Brown,’ she sighs, stirring her coffee with visible disappointment. ‘But my brother is an arrogant prick who thinks he’s Mr. Big, or something. I have dirt on him that would end his pathetic little campaign. The question is: do you actually have the spine to use it, blockhead?’";
+				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>“You’re too soft, Charlie Brown,” she sighs, stirring her coffee with visible disappointment. “But my brother is an arrogant prick who thinks he’s Mr. Big, or something. I have dirt on him that would end his pathetic little campaign. The question is: do you actually have the spine to use it, blockhead?”";
 			}
 		}
 	}
@@ -15869,6 +15869,200 @@ const bonusSlides = [
     }
   },
   {
+    id: "trump",
+    condition: (ev) => charlieWin && ev < 269 && support_jocks >= 3 && anti_establishment >= 3,
+    image: "https://d7hftxdivxxvm.cloudfront.net/?height=800&quality=85&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2FsYasG-Avf3SfG9jALDvSlw%2Fnormalized.jpg&width=658",
+    html: `<style>
+  .fox-wrapper {
+    background-color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000000;
+    max-width: 800px;
+    margin: 20px auto;
+    border: 1px solid #999999;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .fox-header {
+    background-color: #003366;
+    color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: bottom;
+    border-bottom: 4px solid #cc0000;
+  }
+
+  .fox-logo {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .fox-slogan {
+    font-size: 11px;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .fox-nav {
+    background-color: #e6e6e6;
+    padding: 5px 20px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #003366;
+    border-bottom: 1px solid #cccccc;
+  }
+
+  .fox-nav span {
+    margin-right: 15px;
+    cursor: pointer;
+  }
+
+  .fox-content {
+    padding: 20px 30px;
+  }
+
+  .fox-headline {
+    font-size: 24px;
+    font-weight: bold;
+    color: #003366;
+    margin-top: 0;
+    margin-bottom: 5px;
+    line-height: 1.2;
+  }
+
+  .fox-dateline {
+    font-size: 11px;
+    color: #666666;
+    margin-bottom: 20px;
+  }
+
+  .fox-body {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .fox-body p {
+    margin-bottom: 15px;
+  }
+
+  .fox-transcript {
+    background-color: #f4f4f4;
+    border: 1px solid #cccccc;
+    padding: 15px;
+    margin: 20px 0;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+  }
+
+  .fox-transcript strong {
+    color: #003366;
+  }
+
+  .fox-pullquote {
+    float: right;
+    width: 250px;
+    margin: 0 0 15px 20px;
+    padding: 10px;
+    border-top: 2px solid #cc0000;
+    border-bottom: 2px solid #cc0000;
+    font-size: 16px;
+    font-weight: bold;
+    color: #003366;
+    line-height: 1.3;
+  }
+
+  .fox-footer {
+    background-color: #003366;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    font-size: 10px;
+  }
+</style>
+
+<div class="fox-wrapper">
+
+  <div class="fox-header">
+    <div class="fox-logo">FOXNews.com</div>
+    <div class="fox-slogan">Fair and Balanced</div>
+  </div>
+
+  <div class="fox-nav">
+    <span>HOME</span>
+    <span>U.S.</span>
+    <span>WORLD</span>
+    <span>POLITICS</span>
+    <span>ELECTION '04</span>
+  </div>
+
+  <div class="fox-content">
+
+    <h1 class="fox-headline">TRUMP'S DEBATE SHOCKER: 'APPRENTICE' STAR BULLIES BUSH, PUSHES UNIVERSAL HEALTHCARE</h1>
+
+    <div class="fox-dateline">
+      Friday, October 8, 2004<br>
+      By Fox News Channel Staff
+    </div>
+
+    <div class="fox-body">
+      <div class="fox-pullquote">
+        "I'm looking at George, and frankly, I feel bad for him. Very low energy. And Dick Cheney, who is hiding in a bunker somewhere — he's a loser, folks."
+      </div>
+
+      <p><b>ST. LOUIS —</b> Pundits and voters alike were left speechless Friday night after what was arguably the most bizarre, chaotic, and downright hostile presidential debate in American history.</p>
+
+      <p>Democratic nominee Donald J. Trump, the billionaire real estate mogul and star of NBC's "The Apprentice," completely abandoned traditional political decorum during the town-hall style debate at Washington University. Instead of offering wonky policy details or parrying on foreign policy, as most nominees before him did, Trump spent the 90-minute broadcast mercilessly bullying President George W. Bush and Vice President Dick Cheney.</p>
+
+      <p>Bush, who appeared visibly frustrated and occasionally bewildered, repeatedly tried to steer the conversation toward his record on tax cuts and the War on Terror. But Trump interrupted the incumbent at every turn, pacing around the stage, invading Bush's personal space, and labeling the sitting administration as "low-energy losers."</p>
+
+      <p>In perhaps the most shocking policy moment of the night, Trump vigorously defended a sweeping, government-funded universal healthcare system— a traditionally left-wing policy that he pitched using his trademark brash, populist rhetoric, alienating conservatives while leaving moderate Democrats scratching their heads.</p>
+
+      <p>Below is an excerpt from the official debate transcript, provided by the Commission on Presidential Debates:</p>
+
+      <div class="fox-transcript">
+        <p><strong>MODERATOR CHARLES GIBSON:</strong> Mr. Trump, I want to return to the issue of the rising cost of healthcare. President Bush has proposed tax credits and health savings accounts, and you have proposed a system that sounds very similar to socialized medicine. How do you pay for it?</p>
+
+        <p><strong>DONALD TRUMP:</strong> Charlie, first of all, look at George. Look at him. He's sweating, he's a mess. He's been President for four years and our country is falling apart. Health savings accounts? Give me a break. George, nobody knows what that is. It's garbage.</p>
+
+        <p><strong>PRESIDENT GEORGE W. BUSH:</strong> Well, Charlie, let me— let me just say, my plan empowers the patient. My opponent wants the federal government to—</p>
+
+        <p><strong>TRUMP:</strong> <em>(interrupting)</em> Nobody wants your plan, George. You don't even want your plan. You know who wants your plan? Dick Cheney's rich friends at Halliburton. And by the way, where is Dick? Is he in a bunker? He's always in a bunker. Either that or Tahiti, he's a low-energy guy. A total loser, so bad at business. I've seen his balance sheets, they're a disaster.</p>
+
+        <p><strong>BUSH:</strong> Now wait a minute. The Vice President is a good man, and we are fighting a global war on—</p>
+
+        <p><strong>TRUMP:</strong> <em>(waving his hands)</em> Quiet, piggy. Let me talk, I'm answering Charlie's question. We are going to take care of everybody. Okay? Universal healthcare, everybody gets covered, the government pays for it, boom. We're the richest country in the world, and we have people dying in the streets because they can't afford a band-aid. It's a disgrace, rdally.</p>
+
+        <p><strong>GIBSON:</strong> But Mr. Trump, to follow up—</p>
+
+        <p><strong>TRUMP:</strong> In Canada, in Scotland — where I have beautiful golf courses, by the way, you should go there someday —, they don't let you die. They take care of you. We are going to make a deal with the hospitals, a beautiful deal, perhaps the greatest deal ever made. Lil' Dubya and Mr. Cheney are just letting the drug companies rob you blind because they have zero negotiating skills. <i>Zero</i>. Look at him, he can barely string a sentence together. He can't even stand up for the country! I've seen disabled vets who could stand up more than him, really. And you're going to let this guy negotiate with Pfizer? I don't think so.</p>
+
+        <p><strong>BUSH:</strong> <em>(laughing nervously)</em> Charlie, he wants to put bureaucrats between you and your doctor. It's... it's just not the American way.</p>
+
+        <p><strong>TRUMP:</strong> <em>(leaning into his microphone)</em> "The American way." George, your American way is getting us ripped off by the Saudis while we spend trillions in the sandbox. We're going to use that money to fix our own country. And this November, I'm gonna let you know: you're fired. You're fired, George. It's over, get the hell out of here.</p>
+      </div>
+
+      <p>Following the debate, the Bush campaign released a blistering statement calling Trump's behavior "unhinged and un-presidential." Top Republican strategists appeared on Fox News immediately after the broadcast, warning that Trump's healthcare plan would bankrupt the nation.</p>
+
+      <p>Meanwhile, Democratic leadership remained remarkably quiet, seemingly unsure of how to handle their nominee's unorthodox, abrasive, yet undeniably commanding debate performance. Early flash polls taken by the Gallup organization suggest that despite the breach in decorum, Trump's performance resonated strongly with undecided blue-collar voters in key rust-belt states.</p>
+
+      <p>The third and final presidential debate is scheduled for October 13 in Tempe, Arizona.</p>
+
+    </div>
+  </div>
+
+  <div class="fox-footer">
+    Copyright © 2004 FOX News Network, LLC. All rights reserved.
+  </div>
+
+</div>`
+  },
+  {
     id: "homersimpson_good",
     condition: (ev) => charlieWin && cynicism >= 4 && ruthlessness >= 6,
     image: "https://i.pinimg.com/1200x/3c/33/9e/3c339e5453035d82f27cc8e63f06512d.jpg",
@@ -18453,6 +18647,213 @@ dd {
       </div>
     </div>
   </div>
+</div>`
+  },
+  {
+    id: "enron",
+    condition: (ev) => ev < 269 && support_admin >= 3 && ruthlessness >= 4,
+    image: "https://i.redd.it/zjzq2gb5mcce1.jpeg",
+    html: `<style>
+  .engadget-wrapper {
+    background-color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333;
+    font-size: 14px;
+    line-height: 1.6;
+    border: 1px solid #cccccc;
+    max-width: 780px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .engadget-header {
+    background-color: #1a75bb;
+    color: #ffffff;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .engadget-logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    margin: 0;
+  }
+
+  .engadget-nav {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .engadget-nav span {
+    margin-left: 15px;
+    cursor: pointer;
+  }
+
+  .post-container {
+    padding: 30px 40px;
+  }
+
+  .post-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #000000;
+    margin-top: 0;
+    margin-bottom: 5px;
+    line-height: 1.2;
+  }
+
+  .post-meta {
+    font-size: 11px;
+    color: #888888;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+  }
+
+  .post-meta a {
+    color: #1a75bb;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .post-body p {
+    margin-bottom: 18px;
+  }
+
+  .post-body a {
+    color: #1a75bb;
+    text-decoration: none;
+  }
+
+  .post-body a:hover {
+    text-decoration: underline;
+  }
+
+  .pullquote {
+    margin: 25px 0;
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #1a75bb;
+    font-style: italic;
+    color: #555555;
+  }
+
+  .specs-box {
+    background-color: #f4f4f4;
+    border: 1px solid #dddddd;
+    padding: 15px;
+    margin: 25px 0;
+    font-size: 12px;
+  }
+
+  .specs-box h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #333;
+  }
+
+  .tags {
+    margin-top: 30px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #666666;
+  }
+
+  .tags span {
+    background-color: #eeeeee;
+    padding: 3px 8px;
+    margin-right: 5px;
+    border-radius: 3px;
+  }
+
+  .comments-bar {
+    background-color: #f4f4f4;
+    padding: 15px 40px;
+    border-top: 1px solid #cccccc;
+    font-weight: bold;
+    font-size: 13px;
+    color: #1a75bb;
+  }
+</style>
+
+<div class="engadget-wrapper">
+
+  <div class="engadget-header">
+    <div class="engadget-logo">engadget</div>
+    <div class="engadget-nav">
+      <span>Mobile</span>
+      <span>Features</span>
+      <span>Reviews</span>
+    </div>
+  </div>
+
+  <div class="post-container">
+
+    <h1 class="post-title">Enron Mobile E-300 review: A battery beast crippled by syllable shock</h1>
+
+    <div class="post-meta">
+      By <a href="#">Peter Rojas</a> | August 14th 2005, 1:23 PM EST | <b>342 Comments</b>
+    </div>
+
+    <div class="post-body">
+      <p>We finally got our hands on the highly anticipated Enron Mobile E-300. After Kenneth Lay’s aggressive push into the consumer electronics sector earlier this year, everyone has been wondering if the controversial energy-turned-telecom giant could actually build a decent handset. The hardware answer is a resounding "yes." The software and billing answer, however, is a dystopian "ugh" (which, incidentally, will cost you exactly five cents to say).</p>
+
+      <p>Let's talk form factor first. The E-300 is a sleek, black clamshell device featuring a vibrant 65k-color internal display and a very respectable 1.3-megapixel camera. But the real star of the show here is Enron’s proprietary "Smart-Grid" lithium-ion battery. We managed to squeeze a mind-boggling <b>twelve days</b> of standby time and 14 hours of continuous talk time out of this thing. It makes the Motorola RAZR look like it’s running on potato power! If we were rating the E-300 on hardware alone, it would be an absolute must-buy.</p>
+
+      <p>But we can't do that. We have to talk about the billing plan.</p>
+
+      <p>As you probably know, following Enron's massive 2001 restructuring and their subsequent (and highly controversial) lobbying efforts in Washington, the FCC basically handed them the keys to the kingdom. President Bush’s recently signed "Telecommunications Verbal Equity Act" allowed Enron to patent and privatize the digital transmission of verbal communication over cellular networks. That brings us to the E-300’s primary caveat: the Pay-Per-Syllable (PPS) billing structure.</p>
+
+      <div class="pullquote">
+        "Calling your grandmother to wish her a happy birthday will now cost you upwards of twelve dollars if she's a talker."
+      </div>
+
+      <p>Instead of charging per minute, Enron’s voice-recognition algorithm actively monitors your calls and charges your account $0.05 per syllable. Say "Hello" to the person on the other line? That's ten cents. Say "I am doing well, how are you today?" That's 45 cents. It sounds trivial until you get your first monthly bill. One of our editors racked up a $412 charge over a single weekend just by having a mildly heated argument with his girlfriend about where to eat dinner. It's insane!</p>
+
+      <p>This absurd monetization of vocabulary has already birthed a bizarre new counter-culture among American teenagers. If you’ve hung out near a high school or a mall recently, you’ve probably witnessed the so-called "Enron grunt." Because the E-300's voice-recognition software filters out non-linguistic vocalizations, teens are literally resorting to communicating in grunts, clicks, and extreme shorthand to save their prepaid minutes. </p>
+
+      <p>A typical phone conversation between two 16-year-olds in 2005 now sounds something like this:</p>
+
+      <p>
+        <i>"Sup." ($0.05)</i><br>
+        <i>*affirmative grunt* ($0.00)</i><br>
+        <i>"Mall?" ($0.05)</i><br>
+        <i>*hesitant grunt* ($0.00)</i><br>
+        <i>"Food." ($0.05)</i><br>
+        <i>"Bet." ($0.05)</i><br>
+      </p>
+
+      <p>It's fascinating from a linguistic standpoint, but absolutely infuriating from a consumer rights perspective. No wonder President Bush is currently facing his lowest approval ratings to date; allowing a megacorporation to nickel-and-dime the English language is a policy failure of epic proportions.</p>
+
+      <p>Text messaging (SMS) remains flat-rate for now, but Enron has already filed a patent for "digital alphabet taxation," so we wouldn't hold our breath.</p>
+
+      <div class="specs-box">
+        <h4>The Engadget Score</h4>
+        <b>Hardware:</b> 9/10<br>
+        <b>Battery Life:</b> 10/10<br>
+        <b>Software/UI:</b> 7/10<br>
+        <b>Pricing/Value:</b> 1/10<br>
+        <br>
+        <b>Wrap-up:</b> The Enron Mobile E-300 is a gorgeous, long-lasting clamshell phone ruined by corporate greed. Only recommended for mimes, the incredibly wealthy, or teenagers who have fully embraced the new grunt-culture.
+      </div>
+
+      <div class="tags">
+        TAGS: <span>enron</span> <span>e-300</span> <span>cellphones</span> <span>reviews</span> <span>mobile</span> <span>dystopia</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="comments-bar">
+    View all 342 comments...
+  </div>
+
 </div>`
   },
   {
@@ -26243,10 +26644,10 @@ dd {
 
 </div>`,
 	song: {
-      title: "Architecture And Morality",
-      artist: "Orchestral Manoeuvres In The Dark",
-      cover: "https://resources.tidal.com/images/042b8cdd/89c9/4358/9066/72140578b39e/320x320.jpg",
-      url: ["XA3KTY--20g", "7Kxpa72BwsE"]
+      title: "In My Bed",
+      artist: "Amy Winehouse",
+      cover: "https://yt3.googleusercontent.com/_9Rfq6bjdHypuz40wPYQMHZDfraEHWtzLXZYDMneLAJZlpyD35p4ZuFKWQuTjxdcrFfTgw_YWrt5eRib=w544-h544-l90-rj",
+      url: ["3vZHpdo4DHU"]
     }
   },
   {
@@ -27734,8 +28135,35 @@ endingPicker = (out, totv, aa, quickstats) => {
 	if (typeof linusWin !== "undefined" && linusWin && ansSet.has(3314) && ansSet.has(3385)) {
         unlockAchievement("The End Is Never...");
     }
+	if (typeof charlieWin !== "undefined" && charlieWin && window.isRoyInCharge && cynicism >= 5) {
+        unlockAchievement("Love Like Blood");
+    }
+	if (typeof charlieWin !== "undefined" && charlieWin && window.isRoyInCharge) {
+        unlockAchievement("60 Miles an Hour");
+    }
+	if (typeof charlieWin !== "undefined" && charlieWin && ruthlessness <= -2) {
+        unlockAchievement("True Faith");
+    }
+	if (typeof charlieWin !== "undefined" && charlieWin && support_arts >= 3 && (ansSet.has(3410) || ansSet.has(3411))) {
+        unlockAchievement("Bohemian Like You");
+    }
+	if (typeof charlieWin !== "undefined" && charlieWin && support_jocks >= 3 && ansSet.has(3318)) {
+        unlockAchievement("Primitive Notion");
+    }
+	if (typeof charlieWin !== "undefined" && charlieWin && support_burnouts >= 3 && ansSet.has(3319)) {
+        unlockAchievement("Running in the Family");
+    }
+	if (typeof charlieWin !== "undefined" && charlieWin && ruthlessness >= 5 && cynicism >= 5) {
+        unlockAchievement("Kundalini Express");
+    }
     if (ansSet.has(3488) && cynicism <= 0) {
         unlockAchievement("Erase and Rewind");
+    }
+	if (anti_establishment >= 5 && support_admin <= -2) {
+        unlockAchievement("The Swing of Things");
+    }
+	if (support_admin >= 2 && anti_establishment <= -1) {
+        unlockAchievement("Bass to Mouth");
     }
 
   // select main ending (slide 0)
