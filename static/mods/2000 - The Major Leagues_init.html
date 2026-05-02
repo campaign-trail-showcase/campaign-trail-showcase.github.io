@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.0.8
+* @version: 1.0.9
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -4213,30 +4213,32 @@ window.a = function(e) {
 // The dynamic tooltips
 const tooltipList = [
   { searchString: "Linus", image: "https://i.pinimg.com/1200x/83/3a/3a/833a3aa1382f73a6cffe17e3193101a5.jpg", text: "The devil." },
-  { searchString: "Patty", image: "https://i.pinimg.com/1200x/22/cb/d0/22cbd081d3bc2e7306f29803cb9d7a67.jpg", text: "Ah, heavens..." },
-  { searchString: "Lucy", image: "https://i.pinimg.com/1200x/40/d6/45/40d64580f6da559e27862d50810be0c7.jpg", text: "Linus's terrifying older sister. Also known as Baphomet, she runs the school's social hierarchy with an iron fist." },
-  { searchString: "Marcie", image: "https://i.pinimg.com/1200x/38/39/b8/3839b8a8087408dfdfe5204465db6ed7.jpg", text: "A modern day Cleopatra, she's the editor of the school paper. What if I told you her favorite author is Dennis Cooper?" },
-  { searchString: "Schroeder", image: "https://i.pinimg.com/1200x/f9/29/e1/f929e18099f43154a6ae2d93e4ff499c.jpg", text: "A so-called tortured 19th-century artist trapped in the suburbs. He's more <i>nouveau rich</i> than old money, though." },
+  { searchString: "Patty", image: "https://i.pinimg.com/1200x/22/cb/d0/22cbd081d3bc2e7306f29803cb9d7a67.jpg", text: "Ah, heavens…" },
+  { searchString: "Lucy", image: "https://i.pinimg.com/1200x/40/d6/45/40d64580f6da559e27862d50810be0c7.jpg", text: "Linus’s terrifying older sister. Also known as Baphomet, she runs the school’s social hierarchy with an iron fist." },
+  { searchString: "Marcie", image: "https://i.pinimg.com/1200x/38/39/b8/3839b8a8087408dfdfe5204465db6ed7.jpg", text: "A modern day Cleopatra, she’s the editor of the school paper. What if I told you her favorite author is Dennis Cooper?" },
+  { searchString: "Schroeder", image: "https://i.pinimg.com/1200x/f9/29/e1/f929e18099f43154a6ae2d93e4ff499c.jpg", text: "A so-called tortured 19th-century artist trapped in the suburbs. He’s more <i>nouveau rich</i> than old money, though." },
   { searchString: "Snoopy", image: "https://i.pinimg.com/1200x/fa/5e/f9/fa5ef929605e697568af58c09fa2ae35.jpg" },
   { searchString: "Sally", image: "https://i.pinimg.com/1200x/4f/94/72/4f9472bf689e41439e9822a84b43af29.jpg", text: "Your very kind and loving sister." },
-  { searchString: "Pig-Pen", image: "https://i.pinimg.com/1200x/43/98/e9/4398e9861682555d3f2e7bcc5f18356c.jpg", text: "Some things just don't change." },
+  { searchString: "Pig-Pen", image: "https://i.pinimg.com/1200x/43/98/e9/4398e9861682555d3f2e7bcc5f18356c.jpg", text: "Some things just don’t change." },
   { searchString: "Little Red-Haired Girl", image: "https://i.pinimg.com/1200x/6f/8f/6a/6f8f6a6fafb6dd7aa93b1be52b741352.jpg", text: "Maybe you two could be royals." },
   { searchString: "Franklin", image: "https://i.pinimg.com/1200x/8a/be/3d/8abe3d131ec5b11c1644f6103cd2c851.jpg", text: "If only you were like him." },
   { searchString: "Othmar", image: null, text: "The Bastard. Not even worthy of an image." },
   { searchString: "Principal Othmar", image: null, text: "Worse than Hitler. Not even worthy of an image." },
   { searchString: "Roy", image: "https://i.pinimg.com/1200x/16/15/08/161508a3e30144c8dbd83bb2c06fc952.jpg", text: "An angel." },
   { searchString: "Great Pumpkin", image: "https://i.pinimg.com/1200x/5b/2e/88/5b2e887851a61a142436b34a3d86b283.jpg", text: "A childish myth repackaged as pseudo-intellectual campaign rhetoric. Great job, Linus." },
-  { searchString: "Thibault", image: "https://i.pinimg.com/1200x/4a/84/3d/4a843dbc40cbb50ac6820404d56cb57e.jpg", text: "Marcie's enforcer. Being infatuated with him has been a real pleasure." },
-  { searchString: "Cormac", image: "https://i.pinimg.com/1200x/5a/e6/66/5ae66660555befcde65c29f7996c23c8.jpg", text: "More popular in some corners than you'd think he is." },
+  { searchString: "Thibault", image: "https://i.pinimg.com/1200x/4a/84/3d/4a843dbc40cbb50ac6820404d56cb57e.jpg", text: "Marcie’s enforcer. Being infatuated with him has been a real pleasure." },
+  { searchString: "Cormac", image: "https://i.pinimg.com/1200x/5a/e6/66/5ae66660555befcde65c29f7996c23c8.jpg", text: "More popular in some corners than you’d think he is." },
   { searchString: "Shermy", image: "https://i.pinimg.com/1200x/d8/29/14/d82914cc5d15f876c4c48402b0977aee.jpg", text: "Like Moses, only keeping it real. Peaked in elementary school but still kicking around." },
   { searchString: "Five", image: "https://i.pinimg.com/originals/09/c3/3a/09c33aaf8ec90828066caeef33c586b5.gif", text: "Wait, his parents actually named him that!?" },
-  { searchString: "Floyd", image: "https://i.pinimg.com/1200x/37/b1/6d/37b16d01ef6955e530ef3b009c58c07c.jpg", text: "The student body treasurer. He doesn't know how worse it can get." },
-  { searchString: "Maynard", image: "https://www.behindthevoiceactors.com/_img/chars/thumbs/maynard-snoopy-presents-for-auld-lang-syne-89.9_thumb.jpg", text: "Marcie's cousin. His part-time job is being school paper's photographer; his pastime is being her lapdog." },
-  { searchString: "Sparky High", image: null, text: "Sparky Memorial High, presumably named after the creator himself. Essentially, a microcosm of the world's decay." },
+  { searchString: "Floyd", image: "https://i.pinimg.com/1200x/37/b1/6d/37b16d01ef6955e530ef3b009c58c07c.jpg", text: "The student body treasurer. He doesn’t know how worse it can get." },
+  { searchString: "Maynard", image: "https://www.behindthevoiceactors.com/_img/chars/thumbs/maynard-snoopy-presents-for-auld-lang-syne-89.9_thumb.jpg", text: "Marcie’s cousin. His part-time job is being school paper’s photographer; his pastime is being her lapdog." },
+  { searchString: "Sparky High", image: null, text: "Sparky Memorial High, presumably named after the creator himself. Essentially, a microcosm of the world’s decay." },
   { searchString: "Brownites", image: null, text: "A nickname for your supporters." },
-  { searchString: "Charlie Brown", image: "https://i.pinimg.com/1200x/c4/fd/a5/c4fda5921388916b2523f87962463eda.jpg", text: "Despite everything, it's still you." },
+  { searchString: "Charlie Brown", image: "https://i.pinimg.com/1200x/c4/fd/a5/c4fda5921388916b2523f87962463eda.jpg", text: "Despite everything, it’s still you." },
 
   { searchString: "your campaign", image: "https://i.pinimg.com/1200x/0f/a6/fe/0fa6fe4fc973a3ee8d38c370f35f5a36.jpg", text: "A disaster." },
+  { searchString: "Al Gore", image: "https://i.pinimg.com/1200x/9e/2c/16/9e2c160a080bca989d5db92537b34faa.jpg", text: "Ballin’." },
+  { searchString: "Stevenson", image: "https://i.pinimg.com/1200x/57/14/5c/57145ca004175da428d7391e6718f35b.jpg", text: "An egghead of style." },
 
 ];
 
@@ -4303,8 +4305,26 @@ function applyTooltips(str) {
 function applyTooltipsToObject(obj) {
     for (const key of Object.keys(obj)) {
         if (typeof obj[key] === 'string') {
-            obj[key] = applyTooltips(obj[key]);
+            // pre-process the initial string
+            let internalValue = applyTooltips(obj[key]);
+
+            // hijack the property so future assignments are automatically processed
+            Object.defineProperty(obj, key, {
+                get: function() {
+                    return internalValue;
+                },
+                set: function(newVal) {
+                    if (typeof newVal === 'string') {
+                        internalValue = applyTooltips(newVal);
+                    } else {
+                        internalValue = newVal;
+                    }
+                },
+                configurable: true,
+                enumerable: true
+            });
         } else if (obj[key] && typeof obj[key] === 'object') {
+            // recursively travel down the object tree
             applyTooltipsToObject(obj[key]);
         }
     }
@@ -5574,4 +5594,49 @@ campaignTrail_temp.achievements = {
     "description": "You can have it all.",
     "cannotBeCheated": true
   },
+  "60 Miles an Hour": {
+    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a18.png",
+    "description": "Be on the run.",
+    "cannotBeCheated": true
+  },
+  "Love Like Blood": {
+    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a17.png",
+    "description": "Make his day.",
+    "cannotBeCheated": true
+  },
+  "True Faith": {
+    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a19.png",
+    "description": "Keep your nose clean.",
+    "cannotBeCheated": true
+  },
+  "Bohemian Like You": {
+    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a20.png",
+    "description": "Don't blame me, I prefer Dvořák.",
+    "cannotBeCheated": true
+  },
+  "Primitive Notion": {
+    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a21.png",
+    "description": "Play ball.",
+    "cannotBeCheated": true
+  },
+  "The Swing of Things": {
+    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a22.png",
+    "description": "Get thrown under a bus.",
+    "cannotBeCheated": true
+  },
+  "Bass to Mouth": {
+    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a23.png",
+    "description": "Throw others under a bus.",
+    "cannotBeCheated": true
+  },
+  "Running in the Family": {
+    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a24.png",
+    "description": "Be totally exonerated, no wrongdoing.",
+    "cannotBeCheated": true
+  },
+   "Kundalini Express": {
+    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a25.png",
+    "description": "Truly a model child.",
+    "cannotBeCheated": true
+  }
 }
