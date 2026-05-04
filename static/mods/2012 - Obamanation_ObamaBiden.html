@@ -1,36 +1,84 @@
+const ACHBOX = (() => {
+    const STACK_TOP    = 12;
+    const STACK_GAP    = 10;
+    const DISPLAY_TIME = 5000;
+    const active = [];
+
+    function reflow() {
+        const totalWidth = active.reduce((sum, item) => sum + item.width, 0)
+                         + STACK_GAP * (active.length - 1);
+
+        let x = (window.innerWidth - totalWidth) / 2;
+        for (const item of active) {
+            item.el.style.left = x + "px";
+            x += item.width + STACK_GAP;
+        }
+    }
+
+    function remove(popup) {
+        popup.classList.remove("is-visible");
+        popup.classList.add("is-hiding");
+
+        setTimeout(() => {
+            popup.remove();
+            const idx = active.findIndex(i => i.el === popup);
+            if (idx !== -1) active.splice(idx, 1);
+            reflow();
+        }, 250);
+    }
+
+    function push(popup) {
+        document.body.appendChild(popup);
+
+        requestAnimationFrame(() => {
+            const width = popup.offsetWidth;
+            active.push({ el: popup, width });
+            reflow();
+
+            requestAnimationFrame(() => popup.classList.add("is-visible"));
+
+            setTimeout(() => remove(popup), DISPLAY_TIME);
+        });
+    }
+
+    return { push };
+})();
+
+
 const CTS_ACHIEVEMENT_CSS = `
 .cts-achievement {
     position: fixed;
     top: 12px;
-    left: 50%;
-    transform: translateX(-50%) scale(0.92);
+    /* left is set dynamically */
+    transform: scale(0.92);
     opacity: 0;
     z-index: 9999;
     padding: 12px 14px;
     text-align: center;
     font-family: "Segoe UI", Tahoma, sans-serif;
-    background:
-        linear-gradient(to bottom,
-            rgba(255,255,255,0.95),
-            rgba(210,225,245,0.95)
-        );
+    background: linear-gradient(to bottom,
+        rgba(255,255,255,0.95),
+        rgba(210,225,245,0.95)
+    );
     border: 1px solid rgba(60,120,200,0.6);
     border-radius: 4px;
     box-shadow:
         0 0 0 1px rgba(255,255,255,0.6) inset,
         0 8px 18px rgba(0,0,0,0.25),
         0 0 12px rgba(120,170,255,0.35);
-    transition: all 0.25s ease-out;
+
+    transition: left 0.3s ease, opacity 0.25s ease-out, transform 0.25s ease-out;
 }
 
 .cts-achievement.is-visible {
     opacity: 1;
-    transform: translateX(-50%) scale(1);
+    transform: scale(1);
 }
 
 .cts-achievement.is-hiding {
     opacity: 0;
-    transform: translateX(-50%) scale(0.9);
+    transform: scale(0.9);
+    transition: left 0.3s ease, opacity 0.2s ease, transform 0.2s ease;
 }
 
 .cts-achievement__image {
@@ -47,7 +95,7 @@ const CTS_ACHIEVEMENT_CSS = `
 .cts-achievement__title {
     font-weight: 600;
     font-size: 16px;
-    color: rgb(30, 70, 140);
+    color: rgb(30,70,140);
     text-shadow: 0 1px 0 rgba(255,255,255,0.8);
 }
 
@@ -55,18 +103,18 @@ const CTS_ACHIEVEMENT_CSS = `
     font-size: 13px;
     margin-top: 4px;
     max-width: 220px;
-    color: rgba(20, 20, 20, 0.85);
+    color: rgba(20,20,20,0.85);
 }
 `;
 
 function ensureAchievementStyles() {
     if (document.getElementById("cts-achievement-styles")) return;
-
     const style = document.createElement("style");
     style.id = "cts-achievement-styles";
     style.textContent = CTS_ACHIEVEMENT_CSS;
     document.head.appendChild(style);
 }
+
 
 function ctsAchievement(achievementName, difficultyChecker = true) {
     const temp = window.campaignTrail_temp;
@@ -108,34 +156,21 @@ function ctsAchievement(achievementName, difficultyChecker = true) {
     }
 
     // extract achievement metadata
-    const achievementData = temp.achievements?.[achievementName] || {};
-    const title = achievementData.title || achievementName;
-    const description = achievementData.description || "";
-    const imgSource = achievementData.image || achievementData.imageUrl || "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Code1/zXSQiZr.png";
+    const data   = temp.achievements?.[achievementName] || {};
+    const title  = data.title       || achievementName;
+    const desc   = data.description || "";
+    const imgSrc = data.image || data.imageUrl || "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Code1/zXSQiZr.png";
 
     // build the custom popup
     const popup = document.createElement("div");
     popup.className = "cts-achievement";
     popup.innerHTML = `
-        <img class="cts-achievement__image" src="${imgSource}" alt="">
+        <img class="cts-achievement__image" src="${imgSrc}" alt="">
         <div class="cts-achievement__title">${title}</div>
-        ${description ? `<div class="cts-achievement__desc">${description}</div>` : ""}
+        ${desc ? `<div class="cts-achievement__desc">${desc}</div>` : ""}
     `;
 
-    document.body.appendChild(popup);
-
-    // animate in
-    requestAnimationFrame(() => {
-        popup.classList.add("is-visible");
-    });
-
-    // animate out and remove
-    setTimeout(() => {
-        popup.classList.remove("is-visible");
-        popup.classList.add("is-hiding");
-
-        setTimeout(() => popup.remove(), 250);
-    }, 2500);
+    ACHBOX.push(popup);
 }
 
 campaignTrail_temp.questions_json = [
@@ -43446,6 +43481,7 @@ const ads = [
 
 	campaignTrail_temp.candidate_last_name = ' ';
 	campaignTrail_temp.running_mate_last_name = ' ';
+	campaignTrail_temp.candidate_state_id = '193';
 	campaignTrail_temp.running_mate_state_id = '188';
 	campaignTrail_temp.player_answers = [];
 	campaignTrail_temp.player_visits = [];
@@ -46983,26 +47019,6 @@ scrollbarObserver.observe(observeTarget, {
 			Sanders += 1;
 		}
 
-		// Question 31 special post-processing
-		if (isQuestion(31)) {
-			if (Rep == 29 && Sanders == 0) {
-				switcheroo15();
-			}
-
-			if (Rep == 38) {
-				switcheroo39();
-				vpTable["Pat Buchanan"] = "Tucker Carlson";
-				removeById('BECK_A');
-			}
-
-			if (Rep == 2 && hasAllAnswers(8938, 9184)) {
-				switcheroo40();
-				vpTable["Ron Paul"] = "Michael Render";
-				addEndIfMissing('PAUL_D', PaulSpoil);
-				removeById('BECK_A');
-			}
-		}
-
 		Object.entries(questionConfig).forEach(([qNum, conditions]) => {
 			if (isQuestion(+qNum)) {
 				const match = conditions.find(c => c.when());
@@ -47142,6 +47158,35 @@ scrollbarObserver.observe(observeTarget, {
         if (e.player_answers.includes(9491) || e.player_answers.includes(9492) || e.player_answers.includes(9493)) { // Achieve ultimate victory as a neolib
             ctsAchievement("war criminal :(");
         }
+
+		// calculates dynamic momentum
+		function getCandidateScore(id) {
+			let score = 0;
+			switch(id) {
+				case 'ROMNEY_A': score = (Econ * 2) + (Wins * 1) - (Cred * 0.5); break;
+				case 'TRUMP_A': score = (Econ * -2) - (Cred * 1.5) + (Chauvinism * 1); break;
+				case 'CHRISTIE_A': score = (Cred * -1.5) + (Econ * -1); break;
+				case 'ARPAIO_A': score = (Cred * -2) - (Econ * 1); break;
+				case 'PETRAEUS_A': score = (Cred * 2) + (Chauvinism * 1.5); break;
+				case 'MCCHRYSTAL_A': score = (Chauvinism * 2.5) - (Cred * 1); break;
+				case 'HUNTSMAN_A':
+				case 'HUNTSMAN_B':
+				case 'HUNTSMAN_C': score = (Cred * 2) + (Econ * 1); break;
+				case 'RICE_A': score = (Chauvinism * 2) - (Wins * 1.5); break;
+				case 'BLOOMBERG_A': score = (Econ * 2) + (Cred * 1); break;
+				case 'BUSH_A': score = (Cred * -2) - (Wins * 1); break;
+				case 'BACHMANN_A': score = (Cred * -2.5) - (Wins * 1); break;
+				case 'MCCAIN_A':
+				case 'MCCAIN_B': score = (Chauvinism * 2) + (Cred * 1.5); break;
+				case 'GINGRICH_A': score = (Cred * -1.5) + (Econ * -1); break;
+				case 'CHENEY_A': score = (Chauvinism * 3) - (Cred * 3); break;
+				case 'PAUL_A':
+				case 'PAUL_B':
+				case 'PAUL_C': score = (Econ * -1.5) - (Chauvinism * 2); break;
+				default: return null;
+			}
+			return score;
+		}
 
 		function applyCandidateRules(e) {
 		  const { has, hasAll, hasAny } = makeAnswerChecks(e.player_answers || []);
@@ -47397,6 +47442,26 @@ scrollbarObserver.observe(observeTarget, {
 			addEndIfMissing('LIEBERMAN_A', LiebermanCand);
 		  }
 
+		  // Question 31 special post-processing
+		  if (e.noCounter == 31) {
+			if (Rep == 29 && Sanders == 0) {
+				switcheroo15();
+			}
+
+			if (Rep == 38) {
+				switcheroo39();
+				vpTable["Pat Buchanan"] = "Tucker Carlson";
+				removeById('BECK_A');
+			}
+
+			if (Rep == 2 && hasAll([8938, 9184])) {
+				switcheroo40();
+				vpTable["Ron Paul"] = "Michael Render";
+				addEndIfMissing('PAUL_D', PaulSpoil);
+				removeById('BECK_A');
+			}
+		  }
+
 		  // Eastwood "The Storm" trigger
 		  if (e.noCounter == 7 && has(8921) && (has(8930) || has(8943))) {
 			  addEndIfMissing('STORM_A', TheStorm);
@@ -47417,6 +47482,29 @@ scrollbarObserver.observe(observeTarget, {
               SandersCand.text = "Outraged by your inflammatory remarks, Sanders leads an army of angry progressives into the general election, promising to destroy you for your betrayal of the left.";
 
 		  }
+
+		  // dynamic sorting of nominees
+			if (e.noCounter < 32) {
+				const thirdParties = [];
+				const gopField = [];
+
+				menuItemsA.forEach(item => {
+					let score = getCandidateScore(item.id);
+					if (score !== null) {
+						item.currentScore = score;
+						gopField.push(item);
+					} else {
+						thirdParties.push(item);
+					}
+				});
+
+				// sort from highest momentum to lowest
+				gopField.sort((a, b) => b.currentScore - a.currentScore);
+
+				menuItemsA.length = 0;
+				gopField.forEach(item => menuItemsA.push(item));
+				thirdParties.forEach(item => menuItemsA.push(item));
+			}
 
 		  // For noCounter == 32
 			if (e.noCounter == 32) {

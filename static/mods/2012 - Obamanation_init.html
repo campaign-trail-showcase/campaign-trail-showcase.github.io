@@ -478,6 +478,7 @@ const css = `
 					#opponent_selection_id_button_p {
 						color: #fff;
 					}
+					.container #site_credits p, .container #site_credits a { color: #fbff66 !important; }
 
 					/* Override xp.css focus and hover styles */
 					#closeButton:focus,
@@ -1397,21 +1398,81 @@ function createBanner(url, sibling, isLeft) {
 
 // The banner system from 2016ALOT
 (function () {
-    const gameWindow = document.getElementById("game_window");
-    if (!gameWindow) return;
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow) return;
 
-    // configuration object
-    const CONFIG = {
-        bannerHeight: 60,
-        fadeTransition: 250,
-        preloadCount: 4,
-        enablePreloading: true,
-        enableLocalStorage: true,
-        hoverEffect: true,
-        clickCooldown: 150,
-        maxCacheSize: 20,
-        useRequestIdleCallback: true
-    };
+  // configuration object
+  const CONFIG = {
+    bannerHeight: 60,
+    fadeTransition: 250,
+    preloadCount: 4,
+    enablePreloading: true,
+    enableLocalStorage: true,
+    hoverEffect: true,
+    clickCooldown: 150,
+    maxCacheSize: 20,
+    useRequestIdleCallback: true,
+    maxRetries: 2,
+    failedBannerTimeout: 5 * 60 * 1000
+  };
+
+  if (!document.getElementById('banner-system-styles')) {
+    const style = document.createElement('style');
+    style.id = 'banner-system-styles';
+    style.textContent = `
+            #bottomBar {
+                height: ${CONFIG.bannerHeight}px;
+                font-size: 12px;
+                background: transparent;
+				border-style: none;
+				box-shadow: none;
+                margin: 1em auto;
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+                user-select: none;
+                border-radius: 3px;
+                width: 100%;
+                max-width: 800px;
+            }
+            #bottomBar:hover {
+                transform: scale(1.02);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            #bottomBar img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+                transition: opacity ${CONFIG.fadeTransition}ms ease-in-out;
+                pointer-events: none;
+            }
+            #bannerIndicator {
+                position: absolute;
+                top: 2px; right: 4px;
+                width: 16px; height: 16px;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 50%;
+                display: flex;
+                align-items: center; justify-content: center;
+                font-size: 10px; font-weight: bold;
+                color: #333;
+                opacity: 0;
+                transition: opacity 200ms ease-in-out, transform 150ms ease-in-out;
+                pointer-events: none;
+                z-index: 10;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            }
+            #bottomBar:hover #bannerIndicator {
+                opacity: 1;
+            }
+            .indicator-pop {
+                transform: scale(1.2);
+            }
+        `;
+    document.head.appendChild(style);
+  }
 
     // banner list
     const banners = [{
@@ -1541,438 +1602,444 @@ function createBanner(url, sibling, isLeft) {
     },
     ];
 
-    // caching system
-    class BannerCache {
-        constructor() {
-            this.imageCache = new Map();
-            this.loadedUrls = new Set();
-            this.storageKey = 'vintageBannerCache_v2';
-            this.maxCacheAge = 7 * 24 * 60 * 60 * 1000; // 7 days
-            this.cacheAccessOrder = [];
+  // caching system
+  class BannerCache {
+    constructor() {
+      this.imageCache = new Map();
+      this.failedUrls = new Map();
+      this.storageKey = 'vintageBannerCache_v2';
+      this.maxCacheAge = 7 * 24 * 60 * 60 * 1000;
 
-            if (CONFIG.enableLocalStorage) {
-                this.loadFromStorage();
-            }
-        }
-
-        saveToStorage() {
-            if (!CONFIG.enableLocalStorage) return;
-
-            try {
-                const cacheData = {
-                    timestamp: Date.now(),
-                    urls: Array.from(this.loadedUrls)
-                };
-                localStorage.setItem(this.storageKey, JSON.stringify(cacheData));
-            } catch (e) {
-                // silent fail
-            }
-        }
-
-        loadFromStorage() {
-            try {
-                const cached = localStorage.getItem(this.storageKey);
-                if (!cached) return;
-
-                const data = JSON.parse(cached);
-                const age = Date.now() - data.timestamp;
-
-                if (age < this.maxCacheAge) {
-                    this.loadedUrls = new Set(data.urls);
-                } else {
-                    localStorage.removeItem(this.storageKey);
-                }
-            } catch (e) {
-                // silent fail
-            }
-        }
-
-        preloadImage(url) {
-            if (this.imageCache.has(url)) {
-                this.updateCacheOrder(url);
-                return Promise.resolve(this.imageCache.get(url));
-            }
-
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                let timeoutId;
-
-                const cleanup = () => {
-                    clearTimeout(timeoutId);
-                    img.onload = img.onerror = null;
-                };
-
-                timeoutId = setTimeout(() => {
-                    cleanup();
-                    reject(new Error(`Timeout: ${url}`));
-                }, 8000);
-
-                img.onload = () => {
-                    cleanup();
-                    this.addToCache(url, img);
-                    resolve(img);
-                };
-
-                img.onerror = () => {
-                    cleanup();
-                    reject(new Error(`Failed: ${url}`));
-                };
-
-                // set image loading priority to low
-                img.fetchPriority = "low";
-                img.src = url;
-            });
-        }
-
-        addToCache(url, img) {
-            // LRU cache eviction policy
-            if (this.imageCache.size >= CONFIG.maxCacheSize && !this.imageCache.has(url)) {
-                const lruUrl = this.cacheAccessOrder.shift();
-                this.imageCache.delete(lruUrl);
-            }
-
-            this.imageCache.set(url, img);
-            this.updateCacheOrder(url);
-            this.loadedUrls.add(url);
-            this.saveToStorage();
-        }
-
-        updateCacheOrder(url) {
-            // remove url if it exists in the order array
-            const index = this.cacheAccessOrder.indexOf(url);
-            if (index > -1) {
-                this.cacheAccessOrder.splice(index, 1);
-            }
-            // add to the end (most recently used)
-            this.cacheAccessOrder.push(url);
-        }
-
-        preloadBatch(urls) {
-            if (!CONFIG.enablePreloading) return Promise.resolve();
-
-            if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
-                return new Promise(resolve => {
-                    window.requestIdleCallback(() => {
-                        const promises = urls.map(url =>
-                            this.preloadImage(url).catch(() => null)
-                        );
-                        Promise.allSettled(promises).then(resolve);
-                    }, { timeout: 2000 });
-                });
-            } else {
-                const promises = urls.map(url =>
-                    this.preloadImage(url).catch(() => null)
-                );
-                return Promise.allSettled(promises);
-            }
-        }
-
-        getCachedImage(url) {
-            const img = this.imageCache.get(url);
-            if (img) {
-                this.updateCacheOrder(url);
-            }
-            return img || null;
-        }
+      if (CONFIG.enableLocalStorage) {
+        this.loadFromStorage();
+      }
     }
 
-    // weighted random selection with memoization
-    const bannerSelector = (() => {
-        let weightSum = null;
+	saveToStorage() {
+	  if (this._saveTimer) clearTimeout(this._saveTimer);
+	  this._saveTimer = setTimeout(() => {
+		try {
+		  const cacheData = {
+			timestamp: Date.now(),
+			failed: Array.from(this.failedUrls.entries())
+		  };
+		  localStorage.setItem(this.storageKey, JSON.stringify(cacheData));
+		} catch (e) {
+          console.warn('Banner cache save failed:', e);
+		}
+	  }, 1000);
+	}
 
-        const getTotalWeight = () => {
-            if (weightSum === null) {
-                weightSum = banners.reduce((sum, banner) => sum + banner.weight, 0);
-            }
-            return weightSum;
-        };
+    loadFromStorage() {
+      try {
+        const cached = localStorage.getItem(this.storageKey);
+        if (!cached) return;
 
-        return {
-            getRandomBanner(excludeRecent = []) {
-                const availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+        const data = JSON.parse(cached);
+        const age = Date.now() - data.timestamp;
 
-                if (availableBanners.length === 0) {
-                    const currentUrl = excludeRecent[excludeRecent.length - 1];
-                    return banners.find(b => b.url !== currentUrl) || banners[0];
-                }
-
-                const totalWeight = availableBanners.reduce((sum, banner) => sum + banner.weight, 0);
-                let random = Math.random() * totalWeight;
-
-                for (const banner of availableBanners) {
-                    random -= banner.weight;
-                    if (random <= 0) return banner;
-                }
-
-                return availableBanners[0];
-            },
-
-            // precompute weighted selection table
-            initializeSelectionTable() {
-                getTotalWeight();
-            }
-        };
-    })();
-
-    // banner system
-    class ClickableBannerSystem {
-        constructor() {
-            this.createElements();
-
-            this.cache = new BannerCache();
-            this.currentBanner = null;
-            this.recentBanners = [];
-            this.isTransitioning = false;
-            this.lastClickTime = 0;
-            this.rafId = null;
-
-            this.init();
+        if (age < this.maxCacheAge) {
+          if (data.failed) {
+            this.failedUrls = new Map(data.failed);
+          }
+        } else {
+          localStorage.removeItem(this.storageKey);
         }
-
-        init() {
-            this.setupEventListeners();
-            bannerSelector.initializeSelectionTable();
-
-            Promise.resolve()
-                .then(() => this.preloadInitialBanners())
-                .then(() => this.displayRandomBanner())
-                .catch(() => {
-                    // fallback if preloading fails
-                    this.displayRandomBanner();
-                });
-
-            // cleanup on page unload
-            window.addEventListener('beforeunload', () => {
-                this.destroy();
-            });
-        }
-
-        createElements() {
-            this.container = document.createElement("div");
-            this.imageElement = document.createElement("img");
-            this.clickIndicator = document.createElement("div");
-
-            this.container.id = "bottomBar";
-            this.container.setAttribute('tabindex', '0');
-            this.container.setAttribute('role', 'button');
-            this.container.setAttribute('aria-label', 'Click to change banner');
-
-            this.container.style.cssText = `
-                height: ${CONFIG.bannerHeight}px;
-                font-size: 12px;
-                border-style: none;
-                border-width: 5px;
-				box-shadow: none;
-                background: transparent;
-                padding: 0;
-                margin: 1em .3em 1em 1em;
-                position: relative;
-                overflow: hidden;
-                cursor: pointer;
-                transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
-                user-select: none;
-                border-radius: 3px;
-            `;
-
-            this.imageElement.style.cssText = `
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                display: block;
-                transition: opacity ${CONFIG.fadeTransition}ms ease-in-out;
-                pointer-events: none;
-            `;
-
-            this.clickIndicator.style.cssText = `
-                position: absolute;
-                top: 2px;
-                right: 4px;
-                width: 16px;
-                height: 16px;
-                background: rgba(255, 255, 255, 0.8);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 10px;
-                font-weight: bold;
-                color: #333;
-                opacity: 0;
-                transition: opacity 200ms ease-in-out, transform 150ms ease-in-out;
-                pointer-events: none;
-                z-index: 10;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-            `;
-            this.clickIndicator.textContent = "↻";
-
-            // append elements
-            this.container.appendChild(this.imageElement);
-            this.container.appendChild(this.clickIndicator);
-            gameWindow.insertAdjacentElement("afterend", this.container);
-        }
-
-        setupEventListeners() {
-            this.container.onclick = (e) => {
-                e.preventDefault();
-                const now = Date.now();
-                if (now - this.lastClickTime < CONFIG.clickCooldown || this.isTransitioning) {
-                    return;
-                }
-                this.lastClickTime = now;
-                this.nextBanner();
-            };
-
-            // hover effects
-            if (CONFIG.hoverEffect) {
-                this.container.onmouseenter = () => {
-                    if (this.isTransitioning) return;
-
-                    cancelAnimationFrame(this.rafId);
-                    this.rafId = requestAnimationFrame(() => {
-                        this.container.style.background = 'transparent';
-                        this.container.style.transform = 'scale(1.02)';
-                        this.container.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
-                        this.clickIndicator.style.opacity = '1';
-                    });
-                };
-
-                this.container.onmouseleave = () => {
-                    cancelAnimationFrame(this.rafId);
-                    this.rafId = requestAnimationFrame(() => {
-                        this.container.style.transform = 'scale(1)';
-                        this.container.style.boxShadow = 'none';
-                        this.clickIndicator.style.opacity = '0';
-                    });
-                };
-            }
-
-            // keyboard accessibility
-            this.container.onkeydown = (e) => {
-                if (e.code === 'Space' || e.code === 'Enter') {
-                    e.preventDefault();
-                    this.nextBanner();
-                }
-            };
-        }
-
-        async preloadInitialBanners() {
-            // prioritize preloading based on banner weights
-            const sortedBanners = [...banners]
-                .sort((a, b) => b.weight - a.weight)
-                .slice(0, CONFIG.preloadCount);
-
-            const urlsToPreload = sortedBanners.map(b => b.url);
-            return this.cache.preloadBatch(urlsToPreload);
-        }
-
-        async displayBanner(banner, useTransition = false) {
-            if (this.isTransitioning) return;
-
-            const cachedImg = this.cache.getCachedImage(banner.url);
-
-            if (useTransition && CONFIG.fadeTransition > 0) {
-                this.isTransitioning = true;
-                this.imageElement.style.opacity = '0';
-
-                setTimeout(() => {
-                    requestAnimationFrame(() => {
-                        if (cachedImg) {
-                            this.imageElement.src = cachedImg.src;
-                        } else {
-                            this.imageElement.src = banner.url;
-                        }
-                        this.imageElement.alt = banner.alt;
-
-                        // force reflow to ensure transition works
-                        void this.imageElement.offsetWidth;
-                        this.imageElement.style.opacity = '1';
-                        this.isTransitioning = false;
-                    });
-                }, CONFIG.fadeTransition / 2);
-            } else {
-                requestAnimationFrame(() => {
-                    if (cachedImg) {
-                        this.imageElement.src = cachedImg.src;
-                    } else {
-                        this.imageElement.src = banner.url;
-                    }
-                    this.imageElement.alt = banner.alt;
-                });
-            }
-
-            this.currentBanner = banner;
-
-            // track recent banners
-            this.recentBanners.push(banner.url);
-            if (this.recentBanners.length > 3) {
-                this.recentBanners.shift();
-            }
-
-            // preload next banner if not cached
-            if (!cachedImg) {
-                this.cache.preloadImage(banner.url).catch(() => {
-                    // silent fail
-                });
-            }
-
-            // opportunistically preload next potential banners
-            if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
-                window.requestIdleCallback(() => {
-                    const nextBanners = banners
-                        .filter(b => !this.recentBanners.includes(b.url) && !this.cache.imageCache.has(b.url))
-                        .sort((a, b) => b.weight - a.weight)
-                        .slice(0, 2);
-
-                    this.cache.preloadBatch(nextBanners.map(b => b.url));
-                }, { timeout: 5000 });
-            }
-        }
-
-        displayRandomBanner() {
-            const banner = bannerSelector.getRandomBanner(this.recentBanners);
-            this.displayBanner(banner, this.currentBanner !== null);
-        }
-
-        nextBanner() {
-            this.displayRandomBanner();
-
-            requestAnimationFrame(() => {
-                this.clickIndicator.style.transform = 'scale(1.2)';
-
-                setTimeout(() => {
-                    requestAnimationFrame(() => {
-                        this.clickIndicator.style.transform = 'scale(1)';
-                    });
-                }, 150);
-            });
-        }
-
-        destroy() {
-            cancelAnimationFrame(this.rafId);
-
-            if (this.container) {
-                this.container.onclick = null;
-                this.container.onmouseenter = null;
-                this.container.onmouseleave = null;
-                this.container.onkeydown = null;
-
-                if (this.container.parentNode) {
-                    this.container.parentNode.removeChild(this.container);
-                }
-            }
-
-            this.container = null;
-            this.imageElement = null;
-            this.clickIndicator = null;
-        }
+      } catch (e) {
+        console.warn('Banner cache load failed:', e);
+      }
     }
 
-    const bannerSystem = new ClickableBannerSystem();
+    isRecentlyFailed(url) {
+      if (!this.failedUrls.has(url)) return false;
 
-    window.vintageBannerSystem = {
-        next: () => bannerSystem.nextBanner(),
-        current: () => bannerSystem.currentBanner?.alt || 'Loading...'
+      const failedTime = this.failedUrls.get(url);
+      const timeSinceFailed = Date.now() - failedTime;
+
+      // allow retry after timeout
+      if (timeSinceFailed > CONFIG.failedBannerTimeout) {
+        this.failedUrls.delete(url);
+        return false;
+      }
+
+      return true;
+    }
+
+    markAsFailed(url) {
+      this.failedUrls.set(url, Date.now());
+      this.imageCache.delete(url);
+      this.saveToStorage();
+    }
+
+    isCachedImageValid(img) {
+      return img &&
+        img.complete &&
+        img.naturalHeight !== 0 &&
+        img.naturalWidth !== 0;
+    }
+
+    preloadImage(url) {
+      if (this.isRecentlyFailed(url)) {
+        return Promise.reject(new Error(`Recently failed: ${url}`));
+      }
+
+      if (this.imageCache.has(url)) {
+        const cachedImg = this.imageCache.get(url);
+        if (this.isCachedImageValid(cachedImg)) {
+          return Promise.resolve(cachedImg);
+        } else {
+          this.imageCache.delete(url);
+        }
+      }
+
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        let timeoutId;
+
+        const cleanup = () => {
+          clearTimeout(timeoutId);
+          img.onload = img.onerror = null;
+        };
+
+        timeoutId = setTimeout(() => {
+          cleanup();
+          this.markAsFailed(url);
+          reject(new Error(`Timeout: ${url}`));
+        }, 8000);
+
+        img.onload = () => {
+          cleanup();
+          if (this.isCachedImageValid(img)) {
+            this.addToCache(url, img);
+            resolve(img);
+          } else {
+            this.markAsFailed(url);
+            reject(new Error(`Invalid image: ${url}`));
+          }
+        };
+
+        img.onerror = () => {
+          cleanup();
+          this.markAsFailed(url);
+          reject(new Error(`Failed: ${url}`));
+        };
+
+        img.fetchPriority = "low";
+        img.src = url;
+      });
+    }
+
+    addToCache(url, img) {
+      if (!this.isCachedImageValid(img)) return;
+
+      if (this.imageCache.has(url)) this.imageCache.delete(url); // refresh order
+      this.imageCache.set(url, img);
+
+      while (this.imageCache.size > CONFIG.maxCacheSize) {
+        const lruUrl = this.imageCache.keys().next().value;
+        this.imageCache.delete(lruUrl);
+      }
+
+      this.saveToStorage();
+    }
+
+    preloadBatch(urls) {
+      if (!CONFIG.enablePreloading) return Promise.resolve();
+
+      if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
+        return new Promise(resolve => {
+          window.requestIdleCallback(() => {
+            const promises = urls.map(url =>
+              this.preloadImage(url).catch(() => null)
+            );
+            Promise.allSettled(promises).then(resolve);
+          }, { timeout: 2000 });
+        });
+      } else {
+        const promises = urls.map(url =>
+          this.preloadImage(url).catch(() => null)
+        );
+        return Promise.allSettled(promises);
+      }
+    }
+
+    getCachedImage(url) {
+      const img = this.imageCache.get(url);
+      if (!this.isCachedImageValid(img)) {
+        this.imageCache.delete(url);
+        return null;
+      }
+      // refresh order
+      this.imageCache.delete(url);
+      this.imageCache.set(url, img);
+      return img;
+    }
+
+    getAvailableBanners(bannerList) {
+      return bannerList.filter(banner => !this.isRecentlyFailed(banner.url));
+    }
+  }
+
+  // weighted random selection
+  const bannerSelector = (() => {
+    let weightSum = null;
+
+    const getTotalWeight = () => {
+      if (weightSum === null) {
+        weightSum = banners.reduce((sum, banner) => sum + banner.weight, 0);
+      }
+      return weightSum;
     };
+
+    return {
+      // accept cache to filter failed banners
+      getRandomBanner(excludeRecent = [], cache = null) {
+        let availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+
+        // filter out failed banners
+        if (cache) {
+          availableBanners = availableBanners.filter(b => !cache.isRecentlyFailed(b.url));
+        }
+
+        if (availableBanners.length === 0) {
+          // if all banners failed or recent, try any banner not in exclude list
+          availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+
+          if (availableBanners.length === 0) {
+            // last resort: return any banner
+            return banners[0];
+          }
+        }
+
+        const totalWeight = availableBanners.reduce((sum, banner) => sum + banner.weight, 0);
+        let random = Math.random() * totalWeight;
+
+        for (const banner of availableBanners) {
+          random -= banner.weight;
+          if (random <= 0) return banner;
+        }
+
+        return availableBanners[0];
+      },
+
+      initializeSelectionTable() {
+        getTotalWeight();
+      }
+    };
+  })();
+
+  // banner system
+  class ClickableBannerSystem {
+    constructor() {
+      this.createElements();
+
+      this.cache = new BannerCache();
+      this.currentBanner = null;
+      this.recentBanners = [];
+      this.isTransitioning = false;
+      this.lastClickTime = 0;
+      this.rafId = null;
+      this.retryCount = 0;
+
+      this.init();
+    }
+
+    init() {
+      this.setupEventListeners();
+      bannerSelector.initializeSelectionTable();
+
+      Promise.resolve()
+        .then(() => this.preloadInitialBanners())
+        .then(() => this.displayRandomBanner())
+        .catch(() => {
+          this.displayRandomBanner();
+        });
+
+      window.addEventListener('beforeunload', () => {
+        this.destroy();
+      });
+    }
+
+    createElements() {
+      this.container = document.createElement("div");
+      this.container.id = "bottomBar";
+      this.container.setAttribute('tabindex', '0');
+      this.container.setAttribute('role', 'button');
+      this.container.setAttribute('aria-label', 'Click to change banner');
+
+      this.imageElement = document.createElement("img");
+      this.clickIndicator = document.createElement("div");
+      this.clickIndicator.id = "bannerIndicator";
+      this.clickIndicator.textContent = "↻";
+
+      const frag = document.createDocumentFragment();
+      frag.appendChild(this.imageElement);
+      frag.appendChild(this.clickIndicator);
+      this.container.appendChild(frag);
+
+      gameWindow.insertAdjacentElement("afterend", this.container);
+
+      this.imageElement.onerror = () => {
+        console.warn('Banner display failed:', this.imageElement.src);
+        if (this.currentBanner) this.cache.markAsFailed(this.currentBanner.url);
+        // try to load another banner
+        if (this.retryCount < CONFIG.maxRetries) {
+          this.retryCount++;
+          setTimeout(() => this.displayRandomBanner(), 100);
+        }
+      };
+      this.imageElement.onload = () => { this.retryCount = 0; }; // reset retry count on successful load
+    }
+
+    setupEventListeners() {
+      this.container.onclick = (e) => {
+        e.preventDefault();
+        const now = Date.now();
+        if (now - this.lastClickTime < CONFIG.clickCooldown || this.isTransitioning) {
+          return;
+        }
+        this.lastClickTime = now;
+        this.retryCount = 0;
+        this.nextBanner();
+      };
+
+      this.container.onkeydown = (e) => {
+        if (e.code === 'Space' || e.code === 'Enter') {
+          e.preventDefault();
+          this.retryCount = 0;
+          this.nextBanner();
+        }
+      };
+    }
+
+    async preloadInitialBanners() {
+      // only preload non-failed banners
+      const sortedBanners = [...banners]
+        .filter(b => !this.cache.isRecentlyFailed(b.url))
+        .sort((a, b) => b.weight - a.weight)
+        .slice(0, CONFIG.preloadCount);
+
+      const urlsToPreload = sortedBanners.map(b => b.url);
+      return this.cache.preloadBatch(urlsToPreload);
+    }
+
+    async displayBanner(banner, useTransition = false) {
+      if (this.isTransitioning) return;
+
+      const cachedImg = this.cache.getCachedImage(banner.url);
+
+      if (useTransition && CONFIG.fadeTransition > 0) {
+        this.isTransitioning = true;
+        this.imageElement.style.opacity = '0';
+
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            if (cachedImg) {
+              this.imageElement.src = cachedImg.src;
+            } else {
+              this.imageElement.src = banner.url;
+            }
+            this.imageElement.alt = banner.alt;
+
+            this.imageElement.style.opacity = '1';
+            this.isTransitioning = false;
+          });
+        }, CONFIG.fadeTransition / 2);
+      } else {
+        requestAnimationFrame(() => {
+          if (cachedImg) {
+            this.imageElement.src = cachedImg.src;
+          } else {
+            this.imageElement.src = banner.url;
+          }
+          this.imageElement.alt = banner.alt;
+        });
+      }
+
+      this.currentBanner = banner;
+      this.recentBanners.push(banner.url);
+      if (this.recentBanners.length > 3) {
+        this.recentBanners.shift();
+      }
+
+      // preload if not cached
+      if (!cachedImg) {
+        this.cache.preloadImage(banner.url).catch((err) => {
+          console.warn('Preload failed:', err.message);
+        });
+      }
+
+      // opportunistically preload next banners
+      if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
+        window.requestIdleCallback(() => {
+          const nextBanners = banners
+            .filter(b =>
+              !this.recentBanners.includes(b.url) &&
+              !this.cache.imageCache.has(b.url) &&
+              !this.cache.isRecentlyFailed(b.url)
+            )
+            .sort((a, b) => b.weight - a.weight)
+            .slice(0, 2);
+
+          this.cache.preloadBatch(nextBanners.map(b => b.url));
+        }, { timeout: 5000 });
+      }
+    }
+
+    displayRandomBanner() {
+      const banner = bannerSelector.getRandomBanner(this.recentBanners, this.cache);
+      this.displayBanner(banner, this.currentBanner !== null);
+    }
+
+    nextBanner() {
+      this.displayRandomBanner();
+
+      requestAnimationFrame(() => {
+        this.clickIndicator.classList.add('indicator-pop');
+
+        setTimeout(() => {
+          this.clickIndicator.classList.remove('indicator-pop');
+        }, 150);
+      });
+    }
+
+    destroy() {
+      cancelAnimationFrame(this.rafId);
+
+      if (this.container) {
+        this.container.onclick = null;
+        this.container.onmouseenter = null;
+        this.container.onmouseleave = null;
+        this.container.onkeydown = null;
+
+        if (this.container.parentNode) {
+          this.container.parentNode.removeChild(this.container);
+        }
+      }
+
+      if (this.imageElement) {
+        this.imageElement.onload = null;
+        this.imageElement.onerror = null;
+      }
+
+      this.container = null;
+      this.imageElement = null;
+      this.clickIndicator = null;
+    }
+  }
+
+  const bannerSystem = new ClickableBannerSystem();
+
+  window.vintageBannerSystem = {
+    next: () => bannerSystem.nextBanner(),
+    current: () => bannerSystem.currentBanner?.alt || 'Loading...',
+    clearFailedCache: () => {
+      bannerSystem.cache.failedUrls.clear();
+      bannerSystem.cache.saveToStorage();
+      console.log('Failed banner cache cleared');
+    },
+    getFailedBanners: () => Array.from(bannerSystem.cache.failedUrls.keys())
+  };
 })();
 
 (function () {

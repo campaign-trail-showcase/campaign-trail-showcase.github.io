@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.0.9
+* @version: 1.1.0
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -126,7 +126,7 @@ const recommendedReadingContent = `
         </ul>
         <h4>Special thanks to…</h4>
         <ul class="thanks-list">
-			<li>Our playtesters, including, but not limited to: ahhklt, alleightbits, ashraf177, blur, CitySlicker, Confused, EmpiresUnited, Felosia, Firetrucker74, glep, HMV, Ianwubby, igorsky, Inferno, IngJon, Laura (Giant Rat), Lemon, Momentum, mumkey, Nem06, Paul David Wellstone, Penny, q7, RealTrey17, Richard Gephardt, routevenus, Rubix, Sam, shushue, Simple Peasant 1, Stan, TheBatStory, The Numbskull, timberwolf857, Vicx, William, Zach, and other people I probably forgot</li>
+			<li>Our playtesters, including, but not limited to: ahhklt, alleightbits, ashraf177, blur, CitySlicker, Confused, EmpiresUnited, Felosia, Firetrucker74, glep, HMV, Ianwubby, igorsky, Inferno, IngJon, Laura (Giant Rat), Lemon, Momentum, mumkey, Nem06, NikaNExitedBFF, Nisgrot, Paul David Wellstone, Penny, q7, RealTrey17, Richard Gephardt, routevenus, Rubix, Sam, shushue, Simple Peasant 1, Stan, TheBatStory, The Numbskull, timberwolf857, Vicx, William, Zach, and other people I probably forgot</li>
             <li>Charles Schulz, for creating all these funny little characters</li>
             <li><i>astrohuncho</i> — for his <a href="https://hunchonautilus.github.io/nct-further-reading-wizard/" target="_blank" rel="noopener">Further Reading Wizard</a>, which I have used for testing this mod’s endings, and also this message which you are reading right now</li>
             <li><i>Jet</i> — for his excellent mod tool and for being fine with my fork of it, which I used for the making of this mod</li>
@@ -144,7 +144,7 @@ const recommendedReadingContent = `
         <ul class="fact-list">
             <li>
                 <strong>Why a student council election?</strong><br>
-                Because the cutthroat, reputation-ruining politics of a high school election perfectly mirror the existential dread Charlie Brown feels in his life here. Setting it in high school allowed the characters to be, heh, “cynical” enough to actually hurt each other while remaining fundamentally immature. Not only that, but, technically-speaking, the idea of having two separate election seemed much more interesting than making up a separate map for this, which wouldn’t be as cool.
+                Because the cutthroat, reputation-ruining politics of a high school election perfectly mirror the existential dread Charlie Brown feels in his life here. Setting it in high school allowed the characters to be, heh, “cynical” enough to actually hurt each other while remaining fundamentally immature. Not only that, but, technically-speaking, the idea of having two separate elections seemed much more interesting than making up a separate map for this, which wouldn’t be as cool. Charlie could visit as many groups as he wanted, but if he made little to no overtures to them, it would've been mostly pointless.
             </li>
             <li>
                 <strong>What exactly is the ‘Ruthlessness’ stat?</strong><br>
@@ -157,6 +157,10 @@ const recommendedReadingContent = `
             <li>
                 <strong>Where is Snoopy during all of this?</strong><br>
                 He’s chilling at home, mostly, but he’s doing alright. He appears prominently on Election Night when the weight of the campaign finally breaks you, as perhaps the only pure thing left in Charlie’s life.
+            </li>
+			<li>
+                <strong>Where is Rerun during all of this?</strong><br>
+                Dead, probably. Just kidding, he’s alive, but because the story mostly focuses on the election, it was hard to include much of him here. All you need to know is that he is, unsurprisingly, a supporter of Linus.
             </li>
             <li>
                 <strong>What happened with Heather (The Little Red-Haired Girl)?</strong><br>
@@ -4242,41 +4246,34 @@ const tooltipList = [
 
 ];
 
-function escapeRegex(str) {
+function escapeRegExp(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+
+const compiledTooltips = tooltipList.map((tooltip, index) => ({
+    index,
+    regex: new RegExp(
+        `(?<=\\b|\\s|^|")${escapeRegExp(tooltip.searchString)}(?=[.,;!?]?\\b|\\s|"|$)`,
+        'g'
+    ),
+}));
 
 function getTooltips(str) {
     const matches = [];
 
-    tooltipList.forEach((tooltip, index) => {
-        const safeSearch = escapeRegex(tooltip.searchString);
-        const regex = new RegExp(
-            `(?<=\\b|\\s|^|“)${safeSearch}(?=[.,;!?]?\\b|\\s|”|$)`,
-            'g'
-        );
-
+    for (const { index, regex } of compiledTooltips) {
+        regex.lastIndex = 0;
         let match;
         while ((match = regex.exec(str)) !== null) {
-            matches.push({
-                start: match.index,
-                end: match.index + match[0].length,
-                tooltipIndex: index
-            });
+            matches.push({ start: match.index, end: match.index + match[0].length, tooltipIndex: index });
         }
-    });
+    }
 
-    matches.sort((a, b) => {
-        if (a.start !== b.start) return a.start - b.start;
-        return (b.end - b.start) - (a.end - a.start);
-    });
+    matches.sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start));
 
     for (let i = 0; i < matches.length - 1;) {
-        if (matches[i + 1].start < matches[i].end) {
-            matches.splice(i + 1, 1);
-        } else {
-            i++;
-        }
+        if (matches[i + 1].start < matches[i].end) matches.splice(i + 1, 1);
+        else i++;
     }
 
     return matches;
@@ -4287,66 +4284,54 @@ function applyTooltips(str) {
     let result = '';
     let lastIndex = 0;
 
-    matches.forEach(match => {
-        const tooltip = tooltipList[match.tooltipIndex];
-
-        const imgHtml = tooltip.image ? `<img src='${tooltip.image}'>` : "";
-		const textHtml = tooltip.text ? `<span class='annotation'>${tooltip.text}</span>` : "";
-
+    for (const match of matches) {
+        const { image, text, searchString } = tooltipList[match.tooltipIndex];
         result += str.slice(lastIndex, match.start);
-        result += `<span class='mytooltip'>${tooltip.searchString}<span class='mytooltiptext'>${imgHtml}${textHtml}</span></span>`;
+        result += `<span class='mytooltip'>${searchString}<span class='mytooltiptext'>${
+            image ? `<img src='${image}'>` : ''
+        }${
+            text ? `<span class='annotation'>${text}</span>` : ''
+        }</span></span>`;
         lastIndex = match.end;
-    });
+    }
 
-    result += str.slice(lastIndex);
-    return result;
+    return result + str.slice(lastIndex);
 }
 
 function applyTooltipsToObject(obj) {
     for (const key of Object.keys(obj)) {
-        if (typeof obj[key] === 'string') {
+        const val = obj[key];
+        if (typeof val === 'string') {
             // pre-process the initial string
-            let internalValue = applyTooltips(obj[key]);
+            let stored = applyTooltips(val);
 
             // hijack the property so future assignments are automatically processed
             Object.defineProperty(obj, key, {
-                get: function() {
-                    return internalValue;
-                },
-                set: function(newVal) {
-                    if (typeof newVal === 'string') {
-                        internalValue = applyTooltips(newVal);
-                    } else {
-                        internalValue = newVal;
-                    }
-                },
+                get: () => stored,
+                set: (newVal) => { stored = typeof newVal === 'string' ? applyTooltips(newVal) : newVal; },
                 configurable: true,
-                enumerable: true
+                enumerable: true,
             });
-        } else if (obj[key] && typeof obj[key] === 'object') {
+        } else if (val && typeof val === 'object') {
             // recursively travel down the object tree
-            applyTooltipsToObject(obj[key]);
+            applyTooltipsToObject(val);
         }
     }
 }
 
 // intercept the properties being set by Code 2 so we can apply tooltips instantly
-['questions_json', 'answers_json', 'answer_feedback_json'].forEach(prop => {
-    let internalValue = campaignTrail_temp[prop];
+for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
+    let stored = campaignTrail_temp[prop];
     Object.defineProperty(campaignTrail_temp, prop, {
-        get: function() {
-            return internalValue;
-        },
-        set: function(newVal) {
-            if (newVal) {
-                applyTooltipsToObject(newVal);
-            }
-            internalValue = newVal;
+        get: () => stored,
+        set: (newVal) => {
+            if (newVal) applyTooltipsToObject(newVal);
+            stored = newVal;
         },
         configurable: true,
-        enumerable: true
+        enumerable: true,
     });
-});
+}
 
 // The music player from 2016ALOT
 // updated for The Dreaming Moon
@@ -4551,13 +4536,17 @@ function applyTooltipsToObject(obj) {
         document.getElementById(DISPLAY_BOX_ID)?.classList.toggle("playing", !isPaused);
     }
 
-    function updateVolumeIcon() {
-        if (!volumeIconElement || !volumeSlider) return;
-        const muted = parseFloat(volumeSlider.value) === 0 || (isPlayerActive() && ytPlayer.isMuted());
-        volumeIconElement.src   = muted ? ICON_MUTED  : ICON_VOLUME;
-        volumeIconElement.alt   = muted ? "Unmute"    : "Mute";
-        volumeIconElement.title = muted ? "Unmute"    : "Mute";
-    }
+	let lastMutedState = null;
+
+	function updateVolumeIcon() {
+		if (!volumeIconElement || !volumeSlider) return;
+		const muted = parseFloat(volumeSlider.value) === 0 || (isPlayerActive() && ytPlayer.isMuted());
+		if (muted === lastMutedState) return;
+		lastMutedState = muted;
+		volumeIconElement.src   = muted ? ICON_MUTED : ICON_VOLUME;
+		volumeIconElement.alt   = muted ? "Unmute"   : "Mute";
+		volumeIconElement.title = muted ? "Unmute"   : "Mute";
+	}
 
     function updateRepeatButtonUI() {
         if (!repeatButtonElement) return;
@@ -4587,52 +4576,68 @@ function applyTooltipsToObject(obj) {
         if (item) queueListElement.scrollTop = item.offsetTop - (queueListElement.clientHeight / 2) + (item.offsetHeight / 2);
     }
 
-    function updateQueueDisplay() {
-        if (!queueListElement || !playlist) {
-            if (queueListElement) queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">List is empty</li>`;
-            if (queueTitleElement) queueTitleElement.style.display = (playlist && !playlist.isEmpty()) ? 'flex' : 'none';
-            return;
-        }
-        if (queueTitleElement) queueTitleElement.style.display = 'flex';
+    let previousIndex = null;
 
-        if (playlist.isEmpty()) {
-            queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">List is empty</li>`;
-            return;
-        }
+	function updateQueueDisplay() {
+		if (!queueListElement || !playlist) {
+			if (queueListElement) queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">List is empty</li>`;
+			if (queueTitleElement) queueTitleElement.style.display = (playlist && !playlist.isEmpty()) ? 'flex' : 'none';
+			return;
+		}
 
-        const currentIndex = playlist.currentSongIndex;
+		if (queueTitleElement) queueTitleElement.style.display = 'flex';
 
-        if (!queueDirty) {
-            const items = queueListElement.children;
-            for (let i = 0; i < items.length; i++) {
-                items[i].classList.toggle('player-queue-item-active', i === currentIndex);
-            }
-            if (isQueueSectionExpanded) scrollQueueToActive(currentIndex);
-            return;
-        }
+		if (playlist.isEmpty()) {
+			queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">List is empty</li>`;
+			return;
+		}
 
-        queueDirty = false;
-        const fragment = document.createDocumentFragment();
-        playlist.getSongs().forEach((song, index) => {
-            const li         = document.createElement("li");
-            li.className     = PLAYER_QUEUE_ITEM_CLASS;
-            li.dataset.songIndex = index;
-            if (index === currentIndex) li.classList.add('player-queue-item-active');
+		const currentIndex = playlist.currentSongIndex;
 
-            const titleSpan        = document.createElement("span");
-            titleSpan.className    = "player-queue-item-title";
-            titleSpan.textContent  = `${index + 1}. ${song.getTitle()}`;
+		if (!queueDirty) {
+			const items = queueListElement.children;
 
-            const artistSpan       = document.createElement("span");
-            artistSpan.className   = "player-queue-item-artist";
-            artistSpan.textContent = ` - ${song.getArtist()}`;
+			if (previousIndex !== null && items[previousIndex]) {
+				items[previousIndex].classList.remove('player-queue-item-active');
+			}
 
-            li.append(titleSpan, artistSpan);
-            fragment.appendChild(li);
-        });
-        queueListElement.replaceChildren(fragment);
-        if (isQueueSectionExpanded) scrollQueueToActive(currentIndex);
-    }
+			if (items[currentIndex]) {
+				items[currentIndex].classList.add('player-queue-item-active');
+			}
+
+			previousIndex = currentIndex;
+
+			if (isQueueSectionExpanded) scrollQueueToActive(currentIndex);
+			return;
+		}
+
+		queueDirty = false;
+		previousIndex = currentIndex;
+
+		const fragment = document.createDocumentFragment();
+		playlist.getSongs().forEach((song, index) => {
+			const li = document.createElement("li");
+			li.className = PLAYER_QUEUE_ITEM_CLASS;
+			li.dataset.songIndex = index;
+
+			if (index === currentIndex) li.classList.add('player-queue-item-active');
+
+			const titleSpan = document.createElement("span");
+			titleSpan.className = "player-queue-item-title";
+			titleSpan.textContent = `${index + 1}. ${song.getTitle()}`;
+
+			const artistSpan = document.createElement("span");
+			artistSpan.className = "player-queue-item-artist";
+			artistSpan.textContent = ` - ${song.getArtist()}`;
+
+			li.append(titleSpan, artistSpan);
+			fragment.appendChild(li);
+		});
+
+		queueListElement.replaceChildren(fragment);
+
+		if (isQueueSectionExpanded) scrollQueueToActive(currentIndex);
+	}
 
     function updateUI() {
         if (!coverElement || !titleElement || !artistElement || !youtubeLinkElement) return;
@@ -4681,23 +4686,29 @@ function applyTooltipsToObject(obj) {
         updateQueueDisplay();
     }
 
-    function preloadNextCover() {
-        if (!playlist || playlist.isEmpty()) return;
-        const songs   = playlist.getSongs();
-        const nextSong = songs[(playlist.currentSongIndex + 1) % songs.length];
-        if (!nextSong) return;
-        const url = nextSong.getCoverLink();
-        const existing = document.querySelector(`link[rel="preload"][as="image"][href="${url}"]`);
-        if (existing) return;
-        const old = document.querySelectorAll('link[rel="preload"][as="image"][data-music-player]');
-        old.forEach(el => el.remove());
-        const link = document.createElement('link');
-        link.rel  = 'preload';
-        link.as   = 'image';
-        link.href = url;
-        link.dataset.musicPlayer = '1';
-        document.head.appendChild(link);
-    }
+    let preloadLinkEl = null;
+
+	function preloadNextCover() {
+		if (!playlist || playlist.isEmpty()) return;
+
+		const songs = playlist.getSongs();
+		const next = songs[(playlist.currentSongIndex + 1) % songs.length];
+		const url = next?.getCoverLink();
+		if (!url) return;
+
+		const resolvedUrl = new URL(url, document.baseURI).href;
+
+		if (preloadLinkEl?.href === resolvedUrl) return;
+
+		if (!preloadLinkEl) {
+			preloadLinkEl = document.createElement('link');
+			preloadLinkEl.rel = 'preload';
+			preloadLinkEl.as  = 'image';
+			document.head.appendChild(preloadLinkEl);
+		}
+
+		preloadLinkEl.href = resolvedUrl;
+	}
 
     function loadCurrentSong(autoplay = false, isRetry = false) {
         const currentSong = playlist?.getCurrentSong();
@@ -4834,7 +4845,6 @@ function applyTooltipsToObject(obj) {
 
     function onPlayerStateChange(event) {
         const state = event.data;
-        updateDurationDisplay();
 
         switch (state) {
             case YT.PlayerState.PLAYING:
@@ -4855,9 +4865,9 @@ function applyTooltipsToObject(obj) {
                 updatePlayPauseButton(true);
                 if (progressBar) progressBar.value = 100;
                 progressWrapperElement?.style.setProperty('--progress-ratio', '1');
-                if (currentTimeElement && typeof ytPlayer.getDuration === 'function') {
-                    currentTimeElement.textContent = formatTime(ytPlayer.getDuration());
-                }
+				if (currentTimeElement && cachedDuration > 0) {
+					currentTimeElement.textContent = formatTime(cachedDuration);
+				}
 
                 if (!hasUserInitiatedPlayback) { updateUI(); return; }
 

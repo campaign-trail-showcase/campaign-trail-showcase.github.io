@@ -164,7 +164,7 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 430,
         "fields": {
-            "description": "Sitting alone in the empty gym after hours is Roy. Somehow, he’s managed to achieve the impossible: he forgot to submit the registration forms for your poll watchers, meaning Linus’s camp will have unchecked control over the ballot boxes on Election Day. “My bad, dude,” he says, failing to puncture his Capri Sun with the straw. “I got distracted watching MTV. But hey, it’s just student council, right?” My God, you think. This entire campaign is in the hands of an idiot."
+            "description": "Sitting alone in the empty gym after hours is Roy. Somehow, he’s managed to achieve the impossible: he forgot to submit the registration forms for your poll watchers, meaning Linus’s camp will have unchecked control over the ballot boxes on Election Day. “My bad, dude,” he says, failing to puncture his Capri Sun with the straw. How many times will he do that? “I got distracted watching MTV. But hey, it’s just student council, right?” My God, you think. This entire campaign is in the hands of an idiot."
         }
     }
 ];
@@ -11050,7 +11050,7 @@ cyoAdventure = function (a) {
 	}
 
 	// it's royin' time
-	if (ans === 12440 && !window.isRoyInCharge) {
+	if ((ans === 12440 || ans === 3429) && !window.isRoyInCharge) {
 		window.isRoyInCharge = true;
 
 		campaignTrail_temp.running_mate_image_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy.jpg";
@@ -11065,7 +11065,7 @@ cyoAdventure = function (a) {
 		// shameless rewrites to fit in Roy
         const q363 = campaignTrail_temp.questions_json.find(q => q.pk === 363);
         if (q363) {
-            q363.fields.description = "It’s unbelievable. Roy somehow managed to acquire the keys to the main office PA system. You don’t ask how. “You have two minutes before the janitor finishes his rounds, dude,” he whispers to you. “Broadcast a, uh, final message to the whole school. And quick, too. Make it count. You sit down in the principal’s swivel chair, pull the microphone toward you, and click it on. As the red broadcast light glows steady in the dark room, it casts long shadows across the filing cabinets and the framed portraits of former principals, who all look vaguely disappointed in you.";
+            q363.fields.description = "It’s unbelievable. Roy somehow managed to acquire the keys to the main office PA system. You don’t ask how. “You have two minutes before the janitor finishes his rounds, dude,” he whispers to you. “Broadcast a, uh, final message to the whole school. And quick, too. Make it count.” You sit down in the principal’s swivel chair, pull the microphone toward you, and click it on. As the red broadcast light glows steady in the dark room, it casts long shadows across the filing cabinets and the framed portraits of former principals, who all look vaguely disappointed in you.";
         }
 
         const q360 = campaignTrail_temp.questions_json.find(q => q.pk === 360);
@@ -13227,6 +13227,214 @@ const mainEndings = [
       artist: "Martin L. Gore",
       cover: "https://resources.tidal.com/images/ed0a54b8/9094/4319/821e/e6e13cdeafaf/320x320.jpg",
       url: "ZJn1VukFa4E"
+    }
+  },
+  {
+    id: "ouch",
+    condition: (ev) => charlieWin && cynicism >= 4 && ruthlessness < 5,
+    image: "https://file.garden/aNtAfG887DiA_7lO/TML_2000/tv.webp",
+    title: "the sun always shines on t.v.",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  .letter-page {
+    background: linear-gradient(160deg, #fdf9ed 0%, #f5eecc 30%, #ede3b8 60%, #f2ebca 100%);
+    border: 1px solid #c8b882;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #b8a862, 4px 4px 0 #a89852, 1px 1px 8px rgba(0,0,0,0.18);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Crimson Text', 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #2a200a;
+  }
+
+  .letter-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        rgba(160, 130, 60, 0.09) 27px,
+        rgba(160, 130, 60, 0.09) 28px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .letter-page::after {
+    content: '';
+    position: absolute;
+    top: 48px; bottom: 48px;
+    left: 88px;
+    width: 1px;
+    background: rgba(190, 100, 100, 0.18);
+    pointer-events: none;
+  }
+
+  .fold-line {
+    border-top: 1px dashed rgba(150,120,50,0.25);
+    margin: 32px -54px;
+    position: relative;
+  }
+
+  .letter-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(160,130,60,0.3);
+  }
+
+  .letter-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #5a4418;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .letter-page p {
+    margin: 0 0 16px 0;
+    text-indent: 2em;
+  }
+
+  .letter-page p:first-of-type {
+    text-indent: 0;
+  }
+
+  .dialogue {
+    font-style: italic;
+  }
+
+  .section-break {
+    text-align: center;
+    color: #9a7830;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin: 24px 0 20px;
+  }
+
+  .stamp-area {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 1.5px solid #b09050;
+    border-radius: 1px;
+    background: linear-gradient(135deg, #f0e8c8, #e8dab0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #7a5828;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+  }
+
+  .stamp-perfs {
+    position: absolute;
+    top: 23px; right: 31px;
+    width: 54px; height: 64px;
+    border: 1px dotted rgba(150,110,40,0.5);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+</style>
+
+<div class="letter-page">
+  <div class="stamp-area">★</div>
+  <div class="stamp-perfs"></div>
+
+  <div class="letter-header">
+    <div class="letter-title">the sun always shines on t.v.</div>
+  </div>
+
+  <p>Linus Van Pelt stood on the porch of the Brown household. It was past midnight, and the rain was misting into the collar of his jacket.</p>
+
+  <p>He had rehearsed what he was going to say approximately twelve times on the walk over. <span class="dialogue">“Charlie, congratulations. You ran a hard campaign, and the voters have spoken.”</span> It was civil, it was polite, but it was the right thing to do, regardless of how much venom they had spat at each other over the last two months, and regardless of how heavily the loss was currently sitting in Linus’s own chest.</p>
+
+  <p>He knocked. Nothing. He knocked again, a little louder. Still nothing.</p>
+
+  <p>Frowning, Linus reached down and tried the doorknob. To his surprise, it turned; it seemed like Charlie had forgotten to lock it again.</p>
+
+  <p>Linus stepped inside, gently pushing the door shut behind him to keep the draft out. The house was entirely dark, lit only by the flickering, bluish glow of the television in the living room. The TV was muted, displaying a rapidly updating electoral graphic that showed exactly what Linus already knew. Snoopy was sitting at the bottom of the stairs, looking mildly distressed, which for the dog was a state of high alarm.</p>
+
+  <p>Then, Linus heard it.</p>
+
+  <p>It was a wet, guttural, agonizing sound echoed from the downstairs hallway. A choke, a gasp, and then Another violent, echoing heave.</p>
+
+  <p>Linus froze in the entryway; the hair on the back of his neck stood up. For one brief, terrifying, entirely irrational second, his mind supplied the absolute worst: Charlie Brown was choking on his own tongue. Or he had been poisoned? Or maybe the stress had finally snapped his brain, and he was turning into some kind of undead ghoul in the downstairs bathroom. Oh, heavens.</p>
+
+  <p><span class="dialogue">“Charlie?”</span> Linus called out, dropping his umbrella on the rug.</p>
+
+  <p>Another horrible, retching sound answered him. </p>
+
+  <div class="fold-line"></div>
+
+  <p>At that point, Linus stopped thinking and started moving. He bolted down the hall and barged into the bathroom.</p>
+
+  <p><span class="dialogue">“Charlie, are you— oh.”</span></p>
+
+  <p>Charlie Brown was collapsed on the bathmat, his arms wrapped desperately around the porcelain bowl of the toilet, panting heavily. He was pale, shivering faintly, and looked completely, utterly defeated. The room smelled sharply of stomach acid and… God, was that Cheerios?</p>
+
+  <p>And Charlie slowly turned his head, resting his cheek against the toilet seat. His eyes were bloodshot and glassy. He looked at Linus, blinking slowly as if his brain was struggling to process the visual information, and then looked back down at the water.</p>
+
+  <p><span class="dialogue">“I threw up,”</span> Charlie whispered. His voice was hoarse and incredibly small.</p>
+
+  <p><span class="dialogue">“I can see that,”</span> Linus said.</p>
+
+  <p><span class="dialogue">“I think it was the milk,”</span> Charlie mumbled, closing his eyes. <span class="dialogue">“Or the anxiety. Or both, I dunno.”</span></p>
+
+  <p>It was a very awkward moment. The newly elected president of the student council, lying on the floor in his pajamas, smelling of vomit, looking up at the opponent he had just defeated. All the grand speeches, all the bitter debates, all the philosophical arguments about the future of the school… well, to Linus, it all instantly evaporated in the fluorescent light of the bathroom.</p>
+
+  <p>Linus let out a long, quiet breath through his nose. He didn’t say his rehearsed speech. In fact, he didn’t mention the election at all.</p>
+
+  <div class="section-break">· · ·</div>
+
+  <p>Instead, he walked over, knelt on the bathmat, and put a firm hand on Charlie’s clammy shoulder.</p>
+
+  <p><span class="dialogue">“Come here,”</span> Linus said softly.</p>
+
+  <p>He grabbed Charlie by the arm and helped him to his feet. Charlie was unsteady, and his legs were trembling as he leaned heavily against Linus’s side. Linus reached over, flushed the toilet, and then guided Charlie to the sink. He grabbed a washcloth from the rack, ran it under the cold tap, and gently wiped the sweat and mess from Charlie’s face.</p>
+
+  <p>Charlie didn’t resist. He just stood there, letting it happen, to his relief. Linus opened the medicine cabinet, found a small paper cup, filled it with water, and pressed it into Charlie’s hand without much ceremony.</p>
+
+  <p><span class="dialogue">“Rinse,”</span> Linus ordered.</p>
+
+  <p>Charlie rinsed, and he spit it into the sink. Jeez. He looked terrible, like a ghost haunting his own house. Not enjoying the experience, he looked away.</p>
+
+  <p><span class="dialogue">“Do you need a doctor?”</span> Linus asked, and his brow furrowed with genuine concern. <span class="dialogue">“Should I wake up your parents?”</span></p>
+
+  <p><span class="dialogue">“No,”</span> Charlie sighed, leaning the back of his head against the doorframe, and closing his eyes. <span class="dialogue">“No, please. I just need… I just need the world to stop spinning for a minute.”</span></p>
+
+  <div class="fold-line"></div>
+
+  <p>Linus nodded. He put an arm around Charlie’s waist and guided him out of the bathroom, down the short hallway, and into the living room. He carefully lowered Charlie onto the couch. Charlie immediately curled into a tight ball, pulling his knees to his chest and shivering, trying to occupy as little space as possible.</p>
+
+  <p>Looking around, Linus spotted a heavy, knit throw blanket draped over the armchair, and pulled it down. This one would suffice, he thought. And so he shook it out and draped it carefully over Charlie, tucking the edges in tightly around his shoulders and under his feet, so the cold air wouldn’t get to him. It wasn’t <i>his</i> blanket, of course… but the motion was the exact same. It was a gesture of security, all of this.</p>
+
+  <p>On the television, the news anchor was pointing to a graphic displaying some of the night’s margins. He didn’t want to hear that. Linus picked up the remote and turned the television off. And so the room plunged into a soft, quiet darkness, save for the amber glow of the streetlight filtering through the windowpanes.</p>
+
+  <p>Linus set the remote down and sat on the edge of the couch, right near Charlie’s chest. Again, he didn’t say a word. </p>
+
+  <p>Charlie didn’t speak either, but after a minute, he reached out from under the heavy knit throw. His hand, shaking slightly, found Linus’s sleeve. He didn’t pull on it, no, but he held on, gripping the fabric as if making sure Linus wouldn’t disappear into the dark. &gt;Perhaps unsurprisingly, Linus didn’t pull away. He adjusted his position, reached down, and gently took Charlie’s hand in his own.</p>
+
+  <p><span class="dialogue">“You’re okay, Charlie Brown,”</span> Linus whispered to the quiet room, letting his thumb slowly rub the back of Charlie’s knuckles. <span class="dialogue">“You’re okay. Don’t let anyone change that. Just rest.”</span></p>
+
+  <p>And for the first time in two months, Charlie Brown closed his eyes, let out a long, shuddering breath, and, moments later, fell into a deep sleep.</p>
+
+</div>`,
+    song: {
+      title: "Are You Someone?",
+      artist: "Radiohead",
+      cover: "https://file.garden/aNtAfG887DiA_7lO/TML_2000/areyousomeone.png",
+      url: ["7hHMjap09js"]
     }
   },
   {
