@@ -11656,16 +11656,16 @@ function calculateCliqueResults() {
             calcCharlieMod: function() { return (this.support * 0.025) + (cur_anti * 0.015) + (cur_patty * 0.005); }
         },
         {
-            name: "Honors", pop: 85, baseShare: 0.60,
+            name: "Honors", pop: 85, baseShare: 0.55,
             support: typeof support_honors !== 'undefined' ? support_honors : 0,
             // honors hate anti-establishment; they like Linus slightly, but mostly stick to the rules
             calcCharlieMod: function() { return (this.support * 0.04) - (cur_anti * 0.02) - (cur_linus * 0.005); }
         },
         {
-            name: "Jocks", pop: 150, baseShare: 0.30,
+            name: "Jocks", pop: 150, baseShare: 0.35,
             support: typeof support_jocks !== 'undefined' ? support_jocks : 0,
             // jocks follow Patty's approval religiously
-            calcCharlieMod: function() { return (this.support * 0.05) + (cur_patty * 0.015) - (cur_cynicism * 0.01) - (cur_anti * 0.005); }
+            calcCharlieMod: function() { return (this.support * 0.04) + (cur_patty * 0.015) - (cur_cynicism * 0.01) - (cur_anti * 0.005); }
         },
         {
             name: "Arts", pop: 70, baseShare: 0.50,
@@ -12730,6 +12730,172 @@ const mainEndings = [
     }
   },
   {
+    id: "differentcorner",
+    condition: (ev) => linusWin && ruthlessness >= 2 && linus_bond < 3 && linus_bond > -5,
+    image: "https://i.pinimg.com/1200x/c9/78/3f/c9783f980145c26b2d2f254e287b4da6.jpg",
+    title: "a different corner",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  .letter-page {
+    background: linear-gradient(160deg, #fdf9ed 0%, #f5eecc 30%, #ede3b8 60%, #f2ebca 100%);
+    border: 1px solid #c8b882;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #b8a862, 4px 4px 0 #a89852, 1px 1px 8px rgba(0,0,0,0.18);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Crimson Text', 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #2a200a;
+  }
+
+  .letter-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        rgba(160, 130, 60, 0.09) 27px,
+        rgba(160, 130, 60, 0.09) 28px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .letter-page::after {
+    content: '';
+    position: absolute;
+    top: 48px; bottom: 48px;
+    left: 88px;
+    width: 1px;
+    background: rgba(190, 100, 100, 0.18);
+    pointer-events: none;
+  }
+
+  .fold-line {
+    border-top: 1px dashed rgba(150,120,50,0.25);
+    margin: 32px -54px;
+    position: relative;
+  }
+
+  .letter-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(160,130,60,0.3);
+  }
+
+  .letter-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #5a4418;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .letter-page p {
+    margin: 0 0 16px 0;
+    text-indent: 2em;
+  }
+
+  .letter-page p:first-of-type {
+    text-indent: 0;
+  }
+
+  .dialogue {
+    font-style: italic;
+  }
+
+  .section-break {
+    text-align: center;
+    color: #9a7830;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin: 24px 0 20px;
+  }
+
+  .stamp-area {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 1.5px solid #b09050;
+    border-radius: 1px;
+    background: linear-gradient(135deg, #f0e8c8, #e8dab0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #7a5828;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+  }
+
+  .stamp-perfs {
+    position: absolute;
+    top: 23px; right: 31px;
+    width: 54px; height: 64px;
+    border: 1px dotted rgba(150,110,40,0.5);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+</style>
+
+<div class="letter-page">
+  <div class="stamp-area">★</div>
+  <div class="stamp-perfs"></div>
+
+  <div class="letter-header">
+    <div class="letter-title">a different corner</div>
+  </div>
+
+  <p>If this were a movie, the camera would start low and wide in the living room, and panning seamlessly through the crowd.</p>
+
+  <p>It tracks Linus Van Pelt as he glides through the victory party. Oh, there he is. The golden boy, the philosopher king, the newly elected President of the Student Council. The lens stays locked on him as he shakes a hand, spins on his heel, clinks a plastic cup of fruit punch against someone else's, and laughs; it's a big, bright, flawless laugh. The music is loud; it was some pulsing old school music he liked, and that vibrated in the floorboards. Streamers hang from the ceiling fans, and everyone is smiling at him. Everyone wants to be near him.</p>
+
+  <p>He moves through the kitchen in one fluid, continuous motion. He points at Schroeder, who gives him a salute from the counter. He dodges a stray balloon. Linus us, ultimately, being just like the version of himself he sold to the school for two months: confident, capable, and perfectly at ease with his own triumph.</p>
+
+  <p>But the camera doesn't cut. It stays fixed tightly on his face as he leans against the edge of the kitchen island to take a sip of punch. And right there, in the middle of the frame, the facade slips.</p>
+
+  <p>His smile doesn't drop all at once, but it rapidly decays. The corners of his mouth twitch, fighting to stay elevated, but gravity and guilt drag them down. His eyes, which had been bright and engaged a second ago, glaze over, staring blankly past the crowd. God. The ambient noise of the party, all the cheers, the bass, the clattering of cups, begins to sound muffled to him, so hollowed out, like it's happening underwater...</p>
+
+  <div class="fold-line"></div>
+
+  <p>He tries to shake it off. A sophomore girl bumps into his shoulder and congratulates him. How fantastic! Linus forces the smile back onto his face, wide and eager, and nods, saying something polite. But the moment she turns away, the smile collapses completely, faster this time.</p>
+
+  <p>He can't stop thinking about it. He keeps seeing Charlie Brown's face, over and over again. Linus sees the look of betrayal he had during the debate. He sees the sheer misery in Charlie's eyes walking down the hallway. Worse, he sees the ghost of the kid he used to sit with on a brick wall, talking about the stars among other topic, a kid who had looked at him over the last few weeks not as a friend, but as a monster.</p>
+
+  <p>He had won, he had everything he ever wanted, the school was his. But it felt like absolutely nothing.</p>
+
+  <p>The camera tracks him as he sets the red plastic cup down on the counter. He doesn't look at anyone now. He keeps his head down, weaving through the dense pack of bodies in the living room. Someone calls his name — <span class="dialogue">"Hey, Mr. President!"</span> —,but he ignores it, pressing forward. The walls of his own house feel impossibly tight, and the air too thick to breathe.</p>
+
+  <div class="section-break">· · ·</div>
+
+  <p>Linus reaches the sliding glass door at the back of the dining room. He throws the latch, pushes it open, and steps outside.</p>
+
+  <p>He slides the glass shut behind him. Immediately, the thumping bass of the party is cut off, reduced to a dull, rhythmic thud against the glass. The camera follows him out into the cool, damp night air. Ahh.</p>
+
+  <p>And so Linus walks down the wooden steps of the deck and steps onto the wet grass of his backyard. He walks until he is near the back fence, where the glow of the party lights can't quite reach him. The yard is vast, dark, and perfectly silent, save for the hum of crickets.</p>
+
+  <p>He stops. The camera circles around him slowly, coming to a halt just in front of him. He is still wearing his victory outfit: a fairly bland red sweater. His blanket is neatly folded over his forearm, but he looks incredibly small.</p>
+
+  <p>Linus tilts his head back, staring up at the sprawling, black expanse of the sky. The stars are barely visible through the autumn cloud cover, and his chest rises and falls in a long, shaky breath. He stands there in the dark, in silence. The shot holds on his face, illuminated only by the faint, distant moon. And then, finally, the screen fades to black.</p>
+
+</div>`,
+    song: {
+      title: "Rub You The Right Way (Extended Hype 1)",
+      artist: "Johnny Gill",
+      cover: "https://yt3.googleusercontent.com/qjBPl2kXFfEKpRdp01xc2v4J-xNMyes0TFWgsQUbj5Ct9ys7fPA10jutwXbHW17k7pmuftUpfuq-VXnL1Q=w544-h544-l90-rj",
+      url: ["2C0FDyXiwuE"]
+    }
+  },
+  {
     id: "missyoubuddy",
     condition: (ev) => linusWin && linus_bond >= 4,
     image: "https://i.pinimg.com/1200x/c8/ed/27/c8ed273eda12f3ca73527ecd74d82a60.jpg",
@@ -13227,6 +13393,237 @@ const mainEndings = [
       artist: "Martin L. Gore",
       cover: "https://resources.tidal.com/images/ed0a54b8/9094/4319/821e/e6e13cdeafaf/320x320.jpg",
       url: "ZJn1VukFa4E"
+    }
+  },
+  {
+    id: "moes",
+    condition: (ev) => charlieWin && cynicism > 5 && ruthlessness > 5,
+    image: "https://i.pinimg.com/1200x/d3/44/25/d3442532e134104064fa174dd783590f.jpg",
+    title: "two divided by zero",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  .letter-page {
+    background: linear-gradient(160deg, #fdf9ed 0%, #f5eecc 30%, #ede3b8 60%, #f2ebca 100%);
+    border: 1px solid #c8b882;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #b8a862, 4px 4px 0 #a89852, 1px 1px 8px rgba(0,0,0,0.18);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Crimson Text', 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #2a200a;
+  }
+
+  .letter-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        rgba(160, 130, 60, 0.09) 27px,
+        rgba(160, 130, 60, 0.09) 28px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .letter-page::after {
+    content: '';
+    position: absolute;
+    top: 48px; bottom: 48px;
+    left: 88px;
+    width: 1px;
+    background: rgba(190, 100, 100, 0.18);
+    pointer-events: none;
+  }
+
+  .fold-line {
+    border-top: 1px dashed rgba(150,120,50,0.25);
+    margin: 32px -54px;
+    position: relative;
+  }
+
+  .letter-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(160,130,60,0.3);
+  }
+
+  .letter-dateline {
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #7a6030;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .letter-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #5a4418;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .chapter-mark {
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+    color: #8a6828;
+    font-size: 15px;
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  .letter-page p {
+    margin: 0 0 16px 0;
+    text-indent: 2em;
+  }
+
+  .letter-page p:first-of-type {
+    text-indent: 0;
+  }
+
+  .dialogue {
+    font-style: italic;
+  }
+
+  .section-break {
+    text-align: center;
+    color: #9a7830;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin: 24px 0 20px;
+  }
+
+  .letter-footer {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(160,130,60,0.3);
+    text-align: right;
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #7a6030;
+  }
+
+  .stamp-area {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 1.5px solid #b09050;
+    border-radius: 1px;
+    background: linear-gradient(135deg, #f0e8c8, #e8dab0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #7a5828;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+  }
+
+  .stamp-perfs {
+    position: absolute;
+    top: 23px; right: 31px;
+    width: 54px; height: 64px;
+    border: 1px dotted rgba(150,110,40,0.5);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+</style>
+
+<div class="letter-page">
+  <div class="stamp-area">★</div>
+  <div class="stamp-perfs"></div>
+
+  <div class="letter-header">
+    <div class="letter-title">two divided by zero</div>
+  </div>
+
+  <p>The neon sign in the window of O'Malley's Pub cast a dull, flickering red glow over the sticky mahogany of the bar. It was a Tuesday night, which meant the place was mostly empty, save for a couple of tired regulars nursing their drafts and the bartender half-asleep by the register.</p>
+
+  <p>At the far end of the counter, sitting perfectly still in the dim lighting, was Roy.</p>
+
+  <p>He didn't look like a high schooler. Maybe he never really had. With the collar of his jacket turned up, his posture relaxed but guarded, and an eerily convincing fake license tucked safely back into his wallet, he fit right into the landscape of the dive bar, to his relief. He was nursing the last third of a Manhattan, staring at the cherry resting at the bottom of the glass as if it held the answers to the universe.</p>
+
+  <p>The heavy wooden door of the pub creaked open, letting in a sudden gust of the freezing night air. Roy didn't turn his head, and just watched the red neon reflect in his drink. Footsteps approached before someone slid onto the vinyl barstool right next to him. Roy took a slow sip of his drink, and when he looked to his side, e didn't seem surprised in the slightest.</p>
+
+  <p><span class="dialogue">"I thought I might find you here,"</span> Patty said.</p>
+
+  <div class="fold-line"></div>
+
+  <p>She wasn't drinking, of course. She just rested her arms on the sticky counter, looking at him with that gaze she usually saved for the pitcher's mound. The bartender gave her a passing glance, decided she wasn't worth the trouble of carding if she wasn't ordering, and went back to wiping glasses.</p>
+
+  <p><span class="dialogue">"You tracking me now, Patty?"</span> Roy asked, his voice smooth, carrying its usual easy cadence. But there was a slight edge to it tonight. A subtle fraying at the seams.</p>
+
+  <p><span class="dialogue">"Not exactly,"</span> she replied, brushing a stray leaf off the sleeve of her jacket. <span class="dialogue">"Just figured you'd want to avoid the fallout zone. I came to see how things were with Chuck. And with the campaign, now that he actually pulled it off."</span></p>
+
+  <p>Roy let out a quiet, hollow laugh. He swirled the amber liquid in his glass, listening to the ice clink against the rim.</p>
+
+  <p><span class="dialogue">"He pulled it off, alright,"</span> Roy murmured. He stopped swirling the glass and finally looked up, staring straight at the rows of liquor bottles on the shelf opposite them. He raised a hand, rubbing his temples slowly. <span class="dialogue">"I think I have a headache, Patty."</span></p>
+
+  <p>Patty frowned. It wasn't like Roy to admit discomfort. He was the guy who breezed through everything, the detached drifter who always knew what to say and when to leave. Seeing him sit here, genuinely worn down, felt wrong.</p>
+
+  <p><span class="dialogue">"You sick?"</span> she asked softly.</p>
+
+  <p><span class="dialogue">"No."</span> He exhaled, a long, tired sound. <span class="dialogue">"No, I'm just... this whole campaign, Patty. It really brought me down."</span></p>
+
+  <div class="section-break">· · ·</div>
+
+  <p>He turned his head to look at her. The neon light caught his eyes, and Patty was startled to see how profoundly exhausted he looked. The cool, impenetrable mask had completely slipped, leaving behind someone who looked as bruised as Charlie Brown did on a bad day.</p>
+
+  <p><span class="dialogue">"I don't get it,"</span> Roy said, his voice dropping into a tight, quiet register. <span class="dialogue">"I really don't. I've known Charlie for a long time. I thought I knew who he was. But how could he be so incredibly inconsiderate to someone who used to be his best friend?"</span></p>
+
+  <p>Patty looked down at the bar top. <span class="dialogue">"Chuck was desperate, Roy. He just wanted to win for once."</span></p>
+
+  <p><span class="dialogue">"Desperate isn't an excuse to carve someone open on a stage,"</span> Roy countered, shaking his head. He took another slow sip of his Manhattan, the bourbon burning down his throat. <span class="dialogue">"He didn't just beat Linus. He humiliated him. He took everything he knew about the kid and weaponized it. I stood there and watched him do it, Patty, and he didn't even flinch."</span></p>
+
+  <p>Roy set the glass down harder than he meant to. The <i>clack</i> echoed briefly in the quiet bar.</p>
+
+  <p><span class="dialogue">"And it wasn't just Charlie,"</span> Roy continued, his frustration bleeding out into the open. <span class="dialogue">"It was all of them. How could Linus let Lucy and the others parade around like that? Throwing dirt, berating Charlie in the hallways, organizing those mobs just to break him down before he even got to the podium? It was vicious. It was sick."</span></p>
+
+  <p>He leaned forward, resting his forehead against his hand, shielding his eyes from the red glow of the window.</p>
+
+  <p><span class="dialogue">"Why are they like this?"</span> Roy whispered into the empty space between them. <span class="dialogue">"It’s just a stupid student council election. It doesn't matter. None of it matters. But they tore each other to pieces for it anyway."</span></p>
+
+  <div class="fold-line"></div>
+
+  <p>The silence that followed was heavy, filled only by the low hum of the pub's refrigerator and the distant, muffled sound of a siren a few blocks away.</p>
+
+  <p>Patty didn't have an answer for him. She wished she did. She wished she could tell him that it was just a phase, or that things would go back to normal by next week, or that Charlie and Linus would eventually laugh it off over a game of baseball.</p>
+
+  <p>But she couldn't. Because she had seen the look on Charlie's face tonight, and she had seen the dark, silent house on Elm Street, and she knew the damage was deep. It had fundamentally changed the chemistry of their little world, and Roy—for all his cool detachment—was grieving the loss of it just as much as anyone else.</p>
+
+  <p>Patty reached out. She didn't say any empty platitudes. She just placed her hand firmly over his on the sticky counter, giving it a gentle, grounding squeeze.</p>
+
+  <p><span class="dialogue">"I know, Roy,"</span> she said quietly, her voice full of a steady, sad grace. <span class="dialogue">"I know."</span></p>
+
+  <p>Roy didn't pull away. He just sat there in the dim red light, staring at his half-empty glass, letting the warmth of her hand anchor him for a moment in a world that suddenly felt entirely too cold.</p>
+
+  <p><span class="dialogue">"Just..."</span> Patty murmured, giving his hand one final squeeze before she slowly stood up from the stool. <span class="dialogue">"Take care of yourself, okay?"</span></p>
+
+  <p>Roy looked up at her. He offered a small, broken smile that didn't quite reach his eyes, a ghost of the effortless drifter he usually played so well.</p>
+
+  <p><span class="dialogue">"You too, Patty,"</span> he said softly.</p>
+
+  <p>She turned and walked out into the freezing night, the door creaking shut behind her. Roy turned back to the bar, picked up his drink, and finished it in the dark.</p>
+
+</div>`,
+    song: {
+      title: "She Fades Away",
+      artist: "Alphaville",
+      cover: "https://yt3.googleusercontent.com/gpJ3hEV2iZMHusRAsRUijML2NIiGt5Vl8Tt1cCjeR6JScXY8DNlh-XqikZz8mzNHxkom1Xup4uOYlpFK=w544-h544-l90-rj",
+      url: ["LxGHOGcHcoU", "8RgrttqY91w"]
     }
   },
   {
@@ -30256,7 +30653,8 @@ async function loadAndDrawCountyMap(mode) {
   window.recommendedReading = { addStyles, initializeTabs, ensureInitialized };
 })();
 
-
+// The data visualizer from 2012LBM
+// many thanks to routevenus for their work here!
 (function () {
   const VISUALIZATION_MODES = {
     SOLID: 'solid', MARGINS: 'margins', VOTE_SHARE: 'vote_share',
@@ -30546,7 +30944,9 @@ async function loadAndDrawCountyMap(mode) {
 
   function getIssueWeightColor(weight, idx) {
     const range = getIssueWeightRange(idx);
-    if (!range || range.min === range.max || (range.max - range.min) <= 0.15) {
+    if (!range) return "#F8F8FF";
+    if (range.min === range.max) return "#C9C9C9";
+    if ((range.max - range.min) <= 0.15) {
       const w = Math.min(weight, 1.0);
       return w < 0.1 ? "#F8F8FF" : w < 0.25 ? "#E6E6FA" : w < 0.4 ? "#B0C4DE" :
              w < 0.55 ? "#87CEEB" : w < 0.7 ? "#4682B4" : w < 0.85 ? "#1E90FF" : "#0000CD";
@@ -31445,9 +31845,11 @@ async function loadAndDrawCountyMap(mode) {
       const w = campaignTrail_temp.state_issue_score_json?.find(s => s.fields.state === r.state && s.fields.issue === iss.pk)?.fields.weight;
       if (w != null) { if (w > hW) { hW = w; hS = r.abbr; } if (w < lW) { lW = w; lS = r.abbr; } }
     });
-    f.appendChild(cr('div', { textContent: hS && lS ? `Highest priority: ${hS} (${hW.toFixed(2)}) | Lowest: ${lS} (${lW.toFixed(2)})` : 'No weight data available' }, { fontSize: '9px', marginBottom: '5px', textAlign: 'center', color: '#555' }));
+    f.appendChild(cr('div', { textContent: hS && lS ? (hW === lW ? `All states uniform` : `Highest priority: ${hS} (${hW.toFixed(2)}) | Lowest: ${lS} (${lW.toFixed(2)})`) : 'No weight data available' }, { fontSize: '9px', marginBottom: '5px', textAlign: 'center', color: '#555' }));
     const rng = getIssueWeightRange(iIdx);
-    if (rng && rng.min !== rng.max && (rng.max - rng.min) > 0.15) {
+    if (rng && rng.min === rng.max) {
+      f.appendChild(makeLegendTable([{ color: "#C9C9C9", label: `Uniform importance (${rng.min.toFixed(2)})` }]));
+    } else if (rng && (rng.max - rng.min) > 0.15) {
       const sz = (rng.max - rng.min) / 5, items = [];
       for (let i = 4; i >= 0; i--) {
         const mn = rng.min + (i * sz), mx = i === 4 ? rng.max : rng.min + ((i + 1) * sz);
