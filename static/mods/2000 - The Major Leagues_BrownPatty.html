@@ -11172,7 +11172,12 @@ cyoAdventure = function (a) {
       color: #0f172a;
       display: flex;
       flex-direction: column;
+      transition: width 0.2s ease;
     }
+    #gameStatsPopup.minimized {
+      width: 380px;
+    }
+
     #gameStatsPopupHeader {
       background-color: #0f172a;
       color: #ffffff;
@@ -11186,7 +11191,13 @@ cyoAdventure = function (a) {
       align-items: center;
       cursor: move;
     }
-    #close_stats_btn {
+
+    .header-buttons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .hdr-btn {
       background: none;
       border: none;
       color: #ffffff;
@@ -11196,13 +11207,18 @@ cyoAdventure = function (a) {
       line-height: 1;
       padding: 0 4px;
     }
-    #close_stats_btn:hover { color: #ef4444; }
+    .hdr-btn:hover { color: #ef4444; }
+    #min_stats_btn:hover { color: #60a5fa; }
 
     #gameStatsTabs {
       display: flex;
       background-color: #e2e8f0;
       border-bottom: 2px solid #0f172a;
     }
+    #gameStatsPopup.minimized #gameStatsTabs {
+      display: none;
+    }
+
     .tab-btn {
       flex: 1;
       padding: 8px;
@@ -11231,6 +11247,41 @@ cyoAdventure = function (a) {
       padding: 16px;
       gap: 24px;
       min-height: 280px;
+    }
+    #gameStatsPopup.minimized #gameStatsContent {
+      display: none;
+    }
+
+    /* minimzed tab */
+    #minimizedContent {
+      display: none;
+    }
+    #gameStatsPopup.minimized #minimizedContent {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      min-height: 60px;
+      background-color: #f4f4f5;
+    }
+    .min-arrow-btn {
+      background: #e2e8f0;
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+      border-radius: 4px;
+      font-size: 12px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .min-arrow-btn:hover { background: #cbd5e1; }
+    .min-arrow-btn:active { transform: translateY(1px); }
+    #min_data_display {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      padding: 0 12px;
+      line-height: 1.4;
     }
 
     .stats-column { flex: 1; display: flex; flex-direction: column; gap: 12px; }
@@ -11298,7 +11349,7 @@ cyoAdventure = function (a) {
     .lbl-left { left: -6px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: center; }
     .lbl-right { right: -6px; top: 50%; transform: translateY(-50%) rotate(90deg); transform-origin: center; }
 
-	#compass-marker {
+    #compass-marker {
       position: absolute;
       width: 24px;
       height: 24px;
@@ -11332,6 +11383,8 @@ cyoAdventure = function (a) {
   document.head.appendChild(styleEl);
 
   let activeTab = "demographics"; // 'demographics' or 'compass'
+  let isMinimized = false;
+  let minimizedIndex = 0;
 
   const bold = (text, color) => `<span style="color: ${color}; font-weight: bold">${text}</span>`;
 
@@ -11347,45 +11400,45 @@ cyoAdventure = function (a) {
     return [
       {
         getValue: () => ruthlessness,
-		tiers: [
-		  [-1, `Charlie Brown is running a ${bold("honest", "#22c55e")} campaign.`],
-		  [1,  `Charlie Brown is trying to ${bold("play fair", "#64748b")}.`],
-		  [3,  `Charlie Brown is starting to ${bold("cut corners", "#eab308")}.`],
-		  [5,  `Charlie Brown's hands are ${bold("dirty", "#f97316")}.`],
-		  [Infinity, `Charlie Brown is a total ${bold("sociopath", "#ef4444")}.`],
-		],
+        tiers: [
+          [-1, `Charlie Brown is running a ${bold("honest", "#22c55e")} campaign.`],
+          [1,  `Charlie Brown is trying to ${bold("play fair", "#64748b")}.`],
+          [3,  `Charlie Brown is starting to ${bold("cut corners", "#eab308")}.`],
+          [5,  `Charlie Brown's hands are ${bold("dirty", "#f97316")}.`],
+          [Infinity, `Charlie Brown is a total ${bold("sociopath", "#ef4444")}.`],
+        ],
       },
       {
         getValue: () => linus_bond,
         tiers: [
-		  [-8, `Charlie Brown would sell Linus for a ${bold("corn dog", "#ef4444")}.`],
-		  [-5, `Charlie Brown and Linus are ${bold("bitter rivals", "#ef4444")}.`],
-		  [-3, `Charlie Brown actively ${bold("dislikes", "#d97706")} Linus.`],
-		  [-1, `Charlie Brown barely ${bold("tolerates", "#ca8a04")} Linus.`],
-		  [0,  `Charlie Brown and Linus are currently ${bold("estranged", "#475569")}.`],
-		  [1,  `Charlie Brown and Linus are ${bold("on speaking terms", "#475569")}.`],
-		  [3,  `Charlie Brown and Linus still have ${bold("some respect", "#10b981")}.`],
-		  [Infinity, `Charlie Brown and Linus ${bold("miss each other", "#10b981")}.`],
-		],
+          [-8, `Charlie Brown would sell Linus for a ${bold("corn dog", "#ef4444")}.`],
+          [-5, `Charlie Brown and Linus are ${bold("bitter rivals", "#ef4444")}.`],
+          [-3, `Charlie Brown actively ${bold("dislikes", "#d97706")} Linus.`],
+          [-1, `Charlie Brown barely ${bold("tolerates", "#ca8a04")} Linus.`],
+          [0,  `Charlie Brown and Linus are currently ${bold("estranged", "#475569")}.`],
+          [1,  `Charlie Brown and Linus are ${bold("on speaking terms", "#475569")}.`],
+          [3,  `Charlie Brown and Linus still have ${bold("some respect", "#10b981")}.`],
+          [Infinity, `Charlie Brown and Linus ${bold("miss each other", "#10b981")}.`],
+        ],
       },
       {
         getValue: () => cynicism,
         tiers: [
           [-3, `Charlie Brown is in ${bold("heaven", "#16a34a")}.`],
-		  [-1, `Charlie Brown still has some ${bold("hope", "#22c55e")}.`],
-		  [2,  `Charlie Brown runs on the usual ${bold("teenage angst", "#64748b")}.`],
-		  [4,  `Charlie Brown is quite ${bold("exhausted", "#f97316")}.`],
-		  [Infinity, `Charlie Brown is on ${bold("suicide watch", "#ef4444")}.`],
-		],
+          [-1, `Charlie Brown still has some ${bold("hope", "#22c55e")}.`],
+          [2,  `Charlie Brown runs on the usual ${bold("teenage angst", "#64748b")}.`],
+          [4,  `Charlie Brown is quite ${bold("exhausted", "#f97316")}.`],
+          [Infinity, `Charlie Brown is on ${bold("suicide watch", "#ef4444")}.`],
+        ],
       },
       {
         getValue: () => anti_establishment,
         tiers: [
           [-1, `Charlie Brown is seen as part of the ${bold("establishment", "#ef4444")}.`],
-		  [0,  `Charlie Brown is ${bold("playing it safe", "#64748b")}.`],
-		  [1,  `Charlie Brown is seen as a ${bold("moderate reformer", "#eab308")}.`],
-		  [4,  `Charlie Brown is seen as a ${bold("populist firebrand", "#f97316")}.`],
-		  [Infinity, `Charlie Brown is basically seen as ${bold("Robespierre", "#ef4444")}.`],
+          [0,  `Charlie Brown is ${bold("playing it safe", "#64748b")}.`],
+          [1,  `Charlie Brown is seen as a ${bold("moderate reformer", "#eab308")}.`],
+          [4,  `Charlie Brown is seen as a ${bold("populist firebrand", "#f97316")}.`],
+          [Infinity, `Charlie Brown is basically seen as ${bold("Robespierre", "#ef4444")}.`],
         ],
       },
       {
@@ -11457,7 +11510,6 @@ cyoAdventure = function (a) {
     let x_pct = ((ruthlessness - BAR_MIN) / (BAR_MAX - BAR_MIN)) * 100;
     let y_pct = ((BAR_MAX - anti_establishment) / (BAR_MAX - BAR_MIN)) * 100;
 
-    // constrain to box
     x_pct = Math.max(0, Math.min(100, x_pct));
     y_pct = Math.max(0, Math.min(100, y_pct));
 
@@ -11508,21 +11560,60 @@ cyoAdventure = function (a) {
     return leftHTML + rightHTML;
   }
 
+  // for the minimized slider view
+  function getMinimizedDataList() {
+    let list = [];
+
+    getInternalStats().forEach(stat => {
+      let val = stat.getValue();
+      list.push(`${matchTier(val, stat.tiers)} [<span class="stat-val">${val > 0 ? '+'+val : val}</span>]`);
+    });
+
+    const factions = [
+      { label: "The Burnouts", val: support_burnouts, color: "#d97706" },
+      { label: "Honors Kids", val: support_honors, color: "#2563eb" },
+      { label: "The Jocks", val: support_jocks, color: "#dc2626" },
+      { label: "Arts & Theatre", val: support_arts, color: "#7c3aed" },
+      { label: "Administration", val: support_admin, color: "#059669" }
+    ];
+    factions.forEach(f => {
+      let status = getFactionStatus(f.label, f.val);
+      list.push(`<b>${f.label}:</b> ${bold(status, f.color)} [<span class="stat-val">${f.val > 0 ? '+'+f.val : f.val}</span>]`);
+    });
+
+    let x_pct = Math.max(0, Math.min(100, ((ruthlessness - BAR_MIN) / (BAR_MAX - BAR_MIN)) * 100));
+    let y_pct = Math.max(0, Math.min(100, ((BAR_MAX - anti_establishment) / (BAR_MAX - BAR_MIN)) * 100));
+    list.push(`<b>Political Matrix:</b><br> You are seen as ${getIdeologyName(x_pct, y_pct)}.`);
+
+    return list;
+  }
+
   function updateGameStatsPopup() {
+    const popup = document.getElementById("gameStatsPopup");
     const content = document.getElementById("gameStatsContent");
     const tabDemo = document.getElementById("tab_demo");
     const tabCompass = document.getElementById("tab_compass");
+    const minDisplay = document.getElementById("min_data_display");
 
-    if (!content || !tabDemo || !tabCompass) return;
+    if (!popup || !content || !tabDemo || !tabCompass || !minDisplay) return;
 
-    if (activeTab === "demographics") {
-      tabDemo.classList.add("active");
-      tabCompass.classList.remove("active");
-      content.innerHTML = renderDemographics();
+    if (isMinimized) {
+      let dataList = getMinimizedDataList();
+
+      if (minimizedIndex >= dataList.length) minimizedIndex = 0;
+      if (minimizedIndex < 0) minimizedIndex = dataList.length - 1;
+
+      minDisplay.innerHTML = dataList[minimizedIndex];
     } else {
-      tabCompass.classList.add("active");
-      tabDemo.classList.remove("active");
-      content.innerHTML = renderCompass();
+      if (activeTab === "demographics") {
+        tabDemo.classList.add("active");
+        tabCompass.classList.remove("active");
+        content.innerHTML = renderDemographics();
+      } else {
+        tabCompass.classList.add("active");
+        tabDemo.classList.remove("active");
+        content.innerHTML = renderCompass();
+      }
     }
   }
 
@@ -11535,13 +11626,22 @@ cyoAdventure = function (a) {
     popup.innerHTML = `
       <div id="gameStatsPopupHeader">
         <span>Campaign Data</span>
-        <button id="close_stats_btn">×</button>
+        <div class="header-buttons">
+          <button class="hdr-btn" id="min_stats_btn">−</button>
+          <button class="hdr-btn" id="close_stats_btn">×</button>
+        </div>
       </div>
       <div id="gameStatsTabs">
         <button class="tab-btn active" id="tab_demo">Statistics</button>
         <button class="tab-btn" id="tab_compass">Matrix</button>
       </div>
       <div id="gameStatsContent"></div>
+
+      <div id="minimizedContent">
+        <button class="min-arrow-btn" id="min_prev_btn">◀</button>
+        <div id="min_data_display"></div>
+        <button class="min-arrow-btn" id="min_next_btn">▶</button>
+      </div>
     `;
     document.body.appendChild(popup);
 
@@ -11551,6 +11651,30 @@ cyoAdventure = function (a) {
     });
     document.getElementById("tab_compass").addEventListener("click", () => {
       activeTab = "compass";
+      updateGameStatsPopup();
+    });
+
+    document.getElementById("min_prev_btn").addEventListener("click", () => {
+      const dataLength = getMinimizedDataList().length;
+      minimizedIndex = (minimizedIndex - 1 + dataLength) % dataLength;
+      updateGameStatsPopup();
+    });
+    document.getElementById("min_next_btn").addEventListener("click", () => {
+      const dataLength = getMinimizedDataList().length;
+      minimizedIndex = (minimizedIndex + 1) % dataLength;
+      updateGameStatsPopup();
+    });
+
+    document.getElementById("min_stats_btn").addEventListener("click", () => {
+      isMinimized = !isMinimized;
+      const minBtn = document.getElementById("min_stats_btn");
+      if (isMinimized) {
+        popup.classList.add("minimized");
+        minBtn.textContent = "+";
+      } else {
+        popup.classList.remove("minimized");
+        minBtn.textContent = "−";
+      }
       updateGameStatsPopup();
     });
 
@@ -11581,7 +11705,7 @@ cyoAdventure = function (a) {
     }
 
     header.addEventListener("mousedown", (e) => {
-      if(e.target.id === "close_stats_btn") return;
+      if(e.target.closest('.hdr-btn')) return;
       const rect = el.getBoundingClientRect();
       offsetX = e.clientX - rect.left;
       offsetY = e.clientY - rect.top;
@@ -11594,7 +11718,7 @@ cyoAdventure = function (a) {
     const popup = document.getElementById("gameStatsPopup");
     if (!popup) return;
     const showing = popup.style.display === "none";
-    popup.style.display = showing ? "block" : "none";
+    popup.style.display = showing ? "flex" : "none";
     if (showing) updateGameStatsPopup();
   }
 
@@ -12731,8 +12855,8 @@ const mainEndings = [
   },
   {
     id: "differentcorner",
-    condition: (ev) => linusWin && ruthlessness >= 2 && linus_bond < 3 && linus_bond > -5,
-    image: "https://i.pinimg.com/1200x/c9/78/3f/c9783f980145c26b2d2f254e287b4da6.jpg",
+    condition: (ev) => linusWin && ruthlessness >= 3 && linus_bond < 0 && linus_bond > -5,
+    image: "https://i.pinimg.com/1200x/1e/93/a0/1e93a022d1c0c14dbd39ab0b63aeff55.jpg",
     title: "a different corner",
     html: `<style>
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
@@ -12857,23 +12981,23 @@ const mainEndings = [
 
   <p>If this were a movie, the camera would start low and wide in the living room, and panning seamlessly through the crowd.</p>
 
-  <p>It tracks Linus Van Pelt as he glides through the victory party. Oh, there he is. The golden boy, the philosopher king, the newly elected President of the Student Council. The lens stays locked on him as he shakes a hand, spins on his heel, clinks a plastic cup of fruit punch against someone else's, and laughs; it's a big, bright, flawless laugh. The music is loud; it was some pulsing old school music he liked, and that vibrated in the floorboards. Streamers hang from the ceiling fans, and everyone is smiling at him. Everyone wants to be near him.</p>
+  <p>It tracks Linus Van Pelt as he glides through the victory party. Oh, there he is. The golden boy, the philosopher king, the newly elected President of the Student Council. The lens stays locked on him as he shakes a hand, spins on his heel, clinks a plastic cup of fruit punch against someone else’s, and laughs; it’s a big, bright, flawless laugh. The music is loud; it was some pulsing old school music he liked, and that vibrated in the floorboards. Streamers hang from the ceiling fans, and everyone is smiling at him. Everyone wants to be near him.</p>
 
   <p>He moves through the kitchen in one fluid, continuous motion. He points at Schroeder, who gives him a salute from the counter. He dodges a stray balloon. Linus us, ultimately, being just like the version of himself he sold to the school for two months: confident, capable, and perfectly at ease with his own triumph.</p>
 
-  <p>But the camera doesn't cut. It stays fixed tightly on his face as he leans against the edge of the kitchen island to take a sip of punch. And right there, in the middle of the frame, the facade slips.</p>
+  <p>But the camera doesn’t cut. It stays fixed tightly on his face as he leans against the edge of the kitchen island to take a sip of punch. And right there, in the middle of the frame, the facade slips.</p>
 
-  <p>His smile doesn't drop all at once, but it rapidly decays. The corners of his mouth twitch, fighting to stay elevated, but gravity and guilt drag them down. His eyes, which had been bright and engaged a second ago, glaze over, staring blankly past the crowd. God. The ambient noise of the party, all the cheers, the bass, the clattering of cups, begins to sound muffled to him, so hollowed out, like it's happening underwater...</p>
+  <p>His smile doesn’t drop all at once, but it rapidly decays. The corners of his mouth twitch, fighting to stay elevated, but gravity and guilt drag them down. His eyes, which had been bright and engaged a second ago, glaze over, staring blankly past the crowd. God. The ambient noise of the party, all the cheers, the bass, the clattering of cups, begins to sound muffled to him, so hollowed out, like it’s happening underwater…</p>
 
   <div class="fold-line"></div>
 
   <p>He tries to shake it off. A sophomore girl bumps into his shoulder and congratulates him. How fantastic! Linus forces the smile back onto his face, wide and eager, and nods, saying something polite. But the moment she turns away, the smile collapses completely, faster this time.</p>
 
-  <p>He can't stop thinking about it. He keeps seeing Charlie Brown's face, over and over again. Linus sees the look of betrayal he had during the debate. He sees the sheer misery in Charlie's eyes walking down the hallway. Worse, he sees the ghost of the kid he used to sit with on a brick wall, talking about the stars among other topic, a kid who had looked at him over the last few weeks not as a friend, but as a monster.</p>
+  <p>He can’t stop thinking about it. He keeps seeing Charlie Brown’s face, over and over again. Linus sees the look of betrayal he had during the debate. He sees the sheer misery in Charlie’s eyes walking down the hallway. Worse, he sees the ghost of the kid he used to sit with on a brick wall, talking about the stars among other topic, a kid who had looked at him over the last few weeks not as a friend, but as a monster.</p>
 
   <p>He had won, he had everything he ever wanted, the school was his. But it felt like absolutely nothing.</p>
 
-  <p>The camera tracks him as he sets the red plastic cup down on the counter. He doesn't look at anyone now. He keeps his head down, weaving through the dense pack of bodies in the living room. Someone calls his name — <span class="dialogue">"Hey, Mr. President!"</span> —,but he ignores it, pressing forward. The walls of his own house feel impossibly tight, and the air too thick to breathe.</p>
+  <p>The camera tracks him as he sets the red plastic cup down on the counter. He doesn’t look at anyone now. He keeps his head down, weaving through the dense pack of bodies in the living room. Someone calls his name — <span class="dialogue">“Hey, Mr. President!”</span> —,but he ignores it, pressing forward. The walls of his own house feel impossibly tight, and the air too thick to breathe.</p>
 
   <div class="section-break">· · ·</div>
 
@@ -12881,7 +13005,7 @@ const mainEndings = [
 
   <p>He slides the glass shut behind him. Immediately, the thumping bass of the party is cut off, reduced to a dull, rhythmic thud against the glass. The camera follows him out into the cool, damp night air. Ahh.</p>
 
-  <p>And so Linus walks down the wooden steps of the deck and steps onto the wet grass of his backyard. He walks until he is near the back fence, where the glow of the party lights can't quite reach him. The yard is vast, dark, and perfectly silent, save for the hum of crickets.</p>
+  <p>And so Linus walks down the wooden steps of the deck and steps onto the wet grass of his backyard. He walks until he is near the back fence, where the glow of the party lights can’t quite reach him. The yard is vast, dark, and perfectly silent, save for the hum of crickets.</p>
 
   <p>He stops. The camera circles around him slowly, coming to a halt just in front of him. He is still wearing his victory outfit: a fairly bland red sweater. His blanket is neatly folded over his forearm, but he looks incredibly small.</p>
 
@@ -13992,7 +14116,7 @@ const mainEndings = [
 
   <p>Charlie Brown had won. It was official as of two hours ago. He was the new student council president, as hard as it was to imagine. But as he sat on the edge of his bed, looking at the wall, he didn’t feel the rush of validation he had spent the last two months chasing. He mostly just felt completely, hollowly exhausted.</p>
 
-  <p>He had played dirty. Terribly, ruthlessly dirty. When the polls had started slipping in October, it was like something inside him had simply snapped. He had done things tha he never thought he would do to win, that he <i>hated</i> to do, and yet, he won. He finally won.</p>
+  <p>He had played dirty. Terribly, ruthlessly dirty. When the polls had started slipping in October, it was like something inside him had simply snapped. He had done things that he never thought he would do to win, that he <i>hated</i> to do, and yet, he won. He finally won.</p>
 
   <p>By the time the doorbell rang, he didn’t jump. He just stood up, slowly, feeling like he was moving underwater, and walked downstairs to open it.</p>
 
@@ -18664,7 +18788,7 @@ dd {
       </ol>
     </div>
 
-    <p class="wi">The <b>2010 New York gubernatorial election</b> was held on November 2, 2010, as part of the broader <a class="wl" href="#">2010 United States midterm elections</a>. <a class="wl" href="#">Sean Combs</a>, the <a class="wl" href="#">Harlem</a>-born music mogul and civic activist, won the <a class="wl" href="#">Democratic</a> nomination following a crowded and nationally watched primary, then defeated <a class="wl" href="#">Republican</a> nominee <a class="wl" href="#">Carl Paladino</a> in the general election by approximately 15 percentage points. Combs became the first <a class="wl" href="#">African-American</a> governor of New York and the first person without prior elected office to win a major-party gubernatorial nomination in the state's modern history.</p>
+    <p class="wi">The <b>2010 New York gubernatorial election</b> was held on November 2, 2010, as part of the broader <a class="wl" href="#">2010 United States midterm elections</a>. <a class="wl" href="#">Sean Combs</a>, the <a class="wl" href="#">Harlem</a>-born music mogul and civic activist, won the <a class="wl" href="#">Democratic</a> nomination following a crowded and nationally watched primary, then defeated <a class="wl" href="#">Republican</a> nominee <a class="wl" href="#">Carl Paladino</a> in the general election by approximately 15 percentage points. Combs became the first <i>elected</i> <a class="wl" href="#">African-American</a> governor of New York and the first person without prior elected office to win a major-party gubernatorial nomination in the state's modern history.</p>
 
     <p class="wi">The election took place against a difficult national environment for Democrats. The administration of President <a class="wl" href="#">Hillary Clinton</a>, which had taken office in January 2009, faced significant public discontent over the pace of economic recovery following the <a class="wl" href="#">2007–2009 financial crisis</a>. Republicans gained 63 seats in the <a class="wl" href="#">House of Representatives</a> and six seats in the <a class="wl" href="#">Senate</a> on election night, recapturing majorities in both chambers.<sup style="font-size:0.8em;"><a class="wl" href="#">[1]</a></sup> New York's relative insulation from the wave, as Combs's margin was roughly half that of the party's 2006 gubernatorial win, was nonetheless seen as a sign of the <a class="wl" href="#">Empire State</a>'s continued lean toward Democrats at the statewide level.</p>
 
@@ -19463,7 +19587,7 @@ dd {
   },
   {
     id: "homersimpson_bad",
-    condition: (ev) => linusWin && cynicism >= 4 && ruthlessness >= 6,
+    condition: (ev) => linusWin && cynicism >= 3 && ruthlessness > 4,
     image: "https://i.pinimg.com/1200x/e6/dc/b3/e6dcb342ce13c8b68c9b2621fd6af7da.jpg",
     html: `<style>
   #fc-2003-wrapper {
@@ -19975,7 +20099,7 @@ dd {
   },
   {
     id: "yeahrumsfeld",
-    condition: (ev) => linusWin && cynicism >= 3 && ruthlessness < 5,
+    condition: (ev) => linusWin && cynicism >= 3 && ruthlessness < 4,
     image: "https://cdn.theatlantic.com/thumbor/XKMpBuVcgoTkgz8OiX1Sf0HtL3c=/0x0:2500x1406/960x540/media/img/2021/06/h_19.00231388/original.jpg",
     html: `<style>
   @import url('https://fonts.googleapis.com/css2?family=Cheltenham:ital,wght@0,400;0,700;1,400&display=swap');
@@ -27952,7 +28076,6 @@ dd {
   white-space: nowrap;
 }
 
-/* ── ALBUM REVIEW CARD ── */
 .album-card {
   background: #fff;
   border: 1px solid var(--border);
@@ -28620,6 +28743,1266 @@ dd {
       cover: "https://resources.tidal.com/images/0a7e368b/665a/4d05/a8b4/23b6072193e9/320x320.jpg",
       url: ["bqw5Ki3XvUc", "oqqmRwcvsP4"]
     }
+  },
+  // surprise Surprise
+  {
+    id: "charlieextra",
+    condition: (ev) => charlieWin,
+    image: "https://m.media-amazon.com/images/M/MV5BYTYyZjIzMmQtNmVmNy00ZDliLWI4ZWUtNzU4MjBhNjM1N2Q1XkEyXkFqcGc@._V1_.jpg",
+    html: `<style>
+  .aol-wrapper {
+    background: #000080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
+  }
+
+  .aol-wrapper * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .aol-window {
+    width: 540px;
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #444;
+    border-bottom: 2px solid #444;
+    font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
+    font-size: 12px;
+  }
+
+  .title-bar {
+    background: linear-gradient(90deg, #00007b 0%, #1084d0 50%, #00007b 100%);
+    padding: 2px 3px 2px 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 20px;
+  }
+  .title-bar-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .title-bar-text {
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
+  }
+  .title-bar-buttons {
+    display: flex;
+    gap: 2px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .tb-btn {
+    width: 16px;
+    height: 14px;
+    background: #c0c0c0;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .tb-btn:active {
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #fff;
+    border-bottom-color: #fff;
+  }
+  .btn-min::after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 2px;
+    background: #000;
+    position: absolute;
+    bottom: 2px;
+    left: 4px;
+  }
+  .btn-max::after {
+    content: '';
+    display: block;
+    width: 7px;
+    height: 6px;
+    border: 1px solid #000;
+    border-top-width: 2px;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    background: transparent;
+  }
+  .btn-close {
+    font-size: 9px;
+    font-weight: bold;
+    color: #000;
+    font-family: 'Marlett', 'Wingdings', Arial, sans-serif;
+  }
+  .btn-close::after {
+    content: '×';
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+    color: #000;
+    font-weight: bold;
+    position: absolute;
+    top: 0px;
+    left: 2px;
+  }
+
+  .menu-bar {
+    background: #c0c0c0;
+    padding: 2px 2px 1px;
+    display: flex;
+    border-bottom: 1px solid #808080;
+  }
+  .menu-item {
+    padding: 2px 6px;
+    font-size: 11px;
+    color: #000;
+    cursor: pointer;
+    font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
+  }
+  .menu-item:hover { background: #000080; color: #fff; }
+
+  .room-header {
+    background: #003087;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .room-name {
+    color: #ffd700;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .room-name-aol {
+    display: inline-block;
+    font-size: 13px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .room-count {
+    color: rgba(255,255,255,0.6);
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+  }
+
+  .chat-body {
+    display: flex;
+    background: #fff;
+  }
+  .chat-log {
+    flex: 1;
+    padding: 6px 8px;
+    min-height: 370px;
+    max-height: 370px;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+  }
+  .user-list {
+    width: 106px;
+    flex-shrink: 0;
+    background: #f0f0f0;
+    padding: 5px 4px;
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+    border-left: 1px solid #bbb;
+  }
+  .ul-title {
+    font-weight: bold;
+    color: #003087;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  .ul-name {
+    padding: 1px 3px;
+    color: #222;
+    cursor: pointer;
+    font-size: 10px;
+    line-height: 1.55;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ul-name:hover { background: #003087; color: #fff; }
+  .ul-name.me { color: #003087; font-weight: bold; }
+
+  .system-msg {
+    color: #999;
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    text-align: center;
+    padding: 3px 0;
+    margin: 3px 0;
+    border-top: 1px dashed #eee;
+    border-bottom: 1px dashed #eee;
+  }
+  .system-msg.midnight {
+    color: #003087;
+    font-weight: bold;
+    font-style: normal;
+    border-color: #aac4e8;
+    background: #f0f5ff;
+    font-size: 10px;
+  }
+  .chat-line {
+    margin: 4px 0;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    word-break: break-word;
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  .ts {
+    color: #bbb;
+    font-size: 9px;
+    margin-right: 5px;
+    flex-shrink: 0;
+    font-family: Arial, sans-serif;
+  }
+  .uname {
+    font-weight: bold;
+    margin-right: 2px;
+    flex-shrink: 0;
+  }
+  .body { flex: 1; min-width: 0; }
+
+  .u-lucy     { color: #cc0000; }
+  .u-schroe   { color: #003399; }
+  .u-patty    { color: #b35c00; }
+  .u-marcie   { color: #226600; }
+  .u-sally    { color: #cc44aa; }
+  .u-franklin { color: #4400cc; }
+  .u-pigpen   { color: #887755; }
+  .u-snoopy   { color: #005599; }
+  .u-roy      { color: #774488; }
+  .u-rerun    { color: #993300; }
+  .u-charlie  { color: #444444; }
+  .u-linus    { color: #003087; }
+
+  .linus-last {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed #e8e8e8;
+  }
+
+  .chat-input-area {
+    background: #c0c0c0;
+    border-top: 1px solid #808080;
+    padding: 4px 6px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .chat-input {
+    flex: 1;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    background: #fff;
+    padding: 2px 5px;
+    font-size: 11px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  .send-btn {
+    background: #c0c0c0;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    cursor: pointer;
+    color: #000;
+    white-space: nowrap;
+  }
+  .send-btn:active {
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #fff;
+    border-bottom-color: #fff;
+  }
+
+  .status-bar {
+    background: #c0c0c0;
+    border-top: 1px solid #808080;
+    padding: 2px 6px;
+    font-size: 10px;
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+  }
+  .status-panel {
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    padding: 1px 6px;
+  }
+
+  .chat-line, .system-msg {
+    opacity: 0;
+    animation: msgIn 0.25s forwards;
+  }
+  @keyframes msgIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .chat-log > div:nth-child(1)  { animation-delay: 0.2s; }
+  .chat-log > div:nth-child(2)  { animation-delay: 0.9s; }
+  .chat-log > div:nth-child(3)  { animation-delay: 1.7s; }
+  .chat-log > div:nth-child(4)  { animation-delay: 2.4s; }
+  .chat-log > div:nth-child(5)  { animation-delay: 3.0s; }
+  .chat-log > div:nth-child(6)  { animation-delay: 3.6s; }
+  .chat-log > div:nth-child(7)  { animation-delay: 4.1s; }
+  .chat-log > div:nth-child(8)  { animation-delay: 4.7s; }
+  .chat-log > div:nth-child(9)  { animation-delay: 5.3s; }
+  .chat-log > div:nth-child(10) { animation-delay: 5.9s; }
+  .chat-log > div:nth-child(11) { animation-delay: 6.4s; }
+  .chat-log > div:nth-child(12) { animation-delay: 7.0s; }
+  .chat-log > div:nth-child(13) { animation-delay: 7.5s; }
+  .chat-log > div:nth-child(14) { animation-delay: 8.1s; }
+  .chat-log > div:nth-child(15) { animation-delay: 8.7s; }
+  .chat-log > div:nth-child(16) { animation-delay: 9.2s; }
+  .chat-log > div:nth-child(17) { animation-delay: 9.8s; }
+  .chat-log > div:nth-child(18) { animation-delay: 10.4s; }
+  .chat-log > div:nth-child(19) { animation-delay: 11.0s; }
+  .chat-log > div:nth-child(20) { animation-delay: 11.6s; }
+  .chat-log > div:nth-child(21) { animation-delay: 12.2s; }
+  .chat-log > div:nth-child(22) { animation-delay: 12.8s; }
+  .chat-log > div:nth-child(23) { animation-delay: 13.4s; }
+  .chat-log > div:nth-child(24) { animation-delay: 14.0s; }
+  .chat-log > div:nth-child(25) { animation-delay: 14.6s; }
+  .chat-log > div:nth-child(26) { animation-delay: 15.2s; }
+  .chat-log > div:nth-child(27) { animation-delay: 15.8s; }
+  .chat-log > div:nth-child(28) { animation-delay: 16.4s; }
+  .chat-log > div:nth-child(29) { animation-delay: 17.0s; }
+  .chat-log > div:nth-child(30) { animation-delay: 17.8s; }
+  .chat-log > div:nth-child(31) { animation-delay: 19.0s; }
+  .chat-log > div:nth-child(32) { animation-delay: 20.0s; }
+  .chat-log > div:nth-child(33) { animation-delay: 21.0s; }
+</style>
+
+<div class="aol-wrapper">
+  <div class="aol-window">
+
+    <div class="title-bar">
+      <div class="title-bar-icon">🏃</div>
+      <span class="title-bar-text">AOL Chat — themidnightgang — 12 people here</span>
+      <div class="title-bar-buttons">
+        <div class="tb-btn btn-min"></div>
+        <div class="tb-btn btn-max"></div>
+        <div class="tb-btn btn-close"></div>
+      </div>
+    </div>
+
+    <div class="menu-bar">
+      <div class="menu-item">File</div>
+      <div class="menu-item">Edit</div>
+      <div class="menu-item">Chat</div>
+      <div class="menu-item">People</div>
+      <div class="menu-item">Help</div>
+    </div>
+
+    <div class="room-header">
+      <div class="room-name">
+        <span class="room-name-aol">🏃</span>
+        themidnightgang
+      </div>
+      <span class="room-count">12 chatters · Dec 31, 2000</span>
+    </div>
+
+    <div class="chat-body">
+      <div class="chat-log">
+
+        <div class="system-msg">You have entered room "themidnightgang" · 11:47 PM</div>
+
+        <div class="chat-line">
+          <span class="ts">11:47p</span>
+          <span class="uname u-lucy">theDocIsIn:</span>
+          <span class="body">holy shit i finally got on here. schroeder kicked me off the piano bench AGAIN tonight, the bastard. third time this week</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:47p</span>
+          <span class="uname u-schroe">MoonlightSonata9:</span>
+          <span class="body">Come on I have a recital in February. I explained this to you like twice now.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:48p</span>
+          <span class="uname u-lucy">theDocIsIn:</span>
+          <span class="body">you say that every single time i don't care about your recital</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:48p</span>
+          <span class="uname u-patty">sgtPatty:</span>
+          <span class="body">lmaooo. hi everyone!! this room has been quiet forever glad someone finally got it going again</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:48p</span>
+          <span class="uname u-marcie">organistDweller:</span>
+          <span class="body">Good evening, everyone! Happy almost New Year, Sir.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:49p</span>
+          <span class="uname u-patty">sgtPatty:</span>
+          <span class="body">marcie you cannot call me sir on the internet we talked about this</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:49p</span>
+          <span class="uname u-marcie">organistDweller:</span>
+          <span class="body">I apologize. Force of habit, Sir.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:49p</span>
+          <span class="uname u-sally">salprincess_xoxo:</span>
+          <span class="body">HI HI HI!! i had to get off the phone sorry i'm late. who's all here?? oh hi schroeder &lt;3 not that i was looking for anyone in particular of course...</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:50p</span>
+          <span class="uname u-franklin">Frankonomics:</span>
+          <span class="body">Hey everyone. Honestly glad someone opened this room back up. Feels like it's been a while.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:51p</span>
+          <span class="uname u-pigpen">citiesinDust67:</span>
+          <span class="body">hey evryeone!! sory abt typos my keyborad is a ltitle fucked up. anyway. hi!!!!! happy new yeear almost</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:51p</span>
+          <span class="uname u-snoopy">TheJoeCool:</span>
+          <span class="body">Joe Cool has arrived. the new year can now officially begin B)</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:51p</span>
+          <span class="uname u-roy">moonagedaydream:</span>
+          <span class="body">Yeah yeah thanks joe cool very wholesome. but hi. happy new year.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:52p</span>
+          <span class="uname u-rerun">callmrrerun:</span>
+          <span class="body">Whats up guys? im here too ready for 2001!!!</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:52p</span>
+          <span class="uname u-roy">moonagedaydream:</span>
+          <span class="body">the hell you're doing here rerun. you're way too fucking young to be on here</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:53p</span>
+          <span class="uname u-rerun">callmrrerun:</span>
+          <span class="body">mom said i could stay up till midnight shut up. why can sally stay and i can't anyway</span>
+        </div>
+
+		    <div class="chat-line">
+          <span class="ts">11:53p</span>
+          <span class="uname u-roy">moonagedaydream:</span>
+          <span class="body">she's cooler and not selling us black tar heroin anyway</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:53p</span>
+          <span class="uname u-patty">sgtPatty:</span>
+          <span class="body">wait, wow. isn't Linus's brother fat and addicted to hookers anyway? wow. you are telling me this for the first time</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:53p</span>
+          <span class="uname u-rerun">callmrrerun:</span>
+          <span class="body">im not fat im big boned &gt;:(</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:53p</span>
+          <span class="uname u-franklin">Frankonomics:</span>
+          <span class="body">It really is nice to be in here. I missed this honestly, lot of stuff kind of got in the way for a while there.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:54p</span>
+          <span class="uname u-roy">moonagedaydream:</span>
+          <span class="body">yeah. yeah it did. anyway 2001 let's just have a good year</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:54p</span>
+          <span class="uname u-patty">sgtPatty:</span>
+          <span class="body">agreed!! Okay it's almost midnight who's counting down</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:54p</span>
+          <span class="uname u-marcie">organistDweller:</span>
+          <span class="body">Six minutes and twelve seconds from now, technically. Sir. I mean Patty.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:55p</span>
+          <span class="uname u-sally">salprincess_xoxo:</span>
+          <span class="body">lol marcie. is everyone here btw?? i feel like somene is missing :(</span>
+        </div>
+
+        <div class="system-msg">romanceofRome has entered the room.</div>
+
+        <div class="chat-line">
+          <span class="ts">11:57p</span>
+          <span class="uname u-franklin">Frankonomics:</span>
+          <span class="body">hey linus</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:57p</span>
+          <span class="uname u-pigpen">citiesinDust67:</span>
+          <span class="body">whoa Linus!!!! o/</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:58p</span>
+          <span class="uname u-sally">salprincess_xoxo:</span>
+          <span class="body">MY SWEET BABBOO!! :D :D</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:58p</span>
+          <span class="uname u-rerun">callmrrerun:</span>
+          <span class="body">linus tell mom i'm allowed to be on the computer right now</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:59p</span>
+          <span class="uname u-linus">romanceofRome:</span>
+          <span class="body">Sorry everyone, had to do some things, Happy New Year! And Rerun just go to sleep lol, it's late.</span>
+        </div>
+
+        <div class="system-msg midnight">It is now January 1, 2001. Happy New Year from AOL!</div>
+
+        <div class="chat-line linus-last">
+          <span class="ts">12:00a</span>
+          <span class="uname u-linus">romanceofRome:</span>
+          <span class="body">glad to see most of us are here though!</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">12:00a</span>
+          <span class="uname u-charlie">blurnoise98:</span>
+          <span class="body">me too. me too</span>
+        </div>
+
+      </div>
+
+      <div class="user-list">
+        <div class="ul-title">Online (12)</div>
+        <div class="ul-name me">blurnoise98</div>
+        <div class="ul-name">romanceofRome</div>
+        <div class="ul-name">theDocIsIn</div>
+        <div class="ul-name">MoonlightSonata9</div>
+        <div class="ul-name">sgtPatty</div>
+        <div class="ul-name">organistDweller</div>
+        <div class="ul-name">salprincess_xoxo</div>
+        <div class="ul-name">Frankonomics</div>
+        <div class="ul-name">citiesinDust67</div>
+        <div class="ul-name">TheJoeCool</div>
+        <div class="ul-name">moonagedaydream</div>
+        <div class="ul-name">callmrrerun</div>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <input class="chat-input" type="text" placeholder="Type your message here..." />
+      <button class="send-btn">Send</button>
+    </div>
+
+    <div class="status-bar">
+      <span class="status-panel">Signed on as blurnoise98</span>
+      <span class="status-panel">12:00 AM &nbsp;·&nbsp; Jan 1, 2001</span>
+    </div>
+
+  </div>
+</div>`
+  },
+  {
+    id: "linusextra",
+    condition: (ev) => linusWin,
+    image: "https://m.media-amazon.com/images/M/MV5BYTYyZjIzMmQtNmVmNy00ZDliLWI4ZWUtNzU4MjBhNjM1N2Q1XkEyXkFqcGc@._V1_.jpg",
+    html: `<style>
+  .aol-wrapper {
+    background: #000080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
+  }
+
+  .aol-wrapper * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .aol-window {
+    width: 540px;
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #444;
+    border-bottom: 2px solid #444;
+    font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
+    font-size: 12px;
+  }
+
+  .title-bar {
+    background: linear-gradient(90deg, #00007b 0%, #1084d0 50%, #00007b 100%);
+    padding: 2px 3px 2px 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 20px;
+  }
+  .title-bar-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .title-bar-text {
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
+  }
+  .title-bar-buttons {
+    display: flex;
+    gap: 2px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .tb-btn {
+    width: 16px;
+    height: 14px;
+    background: #c0c0c0;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .tb-btn:active {
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #fff;
+    border-bottom-color: #fff;
+  }
+  .btn-min::after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 2px;
+    background: #000;
+    position: absolute;
+    bottom: 2px;
+    left: 4px;
+  }
+  .btn-max::after {
+    content: '';
+    display: block;
+    width: 7px;
+    height: 6px;
+    border: 1px solid #000;
+    border-top-width: 2px;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    background: transparent;
+  }
+  .btn-close {
+    font-size: 9px;
+    font-weight: bold;
+    color: #000;
+    font-family: 'Marlett', 'Wingdings', Arial, sans-serif;
+  }
+  .btn-close::after {
+    content: '×';
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+    color: #000;
+    font-weight: bold;
+    position: absolute;
+    top: 0px;
+    left: 2px;
+  }
+
+  .menu-bar {
+    background: #c0c0c0;
+    padding: 2px 2px 1px;
+    display: flex;
+    border-bottom: 1px solid #808080;
+  }
+  .menu-item {
+    padding: 2px 6px;
+    font-size: 11px;
+    color: #000;
+    cursor: pointer;
+    font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
+  }
+  .menu-item:hover { background: #000080; color: #fff; }
+
+  .room-header {
+    background: #003087;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .room-name {
+    color: #ffd700;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .room-name-aol {
+    display: inline-block;
+    font-size: 13px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .room-count {
+    color: rgba(255,255,255,0.6);
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+  }
+
+  .chat-body {
+    display: flex;
+    background: #fff;
+  }
+  .chat-log {
+    flex: 1;
+    padding: 6px 8px;
+    min-height: 370px;
+    max-height: 370px;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+  }
+  .user-list {
+    width: 106px;
+    flex-shrink: 0;
+    background: #f0f0f0;
+    padding: 5px 4px;
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+    border-left: 1px solid #bbb;
+  }
+  .ul-title {
+    font-weight: bold;
+    color: #003087;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  .ul-name {
+    padding: 1px 3px;
+    color: #222;
+    cursor: pointer;
+    font-size: 10px;
+    line-height: 1.55;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ul-name:hover { background: #003087; color: #fff; }
+  .ul-name.me { color: #003087; font-weight: bold; }
+
+  .system-msg {
+    color: #999;
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    text-align: center;
+    padding: 3px 0;
+    margin: 3px 0;
+    border-top: 1px dashed #eee;
+    border-bottom: 1px dashed #eee;
+  }
+  .system-msg.midnight {
+    color: #003087;
+    font-weight: bold;
+    font-style: normal;
+    border-color: #aac4e8;
+    background: #f0f5ff;
+    font-size: 10px;
+  }
+  .chat-line {
+    margin: 4px 0;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    word-break: break-word;
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  .ts {
+    color: #bbb;
+    font-size: 9px;
+    margin-right: 5px;
+    flex-shrink: 0;
+    font-family: Arial, sans-serif;
+  }
+  .uname {
+    font-weight: bold;
+    margin-right: 2px;
+    flex-shrink: 0;
+  }
+  .body { flex: 1; min-width: 0; }
+
+  .u-lucy     { color: #cc0000; }
+  .u-schroe   { color: #003399; }
+  .u-patty    { color: #b35c00; }
+  .u-marcie   { color: #226600; }
+  .u-sally    { color: #cc44aa; }
+  .u-franklin { color: #4400cc; }
+  .u-pigpen   { color: #887755; }
+  .u-snoopy   { color: #005599; }
+  .u-roy   { color: #774488; }
+  .u-rerun    { color: #993300; }
+  .u-charlie  { color: #444444; }
+  .u-linus    { color: #003087; }
+
+  .charlie-last {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed #e8e8e8;
+  }
+
+  .chat-input-area {
+    background: #c0c0c0;
+    border-top: 1px solid #808080;
+    padding: 4px 6px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .chat-input {
+    flex: 1;
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    background: #fff;
+    padding: 2px 5px;
+    font-size: 11px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  .send-btn {
+    background: #c0c0c0;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    cursor: pointer;
+    color: #000;
+    white-space: nowrap;
+  }
+  .send-btn:active {
+    border-top-color: #404040;
+    border-left-color: #404040;
+    border-right-color: #fff;
+    border-bottom-color: #fff;
+  }
+
+  .status-bar {
+    background: #c0c0c0;
+    border-top: 1px solid #808080;
+    padding: 2px 6px;
+    font-size: 10px;
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+  }
+  .status-panel {
+    border-top: 1px solid #808080;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    padding: 1px 6px;
+  }
+
+  .chat-line, .system-msg {
+    opacity: 0;
+    animation: msgIn 0.25s forwards;
+  }
+  @keyframes msgIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .chat-log > div:nth-child(1)  { animation-delay: 0.2s; }
+  .chat-log > div:nth-child(2)  { animation-delay: 0.9s; }
+  .chat-log > div:nth-child(3)  { animation-delay: 1.7s; }
+  .chat-log > div:nth-child(4)  { animation-delay: 2.4s; }
+  .chat-log > div:nth-child(5)  { animation-delay: 3.0s; }
+  .chat-log > div:nth-child(6)  { animation-delay: 3.6s; }
+  .chat-log > div:nth-child(7)  { animation-delay: 4.1s; }
+  .chat-log > div:nth-child(8)  { animation-delay: 4.7s; }
+  .chat-log > div:nth-child(9)  { animation-delay: 5.3s; }
+  .chat-log > div:nth-child(10) { animation-delay: 5.9s; }
+  .chat-log > div:nth-child(11) { animation-delay: 6.4s; }
+  .chat-log > div:nth-child(12) { animation-delay: 7.0s; }
+  .chat-log > div:nth-child(13) { animation-delay: 7.5s; }
+  .chat-log > div:nth-child(14) { animation-delay: 8.1s; }
+  .chat-log > div:nth-child(15) { animation-delay: 8.7s; }
+  .chat-log > div:nth-child(16) { animation-delay: 9.2s; }
+  .chat-log > div:nth-child(17) { animation-delay: 9.8s; }
+  .chat-log > div:nth-child(18) { animation-delay: 10.4s; }
+  .chat-log > div:nth-child(19) { animation-delay: 11.0s; }
+  .chat-log > div:nth-child(20) { animation-delay: 11.6s; }
+  .chat-log > div:nth-child(21) { animation-delay: 12.2s; }
+  .chat-log > div:nth-child(22) { animation-delay: 12.8s; }
+  .chat-log > div:nth-child(23) { animation-delay: 13.4s; }
+  .chat-log > div:nth-child(24) { animation-delay: 14.0s; }
+  .chat-log > div:nth-child(25) { animation-delay: 14.6s; }
+  .chat-log > div:nth-child(26) { animation-delay: 15.2s; }
+  .chat-log > div:nth-child(27) { animation-delay: 15.8s; }
+  .chat-log > div:nth-child(28) { animation-delay: 16.4s; }
+  .chat-log > div:nth-child(29) { animation-delay: 17.0s; }
+  .chat-log > div:nth-child(30) { animation-delay: 17.8s; }
+  .chat-log > div:nth-child(31) { animation-delay: 19.0s; }
+  .chat-log > div:nth-child(32) { animation-delay: 20.0s; }
+</style>
+
+<div class="aol-wrapper">
+  <div class="aol-window">
+
+    <div class="title-bar">
+      <div class="title-bar-icon">🏃</div>
+      <span class="title-bar-text">AOL Chat — themidnightgang — 12 people here</span>
+      <div class="title-bar-buttons">
+        <div class="tb-btn btn-min"></div>
+        <div class="tb-btn btn-max"></div>
+        <div class="tb-btn btn-close"></div>
+      </div>
+    </div>
+
+    <div class="menu-bar">
+      <div class="menu-item">File</div>
+      <div class="menu-item">Edit</div>
+      <div class="menu-item">Chat</div>
+      <div class="menu-item">People</div>
+      <div class="menu-item">Help</div>
+    </div>
+
+    <div class="room-header">
+      <div class="room-name">
+        <span class="room-name-aol">🏃</span>
+        themidnightgang
+      </div>
+      <span class="room-count">12 chatters · Dec 31, 2000</span>
+    </div>
+
+    <div class="chat-body">
+      <div class="chat-log">
+
+        <div class="system-msg">You have entered room "themidnightgang" · 11:47 PM</div>
+
+        <div class="chat-line">
+          <span class="ts">11:47p</span>
+          <span class="uname u-lucy">theDocIsIn:</span>
+          <span class="body">holy shit i finally got on here. schroeder kicked me off the piano bench AGAIN tonight, the bastard. third time this week</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:47p</span>
+          <span class="uname u-schroe">MoonlightSonata9:</span>
+          <span class="body">Come on I have a recital in February. I explained this to you like twice now.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:48p</span>
+          <span class="uname u-lucy">theDocIsIn:</span>
+          <span class="body">you say that every single time i don't care about your recital</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:48p</span>
+          <span class="uname u-patty">sgtPatty:</span>
+          <span class="body">lmaooo. hi everyone!! this room has been quiet forever glad someone finally got it going again</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:48p</span>
+          <span class="uname u-marcie">organistDweller:</span>
+          <span class="body">Good evening, everyone! Happy almost New Year, Sir.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:49p</span>
+          <span class="uname u-patty">sgtPatty:</span>
+          <span class="body">marcie you cannot call me sir on the internet we talked about this</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:49p</span>
+          <span class="uname u-marcie">organistDweller:</span>
+          <span class="body">I apologize. Force of habit, Sir.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:49p</span>
+          <span class="uname u-sally">salprincess_xoxo:</span>
+          <span class="body">HI HI HI!! i had to get off the phone sorry i'm late. who's all here?? oh hi schroeder &lt;3 not that i was looking for anyone in particular of course...</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:50p</span>
+          <span class="uname u-franklin">Frankonomics:</span>
+          <span class="body">Hey everyone. Honestly glad someone opened this room back up. Feels like it's been a while.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:51p</span>
+          <span class="uname u-pigpen">citiesinDust67:</span>
+          <span class="body">hey evryeone!! sory abt typos my keyborad is a ltitle fucked up. anyway. hi!!!!! happy new yeear almost</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:51p</span>
+          <span class="uname u-snoopy">TheJoeCool:</span>
+          <span class="body">Joe Cool has arrived. the new year can now officially begin B)</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:51p</span>
+          <span class="uname u-roy">moonagedaydream:</span>
+          <span class="body">Yeah yeah thanks joe cool very wholesome. but hi. happy new year.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:52p</span>
+          <span class="uname u-rerun">callmrrerun:</span>
+          <span class="body">Whats up guys? im here too ready for 2001!!!</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:52p</span>
+          <span class="uname u-roy">moonagedaydream:</span>
+          <span class="body">the hell you're doing here rerun. you're way too fucking young to be on here</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:53p</span>
+          <span class="uname u-rerun">callmrrerun:</span>
+          <span class="body">mom said i could stay up till midnight shut up. why can sally stay and i can't anyway</span>
+        </div>
+
+		<div class="chat-line">
+          <span class="ts">11:53p</span>
+          <span class="uname u-roy">moonagedaydream:</span>
+          <span class="body">she's cooler and not selling us black tar heroin anyway</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:53p</span>
+          <span class="uname u-patty">sgtPatty:</span>
+          <span class="body">wait, wow. isn't Linus's brother fat and addicted to hookers anyway? wow. you are telling me this for the first time</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:53p</span>
+          <span class="uname u-rerun">callmrrerun:</span>
+          <span class="body">im not fat im big boned &gt;:(</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:53p</span>
+          <span class="uname u-franklin">Frankonomics:</span>
+          <span class="body">It really is nice to be in here. I missed this honestly, lot of stuff kind of got in the way for a while there.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:54p</span>
+          <span class="uname u-roy">moonagedaydream:</span>
+          <span class="body">yeah. yeah it did. anyway 2001 let's just have a good year</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:54p</span>
+          <span class="uname u-patty">sgtPatty:</span>
+          <span class="body">agreed!! Okay it's almost midnight who's counting down</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:54p</span>
+          <span class="uname u-marcie">organistDweller:</span>
+          <span class="body">Six minutes and twelve seconds from now, technically. Sir. I mean Patty.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:55p</span>
+          <span class="uname u-sally">salprincess_xoxo:</span>
+          <span class="body">lol marcie. is everyone here btw?? i feel like someone is missing</span>
+        </div>
+
+        <div class="system-msg">blurnoise98 has entered the room.</div>
+
+        <div class="chat-line">
+          <span class="ts">11:57p</span>
+          <span class="uname u-franklin">Frankonomics:</span>
+          <span class="body">hey charlie</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:57p</span>
+          <span class="uname u-pigpen">citiesinDust67:</span>
+          <span class="body">OH charlie!! hey o/</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:58p</span>
+          <span class="uname u-patty">sgtPatty:</span>
+          <span class="body">charlie!! hey man good to see you on here</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:58p</span>
+          <span class="uname u-sally">salprincess_xoxo:</span>
+          <span class="body">CHARLIE!! :D :D</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">11:59p</span>
+          <span class="uname u-charlie">blurnoise98:</span>
+          <span class="body">hey everyone. sorry for the wait. happy new year.</span>
+        </div>
+
+        <div class="system-msg midnight">It is now January 1, 2001. Happy New Year from AOL!</div>
+
+        <div class="chat-line charlie-last">
+          <span class="ts">12:00a</span>
+          <span class="uname u-charlie">blurnoise98:</span>
+          <span class="body">good to be back in here.</span>
+        </div>
+
+        <div class="chat-line">
+          <span class="ts">12:00a</span>
+          <span class="uname u-linus">romanceofRome:</span>
+          <span class="body">happy new year charlie. take care.</span>
+        </div>
+
+      </div>
+
+      <div class="user-list">
+        <div class="ul-title">Online (12)</div>
+        <div class="ul-name me">romanceofRome</div>
+        <div class="ul-name">theDocIsIn</div>
+        <div class="ul-name">MoonlightSonata9</div>
+        <div class="ul-name">sgtPatty</div>
+        <div class="ul-name">organistDweller</div>
+        <div class="ul-name">salprincess_xoxo</div>
+        <div class="ul-name">Frankonomics</div>
+        <div class="ul-name">citiesinDust67</div>
+        <div class="ul-name">TheJoeCool</div>
+        <div class="ul-name">moonagedaydream</div>
+        <div class="ul-name">callmrrerun</div>
+        <div class="ul-name">blurnoise98</div>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <input class="chat-input" type="text" placeholder="Type your message here..." />
+      <button class="send-btn">Send</button>
+    </div>
+
+    <div class="status-bar">
+      <span class="status-panel">Signed on as romanceofRome</span>
+      <span class="status-panel">12:00 AM &nbsp;·&nbsp; Jan 1, 2001</span>
+    </div>
+
+  </div>
+</div>`
   }
 ];
 
