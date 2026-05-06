@@ -31855,6 +31855,43 @@ async function loadAndDrawCountyMap(mode) {
 		margin-top: 6px;
 	}
 
+	.overview-content .overview-header {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+
+		padding: 10px 12px;
+		margin-bottom: 12px;
+
+		background: linear-gradient(#f4f8fc, #e3edf7);
+		border: 1px solid #7f9db9;
+
+		box-shadow: inset 0 1px 0 #ffffff;
+	}
+
+	.overview-content .overview-text p:first-child {
+		background: linear-gradient(#fffdf0, #f4f1d8);
+		border: 1px solid #e0d98c;
+		padding: 8px;
+	}
+
+	.overview-content .overview-text p:nth-of-type(3) {
+		border-top: 1px solid #c9d8ea;
+		padding-top: 10px;
+		margin-top: 14px;
+	}
+
+	.overview-content .overview-text b,
+	.overview-content .overview-text i {
+		color: #1b146c;
+	}
+
+	.overview-content .overview-text p:nth-of-type(4) {
+		border-top: 1px solid #c9d8ea;
+		padding-top: 12px;
+		margin-top: 16px;
+	}
+
 	/* Note box */
 	.overview-content .overview-note {
 		background: linear-gradient(#fffdf0, #f4f1d8);
@@ -31938,6 +31975,82 @@ async function loadAndDrawCountyMap(mode) {
 	.funfacts-content .fact-list strong + * {
 		display: block;
 	}
+
+	/* Rec reading section */
+	.reading-quote {
+		margin: 8px 0 0 0;
+		padding: 8px 10px;
+
+		background: linear-gradient(#f8fbff, #e6f0fa);
+		border: 1px solid #c3d6ea;
+
+		font-size: 0.92em;
+		color: #222;
+
+		position: relative;
+	}
+
+	.reading-title {
+		margin: 0 0 4px 0;
+		font-weight: bold;
+		color: #003399;
+	}
+
+	.reading-title a {
+		color: #0033cc;
+		text-decoration: none;
+	}
+
+	.reading-title a:hover {
+		text-decoration: underline;
+	}
+
+	.reading-title i {
+		color: #111;
+		font-weight: normal;
+		font-style: italic;
+	}
+
+	/* Credits */
+	.rec-credits-content ul:first-of-type {
+		list-style: none;
+		padding-left: 0;
+	}
+
+	.rec-credits-content ul:first-of-type > li {
+		margin-bottom: 10px;
+		padding: 10px 12px;
+
+		background: linear-gradient(#f9fbfe, #e8f1fb);
+		border: 1px solid #b7cde5;
+		border-left: 4px solid #5a8fd8;
+
+		border-radius: 3px;
+
+		box-shadow: inset 0 1px 0 #ffffff;
+	}
+
+	.rec-credits-content li i {
+		font-style: normal;
+		font-weight: bold;
+		color: #003399;
+	}
+
+	.rec-credits-content ul:first-of-type > li {
+		line-height: 1.45;
+	}
+
+	.rec-credits-content h4 + ul {
+		margin-bottom: 18px;
+	}
+
+	.rec-credits-content h4:nth-of-type(2) {
+		margin-top: 20px;
+
+		border-top: 1px solid #b7cde5;
+		padding-top: 10px;
+	}
+
   `);
 
   let stylesAdded = false;
