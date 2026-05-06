@@ -12312,35 +12312,42 @@ function setupExpandButton() {
   }
 
   // create the Expand button
-  const expandBtn = document.createElement("button");
-  expandBtn.id = "expand-ending-btn";
-  expandBtn.innerText = "Expand";
+  if (!document.getElementById("expand-ending-btn")) {
+    const expandBtn = document.createElement("button");
+    expandBtn.id = "expand-ending-btn";
+    expandBtn.innerText = "Expand";
 
-  // create the modal
-  const modal = document.createElement("div");
-  modal.id = "expand-ending-modal";
+    let modal = document.getElementById("expand-ending-modal");
+    let contentDiv = document.getElementById("expand-modal-content");
 
-  // close button
-  const closeBtn = document.createElement("button");
-  closeBtn.id = "expand-modal-close";
-  closeBtn.innerText = "Close";
-  closeBtn.onclick = () => modal.style.display = "none";
+    if (!modal) {
+      // create the modal
+      modal = document.createElement("div");
+      modal.id = "expand-ending-modal";
 
-  // content container
-  const contentDiv = document.createElement("div");
-  contentDiv.id = "expand-modal-content";
+      // close button
+      const closeBtn = document.createElement("button");
+      closeBtn.id = "expand-modal-close";
+      closeBtn.innerText = "Close";
+      closeBtn.onclick = () => modal.style.display = "none";
 
-  modal.appendChild(closeBtn);
-  modal.appendChild(contentDiv);
+      // content container
+      contentDiv = document.createElement("div");
+      contentDiv.id = "expand-modal-content";
 
-  // load current slide's HTML into the modal and show it
-  expandBtn.onclick = () => {
-    contentDiv.innerHTML = campaignTrail_temp.pages[campaignTrail_temp.page] || "";
-    modal.style.display = "block";
-  };
+      modal.appendChild(closeBtn);
+      modal.appendChild(contentDiv);
+      document.body.appendChild(modal);
+    }
 
-  resultsContainer.appendChild(expandBtn);
-  document.body.appendChild(modal);
+    // load current slide's HTML into the modal and show it
+    expandBtn.onclick = () => {
+      contentDiv.innerHTML = campaignTrail_temp.pages[campaignTrail_temp.page] || "";
+      modal.style.display = "block";
+    };
+
+    resultsContainer.appendChild(expandBtn);
+  }
 }
 
 function attemptRenderEnding() {
@@ -12355,9 +12362,7 @@ function attemptRenderEnding() {
   const mapFooter = document.getElementById("map_footer");
 
   if (finalDesc && difficultyTxt && overallVote && mapFooter) {
-	if (!document.getElementById("expand-ending-btn")) {
-      setupExpandButton();
-    }
+    setupExpandButton();
     endingConstructor(0);
     return true;
   }
@@ -19587,7 +19592,7 @@ dd {
   },
   {
     id: "homersimpson_bad",
-    condition: (ev) => linusWin && cynicism >= 3 && ruthlessness > 4,
+    condition: (ev) => linusWin && cynicism >= 4 && ruthlessness > 5,
     image: "https://i.pinimg.com/1200x/e6/dc/b3/e6dcb342ce13c8b68c9b2621fd6af7da.jpg",
     html: `<style>
   #fc-2003-wrapper {
@@ -30018,13 +30023,16 @@ endingPicker = (out, totv, aa, quickstats) => {
 
   // queue the injection to run as soon as the DOM renders
   window.bobertTasks.push(() => {
+    // clear out task once it has successfully rendered the table
+    if (document.getElementById("custom-clique-table")) return true;
+
     const overallStats = document.getElementById("overall_vote_statistics");
 
     // check if the container exists and we haven't already injected the table
-    if (overallStats && !document.getElementById("custom-clique-table")) {
+    if (overallStats) {
         let wrapper = document.createElement("div");
         wrapper.id = "custom-clique-table";
-        wrapper.innerHTML = window.cliqueData.tableHTML;
+        wrapper.innerHTML = window.cliqueData ? window.cliqueData.tableHTML : "";
 
         // insert it right before the national results
         overallStats.parentNode.insertBefore(wrapper, overallStats);
@@ -30242,9 +30250,8 @@ function finalizeRendering() {
 
   // do it if our container is missing
   window.bobertTasks.push(() => {
-    if (!document.getElementById("main-ending-scroll-container")) {
-      attemptRenderEnding();
-    }
+    if (document.getElementById("main-ending-scroll-container")) return true;
+    return attemptRenderEnding();
   });
 
   if (window.bobert) {
@@ -31802,7 +31809,7 @@ async function loadAndDrawCountyMap(mode) {
 	/* Links */
 	#recommended_reading_box [id^="rpage"] a {
 		color: #0033cc;
-		text-decoration: none;
+		text-decoration: underline dotted;
 	}
 	#recommended_reading_box [id^="rpage"] a:hover {
 		text-decoration: underline;
