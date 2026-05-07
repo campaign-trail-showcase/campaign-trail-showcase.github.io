@@ -108,7 +108,7 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 375,
         "fields": {
-            "description": "Sitting alone in the empty gym after hours is Patty, perched on the lowest bleacher with her elbows on her knees and her head hanging low. She confesses to you, in a voice stripped of every trace of her usual bravado, that she’s failing three classes. If she doesn’t get her grades up by next Friday, she loses the sports scholarship that was supposed to be her ticket out of this town. “I’ve been spending too much time on your campaign, Chuck,” she says, not looking at you. “God…! I turned out to be a damsel in distress… I’m drowning.”"
+            "description": "Sitting alone in the empty gym after hours is Patty, perched on the lowest bleacher with her elbows on her knees and her head hanging low. She confesses to you, in a voice stripped of every trace of her usual bravado, that she’s failing three classes. If she doesn’t get her grades up by next Friday, she loses the sports scholarship that was supposed to be her ticket out of this town. “I’ve been spending too much time on your campaign, Chuck,” she says, not looking at you.<br>“God…! I turned out to be such a damsel in distress… I’m drowning.”"
         }
     },
     {
@@ -711,7 +711,7 @@ campaignTrail_temp.answers_json = [
         "pk": 12431,
         "fields": {
             "question": 410,
-            "description": "Go on, do it. Suspend me. Let’s see what happens to your precious ‘educational environment’ when they find out you silenced the only candidate who actually speaks for them. Come on, make me a martyr. I am <i>begging</i> you, just do it."
+            "description": "Go on, do it. Suspend me. Let’s see what happens to your precious “educational environment” when they find out you silenced the only candidate who actually speaks for them. Come on, make me a martyr. I am <i>begging</i> you, just do it."
         }
     },
     {
@@ -9692,7 +9692,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3316,
             "candidate": 78,
-            "answer_feedback": "You promptly swat the recorder away. To your displeasure, the next day the paper runs the headline: ‘BROWN TO PRESS: DROP DEAD’, forcing Patty to spend the next three days doing agonizing damage control. You look like an absolute maniac to the rest of the school, with only the kids currently serving detention finding any sort of grim amusement in your outburst.<br><br>Feeling pity or worse, Marcie sends her <i>consigliere</i>, Thibault, to soothe your fears one lonely afternoon. But why…?"
+            "answer_feedback": "You promptly swat the recorder away. To your displeasure, the next day the paper runs the headline: “BROWN TO PRESS: DROP DEAD”, forcing Patty to spend the next three days doing agonizing damage control. You look like an absolute maniac to the rest of the school, with only the kids currently serving detention finding any sort of grim amusement in your outburst.<br><br>Feeling pity or worse, Marcie sends her <i>consigliere</i>, Thibault, to soothe your fears one lonely afternoon. But why…?"
         }
     },
     {
@@ -10331,7 +10331,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 12466,
             "candidate": 78,
-            "answer_feedback": "Roy shrugs as he finally gets his straw in the pouch. The rumor that you’ve given up on election security makes the rounds, cementing your reputation as the ‘burnout candidate’. Let’s hope your margins are too big to rig…"
+            "answer_feedback": "Roy shrugs as he finally gets his straw in the pouch. The rumor that you’ve given up on election security makes the rounds, cementing your reputation as the “burnout candidate”. Let’s hope your margins are too big to rig…"
         }
     },
     {
@@ -10548,9 +10548,13 @@ function createCenterFrame({ imageSrc, counterText, dateText }) {
     return frame;
 }
 
+const preloadImage = (src) => {
+    const img = new Image();
+    img.src = src;
+};
 function preloadFooterImages() {
-    new Image().src = FALLBACK_CENTER_IMAGE_URL;
-    new Image().src = CENTER_IMAGE_URL;
+	preloadImage(FALLBACK_CENTER_IMAGE_URL);
+	preloadImage(CENTER_IMAGE_URL);
 }
 
 function handleFooter() {
@@ -10602,8 +10606,7 @@ function handleFooter() {
     fragment.appendChild(centerBox);
     fragment.appendChild(runningMateBox);
 
-    newFooter.innerHTML = '';
-    newFooter.appendChild(fragment);
+	newFooter.replaceChildren(candidateBox, centerBox, runningMateBox);
 
     const signDisplay = document.querySelector('.inner_window_sign_display');
     if (signDisplay) signDisplay.style.display = "none";
@@ -10621,7 +10624,7 @@ if (!window._footerObserver) {
                 if (node.nodeType !== Node.ELEMENT_NODE) continue;
                 if (
                     node.id === 'candidate_pic' ||
-                    (node.children?.length && node.querySelector('#candidate_pic'))
+                    (node.querySelector?.('#candidate_pic'))
                 ) {
                     window._footerObserver.disconnect();
                     handleFooter();
@@ -10983,7 +10986,7 @@ cyoAdventure = function (a) {
 
 				updateFeedback(3366, "Patty doesn’t even bother calling your name this time, as she lunges, with her fingers clamping around your arm with a grip that feels wrong, too tight, too absolute, like you couldn’t pull away if you tried. She drags you into an empty classroom before you make it to the cafeteria. Her eyes search yours, frantic. “You’re out of your mind. You wanna prove them right!?” she hisses to you. And sure enough, your ruthless streak has made the rumors of your instability terrifyingly plausible to the voters.");
 			} else if (ruthlessness <= 0) {
-				q358.fields.description = "A rumor’s been making the rounds, slipping from bathroom stalls to lunch tables, to the back rows where people think teachers can’t hear them: Charlie Brown’s been seeing a shrink. They say you’ve got a “depressive disorder,” that you’re not fit to be Council President, that you’re too fragile, soft, and damaged to lead. They think you’re <i>weak</i>. You know exactly where this originated; you should’ve never trusted Lucy and that five-cent psychiatric booth she used to run. No way she ever tossed your file. And meanwhile, Linus’s camp is playing the pity card, acting ‘concerned’ about your mental well-being to make you look incredibly weak.";
+				q358.fields.description = "A rumor’s been making the rounds, slipping from bathroom stalls to lunch tables, to the back rows where people think teachers can’t hear them: Charlie Brown’s been seeing a shrink. They say you’ve got a “depressive disorder,” that you’re not fit to be Council President, that you’re too fragile, soft, and damaged to lead. They think you’re <i>weak</i>. You know exactly where this originated; you should’ve never trusted Lucy and that five-cent psychiatric booth she used to run. No way she ever tossed your file. And meanwhile, Linus’s camp is playing the pity card, acting “concerned” about your mental well-being to make you look incredibly weak.";
 			}
 		}
 	}
@@ -11004,12 +11007,12 @@ cyoAdventure = function (a) {
 		if (q352) {
 			// damn patty, back at it again with the campaign sabotage
 			let pattyGlare = (patty_approval >= 3 && !window.isRoyInCharge)
-				? " Over his shoulder, you can see Patty leaning against the cinderblock wall, glaring daggers at him and mouthing something probably close to ‘don’t do it!’. Huh. You’ve got a choice to make."
+				? " Over his shoulder, you can see Patty leaning against the cinderblock wall, glaring daggers at him and mouthing something probably close to “don’t do it!”. Huh. You’ve got a choice to make."
 				: "";
 
 			if (ruthlessness >= 3 && anti_establishment <= 1) {
 				// generally dirty campaign
-				q352.fields.description = "Franklin stops you by the lockers after third period. He’s the current Student Council Vice President, and perhaps one of the few people in this building which you can trust. Even the administration respects his authority, which is more than you can say for anyone else under the age of forty in this building. ”Charlie, I want to endorse you,” he says, his voice low enough that the passing students can’t hear. “But you’re like, playing too dirty. You’re terrorizing Linus and half the school thinks you’re a bully now. What’s happening? Here, tone down all the mudslinging, and I’ll bring the moderates to your side. No daylight, <i>capiche</i>?”" + pattyGlare;
+				q352.fields.description = "Franklin stops you by the lockers after third period. He’s the current Student Council Vice President, and perhaps one of the few people in this building which you can trust. Even the administration respects his authority, which is more than you can say for anyone else under the age of forty in this building. “Charlie, I want to endorse you,” he says, his voice low enough that the passing students can’t hear. “But you’re like, playing too dirty. You’re terrorizing Linus and half the school thinks you’re a bully now. What’s happening? Here, tone down all the mudslinging, and I’ll bring the moderates to your side. No daylight, <i>capiche</i>?”" + pattyGlare;
 
 				const a3344 = campaignTrail_temp.answers_json.find(a => a.pk === 3344);
 				if (a3344) a3344.fields.description = "I can’t do that, Frank, I’m sorry. Linus and the administration have been playing dirty for years while you did nothing. If I stop hitting him now, I’m just letting them get away with it.";
@@ -11022,7 +11025,7 @@ cyoAdventure = function (a) {
 
 			} else if (anti_establishment >= 3 && ruthlessness < 3) {
 				// more revolutionary-like
-				q352.fields.description = "Franklin stops you by the lockers after third period. He’s the current Student Council Vice President, and perhaps one of the few people in this building which you can trust. Even the administration respects his authority, which is more than you can say for anyone else under the age of forty in this building. “Charlie, I want to endorse you,” he says, his voice low enough that the passing students can’t hear. ‘But I think your platform is too radical. Really, like half the kids think you’re going to dismantle the entire council system if you win. If you cut down on your revolutionary talk, and promise some stability, then I’ll bring the moderates to your side. No daylight, <i>capiche</i>?’";
+				q352.fields.description = "Franklin stops you by the lockers after third period. He’s the current Student Council Vice President, and perhaps one of the few people in this building which you can trust. Even the administration respects his authority, which is more than you can say for anyone else under the age of forty in this building. “Charlie, I want to endorse you,” he says, his voice low enough that the passing students can’t hear. “But I think your platform is too radical. Really, like half the kids think you’re going to dismantle the entire council system if you win. If you cut down on your revolutionary talk, and promise some stability, then I’ll bring the moderates to your side. No daylight, <i>capiche</i>?”";
 
 				// Update Feedback
 				updateFeedback(3344, "Franklin sighs, adjusting his backpack. He respects your integrity, surely, but he thinks you’re committing political suicide. Many times, actually. He walks away down the hall without another word. When she finds out there was no deal, Patty groans that you just threw away the easiest endorsement of the campaign, but your die-hard supporters are thrilled you didn’t sell out.");
@@ -11075,18 +11078,18 @@ cyoAdventure = function (a) {
 
         // ooooh flimsy Roy, where did you go, what have you seen
 		updateFeedback(3326, "Roy lets out a low, impressed whistle from the front row. Oh, he thought this debate was going to be completely lame, but watching you metaphorically execute Linus on stage has fully captured his attention. Linus is no golden boy, and thanks to you, everyone knows it.");
-		updateFeedback(3344, "Franklin sighs, adjusting his backpack on his shoulder before walking away down the hall without another word, seemingly refusing to endorse either candidate. Curiously, Roy seems to be unbothered by your words. ‘Middle-of-the-road guys are always total narcs anyway, man.’");
+		updateFeedback(3344, "Franklin sighs, adjusting his backpack on his shoulder before walking away down the hall without another word, seemingly refusing to endorse either candidate. Curiously, Roy seems to be unbothered by your words. “Middle-of-the-road guys are always total narcs anyway, man.”");
 		updateFeedback(3366, "Your ability to fuck things up at a moment’s notice amazes me.");
 		updateFeedback(3368, "You don’t get it, you really don’t. Why can’t people understand it? Is the problem that Charlie Brown is too sad, or is the problem that Linus Van Pelt isn’t sad enough? Against his will, Roy writes down your words and by the next day, the school hallways are filled with flyers from so-called Brownites who appreciate your words of wisdom.");
-		updateFeedback(3381, "Roy, who has actually slept through that particular history teacher’s class all semester, entirely agrees with you. While a few of the more strategic kids in your camp groan that you just handed Linus the moral high ground, all Roy does is tell them to ‘take a chill pill.’");
-        updateFeedback(3385, "‘Well, at least you’ve never been a buzzkill,’ Roy laughs as you both scramble out the side door before the janitor catches you. He tosses you a half-empty bag of chips as a reward once you hit the parking lot. You guess you’ve had worse speech coaches.");
-		updateFeedback(3386, "‘Damn, Chuck. Remind me never to get on your bad side,’ Roy mutters as you cut the mic. He’s laughing, but even he looks a little unnerved by how incredibly cold you sounded. It amazes a couple of students who had not seen the dark side of your campaign.");
+		updateFeedback(3381, "Roy, who has actually slept through that particular history teacher’s class all semester, entirely agrees with you. While a few of the more strategic kids in your camp groan that you just handed Linus the moral high ground, all Roy does is tell them to “take a chill pill.”");
+        updateFeedback(3385, "“Well, at least you’ve never been a buzzkill,” Roy laughs as you both scramble out the side door before the janitor catches you. He tosses you a half-empty bag of chips as a reward once you hit the parking lot. You guess you’ve had worse speech coaches.");
+		updateFeedback(3386, "“Damn, Chuck. Remind me never to get on your bad side,” Roy mutters as you cut the mic. He’s laughing, but even he looks a little unnerved by how incredibly cold you sounded. It amazes a couple of students who had not seen the dark side of your campaign.");
 		updateFeedback(3387, "You click the microphone off, exhaustion written all over your face. Roy blinks, slightly out of his depth, though he seems genuinely surprised, and awkwardly offers you a sip of his Sprite®. You decline, but walk out into the empty hallway feeling a little less heavy.");
 		updateFeedback(3487, "You lie on the doghouse for a whopping six hours. Roy, who was supposed to cover for your absence at the town hall, apparently told the auditorium you got abducted by aliens or had a vision quest. Nobody believes him, but at least he tried. Kind of.");
 		updateFeedback(3338, "The truce takes effect immediately. Roy is noticeably bummed out when you tell him; he was really hoping someone would throw a punch by Friday. As the final week of the campaign is drained of venom, much to his disappointment, he wonders if there’s something else going on between you two.");
 		updateFeedback(12424, "Othmar stops drumming his fingers, and a bead of sweat forms on his temple. He may hate you, but he loves his pension more. Finally, he gives you a tight, furious nod and dismisses you. By the time you find Roy at his locker and tell him you just extorted the principal, he stares at you like you’re a rockstar. <i>His</i> rockstar.");
 		updateFeedback(12401, "Of course, Roy lets out a loud, obnoxious laugh as the broadcast ends. He’s eating this drama up like it’s prime-time television. Last time you saw him this happy was when you loaned him 200 bucks so he could visit his grandma in Peru. In the hallways, however, the silence of the student body is absolutely deafening.");
-		updateFeedback(12407, "Roy looks intensely disappointed, having tuned in hoping for a total meltdown. ‘This is… uh… a bit anti-climactic, don’t you think?’ And he sighs. But when you click the microphone off, you ignore him, feeling a massive weight lift off your chest. For the first time in weeks, you think, you can breathe.");
+		updateFeedback(12407, "Roy looks intensely disappointed, having tuned in hoping for a total meltdown. “This is… uh… a bit anti-climactic, don’t you think?” And he sighs. But when you click the microphone off, you ignore him, feeling a massive weight lift off your chest. For the first time in weeks, you think, you can breathe.");
 
 		if (ruthlessness >= 3) { // if you're not at all clean
             updateFeedback(3383, "You feel like a massive hypocrite lecturing people about decency when you’ve spent the last two months slinging mud. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
@@ -11120,9 +11123,9 @@ cyoAdventure = function (a) {
 
     const singleAchievements = [
         [12440, "A Red Letter Day"],
-        [3333,  "Price of Fame"],
+        [3333,  "Lady Lazarus"],
         [3316,  "Bastards of Young"],
-        [12448, "Lady Lazarus"],
+        [12448, "Price of Fame"],
         [12407, "Transatlanticism"]
     ];
     for (const [id, name] of singleAchievements) {
@@ -13510,9 +13513,9 @@ const mainEndings = [
 
   <p>Then he sat down on the floor of his hallway, which was damp where Charlie had dripped on it, and put his back against the wall and his knees up and stared at the ceiling. The house was very quietç; outside the rain continued its work.</p>
 
-  <p>He thought about winning. He thought about what it looked like, apparently. He thought about the small flat sound in the hallway and the blood on Charlie’s fingers and the way he’d said <em>stay away from me, please, I’m begging you,</em> like a person saying goodbye in a language that didn’t have a word for it.</p>
+  <p>He thought about winning. He thought about what it looked like, apparently. He thought about the sound in the hallway, and the blood on Charlie’s fingers, and the way he’d just told him to stay away from hm. If was like if he were someone saying goodbye in a language that didn’t have a word for it. He looked scared.</p>
 
-  <p>Linus closed his eyes. He let out a breath, slowly, all the way down. It didn’t help. He hadn’t thought it would.</p>
+  <p>Linus closed his eyes. He let out a breath, slowly, all the way down. It didn’t help, he hadn’t thought it would.</p>
 
   <p>Finally, he let out a long, trembling sigh, and eventually, Linus gently closed the door.</p>
 
@@ -13679,71 +13682,67 @@ const mainEndings = [
     <div class="letter-title">two divided by zero</div>
   </div>
 
-  <p>The neon sign in the window of O'Malley's Pub cast a dull, flickering red glow over the sticky mahogany of the bar. It was a Tuesday night, which meant the place was mostly empty, save for a couple of tired regulars nursing their drafts and the bartender half-asleep by the register.</p>
+  <p>The neon sign in the window of O’Malley’s Pub cast a dull, flickering red glow over the sticky mahogany of the bar. It was a Tuesday night, which meant the place was mostly empty, save for a couple of tired regulars nursing their drafts and the bartender half-asleep by the register.</p>
 
   <p>At the far end of the counter, sitting perfectly still in the dim lighting, was Roy.</p>
 
-  <p>He didn't look like a high schooler. Maybe he never really had. With the collar of his jacket turned up, his posture relaxed but guarded, and an eerily convincing fake license tucked safely back into his wallet, he fit right into the landscape of the dive bar, to his relief. He was nursing the last third of a Manhattan, staring at the cherry resting at the bottom of the glass as if it held the answers to the universe.</p>
+  <p>He didn’t look like a high schooler. Maybe he never really had. With the collar of his jacket turned up, his posture relaxed but guarded, and an eerily convincing fake license tucked safely back into his wallet, he fit right into the landscape of the dive bar, to his relief. He was nursing the last third of a Manhattan, staring at the cherry resting at the bottom of the glass as if it held the answers to the universe.</p>
 
-  <p>The heavy wooden door of the pub creaked open, letting in a sudden gust of the freezing night air. Roy didn't turn his head, and just watched the red neon reflect in his drink. Footsteps approached before someone slid onto the vinyl barstool right next to him. Roy took a slow sip of his drink, and when he looked to his side, e didn't seem surprised in the slightest.</p>
+  <p>The heavy wooden door of the pub creaked open, letting in a sudden gust of the freezing night air. Roy didn’t turn his head, and just watched the red neon reflect in his drink. Footsteps approached before someone slid onto the vinyl barstool right next to him. Roy took a slow sip of his drink, and when he looked to his side, e didn’t seem surprised in the slightest.</p>
 
-  <p><span class="dialogue">"I thought I might find you here,"</span> Patty said.</p>
+  <p><span class="dialogue">“I thought I might find you here,”</span> Patty said.</p>
 
   <div class="fold-line"></div>
 
-  <p>She wasn't drinking, of course. She just rested her arms on the sticky counter, looking at him with that gaze she usually saved for the pitcher's mound. The bartender gave her a passing glance, decided she wasn't worth the trouble of carding if she wasn't ordering, and went back to wiping glasses.</p>
+  <p>She wasn’t drinking, of course. She just rested her arms on the sticky counter, looking at him with that gaze she usually saved for the pitcher’s mound. The bartender gave her a passing glance, decided she wasn’t worth the trouble of carding if she wasn’t ordering, and went back to wiping glasses.</p>
 
-  <p><span class="dialogue">"You tracking me now, Patty?"</span> Roy asked, his voice smooth, carrying its usual easy cadence. But there was a slight edge to it tonight. A subtle fraying at the seams.</p>
+  <p><span class="dialogue">“You tracking me now, Patty?”</span> Roy asked, his voice smooth, carrying its usual easy cadence. But there was a slight edge to it tonight… a subtle fraying at the seams.</p>
 
-  <p><span class="dialogue">"Not exactly,"</span> she replied, brushing a stray leaf off the sleeve of her jacket. <span class="dialogue">"Just figured you'd want to avoid the fallout zone. I came to see how things were with Chuck. And with the campaign, now that he actually pulled it off."</span></p>
+  <p><span class="dialogue">“Not exactly,”</span> she replied, brushing a stray leaf off the sleeve of her jacket. <span class="dialogue">“Just figured you’d want to avoid the fallout zone. I came to see how things were with Chuck. And with the campaign, now that he actually pulled it off.”</span></p>
 
   <p>Roy let out a quiet, hollow laugh. He swirled the amber liquid in his glass, listening to the ice clink against the rim.</p>
 
-  <p><span class="dialogue">"He pulled it off, alright,"</span> Roy murmured. He stopped swirling the glass and finally looked up, staring straight at the rows of liquor bottles on the shelf opposite them. He raised a hand, rubbing his temples slowly. <span class="dialogue">"I think I have a headache, Patty."</span></p>
+  <p><span class="dialogue">“He pulled it off, alright,”</span> Roy murmured. He stopped swirling the glass and finally looked up, staring straight at the rows of liquor bottles on the shelf opposite them. He raised a hand, rubbing his temples slowly. <span class="dialogue">“I think I have a headache, Patty.”</span></p>
 
-  <p>Patty frowned. It wasn't like Roy to admit discomfort. He was the guy who breezed through everything, the detached drifter who always knew what to say and when to leave. Seeing him sit here, genuinely worn down, felt wrong.</p>
+  <p>Patty frowned. It wasn’t like Roy to admit discomfort. He was the guy who breezed through everything, the detached drifter who always knew what to say and when to leave. Seeing him sit here, genuinely worn down, felt wrong.</p>
 
-  <p><span class="dialogue">"You sick?"</span> she asked softly.</p>
+  <p><span class="dialogue">“You sick?”</span> she asked softly.</p>
 
-  <p><span class="dialogue">"No."</span> He exhaled, a long, tired sound. <span class="dialogue">"No, I'm just... this whole campaign, Patty. It really brought me down."</span></p>
+  <p><span class="dialogue">“No.”</span> He exhaled, a long, tired sound. <span class="dialogue">“No, I’m just… this whole campaign, Patty. It really brought me down.”</span></p>
 
   <div class="section-break">· · ·</div>
 
   <p>He turned his head to look at her. The neon light caught his eyes, and Patty was startled to see how profoundly exhausted he looked. The cool, impenetrable mask had completely slipped, leaving behind someone who looked as bruised as Charlie Brown did on a bad day.</p>
 
-  <p><span class="dialogue">"I don't get it,"</span> Roy said, his voice dropping into a tight, quiet register. <span class="dialogue">"I really don't. I've known Charlie for a long time. I thought I knew who he was. But how could he be so incredibly inconsiderate to someone who used to be his best friend?"</span></p>
+  <p><span class="dialogue">“I don’t get it,”</span> Roy said, his voice dropping into a tight, quiet register. <span class="dialogue">“I really don’t. I’ve known Charlie for a long time. I thought I knew who he was. But like, how could he be so incredibly inconsiderate to someone who used to be his best friend?”</span></p>
 
-  <p>Patty looked down at the bar top. <span class="dialogue">"Chuck was desperate, Roy. He just wanted to win for once."</span></p>
+  <p>Patty looked down at the bar top. <span class="dialogue">“Chuck was desperate, Roy. He just wanted to win for once.”</span></p>
 
-  <p><span class="dialogue">"Desperate isn't an excuse to carve someone open on a stage,"</span> Roy countered, shaking his head. He took another slow sip of his Manhattan, the bourbon burning down his throat. <span class="dialogue">"He didn't just beat Linus. He humiliated him. He took everything he knew about the kid and weaponized it. I stood there and watched him do it, Patty, and he didn't even flinch."</span></p>
+  <p><span class="dialogue">“Desperate isn’t an excuse to carve someone open on a stage,”</span> Roy countered, shaking his head. He took another slow sip of his Manhattan, letting the bourbon burn down his throat. <span class="dialogue">“He didn’t just beat Linus, he humiliated him. He took everything he knew about the kid and weaponized it. I stood there and watched him do it, Patty, and he didn’t even flinch.”</span></p>
 
   <p>Roy set the glass down harder than he meant to. The <i>clack</i> echoed briefly in the quiet bar.</p>
 
-  <p><span class="dialogue">"And it wasn't just Charlie,"</span> Roy continued, his frustration bleeding out into the open. <span class="dialogue">"It was all of them. How could Linus let Lucy and the others parade around like that? Throwing dirt, berating Charlie in the hallways, organizing those mobs just to break him down before he even got to the podium? It was vicious. It was sick."</span></p>
+  <p><span class="dialogue">“And it wasn’t just Charlie,”</span> he continued, his frustration bleeding out into the open. <span class="dialogue">“It was all of them. How could Linus let Lucy and the others parade around like that? Throwing dirt, berating Charlie in the hallways, organizing those mobs just to break him down before he even got to the podium? It was vicious. It was sick.”</span></p>
 
   <p>He leaned forward, resting his forehead against his hand, shielding his eyes from the red glow of the window.</p>
 
-  <p><span class="dialogue">"Why are they like this?"</span> Roy whispered into the empty space between them. <span class="dialogue">"It’s just a stupid student council election. It doesn't matter. None of it matters. But they tore each other to pieces for it anyway."</span></p>
+  <p><span class="dialogue">“Why are they like this?”</span> Roy whispered into the empty space between them. <span class="dialogue">“It’s just a stupid student council election. It doesn’t matter, none of it matters. But they tore each other to pieces for it anyway.”</span></p>
 
   <div class="fold-line"></div>
 
-  <p>The silence that followed was heavy, filled only by the low hum of the pub's refrigerator and the distant, muffled sound of a siren a few blocks away.</p>
+  <p>The silence that followed was heavy, filled only by the low hum of the pub’s refrigerator and the distant, muffled sound of a siren a few blocks away. Patty didn’t have an answer for him. She wished she did, though. She wished she could tell him that it was just a phase, or that things would go back to normal by next week, or that Charlie and Linus would eventually laugh it off over a game of baseball.</p>
 
-  <p>Patty didn't have an answer for him. She wished she did. She wished she could tell him that it was just a phase, or that things would go back to normal by next week, or that Charlie and Linus would eventually laugh it off over a game of baseball.</p>
+  <p>But she couldn’t. Because she had seen the look on Charlie’s face tonight, and she had seen the dark, silent house on Elm Street, and she knew the damage was deeper than she thought it would be. It had fundamentally changed the chemistry of their little world, and Roy, for all his cool detachment, was grieving the loss of it just as much as anyone else.</p>
 
-  <p>But she couldn't. Because she had seen the look on Charlie's face tonight, and she had seen the dark, silent house on Elm Street, and she knew the damage was deep. It had fundamentally changed the chemistry of their little world, and Roy—for all his cool detachment—was grieving the loss of it just as much as anyone else.</p>
+  <p>Patty placed her hand firmly over his on the sticky counter, and gave it a gentle, grounding squeeze. </p><p><span class="dialogue">“I know, Roy,”</span> she said quietly, her voice full of a steady, sad grace. <span class="dialogue">“I know.”</span></p>
 
-  <p>Patty reached out. She didn't say any empty platitudes. She just placed her hand firmly over his on the sticky counter, giving it a gentle, grounding squeeze.</p>
+  <p>Roy, to her relief, didn’t pull away. He just sat there in the dim red light, staring at his half-empty glass, letting the warmth of her hand anchor him for a moment in a world that suddenly felt entirely too cold.</p>
 
-  <p><span class="dialogue">"I know, Roy,"</span> she said quietly, her voice full of a steady, sad grace. <span class="dialogue">"I know."</span></p>
+  <p><span class="dialogue">“Just…”</span> Patty murmured, giving his hand one final squeeze before she slowly stood up from the stool. <span class="dialogue">“Take care of yourself, okay?”</span></p>
 
-  <p>Roy didn't pull away. He just sat there in the dim red light, staring at his half-empty glass, letting the warmth of her hand anchor him for a moment in a world that suddenly felt entirely too cold.</p>
+  <p>Roy looked up at her. He offered a small, broken smile that didn’t quite reach his eyes, a ghost of the effortless drifter he usually played so well.</p>
 
-  <p><span class="dialogue">"Just..."</span> Patty murmured, giving his hand one final squeeze before she slowly stood up from the stool. <span class="dialogue">"Take care of yourself, okay?"</span></p>
-
-  <p>Roy looked up at her. He offered a small, broken smile that didn't quite reach his eyes, a ghost of the effortless drifter he usually played so well.</p>
-
-  <p><span class="dialogue">"You too, Patty,"</span> he said softly.</p>
+  <p><span class="dialogue">“You too, Patty,”</span> he said softly.</p>
 
   <p>She turned and walked out into the freezing night, the door creaking shut behind her. Roy turned back to the bar, picked up his drink, and finished it in the dark.</p>
 
@@ -16833,6 +16832,7 @@ const bonusSlides = [
   align-items: center;
   gap: 14px;
   flex-shrink: 0;
+  width: 160px;
 }
 .dhs-logo-text {
   font-family: 'Arial Black', 'Arial', sans-serif;
@@ -17314,7 +17314,7 @@ dd {
         <div style="font-size:0.82em;font-weight:bold;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:14px;">Comments (12)</div>
 
         <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #eee;font-family:Georgia,serif;font-size:0.9em;line-height:1.65;">
-          <div style="font-size:0.78em;font-family:Verdana,sans-serif;color:#888;margin-bottom:5px;"><strong style="color:#333;">sector7g_forever</strong> — 2004-11-03</div>
+          <div style="font-size:0.78em;font-family:Verdana,sans-serif;color:#888;margin-bottom:5px;"><strong style="color:#333;">meeseven</strong> — 2004-11-03</div>
           <p>"he thought about his chair, the one with the good armrests" has destroyed me. oh my god homer i wanna hug him so bad</p>
         </div>
 
@@ -27386,7 +27386,7 @@ dd {
   },
   {
     id: "brandis", // shamelessly recycled from an old LBM slide what am I doing
-    condition: (ev) => ev < 64,
+    condition: (ev) => ev > 3 && ev < 64,
     image: "https://i.pinimg.com/1200x/36/b0/25/36b025ad71ab2577ddcdd92b86b3b11c.jpg",
     html: `<style>
   .wiki-body {
@@ -27805,7 +27805,7 @@ dd {
   },
   {
     id: "clarklandrieu",
-    condition: (ev) => ev > 456,
+    condition: (ev) => ev > 456 && ev < 535,
     image: "https://news.harvard.edu/gazette/wp-content/uploads/2003/12/10-clark1-450-2.jpg",
     html: `<style>
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
@@ -28749,7 +28749,251 @@ dd {
       url: ["bqw5Ki3XvUc", "oqqmRwcvsP4"]
     }
   },
-  // surprise Surprise
+  {
+    id: "obamna2",
+    condition: (ev) => ev >= 535,
+    image: "https://www.chicagotribune.com/wp-content/uploads/migration/2015/07/28/JAFLQF3XLJAVXFGHD4K7U6EKXM.jpg?w=1800&resize=1800,1800",
+    html: `<style>
+  .background {
+    background: #888;
+    padding: 30px 16px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+  }
+
+  .page {
+    background: #fff;
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 72px 80px 80px 106px;
+    min-height: 900px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+    line-height: 1.55;
+    color: #111;
+    position: relative;
+  }
+
+  .scene-heading {
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 22px 0 10px;
+  }
+
+  .action {
+    margin: 8px 0;
+    text-align: left;
+  }
+
+  .character {
+    text-align: center;
+    margin-top: 14px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: normal;
+    padding-left: 140px;
+  }
+
+  .paren {
+    text-align: center;
+    margin: 0;
+    padding-left: 100px;
+    padding-right: 80px;
+    color: #333;
+  }
+
+  .dialogue {
+    margin: 0 0 6px;
+    padding: 0 60px 0 90px;
+  }
+
+  .continued {
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    color: #555;
+  }
+
+  .page-number {
+    position: absolute;
+    top: 54px;
+    right: 80px;
+    font-size: 12px;
+  }
+
+  .slug {
+    font-weight: normal;
+    font-size: 11px;
+    float: right;
+    margin-top: 2px;
+  }
+
+  hr.scene-div {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 24px 0;
+  }
+
+  .revised-banner {
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    padding: 7px 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 28px;
+    font-family: 'Courier New', monospace;
+  }
+  .revised-banner span { color: #aaa; }
+
+  .asterisk {
+    position: absolute;
+    right: 50px;
+    color: #333;
+    font-size: 13px;
+  }
+
+  .vo {
+    font-size: 12px;
+    color: #222;
+  }
+</style>
+
+<div class="background">
+<div class="page">
+  <div class="page-number">37A.</div>
+
+  <div class="scene-heading">54&nbsp;&nbsp;55&nbsp;&nbsp;EXT. HIGHWAY 15 — MOJAVE DESERT — EVENING<span class="slug">54&nbsp;55</span></div>
+
+  <div class="action">The spy car streaks along.</div>
+
+  <div class="character">BUGS/DAFFY&nbsp;&nbsp;(O.S.)</div>
+  <div class="paren">(sings)</div>
+  <div class="dialogue">VIVA, LAS VEGAS/ VIVA —</div>
+
+  <div class="scene-heading">INT. SPY CAR — CONTINUOUS<span class="slug">54&nbsp;55</span></div>
+
+  <div class="action">Bugs FLAILS on a banjo as he sings. Stuckmann grabs the banjo and throws it out the window.</div>
+
+  <div class="character">BUGS</div>
+  <div class="dialogue">You've got no music in your soul, you know that?</div>
+
+  <div class="character">STUCKMANN</div>
+  <div class="dialogue">I'm uh, aware of that, yes.</div>
+
+  <div class="action">Bugs shrugs and turns to the dashboard. It's a dizzying array of hardware. Bugs' hand hovers over the switches.</div>
+
+  <div class="character">BUGS</div>
+  <div class="dialogue">Jeesh, he went for all the options. Chump.</div>
+
+  <div class="character">STUCKMANN</div>
+  <div class="dialogue">Don't touch anything. This is Damian Drake's car, and if—</div>
+
+  <div class="action">Bugs flicks a switch. Through the back windshield we see two white jet streams shoot out. A moment later, two huge fireballs erupt a half mile back.</div>
+
+  <div class="action">Bugs scans the array of buttons.</div>
+
+  <div class="character">STUCKMANN</div>
+  <div class="dialogue">If you, um, touch one more button —</div>
+
+  <div class="character">BUGS</div>
+  <div class="dialogue">Shh. I'm about to defy you.</div>
+
+  <div class="continued">(CONTINUED)</div>
+
+  <hr class="scene-div">
+  <div class="page-number">38.</div>
+  <div style="font-size:11px;text-transform:uppercase;margin-bottom:14px;">CONTINUED:</div>
+
+  <div class="action">Bugs reaches. Stuckmann blocks him. In doing so, he places the palm of his hand flat on a black panel on the dashboard. The panel glows.<span class="asterisk">*</span></div>
+
+  <div class="action">Stuckmann quickly pulls his hand away, but a perfect fingerprint map remains. Across the bottom of the panel flashes the words "SEARCHING..."</div>
+
+  <div class="character">BUGS</div>
+  <div class="paren">(CONT'D)</div>
+  <div class="dialogue">Now you done it.</div>
+
+  <div class="action">The handprint disappears. It is replaced by Stuckmann's government ID photo surrounded by a dizzying scroll of personal information: height, weight, security clearance levels, cholesterol, library fines, etc.</div>
+
+  <div class="character">FEMALE COMPUTER VOICE&nbsp;&nbsp;(V.O.)</div>
+  <div class="dialogue vo">Focko Reginald Stuckmann</div>
+
+  <div class="character">BUGS</div>
+  <div class="dialogue">I can deal with Focko, but Reginald?</div>
+
+  <div class="character">STUCKMANN</div>
+  <div class="dialogue">My grandmother named me.</div>
+
+  <div class="action">Assorted photos flash on screen: a one-year-old Stuckmann in a bath, a ten-year-old Stuckmann at a model UN conference, a sixteen-year-old Stuckmann at a debate tournament holding a third-place ribbon.</div>
+
+  <div class="character">FEMALE COMPUTER VOICE&nbsp;&nbsp;(V.O.)</div>
+  <div class="dialogue vo">IQ, one hundred and forty-seven. Spatial IQ, sixty-three.</div>
+
+  <div class="character">STUCKMANN</div>
+  <div class="paren">(measured)</div>
+  <div class="dialogue">Heh. The, um, spatial test was administered following a red-eye flight.</div>
+
+  <div class="character">FEMALE COMPUTER VOICE&nbsp;&nbsp;(V.O.)</div>
+  <div class="dialogue vo">In high school, he was president of the student council. He prepared a forty-five minute victory speech, cut short by thirty-nine minutes.</div>
+
+  <div class="character">STUCKMANN</div>
+  <div class="dialogue">There were, uh, important points that needed to be made.</div>
+
+  <div class="character">BUGS</div>
+  <div class="dialogue">I bet.</div>
+
+  <div class="action">On the screen is a full-length picture of Stuckmann. Various parts of his body and face light up in red. The title over the illustration reads "PROBLEM AREAS." Stuckmann's finger pushes the button next to the touch screen. Instead of stopping, A FLURRY OF ROBOTIC ARMS shoot out of the dash and attack Stuckmann and Bugs. Stuckmann screams.</div>
+
+  <hr class="scene-div">
+
+  <div class="scene-heading">56&nbsp;&nbsp;57&nbsp;&nbsp;EXT. HIGHWAY 15<span class="slug">56&nbsp;57</span></div>
+
+  <div class="action">The car swerves all over the road.</div>
+
+  <div class="scene-heading">INT. SPY CAR — MOVING<span class="slug">55&nbsp;56&nbsp;57</span></div>
+
+  <div class="action">The robot arms retract, revealing a dishevelled Stuckmann and Bugs, now wearing full scuba gear.</div>
+
+  <div class="character">FEMALE COMPUTER VOICE&nbsp;&nbsp;(V.O.)</div>
+  <div class="dialogue vo">Freshman year of college, spent eleven weekends attempting to dunk a basketball on a regulation hoop. He managed it once.</div>
+
+  <div class="character">STUCKMANN</div>
+  <div class="paren">(quietly)</div>
+  <div class="dialogue">Hey! It was a personal achievement...</div>
+
+  <div class="action">Annoyed, Stuckmann pushes the button again. The robotic arms flurry in again, leaving Stuckmann in a perfectly pressed evening suit and Bugs in a tuxedo.</div>
+
+  <div class="character">FEMALE COMPUTER VOICE&nbsp;&nbsp;(V.O.)</div>
+  <div class="paren">(CONT'D)</div>
+  <div class="dialogue vo">Estimated number of times he will run for president: sixty-seven.</div>
+
+  <div class="scene-heading">57A&nbsp;&nbsp;58&nbsp;&nbsp;58A&nbsp;&nbsp;EXT. HIGHWAY 15<span class="slug">57A&nbsp;58&nbsp;58A</span></div>
+
+  <div class="action">The car drives off as we hear...</div>
+
+  <div class="character">STUCKMANN&nbsp;&nbsp;(O.S.)</div>
+  <div class="dialogue">Let me be clear... that was an invasion of... privacy.</div>
+
+  <div class="character">BUGS&nbsp;&nbsp;(O.S.)</div>
+  <div class="dialogue">Man, I love this show.</div>
+
+  <br><br>
+
+</div></div>`,
+	song: {
+      title: "Dream On Dreamer",
+      artist: "The Brand New Heavies",
+      cover: "https://yt3.googleusercontent.com/XEBsqlUnZQtyxH1ZKCDbjQ-xkyrAdpmPg-iosU4ilHNRIkGC6_VMxWtFaL4I9HG0WYCCAR9qeW7oqoiA=w544-h544-l90-rj",
+      url: ["cWWKPgmNFvI", "KQsfCrrfDlU"]
+    }
+  },
+  /*{
+    id: "somethingidk",
+    condition: (ev) => ev >= 0 && ev < 4,
+    image: "https://www.chicagotribune.com/wp-content/uploads/migration/2015/07/28/JAFLQF3XLJAVXFGHD4K7U6EKXM.jpg?w=1800&resize=1800,1800",
+    html: ``
+  },*/
+  // surprise surprise
   {
     id: "charlieextra",
     condition: (ev) => charlieWin,
@@ -30113,54 +30357,39 @@ endingPicker = (out, totv, aa, quickstats) => {
   // other achievement unlocks
   const ansSet = new Set(campaignTrail_temp.player_answers);
 
-    if (typeof charlieWin !== "undefined" && charlieWin) {
-        unlockAchievement("Young Offender");
-    }
-    if (typeof linusWin !== "undefined" && linusWin) {
-        unlockAchievement("Good Grief");
-    }
-    if (typeof charlieWin !== "undefined" && charlieWin && patty_approval < 0) {
-        unlockAchievement("Just Like You Imagined");
-    }
-    if (typeof charlieWin !== "undefined" && charlieWin && ruthlessness >= 5) {
-        unlockAchievement("Uncle Wiggily in Connecticut");
-    }
-	if (typeof charlieWin !== "undefined" && charlieWin && ruthlessness <= 0 && linus_bond >= 3) {
-        unlockAchievement("A Different Corner");
-    }
-	if (typeof linusWin !== "undefined" && linusWin && ansSet.has(3314) && ansSet.has(3385)) {
-        unlockAchievement("The End Is Never...");
-    }
-	if (typeof charlieWin !== "undefined" && charlieWin && window.isRoyInCharge && cynicism >= 5) {
-        unlockAchievement("Love Like Blood");
-    }
-	if (typeof charlieWin !== "undefined" && charlieWin && window.isRoyInCharge) {
-        unlockAchievement("60 Miles an Hour");
-    }
-	if (typeof charlieWin !== "undefined" && charlieWin && ruthlessness <= -2) {
-        unlockAchievement("True Faith");
-    }
-	if (typeof charlieWin !== "undefined" && charlieWin && support_arts >= 3 && (ansSet.has(3410) || ansSet.has(3411))) {
-        unlockAchievement("Bohemian Like You");
-    }
-	if (typeof charlieWin !== "undefined" && charlieWin && support_jocks >= 3 && ansSet.has(3318)) {
-        unlockAchievement("Primitive Notion");
-    }
-	if (typeof charlieWin !== "undefined" && charlieWin && support_burnouts >= 3 && ansSet.has(3319)) {
-        unlockAchievement("Running in the Family");
-    }
-	if (typeof charlieWin !== "undefined" && charlieWin && ruthlessness >= 5 && cynicism >= 5) {
-        unlockAchievement("Kundalini Express");
-    }
-    if (ansSet.has(3488) && cynicism <= 0) {
-        unlockAchievement("Erase and Rewind");
-    }
-	if (anti_establishment >= 5 && support_admin <= -2) {
-        unlockAchievement("The Swing of Things");
-    }
-	if (support_admin >= 2 && anti_establishment <= -1) {
-        unlockAchievement("Bass to Mouth");
-    }
+	const isCharlieWin = typeof charlieWin !== "undefined" && charlieWin;
+	const isLinusWin = typeof linusWin !== "undefined" && linusWin;
+
+	const achievements = [
+	  { name: "Young Offender", cond: () => isCharlieWin },
+	  { name: "Good Grief", cond: () => isLinusWin },
+
+	  { name: "Just Like You Imagined", cond: () => isCharlieWin && patty_approval < 0 },
+	  { name: "Uncle Wiggily in Connecticut", cond: () => isCharlieWin && ruthlessness >= 5 },
+	  { name: "A Different Corner", cond: () => isCharlieWin && ruthlessness <= 0 && linus_bond >= 3 },
+
+	  { name: "The End Is Never...", cond: () => isLinusWin && ansSet.has(3314) && ansSet.has(3385) },
+
+	  { name: "Love Like Blood", cond: () => isCharlieWin && window.isRoyInCharge && cynicism >= 5 },
+	  { name: "60 Miles an Hour", cond: () => isCharlieWin && window.isRoyInCharge },
+
+	  { name: "True Faith", cond: () => isCharlieWin && ruthlessness <= -2 },
+
+	  { name: "Bohemian Like You", cond: () => isCharlieWin && support_arts >= 3 && (ansSet.has(3410) || ansSet.has(3411)) },
+	  { name: "Primitive Notion", cond: () => isCharlieWin && support_jocks >= 3 && ansSet.has(3318) },
+	  { name: "Running in the Family", cond: () => isCharlieWin && support_burnouts >= 3 && ansSet.has(3319) },
+
+	  { name: "Kundalini Express", cond: () => isCharlieWin && ruthlessness >= 5 && cynicism >= 5 },
+
+	  { name: "Erase and Rewind", cond: () => ansSet.has(3488) && cynicism <= 0 },
+
+	  { name: "The Swing of Things", cond: () => anti_establishment >= 5 && support_admin <= -2 },
+	  { name: "Bass to Mouth", cond: () => support_admin >= 2 && anti_establishment <= -1 },
+	];
+
+	achievements.forEach(({ name, cond }) => {
+	  if (cond()) unlockAchievement(name);
+	});
 
   // select main ending (slide 0)
   const selectedScenario = mainEndings.find(ending => ending.condition(playerEV, opponentEVs, rightThirdEV, leftThirdEV, leftNomineeName));
