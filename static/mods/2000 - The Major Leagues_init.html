@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.1.4
+* @version: 1.1.5
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -144,7 +144,7 @@ const recommendedReadingContent = `
         </ul>
         <h4>Special thanks to…</h4>
         <ul class="thanks-list">
-			<li>Our playtesters, including, but not limited to: ahhklt, alleightbits, ashraf177, blur, CitySlicker, Clint Eastwood, Confused, EmpiresUnited, Felosia, Firetrucker74, glep, HMV, Ianwubby, igorsky, Inferno, IngJon, Laura the Giant Rat, Lemon, Momentum, mumkey, Nem06, NikaNExitedBFF, Nisgrot, Paul David Wellstone, Penny, q7, RealTrey17, Richard Gephardt, routevenus, Rubix, Sam, Serdarkn, shushue, Simple Peasant 1, Stan, TheBatStory, The Numbskull, timberwolf857, Vicx, William, Zach, and other people I probably forgot</li>
+			<li>Our playtesters, including, but not limited to: ahhklt, alleightbits, ashraf177, Astronomical, blur, CitySlicker, Clint Eastwood, Confused, EmpiresUnited, Felosia, Firetrucker74, glep, HMV, Ianwubby, igorsky, Inferno, IngJon, Laura the Giant Rat, Lemon, Lily, Momentum, mumkey, Nem06, NikaNExitedBFF, Nisgrot, Paul David Wellstone, Penny, q7, RealTrey17, Richard Gephardt, routevenus, Rubix, Sam, Serdarkn, shushue, Simple Peasant 1, Stan, TheBatStory, The Numbskull, timberwolf857, Vicx, William, Zach, and other people I probably forgot</li>
             <li>Charles Schulz, for creating all these funny little characters</li>
             <li><i>astrohuncho</i> — for his <a href="https://hunchonautilus.github.io/nct-further-reading-wizard/" target="_blank" rel="noopener">Further Reading Wizard</a>, which I have used for testing this mod’s endings, and also this message which you are reading right now</li>
             <li><i>Jet</i> — for his excellent mod tool and for being fine with my fork of it, which I used for the making of this mod</li>
@@ -880,7 +880,7 @@ const css = `
 				background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
 				background-blend-mode: overlay;
 				background-color: #fffdf2;
-				border: .3em double #d02222;
+				border: .2em solid #d02222;
 				border-top: none;
 				border-left: none;
 				border-right: none;
@@ -2000,8 +2000,7 @@ const css = `
 			  color: #730e0e;
 			}
 
-
-
+			/* Achievement tab fixes */
 			#achwindow {
 				top: 5%;
 				left: 25%;
@@ -2868,7 +2867,7 @@ const themeData = {
         `
   },
   "Azure": {
-    headerSrc: "https://i.pinimg.com/1200x/e1/05/5c/e1055ce82c335775b1cd844542324834.jpg",
+    headerSrc: "https://file.garden/aNtAfG887DiA_7lO/TML_2000/azurebanner.webp",
     coloring_title: "#0d47a1",
     coloring_window: "linear-gradient(135deg, #e3f2fd, #90caf9)",
     containerColor: "",
@@ -2878,6 +2877,9 @@ const themeData = {
                 background-image: url(https://cloudfront-us-east-1.images.arcpublishing.com/advancelocal/4SALKLQ7VNE6LNJAN7VLZCDJD4.jpeg) !important;
                 background-position: center !important;
                 background-size: cover !important;
+            }
+			div#site_credits p, div#site_credits a {
+                color: #fff !important;
             }
 			#header { object-position: 0 70%;}
 			.container { background-color: #312860 !important; }
@@ -2950,6 +2952,9 @@ const themeData = {
             background-image: url(https://file.garden/aNtAfG887DiA_7lO/TML_2000/poppy.png) !important;
             background-color: #1b3a1b !important;
 			background-size: cover !important;
+        }
+		div#site_credits p, div#site_credits a {
+            color: #fff !important;
         }
         #header { object-position: center 55%; }
         .container { background-color: #1e3a1e !important; }
@@ -3031,6 +3036,9 @@ const themeData = {
             background-image: url(https://file.garden/aNtAfG887DiA_7lO/TML_2000/flint_background.webp) !important;
     		background-repeat: repeat !important;
 			background-size: 250px 250px !important;
+        }
+		div#site_credits p, div#site_credits a {
+            color: #fff !important;
         }
         #header { object-position: center 60%; }
         .container { background-color: #3a3a3a !important; }
@@ -4237,8 +4245,9 @@ const tooltipList = [
   { searchString: "Linus", image: "https://i.pinimg.com/1200x/83/3a/3a/833a3aa1382f73a6cffe17e3193101a5.jpg", text: "The devil." },
   { searchString: "Patty", image: "https://i.pinimg.com/1200x/22/cb/d0/22cbd081d3bc2e7306f29803cb9d7a67.jpg", text: "Ah, heavens…" },
   { searchString: "Lucy", image: "https://i.pinimg.com/1200x/40/d6/45/40d64580f6da559e27862d50810be0c7.jpg", text: "Linus’s terrifying older sister. Also known as Baphomet, she runs the school’s social hierarchy with an iron fist." },
+  { searchString: "Lucy Van Pelt", image: "https://i.pinimg.com/1200x/6f/f2/ea/6ff2ea684968657b4b7319baa6eae0ee.jpg", text: "Same." },
   { searchString: "Marcie", image: "https://i.pinimg.com/1200x/38/39/b8/3839b8a8087408dfdfe5204465db6ed7.jpg", text: "A modern day Cleopatra, she’s the editor of the school paper. What if I told you her favorite author is Dennis Cooper?" },
-  { searchString: "Schroeder", image: "https://i.pinimg.com/1200x/f9/29/e1/f929e18099f43154a6ae2d93e4ff499c.jpg", text: "A so-called tortured 19th-century artist trapped in the suburbs. He’s more <i>nouveau rich</i> than old money, though." },
+  { searchString: "Schroeder", image: "https://i.pinimg.com/1200x/f9/29/e1/f929e18099f43154a6ae2d93e4ff499c.jpg", text: "Supposedly the reincarnation of Beethoven. He’s more <i>nouveau rich</i> than old money, though." },
   { searchString: "Snoopy", image: "https://i.pinimg.com/1200x/fa/5e/f9/fa5ef929605e697568af58c09fa2ae35.jpg" },
   { searchString: "Sally", image: "https://i.pinimg.com/1200x/4f/94/72/4f9472bf689e41439e9822a84b43af29.jpg", text: "Your very kind and loving sister." },
   { searchString: "Pig-Pen", image: "https://i.pinimg.com/1200x/43/98/e9/4398e9861682555d3f2e7bcc5f18356c.jpg", text: "Some things just don’t change." },
@@ -4253,7 +4262,7 @@ const tooltipList = [
   { searchString: "Shermy", image: "https://i.pinimg.com/1200x/d8/29/14/d82914cc5d15f876c4c48402b0977aee.jpg", text: "Like Moses, only keeping it real. Peaked in elementary school but still kicking around." },
   { searchString: "Five", image: "https://i.pinimg.com/originals/09/c3/3a/09c33aaf8ec90828066caeef33c586b5.gif", text: "Wait, his parents actually named him that!?" },
   { searchString: "Floyd", image: "https://i.pinimg.com/1200x/37/b1/6d/37b16d01ef6955e530ef3b009c58c07c.jpg", text: "The student body treasurer. He doesn’t know how worse it can get." },
-  { searchString: "Maynard", image: "https://www.behindthevoiceactors.com/_img/chars/thumbs/maynard-snoopy-presents-for-auld-lang-syne-89.9_thumb.jpg", text: "Marcie’s cousin. His part-time job is being school paper’s photographer; his pastime is being her lapdog." },
+  { searchString: "Maynard", image: "https://file.garden/aNtAfG887DiA_7lO/TML_2000/maynard.jpg", text: "Marcie’s cousin. His part-time job is being school paper’s photographer; his pastime is being her lapdog." },
   { searchString: "Sparky High", image: null, text: "Sparky Memorial High, presumably named after the creator himself. Essentially, a microcosm of the world’s decay." },
   { searchString: "Brownites", image: null, text: "A nickname for your supporters." },
   { searchString: "Charlie Brown", image: "https://i.pinimg.com/1200x/c4/fd/a5/c4fda5921388916b2523f87962463eda.jpg", text: "Despite everything, it’s still you." },
@@ -4261,6 +4270,9 @@ const tooltipList = [
   { searchString: "your campaign", image: "https://i.pinimg.com/1200x/0f/a6/fe/0fa6fe4fc973a3ee8d38c370f35f5a36.jpg", text: "A disaster." },
   { searchString: "Al Gore", image: "https://i.pinimg.com/1200x/9e/2c/16/9e2c160a080bca989d5db92537b34faa.jpg", text: "Ballin’." },
   { searchString: "Stevenson", image: "https://i.pinimg.com/1200x/57/14/5c/57145ca004175da428d7391e6718f35b.jpg", text: "An egghead of style." },
+  { searchString: "Stanford Experiment", image: "https://images.newscientist.com/wp-content/uploads/2018/10/08143156/00011117_master_004.jpg", text: "Too risqué for this election." },
+  { searchString: "MTV", image: "https://i.pinimg.com/1200x/d3/0f/c1/d30fc12836f8047042fb07caa08cd32c.jpg", text: "*He means Daria." },
+  { searchString: "Dewey", image: "https://i.redd.it/old-photos-of-everyone-v0-ao2xb3ytcvpe1.jpg?width=395&format=pjpg&auto=webp&s=f2cc450a61fb4145cde84aba312b3346228853b9", text: "Oooh, shiny." },
 
 ];
 
@@ -5569,7 +5581,7 @@ campaignTrail_temp.achievements = {
     "cannotBeCheated": true
   },
   "Price of Fame": {
-    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a6.png",
+    "image": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/ach/a6b.png",
     "description": "Play dirty.",
     "cannotBeCheated": true
   },
