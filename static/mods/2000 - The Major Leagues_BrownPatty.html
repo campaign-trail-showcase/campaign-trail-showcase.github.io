@@ -16602,6 +16602,531 @@ const bonusSlides = [
     }
   },
   {
+    id: "fightfightfight",
+    condition: (ev) => isRecountElection,
+    image: "https://www.propublica.org/wp-content/uploads/2020/11/20201101-bush-v-gore-b-1x1.jpg",
+    html: `<style>
+  .gu-page {
+    background-color: #FFFFFF;
+    color: #000000;
+    font-family: Geneva, Arial, sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+  }
+  .gu-page a { color: #003366; text-decoration: none; }
+  .gu-page a:hover { text-decoration: underline; }
+  .gu-page a:visited { color: #003366; }
+
+  .wb-bar {
+    background: #1a1a1a;
+    color: #ccc;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    padding: 3px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 3px solid #1a75be;
+  }
+  .wb-logo { color: #1a75be; font-weight: bold; font-size: 12px; flex-shrink: 0; }
+  .wb-url  {
+    flex: 1;
+    background: #0a0a0a;
+    border: 1px solid #444;
+    color: #aaa;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .wb-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    font-size: 10px;
+    color: #999;
+  }
+  .wb-nav b { color: #fff; font-size: 13px; }
+  .wb-nav-btn {
+    background: #333;
+    color: #aaa;
+    border: 1px solid #555;
+    padding: 1px 5px;
+    font-size: 10px;
+    cursor: default;
+  }
+  .wb-cal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 9px;
+    color: #888;
+    line-height: 1.3;
+    flex-shrink: 0;
+    border: 1px solid #444;
+    padding: 2px 6px;
+  }
+  .wb-cal-month { color: #1a75be; font-weight: bold; font-size: 11px; }
+  .wb-cal-day { color: #fff; font-size: 14px; font-weight: bold; }
+  .wb-cal-year { color: #aaa; font-size: 9px; }
+
+  .gu-outer { width: 608px; margin: 0 auto; }
+
+  .gu-header {
+    display: flex;
+    align-items: flex-start;
+    padding: 8px 0 4px;
+    width: 608px;
+  }
+  .gu-logo-cell  { width: 140px; flex-shrink: 0; }
+  .gu-spacer20   { width: 20px;  flex-shrink: 0; }
+  .gu-banner-cell { flex: 1; text-align: right; }
+  .gu-banner {
+    display: inline-flex;
+    width: 468px;
+    height: 60px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #aaa;
+    font-family: Arial, sans-serif;
+  }
+
+  .gu-subheader {
+    display: flex;
+    align-items: center;
+    width: 608px;
+    padding: 3px 0;
+  }
+  .gu-subheader-left { width: 140px; flex-shrink: 0; }
+  .gu-subheader-mid  { flex: 1; }
+  .gu-subheader-right {
+    font-size: 11px;
+    font-family: Geneva, Arial, sans-serif;
+  }
+  .gu-subheader-right select { font-size: 11px; }
+
+  .gu-nav-row { width: 608px; padding-bottom: 6px; }
+  .gu-crumbs  { display: flex; align-items: center; padding: 2px 0; }
+  .gu-crumbs img { display: block; }
+  .gu-navrow  { display: flex; align-items: center; flex-wrap: nowrap; padding: 2px 0 0; }
+  .gu-navrow img { display: block; }
+  .gu-navline { width: 520px; height: 1px; background: #ccc; margin: 2px 0; }
+
+  .gu-grid {
+    display: flex;
+    width: 544px;
+    margin-left: 32px;
+    margin-top: 10px;
+    align-items: flex-start;
+  }
+
+  .gu-sidebar { width: 256px; flex-shrink: 0; }
+
+  .gu-tools {
+    width: 128px;
+    margin-bottom: 10px;
+    font-family: Geneva, Arial, sans-serif;
+    font-size: 11px;
+  }
+  .gu-box-hdr {
+    background: #999;
+    color: #fff;
+    font-weight: bold;
+    padding: 2px 4px;
+    font-size: 11px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+  }
+  .gu-box-row {
+    display: flex;
+    align-items: center;
+    padding: 2px 0;
+    gap: 3px;
+  }
+  .gu-box-row a { color: #003366; font-size: 11px; }
+  .gu-box-spacer { height: 3px; }
+
+  .gu-trail-hdr {
+    background: #999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+    height: 18px;
+  }
+  .gu-trail-hdr a { color: #fff !important; font-size: 11px; font-weight: bold; }
+  .gu-trail-sep   { height: 6px; background: #fff; margin-bottom: 8px; }
+
+  .gu-slinks {
+    width: 128px;
+    font-family: Geneva, Arial, sans-serif;
+    font-size: 10px;
+    line-height: 1.45;
+  }
+  .gu-slinks a { display: block; color: #003366; margin-bottom: 7px; }
+  .gu-slinks a:hover { text-decoration: underline; }
+
+  .gu-mini-ad {
+    width: 128px;
+    height: 64px;
+    background: #ebebeb;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: #bbb;
+    font-family: sans-serif;
+    margin-bottom: 10px;
+  }
+
+  .gu-article {
+    flex: 1;
+    padding-left: 12px;
+    min-width: 0;
+  }
+  .gu-hl {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .gu-sf {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .gu-sf a { color: #003366; }
+  .gu-byline {
+    font-family: Geneva, Arial, sans-serif;
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+  .gu-body {
+    font-family: Geneva, Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .gu-body p   { margin: 0 0 9px; }
+  .gu-body b   { font-weight: bold; }
+
+  .gu-btm {
+    display: flex;
+    width: 544px;
+    margin: 14px 0 4px 32px;
+  }
+  .gu-btm-ad {
+    width: 128px;
+    height: 64px;
+    background: #ebebeb;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: #bbb;
+    font-family: sans-serif;
+  }
+
+  .gu-foot {
+    margin: 6px 0 6px 32px;
+    font-family: Geneva, Arial, sans-serif;
+    font-size: 10px;
+  }
+
+  .gu-section-img { margin-bottom: 10px; }
+  .gu-section-img img { display: block; }
+</style>
+
+<div class="gu-page">
+
+  <div class="wb-bar">
+    <div class="wb-logo">Wayback Machine</div>
+    <div class="wb-url">https://web.archive.org/web/20001215192341/http://www.guardianunlimited.co.uk/uselection/story/0,2763,412067,00.html</div>
+    <div class="wb-nav">
+      <span class="wb-nav-btn">◀</span>
+      <div class="wb-cal">
+        <span style="color:#aaa;font-size:9px;">NOV</span>
+        <span class="wb-cal-month">DEC</span>
+        <span class="wb-cal-day">15</span>
+        <span class="wb-cal-year">2000</span>
+        <span style="color:#aaa;font-size:9px;">JAN</span>
+      </div>
+      <span class="wb-nav-btn">▶</span>
+    </div>
+  </div>
+
+  <div class="gu-outer">
+
+    <div class="gu-header">
+      <div class="gu-logo-cell">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/sys-images/Guardian/Pix/site_furniture/2000/04/13/gulogo.gif" alt="Guardian Unlimited" height="60" width="120" border="0">
+        </a>
+      </div>
+      <div class="gu-spacer20">&nbsp;</div>
+      <div class="gu-banner-cell">
+        <div class="gu-banner">Advertisement</div>
+      </div>
+    </div>
+
+    <div class="gu-subheader">
+      <div class="gu-subheader-left">
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/sys-images/Guardian/Pix/site_furniture/2000/04/13/guardianobs.gif" width="80" height="25" alt="The Guardian" border="0">
+      </div>
+      <div class="gu-subheader-mid">&nbsp;</div>
+      <div class="gu-subheader-right">
+        <select>
+          <option>Network guide</option>
+          <option>Network home</option>
+          <option>UK latest</option>
+          <option>World latest</option>
+          <option>Special reports</option>
+          <option>The Guardian</option>
+          <option>Net news</option>
+          <option>The weblog</option>
+          <option>Archive search</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="gu-nav-row">
+      <div class="gu-crumbs">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/sys-images/Guardian/Pix/site_furniture/2000/04/14/guardian_unlim2.gif" width="143" height="22" alt="Guardian Unlimited" border="0">
+        </a>
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/Documentaries">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/crumbs/special_reports_crumb.gif" width="130" height="22" alt="Special reports" border="0">
+        </a>
+      </div>
+
+      <div class="gu-navrow">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/home0.gif" alt="Home" width="96" height="14" border="0"></a>
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/news/site/locnav/home/navh_v_bar.gif" width="7" height="14" alt="">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/uklatest">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/UK_latest0.gif" alt="UK latest" width="60" height="14" border="0"></a>
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/news/site/locnav/home/navh_v_bar.gif" width="7" height="14" alt="">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/worldlatest">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/world_latest0.gif" alt="World latest" width="77" height="14" border="0"></a>
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/news/site/locnav/home/navh_v_bar.gif" width="7" height="14" alt="">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/Documentaries">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/Special_r1.gif" alt="Special reports" width="99" height="14" border="0"></a>
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/news/site/locnav/home/navh_v_bar.gif" width="7" height="14" alt="">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/audioarchive/front">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/audio0.gif" alt="Audio" width="73" height="14" border="0"></a>
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/news/site/locnav/home/navh_v_bar.gif" width="7" height="14" alt="">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/Archive">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/search0.gif" alt="Search" width="45" height="14" border="0"></a>
+      </div>
+
+      <div class="gu-navline"></div>
+
+      <div class="gu-navrow">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/guardian">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/Guardian0.gif" alt="The Guardian" width="85" height="14" border="0"></a>
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/news/site/locnav/home/navh_v_bar.gif" width="7" height="14" alt="">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/thewrap">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/wrap0.gif" alt="The wrap" width="60" height="14" border="0"></a>
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/news/site/locnav/home/navh_v_bar.gif" width="7" height="14" alt="">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/columnists">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/Columists0.gif" alt="Columnists" width="77" height="14" border="0"></a>
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/news/site/locnav/home/navh_v_bar.gif" width="7" height="14" alt="">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/internetnews">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/net_news0.gif" alt="Net news" width="99" height="14" border="0"></a>
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/news/site/locnav/home/navh_v_bar.gif" width="7" height="14" alt="">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/weblog">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/weblog0.gif" alt="The weblog" width="73" height="14" border="0"></a>
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/news/site/locnav/home/navh_v_bar.gif" width="7" height="14" alt="">
+        <a href="https://web.archive.org/web/20001002034321/http://www.guardianunlimited.co.uk/helpredirect/">
+          <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/guardian/site/locnav/twotier/help0.gif" alt="Help" width="45" height="14" border="0"></a>
+      </div>
+    </div>
+
+    <div class="gu-grid">
+
+      <div class="gu-sidebar">
+
+        <div class="gu-section-img">
+          <a href="#">
+            <img src="https://web.archive.org/web/20001027210343if_/http://www.pixunlimited.co.uk:80/sys-images/Guardian/Pix/maps_and_graphs/2000/10/10/bushgoreelection_256128.gif" height="128" width="256" alt="US Election 2000" border="0" style="/* filter: hue-rotate(190deg) saturate(0.8); */">
+          </a>
+        </div>
+
+        <div class="gu-mini-ad">Advertisement</div>
+
+        <div class="gu-tools" style="margin-bottom:10px;">
+          <div class="gu-box-hdr">Search this site</div>
+          <div class="gu-box-spacer"></div>
+          <div style="padding:2px 0;">
+            <input type="text" size="10" style="font-size:11px;">
+            <input type="submit" value="Go" style="font-size:11px;">
+          </div>
+        </div>
+
+        <div class="gu-tools">
+          <div class="gu-box-hdr">Tools</div>
+          <div class="gu-box-spacer"></div>
+          <div class="gu-box-row">
+            <a href="#">Text-only version</a>
+            <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/global/black_right_10x8.gif" width="10" height="8" border="0">
+          </div>
+          <div class="gu-box-row">
+            <a href="#">Send it to a friend</a>
+            <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/global/black_right_10x8.gif" width="10" height="8" border="0">
+          </div>
+          <div class="gu-box-row">
+            <a href="#">Read it later</a>
+            <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/global/black_right_10x8.gif" width="10" height="8" border="0">
+          </div>
+          <div class="gu-box-row">
+            <a href="#">See saved stories</a>
+            <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/global/black_right_10x8.gif" width="10" height="8" border="0">
+          </div>
+        </div>
+
+        <br>
+
+        <div style="width:128px;margin-bottom:10px;">
+          <div class="gu-trail-hdr">
+            <a href="#">US Election 2000 front page</a>
+            <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/global/white_right_10x8.gif" width="10" height="8" border="0">
+          </div>
+          <div class="gu-trail-sep"></div>
+        </div>
+
+        <div class="gu-slinks">
+          <a href="#">Florida recount: the full timeline</a>
+          <a href="#">Scalia recusal: a legal analysis</a>
+          <a href="#">The Supreme Court's 4-4 tie explained</a>
+          <a href="#">Emergency Presidential Determination Act: full text</a>
+          <a href="#">Don King: 'the most monumentally stupendous event in history'</a>
+          <a href="#">Bush v Gore: the physical matchup</a>
+          <a href="#">Vegas odds: Bush -140, Gore +115 — then it moved</a>
+          <a href="#">Roy Jones Jr to train Gore in Tennessee</a>
+          <a href="#">Tipper Gore barred from "striking" Bush camp members</a>
+          <a href="#">Miami Arena sold out in 11 minutes</a>
+          <a href="#">Floor seats reach $18,000 on secondary market</a>
+          <a href="#">Cheney confirmed 'non-participatory' attendee</a>
+          <a href="#">Clinton signs act with 'visible cheerfulness'</a>
+          <a href="#">Europe reacts: bewilderment from Berlin to Paris</a>
+          <a href="#">Bild: 'Haben die Amerikaner den Verstand verloren?'</a>
+          <a href="#">Bush: 'Clearing brush is basically training'</a>
+          <a href="#">What happens if the fight ends in a draw?</a>
+          <a href="#">The election that broke America</a>
+        </div>
+
+      </div>
+
+      <div class="gu-article">
+
+        <div class="gu-hl">Gloves off: Bush and Gore to settle Florida dispute in pay-per-view title bout</div>
+
+        <div class="gu-sf">
+          After the Supreme Court deadlocks four-to-four following Justice Scalia's shock recusal, Congress passes the Emergency Presidential Determination Act; fight set for January&nbsp;6 at the MGM Grand Garden Arena, with Don King as promoter<br><br>
+          <a href="#">The 2000 US election crisis: Special Report</a>
+        </div>
+
+        <div class="gu-byline">
+          <b>Andrew Pilkington in Washington</b><br>
+          <b>Friday December 15, 2000</b>
+        </div>
+
+        <div class="gu-body">
+
+          <p>The strangest presidential election in American history took yet another extraordinary turn last night when Al Gore and George W Bush formally agreed to settle the outcome of the Florida dispute in a sanctioned boxing match, after the Supreme Court deadlocked four votes to four following the sudden recusal of Justice Antonin Scalia.</p>
+
+          <p>Under the terms of the Emergency Presidential Determination Act, signed into law by President Clinton on Thursday afternoon in what observers noted was his most visibly cheerful signing ceremony in eight years, the two candidates will meet at the Miami Arena on January 6 — the same date on which Congress was due to certify the electoral college results.</p>
+
+          <p>The fight will be broadcast on pay-per-view by Fox Sports at $29.95 per household. Proceeds, after costs, will be split between the Federal Election Commission's administrative modernisation fund and the American Red Cross. Rupert Murdoch, the chairman of News Corporation, issued a statement in which he described himself as "proud to bring this historic moment to the American public". The broadcast rights were sold to Fox in a transaction that attorneys for both campaigns declined to describe in detail, citing ongoing negotiations.</p>
+
+		  <p>Don King, the boxing promoter, described the bout as "the most monumentally stupendous and historically unprecedented event in the 224-year history of the American republic." He will receive a commission of 12%.</p>
+
+          <p><b>The Scalia question</b></p>
+
+          <p>The crisis began on Tuesday when Justice Scalia, who had been among the court's most vocal supporters of hearing the Bush campaign's challenge to the Florida recount, abruptly withdrew from the case after the Associated Press reported that his son, Eugene Scalia, was a partner at Gibson, Dunn &amp; Crutcher — the law firm representing George W Bush before the court.</p>
+
+          <p>Legal scholars expressed surprise less at the conflict of interest, which had been noted in passing by several commentators in the preceding days, than at the decision to recuse at all. "It's unusual," said Laurence Tribe of Harvard Law School, with considerable understatement.</p>
+
+          <p>Without Scalia, the court divided four to four. Justices Stevens, Souter, Ginsburg and Breyer voted to allow the recount to continue; Justices Rehnquist, O'Connor, Kennedy and Thomas voted to halt it. A tied Supreme Court produces no binding precedent and no resolution. The Florida Supreme Court's order to continue counting stood, and chaos ensued.</p>
+
+          <p>By Wednesday evening, with no constitutional mechanism available to resolve the dispute before the January 20 inauguration date, congressional leaders from both parties convened in emergency session. Senator Trent Lott of Mississippi emerged at 2am to announce that a "frankly unprecedented but entirely workable" bipartisan solution had been reached.</p>
+
+          <p><b>The legislation</b></p>
+
+          <p>The Emergency Presidential Determination Act passed the Senate 97-3 and the House 418-11. It designates a sanctioned athletic contest between the two principal-party nominees as a legally binding method of resolving an electoral deadlock for which no other constitutional remedy exists.</p>
+
+          <p>The three senators voting against — Wellstone, Feingold and McCain — objected on different grounds. Senator McCain, reached by telephone, said he found the legislation "insane," then paused for an extended moment, and then said he would "probably watch anyway."</p>
+
+          <p>The rules of the bout, as set out in the Act's 340-page annex, are broadly standard boxing regulations with several amendments. The match will be ten rounds of three minutes each. Both candidates will be permitted a trainer and a cut man. Mr Cheney, as Bush's running mate, may attend "in a non-participatory capacity," as will Mr Lieberman as Gore's running mate. Tipper Gore will be permitted at ringside but may not, under subsection 14(b), "strike or otherwise physically engage" any member of the Bush campaign. This provision was reportedly requested by Karen Hughes.</p>
+
+          <p><b>Reaction</b></p>
+
+          <p>Mr Bush, 54, reached at his ranch in Crawford, Texas, expressed confidence. "I'm feeling great," he said, jogging lightly on the spot for the assembled press pool. "I've been clearing brush all week. That's basically training." When a reporter asked whether he had spoken to Don King, Mr Bush confirmed he had and called King "a fantastic guy, very smart, really just a great supporter of democracy."</p>
+
+          <p>Mr Gore, 52, convened a press conference at his official residence and struck a more methodical tone. He announced that he had retained the services of former light-heavyweight champion Roy Jones Jr as his personal trainer, and that he expected to be "fully prepared on every dimension of this contest." Asked whether he was concerned about the physical requirements of the match, Mr Gore removed his jacket, rolled up his shirt sleeve, and flexed, causing the press pool to be briefly silent.</p>
+
+          <p>President Clinton, signing the Act in the Rose Garden, said he was "very proud of the bipartisan spirit that produced this legislation" and had every confidence the American people would "determine the right outcome." He then appeared to notice the cameras, rearranged his expression into one of greater solemnity, and returned to the White House without taking further questions.</p>
+
+		  <p>A challenge was filed overnight by the American Civil Liberties Union, which argued that the act violated the 14th amendment's equal protection clause on the grounds that it discriminated against candidates who were, among other things, elderly, physically disabled, or fundamentally disinclined towards violence. The ACLU conceded in its filing that neither of the present candidates fell into any of these categories, but maintained the principle was sound.</p>
+
+          <p><b>International reaction</b></p>
+
+          <p>A spokesman for Tony Blair said the prime minister had "taken note" of developments and looked forward to working constructively with "whoever emerges." The French foreign minister, Hubert Védrine, told RTL radio that the situation confirmed France's "longstanding concerns about the structural peculiarities of American democratic process," then declined to elaborate. The German tabloid Bild ran the headline: <i>Haben die Amerikaner den Verstand verloren?</i>, and The German chancellor, Gerhard Schroeder, issued a communiqué in which he described the contest as "without precedent in any democratic state" and said he hoped the American people would "find a pathway back to constitutional normality" following the result. The Vatican said it was praying for a peaceful resolution and did not indicate a preferred candidate, while in Moscow, the Kremlin issued no official comment.</p>
+
+		  <p>The White House said President Clinton would not be attending the contest in person. He issued a statement through his press secretary saying he wished both men "the very best" and that he had "every confidence the American democratic system will endure this as it has endured everything else". Mrs Clinton, reached at her transition office in Washington, declined to comment. A spokesperson said the senator-elect was "focused on the work of the people of New York".</p>
+
+		  <p>Speaker Dennis Hastert, asked by reporters on the steps of the Capitol whether he had any reservations about the legislation he had helped pass at three in the morning, paused for what witnesses described as a considerable length of time before saying: "We did what we had to do." He then went inside.</p>
+
+          <p>Las Vegas opened the odds at Bush -140, Gore +115, reflecting the governor's slight advantage in upper body mass. By Thursday afternoon, following confirmation of Gore's Roy Jones Jr connection, the line had shifted to Bush -105, Gore -115.</p>
+
+		  <p>Tickets for the MGM Grand Garden Arena in Las Vegas, which holds over 17,000, opened at $1,500 and surged within minutes. The event sold out in under 9 minutes. Ringside seats were trading on the secondary market for upwards of $22,000 by Thursday night, and Former President George H W Bush reportedly purchased two tickets himself.</p>
+
+          <p>The fight is scheduled for January 6, with the winner to be inaugurated on January 20.</p>
+
+          <p>Don King said: "This is beautiful. This is America."</p>
+
+          <br>
+          <a href="#top">
+            <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/football/site/Triangle_up.gif" width="12" height="11" alt="UP" border="0">
+          </a>
+          &nbsp;<br>&nbsp;<br>&nbsp;
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="gu-btm">
+      <div class="gu-btm-ad">Advertisement</div>
+      <div class="gu-btm-ad">
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/global/netgravity/generic1.gif" width="128" height="64" border="0" alt="">
+      </div>
+      <div class="gu-btm-ad">Advertisement</div>
+      <div class="gu-btm-ad">
+        <img src="https://web.archive.org/web/20001002034321im_/http://www.pixunlimited.co.uk/global/netgravity/generic2.gif" width="128" height="64" border="0" alt="">
+      </div>
+    </div>
+
+    <div class="gu-foot">
+      Guardian Unlimited © Guardian Newspapers Limited 2000
+    </div>
+
+  </div>
+
+</div>`
+  },
+  {
     id: "trump",
     condition: (ev) => charlieWin && ev < 269 && support_jocks >= 3 && anti_establishment >= 3,
     image: "https://d7hftxdivxxvm.cloudfront.net/?height=800&quality=85&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2FsYasG-Avf3SfG9jALDvSlw%2Fnormalized.jpg&width=658",
@@ -30529,6 +31054,45 @@ endingPicker = (out, totv, aa, quickstats) => {
 	achievements.forEach(({ name, cond }) => {
 	  if (cond()) unlockAchievement(name);
 	});
+
+	// recount checker
+    window.isRecountElection = function (marginThreshold = 0.005) {
+	  const overall = [...e.final_overall_results].sort(
+		(a, b) => b.electoral_votes - a.electoral_votes
+	  );
+
+	  if (overall.length < 2) return false;
+
+	  const overallWinner = overall[0];
+	  const overallRunnerUp = overall[1];
+	  const evDiff =
+		overallWinner.electoral_votes - overallRunnerUp.electoral_votes;
+
+	  for (const stateRes of e.final_state_results) {
+		if (stateRes.result.length < 2) continue;
+
+		const stateWinner = stateRes.result[0];
+		const stateRunnerUp = stateRes.result[1];
+
+		const margin = stateWinner.percent - stateRunnerUp.percent;
+		const stateEV = stateWinner.electoral_votes || 0;
+
+		// check if the margin is razor-thin
+		if (margin <= marginThreshold) {
+		  // check if flipping this state alters the election outcome
+		  if (
+			stateWinner.candidate === overallWinner.candidate &&
+			stateRunnerUp.candidate === overallRunnerUp.candidate
+		  ) {
+			if (evDiff <= 2 * stateEV) {
+			  return true;
+			}
+		  }
+		}
+	  }
+
+	  return false;
+	};
 
   // select main ending (slide 0)
   const selectedScenario = mainEndings.find(ending => ending.condition(playerEV, opponentEVs, rightThirdEV, leftThirdEV, leftNomineeName));
