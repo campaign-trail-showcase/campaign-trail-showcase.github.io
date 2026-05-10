@@ -10959,8 +10959,33 @@ cyoAdventure = function (a) {
 		if (q349) {
 			if (ruthlessness >= 2) {
 				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>“I’ve been watching you, blockhead,” she smirks, stirring her coffee. “You’ve got a bit more bite this semester. I like it, I really do. My brother thinks he’s a philosopher king destined to rule over us morons, but I have some dirt on him that would end his pathetic campaign. I know you have the guts to use it now. You want it?”";
+			} else if (cynicism >= 2) {
+				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>“You look like shit, Charlie,” she says flatly, staring into her black coffee. “And my brother isn’t looking much better. People are shitting on him from such a height, that I think God himself has crapped on him. Good news is, I have dirt on him that would end his pathetic little campaign right now. Just… take it. End this before you two kill each other. How’s that?”";
+
+				updateFeedback(3334, "You tell her you aren’t going to win like this. You expect her to sneer, or yell, or call you a blockhead. But she doesn’t. Lucy watches you for a long, quiet moment, the hard lines of her face softening into something that looks uncomfortably like pity.<br><br>”You know, Charlie Brown,” she says softly, stopping her spoon. “I offered you this because I thought you wanted to survive. But you two are just going to bleed each other dry, aren’t you?” She slides the folder back into her bag without another word. Patty is furious when she finds out, but as you walk home, you can’t stop thinking about the look in Lucy’s eyes.");
+
 			} else {
 				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>“You’re too soft, Charlie Brown,” she sighs, stirring her coffee with visible disappointment. “But my brother is an arrogant prick who thinks he’s Mr. Big, or something. I have dirt on him that would end his pathetic little campaign. The question is: do you actually have the spine to use it, blockhead?”";
+			}
+
+			// extra
+			if (cynicism >= 2 && ruthlessness < 2) {
+				updateFeedback(3333, "Lucy slides a manila folder across the table with one finger, and inside you find undeniable proof that Linus paid a desperate freshman fifty dollars to ghostwrite his AP English thesis, one that won him an award for Academic Excellence and cemented his reputation as the so-called intellectual conscience of the seniors.<br><br>Patty leaks it anonymously to the school paper, and the resulting carnage sends Linus’s numbers into freefall. And yet, watching him hold a tearful, unconvincing press conference in the auditorium doesn't make you feel like a winner. It just makes you feel sick to your stomach.");
+			}
+
+		}
+	}
+
+	// hit the road Sally
+	if (e.noCounter === 6) {
+		const q346 = campaignTrail_temp.questions_json.find(q => q.pk === 346);
+		if (q346) {
+			if (anti_establishment >= 2 && ruthlessness >= 1) {
+				q346.fields.description = "Sally, your freshman sister, catches you at your locker between classes, grabbing your sleeve and pulling you into the space between the school’s trophy case and the wall. It’s not good; her eyes are red-rimmed and glassy. “My friends are terrified of you,” she hisses, her voice cracking. “They say you're going on a revenge trip, t-that you're going to cancel all the events and punish anyone who ever looked at you funny. I’m going to have to spend the rest of high school being the sister of the… crazy kid who burned it all down! Why do you always have to ruin everything for me?”";
+
+				updateFeedback(3322, "You hate this. You really do. As you look at your little sister and see the sheer terror your radical campaign has instilled in her, you feel entirely unwanted. You apologize, but her eyes stay wide and fearful. You don’t even notice an AV club sophomore lingering a few feet away with his camcorder running, capturing the whole exchange for the weekly student broadcast, but to you, it doesn’t matter. You feel like a villain.");
+			} else if (patty_approval >= 2 && cynicism <= 1) {
+				q346.fields.description = "Sally, your freshman sister, catches you at your locker between classes, grabbing your sleeve and pulling you into the space between the school’s trophy case and the wall. It’s not good; her eyes are red-rimmed and glassy. “My friends are making fun of me because my brother is acting like a total sellout,” she hisses, her voice cracking. “My friends keep saying this is how it starts,” she hisses, her voice cracking. “First you smile for pictures and promise everybody everything, then later you’re stealing money and lying and ruining everyone around you… and I’m gonna be stuck as your sister when it happens. Why can’t you just be normal for <i>once</i>?”";
 			}
 		}
 	}
@@ -10977,26 +11002,30 @@ cyoAdventure = function (a) {
 		}
 	}
 
-	// approaching the rumors
-	if (e.noCounter === 13) {
-		const q358 = campaignTrail_temp.questions_json.find(q => q.pk === 358);
-		if (q358) {
-			if (ruthlessness >= 4) {
-				q358.fields.description = "A rumor’s been making the rounds, slipping from bathroom stalls to lunch tables, to the back rows where people think teachers can’t hear them: Charlie Brown’s been seeing a shrink. They say you’ve got a “depressive disorder,” that you’re not fit to be Council President, that you’re volatile, vindictive, dangerous, a school shooter-in-the-making. You know exactly where this originated; you should’ve never trusted Lucy and that five-cent psychiatric booth she used to run. No way she ever tossed your file. And meanwhile, Linus’s camp is quietly fanning the flames, painting you as a ticking time bomb.";
+	// approaching the locker break-in
+	if (e.noCounter === 10) {
+		const q351 = campaignTrail_temp.questions_json.find(q => q.pk === 351);
+		if (q351) {
+			if (patty_approval >= 3 && !window.isRoyInCharge) {
+				q351.fields.description = "Somebody broke into your locker overnight. They pried the latch with a flathead screwdriver, from the look of it, and stole the a black notebook you keep shoved behind your chemistry textbook, one you’ve never shown to a single living soul. Inside it is a poem you wrote about Heather, the Little Red-Haired Girl, and it is exactly as pathetic and desperate as you’d expect from a seventeen-year-old boy. To your displeasure, photocopies of it have been taped to just about every locker. The good news is that, thanks to Patty’s well-oiled campaign machine, she and your supporters are already tearing them down before second period. Still, as you round the corner, Heather is holding one of the surviving flyers. Oh God.";
+			} else if (cynicism >= 3) {
+				q351.fields.description = "Somebody broke into your locker overnight. They pried the latch with a flathead screwdriver, from the look of it, and stole the a black notebook you keep shoved behind your chemistry textbook, one you’ve never shown to a single living soul. Inside it is a poem you wrote about Heather, the Little Red-Haired Girl, and it is exactly as pathetic and desperate as you’d expect from a seventeen-year-old boy. It’s not just the words, exactly; it’s that for the first time, everyone can see the raw, jagged edges of the depression you’ve tried to keep buttoned under your shirt for years. You feel translucent, and it’s as if anyone who looks at you can see the old bruises on your soul. As you round the corner, Heather is holding one of the flyers. Oh God.";
 
-				updateFeedback(3366, "Patty doesn’t even bother calling your name this time, as she lunges, with her fingers clamping around your arm with a grip that feels wrong, too tight, too absolute, like you couldn’t pull away if you tried. She drags you into an empty classroom before you make it to the cafeteria. Her eyes search yours, frantic. “You’re out of your mind. You wanna prove them right!?” she hisses to you. And sure enough, your ruthless streak has made the rumors of your instability terrifyingly plausible to the voters.");
-			} else if (ruthlessness <= 0) {
-				q358.fields.description = "A rumor’s been making the rounds, slipping from bathroom stalls to lunch tables, to the back rows where people think teachers can’t hear them: Charlie Brown’s been seeing a shrink. They say you’ve got a “depressive disorder,” that you’re not fit to be Council President, that you’re too fragile, soft, and damaged to lead. They think you’re <i>weak</i>. You know exactly where this originated; you should’ve never trusted Lucy and that five-cent psychiatric booth she used to run. No way she ever tossed your file. And meanwhile, Linus’s camp is playing the pity card, acting “concerned” about your mental well-being to make you look incredibly weak.";
+				updateFeedback(3341, "The words don’t even make it out of your mouth properly. You just look down at your shaking hands, at the white knuckles and the bitten-down cuticles, and you realize you have nothing left to give this school. It’s like you’re a ghost. You turn and walk away before she can see the tears starting to blur your vision, hoping you can forget this day ever happened.");
 			}
 		}
 	}
 
-	// approaching the locker break-in
-	if (e.noCounter === 10) {
-		if (patty_approval >= 3 && !window.isRoyInCharge) {
-			const q351 = campaignTrail_temp.questions_json.find(q => q.pk === 351);
-			if (q351) {
-				q351.fields.description = "Somebody broke into your locker overnight. They pried the latch with a flathead screwdriver, from the look of it, and stole the a black notebook you keep shoved behind your chemistry textbook, one you’ve never shown to a single living soul. Inside it is a poem you wrote about Heather, the Little Red-Haired Girl, and it is exactly as pathetic and desperate as you’d expect from a seventeen-year-old boy. To your displeasure, photocopies of it have been taped to just about every locker. The good news is that, thanks to Patty’s well-oiled campaign machine, she and your supporters are already tearing them down before second period. Still, as you round the corner, Heather is holding one of the surviving flyers. Oh God.";
+	// the car ride with Linus
+	if (e.noCounter === 11) {
+		const q350 = campaignTrail_temp.questions_json.find(q => q.pk === 350);
+		if (q350) {
+			if (ruthlessness >= 3 || linus_bond <= -2) {
+				q350.fields.description = "The fallout from the poem leak has left you emotionally gutted, hollowed out like a jack-o’-lantern the day before Halloween, and you’re walking home alone in the rain when a car pulls up beside you, its headlights cutting through the gray October drizzle. It’s Linus’s mom’s wood-paneled station wagon, and Linus is behind the wheel. Of course, he got his license over the summer, something you still haven’t managed.<br><br>“Charlie, uh… get in.” You hesitate, the rain soaking through your jacket, and then you climb into the passenger seat. He doesn’t look at you; in fact, he is gripping the steering wheel so hard his knuckles are pure white. “This has to stop,” he says, his voice tight, almost shaking. “You’re tearing the school apart, and you’re dragging everyone down with you. Drop out, endorse me tomorrow morning, and I’ll make you Vice President. I’ll give you whatever oversight you want, just… please. Stop this.”";
+
+				updateFeedback(3338, "Linus looks genuinely surprised at your words. He studies your face for a long moment, searching for the angle, the trap, the hidden knife you’re holding, and when he doesn’t find one, he nods slowly and extends his hand to you.<br><br>The truce takes effect immediately, draining some of the venom from the final week of the campaign. Patty, very satisfied by this decision, is seen the other day violently stabbing a juice box straw through the carton hard enough to spray fruit punch onto her sweater.");
+
+				updateFeedback(3337, "You open the passenger door and step back out into the downpour without looking at him, slamming it shut behind you just hard enough to rock the station wagon on its suspension, and you walk away down the shoulder of the road, with the rain streaming down your face and your shoes filling with water. You’re not going to let him hurt you anymore.<br><br>As Linus watches you go, his expression darkens as he realizes that, perhaps, that you aren’t just trying to win anymore… you’re trying to destroy him. And he’s going to have to fight back.");
 			}
 		}
 	}
@@ -11040,15 +11069,38 @@ cyoAdventure = function (a) {
 		}
 	}
 
+	// approaching the rumors
+	if (e.noCounter === 13) {
+		const q358 = campaignTrail_temp.questions_json.find(q => q.pk === 358);
+		if (q358) {
+			if (ruthlessness >= 4) {
+				q358.fields.description = "A rumor’s been making the rounds, slipping from bathroom stalls to lunch tables, to the back rows where people think teachers can’t hear them: Charlie Brown’s been seeing a shrink. They say you’ve got a “depressive disorder,” that you’re not fit to be Council President, that you’re volatile, vindictive, dangerous, a school shooter-in-the-making. You know exactly where this originated; you should’ve never trusted Lucy and that five-cent psychiatric booth she used to run. No way she ever tossed your file. And meanwhile, Linus’s camp is quietly fanning the flames, painting you as a ticking time bomb.";
+
+				updateFeedback(3366, "Patty doesn’t even bother calling your name this time, as she lunges, with her fingers clamping around your arm with a grip that feels wrong, too tight, too absolute, like you couldn’t pull away if you tried. She drags you into an empty classroom before you make it to the cafeteria. Her eyes search yours, frantic. “You’re out of your mind. You wanna prove them right!?” she hisses to you. And sure enough, your ruthless streak has made the rumors of your instability terrifyingly plausible to the voters.");
+			} else if (ruthlessness <= 0) {
+				q358.fields.description = "A rumor’s been making the rounds, slipping from bathroom stalls to lunch tables, to the back rows where people think teachers can’t hear them: Charlie Brown’s been seeing a shrink. They say you’ve got a “depressive disorder,” that you’re not fit to be Council President, that you’re too fragile, soft, and damaged to lead. They think you’re <i>weak</i>. You know exactly where this originated; you should’ve never trusted Lucy and that five-cent psychiatric booth she used to run. No way she ever tossed your file. And meanwhile, Linus’s camp is playing the pity card, acting “concerned” about your mental well-being to make you look incredibly weak.";
+			}
+		}
+	}
+
 	// Sunday town hall
 	if (e.noCounter === 16) {
 		const q391 = campaignTrail_temp.questions_json.find(q => q.pk === 391);
 		if (q391) {
 			if (cynicism >= 4) {
 				q391.fields.description = "It’s Sunday morning. The campaign has ground you down to powder, to calcium dust, to whatever the hell is left of a person after two months of whoring themselves to the voters. Your internal polls (courtesy of Pig-Pen) miraculously show a dead heat, but honestly? You don’t even care anymore. You are scheduled for a town hall-style forum in the cafeteria at noon, where the school paper’s editorial board and a gym full of undecided voters are waiting for you to give them a reason. The thought of looking at another voter makes you want to crawl out of your own skin. As you climb on top of your old red doghouse, you wonder: why even go?";
+
+				updateFeedback(3489, "Marcie shows up forty-five minutes later with a photographer (her cousin Maynard) and a fresh cassette in her recorder, finding you lying on top of the doghouse, wearing a wrinkled flannel shirt and sneakers with no socks, and all she says is that you look like shit. Maybe you do. The interview you have with her is probably the hardest of your life, but you can’t help but chuckle at all the silly faces they make to cheer you up.");
 			} else if (cynicism <= 0) {
 				q391.fields.description = "It’s Sunday morning. The campaign has let you very much exhausted, despite everything. Your internal polls (courtesy of Pig-Pen) miraculously show a dead heat, as hard as it is to believe. It fills you up with hope, though. You are scheduled for a town hall-style forum in the cafeteria at noon, where the school paper’s editorial board and a gym full of undecided voters are waiting for you to give them a reason. It’s a gray November morning, and as you climb on top of your old red doghouse, you look up at the clouds and gather your strength. Do you really need to go?";
 			}
+		}
+	}
+
+	if (e.noCounter === 17) {
+		const q356 = campaignTrail_temp.questions_json.find(q => q.pk === 356);
+		if (q356 && cynicism >= 4) {
+			q356.fields.description = "The boys’ bathroom door swings shut behind you, and, surprise surprise, there’s Linus at the sinks, with his hands under the water like he forgot why he turned it on. You notice, under the stuttering light, that the bags under his eyes are just as dark as yours. Maybe he’s tired, just like you are. He watches you in the mirror for a moment, then turns the faucet off and speaks without turning around. “Is this what we wanted, Charlie?” he says quietly. “Tearing each other apart over something so… simple?”";
 		}
 	}
 
