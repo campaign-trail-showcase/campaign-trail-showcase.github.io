@@ -30560,6 +30560,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 
 	// check if every achievement in the game (except this one, duh)
 	// exists in the player's unlockedAchievements object
+	let unlockedAchievements = JSON.parse(localStorage.getItem("unlockedAch")) || {};
 	const hasAll = allKeys.every(key => key === "Something Beautiful Remains" || unlockedAchievements[key]);
 	if (hasAll) {
 		unlockAchievement("Something Beautiful Remains");
