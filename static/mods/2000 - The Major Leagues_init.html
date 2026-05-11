@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.1.14
+* @version: 1.1.15
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -691,21 +691,6 @@ function applyGlobalStyles(css, id = 'app-theme') {
 }
 
 const css = `
-			/* Candidate/running mate images */
-            #candidate_image, #running_mate_image {
-                border: none;
-                height: auto;
-                margin: 5px 10px 5px 5px;
-                width: 250px;
-            }
-            #candidate_image img, #running_mate_image img {
-                height: 284px;
-                width: auto;
-                outline: 8px ridge;
-            }
-            #candidate_image img { outline-color: #E3BB5B; }
-            #running_mate_image img { outline-color: #DB4141; }
-
             /* Background & stuff */
             body {
                 background-image: url(https://file.garden/aNtAfG887DiA_7lO/TML_2000/tml_background.webp);
@@ -716,10 +701,6 @@ const css = `
 				height: 290px;
 				object-fit: cover;
 			}
-			/*#header {
-				-webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-				mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-			}*/
 			.campaign_trail_start_emphasis {
 			    background: #fbe63e;
 			    outline: 1px solid #ccc;
@@ -774,27 +755,28 @@ const css = `
 			#inner_window_2 p:first-of-type:first-letter,
 			#inner_window_3 p:first-of-type:first-letter,
 			#running_mate_description_window p:first-of-type:first-letter {
-				float: left; font-weight: bold; line-height: 0.7em;
+				float: left;
+				font-weight: bold;
+				line-height: 0.7em;
 				margin-top: 0.05em;
-				color: #d93829;
 				font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
 				text-shadow: 2px 2px 0px #222222, -1px -1px 0px #fffdf2;
+
+				font-size: 3.5em;
+				padding-bottom: 0.1em;
 			}
 
 			#inner_window_1 p:first-of-type:first-letter {
 				color: #f49b18;
-				font-size: 3.5em;
 				margin-right: 0.04em;
-				padding-bottom: 0.1em;
 				padding-right: 0.02em;
 			}
 
 			#inner_window_2 p:first-of-type:first-letter,
 			#inner_window_3 p:first-of-type:first-letter,
 			#running_mate_description_window p:first-of-type:first-letter {
-				font-size: 3.5em;
+				color: #d93829;
 				margin-right: 0.15em;
-				padding-bottom: 0.1em;
 				padding-right: 0.05em;
 			}
 
@@ -812,8 +794,6 @@ const css = `
 			}
 
 			.person_summary li {
-				/*padding-bottom: .5em;
-				border-bottom: 1px solid rgba(44, 62, 80, 0.2);*/
 				margin: .1em 0 0 0;
 				color: #072d53;
 			}
@@ -859,19 +839,35 @@ const css = `
 				background-position: 0 0.75em;
 			}
 
+			/* Candidate/running mate images */
+			#candidate_image, #running_mate_image {
+                border: none;
+                height: auto;
+                margin: 5px 10px 5px 5px;
+                width: 250px;
+            }
+
 			#candidate_image img, #running_mate_image img {
 				background: #fffdf2;
-				padding: 6px 6px 16px 6px;
 				border: 1px solid #222;
-				outline: 2px solid #b10b0b;
 				box-shadow: 2px 3px 5px rgba(0,0,0,0.3);
-				transform: rotate(-3deg);
-				z-index: 1;
+				height: 284px;
+				max-width: 220px;
+				object-fit: cover;
+				object-position: top;
+				outline: 2px solid;
+				padding: 6px 6px 16px 6px;
 				position: relative;
+				transform: rotate(-3deg);
+				width: auto;
 				width: 100%;
+				z-index: 1;
 			}
-
+			#candidate_image img {
+				outline-color: #b10b0b;
+			}
 			#running_mate_image img {
+				outline-color: #414ddb;
 				transform: rotate(2deg);
 			}
 
@@ -895,29 +891,26 @@ const css = `
 				border-right: none;
                 min-height: 20em;
 			}
-            .game_header {
-                align-items: center;
-                background: linear-gradient(to bottom, #FFC83D, #F2B705, #C99500);
+
+			.game_header {
+				align-items: center;
+				background-color: #d8720c;
+				background-image: linear-gradient(
+					to right,
+					#ffc83d,
+					#f2b705 calc(50% - 250px),
+					#d8720c calc(50% - 150px) calc(50% + 150px),
+					#f2b705 calc(50% + 250px),
+					#ffc83d
+				);
 				border-bottom: 2px solid #b22929;
 				border-radius: .15em .15em 0 0;
-                box-shadow: inset 0 .25rem .5rem rgba(255, 255, 255, 0.1), 0 .1rem .5rem rgba(0, 0, 0, 0.4);
-                display: flex;
-                justify-content: center;
+				box-shadow: inset 0 .25rem .5rem rgba(255, 255, 255, 0.1), 0 .1rem .5rem rgba(0, 0, 0, 0.4);
+				display: flex;
+				justify-content: center;
 				height: 3rem;
 				color: #000;
 				font-family: 'IBM Courier', Courier, 'Courier New', monospace;
-            }
-
-			.game_header {
-			  background-color: #d8720c !important;
-			  background-image: linear-gradient(
-				to right,
-				#ffc83d,
-				#f2b705 calc(50% - 250px),
-				#d8720c calc(50% - 150px) calc(50% + 150px),
-				#f2b705 calc(50% + 250px),
-				#ffc83d
-			  ) !important;
 			}
 
 			.game_header img.tml_logo {
@@ -1027,7 +1020,7 @@ const css = `
 				background: repeating-linear-gradient(to bottom, #fff4cc 0px, #fff4cc 40px, #f7e29a 41px);
 			    border-radius:  .5em 0 0 .5em;
 			    border: 3px solid #e1c396;
-				height: 33.48em; /* 30.78em */ /* necessary for mobile compatibility */
+				height: 33.48em; /* necessary for mobile compatibility */
 			}
 
 			/* basically a lazy fix to increase the SVG map size without
@@ -1035,8 +1028,6 @@ const css = `
 			 * as Year Zero does something kinda similar */
 			#map_container svg {
 				height: 100%;
-			}
-			#map_container svg {
 				transform: translate(10px, 0);
 			}
 			#map_container svg rect, #map_container svg text {
@@ -1057,9 +1048,6 @@ const css = `
 				color: #fff;
 				border-radius: 0 0 .25em .25em;
             }
-			#state_info ul {
-				padding: .2em 1em .2em 1em;
-			}
 			#state_info > p:first-of-type {
 			  margin: .5em 0 0.4em 0;
 			  font-weight: 600;
@@ -1106,17 +1094,15 @@ const css = `
 			}
 
 
-			#menu_container {
-			    border-radius: .4em .4em 0 0;
-			}
 			#overall_result h3 {
 			    border-radius: .15em .15em 0 0;
 				border-bottom: 3px solid rgb(221, 163, 163);
+				width: 100%;
 			}
 			#overall_result, #overall_result_container {
 		        border-radius: .4em .4em 0 0;
 			}
-            #overall_result button:nth-of-type(1) /* pop. vote button */ {
+            #overall_result button:nth-of-type(1) { /* pop. vote button */
                 margin-bottom: .5rem;
             }
 			/* other special button fixes */
@@ -1125,9 +1111,6 @@ const css = `
 			  flex-direction: column;
 			  align-items: center;
 			  min-height: 10.3em;
-			}
-			#overall_result h3 {
-			  width: 100%;
 			}
 			#overall_result #switchingEst {
 			  width: 88.5%;
@@ -1159,7 +1142,8 @@ const css = `
                 overflow-y: auto;
             }
 			#menu_container {
-				background: linear-gradient(#bf1010 50%, transparent);
+				border-radius: .4em .4em 0 0;
+				background-image: linear-gradient(#bf1010 50%, transparent);
 				background-color: inherit;
 			}
 			#state_result_container {
@@ -1173,8 +1157,7 @@ const css = `
 			    margin: 1.5em 1em auto 1em;
 			}*/
 
-			/* Tweaks for a larger election description - I made this for Moonbeam
-			 * but idk if it'll be used there */
+			/* Tweaks for a larger election description - initially made for Moonbeam */
 			#election_summary {
 			  display: flex;
 			  flex-flow: column;
@@ -1199,6 +1182,7 @@ const css = `
 			#election_year_form + p:first-of-type {
 			  padding-top: 5em;
 			}
+
 			/* mobile tweaks for this */
 			@media only screen and (max-width: 768px) {
 			  #election_description_window {
@@ -1287,7 +1271,6 @@ const css = `
 			/* campaign sign */
 			#campaign_sign {
 				background: #ffffff;
-				background-image: url(https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Obama_logomark.svg/1200px-Obama_logomark.svg.png);
 				background-position: center;
 				background-size: contain;
 				background-repeat: no-repeat;
@@ -1415,6 +1398,7 @@ const css = `
             button#ExportFileButton {
                 display: inline-flex;
             }
+
             /* other, in-game issue tooltips */
             .tooltip {
                 cursor: help;
@@ -1496,8 +1480,8 @@ const css = `
 
 			#game_window input,
 			#theme_picker input {
-				appearance: none;
 				-webkit-appearance: none;
+				appearance: none;
 				box-sizing: border-box;
 
 				background: linear-gradient(#fefefe 0%, #e3e3e3 100%);
@@ -2035,17 +2019,18 @@ const css = `
 
 			#achwindow > #achcontent button:focus {
 			  background: linear-gradient(#790303, #4a6ea9);
-			  outline:1px dotted #000;
-			  outline-offset:-4px
+			  outline: 1px dotted #000;
+			  outline-offset: -4px;
 			}
+
 			.achSubHolder.visible {
-			  display: grid !important;
-			  grid-template-columns: repeat(3, 1fr) !important;
+			  display: flex !important;
+			  flex-wrap: wrap !important;
+			  justify-content: center !important;
 			  gap: 15px !important;
 			  width: 100% !important;
 			  padding: 10px !important;
 			  box-sizing: border-box !important;
-			  justify-content: normal !important;
 
 			  opacity: 1 !important;
 			  max-height: none !important;
@@ -2059,7 +2044,7 @@ const css = `
 
 			.achBox {
 			  margin: 0 !important;
-			  width: 100% !important;
+			  width: calc((100% - 30px) / 3) !important;
 			  max-width: none !important;
 			  height: 350px !important;
 			  display: flex !important;
@@ -2068,6 +2053,19 @@ const css = `
 			  justify-content: flex-start !important;
 			  padding: 15px !important;
 			  box-sizing: border-box !important;
+			}
+
+			/* extra media queries */
+			@media (max-width: 768px) {
+			  .achBox {
+				width: calc((100% - 15px) / 2) !important;
+			  }
+			}
+
+			@media (max-width: 480px) {
+			  .achBox {
+				width: 100% !important;
+			  }
 			}
 
 			.achImageHolder {
@@ -2385,6 +2383,7 @@ const css = `
 
 			#cheatMenu input[type="range"] {
 				-webkit-appearance: none;
+				appearance: none;
 				width: 160px;
 				height: 6px;
 
@@ -2395,6 +2394,7 @@ const css = `
 
 			#cheatMenu input[type="range"]::-webkit-slider-thumb {
 				-webkit-appearance: none;
+				appearance: none;
 				width: 14px;
 				height: 14px;
 
@@ -2662,13 +2662,6 @@ const css = `
 				background-size: cover;
 			  }
 
-			  #question_form button, #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button, #inner_window_2 select, #inner_window_3 select, #inner_window_4 select {
-				font-size: clamp(16px, 4.2vw, 20px);
-				line-height: 1.2;
-				padding: 10px 16px;
-				min-height: 44px;
-			  }
-
 			  #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
 				font-size: 1em;
 				line-height: 2em;
@@ -2702,7 +2695,6 @@ const css = `
 				display: flow-root !important;
 				overflow: visible !important;
 				box-sizing: border-box !important;
-				max-height: 395px;
 			  }
 
 				#question_form input[type="radio"] {
@@ -2726,7 +2718,8 @@ const css = `
 				#inner_window_4 button,
 				#game_window button,
 				#headquarter button,
-				#advisorsDiv button {
+				#advisorsDiv button,
+				#inner_window_2 select, #inner_window_3 select, #inner_window_4 select {
 					font-size: clamp(16px, 4.2vw, 20px);
 					line-height: 1.2;
 					padding: 10px 16px;
@@ -5385,10 +5378,10 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
             #${VOLUME_PERCENTAGE_ID} { font-size: 11px; color: #777; width: 30px; text-align: right; }
             #${VOLUME_SLIDER_ID} { width: 70px; }
 
-            input[type="range"] { -webkit-appearance: none; background: transparent; cursor: pointer; width: 100%; outline: none; height: 16px; padding: 0; margin: 0; }
+            input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; width: 100%; outline: none; height: 16px; padding: 0; margin: 0; }
             input[type="range"]::-webkit-slider-runnable-track { height: 6px; background: var(--surface-inset); border-radius: 3px; box-shadow: inset 1px 1px 2px rgba(0,0,0,0.15); border-bottom: 1px solid rgba(255,255,255,0.8); }
             input[type="range"]::-moz-range-track { height: 6px; background: var(--surface-inset); border-radius: 3px; box-shadow: inset 1px 1px 2px rgba(0,0,0,0.15); border-bottom: 1px solid rgba(255,255,255,0.8); }
-            input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; margin-top: -5px; height: 16px; width: 16px; background: radial-gradient(circle at 30% 30%, #fff, #bbb); border: 1px solid #999; border-radius: 50%; box-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+            input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -5px; height: 16px; width: 16px; background: radial-gradient(circle at 30% 30%, #fff, #bbb); border: 1px solid #999; border-radius: 50%; box-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
             input[type="range"]::-moz-range-thumb { height: 16px; width: 16px; background: radial-gradient(circle at 30% 30%, #fff, #bbb); border: 1px solid #999; border-radius: 50%; box-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
 
             #player-progress-wrapper { position: relative; width: 100%; height: 16px; display: flex; align-items: center; }
