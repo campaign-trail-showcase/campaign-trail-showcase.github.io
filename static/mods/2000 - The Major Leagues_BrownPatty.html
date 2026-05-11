@@ -16670,62 +16670,6 @@ const bonusSlides = [
   .gu-page a:hover { text-decoration: underline; }
   .gu-page a:visited { color: #003366; }
 
-  .wb-bar {
-    background: #1a1a1a;
-    color: #ccc;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    padding: 3px 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 3px solid #1a75be;
-  }
-  .wb-logo { color: #1a75be; font-weight: bold; font-size: 12px; flex-shrink: 0; }
-  .wb-url  {
-    flex: 1;
-    background: #0a0a0a;
-    border: 1px solid #444;
-    color: #aaa;
-    padding: 2px 6px;
-    font-size: 10px;
-    font-family: 'Courier New', monospace;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .wb-nav {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-    font-size: 10px;
-    color: #999;
-  }
-  .wb-nav b { color: #fff; font-size: 13px; }
-  .wb-nav-btn {
-    background: #333;
-    color: #aaa;
-    border: 1px solid #555;
-    padding: 1px 5px;
-    font-size: 10px;
-    cursor: default;
-  }
-  .wb-cal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 9px;
-    color: #888;
-    line-height: 1.3;
-    flex-shrink: 0;
-    border: 1px solid #444;
-    padding: 2px 6px;
-  }
-  .wb-cal-month { color: #1a75be; font-weight: bold; font-size: 11px; }
-  .wb-cal-day { color: #fff; font-size: 14px; font-weight: bold; }
-  .wb-cal-year { color: #aaa; font-size: 9px; }
-
   .gu-outer { width: 608px; margin: 0 auto; }
 
   .gu-header {
@@ -16901,22 +16845,6 @@ const bonusSlides = [
 </style>
 
 <div class="gu-page">
-
-  <div class="wb-bar">
-    <div class="wb-logo">Wayback Machine</div>
-    <div class="wb-url">https://web.archive.org/web/20001215192341/http://www.guardianunlimited.co.uk/uselection/story/0,2763,412067,00.html</div>
-    <div class="wb-nav">
-      <span class="wb-nav-btn">◀</span>
-      <div class="wb-cal">
-        <span style="color:#aaa;font-size:9px;">NOV</span>
-        <span class="wb-cal-month">DEC</span>
-        <span class="wb-cal-day">15</span>
-        <span class="wb-cal-year">2000</span>
-        <span style="color:#aaa;font-size:9px;">JAN</span>
-      </div>
-      <span class="wb-nav-btn">▶</span>
-    </div>
-  </div>
 
   <div class="gu-outer">
 
@@ -17176,6 +17104,224 @@ const bonusSlides = [
 
   </div>
 
+</div>`
+  },
+  {
+    id: "biden",
+    condition: (ev) => itsATie,
+    image: "https://whyy.org/wp-content/uploads/2017/08a/apjoebidenx1200.jpg",
+    html: `<style>
+  .email-wrapper {
+    background-color: #d9d9dd;
+    padding: 40px 20px;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: #1c1c1c;
+  }
+
+  .email-container {
+    background-color: #ffffff;
+    max-width: 700px;
+    margin: 0 auto;
+    border: 1px solid #b8b8bc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
+                0 0 1px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+
+  .email-toolbar {
+    background: linear-gradient(180deg, #e8e8ea 0%, #d4d4d8 100%);
+    border-bottom: 1px solid #b8b8bc;
+    padding: 6px 16px;
+    display: flex;
+    gap: 4px;
+    font-size: 13px;
+    color: #3a3a3d;
+  }
+
+  .email-toolbar-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px 12px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    font-size: 12.5px;
+    transition: background 0.12s, border-color 0.12s;
+  }
+
+  .email-toolbar-btn:hover {
+    background: linear-gradient(180deg, #f0f0f4 0%, #e0e0e4 100%);
+    border-color: #b0b0b4;
+    color: #0a84ff;
+  }
+
+  .email-toolbar-btn:active {
+    background: linear-gradient(180deg, #c8c8cc 0%, #d0d0d4 100%);
+    border-color: #a0a0a4;
+  }
+
+  .email-header {
+    padding: 16px 20px 12px 20px;
+    border-bottom: 2px solid #0a84ff;
+    background-color: #f9f9fb;
+  }
+
+  .header-row {
+    display: flex;
+    margin-bottom: 4px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .header-label {
+    width: 55px;
+    color: #6a6a6e;
+    text-align: right;
+    padding-right: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .header-value {
+    color: #1c1c1c;
+  }
+
+  .header-value.bold {
+    font-weight: 600;
+  }
+
+  .header-value.email {
+    color: #0a84ff;
+  }
+
+  .email-subject {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1c1c1c;
+    margin: 14px 0 4px 0;
+    padding-left: 67px;
+  }
+
+  .email-header::after {
+    content: "★";
+    position: relative;
+    float: right;
+    top: -30px;
+    color: #c8c8cc;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+
+  .email-header:hover::after {
+    color: #ffc107;
+  }
+
+  .email-body {
+    padding: 24px 32px 36px 67px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: #1c1c1c;
+    background-color: #ffffff;
+  }
+
+  .email-body p {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .email-signature {
+    margin-top: 28px;
+    color: #6a6a6e;
+    font-size: 13px;
+    border-top: 1px dashed #c8c8cc;
+    padding-top: 14px;
+  }
+
+  .email-body a {
+    color: #0a84ff;
+    text-decoration: underline;
+  }
+
+  .email-statusbar {
+    background: linear-gradient(180deg, #e8e8ea 0%, #d4d4d8 100%);
+    border-top: 1px solid #b8b8bc;
+    padding: 4px 16px;
+    font-size: 11px;
+    color: #6a6a6e;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+
+<div class="email-wrapper">
+  <div class="email-container">
+
+    <div class="email-toolbar">
+      <div class="email-toolbar-btn">↩ Reply</div>
+      <div class="email-toolbar-btn">↪ Reply All</div>
+      <div class="email-toolbar-btn">↪ Forward</div>
+      <div class="email-toolbar-btn">🗑 Delete</div>
+      <div class="email-toolbar-btn">⬇ Archive</div>
+      <div class="email-toolbar-btn">🏷 Tag</div>
+    </div>
+
+    <div class="email-header">
+      <div class="header-row">
+        <div class="header-label">From</div>
+        <div class="header-value bold">Joe Biden <span class="email">&lt;jrb@biden2012.com&gt;</span></div>
+      </div>
+      <div class="header-row">
+        <div class="header-label">To</div>
+        <div class="header-value">DNC Leadership, Surrogates, Interested Parties, National Press Corps</div>
+      </div>
+      <div class="header-row">
+        <div class="header-label">Date</div>
+        <div class="header-value">August 14, 2012, 8:42 AM EDT</div>
+      </div>
+
+      <div class="email-subject">Re: The State of the Race</div>
+    </div>
+
+    <div class="email-body">
+      <p>Folks, let me say this as clearly and simply as I can: <b>Fuck You</b>.</p>
+
+      <p>I'm the Democratic Party's nominee. No one is pushing me out. I'm not leaving.</p>
+
+      <p>I woke up this morning to read front-page stories in the Times and Politico full of anonymous quotes from "senior party officials" and "concerned donors" saying I need to step aside for Janet, or hand the keys over to some fresh-faced kid from the Senate, because my poll numbers in Ohio "dipped" three points. I'm watching cable news anchors openly pontificate about a brokered convention in Charlotte.</p>
+
+      <p>It's absolute malarkey.</p>
+
+      <p>When I took this job in 2008, the economy was in freefall. We were bleeding 800,000 jobs a month. We were drowning in two unwinnable wars. I dragged us out of the worst financial crisis since the Great Depression. I gave the order to take out Osama bin Laden. I passed healthcare reform when everyone in Washington, including half the people on this email chain, told me it was political suicide. And now, everyone acts like they loved Bidencare from the start, when half of them were sabotaging me.</p>
+
+      <p>Now, things get a little tough against Romney and his billionaire buddies, and your first instinct is to run for the hills? To stab the guy who got you here in the back?</p>
+
+      <p>Janet is a hell of a Vice President. God love her, she's doing an incredible job securing the homeland and helping me govern. But she is <em>my</em> Vice President. She's on <em>my</em> ticket. And as for the "rising stars" you're all whispering about at your Georgetown cocktail parties? They can wait their damn turn.</p>
+
+      <p>I am the only person who has beaten these guys, and I am the only person who is going to beat them in November. If you want to spend the next three months wetting the bed, do it in your own homes. But stop leaking to the press, stop the cowardly backroom plotting, and start doing the work to win this election.</p>
+
+      <p>Get behind me or get the fuck out of my way.</p>
+
+      <p>Joe</p>
+
+      <div class="email-signature">
+        <strong>Joseph R. Biden Jr.</strong><br>
+        President of the United States<br>
+        <em>Paid for by Biden-Napolitano 2012</em>
+      </div>
+    </div>
+
+    <div class="email-statusbar">
+      <span>✅ This message appears to be legitimate.</span>
+      <span>1 attachment — 24 KB</span>
+    </div>
+
+  </div>
 </div>`
   },
   {
@@ -22930,7 +23076,7 @@ dd {
   },
   {
     id: "regaan",
-    condition: (ev) => linusWin && anti_establishment <= 1 && ruthlessness >= 5,
+    condition: (ev) => linusWin && anti_establishment <= 2 && ruthlessness >= 5,
     image: "https://cdn2.picryl.com/photo/1986/08/08/president-ronald-reagan-during-an-interview-with-fortune-magazine-in-the-oval-e1f906-1024.jpg",
     html: `<style>
 .cbs-wrap {
@@ -23867,6 +24013,190 @@ dd {
 
 </div>
 </body>`
+  },
+  {
+    id: "ford",
+    condition: (ev) => linusWin && anti_establishment <= 2 && ruthlessness < 5,
+	image: "https://www.fineartstorehouse.com/p/629/gerald-ford-39001675.jpg.webp",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600;700&display=swap');
+
+  .cr-wrapper {
+    background-color: #050505;
+    color: #e0e0e0;
+    font-family: 'Libre Baskerville', serif;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 40px 50px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    line-height: 1.6;
+  }
+
+  .cr-header {
+    text-align: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+
+  .cr-logo {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .cr-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+  }
+
+  .cr-meta {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 30px;
+    text-align: right;
+  }
+
+  .cr-transcript {
+    font-size: 15px;
+  }
+
+  .cr-line {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cr-speaker {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+
+  .cr-rose .cr-speaker {
+    color: #5a8bb0;
+  }
+
+  .cr-text {
+    padding-left: 20px;
+  }
+
+  .cr-action {
+    font-style: italic;
+    color: #777;
+  }
+
+</style>
+
+<div class="cr-wrapper">
+
+  <div class="cr-header">
+    <div class="cr-logo">Charlie Rose</div>
+    <div class="cr-sub">Transcript Excerpt — PBS</div>
+  </div>
+
+  <div class="cr-meta">
+    Original Air Date: November 12, 2003<br>
+    Guest: Former President Gerald R. Ford
+  </div>
+
+  <div class="cr-transcript">
+
+    <div class="cr-line cr-rose">
+      <div class="cr-speaker">Charlie Rose</div>
+      <div class="cr-text">…but let me go back to what you wrote about Nixon. Because you argue in the essay… you write that the pardon was, for you, the ultimate confrontation with the “Big Other”.</div>
+    </div>
+
+    <div class="cr-line">
+      <div class="cr-speaker">Gerald Ford</div>
+      <div class="cr-text">That’s exactly right, Charlie. Because when you pardon Richard Nixon—</div>
+    </div>
+
+    <div class="cr-line cr-rose">
+      <div class="cr-speaker">Charlie Rose</div>
+      <div class="cr-text"><em><span class="cr-action">(interrupting)</span></em> But people didn’t see it as the Symbolic order as you suggested. They saw it as a corrupt bargain, a quid pro quo.</div>
+    </div>
+
+    <div class="cr-line">
+      <div class="cr-speaker">Gerald Ford</div>
+      <div class="cr-text">Of course they did. Because they were entirely trapped in the Imaginary, they were projecting their own anxieties onto the event. But you step into the Oval Office under those circumstances, and you realize very quickly that the presidency strips you of your subjectivity. I was no longer Jerry Ford, I beaome a signifier. And Nixon had become the symptom. The whole country was caught in this neurotic loop, obsessing over the tapes. And if you read Lacan’s seminar on “The Purloined Letter,” the tapes are precisely that— the hidden object that dictates the entire structure of the discourse, even when unseen. The pardon was, to put it plainly, the intervention of the Real.</div>
+    </div>
+
+    <div class="cr-line cr-rose">
+      <div class="cr-speaker">Charlie Rose</div>
+      <div class="cr-text">Which brings me to today. Because you look at the political landscape heading into 2004, you look at the Democratic field challenging President Bush. John Kerry, Howard Dean, Ted Turner, Wesley Clark, and now—</div>
+    </div>
+
+    <div class="cr-line">
+      <div class="cr-speaker">Gerald Ford</div>
+      <div class="cr-text">Trump.</div>
+    </div>
+
+    <div class="cr-line cr-rose">
+      <div class="cr-speaker">Charlie Rose</div>
+      <div class="cr-text">Donald Trump, yes. Running as a Democrat, thowing out the rulebook…</div>
+    </div>
+
+    <div class="cr-line">
+      <div class="cr-speaker">Gerald Ford</div>
+      <div class="cr-text"><em><span class="cr-action">(nodding slowly)</span></em> Well, Trump is fascinating. He is a walking, breathing manifestation of the Mirror Stage.</div>
+    </div>
+
+    <div class="cr-line cr-rose">
+      <div class="cr-speaker">Charlie Rose</div>
+      <div class="cr-text">Explain that.</div>
+    </div>
+
+    <div class="cr-line">
+      <div class="cr-speaker">Gerald Ford</div>
+      <div class="cr-text">He is completely captivated by his own specular image, Charlie. There is no mediation through the Symbolic order for him. He bypasses the law, he bypasses standard political decorum, and he speaks directly from the id. Bush, Cheney, Kerry— well, I see they are all trying to operate within the Symbolic. They talk about tax credits, healthcare savings accounts, etcetera, but you can see Trump just points out the lack in the Other.</div>
+    </div>
+
+    <div class="cr-line cr-rose">
+      <div class="cr-speaker">Charlie Rose</div>
+      <div class="cr-text">He exposes the lack, you say?</div>
+    </div>
+
+    <div class="cr-line">
+      <div class="cr-speaker">Gerald Ford</div>
+      <div class="cr-text">Precisely. He functions as a disruption of the Symbolic. But, Charlie, this is entirely an Imaginary ego-struggle. It’s pure narcissism masquerading as policy. Now, getting back to what I was saying about <em>jouissance</em> and the executive branch…</div>
+    </div>
+
+    <div class="cr-line cr-rose">
+      <div class="cr-speaker">Charlie Rose</div>
+      <div class="cr-text">But let me just ask you this, because people are wondering. Do you think a disruption like that can win? Does the American public want the id? Would someone like, say, you—</div>
+    </div>
+
+    <div class="cr-line">
+      <div class="cr-speaker">Gerald Ford</div>
+      <div class="cr-text"><em><span class="cr-action">(sighs slightly, waving a hand)</span></em> Charlie, electoral politics is just the management of collective neurosis. We vote to sustain our own fantasies, plain and simple. Whether Donald Trump wins the nomination, or whether John Kerry wins it, or if is someone like Mickey Mouse, it is completely immaterial to the underlying psychological structure of the state. The symptom will just manifest elsewhere, understand this. What I find much more interesting, and what I was trying to get at in the <em>Review</em>, is how the concept of the <em>objet petit a</em> relates to the presidential veto power.</div>
+    </div>
+
+    <div class="cr-line cr-rose">
+      <div class="cr-speaker">Charlie Rose</div>
+      <div class="cr-text"><em><span class="cr-action">(smiles, leaning forward)</span></em> The veto power.</div>
+    </div>
+
+    <div class="cr-line">
+      <div class="cr-speaker">Gerald Ford</div>
+      <div class="cr-text">Yes. The veto is the ultimate expression of the unattainable object of desire in the legislative process. Congress produces the bill, the demand, and the President, through the veto, introduces the cut, the lack. And so what you have is the castration of the legislative body. I vetoed sixty-six bills during my time in office, Charlie. And every time I did it, I was inadvertently demonstrating the impossibility of complete political wholeness. We are all just chasing the lost object…</div>
+    </div>
+
+  </div>
+</div>`
   },
   {
     id: "reddit",
@@ -24814,7 +25144,7 @@ dd {
   <div class="ibl-head">Kennedy Musicals</div>
   <a href="#">Camelot (1960)</a>
   <a href="#">JFK: The Musical (1993)</a>
-  <a href="#">Bobby (1999)</a>
+  <a href="#">Things That Never Were (1999)</a>
 </div>
 
 <div class="ib-content">
@@ -25130,20 +25460,20 @@ dd {
   </div>
 
   <div class="rr-sp"></div>
-  <div class="rr-h">Related Shows</div>
+  <div class="rr-h">Related shows</div>
   <div class="rr-it"><a href="#">Assassins (Revival, 2004)</a><div class="rr-meta">Presidential musical · Sondheim</div></div>
   <div class="rr-it"><a href="#">Caroline, or Change (2004)</a><div class="rr-meta">American history musical</div></div>
-  <div class="rr-it"><a href="#">Bobby (1999)</a><div class="rr-meta">RFK musical · Off-Broadway</div></div>
+  <div class="rr-it"><a href="#">Things That Never Were (1999)</a><div class="rr-meta">RFK musical · Off-Broadway</div></div>
   <div class="rr-it"><a href="#">1776 (Revival, 1997)</a><div class="rr-meta">Political American musical</div></div>
 
   <div class="rr-sp"></div>
-  <div class="rr-h">Box Office</div>
+  <div class="rr-h">Box office</div>
   <div class="rr-box">
-    <div class="rr-box-h">Weekly Gross</div>
+    <div class="rr-box-h">Weekly gross</div>
     <div class="rr-box-b">
       <p><strong>Week of Mar 6:</strong> $1,284,000</p>
       <p><strong>Capacity:</strong> 104.2%</p>
-      <p><strong>Avg Ticket:</strong> $94.18</p>
+      <p><strong>Avg ticket:</strong> $94.18</p>
       <p style="font-size:10px;color:#888;">Majestic Theatre · 1,655 seats</p>
     </div>
   </div>
@@ -29160,7 +29490,7 @@ dd {
   // surprise surprise
   {
     id: "charlieextra",
-    condition: (ev) => charlieWin,
+    condition: (ev) => charlieWin && linus_bond > 0,
     image: "https://m.media-amazon.com/images/M/MV5BYTYyZjIzMmQtNmVmNy00ZDliLWI4ZWUtNzU4MjBhNjM1N2Q1XkEyXkFqcGc@._V1_.jpg",
     html: `<style>
   .aol-wrapper {
@@ -29790,7 +30120,7 @@ dd {
   },
   {
     id: "linusextra",
-    condition: (ev) => linusWin,
+    condition: (ev) => linusWin && linus_bond > 0,
     image: "https://m.media-amazon.com/images/M/MV5BYTYyZjIzMmQtNmVmNy00ZDliLWI4ZWUtNzU4MjBhNjM1N2Q1XkEyXkFqcGc@._V1_.jpg",
     html: `<style>
   .aol-wrapper {
@@ -30415,6 +30745,185 @@ dd {
     </div>
 
   </div>
+</div>`
+  },
+  {
+    id: "penpal",
+    condition: (ev) => linus_bond <= 0,
+    image: "https://i.pinimg.com/1200x/5f/b8/e2/5fb8e2357128f5bab5ec5fe836e36fed.jpg",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  .letter-page {
+    background: linear-gradient(160deg, #f0f4f8 0%, #e2e8f0 30%, #cbd5e1 60%, #b8c7d9 100%);
+    border: 1px solid #94a3b8;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #94a3b8, 4px 4px 0 #64748b, 1px 1px 8px rgba(15, 23, 42, 0.18);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Crimson Text', 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #1e293b;
+  }
+
+  .letter-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        rgba(100, 116, 139, 0.07) 27px,
+        rgba(100, 116, 139, 0.07) 28px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .letter-page::after {
+    content: '';
+    position: absolute;
+    top: 48px; bottom: 48px;
+    left: 88px;
+    width: 1px;
+    background: rgba(14, 165, 233, 0.15);
+    pointer-events: none;
+  }
+
+  .fold-line {
+    border-top: 1px dashed rgba(71, 85, 105, 0.25);
+    margin: 32px -54px;
+    position: relative;
+  }
+
+  .letter-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(100, 116, 139, 0.3);
+  }
+
+  .letter-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .letter-page p {
+    margin: 0 0 16px 0;
+    text-indent: 2em;
+  }
+
+  .letter-page p:first-of-type {
+    text-indent: 0;
+  }
+
+  .written-word {
+    font-style: italic;
+    color: #334155;
+    padding: 0 10px;
+  }
+
+  .section-break {
+    text-align: center;
+    color: #64748b;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin: 24px 0 20px;
+  }
+
+  .stamp-area {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 1.5px solid #64748b;
+    border-radius: 1px;
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #475569;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+  }
+
+  .stamp-perfs {
+    position: absolute;
+    top: 23px; right: 31px;
+    width: 54px; height: 64px;
+    border: 1px dotted rgba(71, 85, 105, 0.5);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+</style>
+
+<div class="letter-page">
+  <div class="stamp-area">☾</div>
+  <div class="stamp-perfs"></div>
+
+  <div class="letter-header">
+    <div class="letter-title">boy strange</div>
+  </div>
+
+  <p>The envelope had been sitting on his desk for three hours.</p>
+
+  <p>Charlie Brown had found it jammed at the bottom of the mailbox that afternoon, wedged beneath a grocery circular. The return address was blank. The handwriting on the front, however, was unmistakable. He hadn't seen that precise, slightly slanted script in years.</p>
+
+  <p>He sat on the edge of his bed, the room washed in the cold, pale blue of moonlight filtering through the windowpanes. He was trembling. His last letter to his pen-pal had been a frantic, messy confession. He had written it at two in the morning, shaking and crying, outlining exactly how he had poured every ounce of his ruined friendship with Linus, the suffocating isolation of the school hallways,  and confessing the terrifying, absolute certainty that the world would be lighter without him in it. And it was a message sent into the void, nothing more than that; he did not expect a reply.</p>
+
+  <p>He swallowed hard, carefully sliding his thumb under the flap of the envelope. Charlie pulled out two sheets of blue stationery, unfolded them, and began to read.</p>
+
+  <p class="written-word">"Dear Charlie Brown,"</p>
+
+  <p class="written-word">"I was surprised to find an envelope with your name on it in my box after all this time. I thought you had forgotten about me. But my heart sank to the floor when I read the words inside."</p>
+
+  <p class="written-word">"You told me that you did something unforgivable. You said that you looked at your best friend, the boy who always carried a blanket, and you tore him down just so you could finally stand on a pedestal. That whatever victories you had in the last couple of months felt like poison in your veins. And that you are so exhausted by your own failures that you want to stop existing entirely."</p>
+
+  <p class="written-word">"I am writing this back to you immediately because I need you to listen to me: do not do it."</p>
+
+  <p>Charlie squeezed his eyes shut. His chest hitched; it was a sharp, ragged sound breaking the silence of the bedroom.</p>
+
+  <p class="written-word">"People make terrible, ugly mistakes when they are desperate to be seen," <span style="font-style: normal; color: #1e293b;">the letter continued.</span> "You ran a cruel campaign because you have spent your entire life being the punchline, and you finally wanted to be the hero. But true monsters do not lie awake in the dark weeping over the pain they have caused. And true monsters do not feel the agonizing regret that is radiating off the pages of your letter."</p>
+
+  <p class="written-word">"The fact that your soul is aching right now is the absolute proof that you are still a good person."</p>
+
+  <div class="section-break">· · ·</div>
+
+  <p class="written-word">"You feel like you have ruined everything. Perhaps you have ruined this one thing. But life is vast, Charlie Brown, and your town is such a remarkably small piece of it. Do not let one terrible chapter convince you to burn the whole book."</p>
+
+  <p class="written-word">"Tomorrow will come. You will have to walk down those hallways, and you will have to face him, and worse, you will have to face yourself. It will be agonizing. You will have to live with the consequences of your ambition. But you will survive it. I know your friend will too. You just need time."</p>
+
+  <p class="written-word">"There is a deep, quiet grace in living with our mistakes and choosing to be better anyway. You owe it to Linus, and you owe it to yourself, to stay here and try to be better. You cannot fix the bridge if you are gone."</p>
+
+  <div class="fold-line"></div>
+
+  <p class="written-word">"I don't know if we will ever meet.  But I have known you through your words for a very long time. I know the boy who manages the baseball team that never wins. I know the boy who loves his cute, erratic little dog. And I know the boy who never, ever gives up."</p>
+
+  <p class="written-word">"I trust that boy. I trust him to stay strong, I trust him to keep breathing. I feel for him, and I hope you will too."</p>
+
+  <p class="written-word">"Forgive yourself enough to stay alive, Charlie Brown. Please."</p>
+
+  <p class="written-word">"Always, your pen-pal."</p>
+
+  <p>The pages slipped from Charlie's fingers, drifting like blue leaves to the floorboards.</p>
+
+  <p>He didn't try to catch them this time. He just sat there, with his hands empty, and the words echoing in the hollowed-out spaces of his chest. For a moment, the room was perfectly still. And then, Charlie Brown fell to his knees.</p>
+
+  <p>Charlie slid off the edge of the mattress, falling to his knees on the cold wood, and wept. He cried for the things he couldn't take back, for his dog, for his friend, for his friendships, and he cried for the terrible weight he had been carrying, but as he gasped for air in the dark, he realized something profound.</p>
+
+  <p>He was still breathing. </p>
+
+  <p>And as he cried there in the dark, the moonlight caught the edge of the fallen paper. He didn't feel entirely fixed, and he knew tomorrow would be incredibly hard. But for the first time in a very long time, as he sat there in the quiet, Charlie Brown wanted to see the morning.</p>
+
 </div>`
   }
 ];
