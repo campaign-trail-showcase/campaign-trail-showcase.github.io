@@ -26694,960 +26694,408 @@ dd {
     id: "sombr",
     condition: (ev) => ev > 332 && ev <= 394,
     image: "https://file.garden/aNtAfG887DiA_7lO/TML_2000/sombr.jpg",
-    html: `<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
-<style>
-.bbc-wrap {
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  background: #fff;
-  color: #111;
-  max-width: 1040px;
-  margin: 0 auto;
-}
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
 
-.bbc-top {
-  background: #000;
-  padding: 0;
-  display: flex;
-  align-items: stretch;
-  border-bottom: 1px solid #222;
-}
-.bbc-logo-block {
-  background: #bb1919;
-  padding: 8px 12px;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  flex-shrink: 0;
-}
-.bbc-logo-box {
-  background: #fff;
-  color: #bb1919;
-  font-weight: 700;
-  font-size: 14px;
-  width: 24px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  font-family: Arial, sans-serif;
-}
-.bbc-top-nav {
-  display: flex;
-  align-items: stretch;
-  padding: 0 8px;
-  gap: 0;
-}
-.bbc-top-nav a {
-  color: #ccc;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 400;
-  padding: 0 12px;
-  display: flex;
-  align-items: center;
-  border-right: 1px solid #222;
-  white-space: nowrap;
-  letter-spacing: 0.01em;
-}
-.bbc-top-nav a:hover { color: #fff; background: #1a1a1a; }
-.bbc-top-nav a.on { color: #fff; }
-.bbc-top-right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  padding-right: 12px;
-  gap: 14px;
-}
-.bbc-top-right a {
-  color: #aaa;
-  text-decoration: none;
-  font-size: 12px;
-}
-.bbc-top-right a:hover { color: #fff; }
-.bbc-sign-in {
-  background: #fff;
-  color: #000 !important;
-  padding: 5px 14px;
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-}
+  .bbc-wrap {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    background: #fff;
+    color: #111;
+    max-width: 1040px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+  }
 
-.iplayer-subnav {
-  background: #111;
-  display: flex;
-  align-items: stretch;
-  padding: 0 14px;
-  border-bottom: 1px solid #222;
-}
-.ip-logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 0;
-  margin-right: 20px;
-}
-.ip-logo-text {
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.3px;
-}
-.ip-logo-text span { color: #bb1919; }
-.iplayer-subnav-links {
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-}
-.iplayer-subnav-links a {
-  color: #bbb;
-  text-decoration: none;
-  font-size: 13px;
-  padding: 0 14px;
-  display: flex;
-  align-items: center;
-  border-right: 1px solid #222;
-  white-space: nowrap;
-}
-.iplayer-subnav-links a:hover { color: #fff; background: #1a1a1a; }
-.iplayer-subnav-links a.on { color: #fff; border-bottom: 3px solid #bb1919; }
-.ip-search {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.ip-search input {
-  background: #222;
-  border: 1px solid #333;
-  color: #fff;
-  padding: 5px 10px;
-  font-size: 12px;
-  width: 200px;
-  font-family: inherit;
-  outline: none;
-}
-.ip-search input::placeholder { color: #888; }
-.ip-search button {
-  background: #bb1919;
-  color: #fff;
-  border: none;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-}
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; padding: 0; margin: 0; }
 
-.bbc-hero {
-  background: #0a0a0a;
-  position: relative;
-  overflow: hidden;
-}
-.bbc-hero-inner {
-  display: flex;
-  align-items: stretch;
-  min-height: 320px;
-}
-.bbc-player-area {
-  flex: 1;
-  position: relative;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 320px;
-}
-.bbc-player-scene {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0; left: 0;
-  background: linear-gradient(155deg, #0d1820 0%, #1a2a18 40%, #0a1008 100%);
-  overflow: hidden;
-}
-.bbc-chicago-sky {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-}
-.bbc-play-overlay {
-  position: relative;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-.bbc-play-btn {
-  width: 60px;
-  height: 60px;
-  background: rgba(255,255,255,0.9);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.bbc-play-btn::after {
-  content: '';
-  width: 0; height: 0;
-  border-top: 14px solid transparent;
-  border-bottom: 14px solid transparent;
-  border-left: 22px solid #000;
-  margin-left: 4px;
-}
-.bbc-player-label {
-  font-size: 12px;
-  color: rgba(255,255,255,0.7);
-  text-align: center;
-  letter-spacing: 0.03em;
-}
-.bbc-avail-badge {
-  background: rgba(187,25,25,0.9);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 8px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.bbc-hero-info {
-  width: 320px;
-  flex-shrink: 0;
-  background: #111;
-  padding: 20px 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-left: 1px solid #222;
-}
-.bbc-channel-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-.bbc-ch-logo {
-  background: #bb1919;
-  color: #fff;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 2px 5px;
-  letter-spacing: 0.05em;
-}
-.bbc-ch-name {
-  font-size: 12px;
-  color: #aaa;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-.bbc-hero-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.15;
-  margin-bottom: 6px;
-  letter-spacing: -0.3px;
-}
-.bbc-hero-title em { font-style: italic; font-weight: 300; }
-.bbc-hero-ep {
-  font-size: 13px;
-  color: #aaa;
-  margin-bottom: 10px;
-}
-.bbc-hero-desc {
-  font-size: 13px;
-  color: #ccc;
-  line-height: 1.6;
-  margin-bottom: 14px;
-  font-weight: 300;
-}
-.bbc-hero-meta {
-  font-size: 11px;
-  color: #777;
-  line-height: 1.7;
-  border-top: 1px solid #222;
-  padding-top: 10px;
-}
-.bbc-hero-meta span { color: #aaa; }
-.bbc-cta-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 12px;
-}
-.bbc-cta {
-  background: #bb1919;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: inherit;
-  text-decoration: none;
-  display: inline-block;
-}
-.bbc-cta:hover { background: #991414; }
-.bbc-cta-sec {
-  background: transparent;
-  color: #fff;
-  border: 1px solid #555;
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-}
-.bbc-cta-sec:hover { border-color: #888; }
+  .bbc-logo-block {
+    display: flex; gap: 2px;
+  }
+  .bbc-box {
+    background: #fff; color: #bb1919;
+    font-weight: 700; font-family: Arial, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
 
-.bbc-content {
-  background: #fff;
-  padding: 0;
-}
+  .bbc-top {
+    background: #000; display: flex; align-items: stretch; border-bottom: 1px solid #222;
+  }
+  .bbc-top .bbc-logo-block { background: #bb1919; padding: 8px 12px; flex-shrink: 0; }
+  .bbc-top .bbc-box { width: 24px; height: 20px; font-size: 14px; }
 
-.bbc-content-inner {
-  display: flex;
-  align-items: flex-start;
-  gap: 0;
-  padding: 24px 20px;
-}
+  .bbc-top-nav { display: flex; flex: 1; }
+  .bbc-top-nav a {
+    color: #ccc; font-size: 13px; padding: 0 12px;
+    display: flex; align-items: center; border-right: 1px solid #222;
+  }
+  .bbc-top-nav a:hover, .bbc-top-nav a.on { color: #fff; background: #1a1a1a; }
 
-.bbc-main { flex: 1; min-width: 0; }
+  .bbc-top-right { display: flex; align-items: center; gap: 14px; padding-right: 12px; margin-left: auto; }
+  .bbc-top-right a { color: #aaa; font-size: 12px; }
+  .bbc-top-right a:hover { color: #fff; }
+  .bbc-top-right .bbc-sign-in {
+    background: #fff; color: #000; font-weight: 700; padding: 5px 14px;
+  }
 
-.bbc-show-title-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 6px;
-  gap: 12px;
-}
-.bbc-show-title-main {
-  font-size: 28px;
-  font-weight: 700;
-  color: #111;
-  line-height: 1.1;
-  letter-spacing: -0.5px;
-}
-.bbc-show-title-main em { font-style: italic; font-weight: 300; }
-.bbc-genre-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
-.bbc-genre-tag {
-  background: #f0f0f0;
-  color: #444;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 9px;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  border: 1px solid #ddd;
-}
-.bbc-genre-tag:hover { background: #e0e0e0; }
-.bbc-genre-tag.primary {
-  background: #bb1919;
-  color: #fff;
-  border-color: #bb1919;
-}
+  .ip-subnav {
+    background: #111; display: flex; align-items: stretch; padding: 0 14px; border-bottom: 1px solid #222;
+  }
+  .ip-logo { display: flex; align-items: center; gap: 8px; padding: 8px 0; margin-right: 20px; }
+  .ip-logo .bbc-box { width: 18px; height: 16px; font-size: 11px; }
+  .ip-logo-text { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+  .ip-logo-text span { color: #bb1919; }
 
-.bbc-synopsis {
-  font-size: 15px;
-  color: #333;
-  line-height: 1.7;
-  margin-bottom: 18px;
-  font-weight: 300;
-  max-width: 620px;
-}
-.bbc-synopsis em { font-style: italic; font-weight: 400; }
-.bbc-synopsis strong { font-weight: 600; color: #111; }
+  .ip-nav-links { display: flex; }
+  .ip-nav-links a { color: #bbb; font-size: 13px; padding: 0 14px; display: flex; align-items: center; border-right: 1px solid #222; }
+  .ip-nav-links a:hover { color: #fff; background: #1a1a1a; }
+  .ip-nav-links a.on { color: #fff; border-bottom: 3px solid #bb1919; }
 
-.bbc-presenter-quote {
-  background: #f8f8f8;
-  border-left: 4px solid #bb1919;
-  padding: 12px 16px;
-  margin: 14px 0 20px;
-  max-width: 600px;
-}
-.bbc-pq-text {
-  font-size: 15px;
-  font-style: italic;
-  color: #333;
-  line-height: 1.6;
-  margin-bottom: 6px;
-}
-.bbc-pq-attr {
-  font-size: 11px;
-  color: #888;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
+  .ip-search { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+  .ip-search input { background: #222; border: 1px solid #333; color: #fff; padding: 5px 10px; font-size: 12px; width: 200px; outline: none; }
+  .ip-search button { background: #bb1919; color: #fff; border: none; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer; }
 
-.bbc-sec-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #888;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e8e8e8;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-.bbc-sec-label a { color: #bb1919; text-decoration: none; font-size: 11px; text-transform: none; letter-spacing: 0; font-weight: 600; }
+  .hero { background: #0a0a0a; display: flex; min-height: 320px; overflow: hidden; }
 
-.bbc-ep-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  margin-bottom: 24px;
-}
+  .hero-player {
+    flex: 1; position: relative; background: linear-gradient(155deg, #0d1820, #1a2a18 40%, #0a1008);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  }
 
-.bbc-ep {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  padding: 12px 0;
-  border-bottom: 1px solid #f0f0f0;
-  cursor: pointer;
-  transition: background 0.1s;
-}
-.bbc-ep:hover { background: #fafafa; }
-.bbc-ep.current { background: #fef9f9; border-left: 3px solid #bb1919; padding-left: 10px; }
+  .skyline-base { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(0deg, #0a1a08, transparent); }
+  .skyline-line { position: absolute; top: 20px; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.06); }
+  .skyline-floor { position: absolute; bottom: 0; left: 0; right: 0; height: 42px; background: rgba(10,15,10,0.9); }
+  .bldg { position: absolute; bottom: 40px; }
+  .bldg-1 { left: 5%; width: 60px; height: 120px; background: rgba(20,30,20,0.8); }
+  .bldg-2 { left: 12%; width: 40px; height: 90px; background: rgba(15,25,15,0.8); }
+  .bldg-3 { right: 8%; width: 80px; height: 140px; background: rgba(20,30,20,0.8); }
+  .bldg-4 { right: 18%; width: 50px; height: 100px; background: rgba(15,25,15,0.8); }
+  .ch-watermark { position: absolute; bottom: 48px; right: 14px; font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; }
 
-.bbc-ep-thumb {
-  width: 110px;
-  height: 62px;
-  flex-shrink: 0;
-  background: #111;
-  position: relative;
-  overflow: hidden;
-}
-.bbc-ep-thumb-inner {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.bbc-ep-duration {
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  background: rgba(0,0,0,0.75);
-  color: #fff;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 1px 4px;
-}
-.bbc-ep-play-sm {
-  width: 24px;
-  height: 24px;
-  background: rgba(255,255,255,0.85);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.bbc-ep-play-sm::after {
-  content: '';
-  width: 0; height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 8px solid #000;
-  margin-left: 2px;
-}
-.bbc-ep-info { flex: 1; min-width: 0; }
-.bbc-ep-num {
-  font-size: 10px;
-  font-weight: 700;
-  color: #888;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 2px;
-}
-.bbc-ep-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #111;
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-.bbc-ep-desc {
-  font-size: 12px;
-  color: #555;
-  line-height: 1.55;
-  font-weight: 300;
-}
-.bbc-ep-meta {
-  font-size: 11px;
-  color: #999;
-  margin-top: 5px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.bbc-avail {
-  background: #2e7d32;
-  color: #fff;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 1px 5px;
-  letter-spacing: 0.04em;
-}
-.bbc-avail.expiring { background: #e65100; }
+  .play-badge { background: rgba(187,25,25,0.9); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; letter-spacing: 0.06em; text-transform: uppercase; z-index: 5; }
+  .play-btn { width: 60px; height: 60px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; }
+  .play-btn::after { content: ''; border-top: 14px solid transparent; border-bottom: 14px solid transparent; border-left: 22px solid #000; margin-left: 4px; }
+  .play-label { font-size: 12px; color: rgba(255,255,255,0.7); z-index: 5; }
 
-.bbc-subjects {
-  background: #f8f8f8;
-  border: 1px solid #e8e8e8;
-  margin: 20px 0;
-  padding: 0;
-  overflow: hidden;
-}
-.bbc-subjects-head {
-  background: #111;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 8px 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.bbc-subjects-head span {
-  font-size: 10px;
-  color: #888;
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: 0;
-}
-.bbc-subject-list {
-  padding: 0;
-}
-.bbc-subject-item {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 10px 14px;
-  border-bottom: 1px solid #e8e8e8;
-}
-.bbc-subject-item:last-child { border-bottom: none; }
-.bbc-subject-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-}
-.bbc-subject-info { flex: 1; }
-.bbc-subject-name {
-  font-size: 13px;
-  font-weight: 700;
-  color: #111;
-  margin-bottom: 1px;
-}
-.bbc-subject-role {
-  font-size: 11px;
-  color: #666;
-  font-style: italic;
-  margin-bottom: 3px;
-}
-.bbc-subject-note {
-  font-size: 11px;
-  color: #888;
-  line-height: 1.45;
-}
+  .hero-info {
+    width: 320px; background: #111; padding: 20px 18px; display: flex; flex-direction: column; justify-content: space-between; border-left: 1px solid #222; flex-shrink: 0;
+  }
+  .ch-badge { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+  .ch-logo { background: #bb1919; color: #fff; font-size: 9px; font-weight: 700; padding: 2px 5px; }
+  .ch-name { font-size: 12px; color: #aaa; font-weight: 600; }
 
-.bbc-cast-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-bottom: 20px;
-}
-.bbc-cast-item {
-  display: flex;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid #f0f0f0;
-  font-size: 13px;
-  align-items: baseline;
-}
-.bbc-cast-role {
-  width: 180px;
-  flex-shrink: 0;
-  color: #888;
-  font-size: 12px;
-}
-.bbc-cast-name { color: #111; font-weight: 500; }
-.bbc-cast-name a { color: #bb1919; text-decoration: none; }
-.bbc-cast-name a:hover { text-decoration: underline; }
-.bbc-cast-note { font-size: 11px; color: #aaa; font-style: italic; margin-left: 6px; }
+  .hero-title { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 6px; letter-spacing: -0.3px; }
+  .hero-ep { font-size: 13px; color: #aaa; margin-bottom: 10px; }
+  .hero-desc { font-size: 13px; color: #ccc; line-height: 1.6; font-weight: 300; margin-bottom: 14px; }
 
-.bbc-press-box {
-  background: #fff;
-  border: 1px solid #e8e8e8;
-  margin-top: 20px;
-}
-.bbc-press-head {
-  background: #f4f4f4;
-  border-bottom: 1px solid #e8e8e8;
-  padding: 8px 14px;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #444;
-}
-.bbc-press-item {
-  padding: 10px 14px;
-  border-bottom: 1px solid #f0f0f0;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #333;
-}
-.bbc-press-item:last-child { border-bottom: none; }
-.bbc-press-item em { font-style: italic; color: #111; font-weight: 500; }
-.bbc-press-src { font-size: 11px; color: #888; margin-top: 3px; font-weight: 600; letter-spacing: 0.04em; }
-.bbc-star { color: #f5a623; }
+  .hero-meta { font-size: 11px; color: #777; line-height: 1.7; border-top: 1px solid #222; padding-top: 10px; }
+  .hero-meta span { color: #aaa; }
 
-.bbc-side {
-  width: 260px;
-  flex-shrink: 0;
-  padding-left: 24px;
-  border-left: 1px solid #e8e8e8;
-  margin-left: 24px;
-}
-.bbc-side-section {
-  margin-bottom: 22px;
-}
-.bbc-side-head {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #888;
-  border-bottom: 1px solid #e8e8e8;
-  padding-bottom: 8px;
-  margin-bottom: 10px;
-}
-.bbc-side-item {
-  display: flex;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid #f4f4f4;
-  align-items: flex-start;
-  cursor: pointer;
-}
-.bbc-si-thumb {
-  width: 70px;
-  height: 42px;
-  flex-shrink: 0;
-  background: #111;
-  overflow: hidden;
-  position: relative;
-}
-.bbc-si-info { flex: 1; min-width: 0; }
-.bbc-si-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: #111;
-  line-height: 1.3;
-  margin-bottom: 2px;
-}
-.bbc-si-meta { font-size: 10px; color: #888; }
+  .btn-row { display: flex; gap: 8px; margin-top: 12px; }
+  .btn-primary { background: #bb1919; color: #fff; padding: 8px 16px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; }
+  .btn-primary:hover { background: #991414; }
+  .btn-secondary { background: transparent; color: #fff; padding: 8px 16px; font-size: 13px; font-weight: 600; border: 1px solid #555; cursor: pointer; }
+  .btn-secondary:hover { border-color: #888; }
 
-.bbc-info-table { width: 100%; font-size: 12px; }
-.bbc-info-table td { padding: 4px 0; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
-.bbc-info-table td:first-child { color: #888; width: 100px; font-size: 11px; }
-.bbc-info-table td:last-child { color: #111; font-weight: 500; }
+  .layout-grid { display: flex; gap: 24px; padding: 24px 20px; }
+  .main-content { flex: 1; min-width: 0; }
+  .sidebar { width: 260px; flex-shrink: 0; border-left: 1px solid #e8e8e8; padding-left: 24px; }
 
-.bbc-footer {
-  background: #111;
-  padding: 14px 20px;
-  margin-top: 0;
-}
-.bbc-footer-top {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.bbc-footer-logo {
-  display: flex;
-  gap: 2px;
-}
-.bbc-footer-links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-bottom: 8px; }
-.bbc-footer a { color: #888; text-decoration: none; font-size: 11px; }
-.bbc-footer a:hover { color: #fff; text-decoration: underline; }
-.bbc-footer-copy { color: #555; font-size: 10px; border-top: 1px solid #222; padding-top: 7px; margin-top: 4px; line-height: 1.6; }
+  .show-title { font-size: 28px; font-weight: 700; color: #111; line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .show-title em { font-style: italic; font-weight: 300; }
+
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .tag { background: #f0f0f0; color: #444; font-size: 11px; font-weight: 600; padding: 3px 9px; border: 1px solid #ddd; }
+  .tag:hover { background: #e0e0e0; }
+  .tag.primary { background: #bb1919; color: #fff; border-color: #bb1919; }
+
+  .synopsis { font-size: 15px; color: #333; line-height: 1.7; font-weight: 300; max-width: 620px; margin-bottom: 18px; }
+  .synopsis em { font-style: italic; font-weight: 400; }
+
+  .quote-box { background: #f8f8f8; border-left: 4px solid #bb1919; padding: 12px 16px; margin: 14px 0 20px; max-width: 600px; }
+  .quote-text { font-size: 15px; font-style: italic; color: #333; line-height: 1.6; margin-bottom: 6px; }
+  .quote-attr { font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .section-header { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #888; border-bottom: 1px solid #e8e8e8; padding-bottom: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: baseline; }
+  .section-header a { color: #bb1919; font-weight: 600; text-transform: none; letter-spacing: 0; }
+
+  .ep-list { display: flex; flex-direction: column; gap: 1px; margin-bottom: 24px; }
+  .ep-card { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+  .ep-card:hover { background: #fafafa; }
+  .ep-card.active { background: #fef9f9; border-left: 3px solid #bb1919; padding-left: 10px; }
+
+  .ep-thumb { width: 110px; height: 62px; background: #111; position: relative; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .ep-duration { position: absolute; bottom: 4px; right: 4px; background: rgba(0,0,0,0.75); color: #fff; font-size: 9px; font-weight: 700; padding: 1px 4px; }
+  .play-sm { width: 24px; height: 24px; background: rgba(255,255,255,0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .play-sm::after { content: ''; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid #000; margin-left: 2px; }
+
+  .ep-info { flex: 1; min-width: 0; }
+  .ep-subtitle { font-size: 10px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+  .ep-title { font-size: 14px; font-weight: 700; color: #111; margin-bottom: 4px; }
+  .ep-desc { font-size: 12px; color: #555; line-height: 1.55; font-weight: 300; }
+  .ep-meta { font-size: 11px; color: #999; margin-top: 5px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge-green { background: #2e7d32; color: #fff; font-size: 9px; font-weight: 700; padding: 1px 5px; }
+  .badge-orange { background: #e65100; color: #fff; font-size: 9px; font-weight: 700; padding: 1px 5px; }
+
+  .cast-item { display: flex; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; align-items: baseline; }
+  .cast-role { width: 180px; color: #888; font-size: 12px; flex-shrink: 0; }
+  .cast-name { color: #111; font-weight: 500; }
+  .cast-name a { color: #bb1919; }
+  .cast-name a:hover { text-decoration: underline; }
+  .cast-note { font-size: 11px; color: #aaa; font-style: italic; margin-left: 6px; }
+
+  .press-box { border: 1px solid #e8e8e8; margin-top: 20px; }
+  .press-head { background: #f4f4f4; border-bottom: 1px solid #e8e8e8; padding: 8px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #444; letter-spacing: 0.1em; }
+  .press-item { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; font-size: 13px; line-height: 1.6; color: #333; }
+  .press-item:last-child { border-bottom: none; }
+  .press-item em { font-style: italic; color: #111; font-weight: 500; }
+  .press-src { font-size: 11px; color: #888; margin-top: 3px; font-weight: 600; }
+  .star-rating { color: #f5a623; }
+
+  .sidebar-section { margin-bottom: 22px; }
+  .info-table { width: 100%; font-size: 12px; }
+  .info-table td { padding: 4px 0; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .info-table td:first-child { color: #888; width: 100px; font-size: 11px; }
+  .info-table td:last-child { color: #111; font-weight: 500; }
+
+  .award-block { margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid #f0f0f0; }
+  .award-block:last-child { border-bottom: none; }
+  .award-title { font-weight: 600; color: #111; font-size: 12px; }
+  .award-desc { color: #666; font-size: 11px; line-height: 1.6; }
+  .award-note { font-style: italic; }
+
+  .related-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f4f4f4; align-items: flex-start; cursor: pointer; }
+  .rel-thumb { width: 70px; height: 42px; background: #111; flex-shrink: 0; }
+  .rel-title { font-size: 12px; font-weight: 600; color: #111; margin-bottom: 2px; line-height: 1.3; }
+  .rel-meta { font-size: 10px; color: #888; }
+
+  .footer { background: #111; padding: 14px 20px; }
+  .footer-logo { margin-bottom: 10px; }
+  .footer-logo .bbc-box { width: 20px; height: 18px; font-size: 12px; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-bottom: 8px; }
+  .footer-links a { color: #888; font-size: 11px; }
+  .footer-links a:hover { color: #fff; text-decoration: underline; }
+  .footer-copy { color: #555; font-size: 10px; border-top: 1px solid #222; padding-top: 7px; margin-top: 4px; }
 </style>
 
 <div class="bbc-wrap">
 
-<div class="bbc-top">
-  <div class="bbc-logo-block">
-    <div class="bbc-logo-box">B</div>
-    <div class="bbc-logo-box">B</div>
-    <div class="bbc-logo-box">C</div>
-  </div>
-  <div class="bbc-top-nav">
-    <a href="#">Home</a>
-    <a href="#">News</a>
-    <a href="#">Sport</a>
-    <a href="#" class="on">iPlayer</a>
-    <a href="#">Sounds</a>
-    <a href="#">Bitesize</a>
-    <a href="#">CBBC</a>
-    <a href="#">CBeebies</a>
-    <a href="#">Weather</a>
-    <a href="#">More ▾</a>
-  </div>
-  <div class="bbc-top-right">
-    <a href="#">Notifications</a>
-    <a href="#" class="bbc-sign-in">Sign In</a>
-  </div>
-</div>
-
-<div class="iplayer-subnav">
-  <div class="ip-logo">
-    <div class="bbc-logo-block" style="padding:4px 8px;">
-      <div class="bbc-logo-box" style="width:18px;height:16px;font-size:11px;">B</div>
-      <div class="bbc-logo-box" style="width:18px;height:16px;font-size:11px;">B</div>
-      <div class="bbc-logo-box" style="width:18px;height:16px;font-size:11px;">C</div>
+  <header class="bbc-top">
+    <div class="bbc-logo-block">
+      <span class="bbc-box">B</span><span class="bbc-box">B</span><span class="bbc-box">C</span>
     </div>
-    <div class="ip-logo-text">i<span>Player</span></div>
-  </div>
-  <div class="iplayer-subnav-links">
-    <a href="#">Home</a>
-    <a href="#">TV Guide</a>
-    <a href="#" class="on">Programmes</a>
-    <a href="#">Channels</a>
-    <a href="#">Categories</a>
-  </div>
-  <div class="ip-search">
-    <input type="text" placeholder="Search BBC iPlayer" value="Krombo" />
-    <button>Search</button>
-  </div>
-</div>
+    <nav class="bbc-top-nav">
+      <a href="#">Home</a>
+      <a href="#">News</a>
+      <a href="#">Sport</a>
+      <a href="#" class="on">iPlayer</a>
+      <a href="#">Sounds</a>
+      <a href="#">Bitesize</a>
+      <a href="#">CBBC</a>
+      <a href="#">CBeebies</a>
+      <a href="#">Weather</a>
+      <a href="#">More ▾</a>
+    </nav>
+    <div class="bbc-top-right">
+      <a href="#">Notifications</a>
+      <a href="#" class="bbc-sign-in">Sign In</a>
+    </div>
+  </header>
 
-<div class="bbc-hero">
-  <div class="bbc-hero-inner">
+  <nav class="ip-subnav">
+    <div class="ip-logo">
+      <div class="bbc-logo-block">
+        <span class="bbc-box">B</span><span class="bbc-box">B</span><span class="bbc-box">C</span>
+      </div>
+      <div class="ip-logo-text">i<span>Player</span></div>
+    </div>
+    <div class="ip-nav-links">
+      <a href="#">Home</a>
+      <a href="#">TV Guide</a>
+      <a href="#" class="on">Programmes</a>
+      <a href="#">Channels</a>
+      <a href="#">Categories</a>
+    </div>
+    <div class="ip-search">
+      <input type="text" placeholder="Search BBC iPlayer" value="Krombo" />
+      <button>Search</button>
+    </div>
+  </nav>
 
-    <div class="bbc-player-area">
-      <div class="bbc-player-scene">
-        <div style="position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(0deg,#0a1a08 0%,transparent 100%);"></div>
-        <div style="position:absolute;top:20px;left:0;right:0;height:2px;background:rgba(255,255,255,0.06);"></div>
-        <div style="position:absolute;bottom:40px;left:5%;width:60px;height:120px;background:rgba(20,30,20,0.8);"></div>
-        <div style="position:absolute;bottom:40px;left:12%;width:40px;height:90px;background:rgba(15,25,15,0.8);"></div>
-        <div style="position:absolute;bottom:40px;right:8%;width:80px;height:140px;background:rgba(20,30,20,0.8);"></div>
-        <div style="position:absolute;bottom:40px;right:18%;width:50px;height:100px;background:rgba(15,25,15,0.8);"></div>
-        <div style="position:absolute;bottom:0;left:0;right:0;height:42px;background:rgba(10,15,10,0.9);"></div>
-        <div style="position:absolute;bottom:48px;right:14px;text-align:right;">
-          <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;">BBC Four</div>
-        </div>
-      </div>
-      <div class="bbc-play-overlay">
-        <div class="bbc-avail-badge">Available for 29 days</div>
-        <div class="bbc-play-btn"></div>
-        <div class="bbc-player-label">Episode 1 · 58 mins</div>
-      </div>
+  <section class="hero">
+    <div class="hero-player">
+      <div class="skyline-base"></div>
+      <div class="skyline-line"></div>
+      <div class="bldg bldg-1"></div>
+      <div class="bldg bldg-2"></div>
+      <div class="bldg bldg-3"></div>
+      <div class="bldg bldg-4"></div>
+      <div class="skyline-floor"></div>
+      <div class="ch-watermark">BBC Four</div>
+
+      <div class="play-badge">Available for 29 days</div>
+      <div class="play-btn"></div>
+      <div class="play-label">Episode 1 · 58 mins</div>
     </div>
 
-    <div class="bbc-hero-info">
+    <aside class="hero-info">
       <div>
-        <div class="bbc-channel-badge">
-          <div class="bbc-ch-logo">BBC</div>
-          <div class="bbc-ch-name">BBC FOUR</div>
+        <div class="ch-badge">
+          <span class="ch-logo">BBC</span>
+          <span class="ch-name">BBC FOUR</span>
         </div>
-        <div class="bbc-hero-title">Krombo: On the<br>Streets of Chicago</div>
-        <div class="bbc-hero-ep">Episode 1 · "The Mayor and I"</div>
-        <div class="bbc-hero-desc">
+        <h1 class="hero-title">Krombo: On the<br>Streets of Chicago</h1>
+        <div class="hero-ep">Episode 1 · "The Mayor and I"</div>
+        <p class="hero-desc">
           Presenter Krombopulos Michael visits Chicago to explore the presidency of Rahm Emanuel. He eats a corn dog, he interviews some experts, and things develop from there.
-        </div>
-        <div class="bbc-hero-meta">
+        </p>
+        <div class="hero-meta">
           <div><span>Channel:</span> BBC Four</div>
           <div><span>Year:</span> 2023</div>
           <div><span>Duration:</span> 58 mins per episode</div>
           <div><span>Series:</span> 1 (4 episodes)</div>
         </div>
       </div>
-      <div class="bbc-cta-row">
-        <a href="#" class="bbc-cta">▶ Watch Now</a>
-        <button class="bbc-cta-sec">+ Watchlist</button>
+      <div class="btn-row">
+        <button class="btn-primary">▶ Watch Now</button>
+        <button class="btn-secondary">+ Watchlist</button>
       </div>
-    </div>
+    </aside>
+  </section>
 
-  </div>
-</div>
+  <main class="layout-grid">
+    <div class="main-content">
 
-<div class="bbc-content">
-  <div class="bbc-content-inner">
+      <h2 class="show-title">Krombo: On the<br>Streets of Chicago</h2>
 
-    <div class="bbc-main">
-
-      <div class="bbc-show-title-row">
-        <div class="bbc-show-title-main">Krombo: On the<br>Streets of Chicago</div>
-      </div>
-
-      <div class="bbc-genre-tags">
-        <a href="#" class="bbc-genre-tag primary">Comedy</a>
-        <a href="#" class="bbc-genre-tag">Documentary</a>
-        <a href="#" class="bbc-genre-tag">Satire</a>
-        <a href="#" class="bbc-genre-tag">Current Affairs</a>
-        <a href="#" class="bbc-genre-tag">BBC Four</a>
+      <div class="tags">
+        <a href="#" class="tag primary">Comedy</a>
+        <a href="#" class="tag">Documentary</a>
+        <a href="#" class="tag">Satire</a>
+        <a href="#" class="tag">Current Affairs</a>
+        <a href="#" class="tag">BBC Four</a>
       </div>
 
-      <p class="bbc-synopsis">
+      <p class="synopsis">
         In the tradition of the great outsider documentary, <em>Krombo: On the Streets of Chicago</em> follows television presenter Krombopulos Michael as he sets out to understand the political legacy of President Rahm Emanuel through conversations with academics, political scientists, former staffers, and assorted members of the Chicago public, most of whom immediately regret agreeing to be filmed. Over four episodes, Krombopulos crisscrosses the city in search of answers to questions that range from the genuinely probing to the cosmically wrongheaded, while pausing regularly to purchase and consume food from whatever street vendor happens to be nearby.<br><br>Krombopulos Michael first came to public attention performing impersonations of then-President John McCain at regional comedy nights throughout 2008 and 2009.
       </p>
 
-      <div class="bbc-presenter-quote">
-        <div class="bbc-pq-text">"Oh, I just love meeting people. I love learning things. And I love corn dogs. Honestly, if I could do all three at the same time, every day, I think I'd be satisfied."</div>
-        <div class="bbc-pq-attr">— Krombopulos Michael, Series 1 Press Materials</div>
-      </div>
+      <blockquote class="quote-box">
+        <div class="quote-text">"Oh, I just love meeting people. I love learning things. And I love corn dogs. Honestly, if I could do all three at the same time, every day, I think I'd be satisfied."</div>
+        <div class="quote-attr">— Krombopulos Michael, Series 1 Press Materials</div>
+      </blockquote>
 
-      <div class="bbc-sec-label">Episodes — Series 1 <a href="#">All episodes →</a></div>
+      <div class="section-header">Episodes — Series 1 <a href="#">All episodes →</a></div>
+      <div class="ep-list">
 
-      <div class="bbc-ep-list">
-
-        <div class="bbc-ep current">
-          <div class="bbc-ep-thumb">
-            <div class="bbc-ep-thumb-inner" style="background:linear-gradient(135deg,#0d1a0d 0%,#1a2a18 100%);">
-              <div class="bbc-ep-play-sm"></div>
-              <div class="bbc-ep-duration">58:12</div>
-            </div>
+        <article class="ep-card active">
+          <div class="ep-thumb" style="background: linear-gradient(135deg, #0d1a0d, #1a2a18);">
+            <div class="play-sm"></div>
+            <span class="ep-duration">58:12</span>
           </div>
-          <div class="bbc-ep-info">
-            <div class="bbc-ep-num">Episode 1 · Now Playing</div>
-            <div class="bbc-ep-title">The Mayor and I</div>
-            <div class="bbc-ep-desc">Krombopulos arrives in Chicago and asks a political science professor at the University of Chicago whether President Emanuel "used to be in a different job before, or has it always been this." He then eats a corn dog on the steps of the Richard J. Daley Center while conducting a follow-up interview with a constitutional law expert who has given their name as "Nah." Krombopulos thanks Nah warmly for their time.</div>
-            <div class="bbc-ep-meta">
+          <div class="ep-info">
+            <div class="ep-subtitle">Episode 1 · Now Playing</div>
+            <h3 class="ep-title">The Mayor and I</h3>
+            <p class="ep-desc">Krombopulos arrives in Chicago and asks a political science professor at the University of Chicago whether President Emanuel "used to be in a different job before, or has it always been this." He then eats a corn dog on the steps of the Richard J. Daley Center while conducting a follow-up interview with a constitutional law expert who has given their name as "Nah." Krombopulos thanks Nah warmly for their time.</p>
+            <div class="ep-meta">
               <span>58 mins</span>
-              <span class="bbc-avail">29 days left</span>
+              <span class="badge-green">29 days left</span>
               <span>First shown: 14 Feb 2023</span>
             </div>
           </div>
-        </div>
+        </article>
 
-        <div class="bbc-ep">
-          <div class="bbc-ep-thumb">
-            <div class="bbc-ep-thumb-inner" style="background:linear-gradient(135deg,#1a0d0d 0%,#2a1818 100%);">
-              <div class="bbc-ep-play-sm"></div>
-              <div class="bbc-ep-duration">56:44</div>
-            </div>
+        <article class="ep-card">
+          <div class="ep-thumb" style="background: linear-gradient(135deg, #1a0d0d, #2a1818);">
+            <div class="play-sm"></div>
+            <span class="ep-duration">56:44</span>
           </div>
-          <div class="bbc-ep-info">
-            <div class="bbc-ep-num">Episode 2</div>
-            <div class="bbc-ep-title">The Economy, or Whatever That Is</div>
-            <div class="bbc-ep-desc">Krombopulos investigates Emanuel's economic record with the help of a senior fellow at the Brookings Institution, this time with two corn dogs (mustard and plain), and an interview with a retired city alderman who has given their contact name as "If You Talk To Me Again I'll Beat Your Ass Up." Krombopulos opens the interview by asking: "So, If You Talk To Me Again I'll Beat Your Ass Up — may I call you If? — what do you make of the infrastructure bill?"</div>
-            <div class="bbc-ep-meta">
+          <div class="ep-info">
+            <div class="ep-subtitle">Episode 2</div>
+            <h3 class="ep-title">The Economy, or Whatever That Is</h3>
+            <p class="ep-desc">Krombopulos investigates Emanuel's economic record with the help of a senior fellow at the Brookings Institution, this time with two corn dogs (mustard and plain), and an interview with a retired city alderman who has given their contact name as "If You Talk To Me Again I'll Beat Your Ass Up." Krombopulos opens the interview by asking: "So, If You Talk To Me Again I'll Beat Your Ass Up — may I call you If? — what do you make of the infrastructure bill?"</p>
+            <div class="ep-meta">
               <span>56 mins</span>
-              <span class="bbc-avail">29 days left</span>
+              <span class="badge-green">29 days left</span>
               <span>First shown: 21 Feb 2023</span>
             </div>
           </div>
-        </div>
+        </article>
 
-        <div class="bbc-ep">
-          <div class="bbc-ep-thumb">
-            <div class="bbc-ep-thumb-inner" style="background:linear-gradient(135deg,#0d0d1a 0%,#18182a 100%);">
-              <div class="bbc-ep-play-sm"></div>
-              <div class="bbc-ep-duration">61:02</div>
-            </div>
+        <article class="ep-card">
+          <div class="ep-thumb" style="background: linear-gradient(135deg, #0d0d1a, #18182a);">
+            <div class="play-sm"></div>
+            <span class="ep-duration">61:02</span>
           </div>
-          <div class="bbc-ep-info">
-            <div class="bbc-ep-num">Episode 3</div>
-            <div class="bbc-ep-title">Foreign Policy: A Long Walk</div>
-            <div class="bbc-ep-desc">Attempting to understand the Emanuel administration's foreign policy, Krombopulos walks from the Loop to the lakefront while interviewing a former State Department official and consuming what the production team estimates is his fourteenth corn dog of the shoot. At one point he asks whether the President has ever considered "just not doing foreign policy at all, and seeing how that goes", nothing it went very well for his predecessor Buddy Cianci; he makes no comment.</div>
-            <div class="bbc-ep-meta">
+          <div class="ep-info">
+            <div class="ep-subtitle">Episode 3</div>
+            <h3 class="ep-title">Foreign Policy: A Long Walk</h3>
+            <p class="ep-desc">Attempting to understand the Emanuel administration's foreign policy, Krombopulos walks from the Loop to the lakefront while interviewing a former State Department official and consuming what the production team estimates is his fourteenth corn dog of the shoot. At one point he asks whether the President has ever considered "just not doing foreign policy at all, and seeing how that goes", nothing it went very well for his predecessor Buddy Cianci; he makes no comment.</p>
+            <div class="ep-meta">
               <span>61 mins</span>
-              <span class="bbc-avail">29 days left</span>
+              <span class="badge-green">29 days left</span>
               <span>First shown: 28 Feb 2023</span>
             </div>
           </div>
-        </div>
+        </article>
 
-        <div class="bbc-ep">
-          <div class="bbc-ep-thumb">
-            <div class="bbc-ep-thumb-inner" style="background:linear-gradient(135deg,#1a1a0d 0%,#2a2a18 100%);">
-              <div class="bbc-ep-play-sm"></div>
-              <div class="bbc-ep-duration">63:18</div>
-            </div>
+        <article class="ep-card">
+          <div class="ep-thumb" style="background: linear-gradient(135deg, #1a1a0d, #2a2a18);">
+            <div class="play-sm"></div>
+            <span class="ep-duration">63:18</span>
           </div>
-          <div class="bbc-ep-info">
-            <div class="bbc-ep-num">Episode 4 · Series Finale</div>
-            <div class="bbc-ep-title">The Rahm Legacy</div>
-            <div class="bbc-ep-desc">In the final episode, Krombopulos attempts to synthesise everything he has learned into a concluding assessment of the Emanuel legacy. He is assisted in this by a panel discussion featuring scholars whose names he reads from his clipboard as "Get Away From Me," "Absolutely Not," and "Why Is He Still Here." He thanks them all individually. He then eats a corn dog on the shore of Lake Michigan, facing the water, in silence, for approximately three and a half minutes.</div>
-            <div class="bbc-ep-meta">
+          <div class="ep-info">
+            <div class="ep-subtitle">Episode 4 · Series Finale</div>
+            <h3 class="ep-title">The Rahm Legacy</h3>
+            <p class="ep-desc">In the final episode, Krombopulos attempts to synthesise everything he has learned into a concluding assessment of the Emanuel legacy. He is assisted in this by a panel discussion featuring scholars whose names he reads from his clipboard as "Get Away From Me," "Absolutely Not," and "Why Is He Still Here." He thanks them all individually. He then eats a corn dog on the shore of Lake Michigan, facing the water, in silence, for approximately three and a half minutes.</p>
+            <div class="ep-meta">
               <span>63 mins</span>
-              <span class="bbc-avail expiring">Expires in 2 days</span>
+              <span class="badge-orange">Expires in 2 days</span>
               <span>First shown: 7 Mar 2023</span>
             </div>
           </div>
-        </div>
+        </article>
 
       </div>
 
-      <div class="bbc-sec-label" style="margin-top:20px;">Cast &amp; Crew</div>
-      <div class="bbc-cast-list">
-        <div class="bbc-cast-item"><span class="bbc-cast-role">Presenter</span><span class="bbc-cast-name"><a href="#">Shane Boose</a> as Krombopulos Michael</span></span></div>
-        <div class="bbc-cast-item"><span class="bbc-cast-role">Series Director</span><span class="bbc-cast-name"><a href="#">Charlie Russell</a> <span class="bbc-cast-note">also director, Cunk on Earth</span></span></div>
-        <div class="bbc-cast-item"><span class="bbc-cast-role">Writers</span><span class="bbc-cast-name"><a href="#">Shane Boose</a>, <a href="#">Jason Hazeley</a>, <a href="#">Joel Morris</a></span></div>
-        <div class="bbc-cast-item"><span class="bbc-cast-role">Executive Producers</span><span class="bbc-cast-name"><a href="#">Annabel Jones</a>, <a href="#">Charlie Brooker</a></span></div>
-        <div class="bbc-cast-item"><span class="bbc-cast-role">Production Company</span><span class="bbc-cast-name">House of Tomorrow / BBC Studios</span></div>
-        <div class="bbc-cast-item"><span class="bbc-cast-role">Commissioning Editor</span><span class="bbc-cast-name"><a href="#">BBC Four</a></span></div>
+      <div class="section-header">Cast &amp; crew</div>
+      <div>
+        <div class="cast-item"><span class="cast-role">Presenter</span><span class="cast-name"><a href="#">Shane Boose</a> as Krombopulos Michael</span></div>
+        <div class="cast-item"><span class="cast-role">Series Director</span><span class="cast-name"><a href="#">Charlie Russell</a> <span class="cast-note">also director, Cunk on Earth</span></span></div>
+        <div class="cast-item"><span class="cast-role">Writers</span><span class="cast-name"><a href="#">Shane Boose</a>, <a href="#">Jason Hazeley</a>, <a href="#">Joel Morris</a></span></div>
+        <div class="cast-item"><span class="cast-role">Executive Producers</span><span class="cast-name"><a href="#">Annabel Jones</a>, <a href="#">Charlie Brooker</a></span></div>
+        <div class="cast-item"><span class="cast-role">Production Company</span><span class="cast-name">House of Tomorrow / BBC Studios</span></div>
+        <div class="cast-item"><span class="cast-role">Commissioning Editor</span><span class="cast-name"><a href="#">BBC Four</a></span></div>
       </div>
 
-      <div class="bbc-press-box">
-        <div class="bbc-press-head">Press &amp; Critical Reception</div>
-        <div class="bbc-press-item">
+      <div class="press-box">
+        <div class="press-head">Press &amp; critical reception</div>
+        <div class="press-item">
           "Perhaps the most formally original comedy the BBC has commissioned in a decade. Miraculously, whatever is going on here sustains four hours of television easily, and Michael's interpretation in the show is, without exaggeration, devastating."
-          <div class="bbc-press-src">
-            <span class="bbc-star">★★★★★</span> The Guardian · Stuart Heritage
-          </div>
+          <div class="press-src"><span class="star-rating">★★★★★</span> The Guardian · Stuart Heritage</div>
         </div>
-        <div class="bbc-press-item">
+        <div class="press-item">
           "Boose's performance is a masterclass in committed wrongheadedness, for the lack of a better word. He plays Krombopulos as someone who is entirely present in every conversation, and entirely incorrect about everything he takes from it, and this combination turns out to be as lethal a satirical tool as anything that has been applied to political documentary since <em>The Thick of It</em>. The interview with 'If' in Episode 2 alone is worth the licence fee."
-          <div class="bbc-press-src">
-            <span class="bbc-star">★★★★½</span> The Times · Carol Midgley
-          </div>
+          <div class="press-src"><span class="star-rating">★★★★½</span> The Times · Carol Midgley</div>
         </div>
-        <div class="bbc-press-item">
-          "There is a moment in Episode 4 when Krombopulos, having thanked the panellists 'Get Away From Me,' 'Absolutely Not,' and 'Why Is He Still Here' by name, among others, turns to the camera and says — simply, directly, with absolute sincerity simply says 'I feel like I've really learned something today.' The audience laugh, and then you think about it for a second. Then you stop laughing. Then you sit very quietly for a while wondering what the hell is going on here."
-          <div class="bbc-press-src">
-            <span class="bbc-star">★★★★★</span> Radio Times · Alison Graham
-          </div>
+        <div class="press-item">
+          "There is a moment in Episode 4 when Krombopulos, having thanked the panellists 'Get Away From Me,' 'Absolutely Not,' and 'Why Is He Still Here' by name, among others, turns to the camera and says, with absolute sincerity, 'I feel like I've really learned something today.' The audience laugh, and then you think about it for a second. Then you stop laughing, and then you sit very quietly for a while wondering what the hell is going on here."
+          <div class="press-src"><span class="star-rating">★★★★</span> Radio Times · Alison Graham</div>
         </div>
-        <div class="bbc-press-item">
-          "Won the BAFTA for Best Comedy Programme 2024, and Won the BAFTA for Best Editing. Also nominated for Best Factual Entertainment (the BBC checked whether this was technically possible; it was). The corn dog vendor credited as 'I Will End You' has been nominated for a BAFTA for Best Supporting Performance. Seemingly, this is apparently the first time a person identified only as 'I Will End You' has received a BAFTA nomination, and the BAFTA committee has confirmed they intend to read the name out in full."
-          <div class="bbc-press-src">Source: BAFTA Awards Database, 2024</div>
+        <div class="press-item">
+          "Won the BAFTA for Best Comedy Programme 2024, and Won the BAFTA for Best Editing. Also nominated for Best Factual Entertainment (the BBC checked whether this was technically possible; it was). The corn dog vendor credited as 'I Will End You' has been nominated for a BAFTA for Best Supporting Performance. Curiously, this is apparently the first time a person identified only as 'I Will End You' has received a BAFTA nomination, and the BAFTA committee has confirmed they intend to read the name out in full."
+          <div class="press-src">Source: BAFTA Awards Database, 2024</div>
         </div>
       </div>
 
     </div>
 
-    <div class="bbc-side">
+    <aside class="sidebar">
 
-      <div class="bbc-side-section">
-        <div class="bbc-side-head">Programme Info</div>
-        <table class="bbc-info-table">
+      <div class="sidebar-section">
+        <div class="section-header">Programme Info</div>
+        <table class="info-table">
           <tr><td>Channel</td><td>BBC Four</td></tr>
           <tr><td>Series</td><td>1 (4 episodes)</td></tr>
           <tr><td>Year</td><td>2023</td></tr>
@@ -27659,73 +27107,67 @@ dd {
         </table>
       </div>
 
-      <div class="bbc-side-section">
-        <div class="bbc-side-head">Awards</div>
-        <div style="font-size:12px;line-height:1.7;color:#333;">
-          <div style="margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #f0f0f0;">
-            <div style="font-weight:600;color:#111;">BAFTA 2024</div>
-            <div style="color:#666;font-size:11px;">Best Comedy Programme ✓<br>Best Editing ✓<br>Best Supporting Performance (nom.)<br><span style="font-style:italic;">"I Will End You" · Ep. 3</span></div>
-          </div>
-          <div style="margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #f0f0f0;">
-            <div style="font-weight:600;color:#111;">RTS Awards 2024</div>
-            <div style="color:#666;font-size:11px;">Best Comedy Entertainment ✓<br>Best Presenter (nom.)<br><span style="font-style:italic;">Shane Boose</span></div>
-          </div>
+      <div class="sidebar-section">
+        <div class="section-header">Awards</div>
+        <div class="award-block">
+          <div class="award-title">BAFTA 2024</div>
+          <div class="award-desc">Best Comedy Programme ✓<br>Best Editing ✓<br>Best Supporting Performance (nom.)<br><span class="award-note">"I Will End You" · Ep. 3</span></div>
+        </div>
+        <div class="award-block">
+          <div class="award-title">RTS Awards 2024</div>
+          <div class="award-desc">Best Comedy Entertainment ✓<br>Best Presenter (nom.)<br><span class="award-note">Shane Boose</span></div>
+        </div>
+        <div class="award-block">
+          <div class="award-title">Broadcasting Press Guild</div>
+          <div class="award-desc">Best Comedy Series ✓</div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-header">Also on BBC Four</div>
+        <div class="related-item">
+          <div class="rel-thumb" style="background: linear-gradient(135deg, #1a0a2a, #2a1a3a);"></div>
           <div>
-            <div style="font-weight:600;color:#111;">Broadcasting Press Guild</div>
-            <div style="color:#666;font-size:11px;">Best Comedy Series ✓</div>
+            <div class="rel-title">Cunk on Earth</div>
+            <div class="rel-meta">BBC Two · Series 1</div>
+          </div>
+        </div>
+        <div class="related-item">
+          <div class="rel-thumb" style="background: linear-gradient(135deg, #0a1a0a, #1a2a1a);"></div>
+          <div>
+            <div class="rel-title">This Time with Alan Partridge</div>
+            <div class="rel-meta">BBC One · Series 2</div>
+          </div>
+        </div>
+        <div class="related-item">
+          <div class="rel-thumb" style="background: linear-gradient(135deg, #1a1a0a, #2a2a1a);"></div>
+          <div>
+            <div class="rel-title">Toast of London</div>
+            <div class="rel-meta">Channel 4 · Series 3</div>
           </div>
         </div>
       </div>
 
-      <div class="bbc-side-section">
-        <div class="bbc-side-head">Also on BBC Four</div>
-        <div class="bbc-side-item">
-          <div class="bbc-si-thumb" style="background:linear-gradient(135deg,#1a0a2a 0%,#2a1a3a 100%);"></div>
-          <div class="bbc-si-info">
-            <div class="bbc-si-title">Cunk on Earth</div>
-            <div class="bbc-si-meta">BBC Two · Series 1</div>
-          </div>
-        </div>
-        <div class="bbc-side-item">
-          <div class="bbc-si-thumb" style="background:linear-gradient(135deg,#0a1a0a 0%,#1a2a1a 100%);"></div>
-          <div class="bbc-si-info">
-            <div class="bbc-si-title">This Time with Alan Partridge</div>
-            <div class="bbc-si-meta">BBC One · Series 2</div>
-          </div>
-        </div>
-        <div class="bbc-side-item">
-          <div class="bbc-si-thumb" style="background:linear-gradient(135deg,#1a1a0a 0%,#2a2a1a 100%);"></div>
-          <div class="bbc-si-info">
-            <div class="bbc-si-title">Toast of London</div>
-            <div class="bbc-si-meta">Channel 4 · Series 3</div>
-          </div>
-        </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-logo">
+      <div class="bbc-logo-block">
+        <span class="bbc-box">B</span><span class="bbc-box">B</span><span class="bbc-box">C</span>
       </div>
-
     </div>
-
-  </div>
-</div>
-
-<div class="bbc-footer">
-  <div class="bbc-footer-top">
-    <div class="bbc-footer-logo">
-      <div class="bbc-logo-box" style="background:#fff;color:#bb1919;font-weight:700;font-size:12px;width:20px;height:18px;display:flex;align-items:center;justify-content:center;font-family:Arial;">B</div>
-      <div class="bbc-logo-box" style="background:#fff;color:#bb1919;font-weight:700;font-size:12px;width:20px;height:18px;display:flex;align-items:center;justify-content:center;font-family:Arial;">B</div>
-      <div class="bbc-logo-box" style="background:#fff;color:#bb1919;font-weight:700;font-size:12px;width:20px;height:18px;display:flex;align-items:center;justify-content:center;font-family:Arial;">C</div>
+    <nav class="footer-links">
+      <a href="#">Home</a><a href="#">News</a><a href="#">Sport</a><a href="#">Reel</a>
+      <a href="#">Worklife</a><a href="#">Travel</a><a href="#">Future</a><a href="#">Culture</a>
+      <a href="#">TV</a><a href="#">Weather</a><a href="#">Sounds</a>
+      <a href="#">Terms of Use</a><a href="#">About the BBC</a><a href="#">Privacy Policy</a>
+      <a href="#">Cookies</a><a href="#">Accessibility Help</a><a href="#">Contact the BBC</a>
+    </nav>
+    <div class="footer-copy">
+      Copyright © 2023 BBC. The BBC is not responsible for the content of external sites.
     </div>
-  </div>
-  <div class="bbc-footer-links">
-    <a href="#">Home</a><a href="#">News</a><a href="#">Sport</a><a href="#">Reel</a>
-    <a href="#">Worklife</a><a href="#">Travel</a><a href="#">Future</a><a href="#">Culture</a>
-    <a href="#">TV</a><a href="#">Weather</a><a href="#">Sounds</a>
-    <a href="#">Terms of Use</a><a href="#">About the BBC</a><a href="#">Privacy Policy</a>
-    <a href="#">Cookies</a><a href="#">Accessibility Help</a><a href="#">Contact the BBC</a>
-  </div>
-  <div class="bbc-footer-copy">
-    Copyright © 2023 BBC. The BBC is not responsible for the content of external sites.
-  </div>
-</div>
+  </footer>
 
 </div>`,
 	song: {
@@ -27875,7 +27317,13 @@ dd {
 
   <p>And so Beavis closed his eyes.</p>
 
-</div>`
+</div>`,
+	song: {
+      title: "Something Beautiful Remains (Urban Remix Edit)",
+      artist: "Tina Turner",
+      cover: "https://yt3.googleusercontent.com/yAX83obtuojW8pXa-6z2uZhMpCueCEvTj3aT1GG2ikD4tACQxt1hZVuAllVZNciL3uH-LX8ziXJvC3mBGQ=w544-h544-l90-rj",
+      url: ["fcs-S4c2DBI"]
+    }
   },
   {
     id: "trevor",
@@ -31106,6 +30554,16 @@ endingPicker = (out, totv, aa, quickstats) => {
 	achievements.forEach(({ name, cond }) => {
 	  if (cond()) unlockAchievement(name);
 	});
+
+	// completionist achievement
+	const allKeys = Object.keys(campaignTrail_temp.achievements);
+
+	// check if every achievement in the game (except this one, duh)
+	// exists in the player's unlockedAchievements object
+	const hasAll = allKeys.every(key => key === "Something Beautiful Remains" || unlockedAchievements[key]);
+	if (hasAll) {
+		unlockAchievement("Something Beautiful Remains");
+	}
 
 	// recount checker
     window.isRecountElection = function (marginThreshold = 0.005) {
