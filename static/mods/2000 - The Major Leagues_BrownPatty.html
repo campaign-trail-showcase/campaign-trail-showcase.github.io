@@ -34338,6 +34338,12 @@ async function loadAndDrawCountyMap(mode) {
 
   function updateControls() {
     let ctrl = document.getElementById('map_controls');
+
+	if (ctrl && !document.getElementById('grid_export_btn')) {
+      ctrl.remove();
+      ctrl = null;
+    }
+
     if (ctrl) {
       const t = (id, cond) => { const el = document.getElementById(id); if (el) el.style.display = cond ? 'block' : 'none'; };
       t('senate_controls_container', currentMode === VISUALIZATION_MODES.SENATE_RACES);
@@ -34513,7 +34519,7 @@ async function loadAndDrawCountyMap(mode) {
     aCDiv.appendChild(cmpDiv); issDiv.appendChild(aCDiv); frag.appendChild(issDiv);
 
     const expDiv = cr('div', {}, { marginTop: '8px', borderTop: '1px solid #ccc', paddingTop: '8px' });
-    const expBtn = cr('button', { textContent: 'Export map(s)' }, { fontSize: '11px', padding: '4px', width: '100%', cursor: 'pointer', backgroundColor: '#e6ffe6', border: '1px solid #aaa', borderRadius: '3px', fontWeight: 'bold' });
+    const expBtn = cr('button', { id: 'grid_export_btn', textContent: 'Export map(s)' }, { fontSize: '11px', padding: '4px', width: '100%', cursor: 'pointer', backgroundColor: '#e6ffe6', border: '1px solid #aaa', borderRadius: '3px', fontWeight: 'bold' });
     expBtn.addEventListener('click', openExportDialog);
     expDiv.appendChild(expBtn);
     frag.appendChild(expDiv);
