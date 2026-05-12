@@ -117,11 +117,11 @@ function ensureAchievementStyles() {
 
 
 function ctsAchievement(achievementName, difficultyChecker = true) {
-    const temp = window.campaignTrail_temp;
+    const temp = campaignTrail_temp;
 
     if (!temp?.CTS) return;
-    if (difficultyChecker && temp.difficulty_level_multiplier > 1) return;
-    if (window.cheatsActive) return;
+    if (difficultyChecker && temp.difficulty_level_multiplier > 0.97) return;
+    if (temp?.cheatsActive || campaignTrail_temp?.cheatsActive) return;
 
     // track unlocked achievements to prevent duplicate popups
     window.ctsUnlockedAchievements = window.ctsUnlockedAchievements || new Set();
