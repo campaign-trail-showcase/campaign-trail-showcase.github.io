@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.1.18
+* @version: 1.1.19
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -4462,6 +4462,7 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
     const VOLUME_SLIDER_ID             = "player-volume-slider";
     const REPEAT_BUTTON_ID             = "player-repeat-button";
     const SHUFFLE_BUTTON_ID            = "player-shuffle-button";
+	const FAVORITE_BUTTON_ID           = "player-favorite-button";
     const PLAYER_CONTROL_BUTTON_CLASS  = 'player-control-button';
     const QUEUE_CONTAINER_ID           = "player-queue-container";
     const QUEUE_TITLE_ID               = "player-queue-title";
@@ -4486,6 +4487,8 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
     const ICON_REPEAT_ONE   = `${SVG_HEAD}%3Cpolyline points='17 1 21 5 17 9' /%3E%3Cpath d='M3 11V9a4 4 0 0 1 4-4h14' /%3E%3Cpolyline points='7 23 3 19 7 15' /%3E%3Cpath d='M21 13v2a4 4 0 0 1-4 4H3' /%3E%3Ctext x='10' y='15' font-family='sans-serif' font-size='8' font-weight='bold' stroke='none' fill='${SVG_COLOR}'%3E1%3C/text%3E${SVG_TAIL}`;
     const ICON_SHUFFLE_OFF  = `${SVG_HEAD}%3Cpolyline points='16 3 21 3 21 8' /%3E%3Cline x1='4' y1='20' x2='21' y2='3' opacity='0.3' /%3E%3Cpolyline points='21 16 21 21 16 21' /%3E%3Cline x1='15' y1='15' x2='21' y2='21' opacity='0.3' /%3E%3Cline x1='4' y1='4' x2='9' y2='9' opacity='0.3' /%3E${SVG_TAIL}`;
     const ICON_SHUFFLE_ON   = `${SVG_HEAD}%3Cpolyline points='16 3 21 3 21 8' /%3E%3Cline x1='4' y1='20' x2='21' y2='3' /%3E%3Cpolyline points='21 16 21 21 16 21' /%3E%3Cline x1='15' y1='15' x2='21' y2='21' /%3E%3Cline x1='4' y1='4' x2='9' y2='9' /%3E${SVG_TAIL}`;
+	const ICON_HEART_EMPTY  = `${SVG_HEAD}%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' /%3E${SVG_TAIL}`;
+    const ICON_HEART_FILLED = `${SVG_HEAD}%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' fill='${SVG_COLOR}' /%3E${SVG_TAIL}`;
     const ICON_MINIMIZE     = `${SVG_HEAD}%3Cpolyline points='6 9 12 15 18 9' /%3E${SVG_TAIL}`;
     const ICON_MAXIMIZE     = `${SVG_HEAD}%3Cpolyline points='6 15 12 9 18 15' /%3E${SVG_TAIL}`;
 
@@ -4541,7 +4544,7 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
 
     let playerContainer, playlistSelectorElement;
     let coverElement, titleElement, artistElement, youtubeLinkElement;
-    let playPauseButton, prevButtonElement, nextButtonElement;
+    let playPauseButton, prevButtonElement, nextButtonElement, favoriteButtonElement;
     let progressBar, progressWrapperElement, currentTimeElement, durationElement;
     let volumeIconElement, volumePercentageElement, volumeSlider;
     let repeatButtonElement, shuffleButtonElement;
@@ -4721,6 +4724,87 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
 		if (isQueueSectionExpanded) scrollQueueToActive(currentIndex);
 	}
 
+	function getFavorites() {
+        try { return JSON.parse(localStorage.getItem('musicPlayerFavorites')) || []; } catch(e) { return []; }
+    }
+
+    function saveFavorites(favs) {
+        localStorage.setItem('musicPlayerFavorites', JSON.stringify(favs));
+    }
+
+    function refreshPlaylistsUI() {
+        const favs = getFavorites();
+        PLAYLISTS_DATA = [{ name: "Default Mix", songs: typeof SONGS_DATA !== 'undefined' ? SONGS_DATA : [] }];
+
+        if (favs.length > 0) {
+            PLAYLISTS_DATA.push({ name: "Charlie's Mix", songs: favs });
+        }
+
+        const oldVal = playlistSelectorElement ? playlistSelectorElement.value : "0";
+        if (playlistSelectorElement) {
+            playlistSelectorElement.innerHTML = '';
+            PLAYLISTS_DATA.forEach((pl, index) => {
+                const option = document.createElement("option");
+                option.value = index.toString();
+                option.textContent = pl.name;
+                playlistSelectorElement.appendChild(option);
+            });
+
+            if (oldVal && parseInt(oldVal) < PLAYLISTS_DATA.length) {
+                playlistSelectorElement.value = oldVal;
+            } else {
+                playlistSelectorElement.value = "0";
+                // if they emptied favorites while playing it, revert to default mix
+                if (activePlaylistIndex !== 0 && typeof loadNewPlaylistByIndex === 'function') {
+                    const wasPlaying = hasUserInitiatedPlayback && isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING;
+                    loadNewPlaylistByIndex(0, wasPlaying);
+                }
+            }
+        }
+
+        const selectorContainer = playlistSelectorElement?.closest(`#${PLAYLIST_SELECTOR_CONTAINER_ID}`) || document.getElementById(PLAYLIST_SELECTOR_CONTAINER_ID);
+        if (selectorContainer) {
+            selectorContainer.style.display = PLAYLISTS_DATA.length > 1 ? 'flex' : 'none';
+        }
+    }
+
+    function updateFavoriteButtonUI() {
+        if (!favoriteButtonElement) return;
+        const currentSong = playlist?.getCurrentSong();
+        const img = favoriteButtonElement.querySelector('img');
+        if (!currentSong) {
+            if (img) img.src = ICON_HEART_EMPTY;
+            return;
+        }
+        const favs = getFavorites();
+        const songId = currentSong.videoIds[0];
+        const isFav = favs.some(s => (s.videoIds ? s.videoIds[0] : s.videoId) === songId);
+        if (img) img.src = isFav ? ICON_HEART_FILLED : ICON_HEART_EMPTY;
+    }
+
+    function toggleFavorite() {
+        const currentSong = playlist?.getCurrentSong();
+        if (!currentSong) return;
+
+        const favs = getFavorites();
+        const songId = currentSong.videoIds[0];
+        const existingIdx = favs.findIndex(s => (s.videoIds ? s.videoIds[0] : s.videoId) === songId);
+
+        if (existingIdx >= 0) {
+            favs.splice(existingIdx, 1);
+        } else {
+            favs.push({
+                title: currentSong.title,
+                artist: currentSong.artist,
+                coverLink: currentSong.coverLink,
+                videoIds: currentSong.videoIds
+            });
+        }
+        saveFavorites(favs);
+        refreshPlaylistsUI();
+        updateFavoriteButtonUI();
+    }
+
     function updateUI() {
         if (!coverElement || !titleElement || !artistElement || !youtubeLinkElement) return;
         const currentSong = playlist?.getCurrentSong();
@@ -4762,6 +4846,7 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
         updateVolumeIcon();
         updateRepeatButtonUI();
         updateShuffleButtonUI();
+		updateFavoriteButtonUI();
         if (playlistSelectorElement && playlistSelectorElement.value !== activePlaylistIndex.toString()) {
             playlistSelectorElement.value = activePlaylistIndex.toString();
         }
@@ -5140,7 +5225,6 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
         playlistSelectorElement.id = PLAYLIST_SELECTOR_ID;
         playlistSelectorElement.title = "Select playlist";
         selectorContainer.appendChild(playlistSelectorElement);
-        rightPanel.appendChild(selectorContainer);
 
         const infoContainer     = document.createElement("div"); infoContainer.id = "player-info-container";
         const songInfo          = document.createElement("div"); songInfo.id       = "player-song-info";
@@ -5197,8 +5281,12 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
         repeatButtonElement       = document.createElement("button"); repeatButtonElement.id = REPEAT_BUTTON_ID; repeatButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-repeat-button');
         const repeatIcon          = document.createElement("img"); repeatIcon.alt = ""; repeatIcon.src = ICON_REPEAT_NONE; repeatButtonElement.appendChild(repeatIcon);
 
-        controls.append(shuffleButtonElement, prevButtonElement, playPauseButton, nextButtonElement, repeatButtonElement);
-        controlsContainer.appendChild(controls);
+        favoriteButtonElement     = document.createElement("button"); favoriteButtonElement.id = FAVORITE_BUTTON_ID; favoriteButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-favorite-button'); favoriteButtonElement.title = "Favorite";
+        const favIcon             = document.createElement("img"); favIcon.alt = "Favorite"; favIcon.src = ICON_HEART_EMPTY; favoriteButtonElement.appendChild(favIcon);
+
+        controls.append(shuffleButtonElement, prevButtonElement, playPauseButton, nextButtonElement, repeatButtonElement, favoriteButtonElement);
+		controlsContainer.appendChild(controls);
+		controlsContainer.appendChild(selectorContainer);
 
         const volContainer        = document.createElement("div"); volContainer.id = VOLUME_CONTAINER_ID;
         volumeIconElement         = document.createElement("img"); volumeIconElement.id = VOLUME_ICON_ID; volumeIconElement.alt = "Mute"; volumeIconElement.title = "Mute/Unmute"; volumeIconElement.style.cursor = 'pointer'; volumeIconElement.src = ICON_VOLUME;
@@ -5244,6 +5332,7 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
 
         repeatButtonElement.addEventListener("click", toggleRepeatMode);
         shuffleButtonElement.addEventListener("click", toggleShuffleMode);
+		favoriteButtonElement.addEventListener("click", toggleFavorite);
         volumeIconElement.addEventListener("click", toggleMute);
         queueTitleElement.addEventListener('click', toggleQueueExpansion);
 
@@ -5330,7 +5419,12 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
             #player-main-area { display: flex; flex-direction: column; }
             #${PLAYER_MAIN_CONTENT_ID} { display: flex; align-items: flex-start; gap: 20px; width: 100%; }
             #${PLAYER_RIGHT_PANEL_ID} { display: flex; flex-direction: column; flex-grow: 1; min-width: 0; }
-            #${PLAYLIST_SELECTOR_CONTAINER_ID} { display: none; }
+            #${PLAYLIST_SELECTOR_CONTAINER_ID} { display: none; align-items: center; gap: 8px; margin-left: auto; }
+            #${PLAYLIST_SELECTOR_CONTAINER_ID} label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin: 0; }
+            #${PLAYLIST_SELECTOR_ID} { background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.2); border-radius: 4px; padding: 2px 6px; font-family: inherit; font-size: 11px; color: var(--text-primary); cursor: pointer; outline: none; transition: background 0.2s; }
+            #${PLAYLIST_SELECTOR_ID}:hover { background: rgba(255,255,255,0.8); }
+
+			#player-playlist-selector { margin: 0 5px; padding: 2px; }
             .hidden { display: none !important; }
 
             #${MINIMIZE_BUTTON_ID} {
@@ -5417,8 +5511,8 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
             .${PLAYER_CONTROL_BUTTON_CLASS}:hover img { opacity: 1; filter: brightness(0.8); }
 
             #${PLAY_PAUSE_BUTTON_ID} { width: 42px; height: 42px; }
-            .player-repeat-button, .player-shuffle-button { width: 26px; height: 26px; background: transparent; border: none; box-shadow: none; }
-            .player-repeat-button:hover, .player-shuffle-button:hover { background: rgba(255,255,255,0.5); box-shadow: 0 0 0 1px rgba(0,0,0,0.1); }
+            .player-repeat-button, .player-shuffle-button, .player-favorite-button { width: 26px; height: 26px; background: transparent; border: none; box-shadow: none; }
+            .player-repeat-button:hover, .player-shuffle-button:hover, .player-favorite-button:hover { background: rgba(255,255,255,0.5); box-shadow: 0 0 0 1px rgba(0,0,0,0.1); }
             .player-repeat-button.repeat-active, .player-shuffle-button.shuffle-active { background: #fff; box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2); }
 
             #${VOLUME_CONTAINER_ID} { display: flex; align-items: center; gap: 8px; }
@@ -5491,10 +5585,12 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
             #${PLAYER_ELEMENT_ID}.minimized #player-controls-container { display: contents; }
             #${PLAYER_ELEMENT_ID}.minimized #player-controls { order: 2; gap: 6px; }
             #${PLAYER_ELEMENT_ID}.minimized .player-repeat-button,
-            #${PLAYER_ELEMENT_ID}.minimized .player-shuffle-button { display: none; }
+            #${PLAYER_ELEMENT_ID}.minimized .player-shuffle-button,
+            #${PLAYER_ELEMENT_ID}.minimized .player-favorite-button { display: none; }
             #${PLAYER_ELEMENT_ID}.minimized #${PROGRESS_BAR_CONTAINER_ID} { order: 3; flex: 1; margin: 0; background: transparent; border: none; padding: 0; }
             #${PLAYER_ELEMENT_ID}.minimized #${VOLUME_CONTAINER_ID} { order: 4; }
-            #${PLAYER_ELEMENT_ID}.minimized #${QUEUE_CONTAINER_ID} { display: none !important; }
+			#${PLAYER_ELEMENT_ID}.minimized #${QUEUE_CONTAINER_ID},
+            #${PLAYER_ELEMENT_ID}.minimized #${PLAYLIST_SELECTOR_CONTAINER_ID} { display: none !important; }
 
             @media (max-width: 600px) {
                 #${PLAYER_ELEMENT_ID}:not(.minimized) { --cover-art-size: 160px; padding: 12px; }
@@ -5504,6 +5600,7 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
                 #${PLAYER_ELEMENT_ID}:not(.minimized) #player-info-container { text-align: center; }
                 #${PLAYER_ELEMENT_ID}:not(.minimized) .${TITLE_LINE_WRAPPER_CLASS} { justify-content: center; }
                 #${PLAYER_ELEMENT_ID}:not(.minimized) #player-controls-container { flex-direction: column; gap: 12px; }
+				#${PLAYER_ELEMENT_ID}:not(.minimized) #${PLAYLIST_SELECTOR_CONTAINER_ID} { margin-left: 0; }
                 #${PLAYER_ELEMENT_ID}:not(.minimized) #${VOLUME_PERCENTAGE_ID} { display: none; }
                 #${PLAYER_ELEMENT_ID}.minimized #${PLAYER_RIGHT_PANEL_ID} { gap: 8px; }
                 #${PLAYER_ELEMENT_ID}.minimized #player-info-container { flex: 1; }
@@ -5550,25 +5647,15 @@ for (const prop of ['questions_json', 'answers_json', 'answer_feedback_json']) {
 
     async function initializeMusicPlayer() {
         try {
-            PLAYLISTS_DATA = [{ name: "Default Mix", songs: SONGS_DATA }];
+            const playerFragment = createPlayerElements();
+
+            refreshPlaylistsUI();
 
             const initialSongs = PLAYLISTS_DATA[0]?.songs.length
                 ? PLAYLISTS_DATA[0].songs.map(d => new Song(d.title, d.artist, d.coverLink, d.videoIds || d.videoId))
                 : [];
             originalSongOrderForCurrentPlaylist = [...initialSongs];
             playlist = new Playlist(initialSongs);
-
-            const playerFragment = createPlayerElements();
-
-            if (PLAYLISTS_DATA.length > 0) {
-                PLAYLISTS_DATA.forEach((pl, index) => {
-                    const option       = document.createElement("option");
-                    option.value       = index.toString();
-                    option.textContent = pl.name;
-                    playlistSelectorElement.appendChild(option);
-                });
-                playlistSelectorElement.value = "0";
-            }
 
             const anchor         = document.getElementById("game_window");
             const targetParent   = anchor?.parentNode ?? document.body;
