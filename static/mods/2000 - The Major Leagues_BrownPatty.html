@@ -10368,7 +10368,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 12415,
             "candidate": 78,
-            "answer_feedback": "Sure enough, you walk out of the office feeling two inches tall. The next morning, you read a pre-written, administration-approved apology over the PA system,  combined with half a dozen accolades of future Hall of Famer Othmar himself. As appeased as he is, you rapidly find out several of your supporters are, in fact, not."
+            "answer_feedback": "Sure enough, you walk out of the office feeling two inches tall. The next morning, you read a pre-written, administration-approved apology over the PA system, combined with half a dozen accolades of future Hall of Famer Othmar himself. As appeased as he is, you rapidly find out several of your supporters are, in fact, not."
         }
     },
     {
@@ -11021,6 +11021,18 @@ cyoAdventure = function (a) {
     if ([3324, 3332, 3399, 12240, 12415].includes(ans)) support_admin += 1;
     if ([3311, 3330, 3331, 3346, 3367, 3381, 3382, 3397, 3398, 3410, 3501, 12423, 12431, 12465].includes(ans)) support_admin -= 1;
 
+    // it's royin' time
+	if ((ans === 12440 || ans === 3429) && !window.isRoyInCharge) {
+		window.isRoyInCharge = true;
+
+		campaignTrail_temp.running_mate_image_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy.jpg";
+		campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy_advisor2.png";
+		CENTER_IMAGE_URL = "https://i.pinimg.com/1200x/4b/38/7d/4b387d964d5502f237e4951befc19adb.jpg";
+
+        // as Patty stepped down
+		questionSwapper(375, 430);
+	}
+
 	// other stuff
 	// psst: noCounter value should be question no. - 1
 	if (e.noCounter === 7) {
@@ -11035,23 +11047,6 @@ cyoAdventure = function (a) {
         }
     }
 
-	if (e.noCounter === 17) {
-		if (ruthlessness >= 4) {
-			answerSwapper(3360, 12379, true);
-			answerSwapper(3361, 12390, true);
-		} else if (linus_bond >= 3) {
-			answerSwapper(3359, 12395, true);
-		}
-	}
-
-	if (e.noCounter === 18) {
-		if (ruthlessness >= 5 & linus_bond < 3) {
-			answerSwapper(3386, 12401, true);
-		} else if (ruthlessness < 5 && linus_bond >= 3) {
-			answerSwapper(3386, 12407, true);
-		}
-	}
-
 	// spooky variable changes
 	// Lucy's offer
 	if (e.noCounter === 4) {
@@ -11062,7 +11057,7 @@ cyoAdventure = function (a) {
 			} else if (cynicism >= 2) {
 				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>“You look like shit, Charlie,” she says flatly, staring into her black coffee. “And my brother isn’t looking much better. People are shitting on him from such a height, that I think God himself has crapped on him. Good news is, I have dirt on him that would end his pathetic little campaign right now. Just… take it. End this before you two kill each other. How’s that?”";
 
-				updateFeedback(3334, "You tell her you aren’t going to win like this. You expect her to sneer, or yell, or call you a blockhead. But she doesn’t. Lucy watches you for a long, quiet moment, the hard lines of her face softening into something that looks uncomfortably like pity.<br><br>”You know, Charlie Brown,” she says softly, stopping her spoon. “I offered you this because I thought you wanted to survive. But you two are just going to bleed each other dry, aren’t you?” She slides the folder back into her bag without another word. Patty is furious when she finds out, but as you walk home, you can’t stop thinking about the look in Lucy’s eyes.");
+				updateFeedback(3334, "You tell her you aren’t going to win like this. You expect her to sneer, or yell, or call you a blockhead. But she doesn’t. Lucy watches you for a long, quiet moment, the hard lines of her face softening into something that looks uncomfortably like pity.<br><br>“You know, Charlie Brown,” she says softly, stopping her spoon. “I offered you this because I thought you wanted to survive. But you two are just going to bleed each other dry, aren’t you?” She slides the folder back into her bag without another word. Patty is furious when she finds out, but as you walk home, you can’t stop thinking about the look in Lucy’s eyes.");
 
 			} else {
 				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>“You’re too soft, Charlie Brown,” she sighs, stirring her coffee with visible disappointment. “But my brother is an arrogant prick who thinks he’s Mr. Big, or something. I have dirt on him that would end his pathetic little campaign. The question is: do you actually have the spine to use it, blockhead?”";
@@ -11100,6 +11095,11 @@ cyoAdventure = function (a) {
 				q347.fields.description = "You and Linus agreed to a debate in the gym. He’s standing at his podium in a goddamn sweater vest, talking about “leaving childish things behind” and “stepping into the future of our school,” among other stuff. He actually gives you a polite, somewhat melancholic nod before he begins. It makes it a lot harder to be angry at him. In fact, you don’t even think his sweater is that bad in the first place. <i>Damn.</i> After a round of applause, the moderator turns to you. You have the floor.";
 			}
 		}
+
+        if (window.isRoyInCharge) {
+            // ooooh flimsy Roy, where did you go, what have you seen
+            updateFeedback(3326, "Roy lets out a low, impressed whistle from the front row. Oh, he thought this debate was going to be completely lame, but watching you metaphorically execute Linus on stage has fully captured his attention. Linus is no golden boy, and thanks to you, everyone knows it.");
+        }
 	}
 
 	// approaching the locker break-in
@@ -11128,6 +11128,10 @@ cyoAdventure = function (a) {
 				updateFeedback(3337, "You open the passenger door and step back out into the downpour without looking at him, slamming it shut behind you just hard enough to rock the station wagon on its suspension, and you walk away down the shoulder of the road, with the rain streaming down your face and your shoes filling with water. You’re not going to let him hurt you anymore.<br><br>As Linus watches you go, his expression darkens as he realizes that, perhaps, that you aren’t just trying to win anymore… you’re trying to destroy him. And he’s going to have to fight back.");
 			}
 		}
+
+        if (window.isRoyInCharge) {
+            updateFeedback(3338, "The truce takes effect immediately. Roy is noticeably bummed out when you tell him; he was really hoping someone would throw a punch by Friday. As the final week of the campaign is drained of venom, much to his disappointment, he wonders if there’s something else going on between you two.");
+        }
 	}
 
 	// Franklin's endorsement
@@ -11156,7 +11160,6 @@ cyoAdventure = function (a) {
 				// more revolutionary-like
 				q352.fields.description = "Franklin stops you by the lockers after third period. He’s the current Student Council Vice President, and perhaps one of the few people in this building whom you can trust. Even the administration respects his authority, which is more than you can say for anyone else under the age of forty in this building. “Charlie, I want to endorse you,” he says, his voice low enough that the passing students can’t hear. “But I think your platform is too radical. Really, like half the kids think you’re going to dismantle the entire council system if you win. If you cut down on your revolutionary talk, and promise some stability, then I’ll bring the moderates to your side. No daylight, <i>capiche</i>?”";
 
-				// Update Feedback
 				updateFeedback(3344, "Franklin sighs, adjusting his backpack. He respects your integrity, surely, but he thinks you’re committing political suicide. Many times, actually. He walks away down the hall without another word. When she finds out there was no deal, Patty groans that you just threw away the easiest endorsement of the campaign, but your die-hard supporters are thrilled you didn’t sell out.");
 				updateFeedback(3345, "Remarkably, Franklin is relieved, and he publicly endorses you the next morning. However, your pivot to the center is not received so well by your more populist base. The burnouts and idealists who flocked to your campaign because you promised real change now see you as just another fake politician. Looks like we’re gonna have to brush up your reputation again.");
 
@@ -11167,6 +11170,10 @@ cyoAdventure = function (a) {
 				}
 			}
 		}
+
+        if (window.isRoyInCharge) {
+            updateFeedback(3344, "Franklin sighs, adjusting his backpack on his shoulder before walking away down the hall without another word, seemingly refusing to endorse either candidate. Curiously, Roy seems to be unbothered by your words. “Middle-of-the-road guys are always total narcs anyway, man.”");
+        }
 	}
 
 	// approaching the rumors
@@ -11181,7 +11188,30 @@ cyoAdventure = function (a) {
 				q358.fields.description = "A rumor’s been making the rounds, slipping from bathroom stalls to lunch tables, to the back rows where people think teachers can’t hear them: Charlie Brown’s been seeing a shrink. They say you’ve got a “depressive disorder,” that you’re not fit to be Council President, that you’re too fragile, soft, and damaged to lead. They think you’re <i>weak</i>. You know exactly where this originated; you should’ve never trusted Lucy and that five-cent psychiatric booth she used to run. No way she ever tossed your file. And meanwhile, Linus’s camp is playing the pity card, acting “concerned” about your mental well-being to make you look incredibly weak.";
 			}
 		}
+
+        if (window.isRoyInCharge) {
+            updateFeedback(3366, "Your ability to fuck things up at a moment’s notice amazes me.");
+            updateFeedback(3368, "You don’t get it, you really don’t. Why can’t people understand it? Is the problem that Charlie Brown is too sad, or is the problem that Linus Van Pelt isn’t sad enough? Against his will, Roy writes down your words and by the next day, the school hallways are filled with flyers from so-called Brownites who appreciate your words of wisdom.");
+        }
 	}
+
+    if (e.noCounter === 14) {
+        if (window.isRoyInCharge) {
+            updateFeedback(3381, "Roy, who has actually slept through that particular history teacher’s class all semester, entirely agrees with you. While a few of the more strategic kids in your camp groan that you just handed Linus the moral high ground, all Roy does is tell them to “take a chill pill.”");
+            updateFeedback(12423, "Othmar stops drumming his fingers, and a bead of sweat forms on his temple. He may hate you, but he loves his pension more. Finally, he gives you a tight, furious nod and dismisses you. By the time you find Roy at his locker and tell him you just extorted the principal, he stares at you like you’re a rockstar. <i>His</i> rockstar.");
+
+            // if you're not at all clean
+            if (ruthlessness >= 3) {
+                updateFeedback(3383, "You feel like a massive hypocrite lecturing people about decency when you’ve spent the last two months slinging mud. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
+            } else {
+                updateFeedback(3383, "You feel exhausted lecturing people about decency when you’ve spent the last two months trying to keep your head above water. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
+            }
+        } else {
+            if (ruthlessness < 3) {
+                updateFeedback(3383, "You feel exhausted lecturing people about decency when you’ve spent the last two months trying to keep your head above water in this vicious environment, but Patty assures you, with a genuine smile, that the audience really resonated with your sincerity.");
+            }
+        }
+    }
 
 	// Sunday town hall
 	if (e.noCounter === 16) {
@@ -11193,8 +11223,14 @@ cyoAdventure = function (a) {
 				updateFeedback(3489, "Marcie shows up forty-five minutes later with a photographer (her cousin Maynard) and a fresh cassette in her recorder, finding you lying on top of the doghouse, wearing a wrinkled flannel shirt and sneakers with no socks, and all she says is that you look like shit. Maybe you do. The interview you have with her is probably the hardest of your life, but you can’t help but chuckle at all the silly faces they make to cheer you up.");
 			} else if (cynicism <= 0) {
 				q391.fields.description = "It’s Sunday morning. The campaign has let you very much exhausted, despite everything. Your internal polls (courtesy of Pig-Pen) miraculously show a dead heat, as hard as it is to believe. It fills you up with hope, though. You are scheduled for a town hall-style forum in the cafeteria at noon, where the school paper’s editorial board and a gym full of undecided voters are waiting for you to give them a reason. It’s a gray November morning, and as you climb on top of your old red doghouse, you look up at the clouds and gather your strength. Do you really need to go?";
-			}
+			} else if (ruthlessness < 3) {
+                q391.fields.description = "It’s Sunday morning. The campaign has ground you down to powder, to calcium dust, to whatever the hell is left of a person after two months of giving everything they have to the voters. Your internal polls miraculously show, despite everything, a dead heat, even if you find Pig-Pen’s data unreliable. You are scheduled for a town hall-style forum in the cafeteria at noon, where the school paper’s editorial board and a gym full of undecided voters are waiting for you to give them a reason. It’s a gray November morning, and as you climb on top of your old red doghouse, you lie on your back and wonder if you should really go.";
+            }
 		}
+
+        if (window.isRoyInCharge) {
+            updateFeedback(3487, "You lie on the doghouse for a whopping six hours. Roy, who was supposed to cover for your absence at the town hall, apparently told the auditorium you got abducted by aliens or had a vision quest. Nobody believes him, but at least he tried. Kind of.");
+        }
 	}
 
 	if (e.noCounter === 17) {
@@ -11202,72 +11238,61 @@ cyoAdventure = function (a) {
 		if (q356 && cynicism >= 4) {
 			q356.fields.description = "The boys’ bathroom door swings shut behind you, and, surprise surprise, there’s Linus at the sinks, with his hands under the water like he forgot why he turned it on. You notice, under the stuttering light, that the bags under his eyes are just as dark as yours. Maybe he’s tired, just like you are. He watches you in the mirror for a moment, then turns the faucet off and speaks without turning around. “Is this what we wanted, Charlie?” he says quietly. “Tearing each other apart over something so… simple?”";
 		}
+
+        if (ruthlessness >= 4) {
+			answerSwapper(3360, 12379, true);
+			answerSwapper(3361, 12390, true);
+		} else if (linus_bond >= 3) {
+			answerSwapper(3359, 12395, true);
+		}
 	}
 
-	// it's royin' time
-	if ((ans === 12440 || ans === 3429) && !window.isRoyInCharge) {
-		window.isRoyInCharge = true;
+    if (e.noCounter === 18) {
+		if (ruthlessness >= 5 && linus_bond < 3) {
+			answerSwapper(3386, 12401, true);
+		} else if (ruthlessness < 5 && linus_bond >= 3) {
+			answerSwapper(3386, 12407, true);
+		}
 
-		campaignTrail_temp.running_mate_image_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy.jpg";
-		campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://file.garden/aNtAfG887DiA_7lO/TML_2000/roy_advisor2.png";
+        if (window.isRoyInCharge) {
+            // shameless rewrites to fit in Roy
+            const q363 = campaignTrail_temp.questions_json.find(q => q.pk === 363);
+            if (q363) {
+                q363.fields.description = "It’s unbelievable. Roy somehow managed to acquire the keys to the main office PA system. You don’t ask how. “You have two minutes before the janitor finishes his rounds, dude,” he whispers to you. “Broadcast a, uh, final message to the whole school. And quick, too. Make it count.” You sit down in the principal’s swivel chair, pull the microphone toward you, and click it on. As the red broadcast light glows steady in the dark room, it casts long shadows across the filing cabinets and the framed portraits of former principals, who all look vaguely disappointed in you.";
+            }
 
-		CENTER_IMAGE_URL = "https://i.pinimg.com/1200x/4b/38/7d/4b387d964d5502f237e4951befc19adb.jpg";
-
-		questionSwapper(375, 430); // as Patty stepped down
-	}
-
-	if (window.isRoyInCharge) {
-		// shameless rewrites to fit in Roy
-        const q363 = campaignTrail_temp.questions_json.find(q => q.pk === 363);
-        if (q363) {
-            q363.fields.description = "It’s unbelievable. Roy somehow managed to acquire the keys to the main office PA system. You don’t ask how. “You have two minutes before the janitor finishes his rounds, dude,” he whispers to you. “Broadcast a, uh, final message to the whole school. And quick, too. Make it count.” You sit down in the principal’s swivel chair, pull the microphone toward you, and click it on. As the red broadcast light glows steady in the dark room, it casts long shadows across the filing cabinets and the framed portraits of former principals, who all look vaguely disappointed in you.";
-        }
-
-        const q360 = campaignTrail_temp.questions_json.find(q => q.pk === 360);
-        if (q360) {
-            q360.fields.description = "It’s Election Night, and the rain hasn’t stopped since three o’clock. Roy called from a payphone to drag you down to the watch party at the bowling alley, but you told him you were done for the night and hung up. You couldn’t stomach the noise, the plastic cups, or the anxious stares. Tired, you walked home alone in the dark.<br><br>Soaking wet, you sink into the living room couch and turn on the television. On the screen, you sigh as national anchors sweat over razor-thin margins in places you never heard of; the whole world feels like it’s fracturing. Then, you hear the soft clicking of claws on the linoleum as Snoopy walks in. He’s a bit older now, but remains as wise as always. He rests his heavy chin on your knee, looking up with quiet eyes, as the weight of the last two months finally crashes down on you.";
-        }
-
-        // ooooh flimsy Roy, where did you go, what have you seen
-		updateFeedback(3326, "Roy lets out a low, impressed whistle from the front row. Oh, he thought this debate was going to be completely lame, but watching you metaphorically execute Linus on stage has fully captured his attention. Linus is no golden boy, and thanks to you, everyone knows it.");
-		updateFeedback(3344, "Franklin sighs, adjusting his backpack on his shoulder before walking away down the hall without another word, seemingly refusing to endorse either candidate. Curiously, Roy seems to be unbothered by your words. “Middle-of-the-road guys are always total narcs anyway, man.”");
-		updateFeedback(3366, "Your ability to fuck things up at a moment’s notice amazes me.");
-		updateFeedback(3368, "You don’t get it, you really don’t. Why can’t people understand it? Is the problem that Charlie Brown is too sad, or is the problem that Linus Van Pelt isn’t sad enough? Against his will, Roy writes down your words and by the next day, the school hallways are filled with flyers from so-called Brownites who appreciate your words of wisdom.");
-		updateFeedback(3381, "Roy, who has actually slept through that particular history teacher’s class all semester, entirely agrees with you. While a few of the more strategic kids in your camp groan that you just handed Linus the moral high ground, all Roy does is tell them to “take a chill pill.”");
-        updateFeedback(3385, "“Well, at least you’ve never been a buzzkill,” Roy laughs as you both scramble out the side door before the janitor catches you. He tosses you a half-empty bag of chips as a reward once you hit the parking lot. You guess you’ve had worse speech coaches.");
-		updateFeedback(3386, "“Damn, Chuck. Remind me never to get on your bad side,” Roy mutters as you cut the mic. He’s laughing, but even he looks a little unnerved by how incredibly cold you sounded. It amazes a couple of students who had not seen the dark side of your campaign.");
-		updateFeedback(3387, "You click the microphone off, exhaustion written all over your face. Roy blinks, slightly out of his depth, though he seems genuinely surprised, and awkwardly offers you a sip of his Sprite®. You decline, but walk out into the empty hallway feeling a little less heavy.");
-		updateFeedback(3487, "You lie on the doghouse for a whopping six hours. Roy, who was supposed to cover for your absence at the town hall, apparently told the auditorium you got abducted by aliens or had a vision quest. Nobody believes him, but at least he tried. Kind of.");
-		updateFeedback(3338, "The truce takes effect immediately. Roy is noticeably bummed out when you tell him; he was really hoping someone would throw a punch by Friday. As the final week of the campaign is drained of venom, much to his disappointment, he wonders if there’s something else going on between you two.");
-		updateFeedback(12424, "Othmar stops drumming his fingers, and a bead of sweat forms on his temple. He may hate you, but he loves his pension more. Finally, he gives you a tight, furious nod and dismisses you. By the time you find Roy at his locker and tell him you just extorted the principal, he stares at you like you’re a rockstar. <i>His</i> rockstar.");
-		updateFeedback(12401, "Of course, Roy lets out a loud, obnoxious laugh as the broadcast ends. He’s eating this drama up like it’s prime-time television. Last time you saw him this happy was when you loaned him 200 bucks so he could visit his grandma in Peru. In the hallways, however, the silence of the student body is absolutely deafening.");
-		updateFeedback(12407, "Roy looks intensely disappointed, having tuned in hoping for a total meltdown. “This is… uh… a bit anti-climactic, don’t you think?” And he sighs. But when you click the microphone off, you ignore him, feeling a massive weight lift off your chest. For the first time in weeks, you think, you can breathe.");
-
-		if (ruthlessness >= 3) { // if you're not at all clean
-            updateFeedback(3383, "You feel like a massive hypocrite lecturing people about decency when you’ve spent the last two months slinging mud. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
-			updateFeedback(3375, "The words crack in your throat, apologizing to him, but also to yourself, to Linus, to Patty, to Roy (wherever he is right now), and to the kid you once used to be. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+            updateFeedback(3385, "“Well, at least you’ve never been a buzzkill,” Roy laughs as you both scramble out the side door before the janitor catches you. He tosses you a half-empty bag of chips as a reward once you hit the parking lot. You guess you’ve had worse speech coaches.");
+            updateFeedback(3386, "“Damn, Chuck. Remind me never to get on your bad side,” Roy mutters as you cut the mic. He’s laughing, but even he looks a little unnerved by how incredibly cold you sounded. It amazes a couple of students who had not seen the dark side of your campaign.");
+            updateFeedback(3387, "You click the microphone off, exhaustion written all over your face. Roy blinks, slightly out of his depth, though he seems genuinely surprised, and awkwardly offers you a sip of his Sprite®. You decline, but walk out into the empty hallway feeling a little less heavy.");
+            updateFeedback(12401, "Of course, Roy lets out a loud, obnoxious laugh as the broadcast ends. He’s eating this drama up like it’s prime-time television. Last time you saw him this happy was when you loaned him 200 bucks so he could visit his grandma in Peru. In the hallways, however, the silence of the student body is absolutely deafening.");
+            updateFeedback(12407, "Roy looks intensely disappointed, having tuned in hoping for a total meltdown. “This is… uh… a bit anti-climactic, don’t you think?” And he sighs. But when you click the microphone off, you ignore him, feeling a massive weight lift off your chest. For the first time in weeks, you think, you can breathe.");
         }
 	}
 
-	// narrative adjustments in general
+    if (e.noCounter === 19) {
+        // narrative adjustments in general
+        if (window.isRoyInCharge) {
+            const q360 = campaignTrail_temp.questions_json.find(q => q.pk === 360);
+            if (q360) {
+                q360.fields.description = "It’s Election Night, and the rain hasn’t stopped since three o’clock. Roy called from a payphone to drag you down to the watch party at the bowling alley, but you told him you were done for the night and hung up. You couldn’t stomach the noise, the plastic cups, or the anxious stares. Tired, you walked home alone in the dark.<br><br>Soaking wet, you sink into the living room couch and turn on the television. On the screen, you sigh as national anchors sweat over razor-thin margins in places you never heard of; the whole world feels like it’s fracturing. Then, you hear the soft clicking of claws on the linoleum as Snoopy walks in. He’s a bit older now, but remains as wise as always. He rests his heavy chin on your knee, looking up with quiet eyes, as the weight of the last two months finally crashes down on you.";
+            }
 
-	// clean-ish? campaign
-    if (ruthlessness < 3) {
-        const q391 = campaignTrail_temp.questions_json.find(q => q.pk === 391);
-        if (q391) {
-            q391.fields.description = "It’s Sunday morning. The campaign has ground you down to powder, to calcium dust, to whatever the hell is left of a person after two months of giving everything they have to the voters. Your internal polls miraculously show, despite everything, a dead heat, even if you find Pig-Pen’s data unreliable. You are scheduled for a town hall-style forum in the cafeteria at noon, where the school paper’s editorial board and a gym full of undecided voters are waiting for you to give them a reason. It’s a gray November morning, and as you climb on top of your old red doghouse, you lie on your back and wonder if you should really go.";
-        }
-
-        if (!window.isRoyInCharge) {
-            updateFeedback(3383, "You feel exhausted lecturing people about decency when you’ve spent the last two months trying to keep your head above water in this vicious environment, but Patty assures you, with a genuine smile, that the audience really resonated with your sincerity.");
-            updateFeedback(3375, "The words crack in your throat, as you thank him for being there for you, but also thank yourself, Linus, Patty, and the kid you used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft, low whine, nudging his wet nose under your hand, as he demands to be petted. You oblige, stroking his ears as the news anchors on the television announce that it’s going to be a long, drawn-out night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+            if (ruthlessness >= 3) {
+                updateFeedback(3375, "The words crack in your throat, apologizing to him, but also to yourself, to Linus, to Patty, to Roy (wherever he is right now), and to the kid you once used to be. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+            } else {
+                updateFeedback(3375, "The words crack in your throat, thanking him, but also thanking yourself, Linus, Patty, Roy (wherever he is right now), and the kid you once used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+            }
         } else {
-            updateFeedback(3383, "You feel exhausted lecturing people about decency when you’ve spent the last two months trying to keep your head above water. Roy claps you on the shoulder though, saying that at least the crowd seemed to buy it.");
-            updateFeedback(3375, "The words crack in your throat, thanking him, but also thanking yourself, Linus, Patty, Roy (wherever he is right now), and the kid you once used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+            if (ruthlessness < 3) {
+                updateFeedback(3375, "The words crack in your throat, as you thank him for being there for you, but also thank yourself, Linus, Patty, and the kid you used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft, low whine, nudging his wet nose under your hand, as he demands to be petted. You oblige, stroking his ears as the news anchors on the television announce that it’s going to be a long, drawn-out night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+            }
         }
 
-        updateFeedback(3374, "The TV keeps buzzing with the sounds of pundits arguing over a lot of things, but the noise fades into the background as you bury your face in his fur. He doesn’t judge you for the stress you’ve carried, or the speeches you gave, or the poems they laughed at. You pull him close, wrapping your arms around him, holding on to the last pure thing you have left from childhood, until your eyes grow heavy and you fall asleep to the sound of the rain against the glass.");
-        updateFeedback(3376, "You’ve tried to be good, even when it was impossibly hard to do so. And Snoopy knows that. He doesn’t care about the presidency, or the student council, or the chaos unfolding on the television screen; no, he just rests his paws on your lap, licking the back of your hand. You wrap your arms around him, pulling him up to your chest as the rain lashes against the windowpane. The 20th century dies on the broadcast in front of you as you hold your friend until the screen goes to static.");
+        // clean-ish? campaign
+        if (ruthlessness < 3) {
+            updateFeedback(3374, "The TV keeps buzzing with the sounds of pundits arguing over a lot of things, but the noise fades into the background as you bury your face in his fur. He doesn’t judge you for the stress you’ve carried, or the speeches you gave, or the poems they laughed at. You pull him close, wrapping your arms around him, holding on to the last pure thing you have left from childhood, until your eyes grow heavy and you fall asleep to the sound of the rain against the glass.");
+            updateFeedback(3376, "You’ve tried to be good, even when it was impossibly hard to do so. And Snoopy knows that. He doesn’t care about the presidency, or the student council, or the chaos unfolding on the television screen; no, he just rests his paws on your lap, licking the back of your hand. You wrap your arms around him, pulling him up to your chest as the rain lashes against the windowpane. The 20th century dies on the broadcast in front of you as you hold your friend until the screen goes to static.");
+        }
     }
 
 	// achievement unlocks
@@ -11306,7 +11331,6 @@ cyoAdventure = function (a) {
             unlockAchievement(name);
         }
     }
-
 }
 
 // Campaign Data popup
