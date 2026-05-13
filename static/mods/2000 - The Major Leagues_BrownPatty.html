@@ -10954,23 +10954,23 @@ function answerSwapper(pk1, pk2, takeEffects = true) {
 }
 
 // Feedback updater, taken and modified from 2021DE
-const feedbackMap = new Map(
-  campaignTrail_temp.answer_feedback_json.map(e => [e.pk, e])
-);
-
-const feedbackByAnswerMap = new Map(
-  campaignTrail_temp.answer_feedback_json.map(e => [e.fields.answer, e])
-);
-
 function updateFeedback(pkValue, newFeedback) {
-  let entry = feedbackMap.get(pkValue);
+    const numPk = Number(pkValue);
+    const feedbackJson = campaignTrail_temp.answer_feedback_json;
 
-  // as fallback, treat pkValue as an answer pk
-  if (!entry) {
-    entry = feedbackByAnswerMap.get(pkValue);
-  }
+    if (!feedbackJson) return;
 
-  if (entry) entry.fields.answer_feedback = newFeedback;
+    for (let i = 0, len = feedbackJson.length; i < len; i++) {
+        const fields = feedbackJson[i].fields;
+
+        if (
+            Number(feedbackJson[i].pk) === numPk ||
+            Number(fields.answer) === numPk
+        ) {
+            fields.answer_feedback = newFeedback;
+            return;
+        }
+    }
 }
 
 // CYOA down here!
@@ -31804,7 +31804,8 @@ async function loadAndDrawCountyMap(mode) {
 				let basePct = baseVotes / total;
 				let rawSwing = swings[candId] || 0;
 				let dampenedSwing = rawSwing > 0 ? rawSwing * (1 - basePct) * 1.2 : rawSwing * basePct * 1.2;
-				dampenedSwing = Math.max(-0.15, Math.min(0.15, dampenedSwing));
+				let dynamicCap = Math.max(0.15, Math.abs(rawSwing) * 1.75);
+				dampenedSwing = Math.max(-dynamicCap, Math.min(dynamicCap, dampenedSwing));
 				let newPct = Math.max(0, Math.min(1, basePct + dampenedSwing));
 
 				return { id: candId, pct: newPct, votes: Math.round(newPct * total), baseVotes: baseVotes };
