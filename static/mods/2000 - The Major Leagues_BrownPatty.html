@@ -11556,7 +11556,7 @@ cyoAdventure = function (a) {
       {
         getValue: () => ruthlessness,
         tiers: [
-          [-1, `Charlie Brown is running a ${bold("honest", "#22c55e")} campaign.`],
+          [-1, `Charlie Brown is running an ${bold("honest", "#22c55e")} campaign.`],
           [1,  `Charlie Brown is trying to ${bold("play fair", "#64748b")}.`],
           [3,  `Charlie Brown is starting to ${bold("cut corners", "#eab308")}.`],
           [5,  `Charlie Brown's hands are ${bold("dirty", "#f97316")}.`],
@@ -11649,7 +11649,7 @@ cyoAdventure = function (a) {
     const isRuthless = x_pct > 50;
 
     if (y_pct < 20 && x_pct > 80) return "a vengeful demagogue";
-    if (y_pct < 20 && x_pct < 20) return "a idealistic revolutionary";
+    if (y_pct < 20 && x_pct < 20) return "an idealistic revolutionary";
     if (y_pct > 80 && x_pct > 80) return "a corrupt party boss";
     if (y_pct > 80 && x_pct < 20) return "a quirky institutionalist";
 
@@ -12280,9 +12280,6 @@ extraEndingStyles.replaceSync(`
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     overflow-y: auto;
     display: none;
-  }
-  #expand-ending-modal img {
-    display: none !important;
   }
   #expand-modal-close {
     float: right;
@@ -13676,7 +13673,7 @@ const mainEndings = [
       title: "Motherless Child",
       artist: "Martin L. Gore",
       cover: "https://resources.tidal.com/images/ed0a54b8/9094/4319/821e/e6e13cdeafaf/320x320.jpg",
-      url: "ZJn1VukFa4E"
+      url: ["ZJn1VukFa4E", "ghR8w6FSu50"]
     }
   },
   {
