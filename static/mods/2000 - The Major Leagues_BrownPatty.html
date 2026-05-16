@@ -33602,9 +33602,17 @@ async function loadAndDrawCountyMap(mode) {
 
             // build bivariate density palette
             const dens = densityScale(total);
-            const neutralColor = d3.interpolateRgb("#ffffff", "#555555")(dens); // high turnout = dark grey baseline
-            const maxColor = d3.interpolateRgb("#ffffff", candColor)(dens); // high turnout = vibrant cand color
-            const densityColor = d3.interpolateRgb(neutralColor, maxColor)(Math.min(marginPct * 1.5, 1)); // mix between neutral vs cand based on margin
+
+            // ensure even razor-thin margins retain a distinct tint of the candidate's color
+            const colorWeight = 0.35 + 0.65 * Math.min(1, marginPct * 3.0);
+
+            // high density: dark gray + candidate color
+            const maxDensityColor = d3.interpolateRgb("#555555", candColor)(colorWeight);
+
+            // low density: white + candidate color
+            const minDensityColor = d3.interpolateRgb("#ffffff", candColor)(colorWeight * 0.4);
+
+            const densityColor = d3.interpolateRgb(minDensityColor, maxDensityColor)(dens);
 
             // shift calculations
             const c1996 = base1996Map[d.fips];
@@ -33623,8 +33631,8 @@ async function loadAndDrawCountyMap(mode) {
                 });
                 let simMargin = simDemPct - simRepPct;
 
-                let shift = simMargin - histMargin; // Positive = Dem shift, Negative = Rep shift
-                let shiftIntensity = Math.min(Math.abs(shift) * 3, 1); // Max out visual at 33.3% shift
+                let shift = simMargin - histMargin; // positive = Dem shift, negative = Rep shift
+                let shiftIntensity = Math.min(Math.abs(shift) * 3, 1); // max out visual at 33.3% shift
 
                 if (shift > 0) {
                     colorShift = d3.interpolateRgb("#ffffff", demColor)(shiftIntensity);
@@ -33646,14 +33654,15 @@ async function loadAndDrawCountyMap(mode) {
                 colorDensity: densityColor,
                 colorFlipped: flipped ? candColor : "#ececec",
                 colorShift: colorShift,
-                winText: `${candsInfo.get(String(winner.id))?.last_name} +${(marginPct * 100).toFixed(1)}%`
+                winText: `${candsInfo.get(String(winner.id))?.last_name} +${(marginPct * 100).toFixed(1)}% (${marginVotesEst.toLocaleString()} votes)`
             };
 
-            d.proj.tooltipHtml = `<strong style="font-size:16px">${d.proj.name}, ${d.proj.state}</strong><br><br>` +
+            d.proj.tooltipHtml = `<strong style="font-size:16px">${d.proj.name}, ${d.proj.state}</strong><br><div style="font-size:12px; color:#bbb; margin-top:-2px; margin-bottom:8px;">Total Votes: ${total.toLocaleString()}</div>` +
                 countyResults.slice(0,3).map(r =>
                     `<div style="display:flex; align-items:center; margin-bottom: 4px;">
                         <span style="display:inline-block; width:12px; height:12px; background-color:${candsInfo.get(String(r.id))?.color_hex || '#888'}; margin-right:8px; border: 1px solid #aaa;"></span>
                         <span style="font-weight:bold;">${candsInfo.get(String(r.id))?.last_name}: ${(r.pct * 100).toFixed(1)}%</span>
+                        <span style="color:#ccc; font-size:12px; margin-left:6px;">(${r.votes.toLocaleString()})</span>
                     </div>`).join('') +
                 `<hr style="margin:6px 0; border:0; border-top:1px solid #777;"><div style="color:#ddd; font-size:13px; margin-top:4px;"><i>Margin: ${d.proj.winText}</i></div>` +
                 (flipped ? `<div style="color:#ffb2b2; font-size:12px; margin-top:2px;"><i>Flipped from ${candsInfo.get(String(irlWinner.id))?.last_name}</i></div>` : `<div style="color:#b2ffb2; font-size:12px; margin-top:2px;"><i>Held by ${candsInfo.get(String(winner.id))?.last_name}</i></div>`) +
