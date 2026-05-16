@@ -10782,6 +10782,13 @@ function unlockAchievement(title) {
     achState.permanent[title] = true;
     localStorage.setItem(ACH_CONFIG.STORAGE_KEY, JSON.stringify(achState.permanent));
 
+    if (typeof window.unlockedAch !== 'undefined') {
+      window.unlockedAch[title] = achData;
+    }
+
+    window.modCompletionCache = null;
+    window.lastCacheUpdate = 0;
+
     if (typeof window.addAllAchievements === 'function') {
       window.addAllAchievements();
     }
@@ -11240,18 +11247,18 @@ cyoAdventure = function (a) {
 		}
 
         if (ruthlessness >= 4) {
-			answerSwapper(3360, 12379, true);
-			answerSwapper(3361, 12390, true);
+			answerSwapper(3360, 12379, false);
+			answerSwapper(3361, 12390, false);
 		} else if (linus_bond >= 3) {
-			answerSwapper(3359, 12395, true);
+			answerSwapper(3359, 12395, false);
 		}
 	}
 
     if (e.noCounter === 18) {
 		if (ruthlessness >= 5 && linus_bond < 3) {
-			answerSwapper(3386, 12401, true);
+			answerSwapper(3386, 12401, false);
 		} else if (ruthlessness < 5 && linus_bond >= 3) {
-			answerSwapper(3386, 12407, true);
+			answerSwapper(3386, 12407, false);
 		}
 
         if (window.isRoyInCharge) {
@@ -12134,12 +12141,14 @@ function calculateCliqueResults() {
 
     // build table HTML
     let tableRows = "";
+    let charlieCliquesWon = 0;
     rowsData.forEach(r => {
         let winnerText = "Tie";
         let winnerColor = "#000";
         if (r.charlieVotes > r.linusVotes && r.charlieVotes > r.writeInVotes) {
             winnerText = "<b>Charlie</b>";
             winnerColor = "#d32f2f";
+            charlieCliquesWon++;
         } else if (r.linusVotes > r.charlieVotes && r.linusVotes > r.writeInVotes) {
             winnerText = "<b>Linus</b>";
             winnerColor = "#2f52d3";
@@ -12194,6 +12203,7 @@ function calculateCliqueResults() {
         charlieWin: charlieTotal > linusTotal,
         linusWin: linusTotal > charlieTotal,
         itsATie: charlieTotal === linusTotal,
+        charlieCleanSweep: charlieCliquesWon === 5,
         tableHTML
     };
 
@@ -17640,6 +17650,933 @@ const bonusSlides = [
 </div>`
   },
   {
+	id: "sharpton",
+    condition: (ev) => charlieWin && ev >= 269 && anti_establishment >= 3 && anti_establishment < 5,
+    image: "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/11E9/production/_86558540_sharpton.jpg",
+    html: `<style>
+  .rtr-page {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #1a1a1a;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+  .rtr-page a { color: #c1272d; text-decoration: none; }
+  .rtr-page a:hover { text-decoration: underline; }
+
+  .rtr-topbar {
+    background: #c1272d;
+    padding: 0 20px;
+    display: flex;
+    align-items: stretch;
+    height: 36px;
+    gap: 0;
+  }
+  .rtr-logo {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+    border-right: 1px solid rgba(255,255,255,0.25);
+    flex-shrink: 0;
+  }
+  .rtr-logo-text {
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+  }
+  .rtr-nav {
+    display: flex;
+    align-items: stretch;
+    padding-left: 10px;
+    gap: 0;
+  }
+  .rtr-nav a {
+    color: rgba(255,255,255,0.85);
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+  }
+  .rtr-nav a:hover, .rtr-nav a.active {
+    color: #fff;
+    border-bottom-color: #fff;
+    text-decoration: none;
+  }
+  .rtr-topbar-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .rtr-datebar {
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 20px;
+    font-size: 11px;
+    color: #777;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .rtr-datebar-time { font-weight: bold; color: #333; }
+
+  .rtr-layout {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px 20px 40px;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+  }
+
+  .rtr-article { flex: 1; min-width: 0; }
+
+  .rtr-section {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #c1272d;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rtr-section::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+  }
+
+  .rtr-hl {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #000;
+    margin-bottom: 10px;
+  }
+
+  .rtr-sf {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.45;
+    margin-bottom: 12px;
+    border-left: 3px solid #c1272d;
+    padding-left: 12px;
+  }
+
+  .rtr-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: #777;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 8px 0;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .rtr-meta .byline { color: #000; font-weight: bold; }
+  .rtr-meta .dateline { color: #333; }
+  .rtr-meta-right {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+  }
+  .rtr-share-btn {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 3px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #333;
+  }
+  .rtr-share-btn:hover { background: #e5e5e5; }
+
+  .rtr-photo {
+    float: right;
+    clear: right;
+    margin: 0 0 14px 18px;
+    width: 240px;
+  }
+  .rtr-photo-img {
+    width: 240px;
+    height: 154px;
+    background: linear-gradient(135deg, #2a2a3a 0%, #3a3a4a 50%, #1a2030 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.35);
+    font-size: 11px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 10px;
+    line-height: 1.5;
+    border: 1px solid #ddd;
+  }
+  .rtr-photo-cap {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.4;
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px solid #ddd;
+  }
+  .rtr-photo-credit {
+    font-size: 10px;
+    color: #aaa;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .rtr-body {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #1a1a1a;
+  }
+  .rtr-body p { margin: 0 0 14px; }
+  .rtr-body p:first-child::first-letter {
+    font-size: 2.6em;
+    font-weight: bold;
+    float: left;
+    line-height: 0.8;
+    margin: 4px 5px -2px 0;
+    color: #c1272d;
+  }
+  .rtr-dateline-inline {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .rtr-pull {
+    border-top: 2px solid #c1272d;
+    border-bottom: 1px solid #ddd;
+    padding: 12px 14px;
+    margin: 16px 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: #1a1a1a;
+    line-height: 1.45;
+    font-style: italic;
+    clear: both;
+  }
+
+  .rtr-attribution {
+    font-size: 12px;
+    color: #777;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 24px;
+    padding-top: 10px;
+    line-height: 1.55;
+  }
+  .rtr-attribution em { font-style: italic; }
+
+  .rtr-sidebar { width: 220px; flex-shrink: 0; }
+
+  .rtr-related {
+    border: 1px solid #ddd;
+    margin-bottom: 18px;
+  }
+  .rtr-related-hdr {
+    background: #c1272d;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 6px 10px;
+  }
+  .rtr-related-body { padding: 8px 10px; }
+  .rtr-related-item {
+    font-size: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 1.4;
+  }
+  .rtr-related-item:last-child { border-bottom: none; }
+  .rtr-related-item a { color: #1a1a1a; }
+  .rtr-related-item a:hover { color: #c1272d; text-decoration: underline; }
+  .rtr-related-item .ri-cat {
+    font-size: 10px;
+    color: #c1272d;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .rtr-ad-box {
+    border: 1px solid #ddd;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+    font-size: 10px;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: Arial, sans-serif;
+  }
+
+  .rtr-ticker {
+    background: #1a1a1a;
+    color: #ccc;
+    padding: 5px 20px;
+    font-size: 11px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow: hidden;
+    border-bottom: 1px solid #000;
+  }
+  .rtr-ticker-label {
+    background: #c1272d;
+    color: #fff;
+    padding: 1px 8px;
+    font-weight: bold;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .rtr-ticker-items {
+    display: flex;
+    gap: 24px;
+    color: #bbb;
+    font-size: 11px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .rtr-ticker-items span { color: #e0e0e0; }
+
+  .clearfix::after { content:''; display:table; clear:both; }
+</style>
+
+<div class="rtr-page">
+
+  <div class="rtr-topbar">
+    <div class="rtr-logo">
+      <div class="rtr-logo-text">Reuters</div>
+    </div>
+    <nav class="rtr-nav">
+      <a href="#" class="active">World</a>
+      <a href="#">U.S.</a>
+      <a href="#">Business</a>
+      <a href="#">Markets</a>
+      <a href="#">Politics</a>
+      <a href="#">Technology</a>
+      <a href="#">Science</a>
+      <a href="#">Arts</a>
+    </nav>
+    <div class="rtr-topbar-right">
+      <span>SIGN IN</span>
+      <span>|</span>
+      <span>REGISTER</span>
+    </div>
+  </div>
+
+  <div class="rtr-ticker">
+    <span class="rtr-ticker-label">Breaking</span>
+    <div class="rtr-ticker-items">
+      <span>U.S. DOLLAR SLIDES AS SUBPRIME LOSSES MOUNT AT CITIGROUP, MERRILL LYNCH</span>
+      &nbsp;·&nbsp;
+      <span>BRAUN SIGNALS FURTHER FED EMERGENCY MEASURES UNDER REVIEW</span>
+      &nbsp;·&nbsp;
+      <span>SHARPTON ARRIVES PARIS FOR BAYROU SUMMIT; BRIEF BELGRADE STOPOVER DRAWS CRITICISM</span>
+      &nbsp;·&nbsp;
+      <span>OIL ABOVE $94 A BARREL; OPEC MEETS THURSDAY</span>
+    </div>
+  </div>
+
+  <div class="rtr-datebar">
+    <span>Thursday, November 15, 2007</span>
+    <span class="rtr-datebar-time">14:32 EST</span>
+    <span style="margin-left:auto;">
+      <a href="#">English</a> | <a href="#">Français</a> | <a href="#">Deutsch</a> | <a href="#">العربية</a>
+    </span>
+  </div>
+
+  <div class="rtr-layout">
+
+    <div class="rtr-article">
+
+      <div class="rtr-section">World / Americas / White House</div>
+
+      <h1 class="rtr-hl">Sharpton tours Europe amid mounting criticism over subprime response, Belgrade stopover</h1>
+
+      <div class="rtr-sf">President spends week with Bayrou, Jackson, Olejniczak and controversially Milosevic, as VP Braun steers crisis talks in Washington</div>
+
+      <div class="rtr-meta">
+        <span class="byline">By Carolyn Ahern and Marcus Webb</span>
+        <span class="dateline">PARIS/LONDON</span>
+        <span>|</span>
+        <span>4 min read</span>
+        <span>Updated: Nov. 15, 2007, 2:32 PM EST</span>
+        <div class="rtr-meta-right">
+          <span class="rtr-share-btn">Email</span>
+          <span class="rtr-share-btn">Print</span>
+          <span class="rtr-share-btn">Share</span>
+        </div>
+      </div>
+
+      <div class="rtr-body clearfix">
+
+        <p><span class="rtr-dateline-inline">PARIS (Reuters)</span> — President Al Sharpton concluded a five-day European swing on Thursday, meeting with British Prime Minister Glenda Jackson at Downing Street after stops in Paris, Warsaw and a brief, sharply criticised visit to Belgrade that dominated press coverage on both sides of the Atlantic, while a widening crisis in U.S. mortgage markets continued to fall almost entirely to Vice President Carol Moseley Braun to manage from Washington.</p>
+
+        <p>The tour, billed by the White House as a "renewed Atlantic dialogue" ahead of next month's G8 preparatory sessions, took Sharpton to French President François Bayrou for a working dinner in Paris on Tuesday, to Polish opposition leader Waldemar Olejniczak in Warsaw on Wednesday morning, and then, in what aides insisted was a scheduled forty-minute courtesy call, to Belgrade, where he shook hands with Yugoslav President Slobodan Milosevic before flying north to London.</p>
+
+        <p>The Milosevic meeting, the first between a sitting U.S. president and the Serbian leader since his return to power following the collapse of his Hague proceedings in 2005, drew immediate condemnation from human rights groups and bipartisan rebuke in Congress.</p>
+
+        <p>"There is no diplomatic rationale for that handshake that is more important than the signal it sends to survivors of Srebrenica," said Senator John McCain of Arizona in a statement released Wednesday evening. Representative Nancy Pelosi called it "inexplicable" and said the House Foreign Affairs Committee would seek a briefing.</p>
+
+        <p>The White House pushed back. National Security Adviser Susan Rice told reporters aboard Air Force One that the meeting was "brief and in the U.S. interest," citing ongoing negotiations over Kosovo's status and the need to maintain a channel to Belgrade. She declined to say whether Sharpton had raised the question of outstanding Hague warrants.</p>
+
+        <div class="rtr-pull">
+          "The President is focused on America's standing in the world. The Vice President is focused on the American economy. That's the division of labour, and it's working."
+          <div style="font-size:12px;font-weight:normal;font-style:normal;color:#777;margin-top:6px;">— White House press secretary Kevin Sulley</div>
+        </div>
+
+        <p>The London stop, by contrast, was described by both governments as substantive. Sharpton and Prime Minister Jackson, whose Labour government has faced its own turbulence over Northern Rock's emergency nationalisation, agreed to a joint working group on transatlantic mortgage market exposure, with results to be reported by February. Jackson, who had been openly sceptical of Sharpton's Keynesian stimulus proposals earlier in the year, was notably warmer at the podium than in previous encounters.</p>
+
+        <p>"We face common challenges," Jackson said. "And we have, I think, a genuine convergence on how to meet them." Asked whether she had raised concerns about the Belgrade visit, she said only that "we covered a full agenda" and moved on.</p>
+
+        <p>The Paris meeting with Bayrou had been the headline item on the tour's original schedule. The two leaders discussed NATO burden-sharing, climate negotiations, and, according to a French government readout, Iran, although the White House summary made no mention of Tehran. Bayrou, whose MoDem government has positioned itself as a bridge between Washington and a sceptical European centre-left, called the talks "frank and productive." There was no joint press conference.</p>
+
+        <p>In Warsaw, Sharpton met Olejniczak of the Democratic Left Alliance for approximately ninety minutes, a session that drew less coverage than it might have, given that it fell on the same news cycle as the Belgrade pictures. Olejniczak, whose party is positioning itself ahead of next year's parliamentary elections, described the conversation as covering "energy security, the role of NATO, and Poland's place in a changing Europe."</p>
+
+        <p>Throughout all of it, the dominant story back in Washington remained the accelerating deterioration of the U.S. housing market. Citigroup on Wednesday disclosed a further $8 billion to $11 billion in subprime-related writedowns. Merrill Lynch is expected to announce losses of a comparable scale next week, and consumer confidence figures released Thursday morning fell to their lowest since 2003.</p>
+
+        <p>It has fallen largely to Braun — who holds the economic portfolio as a formal Vice Presidential mandate, the broadest such arrangement since the Clinton/Gore years — to respond. On Tuesday she convened an emergency session with Treasury Secretary Roger Altman, Federal Reserve Chairman Janet Yellen and the heads of the major housing agencies. A White House statement said the meeting produced "a framework for coordinated intervention," though specifics were not disclosed, as markets responded with modest relief.</p>
+
+        <p>The optics of the divergence have not gone unnoticed. Several Democratic congressional leaders, speaking on condition of anonymity, expressed frustration that the President was photographed with Milosevic on the same day Braun was fielding calls from Citigroup's board.</p>
+
+        <p>"The Vice President is doing the work," one senior House Democrat said. "Everyone in this town knows it. The question is whether anyone <i>outside</i> this town knows it."</p>
+
+        <p>White House press secretary Kevin Sulley, when asked about the split-screen quality of the week, was unapologetic. "The President is focused on America's standing in the world," he said. "The Vice President is focused on the American economy. That's the division of labour, and it's working."</p>
+
+        <p>Sharpton returns to Washington on Friday. He is scheduled to address the Democratic Leadership Council on Monday.</p>
+
+        <div class="rtr-attribution">
+          <em>Additional reporting by Philippe Girard in Paris, Anna Kowalski in Warsaw and Stephen Marsh in London. Editing by David Cutler.</em>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="rtr-sidebar">
+
+      <div class="rtr-related">
+        <div class="rtr-related-hdr">Related Coverage</div>
+        <div class="rtr-related-body">
+          <div class="rtr-related-item">
+            <span class="ri-cat">Politics</span>
+            <a href="#">Braun convenes emergency mortgage session as Citi losses mount</a>
+          </div>
+          <div class="rtr-related-item">
+            <span class="ri-cat">World</span>
+            <a href="#">Milosevic handshake draws bipartisan condemnation in Congress</a>
+          </div>
+          <div class="rtr-related-item">
+            <span class="ri-cat">Business</span>
+            <a href="#">Citigroup warns of $8–11 billion in further subprime writedowns</a>
+          </div>
+          <div class="rtr-related-item">
+            <span class="ri-cat">World</span>
+            <a href="#">Jackson and Sharpton agree joint financial working group</a>
+          </div>
+          <div class="rtr-related-item">
+            <span class="ri-cat">Politics</span>
+            <a href="#">Analysis: Can Braun hold the economy together alone?</a>
+          </div>
+          <div class="rtr-related-item">
+            <span class="ri-cat">World</span>
+            <a href="#">Bayrou calls Paris summit "frank", no joint presser</a>
+          </div>
+          <div class="rtr-related-item">
+            <span class="ri-cat">World</span>
+            <a href="#">Kosovo talks stall; Belgrade points to White House visit as leverage</a>
+          </div>
+          <div class="rtr-related-item">
+            <span class="ri-cat">Business</span>
+            <a href="#">Federal Reserve holds rates; Yellen signals "all options open"</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="rtr-ad-box">Advertisement · 220×250</div>
+
+      <div class="rtr-related" style="margin-top:16px;">
+        <div class="rtr-related-hdr">In Focus</div>
+        <div class="rtr-related-body">
+          <div style="font-size:11px;color:#555;padding:6px 0;line-height:1.6;border-bottom:1px solid #eee;">
+            <strong style="display:block;font-size:12px;color:#000;margin-bottom:4px;">The Subprime Crisis</strong>
+            Reuters special coverage of the U.S. housing market collapse and the Braun-led federal response
+            <br><a href="#" style="color:#c1272d;font-size:11px;">Full coverage →</a>
+          </div>
+          <div style="font-size:11px;color:#555;padding:6px 0;line-height:1.6;">
+            <strong style="display:block;font-size:12px;color:#000;margin-bottom:4px;">Sharpton in Europe</strong>
+            Day-by-day coverage of the President's five-nation tour and its diplomatic fallout
+            <br><a href="#" style="color:#c1272d;font-size:11px;">Full coverage →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>`
+  },
+  {
+    id: "combs",
+    condition: (ev) => charlieWin && ev >= 269 && anti_establishment >= 5,
+    image: "https://www.thetimes.com/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F3347dba4-d278-476d-98d5-59c5cc89b5ba.jpg?crop=3000%2C1688%2C0%2C158&resize=1200",
+    html: `<style>
+  .wiki-body {
+    background: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #202122;
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+  }
+  .wiki-header-bar {
+    background: #fff;
+    border-bottom: 1px solid #a2a9b1;
+    padding: 6px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: #54595d;
+  }
+  .wiki-wordmark { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.4em; color: #202122; }
+  .wiki-content { padding: 16px 24px; max-width: 960px; margin: 0 auto; }
+  .wiki-title { font-family: 'Linux Libertine', Georgia, serif; font-size: 2em; font-weight: normal; border-bottom: 1px solid #a2a9b1; padding-bottom: 4px; margin-bottom: 12px; color: #000; }
+  .wiki-toc { background: #f8f9fa; border: 1px solid #a2a9b1; padding: 10px 16px; display: inline-block; font-size: 0.9em; margin: 0 0 16px 0; }
+  .wiki-toc-title { font-weight: bold; text-align: center; margin-bottom: 6px; }
+  .wiki-toc ol { margin: 0; padding-left: 24px; }
+  .wiki-toc li { margin: 2px 0; }
+  a.wl { color: #3366cc; text-decoration: none; }
+  a.wl:hover { text-decoration: underline; }
+  h2.ws { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.4em; font-weight: normal; border-bottom: 1px solid #a2a9b1; margin: 20px 0 8px; padding-bottom: 2px; }
+  h3.ws { font-size: 1.1em !important; font-weight: bold !important; letter-spacing: 0 !important; margin: 4px 0 6px !important; text-align: left !important; }
+  .infobox {
+    float: right;
+    clear: right;
+    margin: 0 0 16px 24px;
+    padding: 0;
+    border: 1px solid #a2a9b1;
+    background: #f8f9fa;
+    font-size: 12.5px;
+    line-height: 1.5;
+    width: 290px;
+    font-family: sans-serif;
+  }
+  .infobox-title {
+    background: #cee0f2;
+    text-align: center;
+    font-weight: bold;
+    padding: 6px 8px;
+    font-size: 1.05em;
+    border-bottom: 1px solid #a2a9b1;
+  }
+  .infobox-subtitle {
+    background: #ddeeff;
+    text-align: center;
+    padding: 4px 8px;
+    font-size: 0.95em;
+    border-bottom: 1px solid #a2a9b1;
+    color: #333;
+  }
+  .infobox table { width: 100%; border-collapse: collapse; }
+  .infobox td { padding: 4px 8px; vertical-align: top; }
+  .infobox .ib-label { color: #54595d; font-size: 0.9em; }
+  .infobox .ib-cand-header { background: #eaecf0; font-weight: bold; text-align: center; padding: 5px; border-top: 1px solid #a2a9b1; border-bottom: 1px solid #a2a9b1; }
+  .infobox .ib-party-d { background: #ddeeff; font-weight: bold; padding: 4px 8px; }
+  .infobox .ib-party-r { background: #ffe8e8; font-weight: bold; padding: 4px 8px; }
+  .infobox .ib-party-g { background: #e8ffe8; font-weight: bold; padding: 4px 8px; }
+  .bar-wrap { margin: 4px 8px 8px; }
+  .bar-label { display: flex; justify-content: space-between; font-size: 0.85em; margin-bottom: 2px; }
+  .bar-outer { background: #eaecf0; height: 10px; border-radius: 2px; overflow: hidden; }
+  .bar-d { background: #3971b5; height: 10px; }
+  .bar-r { background: #c0392b; height: 10px; }
+  .bar-g { background: #4caf50; height: 10px; }
+  .wiki-table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    margin: 12px 0;
+    width: 100%;
+  }
+  .wiki-table th {
+    background: #eaecf0;
+    border: 1px solid #a2a9b1;
+    padding: 6px 10px;
+    text-align: left;
+  }
+  .wiki-table td {
+    border: 1px solid #a2a9b1;
+    padding: 5px 10px;
+    vertical-align: top;
+  }
+  .wiki-table .row-d { background: #ddeeff; }
+  .wiki-table .row-r { background: #fff0f0; }
+  .wiki-table .row-g { background: #f0fff0; }
+  .wiki-table .row-o { background: #fafafa; }
+  .wiki-table .won { font-weight: bold; }
+  .result-bar-cell { width: 120px; }
+  .mini-bar-outer { background: #eaecf0; height: 8px; border-radius: 1px; margin: .5em auto; overflow: hidden; }
+  .note-box { background: #eaf3fb; border-left: 3px solid #3685b5; padding: 8px 12px; font-size: 0.88em; font-family: sans-serif; margin: 14px 0; color: #333; }
+  p.wi { margin: 0 0 12px; }
+  .reflist { font-size: 0.88em; font-family: sans-serif; color: #54595d; border-top: 1px solid #a2a9b1; padding-top: 8px; margin-top: 20px; }
+  .stub-note { font-family: sans-serif; font-size: 0.85em; color: #54595d; border: 1px solid #a2a9b1; background: #f8f9fa; padding: 6px 10px; margin-top: 20px; text-align: center; }
+  .clearfix::after { content: ""; display: table; clear: both; }
+</style>
+
+<div class="wiki-body">
+  <div class="wiki-header-bar">
+    <div class="wiki-wordmark">Wikipedia</div>
+    <div style="font-family:sans-serif;">Article &nbsp;·&nbsp; Talk &nbsp;·&nbsp; Read &nbsp;·&nbsp; Edit &nbsp;·&nbsp; View history</div>
+  </div>
+
+  <div class="wiki-content">
+    <h1 class="wiki-title">2010 New York gubernatorial election</h1>
+
+    <div class="infobox">
+      <div class="infobox-title">2010 New York<br>gubernatorial election</div>
+      <div class="infobox-subtitle">November 2, 2010</div>
+      <table>
+        <tr><td colspan="2" style="text-align:center; padding:6px 8px; font-size:0.9em; color:#54595d; border-bottom:1px solid #a2a9b1;">← <a class="wl" href="#">2006</a> &nbsp;&nbsp; <a class="wl" href="#">2014</a> →</td></tr>
+        <tr><td colspan="2" class="ib-cand-header">Candidates</td></tr>
+        <tr>
+          <td class="ib-party-d" colspan="2">&#9632; Democratic</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align:center; padding:8px;">
+            <div style="font-size:1.1em; font-weight:bold;"><a class="wl" href="#">Sean Combs</a></div>
+            <div style="font-size:0.9em; color:#54595d;">Running mate: <a class="wl" href="#">Stephanie Miner</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="ib-party-r" colspan="2">&#9632; Republican</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align:center; padding:8px;">
+            <div style="font-size:1.1em; font-weight:bold;"><a class="wl" href="#">Carl Paladino</a></div>
+            <div style="font-size:0.9em; color:#54595d;">Running mate: <a class="wl" href="#">Greg Edwards</a></div>
+          </td>
+        </tr>
+        <tr><td colspan="2" class="ib-cand-header">Results</td></tr>
+      </table>
+      <div class="bar-wrap">
+        <div class="bar-label"><span style="color:#3971b5;font-weight:bold;">Combs (D)</span><span>54.8%</span></div>
+        <div class="bar-outer"><div class="bar-d" style="width:54.8%;"></div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span style="color:#c0392b;font-weight:bold;">Paladino (R)</span><span>39.3%</span></div>
+        <div class="bar-outer"><div class="bar-r" style="width:39.3%;"></div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span style="color:#4caf50;font-weight:bold;">Hawkins (G)</span><span>3.7%</span></div>
+        <div class="bar-outer"><div class="bar-g" style="width:3.7%;"></div></div>
+      </div>
+      <table>
+        <tr>
+          <td class="ib-label">Margin</td>
+          <td><b>15.5 pp</b></td>
+        </tr>
+        <tr>
+          <td class="ib-label">Popular vote</td>
+          <td>3,168,442 / 2,271,809</td>
+        </tr>
+        <tr>
+          <td class="ib-label">Turnout</td>
+          <td>41.3%</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 8px 4px;" colspan="2">
+            <div style="font-size:0.88em; color:#54595d; text-align:center; border-top:1px solid #a2a9b1; padding-top:6px;">
+              Governor before election<br>
+              <a class="wl" href="#" style="color:#3366cc;"><b>David Paterson</b></a><br>
+              <span style="color:#3971b5;">Democratic</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:4px 8px 10px;" colspan="2">
+            <div style="font-size:0.88em; color:#54595d; text-align:center;">
+              Governor-elect<br>
+              <a class="wl" href="#" style="color:#3366cc;"><b>Sean Combs</b></a><br>
+              <span style="color:#3971b5;">Democratic</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="wiki-toc">
+      <div class="wiki-toc-title">Contents</div>
+      <ol>
+        <li><a class="wl" href="#">Background</a></li>
+        <li><a class="wl" href="#">Democratic primary</a>
+          <ol>
+            <li><a class="wl" href="#">Candidates</a></li>
+            <li><a class="wl" href="#">Primary results</a></li>
+          </ol>
+        </li>
+        <li><a class="wl" href="#">Republican primary</a></li>
+        <li><a class="wl" href="#">General election</a>
+          <ol>
+            <li><a class="wl" href="#">Campaign</a></li>
+            <li><a class="wl" href="#">Results</a></li>
+          </ol>
+        </li>
+        <li><a class="wl" href="#">Aftermath</a></li>
+        <li><a class="wl" href="#">See also</a></li>
+        <li><a class="wl" href="#">References</a></li>
+      </ol>
+    </div>
+
+    <p class="wi">The <b>2010 New York gubernatorial election</b> was held on November 2, 2010, as part of the broader <a class="wl" href="#">2010 United States midterm elections</a>. <a class="wl" href="#">Sean Combs</a>, the <a class="wl" href="#">Harlem</a>-born music mogul and civic activist, won the <a class="wl" href="#">Democratic</a> nomination following a crowded and nationally watched primary, then defeated <a class="wl" href="#">Republican</a> nominee <a class="wl" href="#">Carl Paladino</a> in the general election by approximately 15 percentage points. Combs became the first <i>elected</i> <a class="wl" href="#">African-American</a> governor of New York and the first person without prior elected office to win a major-party gubernatorial nomination in the state's modern history.</p>
+
+    <p class="wi">The election took place against a difficult national environment for Democrats. The administration of President <a class="wl" href="#">Hillary Clinton</a>, which had taken office in January 2009, faced significant public discontent over the pace of economic recovery following the <a class="wl" href="#">2007–2009 financial crisis</a>. Republicans gained 63 seats in the <a class="wl" href="#">House of Representatives</a> and six seats in the <a class="wl" href="#">Senate</a> on election night, recapturing majorities in both chambers.<sup style="font-size:0.8em;"><a class="wl" href="#">[1]</a></sup> New York's relative insulation from the wave, as Combs's margin was roughly half that of the party's 2006 gubernatorial win, was nonetheless seen as a sign of the <a class="wl" href="#">Empire State</a>'s continued lean toward Democrats at the statewide level.</p>
+
+    <div class="clearfix">
+
+    <h2 class="ws">Background</h2>
+    <p class="wi">Incumbent Governor <a class="wl" href="#">David Paterson</a>, who had assumed office in March 2008 following the resignation of <a class="wl" href="#">Eliot Spitzer</a>, announced in February 2010 that he would not seek a full term, citing persistently low approval ratings and ongoing investigations into his administration.<sup style="font-size:0.8em;"><a class="wl" href="#">[2]</a></sup> His withdrawal opened one of the most competitive Democratic primaries in New York in two decades.</p>
+
+    <p class="wi">Combs had been involved in civic and voter-registration efforts since the early 2000s, most notably through his <a class="wl" href="#">Citizen Change</a> campaign ("Vote or Die"), which was widely credited with boosting youth turnout for <a class="wl" href="#">Paul Wellstone</a> in the <a class="wl" href="#">2004 presidential election</a>.<sup style="font-size:0.8em;"><a class="wl" href="#">[3]</a></sup> He had publicly considered a Senate run in 2006 but ultimately decided not to run. His entrance into the 2010 governor's race was announced in a September 2009 <i><a class="wl" href="#">New York Times</a></i> op-ed in which he outlined an economic platform centered on urban infrastructure investment, workforce development in the outer boroughs, and reform of the state's <a class="wl" href="#">Rockefeller drug laws</a>.<sup style="font-size:0.8em;"><a class="wl" href="#">[4]</a></sup></p>
+
+    <h2 class="ws">Democratic primary</h2>
+    <h3 class="ws">Candidates</h3>
+    <p class="wi">The Democratic field was considered unusually crowded for a New York gubernatorial primary. Major declared candidates included:</p>
+
+    <table class="wiki-table">
+      <tr>
+        <th>Candidate</th>
+        <th>Background</th>
+        <th>Notable support</th>
+      </tr>
+      <tr class="row-d">
+        <td><b><a class="wl" href="#">Sean Combs</a></b></td>
+        <td>Music executive and entrepreneur; founder of <a class="wl" href="#">Bad Boy Records</a>; civic activist</td>
+        <td><a class="wl" href="#">Rep. Charles Rangel</a>, <a class="wl" href="#">Rev. Al Sharpton</a>, several <a class="wl" href="#">Brooklyn</a> party organizations</td>
+      </tr>
+      <tr class="row-o">
+        <td><a class="wl" href="#">Andrew Cuomo</a></td>
+        <td><a class="wl" href="#">Attorney General of New York</a> (2007–present); former <a class="wl" href="#">Secretary of Housing and Urban Development</a></td>
+        <td>Much of the party establishment; labor unions</td>
+      </tr>
+      <tr class="row-o">
+        <td><a class="wl" href="#">Richard Ravitch</a></td>
+        <td>Lieutenant Governor (2009–2010); former <a class="wl" href="#">MTA</a> chair</td>
+        <td>Good-government groups; editorial boards</td>
+      </tr>
+      <tr class="row-o">
+        <td><a class="wl" href="#">Kathleen Rice</a></td>
+        <td><a class="wl" href="#">Nassau County District Attorney</a></td>
+        <td>Law enforcement associations; suburban moderates</td>
+      </tr>
+      <tr class="row-o">
+        <td><a class="wl" href="#">Eric Schneiderman</a></td>
+        <td><a class="wl" href="#">New York State Senate</a> (1998–2010)</td>
+        <td>Progressive activist groups; <a class="wl" href="#">Working Families Party</a></td>
+      </tr>
+    </table>
+
+    <p class="wi">Cuomo entered the race as the strong frontrunner, with name recognition and institutional backing that many observers believed would be decisive. However, his campaign was hampered in its early months by persistent questions about his tenure at <a class="wl" href="#">HUD</a> and his role in loosening mortgage-lending standards in the late 1990s, a line of attack Combs's campaign pressed aggressively in debates.<sup style="font-size:0.8em;"><a class="wl" href="#">[5]</a></sup> Combs, meanwhile, proved an unexpectedly disciplined debater and drew enthusiastic crowds in <a class="wl" href="#">New York City</a>, where turnout models consistently showed him running well ahead of projections.</p>
+
+    <p class="wi">Schneiderman, running on a more explicitly progressive platform, briefly surged in late May polling before consolidating support behind Combs in the campaign's final weeks, citing the "urgent need for a candidate who could energize the full Democratic coalition."<sup style="font-size:0.8em;"><a class="wl" href="#">[6]</a></sup> Cuomo, Ravitch, and Rice all remained in the race through primary day.</p>
+
+    <h3 class="ws">Primary results</h3>
+
+    <table class="wiki-table">
+      <tr>
+        <th>Candidate</th>
+        <th>Votes</th>
+        <th>%</th>
+        <th class="result-bar-cell"></th>
+      </tr>
+      <tr class="row-d">
+        <td class="won"><b>Sean Combs</b> ✓</td>
+        <td class="won">481,203</td>
+        <td class="won"><b>33.8%</b></td>
+        <td><div class="mini-bar-outer"><div style="background:#3971b5;height:8px;width:33.8%;"></div></div></td>
+      </tr>
+      <tr class="row-o">
+        <td>Andrew Cuomo</td>
+        <td>407,119</td>
+        <td>28.6%</td>
+        <td><div class="mini-bar-outer"><div style="background:#6699cc;height:8px;width:28.6%;"></div></div></td>
+      </tr>
+      <tr class="row-o">
+        <td>Richard Ravitch</td>
+        <td>256,440</td>
+        <td>18.0%</td>
+        <td><div class="mini-bar-outer"><div style="background:#6699cc;height:8px;width:18.0%;"></div></div></td>
+      </tr>
+      <tr class="row-o">
+        <td>Kathleen Rice</td>
+        <td>163,882</td>
+        <td>11.5%</td>
+        <td><div class="mini-bar-outer"><div style="background:#6699cc;height:8px;width:11.5%;"></div></div></td>
+      </tr>
+      <tr class="row-o">
+        <td>Eric Schneiderman</td>
+        <td>106,774</td>
+        <td>7.5%</td>
+        <td><div class="mini-bar-outer"><div style="background:#6699cc;height:8px;width:7.5%;"></div></div></td>
+      </tr>
+      <tr class="row-o">
+        <td><i>Others</i></td>
+        <td>8,991</td>
+        <td>0.6%</td>
+        <td></td>
+      </tr>
+      <tr style="background:#eaecf0; font-weight:bold;">
+        <td>Total</td>
+        <td>1,424,409</td>
+        <td>100%</td>
+        <td></td>
+      </tr>
+    </table>
+
+    <p class="wi">Combs carried all five New York City boroughs by wide margins and ran competitively in <a class="wl" href="#">Westchester</a> and <a class="wl" href="#">Nassau</a> counties. Cuomo led outside New York City but could not overcome Combs's metropolitan dominance. Cuomo conceded early the following morning and endorsed Combs, as did Schneiderman and Rice within the week. Ravitch withheld his endorsement for several days amid speculation about a third-party run before ultimately supporting the Democratic nominee.<sup style="font-size:0.8em;"><a class="wl" href="#">[7]</a></sup></p>
+
+    <h2 class="ws">Republican primary</h2>
+    <p class="wi">The Republican primary was won by <a class="wl" href="#">Carl Paladino</a>, a <a class="wl" href="#">Buffalo</a>-area real estate developer and Tea Party-aligned candidate, who defeated former <a class="wl" href="#">congressman</a> <a class="wl" href="#">Rick Lazio</a> with 62.3% of the vote. Paladino's campaign, which stressed fiscal austerity, opposition to the <a class="wl" href="#">TARP</a> bank bailouts, and sharp criticism of President Clinton's stimulus agenda, benefited from substantial <a class="wl" href="#">Tea Party movement</a> organizational support.<sup style="font-size:0.8em;"><a class="wl" href="#">[8]</a></sup></p>
+
+    <h2 class="ws">General election</h2>
+    <h3 class="ws">Campaign</h3>
+    <p class="wi">The general election campaign was defined by two competing narratives. Paladino sought to tie Combs to the Clinton administration and to <a class="wl" href="#">Albany</a>'s perceived dysfunction, arguing that a first-time candidate with no governmental experience was unfit to manage a state in fiscal crisis. His campaign repeatedly aired television spots juxtaposing Combs's <a class="wl" href="#">hip-hop</a> persona with images of budget shortfalls and empty manufacturing plants in <a class="wl" href="#">upstate New York</a>.</p>
+
+    <p class="wi">Combs countered by emphasizing job creation, positioning himself as an outsider untainted by Albany's failures. His campaign produced a widely-shared series of ads spotlighting <a class="wl" href="#">South Bronx</a> and <a class="wl" href="#">Brownsville</a> residents speaking directly to camera about economic need, credited by political analysts with boosting his favorability among <a class="wl" href="#">Latino</a> and working-class white voters in the outer boroughs.<sup style="font-size:0.8em;"><a class="wl" href="#">[9]</a></sup> He received the formal endorsements of the <a class="wl" href="#">Working Families Party</a>, the <a class="wl" href="#">United Federation of Teachers</a>, and 1199 <a class="wl" href="#">SEIU</a>, as well as a high-profile endorsement from President Clinton in October.<sup style="font-size:0.8em;"><a class="wl" href="#">[10]</a></sup></p>
+
+    <p class="wi">The race tightened somewhat in late October, consistent with national trends showing Democratic candidates underperforming their summer polling averages. A <i><a class="wl" href="#">Siena College</a></i> poll released October 25 showed Combs ahead by 12 points, down from 21 points in August.<sup style="font-size:0.8em;"><a class="wl" href="#">[11]</a></sup></p>
+
+    <h3 class="ws">Results</h3>
+
+    <table class="wiki-table">
+      <tr>
+        <th>Candidate</th>
+        <th>Party</th>
+        <th>Votes</th>
+        <th>%</th>
+        <th class="result-bar-cell"></th>
+      </tr>
+      <tr class="row-d">
+        <td class="won"><b>Sean Combs</b> ✓</td>
+        <td>Democratic / Working Families</td>
+        <td class="won">3,168,442</td>
+        <td class="won"><b>54.8%</b></td>
+        <td><div class="mini-bar-outer"><div style="background:#3971b5;height:8px;width:54.8%;"></div></div></td>
+      </tr>
+      <tr class="row-r">
+        <td>Carl Paladino</td>
+        <td>Republican / Conservative / Tea Party</td>
+        <td>2,271,809</td>
+        <td>39.3%</td>
+        <td><div class="mini-bar-outer"><div style="background:#c0392b;height:8px;width:39.3%;"></div></div></td>
+      </tr>
+      <tr class="row-g">
+        <td>Howie Hawkins</td>
+        <td>Green</td>
+        <td>213,870</td>
+        <td>3.7%</td>
+        <td><div class="mini-bar-outer"><div style="background:#4caf50;height:8px;width:3.7%;"></div></div></td>
+      </tr>
+      <tr class="row-o">
+        <td>Warren Redlich</td>
+        <td>Libertarian</td>
+        <td>117,344</td>
+        <td>2.0%</td>
+        <td><div class="mini-bar-outer"><div style="background:#c8a800;height:8px;width:2.0%;"></div></div></td>
+      </tr>
+      <tr class="row-o">
+        <td><i>Others / scattering</i></td>
+        <td>—</td>
+        <td>11,204</td>
+        <td>0.2%</td>
+        <td></td>
+      </tr>
+      <tr style="background:#eaecf0; font-weight:bold;">
+        <td colspan="2">Total</td>
+        <td>5,782,669</td>
+        <td>100%</td>
+        <td></td>
+      </tr>
+    </table>
+
+    <p class="wi">Combs carried New York City by a margin of approximately 78–17%, and won <a class="wl" href="#">Westchester</a>, <a class="wl" href="#">Rockland</a>, and <a class="wl" href="#">Albany</a> counties. Paladino swept most of upstate New York and performed strongly in <a class="wl" href="#">Staten Island</a>. The outcome was called by the <a class="wl" href="#">Associated Press</a> at 10:41 PM Eastern time.</p>
+
+    <h2 class="ws">Aftermath</h2>
+    <p class="wi">Combs was inaugurated as the 57th <a class="wl" href="#">Governor of New York</a> on January 1, 2011. His transition team, co-chaired by former <a class="wl" href="#">deputy mayor</a> <a class="wl" href="#">Dennis Walcott</a> and venture capital executive <a class="wl" href="#">Mellody Hobson</a>, was described by <i><a class="wl" href="#">Politico</a></i> as "heavy on private-sector talent and light on Albany insiders, perhaps deliberately so."<sup style="font-size:0.8em;"><a class="wl" href="#">[12]</a></sup></p>
+
+    <p class="wi">Nationally, the election results were parsed as a mixed signal. Democrats pointed to Combs's margin as evidence that the party could recruit non-traditional candidates capable of expanding the electorate, while Republicans argued that the 15-point result in a reliably blue state during a wave year illustrated the ceiling of such a strategy.<sup style="font-size:0.8em;"><a class="wl" href="#">[13]</a></sup> President Clinton, speaking at a post-election press conference, cited Combs's win as a "bright spot in an otherwise sobering evening" while acknowledging that the loss of Congressional majorities would require her administration to "govern differently" in its second two years.<sup style="font-size:0.8em;"><a class="wl" href="#">[14]</a></sup></p>
+
+    <p class="wi">Andrew Cuomo subsequently announced in December 2010 his intention to seek the Democratic nomination for <a class="wl" href="#">U.S. Senate</a> in 2012. <a class="wl" href="#">Eric Schneiderman</a> was elected <a class="wl" href="#">Attorney General</a> in the same November 2010 cycle, a race that received considerably less national attention than the gubernatorial contest.</p>
+
+    <h2 class="ws">See also</h2>
+    <ul style="font-size:0.95em;">
+      <li><a class="wl" href="#">2010 United States midterm elections</a></li>
+      <li><a class="wl" href="#">Hillary Clinton administration</a></li>
+      <li><a class="wl" href="#">Citizen Change</a></li>
+      <li><a class="wl" href="#">List of governors of New York</a></li>
+      <li><a class="wl" href="#">2010 New York State Senate election</a></li>
+    </ul>
+
+    <div class="reflist">
+      <b>References</b><br><br>
+      [1] "Republicans Seize House Majority in Midterm Rebuke of Clinton" <i>The New York Times</i>, November 3, 2010. &nbsp;·&nbsp;
+      [2] "Paterson Opts Out, Clearing Path for 2010 Primary" <i>New York Daily News</i>, February 26, 2010. &nbsp;·&nbsp;
+      [3] Citizen Change press archives, 2004. &nbsp;·&nbsp;
+      [4] Combs, Sean. "Why I'm Running for Governor." <i>The New York Times</i>, September 14, 2009. &nbsp;·&nbsp;
+      [5] Transcript, NY Democratic Gubernatorial Debate, March 2010, WNBC. &nbsp;·&nbsp;
+      [6] "Schneiderman Endorses Combs, Cites Coalition Argument" <i>Politico</i>, August 3, 2010. &nbsp;·&nbsp;
+      [7] "Ravitch Backs Combs After Weighing Independent Bid" <i>New York Post</i>, September 21, 2010. &nbsp;·&nbsp;
+      [8] "Tea Party's Paladino Wins GOP Nod in Rout" <i>Buffalo News</i>, September 15, 2010. &nbsp;·&nbsp;
+      [9] "How Combs's outer-borough strategy held the margin" <i>The Atlantic</i>, November 12, 2010. &nbsp;·&nbsp;
+      [10] "Clinton endorses Combs, calls him 'future of the Democratic Party'" <i>AP</i>, October 19, 2010. &nbsp;·&nbsp;
+      [11] Siena College Research Institute, New York Governor Poll, October 25, 2010. &nbsp;·&nbsp;
+      [12] "Combs transition heavy on outsiders." <i>Politico</i>, November 20, 2010. &nbsp;·&nbsp;
+      [13] "Blue State, Narrow Win: What Combs's Margin Tells Us" <i>FiveThirtyEight</i>, November 4, 2010. &nbsp;·&nbsp;
+      [14] White House press briefing transcript, November 3, 2010.
+    </div>
+
+    <div class="stub-note">
+      This article about a <b>New York state election</b> is a stub. You can help Wikipedia by <a class="wl" href="#">expanding it</a>.
+    </div>
+
+    </div>
+  </div>
+</div>`
+  },
+  {
     id: "homersimpson_good",
     condition: (ev) => charlieWin && cynicism >= 4 && ruthlessness >= 6,
     image: "https://i.pinimg.com/1200x/3c/33/9e/3c339e5453035d82f27cc8e63f06512d.jpg",
@@ -19422,434 +20359,6 @@ dd {
     <span>© BBC MMIX</span>
   </div>
 
-</div>`
-  },
-  {
-    id: "combs",
-    condition: (ev) => charlieWin && anti_establishment >= 4,
-    image: "https://www.thetimes.com/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F3347dba4-d278-476d-98d5-59c5cc89b5ba.jpg?crop=3000%2C1688%2C0%2C158&resize=1200",
-    html: `<style>
-  .wiki-body {
-    background: #fff;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: #202122;
-    line-height: 1.6;
-    padding: 0;
-    margin: 0;
-  }
-  .wiki-header-bar {
-    background: #fff;
-    border-bottom: 1px solid #a2a9b1;
-    padding: 6px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: sans-serif;
-    font-size: 12px;
-    color: #54595d;
-  }
-  .wiki-wordmark { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.4em; color: #202122; }
-  .wiki-content { padding: 16px 24px; max-width: 960px; margin: 0 auto; }
-  .wiki-title { font-family: 'Linux Libertine', Georgia, serif; font-size: 2em; font-weight: normal; border-bottom: 1px solid #a2a9b1; padding-bottom: 4px; margin-bottom: 12px; color: #000; }
-  .wiki-toc { background: #f8f9fa; border: 1px solid #a2a9b1; padding: 10px 16px; display: inline-block; font-size: 0.9em; margin: 0 0 16px 0; }
-  .wiki-toc-title { font-weight: bold; text-align: center; margin-bottom: 6px; }
-  .wiki-toc ol { margin: 0; padding-left: 24px; }
-  .wiki-toc li { margin: 2px 0; }
-  a.wl { color: #3366cc; text-decoration: none; }
-  a.wl:hover { text-decoration: underline; }
-  h2.ws { font-family: 'Linux Libertine', Georgia, serif; font-size: 1.4em; font-weight: normal; border-bottom: 1px solid #a2a9b1; margin: 20px 0 8px; padding-bottom: 2px; }
-  h3.ws { font-size: 1.1em !important; font-weight: bold !important; letter-spacing: 0 !important; margin: 4px 0 6px !important; text-align: left !important; }
-  .infobox {
-    float: right;
-    clear: right;
-    margin: 0 0 16px 24px;
-    padding: 0;
-    border: 1px solid #a2a9b1;
-    background: #f8f9fa;
-    font-size: 12.5px;
-    line-height: 1.5;
-    width: 290px;
-    font-family: sans-serif;
-  }
-  .infobox-title {
-    background: #cee0f2;
-    text-align: center;
-    font-weight: bold;
-    padding: 6px 8px;
-    font-size: 1.05em;
-    border-bottom: 1px solid #a2a9b1;
-  }
-  .infobox-subtitle {
-    background: #ddeeff;
-    text-align: center;
-    padding: 4px 8px;
-    font-size: 0.95em;
-    border-bottom: 1px solid #a2a9b1;
-    color: #333;
-  }
-  .infobox table { width: 100%; border-collapse: collapse; }
-  .infobox td { padding: 4px 8px; vertical-align: top; }
-  .infobox .ib-label { color: #54595d; font-size: 0.9em; }
-  .infobox .ib-cand-header { background: #eaecf0; font-weight: bold; text-align: center; padding: 5px; border-top: 1px solid #a2a9b1; border-bottom: 1px solid #a2a9b1; }
-  .infobox .ib-party-d { background: #ddeeff; font-weight: bold; padding: 4px 8px; }
-  .infobox .ib-party-r { background: #ffe8e8; font-weight: bold; padding: 4px 8px; }
-  .infobox .ib-party-g { background: #e8ffe8; font-weight: bold; padding: 4px 8px; }
-  .bar-wrap { margin: 4px 8px 8px; }
-  .bar-label { display: flex; justify-content: space-between; font-size: 0.85em; margin-bottom: 2px; }
-  .bar-outer { background: #eaecf0; height: 10px; border-radius: 2px; overflow: hidden; }
-  .bar-d { background: #3971b5; height: 10px; }
-  .bar-r { background: #c0392b; height: 10px; }
-  .bar-g { background: #4caf50; height: 10px; }
-  .wiki-table {
-    border-collapse: collapse;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    margin: 12px 0;
-    width: 100%;
-  }
-  .wiki-table th {
-    background: #eaecf0;
-    border: 1px solid #a2a9b1;
-    padding: 6px 10px;
-    text-align: left;
-  }
-  .wiki-table td {
-    border: 1px solid #a2a9b1;
-    padding: 5px 10px;
-    vertical-align: top;
-  }
-  .wiki-table .row-d { background: #ddeeff; }
-  .wiki-table .row-r { background: #fff0f0; }
-  .wiki-table .row-g { background: #f0fff0; }
-  .wiki-table .row-o { background: #fafafa; }
-  .wiki-table .won { font-weight: bold; }
-  .result-bar-cell { width: 120px; }
-  .mini-bar-outer { background: #eaecf0; height: 8px; border-radius: 1px; margin: .5em auto; overflow: hidden; }
-  .note-box { background: #eaf3fb; border-left: 3px solid #3685b5; padding: 8px 12px; font-size: 0.88em; font-family: sans-serif; margin: 14px 0; color: #333; }
-  p.wi { margin: 0 0 12px; }
-  .reflist { font-size: 0.88em; font-family: sans-serif; color: #54595d; border-top: 1px solid #a2a9b1; padding-top: 8px; margin-top: 20px; }
-  .stub-note { font-family: sans-serif; font-size: 0.85em; color: #54595d; border: 1px solid #a2a9b1; background: #f8f9fa; padding: 6px 10px; margin-top: 20px; text-align: center; }
-  .clearfix::after { content: ""; display: table; clear: both; }
-</style>
-
-<div class="wiki-body">
-  <div class="wiki-header-bar">
-    <div class="wiki-wordmark">Wikipedia</div>
-    <div style="font-family:sans-serif;">Article &nbsp;·&nbsp; Talk &nbsp;·&nbsp; Read &nbsp;·&nbsp; Edit &nbsp;·&nbsp; View history</div>
-  </div>
-
-  <div class="wiki-content">
-    <h1 class="wiki-title">2010 New York gubernatorial election</h1>
-
-    <div class="infobox">
-      <div class="infobox-title">2010 New York<br>gubernatorial election</div>
-      <div class="infobox-subtitle">November 2, 2010</div>
-      <table>
-        <tr><td colspan="2" style="text-align:center; padding:6px 8px; font-size:0.9em; color:#54595d; border-bottom:1px solid #a2a9b1;">← <a class="wl" href="#">2006</a> &nbsp;&nbsp; <a class="wl" href="#">2014</a> →</td></tr>
-        <tr><td colspan="2" class="ib-cand-header">Candidates</td></tr>
-        <tr>
-          <td class="ib-party-d" colspan="2">&#9632; Democratic</td>
-        </tr>
-        <tr>
-          <td colspan="2" style="text-align:center; padding:8px;">
-            <div style="font-size:1.1em; font-weight:bold;"><a class="wl" href="#">Sean Combs</a></div>
-            <div style="font-size:0.9em; color:#54595d;">Running mate: <a class="wl" href="#">Stephanie Miner</a></div>
-          </td>
-        </tr>
-        <tr>
-          <td class="ib-party-r" colspan="2">&#9632; Republican</td>
-        </tr>
-        <tr>
-          <td colspan="2" style="text-align:center; padding:8px;">
-            <div style="font-size:1.1em; font-weight:bold;"><a class="wl" href="#">Carl Paladino</a></div>
-            <div style="font-size:0.9em; color:#54595d;">Running mate: <a class="wl" href="#">Greg Edwards</a></div>
-          </td>
-        </tr>
-        <tr><td colspan="2" class="ib-cand-header">Results</td></tr>
-      </table>
-      <div class="bar-wrap">
-        <div class="bar-label"><span style="color:#3971b5;font-weight:bold;">Combs (D)</span><span>54.8%</span></div>
-        <div class="bar-outer"><div class="bar-d" style="width:54.8%;"></div></div>
-      </div>
-      <div class="bar-wrap">
-        <div class="bar-label"><span style="color:#c0392b;font-weight:bold;">Paladino (R)</span><span>39.3%</span></div>
-        <div class="bar-outer"><div class="bar-r" style="width:39.3%;"></div></div>
-      </div>
-      <div class="bar-wrap">
-        <div class="bar-label"><span style="color:#4caf50;font-weight:bold;">Hawkins (G)</span><span>3.7%</span></div>
-        <div class="bar-outer"><div class="bar-g" style="width:3.7%;"></div></div>
-      </div>
-      <table>
-        <tr>
-          <td class="ib-label">Margin</td>
-          <td><b>15.5 pp</b></td>
-        </tr>
-        <tr>
-          <td class="ib-label">Popular vote</td>
-          <td>3,168,442 / 2,271,809</td>
-        </tr>
-        <tr>
-          <td class="ib-label">Turnout</td>
-          <td>41.3%</td>
-        </tr>
-        <tr>
-          <td style="padding:8px 8px 4px;" colspan="2">
-            <div style="font-size:0.88em; color:#54595d; text-align:center; border-top:1px solid #a2a9b1; padding-top:6px;">
-              Governor before election<br>
-              <a class="wl" href="#" style="color:#3366cc;"><b>David Paterson</b></a><br>
-              <span style="color:#3971b5;">Democratic</span>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:4px 8px 10px;" colspan="2">
-            <div style="font-size:0.88em; color:#54595d; text-align:center;">
-              Governor-elect<br>
-              <a class="wl" href="#" style="color:#3366cc;"><b>Sean Combs</b></a><br>
-              <span style="color:#3971b5;">Democratic</span>
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="wiki-toc">
-      <div class="wiki-toc-title">Contents</div>
-      <ol>
-        <li><a class="wl" href="#">Background</a></li>
-        <li><a class="wl" href="#">Democratic primary</a>
-          <ol>
-            <li><a class="wl" href="#">Candidates</a></li>
-            <li><a class="wl" href="#">Primary results</a></li>
-          </ol>
-        </li>
-        <li><a class="wl" href="#">Republican primary</a></li>
-        <li><a class="wl" href="#">General election</a>
-          <ol>
-            <li><a class="wl" href="#">Campaign</a></li>
-            <li><a class="wl" href="#">Results</a></li>
-          </ol>
-        </li>
-        <li><a class="wl" href="#">Aftermath</a></li>
-        <li><a class="wl" href="#">See also</a></li>
-        <li><a class="wl" href="#">References</a></li>
-      </ol>
-    </div>
-
-    <p class="wi">The <b>2010 New York gubernatorial election</b> was held on November 2, 2010, as part of the broader <a class="wl" href="#">2010 United States midterm elections</a>. <a class="wl" href="#">Sean Combs</a>, the <a class="wl" href="#">Harlem</a>-born music mogul and civic activist, won the <a class="wl" href="#">Democratic</a> nomination following a crowded and nationally watched primary, then defeated <a class="wl" href="#">Republican</a> nominee <a class="wl" href="#">Carl Paladino</a> in the general election by approximately 15 percentage points. Combs became the first <i>elected</i> <a class="wl" href="#">African-American</a> governor of New York and the first person without prior elected office to win a major-party gubernatorial nomination in the state's modern history.</p>
-
-    <p class="wi">The election took place against a difficult national environment for Democrats. The administration of President <a class="wl" href="#">Hillary Clinton</a>, which had taken office in January 2009, faced significant public discontent over the pace of economic recovery following the <a class="wl" href="#">2007–2009 financial crisis</a>. Republicans gained 63 seats in the <a class="wl" href="#">House of Representatives</a> and six seats in the <a class="wl" href="#">Senate</a> on election night, recapturing majorities in both chambers.<sup style="font-size:0.8em;"><a class="wl" href="#">[1]</a></sup> New York's relative insulation from the wave, as Combs's margin was roughly half that of the party's 2006 gubernatorial win, was nonetheless seen as a sign of the <a class="wl" href="#">Empire State</a>'s continued lean toward Democrats at the statewide level.</p>
-
-    <div class="clearfix">
-
-    <h2 class="ws">Background</h2>
-    <p class="wi">Incumbent Governor <a class="wl" href="#">David Paterson</a>, who had assumed office in March 2008 following the resignation of <a class="wl" href="#">Eliot Spitzer</a>, announced in February 2010 that he would not seek a full term, citing persistently low approval ratings and ongoing investigations into his administration.<sup style="font-size:0.8em;"><a class="wl" href="#">[2]</a></sup> His withdrawal opened one of the most competitive Democratic primaries in New York in two decades.</p>
-
-    <p class="wi">Combs had been involved in civic and voter-registration efforts since the early 2000s, most notably through his <a class="wl" href="#">Citizen Change</a> campaign ("Vote or Die"), which was widely credited with boosting youth turnout for <a class="wl" href="#">Paul Wellstone</a> in the <a class="wl" href="#">2004 presidential election</a>.<sup style="font-size:0.8em;"><a class="wl" href="#">[3]</a></sup> He had publicly considered a Senate run in 2006 but ultimately decided not to run. His entrance into the 2010 governor's race was announced in a September 2009 <i><a class="wl" href="#">New York Times</a></i> op-ed in which he outlined an economic platform centered on urban infrastructure investment, workforce development in the outer boroughs, and reform of the state's <a class="wl" href="#">Rockefeller drug laws</a>.<sup style="font-size:0.8em;"><a class="wl" href="#">[4]</a></sup></p>
-
-    <h2 class="ws">Democratic primary</h2>
-    <h3 class="ws">Candidates</h3>
-    <p class="wi">The Democratic field was considered unusually crowded for a New York gubernatorial primary. Major declared candidates included:</p>
-
-    <table class="wiki-table">
-      <tr>
-        <th>Candidate</th>
-        <th>Background</th>
-        <th>Notable support</th>
-      </tr>
-      <tr class="row-d">
-        <td><b><a class="wl" href="#">Sean Combs</a></b></td>
-        <td>Music executive and entrepreneur; founder of <a class="wl" href="#">Bad Boy Records</a>; civic activist</td>
-        <td><a class="wl" href="#">Rep. Charles Rangel</a>, <a class="wl" href="#">Rev. Al Sharpton</a>, several <a class="wl" href="#">Brooklyn</a> party organizations</td>
-      </tr>
-      <tr class="row-o">
-        <td><a class="wl" href="#">Andrew Cuomo</a></td>
-        <td><a class="wl" href="#">Attorney General of New York</a> (2007–present); former <a class="wl" href="#">Secretary of Housing and Urban Development</a></td>
-        <td>Much of the party establishment; labor unions</td>
-      </tr>
-      <tr class="row-o">
-        <td><a class="wl" href="#">Richard Ravitch</a></td>
-        <td>Lieutenant Governor (2009–2010); former <a class="wl" href="#">MTA</a> chair</td>
-        <td>Good-government groups; editorial boards</td>
-      </tr>
-      <tr class="row-o">
-        <td><a class="wl" href="#">Kathleen Rice</a></td>
-        <td><a class="wl" href="#">Nassau County District Attorney</a></td>
-        <td>Law enforcement associations; suburban moderates</td>
-      </tr>
-      <tr class="row-o">
-        <td><a class="wl" href="#">Eric Schneiderman</a></td>
-        <td><a class="wl" href="#">New York State Senate</a> (1998–2010)</td>
-        <td>Progressive activist groups; <a class="wl" href="#">Working Families Party</a></td>
-      </tr>
-    </table>
-
-    <p class="wi">Cuomo entered the race as the strong frontrunner, with name recognition and institutional backing that many observers believed would be decisive. However, his campaign was hampered in its early months by persistent questions about his tenure at <a class="wl" href="#">HUD</a> and his role in loosening mortgage-lending standards in the late 1990s, a line of attack Combs's campaign pressed aggressively in debates.<sup style="font-size:0.8em;"><a class="wl" href="#">[5]</a></sup> Combs, meanwhile, proved an unexpectedly disciplined debater and drew enthusiastic crowds in <a class="wl" href="#">New York City</a>, where turnout models consistently showed him running well ahead of projections.</p>
-
-    <p class="wi">Schneiderman, running on a more explicitly progressive platform, briefly surged in late May polling before consolidating support behind Combs in the campaign's final weeks, citing the "urgent need for a candidate who could energize the full Democratic coalition."<sup style="font-size:0.8em;"><a class="wl" href="#">[6]</a></sup> Cuomo, Ravitch, and Rice all remained in the race through primary day.</p>
-
-    <h3 class="ws">Primary results</h3>
-
-    <table class="wiki-table">
-      <tr>
-        <th>Candidate</th>
-        <th>Votes</th>
-        <th>%</th>
-        <th class="result-bar-cell"></th>
-      </tr>
-      <tr class="row-d">
-        <td class="won"><b>Sean Combs</b> ✓</td>
-        <td class="won">481,203</td>
-        <td class="won"><b>33.8%</b></td>
-        <td><div class="mini-bar-outer"><div style="background:#3971b5;height:8px;width:33.8%;"></div></div></td>
-      </tr>
-      <tr class="row-o">
-        <td>Andrew Cuomo</td>
-        <td>407,119</td>
-        <td>28.6%</td>
-        <td><div class="mini-bar-outer"><div style="background:#6699cc;height:8px;width:28.6%;"></div></div></td>
-      </tr>
-      <tr class="row-o">
-        <td>Richard Ravitch</td>
-        <td>256,440</td>
-        <td>18.0%</td>
-        <td><div class="mini-bar-outer"><div style="background:#6699cc;height:8px;width:18.0%;"></div></div></td>
-      </tr>
-      <tr class="row-o">
-        <td>Kathleen Rice</td>
-        <td>163,882</td>
-        <td>11.5%</td>
-        <td><div class="mini-bar-outer"><div style="background:#6699cc;height:8px;width:11.5%;"></div></div></td>
-      </tr>
-      <tr class="row-o">
-        <td>Eric Schneiderman</td>
-        <td>106,774</td>
-        <td>7.5%</td>
-        <td><div class="mini-bar-outer"><div style="background:#6699cc;height:8px;width:7.5%;"></div></div></td>
-      </tr>
-      <tr class="row-o">
-        <td><i>Others</i></td>
-        <td>8,991</td>
-        <td>0.6%</td>
-        <td></td>
-      </tr>
-      <tr style="background:#eaecf0; font-weight:bold;">
-        <td>Total</td>
-        <td>1,424,409</td>
-        <td>100%</td>
-        <td></td>
-      </tr>
-    </table>
-
-    <p class="wi">Combs carried all five New York City boroughs by wide margins and ran competitively in <a class="wl" href="#">Westchester</a> and <a class="wl" href="#">Nassau</a> counties. Cuomo led outside New York City but could not overcome Combs's metropolitan dominance. Cuomo conceded early the following morning and endorsed Combs, as did Schneiderman and Rice within the week. Ravitch withheld his endorsement for several days amid speculation about a third-party run before ultimately supporting the Democratic nominee.<sup style="font-size:0.8em;"><a class="wl" href="#">[7]</a></sup></p>
-
-    <h2 class="ws">Republican primary</h2>
-    <p class="wi">The Republican primary was won by <a class="wl" href="#">Carl Paladino</a>, a <a class="wl" href="#">Buffalo</a>-area real estate developer and Tea Party-aligned candidate, who defeated former <a class="wl" href="#">congressman</a> <a class="wl" href="#">Rick Lazio</a> with 62.3% of the vote. Paladino's campaign, which stressed fiscal austerity, opposition to the <a class="wl" href="#">TARP</a> bank bailouts, and sharp criticism of President Clinton's stimulus agenda, benefited from substantial <a class="wl" href="#">Tea Party movement</a> organizational support.<sup style="font-size:0.8em;"><a class="wl" href="#">[8]</a></sup></p>
-
-    <h2 class="ws">General election</h2>
-    <h3 class="ws">Campaign</h3>
-    <p class="wi">The general election campaign was defined by two competing narratives. Paladino sought to tie Combs to the Clinton administration and to <a class="wl" href="#">Albany</a>'s perceived dysfunction, arguing that a first-time candidate with no governmental experience was unfit to manage a state in fiscal crisis. His campaign repeatedly aired television spots juxtaposing Combs's <a class="wl" href="#">hip-hop</a> persona with images of budget shortfalls and empty manufacturing plants in <a class="wl" href="#">upstate New York</a>.</p>
-
-    <p class="wi">Combs countered by emphasizing job creation, positioning himself as an outsider untainted by Albany's failures. His campaign produced a widely-shared series of ads spotlighting <a class="wl" href="#">South Bronx</a> and <a class="wl" href="#">Brownsville</a> residents speaking directly to camera about economic need, credited by political analysts with boosting his favorability among <a class="wl" href="#">Latino</a> and working-class white voters in the outer boroughs.<sup style="font-size:0.8em;"><a class="wl" href="#">[9]</a></sup> He received the formal endorsements of the <a class="wl" href="#">Working Families Party</a>, the <a class="wl" href="#">United Federation of Teachers</a>, and 1199 <a class="wl" href="#">SEIU</a>, as well as a high-profile endorsement from President Clinton in October.<sup style="font-size:0.8em;"><a class="wl" href="#">[10]</a></sup></p>
-
-    <p class="wi">The race tightened somewhat in late October, consistent with national trends showing Democratic candidates underperforming their summer polling averages. A <i><a class="wl" href="#">Siena College</a></i> poll released October 25 showed Combs ahead by 12 points, down from 21 points in August.<sup style="font-size:0.8em;"><a class="wl" href="#">[11]</a></sup></p>
-
-    <h3 class="ws">Results</h3>
-
-    <table class="wiki-table">
-      <tr>
-        <th>Candidate</th>
-        <th>Party</th>
-        <th>Votes</th>
-        <th>%</th>
-        <th class="result-bar-cell"></th>
-      </tr>
-      <tr class="row-d">
-        <td class="won"><b>Sean Combs</b> ✓</td>
-        <td>Democratic / Working Families</td>
-        <td class="won">3,168,442</td>
-        <td class="won"><b>54.8%</b></td>
-        <td><div class="mini-bar-outer"><div style="background:#3971b5;height:8px;width:54.8%;"></div></div></td>
-      </tr>
-      <tr class="row-r">
-        <td>Carl Paladino</td>
-        <td>Republican / Conservative / Tea Party</td>
-        <td>2,271,809</td>
-        <td>39.3%</td>
-        <td><div class="mini-bar-outer"><div style="background:#c0392b;height:8px;width:39.3%;"></div></div></td>
-      </tr>
-      <tr class="row-g">
-        <td>Howie Hawkins</td>
-        <td>Green</td>
-        <td>213,870</td>
-        <td>3.7%</td>
-        <td><div class="mini-bar-outer"><div style="background:#4caf50;height:8px;width:3.7%;"></div></div></td>
-      </tr>
-      <tr class="row-o">
-        <td>Warren Redlich</td>
-        <td>Libertarian</td>
-        <td>117,344</td>
-        <td>2.0%</td>
-        <td><div class="mini-bar-outer"><div style="background:#c8a800;height:8px;width:2.0%;"></div></div></td>
-      </tr>
-      <tr class="row-o">
-        <td><i>Others / scattering</i></td>
-        <td>—</td>
-        <td>11,204</td>
-        <td>0.2%</td>
-        <td></td>
-      </tr>
-      <tr style="background:#eaecf0; font-weight:bold;">
-        <td colspan="2">Total</td>
-        <td>5,782,669</td>
-        <td>100%</td>
-        <td></td>
-      </tr>
-    </table>
-
-    <p class="wi">Combs carried New York City by a margin of approximately 78–17%, and won <a class="wl" href="#">Westchester</a>, <a class="wl" href="#">Rockland</a>, and <a class="wl" href="#">Albany</a> counties. Paladino swept most of upstate New York and performed strongly in <a class="wl" href="#">Staten Island</a>. The outcome was called by the <a class="wl" href="#">Associated Press</a> at 10:41 PM Eastern time.</p>
-
-    <h2 class="ws">Aftermath</h2>
-    <p class="wi">Combs was inaugurated as the 57th <a class="wl" href="#">Governor of New York</a> on January 1, 2011. His transition team, co-chaired by former <a class="wl" href="#">deputy mayor</a> <a class="wl" href="#">Dennis Walcott</a> and venture capital executive <a class="wl" href="#">Mellody Hobson</a>, was described by <i><a class="wl" href="#">Politico</a></i> as "heavy on private-sector talent and light on Albany insiders, perhaps deliberately so."<sup style="font-size:0.8em;"><a class="wl" href="#">[12]</a></sup></p>
-
-    <p class="wi">Nationally, the election results were parsed as a mixed signal. Democrats pointed to Combs's margin as evidence that the party could recruit non-traditional candidates capable of expanding the electorate, while Republicans argued that the 15-point result in a reliably blue state during a wave year illustrated the ceiling of such a strategy.<sup style="font-size:0.8em;"><a class="wl" href="#">[13]</a></sup> President Clinton, speaking at a post-election press conference, cited Combs's win as a "bright spot in an otherwise sobering evening" while acknowledging that the loss of Congressional majorities would require her administration to "govern differently" in its second two years.<sup style="font-size:0.8em;"><a class="wl" href="#">[14]</a></sup></p>
-
-    <p class="wi">Andrew Cuomo subsequently announced in December 2010 his intention to seek the Democratic nomination for <a class="wl" href="#">U.S. Senate</a> in 2012. <a class="wl" href="#">Eric Schneiderman</a> was elected <a class="wl" href="#">Attorney General</a> in the same November 2010 cycle, a race that received considerably less national attention than the gubernatorial contest.</p>
-
-    <h2 class="ws">See also</h2>
-    <ul style="font-size:0.95em;">
-      <li><a class="wl" href="#">2010 United States midterm elections</a></li>
-      <li><a class="wl" href="#">Hillary Clinton administration</a></li>
-      <li><a class="wl" href="#">Citizen Change</a></li>
-      <li><a class="wl" href="#">List of governors of New York</a></li>
-      <li><a class="wl" href="#">2010 New York State Senate election</a></li>
-    </ul>
-
-    <div class="reflist">
-      <b>References</b><br><br>
-      [1] "Republicans Seize House Majority in Midterm Rebuke of Clinton" <i>The New York Times</i>, November 3, 2010. &nbsp;·&nbsp;
-      [2] "Paterson Opts Out, Clearing Path for 2010 Primary" <i>New York Daily News</i>, February 26, 2010. &nbsp;·&nbsp;
-      [3] Citizen Change press archives, 2004. &nbsp;·&nbsp;
-      [4] Combs, Sean. "Why I'm Running for Governor." <i>The New York Times</i>, September 14, 2009. &nbsp;·&nbsp;
-      [5] Transcript, NY Democratic Gubernatorial Debate, March 2010, WNBC. &nbsp;·&nbsp;
-      [6] "Schneiderman Endorses Combs, Cites Coalition Argument" <i>Politico</i>, August 3, 2010. &nbsp;·&nbsp;
-      [7] "Ravitch Backs Combs After Weighing Independent Bid" <i>New York Post</i>, September 21, 2010. &nbsp;·&nbsp;
-      [8] "Tea Party's Paladino Wins GOP Nod in Rout" <i>Buffalo News</i>, September 15, 2010. &nbsp;·&nbsp;
-      [9] "How Combs's outer-borough strategy held the margin" <i>The Atlantic</i>, November 12, 2010. &nbsp;·&nbsp;
-      [10] "Clinton endorses Combs, calls him 'future of the Democratic Party'" <i>AP</i>, October 19, 2010. &nbsp;·&nbsp;
-      [11] Siena College Research Institute, New York Governor Poll, October 25, 2010. &nbsp;·&nbsp;
-      [12] "Combs transition heavy on outsiders." <i>Politico</i>, November 20, 2010. &nbsp;·&nbsp;
-      [13] "Blue State, Narrow Win: What Combs's Margin Tells Us" <i>FiveThirtyEight</i>, November 4, 2010. &nbsp;·&nbsp;
-      [14] White House press briefing transcript, November 3, 2010.
-    </div>
-
-    <div class="stub-note">
-      This article about a <b>New York state election</b> is a stub. You can help Wikipedia by <a class="wl" href="#">expanding it</a>.
-    </div>
-
-    </div>
-  </div>
 </div>`
   },
   {
@@ -31044,6 +31553,1289 @@ dd {
   <p>And as he cried there in the dark, the moonlight caught the edge of the fallen paper. He didn’t feel entirely fixed, and he knew tomorrow would be incredibly hard. But for the first time in a very long time, as he sat there in the quiet, Charlie Brown wanted to see the morning.</p>
 
 </div>`
+  },
+  // even more extras oh my god
+  {
+    id: "transcript_patty",
+    condition: (ev) => charlieWin && patty_approval >= 2,
+    image: "https://i1-e.pinimg.com/1200x/90/f6/ab/90f6aba7514b426faf4da80231a05b2d.jpg",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+  .transcript-page {
+    background: linear-gradient(160deg, #f0f4f8 0%, #e2e8f0 40%, #cbd5e1 100%);
+    border: 1px solid #94a3b8;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #94a3b8, 4px 4px 0 #64748b, 1px 1px 8px rgba(0,0,0,0.15);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #1e293b;
+  }
+
+  .transcript-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 23px,
+        rgba(100, 116, 139, 0.12) 23px,
+        rgba(100, 116, 139, 0.12) 24px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .telecom-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #64748b;
+  }
+
+  .telecom-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .transcript-meta {
+    font-size: 11px;
+    color: #475569;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+
+  .transcript-line {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .speaker {
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .speaker.marcie {
+    color: #0369a1;
+  }
+
+  .dialogue {
+    padding-left: 20px;
+    color: #1e293b;
+  }
+
+  .action-note {
+    font-style: italic;
+    color: #64748b;
+    padding-left: 20px;
+    margin-top: 2px;
+    font-size: 11.5px;
+  }
+
+  .telecom-stamp {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 2px solid #64748b;
+    border-radius: 4px;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #334155;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  }
+</style>
+
+<div class="letter-page">
+  <div class="stamp-area">☎</div>
+  <div class="stamp-perfs"></div>
+
+  <div class="letter-header">
+    <div class="letter-title">precious box</div>
+  </div>
+
+  <div class="transcript-meta">
+    DATE: NOVEMBER 14, 2001<br>
+    TIME: 18:42 EST<br>
+    ORIGIN: PAYPHONE, GREENWICH VILLAGE, NYC<br>
+    DESTINATION: DORMITORY LANDLINE, PROVIDENCE, RI
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="dialogue">Hello?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="dialogue">Hey, uh, it’s me. I only have like two dollars in quarters, so talk fast.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="dialogue">Good evening, Sir. How is New York treating you?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="dialogue">Pretty loud, pretty expensive. But I found that record store you told me about, the one down in the Village. It smells like dust in here, so I think you’d absolutely love it here.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="dialogue">I am perfectly capable of appreciating dust, Sir. Did you find what you were looking for?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="dialogue">Yeah. Found an original pressing of that old-school R&B record I wanted, the D'Angelo one.</div>
+    <div class="action-note">[sound of traffic passing; a muffled siren in the background]</div>
+    <div class="dialogue">I don't know, Marce. Holding it just made me think of last year, how insane we all were.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="dialogue">I believe 'clinically dramatic' covers it, yes.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="dialogue">Right? Like, I ran into Schroeder last week. He’s at Juilliard now, and he's walking around acting like he personally invented the piano. And Lucy is already threatening her pre-law professors. It's like nobody learned anything.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="dialogue">Some people are remarkably resistant to personal growth. I assume our friend Linus is currently writing a four-hundred-page thesis at Yale on how losing a high school election built his moral character?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="action-note">[Patty laughs; it's a bright, genuine sound cutting through the payphone static]</div>
+    <div class="dialogue">Oh, totally. He’s probably quoting Kierkegaard to freshmen who just want to do keg stands or whatever.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="dialogue">Has Charles called you recently?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="dialogue">Yeah, last Tuesday. He sounds... okay. Still overthinking everything, honestly. He won the whole damn school and he still thinks he broke the world doing it. The poor guy, he just can't let himself be happy. Calgary doesn't help either.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="action-note">[a soft sigh over the line]</div>
+    <div class="dialogue">We were all taking ourselves so seriously. It was just student council!</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="dialogue">It felt like the whole world at the time, though. Didn't it?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="action-note">[a long pause]</div>
+    <div class="dialogue">Yes. It did.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="dialogue">Yeah.</div>
+    <div class="action-note">[another pause; a subway train rumbles faintly in the distance]</div>
+    <div class="dialogue">It’s really loud here, Marcie. And it's freezing.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="dialogue">New York usually is. You should go back to your dorm before you catch a cold.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="dialogue">I kinda wish you were here to complain about it with me.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="action-note">[her voice softens considerably]</div>
+    <div class="dialogue">I wish I was there too, Patty.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="action-note">[automated operator voice interrupts: "Please deposit twenty-five cents for the next three minutes."]</div>
+    <div class="dialogue">Shit, I'm out of time. </div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker marcie">MARCIE:</div>
+    <div class="dialogue">Buy the record, go get warm. Call me on Sunday from the dorm landline?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker">PATTY:</div>
+    <div class="dialogue">It's a date. See you, Marce.</div>
+  </div>
+
+  <div class="transcript-meta" style="margin-top: 20px; border-bottom: none; border-top: 1px solid #94a3b8; padding-top: 12px; margin-bottom: 0; text-align: center;">
+    [CONNECTION TERMINATED]
+  </div>
+
+</div>`
+  },
+  {
+    id: "transcript_lucy",
+    condition: (ev) => charlieWin && support_arts >= 2,
+    image: "https://i1-e.pinimg.com/736x/1f/ae/9b/1fae9b86776deb5a65383c3a0a7f42fd.jpg",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+  .transcript-page {
+    background: linear-gradient(160deg, #f0f4f8 0%, #e2e8f0 40%, #cbd5e1 100%);
+    border: 1px solid #94a3b8;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #94a3b8, 4px 4px 0 #64748b, 1px 1px 8px rgba(0,0,0,0.15);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #1e293b;
+  }
+
+  .transcript-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 23px,
+        rgba(100, 116, 139, 0.12) 23px,
+        rgba(100, 116, 139, 0.12) 24px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .telecom-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #64748b;
+  }
+
+  .telecom-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .transcript-meta {
+    font-size: 11px;
+    color: #475569;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+
+  .transcript-line {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .speaker {
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .speaker.lucy {
+    color: #b91c1c;
+  }
+
+  .speaker.schroeder {
+    color: #4338ca;
+  }
+
+  .dialogue {
+    padding-left: 20px;
+    color: #1e293b;
+  }
+
+  .action-note {
+    font-style: italic;
+    color: #64748b;
+    padding-left: 20px;
+    margin-top: 2px;
+    font-size: 11.5px;
+  }
+
+  .telecom-stamp {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 2px solid #64748b;
+    border-radius: 4px;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #334155;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  }
+</style>
+
+<div class="transcript-page">
+  <div class="telecom-stamp">☎</div>
+
+  <div class="telecom-header">
+    <div class="telecom-title">fine time</div>
+  </div>
+
+  <div class="transcript-meta">
+    DATE: DECEMBER 03, 2001<br>
+    TIME: 21:14 EST<br>
+    ORIGIN: PRACTICE ROOM 4B, THE JUILLIARD SCHOOL, NYC<br>
+    DESTINATION: OFF-CAMPUS APARTMENT, BOSTON, MA
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="dialogue">Hello? Who is this?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="action-note">[the faint, solitary sound of a piano chord being struck]</div>
+    <div class="dialogue">You know me.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="dialogue">Schroeder? What, are you calling me voluntarily? Did your piano catch fire? Did someone finally tell you that wearing black turtlenecks every day makes you look like a mime?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="dialogue">Very funny. They are visually unobtrusive and help me focus on the music, you know that. I was just organizing some sheet music and realized I hadn't spoken to your brother recently. I assume Linus is surviving Yale?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="dialogue">Yeah, he's fine. He joined a debate society just so he has an excuse to argue with people who are legally obligated to listen to him. Like, oh wow, he has all his rich hippie friends to hang out with now. Why didn't you just call him yourself?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="dialogue">He talks too much. I only have fifteen minutes before I need to review my counterpoint seminar notes.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="dialogue">Uh-huh.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="action-note">[another chord is struck, slightly dissonant]</div>
+    <div class="dialogue">Anyway... how is everyone else? Did the high school burn down after we left, or did Charlie actually manage to keep the lights on through graduation?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="action-note">[a sharp, knowing exhale over the line]</div>
+    <div class="dialogue">Ah. There it is.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="dialogue">There what is?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="dialogue">What's this question even for? You haven't asked about my brother in six months, Schroeder. And now suddenly you're spending your precious practice time doing a wellness check on the former student council. You want to know about poor lttle Charlie.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="dialogue">I am merely making polite conversation about our former classmates. It's a sociological curiosity, really. Besides, I do find the trajectory of mediocre student governance intellectually stimulating.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="dialogue">You are a terrible liar. It's a miracle you can play the piano with fingers that clumsy.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="action-note">[silence for a long moment, save for the ambient hum of city traffic outside his window]</div>
+    <div class="dialogue">...is he alright?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="dialogue">He's fine. He's at state college. He's still a blockhead, obviously, but he's getting by. He actually asked about you last week when I saw him at Thanksgiving.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="action-note">[the piano keys stop entirely]</div>
+    <div class="dialogue">Did he?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="dialogue">Yup. He asked if you were still hiding out in practice rooms pretending you don't need other people. I told him yes. He seemed... disappointed. But not surprised, of course. Even he knows how you are.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="dialogue">Ugh, I don't hide. Music requires isolation, Lucy. It demands sacrifice of the ordinary—</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="dialogue">Whatever you have to tell yourself to sleep at night, Bee-atch-thoven. </div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="action-note">[a heavy sigh]</div>
+    <div class="dialogue">You don't have to go out of your way. But... if you happen to speak to him again, tell him I said hello. Okay? And tell him that he shouldn't let the state college administration walk all over him. He earned his spine last year, he shouldn't lose it now.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker lucy">LUCY:</div>
+    <div class="action-note">[her voice softens, losing its usual combative edge]</div>
+    <div class="dialogue">I'll pass along the message. And try to get some fresh air, Schroeder. It's bad for your complexion to live in the dark.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker schroeder">SCHROEDER:</div>
+    <div class="dialogue">Thank you, Lucy. I'll try. Goodbye.</div>
+  </div>
+
+  <div class="transcript-meta" style="margin-top: 20px; border-bottom: none; border-top: 1px dashed rgba(150,120,50,0.4); padding-top: 12px; margin-bottom: 0; text-align: center;">
+    [CONNECTION TERMINATED]
+  </div>
+
+</div>`
+  },
+  {
+    id: "transcript_franklin",
+    condition: (ev) => charlieWin && anti_establishment <= 2,
+    image: "https://i.pinimg.com/1200x/bd/62/77/bd627702fdf21db9a2f1837c78028ff7.jpg",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+  .transcript-page {
+    background: linear-gradient(160deg, #f0f4f8 0%, #e2e8f0 40%, #cbd5e1 100%);
+    border: 1px solid #94a3b8;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #94a3b8, 4px 4px 0 #64748b, 1px 1px 8px rgba(0,0,0,0.15);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #1e293b;
+  }
+
+  .transcript-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 23px,
+        rgba(100, 116, 139, 0.12) 23px,
+        rgba(100, 116, 139, 0.12) 24px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .telecom-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #64748b;
+  }
+
+  .telecom-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .transcript-meta {
+    font-size: 11px;
+    color: #475569;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+
+  .transcript-line {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .speaker {
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .speaker.franklin {
+    color: #047857;
+  }
+
+  .speaker.charlie {
+    color: #475569;
+  }
+
+  .dialogue {
+    padding-left: 20px;
+    color: #1e293b;
+  }
+
+  .action-note {
+    font-style: italic;
+    color: #64748b;
+    padding-left: 20px;
+    margin-top: 2px;
+    font-size: 11.5px;
+  }
+
+  .telecom-stamp {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 2px solid #64748b;
+    border-radius: 4px;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #334155;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  }
+
+  .telecom-stamp::after {
+    content: 'BELL';
+    position: absolute;
+    bottom: 4px;
+    font-size: 8px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+  }
+
+</style>
+
+<div class="transcript-page">
+  <div class="telecom-stamp">✆</div>
+
+  <div class="telecom-header">
+    <div class="telecom-title">Audio Intercept Transcript</div>
+  </div>
+
+  <div class="transcript-meta">
+    DATE: FEBRUARY 12, 2002<br>
+    TIME: 19:30 EST<br>
+    ORIGIN: DORMITORY LANDLINE, GEORGETOWN UNIVERSITY, WASH. D.C.<br>
+    DESTINATION: OFF-CAMPUS APARTMENT, STATE COLLEGE, PA
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">Hello?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker franklin">FRANKLIN:</div>
+    <div class="dialogue">Charlie, it's Frank. Uh, let me guess... you're currently staring at a textbook trying to figure out how you got assigned thirty pages of reading for a Tuesday.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="action-note">[the sound of a heavy textbook snapping shut]</div>
+    <div class="dialogue">Close. I was actually staring at the ceiling, smartass. Let me guess what you're doing... you're wearing a tie right now, aren't you?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker franklin">FRANKLIN:</div>
+    <div class="action-note">[a low, tired chuckle]</div>
+    <div class="dialogue">It’s Georgetown, Charlie. If you wear sweatpants to the dining hall, they report you to the CIA. It’s a crazy nightmare, too. Like, I’m surrounded by five hundred kids desperately trying to be the next Linus.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">Oh God. Well, tell me they don't have the blankets.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker franklin">FRANKLIN:</div>
+    <div class="dialogue">No blankets! But definitely the sweater vests. Everybody here wants to be a philosopher king.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">I don't miss that at all.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker franklin">FRANKLIN:</div>
+    <div class="dialogue">You shouldn't. Speaking of which, you know, I saw the retrospective Marcie published in her campus zine up at Brown. She dedicated a whole column to our "centrist coalition" actually!</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="action-note">[A pained groan]</div>
+    <div class="dialogue">Oh no. Did she call me a sellout?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker franklin">FRANKLIN:</div>
+    <div class="dialogue">She called you a "pragmatist."</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">That somehow hurts worse. Patty called me last week and she's still mad we didn't dismantle the entire administration. She said we had the mandate to burn Principal Othmar's desk on the football field.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker franklin">FRANKLIN:</div>
+    <div class="dialogue">Well, Patty is a wartime consigliere, Charlie. She doesn't understand peacetime, you know she wanted a revolution. But you gave them functional heating in the library and a balanced student budget, so it's not like it wasn't worth it.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">It just felt like giving up, sometimes. Just watering down the whole message just so the PTA wouldn't panic...</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker franklin">FRANKLIN:</div>
+    <div class="dialogue">Listen to me. Revolutions look great on posters and all, but pragmatists actually keep people from freezing. The system is completely broken, sure, but you can't fix the pipes if you refuse to walk into the building. You compromised, we worked together, and we got things done, that's what matters. It’s not giving up, but it’s about, erm, growing up.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">And where did you learn all this from?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker franklin">FRANKLIN:</div>
+    <div class="dialogue">Kissinger.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="action-note">[a long pause. the static hums quietly on the line]</div>
+    <div class="dialogue">Ah, thanks, Frank. I think... I really needed to hear that.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker franklin">FRANKLIN:</div>
+    <div class="dialogue">Anytime, Mr. President. By the way, have you heard from Pig-Pen recently?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">Yeah, actually. It's ridiculous, but he's following Radiohead on tour across the Midwest. The life of a roadie...</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker franklin">FRANKLIN:</div>
+    <div class="dialogue">Heh, some things never change. Get back to your reading, Charlie. I've got a macroeconomics paper to finish.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">Good luck. And don't let those kids get to you.</div>
+  </div>
+
+  <div class="transcript-meta" style="margin-top: 20px; border-bottom: none; border-top: 1px dashed rgba(150,120,50,0.4); padding-top: 12px; margin-bottom: 0; text-align: center;">
+    [CONNECTION TERMINATED]
+  </div>
+
+</div>`
+  },
+  {
+    id: "transcript_roy",
+    condition: (ev) => charlieWin && window.isRoyInCharge,
+    image: "https://i.pinimg.com/1200x/1f/f6/4f/1ff64f1ff28f354dddd8de6c316d81c4.jpg",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+  .transcript-page {
+    background: linear-gradient(160deg, #f0f4f8 0%, #e2e8f0 40%, #cbd5e1 100%);
+    border: 1px solid #94a3b8;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #94a3b8, 4px 4px 0 #64748b, 1px 1px 8px rgba(0,0,0,0.15);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #1e293b;
+  }
+
+  .transcript-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 23px,
+        rgba(100, 116, 139, 0.12) 23px,
+        rgba(100, 116, 139, 0.12) 24px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .telecom-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #64748b;
+  }
+
+  .telecom-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .transcript-meta {
+    font-size: 11px;
+    color: #475569;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+
+  .transcript-line {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .speaker {
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .speaker.charlie {
+    color: #475569;
+  }
+
+  .speaker.roy {
+    color: #15803d;
+  }
+
+  .dialogue {
+    padding-left: 20px;
+    color: #1e293b;
+  }
+
+  .action-note {
+    font-style: italic;
+    color: #64748b;
+    padding-left: 20px;
+    margin-top: 2px;
+    font-size: 11.5px;
+  }
+
+  .telecom-stamp {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 2px solid #64748b;
+    border-radius: 4px;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #334155;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  }
+</style>
+
+<div class="transcript-page">
+  <div class="telecom-stamp">☎</div>
+
+  <div class="telecom-header">
+    <div class="telecom-title">fate</div>
+  </div>
+
+  <div class="transcript-meta">
+    DATE: APRIL 20, 2002<br>
+    TIME: 02:14 MST<br>
+    ORIGIN: CONVENIENCE STORE PAYPHONE, BOULDER, CO<br>
+    DESTINATION: OFF-CAMPUS APARTMENT, STATE COLLEGE, PA
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="action-note">[a groggy, muffled rustling of sheets]</div>
+    <div class="dialogue">...hello?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker roy">ROY:</div>
+    <div class="dialogue">Chuck. Chuckster. My captain. <i>El Presidente</i>!</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">Roy? Do you have any idea what time it is? Are you high?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker roy">ROY:</div>
+    <div class="dialogue">What? N-no. No way, dude. I'm completely sober, have always been. My mind is a steel trap. I'm just... uh, you know, xperiencing the universe at a higher frequency right now.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="action-note">[a heavy, tired sigh]</div>
+    <div class="dialogue">You called me at two in the morning to experience the universe at me?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker roy">ROY:</div>
+    <div class="dialogue">Hey, I'm at a payphone outside a 7-Eleven. There's this funny neon sign here, and it's buzzing, Chuck. It's beautiful, sounds like a chorus of electric angels. But listen, that's not why I called.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">Then why did you call?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker roy">ROY:</div>
+    <div class="dialogue">I was just thinking about the campaign, man. Y'know, back in high school. It was all so cool, we really took down the establishment. We were like... Batman and Robin, but if Robin was super chill and had a much better CD collection. And was much cooler, too.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">We ran for suburban high school student council, Roy.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker roy">ROY:</div>
+    <div class="dialogue">We changed history! And I just wanted to say... you're a good guy, Chuck. You're completely correctomundo. I miss you, man, I really do. I loved hanging out with you. I love you and stuff. You're my brother.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="action-note">[the line is quiet for a few seconds. When Charlie speaks again, the irritation is entirely gone from his voice]</div>
+    <div class="dialogue">I-I miss you too, Roy.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker roy">ROY:</div>
+    <div class="dialogue">Really? Because I feel like I messed things up a lot back then. Like with the registration forms, the flyters, uh... my general existence. Sometimes I think Patty was right and I was just dead weight.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">Look, you weren't dead weight. You kept me from losing my mind. <i>We</i> won, didn't we?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker roy">ROY:</div>
+    <div class="dialogue">Yeah. We did.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">Listen. Instead of calling me from a gas station in the middle of the night, why don't you just pay me a visit? You can take the Greyhound down this weekend. Crash on my couch.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker roy">ROY:</div>
+    <div class="action-note">[the sound of a plastic slurpee cup dropping onto the pavement]</div>
+    <div class="dialogue">Whoa, really? Are you serious?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">Yeah. Just... don't bring whatever you're currently smoking.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker roy">ROY:</div>
+    <div class="dialogue">Dude, I told you, I'm just high on the crisp night air. And maybe a very... uh, large Blue Raspberry Slurpee. I'll see you Saturday, my captain.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker charlie">CHARLIE:</div>
+    <div class="dialogue">Goodnight, Roy. And drink some water, for God's sake.</div>
+  </div>
+
+  <div class="transcript-meta" style="margin-top: 20px; border-bottom: none; border-top: 1px dashed rgba(150,120,50,0.4); padding-top: 12px; margin-bottom: 0; text-align: center;">
+    [CONNECTION TERMINATED]
+  </div>
+
+</div>`
+  },
+  {
+    id: "transcript_rerun",
+    condition: (ev) => linusWin && linus_bond <= 2,
+    image: "https://i1-e.pinimg.com/736x/0f/30/9d/0f309d9d86815f638d9e807247d3be26.jpg",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+  .transcript-page {
+    background: linear-gradient(160deg, #f0f4f8 0%, #e2e8f0 40%, #cbd5e1 100%);
+    border: 1px solid #94a3b8;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #94a3b8, 4px 4px 0 #64748b, 1px 1px 8px rgba(0,0,0,0.15);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #1e293b;
+  }
+
+  .transcript-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 23px,
+        rgba(100, 116, 139, 0.12) 23px,
+        rgba(100, 116, 139, 0.12) 24px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .telecom-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #64748b;
+  }
+
+  .telecom-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .transcript-meta {
+    font-size: 11px;
+    color: #475569;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+
+  .transcript-line {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .speaker {
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .speaker.rerun {
+    color: #b45309;
+  }
+
+  .speaker.linus {
+    color: #1d4ed8;
+  }
+
+  .dialogue {
+    padding-left: 20px;
+    color: #1e293b;
+  }
+
+  .action-note {
+    font-style: italic;
+    color: #64748b;
+    padding-left: 20px;
+    margin-top: 2px;
+    font-size: 11.5px;
+  }
+
+  .telecom-stamp {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 2px solid #64748b;
+    border-radius: 4px;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #334155;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  }
+
+  .telecom-stamp::after {
+    content: 'SNET';
+    position: absolute;
+    bottom: 4px;
+    font-size: 8px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+  }
+
+</style>
+
+<div class="transcript-page">
+  <div class="telecom-stamp">☎</div>
+
+  <div class="telecom-header">
+    <div class="telecom-title">if</div>
+  </div>
+
+  <div class="transcript-meta">
+    DATE: MAY 04, 2002<br>
+    TIME: 16:12 EST<br>
+    ORIGIN: VAN PELT RESIDENCE, IN SUBURBIA, MN<br>
+    DESTINATION: DORMITORY LANDLINE, YALE UNIVERSITY, NEW HAVEN, CT
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="action-note">[the sound of pages being turned rapidly]</div>
+    <div class="dialogue">Hello?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">Hey.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="dialogue">Rerun? Is everything alright? It’s the middle of the afternoon.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">I just got home from school, Mom’s not here. I’m standing in your old room.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="dialogue">Have you been going through my things again? I cataloged all my belongings before I left for New Haven.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">You don't have any things. You took all your boring books and left the closet completely empty. It’s depressing.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="dialogue">It is called minimalism, Rerun. You'll learn that when you get older. I find that an excess of material possessions tethers the mind to the—</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="action-note">[a loud, thoroughly unimpressed sigh]</div>
+    <div class="dialogue">Yeah, yeah, the earthly plane, whatever. You know what your problem is, Linus?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="dialogue">Problem? I was not aware I had a problem. I am currently maintaining a 3.9 GPA.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">Oh you do. You won that stupid election two years ago, you got into the fancy college, you have everything you said you wanted... and you’re still acting like a sad little kid.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="action-note">[the sound of pages turning abruptly stops]</div>
+    <div class="dialogue">Oh, please. That is a remarkably reductive assessment of my—</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">You’re hiding in another state because you’re scared of running into Charlie Brown at the grocery store. Come on. And now you're using all your big words, thinking you're some sort of sexy mofo, only so you don't have to admit you're just sitting in the dark feeling sorry for yourself.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="dialogue">I am <i>not</i> hiding. I am pursuing an elite secondary education. And I do not feel sorry for myself; unlike some of these losers, I am merely contemplating the inherent emptiness of institutional achievement.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">You're hiding. And you’re still holding onto that blanket, aren’t you?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="dialogue">I—</div>
+    <div class="action-note">[a beat of profound, defensive silence]</div>
+    <div class="dialogue">Who told you that? It's safely secured in a drawer.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">You’re an adult now, Linus. Stop acting like you're still eight, it’s exhausting for the rest of us. </div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="dialogue">...is there a reason you called to berate me?</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">Mom says you’re thinking about staying in Connecticut for the summer to do research. Please don’t.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="dialogue">I have opportunities here, brother. Grants! I am working closely with the philosophy department on a paper regarding moral absolutism.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">Come home. You need to touch some actual grass and be normal for a minute. I’ll even let you teach me how to shoot a basketball.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="dialogue">You hate basketball.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">I know, but you like it. So come home.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="action-note">[the static hums quietly on the line, followed by a faint, reluctant exhale]</div>
+    <div class="dialogue">...I will keep that in mind.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker rerun">RERUN:</div>
+    <div class="dialogue">Good. See ya.</div>
+  </div>
+
+  <div class="transcript-line">
+    <div class="speaker linus">LINUS:</div>
+    <div class="dialogue">Goodbye, Rerun.</div>
+  </div>
+
+  <div class="transcript-meta" style="margin-top: 20px; border-bottom: none; border-top: 1px dashed rgba(150,120,50,0.4); padding-top: 12px; margin-bottom: 0; text-align: center;">
+    [CONNECTION TERMINATED]
+  </div>
+
+</div>`
   }
 ];
 
@@ -31056,6 +32848,7 @@ endingPicker = (out, totv, aa, quickstats) => {
   window.charlieWin = window.cliqueData.charlieWin;
   window.linusWin = window.cliqueData.linusWin;
   window.itsATie = window.cliqueData.itsATie;
+  window.charlieCleanSweep = window.cliqueData.charlieCleanSweep;
 
   // queue the injection to run as soon as the DOM renders
   window.bobertTasks.push(() => {
@@ -31155,6 +32948,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 	const achievements = [
 	  { name: "Young Offender", cond: () => isCharlieWin },
 	  { name: "Good Grief", cond: () => isLinusWin },
+      { name: "Next Sensation", cond: () => window.charlieCleanSweep },
 
 	  { name: "Just Like You Imagined", cond: () => isCharlieWin && patty_approval < 0 },
 	  { name: "Uncle Wiggily in Connecticut", cond: () => isCharlieWin && ruthlessness >= 5 },
