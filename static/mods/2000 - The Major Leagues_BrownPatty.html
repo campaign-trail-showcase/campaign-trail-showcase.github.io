@@ -33289,7 +33289,125 @@ dd {
     id: "transcript_sally",
     condition: (ev) => linusWin && patty_approval < 3,
     image: "https://i.pinimg.com/1200x/78/89/05/7889058f3dca0508d970ca01d6e26156.jpg",
-    html: `<div class="transcript-page">
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+  .transcript-page {
+    background: linear-gradient(160deg, #f0f4f8 0%, #e2e8f0 40%, #cbd5e1 100%);
+    border: 1px solid #94a3b8;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #94a3b8, 4px 4px 0 #64748b, 1px 1px 8px rgba(0,0,0,0.15);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #1e293b;
+  }
+
+  .transcript-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 23px,
+        rgba(100, 116, 139, 0.12) 23px,
+        rgba(100, 116, 139, 0.12) 24px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .telecom-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #64748b;
+  }
+
+  .telecom-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .transcript-meta {
+    font-size: 11px;
+    color: #475569;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+
+  .transcript-line {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .speaker {
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .speaker.sally {
+    color: #c026d3;
+  }
+
+  .speaker.violet {
+    color: #6b21a8;
+  }
+
+  .speaker.system {
+    color: #475569;
+  }
+
+  .dialogue {
+    padding-left: 20px;
+    color: #1e293b;
+  }
+
+  .action-note {
+    font-style: italic;
+    color: #64748b;
+    padding-left: 20px;
+    margin-top: 2px;
+    font-size: 11.5px;
+  }
+
+  .telecom-stamp {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 2px solid #64748b;
+    border-radius: 4px;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #334155;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  }
+</style>
+
+<div class="transcript-page">
   <div class="telecom-stamp">✆</div>
 
   <div class="telecom-header">
