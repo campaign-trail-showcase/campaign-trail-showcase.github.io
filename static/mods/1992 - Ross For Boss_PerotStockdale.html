@@ -17677,13 +17677,58 @@ function changeImage(newImgUrl) {
   updateStyling(newImgUrl);
 }
 
-// achievement function
+// achievmeent function
+const ACHBOX = (() => {
+    const STACK_TOP    = 12;
+    const STACK_GAP    = 10;
+    const DISPLAY_TIME = 5000;
+    const active = [];
+
+    function reflow() {
+        const totalWidth = active.reduce((sum, item) => sum + item.width, 0)
+                         + STACK_GAP * (active.length - 1);
+
+        let x = (window.innerWidth - totalWidth) / 2;
+        for (const item of active) {
+            item.el.style.left = x + "px";
+            x += item.width + STACK_GAP;
+        }
+    }
+
+    function remove(popup) {
+        popup.classList.remove("is-visible");
+        popup.classList.add("is-hiding");
+
+        setTimeout(() => {
+            popup.remove();
+            const idx = active.findIndex(i => i.el === popup);
+            if (idx !== -1) active.splice(idx, 1);
+            reflow();
+        }, 250);
+    }
+
+    function push(popup) {
+        document.body.appendChild(popup);
+
+        requestAnimationFrame(() => {
+            const width = popup.offsetWidth;
+            active.push({ el: popup, width });
+            reflow();
+
+            requestAnimationFrame(() => popup.classList.add("is-visible"));
+
+            setTimeout(() => remove(popup), DISPLAY_TIME);
+        });
+    }
+
+    return { push };
+})();
+
 const CTS_ACHIEVEMENT_CSS = `
 .cts-achievement {
     position: fixed;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%) scale(0.92);
+    top: 12px;
+    transform: scale(0.92);
     opacity: 0;
     z-index: 9999;
 
@@ -17693,8 +17738,7 @@ const CTS_ACHIEVEMENT_CSS = `
 
     border: 1px solid #3e4f6b;
 
-    background:
-        linear-gradient(to bottom, #f7f1dc 0%, #ece3c4 100%);
+    background: linear-gradient(to bottom, #f7f1dc 0%, #ece3c4 100%);
 
     box-shadow:
         inset 1px 1px 0 #fff8df,
@@ -17703,13 +17747,11 @@ const CTS_ACHIEVEMENT_CSS = `
 
     color: #2b2b2b;
 
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+    transition: left 0.3s ease, opacity 0.25s ease, transform 0.25s ease;
 }
 
 .cts-achievement::before {
-    content: "Achievement Unlocked";
+    content: "Achievement unlocked";
     display: block;
 
     margin: -10px -12px 10px;
@@ -17722,8 +17764,7 @@ const CTS_ACHIEVEMENT_CSS = `
 
     color: #fff;
 
-    background:
-        linear-gradient(to right, #2f5d95 0%, #5d88b8 100%);
+    background: linear-gradient(to right, #2f5d95 0%, #5d88b8 100%);
 
     border-bottom: 1px solid #2c4868;
 
@@ -17732,12 +17773,13 @@ const CTS_ACHIEVEMENT_CSS = `
 
 .cts-achievement.is-visible {
     opacity: 1;
-    transform: translateX(-50%) scale(1);
+    transform: scale(1);
 }
 
 .cts-achievement.is-hiding {
     opacity: 0;
-    transform: translateX(-50%) scale(0.84);
+    transform: scale(0.84);
+    transition: left 0.3s ease, opacity 0.2s ease, transform 0.2s ease;
 }
 
 .cts-achievement__image {
@@ -17775,17 +17817,16 @@ const CTS_ACHIEVEMENT_CSS = `
 
     color: #4a4a4a;
 }
-
 `;
 
 function ensureAchievementStyles() {
     if (document.getElementById("cts-achievement-styles")) return;
-
     const style = document.createElement("style");
     style.id = "cts-achievement-styles";
     style.textContent = CTS_ACHIEVEMENT_CSS;
     document.head.appendChild(style);
 }
+
 
 function ctsAchievement(achievementName, difficultyChecker = true) {
     const temp = campaignTrail_temp;
@@ -17827,34 +17868,21 @@ function ctsAchievement(achievementName, difficultyChecker = true) {
     }
 
     // extract achievement metadata
-    const achievementData = temp.achievements?.[achievementName] || {};
-    const title = achievementData.title || achievementName;
-    const description = achievementData.description || "";
-    const imgSource = achievementData.image || achievementData.imageUrl || "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Code1/zXSQiZr.png";
+    const data   = temp.achievements?.[achievementName] || {};
+    const title  = data.title       || achievementName;
+    const desc   = data.description || "";
+    const imgSrc = data.image || data.imageUrl || "https://file.garden/aaGBA-NNayasLE8D/comeback%20(1).jpg";
 
     // build the custom popup
     const popup = document.createElement("div");
     popup.className = "cts-achievement";
     popup.innerHTML = `
-        <img class="cts-achievement__image" src="${imgSource}" alt="">
+        <img class="cts-achievement__image" src="${imgSrc}" alt="">
         <div class="cts-achievement__title">${title}</div>
-        ${description ? `<div class="cts-achievement__desc">${description}</div>` : ""}
+        ${desc ? `<div class="cts-achievement__desc">${desc}</div>` : ""}
     `;
 
-    document.body.appendChild(popup);
-
-    // animate in
-    requestAnimationFrame(() => {
-        popup.classList.add("is-visible");
-    });
-
-    // animate out and remove
-    setTimeout(() => {
-        popup.classList.remove("is-visible");
-        popup.classList.add("is-hiding");
-
-        setTimeout(() => popup.remove(), 250);
-    }, 3000);
+    ACHBOX.push(popup);
 }
 
 // tooltip code
@@ -19976,7 +20004,7 @@ if (isElectoralDeadlock) {
 
     if (quickstats[0] < 270 && bushResult.electoral_votes < 270 && clintonResult.electoral_votes < 270 ) ctsAchievement("New Hickory");
 
-    if (quickstats[0] > 269 && ans === 16727) ctsAchievement("Penny Pincher");
+    if (ans === 16727 && quickstats[0] >= 270) ctsAchievement("Penny Pincher");
 
     if (perotWinsEVLosesPV) ctsAchievement("Shorty");
 
