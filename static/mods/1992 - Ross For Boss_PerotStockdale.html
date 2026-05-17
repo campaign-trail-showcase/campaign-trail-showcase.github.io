@@ -18487,8 +18487,6 @@ endingPicker = (out, totv, aa, quickstats) => {
 //totv = total votes in entire election
 //aa = all final overall results data
 //quickstat = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
-    var playerEV = quickstats[0];
-    var playerID = 0;
 
 /*
 e.header = "<h2></h2>"
@@ -18501,6 +18499,7 @@ e.header = "";
 e.executable = []
 
 // data
+const playerEV = quickstats[0];
 const playerPV = quickstats[1];
 const playerAnswers = e.player_answers;
 
@@ -18559,6 +18558,65 @@ const clintonEVForEndings = isElectoralDeadlock
 const bushEVForEndings = isElectoralDeadlock
   ? applyDeadlockChoice(bushResult.electoral_votes, deadlockChoice)
   : bushResult.electoral_votes;
+
+// achievement checks
+
+	const finalStates = Array.isArray(e.final_state_results) ? e.final_state_results : [];
+	const stateWinnersByAbbr = new Map(
+	  finalStates.map(st => [st.abbr, st.result?.[0]?.candidate])
+	);
+
+    const playerWonStates = (...abbrs) => abbrs.every(abbr => stateWinnersByAbbr.get(abbr) === e.candidate_id);
+
+    if (playerWonStates('FL')) {
+    ctsAchievement("Sunshine state");
+    }
+
+    if (playerWonStates('OH', 'MI', 'PA', 'IN', 'MN', 'WI')) {
+    ctsAchievement("Giant Sucking Sound");
+    }
+
+    if (playerWonStates('CT', 'ME', 'MA', 'NH', 'RI', 'VT')) {
+    ctsAchievement("King of College kids");
+    }
+
+    if (playerWonStates('TX')) {
+    ctsAchievement("Lone Star");
+    }
+
+    if (playerWonStates('CA')) {
+    ctsAchievement("California dreaming");
+    }
+
+    if (quickstats[0] > 269 && Paranoid > 4) ctsAchievement("Paranoid");
+
+    if (playerPV > 18.9) ctsAchievement("You’ve outdone yourself");
+
+    if (quickstats[0] > 46) ctsAchievement("Wallace, who?");
+
+    if (playerPV > 35) ctsAchievement("I’m all ears");
+
+    if (quickstats[0] > 88) ctsAchievement("Teddy bear");
+
+    if (quickstats[0] > 349) ctsAchievement("Wiz Kid");
+
+    if (quickstats[0] > 269 && (e.player_answers.includes(169541))) ctsAchievement("Comeback kid");
+
+    if (quickstats[0] >= 270 && e.running_mate_last_name === "Stockdale") ctsAchievement("The Admiral");
+
+    //if (quickstats[0] >= 270 && (e.player_answers.includes(169593))) ctsAchievement("VP? Never knew her");
+
+    if (quickstats[0] >= 270 && e.running_mate_last_name === "Kirkpatrick") ctsAchievement("The Ambassador");
+
+    if (quickstats[0] >= 270 && e.running_mate_last_name === "Weicker") ctsAchievement("The Outsider");
+
+    if (e.player_answers.includes(170303)) ctsAchievement("Matrix");
+
+    if (quickstats[0] < 270 && bushResult.electoral_votes < 270 && clintonResult.electoral_votes < 270) ctsAchievement("New Hickory");
+
+    if (quickstats[0] > 269 && (e.player_answers.includes(16727))) ctsAchievement("Penny Pincher");
+
+    if (perotWinsEVLosesPV) ctsAchievement("Shorty");
 
 
 // Deadlock endings
@@ -19948,66 +20006,6 @@ if (isElectoralDeadlock) {
               <p>“Gentleman, it would be my honor.” answered Ms. Fulani.</p>`)
         e.executable.push([1, (() => { e.image = "https://file.garden/aaGBA-NNayasLE8D/Fulani.png" })]);
     }
-
-    const stateWinnersByAbbr = new Map(
-    e.final_state_results.map(state => [
-        state.abbr,
-        state.result?.[0]?.candidate
-    ])
-    );
-
-    const playerWonStates = (...abbrs) => abbrs.every(abbr => stateWinnersByAbbr.get(abbr) === e.candidate_id);
-
-    if (playerWonStates('FL')) {
-    ctsAchievement("Sunshine state");
-    }
-
-    if (playerWonStates('OH', 'MI', 'PA', 'IN', 'MN', 'WI')) {
-    ctsAchievement("Giant Sucking Sound");
-    }
-
-    if (playerWonStates('CT', 'ME', 'MA', 'NH', 'RI', 'VT')) {
-    ctsAchievement("King of College kids");
-    }
-
-    if (playerWonStates('TX')) {
-    ctsAchievement("Lone Star");
-    }
-
-    if (playerWonStates('CA')) {
-    ctsAchievement("California dreaming");
-    }
-
-    if (quickstats[0] > 269 && Paranoid > 4) ctsAchievement("Paranoid");
-
-    if (playerPV > 18.9) ctsAchievement("You’ve outdone yourself");
-
-    if (quickstats[0] > 46) ctsAchievement("Wallace, who?");
-
-    if (playerPV > 35) ctsAchievement("I’m all ears");
-
-    if (quickstats[0] > 88) ctsAchievement("Teddy bear");
-
-    if (quickstats[0] > 349) ctsAchievement("Wiz Kid");
-
-    if (ans === 169541 && quickstats[0] > 269) ctsAchievement("Comeback kid");
-
-    if (quickstats[0] >= 270 && e.running_mate_last_name === "Stockdale") ctsAchievement("The Admiral");
-
-    //if (quickstats[0] >= 270 && ans === 169593) ctsAchievement("VP? Never knew her");
-
-    if (quickstats[0] >= 270 && e.running_mate_last_name === "Kirkpatrick") ctsAchievement("The Ambassador");
-
-    if (quickstats[0] >= 270 && e.running_mate_last_name === "Weicker") ctsAchievement("The Outsider");
-
-    if (ans === 170303) ctsAchievement("Matrix");
-
-    if (quickstats[0] < 270 && bushResult.electoral_votes < 270 && clintonResult.electoral_votes < 270 ) ctsAchievement("New Hickory");
-
-    if (ans === 16727 && quickstats[0] >= 270) ctsAchievement("Penny Pincher");
-
-    if (perotWinsEVLosesPV) ctsAchievement("Shorty");
-
 
     return construct(0);
 
