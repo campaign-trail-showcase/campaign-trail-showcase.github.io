@@ -34330,10 +34330,27 @@ async function loadAndDrawCountyMap(mode) {
 
         let demCandId = topCands[0].candidate, repCandId = topCands[1].candidate;
 
-        const stateNY = electionData.final_state_results.find(s => s.abbr === "NY");
-        const stateTX = electionData.final_state_results.find(s => s.abbr === "TX");
-        if (stateNY && stateTX && (stateTX.result.find(r => r.candidate === demCandId)?.percent || 0) > (stateNY.result.find(r => r.candidate === demCandId)?.percent || 0)) {
-            repCandId = topCands[0].candidate; demCandId = topCands[1].candidate;
+        const cand0Data = electionData.candidate_json.find(c => c.pk === demCandId)?.fields || {};
+        const cand1Data = electionData.candidate_json.find(c => c.pk === repCandId)?.fields || {};
+        const party0 = (cand0Data.party || "").toLowerCase();
+        const party1 = (cand1Data.party || "").toLowerCase();
+
+        const is0Dem = party0.includes("democrat");
+        const is1Dem = party1.includes("democrat");
+        const is0Rep = party0.includes("republican");
+        const is1Rep = party1.includes("republican");
+
+        if ((is0Dem && is1Rep) || (is1Dem && is0Rep)) {
+            if (is1Dem) {
+                demCandId = topCands[1].candidate;
+                repCandId = topCands[0].candidate;
+            }
+        } else {
+            const stateNY = electionData.final_state_results.find(s => s.abbr === "NY");
+            const stateTX = electionData.final_state_results.find(s => s.abbr === "TX");
+            if (stateNY && stateTX && (stateTX.result.find(r => r.candidate === demCandId)?.percent || 0) > (stateNY.result.find(r => r.candidate === demCandId)?.percent || 0)) {
+                repCandId = topCands[0].candidate; demCandId = topCands[1].candidate;
+            }
         }
 
         const demName = candsInfo.get(String(demCandId))?.last_name || "Democrat";
@@ -34373,6 +34390,19 @@ async function loadAndDrawCountyMap(mode) {
         const densityScale = d3.scaleLog().domain([1000, 200000]).range([0, 1]).clamp(true);
 
         // caching pass
+        const unnormalizedCounties = {};
+        const simStateVotes = {};
+
+        // target percentages straight from the game results
+        const targetStatePct = {};
+        electionData.final_state_results.forEach(f => {
+            targetStatePct[f.abbr] = {};
+            f.result.forEach(r => {
+                targetStatePct[f.abbr][r.candidate] = r.percent || 0;
+            });
+        });
+
+        // calculate raw swung baseline and accumulate simulated state totals
         usCounties.forEach(d => {
             d.fips = String(d.id).padStart(5, '0');
             const c = base2000Map[d.fips];
@@ -34381,29 +34411,92 @@ async function loadAndDrawCountyMap(mode) {
             const total = c.votes_all || 1;
             const swings = stateSwings[c.state_po] || {};
 
-			const countyResults = activeCandidates.map(candId => {
-				let baseVotes = (candId === demCandId) ? (c.votes_dem || 0) : (candId === repCandId ? (c.votes_rep || 0) : ((c.votes_other || 0) / Math.max(1, activeCandidates.length - 2)));
-				let basePct = baseVotes / total;
-				let rawSwing = swings[candId] || 0;
-				let dampenedSwing = rawSwing > 0 ? rawSwing * (1 - basePct) * 1.2 : rawSwing * basePct * 1.2;
-				let dynamicCap = Math.max(0.15, Math.abs(rawSwing) * 1.75);
-				dampenedSwing = Math.max(-dynamicCap, Math.min(dynamicCap, dampenedSwing));
-				let newPct = Math.max(0, Math.min(1, basePct + dampenedSwing));
+            const countyResults = activeCandidates.map(candId => {
+                let baseVotes = (candId === demCandId) ? (c.votes_dem || 0) : (candId === repCandId ? (c.votes_rep || 0) : ((c.votes_other || 0) / Math.max(1, activeCandidates.length - 2)));
+                let basePct = baseVotes / total;
+                let rawSwing = swings[candId] || 0;
 
-				return { id: candId, pct: newPct, votes: Math.round(newPct * total), baseVotes: baseVotes };
-			});
+                // swing math (dampened to avoid going below 0 or above 100)
+                let dampenedSwing = rawSwing > 0 ? rawSwing * (1 - basePct) * 1.2 : rawSwing * basePct * 1.2;
+                let dynamicCap = Math.max(0.15, Math.abs(rawSwing) * 1.75);
+                dampenedSwing = Math.max(-dynamicCap, Math.min(dynamicCap, dampenedSwing));
+                let newPct = Math.max(0, Math.min(1, basePct + dampenedSwing));
 
+                return { id: candId, pct: newPct, votes: newPct * total, baseVotes: baseVotes };
+            });
+
+            // make sure the raw estimates sum to 100% locally
             const sumPct = countyResults.reduce((sum, cr) => sum + cr.pct, 0);
-            if (sumPct > 0) countyResults.forEach(cr => { cr.pct = cr.pct / sumPct; cr.votes = Math.round(cr.pct * total); });
+            if (sumPct > 0) {
+                countyResults.forEach(cr => {
+                    cr.pct = cr.pct / sumPct;
+                    cr.votes = cr.pct * total;
+                });
+            }
 
-            let irlWinner = countyResults.reduce((prev, current) => (prev.baseVotes > current.baseVotes) ? prev : current);
+            unnormalizedCounties[d.fips] = { results: countyResults, total: total, state_po: c.state_po };
 
-            countyResults.sort((a, b) => b.pct - a.pct);
+            // tally up simulated state totals
+            if (!simStateVotes[c.state_po]) simStateVotes[c.state_po] = { total: 0 };
+            simStateVotes[c.state_po].total += total;
+            countyResults.forEach(cr => {
+                simStateVotes[c.state_po][cr.id] = (simStateVotes[c.state_po][cr.id] || 0) + cr.votes;
+            });
+        });
 
-            const winner = countyResults[0];
+        // apply state-level correction multipliers and finalize
+        usCounties.forEach(d => {
+            const c = base2000Map[d.fips];
+            const unnorm = unnormalizedCounties[d.fips];
+            if (!c || !unnorm) return;
+
+            const st = c.state_po;
+            const targetPcts = targetStatePct[st] || {};
+            const simVotes = simStateVotes[st] || {};
+            const stateTotalVotes = simVotes.total || 1;
+
+            // normalize each candidate's votes against the game's actual state percentage
+            const normalizedResults = unnorm.results.map(cr => {
+                const targetPct = targetPcts[cr.id] || 0;
+                const simPct = (simVotes[cr.id] || 0) / stateTotalVotes;
+
+                let normVotes = cr.votes;
+                if (simPct > 0 && targetPct > 0) {
+                    normVotes = cr.votes * (targetPct / simPct);
+                } else if (simPct === 0 && targetPct > 0) {
+                    // edge case: county swung to 0, but state has votes, so re-distribute proportionately.
+                    normVotes = unnorm.total * targetPct;
+                } else if (targetPct === 0) {
+                    normVotes = 0;
+                }
+                return { ...cr, normVotes: normVotes };
+            });
+
+            // rescale finalized votes to exactly equal the county's total turnout capacity
+            const normTotal = normalizedResults.reduce((sum, cr) => sum + cr.normVotes, 0);
+            let finalResults = [];
+            if (normTotal > 0) {
+                finalResults = normalizedResults.map(cr => {
+                    const finalPct = cr.normVotes / normTotal;
+                    return {
+                        id: cr.id,
+                        pct: finalPct,
+                        votes: Math.round(finalPct * unnorm.total),
+                        baseVotes: cr.baseVotes
+                    };
+                });
+            } else {
+                finalResults = unnorm.results.map(cr => ({ ...cr, votes: Math.round(cr.votes) }));
+            }
+
+            // determine the IRL vs simulated winners
+            let irlWinner = finalResults.reduce((prev, current) => (prev.baseVotes > current.baseVotes) ? prev : current);
+            finalResults.sort((a, b) => b.pct - a.pct);
+
+            const winner = finalResults[0];
             const flipped = irlWinner.id !== winner.id;
-            const marginPct = winner.pct - (countyResults.length > 1 ? countyResults[1].pct : 0);
-            const marginVotesEst = winner.votes - (countyResults.length > 1 ? countyResults[1].votes : 0);
+            const marginPct = winner.pct - (finalResults.length > 1 ? finalResults[1].pct : 0);
+            const marginVotesEst = winner.votes - (finalResults.length > 1 ? finalResults[1].votes : 0);
 
             if (marginVotesEst > maxMarginVotes) maxMarginVotes = marginVotesEst;
 
@@ -34434,7 +34527,7 @@ async function loadAndDrawCountyMap(mode) {
                 let histMargin = histDemPct - histRepPct;
 
                 let simDemPct = 0, simRepPct = 0;
-                countyResults.forEach(r => {
+                finalResults.forEach(r => {
                     if (r.id === demCandId) simDemPct = r.pct;
                     if (r.id === repCandId) simRepPct = r.pct;
                 });
@@ -34454,11 +34547,11 @@ async function loadAndDrawCountyMap(mode) {
                 shiftHtml = `<div style="color:#aaa; font-size:12px; margin-top:2px;"><i>No 1996 data available</i></div>`;
             }
 
-			d.proj = {
-                name: c.county_name, state: c.state_po, results: countyResults, totalVotes: total, marginVotes: marginVotesEst,
+            d.proj = {
+                name: c.county_name, state: c.state_po, results: finalResults, totalVotes: unnorm.total, marginVotes: marginVotesEst,
                 winnerId: winner.id,
                 colorChoro: colorInterpolators[winner.id](Math.sqrt(marginPct)),
-				colorShare: colorInterpolators[winner.id](winner.pct),
+                colorShare: colorInterpolators[winner.id](winner.pct),
                 colorBinary: candColor,
                 colorDensity: densityColor,
                 colorFlipped: flipped ? candColor : "#ececec",
@@ -34466,8 +34559,8 @@ async function loadAndDrawCountyMap(mode) {
                 winText: `${candsInfo.get(String(winner.id))?.last_name} +${(marginPct * 100).toFixed(1)}% (${marginVotesEst.toLocaleString()} votes)`
             };
 
-            d.proj.tooltipHtml = `<strong style="font-size:16px">${d.proj.name}, ${d.proj.state}</strong><br><div style="font-size:12px; color:#bbb; margin-top:-2px; margin-bottom:8px;">Total Votes: ${total.toLocaleString()}</div>` +
-                countyResults.slice(0,3).map(r =>
+            d.proj.tooltipHtml = `<strong style="font-size:16px">${d.proj.name}, ${d.proj.state}</strong><br><div style="font-size:12px; color:#bbb; margin-top:-2px; margin-bottom:8px;">Total Votes: ${unnorm.total.toLocaleString()}</div>` +
+                finalResults.slice(0,3).map(r =>
                     `<div style="display:flex; align-items:center; margin-bottom: 4px;">
                         <span style="display:inline-block; width:12px; height:12px; background-color:${candsInfo.get(String(r.id))?.color_hex || '#888'}; margin-right:8px; border: 1px solid #aaa;"></span>
                         <span style="font-weight:bold;">${candsInfo.get(String(r.id))?.last_name}: ${(r.pct * 100).toFixed(1)}%</span>
@@ -34477,7 +34570,7 @@ async function loadAndDrawCountyMap(mode) {
                 (flipped ? `<div style="color:#ffb2b2; font-size:12px; margin-top:2px;"><i>Flipped from ${candsInfo.get(String(irlWinner.id))?.last_name}</i></div>` : `<div style="color:#b2ffb2; font-size:12px; margin-top:2px;"><i>Held by ${candsInfo.get(String(winner.id))?.last_name}</i></div>`) +
                 shiftHtml;
 
-			const cent = path.centroid(d);
+            const cent = path.centroid(d);
             d.centroid = (isFinite(cent[0]) && isFinite(cent[1]) && (cent[0] !== 0 || cent[1] !== 0)) ? cent : null;
         });
 
@@ -34537,13 +34630,23 @@ async function loadAndDrawCountyMap(mode) {
 			allocatedEVs = 0;
 			let totalAllocated = 0;
 			const stateRemainders = [];
+			const realStateEVs = {};
+			electionData.states_json.forEach(s => {
+				realStateEVs["rs_" + s.fields.abbr] = s.fields.electoral_votes;
+			});
 
 			Object.values(customStates).forEach(s => {
 				if (s.tVotes === 0) { s.ev = 0; return; }
-				const exactEV = (s.tVotes / nationalTotalVotes) * 538;
-				s.ev = Math.floor(exactEV);
-				totalAllocated += s.ev;
-				stateRemainders.push({ id: s.id, remainder: exactEV - s.ev });
+
+				if (realStateEVs[s.id] !== undefined) {
+					s.ev = realStateEVs[s.id];
+					totalAllocated += s.ev;
+				} else {
+					const exactEV = (s.tVotes / nationalTotalVotes) * 538;
+					s.ev = Math.floor(exactEV);
+					totalAllocated += s.ev;
+					stateRemainders.push({ id: s.id, remainder: exactEV - s.ev });
+				}
 			});
 
 			stateRemainders.sort((a, b) => b.remainder - a.remainder);
