@@ -1,15 +1,3 @@
-
-campaignTrail_temp.cyoa = true;
-
-function getQuestionNumberFromPk(pk) {
-    return campaignTrail_temp.questions_json.map(q=>q.pk).indexOf(pk)-1;
-}
-
-cyoAdventure = function (a) {
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
-
-}
-
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -18183,7 +18171,7 @@ cyoAdventure = function (a) {
         campaignTrail_temp.running_mate_image_url = "https://file.garden/aaGBA-NNayasLE8D/303%20(1).png";
     }
 
-   if (ans === 170323) ctsAchievement("“Read my lips”");
+   if (ans === 170322) ctsAchievement("“Read my lips”");
 
    if (ans === 169484) ctsAchievement("Wait!");
 
@@ -18197,7 +18185,7 @@ cyoAdventure = function (a) {
 
    if (ans === 169528) ctsAchievement("Tricky");
 
-   if (ans === 169582 || ans === 169552) ctsAchievement("Hey! I paid for those!");
+   if (ans === 169581 || ans === 169552) ctsAchievement("Hey! I paid for those!");
 
    if (ans === 16894) ctsAchievement("Homewrecker");
 
@@ -19059,8 +19047,80 @@ if (isElectoralDeadlock) {
     }
 
     // Slide 2 endings
+    // oh no...
+	if (otherResult.electoral_votes >= 270) {
+        e.pages.push(`&emsp;<h3><i>CNN (Washington): We can now project that the winner of the 1992 Presidential Election is…wait, is this a typo? What the hell does “other” mean? That’s Perot, right? Right?</i></h3>
+              <p>Treaty Room-White House. 11:49 PM. December 13th, 1992.
+              <p>As the room shouted at each other, Lenora Fulani, Socialist activist and Presidential candidate of the New Alliance Party just shook her head and sighed. The third-parties had finally made it to Washington. Yet now that they were in power, they acted no differently from the major ones.
+              <p>“Okay, that’s enough!” Andre Marrou of the Libertarian party declared as he shouted for attention from behind the resolute desk.
+              <p>“Hey! I have something to say!” Bo Gritz of the Populist Party impatiently declared.
+              <p>“No! I am the meeting’s moderator, I won a plurality of ‘others’, so I decide who is speaking and who isn’t!” Marrou responded before taking another drag from his cigar.
+              <p>For the last 14 and a half hours, the 6 third-party candidates who made up “other” had met to decide how to reorganize the federal government. They agreed that 4 out of 6 of them would need to agree on something to put it in the plan. It started nicely enough at first. Overseas troops? Unanimous decision that we would evacuate all deployed soldiers in 48 countries. NAFTA? Canceled 5-1. The Federal Reserve System? Dead in the water, 4-2. Who should be President?
+              <p>They had spent the past four hours huddled around the resolute desk asking this question, and every option was struck down. No more than two people had agreed on someone.
+              <p>“Okay, I’m going to draw another name. And please, no interrupting!” Marrou stated while glaring at Lyndon Larouche of the DER party. Larouche, who was on Temporary Release from federal prison, had been the most annoying person in the room. During the occasional break, he’d complain to anyone listening how they had refused to untighten his handcuffs on his three-hour flight from Minnesota.
+              <p>“Okay. Next for consideration is former Senator and independent candidate Eugene McCarthy” Marrou stated, while his eyes narrowed at the slip of paper. Lenora smiled. She was the one who wrote him in.
+              <p>“Isn’t he 80?” Gritz asked. “76, but close enough.” replied Howard Phillips of the U.S Taxpayer's party.
+              <p>“I like him. I remember that he had amazing eloquence and energy at the Third-party candidates debate.” John Hagelin of the Natural Law Party said. Lenora liked him. During the meeting, they often teamed up when the other four, who were more conservative, wanted to do something reckless.
+              <p>“I agree. Senator McCarthy was one of the people who put independents on the map. Without him, we probably wouldn’t be here.” Lenora said.
+              <p>The rest of them looked at each other. They respected a nationally recognized third-party candidate like McCarthy. But she could tell that all they cared about was his support for high taxes.
+              <p>“Okay, let’s put him to a vote,” Marrou said. As Lenora expected, it was 4-2 against McCarthy's  nomination. She was disappointed, but frankly not surprised.
+              <p>“Okay, rejected.” Marrou pulled another slip out of the bowl. “Next for consideration is Henry Ross Pero- okay, is this a joke? Who put this in here?” Marrou looked around the room. As his eyes met each of them, they all shrugged or shook their heads. Then he met Lenora’s eyes.
+              <p>“Ms. Fulani,” he said coldly. “Did you write this?” The rest of the room looked at her. Lenora bit her lip as she sat up straight. She hesitated.
+              <p>“Yes, it was my suggestion,” she replied. The rest of the room devolved into groans and hand waves, not surprised that the only woman and only black person in the room came up with the dumb idea.
+              <p>“He started his campaign from scratch in 9 months. He’s popular with the American people, heck, he’s become the face of third-party politics! We should consider him as-”
+              <p>“-So how much did he pay you to write his name?” LaRouche joked, to some chuckles
+              <p>“Hey, gentleman. Please let her explain!” Hagelin exclaimed.
+              <p>“What’s there to explain? Why, he stole the limelight this entire election!” Marrou asked.
+              <p>“Heck, he was such a bad candidate <i>we beat him</i>!” Phillips declared. The room laughed at that. Except Lenora, who was becoming agitated. And Marrou, who took an extra long drag from his cigar.
+              <p>“Good one Phillips, that was funny. Anyway, let’s move on” Marrou said before reaching into the bowl.
+              <p>“But we didn’t even hold a-”
+              <p>“We don’t need to hold a vote.” Marrou snapped. “We don’t want that bastard to reap our benefits.”
+              <p>Lenora looked around the room. They all nodded their heads. Even Hagelin seemed a bit on the edge.
+              <p>Marrou shook his head. “You know, maybe I need to explain this a bit better.” Marrou stood up and sighed. "It's almost tomorrow. By then, we need a candidate for our electors to vote for. If we don’t have one, then they don’t know who to vote for, the election goes to Congress, and we’re all fucked!” he exclaimed, surprising the room.
+              <p>“<i>So…</i>” he continued, raising the piece of paper in the air. “Instead of writing down the name of a…let’s say divisive figure such as Ross Perot, we <i>should</i> be focused on finding someone we can all agree on. That way, we can all walk out of here having found someone who can bring about the change this country needs!” He looked around the room. Satisfied that he had gotten the desired effect, he then sat down. “I think I’ve got my message across.” He put out his cigar on the piece of paper.
+              <p>John Hagelin turned to Lenora, and mouthed: ‘Good lord!’ He expected her to react as equally surprised and offended. But she wasn’t looking at Hagelin. She kept her eye on the resolute desk.
+              <p>The more she analyzed what Marrou said, the more it made sense to her. Her first instinct was to take his talking-to as the prejudice-coded ramblings of a mad man corrupted by power. A year ago, she would have walked out of the room and used her new fame and influence to organize nationwide protests at whatever demagogue these men nominated. But…he had a point. By tomorrow, we did need a candidate. Otherwise, the electoral college would deadlock, Congress would decide the leader, and the establishment would live to reign once more, just as the founding fathers intended.
+              <p>Lenora shook her head. She hated Andre Marrou. She hated this room, and its stupid resolute desk, and the power that emulated from the walls. But she didn’t want to leave. She didn’t want to lead another protest in cold, dirty Harlem. Where nobody listened to her and hecklers taunted her with slurs. Where she fought through blood, sweat, tears for justice, only for her own people to support the white liberal. She wanted to be in Washington. Where she could change things. Perhaps not in the way she intended, but certainly in a way the establishment didn’t want. Lenora smiled. Yes, yes..the establishment is the enemy.
+              <p>She gazed around the table. She looked at Marrou, who was trying to put out the small fire he started by putting out his cigar on her slip. She looked at Lyndon LaRouche, who was gripping his wrists. Happy to be free of his chains, and eager to never feel them again. She looked to Howard Phillips, helping Marrou put out the fire. And she looked to Bo Gritz, who was amused by the group he found himself in, as he enjoyed a large tub of KFC.
+              <p>The men at this table? The dumb, fat, balding men? They were the anti-establishment. They were the ones who would decide the alternative. So she could either choose the establishment, which kept her and her people down; or, she could choose these buffoons, who were everything she hated. But she needed them. And they needed her. Otherwise the establishment won. And more than anything, both Lenora and the rest of the room wanted to get rid of the establishment. As Marrou pulled out a new slip of paper, Lenora nodded her head. She was tired of the system. And she wanted a new system, at any cost.
+              <p>“Okay, our next contender for Commander in Chief is…” Marrou fished a slip out of the bowl. He looked at the note, and his demeanor fell flat as he rolled his eyes at the mere suggestion.
+              <p>“Patrick Buchanan”
+              <p>A chill ran through the room at the mention of his name. Pat Buchanan. The fascist, Confederate-descended, gay-bashing, jew-hating, culture war crusader. Who made a name for himself by getting second-place in the Republican primaries, and hijacking the Republican convention to spew his bigoted ramblings to a national audience. Lenora had heard his name prior to that. As she protested the incarceration of the Central Park 5, a group of minority teenagers wrongfully accused of raping a white women, she remembered reading a newspaper where Buchanan called them ‘barbarians’ who should have been either ‘hung or horsewhipped.’ Like slaves were. Like Lenora’s ancestors were.
+              <p>"I was the one who wrote him down. I support him wholeheartedly” Bo Gritz piped up. “Seconded” Lyndon Larouche replied with a malicious smile.
+              <p>“The man is a Nazi and a divider.” stated John Hagelin, disgusted with the glee he saw from the two men.
+              <p>“<i>Stupid hippie</i>.” muttered Lyndon LaRouche, who glared at Hagelin through his prison-supplied glasses.
+              <p>“Oh what the hell, I support the motion as well” declared Howard Phillips. Andre Marrou raised an eyebrow, and John Hagelin shook his head in disgust.
+              <p>“Hey, what’s with the looks? I mean, sure the guy, he’s...you know…out there. But he wants low taxes, he wants to decrease the federal government. He’s exactly what you want, Andre.” Phillips said. Marrou leaned back in his chair, considering Phillip’s points. He did enjoy low taxes, the same as any Libertarian.
+              <p>“He also wants to ban abortion, seal the border, and go nuclear on the war on drugs” replied John Hagelin, matter of factly. Marrou raised a finger, and pointed at Hagelin, nodding his head. Marrou <i>also</i> didn’t like that or want that to happen, the same as any Libertarian.
+              <p>“Okay, you know what? We have three votes for Buchanan. We need four to approve his nomination. Now, I’m going to take a wild guess and say I’ll be the deciding vote. I’ll need some more time to think about this. In the meantime, Mr. Hagelin and Ms. Fulani can voice their objections.” Marrou declared.
+              <p>“I object to his nomination on the basis that he is an evil person” Hagelin declared in response.
+              <p>Marrou nodded. “Noted. Ms. Fulani?”
+              <p>“I approve his nomination.”
+              <p>At that moment, the world stopped turning. All of the men froze. Only their eyes moving as they looked to the Black woman, surprised that she had said something that caught their attention. Andre Marrou was leaning back in his chair so much that it almost tipped over backward. He quickly regained composure. Lenora saw that he was about to ask if she misspoke, so she continued.
+              <p>“On the basis that he’s the closest we’ve gotten to deciding someone, he hates the establishment, and because the establishment hates him even more.” She explained.
+              <p>There was no sound in the room. Suddenly, Bo Gritz leapt to his feet, raised his hands to the sky, and shouted “Thank you Jesus Christ!” This inspired Howard Phillips to do the same. LaRouche, believing himself to be the messiah, declined to partake in their chant. But the pure joy in his face was undeniable.
+              <p>John Hagelin’s brow furrowed, as he realized that this wasn’t some sort of sick joke. And Andre Marrou was still struggling to register what just happened. When he did, he simply replied: “Um…in that case, I suppose…I will also approve his nomination.” he responded. He then turned to Hagelin. “Would Mr. Hagelin like to change his vote to make the decision unanimous?”
+              <p>“What? No!” Hagelin leapt from his seat. “Don't you see what you’re doing? Your giving the presidency to a dangerous person? Who wants nothing but hate and misery in this world!”
+              <p>“Womp, womp, womp, woooooomp.” Bo Gritz said flippantly. Hagelin had it up to here with the room.
+              <p>“I can’t believe this! The America has bestowed upon us the honor to decide an issue of such great importance, yet we squander it on a hateful-“
+              <p>“-Would you shut up you stupid piece of sh*t?” Asked LaRouche. He got up from his chair.
+              <p>“I have had it up to here with your whiney little mouth and everything you deem to be right. I don’t think you understand: we won, and you lost.” LaRouche approached Hagelin.
+              <p>“Nobody is on the side of the telekinetic magic-yoga believing freak! Hell, even the damn Marxist is on our side!” LaRouche said, as he stood in front of Hagelin.
+              <p>“Pat Buchanan is going to be our President. And whatever Indian hippie you had in mind isn’t! So why don’t you get on your flying carpet, and go back to whatever university for brainiac b*tches <i>you came from</i>!” LaRouche quickly wiped away the foam forming at his mouth, and stood in front of the group. “You’re on your own.”
+              <p>Hagelin looked at the group. He shifted his body to face Lenora. She didn’t even look in his direction. Hagelin stood quietly. Then turned around and walked out of the room. The sound of the door closing behind him broke the silence.
+              <p>“Okay, Hagelin has left, so we can now declare this nomination approved unanimously.” Marrow stated. He looked at the slip of paper that he held in his hands. Then put it into his pocket. He’d have to phone all of the electors across the nation about their decision.
+              <p>“Now then. With the presidency decided,  there is simply one final question” he leaned back in his chair. “Who will be the Vice President?”
+              <p>“Well, we need to appeal to hippie types like Hagelin. So we might want to choose someone on the left. Maybe a woman.” Phillips suggested.
+              <p>“Or a woman,” said Gritz.
+              <p>The four men looked at Lenora. They then looked at each other. Then back at her. They then moved closer to each other, and had a conversation they thought Lenora wouldn’t hear.
+              <p>“We can’t possibly-” “She did help approve-” “She’s a Marxist for damn sake!” They looked at her again.
+              <p>“Hell, let’s just make the offer now. We’ll still have 9  hours to change our minds and find someone else.” The group nodded at that, and proceeded to turn to Fulani.
+              <p>“Say Ms. Fulani. What would you say about being Buchanan’s Vice President?” asked Marrou.
+              <p>Lenora looked down at the resolute desk. Then at the clock behind the men. It struck midnight in front of her eyes. It was a new day. A new dawn. A new system. One she helped create. Would she be a part of it?
+              <p>“Gentleman, it would be my honor.” answered Ms. Fulani.</p>`)
+        e.executable.push([1, (() => { e.image = "https://file.garden/aaGBA-NNayasLE8D/Fulani.png" })]);
     // Perots last interview
-    if (playerAnswers.includes(169542) && playerPV < 5.0 && clintonResult.electoral_votes >= 270) {
+    } else if (playerAnswers.includes(169542) && playerPV < 5.0 && clintonResult.electoral_votes >= 270) {
         e.pages.push(`&emsp;<h3>Youtube. Asking old people for life advice</h3>
          <p><strong>CLOSED CAPTIONING TRANSCRIPT</strong>
               <p>“Excuse me sir, do you have a minute to answer some questions?”
@@ -19933,79 +19993,7 @@ if (isElectoralDeadlock) {
               <p>“What?”
               <p>“Oh, nothing. Say, when does Jeb’s rally start again?"</p>`)
         e.executable.push([1, (() => { e.image = "https://file.garden/aaGBA-NNayasLE8D/Perot%20science%20Meuseum.png" })]);
-    // oh no...
-    } else if (otherResult.electoral_votes >= 270) {
-        e.pages.push(`&emsp;<h3><i>CNN (Washington): We can now project that the winner of the 1992 Presidential Election is…wait, is this a typo? What the hell does “other” mean? That’s Perot, right? Right?</i></h3>
-              <p>Treaty Room-White House. 11:49 PM. December 13th, 1992.
-              <p>As the room shouted at each other, Lenora Fulani, Socialist activist and Presidential candidate of the New Alliance Party just shook her head and sighed. The third-parties had finally made it to Washington. Yet now that they were in power, they acted no differently from the major ones.
-              <p>“Okay, that’s enough!” Andre Marrou of the Libertarian party declared as he shouted for attention from behind the resolute desk.
-              <p>“Hey! I have something to say!” Bo Gritz of the Populist Party impatiently declared.
-              <p>“No! I am the meeting’s moderator, I won a plurality of ‘others’, so I decide who is speaking and who isn’t!” Marrou responded before taking another drag from his cigar.
-              <p>For the last 14 and a half hours, the 6 third-party candidates who made up “other” had met to decide how to reorganize the federal government. They agreed that 4 out of 6 of them would need to agree on something to put it in the plan. It started nicely enough at first. Overseas troops? Unanimous decision that we would evacuate all deployed soldiers in 48 countries. NAFTA? Canceled 5-1. The Federal Reserve System? Dead in the water, 4-2. Who should be President?
-              <p>They had spent the past four hours huddled around the resolute desk asking this question, and every option was struck down. No more than two people had agreed on someone.
-              <p>“Okay, I’m going to draw another name. And please, no interrupting!” Marrou stated while glaring at Lyndon Larouche of the DER party. Larouche, who was on Temporary Release from federal prison, had been the most annoying person in the room. During the occasional break, he’d complain to anyone listening how they had refused to untighten his handcuffs on his three-hour flight from Minnesota.
-              <p>“Okay. Next for consideration is former Senator and independent candidate Eugene McCarthy” Marrou stated, while his eyes narrowed at the slip of paper. Lenora smiled. She was the one who wrote him in.
-              <p>“Isn’t he 80?” Gritz asked. “76, but close enough.” replied Howard Phillips of the U.S Taxpayer's party.
-              <p>“I like him. I remember that he had amazing eloquence and energy at the Third-party candidates debate.” John Hagelin of the Natural Law Party said. Lenora liked him. During the meeting, they often teamed up when the other four, who were more conservative, wanted to do something reckless.
-              <p>“I agree. Senator McCarthy was one of the people who put independents on the map. Without him, we probably wouldn’t be here.” Lenora said.
-              <p>The rest of them looked at each other. They respected a nationally recognized third-party candidate like McCarthy. But she could tell that all they cared about was his support for high taxes.
-              <p>“Okay, let’s put him to a vote,” Marrou said. As Lenora expected, it was 4-2 against McCarthy's  nomination. She was disappointed, but frankly not surprised.
-              <p>“Okay, rejected.” Marrou pulled another slip out of the bowl. “Next for consideration is Henry Ross Pero- okay, is this a joke? Who put this in here?” Marrou looked around the room. As his eyes met each of them, they all shrugged or shook their heads. Then he met Lenora’s eyes.
-              <p>“Ms. Fulani,” he said coldly. “Did you write this?” The rest of the room looked at her. Lenora bit her lip as she sat up straight. She hesitated.
-              <p>“Yes, it was my suggestion,” she replied. The rest of the room devolved into groans and hand waves, not surprised that the only woman and only black person in the room came up with the dumb idea.
-              <p>“He started his campaign from scratch in 9 months. He’s popular with the American people, heck, he’s become the face of third-party politics! We should consider him as-”
-              <p>“-So how much did he pay you to write his name?” LaRouche joked, to some chuckles
-              <p>“Hey, gentleman. Please let her explain!” Hagelin exclaimed.
-              <p>“What’s there to explain? Why, he stole the limelight this entire election!” Marrou asked.
-              <p>“Heck, he was such a bad candidate <i>we beat him</i>!” Phillips declared. The room laughed at that. Except Lenora, who was becoming agitated. And Marrou, who took an extra long drag from his cigar.
-              <p>“Good one Phillips, that was funny. Anyway, let’s move on” Marrou said before reaching into the bowl.
-              <p>“But we didn’t even hold a-”
-              <p>“We don’t need to hold a vote.” Marrou snapped. “We don’t want that bastard to reap our benefits.”
-              <p>Lenora looked around the room. They all nodded their heads. Even Hagelin seemed a bit on the edge.
-              <p>Marrou shook his head. “You know, maybe I need to explain this a bit better.” Marrou stood up and sighed. "It's almost tomorrow. By then, we need a candidate for our electors to vote for. If we don’t have one, then they don’t know who to vote for, the election goes to Congress, and we’re all fucked!” he exclaimed, surprising the room.
-              <p>“<i>So…</i>” he continued, raising the piece of paper in the air. “Instead of writing down the name of a…let’s say divisive figure such as Ross Perot, we <i>should</i> be focused on finding someone we can all agree on. That way, we can all walk out of here having found someone who can bring about the change this country needs!” He looked around the room. Satisfied that he had gotten the desired effect, he then sat down. “I think I’ve got my message across.” He put out his cigar on the piece of paper.
-              <p>John Hagelin turned to Lenora, and mouthed: ‘Good lord!’ He expected her to react as equally surprised and offended. But she wasn’t looking at Hagelin. She kept her eye on the resolute desk.
-              <p>The more she analyzed what Marrou said, the more it made sense to her. Her first instinct was to take his talking-to as the prejudice-coded ramblings of a mad man corrupted by power. A year ago, she would have walked out of the room and used her new fame and influence to organize nationwide protests at whatever demagogue these men nominated. But…he had a point. By tomorrow, we did need a candidate. Otherwise, the electoral college would deadlock, Congress would decide the leader, and the establishment would live to reign once more, just as the founding fathers intended.
-              <p>Lenora shook her head. She hated Andre Marrou. She hated this room, and its stupid resolute desk, and the power that emulated from the walls. But she didn’t want to leave. She didn’t want to lead another protest in cold, dirty Harlem. Where nobody listened to her and hecklers taunted her with slurs. Where she fought through blood, sweat, tears for justice, only for her own people to support the white liberal. She wanted to be in Washington. Where she could change things. Perhaps not in the way she intended, but certainly in a way the establishment didn’t want. Lenora smiled. Yes, yes..the establishment is the enemy.
-              <p>She gazed around the table. She looked at Marrou, who was trying to put out the small fire he started by putting out his cigar on her slip. She looked at Lyndon LaRouche, who was gripping his wrists. Happy to be free of his chains, and eager to never feel them again. She looked to Howard Phillips, helping Marrou put out the fire. And she looked to Bo Gritz, who was amused by the group he found himself in, as he enjoyed a large tub of KFC.
-              <p>The men at this table? The dumb, fat, balding men? They were the anti-establishment. They were the ones who would decide the alternative. So she could either choose the establishment, which kept her and her people down; or, she could choose these buffoons, who were everything she hated. But she needed them. And they needed her. Otherwise the establishment won. And more than anything, both Lenora and the rest of the room wanted to get rid of the establishment. As Marrou pulled out a new slip of paper, Lenora nodded her head. She was tired of the system. And she wanted a new system, at any cost.
-              <p>“Okay, our next contender for Commander in Chief is…” Marrou fished a slip out of the bowl. He looked at the note, and his demeanor fell flat as he rolled his eyes at the mere suggestion.
-              <p>“Patrick Buchanan”
-              <p>A chill ran through the room at the mention of his name. Pat Buchanan. The fascist, Confederate-descended, gay-bashing, jew-hating, culture war crusader. Who made a name for himself by getting second-place in the Republican primaries, and hijacking the Republican convention to spew his bigoted ramblings to a national audience. Lenora had heard his name prior to that. As she protested the incarceration of the Central Park 5, a group of minority teenagers wrongfully accused of raping a white women, she remembered reading a newspaper where Buchanan called them ‘barbarians’ who should have been either ‘hung or horsewhipped.’ Like slaves were. Like Lenora’s ancestors were.
-              <p>"I was the one who wrote him down. I support him wholeheartedly” Bo Gritz piped up. “Seconded” Lyndon Larouche replied with a malicious smile.
-              <p>“The man is a Nazi and a divider.” stated John Hagelin, disgusted with the glee he saw from the two men.
-              <p>“<i>Stupid hippie</i>.” muttered Lyndon LaRouche, who glared at Hagelin through his prison-supplied glasses.
-              <p>“Oh what the hell, I support the motion as well” declared Howard Phillips. Andre Marrou raised an eyebrow, and John Hagelin shook his head in disgust.
-              <p>“Hey, what’s with the looks? I mean, sure the guy, he’s...you know…out there. But he wants low taxes, he wants to decrease the federal government. He’s exactly what you want, Andre.” Phillips said. Marrou leaned back in his chair, considering Phillip’s points. He did enjoy low taxes, the same as any Libertarian.
-              <p>“He also wants to ban abortion, seal the border, and go nuclear on the war on drugs” replied John Hagelin, matter of factly. Marrou raised a finger, and pointed at Hagelin, nodding his head. Marrou <i>also</i> didn’t like that or want that to happen, the same as any Libertarian.
-              <p>“Okay, you know what? We have three votes for Buchanan. We need four to approve his nomination. Now, I’m going to take a wild guess and say I’ll be the deciding vote. I’ll need some more time to think about this. In the meantime, Mr. Hagelin and Ms. Fulani can voice their objections.” Marrou declared.
-              <p>“I object to his nomination on the basis that he is an evil person” Hagelin declared in response.
-              <p>Marrou nodded. “Noted. Ms. Fulani?”
-              <p>“I approve his nomination.”
-              <p>At that moment, the world stopped turning. All of the men froze. Only their eyes moving as they looked to the Black woman, surprised that she had said something that caught their attention. Andre Marrou was leaning back in his chair so much that it almost tipped over backward. He quickly regained composure. Lenora saw that he was about to ask if she misspoke, so she continued.
-              <p>“On the basis that he’s the closest we’ve gotten to deciding someone, he hates the establishment, and because the establishment hates him even more.” She explained.
-              <p>There was no sound in the room. Suddenly, Bo Gritz leapt to his feet, raised his hands to the sky, and shouted “Thank you Jesus Christ!” This inspired Howard Phillips to do the same. LaRouche, believing himself to be the messiah, declined to partake in their chant. But the pure joy in his face was undeniable.
-              <p>John Hagelin’s brow furrowed, as he realized that this wasn’t some sort of sick joke. And Andre Marrou was still struggling to register what just happened. When he did, he simply replied: “Um…in that case, I suppose…I will also approve his nomination.” he responded. He then turned to Hagelin. “Would Mr. Hagelin like to change his vote to make the decision unanimous?”
-              <p>“What? No!” Hagelin leapt from his seat. “Don't you see what you’re doing? Your giving the presidency to a dangerous person? Who wants nothing but hate and misery in this world!”
-              <p>“Womp, womp, womp, woooooomp.” Bo Gritz said flippantly. Hagelin had it up to here with the room.
-              <p>“I can’t believe this! The America has bestowed upon us the honor to decide an issue of such great importance, yet we squander it on a hateful-“
-              <p>“-Would you shut up you stupid piece of sh*t?” Asked LaRouche. He got up from his chair.
-              <p>“I have had it up to here with your whiney little mouth and everything you deem to be right. I don’t think you understand: we won, and you lost.” LaRouche approached Hagelin.
-              <p>“Nobody is on the side of the telekinetic magic-yoga believing freak! Hell, even the damn Marxist is on our side!” LaRouche said, as he stood in front of Hagelin.
-              <p>“Pat Buchanan is going to be our President. And whatever Indian hippie you had in mind isn’t! So why don’t you get on your flying carpet, and go back to whatever university for brainiac b*tches <i>you came from</i>!” LaRouche quickly wiped away the foam forming at his mouth, and stood in front of the group. “You’re on your own.”
-              <p>Hagelin looked at the group. He shifted his body to face Lenora. She didn’t even look in his direction. Hagelin stood quietly. Then turned around and walked out of the room. The sound of the door closing behind him broke the silence.
-              <p>“Okay, Hagelin has left, so we can now declare this nomination approved unanimously.” Marrow stated. He looked at the slip of paper that he held in his hands. Then put it into his pocket. He’d have to phone all of the electors across the nation about their decision.
-              <p>“Now then. With the presidency decided,  there is simply one final question” he leaned back in his chair. “Who will be the Vice President?”
-              <p>“Well, we need to appeal to hippie types like Hagelin. So we might want to choose someone on the left. Maybe a woman.” Phillips suggested.
-              <p>“Or a woman,” said Gritz.
-              <p>The four men looked at Lenora. They then looked at each other. Then back at her. They then moved closer to each other, and had a conversation they thought Lenora wouldn’t hear.
-              <p>“We can’t possibly-” “She did help approve-” “She’s a Marxist for damn sake!” They looked at her again.
-              <p>“Hell, let’s just make the offer now. We’ll still have 9  hours to change our minds and find someone else.” The group nodded at that, and proceeded to turn to Fulani.
-              <p>“Say Ms. Fulani. What would you say about being Buchanan’s Vice President?” asked Marrou.
-              <p>Lenora looked down at the resolute desk. Then at the clock behind the men. It struck midnight in front of her eyes. It was a new day. A new dawn. A new system. One she helped create. Would she be a part of it?
-              <p>“Gentleman, it would be my honor.” answered Ms. Fulani.</p>`)
-        e.executable.push([1, (() => { e.image = "https://file.garden/aaGBA-NNayasLE8D/Fulani.png" })]);
-    }
+	}
 
     return construct(0);
 
