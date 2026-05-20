@@ -6,7 +6,7 @@ function ctsAchievement(achievement, difficultyChecker = true){
 }
 
 const style_overwrite = document.createElement("style");
-style_overwrite.innerHTML = 
+style_overwrite.innerHTML =
 `#campaign_sign {
   background-color: #d46f5b;
   border-color: #b13a1a;
@@ -7324,17 +7324,6 @@ campaignTrail_temp.answer_score_issue_json = [
         }
     },
     {
-        "model": "campaign_trail.answer_score_state_json",
-        "pk": 99999,
-        "fields": {
-            "answer": 9999,
-            "state": 54,
-            "candidate": 20,
-            "affected_candidate": 20,
-            "global_multiplier": -0.01
-        }
-    },
-    {
         "model": "campaign_trail.answer_score_issue",
         "pk": 807334,
         "fields": {
@@ -13759,7 +13748,7 @@ cyoAdventure = function (a) {
     ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 
     if(ans == 8023 || ans == 8024 || ans == 8032 || ans == 8036 || ans == 8037 || ans == 8038 || ans == 8042 || ans == 8049 || ans == 8050 || ans == 8064 || ans == 8065 || ans == 8066){
-        nice -= 1;              
+        nice -= 1;
     }
 
 }
@@ -13768,12 +13757,12 @@ cyoAdventure = function (a) {
 endingPicker = (out, totv, aa, quickstats) => {
 used=false
 
-if (quickstats[0] >= 470) { 
-    ctsAchievement("A Chicken in Every Pot");  
+if (quickstats[0] >= 470) {
+    ctsAchievement("A Chicken in Every Pot");
 }
 
-if (quickstats[0] >= 425 && nice >= 1) { 
-    ctsAchievement("Honest Hoover");  
+if (quickstats[0] >= 425 && nice >= 1) {
+    ctsAchievement("Honest Hoover");
 }
 
 //out = "win", "loss", or "tie" for your candidate
