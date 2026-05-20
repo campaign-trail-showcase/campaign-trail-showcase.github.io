@@ -431,7 +431,7 @@ const css = `
     :root {
       --stroke-color: #BB321E;
       --fill-color: #1F1919;
-      --left-space: -434px; 
+      --left-space: -434px;
       --from-Scroll: 340%;
       --to-Scroll: -275.82%;
     }
@@ -455,7 +455,7 @@ const css = `
 		background-size: cover;
 		background-position: center;
 	}
-	
+
 	button, select {
 	  font-family: "Bahnschrift", "Source Serif 4", "Trebuchet MS", sans-serif;
 
@@ -479,19 +479,19 @@ const css = `
 	button:active, select:active {
 	  transform: translateY(1px);
 	}
-	
+
 	button:disabled {
 		border-color: #e4e4e4;
 		background-color: #f9f9f9;
 		color: #999;
 		cursor: help;
 	}
-	
+
 	.container {
 	  background-color: #05254e;
 	  border: 4px solid rgba(33, 136, 246, 0.5);
 	}
-	
+
     #game_window {
       display: flex;
       flex-direction: column;
@@ -516,7 +516,7 @@ const css = `
 	  visibility: collapse;
 	  display: none;
 	}
-	
+
 	form[name="election_year"], form[name="candidate"], form[name="running mate"], form[name="game_type_selection"] {
 	  align-items: center;
 	  display: flex;
@@ -531,7 +531,7 @@ const css = `
 
     #inner_window_1 {
       background: linear-gradient(#182045, #09092b);
-      height: 494px; 
+      height: 494px;
       color: #F8F8F8;
 	  margin: 1em 2.5em;
 	  line-height: 3.25;
@@ -578,15 +578,15 @@ const css = `
       margin-top: 0px;
       width: 448px;
       height: 455px;
-      background-image: 
-        linear-gradient(to right, transparent, #1f1919), 
-        url('https://file.garden/aNtAfG887DiA_7lO/2028AOC/DSA.gif'); 
+      background-image:
+        linear-gradient(to right, transparent, #1f1919),
+        url('https://file.garden/aNtAfG887DiA_7lO/2028AOC/DSA.gif');
       background-size: cover;
 	  background-position: center;
       z-index: 1;
     }
     #election_image img {
-      padding: 1px 1px; 
+      padding: 1px 1px;
       border: 1px solid #C9C9C9;
       z-index: 0;
       opacity: 0;
@@ -600,7 +600,7 @@ const css = `
     #election_description_window {
       background-color: #1F1919;
       font-size: 12.6px;
-      height: 455px;          
+      height: 455px;
     }
 
     #election_summary {
@@ -608,13 +608,13 @@ const css = `
       width: auto;
       z-index: 0;
       color: #DFDFD9;
-      position: absolute; 
+      position: absolute;
       left: 652px;
       top: 30px;
-      text-shadow: 
+      text-shadow:
         0px 0px 6px rgba(32, 29, 26, 0.3),
         0px 0px 8px rgba(32, 29, 26, 0.8),
-        0px 0px 1px rgba(32, 29, 26, 1); 
+        0px 0px 1px rgba(32, 29, 26, 1);
       overflow: visible;
       overflow-x: visible;
       margin-left: 5px;
@@ -631,7 +631,7 @@ const css = `
 
     #election_id_button {
 	  margin: 0;
-	  /*position: absolute; 
+	  /*position: absolute;
       left: auto;
       top: auto;
       margin-left: -265px;
@@ -655,15 +655,15 @@ const css = `
       flex-direction: row;
       align-items: flex-start;
       gap: 20px;
-      padding: 5px; 
+      padding: 5px;
     }
 
     #opponent_selection_description_window {
         margin: 1em;
         height: 317px;
         background-color: #1F1919;
-        /* background-image: 
-             linear-gradient(to right, transparent, rgba(32, 30, 26, 1)) , 
+        /* background-image:
+             linear-gradient(to right, transparent, rgba(32, 30, 26, 1)) ,
              url('https://i.imgur.com/1n3gWGS.png'); */
         background-repeat: no-repeat;
         background-size: 50% 100%, auto 100%;
@@ -679,7 +679,7 @@ const css = `
     }
     #opponent_selection_description_window p:nth-of-type(2) {
       color: #DFDFD9;
-      position: absolute; 
+      position: absolute;
       top: 66px;
       left: 290px;
       width: 620px;
@@ -703,7 +703,7 @@ const css = `
       font-family: "Bahnschrift SemiBold", "Bahnschrift", sans-serif;
       text-align: center;
     }
-	
+
 	#candidate_summary ul, #running_mate_summary ul { display: none; padding-left: 0; }
     #candidate_summary li:not(:first-child), #running_mate_summary li:not(:first-child) { display: none; }
     #candidate_summary li, #running_mate_summary li {
@@ -730,7 +730,7 @@ const css = `
     #candidate_image img, #running_mate_image img {
       width: 253px;
       height: 301px;
-      padding: 1px 1px; 
+      padding: 1px 1px;
       outline: 1px solid #C9C9C9;
       margin-top: 24px;
     }
@@ -746,11 +746,11 @@ const css = `
         line-height: 1;
     }
     #question_form br { display: none; }
-    
+
     #question_form form {
         display: grid;
-        grid-template-columns: auto 1fr; 
-        align-items: start;         
+        grid-template-columns: auto 1fr;
+        align-items: start;
         row-gap: 0;
         max-width: 930px;
     }
@@ -759,8 +759,8 @@ const css = `
         grid-column: 1;
         margin: 0;
         margin-right: -3px;
-        align-self: center;           
-        transform: translateY(-1px); 
+        align-self: center;
+        transform: translateY(-1px);
     }
     #question_form form[name="question"] input[type="radio"][name="game_answers"] {
         margin-left: -6px;
@@ -768,18 +768,18 @@ const css = `
 
     #question_form input[type="radio"] + label {
         grid-column: 2;
-        display: block;                  
-        padding: 8px 10px; 
-        margin: 0 0 8px 0;      
+        display: block;
+        padding: 8px 10px;
+        margin: 0 0 8px 0;
         line-height: 1.3;
-        border: 1px solid #ccc; 
+        border: 1px solid #ccc;
         border-radius: 0.5em;
         background: #f9f9f9;
         transition: background-color .2s, border-color .2s, box-shadow .2s;
         cursor: pointer;
         width: min(100%, 930px);
         font-size: 15px;
-        font-weight: 400; 
+        font-weight: 400;
         vertical-align: middle;
         max-width: 97%;
     }
@@ -811,14 +811,14 @@ const css = `
         margin: 0;
         padding: 0;
         margin-top: auto;
-        transform: translateY(-4px); 
+        transform: translateY(-4px);
     }
 
     /* map container */
     #map_container { height: 33.48em; background: #eae8ff; }
     .map_footer { gap: 0px !important; }
     #map_footer { margin-top: 5em !important; }
-	
+
 	/* for the default CTS/NCT footer */
 	/* we don't actually use this here, BUT it's necessary
 	 * so we can avoid issues like flat Hillary/Booker, like TTNW has */
@@ -830,7 +830,7 @@ const css = `
 				gap: 8px;
 				padding: auto;
 			  }
-			  
+
 			  #candidate_pic, img#candidate_pic {
 				order: 1;
 				width: 13em;
@@ -838,7 +838,7 @@ const css = `
 				flex-shrink: 0;
 				margin: 0;
 			  }
-			  
+
 			  .inner_window_sign_display {
 				order: 2;
 				flex: 1;
@@ -848,7 +848,7 @@ const css = `
 				flex-direction: column;
 				align-items: center;
 			  }
-			  
+
 			  #running_mate_pic,
 			img#running_mate_pic {
 			  opacity: 0;
@@ -857,7 +857,7 @@ const css = `
 			  margin: 0;
 			  border-width: 0;
 			}
-	
+
 	/* basically a lazy fix to increase the SVG map size without
 	 * changing the actual SVG or resort to more aggressive tactics,
 	 * as Year Zero does something kinda similar */
@@ -869,21 +869,21 @@ const css = `
 	}
 	#map_container svg rect, #map_container svg text {
 		transform: translate(-100px, 0px);
-	}			
+	}
 	#main_content_area + #map_footer {
 		margin: 3em auto !important;
 	}
-    
+
     .button_container {
         position: absolute;
         top: 265px;
-        left: 13px; 
-        display: flex; 
+        left: 13px;
+        display: flex;
         gap: 20px;
-        margin-top: 10px; 
+        margin-top: 10px;
     }
-	
-	/* table styling */	
+
+	/* table styling */
 	table {
 	  border-collapse: collapse;
 	  font-family: "Bahnschrift", "Source Serif 4", sans-serif;
@@ -943,9 +943,9 @@ const css = `
 	  vertical-align: top;
 	  width: 0.9em;
 	}
-    
+
     .final_results_table th, .final_results_table td {
-        padding: 2px 1px; 
+        padding: 2px 1px;
         border: 1px solid #ddd;
     }
 
@@ -956,19 +956,19 @@ const css = `
 	    padding: 0px 1em;
 	    border: 3px solid rgba(246, 33, 33, 0.5);
 	}
-    
+
     #overall_details_container {
         height: 98%;
         overflow: auto;
 		color: #fff;
     }
-    
+
     #overall_result,
     #final_results_description {
         overflow: auto;
         overflow-x: hidden;
     }
-	
+
 	h3.results_tab_header, .results_tab_header + p,
 	.title_h3, #drop_down_area_state, #state_result_data_summary {
 	  color: #fff;
@@ -978,7 +978,7 @@ const css = `
     .tooltip-container {
       opacity: 1;
       transition-delay: 0.5s;
-      border-bottom: 1px dotted blue; 
+      border-bottom: 1px dotted blue;
     }
 	.tooltip .tooltiptext {
 		background-color: #333;
@@ -1004,21 +1004,21 @@ const css = `
         transform: translate(-50px, 0px);
     }*/
     .tooltip-container:hover .tooltip {
-        pointer-events: auto; 
+        pointer-events: auto;
         visibility: visible;
-        transition-delay: 0s; 
+        transition-delay: 0s;
         opacity: 1;
         background-color: #201F1A;
         background-image: url("https://i.imgur.com/sjCE31d.png");
-        background-size: cover; 
+        background-size: cover;
         font-family: Arial, sans-serif !important;
         font-style: normal !important;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: left; 
-        line-height: 1.2; 
+        text-align: left;
+        line-height: 1.2;
     }
     .tooltip img {
-        display: block; 
+        display: block;
         margin: 0 auto -13px;
         max-width: 50%;
     }
@@ -1029,13 +1029,13 @@ const css = `
         display: inline-block;
         cursor: pointer;
         text-decoration: none;
-        font-style: italic; 
+        font-style: italic;
         color: #1F1E19;
     }
     .mytooltipBLUE { text-shadow: 0px 0px 2px rgba(44, 162, 215, 0.6); }
     .mytooltipRED { text-shadow: 0px 0px 2px rgba(187, 50, 30, 0.6); }
 
-    .mytooltipBLUE .mytooltiptext, 
+    .mytooltipBLUE .mytooltiptext,
     .mytooltipRED .mytooltiptext {
         width: 240px;
         background: linear-gradient(rgba(81, 87, 84, 0.98), rgba(158, 168, 163, 0.95));
@@ -1155,7 +1155,7 @@ const css = `
 	  padding: 1em;
 	}
     .person_button { margin-top: 0.2em; }
-    
+
     #achievement-box {
       position: fixed;
       bottom: 20px;
@@ -1179,11 +1179,11 @@ const css = `
     #candidate_pic { margin-left: 159px; }
     #running_mate_pic { margin-right: 159px; }
     .inner_window_sign_display { width: 27%; }
-    
+
     #visit_window { height: auto; }
     #visit_content { height: 79%; }
     #election_night_content h3, #visit_content h3 { display: none; }
-    
+
     #election_night_window img, #visit_content img, .overlay_window img {
         opacity: 0.95;
         width: 260px;
@@ -1192,7 +1192,7 @@ const css = `
         outline: 1px solid #08306E;
         box-shadow: none !important;
     }
-	
+
 	.overlay_window {
 		top: 35px !important;
 		border: none !important;
@@ -1201,10 +1201,10 @@ const css = `
 		opacity: 0;
 		animation: show 125ms ease-in-out forwards;
 
-		box-shadow: 
+		box-shadow:
         0 10px 15px rgba(0,0,0,.6),
         0 0 0 1px rgba(0,0,0,.08);
-		
+
 		height: auto;
 	}
 
@@ -1224,9 +1224,9 @@ const css = `
 	.overlay_window_content h3 {
 		display: none;
 	}
-	
+
     .description_window_small { height: 50%; }
-	
+
 	.overlay_buttons, #visit_buttons {
 	  margin: 1em auto;
 	}
@@ -1236,11 +1236,11 @@ const css = `
         margin: 0;
         padding: 0;
         margin-top: auto;
-        transform: translateY(-8px); 
+        transform: translateY(-8px);
     }*/
-	
+
 	#results_container { color: #000; }
-	
+
 	.visit_text {
 		background: #fff;
 		border-radius: .2em;
@@ -1253,7 +1253,7 @@ const css = `
 		position: initial;
 		transform: initial;
 	}
-	
+
 	#map_container, #overall_result, #state_info, #state_result {
 	  border: .3em solid #2188f680;
 	}
@@ -1271,7 +1271,7 @@ const css = `
 	#state_result {
 		min-height: 7.5em;
 	}
-	
+
 	#overall_result span {
 	  border: 1px solid rgba(0, 0, 0, 0.2);
 	  border-radius: 4px;
@@ -1282,7 +1282,7 @@ const css = `
 	  vertical-align: sub;
 	  width: 0.9em;
 	}
-	
+
 	#state_result li {
 	  display: grid;
 	  grid-template-columns: auto 1fr;
@@ -1299,7 +1299,7 @@ const css = `
 	  border: 1px solid rgba(0, 0, 0, 0.25);
 	  text-indent: -9999px;
 	}
-	
+
 	/* for the endings! */
 	.article-intro {
 	  background: #f5f5f5;
@@ -1310,7 +1310,7 @@ const css = `
 	  max-width: 720px;
 	  line-height: 1.65;
 	}
-	
+
 	/* tooltip styling */
 	/* partially inspired by that of 2012LBM and Year Zero */
 	.mytooltip {
@@ -1420,7 +1420,7 @@ const css = `
 
         #game_window {
             flex: 1 1 auto;
-            min-height: clamp(360px, 40vh, 587px); 
+            min-height: clamp(360px, 40vh, 587px);
             height: auto;
             align-self: stretch;
             overflow: visible;
@@ -1478,7 +1478,7 @@ const css = `
             overflow: auto;
         }*/
 		#map_footer { margin-top: auto !important; }
-        
+
         /* opponent/descriptions */
         #opponent_selection_description_window p { display: none !important; }
         #opponent_selection_description_window,
@@ -1509,7 +1509,7 @@ const css = `
             grid-row: auto !important;
             grid-column: auto !important;
             justify-self: auto !important;
-            display: flow-root !important;  
+            display: flow-root !important;
             overflow: visible !important;
             box-sizing: border-box !important;
         }
@@ -1523,7 +1523,7 @@ const css = `
             font-size: 1em;
             padding: 10px;
         }
-        
+
         #question_form button,
         #inner_window_2 button,
         #inner_window_3 button,
@@ -1553,7 +1553,7 @@ const css = `
         }
         #question_form input[type="radio"] + label:hover,
         #question_form input[type="radio"] + label:focus {
-            background: #e6edf4; 
+            background: #e6edf4;
         }
 
         /* popups */
@@ -1570,14 +1570,14 @@ const css = `
 
         /* mobile footer */
         /*body #new_footer {
-            order: 9999;                
-            margin-top: auto;     
-            position: static !important;   
-            display: flex !important;   
+            order: 9999;
+            margin-top: auto;
+            position: static !important;
+            display: flex !important;
             flex-wrap: nowrap !important;
-            justify-content: center; 
-            align-items: center;            
-            gap: 10px;                    
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
             align-self: center !important;
             width: auto !important;
             max-width: 900px !important;
@@ -1590,19 +1590,19 @@ const css = `
         #new_footer img,
         #new_footer video,
         #new_footer canvas {
-            max-width: 100%;    
-            height: auto;      
+            max-width: 100%;
+            height: auto;
             display: block;
-            object-fit: contain; 
+            object-fit: contain;
         }
         #new_footer > * {
             min-width: 0;
             flex: 0 1 auto;
         }
         #new_footer :is(p, span, a, button) {
-            white-space: nowrap;               
-            overflow: hidden;                  
-            text-overflow: ellipsis;           
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             font-size: clamp(12px, 3.2cqw, 16px);
             line-height: 1.2;
         }*/
@@ -1618,9 +1618,9 @@ const originalA = window.a; // store the original function so we can fallback if
 window.a = function(mode) {
   const barackColor = "rgba(151, 175, 201, 1)";
   const alexColor = "rgba(223, 223, 217, 1)";
-  
+
   const rowStyle = "color: #fff; margin: 1em 1.5em; line-height: 1.8; font-size: 1.05em;";
-  
+
   const dialogue = [
     { name: "BARACK", side: "left", color: barackColor, text: "Hi, uh, Alex. Can I call you Alex?" },
     { name: "ALEX", side: "left", color: alexColor, text: "Yes, uh… yes, Mister President, that's…" },
@@ -1660,12 +1660,12 @@ class Playlist {
   }
   addSong(song) { this.songs.push(song); }
   getCurrentSong() { return this.songs[this.currentSongIndex]; }
-  
+
   playNext() {
     if (this.songs.length === 0) return;
     this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
   }
-  
+
   playPrevious() {
     if (this.songs.length === 0) return;
     this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
@@ -1675,7 +1675,7 @@ class Playlist {
 window.Playlist = Playlist;
 window.Song = Song;
 
-let activePlaylist = new Playlist(); 
+let activePlaylist = new Playlist();
 let audioInstance = null;
 let currentVolume = 11;
 
@@ -2114,7 +2114,7 @@ function setupMusicPlayer() {
 	#volumeIcon:active {
 	  transform: scale(0.95);
 	}
-	  
+
 	#progress-bar-container {
 	  width: 80%;
 	  margin-top: 18px;
@@ -2124,7 +2124,7 @@ function setupMusicPlayer() {
 	  gap: 8px;
 	  padding: 8px 0;
 	}
-	
+
 	#current-time,
 	#duration {
 	  font-size: 11px;
@@ -2213,7 +2213,7 @@ function setupMusicPlayer() {
         width: 44px;
         padding-right: 10px;
       }
-      
+
 	#volume-container img {
 	  width: 16px;
 	  height: 16px;
@@ -2328,7 +2328,7 @@ function setupMusicPlayer() {
   `;
 
   gameWindow.insertAdjacentElement("afterend", playerContainer);
-  
+
 	playerRefs.player = playerContainer;
 	playerRefs.cover = playerContainer.querySelector("#cover");
 	playerRefs.title = playerContainer.querySelector("#title");
@@ -2358,9 +2358,9 @@ function setupMusicPlayer() {
   const currentTimeEl = document.getElementById("current-time");
   const durationEl = document.getElementById("duration");
   const volumeSlider = document.getElementById("volumeSlider");
-  const volDisplay = document.getElementById("volume-display");  
+  const volDisplay = document.getElementById("volume-display");
   const volumeIcon = document.getElementById("volumeIcon");
-  
+
   ["pointerenter", "pointerleave", "focus", "blur"].forEach(evt => {
 	  progressBar.addEventListener(evt, repaintProgressBarSoon);
 	});
@@ -2380,7 +2380,7 @@ function setupMusicPlayer() {
   paintProgressBar();
   paintVolumeBar();
   updateVolumeIcon(currentVolume);
-  
+
 
   // play/pause
   playPauseBtn.addEventListener("click", () => {
@@ -2393,7 +2393,7 @@ function setupMusicPlayer() {
       updatePlayPauseIcon(false);
     }
   });
-  
+
   // next/prev
   const playSongAtIndex = () => {
 	  const song = activePlaylist.getCurrentSong();
@@ -2470,7 +2470,7 @@ function setupMusicPlayer() {
 		paintProgressBar();
 	  }
 	});
- 
+
   // volume
   let lastNonZeroVolume = currentVolume > 0 ? currentVolume : 50;
 
@@ -2532,9 +2532,9 @@ setupMusicPlayer();
 
     if (gameStart) {
         gameStart.innerHTML = '<strong>Yeah... yeah. I think I’m ready.</strong>';
-		
-		gameStart.addEventListener('click', () => { 
-            if (gameWindow) gameWindow.style.removeProperty('height'); 
+
+		gameStart.addEventListener('click', () => {
+            if (gameWindow) gameWindow.style.removeProperty('height');
         }, { once: true });
     }
 
@@ -2545,10 +2545,10 @@ setupMusicPlayer();
       </div>
 
     <p>There is a dream of America, one told countless times, in every format possible since its creation.</p>
-    <p>It is an id, a concept told from one generation to the next, one that transcends even beyond the physical borders of Nation and Empire. 
-    It is a story with an undying passion for not the few that 'found' this new continent, but the many which populate and cloud its arteries, 
-    pumping new blood into the heart and soul of a metaphysical utopia. Its preachers are many; its fanatics disciplined. It is a tale that, 
-    despite the rot eating away upon its surface, continues to be told and believed in. It lives in the gasps of affirmation of the worker, the 
+    <p>It is an id, a concept told from one generation to the next, one that transcends even beyond the physical borders of Nation and Empire.
+    It is a story with an undying passion for not the few that 'found' this new continent, but the many which populate and cloud its arteries,
+    pumping new blood into the heart and soul of a metaphysical utopia. Its preachers are many; its fanatics disciplined. It is a tale that,
+    despite the rot eating away upon its surface, continues to be told and believed in. It lives in the gasps of affirmation of the worker, the
     sweat of the newcomers, and the hopes and wishes of one <b>Alexandria Ocasio-Cortez.</b></p>
     <p>So we ask you, for just one moment, to look beyond this New Colossus, and into the vast abyss that surrounds it.</p>
     <p>The hand of destiny reaches out. It is calling. Calling. Still calling.</p>
@@ -2594,7 +2594,7 @@ tooltipList = [
   { searchString: "Sheinbaum", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image32.jpg> <div class=\"annotation\">Mexico's President. Leftist darling. Dutifully bulldozing a millenia old native culture, somewhere.</div>" },
 
   { searchString: "Krugman", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image61.jpg> <div class=\"annotation\">US Treasury Secretary. Scruffy nerd in tweed. 'New Keynesian'.</div>" },
-  { searchString: "The Blob", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image18.jpg> <div class=\"annotation\">I AM THE NEXUS OF A WORLD VIRUS. MY TENDRILS CHOKE THE SKY. THEY BURROW INTO THE EARTH AND DRINK DEEPLY.</div>" },
+  { searchString: "The Blob", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image18.png> <div class=\"annotation\">I AM THE NEXUS OF A WORLD VIRUS. MY TENDRILS CHOKE THE SKY. THEY BURROW INTO THE EARTH AND DRINK DEEPLY.</div>" },
   { searchString: "Miller", explanationText: "<img src=https://file.garden/aNtAfG887DiA_7lO/2028AOC/image63.jpg> <div class=\"annotation\">Former Homeland Security Advisor. Combining all of the reptilian traits of our Clintonite overlords with unabashed fascism.</div>" },
 
   { searchString: "ICE", explanationText: "<div class=\"annotation\">'They just kidnap you [...] If I'm brown, if I'm Hispanic, they just come and catch you and take you.'</div>" },
@@ -3158,7 +3158,7 @@ campaignTrail_temp.achievements = {
       }
     ]
   };
-  
+
   const modMenuStyles = new CSSStyleSheet();
 	 modMenuStyles.replaceSync(`
             #${CONFIG.targetId} { display: inline-flex; flex-wrap: wrap; gap: 2.5em; align-items: flex-start; }
@@ -3184,7 +3184,7 @@ campaignTrail_temp.achievements = {
   if (!document.getElementById("mod_option_styles")) {
 	document.adoptedStyleSheets = [...document.adoptedStyleSheets, modMenuStyles];
   }
-  
+
   // storage
   const getSavedSettings = () => {
     try {
@@ -3305,14 +3305,14 @@ campaignTrail_temp.achievements = {
 	if (document.getElementById("difficulty_level")) {
         if (typeof window.manageModOptions === 'function') window.manageModOptions();             // mod settings
 	}
-	
+
 	if (document.querySelector(".inner_window_question")) {
         return true; // removes this task from the list
     }
     return false;
-	
+
   };
-  
+
   window.glorbleTasks.push(initialTasks);
 
     let scheduled = false;
