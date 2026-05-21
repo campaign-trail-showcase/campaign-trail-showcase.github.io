@@ -34195,6 +34195,7 @@ async function loadAndDrawCountyMap(mode) {
         let countyResultsRaw, countyResults1996Raw, us;
         const electionData = window.campaignTrail_temp || window.e;
 
+        // perform fetch and heavy pre-processing only if cache is empty
         if (!_countyMapCache.data || !_countyMapCache.data1996 || !_countyMapCache.us) {
             const countyDataUrl = "https://raw.githubusercontent.com/StrawberryMaster/StrawberryMaster.github.io/refs/heads/master/scripts/county_results_2000.min.json";
             const countyData1996Url = "https://raw.githubusercontent.com/StrawberryMaster/StrawberryMaster.github.io/refs/heads/master/scripts/county_results_1996.min.json";
@@ -34205,103 +34206,131 @@ async function loadAndDrawCountyMap(mode) {
                 fetch(countyData1996Url).then(r => r.json()).catch(() => []),
                 fetch(usMapUrl).then(r => r.json())
             ]);
-            _countyMapCache.data = raw;
-            _countyMapCache.data1996 = raw1996;
+
+            // Shannon County, SD --> Oglala Lakota
+            const shannon = raw.find(c => c.fips === "46113");
+            if (shannon) shannon.fips = "46102";
+
+            const shannon96 = raw1996.find(c => c.fips === "46113");
+            if (shannon96) shannon96.fips = "46102";
+
+            // synthesize modern Alaska boroughs
+			// basically a rough guess to get them working in the map
+            const akBoroughs = {
+                "02020": { name: "Anchorage", d:["02010","02011","02012","02014","02015","02016","02017","02018","02019","02021","02022","02023","02024","02025"] },
+                "02170": { name: "Matanuska-Susitna", d:["02026","02027","02028"] },
+                "02090": { name: "Fairbanks North Star", d:["02029","02030","02031","02032","02033"] },
+                "02110": { name: "Juneau", d:["02003","02004"] },
+                "02122": { name: "Kenai Peninsula", d:["02007","02008","02009"] },
+                "02150": { name: "Kodiak Island", d: ["02006"] },
+                "02130": { name: "Ketchikan Gateway", d:["02001"] },
+                "02198": { name: "Prince of Wales-Hyder", d:["02001"] },
+                "02275": { name: "Wrangell", d:["02001"] },
+                "02220": { name: "Sitka", d: ["02002"] },
+                "02195": { name: "Petersburg", d: ["02002"] },
+                "02282": { name: "Yakutat", d: ["02005"] },
+                "02100": { name: "Haines", d: ["02005"] },
+                "02230": { name: "Skagway", d: ["02005"] },
+                "02105": { name: "Hoonah-Angoon", d:["02005"] },
+                "02063": { name: "Chugach", d:["02034"] },
+                "02066": { name: "Copper River", d:["02034"] },
+                "02261": { name: "Valdez-Cordova", d:["02034"] },
+                "02068": { name: "Denali", d:["02034"] },
+                "02240": { name: "Southeast Fairbanks", d:["02035"] },
+                "02290": { name: "Yukon-Koyukuk", d: ["02036"] },
+                "02188": { name: "Northwest Arctic", d: ["02037"] },
+                "02185": { name: "North Slope", d: ["02037"] },
+                "02180": { name: "Nome", d: ["02038"] },
+                "02050": { name: "Bethel", d:["02039"] },
+                "02158": { name: "Kusilvak", d:["02039"] },
+                "02013": { name: "Aleutians East", d:["02040"] },
+                "02016": { name: "Aleutians West", d: ["02040"] },
+                "02060": { name: "Bristol Bay", d: ["02040"] },
+                "02070": { name: "Dillingham", d: ["02040"] },
+                "02164": { name: "Lake and Peninsula", d: ["02040"] }
+            };
+
+            // process Alaska
+            const akDistricts = {};
+            raw.forEach(c => {
+                if (c.state_po === "AK" && c.year === "2000") akDistricts[String(c.fips).padStart(5, '0')] = c;
+            });
+
+            const newAkBoroughs = [];
+            Object.keys(akBoroughs).forEach(bFips => {
+                const bInfo = akBoroughs[bFips];
+                let tDem = 0, tRep = 0, tOth = 0, tAll = 0;
+                bInfo.d.forEach(distFips => {
+                    const dData = akDistricts[distFips];
+                    if (dData) {
+                        tDem += dData.votes_dem || 0;
+                        tRep += dData.votes_rep || 0;
+                        tOth += dData.votes_other || 0;
+                        tAll += dData.votes_all || 0;
+                    }
+                });
+                if (tAll > 0) {
+                    newAkBoroughs.push({
+                        fips: bFips, county_name: bInfo.name, state_po: "AK", year: "2000",
+                        votes_dem: tDem, votes_rep: tRep, votes_other: tOth, votes_all: tAll
+                    });
+                }
+            });
+
+            let filtered2000 = raw.filter(c => !(c.state_po === "AK" && String(c.fips).startsWith("02") && c.county_name.includes("DISTRICT")));
+            filtered2000.push(...newAkBoroughs);
+
+			// AK 1996 processing
+            const akDistricts96 = {};
+            raw1996.forEach(c => {
+                if (c.state_po === "AK" && c.year === "1996") akDistricts96[String(c.fips).padStart(5, '0')] = c;
+            });
+
+            const newAkBoroughs96 = [];
+            Object.keys(akBoroughs).forEach(bFips => {
+                const bInfo = akBoroughs[bFips];
+                let tDem = 0, tRep = 0, tOth = 0, tAll = 0;
+                bInfo.d.forEach(distFips => {
+                    const dData = akDistricts96[distFips];
+                    if (dData) {
+                        tDem += dData.votes_dem || 0;
+                        tRep += dData.votes_rep || 0;
+                        tOth += dData.votes_other || 0;
+                        tAll += dData.votes_all || 0;
+                    }
+                });
+                if (tAll > 0) {
+                    newAkBoroughs96.push({
+                        fips: bFips, county_name: bInfo.name, state_po: "AK", year: "1996",
+                        votes_dem: tDem, votes_rep: tRep, votes_other: tOth, votes_all: tAll
+                    });
+                }
+            });
+
+            let filtered1996 = raw1996.filter(c => !(c.state_po === "AK" && String(c.fips).startsWith("02") && c.county_name.includes("DISTRICT")));
+            filtered1996.push(...newAkBoroughs96);
+
+            // pre-standardize and pad FIPS keys
+            filtered2000.forEach(c => c.fips = String(c.fips).padStart(5, '0'));
+            filtered1996.forEach(c => c.fips = String(c.fips).padStart(5, '0'));
+
+            // cache the final processed arrays
+            _countyMapCache.data = filtered2000;
+            _countyMapCache.data1996 = filtered1996;
             _countyMapCache.us = usData;
         }
 
-		// deep clone the array so Alaska pushes don't stack/pollute the cache on screen switch
-        countyResultsRaw = JSON.parse(JSON.stringify(_countyMapCache.data));
-        countyResults1996Raw = JSON.parse(JSON.stringify(_countyMapCache.data1996));
+        // assign raw references directly
+        countyResultsRaw = _countyMapCache.data;
+        countyResults1996Raw = _countyMapCache.data1996;
         us = _countyMapCache.us;
-
-        // Shannon County, SD --> Oglala Lakota
-        const shannon = countyResultsRaw.find(c => c.fips === "46113");
-        if (shannon) shannon.fips = "46102";
-
-        const shannon96 = countyResults1996Raw.find(c => c.fips === "46113");
-        if (shannon96) shannon96.fips = "46102";
-
-        // synthesize modern Alaska boroughs
-		// basically a rough guess to get them working in the map
-        const akBoroughs = {
-            "02020": { name: "Anchorage", d:["02010","02011","02012","02014","02015","02016","02017","02018","02019","02021","02022","02023","02024","02025"] },
-            "02170": { name: "Matanuska-Susitna", d:["02026","02027","02028"] },
-            "02090": { name: "Fairbanks North Star", d:["02029","02030","02031","02032","02033"] },
-            "02110": { name: "Juneau", d:["02003","02004"] },
-            "02122": { name: "Kenai Peninsula", d:["02007","02008","02009"] },
-            "02150": { name: "Kodiak Island", d: ["02006"] },
-            "02130": { name: "Ketchikan Gateway", d:["02001"] },
-            "02198": { name: "Prince of Wales-Hyder", d:["02001"] },
-            "02275": { name: "Wrangell", d:["02001"] },
-            "02220": { name: "Sitka", d: ["02002"] },
-            "02195": { name: "Petersburg", d: ["02002"] },
-            "02282": { name: "Yakutat", d: ["02005"] },
-            "02100": { name: "Haines", d: ["02005"] },
-            "02230": { name: "Skagway", d: ["02005"] },
-            "02105": { name: "Hoonah-Angoon", d:["02005"] },
-            "02063": { name: "Chugach", d:["02034"] },
-            "02066": { name: "Copper River", d:["02034"] },
-            "02261": { name: "Valdez-Cordova", d:["02034"] },
-            "02068": { name: "Denali", d:["02034"] },
-            "02240": { name: "Southeast Fairbanks", d:["02035"] },
-            "02290": { name: "Yukon-Koyukuk", d: ["02036"] },
-            "02188": { name: "Northwest Arctic", d: ["02037"] },
-            "02185": { name: "North Slope", d: ["02037"] },
-            "02180": { name: "Nome", d: ["02038"] },
-            "02050": { name: "Bethel", d:["02039"] },
-            "02158": { name: "Kusilvak", d:["02039"] },
-            "02013": { name: "Aleutians East", d:["02040"] },
-            "02016": { name: "Aleutians West", d: ["02040"] },
-            "02060": { name: "Bristol Bay", d: ["02040"] },
-            "02070": { name: "Dillingham", d: ["02040"] },
-            "02164": { name: "Lake and Peninsula", d: ["02040"] }
-        };
-
-        const akDistricts = {};
-        countyResultsRaw.forEach(c => {
-            if (c.state_po === "AK" && c.year === "2000") akDistricts[String(c.fips).padStart(5, '0')] = c;
-        });
-
-        const newAkBoroughs =[];
-        Object.keys(akBoroughs).forEach(bFips => {
-            const bInfo = akBoroughs[bFips];
-            let tDem = 0, tRep = 0, tOth = 0, tAll = 0;
-            bInfo.d.forEach(distFips => {
-                const dData = akDistricts[distFips];
-                if (dData) { tDem += dData.votes_dem||0; tRep += dData.votes_rep||0; tOth += dData.votes_other||0; tAll += dData.votes_all||0; }
-            });
-            if (tAll > 0) newAkBoroughs.push({ fips: bFips, county_name: bInfo.name, state_po: "AK", year: "2000", votes_dem: tDem, votes_rep: tRep, votes_other: tOth, votes_all: tAll });
-        });
-
-        countyResultsRaw = countyResultsRaw.filter(c => !(c.state_po === "AK" && String(c.fips).startsWith("02") && c.county_name.includes("DISTRICT")));
-        countyResultsRaw.push(...newAkBoroughs);
-
-        // AK 1996 processing
-        const akDistricts96 = {};
-        countyResults1996Raw.forEach(c => {
-            if (c.state_po === "AK" && c.year === "1996") akDistricts96[String(c.fips).padStart(5, '0')] = c;
-        });
-        const newAkBoroughs96 = [];
-        Object.keys(akBoroughs).forEach(bFips => {
-            const bInfo = akBoroughs[bFips];
-            let tDem = 0, tRep = 0, tOth = 0, tAll = 0;
-            bInfo.d.forEach(distFips => {
-                const dData = akDistricts96[distFips];
-                if (dData) { tDem += dData.votes_dem||0; tRep += dData.votes_rep||0; tOth += dData.votes_other||0; tAll += dData.votes_all||0; }
-            });
-            if (tAll > 0) newAkBoroughs96.push({ fips: bFips, county_name: bInfo.name, state_po: "AK", year: "1996", votes_dem: tDem, votes_rep: tRep, votes_other: tOth, votes_all: tAll });
-        });
-        countyResults1996Raw = countyResults1996Raw.filter(c => !(c.state_po === "AK" && String(c.fips).startsWith("02") && c.county_name.includes("DISTRICT")));
-        countyResults1996Raw.push(...newAkBoroughs96);
 
         // pre-process 1996 dataset
         const base1996Map = {};
         for (let i = 0, len = countyResults1996Raw.length; i < len; i++) {
             const c = countyResults1996Raw[i];
             if (c.year === "1996") {
-                const fips = String(c.fips).padStart(5, '0');
-                base1996Map[fips] = c;
+                base1996Map[c.fips] = c;
             }
         }
 
@@ -34313,12 +34342,13 @@ async function loadAndDrawCountyMap(mode) {
         for (let i = 0, len = countyResultsRaw.length; i < len; i++) {
             const c = countyResultsRaw[i];
             if (c.year === "2000") {
-                const fips = String(c.fips).padStart(5, '0');
-                base2000Map[fips] = c;
+                base2000Map[c.fips] = c;
                 const st = c.state_po;
                 if (!stateBase[st]) stateBase[st] = { dem: 0, rep: 0, other: 0, all: 0 };
-                stateBase[st].dem += (c.votes_dem || 0); stateBase[st].rep += (c.votes_rep || 0);
-                stateBase[st].other += (c.votes_other || 0); stateBase[st].all += (c.votes_all || 0);
+                stateBase[st].dem += (c.votes_dem || 0);
+                stateBase[st].rep += (c.votes_rep || 0);
+                stateBase[st].other += (c.votes_other || 0);
+                stateBase[st].all += (c.votes_all || 0);
                 nationalTotalVotes += (c.votes_all || 0);
             }
         }
@@ -34450,6 +34480,7 @@ async function loadAndDrawCountyMap(mode) {
             const unnorm = unnormalizedCounties[d.fips];
             if (!c || !unnorm) return;
 
+			const total = unnorm.total;
             const st = c.state_po;
             const targetPcts = targetStatePct[st] || {};
             const simVotes = simStateVotes[st] || {};
@@ -34603,15 +34634,36 @@ async function loadAndDrawCountyMap(mode) {
 
         function recalcRSStats() {
 			Object.values(customStates).forEach(s => { s.tVotes = 0; s.cands = {}; s.ev = 0; });
+
+			const stateCentroids = {};
+			let totalPaintedVotes = 0;
+
 			usCounties.forEach(c => {
 				const sid = countyToCustom[c.fips];
-				if (sid && customStates[sid] && c.proj) {
+				if (!sid) return;
+
+				// tally votes if the custom state and project data are valid
+				if (customStates[sid] && c.proj) {
 					customStates[sid].tVotes += c.proj.totalVotes;
-					c.proj.results.forEach(r => customStates[sid].cands[r.id] = (customStates[sid].cands[r.id] || 0) + r.votes);
+					c.proj.results.forEach(r => {
+						customStates[sid].cands[r.id] = (customStates[sid].cands[r.id] || 0) + r.votes;
+					});
+				}
+
+				// tally coordinate weights for dynamic label centroids
+				if (c.centroid) {
+					if (!stateCentroids[sid]) {
+						stateCentroids[sid] = { x: 0, y: 0, w: 0 };
+					}
+					const w = c.proj ? c.proj.totalVotes : 1;
+					stateCentroids[sid].x += c.centroid[0] * w;
+					stateCentroids[sid].y += c.centroid[1] * w;
+					stateCentroids[sid].w += w;
 				}
 			});
 
-			let totalPaintedVotes = 0;
+			rsStateCentroids = stateCentroids;
+
 			Object.values(customStates).forEach(s => {
 				totalPaintedVotes += s.tVotes;
 				if (s.tVotes === 0) {
@@ -34661,19 +34713,6 @@ async function loadAndDrawCountyMap(mode) {
 			if (evTracker) evTracker.innerText = `${allocatedEVs} / 538 EV`;
 
 			// labels
-			const stateCentroids = {};
-			usCounties.forEach(c => {
-				const sid = countyToCustom[c.fips];
-				if (!sid || !c.centroid) return;
-				if (!stateCentroids[sid]) stateCentroids[sid] = { x: 0, y: 0, w: 0 };
-				const w = c.proj ? c.proj.totalVotes : 1;
-				stateCentroids[sid].x += c.centroid[0] * w;
-				stateCentroids[sid].y += c.centroid[1] * w;
-				stateCentroids[sid].w += w;
-			});
-
-            rsStateCentroids = stateCentroids;
-
 			const labelData = Object.values(customStates).map(s => {
 				const cen = stateCentroids[s.id];
 				return { ...s, cx: cen ? cen.x / cen.w : null, cy: cen ? cen.y / cen.w : null };
@@ -34927,33 +34966,72 @@ async function loadAndDrawCountyMap(mode) {
         });
 
         function refreshMapFills() {
-            const showCounties = document.getElementById("rs_toggle_counties") && document.getElementById("rs_toggle_counties").checked;
+			const showCounties = document.getElementById("rs_toggle_counties") && document.getElementById("rs_toggle_counties").checked;
 
-            countyPaths.attr("fill", d => {
-                if (currentMode === "redraw") {
-                    const sid = countyToCustom[d.fips];
-                    return (sid && customStates[sid]) ? customStates[sid].color : "#444";
-                }
-                if (currentMode === "proportional") return "#f4f6f8"; // clean background mapping
-                if (currentMode === "density") return d.proj ? d.proj.colorDensity : "#ccc"; // bivariate mapping
-				if (currentMode === "voteshare") return d.proj ? d.proj.colorShare : "#ccc";
-                if (currentMode === "flipped") return d.proj ? d.proj.colorFlipped : "#ccc";
-                if (currentMode === "shift") return d.proj ? (d.proj.colorShift || "#ccc") : "#ccc";
+			const isRedraw = currentMode === "redraw";
+			const isProportional = currentMode === "proportional";
 
-                return d.proj ? (currentMode==="binary"?d.proj.colorBinary:d.proj.colorChoro) : "#ccc";
-            }).attr("stroke", d => {
-                if (currentMode === "redraw") {
-                    if (showCounties) return "rgba(0,0,0,0.15)"; // subtle county lines inside the state
-                    const sid = countyToCustom[d.fips];
-                    return (sid && customStates[sid]) ? customStates[sid].color : "#444";
-                }
-                if (currentMode === "proportional") return "none"; // hide county lines on proportional. this un-clutters the bubbles
-                return "rgba(255,255,255,0.2)";
-            }).attr("stroke-width", currentMode === "redraw" ? (showCounties ? 0.2 : 0.5) : (currentMode === "proportional" ? 0 : 0.2));
+			const projColorKeys = {
+				density: "colorDensity",
+				voteshare: "colorShare",
+				flipped: "colorFlipped",
+				shift: "colorShift",
+				binary: "colorBinary",
+				choropleth: "colorChoro"
+			};
 
-            if (currentMode === "redraw") d3.select("#custom-borders-path").style("display", "block");
-            else d3.select("#custom-borders-path").style("display", "none");
-        }
+			const colorKey = projColorKeys[currentMode];
+
+			// determine the fill callback
+			let fillFn;
+			if (isRedraw) {
+				fillFn = d => {
+					const sid = countyToCustom[d.fips];
+					return (sid && customStates[sid]) ? customStates[sid].color : "#444";
+				};
+			} else if (isProportional) {
+				fillFn = () => "#f4f6f8"; // clean background mapping
+			} else {
+				fillFn = d => d.proj ? (d.proj[colorKey] || "#ccc") : "#ccc";
+			}
+
+			// determine the stroke callback
+			let strokeFn;
+			if (isRedraw) {
+				if (showCounties) {
+					strokeFn = () => "rgba(0,0,0,0.15)"; // subtle county lines inside the state
+				} else {
+					strokeFn = d => {
+						const sid = countyToCustom[d.fips];
+						return (sid && customStates[sid]) ? customStates[sid].color : "#444";
+					};
+				}
+			} else if (isProportional) {
+				strokeFn = () => "none"; // hide county lines on proportional to un-clutter the bubbles
+			} else {
+				strokeFn = () => "rgba(255,255,255,0.2)";
+			}
+
+			// resolve stroke-width
+			let strokeWidthVal;
+			if (isRedraw) {
+				strokeWidthVal = showCounties ? 0.2 : 0.5;
+			} else if (isProportional) {
+				strokeWidthVal = 0;
+			} else {
+				strokeWidthVal = 0.2;
+			}
+
+			// apply the configured render loops to the SVG selection
+			countyPaths
+				.attr("fill", fillFn)
+				.attr("stroke", strokeFn)
+				.attr("stroke-width", strokeWidthVal);
+
+			// toggle custom boundaries overlay
+			d3.select("#custom-borders-path")
+				.style("display", isRedraw ? "block" : "none");
+		}
 
         d3.select(window).on("mouseup.redraw", () => {
 			if (isPainting) {
