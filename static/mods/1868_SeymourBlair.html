@@ -6,7 +6,7 @@ function ctsAchievement(achievement, difficultyChecker = true){
 }
 
 const style_overwrite = document.createElement("style");
-style_overwrite.innerHTML = 
+style_overwrite.innerHTML =
 `#campaign_sign {
   background-color:rgb(53, 68, 151);
   border-color:rgb(126, 145, 206);
@@ -6341,17 +6341,6 @@ campaignTrail_temp.answer_score_issue_json = [
         }
     },
     {
-        "model": "campaign_trail.answer_score_state_json",
-        "pk": 99999,
-        "fields": {
-            "answer": 9999,
-            "state": 54,
-            "candidate": 20,
-            "affected_candidate": 20,
-            "global_multiplier": -0.01
-        }
-    },
-    {
         "model": "campaign_trail.answer_score_issue",
         "pk": 800263,
         "fields": {
@@ -10053,7 +10042,7 @@ campaignTrail_temp.game_start_logging_id = '4472388';
 campaignTrail_temp.cyoa = true
 var DixieRage = 0;
 
-cyoAdventure = function (a) { 
+cyoAdventure = function (a) {
   ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 
   if (e.question_number == 4) {
@@ -10063,23 +10052,23 @@ cyoAdventure = function (a) {
 // System for the booting of Seymour from the ticket
   if(ans == 8001){
     DixieRage += 1;
-    console.log("The rage of the South boils further");                  
+    console.log("The rage of the South boils further");
   }
   if(ans == 8015){
-    DixieRage += 1;   
-    console.log("The rage of the South boils further");                
+    DixieRage += 1;
+    console.log("The rage of the South boils further");
   }
   if(ans == 8055){
-    DixieRage += 1; 
-    console.log("The rage of the South boils further");                  
+    DixieRage += 1;
+    console.log("The rage of the South boils further");
   }
   if(ans == 8060){
-    DixieRage += 1;   
-    console.log("The rage of the South boils further");                
+    DixieRage += 1;
+    console.log("The rage of the South boils further");
   }
 
   if((ans == 8076 || ans == 8077 || ans == 8078 || ans == 8079 ) && DixieRage >= 2){
-    console.log("They have reached their boiling point...");  
+    console.log("They have reached their boiling point...");
       campaignTrail_temp.questions_json[21] = {
         "model": "campaign_trail.question",
         "pk": 800445,
@@ -10198,10 +10187,10 @@ if(ans == 800441){
   campaignTrail_temp.candidate_json[1]["fields"].electoral_loss_message = "<h3>Well, You Told Them</h3><p>You knew that replacing a presidential candidate would be messy, but the National Committee didn’t have to choose Johnson. Deeply unpopular, it was no difficult feat for Grant to cut him down and demolish him on the field of battle. You are embarrassed to see how low your party has fallen, turning a presidential campaign into nothing more than a drinking contest. At least the old fool shall be out of office and out of our hair now. With his defeat, Johnson is fully convinced that he is done in national politics, and we are likely the better for it.</p><p>With his mandate, Grant shall continue the work of Reconstruction and undo everything Johnson fought for. Too bad, you suppose. Perhaps if Johnson had been less of a drunkard bastard and put the bottle down, we wouldn’t be in this situation. Or, perhaps, if you’d been less of a failure.</p>";
   campaignTrail_temp.candidate_json[1]["fields"].no_electoral_majority_message = "<h3>The Earth Shakes, as Johnson Holds to a Draw!</h3><p>In a shocking turn of events, the flagrantly alcoholic, boorish president has held Grant to a draw, tying with him in the electoral college. Cartoons abound of the two drinking with each other for the presidency, as the House meets to elect the next president. Doubtlessly it shall be Grant, whose party controls the Congress, yet Johnson is convinced he can change their minds in some manner. His babble bores you as you listen to him in a DC hotel. Even if he came closer than you ever did, you cannot help but be disgusted by the smell of booze wafting from his breath. Likely any other man, even you, would have won the extra electoral vote.</p><p>From here, it seems the results shall be simple. Grant shall be elected, but he shall tread carefully, knowing his agenda is rather unpopular with the general public. Clearly if Andy Johnson could get this far he must be doing something wrong. He may attempt to win re-election in 1872, but he shares the same vice as Johnson-this shall certainly lay him low. Then another, more sober member of our party shall swoop in and defeat him. Either way, apologies that it ended on this note Mr. Seymour. The South was wrong to boot you off the ticket-you clearly had the right idea.</p>";
   campaignTrail_temp.multiple_endings=false
-  unlockAchievement("An Earthquake Unleashed"); 
+  unlockAchievement("An Earthquake Unleashed");
 }
 
-// If Hendricks is your running mate 
+// If Hendricks is your running mate
 if(ans == 800456){
   campaignTrail_temp.candidate_json[1]["fields"].first_name = "Winfield Scott";
   campaignTrail_temp.candidate_json[1]["fields"].last_name = "Hancock";
@@ -10253,7 +10242,7 @@ var changeGameDisp = (hide) => {
     disp = "none";
   }
   Array.from(gameWindow.children).forEach(f=>{
-      if(!f.classList.contains("game_header") && (f.id != "main_content_area" || !$("#campaign_sign")[0])) 
+      if(!f.classList.contains("game_header") && (f.id != "main_content_area" || !$("#campaign_sign")[0]))
           f.style.display = disp
   });
 };
@@ -10270,7 +10259,7 @@ e.vpSwitcher = () => {
       <div id="running_mate_form">
           <form name="running mate">
               <p></p>
-              <h3>Please select your running mate:</h3> 
+              <h3>Please select your running mate:</h3>
               <select name="running_mate_id" id="running_mate_id">
                   ${running_mate_options}
               </select>
@@ -10369,13 +10358,13 @@ console.log(campaignTrail_temp.questions_json[5])
         "likelihood": 1
       }
     }
-var button1 = document.getElementById('view_electoral_map');	
+var button1 = document.getElementById('view_electoral_map');
 
 button1.click();
 
 
 setTimeout(function(){
-var button2 = document.getElementById('resume_questions_button');	
+var button2 = document.getElementById('resume_questions_button');
       button2.click();
 }, 50);
 console.log(campaignTrail_temp.questions_json[7])
@@ -10415,7 +10404,7 @@ button1.click();
 
 
 setTimeout(function(){
-var button2 = document.getElementById('resume_questions_button');	
+var button2 = document.getElementById('resume_questions_button');
       button2.click();
 }, 50);
 console.log(campaignTrail_temp.questions_json[7])
@@ -10456,7 +10445,7 @@ endingPicker = (out, totv, aa, quickstats) => {
   } else {
     return "<h3>What?!</h3><p>This is an error page. Contact ItsAstronomical and explain in detail how you got to here.</p><p>If you won, congrats.</p>"
   }
-  
-  
+
+
   }
   campaignTrail_temp.multiple_endings=true

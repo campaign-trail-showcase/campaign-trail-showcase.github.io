@@ -986,7 +986,9 @@ $(document).ready(async () => {
     console.warn("Could not find mod sorter dropdown to attach 'View all' checkbox.");
   }
 
-  $(".tagCheckbox").on("change", filterEntries);
+  document.querySelectorAll(".tagCheckbox").forEach(checkbox => {
+    checkbox.addEventListener("change", filterEntries);
+  });
 
   await loadEntries();
   const mods = document.getElementById("modSelect").childNodes;
@@ -2061,7 +2063,7 @@ async function loadModFromButton(modValue) {
     customThemesButton.style.display = "none";
   }
 
-  $("#modloaddiv")[0].style.display = "none";
+  document.getElementById("modloaddiv").style.display = "none";
   $("#modLoadReveal")[0].style.display = "none";
   document.getElementById("featured-mods-area").style.display = "none";
   modded = true;
@@ -2130,7 +2132,7 @@ async function loadEntries() {
   try {
     const modListResponse = await fetch("../static/mods/MODLOADERFILE.html");
     const modListHTML = await modListResponse.text();
-    $("#modSelect").html(modListHTML);
+    document.getElementById("modSelect").innerHTML = modListHTML;
     //clone so we don't reduce the list of mods every time a tag is selected
     originalOptions = $("#modSelect option").clone();
     filterEntries();
