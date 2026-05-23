@@ -16,14 +16,12 @@ function findByPk(arr, pk, fieldName) {
 }
 
 function findCandidate(pk) {
-  return findByPk(campaignTrail_temp.candidate_json, pk, "first_name") && findByPk(campaignTrail_temp.candidate_json, pk, "last_name")
-    ? [
-      findByPk(campaignTrail_temp.candidate_json, pk)[0],
-      findByPk(campaignTrail_temp.candidate_json, pk, "first_name")[1] +
-      " " +
-      findByPk(campaignTrail_temp.candidate_json, pk, "last_name")[1],
-    ]
-    : [null, ""];
+  const [index, candidate] = findByPk(campaignTrail_temp.candidate_json, pk);
+  if (index !== null && candidate && candidate.fields) {
+    const fields = candidate.fields;
+    return [index, `${fields.first_name || ""} ${fields.last_name || ""}`.trim()];
+  }
+  return [null, ""];
 }
 
 function findAnswer(pk) {
@@ -207,15 +205,15 @@ const keyboardShortcutsHandler = (event) => {
     return;
   }
 
-  // only handle shortcuts if #game_window exists and has content
-  const gameWindow = document.getElementById("game_window");
-  if (!gameWindow || gameWindow.children.length === 0) {
-    return;
-  }
-
   // check if we should skip (e.g., if user is typing in an input field)
   const tgt = event && event.target;
   if (tgt && (tgt.tagName === 'INPUT' || tgt.tagName === 'TEXTAREA')) {
+    return;
+  }
+
+  // only handle shortcuts if #game_window exists and has content
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow || gameWindow.children.length === 0) {
     return;
   }
 
@@ -477,9 +475,6 @@ document.head.appendChild(dynamicStyle);
 // Not removed because used by 2023 WOKE
 function updateBannerAndStyling() {
   header = document.getElementById("header");
-  gameWindow = document.getElementById("game_window");
-  container = document.querySelector(".container");
-  gameHeader = document.getElementsByClassName("game_header")[0];
 
   if (header) {
     if (header.src !== selectedTheme.banner) {
@@ -490,41 +485,7 @@ function updateBannerAndStyling() {
     }
   }
 
-  if (document.body.background !== selectedTheme.background) {
-    document.body.background = selectedTheme.background;
-  }
-
-  if (gameWindow) {
-    if (gameWindow.style.backgroundColor !== selectedTheme.coloring_window) {
-      gameWindow.style.backgroundColor = selectedTheme.coloring_window;
-    }
-    if (selectedTheme.text_col != null && gameWindow.style.color !== "black") {
-      gameWindow.style.color = "black";
-    }
-  }
-
-  if (container) {
-    if (container.style.backgroundColor !== selectedTheme.coloring_container) {
-      container.style.backgroundColor = selectedTheme.coloring_container;
-    }
-    if (selectedTheme.text_col != null && container.style.color !== selectedTheme.text_col) {
-      container.style.color = selectedTheme.text_col;
-    }
-  }
-
-  if (gameHeader) {
-    if (gameHeader.style.backgroundColor !== selectedTheme.coloring_title) {
-      gameHeader.style.backgroundColor = selectedTheme.coloring_title;
-    }
-  }
-
-  // classes for theme styling
-  document.body.classList.remove('cts-theme', 'classic-theme');
-  if (nct_stuff.selectedTheme === "classic") {
-    document.body.classList.add('classic-theme');
-  } else {
-    document.body.classList.add('cts-theme');
-  }
+  updateStyling();
 }
 
 function updateStyling() {
@@ -740,7 +701,9 @@ documentObserver = new MutationObserver((mutations) => {
   }
 });
 
-documentObserver.observe(document.body, {
+const targetContainer = document.querySelector(".container") || document.body;
+
+documentObserver.observe(targetContainer, {
   childList: true,
   subtree: true
 });
