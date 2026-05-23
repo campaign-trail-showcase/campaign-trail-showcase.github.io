@@ -795,23 +795,27 @@ window.addEventListener('beforeunload', () => {
 });
 
 async function loadJSON(path, varr, callback = null) {
-  const res = await fetch(path);
-  if (!res.ok) return;
-  const responseText = await res.text();
+  try {
+    const res = await fetch(path);
+    if (!res.ok) return;
+    const responseText = await res.text();
 
-  // parse nested property path and assign
-  const parts = varr.split('.');
-  let obj = window;
+    // parse nested property path and assign
+    const parts = varr.split('.');
+    let obj = window;
 
-  // navigate to the parent object
-  for (let i = 0; i < parts.length - 1; i++) {
-    obj = obj[parts[i]];
+    // navigate to the parent object
+    for (let i = 0; i < parts.length - 1; i++) {
+      obj = obj[parts[i]];
+    }
+
+    // assign to the final property
+    obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
+
+    if (callback) callback();
+  } catch (e) {
+    console.error(`Error loading JSON from ${path}:`, e);
   }
-
-  // assign to the final property
-  obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
-
-  if (callback) callback();
 }
 
 const strCopy = obj => JSON.parse(JSON.stringify(obj));
@@ -821,24 +825,26 @@ const ree = {};
 
 campaignTrail_temp.election_json = {};
 campaignTrail_temp.candidate_json = {};
-loadJSON("../static/json/election.json", "campaignTrail_temp.election_json", () => {
-  ree.election_json = strCopy(campaignTrail_temp.election_json);
-});
-loadJSON("../static/json/candidate.json", "campaignTrail_temp.candidate_json", () => {
-  ree.candidate_json = strCopy(campaignTrail_temp.candidate_json);
-});
-loadJSON("../static/json/running_mate.json", "campaignTrail_temp.running_mate_json", () => {
-  ree.running_mate_json = strCopy(campaignTrail_temp.running_mate_json);
-});
-loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_default_json", () => {
-  ree.opponents_default_json = strCopy(campaignTrail_temp.opponents_default_json);
-});
-loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_weighted_json", () => {
-  ree.opponents_weighted_json = strCopy(campaignTrail_temp.opponents_weighted_json);
-});
-loadJSON("../static/json/election_list.json", "campaignTrail_temp.temp_election_list", () => {
-  ree.temp_election_list = strCopy(campaignTrail_temp.temp_election_list);
-});
+window.baseJSONPromises = [
+  loadJSON("../static/json/election.json", "campaignTrail_temp.election_json", () => {
+    ree.election_json = strCopy(campaignTrail_temp.election_json);
+  }),
+  loadJSON("../static/json/candidate.json", "campaignTrail_temp.candidate_json", () => {
+    ree.candidate_json = strCopy(campaignTrail_temp.candidate_json);
+  }),
+  loadJSON("../static/json/running_mate.json", "campaignTrail_temp.running_mate_json", () => {
+    ree.running_mate_json = strCopy(campaignTrail_temp.running_mate_json);
+  }),
+  loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_default_json", () => {
+    ree.opponents_default_json = strCopy(campaignTrail_temp.opponents_default_json);
+  }),
+  loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_weighted_json", () => {
+    ree.opponents_weighted_json = strCopy(campaignTrail_temp.opponents_weighted_json);
+  }),
+  loadJSON("../static/json/election_list.json", "campaignTrail_temp.temp_election_list", () => {
+    ree.temp_election_list = strCopy(campaignTrail_temp.temp_election_list);
+  })
+];
 
 campaignTrail_temp.difficulty_level_json = JSON.parse(
   '[{"model": "campaign_trail.difficulty_level", "pk": 1, "fields": {"name": "Cakewalk", "multiplier": 1.33}}, {"model": "campaign_trail.difficulty_level", "pk": 2, "fields": {"name": "Very Easy", "multiplier": 1.2}}, {"model": "campaign_trail.difficulty_level", "pk": 3, "fields": {"name": "Easy", "multiplier": 1.1}}, {"model": "campaign_trail.difficulty_level", "pk": 4, "fields": {"name": "Normal", "multiplier": 0.97}}, {"model": "campaign_trail.difficulty_level", "pk": 5, "fields": {"name": "Hard", "multiplier": 0.95}}, {"model": "campaign_trail.difficulty_level", "pk": 6, "fields": {"name": "Impossible", "multiplier": 0.9}}, {"model": "campaign_trail.difficulty_level", "pk": 7, "fields": {"name": "Unthinkable", "multiplier": 0.83}}, {"model": "campaign_trail.difficulty_level", "pk": 8, "fields": {"name": "Blowout", "multiplier": 0.75}}, {"model": "campaign_trail.difficulty_level", "pk": 9, "fields": {"name": "Disaster", "multiplier": 0.68}}]'

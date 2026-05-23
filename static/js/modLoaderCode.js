@@ -1033,6 +1033,11 @@ function createLegacyViewControls() {
 $(document).ready(async () => {
   await initDB();
 
+  // wait for base JSONs to load first
+  if (window.baseJSONPromises && window.baseJSONPromises.length > 0) {
+    await Promise.all(window.baseJSONPromises);
+  }
+
   // migrate localStorage mods to IndexedDB
   await migrateLocalStorageToIndexedDB();
 
