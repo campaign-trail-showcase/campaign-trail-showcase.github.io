@@ -12,7 +12,6 @@ const tagList = [];
 let originalModsData = [];
 
 let customMods = new Set();
-let customMod = false;
 let favoriteMods = new Set();
 
 let onlyFavorites = false;
@@ -40,6 +39,31 @@ async function getModMetadata(modName) {
     return metadataCache.get(modName);
   }
 
+  // if it's a local mod, retrieve metadata from indexedDB
+  if (customMods.has(modName)) {
+    try {
+      const modData = await getModFromDB(modName);
+      if (modData && modData.code1) {
+        const temp = extractElectionDetails(modData.code1, modName);
+        extractModMetadata(modData.code1, modName);
+
+        const imageUrl = temp?.election_json?.[0]?.fields?.site_image ?? temp?.election_json?.[0]?.fields?.image_url ?? "";
+        const description = temp?.election_json?.[0]?.fields?.site_description ?? temp?.election_json?.[0]?.fields?.summary ?? "";
+
+        const metadata = { imageUrl, description };
+        metadataCache.set(modName, metadata);
+        return metadata;
+      }
+    } catch (e) {
+      console.error(`Error loading metadata for custom mod ${modName}:`, e);
+    }
+    return {
+      imageUrl: "",
+      description: `<h1 style="color:red">FAILED TO LOAD LOCAL MOD INFO</h1>`
+    };
+  }
+
+  // otherwise, perform standard fetch from server
   try {
     const res = await fetch(`../static/mods/${modName}_init.html`);
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
@@ -1012,7 +1036,15 @@ $(document).ready(async () => {
 
   // show loading indicator while mods load
   const gridEl = document.getElementById("mod-grid");
-  if (gridEl) gridEl.innerHTML = `<div id="loading-mods-text" style="text-align:center;margin:20px;">Loading mods...</div>`;
+  if (gridEl) {
+    gridEl.replaceChildren();
+    const loader = document.createElement("div");
+    loader.id = "loading-mods-text";
+    loader.style.textAlign = "center";
+    loader.style.margin = "20px";
+    loader.textContent = "Loading mods...";
+    gridEl.appendChild(loader);
+  }
 
   const modNameParam = getUrlParam("modName");
   const localModParam = getUrlParam("localMod");
@@ -1039,9 +1071,6 @@ $(document).ready(async () => {
       return;
     }
   }
-
-  const $modSelect = $("#modSelect");
-  const originalOptions = $modSelect.find("option").clone();
 
   // Inject the "View all mods" checkbox next to the sorter using a more robust selector
   const sorter = document.querySelector('[onchange="onChangeModSorter(event)"]');
@@ -1077,144 +1106,100 @@ $(document).ready(async () => {
     }
   });
 
+  // populate custom mod shells first, so they always occupy the beginning of the list
+  customModNames.forEach((customModName) => {
+    const modView = createModView({
+      value: customModName,
+      innerText: customModName,
+      dataset: { tags: "Custom" }
+    });
+    modList.push(modView);
+    modMap.set(customModName, modView);
+  });
+
+  // gather standard mods based on query parameters
   const targetMod = getUrlParam("modName");
-    const standardModsToLoad = [];
+  const standardModsToLoad = [];
 
-    // determine standard mods based on query criteria
-    Array.from(mods).forEach((mod) => {
-      const isLinked = targetMod && typeof expandFavoriteSet === 'function' && expandFavoriteSet(new Set([targetMod])).has(mod.value);
-      const isDSAClassicLink = targetMod === "2024" && mod.value === "2024 Divided States" || targetMod === "2024 Divided States" && mod.value === "2024";
+  Array.from(mods).forEach((mod) => {
+    const isLinked = targetMod && typeof expandFavoriteSet === 'function' && expandFavoriteSet(new Set([targetMod])).has(mod.value);
+    const isDSAClassicLink = targetMod === "2024" && mod.value === "2024 Divided States" || targetMod === "2024 Divided States" && mod.value === "2024";
 
-      if (
-        mod.value === "other" ||
-        (
-          targetMod != null &&
-          targetMod != mod.value &&
-          !isLinked && !isDSAClassicLink
-        )
-      ) {
-        return;
-      }
-
-      namesOfModsFromValue[mod.value] = mod.innerText ?? mod.value;
-      standardModsToLoad.push(mod);
-    });
-
-    // sort alphabetically by value
-    standardModsToLoad.sort((a, b) => {
-      if (a.value < b.value) return -1;
-      if (a.value > b.value) return 1;
-      return 0;
-    });
-
-    // populate card shells into the global mod list cache
-    standardModsToLoad.forEach((mod) => {
-      if (mod.value === '2024 Divided States') return; // skip special case
-
-      const modView = createModView(mod);
-
-      if (
-        mod.dataset.awardimageurls &&
-        mod.dataset.awardimageurls.split(", ").length > 1
-      ) {
-        cycleAwards(modView.querySelector(".trophy-holder"), 0);
-      }
-
-      modList.push(modView);
-      modMap.set(modView.id, modView);
-    });
-
-    // if we are not loading a specific mod, preload all award icons
-    if (!modNameParam) {
-      const allAwardIconUrls = new Set();
-      Array.from(mods).forEach(mod => {
-        if (mod.dataset && mod.dataset.awardimageurls) {
-          mod.dataset.awardimageurls.split(", ").forEach(url => {
-            allAwardIconUrls.add(url);
-          });
-        }
-      });
-
-      if (allAwardIconUrls.size > 0) {
-        preloadInBatches(allAwardIconUrls, 6);
-      }
+    if (
+      mod.value === "other" ||
+      (
+        targetMod != null &&
+        targetMod != mod.value &&
+        !isLinked && !isDSAClassicLink
+      )
+    ) {
+      return;
     }
 
-  // create an array of Promises; each one retrieves and processes one custom mod
-  const customModPromises = Array.from(customMods).map(async (customModName) => {
-    try {
-      // async fetch from DB
-      const modData = await getModFromDB(customModName);
-
-      if (!modData || !modData.code1) {
-        console.warn(`Custom mod ${customModName} not found in storage.`);
-        return null;
-      }
-
-      const rawModText = modData.code1;
-      const temp = extractElectionDetails(rawModText, customModName);
-
-      if (!temp?.election_json?.[0]?.fields) {
-        return null;
-      }
-
-      // populate themes/achievements cache
-      extractModMetadata(rawModText, customModName);
-
-      const imageUrl =
-        temp.election_json[0].fields.site_image ??
-        temp.election_json[0].fields.image_url;
-      const description =
-        temp.election_json[0].fields.site_description ??
-        temp.election_json[0].fields.summary;
-
-      const modView = createModView(
-        {
-          value: customModName,
-          innerText: customModName,
-          dataset: { tags: "Custom" },
-        },
-        imageUrl,
-        description,
-      );
-
-      return modView;
-    } catch (e) {
-      console.error(`Error loading custom mod ${customModName}:`, e);
-      return null;
-    }
+    namesOfModsFromValue[mod.value] = mod.innerText ?? mod.value;
+    standardModsToLoad.push(mod);
   });
 
-  // wait for all DB requests to finish
-    const customModResults = await Promise.all(customModPromises);
+  // sort standard mods alphabetically by value
+  standardModsToLoad.sort((a, b) => {
+    if (a.value < b.value) return -1;
+    if (a.value > b.value) return 1;
+    return 0;
+  });
 
-    // filter out the failures and add them to the global list
-    let customModsLoaded = customModResults.filter(result => result !== null);
-    customModsLoaded.forEach(mv => {
-      modList.push(mv);
-      modMap.set(mv.id, mv);
+  // populate standard card shells right after custom ones
+  standardModsToLoad.forEach((mod) => {
+    if (mod.value === '2024 Divided States') return; // skip special case
+
+    const modView = createModView(mod);
+
+    if (
+      mod.dataset.awardimageurls &&
+      mod.dataset.awardimageurls.split(", ").length > 1
+    ) {
+      cycleAwards(modView.querySelector(".trophy-holder"), 0);
+    }
+
+    modList.push(modView);
+    modMap.set(modView.id, modView);
+  });
+
+  // if we are not loading a specific mod, preload all award icons
+  if (!modNameParam) {
+    const allAwardIconUrls = new Set();
+    Array.from(mods).forEach(mod => {
+      if (mod.dataset && mod.dataset.awardimageurls) {
+        mod.dataset.awardimageurls.split(", ").forEach(url => {
+          allAwardIconUrls.add(url);
+        });
+      }
     });
 
-    // initialize tags and render views
-    createTagButtons(tagsFound);
-    updateModViews();
-    applyModBoxThemes();
-  });
+    if (allAwardIconUrls.size > 0) {
+      preloadInBatches(allAwardIconUrls, 6);
+    }
+  }
+
+  // initialize tags and render views
+  createTagButtons(tagsFound);
+  updateModViews();
+  applyModBoxThemes();
+});
 
 function createModView(mod, imageUrl = "", description = "Loading summary...") {
   const modView = modViewTemplate.content.firstElementChild.cloneNode(true);
 
   // set data attributes
-  modView.setAttribute("mode", mod.dataset.mode || "");
-  modView.setAttribute("tags", mod.dataset.tags || "");
-  modView.setAttribute("awardimageurls", mod.dataset.awardimageurls || "");
-  modView.setAttribute("awards", mod.dataset.awards || "");
+  modView.setAttribute("mode", mod.dataset?.mode || "");
+  modView.setAttribute("tags", mod.dataset?.tags || "");
+  modView.setAttribute("awardimageurls", mod.dataset?.awardimageurls || "");
+  modView.setAttribute("awards", mod.dataset?.awards || "");
   modView.setAttribute("mod-name", mod.value);
   modView.setAttribute("mod-display-name", (mod.innerText || mod.value).toLowerCase());
   modView.id = mod.value;
 
   namesOfModsFromValue[mod.value] = mod.innerText ?? mod.value;
-  modView._tagsArray = mod.dataset.tags ? mod.dataset.tags.split(" ") : [];
+  modView._tagsArray = mod.dataset?.tags ? mod.dataset.tags.split(" ") : [];
 
   modView._elements = {
     title: modView.querySelector(".mod-title"),
@@ -1241,21 +1226,31 @@ function createModView(mod, imageUrl = "", description = "Loading summary...") {
   modView._elements.playBtn.querySelector("span").textContent = PLAY;
   modView._elements.playBtn.addEventListener("click", () => loadModFromButton(mod.value));
 
+  // determine if this is a custom/local mod
+  const isCustom = customMods.has(mod.value) || (mod.dataset && mod.dataset.tags && mod.dataset.tags.split(" ").includes("Custom"));
+
   // Favorite button
-  modView._elements.favBtn.querySelector("span").textContent = isFavorite(mod.value) ? UNFAV : FAV;
-  modView._elements.favBtn.addEventListener("click", (e) => toggleFavorite(e, mod.value));
+  if (isCustom) {
+    modView._elements.favBtn.style.display = "none";
+  } else {
+    modView._elements.favBtn.style.display = "";
+    modView._elements.favBtn.querySelector("span").textContent = isFavorite(mod.value) ? UNFAV : FAV;
+    modView._elements.favBtn.addEventListener("click", (e) => toggleFavorite(e, mod.value));
+  }
 
   // Delete button
-  if (customMods.has(mod.value)) {
+  if (isCustom) {
+    modView._elements.deleteBtn.querySelector("span").textContent = DELETE;
     modView._elements.deleteBtn.style.display = "";
     modView._elements.deleteBtn.addEventListener("click", (e) => deleteCustomMod(e, mod.value));
+  } else {
+    modView._elements.deleteBtn.style.display = "none";
   }
 
   // handle rating display
-  const isCustom = customMods.has(mod.value);
   if (isCustom) {
     if (modView._elements.ratingBg) modView._elements.ratingBg.remove();
-  } else if (mod.dataset.awards && mod.dataset.awards.length > 0) {
+  } else if (mod.dataset?.awards && mod.dataset.awards.length > 0) {
     modView._elements.ratingBg.insertAdjacentHTML(
       "beforeend",
       renderAwards(mod.dataset.awards, mod.dataset.awardimageurls)
@@ -1994,7 +1989,6 @@ async function loadModFromButton(modValue) {
     }
 
     diff_mod = true;
-    customMod = modValue;
   } else {
     const pageURL = new URL(window.location.href);
 
@@ -2072,7 +2066,7 @@ async function loadModFromButton(modValue) {
   }
 
   document.getElementById("modloaddiv").style.display = "none";
-  $("#modLoadReveal")[0].style.display = "none";
+  document.getElementById("modLoadReveal").style.display = "none";
   document.getElementById("featured-mods-area").style.display = "none";
   modded = true;
 
@@ -2124,16 +2118,6 @@ async function updateModViewCount(modName) {
   } catch (error) {
     console.error(`Failed to update play count for ${modName}:`, error);
   }
-}
-
-function getAllIndexes(arr, val) {
-  const indexes = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === val) {
-      indexes.push(i);
-    }
-  }
-  return indexes;
 }
 
 async function loadEntries() {
@@ -2230,16 +2214,6 @@ function modCompare2(a, b) {
     return -1;
   }
   if (nameA > nameB) {
-    return 1;
-  }
-  return 0;
-}
-
-function modCompare(a, b) {
-  if (a.mod.value < b.mod.value) {
-    return -1;
-  }
-  if (a.mod.value > b.mod.value) {
     return 1;
   }
   return 0;
