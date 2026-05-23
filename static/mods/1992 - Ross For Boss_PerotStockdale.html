@@ -18592,7 +18592,7 @@ const bushEVForEndings = isElectoralDeadlock
 
     if (quickstats[0] >= 270 && e.running_mate_last_name === "Stockdale") ctsAchievement("The Admiral");
 
-    //if (quickstats[0] >= 270 && (e.player_answers.includes(169593))) ctsAchievement("VP? Never knew her");
+    if (quickstats[0] >= 270 && (e.player_answers.includes(169593))) ctsAchievement("VP? Never knew her");
 
     if (quickstats[0] >= 270 && e.running_mate_last_name === "Kirkpatrick") ctsAchievement("The Ambassador");
 
@@ -19219,7 +19219,7 @@ if (isElectoralDeadlock) {
               <p><span style="color: #0000EE; text-decoration: underline; cursor: pointer;">Ohio State Student Arrested for “Lewd Acts with Couch”</p>`)
         e.executable.push([1, (() => { e.image = "https://file.garden/aaGBA-NNayasLE8D/2d70bb47-689f-4c8d-9fc0-07072c9ed8ab.png" })]);
         // Perot Goes on Meet the Press
-    } else if (bushResult.electoral_votes <= 269 && clintonResult.electoral_votes <= 269 && quickstats[0] >= 54 && quickstats[0] < 270) {
+    } else if (bushResult.electoral_votes <= 269 && clintonResult.electoral_votes <= 269 && quickstats[0] < 270) {
         e.pages.push(`&emsp;<h3>Meet The Press: Henry Ross Perot. Transcript. May 7th, 2000</h3>
               <p><b>RUSSERT:</b> "Mr Perot, thank's for being on the program with us today."
               <p><b>PEROT:</b> "Happy to be here."
