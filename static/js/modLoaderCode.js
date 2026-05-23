@@ -12,6 +12,7 @@ const tagList = [];
 let originalModsData = [];
 
 let customMods = new Set();
+let customMod = false;
 let favoriteMods = new Set();
 
 let onlyFavorites = false;
@@ -1989,6 +1990,7 @@ async function loadModFromButton(modValue) {
     }
 
     diff_mod = true;
+    customMod = modValue;
   } else {
     const pageURL = new URL(window.location.href);
 
@@ -2054,6 +2056,7 @@ async function loadModFromButton(modValue) {
         jQuery
       });
       diff_mod = true;
+      customMod = false;
     } catch (error) {
       console.error(`Failed to load mod ${modValue}:`, error);
       alert(`Failed to load mod ${modValue}. See console for details.`);
