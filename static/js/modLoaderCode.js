@@ -21,6 +21,8 @@ let showAllModsLegacy = false;
 
 // cache and observer for lazy loading metadata
 const metadataCache = new Map();
+const loadedMetadataMods = new Set();
+window.loadedMetadataMods = loadedMetadataMods;
 
 const metadataObserver = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
@@ -813,6 +815,9 @@ function extractFallbackTheme(rawModText, nameOfMod) {
 
 function extractModMetadata(rawModText, nameOfMod) {
   const snippets = [];
+  if (window.loadedMetadataMods) {
+    window.loadedMetadataMods.add(nameOfMod);
+  }
 
   // find achievements
   const achSnippet = findCodeSnippet(
