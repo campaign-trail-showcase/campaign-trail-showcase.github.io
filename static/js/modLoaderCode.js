@@ -1099,7 +1099,7 @@ $(document).ready(async () => {
   });
 
   await loadEntries();
-  const mods = document.getElementById("modSelect").childNodes;
+  const mods = document.getElementById("modSelect").children;
 
   let tagsFound = new Set();
 
