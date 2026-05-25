@@ -918,7 +918,7 @@ const shining_menu = (polling) => {
         }
       </style>
   `;
-  for (i in game_winArr) {
+  for (const i in game_winArr) {
     if (
       game_winArr[i].getAttribute("id") != "main_content_area"
       && game_winArr[i].getAttribute("class") != "game_header"
@@ -3796,7 +3796,7 @@ function A(t) {
   for (const candIssueScore of candsIssueScores) {
     const candId = candIssueScore.candidate_id;
     const aggMap = candIssueAgg.get(candId);
-    
+
     if (!aggMap && candId !== e.candidate_id) continue;
 
     candIssueScore.issue_scores = candIssueScore.issue_scores.map((it) => {
@@ -3809,7 +3809,7 @@ function A(t) {
         const runIssue = runningMateByIssue.get(issue);
         if (!runIssue) {
               console.warn(`No running mate issue for issue ${issue}`);
-          return it; 
+          return it;
         }
         rmScore = runIssue.fields.issue_score;
         rmWeight = runningMateIssueWeight;

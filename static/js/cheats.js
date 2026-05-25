@@ -26,15 +26,16 @@ function buildAnswerEffectsIndex() {
   }
 }
 
-function benefitCheck(objectid) {
-  const object =
-    document.getElementById("question_form").children[0].children[objectid * 3];
-  const answerid = Number(object.value);
+function benefitCheck(inputElement) {
+  if (!inputElement) return "";
+  const answerid = Number(inputElement.value);
   let effects = [];
+
   if (_answerEffectsIndex == null) {
     // build once on first use
     buildAnswerEffectsIndex();
   }
+
   if (_answerEffectsIndex && _answerEffectsIndex.has(answerid)) {
     effects = _answerEffectsIndex.get(answerid);
   } else {
@@ -51,9 +52,9 @@ function benefitCheck(objectid) {
   }
 
   let mods = "";
-  for (const effect of effects) {
-    const type = effect[0];
-    const data = effect[1].fields;
+  for (let i = 0; i < effects.length; i++) {
+    const type = effects[i][0];
+    const data = effects[i][1].fields;
 
     if (type === "global") {
       const name = findCandidate(data.candidate)[1];
@@ -74,20 +75,18 @@ function benefitCheck(objectid) {
   }
 
   let answerfeedback = "";
-  for (
-    let index = 0;
-    index < (campaignTrail_temp.answer_feedback_json?.length || 0);
-    index++
-  ) {
-    if (
-      answerid == campaignTrail_temp.answer_feedback_json[index].fields.answer
-    ) {
-      answerfeedback = `<b>${campaignTrail_temp.answer_feedback_json[index].fields.answer_feedback}</b>`;
+  const feedbackArr = campaignTrail_temp.answer_feedback_json || [];
+  for (let index = 0; index < feedbackArr.length; index++) {
+    if (answerid == feedbackArr[index].fields.answer) {
+      answerfeedback = `<b>${feedbackArr[index].fields.answer_feedback}</b>`;
       break;
     }
   }
 
-  return `<p><b>Answer: </b>'${findAnswer(answerid)[1]}'<br>Feedback: ${answerfeedback}<br>${mods}</p><br><br>`;
+  const answerLookup = findAnswer(answerid);
+  const answerText = answerLookup ? answerLookup[1] : "Unknown";
+
+  return `<p><b>Answer: </b>'${answerText}'<br>Feedback: ${answerfeedback}<br>${mods}</p><br><br>`;
 }
 
 let benefitCheckAlreadyActivated = false;
@@ -148,19 +147,21 @@ function activateCheatMenu() {
 
 async function benefitChecker() {
   try {
-    const formEl = document.querySelector("#question_form > form");
-    if (!formEl) return;
-    const questionlength = formEl.length;
+    const inputs = document.querySelectorAll("#question_form input[name='game_answers']");
+    if (inputs.length === 0) return;
+
     let content = "";
-    for (let v = 0; v < questionlength; v++) {
-      content += benefitCheck(v);
+    for (let v = 0; v < inputs.length; v++) {
+      content += benefitCheck(inputs[v]);
     }
 
     content += "<br>Benefit Checker code partially adapted from NCT";
 
     const benefitContent = document.getElementById("benefitcontent");
     if (benefitContent) benefitContent.innerHTML = content;
-  } catch { }
+  } catch (err) {
+    console.error("Benefit checker rendering error:", err);
+  }
 }
 
 function hideBenefitChecker() {
@@ -273,8 +274,11 @@ let answerSet = new Set();
 let noAnswerSet = new Set();
 
 function setupAutoplayInput(elementId, targetSet) {
-  document.getElementById(elementId).addEventListener("input", function (e) {
-    targetSet.clear
+  const inputEl = document.getElementById(elementId);
+  if (!inputEl) return;
+
+  inputEl.addEventListener("input", function (e) {
+    targetSet.clear();
     const pks = e.target.value.split(/[\s,]+/).filter(Boolean);
     for (const pk of pks) {
       targetSet.add(Number(pk));
@@ -287,37 +291,66 @@ setupAutoplayInput("autoplayNo", noAnswerSet);
 
 function autoplay() {
   try {
+    // immediately click map visit confirmations to keep autoplay flowing
     const confirm = document.getElementById("confirm_visit_button");
+    if (confirm) {
+      confirm.click();
+      return;
+    }
 
-    if (confirm) confirm.click();
-
-    const questionLength =
-      document.getElementById("question_form").children[0].children.length / 3;
+    // fetch all current radio choices directly from the form
+    const inputs = document.querySelectorAll("#question_form input[name='game_answers']");
+    if (inputs.length === 0) return;
 
     let clicked = false;
-    for (let i = 0; i < questionLength; i++) {
-      clicked = checkIfAnswer(i, answerSet);
-      if (clicked) {
+
+    // check preferred answer choices
+    for (let i = 0; i < inputs.length; i++) {
+      const input = inputs[i];
+      const pk = Number(input.value);
+      if (answerSet.has(pk)) {
+        clickAndContinue(input);
+        clicked = true;
         break;
       }
     }
 
+    // check fallback choices if no preferred answers exist
     if (!clicked) {
-      for (let i = 0; i < questionLength; i++) {
-        clicked = clickIfAvailable(i, noAnswerSet);
-
-        if (clicked) {
+      for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
+        const pk = Number(input.value);
+        if (!noAnswerSet.has(pk)) {
+          clickAndContinue(input);
+          clicked = true;
           break;
         }
       }
     }
 
-    if (clicked == false) {
-      console.log("ERROR: Cannot find answer to click!");
+    if (!clicked) {
+      console.warn("AUTOPLAY: No eligible answer matches criteria.");
     }
 
-    campaignTrail_temp.election_json[0].fields.has_visits = false;
-  } catch { }
+    // disable map visits on autoplay
+    if (campaignTrail_temp.election_json?.[0]?.fields) {
+      campaignTrail_temp.election_json[0].fields.has_visits = false;
+    }
+  } catch (err) {
+    console.error("Autoplay runtime error:", err);
+  }
+}
+
+function clickAndContinue(inputElement) {
+  printAutoplayClickedMessage(inputElement);
+  inputElement.click();
+
+  const nextBtn = document.getElementById("answer_select_button");
+  if (nextBtn) nextBtn.click();
+
+  // instantly dismiss any feedback text screens
+  const okBtn = document.getElementById("ok_button");
+  if (okBtn) okBtn.click();
 }
 
 let answersPickedAutoplay = new Set();

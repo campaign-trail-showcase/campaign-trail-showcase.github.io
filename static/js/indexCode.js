@@ -16,14 +16,12 @@ function findByPk(arr, pk, fieldName) {
 }
 
 function findCandidate(pk) {
-  return findByPk(campaignTrail_temp.candidate_json, pk, "first_name") && findByPk(campaignTrail_temp.candidate_json, pk, "last_name")
-    ? [
-      findByPk(campaignTrail_temp.candidate_json, pk)[0],
-      findByPk(campaignTrail_temp.candidate_json, pk, "first_name")[1] +
-      " " +
-      findByPk(campaignTrail_temp.candidate_json, pk, "last_name")[1],
-    ]
-    : [null, ""];
+  const [index, candidate] = findByPk(campaignTrail_temp.candidate_json, pk);
+  if (index !== null && candidate && candidate.fields) {
+    const fields = candidate.fields;
+    return [index, `${fields.first_name || ""} ${fields.last_name || ""}`.trim()];
+  }
+  return [null, ""];
 }
 
 function findAnswer(pk) {
@@ -207,15 +205,15 @@ const keyboardShortcutsHandler = (event) => {
     return;
   }
 
-  // only handle shortcuts if #game_window exists and has content
-  const gameWindow = document.getElementById("game_window");
-  if (!gameWindow || gameWindow.children.length === 0) {
-    return;
-  }
-
   // check if we should skip (e.g., if user is typing in an input field)
   const tgt = event && event.target;
   if (tgt && (tgt.tagName === 'INPUT' || tgt.tagName === 'TEXTAREA')) {
+    return;
+  }
+
+  // only handle shortcuts if #game_window exists and has content
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow || gameWindow.children.length === 0) {
     return;
   }
 
@@ -477,9 +475,6 @@ document.head.appendChild(dynamicStyle);
 // Not removed because used by 2023 WOKE
 function updateBannerAndStyling() {
   header = document.getElementById("header");
-  gameWindow = document.getElementById("game_window");
-  container = document.querySelector(".container");
-  gameHeader = document.getElementsByClassName("game_header")[0];
 
   if (header) {
     if (header.src !== selectedTheme.banner) {
@@ -490,41 +485,7 @@ function updateBannerAndStyling() {
     }
   }
 
-  if (document.body.background !== selectedTheme.background) {
-    document.body.background = selectedTheme.background;
-  }
-
-  if (gameWindow) {
-    if (gameWindow.style.backgroundColor !== selectedTheme.coloring_window) {
-      gameWindow.style.backgroundColor = selectedTheme.coloring_window;
-    }
-    if (selectedTheme.text_col != null && gameWindow.style.color !== "black") {
-      gameWindow.style.color = "black";
-    }
-  }
-
-  if (container) {
-    if (container.style.backgroundColor !== selectedTheme.coloring_container) {
-      container.style.backgroundColor = selectedTheme.coloring_container;
-    }
-    if (selectedTheme.text_col != null && container.style.color !== selectedTheme.text_col) {
-      container.style.color = selectedTheme.text_col;
-    }
-  }
-
-  if (gameHeader) {
-    if (gameHeader.style.backgroundColor !== selectedTheme.coloring_title) {
-      gameHeader.style.backgroundColor = selectedTheme.coloring_title;
-    }
-  }
-
-  // classes for theme styling
-  document.body.classList.remove('cts-theme', 'classic-theme');
-  if (nct_stuff.selectedTheme === "classic") {
-    document.body.classList.add('classic-theme');
-  } else {
-    document.body.classList.add('cts-theme');
-  }
+  updateStyling();
 }
 
 function updateStyling() {
@@ -740,7 +701,9 @@ documentObserver = new MutationObserver((mutations) => {
   }
 });
 
-documentObserver.observe(document.body, {
+const targetContainer = document.querySelector(".container") || document.body;
+
+documentObserver.observe(targetContainer, {
   childList: true,
   subtree: true
 });
@@ -795,23 +758,27 @@ window.addEventListener('beforeunload', () => {
 });
 
 async function loadJSON(path, varr, callback = null) {
-  const res = await fetch(path);
-  if (!res.ok) return;
-  const responseText = await res.text();
+  try {
+    const res = await fetch(path);
+    if (!res.ok) return;
+    const responseText = await res.text();
 
-  // parse nested property path and assign
-  const parts = varr.split('.');
-  let obj = window;
+    // parse nested property path and assign
+    const parts = varr.split('.');
+    let obj = window;
 
-  // navigate to the parent object
-  for (let i = 0; i < parts.length - 1; i++) {
-    obj = obj[parts[i]];
+    // navigate to the parent object
+    for (let i = 0; i < parts.length - 1; i++) {
+      obj = obj[parts[i]];
+    }
+
+    // assign to the final property
+    obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
+
+    if (callback) callback();
+  } catch (e) {
+    console.error(`Error loading JSON from ${path}:`, e);
   }
-
-  // assign to the final property
-  obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
-
-  if (callback) callback();
 }
 
 const strCopy = obj => JSON.parse(JSON.stringify(obj));
@@ -821,24 +788,26 @@ const ree = {};
 
 campaignTrail_temp.election_json = {};
 campaignTrail_temp.candidate_json = {};
-loadJSON("../static/json/election.json", "campaignTrail_temp.election_json", () => {
-  ree.election_json = strCopy(campaignTrail_temp.election_json);
-});
-loadJSON("../static/json/candidate.json", "campaignTrail_temp.candidate_json", () => {
-  ree.candidate_json = strCopy(campaignTrail_temp.candidate_json);
-});
-loadJSON("../static/json/running_mate.json", "campaignTrail_temp.running_mate_json", () => {
-  ree.running_mate_json = strCopy(campaignTrail_temp.running_mate_json);
-});
-loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_default_json", () => {
-  ree.opponents_default_json = strCopy(campaignTrail_temp.opponents_default_json);
-});
-loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_weighted_json", () => {
-  ree.opponents_weighted_json = strCopy(campaignTrail_temp.opponents_weighted_json);
-});
-loadJSON("../static/json/election_list.json", "campaignTrail_temp.temp_election_list", () => {
-  ree.temp_election_list = strCopy(campaignTrail_temp.temp_election_list);
-});
+window.baseJSONPromises = [
+  loadJSON("../static/json/election.json", "campaignTrail_temp.election_json", () => {
+    ree.election_json = strCopy(campaignTrail_temp.election_json);
+  }),
+  loadJSON("../static/json/candidate.json", "campaignTrail_temp.candidate_json", () => {
+    ree.candidate_json = strCopy(campaignTrail_temp.candidate_json);
+  }),
+  loadJSON("../static/json/running_mate.json", "campaignTrail_temp.running_mate_json", () => {
+    ree.running_mate_json = strCopy(campaignTrail_temp.running_mate_json);
+  }),
+  loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_default_json", () => {
+    ree.opponents_default_json = strCopy(campaignTrail_temp.opponents_default_json);
+  }),
+  loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_weighted_json", () => {
+    ree.opponents_weighted_json = strCopy(campaignTrail_temp.opponents_weighted_json);
+  }),
+  loadJSON("../static/json/election_list.json", "campaignTrail_temp.temp_election_list", () => {
+    ree.temp_election_list = strCopy(campaignTrail_temp.temp_election_list);
+  })
+];
 
 campaignTrail_temp.difficulty_level_json = JSON.parse(
   '[{"model": "campaign_trail.difficulty_level", "pk": 1, "fields": {"name": "Cakewalk", "multiplier": 1.33}}, {"model": "campaign_trail.difficulty_level", "pk": 2, "fields": {"name": "Very Easy", "multiplier": 1.2}}, {"model": "campaign_trail.difficulty_level", "pk": 3, "fields": {"name": "Easy", "multiplier": 1.1}}, {"model": "campaign_trail.difficulty_level", "pk": 4, "fields": {"name": "Normal", "multiplier": 0.97}}, {"model": "campaign_trail.difficulty_level", "pk": 5, "fields": {"name": "Hard", "multiplier": 0.95}}, {"model": "campaign_trail.difficulty_level", "pk": 6, "fields": {"name": "Impossible", "multiplier": 0.9}}, {"model": "campaign_trail.difficulty_level", "pk": 7, "fields": {"name": "Unthinkable", "multiplier": 0.83}}, {"model": "campaign_trail.difficulty_level", "pk": 8, "fields": {"name": "Blowout", "multiplier": 0.75}}, {"model": "campaign_trail.difficulty_level", "pk": 9, "fields": {"name": "Disaster", "multiplier": 0.68}}]'
