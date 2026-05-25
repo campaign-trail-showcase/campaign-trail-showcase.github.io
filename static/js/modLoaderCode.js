@@ -1099,7 +1099,7 @@ $(document).ready(async () => {
   });
 
   await loadEntries();
-  const mods = Array.from(document.getElementById("modSelect").options);
+  const mods = document.getElementById("modSelect").childNodes;
 
   let tagsFound = new Set();
 
@@ -1201,19 +1201,16 @@ $(document).ready(async () => {
 function createModView(mod, imageUrl = "", description = "Loading summary...") {
   const modView = modViewTemplate.content.firstElementChild.cloneNode(true);
 
-  const modValue = mod.value || "";
-  const displayName = mod.innerText || mod.value || "";
-
   // set data attributes
   modView.setAttribute("mode", mod.dataset?.mode || "");
   modView.setAttribute("tags", mod.dataset?.tags || "");
   modView.setAttribute("awardimageurls", mod.dataset?.awardimageurls || "");
   modView.setAttribute("awards", mod.dataset?.awards || "");
-  modView.setAttribute("mod-name", modValue);
-  modView.setAttribute("mod-display-name", displayName.toLowerCase());
-  modView.id = modValue;
+  modView.setAttribute("mod-name", mod.value);
+  modView.setAttribute("mod-display-name", (mod.innerText || mod.value).toLowerCase());
+  modView.id = mod.value;
 
-  namesOfModsFromValue[modValue] = displayName;
+  namesOfModsFromValue[mod.value] = mod.innerText ?? mod.value;
   modView._tagsArray = mod.dataset?.tags ? mod.dataset.tags.split(" ") : [];
 
   modView._elements = {
@@ -1229,8 +1226,8 @@ function createModView(mod, imageUrl = "", description = "Loading summary...") {
   };
 
   // set text and attributes
-  modView._elements.titleText.textContent = displayName;
-  modView._elements.image.alt = modValue + " Box Image";
+  modView._elements.titleText.textContent = mod.innerText;
+  modView._elements.image.alt = mod.value + " Box Image";
   modView._elements.desc.innerHTML = description;
 
   if (imageUrl) {
@@ -1239,25 +1236,25 @@ function createModView(mod, imageUrl = "", description = "Loading summary...") {
 
   // Play button
   modView._elements.playBtn.querySelector("span").textContent = PLAY;
-  modView._elements.playBtn.addEventListener("click", () => loadModFromButton(modValue));
+  modView._elements.playBtn.addEventListener("click", () => loadModFromButton(mod.value));
 
   // determine if this is a custom/local mod
-  const isCustom = customMods.has(modValue) || (mod.dataset && mod.dataset.tags && mod.dataset.tags.split(" ").includes("Custom"));
+  const isCustom = customMods.has(mod.value) || (mod.dataset && mod.dataset.tags && mod.dataset.tags.split(" ").includes("Custom"));
 
   // Favorite button
   if (isCustom) {
     modView._elements.favBtn.style.display = "none";
   } else {
     modView._elements.favBtn.style.display = "";
-    modView._elements.favBtn.querySelector("span").textContent = isFavorite(modValue) ? UNFAV : FAV;
-    modView._elements.favBtn.addEventListener("click", (e) => toggleFavorite(e, modValue));
+    modView._elements.favBtn.querySelector("span").textContent = isFavorite(mod.value) ? UNFAV : FAV;
+    modView._elements.favBtn.addEventListener("click", (e) => toggleFavorite(e, mod.value));
   }
 
   // Delete button
   if (isCustom) {
     modView._elements.deleteBtn.querySelector("span").textContent = DELETE;
     modView._elements.deleteBtn.style.display = "";
-    modView._elements.deleteBtn.addEventListener("click", (e) => deleteCustomMod(e, modValue));
+    modView._elements.deleteBtn.addEventListener("click", (e) => deleteCustomMod(e, mod.value));
   } else {
     modView._elements.deleteBtn.style.display = "none";
   }
