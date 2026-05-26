@@ -18181,7 +18181,7 @@ cyoAdventure = function (a) {
 
    if (ans === 16984) ctsAchievement("Genesis");
 
-   if (ans === 17037) ctsAchievement("Rum and Coca-Cola");
+   if (ans === 17037 || ans === 169562) ctsAchievement("Rum and Coca-Cola");
 
    if (ans === 169528) ctsAchievement("Tricky");
 
@@ -18719,9 +18719,38 @@ if (isElectoralDeadlock) {
   return construct(0);
 }
 
-    // Drop out endings
-    // Slide 1
-    if (playerAnswers.includes(169542) && quickstats[0] < 270) {
+	// Slide 1 Wait what?
+    if (otherResult.electoral_votes >= 270) {
+        e.pages.push(`&emsp;<h3>Grand Kempinski Hotel, Dallas Texas. November 4th, 1992. 6:34 AM</h3>
+              <p><b>Room 252:</b> Hello? Mr. Perot?
+              <p><b>Room 206:</b> Hey Jordan! Sleep well?
+              <p><b>Room 252:</b> Oh, I couldn’t sleep, but thanks for asking. Have you-
+              <p><b>Room 206:</b> Oh, I know how you feel. I could barely sleep myself for a while. But after having a jazz, me and Margot tired ourselves out and went to bed.
+              <p><b>Room 252:</b> Oh. Umm…Well…that’s good to hear sir-
+              <p><b>Room 206:</b> Good lord- We were dancing! Get your head out of the gutter, jeez!
+              <p><b>Room 252:</b> Oh, I’m sorry sir! I wasn’t trying- You know what, I’m going to move on. Sir, have you seen the election results yet?
+              <p><b>Room 206:</b> No. I was awfully surprised the media couldn’t project a winner last night. Who won? I have to work it into the concession speech. Wait! Let me guess…Bush?
+              <p><b>Room 252:</b> No, not him sir.
+              <p><b>Room 206:</b> Oh, well then congratulations Governor Clinton. Or, I guess I should say President-elect Cli-
+              <p><b>Room 252:</b> No sir, it wasn’t Clinton either.
+              <p><b>Room 206:</b> Wasn’t Clinton? Wait…di-....did I win?
+              <p><b>Room 252:</b> No, not you either. I’m sorry sir.
+              <p><b>Room 206:</b> Wait, so, I didn't win, and Clinton didn’t win, and Bush didn’t win…oh, why didn’t you just say it was a deadlock? We wasted half a minute doing that song and dance of who won. Time is money!
+              <p><b>Room 252:</b> Well actually sir, it wasn’t a deadlock either.
+              <p><b>Room 206:</b>...Okay, wait. Am I dumb, or are you? I don’t understand what’s going on.
+              <p><b>Room 252:</b> We don’t really understand either sir. You might want to come down to the conference room. We’re discussing it there. We…we never planned for this.</p>`)
+        e.executable.push([0, (() => { e.image = "https://file.garden/aaGBA-NNayasLE8D/what.png" })]);
+        let endingPlaylist = new Playlist();
+        endingPlaylist.addSong(new Song(
+        "Little Dark Age",
+        "MGMT",
+        "https://file.garden/aaGBA-NNayasLE8D/MGMT_-_Little_Dark_Age.png",
+        "https://audio.jukehost.co.uk/019e0f83-ff33-71b8-b91e-87f239bed874"
+        ));
+        changePlaylist(endingPlaylist);
+    }
+    // Slide 1 drop out ending
+    else if (playerAnswers.includes(169542) && quickstats[0] < 270) {
         e.pages.push(`&emsp;<h3>The Perot family goes on a boat trip.</h3>
               <p>“Good job! That fella barely made it!”
               <p>Your granddaughter looked at you, smiling at your praise. No, she didn’t get a fish, but she was doing better than her mother did long ago, that’s for sure.
@@ -18937,36 +18966,6 @@ if (isElectoralDeadlock) {
         ));
         changePlaylist(endingPlaylist);
      }
-    // Slide 1 Wait what?
-    else if (otherResult.electoral_votes >= 270) {
-        e.pages.push(`&emsp;<h3>Grand Kempinski Hotel, Dallas Texas. November 4th, 1992. 6:34 AM</h3>
-              <p><b>Room 252:</b> Hello? Mr. Perot?
-              <p><b>Room 206:</b> Hey Jordan! Sleep well?
-              <p><b>Room 252:</b> Oh, I couldn’t sleep, but thanks for asking. Have you-
-              <p><b>Room 206:</b> Oh, I know how you feel. I could barely sleep myself for a while. But after having a jazz, me and Margot tired ourselves out and went to bed.
-              <p><b>Room 252:</b> Oh. Umm…Well…that’s good to hear sir-
-              <p><b>Room 206:</b> Good lord- We were dancing! Get your head out of the gutter, jeez!
-              <p><b>Room 252:</b> Oh, I’m sorry sir! I wasn’t trying- You know what, I’m going to move on. Sir, have you seen the election results yet?
-              <p><b>Room 206:</b> No. I was awfully surprised the media couldn’t project a winner last night. Who won? I have to work it into the concession speech. Wait! Let me guess…Bush?
-              <p><b>Room 252:</b> No, not him sir.
-              <p><b>Room 206:</b> Oh, well then congratulations Governor Clinton. Or, I guess I should say President-elect Cli-
-              <p><b>Room 252:</b> No sir, it wasn’t Clinton either.
-              <p><b>Room 206:</b> Wasn’t Clinton? Wait…di-....did I win?
-              <p><b>Room 252:</b> No, not you either. I’m sorry sir.
-              <p><b>Room 206:</b> Wait, so, I didn't win, and Clinton didn’t win, and Bush didn’t win…oh, why didn’t you just say it was a deadlock? We wasted half a minute doing that song and dance of who won. Time is money!
-              <p><b>Room 252:</b> Well actually sir, it wasn’t a deadlock either.
-              <p><b>Room 206:</b>...Okay, wait. Am I dumb, or are you? I don’t understand what’s going on.
-              <p><b>Room 252:</b> We don’t really understand either sir. You might want to come down to the conference room. We’re discussing it there. We…we never planned for this.</p>`)
-        e.executable.push([0, (() => { e.image = "https://file.garden/aaGBA-NNayasLE8D/what.png" })]);
-        let endingPlaylist = new Playlist();
-        endingPlaylist.addSong(new Song(
-        "Little Dark Age",
-        "MGMT",
-        "https://file.garden/aaGBA-NNayasLE8D/MGMT_-_Little_Dark_Age.png",
-        "https://audio.jukehost.co.uk/019e0f83-ff33-71b8-b91e-87f239bed874"
-        ));
-        changePlaylist(endingPlaylist);
-        }
     // Slide 1 Perot Looses
     else if (quickstats[0] < 270 && playerPV < 25.0) {
         e.pages.push(`&emsp;<h3>Congratulations! You have lost the 1992 election!</h3>
