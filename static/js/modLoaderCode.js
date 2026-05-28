@@ -445,11 +445,10 @@ function applyStyle(element, property, value) {
   }
 }
 
-function applySingleModTheme(modView) {
-  const state = localStorage.getItem("modThemeState");
+function applySingleModTheme(modView, state = null) {
+  state = state || localStorage.getItem("modThemeState");
   const modName = modView.getAttribute("mod-name");
   const theme = customModBoxThemes[modName];
-  const els = modView._elements;
   let applyTheme = false;
 
   if (state === "default" && theme && !theme._isFallback) {
@@ -459,56 +458,29 @@ function applySingleModTheme(modView) {
   }
 
   if (applyTheme) {
-    if (els.title) {
-      els.title.style.background = `url('${theme.header_image_url ?? ""}')`;
-      els.title.style.backgroundColor = theme.header_color ?? "";
-      const p = els.title.querySelector("p");
-      if (p) p.style.color = theme.header_text_color ?? "";
-    }
-    if (els.desc) {
-      els.desc.style.backgroundColor = theme.description_background_color ?? "";
-      els.desc.style.color = theme.description_text_color ?? "";
-    }
-    modView.style.backgroundColor = theme.main_color ?? "";
-    els.buttons.forEach(btn => {
-      btn.style.backgroundColor = theme.secondary_color ?? "";
-      const span = btn.querySelector("span");
-      if (span) span.style.color = theme.ui_text_color ?? "";
-    });
-    if (els.ratingBg) {
-      els.ratingBg.style.backgroundColor = theme.secondary_color ?? "";
-      els.ratingBg.querySelectorAll(".modRating, .modPlayCount").forEach(el => {
-        el.style.color = theme.ui_text_color ?? "";
-      });
-    }
+    theme.header_image_url ? modView.style.setProperty("--theme-header-bg", `url('${theme.header_image_url}')`) : modView.style.removeProperty("--theme-header-bg");
+    theme.header_color ? modView.style.setProperty("--theme-header-color", theme.header_color) : modView.style.removeProperty("--theme-header-color");
+    theme.header_text_color ? modView.style.setProperty("--theme-header-text", theme.header_text_color) : modView.style.removeProperty("--theme-header-text");
+    theme.description_background_color ? modView.style.setProperty("--theme-desc-bg", theme.description_background_color) : modView.style.removeProperty("--theme-desc-bg");
+    theme.description_text_color ? modView.style.setProperty("--theme-desc-text", theme.description_text_color) : modView.style.removeProperty("--theme-desc-text");
+    theme.main_color ? modView.style.setProperty("--theme-main-color", theme.main_color) : modView.style.removeProperty("--theme-main-color");
+    theme.secondary_color ? modView.style.setProperty("--theme-secondary-color", theme.secondary_color) : modView.style.removeProperty("--theme-secondary-color");
+    theme.ui_text_color ? modView.style.setProperty("--theme-ui-text", theme.ui_text_color) : modView.style.removeProperty("--theme-ui-text");
   } else {
-    if (els.title) {
-      els.title.style.background = "";
-      els.title.style.backgroundColor = "";
-      const p = els.title.querySelector("p");
-      if (p) p.style.color = "";
-    }
-    if (els.desc) {
-      els.desc.style.backgroundColor = "";
-      els.desc.style.color = "";
-    }
-    modView.style.backgroundColor = "";
-    els.buttons.forEach(btn => {
-      btn.style.backgroundColor = "";
-      const span = btn.querySelector("span");
-      if (span) span.style.color = "";
-    });
-    if (els.ratingBg) {
-      els.ratingBg.style.backgroundColor = "";
-      els.ratingBg.querySelectorAll(".modRating, .modPlayCount").forEach(el => {
-        el.style.color = "";
-      });
-    }
+    modView.style.removeProperty("--theme-header-bg");
+    modView.style.removeProperty("--theme-header-color");
+    modView.style.removeProperty("--theme-header-text");
+    modView.style.removeProperty("--theme-desc-bg");
+    modView.style.removeProperty("--theme-desc-text");
+    modView.style.removeProperty("--theme-main-color");
+    modView.style.removeProperty("--theme-secondary-color");
+    modView.style.removeProperty("--theme-ui-text");
   }
 }
 
 function applyModBoxThemes() {
-  modList.forEach(modView => applySingleModTheme(modView));
+  const state = localStorage.getItem("modThemeState");
+  modList.forEach(modView => applySingleModTheme(modView, state));
 }
 
 // finds the end index of a code block by balancing brackets/parentheses,
