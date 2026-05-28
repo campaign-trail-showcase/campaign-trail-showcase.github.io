@@ -25,6 +25,7 @@ try {
 }
 let isAchUIInitialized = false;
 let pinnedAchMods = new Set();
+let achievementMetadataLoadPromise = null;
 
 try {
   pinnedAchMods = new Set(
@@ -137,17 +138,96 @@ const achWindow = document.getElementById("achwindow");
 const achButton = document.getElementById("achButton");
 const achContent = document.getElementById("achcontent");
 
-function openAchievements() {
+function getKnownAchievementModNames() {
+  const officialMods = Array.isArray(originalModsData)
+    ? originalModsData.map((entry) => entry.value).filter(Boolean)
+    : [];
+  const customModNames = customMods instanceof Set ? Array.from(customMods) : [];
+
+  return Array.from(new Set([...officialMods, ...customModNames]));
+}
+
+function showAchievementLoadingState(message) {
+  if (!contentContainerElement) return;
+
+  contentContainerElement.innerHTML = `
+    <p style="text-align:center;margin:20px 0;">${message}</p>
+  `;
+}
+
+async function ensureAchievementMetadataLoaded() {
+  if (achievementMetadataLoadPromise) {
+    return achievementMetadataLoadPromise;
+  }
+
+  const loadedMetadataMods = window.loadedMetadataMods || new Set();
+  const modNames = getKnownAchievementModNames();
+
+  // filter based on whether we have examined the metadata at all,
+  // rather than checking if they have achievements in allAch
+  const missingMods = modNames.filter((modName) => !loadedMetadataMods.has(modName));
+
+  if (missingMods.length === 0) {
+    return;
+  }
+
+  achievementMetadataLoadPromise = (async () => {
+    const batchSize = 15;
+
+    for (let i = 0; i < missingMods.length; i += batchSize) {
+      const batch = missingMods.slice(i, i + batchSize);
+
+      await Promise.allSettled(batch.map(async (modName) => {
+        try {
+          if (customMods.has(modName)) {
+            const modData = await getModFromDB(modName);
+            if (modData?.code1) {
+              extractModMetadata(modData.code1, modName);
+            }
+            return;
+          }
+
+          const res = await fetch(`../static/mods/${modName}_init.html`);
+          if (!res.ok) return;
+
+          const rawModText = await res.text();
+          extractModMetadata(rawModText, modName);
+        } catch (error) {
+          console.error(`Failed to preload achievements metadata for ${modName}:`, error);
+        } finally {
+          // always mark as loaded (even on failure or if empty) to prevent refetching
+          loadedMetadataMods.add(modName);
+        }
+      }));
+    }
+
+    achievementsCache = null;
+    modCompletionCache = null;
+    lastCacheUpdate = 0;
+  })();
+
+  try {
+    await achievementMetadataLoadPromise;
+  } finally {
+    achievementMetadataLoadPromise = null;
+  }
+}
+
+async function openAchievements() {
   // If the UI hasn't been built yet, build it once.
   if (!isAchUIInitialized) {
     setupAchievementUI();
   }
 
+  achWindow.style.display = "block";
+  showAchievementLoadingState("Loading achievements...");
+  centerAchievementsWindow();
+
+  // ensure the full achievements dataset is available before rendering.
+  await ensureAchievementMetadataLoaded();
+
   // run the render logic.
   addAllAchievements();
-
-  achWindow.style.display = "block";
-  centerAchievementsWindow();
 }
 
 function setupAchievementUI() {
@@ -754,6 +834,11 @@ function addAllAchievements() {
 function performRender() {
   if (!contentContainerElement) return;
 
+  if (achievementMetadataLoadPromise) {
+    showAchievementLoadingState("Loading achievements...");
+    return;
+  }
+
   // update the state of the static controls
   addSortingControls();
   addLegacyViewControls();
@@ -784,7 +869,7 @@ function performRender() {
     // map the data to include a "filterResult" property
     processedData = processedData.map((modData) => {
       const modDisplayName =
-        namesOfModsFromValue[modData.modName] || modData.modName;
+        String(namesOfModsFromValue[modData.modName] || modData.modName);
 
       // does the mod name match?
       if (modDisplayName.toLowerCase().includes(query)) {
