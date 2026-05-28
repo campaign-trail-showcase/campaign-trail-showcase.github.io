@@ -97,6 +97,8 @@ e.CandidText = "Please select your candidate:";
 e.VpText = "Please select your running mate:";
 e.PartyText = "Party:";
 e.HomeStateText = "Home State:";
+e.VisitText = "You have chosen to visit ";
+e.VisitText2 = " -- is this correct?";
 // Ending Popups
 e.ElectionPopup = "Election night has arrived. Settle in and wait for the returns, however long it may take. Best of luck!";
 e.WinPopup = "Congratulations! You won this year's election! Click OK to view the rest of the returns, or skip straight to the final results. We hope you have a nice victory speech prepared for your supporters.";
@@ -2778,7 +2780,7 @@ function rFunc(t, i) {
                 <div class="overlay_window_content" id="visit_content">
                   <h3>Advisor Feedback</h3>
                   <img src="${election.advisor_url}" width="208" height="128"/>
-                  <p>You have chosen to visit ${state.fields.name} -- is this correct?</p>
+                  <p>${e.VisitText} ${state.fields.name} ${e.VisitText2}</p>
                 </div>
                 <div class="overlay_buttons" id="visit_buttons">
                   <button id="confirm_visit_button">YES</button><br>
