@@ -141,11 +141,11 @@
 }
 
 .hover-button:hover {
-  background-color: rgb(76, 98, 154);
+  background-color: var(--theme-secondary-hover, rgb(76, 98, 154));
 }
 
 .hover-button:active {
-  background-color: rgb(85, 111, 176);
+  background-color: var(--theme-secondary-color, rgb(85, 111, 176));
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
