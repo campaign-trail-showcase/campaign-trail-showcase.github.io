@@ -396,30 +396,30 @@ const customThemesButton = document.getElementById("customThemesButton");
 
 let customModBoxThemes = {};
 
-// check if the modThemeState is set in localStorage
-if (localStorage.getItem("modThemeState") === null) {
+let currentModThemeState = localStorage.getItem("modThemeState");
+if (currentModThemeState === null) {
   // if not, check for the legacy 'customModBoxThemesEnabled' setting
   const legacyThemeState = localStorage.getItem("customModBoxThemesEnabled");
 
   if (legacyThemeState !== null) {
     // migration time!
     // 'true' maps to 'default', and 'false' maps to 'off'
-    const newThemeState = legacyThemeState === "true" ? "default" : "off";
-    localStorage.setItem("modThemeState", newThemeState);
+    currentModThemeState = legacyThemeState === "true" ? "default" : "off";
+    localStorage.setItem("modThemeState", currentModThemeState);
 
     // remove old key
     localStorage.removeItem("customModBoxThemesEnabled");
   } else {
     // initialize with default
-    localStorage.setItem("modThemeState", "default");
+    currentModThemeState = "default";
+    localStorage.setItem("modThemeState", currentModThemeState);
   }
 }
 
 function updateButtonText() {
-  const state = localStorage.getItem("modThemeState");
-  if (state === "off") {
+  if (currentModThemeState === "off") {
     customThemesButton.innerText = "Mod Themes: Off";
-  } else if (state === "default") {
+  } else if (currentModThemeState === "default") {
     customThemesButton.innerText = "Mod Themes: Default";
   } else {
     customThemesButton.innerText = "Mod Themes: Detailed";
@@ -430,10 +430,10 @@ updateButtonText();
 const themeStates = ["off", "default", "detailed"];
 
 function toggleModBoxThemes() {
-  const currentState = localStorage.getItem("modThemeState");
-  const currentIndex = themeStates.indexOf(currentState);
+  const currentIndex = themeStates.indexOf(currentModThemeState);
   const nextIndex = (currentIndex + 1) % themeStates.length;
-  localStorage.setItem("modThemeState", themeStates[nextIndex]);
+  currentModThemeState = themeStates[nextIndex];
+  localStorage.setItem("modThemeState", currentModThemeState);
 
   updateButtonText();
   applyModBoxThemes();
@@ -446,7 +446,7 @@ function applyStyle(element, property, value) {
 }
 
 function applySingleModTheme(modView, state = null) {
-  state = state || localStorage.getItem("modThemeState");
+  state = state || currentModThemeState;
   const modName = modView.getAttribute("mod-name");
   const theme = customModBoxThemes[modName];
   let applyTheme = false;
@@ -479,8 +479,7 @@ function applySingleModTheme(modView, state = null) {
 }
 
 function applyModBoxThemes() {
-  const state = localStorage.getItem("modThemeState");
-  modList.forEach(modView => applySingleModTheme(modView, state));
+  modList.forEach(modView => applySingleModTheme(modView, currentModThemeState));
 }
 
 // finds the end index of a code block by balancing brackets/parentheses,
@@ -1560,10 +1559,14 @@ async function addCustomMod(code1, code2) {
   applyModBoxThemes();
 }
 
+let debounceFilterTimer;
 function filterMods(event) {
   nameFilter = event.target.value.toLowerCase();
-  currentPage = 1;
-  updateModViews();
+  clearTimeout(debounceFilterTimer);
+  debounceFilterTimer = setTimeout(() => {
+    currentPage = 1;
+    updateModViews();
+  }, 150);
 }
 
 function createTagButtons(tagsFound) {
