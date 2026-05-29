@@ -40,6 +40,10 @@
   font-weight: bolder;
   width: 100%;
   position: relative;
+  background-image: var(--theme-header-bg, none);
+  background-color: var(--theme-header-color, transparent);
+  background-size: cover;
+  background-position: center;
 }
 
 .trophy-holder {
@@ -66,6 +70,7 @@
 
 .mod-title p {
   padding: 10px;
+  color: var(--theme-header-text, inherit);
 }
 
 .mod-img-desc {
@@ -82,6 +87,8 @@
   border-radius: 5px;
   padding: 5px;
   overflow-y: clip;
+  background-color: var(--theme-desc-bg, transparent);
+  color: var(--theme-desc-text, inherit);
 }
 
 .tag-button {
@@ -99,7 +106,7 @@
 .community-grid-element {
   width: 23%;
   height: 25rem;
-  background-color: #BFE6FF;
+  background-color: var(--theme-main-color, #BFE6FF);
   margin: 5px 5px 10px 10px;
   border-radius: 10px;
   display: flex;
@@ -126,19 +133,19 @@
   text-align: center;
   text-decoration: none;
   outline: none;
-  color: #fff;
-  background-color: rgb(85, 111, 176);
+  color: var(--theme-ui-text, #fff);
+  background-color: var(--theme-secondary-color, rgb(85, 111, 176));
   border: none;
   border-radius: 10px;
   margin: 5px;
 }
 
 .hover-button:hover {
-  background-color: rgb(76, 98, 154);
+  background-color: var(--theme-secondary-hover, rgb(76, 98, 154));
 }
 
 .hover-button:active {
-  background-color: rgb(85, 111, 176);
+  background-color: var(--theme-secondary-color, rgb(85, 111, 176));
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -740,10 +747,10 @@
 }
 
 .rating-background {
-  background-color: rgb(85, 111, 176);
+  background-color: var(--theme-secondary-color, rgb(85, 111, 176));
   width: 100%;
   border-radius: 0px 0px 10px 10px;
-  color: white;
+  color: var(--theme-ui-text, white);
   padding-top: 10px;
   position: relative;
   padding-bottom: 5px;
