@@ -524,7 +524,7 @@ function evest() {
   window.swE.innerHTML = nnn;
 }
 
-function copy(mainObject) {
+function copyObj(mainObject) {
   const objectCopy = {}; // objectCopy will store a copy of the mainObject
   let key;
   for (key in mainObject) {
@@ -3810,7 +3810,7 @@ function A(t) {
       if (candId === e.candidate_id) {
         const runIssue = runningMateByIssue.get(issue);
         if (!runIssue) {
-              console.warn(`No running mate issue for issue ${issue}`);
+          console.warn(`No running mate issue for issue ${issue}`);
           return it;
         }
         rmScore = runIssue.fields.issue_score;
