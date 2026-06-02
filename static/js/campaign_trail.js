@@ -1971,19 +1971,19 @@ function descHTML(descWindow, id) {
     </div>`.trim());
 }
 
-function a(e) {
-  let t;
+function getGameTypeDescription(gameTypeId) {
+  let gameTypeDescription;
   // eslint-disable-next-line default-case
-  switch (e) {
+  switch (gameTypeId) {
     case "1":
-      t = `
+      gameTypeDescription = `
         <p><strong>Use the default method of allocating electoral votes for each state.</strong></p>
         <p>In the vast majority of cases, states use a winner-take-all method. For instance, if Candidate A defeats Candidate B in a state, worth 20 electoral votes, Candidate A will usually win all 20 votes.</p>
         <p>This method tends to concentrate the election into a handful of swing states. It also makes it difficult for third-party candidates to win electoral votes. On the other hand, it is easier for a single candidate to gain an overall majority of the electoral votes.</p>
       `;
       break;
     case "2":
-      t = `
+      gameTypeDescription = `
         <p><strong>Allocate each state's electoral votes proportionally.</strong></p>
         <p>Under this method, all candidates split the electoral votes in a state, in proportion to their popular vote %.</p>
         <p>There is still an advantage to winning a state -- the winner of the state will always receive a plurality of electoral votes. For instance, in a state with 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3 electoral votes.</p>
@@ -1991,7 +1991,7 @@ function a(e) {
       `;
       break;
     case "3":
-      t = `
+      gameTypeDescription = `
         <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
         <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
         <p>
@@ -2005,7 +2005,7 @@ function a(e) {
       `;
       break;
   }
-  $("#opponent_selection_description_window").html(t);
+  $("#opponent_selection_description_window").html(gameTypeDescription);
 }
 
 function realityCheck(cand, running_mate) {
@@ -2191,9 +2191,9 @@ function renderOptions(electionId, candId, runId) {
   `.trim();
   const gameTypeId = document.querySelector("#game_type_id");
   const difficultyLevelId = document.querySelector("#difficulty_level_id");
-  a(gameTypeId.value);
+  getGameTypeDescription(gameTypeId.value);
   gameTypeId.addEventListener("change", () => {
-    a(gameTypeId.value);
+    getGameTypeDescription(gameTypeId.value);
   });
   // if (e.shining) $("#game_type_id").val("3");
   $("#opponent_selection_id_button").click(() => {
