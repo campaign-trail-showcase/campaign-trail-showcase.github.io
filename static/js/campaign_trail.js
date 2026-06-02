@@ -2721,11 +2721,11 @@ function rFunc(t, i) {
   const latestRes = getLatestRes(t);
   const latestCandidates = latestRes[0];
   const evArray = latestCandidates.map((c) => c.evvs || 0);
-  const cachedVV = latestCandidates.map((c) => {
+  const cachedNationalPopularVoteEstimate = latestCandidates.map((c) => {
     const hasNoVotes = c.popvs === 0 && c.evvs === 0;
     return hasNoVotes ? '' : `<b>${c.fields.last_name}</b> - ${(c.pvp * 100).toFixed(1)}%<br>`
   }).join("");
-  const cachedNNN = latestCandidates.reduce((acc, c, idx) => {
+  const cachedElectoralVoteEstimate = latestCandidates.reduce((acc, c, idx) => {
     if (evArray[idx] > 0) {
       acc += `<b>${c.fields.last_name}</b> - ${evArray[idx]}<br>`;
     }
@@ -2741,8 +2741,8 @@ function rFunc(t, i) {
 
     window.nn2 = latestCandidates;
     window.nn3 = evArray;
-    nationalPopularVoteEstimate = cachedVV;
-    electoralVoteEstimate = cachedNNN;
+    nationalPopularVoteEstimate = cachedNationalPopularVoteEstimate;
+    electoralVoteEstimate = cachedElectoralVoteEstimate;
     window.evestt = 0;
 
     const stObj = abbrToState.get(data.name);
