@@ -25890,7 +25890,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
 
   // Obama 1st term
   const obamaVP = (typeof getObamaVP === 'function') ? getObamaVP() : "Joe Biden";
-  rawTimeline.push({ name: "Barack Obama", start: 2009, end: 2013, vp: obamaVP });
+  rawTimeline.push({ name: "Barack Obama", start: 2009, end: 2013, vp: "Joe Biden" });
 
   // the 2012 winner
   let winner12, vp12;
@@ -26020,19 +26020,48 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   if (Math.random() < modifiedTurnover) {
     let last = rawTimeline[rawTimeline.length - 1];
 
-    const takeoverYears = [2018, 2019, 2020];
+    // restrict takeover to 2018 or 2019 to prevent resigning exactly at the 2020 transition
+    const takeoverYears = [2018, 2019];
     const takeoverYear = takeoverYears[Math.floor(Math.random() * takeoverYears.length)];
 
     const resignationChance =
       winner16 === "Donald Trump" && con >= 6 ? 0.65 : 0.35;
 
+    // vaguely realistic resignation date simulator
+    const months = ["February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const randomMonth = months[Math.floor(Math.random() * months.length)];
+    const randomDay = Math.floor(Math.random() * 28) + 1;
+    const exactTakeoverDate = `${randomMonth} ${randomDay}, ${takeoverYear}`;
+
     last.end = takeoverYear;
+    last.endDateStr = exactTakeoverDate;
     last.reason = Math.random() < resignationChance ? "Resigned" : "Died in office";
 
-	// VP takes over
+    // VP takes over
     if (TIMELINE_ASSETS.candidates[last.vp]) {
-      rawTimeline.push({ name: last.vp, start: takeoverYear, end: 2021, vp: "Vacant" });
-      winner16 = last.vp;
+      const takeoverPres = last.vp;
+      const party = TIMELINE_ASSETS.candidates[takeoverPres]?.party || "Democratic";
+
+      let assignedVP = "Vacant";
+      if (party === "Democratic") {
+        assignedVP = get2016DemVP(takeoverPres, lib);
+      } else {
+        assignedVP = (typeof getRepublicanVP === 'function') ? getRepublicanVP(takeoverPres, lib, con) : "Paul Ryan";
+      }
+
+      // new VP under the 25th Amendment
+      const confMonths = ["September", "October", "November", "December"];
+      const confMonth = confMonths[Math.floor(Math.random() * confMonths.length)];
+      const confirmationVPText = `Vacant<br><a href="#" style="color:#0645AD; text-decoration: none;">${assignedVP}</a> (from ${confMonth} ${takeoverYear})`;
+
+      rawTimeline.push({
+        name: takeoverPres,
+        start: takeoverYear,
+        end: 2021,
+        vp: confirmationVPText,
+        startDateStr: exactTakeoverDate
+      });
+      winner16 = takeoverPres;
     }
   }
 
@@ -26062,9 +26091,14 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
       if (bip > 2 && prevPres.start === 2017) {
         winner20 = prevPres.name; vp20 = prevPres.vp;
       } else {
-        winner20 = "Joe Biden"; vp20 = "Kamala Harris";
-        if (lib > 4) { winner20 = "Elizabeth Warren"; vp20 = "Julian Castro"; }
-        if (mynutmegphantasy > 0 && Math.random() > 0.5) { winner20 = "Michelle Obama"; vp20 = "Julian Castro"; }
+        if (prevPres.name === winner12) {
+          winner20 = prevPres.name;
+          vp20 = (typeof getRepublicanVP === 'function') ? getRepublicanVP(winner20, lib, con) : "Paul Ryan";
+        } else {
+          winner20 = "Joe Biden"; vp20 = "Kamala Harris";
+          if (lib > 4) { winner20 = "Elizabeth Warren"; vp20 = "Julian Castro"; }
+          if (mynutmegphantasy > 0 && Math.random() > 0.5) { winner20 = "Michelle Obama"; vp20 = "Julian Castro"; }
+        }
       }
     } else if (prevParty === "Democratic") {
       if (wall > 2 && prevPres.start === 2017) {
@@ -26077,7 +26111,8 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
         if (lunarbears >= 2) rep2020Choices.push(["Herman Cain", "Tucker Carlson"]);
         [winner20, vp20] = rep2020Choices[Math.floor(Math.random() * rep2020Choices.length)];
       } else {
-        winner20 = prevPres.name; vp20 = prevPres.vp; // re-election
+        winner20 = prevPres.name;
+        vp20 = get2016DemVP(winner20, lib); // a fresh VP for the full term election
       }
     } else {
       // 3rd/4th party crashes
@@ -26160,7 +26195,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
       "Al Gore": ["Tammy Baldwin", "Tim Kaine"]
     };
     let options = demVPs[winner24] || ["Tim Kaine", "Cory Booker", "Kamala Harris"];
-    vp24 = options[Math.floor(Math.random() * options.length)];
+    vp24 = options[Math.floor(options.length / 2)];
   } else {
     vp24 = "Howard Stern";
   }
@@ -26183,12 +26218,19 @@ function mergeTimelineData(rawTimeline) {
 
     // check if same person & consecutive time
     if (prev.name === curr.name && prev.end === curr.start) {
-
       prev.end = curr.end;
+      prev.endDateStr = curr.endDateStr || (curr.end === "Incumbent" ? "Incumbent" : `January 20, ${curr.end}`);
 
       // if the reason for leaving happened in the *second* term, update it
       if (curr.reason) {
         prev.reason = curr.reason;
+      }
+
+      // merge different VPs into a clean list to avoid duplicating them
+      if (prev.vp !== curr.vp) {
+        if (!prev.vp.includes(curr.vp)) {
+          prev.vp = `${prev.vp}<br>${curr.vp}`;
+        }
       }
     } else {
       // push new entry (either new person OR non-consecutive term)
@@ -26292,11 +26334,11 @@ function generateTimelineHTML(timelineData) {
       }
     }
 
-    const startStr = `January 20, ${p.start}`;
-    const endStr = (p.end === "Incumbent") ? "<i>Incumbent</i>" : `January 20, ${p.end}`;
+    const startStr = p.startDateStr || `January 20, ${p.start}`;
+    const endStr = (p.end === "Incumbent") ? "<i>Incumbent</i>" : (p.endDateStr || `January 20, ${p.end}`);
 
-    // Dynamically calculate the election years based on their time in office.
-    // If they assumed office mid-term (e.g. start year is not divisible by 4 + 1 like 2013, 2017), output a grey dash.
+    // calculate the election years based on their time in office.
+    // if they assumed office mid-term (e.g. start year is not divisible by 4 + 1 like 2013, 2017), output a grey dash
     let electionHtml = '<span style="color:gray">–</span>';
     if (p.start % 4 === 1) {
       let firstElection = p.start - 1;
