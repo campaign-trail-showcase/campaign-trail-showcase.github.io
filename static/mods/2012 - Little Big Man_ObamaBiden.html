@@ -23066,13 +23066,6 @@ function applyDataModifications() {
     });
   }
 
-  // reapply tooltips to text that otherwise wouldn't load
-  if (window.tooltipProcessor) {
-      window.tooltipProcessor.applyToObject(campaignTrail_temp.questions_json);
-      window.tooltipProcessor.applyToObject(campaignTrail_temp.answers_json);
-      window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
-  }
-
   lastDataAppliedMateId = runningMateId;
 }
 
@@ -31995,7 +31988,7 @@ function finalizeRendering() {
     return;
   }
 
-  const targetNode = document.getElementById('game_screen') || document.getElementById('main_content') || document.body;
+  const targetNode = document.getElementById('game_window') || document.body;
   const config = { childList: true, subtree: true };
 
   endingObserver = new MutationObserver((mutationsList, observer) => {
@@ -33991,7 +33984,7 @@ const questionImageMap = {
   98: "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-560w,f_auto,q_auto:best/newscms/2017_50/2263011/171215-capitol-mn-1630.jpg",
   114: "https://media.gazetadopovo.com.br/2011/05/obama-ny-1.0.74797257-gpMedium.jpg",
   130: "https://live.staticflickr.com/3231/3142216126_c66d9ff7b6_c.jpg",
-  300: "https://ideas.time.com/wp-content/uploads/sites/5/2012/08/151026561.jpg",
+  300: "https://web.archive.org/web/20250817035744im_/https://ideas.time.com/wp-content/uploads/sites/5/2012/08/151026561.jpg",
   301: "https://static01.nyt.com/images/2008/11/07/us/politics/07barackobama533.jpg",
   1722: "https://www.nytexaminer.com/wp-content/uploads/2012/11/Hurricane-Sandy-Lake-Michigan.jpg",
   21138: "https://static01.nyt.com/images/2012/10/11/us/politics/1011obama/1011obama-superJumbo.jpg",
@@ -36929,101 +36922,6 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     forceReset: function () { isInitialized = false; styleCache = {}; }
   };
 })();
-
-// Everyone's favorite tooltips. This one was taken from 2016ALOT.
-// Note this was rewritten from a similar tooltip mechanism that was in W.
-// I'm not sure who were the original authors. For the styling, I believe it was
-// taken from the 2021DE scenario, though I used one for my personal site on ALOT,
-// and passed it over to here.
-
-// @note: for the sake of simplicity, this was rewritten again for a
-// more optimal/cleaner design.
-
-function createTooltipProcessor(tooltipList) {
-  function escapeRegex(s) {
-    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-  }
-
-  // pre-process data
-  // we use lower-case keys for case-insensitive matching logic
-  const tooltipMap = new Map();
-  const sortedKeys = [];
-
-  // deduplicate and prep sorting
-  // we filter unique keys to prevent redundant regex processing
-  const seenKeys = new Set();
-
-  // sort by length (descending) so, e.g. "Joe Biden" is matched before "Biden"
-  // we do this sort BEFORE creating the regex string
-  const sortedList = [...tooltipList].sort((a, b) => b.searchString.length - a.searchString.length);
-
-  for (const item of sortedList) {
-    if (!item.searchString || seenKeys.has(item.searchString)) continue;
-
-    seenKeys.add(item.searchString);
-    sortedKeys.push(escapeRegex(item.searchString));
-
-    // store mapping - since regex is case insensitive ('i'),
-    // we map the lowercase match to the object
-    tooltipMap.set(item.searchString.toLowerCase(), item);
-  }
-
-  // create one regex with no capturing groups for individual items.
-  // \b ensures we don't match, e.g., "Barack" inside "BarackObama"
-  const pattern = sortedKeys.join('|');
-
-  // regex
-  const TOOLTIP_REGEX = pattern.length > 0 ?
-    new RegExp(`((?:<span class=['"]mytooltip['"]>[\\s\\S]*?<\\/span>\\s*<\\/span>)|(?:<[^>]*>))|(?<=\\b|\\s|^|“|")(${pattern})(?=[.,;!?]?\\b|\\s|”|"|$)`, 'gi')
-    : null;
-
-  // cache
-  const cache = new Map();
-
-  function _applyTooltipsToString(str) {
-    if (!TOOLTIP_REGEX || !str || typeof str !== 'string') return str;
-
-    // return cached result if exists
-    if (cache.has(str)) return cache.get(str);
-
-    const processed = str.replace(TOOLTIP_REGEX, (match, skip, keyword) => {
-      if (skip) return skip;
-
-      const data = tooltipMap.get(keyword.toLowerCase());
-      if (data) {
-        return `<span class='mytooltip'>${keyword}<span class='mytooltiptext'>${data.explanationText}</span></span>`;
-      }
-      return keyword;
-    });
-
-    cache.set(str, processed);
-    return processed;
-  }
-
-  return {
-    applyToObject(obj) {
-      function recurse(currentObj) {
-        for (let key in currentObj) {
-          if (!Object.prototype.hasOwnProperty.call(currentObj, key)) continue;
-
-          const value = currentObj[key];
-          if (typeof value === 'string') {
-            currentObj[key] = _applyTooltipsToString(value);
-          } else if (value !== null && typeof value === 'object') {
-            recurse(value);
-          }
-        }
-      }
-      recurse(obj);
-    }
-  };
-}
-
-window.tooltipProcessor = createTooltipProcessor(tooltipList);
-
-window.tooltipProcessor.applyToObject(campaignTrail_temp.questions_json);
-window.tooltipProcessor.applyToObject(campaignTrail_temp.answers_json);
-window.tooltipProcessor.applyToObject(campaignTrail_temp.answer_feedback_json);
 
 // The music player! Taken from 2016ALOT.
 // This was initially developed using the one from W. as a basis, which is also why the
