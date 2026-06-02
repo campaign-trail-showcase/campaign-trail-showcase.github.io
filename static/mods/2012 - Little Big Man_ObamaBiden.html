@@ -34183,7 +34183,7 @@ window.newFooter = { ensureFooter };
     updateUI();
   };
 
-  // capture national estimates (rrr and nnn) from the map config
+  // capture national estimates (nationalPopularVoteEstimate and electoralVoteEstimate) from the map config
   const originalRFunc = window.rFunc;
   window.rFunc = function (t, i) {
     const config = originalRFunc.apply(this, arguments);
@@ -34192,11 +34192,11 @@ window.newFooter = { ensureFooter };
     const originalClick = config.click;
 
     const captureEstimates = () => {
-      if (typeof rrr !== 'undefined') store.popVote = rrr;
-      if (typeof nnn !== 'undefined') store.elecVote = nnn;
+      if (typeof nationalPopularVoteEstimate !== 'undefined') store.popVote = nationalPopularVoteEstimate;
+      if (typeof electoralVoteEstimate !== 'undefined') store.elecVote = electoralVoteEstimate;
 
-      if (!store.popVote) store.popVote = window.rrr || "";
-      if (!store.elecVote) store.elecVote = window.nnn || "";
+      if (!store.popVote) store.popVote = window.nationalPopularVoteEstimate || "";
+      if (!store.elecVote) store.elecVote = window.electoralVoteEstimate || "";
     };
 
     if (typeof originalHover === 'function') {

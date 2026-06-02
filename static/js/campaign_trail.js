@@ -495,20 +495,20 @@ function csrfToken() {
   return t;
 }
 
-let slrr = "";
-let rrr = "";
+let statePopularVoteEstimate = "";
+let nationalPopularVoteEstimate = "";
 let starting_mult = 0;
 const encrypted = Math.round(Math.random() * 100);
-let nnn = "";
+let electoralVoteEstimate = "";
 
 function switchPV() {
-  // switchingEst, rrr, _, pvswitcher
+  // switchingEst, nationalPopularVoteEstimate, _, pvswitcher
   window.swE = document.getElementById("switchingEst");
-  if (window.swE.innerHTML === rrr) {
-    window.swE.innerHTML = slrr;
+  if (window.swE.innerHTML === nationalPopularVoteEstimate) {
+    window.swE.innerHTML = statePopularVoteEstimate;
     window.pvswitcher.innerText = "PV Estimate";
   } else {
-    window.swE.innerHTML = rrr;
+    window.swE.innerHTML = nationalPopularVoteEstimate;
     window.pvswitcher.innerText = "Switch to State Estimate";
   }
   const evEst = document.getElementById("ev_est");
@@ -519,7 +519,7 @@ function evest() {
   const evEst = document.getElementById("ev_est");
   if (evEst) evEst.style.display = "none";
   window.swE = document.getElementById("switchingEst");
-  window.swE.innerHTML = nnn;
+  window.swE.innerHTML = electoralVoteEstimate;
 }
 
 function copyObj(mainObject) {
@@ -2516,7 +2516,7 @@ function setStatePollText(state, t) {
   });
 
   const _ = formattedResults.join("");
-  slrr = _;
+  statePopularVoteEstimate = _;
 
   const someStatesHaveEVs = e.states_json.some((state) => state.fields.electoral_votes > 0);
 
@@ -2741,8 +2741,8 @@ function rFunc(t, i) {
 
     window.nn2 = latestCandidates;
     window.nn3 = evArray;
-    rrr = cachedVV;
-    nnn = cachedNNN;
+    nationalPopularVoteEstimate = cachedVV;
+    electoralVoteEstimate = cachedNNN;
     window.evestt = 0;
 
     const stObj = abbrToState.get(data.name);
