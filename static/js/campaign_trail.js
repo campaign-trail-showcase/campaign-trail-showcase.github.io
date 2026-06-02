@@ -235,7 +235,6 @@ function findFromPK(array, pk) {
 }
 
 let states = [];
-const initIt = 0;
 
 function fileExists(url) {
   return fetch(url, { method: "HEAD", cache: "no-store" })
@@ -500,7 +499,6 @@ let slrr = "";
 let rrr = "";
 let starting_mult = 0;
 const encrypted = Math.round(Math.random() * 100);
-const t = "";
 let nnn = "";
 
 function switchPV() {
