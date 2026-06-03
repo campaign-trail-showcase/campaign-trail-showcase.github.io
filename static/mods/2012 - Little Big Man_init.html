@@ -1,7 +1,7 @@
 /*
 * @title: 2012: Little Big Man / Little Big Man / 2012a
 * @author: StrawberryMaster & Friends
-* @version: 1.2.9
+* @version: 1.2.10
 * @description: The 2012 election in the eyes of Barack Obama (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -3987,13 +3987,22 @@ document.addEventListener('mouseover', function(e) {
     targetId: 'difficulty_level',
     containerId: 'mod_options_container',
     storageKey: 'lbm_custom_preferences',
-    features: [
-      {
+	features: [
+	  {
         id: 'city_visits',
         text: "City visits",
         desc: "Visits to a state's cities may gradually shift its issues towards a specific stance.",
         flag: 'city_visits',
+		type: 'toggle',
         default: true
+      },
+	  {
+        id: 'compact_playlist',
+        text: "Compact playlist",
+        desc: "Replaces the default soundtrack with a curated, more theme-accurate playlist.",
+        flag: 'compact_playlist',
+		type: 'toggle',
+        default: false
       },
 	  {
         id: 'countymap_position',
@@ -4011,51 +4020,46 @@ document.addEventListener('mouseover', function(e) {
       {
         id: 'dynamic_en',
         text: "Dynamic election night",
-        desc: "Enables a fluid, realistic election night simulation instead of the in-game election night. Similar to that of The Political Process.",
+        desc: "Enables a fluid, realistic election night simulation instead of the in-game election night.",
         flag: 'dynamicEN',
-        default: false
+        type: 'toggle',
+        default: true
       },
-      {
-        id: 'compact_playlist',
-        text: "Compact playlist",
-        desc: "Replaces the default soundtrack with a curated, more theme-accurate playlist.",
-        flag: 'compact_playlist',
-        default: false
-      }
     ]
   };
   
   const modMenuStyles = new CSSStyleSheet();
-	 modMenuStyles.replaceSync(`
-            #${CONFIG.targetId} { display: inline-flex; flex-wrap: wrap; gap: 2.5em; align-items: flex-start; }
-            #${CONFIG.containerId} { display: flex; flex-direction: column; width: 260px; }
-            .mod-desc-box {
-                margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.35);
-                border: 1px solid #ccc; border-radius: 4px; min-height: 90px;
-                font-size: 0.95em; display: flex; flex-direction: column; justify-content: space-between;
-            }
-            .mod-desc-box p { margin: 0 0 10px 0; line-height: 1.3em; }
-            .mod-toggle-row { display: flex; align-items: center; padding-top: 5px; border-top: 1px solid rgba(0,0,0,0.1); }
-            .switch { position: relative; display: inline-block; width: 40px; height: 20px; margin-right: 10px; }
-            .switch input { opacity: 0; width: 0; height: 0; }
-            .inner_window_w_desc .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
-            .inner_window_w_desc .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-            .inner_window_w_desc input:checked + .slider { background-color: #208604; }
-            .inner_window_w_desc input:checked + .slider:before { transform: translateX(20px); }
-            .status-label { font-weight: bold; font-size: 0.9em; text-transform: uppercase; }
-            .status-enabled { color: #0d3d00; }
-            .status-disabled { color: #2d2d2d; }
-    `);
+  modMenuStyles.replaceSync(`
+    #${CONFIG.targetId} { display: inline-flex; flex-wrap: wrap; gap: 2.5em; align-items: flex-start; }
+    #${CONFIG.containerId} { display: flex; flex-direction: column; width: 260px; }
+    .mod-desc-box {
+        margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.35);
+        border: 1px solid #ccc; border-radius: 4px; min-height: 90px;
+        font-size: 0.95em; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .mod-desc-box p { margin: 0 0 10px 0; line-height: 1.3em; }
+    .mod-ctrl-row { display: flex; align-items: center; padding-top: 5px; border-top: 1px solid rgba(0,0,0,0.1); }
+    .switch { position: relative; display: inline-block; width: 40px; height: 20px; margin-right: 10px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+    .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+    input:checked + .slider { background-color: #208604; }
+    input:checked + .slider:before { transform: translateX(20px); }
+    .status-label { font-weight: bold; font-size: 0.9em; text-transform: uppercase; }
+    .status-enabled { color: #0d3d00; }
+    .status-disabled { color: #2d2d2d; }
+    .mod-select { width: 100%; padding: 4px; font-size: 0.95em; border: 1px solid #ccc; border-radius: 3px; background: white; }
+  `);
 
   if (!document.getElementById("mod_option_styles")) {
+    const styleMarker = document.createElement("style");
+    styleMarker.id = "mod_option_styles";
+    document.head.appendChild(styleMarker);
 	document.adoptedStyleSheets = [...document.adoptedStyleSheets, modMenuStyles];
   }
-  
-  // storage
+
   const getSavedSettings = () => {
-    try {
-      return JSON.parse(localStorage.getItem(CONFIG.storageKey)) || {};
-    } catch (e) { return {}; }
+    try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)) || {}; } catch (e) { return {}; }
   };
 
   const saveSettingToStorage = (flag, value) => {
@@ -4064,13 +4068,12 @@ document.addEventListener('mouseover', function(e) {
     localStorage.setItem(CONFIG.storageKey, JSON.stringify(current));
   };
 
-
-  // helpers
   const getFlag = (key, def) => {
     window.campaignTrail_temp = window.campaignTrail_temp || {};
     if (!window.campaignTrail_temp.hasOwnProperty(key)) window.campaignTrail_temp[key] = def;
     return window.campaignTrail_temp[key];
   };
+
   const setFlag = (key, val) => window.campaignTrail_temp[key] = val;
 
   const createEl = (tag, props = {}, children = []) => {
@@ -4089,22 +4092,24 @@ document.addEventListener('mouseover', function(e) {
     if (!target || document.getElementById(CONFIG.containerId)) return;
 
     const frag = document.createDocumentFragment();
-
-    let descText, toggleInput, statusText, dropdown;
+    let descText, toggleWrapper, toggleInput, statusText, selectWrapper, selectInput, dropdown;
 
     const wrapper = createEl('div', { id: CONFIG.containerId }, [
-      createEl('h3', { textContent: 'Special mod settings:' }),
-      dropdown = createEl('select', {
-        style: { width: '100%', padding: '5px' }
-      }),
+      createEl('h3', { textContent: 'Special mod settings:', style: { marginBottom: '8px' } }),
+      dropdown = createEl('select', { style: { width: '100%', padding: '5px' } }),
       createEl('div', { className: 'mod-desc-box' }, [
         descText = createEl('p', {}),
-        createEl('div', { className: 'mod-toggle-row' }, [
+
+        toggleWrapper = createEl('div', { className: 'mod-ctrl-row', style: { display: 'none' } }, [
           createEl('label', { className: 'switch' }, [
             toggleInput = createEl('input', { type: 'checkbox' }),
             createEl('span', { className: 'slider' })
           ]),
           statusText = createEl('span', { className: 'status-label' })
+        ]),
+
+        selectWrapper = createEl('div', { className: 'mod-ctrl-row', style: { display: 'none' } }, [
+          selectInput = createEl('select', { className: 'mod-select' })
         ])
       ])
     ]);
@@ -4113,14 +4118,7 @@ document.addEventListener('mouseover', function(e) {
 
     CONFIG.features.forEach((f, i) => {
       dropdown.add(new Option(f.text, i));
-
-      let initialValue;
-      if (savedSettings.hasOwnProperty(f.flag)) {
-        initialValue = savedSettings[f.flag];
-      } else {
-        initialValue = f.default;
-      }
-
+      let initialValue = savedSettings.hasOwnProperty(f.flag) ? savedSettings[f.flag] : f.default;
       setFlag(f.flag, initialValue);
     });
 
@@ -4128,12 +4126,27 @@ document.addEventListener('mouseover', function(e) {
       const feat = CONFIG.features[dropdown.value];
       descText.textContent = feat.desc;
 
-      const isOn = getFlag(feat.flag, feat.default);
-      toggleInput.checked = isOn;
-      toggleInput.dataset.flag = feat.flag;
+      if (feat.type === 'toggle') {
+          toggleWrapper.style.display = 'flex';
+          selectWrapper.style.display = 'none';
 
-      statusText.textContent = isOn ? "Enabled" : "Disabled";
-      statusText.className = `status-label ${isOn ? 'status-enabled' : 'status-disabled'}`;
+          const isOn = getFlag(feat.flag, feat.default);
+          toggleInput.checked = isOn;
+          toggleInput.dataset.flag = feat.flag;
+
+          statusText.textContent = isOn ? "Enabled" : "Disabled";
+          statusText.className = `status-label ${isOn ? 'status-enabled' : 'status-disabled'}`;
+      } else if (feat.type === 'select') {
+          toggleWrapper.style.display = 'none';
+          selectWrapper.style.display = 'flex';
+
+          selectInput.innerHTML = '';
+          feat.options.forEach(opt => selectInput.add(new Option(opt.text, opt.value)));
+
+          const currentVal = getFlag(feat.flag, feat.default);
+          selectInput.value = currentVal;
+          selectInput.dataset.flag = feat.flag;
+      }
     };
 
     dropdown.addEventListener('change', updateState);
@@ -4141,11 +4154,16 @@ document.addEventListener('mouseover', function(e) {
     toggleInput.addEventListener('change', (e) => {
       const flag = e.target.dataset.flag;
       const isChecked = e.target.checked;
-
       setFlag(flag, isChecked);
       saveSettingToStorage(flag, isChecked);
-
       updateState();
+    });
+
+    selectInput.addEventListener('change', (e) => {
+      const flag = e.target.dataset.flag;
+      const val = e.target.value;
+      setFlag(flag, val);
+      saveSettingToStorage(flag, val);
     });
 
     updateState();
