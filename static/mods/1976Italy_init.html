@@ -1,0 +1,775 @@
+RecReading=true
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 9,
+        "fields": {
+            "year": 2000,
+            "summary": "<p>Italy enters the 1976 elections in the midst of economic stagnation, corruption scandals and terrorist attacks. In the 30-year history of the Republic the race has never been closer and the stakes have never been higher.</p> <ul><li>The ruling Christian Democracy (DC) has been blamed from both sides for all the chaos Italy finds itself in right now. Benigno Zaccagnini, the party’s new leader, must unite his party to retain power.</li> <li>The Italian Communist Party (PCI) has been growing steadily for the past 30 years and now could be the time they enter the halls of power. General secretary Enrico Berlinguer is pushing a new line of thought called “Eurocommunism”, which seeks to sever ties with the Soviet Union.</li> <li>The Italian Socialist Party (PSI) finds itself very optimistic about its chances this year, but outsiders aren’t convinced. Long-time party secretary Francesco De Martino is worried about losing his position should the worst case scenario happen.</li></ul>",
+			"image_url": "https://flolhub.github.io/images/1976it/Ymqb1tY.png",
+            "winning_electoral_vote_number": 316,
+            "advisor_url": "https://flolhub.github.io/images/1976it/UBH8N1B.png",
+            "recommended_reading": "<h4 style=\\\"margin-top: 0.5em;\\\">Further Reading</h4>Howard R. Penniman - <a href=\\\"https://archive.org/details/italyatpollsparl0000unse\\\" target=\\\"_blank\\\">Italy At The Polls: The Parliamentary Elections of 1976</a></br>Norman Kogan - <a href=\\\"https://archive.org/details/politicalhistory0000koga\\\" target=\\\"_blank\\\">A Political History of Italy: The Postwar Years</a></br>John Earle - <a href=\\\"https://archive.org/details/italyin1970s0000earl\\\" target=\\\"_blank\\\">Italy in the 1970s</a></br>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "1976Italy"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 77,
+        "fields": {
+            "first_name": "Democrazia Cristiana -",
+            "last_name": "DC",
+            "election": 9,
+            "party": "-",
+            "state": "-",
+            "priority": 1,
+            "description": "<p><b>Christian Democracy</b> (Democrazia Cristiana) is a party that was founded by Alcide De Gasperi, considered to be one of the Founding Fathers of Europe. Its politics are catch-all, with left and right-wing factions, but a strong commitment to the Catholic Church and a pro-Western worldview. It is strong in the Northeast, and very strong in the South.</p><p>Recently, the party has come under criticism for corruption scandals and ever present factionalism is at a breaking point. A referendum on divorce in 1974 was spearheaded by party leader Amintore Fanfani while other figures kept a low profile. After being soundly defeated, many within the party called Fanfani to resign.</p><p>Any hope of victory will have to come through party unity. Whether taking a firm stand on certain issues, brokering backroom deals or putting opposing voices up against the wall, the only other option is having the Americans involved again.</p>",
+            "color_hex": "#87CEFA",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 1,
+            "image_url": "https://flolhub.github.io/images/1976it/Democrazia%20Cristiana.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>Confounding the predictions of many experts, you were able to turn the tables on Al Gore, in spite of the economy and Clinton's popularity.</p><p>On the political front, you can push for tax cuts to spur the economy and return the budget surplus to the American people. You might also pursue education and immigration reform, individual Social Security accounts, and new laws to defend the family and the sanctity of life.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2000 election.</h3><p>Perhaps it was always a long-shot, with the Democrats in such a commanding position after eight years of Bill Clinton. In any case, at least you are still the Governor of Texas.</p><p>Expect Al Gore to unleash a new round of government programs and environmental regulations. You are still youngish, however. If the election was close this time, perhaps you can run again in 2004, or work on behalf your brother Jeb.</p>",
+            "no_electoral_majority_message": "<h3>Wow! You have won in a squeaker.</h3><p>No candidate achieved a majority of the electoral votes, marking the first time this has happened since 1824. Fortunately for you, the majority of U.S. states have Republican controlled congressional delegations, and they will cast their votes accordingly.</p><p>Given the incredibly close nature of the election, you will surely be expected to govern as a moderate, conciliatory President. Right??</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 78,
+        "fields": {
+            "first_name": "Partito Comunista Italiano - ",
+            "last_name": "PCI",
+            "election": 9,
+            "party": "-",
+            "state": "-",
+            "priority": 2,
+            "description": "<p>The <b>Italian Communist Party</b> (Partito Comunista Italiano) is a far-left political party founded in 1921 after a split with the PSI. It used to be strongly backed by the Soviet Union, but began to distance itself after the Prague Spring. The party’s base is in Central Italy, but in recent times their strength has increased in the Northwest as well.</p><p>The party has moved away from anti-NATO and anti-American positions, as well as advocating for a new type of politics called “Eurocommunism”. It seeks for communist parties in Western Europe to distance themselves from the Soviet Union, all the while promoting integration within the common market.</p><p>After the 1975 regional elections, it seems to most observers that the PCI could potentially win the most votes, and the big question for the PCI is what to do under such a scenario. There are plenty of options, it’s just that none of them are good.</p>",
+            "color_hex": "#CC0000",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://flolhub.github.io/images/1976it/Partito%20Comunista%20Italiano.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>Though it was perhaps expected, you could have easily faltered at a number of points. Credit to you for pulling through.</p><p>On the political front, you can continue the Clinton legacy and strengthen Social Security for generations to come. Perhaps you can succeed on health care where Clinton came up short? Or maybe you can create a future of renewable energy for America. Just be wary of a (George or Jeb?) Bush challenge in 2004.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2000 election.</h3><p>Surely the second-guessing will be intense, but if things were close you could probably run again in 2004.</p><p>It seems that with George W. Bush and a Republican majority, the United States can expect some conservative policy-making over the next four years. Hopefully Bush comes through on his promise to govern in a bipartisan, conciliatory manner. A lot should depend on the margin of his victory, and whether it was large or small.</p>",
+            "no_electoral_majority_message": "<h3>Sorry! You have lost in a squeaker.</h3><p>No candidate achieved a majority of the electoral votes, for the first time since 1824. Unfortunately for you, a majority of states have Republican controlled congressional delegations.</p><p>It seems that with George W. Bush and a Republican majority, the United States can expect some conservative policy-making over the next four years. Hopefully Bush comes through on his promise to govern in a bipartisan, conciliatory manner.</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 79,
+        "fields": {
+            "first_name": "Partito Socialista Italiano -",
+            "last_name": "PSI",
+            "election": 9,
+            "party": "-",
+            "state": "-",
+            "priority": 3,
+            "description": "<p>The <b>Italian Socialist Party</b> (Partito Socialista Italiano) is a left-wing party founded in 1892. It was initially receptive to both the PCI and the Soviet Union, but broke off with both after the 1956 invasion of Hungary. It has no true regional base, but it is popular with a certain class of blue and white collar workers.</p><p>Since 1963 it has participated in a centre-left government with the DC, but left it earlier this year to force a general election, which was widely criticized from all sides. Their goal was to force a new government, either a “left alternative” or a national unity government, both of which would include the PCI.</p><p>The party is putting on a brave face this election and will try to woo the media and intellectuals to its side. It is currently struggling with factionalism that’s arguably greater than the one going on in the DC.</p>",
+            "color_hex": "#FF007F",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 1,
+            "image_url": "https://flolhub.github.io/images/1976it/Partito%20Socialista%20Italiano.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>This was definitely not supposed to happen. Good luck!</p>",
+            "electoral_loss_message": "<h3>As expected, you have lost the 2000 election.</h3><p>The legacy of this campaign depends on a couple of factors. First of all, did you receive 5% of the popular vote? If so, congratulations! You will enable the Green Party to run a vigorous campaign in 2004 and present a true choice to the American people. Also, the Democrats were a little peeved that you \"stole\" votes from them in this election. Hopefully that doesn't lead to a backlash.</p>",
+            "no_electoral_majority_message": "<h3>Wow! No candidate received 270 electoral votes, but the House will elect George W. Bush as President.</h3><p>Did you receive 5% of the popular vote? If so, congratulations! You will enable the Green Party to run a vigorous campaign in 2004 and present a true choice to the American people. Also, the Democrats were a little peeved that you \"stole\" votes from them in this election. Hopefully that doesn't lead to a backlash, especially since they will lose the vote in the House.</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 80,
+        "fields": {
+            "first_name": "Movimento Sociale Italiano -",
+            "last_name": "MSI",
+            "election": 9,
+            "party": "-",
+            "state": "-",
+            "priority": 4,
+            "description": "''",
+            "color_hex": "#000000",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "''",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 81,
+        "fields": {
+            "first_name": "Benigno",
+            "last_name": "Zaccagnini",
+            "election": 9,
+            "party": "DC",
+            "state": "Bologna",
+            "priority": 5,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://flolhub.github.io/images/1976it/Benigno%20Zaccagnini.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Benigno Zaccagnini was elected party leader in 1975 after a divisive congress. He was initially supported by some rightists as well as the previous leader, Amintore Fanfani, but he is very much in the leftist camp of the DC. He is noted for his honesty and integrity at a time when the party is severely lacking in these areas.</p><p>What the party does not lack is external support. Wealthy industrialists, Telegiornale 1, the Catholic Church and the United States are all at their disposal with varying degrees of confidence. Party unity is a must, and it seems the only thing that could accomplish that would be the Communists taking power, or more accurately, the DC losing it.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 12300,
+        "fields": {
+            "first_name": "Partito Socialista Democratico Italiano -",
+            "last_name": "PSDI",
+            "election": 9,
+            "party": "Republican",
+            "state": "Missouri",
+            "priority": 6,
+            "description": "''",
+            "color_hex": "#FF8282",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/john-danforth-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>John Danforth served four terms as Senator from Missouri. He has broad experience in government, and as a moderate Republican would reinforce Bush's claim to be a uniter. Danforth also has close relationships with conservative stalwarts such as Kit Bond, Clarence Thomas, and John Ashcroft, and would not arouse undue suspicion from the conservative wing of the party. Winning Missouri back would be a key piece of any Republican victory in 2000.</p>",
+            "candidate_score": 0,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 12357,
+        "fields": {
+            "first_name": "Partito Repubblicano Italiano -",
+            "last_name": "PRI",
+            "election": 9,
+            "party": "-",
+            "state": "-",
+            "priority": 7,
+            "description": "''",
+            "color_hex": "#3CB371",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/tom-ridge-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Tom Ridge is the popular Governor of a large swing state. Pennsylvania's 23 electoral votes would almost ensure a Bush victory if Ridge could deliver them. He has a reputation as an able administrator and has been very tough on crime. However, he has also been pro-choice for his entire career, and his selection as running mate could cause issues with the Republican base in other regions.</p>",
+            "candidate_score": 0,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 12414,
+        "fields": {
+            "first_name": "Democrazia Proletaria -",
+            "last_name": "DP",
+            "election": 9,
+            "party": "-",
+            "state": "-",
+            "priority": 8,
+            "description": "''",
+            "color_hex": "#A1292F",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/colin-powell-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Colin Powell is a moderate Republican and a key general from the Desert Storm campaign. He enjoys high personal popularity among the American electorate. He would be the first African-American to be a running mate for a major party. It will take some strong inducements to get Powell to run, however. He has repeatedly stated that he is not seeking the role, but perhaps you could persuade him by taking a moderate position on the social issues of the day.</p>",
+            "candidate_score": 0,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 85,
+        "fields": {
+            "first_name": "Enrico",
+            "last_name": "Berlinguer",
+            "election": 9,
+            "party": "PCI",
+            "state": "Rome",
+            "priority": 9,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://flolhub.github.io/images/1976it/Enrico%20Berlinguer.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Enrico Berlinguer de facto took over the PCI in 1969 after former leader Luigi Longo suffered a stroke, and the process was finalized in 1972. A protégé of Palmiro Togliatti and descendent of a noble Sardinian family, yet despite this noted for his austere lifestyle and calm demeanor.</p><p>Berlinguer came up with the idea of the “historic compromise” with the DC, a broad democratic force meant to guide Italy through its present crisis, and a ploy to get the PCI into power neither by revolution or electoralism but by working together with the DC’s left wing.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 12471,
+        "fields": {
+            "first_name": "Partito Liberale Italiano -",
+            "last_name": "PLI",
+            "election": 9,
+            "party": "-",
+            "state": "-",
+            "priority": 10,
+            "description": "''",
+            "color_hex": "#2975C2",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/bob-graham-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Bob Graham is a Senator and former Governor from Florida. His popularity in that state could be crucial to a Democratic victory in 2000. He is fairly moderate and was one of Bill Clinton's top choices for running mate before Clinton went with Gore. His focus has been on the environment, education, and intelligence issues.</p>",
+            "candidate_score": 0,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 12528,
+        "fields": {
+            "first_name": "Partito Radicale -",
+            "last_name": "PR",
+            "election": 9,
+            "party": "-",
+            "state": "-",
+            "priority": 11,
+            "description": "''",
+            "color_hex": "#FFD700",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/john-kerry-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>John Kerry is a Senator from Massachusetts. He gained prominence in his youth as a Vietnam Veteran Against the War. He also won a Silver Star in that war. He is a solid liberal on the political spectrum. His home state is strongly Democratic, but his views may help the Democrats reduce the loss of support to Ralph Nader. He can also be helpful in New Hampshire.</p>",
+            "candidate_score": 0,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 12585,
+        "fields": {
+            "first_name": "SVP/Other",
+            "last_name": "Parties",
+            "election": 9,
+            "party": "-",
+            "state": "-",
+            "priority": 12,
+            "description": "''",
+            "color_hex": "#FFFF00",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/evan-bayh-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Evan Bayh is a Senator from Indiana and a former Governor. He is broadly popular in that state and is a leader of the moderate wing of the Democrats. This could help the Democrats compete in the Midwest and South, but it could also alienate the left-wing of the party and drive additional support to Ralph Nader's bid.</p>",
+            "candidate_score": 0,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 89,
+        "fields": {
+            "first_name": "Francesco",
+            "last_name": "De Martino",
+            "election": 9,
+            "party": "PSI",
+            "state": "Naples",
+            "priority": 13,
+            "description": "''",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "https://flolhub.github.io/images/1976it/Francesco%20De%20Martino.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Francesco De Martino has held the position of Socialist party secretary three times and Deputy Prime Minister on two occasions. He is noted for his academic credentials and for being a protégé of Pietro Nenni, himself a very influential figure of the Italian left.</p><p>His party is internally divided and shrinking in size. Should the PCI and DC become too large to avoid each other Italy will practically become a two-party state, and De Martino out of his current position, which he is well aware of.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 56,
+        "fields": {
+            "candidate": 79,
+            "running_mate": 89
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 48,
+        "fields": {
+            "candidate": 77,
+            "running_mate": 81
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 113371,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 85
+        }
+    }
+]
+
+campaignTrail_temp.credits = "/u/crvenocrveni"
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 9,
+        "candidates": [
+            77,
+            78,
+            79,
+            80,
+            12300,
+            12357,
+            12414,
+            12471,
+            12528,
+            12585
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 9,
+        "candidates": [
+            77,
+            78,
+            79,
+            80,
+            12300,
+            12357,
+            12414,
+            12471,
+            12528,
+            12585
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 9,
+        "year": 2000,
+        "is_premium": 0,
+        "display_year": "1976Italy"
+    }
+]
+
+jet_data = {
+    "headerColor": "#008c45",
+    "windowColor": "#824b4b",
+    "containerColor": "#930301",
+    "innerWindowColor": "#ff6b6b",
+    "bannerImageUrl": "https://flolhub.github.io/images/1976it/Ymqb1tY.png",
+    "backgroundImageUrl": "https://i.postimg.cc/Z4n5vq9d/Untitled.png",
+    "endingTextColor": "#000000",
+    "customQuote": ""
+}
+
+//#startcode
+
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#008c45";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#824b4b";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#930301";
+
+document.getElementById("header").src = "https://flolhub.github.io/images/1976it/Ymqb1tY.png";
+
+bannerlist=["https://flolhub.github.io/images/1976it/pdeySz0.png", "https://flolhub.github.io/images/1976it/ABu2jCc.png", "https://flolhub.github.io/images/1976it/SoMGVAR.png"]
+document.getElementById("header").src = bannerlist[Math.floor((Math.random() * bannerlist.length))] 
+
+document.body.background = "https://i.postimg.cc/Z4n5vq9d/Untitled.png";
+
+document.head.innerHTML += "<style>#results_container {color:#FFFFFF;} .inner_window_w_desc {background-color:#ff6b6b!important;}</style>";
+
+  var changeGameDisp = (hide) => {
+    disp = "";
+    if (hide) {
+      disp = "none";
+    }
+    document.getElementsByClassName("inner_window_w_desc")[0].style.display = disp
+  };
+  var changeGameDisp = (hide) => {
+      disp = "";
+      if (hide) {
+        disp = "none";
+      }
+      document.getElementsByClassName("inner_window_w_desc")[0].style.display = disp
+    };
+    e.creditsPage = () => {
+      credits_html = `
+        <h2 style='color: #000000;'>Writer/Coder/Researcher</h2>
+        <p style='color: #000000;'>/u/crvenocrveni</p>
+        <h2 style='color: #000000;'>Special Thanks</h2>
+        <p style='color: #000000;'>/u/StrawberryMaster for encoding d’Hondt</p>
+        <h2 style='color: #000000;'>Playtesters (2022)</h2>
+        <p style='color: #000000; margin-bottom: 0px;'>/u/ernestopdeambris <font color="#008c45">▮</font> <font color="#ff0000">▮</font></p>
+	<p style='color: #000000; margin-bottom: 0px;'>/u/ItsAstronomical</p>
+	<p style='color: #000000;'>/u/Rickroll999</p>
+        <h2 style='color: #000000;'>Playtesters (2026)</h2>
+        <p style='color: #000000; margin-bottom: 0px;'>AvGeekBoy  <font color="#008c45">▮</font> <font color="#ff0000">▮</font></p>
+	<p style='color: #000000; margin-bottom: 0px;'>Snazzrazz Mazzlejazz</p>
+	<p style='color: #000000;'>duplicator</p>
+        <p style='color: #000000;'>Thank you very much for playing the mod after all these years! Being the second of its kind (Texas 1836 was the first official international mod) it has not aged the greatest, however in the following years I have still received loads questions about the future of the mod, which inspired me to fix many of the game-breaking bugs and port it to CTS. This is not a redux or a remaster or anything of the sort, because that would require starting over from the ground up to make a mod in line with current standards. If you notice a feature that was taken from one of your mods but uncredited, please contact me on Reddit or Discord and I will add it to this screen.</p>
+      `
+      changeGameDisp(true);
+      var spacer = document.createElement("amongusspacerthisisntarealelement");
+      spacer.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+      document
+        .getElementsByClassName("inner_window_w_desc")[0]
+        .children[1].appendChild(spacer);
+        changeGameDisp(true);
+        var menuHeader = document.createElement("div");
+        menuHeader.classList.add("inner_window_front");
+        menuHeader.innerHTML = `<h1 style='font-family: "Helvetica";'>Italy 1976</font></h1>`;
+        menuHeader.id = "SOTUheader";
+        menuHeader.style = "height: 50px";
+        var newMenu = document.createElement("div");
+        newMenu.classList.add("inner_window_front");
+        newMenu.id = "SOTUmenu";
+        newMenu.style = `height:260px;color:white;overflow-y: scroll;`;
+    
+        newMenu.innerHTML = credits_html;
+        let z = document.getElementById("game_window");
+        var backButton = document.createElement("button");
+        backButton.style =
+          "position: relative; bottom: -13px; margin-left: auto; margin-right: auto;";
+        backButton.id = "backSOTUBtn";
+        backButton.innerHTML = `Back`;
+        backButton.onclick = function () {
+          document.getElementById("SOTUheader").remove();
+          document.getElementById("SOTUmenu").remove();
+          document.getElementById("backSOTUBtn").remove();
+          changeGameDisp(false);
+        };
+        z.appendChild(menuHeader);
+        z.appendChild(newMenu);
+        z.appendChild(backButton);
+    
+  }
+
+function removeCandidateSummary() {
+   sumobserver.disconnect();
+  const candidateSummary = document.querySelector("#candidate_summary");
+  if (candidateSummary) {
+    const ulList = candidateSummary.querySelector("ul");
+    if (ulList) {
+      candidateSummary.removeChild(ulList);
+    }
+  }
+  sumobserver.observe(document.body, {childList: true,subtree: true});
+}
+if(!sumobserver){
+var sumobserver = new MutationObserver(removeCandidateSummary);
+sumobserver.observe(document.body, {childList: true,subtree: true});
+}
+
+    
+  e.credits = "<button onclick='e.creditsPage()'>/u/crvenocrveni</button>"
+
+HistHexcolour=["#87CEFA","#CC0000","#FF007F","#000000","#FFFF00"];
+HistName=[" Democrazia Cristiana - DC"," Partito Comunista Italiano - PCI"," Partito Socialista Italiano - PSI"," Movimento Sociale Italiano - MSI"," Other Parties"];
+HistEV=[262,228,57,35,47];
+HistPV=["14,209,519","12,614,650","3,540,309","2,238,339","4,078,013"];
+HistPVP=["38.8%","34.5%","9.7%","6.2%","10.8%"];
+
+// This is to replace the existing voting system descriptions.
+(function () {
+  'use strict';
+
+  const METHOD_VALUE = {
+    DHONDT: "5",
+  };
+
+  const DESCRIPTIONS = {
+    [METHOD_VALUE.DHONDT]: `<p><strong>D'Hondt method</strong></p><p>The D’Hondt method is a “highest averages” system that allocates seats one by one. A candidate’s total vote is divided by the number of seats they have already won, plus one (divisors: 1, 2, 3, etc.). The seat goes to the candidate with the highest average in each round.</p><p>Each Italian region or electoral district is allocated a number of seats proportional to the overall population. In the Italian Senate, D'Hondt is only used within that district, with no national rounding, while for the Chamber of Deputies there is a single national list.</p><p>This method tends to slightly favor larger parties and coalitions over smaller, more fragmented ones. It is named after Victor D'Hondt and, in the U.S., Thomas Jefferson.</p>`,
+  };
+
+  function updateDescription(value) {
+    const descBox = document.getElementById("opponent_selection_description_window");
+    if (descBox) {
+      descBox.innerHTML = DESCRIPTIONS[value] || DESCRIPTIONS[METHOD_VALUE.DHONDT];
+    }
+  }
+
+  function forceDhondtSelection() {
+    const select = document.getElementById("game_type_id");
+    if (!select) return;
+
+    // Remove all existing options and replace with just D'Hondt
+    select.innerHTML = "";
+
+    const opt = document.createElement("option");
+    opt.value = METHOD_VALUE.DHONDT;
+    opt.textContent = "D’Hondt";
+    select.appendChild(opt);
+
+    select.value = METHOD_VALUE.DHONDT;
+
+    // update header
+    if (select.form) {
+      const h3 = select.form.querySelector("h3");
+      if (h3) h3.textContent = "How would you like electoral votes to be allocated?";
+    }
+
+    select.addEventListener("change", () => {
+      select.value = METHOD_VALUE.DHONDT;
+      updateDescription(METHOD_VALUE.DHONDT);
+    });
+
+    updateDescription(METHOD_VALUE.DHONDT);
+    select.dataset.enhanced = "true";
+  }
+
+  window.modifySelector = forceDhondtSelection;
+})();
+
+// the actual D'Hondt setup
+(() => {
+  const METHOD = {
+    DHONDT: 5,
+  };
+
+  function dHondt(votes, seats) {
+    const n = votes.length;
+    const alloc = Array(n).fill(0);
+    if (seats <= 0) return alloc;
+    for (let s = 0; s < seats; s++) {
+      let best = -1, bestScore = -Infinity;
+      for (let i = 0; i < n; i++) {
+        const score = votes[i] / (alloc[i] + 1);
+        if (score > bestScore) { bestScore = score; best = i; }
+      }
+      alloc[best]++;
+    }
+    return alloc;
+  }
+
+  const __origA = window.A;
+  if (typeof __origA !== "function") return;
+
+  window.A = function patchedA(t) {
+    const out = __origA.apply(this, arguments);
+
+    try {
+      const e = window.campaignTrail_temp || window.e;
+      if (!e || e.primary) return out;
+
+      e.game_type_id = METHOD.DHONDT;
+
+      const stateFieldsByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields]));
+      for (const st of out) {
+        const sf = stateFieldsByPk.get(st.state);
+        const seats = Number(sf?.electoral_votes || 0);
+        if (seats <= 0) continue;
+
+        const weights = st.result.map((r) => Math.max(0, Number(r.votes) || 0));
+        const alloc = dHondt(weights, seats);
+
+        for (let i = 0; i < st.result.length; i++) {
+          st.result[i].electoral_votes = alloc[i];
+        }
+      }
+    } catch (err) {
+      console.error("[AltVoting] Error:", err);
+      return out;
+    }
+
+    return out;
+  };
+
+  const __origGetLatestRes = window.getLatestRes;
+  window.getLatestRes = function patchedGetLatestRes(t) {
+    const e = window.campaignTrail_temp || window.e;
+    e.game_type_id = METHOD.DHONDT;
+
+    const activeCandidates = e.candidate_json.filter(
+      (candidate) => e.opponents_list.includes(candidate.pk) || candidate.pk === e.candidate_id
+    );
+
+    const candidateTotals = new Map();
+    activeCandidates.forEach(cand => {
+      candidateTotals.set(cand.pk, { popvs: 0, evvs: 0 });
+    });
+
+    let total_v = 0;
+
+    for (const state of t) {
+      for (const candidateResult of state.result) {
+        const candidatePk = candidateResult.candidate;
+        const totals = candidateTotals.get(candidatePk);
+
+        if (totals) {
+          totals.popvs += (candidateResult.votes || 0);
+          totals.evvs += (candidateResult.electoral_votes || 0);
+        }
+        total_v += (candidateResult.votes || 0);
+      }
+    }
+
+    const finalCandidates = activeCandidates.map(candidate => {
+      const totals = candidateTotals.get(candidate.pk) || { popvs: 0, evvs: 0 };
+      candidate.popvs = totals.popvs;
+      candidate.evvs = totals.evvs;
+      candidate.pvp = total_v > 0 ? (totals.popvs / total_v) : 0;
+      return candidate;
+    });
+
+    const sortedCandidates = finalCandidates.sort((a, b) => b.pvp - a.pvp);
+
+    window.nn2 = sortedCandidates;
+    window.nn3 = sortedCandidates.map(c => c.evvs || 0);
+
+    return [sortedCandidates, window.answerEffects];
+  };
+})();
+  
+// This is a catch-all mutation observer so that
+// we keep one having them all run at once
+// taken from 2012LBM
+(function () {
+  'use strict';
+
+  if (window.glorble) {
+    window.glorble.disconnect();
+  }
+
+  window.glorbleTasks = [];
+
+  const initialTasks = () => {
+    const gameTypeSelect = document.getElementById("game_type_id");
+    if (gameTypeSelect?.dataset.enhanced !== "true" && typeof window.modifySelector === 'function') {
+      window.modifySelector();
+    }
+
+    if (document.querySelector(".inner_window_question")) {
+      return true;
+    }
+    return false;
+  };
+
+  window.glorbleTasks.push(initialTasks);
+
+  let scheduled = false;
+
+  const runTasks = () => {
+    scheduled = false;
+    const tasks = window.glorbleTasks;
+
+    if (tasks.length === 0) {
+      if (window.glorble) window.glorble.disconnect();
+      return;
+    }
+
+    for (let i = tasks.length - 1; i >= 0; i--) {
+      try {
+        if (tasks[i]() === true) tasks.splice(i, 1);
+      } catch (e) {
+        console.error("glorble task failed:", e);
+      }
+    }
+
+    if (tasks.length === 0 && window.glorble) {
+      window.glorble.disconnect();
+    }
+  };
+
+  const handleMutations = () => {
+    if (scheduled || window.glorbleTasks.length === 0) return;
+    scheduled = true;
+    requestAnimationFrame(runTasks);
+  };
+
+  const targetNode = document.getElementById("game_window");
+
+  if (targetNode) {
+    window.glorble = new MutationObserver(handleMutations);
+    window.glorble.observe(targetNode, { childList: true, subtree: true });
+    handleMutations();
+  } else {
+    console.warn("Zoinks! Glorble could not find game_window.");
+  }
+})();
+
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#106100",
+     "header_text_color": "#ffffff",
+     "description_text_color": "#000000",
+     "description_background_color": "#ffffff",
+     "main_color": "#ffffff",
+     "secondary_color": "#cd0a0a",
+     "ui_text_color": "#FFFFFF"
+}
+
+//#endcode
