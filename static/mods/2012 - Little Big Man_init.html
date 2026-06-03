@@ -1,7 +1,7 @@
 /*
 * @title: 2012: Little Big Man / Little Big Man / 2012a
 * @author: StrawberryMaster & Friends
-* @version: 1.2.10
+* @version: 1.2.11
 * @description: The 2012 election in the eyes of Barack Obama (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -4041,10 +4041,10 @@ document.addEventListener('mouseover', function(e) {
     .mod-ctrl-row { display: flex; align-items: center; padding-top: 5px; border-top: 1px solid rgba(0,0,0,0.1); }
     .switch { position: relative; display: inline-block; width: 40px; height: 20px; margin-right: 10px; }
     .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
-    .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-    input:checked + .slider { background-color: #208604; }
-    input:checked + .slider:before { transform: translateX(20px); }
+    .menu-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+    .menu-slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+    input:checked + .menu-slider { background-color: #208604; }
+    input:checked + .menu-slider:before { transform: translateX(20px); }
     .status-label { font-weight: bold; font-size: 0.9em; text-transform: uppercase; }
     .status-enabled { color: #0d3d00; }
     .status-disabled { color: #2d2d2d; }
@@ -4103,7 +4103,7 @@ document.addEventListener('mouseover', function(e) {
         toggleWrapper = createEl('div', { className: 'mod-ctrl-row', style: { display: 'none' } }, [
           createEl('label', { className: 'switch' }, [
             toggleInput = createEl('input', { type: 'checkbox' }),
-            createEl('span', { className: 'slider' })
+            createEl('span', { className: 'menu-slider' })
           ]),
           statusText = createEl('span', { className: 'status-label' })
         ]),
