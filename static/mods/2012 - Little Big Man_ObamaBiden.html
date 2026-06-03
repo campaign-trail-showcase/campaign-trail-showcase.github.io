@@ -25862,6 +25862,11 @@ function getLeftThirdPartyVP(nominee, lib, con) {
 
 // timeline generator
 function generateTimelineSlide(victoryType, playerEV, opLast) {
+  const cacheKey = `timeline_${window.CONTINGENT || 'default'}`;
+  if (window.generatedTimelineCache[cacheKey]) {
+    return window.generatedTimelineCache[cacheKey];
+  }
+
   let rawTimeline = [];
 
   // global scores
@@ -26195,6 +26200,8 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
 
   rawTimeline.push({ name: winner24, start: 2025, end: "Incumbent", vp: vp24 });
 
+  window.generatedTimelineCache[cacheKey] = rawTimeline;
+  
   return rawTimeline;
 }
 
@@ -35807,7 +35814,9 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
   function getIssueWeightColor(weight, idx) {
     const range = getIssueWeightRange(idx);
-    if (!range || range.min === range.max || (range.max - range.min) <= 0.15) {
+    if (!range) return "#F8F8FF";
+    if (range.min === range.max) return "#C9C9C9";
+    if ((range.max - range.min) <= 0.15) {
       const w = Math.min(weight, 1.0);
       return w < 0.1 ? "#F8F8FF" : w < 0.25 ? "#E6E6FA" : w < 0.4 ? "#B0C4DE" :
              w < 0.55 ? "#87CEEB" : w < 0.7 ? "#4682B4" : w < 0.85 ? "#1E90FF" : "#0000CD";
@@ -36110,7 +36119,13 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   }
 
   function processStateUpdateQueue() {
-    if (!stateUpdateQueue.length || animationFrameRequested) return;
+    if (!stateUpdateQueue.length) return;
+    if (window._isExporting) {
+        stateUpdateQueue.forEach(u => u.shape.attr('fill', u.fill));
+        stateUpdateQueue.length = 0;
+        return;
+    }
+    if (animationFrameRequested) return;
     animationFrameRequested = true;
     requestAnimationFrame(() => {
       stateUpdateQueue.forEach(u => {
@@ -36238,6 +36253,17 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     stateUpdateQueue.length = 0;
     for (const a in s) if (map.stateShapes[a]) stateUpdateQueue.push({ shape: map.stateShapes[a], fill: s[a]?.fill || "#C9C9C9", hoverFill: s[a]?.hoverFill || darkenColor(s[a]?.fill || "#C9C9C9") });
     processStateUpdateQueue();
+  }
+
+  function createSolidLegend() {
+    const f = document.createDocumentFragment();
+    f.appendChild(cr('div', { textContent: 'Winner' }, { fontWeight: 'bold', marginBottom: '5px', textAlign: 'center' }));
+    const items = getTopCandidates().map(c => ({
+      color: c.candidate.fields.color_hex,
+      label: c.candidate.fields.last_name
+    }));
+    f.appendChild(makeLegendTable(items));
+    return cr('div', {}, {}, [f]);
   }
 
   function createMarginLegend() {
@@ -36402,8 +36428,156 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     return cr('div', {}, { paddingRight: '5px' }, [f]);
   }
 
+  function getLegendNode(mode) {
+    const lFn = {
+      [VISUALIZATION_MODES.SOLID]: createSolidLegend,
+      [VISUALIZATION_MODES.MARGINS]: createMarginLegend,
+      [VISUALIZATION_MODES.CANDIDATE_STRENGTH]: () => candidatePerformanceMode === 'relative' ? createRelativePerformanceLegend(selectedCandidateIndex) : createPerformanceLegend(selectedCandidateIndex),
+      [VISUALIZATION_MODES.COMPETITIVENESS]: createCompetitivenessLegend,
+      [VISUALIZATION_MODES.TURNOUT_CHANGE]: createTurnoutChangeLegend,
+      [VISUALIZATION_MODES.VOTE_SHARE]: createVoteShareLegend,
+      [VISUALIZATION_MODES.ISSUE_STANCE]: () => createIssueStanceLegend(selectedIssueIndex),
+      [VISUALIZATION_MODES.ISSUE_WEIGHT]: () => createIssueWeightLegend(selectedIssueIndex),
+      [VISUALIZATION_MODES.CANDIDATE_ISSUE_ALIGNMENT]: () => alignmentComparisonMode === 'comparison' ? createComparisonAlignmentLegend(selectedIssueIndex) : createCandidateIssueAlignmentLegend(selectedIssueIndex, selectedAlignmentCandidateIndex),
+      [VISUALIZATION_MODES.COALITION_BUILDER]: createCoalitionBuilderLegend,
+      [VISUALIZATION_MODES.CANDIDATE_COMBINER]: () => headToHeadMode ? createHeadToHeadLegend() : createCandidateCombinerLegend(),
+      [VISUALIZATION_MODES.TIPPING_POINT]: createTippingPointLegend,
+      [VISUALIZATION_MODES.SENATE_RACES]: createSenateRacesLegend,
+      [VISUALIZATION_MODES.HOUSE_COMPOSITION]: createHouseCompositionLegend
+    }[mode];
+    return lFn ? lFn() : null;
+  }
+
+  function openExportDialog() {
+    if (document.getElementById('export_modal')) return;
+
+    const modal = cr('div', { id: 'export_modal' }, { position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', zIndex: '10005', width: '300px' });
+    modal.appendChild(cr('h3', { textContent: 'Export map(s)' }, { marginTop: '0', textAlign: 'center', fontFamily: 'sans-serif' }));
+    modal.appendChild(cr('p', { textContent: 'Select map modes to combine into a single image grid:' }, { fontSize: '13px', color: '#555', marginBottom: '10px', fontFamily: 'sans-serif' }));
+
+    const opts = [
+      { v: 'solid', t: 'Solid colors' }, { v: 'margins', t: 'Margin of victory' },
+      { v: 'vote_share', t: 'Winner vote share' }, { v: 'candidate_strength', t: 'Candidate performance' },
+      { v: 'competitiveness', t: 'Race competitiveness' }, { v: 'turnout_change', t: 'Turnout change' }
+    ];
+
+    const checks = [];
+    opts.forEach(o => {
+      const lbl = cr('label', {}, { display: 'block', marginBottom: '4px', fontSize: '13px', cursor: 'pointer', fontFamily: 'sans-serif' });
+      const cb = cr('input', { type: 'checkbox', value: o.v, checked: true }, { marginRight: '6px' });
+      lbl.appendChild(cb);
+      lbl.appendChild(document.createTextNode(o.t));
+      checks.push({ cb, ...o });
+      modal.appendChild(lbl);
+    });
+
+    const btnContainer = cr('div', {}, { display: 'flex', justifyContent: 'space-between', marginTop: '15px' });
+    const cancelBtn = cr('button', { textContent: 'Cancel' }, { padding: '6px 10px', cursor: 'pointer', background: '#ccc', border: 'none', borderRadius: '3px' });
+    cancelBtn.addEventListener('click', () => modal.remove());
+
+    const startBtn = cr('button', { textContent: 'Generate grid' }, { padding: '6px 10px', cursor: 'pointer', background: '#007acc', color: 'white', border: 'none', borderRadius: '3px', fontWeight: 'bold' });
+    startBtn.addEventListener('click', async () => {
+      const selected = checks.filter(c => c.cb.checked);
+      if (!selected.length) { alert('Please select at least one map mode.'); return; }
+      startBtn.textContent = 'Generating...';
+      startBtn.disabled = true;
+      cancelBtn.disabled = true;
+      await runExport(selected);
+      modal.remove();
+    });
+
+    btnContainer.appendChild(cancelBtn);
+    btnContainer.appendChild(startBtn);
+    modal.appendChild(btnContainer);
+
+    document.body.appendChild(modal);
+  }
+
+  async function runExport(selectedModes) {
+    if (!window.html2canvas) {
+      await new Promise(res => {
+        const s = document.createElement('script');
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+        s.onload = res;
+        document.head.appendChild(s);
+      });
+    }
+
+    const origMode = currentMode;
+    const n = selectedModes.length;
+    let cols = 1;
+    if (n === 2 || n === 4) cols = 2;
+    else if (n >= 3) cols = 3;
+
+    const exportStage = cr('div', { id: 'export_stage' }, {
+      position: 'absolute', top: '-9999px', left: '-9999px',
+      display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`,
+      gap: '30px', background: '#eaeaea', padding: '30px', zIndex: -1
+    });
+    document.body.appendChild(exportStage);
+
+    window._isExporting = true;
+
+    for (let i = 0; i < selectedModes.length; i++) {
+      const mode = selectedModes[i];
+      currentMode = mode.v;
+
+      updateMapStyles();
+      updateLegend();
+
+      const cell = cr('div', {}, {
+        background: 'white', padding: '20px', borderRadius: '8px',
+        boxShadow: '0 6px 12px rgba(0,0,0,0.15)',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', fontFamily: 'sans-serif'
+      });
+
+      cell.appendChild(cr('h2', { textContent: mode.t }, { margin: '0 0 15px 0', fontSize: '22px', color: '#333' }));
+
+      const row = cr('div', {}, { display: 'flex', gap: '0px', alignItems: 'center' });
+
+      const origMap = document.getElementById('map_container');
+      const cloneMap = origMap.cloneNode(true);
+      cloneMap.id = '';
+      Object.assign(cloneMap.style, { width: '700px', height: '450px', position: 'relative', margin: '0', padding: '0' });
+      row.appendChild(cloneMap);
+
+      const legWrap = cr('div', {}, { position: 'relative', zIndex: '100', width: '200px', background: '#fcfcfc', border: '1px solid #ddd', padding: '12px', borderRadius: '4px', boxSizing: 'border-box' });
+      const spec = getLegendNode(mode.v);
+      if (spec) legWrap.appendChild(spec);
+      row.appendChild(legWrap);
+
+      cell.appendChild(row);
+      exportStage.appendChild(cell);
+    }
+
+    await new Promise(r => setTimeout(r, 100));
+
+    const canvas = await html2canvas(exportStage, { scale: 2, useCORS: true, logging: false, backgroundColor: '#eaeaea' });
+
+    const link = document.createElement('a');
+    link.download = `Election_Maps_Grid_${Date.now()}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+
+    exportStage.remove();
+    window._isExporting = false;
+    currentMode = origMode;
+    const sel = document.getElementById('visualization_mode');
+    if (sel) sel.value = origMode;
+
+    updateControls();
+    updateMapStyles();
+    updateLegend();
+  }
+
   function updateControls() {
     let ctrl = document.getElementById('map_controls');
+
+	if (ctrl && !document.getElementById('grid_export_btn')) {
+      ctrl.remove();
+      ctrl = null;
+    }
+
     if (ctrl) {
       const t = (id, cond) => { const el = document.getElementById(id); if (el) el.style.display = cond ? 'block' : 'none'; };
       t('senate_controls_container', currentMode === VISUALIZATION_MODES.SENATE_RACES);
@@ -36578,6 +36752,12 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     });
     aCDiv.appendChild(cmpDiv); issDiv.appendChild(aCDiv); frag.appendChild(issDiv);
 
+    const expDiv = cr('div', {}, { marginTop: '8px', borderTop: '1px solid #ccc', paddingTop: '8px' });
+    const expBtn = cr('button', { id: 'grid_export_btn', textContent: 'Export map(s)' }, { fontSize: '11px', padding: '4px', width: '100%', cursor: 'pointer', backgroundColor: '#e6ffe6', border: '1px solid #aaa', borderRadius: '3px', fontWeight: 'bold' });
+    expBtn.addEventListener('click', openExportDialog);
+    expDiv.appendChild(expBtn);
+    frag.appendChild(expDiv);
+
     ctrl.appendChild(frag); document.body.appendChild(ctrl);
     makeDraggable(ctrl, hnd);
     updateControls();
@@ -36706,9 +36886,11 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       const w = campaignTrail_temp.state_issue_score_json?.find(s => s.fields.state === r.state && s.fields.issue === iss.pk)?.fields.weight;
       if (w != null) { if (w > hW) { hW = w; hS = r.abbr; } if (w < lW) { lW = w; lS = r.abbr; } }
     });
-    f.appendChild(cr('div', { textContent: hS && lS ? `Highest priority: ${hS} (${hW.toFixed(2)}) | Lowest: ${lS} (${lW.toFixed(2)})` : 'No weight data available' }, { fontSize: '9px', marginBottom: '5px', textAlign: 'center', color: '#555' }));
+    f.appendChild(cr('div', { textContent: hS && lS ? (hW === lW ? `All states uniform` : `Highest priority: ${hS} (${hW.toFixed(2)}) | Lowest: ${lS} (${lW.toFixed(2)})`) : 'No weight data available' }, { fontSize: '9px', marginBottom: '5px', textAlign: 'center', color: '#555' }));
     const rng = getIssueWeightRange(iIdx);
-    if (rng && rng.min !== rng.max && (rng.max - rng.min) > 0.15) {
+    if (rng && rng.min === rng.max) {
+      f.appendChild(makeLegendTable([{ color: "#C9C9C9", label: `Uniform importance (${rng.min.toFixed(2)})` }]));
+    } else if (rng && (rng.max - rng.min) > 0.15) {
       const sz = (rng.max - rng.min) / 5, items = [];
       for (let i = 4; i >= 0; i--) {
         const mn = rng.min + (i * sz), mx = i === 4 ? rng.max : rng.min + ((i + 1) * sz);
@@ -36850,7 +37032,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
   function updateLegend() {
     let leg = document.getElementById('map_legend');
-    if (currentMode === VISUALIZATION_MODES.SOLID) { if (leg) leg.style.display = 'none'; return; }
+    if (currentMode === VISUALIZATION_MODES.SOLID && !window._isExporting) { if (leg) leg.style.display = 'none'; return; }
     let cCont;
     if (!leg) {
       leg = cr('div', { id: 'map_legend' }, { position: 'absolute', background: 'rgba(252, 252, 252, 0.92)', border: '1px solid #aaa', padding: '8px', borderRadius: '4px', boxShadow: '0 1px 4px rgba(0,0,0,0.2)', zIndex: '1000', fontSize: '11px' });
@@ -36872,21 +37054,10 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       makeDraggable(leg, hnd);
     } else { leg.style.display = 'block'; cCont = document.getElementById('map_legend_content'); }
     leg.style.width = currentMode === VISUALIZATION_MODES.CANDIDATE_COMBINER && headToHeadMode ? '200px' : '180px';
-    const f = document.createDocumentFragment();
-    const lFn = {
-      [VISUALIZATION_MODES.MARGINS]: createMarginLegend,
-      [VISUALIZATION_MODES.CANDIDATE_STRENGTH]: () => candidatePerformanceMode === 'relative' ? createRelativePerformanceLegend(selectedCandidateIndex) : createPerformanceLegend(selectedCandidateIndex),
-      [VISUALIZATION_MODES.COMPETITIVENESS]: createCompetitivenessLegend, [VISUALIZATION_MODES.TURNOUT_CHANGE]: createTurnoutChangeLegend,
-      [VISUALIZATION_MODES.VOTE_SHARE]: createVoteShareLegend, [VISUALIZATION_MODES.ISSUE_STANCE]: () => createIssueStanceLegend(selectedIssueIndex),
-      [VISUALIZATION_MODES.ISSUE_WEIGHT]: () => createIssueWeightLegend(selectedIssueIndex),
-      [VISUALIZATION_MODES.CANDIDATE_ISSUE_ALIGNMENT]: () => alignmentComparisonMode === 'comparison' ? createComparisonAlignmentLegend(selectedIssueIndex) : createCandidateIssueAlignmentLegend(selectedIssueIndex, selectedAlignmentCandidateIndex),
-      [VISUALIZATION_MODES.COALITION_BUILDER]: createCoalitionBuilderLegend,
-      [VISUALIZATION_MODES.CANDIDATE_COMBINER]: () => headToHeadMode ? createHeadToHeadLegend() : createCandidateCombinerLegend(),
-      [VISUALIZATION_MODES.TIPPING_POINT]: createTippingPointLegend, [VISUALIZATION_MODES.SENATE_RACES]: createSenateRacesLegend,
-      [VISUALIZATION_MODES.HOUSE_COMPOSITION]: createHouseCompositionLegend
-    }[currentMode];
-    if (lFn) { const spec = lFn(); if (spec) f.appendChild(spec); }
-    cCont.replaceChildren(f);
+
+    const spec = getLegendNode(currentMode);
+    if (spec) cCont.replaceChildren(spec);
+    else cCont.replaceChildren();
   }
 
   function isInElectionMapView() { return document.getElementById('map_container') && document.getElementById('final_election_map_button')?.disabled === true; }
@@ -40327,6 +40498,7 @@ const HOUSE_2012_DATA = {
   "VA": { seats: 11, bias: -0.05 }, "WA": { seats: 10, bias: 0.10 }, "WV": { seats: 3, bias: -0.15 },
   "WI": { seats: 8, bias: -0.05 }, "WY": { seats: 1, bias: -0.25 }
 };
+window.HOUSE_2012_DATA = HOUSE_2012_DATA;
 
 (() => {
   const E = (typeof campaignTrail_temp !== 'undefined' ? campaignTrail_temp : window.e);
