@@ -416,7 +416,7 @@ if (currentModThemeState === null) {
   }
 }
 
-function updateButtonText() {
+function updateModThemesButtonText() {
   if (currentModThemeState === "off") {
     customThemesButton.innerText = "Mod Themes: Off";
   } else if (currentModThemeState === "default") {
@@ -425,7 +425,7 @@ function updateButtonText() {
     customThemesButton.innerText = "Mod Themes: Detailed";
   }
 }
-updateButtonText();
+updateModThemesButtonText();
 
 const themeStates = ["off", "default", "detailed"];
 
@@ -435,7 +435,7 @@ function toggleModBoxThemes() {
   currentModThemeState = themeStates[nextIndex];
   localStorage.setItem("modThemeState", currentModThemeState);
 
-  updateButtonText();
+  updateModThemesButtonText();
   applyModBoxThemes();
 }
 

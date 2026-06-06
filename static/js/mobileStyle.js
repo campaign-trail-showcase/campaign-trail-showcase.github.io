@@ -140,7 +140,7 @@ function applyMobileStyle(enabled) {
   }
 }
 
-function updateButtonText(enabled) {
+function updateMobileModeButtonText(enabled) {
   if (mobileModeButton) {
     mobileModeButton.innerText = enabled
       ? "Turn Off Mobile Compatibility"
@@ -152,11 +152,11 @@ function toggleMobileMode() {
   isMobileMode = !isMobileMode;
   localStorage.setItem("mobileMode", isMobileMode ? "true" : "false");
   applyMobileStyle(isMobileMode);
-  updateButtonText(isMobileMode);
+  updateMobileModeButtonText(isMobileMode);
 }
 
 if (mobileModeButton) {
   applyMobileStyle(isMobileMode);
-  updateButtonText(isMobileMode);
+  updateMobileModeButtonText(isMobileMode);
   mobileModeButton.onclick = toggleMobileMode;
 }
