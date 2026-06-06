@@ -1,26 +1,81 @@
 let cheatsActive = false;
 
 // Most of this benefit checker stuff is adapted from NCT. Thanks!
+const candidateCache = new Map();
+const stateCache = new Map();
+const issueCache = new Map();
+const answerCache = new Map();
+
+function getCachedCandidate(id) {
+  if (id == null) return ["", "Unknown"];
+  if (!candidateCache.has(id)) {
+    candidateCache.set(id, typeof findCandidate !== "undefined" ? findCandidate(id) : ["", "Unknown"]);
+  }
+  return candidateCache.get(id);
+}
+
+function getCachedState(id) {
+  if (id == null) return ["", "Unknown"];
+  if (!stateCache.has(id)) {
+    stateCache.set(id, typeof findState !== "undefined" ? findState(id) : ["", "Unknown"]);
+  }
+  return stateCache.get(id);
+}
+
+function getCachedIssue(id) {
+  if (id == null) return ["", "Unknown"];
+  if (!issueCache.has(id)) {
+    issueCache.set(id, typeof findIssue !== "undefined" ? findIssue(id) : ["", "Unknown"]);
+  }
+  return issueCache.get(id);
+}
+
+function getCachedAnswer(id) {
+  if (id == null) return ["", "Unknown"];
+  if (!answerCache.has(id)) {
+    answerCache.set(id, typeof findAnswer !== "undefined" ? findAnswer(id) : ["", "Unknown"]);
+  }
+  return answerCache.get(id);
+}
 
 // fast lookup index for answer effects
 let _answerEffectsIndex = null;
+let _answerFeedbackIndex = null;
+
 function buildAnswerEffectsIndex() {
   _answerEffectsIndex = new Map();
+  _answerFeedbackIndex = new Map();
 
-  const push = (type, arr) => {
+  const pushEffects = (type, arr) => {
     if (!Array.isArray(arr)) return;
-    for (const item of arr) {
+    for (let i = 0; i < arr.length; i++) {
+      const item = arr[i];
       const ans = item?.fields?.answer;
       if (ans == null) continue;
-      if (!_answerEffectsIndex.has(ans)) _answerEffectsIndex.set(ans, []);
+      if (!_answerEffectsIndex.has(ans)) {
+        _answerEffectsIndex.set(ans, []);
+      }
       _answerEffectsIndex.get(ans).push([type, item]);
     }
   };
 
   try {
-    push("global", campaignTrail_temp?.answer_score_global_json);
-    push("state", campaignTrail_temp?.answer_score_state_json);
-    push("issue", campaignTrail_temp?.answer_score_issue_json);
+    pushEffects("global", campaignTrail_temp?.answer_score_global_json);
+    pushEffects("state", campaignTrail_temp?.answer_score_state_json);
+    pushEffects("issue", campaignTrail_temp?.answer_score_issue_json);
+
+    const feedbackArr = campaignTrail_temp?.answer_feedback_json;
+    if (Array.isArray(feedbackArr)) {
+      for (let i = 0; i < feedbackArr.length; i++) {
+        const item = feedbackArr[i];
+        const ans = item?.fields?.answer;
+        if (ans == null) continue;
+        if (!_answerFeedbackIndex.has(ans)) {
+          _answerFeedbackIndex.set(ans, []);
+        }
+        _answerFeedbackIndex.get(ans).push(item.fields);
+      }
+    }
   } catch (_) {
     // leave index null on failure; benefitCheck will fall back to scanning if needed
   }
@@ -31,7 +86,7 @@ function benefitCheck(inputElement) {
   const answerid = Number(inputElement.value);
   let effects = [];
 
-  if (_answerEffectsIndex == null) {
+  if (_answerEffectsIndex === null) {
     // build once on first use
     buildAnswerEffectsIndex();
   }
@@ -40,50 +95,71 @@ function benefitCheck(inputElement) {
     effects = _answerEffectsIndex.get(answerid);
   } else {
     // fallback: scan arrays if index not available
-    for (const item of campaignTrail_temp.answer_score_global_json || []) {
-      if (item.fields.answer == answerid) effects.push(["global", item]);
+    const globalArr = campaignTrail_temp?.answer_score_global_json || [];
+    for (let i = 0; i < globalArr.length; i++) {
+      if (globalArr[i].fields.answer === answerid) effects.push(["global", globalArr[i]]);
     }
-    for (const item of campaignTrail_temp.answer_score_state_json || []) {
-      if (item.fields.answer == answerid) effects.push(["state", item]);
+    const stateArr = campaignTrail_temp?.answer_score_state_json || [];
+    for (let i = 0; i < stateArr.length; i++) {
+      if (stateArr[i].fields.answer === answerid) effects.push(["state", stateArr[i]]);
     }
-    for (const item of campaignTrail_temp.answer_score_issue_json || []) {
-      if (item.fields.answer == answerid) effects.push(["issue", item]);
+    const issueArr = campaignTrail_temp?.answer_score_issue_json || [];
+    for (let i = 0; i < issueArr.length; i++) {
+      if (issueArr[i].fields.answer === answerid) effects.push(["issue", issueArr[i]]);
     }
   }
 
   let mods = "";
+  const candidateId = campaignTrail_temp?.candidate_id;
+
   for (let i = 0; i < effects.length; i++) {
     const type = effects[i][0];
     const data = effects[i][1].fields;
 
     if (type === "global") {
-      const name = findCandidate(data.candidate)[1];
-      const name2 = findCandidate(data.affected_candidate)[1];
+      if (data.candidate && data.candidate !== candidateId) continue;
+      const name = getCachedCandidate(data.candidate)[1];
+      const name2 = getCachedCandidate(data.affected_candidate)[1];
       mods += `<br><em>Global:</em> Affects ${name2} for ${name} by ${data.global_multiplier}`;
     } else if (type === "issue") {
-      const name = findIssue(data.issue)[1];
+      if (data.candidate && data.candidate !== candidateId && data.tag !== 'STATE') continue;
+      const name = getCachedIssue(data.issue)[1];
       const target = (data.tag === 'STATE')
-        ? findState(data.state)[1]
-        : findCandidate(data.candidate || e.candidate_id)[1];
+        ? getCachedState(data.state)[1]
+        : getCachedCandidate(data.candidate || candidateId)[1];
       mods += `<br><em>Issue:</em> Affects ${target}'s stance on ${name} by ${data.issue_score} with an importance of ${data.issue_importance}`;
     } else if (type === "state") {
-      const name1 = findState(data.state)[1];
-      const test5 = findCandidate(data.affected_candidate)[1];
-      const test6 = findCandidate(data.candidate)[1];
+      if (data.candidate && data.candidate !== candidateId) continue;
+      const name1 = getCachedState(data.state)[1];
+      const test5 = getCachedCandidate(data.affected_candidate)[1];
+      const test6 = getCachedCandidate(data.candidate)[1];
       mods += `<br><em>State:</em> Affects ${test5} for ${test6} in ${name1} by ${data.state_multiplier}`;
     }
   }
 
   let answerfeedback = "";
-  const feedbackArr = campaignTrail_temp.answer_feedback_json || [];
-  for (let index = 0; index < feedbackArr.length; index++) {
-    if (answerid == feedbackArr[index].fields.answer) {
-      answerfeedback = `<b>${feedbackArr[index].fields.answer_feedback}</b>`;
+  if (_answerFeedbackIndex && _answerFeedbackIndex.has(answerid)) {
+    const feedbacks = _answerFeedbackIndex.get(answerid);
+    for (let i = 0; i < feedbacks.length; i++) {
+      const fb = feedbacks[i];
+      if (fb.candidate && fb.candidate !== candidateId) continue;
+      answerfeedback = `<b>${fb.answer_feedback}</b>`;
       break;
+    }
+  } else {
+    // fallback scan
+    const feedbackArr = campaignTrail_temp?.answer_feedback_json || [];
+    for (let i = 0; i < feedbackArr.length; i++) {
+      const feedback = feedbackArr[i].fields;
+      if (answerid === feedback.answer) {
+        if (feedback.candidate && feedback.candidate !== candidateId) continue;
+        answerfeedback = `<b>${feedback.answer_feedback}</b>`;
+        break;
+      }
     }
   }
 
-  const answerLookup = findAnswer(answerid);
+  const answerLookup = getCachedAnswer(answerid);
   const answerText = answerLookup ? answerLookup[1] : "Unknown";
 
   return `<p><b>Answer: </b>'${answerText}'<br>Feedback: ${answerfeedback}<br>${mods}</p><br><br>`;
@@ -91,6 +167,7 @@ function benefitCheck(inputElement) {
 
 let benefitCheckAlreadyActivated = false;
 let benefitCheckerEnabled = false;
+
 function activateBenefitCheck() {
   if (benefitCheckAlreadyActivated) {
     // ensure it's turned on and observing if re-invoked
@@ -115,34 +192,31 @@ function activateBenefitCheck() {
 
 let cheatMenuAlreadyActivated = false;
 function activateCheatMenu() {
-  if (cheatMenuAlreadyActivated) {
-    return;
-  }
+  if (cheatMenuAlreadyActivated) return;
 
-  document.getElementById("cheatMenu").style.display = "inline-block";
+  const menu = document.getElementById("cheatMenu");
+  if (menu) menu.style.display = "inline-block";
+  
   cheatMenuAlreadyActivated = true;
   cheatsActive = true;
 
   const difficultySlider = document.getElementById("difficultySlider");
   const difficultyValue = document.getElementById("difficultyValue");
 
-  difficultySlider.value = campaignTrail_temp.difficulty_level_multiplier;
-  difficultyValue.value = difficultySlider.value;
+  if (difficultySlider && difficultyValue) {
+    difficultySlider.value = campaignTrail_temp.difficulty_level_multiplier;
+    difficultyValue.value = difficultySlider.value;
 
-  difficultySlider.oninput = function () {
-    difficultyValue.value = this.value;
-    campaignTrail_temp.difficulty_level_multiplier = Number.parseFloat(
-      this.value,
-    );
-  };
+    difficultySlider.oninput = function () {
+      difficultyValue.value = this.value;
+      campaignTrail_temp.difficulty_level_multiplier = Number.parseFloat(this.value);
+    };
 
-  difficultyValue.oninput = function () {
-    const cleaned = Number.parseFloat(this.value);
-    difficultySlider.value = this.value;
-    campaignTrail_temp.difficulty_level_multiplier = Number.parseFloat(
-      this.value,
-    );
-  };
+    difficultyValue.oninput = function () {
+      difficultySlider.value = this.value;
+      campaignTrail_temp.difficulty_level_multiplier = Number.parseFloat(this.value);
+    };
+  }
 }
 
 async function benefitChecker() {
@@ -166,13 +240,13 @@ async function benefitChecker() {
 
 function hideBenefitChecker() {
   const benefitWindow = document.getElementById("benefitwindow");
-  benefitWindow.style.display = "none";
+  if (benefitWindow) benefitWindow.style.display = "none";
   stopBenefitObserver();
 }
 
 function showBenefitChecker() {
   const benefitWindow = document.getElementById("benefitwindow");
-  benefitWindow.style.display = "block";
+  if (benefitWindow) benefitWindow.style.display = "block";
   if (benefitCheckerEnabled) startBenefitObserver();
   try { benefitChecker(); } catch (_) { }
 }
@@ -182,11 +256,13 @@ const config = { attributes: true, childList: true, subtree: true };
 
 let benefitObserver = null;
 let benefitRenderScheduled = false;
+
 function renderBenefitChecker(mutationList, observer) {
   if (!benefitCheckerEnabled) return;
   const benefitWindow = document.getElementById("benefitwindow");
   if (!benefitWindow || benefitWindow.style.display === "none") return;
   if (benefitRenderScheduled) return;
+
   benefitRenderScheduled = true;
   requestAnimationFrame(() => {
     benefitRenderScheduled = false;
@@ -195,8 +271,7 @@ function renderBenefitChecker(mutationList, observer) {
 }
 
 function startBenefitObserver() {
-  if (benefitObserver) return;
-  if (!targetNode) return;
+  if (benefitObserver || !targetNode) return;
   benefitObserver = new MutationObserver(renderBenefitChecker);
   benefitObserver.observe(targetNode, config);
 }
@@ -216,14 +291,13 @@ function stopBenefitObserver() {
 })();
 
 function dragElement(elmnt) {
-  var pos1 = 0,
-    pos2 = 0,
-    pos3 = 0,
-    pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-    document.getElementById(elmnt.id + "header").ontouchstart = dragMouseDown;
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  const header = document.getElementById(elmnt.id + "header");
+
+  // if present, the header is where you move the DIV from:
+  if (header) {
+    header.onmousedown = dragMouseDown;
+    header.ontouchstart = dragMouseDown;
   } else {
     // otherwise, move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
@@ -234,8 +308,12 @@ function dragElement(elmnt) {
     e = e || window.event;
     //e.preventDefault();
     // get the mouse cursor position at startup:
-    pos3 = e.clientX ?? e.touches[0].clientX;
-    pos4 = e.clientY ?? e.touches[0].clientY;
+    const clientX = e.clientX ?? e.touches?.[0]?.clientX;
+    const clientY = e.clientY ?? e.touches?.[0]?.clientY;
+
+    pos3 = clientX;
+    pos4 = clientY;
+
     document.onmouseup = closeDragElement;
     document.ontouchend = closeDragElement;
     // call a function whenever the cursor moves:
@@ -249,19 +327,21 @@ function dragElement(elmnt) {
     //e = e || window.event;
     e.preventDefault();
     // calculate the new cursor position:
-    pos1 = pos3 - (e.clientX ?? e.touches[0].clientX);
-    pos2 = pos4 - (e.clientY ?? e.touches[0].clientY);
-    pos3 = e.clientX ?? e.touches[0].clientX;
-    pos4 = e.clientY ?? e.touches[0].clientY;
+    const clientX = e.clientX ?? e.touches?.[0]?.clientX;
+    const clientY = e.clientY ?? e.touches?.[0]?.clientY;
+
+    pos1 = pos3 - clientX;
+    pos2 = pos4 - clientY;
+    pos3 = clientX;
+    pos4 = clientY;
+
     // set the element's new position:
-    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
-    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
 
   function closeDragElement(e) {
-    if (e.touches && e.touches.length > 0) {
-      return;
-    }
+    if (e.touches && e.touches.length > 0) return;
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
@@ -270,8 +350,8 @@ function dragElement(elmnt) {
   }
 }
 
-let answerSet = new Set();
-let noAnswerSet = new Set();
+const answerSet = new Set();
+const noAnswerSet = new Set();
 
 function setupAutoplayInput(elementId, targetSet) {
   const inputEl = document.getElementById(elementId);
@@ -280,8 +360,8 @@ function setupAutoplayInput(elementId, targetSet) {
   inputEl.addEventListener("input", function (e) {
     targetSet.clear();
     const pks = e.target.value.split(/[\s,]+/).filter(Boolean);
-    for (const pk of pks) {
-      targetSet.add(Number(pk));
+    for (let i = 0; i < pks.length; i++) {
+      targetSet.add(Number(pks[i]));
     }
   });
 }
@@ -353,29 +433,20 @@ function clickAndContinue(inputElement) {
   if (okBtn) okBtn.click();
 }
 
-let answersPickedAutoplay = new Set();
+const answersPickedAutoplay = new Set();
 
 function printAutoplayClickedMessage(object) {
-  const answerDesc = findAnswer(Number(object.value))[1];
-  const autoplayString =
-    "Question " +
-    (campaignTrail_temp.question_number + 1) +
-    ') "' +
-    answerDesc +
-    '" is what AUTOPLAY chose!\n';
-  const autoplayStringToSave =
-    "Question " +
-    (campaignTrail_temp.question_number + 1) +
-    ') "' +
-    answerDesc +
-    "\n\n";
+  const answerDesc = getCachedAnswer(Number(object.value))[1];
+  const qNum = (campaignTrail_temp.question_number + 1);
+  const autoplayString = `Question ${qNum}) "${answerDesc}" is what AUTOPLAY chose!\n`;
+  const autoplayStringToSave = `Question ${qNum}) "${answerDesc}"\n\n`;
+  
   console.log(autoplayString);
   answersPickedAutoplay.add(autoplayStringToSave);
 }
 
 function printAllAnswersAutoplayPicked() {
   let finalString = "-- AUTOPLAY RESULTS --\n\n";
-
   const answers = Array.from(answersPickedAutoplay);
 
   for (let i = 0; i < answers.length; i++) {
@@ -383,36 +454,10 @@ function printAllAnswersAutoplayPicked() {
   }
 
   const autoplayTextBox = document.getElementById("autoplayAnswers");
-  autoplayTextBox.style.display = "inline-block";
-  autoplayTextBox.value = finalString;
-}
-
-function checkIfAnswer(i, answerSet) {
-  const object =
-    document.getElementById("question_form").children[0].children[i * 3];
-  const pk = Number(object.value);
-  if (answerSet.has(pk)) {
-    printAutoplayClickedMessage(object);
-    object.click();
-    document.getElementById("answer_select_button").click();
-    document.getElementById("ok_button").click();
-    return true;
+  if (autoplayTextBox) {
+    autoplayTextBox.style.display = "inline-block";
+    autoplayTextBox.value = finalString;
   }
-  return false;
-}
-
-function clickIfAvailable(i, noAnswerSet) {
-  const object =
-    document.getElementById("question_form").children[0].children[i * 3];
-  const pk = Number(object.value);
-  if (!noAnswerSet.has(pk)) {
-    printAutoplayClickedMessage(object);
-    object.click();
-    document.getElementById("answer_select_button").click();
-    document.getElementById("ok_button").click();
-    return true;
-  }
-  return false;
 }
 
 let autoplayCount = 0;
@@ -470,12 +515,12 @@ function disableAutoplayUI() {
 function stopAutoplay() {
   autoplayRequested = false;
 
-  if (autoplayWaitHandle != null) {
+  if (autoplayWaitHandle !== null) {
     clearInterval(autoplayWaitHandle);
     autoplayWaitHandle = null;
   }
 
-  if (autoplayHandle != null) {
+  if (autoplayHandle !== null) {
     clearInterval(autoplayHandle);
     autoplayHandle = null;
   }
@@ -485,15 +530,17 @@ function stopAutoplay() {
 }
 
 function startAutoplayWhenReady() {
-  if (autoplayRequested || autoplayPending || autoplayHandle != null) return;
+  if (autoplayRequested || autoplayPending || autoplayHandle !== null) return;
 
   autoplayPending = true;
   autoplayRequested = true;
   enableAutoplayUI(false);
 
+  const loopIntervalMs = 50;
+
   if (isQuestionSetReady()) {
     setTimeout(() => {
-      autoplayHandle = setInterval(autoplay, 10);
+      autoplayHandle = setInterval(autoplay, loopIntervalMs);
       autoplayPending = false;
       enableAutoplayUI(true);
     }, 1500);
@@ -506,7 +553,7 @@ function startAutoplayWhenReady() {
       autoplayWaitHandle = null;
 
       setTimeout(() => {
-        autoplayHandle = setInterval(autoplay, 10);
+        autoplayHandle = setInterval(autoplay, loopIntervalMs);
         autoplayPending = false;
         enableAutoplayUI(true);
       }, 3000);
@@ -516,16 +563,16 @@ function startAutoplayWhenReady() {
 
 window.addEventListener("keydown", (e) => {
   if (!e.repeat) {
-    if (e.key == "~" || e.key == "`") {
+    if (e.key === "~" || e.key === "`") {
       activateBenefitCheck();
-    } else if (e.key == "#") {
+    } else if (e.key === "#") {
       activateCheatMenu();
-    } else if (e.key == "@") {
+    } else if (e.key === "@") {
       autoplayCount++;
-      if (autoplayCount % 3 == 0) {
+      if (autoplayCount % 3 === 0) {
         startAutoplayWhenReady();
       }
-    } else if (e.key == "$") {
+    } else if (e.key === "$") {
       stopAutoplay();
     }
   }
@@ -534,7 +581,7 @@ window.addEventListener("keydown", (e) => {
 // click handler for the autoplay indicator banner
 document.addEventListener("click", (e) => {
   if (e.target && e.target.id === "cheatIndicator") {
-    if (autoplayRequested || autoplayHandle != null) {
+    if (autoplayRequested || autoplayHandle !== null) {
       stopAutoplay();
     } else {
       startAutoplayWhenReady();
@@ -543,15 +590,16 @@ document.addEventListener("click", (e) => {
 });
 
 function turnOffVisits() {
-  campaignTrail_temp.election_json[0].fields.has_visits = false;
-  alert("Visits are now disabled");
+  if (campaignTrail_temp?.election_json?.[0]?.fields) {
+    campaignTrail_temp.election_json[0].fields.has_visits = false;
+    alert("Visits are now disabled");
+  }
 }
 
 function skipQuestion(e) {
   e.preventDefault();
-  const newQuestion = Number(
-    document.getElementById("skipQuestionValue").value,
-  );
+  const inputVal = document.getElementById("skipQuestionValue")?.value;
+  const newQuestion = Number(inputVal);
 
   if (!newQuestion) {
     alert("Question number cannot be blank!");
@@ -578,7 +626,7 @@ function skipQuestion(e) {
 }
 
 function addSTSSMoney() {
-  if (campaignTrail_temp.shining_data.balance) {
+  if (campaignTrail_temp?.shining_data?.balance != null) {
     campaignTrail_temp.shining_data.balance += 1000000;
   } else {
     alert("You must be playing Sea to Shining Sea mode to use this!");
