@@ -25638,7 +25638,8 @@ const TIMELINE_ASSETS = {
     "Green": "#17aa5c",
     "Constitution": "#a356de",
     "Independent": "#DCDCDC",
-    "Unity": "#FFD700"
+    "Unity": "#FFD700",
+	"No Labels": "#775eb2"
   },
   candidates: {
     // Democrats
@@ -25671,7 +25672,10 @@ const TIMELINE_ASSETS = {
     "Michelle Obama": { party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/1/13/Michelle_Obama_in_2014_%28cropped%29.jpg" },
     "Al Gore": { party: "Democratic", img: "https://www.amacad.org/sites/default/files/images/headshots/headshot_5292.jpg" },
     "Tammy Baldwin": { party: "Democratic", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQS7SzK33TbZTM5oq58pejOhtAqJyZXgyyag&s" },
-    "Jon Stewart": { party: "Democratic", img: "https://npr.brightspotcdn.com/dims4/default/3db886b/2147483647/strip/true/crop/252x200+0+0/resize/880x698!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwrkf%2Ffiles%2F201310%2Fventura.png" },
+    "Jon Stewart": { party: "Democratic", img: "https://i.insider.com/5d0aae692516e90c461609f9?width=700" },
+    "Pete Buttigieg": { party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/9/91/Pete_Buttigieg_2020_%282%29.jpg" },
+    "Gretchen Whitmer": { party: "Democratic", img: "https://cdn.britannica.com/23/237023-050-4DE1EFA0/Michigan-governor-Gretchen-Whitmer-2022.jpg" },
+    "Roy Cooper": { party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Roy_Cooper_at_Governor%27s_open_house_event_%28cropped%29.jpg" },
 
     // Republicans
     "Mitt Romney": { party: "Republican", img: "https://platform.vox.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/9196729/mitt.jpg?quality=90&strip=all&crop=16.66015625,0,66.6796875,100" },
@@ -25695,6 +25699,9 @@ const TIMELINE_ASSETS = {
     "Jeb Bush": { party: "Republican", img: "https://stateimpact.npr.org/florida/files/2014/04/4-3-JebBush.jpg" },
     "Carly Fiorina": { party: "Republican", img: "https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt16f70888b1e507ff/69876d7ee20a8777eea83df1/carly-fiorina.jpg?branch=production" },
     "Herman Cain": { party: "Republican", img: "https://www.pbs.org/newshour/app/uploads/2014/12/129043537-1024x679.jpg" },
+    "J.D. Vance": { party: "Republican", img: "https://m.media-amazon.com/images/M/MV5BMzgzNTY5MDUtNDg0Zi00MmMxLWE5YjItM2U0OGRjZDFlNTBkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" },
+    "Tim Scott": { party: "Republican", img: "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Tim_Scott.jpeg" },
+    "Kristi Noem": { party: "Republican", img: "https://sdaho.org/wp-content/uploads/2019/01/gov-noem-scaled-e1638983117849.jpg?w=640" },
 
     // Third parties
     "Jesse Ventura": { party: "Reform", img: "https://npr.brightspotcdn.com/dims4/default/3db886b/2147483647/strip/true/crop/252x200+0+0/resize/880x698!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwrkf%2Ffiles%2F201310%2Fventura.png" },
@@ -25711,7 +25718,7 @@ const TIMELINE_ASSETS = {
     "Soleil Moon Frye": { party: "Green", img: "https://static1.purepeople.com/articles/0/15/09/60/@/1655328-soleil-moon-frye-a-los-angeles-le-7-580x0-2.jpg" },
     "Jimmy Carter": { party: "Unity", img: "https://cdn2.picryl.com/photo/2011/02/15/jimmy-carter-at-the-lbj-library-cropped-725c53-1024.jpg" },
     "Jimmy Fallon": { party: "Independent", img: "https://imageio.forbes.com/specials-images/imageserve/a5c3c6cf3f6284d23b696327a2f3232b/0x0.jpg?format=jpg&height=1200&width=400&fit=bounds" },
-    "Sean Combs": { party: "Independent", img: "https://cdn11.bigcommerce.com/s-yzgoj/products/997668/images/4424450/EVC1310O04GM023H__34017.1541917403.500.659.jpg?c=2" },
+    "Kanye West": { party: "Independent", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Kanye_West_at_the_2009_Tribeca_Film_Festival-2_%28cropped%29.jpg/440px-Kanye_West_at_the_2009_Tribeca_Film_Festival-2_%28cropped%29.jpg" },
     "David Letterman": { party: "Independent", img: "https://variety.com/wp-content/uploads/2014/04/david-letterman.jpg?w=681&h=454&crop=1" },
     "Mark Cuban": { party: "Independent", img: "https://cdn.britannica.com/50/232950-050-EC8D9449/American-entrepreneur-Mark-Cuban-2013.jpg" },
 
@@ -25719,15 +25726,26 @@ const TIMELINE_ASSETS = {
     "Alex Jones": { party: "Reform", img: "https://www.texasstandard.org/wp-content/uploads/2017/04/alex-jones.jpg" },
     "Howard Stern": { party: "Reform", img: "https://hips.hearstapps.com/hmg-prod/images/howard-stern-with-billy-joel-on-siriusxm-howard-stern-on-news-photo-1757344438.pjpeg?crop=0.325xw:0.487xh;0.138xw,0.265xh&resize=640:*" },
     "Penn Jillette": { party: "Libertarian", img: "https://content.api.news/v3/images/bin/a5191b7dba2db909d01273fbf555c2a7" },
-    "Bill Weld": { party: "Libertarian", img: "https://www.bostonherald.com/wp-content/uploads/migration/2015/01/08/091614weldpw003.jpg?w=535" }
+    "Bill Weld": { party: "Libertarian", img: "https://www.bostonherald.com/wp-content/uploads/migration/2015/01/08/091614weldpw003.jpg?w=535" },
+    "Elon Musk": { party: "No Labels", img: "https://assets.ganeshaspeaks.com/wp-content/uploads/2017/04/elon-musk-2017-592.webp" }
   }
 };
 
-// get 2016 nominee based on VP + mandate
+// wrapper to inspect player decisions
+function hasSelectedAnswer(pk) {
+  if (typeof campaignTrail_temp !== 'undefined') {
+    if (campaignTrail_temp.player_answers && campaignTrail_temp.player_answers.includes(pk)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// get 2016 nominee based on VP, mandate, and active choices
 window.get2016DemNominee = function (obamaVP, playerEV, liberalismScore) {
   const strongMandate = playerEV >= 330;
 
-  // Game-specific CYOA hooks
+  // game-specific CYOA hooks
   let mynutmegphantasy = window.mynutmegphantasy || 0;
   let lunarbears = window.lunarbears || 0;
 
@@ -25741,6 +25759,21 @@ window.get2016DemNominee = function (obamaVP, playerEV, liberalismScore) {
       return { nominee: "Al Gore", vp: "Tammy Baldwin" };
   }
 
+  const baseAlienated = hasSelectedAnswer(88) || hasSelectedAnswer(202);
+  const wallStreetRevolt = hasSelectedAnswer(242);
+
+  if (baseAlienated) {
+    const progressiveTickets = [
+      { nominee: "Bernie Sanders", vp: "Elizabeth Warren" },
+      { nominee: "Elizabeth Warren", vp: "Sherrod Brown" }
+    ];
+    return progressiveTickets[Math.floor(Math.random() * progressiveTickets.length)];
+  }
+
+  if (wallStreetRevolt) {
+    return { nominee: "Sherrod Brown", vp: "Tammy Baldwin" };
+  }
+
   const vpCandidates = {
     "Hillary Clinton": { threshold: 280, libMin: -2, libMax: 4 },
     "Joe Biden": { threshold: 280, libMin: -1, libMax: 3 },
@@ -25752,7 +25785,6 @@ window.get2016DemNominee = function (obamaVP, playerEV, liberalismScore) {
     "Kathleen Sebelius": { threshold: 310, libMin: 0, libMax: 4 }
   };
 
-  // check if the current VP can run
   if (vpCandidates[obamaVP] && playerEV >= vpCandidates[obamaVP].threshold) {
     const vpData = vpCandidates[obamaVP];
     if (liberalismScore >= vpData.libMin && liberalismScore <= vpData.libMax) {
@@ -25797,7 +25829,77 @@ function get2016DemVP(nominee, liberalismScore) {
 
   if (liberalismScore >= 3) return options[0];
   if (liberalismScore <= -1) return options[options.length - 1];
-  return options[Math.floor(options.length / 2)]; // middle option
+  return options[Math.floor(options.length / 2)];
+}
+
+// 2020 VP selectors
+function get2020DemVP(nominee, liberalismScore, confrontationScore) {
+  const pool = {
+    "Joe Biden": liberalismScore >= 3
+      ? ["Kamala Harris", "Elizabeth Warren", "Pete Buttigieg"]
+      : liberalismScore <= -1
+        ? ["Roy Cooper", "Tim Kaine", "Amy Klobuchar"]
+        : ["Kamala Harris", "Gretchen Whitmer", "Pete Buttigieg"],
+    "Elizabeth Warren": liberalismScore >= 4
+      ? ["Sherrod Brown", "Tammy Baldwin", "Nina Turner"]
+      : ["Julian Castro", "Cory Booker", "Roy Cooper"],
+    "Kamala Harris": ["Gavin Newsom", "Roy Cooper", "Pete Buttigieg", "Gretchen Whitmer"],
+    "Michelle Obama": ["Sherrod Brown", "Pete Buttigieg", "Roy Cooper", "Julian Castro"]
+  };
+
+  const options = pool[nominee] || ["Kamala Harris", "Pete Buttigieg", "Gretchen Whitmer"];
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+function get2020RepVP(nominee, liberalismScore, confrontationScore) {
+  const pool = {
+    "Donald Trump": confrontationScore >= 4
+      ? ["Mike Pence", "Tucker Carlson", "JD Vance", "Tim Scott"]
+      : ["Mike Pence", "Nikki Haley", "JD Vance", "Tim Scott"],
+    "Ron DeSantis": ["Nikki Haley", "Tim Scott", "Kristi Noem", "Marco Rubio"],
+    "Ted Cruz": ["Carly Fiorina", "Rand Paul", "JD Vance", "Kristi Noem"],
+    "Mitt Romney": ["Paul Ryan", "Nikki Haley", "Jon Huntsman", "Tim Scott"],
+    "Herman Cain": ["Tucker Carlson", "Michele Bachmann", "Rand Paul", "Tim Scott"]
+  };
+
+  const options = pool[nominee] || ["Nikki Haley", "Tim Scott", "Paul Ryan"];
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+// 2024 VP selectors
+function get2024DemVP(nominee, liberalismScore, confrontationScore) {
+  const pool = {
+    "Alexandria Ocasio-Cortez": ["Bernie Sanders", "Nina Turner", "Elizabeth Warren"],
+    "Gavin Newsom": ["Kamala Harris", "Gretchen Whitmer", "Roy Cooper", "Pete Buttigieg"],
+    "Kamala Harris": ["Pete Buttigieg", "Roy Cooper", "Gretchen Whitmer", "Gavin Newsom"],
+    "Joe Biden": ["Kamala Harris", "Gretchen Whitmer", "Pete Buttigieg", "Roy Cooper"],
+    "Elizabeth Warren": ["Sherrod Brown", "Tammy Baldwin", "Julian Castro", "Nina Turner"],
+    "Bernie Sanders": ["Nina Turner", "Elizabeth Warren", "Sherrod Brown"],
+    "Cory Booker": ["Kamala Harris", "Roy Cooper", "Pete Buttigieg", "Gretchen Whitmer"],
+    "Amy Klobuchar": ["Tim Kaine", "Sherrod Brown", "Gretchen Whitmer", "Roy Cooper"],
+    "Michelle Obama": ["Sherrod Brown", "Pete Buttigieg", "Roy Cooper", "Julian Castro"],
+    "Al Gore": ["Tammy Baldwin", "Gretchen Whitmer", "Roy Cooper", "Tim Kaine"]
+  };
+
+  const options = pool[nominee] || ["Gretchen Whitmer", "Pete Buttigieg", "Roy Cooper"];
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+function get2024RepVP(nominee, liberalismScore, confrontationScore) {
+  const pool = {
+    "Donald Trump": ["JD Vance", "Mike Pence", "Tim Scott", "Kristi Noem", "Tucker Carlson"],
+    "Ron DeSantis": ["Nikki Haley", "Marco Rubio", "Tim Scott", "Kristi Noem", "JD Vance"],
+    "Ted Cruz": ["Carly Fiorina", "Rand Paul", "Kristi Noem", "JD Vance"],
+    "Tucker Carlson": ["Sarah Palin", "Herman Cain", "JD Vance", "Kristi Noem"],
+    "Nikki Haley": ["Marco Rubio", "Ron DeSantis", "Tim Scott", "Kristi Noem"],
+    "Marco Rubio": ["Nikki Haley", "Jeb Bush", "Tim Scott", "Kristi Noem"],
+    "Jeb Bush": ["Marco Rubio", "Nikki Haley", "Tim Scott", "Kristi Noem"],
+    "Rand Paul": ["Tucker Carlson", "Nikki Haley", "JD Vance", "Kristi Noem"],
+    "Herman Cain": ["Tucker Carlson", "Michele Bachmann", "JD Vance", "Tim Scott"]
+  };
+
+  const options = pool[nominee] || ["JD Vance", "Tim Scott", "Nikki Haley"];
+  return options[Math.floor(Math.random() * options.length)];
 }
 
 function getFullOpponentName(opLast) {
@@ -25916,8 +26018,11 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   if (realResults) {
     winningParty = realResults.winner;
   } else {
-    if (victoryType === "win") winningParty = 'dem';
-    else winningParty = 'rep';
+    if (hasSelectedAnswer(1736) || victoryType === "win") {
+      winningParty = 'dem';
+    } else {
+      winningParty = 'rep';
+    }
   }
 
   if (winningParty === 'dem') {
@@ -25966,7 +26071,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
         ["Mitt Romney", "Paul Ryan"],
         ["Jon Huntsman", "Nikki Haley"]
       ];
-    } else if (con >= 4) {
+    } else if (con >= 4 || hasSelectedAnswer(308)) {
       gopChoices = [
         ["Ted Cruz", "Carly Fiorina"],
         ["Donald Trump", "Mike Pence"],
@@ -26002,9 +26107,9 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
       winner16 = getLeftThirdPartyNominee(lib, con);
       if (!isEligible(winner16)) winner16 = "Jill Stein";
       vp16 = getLeftThirdPartyVP(winner16, lib, con);
-    } else if (wasntme > 0 && Math.random() > 0.75 && isEligible("Sean Combs")) {
-      winner16 = "Sean Combs";
-      vp16 = "Mark Cuban";
+    } else if ((wasntme > 0 || hasSelectedAnswer(728)) && isEligible("Kanye West")) {
+      winner16 = "Kanye West";
+      vp16 = "Elon Musk";
     } else if (con >= 3 && lib < 3) {
       winner16 = gopNominee; vp16 = gopVP;
     } else {
@@ -26019,8 +26124,11 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
     if (currentParty === "Republican") {
       if (incumbentWeak || wall <= -4 || !isEligible(prevPres.name)) {
         // incumbent loses or is term-limited
-        if (lib >= 3) { winner16 = "Bernie Sanders"; vp16 = "Sherrod Brown"; }
-        else { winner16 = "Hillary Clinton"; vp16 = "Cory Booker"; }
+        if (lib >= 3 || hasSelectedAnswer(242)) {
+          winner16 = "Bernie Sanders"; vp16 = "Sherrod Brown";
+        } else {
+          winner16 = "Hillary Clinton"; vp16 = "Cory Booker";
+        }
 
         if (mynutmegphantasy > 0 && Math.random() > 0.5) {
             winner16 = "Michelle Obama"; vp16 = "Sherrod Brown";
@@ -26050,9 +26158,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
     // restrict takeover to 2018 or 2019 to prevent resigning exactly at the 2020 transition
     const takeoverYears = [2018, 2019];
     const takeoverYear = takeoverYears[Math.floor(Math.random() * takeoverYears.length)];
-
-    const resignationChance =
-      winner16 === "Donald Trump" && con >= 6 ? 0.65 : 0.35;
+    const resignationChance = winner16 === "Donald Trump" && con >= 6 ? 0.65 : 0.35;
 
     // vaguely realistic resignation date simulator
     const months = ["February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -26116,9 +26222,9 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
     winner20 = "David Letterman";
     vp20 = "Jon Stewart";
   }
-  else if (heyheyhey > 0 && Math.random() > 0.6 && isEligible("Jimmy Fallon")) {
+  else if (window.heyheyhey > 0 && Math.random() > 0.7 && isEligible("Jimmy Fallon")) {
     winner20 = "Jimmy Fallon";
-    vp20 = "Mark Cuban";
+    vp20 = "Elon Musk";
   }
   else {
     if (prevParty === "Republican") {
@@ -26128,15 +26234,16 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
         // Romney is term-limited here if he served 2013-2021
         if (prevPres.name === winner12 && incumbentCanRun) {
           winner20 = prevPres.name;
-          vp20 = (typeof getRepublicanVP === 'function') ? getRepublicanVP(winner20, lib, con) : "Paul Ryan";
+          vp20 = get2020RepVP(winner20, lib, con);
         } else {
-          winner20 = "Joe Biden"; vp20 = "Kamala Harris";
-          if (lib > 4) { winner20 = "Elizabeth Warren"; vp20 = "Julian Castro"; }
-          if (mynutmegphantasy > 0 && Math.random() > 0.5) { winner20 = "Michelle Obama"; vp20 = "Julian Castro"; }
+          winner20 = "Joe Biden";
+          if (lib > 4) { winner20 = "Elizabeth Warren"; }
+          if (mynutmegphantasy > 0 && Math.random() > 0.5) { winner20 = "Michelle Obama"; }
 
           if (!isEligible(winner20)) {
-            winner20 = "Kamala Harris"; vp20 = "Gavin Newsom";
+            winner20 = "Kamala Harris";
           }
+          vp20 = get2020DemVP(winner20, lib, con);
         }
       }
     } else if (prevParty === "Democratic") {
@@ -26150,31 +26257,34 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
         if (lunarbears >= 2 && isEligible("Herman Cain")) rep2020Choices.push(["Herman Cain", "Tucker Carlson"]);
 
         if (rep2020Choices.length > 0) {
-          [winner20, vp20] = rep2020Choices[Math.floor(Math.random() * rep2020Choices.length)];
+          let repChoice = rep2020Choices[Math.floor(Math.random() * rep2020Choices.length)];
+          winner20 = repChoice[0];
         } else {
-          [winner20, vp20] = ["Ron DeSantis", "Nikki Haley"];
+          winner20 = "Ron DeSantis";
         }
+        vp20 = get2020RepVP(winner20, lib, con);
       } else {
         if (incumbentCanRun) {
           winner20 = prevPres.name;
-          vp20 = get2016DemVP(winner20, lib); // a fresh VP for the full term election
+          vp20 = get2020DemVP(winner20, lib, con);
         } else {
-          winner20 = "Joe Biden"; vp20 = "Kamala Harris";
-          if (!isEligible(winner20)) { winner20 = "Kamala Harris"; vp20 = "Tim Kaine"; }
+          winner20 = "Joe Biden";
+          if (!isEligible(winner20)) { winner20 = "Kamala Harris"; }
+          vp20 = get2020DemVP(winner20, lib, con);
         }
       }
     } else {
       // 3rd/4th party crashes
-      winner20 = "Joe Biden"; vp20 = "Kamala Harris";
-      if (!isEligible(winner20)) { winner20 = "Kamala Harris"; vp20 = "Tim Kaine"; }
+      winner20 = "Joe Biden";
+      if (!isEligible(winner20)) { winner20 = "Kamala Harris"; }
+      vp20 = get2020DemVP(winner20, lib, con);
     }
   }
   rawTimeline.push({ name: winner20, start: 2021, end: 2025, vp: vp20 });
   addTerm(winner20);
 
   // 2024 election
-  let winner24;
-  let vp24;
+  let winner24, vp24;
   prevPres = rawTimeline[rawTimeline.length - 1];
   let currentParty = TIMELINE_ASSETS.candidates[prevPres.name]?.party || "Independent";
   incumbentCanRun = isEligible(prevPres.name);
@@ -26218,10 +26328,10 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
     }
   }
 
-  if (heyheyhey > 0 && Math.random() > 0.65 && isEligible("Jimmy Fallon")) {
+  if (window.heyheyhey > 0 && Math.random() > 0.65 && isEligible("Jimmy Fallon")) {
     winner24 = "Jimmy Fallon";
-  } else if (wasntme > 0 && Math.random() > 0.7 && isEligible("Sean Combs")) {
-    winner24 = "Sean Combs";
+  } else if ((wasntme > 0 || hasSelectedAnswer(728)) && Math.random() > 0.8 && isEligible("Kanye West")) {
+    winner24 = "Kanye West";
   } else if (lunarbears >= 4 && Math.random() > 0.55 && isEligible("David Letterman")) {
     winner24 = "David Letterman";
   }
@@ -26232,40 +26342,15 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   let party24 = TIMELINE_ASSETS.candidates[winner24]?.party || "Independent";
 
   if (winner24 === "Jimmy Carter") {
-    vp24 = "Walter Mondale";
-  } else if (winner24 === "Jimmy Fallon" || winner24 === "Sean Combs") {
-    vp24 = "Mark Cuban";
+    vp24 = "Gary Hart";
+  } else if (winner24 === "Jimmy Fallon" || winner24 === "Kanye West") {
+    vp24 = "Elon Musk";
   } else if (winner24 === "David Letterman" || winner24 === "Jon Stewart") {
     vp24 = winner24 === "Jon Stewart" ? "David Letterman" : "Jon Stewart";
   } else if (party24 === "Republican") {
-    const repVPs = {
-      "Donald Trump": ["JD Vance", "Mike Pence", "Tucker Carlson"],
-      "Ron DeSantis": ["Nikki Haley", "Marco Rubio"],
-      "Ted Cruz": ["Carly Fiorina", "Rand Paul"],
-      "Tucker Carlson": ["Sarah Palin", "Herman Cain"],
-      "Nikki Haley": ["Marco Rubio", "Ron DeSantis"],
-      "Marco Rubio": ["Nikki Haley", "Jeb Bush"],
-      "Jeb Bush": ["Marco Rubio", "Nikki Haley"],
-      "Rand Paul": ["Tucker Carlson", "Nikki Haley"],
-      "Herman Cain": ["Tucker Carlson", "Michele Bachmann"]
-    };
-    let options = repVPs[winner24] || ["Paul Ryan", "Nikki Haley", "Marco Rubio"];
-    vp24 = options[Math.floor(Math.random() * options.length)];
+    vp24 = get2024RepVP(winner24, lib, con);
   } else if (party24 === "Democratic") {
-    const demVPs = {
-      "Alexandria Ocasio-Cortez": ["Bernie Sanders", "Nina Turner"],
-      "Gavin Newsom": ["Kamala Harris", "Cory Booker"],
-      "Kamala Harris": ["Gavin Newsom", "Tim Kaine"],
-      "Joe Biden": ["Kamala Harris", "Gavin Newsom"],
-      "Elizabeth Warren": ["Sherrod Brown", "Julian Castro"],
-      "Bernie Sanders": ["Elizabeth Warren", "Nina Turner"],
-      "Cory Booker": ["Kamala Harris", "Julian Castro"],
-      "Amy Klobuchar": ["Tim Kaine", "Sherrod Brown"],
-      "Michelle Obama": ["Sherrod Brown", "Julian Castro"],
-      "Al Gore": ["Tammy Baldwin", "Tim Kaine"]
-    };
-    let options = demVPs[winner24] || ["Tim Kaine", "Cory Booker", "Kamala Harris"];
-    vp24 = options[Math.floor(options.length / 2)];
+    vp24 = get2024DemVP(winner24, lib, con);
   } else {
     vp24 = "Howard Stern";
   }
@@ -26274,7 +26359,6 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   addTerm(winner24);
 
   window.generatedTimelineCache[cacheKey] = rawTimeline;
-
   return rawTimeline;
 }
 
@@ -26392,9 +26476,9 @@ function generateTimelineHTML(timelineData) {
 
     // fallback party assignment logic
     if (!TIMELINE_ASSETS.candidates[p.name]) {
-      if (["Donald Trump", "George W. Bush", "Mike Pence", "Ted Cruz", "Carly Fiorina", "Mitt Romney", "Paul Ryan", "Jeb Bush", "Marco Rubio", "Chris Christie", "Sarah Palin", "Ron DeSantis", "Nikki Haley", "Tucker Carlson", "Rand Paul", "Rick Perry", "Jon Huntsman", "Rick Santorum", "Newt Gingrich", "Michele Bachmann", "Herman Cain"].includes(p.name)) {
+      if (["Donald Trump", "George W. Bush", "Mike Pence", "Ted Cruz", "Carly Fiorina", "Mitt Romney", "Paul Ryan", "Jeb Bush", "Marco Rubio", "Chris Christie", "Sarah Palin", "Ron DeSantis", "Nikki Haley", "Tucker Carlson", "Rand Paul", "Rick Perry", "Jon Huntsman", "Rick Santorum", "Newt Gingrich", "Michele Bachmann", "Herman Cain", "JD Vance", "Tim Scott", "Kristi Noem"].includes(p.name)) {
         data.party = "Republican";
-      } else if (["Joe Biden", "Kamala Harris", "Elizabeth Warren", "Bernie Sanders", "Hillary Clinton", "Tim Kaine", "Cory Booker", "Julian Castro", "Sherrod Brown", "Gavin Newsom", "Alexandria Ocasio-Cortez", "Amy Klobuchar", "Michelle Obama", "Martin O'Malley", "Jon Stewart", "Al Gore", "Tammy Baldwin"].includes(p.name)) {
+      } else if (["Joe Biden", "Kamala Harris", "Elizabeth Warren", "Bernie Sanders", "Hillary Clinton", "Tim Kaine", "Cory Booker", "Julian Castro", "Sherrod Brown", "Gavin Newsom", "Alexandria Ocasio-Cortez", "Amy Klobuchar", "Michelle Obama", "Martin O'Malley", "Jon Stewart", "Al Gore", "Tammy Baldwin", "Pete Buttigieg", "Gretchen Whitmer", "Roy Cooper"].includes(p.name)) {
         data.party = "Democratic";
       } else if (["Jesse Ventura", "Andrew Yang", "Howard Stern", "Alex Jones"].includes(p.name)) {
         data.party = "Reform";
@@ -26404,7 +26488,7 @@ function generateTimelineHTML(timelineData) {
         data.party = "Green";
       } else if (["Virgil Goode"].includes(p.name)) {
         data.party = "Constitution";
-      } else if (["Sean Combs", "Jimmy Fallon", "David Letterman", "Mark Cuban"].includes(p.name)) {
+      } else if (["Kanye West", "Jimmy Fallon", "David Letterman", "Mark Cuban"].includes(p.name)) {
         data.party = "Independent";
       }
     }
