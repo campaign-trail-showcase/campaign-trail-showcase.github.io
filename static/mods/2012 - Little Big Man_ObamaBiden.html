@@ -23457,9 +23457,7 @@ campaignTrail_temp.image = false;
 campaignTrail_temp.executable = {};
 
 let endingObserver = null;
-let endingSafetyTimeout = null;
 let currentTargetImage = "";
-let globalEndingObserver = null;
 
 window.endingImageSystem = (() => {
   let currentTargetImage = null;
@@ -25687,7 +25685,7 @@ const TIMELINE_ASSETS = {
     "Donald Trump": { party: "Republican", img: "https://i.guim.co.uk/img/static/sys-images/BOOKS/Pix/pictures/2011/5/11/1305115261780/Donald-Trump-007.jpg?width=465&dpr=1&s=none&crop=none" },
     "Mike Pence": { party: "Republican", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrvhkwSt_myQXI9RvWo_rx9z9LAw9jHUT6eg&s" },
     "Ted Cruz": { party: "Republican", img: "https://img.texasmonthly.com/2014/01/ted_cruz.png?auto=compress&crop=faces&fit=fit&fm=jpg&h=0&ixlib=php-3.3.1&q=45&w=1250" },
-    "Marco Rubio": { party: "Republican", img: "https://s3-origin-images.politico.com/2014/12/21/141221_marco_rubio_gty_1160.jpg" },
+    "Marco Rubio": { party: "Republican", img: "https://web.archive.org/web/20150924011516if_/http://s3-origin-images.politico.com/2014/12/21/141221_marco_rubio_gty_1160.jpg" },
     "Chris Christie": { party: "Republican", img: "https://www.salon.com/app/uploads/2014/03/chris_christie12.jpg" },
     "Sarah Palin": { party: "Republican", img: "https://media.cnn.com/api/v1/images/stellar/prod/150120161546-2014-nra-sarah-palin.jpg?q=w_1600,h_900,x_0,y_0,c_fill/w_860" },
     "Rand Paul": { party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/6/66/Rand_Paul_Official_Portrait_%28cropped%29.jpg" },
@@ -26065,7 +26063,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
     last.end = takeoverYear;
     last.endDateStr = exactTakeoverDate;
     last.reason = Math.random() < resignationChance ? "Resigned" : "Died in office";
-    
+
     // disqualify original president because they resigned or died
     disqualified.add(last.name);
 
@@ -26114,11 +26112,11 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
     if (!isEligible(winner20)) winner20 = "Cynthia Nixon";
     vp20 = getLeftThirdPartyVP(winner20, lib, con);
   }
-  else if (lunarbears >= 3 && Math.random() > 0.7 && isEligible("David Letterman")) {
+  else if (lunarbears >= 3 && Math.random() > 0.6 && isEligible("David Letterman")) {
     winner20 = "David Letterman";
     vp20 = "Jon Stewart";
   }
-  else if (heyheyhey > 0 && Math.random() > 0.65 && isEligible("Jimmy Fallon")) {
+  else if (heyheyhey > 0 && Math.random() > 0.6 && isEligible("Jimmy Fallon")) {
     winner20 = "Jimmy Fallon";
     vp20 = "Mark Cuban";
   }
@@ -26135,7 +26133,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
           winner20 = "Joe Biden"; vp20 = "Kamala Harris";
           if (lib > 4) { winner20 = "Elizabeth Warren"; vp20 = "Julian Castro"; }
           if (mynutmegphantasy > 0 && Math.random() > 0.5) { winner20 = "Michelle Obama"; vp20 = "Julian Castro"; }
-          
+
           if (!isEligible(winner20)) {
             winner20 = "Kamala Harris"; vp20 = "Gavin Newsom";
           }
@@ -26150,7 +26148,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
           ["Marco Rubio", "Ron DeSantis"]
         ].filter(choice => isEligible(choice[0]));
         if (lunarbears >= 2 && isEligible("Herman Cain")) rep2020Choices.push(["Herman Cain", "Tucker Carlson"]);
-        
+
         if (rep2020Choices.length > 0) {
           [winner20, vp20] = rep2020Choices[Math.floor(Math.random() * rep2020Choices.length)];
         } else {
@@ -26191,10 +26189,10 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
         ? ["Tucker Carlson", "Ron DeSantis", "Ted Cruz", "Donald Trump", "Marco Rubio"]
         : ["Ron DeSantis", "Nikki Haley", "Marco Rubio", "Jeb Bush", "Rand Paul"]
       ).filter(name => isEligible(name));
-      
+
       if (lunarbears >= 2 && isEligible("Herman Cain")) rep2024Choices.push("Herman Cain");
       if (lunarbears >= 2 && isEligible("Tucker Carlson")) rep2024Choices.push("Tucker Carlson");
-      
+
       if (rep2024Choices.length > 0) {
         winner24 = rep2024Choices[Math.floor(Math.random() * rep2024Choices.length)];
       } else {
@@ -26205,13 +26203,13 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
         ? ["Alexandria Ocasio-Cortez", "Elizabeth Warren", "Bernie Sanders", "Kamala Harris"]
         : ["Gavin Newsom", "Kamala Harris", "Joe Biden", "Cory Booker", "Amy Klobuchar"]
       ).filter(name => isEligible(name));
-      
+
       if (mynutmegphantasy > 0 && isEligible("Michelle Obama")) dem2024Choices.push("Michelle Obama");
       if (lunarbears >= 3) {
         if (isEligible("Jon Stewart")) dem2024Choices.push("Jon Stewart");
         if (isEligible("Al Gore")) dem2024Choices.push("Al Gore");
       }
-      
+
       if (dem2024Choices.length > 0) {
         winner24 = dem2024Choices[Math.floor(Math.random() * dem2024Choices.length)];
       } else {
@@ -26220,9 +26218,9 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
     }
   }
 
-  if (heyheyhey > 0 && Math.random() > 0.6 && isEligible("Jimmy Fallon")) {
+  if (heyheyhey > 0 && Math.random() > 0.65 && isEligible("Jimmy Fallon")) {
     winner24 = "Jimmy Fallon";
-  } else if (wasntme > 0 && Math.random() > 0.75 && isEligible("Sean Combs")) {
+  } else if (wasntme > 0 && Math.random() > 0.7 && isEligible("Sean Combs")) {
     winner24 = "Sean Combs";
   } else if (lunarbears >= 4 && Math.random() > 0.55 && isEligible("David Letterman")) {
     winner24 = "David Letterman";
@@ -26276,7 +26274,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   addTerm(winner24);
 
   window.generatedTimelineCache[cacheKey] = rawTimeline;
-  
+
   return rawTimeline;
 }
 
@@ -26285,31 +26283,42 @@ function mergeTimelineData(rawTimeline) {
   if (!rawTimeline || rawTimeline.length === 0) return [];
 
   let merged = [];
-  merged.push(JSON.parse(JSON.stringify(rawTimeline[0])));
 
-  for (let i = 1; i < rawTimeline.length; i++) {
-    let prev = merged[merged.length - 1];
+  for (let i = 0; i < rawTimeline.length; i++) {
     let curr = rawTimeline[i];
+    let prev = merged[merged.length - 1];
 
-    // check if same person & consecutive time
-    if (prev.name === curr.name && prev.end === curr.start) {
+    // determine the election year for this term
+    let electionText = '–';
+    if (curr.start % 4 === 1) {
+      electionText = (curr.start - 1).toString();
+    }
+
+    let termObj = {
+      election: electionText,
+      vp: curr.vp
+    };
+
+    if (prev && prev.name === curr.name && prev.end === curr.start) {
+      // merge consecutive terms for the same president
       prev.end = curr.end;
       prev.endDateStr = curr.endDateStr || (curr.end === "Incumbent" ? "Incumbent" : `January 20, ${curr.end}`);
 
-      // if the reason for leaving happened in the *second* term, update it
       if (curr.reason) {
         prev.reason = curr.reason;
       }
-
-      // merge different VPs into a clean list to avoid duplicating them
-      if (prev.vp !== curr.vp) {
-        if (!prev.vp.includes(curr.vp)) {
-          prev.vp = `${prev.vp}<br>${curr.vp}`;
-        }
-      }
+      prev.terms.push(termObj);
     } else {
-      // push new entry (either new person OR non-consecutive term)
-      merged.push(JSON.parse(JSON.stringify(curr)));
+      // create a new president entry
+      merged.push({
+        name: curr.name,
+        start: curr.start,
+        end: curr.end,
+        startDateStr: curr.startDateStr || `January 20, ${curr.start}`,
+        endDateStr: curr.endDateStr || (curr.end === "Incumbent" ? "Incumbent" : `January 20, ${curr.end}`),
+        reason: curr.reason || null,
+        terms: [termObj]
+      });
     }
   }
   return merged;
@@ -26359,40 +26368,31 @@ function generatePresidentRow(number, name, image, startStr, endStr, party, elec
 
 function generateTimelineHTML(timelineData) {
   // dubya
-  let rowsHtml = `
-    <tr>
-      <th scope="row" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #f8f9fa;">43</th>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-          <img src="https://file.garden/aNtjn2887DiA_8HP/George%20W%20Bush%202%20Term.png" alt="George W. Bush" style="width:100px; height: 140px; object-fit: cover;">
-      </td>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-          <b><a href="#" style="color:#0645AD; text-decoration: none;">George W. Bush</a></b><br><span style="font-size: 85%;">(b. 1946)</span>
-      </td>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-          <span>January 20, 2001</span><br>–<br><span>January 20, 2009</span>
-      </td>
-      <td style="width: 8px; padding: 2px; border: 1px solid #a2a9b1; background-color: #E81B23;"></td>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-          <a href="#" style="color:#0645AD; text-decoration: none;">Republican</a>
-      </td>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-          <a href="#" style="color:#0645AD; text-decoration: none;">2000</a><br>
-          <a href="#" style="color:#0645AD; text-decoration: none;">2004</a>
-      </td>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-          <a href="#" style="color:#0645AD; text-decoration: none;">Dick Cheney</a>
-      </td>
-    </tr>
-  `;
+  let formattedTimeline = [
+    {
+      name: "George W. Bush",
+      startDateStr: "January 20, 2001",
+      endDateStr: "January 20, 2009",
+      party: "Republican",
+      img: "https://file.garden/aNtjn2887DiA_8HP/George%20W%20Bush%202%20Term.png",
+      terms: [
+        { election: "2000", vp: "Dick Cheney" },
+        { election: "2004", vp: "Dick Cheney" }
+      ]
+    }
+  ];
 
   let presNum = 44;
+  let rowsHtml = "";
 
-  timelineData.forEach(p => {
+  const fullTimeline = [...formattedTimeline, ...timelineData];
+
+  fullTimeline.forEach((p) => {
     let data = TIMELINE_ASSETS.candidates[p.name] || { party: "Independent", img: "https://via.placeholder.com/100x140?text=?" };
 
-    // Set fallback parties for missing candidates
+    // fallback party assignment logic
     if (!TIMELINE_ASSETS.candidates[p.name]) {
-      if (["Donald Trump", "Mike Pence", "Ted Cruz", "Carly Fiorina", "Mitt Romney", "Paul Ryan", "Jeb Bush", "Marco Rubio", "Chris Christie", "Sarah Palin", "Ron DeSantis", "Nikki Haley", "Tucker Carlson", "Rand Paul", "Rick Perry", "Jon Huntsman", "Rick Santorum", "Newt Gingrich", "Michele Bachmann", "Herman Cain"].includes(p.name)) {
+      if (["Donald Trump", "George W. Bush", "Mike Pence", "Ted Cruz", "Carly Fiorina", "Mitt Romney", "Paul Ryan", "Jeb Bush", "Marco Rubio", "Chris Christie", "Sarah Palin", "Ron DeSantis", "Nikki Haley", "Tucker Carlson", "Rand Paul", "Rick Perry", "Jon Huntsman", "Rick Santorum", "Newt Gingrich", "Michele Bachmann", "Herman Cain"].includes(p.name)) {
         data.party = "Republican";
       } else if (["Joe Biden", "Kamala Harris", "Elizabeth Warren", "Bernie Sanders", "Hillary Clinton", "Tim Kaine", "Cory Booker", "Julian Castro", "Sherrod Brown", "Gavin Newsom", "Alexandria Ocasio-Cortez", "Amy Klobuchar", "Michelle Obama", "Martin O'Malley", "Jon Stewart", "Al Gore", "Tammy Baldwin"].includes(p.name)) {
         data.party = "Democratic";
@@ -26409,35 +26409,91 @@ function generateTimelineHTML(timelineData) {
       }
     }
 
-    const startStr = p.startDateStr || `January 20, ${p.start}`;
-    const endStr = (p.end === "Incumbent") ? "<i>Incumbent</i>" : (p.endDateStr || `January 20, ${p.end}`);
+    // prioritize properties set directly on the timeline object 'p'
+    const partyName = p.party || data.party;
+    const imgSrc = p.img || data.img;
 
-    // calculate the election years based on their time in office.
-    // if they assumed office mid-term (e.g. start year is not divisible by 4 + 1 like 2013, 2017), output a grey dash
-    let electionHtml = '<span style="color:gray">–</span>';
-    if (p.start % 4 === 1) {
-      let firstElection = p.start - 1;
-      electionHtml = `<a href="#" style="color:#0645AD; text-decoration: none;">${firstElection}</a>`;
+    const partyColor = TIMELINE_ASSETS.colors[partyName] || "#cccccc";
+    const startStr = p.startDateStr;
+    const endStr = (p.endDateStr === "Incumbent") ? "<i>Incumbent</i>" : p.endDateStr;
 
-      if (typeof p.end === 'number') {
-        let terms = Math.round((p.end - p.start) / 4);
-        for (let i = 1; i < terms; i++) {
-           electionHtml += `<br><a href="#" style="color:#0645AD; text-decoration: none;">${firstElection + (i * 4)}</a>`;
-        }
-      }
+    let termDisplay = `<span>${startStr}</span><br>–<br><span>${endStr}</span>`;
+    if (p.reason) {
+      termDisplay += `<br><span style="font-size:85%;"><i>${p.reason}</i></span>`;
     }
 
-    rowsHtml += generatePresidentRow(
-      presNum,
-      p.name,
-      data.img,
-      startStr,
-      endStr,
-      data.party,
-      electionHtml,
-      p.vp,
-      p.reason
-    );
+    const numTerms = p.terms.length;
+
+    // calculate dynamic rowspans for the VP column to avoid split cells if VPs match
+    for (let i = 0; i < numTerms; i++) {
+      if (p.terms[i].skipVP) continue;
+
+      let rowspan = 1;
+      while (i + rowspan < numTerms && p.terms[i + rowspan].vp === p.terms[i].vp) {
+        p.terms[i + rowspan].skipVP = true;
+        rowspan++;
+      }
+      p.terms[i].vpRowspan = rowspan;
+    }
+
+    // render each term row
+    p.terms.forEach((term, tIdx) => {
+      let vpDisplay = "";
+
+      if (!term.skipVP) {
+        let vpText = term.vp;
+        if (vpText !== "Vacant" && vpText !== "TBD" && !vpText.includes("<i") && !vpText.includes("<a")) {
+          vpDisplay = `<td rowspan="${term.vpRowspan}" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle;">
+            <a href="#" style="color:#0645AD; text-decoration: none;">${vpText}</a>
+          </td>`;
+        } else if (vpText === "Vacant") {
+          vpDisplay = `<td rowspan="${term.vpRowspan}" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle;">
+            <i style="color:gray;">Vacant</i>
+          </td>`;
+        } else {
+          vpDisplay = `<td rowspan="${term.vpRowspan}" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle;">
+            ${vpText}
+          </td>`;
+        }
+      }
+
+      let electionDisplay = term.election;
+      if (electionDisplay !== "–" && !electionDisplay.includes("<a")) {
+        electionDisplay = `<a href="#" style="color:#0645AD; text-decoration: none;">${electionDisplay}</a>`;
+      }
+
+      if (tIdx === 0) {
+        rowsHtml += `
+          <tr>
+            <th scope="row" rowspan="${numTerms}" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #f8f9fa; vertical-align: middle;">${presNum}</th>
+            <td rowspan="${numTerms}" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle;">
+              <img src="${imgSrc}" alt="${p.name}" style="width:100px; height:140px; object-fit: cover;">
+            </td>
+            <td rowspan="${numTerms}" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle; text-align: left;">
+              <b><a href="#" style="color:#0645AD; text-decoration: none;" title="${p.name}">${p.name}</a></b>
+            </td>
+            <td rowspan="${numTerms}" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle;">
+              ${termDisplay}
+            </td>
+            <td rowspan="${numTerms}" style="width: 8px; padding: 2px; border: 1px solid #a2a9b1; background-color: ${partyColor}; vertical-align: middle;"></td>
+            <td rowspan="${numTerms}" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle;">
+              <a href="#" style="color:#0645AD; text-decoration: none;">${partyName}</a>
+            </td>
+            <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle;">
+              ${electionDisplay}
+            </td>
+            ${vpDisplay}
+          </tr>`;
+      } else {
+        rowsHtml += `
+          <tr>
+            <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle;">
+              ${electionDisplay}
+            </td>
+            ${vpDisplay}
+          </tr>`;
+      }
+    });
 
     presNum++;
   });
@@ -32547,8 +32603,8 @@ const THIRD_PARTY_MODIFICATIONS = {
       "Upper South": 0.03
     },
     stateMultipliers: {
-      "VA": 0.12,
-      "NC": 0.05, "SC": 0.05, "AL": 0.06, "MS": 0.06, "TN": 0.05
+      "VA": 0.16,
+      "WV": 0.12, "NC": 0.08, "MD": 0.075, "SC": 0.07, "AL": 0.06, "MS": 0.06, "TN": 0.05
     }
   },
   "Clint Eastwood": {
