@@ -675,28 +675,6 @@ document.head.appendChild(style);
   const gameWindow = document.getElementById("game_window");
   if (!gameWindow) return;
 
-  /***************************************************************
-   Light Lionverse overlay-window cleanup
-  ****************************************************************/
-
-  const overlayObserver = new MutationObserver(() => {
-    const overlay = document.querySelector(".overlay_window:not(.lionverse-window-done)");
-    if (!overlay) return;
-
-    overlay.classList.add("lionverse-window-done", "lionverse-window");
-
-    const titleBar = overlay.querySelector("h3");
-    if (titleBar) {
-      titleBar.classList.add("lionverse-title-bar");
-      titleBar.style.paddingLeft = "5px";
-    }
-  });
-
-  overlayObserver.observe(gameWindow, {
-    attributes: true,
-    childList: true,
-    subtree: true
-  });
 
   /***************************************************************
    Song / Playlist classes
@@ -1172,20 +1150,6 @@ button.lionverse-player-button:active {
   border-radius: 0;
 }
 
-.lionverse-window {
-  border: 3px double #B2B2B2 !important;
-  background: #ffffff !important;
-}
-
-.lionverse-title-bar {
-  margin-top: 0 !important;
-  padding-top: 3px !important;
-  padding-bottom: 3px !important;
-  background: var(--lionverse-accent, #286FD0) !important;
-  color: #ffffff !important;
-  border-bottom: 3px double #B2B2B2 !important;
-  font-family: Georgia, "Times New Roman", Times, serif !important;
-}
 
 @media (max-width: 700px) {
   #lionverse-player {
