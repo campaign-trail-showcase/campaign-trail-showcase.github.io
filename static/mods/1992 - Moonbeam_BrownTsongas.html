@@ -1,8 +1,10 @@
+const gameWindow = document.getElementById('game_window');
 
-new MutationObserver(() => {
-    document.querySelectorAll('img.person_image').forEach(img => img.remove());
-}).observe(document.body, { childList: true, subtree: true });
-
+if (gameWindow) {
+  new MutationObserver(() => {
+    gameWindow.querySelectorAll('img.person_image').forEach(img => img.remove());
+  }).observe(gameWindow, { childList: true, subtree: true });
+}
 var dncKeynoteSpeaker = "Chris Dodd"
 
 const Dialog = {
@@ -24952,7 +24954,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "pk": 11112553,
         "fields": {
             "answer": 1114946,
-            "issue": 27,
+            "issue": "27",
             "issue_score": -0.5,
             "issue_importance": 5
         }
@@ -25082,7 +25084,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "pk": 11112627,
         "fields": {
             "answer": 3368,
-            "issue": 27,
+            "issue": "27",
             "issue_score": 0.15,
             "issue_importance": 1
         }
@@ -25102,7 +25104,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "pk": 11112631,
         "fields": {
             "answer": 3369,
-            "issue": 27,
+            "issue": "27",
             "issue_score": 0.75,
             "issue_importance": 2
         }
@@ -37954,7 +37956,7 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-              <div style="font-family: Georgia, 'Times New Roman', serif; max-width: 700px; margin: 1em auto; background-color: #ffffff; color: #333333; line-height: 1.6;">
+              <div style="font-family: Georgia, 'Times New Roman', serif; max-width: 800px; margin: 1em auto; background-color: #ffffff; color: #333333; line-height: 1.6;">
 
 				<div style="text-align: center; margin-bottom: 25px;">
 					<img src='https://i.imgur.com/eJ2tFBM.png' style="max-width: 98%; height: auto; border: 1px solid #ddd; padding: 4px; box-shadow: 2px 2px 8px rgba(0,0,0,0.1);">
@@ -42253,53 +42255,306 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-                  <h1><u>Saturday Night Live - Season 21 Episode 1. Cold Open</u></h1>
-                  <img src='https://i.imgur.com/AT94Yay.png'>
-                  <h4>BREUER:</h4> <li>Good evening, I’m Bill Bonds. Welcome to the first Democratic primary debate. The winner of the primary will go on to face the Republican nominee - who could be anyone. He could be Jim Baker, Jim Baker, or even Jim Baker. On the stage now is Governor Bill Clinton (DARRELL HAMMOND), Governor Mario Cuomo (NORM MCDONALD), Governor Ann Richards (ANA GASTEYER) and against all odds, Senator George Mitchell (MARK MCKINNEY).<li>
+                  <style>
+  .snl-transcript-wrapper {
+    background-color: #0b0c10;
+    color: #c5c6c7;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 30px auto;
+    border: 1px solid #1f2833;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
 
-                  <h4>MCKINNEY:</h4> <li>I’m just happy to be here!</li>
+  .snl-navbar {
+    background-color: #1f2833;
+    border-bottom: 3px solid #f1c40f;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-                  <h4>HANKS:</h4> <li>You have only 10 words left, Senator.</li>
+  .snl-db-logo {
+    font-family: Impact, sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+  }
 
-                  <h4>MCKINNEY:</h4> <li>(Smiles, nods and gives a thumbs up.)</li>
+  .snl-db-logo span {
+    color: #f1c40f;
+  }
 
-                  <h4>BREUER:</h4> <li>Now, onto the real candidates. Governor Clinton, many question your electability with your controversial past and your failure to win the primary last cycle. What would you say to these critics?</li>
+  .snl-header-metadata {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #c5c6c7;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
 
-                  <h4>HAMMOND:</h4> <li>(Smiles, very, very tightly. Chew a lemon, that sort of face) Vote Jerry Brown again, you morons.</li>
+  .snl-container {
+    padding: 30px 40px 40px 40px;
+  }
 
-                  <h4>GASTEYER:</h4> <li>See, this is exactly what I’ve been talking about. Who was one of Jerry Brown’s supporters? Women. And who is Governor Clinton calling morons? Women. How long are we going to tolerate this misogyny?</li>
+  .snl-main-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 5px 0;
+    line-height: 1.2;
+    border-bottom: 1px solid #1f2833;
+    padding-bottom: 10px;
+  }
 
-                  <h4>HAMMOND:</h4> <li>Well, jokes on you, because there are more men as registered Democrats.</li>
+  .snl-airdate {
+    font-size: 11px;
+    color: #8892b0;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    display: block;
+  }
 
-                  <h4>MCDONALD:</h4> <li>Now, see this is exactly why I ran for office. Governor Clinton is an abrasive, frankly Republican conservative. It’s tragic that he leads the polls – probably vote splitting between me and that slut Richards.</li>
+  .snl-screen-frame {
+    background-color: #000000;
+    border: 3px solid #1f2833;
+    border-radius: 4px;
+    padding: 6px;
+    margin-bottom: 35px;
+    text-align: center;
+    box-shadow: inset 0 0 15px rgba(255,255,255,0.05);
+  }
 
-                  <h4>MCKINNEY:</h4> <li>(While slowly tapping at his fingers to count) Mario you… mean. (Smirks and nods.)</li>
+  .snl-screen-frame img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 2px;
+  }
 
-                  <h4>BREUER:</h4> <li>That’s 7 words left, Senator. Would you like to beat traffic?</li>
+  .snl-frame-caption {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #f1c40f;
+    margin-top: 8px;
+    font-family: monospace;
+  }
 
-                  <h4>MCKINNEY:</h4> <li>. . . Yes please. Thank you very much Bill. (He sprints off stage)</li>
+  .snl-script-line {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+  }
 
-                  <h4>BREUER:</h4> <li>Now, Governor Cuomo. Many of your critics hold that New York under your watch has become a modern day Sodom and Gamorrah. Wherever you walk, the streets leave you ankle deep in blood, screams of horror reverberate in every corner and there are a reported 20 murders a second.</li>
+  .snl-character-name {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #f1c40f;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+  }
 
-                  <h4>MCDONALD:</h4> <li>Uh, do you have a question Bill?</li>
+  .snl-dialogue {
+    color: #ffffff;
+    padding-left: 10px;
+    border-left: 2px solid #1f2833;
+  }
 
-                  <h4>BREUER:</h4> <li>(Spends a minute flicking through sheets of paper while pensive. Finally he smiles and looks back up.) Ah, yes. Why have you failed your state?</li>
+  .snl-direction {
+    font-style: italic;
+    color: #8892b0;
+    background-color: rgba(31, 40, 51, 0.3);
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 20px 0;
+    border-left: 2px dashed #f1c40f;
+    font-size: 13px;
+  }
 
-                  <h4>MCDONALD:</h4> <li>Well, I would have to question that assessment. I’d say the blood only really gets foot deep. But if we want to talk about failing a state on crime, then we need to talk about Bill Clinton. Bill Clinton just recently executed a man named Wyatt Higgens. Now Wyatt, he was a poor little boy who grew up with nothing. When he tried to learn how to read and write, his teachers beat him with sticks. When he tried to seek employment, people sicced hounds on him. Finally, he swallowed his pride and went to the government welfare office to try and get enough support to live, and the office workers there pantsed him and laughed at him for having small genitals. For being nothing more than an innocent victim failed by society, Bill Clinton murdered him. Why? Just because he killed 12 children? Wyatt needed support, not death. The system failed him, and I think the American people won’t vote for a murderer like Bill Clinton!</li>
+  .snl-inner-parenthetical {
+    font-style: italic;
+    color: #8892b0;
+  }
 
-                  <h4>BREUER:</h4> <li>Strong words. Mr. Clinton, do you have a rebuttal?</li>
+  .snl-footer {
+    background-color: #0c0d12;
+    border-top: 1px solid #1f2833;
+    padding: 15px 40px;
+    font-size: 11px;
+    color: #45a29e;
+    text-align: center;
+  }
+</style>
 
-                  <h4>HAMMOND:</h4> <li>(Leaning on the podium, he takes a puff of marijuana and blows out a smoke ring) Nope.</li>
+<div class="snl-transcript-wrapper">
+  <div class="snl-navbar">
+    <div class="snl-db-logo">SNL<span>TRANSCRIPTS</span></div>
+    <div class="snl-header-metadata">Season 21, Episode 1</div>
+  </div>
 
-                  <h4>HANKS:</h4> <li>I see. Now, Governor Richards, you’ve openly accused many media junkets of being biased against you because of your gender. Do you hold that’s true?</li>
+  <div class="snl-container">
+    <h1 class="snl-main-title">Saturday Night Live - Season 21 Episode 1. Cold Open</h1>
+    <span class="snl-airdate">Air Date: September 30, 1995</span>
 
-                  <h4>GASTEYER:</h4> <li>Well—</li>
+    <div class="snl-screen-frame">
+      <img src="https://i.imgur.com/AT94Yay.png" alt="SNL Season 21 Cold Open Screenshot">
+    </div>
 
-                  <h4>BREUER:</h4> <li>I’m afraid that’s all the time we have for the debate - we look forward to the next debate, which promises to be more civilised. Isn’t that the case?</li>
+    <div class="snl-script-line">
+      <span class="snl-character-name">BREUER:</span>
+      <div class="snl-dialogue">
+        Good evening, I’m Bill Bonds. Welcome to the first Democratic primary debate. The winner of the primary will go on to face the Republican nominee - who could be anyone. He could be Jim Baker, Jim Baker, or even Jim Baker. On the stage now is Governor Bill Clinton (DARRELL HAMMOND), Governor Mario Cuomo (NORM MCDONALD), Governor Ann Richards (ANA GASTEYER) and against all odds, Senator George Mitchell (MARK MCKINNEY).
+      </div>
+    </div>
 
-                  (A panning shot of the three candidates. Richards is wiping a machete, Cuomo is cocking a gun and Clinton swings nunchucks while saying “woooh”)
+    <div class="snl-script-line">
+      <span class="snl-character-name">MCKINNEY:</span>
+      <div class="snl-dialogue">I’m just happy to be here!</div>
+    </div>
 
-                  <h4>BREUER:</h4> <li>It’s enough to admit that in hindsight, Jerry Brown wasn’t that bad. At the very least, we can say that LIVE FROM NEW YORK, IT’S SATURDAY NIGHT!</li>
+    <div class="snl-script-line">
+      <span class="snl-character-name">HANKS:</span>
+      <div class="snl-dialogue">You have only 10 words left, Senator.</div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">MCKINNEY:</span>
+      <div class="snl-dialogue">
+        <span class="snl-inner-parenthetical">(Smiles, nods and gives a thumbs up.)</span>
+      </div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">BREUER:</span>
+      <div class="snl-dialogue">
+        Now, onto the real candidates. Governor Clinton, many question your electability with your controversial past and your failure to win the primary last cycle. What would you say to these critics?
+      </div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">HAMMOND:</span>
+      <div class="snl-dialogue">
+        <span class="snl-inner-parenthetical">(Smiles, very, very tightly. Chew a lemon, that sort of face)</span> Vote Jerry Brown again, you morons.
+      </div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">GASTEYER:</span>
+      <div class="snl-dialogue">
+        See, this is exactly what I’ve been talking about. Who was one of Jerry Brown’s supporters? Women. And who is Governor Clinton calling morons? Women. How long are we going to tolerate this misogyny?
+      </div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">HAMMOND:</span>
+      <div class="snl-dialogue">Well, jokes on you, because there are more men as registered Democrats.</div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">MCDONALD:</span>
+      <div class="snl-dialogue">
+        Now, see this is exactly why I ran for office. Governor Clinton is an abrasive, frankly Republican conservative. It’s tragic that he leads the polls – probably vote splitting between me and that slut Richards.
+      </div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">MCKINNEY:</span>
+      <div class="snl-dialogue">
+        <span class="snl-inner-parenthetical">(While slowly tapping at his fingers to count)</span> Mario you… mean. <span class="snl-inner-parenthetical">(Smirks and nods.)</span>
+      </div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">BREUER:</span>
+      <div class="snl-dialogue">That’s 7 words left, Senator. Would you like to beat traffic?</div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">MCKINNEY:</span>
+      <div class="snl-dialogue">. . . Yes please. Thank you very much Bill. <span class="snl-inner-parenthetical">(He sprints off stage)</span></div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">BREUER:</span>
+      <div class="snl-dialogue">
+        Now, Governor Cuomo. Many of your critics hold that New York under your watch has become a modern day Sodom and Gamorrah. Wherever you walk, the streets leave you ankle deep in blood, screams of horror reverberate in every corner and there are a reported 20 murders a second.
+      </div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">MCDONALD:</span>
+      <div class="snl-dialogue">Uh, do you have a question Bill?</div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">BREUER:</span>
+      <div class="snl-dialogue">
+        <span class="snl-inner-parenthetical">(Spends a minute flicking through sheets of paper while pensive. Finally he smiles and looks back up.)</span> Ah, yes. Why have you failed your state?
+      </div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">MCDONALD:</span>
+      <div class="snl-dialogue">
+        Well, I would have to question that assessment. I’d say the blood only really gets foot deep. But if we want to talk about failing a state on crime, then we need to talk about Bill Clinton. Bill Clinton just recently executed a man named Wyatt Higgens. Now Wyatt, he was a poor little boy who grew up with nothing. When he tried to learn how to read and write, his teachers beat him with sticks. When he tried to seek employment, people sicced hounds on him. Finally, he swallowed his pride and went to the government welfare office to try and get enough support to live, and the office workers there pantsed him and laughed at him for having small genitals. For being nothing more than an innocent victim failed by society, Bill Clinton murdered him. Why? Just because he killed 12 children? Wyatt needed support, not death. The system failed him, and I think the American people won’t vote for a murderer like Bill Clinton!
+      </div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">BREUER:</span>
+      <div class="snl-dialogue">Strong words. Mr. Clinton, do you have a rebuttal?</div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">HAMMOND:</span>
+      <div class="snl-dialogue">
+        <span class="snl-inner-parenthetical">(Leaning on the podium, he takes a puff of marijuana and blows out a smoke ring)</span> Nope.
+      </div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">HANKS:</span>
+      <div class="snl-dialogue">I see. Now, Governor Richards, you’ve openly accused many media junkets of being biased against you because of your gender. Do you hold that’s true?</div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">GASTEYER:</span>
+      <div class="snl-dialogue">Well—</div>
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">BREUER:</span>
+      <div class="snl-dialogue">I’m afraid that’s all the time we have for the debate - we look forward to the next debate, which promises to be more civilised. Isn’t that the case?</div>
+    </div>
+
+    <div class="snl-direction">
+      (A panning shot of the three candidates. Richards is wiping a machete, Cuomo is cocking a gun and Clinton swings nunchucks while saying “woooh”)
+    </div>
+
+    <div class="snl-script-line">
+      <span class="snl-character-name">BREUER:</span>
+      <div class="snl-dialogue">
+        It’s enough to admit that in hindsight, Jerry Brown wasn’t that bad. At the very least, we can say that LIVE FROM NEW YORK, IT’S SATURDAY NIGHT!
+      </div>
+    </div>
+
+  </div>
+
+  <div class="snl-footer">
+    Weekly Episode Guide / SNL Digital Archive
+  </div>
+</div>
               `
         },
         {
@@ -42786,6 +43041,1346 @@ endingPicker = (out, totv, aa, quickstats) => {
 			</div>
         `
         },
+		{
+            "pk": "Cisneros Ending",
+            "conditions": {
+                "Win Type": requireEV(270),
+                "Answer Check": hasAns([115200, 1114872, 1114876, 115210, 1114874, 1114878]),
+                "Establishment Use": endingstuff["Establishment Use"],
+                "Running Mate": e.running_mate_last_name
+            },
+            "ending text": `
+			<style>
+			  .tny-98-container {
+				background-color: #fcfaf3;
+				color: #1a1a1a;
+				font-family: Georgia, "Times New Roman", Times, serif;
+				max-width: 760px;
+				margin: 20px auto;
+				border: 1px solid #d2c9b1;
+				box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+			  }
+
+			  .tny-98-header {
+				text-align: center;
+				padding: 20px 10px 10px 10px;
+				background-color: #fcfaf3;
+			  }
+
+			  .tny-98-masthead {
+				font-family: "Times New Roman", Times, Georgia, serif;
+				font-size: 32px;
+				font-weight: bold;
+				letter-spacing: 5px;
+				text-transform: uppercase;
+				color: #111111;
+				margin: 0;
+				line-height: 1.1;
+			  }
+
+			  .tny-98-subhead {
+				font-size: 10px;
+				font-family: Arial, Helvetica, sans-serif;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				color: #555555;
+				margin-top: 8px;
+				margin-bottom: 0;
+			  }
+
+			  .tny-98-double-rule {
+				border-top: 3px double #d2c9b1;
+				border-bottom: none;
+				height: 0;
+				margin: 12px auto;
+				width: 95%;
+			  }
+
+			  .tny-98-layout {
+				display: flex;
+				border-top: 1px solid #d2c9b1;
+				background-color: #ffffff;
+			  }
+
+			  .tny-98-sidebar {
+				width: 155px;
+				background-color: #fcfaf3;
+				border-right: 1px solid #d2c9b1;
+				padding: 20px 15px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				box-sizing: border-box;
+			  }
+
+			  .tny-98-sidebar-title {
+				font-weight: bold;
+				color: #8c1d1d;
+				text-transform: uppercase;
+				margin-bottom: 12px;
+				letter-spacing: 1px;
+			  }
+
+			  .tny-98-nav-list {
+				list-style-type: none;
+				padding: 0;
+				margin: 0 0 20px 0;
+			  }
+
+			  .tny-98-nav-list li {
+				margin-bottom: 8px;
+			  }
+
+			  .tny-98-nav-list a {
+				color: #333333;
+				text-decoration: none;
+			  }
+
+			  .tny-98-nav-list a:hover {
+				text-decoration: underline;
+				color: #8c1d1d;
+			  }
+
+			  .tny-98-article {
+				flex: 1;
+				padding: 25px 30px;
+				background-color: #ffffff;
+				box-sizing: border-box;
+			  }
+
+			  .tny-98-category {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 10px;
+				font-weight: bold;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				color: #8c1d1d;
+				margin-bottom: 10px;
+			  }
+
+			  .tny-98-title {
+				font-family: "Times New Roman", Times, Georgia, serif;
+				font-size: 26px;
+				font-weight: normal;
+				line-height: 1.2;
+				color: #000000;
+				margin: 0 0 5px 0;
+			  }
+
+			  .tny-98-byline {
+				font-style: italic;
+				font-size: 13px;
+				color: #333333;
+				margin-bottom: 2px;
+			  }
+
+			  .tny-98-issue-date {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 10px;
+				text-transform: uppercase;
+				color: #666666;
+				margin-bottom: 25px;
+				border-bottom: 1px solid #e2dac6;
+				padding-bottom: 10px;
+			  }
+
+			  .tny-98-paragraph {
+				font-size: 14px;
+				line-height: 1.6;
+				margin-bottom: 18px;
+				text-align: justify;
+				text-indent: 0;
+			  }
+
+			  .tny-98-dropcap {
+				float: left;
+				font-size: 52px;
+				line-height: 38px;
+				padding-top: 4px;
+				padding-right: 8px;
+				padding-left: 2px;
+				font-family: "Times New Roman", Times, Georgia, serif;
+				font-weight: bold;
+				color: #111111;
+			  }
+
+			  .tny-98-author-signoff {
+				text-align: right;
+				font-style: italic;
+				margin-top: 30px;
+				border-top: 1px dashed #d2c9b1;
+				padding-top: 15px;
+				font-size: 13px;
+				color: #444444;
+			  }
+
+			  .tny-98-footer {
+				background-color: #fcfaf3;
+				border-top: 1px solid #d2c9b1;
+				padding: 15px;
+				text-align: center;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 10px;
+				color: #666666;
+			  }
+
+			  .tny-98-footer a {
+				color: #666666;
+				text-decoration: none;
+				margin: 0 6px;
+			  }
+
+			  .tny-98-footer a:hover {
+				text-decoration: underline;
+			  }
+			</style>
+
+			<div class="tny-98-container">
+			  <div class="tny-98-header">
+				<h1 class="tny-98-masthead">The New Yorker</h1>
+				<p class="tny-98-subhead">The Electronic Edition &bull; Archives</p>
+				<div class="tny-98-double-rule"></div>
+			  </div>
+
+			  <div class="tny-98-layout">
+				<div class="tny-98-sidebar">
+				  <div class="tny-98-sidebar-title">Departments</div>
+				  <ul class="tny-98-nav-list">
+					<li><a href="#">Talk of the Town</a></li>
+					<li><a href="#">The Mail</a></li>
+					<li><a href="#">Comment</a></li>
+					<li><a href="#">Fiction</a></li>
+					<li><a href="#">The Theatre</a></li>
+					<li><a href="#">Books</a></li>
+				  </ul>
+				  
+				  <div class="tny-98-sidebar-title">Online Features</div>
+				  <ul class="tny-98-nav-list">
+					<li><a href="#">Current Issue</a></li>
+					<li><a href="#">Web Exclusives</a></li>
+					<li><a href="#">Article Archive</a></li>
+				  </ul>
+				</div>
+
+				<div class="tny-98-article">
+				  <div class="tny-98-category">Comment</div>
+				  <h2 class="tny-98-title">Jerry Brown as the first Latino President</h2>
+				  <div class="tny-98-byline">by Sandra Cisneros</div>
+				  <div class="tny-98-issue-date">Issue of October 1998</div>
+
+				  <p class="tny-98-paragraph">
+					<span class="tny-98-dropcap">T</span>hanks to the papers, we know what the columnists think. Thanks to round-the-clock cable, we know what the ex-prosecutors, the right-wing blondes, the teletropic law professors, and the disgraced political consultants think. Thanks to the polls, we know what "the American people" think. But what about the experts on human folly?
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					This summer, my plan was to do very selective radio listening, read no newspapers or news magazines, and leave my television screen profoundly, mercifully blank. There were books to read, others to finish, a few to read again. It was a lovely summer, and I was pleased with the decision to recuse myself from what had become since January The Only Story Worth Telling. I was not willing to trust reporters to report instead of gossip among themselves, unable to bear newscasters deflecting, ignoring, trivializing information–orchestrating its minor chords for the highest decibel. Therefore, I decided to get my news the old-fashioned way: conversation, public eavesdropping, and word of mouth.
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					I hoped to avoid the spectacle I was sure would be mounted, fearing that at any minute I might have to witness ex-Presidential friends selling that friendship for the higher salaries of broadcast journalism; anticipating the nausea that might rise when quaking Democrats took firm positions on or over the fence in case the polls changed. I imagined feral Republicans, smelling blood and a shot at the totalitarian power they believe is rightfully theirs; self-congratulatory pundits sifting through "history" for nuggets of dubious relevancy.
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					I did not relinquish my summer plans, but summer is over now and I have begun to supplement verbal accounts of the running news with tentative perusal of C-SPAN, brief glimpses of anchorfolk, squinting glances at newspaper--trying belatedly to get the story straight. What, I have been wondering, is the story--the one only the public seems to know? And what does it mean?
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					As serious as lying is, it is not a national catastrophe. Women leaving hotels following trysts with their extramarital lovers tell pollsters they abominate Mr. Brown’s behavior. Relaxed millionaires fresh off of filing their tax returns for pennies on the dollar frown earnestly into the camera at the mere thought of such malfeasance. No one "approves" of lying, but, unlike goodness in Plymouth Rock society, a fib comes up short. As public citizens, people don't get arrested for lying, but they can suffer its grave consequences.
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					Still, it is clear that this is not a narrative of lying or even of its consequences for the people involved. Is there anyone who believes that that was all the investigation had in mind? Lying is the Independent Counsel's loss leader, the item displayed to lure the customers inside the shop. Nor was it ever a story about deception--a deceptor and a deceptee (or the other way around). It played that way a little: a worn tale of middle-aged vulnerability and bad judgement. The Achilles' heel analogy flashed for a bit, but had no staying power, although its ultra meaning--that Achilles' heel was given to Achilles, not to a lesser man--lay quietly dormant under the cliché.
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					At another point, the story seemed to be about high and impeachable crimes like the ones we have had some experience with: the suborning of federal agencies; the exchange of billion-dollar contracts for proof of indiscretion; the extermination of infants in illegal wars mounted and waged for money and power. Until something like those abuses surfaces, the story will have to make do with thinner stuff: alleged perjury and "Jerry Brown did something I didn’t like." Whatever the media promotes and the chorus chants, whatever dapples dinner tables, this is not a mundane story of sex, lies, and videotape. The real story is none of these. Not perjury, or high crimes. Nor is it even the story of a brilliant President naive enough to believe, along with the rest of the citizenry, that there were lines one's enemies would not cross, lengths to which they would not go--a profound, perhaps irrevocable, error in judgment.
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					But the enemies possess a revulsion against what? What is being violated, ruptured, defiled? The Oval Office? The voting booth? The fourth grade? Marriage vows? The flag? Whatever answer is given, underneath the national embarrassment churns a disquiet turned to dread and now anger.
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					Latino men seemed to understand it right away. Years ago, in the middle of the Central Valley investigation, one heard the first murmurs: white skin notwithstanding, this is our first Latino President. More Latino than any actual Latino person who could ever be elected in our children's lifetime. After all, Brown displays almost every trope of Latinoness, specifically that of a Chicano: Catholic household, marginalized, hardworking, Spanish-speaking, taco-and-burrito-loving boy from California. And when virtually all the Latino Clinton appointees began, one by one, to disappear, when the President's mind, his privacy, his unpoliced decisions became the focus of the persecution, when he was metaphorically seized and bodysearched, who could gainsay these Latino men who knew whereof they spoke? The message was clear: "No matter how smart you are, how hard you work, how much coin you earn for us, we will put you in your place or put you out of the place you have somehow, albeit with our permission, achieved. You will be fired from your job, sent away in disgrace, and–who knows?--maybe sentenced and jailed to boot. In short, unless you do as we say (i.e., assimilate at once), your expletives belong to us."
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					For a large segment of the population who are not Latinos or members of other minorities, the elusive story left visible tracks: from target sighted to attack, to discrimination, to criminalization, and now, in some quarters, to crucifixion. The always and already guilty "perp" is being hunted down not by a prosecutor's obsessive application of law but by a different kind of pursuer, one who makes new laws out of the shards of those he breaks.
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					Certain freedoms I once imagined as being in a vault somewhere, like ancient jewels kept safe from thieves. No single official or group could break in and remove them, certainly not in public. The image is juvenile, of course, and I have not had recourse to it for the whole of my adult life. Yet it is useful now to explain what I perceive as the real story. For each bootstep the office of the Independent Counsel has taken smashes one of those jewels--a ruby of grand-jury secrecy here, a sapphire of due process there. Such concentrated power may be reminiscent of a solitary Torquemada on a holy mission of lethal inquisition. It may even suggest a fatwa. But neither applies. This is Slaughtergate. A sustained, bloody, arrogant coup d'éat. The Presidency is being stolen from us. And the people–at least the nation’s Latinos–know it.
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					I don't regret my "news-free" summer. Getting at the story in that retrograde fashion has been rewarding. Early this week, a neighbor called to ask if I would march. Where? To Washington, she said. Absolutely, I answered, without even asking what for. "We have to prevent the collapse of our Constitution," she said.
+				  </p>
+
+				  <p class="tny-98-paragraph">
+					We meet tonight.
+				  </p>
+
+				  <div class="tny-98-author-signoff">
+					&mdash;Sandra Cisneros
+				  </div>
+				</div>
+			  </div>
+
+			  <div class="tny-98-footer">
+				<span>All contents &copy; 1998 The New Yorker Magazine, Inc. All rights reserved.</span><br>
+				<span style="display:inline-block; margin-top:5px;">
+				  <a href="#">Contact Us</a> | <a href="#">Subscribe</a> | <a href="#">Advertising</a>
+				</span>
+			  </div>
+			</div>
+			`
+		},
+		{
+            "pk": "Pantheon Jerry",
+            "conditions": {
+                "Win Type": requireEV(270),
+                "Answer Check": hasAns([114793, 114817]),
+                "Establishment Use": endingstuff["Establishment Use"],
+                "Running Mate": e.running_mate_last_name
+            },
+            "ending text": `<style>
+			  .chronicle-2050-wrapper {
+				background-color: #080c14;
+				color: #e2e8f0;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+				max-width: 740px;
+				margin: 30px auto;
+				border: 1px solid rgba(197, 160, 89, 0.3);
+				border-radius: 8px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(197, 160, 89, 0.05);
+				overflow: hidden;
+				box-sizing: border-box;
+			  }
+
+			  .chronicle-header-hud {
+				background-color: #0c1220;
+				border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+				padding: 10px 20px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				font-size: 10px;
+				font-family: Arial, sans-serif;
+				letter-spacing: 1.5px;
+				color: #c5a059;
+				text-transform: uppercase;
+			  }
+
+			  .hud-status {
+				display: flex;
+				align-items: center;
+				gap: 6px;
+			  }
+
+			  .hud-pulse {
+				width: 6px;
+				height: 6px;
+				background-color: #c5a059;
+				border-radius: 50%;
+				box-shadow: 0 0 8px #c5a059;
+			  }
+
+			  .chronicle-branding {
+				padding: 30px 40px 10px 40px;
+				text-align: center;
+			  }
+
+			  .chronicle-edition {
+				font-size: 11px;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 3px;
+				color: #c5a059;
+				margin-bottom: 15px;
+			  }
+
+			  .chronicle-title {
+				font-family: "Georgia", serif;
+				font-size: 32px;
+				font-weight: 400;
+				line-height: 1.25;
+				color: #ffffff;
+				margin: 0 0 10px 0;
+				letter-spacing: -0.5px;
+			  }
+
+			  .chronicle-meta {
+				font-size: 12px;
+				color: #8a99ad;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 15px;
+				margin-top: 15px;
+				padding-bottom: 20px;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			  }
+
+			  .chronicle-author {
+				font-weight: bold;
+				color: #ffffff;
+			  }
+
+			  .chronicle-body {
+				padding: 10px 40px 40px 40px;
+			  }
+
+			  .chronicle-paragraph {
+				font-size: 15px;
+				line-height: 1.7;
+				margin-bottom: 22px;
+				color: #cbd5e1;
+				text-align: justify;
+			  }
+
+			  .chronicle-callout {
+				background-color: rgba(12, 18, 32, 0.8);
+				border-left: 3px solid #c5a059;
+				padding: 18px;
+				margin: 30px 0;
+				border-radius: 0 4px 4px 0;
+			  }
+
+			  .chronicle-callout p {
+				margin: 0;
+				font-size: 14.5px;
+				font-style: italic;
+				color: #94a3b8;
+				line-height: 1.6;
+			  }
+
+			  .chronicle-footer {
+				background-color: #0c1220;
+				border-top: 1px solid rgba(197, 160, 89, 0.2);
+				padding: 15px 40px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				font-size: 11px;
+				color: #64748b;
+			  }
+
+			  .chronicle-footer-links a {
+				color: #c5a059;
+				text-decoration: none;
+				margin-left: 15px;
+			  }
+
+			  .chronicle-footer-links a:hover {
+				text-decoration: underline;
+			  }
+			</style>
+
+			<div class="chronicle-2050-wrapper">
+			  <div class="chronicle-header-hud">
+				<span>Eurasian News Consortium / Archive</span>
+				<div class="hud-status">
+				</div>
+			  </div>
+
+			  <div class="chronicle-branding">
+				<div class="chronicle-edition">The WESTERN Diplomatic Gazette</div>
+				<h1 class="chronicle-title">Jerry Brown Reburied in Pantheon</h1>
+				
+				<div class="chronicle-meta">
+				  <span class="chronicle-author">Niles Hendricks</span>
+				  <span>&bull;</span>
+				  <span>April 26, 2050</span>
+				</div>
+			  </div>
+
+			  <div class="chronicle-body">
+				<p class="chronicle-paragraph">
+				  Decades after his death, Jerry Brown has become the first American man, first American citizen, and first American president to be interred in the Pantheon, the resting place of many of France’s national heroes. Since Josephine Baker’s addition to the Pantheon in 2021, no one born in the United States has been buried there, and Baker lived most of her life in France, renouncing her American citizenship. Brown, on the contrary, lived most of his life in the U.S., never gained French citizenship, and was buried in the soil of his home state of California.
+				</p>
+
+				<p class="chronicle-paragraph">
+				  Although Brown’s political legacy in the United States is somewhat mixed, he is widely considered to be a champion of European integration in France, where his campaigning on behalf of the Maastricht Treaty to integrate the EU more deeply and introduce a common currency is widely considered to have helped sway the French into ratifying the treaty. During his time in office, Brown continued his integrationist approach, coordinating American efforts to deal with the EU and actively encouraging further integration measures.
+				</p>
+
+				<p class="chronicle-paragraph">
+				  After his presidency, Brown continued his advocacy for the EU. Although he never officially moved to Europe or became a European citizen, he founded the Brown Foundation shortly after leaving office as an international nonprofit dedicated to spreading peace and advocating human rights, an organization that often helps act as a conduit to foster cultural connections and conduct diplomacy. Brown’s work with his foundation is widely seen as crucial in expanding the EU in the face of conflicts in Eastern Europe, and he won the Nobel Peace Prize in 2019 for his efforts on that front. Likewise, he was a constant figure in European capitals in this time, serving as a confidant and friend to many European heads of state.
+				</p>
+
+				<div class="chronicle-callout">
+				  <p>
+					In the 2025 Treaty of Minsk that provided for Russia’s entry into the EU and gave the United States a modified economic membership, French efforts led to Brown being cited as an official “source of inspiration.”
+				  </p>
+				</div>
+
+				<p class="chronicle-paragraph">
+				  In particular, the nation of France never forgot his efforts to help the EU, and he was constantly feted as an exemplary politician in France during his life, with French president Ségolène Royal awarding him the Legion of Honour in 2010 in a public ceremony. Although politicians are notoriously unpopular in France, Brown sported an approval rating of 80% during his presidency, the highest of any foreign leader, a number that held in retrospective surveys until his death.
+				</p>
+
+				<p class="chronicle-paragraph">
+				  While Brown laid in state in the U.S. Capitol after his death and was buried in California, an online campaign in France called for him to be interred in the Pantheon among great French heroes such as Victor Hugo and Voltaire. Although this campaign existed for many years, it was only recently that it began to gain serious steam, becoming a sensation on French-language social media accounts. In turn, the French government officially approved for Brown to be interred there, and with the permission of his family, his remains were moved to Paris and reburied in a public ceremony featuring the French army.
+				</p>
+
+				<p class="chronicle-paragraph">
+				  Although Brown’s presence in the Pantheon has drawn the ire of many who claim that the crypt should only be for French citizens, owing to Brown’s continued popularity in France and the rest of Europe, the move has been met with broad public support. At the time, the French government has announced that Brown’s reburial was an “extraordinary circumstance owing to his deeds for the nation of France and the continent of Europe,” and that it currently has no plans to inter other foreign leaders.
+				</p>
+			  </div>
+
+			  <div class="chronicle-footer">
+				<span>ENC Digital Network &copy; 2050</span>
+				<div class="chronicle-footer-links">
+				  <a href="#">Security Protocol</a>
+				  <a href="#">Terms of Access</a>
+				</div>
+			  </div>
+			</div>`
+		},
+		{
+            "pk": "Jerry Brown Aura",
+            "conditions": {
+                "Win Type": requireEV(270),
+                "Answer Check": hasAns([114728, 114750, 114769]),
+                "Establishment Use": endingstuff["Establishment Use"],
+                "Running Mate": e.running_mate_last_name
+            },
+            "ending text": `
+			<style>
+			  .slate-article-wrapper {
+				background-color: #ffffff;
+				color: #111111;
+				font-family: "Georgia", Times, "Times New Roman", serif;
+				max-width: 660px;
+				margin: 30px auto;
+				border: 1px solid #e2e8f0;
+				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+				box-sizing: border-box;
+			  }
+
+			  .slate-header-bar {
+				border-bottom: 2px solid #a80c14;
+				padding: 15px 30px;
+				background-color: #ffffff;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			  }
+
+			  .slate-logo {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+				font-weight: 900;
+				font-size: 26px;
+				letter-spacing: -1.5px;
+				color: #111111;
+				text-decoration: none;
+				text-transform: lowercase;
+			  }
+
+			  .slate-logo span {
+				color: #a80c14;
+				font-weight: 300;
+			  }
+
+			  .slate-section-tag {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+				font-size: 10px;
+				font-weight: 800;
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				color: #a80c14;
+			  }
+
+			  .slate-content {
+				padding: 30px 40px 40px 40px;
+			  }
+
+			  .slate-category {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+				font-size: 11px;
+				font-weight: 800;
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				color: #a80c14;
+				margin-bottom: 8px;
+				display: block;
+			  }
+
+			  .slate-headline {
+				font-size: 34px;
+				font-weight: 700;
+				line-height: 1.15;
+				color: #000000;
+				margin: 0 0 15px 0;
+				letter-spacing: -0.5px;
+			  }
+
+			  .slate-meta-block {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+				font-size: 12px;
+				color: #555555;
+				border-top: 1px solid #eeeeee;
+				border-bottom: 1px solid #eeeeee;
+				padding: 10px 0;
+				margin-bottom: 25px;
+				display: flex;
+				justify-content: space-between;
+			  }
+
+			  .slate-author {
+				font-weight: 700;
+				color: #111111;
+			  }
+
+			  .slate-paragraph {
+				font-size: 16px;
+				line-height: 1.65;
+				color: #222222;
+				margin-bottom: 20px;
+				text-align: left;
+			  }
+
+			  .slate-quote-block {
+				background-color: #fcfcfc;
+				border-left: 4px solid #a80c14;
+				padding: 15px 20px;
+				margin: 25px 0;
+				font-size: 15px;
+				font-style: italic;
+				color: #444444;
+			  }
+
+			  .slate-footer {
+				background-color: #fafafa;
+				border-top: 1px solid #eeeeee;
+				padding: 20px 40px;
+				text-align: center;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+				font-size: 11px;
+				color: #777777;
+			  }
+
+			  .slate-footer a {
+				color: #a80c14;
+				text-decoration: none;
+				margin: 0 8px;
+			  }
+
+			  .slate-footer a:hover {
+				text-decoration: underline;
+			  }
+			</style>
+
+			<div class="slate-article-wrapper">
+			  <div class="slate-header-bar">
+				<div class="slate-logo">slate<span>/</span></div>
+				<div class="slate-section-tag">Culture</div>
+			  </div>
+
+			  <div class="slate-content">
+				<span class="slate-category">Internet Culture</span>
+				<h1 class="slate-headline">Did Jerry Brown Invent Aura?</h1>
+				
+				<div class="slate-meta-block">
+				  <div>By <span class="slate-author">Allison Kostel</span></div>
+				  <div>March 6, 2025</div>
+				</div>
+
+				<p class="slate-paragraph">
+				  One term that has gained recent popularity is “aura,” which website Know Your Meme describes as “a slang term that was popularized online in 2023 and 2024, often used to compliment men for their charisma or presence.” Although the word has existed for centuries, few are certain where its origins come from, with Know Your Meme suggesting that “use of the term ‘aura’ is often associated with Liverpool center-back Van Djik, with a New York Times article from October 2020 reading, ‘Van Dijk’s mistakes can be dismissed because, basically, he has an aura,’” claiming that it was first popular among soccer fans before permeating into the mainstream.
+				</p>
+
+				<p class="slate-paragraph">
+				  Upon further investigation, though, the origin of the world aura, as it relates to complimenting men for their charisma or presence, might belong to no other man than Jerry Brown, the 42nd President of the United States. First, in the 1979 song California Über Alles, the Dead Kennedys sing “I am Governor Jerry Brown; my aura smiles and never frowns.” While this could refer to the much older understanding of aura as a sort of energy field, it is also entirely possible that the Dead Kennedys were referring to Brown in the context of personality, making him possibly the first person to be associated with aura.
+				</p>
+
+				<p class="slate-paragraph">
+				  Going forward, Brown would later embrace the concept of aura himself. In a 1992 speech in Berlin, which was little-covered at the time but since has gained a great deal of recognition, often playing in clips about Brown’s career, Brown’s speechwriting team wrote that “the goal of this speech should be to build your own aura the same way that Reagan and Kennedy did.” In a memo to a staffer after the speech, Brown wrote “the building of aura went well, I think, even if I don’t feel like I’m Kennedy yet.”
+				</p>
+
+				<div class="slate-quote-block font-style-italic">
+				  “I feel like stepping up for a big moment like that helped increase my brand... I wouldn’t call it aura farming so much as aura tinkering.” <br>
+				  <span style="font-size: 11px; text-transform: uppercase; font-weight: bold; color: #777; display: block; margin-top: 5px;">— Jerry Brown, 1997</span>
+				</div>
+
+				<p class="slate-paragraph">
+				  While the question of whether Brown invented aura or not is debatable, one thing that seems undeniable is that he was the first person to use the term “aura farming,” to describe actions that increase the level of one’s aura. In 1997, during a meeting with German chancellor Björn Engholm, Brown referenced his 1992 speech, saying that “I feel like stepping up for a big moment like that helped increase my brand, even if it wasn’t a tear down this wall moment. It wasn’t very organic, though… I wouldn’t call it aura farming so much as aura tinkering.”
+				</p>
+
+				<p class="slate-paragraph">
+				  So maybe Jerry Brown really did invent aura, or at the very least, become one of the first people to adopt the term. With that in mind, did he actually have any aura, or did he succeed in his presidential ambitions in spite of being aura-less? Given that he was broadly well-liked and successful, one has to imagine that he succeeded on the aura front. So there you go: Jerry Brown was the first president to not only consciously farm his own aura, but also the first president to have it while knowing exactly what he had.
+				</p>
+			  </div>
+
+			  <div class="slate-footer">
+				<div>Slate is published by The Slate Group, a Graham Holdings Company.</div>
+				<div style="margin-top: 6px;">
+				  <a href="#">About Us</a> | <a href="#">Work With Us</a> | <a href="#">Contact</a> | <a href="#">Privacy Policy</a>
+				</div>
+			  </div>
+			</div>
+			`
+		},
+		{
+            "pk": "Cuban Thaw",
+            "conditions": {
+                "Win Type": requireEV(270),
+                "Answer Check": hasAns([1114869]),
+                "Establishment Use": endingstuff["Establishment Use"],
+                "Running Mate": e.running_mate_last_name
+            },
+            "ending text": `<style>
+			  .ap-wire-wrapper {
+				background-color: #ffffff;
+				color: #000000;
+				font-family: "Times New Roman", Times, Georgia, serif;
+				font-size: 14px;
+				line-height: 1.5;
+				max-width: 680px;
+				margin: 20px auto;
+				border: 1px solid #999999;
+				padding: 15px;
+				box-sizing: border-box;
+			  }
+
+			  .ap-wire-header {
+				border-bottom: 2px solid #000000;
+				padding-bottom: 8px;
+				margin-bottom: 15px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			  }
+
+			  .ap-logo-area {
+				display: flex;
+				align-items: center;
+			  }
+
+			  .ap-red-badge {
+				background-color: #cc0000;
+				color: #ffffff;
+				font-family: "Arial Black", Gadget, sans-serif;
+				font-size: 18px;
+				font-weight: bold;
+				padding: 2px 8px;
+				margin-right: 10px;
+				letter-spacing: -1px;
+				line-height: 1;
+			  }
+
+			  .ap-logo-text {
+				font-family: Arial, Helvetica, sans-serif;
+				font-weight: bold;
+				font-size: 14px;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+			  }
+
+			  .ap-wire-tag {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				color: #666666;
+				text-transform: uppercase;
+				font-weight: bold;
+			  }
+
+			  .ap-wire-title {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 22px;
+				font-weight: bold;
+				line-height: 1.2;
+				margin: 0 0 10px 0;
+				color: #000000;
+			  }
+
+			  .ap-wire-meta {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				color: #555555;
+				margin-bottom: 15px;
+				border-bottom: 1px solid #cccccc;
+				padding-bottom: 8px;
+			  }
+
+			  .ap-wire-meta strong {
+				color: #000000;
+			  }
+
+			  .ap-wire-paragraph {
+				margin-bottom: 14px;
+				text-align: justify;
+			  }
+
+			  .ap-photo-frame {
+				float: right;
+				width: 230px;
+				border: 1px solid #888888;
+				padding: 4px;
+				background-color: #f7f7f7;
+				margin: 0 0 12px 15px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				color: #333333;
+				line-height: 1.3;
+			  }
+
+			  .ap-photo-placeholder {
+				  width: 100%;
+				  background-color: #dddddd;
+				  border: 1px solid #777777;
+				  display: block; 
+				  overflow: hidden;
+				}
+
+				.ap-photo-placeholder img {
+				  width: 100%;
+				  height: auto;
+				  display: block;
+				}
+
+			  .ap-photo-caption {
+				padding: 2px;
+			  }
+
+			  .ap-dateline {
+				font-weight: bold;
+				font-family: Arial, Helvetica, sans-serif;
+			  }
+
+			  .ap-wire-footer {
+				border-top: 1px solid #cccccc;
+				padding-top: 10px;
+				margin-top: 20px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 10px;
+				color: #666666;
+				text-align: center;
+			  }
+			</style>
+
+			<div class="ap-wire-wrapper">
+			  <div class="ap-wire-header">
+				<div class="ap-logo-area">
+				  <div class="ap-red-badge">AP</div>
+				  <div class="ap-logo-text">The Associated Press</div>
+				</div>
+				<div class="ap-wire-tag">World News Wire</div>
+			  </div>
+
+			  <h1 class="ap-wire-title">With Brazil’s Shuttle Diplomacy, Cuba Reenters the World Stage</h1>
+			  <div class="ap-wire-meta">
+				By <strong>FRANCISCO MORALES</strong>, Associated Press Writer<br>
+				Published: <strong>July 27, 1999</strong>
+			  </div>
+
+			  <div class="ap-photo-frame">
+			  <div class="ap-photo-placeholder">
+				<img src="https://file.garden/aNtAfG887DiA_7lO/Moonbeam/fidel.png" alt="Fidel Castro">
+			  </div>
+			  <div class="ap-photo-caption">
+				<strong>NORMALIZING RELATIONS:</strong> Cuban President Fidel Castro during the historic diplomatic signing ceremony in Brasilia on Tuesday. (AP Photo)
+			  </div>
+			</div>
+
+			  <p class="ap-wire-paragraph">
+				<span class="ap-dateline">BRASILIA (AP) —</span> In a historic ceremony, American president Jerry Brown and Cuban president Fidel Castro signed a diplomatic agreement normalizing relations between the two nations, including redesignating the Cuban and American embassies in Havana and Washington D.C. and, most importantly, lifting the American embargo on the island. The two men were accompanied by Brazilian president Lula da Silva, who they credited as having been a driving force behind the agreement.
+			  </p>
+
+			  <p class="ap-wire-paragraph">
+				This move marks a significant turning point in American diplomatic relations with Cuba, which have been extremely tenuous since the Cuban Revolution during the Cold War, with the American government having taken a wide variety of actions to topple Castro’s government, all to no avail. Since the end of the Cold War, however, attitudes towards Cuba have greatly softened in the face of the lack of a global communist threat, with many believing that Cuba can be co-opted into the global economic system as a way of encouraging political moderation in the country. Similarly, Cuba’s economy has struggled severely since the Soviet Union’s collapse, and many frame the question of global integration in Cuba as a humanitarian issue, regardless of the political impacts.
+			  </p>
+
+			  <p class="ap-wire-paragraph">
+				Lula is a member of the latter group, publicly framing Cuba’s current existence as a humanitarian catastrophe. After his 1994 election as president of Brazil as a left-wing social democrat, he quickly sought to bolster Brazilian relations with the beleaguered island, believing that Cuba, while flawed, is ultimately a sovereign nation. In particular, Lula has sought the cooperation of the U.S. in reopening Cuba to the world, stating that “the embargo experiment has resulted in mass famine and economic chaos.”
+			  </p>
+
+			  <p class="ap-wire-paragraph">
+				Luckily for Lula, he has found a willing partner in Brown, whose diplomacy has marked a much more flexible interpretation of the international order than his predecessors, with Brown often showing a willingness to break with American diplomatic tradition in the name of pursuing the country’s interests. Over the past five years, Brown has met with and spoken with Lula over a dozen times, with Cuba’s status often heavily figuring into their discussions. At the same time, Lula has acted as a conduit to Cuba, transmitting Castro’s messages to Brown and vice versa in a process that many have compared to Henry Kissinger’s famed “shuttle diplomacy” that saw Israel and Egypt achieve rapprochement in the Camp Document Accords.
+			  </p>
+
+			  <p class="ap-wire-paragraph">
+				Brown’s embrace of Cuba has come at the expense of Cuban-American exiles in the United States, who have raised substantial opposition to the agreement, claiming that it legitimizes an illegitimate government. Brown, for his part, has argued that his approach to Cuba is in the Cuban people’s best interest, as it forces the Castro regime to comply with international laws and standards. Some cynical observers have noted that Brown announced the agreement a week after the 1998 U.S. midterm elections, though he claims that the timing was pure coincidence.
+			  </p>
+
+			  <p class="ap-wire-paragraph">
+				Whatever the case, while the agreement has proved moderately popular in the U.S., its reactions have been universally popular in Cuba, with hundreds of thousands of Cuban citizens taking to the streets of Havana to celebrate, with many waving American and Brazilian flags. Additionally, the agreement has received international praise, with leaders from all across the ideological spectrum hailing it as a victory for human rights and the mark of a turning point in post-Cold War international relations.
+			  </p>
+
+			  <div class="ap-wire-footer">
+				Copyright 1999 Associated Press. All rights reserved. This material may not be published, broadcast, rewritten, or redistributed.
+			  </div>
+			</div>
+			`
+		},
+		{
+            "pk": "Franc Debate",
+            "conditions": {
+                "Win Type": requireEV(270),
+                "Answer Check": hasAns([114788, 114812]),
+                "Establishment Use": endingstuff["Establishment Use"],
+                "Running Mate": e.running_mate_last_name
+            },
+            "ending text": `
+			<style>
+			  .nyt-wrapper {
+				background-color: #ffffff;
+				color: #000000;
+				font-family: Georgia, "Times New Roman", Times, serif;
+				max-width: 820px;
+				margin: 20px auto;
+				border: 1px solid #dddddd;
+				padding: 15px;
+				box-sizing: border-box;
+			  }
+
+			  .nyt-header {
+				text-align: center;
+				margin-bottom: 10px;
+			  }
+
+			  .nyt-logo {
+				font-family: "Old English Text MT", "Engravers Old English", "Times New Roman", Times, serif;
+				font-size: 40px;
+				font-weight: normal;
+				margin: 0;
+				line-height: 1;
+				letter-spacing: -0.5px;
+			  }
+
+			  .nyt-date-bar {
+				border-top: 1px solid #000000;
+				border-bottom: 4px double #000000;
+				padding: 4px 0;
+				margin: 10px 0 15px 0;
+				display: flex;
+				justify-content: space-between;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 10px;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				color: #333333;
+			  }
+
+			  .nyt-section-link {
+				font-weight: bold;
+				color: #000000;
+				text-decoration: none;
+			  }
+
+			  .nyt-layout {
+				display: flex;
+				gap: 20px;
+			  }
+
+			  .nyt-main-column {
+				flex: 1;
+				max-width: 580px;
+			  }
+
+			  .nyt-sidebar {
+				width: 180px;
+				border-left: 1px solid #cccccc;
+				padding-left: 15px;
+				font-family: Arial, Helvetica, sans-serif;
+				box-sizing: border-box;
+			  }
+
+			  .nyt-headline {
+				font-size: 28px;
+				font-weight: bold;
+				line-height: 1.15;
+				margin: 0 0 10px 0;
+				color: #000000;
+			  }
+
+			  .nyt-byline-box {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				color: #333333;
+				border-bottom: 1px solid #e2e2e2;
+				padding-bottom: 8px;
+				margin-bottom: 18px;
+			  }
+
+			  .nyt-byline {
+				text-transform: uppercase;
+				font-weight: bold;
+				color: #000000;
+			  }
+
+			  .nyt-paragraph {
+				font-size: 13.5px;
+				line-height: 1.55;
+				margin-bottom: 16px;
+				text-align: justify;
+			  }
+
+			  .nyt-tool-box {
+				border: 1px solid #dddddd;
+				background-color: #f7f7f7;
+				padding: 10px;
+				margin-bottom: 15px;
+				font-size: 11px;
+			  }
+
+			  .nyt-tool-title {
+				font-weight: bold;
+				text-transform: uppercase;
+				border-bottom: 1px solid #cccccc;
+				padding-bottom: 3px;
+				margin-bottom: 8px;
+				color: #000000;
+			  }
+
+			  .nyt-tool-list {
+				list-style-type: none;
+				padding: 0;
+				margin: 0;
+			  }
+
+			  .nyt-tool-list li {
+				margin-bottom: 6px;
+			  }
+
+			  .nyt-tool-list a {
+				color: #004276;
+				text-decoration: none;
+			  }
+
+			  .nyt-tool-list a:hover {
+				text-decoration: underline;
+			  }
+
+			  .nyt-select-badge {
+				background-color: #f4e8c1;
+				border: 1px solid #dcd1a5;
+				padding: 8px;
+				font-size: 11px;
+				margin-bottom: 15px;
+			  }
+
+			  .nyt-select-title {
+				font-weight: bold;
+				color: #7d1b1b;
+				margin-bottom: 4px;
+			  }
+
+			  .nyt-footer {
+				border-top: 1px solid #000000;
+				margin-top: 25px;
+				padding-top: 10px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 10px;
+				color: #555555;
+				text-align: center;
+			  }
+
+			  .nyt-footer a {
+				color: #004276;
+				text-decoration: none;
+				margin: 0 5px;
+			  }
+
+			  .nyt-footer a:hover {
+				text-decoration: underline;
+			  }
+			</style>
+
+			<div class="nyt-wrapper">
+			  <div class="nyt-header">
+				<h1 class="nyt-logo">The New York Times</h1>
+			  </div>
+
+			  <div class="nyt-date-bar">
+				<span>Tuesday, December 5, 2006</span>
+				<span><a href="#" class="nyt-section-link">International</a> / Europe</span>
+				<span>Single-Page View</span>
+			  </div>
+
+			  <div class="nyt-layout">
+				
+				<div class="nyt-main-column">
+				  <h2 class="nyt-headline">After Relitigation, France Adopts a New $50 Franc</h2>
+				  
+				  <div class="nyt-byline-box">
+					By <span class="nyt-byline">BRYAN BALLARD</span><br>
+					Published: December 5, 2006
+				  </div>
+
+				  <p class="nyt-paragraph">
+					Earlier this year, French voters went to the polls in a national referendum to select who they wanted to appear on the $50 franc bill. Originally, the decision was supposed to be a lighthearted way of expressing national pride, with citizens allowed to select between Gustave Eiffel, the Lumiere Brothers, Claude Monet, and Ferdinand Foch. However, a spot on the official ballot was also left blank to allow French citizens to write in a nominee of their choice, though most observers expected Eiffel to win easily.
+				  </p>
+
+				  <p class="nyt-paragraph">
+					However, upon counting the ballots, the electoral authority was shocked to announce that in a shocking upset, former field marshal Philippe Petain, most famous for betraying his country to the Nazis, had won the ballot with 27% of the vote as a write-in. The election was marked by low turnout, and upon further review, it was discovered that a right-wing campaign to put Petain on the ballot had been extremely popular, with many outside of the political right latching onto Petain as an ironic choice meant for humorous effect.
+				  </p>
+
+				  <p class="nyt-paragraph">
+					“It was the arrogance of the French people that made me vote for Petain,” says Giles Corbett, a card-carrying member of the French Communist Party. “I’m very tired of the delusions of grandeur, this concept of holding onto our own currency while the Germans leave us in the dust. Maybe we are really, as the Americans say, cheese-eating surrender monkeys. Who better to symbolize that than Petain?”
+				  </p>
+
+				  <p class="nyt-paragraph">
+					Others were much more supportive of Petain. “Absolutely, I think that Petain was a great soldier who did the best that he could for this country,” says Jacques Broussard, a grocer from Lille. “He was the lion or Verdun and a believer in a strong France. He is the type of man you can on your currency, to remind you of the values that France stands for.”
+				  </p>
+
+				  <p class="nyt-paragraph">
+					Still, most of the public expressed shock at the election’s results. “Horrible, just absolutely horrible,” says Marine Le Pen, a Paris-based lawyer who is the daughter of French far-right leader Jean-Marie Le Pen. “The ideals that our republic is based on, which are the same ideals that dastardly figures such as my father fought against, are completely foreign to Petain and those who wish to be like him. It’s utterly shameful to see that we have sunk to this level.”
+				  </p>
+
+				  <p class="nyt-paragraph">
+					After relitigation and a review of the ballots, the French government announced that Petain’s plurality was invalid, and that Eiffel had won the vote. In order to allay concerns of a rigged process, they announced a second vote on the $50 Franc design to be held earlier this week, this time adopting a ranked-choice method of voting. This time around, the design of Claude Monet won in a landslide.
+				  </p>
+
+				  <p class="nyt-paragraph">
+					French President Lionel Jospin hailed the design as a positive change, noting that “even when the outlook for the will of the people is bleak, there will always be enough good actors willing to take the initiative to fight against fascist nonsense.” Jospin admitted that he had personally voted for the design with the Lumiere Brothers, but was pleased with the result of Monet winning, stating that the design was “very aesthetically pleasing.”
+				  </p>
+				</div>
+
+				<div class="nyt-sidebar">
+				  <div class="nyt-tool-box">
+					<div class="nyt-tool-title">Article Tools</div>
+					<ul class="nyt-tool-list">
+					  <li><a href="#">E-Mail This Article</a></li>
+					  <li><a href="#">Print Format</a></li>
+					  <li><a href="#">Most Popular Articles</a></li>
+					  <li><a href="#">Reprints & Permissions</a></li>
+					</ul>
+				  </div>
+
+				  <div class="nyt-select-badge">
+					<div class="nyt-select-title">TimesSelect</div>
+					Gain full access to NYT columnists, archives back to 1980, and exclusive features. <a href="#" style="color:#7d1b1b; font-weight:bold; text-decoration:none;">Join Now &gt;</a>
+				  </div>
+
+				  <div class="nyt-tool-box" style="background-color: #ffffff;">
+					<div class="nyt-tool-title">Related Searches</div>
+					<ul class="nyt-tool-list">
+					  <li><a href="#">France Politics</a></li>
+					  <li><a href="#">Philippe Pétain</a></li>
+					  <li><a href="#">Claude Monet</a></li>
+					  <li><a href="#">French Currency</a></li>
+					</ul>
+				  </div>
+				</div>
+
+			  </div>
+
+			  <div class="nyt-footer">
+				<span>Copyright 2006 The New York Times Company</span> | 
+				<span><a href="#">Privacy Policy</a></span> | 
+				<span><a href="#">Terms of Service</a></span> | 
+				<span><a href="#">Help</a></span>
+			  </div>
+			</div>
+			
+			`
+		},
+		{
+            "pk": "Chancellor Heidi",
+            "conditions": {
+                "Win Type": requireEV(270),
+                "Answer Check": hasAns([114739, 114759, 114779]),
+                "Establishment Use": endingstuff["Establishment Use"],
+                "Running Mate": e.running_mate_last_name
+            },
+            "ending text": `
+				<style>
+			  .dw-article-wrapper {
+				background-color: #ffffff;
+				color: #222222;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+				font-size: 15px;
+				line-height: 1.6;
+				max-width: 720px;
+				margin: 25px auto;
+				border: 1px solid #e2e8f0;
+				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+				box-sizing: border-box;
+				border-radius: 4px;
+				overflow: hidden;
+			  }
+
+			  .dw-navbar {
+				background-color: #002d5a;
+				padding: 12px 20px;
+				display: flex;
+				align-items: center;
+				border-bottom: 4px solid #00509a;
+			  }
+
+			  .dw-logo-circle {
+				background-color: #ffffff;
+				color: #002d5a;
+				border-radius: 50%;
+				width: 28px;
+				height: 28px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-weight: 900;
+				font-family: Arial, sans-serif;
+				font-size: 14px;
+				text-transform: lowercase;
+				margin-right: 12px;
+			  }
+
+			  .dw-logo-text {
+				color: #ffffff;
+				font-weight: bold;
+				font-size: 13px;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+			  }
+
+			  .dw-container {
+				padding: 25px 30px 40px 30px;
+			  }
+
+			  .dw-section-tag {
+				color: #00509a;
+				font-size: 11px;
+				font-weight: 800;
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				margin-bottom: 8px;
+				display: block;
+			  }
+
+			  .dw-headline {
+				font-size: 30px;
+				font-weight: 800;
+				color: #111111;
+				line-height: 1.2;
+				margin: 0 0 12px 0;
+				letter-spacing: -0.5px;
+			  }
+
+			  .dw-meta-box {
+				font-size: 12px;
+				color: #657786;
+				margin-bottom: 20px;
+				border-bottom: 1px solid #e1e8ed;
+				padding-bottom: 12px;
+			  }
+
+			  .dw-author {
+				font-weight: bold;
+				color: #111111;
+			  }
+
+			  .dw-hero-image-box {
+				width: 100%;
+				margin-bottom: 20px;
+				background-color: #f5f8fa;
+			  }
+
+			  .dw-hero-image-box img {
+				width: 100%;
+				height: auto;
+				display: block;
+				object-fit: cover;
+			  }
+
+			  .dw-image-caption {
+				font-size: 11px;
+				color: #657786;
+				padding: 8px 0;
+				line-height: 1.4;
+				border-bottom: 1px solid #f0f3f5;
+			  }
+
+			  .dw-paragraph {
+				margin-bottom: 18px;
+				color: #2d3748;
+				text-align: justify;
+			  }
+
+			  .dw-footer {
+				background-color: #f7fafc;
+				border-top: 1px solid #edf2f7;
+				padding: 15px 30px;
+				font-size: 11px;
+				color: #718096;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			  }
+
+			  .dw-footer-links a {
+				color: #00509a;
+				text-decoration: none;
+				margin-left: 12px;
+			  }
+
+			  .dw-footer-links a:hover {
+				text-decoration: underline;
+			  }
+			</style>
+
+			<div class="dw-article-wrapper">
+			  <div class="dw-navbar">
+				<div class="dw-logo-circle">dw</div>
+				<div class="dw-logo-text">Made for minds.</div>
+			  </div>
+
+			  <div class="dw-container">
+				<span class="dw-section-tag">Germany / Politics</span>
+				<h1 class="dw-headline">Germany’s New Chancellor: Meet Heidi Reichinnek</h1>
+				
+				<div class="dw-meta-box">
+				  <span>Date: <strong>25.02.2025</strong></span> | 
+				  <span>Author: <span class="dw-author">Frieda Strack</span></span>
+				</div>
+
+				<div class="dw-hero-image-box">
+				  <img src="https://i.guim.co.uk/img/media/4168715527779089d7851b238213748e0806bac9/0_247_6312_3787/master/6312.jpg?width=1020&dpr=1&s=none&crop=none" alt="Heidi Reichinnek">
+				  <div class="dw-image-caption">
+					Heidi Reichinnek has achieved a decisive victory, positioning Die Linke at the center of Germany's new coalition government.
+				  </div>
+				</div>
+
+				<p class="dw-paragraph">
+				  In the most recent German elections, many observers expected that the race would be a tight three-way contest between Chancellor Ursula Von Der Leyen’s conservative CDU, Rolf Mützenich’s liberal-to-left-wing SPD, and Heidi Reichinnek’s leftist Die Linke (literally The Left), with many pointing to a coalition between the CDU and SPD as the most likely outcome. Instead, due to Reichinnek’s personal popularity and charisma, Die Linke experienced a massive polling and enthusiasm surge in the final days of the race, leading to the party scoring a decisive election victory and announcing plans to form a government with the Green Party and SPD, giving Germany its first solidly left-wing government ever.
+				</p>
+
+				<p class="dw-paragraph">
+				  But who is Ms. Reichinnek, a virtual unknown to international observers? She was born in East Germany in 1988, though she has no clear memories of living in the communist country. She grew up in a working family in the small town of Obhausen to an electrician father and a chemical technician mother. Reichinnek studied political science and Middle Eastern studies in university after graduating from high school, later earning her master’s in 2013. In 2014, Reichennek first joined Die Linke while working in a refugee center tasked with handling the 2013-2014 Moroccan refugee crisis.
+				</p>
+
+				<p class="dw-paragraph">
+				  For the next few years of her political career, Reichinnek worked as the treasurer of Die Linke’s youth group, Left Youth Solid, rising to prominence within the party as a widely popular, agreeable personality with a non-nonsense brand of straightforward leftist politics and a penchant for social media. In the 2020 German federal election, in which Die Linke placed third, Reichinnek was elected to the Bundestag, becoming one of the German parliament’s youngest members. Over the next few years, Reichinnek rose to prominence within the party, becoming a likely candidate for a cabinet position in the case of a Linke victory.
+				</p>
+
+				<p class="dw-paragraph">
+				  However, Die Linke’s plans dramatically changed in March of 2024, when party co-chair Sahra Wagenknecht was embroiled in a massive corruption scandal, accused of lying about her personal finances. Reichinnek emerged as an alternative leadership candidate after the party voted to eject Wagenknecht and all other members credibly accused of corruption, earning universal praise for their no-tolerance stance. Immediately after winning a leadership vote, Reichinnek embarked on a full-scale rebranding of Die Linke’s public image, embracing a TikTok campaign and making fiery, viral speeches.
+				</p>
+
+				<p class="dw-paragraph">
+				  However, it was in the televised three-way debate against Von Der Leyen and Mützenich that Reichinnek really made her public image. While Von Der Leyen often came across as cold and unrelatable and Mützenich stumbled over his own words, Reichinnek translated her fiery personality into a dominant debate performance where she constantly challenged her opponents to match her emotional drive, with neither proving able to do so. Polling after the debate universally concluded that she had emerged as the winner, and national election polling previously indicating a three-way tie showed a strong surge to Die Linke.
+				</p>
+
+				<p class="dw-paragraph">
+				  Now, as the results have come in, Reichinnek stands with a mandate to remake the country in a leftist image. In particular, Reichinnek focuses on women’s issues, family issues, and youth issues, warning against the dominance of the “Patriarchal capitalist system.” She considers billionaires such as Cameron Winklevoss to be existential threats to democracy, and has called for organized leftist resistance in the form of trade unions to combat the wealthy elite. As part of its official campaign platform, Die Linke advocates for the complete expropriation of billionaires, though she will likely not be able to achieve this goal with her current majority.
+				</p>
+
+				<p class="dw-paragraph">
+				  In addition to her economic views, Reichinnek is also a social liberal, marking a break away from Die Linke’s more traditional conservative stances on the matter. While the economic side of her platform is filled with standard leftist ideas such as economic redistribution and nationalizing housing, she believes in the decriminalization of abortion, the recognition of all genders, easier access to gender-affirming care, and support of "queer trade unions.” Drawing on her experience working with Moroccan refugees, Reichinnek believes in easing the immigration process of immigrants looking to come to Germany, although she believes that this must be done in a measured way that allows for “social support systems to properly adjust.”
+				</p>
+
+				<p class="dw-paragraph">
+				  As Reichinnek begins her time as Chancellor, many Germans report feelings of excitement for a fully left government, even as conservatives feel that they are being completely left behind and ignored. Internationally, Reichinnek has drawn mixed reactions, earning praise from leftist politicians while routinely being ignored by most establishment politicians (notably, British Prime Minister Jeremy Hunt has said that he does “not look forward to working with this woman in the slightest”). However Reichinnek’s chancellorship turns out, it certainly marks an entirely new chapter of German history.
+				</p>
+			  </div>
+
+			  <div class="dw-footer">
+				<span>&copy; 2025 Deutsche Welle</span>
+				<div class="dw-footer-links">
+				  <a href="#">Privacy Policy</a>
+				  <a href="#">Terms of Use</a>
+				  <a href="#">Contact</a>
+				</div>
+			  </div>
+			</div>
+			`
+		},
         {
             "pk": "Poland NATO",
             "conditions": {
@@ -43148,6 +44743,193 @@ endingPicker = (out, totv, aa, quickstats) => {
 <p>Since his election loss, Mr. Prentice has avoided public events and news conferences whenever he could, and he kept that up right to the end.</p>
 <p>Some camera crews positioned near an entrance to Rideau Hall on Wednesday were told to move away and were prevented from recording Mr. Prentice's arrival to perform his final act as prime minister: his resignation.</p>`
         },
+		{
+        "pk": "P. Diddy and Oil",
+        "conditions": {
+            "Win Type": requireEV(270, 'lt'),
+            "Answer Check": hasAns([115174, 115216]),
+            "Establishment Use": endingstuff["Establishment Use"],
+            "Running Mate": e.running_mate_last_name
+        },
+        "ending text": `
+			<style>
+			  .espn-retro-wrapper {
+				font-family: Verdana, Geneva, Arial, sans-serif;
+				font-size: 12px;
+				color: #333333;
+				line-height: 1.6;
+				max-width: 640px;
+				margin: 20px auto;
+				border: 1px solid #cccccc;
+				background-color: #ffffff;
+			  }
+			  
+			  .espn-header-nav {
+				background-color: #cc0000;
+				color: #ffffff;
+				padding: 8px 12px;
+				font-weight: bold;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				border-bottom: 3px solid #000000;
+			  }
+
+			  .espn-logo-text {
+				font-family: "Arial Black", Gadget, sans-serif;
+				font-size: 22px;
+				font-style: italic;
+				letter-spacing: -1px;
+				line-height: 1;
+			  }
+
+			  .espn-section-label {
+				font-size: 10px;
+				text-transform: uppercase;
+				font-weight: bold;
+				letter-spacing: 1px;
+			  }
+
+			  .espn-article-body {
+				padding: 20px;
+			  }
+
+			  .espn-headline {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 24px;
+				font-weight: bold;
+				color: #000000;
+				line-height: 1.2;
+				margin: 0 0 10px 0;
+			  }
+
+			  .espn-byline {
+				font-size: 11px;
+				color: #666666;
+				border-bottom: 1px solid #dddddd;
+				padding-bottom: 10px;
+				margin-bottom: 18px;
+				text-transform: uppercase;
+			  }
+
+			  .espn-byline strong {
+				color: #333333;
+			  }
+
+			  .espn-paragraph {
+				margin-bottom: 16px;
+				text-indent: 0;
+			  }
+
+			  .espn-pull-quote {
+				float: right;
+				width: 200px;
+				background-color: #f5f5f5;
+				border-top: 3px solid #cc0000;
+				border-bottom: 1px solid #cccccc;
+				padding: 10px;
+				margin: 0 0 15px 15px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 12px;
+				font-weight: bold;
+				color: #cc0000;
+				line-height: 1.4;
+			  }
+			  
+			  .espn-pull-quote-source {
+				display: block;
+				font-size: 10px;
+				color: #666666;
+				margin-top: 6px;
+				text-transform: uppercase;
+				font-weight: normal;
+			  }
+
+			  .espn-footer-bar {
+				background-color: #333333;
+				color: #cccccc;
+				padding: 12px;
+				text-align: center;
+				font-size: 10px;
+				border-top: 1px solid #cccccc;
+			  }
+
+			  .espn-footer-bar a {
+				color: #ffffff;
+				text-decoration: none;
+				margin: 0 6px;
+			  }
+
+			  .espn-footer-bar a:hover {
+				text-decoration: underline;
+			  }
+			</style>
+
+			<div class="espn-retro-wrapper">
+			  <div class="espn-header-nav">
+				<div class="espn-logo-text">ESPN.com</div>
+				<div class="espn-section-label">NHL / Page 2</div>
+			  </div>
+
+			  <div class="espn-article-body">
+				<h1 class="espn-headline">P. Diddy to Fans: Oil Up!</h1>
+				
+				<div class="espn-byline">
+				  By <strong>Mona DeAngelo</strong><br>
+				  Special to ESPN.com<br>
+				  September 5, 2006
+				</div>
+
+				<p class="espn-paragraph">
+				  Celebrity fans of sports teams are no new phenomenon. In the 1980s, Jack Nicholson was a constant courtside figure at Lakers games, often treated like he was a rostered player. In the 1990s, Spike Lee became well-known as a major Knicks fan, supporting the team from the highs of its 1994 championship to the lows of Patrick Ewing’s career-ending knee injury in 1998. Now, however, a new phenomenon is taking place: the rise of the celebrity bandwagon fan. In the NBA, the Jazz’s run of success, starting with their 1997 championship, has seen English actor John Cleese publicly declare himself a fan despite having no practical connection to the team or the state of Utah. In the NFL, the Dolphins’ popularity has surged since their unexpected 1994 championship and sustained success, with Nebraska billionaire Warren Buffet not only publicly declaring himself a fan, but also even buying a minority share in the team for sentimental purposes.
+				</p>
+
+				<p class="espn-paragraph">
+				  One recent celebrity convert has gone a step further than most. Rapper P. Diddy, famous for his array of hits and his management of rapper Biggie Smalls, with whom he just wrapped up the highest-grossing tour of the year, has signed a deal with the NHL’s Edmonton Oilers as an official paid employee. Under the terms of this deal, Diddy will redesign the team’s alternate jerseys to better fit with “contemporary fashion standards,” while every player and coach on the Oilers will receive exclusive sportswear from Diddy’s Sean John clothing line. Additionally, Diddy’s AquaHydrate water is set to become the team’s official water source, with AquaHydrate becoming the players’ default drink and replacing Dasani in the team’s concessions.
+				</p>
+
+				<div class="espn-pull-quote">
+				  "Oil country, I have just one message for you: you’d better get ready to oil up. This team is like one giant party..."
+				  <span class="espn-pull-quote-source">— P. Diddy</span>
+				</div>
+
+				<p class="espn-paragraph">
+				  Diddy’s love affair with the Oilers has been public for quite some time. After an acquaintance introduced him to the game of ice hockey in the mid-1990s, Diddy fell in love with the sport. Instead of choosing his hometown New York Rangers as his preferred team, though, Diddy instead found himself attracted to the small-market Edmonton Oilers, the most dominant team in the league for the past 25 years, having won 11 Stanley Cups in that timeframe. Over the past five years, Diddy has become a fixture at Oilers games in New York and New Jersey, often even making the long journey to Edmonton to see the team play at home. When the Oilers won their 11th Stanley Cup last season, Diddy joined the locker room for the celebration, even throwing the players an exclusive party held at his Long Island estate.
+				</p>
+
+				<p class="espn-paragraph">
+				  In an Edmonton press conference announcing the deal, Diddy was flanked by Oilers captain Jarome Iginla and majority owner Daryl Katz, sharing his love of the team. “I love the Oil,” said Diddy. “I truly believe that when it comes to the Oilers, there is nobody who knows as much about Oil as I do, nobody who knows how much I’ve applied in my love of this team. It’s a slippery slope. The Oilers could win 1,000 championships, and I still wouldn’t be satisfied, man, I’d just want even more Oil.”
+				</p>
+
+				<p class="espn-paragraph">
+				  “Diddy isn’t a favorite of the guys in our locker room,” quipped Iginla, “but some of us have come around to him. The ‘Satisfy You’ song, the one he did with R. Kelly, we play that one at practice pretty often.”
+				</p>
+
+				<p class="espn-paragraph">
+				  Diddy then addressed the fans directly. “Oil country, I have just one message for you: you’d better get ready to oil up. This team is like one giant party, and as long as you’re down with the Oil, then you’re getting invited.”
+				</p>
+
+				<p class="espn-paragraph">
+				  Oilers fans reacted positively to the news. “I’m personally a huge fan of the Oilers, but I’m an even bigger fan of Diddy,” said 12-year-old fan Justin Bieber, who had waited in line two hours to view the announcement in person. “Back when my mom moved us here for work, Diddy’s music was a huge part in keeping me feel secure, even when I was bullied at school. When times got hard and the nights were black, Diddy was always there for me. I just want Diddy to know how much I love him, and how much I love what he’s done with the Oil.”
+				</p>
+
+				<p class="espn-paragraph">
+				  In closing, Diddy had one final message. “You know, in one of my songs, I say that can’t nobody hold me back, and that’s how I feel about this franchise. No matter how much other teams hate on us for our success, no matter how much they try to say ‘no,’ we just gotta slide on past them, and tell those freaks off. Now that me and the Oilers are together, I can safely predict that with Diddy, you guys are going to have a good time. I’m gonna say it one more time: oil up!”
+				</p>
+			  </div>
+
+			  <div class="espn-footer-bar">
+				<div>&copy; 2006 ESPN Internet Ventures. All rights reserved.</div>
+				<div style="margin-top: 4px;">
+				  <a href="#">Privacy Policy</a> | 
+				  <a href="#">Terms of Use</a> | 
+				  <a href="#">Help</a> | 
+				  <a href="#">Contact Us</a>
+				</div>
+			  </div>
+			</div>
+			`
+		},
         {
             "pk": "Candy",
             "conditions": {
@@ -44670,6 +46452,475 @@ endingPicker = (out, totv, aa, quickstats) => {
 `
         },
 		{
+            "pk": "Milosevic Gets Popped",
+            "conditions": {
+                "Win Type": requireEV(270),
+                "Answer Check": hasAns([114930, 114952]),
+                "Establishment Use": endingstuff["Establishment Use"],
+                "Running Mate": e.running_mate_last_name
+            },
+            "ending text": `
+			<style>
+			  .notepad-window {
+				width: 100%;
+				max-width: 720px;
+				margin: 20px auto;
+				background-color: #f1f1f1;
+				border-top: 2px solid #ffffff;
+				border-left: 2px solid #ffffff;
+				border-right: 2px solid #808080;
+				border-bottom: 2px solid #808080;
+				box-shadow: 1px 1px 0px 0px #000000;
+				font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+				box-sizing: border-box;
+			  }
+			  
+			  .notepad-titlebar {
+				background: linear-gradient(90deg, #000080, #1084d0);
+				color: #ffffff;
+				padding: 3px 6px;
+				font-size: 11px;
+				font-weight: bold;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			  }
+
+			  .notepad-title-controls {
+				display: flex;
+				gap: 2px;
+			  }
+
+			  .notepad-btn {
+				background-color: #f1f1f1;
+				border-top: 1px solid #ffffff;
+				border-left: 1px solid #ffffff;
+				border-right: 1px solid #808080;
+				border-bottom: 1px solid #808080;
+				font-family: Tahoma, Geneva, sans-serif;
+				font-size: 9px;
+				font-weight: bold;
+				color: #000000;
+				width: 14px;
+				height: 14px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: default;
+			  }
+
+			  .notepad-menu {
+				border-bottom: 1px solid #808080;
+				padding: 3px 6px;
+				font-size: 11px;
+				color: #000000;
+				background-color: #f1f1f1;
+			  }
+
+			  .notepad-menu span {
+				margin-right: 12px;
+				cursor: default;
+			  }
+
+			  .notepad-menu span::first-letter {
+				text-decoration: underline;
+			  }
+
+			  .notepad-text-area {
+				background-color: #ffffff;
+				color: #000000;
+				font-family: "Courier New", Courier, monospace;
+				font-size: 13px;
+				padding: 15px;
+				border-top: 2px solid #808080;
+				border-left: 2px solid #808080;
+				border-right: 2px solid #ffffff;
+				border-bottom: 2px solid #ffffff;
+				white-space: pre-wrap;
+				box-sizing: border-box;
+				line-height: 1.4;
+			  }
+
+			  .notepad-img-wrapper {
+				display: block;
+				text-align: center;
+				margin-bottom: 20px;
+				padding-bottom: 15px;
+				border-bottom: 1px dashed #aaaaaa;
+			  }
+
+			  .notepad-img {
+				max-width: 50%;
+				height: auto;
+				border: 1px solid #cccccc;
+			  }
+			</style>
+
+			<div class="notepad-window">
+			  <div class="notepad-titlebar">
+				<span>untitled.txt - Notepad</span>
+				<div class="notepad-title-controls">
+				  <div class="notepad-btn">_</div>
+				  <div class="notepad-btn">[ ]</div>
+				  <div class="notepad-btn">X</div>
+				</div>
+			  </div>
+
+			  <div class="notepad-menu">
+				<span>File</span><span>Edit</span><span>Search</span><span>Help</span>
+			  </div>
+
+			  <div class="notepad-text-area">
+				<div class="notepad-img-wrapper">
+				  <img src="https://file.garden/aNtAfG887DiA_7lO/Moonbeam/milosevic.png" class="notepad-img" alt="Document attachment" />
+				</div>The man opened his eyes.
+
+			He looked around his surroundings, not recognizing a thing. Earlier, he had been eating dinner, he knew that, but everything after dinner was a messy haze. He tried to replay the events in his head. He had gone to visit a friend, come home, eaten a light meal, and then absolutely nothing. Now, rather than being in his house, he was in a dark, empty room with two big windows, neither of which he could see a thing out of.
+
+			The man suddenly remembered that he had control of his body and tried to move. Absolutely nothing moved. He looked down and saw that his whole body was tied tightly to a chair. Immediately, he began to panic. He knew what happened when people were tied in chairs in unfamiliar locations. He had orchestrated many such incidents himself. The end result was always ugly. 
+
+			“Thank God, you’re awake.”
+
+			The voice came from behind him, and the man turned around as much as the bindings would allow him. Behind him stood a woman, quite a good-looking one, wearing just a bra and a pair of pants, sporting a sharp black bob. Despite this, there was nothing about her that was remotely attractive or romantic. The most obvious part of that was the gun that she held in her hand, equipped with a silencer. But as she walked towards him, the man realized that it was more than the gun that contributed to her lack of attractiveness. She moved with a slinking tension like that of a panther, her muscles tensed and ready to strike.
+
+			“I’ve been waiting a long time for this. Four years, to be exact.” She stood in front of him, holding the gun as casually as a phone. 
+
+			“I’m sorry, I don’t know you,” the man said, fidgeting in his seat. “Or at least, I don’t think I do. I’m sure that this is some sort of error.”
+
+			“That’s true,” said the woman, playing with the silencer on her gun, “but I know who you are. That’s what matters.”
+
+			Fuck. The man was worried that this was something political, and this answer had just made it more likely. He had to think fast, otherwise he was very sure that he knew exactly where this was going. 
+
+			“Look, are you with the Americans? The Russians? The Croatians? What did they offer you? I know you’re a Serb, I know your accent. Think of your country! Everything that we’ve fought for, think about it for a second! For the love of God, anything they gave you, I can double it. I can probably multiply it by 20, realistically.”
+
+			The woman laughed, a beautiful, horrifying noise like the sound of shattering glass. “Wow, just wow. You must be very stupid.”
+
+			“Maybe, I might be stupid. But you, you brought me here, you accomplished this. So clearly, you’re smart, at least operationally competent. So if you’re smart, then, let’s talk it over. I’m not going anywhere. There’s no cavalry coming. Let’s talk it out and see if we can find out where we disagree.”
+
+			She laughed again, and the man flinched as the vocal shards of glass cut into his ears. “Are you a necromancer, Milosevic? Because if you are, that’s the only way you can get out of this.”
+
+			Fuck, fuck. She definitely knew who he was. It sounded personal. He winced. It was going to take everything he had left to get out of this. “I’m not a necromancer. Look, if someone you knew died, I’m very sorry, but you have to understand that–”
+
+			She shot him in the left knee, and his entire world became pain as the bullet shattered his bone and dug into his flesh. Thick blood began pouring out slowly as he screamed.
+
+			“Oh, do you think screaming is going to help you? I’ll scream with you, you fucking son of a bitch. HEY! IT’S ME, SLOBODAN MILOSEVIC! HELP ME, I’M TRAPPED WITH A CRAZY WOMAN!”
+
+			She screamed a few more times, just for good measure, as Slobodan screamed in anguish. Finally, the pain eclipsed him so wholly that he didn’t even notice it anymore, and he was able to think straight for a moment. This was bad, real fucking bad. 
+
+			She screwed the silencer off and on as she looked back at him. “Sorry if the sight of the silencer made you think that you had a chance. It was a backup measure when I was starting this whole thing, but it’s useless now, one way or another. Just like you, right?”
+
+			Slobodan began to cry, his tears betraying him. “Please, before you do it, just tell me why. This is going to sound bad, very bad, but… lots of people have reasons to do this, valid or not. At least tell me why, damn it.”
+
+			She looked at him pityingly, in the way that one might look at a 17-year-old dog who they have to euthanize. “Very well. I won’t lie, I do have an egotistical streak. That might be the only area where you and I are similar. Now, listen closely, since you’re only going to get one chance.”
+
+			Slobodan tilted his head down, ready to hear the woman’s story, his final judgement on the earthly plane.
+
+			“Do you remember Vuk Drašković?” she asked, her voice adopting a cloying tone. “Do you remember October 3rd, 1999? Maybe it was just a normal day at the office for you, but that was the worst day of my life.”
+
+			Slobodan sobbed. “I didn’t have anything to do with that. I know nothing about–”
+
+			She shot him in the right knee, and pain once again took over his whole world. When he came to from the painful haze, she was looking at him with a sneering expression on her face. “You fucking pussy. Such a liar, that even when you’re about to die, you just can’t help it. Fucking pathetic.”
+
+			“Fine! Fine! Yes, I did it! We got Bošković, I remember that!”
+
+			“That’s right, you got Bošković. Now your memory is working. You got three other men, as well. Nobodies, certainly not people who deserved to die. You rammed a truck into their car, crushed it, and caused it to explode. A cheap mafia hit by a cheap mafia boss.”
+
+			Slobodan hung his head. “How do you figure into this? Are you a victim of some sort? A witness?”
+
+			The sound of shattered glass returned. “One of those nobodies was my father, a truly great man. He loved cooking, loved long walks in the woods, and loved his daughter very much. He had a smile that could light up the room. And then you crushed him to death and incinerated his corpse, you coward.”
+
+			Slobodan sputtered. “So that’s what this is? A vendetta? Come on, we’re Serbs, we’re adults, not fucking shiptars. Have some decency!” 
+
+			For the first time, Slobodan saw the woman become truly angry. Her face lost all trace of its beauty as it twisted into an expression of pure pain and rage. “Decency? Fucking DECENCY? From you! How many Slavs did you kill? How many of those were your own countrymen? How many mothers had to bury their children because they happened to be Bosniaks? Decency from Slobodan Milosevic… what a fucking joke.”
+
+			Slobodan just sat there, taking it all in. Maybe there was some sort of way out, maybe he would get lucky. There wasn't much of a chance, but he had to keep talking and keep fighting the pain. “I did what I did for the good of the country, for our great nation. I may not be a great man; I may be an evil man. But God damn it, I fucking tried. At least see that!”
+
+			The woman’s face maintained its wrathful expression. “A liar to the end. Before you die, I want to tell you who you really are, since you don’t seem willing to do it yourself. You’re pathetic, a random party functionary who lucked his way into power. Your father killed himself. Your mother killed himself. Maybe it was because they couldn’t bear having birthed someone as pathetic as you; I don't know. Your wife is a witch. Your son is a mafia thug, maybe the one person who’s a bigger loser than you are. You are nothing.”
+
+			“But the people,” Slobodan screamed, “the people! It’s not about me, it’s about us! Serbs!”
+
+			The woman just shook her head slowly. “We, the people, overthrew you after you led our country into ruin. Somehow, I don’t know why, we decided to extend you a courtesy you never would have extended to any one of us and decided to let you live out the rest of your days in peace.”
+
+			She shook her head again. “But not me, I’m afraid. These four years, I haven’t been able to make the pain go away. I tried, but I’m just not forgiving enough. Really, I’m not a strong woman; I’m not half the human being my father was. That’s why I’m here, and that’s why I’m going to kill you.”
+
+			She screwed the silencer on one final time. “I think that we’ve said all there is to say, really. Unless you have an objection?”
+
+			The words flew out of Slobodan’s mouth. “Please, you’ve got to believe me. You’ve got the wrong guy. I didn’t do this. I didn’t do anything. I didn’t know your father. I don’t know anything. Please, I don’t deserve this. I’m an innocent man! It was the Americans! It wasn’t me! It was them and the shiptars! I shouldn’t be here!”
+
+			She pointed the gun at his knees again, and Slobodan immediately shut up. She walked towards him, looking at him dead straight in the eyes. “I’m not very strong, but I at least want to try to be. In the spirit of charity, you have one final wish.”
+
+			Slobodan blinked, fresh tears coming to his eyes. “I have two.”
+
+			“Fucking unbelieveable,” she said, raising the gun up.
+
+			“Wait! Wait! They’re very small. I promise.”
+
+			She lowered the gun. “Very well, fine. I’ll give you one last victory before you plunge into nonexistence.
+
+			“The first is that I want to know your name, just for the sake of knowing it.”
+
+			“That’s reasonable,” she replied. “My name is Mila.”
+
+			“Mila, huh,” he responded, chewing it over in his mouth. “That’s a lovely name. The second request is that you shoot me in the head, so that it’s quick and easy.”
+
+			Mila smirked. “You know, I doubted you, but I’m actually glad you asked for two and didn’t waste your request on that. It was already the plan.”
+
+			Mila pointed the gun straight at him, taking steady aim. “Any last words?”
+
+			“Eventually, somewhere, I will defeat you all.”
+
+			“Fucking pathetic,” Mila said, and shot Milosevic in the head, finally wiping the blot off of Serbian soil.</div>
+			</div>
+			`
+		},
+		{
+            "pk": "Belgrade Open",
+            "conditions": {
+                "Win Type": requireEV(270),
+                "Answer Check": hasAns([114926]),
+                "Establishment Use": endingstuff["Establishment Use"],
+                "Running Mate": e.running_mate_last_name
+            },
+            "ending text": `
+				<style>
+				  .atp-transcript-wrapper {
+					font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+					font-size: 14px;
+					color: #1a1a1a;
+					line-height: 1.6;
+					max-width: 680px;
+					margin: 30px auto;
+					background-color: #ffffff;
+					border: 1px solid #e1e8ed;
+					box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+					border-radius: 4px;
+					overflow: hidden;
+				  }
+
+				  .atp-header {
+					background-color: #0c2340;
+					padding: 15px 20px;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					border-bottom: 4px solid #ccff00;
+				  }
+
+				  .atp-logo {
+					color: #ffffff;
+					font-weight: 900;
+					font-size: 18px;
+					letter-spacing: 1px;
+					text-transform: uppercase;
+				  }
+
+				  .atp-logo-sub {
+					color: #ccff00;
+				  }
+
+				  .atp-meta-category {
+					color: #ccff00;
+					font-size: 11px;
+					font-weight: bold;
+					text-transform: uppercase;
+					letter-spacing: 1.5px;
+				  }
+
+				  .atp-content {
+					padding: 25px 30px;
+				  }
+
+				  .atp-category-tag {
+					color: #0072ce;
+					font-size: 11px;
+					font-weight: 700;
+					text-transform: uppercase;
+					letter-spacing: 1px;
+					margin-bottom: 5px;
+					display: inline-block;
+				  }
+
+				  .atp-title {
+					font-size: 24px;
+					font-weight: 800;
+					color: #0c2340;
+					margin: 0 0 8px 0;
+					line-height: 1.2;
+				  }
+
+				  .atp-date-location {
+					font-size: 12px;
+					color: #657786;
+					margin-bottom: 25px;
+					padding-bottom: 15px;
+					border-bottom: 1px solid #e1e8ed;
+					font-weight: 500;
+				  }
+
+				  .atp-q-block {
+					margin-bottom: 20px;
+					padding-left: 15px;
+					border-left: 3px solid #e1e8ed;
+				  }
+
+				  .atp-a-block {
+					margin-bottom: 30px;
+					padding: 15px;
+					background-color: #f8f9fa;
+					border-radius: 4px;
+					border-left: 3px solid #0c2340;
+				  }
+
+				  .speaker-label-q {
+					display: block;
+					font-weight: 700;
+					color: #657786;
+					font-size: 11px;
+					text-transform: uppercase;
+					margin-bottom: 4px;
+					letter-spacing: 0.5px;
+				  }
+
+				  .speaker-label-a {
+					display: block;
+					font-weight: 800;
+					color: #0c2340;
+					font-size: 11px;
+					text-transform: uppercase;
+					margin-bottom: 4px;
+					letter-spacing: 0.5px;
+				  }
+
+				  .transcript-text {
+					margin: 0;
+				  }
+
+				  .atp-footer {
+					background-color: #f4f6f8;
+					padding: 15px 30px;
+					border-top: 1px solid #e1e8ed;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					font-size: 11px;
+					color: #657786;
+				  }
+
+				  .atp-footer-links a {
+					color: #0072ce;
+					text-decoration: none;
+					margin-left: 15px;
+				  }
+
+				  .atp-footer-links a:hover {
+					text-decoration: underline;
+				  }
+				</style>
+
+				<div class="atp-transcript-wrapper">
+				  <div class="atp-header">
+					<div class="atp-logo">ATP<span class="atp-logo-sub">Tour</span></div>
+					<div class="atp-meta-category">Media Centre</div>
+				  </div>
+
+				  <div class="atp-content">
+					<span class="atp-category-tag">Press Conference</span>
+					<h1 class="atp-title">Belgrade Open: Rafael Nadal</h1>
+					<div class="atp-date-location">Belgrade, Serbia | May 29, 2021</div>
+
+					<div class="atp-q-block">
+					  <span class="speaker-label-q">Reporter 1</span>
+					  <p class="transcript-text">Mr. Nadal, congratulations on your victory. How does it feel to beat Roger Federer again? The two of you have had such a tremendous back-and-forth throughout your career, so how does it feel to get the better of him this time around?</p>
+					</div>
+
+					<div class="atp-a-block">
+					  <span class="speaker-label-a">Rafael Nadal</span>
+					  <p class="transcript-text">Roger is a very, very special player. Every time I play him, I have to find my absolute best game to even have a chance against him, and I often end up falling short anyway. I thought that he put up a great performance today, and I think that he could be the one having this press conference right now if a few bounces had gone his way.</p>
+					</div>
+
+					<div class="atp-q-block">
+					  <span class="speaker-label-q">Reporter 2</span>
+					  <p class="transcript-text">Mr. Nadal, you and Roger have both won over 30 Grand Slam titles. No other man has even half of that. How do you reckon with the amount of success that you’ve had?</p>
+					</div>
+
+					<div class="atp-a-block">
+					  <span class="speaker-label-a">Rafael Nadal</span>
+					  <p class="transcript-text">One day at a time. In tennis, like any other game, you can only beat whoever's in front of you and can only focus on one opponent per match. My entire career has just been focusing on what’s in front of me instead of trying to achieve some sort of grand career plan. Who knows, maybe if I didn’t exist, Roger would have 50 titles. Maybe I would be a much more successful player if he didn’t exist. It’s hard to tell with these hypotheticals.</p>
+					</div>
+
+					<div class="atp-q-block">
+					  <span class="speaker-label-q">Reporter 3</span>
+					  <p class="transcript-text">Now, Mr. Nadal, this tournament is in its inaugural year, and it’s only at a 250 level in the ATP point system. You and Mr. Federer, alongside a host of other great players, chose to come here to Belgrade for such a small-profile event. Can you expand on your reasoning?</p>
+					</div>
+
+					<div class="atp-a-block">
+					  <span class="speaker-label-a">Rafael Nadal</span>
+					  <p class="transcript-text">Well, this is something that I’ve actually talked about with Roger, with some other great players. We wanted to come to Belgrade, to come to Serbia, because we want to help make this tournament into the best tournament that it can be, a place where people can come to enjoy a good few games of tennis and see the world’s best in action.</p>
+					</div>
+
+					<div class="atp-q-block">
+					  <span class="speaker-label-q">Reporter 3</span>
+					  <p class="transcript-text">And how have you enjoyed Serbia so far?</p>
+					</div>
+
+					<div class="atp-a-block">
+					  <span class="speaker-label-a">Rafael Nadal</span>
+					  <p class="transcript-text">It’s just been amazing, really amazing. You know, the Serbian people have just been through so much, so many dreadful events, with the wars and the bombings, just absolutely awful. It’s been something around 25, 30 years, and you can still see the scars here, no question about it. But the generosity that these people have shown to be, the kindness that they’ve treated me with, has been nothing short of amazing. I mean, just so nice.</p>
+					</div>
+
+					<div class="atp-q-block">
+					  <span class="speaker-label-q">Reporter 4</span>
+					  <p class="transcript-text">Would you say that the tournament has been a success? Do you believe that it could have a positive impact on Serbian tennis?</p>
+					</div>
+
+					<div class="atp-a-block">
+					  <span class="speaker-label-a">Rafael Nadal</span>
+					  <p class="transcript-text">I hope so, I really hope that it’s been a success. I know that the final, with Roger and I, there wasn’t an empty seat in the house, so that’s promising. I hope that we, and other players, can come back here year after year and help grow the game. If nothing else, Roger and I, alongside most of the other players in this tournament, have agreed to donate all of the prize money from this tournament to charity. Half of that will go to advancing Serbian tennis, and half of that will go to more general charity efforts.</p>
+					</div>
+
+					<div class="atp-q-block">
+					  <span class="speaker-label-q">Reporter 5</span>
+					  <p class="transcript-text">What are these tennis charities that you’ve donated to? Do you know anything about what they’re doing?</p>
+					</div>
+
+					<div class="atp-a-block">
+					  <span class="speaker-label-a">Rafael Nadal</span>
+					  <p class="transcript-text">Well, there’s, um, one charity called Our Court, one that I really like a lot. They’re focused on making sure that every town over a certain size in Serbia–I don’t remember quite how large–has tennis courts that people can easily access, so they’ve spent a lot of time building new ones and refurbishing old ones.</p>
+					</div>
+
+					<div class="atp-q-block">
+					  <span class="speaker-label-q">Reporter 5</span>
+					  <p class="transcript-text">Wow, I hadn’t heard of this charity. Do you know how much they’ve done so far?</p>
+					</div>
+
+					<div class="atp-a-block">
+					  <span class="speaker-label-a">Rafael Nadal</span>
+					  <p class="transcript-text">They’ve actually done a lot. Right here in Belgrade, there was one tennis club, Partizan, that got completely razed back in 1993 during, uh, lift and strike. Lots of kids died, adults too, and the complex was just destroyed. So, the guys at Our Court have actually rebuilt the entire thing and made it to where people in Belgrade have a good spot to develop their game.</p>
+					</div>
+
+					<div class="atp-q-block">
+					  <span class="speaker-label-q">Reporter 6</span>
+					  <p class="transcript-text">Given how much you’ve talked about how this tournament is for Serbia, to help grow the game, if you had one thing to say to the Serbians reading about this in the news, what would you say?</p>
+					</div>
+
+					<div class="atp-a-block">
+					  <span class="speaker-label-a">Rafael Nadal</span>
+					  <p class="transcript-text">I would just want to repeat what I’ve already said, basically. I think that you are an amazing, resilient people, and I think that you have incredible potential, especially in tennis. I really hope that this tournament has been and can continue to be an inspiration to every Serbian man, woman, and child who’s ever thought about picking up a racket. One day, we could see great tennis players come out of Serbia, I’m sure of it. But yeah, just that I dearly thank all of you for coming out and watching us play. It means the world to us. Thank you.</p>
+					</div>
+				  </div>
+
+				  <div class="atp-footer">
+					<span>&copy; 2021 ATP Tour, Inc. All Rights Reserved.</span>
+					<div class="atp-footer-links">
+					  <a href="#">Privacy</a>
+					  <a href="#">Terms of Use</a>
+					  <a href="#">Feedback</a>
+					</div>
+				  </div>
+				</div>
+			`
+		},
+		{
             "pk": "Rabin Funeral",
             "conditions": {
                 "Win Type": requireEV(270),
@@ -45632,27 +47883,340 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-    <img src='https://www.aspistrategist.org.au/wp-content/uploads/2014/01/beazley.png'>
-    <p><strong>Saturday, 10 July 2004, 16:28 GMT / 17:28 UK</strong></p>
+			<style>
+			  .bbc-2004-wrapper {
+				background-color: #ffffff;
+				color: #000000;
+				font-family: Verdana, Geneva, Arial, sans-serif;
+				font-size: 11px;
+				line-height: 1.4;
+				max-width: 760px;
+				margin: 20px auto;
+				border: 1px solid #cccccc;
+				box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+				box-sizing: border-box;
+			  }
 
-    <p><strong>Australian PM wins second term</strong></p>
-    <ul>
-      <li>Australia’s Prime Minister Kim Beazley says he is “grateful” for his re-election.</li>
-      <li>Results indicate a slim majority for Beazley’s Labor Party over Howard's Liberal/National coalition.</li>
-      <li>The election mostly focused on domestic issues, though the War in Sudan also played a role in voters’ decision-making.</li>
-      <li>In the United States, President Brown called the Prime Minister to congratulate him on his victory.</li>
-      <li>During his victory speech, Mr. Beazley said: “I am truly grateful that the Australian people had trust in my government.”</li>
-      <li>By winning his second term, Beazley is on track to lead the Labor Party to its 7th win in 21 years.</li>
-    </ul>
+			  .bbc-top-banner {
+				background-color: #990000;
+				padding: 8px 12px;
+				display: flex;
+				align-items: center;
+				border-bottom: 2px solid #e58c00;
+			  }
 
-    <p><strong>Losses for Beazley</strong></p>
-    <ul>
-      <li>Opinion polls during the campaign predicted a hung parliament or a slim Liberal majority; early results, however, showed Mr. Howard’s chances diminishing.</li>
-      <li>Howard won several seats in South Australia and Queensland but failed to reach the 76 seats needed for a majority.</li>
-      <li>Computer projections suggested Labor could win 79 seats out of 150 in the lower house, a decrease of 8 seats from the last election.</li>
-      <li>Labor also lost some previously safe seats to Howard's Coalition.</li>
-      <li>Mr. Howard called to concede to Mr. Beazley before announcing his resignation in his constituency of Bennelong.</li>
-    </ul>
+			  .bbc-blocks {
+				display: flex;
+				gap: 2px;
+				margin-right: 12px;
+			  }
+
+			  .bbc-block-letter {
+				background-color: #000000;
+				color: #ffffff;
+				font-family: Arial, Helvetica, sans-serif;
+				font-weight: bold;
+				font-size: 15px;
+				width: 18px;
+				height: 18px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				line-height: 1;
+			  }
+
+			  .bbc-news-title {
+				color: #ffffff;
+				font-family: Arial, Helvetica, sans-serif;
+				font-weight: bold;
+				font-size: 16px;
+				letter-spacing: 0.5px;
+			  }
+
+			  .bbc-edition-tag {
+				color: #ffffff;
+				font-size: 9px;
+				margin-left: auto;
+				font-family: Arial, sans-serif;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+			  }
+
+			  .bbc-nav-strip {
+				background-color: #eeeeee;
+				border-bottom: 1px solid #cccccc;
+				padding: 4px 12px;
+				font-size: 10px;
+				color: #444444;
+			  }
+
+			  .bbc-nav-strip a {
+				color: #000000;
+				text-decoration: none;
+				font-weight: bold;
+			  }
+
+			  .bbc-grid {
+				display: flex;
+				background-color: #ffffff;
+			  }
+
+			  .bbc-left-sidebar {
+				width: 120px;
+				background-color: #f6f6f6;
+				border-right: 1px solid #cccccc;
+				padding: 10px 8px;
+				box-sizing: border-box;
+			  }
+
+			  .bbc-left-links {
+				list-style-type: none;
+				padding: 0;
+				margin: 0;
+			  }
+
+			  .bbc-left-links li {
+				margin-bottom: 6px;
+				border-bottom: 1px solid #e5e5e5;
+				padding-bottom: 3px;
+			  }
+
+			  .bbc-left-links a {
+				color: #003399;
+				text-decoration: none;
+				font-size: 10px;
+				font-family: Arial, Helvetica, sans-serif;
+			  }
+
+			  .bbc-left-links a:hover {
+				text-decoration: underline;
+			  }
+
+			  .bbc-main-content {
+				flex: 1;
+				padding: 15px;
+				box-sizing: border-box;
+			  }
+
+			  .bbc-right-sidebar {
+				width: 160px;
+				border-left: 1px solid #cccccc;
+				padding: 15px 10px;
+				background-color: #f6f6f6;
+				box-sizing: border-box;
+			  }
+
+			  .bbc-right-box {
+				border: 1px solid #cccccc;
+				background-color: #ffffff;
+				padding: 8px;
+				margin-bottom: 12px;
+			  }
+
+			  .bbc-right-box-title {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 10px;
+				font-weight: bold;
+				color: #990000;
+				text-transform: uppercase;
+				margin-bottom: 6px;
+				border-bottom: 1px solid #990000;
+				padding-bottom: 2px;
+			  }
+
+			  .bbc-right-links {
+				list-style-type: none;
+				padding: 0;
+				margin: 0;
+			  }
+
+			  .bbc-right-links li {
+				margin-bottom: 6px;
+				font-size: 10px;
+			  }
+
+			  .bbc-right-links a {
+				color: #003399;
+				text-decoration: none;
+			  }
+
+			  .bbc-right-links a:hover {
+				text-decoration: underline;
+			  }
+
+			  .bbc-main-content p {
+				margin: 0 0 12px 0;
+			  }
+
+			  .bbc-main-content p:first-of-type {
+				color: #444444;
+				font-size: 10px;
+				font-family: Arial, Helvetica, sans-serif;
+				border-bottom: 1px solid #eeeeee;
+				padding-bottom: 6px;
+				margin-bottom: 12px;
+			  }
+
+			  .bbc-main-content p:nth-of-type(2) {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 18px;
+				font-weight: bold;
+				color: #000000;
+				margin-bottom: 15px;
+				line-height: 1.2;
+			  }
+			  .bbc-main-content p:nth-of-type(3) {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 13px;
+				font-weight: bold;
+				color: #000000;
+				margin-top: 20px;
+				margin-bottom: 10px;
+				border-bottom: 1px solid #990000;
+				padding-bottom: 2px;
+			  }
+
+			  .bbc-img-box {
+				float: right;
+				width: 203px;
+				border: 1px solid #999999;
+				background-color: #f6f6f6;
+				padding: 2px;
+				margin: 0 0 10px 12px;
+			  }
+
+			  .bbc-img-box img {
+				width: 100%;
+				height: auto;
+				display: block;
+			  }
+
+			  .bbc-img-caption {
+				font-size: 9px;
+				font-family: Arial, Helvetica, sans-serif;
+				color: #555555;
+				padding: 3px;
+				line-height: 1.3;
+				border-top: 1px solid #cccccc;
+				margin-top: 2px;
+			  }
+
+			  .bbc-main-content ul {
+				list-style: none;
+				padding: 0;
+				margin: 0 0 15px 0;
+			  }
+
+			  .bbc-main-content li {
+				position: relative;
+				padding-left: 14px;
+				margin-bottom: 8px;
+				text-align: justify;
+			  }
+
+			  .bbc-main-content li::before {
+				content: "■";
+				position: absolute;
+				left: 0;
+				top: 1px;
+				color: #990000;
+				font-size: 8px;
+			  }
+
+			  .bbc-footer {
+				background-color: #f6f6f6;
+				border-top: 1px solid #cccccc;
+				padding: 10px;
+				text-align: center;
+				font-size: 9px;
+				color: #666666;
+				font-family: Arial, sans-serif;
+			  }
+			</style>
+
+			<div class="bbc-2004-wrapper">
+			  <div class="bbc-top-banner">
+				<div class="bbc-blocks">
+				  <div class="bbc-block-letter">B</div>
+				  <div class="bbc-block-letter">B</div>
+				  <div class="bbc-block-letter">C</div>
+				</div>
+				<div class="bbc-news-title">NEWS</div>
+				<div class="bbc-edition-tag">World Edition</div>
+			  </div>
+
+			  <div class="bbc-nav-strip">
+				<a href="#">LATEST NEWS</a> | <a href="#">WORLD</a> | <a href="#">UK</a> | <a href="#">ASIA-PACIFIC</a> | <a href="#">BUSINESS</a>
+			  </div>
+
+			  <div class="bbc-grid">
+				
+				<div class="bbc-left-sidebar">
+				  <ul class="bbc-left-links">
+					<p><a href="#" style="font-weight: bold; color: #990000;">Front Page</a></p>
+					<p><a href="#">Africa</a></p>
+					<p><a href="#">Americas</a></p>
+					<p><a href="#">Asia-Pacific</a></p>
+					<p><a href="#">Europe</a></p>
+					<p><a href="#">Middle East</a></p>
+					<p><a href="#">South Asia</a></p>
+					<p><a href="#">From Our Own Correspondent</a></p>
+				  </ul>
+				</div>
+
+				<div class="bbc-main-content">
+				  
+				  <p><strong>Saturday, 10 July 2004, 16:28 GMT / 17:28 UK</strong></p>
+
+				  <div class="bbc-img-box">
+					<img src="https://www.aspistrategist.org.au/wp-content/uploads/2014/01/beazley.png" alt="Kim Beazley">
+					<div class="bbc-img-caption">Labor leader Kim Beazley wins a slim majority in Saturday's federal vote.</div>
+				  </div>
+
+				  <p><strong>Australian PM wins second term</strong></p>
+				  
+					<p>Australia’s Prime Minister Kim Beazley says he is “grateful” for his re-election.</p>
+					<p>Results indicate a slim majority for Beazley’s Labor Party over Howard's Liberal/National coalition.</p>
+					<p>The election mostly focused on domestic issues, though the War in Sudan also played a role in voters’ decision-making.</p>
+					<p>In the United States, President Brown called the Prime Minister to congratulate him on his victory.</p>
+					<p>During his victory speech, Mr. Beazley said: “I am truly grateful that the Australian people had trust in my government.”</p>
+					<p>By winning his second term, Beazley is on track to lead the Labor Party to its 7th win in 21 years.</p>
+
+				  <p><strong>Losses for Beazley</strong></p>
+				  
+					<p>Opinion polls during the campaign predicted a hung parliament or a slim Liberal majority; early results, however, showed Mr. Howard’s chances diminishing.</p>
+					<p>Howard won several seats in South Australia and Queensland but failed to reach the 76 seats needed for a majority.</p>
+					<p>Computer projections suggested Labor could win 79 seats out of 150 in the lower house, a decrease of 8 seats from the last election.</p>
+					<p>Labor also lost some previously safe seats to Howard's Coalition.</p>
+					<p>Mr. Howard called to concede to Mr. Beazley before announcing his resignation in his constituency of Bennelong.</p>
+
+				</div>
+
+				<div class="bbc-right-sidebar">
+				  <div class="bbc-right-box">
+					<div class="bbc-right-box-title">See Also:</div>
+					<ul class="bbc-right-links">
+					  <p><a href="#">Australian election guide</a></p>
+					  <p><a href="#">Profile: Kim Beazley</a></p>
+					  <p><a href="#">Profile: John Howard</a></p>
+					</ul>
+				  </div>
+
+				  <div class="bbc-right-box" style="background-color: #f6f6f6; border: none; padding: 0;">
+					<div class="bbc-right-box-title">Related Internet Links:</div>
+					<ul class="bbc-right-links">
+					  <p><a href="#">Australian Labor Party</a></p>
+					  <p><a href="#">Australian Liberal Party</a></p>
+					</ul>
+				  </div>
+				</div>
+
+			  </div>
+
+			  <div class="bbc-footer">
+				The BBC is not responsible for the content of external internet sites.
+			  </div>
+			</div>
      `
         },
         {
@@ -45664,76 +48228,339 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-    <img src='https://images7.fotosik.pl/2945/d70ec7638f7e01b1.jpg  '>
-    <p style="text-align:center; font-weight:bold;">A History of the Polish-Lithuanian War</p>
-    <p>June 1989: Semi-free elections in Poland bring Solidarity to power. Lech Wałęsa becomes a key figure in Eastern Europe's democratization, winning the next year’s presidential elections.</p>
-    <p>March 1990: Lithuania declares independence from the Soviet Union. The USSR refuses recognition, sparking an economic blockade. Lithuania will eventually fully secure its independence when the USSR falls the next year.</p>
-    <p>1990–1991: Lithuanian-Polish relations are strained. The Polish minority in southeastern Lithuania (~7% of population, heavily concentrated in Vilnius and Šalčininkai regions) complains of cultural discrimination, such as restrictions on Polish-language education, property restitution disputes, and removal of Polish signage.</p>
-    <p><strong>Early Warming and Sudden Rupture (1992)</strong></p>
-    <p>January–August 1992: Lithuanian leader Vytautas Landsbergis meets Polish officials to ease tensions. Initiatives include a bilateral commission on minority rights and the expansion of minority-language schools.</p>
-    <p>September 1992: Both countries sign a declaration of friendship, with promises to move towards an official treaty in the immediate future.</p>
-    <p><strong>The Trigger: November 17, 1992</strong></p>
-    <p>A Tupolev Tu-154 carrying Polish President Lech Wałęsa, Foreign Minister Krzysztof Skubiszewski, and 13 high-ranking officials crashes near the Lithuanian town of Druskininkai. All 87 on board are killed.</p>
-    <p>Lithuanian authorities suggest heavy fog and pilot error. However, a leaked preliminary report mentions a heat signature consistent with a surface-to-air missile.</p>
-    <p>The public reaction in Poland is gigantic, as massive vigils, protests are staged amidst a growing suspicion of foul play. Nationalist newspapers claim deliberate sabotage by Lithuanian hardliners or ex-Soviet elements sympathetic to Vilnius.</p>
-    <p><strong>Breakdown of Relations and Militarization (1992–1993)</strong></p>
-    <p>Late November 1992:</p>
-    <p>The Polish military puts its air force on alert and mobilizes a large percentage of its troops.</p>
-    <p>Lithuania mobilizes border guards and suspends some civil liberties in Šalčininkai and Vilnius counties.</p>
-    <p>Poland demands an international investigation and allows NATO observers in Warsaw. Reports on the nature of the crash are inconclusive, with foul play not ruled out as a factor.</p>
-    <p>December 1992:</p>
-    <p>On the night of December 8, 1992, Poland unilaterally militarizes the Suwalki Corridor, deploying two mechanized brigades and creating a de facto blockade of Lithuanian-Polish land trade. Only a limited amount of people and goods are allowed through, although the Lithuania port of Klaipeda remains open.</p>
-    <p>Polish intelligence begins covertly supplying small arms to ethnic Polish self-defense units in Lithuania’s southeast who have formed as a response to the Lithuanian crackdown, modeled after WWII-era Armia Krajowa tactics.</p>
-    <p>January 1993:</p>
-    <p>Lithuania arrests several Polish community leaders for “illegal paramilitary organization.”</p>
-    <p>Martial law is declared in Vilnius and surrounding counties. Polish language newspapers are shuttered. Polish school boards are dissolved. The government schedules a national referendum on citizenship.</p>
-    <p><strong>Escalation via Latvia (1993)</strong></p>
-    <p>February 3, 1993:</p>
-    <p>3,000 ethnic Polish partisans from Daugavpils (Latvia), claiming to seek asylum or transit to Poland, attempt to cross into Lithuania via the Smėlynė border crossing. The partisans refuse to surrender their weapons, citing their fear of not being able to respond to Lithuanian threats under martial law.</p>
-    <p>Lithuanian border guards deny entry. After a tense 9-hour standoff, gunfire breaks out. 47 partisans are killed, and 23 Lithuanian troops also die.</p>
-    <p>Poland’s Sejm votes 454-6 to declare the incident an “act of aggression.” Polish protesters storm the Lithuanian embassy in Warsaw.</p>
-    <p><strong>Lightning War: "Operation Eagle’s Right" (February 1993)</strong></p>
-    <p>February 3-7</p>
-    <p>Lithuania secretly negotiates with Russia and Belarus on a plan to invade Lithuania and avoid larger regional conflict. Despite the bad blood between Poland and Russia, the two countries use the issue of Russian troops still stationed in Poland as a bargaining chip, with Russia agreeing to a timely withdrawal in exchange for military cooperation.</p>
-    <p>February 8, 1993 – Day 1:</p>
-    <p>04:00 AM: Poland launches a multi-front assault into southern and central Lithuania. Troops advance from Suwałki into Lazdijai, Druskininkai, and Marijampolė.</p>
-    <p>Simultaneously, Belarusian mechanized units enter Lithuania from the east, targeting Švenčionys and Visaginas.</p>
-    <p>Russian Spetsnaz in unmarked uniforms land behind enemy lines and sabotage Lithuanian radar and air defense systems from within.</p>
-    <p>February 9, 1993 – Day 2:</p>
-    <p>Vilnius is encircled by Polish and Belarusian forces. Lithuania’s 1st Mechanized Infantry Brigade attempts to break out, but is cut off near Trakai.</p>
-    <p>10:30 PM: Acting President Algirdas Brazauskas signs a conditional ceasefire and agrees to terms of occupation to avoid mass civilian casualties.</p>
-    <p>February 10, 1993:</p>
-    <p>Polish troops secure Vilnius, Šalčininkai, and Švenčionys. A military governor is installed in the occupied zone. The remaining holdouts of the Lithuanian government completely capitulate, and a temporary government is established in Kaunas.</p>
-    <p><strong>International Response (1993–1994)</strong></p>
-    <p>February–April 1993:</p>
-    <p>UN General Assembly Resolution 48/121 condemns the invasion 142–6. Poland, Russia, Belarus, North Korea, Cuba, and Serbia vote against.</p>
-    <p>EC freezes Polish financial aid and suspends all plans for accession talks.</p>
-    <p>The U.S. halts arms sales to Poland and suspends diplomatic visits, placing several sectors of their economy under heavy sanctions.</p>
-    <p>May 1993:</p>
-    <p>Poland forms a regional bloc with Belarus and Ukraine (which remains neutral but friendly to Warsaw) under the Lublin Security Compact, allowing for joint military exercises and preferential trade agreements.</p>
-    <p><strong>Stabilization and Referendum (1994–1996)</strong></p>
-    <p>August 1994: Poland organizes an occupation administration with Polish and cooperative Lithuanian officials. The Polish language is restored in schools. All political activity is banned.</p>
-    <p>May 1995: Under increasing international pressure, Poland agrees to supervised referendums in the occupied regions.</p>
-    <p><strong>Referendum Details (October 1995):</strong></p>
-    <p>Administered by: OSCE, monitored by Red Cross and neutral Swiss observers.</p>
-    <p><strong>Ballot Options:</strong></p>
-    <p>Join the Republic of Poland.</p>
-    <p>Return to the Republic of Lithuania.</p>
-    <p><strong>Results (official):</strong></p>
-    <p>Alytus Country: 51% vote to join Poland.</p>
-    <p>Vilnius country: 58% vote to join Poland.</p>
-    <p>Švenčionys district municipality: 56% vote to join Poland.</p>
-    <p>There are no irregularities noted in the ballot process, but many Lithuanians boycott the referendum.</p>
-    <p><strong>Resolution and Aftermath (1996–Present)</strong></p>
-    <p>March 1996: Treaty of Kraków signed.</p>
-    <p>Alytus County, Vilnius Country, and Švenčionys district municipality are annexed by Poland.</p>
-    <p>Lithuanians are guaranteed significant language and cultural autonomy in Polish territory.</p>
-    <p>The border is demarcated and border posts are fully opened.</p>
-    <p>June 1997: Lithuania joins NATO.</p>
-    <p>After June 1997: Poland re-engages with the EU and NATO, but refuses to give up its claims in Lithuania.</p>
-    <p>As relations between Poland and Russia cool, Ukraine becomes Poland’s foremost economic and military partner.</p>
-    <p>The war permanently scars Lithuanian politics, fueling ethnic nationalism and distrust of Poland for over a generation.</p>
-    <p>Polish revanchism is satisfied, and economic growth slowly resumes as Western governments and firms prove themselves eager to invest in the country.</p>
+   <style>
+  .dossier-wrapper {
+    background-color: #faf8f5;
+    color: #2b2b2b;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 30px auto;
+    border: 1px solid #dcd1a5;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    border-top: 6px solid #a6192e;
+  }
+
+  .dossier-header {
+    padding: 30px 40px 15px 40px;
+    text-align: center;
+    border-bottom: 1px solid #dcd1a5;
+  }
+
+  .dossier-tag {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #002f6c;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .dossier-title {
+    font-size: 26px;
+    font-weight: normal;
+    color: #111111;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .dossier-body {
+    padding: 35px 40px 40px 40px;
+  }
+
+  .dossier-section-heading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #a6192e;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #a6192e;
+    padding-bottom: 4px;
+    margin: 35px 0 15px 0;
+    display: block;
+  }
+
+  .timeline-track {
+    border-left: 2px solid #a6192e;
+    padding-left: 20px;
+    margin-left: 8px;
+    position: relative;
+  }
+
+  .timeline-event {
+    margin-bottom: 18px;
+    text-align: justify;
+    position: relative;
+  }
+
+  .timeline-event::before {
+    content: "";
+    position: absolute;
+    left: -26px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    background-color: #002f6c;
+    border: 2px solid #faf8f5;
+    border-radius: 50%;
+  }
+
+  .timeline-date {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #002f6c;
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+  }
+
+  .dossier-bullet-list {
+    margin: 8px 0 15px 0;
+    padding-left: 20px;
+  }
+
+  .dossier-bullet-list li {
+    margin-bottom: 6px;
+  }
+
+  .dossier-footer {
+    background-color: #f1ede2;
+    border-top: 1px solid #dcd1a5;
+    padding: 15px 40px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: #7a7361;
+  }
+</style>
+
+<div class="dossier-wrapper">
+  <div class="dossier-header">
+    <span class="dossier-tag">Dossier</span>
+    <h1 class="dossier-title">A History of the Polish-Lithuanian War</h1>
+  </div>
+
+  <div class="dossier-body">
+    
+    <div class="timeline-track">
+      
+      <div class="timeline-event">
+        <span class="timeline-date">June 1989</span>
+        Semi-free elections in Poland bring Solidarity to power. Lech Wałęsa becomes a key figure in Eastern Europe's democratization, winning the next year’s presidential elections.
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">March 1990</span>
+        Lithuania declares independence from the Soviet Union. The USSR refuses recognition, sparking an economic blockade. Lithuania will eventually fully secure its independence when the USSR falls the next year.
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">1990–1991</span>
+        Lithuanian-Polish relations are strained. The Polish minority in southeastern Lithuania (~7% of population, heavily concentrated in Vilnius and Šalčininkai regions) complains of cultural discrimination, such as restrictions on Polish-language education, property restitution disputes, and removal of Polish signage.
+      </div>
+
+    </div>
+
+    <span class="dossier-section-heading">Early Warming and Sudden Rupture (1992)</span>
+
+    <div class="timeline-track">
+      
+      <div class="timeline-event">
+        <span class="timeline-date">January–August 1992</span>
+        Lithuanian leader Vytautas Landsbergis meets Polish officials to ease tensions. Initiatives include a bilateral commission on minority rights and the expansion of minority-language schools.
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">September 1992</span>
+        Both countries sign a declaration of friendship, with promises to move towards an official treaty in the immediate future.
+      </div>
+
+    </div>
+
+    <span class="dossier-section-heading">The Trigger: November 17, 1992</span>
+
+    <div class="timeline-track">
+
+      <div class="timeline-event">
+        A Tupolev Tu-154 carrying Polish President Lech Wałęsa, Foreign Minister Krzysztof Skubiszewski, and 13 high-ranking officials crashes near the Lithuanian town of Druskininkai. All 87 on board are killed.
+      </div>
+
+      <div class="timeline-event">
+        Lithuanian authorities suggest heavy fog and pilot error. However, a leaked preliminary report mentions a heat signature consistent with a surface-to-air missile.
+      </div>
+
+      <div class="timeline-event">
+        The public reaction in Poland is gigantic, as massive vigils, protests are staged amidst a growing suspicion of foul play. Nationalist newspapers claim deliberate sabotage by Lithuanian hardliners or ex-Soviet elements sympathetic to Vilnius.
+      </div>
+
+    </div>
+
+    <span class="dossier-section-heading">Breakdown of Relations and Militarization (1992–1993)</span>
+
+    <div class="timeline-track">
+
+      <div class="timeline-event">
+        <span class="timeline-date">Late November 1992</span>
+        <p style="margin: 4px 0 8px 0;">The Polish military puts its air force on alert and mobilizes a large percentage of its troops.</p>
+        <p style="margin: 0 0 8px 0;">Lithuania mobilizes border guards and suspends some civil liberties in Šalčininkai and Vilnius counties.</p>
+        <p style="margin: 0;">Poland demands an international investigation and allows NATO observers in Warsaw. Reports on the nature of the crash are inconclusive, with foul play not ruled out as a factor.</p>
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">December 1992</span>
+        <p style="margin: 4px 0 8px 0;">On the night of December 8, 1992, Poland unilaterally militarizes the Suwalki Corridor, deploying two mechanized brigades and creating a de facto blockade of Lithuanian-Polish land trade. Only a limited amount of people and goods are allowed through, although the Lithuania port of Klaipeda remains open.</p>
+        <p style="margin: 0;">Polish intelligence begins covertly supplying small arms to ethnic Polish self-defense units in Lithuania’s southeast who have formed as a response to the Lithuanian crackdown, modeled after WWII-era Armia Krajowa tactics.</p>
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">January 1993</span>
+        <p style="margin: 4px 0 8px 0;">Lithuania arrests several Polish community leaders for “illegal paramilitary organization.”</p>
+        <p style="margin: 0;">Martial law is declared in Vilnius and surrounding counties. Polish language newspapers are shuttered. Polish school boards are dissolved. The government schedules a national referendum on citizenship.</p>
+      </div>
+
+    </div>
+
+    <span class="dossier-section-heading">Escalation via Latvia (1993)</span>
+
+    <div class="timeline-track">
+
+      <div class="timeline-event">
+        <span class="timeline-date">February 3, 1993</span>
+        <p style="margin: 4px 0 8px 0;">3,000 ethnic Polish partisans from Daugavpils (Latvia), claiming to seek asylum or transit to Poland, attempt to cross into Lithuania via the Smėlynė border crossing. The partisans refuse to surrender their weapons, citing their fear of not being able to respond to Lithuanian threats under martial law.</p>
+        <p style="margin: 0 0 8px 0;">Lithuanian border guards deny entry. After a tense 9-hour standoff, gunfire breaks out. 47 partisans are killed, and 23 Lithuanian troops also die.</p>
+        <p style="margin: 0;">Poland’s Sejm votes 454-6 to declare the incident an “act of aggression.” Polish protesters storm the Lithuanian embassy in Warsaw.</p>
+      </div>
+
+    </div>
+
+    <span class="dossier-section-heading">Lightning War: "Operation Eagle’s Right" (February 1993)</span>
+
+    <div class="timeline-track">
+
+      <div class="timeline-event">
+        <span class="timeline-date">February 3-7</span>
+        Lithuania secretly negotiates with Russia and Belarus on a plan to invade Lithuania and avoid larger regional conflict. Despite the bad blood between Poland and Russia, the two countries use the issue of Russian troops still stationed in Poland as a bargaining chip, with Russia agreeing to a timely withdrawal in exchange for military cooperation.
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">February 8, 1993 – Day 1</span>
+        <p style="margin: 4px 0 8px 0;">04:00 AM: Poland launches a multi-front assault into southern and central Lithuania. Troops advance from Suwałki into Lazdijai, Druskininkai, and Marijampolė.</p>
+        <p style="margin: 0 0 8px 0;">Simultaneously, Belarusian mechanized units enter Lithuania from the east, targeting Švenčionys and Visaginas.</p>
+        <p style="margin: 0;">Russian Spetsnaz in unmarked uniforms land behind enemy lines and sabotage Lithuanian radar and air defense systems from within.</p>
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">February 9, 1993 – Day 2</span>
+        <p style="margin: 4px 0 8px 0;">Vilnius is encircled by Polish and Belarusian forces. Lithuania’s 1st Mechanized Infantry Brigade attempts to break out, but is cut off near Trakai.</p>
+        <p style="margin: 0;">10:30 PM: Acting President Algirdas Brazauskas signs a conditional ceasefire and agrees to terms of occupation to avoid mass civilian casualties.</p>
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">February 10, 1993</span>
+        Polish troops secure Vilnius, Šalčininkai, and Švenčionys. A military governor is installed in the occupied zone. The remaining holdouts of the Lithuanian government completely capitulate, and a temporary government is established in Kaunas.
+      </div>
+
+    </div>
+
+    <span class="dossier-section-heading">International Response (1993–1994)</span>
+
+    <div class="timeline-track">
+
+      <div class="timeline-event">
+        <span class="timeline-date">February–April 1993</span>
+        <p style="margin: 4px 0 8px 0;">UN General Assembly Resolution 48/121 condemns the invasion 142–6. Poland, Russia, Belarus, North Korea, Cuba, and Serbia vote against.</p>
+        <p style="margin: 0 0 8px 0;">EC freezes Polish financial aid and suspends all plans for accession talks.</p>
+        <p style="margin: 0;">The U.S. halts arms sales to Poland and suspends diplomatic visits, placing several sectors of their economy under heavy sanctions.</p>
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">May 1993</span>
+        Poland forms a regional bloc with Belarus and Ukraine (which remains neutral but friendly to Warsaw) under the Lublin Security Compact, allowing for joint military exercises and preferential trade agreements.
+      </div>
+
+    </div>
+
+    <span class="dossier-section-heading">Stabilization and Referendum (1994–1996)</span>
+
+    <div class="timeline-track">
+
+      <div class="timeline-event">
+        <span class="timeline-date">August 1994</span>
+        Poland organizes an occupation administration with Polish and cooperative Lithuanian officials. The Polish language is restored in schools. All political activity is banned.
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">May 1995</span>
+        Under increasing international pressure, Poland agrees to supervised referendums in the occupied regions.
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">October 1995: Referendum Details</span>
+        <p style="margin: 4px 0 8px 0;">Administered by: OSCE, monitored by Red Cross and neutral Swiss observers.</p>
+        <p style="margin: 0 0 4px 0;"><strong>Ballot Options:</strong></p>
+        <ul class="dossier-bullet-list" style="margin-top: 0;">
+          <li>Join the Republic of Poland.</li>
+          <li>Return to the Republic of Lithuania.</li>
+        </ul>
+        <p style="margin: 0 0 4px 0;"><strong>Results (official):</strong></p>
+        <ul class="dossier-bullet-list" style="margin-top: 0;">
+          <li>Alytus Country: 51% vote to join Poland.</li>
+          <li>Vilnius country: 58% vote to join Poland.</li>
+          <li>Švenčionys district municipality: 56% vote to join Poland.</li>
+        </ul>
+        <p style="margin: 0;">There are no irregularities noted in the ballot process, but many Lithuanians boycott the referendum.</p>
+      </div>
+
+    </div>
+
+    <span class="dossier-section-heading">Resolution and Aftermath (1996–Present)</span>
+
+    <div class="timeline-track">
+
+      <div class="timeline-event">
+        <span class="timeline-date">March 1996</span>
+        <p style="margin: 4px 0 8px 0;">Treaty of Kraków signed.</p>
+        <p style="margin: 0 0 8px 0;">Alytus County, Vilnius Country, and Švenčionys district municipality are annexed by Poland.</p>
+        <p style="margin: 0 0 8px 0;">Lithuanians are guaranteed significant language and cultural autonomy in Polish territory.</p>
+        <p style="margin: 0;">The border is demarcated and border posts are fully opened.</p>
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">June 1997</span>
+        Lithuania joins NATO.
+      </div>
+
+      <div class="timeline-event">
+        <span class="timeline-date">After June 1997</span>
+        Poland re-engages with the EU and NATO, but refuses to give up its claims in Lithuania.
+      </div>
+
+      <div class="timeline-event">
+        As relations between Poland and Russia cool, Ukraine becomes Poland’s foremost economic and military partner.
+      </div>
+
+      <div class="timeline-event">
+        The war permanently scars Lithuanian politics, fueling ethnic nationalism and distrust of Poland for over a generation.
+      </div>
+
+      <div class="timeline-event">
+        Polish revanchism is satisfied, and economic growth slowly resumes as Western governments and firms prove themselves eager to invest in the country.
+      </div>
+
+    </div>
+
+  </div>
+  <div class="dossier-footer">
+    ENC Historical Archives &bull; Central European Security Dossier
+  </div>
+</div>
   `
         },
         {
@@ -45907,55 +48734,338 @@ endingPicker = (out, totv, aa, quickstats) => {
                 "Running Mate": e.running_mate_last_name
             },
             "ending text": `
-    <p style="text-align:center; font-weight:bold;">ガチンコ！芸能バトル '97 (Gachinko! Geinō Battle '97)</p>
-    <p style="text-align:left;">Aired January 4th, 1997<br>(Theme song: Fast-paced brass-heavy jingle with crashing cymbals)</p>
+    <style>
+  .gachinko-retro-container {
+    background-color: #d4d0c8; /* Windows 95 classic grey background */
+    color: #000000;
+    font-family: "MS PGothic", "Osaka", "Hiragino Kaku Gothic Pro W3", sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 680px;
+    margin: 25px auto;
+    border: 3px outset #ffffff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    padding: 2px;
+    box-sizing: border-box;
+  }
 
-    <p>Narrator (V.O.) 「今夜のゲストは……まさかのアメリカ元大統領！ジョージ・H・W・ブッシュ氏が日本バラエティ初登場！」 ("Tonight’s guest… is none other than former U.S. President George H. W. Bush, making his Japanese variety show debut!")</p>
-    <p>[Cut to stage with flashing lights, large kanji characters reading: “芸能バトル” hanging behind]</p>
-    <p>Japanese Host (in sparkly gold blazer) 「みなさんこんばんはーッ！今夜は超スペシャルゲストが来てますよ～！みんな、ビビらないでね！」 ("Good evening, everyone! Tonight, we have an extra special guest! Don’t be too shocked!")</p>
-    <p>[Audience claps politely. The camera pans to Bush, who is seated stiffly next to a large plastic fish and a spinning wheel labeled “運命の回転” (Wheel of Fate)]</p>
-    <p>Host (to Bush) 「ジョージさん、コンニチハ！ジャパニーズ・テレビ、ハジメテ？」 ("Mr. George, hello! First time on Japanese TV?")</p>
-    <p>George Bush (tight smile) "Second, actually. I, uh, appeared on Tetsuko Kuroyanagi’s show the other night. You know, my term is ending here in a few weeks, so I thought that it would be good for me to branch out into some more media. Now, I was told this would be a political interview."</p>
-    <p>Host (grinning) 「ノー・プロブレム、政治ノ話、あとデス！最初は“バラエティ入門クイズ”デス！」 ("No problem, politics come later! First, let’s do the Variety Show Entry Quiz!")</p>
+  /* Fan Site Title Banner */
+  .gachinko-banner {
+    background-color: #000080; /* Navy Title bar */
+    color: #ffffff;
+    padding: 6px 10px;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #808080;
+  }
 
-    <p>“バラエティ入門クイズ” (Variety Show Entry Quiz)</p>
-    <p>(Upbeat quiz show music plays. Lights dim and three big red buttons appear in front of Bush)</p>
-    <p>Host 「ルールはカンタン。質問に正解したらオヤツゲット、間違えたら罰ゲームね！」 ("Simple rules. Correct answer = snack. Wrong answer = punishment game.")</p>
-    <p>Translator whispers to Bush. Bush frowns, glances offstage. Nods reluctantly.</p>
-    <p>Host 「第一問！たこ焼きの中に入ってるのは何？」 ("First question! What’s inside takoyaki?")</p>
-    <p>Bush "Octopus."</p>
-    <p>(Correct chime, audience claps. A man in a giant octopus costume appears and hands Bush a small plate of takoyaki. Bush hesitantly tries one.)</p>
-    <p>Host 「正解！さすが国際派！」 ("Correct! Truly international!")</p>
-    <p>Bush “Well, interesting question. Ms. Kuroyanagi was talking with me about Japanese steel–”</p>
+  .gachinko-banner-text {
+    text-shadow: 1px 1px #000000;
+  }
 
-    <p>Second Question 「次のうち、“おなら”はどれ？ A: ラーメン B: ブーブー C: スシ」 ("Which of the following means noodle? A: Ramen B: Boo Boo C: Sushi")</p>
-    <p>Bush “Uh, uh…”</p>
-    <p>(He panics and just presses a red button. The buzzer blares. A trap door opens and confetti falls on Bush. Someone offscreen yells “BINGO!”)</p>
-    <p>Host 「残念！正解はA：ラーメンでした”！」 ("Too bad! The correct answer was A: Ramen!")</p>
-    <p>Bush "...This is not what I was expecting."</p>
+  .gachinko-banner-controls {
+    display: flex;
+    gap: 3px;
+  }
 
-    <p>Narrator (V.O.) 「ここからが本番だッ！芸能バトル恒例“ムチャぶりコーナー”開始！！」 ("Now it’s the real deal! Time for our traditional segment: The Absurd Challenge!")</p>
-    <p>[Stage transforms into obstacle course: inflatable noodles, slime pit, balance beam with giant foam hand swinging at intervals]</p>
-    <p>Host 「ジョージさん、“大統領スプリント”チャレンジしてみようか？」 ("George-san, care to try the Presidential Sprint?")</p>
-    <p>Bush (still seated) "I’m 72 years old."</p>
-    <p>[Audience laughs. Two assistants in Power Ranger-style outfits help him into a blue tracksuit with “アメリカ合衆国大統領” in bold katakana on the back]</p>
-    <p>Translator (off-screen, struggling) "He says… he prefers not to, but will do a short version."</p>
-    <p>[Cue dramatic drum music. Bush climbs onto the balance beam. He takes a step, then another, feeling confident. As he takes another one, a foam hand smacks him into the slime pool. The audience erupts in cheers and chants: “ブッシュ！ブッシュ！”]</p>
-    <p>[Bush crawls out of the slime pool, helped by the show’s aides. Although he’s drenched in slime, he otherwise looks to be in fine condition.]</p>
-    <p>Bush This suit was a gift from my son, so we’re lucky that it’s not expensive, huh? Okay, time for the political aspect, right?</p>
+  .gachinko-btn {
+    background-color: #d4d0c8;
+    color: #000000;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    font-size: 9px;
+    font-weight: bold;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+  }
 
-    <p>Host 「さて、ここで真面目な政治インタビューを……と思ったら、ドッキリ！」 ("Now, time for the serious political interview... or is it?!")</p>
-    <p>[Bush is sat down for a “one-on-one” under the spotlight, right across from the host. The host asks him a question about cooperation between Japan and the U.S. in the Pacific ocean. Suddenly, Bush’s chair starts slowly spinning. The background lifts to reveal sumo wrestlers holding cue cards.]</p>
-    <p>Sumo Wrestler (holding sign): “DANCE TO STAY IN THE ROOM”</p>
-    <p>Translator: "They want you to dance to continue."</p>
-    <p>Bush "...I am the President of the United States."</p>
-    <p>(Bush sees the crowd cheering wildly and sighs. He starts doing a stiff version of the Charleston, to rapturous applause. A Japanese woman dressed like Madonna runs on stage and gives him a doll: a plush caricature of himself, wearing a rising sun bandana)</p>
-    <p>Host 「ジョージさん、どうでしたか？日本のテレビ？」 ("George-san, how was Japanese TV?")</p>
-    <p>Bush (drenched in slime, holding the doll of himself) "...You people are, uh…"</p>
-    <p>(He pauses for a moment)</p>
-    <p>Bush “…wonderful."</p>
-    <p>Host 「サンキュー・ミスター・プレジデント！また来てね！」 ("Thank you, Mr. President! Come back anytime!")</p>
-    <p>[Credits roll over clips of Bush slipping, eating takoyaki, and being cheered by the crowd. The background music is an upbeat remix of “Hail to the Chief.”]</p>
+  /* Inner Content Area */
+  .gachinko-content {
+    background-color: #ffffff;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .gachinko-site-title {
+    color: #ff00ff; /* Retro neon pink */
+    font-size: 18px;
+    border-bottom: 2px dashed #0000ff;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px #ffcccc;
+  }
+
+  /* Retro Program Info Table */
+  .gachinko-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    font-size: 12px;
+  }
+
+  .gachinko-info-table td {
+    border: 1px solid #808080;
+    padding: 6px 10px;
+  }
+
+  .gachinko-td-label {
+    background-color: #e6e6e6;
+    font-weight: bold;
+    width: 25%;
+    color: #000080;
+  }
+
+  /* Subheadings */
+  .gachinko-subheading {
+    background-color: #ffff00; /* Yellow highlight */
+    color: #000000;
+    font-weight: bold;
+    padding: 4px 8px;
+    display: inline-block;
+    border: 1px solid #808080;
+    margin: 20px 0 10px 0;
+    font-family: monospace;
+  }
+
+  /* Subtitle/Dialogue Color Coding */
+  .dialogue-narrator {
+    color: #cc0000; /* Red V.O. */
+    font-weight: bold;
+  }
+
+  .dialogue-host {
+    color: #0000ff; /* Blue Host */
+    font-weight: bold;
+  }
+
+  .dialogue-bush {
+    color: #2e7d32; /* Green Bush */
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+  }
+
+  .dialogue-translation {
+    color: #666666;
+    font-size: 11px;
+    font-style: italic;
+  }
+
+  /* Screen Direction Blocks */
+  .gachinko-action {
+    color: #ff00ff;
+    font-weight: bold;
+    margin: 10px 0;
+    font-size: 12px;
+  }
+
+  .gachinko-para {
+    margin-bottom: 12px;
+    text-align: left;
+  }
+
+  /* 90s Hit Counter */
+  .gachinko-hitcounter {
+    background-color: #000000;
+    color: #00ff00; /* Green LED */
+    font-family: monospace;
+    font-size: 12px;
+    padding: 4px 10px;
+    display: inline-block;
+    border: 2px inset #808080;
+    margin-top: 25px;
+    letter-spacing: 2px;
+  }
+</style>
+
+<div class="gachinko-retro-container">
+  <div class="gachinko-banner">
+    <span class="gachinko-banner-text">Gachinko! Variety Show Archive Page</span>
+    <div class="gachinko-banner-controls">
+      <div class="gachinko-btn">_</div>
+      <div class="gachinko-btn">[]</div>
+      <div class="gachinko-btn">X</div>
+    </div>
+  </div>
+
+  <div class="gachinko-content">
+    
+    <div class="gachinko-site-title" style="text-align:center; font-weight:bold;">
+      ガチンコ！芸能バトル '97 (Gachinko! Geinō Battle '97)
+    </div>
+
+    <table class="gachinko-info-table">
+      <tr>
+        <td class="gachinko-td-label">Air Date</td>
+        <td>Aired January 4th, 1997</td>
+      </tr>
+      <tr>
+        <td class="gachinko-td-label">Theme Song</td>
+        <td>Fast-paced brass-heavy jingle with crashing cymbals</td>
+      </tr>
+    </table>
+
+    <p class="gachinko-para">
+      <span class="dialogue-narrator">Narrator (V.O.) 「今夜のゲストは……まさかのアメリカ元大統領！ジョージ・H・W・ブッシュ氏が日本バラエティ初登場！」</span> <span class="dialogue-translation">("Tonight’s guest… is none other than former U.S. President George H. W. Bush, making his Japanese variety show debut!")</span>
+    </p>
+
+    <p class="gachinko-action">[Cut to stage with flashing lights, large kanji characters reading: “芸能バトル” hanging behind]</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Japanese Host (in sparkly gold blazer) 「みなさんこんばんはーッ！今夜は超スペシャルゲストが来てますよ～！みんな、ビビらないでね！」</span> <span class="dialogue-translation">("Good evening, everyone! Tonight, we have an extra special guest! Don’t be too shocked!")</span>
+    </p>
+
+    <p class="gachinko-action">[Audience claps politely. The camera pans to Bush, who is seated stiffly next to a large plastic fish and a spinning wheel labeled “運命の回転” (Wheel of Fate)]</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Host (to Bush) 「ジョージさん、コンニチハ！ジャパニーズ・テレビ、ハジメテ？」</span> <span class="dialogue-translation">("Mr. George, hello! First time on Japanese TV?")</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-bush">George Bush (tight smile) "Second, actually. I, uh, appeared on Tetsuko Kuroyanagi’s show the other night. You know, my term is ending here in a few weeks, so I thought that it would be good for me to branch out into some more media. Now, I was told this would be a political interview."</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Host (grinning) 「ノー・プロブレム、政治ノ話、あとデス！最初は“バラエティ入門クイズ”デス！」</span> <span class="dialogue-translation">("No problem, politics come later! First, let’s do the Variety Show Entry Quiz!")</span>
+    </p>
+
+    <div class="gachinko-subheading">“バラエティ入門クイズ” (Variety Show Entry Quiz)</div>
+
+    <p class="gachinko-action">(Upbeat quiz show music plays. Lights dim and three big red buttons appear in front of Bush)</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Host 「ルールはカンタン。質問に正解したらオヤツゲット、間違えたら罰ゲームね！」</span> <span class="dialogue-translation">("Simple rules. Correct answer = snack. Wrong answer = punishment game.")</span>
+    </p>
+
+    <p class="gachinko-para">Translator whispers to Bush. Bush frowns, glances offstage. Nods reluctantly.</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Host 「第一問！たこ焼きの中に入ってるのは何？」</span> <span class="dialogue-translation">("First question! What’s inside takoyaki?")</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-bush">Bush "Octopus."</span>
+    </p>
+
+    <p class="gachinko-action">(Correct chime, audience claps. A man in a giant octopus costume appears and hands Bush a small plate of takoyaki. Bush hesitantly tries one.)</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Host 「正解！さすが国際派！」</span> <span class="dialogue-translation">("Correct! Truly international!")</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-bush">Bush “Well, interesting question. Ms. Kuroyanagi was talking with me about Japanese steel–”</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Second Question 「次のうち、“おなら”はどれ？ A: ラーメン B: ブーブー C: スシ」</span> <span class="dialogue-translation">("Which of the following means noodle? A: Ramen B: Boo Boo C: Sushi")</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-bush">Bush “Uh, uh…”</span>
+    </p>
+
+    <p class="gachinko-action">(He panics and just presses a red button. The buzzer blares. A trap door opens and confetti falls on Bush. Someone offscreen yells “BINGO!”)</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Host 「残念！正解はA：ラーメンでした”！」</span> <span class="dialogue-translation">("Too bad! The correct answer was A: Ramen!")</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-bush">Bush "...This is not what I was expecting."</span>
+    </p>
+
+    <div class="gachinko-subheading">芸能バトル恒例“ムチャぶりコーナー” (The Absurd Challenge)</div>
+
+    <p class="gachinko-para">
+      <span class="dialogue-narrator">Narrator (V.O.) 「ここからが本番だッ！芸能バトル恒例“ムチャぶりコーナー”開始！！」</span> <span class="dialogue-translation">("Now it’s the real deal! Time for our traditional segment: The Absurd Challenge!")</span>
+    </p>
+
+    <p class="gachinko-action">[Stage transforms into obstacle course: inflatable noodles, slime pit, balance beam with giant foam hand swinging at intervals]</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Host 「ジョージさん、“大統領スプリント”チャレンジしてみようか？」</span> <span class="dialogue-translation">("George-san, care to try the Presidential Sprint?")</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-bush">Bush (still seated) "I’m 72 years old."</span>
+    </p>
+
+    <p class="gachinko-action">[Audience laughs. Two assistants in Power Ranger-style outfits help him into a blue tracksuit with “アメリカ合衆国大統領” in bold katakana on the back]</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-translation">Translator (off-screen, struggling) "He says… he prefers not to, but will do a short version."</span>
+    </p>
+
+    <p class="gachinko-action">[Cue dramatic drum music. Bush climbs onto the balance beam. He takes a step, then another, feeling confident. As he takes another one, a foam hand smacks him into the slime pool. The audience erupts in cheers and chants: “ブッシュ！ブッシュ！”]</p>
+
+    <p class="gachinko-action">[Bush crawls out of the slime pool, helped by the show’s aides. Although he’s drenched in slime, he otherwise looks to be in fine condition.]</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-bush">Bush This suit was a gift from my son, so we’re lucky that it’s not expensive, huh? Okay, time for the political aspect, right?</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Host 「さて、ここで真面目な政治インタビューを……と思ったら、ドッキリ！」</span> <span class="dialogue-translation">("Now, time for the serious political interview... or is it?!")</span>
+    </p>
+
+    <p class="gachinko-action">[Bush is sat down for a “one-on-one” under the spotlight, right across from the host. The host asks him a question about cooperation between Japan and the U.S. in the Pacific ocean. Suddenly, Bush’s chair starts slowly spinning. The background lifts to reveal sumo wrestlers holding cue cards.]</p>
+
+    <p class="gachinko-para" style="font-weight: bold; color: #ff0000; font-family: monospace;">
+      Sumo Wrestler (holding sign): “DANCE TO STAY IN THE ROOM”
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-translation">Translator: "They want you to dance to continue."</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-bush">Bush "...I am the President of the United States."</span>
+    </p>
+
+    <p class="gachinko-action">(Bush sees the crowd cheering wildly and sighs. He starts doing a stiff version of the Charleston, to rapturous applause. A Japanese woman dressed like Madonna runs on stage and gives him a doll: a plush caricature of himself, wearing a rising sun bandana)</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Host 「ジョージさん、どうでしたか？日本のテレビ？」</span> <span class="dialogue-translation">("George-san, how was Japanese TV?")</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-bush">Bush (drenched in slime, holding the doll of himself) "...You people are, uh…"</span>
+    </p>
+
+    <p class="gachinko-action">(He pauses for a moment)</p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-bush">Bush “…wonderful."</span>
+    </p>
+
+    <p class="gachinko-para">
+      <span class="dialogue-host">Host 「サンキュー・ミスター・プレジデント！また来てね！」</span> <span class="dialogue-translation">("Thank you, Mr. President! Come back anytime!")</span>
+    </p>
+
+    <p class="gachinko-action">[Credits roll over clips of Bush slipping, eating takoyaki, and being cheered by the crowd. The background music is an upbeat remix of “Hail to the Chief.”]</p>
+
+    <div style="text-align: center;">
+      <div class="gachinko-hitcounter">
+        ACCESS COUNTER: 0097402
+      </div>
+    </div>
+
+  </div>
+</div>
     `
         },
         {

@@ -25,48 +25,40 @@ campaignTrail_temp.global_parameter_json = [
 ]
 
 const recommendedReadingContent = `
-  <h1 style="text-align: center;"><strong>Moonbeam Credits</strong></h1>
+  <h1 style="text-align: center;"><strong>Recommended reading</strong></h1>
 
-<ul style="list-style: none; padding: 0; max-width: 700px; margin: 0 auto;">
-  <li><strong>Head Writer:</strong> Shockonomics</li>
-  <li><strong>Head Coder:</strong> Ohas</li>
-  <li><strong>Coding Work:</strong> Girlie, StrawberryMaster</li>
-  <li><strong>Dev Team:</strong> John Arizona, Dyson, LP</li>
-  <li><strong>Help with Values and Margins:</strong> Martha</li>
-  <li><strong>Promotional Material & Advice:</strong> LiterallyNelsonRockefeller</li>
-
-  <li style="margin-top: 1em;">
-    <strong>Much thanks to:</strong><br>
-    Mack A. Rony, TerryJerry, Kaylee, Nidoras, DayDoveRomantic, Librasaurusx, Karton, and DKing
-    for useful advice
-  </li>
-
-  <li style="margin-top: 1em;">
-    <strong>Special thanks:</strong><br>
-    Vetulicolia — incredibly helpful advice on the Yugoslavia path and endings
-  </li>
-
-  <li>
-    Halligan Elysium — incredibly helpful advice on the Britain path and writing endings
-  </li>
-
-  <li>
-    MeWhenTheAgain, ThisGuy, and SteamedHams501 — writing endings
-  </li>
-
-  <li style="margin-top: 1em;">
-    <strong>Extra special thanks:</strong><br>
-    Franko the Tea King — consistent support of the project and writing endings
-  </li>
-
-  <li>
-    EmpiresUnited — for helping us fix issues with the achievements & other tunneling issues
-  </li>
-
-  <li>
-    Jerry Brown — despite his imperfections, this mod would not exist without his strength of character and willingness to fight for his beliefs
-  </li>
-</ul>
+  <ul style="list-style: none; padding: 0; max-width: 700px; margin: 20px auto; line-height: 2.2; text-align: center;">
+    <li>
+      <a href="https://digitalassets.lib.berkeley.edu/roho/ucb/text/brown_jerry_2020.pdf" target="_blank" style="color: #4268af; font-weight: bold; text-decoration: underline;">
+        <em>Mein Kampf</em>, Adolf Hitler
+      </a>
+    </li>
+    <li>
+      <a href="https://www.hachettebookgroup.com/titles/jim-newton/man-of-tomorrow/9781478964186/?lens=little-brown" target="_blank" style="color: #4268af; font-weight: bold; text-decoration: underline;">
+        <em>La Mia Vita</em>, Benito Mussolini
+      </a>
+    </li>
+    <li>
+      <a href="https://www.pbs.org/wnet/americanmasters/jerry-brown-the-disrupter-about-the-documentary/28365/" target="_blank" style="color: #4268af; font-weight: bold; text-decoration: underline;">
+        <em>Imperium: The Philosophy of History and Politics</em>, Francis Parker Yockey
+      </a>
+    </li>
+    <li>
+      <a href="https://www.nytimes.com/1992/04/02/us/1992-campaign-california-who-jerry-brown-voices-past-show-why-man-enigma.html" target="_blank" style="color: #4268af; font-weight: bold; text-decoration: underline;">
+        <em>Revolt Against the Modern World</em>, Julius Evola
+      </a>
+    </li>
+    <li>
+      <a href="https://newrepublic.com/article/117695/sidney-blumenthal-jerry-browns-campaign" target="_blank" style="color: #4268af; font-weight: bold; text-decoration: underline;">
+        <em>The Will to Power</em>, Friedrich Nietzsche
+      </a>
+    </li>
+    <li>
+      <a href="https://www.salon.com/1999/01/05/news_164/" target="_blank" style="color: #4268af; font-weight: bold; text-decoration: underline;">
+        <em>Che Cosa è Il Fascismo</em>, Giovanni Gentile
+      </a>
+    </li>
+  </ul>
 `;
 
 campaignTrail_temp.election_json = [
@@ -537,39 +529,182 @@ campaignTrail_temp.running_mate_json = [
 campaignTrail_temp.credits = "<button onclick='credits()'>THE MOONBEAM TEAM</button>";
 
 window.credits = function () {
-  const creditsList = [
-    "Shockonomics",
-    "Ohas",
-    "Girlie",
-    "StrawberryMaster",
-    "John Arizona",
-    "Dyson",
-    "LP",
-    "",
-    "Much thanks to:",
-    "Martha",
-    "LiterallyNelsonRockefeller",
-    "Mack A. Rony",
-    "TerryJerry",
-    "Kaylee",
-    "Nidoras",
-    "DayDoveRomantic",
-    "Librasaurusx",
-    "Karton",
-    "DKing",
-    "Vetulicolia",
-    "Halligan Elysium",
-    "MeWhenTheAgain",
-    "ThisGuy",
-    "SteamedHams501",
-    "Franko the Tea King",
-    "EmpiresUnited",
-    "and of course, Jerry Brown."
+  if (document.getElementById("credits-modal")) return;
+
+  if (!document.getElementById("credits-modal-styles")) {
+    const style = document.createElement("style");
+    style.id = "credits-modal-styles";
+    style.textContent = `
+      .credits-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .credits-window {
+        max-width: 90vw;
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        background-color: #2d4f6b;
+        border: 3px double #bfc7cf;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        color: #ffffff;
+        font-family: 'Claremont', sans-serif;
+      }
+      .credits-header-bar {
+        margin: 0;
+        padding: .5em 1em !important;
+        background: #2b3f6e;
+        border-bottom: 3px groove #4268af;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .credits-header-title {
+        font-size: 16px;
+      }
+      .credits-close-btn {
+        background: #e7ecf3;
+        color: #0f1a29;
+        border: 1px solid #243f63;
+        padding: 2px 8px;
+        cursor: pointer;
+        font-size: 12px;
+        font-family: sans-serif;
+        font-weight: bold;
+      }
+      .credits-close-btn:hover {
+        background: #2b3f6e;
+        color: #fff;
+        border-color: #ccc;
+      }
+      .credits-scroll-area {
+        padding: 15px 20px;
+        font-size: 14px;
+        line-height: 1.5;
+        overflow-y: auto;
+      }
+      .credits-scroll-area h2 {
+        text-align: center;
+        margin-top: 0;
+        font-size: 1.5em;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        padding-bottom: 8px;
+      }
+      .credits-item-role {
+        margin: 6px 0;
+      }
+      .credits-item-note {
+        margin: 10px 0;
+      }
+      .credits-item-divider {
+        border: 0;
+        border-top: 1px dotted rgba(255,255,255,0.3);
+        margin: 12px 0;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  const creditsData = [
+    { type: "role", label: "Head writer", names: ["Shockonomics"] },
+    { type: "role", label: "Head coder", names: ["Ohas"] },
+    { type: "role", label: "Coding work", names: ["Girlie", "StrawberryMaster"] },
+    { type: "role", label: "Dev team", names: ["John Arizona", "Dyson", "LP"] },
+    { type: "role", label: "Help with values and margins", names: ["Martha"] },
+    { type: "role", label: "Promotional material & advice", names: ["LiterallyNelsonRockefeller"] },
+    
+    { type: "divider" },
+    
+    { 
+      type: "note", 
+      label: "Much thanks to", 
+      text: "Mack A. Rony, TerryJerry, Kaylee, Nidoras, DayDoveRomantic, Librasaurusx, Karton, and DKing for useful advice" 
+    },
+    { 
+      type: "note", 
+      label: "Special thanks to", 
+      text: "Vetulicolia for incredibly helpful advice on the Yugoslavia path and endings" 
+    },
+    { 
+      type: "note", 
+      label: "Special thanks to", 
+      text: "Halligan Elysium for incredibly helpful advice on the Britain path and writing endings" 
+    },
+    { 
+      type: "note", 
+      label: "Special thanks to", 
+      text: "MeWhenTheAgain, ThisGuy, and SteamedHams501 for writing endings" 
+    },
+    { 
+      type: "note", 
+      label: "Extra special thanks to", 
+      text: "Franko the Tea King for his consistent support of the project and writing endings" 
+    },
+    { 
+      type: "note", 
+      label: "Extra special thanks to", 
+      text: "Jerry Brown, as despite his imperfections, this mod would not exist without his strength of character and willingness to fight for his beliefs" 
+    }
   ];
 
-  const text = "Brought to you with love by:\n\n" + creditsList.join('\n');
+  const contentHTML = creditsData.map(item => {
+    if (item.type === "role") {
+      return `<p class="credits-item-role"><strong>${item.label}:</strong> ${item.names.join(", ")}</p>`;
+    }
+    if (item.type === "note") {
+      return `<p class="credits-item-note"><strong>${item.label}:</strong> ${item.text}</p>`;
+    }
+    if (item.type === "divider") {
+      return `<hr class="credits-item-divider">`;
+    }
+    return "";
+  }).join("");
 
-  alert(text);
+  const backdrop = document.createElement("div");
+  backdrop.id = "credits-modal";
+  backdrop.className = "credits-backdrop";
+
+  const modal = document.createElement("div");
+  modal.className = "credits-window overlay_window window";
+
+  const header = document.createElement("h3");
+  header.className = "credits-header-bar title-bar title-bar-text";
+  header.innerHTML = `
+    <span class="credits-header-title">Moonbeam credits</span>
+    <button id="close-credits" class="credits-close-btn">X</button>
+  `;
+
+  const content = document.createElement("div");
+  content.className = "credits-scroll-area";
+  content.innerHTML = `
+    <h2>Moonbeam credits</h2>
+    ${contentHTML}
+  `;
+
+  modal.appendChild(header);
+  modal.appendChild(content);
+  backdrop.appendChild(modal);
+  document.body.appendChild(backdrop);
+
+  const closeBtn = backdrop.querySelector("#close-credits");
+  const closeModal = () => {
+    backdrop.remove();
+  };
+  
+  closeBtn.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", (e) => {
+    if (e.target === backdrop) closeModal();
+  });
 }
 
 campaignTrail_temp.opponents_default_json = [
@@ -1937,8 +2072,14 @@ window.WalkmanPlayer = {
   },
 
   _createPlayerHTML(targetElement) {
+	const savedLayout = localStorage.getItem('walkman_layout');
+    const isHorizontal = savedLayout === 'horizontal';
+    
+    const playerClass = isHorizontal ? 'player player--horizontal' : 'player';
+    const lockClass = isHorizontal ? 'player__lock-switch active' : 'player__lock-switch';
+
     const playerHTML = `
-            <div class="player">
+            <div class="${playerClass}">
                 <div class="player__body">
                     <div class="player__header">
                         <span class="player__brand-sony">SONY</span>
@@ -1994,7 +2135,7 @@ window.WalkmanPlayer = {
                     </div>
                     <div class="player__lock">
                         <span class="player__lock-label">HOLD</span>
-                        <div class="player__lock-switch"></div>
+                        <div class="${lockClass}"></div>
                     </div>
                 </div>
             </div>
@@ -2039,8 +2180,10 @@ window.WalkmanPlayer = {
   },
 
   toggleLayout() {
-    this.dom.player.classList.toggle('player--horizontal');
+    const isNowHorizontal = this.dom.player.classList.toggle('player--horizontal');
     this.dom.lockSwitch.classList.toggle('active');
+	
+    localStorage.setItem('walkman_layout', isNowHorizontal ? 'horizontal' : 'vertical');
   },
 
   _playSongAtIndex(index, autoplay = false) {
@@ -2159,11 +2302,11 @@ window.WalkmanPlayer = {
                 box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1);
                 font-family: 'Consolas', IBM Courier, Arial, sans-serif;
                 width: 100%;
-                max-width: 360px; /* Default Vertical Width */
+                max-width: 360px;
                 margin: 15px auto;
                 color: var(--text-primary);
                 overflow: hidden;
-                transition: max-width 0.3s ease, height 0.3s ease; /* Smooth size transition */
+                transition: max-width 0.3s ease, height 0.3s ease;
             }
             .player__body {
                 flex-grow: 1; padding: 8px;
@@ -2176,6 +2319,12 @@ window.WalkmanPlayer = {
             }
             .player__brand-sony { font-weight: bold; font-size: 14px; color: var(--accent-color); }
             .player__features { display: flex; gap: 8px; }
+			.player__features span {
+				border: 1px solid #3b3d44;
+				border-radius: 2px;
+				padding: 1px 4px;
+				background: rgba(0, 0, 0, 0.2);
+			}
 
             .player__window {
                 background: #111; border: 1px solid #000;
@@ -2360,25 +2509,6 @@ window.WalkmanPlayer = {
     document.head.appendChild(style);
   }
 };
-
-// the observer.
-const windowsAdvisorTargetNode = document.getElementById("game_window");
-if (windowsAdvisorTargetNode) {
-  const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
-  const callback = (mutationList, observer) => {
-    const visitWindow = document.getElementsByClassName("overlay_window")[0];
-    if (visitWindow && !visitWindow.classList.contains("done")) {
-      visitWindow.classList.add("done", "window");
-      let titleBar = visitWindow.querySelector("h3");
-      if (titleBar) {
-        titleBar.classList.add("title-bar", "title-bar-text");
-        titleBar.style.paddingLeft = "3px";
-      }
-    }
-  };
-  const observer = new MutationObserver(callback);
-  observer.observe(windowsAdvisorTargetNode, windowsAdvisorConfig);
-}
 
 // the songs.
 const mainPlaylist = new Playlist([
