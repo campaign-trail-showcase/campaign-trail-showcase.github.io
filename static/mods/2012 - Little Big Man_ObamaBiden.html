@@ -25699,7 +25699,11 @@ const TIMELINE_ASSETS = {
     "Jeb Bush": { party: "Republican", img: "https://stateimpact.npr.org/florida/files/2014/04/4-3-JebBush.jpg" },
     "Carly Fiorina": { party: "Republican", img: "https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt16f70888b1e507ff/69876d7ee20a8777eea83df1/carly-fiorina.jpg?branch=production" },
     "Herman Cain": { party: "Republican", img: "https://www.pbs.org/newshour/app/uploads/2014/12/129043537-1024x679.jpg" },
-    "J.D. Vance": { party: "Republican", img: "https://m.media-amazon.com/images/M/MV5BMzgzNTY5MDUtNDg0Zi00MmMxLWE5YjItM2U0OGRjZDFlNTBkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" },
+	"Allen West": { party: "Republican", img: "https://www.focusonthefamily.com/wp-content/uploads/2022/05/lt-col-allen-west-headshot.jpg" },
+    "Rob Portman": { party: "Republican", img: "https://radio.foxnews.com/wp-content/uploads/2013/03/3-15-portman.jpg" },
+    "Mike Huckabee": { party: "Republican", img: "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iRr0QA6nQ6VQ/v2/-1x-1.webp" },
+    "Lew Rockwell": { party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Lew_Rockwell_2016.jpg/250px-Lew_Rockwell_2016.jpg" },
+    "JD Vance": { party: "Republican", img: "https://m.media-amazon.com/images/M/MV5BMzgzNTY5MDUtNDg0Zi00MmMxLWE5YjItM2U0OGRjZDFlNTBkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" },
     "Tim Scott": { party: "Republican", img: "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Tim_Scott.jpeg" },
     "Kristi Noem": { party: "Republican", img: "https://sdaho.org/wp-content/uploads/2019/01/gov-noem-scaled-e1638983117849.jpg?w=640" },
 
@@ -26168,9 +26172,29 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
 
     last.end = takeoverYear;
     last.endDateStr = exactTakeoverDate;
-    last.reason = Math.random() < resignationChance ? "Resigned" : "Died in office";
 
-    // disqualify original president because they resigned or died
+    // roll a random decimal between 0 and 1 to determine the outcome
+    const reasonRoll = Math.random();
+
+    if (winner16 === "Donald Trump" && con >= 6) {
+      if (reasonRoll < 0.45) {
+        last.reason = "Resigned";                  // 45% chance
+      } else if (reasonRoll < 0.90) {
+        last.reason = "Impeached and removed";     // 45% chance
+      } else {
+        last.reason = "Died in office";            // 10% chance
+      }
+    } else {
+      if (reasonRoll < 0.60) {
+        last.reason = "Resigned";                  // 60% chance
+      } else if (reasonRoll < 0.95) {
+        last.reason = "Impeached and removed";     // 35% chance
+      } else {
+        last.reason = "Died in office";            // 5% chance
+      }
+    }
+
+    // disqualify original president because they resigned/died
     disqualified.add(last.name);
 
     // VP takes over
@@ -26476,7 +26500,7 @@ function generateTimelineHTML(timelineData) {
 
     // fallback party assignment logic
     if (!TIMELINE_ASSETS.candidates[p.name]) {
-      if (["Donald Trump", "George W. Bush", "Mike Pence", "Ted Cruz", "Carly Fiorina", "Mitt Romney", "Paul Ryan", "Jeb Bush", "Marco Rubio", "Chris Christie", "Sarah Palin", "Ron DeSantis", "Nikki Haley", "Tucker Carlson", "Rand Paul", "Rick Perry", "Jon Huntsman", "Rick Santorum", "Newt Gingrich", "Michele Bachmann", "Herman Cain", "JD Vance", "Tim Scott", "Kristi Noem"].includes(p.name)) {
+      if (["Donald Trump", "George W. Bush", "Mike Pence", "Ted Cruz", "Carly Fiorina", "Mitt Romney", "Paul Ryan", "Jeb Bush", "Marco Rubio", "Chris Christie", "Sarah Palin", "Ron DeSantis", "Nikki Haley", "Tucker Carlson", "Rand Paul", "Rick Perry", "Jon Huntsman", "Rick Santorum", "Newt Gingrich", "Michele Bachmann", "Herman Cain", "JD Vance", "Tim Scott", "Kristi Noem", "Allen West", "Rob Portman", "Mike Huckabee", "Lew Rockwell"].includes(p.name)) {
         data.party = "Republican";
       } else if (["Joe Biden", "Kamala Harris", "Elizabeth Warren", "Bernie Sanders", "Hillary Clinton", "Tim Kaine", "Cory Booker", "Julian Castro", "Sherrod Brown", "Gavin Newsom", "Alexandria Ocasio-Cortez", "Amy Klobuchar", "Michelle Obama", "Martin O'Malley", "Jon Stewart", "Al Gore", "Tammy Baldwin", "Pete Buttigieg", "Gretchen Whitmer", "Roy Cooper"].includes(p.name)) {
         data.party = "Democratic";
