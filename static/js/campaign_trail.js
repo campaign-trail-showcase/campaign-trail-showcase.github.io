@@ -6,8 +6,8 @@ e ||= campaignTrail_temp;
 e.skippingQuestion = false;
 
 /**
- * @param {{pk: *, fields: Object}[]} json
- * @returns {Map<string, Object>}
+ * @param {{pk: *, fields: {}}[]} json
+ * @returns {Map<string, {}>}
  */
 function mapPkToFields(json) {
   const map = new Map();
@@ -38,8 +38,8 @@ const stringsEqual = (a, b) => String(a) === String(b);
 // midgame.
 const PROPS = {
   get PARAMS() { return e.global_parameter_json?.[0]?.fields ?? {}; },
-  get ELECTIONS() { return mapPkToFields(e.election_json); }, // Map<string, object>
-  get CANDIDATES() { return mapPkToFields(e.candidate_json); }, // Map<string, object>
+  get ELECTIONS() { return mapPkToFields(e.election_json); }, // Map<string, {}>
+  get CANDIDATES() { return mapPkToFields(e.candidate_json); }, // Map<string, {}>
 };
 
 async function evalFromUrl(url, callback = null) {
@@ -88,6 +88,8 @@ const baseScenarioDict = {
   "2016a": "2016a_Clinton_Booker.html",
   2020: "2020_Biden_Bass.html",
 };
+
+const RESULTS_MODE = Object.freeze({ FINAL: 1, MIDGAME: 2 });
 
 // Global Text Variables
 
@@ -182,7 +184,7 @@ function mapCache(skip = false) {
     }
   }
 
-  const rr = A(2);
+  const rr = calculateResults(RESULTS_MODE.MIDGAME);
   window.rFuncRes = rFunc(rr, 0);
 
   const $mapContainer = $("#map_container");
@@ -1392,13 +1394,13 @@ function questionHTML() {
   $("#view_electoral_map").off("click").on("click", (evt) => {
     evt.preventDefault();
     evt.stopImmediatePropagation();
-    openMap(A(2));
+    openMap(calculateResults(RESULTS_MODE.MIDGAME));
   });
 
   if (Number(e.game_type_id) === 3) {
     $("#shining_menu_button").off("click").on("click", (evt) => {
       evt.preventDefault();
-      shining_menu(A(2));
+      shining_menu(calculateResults(RESULTS_MODE.MIDGAME));
     });
   }
 
@@ -1496,7 +1498,7 @@ function primaryFunction(execute, breaks) {
   });
 
   // Set the final state results to an array with one element (1)
-  e.final_state_results = A(1);
+  e.final_state_results = calculateResults(RESULTS_MODE.FINAL);
 
   // Filter out those that aren't in the map
   e.final_state_results = e.final_state_results.filter((f) => stateMap.includes(f.state));
@@ -1787,15 +1789,15 @@ function nextQuestion() {
   // calculate shining
 
   if (Number(e.game_type_id) === 3) {
-    const temp_polls = A(2);
+    const temp_polls = calculateResults(RESULTS_MODE.MIDGAME);
     shining_cal(temp_polls);
   }
 
-  const t = A(2);
+  const t = calculateResults(RESULTS_MODE.MIDGAME);
 
   if (e.cyoa) {
     if (e.collect_results) {
-      const a = A(2);
+      const a = calculateResults(RESULTS_MODE.MIDGAME);
       e.current_results = [getLatestRes(a)[0], a];
     }
     cyoAdventure(e.questions_json[e.question_number]);
@@ -1843,7 +1845,7 @@ function nextQuestion() {
   }
 
   if (e.question_number === Number(PROPS.PARAMS.question_count)) {
-    e.final_state_results = A(1);
+    e.final_state_results = calculateResults(RESULTS_MODE.FINAL);
     electionNight();
     if (e.primary) {
       handleFinalResults(500);
@@ -2265,7 +2267,7 @@ function renderOptions(electionId, candId, runId) {
 
     const tempFuncO = (e) => {
       if (e.collect_results) {
-        const a = A(2);
+        const a = calculateResults(RESULTS_MODE.MIDGAME);
         e.current_results = [getLatestRes(a)[0], a];
       }
       questionHTML();
@@ -2273,7 +2275,7 @@ function renderOptions(electionId, candId, runId) {
 
     if (!modded) {
       $("#game_window").load(aaa, () => {
-        const e = A(2);
+        const e = calculateResults(RESULTS_MODE.MIDGAME);
         questionHTML(e);
       });
     } else if (
@@ -2380,7 +2382,7 @@ function renderOptions(electionId, candId, runId) {
 
 function importgame(code) {
   starting_mult = encrypted + campaignTrail_temp.difficulty_level_multiplier;
-  A(1);
+  calculateResults(RESULTS_MODE.FINAL);
   const campaigntrail = JSON.parse(code);
   e.election_id = campaigntrail.election_id;
   e.candidate_id = campaigntrail.player_candidate;
@@ -2623,7 +2625,7 @@ function rFunc(t, i) {
       t = t[1];
     } else {
       try {
-        t = A(2);
+        t = calculateResults(RESULTS_MODE.MIDGAME);
       } catch (_err) {
         t = [];
       }
@@ -3676,10 +3678,10 @@ function T(t) {
 
 /**
  * Handles state polling and election results
- * @param {1|2} t - 1 for final results, 2 for state polling during game
+ * @param {1|2} mode - 1 for final results, 2 for state polling during game
  * @returns {StateResult[]} Array of results for each state
  */
-function A(t) {
+function calculateResults(mode) {
   const gp = PROPS.PARAMS;
   const variance = gp.global_variance;
   const candidateIssueWeight = gp.candidate_issue_weight;
@@ -4021,7 +4023,7 @@ function A(t) {
     });
   }
 
-  if (t === 1) {
+  if (mode === RESULTS_MODE.FINAL) {
     try {
       const latest = getLatestRes(calcStatePolls);
       window.res = latest;
@@ -4033,7 +4035,7 @@ function A(t) {
     return calcStatePolls;
   }
 
-  if (t === 2) {
+  if (mode === RESULTS_MODE.MIDGAME) {
     const out = calcStatePolls.map((f) => {
       const res = f.result.map((candidate) => {
         const G = 1 + randomNormal() * variance;
@@ -4141,7 +4143,7 @@ const gameStart = (a) => {
 // $("#game_start").click(gameStart);
 document.getElementById("game_start").addEventListener("click", gameStart);
 document.getElementById("skip_to_final")?.addEventListener("click", () => {
-  e.final_state_results = A(1);
+  e.final_state_results = calculateResults(RESULTS_MODE.FINAL);
   electionNight();
 });
 
@@ -4160,10 +4162,10 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     "#running_mate_id_back": (event) => candSel(event),
     "#opponent_selection_id_back": (event) => vpSelect(event),
-    "#view_electoral_map": () => openMap(A(2)),
-    "#shining_menu_button": () => shining_menu(A(2)),
+    "#view_electoral_map": () => openMap(calculateResults(RESULTS_MODE.MIDGAME)),
+    "#shining_menu_button": () => shining_menu(calculateResults(RESULTS_MODE.MIDGAME)),
     "#answer_select_button": (event) => onAnswerSelectButtonClicked(event),
-    "#resume_questions_button": () => questionHTML(A(2)),
+    "#resume_questions_button": () => questionHTML(calculateResults(RESULTS_MODE.MIDGAME)),
     "#AdvisorButton": (event) => {
       event.preventDefault();
 
@@ -4190,7 +4192,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const stateResults = (Array.isArray(pollingTuple) && pollingTuple.length === 2 && Array.isArray(pollingTuple[1]))
         ? pollingTuple[1]
         : pollingTuple;
-      const pollingData = stateResults || A(2);
+      const pollingData = stateResults || calculateResults(RESULTS_MODE.MIDGAME);
       const mapOptions = rFunc(pollingData, 0);
 
       if ($("#map_container").data("plugin-usmap")) {
