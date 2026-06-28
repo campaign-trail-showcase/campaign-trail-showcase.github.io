@@ -43723,15 +43723,15 @@ const ads = [
     handleFinalResults(500);
   }
 
-  // calculateResults() wrapper for future polls/results
-  function patchCalculateResultsOnce() {
+  // A() wrapper for future polls/results
+  function patchAOnce() {
     if (window.__ctApatched) return;
-    const origCalculateResults = window.calculateResults;
-    if (typeof origCalculateResults !== 'function') return;
+    const origA = window.A;
+    if (typeof origA !== 'function') return;
 
     window.__ct_dropouts ||= [];
-    window.calculateResults = function patchedCalculateResults(mode) {
-      const res = origCalculateResults.call(this, mode);
+    window.A = function patchedA(t) {
+      const res = origA.call(this, t);
       const arr = Array.isArray(res) ? res : (Array.isArray(res?.[1]) ? res[1] : null);
       if (!Array.isArray(arr) || !window.__ct_dropouts?.length) return res;
 
@@ -43818,7 +43818,7 @@ const ads = [
     }
 
     // register/patch for future polls and results
-    patchCalculateResultsOnce();
+    patchAOnce();
     window.__ct_dropouts ||= [];
     window.__ct_dropouts = window.__ct_dropouts.filter((r) => Number(r.removedPk) !== Number(removedPk));
     window.__ct_dropouts.push({ removedPk: Number(removedPk), mode, target: Number(target), weights });
@@ -43906,7 +43906,7 @@ const ads = [
     // refresh cached arrays if requested
     if (touch === 'polls' || touch === 'both') {
       try {
-        const polls = calculateResults(RESULTS_MODE.MIDGAME);
+        const polls = A(2);
         // update e.current_results in the same shape as the code expects
         const latest = window.getLatestRes ? window.getLatestRes(polls) : null;
         e.current_results = latest ? [latest[0], polls] : polls;
@@ -43917,10 +43917,10 @@ const ads = [
 
     if (touch === 'final' || touch === 'both') {
       try {
-        e.final_state_results = calculateResults(RESULTS_MODE.FINAL);
+        e.final_state_results = A(1);
         rebuildFinalOverallFromStates();
       } catch (err) {
-        console.warn('restoreCandidate: failed to recompute final via calculateResults(RESULTS_MODE.FINAL):', err);
+        console.warn('restoreCandidate: failed to recompute final via A(1):', err);
       }
     }
 
