@@ -616,11 +616,11 @@ HistPVP=["38.8%","34.5%","9.7%","6.2%","10.8%"];
     return alloc;
   }
 
-  const __origCalculateResults = window.calculateResults;
-  if (typeof __origCalculateResults !== "function") return;
+  const __origA = window.A;
+  if (typeof __origA !== "function") return;
 
-  window.calculateResults = function patchedCalculateResults(mode) {
-    const out = __origCalculateResults.apply(this, arguments);
+  window.A = function patchedA(t) {
+    const out = __origA.apply(this, arguments);
 
     try {
       const e = window.campaignTrail_temp || window.e;
