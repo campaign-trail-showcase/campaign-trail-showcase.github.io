@@ -17,7 +17,7 @@ var songChoice = 'ThemeSong';
 newYouTubeMusicPlayer(songChoice);
 
 const style_overwrite = document.createElement("style");
-style_overwrite.innerHTML = 
+style_overwrite.innerHTML =
 `#campaign_sign {
   background-color: #002890;
   border-color: #1C75E8;
@@ -47,7 +47,7 @@ var changeGameDisp = (hide) => {
       disp = "none";
     }
     Array.from(gameWindow.children).forEach(f=>{
-        if(!f.classList.contains("game_header") && (f.id != "main_content_area" || !$("#campaign_sign")[0])) 
+        if(!f.classList.contains("game_header") && (f.id != "main_content_area" || !$("#campaign_sign")[0]))
             f.style.display = disp
     });
   };
@@ -64,7 +64,7 @@ e.vpSwitcher = () => {
         <div id="running_mate_form">
             <form name="running mate">
                 <p></p>
-                <h3>Please select your running mate:</h3> 
+                <h3>Please select your running mate:</h3>
                 <select name="running_mate_id" id="running_mate_id">
                     ${running_mate_options}
                 </select>
@@ -126,7 +126,7 @@ e.vpSwitcher = () => {
         $("#inner_window_4").remove();
         changeGameDisp(false);
     })
-  
+
   }
 
 getQuestionFromPk = function (pk) {
@@ -139,7 +139,7 @@ return questionSheath[index];
 
 // counts how many controversial answers a player makes & has an extra function to count different aspects of answers
 
-controversyCount = (array, call = a => a.fields.controversial) => { 
+controversyCount = (array, call = a => a.fields.controversial) => {
 array = array.filter(a=>a);
 let answers = e.answers_json.map(f=>f.pk);
 let controversy = 0;
@@ -164,7 +164,7 @@ PMJorritsma = false;
 cyoAdventure = function (a) {
 answer = e.player_answers[e.player_answers.length - 1]; // get current answer selection
 
-let hell_answerCount = controversyCount(e.player_answers, a => a.fields.hell_answer);  
+let hell_answerCount = controversyCount(e.player_answers, a => a.fields.hell_answer);
 let controversialCount = controversyCount(e.player_answers);
 
 if(answer == 2001){
@@ -189,13 +189,13 @@ e.answers_json = [{"model":"campaign_trail.answer","pk":2000,"fields":{"question
 e.answer_feedback_json = [{"model":"campaign_trail.answer_feedback","pk":3000,"fields":{"answer":2000,"candidate":e.candidate_id,"answer_feedback":"The LPF realizes that they're all on the street again if they don't listen and take your pressing advice extremely seriously. Their parliamentary faction schedules a meeting to discuss the position of its two ministers without them present."}},{"model":"campaign_trail.answer_feedback","pk":3001,"fields":{"answer":2001,"candidate":e.candidate_id,"answer_feedback":"The two of you agree to keep your cards close until after the weekend and after the funeral, when you jointly declare that you have no faith in the coalition anymore. The LPF is outraged, but there is nobody who doesn't understand."}},{"model":"campaign_trail.answer_feedback","pk":3002,"fields":{"answer":2002,"candidate":e.candidate_id,"answer_feedback":"While the sentiment is shared by the electorate, the fact that the cabinet collapsed, just as the prince consort died, is viewed as sacrilege, and you are widely criticized for the lack of respect to the monarchy this action shows."}},{"model":"campaign_trail.answer_feedback","pk":3003,"fields":{"answer":2003,"candidate":e.candidate_id,"answer_feedback":"The cabinet stands... For now. But the patience of the CDA is also wearing thin."}},{"model":"campaign_trail.answer_feedback","pk":3004,"fields":{"answer":2004,"candidate":e.candidate_id,"answer_feedback":"The CDA follows suit. It's clear to all who was at fault here, but the LPF claims that since they have had Heinsbroek and Bomhoff hand in their resignation before 9 AM, you have gone back on your word. And they primarily blame you for it."}},{"model":"campaign_trail.answer_feedback","pk":3005,"fields":{"answer":2005,"candidate":e.candidate_id,"answer_feedback":"The LPF still believed in your deal from before the funeral and kept it, with Bomhoff and Heinsbroek handing in their resignations in time. The CDA is annoyed with your position but can't let the outrage stand, so they relent and pull the plug. The LPF primarily blames the CDA for not holding up to the bargain you held up to them."}},{"model":"campaign_trail.answer_feedback","pk":3006,"fields":{"answer":2006,"candidate":e.candidate_id,"answer_feedback":"The CDA is not impressed, and does pull its support. Your positioning behind the LPF is received very badly, both with the CDA, which will think twice before it governs with you again, and with the electorate at large, which is by now long tired of the LPF's antics. Some VVDers fear you're just helping the left here."}},{"model":"campaign_trail.answer_feedback","pk":3007,"fields":{"answer":2007,"candidate":e.candidate_id,"answer_feedback":"The CDA backs you up, but the LPF attacks you for not upholding your bargain, after they have Heinsbroek and Bomhoff hand in their resignation. It being ended the night after the funeral also leads to some criticism. Nonetheless, the public also understands."}},{"model":"campaign_trail.answer_feedback","pk":3008,"fields":{"answer":2008,"candidate":e.candidate_id,"answer_feedback":"The LPF is with you, but the CDA is not. Now that the cabinet fell, they can also work with the PvdA, GroenLinks and D66, who scuttle your plan."}},{"model":"campaign_trail.answer_feedback","pk":3009,"fields":{"answer":2009,"candidate":e.candidate_id,"answer_feedback":"This does the trick. With the referendum being announced, De Hoop Scheffer cannot credibly agree at the European summit in December."}},{"model":"campaign_trail.answer_feedback","pk":3010,"fields":{"answer":2010,"candidate":e.candidate_id,"answer_feedback":"With no action on your part, the cabinet silently agrees with the accession of Eastern Europe. Your own team dissents, however. One MP, Geert Wilders, represents the conservative wing of the party at the election congress. Not ideal when you wish to display unity."}},{"model":"campaign_trail.answer_feedback","pk":3011,"fields":{"answer":2011,"candidate":e.candidate_id,"answer_feedback":"This leads to unrest within your party, but people do see the stability of policy among you and the CDA. Overall, while this was a net negative for the VVD alone, it was likely a benefit for the combined majority, which may just be the difference in the end."}},{"model":"campaign_trail.answer_feedback","pk":3012,"fields":{"answer":2012,"candidate":e.candidate_id,"answer_feedback":"This is a good answer. Despite the failure of the LPF cabinet, a return to Purple is far from what people desire, either. So you closing out the PvdA will benefit you."}},{"model":"campaign_trail.answer_feedback","pk":3013,"fields":{"answer":2013,"candidate":e.candidate_id,"answer_feedback":"Just because the LPF cabinet was the most magnificent failure of Dutch political history (so far), does not mean that people now long back for Purple. Especially not when the PvdA starts saying things like this."}},{"model":"campaign_trail.answer_feedback","pk":3014,"fields":{"answer":2014,"candidate":e.candidate_id,"answer_feedback":"Of course, to a degree, this is also bait, more for the PvdA base than the population at large. But this places that shiver of doubt, and the opponents of Bos pounce on it."}},{"model":"campaign_trail.answer_feedback","pk":3015,"fields":{"answer":2015,"candidate":e.candidate_id,"answer_feedback":"That would normally be fine. But protecting the Hypotheekrenteaftrek is basically what the VVD is on Earth for. The base wants you to talk about this. The CDA does take the base, and VVDers note with sorrow that the CDA is doing a better job putting what they find important onto the agenda."}},{"model":"campaign_trail.answer_feedback","pk":3016,"fields":{"answer":2016,"candidate":e.candidate_id,"answer_feedback":"This is great to win over disillusioned LPF voters, but not all of those will vote VVD no matter how close you come to their opinions. And attacks on the public prosecutor may dissuade some moderates who might instead opt for the CDA or D66."}},{"model":"campaign_trail.answer_feedback","pk":3017,"fields":{"answer":2017,"candidate":e.candidate_id,"answer_feedback":"This is legally the most sound position, but a bit of a weird answer for the VVD, since it is more aligned with the left."}},{"model":"campaign_trail.answer_feedback","pk":3018,"fields":{"answer":2018,"candidate":e.candidate_id,"answer_feedback":"Legally, this is questionable; there is plenty of precedent for it extending to other members of the royal family. Nonetheless, this is a good way to remain somewhat subtle about your opposition to the way things are being handled in this case."}},{"model":"campaign_trail.answer_feedback","pk":3019,"fields":{"answer":2019,"candidate":e.candidate_id,"answer_feedback":"Holding steadfast on the rule of law is a good way to attract moderate voters, but it leaves LPF voters wanting, as they'd prefer it when people 'say what people think'. And you need them to get a majority together with the CDA."}},{"model":"campaign_trail.answer_feedback","pk":3020,"fields":{"answer":2020,"candidate":e.candidate_id,"answer_feedback":"The PvdA is angry and blindsided by this, while VVDers laugh. The parallel with Femke Halsema, who defected to GroenLinks in 1997, is easily made."}},{"model":"campaign_trail.answer_feedback","pk":3021,"fields":{"answer":2021,"candidate":e.candidate_id,"answer_feedback":"This upsets the more left-leaning wing of the VVD, which believes we should be open to all viewpoints. However, you are vindicated when it soon becomes clear that she became a candidate for the SP instead."}},{"model":"campaign_trail.answer_feedback","pk":3022,"fields":{"answer":2022,"candidate":e.candidate_id,"answer_feedback":"Oof. Ayaan is not interested then. She soon re-emerges on the list of the SP instead."}},{"model":"campaign_trail.answer_feedback","pk":3023,"fields":{"answer":2023,"candidate":e.candidate_id,"answer_feedback":"This is a good way to move Ayaan-sympathizers to vote, although it was a little risky because Ali might've turned it down. She didn't, though, so it was a good move in hindsight."}},{"model":"campaign_trail.answer_feedback","pk":3024,"fields":{"answer":2024,"candidate":e.candidate_id,"answer_feedback":"The Dutch order of lawyers (NOvA) criticizes your plan, stating that you are encroaching on the separation of powers. But this is the law and order message the base expects, so let them complain."}},{"model":"campaign_trail.answer_feedback","pk":3025,"fields":{"answer":2025,"candidate":e.candidate_id,"answer_feedback":"The Dutch order of lawyers (NOvA) criticizes your plan, stating that you are encroaching on the separation of powers. But your lack of enthusiasm also infuriates the right wing of the VVD, which is excited for this plan."}},{"model":"campaign_trail.answer_feedback","pk":3026,"fields":{"answer":2026,"candidate":e.candidate_id,"answer_feedback":"The right wing of the VVD is frustrated by this position. They were just so excited for this plan. But do they really have any options? What are they going to vote for? LPF?!"}},{"model":"campaign_trail.answer_feedback","pk":3028,"fields":{"answer":2028,"candidate":e.candidate_id,"answer_feedback":"The VVD list for 2003 is received quite well, with the whole party united for a good showing this election."}},{"model":"campaign_trail.answer_feedback","pk":3029,"fields":{"answer":2029,"candidate":e.candidate_id,"answer_feedback":"The party is in agreement that this is the way to win more seats, even if some liberals rumble."}},{"model":"campaign_trail.answer_feedback","pk":3030,"fields":{"answer":2030,"candidate":e.candidate_id,"answer_feedback":"While not untrue, that list also did not perform admirably at all. This shows you haven't learned from those experiences."}},{"model":"campaign_trail.answer_feedback","pk":3031,"fields":{"answer":2031,"candidate":e.candidate_id,"answer_feedback":"Party-political games so shortly before an election never end well. The right wing is up in arms, and even moderates are worried that pivoting to the center is only going to yield defeat. After all, 2002 suggests this country wants to go right."}},{"model":"campaign_trail.answer_feedback","pk":3032,"fields":{"answer":2032,"candidate":e.candidate_id,"answer_feedback":"This is a good, conservative position to take as the VVD."}},{"model":"campaign_trail.answer_feedback","pk":3033,"fields":{"answer":2033,"candidate":e.candidate_id,"answer_feedback":"This leaves the right of the party wanting, but it's nonetheless good to stand by your own State Secretary."}},{"model":"campaign_trail.answer_feedback","pk":3034,"fields":{"answer":2034,"candidate":e.candidate_id,"answer_feedback":"That's just bad optics. Not only does it look like you're fighting, Nicolaï, as a state secretary has to commit to the cabinet line, and he promptly refuses your demand that he rectify it."}},{"model":"campaign_trail.answer_feedback","pk":3036,"fields":{"answer":2036,"candidate":e.candidate_id,"answer_feedback":"This is a fine proposal; the LPF and CDA are also on board."}},{"model":"campaign_trail.answer_feedback","pk":3037,"fields":{"answer":2037,"candidate":e.candidate_id,"answer_feedback":"This is a logical answer, but without a plan to pay for the lack of government revenue, there is a problem with the budget. You're not the VVD anymore either if you tolerate a budget that isn't balanced."}},{"model":"campaign_trail.answer_feedback","pk":3038,"fields":{"answer":2038,"candidate":e.candidate_id,"answer_feedback":"Seriously, the VVD that does not want a tax rebate? Who cares what it's about?"}},{"model":"campaign_trail.answer_feedback","pk":3039,"fields":{"answer":2039,"candidate":e.candidate_id,"answer_feedback":"Fair enough."}},{"model":"campaign_trail.answer_feedback","pk":3040,"fields":{"answer":2040,"candidate":e.candidate_id,"answer_feedback":"This is a positive tone, but it is ignoring the Fortuyn revolution to a large extent, which risks alienating voters. Even the PvdA is careful surrounding this issue these days."}},{"model":"campaign_trail.answer_feedback","pk":3041,"fields":{"answer":2041,"candidate":e.candidate_id,"answer_feedback":"Pitting it on integration is very much a fine way for the VVD to profile itself on migration."}},{"model":"campaign_trail.answer_feedback","pk":3042,"fields":{"answer":2042,"candidate":e.candidate_id,"answer_feedback":"A year ago, you would have been crucified next to Fortuyn for saying the Netherlands was full, by the PvdA and even your own members. But these days, even GroenLinks lets it go by mostly unchallenged. One PvdA alderman in Amsterdam even supports your statement when asked."}},{"model":"campaign_trail.answer_feedback","pk":3044,"fields":{"answer":2044,"candidate":e.candidate_id,"answer_feedback":"The openness to this plan rather annoys your support base."}},{"model":"campaign_trail.answer_feedback","pk":3045,"fields":{"answer":2045,"candidate":e.candidate_id,"answer_feedback":"This leads to an outright rebellion by conservative VVD MP Geert Wilders, who states that the VVD should never agree to Turkey joining the EU. You try to enforce the whip, but he consequently leaves the VVD. The good news is that it's too late for him to form his own party, so shortly before the election, the bad news is that he's in an electable spot on the list, so you will effectively already be one seat down. Fortunately, they will surely have forgotten this irrelevant backbencher by 2007."}},{"model":"campaign_trail.answer_feedback","pk":3046,"fields":{"answer":2046,"candidate":e.candidate_id,"answer_feedback":"You are attacked viciously by the left for the position that there is nothing Turkey could do to join the Union, not even if they fulfilled all requirements. Even the CDA warns that this position would isolate the Netherlands in Europe."}},{"model":"campaign_trail.answer_feedback","pk":3047,"fields":{"answer":2047,"candidate":e.candidate_id,"answer_feedback":"This position leads to irritation within the EU, because any step would be massively delayed by this. Plus, there are multiple irreversible steps in the accession process. But domestically, this position does fine."}},{"model":"campaign_trail.answer_feedback","pk":3048,"fields":{"answer":2048,"candidate":e.candidate_id,"answer_feedback":"This is a fine position."}},{"model":"campaign_trail.answer_feedback","pk":3049,"fields":{"answer":2049,"candidate":e.candidate_id,"answer_feedback":"What? Defend against whom? It was always to protect the country against the Soviet Union. But the days of Stalin are gone. These days, Russia is a peaceful liberal democracy under President Putin. The west stands unchallenged."}},{"model":"campaign_trail.answer_feedback","pk":3050,"fields":{"answer":2050,"candidate":e.candidate_id,"answer_feedback":"The two will indeed go to Brussels to clarify the situation to the secretary general. But the fact remains that our military is already a shadow of its former self compared to when the Netherlands was a mere 250 kilometers away from the frontiers of freedom."}},{"model":"campaign_trail.answer_feedback","pk":3051,"fields":{"answer":2051,"candidate":e.candidate_id,"answer_feedback":"The VVD is too transatlantically oriented for this answer."}},{"model":"campaign_trail.answer_feedback","pk":3052,"fields":{"answer":2052,"candidate":e.candidate_id,"answer_feedback":"Very good. Always keep an eye on where our tax euros go."}},{"model":"campaign_trail.answer_feedback","pk":3053,"fields":{"answer":2053,"candidate":e.candidate_id,"answer_feedback":"The CDA criticizes you for this, stating that 'a husband doesn't reel his wife in', and that she has a right to her own private opinions. Which isn't untrue, you suppose, but she still has a greater responsibility than this."}},{"model":"campaign_trail.answer_feedback","pk":3054,"fields":{"answer":2054,"candidate":e.candidate_id,"answer_feedback":"No harm, no foul."}},{"model":"campaign_trail.answer_feedback","pk":3055,"fields":{"answer":2055,"candidate":e.candidate_id,"answer_feedback":"No, you're the VVD. The VVD is always staunchly pro-Israel."}},{"model":"campaign_trail.answer_feedback","pk":3056,"fields":{"answer":2056,"candidate":e.candidate_id,"answer_feedback":"Fair enough, though some VVD voters secretly feel some sympathy for the position. However, after everyone falls over him, Nawijn takes his words back."}},{"model":"campaign_trail.answer_feedback","pk":3057,"fields":{"answer":2057,"candidate":e.candidate_id,"answer_feedback":"This is a fine answer."}},{"model":"campaign_trail.answer_feedback","pk":3058,"fields":{"answer":2058,"candidate":e.candidate_id,"answer_feedback":"Many VVDers, who secretly have some sympathy for the position, find this overblown. But your motion does pass. That is the last we'll hear of Nawijn, probably."}},{"model":"campaign_trail.answer_feedback","pk":3059,"fields":{"answer":2059,"candidate":e.candidate_id,"answer_feedback":"This causes a shitstorm. Already for the LPF, it was a step too far. For you, even more so. Joris Voorhoeve, leader of the VVD in the election 1989, publicly annulls his VVD membership."}},{"model":"campaign_trail.answer_feedback","pk":3060,"fields":{"answer":2060,"candidate":e.candidate_id,"answer_feedback":"The CDA and LPF are also inclined to heed the request of the United States, and thus there is majority support."}},{"model":"campaign_trail.answer_feedback","pk":3061,"fields":{"answer":2061,"candidate":e.candidate_id,"answer_feedback":"This isn't what the US was looking for, after having found the Western ally presence in Afghanistan mostly annoying, and it's not something our military can support due to the budget cuts during the 90s, which are still ongoing. The cabinet agrees to limit our contribution to logistical support and garrisoning duties."}},{"model":"campaign_trail.answer_feedback","pk":3062,"fields":{"answer":2062,"candidate":e.candidate_id,"answer_feedback":"The VVD does not need that leftist gibberish! There's UN Security Council Resolution 1441, which is enough. The cabinet thinks so at least."}},{"model":"campaign_trail.answer_feedback","pk":3063,"fields":{"answer":2063,"candidate":e.candidate_id,"answer_feedback":"Fair enough, though this leads to stirrings in the VVD that we are not helping our ally enough."}},{"model":"campaign_trail.answer_feedback","pk":3064,"fields":{"answer":2064,"candidate":e.candidate_id,"answer_feedback":"It's good to laugh, but the changes in the polls this new strategy yields leave little to laugh about."}},{"model":"campaign_trail.answer_feedback","pk":3065,"fields":{"answer":2065,"candidate":e.candidate_id,"answer_feedback":"This is the innovation that it takes. The CDA and PvdA are also professionalizing; it seems a new age of Dutch politics is upon us. This new technique hides the nerves quite effectively."}},{"model":"campaign_trail.answer_feedback","pk":3066,"fields":{"answer":2066,"candidate":e.candidate_id,"answer_feedback":"This leaves little in terms of results. Those nerves remain the issue."}},{"model":"campaign_trail.answer_feedback","pk":3067,"fields":{"answer":2067,"candidate":e.candidate_id,"answer_feedback":"It didn't work and will continue not to work."}},{"model":"campaign_trail.answer_feedback","pk":3068,"fields":{"answer":2068,"candidate":e.candidate_id,"answer_feedback":"The inevitable conclusion to this saga."}},{"model":"campaign_trail.answer_feedback","pk":3069,"fields":{"answer":2069,"candidate":e.candidate_id,"answer_feedback":"This just pushes your problem to the CDA, who, of course, don't like that. This alienation then means they support a motion of no confidence against Korthals for ducking his responsibility."}},{"model":"campaign_trail.answer_feedback","pk":3070,"fields":{"answer":2070,"candidate":e.candidate_id,"answer_feedback":"The CDA is willing to lend a helping hand, but the LPF and the leftist opposition are not. Motion of no confidence nonetheless forces Korthals to resign."}},{"model":"campaign_trail.answer_feedback","pk":3072,"fields":{"answer":2072,"candidate":e.candidate_id,"answer_feedback":"This is a fine way to draw some distance between the two of you."}},{"model":"campaign_trail.answer_feedback","pk":3073,"fields":{"answer":2073,"candidate":e.candidate_id,"answer_feedback":"While it's reasonable to oppose paying off the entire national debt, you have shown yourself supportive of this plan before, and the CDA intends to use the proceeds for investment in the road network, which makes your argument not very strong."}},{"model":"campaign_trail.answer_feedback","pk":3074,"fields":{"answer":2074,"candidate":e.candidate_id,"answer_feedback":"This is not the message you want to be sharing so shortly before the election, but props to you for your honesty."}},{"model":"campaign_trail.answer_feedback","pk":3075,"fields":{"answer":2075,"candidate":e.candidate_id,"answer_feedback":"Unfortunately, austerity so shortly before the election is also never popular, but at least it's VVD orthodoxy. The left and the CDA just work around you to keep the 'quarter' for the treasury."}},{"model":"campaign_trail.answer_feedback","pk":3076,"fields":{"answer":2076,"candidate":e.candidate_id,"answer_feedback":"The left became quite right-wing. First, in the 1990s, on the economy, and now since the Fortuyn debacle on security as well. Your attacks don't dig deep. The big winner is Wouter Bos, who forces Balkenende into the defensive in a Fortuyn-esque way."}},{"model":"campaign_trail.answer_feedback","pk":3077,"fields":{"answer":2077,"candidate":e.candidate_id,"answer_feedback":"Balkenende is forced heavily into the defense, but it's mainly to the benefit of the two leftists, since the stigma of the LPF also still sticks to them."}},{"model":"campaign_trail.answer_feedback","pk":3078,"fields":{"answer":2078,"candidate":e.candidate_id,"answer_feedback":"It devolves into a battle between you and Balkenende, wearing neckties, against Marijnissen and Bos. You and Balkenende put the fear of God into the homeowner, and consequently come out as the winner."}},{"model":"campaign_trail.answer_feedback","pk":3079,"fields":{"answer":2079,"candidate":e.candidate_id,"answer_feedback":"The biting fight between the two of you leaves the watching public on the edge of their seat, but unfortunately, it seems to have mainly just helped the SP. After all, they benefit from such anger, and the Iraq war is not popular at large. You, meanwhile, are accused of being too aggressive. It does seem in any case that 2002 was not a one-time thing, and that politics is polarizing again."}},{"model":"campaign_trail.answer_feedback","pk":3080,"fields":{"answer":2080,"candidate":e.candidate_id,"answer_feedback":"This is the right way to deal with such recalcitrant party veterans."}},{"model":"campaign_trail.answer_feedback","pk":3081,"fields":{"answer":2081,"candidate":e.candidate_id,"answer_feedback":"It's better not to make it all that big, but fortunately, Balkenende gets hit with the same curse when contemporary Dries van Agt criticizes his campaign."}},{"model":"campaign_trail.answer_feedback","pk":3082,"fields":{"answer":2082,"candidate":e.candidate_id,"answer_feedback":"Nicely clashing with the SP works well to divert attention, but the more oxygen you give them, the more brightly that fire starts to burn. People have had it with the status quo, and the SP benefits from it."}},{"model":"campaign_trail.answer_feedback","pk":3084,"fields":{"answer":2084,"candidate":e.candidate_id,"answer_feedback":"This is a good way to keep your options open."}},{"model":"campaign_trail.answer_feedback","pk":3085,"fields":{"answer":2085,"candidate":e.candidate_id,"answer_feedback":"Pundits do wonder if there isn't something here."}},{"model":"campaign_trail.answer_feedback","pk":3086,"fields":{"answer":2086,"candidate":e.candidate_id,"answer_feedback":"That's clear at least, but some worry what will happen if VVD and CDA don't reach a majority together."}},{"model":"campaign_trail.answer_feedback","pk":3088,"fields":{"answer":2088,"candidate":e.candidate_id,"answer_feedback":"Before she heard this, Hirsi Ali realized she had promised something that was not agreed upon. She therefore says she did not speak on behalf of the VVD when she said that. After it becomes clear that the money is there, she rectifies it again."}},{"model":"campaign_trail.answer_feedback","pk":3089,"fields":{"answer":2089,"candidate":e.candidate_id,"answer_feedback":"Hirsi Ali realizes her mistake and rows back, but it does seem a little unsympathetic that these shelters will now not get any money."}},{"model":"campaign_trail.answer_feedback","pk":3090,"fields":{"answer":2090,"candidate":e.candidate_id,"answer_feedback":"I thought the VVD were budget hawks? This message is not received with open arms."}},{"model":"campaign_trail.answer_feedback","pk":3092,"fields":{"answer":2092,"candidate":e.candidate_id,"answer_feedback":"Your voters wholeheartedly agree. The left, however, sheds crocodile tears for dangerous crooks. Typical."}},{"model":"campaign_trail.answer_feedback","pk":3093,"fields":{"answer":2093,"candidate":e.candidate_id,"answer_feedback":"It's appreciated that you look out for the guards, but we do want enough cells. We need that law and order to be safeguarded."}},{"model":"campaign_trail.answer_feedback","pk":3094,"fields":{"answer":2094,"candidate":e.candidate_id,"answer_feedback":"Prison is not for comfort, it's for punishment. The VVD is normally the party of law and order. If you're getting this soft, maybe some people will just accept the incompetence of the LPF."}},{"model":"campaign_trail.answer_feedback","pk":3095,"fields":{"answer":2095,"candidate":e.candidate_id,"answer_feedback":"This leads to strong resistance from Abvakabo/FNV, the trade union of prison guards, who claim this is unsafe for their members."}},{"model":"campaign_trail.answer_feedback","pk":3096,"fields":{"answer":2096,"candidate":e.candidate_id,"answer_feedback":"Good luck on the 22nd."}},{"model":"campaign_trail.answer_feedback","pk":3097,"fields":{"answer":2097,"candidate":e.candidate_id,"answer_feedback":"Good luck on the 22nd."}},{"model":"campaign_trail.answer_feedback","pk":3098,"fields":{"answer":2098,"candidate":e.candidate_id,"answer_feedback":"Good luck on the 22nd."}},{"model":"campaign_trail.answer_feedback","pk":3099,"fields":{"answer":2099,"candidate":e.candidate_id,"answer_feedback":"Good luck on the 22nd."}},{"model":"campaign_trail.answer_feedback","pk":3100,"fields":{"answer":2100,"candidate":e.candidate_id,"answer_feedback":"The LPF seethes and malds that you two are making use of the situation to 'off' them. But it's clear to all who is really at fault."}},{"model":"campaign_trail.answer_feedback","pk":3104,"fields":{"answer":2104,"candidate":e.candidate_id,"answer_feedback":"Now they get. Now they see. The LPF just cannot be worked with."}},{"model":"campaign_trail.answer_feedback","pk":3108,"fields":{"answer":2108,"candidate":e.candidate_id,"answer_feedback":"The CDA follows suit. It's clear to all who was at fault here, as much as the LPF blames you two for making use of the situation to 'off' them."}},{"model":"campaign_trail.answer_feedback","pk":3109,"fields":{"answer":2109,"candidate":e.candidate_id,"answer_feedback":"The CDA is annoyed with your position but can't let the outrage stand, so they relent and pull the plug. The LPF blames both of you for making use of the situation to 'off' them when you end up siding with them."}},{"model":"campaign_trail.answer_feedback","pk":3110,"fields":{"answer":2110,"candidate":e.candidate_id,"answer_feedback":"The CDA is not impressed, and does pull its support. Your positioning behind the LPF is received very badly, both with the CDA, which will think twice before it governs with you again, and with the electorate at large, which is by now long tired of the LPF's antics. Some VVDers fear you're just helping the left here."}},{"model":"campaign_trail.answer_feedback","pk":3111,"fields":{"answer":2111,"candidate":e.candidate_id,"answer_feedback":"The CDA backs you up, but the LPF attacks you both for 'misusing the situation to off them'. It being ended the night after the funeral also leads to some criticism. Nonetheless, the public understands."}},{"model":"campaign_trail.answer_feedback","pk":3112,"fields":{"answer":2112,"candidate":e.candidate_id,"answer_feedback":"The openness to this plan slightly annoys your support base."}},{"model":"campaign_trail.answer_feedback","pk":3113,"fields":{"answer":2113,"candidate":e.candidate_id,"answer_feedback":"This leads to an outright rebellion by conservative VVD MP Geert Wilders, who states that the VVD should never agree to Turkey joining the EU. You try to enforce the whip, but he consequently leaves the VVD. The good news is that it's too late for him to form his own party so shortly before the election, and not being on an electable spot, odds are everyone will have forgotten him by 2007."}},{"model":"campaign_trail.answer_feedback","pk":3114,"fields":{"answer":2114,"candidate":e.candidate_id,"answer_feedback":"You are attacked viciously by the left and even your own liberal list for the position that there is nothing Turkey could do to join the Union, not even if they fulfilled all requirements. Even the CDA warns that this position would isolate the Netherlands in Europe."}},{"model":"campaign_trail.answer_feedback","pk":3115,"fields":{"answer":2115,"candidate":e.candidate_id,"answer_feedback":"Knowing full well that if it would also include consent to Turkey joining that such a referendum is rightly or wrongly much less likely to pass."}},{"model":"campaign_trail.answer_feedback","pk":3116,"fields":{"answer":2116,"candidate":e.candidate_id,"answer_feedback":"It's good to go forward with the plans to maintain a consistent line within your party."}},{"model":"campaign_trail.answer_feedback","pk":3117,"fields":{"answer":2117,"candidate":e.candidate_id,"answer_feedback":"VVD aldermen had lobbied hard at the VVD congress to remove this plank, against your will. That you now revived it so shortly before the election infuriates them and leads to unrest in the support base."}},{"model":"campaign_trail.answer_feedback","pk":3118,"fields":{"answer":2118,"candidate":e.candidate_id,"answer_feedback":"But it is broken. Candidatures for mayor have collapsed since Purple implemented those changes."}}];
 campaignTrail_temp.states_json = JSON.parse("[{\"model\": \"campaign_trail.state\", \"pk\": 3001, \"fields\": {\"name\": \"Drenthe\", \"abbr\": \"DR\", \"electoral_votes\": 0, \"popular_votes\": 303464, \"poll_closing_time\": 5, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3002, \"fields\": {\"name\": \"Overijssel\", \"abbr\": \"OV\", \"electoral_votes\": 0, \"popular_votes\": 683939, \"poll_closing_time\": 10, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3003, \"fields\": {\"name\": \"Gelderland\", \"abbr\": \"GD\", \"electoral_votes\": 0, \"popular_votes\": 1213591, \"poll_closing_time\": 70, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3004, \"fields\": {\"name\": \"Utrecht\", \"abbr\": \"UT\", \"electoral_votes\": 0, \"popular_votes\": 706437, \"poll_closing_time\": 80, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3005, \"fields\": {\"name\": \"Noord-Holland\", \"abbr\": \"NH\", \"electoral_votes\": 0, \"popular_votes\": 1500472, \"poll_closing_time\": 60, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3006, \"fields\": {\"name\": \"Groningen\", \"abbr\": \"GR\", \"electoral_votes\": 0, \"popular_votes\": 362090, \"poll_closing_time\": 40, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3007, \"fields\": {\"name\": \"Fryslân\", \"abbr\": \"FR\", \"electoral_votes\": 0, \"popular_votes\": 403159, \"poll_closing_time\": 30, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3008, \"fields\": {\"name\": \"Flevoland\", \"abbr\": \"FL\", \"electoral_votes\": 0, \"popular_votes\": 191325, \"poll_closing_time\": 50, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3009, \"fields\": {\"name\": \"Limburg\", \"abbr\": \"LB\", \"electoral_votes\": 0, \"popular_votes\": 651121, \"poll_closing_time\": 25, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3010, \"fields\": {\"name\": \"Noord-Brabant\", \"abbr\": \"NB\", \"electoral_votes\": 0, \"popular_votes\": 1408792, \"poll_closing_time\": 55, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3011, \"fields\": {\"name\": \"Zeeland\", \"abbr\": \"ZL\", \"electoral_votes\": 0, \"popular_votes\": 226835, \"poll_closing_time\": 30, \"winner_take_all_flg\": 1, \"election\": 11}}, {\"model\": \"campaign_trail.state\", \"pk\": 3012, \"fields\": {\"name\": \"Zuid-Holland\", \"abbr\": \"ZH\", \"electoral_votes\": 0, \"popular_votes\": 2003250, \"poll_closing_time\": 85, \"winner_take_all_flg\": 1, \"election\": 11}}]");
 campaignTrail_temp.issues_json = JSON.parse("[{\"model\": \"campaign_trail.issue\", \"pk\": 37, \"fields\": {\"name\": \"Iraq War\", \"description\": \"\", \"stance_1\": \"America fuck yeah!\", \"stance_desc_1\": \"\", \"stance_2\": \"Highly supportive\", \"stance_desc_2\": \"\", \"stance_3\": \"Supportive\", \"stance_desc_3\": \"\", \"stance_4\": \"Opposed\", \"stance_desc_4\": \"\", \"stance_5\": \"Very opposed\", \"stance_desc_5\": \"\", \"stance_6\": \"Staunchly opposed\", \"stance_desc_6\": \"\", \"stance_7\": \"FRENCH fries!\", \"stance_desc_7\": \"\", \"election\": 11}}, {\"model\": \"campaign_trail.issue\", \"pk\": 39, \"fields\": {\"name\": \"Multiculturalism\", \"description\": \"\", \"stance_1\": \"Very high tension\", \"stance_desc_1\": \"\", \"stance_2\": \"High tension\", \"stance_desc_2\": \"\", \"stance_3\": \"Medium tension\", \"stance_desc_3\": \"\", \"stance_4\": \"Low tension\", \"stance_desc_4\": \"\", \"stance_5\": \"Very low Tension\", \"stance_desc_5\": \"\", \"stance_6\": \"No tension\", \"stance_desc_6\": \"\", \"stance_7\": \"Homogeneous\", \"stance_desc_7\": \"\", \"election\": 11}}, {\"model\": \"campaign_trail.issue\", \"pk\": 40, \"fields\": {\"name\": \"Economy\", \"description\": \"\", \"stance_1\": \"Very conservative\", \"stance_desc_1\": \"\", \"stance_2\": \"Conservative\", \"stance_desc_2\": \"\", \"stance_3\": \"Slightly conservative\", \"stance_desc_3\": \"\", \"stance_4\": \"Moderate\", \"stance_desc_4\": \"\", \"stance_5\": \"Slightly progressive\", \"stance_desc_5\": \"\", \"stance_6\": \"Progressive\", \"stance_desc_6\": \"\", \"stance_7\": \"Very progressive\", \"stance_desc_7\": \"\", \"election\": 11}}, {\"model\": \"campaign_trail.issue\", \"pk\": 41, \"fields\": {\"name\": \"Waiting Lists\", \"description\": \"\", \"stance_1\": \"Very acute\", \"stance_desc_1\": \"\", \"stance_2\": \"Acute\", \"stance_desc_2\": \"\", \"stance_3\": \"Somewhat acute\", \"stance_desc_3\": \"\", \"stance_4\": \"Tolerable\", \"stance_desc_4\": \"\", \"stance_5\": \"Very tolerable\", \"stance_desc_5\": \"\", \"stance_6\": \"Nearly non-existent\", \"stance_desc_6\": \"\", \"stance_7\": \"Non-existent\", \"stance_desc_7\": \"\", \"election\": 11}}, {\"model\": \"campaign_trail.issue\", \"pk\": 38, \"fields\": {\"name\": \"EU Expansion\", \"description\": \"\", \"stance_1\": \"Staunchly opposed\", \"stance_desc_1\": \"\", \"stance_2\": \"Staunchly opposed\", \"stance_desc_2\": \"\", \"stance_3\": \"Opposed\", \"stance_desc_3\": \"\", \"stance_4\": \"Ambivalent\", \"stance_desc_4\": \"\", \"stance_5\": \"Supportive\", \"stance_desc_5\": \"\", \"stance_6\": \"Very supportive\", \"stance_desc_6\": \"\", \"stance_7\": \"Turkey too!\", \"stance_desc_7\": \"\", \"election\": 11}}]");
-campaignTrail_temp.state_issue_score_json = 
+campaignTrail_temp.state_issue_score_json =
     JSON.parse("[{\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1383, \"fields\": {\"state\": 3001, \"issue\": 37, \"state_issue_score\": 0.3, \"weight\": -0.1}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1384, \"fields\": {\"state\": 3001, \"issue\": 38, \"state_issue_score\": -0.8, \"weight\": 0.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1385, \"fields\": {\"state\": 3001, \"issue\": 39, \"state_issue_score\": 1.0, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1386, \"fields\": {\"state\": 3001, \"issue\": 40, \"state_issue_score\": 0.8, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1387, \"fields\": {\"state\": 3001, \"issue\": 41, \"state_issue_score\": -0.3, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1388, \"fields\": {\"state\": 3002, \"issue\": 37, \"state_issue_score\": -0.3, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1389, \"fields\": {\"state\": 3002, \"issue\": 38, \"state_issue_score\": -0.6, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1390, \"fields\": {\"state\": 3002, \"issue\": 39, \"state_issue_score\": 1.0, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1391, \"fields\": {\"state\": 3002, \"issue\": 40, \"state_issue_score\": 0.0, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1392, \"fields\": {\"state\": 3002, \"issue\": 41, \"state_issue_score\": -0.3, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1393, \"fields\": {\"state\": 3003, \"issue\": 37, \"state_issue_score\": 0.2, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1394, \"fields\": {\"state\": 3003, \"issue\": 38, \"state_issue_score\": -0.2, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1395, \"fields\": {\"state\": 3003, \"issue\": 39, \"state_issue_score\": 0.7, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1396, \"fields\": {\"state\": 3003, \"issue\": 40, \"state_issue_score\": 0.5, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1397, \"fields\": {\"state\": 3003, \"issue\": 41, \"state_issue_score\": -0.6, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1398, \"fields\": {\"state\": 3004, \"issue\": 37, \"state_issue_score\": 0.7, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1399, \"fields\": {\"state\": 3004, \"issue\": 38, \"state_issue_score\": 0.3, \"weight\": 0.6}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1400, \"fields\": {\"state\": 3004, \"issue\": 39, \"state_issue_score\": -0.5, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1401, \"fields\": {\"state\": 3004, \"issue\": 40, \"state_issue_score\": -0.3, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1402, \"fields\": {\"state\": 3004, \"issue\": 41, \"state_issue_score\": -0.8, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1403, \"fields\": {\"state\": 3005, \"issue\": 37, \"state_issue_score\": 0.4, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1404, \"fields\": {\"state\": 3005, \"issue\": 38, \"state_issue_score\": 0.6, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1405, \"fields\": {\"state\": 3005, \"issue\": 39, \"state_issue_score\": -0.6, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1406, \"fields\": {\"state\": 3005, \"issue\": 40, \"state_issue_score\": -0.5, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1407, \"fields\": {\"state\": 3005, \"issue\": 41, \"state_issue_score\": -0.8, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1408, \"fields\": {\"state\": 3006, \"issue\": 37, \"state_issue_score\": 0.6, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1409, \"fields\": {\"state\": 3006, \"issue\": 38, \"state_issue_score\": -0.1, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1409, \"fields\": {\"state\": 3006, \"issue\": 39, \"state_issue_score\": 1.0, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1409, \"fields\": {\"state\": 3006, \"issue\": 40, \"state_issue_score\": 1.0, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1409, \"fields\": {\"state\": 3006, \"issue\": 41, \"state_issue_score\": 0.1, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1410, \"fields\": {\"state\": 3007, \"issue\": 37, \"state_issue_score\": 0.3, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1411, \"fields\": {\"state\": 3007, \"issue\": 38, \"state_issue_score\": -0.4, \"weight\": -0.1}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1412, \"fields\": {\"state\": 3007, \"issue\": 39, \"state_issue_score\": 1.0, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1413, \"fields\": {\"state\": 3007, \"issue\": 40, \"state_issue_score\": 0.7, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1414, \"fields\": {\"state\": 3007, \"issue\": 41, \"state_issue_score\": 0.0, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1411, \"fields\": {\"state\": 3008, \"issue\": 37, \"state_issue_score\": -0.6, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1412, \"fields\": {\"state\": 3008, \"issue\": 38, \"state_issue_score\": -0.5, \"weight\": -1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1413, \"fields\": {\"state\": 3008, \"issue\": 39, \"state_issue_score\": -0.8, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1414, \"fields\": {\"state\": 3008, \"issue\": 40, \"state_issue_score\": -0.7, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1415, \"fields\": {\"state\": 3008, \"issue\": 41, \"state_issue_score\": -0.5, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1416, \"fields\": {\"state\": 3009, \"issue\": 37, \"state_issue_score\": -0.6, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1417, \"fields\": {\"state\": 3009, \"issue\": 38, \"state_issue_score\": -0.4, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1418, \"fields\": {\"state\": 3009, \"issue\": 39, \"state_issue_score\": -0.1, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1419, \"fields\": {\"state\": 3009, \"issue\": 40, \"state_issue_score\": -0.2, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1420, \"fields\": {\"state\": 3009, \"issue\": 41, \"state_issue_score\": 0.0, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1421, \"fields\": {\"state\": 3010, \"issue\": 37, \"state_issue_score\": -0.4, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1422, \"fields\": {\"state\": 3010, \"issue\": 38, \"state_issue_score\": -0.4, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1423, \"fields\": {\"state\": 3010, \"issue\": 39, \"state_issue_score\": 1.0, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1424, \"fields\": {\"state\": 3010, \"issue\": 40, \"state_issue_score\": 0.2, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1425, \"fields\": {\"state\": 3010, \"issue\": 41, \"state_issue_score\": -0.4, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1426, \"fields\": {\"state\": 3011, \"issue\": 37, \"state_issue_score\": -0.7, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1427, \"fields\": {\"state\": 3011, \"issue\": 38, \"state_issue_score\": -0.7, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1428, \"fields\": {\"state\": 3011, \"issue\": 39, \"state_issue_score\": 1.0, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1429, \"fields\": {\"state\": 3011, \"issue\": 40, \"state_issue_score\": 0.5, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1430, \"fields\": {\"state\": 3011, \"issue\": 41, \"state_issue_score\": 0.4, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1431, \"fields\": {\"state\": 3012, \"issue\": 37, \"state_issue_score\": -0.2, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1432, \"fields\": {\"state\": 3012, \"issue\": 38, \"state_issue_score\": -0.1, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1433, \"fields\": {\"state\": 3012, \"issue\": 39, \"state_issue_score\": -0.8, \"weight\": 1.0}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1434, \"fields\": {\"state\": 3012, \"issue\": 40, \"state_issue_score\": -0.2, \"weight\": -0.8}}, {\"model\": \"campaign_trail.state_issue_score\", \"pk\": 1435, \"fields\": {\"state\": 3012, \"issue\": 41, \"state_issue_score\": -0.7, \"weight\": 1.0}}]");
-campaignTrail_temp.candidate_issue_score_json = 
+campaignTrail_temp.candidate_issue_score_json =
     JSON.parse("[{\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 398, \"fields\": {\"candidate\": 105, \"issue\": 37, \"issue_score\": -0.3}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 399, \"fields\": {\"candidate\": 105, \"issue\": 38, \"issue_score\": 0.4}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 400, \"fields\": {\"candidate\": 105, \"issue\": 39, \"issue_score\": 1.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 401, \"fields\": {\"candidate\": 105, \"issue\": 40, \"issue_score\": -0.3}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 402, \"fields\": {\"candidate\": 105, \"issue\": 41, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 408, \"fields\": {\"candidate\": 17, \"issue\": 37, \"issue_score\": 0.6}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 409, \"fields\": {\"candidate\": 17, \"issue\": 38, \"issue_score\": 1.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 410, \"fields\": {\"candidate\": 17, \"issue\": 39, \"issue_score\": 0.8}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 411, \"fields\": {\"candidate\": 17, \"issue\": 40, \"issue_score\": 0.7}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 412, \"fields\": {\"candidate\": 17, \"issue\": 41, \"issue_score\": 1.0}},{\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 403, \"fields\": {\"candidate\": 106, \"issue\": 37, \"issue_score\": -0.3}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 404, \"fields\": {\"candidate\": 106, \"issue\": 38, \"issue_score\": -1.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 405, \"fields\": {\"candidate\": 106, \"issue\": 39, \"issue_score\": -0.5}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 406, \"fields\": {\"candidate\": 106, \"issue\": 40, \"issue_score\": -0.7}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 407, \"fields\": {\"candidate\": 106, \"issue\": 41, \"issue_score\": -0.4}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 408, \"fields\": {\"candidate\": 23, \"issue\": 37, \"issue_score\": 0.9}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 409, \"fields\": {\"candidate\": 23, \"issue\": 38, \"issue_score\": -0.4}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 410, \"fields\": {\"candidate\": 23, \"issue\": 39, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 411, \"fields\": {\"candidate\": 23, \"issue\": 40, \"issue_score\": 0.6}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 412, \"fields\": {\"candidate\": 23, \"issue\": 41, \"issue_score\": 1.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 413, \"fields\": {\"candidate\": 16, \"issue\": 37, \"issue_score\": 0.2}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 414, \"fields\": {\"candidate\": 16, \"issue\": 38, \"issue_score\": 0.5}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 415, \"fields\": {\"candidate\": 16, \"issue\": 39, \"issue_score\": 0.7}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 416, \"fields\": {\"candidate\": 16, \"issue\": 40, \"issue_score\": -0.1}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 423, \"fields\": {\"candidate\": 21, \"issue\": 37, \"issue_score\": 0.5}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 423, \"fields\": {\"candidate\": 21, \"issue\": 38, \"issue_score\": 0.8}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 423, \"fields\": {\"candidate\": 21, \"issue\": 39, \"issue_score\": 0.6}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 423, \"fields\": {\"candidate\": 21, \"issue\": 40, \"issue_score\": 0.85}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 423, \"fields\": {\"candidate\": 21, \"issue\": 41, \"issue_score\": -0.1}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 424, \"fields\": {\"candidate\": 67, \"issue\": 37, \"issue_score\": 1.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 425, \"fields\": {\"candidate\": 67, \"issue\": 38, \"issue_score\": -0.4}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 426, \"fields\": {\"candidate\": 67, \"issue\": 39, \"issue_score\": 0.1}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 427, \"fields\": {\"candidate\": 67, \"issue\": 40, \"issue_score\": -1.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 428, \"fields\": {\"candidate\": 67, \"issue\": 41, \"issue_score\": -0.6}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 439, \"fields\": {\"candidate\": 78, \"issue\": 37, \"issue_score\": -0.3}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 440, \"fields\": {\"candidate\": 78, \"issue\": 38, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 441, \"fields\": {\"candidate\": 78, \"issue\": 39, \"issue_score\": 0.8}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 442, \"fields\": {\"candidate\": 78, \"issue\": 40, \"issue_score\": 0.4}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 443, \"fields\": {\"candidate\": 78, \"issue\": 41, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 464, \"fields\": {\"candidate\": 512, \"issue\": 37, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 465, \"fields\": {\"candidate\": 512, \"issue\": 38, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 466, \"fields\": {\"candidate\": 512, \"issue\": 39, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 467, \"fields\": {\"candidate\": 512, \"issue\": 40, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 468, \"fields\": {\"candidate\": 512, \"issue\": 41, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 469, \"fields\": {\"candidate\": 117, \"issue\": 37, \"issue_score\": 0.8}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 470, \"fields\": {\"candidate\": 117, \"issue\": 38, \"issue_score\": -0.7}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 471, \"fields\": {\"candidate\": 117, \"issue\": 39, \"issue_score\": 1.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 472, \"fields\": {\"candidate\": 117, \"issue\": 40, \"issue_score\": -0.7}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 473, \"fields\": {\"candidate\": 117, \"issue\": 41, \"issue_score\": 0.0}}]");
-campaignTrail_temp.running_mate_issue_score_json = 
+campaignTrail_temp.running_mate_issue_score_json =
     JSON.parse("[{\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 413, \"fields\": {\"candidate\": 514, \"issue\": 37, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 414, \"fields\": {\"candidate\": 514, \"issue\": 38, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 415, \"fields\": {\"candidate\": 514, \"issue\": 39, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 416, \"fields\": {\"candidate\": 514, \"issue\": 40, \"issue_score\": 0.0}}, {\"model\": \"campaign_trail.candidate_issue_score\", \"pk\": 417, \"fields\": {\"candidate\": 514, \"issue\": 41, \"issue_score\": 0.0}}]");
-campaignTrail_temp.candidate_state_multiplier_json = 
+campaignTrail_temp.candidate_state_multiplier_json =
     JSON.parse("[{\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1103, \"fields\": {\"candidate\": 105, \"state\": 3001, \"state_multiplier\": 1.97}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1104, \"fields\": {\"candidate\": 17, \"state\": 3001, \"state_multiplier\": 2.23}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1105, \"fields\": {\"candidate\": 106, \"state\": 3001, \"state_multiplier\": 0.21}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1106, \"fields\": {\"candidate\": 23, \"state\": 3001, \"state_multiplier\": 1.88}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1107, \"fields\": {\"candidate\": 16, \"state\": 3001, \"state_multiplier\": 0.36}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1109, \"fields\": {\"candidate\": 21, \"state\": 3001, \"state_multiplier\": 0.54}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1110, \"fields\": {\"candidate\": 67, \"state\": 3001, \"state_multiplier\": 1.2}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1113, \"fields\": {\"candidate\": 78, \"state\": 3001, \"state_multiplier\": 0.21}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1120, \"fields\": {\"candidate\": 512, \"state\": 3001, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1119, \"fields\": {\"candidate\": 117, \"state\": 3001, \"state_multiplier\": 0.03}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1120, \"fields\": {\"candidate\": 105, \"state\": 3008, \"state_multiplier\": 2.08}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1121, \"fields\": {\"candidate\": 17, \"state\": 3008, \"state_multiplier\": 24.11}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1122, \"fields\": {\"candidate\": 106, \"state\": 3008, \"state_multiplier\": 0.17}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1123, \"fields\": {\"candidate\": 23, \"state\": 3008, \"state_multiplier\": 2.74}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1124, \"fields\": {\"candidate\": 16, \"state\": 3008, \"state_multiplier\": 0.42}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1126, \"fields\": {\"candidate\": 21, \"state\": 3008, \"state_multiplier\": 1.06}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1127, \"fields\": {\"candidate\": 67, \"state\": 3008, \"state_multiplier\": 0.67}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1130, \"fields\": {\"candidate\": 78, \"state\": 3008, \"state_multiplier\": 0.26}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1135, \"fields\": {\"candidate\": 512, \"state\": 3008, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1136, \"fields\": {\"candidate\": 117, \"state\": 3008, \"state_multiplier\": 0.18}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1137, \"fields\": {\"candidate\": 105, \"state\": 3003, \"state_multiplier\": 2.56}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1138, \"fields\": {\"candidate\": 17, \"state\": 3003, \"state_multiplier\": 2.17}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1139, \"fields\": {\"candidate\": 106, \"state\": 3003, \"state_multiplier\": 0.22}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1140, \"fields\": {\"candidate\": 23, \"state\": 3003, \"state_multiplier\": 1.87}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1141, \"fields\": {\"candidate\": 16, \"state\": 3003, \"state_multiplier\": 0.28}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1143, \"fields\": {\"candidate\": 21, \"state\": 3003, \"state_multiplier\": 0.74}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1144, \"fields\": {\"candidate\": 67, \"state\": 3003, \"state_multiplier\": 1.15}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1147, \"fields\": {\"candidate\": 78, \"state\": 3003, \"state_multiplier\": 0.16}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1152, \"fields\": {\"candidate\": 512, \"state\": 3003, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1153, \"fields\": {\"candidate\": 117, \"state\": 3003, \"state_multiplier\": 0.05}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1154, \"fields\": {\"candidate\": 105, \"state\": 3004, \"state_multiplier\": 2.55}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1155, \"fields\": {\"candidate\": 17, \"state\": 3004, \"state_multiplier\": 2.32}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1156, \"fields\": {\"candidate\": 106, \"state\": 3004, \"state_multiplier\": 0.19}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1157, \"fields\": {\"candidate\": 23, \"state\": 3004, \"state_multiplier\": 2.32}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1158, \"fields\": {\"candidate\": 16, \"state\": 3004, \"state_multiplier\": 0.45}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1160, \"fields\": {\"candidate\": 21, \"state\": 3004, \"state_multiplier\": 1.07}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1161, \"fields\": {\"candidate\": 67, \"state\": 3004, \"state_multiplier\": 0.8}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1164, \"fields\": {\"candidate\": 78, \"state\": 3004, \"state_multiplier\": 0.26}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1169, \"fields\": {\"candidate\": 512, \"state\": 3004, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1170, \"fields\": {\"candidate\": 117, \"state\": 3004, \"state_multiplier\": 0.19}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1171, \"fields\": {\"candidate\": 105, \"state\": 3005, \"state_multiplier\": 1.77}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1172, \"fields\": {\"candidate\": 17, \"state\": 3005, \"state_multiplier\": 3.25}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1173, \"fields\": {\"candidate\": 106, \"state\": 3005, \"state_multiplier\": 0.22}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1174, \"fields\": {\"candidate\": 23, \"state\": 3005, \"state_multiplier\": 2.81}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1175, \"fields\": {\"candidate\": 16, \"state\": 3005, \"state_multiplier\": 0.42}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1177, \"fields\": {\"candidate\": 21, \"state\": 3005, \"state_multiplier\": 0.97}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1178, \"fields\": {\"candidate\": 67, \"state\": 3005, \"state_multiplier\": 1.03}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1181, \"fields\": {\"candidate\": 78, \"state\": 3005, \"state_multiplier\": 0.08}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1186, \"fields\": {\"candidate\": 512, \"state\": 3005, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1187, \"fields\": {\"candidate\": 117, \"state\": 3005, \"state_multiplier\": 0.02}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1188, \"fields\": {\"candidate\": 105, \"state\": 3006, \"state_multiplier\": 1.46}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1189, \"fields\": {\"candidate\": 17, \"state\": 3006, \"state_multiplier\": 2.47}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1190, \"fields\": {\"candidate\": 106, \"state\": 3006, \"state_multiplier\": 0.33}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1191, \"fields\": {\"candidate\": 23, \"state\": 3006, \"state_multiplier\": 1.43}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1192, \"fields\": {\"candidate\": 16, \"state\": 3006, \"state_multiplier\": 0.41}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1194, \"fields\": {\"candidate\": 21, \"state\": 3006, \"state_multiplier\": 0.69}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1195, \"fields\": {\"candidate\": 67, \"state\": 3006, \"state_multiplier\": 2.24}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1198, \"fields\": {\"candidate\": 78, \"state\": 3006, \"state_multiplier\": 0.3}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1203, \"fields\": {\"candidate\": 512, \"state\": 3006, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1204, \"fields\": {\"candidate\": 117, \"state\": 3006, \"state_multiplier\": 0.02}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1205, \"fields\": {\"candidate\": 105, \"state\": 3007, \"state_multiplier\": 2.35}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1206, \"fields\": {\"candidate\": 17, \"state\": 3007, \"state_multiplier\": 1.86}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1207, \"fields\": {\"candidate\": 106, \"state\": 3007, \"state_multiplier\": 0.2}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1208, \"fields\": {\"candidate\": 23, \"state\": 3007, \"state_multiplier\": 1.54}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1209, \"fields\": {\"candidate\": 16, \"state\": 3007, \"state_multiplier\": 0.27}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1211, \"fields\": {\"candidate\": 21, \"state\": 3007, \"state_multiplier\": 0.58}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1212, \"fields\": {\"candidate\": 67, \"state\": 3007, \"state_multiplier\": 1.92}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1215, \"fields\": {\"candidate\": 78, \"state\": 3007, \"state_multiplier\": 0.23}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1220, \"fields\": {\"candidate\": 512, \"state\": 3007, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1221, \"fields\": {\"candidate\": 117, \"state\": 3007, \"state_multiplier\": 0.04}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1222, \"fields\": {\"candidate\": 105, \"state\": 3002, \"state_multiplier\": 2.38}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1223, \"fields\": {\"candidate\": 17, \"state\": 3002, \"state_multiplier\": 2.83}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1224, \"fields\": {\"candidate\": 106, \"state\": 3002, \"state_multiplier\": 0.15}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1225, \"fields\": {\"candidate\": 23, \"state\": 3002, \"state_multiplier\": 1.94}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1226, \"fields\": {\"candidate\": 16, \"state\": 3002, \"state_multiplier\": 0.27}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1228, \"fields\": {\"candidate\": 21, \"state\": 3002, \"state_multiplier\": 0.75}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1229, \"fields\": {\"candidate\": 67, \"state\": 3002, \"state_multiplier\": 1.23}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1232, \"fields\": {\"candidate\": 78, \"state\": 3002, \"state_multiplier\": 0.27}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1237, \"fields\": {\"candidate\": 512, \"state\": 3002, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1238, \"fields\": {\"candidate\": 117, \"state\": 3002, \"state_multiplier\": 0.15}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1239, \"fields\": {\"candidate\": 105, \"state\": 3009, \"state_multiplier\": 2.94}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1240, \"fields\": {\"candidate\": 17, \"state\": 3009, \"state_multiplier\": 3.29}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1241, \"fields\": {\"candidate\": 106, \"state\": 3009, \"state_multiplier\": 0.21}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1242, \"fields\": {\"candidate\": 23, \"state\": 3009, \"state_multiplier\": 1.35}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1243, \"fields\": {\"candidate\": 16, \"state\": 3009, \"state_multiplier\": 0.26}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1245, \"fields\": {\"candidate\": 21, \"state\": 3009, \"state_multiplier\": 0.73}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1246, \"fields\": {\"candidate\": 67, \"state\": 3009, \"state_multiplier\": 1.26}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1249, \"fields\": {\"candidate\": 78, \"state\": 3009, \"state_multiplier\": 0.02}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1254, \"fields\": {\"candidate\": 512, \"state\": 3009, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1255, \"fields\": {\"candidate\": 117, \"state\": 3009, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1256, \"fields\": {\"candidate\": 105, \"state\": 3010, \"state_multiplier\": 2.19}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1257, \"fields\": {\"candidate\": 17, \"state\": 3010, \"state_multiplier\": 2.29}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1258, \"fields\": {\"candidate\": 106, \"state\": 3010, \"state_multiplier\": 0.28}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1259, \"fields\": {\"candidate\": 23, \"state\": 3010, \"state_multiplier\": 2.51}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1260, \"fields\": {\"candidate\": 16, \"state\": 3010, \"state_multiplier\": 0.32}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1262, \"fields\": {\"candidate\": 21, \"state\": 3010, \"state_multiplier\": 0.74}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1263, \"fields\": {\"candidate\": 67, \"state\": 3010, \"state_multiplier\": 1.97}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1266, \"fields\": {\"candidate\": 78, \"state\": 3010, \"state_multiplier\": 0.04}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1271, \"fields\": {\"candidate\": 512, \"state\": 3010, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1272, \"fields\": {\"candidate\": 117, \"state\": 3010, \"state_multiplier\": 0.03}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1273, \"fields\": {\"candidate\": 105, \"state\": 3011, \"state_multiplier\": 2.04}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1274, \"fields\": {\"candidate\": 17, \"state\": 3011, \"state_multiplier\": 2.07}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1275, \"fields\": {\"candidate\": 106, \"state\": 3011, \"state_multiplier\": 0.26}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1276, \"fields\": {\"candidate\": 23, \"state\": 3011, \"state_multiplier\": 1.91}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1277, \"fields\": {\"candidate\": 16, \"state\": 3011, \"state_multiplier\": 0.26}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1279, \"fields\": {\"candidate\": 21, \"state\": 3011, \"state_multiplier\": 0.64}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1280, \"fields\": {\"candidate\": 67, \"state\": 3011, \"state_multiplier\": 0.87}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1283, \"fields\": {\"candidate\": 78, \"state\": 3011, \"state_multiplier\": 0.17}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1288, \"fields\": {\"candidate\": 512, \"state\": 3011, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1289, \"fields\": {\"candidate\": 117, \"state\": 3011, \"state_multiplier\": 0.56}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1290, \"fields\": {\"candidate\": 105, \"state\": 3012, \"state_multiplier\": 2.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1291, \"fields\": {\"candidate\": 17, \"state\": 3012, \"state_multiplier\": 4.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1292, \"fields\": {\"candidate\": 106, \"state\": 3012, \"state_multiplier\": 0.29}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1293, \"fields\": {\"candidate\": 23, \"state\": 3012, \"state_multiplier\": 2.27}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1294, \"fields\": {\"candidate\": 16, \"state\": 3012, \"state_multiplier\": 0.35}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1296, \"fields\": {\"candidate\": 21, \"state\": 3012, \"state_multiplier\": 0.78}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1297, \"fields\": {\"candidate\": 67, \"state\": 3012, \"state_multiplier\": 0.79}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1300, \"fields\": {\"candidate\": 78, \"state\": 3012, \"state_multiplier\": 0.15}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1305, \"fields\": {\"candidate\": 512, \"state\": 3012, \"state_multiplier\": 0.01}}, {\"model\": \"campaign_trail.candidate_state_multiplier\", \"pk\": 1306, \"fields\": {\"candidate\": 117, \"state\": 3012, \"state_multiplier\": 0.31}}]");
 e.answer_score_global_json = [{"model":"campaign_trail.answer_score_global","pk":4000,"fields":{"answer":2000,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4000,"fields":{"answer":2000,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4002,"fields":{"answer":2002,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4002,"fields":{"answer":2002,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4002,"fields":{"answer":2002,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4020,"fields":{"answer":2004,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4020,"fields":{"answer":2004,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4020,"fields":{"answer":2004,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4021,"fields":{"answer":2005,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4021,"fields":{"answer":2005,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4021,"fields":{"answer":2005,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4022,"fields":{"answer":2006,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4022,"fields":{"answer":2006,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4022,"fields":{"answer":2006,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.08}},{"model":"campaign_trail.answer_score_global","pk":4022,"fields":{"answer":2006,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4023,"fields":{"answer":2007,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.08}},{"model":"campaign_trail.answer_score_global","pk":4023,"fields":{"answer":2007,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.08}},{"model":"campaign_trail.answer_score_global","pk":4040,"fields":{"answer":2008,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4040,"fields":{"answer":2008,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4041,"fields":{"answer":2009,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4041,"fields":{"answer":2009,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4041,"fields":{"answer":2009,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4041,"fields":{"answer":2009,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4042,"fields":{"answer":2010,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.08}},{"model":"campaign_trail.answer_score_global","pk":4042,"fields":{"answer":2010,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4042,"fields":{"answer":2010,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4043,"fields":{"answer":2011,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4043,"fields":{"answer":2011,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.07}},{"model":"campaign_trail.answer_score_global","pk":4043,"fields":{"answer":2011,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4043,"fields":{"answer":2011,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4060,"fields":{"answer":2012,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4060,"fields":{"answer":2012,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4060,"fields":{"answer":2012,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4060,"fields":{"answer":2012,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4061,"fields":{"answer":2013,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4061,"fields":{"answer":2013,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.08}},{"model":"campaign_trail.answer_score_global","pk":4061,"fields":{"answer":2013,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4061,"fields":{"answer":2013,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4061,"fields":{"answer":2013,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4062,"fields":{"answer":2014,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4062,"fields":{"answer":2014,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.01}},{"model":"campaign_trail.answer_score_global","pk":4062,"fields":{"answer":2014,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4062,"fields":{"answer":2014,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.01}},{"model":"campaign_trail.answer_score_global","pk":4063,"fields":{"answer":2015,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4063,"fields":{"answer":2015,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4063,"fields":{"answer":2015,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4063,"fields":{"answer":2015,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4080,"fields":{"answer":2016,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4080,"fields":{"answer":2016,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4080,"fields":{"answer":2016,"candidate":e.candidate_id,"affected_candidate":16,"global_multiplier":0.01}},{"model":"campaign_trail.answer_score_global","pk":4081,"fields":{"answer":2017,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4081,"fields":{"answer":2017,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4082,"fields":{"answer":2018,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4082,"fields":{"answer":2018,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4083,"fields":{"answer":2019,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4083,"fields":{"answer":2019,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4100,"fields":{"answer":2020,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4100,"fields":{"answer":2020,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4100,"fields":{"answer":2020,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4101,"fields":{"answer":2021,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4101,"fields":{"answer":2021,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4101,"fields":{"answer":2021,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4102,"fields":{"answer":2022,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4102,"fields":{"answer":2022,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4102,"fields":{"answer":2022,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4103,"fields":{"answer":2023,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4103,"fields":{"answer":2023,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4103,"fields":{"answer":2023,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4103,"fields":{"answer":2023,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4120,"fields":{"answer":2024,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4120,"fields":{"answer":2024,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4120,"fields":{"answer":2024,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4120,"fields":{"answer":2024,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4120,"fields":{"answer":2024,"candidate":e.candidate_id,"affected_candidate":21,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4121,"fields":{"answer":2025,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4121,"fields":{"answer":2025,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4121,"fields":{"answer":2025,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4121,"fields":{"answer":2025,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4121,"fields":{"answer":2025,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4121,"fields":{"answer":2025,"candidate":e.candidate_id,"affected_candidate":21,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4122,"fields":{"answer":2026,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4122,"fields":{"answer":2026,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4122,"fields":{"answer":2026,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4122,"fields":{"answer":2026,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4122,"fields":{"answer":2026,"candidate":e.candidate_id,"affected_candidate":21,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4140,"fields":{"answer":2028,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4140,"fields":{"answer":2028,"candidate":e.candidate_id,"affected_candidate":21,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4141,"fields":{"answer":2029,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4141,"fields":{"answer":2029,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4141,"fields":{"answer":2029,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4141,"fields":{"answer":2029,"candidate":e.candidate_id,"affected_candidate":21,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4142,"fields":{"answer":2030,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4142,"fields":{"answer":2030,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.01}},{"model":"campaign_trail.answer_score_global","pk":4142,"fields":{"answer":2030,"candidate":e.candidate_id,"affected_candidate":16,"global_multiplier":0.01}},{"model":"campaign_trail.answer_score_global","pk":4142,"fields":{"answer":2030,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4143,"fields":{"answer":2031,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.08}},{"model":"campaign_trail.answer_score_global","pk":4143,"fields":{"answer":2031,"candidate":e.candidate_id,"affected_candidate":16,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4143,"fields":{"answer":2031,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4143,"fields":{"answer":2031,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.08}},{"model":"campaign_trail.answer_score_global","pk":4143,"fields":{"answer":2031,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4143,"fields":{"answer":2031,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4160,"fields":{"answer":2032,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4160,"fields":{"answer":2032,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4161,"fields":{"answer":2033,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4161,"fields":{"answer":2033,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4162,"fields":{"answer":2034,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4162,"fields":{"answer":2034,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4162,"fields":{"answer":2034,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4180,"fields":{"answer":2036,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4180,"fields":{"answer":2036,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4181,"fields":{"answer":2037,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4181,"fields":{"answer":2037,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4182,"fields":{"answer":2038,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4182,"fields":{"answer":2038,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4200,"fields":{"answer":2040,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4200,"fields":{"answer":2040,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4200,"fields":{"answer":2040,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4200,"fields":{"answer":2040,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4201,"fields":{"answer":2041,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4201,"fields":{"answer":2041,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4201,"fields":{"answer":2041,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4201,"fields":{"answer":2041,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4202,"fields":{"answer":2042,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4202,"fields":{"answer":2042,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4202,"fields":{"answer":2042,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4202,"fields":{"answer":2042,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4220,"fields":{"answer":2044,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4220,"fields":{"answer":2044,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4220,"fields":{"answer":2044,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4221,"fields":{"answer":2045,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.16}},{"model":"campaign_trail.answer_score_global","pk":4221,"fields":{"answer":2045,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4221,"fields":{"answer":2045,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.08}},{"model":"campaign_trail.answer_score_global","pk":4221,"fields":{"answer":2045,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4221,"fields":{"answer":2045,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4222,"fields":{"answer":2046,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4222,"fields":{"answer":2046,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4222,"fields":{"answer":2046,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.07}},{"model":"campaign_trail.answer_score_global","pk":4222,"fields":{"answer":2046,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4222,"fields":{"answer":2046,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4223,"fields":{"answer":2047,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4223,"fields":{"answer":2047,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.01}},{"model":"campaign_trail.answer_score_global","pk":4223,"fields":{"answer":2047,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.01}},{"model":"campaign_trail.answer_score_global","pk":4223,"fields":{"answer":2047,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4241,"fields":{"answer":2049,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4241,"fields":{"answer":2049,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4241,"fields":{"answer":2049,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4242,"fields":{"answer":2050,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4242,"fields":{"answer":2050,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4243,"fields":{"answer":2051,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4243,"fields":{"answer":2051,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4243,"fields":{"answer":2051,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4243,"fields":{"answer":2051,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4260,"fields":{"answer":2052,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.01}},{"model":"campaign_trail.answer_score_global","pk":4260,"fields":{"answer":2052,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.01}},{"model":"campaign_trail.answer_score_global","pk":4260,"fields":{"answer":2052,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4261,"fields":{"answer":2053,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4261,"fields":{"answer":2053,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4261,"fields":{"answer":2053,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4263,"fields":{"answer":2055,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4263,"fields":{"answer":2055,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.15}},{"model":"campaign_trail.answer_score_global","pk":4280,"fields":{"answer":2056,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4280,"fields":{"answer":2056,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4280,"fields":{"answer":2056,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4282,"fields":{"answer":2058,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4282,"fields":{"answer":2058,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4282,"fields":{"answer":2058,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.08}},{"model":"campaign_trail.answer_score_global","pk":4283,"fields":{"answer":2059,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.08}},{"model":"campaign_trail.answer_score_global","pk":4283,"fields":{"answer":2059,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4283,"fields":{"answer":2059,"candidate":e.candidate_id,"affected_candidate":16,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4300,"fields":{"answer":2060,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4300,"fields":{"answer":2060,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.18}},{"model":"campaign_trail.answer_score_global","pk":4300,"fields":{"answer":2060,"candidate":e.candidate_id,"affected_candidate":21,"global_multiplier":-0.15}},{"model":"campaign_trail.answer_score_global","pk":4300,"fields":{"answer":2060,"candidate":e.candidate_id,"affected_candidate":16,"global_multiplier":-0.01}},{"model":"campaign_trail.answer_score_global","pk":4300,"fields":{"answer":2060,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4300,"fields":{"answer":2060,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.2}},{"model":"campaign_trail.answer_score_global","pk":4300,"fields":{"answer":2060,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.08}},{"model":"campaign_trail.answer_score_global","pk":4301,"fields":{"answer":2061,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4301,"fields":{"answer":2061,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.14}},{"model":"campaign_trail.answer_score_global","pk":4301,"fields":{"answer":2061,"candidate":e.candidate_id,"affected_candidate":21,"global_multiplier":-0.1}},{"model":"campaign_trail.answer_score_global","pk":4301,"fields":{"answer":2061,"candidate":e.candidate_id,"affected_candidate":16,"global_multiplier":-0.015}},{"model":"campaign_trail.answer_score_global","pk":4301,"fields":{"answer":2061,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4301,"fields":{"answer":2061,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.2}},{"model":"campaign_trail.answer_score_global","pk":4301,"fields":{"answer":2061,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.08}},{"model":"campaign_trail.answer_score_global","pk":4302,"fields":{"answer":2062,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4302,"fields":{"answer":2062,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4302,"fields":{"answer":2062,"candidate":e.candidate_id,"affected_candidate":21,"global_multiplier":-0.15}},{"model":"campaign_trail.answer_score_global","pk":4302,"fields":{"answer":2062,"candidate":e.candidate_id,"affected_candidate":16,"global_multiplier":-0.01}},{"model":"campaign_trail.answer_score_global","pk":4302,"fields":{"answer":2062,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4302,"fields":{"answer":2062,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.2}},{"model":"campaign_trail.answer_score_global","pk":4302,"fields":{"answer":2062,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.08}},{"model":"campaign_trail.answer_score_global","pk":4303,"fields":{"answer":2063,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4303,"fields":{"answer":2063,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4303,"fields":{"answer":2063,"candidate":e.candidate_id,"affected_candidate":21,"global_multiplier":-0.15}},{"model":"campaign_trail.answer_score_global","pk":4303,"fields":{"answer":2063,"candidate":e.candidate_id,"affected_candidate":16,"global_multiplier":-0.01}},{"model":"campaign_trail.answer_score_global","pk":4303,"fields":{"answer":2063,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4303,"fields":{"answer":2063,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.2}},{"model":"campaign_trail.answer_score_global","pk":4303,"fields":{"answer":2063,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.08}},{"model":"campaign_trail.answer_score_global","pk":4320,"fields":{"answer":2064,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4320,"fields":{"answer":2064,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.14}},{"model":"campaign_trail.answer_score_global","pk":4321,"fields":{"answer":2065,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4321,"fields":{"answer":2065,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4321,"fields":{"answer":2065,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4322,"fields":{"answer":2066,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4322,"fields":{"answer":2066,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4322,"fields":{"answer":2066,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4323,"fields":{"answer":2067,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4323,"fields":{"answer":2067,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4323,"fields":{"answer":2067,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4340,"fields":{"answer":2068,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4340,"fields":{"answer":2068,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4340,"fields":{"answer":2068,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4340,"fields":{"answer":2068,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4341,"fields":{"answer":2069,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4341,"fields":{"answer":2069,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4341,"fields":{"answer":2069,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4341,"fields":{"answer":2069,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4341,"fields":{"answer":2069,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4342,"fields":{"answer":2070,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.01}},{"model":"campaign_trail.answer_score_global","pk":4342,"fields":{"answer":2070,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.01}},{"model":"campaign_trail.answer_score_global","pk":4342,"fields":{"answer":2070,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.01}},{"model":"campaign_trail.answer_score_global","pk":4342,"fields":{"answer":2070,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.01}},{"model":"campaign_trail.answer_score_global","pk":4342,"fields":{"answer":2070,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4360,"fields":{"answer":2072,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4360,"fields":{"answer":2072,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4361,"fields":{"answer":2073,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4361,"fields":{"answer":2073,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4362,"fields":{"answer":2074,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4362,"fields":{"answer":2074,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4363,"fields":{"answer":2075,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4363,"fields":{"answer":2075,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4380,"fields":{"answer":2076,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.5}},{"model":"campaign_trail.answer_score_global","pk":4380,"fields":{"answer":2076,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.65}},{"model":"campaign_trail.answer_score_global","pk":4380,"fields":{"answer":2076,"candidate":e.candidate_id,"affected_candidate":21,"global_multiplier":-0.2}},{"model":"campaign_trail.answer_score_global","pk":4380,"fields":{"answer":2076,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.08}},{"model":"campaign_trail.answer_score_global","pk":4381,"fields":{"answer":2077,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4381,"fields":{"answer":2077,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4381,"fields":{"answer":2077,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4381,"fields":{"answer":2077,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4382,"fields":{"answer":2078,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4382,"fields":{"answer":2078,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4382,"fields":{"answer":2078,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4382,"fields":{"answer":2078,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.01}},{"model":"campaign_trail.answer_score_global","pk":4383,"fields":{"answer":2079,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.23}},{"model":"campaign_trail.answer_score_global","pk":4383,"fields":{"answer":2079,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.16}},{"model":"campaign_trail.answer_score_global","pk":4383,"fields":{"answer":2079,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.07}},{"model":"campaign_trail.answer_score_global","pk":4383,"fields":{"answer":2079,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4383,"fields":{"answer":2079,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4400,"fields":{"answer":2080,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4400,"fields":{"answer":2080,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4400,"fields":{"answer":2080,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.1}},{"model":"campaign_trail.answer_score_global","pk":4401,"fields":{"answer":2081,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4401,"fields":{"answer":2081,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4401,"fields":{"answer":2081,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4401,"fields":{"answer":2081,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4401,"fields":{"answer":2081,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.1}},{"model":"campaign_trail.answer_score_global","pk":4402,"fields":{"answer":2082,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.1}},{"model":"campaign_trail.answer_score_global","pk":4402,"fields":{"answer":2082,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.1}},{"model":"campaign_trail.answer_score_global","pk":4421,"fields":{"answer":2085,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4421,"fields":{"answer":2085,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4421,"fields":{"answer":2085,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.1}},{"model":"campaign_trail.answer_score_global","pk":4422,"fields":{"answer":2086,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4422,"fields":{"answer":2086,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4422,"fields":{"answer":2086,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.1}},{"model":"campaign_trail.answer_score_global","pk":4440,"fields":{"answer":2088,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4440,"fields":{"answer":2088,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4441,"fields":{"answer":2089,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.08}},{"model":"campaign_trail.answer_score_global","pk":4441,"fields":{"answer":2089,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4441,"fields":{"answer":2089,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4442,"fields":{"answer":2090,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.09}},{"model":"campaign_trail.answer_score_global","pk":4442,"fields":{"answer":2090,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4442,"fields":{"answer":2090,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4460,"fields":{"answer":2092,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4460,"fields":{"answer":2092,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4460,"fields":{"answer":2092,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.1}},{"model":"campaign_trail.answer_score_global","pk":4461,"fields":{"answer":2093,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.12}},{"model":"campaign_trail.answer_score_global","pk":4461,"fields":{"answer":2093,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4461,"fields":{"answer":2093,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.08}},{"model":"campaign_trail.answer_score_global","pk":4462,"fields":{"answer":2094,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4462,"fields":{"answer":2094,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4462,"fields":{"answer":2094,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.05}},{"model":"campaign_trail.answer_score_global","pk":4462,"fields":{"answer":2094,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4463,"fields":{"answer":2095,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4463,"fields":{"answer":2095,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4500,"fields":{"answer":2100,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4500,"fields":{"answer":2100,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4500,"fields":{"answer":2100,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4520,"fields":{"answer":2104,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4520,"fields":{"answer":2104,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4540,"fields":{"answer":2108,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.01}},{"model":"campaign_trail.answer_score_global","pk":4540,"fields":{"answer":2108,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.01}},{"model":"campaign_trail.answer_score_global","pk":4540,"fields":{"answer":2108,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4541,"fields":{"answer":2109,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4541,"fields":{"answer":2109,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4541,"fields":{"answer":2109,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4543,"fields":{"answer":2111,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.015}},{"model":"campaign_trail.answer_score_global","pk":4543,"fields":{"answer":2111,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.015}},{"model":"campaign_trail.answer_score_global","pk":4543,"fields":{"answer":2111,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4560,"fields":{"answer":2112,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4560,"fields":{"answer":2112,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4561,"fields":{"answer":2113,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4561,"fields":{"answer":2113,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.06}},{"model":"campaign_trail.answer_score_global","pk":4561,"fields":{"answer":2113,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4561,"fields":{"answer":2113,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4562,"fields":{"answer":2114,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4562,"fields":{"answer":2114,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4562,"fields":{"answer":2114,"candidate":e.candidate_id,"affected_candidate":106,"global_multiplier":-0.03}},{"model":"campaign_trail.answer_score_global","pk":4562,"fields":{"answer":2114,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4562,"fields":{"answer":2114,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4563,"fields":{"answer":2115,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.06}},{"model":"campaign_trail.answer_score_global","pk":4563,"fields":{"answer":2115,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4563,"fields":{"answer":2115,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4563,"fields":{"answer":2115,"candidate":e.candidate_id,"affected_candidate":67,"global_multiplier":0.02}},{"model":"campaign_trail.answer_score_global","pk":4580,"fields":{"answer":2116,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4580,"fields":{"answer":2116,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":-0.04}},{"model":"campaign_trail.answer_score_global","pk":4581,"fields":{"answer":2117,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.05}},{"model":"campaign_trail.answer_score_global","pk":4581,"fields":{"answer":2117,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.04}},{"model":"campaign_trail.answer_score_global","pk":4581,"fields":{"answer":2117,"candidate":e.candidate_id,"affected_candidate":17,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4581,"fields":{"answer":2117,"candidate":e.candidate_id,"affected_candidate":16,"global_multiplier":-0.02}},{"model":"campaign_trail.answer_score_global","pk":4582,"fields":{"answer":2118,"candidate":e.candidate_id,"affected_candidate":23,"global_multiplier":-0.08}},{"model":"campaign_trail.answer_score_global","pk":4582,"fields":{"answer":2118,"candidate":e.candidate_id,"affected_candidate":16,"global_multiplier":0.03}},{"model":"campaign_trail.answer_score_global","pk":4582,"fields":{"answer":2118,"candidate":e.candidate_id,"affected_candidate":105,"global_multiplier":0.05}}];
 e.answer_score_state_json = [{"model":"campaign_trail.answer_score_state","pk":11200,"fields":{"answer":2096,"state":3004,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.03}},{"model":"campaign_trail.answer_score_state","pk":11200,"fields":{"answer":2096,"state":3005,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.03}},{"model":"campaign_trail.answer_score_state","pk":11200,"fields":{"answer":2096,"state":3012,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.03}},{"model":"campaign_trail.answer_score_state","pk":11201,"fields":{"answer":2097,"state":3001,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.01}},{"model":"campaign_trail.answer_score_state","pk":11201,"fields":{"answer":2097,"state":3006,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.01}},{"model":"campaign_trail.answer_score_state","pk":11201,"fields":{"answer":2097,"state":3007,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.01}},{"model":"campaign_trail.answer_score_state","pk":11202,"fields":{"answer":2098,"state":3009,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.05}},{"model":"campaign_trail.answer_score_state","pk":11202,"fields":{"answer":2098,"state":3010,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.05}},{"model":"campaign_trail.answer_score_state","pk":11202,"fields":{"answer":2098,"state":3011,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.03}},{"model":"campaign_trail.answer_score_state","pk":11203,"fields":{"answer":2099,"state":3002,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.03}},{"model":"campaign_trail.answer_score_state","pk":11203,"fields":{"answer":2099,"state":3003,"candidate":e.candidate_id,"affected_candidate":23,"state_multiplier":0.03}}];
@@ -243,14 +243,14 @@ function dHondtAllocationWithFewerBugs(votes, seats, thresh = 0.0067, pimdex = 9
 
 function addCoalitions() {
     const coalitionListDiv = document.getElementById("coalitionList");
-  
+
       // Otherwise, wait for the element to be added to the DOM and then modify it
       const observer = new MutationObserver((mutations) => {
-  
-  
+
+
         const coalitionListDiv = document.getElementById("coalitionList");
         if (coalitionListDiv) {
-  
+
           observer.disconnect();
           // Create a new table
           const coalitionTable = document.createElement("table");
@@ -258,10 +258,10 @@ function addCoalitions() {
           coalitionTable.style.margin = "0 auto";
           coalitionTable.style.width = "70%";
           coalitionTable.style.border = "1px solid black";
-  
+
           // Create a header row
           const headerRow = document.createElement("tr");
-  
+
           if (coalitionNames){
               // Create a header cell for the coalition name
               const nameHeader = document.createElement("th");
@@ -271,7 +271,7 @@ function addCoalitions() {
               nameHeader.appendChild(nameHeaderText);
               headerRow.appendChild(nameHeader);
           }
-  
+
           if (coalitionPartyListed){
             // Create a header cell for the list of parties
             const partiesHeader = document.createElement("th");
@@ -281,7 +281,7 @@ function addCoalitions() {
             partiesHeader.appendChild(partiesHeaderText);
             headerRow.appendChild(partiesHeader);
           }
-  
+
           // Create a header cell for the checkbox
           const checkboxHeader = document.createElement("th");
           checkboxHeader.style.width = "33%";
@@ -289,17 +289,17 @@ function addCoalitions() {
           const checkboxHeaderText = document.createTextNode("Negotiate?");
           checkboxHeader.appendChild(checkboxHeaderText);
           headerRow.appendChild(checkboxHeader);
-  
+
           // Add the header row to the table
           coalitionTable.appendChild(headerRow);
-  
+
           // Loop through each coalition in possibleCoalitions
           possibleCoalitions.forEach(coalition => {
-  
-  
+
+
             // Create a new table row
             const row = document.createElement("tr");
-  
+
             if(coalitionNames){
                 // Create a cell for the coalition name and add it to the row
                 const nameCell = document.createElement("td");
@@ -308,7 +308,7 @@ function addCoalitions() {
                 nameCell.appendChild(coalitionName);
                 row.appendChild(nameCell);
             }
-  
+
             if (coalitionPartyListed){
               // Create a cell for the list of parties and add it to the row
               const partiesCell = document.createElement("td");
@@ -319,7 +319,7 @@ function addCoalitions() {
                 return party.fields.last_name;
               })
               .join(", ");
-  
+
               const partiesText = document.createTextNode(partiesList);
               partiesCell.appendChild(partiesText);
               row.appendChild(partiesCell);
@@ -330,7 +330,7 @@ function addCoalitions() {
             checkboxCell.style.width = "33%";
             const player_pk = 23;
             const hasPlayerParty = coalition.parties.includes(player_pk);
-  
+
               // If the coalition contains the player's party, create a checkbox that can be checked/unchecked
               if (hasPlayerParty && coalition.id != 21) {
                 const checkbox = document.createElement("input");
@@ -348,20 +348,20 @@ function addCoalitions() {
                 checkboxCell.appendChild(checkbox);
               }
             row.append(checkboxCell)
-  
+
             // Add the row to the table
             coalitionTable.appendChild(row);
           });
-  
+
           // Create a container element for the table
             const container = document.createElement("div");
             container.style.height = "calc(4 * 2.5em)"; // Set the height to 4 rows of 2.5em each (adjust as needed)
             container.style.overflow = "scroll"; // Add a scrollbar when there are more rows than visible
             container.appendChild(coalitionTable);
-  
+
             // Add the container to the coalitionListDiv
             coalitionListDiv.appendChild(container);
-  
+
             // Add a button to select a coalition
               const selectButton = document.createElement("button");
               selectButton.textContent = "Negotiate!";
@@ -374,10 +374,10 @@ function addCoalitions() {
                     totalWeight += coalition.weight;
                   }
                 });
-  
+
                 // Choose a random number between 0 and total weight
                 const randomWeight = Math.random() * totalWeight;
-  
+
                 // Find the coalition that matches the random weight
                 let currentWeight = 0;
                 possibleCoalitions.forEach(coalition => {
@@ -388,7 +388,7 @@ function addCoalitions() {
                     }
                   }
                 });
-  
+
                 // If a coalition was selected, show an alert with its name
                 if (selectedCoalition) {
                   negotiationsDone = true;
@@ -403,31 +403,31 @@ function addCoalitions() {
                   alert("No coalition selected");
                 }
               });
-  
+
               function coalitionCheckbox(coalition) {
                 return document.getElementById(`coalition-${coalition.id}-checkbox`).checked;
               }
               coalitionListDiv.appendChild(selectButton);
-  
+
           }
       });
       observer.observe(document.documentElement, { childList: true, subtree: true });
-  
+
     }
-  
-  
+
+
   function coalitionTalks(results){
       // Define the election result, with the number of seats each party received
       const electionResult = results
-  
+
       var totalSeats = electionResult.reduce((sum, party) => sum + party.electoral_votes, 0)
       // Define a function to check if a coalition has a majority of seats
       function hasMajority(coalition) {
         const coalitionSeats = coalition.parties.reduce((sum, partyId) => sum + electionResult.find(p => p.candidate === partyId).electoral_votes, 0);
-  
+
         return coalitionSeats > (totalSeats / 2);
       }
-  
+
       // Define a function to get a list of all possible coalitions that have a majority of seats
       function getMajorityCoalitions() {
         const majorityCoalitions = [];
@@ -440,7 +440,7 @@ function addCoalitions() {
         }
         return majorityCoalitions;
       }
-  
+
       // Define a function to remove all coalitions that are impossible due to other coalitions already in the list
       function removeImpossibleCoalitions(coalitionList) {
         const possibleCoalitionsFunc = coalitionList.filter(coalition => {
@@ -449,18 +449,18 @@ function addCoalitions() {
         });
         return possibleCoalitionsFunc;
       }
-  
+
       // Get the list of all possible coalitions that have a majority of seats
       const majorityCoalitions = getMajorityCoalitions();
-  
+
       // Remove all coalitions that are impossible due to other coalitions already in the list
       const possibleCoalitionsFunc = removeImpossibleCoalitions(majorityCoalitions);
       return possibleCoalitionsFunc;
   }
-  
+
   function adjustWeights(factor){
       const winner_pk = e.final_overall_results[0].candidate;
-  
+
       coalitions.forEach(coalition => {
         if (coalition.parties.includes(winner_pk)) {
           coalition.weight *= factor;
@@ -519,7 +519,7 @@ function findLeader(coalition){
 
   function findFinanceMinister(coalition){
     let memberVotes = [];
-    
+
     // Collect all party vote data
     coalition.parties.forEach(party => {
         let votes = e.final_overall_results[e.final_overall_results.map(f=>f.candidate).indexOf(party)].popular_votes;
@@ -528,16 +528,16 @@ function findLeader(coalition){
             votes: votes
         });
     });
-    
+
     // Sort by votes in descending order
     memberVotes.sort((a, b) => b.votes - a.votes);
-    
+
     // Return the party leader of the second highest party (index 1)
     if (memberVotes.length >= 2) {
         let secondLargestParty = memberVotes[1].party;
         return partyLeaders.find((p) => p.party === secondLargestParty);
     }
-    
+
     return null; // Return null if there's no second party
   }
 
@@ -554,7 +554,7 @@ function findLeader(coalition){
   }
 
   // constructs endings based on header and pages
-  
+
   construct = (a = 1) => {
     e.page = e.page + a < e.pages.length ? e.page + a : 0
     let html = e.header;
@@ -568,7 +568,7 @@ function findLeader(coalition){
     if (e.page == 1) { // Modders beware, this is part of the coalition system!
         addCoalitions();
     }
-  
+
     if (e.image == true)
       setTimeout(()=>{
         candImg = $(".person_image")[0]
@@ -590,10 +590,10 @@ function findLeader(coalition){
         if (candImg)
           candImg.src = e.image;
       }, 10)
-  
+
     return html;
   }
-  
+
   endingConstructor = (a = 1) => {
     if(resetPage){
         a = 0;
@@ -601,34 +601,34 @@ function findLeader(coalition){
     }
    $("#final_results_description")[0].innerHTML = construct(a);
  }
-  
+
   // ENDINGS -- this is slightly more reliable than the ending code method
-  
+
   e.multiple_endings = true;
-  
+
   e.header = "<h1>Welcome to NOS Nederland Kiest</h1>";
   e.pages = [`<p>I'm sorry, the exitpolls did not arrive today. Perhaps the outcome is very peculiar, so that no ending has been applicable to it. Or perhaps something else went wrong... How did you party do? If it has become the largest, congratulations, you have won the elections. You will receive the initiative to form a new government. Hopefully you can find enough willing coalition partners to get to a stable majority of 76 seats. If you did not win, the initiative will go to the winner. Perhaps you can still make your mark on policy if that party invites you to become a junior coalition partner.</p>`, `<p>You are invited to share this outcome with Thomahawk2k#6729 or Zim#6563 so we can have a look what went wrong.</p>`];
   e.page = 0;
-  
+
   endingPicker = (out, totv, aa, quickstats) => {
     //out = "win", "loss", or "tie" for your candidate
     //totv = total votes in entire election
     //aa = all final overall results data
     //quickstat = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
-      
+
     // get a simple array of popular votes for each candidate
     let votes = aa.map(x=>x.popular_votes)
-      
+
     var pimdex = e.final_overall_results.findIndex((r) => r.candidate === e.candidate_id);
     // feed it to the d'Hondt(ish) algorithm
     let allocations = dHondtAllocationWithFewerBugs(votes, 150, 0, pimdex, maxseats);
-      
+
     // store the resulting number of seats for the candidate in their object
     allocations.forEach((a,i) => aa[i].electoral_votes = a);
 
     var firstParty = e.candidate_json.find(p => p.pk === e.final_overall_results[0].candidate);
     var firstPartyLeader = partyLeaders.find((p) => p.party === e.final_overall_results[0].candidate);
-  
+
     /*
     e.header = "<h2></h2>"
     e.pages = ["<p></p>",
@@ -638,11 +638,12 @@ function findLeader(coalition){
     // Secret ending if you only visited the Caribbean
     const CarribeanEnding = campaignTrail_temp.player_visits.every((provinceId) => provinceId === 3010);
     var leader = null;
-  
+
     if (!e.initDC) {
       e.initDC = true
 
         loadScript('https://code.highcharts.com/highcharts.js', function() {
+        loadScript('https://code.highcharts.com/modules/data-sorting.js', function() {
         loadScript('https://code.highcharts.com/modules/item-series.js', function() {
           loadScript('https://code.highcharts.com/modules/accessibility.js', function() {
           });
@@ -658,34 +659,34 @@ function findLeader(coalition){
 
       //IMPORTANT ADD TO YOUR CODE
       possibleCoalitions = coalitionTalks(e.final_overall_results);
-  
+
       //all coalitions with the winning party have their weight multiplied by this value
       adjustWeights(5);
     }
-    
+
     // Wait for tables to be added to the DOM
     const observer = new MutationObserver((mutations, obs) => {
         // Check for the final results table
         const finalResultsTable = document.querySelector('.final_results_table');
         if (finalResultsTable) {
             const headerRow = finalResultsTable.querySelector('tr:first-child');
-            const leaderHeaderExists = Array.from(headerRow.children).some(th => 
+            const leaderHeaderExists = Array.from(headerRow.children).some(th =>
                 th.textContent.trim() === 'Leader'
             );
-            
+
             if (!leaderHeaderExists) {
                 addLeaderColumn(finalResultsTable);
             }
         }
-        
+
         // Check for the overall election details table
         const overallTable = document.querySelector('#overall_election_details table');
         if (overallTable) {
             const headerRow = overallTable.querySelector('tr:first-child');
-            const leaderHeaderExists = Array.from(headerRow.children).some(th => 
+            const leaderHeaderExists = Array.from(headerRow.children).some(th =>
                 th.textContent.trim() === 'Leader'
             );
-            
+
             if (!leaderHeaderExists) {
                 addLeaderColumn(overallTable);
             }
@@ -701,19 +702,19 @@ function findLeader(coalition){
     function addLeaderColumn(table) {
         // Double-check that Leader column doesn't exist
         const headerRow = table.querySelector('tr:first-child');
-        const leaderHeaderExists = Array.from(headerRow.children).some(th => 
+        const leaderHeaderExists = Array.from(headerRow.children).some(th =>
             th.textContent.trim() === 'Leader'
         );
-        
+
         if (leaderHeaderExists) {
             return; // Column already exists, exit early
         }
-        
+
         // Add header for Leader column
         const leaderHeader = document.createElement('th');
         leaderHeader.textContent = 'Leader';
         headerRow.insertBefore(leaderHeader, headerRow.children[1]);
-        
+
         // Add leader data to each party row
         const dataRows = table.querySelectorAll('tr:not(:first-child)');
         dataRows.forEach(row => {
@@ -721,14 +722,14 @@ function findLeader(coalition){
             if (partyCell) {
                 const partyText = partyCell.textContent.trim();
                 const partyData = partyLeaders.find(p => partyText.includes(p.partyName));
-                
+
                 const leaderCell = document.createElement('td');
                 if (partyData) {
                     leaderCell.textContent = partyData.fullLeaderName;
                 } else {
                     leaderCell.textContent = 'Unknown';
                 }
-                
+
                 row.insertBefore(leaderCell, row.children[1]);
             }
         });
@@ -1216,10 +1217,10 @@ function removeElectoralVotesOption() {
 function replaceCandidateWithPartyList() {
     // Find all table headers and cells
     const allElements = document.querySelectorAll('th, td, div, span');
-    
+
     allElements.forEach(element => {
         // Check if the element contains exactly "Candidate" as text
-        if (element.childNodes.length === 1 && 
+        if (element.childNodes.length === 1 &&
             element.childNodes[0].nodeType === Node.TEXT_NODE &&
             element.textContent.trim() === 'Candidate') {
             element.textContent = 'Party List';
@@ -1236,21 +1237,21 @@ function replaceText() {
         null,
         false
     );
-    
+
     const nodesToReplace = [];
     while (walker.nextNode()) {
         const text = walker.currentNode.textContent;
-        if (text.includes('STATE') || 
+        if (text.includes('STATE') ||
             text.includes('State') ||
-            text.includes('state') || 
+            text.includes('state') ||
             text.includes('ELECTORAL VOTES')) {
             nodesToReplace.push(walker.currentNode);
         }
     }
-    
+
     nodesToReplace.forEach(node => {
         let newText = node.textContent;
-        
+
         // Replace all variations of state/State/STATE with province equivalents
         newText = newText.replace(/STATE SUMMARY/g, 'PROVINCE SUMMARY');
         newText = newText.replace(/ELECTORAL VOTES/g, 'POPULAR VOTES');
@@ -1261,11 +1262,11 @@ function replaceText() {
         newText = newText.replace(/Closest States/g, 'Closest Provinces');
         newText = newText.replace(/Results by State/g, 'Results by Province');
         newText = newText.replace(/Returns for this state/g, 'Returns for this province');
-        newText = newText.replace(/Click on a state to view detailed results \(once returns for that state arrive\)/g, 
+        newText = newText.replace(/Click on a state to view detailed results \(once returns for that state arrive\)/g,
                                   'Click on a province to view detailed results (once returns for that province arrive)');
         newText = newText.replace(/Click on a state/g, 'Click on a province');
         newText = newText.replace(/for that state/g, 'for that province');
-        
+
         if (newText !== node.textContent) {
             node.textContent = newText;
         }
@@ -1282,7 +1283,7 @@ const observer = new MutationObserver((mutations) => {
             replaceText();
             replaceCandidateWithPartyList();
         }
-        
+
         // Also check for text changes (characterData)
         if (mutation.type === 'characterData') {
             replaceCandidateWithPartyList();
@@ -1308,19 +1309,19 @@ const replacement2003TableHTML = `<table>
             <th>Popular Votes</th>
             <th>Popular Vote %</th>
         </tr>
-        
+
         <tr><td style="text-align: left;"><span style="background-color: #0E644A; color: #0E644A;">----</span>
              CDA
         </td><td>Jan Peter Balkenende</td><td>44</td><td>2,763,480</td><td>28.6%</td></tr>
-        
+
         <tr><td style="text-align: left;"><span style="background-color: #D90000; color: #D90000;">----</span>
              PvdA
         </td><td>Wouter Bos</td><td>42</td><td>2,455,750</td><td>27.3%</td></tr>
-        
+
         <tr><td style="text-align: left;"><span style="background-color: #120A8F; color: #120A8F;">----</span>
              VVD
         </td><td>Gerrit Zalm</td><td>28</td><td>1,728,707</td><td>17.9%</td></tr>
-        
+
         <tr><td style="text-align: left;"><span style="background-color: #450101; color: #450101;">----</span>
              SP
         </td><td>Jan Marijnissen</td><td>9</td><td>558,019</td><td>6.3%</td></tr>
@@ -1328,19 +1329,19 @@ const replacement2003TableHTML = `<table>
         <tr><td style="text-align: left;"><span style="background-color: #DBD000; color: #DBD000;">----</span>
              LPF
         </td><td>Mat Herben</td><td>8</td><td>549,975</td><td>5.7%</td></tr>
-          
+
         <tr><td style="text-align: left;"><span style="background-color: #39A935; color: #39A935;">----</span>
              GroenLinks
         </td><td>Femke Halsema</td><td>8</td><td>495,995</td><td>5.1%</td></tr>
-        
+
         <tr><td style="text-align: left;"><span style="background-color: #32CD32; color: #32CD32;">----</span>
              D66
         </td><td>Thom de Graaf</td><td>6</td><td>382,463</td><td>4.1%</td></tr>
-        
+
         <tr><td style="text-align: left;"><span style="background-color: #9AEFF5; color: #9AEFF5;">----</span>
              CU
         </td><td>André Rouvoet</td><td>3</td><td>207,627</td><td>2.1%</td></tr>
-        
+
         <tr><td style="text-align: left;"><span style="background-color: #B56B21; color: #B56B21;">----</span>
              SGP
         </td><td>Bas van der Vlies</td><td>2</td><td>163,283</td><td>1.7%</td></tr>
@@ -1359,28 +1360,28 @@ const replaceObserver = new MutationObserver((mutations, obs) => {
         mainContentArea.style.overflowY = 'auto';
         mainContentArea.style.maxHeight = '100vh';
     }
-    
+
     // Get all divs with id 'overall_election_details'
     const allDivs = document.querySelectorAll('#overall_election_details');
-    
+
     // Find the one with "Results - Historical" header
     allDivs.forEach(div => {
         const h4 = div.querySelector('h4');
         if (h4 && h4.textContent.includes('Results - Historical')) {
             const oldTable = div.querySelector('table');
-            
+
             if (oldTable) {
                 // Check if the table has already been replaced by looking for our replacement marker
                 if (oldTable.hasAttribute('data-replaced')) {
                     return; // Already replaced, skip
                 }
-                
+
                 // Remove the old table
                 oldTable.remove();
-                
+
                 // Insert the replacement table directly after the h4 header
                 h4.insertAdjacentHTML('afterend', replacement2003TableHTML);
-                
+
                 // Mark the new table as replaced
                 const newTable = div.querySelector('table');
                 if (newTable) {
@@ -1400,7 +1401,7 @@ replaceObserver.observe(document.body, {
   //chart stuff here, setup in cyoa function required
 
   function Chartbuilder(type){
-  
+
   if(type === "seats"){
     var D66Seats = (e.final_overall_results.find((r) => r.candidate === 16));
     var CDASeats = (e.final_overall_results.find((r) => r.candidate === 105));
@@ -1412,10 +1413,10 @@ replaceObserver.observe(document.body, {
     var PvdASeats = (e.final_overall_results.find((r) => r.candidate === 17))
     var GLSeats = (e.final_overall_results.find((r) => r.candidate === 21))
     var LPFSeats = (e.final_overall_results.find((r) => r.candidate === 106))
-    
+
     const chartButton = document.getElementById("chart_button");
     chartButton.disabled = true;
-    
+
     // Replace values with the actual seat counts
     const data_present = [
       ['Socialist Party', SPSeats.electoral_votes, '#450101', 'SP'],
@@ -1429,7 +1430,7 @@ replaceObserver.observe(document.body, {
       ['Pim Fortuyn List', LPFSeats.electoral_votes, '#DBD000', 'LPF'],
       ['Others', OthersSeats.electoral_votes, '#000000', 'Others']
     ];
-  
+
     const data_last_time = [
       ['Socialist Party', 9, '#450101', 'SP'],
       ['GL', 10, '#39A935', 'GL'],
@@ -1442,7 +1443,7 @@ replaceObserver.observe(document.body, {
       ['Christian-Democratic Appeal', 43, '#0E644A', 'CDA'],
       ['Pim Fortuyn List', 26, '#DBD000', 'LPF']
     ];
-  
+
     // Initial chart creation
     var myChart = Highcharts.chart('myChart', {
       chart: {
@@ -1473,13 +1474,13 @@ replaceObserver.observe(document.body, {
         }
       ]
     });
-  
+
     // Initial state flag
     let showingCurrent = true; // starts with 2002
-    
+
     // Variable to store original HTML
     var originalHtml = null;
-  
+
     // Add "Previous Election" button dynamically
     const toggleBtn = document.createElement("button");
     toggleBtn.innerText = "Previous Election";
@@ -1487,7 +1488,7 @@ replaceObserver.observe(document.body, {
     toggleBtn.style.position = "relative";
     toggleBtn.style.top = "-70px";
     document.getElementById("container").appendChild(toggleBtn);
-  
+
     // Event listener for toggle
     toggleBtn.addEventListener("click", function () {
       if (showingCurrent) {
@@ -1536,9 +1537,9 @@ replaceObserver.observe(document.body, {
         showingCurrent = true;
       }
     });
-    
+
     document.querySelector('.highcharts-legend.highcharts-no-tooltip').remove();
-    
+
     // Add event listener to NextButton
     document.getElementById("nextButton").addEventListener("click", function() {
         // Save the original HTML BEFORE removing
@@ -1548,7 +1549,7 @@ replaceObserver.observe(document.body, {
           buttonsDiv.remove();
         }
     });
-    
+
     // Add event listener to BackButton
     document.getElementById("backButton").addEventListener("click", function() {
         // Add the buttons div back to where it was if we saved it
@@ -2050,7 +2051,7 @@ replaceObserver.observe(document.body, {
       'zwijndrecht': { 'CDA': 0.9832840361152471, 'CU': 1.8394422321673904, 'D66': 0.8256827476241602, 'GroenLinks': 0.6130018181310111, 'LPF': 1.5896526965227555, 'PvdA': 0.9314076321737608, 'SGP': 2.2323674547488284, 'SP': 0.6898799913522374, 'VVD': 0.995598542514623, 'Others': 1 },
       'zwolle': { 'CDA': 0.8879331503041744, 'CU': 3.198045722839129, 'D66': 1.0187160114041394, 'GroenLinks': 1.35088234634065, 'LPF': 0.5964004038440138, 'PvdA': 1.164864689726417, 'SGP': 0.31809283655384996, 'SP': 1.0551725320349916, 'VVD': 0.7745583242005833, 'Others': 1 }
     };
-    
+
     // Party mapping
     const partyMap = {
         105: 'CDA',
@@ -2064,7 +2065,7 @@ replaceObserver.observe(document.body, {
         117: 'SGP',
         512: 'Others'
     };
-    
+
     // Party colors (corrected)
     const partyColors = {
         'CDA': '#0E644A',
@@ -2078,7 +2079,7 @@ replaceObserver.observe(document.body, {
         'SGP': '#B56B21',
         'Others': '#999999'
     };
-    
+
     // Get national votes
     const nationalVotes = {};
     Object.keys(partyMap).forEach(candidateId => {
@@ -2086,9 +2087,9 @@ replaceObserver.observe(document.body, {
         const result = e.final_overall_results.find((r) => r.candidate == candidateId);
         nationalVotes[partyName] = result ? result.popular_votes : 0;
     });
-    
+
     console.log('National votes:', nationalVotes);
-    
+
     // Normalize municipality name for matching
 function normalizeName(name) {
     if (!name) return '';
@@ -2101,17 +2102,17 @@ function normalizeName(name) {
 function getWinner(gemeenteNaam) {
     const normalized = normalizeName(gemeenteNaam);
     let factors = gemeenteFactoren[normalized];
-    
+
     // If not found, try with original name
     if (!factors) {
         factors = gemeenteFactoren[gemeenteNaam];
     }
-    
+
     // If still not found, try lowercase without the normalization
     if (!factors) {
         factors = gemeenteFactoren[gemeenteNaam.toLowerCase()];
     }
-    
+
     if (!factors) {
         console.log(`No factors found for: "${gemeenteNaam}" (tried: "${normalized}", "${gemeenteNaam.toLowerCase()}")`);
         // Return national winner if no factors
@@ -2125,30 +2126,30 @@ function getWinner(gemeenteNaam) {
         });
         return winner;
     }
-    
+
     let maxScore = 0;
     let winner = 'PvdA';
     const scores = {};
-    
+
     Object.entries(nationalVotes).forEach(([party, votes]) => {
         const factor = factors[party] || 1;
         const score = votes * factor;
         scores[party] = score;
-        
+
         if (score > maxScore) {
             maxScore = score;
             winner = party;
         }
     });
-    
+
     // Debug first few municipalities
     //if (Math.random() < 0.05) { // Log 5% of municipalities
     //    console.log(`${gemeenteNaam}: Winner=${winner}`, scores);
     //}
-    
+
     return winner;
 }
-    
+
     // Wait for DOM and render
     setTimeout(async () => {
         const container = document.getElementById('chartcontainer');
@@ -2156,31 +2157,31 @@ function getWinner(gemeenteNaam) {
             console.error('chartcontainer not found!');
             return;
         }
-        
+
         container.innerHTML = `
           <div style="width: 100%; height: 400px; position: relative; background: #f5f5f5; display: flex; align-items: center; justify-content: center;">
               <svg id="municipalMap" style="width: 100%; height: 100%;"></svg>
               <div id="mapTooltip" style="position: fixed; display: none; background: rgba(0,0,0,0.9); color: white; padding: 8px 12px; border-radius: 4px; pointer-events: none; z-index: 10000; font-size: 13px;"></div>
           </div>
         `;
-        
+
         try {
             const response = await fetch('https://cartomap.github.io/nl/wgs84/gemeente_2003.geojson');
             const geoData = await response.json();
-            
+
             console.log(`Loaded ${geoData.features.length} municipalities`);
-            
+
             const svg = document.getElementById('municipalMap');
             const tooltip = document.getElementById('mapTooltip');
-            
+
             // Calculate bounds
             let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-            
+
             geoData.features.forEach(feature => {
-                const coords = feature.geometry.type === 'Polygon' ? 
-                    feature.geometry.coordinates[0] : 
+                const coords = feature.geometry.type === 'Polygon' ?
+                    feature.geometry.coordinates[0] :
                     feature.geometry.coordinates[0][0];
-                
+
                 coords.forEach(([lng, lat]) => {
                     minX = Math.min(minX, lng);
                     maxX = Math.max(maxX, lng);
@@ -2188,42 +2189,42 @@ function getWinner(gemeenteNaam) {
                     maxY = Math.max(maxY, lat);
                 });
             });
-            
+
             const width = 800;
             const height = 380;
             const padding = 30;
-            
+
             svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-            
+
             const scaleX = (width - 2 * padding) / (maxX - minX);
             const scaleY = (height - 2 * padding) / (maxY - minY);
-            
+
             // Use different scales for X and Y instead of Math.min
             const horizontalScale = scaleX * 0.45; // Slightly smaller to fit width
             const verticalScale = scaleY * 1.15; // 20% taller to stretch vertically
-            
+
             // Center the map
             const mapWidth = (maxX - minX) * horizontalScale;
             const mapHeight = (maxY - minY) * verticalScale;
             const offsetX = (width - mapWidth) / 2;
             const offsetY = (height - mapHeight) / 2;
-            
+
             // Render municipalities
             geoData.features.forEach(feature => {
                 const gemeenteNaam = feature.properties.GM_NAAM || feature.properties.statnaam || '';
                 const winner = getWinner(gemeenteNaam);
                 const color = partyColors[winner] || '#CCCCCC';
-                
+
                 const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 path.setAttribute('fill', color);
                 path.setAttribute('stroke', '#ffffff');
                 path.setAttribute('stroke-width', '0.5');
                 path.style.cursor = 'pointer';
-                
-                const coords = feature.geometry.type === 'Polygon' ? 
-                    [feature.geometry.coordinates] : 
+
+                const coords = feature.geometry.type === 'Polygon' ?
+                    [feature.geometry.coordinates] :
                     feature.geometry.coordinates;
-                
+
                 let pathData = '';
                 coords.forEach(polygon => {
                     polygon.forEach((ring) => {
@@ -2235,9 +2236,9 @@ function getWinner(gemeenteNaam) {
                         pathData += 'Z ';
                     });
                 });
-                
+
                 path.setAttribute('d', pathData);
-                
+
                 // Tooltip
                 path.addEventListener('mouseenter', (event) => {
                     tooltip.style.display = 'block';
@@ -2245,23 +2246,23 @@ function getWinner(gemeenteNaam) {
                     path.setAttribute('stroke', '#000000');
                     path.setAttribute('stroke-width', '2');
                 });
-                
+
                 path.addEventListener('mousemove', (event) => {
                     tooltip.style.left = (event.clientX + 15) + 'px';
                     tooltip.style.top = (event.clientY + 15) + 'px';
                 });
-                
+
                 path.addEventListener('mouseleave', () => {
                     tooltip.style.display = 'none';
                     path.setAttribute('stroke', '#ffffff');
                     path.setAttribute('stroke-width', '0.5');
                 });
-                
+
                 svg.appendChild(path);
             });
-            
+
             console.log('Map rendered successfully');
-            
+
         } catch (error) {
             console.error('Map error:', error);
             container.innerHTML = `<div style="padding: 20px; color: red;">Error loading map: ${error.message}</div>`;
@@ -2324,25 +2325,25 @@ function getWinner(gemeenteNaam) {
   // Add ministers to table
   ministers.forEach(minister => {
       const row = table.insertRow();
-      
+
       // Color cell
       const colorCell = row.insertCell();
       colorCell.style.backgroundColor = minister.color;
       colorCell.style.width = '20px';
       colorCell.style.borderBottom = '1px solid #ddd';
-      
+
       // Ministry cell
       const ministryCell = row.insertCell();
       ministryCell.textContent = minister.ministerTitle;
       ministryCell.style.padding = '10px';
       ministryCell.style.borderBottom = '1px solid #ddd';
-      
+
       // Minister name cell
       const ministerCell = row.insertCell();
       ministerCell.innerHTML = minister.name;
       ministerCell.style.padding = '10px';
       ministerCell.style.borderBottom = '1px solid #ddd';
-      
+
       // Party cell
       const partyCell = row.insertCell();
       partyCell.textContent = minister.party;
@@ -2405,25 +2406,25 @@ function getWinner(gemeenteNaam) {
   // Add ministers to table
   ministers.forEach(minister => {
       const row = table.insertRow();
-      
+
       // Color cell
       const colorCell = row.insertCell();
       colorCell.style.backgroundColor = minister.color;
       colorCell.style.width = '20px';
       colorCell.style.borderBottom = '1px solid #ddd';
-      
+
       // Ministry cell
       const ministryCell = row.insertCell();
       ministryCell.textContent = minister.ministerTitle;
       ministryCell.style.padding = '10px';
       ministryCell.style.borderBottom = '1px solid #ddd';
-      
+
       // Minister name cell
       const ministerCell = row.insertCell();
       ministerCell.innerHTML = minister.name;
       ministerCell.style.padding = '10px';
       ministerCell.style.borderBottom = '1px solid #ddd';
-      
+
       // Party cell
       const partyCell = row.insertCell();
       partyCell.textContent = minister.party;
@@ -2535,20 +2536,20 @@ function getWinner(gemeenteNaam) {
 
   // Sort coalition parties by seats (descending)
   coalitionParties.sort((a, b) => b.seats - a.seats);
-  
+
   // First give each party 1 minister
   coalitionParties.forEach(party => {
       party.ministers = 1;
   });
-  
+
   let remainingMinisters = 15 - coalitionParties.length;
-  
+
   // Distribute remaining ministers using D'Hondt method
   while (remainingMinisters > 0) {
       // Find party with highest quotient (seats / (ministers + 1))
       let maxQuotient = 0;
       let partyWithMax = null;
-      
+
       coalitionParties.forEach(party => {
           const quotient = party.seats / (party.ministers + 1);
           if (quotient > maxQuotient) {
@@ -2556,19 +2557,19 @@ function getWinner(gemeenteNaam) {
               partyWithMax = party;
           }
       });
-      
+
       partyWithMax.ministers++;
       remainingMinisters--;
   }
-  
+
   console.log("Minister distribution:");
   coalitionParties.forEach(party => {
       console.log(`${party.name}: ${party.ministers} ministers (${party.seats} seats)`);
   });
-  
+
   // Allocate ministers
   let takenPosts = new Set();
-  
+
   // Each party takes turns picking their most preferred available post
   while(takenPosts.size < 15) {
       for(let party of coalitionParties) {
@@ -2750,7 +2751,7 @@ function getWinner(gemeenteNaam) {
       },
       512: {
         1: "Placeholder",
-        2: "Placeholder", 
+        2: "Placeholder",
         3: "Placeholder",
         4: "Placeholder",
         5: "Placeholder",
@@ -2817,22 +2818,22 @@ function getWinner(gemeenteNaam) {
   // Add minister rows
   ministerList.forEach(minister => {
       const row = table.insertRow();
-      
+
       // Color cell
       const colorCell = row.insertCell();
       colorCell.style.backgroundColor = coalitionParties.find(p => p.party === minister.party)?.color || '#ffffff';
       colorCell.style.width = '20px';
-      
+
       // Ministry cell
       const ministryCell = row.insertCell();
       ministryCell.textContent = minister.ministerTitle;
       ministryCell.style.padding = '10px';
-      
+
       // Minister name cell
       const ministerCell = row.insertCell();
       ministerCell.innerHTML = ministerNames[minister.party]?.[minister.minID] || "TBD";
       ministerCell.style.padding = '10px';
-      
+
       // Party cell
       const partyCell = row.insertCell();
       partyCell.textContent = coalitionParties.find(p => p.party === minister.party)?.name || "Unassigned";
@@ -2861,7 +2862,7 @@ function getWinner(gemeenteNaam) {
         buttonsDiv.remove();
       }
   });
-  
+
   // Add event listener to BackButton
   document.getElementById("backButton").addEventListener("click", function() {
       // Remove the buttons div
@@ -2871,7 +2872,7 @@ function getWinner(gemeenteNaam) {
 
   const chartButton = document.getElementById("chart_button");
   chartButton.disabled = true;
-  
+
   }
   else if(type==="voteshare"){
       var totalPopularVote = 9515226
@@ -2885,10 +2886,10 @@ function getWinner(gemeenteNaam) {
       var PvdAShare = (Math.round(((e.final_overall_results.find((r) => r.candidate === 17).popular_votes/totalPopularVote))*1000)/10);
       var GLShare = (Math.round(((e.final_overall_results.find((r) => r.candidate === 21).popular_votes/totalPopularVote))*1000)/10);
       var LPFShare = (Math.round(((e.final_overall_results.find((r) => r.candidate === 106).popular_votes/totalPopularVote))*1000)/10);
-  
+
       const chartButton = document.getElementById("chart_button");
       chartButton.disabled = true;
-  
+
       const dataPrev = {
         2003: [
             ['People\'s Party for Freedom and Democracy', 15.4],
@@ -3415,7 +3416,7 @@ function getWinner(gemeenteNaam) {
               ['Roman Catholic Party of the Netherlands', 0]
           ]
       };
-      
+
       const countries = [{
           name: 'People\'s Party for Freedom and Democracy',
           flag: 'vvd',
@@ -3525,14 +3526,14 @@ function getWinner(gemeenteNaam) {
           flag: 'RKPN',
           color: '#0033BB'
       }];
-      
-      
+
+
       const getData = data => data.map((country, i) => ({
           name: country[0],
           y: country[1],
           color: countries[i].color
       }));
-      
+
       const chart = Highcharts.chart('myChart', {
           chart: {
               type: 'column'
@@ -3570,13 +3571,13 @@ function getWinner(gemeenteNaam) {
                   animate: true,
                   formatter: ctx => {
                       let flag;
-      
+
                       countries.forEach(function (country) {
                           if (country.name === ctx.value) {
                               flag = country.flag;
                           }
                       });
-      
+
                       return `${flag.toUpperCase()}<br><span class="f32">
                           <span class="flag ${flag}"></span>
                       </span>`;
@@ -3618,7 +3619,7 @@ function getWinner(gemeenteNaam) {
               allowHTML: true
           }
       });
-      
+
       const locations = [
           {
               city: 'Netherlands',
@@ -3672,19 +3673,19 @@ function getWinner(gemeenteNaam) {
               startyear: false
           }
       ];
-      
+
       locations.forEach(location => {
     if(location.startyear){
           const btn = document.getElementById(location.year);
-      
+
           btn.addEventListener('click', () => {
-      
+
               document.querySelectorAll('.buttons button.active')
                   .forEach(active => {
                       active.className = '';
                   });
               btn.className = 'active';
-      
+
               chart.update({
                   title: {
                       text: 'Dutch General Elections ' + location.year +
@@ -3707,8 +3708,8 @@ function getWinner(gemeenteNaam) {
           });
       }
      });
-  
-  
+
+
       // Add event listener to NextButton
       document.getElementById("nextButton").addEventListener("click", function() {
           // Save the original HTML of the buttons div
@@ -3722,19 +3723,19 @@ function getWinner(gemeenteNaam) {
   div.style.border = 'medium double';
   div.style.backgroundColor = '#f9f9f9';
   div.style.borderColor = '#c9c9c9';
-  
+
   var element = document.querySelector('.highcharts-background');
   if (element) { // Check if element exists before trying to remove it
       element.remove();
   }
   }
-  
-  
+
+
   var buttonAdded = false
   function addMyButton(){
-  
+
       if(document.getElementById("map_footer")&&e.initDC){
-  
+
           if (!buttonAdded) {
               buttonAdded=true;
               const buttonrow = document.getElementById("map_footer");
@@ -3753,16 +3754,16 @@ function getWinner(gemeenteNaam) {
                   // reconnect the observer
                   buttonAdded=false;
               }
-  
-  
+
+
             }
       }
   }
-  
+
   function executeWithRetry(fn, ...args) {
     const maxRetries = 20;
     const delayMs = 100;
-  
+
     for (let retry = 0; retry < maxRetries; retry++) {
       try {
         fn(...args);
@@ -3775,44 +3776,44 @@ function getWinner(gemeenteNaam) {
       }
     }
   }
-  
+
   const buttonobserver = new MutationObserver(addMyButton);
   buttonobserver.observe(document.documentElement, { childList: true, subtree: true });
-  
+
   function charting(chartIndex=0){
-  
+
     // Select the element to keep
     let mapFooter = $('#map_footer');
-  
+
     // Temporarily detach the element from DOM (it preserves bound events and data)
     mapFooter.detach();
-  
+
     // Cache the current content of #game_window
     let cachedContent = $('#game_window').html();
-  
+
       $("#game_window").html('<div class="game_header">\t<h2>NEW CAMPAIGN TRAIL</h2>\t</div>\t<div id="main_content_area">\t<div id="results_container"><br>  <div id="title_container"><button id="backButton">Back</button><h3 class="campaign-title">Election Charts:</h3><button id="nextButton">Next</button></div><br><div id="chartcontainer"><figure class="highcharts-figure"><div id="myChart"></div></figure></div></div></div><div class="buttons"><button id="1977">1977</button><button id="1981">1981</button><button id="1982">1982</button><button id="1986">1986</button><button id="1989">1989</button><button id="1994">1994</button><button id="1998">1998</button><button id="2002">2002</button><button id="2003" class="active">2003</button></div><div id="container"></div>');
-  
+
       $("#game_window").append(mapFooter);
       $('#map_footer button').prop('disabled', false);
-  
+
       var container = document.getElementById("title_container");
       var backButton = document.getElementById("backButton");
       var nextButton = document.getElementById("nextButton");
-  
+
       container.style.display = "flex";
       container.style.alignItems = "center";
       container.style.justifyContent = "center";
-  
+
       backButton.style.marginRight = "10px";
       nextButton.style.marginLeft = "10px";
-  
+
       if (chartIndex === 0){
           backButton.style.display = 'none';
       }
       if (chartIndex === charts.length-1){
           nextButton.style.display = 'none';
       }
-  
+
        $("#map_footer").css({
         position: "relative",
         zIndex: "9999"
@@ -3823,7 +3824,7 @@ function getWinner(gemeenteNaam) {
       $("#nextButton").click(function() {
           charting(chartIndex+1)
       })
-  
+
       setTimeout(function() {
           executeWithRetry(Chartbuilder, charts[chartIndex]);
     }, 100);
@@ -3836,10 +3837,10 @@ function getWinner(gemeenteNaam) {
               mapFooter.detach();
               $('#game_window').html(cachedContent);
               $("#game_window").append(mapFooter);
-  
+
               // Enable all buttons
               $('#map_footer button').prop('disabled', false);
-  
+
               // Check the id of the clicked button
               if (this.id === 'overall_results_button') {
                   resetPage = true;
@@ -3853,31 +3854,31 @@ function getWinner(gemeenteNaam) {
           $(this).prop('disabled', true);
           }
       });
-  
+
   };
-  
+
   function loadScript(url, callback) {
     var script = document.createElement('script');
     script.src = url;
     script.onload = callback;
-  
+
     document.head.appendChild(script);
   }
-  
+
   var charts = ["voteshare", "seats", "cabinet", "municipal_map"]
 
   let observerRunning = false;
   let changeChartRunning = false;
   let mcaHeightRunning = false;
   let processedNodes = new Set();
-  
+
   async function handleMutations(mutationsList, observer) {
       if (observerRunning) return;
       observerRunning = true;
-  
+
       // stop observing
       observer.disconnect();
-  
+
       // addScrollbar
       const overallResult = document.getElementById('overall_result');
       if (overallResult && !processedNodes.has(overallResult)) {
@@ -3889,7 +3890,7 @@ function getWinner(gemeenteNaam) {
           buttons.forEach(button => button.addEventListener('click', handleClick));
           processedNodes.add(overallResult);
       }
-  
+
       // changechart
       if (!changeChartRunning) {
           changeChartRunning = true;
@@ -3925,12 +3926,12 @@ function getWinner(gemeenteNaam) {
           }
           mcaHeightRunning = false;
       }
-  
+
       // Resume observing
       observer.observe(document.documentElement, { childList: true, subtree: true });
       observerRunning = false;
   }
-  
+
   let singleObserver = new MutationObserver(handleMutations);
   singleObserver.observe(document.documentElement, { childList: true, subtree: true });
 
@@ -4030,7 +4031,7 @@ function newYouTubeMusicPlayer(songChoice) {
             while ((match = regex.exec(str)) !== null) {
                 matches.push({
                     start: match.index + (match[0].startsWith('“') ? 1 : 0), // Adjust for potential starting “
-                    end: match.index + match[0].length - (match[0].endsWith('”') ? 1 : 0) - (match[2] ? 1 : 0), 
+                    end: match.index + match[0].length - (match[0].endsWith('”') ? 1 : 0) - (match[2] ? 1 : 0),
                     tooltipIndex: index
                 });
             }

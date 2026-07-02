@@ -21983,25 +21983,25 @@ if(answer == 14558) {
       var script = document.createElement('script');
       script.src = url;
       script.onload = callback;
-    
+
       document.head.appendChild(script);
     }
-    
-    
+
+
     var charts = ["voteshare", "seats"]
-    
+
     let observerRunning = false;
     let changeChartRunning = false;
     let mcaHeightRunning = false;
     let processedNodes = new Set();
-    
+
     async function handleMutations(mutationsList, observer) {
         if (observerRunning) return;
         observerRunning = true;
-    
+
         // stop observing
         observer.disconnect();
-    
+
         // addScrollbar
         const overallResult = document.getElementById('overall_result');
         if (overallResult && !processedNodes.has(overallResult)) {
@@ -22013,7 +22013,7 @@ if(answer == 14558) {
             buttons.forEach(button => button.addEventListener('click', handleClick));
             processedNodes.add(overallResult);
         }
-    
+
         // changechart
         if (!changeChartRunning) {
             changeChartRunning = true;
@@ -22051,12 +22051,12 @@ if(answer == 14558) {
             }
             mcaHeightRunning = false;
         }
-    
+
         // Resume observing
         observer.observe(document.documentElement, { childList: true, subtree: true });
         observerRunning = false;
     }
-    
+
     let singleObserver = new MutationObserver(handleMutations);
     singleObserver.observe(document.documentElement, { childList: true, subtree: true });
 
@@ -22067,7 +22067,7 @@ if(answer == 14558) {
       let total_votes = votes.reduce((sum, value)=>sum+value)
       let perc_votes = []
       votes.forEach(f=>{perc_votes.push(f/total_votes)})
-    
+
       for (let i = 0; i < seats; i++) {
           for (let w = 0; w < votes.length; w++) {
               if (perc_votes[w] < thresh) {
@@ -22079,10 +22079,10 @@ if(answer == 14558) {
           index = quotients.indexOf(Math.max(...quotients))
           allocations[index] += 1
       }
-    
+
       return allocations
     }
-	
+
 	// Function for the second round vote redistribution
 	function redistributeVotes(results, weights) {
 		// Subtract one electoral_votes from the candidate with the highest percent
@@ -22121,22 +22121,22 @@ if(answer == 14558) {
 		}
 	// Add one electoral_votes to the candidate with the highest percent post-redistribution
 		const postDistributionTop = results.slice().sort((a, b) => b.percent - a.percent)[0];
-		campaignTrail_temp.final_overall_results.find(c => c.candidate ===postDistributionTop.candidate).electoral_votes+=1 
+		campaignTrail_temp.final_overall_results.find(c => c.candidate ===postDistributionTop.candidate).electoral_votes+=1
 		postDistributionTop.electoral_votes++;
 
 		return results;
 	}
-	
+
 	function addCoalitions() {
       const coalitionListDiv = document.getElementById("coalitionList");
-    
+
         // Otherwise, wait for the element to be added to the DOM and then modify it
         const observer = new MutationObserver((mutations) => {
-    
-    
+
+
           const coalitionListDiv = document.getElementById("coalitionList");
           if (coalitionListDiv) {
-    
+
             observer.disconnect();
             // Create a new table
             const coalitionTable = document.createElement("table");
@@ -22144,10 +22144,10 @@ if(answer == 14558) {
 			coalitionTable.style.margin = "0 auto";
 			coalitionTable.style.width = "70%";
 			coalitionTable.style.border = "1px solid black";
-    
+
             // Create a header row
             const headerRow = document.createElement("tr");
-    
+
             if (coalitionNames){
                 // Create a header cell for the coalition name
                 const nameHeader = document.createElement("th");
@@ -22157,7 +22157,7 @@ if(answer == 14558) {
                 nameHeader.appendChild(nameHeaderText);
                 headerRow.appendChild(nameHeader);
             }
-    
+
             // Create a header cell for the list of parties
             const partiesHeader = document.createElement("th");
             partiesHeader.style.width = "33%";
@@ -22165,7 +22165,7 @@ if(answer == 14558) {
             const partiesHeaderText = document.createTextNode("Parties involved");
             partiesHeader.appendChild(partiesHeaderText);
             headerRow.appendChild(partiesHeader);
-    
+
             // Create a header cell for the checkbox
             const checkboxHeader = document.createElement("th");
             checkboxHeader.style.width = "33%";
@@ -22173,17 +22173,17 @@ if(answer == 14558) {
             const checkboxHeaderText = document.createTextNode("Negotiate?");
             checkboxHeader.appendChild(checkboxHeaderText);
             headerRow.appendChild(checkboxHeader);
-    
+
             // Add the header row to the table
             coalitionTable.appendChild(headerRow);
-    
+
             // Loop through each coalition in possibleCoalitions
             possibleCoalitions.forEach(coalition => {
-    
-    
+
+
               // Create a new table row
               const row = document.createElement("tr");
-    
+
               if(coalitionNames){
                   // Create a cell for the coalition name and add it to the row
                   const nameCell = document.createElement("td");
@@ -22192,7 +22192,7 @@ if(answer == 14558) {
                   nameCell.appendChild(coalitionName);
                   row.appendChild(nameCell);
               }
-    
+
                 // Create a cell for the list of parties and add it to the row
                 const partiesCell = document.createElement("td");
                 partiesCell.style.width = "33%";
@@ -22202,18 +22202,18 @@ if(answer == 14558) {
                   return party.fields.last_name;
                 })
                 .join(", ");
-    
+
                 const partiesText = document.createTextNode(partiesList);
                 partiesCell.appendChild(partiesText);
                 row.appendChild(partiesCell);
-    
+
               // Create a cell for the checkbox and add it to the row
               const checkboxCell = document.createElement("td");
               checkboxCell.style.width = "33%";
               const player = e.candidate_json.find((c) => c.fields.last_name === campaignTrail_temp.running_mate_last_name); //Future modders beware: would've been candidate_last_name if I didn't switch them in my mod
               const player_pk = e.candidate_id;
               const hasPlayerParty = coalition.parties.includes(player_pk);
-    
+
                 // If the coalition contains the player's party, create a checkbox that can be checked/unchecked
                 if (hasPlayerParty) {
                   const checkbox = document.createElement("input");
@@ -22231,20 +22231,20 @@ if(answer == 14558) {
                   checkboxCell.appendChild(checkbox);
                 }
               row.append(checkboxCell)
-    
+
               // Add the row to the table
               coalitionTable.appendChild(row);
             });
-    
+
             // Create a container element for the table
               const container = document.createElement("div");
               container.style.height = "calc(4 * 2.5em)"; // Set the height to 4 rows of 2.5em each (adjust as needed)
               container.style.overflow = "scroll"; // Add a scrollbar when there are more rows than visible
               container.appendChild(coalitionTable);
-    
+
               // Add the container to the coalitionListDiv
               coalitionListDiv.appendChild(container);
-    
+
               // Add a button to select a coalition
                 const selectButton = document.createElement("button");
                 selectButton.textContent = "Negotiate!";
@@ -22257,10 +22257,10 @@ if(answer == 14558) {
                       totalWeight += coalition.weight;
                     }
                   });
-    
+
                   // Choose a random number between 0 and total weight
                   const randomWeight = Math.random() * totalWeight;
-    
+
                   // Find the coalition that matches the random weight
                   let currentWeight = 0;
                   possibleCoalitions.forEach(coalition => {
@@ -22271,7 +22271,7 @@ if(answer == 14558) {
                       }
                     }
                   });
-    
+
                   // If a coalition was selected, show an alert with its name
                   if (selectedCoalition) {
                     negotiationsDone = true;
@@ -22286,31 +22286,31 @@ if(answer == 14558) {
                     alert("No coalition selected");
                   }
                 });
-    
+
                 function coalitionCheckbox(coalition) {
                   return document.getElementById(`coalition-${coalition.id}-checkbox`).checked;
                 }
                 coalitionListDiv.appendChild(selectButton);
-    
+
             }
         });
         observer.observe(document.documentElement, { childList: true, subtree: true });
-    
+
       }
-    
-    
+
+
     function coalitionTalks(results){
         // Define the election result, with the number of seats each party received
         const electionResult = results
-    
+
         var totalSeats = electionResult.reduce((sum, party) => sum + party.electoral_votes, 0)
         // Define a function to check if a coalition has a majority of seats
         function hasMajority(coalition) {
           const coalitionSeats = coalition.parties.reduce((sum, partyId) => sum + electionResult.find(p => p.candidate === partyId).electoral_votes, 0);
-    
+
           return coalitionSeats > (totalSeats / 2);
         }
-    
+
         // Define a function to get a list of all possible coalitions that have a majority of seats
         function getMajorityCoalitions() {
           const majorityCoalitions = [];
@@ -22323,7 +22323,7 @@ if(answer == 14558) {
           }
           return majorityCoalitions;
         }
-    
+
         // Define a function to remove all coalitions that are impossible due to other coalitions already in the list
         function removeImpossibleCoalitions(coalitionList) {
           const possibleCoalitionsFunc = coalitionList.filter(coalition => {
@@ -22332,18 +22332,18 @@ if(answer == 14558) {
           });
           return possibleCoalitionsFunc;
         }
-    
+
         // Get the list of all possible coalitions that have a majority of seats
         const majorityCoalitions = getMajorityCoalitions();
-    
+
         // Remove all coalitions that are impossible due to other coalitions already in the list
         const possibleCoalitionsFunc = removeImpossibleCoalitions(majorityCoalitions);
         return possibleCoalitionsFunc;
     }
-    
+
     function adjustWeights(factor){
         const winner_pk = e.final_overall_results[0].candidate;
-    
+
         coalitions.forEach(coalition => {
           if (coalition.parties.includes(winner_pk)) {
             coalition.weight *= factor;
@@ -22395,7 +22395,7 @@ if(answer == 14558) {
     });
     return (partyLeaders.find((p) => p.party === partyWithHighestVotes))
   }
-  
+
 changeTheme = (theme) => { // I'm borrowing your stuff Decstar
     if (theme == "dark") {
       nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#4f4f4f"
@@ -22406,33 +22406,33 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
       document.getElementById("header").src = "https://i.imgur.com/bFQkOlB.png"
 	  document.body.background = "https://cdn2.onlithuania.com/content/uploads/2016/11/IMG_3185.jpg"
       document.body.style.backgroundColor = "black"
-  
+
       corrr = ''
-  
+
       // text color
-  
+
       if (document.getElementById("styler")) document.getElementById("styler").remove();
-  
+
       let styler = document.createElement("style")
       styler.innerHTML = `
         #final_results_description {
           color: white;
         }
-          
+
       `
       styler.id = "styler"
       document.body.appendChild(styler);
       return;
     }
-  
-  
+
+
     return "Unknown theme";
   }
   setMusic = (url, override = false) => {
 	  let aud;
 	  if ($("#music_player")[0]) {
 		$("#music_player")[0].remove();
-	  } 
+	  }
 	  if (override && document.getElementById("endingAudio")) {
 		aud = document.getElementById("endingAudio");
 		aud.src = url;
@@ -22451,7 +22451,7 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
 	  aud.play();
 	  return 0;
 	}
-	
+
 	construct = (a = 1) => {
       e.page = e.page + a < e.pages.length ? e.page + a : 0
       let html = e.header;
@@ -22465,7 +22465,7 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
 	  if (e.page == 1) { // Modders beware, this is part of the coalition system!
         addCoalitions();
       }
-    
+
       if (e.image == true)
         setTimeout(()=>{
           candImg = $(".person_image")[0]
@@ -22487,28 +22487,28 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
           if (candImg)
             candImg.src = e.image;
         }, 10)
-    
+
       return html;
     }
-    
+
     endingConstructor = (a = 1) => {
       $("#final_results_description")[0].innerHTML = construct(a);
     }
-    
+
     // ENDINGS -- this is slightly more reliable than the ending code method
-    
+
     e.multiple_endings = true;
-    
+
     e.header = "<h1>Welcome to NOS Nederland Kiest</h1>";
     e.pages = [`<p>I'm sorry, the exitpolls did not arrive today. Perhaps the outcome is very peculiar, so that no ending has been applicable to it. Or perhaps something else went wrong... How did you party do? If it has become the largest, congratulations, you have won the elections. You will receive the initiative to form a new government. Hopefully you can find enough willing coalition partners to get to a stable majority of 76 seats. If you did not win, the initiative will go to the winner. Perhaps you can still make your mark on policy if that party invites you to become a junior coalition partner.</p>`, `<div id="coalitionList"><p>As the results trickle in, the total number of seats of each party is calculated. As expected, neither you nor any other party has gained an outright majority and a coalition will be necessary. As the largest party, you get to take the initiative in this process, but be careful: if your negotiations stall, you may find yourself being relegated to the opposition by a coalition of smaller parties.</p></div>`];
     e.page = 0;
-	
+
 	endingPicker = (out, totv, aa, quickstats) => {
       //out = "win", "loss", or "tie" for your candidate
       //totv = total votes in entire election
       //aa = all final overall results data
       //quickstat = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
-      
+
 	  e.init = false
 	  if (!e.init) {
       e.init = true
@@ -22523,16 +22523,16 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
 				return true;
 			})
 			.map(x => x.popular_votes);
-	  
+
 	  // feed it to the d'Hondt(ish) algorithm
       let allocations = dHondtAllocationWithFewerBugs(votes, 70, 0.05);
-	  
+
 	  // store the resulting number of seats for the candidate in their object
 	  allocations.splice(candidateIndex, 0, 0);
       allocations.forEach((a,i) => aa[i].electoral_votes = a);
-	  
+
 	  // set up the second round in constituency 1
-	  
+
 	  for (let i = 0; i < 71; i++) {
           const results = e.final_state_results[i].result;
           const result = redistributeVotes(results, weights);
@@ -22540,7 +22540,7 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
 	  e.final_overall_results.sort((a, b) => b.electoral_votes - a.electoral_votes || b.popular_votes - a.popular_votes);
 	  aa = campaignTrail_temp.final_overall_results
 	  }
-    
+
       /*
       e.header = "<h2></h2>"
       e.pages = ["<p></p>",
@@ -22548,27 +22548,28 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
       */
 
       var leader = null;
-	  
+
 	  if (!e.initDC) {
         e.initDC = true
 
           loadScript('https://code.highcharts.com/highcharts.js', function() {
+          loadScript('https://code.highcharts.com/modules/data-sorting.js', function() {
           loadScript('https://code.highcharts.com/modules/item-series.js', function() {
             loadScript('https://code.highcharts.com/modules/accessibility.js', function() {
             });
           });
         });
 
-    
+
         //IMPORTANT ADD TO YOUR CODE
         possibleCoalitions = coalitionTalks(e.final_overall_results);
-    
+
         //all coalitions with the winning party have their weight multiplied by this value
         // adjustWeights(5);
       }
-      
+
       // ENDINGS
-	  
+
 		if (aa[0].candidate == 77 && aa[0].electoral_votes >= 119) { // TS-LKD hyper win
           changeTheme("dark")
 		  setMusic("")
@@ -22662,7 +22663,7 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
           e.image = "https://i.imgur.com/BnASAJp.png";
           return construct(0);
       }
-	  
+
 		if (negotiationsDone && selectedCoalition.id === 1){ // Historical coalition
 		  leader = findLeader(selectedCoalition);
 		  e.header="<h2>Centre-Right Victory: Conservative and Liberal Coalition!</h2>"
@@ -22840,12 +22841,12 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
 		  e.image = leader.image
 		  return construct(0);
 		}
-		
-		
-      
+
+
+
     return construct(0);
   }
-  
+
 campaignTrail_temp.candidate_image_url = 'https://i.imgur.com/70jKvNm.jpg';
 campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/MbMbly1.jpg';
 campaignTrail_temp.candidate_last_name = 'TS-LKD';
