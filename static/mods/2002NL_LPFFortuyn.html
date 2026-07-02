@@ -949,11 +949,12 @@ function findLeader(coalition){
     if (!e.initDC) {
       e.initDC = true
 
-        loadScript('https://code.highcharts.com/highcharts.js', function() {
+        loadScript('https://code.highcharts.com/highcharts.js', function() {        
         loadScript('https://code.highcharts.com/modules/data-sorting.js', function() {
         loadScript('https://code.highcharts.com/modules/item-series.js', function() {
           loadScript('https://code.highcharts.com/modules/accessibility.js', function() {
           });
+        });
         });
       });
 
