@@ -28529,7 +28529,7 @@ function ctsAchievement(achievementName, difficultyChecker = true) {
     const temp = campaignTrail_temp;
 
     if (!temp?.CTS) return;
-    if (difficultyChecker && temp.difficulty_level_multiplier >= 0.97) return;
+    if (difficultyChecker && temp.difficulty_level_multiplier > 0.97) return;
     if (temp?.cheatsActive || campaignTrail_temp?.cheatsActive) return;
 
     // track unlocked achievements to prevent duplicate popups
@@ -28781,6 +28781,8 @@ endingPicker = (out, totv, aa, quickstats) => {
   if (ev === 269) {
     ctsAchievement("Stuck in Time");
   }
+  
+  if (ev === 538) {ctsAchievement("BIDENCOUNTRY");
 
   const mccainWinPic = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/McCain%20Win!.png";
   const bidenWinPic = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/Joe%20Wins!.png";
@@ -28884,7 +28886,6 @@ endingPicker = (out, totv, aa, quickstats) => {
       audio: "https://file.garden/aNtAfG887DiA_7lO/2008Biden/joebiden.opus"
     };
     htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>Second To None</h3><p>50 shades of blue. A victory surpassing those of Reagan, Roosevelt, Nixon and Johnson.</p><p>Total annihilation of the opposition, all done by a man who people thought was one of the last to achieve such a feat. And yet he did it, he accomplished something that many had seen as a naive fantasy.</p><p>The Republican Party is on the brink of collapse, after experiencing the greatest humiliation in American history, they are tearing each other apart all while declaring their President as the party's Grim Reaper. But Joe didn't care.</p><p>Joseph Robinette Biden Jr. had become the Democratic Party's messiah. With the unfathomable majority in both chambers of Congress, he could do whatever he wanted without anyone getting in his way. The country was now his oyster.</p><p>How is the best case scenario, Joe?</p>";
-    ctsAchievement("BIDENCOUNTRY");
   }
   else {
     return "<div style='overflow-y:scroll;height:230px;'><h3>That's odd. The mod seems broken.</h3><p>Contact the creator of the mod. Congrats if you won, better luck next time if you lost.</p>";
