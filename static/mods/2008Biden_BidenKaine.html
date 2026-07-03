@@ -28382,14 +28382,14 @@ cyoAdventure = function(a) {
 	// other achievement stuff
     const answers = campaignTrail_temp.player_answers;
 
-    const leftAnswers = [3362, 13600, 3489, 3470];
-    const leftCount = leftAnswers.filter(pk => answers.includes(pk)).length;
+    var leftAnswers = [3362, 13600, 3489, 3470];
+    var leftCount = leftAnswers.filter(pk => answers.includes(pk)).length;
 
-    const dinoAnswers = [12954, 3491, 3492, 3372, 3469];
-    const dinoCount = dinoAnswers.filter(pk => answers.includes(pk)).length;
+    var dinoAnswers = [12954, 3491, 3492, 3372, 3469];
+    var dinoCount = dinoAnswers.filter(pk => answers.includes(pk)).length;
     
-    const bullyAnswers = [3330, 3334, 13662];
-    const bullyCount = bullyAnswers.filter(pk => answers.includes(pk)).length;
+    var bullyAnswers = [3330, 3334, 13662];
+    var bullyCount = bullyAnswers.filter(pk => answers.includes(pk)).length;
     
 	if (ohnobro >= 3 && hilltakeover === true){
 		ctsAchievement("Malarkey");
