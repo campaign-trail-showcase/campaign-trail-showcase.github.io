@@ -28105,6 +28105,14 @@ campaignTrail_temp.vpSwitcher = () => {
   });
 };
 
+var leftAnswers = [3362, 13600, 3489, 3470];
+var leftCount = leftAnswers.filter(pk => answers.includes(pk)).length;
+
+var dinoAnswers = [12954, 3491, 3492, 3372, 3469];
+var dinoCount = dinoAnswers.filter(pk => answers.includes(pk)).length;
+    
+var bullyAnswers = [3330, 3334, 13662];
+var bullyCount = bullyAnswers.filter(pk => answers.includes(pk)).length;
 
 cyoAdventure = function(a) {
     const ans = e.player_answers[e.player_answers.length - 1];
@@ -28381,15 +28389,6 @@ cyoAdventure = function(a) {
 
 	// other achievement stuff
     const answers = campaignTrail_temp.player_answers;
-
-    var leftAnswers = [3362, 13600, 3489, 3470];
-    var leftCount = leftAnswers.filter(pk => answers.includes(pk)).length;
-
-    var dinoAnswers = [12954, 3491, 3492, 3372, 3469];
-    var dinoCount = dinoAnswers.filter(pk => answers.includes(pk)).length;
-    
-    var bullyAnswers = [3330, 3334, 13662];
-    var bullyCount = bullyAnswers.filter(pk => answers.includes(pk)).length;
     
 	if (ohnobro >= 3 && hilltakeover === true){
 		ctsAchievement("Malarkey");
