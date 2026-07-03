@@ -28380,7 +28380,18 @@ cyoAdventure = function(a) {
   }
 
 	// other achievement stuff
-	if (ohnobro >= 3 && hilltakeover){
+    const answers = campaignTrail_temp.player_answers;
+
+    const leftAnswers = [3362, 13600, 3489, 3470];
+    const leftCount = leftAnswers.filter(pk => answers.includes(pk)).length;
+
+    const dinoAnswers = [12954, 3491, 3492, 3372, 3469];
+    const dinoCount = dinoAnswers.filter(pk => answers.includes(pk)).length;
+    
+    const bullyAnswers = [3330, 3334, 13662];
+    const bullyCount = bullyAnswers.filter(pk => answers.includes(pk)).length;
+    
+	if (ohnobro >= 3 && hilltakeover === true){
 		ctsAchievement("Malarkey");
 	}
 
@@ -28755,22 +28766,12 @@ endingPicker = (out, totv, aa, quickstats) => {
   const ev = quickstats[0];
 
   // even more achievement stuff
-  const answers = campaignTrail_temp.player_answers || [];
-
-  const leftAnswers = [3362, 13600, 3489, 3470];
-  const leftCount = leftAnswers.filter(pk => answers.includes(pk)).length;
   if (ev >= 270 && leftCount >= 3) {
     ctsAchievement("Dark Brandon Comes Early...");
   }
-
-  const dinoAnswers = [12954, 3491, 3492, 3372, 3469];
-  const dinoCount = dinoAnswers.filter(pk => answers.includes(pk)).length;
   if (ev >= 270 && dinoCount >= 3) {
     ctsAchievement("DINOmaxxing");
   }
-
-  const bullyAnswers = [3330, 3334, 13662];
-  const bullyCount = bullyAnswers.filter(pk => answers.includes(pk)).length;
   if (bullyCount >= 2) {
     ctsAchievement("Bipartisan Betrayal");
   }
@@ -28782,6 +28783,7 @@ endingPicker = (out, totv, aa, quickstats) => {
     ctsAchievement("Stuck in Time");
   }
   
+  if (ev === 0) ctsAchievement("Biggest Malarkey Ever");
   if (ev === 538) ctsAchievement("BIDENCOUNTRY");
 
   const mccainWinPic = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/McCain%20Win!.png";
@@ -28803,7 +28805,6 @@ endingPicker = (out, totv, aa, quickstats) => {
       audio: "https://file.garden/aNtAfG887DiA_7lO/2008Biden/babyblue.opus"
     };
     htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>Scranton Joe? More like Gary Joe</h3><p>“What the fuck is this malarkey?”</p><p>That's what you yelled out at the TV. This was the outcome literally nobody had expected. John McCain had won all 50 states and Washington, D.C.</p><p>You have no idea what you've done to warrant this kind of crushing loss. The Democratic Party is in a post-mortem, on the brink of collapse at any moment. But strangely... you don't seem that bothered by it.</p><p>Yes, you yelled at the TV. However, you brushed it off and went to get some ice cream. Either you really don't care, or you just aren't fully processing what you just witnessed.</p><p>Regardless, you have made history with this loss, and you're likely to be made fun of for decades to come. I'm sorry, Joe.</p>";
-    ctsAchievement("Biggest Malarkey Ever");
   }
   // Hillary checks
   else if (typeof hilltakeover !== "undefined" && hilltakeover === true) {
