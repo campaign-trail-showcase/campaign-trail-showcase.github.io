@@ -28105,6 +28105,7 @@ campaignTrail_temp.vpSwitcher = () => {
   });
 };
 
+const answers = campaignTrail_temp.player_answers;
 var leftAnswers = [3362, 13600, 3489, 3470];
 var leftCount = leftAnswers.filter(pk => answers.includes(pk)).length;
 
@@ -28387,9 +28388,7 @@ cyoAdventure = function(a) {
 
   }
 
-	// other achievement stuff
-    const answers = campaignTrail_temp.player_answers;
-    
+	// other achievement stuff    
 	if (ohnobro >= 3 && hilltakeover === true){
 		ctsAchievement("Malarkey");
 	}
