@@ -6984,6 +6984,26 @@ campaignTrail_temp.answer_score_global_json = [
             "global_multiplier": 0.003
         }
     },
+	{
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12345,
+        "fields": {
+            "answer": 960007,
+            "candidate": 78,
+            "affected_candidate": 78,
+            "global_multiplier": 0.003
+        }
+    },
+	{
+        "model": "campaign_trail.answer_score_global",
+        "pk": 12345,
+        "fields": {
+            "answer": 960008,
+            "candidate": 78,
+            "affected_candidate": 77,
+            "global_multiplier": 0.004
+        }
+    },
     {
         "model": "campaign_trail.answer_score_global",
         "pk": 12385,
@@ -9014,6 +9034,26 @@ campaignTrail_temp.answer_score_issue_json = [
             "answer": 960006,
             "issue": 27,
             "issue_score": -0.05,
+            "issue_importance": 0.5
+        }
+    },
+	{
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13747,
+        "fields": {
+            "answer": 960007,
+            "issue": 27,
+            "issue_score": 0.15,
+            "issue_importance": 0.5
+        }
+    },
+	{
+        "model": "campaign_trail.answer_score_issue",
+        "pk": 13747,
+        "fields": {
+            "answer": 960008,
+            "issue": 27,
+            "issue_score": 0.35,
             "issue_importance": 0.5
         }
     },
@@ -23118,6 +23158,28 @@ campaignTrail_temp.answer_score_state_json = [
             "state_multiplier": 0.01
         }
     },
+	{
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13718,
+        "fields": {
+            "answer": 960007,
+            "state": 233,
+            "candidate": 78,
+            "affected_candidate": 78,
+            "state_multiplier": 0.005
+        }
+    },
+	{
+        "model": "campaign_trail.answer_score_state",
+        "pk": 13718,
+        "fields": {
+            "answer": 960008,
+            "state": 233,
+            "candidate": 78,
+            "affected_candidate": 78,
+            "state_multiplier": 0.003
+        }
+    },
     {
         "model": "campaign_trail.answer_score_state",
         "pk": 13718,
@@ -26871,6 +26933,24 @@ campaignTrail_temp.answer_feedback_json = [
             "answer_feedback": "Bayh’s popularity only makes it easier for you to find newfound support across the midwest, and with moderate voters."
         }
     },
+	{
+        "model": "campaign_trail.answer_feedback",
+        "pk": 817,
+        "fields": {
+            "answer": 960007,
+            "candidate": 78,
+            "answer_feedback": "While she’ll help in Texas, her little name recognition and liberal views have made many to see her as a poor pick. Be careful."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 817,
+        "fields": {
+            "answer": 960008,
+            "candidate": 78,
+            "answer_feedback": "I hope you have a good strategy, because of the way you have announced her many moderates have been put off and are considering voting for McCain. At least the liberal wing is now fully in support of you."
+        }
+    },
     {
         "model": "campaign_trail.answer_feedback",
         "pk": 817,
@@ -27808,6 +27888,13 @@ const _patchVPAnnouncementQ346 = (vp) => {
       a2: `The midwest is key this election, and I hear Indiana has a chance to go to us this year. Hopefully, Evan can make that happen and even help in neighboring states like Ohio.`,
       pk1: 960005,
       pk2: 960006
+    },
+	"Jackson Lee": {
+      q: `I really didn’t expect you to go down this route, Joe. You've selected Texan Rep. Sheila Jackson Lee as your running mate, a pick that is as bold as it is historical. What do you have to say about her?`,
+      a1: `Sheila has done a great job serving the people of Texas for the past 13 years. She’s served with honor and dignity, and I’m glad to have her alongside me!`,
+      a2: `Sheila represents the liberal shift that I want my campaign to take, our party should always be the party of love and compassion. And she is the perfect fit for that!`,
+      pk1: 960007,
+      pk2: 960008
     }
   };
 
@@ -27837,7 +27924,7 @@ const _patchVPDebateQ360 = (vp) => {
   const last = String(vp.fields.last_name || "").trim();
   const full = `${first} ${last}`.trim();
 
-  const isFemale = ["Sebelius"].includes(last);
+  const isFemale = ["Sebelius", "Jackson Lee"].includes(last);
 
   const replaceForVP = (s, skipPronouns = false) => {
     if (typeof s !== "string" || !s) return s;
@@ -28034,7 +28121,7 @@ cyoAdventure = function(a) {
 	if (ans === 3398 || ans === 3411 || ans === 3334 || ans === 13982) {
 		ohnobro++;
 	}
-	if (ans === 3322) {
+	if (ans === 3322 || ans === 3323) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/MG0j5KYb/timkaine08vpportrait.png';
 		campaignTrail_temp.running_mate_last_name = 'Kaine';
 
@@ -28061,34 +28148,7 @@ cyoAdventure = function(a) {
 			document.head.appendChild(style);
 		}
     }
-	if (ans === 3323) {
-		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/MG0j5KYb/timkaine08vpportrait.png';
-		campaignTrail_temp.running_mate_last_name = 'Kaine';
-
-		if (!document.getElementById("kaine-style")) {
-			const style = document.createElement("style");
-			style.id = "kaine-style";
-			style.textContent =
-			`#campaign_sign {
-				background-image: url("https://i.postimg.cc/4nC4TWdV/IMG-9854.png");
-    			background-size: 100% 100%;
-    			background-repeat: no-repeat;
-    			border-color: #c9c9c9;
-    			border-width: .01em;
-    			margin: 0 auto;
-    			background-position: center;
-    			width: auto;
-    			height: 128px;
-    			margin: 0 auto;
-			  }
-			#campaign_sign p {
-				color: rgb(0 0 0 / 0%);
-				visibility: hidden;
-			}`
-			document.head.appendChild(style);
-		}
-    }
-	if (ans === 960001) {
+	if (ans === 960001 || ans === 960002) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/pdNJDZF0/barackhusseinobama2008vp.png';
 		campaignTrail_temp.running_mate_last_name = 'Obama';
 
@@ -28115,34 +28175,7 @@ cyoAdventure = function(a) {
 			document.head.appendChild(style);
 		}
     }
-	if (ans === 960002) {
-		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/pdNJDZF0/barackhusseinobama2008vp.png';
-		campaignTrail_temp.running_mate_last_name = 'Obama';
-
-		if (!document.getElementById("kaine-style")) {
-			const style = document.createElement("style");
-			style.id = "kaine-style";
-			style.textContent =
-			`#campaign_sign {
-				background-image: url("https://i.postimg.cc/BvgcptXF/Untitled104%2020260101015333.webp");
-    			background-size: 100% 100%;
-    			background-repeat: no-repeat;
-    			border-color: #c9c9c9;
-    			border-width: .01em;
-    			margin: 0 auto;
-    			background-position: center;
-    			width: auto;
-    			height: 128px;
-    			margin: 0 auto;
-			  }
-			#campaign_sign p {
-				color: rgb(0 0 0 / 0%);
-				visibility: hidden;
-			}`
-			document.head.appendChild(style);
-		}
-    }
-	if (ans === 960005) {
+	if (ans === 960005 || ans === 960006) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/dtMhF7f3/evanbayhbiden2098.png';
 		campaignTrail_temp.running_mate_last_name = 'Bayh';
 
@@ -28169,34 +28202,7 @@ cyoAdventure = function(a) {
 			document.head.appendChild(style);
 		}
     }
-	if (ans === 960006) {
-		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/dtMhF7f3/evanbayhbiden2098.png';
-		campaignTrail_temp.running_mate_last_name = 'Bayh';
-
-		if (!document.getElementById("kaine-style")) {
-			const style = document.createElement("style");
-			style.id = "kaine-style";
-			style.textContent =
-			`#campaign_sign {
-				background-image: url("https://i.postimg.cc/MKM5wWrr/Untitled104%2020260101015231%20(1).webp");
-    			background-size: 100% 100%;
-    			background-repeat: no-repeat;
-    			border-color: #c9c9c9;
-    			border-width: .01em;
-    			margin: 0 auto;
-    			background-position: center;
-    			width: auto;
-    			height: 128px;
-    			margin: 0 auto;
-			  }
-			#campaign_sign p {
-				color: rgb(0 0 0 / 0%);
-				visibility: hidden;
-			}`
-			document.head.appendChild(style);
-		}
-    }
-	if (ans === 960003) {
+	if (ans === 960003 || ans === 960004) {
 		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/3r1MZzHt/kathleensebiden2008.png';
 		campaignTrail_temp.running_mate_last_name = 'Sebelius';
 
@@ -28223,16 +28229,16 @@ cyoAdventure = function(a) {
 			document.head.appendChild(style);
 		}
     }
-	if (ans === 960004) {
-		campaignTrail_temp.running_mate_image_url = 'https://i.postimg.cc/3r1MZzHt/kathleensebiden2008.png';
-		campaignTrail_temp.running_mate_last_name = 'Sebelius';
+	if (ans === 960007 || ans === 960008) {
+		campaignTrail_temp.running_mate_image_url = 'https://file.garden/aNtAfG887DiA_7lO/2008Biden/lee.jpg';
+		campaignTrail_temp.running_mate_last_name = 'Jackson Lee';
 
 		if (!document.getElementById("kaine-style")) {
 			const style = document.createElement("style");
 			style.id = "kaine-style";
 			style.textContent =
 			`#campaign_sign {
-				background-image: url("https://i.postimg.cc/nLZGqqVk/Untitled104%2020260101015311.webp");
+				background-image: url("https://file.garden/aNtAfG887DiA_7lO/2008Biden/leebanner.jpg");
     			background-size: 100% 100%;
     			background-repeat: no-repeat;
     			border-color: #c9c9c9;
@@ -28251,8 +28257,7 @@ cyoAdventure = function(a) {
 		}
     }
 
-
-
+	// Hillary checks
 	if (ohnobro >= 3) {
 		const endingQuestion = tunnel(14093);
 		if (endingQuestion) {
@@ -28372,15 +28377,366 @@ cyoAdventure = function(a) {
             }
         });
 
+  }
+
+	// other achievement stuff
+	if (ohnobro >= 3 && hilltakeover){
+		ctsAchievement("Malarkey");
 	}
 
 }
 campaignTrail_temp.jet_data = [{}
 ]
 
-endingPicker = (out, totv, aa, quickstats) => {
+// for custom achievement popups
+const ACHBOX = (() => {
+    const STACK_TOP    = 12;
+    const STACK_GAP    = 10;
+    const DISPLAY_TIME = 5000;
+    const active = [];
 
-if (!document.getElementById("ending-h3-style")) {
+    function reflow() {
+        const totalWidth = active.reduce((sum, item) => sum + item.width, 0)
+                         + STACK_GAP * (active.length - 1);
+
+        let x = (window.innerWidth - totalWidth) / 2;
+        for (const item of active) {
+            item.el.style.left = x + "px";
+            x += item.width + STACK_GAP;
+        }
+    }
+
+    function remove(popup) {
+        popup.classList.remove("is-visible");
+        popup.classList.add("is-hiding");
+
+        setTimeout(() => {
+            popup.remove();
+            const idx = active.findIndex(i => i.el === popup);
+            if (idx !== -1) active.splice(idx, 1);
+            reflow();
+        }, 250);
+    }
+
+    function push(popup) {
+        document.body.appendChild(popup);
+
+        requestAnimationFrame(() => {
+            const width = popup.offsetWidth;
+            active.push({ el: popup, width });
+            reflow();
+
+            requestAnimationFrame(() => popup.classList.add("is-visible"));
+
+            setTimeout(() => remove(popup), DISPLAY_TIME);
+        });
+    }
+
+    return { push };
+})();
+
+const CTS_ACHIEVEMENT_CSS = `
+  .cts-achievement {
+      position: fixed;
+      top: 12px;
+      transform: scale(0.95);
+      opacity: 0;
+      z-index: 9999;
+
+      padding: 10px 12px;
+      text-align: center;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+
+      background: linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #f8f9fd 30%,
+          #dde4f3 70%,
+          #c5d0e6 100%
+      );
+
+      border: .18em double #4b5f8d;
+      border-radius: 5px;
+
+      box-shadow:
+          inset 0 1px 0 rgba(255,255,255,.95),
+          inset 0 -1px 0 rgba(110,130,170,.15),
+          0 5px 18px rgba(0,0,0,.28);
+
+      transition:
+          left .3s ease,
+          opacity .22s ease,
+          transform .22s ease;
+  }
+
+  .cts-achievement.is-visible {
+      opacity: 1;
+      transform: scale(1);
+  }
+
+  .cts-achievement.is-hiding {
+      opacity: 0;
+      transform: scale(.93);
+  }
+
+  .cts-achievement__image {
+      width: 120px;
+      height: 120px;
+
+      margin-bottom: 8px;
+      object-fit: cover;
+
+      border: .125em solid #243956;
+      border-radius: 2px;
+
+      box-shadow:
+          inset 0 0 0 1px rgba(255,255,255,.45),
+          0 2px 5px rgba(0,0,0,.22);
+  }
+
+  .cts-achievement__title {
+      margin-top: 2px;
+
+      color: #243956;
+      font-size: 16px;
+      font-weight: bold;
+
+      text-shadow:
+          0 1px 0 rgba(255,255,255,.95);
+  }
+
+  .cts-achievement__desc {
+      margin-top: 5px;
+
+      max-width: 220px;
+
+      color: #2e2e2e;
+      font-size: 13px;
+      line-height: 1.35;
+  }
+`;
+
+function ensureAchievementStyles() {
+    if (document.getElementById("cts-achievement-styles")) return;
+    const style = document.createElement("style");
+    style.id = "cts-achievement-styles";
+    style.textContent = CTS_ACHIEVEMENT_CSS;
+    document.head.appendChild(style);
+}
+
+
+function ctsAchievement(achievementName, difficultyChecker = true) {
+    const temp = campaignTrail_temp;
+
+    if (!temp?.CTS) return;
+    if (difficultyChecker && temp.difficulty_level_multiplier >= 0.97) return;
+    if (temp?.cheatsActive || campaignTrail_temp?.cheatsActive) return;
+
+    // track unlocked achievements to prevent duplicate popups
+    window.ctsUnlockedAchievements = window.ctsUnlockedAchievements || new Set();
+    if (window.ctsUnlockedAchievements.has(achievementName)) {
+        return; // if already shown, do nothing
+    }
+
+    // mark as unlocked for this session
+    window.ctsUnlockedAchievements.add(achievementName);
+
+    ensureAchievementStyles();
+
+    if (typeof window.unlockAchievement === "function") {
+        const origAppendChild = document.body.appendChild;
+        const origAppend = document.body.append;
+        const origAlert = window.alert;
+
+        // stub methods to suppress default popups
+        document.body.appendChild = () => {};
+        if (document.body.append) document.body.append = () => {};
+        window.alert = () => {};
+
+        try {
+            window.unlockAchievement(achievementName);
+        } catch (error) {
+            console.error("Error unlocking achievement:", error);
+        } finally {
+            document.body.appendChild = origAppendChild;
+            if (origAppend) document.body.append = origAppend;
+            window.alert = origAlert;
+        }
+    }
+
+    // extract achievement metadata
+    const data   = temp.achievements?.[achievementName] || {};
+    const title  = data.title       || achievementName;
+    const desc   = data.description || "";
+    const imgSrc = data.image || data.imageUrl || "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Code1/zXSQiZr.png";
+
+    // build the custom popup
+    const popup = document.createElement("div");
+    popup.className = "cts-achievement";
+    popup.innerHTML = `
+        <img class="cts-achievement__image" src="${imgSrc}" alt="">
+        <div class="cts-achievement__title">${title}</div>
+        ${desc ? `<div class="cts-achievement__desc">${desc}</div>` : ""}
+    `;
+
+    ACHBOX.push(popup);
+}
+
+// Ending table code
+let observerRunning = false;
+
+function getActiveVPMapping() {
+    const mapping = {
+        "Joe Biden": "Tim Kaine",
+        "John McCain": "Tim Pawlenty",
+        "Ralph Nader": "Matt Gonzalez",
+        "Bob Barr/Others": "Wayne Allyn Root/<i>Others</i>",
+        "Hillary Clinton": "Chris Dodd"
+    };
+
+    // determine the player's chosen VP
+    let playerVp = "Tim Kaine";
+    if (campaignTrail_temp.selected_running_mate && campaignTrail_temp.selected_running_mate.fields) {
+        const fields = campaignTrail_temp.selected_running_mate.fields;
+        playerVp = `${fields.first_name} ${fields.last_name}`.trim();
+    } else if (campaignTrail_temp.running_mate_last_name) {
+        const lastName = campaignTrail_temp.running_mate_last_name;
+        if (lastName === "Dodd") playerVp = "Chris Dodd";
+        else if (lastName === "Kaine") playerVp = "Tim Kaine";
+        else if (lastName === "Obama") playerVp = "Barack Obama";
+        else if (lastName === "Bayh") playerVp = "Evan Bayh";
+        else if (lastName === "Sebelius") playerVp = "Kathleen Sebelius";
+        else if (lastName === "Jackson Lee") playerVp = "Sheila Jackson Lee";
+        else playerVp = lastName;
+    }
+
+    // determine the player's active candidate name
+    const playerCandidate = (typeof hilltakeover !== "undefined" && hilltakeover) ? "Hillary Clinton" : "Joe Biden";
+
+    // assign the player's selected VP to their active candidate slot
+    mapping[playerCandidate] = playerVp;
+
+    return mapping;
+}
+
+// mapping for the historical table
+function getHistoricalVPMapping() {
+    return {
+        "Joe Biden": "Tim Kaine",
+        "John McCain": "Tim Pawlenty",
+        "Ralph Nader": "Matt Gonzalez",
+        "Bob Barr/Others": "Wayne Allyn Root/<i>Others</i>"
+    };
+}
+
+function handleCandidateTables() {
+    const resultsTableHolder = document.getElementById("overall_details_container");
+
+    if (!resultsTableHolder || resultsTableHolder.classList.contains("done")) {
+        return;
+    }
+
+    resultsTableHolder.classList.add("done");
+
+    const processTable = (table, lookupData) => {
+        if (!table) return;
+
+        const tbody = table.tBodies[0];
+        if (!tbody) return;
+
+        const rows = tbody.rows;
+        if (!rows.length) return;
+
+        // add the "Running Mate" column header
+        const headerRow = rows[0];
+        const th = document.createElement("th");
+        th.innerHTML = "Running Mate";
+
+        if (headerRow.cells.length > 1) {
+            headerRow.insertBefore(th, headerRow.cells[1]);
+        } else {
+            headerRow.appendChild(th);
+        }
+
+        // fill in row data based on candidate name mapping
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            const nameCell = row.cells[0];
+            const rawName = nameCell ? nameCell.innerText : "";
+            const name = rawName.replace(/-/g, "").trim();
+
+            const cell = row.insertCell(1);
+            if (lookupData && lookupData[name]) {
+                cell.innerHTML = lookupData[name];
+            } else {
+                cell.innerHTML = "—";
+            }
+        }
+    };
+
+    const tables = resultsTableHolder.getElementsByTagName("table");
+
+    const activeLookup = getActiveVPMapping();
+    const historicalLookup = getHistoricalVPMapping();
+
+    // process active table
+    if (tables[0]) processTable(tables[0], activeLookup);
+    if (tables[1]) processTable(tables[1], historicalLookup);
+}
+
+function handleGameWindowMutations(mutationsList, observer) {
+    if (observerRunning) return;
+    observerRunning = true;
+
+    handleCandidateTables();
+
+    observerRunning = false;
+}
+
+if (!window.vpObserverInstalled) {
+    window.vpObserverInstalled = true;
+    const gameWindowNode = document.getElementById("game_window");
+    if (gameWindowNode) {
+        const unifiedObserver = new MutationObserver(handleGameWindowMutations);
+        unifiedObserver.observe(gameWindowNode, {
+            childList: true,
+            subtree: true
+        });
+    }
+}
+
+campaignTrail_temp.multiple_endings = true
+
+// Helper to initialize and play songs
+const playEndingSong = (title, artist, coverUrl, audioUrl) => {
+    const audio = document.getElementById("audio");
+    if (audio && audio.src) {
+        try {
+            if (new URL(audio.src).href === new URL(audioUrl).href) {
+                return;
+            }
+        } catch (e) {
+            if (audio.src === audioUrl || audio.src.endsWith(audioUrl)) {
+                return;
+            }
+        }
+    }
+
+    if (typeof activePlaylist !== "undefined" && activePlaylist && typeof activePlaylist.getCurrentSong === "function") {
+        const currentSong = activePlaylist.getCurrentSong();
+        if (currentSong && currentSong.getAudioLink() === audioUrl) {
+            return;
+        }
+    }
+
+    const playlist = new Playlist();
+    const song = new Song(title, artist, coverUrl, audioUrl);
+    playlist.addSong(song);
+    changePlaylist(playlist);
+};
+
+endingPicker = (out, totv, aa, quickstats) => {
+  if (!document.getElementById("ending-h3-style")) {
     const style = document.createElement("style");
     style.id = "ending-h3-style";
     style.textContent = `
@@ -28390,228 +28746,172 @@ if (!document.getElementById("ending-h3-style")) {
         }
     `;
     document.head.appendChild(style);
-}
-
-var used=false
-
-// Astro's Ending Template
-
-// Template 1 - Simple 1v1 races
-
-//out = "win", "loss", or "tie" for your candidate
-//totv = total votes in entire election
-//aa = all final overall results data
-//quickstats = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
-
-//quickstats[0] is the default, and it tracks your electoral vote count.
-
- if (quickstats[0] < 188) {
-//If you want to enable replacing the image based upon your performance, copy from here....
-    if (used != true) {
-        setInterval(function () {
-            used = true;
-            imgg = document.getElementsByClassName("person_image")[0];
-            if (imgg != null) {
-                imgg.src = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/McCain%20Win!.png";
-            }
-        }, 100);
-    if (songChange != 1) {
-    songChange = 1
-const mccainWin = new Playlist();
-const mccainWinSong = new Song(
-  "My Way",
-  "Frank Sinatra",
-  "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/My%20Way%20Album%20Cover.png",
-  "https://audio.jukehost.co.uk/0SRZylCPu07GMjGyUwG8AQtgUSCYAePj",
-);
-mccainWin.addSong(mccainWinSong);
-changePlaylist(mccainWin);
   }
-    }
-    // to here!
-return "<div style='overflow-y:scroll;height:200px;'><h3>Fatality</h3><p>As you sit in the back of the headquarters, you feel uneasy. The states in the Northeast are called way later than expected, and you also win them by thinner margins too. But then… The swing states are called within minutes, and before you know it, the election is over.</p><p>You feel paralysed, instead of a landslide for the Democrats, the script has been completely flipped on it's head for the Republicans. You have a dry feeling in your mouth as you look at the electoral map… A sea of red, not a sea of blue.</p><p>When you come to your senses, everyone else is astonished. Advisors with hands in their faces, Jill crying while holding your arm, the kids looking at the screen with sadness on their faces. It feels like a nightmare, one that you wished wasn't real.</p><p>After you give the muted concession speech, you are given a phone by an advisor to speak to McCain. You can hear the utter surprise in his voice, but you're too depressed to say anything meaningful, and when you do say something you feel your childhood stutter coming back. When you're finished, you just sigh. I guess it's back to Delaware then, Joe.</p>"
-} else if (quickstats[0] >= 188 && quickstats[0]<248) {
-//If you want to enable replacing the image based upon your performance, copy from here....
-    if (used != true) {
-        setInterval(function () {
-            used = true;
-            imgg = document.getElementsByClassName("person_image")[0];
-            if (imgg != null) {
-                imgg.src = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/McCain%20Win!.png";
-            }
-        }, 100);
-    if (songChange != 1) {
-    songChange = 1
-const mccainWin = new Playlist();
-const mccainWinSong = new Song(
-  "My Way",
-  "Frank Sinatra",
-  "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/My%20Way%20Album%20Cover.png",
-  "https://audio.jukehost.co.uk/0SRZylCPu07GMjGyUwG8AQtgUSCYAePj",
-);
-mccainWin.addSong(mccainWinSong);
-changePlaylist(mccainWin);
-  }
-    }
-    // to here!
-return "<div style='overflow-y:scroll;height:200px;'><h3>The Republican Truman?</h3><p>The results seem fine at first, and you try to hold onto optimism. You win some of the Northeast, but even those feel like small consolations. For the last few weeks you've told everyone the same thing, the polls are discounting your chances. But it appears that the polls were correct. It looks like the people don't want you sitting behind the big desk…</p><p>One swing state slips away, then another. The map starts to look less like a fight, and more like a flood. Then, the worst imaginable thing happens. In an utter shock, McCain has won. You feel… dead inside. No one expected this, not even the most diehard Republicans.</p><p>You give a defeated concession speech, but not before you give a phone call to McCain. John appreciates your words, especially when you say to him:</p><p>“Stay gold, Johnny.”</p>"
-} else if (quickstats[0] >= 248 && quickstats[0]<269) {
-//If you want to enable replacing the image based upon your performance, copy from here....
-    if (used != true) {
-        setInterval(function () {
-            used = true;
-            imgg = document.getElementsByClassName("person_image")[0];
-            if (imgg != null) {
-                imgg.src = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/McCain%20Win!.png";
-            }
-        }, 100);
-    if (songChange != 1) {
-    songChange = 1
-const mccainWin = new Playlist();
-const mccainWinSong = new Song(
-  "My Way",
-  "Frank Sinatra",
-  "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/My%20Way%20Album%20Cover.png",
-  "https://audio.jukehost.co.uk/0SRZylCPu07GMjGyUwG8AQtgUSCYAePj",
-);
-mccainWin.addSong(mccainWinSong);
-changePlaylist(mccainWin);
-  }
-    }
-    // to here!
-return "<div style='overflow-y:scroll;height:200px;'><h3>Complacency and Disappointment</h3><p>You sit in the back of the headquarters, with hundreds of supporters a dozen feet from you, and most of the family by your side. The results come trickling in, and you feel optimistic, warm, and good. You win the expected states like the Northeast, and you keep telling yourself the same thing you have told everyone for months. The polls do not lie. The country wants a steady hand. It is going to be fine.</p><p>But as the hours drag on, and on, you watch as your aides grow more nervous, pacing around on the phone, or biting their fingernails as the cable news networks talk about a ''tight''' race. How can it be ''tight''? It's a bunch of malarkey.</p><p>It's early in the morning... One of your staff members shoves a cellphone in your face, it's Chris Coons. “It's over, boss, they are about to declare McCain the winner.” You feel yourself start to grind your teeth. What went wrong? Was it your numerous gaffes on the campaign trail? Was it that McCain seemed more professional? Nonetheless, you realize it's time to concede.</p><p>Eventually, you give a phone call to President-elect McCain. John is a friend, but this is still more painful than you ever could've imagined. He tells a joke, reminisces, says he'll lean on your efforts in the Senate. You manage a laugh that feels forced. You tell him congratulations. You mean it.</p>"
-} else if (quickstats[0] == 269) {
-//If you want to enable replacing the image based upon your performance, copy from here....
-    if (used != true) {
-        setInterval(function () {
-            used = true;
-            imgg = document.getElementsByClassName("person_image")[0];
-            if (imgg != null) {
-                imgg.src = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/Deadlock!.png";
-            }
-        }, 100);
-    if (songChange != 1) {
-    songChange = 1
-const deadlockEvent = new Playlist();
-const deadlockEventSong = new Song(
-  "This Love",
-  "Maroon 5",
-  "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/This%20Love%20Album%20Cover.png",
-  "https://audio.jukehost.co.uk/PugJXBEPEA8Ue7Ii1kg8Kj8uS1ImhVuy",
-);
-deadlockEvent.addSong(deadlockEventSong);
-changePlaylist(deadlockEvent);
-  }
-    }
-    // to here!
-return "<div style='overflow-y:scroll;height:200px;'><h3>Stillness</h3><p>At first, everything was okay. You carried the blue states, McCain carried the red states, but both of you started to pick up the same amount of swing states, and the race tightened like hell. It took many hours, even past 5 AM in the morning.</p><p>Then, the worst outcome possible happens… A deadlock. You are dumbfounded. So is McCain. For the first time in over 170 years, we will have a contingent election. The House of Representatives will elect the president, and the Senate will elect the vice president. You address your supporters, assuring everything will be okay. McCain does the same to his supporters. It is only two months away, after all.</p><p>What happens next? Well, you'll still most likely become President considering that the Democrats have picked up several seats in Congress, but as for your running mate? Nobody is sure, though you hope Pawlenty won't somehow be your VP. That would be really awkward. Get ready Joe, it's gonna be a long 2 months…</p>"
-} else if (quickstats[0] >= 270 && hilltakeover === true) {
-//If you want to enable replacing the image based upon your performance, copy from here....
-    if (used != true) {
-        setInterval(function () {
-            used = true;
-            imgg = document.getElementsByClassName("person_image")[0];
-            if (imgg != null) {
-                imgg.src = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/Hillary%20Win!.png";
-            }
-        }, 100);
-    if (songChange != 1) {
-    songChange = 1
-const hillaryWin = new Playlist();
-const hillaryWinSong = new Song(
-  "I Know What Boys Like",
-  "The Waitresses",
-  "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/I%20Know%20What%20Boys%20Like%20Album%20Cover.png",
-  "https://audio.jukehost.co.uk/vnCMHUXOC1DUYdZk30OWm2LfsTvFk0AX",
-);
-hillaryWin.addSong(hillaryWinSong);
-changePlaylist(hillaryWin);
-  }
-    }
-    // to here!
-return "<div style='overflow-y:scroll;height:200px;'><h3>I’m With Her</h3><p>You and Bill sit down and turn on MSNBC. The numbers start coming in, and you flip Ohio, New Mexico, Iowa, Virginia, Colorado, and many others that were barely even close. It’s official. You have made history, Hillary. You are the first woman elected President of the United States, defeating John McCain in a bloodbath.</p><p>You step out on stage to a noisy, wild crowd, noisier than any other appearance you have had along the campaign trail, and you hug Bill and Chelsea before you make your speech. Your supporters are ecstatic about you promising to rebuild America’s economy, tax reform, manually withdrawing from Iraq, and bringing healthcare costs down.</p><p>But the best part about this (to your supporters at least) is that you are the first female president ever elected, and they love that. Best of luck, Madame President.</p>"
-} else if (quickstats[0] >= 270 && quickstats[0]<330) {
-//If you want to enable replacing the image based upon your performance, copy from here....
-    if (used != true) {
-        setInterval(function () {
-            used = true;
-            imgg = document.getElementsByClassName("person_image")[0];
-            if (imgg != null) {
-                imgg.src = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/Joe%20Wins!.png";
-            }
-        }, 100);
-    if (songChange != 1) {
-    songChange = 1
-const bidenWin = new Playlist();
-const bidenWinSong = new Song(
-  "I Won't Back Down",
-  "Tom Petty & The Heartbreakers",
-  "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/I%20Won't%20Back%20Down%20Album%20Cover.png",
-  "https://audio.jukehost.co.uk/Q4sIcCkSyYv5V2BtLqUM7mgTwc62jmZy",
-);
-bidenWin.addSong(bidenWinSong);
-changePlaylist(bidenWin);
-  }
-    }
-    // to here!
-return "<div style='overflow-y:scroll;height:200px;'><h3>Keep the Faith</h3><p>You turn on the TV, waiting with Jill, Beau, Ashley, and Hunter. You win the expected states like the Northeast, but you start to underperform expectations by losing some swing states, which makes you feel demotivated.</p><p>But once you start flipping the closer states like Iowa, New Mexico, and Nevada, and the Democrats gain more seats in the House and Senate, it seems pretty obvious that you will be projected to be the winner of the election, defeating McCain and the Republicans, though by a smaller than expected margin. McCain concedes over the phone, and you appreciate it.</p><p>After it’s officially confirmed, you step out on stage, waving to a huge, enthusiastic crowd of your supporters. As you make your speech, you can't help but grip the podium while holding back your tears. Even though your victory wasn't the overwhelming one you wanted or that people expected, you still won, and that means the world to you. You talk about economic growth and withdrawing from Iraq like you always do, but they have always been major issues this season, no? Once you finish your speech, you immediately go to hug Jill, and she reciprocates lovingly. While you hug her, you look out at the crowd of people watching you, tears rolling down your cheeks.</p><p>You've done it, Joe, and now, the real work will begin. President Biden… That has a nice ring to it, doesn't it?</p>"
-} else if (quickstats[0] >= 330 && quickstats[0]<390) {
-//If you want to enable replacing the image based upon your performance, copy from here....
-    if (used != true) {
-        setInterval(function () {
-            used = true;
-            imgg = document.getElementsByClassName("person_image")[0];
-            if (imgg != null) {
-                imgg.src = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/Joe%20Wins!.png";
-            }
-        }, 100);
-    if (songChange != 1) {
-    songChange = 1
-const bidenWin = new Playlist();
-const bidenWinSong = new Song(
-  "Move On Up",
-  "Curtis Mayfield",
-  "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/Move%20On%20Up%20Album%20Cover.png",
-  "https://audio.jukehost.co.uk/OK99QyisX7opu7E3b5fYG15xL6GkHQx1",
-);
-bidenWin.addSong(bidenWinSong);
-changePlaylist(bidenWin);
-  }
-    }
-    // to here!
-return "<div style='overflow-y:scroll;height:200px;'><h3>Higher and Higher</h3><p>Thankfully, those polls didn’t disappoint. You are elected the 44th President of the United States in a decisive blowout, and McCain gives you a concession call, which you appreciate.</p><p>You step out on stage, waving to a crowd of your supporters. They are happy, they are screaming, they love you. You talk about the main talking points of the election season; fixing the economy, withdrawing troops from Iraq, and reforming healthcare. You finish your speech, and you hug Jill and your family. You can’t wait to think of the Republicans you can beat in 2012 like Ron Paul, Mitt Romney, and even Tim Pawlenty. This is ultimately the victory you expected—not a landslide or a narrow win, but a decisive win that satisfies you and leaves no one disappointed, nor euphoric, per se. Just happy and grateful.</p><p>The only thing that matters right now though is that happy days are here again. The skies above are clear again. Congratulations, Mr. President-Elect.</p>"
-} else if (quickstats[0] >= 390) {
-//If you want to enable replacing the image based upon your performance, copy from here....
-    if (used != true) {
-        setInterval(function () {
-            used = true;
-            imgg = document.getElementsByClassName("person_image")[0];
-            if (imgg != null) {
-                imgg.src = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/Joe%20Wins!.png";
-            }
-        }, 100);
-    if (songChange != 1) {
-    songChange = 1
-const bidenWin = new Playlist();
-const bidenWinSong = new Song(
-  "(Your Love Keeps Lifting Me) Higher and Higher",
-  "Jackie Wilson",
-  "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/(Your%20Love%20Keeps%20Lifting%20Me)%20Higher%20and%20Higher%20Album%20Cover.png",
-  "https://audio.jukehost.co.uk/E2GdHbmRAwGMeX3iNpwzemCq4LmVwEwT",
-);
-bidenWin.addSong(bidenWinSong);
-changePlaylist(bidenWin);
-  }
-    }
-    // to here!
-return "<div style='overflow-y:scroll;height:200px;'><h3>Above the Clouds</h3><p>Oh, Joe… it’s beautiful. A wave of blue, you’ve pulverised every expectation set out by pundits, pollsters, and whatnot. You’re now the face of a historic landslide not seen since the days of Reagan. You’re ecstatic; you feel a rush of adrenaline flowing through you as you try to process the victory you’ve achieved. McCain calls you to concede, you feel a strange mixture of joy and sorry while hearing him talk–you can clearly hear the sadness in his voice, but you make sure to thank him for all the work he's done up until this point. He thanks you for your words and hangs up.</p><p>As soon as that happens, you jump out of the chair and rush towards Jill, grabbing her by the hand. She barely manages to keep up with you as you yell out to the kids to get out on stage. When you do, the crowd is fired up immediately upon seeing you and Jill–you both go over to the podium while tightly squeezing her hand.</p><p>While giving your speech, you are literally yelling, promising everyone a better future, and practically injecting hope into everybody watching while feeling energised in every sense of the word. This is, by far, the most passionate speech you've ever given. By the end of it, you're lightheaded by the euphoria that you go over to Jill to hug her tightly, she responds back in the same way. The crowd behind you is thunderous, it all feels like a dream.</p><p>However, this isn't a dream, Joe. You've shown everybody that doubted you that you are truly a force to be reckoned with, and with the near super majorities in Congress that the party has gained. It won't be difficult to achieve all the promises you've made. VIVA BIDEN!</p>"
-} else {
-return "<div style='overflow-y:scroll;height:200px;'><h3>That's odd. The mod seems broken.</h3><p>Contact the creator of the mod. Congrats if you won, better luck next time if you lost.</p>"
-}
 
-}
+  let endingImg = "";
+  let endingSong = null;
+  let htmlText = "";
 
-campaignTrail_temp.multiple_endings=true
+  const ev = quickstats[0];
+
+  // even more achievement stuff
+  const answers = campaignTrail_temp.player_answers || [];
+
+  const leftAnswers = [3362, 13600, 3489, 3470];
+  const leftCount = leftAnswers.filter(pk => answers.includes(pk)).length;
+  if (ev >= 270 && leftCount >= 3) {
+    ctsAchievement("Dark Brandon Comes Early...");
+  }
+
+  const dinoAnswers = [12954, 3491, 3492, 3372, 3469];
+  const dinoCount = dinoAnswers.filter(pk => answers.includes(pk)).length;
+  if (ev >= 270 && dinoCount >= 3) {
+    ctsAchievement("DINOmaxxing");
+  }
+
+  const bullyAnswers = [3330, 3334, 13662];
+  const bullyCount = bullyAnswers.filter(pk => answers.includes(pk)).length;
+  if (bullyCount >= 2) {
+    ctsAchievement("Bipartisan Betrayal");
+  }
+
+  if (ev >= 365 && e.running_mate_last_name === "Obama") {
+    ctsAchievement("The Great Switch-Up");
+  }
+  if (ev === 269) {
+    ctsAchievement("Stuck in Time");
+  }
+
+  const mccainWinPic = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/McCain%20Win!.png";
+  const bidenWinPic = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/Joe%20Wins!.png";
+
+  const mccainWinSong = {
+    title: "My Way",
+    artist: "Frank Sinatra",
+    cover: "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/My%20Way%20Album%20Cover.png",
+    audio: "https://audio.jukehost.co.uk/0SRZylCPu07GMjGyUwG8AQtgUSCYAePj"
+  };
+
+  if (ev === 0) {
+    endingImg = "https://file.garden/aNtAfG887DiA_7lO/2008Biden/lightbrandon.jpg";
+    endingSong = {
+      title: "Babyblue",
+      artist: "Bad Finger",
+      cover: "https://yt3.googleusercontent.com/JIulefEoypFiB4GxdwYFvizsU4Jb5Sa4o8k5eQUSJxjy2JKd9kvvUTjzuDykyeySC9veDLDvgFC3QYaf=w544-h544-l90-rj",
+      audio: "https://file.garden/aNtAfG887DiA_7lO/2008Biden/babyblue.opus"
+    };
+    htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>Scranton Joe? More like Gary Joe</h3><p>“What the fuck is this malarkey?”</p><p>That's what you yelled out at the TV. This was the outcome literally nobody had expected. John McCain had won all 50 states and Washington, D.C.</p><p>You have no idea what you've done to warrant this kind of crushing loss. The Democratic Party is in a post-mortem, on the brink of collapse at any moment. But strangely... you don't seem that bothered by it.</p><p>Yes, you yelled at the TV. However, you brushed it off and went to get some ice cream. Either you really don't care, or you just aren't fully processing what you just witnessed.</p><p>Regardless, you have made history with this loss, and you're likely to be made fun of for decades to come. I'm sorry, Joe.</p>";
+    ctsAchievement("Biggest Malarkey Ever");
+  }
+  // Hillary checks
+  else if (typeof hilltakeover !== "undefined" && hilltakeover === true) {
+    if (ev >= 270) {
+      endingImg = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/Hillary%20Win!.png";
+      endingSong = {
+        title: "I Know What Boys Like",
+        artist: "The Waitresses",
+        cover: "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/I%20Know%20What%20Boys%20Like%20Album%20Cover.png",
+        audio: "https://audio.jukehost.co.uk/vnCMHUXOC1DUYdZk30OWm2LfsTvFk0AX"
+      };
+      htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>I’m With Her</h3><p>You and Bill sit down and turn on MSNBC. The numbers start coming in, and you flip Ohio, New Mexico, Iowa, Virginia, Colorado, and many others that were barely even close. It’s official. You have made history, Hillary. You are the first woman elected President of the United States, defeating John McCain in a bloodbath.</p><p>You step out on stage to a noisy, wild crowd, noisier than any other appearance you have had along the campaign trail, and you hug Bill and Chelsea before you make your speech. Your supporters are ecstatic about you promising to rebuild America’s economy, tax reform, manually withdrawing from Iraq, and bringing healthcare costs down.</p><p>But the best part about this (to your supporters at least) is that you are the first female president ever elected, and they love that. Best of luck, Madame President.</p>";
+    } else {
+      endingImg = "https://file.garden/aNtAfG887DiA_7lO/2008Biden/hillarylost.jpg";
+      endingSong = mccainWinSong;
+      htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>I’m Not With Her</h3><p>You and Bill sit down and turn on MSNBC. As the results come in, you slowly realise to your horror McCain unexpectedly is outperforming expectations. States that were vastly expected to go to you, go to him. And then it’s called, John McCain has won the 2008 presidential election.</p><p>You are petrified, head racing with questions on how you could’ve possibly have lost such a winnable election. But then an aide breaks you out of your trance to say you need to concede.</p><p>As you call McCain on your phone, you wish this didn’t have to happen. You wish you would’ve won, but as they say it is what it is…</p>";
+    }
+  }
+  else if (ev > 0 && ev < 188) {
+    endingImg = mccainWinPic;
+    endingSong = mccainWinSong;
+    htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>Fatality</h3><p>As you sit in the back of the headquarters, you feel uneasy. The states in the Northeast are called way later than expected, and you also win them by thinner margins too. But then… The swing states are called within minutes, and before you know it, the election is over.</p><p>You feel paralysed, instead of a landslide for the Democrats, the script has been completely flipped on it's head for the Republicans. You have a dry feeling in your mouth as you look at the electoral map… A sea of red, not a sea of blue.</p><p>When you come to your senses, everyone else is astonished. Advisors with hands in their faces, Jill crying while holding your arm, the kids looking at the screen with sadness on their faces. It feels like a nightmare, one that you wished wasn't real.</p><p>After you give the muted concession speech, you are given a phone by an advisor to speak to McCain. You can hear the utter surprise in his voice, but you're too depressed to say anything meaningful, and when you do say something you feel your childhood stutter coming back. When you're finished, you just sigh. I guess it's back to Delaware then, Joe.</p>";
+  }
+  else if (ev >= 188 && ev < 248) {
+    endingImg = mccainWinPic;
+    endingSong = mccainWinSong;
+    htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>The Republican Truman?</h3><p>The results seem fine at first, and you try to be optimistic. You win some of the Northeast, but even those feel like small consolations. For the last few weeks you’ve told everyone the same thing, the polls are discounting your chances. But it appears that the polls were correct. It looks like the people don’t want you sitting behind the big desk……</p><p>One swing state slips away, then another. The map starts to look less and less like a fight. Then, the worst imaginable thing happens. In an utter shock, McCain has won. Comfortably. You feel… dead inside. No one expected this, not even the most diehard Republicans.</p><p>You give a defeated concession speech, but not before you are given a phone to call McCain. John appreciates your words, especially when you say to him:</p><p>“Stay gold, Johnny.”</p>";
+  }
+  else if (ev >= 248 && ev < 269) {
+    endingImg = mccainWinPic;
+    endingSong = mccainWinSong;
+    htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>Complacency and Disappointment</h3><p>You sit in the back of the headquarters, with hundreds of supporters a dozen feet from you, and most of the family by your side. The results come trickling in, and you feel optimistic, warm, and good. You win the expected states like the Northeast, and you keep telling yourself the same thing you have told everyone for months. The polls do not lie. The country wants a steady hand. It is going to be fine.</p><p>But as the hours drag on, and on, you watch as your aides grow more nervous, pacing around on the phone, or biting their fingernails as the cable news networks talk about a ''tight''' race. How can it be ''tight''? It's a bunch of malarkey.</p><p>It's early in the morning... One of your staff members shoves a cellphone in your face, it's Chris Coons. “It's over, boss, they are about to declare McCain the winner.” You feel yourself start to grind your teeth. What went wrong? Was it your numerous gaffes on the campaign trail? Was it that McCain seemed more professional? Nonetheless, you realize it's time to concede.</p><p>Eventually, you give a phone call to President-elect McCain. John is a friend, but this is still more painful than you ever could've imagined. He tells a joke, reminisces, says he'll lean on your efforts in the Senate. You manage a laugh that feels forced. You tell him congratulations. You mean it.</p>";
+  }
+  else if (ev === 269) {
+    endingImg = "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Ending%20Pictures/Deadlock!.png";
+    endingSong = {
+      title: "This Love",
+      artist: "Maroon 5",
+      cover: "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/This%20Love%20Album%20Cover.png",
+      audio: "https://audio.jukehost.co.uk/PugJXBEPEA8Ue7Ii1kg8Kj8uS1ImhVuy"
+    };
+    htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>Stillness</h3><p>At first, everything was okay. You carried the blue states, McCain carried the red states, but both of you started to pick up the same amount of swing states, and the race tightened like hell. It took many hours, even past 5 AM in the morning.</p><p>Then, the worst outcome possible happens… A deadlock. You are dumbfounded. So is McCain. For the first time in over 170 years, we will have a contingent election. The House of Representatives will elect the president, and the Senate will elect the vice president. You address your supporters, assuring everything will be okay. McCain does the same to his supporters. It is only two months away, after all.</p><p>What happens next? Well, you'll still most likely become President considering that the Democrats have picked up several seats in Congress, but as for your running mate? Nobody is sure, though you hope Pawlenty won't somehow be your VP. That would be really awkward. Get ready Joe, it's gonna be a long 2 months…</p>";
+  }
+  else if (ev >= 270 && ev < 330) {
+    endingImg = bidenWinPic;
+    endingSong = {
+      title: "I Won't Back Down",
+      artist: "Tom Petty & The Heartbreakers",
+      cover: "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/I%20Won't%20Back%20Down%20Album%20Cover.png",
+      audio: "https://audio.jukehost.co.uk/Q4sIcCkSyYv5V2BtLqUM7mgTwc62jmZy"
+    };
+    htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>Keep the Faith</h3><p>You turn on the TV, waiting with Jill, Beau, Ashley, and Hunter. You win the expected states like the Northeast, but you start to underperform expectations by losing some swing states, which makes you feel demotivated.</p><p>But once you start flipping the closer states like Iowa, New Mexico, and Nevada, and the Democrats gain more seats in the House and Senate, it seems pretty obvious that you will be projected to be the winner of the election, defeating McCain and the Republicans, though by a smaller than expected margin. McCain concedes over the phone, and you appreciate it.</p><p>After it’s officially confirmed, you step out on stage, waving to a huge, enthusiastic crowd of your supporters. As you make your speech, you can't help but grip the podium while holding back your tears. Even though your victory wasn't the overwhelming one you wanted or that people expected, you still won, and that means the world to you. You talk about economic growth and withdrawing from Iraq like you always do, but they have always been major issues this season, no? Once you finish your speech, you immediately go to hug Jill, and she reciprocates lovingly. While you hug her, you look out at the crowd of people watching you, tears rolling down your cheeks.</p><p>You've done it, Joe, and now, the real work will begin. President Biden… That has a nice ring to it, doesn't it?</p>";
+  }
+  else if (ev >= 330 && ev < 390) {
+    endingImg = bidenWinPic;
+    endingSong = {
+      title: "Move On Up",
+      artist: "Curtis Mayfield",
+      cover: "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/Move%20On%20Up%20Album%20Cover.png",
+      audio: "https://audio.jukehost.co.uk/OK99QyisX7opu7E3b5fYG15xL6GkHQx1"
+    };
+    htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>Higher and Higher</h3><p>Thankfully, those polls didn’t disappoint. You are elected the 44th President of the United States in a decisive blowout, and McCain gives you a concession call, which you appreciate.</p><p>You step out on stage, waving to a crowd of your supporters. They are happy, they are screaming, they love you. You talk about the main talking points of the election season; fixing the economy, withdrawing troops from Iraq, and reforming healthcare. You finish your speech, and you hug Jill and your family. You can’t wait to think of the Republicans you can beat in 2012 like Ron Paul, Mitt Romney, and even Tim Pawlenty. This is ultimately the victory you expected—not a landslide or a narrow win, but a decisive win that satisfies you and leaves no one disappointed, nor euphoric, per se. Just happy and grateful.</p><p>The only thing that matters right now though is that happy days are here again. The skies above are clear again. Congratulations, Mr. President-Elect.</p>";
+  }
+  else if (ev >= 390 && ev < 538) {
+    endingImg = bidenWinPic;
+    endingSong = {
+      title: "(Your Love Keeps Lifting Me) Higher and Higher",
+      artist: "Jackie Wilson",
+      cover: "https://file.garden/aOp8cCiQ5ho9r5b1/Biden%20'08%20Assets/Song%20Covers/(Your%20Love%20Keeps%20Lifting%20Me)%20Higher%20and%20Higher%20Album%20Cover.png",
+      audio: "https://audio.jukehost.co.uk/E2GdHbmRAwGMeX3iNpwzemCq4LmVwEwT"
+    };
+    htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>Above the Clouds</h3><p>Oh, Joe… it’s beautiful. A wave of blue, you’ve pulverised every expectation set out by pundits, pollsters, and whatnot. You’re now the face of a historic landslide not seen since the days of Reagan. You’re ecstatic; you feel a rush of adrenaline flowing through you as you try to process the victory you’ve achieved. McCain calls you to concede, you feel a strange mixture of joy and sorry while hearing him talk–you can clearly hear the sadness in his voice, but you make sure to thank him for all the work he's done up until this point. He thanks you for your words and hangs up.</p><p>As soon as that happens, you jump out of the chair and rush towards Jill, grabbing her by the hand. She barely manages to keep up with you as you yell out to the kids to get out on stage. When you do, the crowd is fired up immediately upon seeing you and Jill–you both go over to the podium while tightly squeezing her hand.</p><p>While giving your speech, you are literally yelling, promising everyone a better future, and practically injecting hope into everybody watching while feeling energised in every sense of the word. This is, by far, the most passionate speech you've ever given. By the end of it, you're lightheaded by the euphoria that you go over to Jill to hug her tightly, she responds back in the same way. The crowd behind you is thunderous, it all feels like a dream.</p><p>However, this isn't a dream, Joe. You've shown everybody that doubted you that you are truly a force to be reckoned with, and with the near super majorities in Congress that the party has gained. It won't be difficult to achieve all the promises you've made. VIVA BIDEN!</p>";
+  }
+  else if (ev === 538) {
+    endingImg = "https://file.garden/aNtAfG887DiA_7lO/2008Biden/darkbrandon.jpg";
+    endingSong = {
+      title: "Biden (Extended)",
+      artist: "Bo Burnham",
+      cover: "https://yt3.googleusercontent.com/_0qpt-jUBMHXAk-OD875OVXrRviAMFcojrHFUvHQ3nqQMSB3gNn-nZF7tY39i8UU_GZBfldDhTZ7TAU=w544-h544-l90-rj",
+      audio: "https://file.garden/aNtAfG887DiA_7lO/2008Biden/joebiden.opus"
+    };
+    htmlText = "<div style='overflow-y:scroll;height:230px;'><h3>Second To None</h3><p>50 shades of blue. A victory surpassing those of Reagan, Roosevelt, Nixon and Johnson.</p><p>Total annihilation of the opposition, all done by a man who people thought was one of the last to achieve such a feat. And yet he did it, he accomplished something that many had seen as a naive fantasy.</p><p>The Republican Party is on the brink of collapse, after experiencing the greatest humiliation in American history, they are tearing each other apart all while declaring their President as the party's Grim Reaper. But Joe didn't care.</p><p>Joseph Robinette Biden Jr. had become the Democratic Party's messiah. With the unfathomable majority in both chambers of Congress, he could do whatever he wanted without anyone getting in his way. The country was now his oyster.</p><p>How is the best case scenario, Joe?</p>";
+    ctsAchievement("BIDENCOUNTRY");
+  }
+  else {
+    return "<div style='overflow-y:scroll;height:230px;'><h3>That's odd. The mod seems broken.</h3><p>Contact the creator of the mod. Congrats if you won, better luck next time if you lost.</p>";
+  }
+
+  // swap candidate image as soon as the element is rendered
+  if (endingImg) {
+    let attempts = 0;
+    const imgInterval = setInterval(() => {
+      const imgg = document.getElementsByClassName("person_image")[0];
+      if (imgg) {
+        imgg.src = endingImg;
+        clearInterval(imgInterval);
+      }
+      attempts++;
+      if (attempts > 50) {
+        clearInterval(imgInterval);
+      }
+    }, 100);
+  }
+
+  if (endingSong) {
+    playEndingSong(endingSong.title, endingSong.artist, endingSong.cover, endingSong.audio);
+  }
+
+  return htmlText;
+};
 
 if (!document.getElementById("main-style")) {
 const style = document.createElement("style");
