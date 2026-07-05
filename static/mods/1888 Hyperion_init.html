@@ -1,0 +1,404 @@
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+RecReading=true
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 5,
+        "fields": {
+            "year": 1888,
+            "summary": "<div style='overflow-y:scroll;height:200px;'><p>President Roscoe Conkling is dead, felled by a cold.</p><p>After a turbulent four years, the nation's cries for reform cannot be ignored any longer, while the former President's efforts to build a lasting civil rights infrastructure wobble on the shifting Southern clay. As the forces of rights, reform, and reaction clash, strange alliances form. In this turmoil, the nation will choose its centennial president, and its path forward.</p><ul><li>Senator William F. Vilas will champion the causes of reform in taxation and civil service, hoping to uproot what remains of Conkling's centralist reign.</li><li>Senator Henry W. Blair's hopes to reconcile the Republicans, fractured over the issues of rights and reform, rest on his Southern education bill.</li><li>The Populists, seeing an rare opportunity to tip the scales away from the powerful, hope to revolt against the two-party Plutocracy, but they'll have to carefully navigate geography and the civil rights debate to avoid flaming out.</li></ul><p>Music:</p><ul><li>For Blair, I chose the overture from Mendelssohn's <i>Elijah</i>, to represent Blair's conviction.</li><li>For Vilas, I chose Beethoven's <i>The Ruins of Athens</i>, whose elegance and steadiness fits him well.</li><li>And for Gresham, I chose the fiery overture to Wagner's <i>Rienzi</i>, about a medieval populist leading a revolt against the elites.</li></ul></div>",
+            "image_url": "https://i.imgur.com/MkKNpHy.jpeg",
+            "winning_electoral_vote_number": 212,
+            "advisor_url": "https://www.jetsimon.com/public/static/images/hanna-jones.jpg",
+            "recommended_reading": "<div style='overflow-y:scroll;height:370px;'><h3 style='margin-top: 0.5em;'>The 1888 Presidential Election</h3><h3>Blair</h3><p>The primary source for Blair's life was McKinney's <a href='https://www.amazon.com/Henry-Blairs-Campaign-Reform-America/dp/0813140870' target='_blank' rel='noopener noreferrer'><i>Henry W. Blair's Campaign to Reform America: From the Civil War to the U.S. Senate</i> (2013)</a>. It's pretty recent, thorough, and it contributed to the way I thought about the different currents of reform in American politics at the time. The best general overview of the Blair bill, in all its iterations, is Jenkins and Peck's <a href='https://bpb-us-w1.wpmucdn.com/sites.usc.edu/dist/2/77/files/2018/01/Blair_bill-15u43mp.pdf' target='_blank' rel='noopener noreferrer'>\"The Blair Education Bill: A Lost Opportunity in American Public Education\" (2016)</a>, which describes its various forms, its potential impacts, and the coalitions for and against it. The bill's relationship with civil rights for freedman is discussed in Crofts' <a href='https://www.jstor.org/stable/2205919' target='_blank' rel='noopener noreferrer'>\"The Black Response to the Blair Education Bill\" (1971)</a>, and a look at the bill from the perspective of one of the poorest states can be found in <a href='https://www.jstor.org/stable/23517597' target='_blank' rel='noopener noreferrer'>\"North Carolina and Federal Aid to Education: Public Reaction to the Blair Bill, 1881-1890\" (1963)</a>. Finally, I learned about Blair's sometimes-conspiratorial relationship with Catholicism in <a href='https://www.jstor.org/stable/25016712' target='_blank' rel='noopener noreferrer'>\"Catholics and the Blair Education Bill\" (1960)</a>.</p><h3>Vilas</h3><p>Vilas has not inspired as much modern scholarly interest as the other two candidates, and as such the source I used for his life was the solid, if dry, biography <a href='https://archive.org/details/williamfreemanvi0000hora/mode/2up' target='_blank' rel='noopener noreferrer'><i>William Freeman Vilas, Doctrinaire Democrat</i> (1954)</a>, which covers how Vilas fused his traditional Democratic concern for the common man with his high-minded beliefs about material progress. I also drew from <a href='https://archive.org/details/orationswillfvilas00vilarich/mode/2up' target='_blank' rel='noopener noreferrer'>a 1912 compilation of his speeches</a>, which frequently used Greek symbolism.</p><h3>Gresham</h3><p>I used <a href='https://www.amazon.com/Gilded-Age-Cato-Walter-Gresham/dp/0813160073' target='_blank' rel='noopener noreferrer'><i>Gilded Age Cato</i> (2014)</a> as the main source for Gresham's life, which organized his ideology into a decade-by-decade fight against the enemies he saw as corrupting America, and I supplemented this with <a href='https://www.jstor.org/stable/27786630' target='_blank' rel='noopener noreferrer'>Tyner's biographical 1933 article</a>. The <a href='https://history.hanover.edu/courses/excerpts/111popul.html' target='_blank' rel='noopener noreferrer'>1892 Omaha Platform</a> details the original principles of the Populists. If you're interested in delving deeper into the real Populists, Lawrence Goodwyn's <a href='https://a.co/d/0b1dKopy' target='_blank' rel='noopener noreferrer'><i>The Populist Moment</i></a> provides an exhaustive account of the whole movement and its attempts at building coalitions across the diverse South and West.</p><h3>Other</h3><p>One interestng article that guided my thinking was Aneja and Guo's 2024 article <a href='https://pubs.aeaweb.org/doi/pdfplus/10.1257/aer.20230019' target='_blank' rel='noopener noreferrer'>\"Strengthening State Capacity: Civil Service Reform and Public Sector Performance during the Gilded Age\"</a>, which evaluated the efficiency of the post office before and after reform, finding that civil service reform beginning in the 1880s not only reduced postal errors, but also had the consequence of weakening local patronage politics across the country.</p><p>Finally, I referenced back to the <a href='https://archive.org/details/lifelettersofros00inconk/mode/2up' target='_blank' rel='noopener noreferrer'>1889 biography of Conkling I've used in the previous entries.</a></p><h3>Thank you.</h3><p>This mod came out a little later than I originally anticipated. Tip: don't start a project and then leave it unfinished for months at a time, because picking it up again after that long means you have to relearn everything and get back into the right headspace, and if you can't then you might leave it unfinished for even longer. I'm happy to finally complete the Hyperion story, and I thank you all for your patience.</p><p>This series ended in a different place than I imagined, but I'm happy with how it ended. Special thank you to everyone who advised, playtested, or supported the series as it was going -- reading what people said about the series, and what they imagined 1888 would be like, motivated me to finish it. I hope you enjoyed this look into this period of American history that fascinated me so much.</p><p>- dcmetro</p></div>",
+            "has_visits": 0,
+            "no_electoral_majority_image": "https://upload.wikimedia.org/wikipedia/commons/1/1d/United_States_Capitol_Building_Interior_1860.png",
+            "creator": "Dan Bryan",
+            "display_year": "1888 Hyperion"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 201,
+        "fields": {
+            "first_name": "Henry W.",
+            "last_name": "Blair",
+            "election": 5,
+            "party": "Republican",
+            "state": "New Hampshire",
+            "priority": 1,
+            "description": "<p>President Conkling, despite seeing his popularity decline through an ineffective second term, was determined to secure a third. But when a little cold brought the huge man low, he saw the writing on the wall. Unable to stem the tide of reform, and desperate not to see the fruits of his efforts gobbled by the opportunist Blaine, the dying Conkling endorsed Senator Henry W. Blair of New Hampshire, a rare advocate of both civil rights and civil service reform. With the Stalwart strategy of protecting civil rights through patronage increasingly discredited, Blair has championed the cause of education in the South to put the nation on a path to racial and sectional reconciliation.</p><p>To win, Blair must bridge the contradictions of a party struggling to advance reform without abandoning civil rights. A Yankee moralist crusader, he supported Conkling's efforts on women's rights and temperance, though he'll have to articulate a foreign strategy, defend his nativist views, and earn back the nation's trust.</p>",
+            "color_hex": "#00009b",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/wzUBrro.jpeg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 1896 election.</h3><p>In spite of a real scare from Mr. Bryan, you have done your part to preserve good order in the United States.</p><p>None of that changes the fact that the country is facing a depression with millions out of work. Are you the man to lead the nation back into greatness?</p><p>Your first order of business will be tariff increases to stimulate industry, as well as a new commitment to the gold standard.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 1896 election.</h3><p>The titans of American industry were counting on you to put down this nonsense idea of free silver, and to protect them from the other whims of the populist Democrats. Your defeat will go down as one of the most ignominous in the history of American politics.</p><p>Bryan's victory stings all the more because after the inept Cleveland Administration, this election shouldn't have been close. Needless to say, your political career is over.</p>",
+            "no_electoral_majority_message": "<h3>Wow! You have won a true nail-biter.</h3><p>No candidate achieved a majority of the electoral votes, marking the first time this has happened since 1824. Fortunately for you, the majority of U.S. states have Republican controlled congressional delegations, and they will cast their votes for you accordingly.</p><p>The important thing is that you won. Go about implementing your agenda accordingly, and pay no attention to Democrats and agitators who call for 'compromise' and 'conciliation'.</p>",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 200,
+        "fields": {
+            "first_name": "William F.",
+            "last_name": "Vilas",
+            "election": 5,
+            "party": "Democratic",
+            "state": "Wisconsin",
+            "priority": 2,
+            "description": "<p>Aristocratic, well-spoken, and imbued with a deep sense of duty, Senator William Freeman Vilas combines both a Jacksonian concern for the common man with a forward-thinking liberalism of technology and material progress. A law professor and former university administrator, he developed the University of Wisconsin into a world-class institute, and has opposed the centralist thrust of the Blair Bill.</p><p>With Americans widely dissatisfied with the abruptly-ended administration over its deafness to calls for civil service and tariff reform, Vilas begins with a lead. He will, however, have to keep the agrarian and urban-labor wings of the party in line, as well. In his dense and florid style, he'll have to navigate the tricky minefields of foreign and social policy while defending his classically liberal philosophy from his two more imaginative opponents.</p>",
+            "color_hex": "#9b0000",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/UE9v9Lv.jpeg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 1896 election.</h3><p>\"The Great Commoner\" will soon be President of the United States! Nobody with your political views has ever sniffed the Presidency, let alone won it, and with that in mind your supporters are rioting frenziedly in the streets. The sweetest speech of all will be your victory speech tomorrow in Lincoln, Nebraska. Prepare to enact your reform agenda and most importantly the free coinage of silver.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 1896 election.</h3><p>With all of the maneuvering, chicanery, and propoganda that the Republicans threw at you, it's amazing that you even had a chance.</p><p>Regardless of the outcome this time, you have built a legion of devoted followers who will support anything you do. If you play your cards right, you just might get another shot against McKinley in four years...</p>",
+            "no_electoral_majority_message": "<h3>Sorry! You have lost in a squeaker.</h3><p>No candidate achieved a majority of the electoral votes, marking the first time this has happened since 1824. Unfortunately  for you, the majority of U.S. states have Republican controlled congressional delegations, and they will cast their votes for William McKinley.</p><p>Given the incredibly close nature of the election, you can certainly set your sights on a political comeback in 1900, if that is what you desire.</p>",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 202,
+        "fields": {
+            "first_name": "Walter Q.",
+            "last_name": "Gresham",
+            "election": 5,
+            "party": "Populist",
+            "state": "Indiana",
+            "priority": 3,
+            "description": "<p>Deepening frustration with stark inequality, heavy taxation, and big business' ever-present thumb on the scale has prompted the formation of a new party, the Populists. A tenuous alliance of farmers and laborers, North, West, and South, they'll have to articulate a position on the education debate while promoting a progressive economic agenda. They have little hope of winning outright, and thus hope to deadlock the election and force one party or the other to the left.</p><p>Party leaders have looked to the famously incorruptible Indiana judge Walter Q. Gresham as the best hope for the new organization, praising his rulings against rail barons. Gresham would give the fledgling party more credibility than anyone else, but getting him to agree to run may prove difficult...</p>",
+            "color_hex": "#009b00",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/rHfNd9G.jpeg",
+            "electoral_victory_message": "Congratulations!",
+            "electoral_loss_message": "Better luck next time!",
+            "no_electoral_majority_message": "Congratulations!",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 45,
+        "fields": {
+            "first_name": "Shelby M.",
+            "last_name": "Cullom",
+            "election": 5,
+            "party": "Republican",
+            "state": "Illinois",
+            "priority": 20,
+            "description": "n/a",
+            "color_hex": "#00009b",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Shelby_Moore_Cullom_-_Brady-Handy_%28cropped2%29.jpg",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "<p>Cullom's history of public service stretches back to 1856, when he was elected as a state legislator under the Whig banner, and he served two well-received terms as Illinois' governor. Cullom shepherded the Interstate Commerce Act through Congress last year, though he otherwise tends not to rock the boat, and he maintains orthodox Republican positions on issues from the currency to protection to opposition to polygamy.</p><p>Inoffensive to most, Cullom is one of the rare few to have maintained cordial relations with all factions of the party over a tumultuous decade. Choosing him would come as a relief to those who see you as a bit of a knight-errant, and would help maintain good relationships with the party's top figures. Cullom won't help you expand the map much, however.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 46,
+        "fields": {
+            "first_name": "Henry M.",
+            "last_name": "Teller",
+            "election": 5,
+            "party": "Republican",
+            "state": "Colorado",
+            "priority": 21,
+            "description": "n/a",
+            "color_hex": "#00009b",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://laus2022sandbox.voices.wooster.edu/wp-content/uploads/sites/421/2022/10/640px-Senator_Henry_M_Teller.jpg",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "<p>In light of the Populist threat, some are arguing for a more risky choice from the West -- Senator Henry Teller's name has risen to the top. One of the GOP's strongest advocates of silver coinage, the Senator is popular with the downtrodden and indebted. He's caused more headaches for the party recently by staunchly opposing the forced allotment of Indian lands, though.</p><p>Teller, with his progressive stance on the currency, would give you more credibility in the poorer sections of the country, helping you beat back the Populists out West and possibly contest part of the South. However, the establishment won't be happy to see this coveted spot go to someone like Teller, and you risk losing conservatives to the Democrats.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 47,
+        "fields": {
+            "first_name": "Leon",
+            "last_name": "Abbett",
+            "election": 5,
+            "party": "Democratic",
+            "state": "New Jersey",
+            "priority": 22,
+            "description": "n/a",
+            "color_hex": "#9b0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/xIHqYxe.jpeg",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "<p>The former governor of New Jersey has built a reputation as a new kind of Democrat; sympathetic to labor and willing to go after big business; a funder of state education as well as an avid proponent of Catholics' pedagogical prerogatives. Once a staunch opponent of the Emancipation Proclamation, he has since advocated for the rights of Negroes in New Jersey.</p><p>An urban-oriented choice, picking Abbett would signal an intent to rebuild a path to the Executive Mansion through the Northeast, reaching out to workers and Catholics. A spoilsman in the Jacksonian tradition through and through, his selection will undercut your reformist message, however.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 48,
+        "fields": {
+            "first_name": "David",
+            "last_name": "Turpie",
+            "election": 5,
+            "party": "Democratic",
+            "state": "Indiana",
+            "priority": 23,
+            "description": "n/a",
+            "color_hex": "#9b0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/s2vybS1.jpeg",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "<p>The junior senator from Indiana represents the agrarian and silverite wing of the party. He comes from a crucial state state in the Union, and he's  a capable speaker on the stump with a scholarly aura.</p><p>Turpie's inflationist stance would contrast with Vilas' loyalty to the gold standard, for better or worse, though his anti-imperialist and anti-tariff views are in line with the top of the ticket. Choosing Turpie would signal an effort to pivot from the Northeast, attempting to build a Democratic majority in the South and West.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 49,
+        "fields": {
+            "first_name": "Sylvester",
+            "last_name": "Pennoyer",
+            "election": 5,
+            "party": "Democratic",
+            "state": "Oregon",
+            "priority": 24,
+            "description": "n/a",
+            "color_hex": "#009b00",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/PVUSFXk.jpeg",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "<p>The eccentric incumbent governor of Oregon has grown distant from his native Democrats, and he has little interest in a national ascent of Bourbonism under Vilas. He has thrown barbs at the leadership of both parties, and he could be convinced to jump ship and lend some credibility to the new party.</p><p>With his Pacific identity and fanatic Sinophobia, he would give your ticket the best chance of contesting states out West, though snubbing the poor farmers of the South will likely close that region to you entirely. He has pull with the nation's fledgling labor unions, though he has a well-earned reputation as difficult to work with.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50,
+        "fields": {
+            "first_name": "Evander M.",
+            "last_name": "Law",
+            "election": 5,
+            "party": "Populist",
+            "state": "Alabama",
+            "priority": 25,
+            "description": "n/a",
+            "color_hex": "#009b00",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/18bkCn6.jpeg",
+            "electoral_victory_message": "n/a",
+            "electoral_loss_message": "n/a",
+            "no_electoral_majority_message": "n/a",
+            "description_as_running_mate": "<p>A former Confederate major general-turned Granger chief, Law has more credibility on formal education than many in the movement, having served as a professor of humanities at the Citadel and having established a military preparatory school in Tuskegee, Alabama.</p><p>The agrarian movement is strongest among the poor farmers of the South, trapped into perpetual debt by the crop lien system. Without a Southerner on the ticket, the ticket will almost certainly buckle under the weight of sectional attacks from Southern Democrats, but with Law on the ticket, you will have to defend your proposal to put a former rebel a heartbeat away from the Presidency. This strategy poses higher risks, but higher rewards, especially in the popular vote.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 22,
+        "fields": {
+            "candidate": 201,
+            "running_mate": 45
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 23,
+        "fields": {
+            "candidate": 201,
+            "running_mate": 46
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 179991,
+        "fields": {
+            "candidate": 200,
+            "running_mate": 48
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 118149,
+        "fields": {
+            "candidate": 200,
+            "running_mate": 47
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 148585,
+        "fields": {
+            "candidate": 202,
+            "running_mate": 50
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 136773,
+        "fields": {
+            "candidate": 202,
+            "running_mate": 49
+        }
+    } 
+]
+
+campaignTrail_temp.credits = "u/dcmetro7"
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 5,
+        "candidates": [
+            200,
+            201,
+            202
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 5,
+        "candidates": [
+            200,
+            201,
+            202
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 5,
+        "year": 1896,
+        "is_premium": 0,
+        "display_year": "1888 Hyperion"
+    }
+]
+
+jet_data = {
+    "headerColor": "#700016",
+    "windowColor": "#0080ff",
+    "containerColor": "#FFFFFF",
+    "innerWindowColor": "#eaddfd",
+    "bannerImageUrl": "https://jetsimon.com/public/placeholderbanner.png",
+    "backgroundImageUrl": "https://coolbackgrounds.io/images/backgrounds/white/pure-white-background-85a2a7fd.jpg",
+    "endingTextColor": "#000000",
+    "customQuote": "",
+    "gameTitle": "HYPERION"
+}
+
+//#startcode
+
+quote = "“The struggle of today, is not altogether for today -- it is for a vast future also.” -- Abraham Lincoln"
+            corrr=`\n<h2>HYPERION</h2><font id='wittyquote' size='3' color='white'><em>`+quote+`</em></font>`
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#700016";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#0080ff";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#FFFFFF";
+
+document.getElementById("header").src = "https://i.imgur.com/T8lDLR1.png";
+
+document.body.background = "https://i.imgur.com/kOBeuQn.png";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#eaddfd!important;}</style>";
+
+            nexte0 = function() {
+                document.getElementById("ending0").style.display = "none"
+                document.getElementById("ending1").style.display = "initial" 
+            }
+            
+            nexte1 = function() {
+                document.getElementById("ending1").style.display = "none"
+                document.getElementById("ending2").style.display = "initial" 
+            }
+            
+            nexte2 = function() {
+                document.getElementById("ending2").style.display = "none"
+                document.getElementById("ending3").style.display = "initial" 
+            }
+            
+            backe0 = function() {
+                document.getElementById("ending0").style.display = "initial"
+                document.getElementById("ending1").style.display = "none" 
+            }
+            
+            backe1 = function() {
+                document.getElementById("ending1").style.display = "initial"
+                document.getElementById("ending2").style.display = "none" 
+            }
+            
+            backe2 = function() {
+                document.getElementById("ending2").style.display = "initial"
+                document.getElementById("ending3").style.display = "none" 
+            }
+
+//#endcode
