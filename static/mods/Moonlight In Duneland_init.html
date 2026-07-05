@@ -1,0 +1,660 @@
+RecReading = true
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 10,
+        "fields": {
+            "year": 1976,
+            "summary": "<div style='overflow-y:scroll;height:200px;padding-right:7px'><p>Somewhere in our Union, on a milk-lit eve, two peculiar young ladies stand abreast of one another, facing a great mass of water. In a great distance behind them lies a great mass of industry, a cacophony of boiling fires and clanging metal which gave the Republic its strength. They live in the shadow of this beautiful, awful beast; they know they do, and they know they always will. But tonight, their only concern is each other and the waves. </p><p>The wind blows against them, and the bigger of the two clicks her tongue. ''It's awful blustering out t'night, Lee,'' the bespectacled, slender belle remarked. ''I know you've been wanting to see the Dunes again for a while now, but I think we may as well just-''</p><p>Her companion raised her hand for silence, still peering into the waves. ''It's perfect,'' she said, ''just perfect for us.'' The smaller girl, rosy-cheeked and with sparkling brown eyes, wheeled around on the balls of her feet to face her friend and giggled. ''C'mon, Kitty! I promised you a dance, didn't I?''</p><p>Katherine blushed as Layla took her hand and pulled her forward. Together, under the moon and the stars, they twirled and swayed across the sands of their home. There would be no-one to see them, no-one to say anything; under the moonlight, the beach and the water and the sky and the steel and the rails were all theirs.",
+            "image_url": "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/moonlightdunelandimage.png",
+            "winning_electoral_vote_number": 0,
+            "advisor_url": "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/newadvisorimagemoonlight.png",
+            "recommended_reading": `<h3 style="margin-bottom: 0.5em;">Credits</h3>Created by pabloni21<br><p>Written by pabloni21</p><p>Credit to Timberwolf for the music CSS.</p><p>Credit to Jet and StrawberryMaster for their modding tools and resources.</p><h3 style="margin-bottom: 0.5em;">Special Thanks</h3><p>Thank you to Timberwolf for the CSS.</p><p>Thank you to everyone on the discord server who provided advice or support, whether it be technical, creative, or emotional. Special shoutouts to Big Toni for getting me back on track with the writing.</p><p>An especially heavy thank you to those of you who were reading along from well before anything made it this far (you know who you are).</p><p>Most of all, thank <i>you</i> for playing and reading my mod. I hope you enjoyed it, and that I was able to convey just a fragment of how I feel about home.</p><p>Take care of yourselves and those you cannot live without; be kind and rewind; and remember that the moonlight is a messenger of love.</p><p>Forever and always, a lake effect kid. <3</p>`,
+            "site_description": "Or, <i>The Loveliest Lies Of All</i>",
+            "has_visits": 0,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
+            "creator": "one sappy little bastard",
+            "display_year": "Moonlight in Duneland"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 91,
+        "fields": {
+            "first_name": "Layla",
+            "last_name": "Feinstein",
+            "election": 10,
+            "party": "Rainbow",
+            "state": "Indiana",
+            "priority": 1,
+            "description": "<div style='overflow-y:scroll;height:200px;padding-right:7px'><p>She stood right on the edge of the water, watching as the waves' leftover foam splashed against her toes again and again. She breathed in, then out, then in, then out, back and forth alongside the rhythm of the lake. The late summer sun was caught in the netting of her wide-brim hat; meanwhile, beach sand shifted and rustled around her feet. The air was less heavy than usual today.</p><p>The girl closed her eyes. She couldn't have been any more than twenty-five, and it was a naive twenty-five at that. She stood five-foot-four on a good day, with deeply saturated black-brown hair typically loosely tied together. Vibrant mahogany brown eyes stood out against light-olive skin and faced the lakefront directly. Her eyes, particularly, sparkled with the electric energy of ten thousand hopes and dreams, shifting and shining as if they were calling out to the water ahead and the sky above.</p><p>Silently, she drifted away from the push-pull of the water and wandered back up towards the great sand dunes and the grasses behind them. The girl flitted through the grass, running her fingertips along the long and stiff blades which seemed to crop up in all the local preserves, and not merely the beach. Overhead, seagulls squawked to each other about all the passers-by as they floated in the sky. Trees, holding strong like giant anchors of life in the distance, provided percussion made of rustling leaves to the orchestra of nature which seemed to surround this young woman.</p><p>This was her favorite pastime: scurrying off to the seclusion of a park or nature preserve and simply letting herself <i>be</i> among the natural foundries of life which surrounded her. Layla Feinstein was a dreamer, an idealist with her feet buried in the sand and her head soaring above the clouds; and as far as she could tell, there was no greater dream than the beautiful, incomparable promise of her home.</p>",
+            "color_hex": "#f976d0",
+            "secondary_color_hex": "#f6a5dc",
+            "is_active": 1,
+            "image_url": "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/laylaprofile.png",
+            //"electoral_victory_message": "''",
+            //"electoral_loss_message": "''",
+            //"no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 92,
+        "fields": {
+            "first_name": "Homer",
+            "last_name": "Stockard",
+            "election": 10,
+            "party": "Democratic",
+            "state": "Indiana",
+            "priority": 2,
+            "description": "''",
+            "color_hex": "#1154ac",
+            "secondary_color_hex": "#5d7fad",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/gerald-ford-1976.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 95,
+        "fields": {
+            "first_name": "Katherine",
+            "last_name": "Novak",
+            "election": 10,
+            "party": "Rainbow",
+            "state": "Indiana",
+            "priority": 5,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/katprofile.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<div style='overflow-y:scroll;height:200px;padding-right:7px'><p>She sat on a bench overlooking the great lot, watching as cars and people scuttled to and fro the train station. Her breathing was steady, level with the rhythm of the passenger cars chugging along behind her. And when the trains would screech to a stop, she would breathe in; and when they would push off and move again, she would breathe out. She looked up to the awnings of the platform, gazing at the great collection of unreachable scars etched by God-knows-who. But nothing-marks can only take one's imagination so far, and so soon enough she rose to her feet and descended the station's stairwell.</p><p>She looked like a ghost, moving through the station slowly and silently in attire befitting the generation which raised her mother's mother. She was rather tall and somewhat slim, a twenty-seven year old standing at five-foot-ten with locks of medium-brown hair kept in a neat bun. Hazelnut eyes peered out from her tired, pale-pink face, and stared ahead to the great mass of mechanical life which laid ahead. Her eyes, even under the dim station overheads, twinkled and gleamed like the spinning gears of a clock as she kept ten thousand whirling impressions of the world on her mind and the light within danced like hammers on an anvil as her mind raced from subject to subject, idea to idea.</p><p>The girl drifted through the parking lot and across the streets, craning her neck upwards to see the great mass of fire and steel which rooted itself against the beach and sprouted upwards into a manufactured forest of machinery. She paced back and forth along the infinite perimeter of the mill-grounds, each step planting softly on pavement in sync with the movement of life in the mill; the unintelligible clanking tongues shared between metalworkers and their great beastly steeds of iron and the flushing of oil through the pipes towards enormous vats and the blooming flames followed by pillowy, acrid smoke - she saw through the heat, the hells, the odor, and looked upon the magnum opus of human ingenuity.</p><p>Here, standing at the feet of man's own living metal dragon, she was most at peace. Katherine Novak was a technician, an architect with a heart of iron and a mind that moved as fast and as hard as the industry which built her home; and as far as she could tell, there was no greater blueprint for engineered brilliance than the bustling, industrious conception of her home.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 99,
+        "fields": {
+            "first_name": "Lake County",
+            "last_name": "Democrats",
+            "election": 10,
+            "party": "take a guess bro",
+            "state": "Indiana",
+            "priority": 9,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/bob-dole-1976.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 62,
+        "fields": {
+            "candidate": 92,
+            "running_mate": 99
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 58,
+        "fields": {
+            "candidate": 91,
+            "running_mate": 95
+        }
+    }
+]
+
+campaignTrail_temp.credits = "one sappy little bastard"
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 18,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 10,
+        "candidates": [
+            91,
+            92
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 10,
+        "candidates": [
+            91,
+            92
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 10,
+        "year": 1976,
+        "is_premium": 0,
+        "display_year": "Moonlight In Duneland"
+    }
+]
+
+jet_data = {
+    "headerColor": "#702d00",
+    "windowColor": "#eeafc8",
+    "containerColor": "#914803",
+    "innerWindowColor": "#ec83b1",
+    "bannerImageUrl": "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/moondunebanner.png",
+    "backgroundImageUrl": "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/mlidbackground.png",
+    "endingTextColor": "#000000",
+    "customQuote": "If dreams can't come true, then why not pretend?",
+    "gameTitle": "THE LOVELIEST LIES OF ALL"
+}
+
+//#startcode
+
+quotes = ["If dreams can't come true, then why not pretend?", "Fast limited trains operated electrically from Chicago to South Bend", "I'm half crazy, all for the love of you...", "It's good to see you!", "Until death do us part", "Again and again, forever a lake effect kid..."]
+customquote = quotes[Math.floor((Math.random() * quotes.length))]
+corrr = `\n<h2>THE LOVELIEST LIES OF ALL</h2><font id='wittyquote' size='4' color='white'><em>`+customquote+`</em></font>`
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#702d00";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#eeafc8";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#914803";
+
+document.getElementById("header").src = "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/moondunebanner.png";
+
+document.body.background = "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/mlidbackground.png";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#ec83b1!important;}</style>";
+
+const gameStart = document.getElementById('game_start');
+const gameWindow = document.getElementById('game_window');
+
+if (gameStart) {
+    gameStart.innerHTML = "<strong>Homeward Bound</strong>";
+
+    const clearHeight = () => {
+        if (gameWindow) {
+            gameWindow.style.removeProperty('height');
+        }
+    };
+
+    gameStart.addEventListener('click', clearHeight);
+}
+
+document.getElementById("inner_window_1").children[0].innerHTML = `<h3>Departing from Millennium Station soon...</h3>`
+document.getElementById("inner_window_1").children[1].innerHTML = `<p><i>This message is from the mod creator, and will be formatted as she normally speaks.</i></p><p>hi there, thanks for playing my mod. i'm stepping in up front to let you know that this is not a typical TCT mod. i didn't make this to tell the story of a historical or even fictional election, so if you're only around for the gameplay or whatnot i dunno if i've got much to offer you.</p><p>the point of this mod is to tell a series of events which, to my knowledge, have never happened in the way i lay out here. but they are all possible, and i have composed these premises in a specific way not to tell a particular story, but to paint a picture for others to see.</p><p>i come from a deeply troubled part of a deeply troubled nation. it is not inaccurate to say that my hometowns are the pinnacle of ash and rot in the heartland; the very epitome of america's rust belt. yet i nevertheless walk with a deep sense of adoration and pride for my region, the Region. a local columnist once described it as ''the redheaded stepchild of Chicago and Indiana,'' and i agree wholeheartedly - perhaps the story of my home is an aberration in history, and if so i cannot help but feel attached to its strangeness in my own odd, unique soul. i don't think i'll ever not carry some warmth for the place i've grown up.</p><p>so i bring to you here an attempted portrait of the land i love, in an effort to share a piece of my heart. if anyone who reads this plays through this mod and comes away with some understanding of my conception of love, i will have succeeded. and perhaps, i may prompt some of you to consider your own homes and histories.</p><p>so, without further ado, i invite you to join me. take a ride just along the corner, down the South Shore.</p><h3><3</h3>`;
+document.getElementById("inner_window_1").children[1].style.marginRight = `+40px`
+document.styleSheets[1].insertRule('[id="overall_election_details"]:nth-of-type(2) > :is(h4, table) { visibility: hidden; }');
+
+//#endcode
+
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#702d00",
+     "header_text_color": "#ffffff",
+     "description_text_color": "#ffffff",
+     "description_background_color": "#914803",
+     "main_color": "#914803",
+     "secondary_color": "#702d00",
+     "ui_text_color": "#FFFFFF"
+}
+
+e.ElectionPopup = "And so, as the fine people along the shore go out and cast their votes, you and Layla brace for what the hands of fate will deliver to you."
+e.WinPopup = "You thought that winning an election would provoke more of a response, but as you refresh the local website again and it becomes evident that Layla won, you only feel relief. You catch her as she skips across the living room, and you smile at how the wild electricity of success lights up her face. Without another word, you pull her lips to yours."
+e.LosePopup = "You find Layla outside, wiping away tears. Defeat stings. But as you pull her into your arms, you whisper to her that it was better to try and to fail than to never try at all; ''because unless someone like you cares a whole awful lot, nothing's going to get better. It's not.''"
+e.SelAnsContText = "Won't you make a choice?"
+
+// This is a modified version of the music player
+// used in the mod 2024: No More Maga.
+
+class Song {
+  constructor(title, artist, album, coverLink, audioLink) {
+    this.title = title;
+    this.artist = artist;
+    this.album = album;
+    this.coverLink = coverLink;
+    this.audioLink = audioLink;
+  }
+  getTitle() { return this.title; }
+  getArtist() { return this.artist; }
+  getAlbum() { return this.album; }
+  getCoverLink() { return this.coverLink; }
+  getAudioLink() { return this.audioLink; }
+}
+
+class Playlist {
+  constructor() {
+    this.songs = [];
+    this.currentSongIndex = 0;
+  }
+  addSong(song) { this.songs.push(song); }
+  getCurrentSong() { return this.songs[this.currentSongIndex]; }
+
+  playNext() {
+    if (this.songs.length === 0) return;
+    this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+  }
+
+  playPrevious() {
+    if (this.songs.length === 0) return;
+    this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+  }
+}
+
+window.Playlist = Playlist;
+window.Song = Song;
+
+let activePlaylist = new Playlist();
+let audioInstance = null;
+let currentVolume = 0.2;
+
+function changePlaylist(newPlaylist) {
+  activePlaylist = newPlaylist;
+  activePlaylist.currentSongIndex = 0;
+
+  updateUI(activePlaylist);
+
+  // ensure audio exists before trying to access it
+  const audio = getAudioElement();
+  const song = activePlaylist.getCurrentSong();
+
+  if (song) {
+    audio.src = song.audioLink;
+    audio.play().catch(e => console.log("Autoplay blocked or waiting for interaction", e));
+  }
+}
+window.changePlaylist = changePlaylist;
+
+function updateUI(playlist) {
+  const currentSong = playlist.getCurrentSong();
+  if (!currentSong) return;
+
+  const cover = document.getElementById("album_cover");
+  const title = document.getElementById("track_name");
+  const artist = document.getElementById("artist_name");
+  const album = document.getElementById("album_name");
+
+  if (cover) cover.style.backgroundImage = `url("${currentSong.getCoverLink()}")`;
+  if (title) title.textContent = currentSong.getTitle();
+  if (artist) artist.textContent = currentSong.getArtist();
+  if (album) album.textContent = currentSong.getAlbum();
+}
+window.updateUI = updateUI;
+
+function updatePlayPauseButton(isPlaying) {
+  const btn = document.getElementById("play_pause_btn");
+  if (btn) {
+    btn.textContent = isPlaying ? "Pause" : "Play";
+  }
+}
+
+// helpers
+function getAudioElement() {
+  if (!audioInstance) {
+    audioInstance = document.getElementById("campaigntrailmusic");
+    if (!audioInstance) {
+      audioInstance = document.createElement("audio");
+      audioInstance.id = "campaigntrailmusic";
+      document.body.appendChild(audioInstance);
+    }
+  }
+  return audioInstance;
+}
+
+const CUSTOM_PLAYER_STYLE_ID = "custom-music-player-style";
+
+function ensureCustomMusicPlayerStyles() {
+  if (document.getElementById(CUSTOM_PLAYER_STYLE_ID)) return;
+
+  const style = document.createElement("style");
+  style.textContent = `
+    @font-face {
+      font-family: "Berolina";
+      src: url("https://file.garden/aaSAEfSfDxzmdSX8/Berolina.ttf");
+    }
+    @font-face {
+      font-family: "Old Standard";
+      src: url("https://file.garden/aaSAEfSfDxzmdSX8/OldStandardTT-Regular.ttf");
+    }
+    #music_player.custom-player-box {
+      display: flex !important;
+      align-items: center;
+      gap: 20px;
+      padding: 50px;
+      background-image: url("https://file.garden/aaSAEfSfDxzmdSX8/filigree-for-pab.jpg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-color: #161616;
+      border-radius: 10px;
+      max-width: 900px;
+      margin: auto;
+      font-family: "Berolina", serif;
+      box-sizing: border-box;
+    }
+
+    #custom_player_wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    #custom_player_details {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    #custom_player_info {
+      margin-bottom: 10px;
+      text-align: center;
+      width: 100%;
+    }
+
+    #track_name {
+      font-size: 28px !important;
+      line-height: 1.2 !important;
+      font-weight: bold;
+      color: #fff;
+      word-break: break-word;
+    }
+
+    #artist_name {
+      font-size: 20px !important;
+      line-height: 1.2 !important;
+      color: #fff;
+      word-break: break-word;
+    }
+
+    #album_name {
+      font-size: 16px !important;
+      line-height: 1.2 !important;
+      color: #fff;
+      word-break: break-word;
+    }
+
+    #custom_player_sliders {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .custom-player-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .custom-player-row label {
+      width: 70px;
+      color: #fff !important;
+      flex-shrink: 0;
+    }
+    
+    input[type=range] {
+      appearance: none;
+      background: #e0e0e0;
+      outline: none;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
+    }
+
+    #progress_slider {
+      width: 500px;
+      height: 8px;
+      background: #222;
+      cursor: pointer;
+    }
+   #volume_slider {
+      width: fit-content;
+      height: 4px;
+      background: #222;
+      cursor: pointer;
+    }
+
+    #progress_slider::-webkit-slider-thumb, #volume_slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 4px;
+      height: 16px;
+      background: #999;
+      cursor: pointer;
+    }
+    #progress_slider::-moz-range-thumb, #volume_slider::-moz-range-thumb {
+      width: 4px;
+      height: 16px;
+      background: #999;
+      cursor: pointer;
+    }
+
+    #custom_player_controls {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    #custom_player_controls button {
+      padding: 5px 10px;
+      border: none;
+      background: none;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: "Old Standard", serif;
+      color: #FFF;
+    }
+
+  `;
+  document.head.appendChild(style);
+}
+
+
+// setup
+function setupMusicPlayer() {
+  const musicBox = document.getElementById("music_player");
+  if (!musicBox) {
+    console.warn("music_player not found. Player will not be attached.");
+    return;
+  }
+
+  ensureCustomMusicPlayerStyles();
+
+  Array.from(musicBox.children).forEach(child => {
+    if (child.id !== "campaigntrailmusic" && child.id !== "custom_player_wrapper") {
+      child.style.display = "none";
+    }
+  });
+
+  document.getElementById("modLoadReveal")?.style.setProperty("display", "none");
+  document.getElementById("modloaddiv")?.style.setProperty("display", "none");
+
+  musicBox.classList.add("custom-player-box");
+
+  // prevent duplicate players
+  if (document.getElementById("custom_player_wrapper")) return;
+
+  const defaultSongs = [
+    ["ASHOKAN FAREWELL.", "Jay Ungar and Molly Mason Family Band", "The Civil War (Original Soundtrack Recording)", "", "https://file.garden/aV8MTnSmtyzzckGy/moonlight%20soundtrack/Ashokan%20Farewell%20-%20The%20Jay%20Ungar%20%26%20Molly%20Mason%20Family%20Band.mp3"],
+    ["GRAND THEFT AUTUMN/WHERE IS YOUR BOY.", "Fall Out Boy", "My Heart Will Always Be The B-Side To My Tongue", "", "https://file.garden/aV8MTnSmtyzzckGy/moonlight%20soundtrack/Fall%20Out%20Boy%EF%BC%9A%20Grand%20Theft%20Autumn%20%EF%BC%8F%20Where%20Is%20Your%20Boy%20(Acoustic)%20(Audio)%20-%20Fueled%20By%20Ramen.mp3"],
+    ["UPSIDE DOWN.", "Jack Johnson", "Sing-A-Longs And Lullabies For The Film Curious George", "", "https://file.garden/aV8MTnSmtyzzckGy/moonlight%20soundtrack/Jack%20Johnson%20-%20Upside%20Down.mp3"],
+    ["NATIONAL PARK.", "Junichi Masuda, Go Ichinose", "Pokémon Gold, Silver, and Crystal Versions", "", "https://file.garden/aV8MTnSmtyzzckGy/moonlight%20soundtrack/National%20Park%20-%20Pok%C3%A9mon%20Gold%EF%BC%8FSilver%EF%BC%8FCrystal.mp3"],
+    ["DAISY BELL", "Harry Dacre, Edward M. Favor", "Daisy Bell (Bicycle Built For Two)", "", "https://file.garden/aV8MTnSmtyzzckGy/moonlight%20soundtrack/'Daisy%20Bell'%20-%20Original%201894%20Phonograph%20Recording%20with%20Lyrics%20-%20Harry%20Keil.mp3"],
+    ["YO NO SÉ MAÑANA.", "Luis Enrique", "Ciclos", "", "https://file.garden/aV8MTnSmtyzzckGy/moonlight%20soundtrack/Yo%20No%20S%C3%A9%20Ma%C3%B1ana%20-%20Luis%20Enrique.mp3"],
+    ["INTO THE UNKNOWN.", "The Blasting Company & Jack Jone", "Over The Garden Wall", "", "https://file.garden/aV8MTnSmtyzzckGy/moonlight%20soundtrack/Over%20The%20Garden%20Wall%20Official%20Soundtrack%20%EF%BD%9C%20Into%20the%20Unknown%20%E2%80%93%20The%20Blasting%20Company%20%EF%BD%9C%20WaterTower%20-%20WaterTower%20Music.mp3"],
+  ];
+
+  if (activePlaylist.songs.length === 0) {
+    defaultSongs.forEach(data => activePlaylist.addSong(new Song(...data)));
+  }
+
+  // create HTML
+  const wrapper = document.createElement("div");
+  wrapper.id = "custom_player_wrapper";
+  wrapper.innerHTML = `
+      <div id="album_cover"></div>
+
+      <div id="custom_player_details">
+        <div id="custom_player_info">
+          <div id="track_name"></div>
+          <div id="artist_name"></div>
+          <div id="album_name"></div>
+        </div>
+
+        <div id="custom_player_sliders">
+          <div class="custom-player-row">
+            <input id="progress_slider" type="range" min="0" max="1" step="0.001" value="0">
+          </div>
+        </div>
+
+        <div id="custom_player_controls">
+          <button id="prev_btn" type="button">Prev</button>
+          <button id="play_pause_btn" type="button">Play</button>
+          <button id="next_btn" type="button">Next</button>
+          <button type="button">Volume: </button>
+          <input id="volume_slider" type="range" min="0" max="1" step="0.01" value="${currentVolume}">
+        </div>
+      </div>
+    `;
+
+  const audio = getAudioElement();
+  audio.loop = false;
+
+  if (audio.parentNode === musicBox) {
+    musicBox.insertBefore(wrapper, audio);
+  } else {
+    musicBox.appendChild(wrapper);
+  }
+
+  updateUI(activePlaylist);
+
+  const startSong = activePlaylist.getCurrentSong();
+  if (startSong) audio.src = startSong.audioLink;
+  audio.volume = currentVolume;
+
+  const playPauseBtn = document.getElementById("play_pause_btn");
+  const prevBtn = document.getElementById("prev_btn");
+  const nextBtn = document.getElementById("next_btn");
+  const progressBar = document.getElementById("progress_slider");
+  const volumeSlider = document.getElementById("volume_slider");
+
+  const playSongAtIndex = () => {
+    updateUI(activePlaylist);
+    audio.src = activePlaylist.getCurrentSong().audioLink;
+    audio.play().catch(e => console.log(e));
+  };
+
+  playPauseBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play().catch(e => console.log(e));
+    } else {
+      audio.pause();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    activePlaylist.playNext();
+    playSongAtIndex();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    activePlaylist.playPrevious();
+    playSongAtIndex();
+  });
+
+  audio.addEventListener("play", () => updatePlayPauseButton(true));
+  audio.addEventListener("pause", () => updatePlayPauseButton(false));
+
+  audio.addEventListener("timeupdate", () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) {
+      progressBar.value = audio.currentTime / audio.duration;
+    } else {
+      progressBar.value = 0;
+    }
+  });
+
+  audio.addEventListener("ended", () => {
+    activePlaylist.playNext();
+    playSongAtIndex();
+  });
+
+  progressBar.addEventListener("input", (e) => {
+    if (Number.isFinite(audio.duration)) {
+      audio.currentTime = Number(e.target.value) * audio.duration;
+    }
+  });
+
+  volumeSlider.addEventListener("input", (e) => {
+    currentVolume = Number(e.target.value);
+    audio.volume = currentVolume;
+  });
+
+  audio.play().catch(() => updatePlayPauseButton(false));
+}
+
+setupMusicPlayer();
+
+
+// this overrides the default shuffle function
+window.shuffleAnswers = function(arr) {
+  return arr;
+}; 
