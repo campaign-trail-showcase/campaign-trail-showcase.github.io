@@ -110,6 +110,7 @@ e.SelAnsContText = "Please select an answer before continuing!";
 e.numberFormat = "en-US";
 
 e.code2Loaded = false;
+e.oldColors = false;
 
 e.stateOpacity = 1;
 
@@ -2683,6 +2684,16 @@ function rFunc(t, i) {
 
     let fillHex;
 
+
+    if (e.oldColors === true) {
+    if (margin > 0.10) {
+      fillHex = candidate.fields.color_hex; 
+    } else if (margin > 0.05) {
+      fillHex = candidate.fields.secondary_color_hex; 
+    } else {
+      fillHex = "#C9C9C9"; 
+    }
+  }
     if (
       String(e.game_type_id) === "3"
       && i === 1
