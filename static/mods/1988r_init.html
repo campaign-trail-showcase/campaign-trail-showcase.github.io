@@ -1,0 +1,2157 @@
+e=campaignTrail_temp
+RecReading=true
+e.collect_results=true;
+e.music = {};
+e.music.shuffleEnabled = false;
+e.music.Volume=0.5;
+e.music.loopEnabled = false;
+
+function headspaceTheme() {
+  style_overwrite = document.createElement("style");
+    style_overwrite.innerHTML = 
+      `
+      #difficulty_level h3 {
+          color: #000000;
+      }
+      #game_options h3 {
+          color: #000000;
+      }
+      #running_mate_form h3 {
+          color: #000000;
+      }
+      #candidate_form h3 {
+          color: #000000;
+      }
+      #election_year_form h3 {
+          color: #000000;
+      }
+      #credits {
+          color: #000000;
+      }
+      .footer {
+          border-color: #5800D0;
+          border-style: solid;
+      }
+      hr {
+          border-color: #5800D0;
+          border-style: solid;
+      }
+      #opponent_selection_description_window {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #FFFCBD;
+          border-style: solid;
+      }
+      #inner_window_4 {
+          border-color: #F1BFFF;
+          border-style: solid;
+      }
+      #running_mate_description_window {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #FFFCBD;
+          border-style: solid;
+      }
+      #running_mate_image {
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #inner_window_3 {
+          border-color: #F1BFFF;
+          border-style: solid;
+      }
+      #candidate_description_window {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #FFFCBD;
+          border-style: solid;
+      }
+      #candidate_image {
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #inner_window_1 {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #FFFCBD;
+          border-style: solid;
+      }
+      #election_image img {
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #inner_window_2 {
+          border-color: #F1BFFF;
+          border-style: solid;
+      }
+      #election_description_window {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #FFFCBD;
+          border-style: solid;
+      }
+      #map_container {
+          background-color: #FFFCBD;
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #candidate_pic {
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #running_mate_pic {
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #overall_result {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #overall_result h3 {
+          color: #FFFFFF;
+          background-color: #5800D0;
+          border-color: #F2F2F2;
+      }
+      #state_info {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #state_info h3 {
+          color: #FFFFFF;
+          background-color: #5800D0;
+          border-color: #F2F2F2;
+      }
+      #state_result {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #state_result h3 {
+          color: #FFFFFF;
+          background-color: #5800D0;
+          border-color: #F2F2F2;
+      }
+      #overall_result_container {
+          background-color: #F1BFFF;
+      }
+      #state_result_container {
+          background-color: #F1BFFF;
+      }
+      #menu_container {
+          background-color: #F1BFFF;
+      }
+      .game_header {
+          border-color: #FFFFFF;
+      }
+      .content_single {
+          border-color: #FFFFFF;
+      }
+      .inner_window_question {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #FFFCBD;
+          border-style: solid;
+      }
+      .inner_inner_window h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #000000;
+          border-style: solid;
+      }
+      .inner_window_sign_display {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #FFFCBD;
+          border-style: solid;
+      }
+      #visit_window {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #visit_window h3 {
+          color: #FFFFFF;
+          background-color: #6C0FFF;
+          border-color: #F2F2F2;
+          border-style: solid;
+          border-width: 1px;
+      }
+      #visit_window img {
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #election_night_window {
+          color: #000000;
+          background-color: #FFFCBD;
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      #election_night_window h3 {
+          color: #FFFFFF;
+          background-color: #6C0FFF;
+          border-color: #F2F2F2;
+          border-style: solid;
+          border-width: 1px;
+      }
+      #election_night_window img {
+          border-color: #F2F2F2;
+          border-style: solid;
+      }
+      a {
+          color: #000000;
+      }
+      `;
+  document.head.appendChild(style_overwrite);
+}
+function whitespaceTheme() {
+    style_overwrite = document.createElement("style");
+    style_overwrite.innerHTML = 
+      `
+      #difficulty_level h3 {
+          color: #000000;
+      }
+      #game_options h3 {
+          color: #000000;
+      }
+      #running_mate_form h3 {
+          color: #000000;
+      }
+      #candidate_form h3 {
+          color: #000000;
+      }
+      #election_year_form h3 {
+          color: #000000;
+      }
+      #credits {
+          color: #000000;
+      }
+      .footer {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      hr {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #opponent_selection_description_window {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #inner_window_4 {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #running_mate_description_window {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #running_mate_image {
+          border-color: #000000;
+          border-style: solid;
+      }
+      #inner_window_3 {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #candidate_description_window {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #candidate_image {
+          border-color: #000000;
+          border-style: solid;
+      }
+      #inner_window_1 {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #election_image img {
+          border-color: #000000;
+          border-style: solid;
+      }
+      #inner_window_2 {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #election_description_window {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #map_container {
+          background-color: #FFFFFF;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #candidate_pic {
+          border-color: #000000;
+          border-style: solid;
+      }
+      #running_mate_pic {
+          border-color: #000000;
+          border-style: solid;
+      }
+      #overall_result {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #overall_result h3 {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #000000;
+      }
+      #state_info {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #state_info h3 {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #000000;
+      }
+      #state_result {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #state_result h3 {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #000000;
+      }
+      #overall_result_container {
+          background-color: #FFFFFF;
+      }
+      #state_result_container {
+          background-color: #FFFFFF;
+      }
+      #menu_container {
+          background-color: #FFFFFF;
+      }
+      .game_header {
+          border-color: #FFFFFF;
+      }
+      .content_single {
+          border-color: #FFFFFF;
+      }
+      .inner_window_question {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      .inner_inner_window h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #000000;
+          border-style: solid;
+      }
+      .inner_window_sign_display {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #visit_window {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #visit_window h3 {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #000000;
+          border-style: solid;
+          border-width: 1px;
+      }
+      #visit_window img {
+          border-color: #000000;
+          border-style: solid;
+      }
+      #election_night_window {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #election_night_window h3 {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #000000;
+          border-style: solid;
+          border-width: 1px;
+      }
+      #election_night_window img {
+          border-color: #000000;
+          border-style: solid;
+      }
+      a {
+          color: #000000;
+      }
+      `;
+  document.head.appendChild(style_overwrite);
+}
+function blackspaceTheme() {
+      style_overwrite = document.createElement("style");
+    style_overwrite.innerHTML = 
+      `
+      #difficulty_level h3 {
+          color: #FFFFFF;
+      }
+      #game_options h3 {
+          color: #FFFFFF;
+      }
+      #running_mate_form h3 {
+          color: #FFFFFF;
+      }
+      #candidate_form h3 {
+          color: #FFFFFF;
+      }
+      #election_year_form h3 {
+          color: #FFFFFF;
+      }
+      #credits {
+          color: #FFFFFF;
+      }
+      .footer {
+          border-color: #000000;
+          border-style: solid;
+      }
+      hr {
+          border-color: #000000;
+          border-style: solid;
+      }
+      #opponent_selection_description_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #inner_window_4 {
+          border-color: #000000;
+          border-style: solid;
+      }
+      #running_mate_description_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #running_mate_image {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #inner_window_3 {
+          border-color: #000000;
+          border-style: solid;
+      }
+      #candidate_description_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #candidate_image {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #inner_window_1 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #election_image img {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #inner_window_2 {
+          border-color: #000000;
+          border-style: solid;
+      }
+      #election_description_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #map_container {
+          background-color: #000000;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #candidate_pic {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #running_mate_pic {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #overall_result {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #overall_result h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFFFF;
+      }
+      #state_info {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #state_info h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFFFF;
+      }
+      #state_result {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #state_result h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFFFF;
+      }
+      #overall_result_container {
+          background-color: #000000;
+      }
+      #state_result_container {
+          background-color: #000000;
+      }
+      #menu_container {
+          background-color: #000000;
+      }
+      .game_header {
+          border-color: #000000;
+      }
+      .content_single {
+          border-color: #000000;
+      }
+      .inner_window_question {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #000000;
+          border-style: solid;
+      }
+      .inner_inner_window h3 {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      .inner_window_sign_display {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #000000;
+          border-style: solid;
+      }
+      #visit_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #visit_window h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFFFF;
+          border-style: solid;
+          border-width: 1px;
+      }
+      #visit_window img {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #election_night_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      #election_night_window h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFFFF;
+          border-style: solid;
+          border-width: 1px;
+      }
+      #election_night_window img {
+          border-color: #FFFFFF;
+          border-style: solid;
+      }
+      a {
+          color: #000000;
+      }
+      `;
+  document.head.appendChild(style_overwrite);
+}
+function windoseTheme() {
+    style_overwrite = document.createElement("style");
+    style_overwrite.innerHTML = 
+      `
+      #difficulty_level h3 {
+          color: #000000;
+      }
+      #game_options h3 {
+          color: #000000;
+      }
+      #running_mate_form h3 {
+          color: #000000;
+      }
+      #candidate_form h3 {
+          color: #000000;
+      }
+      #election_year_form h3 {
+          color: #000000;
+      }
+      #credits {
+          color: #000000;
+      }
+      .footer {
+          border-color: #80FFFF;
+          border-style: solid;
+      }
+      hr {
+          border-color: #E6E6E6;
+          border-style: solid;
+      }
+      #opponent_selection_description_window {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #E6E6E6;
+          border-style: solid;
+      }
+      #inner_window_4 {
+          border-color: #E6E6E6;
+          border-style: solid;
+      }
+      #running_mate_description_window {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #E6E6E6;
+          border-style: solid;
+      }
+      #running_mate_image {
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #inner_window_3 {
+          border-color: #E6E6E6;
+          border-style: solid;
+      }
+      #candidate_description_window {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #E6E6E6;
+          border-style: solid;
+      }
+      #candidate_image {
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #inner_window_1 {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #E6E6E6;
+          border-style: solid;
+      }
+      #election_image img {
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #inner_window_2 {
+          border-color: #E6E6E6;
+          border-style: solid;
+      }
+      #election_description_window {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #E6E6E6;
+          border-style: solid;
+      }
+      #map_container {
+          background-color: #CCFFFF;
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #candidate_pic {
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #running_mate_pic {
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #overall_result {
+          color: #000000;
+          background-color: #CCFFFF;
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #overall_result h3 {
+          color: #000000;
+          background-color: #FACCFF;
+          border-color: #6629CC;
+      }
+      #state_info {
+          color: #000000;
+          background-color: #CCFFFF;
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #state_info h3 {
+          color: #000000;
+          background-color: #FACCFF;
+          border-color: #6629CC;
+      }
+      #state_result {
+          color: #000000;
+          background-color: #CCFFFF;
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #state_result h3 {
+          color: #000000;
+          background-color: #FACCFF;
+          border-color: #6629CC;
+      }
+      #overall_result_container {
+          background-color: #FACCFF;
+      }
+      #state_result_container {
+          background-color: #FACCFF;
+      }
+      #menu_container {
+          background-color: #FACCFF;
+      }
+      .game_header {
+          border-color: #6629CC;
+      }
+      .content_single {
+          border-color: #80FFFF;
+      }
+      .inner_window_question {
+          color: #000000;
+          background-color: #CCFFFF;
+          border-color: #CCFFFF;
+          border-style: solid;
+      }
+      .inner_inner_window h3 {
+          color: #000000;
+          background-color: #FACCFF;
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      .inner_window_sign_display {
+          color: #000000;
+          background-color: #CCFFFF;
+          border-color: #CCFFFF;
+          border-style: solid;
+      }
+      #visit_window {
+          color: #000000;
+          background-color: #CCFFFF;
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #visit_window h3 {
+          color: #000000;
+          background-color: #FACCFF;
+          border-color: #6629CC;
+          border-style: solid;
+          border-width: 1px;
+      }
+      #visit_window img {
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #election_night_window {
+          color: #000000;
+          background-color: #CCFFFF;
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      #election_night_window h3 {
+          color: #000000;
+          background-color: #FACCFF;
+          border-color: #6629CC;
+          border-style: solid;
+          border-width: 1px;
+      }
+      #election_night_window img {
+          border-color: #6629CC;
+          border-style: solid;
+      }
+      a {
+          color: #000000;
+      }
+      `;
+  document.head.appendChild(style_overwrite);
+}
+function metaverseTheme() {
+    style_overwrite = document.createElement("style");
+    style_overwrite.innerHTML = 
+      `
+      #difficulty_level h3 {
+          color: #000000;
+      }
+      #game_options h3 {
+          color: #000000;
+      }
+      #running_mate_form h3 {
+          color: #000000;
+      }
+      #candidate_form h3 {
+          color: #000000;
+      }
+      #election_year_form h3 {
+          color: #000000;
+      }
+      #credits {
+          color: #000000;
+      }
+      .footer {
+          border-color: #FFCCF5;
+          border-style: solid;
+      }
+      hr {
+          border-color: #FFCCF5;
+          border-style: solid;
+      }
+      #opponent_selection_description_window {
+          color: #000000;
+          background-color: #FFB3B3;
+          border-color: #ED1159;
+          border-style: solid;
+      }
+      #inner_window_4 {
+          border-color: #FFA3ED;
+          border-style: solid;
+      }
+      #running_mate_description_window {
+          color: #000000;
+          background-color: #FFB3B3;
+          border-color: #ED1159;
+          border-style: solid;
+      }
+      #running_mate_image {
+          border-color: #4088C8;
+          border-style: solid;
+      }
+      #inner_window_3 {
+          border-color: #FFA3ED;
+          border-style: solid;
+      }
+      #candidate_description_window {
+          color: #000000;
+          background-color: #FFB3B3;
+          border-color: #ED1159;
+          border-style: solid;
+      }
+      #candidate_image {
+          border-color: #4088C8;
+          border-style: solid;
+      }
+      #inner_window_1 {
+          color: #000000;
+          background-color: #E1C7F9;
+          border-color: #ED1159;
+          border-style: solid;
+      }
+      #election_image img {
+          border-color: #4088C8;
+          border-style: solid;
+      }
+      #inner_window_2 {
+          border-color: #FFA3ED;
+          border-style: solid;
+      }
+      #election_description_window {
+          color: #000000;
+          background-color: #C8F4FF;
+          border-color: #ED1159;
+          border-style: solid;
+      }
+      #map_container {
+          background-color: #FFFFFF;
+          border-color: #ED1159;
+          border-style: solid;
+      }
+      #candidate_pic {
+          border-color: #4088C8;
+          border-style: solid;
+      }
+      #running_mate_pic {
+          border-color: #4088C8;
+          border-style: solid;
+      }
+      #overall_result {
+          color: #000000;
+          background-color: #AEFFAC;
+          border-color: #ED1159;
+          border-style: solid;
+      }
+      #overall_result h3 {
+          color: #000000;
+          background-color: #E1C7F9;
+          border-color: #ED1159;
+      }
+      #state_info {
+          color: #000000;
+          background-color: #C8F4FF;
+          border-color: #ED1159;
+          border-style: solid;
+      }
+      #state_info h3 {
+          color: #000000;
+          background-color: #FFB3B3;
+          border-color: #ED1159;
+      }
+      #state_result {
+          color: #000000;
+          background-color: #C8F4FF;
+          border-color: #ED1159;
+          border-style: solid;
+      }
+      #state_result h3 {
+          color: #000000;
+          background-color: #FFB3B3;
+          border-color: #ED1159;
+      }
+      #overall_result_container {
+          background-color: #C8F4FF;
+      }
+      #state_result_container {
+          background-color: #C8F4FF;
+      }
+      #menu_container {
+          background-color: #C8F4FF;
+      }
+      .game_header {
+          border-color: #4088C8;
+      }
+      .content_single {
+          border-color: #FFCCF5;
+      }
+      .inner_window_question {
+          color: #000000;
+          background-color: #AEFFAC;
+          border-color: #AEFFAC;
+          border-style: solid;
+      }
+      .inner_inner_window h3 {
+          color: #000000;
+          background-color: #FFFFFF;
+          border-color: #ED1159;
+          border-style: solid;
+      }
+      .inner_window_sign_display {
+          color: #000000;
+          background-color: #AEFFAC;
+          border-color: #AEFFAC;
+          border-style: solid;
+      }
+      #visit_window {
+          color: #000000;
+          background-color: #AEFFAC;
+          border-color: #4088C8;
+          border-style: solid;
+      }
+      #visit_window h3 {
+          color: #000000;
+          background-color: #C8F4FF;
+          border-color: #4088C8;
+          border-style: solid;
+          border-width: 1px;
+      }
+      #visit_window img {
+          border-color: #4088C8;
+          border-style: solid;
+      }
+      #election_night_window {
+          color: #000000;
+          background-color: #AEFFAC;
+          border-color: #4088C8;
+          border-style: solid;
+      }
+      #election_night_window h3 {
+          color: #000000;
+          background-color: #C8F4FF;
+          border-color: #4088C8;
+          border-style: solid;
+          border-width: 1px;
+      }
+      #election_night_window img {
+          border-color: #4088C8;
+          border-style: solid;
+      }
+      a {
+          color: #000000;
+      }
+      `;
+  document.head.appendChild(style_overwrite);
+}
+function devoTheme() {
+  style_overwrite = document.createElement("style");
+    style_overwrite.innerHTML = 
+      `
+      #difficulty_level h3 {
+          color: #FFFFFF;
+      }
+      #game_options h3 {
+          color: #FFFFFF;
+      }
+      #running_mate_form h3 {
+          color: #FFFFFF;
+      }
+      #candidate_form h3 {
+          color: #FFFFFF;
+      }
+      #election_year_form h3 {
+          color: #FFFFFF;
+      }
+      #credits {
+          color: #FFFFFF;
+      }
+      .footer {
+          border-color: #000000;
+          border-style: solid;
+      }
+      hr {
+          border-color: #18DC00;
+          border-style: solid;
+      }
+      #opponent_selection_description_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFF36;
+          border-style: solid;
+      }
+      #inner_window_4 {
+          border-color: #FFFF36;
+          border-style: solid;
+      }
+      #running_mate_description_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FF141C;
+          border-style: solid;
+      }
+      #running_mate_image {
+          border-color: #18DC00;
+          border-style: solid;
+      }
+      #inner_window_3 {
+          border-color: #FFFF36;
+          border-style: solid;
+      }
+      #candidate_description_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FF141C;
+          border-style: solid;
+      }
+      #candidate_image {
+          border-color: #18DC00;
+          border-style: solid;
+      }
+      #inner_window_1 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FF141C;
+          border-style: solid;
+      }
+      #election_image img {
+          border-color: #FFFF36;
+          border-style: solid;
+      }
+      #inner_window_2 {
+          border-color: #FF141C;
+          border-style: solid;
+      }
+      #election_description_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #18DC00;
+          border-style: solid;
+      }
+      #map_container {
+          border-color: #FFFF36;
+          border-style: solid;
+          background-color: #000000;
+      }
+      #candidate_pic {
+          border-color: #18DC00;
+          border-style: solid;
+      }
+      #running_mate_pic {
+          border-color: #18DC00;
+          border-style: solid;
+      }
+      #overall_result {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #18DC00;
+          border-style: solid;
+      }
+      #overall_result h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #18DC00;
+      }
+      #state_info {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #18DC00;
+          border-style: solid;
+      }
+      #state_info h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #18DC00;
+      }
+      #state_result {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #18DC00;
+          border-style: solid;
+      }
+      #state_result h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #18DC00;
+      }
+      #overall_result_container {
+          background-color: #000000;
+      }
+      #state_result_container {
+          background-color: #000000;
+      }
+      #menu_container {
+          background-color: #000000;
+      }
+      .game_header {
+          border-color: #2F7EFF;
+      }
+      .content_single {
+          border-color: #18DC00;
+      }
+      .inner_window_question {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FF141C;
+          border-style: solid;
+      }
+      .inner_inner_window h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #18DC00;
+          border-style: solid;
+      }
+      .inner_window_sign_display {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #2F7EFF;
+          border-style: solid;
+      }
+      #visit_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFF36;
+          border-style: solid;
+      }
+      #visit_window h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFF36;
+          border-width: 1px;
+      }
+      #visit_window img {
+          border-color: #2F7EFF;
+          border-style: solid;
+      }
+      #election_night_window {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFF36;
+          border-style: solid;
+      }
+      #election_night_window h3 {
+          color: #FFFFFF;
+          background-color: #000000;
+          border-color: #FFFF36;
+          border-width: 1px;
+      }
+      #election_night_window img {
+          border-color: #2F7EFF;
+          border-style: solid;
+      }
+      a {
+          color: #000000;
+      }
+      `;
+  document.head.appendChild(style_overwrite);
+}
+
+const gameThemes = {
+  "Headspace" : function() {
+    headspaceTheme()
+    selectedTheme.text_col="black"
+    corrr = `<h2>&nbsp;</h2>`
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#6C0FFF"
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#F1BFFF"
+    document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title
+    $("#game_window")[0].style.backgroundImage = ""
+    $("#game_window")[0].style.backgroundColor = "#F1BFFF"
+    $("#game_window")[0].style.borderColor = "#FFFCBD"
+    $(".container")[0].style.borderColor = "#FFFCBD"
+    $(".container")[0].style.backgroundColor = "#5800D0"
+    $(".game_header")[0].style.borderColor = "#FFFCBD"
+    document.getElementById("header").src = "https://file.garden/ZRcfmLUQNGkxIJds/Omori_Origin_Group.png";
+    document.body.style.backgroundColor = "";
+    document.body.background = "https://file.garden/ZRcfmLUQNGkxIJds/headspace-wallpaper-v0-hiwll6h78cx91.webp";
+  },
+  "White Space" : function() {
+    whitespaceTheme()
+    selectedTheme.text_col="black"
+    corrr = `<h2>&nbsp;</h2>`
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#FFFFFF"
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#FFFFFF"
+    document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title
+    $("#game_window")[0].style.backgroundColor = "#FFFFFF"
+    $("#game_window")[0].style.backgroundImage = ""
+    $("#game_window")[0].style.borderColor = "#FFFFFF"
+    $(".container")[0].style.borderColor = "#FFFFFF"
+    $(".container")[0].style.backgroundColor = "#FFFFFF"
+    $(".game_header")[0].style.borderColor = "#FFFFFF"
+    $(".footer a").css({"color":"#FFFFFF"});
+    $("#site_credits a").css({"color":"#FFFFFF"});
+    $("#site_credits p").css({"color":"#FFFFFF"});
+    document.getElementById("header").src = "https://file.garden/ZRcfmLUQNGkxIJds/whiteSpaceBanner.jpg";
+    document.body.style.backgroundColor = "white";
+    document.body.background = "";
+  },
+  "Black Space" : function() {
+    blackspaceTheme()
+    selectedTheme.text_col="white"
+    corrr = `<h2>&nbsp;</h2>`
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#000000"
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#000000"
+    document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title
+    $("#game_window")[0].style.backgroundColor = "#000000"
+    $("#game_window")[0].style.borderColor = "#000000"
+    $("#game_window")[0].style.backgroundImage = ""
+    $(".container")[0].style.borderColor = "#000000"
+    $(".container")[0].style.backgroundColor = "#000000"
+    $(".game_header")[0].style.borderColor = "#000000"
+    $(".footer a").css({"color":"#000000"});
+    $("#site_credits a").css({"color":"#000000"});
+    $("#site_credits p").css({"color":"#000000"});
+    document.getElementById("header").src = "https://file.garden/ZRcfmLUQNGkxIJds/blackSpaceBanner.jpg";
+    document.body.style.backgroundColor = "black";
+    document.body.background = "";
+  },
+  "Windose20" : function() {
+    windoseTheme()
+    selectedTheme.text_col="black"
+    corrr = `<h2>&nbsp;</h2>`
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#FACCFF"
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#CCFFFF"
+    document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title
+    $("#game_window")[0].style.backgroundColor = ""
+    $("#game_window")[0].style.backgroundImage = "url(https://file.garden/ZRcfmLUQNGkxIJds/needyBackground.jpg)"
+    $("#game_window")[0].style.borderColor = "#6629CC"
+    $(".container")[0].style.borderColor = "#6629CC"
+    $(".container")[0].style.backgroundColor = "#80FFFF"
+    $(".game_header")[0].style.borderColor = "#6629CC"
+    $(".footer a").css({"color":"#FFFFFF"});
+    $("#site_credits a").css({"color":"#FFFFFF"});
+    $("#site_credits p").css({"color":"#FFFFFF"});
+    document.getElementById("header").src = "https://file.garden/ZRcfmLUQNGkxIJds/needyStreamerBanner.jpg";
+    document.body.style.backgroundColor = "";
+    document.body.background = "https://file.garden/ZRcfmLUQNGkxIJds/needystreamerBackground.jpg";
+  },
+  "Metaverse" : function() {
+    metaverseTheme()
+    selectedTheme.text_col="black"
+    corrr = `<h2>&nbsp;</h2>`
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#FFCCF5"
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#FFCCF5"
+    document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title
+    $("#game_window")[0].style.backgroundColor = "#C8F4FF"
+    $("#game_window")[0].style.backgroundImage = ""
+    $("#game_window")[0].style.borderColor = "#4088C8"
+    $(".container")[0].style.borderColor = "#FFA3ED"
+    $(".container")[0].style.backgroundColor = "#FFCCF5"
+    $(".game_header")[0].style.borderColor = "#4088C8"
+    $(".footer a").css({"color":"#FFFFFF"});
+    $("#site_credits a").css({"color":"#FFFFFF"});
+    $("#site_credits p").css({"color":"#FFFFFF"});
+    document.getElementById("header").src = "https://file.garden/ZRcfmLUQNGkxIJds/dokiDokiBanner.jpg";
+    document.body.style.backgroundColor = "";
+    document.body.background = "https://file.garden/ZRcfmLUQNGkxIJds/dokidokiBackground.jpg";
+  },
+  "Dev-olution" : function() {
+    devoTheme()
+    selectedTheme.text_col="white"
+    corrr=`\n<h2><span style='color: #FFFF36;'>D</span><span style='color: #2F7EFF;'>E</span><span style='color: #18DC00;'>V</span>-<span style='color: #FF141C;'>O</span>LUTION!</h2>`
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#000000"
+    nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#000000"
+    document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title
+    $("#game_window")[0].style.backgroundColor = "#000000"
+    $("#game_window")[0].style.borderColor = "#2F7EFF"
+    $("#game_window")[0].style.backgroundImage = ""
+    $(".container")[0].style.backgroundColor = "#000000"
+    $(".container")[0].style.borderColor = "#FFF856"
+    $(".game_header")[0].style.borderColor = "#2F7EFF;"
+    $(".footer a").css({"color":"#000000"});
+    $("#site_credits a").css({"color":"#000000"});
+    $("#site_credits p").css({"color":"#000000"});
+    document.getElementById("header").src = "https://file.garden/ZRcfmLUQNGkxIJds/devo.gif";
+    document.body.style.backgroundColor = "black";
+    document.body.background = "";
+  }
+}
+
+const themePicker = document.getElementById("themePicker");
+const newThemePicker = document.createElement("select");
+newThemePicker.id = "themePicker";
+newThemePicker.addEventListener("change", gameThemePicked);
+let newInnerHTML = "";
+for(theme in gameThemes) {
+  newInnerHTML += `<option value="${theme}">${theme}</option>`;
+}
+newThemePicker.innerHTML = newInnerHTML;
+themePicker.replaceWith(newThemePicker);
+function gameThemePicked() {
+  gameThemes[newThemePicker.value]();
+}
+gameThemePicked();
+
+e.credits = "<button onclick='e.creditsPage()'>Evaline!</button>"
+
+var changeGameDisp = (hide) => {
+  disp = "";
+  if (hide) {
+    disp = "none";
+  }
+  document.getElementsByClassName("inner_window_w_desc")[0].style.display = disp
+};
+
+e.creditsPage = () => {
+  credits_html = `
+    <h2>writing credits</h2>
+    <p>evaline</p>
+    <h2>coding credits</h2>
+    <p>evaline</p>
+    <p>max <i>(Answer Function, Music Player)</i></p>
+    <p>thank you to Omori, Doki Doki Literature Club, and Needy Streamer Overload for giving me lots of happiness.</p>
+    <img src='https://file.garden/ZRcfmLUQNGkxIJds/omoriGroupHug.gif' width='450px'>
+    <img src='https://file.garden/ZRcfmLUQNGkxIJds/dokidokiChibiDance.gif' width='450px'>
+    <img src='https://file.garden/ZRcfmLUQNGkxIJds/needyStreamerOverloadKAngelSideSideHD.gif' width='450px'>
+    <h2>code snippets</h2>
+    <p>2000N <i>(Credits Page)</i></p>
+    <p>2021DE <i>(Polling Function, Music Player)</i></p>
+    <p>2024 <i>(Running Mate Mid-Game, Theme Selection, Endings)</i></p>
+    </div>
+  `
+  changeGameDisp(true);
+  var spacer = document.createElement("amongusspacerthisisntarealelement");
+  spacer.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  document
+    .getElementsByClassName("inner_window_w_desc")[0]
+    .children[1].appendChild(spacer);
+    changeGameDisp(true);
+    var menuHeader = document.createElement("div");
+    menuHeader.classList.add("inner_window_front");
+    menuHeader.innerHTML = `<h1 style='margin-top: 0.4em;'><font id='Gothic' size='6' color='#FFFFFF'><i>1988r</i> was made possible by:</font></h1>`;
+    menuHeader.id = "SOTUheader";
+    menuHeader.style = "height: 50px;background-color:#212121";
+    var newMenu = document.createElement("div");
+    newMenu.classList.add("inner_window_front");
+    newMenu.id = "SOTUmenu";
+    newMenu.style = `height:303px;background-color:#212121;color:white;overflow-y: scroll;`;
+
+    newMenu.innerHTML = credits_html;
+    let z = document.getElementById("game_window");
+    var backButton = document.createElement("button");
+    backButton.style =
+      "position: relative; bottom: -4px; left: -392px; width: 130px; height: 50px;font-size:20px;padding-top:5px;padding-left:8px";
+    backButton.id = "backSOTUBtn";
+    backButton.innerHTML = `<b>BACK</b>`;
+    backButton.onclick = function () {
+      document.getElementById("SOTUheader").remove();
+      document.getElementById("SOTUmenu").remove();
+      document.getElementById("backSOTUBtn").remove();
+      changeGameDisp(false);
+    };
+    z.appendChild(menuHeader);
+    z.appendChild(newMenu);
+    z.appendChild(backButton);
+
+}
+
+campaignTrail_temp.election_json = JSON.parse("[{\"model\": \"campaign_trail.election\", \"pk\": 15, \"fields\": {\"year\": 1988, \"summary\": \"<p>As Ronald Reagan's time in office is coming to an end, it seems that the presumptive nominee, George HW Bush, was utterly embarrassed by conservative ideologue Pat Robertson.</p><p>Though it's not smooth sailings for the evangelist. A confident Democratic party, deflated Republican party, and numerous character issues have put Robertson on the backfoot. Only through determination and shoring up his \\\"Moral Coalition\\\" can he even out the deficit.</p><p><i>This is for all the marbles, can Robertson bring morality to America?</i></p>\", \"image_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/rob1988.jpg\", \"winning_electoral_vote_number\": 270, \"advisor_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/nuttleadvisor.jpg\", \"recommended_reading\": \"<div style='overflow-y:auto; height:400px; color: black;'><h2>Needy Girl Overdose</h2><img src='https://file.garden/ZRcfmLUQNGkxIJds/needyOverdoseSquare.jpg' width='100px'></br></br><a href=\\\"https://nyalra.net/\\\" target=\\\"_blank\\\">Nyalra</a> | <a href=\\\"https://store.steampowered.com/app/1451940/NEEDY_STREAMER_OVERLOAD/\\\" target=\\\"_blank\\\">Needy Streamer Overload</a></br><h2>Omori</h2><img src='https://file.garden/ZRcfmLUQNGkxIJds/omoriMariSquare.jpg' width='100px'></br></br><a href=\\\"https://www.omocat-shop.com/collections/omori\\\" target=\\\"_blank\\\">OMOCAT</a> | <a href=\\\"https://store.steampowered.com/app/1150690/OMORI/\\\" target=\\\"_blank\\\">Omori</a></br><h2>Doki Doki Literature Club</h2><img src='https://file.garden/ZRcfmLUQNGkxIJds/dokiDokiSquare.jpg' width='100px'></br></br><a href=\\\"https://ddlc.plus/merch\\\" target=\\\"_blank\\\">Team Salvato</a> | <a href=\\\"https://store.steampowered.com/app/1388880/Doki_Doki_Literature_Club_Plus/\\\" target=\\\"_blank\\\">Doki Doki Literature Club</a></br></br><h3 style=\\\"margin-top: 0.75em;\\\">pat robertson</h3>David J. Marley - <a href=\\\"https://www.amazon.com/Pat-Robertson-David-John-Marley/dp/0742552950\\\" target=\\\"_blank\\\">Pat Robertson: An American Life</a></br>Hubert Morken - <a href=\\\"https://www.amazon.com/Pat-Robertson-Where-He-Stands/dp/0800752651\\\" target=\\\"_blank\\\">Pat Robertson: Where He Stands</a></br>John W. Robbins - <a href=\\\"https://www.amazon.com/-/es/John-W-Robbins/dp/0940931249\\\" target=\\\"_blank\\\">Pat Robertson: Warning To America</a><h3 style=\\\"margin-top: 0.75em;\\\">1988 presidential campaign</h3>Pete Goldman, Tom Mathews - <a href=\\\"https://www.amazon.com/Quest-Presidency-Peter-Louis-Goldman/dp/0671690809\\\" target=\\\"_blank\\\">The Quest For The Presidency: The 1988 Campaign</a></br>Robert L. Fleegler - <a href=\\\"https://www.amazon.com/Brutal-Campaign-Election-Twenty-First-Century-American/dp/1469673371\\\" target=\\\"_blank\\\">Brutal Campaign: How The 1988 Election Set The Stage For Twenty-First Century American Politics</a></br><h3 style=\\\"margin-top: 0.75em;\\\">miscellaneous topics</h3>Chris Hedges - <a href=\\\"https://www.amazon.com/American-Fascists-Christian-Right-America/dp/0743284461\\\" target=\\\"_blank\\\">American Fascists: The Christian Right And The War On America</a></br>Michael S. Winters - <a href=\\\"https://www.amazon.com/Gods-Right-Hand-Republican-Baptized/dp/0061970670\\\" target=\\\"_blank\\\">God's Right Hand: How Jerry Falwell Made God A Republican And Baptized The American Right</a></br>Jose Soba - <a href=\\\"https://research.library.fordham.edu/cgi/viewcontent.cgi?article=1025&context=aaas_senior\\\" target=\\\"_blank\\\">Willie Horton And The 1988 Presidential Campaign: A Tale Of Two Narratives</a></br>William G. Gale, Brennan Kelly - <a href=\\\"https://www.brookings.edu/wp-content/uploads/2016/06/20040604.pdf\\\" target=\\\"_blank\\\">The 'No New Taxes' Pledge</a></br>David Kurlander - <a href=\\\"https://www.brookings.edu/wp-content/uploads/2016/06/20040604.pdf\\\" target=\\\"_blank\\\">'Hungry For A Spiritual Revival': The School Prayer Amendment And The Rise Of The New Right</a></br><h3 style=\\\"margin-top: 0.75em;\\\">miscellaneous materials</h3>December 13, 1987 - <a href=\\\"https://www.youtube.com/watch?v=DcmMgqV0ysU\\\" target=\\\"_blank\\\">A Conversation With Pat Robertson, Republican Candidate For President</a></br>C-SPAN / October 2, 1987 - <a href=\\\"https://www.c-span.org/program/campaign-1988/robertson-announcement/170085\\\" target=\\\"_blank\\\">Campaign 1988: Robertson Announcement</a></br>C-SPAN / March 18, 1988 - <a href=\\\"https://www.c-span.org/program/public-affairs-event/super-tuesday-analysis/722\\\" target=\\\"_blank\\\">Super Tuesday Analysis</a></br>C-SPAN / February 29, 1988 - <a href=\\\"https://www.c-span.org/program/public-affairs-event/democratic-presidential-candidates-debates/158785\\\" target=\\\"_blank\\\">Democratic Presidential Candidates Debates</a></br>C-SPAN / January 8, 1988 - <a href=\\\"https://www.c-span.org/program/public-affairs-event/republican-candidates-debate/162\\\" target=\\\"_blank\\\">Republican Candidates Debate</a></br>C-SPAN / June 17, 1986 / Gary Hart - <a href=\\\"https://www.c-span.org/program/interview/modern-day-campaigning/94199\\\" target=\\\"_blank\\\">Modern Day Campaigning</a></br><p><div style='color: white;'>i cut myself, even despite my pills</div></p></br></br></br></div>\", \"has_visits\": 1, \"no_electoral_majority_image\": \"\"}}]");
+
+campaignTrail_temp.candidate_json = JSON.parse("[{\"model\": \"campaign_trail.candidate\", \"pk\": 152, \"fields\": {\"first_name\": \"Pat\", \"last_name\": \"Robertson\", \"election\": 15, \"party\": \"Republican\", \"state\": \"Virginia\", \"priority\": 2, \"description\": \"<p>Operating out of Virginia Beach, the Christian Broadcasting Network has been the premier in Evangelical outreach and it all started from Pat Robertson and a couple of bucks. There's more to the businessman however. Such as his philanthropic efforts, his business acumen, his political activism. Spreading the word of Christ is his mission, and he aims to do so on the political scene.</p><p>Though the primaries between the candidates got heated, they would all coalesce to the evangelist in the name of party unity. Going into the general election, the polls and what most astute observers believe is a severe deficit for the businessman. The common belief, however, should be ill-considered. Considering there is considerable support for him that just can't be registered. It's now Robertson's job to activate them.</p>\", \"color_hex\": \"#FA002F\", \"secondary_color_hex\": \"#FFA0A0\", \"is_active\": 1, \"image_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/robertson.jpg\", \"electoral_victory_message\": \"\", \"electoral_loss_message\": \"\", \"no_electoral_majority_message\": \"\", \"description_as_running_mate\": \"\", \"candidate_score\": 1.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 153, \"fields\": {\"first_name\": \"\", \"last_name\": \"Democratic Party\", \"election\": 15, \"party\": \"Democratic <i>(Democratic National Convention)</i>\", \"state\": \"Atlanta, Georgia\", \"priority\": 1, \"description\": \"<p>In a sigh of relief, the Democrats can look forward to the campaign as a done-deal. While polls have shown them well above their Republican contemporaries, it seems this lead will only be firmly cemented with the Republicans coalescing around televangelist Pat Robertson.</p><p>While many Democrats decryed the evangelist as too extreme for office, they certainly aren't complaining as their messaging will seem tame compared to his. Despite this, they should not get complacent. After all, Harry Truman was able to pull off an upset in 1948. Who isn't to say the same can happen 40 years later?</p><p><b><div style='color: red;'>not playable</div></b></p>\", \"color_hex\": \"#336FFF\", \"secondary_color_hex\": \"#90C0FF\", \"is_active\": 1, \"image_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/dnc.jpg\", \"electoral_victory_message\": \"\", \"electoral_loss_message\": \"\", \"no_electoral_majority_message\": \"\", \"description_as_running_mate\": \"\", \"candidate_score\": 1.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 154, \"fields\": {\"first_name\": \"Ron\", \"last_name\": \"Paul\", \"election\": 15, \"party\": \"Libertarian <i>(Republican)</i>\", \"state\": \"Texas\", \"priority\": 3, \"description\": \"<p>Kicking off with a bang, Ron Paul has left the Republicans in exchange for the Libertarians. The party achieving little success (besides impressively getting ~1% of the popular vote), they've decided to go with this (now) former Republican to hopefully put up a good performance. If this were any other Republican, he wouldn't be in the conversation but Robertson has flipped the script.</p><p>While the chance to get on the electoral map is more than unlikely, Paul's chances are intertwined with the popular vote instead. Polls have shown the Libertarian's getting nearly ~5% of the popular vote, which would show the party's newfound strength. While polls are speculative this early into the election cycle, getting more than one million supporters on Election Day would be impressive.</p><p><b><div style='color: red;'>not playable</div></b></p>\", \"color_hex\": \"#FFCD26\", \"secondary_color_hex\": \"#FFFFC0\", \"is_active\": 1, \"image_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/paul.jpg\", \"electoral_victory_message\": \"\", \"electoral_loss_message\": \"\", \"no_electoral_majority_message\": \"\", \"description_as_running_mate\": \"\", \"candidate_score\": 1.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 155, \"fields\": {\"first_name\": \"Lenora\", \"last_name\": \"Fulani/Various\", \"election\": 15, \"party\": \"New Alliance <i>(Various)</i>\", \"state\": \"Pennsylvania\", \"priority\": 4, \"description\": \"<p>Various parties want to put their foot at the door and try to make a name for themselves. Trying to put forward their platform and policy prescriptions to push the conversation forward. In all likelihood, many of these parties will not be effective. That doesn't stop the dream of pushing through their individual agendas.</p><p>It's not all for nothing however. Lenora Fulani, for example, is one of these people running for president. While they do the routine of talking about winning the presidency, they're not under any delusions of success. However, if there were to be a pivot by the major parties there could be a good opportunity to attain support. Through this line of thinking, Fulani and others should not be written off as an electoral threat.</p><p><b><div style='color: red;'>not playable</div></b></p>\", \"color_hex\": \"#02F200\", \"secondary_color_hex\": \"#A1FFA1\", \"is_active\": 1, \"image_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/fulani.jpg\", \"electoral_victory_message\": \"\", \"electoral_loss_message\": \"\", \"no_electoral_majority_message\": \"\", \"description_as_running_mate\": \"\", \"candidate_score\": 1.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 156, \"fields\": {\"first_name\": \"Steve\", \"last_name\": \"Symms\", \"election\": 15, \"party\": \"Republican\", \"state\": \"Idaho\", \"priority\": 5, \"description\": \"'\", \"color_hex\": \"#FF0000\", \"secondary_color_hex\": \"#FFA0A0\", \"is_active\": 0, \"image_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/symms.jpg\", \"electoral_victory_message\": \"'\", \"electoral_loss_message\": \"'\", \"no_electoral_majority_message\": \"'\", \"description_as_running_mate\": \"<p>Similar to Robertson in being an ideologue, Steve Symms would be a complimentary running mate. The problem comes with just that, being complimentary. Having a ticket of fiery conservatives will be sure to get the base moving, but just as much as it can get out the base it can put off moderates and independents. Republican members would also be less likely to help out Robertson, which would be detrimental to him when he'll need everything he can get.</p><p>With such a ticket prone to incendiary comments, Symms would truly be a choice for ideological purity.</p>\", \"candidate_score\": 0.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 157, \"fields\": {\"first_name\": \"Dan\", \"last_name\": \"Quayle\", \"election\": 15, \"party\": \"Republican\", \"state\": \"Indiana\", \"priority\": 6, \"description\": \"'\", \"color_hex\": \"#FF0000\", \"secondary_color_hex\": \"#FFA0A0\", \"is_active\": 0, \"image_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/quayle.jpg\", \"electoral_victory_message\": \"'\", \"electoral_loss_message\": \"'\", \"no_electoral_majority_message\": \"'\", \"description_as_running_mate\": \"<p>Robertson just doesn't have the respect of the party and with a campaign that's seeming to need every penny they'll get, is devastating. The party donors, the apparatus, the downballot. They would all sooner stay far away from any clear association, and they wouldn't be so wrong. However, if he were to calm their fears with a non-offensive running mate it would at least temper tensions. Dan Quayle would be just the man for that, and the cherry on top is his strong conservative credentials and youthfulness.</p><p>With a party and general population being skeptical of a televangelist, Quayle would be a choice for soothing moderates.</p>\", \"candidate_score\": 0.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 158, \"fields\": {\"first_name\": \"Jack\", \"last_name\": \"Kemp\", \"election\": 15, \"party\": \"Republican\", \"state\": \"New York\", \"priority\": 7, \"description\": \"'\", \"color_hex\": \"#FF0000\", \"secondary_color_hex\": \"#FFA0A0\", \"is_active\": 0, \"image_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/kemp.jpg\", \"electoral_victory_message\": \"'\", \"electoral_loss_message\": \"'\", \"no_electoral_majority_message\": \"'\", \"description_as_running_mate\": \"<p>The ultimate wildcard for Robertson is his relative distance from proper politics. Donating and supporting political causes is one thing, actively shaping them is another. With the past eight years dominated by Ronald Reagan, there is still a lot of love for the Gipper. A number of bills have been passed and none has been as instrumental as showcasing what Reaganism truly is like the Kemp-Roth Tax Cut bill. With Robertson being an unknown anomaly in the political scene, Jack Kemp would be a known quantity that can soothe concerns.</p><p>With a ticket making people skeptical of how effective it would be in Congress, Kemp would be a useful asset in showing the seriousness that they'll run in an administration.</p>\", \"candidate_score\": 0.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 159, \"fields\": {\"first_name\": \"Paul\", \"last_name\": \"Laxalt\", \"election\": 15, \"party\": \"Republican\", \"state\": \"Nevada\", \"priority\": 8, \"description\": \"'\", \"color_hex\": \"#FF0000\", \"secondary_color_hex\": \"#FFA0A0\", \"is_active\": 0, \"image_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/laxalt.jpg\", \"electoral_victory_message\": \"'\", \"electoral_loss_message\": \"'\", \"no_electoral_majority_message\": \"'\", \"description_as_running_mate\": \"<p>What Robertson ultimately needs, if he wants any sort of chance at getting off the ground, is the party. With the presumptive nominee being take away from their hands, they're awfully hesitant to lend any support for his campaign. Ultimately, this is what Robertson should've expected. Campaigning as an outsider could only get him so far, so getting a party insider like Paul Laxalt would help immensely in building a bridge with the national party. Perhaps, even recognition from the president himself.</p><p>With a ticket that is not taken seriously by party insiders, Laxalt would be a net positive in showing he's willing to listen to the concerns of Republicans.</p>\", \"candidate_score\": 0.0}}, {\"model\": \"campaign_trail.candidate\", \"pk\": 160, \"fields\": {\"first_name\": \"George\", \"last_name\": \"Deukmejian\", \"election\": 15, \"party\": \"Republican\", \"state\": \"California\", \"priority\": 9, \"description\": \"'\", \"color_hex\": \"#FF0000\", \"secondary_color_hex\": \"#FFA0A0\", \"is_active\": 0, \"image_url\": \"https://file.garden/ZRcfmLUQNGkxIJds/deukmejian.jpg\", \"electoral_victory_message\": \"\", \"electoral_loss_message\": \"\", \"no_electoral_majority_message\": \"\", \"description_as_running_mate\": \"<p>There's not many people that take Robertson seriously. It wouldn't be until the convention that people saw just how serious this supposed movement that he represents is. Unfortunately for him, the polls have shown deficits that would make Goldwater blush. What he needs, is a noncontroversial running mate that'll be willing to act as his conduit to the unsettling influences of the media. What his campaign manager says is the California governor, George Deukmejian, would be the perfect man for that.</p><p>The only hard part, is getting the governor to agree to it.</p>\", \"candidate_score\": 0.0}}]");
+
+campaignTrail_temp.running_mate_json = JSON.parse("[{\"model\": \"campaign_trail.running_mate\", \"pk\": 98, \"fields\": {\"candidate\": 152, \"running_mate\": 156}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 99, \"fields\": {\"candidate\": 152, \"running_mate\": 157}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 100, \"fields\": {\"candidate\": 152, \"running_mate\": 158}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 101, \"fields\": {\"candidate\": 152, \"running_mate\": 159}}, {\"model\": \"campaign_trail.running_mate\", \"pk\": 102, \"fields\": {\"candidate\": 152, \"running_mate\": 160}}]");
+campaignTrail_temp.opponents_default_json = JSON.parse("[{\"election\": 15, \"candidates\": [154, 155, 152, 153]}]");
+campaignTrail_temp.opponents_weighted_json = JSON.parse("[{\"election\": 15, \"candidates\": [153, 152, 154, 155]}]");
+campaignTrail_temp.difficulty_level_json = JSON.parse("[{\"model\": \"campaign_trail.difficulty_level\", \"pk\": 1, \"fields\": {\"name\": \"Realistic\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 2, \"fields\": {\"name\": \"Adjusted\", \"multiplier\": 1.02}}]");
+campaignTrail_temp.global_parameter_json = JSON.parse("[{\"model\": \"campaign_trail.global_parameter\", \"pk\": 1, \"fields\": {\"vote_variable\": 1.125, \"max_swing\": 0.12, \"start_point\": 0.94, \"candidate_issue_weight\": 10.0, \"running_mate_issue_weight\": 3.0, \"issue_stance_1_max\": -0.71, \"issue_stance_2_max\": -0.3, \"issue_stance_3_max\": -0.125, \"issue_stance_4_max\": 0.125, \"issue_stance_5_max\": 0.3, \"issue_stance_6_max\": 0.71, \"global_variance\": 0.0, \"state_variance\": 0.0, \"question_count\": 35, \"default_map_color_hex\": \"#C9C9C9\", \"no_state_map_color_hex\": \"#999999\"}}]");
+campaignTrail_temp.candidate_dropout_json = JSON.parse("[{\"model\": \"campaign_trail.candidate_dropout\", \"pk\": 1, \"fields\": {\"candidate\": 36, \"affected_candidate\": 18, \"probability\": 1.0}}]");
+campaignTrail_temp.temp_election_list = [{"id": 15, "year": 1988, "is_premium": 0, "display_year": "1988r"}];
+campaignTrail_temp.show_premium = true;
+campaignTrail_temp.premier_ab_test_version = -1;
+
+$(document).on('click', '#candidate_id_button', () => {
+$('#running_mate_id_button').click();});
+$(document).on('click', '#opponent_selection_id_back', () => {
+$('#running_mate_id_back').click();});
+$(document).on('click', '#opponent_selection_id_button', () => {});
+
+$("#game_start").click((event) => {
+	event.preventDefault();
+	musicMode()
+})
+
+var element = document.getElementById('my-invisible-element');
+if (!element) {
+
+	// Get the reference to the bar
+	var bar = document.getElementById('bottomBar');
+
+	// Create the checkbox
+	var checkbox = document.createElement('input');
+	checkbox.type = 'checkbox';
+	checkbox.id = 'volumeCheckbox';
+	checkbox.checked = false;
+	checkbox.style.display = 'none';
+
+	// Create the label for the checkbox
+	var label = document.createElement('label');
+	label.htmlFor = 'volumeCheckbox';
+	label.style.fontSize = '0px';  // Increase the size of the text
+	label.style.fontWeight = 'bold';  // Make the text bold
+	label.appendChild(document.createTextNode('Enable Volume'));
+
+	// Wrap the checkbox and label in a div and style it
+	var wrapper = document.createElement('div');
+	wrapper.style.padding = '0px';  // Add some padding
+	wrapper.style.borderRadius = '0px';  // Round the corners
+	wrapper.style.backgroundColor = '#60DAFF';  // Set the background color to the default button color
+	wrapper.style.border = '0px solid black';  // Add a black border
+	wrapper.appendChild(checkbox);
+	wrapper.appendChild(label);
+
+	// Position the wrapper in the middle of the bar
+	var div = document.createElement('div');
+	div.style.position = 'absolute';
+	div.style.left = '50%';
+	div.style.transform = 'translate(-50%, 0)';  // Center the div
+	div.appendChild(wrapper);
+
+	// Add the div to the bar
+	bar.appendChild(div);
+
+	// Add event listener to the checkbox
+	checkbox.addEventListener('change', function() {
+    	if (!this.checked) {
+        	e.music.Volume = 0;  // Set the initial volume of the music player to 0
+    	}
+	});
+
+	let trackIndices;
+	let shuffledIndices;
+
+	musicMode = () => {
+    	$("#music_player")[0].children[0].style.display = "none"
+    	$("#music_player")[0].children[1].style.display = "none"
+    	document.getElementById("modLoadReveal").style.display = "none"
+    	document.getElementById("modloaddiv").style.display = "none"
+    	musicBox = document.getElementById("music_player")
+    	musicBox.style.display = ""
+    	var trackSel;
+    	e = campaignTrail_temp
+    	e.selectedSoundtrack = 0
+    	toTime = (seconds) => {
+        	var date = new Date(null);
+        	date.setSeconds(seconds);
+        	return date.toISOString().substr(11, 8);
+    	}
+    	generateTime = () => {
+        	// Get the audio element
+        	var audio = document.getElementById("campaigntrailmusic");
+        	timeTracker = document.createElement("div");
+        	timeTracker.id ='timeTracker'
+        	timeTracker.style = `
+  	text-align:left;
+  	border-style:solid;
+  	border-width:3px;
+    border-color:#60DAFF;
+  	height:200px;
+  	width:200px;
+    color: #000000;
+  	background-color:#FACCFF;
+  	float:right;
+  	padding: 10px;
+  	`
+        	$("#trackSelParent")[0].prepend(timeTracker);
+        	$("#trackSelParent")[0].prepend(document.createElement("br"));
+        	var positionDisplay = document.createElement("gg");
+        	positionDisplay.id = "position-display";
+        	var timeSlider = document.createElement("input");
+        	timeSlider.type = "range";
+        	timeSlider.min = 0;
+        	timeSlider.max = 1;
+        	timeSlider.step = 0.001;
+        	timeSlider.value = 0;
+        	timeSlider.style.width = "200px";
+        	timeSlider.id = "time-slider";
+        	var pausePlay = document.createElement("button");
+        	pausePlay.id = "position-display";
+        	pausePlay.innerHTML = "<b>Pause</b>"
+        	pausePlay.style.width = "100%";
+        	pausePlay.style.margin = "2px";
+        	pausePlay.addEventListener("click", event => {
+            	event.preventDefault();
+            	updatePositionDisplay();
+            	let audio = document.getElementById("campaigntrailmusic");
+            	if (audio.paused) {
+                	audio.play();
+                	event.target.innerHTML = "<b>Pause</b>";
+                	return;
+            	}
+            	audio.pause();
+            	event.target.innerHTML = "<b>Play</b>";
+            	return;
+        	})
+        	var shuffleButton = document.createElement("button");
+        	shuffleButton.id = "shuffle-button";
+        	shuffleButton.innerHTML = "<b>Shuffle</b>"
+        	shuffleButton.style.width = "100%"
+        	shuffleButton.style.margin = "2px";;
+        	shuffleButton.addEventListener("click", event => {
+            	event.preventDefault();
+            	e.music.shuffleEnabled = !e.music.shuffleEnabled;
+            	event.target.innerHTML = e.music.shuffleEnabled ? "<b>Unshuffle</b>" : "<b>Shuffle</b>";
+            	if (e.music.shuffleEnabled) {
+                	shuffledIndices = shuffle(trackIndices.slice());
+                	let currentTrackIndex = Number(document.querySelector('input[name="trackSelector"]:checked').value);
+                	shuffledIndices = shuffledIndices.filter(index => index !== currentTrackIndex);
+                	shuffledIndices.unshift(currentTrackIndex);
+            	}
+        	});
+        	var skipButton = document.createElement("button");
+        	skipButton.id = "skip-button";
+        	skipButton.innerHTML = "<b>Skip</b>"
+        	skipButton.style.width = "100%";
+        	skipButton.style.margin = "2px"; // Add margin
+        	skipButton.addEventListener("click", event => {
+            	event.preventDefault();
+            	let selected = Number(document.querySelector('input[name="trackSelector"]:checked').value);
+            	let newSel;
+            	if (e.music.shuffleEnabled) {
+                	if (!shuffledIndices) {
+                    	shuffledIndices = shuffle(trackIndices.slice());
+                	}
+                	let currentIndex = shuffledIndices.findIndex(index => index === selected);
+                	if (currentIndex === shuffledIndices.length - 1) {
+                    	shuffledIndices = shuffle(trackIndices.slice());
+                    	currentIndex = -1;
+                	}
+                	newSel = shuffledIndices[currentIndex + 1];
+            	} else {
+                	newSel = selected + 1 === soundtracks[e.selectedSoundtrack].tracklist.length ? 0 : selected + 1;
+            	}
+            	let buttons = Array.from(document.getElementById("trackSel").children).filter(f => {
+                    	return f.tagName == "LABEL"
+                	}).map(f => f.children[0])
+            	buttons[newSel].click()
+        	});
+        	skipButton.style.width = "50%";
+        	var loopButton = document.createElement("button");
+        	loopButton.id = "loop-button";
+        	loopButton.innerHTML = e.music.loopEnabled ? "<b>Unloop</b>" : "<b>Loop Song</b>";  // Check the initial loop state
+        	loopButton.style.width = "50%";  // Match the width with skipButton
+        	loopButton.style.margin = "2px";
+        	loopButton.addEventListener("click", event => {
+            	event.preventDefault();
+            	e.music.loopEnabled = !e.music.loopEnabled;
+            	let audio = document.getElementById("campaigntrailmusic");
+            	audio.loop = e.music.loopEnabled;  // Set the audio's loop property
+            	event.target.innerHTML = e.music.loopEnabled ? "<b>Unloop</b>" : "<b>Loop Song</b>";  // Toggle the button text
+        	});
+        	var volumeLabel = document.createElement("gg");
+        	volumeLabel.id = "volume-label";
+        	volumeLabel.innerHTML = "<br><b>Volume: </b>"
+        	var volumeSlider = document.createElement("input");
+        	volumeSlider.type = "range";
+        	volumeSlider.min = 0;
+        	volumeSlider.max = 1;
+        	volumeSlider.step = 0.001;
+        	volumeSlider.value = 0;
+        	volumeSlider.style.width = "200px";
+        	volumeSlider.id = "volume-slider";
+        	audio.volume= e.music.Volume;
+        	volumeSlider.value = audio.volume;
+        	timeTracker.appendChild(pausePlay);
+        	if (audio.volume === 0) {
+            	audio.pause();
+            	pausePlay.innerHTML = "<b>Play</b>";  // Update the pause button text to "Play"
+        	}
+        	timeTracker.appendChild(shuffleButton);
+        	var buttonContainer = document.createElement("div");
+        	buttonContainer.style.display = "flex"; // Makes children inline
+        	buttonContainer.style.justifyContent = "space-between";
+        	skipButton.style.flex = "1"; // Makes it take up equal space
+        	skipButton.style.marginRight = "5px"; // Adds some space between the buttons
+
+        	loopButton.style.marginRight = "0px";
+
+        	buttonContainer.appendChild(skipButton);
+        	buttonContainer.appendChild(loopButton);
+
+        	timeTracker.appendChild(buttonContainer); // Add the container to timeTracker instead of individual buttons
+        	timeTracker.appendChild(positionDisplay);
+        	timeTracker.appendChild(timeSlider);
+        	timeTracker.appendChild(volumeLabel);
+        	timeTracker.appendChild(volumeSlider);
+        	updatePositionDisplay();
+        	function updatePositionDisplay() {
+            	positionDisplay.innerHTML = "<b>Time:</b> " + toTime(audio.currentTime) + "<br>";
+            	timeSlider.value = audio.duration ? audio.currentTime / audio.duration : 0;
+        	}
+        	function changeTime() {
+            	positionDisplay.innerHTML = "<b>Time:</b> " + toTime(audio.currentTime) + "<br>";
+            	audio.currentTime = timeSlider.value * audio.duration;
+        	}
+        	updateVolume = event => {
+            	audio.volume = event.target.value;
+            	e.music.Volume=audio.volume;
+        	}
+        	setInterval(updatePositionDisplay, 1000);
+        	timeSlider.addEventListener("input", changeTime);
+        	volumeSlider.addEventListener("input", updateVolume)
+    	}
+
+	function newMusicPlayer(previousBgImage = null) {
+        	trackSel = document.createElement("div");
+        	trackSel.id = "trackSelParent";
+        	let z = `<br><br><br><br><br><br><br><br><br><br><br><br><div id='trackSel' style="text-align:left;color: #000000;border-color:#60DAFF;border-style:solid;border-width:3px;overflow-y: scroll;overflow-x: hidden;height:200px; width:625px;background-color:#FACCFF;float:right;">`
+        	z += `<b><select id='selectSoundtrack'><option value='` + soundtracks[e.selectedSoundtrack].name + `'>` + soundtracks[e.selectedSoundtrack].name + "</option>"
+        	for (i in soundtracks) {
+            	if (soundtracks[e.selectedSoundtrack] != soundtracks[i]) {
+                	z += `<option value='` + soundtracks[i].name + `'>` + soundtracks[i].name + `</option>`
+            	}
+        	}
+        	z += `</select></b><br><br>`
+            	// <label><input type="radio" name="option" value="option1">Option 1</label><br>
+        	for (i in soundtracks[e.selectedSoundtrack].tracklist) {
+            	let a = soundtracks[e.selectedSoundtrack].tracklist[i]
+            	let b = `<label><input class="trackSelector" type="radio" name="trackSelector" value="` + i + `">` + a.name + `</label><br>`
+            	z += b
+        	}
+        	z += "</div><br><br>"
+        	trackSel.innerHTML = z
+        	musicBox.appendChild(trackSel);
+        	Array.from(document.getElementById("trackSel").children).filter(f => {
+            	return f.tagName == "LABEL"
+        	}).map(f => f.children[0])[0].checked = true
+        	soundtrackSelector = document.getElementById("selectSoundtrack")
+        	soundtrackSelector.onchange = function() {
+            	let currentBgImage = document.getElementById("trackSel").style.backgroundImage;
+
+            	for (i in soundtracks) {
+                	if (soundtracks[i].name == soundtrackSelector.value) {
+                    	e.selectedSoundtrack = i;
+                    	break;
+                	}
+            	}
+            	e.music.shuffleEnabled = false;
+            	shuffledIndices = null;
+
+            	document.getElementById("trackSelParent").remove();
+            	newMusicPlayer(currentBgImage);  // Pass the current background image to the next function invocation.
+        	};
+        	var matches = document.querySelectorAll('.trackSelector');
+        	for (match in matches) {
+            	matches[match].onchange = function() {
+                	audio = $("#campaigntrailmusic")[0];
+                	audio.src = soundtracks[e.selectedSoundtrack].tracklist[this.value].url
+                	audio.currentTime = 0
+            	}
+        	}
+        	musicBox.children[2].loop = false
+        	musicBox.children[2].src = soundtracks[e.selectedSoundtrack].tracklist[0].url
+
+        	trackIndices = Array.from({length: soundtracks[e.selectedSoundtrack].tracklist.length}, (_, i) => i);
+
+        	musicBox.children[2].onended = function() {
+            	if (e.music.loopEnabled) {
+                	this.play();  // If loop is enabled, simply play the same track again
+            	} else {
+            	let selected = Number(document.querySelector('input[name="trackSelector"]:checked').value);
+            	let newSel;
+            	if (e.music.shuffleEnabled) {
+                	if (!shuffledIndices) {
+                    	shuffledIndices = shuffle(trackIndices.slice());
+                	}
+                	let currentIndex = shuffledIndices.findIndex(index => index === selected);
+                	if (currentIndex === shuffledIndices.length - 1) {
+                    	shuffledIndices = shuffle(trackIndices.slice());
+                    	currentIndex = -1;
+                	}
+                	newSel = shuffledIndices[currentIndex + 1];
+            	} else {
+                	newSel = selected + 1 === soundtracks[e.selectedSoundtrack].tracklist.length ? 0 : selected + 1;
+            	}
+            	let buttons = Array.from(document.getElementById("trackSel").children).filter(f => {
+                    	return f.tagName == "LABEL"
+                	}).map(f => f.children[0])
+            	buttons[newSel].click()
+            	}
+        	}
+
+        	for (w = 0; w < 7; w++) {
+          	document.getElementById("trackSelParent").appendChild(document.createElement("br"))
+        	}
+        	generateTime();
+       	if (previousBgImage) {
+            	document.getElementById("trackSel").style.backgroundImage = previousBgImage;
+             	document.getElementById("timeTracker").style.backgroundImage = previousBgImage;
+        	}
+    	}
+    	clamp = function(a, max, min, overflow = true) {
+        	if (overflow) {
+            	return a > max ? min : a < min ? max : a;
+        	}
+        	return a > max ? max : a < min ? min : a;
+    	}
+    	var soundtracks = {
+  0: {
+    
+	name: "Main Soundtrack",
+	tracklist: [
+	{
+    	name: "Do The Evolution - Pearl Jam",
+    	url: "https://files.catbox.moe/zlslj8.mp3",
+	},
+{
+    	name: "Kids In America | Kim Wilde",
+    	url: "https://files.catbox.moe/cvsyp4.mp3",
+	},
+{
+    	name: "Back In Flesh | Wall Of Voodoo",
+    	url: "https://files.catbox.moe/s651et.mp3",
+	},
+{
+    	name: "Eighties | Killing Joke",
+    	url: "https://files.catbox.moe/wpdgu2.mp3",
+	},
+{
+    	name: "Mongoloid | DEVO",
+    	url: "https://files.catbox.moe/k3b37h.mp3",
+	},
+{
+    	name: "Beautiful World | DEVO",
+    	url: "https://files.catbox.moe/io55ny.mp3",
+	},
+{
+    	name: "Don't You Want Me | The Human League",
+    	url: "https://files.catbox.moe/sxdmhz.mp3",
+	},
+{
+    	name: "Relax | Frankie Goes To Hollywood",
+    	url: "https://files.catbox.moe/k87hyf.mp3",
+	},
+{
+    	name: "Enola Gay | Orchestral Manoeuvres In The Dark",
+    	url: "https://files.catbox.moe/g3p0n5.mp3",
+	},
+{
+    	name: "Doki Doki Literature Club! | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/kzgjqu.mp3",
+	},
+{
+    	name: "Play With Me | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/box04h.mp3",
+	},
+{
+    	name: "Approval Desire | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/9mzy4s.mp3",
+	},
+{
+    	name: "Angel Falling | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/mwrl10.mp3",
+	},
+{
+    	name: "Forest Frenzy | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/yqu69z.mp3",
+	},
+{
+    	name: "Three Bar Logos | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/kne61w.mp3",
+	},
+{
+    	name: "You Were Wrong. Go Back. | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/ev7s7n.mp3",
+	},
+{
+    	name: "America | Killing Joke",
+    	url: "https://files.catbox.moe/s65nh5.mp3",
+	},
+{
+    	name: "Big In Japan | Alphaville",
+    	url: "https://files.catbox.moe/db7m4l.mp3",
+	},
+{
+    	name: "China | Red Rockers",
+    	url: "https://files.catbox.moe/ufn1uw.mp3",
+	},
+{
+    	name: "Girls And Boys | blur",
+    	url: "https://files.catbox.moe/9y11x0.mp3",
+	},
+{
+    	name: "Obsession | Animotion",
+    	url: "https://files.catbox.moe/i7l1ox.mp3",
+	},
+{
+    	name: "Gut Feeling | DEVO",
+    	url: "https://files.catbox.moe/jmrffr.mp3",
+	},
+{
+    	name: "Mexican Radio | Wall Of Voodoo",
+    	url: "https://files.catbox.moe/7cuqei.mp3",
+	},
+{
+    	name: "Atomic | Blondie",
+    	url: "https://files.catbox.moe/9tukkh.mp3",
+	},
+{
+    	name: "It's Obvious | Au Pairs",
+    	url: "https://files.catbox.moe/6yavn9.mp3",
+	},
+{
+    	name: "Dreams Of Love And Literature | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/ln90gw.mp3",
+	},
+{
+    	name: "Candy Hearts | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/us4kyy.mp3",
+	},
+{
+    	name: "Internet Angel | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/4cx69q.mp3",
+	},
+{
+    	name: "Angel's Flight | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/n4sf8c.mp3",
+	},
+{
+    	name: "Ascension Of Angel | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/0lqcc6.mp3",
+	},
+{
+    	name: "Fake Happiness Is Still Happiness | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/92rmun.mp3",
+	},
+{
+    	name: "Space Road 1979 | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/42y7x6.mp3",
+	},
+{
+    	name: "Cat's Cradle | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/pwez1m.mp3",
+	},
+{
+    	name: "A Single Flower | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/qy26z5.mp3",
+	},
+{
+    	name: "Sugar Star Planetarium | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/9ptsuk.mp3",
+	},
+{
+    	name: "That's Good | DEVO",
+    	url: "https://files.catbox.moe/4ltp6z.mp3",
+	},
+{
+    	name: "Birds Fly (Whispers To A Scream) | The Icicle Works",
+    	url: "https://files.catbox.moe/vhsive.mp3",
+	},
+{
+    	name: "Nowhere Girl | B-Movie",
+    	url: "https://files.catbox.moe/r2cit9.mp3",
+	},
+{
+    	name: "Our Lips Are Sealed | The Go-Gos",
+    	url: "https://files.catbox.moe/143x66.mp3",
+	},
+{
+    	name: "Personal Jesus | Depeche Mode",
+    	url: "https://files.catbox.moe/lpjsn8.mp3",
+	},
+{
+    	name: "I Still Love You | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/krrykw.mp3",
+	},
+{
+    	name: "Your Reality | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/6dgu4k.mp3",
+	},
+{
+    	name: "Internet Overdose | Aiobahn +81 / KOTOKO",
+    	url: "https://files.catbox.moe/q8i4ud.mp3",
+	},
+{
+    	name: "Internet Yamero | Aiobahn +81 / KOTOKO",
+    	url: "https://files.catbox.moe/73uyla.mp3",
+	},
+{
+    	name: "White Space | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/207f1f.mp3",
+	},
+{
+    	name: "Lost At A Sleepover | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/x1ay8m.mp3",
+	},
+{
+    	name: "Undertow | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/b93c1f.mp3",
+	},
+{
+    	name: "Aquifer | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/4geb4z.mp3",
+	},
+{
+    	name: "Omori / Alter | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/a80qvg.mp3",
+	},
+{
+    	name: "My Time | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/ndwje9.mp3",
+	},
+{
+    	name: "Fireflies | Owl City",
+    	url: "https://files.catbox.moe/bbbck9.mp3",
+	},
+{
+    	name: "Eve Of Destruction | The Dickies",
+    	url: "https://files.catbox.moe/4bbzp0.mp3",
+	},
+{
+    	name: "Love Like Blood | Killing Joke",
+    	url: "https://files.catbox.moe/vfvl5o.mp3",
+	},
+{
+    	name: "Far Side Of Crazy | Wall Of Voodoo",
+    	url: "https://files.catbox.moe/jzx7c7.mp3",
+	},
+{
+    	name: "Gates Of Steel | DEVO",
+    	url: "https://files.catbox.moe/23yi7c.mp3",
+	},
+{
+    	name: "Anything, Anything | Dramarama",
+    	url: "https://files.catbox.moe/244fpl.mp3",
+	},
+{
+    	name: "News At Ten | The Vapors",
+    	url: "https://files.catbox.moe/3bg6es.mp3",
+	},
+{
+    	name: "Online Songs | blink-182",
+    	url: "https://files.catbox.moe/2t5rja.mp3",
+	},
+{
+    	name: "Reckless Abandon | blink-182",
+    	url: "https://files.catbox.moe/u1te8f.mp3",
+	},
+{
+    	name: "It's The End Of The World As We Know It (And I Feel Fine) | R.E.M.",
+    	url: "https://files.catbox.moe/gqixmg.mp3",
+	},
+	],
+  },
+
+1: {
+    
+	name: "Omori Soundtrack",
+	tracklist: [
+    {
+    	name: "Forest Frenzy | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/yqu69z.mp3",
+},
+{
+    	name: "Three Bar Logos | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/kne61w.mp3",
+	},
+{
+    	name: "You Were Wrong. Go Back. | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/ev7s7n.mp3",
+	},
+{
+    	name: "Space Road 1979 | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/42y7x6.mp3",
+	},
+{
+    	name: "A Single Flower | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/qy26z5.mp3",
+	},
+{
+    	name: "Sugar Star Planetarium | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/9ptsuk.mp3",
+	},
+{
+    	name: "Cat's Cradle | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/pwez1m.mp3",
+	},
+    {
+    	name: "White Space | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/207f1f.mp3",
+},
+{
+    	name: "Undertow | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/b93c1f.mp3",
+	},
+{
+    	name: "Aquifer | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/4geb4z.mp3",
+	},
+{
+    	name: "Lost At A Sleepover | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/x1ay8m.mp3",
+	},
+{
+    	name: "Omori / Alter | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/ektsrz.mp3",
+	},
+{
+    	name: "My Time | Omori / Pedro Silva / Jami Lynne",
+    	url: "https://files.catbox.moe/ndwje9.mp3",
+	},
+	],
+  },
+
+
+  2: {
+	name: "Needy Streamer Overload Soundtrack",
+	tracklist: [
+{
+    	name: "Approval Desire | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/9mzy4s.mp3",
+	},
+{
+    	name: "Angel Falling | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/mwrl10.mp3",
+	},
+{
+    	name: "Angel's Flight | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/n4sf8c.mp3",
+	},
+{
+    	name: "Ascension Of Angel | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/0lqcc6.mp3",
+	},
+{
+    	name: "Fake Happiness Is Still Happiness | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/92rmun.mp3",
+	},
+{
+    	name: "Internet Angel | Needy Streamer Overload / Aiobahn +81",
+    	url: "https://files.catbox.moe/4cx69q.mp3",
+	},
+{
+    	name: "Internet Overdose | Aiobahn +81 / KOTOKO",
+    	url: "https://files.catbox.moe/q8i4ud.mp3",
+	},
+{
+    	name: "Internet Yamero | Aiobahn +81 / KOTOKO",
+    	url: "https://files.catbox.moe/73uyla.mp3",
+	},
+	],
+  },
+
+
+  3: {
+	name: "Doki Doki Literature Club Soundtrack",
+	tracklist: [
+{
+    	name: "Doki Doki Literature Club! | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/kzgjqu.mp3",
+	},
+{
+    	name: "Dreams Of Love And Literature | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/ln90gw.mp3",
+	},
+{
+    	name: "Play With Me | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/box04h.mp3",
+	},
+{
+    	name: "Candy Hearts | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/us4kyy.mp3",
+	},
+{
+    	name: "I Still Love You | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/krrykw.mp3",
+	},
+{
+    	name: "Your Reality | Doki Doki Literature Club / Dan Salvato",
+    	url: "https://files.catbox.moe/6dgu4k.mp3",
+	},
+	],
+  },
+}
+
+    	newMusicPlayer()
+  	}
+
+      	function shuffle(array) {
+        	let currentIndex = array.length, temporaryValue, randomIndex;
+
+        	while (0 !== currentIndex) {
+            	randomIndex = Math.floor(Math.random() * currentIndex);
+            	currentIndex -= 1;
+
+            	temporaryValue = array[currentIndex];
+            	array[currentIndex] = array[randomIndex];
+            	array[randomIndex] = temporaryValue;
+        	}
+
+        	return array;
+    	}
+}
