@@ -41812,6 +41812,20 @@ const vpTableHistorical = {
   "Jill Stein": "Cheri Honkala"
 };
 
+// for the extra slide cabinet/timeline checks
+function getFullOpponentName(opLast) {
+  const mapping = {
+    "Romney": "Mitt Romney",
+    "Gingrich": "Newt Gingrich",
+    "Santorum": "Rick Santorum",
+    "Huntsman": "Jon Huntsman",
+    "Paul": "Ron Paul",
+    "Perry": "Rick Perry",
+    "Bachmann": "Michele Bachmann"
+  };
+  return mapping[opLast] || opLast || "Mitt Romney";
+}
+
 // This function determines the opponent based on the final scores.
 // The game will call this function automatically.
 function getRepublicanOpponent(liberalismScore, confrontationScore) {
