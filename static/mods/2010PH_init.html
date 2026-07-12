@@ -1506,5 +1506,16 @@ setupMusicPlayer();
     };
 })();
 
+// necessary so that the right elections are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "9") {
+            campaignTrail_temp.code2_id = "2010PH";
+        } else {
+            campaignTrail_temp.code2_id = "2010PH";
+        }
+    }
+}, 100);
 
 //#endcode
