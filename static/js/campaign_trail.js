@@ -2686,14 +2686,14 @@ function rFunc(t, i) {
 
 
     if (e.oldColors === true) {
-    if (margin > 0.10) {
-      fillHex = candidate.fields.color_hex; 
-    } else if (margin > 0.05) {
-      fillHex = candidate.fields.secondary_color_hex; 
-    } else {
-      fillHex = "#C9C9C9"; 
+      if (margin > 0.10) {
+        fillHex = candidate.fields.color_hex;
+      } else if (margin > 0.05) {
+        fillHex = candidate.fields.secondary_color_hex;
+      } else {
+        fillHex = "#C9C9C9";
+      }
     }
-  }
     if (
       String(e.game_type_id) === "3"
       && i === 1
@@ -3688,9 +3688,10 @@ function T(t) {
 /**
  * Handles state polling and election results
  * @param {1|2} t - 1 for final results, 2 for state polling during game
+ * @param {number[]} matchup - The matchup.
  * @returns {StateResult[]} Array of results for each state
  */
-function A(t) {
+function A(t, matchup = e.matchup ?? [...new Set([e.candidate_id, ...e.opponents_list])]) {
   const gp = PROPS.PARAMS;
   const variance = gp.global_variance;
   const candidateIssueWeight = gp.candidate_issue_weight;
@@ -3701,8 +3702,6 @@ function A(t) {
   const playerAnswers = e.player_answers || [];
   const playerAnswersSet = new Set(playerAnswers);
   const gameType = Number(e.game_type_id);
-
-  const candIdOpponents = [...new Set([e.candidate_id, ...e.opponents_list])];
 
   const stateFieldsByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields]));
   const stateAbbrByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields.abbr]));
@@ -3725,7 +3724,7 @@ function A(t) {
     return m;
   })();
 
-  const candsGAnsScores = candIdOpponents.map((candidate) => {
+  const candsGAnsScores = matchup.map((candidate) => {
     const cumulScores = playerAnswers.reduce((total, answer) => {
       const key = `${answer}|${e.candidate_id}|${candidate}`;
       return total + (asgIndex.get(key) || 0);
@@ -3752,7 +3751,7 @@ function A(t) {
     return m;
   })();
 
-  const candsIssueScores = candIdOpponents.map((candidate) => {
+  const candsIssueScores = matchup.map((candidate) => {
     const arr = issueByCandidate.get(candidate) || [];
     const v = arr.map((item) => ({
       issue: item.fields.issue,
@@ -3852,7 +3851,7 @@ function A(t) {
     return m;
   })();
 
-  const candsStateMults = candIdOpponents.map((candId, idx) => {
+  const candsStateMults = matchup.map((candId, idx) => {
     const arr = csmByCandidate.get(candId) || [];
     const stateMults = arr.map((g) => {
       const rand = randomNormal(g.fields.candidate);
@@ -3876,7 +3875,7 @@ function A(t) {
     return m;
   })();
 
-  candIdOpponents.forEach((cand, idx) => {
+  matchup.forEach((cand, idx) => {
     candsStateMults[idx].state_multipliers.forEach((mult) => {
       const { state } = mult;
 
@@ -3940,7 +3939,7 @@ function A(t) {
   const calcStatePolls = baseStates.map((st) => {
     const { state } = st;
 
-    const finalStatePoll = candIdOpponents.map((candId, r) => {
+    const finalStatePoll = matchup.map((candId, r) => {
       const smValue = smByCandIndex[r].get(state);
       if (smValue == null) {
         return { candidate: candId, result: 0 };
