@@ -3003,9 +3003,9 @@ function overallResultsHtml() {
   }
   const candResults = e.final_overall_results.find((f) => f.candidate === e.candidate_id);
   window.quickstats = [
-    candResults.electoral_votes,
-    (candResults.popular_votes / totalPV) * 100,
-    candResults.popular_votes,
+    candResults?.electoral_votes ?? 0,
+    (candResults?.popular_votes ?? 0 / totalPV) * 100,
+    candResults?.popular_votes ?? 0,
   ]; // format: electoral vote count, popular vote proportion, popular vote vote count
 
   const pickedEnding = endingPicker(e.final_outcome, totalPV, e.final_overall_results, window.quickstats);
