@@ -38946,65 +38946,6 @@ function onGameWindowChanged(mutationList, observer) {
     questionBanner.replaceWith(img);
     }
 
-    function getTooltips(str) {
-    let matches = [];
-
-    tooltipList.forEach((tooltip, index) => {
-
-       let regex = new RegExp(`(?<=\\b|\\s|^|“)${tooltip.searchString}(?=[.,;!?]?\\b|\\s|”|$)`, 'g');
-
-        let match;
-        while ((match = regex.exec(str)) !== null) {
-            matches.push({
-                start: match.index + (match[0].startsWith('“') ? 1 : 0),
-                end: match.index + match[0].length - (match[0].endsWith('”') ? 1 : 0) - (match[2] ? 1 : 0),
-                tooltipIndex: index
-            });
-        }
-    });
-
-    matches.sort((a, b) => a.start - b.start || b.end - b.start - (a.end - a.start));
-
-    for (let i = 0; i < matches.length - 1; ) {
-        if (matches[i + 1].start < matches[i].end) {
-            matches.splice(i + 1, 1);
-        } else {
-            i++;
-        }
-    }
-
-    return matches;
-}
-function applyTooltips(str) {
-    const matches = getTooltips(str);
-    let result = '';
-    let lastIndex = 0;
-
-    matches.forEach(match => {
-        const tooltip = tooltipList[match.tooltipIndex];
-        result += str.slice(lastIndex, match.start);
-        result += `<span class='mytooltip'>${tooltip.searchString}<span class='mytooltiptext'>${tooltip.explanationText}</span></span>`;
-        lastIndex = match.end;
-    });
-
-    result += str.slice(lastIndex);
-    return result;
-}
-
-function applyTooltipsToObject(obj) {
-    for (let key in obj) {
-        if (typeof obj[key] === 'string') {
-            obj[key] = applyTooltips(obj[key]);
-        } else if (typeof obj[key] === 'object') {
-            applyTooltipsToObject(obj[key]);
-        }
-    }
-}
-
-applyTooltipsToObject(campaignTrail_temp.questions_json);
-applyTooltipsToObject(campaignTrail_temp.answers_json);
-applyTooltipsToObject(campaignTrail_temp.answer_feedback_json);
-
 // [JETS_CYOA_CAMPAIGN_DATA_START]
 ;(() => {
     const styleEl = document.createElement("style");
