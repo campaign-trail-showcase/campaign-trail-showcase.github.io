@@ -33397,7 +33397,7 @@ const DYNAMIC_SCENARIOS = {
         },
         21555: {
           desc: "Hm, I’ll quiz him. ‘Governor, what is your plan for Syria?’ Obviously I know he doesn’t have one, so let’s expose his lack of knowledge.",
-          feedback: "Indeed, he doesn’t have one, and it shows. To a few viewers, though, something uncomfortable about watching a sitting President publicly humiliate a clearly outmatched opponent. Although some headlines will mention ‘bullying,’ you don’t really mind losing some of your goodwill here."
+          feedback: "Indeed, he doesn’t have one, and it shows. Not everyone enjoys the spectacle, though. There is something embarrassing about watching the President so thoroughly embarrass a challenger who never stood a chance in the first place. Although some headlines will mention ‘bullying,’ you don’t really mind losing some of your goodwill here."
         },
         21559: {
           desc: "I’ll talk about Bin Laden, it’s a winning issue for me. ‘I authorized the raid, I made the, uh, call. While you were debating geography, I was taking out our enemies.’",
@@ -37717,19 +37717,6 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     return playerReady && ytPlayer && typeof ytPlayer.getPlayerState === 'function';
   }
 
-  function injectYouTubeAPI() {
-	  if (document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) return;
-	  const tag = document.createElement('script');
-	  tag.src = "https://www.youtube.com/iframe_api";
-	  tag.async = true;
-	  const firstScriptTag = document.getElementsByTagName('script')[0];
-	  if (firstScriptTag && firstScriptTag.parentNode) {
-		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-	  } else {
-		document.head.appendChild(tag);
-	  }
-	}
-
   function injectResourceHints() {
     if (document.getElementById('yt-preconnect')) return;
     const hints = ['https://www.youtube.com', 'https://i.ytimg.com', 'https://s.ytimg.com'];
@@ -37958,7 +37945,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
             item._hasClassReflection = false;
 
 			item.addEventListener('click', (e) => {
-				if (isDragging) return;
+				if (dragMoved) return;
 				const index = parseInt(e.currentTarget.dataset.allocatedSongIndex, 10);
 				if (!isNaN(index) && index >= 0 && index !== playlist.currentSongIndex) {
 					playlist.setCurrentSongIndex(index);
@@ -37992,29 +37979,36 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   const POOL_SIZE = 15;
   let poolItems = [];
   const poolAllocation = new Array(POOL_SIZE).fill(-1);
-  const preloadedUrls = new Set();
+  const PRELOAD_URL_CAP = 40;
+  const preloadedUrls = new Map();
+
+  function preloadCoverUrl(url) {
+    if (!url || preloadedUrls.has(url)) return;
+
+    if (preloadedUrls.size >= PRELOAD_URL_CAP) {
+      const oldest = preloadedUrls.keys().next().value;
+      preloadedUrls.delete(oldest);
+    }
+
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = url;
+    preloadedUrls.set(url, img);
+  }
 
   // cover preloader
   function preloadCovers(songs) {
-    if (!songs || !songs.length) return;
+    if (!songs || !songs.length || !playlist) return;
     const preloadRange = 5;
     const currentIdx = playlist.currentSongIndex;
     const start = Math.max(0, currentIdx - preloadRange);
     const end = Math.min(songs.length, currentIdx + preloadRange + 1);
 
-	const load = () => {
-		const frag = document.createDocumentFragment();
-		for (let i = start; i < end; i++) {
-		  const url = songs[i].getCoverLink();
-		  if (preloadedUrls.has(url)) continue;
-
-		  preloadedUrls.add(url);
-		  const link = document.createElement('link');
-		  link.rel = 'preload'; link.as = 'image'; link.href = url; link.fetchPriority = 'low';
-		  frag.appendChild(link);
-		}
-		document.head.appendChild(frag);
-	  };
+    const load = () => {
+      for (let i = start; i < end; i++) {
+        preloadCoverUrl(songs[i].getCoverLink());
+      }
+    };
 
     if (typeof window.requestIdleCallback === 'function') {
       requestIdleCallback(load, { timeout: 1000 });
@@ -38034,17 +38028,15 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     stopRafUpdater();
 
     requestAnimationFrame(() => {
-      if (progressBar) {
-        progressBar.value = 0;
-        progressBar.style.setProperty('--progress-percent', '0%');
-        progressBar.style.setProperty('--buffer-percent', '0%');
-      }
       lastProgress = 0;
+      lastRenderedBuffer = 0;
+      if (progressBar) progressBar.value = 0;
+      updateProgressVisuals(0, 0);
 
       if (currentTimeElement && lastRenderedSecond !== 0) { currentTimeElement.textContent = "0:00"; lastRenderedSecond = 0; }
       if (durationElement && durationElement.textContent !== "--:--") durationElement.textContent = "--:--";
 
-      updateUI();
+      updateUI({ queue: true });
       updateCoverFlow();
     });
 
@@ -38181,12 +38173,18 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
       updateProgressVisuals(p, bufferPercent);
 
-	  const currentSecond = currentTime | 0;
-		if (lastRenderedSecond !== currentSecond) {
-		  if (currentTimeElement) currentTimeElement.textContent = formatTime(currentTime);
-		  if (progressBar && document.activeElement === progressBar) progressBar.setAttribute('aria-valuenow', p.toFixed(2));
-		  lastRenderedSecond = currentSecond;
-		}
+      if (progressBar) {
+        progressBar.value = p;
+        if (document.activeElement === progressBar) {
+          progressBar.setAttribute('aria-valuenow', p.toFixed(2));
+        }
+      }
+
+      const currentSecond = currentTime | 0;
+      if (lastRenderedSecond !== currentSecond) {
+        if (currentTimeElement) currentTimeElement.textContent = formatTime(currentTime);
+        lastRenderedSecond = currentSecond;
+      }
     }
 
     if (isUpdaterRunning) rafId = requestAnimationFrame(rafUpdateProgress);
@@ -38255,7 +38253,9 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       case YT.PlayerState.ENDED:
         stopRafUpdater();
         if (playPauseButton) updatePlayPauseButton(true);
-        if (progressBar) { progressBar.value = 100; progressBar.style.setProperty('--progress-percent', '100%'); }
+        lastProgress = 100;
+        if (progressBar) progressBar.value = 100;
+        updateProgressVisuals(100, lastRenderedBuffer || 100);
         if (currentTimeElement && ytPlayer && typeof ytPlayer.getDuration === 'function') {
           currentTimeElement.textContent = formatTime(ytPlayer.getDuration());
         }
@@ -38278,10 +38278,12 @@ window.tctCityVisits = { ensureVisitOverlayCities };
         break;
       case YT.PlayerState.CUED:
         stopRafUpdater();
-        if (progressBar) { progressBar.value = 0; progressBar.style.setProperty('--progress-percent', '0%'); }
+        lastProgress = 0;
+        if (progressBar) progressBar.value = 0;
+        updateProgressVisuals(0, 0);
         if (currentTimeElement) currentTimeElement.textContent = "0:00";
         updateUI();
-        if (window._musicPlayerAutoplayIntent === true) ytPlayer.playVideo();
+        if (autoplayIntent === true) ytPlayer.playVideo();
         break;
       case YT.PlayerState.UNSTARTED:
         stopRafUpdater();
@@ -38468,24 +38470,30 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     if (!queueListElement || !playlist) return;
 
     if (playlist.isEmpty()) {
-	  const emptyItem = document.createElement('li');
-	  emptyItem.className = `${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty`;
-	  emptyItem.textContent = 'Queue is empty';
-	  queueListElement.replaceChildren(emptyItem);
-      lastQueuePlaylistId = null; lastActiveQueueIndex = -1;
+      const emptyItem = document.createElement('li');
+      emptyItem.className = `${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty`;
+      emptyItem.textContent = 'Queue is empty';
+      queueListElement.replaceChildren(emptyItem);
+      lastQueuePlaylistId = null;
+      lastActiveQueueIndex = -1;
       return;
     }
 
     const songs = playlist.getSongs();
     const currentIndex = playlist.currentSongIndex;
     const playlistId = playlist.id;
+    const queueVisible = queueContainerElement && !queueContainerElement.classList.contains('hidden');
 
     if (lastQueuePlaylistId === playlistId) {
       if (lastActiveQueueIndex !== currentIndex) {
-        if (lastActiveQueueIndex !== -1 && queueItemCache[lastActiveQueueIndex]) queueItemCache[lastActiveQueueIndex].classList.remove('current');
+        if (lastActiveQueueIndex !== -1 && queueItemCache[lastActiveQueueIndex]) {
+          queueItemCache[lastActiveQueueIndex].classList.remove('current');
+        }
         if (queueItemCache[currentIndex]) {
-            queueItemCache[currentIndex].classList.add('current');
+          queueItemCache[currentIndex].classList.add('current');
+          if (queueVisible) {
             queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
         }
         lastActiveQueueIndex = currentIndex;
       }
@@ -38500,10 +38508,10 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     songs.forEach((song, index) => {
       const li = createQueueItem();
-	  const children = li.children;
+      const children = li.children;
       li.title = `${song.getTitle()} — ${song.getArtist()}`;
       li.dataset.index = String(index);
-	  children[0].textContent = song.getTitle();
+      children[0].textContent = song.getTitle();
       children[1].textContent = ` - ${song.getArtist()}`;
 
       if (index === currentIndex) li.classList.add('current');
@@ -38520,7 +38528,9 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     });
 
     queueListElement.replaceChildren(frag);
-    if (queueItemCache[currentIndex]) queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (queueVisible && queueItemCache[currentIndex]) {
+      queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   function updateShuffleButtonUI() {
@@ -38696,7 +38706,12 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 	  });
 	}
 
-  let isDragging = false, startX, dragStartIndex;
+  let isDragging = false;
+  let dragMoved = false;
+  let startX = 0;
+  let dragStartIndex = 0;
+  const DRAG_THRESHOLD_PX = 6;
+
   function bindUIEventListeners() {
     if (!playPauseButton || !nextButtonElement || !prevButtonElement || !repeatButtonElement || !shuffleButtonElement || !progressBar || !volumeIconElement || !volumeSlider || !playlistSelectorElement || !queueToggleButton) return;
 
@@ -38731,7 +38746,9 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     queueToggleButton.addEventListener('click', () => {
       queueContainerElement.classList.toggle('hidden');
-      saveState({ queueVisible: !queueContainerElement.classList.contains('hidden') });
+      const visible = !queueContainerElement.classList.contains('hidden');
+      saveState({ queueVisible: visible });
+      if (visible) updateQueueDisplay();
     });
 
     queueListElement.addEventListener('click', (e) => {
@@ -38743,19 +38760,38 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       loadCurrentSong(true);
     });
 
-    const coverFlowStage = document.getElementById('cover-flow-stage');
-    coverFlowStage.addEventListener('mousedown', (e) => { isDragging = true; startX = e.pageX; dragStartIndex = playlist.currentSongIndex; coverFlowStage.style.cursor = 'grabbing'; });
+        const coverFlowStage = document.getElementById('cover-flow-stage');
+    coverFlowStage.addEventListener('mousedown', (e) => {
+      if (!playlist || playlist.isEmpty()) return;
+      isDragging = true;
+      dragMoved = false;
+      startX = e.pageX;
+      dragStartIndex = playlist.currentSongIndex;
+      coverFlowStage.style.cursor = 'grabbing';
+    });
     const stopDragging = () => {
       if (!isDragging) return;
+      const didMove = dragMoved;
+      const indexChanged = dragStartIndex !== playlist.currentSongIndex;
       isDragging = false;
+      dragMoved = false;
       coverFlowStage.style.cursor = 'grab';
-      if (dragStartIndex === playlist.currentSongIndex) togglePlayPause();
-      else loadCurrentSong(isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING);
+
+      if (!didMove) {
+        if (!indexChanged) togglePlayPause();
+        return;
+      }
+      if (indexChanged) {
+        loadCurrentSong(isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING);
+      }
     };
     coverFlowStage.addEventListener('mouseleave', stopDragging);
     coverFlowStage.addEventListener('mouseup', stopDragging);
     coverFlowStage.addEventListener('mousemove', (e) => {
-      if (!isDragging) return; e.preventDefault();
+      if (!isDragging) return;
+      e.preventDefault();
+      if (!dragMoved && Math.abs(e.pageX - startX) < DRAG_THRESHOLD_PX) return;
+      dragMoved = true;
       const walk = (e.pageX - startX) * -0.005;
       const newIndex = Math.round(dragStartIndex + walk);
       const clampedIndex = Math.max(0, Math.min(playlist.getSongs().length - 1, newIndex));
@@ -38785,18 +38821,33 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     coverFlowStage.addEventListener('touchstart', (e) => {
       if (!playlist || playlist.isEmpty()) return;
       const t = e.touches[0];
-      isDragging = true; startX = t.pageX; dragStartIndex = playlist.currentSongIndex; coverFlowStage.style.cursor = 'grabbing';
+      isDragging = true;
+      dragMoved = false;
+      startX = t.pageX;
+      dragStartIndex = playlist.currentSongIndex;
+      coverFlowStage.style.cursor = 'grabbing';
     }, { passive: true });
     coverFlowStage.addEventListener('touchmove', (e) => {
-      if (!isDragging) return; e.preventDefault();
-      const t = e.touches[0]; const walk = (t.pageX - startX) * -0.005;
+      if (!isDragging) return;
+      e.preventDefault();
+      const t = e.touches[0];
+      if (!dragMoved && Math.abs(t.pageX - startX) < DRAG_THRESHOLD_PX) return;
+      dragMoved = true;
+      const walk = (t.pageX - startX) * -0.005;
       const newIndex = Math.round(dragStartIndex + walk);
       const clampedIndex = Math.max(0, Math.min(playlist.getSongs().length - 1, newIndex));
       scheduleDragRender(clampedIndex);
     }, { passive: false });
     coverFlowStage.addEventListener('touchend', () => {
-      if (!isDragging) return; isDragging = false; coverFlowStage.style.cursor = 'grab';
-      loadCurrentSong(isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING);
+      if (!isDragging) return;
+      const indexChanged = dragStartIndex !== playlist.currentSongIndex;
+      isDragging = false;
+      const didMove = dragMoved;
+      dragMoved = false;
+      coverFlowStage.style.cursor = 'grab';
+      if (didMove && indexChanged) {
+        loadCurrentSong(isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING);
+      }
     });
 
     const progressWrapper = document.getElementById('progress-visual-wrapper');
@@ -38815,16 +38866,15 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 
     progressBar.addEventListener("input", () => {
       if (!isSeeking || !hasUserInitiatedPlayback) return;
-      const percentage = progressBar.value;
+      const percentage = parseFloat(progressBar.value) || 0;
       updateProgressVisuals(percentage);
-      progressBar.style.setProperty('--progress-percent', `${percentage}%`);
       if (isPlayerActive() && currentTimeElement) {
         const duration = cachedDuration || ytPlayer.getDuration();
         if (duration > 0) currentTimeElement.textContent = formatTime((percentage / 100) * duration);
       }
-      progressBar.setAttribute('aria-valuenow', String(progressBar.value));
+      progressBar.setAttribute('aria-valuenow', percentage.toFixed(2));
     });
-
+	
     const applySeekFromProgressBar = () => {
       if (!hasUserInitiatedPlayback) { isSeeking = false; return; }
       if (!isPlayerActive() || typeof ytPlayer.seekTo !== 'function') { isSeeking = false; return; }
@@ -38845,8 +38895,9 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       const rect = progressBar.getBoundingClientRect();
       const x = (e.clientX ?? 0);
       const ratio = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
-      progressBar.value = (ratio * 100).toFixed(2);
-      progressBar.style.setProperty('--progress-percent', `${progressBar.value}%`);
+      const percentage = ratio * 100;
+      progressBar.value = percentage;
+      updateProgressVisuals(percentage);
       applySeekFromProgressBar();
     });
 
@@ -38983,7 +39034,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
                 --progress-fill-bg: #f0f0f0; --slider-thumb-bg: #e0e0e0;
                 --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
                 --transition-speed: 0.5s; --transition-func: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                --buffer-percent: 0%; --volume-fill-bg: rgba(240, 240, 240, 0.45);
+                --volume-fill-bg: rgba(240, 240, 240, 0.45);
             }
             #${PLAYER_ELEMENT_ID} { display: flex; flex-direction: column; background-color: var(--player-bg); width: 100%; height: 450px; overflow: hidden; position: relative; font-family: var(--font-family); border-radius: 0 0 .4em .4em; contain: content; }
 			#cover-flow-stage {
@@ -39130,33 +39181,11 @@ window.tctCityVisits = { ensureVisitOverlayCities };
 				cursor: pointer;
 				width: 100%;
 				outline: none;
-				flex-grow: 1
+				flex-grow: 1;
 				flex-shrink: 1;
 			}
             #nice-music-player input[type="range"]::-webkit-slider-runnable-track { height: 5px; background: var(--slider-track-bg); border-radius: 5px; }
             #nice-music-player input[type="range"]::-moz-range-track { height: 5px; background: var(--slider-track-bg); border-radius: 5px; }
-            #${PROGRESS_BAR_ID}::-webkit-slider-runnable-track {
-                background: linear-gradient(
-                    to right,
-                    var(--progress-fill-bg) 0%,
-                    var(--progress-fill-bg) var(--progress-percent, 0%),
-                    rgba(240,240,240,0.35) var(--progress-percent, 0%),
-                    rgba(240,240,240,0.35) var(--buffer-percent, 0%),
-                    var(--slider-track-bg) var(--buffer-percent, 0%),
-                    var(--slider-track-bg) 100%
-                );
-            }
-            #${PROGRESS_BAR_ID}::-moz-range-track {
-                background: linear-gradient(
-                    to right,
-                    var(--progress-fill-bg) 0%,
-                    var(--progress-fill-bg) var(--progress-percent, 0%),
-                    rgba(240,240,240,0.35) var(--progress-percent, 0%),
-                    rgba(240,240,240,0.35) var(--buffer-percent, 0%),
-                    var(--slider-track-bg) var(--buffer-percent, 0%),
-                    var(--slider-track-bg) 100%
-                );
-            }
             #nice-music-player input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -5px; height: 15px; width: 15px; background-color: var(--slider-thumb-bg); border-radius: 50%; border: none; }
             #nice-music-player input[type="range"]::-moz-range-thumb { height: 15px; width: 15px; background-color: var(--slider-thumb-bg); border-radius: 50%; border: none; }
             #player-bottom-controls { display: flex; align-items: center; justify-content: space-between; width: 100%; order: 2; }
@@ -39254,14 +39283,15 @@ window.tctCityVisits = { ensureVisitOverlayCities };
             .${PLAYER_QUEUE_ITEM_CLASS}.current { background-color: rgba(102, 179, 255, 0.3); font-weight: bold; }
             .player-queue-item-title { color: #eee; } .player-queue-item-artist { color: #999; }
             #${YOUTUBE_PLAYER_DIV_ID} {
-				position: absolute !important;
+				position: fixed !important;
 				top: 0 !important;
-				left: 0 !important;
-				width: 100% !important;
-				height: 100% !important;
+				left: -9999px !important;
+				width: 200px !important;
+				height: 200px !important;
 				opacity: 0 !important;
 				pointer-events: none !important;
 				z-index: -1 !important;
+				overflow: hidden !important;
 			}
 
 			#${FAVORITE_BUTTON_ID} img { width: 22px; height: 22px; }
@@ -39316,9 +39346,19 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   }
 
   function cleanup() {
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-    if (resizeRaf) { cancelAnimationFrame(resizeRaf); resizeRaf = null; }
-    if (ytPlayer?.destroy) ytPlayer.destroy();
+    stopRafUpdater();
+    if (resizeRaf) { cancelAnimationFrame(resizeRaf); resizeRaf = 0; }
+    if (dragRaf) { cancelAnimationFrame(dragRaf); dragRaf = 0; }
+    if (progressBarObserver) {
+      progressBarObserver.disconnect();
+      progressBarObserver = null;
+    }
+    preloadedUrls.clear();
+    if (ytPlayer?.destroy) {
+      try { ytPlayer.destroy(); } catch {}
+      ytPlayer = null;
+    }
+    playerReady = false;
   }
   window.addEventListener('beforeunload', cleanup);
 
@@ -42467,9 +42507,10 @@ const chartEnhancer = new ChartEnhancer();
 
   var oldElectionNight = window.electionNight;
 
-  var timeIncrement = 15; // minutes per tick
+  // configure time increment if desired, defaults to 3 for high-frequency ticks. old was 15
+  var timeIncrement = window.campaignTrail_temp?.en_time_increment ?? 3; // minutes per tick
   var isPaused = false;
-  var tickRate = 1000; // default MS per tick
+  var tickRate = 300; // default MS per tick. old was 1000
 
   var activeStateAbbr = null;
   var stateBiases = {};
@@ -42498,7 +42539,7 @@ const chartEnhancer = new ChartEnhancer();
     // reset simulation vars
     activeStateAbbr = null;
     isPaused = false;
-    tickRate = 1000;
+    tickRate = 300;
     currentTickState = {};
     stateBiases = {};
     stateNextUpdate = {};
@@ -42536,7 +42577,11 @@ const chartEnhancer = new ChartEnhancer();
         biasCandidate: biasCand,
         biasStrength: strength,
         // random reporting curve speed (0.8 = fast start, 1.2 = slow start)
-        reportingSpeed: 0.8 + (Math.random() * 0.4)
+        reportingSpeed: 0.8 + (Math.random() * 0.4),
+        lastDisplayedProgress: 0,
+        stagnationTicks: 0,
+        // jitter the call time by +/- 15 minutes so it's not totally predictable
+        callTimeJitter: Math.floor(Math.random() * 30) - 15
       };
     });
 
@@ -42560,6 +42605,7 @@ const chartEnhancer = new ChartEnhancer();
             <ul id="top_bar_list">
             </ul>
             <p id="progress_text">
+              <span id="sim_clock" style="display: inline; font-weight:bold; color:#555;">--</span><br/>
               0% reporting
               ${evsToWin}
             </p>
@@ -42579,12 +42625,12 @@ const chartEnhancer = new ChartEnhancer();
 
             <label style="font-size: 12px; font-weight:bold;">Speed:</label>
             <select id="speed_selector">
-                <option value="3000">Very Slow</option>
-                <option value="2000">Slow</option>
-                <option value="1500" selected>Default</option>
-                <option value="1000">Vanilla</option>
-                <option value="800">Fast</option>
-                <option value="500">Very Fast</option>
+                <option value="600">Very Slow</option>
+                <option value="400">Slow</option>
+                <option value="300" selected>Default</option>
+                <option value="200">Vanilla</option>
+                <option value="150">Fast</option>
+                <option value="100">Very Fast</option>
                 <option value="0">Instant</option>
             </select>
 			<button id="final_result_button">${footerText}</button>
@@ -42630,7 +42676,9 @@ const chartEnhancer = new ChartEnhancer();
     // pre-calc data
     campaignTrail_temp.final_state_results.forEach((f) => {
       const stateObj = stateMap.get(String(f.state));
-      f.result_time = marginTime(f.result, stateObj.poll_closing_time);
+      const biasData = stateBiases[f.state];
+      let rawCallTime = marginTime(f.result, stateObj.poll_closing_time);
+      f.result_time = Math.max(stateObj.poll_closing_time + 1, rawCallTime + (biasData ? biasData.callTimeJitter : 0));
       f.total_votes_final = f.result.reduce((a, b) => a + b.votes, 0);
 
       let topV = -1;
@@ -42642,6 +42690,8 @@ const chartEnhancer = new ChartEnhancer();
     // interaction handlers
     $("#ok_button").click(() => {
       $("#election_night_overlay, #election_night_window").remove();
+      // initialize clock view on start
+      $("#sim_clock").text(formatClock(time));
       window.results_timeout = setTimeout(loop, 1000);
     });
 
@@ -42670,6 +42720,24 @@ const chartEnhancer = new ChartEnhancer();
       }
     });
 
+    // formats the in-game 'time' integer into a readable clock
+    function formatClock(t) {
+        // default: time=0 is 7:00 PM (19:00). this can be overridden
+        let baseHour = window.campaignTrail_temp?.en_base_hour ?? 19;
+        let currentMinutes = (baseHour * 60) + t;
+
+        while(currentMinutes < 0) currentMinutes += 24 * 60;
+
+        let h = Math.floor(currentMinutes / 60);
+        let m = currentMinutes % 60;
+
+        let ampm = h % 24 >= 12 ? "PM" : "AM";
+        let displayH = h % 12 || 12;
+        let displayM = m.toString().padStart(2, '0');
+
+        return `${displayH}:${displayM} ${ampm} EST`;
+    }
+
     // calc snapshot for a state
     function calculateStateSnapshot(resData, currTime, closeTime, callTime, prevSnapshot) {
       if (currTime < closeTime) {
@@ -42677,13 +42745,23 @@ const chartEnhancer = new ChartEnhancer();
           pk: resData.state,
           isReporting: false,
           isCalled: false,
+          justCalled: false,
+          flashTicks: 0,
           pctReporting: 0,
           votes: resData.result.map(r => ({ ...r, sim_votes: 0 })),
-          leader: null
+          leader: null,
+          marginPercent: 0
         };
       }
 
       const isCalled = (currTime >= callTime);
+      let wasCalledLastTick = prevSnapshot ? prevSnapshot.isCalled : false;
+      let justCalled = isCalled && !wasCalledLastTick;
+
+      // give called states a brief flash time to attract the eye (about 1 second at default speed)
+      let flashTicks = prevSnapshot ? prevSnapshot.flashTicks : 0;
+      if (justCalled) flashTicks = 4;
+      if (flashTicks > 0) flashTicks--;
 
       // reporting %
       // we use a curve so it starts slow and speeds up (or vice versa based on random speed)
@@ -42696,12 +42774,29 @@ const chartEnhancer = new ChartEnhancer();
       if (adjustedProgress > 1) adjustedProgress = 1;
       if (adjustedProgress < 0) adjustedProgress = 0;
 
+      // vote dumping logic
+      // states occasionally stall and don't update their reported progress, then dump a batch
+      if (!isCalled) {
+        if (biasData.stagnationTicks > 0) {
+            biasData.stagnationTicks--;
+            adjustedProgress = biasData.lastDisplayedProgress;
+        } else if (Math.random() < 0.15 && adjustedProgress < 0.95) {
+            // chance to stall for 3-10 ticks (since ticks are fast)
+            biasData.stagnationTicks = Math.floor(Math.random() * 8) + 3;
+            adjustedProgress = biasData.lastDisplayedProgress;
+        } else {
+            biasData.lastDisplayedProgress = adjustedProgress;
+        }
+      } else {
+        biasData.lastDisplayedProgress = 1.0;
+      }
+
       // total votes counted so far
       const totalCounted = Math.floor(resData.total_votes_final * adjustedProgress);
 
       // vote shares with bias
       // if progress is low, bias strength is high. as progress -> 1, bias -> 0
-      let decay = Math.pow(1 - adjustedProgress, 2); // bias falls off quadratically
+      let decay = Math.pow(1 - adjustedProgress, 2);
 
       let simResults = resData.result.map(r => {
         // get actual final percentage
@@ -42761,19 +42856,25 @@ const chartEnhancer = new ChartEnhancer();
       });
 
       // find leader
-      let leader = null;
-      let maxV = -1;
-      finalSimulatedVotes.forEach(r => {
-        if (r.sim_votes > maxV) { maxV = r.sim_votes; leader = r.candidate; }
-      });
+      let sortedByVotes = [...finalSimulatedVotes].sort((a,b) => b.sim_votes - a.sim_votes);
+      let leader = sortedByVotes.length > 0 ? sortedByVotes[0].candidate : null;
+
+      // calculate active margin for map shading
+      let marginPct = 0;
+      if (sortedByVotes.length >= 2 && totalCounted > 0) {
+          marginPct = (sortedByVotes[0].sim_votes - sortedByVotes[1].sim_votes) / totalCounted;
+      }
 
       return {
         pk: resData.state,
         isReporting: true,
         isCalled: isCalled,
+        justCalled: justCalled,
+        flashTicks: flashTicks,
         pctReporting: Math.floor(adjustedProgress * 100),
         votes: finalSimulatedVotes,
         leader: leader,
+        marginPercent: marginPct,
         final_winner: resData.final_winner
       };
     }
@@ -42794,10 +42895,15 @@ const chartEnhancer = new ChartEnhancer();
         const closingTime = stateObj.fields.poll_closing_time;
         content += `<p>Polls close in ${Math.max(0, closingTime - time)} minutes.</p>`;
       } else {
+        let sortedVotes = [...snapshot.votes].sort((a, b) => b.sim_votes - a.sim_votes);
         let statusMsg = `<p>${snapshot.pctReporting}% reporting</p>`;
+
+        // too close to call status
         if (snapshot.isCalled) {
           const w = sortedCands.find(c => c.candidate === snapshot.final_winner);
           statusMsg = `<p style="font-weight:bold;">Projected winner: ${w ? w.last_name : "Unknown"} <span style='color:green'>&#10003;</span></p>`;
+        } else if (snapshot.pctReporting > 85 && snapshot.marginPercent < 0.02) {
+          statusMsg += `<p style="color:#d9534f; font-weight:bold; font-size: 0.9em;">TOO CLOSE TO CALL</p>`;
         } else {
           statusMsg += `<p>Counting...</p>`;
         }
@@ -42806,8 +42912,6 @@ const chartEnhancer = new ChartEnhancer();
         content += `<table style="width:100%; font-size:0.9em; margin-top:5px;">`;
 
         // sort by current simulated votes
-        let sortedVotes = [...snapshot.votes].sort((a, b) => b.sim_votes - a.sim_votes);
-
         sortedVotes.forEach(row => {
           const cand = sortedCands.find(c => c.candidate === row.candidate);
           const col = cand ? cand.color : "#ccc";
@@ -42824,16 +42928,24 @@ const chartEnhancer = new ChartEnhancer();
                  `;
         });
         content += `</table>`;
+
+        // raw margin tracker
+        if (sortedVotes.length > 1 && sortedVotes[0].sim_votes > 0) {
+            let marginVotes = sortedVotes[0].sim_votes - sortedVotes[1].sim_votes;
+            content += `<p style="font-size: 0.8em; font-style: italic; margin-top: 6px;">Lead: +${formatNumbers(marginVotes)} votes</p>`;
+        }
+
         content += `<p style="margin-top:5px; font-size:0.8em; border-top:1px solid #ddd; padding-top:2px;">${stateObj.fields.electoral_votes} Electoral Votes</p>`;
       }
       $("#state_result").html(content);
     }
 
-
-    // main loop
-    let time = 0;
+    // ability to set specific start times (defaults to -60, or 6:00 PM EST)
+    let enStartTime = window.campaignTrail_temp?.en_start_time ?? -60;
+    let time = enStartTime;
     let winnerDeclared = false;
 
+    // main loop
     function loop() {
       if (isPaused) return;
       if (tickRate === 0) time = 10000;
@@ -42851,7 +42963,7 @@ const chartEnhancer = new ChartEnhancer();
         const stateObj = stateMap.get(String(st.state));
         const abbr = stateObj.abbr;
 
-        const snapshot = calculateStateSnapshot(st, time, stateObj.poll_closing_time, st.result_time);
+        const snapshot = calculateStateSnapshot(st, time, stateObj.poll_closing_time, st.result_time, currentTickState[st.state]);
         currentTickState[st.state] = snapshot;
 
         // aggregates
@@ -42868,12 +42980,22 @@ const chartEnhancer = new ChartEnhancer();
 
             const candObj = PROPS.CANDIDATES.get(String(st.final_winner));
             const c = candObj ? candObj.color_hex : "#ccc";
-            mapStyles[abbr] = { fill: c, "fill-opacity": campaignTrail_temp.stateOpacity };
+
+            // flash state brightly if it was just called
+            //if (snapshot.flashTicks > 0) {
+            //    mapStyles[abbr] = { fill: "#ffffff", "fill-opacity": 0.8 };
+            //} else {
+                mapStyles[abbr] = { fill: c, "fill-opacity": campaignTrail_temp.stateOpacity };
+            //}
+
           } else {
             if (snapshot.leader) {
               const candObj = PROPS.CANDIDATES.get(String(snapshot.leader));
               const c = candObj ? candObj.color_hex : "#ccc";
-              mapStyles[abbr] = { fill: c, "fill-opacity": campaignTrail_temp.stateOpacity * 0.6 };
+
+              // dynamic opacity scaling based on margin
+              let dynamicOpacity = Math.min(campaignTrail_temp.stateOpacity, 0.3 + (snapshot.marginPercent * 4.5));
+              mapStyles[abbr] = { fill: c, "fill-opacity": dynamicOpacity };
             } else {
               mapStyles[abbr] = { fill: globalParam.default_map_color_hex, "fill-opacity": campaignTrail_temp.stateOpacity };
             }
@@ -42903,9 +43025,14 @@ const chartEnhancer = new ChartEnhancer();
       if (activeStateAbbr) updateStateSidebar(activeStateAbbr);
 
       // progress
-      let prog = Math.min(100, Math.floor((time / 500) * 100));
+      let maxProgressTime = 560;
+      let prog = Math.max(0, Math.min(100, Math.floor(((time - enStartTime) / maxProgressTime) * 100)));
       if (statesCalled === activeStates.length) prog = 100;
-      $("#progress_text").html(`${prog}% reporting ${evsToWin}`);
+
+      $("#progress_text").html(`
+          <span id="sim_clock" style="display: inline; font-weight:bold; color:#555;">${formatClock(time)}</span><br/>
+          ${prog}% reporting ${evsToWin}
+      `);
 
       // winner check
       if (!winnerDeclared && isGeneral) {
@@ -42935,12 +43062,23 @@ const chartEnhancer = new ChartEnhancer();
 
       // advance
       if (statesCalled < activeStates.length && time < 10000) {
+
+        let currentTickRate = tickRate;
+        // top of the hour linger. if time lands exactly on an hour mark, slow down
+		// the tick rate heavily to process the flood of poll closings
+        if (time >= 0 && time % 60 === 0 && tickRate > 0) {
+            currentTickRate = tickRate * 5;
+        }
+
         window.results_timeout = setTimeout(() => {
           time += timeIncrement;
           loop();
-        }, tickRate);
+        }, currentTickRate);
       } else {
-        $("#progress_text").html(`100% reporting ${evsToWin}`);
+        $("#progress_text").html(`
+          <span id="sim_clock" style="display: inline; font-weight:bold; color:#555;">${formatClock(time)}</span><br/>
+          100% reporting ${evsToWin}
+        `);
         handleFinalResults(10000);
       }
     }
