@@ -43140,6 +43140,22 @@ const PMTILES_URLS = {
 const CD_GEOJSON_BASE = "https://strawberrymaster.github.io/scripts/geojson";
 const CD_VOTES_BASE = "https://strawberrymaster.github.io/scripts/cd_votes_data";
 
+const STATE_PO_TO_FIPS = {
+    "AL":"01","AK":"02","AZ":"04","AR":"05","CA":"06","CO":"08","CT":"09",
+    "DE":"10","DC":"11","FL":"12","GA":"13","HI":"15","ID":"16","IL":"17",
+    "IN":"18","IA":"19","KS":"20","KY":"21","LA":"22","ME":"23","MD":"24",
+    "MA":"25","MI":"26","MN":"27","MS":"28","MO":"29","MT":"30","NE":"31",
+    "NV":"32","NH":"33","NJ":"34","NM":"35","NY":"36","NC":"37","ND":"38",
+    "OH":"39","OK":"40","OR":"41","PA":"42","RI":"44","SC":"45","SD":"46",
+    "TN":"47","TX":"48","UT":"49","VT":"50","VA":"51","WA":"53","WV":"54",
+    "WI":"55","WY":"56"
+};
+
+const STATE_FIPS_TO_PO = {};
+for (const po in STATE_PO_TO_FIPS) {
+    STATE_FIPS_TO_PO[STATE_PO_TO_FIPS[po]] = po;
+}
+
 function getPmTilesUrl(year) {
     return PMTILES_URLS[year] || "https://files.catbox.moe/p5rcjl.gz";
 }
@@ -43152,10 +43168,337 @@ function getCdVotesUrl(year, vintage) {
     return `${CD_VOTES_BASE}/cd_votes_${year}_${vintage}.json`;
 }
 
-// computes district-level results
+function getFeatureCdCode(f) {
+    if (!f || !f.properties) return null;
+    const p = f.properties;
+
+    // check direct standard properties
+    if (p.cd_code) return String(p.cd_code);
+    if (p.CD_CODE) return String(p.CD_CODE);
+    if (p.cd) return String(p.cd);
+
+    // parse and normalize from GEOID (e.g. "0101" or "01001" or "3622")
+    if (p.GEOID) {
+        const geoid = String(p.GEOID);
+        if (geoid.length === 4) {
+            const stFips = geoid.slice(0, 2);
+            const cdNum = geoid.slice(2);
+            const stPo = STATE_FIPS_TO_PO[stFips];
+            if (stPo) return `${stPo}-${cdNum.padStart(2, '0')}`;
+        } else if (geoid.length === 5) {
+            const stFips = geoid.slice(0, 2);
+            const cdNum = geoid.slice(2);
+            const stPo = STATE_FIPS_TO_PO[stFips];
+            if (stPo) return `${stPo}-${String(parseInt(cdNum, 10)).padStart(2, '0')}`;
+        }
+    }
+
+    // parse and normalize from STATEFP + CD field combo
+    if (p.STATEFP) {
+        const stPo = STATE_FIPS_TO_PO[p.STATEFP];
+        const cdNum = p.CD113FP || p.CD114FP || p.CD115FP || p.CD116FP || p.CD117FP || p.CD118FP || p.CD119FP || p.CDFP;
+        if (stPo && cdNum !== undefined) {
+            return `${stPo}-${String(parseInt(cdNum, 10)).padStart(2, '0')}`;
+        }
+    }
+
+    // fallback to parsing numeric Feature ID strings (e.g., "0101" or "101")
+    if (f.id) {
+        const idStr = String(f.id).padStart(4, '0');
+        if (idStr.length === 4) {
+            const stFips = idStr.slice(0, 2);
+            const cdNum = idStr.slice(2);
+            const stPo = STATE_FIPS_TO_PO[stFips];
+            if (stPo) return `${stPo}-${cdNum.padStart(2, '0')}`;
+        }
+    }
+
+    return null;
+}
+
+// helper to approximate geographic center of unprojected geometries
+function getGeographicCentroid(geometry) {
+    let sumX = 0, sumY = 0, count = 0;
+    function processRings(rings) {
+        rings.forEach(ring => {
+            ring.forEach(pt => {
+                if (Array.isArray(pt) && isFinite(pt[0]) && isFinite(pt[1])) {
+                    sumX += pt[0];
+                    sumY += pt[1];
+                    count++;
+                }
+            });
+        });
+    }
+    if (geometry.type === "Polygon") {
+        processRings(geometry.coordinates);
+    } else if (geometry.type === "MultiPolygon") {
+        geometry.coordinates.forEach(poly => processRings(poly));
+    }
+    return count > 0 ? [sumX / count, sumY / count] : null;
+}
+
+// approximate district weights from county shapes and district GeoJSON
+function generateDistrictVotesTable(geojson, usCounties, fipsResults) {
+    if (!geojson || !geojson.features) return {};
+
+    const table = {};
+
+    // group CD features by State PO and normalize IDs
+    const cdsByState = {};
+    geojson.features.forEach(f => {
+        const cdCode = getFeatureCdCode(f);
+        if (!cdCode) return;
+        f.properties.cd_code = cdCode;
+
+        const statePo = cdCode.includes('-') ? cdCode.split('-')[0].toUpperCase() : cdCode.slice(0, 2).toUpperCase();
+        if (!cdsByState[statePo]) cdsByState[statePo] = [];
+        cdsByState[statePo].push(f);
+        table[cdCode] = {};
+    });
+
+    // group counties by State PO
+    const countiesByState = {};
+    usCounties.forEach(c => {
+        const fips = String(c.id || c.fips || "").padStart(5, '0');
+        const res = fipsResults[fips];
+        const statePo = res ? res.state_po : (STATE_FIPS_TO_PO[fips.slice(0, 2)] || "");
+        if (!statePo) return;
+
+        if (!countiesByState[statePo]) countiesByState[statePo] = [];
+        countiesByState[statePo].push(c);
+    });
+
+    // helpers for spatial point-in-polygon
+    function pointInPoly(pt, ring) {
+        let x = pt[0], y = pt[1], inside = false;
+        for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+            let xi = ring[i][0], yi = ring[i][1];
+            let xj = ring[j][0], yj = ring[j][1];
+            let intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+            if (intersect) inside = !inside;
+        }
+        return inside;
+    }
+
+    function pointInGeom(pt, geom) {
+        if (!geom || !geom.coordinates) return false;
+        if (geom.type === "Polygon") {
+            if (!pointInPoly(pt, geom.coordinates[0])) return false;
+            for (let i = 1; i < geom.coordinates.length; i++) {
+                if (pointInPoly(pt, geom.coordinates[i])) return false;
+            }
+            return true;
+        } else if (geom.type === "MultiPolygon") {
+            for (let k = 0; k < geom.coordinates.length; k++) {
+                let poly = geom.coordinates[k];
+                if (pointInPoly(pt, poly[0])) {
+                    let inHole = false;
+                    for (let i = 1; i < poly.length; i++) {
+                        if (pointInPoly(pt, poly[i])) { inHole = true; break; }
+                    }
+                    if (!inHole) return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    // dynamic coordinate system classification
+    const firstGeom = geojson.features[0]?.geometry;
+    let coordinateSystem = "unknown"; // "scaled-screen", "raw-screen", "geographic", "projected-meters"
+    let firstPt = null;
+
+    if (firstGeom && firstGeom.coordinates) {
+        if (firstGeom.type === "Polygon") {
+            firstPt = firstGeom.coordinates[0][0];
+        } else if (firstGeom.type === "MultiPolygon") {
+            firstPt = firstGeom.coordinates[0][0][0];
+        }
+    }
+
+    if (firstPt && Array.isArray(firstPt) && isFinite(firstPt[0])) {
+        const x = firstPt[0];
+        const y = firstPt[1];
+        if (x >= 0 && x <= 12 && y >= 0 && y <= 8) {
+            coordinateSystem = "scaled-screen";
+        } else if (x > 12 && x <= 1000 && y >= 0 && y <= 650) {
+            coordinateSystem = "raw-screen";
+        } else if (x < 0 && x >= -180 && y >= 0 && y <= 90) {
+            coordinateSystem = "geographic";
+        } else {
+            coordinateSystem = "projected-meters";
+        }
+    }
+
+    const proj = coordinateSystem === "geographic" ? d3.geoAlbersUsa().scale(1300).translate([487.5, 305]) : null;
+    const pathGenerator = proj ? d3.geoPath(proj) : d3.geoPath();
+
+    // intersect counties and CDs
+    for (const statePo in cdsByState) {
+        const stateCds = cdsByState[statePo];
+        const stateCounties = countiesByState[statePo] || [];
+
+        if (stateCds.length === 0 || stateCounties.length === 0) continue;
+
+        // single CD state (e.g. At-Large)
+        if (stateCds.length === 1) {
+            const cdCode = stateCds[0].properties.cd_code;
+            stateCounties.forEach(c => {
+                const fips = String(c.id || c.fips || "").padStart(5, '0');
+                table[cdCode][fips] = 1.0;
+            });
+            continue;
+        }
+
+        // calculate CD centroids in screen coordinates
+        stateCds.forEach(f => {
+            if (!f.centroid) {
+                try {
+                    const cent = pathGenerator.centroid(f);
+                    if (cent && isFinite(cent[0]) && isFinite(cent[1])) {
+                        if (coordinateSystem === "scaled-screen") {
+                            // convert back to [0, 975] screen coordinate space
+                            f.centroid = [cent[0] * 100, cent[1] * 100];
+                        } else {
+                            f.centroid = cent;
+                        }
+                    }
+                } catch (err) {
+                    f.centroid = null;
+                }
+
+                // if projection fails, estimate centroid manually
+                if (!f.centroid && f.geometry) {
+                    try {
+                        const geoCent = getGeographicCentroid(f.geometry);
+                        if (geoCent) {
+                            if (coordinateSystem === "geographic" && proj) {
+                                const cent = proj(geoCent);
+                                f.centroid = (cent && isFinite(cent[0]) && isFinite(cent[1])) ? cent : null;
+                            } else if (coordinateSystem === "scaled-screen") {
+                                f.centroid = [geoCent[0] * 100, geoCent[1] * 100];
+                            } else {
+                                f.centroid = geoCent;
+                            }
+                        }
+                    } catch (err) {
+                        f.centroid = null;
+                    }
+                }
+            }
+        });
+
+        // multi-CD state matching
+        stateCounties.forEach(c => {
+            const fips = String(c.id || c.fips || "").padStart(5, '0');
+            let cent = c.centroid;
+            if (!cent && c.geometry) {
+                try {
+                    const pathCent = d3.geoPath().centroid(c);
+                    if (isFinite(pathCent[0]) && isFinite(pathCent[1])) cent = pathCent;
+                } catch (err) {}
+            }
+            if (!cent) return;
+
+            let bbox;
+            try {
+                bbox = d3.geoPath().bounds(c);
+            } catch (err) {
+                bbox = [[cent[0] - 2, cent[1] - 2], [cent[0] + 2, cent[1] + 2]];
+            }
+            let w = (bbox[1][0] - bbox[0][0]) * 0.35 || 2.0;
+            let h = (bbox[1][1] - bbox[0][1]) * 0.35 || 2.0;
+
+            const samplePoints = [
+                cent,
+                [cent[0] - w, cent[1]],
+                [cent[0] + w, cent[1]],
+                [cent[0], cent[1] - h],
+                [cent[0], cent[1] + h],
+                [cent[0] - w, cent[1] - h],
+                [cent[0] + w, cent[1] + h],
+                [cent[0] - w, cent[1] + h],
+                [cent[0] + w, cent[1] - h]
+            ];
+
+            const cdHits = {};
+            let totalHits = 0;
+
+            samplePoints.forEach(pt => {
+                let testPt = pt;
+                if (coordinateSystem === "geographic" && proj) {
+                    try {
+                        testPt = proj.invert(pt);
+                    } catch (err) {
+                        testPt = null;
+                    }
+                } else if (coordinateSystem === "scaled-screen") {
+                    // downscale the county screen points to match the [0, 9.75] space
+                    testPt = [pt[0] / 100, pt[1] / 100];
+                }
+
+                if (!testPt) return;
+
+                for (let i = 0; i < stateCds.length; i++) {
+                    const cdFeat = stateCds[i];
+                    if (pointInGeom(testPt, cdFeat.geometry)) {
+                        const cdCode = cdFeat.properties.cd_code;
+                        cdHits[cdCode] = (cdHits[cdCode] || 0) + 1;
+                        totalHits++;
+                        break;
+                    }
+                }
+            });
+
+            if (totalHits > 0) {
+                for (const cdCode in cdHits) {
+                    table[cdCode][fips] = cdHits[cdCode] / totalHits;
+                }
+            } else {
+                // border-splitting fallback via inverse distance weighting (IDW)
+                const cdDists = [];
+                stateCds.forEach(cdFeat => {
+                    if (cdFeat.centroid) {
+                        const dx = cdFeat.centroid[0] - cent[0];
+                        const dy = cdFeat.centroid[1] - cent[1];
+                        const distSq = dx * dx + dy * dy;
+                        cdDists.push({ cdCode: cdFeat.properties.cd_code, dist: Math.sqrt(distSq) });
+                    }
+                });
+
+                cdDists.sort((a, b) => a.dist - b.dist);
+
+                if (cdDists.length > 0) {
+                    const closest = cdDists[0];
+                    const second = cdDists[1];
+
+                    // if the second closest district is far away, the county is safely inside the closest district
+                    if (!second || (second.dist / Math.max(0.1, closest.dist)) > 2.5) {
+                        table[closest.cdCode][fips] = 1.0;
+                    } else {
+                        // otherwise, the county is split/on the border, so smoothly distribute weights using IDW
+                        const invClosest = 1 / (closest.dist * closest.dist || 0.01);
+                        const invSecond = 1 / (second.dist * second.dist || 0.01);
+                        const sumInv = invClosest + invSecond;
+
+                        table[closest.cdCode][fips] = invClosest / sumInv;
+                        table[second.cdCode][fips] = invSecond / sumInv;
+                    }
+                }
+            }
+        });
+    }
+
+    return table;
+}
+
+// computes district-level results with strict county-level partisan weight normalization
 function computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidatesInGame) {
     const cdMargins = {};
     const cdTotals = {};
+    const countyHistTotals = {}; // pre-pass aggregator for fallback county totals
 
     function parseVotes(obj) {
         if (!obj) return { d: 0, r: 0, o: 0 };
@@ -43171,13 +43514,70 @@ function computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidates
         if (typeof obj === 'object') {
             const d = Number(obj.dem || obj.d || obj.votes_dem || obj.dem_votes || obj.votes_d || 0);
             const r = Number(obj.rep || obj.r || obj.votes_rep || obj.rep_votes || obj.votes_r || 0);
-            const o = Number(obj.other || obj.oth || obj.o || obj.votes_other || obj.other_votes || obj.votes_o || obj.votes_oth || obj.votes_oth || 0);
+            const o = Number(obj.other || obj.oth || obj.o || obj.votes_other || obj.other_votes || obj.votes_o || obj.votes_oth || 0);
             return { d, r, o };
         }
 
         return { d: 0, r: 0, o: 0 };
     }
 
+    // sum up county-level totals from the loaded fallback table
+    const keys = Object.keys(table || {});
+    if (keys.length > 0) {
+        const firstKey = keys[0];
+        const firstVal = table[firstKey];
+
+        if (Array.isArray(firstVal)) {
+            for (const cdCode in table) {
+                const arr = table[cdCode];
+                if (Array.isArray(arr)) {
+                    arr.forEach(piece => {
+                        const fips = String(piece.fips || piece.f || "").replace(/\D/g, '').padStart(5, '0');
+                        const { d, r, o } = parseVotes(piece);
+                        if (!countyHistTotals[fips]) countyHistTotals[fips] = { dem: 0, rep: 0, other: 0 };
+                        countyHistTotals[fips].dem += d;
+                        countyHistTotals[fips].rep += r;
+                        countyHistTotals[fips].other += o;
+                    });
+                }
+            }
+        } else if (typeof firstVal === 'object' && firstVal !== null) {
+            const innerKeys = Object.keys(firstVal);
+            if (innerKeys.length > 0) {
+                const firstInnerKey = innerKeys[0];
+                const isFirstKeyFips = /^(US)?\d{4,5}$/i.test(firstKey);
+                const isInnerKeyFips = /^(US)?\d{4,5}$/i.test(firstInnerKey);
+
+                if (isFirstKeyFips) {
+                    for (const fips in table) {
+                        const cdPieces = table[fips];
+                        const cleanFips = String(fips).replace(/\D/g, '').padStart(5, '0');
+                        for (const cdCode in cdPieces) {
+                            const { d, r, o } = parseVotes(cdPieces[cdCode]);
+                            if (!countyHistTotals[cleanFips]) countyHistTotals[cleanFips] = { dem: 0, rep: 0, other: 0 };
+                            countyHistTotals[cleanFips].dem += d;
+                            countyHistTotals[cleanFips].rep += r;
+                            countyHistTotals[cleanFips].other += o;
+                        }
+                    }
+                } else if (isInnerKeyFips) {
+                    for (const cdCode in table) {
+                        const fipsList = table[cdCode];
+                        for (const fips in fipsList) {
+                            const cleanFips = String(fips).replace(/\D/g, '').padStart(5, '0');
+                            const { d, r, o } = parseVotes(fipsList[fips]);
+                            if (!countyHistTotals[cleanFips]) countyHistTotals[cleanFips] = { dem: 0, rep: 0, other: 0 };
+                            countyHistTotals[cleanFips].dem += d;
+                            countyHistTotals[cleanFips].rep += r;
+                            countyHistTotals[cleanFips].other += o;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // distribute votes using partisan piece weights
     function addPiece(cdCode, fips, pieceData) {
         if (!cdTotals[cdCode]) {
             cdTotals[cdCode] = { dem: 0, rep: 0, other: 0, tp: {} };
@@ -43198,13 +43598,18 @@ function computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidates
             pieceOth = res.curOth * weight;
         } else {
             const { d, r, o } = parseVotes(pieceData);
-            const rD = res.baseDem > 0 ? (res.curDem / res.baseDem) : 1;
-            const rR = res.baseRep > 0 ? (res.curRep / res.baseRep) : 1;
-            const rO = res.baseOth > 0 ? (res.curOth / res.baseOth) : 1;
+            const hist = countyHistTotals[cleanF];
 
-            pieceDem = d * rD;
-            pieceRep = r * rR;
-            pieceOth = o * rO;
+            // convert to partisan segment weight shares relative to the fallback dataset
+            const wD = (hist && hist.dem > 0) ? (d / hist.dem) : 0;
+            const wR = (hist && hist.rep > 0) ? (r / hist.rep) : 0;
+            const wO = (hist && hist.other > 0) ? (o / hist.other) : 0;
+
+            // multiply active game county results by fallback partisan weight shares
+            // falls back to raw ratio scaling if the decade segment total is 0
+            pieceDem = (hist && hist.dem > 0) ? (res.curDem * wD) : (d * (res.baseDem > 0 ? res.curDem / res.baseDem : 1));
+            pieceRep = (hist && hist.rep > 0) ? (res.curRep * wR) : (r * (res.baseRep > 0 ? res.curRep / res.baseRep : 1));
+            pieceOth = (hist && hist.other > 0) ? (res.curOth * wO) : (o * (res.baseOth > 0 ? res.curOth / res.baseOth : 1));
         }
 
         cdTotals[cdCode].dem += pieceDem;
@@ -43221,7 +43626,7 @@ function computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidates
         }
     }
 
-    const keys = Object.keys(table || {});
+    // run distribution loop
     if (keys.length > 0) {
         const firstKey = keys[0];
         const firstVal = table[firstKey];
@@ -43258,6 +43663,7 @@ function computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidates
                         }
                     }
                 } else {
+                    // direct district scaling fallback (for non-breakdown entries)
                     for (const cdCode in table) {
                         const val = table[cdCode];
                         const { d, r, o } = parseVotes(val);
@@ -43536,7 +43942,7 @@ function injectCountyMapInPlace(mode) {
 
     // populate advanced dropdown items if precincts are active for the current year
     const selectorElement = controlsDiv.querySelector("#more_modes_selector");
-    if (selectorElement && parseInt(current, 10) >= 2008) {
+    if (selectorElement) {
         const precinctsOption = document.createElement("option");
         precinctsOption.value = "precinct";
         precinctsOption.textContent = "Precincts";
@@ -43736,7 +44142,7 @@ function countyMapScreenHtml() {
     `;
 
     const moreSelector = document.getElementById("more_modes_selector");
-    if (moreSelector && parseInt(activeY.current, 10) >= 2008) {
+    if (moreSelector) {
         const pr = document.createElement("option");
         pr.value = "precinct";
         pr.textContent = "Precincts";
@@ -43768,11 +44174,25 @@ function countyMapScreenHtml() {
 const _countyMapCache = { current: {}, historical: {}, us: null };
 
 async function loadAndDrawCountyMap(mode) {
+    // restore native Blob constructor
+	// seems funny, but is necessary to get it working on mods like OBN
+	try {
+        new window.Blob([]);
+    } catch (e) {
+        try {
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            window.Blob = iframe.contentWindow.Blob;
+            document.body.removeChild(iframe);
+        } catch (recoveryError) {
+            console.error("Failed to recover native Blob constructor:", recoveryError);
+        }
+    }
+
     const activeYears = getActiveYears();
     CURRENT_YEAR = activeYears.current;
     HISTORICAL_YEAR = activeYears.historical;
-    const curYearInt = parseInt(CURRENT_YEAR, 10);
-    const hasPrecincts = curYearInt >= 2008;
 
     const loadScript = src => new Promise((resolve, reject) => {
         const s = document.createElement("script");
@@ -43787,16 +44207,14 @@ async function loadAndDrawCountyMap(mode) {
     if (!window.d3) scriptsToLoad.push(loadScript("https://cdn.jsdelivr.net/npm/d3@7"));
     if (!window.topojson) scriptsToLoad.push(loadScript("https://cdn.jsdelivr.net/npm/topojson@3.0.2/dist/topojson.min.js"));
 
-    if (hasPrecincts) {
-        if (!window.maplibregl) scriptsToLoad.push(loadScript("https://unpkg.com/maplibre-gl@4.1.3/dist/maplibre-gl.js"));
-        if (!window.pmtiles) scriptsToLoad.push(loadScript("https://unpkg.com/pmtiles@3.0.3/dist/pmtiles.js"));
-        if (!document.getElementById("maplibre_css")) {
-            const link = document.createElement("link");
-            link.id = "maplibre_css";
-            link.rel = "stylesheet";
-            link.href = "https://unpkg.com/maplibre-gl@4.1.3/dist/maplibre-gl.css";
-            document.head.appendChild(link);
-        }
+    if (!window.maplibregl) scriptsToLoad.push(loadScript("https://unpkg.com/maplibre-gl@4.1.3/dist/maplibre-gl.js"));
+    if (!window.pmtiles) scriptsToLoad.push(loadScript("https://unpkg.com/pmtiles@3.0.3/dist/pmtiles.js"));
+    if (!document.getElementById("maplibre_css")) {
+        const link = document.createElement("link");
+        link.id = "maplibre_css";
+        link.rel = "stylesheet";
+        link.href = "https://unpkg.com/maplibre-gl@4.1.3/dist/maplibre-gl.css";
+        document.head.appendChild(link);
     }
 
     if (scriptsToLoad.length > 0) {
@@ -44096,7 +44514,7 @@ async function loadAndDrawCountyMap(mode) {
 
         // map third party candidates to game candidates using their names
         const tpCandidatesInGame = activeCandidates.filter(id => id !== demCandId && id !== repCandId);
-        const tpMapping = {}; // candId -> index in tpCands list
+        const tpMapping = {};
         if (window.MW_SHUFFLER_DATA) {
             const tpc = window.MW_SHUFFLER_DATA.tpCands ? window.MW_SHUFFLER_DATA.tpCands[CURRENT_YEAR] : null;
             if (tpc && Array.isArray(tpc)) {
@@ -45009,7 +45427,7 @@ async function loadAndDrawCountyMap(mode) {
                     mlMap.setZoom(1);
                 }
 
-                // fix race condition: ensure districts render if selected on initial map load
+                // ensure districts render if selected on initial map load
                 if (currentMode === "districts") {
                     if (mlMap.getLayer("precinct-fill")) mlMap.setLayoutProperty("precinct-fill", "visibility", "none");
                     if (mlMap.getLayer("precinct-line")) mlMap.setLayoutProperty("precinct-line", "visibility", "none");
@@ -45100,7 +45518,7 @@ async function loadAndDrawCountyMap(mode) {
 
                 let customText = "";
                 if (countyToCustom[countyFips] && customStates[countyToCustom[countyFips]]) {
-                    const st = customStates[countyToCustom[matchedFips]];
+                    const st = customStates[countyToCustom[countyFips]];
                     customText = `<div style="color:#ffcc00; font-size:13px; margin-top:6px; border-top:1px solid #777; padding-top:4px;"><b>${st.name}</b> (${st.ev} ev)<br><b>net:</b> ${st.winName} ${st.marginText}</div>`;
                 }
 
@@ -45336,68 +45754,112 @@ async function loadAndDrawCountyMap(mode) {
             });
         }
 
+		// decade-level boundary-matched fallback helper
+		function getFallbackVotesUrl(year, vintage) {
+			const v = parseInt(vintage, 10);
+			if (v >= 110 && v <= 112) {
+				// 2000s boundaries (fallback to 2008)
+				return getCdVotesUrl("2008", "111");
+			} else if ((v >= 113 && v <= 117) || vintage === "113" || vintage === "115" || vintage === "117") {
+				// 2010s boundaries (fallback to 2016 or 2020)
+				const y = parseInt(year, 10);
+				if (Math.abs(y - 2020) < Math.abs(y - 2016)) {
+					return getCdVotesUrl("2020", "117");
+				} else {
+					return getCdVotesUrl("2016", "115");
+				}
+			} else {
+				// 2020s boundaries (fallback to 2024)
+				return getCdVotesUrl("2024", "119");
+			}
+		}
+
         async function initDistrictLayer(vintage) {
-            if (!mlMap || !mlMapReady) return;
+			if (!mlMap || !mlMapReady) return;
 
-            const v = vintage || document.getElementById("cd_vintage_selector")?.value || "2026";
+			const v = vintage || document.getElementById("cd_vintage_selector")?.value || "2026";
 
-            if (cdCurrentVintage === v && mlMap.getSource("districts-source")) {
-                recolorDistricts(v, cdVotesTableCache[v]);
-                return;
-            }
+			if (cdCurrentVintage === v && mlMap.getSource("districts-source")) {
+				recolorDistricts(v, cdVotesTableCache[v]);
+				return;
+			}
 
-            removeDistrictLayer();
+			removeDistrictLayer();
 
-            try {
-                const [geojson, votesTable] = await Promise.all([
-                    fetch(getCdGeojsonUrl(v)).then(r => r.json()),
-                    fetch(getCdVotesUrl(CURRENT_YEAR, v)).then(r => {
-                        if (!r.ok) throw new Error("Votes file 404");
-                        return r.json();
-                    }).catch(() => {
-                        console.warn(`Votes file fallback activated for CD-vintage: ${v}`);
-                        return {};
-                    })
-                ]);
+			try {
+				let geojson, votesTable;
 
-                if (!geojson) return;
+				// attempt to fetch exact year/vintage CD votes file
+				try {
+					[geojson, votesTable] = await Promise.all([
+						fetch(getCdGeojsonUrl(v)).then(r => r.json()),
+						fetch(getCdVotesUrl(CURRENT_YEAR, v)).then(r => {
+							if (!r.ok) throw new Error("Votes file 404");
+							return r.json();
+						})
+					]);
+				} catch (firstErr) {
+					// fetch boundary-matched decade fallback blueprint to retain non-homogeneous splits
+					console.warn(`Votes file 404 for ${CURRENT_YEAR} vintage ${v}. Retrying decade-level fallback...`);
+					const fallbackUrl = getFallbackVotesUrl(CURRENT_YEAR, v);
 
-                mlMap.addSource("districts-source", {
-                    type: "geojson",
-                    data: geojson,
-                    promoteId: "cd_code"
-                });
+					[geojson, votesTable] = await Promise.all([
+						fetch(getCdGeojsonUrl(v)).then(r => r.json()),
+						fetch(fallbackUrl).then(r => {
+							if (!r.ok) throw new Error("Fallback votes file 404");
+							return r.json();
+						}).catch(() => {
+							// fallback to empty if even decade blueprint is unreachable
+							return {};
+						})
+					]);
+				}
 
-                const beforeId = mlMap.getLayer("county-line") ? "county-line" : (mlMap.getLayer("precinct-line") ? "precinct-line" : undefined);
+				if (!geojson) return;
 
-                mlMap.addLayer({
-                    id: "cd-fill",
-                    type: "fill",
-                    source: "districts-source",
-                    paint: {
-                        "fill-color": "#e5e5e8",
-                        "fill-opacity": 1
-                    }
-                }, beforeId);
+				// fallback to spatial overlapping weights if no blueprints are available at all
+				let finalVotesTable = votesTable || {};
+				if (!finalVotesTable || Object.keys(finalVotesTable).length === 0) {
+					console.log(`Generating dynamic spatial district weights from county shapes for ${CURRENT_YEAR} / vintage ${v}...`);
+					finalVotesTable = generateDistrictVotesTable(geojson, usCounties, fipsResults);
+				}
 
-                mlMap.addLayer({
-                    id: "cd-line",
-                    type: "line",
-                    source: "districts-source",
-                    paint: {
-                        "line-color": "#ffffff",
-                        "line-width": 0.8
-                    }
-                });
+				mlMap.addSource("districts-source", {
+					type: "geojson",
+					data: geojson,
+					promoteId: "cd_code"
+				});
 
-                cdCurrentVintage = v;
-                cdVotesTableCache[v] = votesTable;
-                recolorDistricts(v, votesTable);
+				const beforeId = mlMap.getLayer("county-line") ? "county-line" : (mlMap.getLayer("precinct-line") ? "precinct-line" : undefined);
 
-            } catch (err) {
-                console.error("Error drawing districts:", err);
-            }
-        }
+				mlMap.addLayer({
+					id: "cd-fill",
+					type: "fill",
+					source: "districts-source",
+					paint: {
+						"fill-color": "#e5e5e8",
+						"fill-opacity": 1
+					}
+				}, beforeId);
+
+				mlMap.addLayer({
+					id: "cd-line",
+					type: "line",
+					source: "districts-source",
+					paint: {
+						"line-color": "#ffffff",
+						"line-width": 0.8
+					}
+				});
+
+				cdCurrentVintage = v;
+				cdVotesTableCache[v] = finalVotesTable;
+				recolorDistricts(v, finalVotesTable);
+
+			} catch (err) {
+				console.error("Error drawing districts:", err);
+			}
+		}
 
         function removeDistrictLayer() {
             if (!mlMap) return;
@@ -45409,25 +45871,31 @@ async function loadAndDrawCountyMap(mode) {
         }
 
         function recolorDistricts(vintage, votesTable) {
-            if (!mlMap || !mlMapReady || !mlMap.getLayer("cd-fill")) return;
+			if (!mlMap || !mlMapReady || !mlMap.getLayer("cd-fill")) return;
 
-            const table = votesTable || {};
-            const cdMargins = computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidatesInGame);
-            currentDistrictMargins = cdMargins;
+			const table = votesTable || {};
+			const cdMargins = computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidatesInGame);
+			currentDistrictMargins = cdMargins;
 
-            // a fast-path GPU match-expression pretty much
-            const colorMatchExpression = ["match", ["get", "cd_code"]];
+			// if empty, set default color
+			const keys = Object.keys(cdMargins);
+			if (keys.length === 0) {
+				mlMap.setPaintProperty("cd-fill", "fill-color", "#e5e5e8");
+				return;
+			}
 
-            for (const cdCode in cdMargins) {
-                const m = cdMargins[cdCode];
-                const winningId = m.margin >= 0 ? demCandId : repCandId;
-                const color = colorInterpolators[winningId] ? colorInterpolators[winningId](Math.sqrt(Math.abs(m.margin))) : "#888888";
-                colorMatchExpression.push(cdCode, color);
-            }
+			const colorMatchExpression = ["match", ["get", "cd_code"]];
 
-            colorMatchExpression.push("#e5e5e8"); // fallback
-            mlMap.setPaintProperty("cd-fill", "fill-color", colorMatchExpression);
-        }
+			for (const cdCode in cdMargins) {
+				const m = cdMargins[cdCode];
+				const winningId = m.margin >= 0 ? demCandId : repCandId;
+				const color = colorInterpolators[winningId] ? colorInterpolators[winningId](Math.sqrt(Math.abs(m.margin))) : "#888888";
+				colorMatchExpression.push(cdCode, color);
+			}
+
+			colorMatchExpression.push("#e5e5e8"); // fallback
+			mlMap.setPaintProperty("cd-fill", "fill-color", colorMatchExpression);
+		}
 
         function setMapMode(uiMode) {
             currentMode = uiMode;
