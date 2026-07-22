@@ -25650,7 +25650,7 @@ const TIMELINE_ASSETS = {
     "Constitution": "#a356de",
     "Independent": "#DCDCDC",
     "Unity": "#FFD700",
-	"No Labels": "#775eb2"
+    "No Labels": "#775eb2"
   },
   candidates: {
     // Democrats
@@ -25710,7 +25710,7 @@ const TIMELINE_ASSETS = {
     "Jeb Bush": { party: "Republican", img: "https://stateimpact.npr.org/florida/files/2014/04/4-3-JebBush.jpg" },
     "Carly Fiorina": { party: "Republican", img: "https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt16f70888b1e507ff/69876d7ee20a8777eea83df1/carly-fiorina.jpg?branch=production" },
     "Herman Cain": { party: "Republican", img: "https://www.pbs.org/newshour/app/uploads/2014/12/129043537-1024x679.jpg" },
-	"Allen West": { party: "Republican", img: "https://www.focusonthefamily.com/wp-content/uploads/2022/05/lt-col-allen-west-headshot.jpg" },
+    "Allen West": { party: "Republican", img: "https://www.focusonthefamily.com/wp-content/uploads/2022/05/lt-col-allen-west-headshot.jpg" },
     "Rob Portman": { party: "Republican", img: "https://radio.foxnews.com/wp-content/uploads/2013/03/3-15-portman.jpg" },
     "Mike Huckabee": { party: "Republican", img: "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iRr0QA6nQ6VQ/v2/-1x-1.webp" },
     "Lew Rockwell": { party: "Republican", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Lew_Rockwell_2016.jpg/250px-Lew_Rockwell_2016.jpg" },
@@ -25783,8 +25783,8 @@ window.get2016DemNominee = function (obamaVP, playerEV, liberalismScore, usedVPs
       { nominee: "Elizabeth Warren", vp: "Sherrod Brown" }
     ];
     const eligibleTickets = progressiveTickets.filter(t => !usedVPs.has(t.vp));
-    return eligibleTickets.length > 0 
-      ? eligibleTickets[Math.floor(Math.random() * eligibleTickets.length)] 
+    return eligibleTickets.length > 0
+      ? eligibleTickets[Math.floor(Math.random() * eligibleTickets.length)]
       : progressiveTickets[0];
   }
 
@@ -25848,8 +25848,8 @@ function get2016DemVP(nominee, liberalismScore, usedVPs = new Set()) {
   };
 
   const options = vpOptions[nominee] || ["Tim Kaine"];
-  const eligible = options.filter(vp => !usedVPs.has(vp));
-  const finalOptions = eligible.length > 0 ? eligible : options;
+  const eligible = options.filter(vp => vp !== nominee && !usedVPs.has(vp));
+  const finalOptions = eligible.length > 0 ? eligible : options.filter(vp => vp !== nominee);
 
   if (liberalismScore >= 3) return finalOptions[0];
   if (liberalismScore <= -1) return finalOptions[finalOptions.length - 1];
@@ -25872,8 +25872,8 @@ function get2020DemVP(nominee, liberalismScore, confrontationScore, usedVPs = ne
   };
 
   const options = pool[nominee] || ["Kamala Harris", "Pete Buttigieg", "Gretchen Whitmer"];
-  const eligible = options.filter(vp => !usedVPs.has(vp));
-  return eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : options[0];
+  const eligible = options.filter(vp => vp !== nominee && !usedVPs.has(vp));
+  return eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : options.filter(vp => vp !== nominee)[0] || "Kamala Harris";
 }
 
 function get2020RepVP(nominee, liberalismScore, confrontationScore, usedVPs = new Set()) {
@@ -25888,8 +25888,8 @@ function get2020RepVP(nominee, liberalismScore, confrontationScore, usedVPs = ne
   };
 
   const options = pool[nominee] || ["Nikki Haley", "Tim Scott", "Paul Ryan"];
-  const eligible = options.filter(vp => !usedVPs.has(vp));
-  return eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : options[0];
+  const eligible = options.filter(vp => vp !== nominee && !usedVPs.has(vp));
+  return eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : options.filter(vp => vp !== nominee)[0] || "Nikki Haley";
 }
 
 // 2024 VP selectors
@@ -25908,8 +25908,8 @@ function get2024DemVP(nominee, liberalismScore, confrontationScore, usedVPs = ne
   };
 
   const options = pool[nominee] || ["Gretchen Whitmer", "Pete Buttigieg", "Roy Cooper"];
-  const eligible = options.filter(vp => !usedVPs.has(vp));
-  return eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : options[0];
+  const eligible = options.filter(vp => vp !== nominee && !usedVPs.has(vp));
+  return eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : options.filter(vp => vp !== nominee)[0] || "Gretchen Whitmer";
 }
 
 function get2024RepVP(nominee, liberalismScore, confrontationScore, usedVPs = new Set()) {
@@ -25926,8 +25926,8 @@ function get2024RepVP(nominee, liberalismScore, confrontationScore, usedVPs = ne
   };
 
   const options = pool[nominee] || ["JD Vance", "Tim Scott", "Nikki Haley"];
-  const eligible = options.filter(vp => !usedVPs.has(vp));
-  return eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : options[0];
+  const eligible = options.filter(vp => vp !== nominee && !usedVPs.has(vp));
+  return eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : options.filter(vp => vp !== nominee)[0] || "JD Vance";
 }
 
 function getRightThirdPartyVP(nominee, lib, con, usedVPs = new Set()) {
@@ -25941,7 +25941,7 @@ function getRightThirdPartyVP(nominee, lib, con, usedVPs = new Set()) {
     "Virgil Goode": ["Bill Weld", "Penn Jillette"]
   };
   const choices = vpMap[nominee] || ["Howard Stern"];
-  const eligible = choices.filter(vp => !usedVPs.has(vp));
+  const eligible = choices.filter(vp => vp !== nominee && !usedVPs.has(vp));
   return eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : choices[0];
 }
 
@@ -25954,7 +25954,7 @@ function getLeftThirdPartyVP(nominee, lib, con, usedVPs = new Set()) {
     "Soleil Moon Frye": "Jill Stein"
   };
   const choice = fallback[nominee] || "Jill Stein";
-  return usedVPs.has(choice) ? "Jill Stein" : choice;
+  return usedVPs.has(choice) || choice === nominee ? "Jill Stein" : choice;
 }
 
 // timeline generator
@@ -26052,7 +26052,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   let winner16, vp16;
   let prevPres = rawTimeline[rawTimeline.length - 1];
 
-  // if Obama won
+  // if Obama won 2012
   if (prevPres.name === "Barack Obama") {
     // get Dem nominee
     const demResult = window.get2016DemNominee(obamaVP, playerEV, lib, usedVPs);
@@ -26119,7 +26119,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
       winner16 = demNominee; vp16 = demVP;
     }
   }
-  // if Rep/3rd party win in 2012
+  // if Rep/3rd party won in 2012
   else {
     let currentParty = TIMELINE_ASSETS.candidates[prevPres.name]?.party || "Independent";
     let incumbentWeak = (playerEV > 240); // if narrow loss, mandate is weak
@@ -26128,24 +26128,25 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
       if (incumbentWeak || wall <= -4 || !isEligible(prevPres.name)) {
         // incumbent loses or is term-limited
         if (lib >= 3 || hasSelectedAnswer(242)) {
-          winner16 = "Bernie Sanders"; 
+          winner16 = "Bernie Sanders";
           vp16 = get2016DemVP(winner16, lib, usedVPs);
         } else {
-          winner16 = "Hillary Clinton"; 
+          winner16 = "Hillary Clinton";
           vp16 = get2016DemVP(winner16, lib, usedVPs);
         }
 
         if (mynutmegphantasy > 0 && Math.random() > 0.85) {
-            winner16 = "Michelle Obama"; 
+            winner16 = "Michelle Obama";
             vp16 = get2016DemVP(winner16, lib, usedVPs);
         }
       } else {
         // re-elected
-        winner16 = winner12; vp16 = vp12;
+        winner16 = winner12;
+        vp16 = vp12;
       }
     } else {
       // 3rd/4th party incumbent crashes and burns
-      winner16 = "Hillary Clinton"; 
+      winner16 = "Hillary Clinton";
       vp16 = get2016DemVP(winner16, lib, usedVPs);
     }
   }
@@ -26181,36 +26182,42 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
 
     if (winner16 === "Donald Trump" && con >= 6) {
       if (reasonRoll < 0.45) {
-        last.reason = "Resigned";                  
+        last.reason = "Resigned";
       } else if (reasonRoll < 0.90) {
-        last.reason = "Impeached and removed";     
+        last.reason = "Impeached and removed";
       } else {
-        last.reason = "Died in office";            
+        last.reason = "Died in office";
       }
     } else {
       if (reasonRoll < 0.60) {
-        last.reason = "Resigned";                  
+        last.reason = "Resigned";
       } else if (reasonRoll < 0.95) {
-        last.reason = "Impeached and removed";     
+        last.reason = "Impeached and removed";
       } else {
-        last.reason = "Died in office";            
+        last.reason = "Died in office";
       }
     }
 
-    // disqualify original president because they resigned/died
+    // disqualify impeached/deceased former President and current VP taking over
     disqualified.add(last.name);
 
-    // VP takes over
     if (TIMELINE_ASSETS.candidates[last.vp]) {
       const takeoverPres = last.vp;
       const party = TIMELINE_ASSETS.candidates[takeoverPres]?.party || "Democratic";
 
+      // mark both former pres and takeover pres as used to prevent self-appointment
+      usedVPs.add(takeoverPres);
+      usedVPs.add(last.name);
+
       let assignedVP = "Vacant";
       if (party === "Democratic") {
-        assignedVP = get2016DemVP(takeoverPres, lib, usedVPs);
+        const demPool = ["Tim Kaine", "Cory Booker", "Sherrod Brown", "Kamala Harris", "Amy Klobuchar", "Gretchen Whitmer", "Roy Cooper", "Pete Buttigieg", "Julian Castro", "Mark Warner", "Evan Bayh"];
+        const eligibleDem = demPool.filter(v => v !== takeoverPres && v !== last.name && !usedVPs.has(v));
+        assignedVP = eligibleDem.length > 0 ? eligibleDem[Math.floor(Math.random() * eligibleDem.length)] : "Sherrod Brown";
       } else {
-        assignedVP = (typeof getRepublicanVP === 'function') ? getRepublicanVP(takeoverPres, lib, con) : "Paul Ryan";
-        if (usedVPs.has(assignedVP)) assignedVP = "Tim Scott";
+        const gopPool = ["Mike Pence", "Nikki Haley", "Tim Scott", "Marco Rubio", "Paul Ryan", "JD Vance", "Kristi Noem", "Rob Portman"];
+        const eligibleGop = gopPool.filter(v => v !== takeoverPres && v !== last.name && !usedVPs.has(v));
+        assignedVP = eligibleGop.length > 0 ? eligibleGop[Math.floor(Math.random() * eligibleGop.length)] : "Tim Scott";
       }
 
       // new VP under the 25th Amendment
@@ -26258,12 +26265,14 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   else {
     if (prevParty === "Republican") {
       if (bip > 2 && prevPres.start === 2017 && incumbentCanRun) {
-        winner20 = prevPres.name; vp20 = prevPres.vp;
+
+        winner20 = prevPres.name;
+        vp20 = prevPres.vp;
       } else {
         // Romney is term-limited here if he served 2013-2021
         if (prevPres.name === winner12 && incumbentCanRun) {
           winner20 = prevPres.name;
-          vp20 = get2020RepVP(winner20, lib, con, usedVPs);
+          vp20 = prevPres.vp;
         } else {
           winner20 = "Joe Biden";
           if (lib > 4) { winner20 = "Elizabeth Warren"; }
@@ -26295,7 +26304,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
       } else {
         if (incumbentCanRun) {
           winner20 = prevPres.name;
-          vp20 = get2020DemVP(winner20, lib, con, usedVPs);
+          vp20 = prevPres.vp;
         } else {
           winner20 = "Joe Biden";
           if (!isEligible(winner20)) { winner20 = "Kamala Harris"; }
@@ -26322,6 +26331,11 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   // if incumbent served < 1 full term (VP takeover), they run again (if eligible)
   if (prevPres.start > 2021 && incumbentCanRun) {
     winner24 = prevPres.name;
+    vp24 = prevPres.vp; // keep VP
+  } else if (incumbentCanRun && Math.random() > 0.45) {
+    // standard re-election check
+    winner24 = prevPres.name;
+    vp24 = prevPres.vp; // keep VP
   } else {
     // flip
     if (currentParty === "Democratic") {
@@ -26369,20 +26383,22 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   if (window.cheatsActive && isEligible("Jimmy Carter")) winner24 = "Jimmy Carter";
 
   // 2024 VP selection
-  let party24 = TIMELINE_ASSETS.candidates[winner24]?.party || "Independent";
+  if (!vp24) {
+    let party24 = TIMELINE_ASSETS.candidates[winner24]?.party || "Independent";
 
-  if (winner24 === "Jimmy Carter") {
-    vp24 = "Gary Hart";
-  } else if (winner24 === "Jimmy Fallon" || winner24 === "Kanye West") {
-    vp24 = "Elon Musk";
-  } else if (winner24 === "David Letterman" || winner24 === "Jon Stewart") {
-    vp24 = winner24 === "Jon Stewart" ? "David Letterman" : "Jon Stewart";
-  } else if (party24 === "Republican") {
-    vp24 = get2024RepVP(winner24, lib, con, usedVPs);
-  } else if (party24 === "Democratic") {
-    vp24 = get2024DemVP(winner24, lib, con, usedVPs);
-  } else {
-    vp24 = "Howard Stern";
+    if (winner24 === "Jimmy Carter") {
+      vp24 = "Gary Hart";
+    } else if (winner24 === "Jimmy Fallon" || winner24 === "Kanye West") {
+      vp24 = "Elon Musk";
+    } else if (winner24 === "David Letterman" || winner24 === "Jon Stewart") {
+      vp24 = winner24 === "Jon Stewart" ? "David Letterman" : "Jon Stewart";
+    } else if (party24 === "Republican") {
+      vp24 = get2024RepVP(winner24, lib, con, usedVPs);
+    } else if (party24 === "Democratic") {
+      vp24 = get2024DemVP(winner24, lib, con, usedVPs);
+    } else {
+      vp24 = "Howard Stern";
+    }
   }
 
   rawTimeline.push({ name: winner24, start: 2025, end: "Incumbent", vp: vp24 });
@@ -26439,48 +26455,6 @@ function mergeTimelineData(rawTimeline) {
   return merged;
 }
 
-function generatePresidentRow(number, name, image, startStr, endStr, party, electionHtml, vp, reason) {
-  const color = TIMELINE_ASSETS.colors[party] || "#cccccc";
-
-  let termDisplay = `<span>${startStr}</span><br>–<br><span>${endStr}</span>`;
-  if (reason) {
-    termDisplay += `<br><span style="font-size:85%;"><i>${reason}</i></span>`;
-  }
-
-  let vpDisplay = vp;
-  if (vp !== "Vacant" && vp !== "TBD" && !vp.includes("<i") && !vp.includes("<a")) {
-      vpDisplay = `<a href="#" style="color:#0645AD; text-decoration: none;">${vp}</a>`;
-  } else if (vp === "Vacant") {
-      vpDisplay = `<i style="color:gray;">Vacant</i>`;
-  } else if (vp === "TBD") {
-      vpDisplay = `<i>TBD</i>`;
-  }
-
-  return `
-    <tr>
-      <th scope="row" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #f8f9fa;">${number}</th>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-        <img src="${image}" alt="${name}" style="width:100px; height:140px; object-fit: cover;">
-      </td>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-        <b><a href="#" style="color:#0645AD; text-decoration: none;" title="${name}">${name}</a></b>
-      </td>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-        ${termDisplay}
-      </td>
-      <td style="width: 8px; padding: 2px; border: 1px solid #a2a9b1; background-color: ${color};"></td>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-        <a href="#" style="color:#0645AD; text-decoration: none;">${party}</a>
-      </td>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-        ${electionHtml}
-      </td>
-      <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff;">
-        ${vpDisplay}
-      </td>
-    </tr>`;
-}
-
 function generateTimelineHTML(timelineData) {
   // dubya
   let formattedTimeline = [
@@ -26524,7 +26498,6 @@ function generateTimelineHTML(timelineData) {
       }
     }
 
-    // prioritize properties set directly on the timeline object 'p'
     const partyName = p.party || data.party;
     const imgSrc = p.img || data.img;
 
@@ -26539,7 +26512,7 @@ function generateTimelineHTML(timelineData) {
 
     const numTerms = p.terms.length;
 
-    // calculate dynamic rowspans for the VP column to avoid split cells if VPs match
+    // calculate dynamic rowspans for the VP column if VPs match
     for (let i = 0; i < numTerms; i++) {
       if (p.terms[i].skipVP) continue;
 
@@ -26552,6 +26525,8 @@ function generateTimelineHTML(timelineData) {
     }
 
     // render each term row
+    const trRowStyle = numTerms > 1 ? `style="height: 50%;"` : ``;
+
     p.terms.forEach((term, tIdx) => {
       let vpDisplay = "";
 
@@ -26579,7 +26554,7 @@ function generateTimelineHTML(timelineData) {
 
       if (tIdx === 0) {
         rowsHtml += `
-          <tr>
+          <tr ${trRowStyle}>
             <th scope="row" rowspan="${numTerms}" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #f8f9fa; vertical-align: middle;">${presNum}</th>
             <td rowspan="${numTerms}" style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle;">
               <img src="${imgSrc}" alt="${p.name}" style="width:100px; height:140px; object-fit: cover;">
@@ -26601,7 +26576,7 @@ function generateTimelineHTML(timelineData) {
           </tr>`;
       } else {
         rowsHtml += `
-          <tr>
+          <tr ${trRowStyle}>
             <td style="padding: 8px; border: 1px solid #a2a9b1; background-color: #fff; vertical-align: middle;">
               ${electionDisplay}
             </td>
@@ -38874,7 +38849,7 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       }
       progressBar.setAttribute('aria-valuenow', percentage.toFixed(2));
     });
-	
+
     const applySeekFromProgressBar = () => {
       if (!hasUserInitiatedPlayback) { isSeeking = false; return; }
       if (!isPlayerActive() || typeof ytPlayer.seekTo !== 'function') { isSeeking = false; return; }
