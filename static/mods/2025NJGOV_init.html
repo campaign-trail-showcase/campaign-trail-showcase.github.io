@@ -1,0 +1,366 @@
+campaignTrail_temp.modBoxTheme = {
+     "header_image_url": "https://file.garden/agX089whTUPrNnBb/sdohiueguo8iwe.png",
+     "header_color": "#e4e4e4",
+     "header_text_color": "#ffb900",
+     "description_text_color": "#000000",
+     "description_background_color": "#ffffff",
+     "main_color": "#e4e4e4",
+     "secondary_color": "#6594df",
+	 "secondary_hover": "#698cc4",
+     "ui_text_color": "#FFFFFF"
+}
+
+// vp switcher
+// credit Decstar
+
+if (!e.done) {
+e.done = true;
+
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2025,
+            "display_year": "2025NJGOV",
+            "summary": "New Jersey is becoming home to one of the most watched races in the country. Just under a year into the 2nd term of Donald Trump, this election has taken on importance as a measure of if the coalition that brought the GOP within 6% of winning the state can stick together. Former Republican nominee from 2021, Jack Ciattarelli, seeks an upset against congresswoman Mikie Sherill.<br><br>Polling seems to show a tight race, leading Democrats to see it as a must-hold. Republicans for their part view this as a serious potential pickup. The decision of the state's voters will set the vibe heading into next years midterm elections, with the results either confirming the president's mandate or marking the start of an electoral counteroffensive.",
+            "image_url": "https://file.garden/agX089whTUPrNnBb/uhsyjuihyw.png",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://file.garden/agX089whTUPrNnBb/dsjuiersgiu.gif",
+            "recommended_reading": "",
+            "recommended_reading_enabled": false,
+            "has_visits": 1,
+            "no_electoral_majority_image": ""
+        }
+    }
+];
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2025,
+        "is_premium": 0,
+        "display_year": "2025NJGOV"
+    }
+];
+
+RecReading = false;
+
+campaignTrail_temp.credits = "enlcwd & shyspyro";
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.015,
+            "state_variance": 0.005,
+            "question_count": 19,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#BFBFBF"
+        }
+    }
+];
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1001,
+        "fields": {
+            "first_name": "Mikie",
+            "last_name": "Sherrill",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Essex",
+            "priority": 1,
+            "description": "<p>Mikie Sherill's political career began in 2018 with her election to the U.S House of Representatives, where she flipped New Jersey's 11th district controlled by Republicans since 1985. Winning over a crowded primary field she seeks to succeed the term limited Phil Murphy, hoping to use her credibility with moderate and suburban voters plus the reversing popularity of the GOP to become the state's second ever female governor.<br><br>She has been criticized by her left flank for lack of a bold progressive platform, and will need to thread the needle to balance appeals to independent voters while also turning out the Democratic base in the state's urban centers. </p>",
+            "color_hex": "#001E78",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://file.garden/agX089whTUPrNnBb/fgdjspoijpios.png",
+            "electoral_victory_message": "DEMWIN",
+            "electoral_loss_message": "DEMLOSE",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1002,
+        "fields": {
+            "first_name": "Jack",
+            "last_name": "Ciattarelli",
+            "election": 20,
+            "party": "Republican",
+            "state": "Somerset",
+            "priority": 1,
+            "description": "Jack Ciattarelli is a businessman and state politician who ran for governor back in 2021 against Chris Murphy. While he previously was a critic of Donald Trump he has come to stand in line with the national party, endorsing the president's 2024 bid for president and in turn receiving a path to victory with his endorsement in this year's primary election.<br><br>Ciattarelli faces the challenge of running as a Republican in a blue state, aiming to use New Jersey's independent streak, personal celebrity, and a shockingly narrow margin for the GOP last year to put him over the top as the state's next governor. He can hit on the faltering popularity of the Murphy government and dissatisfaction with the current tax system during the campaign to win over centrist voters, or try to capture the Trump magic that bolstered Republicans in the state.",
+            "color_hex": "#960000",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://file.garden/agX089whTUPrNnBb/jnisjiedopikjm.png",
+            "electoral_victory_message": "Winner!",
+            "electoral_loss_message": "Loser!",
+            "no_electoral_majority_message": "Majority?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1005,
+        "fields": {
+            "first_name": "Joanne",
+            "last_name": "Kuniansky",
+            "election": 20,
+            "party": "Socialist Workers",
+            "state": "",
+            "priority": 1,
+            "description": "",
+            "color_hex": "#7f0000",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "Winner!",
+            "electoral_loss_message": "Loser!",
+            "no_electoral_majority_message": "Majority?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1006,
+        "fields": {
+            "first_name": "Vic",
+            "last_name": "Kaplan",
+            "election": 20,
+            "party": "Libertarian",
+            "state": "",
+            "priority": 1,
+            "description": "Candidate description here.",
+            "color_hex": "#ffe100",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "Winner!",
+            "electoral_loss_message": "Loser!",
+            "no_electoral_majority_message": "Majority?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    }
+];
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 1,
+        "fields": {
+            "candidate": 1001,
+            "running_mate": 1001
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 2,
+        "fields": {
+            "candidate": 1002,
+            "running_mate": 1002
+        }
+    }
+];
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            1001,
+            1002,
+            1005,
+            1006
+        ]
+    }
+];
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            1001,
+            1002,
+            1005,
+            1006
+        ]
+    }
+];
+
+jet_data = {
+    "headerColor": "#002b70",
+    "headerTextColor": "#ffffff",
+    "windowColor": "#002b70",
+    "containerColor": "#ffffff",
+    "innerWindowColor": "#e7e7e7",
+    "innerWindowTextColor": "#000000",
+    "descriptionWindowColor": "#f8f8f8",
+    "descriptionWindowTextColor": "#000000",
+    "startButtonColor": "#ffa0a0",
+    "bannerImageUrl": "",
+    "backgroundImageUrl": "",
+    "gameTitle": "CAMPAIGN TRAIL SHOWCASE",
+    "customQuote": "",
+    "quoteTextColor": "#ffffff",
+    "endingTextColor": "#000000"
+};
+
+//#startcode
+function applyTheme(theme) {
+    const gameHeader = document.querySelector(".game_header");
+    if (gameHeader && theme.coloring_title) {
+        gameHeader.style.backgroundColor = theme.coloring_title;
+    }
+
+    const gameWindow = document.getElementById("game_window");
+    if (gameWindow && theme.coloring_window) {
+        gameWindow.style.backgroundColor = theme.coloring_window;
+    }
+
+    const container = document.querySelector(".container");
+    if (container && theme.coloring_container) {
+        container.style.backgroundColor = theme.coloring_container;
+    }
+
+    const headerImg = document.getElementById("header");
+    if (headerImg && theme.header_image) {
+        headerImg.src = theme.header_image;
+    }
+
+    if (theme.body_background) {
+        document.body.style.backgroundImage = `url("${theme.body_background}")`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundAttachment = "fixed";
+    }
+
+    const style = document.createElement("style");
+    style.textContent = `
+      #results_container { color: #000000; }
+      #wittyquote { color: #ffffff; }
+      .game_header h2 { color: #ffffff; }
+      .inner_window_w_desc { background-color: #e7e7e7 !important; color: #000000; }
+      .inner_window_front, .person_description_window, .election_description_window, .description_window_small { background-color: #f8f8f8 !important; color: #000000; }
+      .campaign_trail_start_emphasis { background-color: #ffa0a0 !important; }
+    `;
+    document.head.appendChild(style);
+}
+
+corrr = '\n             <h2 style="    font-family: Arial;">CAMPAIGN TRAIL SHOWCASE</h2>\n            ';
+
+const theme = nct_stuff.themes[nct_stuff.selectedTheme];
+
+// define / override theme values
+theme.coloring_title     = "#002b70";
+theme.coloring_window    = "#002b70";
+theme.coloring_container = "#ffffff";
+theme.header_image = "https://file.garden/agX089whTUPrNnBb/nuihjdgiopeuopji.png";
+theme.body_background = "";
+
+applyTheme(theme);
+
+document.styleSheets[0].insertRule("#game_window button{background-color: #FAFBFC; border: 1px solid rgba(27, 31, 35, 0.15); border-radius: 3px; box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset; color: #24292E; cursor: pointer; padding: 2px 6px; transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);}", 0);
+document.styleSheets[0].insertRule("#game_window button:active{transition: none 0s; background-color: #EDEFF2;}", 0);
+document.styleSheets[0].insertRule("#game_window button:hover{transition-duration: 0.1s; background-color: #F3F4F6;}", 0);
+
+styling = document.createElement("style");
+document.head.appendChild(styling);
+
+styling.innerHTML = `
+@font-face {
+  font-family: montserrat;
+  src: url(https://file.garden/agX089whTUPrNnBb/fonts/sdfsjd.woff2);
+}
+.content_single {
+	background: transparent;
+}
+#game_window {
+	font-family: montserrat;
+	height: 45.8em;
+	background-image: url(https://file.garden/agX089whTUPrNnBb/ergijioersdjufigvasd.png);
+}
+#opponent_selection_id_back {
+    display: none;
+}
+#election_image img {
+	height: 220px !important;
+    width: auto;
+    border-radius: 10px !important;
+    position: relative;
+    top: 9px;
+    border: 2px #c3c3c33b outset;
+}
+#election_id_button {
+	margin-top: 4em;
+}
+#election_summary {
+    padding-right: 4em;
+    padding-left: 26em;
+    text-align: left;
+    font-size: 14.5px;
+    position: relative;
+    top: 0.35em;
+}
+#candidate_description_window {
+    background: linear-gradient(0deg, rgba(235, 235, 235, 1) 0%, rgba(240, 240, 240, 1) 50%, rgba(255, 255, 255, 1) 100%);
+    border: 2px #c3c3c33b outset;
+    height: 21.75em;
+}
+#election_description_window {
+    background: linear-gradient(0deg, rgba(235, 235, 235, 1) 0%, rgba(240, 240, 240, 1) 50%, rgba(255, 255, 255, 1) 100%);
+    height: 92%;
+    border: 2px #c3c3c33b outset;
+}
+.container {
+	filter: drop-shadow(0px 0px 20px black);
+    border: 0;
+	background: linear-gradient(to top, #ffffff, #e4e4e4);
+}
+.base.cts-theme {
+	background-image: url(https://file.garden/agX089whTUPrNnBb/poqlalpoaqp.png) !important;
+	background-size: 150% 100%;
+}
+.person_image {
+    border: 2px outset #c3c3c33b;
+}
+.inner_window_w_desc {
+	background: linear-gradient(0deg, rgb(199 199 199) 0%, rgb(213 213 213) 50%, rgb(238 238 238) 100%);
+}
+`
+////vp hider code
+let z = new MutationObserver((mutationsList, observer) => {
+    let runningMateSummary = document.querySelector("#running_mate_summary");
+    if (runningMateSummary) {
+        $("#running_mate_id_button").click();
+    }
+});
+
+
+z.observe(document, { subtree: true, childList: true });
+
+}
+
+// END OF CODE 1
