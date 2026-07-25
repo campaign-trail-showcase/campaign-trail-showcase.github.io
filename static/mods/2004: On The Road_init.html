@@ -1,0 +1,1007 @@
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 9,
+        "fields": {
+            "year": 2004,
+            "summary": "<p>The attacks of September 11 unleashed a wave of grief, driving the public conscience toward a feverish thirst for retribution. Yet beneath the war of vengeance lies an administration that has escaped the public's wrath.</p>\n<ul>\n<li>George W. Bush must keep his campaign focused on the War on Terror while defending his domestic record.</li>\n<li>Al Sharpton must break through an electorate consumed by fear and anger, arguing that America's desire for blood has blinded the country to the Bush administration's failures abroad and at home.</li></ul>",
+            "image_url": "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/Images.png",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/advisor.png",
+            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">Al Sharpton and the 2004 Election</h4>\n\n<a href=\"https://transcripts.cnn.com/show/se/date/2004-07-28/segment/02\" target=\"_blank\">\n    Al Sharpton Addresses Democratic National Convention\n</a><br>\n\n<a href=\"https://www.youtube.com/watch?v=45bCSm0Ja8w\" target=\"_blank\">\n    Democratic Presidential Candidate Debate - January 22, 2004\n</a><br>\n\n<a href=\"https://www.ontheissues.org/al_sharpton.htm\" target=\"_blank\">\n    Al Sharpton on the Issues\n</a><br>\n\n<a href=\"https://www.amazon.ca/Al-America-Reverend-Sharpton/dp/0758203500\" target=\"_blank\">\n    <em>Al on America</em>\n</a><br><br>\n\n<img src=\"https://file.garden/akcbdIW-JC2LjOx6/Sharpton/caca.png\" height=\"170\" alt=\"Al Sharpton 2004\">\n\n<p><strong>Note:</strong> This is my third mod and I created this because I wanted to make an actual TCT mod instead of another unserious project (like <em>Bloomberg Inc.</em> or <em>Evening in America</em>). So I guess this is technically my first real scenario.</p>\n\n<p>Replay the game! Try another running mate! &mdash; <strong>burrito2045</strong></p>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
+            "creator": "burrito2045",
+            "display_year": "2004: On The Road",
+            "recommended_reading_enabled": true
+        }
+    }
+];
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 9,
+        "year": 2004,
+        "is_premium": 0,
+        "display_year": "2004: On The Road"
+    }
+];
+
+RecReading = true;
+
+campaignTrail_temp.credits = "burrito2045";
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+];
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 77,
+        "fields": {
+            "first_name": "George W.",
+            "last_name": "Bush",
+            "election": 9,
+            "party": "Republican",
+            "state": "Texas",
+            "priority": 1,
+            "description": "",
+            "color_hex": "#CA5D5F",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/buh.png",
+            "electoral_victory_message": "",
+            "electoral_loss_message": "",
+            "no_electoral_majority_message": "",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 78,
+        "fields": {
+            "first_name": "Al",
+            "last_name": "Sharpton",
+            "election": 9,
+            "party": "Democratic",
+            "state": "New York",
+            "priority": 2,
+            "description": "<p>When Al Sharpton jumped into the Democratic primaries, party insiders and pundits wrote him off as a fringe candidate with no real shot. But Sharpton refused to be ignored. His blistering attacks on the Bush administration electrified Democrats hungry for someone willing to go toe-to-toe with the White House. Fueled by passionate supporters and a fierce civil rights movement, Sharpton bulldozed expectations, clinched the nomination, and now stands ready to challenge a president defined by bloodlust.</p>\n\n<p>However, in a country still haunted by September 11, his fierce denunciations of the Bush administration risk being painted as extreme by an anxious, flag-waving public still hungry for vengeance.</p>",
+            "color_hex": "#4B82BF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/al.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>Though it was perhaps expected, you could have easily faltered at a number of points. Credit to you for pulling through.</p><p>On the political front, you can continue the Clinton legacy and strengthen Social Security for generations to come. Perhaps you can succeed on health care where Clinton came up short? Or maybe you can create a future of renewable energy for America. Just be wary of a (George or Jeb?) Bush challenge in 2004.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2000 election.</h3><p>Surely the second-guessing will be intense, but if things were close you could probably run again in 2004.</p><p>It seems that with George W. Bush and a Republican majority, the United States can expect some conservative policy-making over the next four years. Hopefully Bush comes through on his promise to govern in a bipartisan, conciliatory manner. A lot should depend on the margin of his victory, and whether it was large or small.</p>",
+            "no_electoral_majority_message": "<h3>Sorry! You have lost in a squeaker.</h3><p>No candidate achieved a majority of the electoral votes, for the first time since 1824. Unfortunately for you, a majority of states have Republican controlled congressional delegations.</p><p>It seems that with George W. Bush and a Republican majority, the United States can expect some conservative policy-making over the next four years. Hopefully Bush comes through on his promise to govern in a bipartisan, conciliatory manner.</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 79,
+        "fields": {
+            "first_name": "David",
+            "last_name": "Cobb",
+            "election": 9,
+            "party": "Green",
+            "state": "Texas",
+            "priority": 3,
+            "description": "<p>Ralph Nader enters the 2000 election as the Green candidate after years as an activist and consumer advocate.</p><p>After eight years of Bill Clinton, it is clear that the United States needs a true liberal alternative -- one that will fight for fair trade, universal health care, free college, and campaign finance reform. Nader's primary goal in this election is to win 5% of the popular vote, which will qualify the Green Party for federal matching funds in 2004.</p>",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#64AA71",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/ralph-nader-2000.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>This was definitely not supposed to happen. Good luck!</p>",
+            "electoral_loss_message": "<h3>As expected, you have lost the 2000 election.</h3><p>The legacy of this campaign depends on a couple of factors. First of all, did you receive 5% of the popular vote? If so, congratulations! You will enable the Green Party to run a vigorous campaign in 2004 and present a true choice to the American people. Also, the Democrats were a little peeved that you \"stole\" votes from them in this election. Hopefully that doesn't lead to a backlash.</p>",
+            "no_electoral_majority_message": "<h3>Wow! No candidate received 270 electoral votes, but the House will elect George W. Bush as President.</h3><p>Did you receive 5% of the popular vote? If so, congratulations! You will enable the Green Party to run a vigorous campaign in 2004 and present a true choice to the American people. Also, the Democrats were a little peeved that you \"stole\" votes from them in this election. Hopefully that doesn't lead to a backlash, especially since they will lose the vote in the House.</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 80,
+        "fields": {
+            "first_name": "Michael",
+            "last_name": "Badnarik",
+            "election": 9,
+            "party": "Libertarian",
+            "state": "Texas",
+            "priority": 4,
+            "description": "''",
+            "color_hex": "#FFFF00",
+            "secondary_color_hex": "#AAA064",
+            "is_active": 0,
+            "image_url": "''",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 81,
+        "fields": {
+            "first_name": "Dick",
+            "last_name": "Cheney",
+            "election": 9,
+            "party": "Republican",
+            "state": "Wyoming",
+            "priority": 5,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/dick-cheney-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Dick Cheney is a seasoned operative of the Republican Party who has served as White House Chief of Staff, Minority Whip in Congress, Secretary of Defense, and as CEO of Halliburton. He would be a respected choice across the Republican spectrum, and would add experience and gravitas to the Republican ticket.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 82,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Danforth",
+            "election": 9,
+            "party": "Republican",
+            "state": "Missouri",
+            "priority": 6,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/john-danforth-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>John Danforth served four terms as Senator from Missouri. He has broad experience in government, and as a moderate Republican would reinforce Bush's claim to be a uniter. Danforth also has close relationships with conservative stalwarts such as Kit Bond, Clarence Thomas, and John Ashcroft, and would not arouse undue suspicion from the conservative wing of the party. Winning Missouri back would be a key piece of any Republican victory in 2000.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 83,
+        "fields": {
+            "first_name": "Tom",
+            "last_name": "Ridge",
+            "election": 9,
+            "party": "Republican",
+            "state": "Pennsylvania",
+            "priority": 7,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/tom-ridge-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Tom Ridge is the popular Governor of a large swing state. Pennsylvania's 23 electoral votes would almost ensure a Bush victory if Ridge could deliver them. He has a reputation as an able administrator and has been very tough on crime. However, he has also been pro-choice for his entire career, and his selection as running mate could cause issues with the Republican base in other regions.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 84,
+        "fields": {
+            "first_name": "Colin",
+            "last_name": "Powell",
+            "election": 9,
+            "party": "Republican",
+            "state": "Virginia",
+            "priority": 8,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/colin-powell-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Colin Powell is a moderate Republican and a key general from the Desert Storm campaign. He enjoys high personal popularity among the American electorate. He would be the first African-American to be a running mate for a major party. It will take some strong inducements to get Powell to run, however. He has repeatedly stated that he is not seeking the role, but perhaps you could persuade him by taking a moderate position on the social issues of the day.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 85,
+        "fields": {
+            "first_name": "Dick",
+            "last_name": "Durbin",
+            "election": 9,
+            "party": "Democratic",
+            "state": "Illinois",
+            "priority": 9,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/DFurbin.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Dick Durbin is a senator from Illinois and a solidly liberal pick. A longtime member of the Senate with deep ties to organized labor, Durbin has made a name for being one of the very few senators to vote against the Iraq War. Durbin's greatest strength is his ability to bring Midwestern charm to the ticket, as his roots in the Rust Belt could give the ticket a more humble appearance.</p>\n<p>However, his selection does little to change the national security debate, leaving a Sharpton–Durbin ticket with the daunting task of challenging a popular wartime president.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 86,
+        "fields": {
+            "first_name": "Bob",
+            "last_name": "Graham",
+            "election": 9,
+            "party": "Democratic",
+            "state": "Florida",
+            "priority": 10,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/BOB.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Senator Graham has gained some well-deserved attention after the September 11 attacks, after famously voting against the Iraq War Powers Resolution of 2002. He is renowned for his foreign policy expertise and measured demeanor, which will make him an attractive choice to balance Al Sharpton's insurgent candidacy.</p>\n<p>He is also from the key state of Florida, which could provide a massive advantage... if you actually <i>win</i> Florida. Other than that, he provides little advantages to the ticket.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 87,
+        "fields": {
+            "first_name": "Russ",
+            "last_name": "Feingold",
+            "election": 9,
+            "party": "Democratic",
+            "state": "Wisconsin",
+            "priority": 11,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/Russ.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Senator Russ Feingold of Wisconsin has built a reputation as one of the Senate's most principled and independent liberals. After the attacks on the World Trade Center, he was the <i>only</i> senator to vote against the PATRIOT Act, making him a natural selection for Sharpton's campaign. Did I mention that he's also anti-NAFTA?</p>\n<p>His presence on the ticket can attract reform-minded voters and economic populists. His home state of Wisconsin is also an imperative state to win this year. However, his outspoken opposition to the post-9/11 consensus is likely to invite fierce attacks from the right.\n\n",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 88,
+        "fields": {
+            "first_name": "Carol Moseley",
+            "last_name": "Braun",
+            "election": 9,
+            "party": "Democratic",
+            "state": "Illinois",
+            "priority": 12,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/braun.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Daring, are we? Carol Moseley Braun is the first Black woman in the United States Senate, bringing historic credentials and years of experience in public service to Al Sharpton's unconventional campaign. She is a social liberal by all means, sponsoring the Women’s Pension Equity Act and voting against DADT and DOMA.</p>\n\n<p>Even so, Braun maintains a centrist, pro-business approach to domestic issues, which gives you some leeway among moderates. Her capacity to connect with both the Democratic base and moderate voters renders her an intriguing candidate; however, her primary appeal appears limited to social issues.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 89,
+        "fields": {
+            "first_name": "Winona",
+            "last_name": "LaDuke",
+            "election": 9,
+            "party": "Green",
+            "state": "Minnesota",
+            "priority": 13,
+            "description": "''",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/static/images/winona-laduke-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Winona LaDuke is a Native American activist of Ojibwe ancestry. She lives in Minnesota and has been active in attempts to regain land that once belonged to various American Indian tribes. She has written a book and started organizations in support of this issue.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 90,
+        "fields": {
+            "first_name": "Ezola",
+            "last_name": "Foster",
+            "election": 9,
+            "party": "Reform",
+            "state": "California",
+            "priority": 14,
+            "description": "''",
+            "color_hex": "#FFFF00",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "''",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+];
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 52,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 85
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 53,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 86
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 54,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 87
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 55,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 88
+        }
+    }
+];
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 9,
+        "candidates": [
+            77,
+            78,
+            79,
+            80
+        ]
+    }
+];
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 9,
+        "candidates": [
+            77,
+            78,
+            79,
+            80
+        ]
+    }
+];
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#1f2937",
+    "header_text_color": "#ffffff",
+    "description_background_color": "#ffffff",
+    "description_text_color": "#111827",
+    "main_color": "#f0f1f4",
+    "secondary_color": "#4b5563",
+    "ui_text_color": "#ffffff",
+    "site_title": "",
+    "site_image_url": ""
+};
+
+jet_data = {
+    "headerColor": "#23234C",
+    "headerTextColor": "#ffffff",
+    "windowColor": "#F4FFFF",
+    "containerColor": "#2D2B62",
+    "innerWindowColor": "#f0f0ff",
+    "innerWindowTextColor": "#000000",
+    "descriptionWindowColor": "#f8f8f8",
+    "descriptionWindowTextColor": "#000000",
+    "startButtonColor": "#23234C",
+    "bannerImageUrl": "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/6E77835C-C9FD-4427-A69E-9CB773C07F66.png",
+    "backgroundImageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/New_York_Panorama_Januar_2004_1.jpg",
+    "gameTitle": "THE CAMPAIGN TRAIL",
+    "customQuote": "",
+    "quoteTextColor": "#ffffff",
+    "endingTextColor": "#000000",
+    "modBoxTheme": {
+        "header_color": "#1f2937",
+        "header_text_color": "#ffffff",
+        "description_background_color": "#ffffff",
+        "description_text_color": "#111827",
+        "main_color": "#f0f1f4",
+        "secondary_color": "#4b5563",
+        "ui_text_color": "#ffffff",
+        "site_title": "",
+        "site_image_url": ""
+    }
+};
+
+//#startcode
+
+function applyTheme(theme) {
+    const gameHeader = document.querySelector(".game_header");
+    if (gameHeader && theme.coloring_title) {
+        gameHeader.style.backgroundColor = theme.coloring_title;
+    }
+
+    const gameWindow = document.getElementById("game_window");
+    if (gameWindow && theme.coloring_window) {
+        gameWindow.style.backgroundColor = theme.coloring_window;
+    }
+
+    const container = document.querySelector(".container");
+    if (container && theme.coloring_container) {
+        container.style.backgroundColor = theme.coloring_container;
+    }
+
+    const headerImg = document.getElementById("header");
+    if (headerImg && theme.header_image) {
+        headerImg.src = theme.header_image;
+    }
+
+    if (theme.body_background) {
+        document.body.style.backgroundImage = `url("${theme.body_background}")`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundAttachment = "fixed";
+    }
+
+    const style = document.createElement("style");
+    style.textContent = `
+      #results_container { color: #000000; }
+      #wittyquote { color: #ffffff; }
+      .game_header h2 { color: #ffffff; }
+      .inner_window_w_desc { background-color: #f0f0ff !important; color: #000000; }
+      .inner_window_front, .person_description_window, .election_description_window, .description_window_small { background-color: #f8f8f8 !important; color: #000000; }
+    `;
+    document.head.appendChild(style);
+}
+
+corrr = '\n              <h2>THE CAMPAIGN TRAIL</h2>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#23234C";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#F4FFFF";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#2D2B62";
+
+document.getElementById("header").src = "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/6E77835C-C9FD-4427-A69E-9CB773C07F66.png";
+
+document.body.background = "https://upload.wikimedia.org/wikipedia/commons/5/55/New_York_Panorama_Januar_2004_1.jpg";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#F4FFFF!important;}</style>";
+
+// Music Player
+
+  // Select the node that will be observed for mutations
+  const windowsAdvisorTargetNode = document.getElementById("game_window");
+  
+  // Options for the observer (which mutations to observe)
+  const windowsAdvisorConfig = { attributes: true, childList: true, subtree: true };
+  
+  // Callback function to execute when mutations are observed
+  const callback = (mutationList, observer) => {
+      visitWindow = document.getElementsByClassName("overlay_window")[0];
+  
+      if(visitWindow == null || visitWindow.classList.contains("done")) {
+          return;
+      }
+      visitWindow.classList.add("done");
+      visitWindow.classList.add("window");
+      let titleBar = visitWindow.querySelector("h3");
+      titleBar.classList.add("title-bar");
+      titleBar.classList.add("title-bar-text")
+      titleBar.style.paddingLeft = "3px";
+  };
+  
+  class Song {
+    constructor(title, artist, coverLink, audioLink) {
+      this.title = title;
+      this.artist = artist;
+      this.coverLink = coverLink;
+      this.audioLink = audioLink;
+    }
+    getTitle() {
+      return this.title;
+    }
+  
+    getArtist() {
+      return this.artist;
+    }
+  
+    getCoverLink() {
+      return this.coverLink;
+    }
+  
+    getAudioLink() {
+      return this.audioLink;
+    }
+  }
+  
+  class Playlist {
+    constructor() {
+      this.songs = [];
+      this.currentSongIndex = 0;
+    }
+  
+    addSong(song) {
+      this.songs.push(song);
+    }
+  
+    getCurrentSong() {
+      return this.songs[this.currentSongIndex];
+    }
+  
+    playNext() {
+      this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+    }
+  
+    playPrevious() {
+      this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+    }
+  }
+  window.Playlist=Playlist
+  window.Song=Song
+  
+  function changePlaylist(newPlaylist) {
+    playlist = newPlaylist;
+    playlist.currentSongIndex = 0;
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+  }
+  window.changePlaylist=changePlaylist
+  
+  function updateUI(playlist) {
+      const currentSong = playlist.getCurrentSong();
+      var player = document.getElementById("player");
+      player.querySelector("#cover").src = currentSong.getCoverLink();
+      player.querySelector("#title").textContent = currentSong.getTitle();
+      player.querySelector("#artist").textContent = currentSong.getArtist();
+  }
+  
+  window.updateUI=updateUI
+  
+  
+  function setupMusicPlayer() {
+    playlist = new Playlist();
+    deanSoundtrack = new Playlist();
+  
+     const song1 = new Song(
+      "Dreams (2004 Remaster)",
+      "Fleetwood Mac",
+      "https://i.scdn.co/image/ab67616d0000b273e52a59a28efa4773dd2bfe1b",
+      "https://files.catbox.moe/qse7ez.mp3"
+    );
+     
+    const song2 = new Song(
+      "I'm Cool (Interlude)",
+      "Outkast",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiJ23vnjYrzHXP_W9yhyZwSVT_DSfuyH1u7zKD4puF3w&s=10",
+      "https://file.garden/akcbdIW-JC2LjOx6/MN/I'm%20Cool%20(Interlude).mp3"
+    );
+    
+    const song3 = new Song(
+      "So Fresh, So Clean",
+      "Outkast",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiJ23vnjYrzHXP_W9yhyZwSVT_DSfuyH1u7zKD4puF3w&s=10",
+      "https://file.garden/akcbdIW-JC2LjOx6/MN/So%20Fresh%2C%20So%20Clean%204.mp3"
+    );
+  
+    const song4 = new Song(
+      "I Get Around",
+      "2Pac",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDCKbDe9qWaMJivX1AZYC5NMFFdZlDhExlhDc5aMXCXQ&s=10",
+      "https://file.garden/akcbdIW-JC2LjOx6/Sharpton/I%20Get%20Around%204.mp3"
+    );
+
+    const song5 = new Song(
+      "Izzo (H.O.V.A.)",
+      "JAŸ-Z",
+      "https://t2.genius.com/unsafe/344x344/https%3A%2F%2Fimages.genius.com%2F9104b7197a0bd57a4f58dbc5e5785bea.600x600x1.jpg",
+      "https://file.garden/akcbdIW-JC2LjOx6/Izzo%20(H.O.V.A.).mp3"
+    );
+
+    playlist.addSong(song1);
+    playlist.addSong(song2);
+    playlist.addSong(song3);
+    playlist.addSong(song4);
+    playlist.addSong(song5);
+
+    const playerContainer = document.createElement("div");
+    playerContainer.id = "player";
+  
+   const displayBox = document.createElement("div");
+  displayBox.id = "display-box";
+  
+  const coverElement = document.createElement("img");
+  coverElement.id = "cover";
+  displayBox.appendChild(coverElement);
+  
+  const infoContainer = document.createElement("div");
+  infoContainer.id = "info-container";
+  infoContainer.style.backgroundImage = "url('https://i.ibb.co/M73CBjW/overlay.png')";
+  infoContainer.style.backgroundSize = "cover"; // Optional: adjust based on your needs
+  infoContainer.style.color = "white"; // Set text color to white
+  
+  const songInfo = document.createElement("div");
+  songInfo.id = "song-info";
+  
+  const titleElement = document.createElement("h3");
+  titleElement.id = "title";
+  titleElement.style.fontWeight = 'normal'; // Make it normal as per previous request
+  songInfo.appendChild(titleElement);
+  
+  const artistElement = document.createElement("p");
+  artistElement.id = "artist";
+  songInfo.appendChild(artistElement);
+  
+  infoContainer.appendChild(songInfo);
+  displayBox.appendChild(infoContainer);
+  
+  playerContainer.appendChild(displayBox);
+  
+  const controlsContainer = document.createElement("div");
+  controlsContainer.id = "controls-container";
+  
+  const controls = document.createElement("div");
+  controls.id = "controls";
+  
+  const prevButton = document.createElement("img");
+  prevButton.id = "prevButton";
+  prevButton.src = "https://i.ibb.co/gMyNq5T/back.png";
+  prevButton.alt = "Previous";
+  controls.appendChild(prevButton);
+  
+  const playPauseButton = document.createElement("img");
+  playPauseButton.id = "playPauseButton";
+  playPauseButton.src = "https://i.ibb.co/5TwzzWN/pause.png"; // Set the default play image
+  playPauseButton.alt = "Play/Pause";
+  controls.appendChild(playPauseButton);
+  
+  const nextButton = document.createElement("img");
+  nextButton.id = "nextButton";
+  nextButton.src = "https://i.ibb.co/5Rx0cYt/forward.png";
+  nextButton.alt = "Next";
+  controls.appendChild(nextButton);
+  
+  controlsContainer.appendChild(controls);
+  
+  playPauseButton.addEventListener("click", function () {
+    const audio = document.getElementById("audio");
+    if (audio.paused) {
+      audio.play();
+      playPauseButton.src = "https://i.ibb.co/5TwzzWN/pause.png"; // Set the pause image
+    } else {
+      audio.pause();
+      playPauseButton.src = "https://i.ibb.co/G5TsX12/play.png"; // Set the play image
+    }
+  });
+  
+  nextButton.addEventListener("click", function () {
+    playlist.playNext();
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+  });
+  
+  prevButton.addEventListener("click", function () {
+    playlist.playPrevious();
+    updateUI(playlist);
+    const audio = document.getElementById("audio");
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.play();
+  });
+  
+    const progressBarContainer = document.createElement("div");
+    progressBarContainer.id = "progress-bar-container";
+  
+    const progressBar = document.createElement("progress");
+    progressBar.type = "range";
+    progressBar.id = "progress-bar";
+    progressBar.value = "0";
+    progressBar.max = "100";
+  
+  
+    progressBarContainer.appendChild(progressBar);
+    controlsContainer.appendChild(progressBarContainer);
+    playerContainer.appendChild(controlsContainer);
+  
+   const volumeContainer = document.createElement("div");
+    volumeContainer.id = "volume-container";
+  
+  const volumeLabel = document.createElement("img");
+  volumeLabel.src = "https://i.ibb.co/9Gkg5Qp/volume.png";
+  volumeLabel.alt = "Volume";
+  volumeContainer.appendChild(volumeLabel);
+  
+    const volumeSliderContainer = document.createElement("div");
+    volumeSliderContainer.classList.add("is-vertical");
+    volumeSliderContainer.style.marginLeft = "23%";
+    volumeSliderContainer.style.height = "126px";
+  
+    const volumeSlider = document.createElement("input");
+    volumeSlider.type = "range";
+    volumeSlider.id = "volumeSlider";
+    volumeSlider.min = 0;
+    volumeSlider.max = 9;
+    volumeSlider.step = 1;
+    volumeSlider.value = 4; // Initial volume
+  
+    volumeSliderContainer.appendChild(volumeSlider);
+  
+    const volumeDisplay = document.createElement("span");
+    volumeDisplay.id = "volume-display";
+    volumeDisplay.style.fontWeight = 'bold'; 
+    volumeDisplay.style.display = 'none';
+    volumeDisplay.textContent = "1";
+  
+    volumeContainer.appendChild(volumeSliderContainer);
+    volumeContainer.appendChild(volumeDisplay);
+  
+    playerContainer.appendChild(volumeContainer);
+  
+    gameWindow_player.insertAdjacentElement("afterend", playerContainer);
+  
+  
+    function updateProgressBar() {
+      const audio = document.getElementById("audio");
+      const progress = (audio.currentTime / audio.duration) * 100;
+      try{progressBar.value = progress}
+    catch{}
+    }
+  
+   
+    progressBar.addEventListener("input", function () {
+      const audio = document.getElementById("audio");
+      const seekTime = (progressBar.value / 100) * audio.duration;
+      audio.currentTime = seekTime;
+    });
+  
+    const audio = document.createElement("audio");
+    audio.id = "audio";
+    audio.src = playlist.getCurrentSong().audioLink;
+    audio.volume = 4/9;
+  
+    audio.addEventListener("timeupdate", updateProgressBar);
+    audio.addEventListener("ended", function () {
+      // Play the next song when the current song ends
+      playlist.playNext();
+      updateUI(playlist);
+      audio.src = playlist.getCurrentSong().audioLink;
+      audio.play();
+    });
+  
+      let currentVolume = 1; // Initial volume
+  
+    volumeSlider.addEventListener("input", function () {
+      currentVolume = parseInt(volumeSlider.value, 10);
+      updateVolumeDisplay();
+      updateAudioVolume();
+    });
+  
+    function updateVolumeDisplay() {
+      volumeDisplay.textContent = currentVolume;
+    }
+  
+     function updateAudioVolume() {
+      const audio = document.getElementById("audio");
+      audio.volume = currentVolume / 9; // Set volume between 0 and 1
+    }
+  
+    document.body.appendChild(audio);
+    audio.play();
+  
+    // Update the UI when the page loads
+    updateUI(playlist);
+  }
+  
+  const style = document.createElement("style");
+  style.textContent = `
+  #player {
+      border: 3px solid #C9C9C9; /* Add your desired border style */
+      display: flex;
+      flex-direction: row;
+    height:191px;
+      background-Image: url("https://i.ibb.co/dKL29kY/background.png");
+    }
+  
+    #display-box {
+      display: flex;
+      align-items: center;
+      width: 50%;
+    }
+  
+    #cover {
+      width: 176px;
+    height:176px;
+    }
+  
+    #info-container {
+      display: flex;
+      flex-direction: row;
+      height:178px;
+    width:127px;
+    margin-top: 3px;
+    }
+  
+    #song-info {
+      width: 100%;
+    padding:5px;
+    }
+  
+    #controls-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+      width:100%;
+    padding-top:15px;
+  
+    }
+    .is-vertical #volumeSlider {
+    width: 125px;
+  }
+  
+    #controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 80%;
+    }
+  
+    #progress-bar-container {
+      width: 100%;
+    }
+  
+    #progress-bar {
+      width: 80%;
+      margin: auto;
+      display: flex;
+      margin-Top: 20px;
+    }
+    
+    h3 {
+      font-size:1.17em!important;
+    }
+  
+    label {
+        font-size: 1em !important;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+        display: inline-block !important;
+        align-items: initial !important;
+        gap: 0 !important;
+    } 
+ body {
+        background-size: cover;
+    }
+      .campaign_trail_start_emphasis { background-color: #23234C !important; }
+ .inner_window_front, #election_description_window, .description_window_small, .person_description_window, .inner_window_question, #map_container {
+    background: rgba(255, 255, 255, 0.7) !important;
+}
+.container {
+    background: linear-gradient(180deg, #631E2D 0%, #3D121B 100%) !important;
+}
+  #campaign_sign {
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Al_Sharpton_presidential_campaign%2C_2004.png/250px-Al_Sharpton_presidential_campaign%2C_2004.png");
+	  background-color: white;
+      background-size: cover;
+      border-color: #FFFFFF;    
+      border-width: .0em;
+      margin: 0 auto;
+      background-position: center;
+      width: 49%; 
+      height: 100px; 
+    }
+.inner_window_sign_display {
+  margin: 0;
+    margin-right: 0.033px;
+    margin-left: 0.033px;
+  height: 25%;
+  position: relative;
+  height: 28%;
+  background-color: #FFFFFF;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: double;
+  border-color: #C9C9C9;
+}
+.coloring_title {
+    background: linear-gradient(90deg, #940503, #d63b2f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+	.overlay_window img {
+    width: 300px;
+    height: 150px;
+	}
+    h3 {
+      font-size:1.17em!important;
+    }
+    h4 {
+      font-size:1.17em!important;
+    }
+  `;
+  
+  document.head.appendChild(style);
+  
+  const gameWindow_player = document.getElementById("game_window");
+  //use this function directly or put it in an event listener to start the music on the press of a certain button
+  setupMusicPlayer();
+
+   document.head.innerHTML += `<link rel="stylesheet" href="https://unpkg.com/xp.css">`
+
+HistHexcolour=["#CA5D5F","#4B82BF","#FFFF00","#00C100"]; HistName=["George W. Bush"," Al Sharpton"," Michael Badnarik","David Cobb"]; HistEV=[321,217,0,0]; HistPV=["62,962,678","58,349,377","702,277","63,867"]; HistPVP=["51.6%","47.8%","0.6%","0.1%"];
+
+//#endcode
