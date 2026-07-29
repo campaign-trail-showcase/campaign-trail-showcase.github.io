@@ -1,7 +1,7 @@
  /*
  * @title: 2016: A Lifetime of This / 2016b / The Hillary Trail
  * @author: StrawberryMaster & Friends
- * @version: 1.2.6
+ * @version: 1.3.0
  * @description: The 2016 election in the eyes of Hillary Clinton (and a couple of others, too)
  * 
  * Coding license: Apache License 2.0
@@ -679,7 +679,7 @@ const css = `
                 margin-left: .25rem;
 				padding: .2em .4em;
             }
-            form[name="election_year"], form[name="candidate"], form[name="running mate"], form[name="game_type_selection"], form[name="difficulty_level_selection"] {
+            form[name="election_year"], form[name="candidate"], form[name="running mate"], form[name="game_type_selection"] {
                 align-items: center;
                 display: flex;
                 justify-content: center;
@@ -1257,6 +1257,162 @@ const css = `
 					height: 50px !important;
 				}
    			}
+			
+			/* Material design button styling */
+			#game_window input[type="radio"], 
+			#theme_picker input[type="radio"] {
+				appearance: none;
+				-webkit-appearance: none;
+				grid-column: 1;
+				width: 14px;
+				height: 14px;
+				border: 2px solid #5f6368;
+				border-radius: 30%;
+				outline: none;
+				cursor: pointer;
+				position: relative;
+				margin: 0 12px 0 6px;
+				background: #ffffff !important;
+				box-shadow: none !important;
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			#game_window input[type="radio"]:hover, 
+			#theme_picker input[type="radio"]:hover {
+				border-color: #800e0e;
+				box-shadow: 0 0 0 6px rgba(14, 50, 128, 0.08) !important;
+			}
+
+			#game_window input[type="radio"]:checked, 
+			#theme_picker input[type="radio"]:checked {
+				border-color: #800e0e !important;
+				background: #ffffff !important;
+			}
+
+			#game_window input[type="radio"]:checked::after, 
+			#theme_picker input[type="radio"]:checked::after {
+				content: "";
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				background-color: #0e3280;
+			}
+
+			/* election footer fixes */
+			#game_window {
+				min-height: 620px;
+			}
+
+			#game_window g {
+			  display: flex;
+			  flex-flow: row wrap;
+			  justify-content: center;
+			  align-items: center;
+			  gap: 8px;
+			  padding: 5px 0;
+			}
+
+			.inner_window_sign_display {
+			  order: 2;
+			  flex: 1;
+			  min-width: 180px;
+			  max-width: 275px;
+			  max-height: 145px;
+			  display: flex;
+			  flex-direction: column;
+			  align-items: center;
+			  margin: .5em;
+			  align-self: flex-start;
+			}
+			  #candidate_pic, img#candidate_pic {
+				  order: 1;
+				  width: 13em;
+				  height: auto;
+				  flex-shrink: 0;
+				  margin: 0;
+			   }
+			   #running_mate_pic, img#running_mate_pic {
+				  order: 3;
+				  width: 13em;
+				  height: auto;
+				  flex-shrink: 0;
+				  margin: 0;
+			   }
+
+			/* Material design-ish button styling */
+			#question_form {
+				margin: 0.2em 0.8em;
+				font-size: 0.95em;
+			}
+
+			#question_form br { 
+				display: none; 
+			}
+
+			#question_form form {
+				display: grid;
+				grid-template-columns: auto 1fr;
+				row-gap: 1px;
+				column-gap: 8px;
+				align-items: start;
+				margin: 0 auto;
+			}
+
+			#question_form input[type="radio"],
+			input.game_answers {
+				grid-column: 1;
+				margin: 3px 0 0 2px !important;
+				cursor: pointer;
+				align-self: start;
+			}
+
+			#question_form label {
+				grid-column: 2;
+				display: block;
+				padding: 3px 6px !important;
+				margin: 0 !important;
+				line-height: 1.28 !important;
+				font-size: 0.93rem !important;
+				font-weight: 400 !important;
+				color: inherit;
+				cursor: pointer;
+				border-radius: 3px;
+				border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+				transition: background-color 0.15s ease, border-color 0.15s ease;
+			}
+
+			#question_form label:hover {
+				font-size: 0.93rem !important;
+				font-weight: 400 !important;
+				background-color: rgba(0, 0, 0, 0.05) !important;
+				border-bottom-color: rgba(0, 0, 0, 0.25) !important;
+			}
+
+			#question_form input[type="radio"]:checked + label {
+				background-color: rgba(14, 50, 128, 0.09) !important;
+				border-bottom: 1px solid rgba(14, 50, 128, 0.4) !important;
+				font-weight: 600 !important;
+			}
+			
+			/* basically a lazy fix to increase the SVG map size without
+			 * changing the actual SVG or resort to more aggressive tactics,
+			 * as Year Zero does something kinda similar */
+			#map_container svg {
+				height: 100%;
+			}
+			#map_container svg {
+				transform: translate(10px, 0);
+			}
+			#map_container svg rect, #map_container svg text {
+				transform: translate(-100px, 0px);
+			}			
+			#main_content_area + #map_footer {
+				margin: 1em auto !important;
+			}
 			
 			/* Mobile compatibility fixes - partially inspired by those of TTNW */
 			@media only screen and (max-width: 768px) {
@@ -2806,157 +2962,273 @@ tooltipList = [
 })();
 
 // This is for the question count selector.
-(function() {
-    'use strict';
+(function () {
+  'use strict';
 
-    const CONFIG = {
-        containerId: 'game_window',
-        targetSectionId: 'difficulty_level',
-        selectorId: 'question_select',
-        options: [
-            { text: "29 (Best)", value: 29 },
-            { text: "40 (Full)", value: 40 }
-        ]
-    };
-	
-	if (!document.getElementById("question_select_style")) {
-        const style = document.createElement("style");
-        style.id = "question_select_style";
-        style.textContent = `
+  const CONFIG = {
+    containerId: 'game_window',
+    targetSectionId: 'difficulty_level',
+    selectorId: 'question_select',
+    options: [
+      { text: "29 (Best)", value: 29 },
+      { text: "40 (Full)", value: 40 }
+    ]
+  };
+
+  if (!document.getElementById("question_select_style")) {
+    const style = document.createElement("style");
+    style.id = "question_select_style";
+    style.textContent = `
             #${CONFIG.targetSectionId} {
+                display: inline-flex;
                 flex-wrap: wrap;
                 gap: 2.5em;
                 align-items: flex-start;
             }
             #${CONFIG.targetSectionId} form {
                 flex: 1 1 auto;
-				display: inline-block !important;
-				padding: 0px 1em !important;
             }
             #${CONFIG.targetSectionId} form p {
                 margin: 0;
             }
         `;
-        document.head.appendChild(style);
+    document.head.appendChild(style);
+  }
+
+  // update global var safely
+  function setGlobalQuestionCount(val) {
+    if (window.campaignTrail_temp?.global_parameter_json?.[0]) {
+      window.campaignTrail_temp.global_parameter_json[0].fields.question_count = Number(val);
     }
+  }
 
-    // update global var safely
-    function setGlobalQuestionCount(val) {
-        if (window.campaignTrail_temp?.global_parameter_json?.[0]) {
-            window.campaignTrail_temp.global_parameter_json[0].fields.question_count = Number(val);
-        }
-    }
+  function manageQuestionSelector() {
+    // if "difficulty_level" is missing (which it is while playing),
+    // this returns null and the function stops instantly
+    const container = document.getElementById(CONFIG.targetSectionId);
 
-    function manageQuestionSelector() {
-        // if "difficulty_level" is missing (which it is while playing), 
-        // this returns null and the function stops instantly
-        const container = document.getElementById(CONFIG.targetSectionId);
-        
-        if (!container) return;
-        if (document.getElementById(CONFIG.selectorId)) return;
-		
-		const frag = document.createDocumentFragment();
+    if (!container) return;
+    if (document.getElementById(CONFIG.selectorId)) return;
 
-        const formContainer = document.createElement("form");
-        formContainer.name = "question_select_form";
-        const heading = document.createElement("h3");
-        heading.textContent = "Select the number of questions:";
+    const frag = document.createDocumentFragment();
 
-        const dropdown = document.createElement("select");
-        dropdown.id = CONFIG.selectorId;
+    const formContainer = document.createElement("form");
+    formContainer.name = "question_select_form";
+    const heading = document.createElement("h3");
+    heading.textContent = "Select the number of questions:";
 
-        CONFIG.options.forEach((opt, index) => {
-            const isSelected = index === 0;
-            dropdown.add(new Option(opt.text, opt.value, isSelected, isSelected));
-        });
+    const dropdown = document.createElement("select");
+    dropdown.id = CONFIG.selectorId;
 
-        dropdown.addEventListener("change", (e) => setGlobalQuestionCount(e.target.value));
-
-        formContainer.appendChild(heading);
-        formContainer.appendChild(dropdown);
-        frag.appendChild(formContainer);
-        container.appendChild(frag);
-
-        setGlobalQuestionCount(dropdown.value);
-    }
-
-    window.manageQuestionSelector = manageQuestionSelector;
-})();
-
-// for the No swearing checkbox
-(function () {
-  if (typeof window === "undefined") return;
-  const gameWindow = document.getElementById("game_window");
-  if (!gameWindow) return;
-
-  function createSqueakyCheckbox() {
-    const difficultyEl = document.getElementById("difficulty_level");
-    if (!difficultyEl) return;
-
-    const existing = document.getElementById("squeaky_clean_wrapper");
-    if (existing) {
-      const cb = document.getElementById("squeaky_clean_checkbox");
-      if (cb) cb.checked = Boolean(window.campaignTrail_temp?.squeaky_clean_mode);
-      const note = document.getElementById("squeaky_clean_label");
-      if (note) note.textContent = window.campaignTrail_temp?.squeaky_clean_label
-        ?? "Hides common swear words from displayed text.";
-      return;
-    }
-
-    const wrapper = document.createElement("div");
-    wrapper.id = "squeaky_clean_wrapper";
-    // use margin shorthand instead of invalid marginLeft value
-    wrapper.style.margin = "1em 0 -1em 0";
-
-    const label = document.createElement("label");
-    label.htmlFor = "squeaky_clean_checkbox";
-    label.style.cursor = "pointer";
-    label.style.fontWeight = "bold";
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.id = "squeaky_clean_checkbox";
-    checkbox.style.marginRight = "10px";
-    checkbox.style.verticalAlign = "text-bottom";
-    checkbox.checked = Boolean(window.campaignTrail_temp?.squeaky_clean_mode);
-
-    checkbox.addEventListener("change", function () {
-      if (!window.campaignTrail_temp) window.campaignTrail_temp = {};
-      campaignTrail_temp.squeaky_clean_mode = this.checked;
-
-      if (typeof window.enableSqueakyClean === "function") {
-        try { window.enableSqueakyClean(this.checked); } catch (e) { /* ignore */ }
-      }
-
-      try {
-        document.dispatchEvent(new CustomEvent("squeakyCleanToggled", { detail: { enabled: this.checked } }));
-      } catch (e) { /* ignore */ }
+    CONFIG.options.forEach((opt, index) => {
+      const isSelected = index === 0;
+      dropdown.add(new Option(opt.text, opt.value, isSelected, isSelected));
     });
 
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode("Squeaky-clean mode"));
+    dropdown.addEventListener("change", (e) => setGlobalQuestionCount(e.target.value));
 
-    const note = document.createElement("div");
-    note.id = "squeaky_clean_label";
-    note.style.fontSize = ".8rem";
-    note.style.color = "#464646";
-    note.style.marginTop = "4px";
-    note.textContent = window.campaignTrail_temp?.squeaky_clean_label
-      ?? "Hides common swear words from displayed text.";
+    formContainer.appendChild(heading);
+    formContainer.appendChild(dropdown);
+    frag.appendChild(formContainer);
+    container.appendChild(frag);
 
-    wrapper.appendChild(label);
-    wrapper.appendChild(note);
-
-    difficultyEl.appendChild(wrapper);
+    setGlobalQuestionCount(dropdown.value);
   }
+
+  window.manageQuestionSelector = manageQuestionSelector;
+})();
+
+// This is a dropdown for all the opt-in
+// or opt-out features in the mod
+(function () {
+  'use strict';
+
+  const CONFIG = {
+    targetId: 'difficulty_level',
+    containerId: 'mod_options_container',
+    storageKey: 'alot_custom_preferences',
+	features: [
+	  {
+        id: 'compact_playlist',
+        text: "Compact playlist",
+        desc: "Replaces the default soundtrack with a curated, more theme-accurate playlist.",
+        flag: 'compact_playlist',
+		type: 'toggle',
+        default: false
+      },
+	  {
+        id: 'countymap_position',
+        text: "County map position",
+        desc: "Controls whether the county map feature should be in a separate tab or within the Election Results tab.",
+        flag: 'countyZoom',
+        type: 'select',
+		options: [
+			{ value: 'separate', text: 'In a separate tab' },
+			{ value: 'together', text: 'Within the Election Results map' },
+			{ value: 'seamless', text: 'Just seamlessly zoom in' }
+		],
+        default: 'separate'
+      },
+      {
+        id: 'dynamic_en',
+        text: "Dynamic election night",
+        desc: "Enables a fluid, realistic election night simulation instead of the in-game election night.",
+        flag: 'dynamicEN',
+        type: 'toggle',
+        default: true
+      },
+    ]
+  };
   
-  window.createSqueakyCheckbox = createSqueakyCheckbox;
+  const modMenuStyles = new CSSStyleSheet();
+  modMenuStyles.replaceSync(`
+    #${CONFIG.targetId} { display: inline-flex; flex-wrap: wrap; gap: 2.5em; align-items: flex-start; }
+    #${CONFIG.containerId} { display: flex; flex-direction: column; width: 260px; }
+    .mod-desc-box {
+        margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.35);
+        border: 1px solid #ccc; border-radius: 4px; min-height: 90px;
+        font-size: 0.95em; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .mod-desc-box p { margin: 0 0 10px 0; line-height: 1.3em; }
+    .mod-ctrl-row { display: flex; align-items: center; padding-top: 5px; border-top: 1px solid rgba(0,0,0,0.1); }
+    .switch { position: relative; display: inline-block; width: 40px; height: 20px; margin-right: 10px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .menu-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+    .menu-slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+    input:checked + .menu-slider { background-color: #208604; }
+    input:checked + .menu-slider:before { transform: translateX(20px); }
+    .status-label { font-weight: bold; font-size: 0.9em; text-transform: uppercase; }
+    .status-enabled { color: #0d3d00; }
+    .status-disabled { color: #2d2d2d; }
+    .mod-select { width: 100%; padding: 4px; font-size: 0.95em; border: 1px solid #ccc; border-radius: 3px; background: white; }
+  `);
+
+  if (!document.getElementById("mod_option_styles")) {
+    const styleMarker = document.createElement("style");
+    styleMarker.id = "mod_option_styles";
+    document.head.appendChild(styleMarker);
+	document.adoptedStyleSheets = [...document.adoptedStyleSheets, modMenuStyles];
+  }
+
+  const getSavedSettings = () => {
+    try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)) || {}; } catch (e) { return {}; }
+  };
+
+  const saveSettingToStorage = (flag, value) => {
+    const current = getSavedSettings();
+    current[flag] = value;
+    localStorage.setItem(CONFIG.storageKey, JSON.stringify(current));
+  };
+
+  const getFlag = (key, def) => {
+    window.campaignTrail_temp = window.campaignTrail_temp || {};
+    if (!window.campaignTrail_temp.hasOwnProperty(key)) window.campaignTrail_temp[key] = def;
+    return window.campaignTrail_temp[key];
+  };
+
+  const setFlag = (key, val) => window.campaignTrail_temp[key] = val;
+
+  const createEl = (tag, props = {}, children = []) => {
+    const el = document.createElement(tag);
+    Object.entries(props).forEach(([key, val]) => {
+      if (key === 'style') Object.assign(el.style, val);
+      else if (key === 'dataset') Object.assign(el.dataset, val);
+      else el[key] = val;
+    });
+    children.forEach(child => el.appendChild(child));
+    return el;
+  };
+
+  function manageModOptions() {
+    const target = document.getElementById(CONFIG.targetId);
+    if (!target || document.getElementById(CONFIG.containerId)) return;
+
+    const frag = document.createDocumentFragment();
+    let descText, toggleWrapper, toggleInput, statusText, selectWrapper, selectInput, dropdown;
+
+    const wrapper = createEl('div', { id: CONFIG.containerId }, [
+      createEl('h3', { textContent: 'Special mod settings:', style: { marginBottom: '8px' } }),
+      dropdown = createEl('select', { style: { width: '100%', padding: '5px' } }),
+      createEl('div', { className: 'mod-desc-box' }, [
+        descText = createEl('p', {}),
+
+        toggleWrapper = createEl('div', { className: 'mod-ctrl-row', style: { display: 'none' } }, [
+          createEl('label', { className: 'switch' }, [
+            toggleInput = createEl('input', { type: 'checkbox' }),
+            createEl('span', { className: 'menu-slider' })
+          ]),
+          statusText = createEl('span', { className: 'status-label' })
+        ]),
+
+        selectWrapper = createEl('div', { className: 'mod-ctrl-row', style: { display: 'none' } }, [
+          selectInput = createEl('select', { className: 'mod-select' })
+        ])
+      ])
+    ]);
+
+    const savedSettings = getSavedSettings();
+
+    CONFIG.features.forEach((f, i) => {
+      dropdown.add(new Option(f.text, i));
+      let initialValue = savedSettings.hasOwnProperty(f.flag) ? savedSettings[f.flag] : f.default;
+      setFlag(f.flag, initialValue);
+    });
+
+    const updateState = () => {
+      const feat = CONFIG.features[dropdown.value];
+      descText.textContent = feat.desc;
+
+      if (feat.type === 'toggle') {
+          toggleWrapper.style.display = 'flex';
+          selectWrapper.style.display = 'none';
+
+          const isOn = getFlag(feat.flag, feat.default);
+          toggleInput.checked = isOn;
+          toggleInput.dataset.flag = feat.flag;
+
+          statusText.textContent = isOn ? "Enabled" : "Disabled";
+          statusText.className = `status-label ${isOn ? 'status-enabled' : 'status-disabled'}`;
+      } else if (feat.type === 'select') {
+          toggleWrapper.style.display = 'none';
+          selectWrapper.style.display = 'flex';
+
+          selectInput.innerHTML = '';
+          feat.options.forEach(opt => selectInput.add(new Option(opt.text, opt.value)));
+
+          const currentVal = getFlag(feat.flag, feat.default);
+          selectInput.value = currentVal;
+          selectInput.dataset.flag = feat.flag;
+      }
+    };
+
+    dropdown.addEventListener('change', updateState);
+
+    toggleInput.addEventListener('change', (e) => {
+      const flag = e.target.dataset.flag;
+      const isChecked = e.target.checked;
+      setFlag(flag, isChecked);
+      saveSettingToStorage(flag, isChecked);
+      updateState();
+    });
+
+    selectInput.addEventListener('change', (e) => {
+      const flag = e.target.dataset.flag;
+      const val = e.target.value;
+      setFlag(flag, val);
+      saveSettingToStorage(flag, val);
+    });
+
+    updateState();
+    frag.appendChild(wrapper);
+    target.appendChild(frag);
+  }
+
+  window.manageModOptions = manageModOptions;
 })();
 
 // This is, essentially, for preventing candidates or running mates
 // from being selected. Very useful if you're having a one-candidate
 // mod but still want to list the other candidates
-// A somewhat more optimized version compared to the ALOT one
 (function () {	
     const BAD_CANDIDATE_IDS = new Set(['200', '202', '203']);
     const RESET_CANDIDATE_ID = '201'; 
@@ -3128,14 +3400,9 @@ tooltipList = [
             window.modifySelector(); 
         }
 		
-		// question count selector
-        if (document.getElementById("difficulty_level") && typeof window.manageQuestionSelector === 'function') {
-            window.manageQuestionSelector();
-        }
-		
-		// squeaky clean checkbox
-		if (!document.getElementById("squeaky_clean_wrapper") && document.getElementById("difficulty_level")) {
-			createSqueakyCheckbox();
+		if (document.getElementById("difficulty_level")) {
+			if (typeof window.manageQuestionSelector === 'function') window.manageQuestionSelector(); // question count selector
+			if (typeof window.manageModOptions === 'function') window.manageModOptions();             // mod settings
 		}
 		
 		// candidate blocking
