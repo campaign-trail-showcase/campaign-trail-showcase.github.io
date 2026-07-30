@@ -23468,7 +23468,6 @@ campaignTrail_temp.image = false;
 campaignTrail_temp.executable = {};
 
 let endingObserver = null;
-let currentTargetImage = "";
 
 window.endingImageSystem = (() => {
   let currentTargetImage = null;
@@ -23563,6 +23562,7 @@ function preloadEndingAssets() {
 
 // construct the HTML for the ending page
 let resetPage = false;
+let currentSlide = null;
 
 window.endingConstructor = (direction = 1) => {
   // handle page indexing
@@ -23630,25 +23630,20 @@ window.endingConstructor = (direction = 1) => {
     preloadEndingAssets();
   }
 
+  // hide only the previously active slide
+  if (currentSlide) currentSlide.style.display = 'none';
+
   // render slide
   const slideId = `slide-wrapper-${newPage}`;
-  let activeSlide = document.getElementById(slideId);
+  let nextSlide = document.getElementById(slideId);
 
-  Array.from(narrativeDiv.children).forEach(child => {
-    child.style.display = 'none';
-  });
-
-  if (activeSlide) {
-    // if slide exists, just show it
-    activeSlide.style.display = 'block';
+  if (nextSlide) {
+    nextSlide.style.display = 'block';
   } else {
-    // render HTML
-    const wrapper = document.createElement("div");
-    wrapper.id = slideId;
-    wrapper.className = "slide-wrapper";
-
-    // inject content
-    wrapper.innerHTML = `
+    nextSlide = document.createElement("div");
+    nextSlide.id = slideId;
+    nextSlide.className = "slide-wrapper";
+    nextSlide.innerHTML = `
       <table style='margin:0px;padding:0px;display: table;width:100%;'>
         <tbody style='display: table-row-group;'>
           <tr style='display: table-row;'>
@@ -23659,9 +23654,10 @@ window.endingConstructor = (direction = 1) => {
         </tbody>
       </table>
     `;
-
-    narrativeDiv.appendChild(wrapper);
+    narrativeDiv.appendChild(nextSlide);
   }
+
+  currentSlide = nextSlide;
 
   // update the buttons
   let btnHtml = "";
@@ -26471,7 +26467,7 @@ function generateTimelineHTML(timelineData) {
     }
   ];
 
-  let presNum = 44;
+  let presNum = 43;
   let rowsHtml = "";
 
   const fullTimeline = [...formattedTimeline, ...timelineData];
@@ -32160,40 +32156,32 @@ endingPicker = (out, totv, aa, quickstats) => {
   const activeBonusSlides = bonusSlides.filter(slide => slide.condition(playerEV, opponentEVs));
 
   // calculate the starting index for bonus slides (0=Main, 1=Congress, 2=Cabinet, so 3 is next)
-  let slideIndex = 3;
-
   activeBonusSlides.forEach(slide => {
     campaignTrail_temp.pages.push(slide.html);
-
-    // we need to capture the current slideIndex in the closure
-    const currentIdx = slideIndex;
+    const currentIdx = campaignTrail_temp.pages.length - 1;
 
     campaignTrail_temp.executable[currentIdx] = () => {
       campaignTrail_temp.image = slide.image;
-      // ensure setImage is called if the user navigates here
       if (typeof setImage === 'function') setImage(campaignTrail_temp.image);
     };
-
-    slideIndex++;
   });
 
   // presidents list slide
   const rawTimelineData = generateTimelineSlide(
-        (playerEV >= 270 ? "win" : "loss"),
-        playerEV,
-        window.opLast || "Romney"
-    );
+    (playerEV >= 270 ? "win" : "loss"),
+    playerEV,
+    window.opLast || "Romney"
+  );
 
-    const mergedTimelineData = mergeTimelineData(rawTimelineData);
-    const timelineHTML = generateTimelineHTML(mergedTimelineData);
-    campaignTrail_temp.pages.push(timelineHTML);
+  const mergedTimelineData = mergeTimelineData(rawTimelineData);
+  const timelineHTML = generateTimelineHTML(mergedTimelineData);
+  campaignTrail_temp.pages.push(timelineHTML);
 
-    // capture final slide index
-    const timelineIdx = slideIndex;
-    campaignTrail_temp.executable[timelineIdx] = () => {
-        campaignTrail_temp.image = 'https://static01.nyt.com/images/2013/08/22/us/SPEECH1/SPEECH1-articleLarge.jpg?quality=100&auto=webp'; //https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Honest_Abe_in_the_quiet_of_night.jpg/960px-Honest_Abe_in_the_quiet_of_night.jpg';
-        if(typeof setImage === 'function') setImage(campaignTrail_temp.image);
-    };
+  const timelineIdx = campaignTrail_temp.pages.length - 1;
+  campaignTrail_temp.executable[timelineIdx] = () => {
+    campaignTrail_temp.image = 'https://static01.nyt.com/images/2013/08/22/us/SPEECH1/SPEECH1-articleLarge.jpg?quality=100&auto=webp';
+    if (typeof setImage === 'function') setImage(campaignTrail_temp.image);
+  };
 
   // render.
   finalizeRendering();
