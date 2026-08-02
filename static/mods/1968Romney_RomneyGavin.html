@@ -13710,6 +13710,13 @@ function answerSwapper(pk1, pk2, takeEffects = true) {
     }
 }
 
+function ctsAchievement(achievement, difficultyChecker = true){
+	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
+		if(campaignTrail_temp.CTS){
+		unlockAchievement(achievement);
+	}
+}
+
 // constructs endings based on header and pages
 
 construct = (a = 1) => {
@@ -13762,13 +13769,32 @@ e.header = "<h2></h2>"
 e.pages = "<p></p>"
 */
 
+if (principles >= 6) {
+    ctsAchievement("Saint George<br> ");  
+}
+if(out == "win" && (e.player_answers.includes(3249))){
+    ctsAchievement("... of Lydda"); 
+}
+if (principles < 0) {
+    ctsAchievement("Laman<br> ");  
+}
+if (principles == 0 && ideology == 0 && out == "win") {
+    ctsAchievement("Pitch Perfect<br> ");  
+}
+if(quickstats[0] >= 320 && out == "win" && (e.player_answers.includes(9474))){
+    ctsAchievement("In Control"); 
+}
+if (ans == 1778 && out == "win") {
+            ctsAchievement("Wash Away the Credibility Gap");  
+    }
+
 // win
 if (out == "win") {
+    ctsAchievement("His Republican Party");
     e.header = ""
     e.pages = "<h3>Congratulations, you won the 1968 Election</h3><p><p style='margin-top:0em;'><br>It looked dicey for a moment. After Johnson’s re-entry into the race, you worried that he might pull all kinds of dirty tricks to discredit you, to make you look like a fool. It seemed as though he would weaponize every instrument of the federal government to sabotage your pledges to end the war in Vietnam and fight the moral rot overtaking America’s cities. You feared what another four years under an increasingly bitter Johnson would look like—assuming he survived that long. More than that, you feared what the Republican Party would become if you lost to this aging husk of a man.<br><br>Luckily, the American voters were not deceived. You accepted a terse but polite concession call from Johnson and then addressed a cheering crowd of supporters. You’ve begun assembling your cabinet, picking your priorities, and figuring out ways to strengthen the so-called Independent Sector. Republican officials from Nixon to Reagan have already started making their way to Detroit to grumble their congratulations and kiss the ring. They and a united Republican Party will be essential in navigating a difficult situation domestically and abroad.<br><br>If there’s one sour note, it’s the presumptive vice president. While you and Gavin are united on ending the war, cracks have already begun to emerge on how the war should end, as well as aspects of your domestic policy. As Inauguration Day approaches, you reassure yourself there’s nothing to worry about. After all, how much trouble could one man cause?<br><br><br><br></p>"
     e.image = "https://imgur.com/McU9IDI.png ";
     return construct(0);
-    ctsAchievement("His Republican Party");
 
 }
 // deadlock
@@ -13788,37 +13814,11 @@ if (out == "tie") {
 
 }
 
-
-if (principles >= 6) {
-    ctsAchievement("Saint George<br> ");  
-}
-if(out == "win" && (e.player_answers.includes(3249))){
-    ctsAchievement("... of Lydda"); 
-}
-if (principles < 0) {
-    ctsAchievement("Laman<br> ");  
-}
-if (principles == 0 && ideology == 0 && out == "win") {
-    ctsAchievement("Pitch Perfect<br> ");  
-}
-if(quickstats[0] >= 320 && out == "win" && (e.player_answers.includes(9474))){
-    ctsAchievement("In Control"); 
-}
-if (ans == 1778 && out == "win") {
-            ctsAchievement("Wash Away the Credibility Gap");  
-    }
 else {
 	e.header = "<h2><q>PLACEHOLDER</q></h2>"
 	e.pages = "<p>Fallback ending>"
 }
 
-}
-
-function ctsAchievement(achievement, difficultyChecker = true){
-	if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier<=1)||!difficultyChecker)
-		if(campaignTrail_temp.CTS){
-		unlockAchievement(achievement);
-	}
 }
 
 HistHexcolour=["#992F39","#2F547C","#A56B3B"]; HistName=[" George W. Romney"," Hubert H. Humphrey"," George W. Wallace"]; HistEV=[287,185,66]; HistPV=["30,504,623","29,692,151","12,704,104"]; HistPVP=["41.3%","40.2%","17.2%"];

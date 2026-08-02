@@ -13430,6 +13430,26 @@ endingPicker = (out, totv, aa, quickstats) => {
 e.header = "<h2></h2>"
 e.pages = "<p></p>"
 */
+
+if (principles >= 6) {
+    ctsAchievement("Saint George<br> ");  
+}
+if(out == "win" && (e.player_answers.includes(3249))){
+    ctsAchievement("... of Lydda"); 
+}
+if (principles < 0) {
+    ctsAchievement("Laman<br> ");  
+}
+if (principles == 0 && ideology == 0 && out == "win") {
+    ctsAchievement("Pitch Perfect<br> ");  
+}
+if(quickstats[0] >= 320 && out == "win" && (e.player_answers.includes(9474))){
+    ctsAchievement("In Control"); 
+}
+if (ans == 1778 && out == "win") {
+            ctsAchievement("Wash Away the Credibility Gap");  
+    }
+
 // nixon win
 if (treason == 1 && out == "win") {
     e.header = ""
@@ -13440,29 +13460,29 @@ if (treason == 1 && out == "win") {
 }
 // low Conservative
 if (principles <= -3 && ideology <= -4 && out == "win") {
+    ctsAchievement("His Republican Party");
     e.header = ""
     e.pages = "<h3>How the Romney Administration is Changing</h3><p><p style='margin-top:0em;'><br>January 2nd, 1970<br><br>By: Anonymous, National Review<br><br>The Romney administration was something much more… lukewarm, than many of us wanted. We had Reagan right there. Why did we pick the mellow Governor of Michigan? The convention made it hurt a little less. Kirk was, of course, an olive branch to the conservative wing himself. But what was more shocking was what happened once he won; Mitchell into the Attorney General's office, Butz into Agriculture, and even Jim Rhodes himself being rolled into the Treasury's office. So the question I mainly ask is, of course, what happened to Romney of Michigan?<br><br>Not that it's complaint worthy. The Romney administration has continuously advocated for heavily conservative policy, seen in the roll through of Haynsworth to the Supreme Court. But one thing that doesn't make logistical sense, even to the most observant pundit, is the absence of Romney himself. Instead of him speaking at many events, we begin to see Rhodes take over many of the duties that Romney once inherited, Mitchell flanking him. Rhodes in the press room, in congress, and even filling the gaps and talking to minor foreign leaders in Romney’s absence.<br><br>The most important consequence of this has been continued bickering with congress. McCormack does not seem to enjoy the company of either of the two firebrands, and after Romney went dark following the approval of Haynsworth, legislation has continuously stalled out in congress. Kirk has also been suspiciously absent from the Senate, and little is seen of him in his official function, never one for official duties.<br><br>Perhaps this is to say a soft coup has happened in the halls of the Administration, because it would be hard to see the Romney of old failing so hard in discussions with congress. It would line up with Romney being relegated to the ceremony podium, and both the hard monetary and hard social policy Mitchell and Rhodes brought into the administration. Maybe even the enigmatic Hoover has stuck his foot into the ring. Whatever it is, again, it has been great for the country.<br><br>Whatever the status of the Mormon President, rumors have dogged the cabinet of Romney that he may seek to be replaced in 72, depending on how midterms go. A few questions also remain: how can Rockefeller take such a cold footed dismissal of his advice so lightly? Lindsay is an unknown variable. And, perhaps the most important question of all: will the public accept this new vision kindly?<br><br></p>"
     e.image = "https://i.imgur.com/IFxDO0b.png ";
     return construct(0);
-    ctsAchievement("His Republican Party");
 
 }
 // middling con. canon
 if (principles > -3 && principles <= 3 && ideology <= -4 && out == "win") {
+    ctsAchievement("His Republican Party");
     e.header = ""
     e.pages = "<h3>Key Names in the Romney Administration</h3><p><p style='margin-top:0em;'><br><b>President:</b> 			George Romney (1969-1973)<br><br><b>Vice President:</b> 		Claude Kirk (1969-1973)<br><br><b>Secretary of State:</b> 		Richard Nixon (1969-1972)<br>				Edward Brooke (1972-1973)<br><br><b>Secretary of Defense:</b> 	James Gavin (1969-1973)<br><br><b>Secretary of the Treasury:</b> 	David Rockefeller (1969-1973)<br><br><b>Attorney General:</b>		Edward Brooke (1969-1972)<br>				Elliot Richardson (1972-1973)<br><br><b>Secretary of the Interior:</b>	Wally Hickel (1969-1973)<br>				Vacant (1973-1973)<br><br><b>Secretary of H.E.W.:</b> 		Ovetta Hobby (1969-1971)<br>				Robert Finch (1971-1972)<br>				Thomas Kuchel (1972-1973)<br><br><b>Secretary of H.U.D.:</b>		John Lindsay (1969-1973)<br><br><b>Secretary of Commerce:</b> 	J. Willard Marriott (1969-1973)</p>"
     e.image = "https://i.imgur.com/H1vhaU7.png ";
     return construct(0);
-    ctsAchievement("His Republican Party");
 
 }
 // high Conservative
 if (principles > 3 && ideology <= -4 && out == "win") {
+    ctsAchievement("His Republican Party");
     e.header = ""
     e.pages = "<h3>BLESSED BE THE HOMEMAKERS: ROMNEY’S LEGACY FOR WOMEN - Opening February 2, 2022</h3><p><p style='margin-top:0em;'><<b>Home > The Museum > Exhibits</b><br><br>Developed in conjunction with the Eagle Forum, the George W. Romney Presidential Library’s Blessed be the Homemakers explores the contributions of the Romney presidency on the achievements of women in the United States and around the world. From his regular meetings on “women’s issues” to his creation of the US Federal Commission on Mothers to his speeches defending the sanctity of the home, this exhibit provides visitors with a look at the pressures roiling the United States through the 60s and early 1970s. It explores how Administration officials bravely resisted pressures of what Secretary Friedman once described as the “momentary majority” to find a path that respected all women, both in the home and outside it.<br><br>Blessed Be the Homemakers includes not just artifacts, documents, photographs, and other materials straight from the George W. Romney Presidential Library’s archives, but countless additional materials donated from everyday, normal women inspired by the Administration’s leadership. The result is a comprehensive and, most importantly, unbiased perspective. Visitors get a rare look at what has all too often been missing from other museums and research centers.<br><br>Celebrating the 50th Anniversary of President’s Romney’s ERA Opposition Speech, Blessed Be the Homemakers will be on exhibit in the Library’s Freedom Hall beginning February 2, 2022, until June 30, 2023.<br><br>Throughout the exhibit’s display, the George W. Romney Foundation and the Eagle Forum will host special programming to highlight President Romney’s extraordinary life and achievements. Also featured will be three new dresses from First Lady Lenore Romney’s wardrobe. These can be found near the gift shop as you exit.<br><br></p>"
     e.image = "https://i.imgur.com/IEDTfHw.png ";
     return construct(0);
-    ctsAchievement("His Republican Party");
 
 }
 // low moderate
@@ -13546,24 +13566,7 @@ if (principles >= 0 && out == "loss") {
 
 }
 
-if (principles >= 6) {
-    ctsAchievement("Saint George<br> ");  
-}
-if(out == "win" && (e.player_answers.includes(3249))){
-    ctsAchievement("... of Lydda"); 
-}
-if (principles < 0) {
-    ctsAchievement("Laman<br> ");  
-}
-if (principles == 0 && ideology == 0 && out == "win") {
-    ctsAchievement("Pitch Perfect<br> ");  
-}
-if(quickstats[0] >= 320 && out == "win" && (e.player_answers.includes(9474))){
-    ctsAchievement("In Control"); 
-}
-if (ans == 1778 && out == "win") {
-            ctsAchievement("Wash Away the Credibility Gap");  
-    }
+
 else {
 	e.header = "<h2><q>PLACEHOLDER</q></h2>"
 	e.pages = "<p>Fallback ending>"
