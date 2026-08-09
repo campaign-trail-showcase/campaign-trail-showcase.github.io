@@ -4152,21 +4152,18 @@ window.a = function(e) {
   window.manageModOptions = manageModOptions;
 })();
 
-// Useful if you have a mod series!
-// Here, it lets you switch easily to ALOT, LBM, et al.
+// This lets you switch between other mods more easily
+// based off a version from the Netherlands mod series
 (function () {
   'use strict';
 
   const CONFIG = {
-    autoStartParam: 'from',
-    autoStartValue: 'othermod',
     startButtonId: 'game_start',
     electionSelectQuery: 'select[name="election_id"]',
     containerId: 'game_window',
     baseUrl: 'https://campaigntrailshowcase.com/campaign-trail/',
     modsToAdd: [
-      { value: '1992', text: '1992 - Every Brilliant Thing', modName: '1992 - Every Brilliant Thing' },
-	  { value: '2012', text: '2012 - Little Big Man', modName: '2012 - Little Big Man' },
+      { value: '2012', text: '2012 - Little Big Man', modName: '2012 - Little Big Man' },
       { value: '2016', text: '2016 - A Lifetime of This', modName: '2016 - A Lifetime of This' },
     ],
   };
@@ -4192,8 +4189,10 @@ window.a = function(e) {
       if (targetMod) {
         const redirectUrl = new URL(CONFIG.baseUrl);
         redirectUrl.searchParams.set('modName', targetMod.modName);
-        redirectUrl.searchParams.set(CONFIG.autoStartParam, CONFIG.autoStartValue);
-        window.location.href = redirectUrl.toString();
+        
+        // converts form-encoded '+' spaces to '%20' so they display cleanly as spaces in the browser address bar
+        const cleanUrl = redirectUrl.toString().replace(/\+/g, '%20');
+        window.location.href = cleanUrl;
       }
     });
 
@@ -4204,7 +4203,8 @@ window.a = function(e) {
     if (hasAutoStarted || window.campaignTrailEnhanced) return;
 
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get(CONFIG.autoStartParam) === CONFIG.autoStartValue) {
+    // checks if 'modName' is in the URL to trigger the click
+    if (urlParams.has('modName')) {
       const startButton = document.getElementById(CONFIG.startButtonId);
       if (startButton) {
         window.campaignTrailEnhanced = true;
