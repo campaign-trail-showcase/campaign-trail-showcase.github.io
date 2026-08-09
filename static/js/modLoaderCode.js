@@ -69,7 +69,8 @@ async function getModMetadata(modName) {
 
   // otherwise, perform standard fetch from server
   try {
-    const res = await fetch(`../static/mods/${modName}_init.html`);
+    const safeFileName = modName.replace(/:/g, " -");
+    const res = await fetch(`../static/mods/${safeFileName}_init.html`);
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const rawModText = await res.text();
 
@@ -2024,7 +2025,8 @@ async function loadModFromButton(modValue) {
     }
 
     try {
-      const res = await fetch(`../static/mods/${modValue}_init.html`);
+      const safeFileName = modValue.replace(/:/g, " -");
+      const res = await fetch(`../static/mods/${safeFileName}_init.html`);
       if (!res.ok) throw new Error("Network response was not ok");
       const modCode = await res.text();
 
@@ -2055,7 +2057,8 @@ async function loadModFromButton(modValue) {
 
         if (!allAch[linkedMod]) {
           try {
-            const linkedRes = await fetch(`../static/mods/${linkedMod}_init.html`);
+            const safeLinkedFileName = linkedMod.replace(/:/g, " -");
+            const linkedRes = await fetch(`../static/mods/${safeLinkedFileName}_init.html`);
             if (linkedRes.ok) {
               const linkedCode = await linkedRes.text();
               extractModMetadata(linkedCode, linkedMod);
