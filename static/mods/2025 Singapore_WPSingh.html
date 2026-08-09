@@ -13914,36 +13914,6 @@ window.SG_DEADLOCK_SONG_PLAYED = null;
 
 endingPicker = (out, totv, aa, quickstats) => {
     const finalStates = Array.isArray(campaignTrail_temp.final_state_results) ? campaignTrail_temp.final_state_results : [];
-    const stateWinnersByAbbr = new Map(
-        finalStates.map(st => [st.abbr, st.result?.candidate])
-    );
-    const playerWonStates = (...abbrs) => abbrs.every(abbr => stateWinnersByAbbr.get(abbr) === campaignTrail_temp.candidate_id);
-    const getCandRes = (id) => aa.find(r => r.candidate === id) || { electoral_votes: 0, popular_votes: 0 };
-    const papEV = getCandRes(300).electoral_votes;
-
-    if (papEV < 64) {
-        ctsAchievement("End of the Supermajority")
-    }
-    let HougangResult = campaignTrail_temp.final_state_results.find((x) => x.state === 42431);
-    if (HougangResult?.result?.[0]?.candidate && HougangResult.result[1].candidate > 75) {
-        ctsAchievement("The Fortress");
-    }
-    if (Woke > 4) {
-        ctsAchievement("True Woke")
-    }
-    if (campaignTrail_temp.player_answers?.includes(6051)){
-        ctsAchievement("Singapore's PAS")
-    }
-    if (ManpowerStrain > 3) {
-        ctsAchievement("Mr Islandwide")
-    }
-    let MBResult = campaignTrail_temp.final_state_results.find((x) => x.state === 42551);
-    if (MBResult?.result?.[0]?.candidate && MBResult.result[1].candidate> 40)  {
-        ctsAchievement("Every dog has its day");
-    }
-
-endingPicker = (out, totv, aa, quickstats) => {
-    const finalStates = Array.isArray(campaignTrail_temp.final_state_results) ? campaignTrail_temp.final_state_results : [];
     const getCandRes = (id) => aa.find(r => r.candidate === id) || { electoral_votes: 0, popular_votes: 0 };
     const getCandStatePct = (statePk, candPk) => {
         const stateObj = finalStates.find(s => s.state === statePk);
