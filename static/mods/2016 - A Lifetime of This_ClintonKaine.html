@@ -24399,23 +24399,40 @@ function getCdVotesUrl(year, vintage) {
     return `${CD_VOTES_BASE}/cd_votes_${year}_${vintage}.json`;
 }
 
+// helper to normalize and match CD codes (e.g., "IL-01" matches "IL-1" or "IL01")
+function normalizeCdCode(cd) {
+	if (!cd) return "";
+	const str = String(cd).toUpperCase().trim().replace(/[-\s]/g, '');
+	const m = str.match(/^([A-Z]{2})(AL|0*(\d+))$/);
+	if (m) {
+		const state = m[1];
+		const num = m[2] === "AL" ? "AL" : String(parseInt(m[3], 10)).padStart(2, '0');
+		return `${state}-${num}`;
+	}
+	return str;
+}
+
+function matchCdCodes(cd1, cd2) {
+	if (!cd1 || !cd2) return false;
+	return normalizeCdCode(cd1) === normalizeCdCode(cd2);
+}
+
 function getFeatureCdCode(f) {
     if (!f || !f.properties) return null;
     const p = f.properties;
 
-    // check direct standard properties if they are already fully formatted (e.g. "AL-05" or "WY-AL")
-    if (p.name && /^[A-Z]{2}-(AL|\d{2})$/i.test(p.name)) return String(p.name).toUpperCase();
-    if (p.cd_code) return String(p.cd_code);
-    if (p.CD_CODE) return String(p.CD_CODE);
-    if (p.cd && /^[A-Z]{2}-(AL|\d{2})$/i.test(p.cd)) return String(p.cd).toUpperCase();
+    // check direct standard properties
+    if (p.name && /^[A-Z]{2}-(AL|\d{1,2})$/i.test(p.name)) return normalizeCdCode(p.name);
+    if (p.cd_code) return normalizeCdCode(p.cd_code);
+    if (p.CD_CODE) return normalizeCdCode(p.CD_CODE);
+    if (p.cd && /^[A-Z]{2}-(AL|\d{1,2})$/i.test(p.cd)) return normalizeCdCode(p.cd);
 
-    // check if we can combine a separate state abbreviation and numeric CD property
     const stateVal = p.state || p.STATE || p.state_po || p.STATE_PO;
     const cdVal = p.cd !== undefined ? p.cd : p.CD;
     if (stateVal && cdVal !== undefined) {
         const stPo = String(stateVal).toUpperCase();
         if (STATE_PO_TO_FIPS[stPo]) {
-            const cdStr = String(cdVal).toUpperCase() === "AL" || String(cdVal) === "0" ? "AL" : String(cdVal).padStart(2, '0');
+            const cdStr = String(cdVal).toUpperCase() === "AL" ? "AL" : String(parseInt(cdVal, 10)).padStart(2, '0');
             return `${stPo}-${cdStr}`;
         }
     }
@@ -24423,45 +24440,26 @@ function getFeatureCdCode(f) {
     // parse and normalize from GEOID (e.g. "0101" or "01001" or "3622")
     if (p.GEOID) {
         const geoid = String(p.GEOID);
-        if (geoid.length === 4) {
+        if (geoid.length >= 4) {
             const stFips = geoid.slice(0, 2);
             const cdNum = geoid.slice(2);
             const stPo = STATE_FIPS_TO_PO[stFips];
-            if (stPo) return `${stPo}-${cdNum.padStart(2, '0')}`;
-        } else if (geoid.length === 5) {
-            const stFips = geoid.slice(0, 2);
-            const cdNum = geoid.slice(2);
-            const stPo = STATE_FIPS_TO_PO[stFips];
-            if (stPo) return `${stPo}-${String(parseInt(cdNum, 10)).padStart(2, '0')}`;
+            if (stPo) {
+                const numVal = parseInt(cdNum, 10);
+                const cdStr = (isNaN(numVal) || numVal === 0) ? "AL" : String(numVal).padStart(2, '0');
+                return `${stPo}-${cdStr}`;
+            }
         }
     }
 
     // parse and normalize from STATEFP + CD field combo
     if (p.STATEFP) {
         const stPo = STATE_FIPS_TO_PO[p.STATEFP];
-
-        // direct lookup for common years
-        let cdNum = p.CDFP || p.CD || p.CD113FP || p.CD114FP || p.CD115FP || p.CD116FP || p.CD117FP || p.CD118FP || p.CD119FP || p.CD109FP || p.CD108FP || p.CD103FP;
-
-        // regex fallback for other non-listed Congress shapes
-        if (cdNum === undefined) {
-            const cdKey = Object.keys(p).find(k => /^CD\d{3}FP$/i.test(k) || /^CDFP$/i.test(k));
-            if (cdKey) cdNum = p[cdKey];
-        }
-
+        let cdNum = p.CDFP || p.CD || p.CD118FP || p.CD119FP || p.CD117FP || p.CD116FP || p.CD115FP;
         if (stPo && cdNum !== undefined) {
-            return `${stPo}-${String(parseInt(cdNum, 10)).padStart(2, '0')}`;
-        }
-    }
-
-    // fallback to parsing numeric Feature ID strings (e.g., "0101" or "101")
-    if (f.id) {
-        const idStr = String(f.id).padStart(4, '0');
-        if (idStr.length === 4) {
-            const stFips = idStr.slice(0, 2);
-            const cdNum = idStr.slice(2);
-            const stPo = STATE_FIPS_TO_PO[stFips];
-            if (stPo) return `${stPo}-${cdNum.padStart(2, '0')}`;
+            const numVal = parseInt(cdNum, 10);
+            const cdStr = (isNaN(numVal) || numVal === 0) ? "AL" : String(numVal).padStart(2, '0');
+            return `${stPo}-${cdStr}`;
         }
     }
 
@@ -24520,6 +24518,13 @@ function projectGeoJsonToScreen(geojson) {
             f.geometry.coordinates = projectCoords(f.geometry.coordinates, 3);
         }
     });
+}
+
+function normalizeGeoid(geoid) {
+    let s = String(geoid || "").trim();
+    if (s.length === 11 && /^\d+$/.test(s)) return "0" + s;
+    if (s.length < 12 && /^\d+$/.test(s)) return s.padStart(12, "0");
+    return s;
 }
 
 // approximate district weights from county shapes and district GeoJSON
@@ -24602,32 +24607,6 @@ function generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyVotes
         return null;
     }
 
-    // helper to normalize and match CD codes (e.g., "IL-01" matches "IL-1" or "IL01")
-    function matchCdCodes(cd1, cd2) {
-        if (!cd1 || !cd2) return false;
-
-        const clean1 = String(cd1).toUpperCase().trim().replace(/[-\s]/g, '');
-        const clean2 = String(cd2).toUpperCase().trim().replace(/[-\s]/g, '');
-
-        if (clean1 === clean2) return true;
-
-        const parse = (str) => {
-            const m = str.match(/^([A-Z]{2})(AL|0*(\d+))$/);
-            if (m) {
-                return { state: m[1], num: m[2] === "AL" ? 0 : parseInt(m[3], 10) };
-            }
-            return null;
-        };
-
-        const p1 = parse(clean1);
-        const p2 = parse(clean2);
-
-        if (p1 && p2) {
-            return p1.state === p2.state && p1.num === p2.num;
-        }
-        return false;
-    }
-
     // helper to extract CD/FIPS data from proxy tables
     function getProxyVotes(cdCode, fips) {
         if (!proxyVotesTable) return null;
@@ -24703,14 +24682,31 @@ function generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyVotes
     // parse reference votes table into a lookup: refCdCode → fips → {dem, rep, other}
     const refPartisanLookup = {};
     if (refVotesTable && typeof refVotesTable === 'object') {
-        for (const cdCode in refVotesTable) {
-            const fipsList = refVotesTable[cdCode];
-            if (!fipsList || typeof fipsList !== 'object') continue;
-            refPartisanLookup[cdCode] = {};
-            for (const fips in fipsList) {
-                const pv = parseProxyVotes(fipsList[fips]);
-                if (pv) {
-                    refPartisanLookup[cdCode][String(fips).replace(/\D/g, '').padStart(5, '0')] = pv;
+        for (const k1 in refVotesTable) {
+            const innerObj = refVotesTable[k1];
+            if (!innerObj || typeof innerObj !== 'object') continue;
+
+            const isK1Fips = /^\d+$/.test(k1) || /^(US)?\d{4,5}$/i.test(k1);
+
+            if (isK1Fips) {
+                const cleanFips = String(k1).replace(/\D/g, '').padStart(5, '0');
+                for (const cdCode in innerObj) {
+                    const cleanCd = String(cdCode).toUpperCase().replace(/[-\s]/g, '');
+                    const pv = parseProxyVotes(innerObj[cdCode]);
+                    if (pv) {
+                        if (!refPartisanLookup[cleanCd]) refPartisanLookup[cleanCd] = {};
+                        refPartisanLookup[cleanCd][cleanFips] = pv;
+                    }
+                }
+            } else {
+                const cleanCd = String(k1).toUpperCase().replace(/[-\s]/g, '');
+                if (!refPartisanLookup[cleanCd]) refPartisanLookup[cleanCd] = {};
+                for (const fips in innerObj) {
+                    const cleanFips = String(fips).replace(/\D/g, '').padStart(5, '0');
+                    const pv = parseProxyVotes(innerObj[fips]);
+                    if (pv) {
+                        refPartisanLookup[cleanCd][cleanFips] = pv;
+                    }
                 }
             }
         }
@@ -24819,7 +24815,7 @@ function generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyVotes
                     if (cent && isFinite(cent[0]) && isFinite(cent[1])) {
                         if (coordinateSystem === "scaled-screen") {
                             // convert back to [0, 975] screen coordinate space
-                            f.centroid = [cent[0] * 100, cent[1] * 100];
+                            f.centroid = [cent[0] * 100, 610 - (cent[1] * 100)];
                         } else {
                             f.centroid = cent;
                         }
@@ -24837,7 +24833,7 @@ function generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyVotes
                                 const cent = proj(geoCent);
                                 f.centroid = (cent && isFinite(cent[0]) && isFinite(cent[1])) ? cent : null;
                             } else if (coordinateSystem === "scaled-screen") {
-                                f.centroid = [geoCent[0] * 100, geoCent[1] * 100];
+                                f.centroid = [geoCent[0] * 100, 610 - (geoCent[1] * 100)];
                             } else {
                                 f.centroid = geoCent;
                             }
@@ -24872,10 +24868,16 @@ function generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyVotes
 
             // count how many CD bounding boxes overlap this county's bbox
             // to determine the required sampling density
-            const countyBbox = [bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1]];
+            let testCent = cent;
+            let countyBbox = [bbox[0][0], bbox[0][1], bbox[1][0], bbox[1][1]];
+            if (coordinateSystem === "scaled-screen") {
+                testCent = [cent[0] / 100, (610 - cent[1]) / 100];
+                countyBbox = [bbox[0][0] / 100, (610 - bbox[1][1]) / 100, bbox[1][0] / 100, (610 - bbox[0][1]) / 100];
+            }
+
             let overlappingCdCount = 0;
             for (let i = 0; i < stateCds.length; i++) {
-                if (stateCds[i].bbox && inBbox(cent, stateCds[i].bbox)) {
+                if (stateCds[i].bbox && inBbox(testCent, stateCds[i].bbox)) {
                     overlappingCdCount++;
                 } else if (stateCds[i].bbox) {
                     // check actual bbox overlap
@@ -24926,7 +24928,7 @@ function generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyVotes
                     }
                 } else if (coordinateSystem === "scaled-screen") {
                     // downscale the county screen points to match the [0, 9.75] space
-                    testPt = [pt[0] / 100, pt[1] / 100];
+                    testPt = [pt[0] / 100, (610 - pt[1]) / 100];
                 }
 
                 if (!testPt) return;
@@ -24998,8 +25000,9 @@ function generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyVotes
                         let hasAnyRefMatch = false;
 
                         for (const refCdCode in refMatches) {
-                            const refWeight = refMatches[refCdCode];
-                            const refPartisan = refPartisanLookup[refCdCode] ? refPartisanLookup[refCdCode][fips] : null;
+							const refWeight = refMatches[refCdCode];
+							const cleanRefCd = String(refCdCode).toUpperCase().replace(/[-\s]/g, '');
+							const refPartisan = refPartisanLookup[cleanRefCd] ? refPartisanLookup[cleanRefCd][fips] : null;
 
                             if (refPartisan) {
                                 totalRefDem += refPartisan.dem * refWeight;
@@ -25027,7 +25030,8 @@ function generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyVotes
                             }
                         } else {
                             // try direct CD code match fallback
-                            const directRef = refPartisanLookup[cdCode] ? refPartisanLookup[cdCode][fips] : null;
+                            const cleanCdCode = String(cdCode).toUpperCase().replace(/[-\s]/g, '');
+							const directRef = refPartisanLookup[cleanCdCode] ? refPartisanLookup[cleanCdCode][fips] : null;
                             if (directRef) {
                                 const spatialWeight = cdHits[cdCode] / totalHits;
                                 const totalRef = directRef.dem + directRef.rep + directRef.other;
@@ -25202,7 +25206,12 @@ function generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyVotes
                     countyBboxForOverlap = null;
                 }
             } else if (coordinateSystem === "scaled-screen") {
-                countyBboxForOverlap = [countyBboxRaw[0] / 100, countyBboxRaw[1] / 100, countyBboxRaw[2] / 100, countyBboxRaw[3] / 100];
+                countyBboxForOverlap = [
+                    countyBboxRaw[0] / 100,
+                    (610 - countyBboxRaw[3]) / 100,
+                    countyBboxRaw[2] / 100,
+                    (610 - countyBboxRaw[1]) / 100
+                ];
             } else {
                 countyBboxForOverlap = countyBboxRaw;
             }
@@ -25377,10 +25386,26 @@ function computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidates
                 const demShare = pieceData.dem / spatialWeight;
                 const repShare = pieceData.rep / spatialWeight;
                 const othShare = pieceData.other / spatialWeight;
+
+                const rD = res.baseDem > 0 ? (res.curDem / res.baseDem) : 1;
+                const rR = res.baseRep > 0 ? (res.curRep / res.baseRep) : 1;
+                const rO = res.baseOth > 0 ? (res.curOth / res.baseOth) : 1;
+
                 const countyTotal = res.curDem + res.curRep + res.curOth;
-                pieceDem = countyTotal * spatialWeight * demShare;
-                pieceRep = countyTotal * spatialWeight * repShare;
-                pieceOth = countyTotal * spatialWeight * othShare;
+                let scaledDem = demShare * rD;
+                let scaledRep = repShare * rR;
+                let scaledOth = othShare * rO;
+                let totalScaled = scaledDem + scaledRep + scaledOth;
+
+                if (totalScaled > 0) {
+                    pieceDem = countyTotal * spatialWeight * (scaledDem / totalScaled);
+                    pieceRep = countyTotal * spatialWeight * (scaledRep / totalScaled);
+                    pieceOth = countyTotal * spatialWeight * (scaledOth / totalScaled);
+                } else {
+                    pieceDem = countyTotal * spatialWeight * demShare;
+                    pieceRep = countyTotal * spatialWeight * repShare;
+                    pieceOth = countyTotal * spatialWeight * othShare;
+                }
             }
         } else {
             const { d, r, o } = parseVotes(pieceData);
@@ -25553,15 +25578,31 @@ function injectCountyMapButton() {
 // helper to detect if active page background is dark or light
 function getAdaptiveTextColor() {
     try {
-        const bg = window.getComputedStyle(document.body).backgroundColor;
-        const rgb = bg.match(/\d+/g);
-        if (rgb && rgb.length >= 3) {
-            // W3C perceived brightness formula
-            const brightness = (parseInt(rgb[0], 10) * 299 + parseInt(rgb[1], 10) * 587 + parseInt(rgb[2], 10) * 114) / 1000;
-            return brightness < 128 ? '#ffffff' : '#000000';
+        // start checking at game_window or main_content_area before falling back to body
+        let el = document.getElementById("game_window") || 
+                 document.getElementById("main_content_area") || 
+                 document.body;
+
+        while (el && el !== document) {
+            const bg = window.getComputedStyle(el).backgroundColor;
+            if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') {
+                const rgb = bg.match(/\d+/g);
+                if (rgb && rgb.length >= 3) {
+                    const r = parseInt(rgb[0], 10);
+                    const g = parseInt(rgb[1], 10);
+                    const b = parseInt(rgb[2], 10);
+                    const a = rgb.length >= 4 ? parseFloat(rgb[3]) : 1;
+                    if (a > 0) {
+                        // W3C perceived brightness formula
+                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                        return brightness < 128 ? '#ffffff' : '#000000';
+                    }
+                }
+            }
+            el = el.parentElement;
         }
     } catch(e) {}
-    return 'inherit';
+    return '#000000';
 }
 
 function getAdaptiveControlBg() {
@@ -26025,6 +26066,8 @@ async function loadAndDrawCountyMap(mode) {
     const activeYears = getActiveYears();
     CURRENT_YEAR = activeYears.current;
     HISTORICAL_YEAR = activeYears.historical;
+	
+	const loadedPmTilesYear = PMTILES_URLS[CURRENT_YEAR] ? CURRENT_YEAR : "2008";
 
     const loadScript = src => new Promise((resolve, reject) => {
         const s = document.createElement("script");
@@ -26266,6 +26309,22 @@ async function loadAndDrawCountyMap(mode) {
                 stateBase[st].other += (c.votes_other || 0);
                 stateBase[st].all += (c.votes_all || 0);
                 nationalTotalVotes += (c.votes_all || 0);
+            }
+        }
+		
+		let pmTilesCountyMap = {};
+        if (loadedPmTilesYear === CURRENT_YEAR) {
+            pmTilesCountyMap = baseCurrentMap;
+        } else if (_countyMapCache.current[loadedPmTilesYear]) {
+            _countyMapCache.current[loadedPmTilesYear].forEach(c => pmTilesCountyMap[c.fips] = c);
+        } else if (_countyMapCache.historical[loadedPmTilesYear]) {
+            _countyMapCache.historical[loadedPmTilesYear].forEach(c => pmTilesCountyMap[c.fips] = c);
+        } else {
+            try {
+                const pmRaw = await fetch(`https://raw.githubusercontent.com/StrawberryMaster/StrawberryMaster.github.io/refs/heads/master/scripts/county_results_${loadedPmTilesYear}.min.json`).then(r => r.json());
+                pmRaw.forEach(c => pmTilesCountyMap[String(c.fips).padStart(5, '0')] = c);
+            } catch (e) {
+                pmTilesCountyMap = baseCurrentMap;
             }
         }
 
@@ -26591,12 +26650,17 @@ async function loadAndDrawCountyMap(mode) {
                 tpShares: tpShares
             };
 
-            fipsMultipliers[d.fips] = {
-                mD: (c.votes_dem || 0) > 0 ? curDem / (c.votes_dem || 0) : 1,
-                mR: (c.votes_rep || 0) > 0 ? curRep / (c.votes_rep || 0) : 1,
-                mO: (c.votes_other || 0) > 0 ? curOth / (c.votes_other || 0) : 1,
-                tpShares: tpShares
-            };
+            const pmCounty = pmTilesCountyMap[d.fips] || c;
+			const pmDem = pmCounty.votes_dem || c.votes_dem || 1;
+			const pmRep = pmCounty.votes_rep || c.votes_rep || 1;
+			const pmOth = pmCounty.votes_other || c.votes_other || 1;
+
+			fipsMultipliers[d.fips] = {
+				mD: pmDem > 0 ? curDem / pmDem : 1,
+				mR: pmRep > 0 ? curRep / pmRep : 1,
+				mO: pmOth > 0 ? curOth / pmOth : 1,
+				tpShares: tpShares
+			};
         });
 
         const radiusScale = d3.scaleSqrt().domain([0, maxMarginVotes]).range([0, 35]);
@@ -27278,7 +27342,7 @@ async function loadAndDrawCountyMap(mode) {
 
                 mlMap.getCanvas().style.cursor = "pointer";
 
-                const countyFips = geoid.length >= 5 ? geoid.slice(0, 5) : geoid;
+                const countyFips = normalizeGeoid(geoid).slice(0, 5);
                 const props = feat.properties || {};
                 const baseTotal = Number(props.votes_total) || 0;
                 const baseDem = Number(props.votes_dem) || 0;
@@ -27443,14 +27507,16 @@ async function loadAndDrawCountyMap(mode) {
         function updatePrecinctColors() {
             if (!mlMap || !mlMapReady || isUserInteracting) return;
 
-            let hasActiveShuffle = false;
-            for (let fips in fipsMultipliers) {
-                const mult = fipsMultipliers[fips];
-                if (Math.abs(mult.mD - 1) > 0.001 || Math.abs(mult.mR - 1) > 0.001) {
-                    hasActiveShuffle = true;
-                    break;
-                }
-            }
+            let hasActiveShuffle = (loadedPmTilesYear !== CURRENT_YEAR) || (tpCandidatesInGame && tpCandidatesInGame.length > 0);
+			if (!hasActiveShuffle) {
+				for (let fips in fipsMultipliers) {
+					const mult = fipsMultipliers[fips];
+					if (Math.abs(mult.mD - 1) > 0.001 || Math.abs(mult.mR - 1) > 0.001 || Math.abs(mult.mO - 1) > 0.001) {
+						hasActiveShuffle = true;
+						break;
+					}
+				}
+			}
 
             if (!hasActiveShuffle) {
                 try {
@@ -27473,13 +27539,13 @@ async function loadAndDrawCountyMap(mode) {
                 precVisCache = [];
                 for (let ri = 0; ri < raw.length; ri++) {
                     const rf = raw[ri];
-                    const rg = String(rf.id || (rf.properties && rf.properties.GEOID) || "");
-                    if (!rg || seenB[rg]) continue;
-                    seenB[rg] = true;
-                    const rp = rf.properties || {};
-                    precVisCache.push({
-                        geoid: rg,
-                        cf: rg.length >= 5 ? rg.slice(0, 5) : rg,
+                    const rg = normalizeGeoid(rf.id || (rf.properties && rf.properties.GEOID));
+					if (!rg || seenB[rg]) continue;
+					seenB[rg] = true;
+					const rp = rf.properties || {};
+					precVisCache.push({
+						geoid: rg,
+						cf: rg.slice(0, 5),
                         vt: Number(rp.votes_total) || 0,
                         vd: Number(rp.votes_dem) || 0,
                         vr: Number(rp.votes_rep) || 0
@@ -27512,12 +27578,33 @@ async function loadAndDrawCountyMap(mode) {
 					const total = dem + rep + ots;
 
 					// determine winner
-					let winnerId = demCandId;
-					let maxVotes = dem;
-					if (rep > maxVotes) { maxVotes = rep; winnerId = repCandId; }
+					const bgResults = [
+						{ id: demCandId, votes: dem },
+						{ id: repCandId, votes: rep }
+					];
+
+					if (tpCandidatesInGame && tpCandidatesInGame.length > 0) {
+						tpCandidatesInGame.forEach(candId => {
+							const share = (mults && mults.tpShares && mults.tpShares[candId] !== undefined) 
+								? mults.tpShares[candId] 
+								: (1 / Math.max(1, tpCandidatesInGame.length));
+							bgResults.push({
+								id: candId,
+								votes: Math.round(ots * share)
+							});
+						});
+					}
+
+					bgResults.sort((a, b) => b.votes - a.votes);
+
+					const winner = bgResults[0];
+					const second = bgResults.length > 1 ? bgResults[1] : { votes: 0 };
+
+					const winnerId = winner.id;
+					const maxVotes = winner.votes;
+					const secondVotes = second.votes;
 
 					// margin & color lookup
-					const secondVotes = winnerId === demCandId ? rep : dem;
 					const marginVal = total > 0 ? (maxVotes - secondVotes) / total : 0;
 					const color = colorInterpolators[winnerId] ? colorInterpolators[winnerId](Math.sqrt(marginVal)) : "#888888";
 
@@ -27623,66 +27710,67 @@ async function loadAndDrawCountyMap(mode) {
                     }
 				}
 
-				if (!geojson) return;
+                if (!geojson) return;
 
-				// normalize and ensure cd_code is always populated on features
-				geojson.features.forEach(f => {
-					const cdCode = getFeatureCdCode(f);
-					if (cdCode) {
-						f.properties.cd_code = cdCode;
-					}
-				});
+                // normalize and ensure cd_code is always populated on features
+                geojson.features.forEach(f => {
+                    const cdCode = getFeatureCdCode(f);
+                    if (cdCode) {
+                        f.properties.cd_code = cdCode;
+                    }
+                });
 
-				let finalVotesTable = votesTable;
+                // convert lat/long to screen space before calculating county weights
+                const firstGeom = geojson.features[0]?.geometry;
+                let isGeographic = false;
+                let firstPt = null;
+                if (firstGeom && firstGeom.coordinates) {
+                    if (firstGeom.type === "Polygon") firstPt = firstGeom.coordinates[0][0];
+                    else if (firstGeom.type === "MultiPolygon") firstPt = firstGeom.coordinates[0][0][0];
+                }
+                if (firstPt && Array.isArray(firstPt) && isFinite(firstPt[0]) && firstPt[0] < 0 && firstPt[0] >= -180) {
+                    isGeographic = true;
+                }
 
-				if (!exactVotesLoaded) {
-					console.log(`Generating dynamic spatial district weights from county shapes for ${CURRENT_YEAR} / vintage ${v}...`);
+                if (isGeographic) {
+                    projectGeoJsonToScreen(geojson);
+                }
 
-					const fallbackUrl = getFallbackVotesUrl(CURRENT_YEAR, v);
-					let proxyTable = null;
+                let finalVotesTable = votesTable;
 
-					if (fallbackUrl) {
-						try {
-							proxyTable = await fetch(fallbackUrl).then(r => {
-								if (!r.ok) throw new Error("Fallback votes file 404");
-								return r.json();
-							});
-							console.log(`Successfully loaded fallback blueprint from: ${fallbackUrl}`);
-						} catch (fallbackErr) {
-							console.warn("Could not load fallback blueprint:", fallbackErr);
-						}
-					}
+                if (!exactVotesLoaded) {
+                    console.log(`Generating dynamic spatial district weights from county shapes for ${CURRENT_YEAR} / vintage ${v}...`);
 
-					let refGeojsonData = null;
-					if (proxyTable) {
-						let refVintage = "111";
-						const refMatch = fallbackUrl.match(/cd_votes_\d+_(\d+)\.json/);
-						if (refMatch) refVintage = refMatch[1];
+                    const fallbackUrl = getFallbackVotesUrl(CURRENT_YEAR, v);
+                    let proxyTable = null;
 
-						try {
-							refGeojsonData = await fetch(getCdGeojsonUrl(refVintage)).then(r => r.json());
-						} catch (refGeoErr) {
-							console.warn("Could not load reference GeoJSON for cross-walk:", refGeoErr);
-						}
-					}
+                    if (fallbackUrl) {
+                        try {
+                            proxyTable = await fetch(fallbackUrl).then(r => {
+                                if (!r.ok) throw new Error("Fallback votes file 404");
+                                return r.json();
+                            });
+                            console.log(`Successfully loaded fallback blueprint from: ${fallbackUrl}`);
+                        } catch (fallbackErr) {
+                            console.warn("Could not load fallback blueprint:", fallbackErr);
+                        }
+                    }
 
-					finalVotesTable = generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyTable, refGeojsonData, proxyTable);
-				}
+                    let refGeojsonData = null;
+                    if (proxyTable) {
+                        let refVintage = "111";
+                        const refMatch = fallbackUrl.match(/cd_votes_\d+_(\d+)\.json/);
+                        if (refMatch) refVintage = refMatch[1];
 
-				const firstGeom = geojson.features[0]?.geometry;
-				let isGeographic = false;
-				let firstPt = null;
-				if (firstGeom && firstGeom.coordinates) {
-					if (firstGeom.type === "Polygon") firstPt = firstGeom.coordinates[0][0];
-					else if (firstGeom.type === "MultiPolygon") firstPt = firstGeom.coordinates[0][0][0];
-				}
-				if (firstPt && Array.isArray(firstPt) && firstPt[0] < 0 && firstPt[0] >= -180) {
-					isGeographic = true;
-				}
+                        try {
+                            refGeojsonData = await fetch(getCdGeojsonUrl(refVintage)).then(r => r.json());
+                        } catch (refGeoErr) {
+                            console.warn("Could not load reference GeoJSON for cross-walk:", refGeoErr);
+                        }
+                    }
 
-				if (isGeographic) {
-					projectGeoJsonToScreen(geojson);
-				}
+                    finalVotesTable = generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyTable, refGeojsonData, proxyTable);
+                }
 
 				mlMap.addSource("districts-source", {
 					type: "geojson",
