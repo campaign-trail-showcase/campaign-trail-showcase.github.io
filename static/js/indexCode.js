@@ -16,14 +16,12 @@ function findByPk(arr, pk, fieldName) {
 }
 
 function findCandidate(pk) {
-  return findByPk(campaignTrail_temp.candidate_json, pk, "first_name") && findByPk(campaignTrail_temp.candidate_json, pk, "last_name")
-    ? [
-      findByPk(campaignTrail_temp.candidate_json, pk)[0],
-      findByPk(campaignTrail_temp.candidate_json, pk, "first_name")[1] +
-      " " +
-      findByPk(campaignTrail_temp.candidate_json, pk, "last_name")[1],
-    ]
-    : [null, ""];
+  const [index, candidate] = findByPk(campaignTrail_temp.candidate_json, pk);
+  if (index !== null && candidate && candidate.fields) {
+    const fields = candidate.fields;
+    return [index, `${fields.first_name || ""} ${fields.last_name || ""}`.trim()];
+  }
+  return [null, ""];
 }
 
 function findAnswer(pk) {
@@ -97,8 +95,15 @@ const nct_stuff = {
 };
 
 var theme = window.localStorage.getItem("theme");
-nct_stuff.selectedTheme = theme || "tct";
-let selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
+// check if the theme actually exists
+if (theme && nct_stuff.themes[theme]) {
+  nct_stuff.selectedTheme = theme;
+} else if (theme && theme.startsWith("custom")) {
+  nct_stuff.selectedTheme = "custom";
+} else {
+  nct_stuff.selectedTheme = "tct";
+}
+var selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
 
 const themePickerEl = document.getElementById("theme_picker");
 themePickerEl.innerHTML = `<label for="themePicker" class="sr-only">Theme Picker</label>
@@ -122,7 +127,7 @@ function themePicked() {
     window.localStorage.setItem("theme", "custom");
     window.localStorage.setItem("active_custom_theme_id", sel);
     nct_stuff.selectedTheme = "custom";
-    
+
     loadCustomTheme(sel);
 
     // make sure the "Add custom theme" button is visible
@@ -134,11 +139,11 @@ function themePicked() {
     // if "Custom" option selected, show button and optionally open modal
     window.localStorage.setItem("theme", "custom");
     nct_stuff.selectedTheme = "custom";
-    
+
     if (!customMenuButton) {
       ensureCustomThemeButton();
     }
-    
+
     // check if there's an active theme, otherwise open modal
     const activeThemeId = window.localStorage.getItem("active_custom_theme_id");
     if (!activeThemeId || !nct_stuff.customThemes[activeThemeId]) {
@@ -175,38 +180,40 @@ const stassenyear = [
 ];
 
 const handleSelectNavigation = (event, selectId) => {
-    const select = document.getElementById(selectId);
-    if (!select) return;
-    
-    event.preventDefault();
-    const optionsLen = select.options.length;
-    let newIndex = select.selectedIndex;
+  const select = document.getElementById(selectId);
+  if (!select) return;
 
-    if (event.key === "ArrowDown") {
-        newIndex = (newIndex + 1) % optionsLen;
-    } else {
-        newIndex = (newIndex - 1 + optionsLen) % optionsLen;
-    }
-    
-    select.selectedIndex = newIndex;
-    select.dispatchEvent(new Event('change'));
+  event.preventDefault();
+  const optionsLen = select.options.length;
+  let newIndex = select.selectedIndex;
+
+  if (event.key === "ArrowDown") {
+    newIndex = (newIndex + 1) % optionsLen;
+  } else {
+    newIndex = (newIndex - 1 + optionsLen) % optionsLen;
+  }
+
+  select.selectedIndex = newIndex;
+  select.dispatchEvent(new Event('change'));
 };
 
 // keyboard shortcuts handler
 const keyboardShortcutsHandler = (event) => {
   // allow system keys (F1-F12, Ctrl+*, etc.)
-  if (event.key.startsWith('F') || event.ctrlKey || event.metaKey || event.altKey) {
+  const key = event && event.key;
+  if ((typeof key === 'string' && key.startsWith('F')) || event.ctrlKey || event.metaKey || event.altKey) {
+    return;
+  }
+
+  // check if we should skip (e.g., if user is typing in an input field)
+  const tgt = event && event.target;
+  if (tgt && (tgt.tagName === 'INPUT' || tgt.tagName === 'TEXTAREA')) {
     return;
   }
 
   // only handle shortcuts if #game_window exists and has content
   const gameWindow = document.getElementById("game_window");
   if (!gameWindow || gameWindow.children.length === 0) {
-    return;
-  }
-
-  // check if we should skip (e.g., if user is typing in an input field)
-  if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
     return;
   }
 
@@ -230,20 +237,20 @@ const keyboardShortcutsHandler = (event) => {
     const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
     if (arrowKey) {
       event.preventDefault();
-      
+
       const electionSelect = document.getElementById("election_id");
       if (!electionSelect) return;
-      
+
       const options = Array.from(electionSelect.children);
       const currentIndex = electionSelect.selectedIndex;
       let newIndex;
-      
+
       if (event.key === "ArrowDown") {
         newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
       } else {
         newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
       }
-      
+
       electionSelect.selectedIndex = newIndex;
       electionSelect.dispatchEvent(new Event('change'));
     }
@@ -264,8 +271,8 @@ const keyboardShortcutsHandler = (event) => {
     }
 
     if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-        handleSelectNavigation(event, "candidate_id");
-        return;
+      handleSelectNavigation(event, "candidate_id");
+      return;
     }
     return;
   }
@@ -286,20 +293,20 @@ const keyboardShortcutsHandler = (event) => {
     const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
     if (arrowKey) {
       event.preventDefault();
-      
+
       const runningMateSelect = document.getElementById("running_mate_id");
       if (!runningMateSelect) return;
-      
+
       const options = Array.from(runningMateSelect.children);
       const currentIndex = runningMateSelect.selectedIndex;
       let newIndex;
-      
+
       if (event.key === "ArrowDown") {
         newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
       } else {
         newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
       }
-      
+
       runningMateSelect.selectedIndex = newIndex;
       runningMateSelect.dispatchEvent(new Event('change'));
     }
@@ -322,20 +329,20 @@ const keyboardShortcutsHandler = (event) => {
     const arrowKey = event.key === "ArrowUp" || event.key === "ArrowDown";
     if (arrowKey) {
       event.preventDefault();
-      
+
       const difficultySelect = document.getElementById("difficulty_level_id");
       if (!difficultySelect) return;
-      
+
       const options = Array.from(difficultySelect.children);
       const currentIndex = difficultySelect.selectedIndex;
       let newIndex;
-      
+
       if (event.key === "ArrowDown") {
         newIndex = currentIndex + 1 >= options.length ? 0 : currentIndex + 1;
       } else {
         newIndex = currentIndex - 1 < 0 ? options.length - 1 : currentIndex - 1;
       }
-      
+
       difficultySelect.selectedIndex = newIndex;
       difficultySelect.dispatchEvent(new Event('change'));
     }
@@ -345,7 +352,7 @@ const keyboardShortcutsHandler = (event) => {
   // question/answer selection
   if (document.querySelector("#question_form")) {
     const answers = Array.from(document.querySelectorAll(".game_answers"));
-    
+
     if (event.key === "Enter" || event.key === "ArrowRight") {
       event.preventDefault();
       // if there's an OK button (feedback), click it
@@ -354,12 +361,12 @@ const keyboardShortcutsHandler = (event) => {
         okButton.click();
         return;
       }
-      
+
       // otherwise, submit the answer
       document.getElementById("answer_select_button")?.click();
       return;
     }
-    
+
     if (event.key === "ArrowLeft") {
       event.preventDefault();
       document.getElementById("view_electoral_map")?.click();
@@ -382,15 +389,15 @@ const keyboardShortcutsHandler = (event) => {
     // handle arrow keys to navigate answers
     if (event.key === "ArrowUp" || event.key === "ArrowDown") {
       event.preventDefault();
-      
+
       let currentIndex = answers.findIndex(a => a.checked);
-      
+
       if (event.key === "ArrowDown") {
         currentIndex = currentIndex + 1 >= answers.length ? 0 : currentIndex + 1;
       } else {
         currentIndex = currentIndex - 1 < 0 ? answers.length - 1 : currentIndex - 1;
       }
-      
+
       answers[currentIndex]?.click();
     }
     return;
@@ -415,13 +422,13 @@ const keyboardShortcutsHandler = (event) => {
         electionNightButton.click();
         return;
       }
-      
+
       const winnerButton = document.querySelector("#winner_buttons #ok_button");
       if (winnerButton) {
         winnerButton.click();
         return;
       }
-      
+
       document.getElementById("final_result_button")?.click();
     }
     return;
@@ -432,20 +439,20 @@ const keyboardShortcutsHandler = (event) => {
   if (finalMenuButtons.length > 0) {
     if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
       event.preventDefault();
-      
+
       // exclude the "Play Again" button from navigation
       const navButtons = finalMenuButtons.slice(0, -1);
       const currentIndex = navButtons.findIndex(b => b.disabled);
-      
+
       if (currentIndex === -1) return;
-      
+
       let newIndex;
       if (event.key === "ArrowRight") {
         newIndex = currentIndex + 1 >= navButtons.length ? 0 : currentIndex + 1;
       } else {
         newIndex = currentIndex - 1 < 0 ? navButtons.length - 1 : currentIndex - 1;
       }
-      
+
       navButtons[newIndex]?.click();
     }
     return;
@@ -456,7 +463,7 @@ document.addEventListener("keydown", keyboardShortcutsHandler);
 
 // DOM cache
 const correctbannerpar = document.getElementsByClassName("game_header")[0];
-var corrr = correctbannerpar.innerHTML;
+var corrr = correctbannerpar ? correctbannerpar.innerHTML : "";
 var header = document.getElementById("header");
 var gameHeader = document.getElementsByClassName("game_header")[0];
 var gameWindow = document.getElementById("game_window");
@@ -467,34 +474,53 @@ document.head.appendChild(dynamicStyle);
 
 // Not removed because used by 2023 WOKE
 function updateBannerAndStyling() {
-  header.src = selectedTheme.banner;
-  header.width = 1000;
-  document.body.background = selectedTheme.background;
-  gameWindow.style.backgroundColor = selectedTheme.coloring_window;
-  container.style.backgroundColor = selectedTheme.coloring_container;
-  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
-  if (selectedTheme.text_col != null) {
-    container.style.color = selectedTheme.text_col;
-    gameWindow.style.color = "black";
+  header = document.getElementById("header");
+
+  if (header) {
+    if (header.src !== selectedTheme.banner) {
+      header.src = selectedTheme.banner;
+    }
+    if (header.width !== 1000) {
+      header.width = 1000;
+    }
   }
-  // classes for theme styling
-  document.body.classList.remove('cts-theme', 'classic-theme');
-  if (nct_stuff.selectedTheme === "classic") {
-    document.body.classList.add('classic-theme');
-  } else {
-    document.body.classList.add('cts-theme');
-  }
+
+  updateStyling();
 }
 
 function updateStyling() {
-  document.body.background = selectedTheme.background;
-  gameWindow.style.backgroundColor = selectedTheme.coloring_window;
-  container.style.backgroundColor = selectedTheme.coloring_container;
-  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
-  if (selectedTheme.text_col != null) {
-    container.style.color = selectedTheme.text_col;
-    gameWindow.style.color = "black";
+  gameWindow = document.getElementById("game_window");
+  container = document.querySelector(".container");
+  gameHeader = document.getElementsByClassName("game_header")[0];
+
+  if (document.body.background !== selectedTheme.background) {
+    document.body.background = selectedTheme.background;
   }
+
+  if (gameWindow) {
+    if (gameWindow.style.backgroundColor !== selectedTheme.coloring_window) {
+      gameWindow.style.backgroundColor = selectedTheme.coloring_window;
+    }
+    if (selectedTheme.text_col != null && gameWindow.style.color !== "black") {
+      gameWindow.style.color = "black";
+    }
+  }
+
+  if (container) {
+    if (container.style.backgroundColor !== selectedTheme.coloring_container) {
+      container.style.backgroundColor = selectedTheme.coloring_container;
+    }
+    if (selectedTheme.text_col != null && container.style.color !== selectedTheme.text_col) {
+      container.style.color = selectedTheme.text_col;
+    }
+  }
+
+  if (gameHeader) {
+    if (gameHeader.style.backgroundColor !== selectedTheme.coloring_title) {
+      gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+    }
+  }
+
   // classes for theme styling
   document.body.classList.remove('cts-theme', 'classic-theme');
   if (nct_stuff.selectedTheme === "classic") {
@@ -507,15 +533,21 @@ function updateStyling() {
 function updateInnerWindowsStyling() {
   ["inner_window_2", "inner_window_3", "inner_window_4", "inner_window_5"].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.style.backgroundColor = selectedTheme.coloring_window;
+    if (el && el.style.backgroundColor !== selectedTheme.coloring_window) {
+      el.style.backgroundColor = selectedTheme.coloring_window;
+    }
   });
 }
 
 function updateGameHeaderContentAndStyling() {
   const gameHeader = $(".game_header")[0];
-  if (gameHeader.innerHTML != corrr) gameHeader.innerHTML = corrr;
-  gameHeader.style.backgroundColor = selectedTheme.coloring_title;
-  updateInnerWindowsStyling();
+  if (gameHeader) {
+    if (gameHeader.innerHTML != corrr) gameHeader.innerHTML = corrr;
+    if (gameHeader.style.backgroundColor !== selectedTheme.coloring_title) {
+      gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+    }
+    updateInnerWindowsStyling();
+  }
 }
 
 function updateDynamicStyle() {
@@ -547,9 +579,22 @@ function updateDynamicStyle() {
 let themeUpdateObserver = null;
 let headerObserver = null;
 let documentObserver = null;
+let currentObservedHeader = null;
+
+let themeUpdateScheduled = false;
 
 // this handles theme updates
 function handleThemeUpdates() {
+  if (themeUpdateScheduled) return;
+  themeUpdateScheduled = true;
+
+  requestAnimationFrame(() => {
+    themeUpdateScheduled = false;
+    actuallyHandleThemeUpdates();
+  });
+}
+
+function actuallyHandleThemeUpdates() {
   // skip updates while theme menu is open
   if (nct_stuff.pauseThemeUpdates) return;
 
@@ -560,60 +605,82 @@ function handleThemeUpdates() {
   ) {
     nct_stuff.themes[nct_stuff.selectedTheme] = strCopy(nct_stuff.custom_override);
     selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
-    gameWindow.style.backgroundImage = "";
+    if (gameWindow && gameWindow.style.backgroundImage !== "") {
+      gameWindow.style.backgroundImage = "";
+    }
     updateStyling();
-  } else if (
-    !nct_stuff.custom_override &&
-    nct_stuff.selectedTheme == "custom" &&
-    typeof modded !== "undefined" &&
-    modded &&
-    selectedTheme.window_url
-  ) {
-    selectedTheme.window_url = null;
+  } else {
+    // ensure selectedTheme is synced with nct_stuff.selectedTheme
+    if (nct_stuff.themes[nct_stuff.selectedTheme]) {
+      selectedTheme = nct_stuff.themes[nct_stuff.selectedTheme];
+    }
+
+    if (
+      !nct_stuff.custom_override &&
+      nct_stuff.selectedTheme == "custom" &&
+      typeof modded !== "undefined" &&
+      modded &&
+      selectedTheme.window_url
+    ) {
+      selectedTheme.window_url = null;
+    }
   }
-  
+
   const gameHeader = document.getElementsByClassName("game_header")[0];
   if (gameHeader) {
     if (gameHeader.innerHTML != corrr) {
       gameHeader.innerHTML = corrr;
     }
-    gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+    if (gameHeader.style.backgroundColor !== selectedTheme.coloring_title) {
+      gameHeader.style.backgroundColor = selectedTheme.coloring_title;
+    }
     corrr = gameHeader.innerHTML;
   }
-  
+
   updateDynamicStyle();
 }
 
 // observe game header changes
 function observeGameHeader() {
   const gameHeader = document.getElementsByClassName("game_header")[0];
-  
+
   if (!gameHeader) {
+    currentObservedHeader = null;
+    if (headerObserver) {
+      headerObserver.disconnect();
+      headerObserver = null;
+    }
     return;
   }
-  
+
+  if (gameHeader === currentObservedHeader && headerObserver) {
+    return;
+  }
+
   if (headerObserver) {
     headerObserver.disconnect();
   }
-  
+
+  currentObservedHeader = gameHeader;
+
   headerObserver = new MutationObserver((mutations) => {
     let shouldUpdate = false;
-    
+
     for (const mutation of mutations) {
       // check for any changes that would require theme updates
-      if (mutation.type === 'childList' || 
-          mutation.type === 'characterData' ||
-          (mutation.type === 'attributes' && mutation.attributeName === 'style')) {
+      if (mutation.type === 'childList' ||
+        mutation.type === 'characterData' ||
+        (mutation.type === 'attributes' && mutation.attributeName === 'style')) {
         shouldUpdate = true;
         break;
       }
     }
-    
+
     if (shouldUpdate) {
       handleThemeUpdates();
     }
   });
-  
+
   // observe the game header for all types of changes
   headerObserver.observe(gameHeader, {
     childList: true,
@@ -622,23 +689,21 @@ function observeGameHeader() {
     attributes: true,
     attributeFilter: ['style', 'class']
   });
-  
+
   handleThemeUpdates();
 }
 
 // watch for game_header being added/removed
 documentObserver = new MutationObserver((mutations) => {
-  for (const mutation of mutations) {
-    if (mutation.type === 'childList') {
-      const gameHeaders = document.getElementsByClassName("game_header");
-      if (gameHeaders.length > 0) {
-        observeGameHeader();
-      }
-    }
+  const gameHeader = document.getElementsByClassName("game_header")[0];
+  if (gameHeader !== currentObservedHeader) {
+    observeGameHeader();
   }
 });
 
-documentObserver.observe(document.body, {
+const targetContainer = document.querySelector(".container") || document.body;
+
+documentObserver.observe(targetContainer, {
   childList: true,
   subtree: true
 });
@@ -658,14 +723,14 @@ observeGameHeader();
 const nct_stuff_proxy = new Proxy(nct_stuff, {
   set(target, property, value) {
     target[property] = value;
-    
-    if (property === 'pauseThemeUpdates' || 
-        property === 'custom_override' || 
-        property === 'dynamicOverride' ||
-        property === 'selectedTheme') {
+
+    if (property === 'pauseThemeUpdates' ||
+      property === 'custom_override' ||
+      property === 'dynamicOverride' ||
+      property === 'selectedTheme') {
       handleThemeUpdates();
     }
-    
+
     return true;
   }
 });
@@ -679,7 +744,7 @@ let fallbackInterval = setInterval(() => {
   if (gameHeader && !headerObserver) {
     observeGameHeader();
   }
-  
+
   if (gameHeader && gameHeader.innerHTML !== corrr && !nct_stuff.pauseThemeUpdates) {
     handleThemeUpdates();
   }
@@ -693,23 +758,27 @@ window.addEventListener('beforeunload', () => {
 });
 
 async function loadJSON(path, varr, callback = null) {
-  const res = await fetch(path);
-  if (!res.ok) return;
-  const responseText = await res.text();
-  
-  // parse nested property path and assign
-  const parts = varr.split('.');
-  let obj = window;
-  
-  // navigate to the parent object
-  for (let i = 0; i < parts.length - 1; i++) {
-    obj = obj[parts[i]];
+  try {
+    const res = await fetch(path);
+    if (!res.ok) return;
+    const responseText = await res.text();
+
+    // parse nested property path and assign
+    const parts = varr.split('.');
+    let obj = window;
+
+    // navigate to the parent object
+    for (let i = 0; i < parts.length - 1; i++) {
+      obj = obj[parts[i]];
+    }
+
+    // assign to the final property
+    obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
+
+    if (callback) callback();
+  } catch (e) {
+    console.error(`Error loading JSON from ${path}:`, e);
   }
-  
-  // assign to the final property
-  obj[parts[parts.length - 1]] = JSON.parse(responseText.trim());
-  
-  if (callback) callback();
 }
 
 const strCopy = obj => JSON.parse(JSON.stringify(obj));
@@ -719,24 +788,26 @@ const ree = {};
 
 campaignTrail_temp.election_json = {};
 campaignTrail_temp.candidate_json = {};
-loadJSON("../static/json/election.json", "campaignTrail_temp.election_json", () => {
-  ree.election_json = strCopy(campaignTrail_temp.election_json);
-});
-loadJSON("../static/json/candidate.json", "campaignTrail_temp.candidate_json", () => {
-  ree.candidate_json = strCopy(campaignTrail_temp.candidate_json);
-});
-loadJSON("../static/json/running_mate.json", "campaignTrail_temp.running_mate_json", () => {
-  ree.running_mate_json = strCopy(campaignTrail_temp.running_mate_json);
-});
-loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_default_json", () => {
-  ree.opponents_default_json = strCopy(campaignTrail_temp.opponents_default_json);
-});
-loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_weighted_json", () => {
-  ree.opponents_weighted_json = strCopy(campaignTrail_temp.opponents_weighted_json);
-});
-loadJSON("../static/json/election_list.json", "campaignTrail_temp.temp_election_list", () => {
-  ree.temp_election_list = strCopy(campaignTrail_temp.temp_election_list);
-});
+window.baseJSONPromises = [
+  loadJSON("../static/json/election.json", "campaignTrail_temp.election_json", () => {
+    ree.election_json = strCopy(campaignTrail_temp.election_json);
+  }),
+  loadJSON("../static/json/candidate.json", "campaignTrail_temp.candidate_json", () => {
+    ree.candidate_json = strCopy(campaignTrail_temp.candidate_json);
+  }),
+  loadJSON("../static/json/running_mate.json", "campaignTrail_temp.running_mate_json", () => {
+    ree.running_mate_json = strCopy(campaignTrail_temp.running_mate_json);
+  }),
+  loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_default_json", () => {
+    ree.opponents_default_json = strCopy(campaignTrail_temp.opponents_default_json);
+  }),
+  loadJSON("../static/json/opponents.json", "campaignTrail_temp.opponents_weighted_json", () => {
+    ree.opponents_weighted_json = strCopy(campaignTrail_temp.opponents_weighted_json);
+  }),
+  loadJSON("../static/json/election_list.json", "campaignTrail_temp.temp_election_list", () => {
+    ree.temp_election_list = strCopy(campaignTrail_temp.temp_election_list);
+  })
+];
 
 campaignTrail_temp.difficulty_level_json = JSON.parse(
   '[{"model": "campaign_trail.difficulty_level", "pk": 1, "fields": {"name": "Cakewalk", "multiplier": 1.33}}, {"model": "campaign_trail.difficulty_level", "pk": 2, "fields": {"name": "Very Easy", "multiplier": 1.2}}, {"model": "campaign_trail.difficulty_level", "pk": 3, "fields": {"name": "Easy", "multiplier": 1.1}}, {"model": "campaign_trail.difficulty_level", "pk": 4, "fields": {"name": "Normal", "multiplier": 0.97}}, {"model": "campaign_trail.difficulty_level", "pk": 5, "fields": {"name": "Hard", "multiplier": 0.95}}, {"model": "campaign_trail.difficulty_level", "pk": 6, "fields": {"name": "Impossible", "multiplier": 0.9}}, {"model": "campaign_trail.difficulty_level", "pk": 7, "fields": {"name": "Unthinkable", "multiplier": 0.83}}, {"model": "campaign_trail.difficulty_level", "pk": 8, "fields": {"name": "Blowout", "multiplier": 0.75}}, {"model": "campaign_trail.difficulty_level", "pk": 9, "fields": {"name": "Disaster", "multiplier": 0.68}}]'

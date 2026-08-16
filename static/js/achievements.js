@@ -25,6 +25,7 @@ try {
 }
 let isAchUIInitialized = false;
 let pinnedAchMods = new Set();
+let achievementMetadataLoadPromise = null;
 
 try {
   pinnedAchMods = new Set(
@@ -90,7 +91,15 @@ function buildAchievementsCache() {
 }
 
 function findAchievementByName(name) {
-  const cache = buildAchievementsCache();
+  let cache = buildAchievementsCache();
+
+  // if the achievement isn't found, the cache might be stale
+  // so we invalidate it and rebuild it from current allAch
+  if (!cache.has(name)) {
+    achievementsCache = null;
+    cache = buildAchievementsCache();
+  }
+
   return cache.get(name) || null;
 }
 
@@ -129,35 +138,113 @@ const achWindow = document.getElementById("achwindow");
 const achButton = document.getElementById("achButton");
 const achContent = document.getElementById("achcontent");
 
-function openAchievements() {
+function getKnownAchievementModNames() {
+  const officialMods = Array.isArray(originalModsData)
+    ? originalModsData.map((entry) => entry.value).filter(Boolean)
+    : [];
+  const customModNames = customMods instanceof Set ? Array.from(customMods) : [];
+
+  return Array.from(new Set([...officialMods, ...customModNames]));
+}
+
+function showAchievementLoadingState(message) {
+  if (!contentContainerElement) return;
+
+  contentContainerElement.innerHTML = `
+    <p style="text-align:center;margin:20px 0;">${message}</p>
+  `;
+}
+
+async function ensureAchievementMetadataLoaded() {
+  if (achievementMetadataLoadPromise) {
+    return achievementMetadataLoadPromise;
+  }
+
+  const loadedMetadataMods = window.loadedMetadataMods || new Set();
+  const modNames = getKnownAchievementModNames();
+
+  // filter based on whether we have examined the metadata at all,
+  // rather than checking if they have achievements in allAch
+  const missingMods = modNames.filter((modName) => !loadedMetadataMods.has(modName));
+
+  if (missingMods.length === 0) {
+    return;
+  }
+
+  achievementMetadataLoadPromise = (async () => {
+    const batchSize = 15;
+
+    for (let i = 0; i < missingMods.length; i += batchSize) {
+      const batch = missingMods.slice(i, i + batchSize);
+
+      await Promise.allSettled(batch.map(async (modName) => {
+        try {
+          if (customMods.has(modName)) {
+            const modData = await getModFromDB(modName);
+            if (modData?.code1) {
+              extractModMetadata(modData.code1, modName);
+            }
+            return;
+          }
+
+          const res = await fetch(`../static/mods/${modName}_init.html`);
+          if (!res.ok) return;
+
+          const rawModText = await res.text();
+          extractModMetadata(rawModText, modName);
+        } catch (error) {
+          console.error(`Failed to preload achievements metadata for ${modName}:`, error);
+        } finally {
+          // always mark as loaded (even on failure or if empty) to prevent refetching
+          loadedMetadataMods.add(modName);
+        }
+      }));
+    }
+
+    achievementsCache = null;
+    modCompletionCache = null;
+    lastCacheUpdate = 0;
+  })();
+
+  try {
+    await achievementMetadataLoadPromise;
+  } finally {
+    achievementMetadataLoadPromise = null;
+  }
+}
+
+async function openAchievements() {
   // If the UI hasn't been built yet, build it once.
   if (!isAchUIInitialized) {
     setupAchievementUI();
   }
 
+  achWindow.style.display = "block";
+  showAchievementLoadingState("Loading achievements...");
+  centerAchievementsWindow();
+
+  // ensure the full achievements dataset is available before rendering.
+  await ensureAchievementMetadataLoaded();
+
   // run the render logic.
   addAllAchievements();
-
-  achWindow.style.display = "block";
-  centerAchievementsWindow();
 }
 
-// --- NEW: One-time UI setup function ---
 function setupAchievementUI() {
-  // Clear the main content area ONCE.
+  // clear the main content area ONCE
   achContent.innerHTML = "";
 
-  // Create and cache the static control elements
+  // create and cache the static control elements
   searchBarElement = addSearchBar();
   sortingControlsElement = addSortingControls();
   legacyViewControlsElement = addLegacyViewControls();
 
-  // Create and cache the container for the dynamic list of mods and pagination
+  // create and cache the container for the dynamic list of mods and pagination
   contentContainerElement = document.createElement("div");
   contentContainerElement.id = "ach-content-container";
-  contentContainerElement.style.width = "100%"; // Ensure it takes full width in the flex layout
+  contentContainerElement.style.width = "100%"; // ensure it takes full width in the flex layout
 
-  // Append all the static pieces to the DOM in the correct order.
+  // append all the static pieces to the DOM in the correct order
   achContent.appendChild(searchBarElement);
   achContent.appendChild(sortingControlsElement);
   achContent.appendChild(legacyViewControlsElement);
@@ -167,7 +254,6 @@ function setupAchievementUI() {
 }
 
 function centerAchievementsWindow() {
-  // Skip centering on mobile - use CSS positioning instead
   if (window.innerWidth <= 768) {
     return;
   }
@@ -200,8 +286,15 @@ function getContrastingTextColor(bgColor) {
   if (!bgColor) return '#000000';
   if (colorContrastCache.has(bgColor)) return colorContrastCache.get(bgColor);
 
-  const color = (bgColor.charAt(0) === '#') ? bgColor.substring(1, 7) : bgColor;
-  if (color.length < 6) return '#000000';
+  let color = (bgColor.charAt(0) === '#') ? bgColor.substring(1) : bgColor;
+
+  // handle 3-character hex codes (e.g., #000 becomes #000000)
+  if (color.length === 3) {
+    color = color[0] + color[0] + color[1] + color[1] + color[2] + color[2];
+  }
+
+  // fallback if the color is an invalid hex or a CSS color name
+  if (color.length !== 6) return '#000000';
 
   const r = parseInt(color.substring(0, 2), 16);
   const g = parseInt(color.substring(2, 4), 16);
@@ -210,9 +303,86 @@ function getContrastingTextColor(bgColor) {
   // YIQ formula to determine brightness
   const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
   const result = (yiq >= 128) ? '#000000' : '#FFFFFF';
-  
+
   colorContrastCache.set(bgColor, result);
   return result;
+}
+
+function enhanceUnlockColor(hexColor) {
+  if (!hexColor) return hexColor;
+
+  // strip hash
+  let color = hexColor.charAt(0) === '#' ? hexColor.substring(1, 7) : hexColor;
+  if (color.length !== 6) return hexColor;
+
+  // convert HEX to RGB
+  let r = parseInt(color.substring(0, 2), 16) / 255;
+  let g = parseInt(color.substring(2, 4), 16) / 255;
+  let b = parseInt(color.substring(4, 6), 16) / 255;
+
+  // convert RGB to HSL
+  let max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
+
+  if (max === min) {
+    h = s = 0; // achromatic (pure gray)
+  } else {
+    let d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h /= 6;
+  }
+
+  let adjusted = false;
+
+  // if it is very dark, boost the lightness so it doesn't look grayed/dimmed out
+  if (l < 0.25) {
+    l = Math.min(1, l + 0.15); // bump lightness up by 15%
+    adjusted = true;
+  }
+
+  // if it is extremely desaturated (gray?)
+  if (s < 0.15) {
+    l = Math.min(1, l + 0.10); // slight lightness bump
+    if (s === 0) h = 0.6; // some saturation - but default to a cool blue if pure gray
+    s = 0.20;
+    adjusted = true;
+  }
+
+  // if it's already colorful and bright, return the original color
+  if (!adjusted) return hexColor;
+
+  // convert adjusted HSL back to RGB
+  let r1, g1, b1;
+  if (s === 0) {
+    r1 = g1 = b1 = l;
+  } else {
+    const hue2rgb = (p, q, t) => {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1/6) return p + (q - p) * 6 * t;
+      if (t < 1/2) return q;
+      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
+    };
+    let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    let p = 2 * l - q;
+    r1 = hue2rgb(p, q, h + 1/3);
+    g1 = hue2rgb(p, q, h);
+    b1 = hue2rgb(p, q, h - 1/3);
+  }
+
+  // convert back to HEX
+  const toHex = x => {
+    const hex = Math.round(x * 255).toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+  };
+
+  return `#${toHex(r1)}${toHex(g1)}${toHex(b1)}`;
 }
 
 // Returns true if the achievement is unlocked
@@ -223,10 +393,26 @@ function addAchivement(achName, achData, parent, theme, lazyLoad = false) {
   ach.classList.add("achBox");
   ach.classList.toggle("locked", locked);
 
-  let themeStyles = { titleColor: "", textBg: "", textColor: "", mainBg: "" };
+  let themeStyles = {
+    titleColor: "",
+    textBg: "",
+    textColor: "",
+    mainBg: "",
+    borderColor: "",
+  };
   if (theme) {
-    if (theme.main_color) {
-      const idealTextColor = getContrastingTextColor(theme.main_color);
+    let mainColor = theme.main_color;
+    let descBgColor = theme.description_background_color;
+    let secondaryColor = theme.secondary_color;
+
+    if (!locked) {
+      if (mainColor) mainColor = enhanceUnlockColor(mainColor);
+      if (descBgColor) descBgColor = enhanceUnlockColor(descBgColor);
+      if (secondaryColor) secondaryColor = enhanceUnlockColor(secondaryColor);
+    }
+
+    if (mainColor) {
+      const idealTextColor = getContrastingTextColor(mainColor);
       themeStyles.titleColor = `color: ${idealTextColor};`;
     } else {
       themeStyles.titleColor = theme.header_text_color
@@ -234,13 +420,14 @@ function addAchivement(achName, achData, parent, theme, lazyLoad = false) {
         : "";
     }
 
-    themeStyles.textBg = theme.description_background_color
-      ? `background-color:${theme.description_background_color}`
+    themeStyles.textBg = descBgColor
+      ? `background-color:${descBgColor}`
       : "";
     themeStyles.textColor = theme.description_text_color
       ? `color:${theme.description_text_color}`
       : "";
-    themeStyles.mainBg = theme.main_color ? theme.main_color : "";
+    themeStyles.mainBg = mainColor ? mainColor : "";
+    themeStyles.borderColor = secondaryColor ? secondaryColor : "";
   }
 
   const imgSrc = lazyLoad
@@ -262,6 +449,10 @@ function addAchivement(achName, achData, parent, theme, lazyLoad = false) {
 
   if (themeStyles.mainBg) {
     ach.style.backgroundColor = themeStyles.mainBg;
+  }
+
+  if (themeStyles.borderColor) {
+    ach.style.outlineColor = themeStyles.borderColor;
   }
 
   parent.appendChild(ach);
@@ -600,11 +791,15 @@ function renderModList(modsToRender, useLazyLoading = false) {
       if (theme.label_background_image_url) {
         labelHolder.style.backgroundImage = `url("${theme.label_background_image_url}")`;
         labelHolder.style.backgroundColor = "";
+        labelHolder.style.color = theme.header_text_color ?? "";
+        labelHolder.style.textShadow = "0px 1px 3px rgba(0,0,0,0.85)";
       } else if (theme.header_color) {
         labelHolder.style.backgroundImage = "";
         labelHolder.style.backgroundColor = theme.header_color;
+        labelHolder.style.color = getContrastingTextColor(theme.header_color);
+      } else {
+        labelHolder.style.color = theme.header_text_color ?? "";
       }
-      labelHolder.style.color = theme.header_text_color ?? "";
     }
   }
 
@@ -639,6 +834,11 @@ function addAllAchievements() {
 function performRender() {
   if (!contentContainerElement) return;
 
+  if (achievementMetadataLoadPromise) {
+    showAchievementLoadingState("Loading achievements...");
+    return;
+  }
+
   // update the state of the static controls
   addSortingControls();
   addLegacyViewControls();
@@ -651,10 +851,7 @@ function performRender() {
   const currentMod = getCurrentModName();
 
   if (!showAllModsLegacyAch && currentMod) {
-    const linkedMods =
-      currentMod === "2024" || currentMod === "2024 Divided States"
-        ? ["2024", "2024 Divided States"]
-        : [currentMod];
+    const linkedMods = Array.from(expandFavoriteSet(new Set([currentMod])));
     processedData = processedData.filter((mod) =>
       linkedMods.includes(mod.modName),
     );
@@ -672,7 +869,7 @@ function performRender() {
     // map the data to include a "filterResult" property
     processedData = processedData.map((modData) => {
       const modDisplayName =
-        namesOfModsFromValue[modData.modName] || modData.modName;
+        String(namesOfModsFromValue[modData.modName] || modData.modName);
 
       // does the mod name match?
       if (modDisplayName.toLowerCase().includes(query)) {

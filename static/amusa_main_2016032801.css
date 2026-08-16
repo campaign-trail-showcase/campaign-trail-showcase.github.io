@@ -682,6 +682,11 @@ h2.headline_pretty {
 	margin: 0
 }
 
+font#wittyquote {
+    display: block;
+    margin-bottom: 4px;
+}
+
 .below_header {
 	background: none;
 	margin: 0;

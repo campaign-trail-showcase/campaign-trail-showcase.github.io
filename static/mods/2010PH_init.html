@@ -1,0 +1,1521 @@
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 9,
+        "fields": {
+            "year": 2010,
+            "summary": "<p>After 9 years of President Gloria Macapagal-Arroyo, the nation sets a new course in 2010</p> <ul><li>Noynoy Aquino runs on a platform of anti-corruption and he is the clear favorite</li><li>Joseph Estrada seeks a return on his presidential post after being deposed in 2001</li><li>Manny Villar will have to fight toe to toe ahead of election day</li><li>Gibo Teodoro is the designated successor of the President’s party</li></ul>",
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Images/2010%20election.png",
+            "winning_electoral_vote_number": 0,
+            "advisor_url": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Images/Advisor2010.png",
+            "recommended_reading": "<ul>\n<li><a href=https://web.archive.org/web/20100304164922/http://www.abs-cbnnews.com/botomo>Halalan 2010</a></li>\n</ul>",           
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "2010 Philippine Presidential Election"
+        }
+    }
+]
+
+credits = function() {
+    c = ["Dev:\nNem06\n\nContributor:\nDispenser\n\nSpecial Thanks:\nStrawberryMaster's Code 1 and 2 Tool and ALOT's ads code\nBiden 2008 Music Player"]
+    text = ""
+    for (i in c) {
+        text += c[i] + "\n"
+    }
+    alert(text)
+}
+
+RecReading = true
+
+e.HomeStateText = "Home Province:";
+e.SelectText = "You have selected to play:";
+e.CandidText = "Choose a Presidential candidate to play:";
+e.VpText = "Choose your Vice Presidential candidate to run with. The Philippines allows different political parties to form coalitions:";
+e.PartyText = "Political Party:";
+
+e.collect_results = true;
+function changeOpponentSelectionDescription() {
+    try {
+      const opponentSelectionDescription = document.getElementById("opponent_selection_description_window");
+      opponentSelectionDescription.innerHTML = `<p><strong>Use the default method of deciding the winner in the Philippine Presidential Election.</strong></p><p>In the Philippines, a Presidential candidate is elected by popular vote. You only need a pluarlity to win the Presidential Election. Example: In the last election, <b>President Gloria Macapagal-Arroyo won 12,905,808 votes</b>, narrowly beating <b>Ferdnando Poe Jr.(11,782,232 votes)</b> and <b>Ping Lacson/others (7,581,060 votes)</b></p>`;
+    } catch {}
+  }
+window.setInterval(changeOpponentSelectionDescription,200)
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 77,
+        "fields": {
+            "first_name": "Noynoy",
+            "last_name": "Aquino",
+            "election": 9,
+            "party": "Liberal Party",
+            "state": "Tarlac",
+            "priority": 1,
+            "description": "<p>Noynoy Aquino is the current Senator of the Philippines from Tarlac and the son of Corazon Aquino. After the death of his mother, Corazon Aquino, and a clamoring public, he reluctantly declared his Presidential candidacy.\n<p><p>While he is riding on the sympathy wave from his mother’s passing, it cannot be guaranteed he is immune to attacks. There are instances people find him mediocre and seemingly unprepared to take the job as President. \n</p>",
+            "color_hex": "#ffff00",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 1,
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Candidates/noynoy.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>Confounding the predictions of many experts, you were able to turn the tables on Al Gore, in spite of the economy and Clinton's popularity.</p><p>On the political front, you can push for tax cuts to spur the economy and return the budget surplus to the American people. You might also pursue education and immigration reform, individual Social Security accounts, and new laws to defend the family and the sanctity of life.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2000 election.</h3><p>Perhaps it was always a long-shot, with the Democrats in such a commanding position after eight years of Bill Clinton. In any case, at least you are still the Governor of Texas.</p><p>Expect Al Gore to unleash a new round of government programs and environmental regulations. You are still youngish, however. If the election was close this time, perhaps you can run again in 2004, or work on behalf your brother Jeb.</p>",
+            "no_electoral_majority_message": "<h3>Wow! You have won in a squeaker.</h3><p>No candidate achieved a majority of the electoral votes, marking the first time this has happened since 1824. Fortunately for you, the majority of U.S. states have Republican controlled congressional delegations, and they will cast their votes accordingly.</p><p>Given the incredibly close nature of the election, you will surely be expected to govern as a moderate, conciliatory President. Right??</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 78,
+        "fields": {
+            "first_name": "Joseph",
+            "last_name": "Estrada",
+            "election": 9,
+            "party": "Pwersa ng Masang Pilipino",
+            "state": "Metro Manila",
+            "priority": 2,
+            "description": "<p>Ex-President Joseph Estrada is making a comeback in the election, declaring this is his last performance. Estrada is getting piled on his numerous corruption scandals that transpired during his term and it is a sure ammunition for his opponents to use. Despite this, his natural charm can effectively dampen the controversies.<p><p>He claims to still have the “Erap magic” popularity from the masses that almost brought him 11 million votes in 1998. However, political analysts are skeptical of his claims due to Aquino and Villar’s candidacies tightening the gap.\n</p>",
+            "color_hex": "#fe7e00",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Candidates/Erap.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>Though it was perhaps expected, you could have easily faltered at a number of points. Credit to you for pulling through.</p><p>On the political front, you can continue the Clinton legacy and strengthen Social Security for generations to come. Perhaps you can succeed on health care where Clinton came up short? Or maybe you can create a future of renewable energy for America. Just be wary of a (George or Jeb?) Bush challenge in 2004.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2000 election.</h3><p>Surely the second-guessing will be intense, but if things were close you could probably run again in 2004.</p><p>It seems that with George W. Bush and a Republican majority, the United States can expect some conservative policy-making over the next four years. Hopefully Bush comes through on his promise to govern in a bipartisan, conciliatory manner. A lot should depend on the margin of his victory, and whether it was large or small.</p>",
+            "no_electoral_majority_message": "<h3>Sorry! You have lost in a squeaker.</h3><p>No candidate achieved a majority of the electoral votes, for the first time since 1824. Unfortunately for you, a majority of states have Republican controlled congressional delegations.</p><p>It seems that with George W. Bush and a Republican majority, the United States can expect some conservative policy-making over the next four years. Hopefully Bush comes through on his promise to govern in a bipartisan, conciliatory manner.</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 79,
+        "fields": {
+            "first_name": "Manny",
+            "last_name": "Villar",
+            "election": 9,
+            "party": "Nacionalista Party",
+            "state": "Metro Manila",
+            "priority": 3,
+            "description": "<p>Senator Manny Villar has been a strong contender in the Presidential contest. He has secured leadership posts like Speaker of the House of Representatives under Estrada and his two year Senate President term under Arroyo.\n</p><p>A real estate magnate and owner of various Villar family ventures, he campaigns on rags to riches background. However, he has been under fire from corruption allegations about the construction of C-5 road near his businesses. Villar must prevent his lead from slipping if he wishes to win this election.</p>",
+            "color_hex": "#98fb98",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 1,
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Candidates/Manny%20Villar.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>This was definitely not supposed to happen. Good luck!</p>",
+            "electoral_loss_message": "<h3>As expected, you have lost the 2000 election.</h3><p>The legacy of this campaign depends on a couple of factors. First of all, did you receive 5% of the popular vote? If so, congratulations! You will enable the Green Party to run a vigorous campaign in 2004 and present a true choice to the American people. Also, the Democrats were a little peeved that you \"stole\" votes from them in this election. Hopefully that doesn't lead to a backlash.</p>",
+            "no_electoral_majority_message": "<h3>Wow! No candidate received 270 electoral votes, but the House will elect George W. Bush as President.</h3><p>Did you receive 5% of the popular vote? If so, congratulations! You will enable the Green Party to run a vigorous campaign in 2004 and present a true choice to the American people. Also, the Democrats were a little peeved that you \"stole\" votes from them in this election. Hopefully that doesn't lead to a backlash, especially since they will lose the vote in the House.</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 80,
+        "fields": {
+            "first_name": "Gibo",
+            "last_name": "Teodoro",
+            "election": 9,
+            "party": "Blue",
+            "state": "Idaho",
+            "priority": 4,
+            "description": "''",
+            "color_hex": "#b0e0e6",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "''",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 81,
+        "fields": {
+            "first_name": "Mar",
+            "last_name": "Roxas",
+            "election": 9,
+            "party": "Liberal Party",
+            "state": "Capiz",
+            "priority": 5,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Candidates/Roxas.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Senator Mar Roxas was supposed to be the standard bearer of the Liberal Party but withdrew in favor of Aquino. He then accepted to become Aquino’s Vice President.<p>Before that, he was a secretary of trade and industry, serving under Estrada and then Arroyo, and implemented successful pro-consumer policies and digitalization of markets. He will get the crucial Bisaya vote in this election, bringing geographical balance.<p></p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 85,
+        "fields": {
+            "first_name": "Jejomar",
+            "last_name": "Binay",
+            "election": 9,
+            "party": "PDP-LABAN",
+            "state": "Metro Manila",
+            "priority": 9,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Candidates/Binay.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Jejomar Binay brings decades of legal and local government experience ranging from his FLAG membership, MMDA chairman, and to Mayor of Makati. Like Estrada, he is popular with the masses and he is also accused of corruption during his mayoral term having “ghost employees” and irregular purchases of office furniture.<p>He will help to solidify your numbers in Metro and also grab the Solid North votes given his Ilocano heritage. But his alleged corruption could potentially negate these gains.<p></p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 86,
+        "fields": {
+            "first_name": "Chiz",
+            "last_name": "Escudero",
+            "election": 9,
+            "party": "Nationalist People's Coalition",
+            "state": "Sorsogon",
+            "priority": 10,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Candidates/chiz.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Senator Escudero is the popular Senator from Sorsogon and one of the fierce critics of President Arroyo, voting no on dropping an impeachment complaint against her. He is still mum on running for President or Vice President since he left the NPC out of pressure.<p>If eventually talked out, Escudero would be a fine choice for Vice President and will bring youthful energy to the ticket and will help get the Bicolandia vote.<p></p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 89,
+        "fields": {
+            "first_name": "Loren",
+            "last_name": "Legarda",
+            "election": 9,
+            "party": "Nationalist People's Coalition",
+            "state": "Rizal",
+            "priority": 13,
+            "description": "''",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Candidates/LorenLegarda.png",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Senator Legarda in this year took another chance in the presidency but ultimately accepted to be your running mate. She ran for the same position back in 2004, with the late Fernando Poe Jr. who was cheated out by President Arroyo according to his camp and the subsequent Hello, Garci scandal.<p>She runs on a green platform, focusing on the environment and natural disaster prevention. Her presence in the ticket is both an asset and a liability. She can bring some media power to your campaign but her failed bids for both President and Vice President is too much of a baggage to deal with.<p></p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 90,
+        "fields": {
+            "first_name": "Eddie",
+            "last_name": "Villanueva",
+            "election": 9,
+            "party": "Turbo Team",
+            "state": "Idaho",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#3f9727",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 91,
+        "fields": {
+            "first_name": "Dick",
+            "last_name": "Gordon",
+            "election": 9,
+            "party": "Turbo Team",
+            "state": "Idaho",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#eb0304",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 92,
+        "fields": {
+            "first_name": "Nicanor",
+            "last_name": "Perlas",
+            "election": 9,
+            "party": "Turbo Team",
+            "state": "Idaho",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#003300",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 93,
+        "fields": {
+            "first_name": "Jamby",
+            "last_name": "Madrigal",
+            "election": 9,
+            "party": "Turbo Team",
+            "state": "Idaho",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#74c709",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 94,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Reyes",
+            "election": 9,
+            "party": "Turbo Team",
+            "state": "Idaho",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#003c74",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 56,
+        "fields": {
+            "candidate": 79,
+            "running_mate": 89
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 48,
+        "fields": {
+            "candidate": 77,
+            "running_mate": 81
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 52,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 85
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 53,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 86
+        }
+    }
+]
+
+campaignTrail_temp.credits = "<button onclick='credits()'><u>The <u>COMELEC</u> Staff</button></u>";
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 9,
+        "candidates": [
+            77,
+            78,
+            79,
+            80,
+            90,
+            91,
+            92,
+            93,
+            94
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 9,
+        "candidates": [
+            77,
+            78,
+            79,
+            80,
+            90,
+            91,
+            92,
+            93,
+            94
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 9,
+        "year": 2000,
+        "is_premium": 0,
+        "display_year": "2010 Philippine Presidential Election"
+    }
+]
+
+jet_data = {
+    "headerColor": "#ac0202",
+    "windowColor": "#ffffff",
+    "containerColor": "#ffffff",
+    "innerWindowColor": "#ffffff",
+    "bannerImageUrl": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Images/abs-cbnnewsbotomo.png",
+    "backgroundImageUrl": "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Images/BG.jpg",
+    "endingTextColor": "#000000",
+    "customQuote": "",
+    "gameTitle": "HALALAN 2010"
+}
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#0f172a",
+    "header_text_color": "#ffffff",
+    "description_background_color": "#ffffff",
+    "description_text_color": "#111827",
+    "main_color": "#000000",
+    "secondary_color": "#ac0202",
+    "ui_text_color": "#ffffff",
+    "site_title": "2010 PH",
+    "site_image_url": ""
+};
+
+//#startcode
+
+
+corrr = '\n              <h2>HALALAN 2010</h2>\n            ';
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#ac0202";
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#ffffff";
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+
+$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+
+$(".container")[0].style.backgroundColor = "#ffffff";
+
+document.getElementById("header").src = "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Images/abs-cbnnewsbotomo.png";
+
+document.body.background = "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Images/BG.jpg";
+
+document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#ffffff!important;}</style>";
+
+document.body.style.backgroundSize = "cover";
+document.body.style.backgroundRepeat = "no-repeat";
+
+document.getElementById("inner_window_1").children[1].innerHTML = "<li>Welcome to 2010 Philippine Presidential Election.</li><li>This is an international election scenario set in 2010 Philippines</li><li>This scenario tries to emulate a Dan Bryan style scenario AKA Bryanesque</li><li>Read the questions and answers carefully. Picking a wrong answer may or may not cost you the election</li><li>The electoral system is a simple popularity contest; Whoever gets the most votes wins</li><li>There are nine candidates in this election but only one will prevail.</li><li>The playable candidates are Aquino, Estrada (COMING SOON), and Villar(COMING SOON)</li>";
+const header = document.querySelector('#inner_window_1').firstElementChild;
+header.textContent = "Do you have what it takes to win a Philippine Presidential Election?";
+document.querySelector('#game_start strong').textContent = "Let's begin";
+
+
+class Song {
+  constructor(title, artist, coverLink, audioLink) {
+    this.title = title;
+    this.artist = artist;
+    this.coverLink = coverLink;
+    this.audioLink = audioLink;
+  }
+  getTitle() { return this.title; }
+  getArtist() { return this.artist; }
+  getCoverLink() { return this.coverLink; }
+  getAudioLink() { return this.audioLink; }
+}
+
+class Playlist {
+  constructor() {
+    this.songs = [];
+    this.currentSongIndex = 0;
+  }
+  addSong(song) { this.songs.push(song); }
+  getCurrentSong() { return this.songs[this.currentSongIndex]; }
+
+  playNext() {
+    if (this.songs.length === 0) return;
+    this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+  }
+
+  playPrevious() {
+    if (this.songs.length === 0) return;
+    this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+  }
+}
+
+window.Playlist = Playlist;
+window.Song = Song;
+
+let activePlaylist = new Playlist();
+let audioInstance = null;
+let currentVolume = 1;
+
+// assets
+const ASSETS = {
+  bg: "https://i.postimg.cc/43VRTVXv/Qbn-Mi4s-Imgur-(1).png",
+  infoBg: "",
+  btnPrev: "https://file.garden/aNxawo8jlVkymd8s/joe%2008/election%20%2B%20music%20play/emaVVZr%20-%20Imgur.png",
+  btnPlay: "https://file.garden/aNxawo8jlVkymd8s/joe%2008/election%20%2B%20music%20play/roCPjJ7%20-%20Imgur.png",
+  btnPause: "https://file.garden/aNxawo8jlVkymd8s/joe%2008/election%20%2B%20music%20play/CxAJHDS%20-%20Imgur.png",
+  btnNext: "https://file.garden/aNxawo8jlVkymd8s/joe%2008/election%20%2B%20music%20play/prB8JyH%20-%20Imgur.png",
+  volIcon: "https://file.garden/aNxawo8jlVkymd8s/joe%2008/election%20%2B%20music%20play/fIQkAed%20-%20Imgur.png"
+};
+
+function changePlaylist(newPlaylist) {
+  activePlaylist = newPlaylist;
+  activePlaylist.currentSongIndex = 0;
+
+  updateUI(activePlaylist);
+
+  const audio = getAudioElement();
+  const song = activePlaylist.getCurrentSong();
+
+  if (song) {
+    audio.src = song.audioLink;
+    audio.play().catch(e => console.log("Autoplay blocked or waiting for interaction", e));
+    updatePlayPauseIcon(true);
+  }
+}
+window.changePlaylist = changePlaylist;
+
+function updateUI(playlist) {
+  const currentSong = playlist.getCurrentSong();
+  const player = document.getElementById("player");
+
+  if (!player || !currentSong) return;
+
+  const cover = player.querySelector("#cover");
+  const title = player.querySelector("#title");
+  const artist = player.querySelector("#artist");
+
+  if (cover) cover.src = currentSong.getCoverLink();
+  if (title) title.textContent = currentSong.getTitle();
+  if (artist) artist.textContent = currentSong.getArtist();
+}
+window.updateUI = updateUI;
+
+// helpers
+function getAudioElement() {
+  if (!audioInstance) {
+    audioInstance = document.createElement("audio");
+    audioInstance.id = "audio";
+    document.body.appendChild(audioInstance);
+  }
+  return audioInstance;
+}
+
+function updatePlayPauseIcon(isPlaying) {
+  const btn = document.getElementById("playPauseButton");
+  if (btn) {
+    btn.src = isPlaying ? ASSETS.btnPause : ASSETS.btnPlay;
+  }
+}
+
+// setup
+function setupMusicPlayer() {
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow) {
+    console.warn("game_window element not found. Player will not be attached.");
+    return;
+  }
+
+  // prevent duplicate players
+  if (document.getElementById("player")) return;
+
+  const defaultSongs = [
+    ["Boom Boom Pow", "Black Eyed Peas", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Album%20cover/71W8tLYLAoL.jpg", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Music/Boom%20Boom%20Pow%20%5BdKiad-CC44o%5D.mp3"],
+    ["Upuan", "Gloc 9", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Album%20cover/716OcmiFeNL.jpg", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Music/Upuan%20%5BRpfqUo26Mxo%5D.mp3"],
+    ["Insomnia", "Craig David", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Album%20cover/71xWBQNEKKL.jpg", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Music/Craig%20David%20-%20Insomnia%20(HQ)%20%5B52V1TORawLw%5D.mp3"],
+    ["Ikaw Na Nga", "Willie Revillame", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Album%20cover/71Dz9z85YzL.jpg", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Music/Wille%20Revillame%20-%20Ikaw%20Na%20Nga%20(Official%20Lyric%20Video)%20%5BXv9GHAVbhb0%5D.mp3"],
+    ["Nobody", "Wonder Girls", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Album%20cover/71FrWGeHZPL.jpg", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Music/Wonder%20Girls%20-%20Nobody%20(Audio)%20%5B_GhqtSit0Vk%5D.mp3"],
+    ["2009 ABS-CBN Christmas Station ID", "Various ABS-CBN Stars & Artists", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Album%20cover/artworks-000249484783-f40wj2-t500x500.jpg", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Music/ABS-CBN%20Christmas%20Station%20ID%202009%202nd%20Version%20(Extended)%20%5B75C8klmQ-4o%5D.mp3"],
+    ["21 Guns", "Green Day", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Album%20cover/81dmRIIv-dL.jpg", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Music/21%20Guns%20%5BU0XcqF7rqHk%5D.mp3"],
+    ["Love Story", "Taylor Swift", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Album%20cover/acdd1489ea27beb10b07c58ffdb99a83.png", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Music/Love%20Story%20%5BCxcEqhy4yKg%5D.mp3"],
+    ["Bad Romance", "Lady Gaga", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Album%20cover/61Fzvpj9qtL.jpg", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Music/Bad%20Romance%20%5BJ2kPH11Z4cM%5D.mp3"],
+    ["Baby", "Justin Bieber", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Album%20cover/610eI1mei5L.jpg", "https://file.garden/aLuYv5ccRlOWOior/2010%20PH/Music/Baby%20%5BTpddIBTiDUc%5D.mp3"]
+  ];
+
+  if (activePlaylist.songs.length === 0) {
+    defaultSongs.forEach(data => activePlaylist.addSong(new Song(...data)));
+  }
+
+  // inject CSS
+  const style = document.createElement("style");
+  style.textContent = `
+    #player {
+      border: 3px solid #8586c0;
+      display: flex;
+      flex-direction: row;
+      height: 191px;
+      background:
+          linear-gradient(
+              135deg,
+              rgba(255,255,255,.95),
+              rgba(250,252,255,.88),
+              rgba(240,246,254,.65),
+              rgba(248,251,255,.82),
+              rgba(255,255,255,.95)
+          )/*,
+          url("${ASSETS.bg}")*/;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.18);
+      font-family: sans-serif;
+    }
+    #display-box { display: flex; align-items: center; width: 50%; }
+    #cover { width: 176px; height: 176px; border: .125em solid #243956; box-shadow: inset 0 0 0 1px rgba(255,255,255,.4), 0 2px 6px rgba(0,0,0,.25); }
+    #info-container {
+      display: flex;
+      flex-direction: row;
+      height: 178px; width: 127px; margin-top: 3px;
+      color: black;
+      background:
+          linear-gradient(
+              180deg,
+              rgba(255,255,255,.88),
+              rgba(238,243,251,.82),
+              rgba(214,223,239,.78)
+          );
+      border-left: 1px solid rgba(90,110,150,.35);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.75);
+    }
+    #song-info { width: 100%; padding: 5px; }
+    #title { font-weight: bold; font-size: 16px; color: #243956; text-shadow: 0 1px 0 rgba(255,255,255,.95); }
+    #artist { font-size: 12px; color: #17191e; letter-spacing: .15px; }
+    #controls-container {
+      display: flex; flex-direction: column; align-items: center;
+      margin: 10px; width: 100%; padding-top: 15px;
+    }
+    .is-vertical #volumeSlider {
+      width: 125px; margin: 0;
+    }
+    #controls { display: flex; flex-direction: row; justify-content: center; width: 80%; gap: 5px; cursor: pointer; }
+    #controls img { transition: transform 0.1s; }
+    #controls img:active { transform: scale(0.95); }
+    #progress-bar-container { width: 100%; }
+    #progress-bar { width: 80%; margin: auto; display: flex; margin-top: 20px; cursor: pointer; }
+    #volume-container { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 1em; }
+    #volume-display { font-weight: bold; display: none; }
+
+    :root {
+      --w7-sdt-w: 10px;
+      --w7-sdt-h: 18px;
+      --w7-surface: #f0f0f0;
+      --w7-sdt-icon: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAASCAYAAABit09LAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC7SURBVHgBlZLBCYQwEEVj9CDYgRfbswF7sRAbsArPdhBICDmEzPoDE9CdXeKH0eHP48fINOrSPM+k/mhd16YDtCyLmqZJhM7zxIs6PAF570WQAzJIRLkksd89DUl939eB1Ym3b0wpiQBmIYSXiTFGZYwRgWEY6o8uIPQLZGlu2rYtP54L3g3c912N45gHSEahh4dZERZj2zZyztFxHLnQw/vaLIattbmeULkMdg6XxLFaa3WB7MlCirTIHxVUkxicbwSEAAAAAElFTkSuQmCC");
+      --w7-sdt-icon-h: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAASCAMAAABVab95AAAAWlBMVEUAAAAAjf8AVpo8f7G44/v5/f7l9P3g8/za8Pzp9v32+/7u+f695v2z4PmWvdjr9/1onMKu3vjQ4e2Zv9l+pcJLc5GTu9eMtNGCqseLrcVhlbt0l7BWfptOdpOMIi2BAAAAA3RSTlMADUenYG6gAAAAWklEQVQI113GRwKAIAwEwCBBRaUo9vL/b0qWG3MaaqKG2FBcDCw3aWPB6NwW6nYgHUoHaQ9VxwlGKUPVwC7joOlIgeeZQ3pJnd46Z/2miNTqbZl8918efj2yH/8dBY1fB+zGAAAAAElFTkSuQmCC");
+      --w7-sdt-icon-a: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAASCAYAAABit09LAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACsSURBVHgB3ZKxCoMwEIYvJWOn0r10LHTuVDp1KIU+RN+gT9FZ6AP0LYqDY+nQWXAScXMQdRYh+ouRqEF0cPGHHJfcl7sbfkaFroYlqEefx5lxQK/blu6rjRZ6R34RLcFxAWSkmRZEbUkeLWigZgVymZhuoid264lGjwMvTkhmtYsqvKEGMQQY43jYNwoy//7t0j31b8DPXyBOcVYe5Kr9mDpKdoY6ndoCrDNyDnRZRNbxQWFyAAAAAElFTkSuQmCC");
+    }
+
+        input[type=range] {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background: transparent;
+          padding: 10px 1px;
+          width: 100%;
+        }
+        input[type=range]:focus-visible {
+          outline: 1px dotted #000;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          background: var(--w7-sdt-icon);
+          filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.125));
+          height: var(--w7-sdt-h);
+          transform: translateY(-7px);
+          width: var(--w7-sdt-w);
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+          background: var(--w7-sdt-icon-h);
+        }
+        input[type=range]::-webkit-slider-thumb:active {
+          background: var(--w7-sdt-icon-a);
+        }
+
+        input[type=range]::-moz-range-thumb {
+          background: var(--w7-sdt-icon);
+          border: 0;
+          border-radius: 0;
+          filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.125));
+          height: var(--w7-sdt-h);
+          width: var(--w7-sdt-w);
+        }
+        input[type=range]::-moz-range-thumb:hover {
+          background: var(--w7-sdt-icon-h);
+        }
+        input[type=range]::-moz-range-thumb:active {
+          background: var(--w7-sdt-icon-a);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+          background: var(--w7-surface);
+          box-shadow: inset 1px 1px 1px #999, inset -1px 0 #999, 0 1px #fff;
+          box-sizing: border-box;
+          height: 3px;
+          width: 100%;
+        }
+        input[type=range]::-moz-range-track {
+          background: var(--w7-surface);
+          box-shadow: inset 1px 1px 1px #999, inset -1px 0 #999, 0 1px #fff;
+          box-sizing: border-box;
+          height: 3px;
+          width: 100%;
+        }
+
+        .is-vertical {
+          display: inline-block;
+          height: 150px;
+          transform: translateY(50%);
+          width: 4px;
+        }
+        .is-vertical > input[type=range] {
+          height: 4px;
+          margin: 0 16px 0 10px;
+          transform: rotate(270deg) translateX(calc(-50% + 8px));
+          transform-origin: left;
+          width: 150px;
+        }
+        .is-vertical > input[type=range]::-webkit-slider-thumb {
+          transform: translateY(-8px) scaleX(-1);
+        }
+        .is-vertical > input[type=range]::-moz-range-thumb {
+          transform: translateY(2px) scaleX(-1);
+        }
+
+  `;
+  document.head.appendChild(style);
+
+  // create HTML
+  const playerContainer = document.createElement("div");
+  playerContainer.id = "player";
+  playerContainer.innerHTML = `
+    <div id="display-box">
+      <img id="cover" src="">
+      <div id="info-container">
+        <div id="song-info">
+          <h3 id="title"></h3>
+          <p id="artist"></p>
+        </div>
+      </div>
+    </div>
+    <div id="controls-container">
+      <div id="controls">
+        <img id="prevButton" src="${ASSETS.btnPrev}" alt="Previous">
+        <img id="playPauseButton" src="${ASSETS.btnPlay}" alt="Play/Pause">
+        <img id="nextButton" src="${ASSETS.btnNext}" alt="Next">
+      </div>
+      <div id="progress-bar-container">
+        <progress id="progress-bar" value="0" max="100"></progress>
+      </div>
+    </div>
+    <div id="volume-container">
+      <img src="${ASSETS.volIcon}" alt="Volume" style="margin-bottom: 1em;">
+      <div class="is-vertical" style="height: 126px;">
+        <input type="range" id="volumeSlider" min="0" max="9" step="1" value="1">
+      </div>
+      <span id="volume-display" style="font-weight: bold; display: none;">1</span>
+    </div>
+  `;
+
+  gameWindow.insertAdjacentElement("afterend", playerContainer);
+
+  // set up audio & logic
+  const audio = getAudioElement();
+  const startSong = activePlaylist.getCurrentSong();
+  if (startSong) audio.src = startSong.audioLink;
+  audio.volume = currentVolume / 9;
+
+  const playPauseBtn = document.getElementById("playPauseButton");
+  const prevBtn = document.getElementById("prevButton");
+  const nextBtn = document.getElementById("nextButton");
+  const progressBar = document.getElementById("progress-bar");
+  const volumeSlider = document.getElementById("volumeSlider");
+  const volDisplay = document.getElementById("volume-display");
+
+  // play/pause
+  playPauseBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      updatePlayPauseIcon(true);
+    } else {
+      audio.pause();
+      updatePlayPauseIcon(false);
+    }
+  });
+
+  // next/prev
+  const playSongAtIndex = () => {
+    updateUI(activePlaylist);
+    audio.src = activePlaylist.getCurrentSong().audioLink;
+    audio.play();
+    updatePlayPauseIcon(true);
+  };
+
+  nextBtn.addEventListener("click", () => {
+    activePlaylist.playNext();
+    playSongAtIndex();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    activePlaylist.playPrevious();
+    playSongAtIndex();
+  });
+
+  // progress bar
+  audio.addEventListener("timeupdate", () => {
+    if (Number.isFinite(audio.duration)) {
+      const progress = (audio.currentTime / audio.duration) * 100;
+      progressBar.value = progress;
+    }
+  });
+
+  audio.addEventListener("ended", () => {
+    activePlaylist.playNext();
+    playSongAtIndex();
+  });
+
+  // native progress click-to-seek functionality
+  progressBar.addEventListener("click", (e) => {
+    if (Number.isFinite(audio.duration)) {
+      const rect = progressBar.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const width = rect.right - rect.left;
+      const seekTime = (clickX / width) * audio.duration;
+      audio.currentTime = seekTime;
+    }
+  });
+
+  // volume
+  volumeSlider.addEventListener("input", (e) => {
+    currentVolume = parseInt(e.target.value, 10);
+    volDisplay.textContent = currentVolume;
+    audio.volume = currentVolume / 9;
+  });
+
+  // initial play
+  updateUI(activePlaylist);
+  audio.play()
+    .then(() => updatePlayPauseIcon(true))
+    .catch(() => updatePlayPauseIcon(false));
+}
+setupMusicPlayer();
+
+// Pretty much a banner system.
+(function() {
+    const gameWindow = document.getElementById("game_window");
+    if (!gameWindow) return;
+
+    // configuration object
+    const CONFIG = {
+        bannerHeight: 60,
+        fadeTransition: 250,
+        preloadCount: 4,
+        enablePreloading: true,
+        enableLocalStorage: true,
+        hoverEffect: true,
+        clickCooldown: 150,
+        maxCacheSize: 20,
+        useRequestIdleCallback: true,
+        maxRetries: 2,
+        failedBannerTimeout: 5 * 60 * 1000
+    };
+
+	if(!document.getElementById('banner-system-styles')) {
+        const style = document.createElement('style');
+        style.id = 'banner-system-styles';
+        style.textContent = `
+            #bottomBar {
+                height: ${CONFIG.bannerHeight}px;
+                font-size: 12px;
+                background-color: transparent;
+                margin: 1em auto;
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+                user-select: none;
+                border-radius: 3px;
+                width: 100%;
+                max-width: 800px; /* Safe default */
+            }
+            #bottomBar:hover {
+                transform: scale(1.02);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            #bottomBar img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+                transition: opacity ${CONFIG.fadeTransition}ms ease-in-out;
+                pointer-events: none;
+            }
+            #bannerIndicator {
+                position: absolute;
+                top: 2px; right: 4px;
+                width: 16px; height: 16px;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 50%;
+                display: flex;
+                align-items: center; justify-content: center;
+                font-size: 10px; font-weight: bold;
+                color: #333;
+                opacity: 0;
+                transition: opacity 200ms ease-in-out, transform 150ms ease-in-out;
+                pointer-events: none;
+                z-index: 10;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            }
+            #bottomBar:hover #bannerIndicator {
+                opacity: 1;
+            }
+            .indicator-pop {
+                transform: scale(1.2);
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // banner list
+    const banners = [{
+            url: "https://web.archive.org/web/20100119200303im_/http://newsinfo.inquirer.net/images/imns300x33.gif",
+            alt: "Inquirer banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20111026101925im_/http://inquirer.cdnetworks.us/inquirer/images/index/images/BreakerAdOnline.jpg",
+            alt: "Job application",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20100119200148im_/http://www.inquirer.net/images/peso_index02_20080129.jpg",
+            alt: "Lucky money",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20100119200249im_/http://inquirer.cdnetworks.us/inquirer/images/ads/megaworld/megaworld01300x35_20090814.jpg",
+            alt: "Megaworld banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20091014233746im_/http://inquirer.cdnetworks.us/inquirer/images/index/images/ondoy300x50.jpg",
+            alt: "Ondoy relief banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20100701030042im_/http://www.mb.com.ph/sites/default/files/mallorca_mb021710.gif",
+            alt: "Mallroca banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20100624041355im_/http://www.mb.com.ph/sites/default/files/manilagift_online%20_shop.gif",
+            alt: "Manila gift banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20090904232018im_/http://www.mb.com.ph/sites/default/files/southforbes-mb-high.gif",
+            alt: "Forbes park banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20120612140604im_/http://www.manilatimes.net/images/banners/tmtc.gif",
+            alt: "Be a journalist banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20100624020918im_/http://www.manilatimes.net/images/banners/CarilloBooks_BannerAd.gif",
+            alt: "Buy Books banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20100617050236im_/http://www.manilatimes.net/images/banners/vicJDB_468x60.gif",
+            alt: "Jobs DB banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20090716021731im_/http://www.manilatimes.net/images2/ads/pidipompi/9.gif",
+            alt: "Pidipompi banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20090514040825im_/http://www.businessmirror.com.ph/images/eternal.gif",
+            alt: "Eternal Plans banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20091111035148im_/http://www.sunstar.com.ph/sites/all/modules/pcsolotto/images/lotto.gif",
+            alt: "PCSO banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20090809154229im_/http://ads.sunstar.com.ph/openx/www/images/mlhuillier_logo_468x60.jpg",
+            alt: "MLHU banner",
+            weight: 1
+        },
+        {
+            url: "https://web.archive.org/web/20090809154236im_/http://ads.sunstar.com.ph/openx/www/images/a0a6ffcf4afd7ffca6c739e5a2518706.jpg",
+            alt: "PGMA banner",
+            weight: 1
+        },
+    ];
+
+    // caching system
+    class BannerCache {
+        constructor() {
+            this.imageCache = new Map();
+            this.loadedUrls = new Set();
+            this.failedUrls = new Map();
+            this.storageKey = 'vintageBannerCache_v2';
+            this.maxCacheAge = 7 * 24 * 60 * 60 * 1000;
+            this.cacheAccessOrder = [];
+
+            if (CONFIG.enableLocalStorage) {
+                this.loadFromStorage();
+            }
+        }
+
+        saveToStorage() {
+            if (!CONFIG.enableLocalStorage) return;
+
+            try {
+                const cacheData = {
+                    timestamp: Date.now(),
+                    urls: Array.from(this.loadedUrls),
+                    failed: Array.from(this.failedUrls.entries())
+                };
+                localStorage.setItem(this.storageKey, JSON.stringify(cacheData));
+            } catch (e) {
+                console.warn('Banner cache save failed:', e);
+            }
+        }
+
+        loadFromStorage() {
+            try {
+                const cached = localStorage.getItem(this.storageKey);
+                if (!cached) return;
+
+                const data = JSON.parse(cached);
+                const age = Date.now() - data.timestamp;
+
+                if (age < this.maxCacheAge) {
+                    this.loadedUrls = new Set(data.urls);
+                    if (data.failed) {
+                        this.failedUrls = new Map(data.failed);
+                    }
+                } else {
+                    localStorage.removeItem(this.storageKey);
+                }
+            } catch (e) {
+                console.warn('Banner cache load failed:', e);
+            }
+        }
+
+        isRecentlyFailed(url) {
+            if (!this.failedUrls.has(url)) return false;
+
+            const failedTime = this.failedUrls.get(url);
+            const timeSinceFailed = Date.now() - failedTime;
+
+            // allow retry after timeout
+            if (timeSinceFailed > CONFIG.failedBannerTimeout) {
+                this.failedUrls.delete(url);
+                return false;
+            }
+
+            return true;
+        }
+
+        markAsFailed(url) {
+            this.failedUrls.set(url, Date.now());
+            this.imageCache.delete(url);
+            this.loadedUrls.delete(url);
+            this.saveToStorage();
+        }
+
+        isCachedImageValid(img) {
+            return img &&
+                   img.complete &&
+                   img.naturalHeight !== 0 &&
+                   img.naturalWidth !== 0;
+        }
+
+        preloadImage(url) {
+            if (this.isRecentlyFailed(url)) {
+                return Promise.reject(new Error(`Recently failed: ${url}`));
+            }
+
+            if (this.imageCache.has(url)) {
+                const cachedImg = this.imageCache.get(url);
+                if (this.isCachedImageValid(cachedImg)) {
+                    this.updateCacheOrder(url);
+                    return Promise.resolve(cachedImg);
+                } else {
+                    this.imageCache.delete(url);
+                    this.loadedUrls.delete(url);
+                }
+            }
+
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                let timeoutId;
+
+                const cleanup = () => {
+                    clearTimeout(timeoutId);
+                    img.onload = img.onerror = null;
+                };
+
+                timeoutId = setTimeout(() => {
+                    cleanup();
+                    this.markAsFailed(url);
+                    reject(new Error(`Timeout: ${url}`));
+                }, 8000);
+
+                img.onload = () => {
+                    cleanup();
+                    if (this.isCachedImageValid(img)) {
+                        this.addToCache(url, img);
+                        resolve(img);
+                    } else {
+                        this.markAsFailed(url);
+                        reject(new Error(`Invalid image: ${url}`));
+                    }
+                };
+
+                img.onerror = () => {
+                    cleanup();
+                    this.markAsFailed(url);
+                    reject(new Error(`Failed: ${url}`));
+                };
+
+                img.fetchPriority = "low";
+                img.src = url;
+            });
+        }
+
+		addToCache(url, img) {
+		  if (!this.isCachedImageValid(img)) return;
+
+		  if (this.imageCache.has(url)) this.imageCache.delete(url); // refresh order
+		  this.imageCache.set(url, img);
+
+		  while (this.imageCache.size > CONFIG.maxCacheSize) {
+			const lruUrl = this.imageCache.keys().next().value;
+			this.imageCache.delete(lruUrl);
+		  }
+
+		  this.saveToStorage();
+		}
+
+        updateCacheOrder(url) {
+            const index = this.cacheAccessOrder.indexOf(url);
+            if (index > -1) {
+                this.cacheAccessOrder.splice(index, 1);
+            }
+            this.cacheAccessOrder.push(url);
+        }
+
+        preloadBatch(urls) {
+            if (!CONFIG.enablePreloading) return Promise.resolve();
+
+            if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
+                return new Promise(resolve => {
+                    window.requestIdleCallback(() => {
+                        const promises = urls.map(url =>
+                            this.preloadImage(url).catch(() => null)
+                        );
+                        Promise.allSettled(promises).then(resolve);
+                    }, { timeout: 2000 });
+                });
+            } else {
+                const promises = urls.map(url =>
+                    this.preloadImage(url).catch(() => null)
+                );
+                return Promise.allSettled(promises);
+            }
+        }
+
+		getCachedImage(url) {
+		  const img = this.imageCache.get(url);
+		  if (!this.isCachedImageValid(img)) {
+			this.imageCache.delete(url);
+			return null;
+		  }
+		  // refresh order
+		  this.imageCache.delete(url);
+		  this.imageCache.set(url, img);
+		  return img;
+		}
+
+        getAvailableBanners(bannerList) {
+            return bannerList.filter(banner => !this.isRecentlyFailed(banner.url));
+        }
+    }
+
+    // weighted random selection
+    const bannerSelector = (() => {
+        let weightSum = null;
+
+        const getTotalWeight = () => {
+            if (weightSum === null) {
+                weightSum = banners.reduce((sum, banner) => sum + banner.weight, 0);
+            }
+            return weightSum;
+        };
+
+        return {
+            // accept cache to filter failed banners
+            getRandomBanner(excludeRecent = [], cache = null) {
+                let availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+
+                // filter out failed banners
+                if (cache) {
+                    availableBanners = availableBanners.filter(b => !cache.isRecentlyFailed(b.url));
+                }
+
+                if (availableBanners.length === 0) {
+                    // if all banners failed or recent, try any banner not in exclude list
+                    availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+
+                    if (availableBanners.length === 0) {
+                        // last resort: return any banner
+                        return banners[0];
+                    }
+                }
+
+                const totalWeight = availableBanners.reduce((sum, banner) => sum + banner.weight, 0);
+                let random = Math.random() * totalWeight;
+
+                for (const banner of availableBanners) {
+                    random -= banner.weight;
+                    if (random <= 0) return banner;
+                }
+
+                return availableBanners[0];
+            },
+
+            initializeSelectionTable() {
+                getTotalWeight();
+            }
+        };
+    })();
+
+    // banner system
+    class ClickableBannerSystem {
+        constructor() {
+            this.createElements();
+
+            this.cache = new BannerCache();
+            this.currentBanner = null;
+            this.recentBanners = [];
+            this.isTransitioning = false;
+            this.lastClickTime = 0;
+            this.rafId = null;
+            this.retryCount = 0;
+
+            this.init();
+        }
+
+        init() {
+            this.setupEventListeners();
+            bannerSelector.initializeSelectionTable();
+
+            Promise.resolve()
+                .then(() => this.preloadInitialBanners())
+                .then(() => this.displayRandomBanner())
+                .catch(() => {
+                    this.displayRandomBanner();
+                });
+
+            window.addEventListener('beforeunload', () => {
+                this.destroy();
+            });
+        }
+
+		createElements() {
+            this.container = document.createElement("div");
+            this.container.id = "bottomBar";
+            this.container.setAttribute('tabindex', '0');
+            this.container.setAttribute('role', 'button');
+            this.container.setAttribute('aria-label', 'Click to change banner');
+
+            this.imageElement = document.createElement("img");
+            this.clickIndicator = document.createElement("div");
+            this.clickIndicator.id = "bannerIndicator";
+            this.clickIndicator.textContent = "↻";
+
+            const frag = document.createDocumentFragment();
+            frag.appendChild(this.imageElement);
+            frag.appendChild(this.clickIndicator);
+            this.container.appendChild(frag);
+
+            gameWindow.insertAdjacentElement("afterend", this.container);
+
+            this.imageElement.onerror = () => {
+                console.warn('Banner display failed:', this.imageElement.src);
+                if (this.currentBanner) this.cache.markAsFailed(this.currentBanner.url);
+				// try to load another banner
+                if (this.retryCount < CONFIG.maxRetries) {
+                    this.retryCount++;
+                    setTimeout(() => this.displayRandomBanner(), 100);
+                }
+            };
+            this.imageElement.onload = () => { this.retryCount = 0; }; // reset retry count on successful load
+        }
+
+        setupEventListeners() {
+            this.container.onclick = (e) => {
+                e.preventDefault();
+                const now = Date.now();
+                if (now - this.lastClickTime < CONFIG.clickCooldown || this.isTransitioning) {
+                    return;
+                }
+                this.lastClickTime = now;
+                this.retryCount = 0;
+                this.nextBanner();
+            };
+
+			this.container.onkeydown = (e) => {
+                if (e.code === 'Space' || e.code === 'Enter') {
+                    e.preventDefault();
+                    this.retryCount = 0;
+                    this.nextBanner();
+                }
+            };
+        }
+
+        async preloadInitialBanners() {
+            // only preload non-failed banners
+            const sortedBanners = [...banners]
+                .filter(b => !this.cache.isRecentlyFailed(b.url))
+                .sort((a, b) => b.weight - a.weight)
+                .slice(0, CONFIG.preloadCount);
+
+            const urlsToPreload = sortedBanners.map(b => b.url);
+            return this.cache.preloadBatch(urlsToPreload);
+        }
+
+        async displayBanner(banner, useTransition = false) {
+            if (this.isTransitioning) return;
+
+            const cachedImg = this.cache.getCachedImage(banner.url);
+
+            if (useTransition && CONFIG.fadeTransition > 0) {
+                this.isTransitioning = true;
+                this.imageElement.style.opacity = '0';
+
+                setTimeout(() => {
+                    requestAnimationFrame(() => {
+                        if (cachedImg) {
+                            this.imageElement.src = cachedImg.src;
+                        } else {
+                            this.imageElement.src = banner.url;
+                        }
+                        this.imageElement.alt = banner.alt;
+
+                        this.imageElement.style.opacity = '1';
+                        this.isTransitioning = false;
+                    });
+                }, CONFIG.fadeTransition / 2);
+            } else {
+                requestAnimationFrame(() => {
+                    if (cachedImg) {
+                        this.imageElement.src = cachedImg.src;
+                    } else {
+                        this.imageElement.src = banner.url;
+                    }
+                    this.imageElement.alt = banner.alt;
+                });
+            }
+
+            this.currentBanner = banner;
+            this.recentBanners.push(banner.url);
+            if (this.recentBanners.length > 3) {
+                this.recentBanners.shift();
+            }
+
+            // preload if not cached
+            if (!cachedImg) {
+                this.cache.preloadImage(banner.url).catch((err) => {
+                    console.warn('Preload failed:', err.message);
+                });
+            }
+
+            // opportunistically preload next banners
+            if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
+                window.requestIdleCallback(() => {
+                    const nextBanners = banners
+                        .filter(b =>
+                            !this.recentBanners.includes(b.url) &&
+                            !this.cache.imageCache.has(b.url) &&
+                            !this.cache.isRecentlyFailed(b.url)
+                        )
+                        .sort((a, b) => b.weight - a.weight)
+                        .slice(0, 2);
+
+                    this.cache.preloadBatch(nextBanners.map(b => b.url));
+                }, { timeout: 5000 });
+            }
+        }
+
+        displayRandomBanner() {
+            const banner = bannerSelector.getRandomBanner(this.recentBanners, this.cache);
+            this.displayBanner(banner, this.currentBanner !== null);
+        }
+
+        nextBanner() {
+            this.displayRandomBanner();
+
+            requestAnimationFrame(() => {
+                this.clickIndicator.classList.add('indicator-pop');
+
+                setTimeout(() => {
+                    this.clickIndicator.classList.remove('indicator-pop');
+                }, 150);
+            });
+        }
+
+        destroy() {
+            cancelAnimationFrame(this.rafId);
+
+            if (this.container) {
+                this.container.onclick = null;
+                this.container.onmouseenter = null;
+                this.container.onmouseleave = null;
+                this.container.onkeydown = null;
+
+                if (this.container.parentNode) {
+                    this.container.parentNode.removeChild(this.container);
+                }
+            }
+
+            if (this.imageElement) {
+                this.imageElement.onload = null;
+                this.imageElement.onerror = null;
+            }
+
+            this.container = null;
+            this.imageElement = null;
+            this.clickIndicator = null;
+        }
+    }
+
+    const bannerSystem = new ClickableBannerSystem();
+
+    window.vintageBannerSystem = {
+        next: () => bannerSystem.nextBanner(),
+        current: () => bannerSystem.currentBanner?.alt || 'Loading...',
+        clearFailedCache: () => {
+            bannerSystem.cache.failedUrls.clear();
+            bannerSystem.cache.saveToStorage();
+            console.log('Failed banner cache cleared');
+        },
+        getFailedBanners: () => Array.from(bannerSystem.cache.failedUrls.keys())
+    };
+})();
+
+// necessary so that the right elections are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "9") {
+            campaignTrail_temp.code2_id = "2010PH";
+        } else {
+            campaignTrail_temp.code2_id = "2010PH";
+        }
+    }
+}, 100);
+
+//#endcode

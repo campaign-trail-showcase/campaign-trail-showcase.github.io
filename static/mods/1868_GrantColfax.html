@@ -6,7 +6,7 @@ function ctsAchievement(achievement, difficultyChecker = true){
 }
 
 const style_overwrite = document.createElement("style");
-style_overwrite.innerHTML = 
+style_overwrite.innerHTML =
 `#campaign_sign {
   background-color:rgb(197, 67, 67);
   border-color:rgb(206, 126, 126);
@@ -6466,17 +6466,6 @@ campaignTrail_temp.answer_score_issue_json = [
         }
     },
     {
-        "model": "campaign_trail.answer_score_state_json",
-        "pk": 99999,
-        "fields": {
-            "answer": 9999,
-            "state": 54,
-            "candidate": 20,
-            "affected_candidate": 20,
-            "global_multiplier": -0.01
-        }
-    },
-    {
         "model": "campaign_trail.answer_score_issue",
         "pk": 800263,
         "fields": {
@@ -10310,7 +10299,7 @@ campaignTrail_temp.player_visits = [];
 campaignTrail_temp.answer_feedback_flg = 1;
 campaignTrail_temp.game_start_logging_id = '4472388';
 
-cyoAdventure = function (a) { 
+cyoAdventure = function (a) {
   ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
 
   if(ans == 8004){
@@ -10336,7 +10325,7 @@ var changeGameDisp = (hide) => {
     disp = "none";
   }
   Array.from(gameWindow.children).forEach(f=>{
-      if(!f.classList.contains("game_header") && (f.id != "main_content_area" || !$("#campaign_sign")[0])) 
+      if(!f.classList.contains("game_header") && (f.id != "main_content_area" || !$("#campaign_sign")[0]))
           f.style.display = disp
   });
 };
@@ -10353,7 +10342,7 @@ e.vpSwitcher = () => {
       <div id="running_mate_form">
           <form name="running mate">
               <p></p>
-              <h3>Please select your running mate:</h3> 
+              <h3>Please select your running mate:</h3>
               <select name="running_mate_id" id="running_mate_id">
                   ${running_mate_options}
               </select>
@@ -10479,13 +10468,13 @@ console.log(campaignTrail_temp.questions_json[3])
         "likelihood": 1
       }
     }
-var button1 = document.getElementById('view_electoral_map');	
+var button1 = document.getElementById('view_electoral_map');
 
 button1.click();
 
 
 setTimeout(function(){
-var button2 = document.getElementById('resume_questions_button');	
+var button2 = document.getElementById('resume_questions_button');
       button2.click();
 }, 50);
 console.log(campaignTrail_temp.questions_json[7])
@@ -10538,13 +10527,13 @@ if(e.running_mate_last_name==="Wilson"){
           "likelihood": 1
         }
       }
-  var button1 = document.getElementById('view_electoral_map');	
-  
+  var button1 = document.getElementById('view_electoral_map');
+
   button1.click();
-  
-  
+
+
   setTimeout(function(){
-  var button2 = document.getElementById('resume_questions_button');	
+  var button2 = document.getElementById('resume_questions_button');
         button2.click();
   }, 50);
   console.log(campaignTrail_temp.questions_json[7])
@@ -10597,13 +10586,13 @@ console.log(campaignTrail_temp.questions_json[3])
         "likelihood": 1
       }
     }
-var button1 = document.getElementById('view_electoral_map');	
+var button1 = document.getElementById('view_electoral_map');
 
 button1.click();
 
 
 setTimeout(function(){
-var button2 = document.getElementById('resume_questions_button');	
+var button2 = document.getElementById('resume_questions_button');
       button2.click();
 }, 50);
 console.log(campaignTrail_temp.questions_json[7])
@@ -10646,4 +10635,3 @@ return "<h3>What?!</h3><p>This is an error page. Contact ItsAstronomical and exp
 campaignTrail_temp.multiple_endings=true
 
 campaignTrail_temp.cyoa = true
-

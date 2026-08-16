@@ -21524,7 +21524,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "pk": 15129,
         "fields": {
             "answer": 14553,
-            "issue": "27",
+            "issue": 27,
             "issue_score": 0.3,
             "issue_importance": 1
         }
@@ -21534,7 +21534,7 @@ campaignTrail_temp.answer_score_issue_json = [
         "pk": 15135,
         "fields": {
             "answer": 14552,
-            "issue": "27",
+            "issue": 27,
             "issue_score": -0.2,
             "issue_importance": 1
         }
@@ -25903,9 +25903,11 @@ changeTheme = (theme) => { // I'm borrowing your stuff Decstar
         e.initDC = true
 
           loadScript('https://code.highcharts.com/highcharts.js', function() {
+          loadScript('https://code.highcharts.com/modules/data-sorting.js', function() {
           loadScript('https://code.highcharts.com/modules/item-series.js', function() {
             loadScript('https://code.highcharts.com/modules/accessibility.js', function() {
             });
+          });
           });
         });
 

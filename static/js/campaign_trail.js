@@ -5,6 +5,10 @@
 e ||= campaignTrail_temp;
 e.skippingQuestion = false;
 
+/**
+ * @param {{pk: *, fields: Object}[]} json
+ * @returns {Map<string, Object>}
+ */
 function mapPkToFields(json) {
   const map = new Map();
   if (!json) return map;
@@ -15,8 +19,23 @@ function mapPkToFields(json) {
   return map;
 }
 
+// I also feel like we should enforce strict typing...
+// It's not really good to account for string/number strict equality problems with PKs
+// which has led to dirty hacks like this function
+
+/**
+ * @param {*} a
+ * @param {*} b
+ * @returns {boolean}
+ */
 const stringsEqual = (a, b) => String(a) === String(b);
 
+// Call the ELECTIONS and CANDIDATES getters sparingly or when necessary as everytime they are called,
+// they have to iterate through the entire array and return a new Map. This is O(n) where n is the
+// array length.
+//
+// These are not memoized because the candidate and election arrays are volatile and can be changed
+// midgame.
 const PROPS = {
   get PARAMS() { return e.global_parameter_json?.[0]?.fields ?? {}; },
   get ELECTIONS() { return mapPkToFields(e.election_json); }, // Map<string, object>
@@ -78,10 +97,12 @@ e.CandidText = "Please select your candidate:";
 e.VpText = "Please select your running mate:";
 e.PartyText = "Party:";
 e.HomeStateText = "Home State:";
+e.VisitText = "You have chosen to visit ";
+e.VisitText2 = " -- is this correct?";
 // Ending Popups
-e.ElectionPopup = "Election night has arrived. Settle in and wait for the returns, however                 long it may take. Best of luck!";
-e.WinPopup = "Congratulations! You won this year's election! Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice victory speech prepared for your supporters.";
-e.LosePopup = "Sorry. You have lost the election this time. Click OK to view the                     rest of the returns, or skip straight to the final results. We hope                     you have a nice concession speech prepared.";
+e.ElectionPopup = "Election night has arrived. Settle in and wait for the returns, however long it may take. Best of luck!";
+e.WinPopup = "Congratulations! You won this year's election! Click OK to view the rest of the returns, or skip straight to the final results. We hope you have a nice victory speech prepared for your supporters.";
+e.LosePopup = "Sorry. You have lost the election this time. Click OK to view the rest of the returns, or skip straight to the final results. We hope you have a nice concession speech prepared.";
 
 e.finalPercentDigits = 1; // for PV % in final results
 e.statePercentDigits = 2;
@@ -89,8 +110,11 @@ e.SelAnsContText = "Please select an answer before continuing!";
 e.numberFormat = "en-US";
 
 e.code2Loaded = false;
+e.oldColors = false;
 
 e.stateOpacity = 1;
+
+window.stopSpacebar = false;
 
 function substitutePlaceholders(str) {
   if (!str || typeof str !== "string") return str;
@@ -158,16 +182,24 @@ function mapCache(skip = false) {
       return false;
     }
   }
-  $("#map_container").remove();
-  $("#main_content_area").html(
-    '<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>',
-  );
-  $("#main_content_area")[0].style.display = "";
 
   const rr = A(2);
   window.rFuncRes = rFunc(rr, 0);
-  $("#map_container").usmap(window.rFuncRes);
-  $("#main_content_area")[0].style.display = "none";
+
+  const $mapContainer = $("#map_container");
+  if ($mapContainer.length > 0 && $mapContainer.data("plugin-usmap")) {
+    updateUsMapStyles(window.rFuncRes);
+  } else {
+    $mapContainer.remove();
+    $("#main_content_area").html(
+      '<div id="map_container"></div>            <div id="menu_container">                <div id="overall_result_container">                    <div id="overall_result">                        <h3>ESTIMATED SUPPORT</h3>                        <p>Click on a state to view more info.</p>                    </div>                </div>                <div id="state_result_container">                    <div id="state_info">                        <h3>STATE SUMMARY</h3>                        <p>Click/hover on a state to view more info.</p>                        <p>Precise results will be available on election night.</p>                    </div>                </div>            </div>',
+    );
+    $("#map_container").usmap(window.rFuncRes);
+  }
+
+  if ($("#main_content_area")[0]) {
+    $("#main_content_area")[0].style.display = "none";
+  }
 
   return true;
 }
@@ -406,6 +438,7 @@ function histFunction() {
   }
 }
 
+// The example CYOA function
 function cyoAdventure(question) {
   const latestAnswer = campaignTrail_temp.player_answers[
     campaignTrail_temp.player_answers.length - 1
@@ -448,19 +481,20 @@ function gradient(interval, min, max) {
 }
 
 function csrfToken() {
-  return (function (e) {
-    let t = null;
-    if (document.cookie && document.cookie != "") {
-      for (let i = document.cookie.split(";"), a = 0; a < i.length; a++) {
-        const s = i[a].trim();
-        if (s.substring(0, e.length + 1) == `${e}=`) {
-          t = decodeURIComponent(s.substring(e.length + 1));
-          break;
-        }
-      }
-    }
-    return t;
-  }("csrftoken"));
+  let t = null;
+  if (!document.cookie?.trim()) return t;
+
+  const CSRF_TOKEN = 'csrftoken';
+
+  const toks = document.cookie.split(';');
+  for (const tok of toks) {
+    const str = tok.trim();
+    if (str.substring(0, CSRF_TOKEN.length + 1) != `${CSRF_TOKEN}=`) continue;
+    t = decodeURIComponent(str.substring(CSRF_TOKEN.length + 1));
+    break;
+  }
+
+  return t;
 }
 
 let slrr = "";
@@ -491,7 +525,7 @@ function evest() {
   window.swE.innerHTML = nnn;
 }
 
-function copy(mainObject) {
+function copyObj(mainObject) {
   const objectCopy = {}; // objectCopy will store a copy of the mainObject
   let key;
   for (key in mainObject) {
@@ -677,6 +711,13 @@ function divideElectoralVotesProp(e, t) {
   return i;
 }
 
+/**
+ * Round winner's share of EVs, clamp to [0, totalEV], and give remainder to runner-up
+ * @param {number} totalEV
+ * @param {number} topVotes
+ * @param {number} totalVotes
+ * @returns {number[]}
+ */
 function splitEVTopTwo(totalEV, topVotes, totalVotes) {
   // round winner's share of EVs, clamp to [0, totalEV], and give remainder to runner-up
   if (!Number.isFinite(totalEV) || totalEV <= 0) return [0, 0];
@@ -742,146 +783,145 @@ const shining_menu = (polling) => {
   }
 
   const adSpendTable = `
-            <table id="ad_spend_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
-                <thead>
-                    <tr>
-                        <th>State</th>
-                        <th>Amount per Turn</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Table rows will be added dynamically -->
-                </tbody>
-            </table>
-        `;
+    <table id="ad_spend_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
+      <thead>
+        <tr>
+          <th>State</th>
+          <th>Amount per Turn</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be added dynamically -->
+      </tbody>
+    </table>
+  `;
 
   const staffTable = `
-            <table id="staff_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
-                <thead>
-                    <tr>
-                        <th>Staff</th>
-                        <th style="width: 250px;">Description</th>
-                        <th>Cost (one time)</th>
-                        <th>Hired?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Table rows will be added dynamically -->
-                </tbody>
-            </table>
-        `;
+    <table id="staff_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
+      <thead>
+        <tr>
+          <th>Staff</th>
+          <th style="width: 250px;">Description</th>
+          <th>Cost (one time)</th>
+          <th>Hired?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be added dynamically -->
+      </tbody>
+    </table>
+  `;
 
   const lobbyTable = `
-            <table id="pac_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
-                <thead>
-                    <tr>
-                        <th style="width: 200px;">Organisation</th>
-                        <th style="width: 150px;">Description</th>
-                        <th>Relationship</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Table rows will be added dynamically -->
-                </tbody>
-            </table>
-        `;
+    <table id="pac_table" style='text-align:center;width: 60%; margin-top: .1em; margin-left: auto; margin-right: auto; background-color: #F9F9F9;color:black;'>
+      <thead>
+        <tr>
+          <th style="width: 200px;">Organisation</th>
+          <th style="width: 150px;">Description</th>
+          <th>Relationship</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be added dynamically -->
+      </tbody>
+    </table>
+  `;
 
   const z = `
-
-        <div class="inner_window_front" id="shining_menu_header" style="height: 50px; background-color:#2d2d2d">
-            <h1 style='position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; text-align: center; font-size: 3em; line-height: normal; font-style: italic; color: white; margin: 0;font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;'>
-                State of the Campaign
-            </h1>
+    <div class="inner_window_front" id="shining_menu_header" style="height: 50px; background-color:#2d2d2d">
+      <h1 style='position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; text-align: center; font-size: 3em; line-height: normal; font-style: italic; color: white; margin: 0;font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;'>
+        State of the Campaign
+      </h1>
+    </div>
+    <div class="shining_tab" style='position: absolute;bottom: 65px;left:50%;transform:translateX(-50%)'>
+      <button class="tablinks" onclick="openTab(event, 'funds')">Funds</button>
+      <button class="tablinks" onclick="openTab(event, 'campaign_time')">Campaign Time</button>
+      <button class="tablinks" onclick="openTab(event, 'ad_campaign')">Ad Campaign</button>
+      <button class="tablinks" onclick="openTab(event, 'staff')">Staff</button>
+      <button class="tablinks" onclick="openTab(event, 'lobbies')">Lobbies</button>
+    </div>
+    <div class="inner_window_front" id="shining_menu" style="height: 260px; overflow-y: auto; background-color:#2d2d2d; color:white;">
+      <div id="funds" class="tabcontent">
+        <h2>Funds</h2>
+        <p><b>Current balance:</b> <span id='shining_balance'>$${Math.floor(uninflatedBalance).toLocaleString()}</span></p>
+        <p><b>Change in balance from previous turn:</b> <span style='${change > 0 ? "color:green" : change == 0 ? "color:yellow" : "color:red"};'>${change < 0 ? "-$" : "$"}${Math.abs(Math.floor(change)).toLocaleString()}</span></p>
+        <p id='projected_change'><b>Estimated change for next turn:</b> <span style='${projected_change > 0 ? "color:green" : projected_change == 0 ? "color:yellow" : "color:red"};'>${projected_change < 0 ? "-$" : "$"}${Math.abs(Math.floor(projected_change)).toLocaleString()}</span></p>
+        ${DEBT_STRING}
+      </div>
+      <div id="campaign_time" class="tabcontent">
+        <h2>Campaign Time</h2>
+        <div class="time_slider_group">
+          <div class="time_slider">
+            <label for="campaign_time_physical">Physically Campaigning:</label>
+            <input type="range" id="campaign_time_physical" min="0" max="1" step="0.01" value="0.33">
+          </div>
+          <div class="time_slider">
+            <label for="campaign_time_fundraising">Fundraising:</label>
+            <input type="range" id="campaign_time_fundraising" min="0" max="1" step="0.01" value="0.33">
+          </div>
+          <div class="time_slider">
+            <label for="campaign_time_media">Media Engagement:</label>
+            <input type="range" id="campaign_time_media" min="0" max="1" step="0.01" value="0.34">
+          </div>
         </div>
-        <div class="shining_tab" style='position: absolute;bottom: 65px;left:50%;transform:translateX(-50%)'>
-            <button class="tablinks" onclick="openTab(event, 'funds')">Funds</button>
-            <button class="tablinks" onclick="openTab(event, 'campaign_time')">Campaign Time</button>
-            <button class="tablinks" onclick="openTab(event, 'ad_campaign')">Ad Campaign</button>
-            <button class="tablinks" onclick="openTab(event, 'staff')">Staff</button>
-            <button class="tablinks" onclick="openTab(event, 'lobbies')">Lobbies</button>
+      </div>
+      <div id="ad_campaign" class="tabcontent">
+        <h2>Ad Campaign</h2>
+        <p>Select a state to add ad spending for it:</p>
+        <select id='shining_ad_state_sel'>${a_states}</select>
+        <p>Enter ad spending amount:</p>
+        <input id="ad_spending_amount" placeholder="Amount">
+        <input type="range" id="ad_spending_slider" min="0" step="1">
+        <button id="add_ad_spending">Add Spending</button>
+        <h2>Current Ad Spends</h2>
+        <em>Note: will <b>all</b> automatically be cancelled in the event of your campaign running a debt.</em>
+        <p>
+        <div style='text-align: center;'>
+        ${adSpendTable}
         </div>
-        <div class="inner_window_front" id="shining_menu" style="height: 260px; overflow-y: auto; background-color:#2d2d2d; color:white;">
-            <div id="funds" class="tabcontent">
-                <h2>Funds</h2>
-                <p><b>Current balance:</b> <span id='shining_balance'>$${Math.floor(uninflatedBalance).toLocaleString()}</span></p>
-                <p><b>Change in balance from previous turn:</b> <span style='${change > 0 ? "color:green" : change == 0 ? "color:yellow" : "color:red"};'>${change < 0 ? "-$" : "$"}${Math.abs(Math.floor(change)).toLocaleString()}</span></p>
-                <p id='projected_change'><b>Estimated change for next turn:</b> <span style='${projected_change > 0 ? "color:green" : projected_change == 0 ? "color:yellow" : "color:red"};'>${projected_change < 0 ? "-$" : "$"}${Math.abs(Math.floor(projected_change)).toLocaleString()}</span></p>
-                ${DEBT_STRING}
-            </div>
-            <div id="campaign_time" class="tabcontent">
-                <h2>Campaign Time</h2>
-                <div class="time_slider_group">
-                    <div class="time_slider">
-                        <label for="campaign_time_physical">Physically Campaigning:</label>
-                        <input type="range" id="campaign_time_physical" min="0" max="1" step="0.01" value="0.33">
-                    </div>
-                    <div class="time_slider">
-                        <label for="campaign_time_fundraising">Fundraising:</label>
-                        <input type="range" id="campaign_time_fundraising" min="0" max="1" step="0.01" value="0.33">
-                    </div>
-                    <div class="time_slider">
-                        <label for="campaign_time_media">Media Engagement:</label>
-                        <input type="range" id="campaign_time_media" min="0" max="1" step="0.01" value="0.34">
-                    </div>
-                </div>
-            </div>
-            <div id="ad_campaign" class="tabcontent">
-                <h2>Ad Campaign</h2>
-                <p>Select a state to add ad spending for it:</p>
-                <select id='shining_ad_state_sel'>${a_states}</select>
-                <p>Enter ad spending amount:</p>
-                <input id="ad_spending_amount" placeholder="Amount">
-                <input type="range" id="ad_spending_slider" min="0" step="1">
-                <button id="add_ad_spending">Add Spending</button>
-                <h2>Current Ad Spends</h2>
-                <em>Note: will <b>all</b> automatically be cancelled in the event of your campaign running a debt.</em>
-                <p>
-                <div style='text-align: center;'>
-                ${adSpendTable}
-                </div>
-                </p>
-            </div>
-            <div id="staff" class="tabcontent">
-                <h2>Staff</h2>
-                <div style='text-align: center;'>
-                ${staffTable}
-                </div>
-            </div>
-            <div id="lobbies" class="tabcontent">
-                <h2>Lobbies</h2>
-                <em>Align your answers with an organisation's values in order to have them contribute to fundraising.</em>
-                <p>
-                <div style='text-align: center;'>
-                ${lobbyTable}
-                </div>
-                </p>
-            </div>
+        </p>
+      </div>
+      <div id="staff" class="tabcontent">
+        <h2>Staff</h2>
+        <div style='text-align: center;'>
+        ${staffTable}
         </div>
-            <button id="shining_back" style="position: relative; bottom: -13px; left: -380px; width: 150px; height: 80px; font-size: 40px; padding-top: 5px; padding-left: 8px;">
-                <b>BACK</b>
-            </button>
+      </div>
+      <div id="lobbies" class="tabcontent">
+        <h2>Lobbies</h2>
+        <em>Align your answers with an organisation's values in order to have them contribute to fundraising.</em>
+        <p>
+        <div style='text-align: center;'>
+        ${lobbyTable}
+        </div>
+        </p>
+      </div>
+    </div>
+      <button id="shining_back" style="position: relative; bottom: -13px; left: -380px; width: 150px; height: 80px; font-size: 40px; padding-top: 5px; padding-left: 8px;">
+        <b>BACK</b>
+      </button>
 
-            <style>
-                .time_slider_group {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
+      <style>
+        .time_slider_group {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
 
-                .time_slider {
-                    display: flex;
-                    align-items: center;
-                    margin-bottom: 8px;
-                }
+        .time_slider {
+          display: flex;
+          align-items: center;
+          margin-bottom: 8px;
+        }
 
-                .time_slider label {
-                    margin-right: 10px;
-                    width: 180px; /* Adjust this width as needed */
-                }
-            </style>
-            `;
-  for (i in game_winArr) {
+        .time_slider label {
+          margin-right: 10px;
+          width: 180px; /* Adjust this width as needed */
+        }
+      </style>
+  `;
+  for (const i in game_winArr) {
     if (
       game_winArr[i].getAttribute("id") != "main_content_area"
       && game_winArr[i].getAttribute("class") != "game_header"
@@ -962,17 +1002,20 @@ const shining_menu = (polling) => {
 
     for (const i in our_info.staff) {
       const targ = our_info.staff[i];
-      const hire_str = targ.hired == true
-        ? `<em>Hired.</em>`
-        : `<button class="hire_button" data-pk="${targ.pk}" style='color:green'>Hire</button>`;
+      const hire_str = targ.hired
+        ? '<em>Hired.</em>'
+        : `<button class="hire_button" data-pk="${targ.pk}" style="color:green">Hire</button>`;
       const newRow = `
-                <tr>
-                    <td><h4>${targ.name}</h4><img style='width:100px' src='${targ.image}'></img></td>
-                    <td>${targ.description}</td>
-                    <td>$${Math.floor(targ.cost / inflation_factor).toLocaleString()}</td>
-                    <td>${hire_str}</td>
-                </tr>
-                `;
+        <tr>
+          <td>
+            <h4>${targ.name}</h4>
+            <img style='width:100px' src='${targ.image}'></img>
+          </td>
+          <td>${targ.description}</td>
+          <td>$${Math.floor(targ.cost / inflation_factor).toLocaleString()}</td>
+          <td>${hire_str}</td>
+        </tr>
+      `;
       tableBody.append(newRow);
       $(`button.hire_button[data-pk="${targ.pk}"]`).click(() => {
         if (e.shining_data.balance < 0) {
@@ -1002,12 +1045,12 @@ const shining_menu = (polling) => {
     for (const i in our_info.lobby) {
       const targ = our_info.lobby[i];
       const newRow = `
-                <tr>
-                    <td><h4>${targ.name}</h4><img style='width:100px' src='${targ.image}'></img></td>
-                    <td>${targ.description}</td>
-                    <td>Opinion: ${Math.floor(targ.opinion)}<br>Max Bonus: $${Math.floor(targ.fund_base / inflation_factor).toLocaleString()}</td>
-                </tr>
-                `;
+        <tr>
+          <td><h4>${targ.name}</h4><img style='width:100px' src='${targ.image}'></img></td>
+          <td>${targ.description}</td>
+          <td>Opinion: ${Math.floor(targ.opinion)}<br>Max Bonus: $${Math.floor(targ.fund_base / inflation_factor).toLocaleString()}</td>
+        </tr>
+      `;
       tableBody.append(newRow);
     }
   };
@@ -1019,12 +1062,12 @@ const shining_menu = (polling) => {
     for (const i in e.shining_data.ad_spending) {
       const targ = e.shining_data.ad_spending[i];
       const newRow = `
-                <tr>
-                    <td>${e.states_json.find((f) => f.pk === targ.state).fields.name}</td>
-                    <td>$${Math.floor(targ.amount / inflation_factor).toLocaleString()}</td>
-                    <td><button class="remove_ad_spend" data-state-pk="${targ.state}" style='color:red'>Remove</button></td>
-                </tr>
-                `;
+        <tr>
+          <td>${e.states_json.find((f) => f.pk === targ.state).fields.name}</td>
+          <td>$${Math.floor(targ.amount / inflation_factor).toLocaleString()}</td>
+          <td><button class="remove_ad_spend" data-state-pk="${targ.state}" style='color:red'>Remove</button></td>
+        </tr>
+      `;
       tableBody.append(newRow);
       $(`button.remove_ad_spend[data-state-pk="${targ.state}"]`).click(() => {
         e.shining_data.balance += targ.amount;
@@ -1338,6 +1381,28 @@ function questionHTML() {
   ports.innerHTML = l;
   gameWindow.appendChild(ports);
 
+  e.code2Loaded = true;
+
+  const $answerButton = $("#answer_select_button");
+  $answerButton.off('click').on('click', (evt) => {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+    onAnswerSelectButtonClicked(evt);
+  });
+
+  $("#view_electoral_map").off("click").on("click", (evt) => {
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+    openMap(A(2));
+  });
+
+  if (Number(e.game_type_id) === 3) {
+    $("#shining_menu_button").off("click").on("click", (evt) => {
+      evt.preventDefault();
+      shining_menu(A(2));
+    });
+  }
+
   // $("#game_window").html(l)
 }
 
@@ -1401,11 +1466,12 @@ function visitState(state, o, t) {
 }
 
 function formatNumbers(num) {
+  let tmpNum = num;
   if (typeof num !== "number") {
-    num = Number(num);
-    if (Number.isNaN(num)) return "";
+    tmpNum = Number(num);
+    if (Number.isNaN(tmpNum)) return "";
   }
-  return num.toLocaleString(e.numberFormat);
+  return tmpNum.toLocaleString(e.numberFormat);
 }
 
 e.answer_count = 4;
@@ -1476,6 +1542,7 @@ function updateUsMapStyles(config) {
     "stateSpecificStyles",
     "stateSpecificHoverStyles",
     "click",
+    "mouseover",
   ];
 
   for (const option of options) {
@@ -1501,20 +1568,20 @@ function showOutcomePopup(election, results) {
   const electionUsed = PROPS.ELECTIONS.get(String(election));
   console.log(results);
   $("#game_window").append(`
-        <div class="overlay" id="election_night_overlay"></div>
-        <div class="overlay_window" id="election_night_window">
-            <div class="overlay_window_content" id="election_night_content">
-                <h3>Advisor Feedback</h3>
-                <img src="${electionUsed.advisor_url}" width="208" height="128"/>
-                <p>${results[0].candidate === e.candidate_id ? e.WinPopup : e.LosePopup}</p>
-            </div>
-            <div class="overlay_buttons" id="winner_buttons">
-                <button id="ok_button">OK</button>
-                <br>
-                <button id="overlay_result_button">Go to Final Results</button>
-            </div>
-        </div>
-    `);
+    <div class="overlay" id="election_night_overlay"></div>
+    <div class="overlay_window" id="election_night_window">
+      <div class="overlay_window_content" id="election_night_content">
+        <h3>Advisor Feedback</h3>
+        <img src="${electionUsed.advisor_url}" width="208" height="128"/>
+        <p>${results[0].candidate === e.candidate_id ? e.WinPopup : e.LosePopup}</p>
+      </div>
+      <div class="overlay_buttons" id="winner_buttons">
+        <button id="ok_button">OK</button>
+        <br>
+        <button id="overlay_result_button">Go to Final Results</button>
+      </div>
+    </div>
+  `);
 }
 
 function generateCandidateList(cands, results, stateResults, total, statesHaveEVs) {
@@ -1541,7 +1608,12 @@ function generateCandidateList(cands, results, stateResults, total, statesHaveEV
   }).join("");
 }
 
-// type: 'general' | 'primary'
+/**
+ * Election night simulation
+ * @param {'general'|'primary'} [type='general'] - The type of election
+ * @param {number} [timestep=10] - How much the election night should advance after each "tick"
+ * @param {Object[]} [states=[]] - Specific states to run the election on
+ */
 function electionNight(type = 'general', timestep = 10, states = []) {
   const isGeneral = type === 'general';
   const globalParam = PROPS.PARAMS;
@@ -1561,7 +1633,7 @@ function electionNight(type = 'general', timestep = 10, states = []) {
         <span style="color:${f.color}; background-color:${f.color}">--</span>
         ${f.last_name}: ${someStatesHaveEVs ? "0 / " : ""}0.0%
       </li>
-    `
+    `;
   }).join("");
 
   const s = PROPS.ELECTIONS.get(String(e.election_id));
@@ -1732,16 +1804,18 @@ function nextQuestion() {
   let a = false;
   if (e.primary) {
     /* Primary code format:
-    e.primary_code = [
+
+      e.primary_code = [
         {
-            "breakQ": 0,
-            "states": [1100, 1101, 1102]
+          "breakQ": 0,
+          "states": [1100, 1101, 1102]
         },
         {
-            "breakQ": 2,
-            "states": [1103, 1104, 1105]
+          "breakQ": 2,
+          "states": [1103, 1104, 1105]
         }
-    ]
+      ]
+
     */
     window.primary_breaks = e.primary_code.map((f) => f.breakQ);
     a = primaryFunction(
@@ -1780,28 +1854,28 @@ function nextQuestion() {
     const election = PROPS.ELECTIONS.get(String(e.election_id));
     if (election.has_visits) {
       $("#game_window").html(`
-                <div class="game_header">${window.corrr}</div>
-                <div id="main_content_area">
-                    <div id="map_container"></div>
-                    <div id="menu_container">
-                        <div id="overall_result_container">
-                            <div id="overall_result">
-                                <h3>ESTIMATED SUPPORT</h3>
-                                <p>Click on a state to view more info.</p>
-                            </div>
-                        </div>
-                        <div id="state_result_container">
-                            <div id="state_info">
-                                <h3>STATE SUMMARY</h3>
-                                <p>Click/hover on a state to view more info.</p>
-                                <p>Precise results will be available on election night.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p class="visit_text">
-                    <font size="2">Use this map to click on the next state you wish to visit. Choose wisely and focus your efforts where they will have the most impact.</font>
-                </p>`,
+        <div class="game_header">${window.corrr}</div>
+        <div id="main_content_area">
+          <div id="map_container"></div>
+          <div id="menu_container">
+            <div id="overall_result_container">
+              <div id="overall_result">
+                <h3>ESTIMATED SUPPORT</h3>
+                <p>Click on a state to view more info.</p>
+              </div>
+            </div>
+            <div id="state_result_container">
+              <div id="state_info">
+                <h3>STATE SUMMARY</h3>
+                <p>Click/hover on a state to view more info.</p>
+                <p>Precise results will be available on election night.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="visit_text">
+          <font size="2">Use this map to click on the next state you wish to visit. Choose wisely and focus your efforts where they will have the most impact.</font>
+        </p>`,
       );
       const visitMap = rFunc(t, 1);
       $("#map_container").usmap(visitMap);
@@ -1815,7 +1889,6 @@ function nextQuestion() {
 
 function answerEffects(t) {
   // eslint-disable-next-line prefer-const
-  window.stopSpacebar = false;
   if (window.stopSpacebar && $("#visit_overlay")[0]) {
     debugConsole("Visit overlay is showing, not applying answer effects");
     return;
@@ -1835,19 +1908,20 @@ function answerEffects(t) {
     )?.fields;
     if (feedback) {
       const n = `
-                <div class="overlay" id="visit_overlay"></div>
-                <div class="overlay_window" id="visit_window">
-                    <div class="overlay_window_content" id="visit_content">
-                        <h3>Advisor Feedback</h3>
-                        <img src="${election.advisor_url}" width="208" height="128"/>
-                        <p>${substitutePlaceholders(feedback.answer_feedback)}</p>
-                    </div>
-                    <div class="overlay_buttons" id="visit_buttons">
-                        <button id="ok_button">OK</button>
-                        <br>
-                        <button id="no_feedback_button">Don't give me advice</button>
-                    </div>
-                </div>`.trim();
+        <div class="overlay" id="visit_overlay"></div>
+        <div class="overlay_window" id="visit_window">
+          <div class="overlay_window_content" id="visit_content">
+            <h3>Advisor Feedback</h3>
+            <img src="${election.advisor_url}" width="208" height="128"/>
+            <p>${substitutePlaceholders(feedback.answer_feedback)}</p>
+          </div>
+          <div class="overlay_buttons" id="visit_buttons">
+            <button id="ok_button">OK</button>
+            <br>
+            <button id="no_feedback_button">Don't give me advice</button>
+          </div>
+        </div>
+      `.trim();
       $("#game_window").append(n);
       $("#ok_button").click(() => nextQuestion());
       $("#no_feedback_button").click(() => {
@@ -1861,19 +1935,19 @@ function answerEffects(t) {
 function advisorFeedback() {
   const election = PROPS.ELECTIONS.get(String(e.election_id));
   const advDiv = `
-        <div class="overlay" id="feedback_overlay"></div>
-        <div class="overlay_window" id="feedback_window">
-            <div class="overlay_window_content" id="feedback_content">
-                <h3>Advisor Feedback</h3>
-                <img src="${election.advisor_url}" width="208" height="128"/>
-                <p>${e.SelAnsContText}</p>
-            </div>
-            <div id="visit_buttons">
-                <button id="ok_button">OK</button>
-                <br>
-            </div>
-        </div>
-    `.trim();
+    <div class="overlay" id="feedback_overlay"></div>
+    <div class="overlay_window" id="feedback_window">
+      <div class="overlay_window_content" id="feedback_content">
+        <h3>Advisor Feedback</h3>
+        <img src="${election.advisor_url}" width="208" height="128"/>
+        <p>${e.SelAnsContText}</p>
+      </div>
+      <div id="visit_buttons">
+        <button id="ok_button">OK</button>
+        <br>
+      </div>
+    </div>
+  `.trim();
   $("#game_window").append(advDiv);
   $("#ok_button").click(() => $("#feedback_overlay, #feedback_window").remove());
 }
@@ -1905,24 +1979,33 @@ function a(e) {
   // eslint-disable-next-line default-case
   switch (e) {
     case "1":
-      t = "<p><strong>Use the default method of allocating electoral votes for each state.</strong></p>                 <p>In the vast majority of cases, states use a winner-take-all method. For instance,                 if Candidate A defeats Candidate B in a state, worth 20 electoral votes, Candidate                 A will usually win all 20 votes.</p>                 <p>This method tends to concentrate the election into a handful of swing states.                 It also makes it difficult for third-party candidates to win electoral votes. On                 the other hand, it is easier for a single candidate to gain an overall majority of the                 electoral votes.</p>";
+      t = `
+        <p><strong>Use the default method of allocating electoral votes for each state.</strong></p>
+        <p>In the vast majority of cases, states use a winner-take-all method. For instance, if Candidate A defeats Candidate B in a state, worth 20 electoral votes, Candidate A will usually win all 20 votes.</p>
+        <p>This method tends to concentrate the election into a handful of swing states. It also makes it difficult for third-party candidates to win electoral votes. On the other hand, it is easier for a single candidate to gain an overall majority of the electoral votes.</p>
+      `;
       break;
     case "2":
-      t = "<p><strong>Allocate each state's electoral votes proportionally.</strong></p>                <p>Under this method, all candidates split the electoral votes in a state, in                 proportion to their popular vote %.</p>                <p>There is still an advantage to winning a state -- the winner of the state will                 always receive a plurality of electoral votes. For instance, in a state with                 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3                 electoral votes.</p>                <p>Compared to a winner-take-all method, this method aligns the electoral vote                 more closely with the popular vote. It also makes it easier to third party                 candidates to increase their electoral vote totals. In some scenarios, this effect                 is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>";
+      t = `
+        <p><strong>Allocate each state's electoral votes proportionally.</strong></p>
+        <p>Under this method, all candidates split the electoral votes in a state, in proportion to their popular vote %.</p>
+        <p>There is still an advantage to winning a state -- the winner of the state will always receive a plurality of electoral votes. For instance, in a state with 4 electoral votes, if Candidate A wins 51% of the vote, they will be awarded 3 electoral votes.</p>
+        <p>Compared to a winner-take-all method, this method aligns the electoral vote more closely with the popular vote. It also makes it easier to third party candidates to increase their electoral vote totals. In some scenarios, this effect is highly significant on the final outcome. Some examples are 1860, 1948, 1968, and 2000. </p>
+      `;
       break;
     case "3":
       t = `
-                <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
-                <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
-                <p>
-                - Campaign finance<br>
-                - Staffing your campaign<br>
-                - Interactions with lobbies<br>
-                - Ad buys
-                </p>
-                <p><b>This is not the recommended experience for new players.</b></p>
-                <p><b>Originally from New Campaign Trail, added with permission.</b></p>
-            `;
+        <p><strong style='color:navy'>From sea to shining sea!</strong> - <em>The "advanced mode" Campaign Trail experience.</em></p>
+        <p>You will play with significantly increased control over the financial and internal aspects of your campaign, including:</p>
+        <p>
+        - Campaign finance<br>
+        - Staffing your campaign<br>
+        - Interactions with lobbies<br>
+        - Ad buys
+        </p>
+        <p><b>This is not the recommended experience for new players.</b></p>
+        <p><b>Originally from New Campaign Trail, added with permission.</b></p>
+      `;
       break;
   }
   $("#opponent_selection_description_window").html(t);
@@ -1980,7 +2063,7 @@ function election_HTML(id, cand, running_mate) {
       return baseScenarioDict["2016a"];
     }
     return (
-      `2016a_${cands.get(String(cand)).fields.last_name}_${cands.get(String(running_mate)).fields.last_name}.html`
+      `2016a_${cands.get(String(cand)).last_name}_${cands.get(String(running_mate)).last_name}.html`
     );
   }
 
@@ -2000,22 +2083,23 @@ function candSel(a) {
   if (!modded) e.shining = e.shining_info.some((f) => stringsEqual(f.pk, stringElect));
 
   document.querySelector("#game_window").innerHTML = `
-        <div class="game_header">${window.corrr}</div>
-        <div class="inner_window_w_desc" id="inner_window_3">
-            <div id="candidate_form">
-                <form name="candidate">
-                    <p>
-                        <h3>${e.CandidText}</h3>
-                        <select name="candidate_id" id="candidate_id">${n}</select>
-                    </p>
-                </form>
-            </div>
+    <div class="game_header">${window.corrr}</div>
+    <div class="inner_window_w_desc" id="inner_window_3">
+      <div id="candidate_form">
+        <form name="candidate">
+          <p>
+            <h3>${e.CandidText}</h3>
+            <select name="candidate_id" id="candidate_id">${n}</select>
+          </p>
+        </form>
+        </div>
         <div class="person_description_window" id="candidate_description_window"></div>
         <p>
-            <button class="person_button" id="candidate_id_back">Back</button>
-            <button class="person_button" id="candidate_id_button">Continue</button>
+          <button class="person_button" id="candidate_id_back">Back</button>
+          <button class="person_button" id="candidate_id_button">Continue</button>
         </p>
-        </div>`.trim();
+    </div>
+  `.trim();
 
   const candId = document.getElementById("candidate_id");
   descHTML("#candidate_description_window", candId.value);
@@ -2043,19 +2127,19 @@ function vpSelect(t) {
   document.querySelector("#game_window").innerHTML = `
     <div class="game_header">${window.corrr}</div>
     <div class="inner_window_w_desc" id="inner_window_4">
-        <div id="running_mate_form">
-            <form name="running mate">
-                <p>
-                    <h3>${e.VpText}</h3>
-                    <select name="running_mate_id" id="running_mate_id">${n}</select>
-                </p>
-            </form>
-        </div>
-        <div class="person_description_window" id="running_mate_description_window"></div>
-        <p>
-            <button class="person_button" id="running_mate_id_back">Back</button>
-            <button class="person_button" id="running_mate_id_button">Continue</button>
-        </p>
+      <div id="running_mate_form">
+        <form name="running mate">
+          <p>
+            <h3>${e.VpText}</h3>
+            <select name="running_mate_id" id="running_mate_id">${n}</select>
+          </p>
+        </form>
+      </div>
+      <div class="person_description_window" id="running_mate_description_window"></div>
+      <p>
+        <button class="person_button" id="running_mate_id_back">Back</button>
+        <button class="person_button" id="running_mate_id_button">Continue</button>
+      </p>
     </div>`.trim();
 
   const runningMateId = document.querySelector("#running_mate_id");
@@ -2079,34 +2163,35 @@ function renderOptions(electionId, candId, runId) {
     shining = `<option value=3 style="">Sea to Shining Sea</option>`;
   }
   document.querySelector("#game_window").innerHTML = `
-        <div class="game_header">${window.corrr}</div>
-        <div class="inner_window_w_desc" id="inner_window_4">
-            <div id="game_options">
-                <form name="game_type_selection">
-                    <p>
-                        <h3>Select your game mode.</h3>
-                        <select name="game_type_id" id="game_type_id">
-                            <option value="1">Default (Winner-Take-All)</option>
-                            <option value="2">Proportional</option>
-                            ${shining}
-                        </select>
-                    </p>
-                </form>
-            </div>
-            <div class="description_window_small" id="opponent_selection_description_window"></div>
-            <div id="difficulty_level">
-                <form name="difficulty_level_selection">
-                <p>
-                    <h3>Please choose your difficulty level:</h3>
-                    <select name="difficulty_level_id" id="difficulty_level_id"> ${difficultyStr} </select>
-                </p>
-                </form>
-            </div>
-            <p id="opponent_selection_id_button_p">
-                <button class="person_button" id="opponent_selection_id_back">Back</button>
-                <button class="person_button" id="opponent_selection_id_button">Continue</button>
-            </p>
-        </div>`.trim();
+    <div class="game_header">${window.corrr}</div>
+    <div class="inner_window_w_desc" id="inner_window_4">
+      <div id="game_options">
+        <form name="game_type_selection">
+          <p>
+            <h3>Select your game mode.</h3>
+            <select name="game_type_id" id="game_type_id">
+              <option value="1">Default (Winner-Take-All)</option>
+              <option value="2">Proportional</option>
+              ${shining}
+            </select>
+          </p>
+        </form>
+      </div>
+      <div class="description_window_small" id="opponent_selection_description_window"></div>
+      <div id="difficulty_level">
+        <form name="difficulty_level_selection">
+        <p>
+          <h3>Please choose your difficulty level:</h3>
+          <select name="difficulty_level_id" id="difficulty_level_id"> ${difficultyStr} </select>
+        </p>
+        </form>
+      </div>
+      <p id="opponent_selection_id_button_p">
+        <button class="person_button" id="opponent_selection_id_back">Back</button>
+        <button class="person_button" id="opponent_selection_id_button">Continue</button>
+      </p>
+    </div>
+  `.trim();
   const gameTypeId = document.querySelector("#game_type_id");
   const difficultyLevelId = document.querySelector("#difficulty_level_id");
   a(gameTypeId.value);
@@ -2178,31 +2263,7 @@ function renderOptions(electionId, candId, runId) {
       difficulty_level_id: Number(campaignTrail_temp.difficulty_level_id),
       game_start_logging_id: Number(campaignTrail_temp.game_start_logging_id),
     });
-    // Set up the interval for adding event listeners
-    const important_code = setInterval(() => {
-      const answerButton = document.querySelector("#answer_select_button");
-      if (answerButton) {
-        // Use jQuery's off() to remove all click handlers
-        const $answerButton = $(answerButton);
-        $answerButton.off('click');
 
-        // Add the click handler using jQuery
-        $answerButton.on('click', (e) => {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          onAnswerSelectButtonClicked(e);
-        });
-
-        // Set up map view click handler
-        $("#view_electoral_map").off("click").on("click", (e) => {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          openMap(A(2));
-        });
-
-        clearInterval(important_code);
-      }
-    }, 1000);
     const tempFuncO = (e) => {
       if (e.collect_results) {
         const a = A(2);
@@ -2239,36 +2300,36 @@ function renderOptions(electionId, candId, runId) {
           } else {
             // check memory cache
             let code2 = window.campaignTrail_temp ? window.campaignTrail_temp.custom_code_2 : null;
-            
+
             // check localStorage
             if (!code2) {
-                code2 = localStorage.getItem(`${customMod}_code2`);
+              code2 = localStorage.getItem(`${customMod}_code2`);
             }
-            
+
             // check indexedDB
             if (!code2 && window.getModFromDB) {
-                try {
-                    const modData = await window.getModFromDB(customMod);
-                    if (modData && modData.code2) {
-                        code2 = modData.code2;
-                    }
-                } catch(e) {
-                    console.error("Could not fetch code 2 from DB:", e);
+              try {
+                const modData = await window.getModFromDB(customMod);
+                if (modData && modData.code2) {
+                  code2 = modData.code2;
                 }
+              } catch (e) {
+                console.error("Could not fetch code 2 from DB:", e);
+              }
             }
 
             if (code2) {
-                executeMod(code2, {
-                  campaignTrail_temp,
-                  window,
-                  document,
-                  $,
-                  jQuery
-                });
+              executeMod(code2, {
+                campaignTrail_temp,
+                window,
+                document,
+                $,
+                jQuery
+              });
             } else {
-                console.error("Code 2 was not found for custom mod: " + customMod);
+              console.error("Code 2 was not found for custom mod: " + customMod);
             }
-            
+
             tempFuncO(e);
           }
 
@@ -2487,8 +2548,16 @@ function setStatePollText(state, t) {
         globalParam.issue_stance_6_max,
       ];
 
+      let currentScore = fields.state_issue_score;
+      if (e.computed_state_issue_scores) {
+        const stateMap = e.computed_state_issue_scores.get(fields.state);
+        if (stateMap && stateMap.has(fields.issue)) {
+          currentScore = stateMap.get(fields.issue).state_issue_score;
+        }
+      }
+
       for (let i = 0; i < borders.length; i++) {
-        if (fields.state_issue_score <= borders[i]) {
+        if (currentScore <= borders[i]) {
           pickedStance = issue.fields[`stance_${i + 1}`];
           stanceDesc = issue.fields[`stance_desc_${i + 1}`];
           break;
@@ -2539,12 +2608,12 @@ function setStatePollText(state, t) {
 
   // $("#state_info").html(f);
   document.getElementById("state_info").innerHTML = `
-        <h3>STATE SUMMARY</h3>
-        <p>${state.fields.name}</p>
-        <ul>${u}</ul>
-        ${!state.fields.electoral_votes ? "" : `<p>${e.primary ? "Delegates:" : "Electoral Votes:"} ${formatNumbers(state.fields.electoral_votes)}</p>`}
-        <p>${e.primary ? onQText : `Popular Votes: ${formatNumbers(state.fields.popular_votes)}`}</p>
-    `.trim();
+    <h3>STATE SUMMARY</h3>
+    <p>${state.fields.name}</p>
+    <ul>${u}</ul>
+    ${!state.fields.electoral_votes ? "" : `<p>${e.primary ? "Delegates:" : "Electoral Votes:"} ${formatNumbers(state.fields.electoral_votes)}</p>`}
+    <p>${e.primary ? onQText : `Popular Votes: ${formatNumbers(state.fields.popular_votes)}`}</p>
+  `.trim();
 }
 
 function rFunc(t, i) {
@@ -2615,6 +2684,16 @@ function rFunc(t, i) {
 
     let fillHex;
 
+
+    if (e.oldColors === true) {
+      if (margin > 0.10) {
+        fillHex = candidate.fields.color_hex;
+      } else if (margin > 0.05) {
+        fillHex = candidate.fields.secondary_color_hex;
+      } else {
+        fillHex = "#C9C9C9";
+      }
+    }
     if (
       String(e.game_type_id) === "3"
       && i === 1
@@ -2666,8 +2745,13 @@ function rFunc(t, i) {
     return acc;
   }, "");
 
+  let lastHoveredStateName = null;
+
   // hover/click handler
   const hoverHandler = (_evt, data) => {
+    if (lastHoveredStateName === data.name) return;
+    lastHoveredStateName = data.name;
+
     window.nn2 = latestCandidates;
     window.nn3 = evArray;
     rrr = cachedVV;
@@ -2707,11 +2791,11 @@ function rFunc(t, i) {
                 <div class="overlay_window_content" id="visit_content">
                   <h3>Advisor Feedback</h3>
                   <img src="${election.advisor_url}" width="208" height="128"/>
-                  <p>You have chosen to visit ${state.fields.name} -- is this correct?</p>
+                  <p>${e.VisitText} ${state.fields.name} ${e.VisitText2}</p>
                 </div>
                 <div class="overlay_buttons" id="visit_buttons">
-                    <button id="confirm_visit_button">YES</button><br>
-                    <button id="no_visit_button">NO</button>
+                  <button id="confirm_visit_button">YES</button><br>
+                  <button id="no_visit_button">NO</button>
                 </div>
               </div>
             `;
@@ -2732,8 +2816,8 @@ function rFunc(t, i) {
 
 /**
  * Dictates how long it takes until the results in a particular state are called
- * @param {Array<{votes: number}>} results The election results in the state
- * @param {number} time The time at which the state's polls close
+ * @param {{votes: number}[]} results - The election results in the state
+ * @param {number} time - The time at which the state's polls close
  * @returns {number} Time at which the state's results are called
  */
 function marginTime(results, time) {
@@ -2919,9 +3003,9 @@ function overallResultsHtml() {
   }
   const candResults = e.final_overall_results.find((f) => f.candidate === e.candidate_id);
   window.quickstats = [
-    candResults.electoral_votes,
-    (candResults.popular_votes / totalPV) * 100,
-    candResults.popular_votes,
+    candResults?.electoral_votes ?? 0,
+    ((candResults?.popular_votes ?? 0) / totalPV) * 100,
+    candResults?.popular_votes ?? 0,
   ]; // format: electoral vote count, popular vote proportion, popular vote vote count
 
   const pickedEnding = endingPicker(e.final_outcome, totalPV, e.final_overall_results, window.quickstats);
@@ -2952,58 +3036,58 @@ function overallResultsHtml() {
       const fName = `${candObj2.first_name} ${candObj2.last_name}`;
       if (!f.popular_votes) return "";
       return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}
-                </td>
-                ${noElectoralVotes ? "" : `<td>${f.electoral_votes}</td>`}
-                <td>${formatNumbers(f.popular_votes)}</td>
-                <td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td>
-            </tr>
-        `;
+        <tr>
+          <td style="text-align: left;">
+            <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${fName}
+          </td>
+          ${noElectoralVotes ? "" : `<td>${f.electoral_votes}</td>`}
+          <td>${formatNumbers(f.popular_votes)}</td>
+          <td>${((f.popular_votes / totalPV) * 100).toFixed(1)}%</td>
+        </tr>
+      `;
     }).filter(Boolean).join("")
     .trim();
 
   const c = e.game_results_url !== "None"
     ? `
-            <h4>
-                Final Results:
-                <a target="_blank" href="${e.game_results_url}">Game Link</a> (use link to view this result on its own page)
-            </h4>
-        `.trim()
+      <h4>
+        Final Results:
+        <a target="_blank" href="${e.game_results_url}">Game Link</a> (use link to view this result on its own page)
+      </h4>
+    `.trim()
     : "";
 
   const u = `
-        <div class="game_header">${window.corrr}</div>
-        <div id="main_content_area">
-            <div id="results_container">
-                <img class="person_image" src="${l}"/>
-                <div id="final_results_description">${s}</div>
-                ${difficulty_string}
-                <div id="overall_vote_statistics">
-                    ${c}
-                    <table class="final_results_table">
-                        <br>
-                        <tr>
-                            <th>Candidate</th>
-                            ${noElectoralVotes ? "" : `<th>${e.primary ? "Delegates" : "Electoral Votes"}</th>`}
-                            <th>Popular Votes</th>
-                            <th>Popular Vote %</th>
-                        </tr>
-                        ${r}
-                    </table>
-                </div>
-            </div>
+    <div class="game_header">${window.corrr}</div>
+    <div id="main_content_area">
+      <div id="results_container">
+        <img class="person_image" src="${l}"/>
+        <div id="final_results_description">${s}</div>
+        ${difficulty_string}
+        <div id="overall_vote_statistics">
+          ${c}
+          <table class="final_results_table">
+            <br>
+            <tr>
+              <th>Candidate</th>
+              ${noElectoralVotes ? "" : `<th>${e.primary ? "Delegates" : "Electoral Votes"}</th>`}
+              <th>Popular Votes</th>
+              <th>Popular Vote %</th>
+            </tr>
+            ${r}
+          </table>
         </div>
-        <div id="map_footer">
-            <button class="final_menu_button" id="overall_results_button" disabled="disabled">Final Election Results</button>
-            <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-            <button class="final_menu_button" id="state_results_button">Results by State</button>
-            <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
-            <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-            <button class="final_menu_button" id="play_again_button">Play Again!</button>
-        </div>
-    `.trim();
+      </div>
+    </div>
+    <div id="map_footer">
+      <button class="final_menu_button" id="overall_results_button" disabled="disabled">Final Election Results</button>
+      <button class="final_menu_button" id="final_election_map_button">Election Map</button>
+      <button class="final_menu_button" id="state_results_button">Results by State</button>
+      <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
+      <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
+      <button class="final_menu_button" id="play_again_button">Play Again!</button>
+    </div>
+  `.trim();
 
   $("#game_window").html(u);
   const $prev = $("#difficulty_mult");
@@ -3109,33 +3193,34 @@ function finalMapScreenHtml() {
     `;
   }).join("");
   const resHtml = `
-        <div class="game_header">${window.corrr}</div>
-        <div id="main_content_area">
-            <div id="map_container"></div>
-            <div id="menu_container">
-                <div id="overall_result_container">
-                    <div id="overall_result">
-                        <h3>${e.primary ? 'DELEGATES' : 'ELECTORAL VOTES'}</h3>
-                        <ul>${candResultText}</ul>
-                        ${noElectoralVotes ? "" : `<p>${formatNumbers(election.winning_electoral_vote_number)} to win</p>`}
-                    </div>
-                </div>
-                <div id="state_result_container">
-                    <div id="state_result">
-                        <h3>STATE RESULTS</h3>
-                        <p>Click on a state to view final results.</p>
-                    </div>
-                </div>
-            </div>
+    <div class="game_header">${window.corrr}</div>
+    <div id="main_content_area">
+      <div id="map_container"></div>
+      <div id="menu_container">
+        <div id="overall_result_container">
+          <div id="overall_result">
+            <h3>${e.primary ? 'DELEGATES' : 'ELECTORAL VOTES'}</h3>
+            <ul>${candResultText}</ul>
+            ${noElectoralVotes ? "" : `<p>${formatNumbers(election.winning_electoral_vote_number)} to win</p>`}
+          </div>
         </div>
-        <div id="map_footer">
-            <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-            <button class="final_menu_button" id="final_election_map_button" disabled="disabled">Election Map</button>
-            <button class="final_menu_button" id="state_results_button">Results by State</button>
-            <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
-            <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button>
-            <button class="final_menu_button" id="play_again_button">Play Again!</button>
-        </div>`.trim();
+        <div id="state_result_container">
+          <div id="state_result">
+            <h3>STATE RESULTS</h3>
+            <p>Click on a state to view final results.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="map_footer">
+      <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
+      <button class="final_menu_button" id="final_election_map_button" disabled="disabled">Election Map</button>
+      <button class="final_menu_button" id="state_results_button">Results by State</button>
+      <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
+      <button class="final_menu_button" id="recommended_reading_button"> Further Reading </button>
+      <button class="final_menu_button" id="play_again_button">Play Again!</button>
+    </div>
+  `.trim();
   $("#game_window").html(resHtml);
   $("#map_container").usmap(coloredResults);
 }
@@ -3233,40 +3318,40 @@ function stateResultsHtml() {
   const initialState = stateBase[0]?.state;
   const initialSummary = initialState ? T(initialState) : '<p>No state results available.</p>';
   const j = `
-        <div class="game_header">${window.corrr}</div>
-        <div id="main_content_area">
-            <div id="results_container">
-                <h3 class="title_h3">Election Results and Data by State</h3>
-                    <div id="drop_down_area_state">
-                        <div id="sort_tab_area">
-                            <p>View states by:
-                                <select id="sort_tab">
-                                    <option value="1">Alphabetical</option>
-                                    <option value="2">Most Electoral Votes</option>
-                                    <option value="3">Closest States</option>
-                                    ${m}
-                                    ${g}
-                                </select>
-                            </p>
-                        </div>
-                        <div id="state_tab_area">
-                            <p>Select a state:
-                                <select id="state_tab">${k(stateBase)}</select>
-                            </p>
-                        </div>
-                    </div>
-                <div id="state_result_data_summary">${initialSummary}</div>
+    <div class="game_header">${window.corrr}</div>
+    <div id="main_content_area">
+      <div id="results_container">
+        <h3 class="title_h3">Election Results and Data by State</h3>
+          <div id="drop_down_area_state">
+            <div id="sort_tab_area">
+              <p>View states by:
+                <select id="sort_tab">
+                  <option value="1">Alphabetical</option>
+                  <option value="2">Most Electoral Votes</option>
+                  <option value="3">Closest States</option>
+                  ${m}
+                  ${g}
+                </select>
+              </p>
             </div>
-            <div id="results_container_description"></div>
-        </div>
-        <div id="map_footer">
-            <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-            <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-            <button class="final_menu_button" id="state_results_button" disabled="disabled">Results by State</button>
-            <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
-            <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-            <button class="final_menu_button" id="play_again_button">Play Again!</button>
-        </div>
+            <div id="state_tab_area">
+              <p>Select a state:
+                <select id="state_tab">${k(stateBase)}</select>
+              </p>
+            </div>
+          </div>
+        <div id="state_result_data_summary">${initialSummary}</div>
+      </div>
+      <div id="results_container_description"></div>
+    </div>
+    <div id="map_footer">
+      <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
+      <button class="final_menu_button" id="final_election_map_button">Election Map</button>
+      <button class="final_menu_button" id="state_results_button" disabled="disabled">Results by State</button>
+      <button class="final_menu_button" id="overall_details_button">Overall Results Details</button>
+      <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
+      <button class="final_menu_button" id="play_again_button">Play Again!</button>
+    </div>
     `.trim();
   $("#game_window").html(j);
   const $stateTab = $("#state_tab");
@@ -3321,7 +3406,7 @@ function overallDetailsHtml() {
   })
     .filter(Boolean)
     .join("")
-    .replace(/>(\s+)</g, (match, p1, offset, string) => {
+    .replace(/>(\s+)</g, (_1, _2, offset, string) => {
       const before = string.slice(0, offset);
       const lastTdOpen = before.lastIndexOf("<td");
       const lastTdClose = before.lastIndexOf("</td>");
@@ -3332,43 +3417,45 @@ function overallDetailsHtml() {
   const l = e.percentile !== "None"
     ? `<p>You have done better than approximately <strong>${e.percentile}%</strong> of the games that have been played with your candidate and difficulty level.</p>`
     : "";
-  let _ = "";
+  //let _ = "";
   if (e.historical_overall !== "None") {
     const o = e.historical_overall.map((f) => {
       const colorHex = f.color_hex;
       return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${f.name}
-                </td>
-                <td>${f.winning_pct.toFixed(2)}</td>
-                <td>${f.electoral_votes_avg.toFixed(1)}</td>
-                <td>${formatNumbers(f.popular_votes_avg)}</td>
-                <td>${f.popular_vote_pct_avg.toFixed(2)}</td>
-                <td>${f.electoral_votes_min} - ${f.electoral_votes_max}</td>
-                <td>${formatNumbers(f.popular_votes_min)} - ${formatNumbers(f.popular_votes_max)}</td>
-            </tr>
-            `;
+        <tr>
+          <td style="text-align: left;">
+            <span style="background-color: ${colorHex}; color: ${colorHex};">----</span> ${f.name}
+          </td>
+          <td>${f.winning_pct.toFixed(2)}</td>
+          <td>${f.electoral_votes_avg.toFixed(1)}</td>
+          <td>${formatNumbers(f.popular_votes_avg)}</td>
+          <td>${f.popular_vote_pct_avg.toFixed(2)}</td>
+          <td>${f.electoral_votes_min} - ${f.electoral_votes_max}</td>
+          <td>${formatNumbers(f.popular_votes_min)} - ${formatNumbers(f.popular_votes_max)}</td>
+        </tr>
+      `;
     }).join("");
 
+    /*
     _ = `
-            <div id="overall_stat_details">
-                <h4>Historical Results - Your Candidate and Difficulty Level</h4>
-                <table>
-                    <tr>
-                        <th>Candidate</th>
-                        <th>Candidate</th>
-                        <th>Win %</th>
-                        <th>EV Avg.</th>
-                        <th>PV Avg.</th>
-                        <th>PV % Avg.</th>
-                        <th>EV Range</th>
-                        <th>PV Range</th>
-                    </tr>
-                    ${o}
-                </table>
-            </div>
-        `;
+      <div id="overall_stat_details">
+        <h4>Historical Results - Your Candidate and Difficulty Level</h4>
+        <table>
+          <tr>
+            <th>Candidate</th>
+            <th>Candidate</th>
+            <th>Win %</th>
+            <th>EV Avg.</th>
+            <th>PV Avg.</th>
+            <th>PV % Avg.</th>
+            <th>EV Range</th>
+            <th>PV Range</th>
+          </tr>
+          ${o}
+        </table>
+      </div>
+    `;
+    */
   }
 
   const currentURL = new URL(window.location.href);
@@ -3384,71 +3471,71 @@ function overallDetailsHtml() {
     const nameToUse = needsSpace ? `${spaceToUse}${name}` : name;
 
     return `
-            <tr>
-                <td style="text-align: left;">
-                    <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span>${nameToUse}
-                </td>
-                ${allHistResZero ? "" : `<td>${HistEV[i]}</td>`}
-                <td>${HistPV[i]}</td>
-                <td>${HistPVP[i]}</td>
-            </tr>
-        `;
+      <tr>
+        <td style="text-align: left;">
+          <span style="background-color:${HistHexcolour[i]}; color:${HistHexcolour[i]};">----</span>${nameToUse}
+        </td>
+        ${allHistResZero ? "" : `<td>${HistEV[i]}</td>`}
+        <td>${HistPV[i]}</td>
+        <td>${HistPVP[i]}</td>
+      </tr>
+    `;
   }).join("").trim();
 
   document.getElementById("game_window").innerHTML = `
-        <div class="game_header">${window.corrr}</div>
-        <div id="main_content_area">
-            <div id="overall_details_container">
-                <h3>Overall Election Details</h3>
-                <div id="overall_election_details">
-                    <h4>Results - This Game</h4>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Candidate</th>
-                                ${noElectoralVotes ? "" : `<th>Electoral Votes</th>`}
-                                <th>Popular Votes</th>
-                                <th>Popular Vote %</th>
-                            </tr>
-                            ${a}
-                        </tbody>
-                    </table>
-                    ${l}
-                </div>
-                <div id="overall_election_details">
-                    <h4>Results - Historical</h4>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Candidate</th>
-                                ${allHistResZero ? "" : `<th>Electoral Votes</th>`}
-                                <th>Popular Votes</th>
-                                <th>Popular Vote %</th>
-                            </tr>
-                            ${histRes}
-                        </tbody>
-                    </table>
-                    <p>
-                        <b>
-                          <div style="display: inline-flex; justify-content: center;">
-                            <button id="ExportFileButton" onclick="exportResults()" style="margin: 0 .5em;">Export Game as File</button>
-                            <span>(<a href="/campaign-trail/viewGame.html" target="_blank">load exported save here</a>)</span>
-                          </div>
-                        </b>
-                    </p>
-                    <br><br><br>
-                </div>
-            </div>
-            <div id="map_footer">
-                <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
-                <button class="final_menu_button" id="final_election_map_button">Election Map</button>
-                <button class="final_menu_button" id="state_results_button">Results by State</button>
-                <button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button>
-                <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
-                <button class="final_menu_button" id="play_again_button">Play Again!</button>
-            </div>
+    <div class="game_header">${window.corrr}</div>
+    <div id="main_content_area">
+      <div id="overall_details_container">
+        <h3>Overall Election Details</h3>
+        <div id="overall_election_details">
+          <h4>Results - This Game</h4>
+          <table>
+            <tbody>
+              <tr>
+                <th>Candidate</th>
+                ${noElectoralVotes ? "" : `<th>Electoral Votes</th>`}
+                <th>Popular Votes</th>
+                <th>Popular Vote %</th>
+              </tr>
+              ${a}
+            </tbody>
+          </table>
+          ${l}
         </div>
-    `.trim();
+        <div id="overall_election_details">
+          <h4>Results - Historical</h4>
+          <table>
+            <tbody>
+              <tr>
+                <th>Candidate</th>
+                ${allHistResZero ? "" : `<th>Electoral Votes</th>`}
+                <th>Popular Votes</th>
+                <th>Popular Vote %</th>
+              </tr>
+              ${histRes}
+            </tbody>
+            </table>
+            <p>
+              <b>
+                <div style="display: inline-flex; justify-content: center;">
+                  <button id="ExportFileButton" onclick="exportResults()" style="margin: 0 .5em;">Export Game as File</button>
+                  <span>(<a href="/campaign-trail/viewGame.html" target="_blank">load exported save here</a>)</span>
+                </div>
+              </b>
+            </p>
+            <br><br><br>
+        </div>
+      </div>
+      <div id="map_footer">
+        <button class="final_menu_button" id="overall_results_button">Final Election Results</button>
+        <button class="final_menu_button" id="final_election_map_button">Election Map</button>
+        <button class="final_menu_button" id="state_results_button">Results by State</button>
+        <button class="final_menu_button" id="overall_details_button" disabled="disabled">Overall Results Details</button>
+        <button class="final_menu_button" id="recommended_reading_button">Further Reading</button>
+        <button class="final_menu_button" id="play_again_button">Play Again!</button>
+      </div>
+    </div>
+  `.trim();
 }
 
 function furtherReadingHtml() {
@@ -3504,19 +3591,20 @@ function furtherReadingHtml() {
 function beginNewGameHtml() {
   const election = PROPS.ELECTIONS.get(String(e.election_id));
   $("#game_window").append(`
-        <div class="overlay" id="new_game_overlay"></div>
-        <div class="overlay_window" id="new_game_window">
-            <div class="overlay_window_content" id="election_night_content">
-                <h3>Advisor Feedback</h3>
-                <img src="${election.advisor_url}" width="208" height="128"/>
-                <p>Are you sure you want to begin a new game?</p>
-            </div>
-            <div class="overlay_buttons" id="new_game_buttons">
-                <button id="new_game_button">Yes</button>
-                <br>
-                <button id="cancel_button">No</button>
-            </div>
-        </div>`.trim());
+    <div class="overlay" id="new_game_overlay"></div>
+    <div class="overlay_window" id="new_game_window">
+      <div class="overlay_window_content" id="election_night_content">
+        <h3>Advisor Feedback</h3>
+        <img src="${election.advisor_url}" width="208" height="128"/>
+        <p>Are you sure you want to begin a new game?</p>
+      </div>
+      <div class="overlay_buttons" id="new_game_buttons">
+        <button id="new_game_button">Yes</button>
+        <br>
+        <button id="cancel_button">No</button>
+      </div>
+    </div>`.trim()
+  );
 
   $("#new_game_button").click(() => {
     if (modded) {
@@ -3533,6 +3621,11 @@ function beginNewGameHtml() {
   });
 }
 
+/**
+ * Generates and returns a result table in the form of a string
+ * @param {number} t - The id of the state to generate a results table for
+ * @returns {string}
+ */
 function T(t) {
   const numT = Number(t);
 
@@ -3545,33 +3638,60 @@ function T(t) {
         if (!candidate) return ""; // skip unknown candidates
         const fullName = `${candidate.first_name} ${candidate.last_name}`;
         return !f.percent && !f.electoral_votes ? "" : `
-                     <tr>
-                         <td>${fullName}</td>
-                         <td>${formatNumbers(f.votes)}</td>
-                         <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
-                         ${noElectoralVotes ? "" : `<td>${f.electoral_votes}</td>`}
-                     </tr>
-                 `;
+          <tr>
+            <td>${fullName}</td>
+            <td>${formatNumbers(f.votes)}</td>
+            <td>${(f.percent * 100).toFixed(e.statePercentDigits)}</td>
+            ${noElectoralVotes ? "" : `<td>${f.electoral_votes}</td>`}
+          </tr>
+        `;
       })
         .filter(Boolean)
         .join("");
 
       return `
-                <h4>Results - This Game</h4>
-                <table>
-                    <tr>
-                        <th>Candidate</th>
-                        <th>Popular Votes</th>
-                        <th>Popular Vote %</th>
-                        ${noElectoralVotes ? "" : `<th>Electoral Votes</th>`}
-                    </tr>
-                    ${rows}
-                </table>
-            `;
+        <h4>Results - This Game</h4>
+        <table>
+          <tr>
+            <th>Candidate</th>
+            <th>Popular Votes</th>
+            <th>Popular Vote %</th>
+            ${noElectoralVotes ? "" : `<th>Electoral Votes</th>`}
+          </tr>
+          ${rows}
+        </table>
+      `;
     }).join("");
 }
 
-function A(t) {
+/**
+ * Object used to represent the results of a candidate in a state
+ * @typedef {Object} CandResult
+ * @property {number} candidate - The unique ID of the candidate
+ * @property {number} result - The score of the candidate in the state
+ * @property {number} percent - The amount of votes divided by the sum of all votes in the state
+ * @property {number} electoral_votes - The amount of electoral votes won by the candidate in the state
+ * @property {number} votes - The amount of votes won by the candidate in the state
+ */
+
+/**
+ * Object used to represent the election results in a state
+ * @typedef {Object} StateResult
+ * @property {number} state - Unique primary key (or ID) of the state
+ * @property {CandResult[]} result - Results of each candidate in the given state
+ * @property {string} abbr - Abbreviation of the state's name, used for quick lookups
+ */
+
+// If only JavaScript had enums then we could use it for `t`... ughh :confounded:
+// Also, we should modularize this function sometime! It's a bit too monolithic right now
+
+/**
+ * Handles state polling and election results
+ * @param {1|2} t - 1 for final results, 2 for state polling during game
+ * @param {number[]} matchup - The matchup.
+ * @returns {StateResult[]} Array of results for each state
+ */
+function A(t, matchup = e.matchup ?? [...new Set([e.candidate_id, ...e.opponents_list])]) {
   const gp = PROPS.PARAMS;
   const variance = gp.global_variance;
   const candidateIssueWeight = gp.candidate_issue_weight;
@@ -3582,8 +3702,6 @@ function A(t) {
   const playerAnswers = e.player_answers || [];
   const playerAnswersSet = new Set(playerAnswers);
   const gameType = Number(e.game_type_id);
-
-  const candIdOpponents = [...new Set([e.candidate_id, ...e.opponents_list])];
 
   const stateFieldsByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields]));
   const stateAbbrByPk = new Map((e.states_json || []).map((s) => [s.pk, s.fields.abbr]));
@@ -3606,7 +3724,7 @@ function A(t) {
     return m;
   })();
 
-  const candsGAnsScores = candIdOpponents.map((candidate) => {
+  const candsGAnsScores = matchup.map((candidate) => {
     const cumulScores = playerAnswers.reduce((total, answer) => {
       const key = `${answer}|${e.candidate_id}|${candidate}`;
       return total + (asgIndex.get(key) || 0);
@@ -3633,7 +3751,7 @@ function A(t) {
     return m;
   })();
 
-  const candsIssueScores = candIdOpponents.map((candidate) => {
+  const candsIssueScores = matchup.map((candidate) => {
     const arr = issueByCandidate.get(candidate) || [];
     const v = arr.map((item) => ({
       issue: item.fields.issue,
@@ -3645,36 +3763,77 @@ function A(t) {
     };
   });
 
-  if (candsIssueScores[0]) {
-    const runningMateByIssue = new Map((e.running_mate_issue_score_json || []).map((x) => [x.fields.issue, x]));
-    const issueAgg = (() => {
-      const m = new Map();
-      for (const answ of (e.answer_score_issue_json || [])) {
-        const f = answ.fields;
-        if (!playerAnswersSet.has(f.answer)) continue;
-        const prev = m.get(f.issue) || { g: 0, b: 0 };
-        prev.g += f.issue_score * f.issue_importance;
-        prev.b += f.issue_importance;
-        m.set(f.issue, prev);
-      }
-      return m;
-    })();
+  // It is probably impossible for `candsIssueScores[0]` to be falsy.
 
-    candsIssueScores[0].issue_scores = candsIssueScores[0].issue_scores.map((it) => {
+  const runningMateByIssue = new Map((e.running_mate_issue_score_json || []).map((x) => [x.fields.issue, x]));
+
+  const candIssueAgg = new Map();
+  const stateIssueAgg = new Map();
+
+  for (const answ of (e.answer_score_issue_json || [])) {
+    const f = answ.fields;
+
+    let tag = f.tag;
+    if (!tag) {
+      if (f.candidate != null && f.state == null) tag = 'CANDIDATE';
+      else if (f.state != null && f.candidate == null) tag = 'STATE';
+      else if (f.candidate == null && f.state == null) tag = 'CANDIDATE';
+    }
+
+    if (tag !== 'CANDIDATE' && tag !== 'STATE')
+      throw new Error("Tag must be either of the two strings 'CANDIDATE' or 'STATE'");
+
+    if (tag === 'CANDIDATE' && f.state != null)
+      throw new Error('Answer issue score can only apply to either a candidate or a state, but not both');
+
+    if (tag === 'STATE' && f.candidate != null)
+      throw new Error('Answer issue score can only apply to either a candidate or a state, but not both');
+
+    if (!playerAnswersSet.has(f.answer)) continue;
+
+    const [tgtMap, tgtKey] = (tag === 'STATE')
+      ? [stateIssueAgg, f.state]
+      : [candIssueAgg, f.candidate || e.candidate_id];
+
+    if (!tgtMap.has(tgtKey)) tgtMap.set(tgtKey, new Map());
+
+    const inner = tgtMap.get(tgtKey);
+    const prev = inner.get(f.issue) || { g: 0, b: 0 };
+    prev.g += f.issue_score * f.issue_importance;
+    prev.b += f.issue_importance;
+
+    if (!inner.has(f.issue)) inner.set(f.issue, { ...prev });
+  }
+
+  for (const candIssueScore of candsIssueScores) {
+    const candId = candIssueScore.candidate_id;
+    const aggMap = candIssueAgg.get(candId);
+
+    if (!aggMap && candId !== e.candidate_id) continue;
+
+    candIssueScore.issue_scores = candIssueScore.issue_scores.map((it) => {
       const { issue } = it;
-      const runIssue = runningMateByIssue.get(issue);
-      if (!runIssue) {
-        console.warn(`No running mate issue for issue ${issue}`);
-        return it;
+      const agg = (aggMap && aggMap.get(issue)) || { g: 0, b: 0 };
+
+      let rmScore = 0;
+      let rmWeight = 0;
+      if (candId === e.candidate_id) {
+        const runIssue = runningMateByIssue.get(issue);
+        if (!runIssue) {
+          console.warn(`No running mate issue for issue ${issue}`);
+          return it;
+        }
+        rmScore = runIssue.fields.issue_score;
+        rmWeight = runningMateIssueWeight;
       }
-      const agg = issueAgg.get(issue) || { g: 0, b: 0 };
+
       const numerator = (it.issue_score * candidateIssueWeight)
-        + (runIssue.fields.issue_score * runningMateIssueWeight)
+        + (rmScore * rmWeight)
         + agg.g;
-      const denom = (candidateIssueWeight + runningMateIssueWeight + agg.b);
+      const denominator = (candidateIssueWeight + rmWeight + agg.b);
       return {
         ...it,
-        issue_score: numerator / denom,
+        issue_score: numerator / denominator,
       };
     });
   }
@@ -3692,14 +3851,14 @@ function A(t) {
     return m;
   })();
 
-  const candsStateMults = candIdOpponents.map((candId, idx) => {
+  const candsStateMults = matchup.map((candId, idx) => {
     const arr = csmByCandidate.get(candId) || [];
     const stateMults = arr.map((g) => {
       const rand = randomNormal(g.fields.candidate);
-      const p = g.fields.state_multiplier
+      const effectiveMult = g.fields.state_multiplier
         * candsGAnsScores[idx].global_multiplier
         * (1 + rand * variance);
-      return { state: Number(g.fields.state), state_multiplier: p };
+      return { state: Number(g.fields.state), state_multiplier: effectiveMult };
     }).sort((a, b) => a.state - b.state);
 
     return { candidate_id: candId, state_multipliers: stateMults };
@@ -3716,7 +3875,7 @@ function A(t) {
     return m;
   })();
 
-  candIdOpponents.forEach((cand, idx) => {
+  matchup.forEach((cand, idx) => {
     candsStateMults[idx].state_multipliers.forEach((mult) => {
       const { state } = mult;
 
@@ -3747,10 +3906,28 @@ function A(t) {
       const f = s.fields;
       if (!m.has(f.state)) m.set(f.state, new Map());
       const inner = m.get(f.state);
-      if (!inner.has(f.issue)) inner.set(f.issue, s.fields);
+
+      if (!inner.has(f.issue)) inner.set(f.issue, { ...s.fields });
+    }
+
+    for (const [stateId, issuesMap] of stateIssueAgg.entries()) {
+      if (!m.has(stateId)) continue;
+
+      const stateIssues = m.get(stateId);
+      for (const [issueId, agg] of issuesMap.entries()) {
+        const sFields = stateIssues.get(issueId);
+        if (!sFields) continue;
+
+        const numerator = (sFields.state_issue_score * sFields.weight) + agg.g;
+        const denominator = sFields.weight + agg.b;
+
+        sFields.state_issue_score = numerator / denominator;
+      }
     }
     return m;
   })();
+
+  e.computed_state_issue_scores = stateIssueByState;
 
   const smByCandIndex = candsStateMults.map((c) => {
     const m = new Map();
@@ -3762,7 +3939,7 @@ function A(t) {
   const calcStatePolls = baseStates.map((st) => {
     const { state } = st;
 
-    const finalStatePoll = candIdOpponents.map((candId, r) => {
+    const finalStatePoll = matchup.map((candId, r) => {
       const smValue = smByCandIndex[r].get(state);
       if (smValue == null) {
         return { candidate: candId, result: 0 };
@@ -3793,8 +3970,7 @@ function A(t) {
         console.log(`From key ${r} into f, state multiplier: ${smValue}`);
       }
 
-      score *= smValue;
-      score = Math.max(score, 0);
+      score = Math.max(score * smValue, 0);
       return { candidate: candId, result: score };
     });
 
@@ -3804,10 +3980,9 @@ function A(t) {
   calcStatePolls.forEach((f) => {
     f.abbr = stateAbbrByPk.get(f.state)
       ?? (e.states_json.find((g) => g.pk === f.state)?.fields.abbr ?? null);
-  });
 
-  calcStatePolls.forEach((f) => {
     const sf = stateFieldsByPk.get(f.state);
+
     const M = sf ? Math.floor(sf.popular_votes * (0.95 + 0.1 * Math.random())) : 0;
     const total = f.result.reduce((acc, g) => acc + g.result, 0);
     f.result.forEach((g) => {
@@ -3815,15 +3990,11 @@ function A(t) {
       g.percent = N;
       g.votes = Math.floor(N * M);
     });
-  });
-
-  calcStatePolls.forEach((f) => {
-    const sf = stateFieldsByPk.get(f.state);
     const O = sf ? sf.electoral_votes : 0;
     f.result.sort((a, b) => b.percent - a.percent);
 
     if ([1, 3].includes(gameType)) {
-      if (sf && sf.winner_take_all_flg === 1) {
+      if (sf?.winner_take_all_flg === 1) {
         f.result.forEach((g, idx) => {
           g.electoral_votes = idx === 0 ? O : 0;
         });
@@ -3943,7 +4114,23 @@ const gameStart = (a) => {
   `;
 
   const electionId = document.getElementById("election_id");
+  const credits = document.getElementById("credits");
+
+  const updateCredits = () => {
+    const val = Number(electionId.value);
+    if (val === 69) {
+      credits.innerHTML = "This scenario was made by Tex.";
+    } else if (val > -1 && !modded) {
+      credits.innerHTML = "This scenario was made by Dan Bryan.";
+    } else {
+      credits.innerHTML = `This scenario was made by ${e.credits}.`;
+    }
+  };
+
   electionId.value = e.election_id;
+
+  updateCredits();
+
   electionId.addEventListener("change", () => {
     e.election_id = Number(electionId.value);
     const selectedElection = PROPS.ELECTIONS.get(String(e.election_id));
@@ -3954,6 +4141,8 @@ const gameStart = (a) => {
       </div>
       <div id="election_summary">${selectedElection.summary}</div>
     `;
+
+    updateCredits();
   });
 
   document.getElementById("election_id_button").addEventListener("click", candSel);
@@ -4037,8 +4226,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "#play_again_button": () => beginNewGameHtml(),
   };
 
+  const handlerEntries = Object.entries(handlers);
+
   document.body.addEventListener("click", (event) => {
-    Object.entries(handlers).some(([selector, handler]) => {
+    handlerEntries.some(([selector, handler]) => {
       if (event.target.matches(selector)) {
         event.preventDefault();
         if (handler.length === 1) handler(event);
@@ -4048,38 +4239,4 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     });
   });
-});
-
-let curElectSelect = null;
-
-const fix1964 = () => {
-  const electionSelect = document.querySelector("#election_id");
-  const electionId = Number(electionSelect.value);
-  const credits = document.querySelector("#credits");
-  if (electionId === 69) {
-    credits.innerHTML = "This scenario was made by Tex.";
-  } else if (electionId > -1 && !modded) {
-    credits.innerHTML = "This scenario was made by Dan Bryan.";
-  }
-};
-
-const fix1964Observer = new MutationObserver((mut, obs) => {
-  const newElectSelect = document.querySelector("#election_id");
-  if (newElectSelect && newElectSelect !== curElectSelect) {
-    if (curElectSelect) {
-      curElectSelect.removeEventListener("change", fix1964);
-    }
-    curElectSelect = newElectSelect;
-    curElectSelect.addEventListener("change", fix1964);
-    fix1964();
-  }
-  if (document.querySelector(".inner_window_question")) {
-    e.code2Loaded = true;
-    obs.disconnect();
-  }
-});
-
-fix1964Observer.observe(document.body, {
-  childList: true,
-  subtree: true,
 });

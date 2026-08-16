@@ -1,138 +1,3 @@
-
-campaignTrail_temp.cyoa = true;
-
-// pk -> index lookup for questions
-let _questionIdxByPk = null;
-
-function _rebuildQuestionIdxMap() {
-  _questionIdxByPk = new Map();
-  const arr = campaignTrail_temp.questions_json;
-  for (let i = 0; i < arr.length; i++) {
-    _questionIdxByPk.set(Number(arr[i].pk), i);
-  }
-}
-
-// returns the true array index (>= 0) or -1 if not found
-function getQuestionIndexFromPk(pk) {
-  const n = Number(pk);
-  if (!_questionIdxByPk) _rebuildQuestionIdxMap();
-
-  let idx = _questionIdxByPk.get(n);
-  // if map is stale, rebuild once
-  if (idx == null || campaignTrail_temp.questions_json[idx]?.pk !== n) {
-    _rebuildQuestionIdxMap();
-    idx = _questionIdxByPk.get(n);
-  }
-  return idx ?? -1;
-}
-
-// index to assign into question_number before nextQuestion()
-function getJumpIndexFromPk(pk) {
-  const idx = getQuestionIndexFromPk(pk);
-  return idx >= 0 ? idx - 1 : -1;
-}
-
-// for backwards compatibility
-function getQuestionNumberFromPk(pk) {
-  return getJumpIndexFromPk(pk);
-}
-
-function questionSwapper(pk1, pk2) {
-    const questionData = campaignTrail_temp.questions_json;
-    
-    // find indices of the questions
-    const index1 = getQuestionIndexFromPk(pk1);
-    const index2 = getQuestionIndexFromPk(pk2);
-    
-    // validate both questions exist
-    if (index1 === -1 || index2 === -1) {
-        console.warn(`questionSwapper: Could not find question(s) with pk ${pk1} and/or ${pk2}`);
-        return false;
-    }
-    
-    // swap the entire question objects
-    [questionData[index1], questionData[index2]] = [questionData[index2], questionData[index1]];
-    
-    // rebuild the index map since positions changed
-    _rebuildQuestionIdxMap();
-    
-    return true;
-}
-
-function answerSwapper(pk1, pk2, takeEffects = true) {
-    // hardcoded JSON data for answers
-    const answerData = campaignTrail_temp.answers_json;
-
-    // find the indices of the objects with the specified PKs
-    const index1 = answerData.findIndex(item => item.pk === pk1);
-    const index2 = answerData.findIndex(item => item.pk === pk2);
-
-    // check if objects with those PKs exist
-    if (index1 === -1 || index2 === -1) {
-        return;
-    }
-
-    // swap the question values
-    const tempQuestion = answerData[index1].fields.question;
-    answerData[index1].fields.question = answerData[index2].fields.question;
-    answerData[index2].fields.question = tempQuestion;
-
-    // if takeEffects is true, answers swap effects also
-    if (takeEffects) {
-        const otherJsons = [
-            campaignTrail_temp.answer_score_global_json,
-            campaignTrail_temp.answer_score_issue_json,
-            campaignTrail_temp.answer_score_state_json
-        ];
-
-        otherJsons.forEach(jsonData => {
-            jsonData.forEach(item => {
-                if (item.fields.answer === pk1) {
-                    item.fields.answer = pk2;
-                }
-            });
-        });
-    }
-}
-cyoAdventure = function (a) {
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
-
-    if(ans == 9256){
-        campaignTrail_temp.running_mate_last_name="Chandler"
-        campaignTrail_temp.running_mate_image_url="https://i.imgur.com/R7iZcKh.png";
-
-   }
-
-    if(ans == 9263){
-	campaignTrail_temp.running_mate_last_name="None"
-        campaignTrail_temp.running_mate_image_url="https://i.imgur.com/C9r7JqZ.gif";
-	
-   }
-
-    if(ans == 9276){
-	campaignTrail_temp.running_mate_last_name="LeMay"
-	campaignTrail_temp.running_mate_image_url="https://i.imgur.com/mv5X0Mz.png";
-   }
-
-    if(ans == 9279){
-	campaignTrail_temp.running_mate_last_name="LeMay"
-	campaignTrail_temp.running_mate_image_url="https://i.imgur.com/mv5X0Mz.png";
-   }
-
-    if(ans == 9278){
-	campaignTrail_temp.running_mate_last_name="LeMay"
-	campaignTrail_temp.running_mate_image_url="https://i.imgur.com/mv5X0Mz.png";
-   }
-
-    if(ans == 9277){
-	campaignTrail_temp.running_mate_last_name="LeMay"
-	campaignTrail_temp.running_mate_image_url="https://i.imgur.com/mv5X0Mz.png"; // Do not ask why, don't bother wanting to know why, or even dream to ponder why I wrote the code like this.
-   }
-
-
-
-}
-
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -386,7 +251,7 @@ campaignTrail_temp.questions_json = [
             "likelihood": 1
         }
     }
-]
+];
 
 campaignTrail_temp.answers_json = [
     {
@@ -1037,7 +902,7 @@ campaignTrail_temp.answers_json = [
             "description": "Pass me a cigar. Don't need a lighter; got one right here."
         }
     }
-]
+];
 
 campaignTrail_temp.states_json = [
     {
@@ -1703,7 +1568,7 @@ campaignTrail_temp.states_json = [
             "election": 4
         }
     }
-]
+];
 
 campaignTrail_temp.issues_json = [
     {
@@ -1775,7 +1640,7 @@ campaignTrail_temp.issues_json = [
             "election": 4
         }
     }
-]
+];
 
 campaignTrail_temp.state_issue_score_json = [
     {
@@ -1884,7 +1749,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 100,
             "issue": 12,
-            "state_issue_score": -0.35,
+            "state_issue_score": -0.55,
             "weight": 1
         }
     },
@@ -1954,7 +1819,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 102,
             "issue": 13,
-            "state_issue_score": 0.05,
+            "state_issue_score": -0.2,
             "weight": 1
         }
     },
@@ -2154,7 +2019,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 109,
             "issue": 12,
-            "state_issue_score": -0.75,
+            "state_issue_score": -0.55,
             "weight": 0.25
         }
     },
@@ -2304,7 +2169,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 114,
             "issue": 12,
-            "state_issue_score": -0.55,
+            "state_issue_score": -0.85,
             "weight": 1
         }
     },
@@ -2484,7 +2349,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 120,
             "issue": 12,
-            "state_issue_score": -0.55,
+            "state_issue_score": -0.85,
             "weight": 1
         }
     },
@@ -2614,7 +2479,7 @@ campaignTrail_temp.state_issue_score_json = [
         "fields": {
             "state": 124,
             "issue": 13,
-            "state_issue_score": -0.25,
+            "state_issue_score": -0.05,
             "weight": 0.25
         }
     },
@@ -3308,7 +3173,7 @@ campaignTrail_temp.state_issue_score_json = [
             "weight": 0.25
         }
     }
-]
+];
 
 campaignTrail_temp.candidate_issue_score_json = [
     {
@@ -3326,7 +3191,7 @@ campaignTrail_temp.candidate_issue_score_json = [
         "fields": {
             "candidate": 23,
             "issue": 12,
-            "issue_score": -0.115
+            "issue_score": -0.215
         }
     },
     {
@@ -3392,7 +3257,7 @@ campaignTrail_temp.candidate_issue_score_json = [
             "issue_score": -0.8
         }
     }
-]
+];
 
 campaignTrail_temp.running_mate_issue_score_json = [
     {
@@ -3422,7 +3287,7 @@ campaignTrail_temp.running_mate_issue_score_json = [
             "issue_score": -0.2
         }
     }
-]
+];
 
 campaignTrail_temp.candidate_state_multiplier_json = [
     {
@@ -4802,7 +4667,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
             "state_multiplier": 0.373
         }
     }
-]
+];
 
 campaignTrail_temp.answer_score_global_json = [
     {
@@ -5322,7 +5187,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 9155,
             "candidate": 25,
             "affected_candidate": 25,
-            "global_multiplier": 0.085
+            "global_multiplier": 0.065
         }
     },
     {
@@ -5715,7 +5580,7 @@ campaignTrail_temp.answer_score_global_json = [
             "global_multiplier": -0.04
         }
     }
-]
+];
 
 campaignTrail_temp.answer_score_issue_json = [
     {
@@ -5888,7 +5753,7 @@ campaignTrail_temp.answer_score_issue_json = [
             "issue_importance": 1.55
         }
     }
-]
+];
 
 campaignTrail_temp.answer_score_state_json = [
     {
@@ -12072,8 +11937,118 @@ campaignTrail_temp.answer_score_state_json = [
             "affected_candidate": 24,
             "state_multiplier": 0.0675
         }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 10094,
+        "fields": {
+            "answer": 9155,
+            "state": 106,
+            "candidate": 25,
+            "affected_candidate": 25,
+            "state_multiplier": -0.035
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 10095,
+        "fields": {
+            "answer": 9155,
+            "state": 114,
+            "candidate": 25,
+            "affected_candidate": 25,
+            "state_multiplier": -0.035
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 10096,
+        "fields": {
+            "answer": 9155,
+            "state": 129,
+            "candidate": 25,
+            "affected_candidate": 25,
+            "state_multiplier": -0.035
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 10097,
+        "fields": {
+            "answer": 9155,
+            "state": 136,
+            "candidate": 25,
+            "affected_candidate": 25,
+            "state_multiplier": -0.035
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 10098,
+        "fields": {
+            "answer": 9155,
+            "state": 138,
+            "candidate": 25,
+            "affected_candidate": 25,
+            "state_multiplier": -0.035
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 10099,
+        "fields": {
+            "answer": 9155,
+            "state": 100,
+            "candidate": 25,
+            "affected_candidate": 25,
+            "state_multiplier": -0.04
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 10100,
+        "fields": {
+            "answer": 9155,
+            "state": 109,
+            "candidate": 25,
+            "affected_candidate": 25,
+            "state_multiplier": 0.02
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 10101,
+        "fields": {
+            "answer": 9155,
+            "state": 131,
+            "candidate": 25,
+            "affected_candidate": 25,
+            "state_multiplier": 0.02
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 10102,
+        "fields": {
+            "answer": 9155,
+            "state": 134,
+            "candidate": 25,
+            "affected_candidate": 25,
+            "state_multiplier": 0.02
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_state",
+        "pk": 10103,
+        "fields": {
+            "answer": 9155,
+            "state": 146,
+            "candidate": 25,
+            "affected_candidate": 25,
+            "state_multiplier": 0.02
+        }
     }
-]
+];
 
 campaignTrail_temp.answer_feedback_json = [
     {
@@ -12100,7 +12075,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 8790,
             "candidate": 25,
-            "answer_feedback": "You've certainly avoided a potentially controversy from arising, but you've also kneecapped your ability to spread your name. At the very least, the angry letters Carto serve as nice tender for the mansion's fireplace we head into fall."
+            "answer_feedback": "You've certainly avoided a potentially controversy from arising, but you've also kneecapped your ability to spread your name. At the very least, the angry letters Carto sends us serve as nice tender for the mansion's fireplace as we head into fall."
         }
     },
     {
@@ -12805,7 +12780,7 @@ campaignTrail_temp.answer_feedback_json = [
             "answer_feedback": "You flick the lighter open with ease, and put the flame to the end of the cigar. A deep breath follows soon after. "
         }
     }
-]
+];
 
 campaignTrail_temp.candidate_image_url = "https://i.imgur.com/F3twOYG.png";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/weTrD4A.png";
@@ -12813,20 +12788,20 @@ campaignTrail_temp.candidate_last_name = "Wallace";
 campaignTrail_temp.running_mate_last_name = "Griffin";
 
 campaignTrail_temp.multiple_endings = true;
+
+const setImage = (url) => {
+    if (!url) return;
+    const interval = setInterval(() => {
+        const img = document.querySelector(".person_image");
+        if (img) {
+            img.src = url;
+            clearInterval(interval);
+        }
+    }, 50);
+};
+
 endingPicker = (out, totv, aa, quickstats) => {
-
-    function setImage(url) {
-        if(url == '' || url == null) return;
-        let interval = setInterval(function () {
-            img = document.getElementsByClassName("person_image")[0];
-            if (img != null) {
-                img.src = url;
-                clearInterval(interval);
-            }
-        }, 50);
-    }
-
-    if(aa[0].electoral_votes > 269) {
+    if (quickstats[0] > 0) {
         setImage("https://i.imgur.com/sA5xu6T.png");
         return `<h2> Analysis </h2>
 <div style=\"max-height: 200px; overflow-y: auto;\">
@@ -12840,7 +12815,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 
 <p> Satisfied with this analysis and plan, Nixon ended this think session. He had to give a speech to the party apparatus soon about appointments and going forward. </p>`;
     }
-    if(aa[1].electoral_votes > 269) {
+    if (quickstats[0] > 0) {
         setImage("https://i.imgur.com/QWkuE5P.png");
         return `<h2> The White House and The Future </h2>
 <div style=\"max-height: 200px; overflow-y: auto;\">
@@ -12874,25 +12849,219 @@ endingPicker = (out, totv, aa, quickstats) => {
 
 <p> Humphrey slunk back in his chair. He looked down at his lap, so as to not see the smug look on Johnson's face. Even a month away from being irrelevant, the President still had ways to make his life a living hell.`;
     }
-    if(aa[0].electoral_votes < 270 && aa[1].electoral_votes < 270) {
+    if (quickstats[0] > 0) {
         setImage("https://i.imgur.com/o3vYtwd.png");
         return `<h2> Governor </h2>
 
-<p> And thus, America is forced into something it hates with all its heart.
+<p> In this moment, a great nation succumbs to its vices.</p>
 
-<p> Those who could never move on, even a century later,
+<p> The eagle that once soared above the skies, free from its chains, now descends so it can be ensnared in them once again.</p>
 
-<p> Condemn the nation to that which they claim to hate 
+<p> In times like these, the people of this nation turn on each other. Chaos rules the streets, fires roar within buildings, and it seems as though the nation is about to tear itself apart.</p>
 
-<p> Out of nothing but spite.
+<p> All while this happens, somewhere in Alabama, a governor smiles.</p>
 
-<p> God Bless the United States
-
-<p> Not out of divinity
-
-<p> But out of necessity. `;
+<p> This is all he wanted.</p>`;
     }
 }
+
+
+//#startcode
+campaignTrail_temp.cyoa = true;
+
+let _questionIdxByPk = null;
+
+function _rebuildQuestionIdxMap() {
+  _questionIdxByPk = new Map();
+  const arr = campaignTrail_temp.questions_json;
+  for (let i = 0; i < arr.length; i++) {
+    _questionIdxByPk.set(Number(arr[i].pk), i);
+  }
+}
+
+function getQuestionIndexFromPk(pk) {
+  const n = Number(pk);
+  if (!_questionIdxByPk) _rebuildQuestionIdxMap();
+
+  let idx = _questionIdxByPk.get(n);
+
+  if (idx == null || campaignTrail_temp.questions_json[idx]?.pk !== n) {
+    _rebuildQuestionIdxMap();
+    idx = _questionIdxByPk.get(n);
+  }
+  return idx ?? -1;
+}
+
+function getJumpIndexFromPk(pk) {
+  const idx = getQuestionIndexFromPk(pk);
+  return idx >= 0 ? idx - 1 : -1;
+}
+
+function getQuestionNumberFromPk(pk) {
+  return getJumpIndexFromPk(pk);
+}
+
+function questionSwapper(pk1, pk2) {
+    const questionData = campaignTrail_temp.questions_json;
+
+    const index1 = getQuestionIndexFromPk(pk1);
+    const index2 = getQuestionIndexFromPk(pk2);
+
+    if (index1 === -1 || index2 === -1) {
+        console.warn(`questionSwapper: Could not find question(s) with pk ${pk1} and/or ${pk2}`);
+        return false;
+    }
+
+    [questionData[index1], questionData[index2]] = [questionData[index2], questionData[index1]];
+
+    _rebuildQuestionIdxMap();
+
+    return true;
+}
+
+function answerSwapper(pk1, pk2, takeEffects = true) {
+
+    const answerData = campaignTrail_temp.answers_json;
+
+    const index1 = answerData.findIndex(item => item.pk === pk1);
+    const index2 = answerData.findIndex(item => item.pk === pk2);
+
+    if (index1 === -1 || index2 === -1) {
+        return;
+    }
+
+    const tempQuestion = answerData[index1].fields.question;
+    answerData[index1].fields.question = answerData[index2].fields.question;
+    answerData[index2].fields.question = tempQuestion;
+
+    if (takeEffects) {
+        const otherJsons = [
+            campaignTrail_temp.answer_score_global_json,
+            campaignTrail_temp.answer_score_issue_json,
+            campaignTrail_temp.answer_score_state_json
+        ];
+
+        otherJsons.forEach(jsonData => {
+            jsonData.forEach(item => {
+                if (item.fields.answer === pk1) {
+                    item.fields.answer = pk2;
+                }
+            });
+        });
+    }
+}
+cyoAdventure = function (a) {
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
+
+    if(ans == 9256){
+        campaignTrail_temp.running_mate_last_name="Chandler"
+
+   }
+
+    if(ans == 9263){
+	campaignTrail_temp.running_mate_last_name="None"
+
+   }
+
+    if(ans == 9276){
+	campaignTrail_temp.running_mate_last_name="LeMay"
+
+   }
+
+    if(ans == 9279){
+	campaignTrail_temp.running_mate_last_name="LeMay"
+
+   }
+
+    if(ans == 9278){
+	campaignTrail_temp.running_mate_last_name="LeMay"
+
+   }
+
+    if(ans == 9277){
+	campaignTrail_temp.running_mate_last_name="LeMay"
+
+   }
+
+}
+
+endingPicker = (out, totv, aa, quickstats) => {
+
+    function setImage(url) {
+        if(url == '' || url == null) return;
+        let interval = setInterval(function () {
+            img = document.getElementsByClassName("person_image")[0];
+            if (img != null) {
+                img.src = url;
+                clearInterval(interval);
+            }
+        }, 50);
+    }
+
+    if(aa[0].electoral_votes > 269) {
+        setImage("https://i.imgur.com/sA5xu6T.png");
+        return `<h2> Analysis </h2>
+<div style=\"max-height: 200px; overflow-y: auto;\">
+<p> <b> Once the emotional high </b> wore off, Nixon felt it was appropriate to analyze the results himself. He'd have his crew pick it apart piece by piece over the next few years, looking for any avenue for success, but something in him said that an understanding of the map constructed entirely by him would serve well. Perhaps it was ego, rather than genuine desire to study the results and learn from them.
+
+<p> He scanned the map over and over again. No matter how many times he looked to the Northeast - cocksuckers, he'll tell ya; they don't know anything that wasn't in their fancy books - or the West - a deserted land of depression - his eyes eventually drifted towards Middle America: the South and Midwest.
+
+<p> Wallace put up quite the numbers in those places. Won most of the southern states, in spite of his carefully constructed strategy to woo them over. Nearly ruined all of it. He distracted himself with the comforting knowledge that the same shit would have happened to Reagan if his coup was successful. At least he can win; Reagan would've been the second Goldwater. The party would have been obliterated if not for him.
+
+<p> He refocused northward. Wallace didn't win a damn state there, but he put up a hell of a performance everywhere. Rural areas, suburbs, and even the damn cities. There was something there. White rage. Pure, hot, white rage. Backlash to all this civil rights crap and chaos. Wallace exploited that. The voters ate it up. If he could tap into that - temper it a little so the moderates won't get pissed but still tap into it - he would be unstoppable. He'd be the standard bearer for the Republican Party going forward: the man who secured it eternal victory by tapping into America's true nature.
+
+<p> Satisfied with this analysis and plan, Nixon ended this think session. He had to give a speech to the party apparatus soon about appointments and going forward. </p>`;
+    }
+    if(aa[1].electoral_votes > 269) {
+        setImage("https:https://i.imgur.com/QWkuE5P.png");
+        return `<h2> The White House and The Future </h2>
+<div style=\"max-height: 200px; overflow-y: auto;\">
+<p> <b> Sitting before the President-elect</b> was a man of many titles - The President, his boss, the slayer of segregation, the blood-guzzling warrior - yet, in this moment, he was Lyndon Baines Johnson, the frail man. His face was dull and lifeless. His natural features were highlighted by the stress he has been subjected to over the past five years. Kennedy's assassination, the Civil Rights movement, Goldwater, the riots, Vietnam, all of it showed on a single face. Such a brutal, prolonged molestation of a man could not be masked; not in public, and certainly not in private when such a facade is unnecessary. The thin glasses certainly don't make him seem stronger; if anything, their frame compliments his frailty.
+
+<p> Their discussion thus far has been about one specific policy, close to the hearts of both of them: Vietnam. The President had made his displeasure over Humphrey's break-off known in private, threatening to derail his entire campaign. Yet, the moment the channels called the election for Humphrey, all that swag, carefully built up over decades, had vanished. He had no power over Humphrey. No matter what he said, pleaded, or threatened, in two months time, Humphrey would not have to listen to a damn word he had to say. Johnson didn't tell anyone it got to him; everyone could tell, rendering such an act pointless. </p>
+
+<p> Still, there was something he could impart onto Humphrey.</p>
+
+<p> "And that," Humphrey continued on, not noticing the President shifting his body, hinting that he was moving on to a new subject, "Johnson, is why I have to see through my pledges. If I don't, the party will be torn apart in the midterms, and then myself in 1972."
+
+<p> Johnson shook his head. "Way I see it," he responded; Humphrey expected him to say something about how giving up on Vietnam would get him massacred harder. "You're doomed either way."
+
+<p> Humphrey was taken aback. The President was so stalwart regarding his own plan and its inevitable success. There's no way he was admitting that, no matter what, Vietnam would doom both of them.
+
+<p> "Pardon?" He asked as he leaned forward over the table.
+
+<p> "That Wallace thing's got you by the balls." Johnson explained, laxing himself in response.
+
+<p> "Well," Humphrey stammered, feeling as though personal pride was on the line - he had just beaten Wallace in an election, and insinuating he would be the downfall of the Democrats was personally insulting. "I think I've already shown that-"
+
+<p> Johnson interjected. "No matter what you showed, Wallace displayed with pizzaz." Johnson flicked his hands up for extra flair. "He wooed over a lot of our core constituents. I got over sixty percent of the vote in Pennsylvania in '64. You barely notched it by a few points; did you see the numbers Wallace got in Pittsburgh? Philly?"
+
+<p> Humphrey attempted to rebuke, opening with "Well, I can't be expected to-" but was interrupted.
+
+<p> "Detroit? Milwaukee? Chicago? The suburbs? He won most of the damned south, for Christ's sake!" Johnsons admonished. Even after he signed the Civil Rights Act, he'd won more Southern states than Goldwater. Humphrey didn't even carry any outside of Texas. "No matter how you slice it, he's got us on something. Folks like him: the rhetoric, the policies, all of him."
+
+<p> "Well then, what are you saying I do? See my presidency through as he would? Betray my principles just for a few more votes?"
+
+<p> "I won't tell you to do a damn thing. I'm letting you know you gotta do something."
+
+<p> Humphrey slunk back in his chair. He looked down at his lap, so as to not see the smug look on Johnson's face. Even a month away from being irrelevant, the President still had ways to make his life a living hell.`;
+    }
+    if(aa[0].electoral_votes < 270 && aa[1].electoral_votes < 270) {
+        setImage("https:https://i.imgur.com/o3vYtwd.png")
+        return `<h2> Governor </h2>
+
+<p> In this moment, a great nation succumbs to its vices.</p>
+
+<p> The eagle that once soared above the skies, free from its chains, now descends so it can be ensnared in them once again.</p>
+
+<p> In times like these, the people of this nation turn on each other. Chaos rules the streets, fires roar within buildings, and it seems as though the nation is about to tear itself apart.</p>
+
+<p> All while this happens, somewhere in Alabama, a governor smiles.</p>
+
+<p> This is all he wanted.</p> `;
+    }
+}
+//#endcode
 
 
 campaignTrail_temp.jet_data = [{
@@ -12937,7 +13106,7 @@ campaignTrail_temp.jet_data = [{
             "operator": ">",
             "amount": 0,
             "endingImage": "https://i.imgur.com/o3vYtwd.png",
-            "endingText": "<h2> Governor </h2>\n\n<p> And thus, America is forced into something it hates with all its heart.\n\n<p> Those who could never move on, even a century later,\n\n<p> Condemn the nation to that which they claim to hate \n\n<p> Out of nothing but spite.\n\n<p> God Bless the United States\n\n<p> Not out of divinity\n\n<p> But out of necessity. "
+            "endingText": "<h2> Governor </h2>\n\n<p> In this moment, a great nation succumbs to its vices.</p>\n\n<p> The eagle that once soared above the skies, free from its chains, now descends so it can be ensnared in them once again.</p>\n\n<p> In times like these, the people of this nation turn on each other. Chaos rules the streets, fires roar within buildings, and it seems as though the nation is about to tear itself apart.</p>\n\n<p> All while this happens, somewhere in Alabama, a governor smiles.</p>\n\n<p> This is all he wanted.</p>"
         }
     },
     "mapping_enabled": false,

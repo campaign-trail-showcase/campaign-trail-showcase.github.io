@@ -1,7 +1,7 @@
  /*
  * @title: 2016: A Lifetime of This / 2016b / The Hillary Trail
  * @author: StrawberryMaster & Friends
- * @version: 1.2.0
+ * @version: 1.3.1
  * @description: The 2016 election in the eyes of Hillary Clinton (and a couple of others, too)
  * 
  * Coding license: Apache License 2.0
@@ -324,16 +324,74 @@ campaignTrail_temp.temp_election_list = [
     }
 ]
 
-campaignTrail_temp.difficulty_level_json = JSON.parse("[{\"model\": \"campaign_trail.difficulty_level\", \"pk\": 0.5, \"fields\": {\"name\": \"Easy-Peasy\", \"multiplier\": 1.2}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 1, \"fields\": {\"name\": \"Quite Easy\", \"multiplier\": 1.1}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 3, \"fields\": {\"name\": \"Normal\", \"multiplier\": 0.97}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 4, \"fields\": {\"name\": \"Challenging\", \"multiplier\": 0.95}}, {\"model\": \"campaign_trail.difficulty_level\", \"pk\": 5, \"fields\": {\"name\": \"Hard-Boiled\", \"multiplier\": 0.93}}]");
+campaignTrail_temp.difficulty_level_json = [
+	{
+        "model": "campaign_trail.difficulty_level",
+        "pk": 0.25,
+        "fields": {
+            "name": "A Walk in the Park",
+            "multiplier": 1.225
+        }
+    },
+    {
+        "model": "campaign_trail.difficulty_level",
+        "pk": 0.5,
+        "fields": {
+            "name": "Easy-Peasy",
+            "multiplier": 1.15
+        }
+    },
+    {
+        "model": "campaign_trail.difficulty_level",
+        "pk": 1,
+        "fields": {
+            "name": "Quite Easy",
+            "multiplier": 1.05
+        }
+    },
+    {
+        "model": "campaign_trail.difficulty_level",
+        "pk": 3,
+        "fields": {
+            "name": "Normal",
+            "multiplier": 0.97
+        }
+    },
+    {
+        "model": "campaign_trail.difficulty_level",
+        "pk": 4,
+        "fields": {
+            "name": "Challenging",
+            "multiplier": 0.95
+        }
+    },
+    {
+        "model": "campaign_trail.difficulty_level",
+        "pk": 5,
+        "fields": {
+            "name": "Hard-Boiled",
+            "multiplier": 0.93
+        }
+    },
+	{
+        "model": "campaign_trail.difficulty_level",
+        "pk": 6,
+        "fields": {
+            "name": "Dead on Arrival",
+            "multiplier": 0.915
+        }
+    }
+];
 
 // Actual code here
-corrr = "<h2>A Lifetime of This…</h2>";
+corrr = "A Lifetime of This…";
 
 // Header image
-document.getElementById("header").src = "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016banner.jpg";
+document.getElementById("header").src = "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016banneralt.jpg";
 
-// Custom favicon
-$("#dynamic-favicon").attr("href", "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/favicon.jpg");
+// Custom favicon & page title
+changeFavicon("https://file.garden/aNtAfG887DiA_7lO/2016ALOT/favicon.jpg");
+document.title = "a lifetime of this...";
 
 // Election night descs
 e.ElectionPopup = "Well, election night is here. This is it. Hang in there, Hill."
@@ -341,16 +399,167 @@ e.WinPopup = "You feel as if there’s a beacon of light shining in on you. You 
 e.LosePopup = "Oh no. Oh no. Oh no."
 e.SelAnsContText = "You gotta pick something first, you know."
 
+HistHexcolour = ["#cf1321", "#0e3280", "#f7f70e", "#14bd14"];
+HistName = ["Donald Trump", "Hillary Clinton", "Gary Johnson/Others", "Jill Stein"];
+HistEV = [304, 227, 7, 0];
+HistPV = ["62,985,153", "65,853,677", "4,489,359", "1,457,288"];
+HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
+
+// This causes some variation between the candidate colors. In other words,
+// in every playthrough, the candidate colors will be different from the rest!
+
+// convert “#RRGGBB” → [R,G,B]
+function hexToRgb(hex) {
+  hex = hex.replace(/^#/, '');
+  if (hex.length === 3) {
+    hex = hex.split('').map(c => c + c).join('');
+  }
+  const num = parseInt(hex, 16);
+  return [(num >> 16) & 0xff, (num >> 8) & 0xff, num & 0xff];
+}
+
+// convert [R,G,B] → “#RRGGBB”
+function rgbToHex(r, g, b) {
+  const pad = x => x.toString(16).padStart(2, '0');
+  return `#${pad(r)}${pad(g)}${pad(b)}`;
+}
+
+// linear interpolate two RGB arrays
+function interpolateColor(c1, c2, factor = 0.5) {
+  return c1.map((v, i) =>
+    Math.round(v + factor * (c2[i] - v))
+  );
+}
+
+// vary a single hex color by up to ±variationFrac (e.g. 0.1 = ±10%)
+function varyHexColor(hex, variationFrac = 0.1) {
+  const rgb = hexToRgb(hex);
+  const newRgb = rgb.map(channel => {
+    // random offset between -variationFrac*255 … +variationFrac*255
+    const delta = (Math.random() * 2 - 1) * variationFrac * 255;
+    return Math.max(0, Math.min(255, Math.round(channel + delta)));
+  });
+  return rgbToHex(...newRgb);
+}
+
+campaignTrail_temp.candidate_json.forEach(candidate => {
+  const f = candidate.fields;
+
+  // simple random tint/shade of the original primary
+  f.color_hex = varyHexColor(f.color_hex, 0.05);
+
+  // or interpolate towards the secondary by a random small factor:
+  const primaryRGB   = hexToRgb(f.color_hex);
+  const secondaryRGB = hexToRgb(f.secondary_color_hex);
+  const randFactor   = 0.4 + Math.random() * 0.2; // between 0.4–0.6
+  const blendedRGB   = interpolateColor(primaryRGB, secondaryRGB, randFactor);
+  f.secondary_color_hex = rgbToHex(...blendedRGB);
+});
+
+HistHexcolour = HistHexcolour.map(hex => 
+  // pass the desired max variation fraction (e.g. 0.05 = +/-5%)
+  varyHexColor(hex, 0.05)
+);
+
 // Mod box theme
 campaignTrail_temp.modBoxTheme = {
     "header_color": "#232333",
-    "header_image_url": "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016b(1).jpg",
+    "header_image_url": "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/hrc_banner_2.png",
     "header_text_color": "#f5f3f4",
     "description_text_color": "#000000",
     "description_background_color": "#f5f3f4",
     "main_color": "#403b79",
-    "secondary_color": "#19191E",
+    "secondary_color": "#171827",
     "ui_text_color": "#FFFFFF"
+}
+
+// Game themes
+const themeData = {
+    "Midnight Blue": {
+        headerSrc: "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/2016banneralt.jpg",
+        coloring_title: "#1e2262",
+        coloring_window: "linear-gradient(#386da6, #87a3d1)",
+        containerColor: "#352b64",
+        footerColor: "",
+        extraCss: `
+            body {
+                background: url(https://file.garden/aNtAfG887DiA_7lO/2012LBM/Code1/lbm_background2.webp) !important;
+                background-size: cover !important;
+                background-position: center !important;
+            }
+        `
+    },
+    "Rust": {
+        headerSrc: "https://media.gettyimages.com/id/672839780/pt/foto/washington-dc-senator-hillary-rodham-clinton-is-reflected-in-her-office-table-on-july-19-2001.jpg?s=612x612&w=0&k=20&c=ea3dB3TXOeF9AzHvt7m_c5-4qO5QQJR7JH__pS-QdYA=",
+        coloring_title: "#1e2262",
+        coloring_window: "linear-gradient(#0b3d73 70%, #530505)",
+        containerColor: "#953202",
+        footerColor: "",
+        extraCss: `
+            body {
+                background: url(https://file.garden/aNtAfG887DiA_7lO/2016ALOT/alotbackground.webp) !important;
+                background-position: center !important;
+                background-size: cover !important;
+            }
+			#header { height: 290px; object-fit: cover; object-position: center 30%; }
+			.container { background-image: initial !important; }
+			.game_header { background: linear-gradient(to bottom, #d48b00, #381811) !important; }
+			#inner_window_2, .inner_window_w_desc { background: linear-gradient(#e7c7ab, #e7cece) !important; }
+			.inner_window_question h3 { background: linear-gradient(#fff8eb, #eebeaf) !important; }
+        `
+    },
+};
+
+const el = {
+    headerImg: document.getElementById("header"),
+    gameHeader: document.querySelector(".game_header"),
+    gameWindow: document.getElementById("game_window"),
+    container: document.querySelector(".container"),
+    footer: document.querySelector(".footer")
+};
+
+function applyTheme(themeName) {
+    const config = themeData[themeName];
+    if (!config) return;
+
+    let styleElement = document.getElementById("custom-theme-styles");
+    if (!styleElement) {
+        styleElement = document.createElement("style");
+        styleElement.id = "custom-theme-styles";
+        document.head.appendChild(styleElement);
+    }
+
+    if (el.headerImg) el.headerImg.src = config.headerSrc;
+
+    if (typeof nct_stuff !== 'undefined' && nct_stuff.themes) {
+        nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = config.coloring_title;
+        nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = config.coloring_window;
+    }
+
+    if (el.gameHeader) el.gameHeader.style.backgroundColor = config.coloring_title;
+    if (el.gameWindow) el.gameWindow.style.background = config.coloring_window;
+    if (el.container) el.container.style.backgroundColor = config.containerColor;
+    if (el.footer) el.footer.style.color = config.footerColor || "";
+
+    styleElement.textContent = config.extraCss;
+}
+
+const oldPicker = document.getElementById("themePicker");
+if (oldPicker) {
+    const newPicker = document.createElement("select");
+    newPicker.id = "themePicker";
+    
+    Object.keys(themeData).forEach(key => {
+        const option = document.createElement("option");
+        option.value = key;
+        option.textContent = key;
+        newPicker.appendChild(option);
+    });
+
+    newPicker.addEventListener("change", (e) => applyTheme(e.target.value));
+    oldPicker.replaceWith(newPicker);
+    
+    applyTheme(newPicker.value);
 }
 
 // Originally, this was the appendStyle() function borrowered from the
@@ -358,31 +567,32 @@ campaignTrail_temp.modBoxTheme = {
 // Eventually, this was replaced by a more optimized function.
 
 function ensureMetaViewport() {
-    if (!document.querySelector('meta[name="viewport"]')) {
-        const m = document.createElement('meta');
-        m.name = 'viewport';
-        m.content = 'width=device-width, initial-scale=1';
-        document.head.appendChild(m);
-    }
+  if (!document.querySelector('meta[name="viewport"]')) {
+    const m = document.createElement('meta');
+    m.name = 'viewport';
+    m.content = 'width=device-width, initial-scale=1';
+    document.head.appendChild(m);
+  }
 }
 
 function applyGlobalStyles(css, id = 'app-theme') {
-    if ('adoptedStyleSheets' in document && 'replaceSync' in CSSStyleSheet.prototype) {
-        if (!applyGlobalStyles.sheet) {
-            applyGlobalStyles.sheet = new CSSStyleSheet();
-            document.adoptedStyleSheets = [...document.adoptedStyleSheets, applyGlobalStyles.sheet];
-        }
-        applyGlobalStyles.sheet.replaceSync(css);
-        return;
+  if ('adoptedStyleSheets' in document && 'replaceSync' in CSSStyleSheet.prototype) {
+    if (!applyGlobalStyles.sheets) applyGlobalStyles.sheets = {};
+    if (!applyGlobalStyles.sheets[id]) {
+      applyGlobalStyles.sheets[id] = new CSSStyleSheet();
+      document.adoptedStyleSheets = [...document.adoptedStyleSheets, applyGlobalStyles.sheets[id]];
     }
+    applyGlobalStyles.sheets[id].replaceSync(css);
+    return;
+  }
 
-    let el = document.getElementById(id);
-    if (!el) {
-        el = document.createElement('style');
-        el.id = id;
-        document.head.appendChild(el);
-    }
-    el.textContent = css;
+  let el = document.getElementById(id);
+  if (!el) {
+    el = document.createElement('style');
+    el.id = id;
+    document.head.appendChild(el);
+  }
+  el.textContent = css;
 }
 
 const css = `
@@ -418,9 +628,6 @@ const css = `
 				border-top: .15em solid #ffffff63;
 				padding: 0 .5em 1em;
 			}
-			#theme_picker, .footer h4 {
-				display: none;
-			}
 			#election_description_window, .person_description_window, .description_window_small {
 				border: 3px double #800b0b;
 				border-radius: .5em 0;
@@ -445,6 +652,10 @@ const css = `
 				background: url(https://file.garden/aNtAfG887DiA_7lO/2016ALOT/white.gif);
 				background-blend-mode: overlay;
 				background-color: rgba(255, 255, 255, 0.5);
+				border: .3em solid rebeccapurple;
+				border-left: 0;
+				border-right: 0;
+				border-bottom-width: 2px;
 			}
             .game_header {
                 align-items: center;
@@ -452,20 +663,23 @@ const css = `
                 background: linear-gradient(to bottom, #172d86, #0D0533, #550202);
                 border-radius: .1rem .1rem 0 0;
                 box-shadow: inset 0 .25rem .5rem rgba(255, 255, 255, 0.1), 0 .1rem .5rem rgba(0, 0, 0, 0.4);
+				border-bottom: 2px solid rgba(128, 6, 6, 0.75);
                 display: flex;
                 justify-content: center;
                 height: 2.75rem;
-            }
-            .game_header h2 {
-                font-family: Georgia, Arial, serif;
-                font-size: 22pt;
+				
+				color: #fff;
+			    font-family: Georgia, Arial, sans-serif;
+			    font-size: 2.25em;
+			    font-style: italic;
+			    font-weight: bold;
             }
             #election_id, #candidate_id, #running_mate_id, #game_type_selection, #game_type_id, #difficulty_level_id, #question_select {
                 border-width: .1rem; /* on Firefox, button borders are different compared to Chrome & friends */
                 margin-left: .25rem;
 				padding: .2em .4em;
             }
-            form[name="election_year"], form[name="candidate"], form[name="running mate"], form[name="game_type_selection"], form[name="difficulty_level_selection"] {
+            form[name="election_year"], form[name="candidate"], form[name="running mate"], form[name="game_type_selection"] {
                 align-items: center;
                 display: flex;
                 justify-content: center;
@@ -479,9 +693,9 @@ const css = `
             }
             .inner_window_question h3 {
                 background: linear-gradient(to bottom, #ebedff, #afd0ee);
-                border: 2px double #c1c1c1;
+                border: 2px double #a13a3a;
                 margin: .2em 1em .4em 1em;
-				padding: .2em .1em;
+				padding: .2em;
             }
             @keyframes fadeInScale {
                 0% {
@@ -542,7 +756,7 @@ const css = `
 			}
 			#state_result_container {
 				background: linear-gradient(0.20turn, transparent, #0e00b5);
-				border-radius: 0 0 .5rem .5rem;
+				border-radius: 0 0 .35em .35em;
 			}
 			#election_image img {
 			    border: 5px groove #1c0080;
@@ -641,7 +855,7 @@ const css = `
             #map_footer {
                 display: flex;
                 justify-content: center;
-                margin-top: 1rem !important; /* necessary for the further reading section */
+                margin: auto 1em !important; /* necessary for the further reading section */
             }
             #ev_est {
                 margin-bottom: .5rem;
@@ -666,7 +880,7 @@ const css = `
             }
             /** for default NCT - this is fine on NCTS **/
             #main_content_area, #main_content_area_reading {
-                color: #000;
+                color: #fff;
             }
 			#bottomBar.inner_window_front {
 				display: none;
@@ -747,6 +961,7 @@ const css = `
             and adapted to opapeldetrouxa.neocities.org */
             .mytooltip {
                 background-color: #fcbf49;
+				border-radius: 1px;
                 color: #000;
                 cursor: help;
                 display: inline-flex;
@@ -795,19 +1010,19 @@ const css = `
                 font-size: 0.95em;
             }
             #state_result_data_summary table th, #overall_details_container table th, .final_results_table th {
-                background-color: #f0f0f0;
+                background: linear-gradient(#e7ecf3, #dbe3ef);
                 border-bottom: .15rem solid #a0a0a0;
                 font-weight: 600;
-                padding: .5rem .75rem;
+                padding: .6em .8em;
+				text-transform: lowercase;
             }
 			#state_result_data_summary table td, #overall_details_container table td {
-                padding: .1rem .4rem;
+                padding: .25em .75em;
                 border: .1rem solid #dcdcdc;
             }
             .final_results_table td {
-                padding: .4rem .8rem;
+                padding: .45em .8em;
                 border: .1rem solid #dcdcdc;
-                text-align: right;
             }
             #state_result_data_summary table td:first-child span, #overall_details_container table td:first-child span, .final_results_table td:first-child span {
                 border: .1rem solid rgba(0,0,0,0.2);
@@ -833,10 +1048,10 @@ const css = `
 
 			/* Ending screens tweaks */			
 			#final_results_description {
-				display: flex !important; // remove this tag once debugging is finished
+				display: flex !important;
 			}
-			#results_container {
-				color: #000;
+			#results_container, #overall_details_container {
+				color: #fff;
 			}
 			#results_container > .person_image {
 				border-color: #9d0000;
@@ -899,13 +1114,7 @@ const css = `
 				justify-content: center;
 				padding-bottom: 1rem;
 			}
-			
-			/* a fix for the US map - no outline showing up on Edge */
-			[tabindex]:focus:not(:focus-visible) {
-			    outline: none;
-			    box-shadow: none;
-			}
-			
+						
 			/* for the achievement notifications */
 			.unlock-notification {
 				position: fixed;
@@ -976,6 +1185,41 @@ const css = `
 				color: #000;
 			}
 			
+			/* drop-caps */
+			#inner_window_3 p:first-of-type:first-letter, #running_mate_description_window p:first-of-type:first-letter {
+			  float: left; font-weight: bold; line-height: 0.7em; margin-top: 0.1em; color: #110d84;
+			}
+			#inner_window_3 p:first-of-type:first-letter,
+			#running_mate_description_window p:first-of-type:first-letter {
+			  font-size: 3.5em; margin-right: 0.15em;
+			}			
+
+			/* styling for candidate lists */
+			.person_summary ul {
+				display: flex;
+				flex-flow: column;
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.person_summary li {
+				padding-bottom: .5em;
+				margin: .25em 0 0 0;
+				border-bottom: 1px solid rgba(80, 44, 44, 0.2);
+				color: #530707;
+			}
+
+			.person_summary li:last-child {
+				border-bottom: none;
+			}
+
+			.person_summary li::before {
+				content: "▸ ";
+				color: #db3434;
+				font-weight: bold;
+			}
+			
 			@media (max-width: 1250px) {
 				#election_description_window, .person_description_window, .description_window_small {
 					padding: 0 1em;
@@ -1013,6 +1257,162 @@ const css = `
 					height: 50px !important;
 				}
    			}
+			
+			/* Material design button styling */
+			#game_window input[type="radio"], 
+			#theme_picker input[type="radio"] {
+				appearance: none;
+				-webkit-appearance: none;
+				grid-column: 1;
+				width: 14px;
+				height: 14px;
+				border: 2px solid #5f6368;
+				border-radius: 30%;
+				outline: none;
+				cursor: pointer;
+				position: relative;
+				margin: 0 12px 0 6px;
+				background: #ffffff !important;
+				box-shadow: none !important;
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			#game_window input[type="radio"]:hover, 
+			#theme_picker input[type="radio"]:hover {
+				border-color: #800e0e;
+				box-shadow: 0 0 0 6px rgba(14, 50, 128, 0.08) !important;
+			}
+
+			#game_window input[type="radio"]:checked, 
+			#theme_picker input[type="radio"]:checked {
+				border-color: #800e0e !important;
+				background: #ffffff !important;
+			}
+
+			#game_window input[type="radio"]:checked::after, 
+			#theme_picker input[type="radio"]:checked::after {
+				content: "";
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				background-color: #0e3280;
+			}
+
+			/* election footer fixes */
+			#game_window {
+				min-height: 620px;
+			}
+
+			#game_window g {
+			  display: flex;
+			  flex-flow: row wrap;
+			  justify-content: center;
+			  align-items: center;
+			  gap: 8px;
+			  padding: 5px 0;
+			}
+
+			.inner_window_sign_display {
+			  order: 2;
+			  flex: 1;
+			  min-width: 180px;
+			  max-width: 275px;
+			  max-height: 145px;
+			  display: flex;
+			  flex-direction: column;
+			  align-items: center;
+			  margin: .5em;
+			  align-self: flex-start;
+			}
+			  #candidate_pic, img#candidate_pic {
+				  order: 1;
+				  width: 13em;
+				  height: auto;
+				  flex-shrink: 0;
+				  margin: 0;
+			   }
+			   #running_mate_pic, img#running_mate_pic {
+				  order: 3;
+				  width: 13em;
+				  height: auto;
+				  flex-shrink: 0;
+				  margin: 0;
+			   }
+
+			/* Material design-ish button styling */
+			#question_form {
+				margin: 0.2em 0.8em;
+				font-size: 0.95em;
+			}
+
+			#question_form br { 
+				display: none; 
+			}
+
+			#question_form form {
+				display: grid;
+				grid-template-columns: auto 1fr;
+				row-gap: 1px;
+				column-gap: 8px;
+				align-items: start;
+				margin: 0 auto;
+			}
+
+			#question_form input[type="radio"],
+			input.game_answers {
+				grid-column: 1;
+				margin: 3px 0 0 2px !important;
+				cursor: pointer;
+				align-self: start;
+			}
+
+			#question_form label {
+				grid-column: 2;
+				display: block;
+				padding: 3px 6px !important;
+				margin: 0 !important;
+				line-height: 1.28 !important;
+				font-size: 0.93rem !important;
+				font-weight: 400 !important;
+				color: inherit;
+				cursor: pointer;
+				border-radius: 3px;
+				border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+				transition: background-color 0.15s ease, border-color 0.15s ease;
+			}
+
+			#question_form label:hover {
+				font-size: 0.93rem !important;
+				font-weight: 400 !important;
+				background-color: rgba(0, 0, 0, 0.05) !important;
+				border-bottom-color: rgba(0, 0, 0, 0.25) !important;
+			}
+
+			#question_form input[type="radio"]:checked + label {
+				background-color: rgba(14, 50, 128, 0.09) !important;
+				border-bottom: 1px solid rgba(14, 50, 128, 0.4) !important;
+				font-weight: 600 !important;
+			}
+			
+			/* basically a lazy fix to increase the SVG map size without
+			 * changing the actual SVG or resort to more aggressive tactics,
+			 * as Year Zero does something kinda similar */
+			#map_container svg {
+				height: 100%;
+			}
+			#map_container svg {
+				transform: translate(10px, 0);
+			}
+			#map_container svg rect, #map_container svg text {
+				transform: translate(-100px, 0px);
+			}			
+			#main_content_area + #map_footer {
+				margin: 1em auto !important;
+			}
 			
 			/* Mobile compatibility fixes - partially inspired by those of TTNW */
 			@media only screen and (max-width: 768px) {
@@ -1165,11 +1565,103 @@ const css = `
 				width: 60%;
 			}
 			
+			/* election summary page */
+			@media only screen and (max-width: 768px) {
+  #election_summary {
+			  display: flex;
+			  flex-flow: column;
+			  margin: 0 1em 0 0;
+			  padding: .5em;
 			}
+			#election_description_window {
+			  display: flex;
+			  height: auto;
+			}
+			#election_image {
+			  display: flex;
+			  flex-flow: column;
+			  justify-content: center;
+			  margin: 1em 0.75em 1em 1.25em;
+			}
+			#election_image img {
+			  height: 90%;
+			  object-fit: cover;
+			  object-position: -36px 0px;
+			}
+			#election_year_form + p:first-of-type {
+			  padding-top: 1em;
+			}
+  
+			  #election_description_window {
+				flex-flow: column;
+			  }
+			  
+			  #election_summary {
+				padding: 0 1em 0 1em;
+				text-align: center;
+			  }
+				
+				#election_summary p {
+				  margin: .5em 0 1em 0;
+				}
+				  
+				#election_image {
+				  flex-flow: row;
+				  margin: inherit;
+				}
+				  
+				#election_year_form+p:first-of-type {
+				  padding-top: 0;
+				}
+				  
+				#election_image img {
+					object-position: center;
+					width: 100%;
+				}
+				
+				.inner_window_w_desc p {
+				  margin: 1em;
+				}
+				
+			}
+			
+			}
+`;
+
+// necessary because NCT deals with a couple of
+// things differently than CTS
+const nctFixes = `
+.game_header {
+  height: 25px !important;
+}
+    .container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    .content_box {
+        flex: 1;
+    }
+    #game_window {
+        min-height: 600px;
+    }
+	
 `;
 
 ensureMetaViewport();
 applyGlobalStyles(css);
+
+const isLiveSite = window.location.hostname === "www.newcampaigntrail.com" || !!document.querySelector('a[href*="github.com/newcampaigntrail"]');
+if (isLiveSite) {
+    if (typeof applyGlobalStyles === 'function') {
+		applyGlobalStyles(nctFixes, 'nct-fixeroo');
+    } else {
+        const style = document.createElement('style');
+        style.id = 'nct-fixeroo';
+        style.textContent = nctFixes;
+        document.head.appendChild(style);
+    }
+}
 
 // Psst: this is for replacing the site_description with this custom modal.
 (() => {
@@ -1554,12 +2046,6 @@ tooltipList = [
     { searchString: "Madonna", explanationText: "<img src=https://pbs.twimg.com/media/Cut3qCTWYAAxYIU.jpg> Gonna help you snatch that Presidency, so watch out! She’s A GIRL GONE WILD!" }
 ];
 
-HistHexcolour = ["#cf1321", "#0e3280", "#f7f70e", "#14bd14"];
-HistName = ["Donald Trump", "Hillary Clinton", "Gary Johnson/Others", "Jill Stein"];
-HistEV = [304, 227, 7, 0];
-HistPV = ["62,985,153", "65,853,677", "4,489,359", "1,457,288"];
-HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
-
 // This is to replace the existing voting system descriptions.
 (function() {
     'use strict';
@@ -1582,7 +2068,24 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
           <p>Under the proportional system, each state’s electoral votes are distributed proportionally based on the popular vote percentage each candidate receives. If a candidate wins 60% of a state’s vote, they receive approximately 60% of that state’s electoral votes.</p>
           <p>The winner of a state still maintains an advantage due to rounding (in a state with 4 electoral votes, 51% of the vote typically yields 3 electoral votes), but the system much more closely reflects the will of the voters. It also makes every state more competitive, as candidates could gain electoral votes even in states they don’t win outright. This system would have changed the outcomes of several elections, including 1860, 1948, 1968, 1992, and 2000.</p>`,
         "3": `<p><strong style='color:navy'>From sea to shining sea!</strong> – you know how it is. Do the Bartman.</p>`,
+        [METHOD_VALUE.DHONDT]: `<p><strong>D'Hondt/Jefferson method</strong></p><p>Similar to Sainte-Laguë, the D’Hondt method is a “highest averages” system that allocates seats one by one. However, it uses a different formula: a candidate’s total vote is divided by the number of seats they have already won, plus one (divisors: 1, 2, 3, etc.). The seat goes to the candidate with the highest average in each round.</p><p>This divisor sequence has a notable mathematical property: it tends to slightly favor larger parties and coalitions over smaller, more fragmented ones. This can encourage strategic alliances but may underrepresent minor parties compared to their vote share. It is named after Victor D'Hondt and, in the U.S., Thomas Jefferson.</p>`,
+        [METHOD_VALUE.HUNTINGTON_HILL]: `<p><strong>Huntington-Hill method</strong></p><p>This is the method currently used to apportion the 435 seats of the U.S. House of Representatives among the states. Like other “highest averages” systems, it awards seats one by one to the party with the highest “priority value.”</p><p>Its unique formula (dividing votes by the geometric mean of seats currently held and the next seat) is designed to minimize the relative percentage difference in representation between any two parties. This means if one party gets twice the votes, it should have as close to twice the seats as mathematically possible. It generally produces very proportional results, somewhere between D'Hondt and Sainte-Laguë in its treatment of smaller parties.</p>`,
+        [METHOD_VALUE.LR_HARE]: `<p><strong>Largest remainder method (Hare quota)</strong></p><p>This method works differently from “highest averages.” First, it establishes a “quota” — the price of a single electoral vote (calculated as Total Votes / Total EVs). Each candidate is immediately awarded a number of EVs equal to how many full quotas they achieved.</p><p>After this initial allocation, any remaining EVs are awarded one by one to the candidates with the largest <em>fractional remainder</em> of votes. This system is very intuitive and tends to be highly proportional, often giving smaller parties a better chance to win representation if they can consolidate their support to earn a large remainder.</p>`,		
+        [METHOD_VALUE.SAINTE_LAGUE]: `<p><strong>Sainte-Laguë/Webster method</strong></p><p>This is a “highest averages” method that allocates a state’s electoral votes one by one. In each round, a candidate’s total popular vote is divided by a number (specifically, twice their current number of seats, plus one: 1, 3, 5, etc.). The seat is awarded to the candidate with the highest resulting average.</p><p>The Sainte-Laguë method is renowned for its high degree of proportionality. Unlike some other systems, it does not systematically favor larger or smaller parties, making it one of the most balanced apportionment methods available.</p>`,
+        [METHOD_VALUE.APPROVAL_SL]: `<p><strong>Approval + Sainte-Laguë</strong></p><p>This is an advanced, model-based method that does <em>not</em> use the popular vote directly. Instead, it first calculates a “utility score” for each candidate based on their policy alignment with a state’s profile. A state then “approves” of all candidates whose utility is within a certain threshold of the top-scoring candidate.</p><p>The number of approvals each candidate receives becomes their new score; the Sainte-Laguë method is used to apportion electoral votes based on these approval counts. This system rewards candidates with broad ideological appeal who are considered a “good fit” by the state, not just the single best one.</p>`,
+        [METHOD_VALUE.BORDA_SL]: `<p><strong>Borda count + Sainte-Laguë</strong></p><p>This model-based method first ranks candidates in a state from best to worst based on their policy alignment (creating a utility score for them). Candidates are then awarded Borda points based on their rank: the top-ranked candidate gets the most points, the second-ranked gets fewer, and so on.</p><p>These Borda points — and not popular votes — are then used as the input for the Sainte-Laguë apportionment method. This system heavily favors consensus candidates who are consistently ranked highly and penalizes polarizing figures who may be ranked first by some but last by others. It rewards being broadly acceptable over being a niche favorite.</p>`,
+        [METHOD_VALUE.COPELAND_SL]: `<p><strong>Condorcet/Copeland + Sainte-Laguë</strong></p><p>This advanced method simulates a round-robin tournament in each state. Based on policy utility scores, every candidate is compared head-to-head against every other candidate. A candidate’s “Copeland score” is the total number of these pairwise matchups they win.</p><p>A candidate who can defeat every other opponent in a one-on-one contest is a “Condorcet winner” and will have the highest possible score. The Copeland scores are then used with the Sainte-Laguë method to allocate electoral votes. This system strongly favors candidates with the broadest appeal who are most likely to be preferred over their direct competitors.</p>`,
     };
+
+    const NEW_OPTIONS = [
+        { val: METHOD_VALUE.DHONDT, text: "D’Hondt/Jefferson" },
+        { val: METHOD_VALUE.HUNTINGTON_HILL, text: "Huntington–Hill" },
+        { val: METHOD_VALUE.LR_HARE, text: "Largest remainder" },
+        { val: METHOD_VALUE.SAINTE_LAGUE, text: "Sainte‑Laguë/Webster" },
+        { val: METHOD_VALUE.APPROVAL_SL, text: "Approval + Sainte‑Laguë" },
+        { val: METHOD_VALUE.BORDA_SL, text: "Borda + Sainte‑Laguë" },
+        { val: METHOD_VALUE.COPELAND_SL, text: "Condorcet/Copeland + Sainte‑Laguë" },
+    ];
 
     function updateDescription(value) {
         const descBox = document.getElementById("opponent_selection_description_window");
@@ -1600,6 +2103,21 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
         
         // since we want the array order to be preserved, we should increment the index as we add
         let insertIndex = propIndex !== -1 ? propIndex + 1 : select.length;
+
+        NEW_OPTIONS.forEach(optData => {
+            if (!select.querySelector(`option[value="${optData.val}"]`)) {
+                const opt = document.createElement("option");
+                opt.value = optData.val;
+                opt.textContent = optData.text;
+                
+                if (insertIndex >= select.length) {
+                    select.add(opt);
+                } else {
+                    select.add(opt, select.options[insertIndex]);
+                }
+                insertIndex++;
+            }
+        });
 
         // rename existing options
         const wta = select.querySelector('option[value="1"]');
@@ -1625,592 +2143,728 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 	window.modifySelector = modifySelector;
 })();
 
-// Funny test. Probably won't last long.
-(function() {
-    const gameWindow = document.getElementById("game_window");
-    if (!gameWindow) return;
+// Pretty much a banner system.
+(function () {
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow) return;
 
-    // configuration object
-    const CONFIG = {
-        bannerHeight: 60,
-        fadeTransition: 250,
-        preloadCount: 4,
-        enablePreloading: true,
-        enableLocalStorage: true,
-        hoverEffect: true,
-        clickCooldown: 150,
-        maxCacheSize: 20,
-        useRequestIdleCallback: true
-    };
+  // configuration object
+  const CONFIG = {
+    bannerHeight: 60,
+    fadeTransition: 250,
+    preloadCount: 4,
+    enablePreloading: true,
+    enableLocalStorage: true,
+    hoverEffect: true,
+    clickCooldown: 150,
+    maxCacheSize: 20,
+    useRequestIdleCallback: true,
+    maxRetries: 2,
+    failedBannerTimeout: 5 * 60 * 1000
+  };
 
-    // banner list
-    const banners = [{
-            url: "https://web.archive.org/web/20000409010138if_/http://cnn.com:80/ads/advertiser/women.com/0002/wcom0ca1.gif",
-            alt: "Women.com banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000608212559if_/http://cnn.com:80/ads/advertiser/cartoon.network/0004/dmd_banner21.gif",
-            alt: "Cartoon Network banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000229184639if_/http://cnn.com:80/ads/advertiser/cartoon.network/9909/PDbanner.gif",
-            alt: "Cartoon Network Pink Donkey banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000408133240if_/http://cnn.com:80/ads/advertiser/captainplanet/0003/cpf_kidsban.gif",
-            alt: "Captain Planet banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000510220821if_/http://cnn.com:80/ads/advertiser/golf/0004/trapped.gif",
-            alt: "Golf banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20010817002630if_/http://www.cnn.com:80/ads/advertiser/netscape/0108/Know468x60.gif",
-            alt: "Netscape Mail banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20061212064048if_/http://www.cnn.com/ads/advertiser/cnnsi/0105/nascpls.gif",
-            alt: "CNN SI NASCAR banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000919191923if_/http://www.cnn.com:80/ads/advertiser/cnn/9809/austinbanner.gif",
-            alt: "CNN Austin banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20010606112401if_/http://www.cnn.com:80/ads/advertiser/verisign/0107/ecom_banner2.gif",
-            alt: "VeriSign banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000815202531if_/http://www.cnn.com:80/ads/advertiser/genie.excelerator/genie.banner.gif",
-            alt: "Genie Excelerator banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20150107022133if_/http://www2.cnn.com/ads/advertiser/ibm/9809/28/468rei10.gif",
-            alt: "REI/IBM banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000711040346if_/http://www.cnn.com:80/ads/advertiser/sony/0006/468FEAST.GIF",
-            alt: "Sony banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20010606232921if_/http://www.cnn.com:80/ads/advertiser/foliofn/0101/dice468x60.gif",
-            alt: "Foliofn banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000824010913if_/http://www.cnn.com:80/ads/advertiser/entertain.dom/0008/duke2000.candidate.gif",
-            alt: "entertaindom banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000815065102if_/http://www.cnn.com:80/ads/advertiser/cnn/0007/nextwave.green.gif",
-            alt: "nextwave banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20001002034025if_/http://www.cnn.com:80/ads/advertiser/cnn/0006/millennium.epi.9.gif",
-            alt: "CNN millenium banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20011122095303if_/http://www.cnn.com:80/ads/advertiser/charles.schwab/9808/BUY_468.GIF",
-            alt: "Charles Schwab banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000901060558if_/http://www.cnn.com:80/ads/advertiser/advanceme/0007/PresidentsPayroll4x.gif",
-            alt: "advanceme banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20010520171031if_/http://www.cnn.com:80/ads/advertiser/agilent/0105/bubbles_468_12k_1lp.gif",
-            alt: "Agilent Tech banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20130401220348if_/http://www.cnn.com/ads/advertiser/purchase.pro/0103/banner468x60A.gif",
-            alt: "PurchasePro banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20131217220137if_/http://www.cnn.com/ads/advertiser/protect.healthcare/0105/Coalition.gif",
-            alt: "Healthcare coalition banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20160624005413if_/http://www.cnn.com/ads/advertiser/verio/0009/19DEF468E.gif",
-            alt: "Verio banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20150109051857if_/http://www.cnn.com/ads/advertiser/trane/0009/devil.gif",
-            alt: "Trane banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20130820030923if_/http://www.cnn.com/ads/advertiser/ibm/9809/28/468vi9.gif",
-            alt: "IBM e-business banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20210504224207if_/http://edition.cnn.com/ads/advertiser/compaq/0010/banner.forever.gif",
-            alt: "Intel Presario banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000512002648if_/http://cnn.com:80/ads/advertiser/women.com/0003/wcom0cgr.gif",
-            alt: "women.com banner",
-            weight: 1
-        },
-        {
-            url: "https://web.archive.org/web/20000507175352if_/http://cnn.com:80/ads/advertiser/viagra/9808/viagra_right.gif",
-            alt: "Viagra banner",
-            weight: 1
-        },
-    ];
-
-    // caching system
-    class BannerCache {
-        constructor() {
-            this.imageCache = new Map();
-            this.loadedUrls = new Set();
-            this.storageKey = 'vintageBannerCache_v2';
-            this.maxCacheAge = 7 * 24 * 60 * 60 * 1000; // 7 days
-            this.cacheAccessOrder = [];
-
-            if (CONFIG.enableLocalStorage) {
-                this.loadFromStorage();
-            }
-        }
-
-        saveToStorage() {
-            if (!CONFIG.enableLocalStorage) return;
-
-            try {
-                const cacheData = {
-                    timestamp: Date.now(),
-                    urls: Array.from(this.loadedUrls)
-                };
-                localStorage.setItem(this.storageKey, JSON.stringify(cacheData));
-            } catch (e) {
-                // silent fail
-            }
-        }
-
-        loadFromStorage() {
-            try {
-                const cached = localStorage.getItem(this.storageKey);
-                if (!cached) return;
-                
-                const data = JSON.parse(cached);
-                const age = Date.now() - data.timestamp;
-
-                if (age < this.maxCacheAge) {
-                    this.loadedUrls = new Set(data.urls);
-                } else {
-                    localStorage.removeItem(this.storageKey);
-                }
-            } catch (e) {
-                // silent fail
-            }
-        }
-
-        preloadImage(url) {
-            if (this.imageCache.has(url)) {
-                this.updateCacheOrder(url);
-                return Promise.resolve(this.imageCache.get(url));
-            }
-
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                let timeoutId;
-                
-                const cleanup = () => {
-                    clearTimeout(timeoutId);
-                    img.onload = img.onerror = null;
-                };
-
-                timeoutId = setTimeout(() => {
-                    cleanup();
-                    reject(new Error(`Timeout: ${url}`));
-                }, 8000);
-
-                img.onload = () => {
-                    cleanup();
-                    this.addToCache(url, img);
-                    resolve(img);
-                };
-
-                img.onerror = () => {
-                    cleanup();
-                    reject(new Error(`Failed: ${url}`));
-                };
-
-                // set image loading priority to low
-                img.fetchPriority = "low";
-                img.src = url;
-            });
-        }
-
-        addToCache(url, img) {
-            // LRU cache eviction policy
-            if (this.imageCache.size >= CONFIG.maxCacheSize && !this.imageCache.has(url)) {
-                const lruUrl = this.cacheAccessOrder.shift();
-                this.imageCache.delete(lruUrl);
-            }
-            
-            this.imageCache.set(url, img);
-            this.updateCacheOrder(url);
-            this.loadedUrls.add(url);
-            this.saveToStorage();
-        }
-
-        updateCacheOrder(url) {
-            // remove url if it exists in the order array
-            const index = this.cacheAccessOrder.indexOf(url);
-            if (index > -1) {
-                this.cacheAccessOrder.splice(index, 1);
-            }
-            // add to the end (most recently used)
-            this.cacheAccessOrder.push(url);
-        }
-
-        preloadBatch(urls) {
-            if (!CONFIG.enablePreloading) return Promise.resolve();
-
-            if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
-                return new Promise(resolve => {
-                    window.requestIdleCallback(() => {
-                        const promises = urls.map(url => 
-                            this.preloadImage(url).catch(() => null)
-                        );
-                        Promise.allSettled(promises).then(resolve);
-                    }, { timeout: 2000 });
-                });
-            } else {
-                const promises = urls.map(url => 
-                    this.preloadImage(url).catch(() => null)
-                );
-                return Promise.allSettled(promises);
-            }
-        }
-
-        getCachedImage(url) {
-            const img = this.imageCache.get(url);
-            if (img) {
-                this.updateCacheOrder(url);
-            }
-            return img || null;
-        }
-    }
-
-    // weighted random selection with memoization
-    const bannerSelector = (() => {
-        let weightSum = null;
-        
-        const getTotalWeight = () => {
-            if (weightSum === null) {
-                weightSum = banners.reduce((sum, banner) => sum + banner.weight, 0);
-            }
-            return weightSum;
-        };
-
-        return {
-            getRandomBanner(excludeRecent = []) {
-                const availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
-                
-                if (availableBanners.length === 0) {
-                    const currentUrl = excludeRecent[excludeRecent.length - 1];
-                    return banners.find(b => b.url !== currentUrl) || banners[0];
-                }
-                
-                const totalWeight = availableBanners.reduce((sum, banner) => sum + banner.weight, 0);
-                let random = Math.random() * totalWeight;
-                
-                for (const banner of availableBanners) {
-                    random -= banner.weight;
-                    if (random <= 0) return banner;
-                }
-                
-                return availableBanners[0];
-            },
-            
-            // precompute weighted selection table
-            initializeSelectionTable() {
-                getTotalWeight();
-            }
-        };
-    })();
-
-    // banner system
-    class ClickableBannerSystem {
-        constructor() {
-            this.createElements();
-            
-            this.cache = new BannerCache();
-            this.currentBanner = null;
-            this.recentBanners = [];
-            this.isTransitioning = false;
-            this.lastClickTime = 0;
-            this.rafId = null;
-
-            this.init();
-        }
-
-        init() {
-            this.setupEventListeners();
-            bannerSelector.initializeSelectionTable();
-            
-            Promise.resolve()
-                .then(() => this.preloadInitialBanners())
-                .then(() => this.displayRandomBanner())
-                .catch(() => {
-                    // fallback if preloading fails
-                    this.displayRandomBanner();
-                });
-
-            // cleanup on page unload
-            window.addEventListener('beforeunload', () => {
-                this.destroy();
-            });
-        }
-
-        createElements() {
-            this.container = document.createElement("div");
-            this.imageElement = document.createElement("img");
-            this.clickIndicator = document.createElement("div");
-
-            this.container.id = "bottomBar";
-            this.container.setAttribute('tabindex', '0');
-            this.container.setAttribute('role', 'button');
-            this.container.setAttribute('aria-label', 'Click to change banner');
-
-            this.container.style.cssText = `
+  if (!document.getElementById('banner-system-styles')) {
+    const style = document.createElement('style');
+    style.id = 'banner-system-styles';
+    style.textContent = `
+            #bottomBar {
                 height: ${CONFIG.bannerHeight}px;
                 font-size: 12px;
-                border-style: none;
-                border-width: 5px;
                 background-color: transparent;
-                padding: 0;
-                margin: 0 .3em 1em 2em;
+                margin: 1em auto;
                 position: relative;
                 overflow: hidden;
                 cursor: pointer;
                 transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
                 user-select: none;
                 border-radius: 3px;
-            `;
-
-            this.imageElement.style.cssText = `
-                width: 100%; 
-                height: 100%; 
-                object-fit: contain; 
+                width: 100%;
+                max-width: 800px;
+            }
+            #bottomBar:hover {
+                transform: ${CONFIG.hoverEffect ? 'scale(1.02)' : 'none'};
+                box-shadow: ${CONFIG.hoverEffect ? '0 2px 8px rgba(0,0,0,0.2)' : 'none'};
+            }
+            #bottomBar img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
                 display: block;
                 transition: opacity ${CONFIG.fadeTransition}ms ease-in-out;
                 pointer-events: none;
-            `;
-
-            this.clickIndicator.style.cssText = `
+            }
+            #bannerIndicator {
                 position: absolute;
-                top: 2px;
-                right: 4px;
-                width: 16px;
-                height: 16px;
+                top: 2px; right: 4px;
+                width: 16px; height: 16px;
                 background: rgba(255, 255, 255, 0.8);
                 border-radius: 50%;
                 display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 10px;
-                font-weight: bold;
+                align-items: center; justify-content: center;
+                font-size: 10px; font-weight: bold;
                 color: #333;
                 opacity: 0;
                 transition: opacity 200ms ease-in-out, transform 150ms ease-in-out;
                 pointer-events: none;
                 z-index: 10;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-            `;
-            this.clickIndicator.textContent = "↻";
-
-            // append elements
-            this.container.appendChild(this.imageElement);
-            this.container.appendChild(this.clickIndicator);
-            gameWindow.insertAdjacentElement("afterend", this.container);
-        }
-
-        setupEventListeners() {
-            this.container.onclick = (e) => {
-                e.preventDefault();
-                const now = Date.now();
-                if (now - this.lastClickTime < CONFIG.clickCooldown || this.isTransitioning) {
-                    return;
-                }
-                this.lastClickTime = now;
-                this.nextBanner();
-            };
-
-            // hover effects
-            if (CONFIG.hoverEffect) {
-                this.container.onmouseenter = () => {
-                    if (this.isTransitioning) return;
-                    
-                    cancelAnimationFrame(this.rafId);
-                    this.rafId = requestAnimationFrame(() => {
-                        this.container.style.transform = 'scale(1.02)';
-                        this.container.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
-                        this.clickIndicator.style.opacity = '1';
-                    });
-                };
-
-                this.container.onmouseleave = () => {
-                    cancelAnimationFrame(this.rafId);
-                    this.rafId = requestAnimationFrame(() => {
-                        this.container.style.transform = 'scale(1)';
-                        this.container.style.boxShadow = 'none';
-                        this.clickIndicator.style.opacity = '0';
-                    });
-                };
             }
-
-            // keyboard accessibility
-            this.container.onkeydown = (e) => {
-                if (e.code === 'Space' || e.code === 'Enter') {
-                    e.preventDefault();
-                    this.nextBanner();
-                }
-            };
-        }
-
-        async preloadInitialBanners() {
-            // prioritize preloading based on banner weights
-            const sortedBanners = [...banners]
-                .sort((a, b) => b.weight - a.weight)
-                .slice(0, CONFIG.preloadCount);
-                
-            const urlsToPreload = sortedBanners.map(b => b.url);
-            return this.cache.preloadBatch(urlsToPreload);
-        }
-
-        async displayBanner(banner, useTransition = false) {
-            if (this.isTransitioning) return;
-
-            const cachedImg = this.cache.getCachedImage(banner.url);
-
-            if (useTransition && CONFIG.fadeTransition > 0) {
-                this.isTransitioning = true;
-                this.imageElement.style.opacity = '0';
-
-                setTimeout(() => {
-                    requestAnimationFrame(() => {
-                        if (cachedImg) {
-                            this.imageElement.src = cachedImg.src;
-                        } else {
-                            this.imageElement.src = banner.url;
-                        }
-                        this.imageElement.alt = banner.alt;
-                        
-                        // force reflow to ensure transition works
-                        void this.imageElement.offsetWidth;
-                        this.imageElement.style.opacity = '1';
-                        this.isTransitioning = false;
-                    });
-                }, CONFIG.fadeTransition / 2);
-            } else {
-                requestAnimationFrame(() => {
-                    if (cachedImg) {
-                        this.imageElement.src = cachedImg.src;
-                    } else {
-                        this.imageElement.src = banner.url;
-                    }
-                    this.imageElement.alt = banner.alt;
-                });
+            #bottomBar:hover #bannerIndicator {
+                opacity: 1;
             }
-
-            this.currentBanner = banner;
-
-            // track recent banners
-            this.recentBanners.push(banner.url);
-            if (this.recentBanners.length > 3) {
-                this.recentBanners.shift();
+            .indicator-pop {
+                transform: scale(1.2);
             }
+        `;
+    document.head.appendChild(style);
+  }
 
-            // preload next banner if not cached
-            if (!cachedImg) {
-                this.cache.preloadImage(banner.url).catch(() => {
-                    // silent fail
-                });
-            }
+  // banner list
+  const banners = [{
+      url: "https://web.archive.org/web/20000409010138if_/http://cnn.com:80/ads/advertiser/women.com/0002/wcom0ca1.gif",
+      alt: "Women.com banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000608212559if_/http://cnn.com:80/ads/advertiser/cartoon.network/0004/dmd_banner21.gif",
+      alt: "Cartoon Network banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000229184639if_/http://cnn.com:80/ads/advertiser/cartoon.network/9909/PDbanner.gif",
+      alt: "Cartoon Network Pink Donkey banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000408133240if_/http://cnn.com:80/ads/advertiser/captainplanet/0003/cpf_kidsban.gif",
+      alt: "Captain Planet banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000510220821if_/http://cnn.com:80/ads/advertiser/golf/0004/trapped.gif",
+      alt: "Golf banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20010817002630if_/http://www.cnn.com:80/ads/advertiser/netscape/0108/Know468x60.gif",
+      alt: "Netscape Mail banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20061212064048if_/http://www.cnn.com/ads/advertiser/cnnsi/0105/nascpls.gif",
+      alt: "CNN SI NASCAR banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000919191923if_/http://www.cnn.com:80/ads/advertiser/cnn/9809/austinbanner.gif",
+      alt: "CNN Austin banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20010606112401if_/http://www.cnn.com:80/ads/advertiser/verisign/0107/ecom_banner2.gif",
+      alt: "VeriSign banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000815202531if_/http://www.cnn.com:80/ads/advertiser/genie.excelerator/genie.banner.gif",
+      alt: "Genie Excelerator banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20150107022133if_/http://www2.cnn.com/ads/advertiser/ibm/9809/28/468rei10.gif",
+      alt: "REI/IBM banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000711040346if_/http://www.cnn.com:80/ads/advertiser/sony/0006/468FEAST.GIF",
+      alt: "Sony banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20010606232921if_/http://www.cnn.com:80/ads/advertiser/foliofn/0101/dice468x60.gif",
+      alt: "Foliofn banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000824010913if_/http://www.cnn.com:80/ads/advertiser/entertain.dom/0008/duke2000.candidate.gif",
+      alt: "entertaindom banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000815065102if_/http://www.cnn.com:80/ads/advertiser/cnn/0007/nextwave.green.gif",
+      alt: "nextwave banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20001002034025if_/http://www.cnn.com:80/ads/advertiser/cnn/0006/millennium.epi.9.gif",
+      alt: "CNN millenium banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20011122095303if_/http://www.cnn.com:80/ads/advertiser/charles.schwab/9808/BUY_468.GIF",
+      alt: "Charles Schwab banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000901060558if_/http://www.cnn.com:80/ads/advertiser/advanceme/0007/PresidentsPayroll4x.gif",
+      alt: "advanceme banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20010520171031if_/http://www.cnn.com:80/ads/advertiser/agilent/0105/bubbles_468_12k_1lp.gif",
+      alt: "Agilent Tech banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20130401220348if_/http://www.cnn.com/ads/advertiser/purchase.pro/0103/banner468x60A.gif",
+      alt: "PurchasePro banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20131217220137if_/http://www.cnn.com/ads/advertiser/protect.healthcare/0105/Coalition.gif",
+      alt: "Healthcare coalition banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20160624005413if_/http://www.cnn.com/ads/advertiser/verio/0009/19DEF468E.gif",
+      alt: "Verio banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20150109051857if_/http://www.cnn.com/ads/advertiser/trane/0009/devil.gif",
+      alt: "Trane banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20130820030923if_/http://www.cnn.com/ads/advertiser/ibm/9809/28/468vi9.gif",
+      alt: "IBM e-business banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20210504224207if_/http://edition.cnn.com/ads/advertiser/compaq/0010/banner.forever.gif",
+      alt: "Intel Presario banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000512002648if_/http://cnn.com:80/ads/advertiser/women.com/0003/wcom0cgr.gif",
+      alt: "women.com banner",
+      weight: 1
+    },
+    {
+      url: "https://web.archive.org/web/20000507175352if_/http://cnn.com:80/ads/advertiser/viagra/9808/viagra_right.gif",
+      alt: "Viagra banner",
+      weight: 1
+    },
+  ];
 
-            // opportunistically preload next potential banners
-            if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
-                window.requestIdleCallback(() => {
-                    const nextBanners = banners
-                        .filter(b => !this.recentBanners.includes(b.url) && !this.cache.imageCache.has(b.url))
-                        .sort((a, b) => b.weight - a.weight)
-                        .slice(0, 2);
-                        
-                    this.cache.preloadBatch(nextBanners.map(b => b.url));
-                }, { timeout: 5000 });
-            }
-        }
+  // caching system
+  class BannerCache {
+    constructor() {
+      this.imageCache = new Map();
+      this.failedUrls = new Map();
+      this.storageKey = 'vintageBannerCache_v2';
+      this.maxCacheAge = 7 * 24 * 60 * 60 * 1000;
 
-        displayRandomBanner() {
-            const banner = bannerSelector.getRandomBanner(this.recentBanners);
-            this.displayBanner(banner, this.currentBanner !== null);
-        }
-
-        nextBanner() {
-            this.displayRandomBanner();
-
-            requestAnimationFrame(() => {
-                this.clickIndicator.style.transform = 'scale(1.2)';
-                
-                setTimeout(() => {
-                    requestAnimationFrame(() => {
-                        this.clickIndicator.style.transform = 'scale(1)';
-                    });
-                }, 150);
-            });
-        }
-
-        destroy() {
-            cancelAnimationFrame(this.rafId);
-            
-            if (this.container) {
-                this.container.onclick = null;
-                this.container.onmouseenter = null;
-                this.container.onmouseleave = null;
-                this.container.onkeydown = null;
-                
-                if (this.container.parentNode) {
-                    this.container.parentNode.removeChild(this.container);
-                }
-            }
-            
-            this.container = null;
-            this.imageElement = null;
-            this.clickIndicator = null;
-        }
+      if (CONFIG.enableLocalStorage) {
+        this.loadFromStorage();
+      }
     }
 
-    const bannerSystem = new ClickableBannerSystem();
+    saveToStorage() {
+      if (this._saveTimer) clearTimeout(this._saveTimer);
+      this._saveTimer = setTimeout(() => {
+        try {
+          const cacheData = {
+            timestamp: Date.now(),
+            failed: Array.from(this.failedUrls.entries())
+          };
+          localStorage.setItem(this.storageKey, JSON.stringify(cacheData));
+        } catch (e) {
+          console.warn('Banner cache save failed:', e);
+        }
+      }, 1000);
+    }
 
-    window.vintageBannerSystem = {
-        next: () => bannerSystem.nextBanner(),
-        current: () => bannerSystem.currentBanner?.alt || 'Loading...'
+    loadFromStorage() {
+      try {
+        const cached = localStorage.getItem(this.storageKey);
+        if (!cached) return;
+
+        const data = JSON.parse(cached);
+        const age = Date.now() - data.timestamp;
+
+        if (age < this.maxCacheAge) {
+          if (data.failed) {
+            this.failedUrls = new Map(data.failed);
+          }
+        } else {
+          localStorage.removeItem(this.storageKey);
+        }
+      } catch (e) {
+        console.warn('Banner cache load failed:', e);
+      }
+    }
+
+    isRecentlyFailed(url) {
+      if (!this.failedUrls.has(url)) return false;
+
+      const failedTime = this.failedUrls.get(url);
+      const timeSinceFailed = Date.now() - failedTime;
+
+      // allow retry after timeout
+      if (timeSinceFailed > CONFIG.failedBannerTimeout) {
+        this.failedUrls.delete(url);
+        return false;
+      }
+
+      return true;
+    }
+
+    markAsFailed(url) {
+      this.failedUrls.set(url, Date.now());
+      this.imageCache.delete(url);
+      this.saveToStorage();
+    }
+
+    isCachedImageValid(img) {
+      return img &&
+        img.complete &&
+        img.naturalHeight !== 0 &&
+        img.naturalWidth !== 0;
+    }
+
+    preloadImage(url) {
+      if (this.isRecentlyFailed(url)) {
+        return Promise.reject(new Error(`Recently failed: ${url}`));
+      }
+
+      if (this.imageCache.has(url)) {
+        const cachedImg = this.imageCache.get(url);
+        if (this.isCachedImageValid(cachedImg)) {
+          return Promise.resolve(cachedImg);
+        } else {
+          this.imageCache.delete(url);
+        }
+      }
+
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        let timeoutId;
+
+        const cleanup = () => {
+          clearTimeout(timeoutId);
+          img.onload = img.onerror = null;
+        };
+
+        timeoutId = setTimeout(() => {
+          cleanup();
+          this.markAsFailed(url);
+          reject(new Error(`Timeout: ${url}`));
+        }, 8000);
+
+        img.onload = () => {
+          cleanup();
+          if (this.isCachedImageValid(img)) {
+            this.addToCache(url, img);
+            resolve(img);
+          } else {
+            this.markAsFailed(url);
+            reject(new Error(`Invalid image: ${url}`));
+          }
+        };
+
+        img.onerror = () => {
+          cleanup();
+          this.markAsFailed(url);
+          reject(new Error(`Failed: ${url}`));
+        };
+
+        img.fetchPriority = "low";
+        img.src = url;
+      });
+    }
+
+    addToCache(url, img) {
+      if (!this.isCachedImageValid(img)) return;
+
+      if (this.imageCache.has(url)) this.imageCache.delete(url); // refresh order
+      this.imageCache.set(url, img);
+
+      while (this.imageCache.size > CONFIG.maxCacheSize) {
+        const lruUrl = this.imageCache.keys().next().value;
+        this.imageCache.delete(lruUrl);
+      }
+    }
+
+    preloadBatch(urls) {
+      if (!CONFIG.enablePreloading) return Promise.resolve();
+
+      if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
+        return new Promise(resolve => {
+          window.requestIdleCallback(() => {
+            const promises = urls.map(url =>
+              this.preloadImage(url).catch(() => null)
+            );
+            Promise.allSettled(promises).then(resolve);
+          }, { timeout: 2000 });
+        });
+      } else {
+        const promises = urls.map(url =>
+          this.preloadImage(url).catch(() => null)
+        );
+        return Promise.allSettled(promises);
+      }
+    }
+
+    getCachedImage(url) {
+      const img = this.imageCache.get(url);
+      if (!this.isCachedImageValid(img)) {
+        this.imageCache.delete(url);
+        return null;
+      }
+      // refresh order
+      this.imageCache.delete(url);
+      this.imageCache.set(url, img);
+      return img;
+    }
+
+    getAvailableBanners(bannerList) {
+      return bannerList.filter(banner => !this.isRecentlyFailed(banner.url));
+    }
+  }
+
+  // weighted random selection
+  const bannerSelector = (() => {
+    return {
+      // accept cache to filter failed banners
+      getRandomBanner(excludeRecent = [], cache = null) {
+        let availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+
+        // filter out failed banners
+        if (cache) {
+          availableBanners = availableBanners.filter(b => !cache.isRecentlyFailed(b.url));
+        }
+
+        if (availableBanners.length === 0) {
+          // if all banners failed or recent, try any banner not in exclude list
+          availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+
+          if (availableBanners.length === 0) {
+            // last resort: return any banner
+            return banners[0];
+          }
+        }
+
+        const totalWeight = availableBanners.reduce((sum, banner) => sum + banner.weight, 0);
+        let random = Math.random() * totalWeight;
+
+        for (const banner of availableBanners) {
+          random -= banner.weight;
+          if (random <= 0) return banner;
+        }
+
+        return availableBanners[0];
+      }
     };
+  })();
+
+  // banner system
+  class ClickableBannerSystem {
+    constructor() {
+      this.createElements();
+
+      this.cache = new BannerCache();
+      this.currentBanner = null;
+      this.recentBanners = [];
+      this.isTransitioning = false;
+      this.lastClickTime = 0;
+      this.retryCount = 0;
+      this._idlePreload = null;
+      this._transitionTimer = null;
+
+      this.init();
+    }
+
+    init() {
+      this.setupEventListeners();
+
+      this.preloadInitialBanners()
+        .then(() => this.displayRandomBanner())
+        .catch(() => {
+          this.displayRandomBanner();
+        });
+
+      window.addEventListener('beforeunload', () => {
+        this.destroy();
+      });
+    }
+
+    createElements() {
+      this.container = document.createElement("div");
+      this.container.id = "bottomBar";
+      this.container.setAttribute('tabindex', '0');
+      this.container.setAttribute('role', 'button');
+      this.container.setAttribute('aria-label', 'Click to change banner');
+
+      this.imageElement = document.createElement("img");
+      this.clickIndicator = document.createElement("div");
+      this.clickIndicator.id = "bannerIndicator";
+      this.clickIndicator.textContent = "↻";
+
+      const frag = document.createDocumentFragment();
+      frag.appendChild(this.imageElement);
+      frag.appendChild(this.clickIndicator);
+      this.container.appendChild(frag);
+
+      gameWindow.insertAdjacentElement("afterend", this.container);
+
+      this.imageElement.onerror = () => {
+        console.warn('Banner display failed:', this.imageElement.src);
+        if (this.currentBanner) this.cache.markAsFailed(this.currentBanner.url);
+        // try to load another banner
+        if (this.retryCount < CONFIG.maxRetries) {
+          this.retryCount++;
+          this.isTransitioning = false;
+          setTimeout(() => this.displayRandomBanner(), 100);
+        } else {
+          this.isTransitioning = false;
+        }
+      };
+      this.imageElement.onload = () => { this.retryCount = 0; }; // reset retry count on successful load
+    }
+
+    setupEventListeners() {
+      this.container.onclick = (e) => {
+        e.preventDefault();
+        this.handleActivate();
+      };
+
+      this.container.onkeydown = (e) => {
+        if (e.code === 'Space' || e.code === 'Enter') {
+          e.preventDefault();
+          this.handleActivate();
+        }
+      };
+    }
+
+    handleActivate() {
+      const now = Date.now();
+      if (now - this.lastClickTime < CONFIG.clickCooldown || this.isTransitioning) {
+        return;
+      }
+      this.lastClickTime = now;
+      this.retryCount = 0;
+      this.nextBanner();
+    }
+
+    async preloadInitialBanners() {
+      // only preload non-failed banners
+      const sortedBanners = [...banners]
+        .filter(b => !this.cache.isRecentlyFailed(b.url))
+        .sort((a, b) => b.weight - a.weight)
+        .slice(0, CONFIG.preloadCount);
+
+      const urlsToPreload = sortedBanners.map(b => b.url);
+      return this.cache.preloadBatch(urlsToPreload);
+    }
+
+    waitForImageReady(url) {
+      return new Promise((resolve, reject) => {
+        const img = this.imageElement;
+
+        // already showing a decoded frame for this url
+        if (img.src === url && img.complete && img.naturalWidth !== 0) {
+          resolve();
+          return;
+        }
+
+        let settled = false;
+        const cleanup = () => {
+          img.removeEventListener('load', onLoad);
+          img.removeEventListener('error', onError);
+        };
+
+        const onLoad = () => {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          if (img.decode) {
+            img.decode().then(resolve).catch(resolve);
+          } else {
+            resolve();
+          }
+        };
+
+        const onError = () => {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          reject(new Error(`Failed: ${url}`));
+        };
+
+        img.addEventListener('load', onLoad);
+        img.addEventListener('error', onError);
+        img.src = url;
+
+        // handle cached-complete case where load may not fire again
+        if (img.complete) {
+          if (img.naturalWidth !== 0) {
+            onLoad();
+          } else {
+            onError();
+          }
+        }
+      });
+    }
+
+    async displayBanner(banner, useTransition = false) {
+      if (this.isTransitioning) return;
+      this.isTransitioning = true;
+
+      if (this._transitionTimer) {
+        clearTimeout(this._transitionTimer);
+        this._transitionTimer = null;
+      }
+
+      const cachedImg = this.cache.getCachedImage(banner.url);
+      const src = cachedImg ? cachedImg.src : banner.url;
+
+      try {
+        if (useTransition && CONFIG.fadeTransition > 0) {
+          this.imageElement.style.opacity = '0';
+
+          await new Promise(resolve => {
+            this._transitionTimer = setTimeout(resolve, CONFIG.fadeTransition / 2);
+          });
+          this._transitionTimer = null;
+
+          this.imageElement.alt = banner.alt;
+          await this.waitForImageReady(src);
+          this.imageElement.style.opacity = '1';
+        } else {
+          this.imageElement.alt = banner.alt;
+          await this.waitForImageReady(src);
+        }
+
+        this.currentBanner = banner;
+        this.container.setAttribute(
+          'aria-label',
+          `${banner.alt}. Click to change banner`
+        );
+
+        // only mark recent after a successful display
+        this.recentBanners.push(banner.url);
+        if (this.recentBanners.length > 3) {
+          this.recentBanners.shift();
+        }
+
+        // preload if not cached
+        if (!cachedImg) {
+          this.cache.preloadImage(banner.url).catch((err) => {
+            console.warn('Preload failed:', err.message);
+          });
+        }
+
+        // opportunistically preload next banners
+        this.scheduleOpportunisticPreload();
+      } catch (err) {
+        console.warn('Banner display failed:', err.message);
+        if (banner) this.cache.markAsFailed(banner.url);
+        // try to load another banner
+        if (this.retryCount < CONFIG.maxRetries) {
+          this.retryCount++;
+          this.isTransitioning = false;
+          setTimeout(() => this.displayRandomBanner(), 100);
+          return;
+        }
+      } finally {
+        this.isTransitioning = false;
+      }
+    }
+
+    scheduleOpportunisticPreload() {
+      if (!(CONFIG.useRequestIdleCallback && window.requestIdleCallback)) return;
+
+      // cancel previous idle work so rapid clicks don't stack
+      if (this._idlePreload != null && window.cancelIdleCallback) {
+        window.cancelIdleCallback(this._idlePreload);
+      }
+
+      this._idlePreload = window.requestIdleCallback(() => {
+        this._idlePreload = null;
+        const nextBanners = banners
+          .filter(b =>
+            !this.recentBanners.includes(b.url) &&
+            !this.cache.imageCache.has(b.url) &&
+            !this.cache.isRecentlyFailed(b.url)
+          )
+          .sort((a, b) => b.weight - a.weight)
+          .slice(0, 2);
+
+        this.cache.preloadBatch(nextBanners.map(b => b.url));
+      }, { timeout: 5000 });
+    }
+
+    displayRandomBanner() {
+      const banner = bannerSelector.getRandomBanner(this.recentBanners, this.cache);
+      return this.displayBanner(banner, this.currentBanner !== null);
+    }
+
+    nextBanner() {
+      this.displayRandomBanner();
+
+      requestAnimationFrame(() => {
+        this.clickIndicator.classList.add('indicator-pop');
+
+        setTimeout(() => {
+          this.clickIndicator.classList.remove('indicator-pop');
+        }, 150);
+      });
+    }
+
+    destroy() {
+      if (this._transitionTimer) {
+        clearTimeout(this._transitionTimer);
+        this._transitionTimer = null;
+      }
+
+      if (this._idlePreload != null && window.cancelIdleCallback) {
+        window.cancelIdleCallback(this._idlePreload);
+        this._idlePreload = null;
+      }
+
+      if (this.container) {
+        this.container.onclick = null;
+        this.container.onkeydown = null;
+
+        if (this.container.parentNode) {
+          this.container.parentNode.removeChild(this.container);
+        }
+      }
+
+      if (this.imageElement) {
+        this.imageElement.onload = null;
+        this.imageElement.onerror = null;
+      }
+
+      this.container = null;
+      this.imageElement = null;
+      this.clickIndicator = null;
+    }
+  }
+
+  const bannerSystem = new ClickableBannerSystem();
+
+  window.vintageBannerSystem = {
+    next: () => bannerSystem.nextBanner(),
+    current: () => bannerSystem.currentBanner?.alt || 'Loading...',
+    clearFailedCache: () => {
+      bannerSystem.cache.failedUrls.clear();
+      bannerSystem.cache.saveToStorage();
+      console.log('Failed banner cache cleared');
+    },
+    getFailedBanners: () => Array.from(bannerSystem.cache.failedUrls.keys())
+  };
 })();
 
 // This checks if any running mates have been unlocked
@@ -2308,137 +2962,274 @@ HistPVP = ["45.9%", "48.0%", "4.1%", "1.0%"];
 })();
 
 // This is for the question count selector.
-const gameWindowNode = document.getElementById("game_window");
-const createQuestionSelector = function() {
-    if (document.getElementById("difficulty_level") && !document.getElementById("question_select")) {
-        
-        const questionOptions = [
-            ["29 (Best)", 29],
-            ["40 (Full)", 40]
-        ];
-
-        let dropdown = document.createElement("select");
-        dropdown.id = "question_select";
-
-        questionOptions.forEach(opt => {
-            let optionElement = document.createElement("option");
-            optionElement.text = opt[0];
-            optionElement.value = opt[1];
-            if (opt[0] === "29 (Best)") {
-                optionElement.selected = true;
-            }
-            dropdown.options.add(optionElement);
-        });
-
-        let formContainer = document.createElement("form");
-        formContainer.name = "question_select_form";
-        let heading = document.createElement("h3");
-        heading.textContent = "Select the number of questions:";
-        formContainer.appendChild(heading);
-        formContainer.appendChild(dropdown);
-
-        document.getElementById("difficulty_level").appendChild(formContainer);
-
-        const updateQuestionCount = (value) => {
-            if (campaignTrail_temp.global_parameter_json && campaignTrail_temp.global_parameter_json[0]) {
-                campaignTrail_temp.global_parameter_json[0].fields.question_count = value;
-            }
-        };
-
-        dropdown.addEventListener("change", function () {
-            updateQuestionCount(this.value);
-        });
-        
-        updateQuestionCount(dropdown.value);
-    }
-};
-
-const diffWatcherConfig = { attributes: true, childList: true, subtree: true };
-const diffObserver = new MutationObserver(createQuestionSelector);
-diffObserver.observe(gameWindowNode, diffWatcherConfig);
-
-try {
-    document.styleSheets[0].insertRule("#difficulty_level form {display: inline-block !important; padding: 0 1em !important;}", 0);
-    document.styleSheets[0].insertRule("#difficulty_level form p {margin: 0 !important;}", 0);
-} catch (e) {
-    console.error("Could not apply selector styling:", e);
-}
-
-// for the No swearing checkbox
 (function () {
-  if (typeof window === "undefined") return;
-  const gameWindow = document.getElementById("game_window");
-  if (!gameWindow) return;
+  'use strict';
 
-  function createSqueakyCheckbox() {
-    const difficultyEl = document.getElementById("difficulty_level");
-    if (!difficultyEl) return;
+  const CONFIG = {
+    containerId: 'game_window',
+    targetSectionId: 'difficulty_level',
+    selectorId: 'question_select',
+    options: [
+      { text: "29 (Best)", value: 29 },
+      { text: "40 (Full)", value: 40 }
+    ]
+  };
 
-    const existing = document.getElementById("squeaky_clean_wrapper");
-    if (existing) {
-      const cb = document.getElementById("squeaky_clean_checkbox");
-      if (cb) cb.checked = Boolean(window.campaignTrail_temp?.squeaky_clean_mode);
-      const note = document.getElementById("squeaky_clean_label");
-      if (note) note.textContent = window.campaignTrail_temp?.squeaky_clean_label
-        ?? "Hides common swear words from displayed text.";
-      return;
+  if (!document.getElementById("question_select_style")) {
+    const style = document.createElement("style");
+    style.id = "question_select_style";
+    style.textContent = `
+            #${CONFIG.targetSectionId} {
+                display: inline-flex;
+                flex-wrap: wrap;
+                gap: 2.5em;
+                align-items: flex-start;
+            }
+            #${CONFIG.targetSectionId} form {
+                flex: 1 1 auto;
+            }
+            #${CONFIG.targetSectionId} form p {
+                margin: 0;
+            }
+        `;
+    document.head.appendChild(style);
+  }
+
+  // update global var safely
+  function setGlobalQuestionCount(val) {
+    if (window.campaignTrail_temp?.global_parameter_json?.[0]) {
+      window.campaignTrail_temp.global_parameter_json[0].fields.question_count = Number(val);
     }
+  }
 
-    const wrapper = document.createElement("div");
-    wrapper.id = "squeaky_clean_wrapper";
-    // use margin shorthand instead of invalid marginLeft value
-    wrapper.style.margin = "1em 0 -1em 0";
+  function manageQuestionSelector() {
+    // if "difficulty_level" is missing (which it is while playing),
+    // this returns null and the function stops instantly
+    const container = document.getElementById(CONFIG.targetSectionId);
 
-    const label = document.createElement("label");
-    label.htmlFor = "squeaky_clean_checkbox";
-    label.style.cursor = "pointer";
-    label.style.fontWeight = "bold";
+    if (!container) return;
+    if (document.getElementById(CONFIG.selectorId)) return;
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.id = "squeaky_clean_checkbox";
-    checkbox.style.marginRight = "10px";
-    checkbox.style.verticalAlign = "text-bottom";
-    checkbox.checked = Boolean(window.campaignTrail_temp?.squeaky_clean_mode);
+    const frag = document.createDocumentFragment();
 
-    checkbox.addEventListener("change", function () {
-      if (!window.campaignTrail_temp) window.campaignTrail_temp = {};
-      campaignTrail_temp.squeaky_clean_mode = this.checked;
+    const formContainer = document.createElement("form");
+    formContainer.name = "question_select_form";
+    const heading = document.createElement("h3");
+    heading.textContent = "Select the number of questions:";
 
-      if (typeof window.enableSqueakyClean === "function") {
-        try { window.enableSqueakyClean(this.checked); } catch (e) { /* ignore */ }
-      }
+    const dropdown = document.createElement("select");
+    dropdown.id = CONFIG.selectorId;
 
-      try {
-        document.dispatchEvent(new CustomEvent("squeakyCleanToggled", { detail: { enabled: this.checked } }));
-      } catch (e) { /* ignore */ }
+    CONFIG.options.forEach((opt, index) => {
+      const isSelected = index === 0;
+      dropdown.add(new Option(opt.text, opt.value, isSelected, isSelected));
     });
 
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode("Squeaky-clean mode"));
+    dropdown.addEventListener("change", (e) => setGlobalQuestionCount(e.target.value));
 
-    const note = document.createElement("div");
-    note.id = "squeaky_clean_label";
-    note.style.fontSize = ".8rem";
-    note.style.color = "#464646";
-    note.style.marginTop = "4px";
-    note.textContent = window.campaignTrail_temp?.squeaky_clean_label
-      ?? "Hides common swear words from displayed text.";
+    formContainer.appendChild(heading);
+    formContainer.appendChild(dropdown);
+    frag.appendChild(formContainer);
+    container.appendChild(frag);
 
-    wrapper.appendChild(label);
-    wrapper.appendChild(note);
-
-    difficultyEl.appendChild(wrapper);
+    setGlobalQuestionCount(dropdown.value);
   }
+
+  window.manageQuestionSelector = manageQuestionSelector;
+})();
+
+// This is a dropdown for all the opt-in
+// or opt-out features in the mod
+(function () {
+  'use strict';
+
+  const CONFIG = {
+    targetId: 'difficulty_level',
+    containerId: 'mod_options_container',
+    storageKey: 'alot_custom_preferences',
+	features: [
+	  {
+        id: 'compact_playlist',
+        text: "Compact playlist",
+        desc: "Replaces the default soundtrack with a curated, more theme-accurate playlist.",
+        flag: 'compact_playlist',
+		type: 'toggle',
+        default: false
+      },
+	  {
+        id: 'countymap_position',
+        text: "County map position",
+        desc: "Controls whether the county map feature should be in a separate tab or within the Election Results tab.",
+        flag: 'countyZoom',
+        type: 'select',
+		options: [
+			{ value: 'separate', text: 'In a separate tab' },
+			{ value: 'together', text: 'Within the Election Results map' },
+			{ value: 'seamless', text: 'Just seamlessly zoom in' }
+		],
+        default: 'separate'
+      },
+      {
+        id: 'dynamic_en',
+        text: "Dynamic election night",
+        desc: "Enables a fluid, realistic election night simulation instead of the in-game election night.",
+        flag: 'dynamicEN',
+        type: 'toggle',
+        default: true
+      },
+    ]
+  };
   
-  window.createSqueakyCheckbox = createSqueakyCheckbox;
+  const modMenuStyles = new CSSStyleSheet();
+  modMenuStyles.replaceSync(`
+    #${CONFIG.targetId} { display: inline-flex; flex-wrap: wrap; gap: 2.5em; align-items: flex-start; }
+    #${CONFIG.containerId} { display: flex; flex-direction: column; width: 260px; }
+    .mod-desc-box {
+        margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.35);
+        border: 1px solid #ccc; border-radius: 4px; min-height: 90px;
+        font-size: 0.95em; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .mod-desc-box p { margin: 0 0 10px 0; line-height: 1.3em; }
+    .mod-ctrl-row { display: flex; align-items: center; padding-top: 5px; border-top: 1px solid rgba(0,0,0,0.1); }
+    .switch { position: relative; display: inline-block; width: 40px; height: 20px; margin-right: 10px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .menu-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+    .menu-slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+    input:checked + .menu-slider { background-color: #208604; }
+    input:checked + .menu-slider:before { transform: translateX(20px); }
+    .status-label { font-weight: bold; font-size: 0.9em; text-transform: uppercase; }
+    .status-enabled { color: #0d3d00; }
+    .status-disabled { color: #2d2d2d; }
+    .mod-select { width: 100%; padding: 4px; font-size: 0.95em; border: 1px solid #ccc; border-radius: 3px; background: white; }
+  `);
+
+  if (!document.getElementById("mod_option_styles")) {
+    const styleMarker = document.createElement("style");
+    styleMarker.id = "mod_option_styles";
+    document.head.appendChild(styleMarker);
+	document.adoptedStyleSheets = [...document.adoptedStyleSheets, modMenuStyles];
+  }
+
+  const getSavedSettings = () => {
+    try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)) || {}; } catch (e) { return {}; }
+  };
+
+  const saveSettingToStorage = (flag, value) => {
+    const current = getSavedSettings();
+    current[flag] = value;
+    localStorage.setItem(CONFIG.storageKey, JSON.stringify(current));
+  };
+
+  const getFlag = (key, def) => {
+    window.campaignTrail_temp = window.campaignTrail_temp || {};
+    if (!window.campaignTrail_temp.hasOwnProperty(key)) window.campaignTrail_temp[key] = def;
+    return window.campaignTrail_temp[key];
+  };
+
+  const setFlag = (key, val) => window.campaignTrail_temp[key] = val;
+
+  const createEl = (tag, props = {}, children = []) => {
+    const el = document.createElement(tag);
+    Object.entries(props).forEach(([key, val]) => {
+      if (key === 'style') Object.assign(el.style, val);
+      else if (key === 'dataset') Object.assign(el.dataset, val);
+      else el[key] = val;
+    });
+    children.forEach(child => el.appendChild(child));
+    return el;
+  };
+
+  function manageModOptions() {
+    const target = document.getElementById(CONFIG.targetId);
+    if (!target || document.getElementById(CONFIG.containerId)) return;
+
+    const frag = document.createDocumentFragment();
+    let descText, toggleWrapper, toggleInput, statusText, selectWrapper, selectInput, dropdown;
+
+    const wrapper = createEl('div', { id: CONFIG.containerId }, [
+      createEl('h3', { textContent: 'Special mod settings:', style: { marginBottom: '8px' } }),
+      dropdown = createEl('select', { style: { width: '100%', padding: '5px' } }),
+      createEl('div', { className: 'mod-desc-box' }, [
+        descText = createEl('p', {}),
+
+        toggleWrapper = createEl('div', { className: 'mod-ctrl-row', style: { display: 'none' } }, [
+          createEl('label', { className: 'switch' }, [
+            toggleInput = createEl('input', { type: 'checkbox' }),
+            createEl('span', { className: 'menu-slider' })
+          ]),
+          statusText = createEl('span', { className: 'status-label' })
+        ]),
+
+        selectWrapper = createEl('div', { className: 'mod-ctrl-row', style: { display: 'none' } }, [
+          selectInput = createEl('select', { className: 'mod-select' })
+        ])
+      ])
+    ]);
+
+    const savedSettings = getSavedSettings();
+
+    CONFIG.features.forEach((f, i) => {
+      dropdown.add(new Option(f.text, i));
+      let initialValue = savedSettings.hasOwnProperty(f.flag) ? savedSettings[f.flag] : f.default;
+      setFlag(f.flag, initialValue);
+    });
+
+    const updateState = () => {
+      const feat = CONFIG.features[dropdown.value];
+      descText.textContent = feat.desc;
+
+      if (feat.type === 'toggle') {
+          toggleWrapper.style.display = 'flex';
+          selectWrapper.style.display = 'none';
+
+          const isOn = getFlag(feat.flag, feat.default);
+          toggleInput.checked = isOn;
+          toggleInput.dataset.flag = feat.flag;
+
+          statusText.textContent = isOn ? "Enabled" : "Disabled";
+          statusText.className = `status-label ${isOn ? 'status-enabled' : 'status-disabled'}`;
+      } else if (feat.type === 'select') {
+          toggleWrapper.style.display = 'none';
+          selectWrapper.style.display = 'flex';
+
+          selectInput.innerHTML = '';
+          feat.options.forEach(opt => selectInput.add(new Option(opt.text, opt.value)));
+
+          const currentVal = getFlag(feat.flag, feat.default);
+          selectInput.value = currentVal;
+          selectInput.dataset.flag = feat.flag;
+      }
+    };
+
+    dropdown.addEventListener('change', updateState);
+
+    toggleInput.addEventListener('change', (e) => {
+      const flag = e.target.dataset.flag;
+      const isChecked = e.target.checked;
+      setFlag(flag, isChecked);
+      saveSettingToStorage(flag, isChecked);
+      updateState();
+    });
+
+    selectInput.addEventListener('change', (e) => {
+      const flag = e.target.dataset.flag;
+      const val = e.target.value;
+      setFlag(flag, val);
+      saveSettingToStorage(flag, val);
+    });
+
+    updateState();
+    frag.appendChild(wrapper);
+    target.appendChild(frag);
+  }
+
+  window.manageModOptions = manageModOptions;
 })();
 
 // This is, essentially, for preventing candidates or running mates
 // from being selected. Very useful if you're having a one-candidate
 // mod but still want to list the other candidates
-// taken from 2012LBM
-function automateStartSequence() {
+(function () {	
     const BAD_CANDIDATE_IDS = new Set(['200', '202', '203']);
     const RESET_CANDIDATE_ID = '201'; 
 
@@ -2451,32 +3242,40 @@ function automateStartSequence() {
         finalNext: "opponent_selection_id_button",
         finalBack: "opponent_selection_id_back",
         initialContinue: "election_id_button",
-		gameMapHeader: "transport_box"
+		gameMapHeader: "inner_window_question"
     };
 
     let lastSelectedCandidateId = null;
 	
-	const handleDomChange = (mutationsList, observer) => {
+	function automateStartSequence() {
 		// check for the candidate input
-        const candidateInput = document.getElementById(IDS.candidateInput);
-        const finalNext = document.getElementById(IDS.finalNext);
-        const finalBack = document.getElementById(IDS.finalBack);
-        const gameMap = document.getElementById(IDS.gameMapHeader);
+		const candidateInput = document.getElementById(IDS.candidateInput);
+		const finalNext = document.getElementById(IDS.finalNext);
+		const finalBack = document.getElementById(IDS.finalBack);
+		const gameMap = document.querySelector(IDS.gameMapHeader);
 
-        // if the map/transport box is loaded, we are done with setup
-        if (gameMap) {
-            observer.disconnect();
-            return;
-        }
+        // if the question screen is loaded, we are done with setup
+		if (gameMap) {
+			finished = true;
+			return;
+		}
+		
+		// if we are on the opponent selection screen, clean up and stop
+		if (finalNext && finalBack) {
+			let candidateId = lastSelectedCandidateId;
 
-        // if we are on the opponent selection screen, clean up and stop.
-        if (finalNext && finalBack) {
-            // remove back button only if we managed to sneak a bad candidate through
-            if (BAD_CANDIDATE_IDS.has(lastSelectedCandidateId)) {
-                finalBack.remove();
-            }
-            return;
-        }
+			// try to read candidate_id directly if available
+			const candidateInput = document.getElementById(IDS.candidateInput);
+			if (candidateInput?.value) {
+				candidateId = candidateInput.value;
+				lastSelectedCandidateId = candidateId;
+			}
+
+			if (BAD_CANDIDATE_IDS.has(candidateId)) {
+				finalBack.remove();
+			}
+			return;
+		}
 		
         // candidate selection screen check
         if (candidateInput) {
@@ -2502,83 +3301,85 @@ function automateStartSequence() {
                 }
             }
         }
-    };
+	}
 	
-    window.automateStartSequence = automateStartSequence;
-}
+	window.tctAutoStart = { tick: automateStartSequence };
+	
+})();
 
-// Useful if you have a mod series!
-// Here, it lets you switch easily to 2012LBM.
-(function() {
-    'use strict';
+// This lets you switch between other mods more easily
+// based off a version from the Netherlands mod series
+(function () {
+  'use strict';
 
-    const CONFIG = {
-        autoStartParam: 'from',
-        autoStartValue: 'othernlmod',
-        startButtonId: 'game_start',
-        electionSelectQuery: 'select[name="election_id"]',
-        containerId: 'game_window', 
-        baseUrl: 'https://campaigntrailshowcase.com/campaign-trail/',
-        modsToAdd: [
-			{ value: '1992', text: '1992 - Every Brilliant Thing', modName: '1992 - Every Brilliant Thing' },
-            { value: '2012', text: '2012 - Little Big Man', modName: '2012 - Little Big Man' },
-        ],
-    };
+  const CONFIG = {
+    startButtonId: 'game_start',
+    electionSelectQuery: 'select[name="election_id"]',
+    containerId: 'game_window',
+    baseUrl: 'https://campaigntrailshowcase.com/campaign-trail/',
+    modsToAdd: [
+	    { value: '2000', text: '2000 - The Major Leagues', modName: '2000 - The Major Leagues' },
+      { value: '2012', text: '2012 - Little Big Man', modName: '2012 - Little Big Man' },
+    ],
+  };
 
-    // state tracking to ensure we don't spam the auto-start click
-    let hasAutoStarted = false;
+  // state tracking to ensure we don't spam the auto-start click
+  let hasAutoStarted = false;
 
-    function modifyElectionSelect(selectEl) {
-        if (selectEl.dataset.modifiedByScript) return;
+  function modifyElectionSelect(selectEl) {
+    if (selectEl.dataset.modifiedByScript) return;
 
-        // reverse to prepend
-        [...CONFIG.modsToAdd].reverse().forEach(mod => {
-            const option = document.createElement('option');
-            option.value = mod.value;
-            option.textContent = mod.text;
-            selectEl.prepend(option);
-        });
+    // reverse to prepend
+    [...CONFIG.modsToAdd].reverse().forEach(mod => {
+      const option = document.createElement('option');
+      option.value = mod.value;
+      option.textContent = mod.text;
+      selectEl.prepend(option);
+    });
 
-        selectEl.addEventListener('change', (event) => {
-            const selectedValue = event.target.value;
-            const targetMod = CONFIG.modsToAdd.find(mod => mod.value === selectedValue);
+    selectEl.addEventListener('change', (event) => {
+      const selectedValue = event.target.value;
+      const targetMod = CONFIG.modsToAdd.find(mod => mod.value === selectedValue);
 
-            if (targetMod) {
-                const redirectUrl = new URL(CONFIG.baseUrl);
-                redirectUrl.searchParams.set('modName', targetMod.modName);
-                redirectUrl.searchParams.set(CONFIG.autoStartParam, CONFIG.autoStartValue);
-                window.location.href = redirectUrl.toString();
-            }
-        });
+      if (targetMod) {
+        const redirectUrl = new URL(CONFIG.baseUrl);
+        redirectUrl.searchParams.set('modName', targetMod.modName);
+        
+        // converts form-encoded '+' spaces to '%20' so they display cleanly as spaces in the browser address bar
+        const cleanUrl = redirectUrl.toString().replace(/\+/g, '%20');
+        window.location.href = cleanUrl;
+      }
+    });
 
-        selectEl.dataset.modifiedByScript = 'true';
+    selectEl.dataset.modifiedByScript = 'true';
+  }
+
+  function attemptAutoStart() {
+    if (hasAutoStarted || window.campaignTrailEnhanced) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    // checks if 'modName' is in the URL to trigger the click
+    if (urlParams.has('modName')) {
+      const startButton = document.getElementById(CONFIG.startButtonId);
+      if (startButton) {
+        window.campaignTrailEnhanced = true;
+        hasAutoStarted = true;
+        startButton.click();
+      }
+    }
+  }
+
+  function onDomChange() {
+    // try to modify the select box
+    const selectEl = document.querySelector(CONFIG.electionSelectQuery);
+    if (selectEl) {
+      modifyElectionSelect(selectEl);
     }
 
-    function attemptAutoStart() {
-        if (hasAutoStarted || window.campaignTrailEnhanced) return;
+    attemptAutoStart();
+  }
 
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get(CONFIG.autoStartParam) === CONFIG.autoStartValue) {
-            const startButton = document.getElementById(CONFIG.startButtonId);
-            if (startButton) {
-                window.campaignTrailEnhanced = true;
-                hasAutoStarted = true;
-                startButton.click();
-            }
-        }
-    }
-
-    function onDomChange() {
-        // try to modify the select box
-        const selectEl = document.querySelector(CONFIG.electionSelectQuery);
-        if (selectEl) {
-            modifyElectionSelect(selectEl);
-        }
-
-        attemptAutoStart();
-    }
-
-    window.modifyElectionSelect = modifyElectionSelect;
+  window.modifyElectionSelect = modifyElectionSelect;
 })();
 
 // This is a catch-all mutation observer so that
@@ -2599,15 +3400,15 @@ function automateStartSequence() {
             window.modifySelector(); 
         }
 		
-		// candidate blocking
-		if (!document.getElementById("squeaky_clean_wrapper") && document.getElementById("difficulty_level")) {
-			createSqueakyCheckbox();
+		if (document.getElementById("difficulty_level")) {
+			if (typeof window.manageQuestionSelector === 'function') window.manageQuestionSelector(); // question count selector
+			if (typeof window.manageModOptions === 'function') window.manageModOptions();             // mod settings
 		}
-
-        // candidate blocking
-		if (typeof automateStartSequence === 'function') {
-            automateStartSequence(); 
-        }
+		
+		// candidate blocking
+		if (window.tctAutoStart?.tick) {
+			window.tctAutoStart.tick();
+		}
 
         // mod switcher
         const electionSelect = document.querySelector('select[name="election_id"]');
@@ -2749,7 +3550,7 @@ campaignTrail_temp.achievements = {
     },
     "Spitting Off The Edge of The World": {
         "image": "https://file.garden/aNtAfG887DiA_7lO/2016ALOT/a14.jpg",
-        "description": "As Hillary Clinton, win on Hard-Boiled difficulty.",
+        "description": "As Hillary Clinton, win on Hard-Boiled or Dead on Arrival difficulty.",
         "cannotBeCheated": true
     },
 	"Before My Telephone Rings": {
@@ -2768,3 +3569,41 @@ campaignTrail_temp.achievements = {
         "cannotBeCheated": true
     }
 }
+
+// This is so we can use only one code 2
+// instead of several for the veeps.
+;(function() {
+    const TARGET_ELECTION_ID = 20;
+    const UNIFIED_VP_SUFFIX = "Kaine";
+
+    // intercept election_HTML
+    if (typeof window.election_HTML === "function") {
+        const originalElectionHTML = window.election_HTML;
+        window.election_HTML = function(id, cand, running_mate) {
+            if (Number(id) === TARGET_ELECTION_ID) {
+                // return a standard, existing base question set
+                return "2016_Clinton_Booker.html";
+            }
+            return originalElectionHTML(id, cand, running_mate);
+        };
+    }
+
+    // intercept evalFromUrl
+	if (typeof window.fetch === "function") {
+        const originalFetch = window.fetch;
+        window.fetch = function(input, init) {
+            if (typeof input === "string") {
+                // if fetching a custom mod file or ending file,
+                // redirect the request to our unified code 2
+                if (input.includes("A Lifetime of This") && input.endsWith(".html")) {
+                    if (input.includes("_ending.html")) {
+                        input = `../static/mods/2016 - A Lifetime of This_Clinton${UNIFIED_VP_SUFFIX}_ending.html`;
+                    } else {
+                        input = `../static/mods/2016 - A Lifetime of This_Clinton${UNIFIED_VP_SUFFIX}.html`;
+                    }
+                }
+            }
+            return originalFetch(input, init);
+        };
+    }
+})();

@@ -1,0 +1,1822 @@
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 21,
+        "fields": {
+            "year": 2025,
+            "summary": "<div style='overflow-y:scroll;height:180px;padding-right:7px'><p> Ever since the independence of Singapore in 1965, the small city-state has been ruled by the People's Action Party. The PAP dominates parliament, with supermajorities every election since full internal self-government in 1959. The opposition's power is little, as the PAP dominate much of the political scene. However, with a rising cost of living being a major concern for most Singaporeans, the opposition finally have an opportunity make significant gains. </p></p> Prime Minister Lawrence Wong hopes to secure a mandate in his first election since his swearing-in last year in the first test of the public's confidence in him. </p></p> The opposition are composed of many parties. However, the main opposition party, is Leader of the Opposition  Pritam Singh's Workers Party. The WP gained a GRC in 2020 and hopes to further their gains. </p><p><b>This scenario is a work of speculative fiction that is not reflective of the team's political beliefs, and should not be taken out of the context of The Campaign Trail for the purposes of information manipulation. As a fictional scenario, it should not be interpreted as a false statement of fact under the Protection from Online Falsehoods Manipulation Act 2019.</b></p></div>",
+            "image_url": "https://file.garden/ahQjEkNAD3B-mQv2/SG%202025%20Mod/SG2025%20election%20gif%20intro%202.gif",
+            "winning_electoral_vote_number": 49,
+            "advisor_url": "https://file.garden/aftBfT23iVucvcGE/advisor.png",
+            "recommended_reading": "<div style='overflow-y:scroll;height:300px;'><ul><li><a href=https://www.channelnewsasia.com/commentary/singapore-election-ge2025-ips-survey-voter-pattern-5330156>What were voters really saying in GE2025?</a></li><li><a href=https://www.ricemedia.co/did-we-hope-for-too-much/>Did we hope for too much?</a></li><li><a href=https://www.theonlinecitizen.com/2025/05/04/why-fringe-parties-dont-need-to-be-excluded-the-voters-are-doing-it-themselves/>Why fringe parties don’t need to be excluded — the voters are doing it themselves\n</a></li><li><a href=https://www.blackbox.com.sg/perspectives/ge2025-how-the-pap-clinched-a-convincing-win-and-what-the-data-tells-us>How the PAP clinched a convincing win and what the data tells us</a></li><li><a href=https://www.jom.media/ge-2025/lawrences-stunning-success/>Lawrence's Stunning Success</a></li></ul><br><b>Mod Notes &amp; Real-Life Variations:</b><ul><li><b>No NCMP Seats:</b> This mod does not allocate Non-Constituency Member of Parliament (NCMP) seats for the opposition should they fall below 12 seats in total. Coding this process would be incredibly complex and tedious without significantly altering gameplay.</li><li><b>Campaign Polling:</b> In reality, election polling—especially during the campaign period—is restricted in Singapore. It has been included here purely for entertainment and gameplay tracking.</li><li><b>Electoral Maps:</b> Real-world boundary maps are typically unreleased until roughly 2 months before the election, but keeping a static map is necessary for practical game design.</li><li><b>Streamlined Opposition:</b> This mod excludes certain minor opposition parties or independent candidates who initially announced intentions to contest specific constituencies but ultimately did not run.</li></ul></div>",            "display_year": "2025",
+            "recommended_reading_enabled": true
+        }
+    }
+];
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 21,
+        "year": 2020,
+        "is_premium": 0,
+        "display_year": "2025"
+    }
+];
+
+RecReading = true;
+
+campaignTrail_temp.credits = "Singaporeans";
+
+// necessary so that the right election files are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "21") {
+            campaignTrail_temp.code2_id = "2025 Singapore";
+        }
+    }
+}, 100);
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+];
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 300,
+        "fields": {
+            "first_name": "The",
+            "last_name": "PAP",
+            "election": 21,
+            "party": "The People's Action Party",
+            "state": "The Government",
+            "priority": 1,
+            "description": "<span id=\"screen7\"><p><p>Established in 1954 as a centre-left party, the PAP has shifted to the right over the years to be the governing political party of Singapore in the decades since. The party of founding father Lee Kuan Yew and his team, most Singaporeans do not know a world where the PAP is in charge of their home. Since Lee Kuan Yew’s death in 2015, the party’s main leader behind the scenes appears to be Lee Hsien Loong, who stepped down in 2024 as Prime Minister.</p><p>Over the last 5 years, much has changed. The younger Lee is no longer the leader of the party and Prime Minister, succeeded by Lawrence Wong in both roles. While the 2023 presidential election showed an affirmation of support for the PAP, that was arguably due to the popularity of PAP-affiliated independent Tharman Shanmugaratnam. Cost-of-living has become the main issue for many Singaporeans and is not a winning issue for the PAP. Can the PAP retain their supermajority, keep their ministers and extend their grip on power?</p> <br><br><button onclick=\"next6()\">Election Strategy Briefing</button><br></span><span id=\"screen8\" style=\"display: none;\"><p><div style='overflow-y:scroll;height:200px;'><p>The PAP enters the election with a loyal voter base, largely filled with older and middle-aged voters born before 1980. New citizens into Singapore also form a heavy component of the PAP's support and are critical in certain battlegrounds. However, it seems likely for the PAP's overall vote share to decrease from the already relatively low 61% in 2020, with an increased proportion of younger voters and voters unhappy with the cost-of-living crisis.</p><p>The PAP is contesting, as usual, in every constituency in Singapore and has the benefit of being the party in government, which will allow the party to decide new policy up until the dissolution of parliament. Furthermore, voters generally have confidence that the PAP will win the election easily, likely with a 2/3 supermajority. The opposition has only focused their efforts on a handful of constituencies, and most PAP ministers should survive this election.</p><p>There is one wild card, though. Lawrence Wong's takeover of the PAP from Lee Hsien Loong means that this new leadership could be untrusted by the Singaporean population. In 1991 and 2006, both elections with new PAP leaders, the PAP's vote share decreased dramatically. Tread carefully, and consider your options.</p></div><br><button onclick=\"back1()\">Back</button></p></span>",
+            "color_hex": "#D7445B",
+            "secondary_color_hex": "#ff5a75",
+            "is_active": 1,
+            "image_url": "https://file.garden/aftBfT23iVucvcGE/papcode1.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2020 election.</h3><p>Things may have been closer and more contested than you hoped for, but the final result remains. Can you help bring the country back together after a tumultuous few years? Or will you be seen as a lame duck from the first day -- unable to keep the two wings of your party coordinated? Time will tell.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2020 election.</h3><p>After an election in which many of your supporters claimed democracy itself was at stake, what happens now? Perhaps the party will need to go in a completely different direction in 2024. As for yourself, it seems that your long, illustrious political career has surely drawn to a close.</p>",
+            "no_electoral_majority_message": "<h3>Sorry! You have lost the 2020 election.</h3><p>In spite of the 269-269 tie in the electoral college, Republicans control a majority of state delegations in the House of Representatives. After an election in which many of your supporters claimed democracy itself was at stake, what happens now? Perhaps the party will need to go in a completely different direction in 2024.</p>",
+            "description_as_running_mate": "",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 301,
+        "fields": {
+            "first_name": "The",
+            "last_name": "WP",
+            "election": 21,
+            "party": "Workers Party",
+            "state": "The Opposition",
+            "priority": 2,
+            "description": "<span id=\"screen1\"><p>Established in 1957, the WP is the only opposition party that has won a GRC in Singaporean history, and the only opposition party currently in parliament with elected MPs. The party first won a seat in a 1981 by-election with party leader J.B. Jeyaretnam elected in Anson. Following Jeyaretnam’s conviction in 1986, the party lost parliamentary representation again before Low Thia Khiang was elected in 1991 as an MP for Hougang. In 2011, the WP won a GRC, giving them a total of 6 seats before expanding again in 2020 to 10 seats.</p><p>In the last 5 years, the party has been constantly embroiled in scandal over 2 of its elected MPs. Other than scandal, the party has been constantly on-and-off the news for its participation in vibrant debates in parliament over every issue imaginable, and the party has also been successful in avoiding controversy in its town council management. With more young voters this election who are open to voting for WP, this is the WP’s chance to increase their representation in parliament. Can the WP win more seats, knock out some PAP ministers and finally become real opposition?</p><br><br><button onclick=\"back0()\">Election Strategy Briefing</button><br></span><span id=\"screen0\" style=\"display: none;\"><p><div style='overflow-y:scroll;height:200px;'> <p> The WP enters the election with 10 seats in the Northeast of Singapore, largely fuelled by young voters. It will be the WP's own decision regarding how many seats to contest - while it contested 21 seats in 2020, it seems likely to contest around 30 or more seats this time. However, the party has been rocked by scandal, first with freshly elected MP Raessah Khan lying about a constituent's sexual assault and then with MP Leon Perera's extramarital affair. This has culminated in a new line of attack against the WP.</p> <p> The WP is certainly contesting in Aljunied, Hougang and Sengkang, the 3 constituencies and 10 seats they currently hold. Beyond that, East Coast and Marine Parade are areas they contested in the previous election, while the party considers expanding into Tampines, Punggol and Pasir Ris. There are many permutations of seats to contest but limited resources and candidates. Many swing voters increasingly view voting WP in selected constituencies to strengthen checks-and-balances while keeping the PAP in charge, which means the party cannot alienate them either.</p>  <p> The WP must manage to balance its position on a few issues while other opposition parties openly take aggressive, anti-PAP positions: the WP must balance its immigration stance to win both nationalist and new citizen votes, the WP must balance its social policy stances to win both older conservative and younger liberal votes, and the WP must manage to figure out how to effectively exploit the cost-of-living crisis to maximize votes.</div></p><br><button onclick=\"next0()\">Back</button></p></span>",             
+            "color_hex": "#459ED6",
+            "secondary_color_hex": "#499ED5",
+            "is_active": 1,
+            "image_url": "https://file.garden/aftBfT23iVucvcGE/wphammers.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2020 election.</h3><p>For the second time in a row, many analysts saw a victory for you as practically impossible. But whatever they say, it is clear that your Make America Great Again agenda has been vindicated. Where do you take things from here?</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2020 election.</h3><p>After an election in which many of your supporters claimed democracy itself was at stake, what happens now? Many analysts believe the party will need to go in a completely different direction next time. As for yourself, will you take these results sitting down, or will you prepare yourself for an epic political comeback in 2024?</p>",
+            "no_electoral_majority_message": "<h3>Congratulations! You have won the 2020 election.</h3><p>In spite of the 269-269 tie in the electoral college, Republicans control a majority of state delegations in the House of Representatives. A lot of liberals are absolutely distraught and outraged that the election came down to such a technicality, but hey, those are the rules!</p>",
+            "description_as_running_mate": "",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 302,
+        "fields": {
+            "first_name": "The",
+            "last_name": "SDP",
+            "election": 21,
+            "party": "Singapore Democratic Party",
+            "state": "The Opposition",
+            "priority": 3,
+            "description": "<span id=\"screen9\"><p><p>Established in 1980 by Chiam See Tong, the social-liberal SDP is the perhaps most ideologically clear party in Singapore. Following Chiam’s election to parliament in 1984 as an SDP candidate, the party tripled its seats in 1991 before internal tensions drove Chiam out of his own party. The party’s new leader, Chee Soon Juan, who took over in 1993, lost all the party’s seats in 1997 and the party has not entered parliament since. However, from losing by landslide margins in the 2000s, the party has progressed rapidly to go within striking distance of winning two seats in 2020.</p><p>Over the last 5 years, one of the seats the party was close to winning, Bukit Batok (contested by Chee) was dissolved, forcing Chee elsewhere on the map. The other candidate who has a good chance of winning, Paul Tambyah in Bukit Panjang, has remained on the ground for the last 5 years. Other than these two candidates, the party has had remarkable success in recruitment over the past 5 years, bringing in a variety of candidates and many young volunteers. This likely seems like the last chance for the aging Chee and Tambyah duo to get elected into parliament. Can the SDP finally enter parliament and make change happen?</p></p><br><br><button onclick=\"next7()\">Election Strategy Briefing</button><br></span><span id=\"screen10\" style=\"display: none;\"><p><div style='overflow-y:scroll;height:200px;'><p>The SDP enters the election with its efforts having largely been concentrated in two areas - Bukit Batok and Bukit Panjang. However, with the dissolution of Bukit Batok into Jurong East-Bukit Batok GRC, the party faces a tough decision: whether to contest the new, much more pro-PAP seat and where to field party leader Chee Soon Juan. Bukit Batok is where many resources of the SDP have been spent, and the party even moved their headquarters into the vicinity. But whether it’s advisable to field an SDP team at all in Jurong East-Bukit Batok will be up to Chee himself.</p><p>In Bukit Panjang, the SDP has been working the ground, with medical expert and candidate Paul Tambyah being out and about in the constituency. Tambyah is less aggressive than Chee and appears to be a more academic figure in the party. While narrowly favored to win, Tambyah does face a formidable opponent in PAP incumbent MP Liang Eng Hwa, who despite a cancer prognosis has still worked extremely hard in the constituency. The PAP-run town council has also spent a lot of funds on building infrastructure such as sheltered walkways in Bukit Panjang, which will affect the seat.</p><p>Outside of these two constituencies, much of the North and West of the Singaporean map appears to be in the hands of the SDP to contest - even smaller opposition parties are expected to back down should the SDP contest anywhere from Sembawang, Sembawang West, Marsiling-Yew Tee, Holland-Bukit Timah or Kebun Baru. But the party is controversial, and Chee’s personality is still unpopular among many older voters who remember the younger and more aggressive Chee. The SDP must figure out how to improve its overall brand and tread carefully if it wants to win anything in what appears to be its last chance.</p></div><br><button onclick=\"back2()()\">Back</button></p></span>",
+            "color_hex": "#C768A6",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 1,
+            "image_url": "https://file.garden/aftBfT23iVucvcGE/sdpflag1.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2020 election.</h3><p>For the second time in a row, many analysts saw a victory for you as practically impossible. But whatever they say, it is clear that your Make America Great Again agenda has been vindicated. Where do you take things from here?</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2020 election.</h3><p>After an election in which many of your supporters claimed democracy itself was at stake, what happens now? Many analysts believe the party will need to go in a completely different direction next time. As for yourself, will you take these results sitting down, or will you prepare yourself for an epic political comeback in 2024?</p>",
+            "no_electoral_majority_message": "<h3>Congratulations! You have won the 2020 election.</h3><p>In spite of the 269-269 tie in the electoral college, Republicans control a majority of state delegations in the House of Representatives. A lot of liberals are absolutely distraught and outraged that the election came down to such a technicality, but hey, those are the rules!</p>",
+            "description_as_running_mate": "",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 303,
+        "fields": {
+            "first_name": "The ",
+            "last_name": "PSP",
+            "election": 21,
+            "party": "Progress Singapore Party",
+            "state": "The Opposition",
+            "priority": 4,
+            "description": "<span id=\"screen13\"><p>Established in 2019 by former PAP MP Tan Cheng Bock, the PSP is the newest major opposition party (along with the WP and SDP). Following its establishment, the party rapidly expanded and considered contesting almost 40 seats, however this eventually was decreased to 24 candidates in the 2020 election. The party won 0 seats but received 2 “best-loser” non-constituency MP seats, allowing it parliamentary presence with Leong Mun Wai and Hazel Poa taking those two seats. Tan Cheng Bock, for his part, took a backseat after the election.</p><p>Since the 2020 election, the PSP NCMPs have been everywhere in parliament, attacking PAP policies passionately. Leong Mun Wai, especially, has earned his fair share of controversy over his anti-immigration stance, which the PSP has shifted to. It is true to a great extent that Leong and Poa have had a power struggle of sorts, rotating power. Can the PSP enter parliament after agonizingly missing out on elected parliamentary representation in the last election?</p><br><br><button onclick=\"next9()\">Election Strategy Briefing</button><br></span><span id=\"screen14\" style=\"display: none;\"><p><div style='overflow-y:scroll;height:200px;'><p>The PSP’s election strategy is largely based on one constituency: West Coast-Jurong West. While this constituency has become significantly more pro-PAP compared to the previous West Coast, it is still ripe territory for the PSP especially with one of the West Coast MPs and Minister Iswaran’s illegal gift conviction. The PSP is thus likely, as it has for the last 5 years, to focus its efforts here and in the small constituency of Pioneer which West Coast-Jurong West surrounds.</p><p>Aside from the key territory in the southwest, the PSP is also expected to contest Chua Chu Kang and Bukit Gombak, as well as potentially fielding a few candidates in central Singapore. The party contested 3 small SMCs in central Singapore in 2020 (Kebun Baru, Yio Chu Kang and Marymount) which could conflict with the plans of minor opposition parties. It is also important to note that the party has lost quite a few of its candidates since the last election, and the new crop of potential candidates is probably a downgrade from 2020.</p><p>Policy-wise, the party’s 5 years in parliament with its 2 NCMPs have led it to be the clearly anti-immigration voice in Singaporean politics. The party’s stances on this issue could make-or-break its electoral chances, with views on this issue varied throughout Singapore. The party must utilize the current cost-of-living situation, frustrations over housing, frustrations over job security and other similar issues to rocket itself into parliament. The PSP must tread carefully if it wants to have a parliamentary delegation after Polling Day.</p></div><br><button onclick=\"back4()()\">Back</button></p></span>",
+            "color_hex": "#A73932",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 1,
+            "image_url": "https://file.garden/aftBfT23iVucvcGE/psptruck.png",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2020 election.</h3><p>For the second time in a row, many analysts saw a victory for you as practically impossible. But whatever they say, it is clear that your Make America Great Again agenda has been vindicated. Where do you take things from here?</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2020 election.</h3><p>After an election in which many of your supporters claimed democracy itself was at stake, what happens now? Many analysts believe the party will need to go in a completely different direction next time. As for yourself, will you take these results sitting down, or will you prepare yourself for an epic political comeback in 2024?</p>",
+            "no_electoral_majority_message": "<h3>Congratulations! You have won the 2020 election.</h3><p>In spite of the 269-269 tie in the electoral college, Republicans control a majority of state delegations in the House of Representatives. A lot of liberals are absolutely distraught and outraged that the election came down to such a technicality, but hey, those are the rules!</p>",
+            "description_as_running_mate": "",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 304,
+        "fields": {
+            "first_name": "Lawrence",
+            "last_name": "Wong",
+            "election": 21,
+            "party": "People's Action Party",
+            "state": "Marsiling-Yew Tee",
+            "priority": 5,
+            "description": "'",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/aftBfT23iVucvcGE/lw_code1.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p><b>Lawrence Wong Shyun Tsai</b> is certainly a surprising Prime Minister. First elected to parliament in 2011 after years as a civil servant, Wong quickly entered the cabinet by 2012 and took over various ministerial portfolios such as National Development, Education, and Finance. While Heng Swee Keat was initially lined up to be the successor to Prime Minister Lee Hsien Loong, Wong took this role from him in 2022 before taking over in 2024 as party leader and Prime Minister.</p><p>Freshly taking the office, Wong must now choose what path to chart for the PAP, and Singapore at-large. Will Wong move Singapore into a new direction and change course? Or will Wong maintain the same PAP positions that have existed for decades? Either way, this election is crucial to show the population’s confidence in Lawrence Wong.</p>",            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 305,
+        "fields": {
+            "first_name": "Chee",
+            "last_name": "Soon Juan",
+            "election": 21,
+            "party": "Singapore Democratic Party",
+            "state": "Sembawang West",
+            "priority": 5,
+            "description": "'",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/aftBfT23iVucvcGE/csjmainscreen.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p><b>Chee Soon Juan</b> is a longtime opposition politician and perennial candidate. In 1993, he joined the other two SDP MPs, Ling How Doong and Cheo Chai Chen, in ousting party leader Chiam See Tong (who then formed his own SPP party). Since then, Chee has ruled the SDP, which has often been criticized as a cult-of-personality around him. In 1997 and 2001, Chee lost elections by large margins, before his bankruptcy following defamation lawsuits disqualified him from the 2006 and 2011 elections. In 2015, Chee made his political return, but age is catching up and 2025 may be his last chance.</p><p>Chee is incredibly controversial especially for his actions earlier in his career, such as using a megaphone to shout at PAP leader and Prime Minister Goh Chok Tong in 2001, and repeated cases of defamation against PAP leaders. Will Chee be able to change voters’ minds about him? Or will voters still treat him like the 2000s Chee?</p>",            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 306,
+        "fields": {
+            "first_name": "Leong",
+            "last_name": "Mun Wai",
+            "election": 21,
+            "party": "Progress Singapore Party",
+            "state": "West Coast-Jurong West",
+            "priority": 5,
+            "description": "'",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/aftBfT23iVucvcGE/lmwmainscreen.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p><b>Leong Mun Wai</b> is a business executive who first entered politics in the 2020 election. Leong has had a lot of experience in investment banks since the 1980s and has taken senior positions in similar companies. In 2020, Leong joined the team of Tan Cheng Bock and Hazel Poa, as well as two other candidates, to contest in West Coast. The PSP team received 49% of the vote and failed to enter, but Leong and Poa were elected as non-constituency MPs. Leong is a very fiery speaker, criticizing, among other things, Singapore’s immigration policy, housing costs and the secrecy of Singapore’s reserves.</p><p>Leong is a divisive figure in some parts of Singaporean society, especially with his strongly anti-immigration and anti-CECA stance. Can Leong bring his PSP team and pull a win in West Coast-Jurong West off? Or will the PSP be relegated to the annals of Singaporean history under his leadership?</p>",            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 309,
+        "fields": {
+            "first_name": "Pritam",
+            "last_name": "Singh",
+            "election": 21,
+            "party": "Workers Party",
+            "state": "Aljunied",
+            "priority": 10,
+            "description": "'",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://file.garden/aftBfT23iVucvcGE/pritamfirstimg.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p><b>Pritam Singh</b> is the first official Leader of the Opposition in Singapore, beating the odds in 2011 and joining a team that defeated the PAP in the first GRC victory for the opposition in history. Since then, he has become an increasingly influential figure in Singapore politics, succeeding Low Thia Khiang as party leader in 2018. Under his leadership, the WP captured a second GRC in 2020 and grew to 10 elected MPs. In 2024, Singh was charged with two counts of lying under oath to a parliamentary committee, which complicates his path going forward.</p><p>Pritam is personally relatively popular due to his generally respectful yet committed personality. Singh must now decide how to move the Workers’ Party. Will Singh move the party towards a more liberal, youth-oriented politics? Or will he maintain the current broad political coalition that keeps the party relatively popular?</p>",            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 304213,
+        "fields": {
+            "first_name": "Bitcoin",
+            "last_name": "Movement",
+            "election": 21,
+            "party": "Independent",
+            "state": "Mountbatten",
+            "priority": 5,
+            "description": "'",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://file.garden/aftBfT23iVucvcGE/bitcoingrass.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "Jeremy Tan’s campaign is largely fueled by his views on cryptocurrency, specifically Bitcoin, and there is general support for him among the small percentage of “crypto bros” in Singapore. How important of a role Bitcoin plays in Mountbatten will be seen in the election.",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50000,
+        "fields": {
+            "first_name": "The",
+            "last_name": "SPP",
+            "election": 21,
+            "party": "Singapore People's Party",
+            "state": "The Opposition",
+            "priority": 8,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#96C083",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50001,
+        "fields": {
+            "first_name": "The",
+            "last_name": "NSP",
+            "election": 21,
+            "party": "National Solidarity Party",
+            "state": "The Opposition",
+            "priority": 13,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#F58340",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50002,
+        "fields": {
+            "first_name": "The",
+            "last_name": "SUP",
+            "election": 21,
+            "party": "Singapore United Party",
+            "state": "The Opposition",
+            "priority": 9,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#A57A42",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50003,
+        "fields": {
+            "first_name": "",
+            "last_name": "RDU",
+            "election": 21,
+            "party": "Red Dot United",
+            "state": "The Opposition",
+            "priority": 5,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#CC5D3A",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50004,
+        "fields": {
+            "first_name": "The",
+            "last_name": "PPP",
+            "election": 21,
+            "party": "People's Power Party",
+            "state": "The Opposition",
+            "priority": 10,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#74C1C8",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50005,
+        "fields": {
+            "first_name": "The",
+            "last_name": "SDA",
+            "election": 21,
+            "party": "Singapore Democratic Alliance",
+            "state": "The Opposition",
+            "priority": 7,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#98A3AD",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50006,
+        "fields": {
+            "first_name": "The",
+            "last_name": "PAR",
+            "election": 21,
+            "party": "People's Alliance for Reform",
+            "state": "The Opposition",
+            "priority": 6,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#96AAF2",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50007,
+        "fields": {
+            "first_name": "Jeremy",
+            "last_name": "Tan",
+            "election": 21,
+            "party": "Independent",
+            "state": "The Opposition",
+            "priority": 11,
+            "description": "<span id=\"screen11\"><p>Jeremy Tan is an independent candidate considering running in Mountbatten. A successful entrepreneur, Tan made money off both Bitcoin and selling Paula’s Choice to Unilever in 2021. Tan claims to be “retired” at the age of 34 and wants to integrate Bitcoin into government policy, while tailoring a message that can work in the affluent constituency of Mountbatten. Whether Tan decides to run as an independent, will be up to him to decide.</p><br><br><button onclick=\"next8()\">Election Strategy Briefing</button><br></span><span id=\"screen12\" style=\"display: none;\"><p><p>Should Jeremy Tan run as an independent candidate in Mountbatten, the odds will be stacked against him. The PAP has historically won with large margins in Mountbatten and it is practically a safe seat. However, as an independent, Tan will have the opportunity to fit policies that are as popular in Mountbatten as possible. Furthermore, longtime PAP MP in Mountbatten Lim Biow Chuan is retiring, and his likely replacement, Gho Sze Kee, seems subpar at best. This is the best chance for an independent to win in over 50 years - Tan just needs to tread carefully, and a win may be on the cards.</p><br><button onclick=\"back3()()\">Back</button></p></span>",
+            "color_hex": "#5D6364",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://file.garden/aftBfT23iVucvcGE/jtanmain.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50008,
+        "fields": {
+            "first_name": "Darryl",
+            "last_name": "Lo",
+            "election": 21,
+            "party": "Independent",
+            "state": "The Opposition",
+            "priority": 12,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#383838",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://www.jetsimon.com/public/candidateexample.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    }
+];
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 200,
+        "fields": {
+            "candidate": 300,
+            "running_mate": 304
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 136154,
+        "fields": {
+            "candidate": 301,
+            "running_mate": 309
+        }
+    },
+        {
+        "model": "campaign_trail.running_mate",
+        "pk": 201,
+        "fields": {
+            "candidate": 302,
+            "running_mate": 305
+        }
+    },
+        {
+        "model": "campaign_trail.running_mate",
+        "pk": 202,
+        "fields": {
+            "candidate": 303,
+            "running_mate": 306
+        }
+    },
+        {
+        "model": "campaign_trail.running_mate",
+        "pk": 203,
+        "fields": {
+            "candidate": 50007,
+            "running_mate": 304213
+        }
+    },
+];
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 21,
+        "candidates": [
+            300,
+            301,
+            302,
+            303,
+            50000,
+            50001,
+            50002,
+            50003,
+            50004,
+            50005,
+            50006,
+            50007,
+            50008
+        ]
+    }
+];
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 21,
+        "candidates": [
+            300,
+            301,
+            302,
+            303,
+            50000,
+            50001,
+            50002,
+            50003,
+            50004,
+            50005,
+            50006,
+            50007,
+            50008
+        ]
+    }
+];
+
+jet_data = {
+    "headerColor": "#700016",
+    "windowColor": "#ffffff",
+    "containerColor": "#ff8080",
+    "innerWindowColor": "#fee9ee",
+    "bannerImageUrl": "https://file.garden/aftBfT23iVucvcGE/4lang.png",
+    "backgroundImageUrl": "https://file.garden/aftBfT23iVucvcGE/merli.png",
+    "gameTitle": "THE SINGAPORE TRAIL",
+    "customQuote": "\"Whoever governs Singapore must have that iron in him\" ",
+    "endingTextColor": "#000000"
+};
+
+//#startcode
+
+// Pretty much a banner system. This one was used on
+// 2016 ALOT and reused here.
+(function () {
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow) return;
+
+  // configuration object
+  const CONFIG = {
+    bannerHeight: 60,
+    fadeTransition: 250,
+    preloadCount: 4,
+    enablePreloading: true,
+    enableLocalStorage: true,
+    hoverEffect: true,
+    clickCooldown: 150,
+    maxCacheSize: 20,
+    useRequestIdleCallback: true,
+    maxRetries: 2,
+    failedBannerTimeout: 5 * 60 * 1000
+  };
+
+  if (!document.getElementById('banner-system-styles')) {
+    const style = document.createElement('style');
+    style.id = 'banner-system-styles';
+    style.textContent = `
+            #bottomBar {
+                height: ${CONFIG.bannerHeight}px;
+                font-size: 12px;
+                background-color: transparent;
+                margin: 1em auto;
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
+                user-select: none;
+                border-radius: 3px;
+                width: 100%;
+                max-width: 800px;
+            }
+            #bottomBar:hover {
+                transform: scale(1.02);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            #bottomBar img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+                transition: opacity ${CONFIG.fadeTransition}ms ease-in-out;
+                pointer-events: none;
+            }
+            #bannerIndicator {
+                position: absolute;
+                top: 2px; right: 4px;
+                width: 16px; height: 16px;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 50%;
+                display: flex;
+                align-items: center; justify-content: center;
+                font-size: 10px; font-weight: bold;
+                color: #333;
+                opacity: 0;
+                transition: opacity 200ms ease-in-out, transform 150ms ease-in-out;
+                pointer-events: none;
+                z-index: 10;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            }
+            #bottomBar:hover #bannerIndicator {
+                opacity: 1;
+            }
+            .indicator-pop {
+                transform: scale(1.2);
+            }
+        `;
+    document.head.appendChild(style);
+  }
+
+  // banner list
+  const banners = [{
+    url: "https://file.garden/aftBfT23iVucvcGE/avssavasv.png",
+    alt: "uma banner",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/lazada.png",
+    alt: "lazada banner",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/shopee2.png",
+    alt: "go shopee banner",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/MCMOVIELEFT.png",
+    alt: "mc movie banner",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/lsrfmad.png",
+    alt: "mc movie banner",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/gaga.png",
+    alt: "gaga banner",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/thunderbolts.png",
+    alt: "thunderbolts banner",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/mcdmeal.png",
+    alt: "macs",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/f1.png",
+    alt: "f1",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/2.png",
+    alt: "lim tean",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/Joke%20Advert.png",
+    alt: "ppp",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/RDU%20Advert.png",
+    alt: "rdu",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/INDP%20Advert.png",
+    alt: "independent",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/SDP%20Advert.png",
+    alt: "sdp",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/WP%20Advert.png",
+    alt: "wp",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/PAP%20Advert.png",
+    alt: "pap",
+    weight: 1
+  },
+  {
+    url: "https://file.garden/aftBfT23iVucvcGE/PSP%20Advert.png",
+    alt: "psp",
+    weight: 1
+  },
+ 
+  ];
+
+  // caching system
+  class BannerCache {
+    constructor() {
+      this.imageCache = new Map();
+      this.failedUrls = new Map();
+      this.storageKey = 'vintageBannerCache_v2';
+      this.maxCacheAge = 7 * 24 * 60 * 60 * 1000;
+
+      if (CONFIG.enableLocalStorage) {
+        this.loadFromStorage();
+      }
+    }
+	
+	saveToStorage() {
+	  if (this._saveTimer) clearTimeout(this._saveTimer);
+	  this._saveTimer = setTimeout(() => {
+		try {
+		  const cacheData = {
+			timestamp: Date.now(),
+			failed: Array.from(this.failedUrls.entries())
+		  };
+		  localStorage.setItem(this.storageKey, JSON.stringify(cacheData));
+		} catch (e) {
+          console.warn('Banner cache save failed:', e);
+		}
+	  }, 1000);
+	}
+
+    loadFromStorage() {
+      try {
+        const cached = localStorage.getItem(this.storageKey);
+        if (!cached) return;
+
+        const data = JSON.parse(cached);
+        const age = Date.now() - data.timestamp;
+
+        if (age < this.maxCacheAge) {
+          if (data.failed) {
+            this.failedUrls = new Map(data.failed);
+          }
+        } else {
+          localStorage.removeItem(this.storageKey);
+        }
+      } catch (e) {
+        console.warn('Banner cache load failed:', e);
+      }
+    }
+
+    isRecentlyFailed(url) {
+      if (!this.failedUrls.has(url)) return false;
+
+      const failedTime = this.failedUrls.get(url);
+      const timeSinceFailed = Date.now() - failedTime;
+
+      // allow retry after timeout
+      if (timeSinceFailed > CONFIG.failedBannerTimeout) {
+        this.failedUrls.delete(url);
+        return false;
+      }
+
+      return true;
+    }
+
+    markAsFailed(url) {
+      this.failedUrls.set(url, Date.now());
+      this.imageCache.delete(url);
+      this.saveToStorage();
+    }
+
+    isCachedImageValid(img) {
+      return img &&
+        img.complete &&
+        img.naturalHeight !== 0 &&
+        img.naturalWidth !== 0;
+    }
+
+    preloadImage(url) {
+      if (this.isRecentlyFailed(url)) {
+        return Promise.reject(new Error(`Recently failed: ${url}`));
+      }
+
+      if (this.imageCache.has(url)) {
+        const cachedImg = this.imageCache.get(url);
+        if (this.isCachedImageValid(cachedImg)) {
+          return Promise.resolve(cachedImg);
+        } else {
+          this.imageCache.delete(url);
+        }
+      }
+
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        let timeoutId;
+
+        const cleanup = () => {
+          clearTimeout(timeoutId);
+          img.onload = img.onerror = null;
+        };
+
+        timeoutId = setTimeout(() => {
+          cleanup();
+          this.markAsFailed(url);
+          reject(new Error(`Timeout: ${url}`));
+        }, 8000);
+
+        img.onload = () => {
+          cleanup();
+          if (this.isCachedImageValid(img)) {
+            this.addToCache(url, img);
+            resolve(img);
+          } else {
+            this.markAsFailed(url);
+            reject(new Error(`Invalid image: ${url}`));
+          }
+        };
+
+        img.onerror = () => {
+          cleanup();
+          this.markAsFailed(url);
+          reject(new Error(`Failed: ${url}`));
+        };
+
+        img.fetchPriority = "low";
+        img.src = url;
+      });
+    }
+
+    addToCache(url, img) {
+      if (!this.isCachedImageValid(img)) return;
+
+      if (this.imageCache.has(url)) this.imageCache.delete(url); // refresh order
+      this.imageCache.set(url, img);
+
+      while (this.imageCache.size > CONFIG.maxCacheSize) {
+        const lruUrl = this.imageCache.keys().next().value;
+        this.imageCache.delete(lruUrl);
+      }
+
+      this.saveToStorage();
+    }
+
+    preloadBatch(urls) {
+      if (!CONFIG.enablePreloading) return Promise.resolve();
+
+      if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
+        return new Promise(resolve => {
+          window.requestIdleCallback(() => {
+            const promises = urls.map(url =>
+              this.preloadImage(url).catch(() => null)
+            );
+            Promise.allSettled(promises).then(resolve);
+          }, { timeout: 2000 });
+        });
+      } else {
+        const promises = urls.map(url =>
+          this.preloadImage(url).catch(() => null)
+        );
+        return Promise.allSettled(promises);
+      }
+    }
+
+    getCachedImage(url) {
+      const img = this.imageCache.get(url);
+      if (!this.isCachedImageValid(img)) {
+        this.imageCache.delete(url);
+        return null;
+      }
+      // refresh order
+      this.imageCache.delete(url);
+      this.imageCache.set(url, img);
+      return img;
+    }
+
+    getAvailableBanners(bannerList) {
+      return bannerList.filter(banner => !this.isRecentlyFailed(banner.url));
+    }
+  }
+
+  // weighted random selection
+  const bannerSelector = (() => {
+    let weightSum = null;
+
+    const getTotalWeight = () => {
+      if (weightSum === null) {
+        weightSum = banners.reduce((sum, banner) => sum + banner.weight, 0);
+      }
+      return weightSum;
+    };
+
+    return {
+      // accept cache to filter failed banners
+      getRandomBanner(excludeRecent = [], cache = null) {
+        let availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+
+        // filter out failed banners
+        if (cache) {
+          availableBanners = availableBanners.filter(b => !cache.isRecentlyFailed(b.url));
+        }
+
+        if (availableBanners.length === 0) {
+          // if all banners failed or recent, try any banner not in exclude list
+          availableBanners = banners.filter(b => !excludeRecent.includes(b.url));
+
+          if (availableBanners.length === 0) {
+            // last resort: return any banner
+            return banners[0];
+          }
+        }
+
+        const totalWeight = availableBanners.reduce((sum, banner) => sum + banner.weight, 0);
+        let random = Math.random() * totalWeight;
+
+        for (const banner of availableBanners) {
+          random -= banner.weight;
+          if (random <= 0) return banner;
+        }
+
+        return availableBanners[0];
+      },
+
+      initializeSelectionTable() {
+        getTotalWeight();
+      }
+    };
+  })();
+
+  // banner system
+  class ClickableBannerSystem {
+    constructor() {
+      this.createElements();
+
+      this.cache = new BannerCache();
+      this.currentBanner = null;
+      this.recentBanners = [];
+      this.isTransitioning = false;
+      this.lastClickTime = 0;
+      this.rafId = null;
+      this.retryCount = 0;
+
+      this.init();
+    }
+
+    init() {
+      this.setupEventListeners();
+      bannerSelector.initializeSelectionTable();
+
+      Promise.resolve()
+        .then(() => this.preloadInitialBanners())
+        .then(() => this.displayRandomBanner())
+        .catch(() => {
+          this.displayRandomBanner();
+        });
+
+      window.addEventListener('beforeunload', () => {
+        this.destroy();
+      });
+    }
+
+    createElements() {
+      this.container = document.createElement("div");
+      this.container.id = "bottomBar";
+      this.container.setAttribute('tabindex', '0');
+      this.container.setAttribute('role', 'button');
+      this.container.setAttribute('aria-label', 'Click to change banner');
+
+      this.imageElement = document.createElement("img");
+      this.clickIndicator = document.createElement("div");
+      this.clickIndicator.id = "bannerIndicator";
+      this.clickIndicator.textContent = "↻";
+
+      const frag = document.createDocumentFragment();
+      frag.appendChild(this.imageElement);
+      frag.appendChild(this.clickIndicator);
+      this.container.appendChild(frag);
+
+      gameWindow.insertAdjacentElement("afterend", this.container);
+
+      this.imageElement.onerror = () => {
+        console.warn('Banner display failed:', this.imageElement.src);
+        if (this.currentBanner) this.cache.markAsFailed(this.currentBanner.url);
+        // try to load another banner
+        if (this.retryCount < CONFIG.maxRetries) {
+          this.retryCount++;
+          setTimeout(() => this.displayRandomBanner(), 100);
+        }
+      };
+      this.imageElement.onload = () => { this.retryCount = 0; }; // reset retry count on successful load
+    }
+
+    setupEventListeners() {
+      this.container.onclick = (e) => {
+        e.preventDefault();
+        const now = Date.now();
+        if (now - this.lastClickTime < CONFIG.clickCooldown || this.isTransitioning) {
+          return;
+        }
+        this.lastClickTime = now;
+        this.retryCount = 0;
+        this.nextBanner();
+      };
+
+      this.container.onkeydown = (e) => {
+        if (e.code === 'Space' || e.code === 'Enter') {
+          e.preventDefault();
+          this.retryCount = 0;
+          this.nextBanner();
+        }
+      };
+    }
+
+    async preloadInitialBanners() {
+      // only preload non-failed banners
+      const sortedBanners = [...banners]
+        .filter(b => !this.cache.isRecentlyFailed(b.url))
+        .sort((a, b) => b.weight - a.weight)
+        .slice(0, CONFIG.preloadCount);
+
+      const urlsToPreload = sortedBanners.map(b => b.url);
+      return this.cache.preloadBatch(urlsToPreload);
+    }
+
+    async displayBanner(banner, useTransition = false) {
+      if (this.isTransitioning) return;
+
+      const cachedImg = this.cache.getCachedImage(banner.url);
+
+      if (useTransition && CONFIG.fadeTransition > 0) {
+        this.isTransitioning = true;
+        this.imageElement.style.opacity = '0';
+
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            if (cachedImg) {
+              this.imageElement.src = cachedImg.src;
+            } else {
+              this.imageElement.src = banner.url;
+            }
+            this.imageElement.alt = banner.alt;
+
+            this.imageElement.style.opacity = '1';
+            this.isTransitioning = false;
+          });
+        }, CONFIG.fadeTransition / 2);
+      } else {
+        requestAnimationFrame(() => {
+          if (cachedImg) {
+            this.imageElement.src = cachedImg.src;
+          } else {
+            this.imageElement.src = banner.url;
+          }
+          this.imageElement.alt = banner.alt;
+        });
+      }
+
+      this.currentBanner = banner;
+      this.recentBanners.push(banner.url);
+      if (this.recentBanners.length > 3) {
+        this.recentBanners.shift();
+      }
+
+      // preload if not cached
+      if (!cachedImg) {
+        this.cache.preloadImage(banner.url).catch((err) => {
+          console.warn('Preload failed:', err.message);
+        });
+      }
+
+      // opportunistically preload next banners
+      if (CONFIG.useRequestIdleCallback && window.requestIdleCallback) {
+        window.requestIdleCallback(() => {
+          const nextBanners = banners
+            .filter(b =>
+              !this.recentBanners.includes(b.url) &&
+              !this.cache.imageCache.has(b.url) &&
+              !this.cache.isRecentlyFailed(b.url)
+            )
+            .sort((a, b) => b.weight - a.weight)
+            .slice(0, 2);
+
+          this.cache.preloadBatch(nextBanners.map(b => b.url));
+        }, { timeout: 5000 });
+      }
+    }
+
+    displayRandomBanner() {
+      const banner = bannerSelector.getRandomBanner(this.recentBanners, this.cache);
+      this.displayBanner(banner, this.currentBanner !== null);
+    }
+
+    nextBanner() {
+      this.displayRandomBanner();
+
+      requestAnimationFrame(() => {
+        this.clickIndicator.classList.add('indicator-pop');
+
+        setTimeout(() => {
+          this.clickIndicator.classList.remove('indicator-pop');
+        }, 150);
+      });
+    }
+
+    destroy() {
+      cancelAnimationFrame(this.rafId);
+
+      if (this.container) {
+        this.container.onclick = null;
+        this.container.onmouseenter = null;
+        this.container.onmouseleave = null;
+        this.container.onkeydown = null;
+
+        if (this.container.parentNode) {
+          this.container.parentNode.removeChild(this.container);
+        }
+      }
+
+      if (this.imageElement) {
+        this.imageElement.onload = null;
+        this.imageElement.onerror = null;
+      }
+
+      this.container = null;
+      this.imageElement = null;
+      this.clickIndicator = null;
+    }
+  }
+
+  const bannerSystem = new ClickableBannerSystem();
+
+  window.vintageBannerSystem = {
+    next: () => bannerSystem.nextBanner(),
+    current: () => bannerSystem.currentBanner?.alt || 'Loading...',
+    clearFailedCache: () => {
+      bannerSystem.cache.failedUrls.clear();
+      bannerSystem.cache.saveToStorage();
+      console.log('Failed banner cache cleared');
+    },
+    getFailedBanners: () => Array.from(bannerSystem.cache.failedUrls.keys())
+  };
+})();
+
+function applyTheme(theme) {
+    const gameHeader = document.querySelector(".game_header");
+    if (gameHeader && theme.coloring_title) {
+        gameHeader.style.backgroundColor = theme.coloring_title;
+    }
+
+    const gameWindow = document.getElementById("game_window");
+    if (gameWindow && theme.coloring_window) {
+        gameWindow.style.backgroundColor = theme.coloring_window;
+    }
+
+    const container = document.querySelector(".container");
+    if (container && theme.coloring_container) {
+        container.style.backgroundColor = theme.coloring_container;
+    }
+
+    const headerImg = document.getElementById("header");
+    if (headerImg && theme.header_image) {
+        headerImg.src = theme.header_image;
+    }
+
+    if (theme.body_background) {
+        document.body.style.backgroundImage = `url("${theme.body_background}")`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundAttachment = "fixed";
+    }
+
+    const style = document.createElement("style");
+    style.textContent = `
+      #results_container { color: #000000; }
+      .inner_window_w_desc { background-color: #fee9ee !important; }
+    `;
+    document.head.appendChild(style);
+}
+
+corrr = 
+quotes = [`"Whoever governs Singapore must have that iron in him!" - Lee Kuan Yew (PAP)`, `"If you are a troublemaker…it’s our job to politically destroy you." - Lee Kuan Yew (PAP)`, `"It warms the cockles of my heart." - Jamus Lim (WP)`, `"Is this the future we want, ownself check ownself?" - Pritam Singh (WP)`, `"Don't give the opposition a free pass either!" - Lawrence Wong (PAP)`, `"Can I says that if the police, do not have 24 hours service," - William Lim (PPP)`, `"I'm a straightforward guy. I'm straight! I'm straight!" - Goh Meng Seng (PPP)`, `"Full time pay, part time job!" - Jeremy Tan`, `"Repeat three times! Housing! Housing! Housing!" - Han Hui Hui (PAR)`, `"It will be the victory of the rakyat!" - Ariffin Sha (SDP)`, `"This is your family, your future, our Singapore." - Lawrence Wong (PAP)`]
+customquote = quotes[Math.floor((Math.random() * quotes.length))]
+
+corrr="\n<h2>THE SINGAPORE TRAIL</h2><font id='wittyquote' size='4' color='white'><em>" + customquote + "</em></font>"
+
+function modifyForm() {
+  try {
+    const form = document.querySelector('form[name="game_type_selection"]');
+    const select = form.querySelector('select[name="game_type_id"]');
+  
+    // change option value
+    const option = select.querySelector('option[value="1"]');
+    option.textContent = 'Default (FPTP + PBV)';
+
+    // Remove second option
+    select.querySelector('option[value="2"]').remove();
+  
+    // change h3 text
+    const h3 = form.querySelector('h3');
+    h3.textContent = 'How would you like the seats to be allocated?';
+  } catch {}
+}
+window.setInterval(modifyForm,200)
+function changeOpponentSelectionDescription() {
+  try {
+    const opponentSelectionDescription = document.getElementById("opponent_selection_description_window");
+    opponentSelectionDescription.innerHTML = `<p><strong>Use the default method of allocating seats in the Singaporean Parliament.</strong></p><p>In Singapore, there are two types of first-past-the-post seats. The first is SMCs (Single Member Constituencies), which are functionally the same as Westminster constituencies. The second is GRCs (Group Member Constituencies), which are multi-member constituencies of 4-5 seats with winner-takes-all, also known as party block voting. Constituencies are either SMCs or GRCs, i.e. no voter will be voting in two constituencies. Constituencies are also redrawn every election cycle.</p>`;
+  } catch {}
+}
+window.setInterval(changeOpponentSelectionDescription,200)
+
+const theme = nct_stuff.themes[nct_stuff.selectedTheme];
+ $("#game_window")[0].style.backgroundImage = "url(https://cdn.discordapp.com/attachments/1506227478463774901/1535953663133220935/image.png?ex=6a79a3d1&is=6a785251&hm=a1a5921401db2ba980a23d60c117029bfc5c41a04d2698ccf79587aa8e7c9c97&animated=true)"
+// define / override theme values
+theme.coloring_title     = "#700016";
+theme.coloring_window    = "#ffffff";
+theme.coloring_container = "#ff8080";
+theme.body_background = "https://file.garden/aftBfT23iVucvcGE/merli.png";
+const headerImages = [
+  "https://i.imgur.com/Il8cbJe.png",
+  "https://i.imgur.com/e1PZxBU.png",
+  "https://i.imgur.com/Z3HH8gN.png",
+  "https://i.imgur.com/d30V5c2.png"
+];
+
+let queue = JSON.parse(sessionStorage.getItem("imgQueue") || "[]");
+
+if (queue.length === 0) {
+  queue = [...headerImages].sort(() => Math.random() - 0.5);
+}
+
+theme.header_image = queue.pop();
+sessionStorage.setItem("imgQueue", JSON.stringify(queue));
+applyTheme(theme);
+
+e=campaignTrail_temp
+
+var changeGameDisp = (hide) => {
+  disp = "";
+  if (hide) {
+    disp = "none";
+  }
+  document.getElementsByClassName("inner_window_w_desc")[0].style.display = disp
+};
+
+e.creditsPage = () => {
+  credits_html = `
+    <h3>Coding and Co-Creator</h3>
+    <p><img src="https://i.imgur.com/UDRmsvT.png" alt="Icon" style="width:40px; vertical-align:middle; margin-right:5px;"><font color='#800080'>CoconutHats<img src="https://i.imgur.com/UDRmsvT.png" alt="Icon" style="width:40px; vertical-align:middle; margin-right:5px;"></font></p>
+    <h3>Head Writer and Co-Creator</h3>
+    <p><font color='#0044ff'>aidanpolitics</font></p>
+    <h3>Team</h3>
+    <p><font color='#afbbff'>skartchian</font></p>
+    <p><font color='#ec1414'>hychael2020 </font></p>
+    <p><font color='#14ec43'>joshausolvesbadly</font></p>   
+    <p><font color='#ecdd14'>PolskaSingapur </font></p>   
+    
+
+
+
+    <h3>Code Credits</h3>
+    <p><font color='#b665bc'>Map By UnpledgedElector</font></p>
+    <p><font color='#264294'>Music Player from 2028 AOC</font></p>
+    <p><font color='#FF0000'>Credits Code by DecstarG</font></p>
+    <p><font color='#f5a700'>Scrollbar from Thomahawk2k</font></p>
+    <p><font color='#5d9934'>SM's fork of Jet's Code Maker and Resources</font></p>
+    <p><font color='#FDB913'>Election Briefing </font><font color='#006A44'>from </font><font color='#C1272D'>2024 Lithuania</font></p>
+    <p><font color='#26c7f8'>Map Hover and Other Code From 2025NJ</font></p>
+    <p><font color='#00c220'>Variety of code from LBM and StrawberryMaster's resources and help in general</font></p>
+   
+
+    <h1><font color='gold'>Final Note</font></h1>
+    <div style='width: 70%;text-overflow: ellipsis;text-align:center;display: block;margin-left: auto;margin-right: auto;'>
+    <p>Thank you for playing this mod.</p>
+    <p>Singaporean politics aren't the most competitive. However, this was a project made with a lot of work from our Singaporean team and we hope you enjoy it, as well as learn something new about our country and our politics.</p>
+    <p>A nation is great not by its size alone. It is the will, the cohesion, the stamina, the discipline of its people and the quality of their leaders. - Lee Kuan Yew</p>
+    
+    </div>
+  `
+  changeGameDisp(true);
+  var spacer = document.createElement("amongusspacerthisisntarealelement");
+  spacer.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  document
+    .getElementsByClassName("inner_window_w_desc")[0]
+    .children[1].appendChild(spacer);
+    changeGameDisp(true);
+    var menuHeader = document.createElement("div");
+    menuHeader.classList.add("inner_window_front");
+    menuHeader.innerHTML = `<h1 style='font-family: "Tahoma";'><font color='#0496f7'>Credits</font></h1>`;
+    menuHeader.id = "SOTUheader";
+    menuHeader.style = "height: 50px;background-color:#2d2d2d";
+    var newMenu = document.createElement("div");
+    newMenu.classList.add("inner_window_front");
+    newMenu.id = "SOTUmenu";
+    newMenu.style = `height:260px;background-color:#2d2d2d;color:white;overflow-y: scroll;`;
+
+    newMenu.innerHTML = credits_html;
+    let z = document.getElementById("game_window");
+    var backButton = document.createElement("button");
+    backButton.style =
+      "position: relative; bottom: -13px; left: -380px; width: 150px; height: 80px;font-size:40px;padding-top:5px;padding-left:8px";
+    backButton.id = "backSOTUBtn";
+    backButton.innerHTML = `<b>BACK</b>`;
+    backButton.onclick = function () {
+      document.getElementById("SOTUheader").remove();
+      document.getElementById("SOTUmenu").remove();
+      document.getElementById("backSOTUBtn").remove();
+      changeGameDisp(false);
+    };
+    z.appendChild(menuHeader);
+    z.appendChild(newMenu);
+    z.appendChild(backButton);
+
+}
+
+e.credits = "<button onclick='e.creditsPage()'>Sinkies</button>"
+
+
+
+function addDynamicCSS() {
+    var css = `
+        .inner_window_question h3 .mytooltip{
+            background-color: lightskyblue;
+        }
+
+        .mytooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background-color: lightblue;
+        }
+
+
+        .mytooltip .mytooltiptext {
+            width: 240px;
+            background-color: #444343;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 99;
+            bottom: 20%;
+            left: 20%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid black;
+            pointer-events: none;
+            font-size: 13px !important;
+            line-height: 1.5em !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+        }
+
+        .mytooltip .mytooltiptext img {
+            max-width: 240px;
+            height: auto;
+        }
+
+        .mytooltip:hover .mytooltiptext {
+            opacity: 1;
+            transition-delay: 0.5s;
+        }
+    `;
+
+    var styleElem = document.createElement('style');
+    styleElem.type = 'text/css';
+    
+    styleElem.appendChild(document.createTextNode(css));
+    
+    document.head.appendChild(styleElem);
+}
+
+campaignTrail_temp.modBoxTheme = {
+     "header_color": "#fe1616",
+     "header_text_color": "#ffffff",
+     "description_text_color": "#000000",
+     "description_background_color": "#fe6767",
+     "main_color": "#ffa8a8",
+     "secondary_color": "#ffffff",
+     "ui_text_color": "#000000"
+}
+
+addDynamicCSS();
+
+
+tooltipList = [
+    {searchString: "Lee Kuan Yew", explanationText: "<img src=https://media.theindependent.sg/wp-content/uploads/2014/02/LKY.jpg> The Founder. Prime Minister of Singapore from 1959 to 1990."},
+    {searchString: "Goh Chok Tong", explanationText: "<img src=https://static1.straitstimes.com.sg/s3fs-public/articles/2020/12/18/af_esm_181220.jpg?VersionId=_2psEIquYv8j6C8FmMsQHeC5bW.xQmDM> 2nd Prime Minister of Singapore from 1990 to 2004."},
+	{searchString: "Lee Hsien Loong", explanationText: "<img src=https://dam.mediacorp.sg/image/upload/s--EFPIs_2x--/c_fill,g_auto,h_676,w_1200/f_auto,q_auto/v1/mediacorp/tdy/image/2023/11/05/20231105_llt_pap_convention_pm_lee_1.jpg?itok=hBFlpk_3> 3rd Prime Minister of Singapore from 2004 to 2024."},
+    {searchString: "4G leadership", explanationText: "<img src=https://static.mothership.sg/1/2019/04/4G.jpg> 4th Generation Leadership. Lawrence Wong's first Cabinet and team."},
+    {searchString: "National Day Rally", explanationText: "<img src=https://dam.mediacorp.sg/image/upload/s--wPRskVqR--/c_crop,h_900,w_1600,x_0,y_80/c_fill,g_auto,h_468,w_830/fl_relative,g_south_east,l_mediacorp:cna:watermark:2021-08:cna,w_0.1/f_auto,q_auto/v1/mediacorp/cna/image/2024/08/18/WAL_8251_0.JPG?itok=5h_ZhRM9> An annual speech in August right after Singapore’s National Day. Used by Prime Ministers to promote new policies or a new direction for the coming year."},
+    {searchString: "CDC vouchers", explanationText: "<img src=https://files.ask.gov.sg/pa-cdc-decal.png> A government initiative which provides vouchers to all Singaporean households which can be used to help with daily expenses and increases traffic in local small businesses. Generally popular."},
+    {searchString: "Gifted Education Programme", explanationText: "<img src=https://static.mothership.sg/1/2024/08/GEP-explained.png> A programme run by the Ministry of Education for the top 1% of students in the country. Derided by some opposition politicians as an elitist scheme."},
+    {searchString: "CECA", explanationText: "<img src=https://static1.straitstimes.com.sg/s3fs-public/articles/2018/09/01/colin-ceca2-1.jpg?VersionId=7MaExtrVRRn5UDkq_OevzJiABGI0Nils> A free trade agreement between Singapore and India, first signed in 2005. Very controversial as it allows Indian workers to freely move into many sectors of the Singaporean economy."},
+    {searchString: "S. Iswaran", explanationText: "<img src=https://dam.mediacorp.sg/image/upload/s--8YwAuHzc--/c_crop,h_900,w_1600,x_0,y_166/c_fill,g_auto,h_468,w_830/fl_relative,g_south_east,l_mediacorp:cna:watermark:2021-08:cna,w_0.1/f_auto,q_auto/v1/mediacorp/cna/image/2024/02/08/iswaran%20court%20apply%20son%20university.jpg?itok=baEltjpH> Former Minister of Transport. Took illegal gifts while in public service, and now in prison."},
+    {searchString: "NMP", explanationText: "Nominated Members of Parliament. Every 2.5 years or so, a number of notable individuals in Singapore can apply to be appointed as non-partisan Nominated Members of Parliament. They typically are from some industry or have particular expertise in a subject, akin to the House of Lords."},
+    {searchString: "Raj Joshua Thomas", explanationText: "<img src=https://cdn.theonlinecitizen.com/uploads/2025/04/17124117/Raj-Thomas.jpg> Nominated Member of Parliament and lawyer. Appointed as an NMP in 2021."},
+    {searchString: "Syed Harun Alhabsyi", explanationText: "<img src=https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format=%27jpg%27&Quality=85&ImageId=%2714120267%27&EntityType=%27Item%27&EntityId=%27794960%27&Width=720&Height=405&ResizeAction=%27fill%27&HorizontalAlignment=%27center%27&VerticalAlignment=%27top%27> Nominated Member of Parliament and psychiatrist. Appointed as an NMP in 2023."},
+    {searchString: "HDB", explanationText: "<img src=https://vulcanpost.com/wp-content/uploads/2019/09/HDB-mockup.jpg> The board responsible for building Singapore’s public housing estates. These housing units are heavily subsidized by the government and over 80% of Singaporeans live in them."},
+    {searchString: "BTO", explanationText: "Build-to-order HDB flats. Essentially, construction on these flats will only begin if at least 65-70% of these flats are booked. Now more of a ballot system to try and get public housing."},
+    {searchString: "Gan Kim Yong", explanationText: "<img src=https://dam.mediacorp.sg/image/upload/s--LE9goLK_--/c_fill,g_auto,h_468,w_830/fl_relative,g_south_east,l_mediacorp:cna:watermark:2021-08:cna,w_0.1/f_auto,q_auto/v1/mediacorp/cna/image/2024/05/13/GCM_4656~2.JPG?itok=ltWFz9Cc> Task Force Man. PAP MP first elected in 2001 and senior PAP figure. Deputy Prime Minister of Lawrence Wong since 2024, and one of his most trusted appointees."},
+    {searchString: "Ng Chee Meng", explanationText: "<img src=https://dam.mediacorp.sg/image/upload/s--oaKLUOMz--/c_fill,g_auto,h_468,w_830/fl_relative,g_south_east,l_mediacorp:cna:watermark:2021-08:cna,w_0.1/f_auto,q_auto/v1/mediacorp/cna/image/2025/04/19/Image%20from%20iOS%20(6).jpg?itok=Cnx4gbm3> Military man turned PAP elite. Unpopular among many Singaporeans due to his involvement in the NTUC-Allianz saga and many other personal issues."},
+    {searchString: "Tan See Leng", explanationText: "<img src=https://alep-p-001.sitecorecontenthub.cloud/api/public/content/fbb7f100d90a4aeea1e40cc483a2004c?v=51b4decb> PAP Minister and former medical practician. Went viral for using Cantonese to retort to PSP NCMP Leong Mun Wai."},
+    {searchString: "Jalan Kayu SMC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/d/d9/Jalan_Kayu_Single_Member_Constituency%2C_2025.svg> A stronghold of the PAP which was just carved out of Ang Mo Kio GRC."},
+    {searchString: "WP", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/en/3/34/Workers%27_Party_of_Singapore_logo.png> A centre-left, social democratic opposition party and the main opposition to the PAP in Singapore. Especially strong in the Northeast."},
+    {searchString: "SDP", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/en/thumb/0/0d/Logo_of_the_SDP.svg/1280px-Logo_of_the_SDP.svg.png> An opposition party led by its longtime leader Chee Soon Juan. Quite left-wing socially and anti-PAP."},
+    {searchString: "PSP", explanationText: "<img src=https://psp.org.sg/wp-content/uploads/2020/04/psp-logo2-600.png> An opposition party formed in 2019 by former PAP MP Tan Cheng Bock. It has 2 NCMPs in parliament and is generally more conservative compared to other opposition parties."},
+    {searchString: "PAR", explanationText: "<img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPezHCcicD6uDDliaLFJxkKCyH7HctidAJfw&s> An opposition alliance formed in 2023 and led by political personality Lim Tean. Anti-immigration and very under-resourced."},
+    {searchString: "SDA", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/f/f0/Red_star%2C_4x_blue_overlapping_rings.svg> An opposition alliance formed by Chiam See Tong before he left the alliance. Now operated exclusively in Pasir Ris and led by Desmond Lim. Quite wealthy but simply not popular enough."},
+    {searchString: "RDU", explanationText: "<img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM_ZlaS-579tvTna2zTr5l2_-5OwkFE61HIw&s> A new opposition party formed in 2020 by Ravi Philemon, it has grown substantially in membership and now wants to run around 15 candidates this election. It still lacks resources and significant name recognition."},
+    {searchString: "PPP", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/en/6/65/People%27s_Power_Party_%28Singapore%29.png> Opposition party founded in 2015. Hates the WP, hates the PAP, hates vaccines and hates LGBT. Also quite unpopular."},
+    {searchString: "SUP", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/en/8/8b/Singapore_United_Party_logo.png> Very irrelevant and minor opposition party. Doesn’t have a functioning website."},
+    {searchString: "NTUC-Allianz deal", explanationText: "Allianz proposed buying a 51% stake in Income Insurance, which was called off following public outcry over Singapore’s former co-operative being sold to a foreign company."},
+    {searchString: "Aljunied GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/1/10/Aljunied_Group_Representation_Constituency%2C_2025.svg> A stronghold of the WP since it was first captured from the PAP in 2011, and the constituency of Opposition Leader Pritam Singh"},
+    {searchString: "Ang Mo Kio GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/8/86/Ang_Mo_Kio_Group_Representation_Constituency%2C_2025.svg> A safe PAP constituency of former Prime Minister Lee Hsien Loong. A generally old estate filled with older voters that attracts weak opposition parties."},
+    {searchString: "Bishan-Toa Payoh GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/6/64/Bishan%E2%80%93Toa_Payoh_Group_Representation_Constituency%2C_2025.svg> Right next to former opposition seat Potong Pasir, the SPP now spends all their time trying to take both these now safe PAP constituencies. They haven’t succeeded."},
+    {searchString: "Chua Chu Kang GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/e/e4/Chua_Chu_Kang_Group_Representation_Constituency%2C_2025.svg> A safe PAP constituency that was surprisingly close in 2020. The PSP is here because they need somewhere to field their B team."},
+    {searchString: "East Coast GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/5/5c/East_Coast_Group_Representation_Constituency%2C_2025.svg> This constituency used to look competitive, but it has been redrawn so many times until its barely a battleground. The PAP holds a slight edge over the WP here."},
+    {searchString: "Holland-Bukit Timah GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/3/3b/Holland%E2%80%93Bukit_Timah_Group_Representation_Constituency%2C_2025.svg> Wealthy constituency filled with mansions and condominiums. The SDP decided to abandon this place, giving it for free to PAP Minister Vivian Balakrishnan."},
+    {searchString: "Jalan Besar GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/2/25/Jalan_Besar_Group_Representation_Constituency%2C_2025.svg> Somehow the worst of the opposition always ends up here, even though the PAP Minister, Josephine Teo, is very unpopular here. Interesting mix of historic Singapore city centre and old voters."},
+    {searchString: "Jurong East-Bukit Batok GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/e/e8/Jurong_East%E2%80%93Bukit_Batok_Group_Representation_Constituency%2C_2025.svg> This GRC was drawn and magically absorbed the once competitive Bukit Batok. Now helmed by Minister Grace Fu."},
+    {searchString: "Marine Parade-Braddell Heights GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/4/4f/Marine_Parade%E2%80%93Braddell_Heights_Group_Representation_Constituency%2C_2025.svg> Used to be Marine Parade GRC and stretched from Braddell Heights to the shore. It got renamed and absorbed the extremely pro-PAP area MacPherson. Also redrawn many, many times."},
+    {searchString: "Marsiling-Yew Tee GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/a/aa/Marsiling%E2%80%93Yew_Tee_Group_Representation_Constituency%2C_2025.svg> The constituency of Prime Minister Lawrence Wong. Should be safe for the PAP and out of reach of the opposition, and another part of the Singapore heartlands."},
+    {searchString: "Nee Soon GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/5/5e/Nee_Soon_Group_Representation_Constituency%2C_2025.svg> All the crazy stuff in Singapore happens here. Helmed by the fearsome PAP Minister K. Shanmugam, and has a rotating set of opposition parties contesting."},
+    {searchString: "Pasir Ris-Changi GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/0/0a/Pasir_Ris-Changi_Group_Representation_Constituency%2C_2025.svg> The world famous Changi Airport is here, but most residents don’t go on regular trips there. The SDA has been here for decades and will be here forever to contest against the PAP and distribute supplies."},
+    {searchString: "Punggol GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/f/f9/Punggol_Group_Representation_Constituency%2C_2025.svg> An incredibly young estate that could be a major election battleground, Punggol is filled with many young families. The WP has set its sights on winning here."},
+    {searchString: "Sembawang GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/6/6f/Sembawang_Group_Representation_Constituency%2C_2025.svg> The constituency at the Malaysian border. Helmed by Minister Ong Ye Kung, and often contested by the inactive NSP. The SDP has decided to run here this time, though."},
+    {searchString: "Sengkang GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/0/03/Sengkang_Group_Representation_Constituency%2C_2025.svg> The second, and to date latest GRC to fall to the WP, Sengkang is filled with young families and is a new estate. Now has 1 MP less after Raeesah Khan was caught lying."},
+    {searchString: "Tampines GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/f/f1/Tampines_Group_Representation_Constituency%2C_2025.svg> An older estate in Singapore. Formerly contested every election by the NSP, the WP now thinks that it has a shot at winning here. The constituency is also helmed by a relatively weak Minister, Masagos Zulkifli."},
+    {searchString: "West Coast-Jurong West GRC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/f/fe/West_Coast%E2%80%93Jurong_West_Group_Representation_Constituency%2C_2025.svg> Formerly West Coast GRC and now with parts of Jurong added. Was the closest constituency in the last election and may well be headed for a tight battle between the PAP and PSP."},
+    {searchString: "Marymount SMC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/e/e3/Marymount_Single_Member_Constituency%2C_2025.svg> An estate in central Singapore that was surprisingly competitive in 2020. The PSP runs candidates here for some reason."},
+    {searchString: "Sembawang West SMC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/d/d1/Sembawang_West_Single_Member_Constituency%2C_2025.svg> A safe PAP area that has never really been in contention, but Chee Soon Juan views it as a good SDP pickup opportunity and thus it’s now competitive."},
+    {searchString: "Bukit Panjang SMC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/8/89/Bukit_Panjang_Single_Member_Constituency%2C_2025.svg> Extremely close constituency in the 2020 election, and it could be a nailbiter yet again. Rematch between PAP MP Liang Eng Hwa who is popular and SDP candidate Dr Paul Tambyah who is very medically qualified."},
+    {searchString: "Chee Hong Tat", explanationText: "<img src=https://mediacorp-videosbc.akamaized.net/image/v1/static/6057984932001/c9a54a83-f806-4a0f-9f55-2772d130eeca/64ed2737-bdbd-4bf6-ba01-fd71a96bba6c/1280x720/match/image.jpg> Young PAP Minister and part of Lawrence Wong’s 4G team. Not very well known."},
+    {searchString: "Shawn Huang", explanationText: "<img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmiMXeyBSvO9ewehPEfX3faXIysqmC1c3rsORDdqrk7z44a9y6zQ1RXtPXQKclZ6aaW6SdNGPtN2djVsleCSFsXxJfqUZfkDGvhw_lgA&s=10> Junior MP for Taman Jurong. Former fighter pilot."},
+    {searchString: "Chee Soon Juan", explanationText: "<img src=https://dam.mediacorp.sg/image/upload/s--uYwBVEWb--/c_fill,g_auto,h_676,w_1200/f_auto,q_auto/v1/mediacorp/tdy/image/2024/02/23/20190804_raj_chee_soon_juan7.jpg?itok=9MQYjp5G> The longtime leader of the SDP and opposition stalwart. Really doesn’t like anyone from the PAP. Western liberal."},
+    {searchString: "Paul Tambyah", explanationText: "<img src=https://static1.straitstimes.com.sg/s3fs-public/articles/2020/06/17/yq-paultambyah-17062021.jpg?VersionId=82NME4867n508_kgUyaRIFIddkM60EJH> Infectious diseases expert and a key asset to the opposition. President of the International Society of Infectious Diseases Executive Committee from 2022 to 2025."},
+    {searchString: "Jeremy Tan", explanationText: "<img src=https://jeremytan.sg/_nuxt/jeremy-tan-crop.0fd34n8_.jpg> Bitcoin entrepreneur and tech libertarian. Very casual and a force to be reckoned with in the opposition."},
+    {searchString: "Voucher Wong", explanationText: "<img src=https://file.garden/aftBfT23iVucvcGE/budget-2025-v0-8ngwg4ics1ke1.webp>"},
+    {searchString: "Lying under oath to a parliamentary committee", explanationText: "<img src=https://www.economist.com/cdn-cgi/image/width=1424,quality=80,format=auto/content-assets/images/20250222_ASP001.jpg> While defending his part in the Raeesah Khan scandal that enveloped the WP, party leader Pritam Singh was ruled to have lied under oath to a parliamentary committee."},   
+    {searchString: "Raeesah Khan", explanationText: "<img src=https://cdn.i-scmp.com/sites/default/files/styles/1020x680/public/d8/images/canvas/2024/10/15/11285f5d-f53a-4ce2-a322-eb32fc656ca6_5042625c.jpg?itok=x6V4VvIs&v=1728976501> Young former WP MP elected in 2020. Resigned in 2021 over lying about a constituent’s sexual assault case. Caused major headaches for WP leadership for the next few years."},   
+    {searchString: "Leon Perera", explanationText: "<img src=https://img.i-scmp.com/cdn-cgi/image/fit=contain,width=1024,format=auto/sites/default/files/d8/images/canvas/2023/07/19/bb2c309c-0724-4369-9c7a-3696418af1b7_7ca491f8.jpg> WP MP elected in 2020 after years as a WP candidate and NCMP. Resigned in 2023 over an extramarital affair with fellow WP candidate Nicole Seah."},   
+    {searchString: "Yaw Shin Leong", explanationText: "<img src=https://static1.straitstimes.com.sg/s3fs-public/articles/2021/12/06/hzyaw061221a.jpg?VersionId=SCyH0HysOt3GIG7nu8tFDp.vsu9iDAyX> WP MP elected in 2011 to replace former WP leader Low Thia Khiang in Hougang. Had an extramarital affair and resigned in 2012, causing a by-election which the WP managed to hold."},
+    {searchString: "Ariffin Sha", explanationText: "<img src=https://s1.dmcdn.net/v/YK4Oq1e4QTjXdIMDz/x1080> Founder of Wake Up Singapore and young SDP candidate. Quite left wing and quite a good speaker."},
+    {searchString: "the campaign trail", explanationText: "May be the game you’re playing right now."},   
+    {searchString: "Sengkang team", explanationText: "<img src=https://cdn.theonlinecitizen.com/uploads/2025/04/06174249/Seng-Kang-TC-plan.png> The 4 WP MPs elected in 2020, minus Raeesah Khan following her scandal."},
+    {searchString: "Hougang SMC", explanationText: "<img src=https://upload.wikimedia.org/wikipedia/commons/0/06/Hougang_Single_Member_Constituency%2C_2025.svg> A safe WP area held by the WP since 1991. Literally the fortress of the opposition in Singapore."},
+    {searchString: "Telegram messages", explanationText: "<img src=https://mustsharenews.com/wp-content/uploads/2025/04/msg-1-2.jpg> Days before the election, WP candidate Andre Low’s Telegram messages in a private group chat were leaked. Aside from the repeated use of expletives, Low also complained about a constituent who called his personal number repeatedly."},  
+    {searchString: "Ivan Lim", explanationText: "<img src=https://static1.straitstimes.com.sg/s3fs-public/articles/2020/06/30/ivan.jpg?VersionId=0a9RNqgCWYJdPk0iOPMMDFexi2S7_Ygc> Almost a PAP candidate in the 2020 election, Lim withdrew after allegations about his past conduct and behavior."},  
+    {searchString: "an interesting man who likes Bitcoin", explanationText: "<img src=https://jeremytan.sg/_nuxt/jeremy-tan-crop.0fd34n8_.jpg>"},
+    {searchString: "Leong Mun Wai", explanationText: "<img src=https://psp.org.sg/wp-content/uploads/2024/10/MunWai1-768x487.png> PSP non-constituency Member of Parliament who narrowly missed out on winning last election. Now the PSP leader. Very aggressive."},
+    {searchString: "Ravi Philemon", explanationText: "<img src=https://cassette.sphdigital.com.sg/image/businesstimes/83026f9ec7287ade3a78c97fa367ece8aa4f3fead2ae4c3b186789be448b50fd?w=960&dpr=1&f=webp> RDU founder and leader, formerly a NSP, SPP and PSP member. Very passionate, very ambitious, and often criticized for using ChatGPT."},
+    {searchString: "SkillsFuture", explanationText: "<img src=https://www.myskillsfuture.gov.sg/content/dam/portal/social/skillsfuture_fb_1200by630_w.jpg> A government initiative designed to help citizens develop industry-related skills throughout their careers for constant upskilling. Quite popular."},
+    {searchString: "It Is Time", explanationText: "<img src=https://singaporepeoplesparty.org/wp-content/uploads/2025/04/Facebook-Cover-1-1080x675.png> Maybe the worst slogan this election, and the official slogan of the SPP. Quite uninspired."},
+    {searchString: "Gerald Giam", explanationText: "<img src=https://dam.mediacorp.sg/image/upload/s--hVNGMn7d--/c_fill,g_auto,h_676,w_1200/f_auto,q_auto/v1/tdy-migration/20150826_gerald_giam_ee_016_read-only.jpg?itok=KfasGIel> WP NCMP from 2011 to 2015 and MP since 2020 for Aljunied GRC. Notably voted against repealing Singapore’s ban on homosexual relations."},
+    {searchString: "Jamus Lim", explanationText: "<img src=https://media.theindependent.sg/wp-content/uploads/2025/11/Screenshot-2025-11-17-at-9.06.59%E2%80%AFAM-e1763373078976.jpg> Charming superstar in the last election and MP for Sengkang GRC since 2020. Disliked by many older conservatives."},
+    {searchString: "He Ting Ru", explanationText: "<img src=https://static1.straitstimes.com.sg/s3fs-public/articles/2020/07/19/hzhetingru0719.jpg?VersionId=liF8cPC3M3ynMPUz6fjn2XzQKr9YhJMH> Surprisingly talented and passionate MP for Sengkang GRC since 2020. Running in elections since 2015."},
+    {searchString: "three core constituencies", explanationText: "Aljunied GRC, Sengkang GRC, and Hougang SMC. The 3 constituencies (and 10 seats) held by the Workers’ Party."},
+    {searchString: "Goh Meng Seng", explanationText: "<img src=https://static1.straitstimes.com.sg/s3fs-public/articles/2020/07/08/hzgoh0708.jpg?VersionId=2JgHK6yQVq2sraKw7O3nft1Xx.zrLMi7> Where do we even begin? Anti-LGBT, anti-vaccine, and leader of the PPP."},
+    {searchString: "not gay", explanationText: "<img src=https://file.garden/aftBfT23iVucvcGE/notgay> ???"},
+    {searchString: "Bukit Batok SMC", explanationText: "Chee Soon Juan has been trying his best here for the last 9 years, but it was dissolved in 2025’s EBRC report and merged into the heavily pro-PAP Jurong East-Bukit Batok GRC."},
+    {searchString: "Andre Low", explanationText: "<img src=https://www.parliament.gov.sg/api/media/217836db-cb5f-64e2-b198-ff00006af031/andre-low.jpg> WP candidate who enjoys using strong language and passionately hates the NTUC-Allianz deal. Very strong language."},
+
+
+
+]; 
+
+
+
+// This changes the labels (and values) of unordered lists in the selection screens
+(function () {
+  const originalDescHTML = window.descHTML || descHTML;
+  if (!originalDescHTML) return;
+
+  function isHiddenValue(value) {
+    const text = String(value ?? "").trim().toLowerCase();
+    return text === "" || text === "none";
+  }
+
+  function cleanLabel(label, fallback) {
+    return String(label ?? fallback ?? "").replace(/:\s*$/, "").trim();
+  }
+
+  function fullName(candObj) {
+    return `${candObj.first_name ?? ""} ${candObj.last_name ?? ""}`.trim();
+  }
+
+  function resolveField(candObj, fieldName) {
+    const key = String(fieldName ?? "").trim();
+
+    switch (key) {
+      case "full_name":
+        return fullName(candObj);
+      case "first_name":
+        return candObj.first_name ?? "";
+      case "last_name":
+        return candObj.last_name ?? "";
+      case "party":
+        return candObj.party ?? "";
+      case "state":
+        return candObj.state ?? "";
+      case "abbreviation":
+        return candObj.abbreviation ?? "";
+      case "":
+        return "";
+      default:
+        return candObj[key] ?? "";
+    }
+  }
+
+  function getRows(isRunningMate) {
+    if (isRunningMate) {
+      return [
+        {
+          label: e.RMLabel1 ?? "Name",
+          field: e.RMField1 ?? "full_name",
+        },
+        {
+          label: e.RMLabel2 ?? e.PartyText ?? "Party:",
+          field: e.RMField2 ?? "party",
+        },
+        {
+          label: e.RMLabel3 = e.HomeStateText = "Constituency:",
+          field: e.RMField3 ?? "state",
+        },
+      ];
+    }
+
+    return [
+      {
+        label: e.CandLabel1 = "Name",
+        field: e.CandField1 ?? "full_name",
+      },
+      {
+        label: e.CandLabel2 ?? e.PartyText ?? "Party:",
+        field: e.CandField2 ?? "party",
+      },
+      {
+        label: e.CandLabel3 = e.HomeStateText = "Role:",
+        field: e.CandField3 ?? "state",
+      },
+    ];
+  }
+
+  window.descHTML = function (descWindow, id) {
+    originalDescHTML(descWindow, id);
+
+    const candObj = PROPS.CANDIDATES.get(String(id));
+    if (!candObj) return;
+
+    const isRunningMate = descWindow === "#running_mate_description_window";
+    const rows = getRows(isRunningMate);
+
+    const $list = $(descWindow).find("ul").first();
+    if (!$list.length) return;
+
+    $list.empty();
+
+    rows.forEach(row => {
+      const label = cleanLabel(row.label);
+      const field = String(row.field ?? "").trim();
+
+      if (isHiddenValue(label) || isHiddenValue(field)) return;
+
+      const value = resolveField(candObj, field);
+      $list.append($("<li>").text(`${label}: ${value ?? ""}`));
+    });
+  };
+})();
+
+document.getElementById("inner_window_1").children[1].innerHTML = `<li>Welcome to Singapore 2025.</li>
+<li>This is a campaign simulation of the 2025 Singaporean general election, forcing you to answer questions on everyday issues such as cost-of-living and constituency infrastructure while fighting the complex political battles.</li>
+<li>The answers will affect your popularity across every one of Singapore's SMCs and GRCs, determining the next 5 years of Singapore.</li>
+<li>Additionally, the game contains CYOA elements, secret endings and achievements.</li>
+<li>It is recommended that you put on headphones and turn on the sound to enjoy the best audio-visual experience.</li> `;
+const header = document.querySelector('#inner_window_1').firstElementChild;
+header.textContent = "Do you have what it takes to decide the fate of the LION CITY?";
+document.querySelector('#game_start strong').textContent = "Let's begin";
+
+HistHexcolour=[
+  "#D7445A",
+  "#499DD5",
+  "#A83A31",
+  "#CC5D3A",
+  "#C769A6",
+  "#96AAF1",
+  "#97A3AD",
+  "#96C082",
+  "#A57A42",
+  "#75C1C7",
+  "#5D6464",
+  "#F58240",
+];
+HistName = [" People's Action Party", " Workers' Party", " Progress Singapore Party", " Red Dot United", " Singapore Democratic Party", " People's Alliance for Reform", " Singapore Democratic Alliance", " Singapore People's Party", " Singapore United Party", " People's Power Party", " Independents", " National Solidarity Party"];
+
+HistEV = ["87", "10 + 2 NCMP", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];
+
+HistPV = ["1,570,803", "359,161", "117,005", "94,955", "89,053", "60,207", "29,213", "28,205", "15,874", "15,525", "12,537", "3,127"];
+
+HistPVP = ["65.57%", "14.99%", "4.88%", "3.96%", "3.72%", "2.51%", "1.22%", "1.18%", "0.66%", "0.65%", "0.52%", "0.13%"];
+
+campaignTrail_temp.achievements = {
+    "2015 Again" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/2015again.png",
+        "description" : "As the PAP, reach new heights.",
+        "cannotBeCheated" : true
+    },
+    "The Canon Ending" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/canonending.png",
+        "description" : "As the PAP, unlock the IRL ending.",
+        "cannotBeCheated" : true
+    },
+    "Crack the Hammer" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/crackthehammer.png",
+        "description" : "As the PAP, make Pritam Singh rethink his decisions.",
+        "cannotBeCheated" : true
+    },
+    "PP-PAP" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/ppap.png",
+        "description" : "As the PAP, unlock Goh Meng Seng’s true fury.",
+        "cannotBeCheated" : true
+    },
+    "Housing, Healthcare, Human Rights" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/hhh.png",
+        "description" : "As the PAP, lose the iron of him.",
+        "cannotBeCheated" : true
+    },
+    "Only read serious books" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/seriousbooks.png",
+        "description" : "As the PAP, stand up when people are talking to you.",
+        "cannotBeCheated" : true
+    },
+    "Every dog has its day" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/everydog.png",
+        "description" : "As the PAP, make the Bitcoin man happy and make Chee angry.",
+        "cannotBeCheated" : true
+    },
+    "United Singapore" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/unitedsg.png",
+        "description" : "As the PAP, do what no one has done before.",
+        "cannotBeCheated" : true
+    },
+    "End of the Supermajority" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/wpachievements.png",
+        "description" : "As the WP, break the PAP’s aura.",
+        "cannotBeCheated" : true
+    },
+    "The Fortress" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/hougang.png",
+        "description" : "As the WP, reach new heights.",
+        "cannotBeCheated" : true
+    },
+    "Be Humble" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/stayhumbleeh.png",
+        "description" : "As the WP, wreck Goh Meng Seng.",
+        "cannotBeCheated" : true
+    },
+    "True Woke" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/truewoke.png",
+        "description" : "As the WP, unlock True Woke.",
+        "cannotBeCheated" : true
+    },
+    "Singapore’s PAS" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/abdul.png",
+        "description" : "As the WP, make Abdul Hadi Awang proud.",
+        "cannotBeCheated" : true
+    },
+    "I’m Straight" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/hmmph.png",
+        "description" : "As the WP, watch the return of Goh Meng Seng.",
+        "cannotBeCheated" : true
+    },
+    "Mr Islandwide" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/mrworldwide.png",
+        "description" : "As the WP, see this island.",
+        "cannotBeCheated" : true
+    },
+    "Be Retired, Not Tired" : {
+        "image" : "https://file.garden/aftBfT23iVucvcGE/ach/retired.png",
+        "description" : "As the WP, make the Bitcoin man happy",
+        "cannotBeCheated" : true
+    }
+}
+
+//Code from 2024 Lithuania
+next0 = function() {
+    document.getElementById("screen0").style.display = "none"
+    document.getElementById("screen1").style.display = "initial"
+}
+next1 = function() {
+    document.getElementById("screen0").style.display = "none"
+    document.getElementById("screen2").style.display = "initial" 
+}
+next2 = function() {
+    document.getElementById("screen0").style.display = "none"
+    document.getElementById("screen3").style.display = "initial" 
+}
+next3 = function() {
+    document.getElementById("screen0").style.display = "none"
+    document.getElementById("screen4").style.display = "initial" 
+}
+next4 = function() {
+    document.getElementById("screen0").style.display = "none"
+    document.getElementById("screen5").style.display = "initial" 
+}
+next5 = function() {
+    document.getElementById("screen0").style.display = "none"
+    document.getElementById("screen6").style.display = "initial" 
+}
+next6 = function() {
+    document.getElementById("screen7").style.display = "none"
+    document.getElementById("screen8").style.display = "initial" 
+}
+next7 = function() {
+    document.getElementById("screen9").style.display = "none"
+    document.getElementById("screen10").style.display = "initial" 
+}
+next8 = function() {
+    document.getElementById("screen11").style.display = "none"
+    document.getElementById("screen12").style.display = "initial" 
+}
+next9 = function() {
+    document.getElementById("screen13").style.display = "none"
+    document.getElementById("screen14").style.display = "initial" 
+}
+back0 = function() {
+    document.getElementById("screen0").style.display = "initial"
+    document.getElementById("screen1").style.display = "none" 
+	document.getElementById("screen2").style.display = "none" 
+	document.getElementById("screen3").style.display = "none" 
+	document.getElementById("screen4").style.display = "none" 
+	document.getElementById("screen5").style.display = "none" 
+	document.getElementById("screen6").style.display = "none" 
+}
+back1 = function() {
+    document.getElementById("screen7").style.display = "initial"
+    document.getElementById("screen8").style.display = "none" 
+}
+back2 = function() {
+    document.getElementById("screen9").style.display = "initial"
+    document.getElementById("screen10").style.display = "none" 
+}
+back3 = function() {
+    document.getElementById("screen11").style.display = "initial"
+    document.getElementById("screen12").style.display = "none" 
+}
+back4 = function() {
+    document.getElementById("screen13").style.display = "initial"
+    document.getElementById("screen14").style.display = "none" 
+}
+
+function updateCandidateForm() {
+  formobserver.disconnect();
+  const heading = document.querySelector("#candidate_form form h3");
+
+  if (heading) {
+    heading.textContent = "Please select your party:";
+  }
+  formobserver.observe(document.documentElement, { childList: true, subtree: true });
+}
+if(!formobserver){
+  var formobserver = new MutationObserver(updateCandidateForm);
+  formobserver.observe(document.documentElement, { childList: true, subtree: true });
+}
+
+function updateRunningMateForm() {
+  runformobserver.disconnect();
+  const heading = document.querySelector("#running_mate_form form h3");
+
+  if (heading) {
+    heading.textContent = "Please select your leader:";
+  }
+  runformobserver.observe(document.documentElement, { childList: true, subtree: true });
+}
+if(!runformobserver){
+  var runformobserver = new MutationObserver(updateRunningMateForm);
+  runformobserver.observe(document.documentElement, { childList: true, subtree: true });
+}
+
+
+
+//#endcode
