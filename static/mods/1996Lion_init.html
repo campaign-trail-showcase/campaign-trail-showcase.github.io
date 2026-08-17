@@ -111,6 +111,30 @@ button, .btn {
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
+#question_form label {
+    display: inline-block;
+    width: 93%;
+    margin-bottom: 4px;
+    padding: 2.5px 5px;
+    border-left: 3px solid transparent;
+    border-radius: 2px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
+}
+
+#question_form label:hover {
+    background-color: rgba(96, 121, 160, 0.10) !important;
+    border-left-color: #8EA5C2 !important;
+}
+
+#question_form input[type="radio"]:checked + label {
+    background-color: rgba(96, 121, 160, 0.18) !important;
+    border-left-color: #6079A0 !important;
+    font-weight: 600 !important;
+}
+
 /* Map container — harbor glass */
 #map_container {
   background: linear-gradient(160deg, #f4f6f9 0%, #e6edf2 40%, #d6dfe8 100%);
