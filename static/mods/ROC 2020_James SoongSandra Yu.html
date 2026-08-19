@@ -3704,9 +3704,8 @@ campaignTrail_temp.player_visits = [];
 campaignTrail_temp.answer_feedback_flg = 1;
 campaignTrail_temp.game_start_logging_id = '3660822';
 let JamesSoongVP_Default = 'Sandra Yu'; 
-
-// 动态获取民进党玩家在游戏中所选的副总裁。如果未定义，默认兜底为赖清德 (Lai Ching-te)
-let DPPVP = (typeof currentMateName !== 'undefined' && currentMateName) ? currentMateName : 'Lai Ching-te'; 
+// 硬编码民进党副总统为赖清德 (Lai Ching-te)
+let DPPVP = 'Lai Ching-te';
 
 // 完美的总统-副总统动态绑定字典，全面支持所有路线分支
 let vpTable = {
@@ -3744,8 +3743,11 @@ function onGameWindowChangeCandidates() {
     if(!resultsTableHolder || resultsTableHolder.classList.contains('done')) {
         return;
     }
-    // 在大选结算界面生成的一瞬间，实时抓取民进党玩家最新确定的副手
-    let activeDPPVP = (typeof currentMateName !== 'undefined' && currentMateName !== 'Opposition Party') ? currentMateName : 'Lai Ching-te';
+
+    // 核心修复：增加 isPlayerDPP 校验 只有玩家亲自操控蔡/赖时 才会读取 currentMateName 否则民进党副手保底为 Lai Ching-te
+    let isPlayerDPP = (typeof campaignTrail_temp !== 'undefined') && (Number(campaignTrail_temp.tsai) === 1 || Number(campaignTrail_temp.lai) === 1);
+    let activeDPPVP = (isPlayerDPP && typeof currentMateName !== 'undefined' && currentMateName !== 'Opposition Party') ? currentMateName : 'Lai Ching-te';
+    
     vpTable['Tsai Ing-wen'] = activeDPPVP;
     vpTable['Lai Ching-te'] = activeDPPVP;
 
@@ -3765,7 +3767,7 @@ function onGameWindowChangeCandidates() {
             row.children[1].innerHTML = '<span style=\'font-weight:bold\'>Running Mate</span>';
         }
         else {
-            // 如果字典里有匹配的名字（包含玩家和国民党对手），自动渲染正确的副手名字
+            // 匹配名字（包含玩家、民进党、亲民党与国民党对手）渲染正确的副手名字
             row.children[1].innerHTML = vpTable[name] ? vpTable[name] : 'Unknown';
         }
     }
