@@ -19477,7 +19477,7 @@ if ((typeof campaignTrail_temp !== 'undefined' && Number(campaignTrail_temp.tsai
     campaignTrail_temp.player_answers.includes(20552) &&
     (campaignTrail_temp.procencon || 0) > 0) {
 
-    window.epilogueImage = 'https://file.garden/Z9XHdyLGHwUEZPS4/ROC%202020/kongxincai.jpg';
+    window.epilogueImage = 'https://files.catbox.moe/kx7qzi.jpg';
 
     epilogueEvents.push({
         body: `
@@ -27563,7 +27563,6 @@ let epiloguePageHTML = `
 if (typeof e !== 'undefined' && e.pages && epilogueEvents.length > 0) {
     e.pages.push(epiloguePageHTML);
 }
-
 // ======================================================================
 // 第四页：中华民国历任总统列表 (The Decade Multiverse Engine 2020-2032)
 // ======================================================================
@@ -27676,7 +27675,6 @@ let isHan2024 = false;
 let kmt_won_2018 = (typeof campaignTrail_temp !== 'undefined' && campaignTrail_temp.Wins2018election === 1);
 
 if (isMa2020 && kmt_2020_win) {
-    // 马英九 2020 胜选，2024 寻求连任
     kmt_2024_cand = 'Ma Ying-jeou'; kmt_2024_cand_zh = '馬英九'; kmt_2024_born = '(Born 1950)';
     kmt_2024_img = 'https://file.garden/Z9XHdyLGHwUEZPS4/ROC%202020/mayingjiutouxiang.png?v=1786402520632';
     kmt_2024_vp_full = kmt_2020_vp_full;
@@ -27721,12 +27719,11 @@ if (luWonTaichung) {
     kmt_2028_vp = 'Ko Chih-en<br><span style=\'color: #000099; font-weight: bold;\'>(KMT)</span>';
 }
 
-// 核心修复：陈其邁图片 URL 绑定
 let dpp_2028_challenger = 'Chen Chi-mai'; 
 let dpp_2028_challenger_zh = '陳其邁'; 
 let dpp_2028_cborn = '(Born 1964)';
 let dpp_2028_cimg = 'https://file.garden/Z9XHdyLGHwUEZPS4/ROC%202020/chimai.jpg';
-let dpp_2028_cvp = 'Hsiao Bi-khim<br><span style=\'color: #1B9431; font-weight: bold;\'>(DPP)</span>';
+let dpp_2028_cvp = 'Su Chiao-Hui<br><span style=\'color: #1B9431; font-weight: bold;\'>(DPP)</span>';
 
 // 7. 2024 胜负精算引擎
 let pol_cap = (typeof campaignTrail_temp !== 'undefined' && typeof campaignTrail_temp.Political_capital !== 'undefined') ? campaignTrail_temp.Political_capital : 0;
@@ -27765,12 +27762,11 @@ if (isHung2020 && !kmt_2020_win) {
     weight_kmt_2024 -= 0.5;
 }
 
-// 马英九 2024 连任疲劳扣分：选民对马英九长期执政感到疲劳，扣减 0.5 权重
 if (isMa2020 && kmt_2020_win) {
     weight_kmt_2024 -= 0.5;
 }
 
-if (dpp_2024_cand === 'Lai Ching-te' && answers_history.includes(2316) && (answers_history.includes(2447) || answers_history.includes(2427))) {
+if (dpp_2024_cand === 'Lai Ching-te' && answers_history.includes(20532) && (answers_history.includes(2447) || answers_history.includes(2427))) {
     weight_dpp_2024 -= 1.0;
 }
 
@@ -27786,7 +27782,7 @@ if (ko_won_2024) {
     dpp_2024_win = !kmt_2024_win;
 }
 
-// 8. 2028 胜负精算引擎
+// 8. 2028 胜负精算引擎 (经过精细提纯去重)
 let weight_kmt_2028 = 0; let weight_dpp_2028 = 0; let weight_tpp_2028 = 0;
 
 if (ko_won_2024) {
@@ -27808,15 +27804,10 @@ if (ko_won_2024) {
     }
 }
 
-// 新增判断逻辑
 if (!kmt_2020_win && dpp_2024_win && !isHung2020) {
     weight_kmt_2028 += 0.5;
 }
 
-if (public_discontent >= 10) {
-    weight_dpp_2028 -= 0.5;
-}
-
 if (isHung2020 && !kmt_2020_win) {
     weight_kmt_2028 -= 0.5;
 }
@@ -27825,23 +27816,15 @@ if (p_kmt_2020 < 35.0) {
     weight_kmt_2028 -= 0.5;
 }
 
-// 2028 民怨对民进党权重的分阶影响
+// 民怨对 2028 民进党权重的分阶影响 (统一在此处计算一次，避免重复扣分)
 if (public_discontent < 3) {
     weight_dpp_2028 += 0.5;
 } else if (public_discontent >= 3 && public_discontent <= 5) {
-    // 不加不减 (0)
+    // 保持不变
 } else if (public_discontent > 5 && public_discontent < 10) {
     weight_dpp_2028 -= 0.5;
 } else if (public_discontent >= 10) {
     weight_dpp_2028 -= 1.0;
-}
-
-if (isHung2020 && !kmt_2020_win) {
-    weight_kmt_2028 -= 0.5;
-}
-
-if (p_kmt_2020 < 35.0) {
-    weight_kmt_2028 -= 0.5;
 }
 
 let tpp_2028_win = ko_won_2024 && (weight_tpp_2028 >= weight_kmt_2028 && weight_tpp_2028 >= weight_dpp_2028);
@@ -27882,7 +27865,6 @@ let tableRowsHTML = '';
 tableRowsHTML += genPresRow('10/11', 2, 'DPP', 'https://file.garden/Z9XHdyLGHwUEZPS4/ROC%202020/duzibianbian.jpg', 'Chen Shui-bian', '陳水扁', '(Born 1950)', '20 May 2000', '20 May 2008', 'Annette Lu<br><span style=\'color: #1B9431; font-weight: bold;\'>(DPP)</span>');
 tableRowsHTML += genPresRow('', 0, 'DPP', '', '', '', '', '20 May 2004', '20 May 2008', 'Annette Lu<br><span style=\'color: #1B9431; font-weight: bold;\'>(DPP)</span>');
 
-// 2008-2016 保持原版头像不动
 tableRowsHTML += genPresRow('12/13', 2, 'KMT', 'https://file.garden/Z9XHdyLGHwUEZPS4/ma.jpg?v=1764181048695', 'Ma Ying-jeou', '馬英九', '(Born 1950)', '20 May 2008', '20 May 2012', 'Vincent Siew<br><span style=\'color: #000099; font-weight: bold;\'>(KMT)</span>');
 tableRowsHTML += genPresRow('', 0, 'KMT', '', '', '', '', '20 May 2012', '20 May 2016', 'Wu Den-yih<br><span style=\'color: #000099; font-weight: bold;\'>(KMT)</span>');
 
@@ -27908,7 +27890,7 @@ if (kmt_2020_win) {
             }
         }
     } else if (kmt_2024_win) {
-        // 国民党 2024 连任（若为马英九，展示为第15/16届连任）
+        // 国民党 2024 连任
         tableRowsHTML += genPresRow('15/16', 2, 'KMT', kmt_2020_img, kmt_2020_cand, kmt_2020_cand_zh, kmt_2020_born, '20 May 2020', '20 May 2024', kmt_2020_vp_full);
         tableRowsHTML += genPresRow('', 0, 'KMT', '', '', '', '', '20 May 2024', '20 May 2028', kmt_2020_vp_full); 
         
@@ -27956,6 +27938,8 @@ if (kmt_2020_win) {
                 tableRowsHTML += genPresRow('16/17', 2, 'KMT', kmt_2024_img, kmt_2024_cand, kmt_2024_cand_zh, kmt_2024_born, '20 May 2024', '20 May 2028', kmt_2024_vp_full);
                 tableRowsHTML += genPresRow('', 0, 'KMT', '', '', '', '', '20 May 2028', 'Incumbent', kmt_2024_vp_full);
             } else {
+                // 完整绘制：第 16 届国民党 (2024-2028) + 第 17 届民进党陈其迈 (2028-至今)
+                tableRowsHTML += genPresRow('16', 1, 'KMT', kmt_2024_img, kmt_2024_cand, kmt_2024_cand_zh, kmt_2024_born, '20 May 2024', '20 May 2028', kmt_2024_vp_full);
                 tableRowsHTML += genPresRow('17', 1, 'DPP', dpp_2028_cimg, dpp_2028_challenger, dpp_2028_challenger_zh, dpp_2028_cborn, '20 May 2028', 'Incumbent', dpp_2028_cvp);
             }
         } else {
@@ -28035,7 +28019,6 @@ let successionHTML = `
 if (typeof e !== 'undefined' && e.pages) {
     e.pages.push(successionHTML);
 }
-
         // ======================================================================
         // 终极影像强制劫持器 (更新：支持第四页维基百科总统府照片)
         // ======================================================================
@@ -28194,8 +28177,8 @@ if (ach_winnerID == ach_ID_TSAI && isPlayerTsai && progVal === 0) {
     unlockDppAch("The Centrist Path");
 }
 
-// 15) The 2008 Collapse (蔡英文得票率<=41.5% 惨败)
-if (ach_winnerID != ach_ID_TSAI && isPlayerTsai && ach_playerVote <= 41.5) {
+// 15) The 2008 Collapse (蔡英文得票率<=41.55% 惨败)
+if (ach_winnerID != ach_ID_TSAI && isPlayerTsai && ach_playerVote <= 41.55) {
     unlockDppAch("The 2008 Collapse");
 }
 
