@@ -95,7 +95,7 @@ window.setMultiplier = function(party, amount) {
     window.PartyMultipliers[party] = amount;
 };
 window.PartyMultipliers = window.PartyMultipliers || {
-    'KMT': 1.0,  
+    'KMT': 1.0,
     'DPP': 1.0,
     'IND': 1.07,
     'MKT': 1
@@ -14524,7 +14524,21 @@ function changeTurnoutBatch(changes) {
 // 国民党 (KMT) 侧 极简答案触发逻辑 (直接挂载于答案点击处)
 // ==============================================================
 
-// 1. Blue Tsunami (点选 2518 且 2018 国民党胜选 且 KMT 权重 >= 80)
+// 1. What Use Are You? (要你何用？：在答案 2518 处挂载触发)
+if (ans === 2518 && campaignTrail_temp.Wins2018election === 1) {
+    let flags = window.Election2018_Flags || {};
+    let refusedHan = campaignTrail_temp.player_answers && campaignTrail_temp.player_answers.includes(2295);
+
+    if (refusedHan && flags['Kaohsiungcity'] === 'KMT') {
+        if (typeof window.ctsAchievement === 'function') {
+            window.ctsAchievement("What Use Are You?", false);
+        } else if (typeof window.unlockAchievement === 'function') {
+            window.unlockAchievement("What Use Are You?");
+        }
+    }
+}
+
+// 2. Blue Tsunami (点选 2518 且 2018 国民党胜选 且 KMT 权重 >= 80)
 if (ans === 2518 && campaignTrail_temp.Wins2018election === 1) {
     let kmtW = (typeof window.Election2018_Weights !== 'undefined' && window.Election2018_Weights) 
         ? window.Election2018_Weights.KMT 
@@ -14535,14 +14549,18 @@ if (ans === 2518 && campaignTrail_temp.Wins2018election === 1) {
     }
 }
 
-// 2. The Deep-Blue Standard (国民党成功提名洪秀柱：点选 2593)
+// 3. The Deep-Blue Standard (国民党成功提名洪秀柱：点选 2593)
 if (ans === 2593) {
     unlockAchievement("The Deep-Blue Standard");
 }
 
-// 3. Rebuilding from the Ruins (2018 败选后提名朱立伦：点选 2578 且 2018 胜者为民进党/数值为 2)
+// 4. Rebuilding from the Ruins (2018 败选后提名朱立伦：点选 2578 且 2018 胜者为民进党/数值为 2)
 if (ans === 2578 && campaignTrail_temp.Wins2018election === 2) {
     unlockAchievement("Rebuilding from the Ruins");
+}
+//5 The Oldest and the Newest (最老的和最新的：吴敦义选蒋万安为副手，点选 2818 即时触发)
+if (ans === 2818) {
+    unlockAchievement("The Oldest and the Newest");
 }
 
 //使用方法:单次最大改变不要超过正负5%
@@ -19334,7 +19352,7 @@ if (Number(campaignTrail_temp.mayingjiu) === 1) {
         // 1. 韩国瑜 (Han Kuo-yu) 败选分支
         // ======================================================================
         if (Number(campaignTrail_temp.hanguoyu) === 1) {
-            if (pct < 40.0) {
+            if (pct < 45.0) {
                    endText += `<p>The air inside your private holding room at the Kuomintang headquarters is stale, reeking of cold coffee and impending doom. You sit alone on the leather sofa, staring blankly at the muted television screen. Beside you, Lee Chia-fen sits in paralyzing silence. Her hands tremble slightly as she clutches a crumpled tissue, her eyes hollow and completely drained by the vicious, year-long media slaughterhouse that has torn your family apart. Standing awkwardly near the door, keeping a noticeable physical distance, is your running mate, <strong style='color:#0046AD;'>${currentMateName}</strong>. The person who eagerly joined your ticket, expecting to ride a populist rocket to the pinnacle of power, now constantly checks their phone with a grim, pale face, silently calculating how to salvage their own political career from this catastrophic, sinking submarine.</p>`;
 
                 endText += `<p>For months, you orchestrated the most audacious psychological illusion in Taiwanese political history. When the scientific polls showed you bleeding out by double digits, you did not pivot; you doubled down. You stood on brightly lit stages and roared to the masses that ‘he who wins the polls gets hemorrhoids.’ You ordered an unprecedented ‘polling blackout,’ instructing your fanatical followers to deliberately lie to pollsters and shout ‘Only support Tsai Ing-wen!’ It was a brilliant, desperate mechanism of self-preservation. You convinced millions of people that the cold, hard data was fake, and that the suffocating, shoulder-to-shoulder sea of red-and-blue flags at your rallies was the only truth that mattered. You built an impenetrable, massive echo chamber. But sitting in this quiet room, looking at the silent despair of your wife and the evasive eyes of your running mate, you know the brutal reality: the bubble is about to burst.</p>`;
@@ -19375,7 +19393,7 @@ if (Number(campaignTrail_temp.mayingjiu) === 1) {
         // 2. 朱立伦 (Eric Chu) 败选分支
         // ======================================================================
         else if (Number(campaignTrail_temp.zhulilun) === 1) {
-            if (pct < 40.0) {
+            if (pct < 45.0) {
                 endText += `<p>The air inside your private VIP suite at the campaign headquarters feels as heavy and cold as a tomb. The late afternoon sun struggles to pierce through the gray, overcast Taipei sky, casting long, fading shadows across the room. You sit perfectly still, staring down at the final internal blackout polling data handed to you just moments ago by Chairman Wu Den-yih. The numbers printed on the crisp white paper are an absolute, undeniable bloodbath. Less than forty percent. It is a grotesque, agonizing echo of your catastrophic 2016 campaign. The moderate, technocratic middle path you banked your entire political resurrection on has been utterly rejected by the electorate.</p>`;
 
                 endText += `<p>You look up, your eyes locking onto the Chairman standing across the coffee table. The polished, unoffensive mask you have worn for years finally slips, revealing a cold, exhausted bitterness. ‘Why didn't you run in 2016, Chairman?’ you ask, your voice dropping to a chilling, razor-sharp murmur. ‘Why did you hide in the shadows and let me walk alone into that slaughterhouse?’ Wu Den-yih pauses. A slow, sinister, and entirely evasive smile creeps across his aged, calculating face. He offers a meaningless, philosophical platitude about party duty and the unpredictable tides of history, smoothly and shamelessly dodging the question. You stare at him with absolute contempt. He knew 2016 was a suicide mission, and he gladly let you take the bullet. Now, through his machinations, he has let you take it twice.</p>`;
@@ -19415,7 +19433,7 @@ if (Number(campaignTrail_temp.mayingjiu) === 1) {
         // 3. 郭台铭 (Terry Gou) 败选分支
         // ======================================================================
         else if (Number(campaignTrail_temp.guotaiming) === 1) {
-            if (pct < 40.0) {
+            if (pct < 45.0) {
                       endText += `<p>The sprawling, ultra-luxury penthouse office of your campaign headquarters sits high above the suffocating smog of Taipei, encased in thick, soundproof glass. It is a fortress suspended in the sky, designed to isolate the apex predator from the noise of the streets below. The time is four-thirty in the afternoon. The ballot boxes have only just been sealed, but the verdict has already been ruthlessly delivered to your mahogany desk. You stand alone by the floor-to-ceiling window, your hands resting on the cold glass, staring blankly out at the gray, overcast horizon. The towering silhouette of Taipei 101 pierces the clouds in the distance, a monument to capital and ambition, yet today, it looks like a giant, mocking needle pointing straight at your monumental failure. You are completely, utterly alone. You had specifically ordered the campaign managers, the data analysts, and even your closest family members out of the suite. You needed the absolute, freezing silence to process the apocalyptic reality unfolding on the papers scattered across your desk. Less than forty percent. You are trailing Tsai Ing-wen by at least ten, perhaps twelve percentage points. It is not just a defeat; it is a mathematical massacre. It is a public, historical execution of your ego.</p>`;
 
 
@@ -19501,7 +19519,7 @@ if (Number(campaignTrail_temp.mayingjiu) === 1) {
         // 4. 王金平 (Wang Jin-pyng) 败选分支
         // ======================================================================
         else if (Number(campaignTrail_temp.wangjinping) === 1) {
-            if (pct < 40.0) {
+            if (pct < 45.0) {
               endText += `<p>The scent of aged Alishan high-mountain tea fills the dimly lit private suite of the Kuomintang headquarters. You sit alone at the heavy mahogany table, taking a slow, measured sip from a delicate porcelain cup. The television in the corner is muted, but the flashing red graphics and plunging bar charts tell the entire, brutal story. Less than forty percent. An absolute, humiliating slaughter. Yet, your heart rate does not spike. There is no shock, no sudden, paralyzing realization of doom. The cold, unromantic truth is that the King of Deals knew he was walking into a graveyard long before the first ballot was ever cast.</p>`;
 
                 endText += `<p>You were fighting a war on two impossible fronts. First, the ideological rebellion. The deep-blue purists, the aging veterans of the Huang Fu-hsing, absolutely refused to march for you. To them, you have always been blue skin, green bone—a treacherous opportunist who collaborated with the DPP and sabotaged their beloved Ma Ying-jeou during the infamous September Strife. They chose to stay home, letting the party burn to the ground rather than hand the crown to a man they viewed as a traitor. You could not negotiate with pure, unadulterated hatred.</p>`;
@@ -19548,7 +19566,7 @@ if (Number(campaignTrail_temp.mayingjiu) === 1) {
         // 5. 吴敦义 (Wu Den-yih) 败选分支
         // ======================================================================
         else if (Number(campaignTrail_temp.wudunyi) === 1) {
-            if (pct < 40.0) {
+            if (pct < 45.0) {
                endText += `<p>‘That sue-tsa-boo!’ you hiss, the sharp, bitter Taiwanese Hokkien curse for an unlucky woman echoing through the private suite of the Kuomintang central headquarters. You slam your hand against the mahogany desk, glaring at the massive LED screen. ‘Her governance is a complete, unmitigated disaster! A total trainwreck! How in the world is she getting these numbers?’ The reality on the broadcast is mathematically terrifying. You are barely scraping the absolute bottom of the orthodox blue base. Less than forty percent. It is an apocalyptic collapse.</p>`;
 
                 endText += `<p>Your wife, Tsai Ling-yi, walks over and gently places a hand on your trembling shoulder. She offers a sad, wry smile, her eyes reflecting the exhaustion of the campaign trail. ‘Nobody likes a stubborn old man like you anymore, Den-yih,’ she teases softly, trying to break the suffocating tension. ‘Well, nobody except me.’ You pause, the anger deflating slightly, and bark out a loud, hollow laugh, waving your hand to brush off the grim reality of the moment. The heavy oak doors open, and your running mate, <strong style='color:#0046AD;'>${currentMateName}</strong>, walks in, looking pale and thoroughly defeated. ‘I am so sorry, Chairman,’ <strong style='color:#0046AD;'>${currentMateName}</strong> says, bowing their head slightly. ‘I wish I could have brought more momentum to the ticket.’ You immediately wave away the apology, your face softening into the mask of a benevolent elder. ‘Nonsense. You fought hard. I appreciate everything you sacrificed for this party. The tides simply were not with us.’</p>`;
@@ -23151,7 +23169,7 @@ if (luWonTaichung) {
 
 let dpp_2028_challenger = 'Chen Chi-mai'; let dpp_2028_challenger_zh = '陳其邁'; let dpp_2028_cborn = '(Born 1964)';
 let dpp_2028_cimg = 'https://file.garden/Z9XHdyLGHwUEZPS4/ROC%202020/chimai.jpg';
-let dpp_2028_cvp = 'Hsiao Bi-khim<br><span style=\'color: #1B9431; font-weight: bold;\'>(DPP)</span>';
+let dpp_2028_cvp = 'Su Chiao-Hui <br><span style=\'color: #1B9431; font-weight: bold;\'>(DPP)</span>';
 
 // 6. 2024 胜负权重精算引擎
 let weight_kmt_2024 = 0; let weight_dpp_2024 = 0;
@@ -23464,6 +23482,35 @@ if (kmt_2020_win && candWang && wonKaohsiung) {
 if (finalKmtSeats >= 75) {
     unlockKmtAch("Supermajority in the Chamber");
 }
+
+
+
+// 13. The Orthodox Choice (正统之选：韩国瑜 + 张善政 选过 2780 且胜选)
+if (kmt_2020_win && candHan && campaignTrail_temp.player_answers.includes(2780)) {
+    unlockKmtAch("The Orthodox Choice");
+}
+
+// 14. An Early Partnership (早来的搭档：韩国瑜 + 江启臣 选过 2786 且胜选)
+if (kmt_2020_win && candHan && campaignTrail_temp.player_answers.includes(2786)) {
+    unlockKmtAch("An Early Partnership");
+}
+
+// 15. Old as Time! (老的要死！：王金平 + 郝龙斌 选过 2756 且胜选)
+if (kmt_2020_win && candWang && campaignTrail_temp.player_answers.includes(2756)) {
+    unlockKmtAch("Old as Time!");
+}
+
+// 16. Taipei Crusaders (台北十字军：洪秀柱 + 张亚中 选过 2826 且得票率 >= 30%)
+if (e.hongxiuzhu == 1 && campaignTrail_temp.player_answers.includes(2826) && p_kmt_2020 >= 30.0) {
+    unlockKmtAch("Taipei Crusaders");
+}
+
+// 17. Foxconn Situation Room (富士康战情室：郭台铭 + 赵少康 选过 2813 且胜选)
+if (kmt_2020_win && candGou && campaignTrail_temp.player_answers.includes(2813)) {
+    unlockKmtAch("Foxconn Situation Room");
+}
+
+
 
 // ==========================================================
 // 通用成就：风向标错了！(直接对比普选票得票率防错版)
