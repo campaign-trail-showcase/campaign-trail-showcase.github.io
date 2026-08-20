@@ -44,7 +44,6 @@
       <div id="achwindowheader"><button onclick="closeAchievements()" id="achclose">X</button> Achievements</div>
       <div id="achcontent"></div>
     </div>
-    <div style="display:none" id="variableTooltip"></div>
     <div id="wittyquote" style="display:none"></div>
     <div class="container">
       <div class="center">
@@ -95,7 +94,7 @@
               <div style="margin-top:10px">
                 <button onclick="addSTSSMoney()" style="border-radius:5px; font-weight:bold;padding:10px;">"Borrow" $1000000 (STSS Only)</button>
                 <button onclick="useConsoleCheats()" style="border-radius:5px; font-weight:bold;padding:10px;">Open Console</button>
-                <button onclick="activateVariableTooltip()" style="border-radius:5px; font-weight:bold;padding:10px;">Variable Tooltip</button>
+                <button onclick="toggleVariableChanges()" id="variableChangesButton" aria-pressed="false" style="border-radius:5px; font-weight:bold;padding:10px;">Variable Changes</button>
               </div>
             </div>
             <div id="autoplayMenu" style="display:none">
@@ -251,7 +250,7 @@
   <script src="../static/js/campaign_trail.js" defer></script>
   <script src="../static/js/remote.js" defer></script>
   <script src="../static/js/mobileStyle.js" defer></script>
-  <script src="../static/js/variableChangeTooltip.js" defer></script>
+  <script src="../static/js/variableChanges.js" defer></script>
   <script>
     window.addEventListener('DOMContentLoaded', function() {
       if (typeof campaignTrail_temp !== 'undefined') {
