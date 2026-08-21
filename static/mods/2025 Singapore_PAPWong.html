@@ -1118,7 +1118,7 @@ campaignTrail_temp.states_json = [
             "name": "Marine-Parade–Braddell-Heights",
             "abbr": "Marine_Parade–Braddell_Heights",
             "electoral_votes": 5,
-            "popular_votes": 0,
+            "popular_votes": 122369,
             "poll_closing_time": 0,
             "winner_take_all_flg": 1,
             "election": 21
@@ -7770,7 +7770,7 @@ campaignTrail_temp.answer_score_global_json = [
         "pk": 4040,
         "fields": {
             "answer": 6066,
-            "candidate": 301,
+            "candidate": 300,
             "affected_candidate": 301,
             "global_multiplier": 0.035
         }
@@ -7780,7 +7780,7 @@ campaignTrail_temp.answer_score_global_json = [
         "pk": 4041,
         "fields": {
             "answer": 6067,
-            "candidate": 303,
+            "candidate": 300,
             "affected_candidate": 303,
             "global_multiplier": 0.035
         }
@@ -11215,10 +11215,12 @@ cyoAdventure = function (a) {
         JalanKayu -= 1;
     }
     // [JETS_CYOA_VARIABLE_EFFECTS_END]
+    if (campaignTrail_temp.player_answers?.includes(6022)) {
+        ctsAchievement("PP-PAP");
+    }
 
             //Walkover
           if(ans == 50397) {
-              console.log("done");
               switcheroo();
         }
 
@@ -12277,9 +12279,6 @@ endingPicker = (out, totv, aa, quickstats) => {
         ctsAchievement("Crack the Hammer");
     }
 
-    if (campaignTrail_temp.player_answers?.includes(6022)) {
-        ctsAchievement("PP-PAP");
-    }
 
     let TPResult = campaignTrail_temp.final_state_results.find((x) => x.state === 42561);
     if (TPResult?.result?.[0]?.candidate && TPResult.result[0].candidate !== 300) {
@@ -12881,7 +12880,7 @@ endingPicker = (out, totv, aa, quickstats) => {
 
 <p>After 15 years of heading Singapore’s government, Prime Minister Lawrence Wong will step down on July 1.
 
-<p>At 66, Mr Wong will be the youngest Prime Minister to retire in Singaporean history.
+<p>At 66, Mr Wong will be the second youngest Prime Minister to retire in Singaporean history, behind Goh Chok Tong.
 
 <p>Mr Wong’s time as Prime Minister started with a roaring success in the 2025 elections, with the PAP winning every seat in Parliament, including Hougang which had not gone for the party since 1991. This result was the first time the ruling party had won every seat since 1980, under Lee Kuan Yew. 
 
@@ -16526,4 +16525,3 @@ campaignTrail_temp.jet_data = [{
     "player_candidate": 300
 }
 ]
-

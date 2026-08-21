@@ -1334,7 +1334,7 @@ campaignTrail_temp.states_json = [
             "name": "Marine-Parade–Braddell-Heights",
             "abbr": "Marine_Parade–Braddell_Heights",
             "electoral_votes": 5,
-            "popular_votes": 0,
+            "popular_votes": 122369,
             "poll_closing_time": 0,
             "winner_take_all_flg": 1,
             "election": 21
@@ -4160,7 +4160,7 @@ campaignTrail_temp.candidate_state_multiplier_json = [
         "fields": {
             "candidate": 301,
             "state": 42441,
-            "state_multiplier": 1
+            "state_multiplier": 1.05
         }
     },
     {
@@ -13936,24 +13936,12 @@ endingPicker = (out, totv, aa, quickstats) => {
     }
 
     const pppTampinesPct = getCandStatePct(42511, 50004);
-    if (pppTampinesPct > 0 && pppTampinesPct < 0.5) {
+    if (pppTampinesPct < 0.5) {
         ctsAchievement("Be Humble");
     }
-
-    if (Woke > 4) {
-        ctsAchievement("True Woke");
-    }
-
-    if (campaignTrail_temp.player_answers?.includes(6051)) {
-        ctsAchievement("Singapore's PAS");
-    }
-
-    if (ManpowerStrain > 3) {
-        ctsAchievement("Mr Islandwide");
-    }
-
+    
     if (!isStateWinner(42511, 301) && getCandStatePct(42511, 50004) > 4) {
-        ctsAchievement("I'm Straight");
+        ctsAchievement("I’m Straight");
     }
 
     if (getCandStatePct(42551, 301) > 40) {
@@ -14697,7 +14685,7 @@ endingConstructor = (a = 1) => {
     e.image = ["https://file.garden/aftBfT23iVucvcGE/wpendings/eta.png","https://file.garden/aftBfT23iVucvcGE/wpendings/contesthalf.png"]
 
     e.pages = [`<h3> Blue Wave </h3>
-<p> As election night began, first came the irrelevant results. Marymount, Radin Mas and Jurong Central looked surprisingly good for the opposition, but nothing spectacular. Besides, once the results turned to the East, you knew there would be swathes of blue.
+<div style='overflow-y:scroll;height:300px;'></div><p> As election night began, first came the irrelevant results. Marymount, Radin Mas and Jurong Central looked surprisingly good for the opposition, but nothing spectacular. Besides, once the results turned to the East, you knew there would be swathes of blue.
 
 <p> But with more results from the West coming in, everything didn’t look that bad after all. Maybe the WP would be in for an acceptable night. Maybe some gains too. Aljunied and Hougang had been called for the WP soon, and all eyes were on Sengkang. The call soon came in.
 
@@ -14809,7 +14797,6 @@ endingConstructor = (a = 1) => {
 
 <p> However the WP moves for 2030, will be up to one man, and that is Pritam Singh.
 
-<p> However the WP moves for 2030, will be up to one man, and that is Pritam Singh.
 </div>`];
                     e.image = ["https://file.garden/aftBfT23iVucvcGE/wpendings/smileprit.png","https://file.garden/aftBfT23iVucvcGE/wpendings/wprally.png"];
                             if (used != true) {
@@ -15203,14 +15190,24 @@ cyoAdventure = function (a) {
         amk -= 1;
     }
     // [JETS_CYOA_VARIABLE_EFFECTS_END]
-    
-            const walkoverCodes = [6079, 50749, 50754, 7012, 7014];
+
+    if (Woke > 4) {
+        ctsAchievement("True Woke");
+    }
+
+    if (campaignTrail_temp.player_answers?.includes(6051)) {
+        ctsAchievement("Singapore’s PAS");
+    }
+
+    if (ManpowerStrain > 3) {
+        ctsAchievement("Mr Islandwide");
+    }
+        const walkoverCodes = [6079, 50749, 50754, 7012, 7014];
 
             if (walkoverCodes.includes(ans)) {
             console.log("done");
             switcheroo();
             }
-
 
     // question swap CYOA here
     if (campaignTrail_temp.question_number == 13 && JKayu == 0) {
@@ -15219,25 +15216,30 @@ cyoAdventure = function (a) {
     if (campaignTrail_temp.question_number == 20 && JKayu == 0 && pasirris == 1 && amk == 1) {
             questionSwapper(1222, 12222);
     }
-    if (campaignTrail_temp.question_number == 20 && JKayu == 0 && pasirris == 1) {
+    if (campaignTrail_temp.question_number == 20 && JKayu == 0 && pasirris == 1 && amk == 0) {
             questionSwapper(1222, 12222);
     }
-    if (campaignTrail_temp.question_number == 20 && JKayu == 0 && amk == 1) {
+    if (campaignTrail_temp.question_number == 20 && JKayu == 0 && amk == 1 && pasirris == 0) {
             questionSwapper(1222, 12223);
     }
     if (campaignTrail_temp.question_number == 20 && JKayu == 0 && amk == 0 && pasirris == 0) {
             questionSwapper(1222, 12224);
     }
-    if (campaignTrail_temp.question_number == 13 && campaignTrail_temp.question_number == 4 && Jeremy < 2) {
+    if (campaignTrail_temp.question_number == 4 && campaignTrail_temp.question_number == 4 && Jeremy < 2) {
         questionSwapper(12042, 1204);
     }
-    if ((campaignTrail_temp.question_number == 13 && ManpowerStrain < 4 && ManpowerStrain >= 2 && campaignTrail_temp.player_answers.includes(6020))) {
+    if (campaignTrail_temp.question_number == 13 && ManpowerStrain < 4 && ManpowerStrain >= 2 && campaignTrail_temp.player_answers.includes(6020) && !campaignTrail_temp.player_answers.includes(50722)) {
         questionSwapper(12216, 1221);
     }
-    if ((campaignTrail_temp.question_number == 13 && ManpowerStrain < 4 && ManpowerStrain >= 2 && campaignTrail_temp.player_answers.includes(50722))) {
+    if (campaignTrail_temp.question_number == 13 && ManpowerStrain < 4 && ManpowerStrain >= 2 && campaignTrail_temp.player_answers.includes(50722) && !campaignTrail_temp.player_answers.includes(6020)) {
         questionSwapper(12215, 1221);
     }
-    if (campaignTrail_temp.question_number == 13 && ManpowerStrain >= 2 && ManpowerStrain < 4) {
+    if (campaignTrail_temp.question_number == 13 && 
+        campaignTrail_temp.player_answers.includes(50722) &&
+        campaignTrail_temp.player_answers.includes(6020)) {
+    }
+    if (campaignTrail_temp.question_number == 13 && ManpowerStrain >= 2 && ManpowerStrain < 4 &&
+        !(campaignTrail_temp.player_answers.includes(6020) && campaignTrail_temp.player_answers.includes(50722))) {
         questionSwapper(12212, 1221);
     }
     if (campaignTrail_temp.question_number == 13 && ManpowerStrain < 2 && JKayu > 0) {
@@ -15249,15 +15251,15 @@ cyoAdventure = function (a) {
     if (campaignTrail_temp.question_number == 23 && ManpowerStrain > 2) {
         questionSwapper(1224, 12245);
     }
-    if (campaignTrail_temp.question_number == 23 && Woke > 2) {
+    if (campaignTrail_temp.question_number == 23 && ManpowerStrain <= 2 && Woke > 2) {
         questionSwapper(12242, 12245);
     }
-    if (campaignTrail_temp.question_number == 23 && Jeremy > 0) {
+    if (campaignTrail_temp.question_number == 23 && ManpowerStrain <= 2 && Woke < 1) {
+        questionSwapper(12244, 12245);
+    }
+    if (campaignTrail_temp.question_number == 23 && ManpowerStrain <= 2 && Woke >= 1 && Jeremy > 0) {
         questionSwapper(12243, 12245);
     }
-    if (campaignTrail_temp.question_number == 23 && Woke < 1) {
-        questionSwapper(12244, 12245);
-}
 }
 // This music player was made
 // for 2028: An Old Cycle.
