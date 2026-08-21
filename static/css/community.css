@@ -804,18 +804,19 @@
   text-align: center;
 }
 
-#variableTooltip {
-  position: absolute;
-  display: none;
-  background-color: rgba(0, 0, 0, 0.85);
-  color: #fff;
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 12px;
-  z-index: 9999;
-  pointer-events: none;
-  max-width: 500px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+#question_form .vs-inline {
+  margin-left: 0.9em;
+  padding: 0.05em 0.4em;
+  background: #ffe27a;
+  color: #1a1a1a;
+  font-family: Consolas, Menlo, "DejaVu Sans Mono", monospace;
+  font-size: 0.78em;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: normal;
+  text-transform: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* CTS theme readability fixes */

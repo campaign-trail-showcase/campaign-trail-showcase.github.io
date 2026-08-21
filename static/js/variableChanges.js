@@ -1,0 +1,100 @@
+const variableChanges = {
+  enabled: false,
+  loadedModName: null,
+  changesByMod: null,
+  observer: null,
+};
+
+async function fetchModVariableChanges(modName) {
+  const response = await fetch(`../static/json/variablechanges/${modName}.json`);
+  // most mods have no custom variables, so 404 isn't failure
+  return response.ok ? response.json() : null;
+}
+
+async function ensureVariableChangesLoaded() {
+  const modName = new URLSearchParams(window.location.search).get("modName");
+  if (variableChanges.loadedModName === modName) return;
+
+  variableChanges.changesByMod = modName ? await fetchModVariableChanges(modName) : null;
+  variableChanges.loadedModName = modName;
+}
+
+function resolveTicketChanges(changesByMod, modName) {
+  const candidateChanges = changesByMod[modName]?.[campaignTrail_temp.candidate_id];
+
+  return candidateChanges?.[campaignTrail_temp.running_mate_id] ?? null;
+}
+
+function formatChange(change) {
+  return `${change.var} ${change.change}`.replaceAll(" ", "\u00A0");
+}
+
+function renderChangeAnnotation(changes) {
+  const text = changes?.length ? changes.map(formatChange).join(", ") : "no changes";
+
+  return `<span class="vs-inline">${text}</span>`;
+}
+
+function findAnswerLabels() {
+  return [...document.querySelectorAll("#question_form input[name='game_answers']")].map((input) => ({
+    answerPk: input.value,
+    labelElement: document.querySelector(`#question_form label[for="${CSS.escape(input.id)}"]`),
+  }));
+}
+
+function clearAnnotations() {
+  for (const annotation of document.querySelectorAll("#question_form .vs-inline")) {
+    annotation.remove();
+  }
+}
+
+function renderVariableChanges() {
+  stopVariableObserver();
+  clearAnnotations();
+
+  if (!variableChanges.enabled) return;
+
+  const ticketChanges = variableChanges.changesByMod
+    ? resolveTicketChanges(variableChanges.changesByMod, variableChanges.loadedModName)
+    : null;
+
+  if (ticketChanges) {
+    for (const { answerPk, labelElement } of findAnswerLabels()) {
+      const annotation = renderChangeAnnotation(ticketChanges[answerPk]);
+      labelElement?.insertAdjacentHTML("beforeend", annotation);
+    }
+  }
+
+  startVariableObserver();
+}
+
+// watcher for question form
+function startVariableObserver() {
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow) return;
+
+  variableChanges.observer = new MutationObserver(renderVariableChanges);
+  variableChanges.observer.observe(gameWindow, { childList: true, subtree: true });
+}
+
+function stopVariableObserver() {
+  if (!variableChanges.observer) return;
+
+  variableChanges.observer.disconnect();
+  variableChanges.observer = null;
+}
+
+function syncVariableChangesButton() {
+  const button = document.getElementById("variableChangesButton");
+  button.setAttribute("aria-pressed", String(variableChanges.enabled));
+  button.textContent = variableChanges.enabled ? "Hide Variable Changes" : "Variable Changes";
+}
+
+async function toggleVariableChanges() {
+  const enabling = !variableChanges.enabled;
+  if (enabling) await ensureVariableChangesLoaded();
+
+  variableChanges.enabled = enabling;
+  syncVariableChangesButton();
+  renderVariableChanges();
+}
