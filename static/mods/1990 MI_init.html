@@ -324,17 +324,6 @@ document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_wi
 e.difficulty_level_json = [{"model":"campaign_trail.difficulty_level","pk":1,"fields":{"name":"Guaranteed","multiplier":1.5}},{"model":"campaign_trail.difficulty_level","pk":2,"fields":{"name":"Babymode","multiplier":1.4}},{"model":"campaign_trail.difficulty_level","pk":3,"fields":{"name":"Cakewalk","multiplier":1.3}},{"model":"campaign_trail.difficulty_level","pk":4,"fields":{"name":"Very Easy","multiplier":1.2}},{"model":"campaign_trail.difficulty_level","pk":5,"fields":{"name":"Easy","multiplier":1.1}},{"model":"campaign_trail.difficulty_level","pk":6,"fields":{"name":"Quite Easy","multiplier":1.05}},{"model":"campaign_trail.difficulty_level","pk":7,"fields":{"name":"Normal","multiplier":1.00}},{"model":"campaign_trail.difficulty_level","pk":8,"fields":{"name":"Challenging","multiplier":0.95}},{"model":"campaign_trail.difficulty_level","pk":9,"fields":{"name":"Hard","multiplier":0.9}},{"model":"campaign_trail.difficulty_level","pk":10,"fields":{"name":"Very Hard","multiplier":0.85}},{"model":"campaign_trail.difficulty_level","pk":11,"fields":{"name":"Impossible","multiplier":0.8}},{"model":"campaign_trail.difficulty_level","pk":12,"fields":{"name":"Unthinkable","multiplier":0.7}},{"model":"campaign_trail.difficulty_level","pk":13,"fields":{"name":"Blowout","multiplier":0.6}},{"model":"campaign_trail.difficulty_level","pk":14,"fields":{"name":"Disaster","multiplier":0.5}},{"model":"campaign_trail.difficulty_level","pk":15,"fields":{"name":"Calamity","multiplier":0.4}}]
 
 
-const stateRaceVpSelect = window.vpSelect;
-if (typeof stateRaceVpSelect === "function") {
-  window.vpSelect = function(event) {
-    stateRaceVpSelect.call(this, event);
-    const runningMateContinue = document.getElementById("running_mate_id_button");
-    if (runningMateContinue) {
-      runningMateContinue.click();
-    }
-  };
-}
-
 document.getElementById("inner_window_1").children[0].innerHTML = `Do you have what it takes to win a State Election?</h3>`
 
 document.getElementById("inner_window_1").children[1].innerHTML = `  <li>Select a year and a candidate to find out.</li>  <li>You will answer questions about your platform and positions, and also about your campaign strategy.</li>  <li>The answers will affect your popularity for better or worse, both state-wide and in individual counties.</li>  <li>Walk the fine line between appealing to your base and winning a majority of the votes.</li> <li>Additionally, the game has been modified to support unofficial, community-made custom scenarios. (or, mods.)</li>  <li>To load a mod, scroll down below to view the mod selection, select a mod, click submit, and then press "Click Here to Begin!".</li>  <li>Alternatively, click the 'Custom Mod Loader' button to load a mod by copying and pasting the codes, or even save them!</li>`
