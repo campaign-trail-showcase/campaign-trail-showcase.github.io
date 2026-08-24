@@ -1505,6 +1505,7 @@ setupMusicPlayer();
 campaignTrail_temp.whiteWhaleSwapColors = false
 campaignTrail_temp.whiteWhaleNormalFont = false
 campaignTrail_temp.whiteWhaleAlternatePerotColor = false
+campaignTrail_temp.whiteWhaleAlternatePerotColor2 = false
 
 function whiteWhaleHasAlternatePerotColor() {
     try {
@@ -1522,7 +1523,39 @@ function whiteWhaleHasAlternatePerotColor() {
     return false
 }
 
+function whiteWhaleUnlockedAchievementCount() {
+    try {
+        var unlockedAchievements = JSON.parse(localStorage.getItem("unlockedAch") || "{}")
+        var achievementNames = Object.keys(campaignTrail_temp.achievements || {})
+        var unlockedCount = 0
+
+        for (var i = 0; i < achievementNames.length; i++) {
+            if (unlockedAchievements[achievementNames[i]]) unlockedCount++
+        }
+
+        return unlockedCount
+    } catch (e) {}
+
+    return 0
+}
+
+function whiteWhaleHasAlternatePerotColor2() {
+    try {
+        if (localStorage.getItem("whiteWhaleAlternatePerotColor2Unlocked") === "true") {
+            return true
+        }
+
+        if (whiteWhaleUnlockedAchievementCount() >= 25) {
+            localStorage.setItem("whiteWhaleAlternatePerotColor2Unlocked", "true")
+            return true
+        }
+    } catch (e) {}
+
+    return false
+}
+
 campaignTrail_temp.whiteWhaleAlternatePerotUnlocked = whiteWhaleHasAlternatePerotColor()
+campaignTrail_temp.whiteWhaleAlternatePerotColor2Unlocked = whiteWhaleHasAlternatePerotColor2()
 
 window.whiteWhaleUnlockAlternatePerotColor = function() {
     var alreadyUnlocked = false
@@ -1541,6 +1574,42 @@ window.whiteWhaleUnlockAlternatePerotColor = function() {
     alert("ALTERNATE OPTION UNLOCKED: Alternate Perot color")
 }
 
+window.whiteWhaleCheckAlternatePerotColor2Unlock = function() {
+    var alreadyUnlocked = false
+
+    try {
+        alreadyUnlocked = localStorage.getItem("whiteWhaleAlternatePerotColor2Unlocked") === "true"
+    } catch (e) {}
+
+    if (alreadyUnlocked) {
+        campaignTrail_temp.whiteWhaleAlternatePerotColor2Unlocked = true
+        return true
+    }
+
+    if (whiteWhaleUnlockedAchievementCount() < 25) return false
+
+    try {
+        localStorage.setItem("whiteWhaleAlternatePerotColor2Unlocked", "true")
+    } catch (e) {}
+
+    campaignTrail_temp.whiteWhaleAlternatePerotColor2Unlocked = true
+    alert("ALTERNATE OPTION UNLOCKED: Alternate Perot color 2")
+    return true
+}
+
+function updateWhiteWhalePerotColorOptionAvailability() {
+    var perotCheckbox = document.getElementById("whiteWhalePerotColour")
+    var perot2Checkbox = document.getElementById("whiteWhalePerotColour2")
+
+    if (perotCheckbox) {
+        perotCheckbox.disabled = campaignTrail_temp.whiteWhaleAlternatePerotColor2
+    }
+
+    if (perot2Checkbox) {
+        perot2Checkbox.disabled = campaignTrail_temp.whiteWhaleAlternatePerotColor
+    }
+}
+
 function updateWhiteWhaleColors() {
     if (campaignTrail_temp.whiteWhaleSwapColors) {
         campaignTrail_temp.candidate_json[0].fields.color_hex = '#3F579B'
@@ -1554,13 +1623,21 @@ function updateWhiteWhaleColors() {
         campaignTrail_temp.candidate_json[1].fields.secondary_color_hex = '#b2bbd7'
     }
 
-    campaignTrail_temp.candidate_json[2].fields.color_hex =
-        campaignTrail_temp.whiteWhaleAlternatePerotColor ? '#843F9B' : '#3F9B7A'
+    if (campaignTrail_temp.whiteWhaleAlternatePerotColor2) {
+        campaignTrail_temp.candidate_json[2].fields.color_hex = '#D5652F'
+        campaignTrail_temp.candidate_json[2].fields.secondary_color_hex = '#D7BEB2'
+    } else if (campaignTrail_temp.whiteWhaleAlternatePerotColor) {
+        campaignTrail_temp.candidate_json[2].fields.color_hex = '#843F9B'
+        campaignTrail_temp.candidate_json[2].fields.secondary_color_hex = '#b2d7c9'
+    } else {
+        campaignTrail_temp.candidate_json[2].fields.color_hex = '#3F9B7A'
+        campaignTrail_temp.candidate_json[2].fields.secondary_color_hex = '#b2d7c9'
+    }
 
     HistHexcolour = [
         campaignTrail_temp.whiteWhaleSwapColors ? "#9b4c3f" : "#3F579B",
         campaignTrail_temp.whiteWhaleSwapColors ? "#3F579B" : "#9b4c3f",
-        campaignTrail_temp.whiteWhaleAlternatePerotColor ? "#843F9B" : "#3F9B7A",
+        campaignTrail_temp.whiteWhaleAlternatePerotColor2 ? "#D5652F" : (campaignTrail_temp.whiteWhaleAlternatePerotColor ? "#843F9B" : "#3F9B7A"),
         "#9b7a3f"
     ]
 }
@@ -1622,9 +1699,34 @@ function addWhiteWhaleOptions() {
 
             perotCheckbox.addEventListener("change", function() {
                 campaignTrail_temp.whiteWhaleAlternatePerotColor = this.checked
+                updateWhiteWhalePerotColorOptionAvailability()
                 updateWhiteWhaleColors()
             });
         }
+
+        campaignTrail_temp.whiteWhaleAlternatePerotColor2Unlocked = whiteWhaleHasAlternatePerotColor2()
+
+        if (campaignTrail_temp.whiteWhaleAlternatePerotColor2Unlocked) {
+            var perot2Form = document.createElement("form");
+            perot2Form.name = "white_whale_perot_colour_2_selection";
+            var perot2Header = document.createElement("h3");
+            perot2Header.textContent = "Alternate Perot color 2";
+            perot2Form.appendChild(perot2Header);
+            var perot2Checkbox = document.createElement("input");
+            perot2Checkbox.type = "checkbox";
+            perot2Checkbox.id = "whiteWhalePerotColour2";
+            perot2Checkbox.checked = campaignTrail_temp.whiteWhaleAlternatePerotColor2;
+            perot2Form.appendChild(perot2Checkbox);
+            difficultyDiv.appendChild(perot2Form);
+
+            perot2Checkbox.addEventListener("change", function() {
+                campaignTrail_temp.whiteWhaleAlternatePerotColor2 = this.checked
+                updateWhiteWhalePerotColorOptionAvailability()
+                updateWhiteWhaleColors()
+            });
+        }
+
+        updateWhiteWhalePerotColorOptionAvailability()
 
         var forms = document.querySelectorAll("#difficulty_level form");
         for (var i = 0; i < forms.length; i++) {
