@@ -4,7 +4,7 @@ campaignTrail_temp.election_json = [
         "pk": 3,
         "fields": {
             "year": 2008,
-            "display_year": "2008 - Wake Up America",
+            "display_year": "2008",
             "summary": "<div class='k08-election-summary-scroll'>\n<p><b>By mid-2007, to many the 2008 Democratic Primary for President already seemed locked down.</b></p>\n<p>Hillary Clinton was the obvious nominee. It was Her\u2122 time, and after the blue wave that was the 2006 midterms, her victory was easy to imagine. That September however, she shocked the nation by announcing she would not seek the nomination due to health problems. The effect was immediate. The Republican field expanded overnight, with multiple conservatives who'd sat the cycle out getting back in. For Republicans, the prospect of facing someone as inexperienced as Barack Obama was a dream scenario, and once Clinton endorsed him in late December he was the clear Democratic frontrunner. But soon enough, it became clear that Senator Obama was a force to be reckoned with. The short moment of hope Republicans experienced had been replaced by the prospect of a blue tsunami. The Bush administration was widely unpopular, and the Iraq war was losing national support by the day.</p>\n<p>Ohio Congressman Dennis Kucinich was nothing more than a sideshow attraction. It wasn't like Democrats didn't like him, but he wasn't serious. He didn't represent the fundamental change the country was desperate for. Sure, Barack Obama had his faults. Hell, he was against gay marriage and legal marijuana. Dennis made those issues pillars of his campaign! But the Democratic Party at large was more interested in making history, and Dennis Kucinich didn't represent that. Maybe his ideas like the Department of Peace and single-payer healthcare were the future of the party, but he wasn't. The platform Dennis Kucinich spent his career fighting to advance would have its day eventually. Dennis, however, was committed to making that day January 20th, 2009. But that's just crazy, right?</p>\n</div>",
             "image_url": "https://i.imgur.com/pSNtuKP.png",
             "winning_electoral_vote_number": 270,
@@ -22,13 +22,23 @@ campaignTrail_temp.temp_election_list = [
         "id": 3,
         "year": 2008,
         "is_premium": 0,
-        "display_year": "2008 - Wake Up America"
+        "display_year": "2008"
     }
 ];
 
 RecReading = true;
 
 campaignTrail_temp.credits = "Rupert Pupkin";
+
+// necessary so that the right election files are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "3") {
+            campaignTrail_temp.code2_id = "2008 - Wake Up America";
+        }
+    }
+}, 100);
 
 campaignTrail_temp.global_parameter_json = [
     {
@@ -48,7 +58,7 @@ campaignTrail_temp.global_parameter_json = [
             "issue_stance_6_max": 0.71,
             "global_variance": 0.01,
             "state_variance": 0.005,
-            "question_count": 30,
+            "question_count": 34,
             "default_map_color_hex": "#C9C9C9",
             "no_state_map_color_hex": "#999999"
         }
@@ -66,7 +76,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Democrat",
             "state": "Ohio",
             "priority": 1,
-            "description": "Dennis Kucinich has never had much use for the word impossible, which is fortunate, because almost everyone looking at this campaign thinks that's exactly what his chances are. He is a nationally known Congressman, but hardly anyone in Washington believes America is about to elect an anti-war populist from Cleveland whose platform sits well outside the party mainstream. The money, the endorsements, and nearly every conventional measure of political viability point somewhere else.<br><br>Still, Dennis has never been afraid of a fight. With his wife Elizabeth by his side, he knows he's in for an uphill battle. That same kid who watched John F. Kennedy's inauguration sitting in his 11th-grade classroom is determined to put every ounce of conviction he has into this fight, no matter what anyone has to say about it.",
+            "description": "Dennis Kucinich has never had much use for the word impossible, which is fortunate, because almost everyone looking at this campaign thinks that's exactly what his chances are. He is a nationally known Congressman, but hardly anyone in Washington believes America is about to elect an anti-war populist from Cleveland whose platform sits well outside the party mainstream. The money, the endorsements, and nearly every conventional measure of political viability point somewhere else.<br><br>Still, Dennis has never been afraid of a fight. With his wife Elizabeth by his side, he knows he's in for an uphill battle. That same kid who watched John F. Kennedy's inauguration sitting in his 11th-grade classroom and felt called to public service is determined to put every ounce of conviction he has into this fight, no matter what anyone has to say about it.",
             "color_hex": "#6eb4f2",
             "secondary_color_hex": "#90C0FF",
             "is_active": 1,
@@ -118,7 +128,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "For once, Democrats can allow themselves a little cautious optimism. After eight years of George W. Bush, the country looks exhausted, the Republican brand is battered, and the party can feel a new age somewhere just over the horizon.<br><br>Maybe this is finally the election that puts the traumatic memories of swift boats and hanging chads to bed for good. Democrats are ready for a change they can believe in, and this time it won't slip through their grasp.... right?",
+            "description_as_running_mate": "For once, Democrats can allow themselves a little cautious optimism. After eight years of George W. Bush, the country looks exhausted, the Republican brand is battered, and the party can feel a new age somewhere just over the horizon.<br><br>Maybe this is finally the election that puts the traumatic memories of swift boats and hanging chads to bed for good. Democrats are ready for a change they can believe in, and this time it won't slip through their grasp.",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -481,7 +491,7 @@ campaignTrail_temp.candidate_json = [
             "description": "<p>Entertainer and libertarian activist Penn Jillette heads a small protest campaign built around civil liberties, opposition to war, and hostility toward the two-party establishment. He is not seriously contesting the presidency, but could matter at the margins in a close election.</p>",
             "color_hex": "#F4D03F",
             "secondary_color_hex": "#FFF3A6",
-            "is_active": 1,
+            "is_active": 0,
             "image_url": "",
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
@@ -504,7 +514,7 @@ campaignTrail_temp.candidate_json = [
             "description": "<p>A collection of minor-party and independent candidates. None is individually competitive, but together they draw a small protest vote in most states.</p>",
             "color_hex": "#8E44AD",
             "secondary_color_hex": "#C39BD3",
-            "is_active": 1,
+            "is_active": 0,
             "image_url": "",
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
@@ -654,7 +664,7 @@ campaignTrail_temp.running_mate_last_name = "Party";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/zGAzDXW.png";
 campaignTrail_temp.selected_running_mate_id = 30;
 if (campaignTrail_temp.global_parameter_json?.[0]?.fields) {
-    campaignTrail_temp.global_parameter_json[0].fields.question_count = 30;
+    campaignTrail_temp.global_parameter_json[0].fields.question_count = 34;
 }
 
 (function(){
@@ -664,10 +674,11 @@ if (campaignTrail_temp.global_parameter_json?.[0]?.fields) {
     if(!c){ c={model:'campaign_trail.candidate',pk,fields:{}}; cs.push(c); }
     Object.assign(c.fields,fields);
   }
-  ensure(50,{first_name:'Penn',last_name:'Jillette',election:3,party:'Libertarian',state:'Nevada',priority:19,color_hex:'#F4D03F',secondary_color_hex:'#FFF3A6',is_active:1,running_mate:false,candidate_score:1});
-  ensure(51,{first_name:'Other',last_name:'Reform/Others',election:3,party:'Others',state:'Various',priority:20,color_hex:'#8E44AD',secondary_color_hex:'#C39BD3',is_active:1,running_mate:false,candidate_score:1});
+  ensure(50,{first_name:'Penn',last_name:'Jillette',election:3,party:'Libertarian',state:'Nevada',priority:19,color_hex:'#F4D03F',secondary_color_hex:'#FFF3A6',is_active:0,running_mate:false,candidate_score:1});
+  ensure(51,{first_name:'Other',last_name:'Reform/Others',election:3,party:'Others',state:'Various',priority:20,color_hex:'#8E44AD',secondary_color_hex:'#C39BD3',is_active:0,running_mate:false,candidate_score:1});
   ensure(52,{first_name:'Libertarian',last_name:'Party',election:3,party:'Libertarian',state:'Nevada',priority:21,color_hex:'#F4D03F',secondary_color_hex:'#FFF3A6',is_active:0,running_mate:true,candidate_score:0,description_as_running_mate:'<p>A nominal Libertarian running-mate shell used for election-engine compatibility.</p>'});
   ensure(53,{first_name:'Other',last_name:'Parties',election:3,party:'Others',state:'Various',priority:22,color_hex:'#8E44AD',secondary_color_hex:'#C39BD3',is_active:0,running_mate:true,candidate_score:0,description_as_running_mate:'<p>A nominal minor-party running-mate shell used for election-engine compatibility.</p>'});
+  ensure(36,{first_name:'Russ',last_name:'Feingold',election:3,party:'Democrat',state:'Wisconsin',priority:9,color_hex:'#0000FF',secondary_color_hex:'#90C0FF',is_active:0,running_mate:true,candidate_score:1.02,image_url:'https://i.imgur.com/v7ZXLUc.png',description_as_running_mate:"<div class='k08-vp-bio-scroll'><p>Russ Feingold may be the closest thing to a best-of-both-worlds choice, Dennis. The Wisconsin senator is a genuine progressive with credibility inside the Democratic Party. He was the lone senator to vote against the PATRIOT Act, helped lead the fight for campaign-finance reform, opposed NAFTA and the Iraq War, and seriously considered running for president himself in 2008.</p><p>At 55, Feingold is relatively young, charismatic, and already a three-term senator from a state we're going to need badly in November. He's Jewish, too, and if we win he'd become the first Jewish Vice President.</p><p>The drawback is balance. Two anti-war Midwestern progressives aren't going to reassure voters looking for a major ideological or geographic counterweight. Patrick or Napolitano would do considerably more of that.</p><p>But if you've managed to keep the progressive movement behind you and convince the Democratic Party you're not trying to burn the institution down, Feingold may be proof those things aren't mutually exclusive. And if you win, he'd make one hell of a vice president.</p></div>"});
   const rm=campaignTrail_temp.running_mate_json=campaignTrail_temp.running_mate_json||[];
   if(!rm.some(x=>Number(x.fields?.candidate)===50)) rm.push({model:'campaign_trail.running_mate',pk:3050,fields:{candidate:50,running_mate:52}});
   if(!rm.some(x=>Number(x.fields?.candidate)===51)) rm.push({model:'campaign_trail.running_mate',pk:3051,fields:{candidate:51,running_mate:53}});
@@ -679,7 +690,7 @@ if (campaignTrail_temp.global_parameter_json?.[0]?.fields) {
   }
   if(typeof jet_data==='object'){
     jet_data.nicknames=jet_data.nicknames||{};
-    Object.assign(jet_data.nicknames,{'16':'Kucinich','18':'Republican','50':'Jillette','51':'Reform/Others','52':'Libertarian Party','53':'Other Parties'});
+    Object.assign(jet_data.nicknames,{'16':'Kucinich','18':'Republican','50':'Jillette','51':'Reform/Others','52':'Libertarian Party','53':'Other Parties','36':'Feingold'});
   }
 })();
 
