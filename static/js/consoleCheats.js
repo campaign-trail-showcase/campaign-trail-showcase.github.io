@@ -586,6 +586,7 @@ const useConsoleCheats = () => {
   let lastQuestionNumber = -1;
   let lastPlayerVisitsLength = -1;
   let lastIgnoreStatesLength = -1;
+  let lastQuestionForm = null;
   let cachedPopVoteMap = null;
   let prev_answer_hint_enabled = false;
   let prev_sort_answers_state = false;
@@ -637,12 +638,14 @@ const useConsoleCheats = () => {
     if (!questionForm || inputs.length === 0) return;
 
     const needsRecalculation =
+      lastQuestionForm !== questionForm ||
       lastQuestionNumber !== e.question_number ||
       lastPlayerVisitsLength !== e.player_visits.length ||
       lastIgnoreStatesLength !== ignore_states.length ||
       cachedPopVoteMap === null;
 
     if (needsRecalculation) {
+      lastQuestionForm = questionForm;
       lastQuestionNumber = e.question_number;
       lastPlayerVisitsLength = e.player_visits.length;
       lastIgnoreStatesLength = ignore_states.length;

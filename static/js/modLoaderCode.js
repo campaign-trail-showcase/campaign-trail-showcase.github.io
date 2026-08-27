@@ -2383,6 +2383,7 @@ async function loadModFromButton(modValue) {
   modded = true;
 
   modBeingPlayed = modValue;
+  window.modBeingPlayed = modValue;
 
   if (!customMods.has(modValue)) {
     document.getElementById("copyLinkButton").style.display = "block";
