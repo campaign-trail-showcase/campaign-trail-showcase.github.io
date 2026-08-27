@@ -724,7 +724,7 @@ const useConsoleCheats = () => {
       prev_answer_hint_enabled = false;
     }
 
-    // Auto-visit automation
+    // auto-visit automation
     if ($(".visit_text").length > 0 && auto_visit != null) {
       const plugin = $("#map_container").data("plugin-usmap");
       const availableStates = e.states_json.map((st) => st.fields.abbr);
@@ -834,7 +834,7 @@ const useConsoleCheats = () => {
     return elt ? elt.pk : null;
   }
 
-  // --- Terminal UI & Autocomplete Engine ---
+  // terminal UI & autocomplete engine
   const terminalContainer = $("<div></div>")
     .addClass("terminal-container")
     .addClass("minimized")
@@ -1159,7 +1159,7 @@ const useConsoleCheats = () => {
     cmd.handle(msg.substring(parts[0].length).trim());
   }
 
-  // --- Autocomplete Provider ---
+  // autocomplete provider
   function getAutocompletion(currentInput) {
     if (!currentInput) return null;
     const trimmed = currentInput;
@@ -1167,7 +1167,7 @@ const useConsoleCheats = () => {
     const tokens = trimmed.split(" ");
     const firstWord = tokens[0].toLowerCase();
 
-    // 1. Completing the command word
+    // completing the command word
     if (tokens.length === 1) {
       const match = cmds.find((c) => c.prefix.startsWith(firstWord) && c.prefix !== firstWord);
       if (match) {
@@ -1179,7 +1179,7 @@ const useConsoleCheats = () => {
       return null;
     }
 
-    // 2. Completing arguments based on command
+    // completing arguments based on command
     const rest = trimmed.substring(tokens[0].length).trimStart();
     const restLower = rest.toLowerCase();
 
@@ -1268,7 +1268,7 @@ const useConsoleCheats = () => {
     return null;
   }
 
-  // --- Terminal UI Construction ---
+  // terminal UI construction
   const terminalActionBar = $("<div></div>")
     .addClass("terminal-footer")
     .appendTo(terminalContainer);
