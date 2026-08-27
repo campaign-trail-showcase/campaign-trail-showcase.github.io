@@ -2434,23 +2434,10 @@ async function updateModViewCount(modName) {
 
 async function loadEntries() {
   try {
-    const modListResponse = await fetch("../static/mods/MODLOADERFILE.html");
-    const modListHTML = await modListResponse.text();
+    const modListResponse = await fetch("../static/mods/mods.json");
+    if (!modListResponse.ok) throw new Error(`HTTP error! status: ${modListResponse.status}`);
 
-    // parse the HTML string into lightweight virtual elements
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(modListHTML, "text/html");
-    const options = doc.querySelectorAll("option");
-
-    // map elements to JS objects
-    originalModsData = Array.from(options).map(opt => ({
-      value: opt.value,
-      text: opt.textContent.trim(),
-      mode: opt.dataset.mode || "",
-      tags: opt.dataset.tags || "",
-      awards: opt.dataset.awards || "",
-      awardimageurls: opt.dataset.awardimageurls || ""
-    }));
+    originalModsData = await modListResponse.json();
 
     filterEntries();
   } catch (error) {
