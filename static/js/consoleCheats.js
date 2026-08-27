@@ -602,6 +602,36 @@ const useConsoleCheats = () => {
   }
 
   window.tct_cheat_interval = setInterval(function () {
+    // auto-visit automation
+    if ($(".visit_text").length > 0 && auto_visit != null) {
+      const plugin = $("#map_container").data("plugin-usmap");
+      const availableStates = e.states_json.map((st) => st.fields.abbr);
+
+      if (plugin?.options?.click) {
+        const visitAndConfirm = (abbr) => {
+          plugin.options.click({ target: null }, { name: abbr });
+          document.getElementById("confirm_visit_button")?.click();
+        };
+
+        if (auto_visit === "all") {
+          const firstPath = availableStates[0];
+          for (let i = 0; i < availableStates.length; i++) {
+            const state = availableStates[i];
+            if (state !== firstPath) {
+              const pk = stateAbbrToPk.get(state.toLowerCase());
+              if (pk) e.player_visits.push(pk);
+            }
+          }
+          visitAndConfirm(firstPath);
+        } else {
+          const stateExists = availableStates.includes(auto_visit);
+          if (stateExists) {
+            visitAndConfirm(auto_visit);
+          }
+        }
+      }
+    }
+
     const questionForm = document.querySelector("form[name='question']");
     const inputs = questionForm ? questionForm.querySelectorAll("input[type='radio']") : [];
     if (!questionForm || inputs.length === 0) return;
@@ -724,35 +754,6 @@ const useConsoleCheats = () => {
       prev_answer_hint_enabled = false;
     }
 
-    // auto-visit automation
-    if ($(".visit_text").length > 0 && auto_visit != null) {
-      const plugin = $("#map_container").data("plugin-usmap");
-      const availableStates = e.states_json.map((st) => st.fields.abbr);
-
-      if (plugin?.options?.click) {
-        const visitAndConfirm = (abbr) => {
-          plugin.options.click({ target: null }, { name: abbr });
-          document.getElementById("confirm_visit_button")?.click();
-        };
-
-        if (auto_visit === "all") {
-          const firstPath = availableStates[0];
-          for (let i = 0; i < availableStates.length; i++) {
-            const state = availableStates[i];
-            if (state !== firstPath) {
-              const pk = stateAbbrToPk.get(state.toLowerCase());
-              if (pk) e.player_visits.push(pk);
-            }
-          }
-          visitAndConfirm(firstPath);
-        } else {
-          const stateExists = availableStates.includes(auto_visit);
-          if (stateExists) {
-            visitAndConfirm(auto_visit);
-          }
-        }
-      }
-    }
   }, 120);
 
   // == CHEATS ==
