@@ -152,6 +152,14 @@ function buildAchievementsCache() {
 function findAchievement(name, targetModName = null) {
   const currentMod = targetModName || getCurrentModName();
 
+  const activeAchievements = window.campaignTrail_temp?.achievements;
+  if (activeAchievements && Object.prototype.hasOwnProperty.call(activeAchievements, name)) {
+    return {
+      modName: currentMod,
+      ach: activeAchievements[name],
+    };
+  }
+
   // if mod is known, query directly from allAch
   if (currentMod && typeof allAch === "object" && allAch?.[currentMod]?.[name]) {
     return {
