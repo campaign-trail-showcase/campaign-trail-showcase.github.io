@@ -8,9 +8,11 @@ const useConsoleCheats = () => {
   // == IMPROVE SELECTION ==
 
   function findCssRule(selectorText) {
-    let result = [];
+    const result = [];
     const sheet = document.styleSheets[0];
-    for (const rule of sheet.rules) {
+    if (!sheet || !sheet.rules) return result;
+    for (let i = 0; i < sheet.rules.length; i++) {
+      const rule = sheet.rules[i];
       if (rule.selectorText === selectorText) {
         result.push(rule);
       }
@@ -18,35 +20,26 @@ const useConsoleCheats = () => {
     return result;
   }
 
-  {
-    /*
-        const rule = findCssRule('#question_form label:hover')[0];
-        rule.style.removeProperty('font-size');
-        rule.style.removeProperty('font-weight');
-        rule.style.removeProperty('margin-bottom');
-        rule.style.setProperty('text-decoration', 'underline');
-        rule.style.setProperty('text-decoration-color', '#05e');
-        rule.style.setProperty('color', '#05e');
-        */
-  }
-
   // == END IMPROVE SELECTION ==
 
   // == IMPROVE HITBOXES ==
 
   function improveHitBoxes() {
-    const labels = $("label");
-    for (const label of labels) {
-      const forAttr = label.getAttribute("for"); // game_answers[0]
-      const id = forAttr.replaceAll("[", "").replaceAll("]", "");
+    const labels = document.querySelectorAll("label");
+    for (let i = 0; i < labels.length; i++) {
+      const label = labels[i];
+      const forAttr = label.getAttribute("for");
+      if (!forAttr) continue;
+      const id = forAttr.replace(/\[/g, "").replace(/\]/g, "");
 
       // check if ghost div already exists
-      if ($(`#${id}_ghostDiv`).length > 0) continue;
+      if (document.getElementById(`${id}_ghostDiv`)) continue;
 
       const text = label.innerHTML;
 
       // wrap text in div
       label.innerHTML = "";
+
       const textDiv = document.createElement("div");
       textDiv.style.display = "inline";
       textDiv.innerHTML = text;
@@ -63,414 +56,330 @@ const useConsoleCheats = () => {
       // create tooltip
       const tooltip = document.createElement("div");
       tooltip.className = "_answer_container_tooltip";
-      tooltip.innerHTML = "Hello world";
+      tooltip.textContent = "Hello world";
       ghostDiv.appendChild(tooltip);
 
       label.appendChild(ghostDiv);
 
       // compute bounds
-      const top =
-        textDiv.getBoundingClientRect().top -
-        ghostDiv.getBoundingClientRect().top;
-      const width = $("#question_form")[0].getBoundingClientRect().width;
+      const qForm = document.getElementById("question_form");
+      const qWidth = qForm ? qForm.getBoundingClientRect().width : 300;
+      const top = textDiv.getBoundingClientRect().top - ghostDiv.getBoundingClientRect().top;
       const height = textDiv.getBoundingClientRect().height;
+
       ghostDiv.style.top = `${top}px`;
-      ghostDiv.style.width = `${width}px`;
+      ghostDiv.style.width = `${qWidth}px`;
       ghostDiv.style.height = `${height}px`;
     }
   }
 
-  $(`
-    <style>
-    ._answer_container ._answer_container_tooltip {
-        visibility: hidden;
-        width: 120px;
-        background-color: black;
-        color: #fff;
-        text-align: center;
-        padding: 5px 0;
-        border-radius: 6px;
-        position: absolute;
-        z-index: 1;
-    }
-    
-    ._answer_container:hover ._answer_container_tooltip {
-        visibility: visible;
-    }
-    </style>
+  if (!document.getElementById("answer-container-style")) {
+    $(`
+      <style id="answer-container-style">
+      ._answer_container ._answer_container_tooltip {
+          visibility: hidden;
+          width: 120px;
+          background-color: black;
+          color: #fff;
+          text-align: center;
+          padding: 5px 0;
+          border-radius: 6px;
+          position: absolute;
+          z-index: 1;
+      }
+
+      ._answer_container:hover ._answer_container_tooltip {
+          visibility: visible;
+      }
+      </style>
     `).appendTo("head");
-
-  // improveHitBoxes();
-
-  /*
-    window.addEventListener('DOMNodeInserted', (event) => {
-        const elt = event.target;
-        if (elt.tagName !== 'input') return;
-        console.log(elt.tagName);
-    });
-    
-    $('#question_form > form')[0].addEventListener('DOMNodeInserted', (event) => {
-        const elt = event.target;
-        console.log(elt);
-    });
-    */
-
-  // improveHitBoxes();
+  }
 
   // == END IMPROVE HITBOXES ==
 
-  const stateNameById = {};
-  const stateByPk = {};
+  // entity lookup dictionaries
+  const stateNameById = Object.create(null);
+  const stateByPk = Object.create(null);
+  const stateAbbrToPk = new Map();
 
-  for (const o of e.states_json) {
+  for (let i = 0; i < e.states_json.length; i++) {
+    const o = e.states_json[i];
     stateNameById[o.pk] = o.fields.name;
     stateByPk[o.pk] = o;
+    stateAbbrToPk.set(o.fields.abbr.toLowerCase(), o.pk);
+    stateAbbrToPk.set(o.fields.name.toLowerCase(), o.pk);
   }
 
-  let candidateNameById = {};
-
-  for (let o of e.candidate_json) {
-    candidateNameById[o.pk] = o.fields.first_name + " " + o.fields.last_name;
+  const candidateNameById = Object.create(null);
+  for (let i = 0; i < e.candidate_json.length; i++) {
+    const o = e.candidate_json[i];
+    candidateNameById[o.pk] = `${o.fields.first_name} ${o.fields.last_name}`.trim();
   }
 
-  let issueNameById = {};
-
-  for (let o of e.issues_json) {
+  const issueNameById = Object.create(null);
+  for (let i = 0; i < e.issues_json.length; i++) {
+    const o = e.issues_json[i];
     issueNameById[o.pk] = o.fields.name;
   }
 
-  let candidate_state_multipliers = {};
-
-  for (let o of e.candidate_state_multiplier_json) {
-    let candidate = candidateNameById[o.fields.candidate];
-    let state = stateNameById[o.fields.state];
-    let mult = o.fields.state_multiplier;
-    candidate_state_multipliers[candidate] =
-      candidate_state_multipliers[candidate] || {};
-    candidate_state_multipliers[candidate][state] = mult;
-
-    //if (o.fields.candidate == e.candidate_id) { o.fields.state_multiplier = 1; }
-    //if (candidate == "Henry Wallace") { o.fields.state_multiplier = 1; }
+  const candidate_state_multipliers = {};
+  for (let i = 0; i < e.candidate_state_multiplier_json.length; i++) {
+    const o = e.candidate_state_multiplier_json[i];
+    const candidate = candidateNameById[o.fields.candidate];
+    const state = stateNameById[o.fields.state];
+    candidate_state_multipliers[candidate] = candidate_state_multipliers[candidate] || {};
+    candidate_state_multipliers[candidate][state] = o.fields.state_multiplier;
   }
 
   function determineStance(issueId, n) {
-    let a = e.global_parameter_json[0].fields;
+    const a = e.global_parameter_json[0].fields;
     let i = 1;
     while (true) {
-      let v = a["issue_stance_" + i + "_max"];
-      if (v == undefined || n <= v) {
-        break;
-      }
+      const v = a["issue_stance_" + i + "_max"];
+      if (v === undefined || n <= v) break;
       i++;
     }
 
     let issue_json = null;
-
-    for (let o of e.issues_json) {
-      if (o.pk == issueId) {
-        issue_json = o;
+    for (let j = 0; j < e.issues_json.length; j++) {
+      if (e.issues_json[j].pk == issueId) {
+        issue_json = e.issues_json[j];
+        break;
       }
     }
 
     if (issue_json != null) {
-      let stance = issue_json.fields["stance_" + i];
-      let str = "" + n + " (" + stance + ")";
-      return str;
-    } else {
-      return "NULL";
+      const stance = issue_json.fields["stance_" + i];
+      return `${n} (${stance})`;
     }
+    return "NULL";
   }
 
-  let candidate_issue_scores = {};
-
-  for (let o of e.candidate_issue_score_json) {
-    let candidate = candidateNameById[o.fields.candidate];
-    let issue = issueNameById[o.fields.issue];
-    let score = o.fields.issue_score;
-
+  const candidate_issue_scores = {};
+  for (let i = 0; i < e.candidate_issue_score_json.length; i++) {
+    const o = e.candidate_issue_score_json[i];
+    const candidate = candidateNameById[o.fields.candidate];
+    const issue = issueNameById[o.fields.issue];
     candidate_issue_scores[candidate] = candidate_issue_scores[candidate] || {};
-    candidate_issue_scores[candidate][issue] = determineStance(
-      o.fields.issue,
-      score,
-    );
-
-    //o.fields.issue_score = 0;
+    candidate_issue_scores[candidate][issue] = determineStance(o.fields.issue, o.fields.issue_score);
   }
 
-  let running_mate_issue_scores = {};
-
-  for (let o of e.running_mate_issue_score_json) {
-    let candidate = candidateNameById[o.fields.candidate];
-    let issue = issueNameById[o.fields.issue];
-    let score = o.fields.issue_score;
-
-    running_mate_issue_scores[candidate] =
-      running_mate_issue_scores[candidate] || {};
-    running_mate_issue_scores[candidate][issue] = determineStance(
-      o.fields.issue,
-      score,
-    );
+  const running_mate_issue_scores = {};
+  for (let i = 0; i < e.running_mate_issue_score_json.length; i++) {
+    const o = e.running_mate_issue_score_json[i];
+    const candidate = candidateNameById[o.fields.candidate];
+    const issue = issueNameById[o.fields.issue];
+    running_mate_issue_scores[candidate] = running_mate_issue_scores[candidate] || {};
+    running_mate_issue_scores[candidate][issue] = determineStance(o.fields.issue, o.fields.issue_score);
   }
 
-  let answers = {};
-
-  for (let o of e.answers_json) {
-    let id = o.pk;
-    let text = o.fields.description;
-    answers[id] = {};
-    answers[id].text = text;
-    answers[id].question = o.fields.question;
-    answers[id].feedback = "";
-    answers[id].global_effects = [];
-    answers[id].issue_effects = [];
-    answers[id].state_effects = [];
+  const answers = Object.create(null);
+  for (let i = 0; i < e.answers_json.length; i++) {
+    const o = e.answers_json[i];
+    answers[o.pk] = {
+      text: o.fields.description,
+      question: o.fields.question,
+      feedback: "",
+      global_effects: [],
+      issue_effects: [],
+      state_effects: [],
+    };
   }
 
-  for (let o of e.answer_feedback_json) {
-    if (o.fields.candidate != e.candidate_id) {
-      continue;
+  for (let i = 0; i < e.answer_feedback_json.length; i++) {
+    const o = e.answer_feedback_json[i];
+    if (o.fields.candidate == e.candidate_id && answers[o.fields.answer]) {
+      answers[o.fields.answer].feedback = o.fields.answer_feedback;
     }
-
-    let id = o.fields.answer;
-    let feedback = o.fields.answer_feedback;
-
-    if (answers[id] === undefined) {
-      console.log(`answer id=${id} was undefined`);
-      continue;
-    }
-    answers[id].feedback = feedback;
   }
 
-  for (let o of e.answer_score_global_json) {
-    if (o.fields.candidate != e.candidate_id) {
-      continue;
-    }
+  for (let i = 0; i < e.answer_score_global_json.length; i++) {
+    const o = e.answer_score_global_json[i];
+    if (o.fields.candidate != e.candidate_id) continue;
+    const ans = answers[o.fields.answer];
+    if (!ans) continue;
 
-    let id = o.fields.answer;
-    let affected_candidate = candidateNameById[o.fields.affected_candidate];
-    let global_multiplier = o.fields.global_multiplier;
-
-    if (answers[id] === undefined) {
-      console.log(`answer id=${id} was undefined`);
-      continue;
+    const aff = candidateNameById[o.fields.affected_candidate];
+    if (!ans.global_effects.some((eff) => eff.affected_candidate === aff)) {
+      ans.global_effects.push({
+        affected_candidate: aff,
+        global_multiplier: o.fields.global_multiplier,
+      });
     }
-    if (
-      answers[id].global_effects.find(
-        (e) => e.affected_candidate === affected_candidate,
-      ) != null
-    )
-      continue;
-    answers[id].global_effects.push({
-      affected_candidate: affected_candidate,
-      global_multiplier: global_multiplier,
+  }
+
+  for (let i = 0; i < e.answer_score_issue_json.length; i++) {
+    const o = e.answer_score_issue_json[i];
+    const ans = answers[o.fields.answer];
+    if (!ans) continue;
+    ans.issue_effects.push({
+      issue: issueNameById[o.fields.issue],
+      importance: o.fields.issue_importance,
+      score: o.fields.issue_score,
     });
   }
 
-  for (let o of e.answer_score_issue_json) {
-    let id = o.fields.answer;
-    let issue = issueNameById[o.fields.issue];
-    let importance = o.fields.issue_importance;
-    let score = o.fields.issue_score;
-
-    if (answers[id] === undefined) {
-      console.log(`answer id=${id} was undefined`);
-      continue;
-    }
-    answers[id].issue_effects.push({
-      issue: issue,
-      importance: importance,
-      score: score,
+  for (let i = 0; i < e.answer_score_state_json.length; i++) {
+    const o = e.answer_score_state_json[i];
+    if (o.fields.candidate != e.candidate_id) continue;
+    const ans = answers[o.fields.answer];
+    if (!ans) continue;
+    ans.state_effects.push({
+      affected_candidate: candidateNameById[o.fields.affected_candidate],
+      state: stateNameById[o.fields.state],
+      state_multiplier: o.fields.state_multiplier,
     });
   }
 
-  for (let o of e.answer_score_state_json) {
-    if (o.fields.candidate != e.candidate_id) {
-      continue;
-    }
-
-    let id = o.fields.answer;
-    let affected_candidate = candidateNameById[o.fields.affected_candidate];
-    let state = stateNameById[o.fields.state];
-    let state_multiplier = o.fields.state_multiplier;
-
-    if (answers[id] === undefined) {
-      console.log(`answer id=${id} was undefined`);
-      continue;
-    }
-    answers[id].state_effects.push({
-      affected_candidate: affected_candidate,
-      state: state,
-      state_multiplier: state_multiplier,
-    });
-  }
-
-  let questions = {};
-
-  for (let o of e.questions_json) {
-    let id = o.pk;
-    let text = o.fields.description;
-    let likelihood = o.fields.likelihood;
-    let priority = o.fields.priority;
-
-    questions[id] = {
-      text: text,
-      likelihood: likelihood,
-      priority: priority,
+  const questions = Object.create(null);
+  for (let i = 0; i < e.questions_json.length; i++) {
+    const o = e.questions_json[i];
+    questions[o.pk] = {
+      text: o.fields.description,
+      likelihood: o.fields.likelihood,
+      priority: o.fields.priority,
       answers: [],
     };
   }
 
-  for (let k in answers) {
-    let o = answers[k];
-    if (o.question in questions) {
+  for (const k in answers) {
+    const o = answers[k];
+    if (questions[o.question]) {
       questions[o.question].answers.push(o);
-    } else {
-      console.log(`Stray answer: ${o.text}`);
     }
   }
 
-  //console.log(candidate_state_multipliers);
-  //console.log(candidate_issue_scores);
-  //console.log(running_mate_issue_scores);
-  //console.log(answers);
-  //console.log(questions);
-
   // == COMPUTE RESULTS ==
 
-  // tentative_answers: number[] is an array of answer ids
-  // function adapted from A(t)
+  // pre-indexed maps for compute_results
+  const globalScoreLookup = new Map();
+  for (let i = 0; i < e.answer_score_global_json.length; i++) {
+    const item = e.answer_score_global_json[i];
+    globalScoreLookup.set(
+      `${item.fields.answer}_${item.fields.candidate}_${item.fields.affected_candidate}`,
+      item.fields.global_multiplier
+    );
+  }
+
+  const stateIssueScoreLookup = new Map();
+  for (let i = 0; i < e.state_issue_score_json.length; i++) {
+    const item = e.state_issue_score_json[i];
+    stateIssueScoreLookup.set(`${item.fields.state}_${item.fields.issue}`, {
+      score: item.fields.state_issue_score,
+      weight: item.fields.weight,
+    });
+  }
+
+  const states_map = new Map();
+  for (let i = 0; i < e.states_json.length; i++) {
+    states_map.set(e.states_json[i].pk, e.states_json[i]);
+  }
+
+  function P(arr, prop) {
+    return arr.sort((a, b) => (a[prop] < b[prop] ? -1 : a[prop] > b[prop] ? 1 : 0));
+  }
+
   function compute_results(tentative_answers) {
-    let e = campaignTrail_temp;
-    let answers = [...e.player_answers, ...(tentative_answers ?? [])];
-    function F() {
-      return 0;
-    }
-    function P(e, t) {
-      return e.sort(function (e, i) {
-        var a = e[t],
-          s = i[t];
-        return a < s ? -1 : a > s ? 1 : 0;
-      });
-    }
-
-    const states_map = new Map();
-    e.states_json.forEach((e) => states_map.set(e.pk, e));
-
+    const answersArr = [...e.player_answers, ...(tentative_answers ?? [])];
     const candidate_ids = [e.candidate_id, ...e.opponents_list];
+    const globalParams = e.global_parameter_json[0].fields;
 
-    var s = [];
-    for (a = 0; a < candidate_ids.length; a++) {
-      for (var n = [], l = 0, o = 0, _ = 0, r = 0; r < answers.length; r++)
-        for (var d = 0; d < e.answer_score_global_json.length; d++)
-          if (
-            e.answer_score_global_json[d].fields.answer == answers[r] &&
-            e.answer_score_global_json[d].fields.candidate == e.candidate_id &&
-            e.answer_score_global_json[d].fields.affected_candidate ==
-              candidate_ids[a]
-          ) {
-            n.push(e.answer_score_global_json[d].fields.global_multiplier);
-            break;
-          }
-      for (r = 0; r < n.length; r++) l += n[r];
-      if (
-        ((o = candidate_ids[a] == e.candidate_id && l < -0.4 ? 0.6 : 1 + l),
-        candidate_ids[a] == e.candidate_id)
-      )
-        var c =
-          o *
-          (1 + F() * e.global_parameter_json[0].fields.global_variance) *
-          e.difficulty_level_multiplier;
-      else
-        c = o * (1 + F() * e.global_parameter_json[0].fields.global_variance);
-      _ = isNaN(c) ? 1 : c;
+    // global multipliers calculation
+    const s = [];
+    for (let a = 0; a < candidate_ids.length; a++) {
+      const candId = candidate_ids[a];
+      let l = 0;
+      for (let r = 0; r < answersArr.length; r++) {
+        const mult = globalScoreLookup.get(`${answersArr[r]}_${e.candidate_id}_${candId}`);
+        if (mult !== undefined) l += mult;
+      }
+
+      let o = (candId === e.candidate_id && l < -0.4) ? 0.6 : 1 + l;
+      let c = (candId === e.candidate_id) ? o * e.difficulty_level_multiplier : o;
       s.push({
-        candidate: candidate_ids[a],
-        global_multiplier: _,
+        candidate: candId,
+        global_multiplier: isNaN(c) ? 1 : c,
       });
     }
 
-    var u = [];
-    for (a = 0; a < candidate_ids.length; a++) {
-      var v = [];
-      for (
-        r = 0;
-        r < e.candidate_issue_score_json.length &&
-        (e.candidate_issue_score_json[r].fields.candidate != candidate_ids[a] ||
-          (v.push({
-            issue: e.candidate_issue_score_json[r].fields.issue,
-            issue_score: e.candidate_issue_score_json[r].fields.issue_score,
-          }),
-          v.length != e.issues_json.length));
-        r++
-      );
+    // candidate issue scores
+    const u = [];
+    for (let a = 0; a < candidate_ids.length; a++) {
+      const candId = candidate_ids[a];
+      const v = [];
+      for (let r = 0; r < e.candidate_issue_score_json.length; r++) {
+        const item = e.candidate_issue_score_json[r];
+        if (item.fields.candidate === candId) {
+          v.push({
+            issue: item.fields.issue,
+            issue_score: item.fields.issue_score,
+          });
+          if (v.length === e.issues_json.length) break;
+        }
+      }
       u.push({
-        candidate_id: candidate_ids[a],
+        candidate_id: candId,
         issue_scores: v,
       });
     }
 
-    var f = [];
-    for (a = 0; a < candidate_ids.length; a++) {
-      var m = [];
-      for (r = 0; r < e.candidate_state_multiplier_json.length; r++)
-        if (
-          e.candidate_state_multiplier_json[r].fields.candidate ==
-          candidate_ids[a]
-        ) {
-          var p =
-            e.candidate_state_multiplier_json[r].fields.state_multiplier *
-            s[a].global_multiplier *
-            (1 + F() * e.global_parameter_json[0].fields.global_variance);
-          if (
-            (m.push({
-              state: e.candidate_state_multiplier_json[r].fields.state,
-              state_multiplier: p,
-            }),
-            m.length == e.states_json.length)
-          )
-            break;
-          P(m, "state");
+    // state multipliers
+    const f = [];
+    for (let a = 0; a < candidate_ids.length; a++) {
+      const candId = candidate_ids[a];
+      const m = [];
+      for (let r = 0; r < e.candidate_state_multiplier_json.length; r++) {
+        const item = e.candidate_state_multiplier_json[r];
+        if (item.fields.candidate === candId) {
+          const p = item.fields.state_multiplier * s[a].global_multiplier;
+          m.push({
+            state: item.fields.state,
+            state_multiplier: p,
+          });
+          if (m.length === e.states_json.length) break;
         }
+      }
+      P(m, "state");
       f.push({
-        candidate_id: candidate_ids[a],
+        candidate_id: candId,
         state_multipliers: m,
       });
     }
 
-    for (a = 0; a < u[0].issue_scores.length; a++) {
-      var h = -1;
-      for (r = 0; r < e.running_mate_issue_score_json.length; r++)
-        if (
-          e.running_mate_issue_score_json[r].fields.issue ==
-          u[0].issue_scores[a].issue
-        ) {
+    // issue stance shifts
+    for (let a = 0; a < u[0].issue_scores.length; a++) {
+      const currentIssue = u[0].issue_scores[a].issue;
+      let h = -1;
+      for (let r = 0; r < e.running_mate_issue_score_json.length; r++) {
+        if (e.running_mate_issue_score_json[r].fields.issue === currentIssue) {
           h = r;
           break;
         }
-      var g = 0,
-        b = 0;
-      for (r = 0; r < answers.length; r++)
-        for (d = 0; d < e.answer_score_issue_json.length; d++)
-          e.answer_score_issue_json[d].fields.issue ==
-            u[0].issue_scores[a].issue &&
-            e.answer_score_issue_json[d].fields.answer == answers[r] &&
-            ((g +=
-              e.answer_score_issue_json[d].fields.issue_score *
-              e.answer_score_issue_json[d].fields.issue_importance),
-            (b += e.answer_score_issue_json[d].fields.issue_importance));
+      }
+
+      let g = 0, b = 0;
+      for (let r = 0; r < answersArr.length; r++) {
+        for (let d = 0; d < e.answer_score_issue_json.length; d++) {
+          const item = e.answer_score_issue_json[d];
+          if (item.fields.issue === currentIssue && item.fields.answer === answersArr[r]) {
+            g += item.fields.issue_score * item.fields.issue_importance;
+            b += item.fields.issue_importance;
+          }
+        }
+      }
+
+      const runningMateScore = h !== -1 ? e.running_mate_issue_score_json[h].fields.issue_score : 0;
       u[0].issue_scores[a].issue_score =
-        (u[0].issue_scores[a].issue_score *
-          e.global_parameter_json[0].fields.candidate_issue_weight +
-          e.running_mate_issue_score_json[h].fields.issue_score *
-            e.global_parameter_json[0].fields.running_mate_issue_weight +
+        (u[0].issue_scores[a].issue_score * globalParams.candidate_issue_weight +
+          runningMateScore * globalParams.running_mate_issue_weight +
           g) /
-        (e.global_parameter_json[0].fields.candidate_issue_weight +
-          e.global_parameter_json[0].fields.running_mate_issue_weight +
-          b);
+        (globalParams.candidate_issue_weight + globalParams.running_mate_issue_weight + b);
     }
 
+    // answer score state effects
     const ASSJByAnswerPK = new Map();
-    for (const assj of e.answer_score_state_json) {
+    for (let i = 0; i < e.answer_score_state_json.length; i++) {
+      const assj = e.answer_score_state_json[i];
       if (!ASSJByAnswerPK.has(assj.fields.answer)) {
         ASSJByAnswerPK.set(assj.fields.answer, [assj]);
       } else {
@@ -478,128 +387,121 @@ const useConsoleCheats = () => {
       }
     }
 
-    for (a = 0; a < candidate_ids.length; a++)
-      for (r = 0; r < f[a].state_multipliers.length; r++) {
-        var w = 0;
-        for (d = 0; d < answers.length; d++) {
-          if (!ASSJByAnswerPK.has(answers[d])) continue;
-          for (const assj of ASSJByAnswerPK.get(answers[d])) {
+    for (let a = 0; a < candidate_ids.length; a++) {
+      const candId = candidate_ids[a];
+      const candStateMultipliers = f[a].state_multipliers;
+      for (let r = 0; r < candStateMultipliers.length; r++) {
+        let w = 0;
+        const st = candStateMultipliers[r].state;
+        for (let d = 0; d < answersArr.length; d++) {
+          const list = ASSJByAnswerPK.get(answersArr[d]);
+          if (!list) continue;
+          for (let k = 0; k < list.length; k++) {
+            const assj = list[k];
             if (
-              assj.fields.state == f[a].state_multipliers[r].state &&
-              assj.fields.candidate == e.candidate_id &&
-              assj.fields.affected_candidate == candidate_ids[a]
+              assj.fields.state === st &&
+              assj.fields.candidate === e.candidate_id &&
+              assj.fields.affected_candidate === candId
             ) {
               w += assj.fields.state_multiplier;
             }
           }
         }
-        if (0 == a) {
-          e.running_mate_state_id == f[a].state_multipliers[r].state &&
-            (w += 0.004 * f[a].state_multipliers[r].state_multiplier);
-          for (d = 0; d < e.player_visits.length; d++)
-            e.player_visits[d] == f[a].state_multipliers[r].state &&
-              (w +=
-                0.005 *
-                Math.max(0.1, f[a].state_multipliers[r].state_multiplier));
-        }
-        f[a].state_multipliers[r].state_multiplier += w;
-      }
 
-    var y = [];
-    for (a = 0; a < f[0].state_multipliers.length; a++) {
-      var k = [];
-      for (r = 0; r < candidate_ids.length; r++) {
-        var $ = 0;
-        for (d = 0; d < u[r].issue_scores.length; d++) {
-          var T = 0,
-            A = 1;
-          for (j = 0; j < e.state_issue_score_json.length; j++)
-            if (
-              e.state_issue_score_json[j].fields.state ==
-                f[0].state_multipliers[a].state &&
-              e.state_issue_score_json[j].fields.issue ==
-                u[0].issue_scores[d].issue
-            ) {
-              (T = e.state_issue_score_json[j].fields.state_issue_score),
-                (A = e.state_issue_score_json[j].fields.weight);
-              break;
+        if (a === 0) {
+          if (e.running_mate_state_id === st) {
+            w += 0.004 * candStateMultipliers[r].state_multiplier;
+          }
+          for (let d = 0; d < e.player_visits.length; d++) {
+            if (e.player_visits[d] === st) {
+              w += 0.005 * Math.max(0.1, candStateMultipliers[r].state_multiplier);
             }
-          var S =
-              u[r].issue_scores[d].issue_score *
-              Math.abs(u[r].issue_scores[d].issue_score),
-            E = T * Math.abs(T);
-          $ +=
-            e.global_parameter_json[0].fields.vote_variable -
-            Math.abs((S - E) * A);
+          }
         }
-        for (d = 0; d < f[r].state_multipliers.length; d++)
-          if (
-            f[r].state_multipliers[d].state == f[0].state_multipliers[a].state
-          )
-            var C = d;
-        ($ *= f[r].state_multipliers[C].state_multiplier),
-          ($ = Math.max($, 0)),
-          k.push({
-            candidate: candidate_ids[r],
-            result: $,
-          });
+        candStateMultipliers[r].state_multiplier += w;
+      }
+    }
+
+    // calculate raw candidate popular vote values per state
+    const y = [];
+    const stateCount = f[0].state_multipliers.length;
+    for (let a = 0; a < stateCount; a++) {
+      const statePk = f[0].state_multipliers[a].state;
+      const k = [];
+      for (let r = 0; r < candidate_ids.length; r++) {
+        let scoreSum = 0;
+        const issueScores = u[r].issue_scores;
+        for (let d = 0; d < issueScores.length; d++) {
+          const issueObj = issueScores[d];
+          const stateIssueData = stateIssueScoreLookup.get(`${statePk}_${issueObj.issue}`) || { score: 0, weight: 1 };
+          const S = issueObj.issue_score * Math.abs(issueObj.issue_score);
+          const E = stateIssueData.score * Math.abs(stateIssueData.score);
+          scoreSum += globalParams.vote_variable - Math.abs((S - E) * stateIssueData.weight);
+        }
+
+        let stateMul = 1;
+        const smList = f[r].state_multipliers;
+        for (let d = 0; d < smList.length; d++) {
+          if (smList[d].state === statePk) {
+            stateMul = smList[d].state_multiplier;
+            break;
+          }
+        }
+        scoreSum = Math.max(scoreSum * stateMul, 0);
+        k.push({
+          candidate: candidate_ids[r],
+          result: scoreSum,
+        });
       }
       y.push({
-        state: f[0].state_multipliers[a].state,
+        state: statePk,
         result: k,
+        abbr: states_map.get(statePk)?.fields?.abbr || "",
       });
     }
 
-    for (a = 0; a < y.length; a++)
-      for (r = 0; r < e.states_json.length; r++)
-        if (y[a].state == e.states_json[r].pk) {
-          y[a].abbr = e.states_json[r].fields.abbr;
-          break;
-        }
+    // calculate percentages & absolute votes
+    for (let a = 0; a < y.length; a++) {
+      const stateObj = states_map.get(y[a].state);
+      const totalPopVotes = Math.floor(stateObj?.fields?.popular_votes || 0);
+      let sumResult = 0;
+      for (let r = 0; r < y[a].result.length; r++) sumResult += y[a].result[r].result;
+      if (sumResult === 0) sumResult = 1;
 
-    for (a = 0; a < y.length; a++) {
-      var M = 0;
-      for (r = 0; r < e.states_json.length; r++)
-        if (e.states_json[r].pk == y[a].state) {
-          M = Math.floor(e.states_json[r].fields.popular_votes);
-          break;
-        }
-      var x = 0;
-      for (r = 0; r < y[a].result.length; r++) x += y[a].result[r].result;
-      for (r = 0; r < y[a].result.length; r++) {
-        var N = y[a].result[r].result / x;
-        (y[a].result[r].percent = N),
-          (y[a].result[r].votes = Math.floor(N * M));
+      for (let r = 0; r < y[a].result.length; r++) {
+        const pct = y[a].result[r].result / sumResult;
+        y[a].result[r].percent = pct;
+        y[a].result[r].votes = Math.floor(pct * totalPopVotes);
       }
     }
 
-    for (a = 0; a < y.length; a++) {
-      let state = states_map.get(y[a].state);
-      var O = 0;
-      if (
-        (P(y[a].result, "percent"),
-        y[a].result.reverse(),
-        (O = state.fields.electoral_votes),
-        "1" == e.game_type_id)
-      )
-        if (1 == state.fields.winner_take_all_flg)
-          for (r = 0; r < y[a].result.length; r++)
-            y[a].result[r].electoral_votes = 0 == r ? O : 0;
-        else {
-          O = state.fields.electoral_votes;
-          var H = 0;
-          for (r = 0; r < y[a].result.length; r++) H += y[a].result[r].votes;
-          var L = Math.ceil((y[a].result[0].votes / H) * O * 1.25),
-            D = O - L;
-          for (r = 0; r < y[a].result.length; r++)
-            y[a].result[r].electoral_votes = 0 == r ? L : 1 == r ? D : 0;
+    // electoral votes distribution
+    for (let a = 0; a < y.length; a++) {
+      const state = states_map.get(y[a].state);
+      const ev = state?.fields?.electoral_votes || 0;
+      P(y[a].result, "percent");
+      y[a].result.reverse();
+
+      if (e.game_type_id == "1") {
+        if (state?.fields?.winner_take_all_flg == 1) {
+          for (let r = 0; r < y[a].result.length; r++) {
+            y[a].result[r].electoral_votes = r === 0 ? ev : 0;
+          }
+        } else {
+          let hVotes = 0;
+          for (let r = 0; r < y[a].result.length; r++) hVotes += y[a].result[r].votes;
+          const L = Math.ceil(((y[a].result[0]?.votes || 0) / (hVotes || 1)) * ev * 1.25);
+          const D = ev - L;
+          for (let r = 0; r < y[a].result.length; r++) {
+            y[a].result[r].electoral_votes = r === 0 ? L : r === 1 ? D : 0;
+          }
         }
-      if ("2" == e.game_type_id) {
-        var V = [];
-        for (r = 0; r < y[a].result.length; r++) V.push(y[a].result[r].percent);
-        var q = divideElectoralVotesProp(V, O);
-        for (r = 0; r < y[a].result.length; r++)
+      } else if (e.game_type_id == "2" && typeof divideElectoralVotesProp === "function") {
+        const V = y[a].result.map((item) => item.percent);
+        const q = divideElectoralVotesProp(V, ev);
+        for (let r = 0; r < y[a].result.length; r++) {
           y[a].result[r].electoral_votes = q[r];
+        }
       }
     }
 
@@ -609,58 +511,44 @@ const useConsoleCheats = () => {
   // diff between pop vote of candidate and pop vote of most popular other candidate
   let ignore_states = [];
   let custom_pop_vote_diff = null;
-  /*
-    interface CandidateResult {
-        candidate: number; // candidate PK
-        result: number; // raw result
-        electoral_votes: number;
-        percent: number;
-        votes: number;
-    }
-    interface StateResult {
-        abbr: string; // 'MI'
-        state: number; // state PK
-        result: CandidateResult[];
-    }
-    type Results = StateResult[]
-    */
 
   // CUSTOM POP VOTE SCRIPTS
 
   function BOOST(candidate_name) {
-    let candidate_pk;
-    let playerAndOpponents = [
-      ...new Set(
-        [e.candidate_id, ...e.opponents_default_json.find((f) => f.election === e.election_id).candidates]
-      ),
-    ];
-    for (const cjson of campaignTrail_temp.candidate_json.filter(
-      (e) => playerAndOpponents.includes(e.pk),
-    )) {
+    let candidate_pk = null;
+    const defaultOpponents = e.opponents_default_json.find((f) => f.election === e.election_id)?.candidates || [];
+    const playerAndOpponents = new Set([e.candidate_id, ...defaultOpponents]);
+
+    for (let i = 0; i < campaignTrail_temp.candidate_json.length; i++) {
+      const cjson = campaignTrail_temp.candidate_json[i];
+      if (!playerAndOpponents.has(cjson.pk)) continue;
       const full_name = `${cjson.fields.first_name} ${cjson.fields.last_name}`;
       if (full_name.toLowerCase().includes(candidate_name.toLowerCase())) {
         if (candidate_pk != null) {
-          throw new Error(
-            `Multiple candidates have "${candidate_name}" in their name; please disambiguate`,
-          );
+          throw new Error(`Multiple candidates have "${candidate_name}" in their name; please disambiguate`);
         }
         candidate_pk = cjson.pk;
       }
     }
-    return (results) =>
-      results.reduce((acc, { abbr, result }) => {
-        if (ignore_states.find((e) => e === abbr) != null) {
-          return acc;
+
+    return (results) => {
+      let acc = 0;
+      for (let i = 0; i < results.length; i++) {
+        const { abbr, result } = results[i];
+        if (ignore_states.includes(abbr)) continue;
+        let my_votes = 0;
+        let second_best = 0;
+        for (let j = 0; j < result.length; j++) {
+          if (result[j].candidate === candidate_pk) {
+            my_votes = result[j].votes;
+          } else {
+            if (result[j].votes > second_best) second_best = result[j].votes;
+          }
         }
-        let my_votes = result.find((e) => e.candidate === candidate_pk).votes;
-        let second_best = result.reduce(
-          (acc, cr) =>
-            cr.candidate === candidate_pk ? acc : Math.max(acc, cr.votes),
-          0,
-        );
-        let diff = my_votes - second_best;
-        return acc + diff;
-      }, 0);
+        acc += (my_votes - second_best);
+      }
+      return acc;
+    };
   }
 
   function SABOTAGE(candidate_name) {
@@ -670,257 +558,216 @@ const useConsoleCheats = () => {
   function pop_vote_diff(results) {
     if (custom_pop_vote_diff != null) {
       return custom_pop_vote_diff(results);
-    } else {
-      const cjson = campaignTrail_temp.candidate_json.find(
-        (e) => e.pk === campaignTrail_temp.candidate_id,
-      );
-      return BOOST(`${cjson.fields.first_name} ${cjson.fields.last_name}`)(
-        results,
-      );
     }
-    /*
-        const cid = campaignTrail_temp.candidate_id;
-        let total_diff = 0;
-        for (const {abbr, result} of results) {
-            if (ignore_states.find(e => e === abbr) != null) {
-                continue;
-            }
-            const our_votes = result.find(e => e.candidate === cid).votes;
-            const their_votes = result.reduce(
-                (acc, val) => {
-                    if (val.candidate === cid) return acc;
-                    return Math.max(acc, val.votes);
-                },
-                0
-            );
-            total_diff += (our_votes - their_votes);
-        }
-        return total_diff;
-        */
+    const cjson = campaignTrail_temp.candidate_json.find((e) => e.pk === campaignTrail_temp.candidate_id);
+    if (!cjson) return 0;
+    return BOOST(`${cjson.fields.first_name} ${cjson.fields.last_name}`)(results);
   }
 
   // == END COMPUTE RESULTS ==
 
-  // add CSS for color hints
-  $(`
-    <style>
-    input {
-        border: none;
-    }
-    
-    input:hover {
-        border: 2px solid #000;
-    }
-    
-    input:checked {
-        border: 2px solid #000;
-    }
-    </style>
+  if (!document.getElementById("cheat-input-style")) {
+    $(`
+      <style id="cheat-input-style">
+      input[type="radio"].cheat-hint-applied {
+          border: none;
+      }
+      input[type="radio"].cheat-hint-applied:hover,
+      input[type="radio"].cheat-hint-applied:checked {
+          border: 2px solid #000;
+      }
+      </style>
     `).appendTo("head");
+  }
 
   clearInterval(window.tct_cheat_interval);
 
-  // cache on question number and player visits
-  let [lastQuestionNumber, lastPlayerVisitsLength, lastIgnoreStatesLength] = [
-    -1, -1, -1,
-  ];
+  // cached state for rendering and sorting
+  let lastQuestionNumber = -1;
+  let lastPlayerVisitsLength = -1;
+  let lastIgnoreStatesLength = -1;
   let cachedPopVoteMap = null;
   let prev_answer_hint_enabled = false;
+  let prev_sort_answers_state = false;
 
   let sort_answers = false;
   let answer_hint_enabled = false;
   let auto_visit = null;
+
+  function colorLerp(r1, g1, b1, r2, g2, b2, n) {
+    const r = Math.round(r1 + (r2 - r1) * n);
+    const g = Math.round(g1 + (g2 - g1) * n);
+    const b = Math.round(b1 + (b2 - b1) * n);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
   window.tct_cheat_interval = setInterval(function () {
-    if (
+    const questionForm = document.querySelector("form[name='question']");
+    const inputs = questionForm ? questionForm.querySelectorAll("input[type='radio']") : [];
+    if (!questionForm || inputs.length === 0) return;
+
+    const needsRecalculation =
       lastQuestionNumber !== e.question_number ||
       lastPlayerVisitsLength !== e.player_visits.length ||
       lastIgnoreStatesLength !== ignore_states.length ||
-      cachedPopVoteMap == null
-    ) {
+      cachedPopVoteMap === null;
+
+    if (needsRecalculation) {
       lastQuestionNumber = e.question_number;
       lastPlayerVisitsLength = e.player_visits.length;
       lastIgnoreStatesLength = ignore_states.length;
       cachedPopVoteMap = new Map();
-      $("form[name='question'] > input").each(function () {
-        let id = $(this).attr("value");
-        cachedPopVoteMap.set(
-          id,
-          pop_vote_diff(compute_results([parseInt(id)])),
-        );
-      });
+
+      for (let i = 0; i < inputs.length; i++) {
+        const id = inputs[i].value;
+        cachedPopVoteMap.set(id, pop_vote_diff(compute_results([parseInt(id, 10)])));
+      }
     }
+
     const popVoteMap = cachedPopVoteMap;
 
-    let minVotes = Infinity;
-    let maxVotes = -Infinity;
-    for (const v of popVoteMap.values()) {
-      if (v < minVotes) minVotes = v;
-      if (v > maxVotes) maxVotes = v;
-    }
-
-    function colorLerp(r1, g1, b1, r2, g2, b2, n) {
-      let r = r1 + (r2 - r1) * n;
-      let g = g1 + (g2 - g1) * n;
-      let b = b1 + (b2 - b1) * n;
-      return `rgb(${r.toFixed(0)}, ${g.toFixed(0)}, ${b.toFixed(0)})`;
-    }
-
-    if (sort_answers) {
-      function swap(a, b) {
-        a = $(a);
-        b = $(b);
-        const a2 = a.next();
-        const a3 = a2.next();
-        const b2 = b.next();
-        const b3 = b2.next();
-        var tmp = $("<span>").hide();
-        a.before(tmp);
-        b.before(a);
-        b.before(a2);
-        b.before(a3);
-        tmp.replaceWith(b3);
-        b3.before(b);
-        b3.before(b2);
-      }
-
-      const inputs = $("form[name='question']").children("input");
-      // bubble sort lol
-      const getPV = (input) => popVoteMap.get($(input).attr("value"));
-      let N = inputs.length;
-      let swapped = false;
-      do {
-        swapped = false;
-        for (let i = 1; i < N; i++) {
-          if (getPV(inputs[i - 1]) < getPV(inputs[i])) {
-            swap(inputs[i - 1], inputs[i]);
-            let tmp = inputs[i];
-            inputs[i] = inputs[i - 1];
-            inputs[i - 1] = tmp;
-            swapped = true;
-          }
+    // perform sort only when question changes or sorting toggles
+    if (sort_answers && (needsRecalculation || !prev_sort_answers_state)) {
+      const parent = inputs[0]?.parentElement;
+      if (parent) {
+        const items = [];
+        for (let i = 0; i < inputs.length; i++) {
+          const inp = inputs[i];
+          const label = inp.nextElementSibling;
+          const br = label ? label.nextElementSibling : null;
+          items.push({ inp, label, br, pv: popVoteMap.get(inp.value) || 0 });
         }
-        N -= 1;
-      } while (swapped);
+
+        items.sort((a, b) => b.pv - a.pv);
+        for (let i = 0; i < items.length; i++) {
+          parent.appendChild(items[i].inp);
+          if (items[i].label) parent.appendChild(items[i].label);
+          if (items[i].br) parent.appendChild(items[i].br);
+        }
+      }
+      prev_sort_answers_state = true;
+    } else if (!sort_answers) {
+      prev_sort_answers_state = false;
     }
 
+    // apply color hints and tooltips
     if (answer_hint_enabled) {
-      $("form[name='question'] > input").each(function () {
-        let id = $(this).attr("value");
-        let answer = answers[id];
-        let str = "";
+      let minVotes = Infinity;
+      let maxVotes = -Infinity;
+      for (const v of popVoteMap.values()) {
+        if (v < minVotes) minVotes = v;
+        if (v > maxVotes) maxVotes = v;
+      }
+      const range = maxVotes - minVotes + 1 || 1;
 
-        str += "Feedback: " + answer.feedback + "\n\n";
+      for (let i = 0; i < inputs.length; i++) {
+        const inp = inputs[i];
+        const id = inp.value;
+        const answer = answers[id];
+        if (!answer) continue;
 
-        const numVotes = popVoteMap.get(id);
-
-        str += "Popular vote (after selecting): " + numVotes + "\n\n";
-
-        let n = ((numVotes - minVotes + 1) / (maxVotes - minVotes + 1)) ** 2;
+        const numVotes = popVoteMap.get(id) || 0;
+        let n = ((numVotes - minVotes + 1) / range) ** 2;
         if (n < 1) n *= 0.9;
         const hintColor = colorLerp(255, 0, 0, 0, 255, 0, n);
-        $(this).css({ appearance: "none", height: "10px", backgroundColor: hintColor });
+
+        inp.style.appearance = "none";
+        inp.style.webkitAppearance = "none";
+        inp.style.height = "10px";
+        inp.style.width = "25px";
+        inp.style.backgroundColor = hintColor;
+        inp.classList.add("cheat-hint-applied");
+
+        let str = `Feedback: ${answer.feedback}\n\nPopular vote (after selecting): ${numVotes.toLocaleString()}\n\n`;
 
         if (answer.issue_effects.length > 0) {
-          str += "Issue effects:" + "\n";
-          for (let effect of answer.issue_effects) {
-            str +=
-              "\tIssue: " +
-              effect.issue +
-              ", Importance: " +
-              effect.importance +
-              ", Score: " +
-              effect.score +
-              "\n";
+          str += "Issue effects:\n";
+          for (let j = 0; j < answer.issue_effects.length; j++) {
+            const eff = answer.issue_effects[j];
+            str += `\tIssue: ${eff.issue}, Importance: ${eff.importance}, Score: ${eff.score}\n`;
           }
           str += "\n";
         }
 
         if (answer.global_effects.length > 0) {
-          str += "Global effects:" + "\n";
-          for (let effect of answer.global_effects) {
-            str +=
-              "\tCandidate: " +
-              effect.affected_candidate +
-              ", Multiplier: " +
-              effect.global_multiplier +
-              "\n";
+          str += "Global effects:\n";
+          for (let j = 0; j < answer.global_effects.length; j++) {
+            const eff = answer.global_effects[j];
+            str += `\tCandidate: ${eff.affected_candidate}, Multiplier: ${eff.global_multiplier}\n`;
           }
           str += "\n";
         }
 
         if (answer.state_effects.length > 0) {
-          str += "State effects:" + "\n";
-          for (let effect of answer.state_effects) {
-            str +=
-              "\tCandidate: " +
-              effect.affected_candidate +
-              ", State: " +
-              effect.state +
-              ", Multiplier: " +
-              effect.state_multiplier +
-              "\n";
+          str += "State effects:\n";
+          for (let j = 0; j < answer.state_effects.length; j++) {
+            const eff = answer.state_effects[j];
+            str += `\tCandidate: ${eff.affected_candidate}, State: ${eff.state}, Multiplier: ${eff.state_multiplier}\n`;
           }
           str += "\n";
         }
 
-        $(this).attr("title", str);
-      });
+        inp.title = str;
+      }
       prev_answer_hint_enabled = true;
     } else if (prev_answer_hint_enabled) {
-      $("form[name='question'] > input").each(function () {
-        $(this).css({ appearance: "", height: "", backgroundColor: "" });
-        $(this).attr("title", "");
-      });
+      for (let i = 0; i < inputs.length; i++) {
+        const inp = inputs[i];
+        inp.style.appearance = "";
+        inp.style.webkitAppearance = "";
+        inp.style.height = "";
+        inp.style.width = "";
+        inp.style.backgroundColor = "";
+        inp.title = "";
+        inp.classList.remove("cheat-hint-applied");
+      }
       prev_answer_hint_enabled = false;
     }
 
-    if (document.activeElement.type === "radio") document.activeElement.blur();
-    const plugin = $('#map_container').data('plugin-usmap');
+    // auto-visit automation
+    if ($(".visit_text").length > 0 && auto_visit != null) {
+      const plugin = $("#map_container").data("plugin-usmap");
+      const availableStates = e.states_json.map((st) => st.fields.abbr);
 
-    const availableStates = e.states_json.map((st) => st.fields.abbr);
+      if (plugin?.options?.click) {
+        const visitAndConfirm = (abbr) => {
+          plugin.options.click({ target: null }, { name: abbr });
+          document.getElementById("confirm_visit_button")?.click();
+        };
 
-    const stateAbbrToPk = new Map();
-    for (const state of e.states_json) {
-      stateAbbrToPk.set(state.fields.abbr, state.pk);
-    }
-    if ($(".visit_text").length > 0) {
-      const visitAndConfirm = (abbr) => {
-        plugin.options.click({ target: null }, { name: abbr });
-        document.getElementById('confirm_visit_button')?.click();
-      };
-      if (auto_visit === "all") {
-        const firstPath = availableStates[0];
-        for (const state of availableStates) {
-          if (state !== firstPath) e.player_visits.push(stateAbbrToPk.get(state));
-        }
-        visitAndConfirm(firstPath);
-      } else if (auto_visit != null) {
-        const stateExists = availableStates.includes(auto_visit);
-        if (stateExists) {
-          visitAndConfirm(auto_visit);
+        if (auto_visit === "all") {
+          const firstPath = availableStates[0];
+          for (let i = 0; i < availableStates.length; i++) {
+            const state = availableStates[i];
+            if (state !== firstPath) {
+              const pk = stateAbbrToPk.get(state.toLowerCase());
+              if (pk) e.player_visits.push(pk);
+            }
+          }
+          visitAndConfirm(firstPath);
         } else {
-          console.warn(`State not found on map: ${auto_visit}`);
+          const stateExists = availableStates.includes(auto_visit);
+          if (stateExists) {
+            visitAndConfirm(auto_visit);
+          }
         }
       }
     }
-  }, 100);
+  }, 120);
 
   // == CHEATS ==
 
-  // get candidate_state_multiplier_json object, creating one if it doesn't exist
-  const gcsmj_map = new Map(); // Map<CandidatePK, Map<StatePK, Object>>
-  for (const entry of e.candidate_state_multiplier_json) {
-    const candidate_pk = entry.fields.candidate;
-    const state_pk = entry.fields.state;
-    if (!gcsmj_map.has(candidate_pk)) {
-      gcsmj_map.set(candidate_pk, new Map());
-    }
-    gcsmj_map.get(candidate_pk).set(state_pk, entry);
+  const gcsmj_map = new Map();
+  for (let i = 0; i < e.candidate_state_multiplier_json.length; i++) {
+    const entry = e.candidate_state_multiplier_json[i];
+    const cand = entry.fields.candidate;
+    const st = entry.fields.state;
+    if (!gcsmj_map.has(cand)) gcsmj_map.set(cand, new Map());
+    gcsmj_map.get(cand).set(st, entry);
   }
+
   function get_candidate_state_mul_json(candidate_pk, state_pk) {
-    if (!gcsmj_map.has(candidate_pk)) {
-      gcsmj_map.set(candidate_pk, new Map());
-    }
+    if (!gcsmj_map.has(candidate_pk)) gcsmj_map.set(candidate_pk, new Map());
     if (!gcsmj_map.get(candidate_pk).has(state_pk)) {
       const new_entry = {
         fields: {
@@ -929,7 +776,7 @@ const useConsoleCheats = () => {
           state_multiplier: 1,
         },
         model: "campaign_trail.candidate_state_multiplier",
-        pk: -1, // hopefully this doesn't matter
+        pk: -1,
       };
       e.candidate_state_multiplier_json.push(new_entry);
       gcsmj_map.get(candidate_pk).set(state_pk, new_entry);
@@ -937,77 +784,57 @@ const useConsoleCheats = () => {
     return gcsmj_map.get(candidate_pk).get(state_pk);
   }
 
-  const cheat_mod_tracker = new Map(); // Map<CandidatePK, Map<StatePK, Number>>
+  const cheat_mod_tracker = new Map();
   function cmt_set(candidate_pk, state_pk, val) {
-    if (!cheat_mod_tracker.has(candidate_pk)) {
-      cheat_mod_tracker.set(candidate_pk, new Map());
-    }
+    if (!cheat_mod_tracker.has(candidate_pk)) cheat_mod_tracker.set(candidate_pk, new Map());
     cheat_mod_tracker.get(candidate_pk).set(state_pk, val);
   }
   function cmt_get(candidate_pk, state_pk) {
-    if (!cheat_mod_tracker.has(candidate_pk)) {
-      return undefined;
-    }
-    return cheat_mod_tracker.get(candidate_pk).get(state_pk);
+    return cheat_mod_tracker.get(candidate_pk)?.get(state_pk);
   }
 
   function add_state_modifier(candidate_pk, state_pk, amt) {
     const obj = get_candidate_state_mul_json(candidate_pk, state_pk);
-    cmt_set(
-      candidate_pk,
-      state_pk,
-      (cmt_get(candidate_pk, state_pk) ?? 0) + amt,
-    );
+    cmt_set(candidate_pk, state_pk, (cmt_get(candidate_pk, state_pk) ?? 0) + amt);
     obj.fields.state_multiplier += amt;
-    if (isNaN(obj.fields.state_multiplier)) {
-      throw new Error("NaN found");
-    }
+    if (isNaN(obj.fields.state_multiplier)) throw new Error("NaN found in state modifier");
     cachedPopVoteMap = null;
   }
 
   function add_global_modifier(candidate_pk, amt) {
-    for (const state_pk of e.states_json.map((e) => e.pk)) {
-      add_state_modifier(candidate_pk, state_pk, amt);
+    for (let i = 0; i < e.states_json.length; i++) {
+      add_state_modifier(candidate_pk, e.states_json[i].pk, amt);
     }
   }
 
   function clear_cheat_effects() {
     for (const [candidate_pk, map] of cheat_mod_tracker) {
-      for (const [state_pk, amt] of map) {
-        add_state_modifier(
-          candidate_pk,
-          state_pk,
-          -cmt_get(candidate_pk, state_pk),
-        );
+      for (const [state_pk] of map) {
+        add_state_modifier(candidate_pk, state_pk, -cmt_get(candidate_pk, state_pk));
       }
     }
     cachedPopVoteMap = null;
   }
 
-  // Convert string (ex. "AK" or "Alaska") into a state_pk
   function state_pk_of_string(str) {
-    let elt = e.states_json.find(
-      (e) =>
-        e.fields.name.toLowerCase() === str.toLowerCase() ||
-        e.fields.abbr.toLowerCase() === str.toLowerCase(),
-    );
-    if (elt) return elt.pk;
+    if (!str) return null;
+    const lower = str.trim().toLowerCase();
+    if (stateAbbrToPk.has(lower)) return stateAbbrToPk.get(lower);
     return null;
   }
 
-  // Convert string (ex. "Biden") into a candidate_pk
   function candidate_pk_of_string(str) {
-    const candidate_json = e.candidate_json.filter(
-      (elt) => elt.fields.election === e.election_id,
-    );
-    let elt = candidate_json.find((elt) => {
-      const full_name = `${elt.fields.first_name} ${elt.fields.last_name}`;
-      return full_name.toLowerCase().includes(str.toLowerCase());
+    if (!str) return null;
+    const lower = str.trim().toLowerCase();
+    const electionCandidates = e.candidate_json.filter((elt) => elt.fields.election === e.election_id);
+    const elt = electionCandidates.find((cand) => {
+      const fullName = `${cand.fields.first_name} ${cand.fields.last_name}`.toLowerCase();
+      return fullName.includes(lower);
     });
-    if (elt) return elt.pk;
-    return null;
+    return elt ? elt.pk : null;
   }
 
+  // terminal UI & autocomplete engine
   const terminalContainer = $("<div></div>")
     .addClass("terminal-container")
     .addClass("minimized")
@@ -1024,8 +851,7 @@ const useConsoleCheats = () => {
     .text("+")
     .appendTo(terminalHeader)
     .on("click", function () {
-      $(this).text($(this).text() === "-" ? "+" : "-");
-      terminalContainer.toggleClass("minimized");
+      toggleTerminal();
     });
 
   function toggleTerminal() {
@@ -1050,34 +876,32 @@ const useConsoleCheats = () => {
       msg.forEach((e) => write(e, color));
       return;
     }
-    if (typeof msg !== "string")
-      throw new Error(`Unexpected type of msg: ${msg}`);
-    color ??= "#fff";
-    let indent = msg.match(/^\t*/)[0].length; // replace tabs at beginning of msg with indents (which persist across line wraps)
+    if (typeof msg !== "string") msg = String(msg);
+    color = color ?? "#fff";
+    const indentMatch = msg.match(/^\t*/);
+    const indent = indentMatch ? indentMatch[0].length : 0;
     msg = msg.replace(/^\t+/, "");
-    const msgDiv = $("<div></div>")
+
+    $("<div></div>")
       .text(msg)
       .css({
         color: color,
         "white-space": "pre-wrap",
-        "margin-left": `${indent * 30}px`,
+        "margin-left": `${indent * 24}px`,
       })
       .appendTo(terminalBody);
     terminalBody.scrollTop(terminalBody.prop("scrollHeight"));
   }
 
-  // const ORIGINAL_GLOBAL_VARIANCE = e.global_parameter_json[0].fields.global_variance;
-  const ORIGINAL_MARSAGLIA = randomNormal;
+  const ORIGINAL_MARSAGLIA = typeof randomNormal === "function" ? randomNormal : null;
   let optrng_enabled = false;
   function set_optimal_rng(enabled) {
     if (enabled && !optrng_enabled) {
-      // e.global_parameter_json[0].fields.global_variance = 0;
       if (typeof randomNormal === "function") {
-        randomNormal = (cand) => (cand === e.candidate_id ? 3 : -3); // Values beyond 3 are rare
+        randomNormal = (cand) => (cand === e.candidate_id ? 3 : -3);
       }
       optrng_enabled = true;
     } else if (!enabled && optrng_enabled) {
-      // e.global_parameter_json[0].fields.global_variance = ORIGINAL_GLOBAL_VARIANCE;
       if (typeof ORIGINAL_MARSAGLIA === "function") {
         randomNormal = ORIGINAL_MARSAGLIA;
       }
@@ -1089,13 +913,12 @@ const useConsoleCheats = () => {
     {
       prefix: "global",
       usage: [
-        "\tglobal [candidate ;] <modifier> -  Add a global modifier for a candidate (defaults to player candidate). Examples:",
+        "\tglobal [candidate ;] <modifier> - Add a global modifier for a candidate (defaults to player). Examples:",
         "\t\tglobal Joe Biden; 0.05 \t# Boost Joe Biden globally by 0.05",
         "\t\tglobal -0.01 \t# Boost player candidate globally by -0.01",
       ],
       handle: (argstr) => {
         const args = argstr.split(";").map((e) => e.trim());
-
         let candidate_pk, modifier;
         if (args.length === 2) {
           candidate_pk = candidate_pk_of_string(args[0]);
@@ -1103,43 +926,30 @@ const useConsoleCheats = () => {
         } else if (args.length === 1) {
           candidate_pk = e.candidate_id;
           modifier = parseFloat(args[0]);
-        } else {
-          write("Incorrect usage", "#aaa");
+        }
+
+        if (candidate_pk == null || isNaN(modifier)) {
+          write("Incorrect usage or unresolved candidate/modifier. Example: global 0.05", "#aaa");
           return;
         }
 
-        if (candidate_pk == null) {
-          write("Couldn't resolve candidate from name", "#aaa");
-          return;
-        }
-
-        if (isNaN(modifier)) {
-          write("Couldn't resolve modifier", "#aaa");
-          return;
-        }
-
-        const candidate = e.candidate_json.find((e) => e.pk === candidate_pk);
-
+        const candidate = e.candidate_json.find((c) => c.pk === candidate_pk);
         add_global_modifier(candidate_pk, modifier);
         write(
-          `Added global modifier of ${modifier.toFixed(3)} to ${
-            candidate.fields.first_name
-          } ${candidate.fields.last_name}`,
-          "#aaa",
+          `Added global modifier of ${modifier.toFixed(3)} to ${candidate.fields.first_name} ${candidate.fields.last_name}`,
+          "#aaa"
         );
       },
     },
     {
       prefix: "state",
       usage: [
-        "\tstate [candidate ;] <state> ; <modifier> - Add a state modifier for a candidate (defaults to player candidate). Examples:",
+        "\tstate [candidate ;] <state> ; <modifier> - Add a state modifier (defaults to player). Examples:",
         "\t\tstate Trump; MI; 0.02 \t# Boost Donald Trump in Michigan by 0.02",
-        "\t\tstate Donald Trump; Michigan; 0.02 \t# Boost Donald Trump in Michigan by 0.02",
         "\t\tstate Michigan; 0.02 \t# Boost player candidate in Michigan by 0.02",
       ],
       handle: (argstr) => {
         const args = argstr.split(";").map((e) => e.trim());
-
         let candidate_pk, state_pk, modifier;
         if (args.length === 3) {
           candidate_pk = candidate_pk_of_string(args[0]);
@@ -1149,46 +959,26 @@ const useConsoleCheats = () => {
           candidate_pk = e.candidate_id;
           state_pk = state_pk_of_string(args[0]);
           modifier = parseFloat(args[1]);
-        } else {
-          write("Incorrect usage", "#aaa");
+        }
+
+        if (candidate_pk == null || state_pk == null || isNaN(modifier)) {
+          write("Incorrect usage or unresolved candidate/state/modifier. Example: state MI; 0.02", "#aaa");
           return;
         }
 
-        if (candidate_pk == null) {
-          write("Couldn't resolve candidate from name", "#aaa");
-          return;
-        }
-
-        if (state_pk == null) {
-          write("Couldn't resolve state from name", "#aaa");
-          return;
-        }
-
-        if (isNaN(modifier)) {
-          write("Couldn't resolve modifier", "#aaa");
-          return;
-        }
-
-        const candidate = e.candidate_json.find((e) => e.pk === candidate_pk);
-        const state = e.states_json.find((e) => e.pk === state_pk);
+        const candidate = e.candidate_json.find((c) => c.pk === candidate_pk);
+        const state = e.states_json.find((s) => s.pk === state_pk);
 
         add_state_modifier(candidate_pk, state_pk, modifier);
         write(
-          `Added state modifier of ${modifier.toFixed(3)} to ${
-            candidate.fields.first_name
-          } ${candidate.fields.last_name} in ${state.fields.name}`,
-          "#aaa",
+          `Added state modifier of ${modifier.toFixed(3)} to ${candidate.fields.first_name} ${candidate.fields.last_name} in ${state.fields.name}`,
+          "#aaa"
         );
       },
     },
     {
       prefix: "optrng",
-      usage: [
-        "\toptrng [on|off] - Toggle optimal RNG for player",
-        "\t\toptrng \t# View whether optrng is on or off",
-        "\t\toptrng on \t# Turns optrng on",
-        "\t\toptrng off \t# Turns optrng off",
-      ],
+      usage: ["\toptrng [on|off] - Toggle optimal RNG rolls for player"],
       handle: (argstr) => {
         if (argstr === "on" && !optrng_enabled) {
           set_optimal_rng(true);
@@ -1197,16 +987,13 @@ const useConsoleCheats = () => {
           set_optimal_rng(false);
           write("Turned optimal RNG off", "#aaa");
         } else {
-          write(
-            `Optimal RNG is currently ${optrng_enabled ? "on" : "off"}`,
-            "#aaa",
-          );
+          write(`Optimal RNG is currently ${optrng_enabled ? "on" : "off"}`, "#aaa");
         }
       },
     },
     {
       prefix: "answerhints",
-      usage: ["\tanswerhints [on|off] - Turns answer hints on or off"],
+      usage: ["\tanswerhints [on|off] - Turns color-coded answer hints on or off"],
       handle: (argstr) => {
         if (argstr === "on" && !answer_hint_enabled) {
           answer_hint_enabled = true;
@@ -1215,134 +1002,108 @@ const useConsoleCheats = () => {
           answer_hint_enabled = false;
           write("Turned answer hints off", "#aaa");
         } else {
-          write(
-            `Answer hints are currently ${answer_hint_enabled ? "on" : "off"}`,
-            "#aaa",
-          );
+          write(`Answer hints are currently ${answer_hint_enabled ? "on" : "off"}`, "#aaa");
         }
       },
     },
     {
       prefix: "ignore",
       usage: [
-        "\tignore [state ;]... - Ignore a state for color-coding answer hints",
-        "\t\tignore \t# List all ignored states",
-        "\t\tignore all \t# Ignore all states",
-        "\t\tignore GA \t# Ignore Georgia",
-        "\t\tignore GA; AL; MS \t# Ignore Georgia, Alabama, and Mississippi",
+        "\tignore [state ;]... - Ignore state(s) for answer calculation (or 'ignore all')",
       ],
       handle: (argstr) => {
-        const args = argstr.split(";").map((e) => e.trim().toLowerCase());
+        const args = argstr.split(";").map((e) => e.trim().toLowerCase()).filter(Boolean);
         const added = [];
-        const check_state = (state) => {
-          const pk = state_pk_of_string(state);
+        const check_state = (stateStr) => {
+          const pk = state_pk_of_string(stateStr);
           if (pk == null) return;
-          state = stateByPk[pk].fields.abbr;
-          if (ignore_states.find((e) => e === state) == null) {
-            ignore_states.push(state);
-            added.push(state);
+          const abbr = stateByPk[pk].fields.abbr;
+          if (!ignore_states.includes(abbr)) {
+            ignore_states.push(abbr);
+            added.push(abbr);
           }
         };
-        for (const arg of args) {
-          if (arg.toLowerCase() === "all") {
-            for (const state of e.states_json.map((e) => e.fields.abbr)) {
-              check_state(state);
+
+        for (let i = 0; i < args.length; i++) {
+          if (args[i] === "all") {
+            for (let j = 0; j < e.states_json.length; j++) {
+              check_state(e.states_json[j].fields.abbr);
             }
           } else {
-            check_state(arg);
+            check_state(args[i]);
           }
         }
-        if (added.length > 0) {
-          write(`Added states to ignore list: ${added.join(", ")}`, "#aaa");
-        }
-        if (ignore_states.length > 0) {
-          write(`Ignore list: ${ignore_states.join(", ")}`, "#aaa");
-        } else {
-          write("Ignore list is empty", "#aaa");
-        }
+
+        if (added.length > 0) write(`Added states to ignore list: ${added.join(", ")}`, "#aaa");
+        write(ignore_states.length > 0 ? `Ignore list: ${ignore_states.join(", ")}` : "Ignore list is empty", "#aaa");
       },
     },
     {
       prefix: "unignore",
-      usage: [
-        "\tunignore [state ;]... \t# Unignore states for color-coding answer hints",
-      ],
+      usage: ["\tunignore [state ;]... - Remove state(s) from ignore list (or 'unignore all')"],
       handle: (argstr) => {
-        const args = argstr.split(";").map((e) => e.trim());
+        const args = argstr.split(";").map((e) => e.trim().toLowerCase()).filter(Boolean);
         const removed = [];
-        const check_state = (state) => {
-          const pk = state_pk_of_string(state);
+        const check_state = (stateStr) => {
+          const pk = state_pk_of_string(stateStr);
           if (pk == null) return;
-          state = stateByPk[pk].fields.abbr;
-          if (ignore_states.find((e) => e === state) != null) {
-            ignore_states = ignore_states.filter((e) => e !== state);
-            removed.push(state);
+          const abbr = stateByPk[pk].fields.abbr;
+          if (ignore_states.includes(abbr)) {
+            ignore_states = ignore_states.filter((st) => st !== abbr);
+            removed.push(abbr);
           }
         };
-        for (const arg of args) {
-          if (arg.toLowerCase() === "all") {
-            for (const state of e.states_json.map((e) => e.fields.abbr)) {
-              check_state(state);
-            }
+
+        for (let i = 0; i < args.length; i++) {
+          if (args[i] === "all") {
+            ignore_states = [];
+            write("Cleared entire ignore list", "#aaa");
+            return;
           } else {
-            check_state(arg);
+            check_state(args[i]);
           }
         }
-        if (removed.length > 0) {
-          write(
-            `Removed states from ignore list: ${removed.join(", ")}`,
-            "#aaa",
-          );
-        }
-        if (ignore_states.length > 0) {
-          write(`Ignore list: ${ignore_states.join(", ")}`, "#aaa");
-        } else {
-          write("Ignore list is empty", "#aaa");
-        }
+
+        if (removed.length > 0) write(`Removed states from ignore list: ${removed.join(", ")}`, "#aaa");
+        write(ignore_states.length > 0 ? `Ignore list: ${ignore_states.join(", ")}` : "Ignore list is empty", "#aaa");
       },
     },
     {
       prefix: "autovisit",
       usage: [
-        "\tautovisit <state> - Picks a state to automatically apply your visits to",
-        "\t\tautovisit MI \t# Automatically apply all visits to Michigan",
-        "\t\tautovisit off \t# Turn off auto visits",
+        "\tautovisit <state|all|off> - Automatically visit specified state each turn",
       ],
       handle: (argstr) => {
         argstr = argstr.trim().toLowerCase();
-        if (argstr === "off" && auto_visit != null) {
-          write("Turned off auto-visit", "#aaa");
+        if (argstr === "off") {
           auto_visit = null;
+          write("Turned off auto-visit", "#aaa");
+        } else if (argstr === "all") {
+          auto_visit = "all";
+          write("Auto-visit set to 'all' states", "#aaa");
         } else {
           const state_pk = state_pk_of_string(argstr);
-          const state = e.states_json.find((e) => e.pk === state_pk);
-          if (argstr === "all") {
-            auto_visit = argstr;
-            write(`Auto-visit has been set to ${auto_visit}`, "#aaa");
-          } else if (state != null && auto_visit !== state.fields.abbr) {
+          const state = e.states_json.find((s) => s.pk === state_pk);
+          if (state) {
             auto_visit = state.fields.abbr;
-            write(`Auto-visit has been set to ${auto_visit}`, "#aaa");
+            write(`Auto-visit set to ${auto_visit} (${state.fields.name})`, "#aaa");
           } else {
-            if (auto_visit == null) {
-              write("Auto-visit is off", "#aaa");
-            } else {
-              write(`Auto-visit is set to ${auto_visit}`, "#aaa");
-            }
+            write(auto_visit ? `Auto-visit is currently set to ${auto_visit}` : "Auto-visit is off", "#aaa");
           }
         }
       },
     },
     {
       prefix: "sortanswers",
-      usage: ["\tsortanswers [on|off] - Toggle whether to sort answers"],
+      usage: ["\tsortanswers [on|off] - Automatically sort answers best-to-worst"],
       handle: (argstr) => {
         argstr = argstr.trim().toLowerCase();
-        if (argstr === "off" && sort_answers) {
-          write("Turned off answer sorting", "#aaa");
+        if (argstr === "off") {
           sort_answers = false;
-        } else if (argstr === "on" && !sort_answers) {
-          write("Turned on answer sorting", "#aaa");
+          write("Turned off answer sorting", "#aaa");
+        } else if (argstr === "on") {
           sort_answers = true;
+          write("Turned on answer sorting", "#aaa");
         } else {
           write(`Answer sorting is ${sort_answers ? "on" : "off"}`, "#aaa");
         }
@@ -1350,21 +1111,19 @@ const useConsoleCheats = () => {
     },
     {
       prefix: "answerscript",
-      usage: [
-        "\tanswerscript <code> - Inject custom code for evaluating answers",
-      ],
+      usage: ["\tanswerscript <code> - Inject custom lambda for answer evaluation"],
       handle: (argstr) => {
         argstr = argstr.trim();
         if (argstr === "") {
-          write("Reset answer script to default", "#aaa");
           custom_pop_vote_diff = null;
+          write("Reset answer script to default", "#aaa");
         } else {
           try {
             custom_pop_vote_diff = eval(argstr);
-            write(`Wrote ${argstr.length} chars to answer script`, "#aaa");
-          } catch (e) {
+            write(`Loaded custom answer script (${argstr.length} chars)`, "#aaa");
+          } catch (err) {
             custom_pop_vote_diff = null;
-            write(e.toString(), "#aaa");
+            write(`Error parsing script: ${err.message}`, "#f55");
           }
         }
         cachedPopVoteMap = null;
@@ -1372,8 +1131,8 @@ const useConsoleCheats = () => {
     },
     {
       prefix: "reset",
-      usage: ["\treset - Reset all cheated effects"],
-      handle: (argstr) => {
+      usage: ["\treset - Reset all cheated effects and parameters to normal"],
+      handle: () => {
         ignore_states = [];
         custom_pop_vote_diff = null;
         answer_hint_enabled = true;
@@ -1381,171 +1140,321 @@ const useConsoleCheats = () => {
         set_optimal_rng(false);
         sort_answers = false;
         clear_cheat_effects();
-        write("Removed all cheated effects", "#aaa");
+        write("Removed all cheated effects and reset cheats", "#aaa");
       },
     },
   ];
 
   function handleCmd(msg) {
-    if (msg.length < 1) return;
+    if (!msg || msg.trim().length === 0) return;
+    write(`> ${msg}`);
+    const parts = msg.trim().split(" ");
+    const cmdName = parts[0].toLowerCase();
+    const cmd = cmds.find((c) => c.prefix === cmdName);
 
-    write(msg);
-
-    const arg0 = msg.split(" ")[0];
-    const cmdFn = cmds.find((cmd) => cmd.prefix === arg0)?.handle;
-    if (cmdFn == null) {
-      write("Command not recognized", "#aaa");
+    if (!cmd) {
+      write(`Command '${cmdName}' not recognized. Type 'reset' or check commands list.`, "#f77");
       return;
     }
-
-    cmdFn(msg.substr(arg0.length).trim());
+    cmd.handle(msg.substring(parts[0].length).trim());
   }
 
+  // autocomplete provider
+  function getAutocompletion(currentInput) {
+    if (!currentInput) return null;
+    const trimmed = currentInput;
+    const lower = trimmed.toLowerCase();
+    const tokens = trimmed.split(" ");
+    const firstWord = tokens[0].toLowerCase();
+
+    // completing the command word
+    if (tokens.length === 1) {
+      const match = cmds.find((c) => c.prefix.startsWith(firstWord) && c.prefix !== firstWord);
+      if (match) {
+        return {
+          full: match.prefix + " ",
+          ghost: match.prefix.slice(firstWord.length) + " ",
+        };
+      }
+      return null;
+    }
+
+    // completing arguments based on command
+    const rest = trimmed.substring(tokens[0].length).trimStart();
+    const restLower = rest.toLowerCase();
+
+    if (firstWord === "optrng" || firstWord === "answerhints" || firstWord === "sortanswers") {
+      const opts = ["on", "off"];
+      const m = opts.find((o) => o.startsWith(restLower) && o !== restLower);
+      if (m) {
+        return {
+          full: `${tokens[0]} ${m}`,
+          ghost: m.slice(restLower.length),
+        };
+      }
+    }
+
+    if (firstWord === "autovisit") {
+      const opts = ["all", "off", ...e.states_json.map((s) => s.fields.abbr), ...e.states_json.map((s) => s.fields.name)];
+      const m = opts.find((o) => o.toLowerCase().startsWith(restLower) && o.toLowerCase() !== restLower);
+      if (m) {
+        return {
+          full: `${tokens[0]} ${m}`,
+          ghost: m.slice(restLower.length),
+        };
+      }
+    }
+
+    if (firstWord === "ignore" || firstWord === "unignore") {
+      const subParts = rest.split(";");
+      const currentToken = subParts[subParts.length - 1].trimStart();
+      const currentTokenLower = currentToken.toLowerCase();
+      if (currentTokenLower) {
+        const opts = ["all", ...e.states_json.map((s) => s.fields.abbr), ...e.states_json.map((s) => s.fields.name)];
+        const m = opts.find((o) => o.toLowerCase().startsWith(currentTokenLower) && o.toLowerCase() !== currentTokenLower);
+        if (m) {
+          subParts[subParts.length - 1] = " " + m;
+          const fullStr = `${tokens[0]} ${subParts.join(";").trim()}`;
+          return {
+            full: fullStr,
+            ghost: m.slice(currentTokenLower.length),
+          };
+        }
+      }
+    }
+
+    if (firstWord === "global") {
+      const subParts = rest.split(";");
+      if (subParts.length === 1 && !rest.includes(";")) {
+        const candNames = e.candidate_json
+          .filter((c) => c.fields.election === e.election_id)
+          .map((c) => `${c.fields.first_name} ${c.fields.last_name}`);
+        const m = candNames.find((name) => name.toLowerCase().startsWith(restLower) && name.toLowerCase() !== restLower);
+        if (m) {
+          return {
+            full: `${tokens[0]} ${m}; `,
+            ghost: m.slice(restLower.length) + "; ",
+          };
+        }
+      }
+    }
+
+    if (firstWord === "state") {
+      const subParts = rest.split(";");
+      if (subParts.length === 1) {
+        const candNames = e.candidate_json
+          .filter((c) => c.fields.election === e.election_id)
+          .map((c) => `${c.fields.first_name} ${c.fields.last_name}`);
+        const m = candNames.find((name) => name.toLowerCase().startsWith(restLower) && name.toLowerCase() !== restLower);
+        if (m) {
+          return {
+            full: `${tokens[0]} ${m}; `,
+            ghost: m.slice(restLower.length) + "; ",
+          };
+        }
+      } else if (subParts.length === 2) {
+        const stPart = subParts[1].trimStart().toLowerCase();
+        const opts = [...e.states_json.map((s) => s.fields.abbr), ...e.states_json.map((s) => s.fields.name)];
+        const m = opts.find((o) => o.toLowerCase().startsWith(stPart) && o.toLowerCase() !== stPart);
+        if (m) {
+          return {
+            full: `${tokens[0]} ${subParts[0].trim()}; ${m}; `,
+            ghost: m.slice(stPart.length) + "; ",
+          };
+        }
+      }
+    }
+
+    return null;
+  }
+
+  // terminal UI construction
   const terminalActionBar = $("<div></div>")
     .addClass("terminal-footer")
     .appendTo(terminalContainer);
 
+  const inputWrapper = $("<div></div>")
+    .addClass("terminal-input-wrapper")
+    .css({ position: "relative", flexGrow: "1", display: "flex", alignItems: "center" })
+    .appendTo(terminalActionBar);
+
+  const ghostTextSpan = $("<span></span>")
+    .addClass("terminal-ghost-hint")
+    .css({
+      position: "absolute",
+      left: "10px",
+      color: "rgba(255, 255, 255, 0.38)",
+      pointerEvents: "none",
+      fontFamily: "monospace",
+      fontSize: "14px",
+      whiteSpace: "pre",
+    })
+    .appendTo(inputWrapper);
+
+  let activeSuggestion = null;
+
+  function updateGhostSuggestion(val) {
+    activeSuggestion = getAutocompletion(val);
+    if (activeSuggestion) {
+      ghostTextSpan.text(val + activeSuggestion.ghost);
+    } else {
+      ghostTextSpan.text("");
+    }
+  }
+
   const cmdHistory = [];
   let cmdHistoryIdx = -1;
+
   const terminalInput = $("<input>")
     .addClass("terminal-input")
     .attr("type", "text")
-    .appendTo(terminalActionBar)
+    .attr("spellcheck", "false")
+    .attr("autocomplete", "off")
+    .css({ fontFamily: "monospace", fontSize: "14px" })
+    .appendTo(inputWrapper)
+    .on("input", function () {
+      updateGhostSuggestion($(this).val());
+    })
     .keydown(function (event) {
       if (event.which === 13) {
-        // Enter was pressed
+        // Enter
         event.preventDefault();
-        handleCmd($(this).val());
-        cmdHistory.unshift($(this).val());
-        cmdHistoryIdx = -1;
+        const val = $(this).val();
+        handleCmd(val);
+        if (val.trim()) {
+          cmdHistory.unshift(val);
+          cmdHistoryIdx = -1;
+        }
         $(this).val("");
+        updateGhostSuggestion("");
+      } else if (event.which === 9 || (event.which === 39 && this.selectionStart === $(this).val().length)) {
+        // Tab or Right-Arrow at end of input
+        if (activeSuggestion) {
+          event.preventDefault();
+          $(this).val(activeSuggestion.full);
+          updateGhostSuggestion(activeSuggestion.full);
+        }
       } else if (event.which === 38) {
-        // Up was pressed
+        // Up Arrow (History)
         event.preventDefault();
         if (cmdHistory.length > 0) {
           cmdHistoryIdx = Math.min(cmdHistoryIdx + 1, cmdHistory.length - 1);
           $(this).val(cmdHistory[cmdHistoryIdx]);
+          updateGhostSuggestion(cmdHistory[cmdHistoryIdx]);
         }
       } else if (event.which === 40) {
-        // Down was pressed
+        // Down Arrow (History)
         event.preventDefault();
         cmdHistoryIdx = Math.max(cmdHistoryIdx - 1, -1);
-        if (cmdHistoryIdx >= 0) {
-          $(this).val(cmdHistory[cmdHistoryIdx]);
-        } else {
-          $(this).val("");
-        }
+        const nextVal = cmdHistoryIdx >= 0 ? cmdHistory[cmdHistoryIdx] : "";
+        $(this).val(nextVal);
+        updateGhostSuggestion(nextVal);
       }
     });
 
-  const submitButton = $("<button></button>")
+  $("<button></button>")
     .addClass("submit-button")
     .text(">")
     .appendTo(terminalActionBar)
     .on("click", function () {
       handleCmd(terminalInput.val());
       terminalInput.val("");
+      updateGhostSuggestion("");
     });
 
   $("body").append(terminalContainer);
 
   write("Welcome to the TCT Cheat Menu.", "#aaa");
+  write("Press Tab to autocomplete commands, states, and candidates.", "#7af");
   write("Commands:", "#aaa");
-  for (const cmd of cmds) {
-    cmd.usage.forEach((msg) => write(msg, "#aaa"));
+  for (let i = 0; i < cmds.length; i++) {
+    cmds[i].usage.forEach((msg) => write(msg, "#aaa"));
   }
 
   if (!document.getElementById("campaign-terminal-style")) {
-    const styleTag = $("<style>")
+    $("<style>")
       .attr("id", "campaign-terminal-style")
       .text(`
             .terminal-container {
                 position: absolute;
                 top: 260px;
                 left: 20px;
-                background-color: rgba(0, 0, 0, 0.7);
+                background-color: rgba(10, 15, 25, 0.88);
+                backdrop-filter: blur(4px);
                 color: #fff;
-                width: 500px;
-                height: 300px;
+                width: 520px;
+                height: 320px;
                 border-radius: 8px;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
                 z-index: 9999;
                 overflow: hidden;
                 display: flex;
                 flex-direction: column;
                 font-size: 14px;
             }
-    
+
             .terminal-header {
-                background-color: rgba(0, 0, 50, 0.3);
+                background-color: rgba(20, 30, 60, 0.5);
                 padding: 10px;
                 cursor: move;
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
+                font-weight: bold;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
-            
-            .toggle-button {
-                width: 20px;
-                height: 20px;
+
+            .toggle-button, .submit-button {
+                width: 24px;
+                height: 24px;
                 border: none;
                 background-color: transparent;
                 color: #fff;
                 font-size: 18px;
                 line-height: 1;
                 cursor: pointer;
+                border-radius: 4px;
             }
-            
-            .submit-button {
-                margin-right: 4px;
-                width: 20px;
-                height: 20px;
-                border: none;
-                background-color: transparent;
-                color: #fff;
-                font-size: 18px;
-                line-height: 1;
-                cursor: pointer;
+            .toggle-button:hover, .submit-button:hover {
+                background-color: rgba(255, 255, 255, 0.15);
             }
-    
+
             .terminal-body {
                 padding: 10px;
                 flex-grow: 1;
                 overflow-y: auto;
+                font-family: monospace;
             }
-            
+
             .terminal-footer {
-                border-top: 1px solid white;
-                background-color: rgba(0, 0, 50, 0.2);
+                border-top: 1px solid rgba(255, 255, 255, 0.15);
+                background-color: rgba(10, 15, 30, 0.4);
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
+                padding-right: 4px;
             }
-    
+
             .terminal-input {
-                background-color: rgba(0, 0, 0, 0);
+                background-color: transparent;
                 color: #fff;
                 padding: 10px;
                 border: none;
                 width: 100%;
                 box-sizing: border-box;
                 outline: none;
+                z-index: 2;
             }
-            
-            .terminal-input:hover {
-                border: none;
-                border-top: 1px solid #aaa;
-            }
-    
+
             .terminal-container.minimized {
                 height: 40px;
                 overflow: hidden;
             }
-        `);
-
-    $("head").append(styleTag);
+        `)
+      .appendTo("head");
   }
 };
 
@@ -1568,32 +1477,29 @@ window.addEventListener("keypress", (e) => {
 $(document).ready(() => {
   $(document).keypress((e) => {
     if (e.isDefaultPrevented()) return;
-
     const key = e.key;
 
-    if (key === "$") {
-      if (window.UsingConsoleCheats === true) e.preventDefault();
+    if (key === "$" && window.UsingConsoleCheats === true) {
+      e.preventDefault();
     }
 
     if (document.activeElement !== document.body) return;
 
     if (key >= "1" && key <= "5") {
       const radioElts = $(".game_answers");
-      const radioElt = radioElts[key.charCodeAt() - "1".charCodeAt()];
-      if (radioElt) radioElt.checked = true;
+      const idx = key.charCodeAt(0) - 49;
+      if (radioElts[idx]) radioElts[idx].checked = true;
       e.preventDefault();
     } else if (key === "Enter") {
-      const tryClick = (id) => {
-        const elt = $(id)[0];
-        if (elt != null) {
-          elt.click();
-          return true;
-        } else {
-          return false;
-        }
-      };
-      tryClick("#ok_button") || tryClick("#answer_select_button");
-      e.preventDefault();
+      const okBtn = document.getElementById("ok_button");
+      const ansBtn = document.getElementById("answer_select_button");
+      if (okBtn) {
+        okBtn.click();
+        e.preventDefault();
+      } else if (ansBtn) {
+        ansBtn.click();
+        e.preventDefault();
+      }
     }
   });
 });

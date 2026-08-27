@@ -1,7 +1,7 @@
  /*
  * @title: 2016: A Lifetime of This / 2016b / The Hillary Trail
  * @author: StrawberryMaster & Friends
- * @version: 1.3.0
+ * @version: 1.3.1
  * @description: The 2016 election in the eyes of Hillary Clinton (and a couple of others, too)
  * 
  * Coding license: Apache License 2.0
@@ -3307,79 +3307,79 @@ tooltipList = [
 	
 })();
 
-// Useful if you have a mod series!
-// Here, it lets you switch easily to 2012LBM.
-(function() {
-    'use strict';
+// This lets you switch between other mods more easily
+// based off a version from the Netherlands mod series
+(function () {
+  'use strict';
 
-    const CONFIG = {
-        autoStartParam: 'from',
-        autoStartValue: 'othernlmod',
-        startButtonId: 'game_start',
-        electionSelectQuery: 'select[name="election_id"]',
-        containerId: 'game_window', 
-        baseUrl: 'https://campaigntrailshowcase.com/campaign-trail/',
-        modsToAdd: [
-			{ value: '1992', text: '1992 - Every Brilliant Thing', modName: '1992 - Every Brilliant Thing' },
-			{ value: '2000', text: '2000 - The Major Leagues', modName: '2000 - The Major Leagues' },
-            { value: '2012', text: '2012 - Little Big Man', modName: '2012 - Little Big Man' },
-        ],
-    };
+  const CONFIG = {
+    startButtonId: 'game_start',
+    electionSelectQuery: 'select[name="election_id"]',
+    containerId: 'game_window',
+    baseUrl: 'https://campaigntrailshowcase.com/campaign-trail/',
+    modsToAdd: [
+	    { value: '2000', text: '2000 - The Major Leagues', modName: '2000 - The Major Leagues' },
+      { value: '2012', text: '2012 - Little Big Man', modName: '2012 - Little Big Man' },
+    ],
+  };
 
-    // state tracking to ensure we don't spam the auto-start click
-    let hasAutoStarted = false;
+  // state tracking to ensure we don't spam the auto-start click
+  let hasAutoStarted = false;
 
-    function modifyElectionSelect(selectEl) {
-        if (selectEl.dataset.modifiedByScript) return;
+  function modifyElectionSelect(selectEl) {
+    if (selectEl.dataset.modifiedByScript) return;
 
-        // reverse to prepend
-        [...CONFIG.modsToAdd].reverse().forEach(mod => {
-            const option = document.createElement('option');
-            option.value = mod.value;
-            option.textContent = mod.text;
-            selectEl.prepend(option);
-        });
+    // reverse to prepend
+    [...CONFIG.modsToAdd].reverse().forEach(mod => {
+      const option = document.createElement('option');
+      option.value = mod.value;
+      option.textContent = mod.text;
+      selectEl.prepend(option);
+    });
 
-        selectEl.addEventListener('change', (event) => {
-            const selectedValue = event.target.value;
-            const targetMod = CONFIG.modsToAdd.find(mod => mod.value === selectedValue);
+    selectEl.addEventListener('change', (event) => {
+      const selectedValue = event.target.value;
+      const targetMod = CONFIG.modsToAdd.find(mod => mod.value === selectedValue);
 
-            if (targetMod) {
-                const redirectUrl = new URL(CONFIG.baseUrl);
-                redirectUrl.searchParams.set('modName', targetMod.modName);
-                redirectUrl.searchParams.set(CONFIG.autoStartParam, CONFIG.autoStartValue);
-                window.location.href = redirectUrl.toString();
-            }
-        });
+      if (targetMod) {
+        const redirectUrl = new URL(CONFIG.baseUrl);
+        redirectUrl.searchParams.set('modName', targetMod.modName);
+        
+        // converts form-encoded '+' spaces to '%20' so they display cleanly as spaces in the browser address bar
+        const cleanUrl = redirectUrl.toString().replace(/\+/g, '%20');
+        window.location.href = cleanUrl;
+      }
+    });
 
-        selectEl.dataset.modifiedByScript = 'true';
+    selectEl.dataset.modifiedByScript = 'true';
+  }
+
+  function attemptAutoStart() {
+    if (hasAutoStarted || window.campaignTrailEnhanced) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    // checks if 'modName' is in the URL to trigger the click
+    if (urlParams.has('modName')) {
+      const startButton = document.getElementById(CONFIG.startButtonId);
+      if (startButton) {
+        window.campaignTrailEnhanced = true;
+        hasAutoStarted = true;
+        startButton.click();
+      }
+    }
+  }
+
+  function onDomChange() {
+    // try to modify the select box
+    const selectEl = document.querySelector(CONFIG.electionSelectQuery);
+    if (selectEl) {
+      modifyElectionSelect(selectEl);
     }
 
-    function attemptAutoStart() {
-        if (hasAutoStarted || window.campaignTrailEnhanced) return;
+    attemptAutoStart();
+  }
 
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get(CONFIG.autoStartParam) === CONFIG.autoStartValue) {
-            const startButton = document.getElementById(CONFIG.startButtonId);
-            if (startButton) {
-                window.campaignTrailEnhanced = true;
-                hasAutoStarted = true;
-                startButton.click();
-            }
-        }
-    }
-
-    function onDomChange() {
-        // try to modify the select box
-        const selectEl = document.querySelector(CONFIG.electionSelectQuery);
-        if (selectEl) {
-            modifyElectionSelect(selectEl);
-        }
-
-        attemptAutoStart();
-    }
-
-    window.modifyElectionSelect = modifyElectionSelect;
+  window.modifyElectionSelect = modifyElectionSelect;
 })();
 
 // This is a catch-all mutation observer so that

@@ -2,6 +2,7 @@ let loadingFromModButton = false;
 const UNFAV = `<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="vertical-align: middle; transform: translateY(-1.5px);"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
 const FAV = `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; transform: translateY(-1.5px) scale(0.9); transform-origin: center;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
 const PLAY = `<svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" style="vertical-align: middle; transform: translateY(-1px);"><path d="M8 5v14l11-7z"/></svg>`;
+const EDIT = `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; transform: translateY(-1px);"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>`;
 const DELETE = `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; transform: translateY(-1px);"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
 const NEW_RELEASE = "new";
 const ALL = "all";
@@ -18,6 +19,99 @@ let favoriteMods = new Set();
 
 let onlyFavorites = false;
 let showAllModsLegacy = false;
+
+// custom dialog modals
+function showCustomAlert(message, title = "Notification") {
+  return new Promise((resolve) => {
+    let alertModal = document.getElementById("customAlertModal");
+    if (!alertModal) {
+      alertModal = document.createElement("div");
+      alertModal.id = "customAlertModal";
+      alertModal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(2px);
+        z-index: 10001; display: flex; align-items: center; justify-content: center;
+      `;
+      document.body.appendChild(alertModal);
+    }
+
+    alertModal.innerHTML = `
+      <div style="background: #f1f1f1; border-radius: 10px; width: 90%; max-width: 420px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.4); border: 2px solid rgb(85, 111, 176); font-family: Arial, sans-serif;">
+        <div style="background-color: rgb(85, 111, 176); color: #ffffff; padding: 12px 16px; font-weight: bolder; font-size: 16px; text-align: center; border-bottom: 2px solid rgb(76, 98, 154);">
+          ${title}
+        </div>
+        <div style="padding: 20px; color: #222; text-align: center; font-size: 14px; line-height: 1.4;">
+          ${message}
+        </div>
+        <div style="display: flex; justify-content: center; padding: 0 20px 15px 20px;">
+          <button id="customAlertOkBtn" class="mode-button" style="background-color: rgb(85, 111, 176); padding: 8px 24px; margin: 0;">OK</button>
+        </div>
+      </div>
+    `;
+
+    alertModal.style.display = "flex";
+
+    const closeAlert = () => {
+      alertModal.style.display = "none";
+      alertModal.onclick = null;
+      resolve();
+    };
+
+    document.getElementById("customAlertOkBtn").onclick = closeAlert;
+
+    // close on clicking outside modal box
+    alertModal.onclick = (e) => {
+      if (e.target === alertModal) closeAlert();
+    };
+  });
+}
+
+function showCustomConfirm(message, title = "Confirm action") {
+  return new Promise((resolve) => {
+    let confirmModal = document.getElementById("customConfirmModal");
+    if (!confirmModal) {
+      confirmModal = document.createElement("div");
+      confirmModal.id = "customConfirmModal";
+      confirmModal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(2px);
+        z-index: 10001; display: flex; align-items: center; justify-content: center;
+      `;
+      document.body.appendChild(confirmModal);
+    }
+
+    confirmModal.innerHTML = `
+      <div style="background: #f1f1f1; border-radius: 10px; width: 90%; max-width: 420px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.4); border: 2px solid rgb(85, 111, 176); font-family: Arial, sans-serif;">
+        <div style="background-color: rgb(85, 111, 176); color: #ffffff; padding: 12px 16px; font-weight: bolder; font-size: 16px; text-align: center; border-bottom: 2px solid rgb(76, 98, 154);">
+          ${title}
+        </div>
+        <div style="padding: 20px; color: #222; text-align: center; font-size: 14px; line-height: 1.4;">
+          ${message}
+        </div>
+        <div style="display: flex; justify-content: center; gap: 15px; padding: 0 20px 15px 20px;">
+          <button id="customConfirmCancelBtn" class="mode-button" style="background-color: #888; padding: 8px 20px; margin: 0;">Cancel</button>
+          <button id="customConfirmOkBtn" class="mode-button" style="background-color: rgb(85, 111, 176); padding: 8px 20px; margin: 0;">Confirm</button>
+        </div>
+      </div>
+    `;
+
+    confirmModal.style.display = "flex";
+
+    const closeConfirm = (result) => {
+      confirmModal.style.display = "none";
+      confirmModal.onclick = null;
+      resolve(result);
+    };
+
+    document.getElementById("customConfirmOkBtn").onclick = () => closeConfirm(true);
+    document.getElementById("customConfirmCancelBtn").onclick = () => closeConfirm(false);
+
+    // close (and cancel) on clicking outside modal box
+    confirmModal.onclick = (e) => {
+      if (e.target === confirmModal) closeConfirm(false);
+    };
+  });
+}
 
 // cache and observer for lazy loading metadata
 const metadataCache = new Map();
@@ -69,7 +163,8 @@ async function getModMetadata(modName) {
 
   // otherwise, perform standard fetch from server
   try {
-    const res = await fetch(`../static/mods/${modName}_init.html`);
+    const safeFileName = modName.replace(/:/g, " -");
+    const res = await fetch(`../static/mods/${safeFileName}_init.html`);
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const rawModText = await res.text();
 
@@ -125,6 +220,7 @@ modViewTemplate.innerHTML = `
     <div class="hover-button-holder">
       <button class="mod-play-button hover-button"><span></span></button>
       <button class="hover-button fav-button"><span></span></button>
+      <button class="hover-button edit-button" style="display:none"><span></span></button>
       <button class="hover-button delete-button" style="display:none"><span></span></button>
     </div>
     <div class="rating-background">
@@ -267,7 +363,7 @@ async function deleteModFromDB(modName) {
     const transaction = db.transaction([STORE_NAME], "readwrite");
     const store = transaction.objectStore(STORE_NAME);
     const request = store.delete(modName);
-    
+
     // try to delete numeric key if it exists, to fix legacy bugs
     if (!isNaN(modName) && modName !== "") {
       try { store.delete(Number(modName)); } catch (e) {}
@@ -465,7 +561,7 @@ function applySingleModTheme(modView, state = null) {
     theme.description_text_color ? modView.style.setProperty("--theme-desc-text", theme.description_text_color) : modView.style.removeProperty("--theme-desc-text");
     theme.main_color ? modView.style.setProperty("--theme-main-color", theme.main_color) : modView.style.removeProperty("--theme-main-color");
     theme.secondary_color ? modView.style.setProperty("--theme-secondary-color", theme.secondary_color) : modView.style.removeProperty("--theme-secondary-color");
-    
+
     let hoverColor = theme.secondary_hover_color;
     if (!hoverColor && theme.secondary_color) {
       const lum = getContrastRatio(theme.secondary_color, '#fff');
@@ -1077,7 +1173,7 @@ $(document).ready(async () => {
     const targetMod = localModParam || modNameParam;
 
     if (localModParam && !customMods.has(localModParam)) {
-      alert(`Zoinks! The local mod "${localModParam}" could not be found in your saved mods.`);
+      await showCustomAlert(`Zoinks! The local mod "${localModParam}" could not be found in your saved mods.`, "Mod not found");
     } else {
       const gridEl = document.getElementById("mod-grid");
       if (gridEl) gridEl.style.display = "none";
@@ -1223,6 +1319,7 @@ function createModView(mod, imageUrl = "", description = "Loading summary...") {
     image: modView.querySelector(".mod-image"),
     playBtn: modView.querySelector(".mod-play-button"),
     favBtn: modView.querySelector(".fav-button"),
+    editBtn: modView.querySelector(".edit-button"),
     deleteBtn: modView.querySelector(".delete-button"),
     ratingBg: modView.querySelector(".rating-background"),
     buttons: modView.querySelectorAll(".hover-button")
@@ -1251,6 +1348,15 @@ function createModView(mod, imageUrl = "", description = "Loading summary...") {
     modView._elements.favBtn.style.display = "";
     modView._elements.favBtn.querySelector("span").innerHTML = isFavorite(mod.value) ? UNFAV : FAV;
     modView._elements.favBtn.addEventListener("click", (e) => toggleFavorite(e, mod.value));
+  }
+
+  // edit button
+  if (isCustom) {
+    modView._elements.editBtn.querySelector("span").innerHTML = EDIT;
+    modView._elements.editBtn.style.display = "";
+    modView._elements.editBtn.addEventListener("click", (e) => editCustomMod(e, mod.value));
+  } else {
+    modView._elements.editBtn.style.display = "none";
   }
 
   // Delete button
@@ -1459,9 +1565,18 @@ function addCustomModButton() {
   addCustomMod(code1, code2);
 }
 
-function deleteCustomMod(event, modValue) {
+async function deleteCustomMod(event, modValue) {
+  if (event) event.stopPropagation();
+
+  const confirmed = await showCustomConfirm(
+    `Are you sure you want to delete the local mod "<b>${modValue}</b>"? This cannot be undone.`,
+    "Delete local mod"
+  );
+
+  if (!confirmed) return;
+
   customMods.delete(modValue);
-  deleteModFromDB(modValue);
+  await deleteModFromDB(modValue);
   saveCustomModNames(customMods);
 
   // remove from the grid
@@ -1474,11 +1589,182 @@ function deleteCustomMod(event, modValue) {
   }
 
   updateModViews();
+  await showCustomAlert(`"<b>${modValue}</b>" is history.`, "Mod deleted");
+}
+
+async function editCustomMod(event, modValue) {
+  if (event) event.stopPropagation();
+
+  const modData = await getModFromDB(modValue);
+  if (!modData) {
+    await showCustomAlert(`Could not retrieve data for custom mod "${modValue}".`, "Error");
+    return;
+  }
+
+  // check if edit modal exists, create if not
+  let modal = document.getElementById("customModEditModal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "customModEditModal";
+    modal.style.cssText = `
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(2px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    `;
+
+    modal.innerHTML = `
+      <div style="background: #f1f1f1; border-radius: 10px; width: 90%; max-width: 700px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.4); border: 2px solid rgb(85, 111, 176); font-family: Arial, sans-serif;">
+        <div style="background-color: rgb(85, 111, 176); color: #ffffff; padding: 12px 16px; font-weight: bolder; font-size: 18px; text-align: center; border-bottom: 2px solid rgb(76, 98, 154);">
+          Edit custom mod
+        </div>
+        <div style="padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; color: #222;">
+          <div>
+            <label style="display:block; font-weight: bold; margin-bottom: 6px; color: rgb(53, 70, 113); font-size: 14px;">Mod name:</label>
+            <input type="text" id="editModNameInput" style="width: 100%; padding: 10px; box-sizing: border-box; border-radius: 8px; border: 2px solid #BFE6FF; background: #fff; color: #222; font-size: 14px; outline: none; transition: border-color 0.2s;">
+          </div>
+          <div>
+            <label style="display:block; font-weight: bold; margin-bottom: 6px; color: rgb(53, 70, 113); font-size: 14px;">Code 1:</label>
+            <textarea id="editCode1Input" rows="8" style="width: 100%; padding: 10px; box-sizing: border-box; border-radius: 8px; border: 2px solid #BFE6FF; background: #fff; color: #222; font-family: monospace; font-size: 13px; resize: vertical; outline: none; transition: border-color 0.2s;"></textarea>
+          </div>
+          <div>
+            <label style="display:block; font-weight: bold; margin-bottom: 6px; color: rgb(53, 70, 113); font-size: 14px;">Code 2 (optional):</label>
+            <textarea id="editCode2Input" rows="8" style="width: 100%; padding: 10px; box-sizing: border-box; border-radius: 8px; border: 2px solid #BFE6FF; background: #fff; color: #222; font-family: monospace; font-size: 13px; resize: vertical; outline: none; transition: border-color 0.2s;"></textarea>
+          </div>
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 5px;">
+            <button id="cancelEditModBtn" class="mode-button" style="background-color: #888; padding: 8px 18px; margin: 0;">Cancel</button>
+            <button id="saveEditModBtn" class="mode-button" style="background-color: rgb(85, 111, 176); padding: 8px 18px; margin: 0;">Save changes</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    // focus state highlighting
+    const inputs = modal.querySelectorAll("input, textarea");
+    inputs.forEach(input => {
+      input.addEventListener("focus", () => input.style.borderColor = "rgb(85, 111, 176)");
+      input.addEventListener("blur", () => input.style.borderColor = "#BFE6FF");
+    });
+
+    document.getElementById("cancelEditModBtn").addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    document.getElementById("cancelEditModBtn").onclick = () => {
+      modal.style.display = "none";
+    };
+
+    // close on clicking outside modal box
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+  }
+
+  const nameInput = document.getElementById("editModNameInput");
+  const code1Input = document.getElementById("editCode1Input");
+  const code2Input = document.getElementById("editCode2Input");
+
+  nameInput.value = modData.name;
+  code1Input.value = modData.code1 || "";
+  code2Input.value = modData.code2 || "";
+
+  modal.dataset.editingMod = modValue;
+  modal.style.display = "flex";
+
+  const saveBtn = document.getElementById("saveEditModBtn");
+  const newSaveBtn = saveBtn.cloneNode(true);
+  saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
+
+  newSaveBtn.addEventListener("click", async () => {
+    const originalModName = modal.dataset.editingMod;
+    const newModName = nameInput.value.trim();
+    const newCode1 = code1Input.value;
+    const newCode2 = code2Input.value;
+
+    if (!newModName) {
+      await showCustomAlert("Mod name cannot be empty!", "Validation error");
+      return;
+    }
+    if (!newCode1) {
+      await showCustomAlert("Code 1 cannot be empty!", "Validation error");
+      return;
+    }
+
+    // save modified data to storage first
+    customMods.add(newModName);
+    await saveCustomModNames(customMods);
+    await saveModToDB(newModName, newCode1, newCode2);
+
+    // parse metadata & extraction
+    delete customModBoxThemes[originalModName];
+    extractModMetadata(newCode1, newModName);
+
+    const temp = extractElectionDetails(newCode1, newModName);
+    const imageUrl = temp?.election_json?.[0]?.fields?.site_image ?? temp?.election_json?.[0]?.fields?.image_url ?? "";
+    const description = temp?.election_json?.[0]?.fields?.site_description ?? temp?.election_json?.[0]?.fields?.summary ?? "";
+
+    metadataCache.set(newModName, { imageUrl, description });
+
+    if (originalModName !== newModName) {
+      // clean up old entry
+      await deleteModFromDB(originalModName);
+      customMods.delete(originalModName);
+      metadataCache.delete(originalModName);
+
+      const oldModView = modMap.get(originalModName);
+      let oldIdx = -1;
+      if (oldModView) {
+        oldIdx = modList.indexOf(oldModView);
+        if (oldModView.parentNode) oldModView.parentNode.removeChild(oldModView);
+        modMap.delete(originalModName);
+      }
+
+      // insert new view in same list position
+      const newModView = createModView(
+        { value: newModName, innerText: newModName, dataset: { tags: "Custom" } },
+        imageUrl,
+        description
+      );
+
+      if (oldIdx !== -1) {
+        modList[oldIdx] = newModView;
+      } else {
+        modList.unshift(newModView);
+      }
+      modMap.set(newModName, newModView);
+    } else {
+      // if unchanged name, update view properties in place
+      const existingView = modMap.get(newModName);
+      if (existingView) {
+        existingView.setAttribute("mod-name", newModName);
+        existingView.setAttribute("mod-display-name", newModName.toLowerCase());
+        existingView.id = newModName;
+        if (existingView._elements.titleText) existingView._elements.titleText.textContent = newModName;
+        if (existingView._elements.image && imageUrl) existingView._elements.image.src = imageUrl;
+        if (existingView._elements.desc) existingView._elements.desc.innerHTML = description;
+        applySingleModTheme(existingView);
+      }
+    }
+
+    // hide edit modal and refresh grid *before* showing alert
+    modal.style.display = "none";
+    updateModViews();
+    applyModBoxThemes();
+
+    await showCustomAlert(`"<b>${newModName}</b>" updated successfully!`, "Mod saved");
+  });
 }
 
 async function addCustomMod(code1, code2) {
   if (!code1) {
-    alert("Code 1 is required!");
+    await showCustomAlert("Code 1 is required!", "Error");
     return;
   }
 
@@ -1487,7 +1773,7 @@ async function addCustomMod(code1, code2) {
   const temp = extractElectionDetails(code1, "custom mod being added");
 
   if (!temp) {
-    alert("Could not add mod from code provided!");
+    await showCustomAlert("Could not add mod from code provided!", "Error");
     return;
   }
 
@@ -1502,7 +1788,7 @@ async function addCustomMod(code1, code2) {
     await saveModToDB(modName, code1, safeCode2);
   } catch (e) {
     console.error("Failed to save mod to DB:", e);
-    alert("There was an error saving the mod to the database. We will try to load it anyway.");
+    await showCustomAlert("There was an error saving the mod to the database. We will try to load it anyway.", "Warning");
   }
 
   // remove old mod if it exists
@@ -1656,9 +1942,27 @@ function updateModViews(event) {
   const paginationContainer = document.getElementById("pagination-controls");
   if (paginationContainer) paginationContainer.replaceChildren();
 
-  if (showAllModsLegacy) {
-    toggleFilterControls(true);
+  // get mods filtered by current tab, tags, and search query
+  const visibleMods = getVisibleMods();
 
+  let noFavsMessage = document.getElementById("no-favorites-message");
+  if (onlyFavorites && visibleMods.length === 0) {
+    if (!noFavsMessage) {
+      noFavsMessage = document.createElement("div");
+      noFavsMessage.id = "no-favorites-message";
+      noFavsMessage.classList.add("no-favorites-message");
+      modGrid.appendChild(noFavsMessage);
+    }
+    noFavsMessage.innerHTML = `You have no favorite mods. Press the ${FAV} button on any mod to see them here!`;
+    noFavsMessage.style.display = "block";
+  } else if (noFavsMessage) {
+    noFavsMessage.style.display = "none";
+  }
+
+  // keep filter controls enabled so users can switch tabs/search while unpaginated
+  toggleFilterControls(false);
+
+  if (showAllModsLegacy) {
     const loadingMessage = document.getElementById("mod-menu-loading-message");
     const checkbox = document.getElementById("modMenuLegacyViewCheckbox");
     if (loadingMessage) loadingMessage.style.display = 'inline';
@@ -1666,7 +1970,8 @@ function updateModViews(event) {
 
     requestAnimationFrame(() => {
       const fragment = document.createDocumentFragment();
-      modList.forEach((modView) => {
+      
+      visibleMods.forEach((modView) => {
         modView.style.display = "flex";
         fragment.appendChild(modView);
 
@@ -1687,24 +1992,6 @@ function updateModViews(event) {
     });
 
   } else {
-    toggleFilterControls(false); // re-enable filters
-
-    const visibleMods = getVisibleMods();
-    let noFavsMessage = document.getElementById("no-favorites-message");
-
-    if (onlyFavorites && visibleMods.length === 0) {
-      if (!noFavsMessage) {
-        noFavsMessage = document.createElement("div");
-        noFavsMessage.id = "no-favorites-message";
-        noFavsMessage.classList.add("no-favorites-message");
-        modGrid.appendChild(noFavsMessage);
-      }
-      noFavsMessage.innerHTML = `You have no favorite mods. Press the ${FAV} button on any mod to see them here!`;
-      noFavsMessage.style.display = "block";
-    } else if (noFavsMessage) {
-      noFavsMessage.style.display = "none";
-    }
-
     const startIndex = (currentPage - 1) * modsPerPage;
     const endIndex = startIndex + modsPerPage;
     const pageMods = visibleMods.slice(startIndex, endIndex);
@@ -1981,7 +2268,7 @@ async function loadModFromButton(modValue) {
     }
 
     if (!modData || !modData.code1) {
-      alert(`Custom mod ${modValue} not found!`);
+      await showCustomAlert(`Custom mod ${modValue} not found!`, "Error");
       return;
     }
 
@@ -2024,7 +2311,8 @@ async function loadModFromButton(modValue) {
     }
 
     try {
-      const res = await fetch(`../static/mods/${modValue}_init.html`);
+      const safeFileName = modValue.replace(/:/g, " -");
+      const res = await fetch(`../static/mods/${safeFileName}_init.html`);
       if (!res.ok) throw new Error("Network response was not ok");
       const modCode = await res.text();
 
@@ -2055,7 +2343,8 @@ async function loadModFromButton(modValue) {
 
         if (!allAch[linkedMod]) {
           try {
-            const linkedRes = await fetch(`../static/mods/${linkedMod}_init.html`);
+            const safeLinkedFileName = linkedMod.replace(/:/g, " -");
+            const linkedRes = await fetch(`../static/mods/${safeLinkedFileName}_init.html`);
             if (linkedRes.ok) {
               const linkedCode = await linkedRes.text();
               extractModMetadata(linkedCode, linkedMod);
@@ -2079,7 +2368,7 @@ async function loadModFromButton(modValue) {
       window.customMod = false;
     } catch (error) {
       console.error(`Failed to load mod ${modValue}:`, error);
-      alert(`Failed to load mod ${modValue}. See console for details.`);
+      await showCustomAlert(`Failed to load mod ${modValue}. See console for details.`, "Error");
       return;
     }
   }
@@ -2119,10 +2408,10 @@ async function copyModLink() {
 
   try {
     await window.navigator.clipboard.writeText(modLink.href);
-    alert("Copied link to clipboard!");
+    await showCustomAlert("Copied link to clipboard!", "Success");
   } catch (err) {
     console.error("Failed to copy: ", err);
-    alert("Failed to copy link to clipboard.");
+    await showCustomAlert("Failed to copy link to clipboard.", "Error");
   }
 }
 
@@ -2145,23 +2434,10 @@ async function updateModViewCount(modName) {
 
 async function loadEntries() {
   try {
-    const modListResponse = await fetch("../static/mods/MODLOADERFILE.html");
-    const modListHTML = await modListResponse.text();
+    const modListResponse = await fetch("../static/mods/mods.json");
+    if (!modListResponse.ok) throw new Error(`HTTP error! status: ${modListResponse.status}`);
 
-    // parse the HTML string into lightweight virtual elements
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(modListHTML, "text/html");
-    const options = doc.querySelectorAll("option");
-
-    // map elements to JS objects
-    originalModsData = Array.from(options).map(opt => ({
-      value: opt.value,
-      text: opt.textContent.trim(),
-      mode: opt.dataset.mode || "",
-      tags: opt.dataset.tags || "",
-      awards: opt.dataset.awards || "",
-      awardimageurls: opt.dataset.awardimageurls || ""
-    }));
+    originalModsData = await modListResponse.json();
 
     filterEntries();
   } catch (error) {

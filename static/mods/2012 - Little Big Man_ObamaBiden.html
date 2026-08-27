@@ -43131,23 +43131,40 @@ function getCdVotesUrl(year, vintage) {
     return `${CD_VOTES_BASE}/cd_votes_${year}_${vintage}.json`;
 }
 
+// helper to normalize and match CD codes (e.g., "IL-01" matches "IL-1" or "IL01")
+function normalizeCdCode(cd) {
+	if (!cd) return "";
+	const str = String(cd).toUpperCase().trim().replace(/[-\s]/g, '');
+	const m = str.match(/^([A-Z]{2})(AL|0*(\d+))$/);
+	if (m) {
+		const state = m[1];
+		const num = m[2] === "AL" ? "AL" : String(parseInt(m[3], 10)).padStart(2, '0');
+		return `${state}-${num}`;
+	}
+	return str;
+}
+
+function matchCdCodes(cd1, cd2) {
+	if (!cd1 || !cd2) return false;
+	return normalizeCdCode(cd1) === normalizeCdCode(cd2);
+}
+
 function getFeatureCdCode(f) {
     if (!f || !f.properties) return null;
     const p = f.properties;
 
-    // check direct standard properties if they are already fully formatted (e.g. "AL-05" or "WY-AL")
-    if (p.name && /^[A-Z]{2}-(AL|\d{2})$/i.test(p.name)) return String(p.name).toUpperCase();
-    if (p.cd_code) return String(p.cd_code);
-    if (p.CD_CODE) return String(p.CD_CODE);
-    if (p.cd && /^[A-Z]{2}-(AL|\d{2})$/i.test(p.cd)) return String(p.cd).toUpperCase();
+    // check direct standard properties
+    if (p.name && /^[A-Z]{2}-(AL|\d{1,2})$/i.test(p.name)) return normalizeCdCode(p.name);
+    if (p.cd_code) return normalizeCdCode(p.cd_code);
+    if (p.CD_CODE) return normalizeCdCode(p.CD_CODE);
+    if (p.cd && /^[A-Z]{2}-(AL|\d{1,2})$/i.test(p.cd)) return normalizeCdCode(p.cd);
 
-    // check if we can combine a separate state abbreviation and numeric CD property
     const stateVal = p.state || p.STATE || p.state_po || p.STATE_PO;
     const cdVal = p.cd !== undefined ? p.cd : p.CD;
     if (stateVal && cdVal !== undefined) {
         const stPo = String(stateVal).toUpperCase();
         if (STATE_PO_TO_FIPS[stPo]) {
-            const cdStr = String(cdVal).toUpperCase() === "AL" || String(cdVal) === "0" ? "AL" : String(cdVal).padStart(2, '0');
+            const cdStr = String(cdVal).toUpperCase() === "AL" ? "AL" : String(parseInt(cdVal, 10)).padStart(2, '0');
             return `${stPo}-${cdStr}`;
         }
     }
@@ -43155,45 +43172,26 @@ function getFeatureCdCode(f) {
     // parse and normalize from GEOID (e.g. "0101" or "01001" or "3622")
     if (p.GEOID) {
         const geoid = String(p.GEOID);
-        if (geoid.length === 4) {
+        if (geoid.length >= 4) {
             const stFips = geoid.slice(0, 2);
             const cdNum = geoid.slice(2);
             const stPo = STATE_FIPS_TO_PO[stFips];
-            if (stPo) return `${stPo}-${cdNum.padStart(2, '0')}`;
-        } else if (geoid.length === 5) {
-            const stFips = geoid.slice(0, 2);
-            const cdNum = geoid.slice(2);
-            const stPo = STATE_FIPS_TO_PO[stFips];
-            if (stPo) return `${stPo}-${String(parseInt(cdNum, 10)).padStart(2, '0')}`;
+            if (stPo) {
+                const numVal = parseInt(cdNum, 10);
+                const cdStr = (isNaN(numVal) || numVal === 0) ? "AL" : String(numVal).padStart(2, '0');
+                return `${stPo}-${cdStr}`;
+            }
         }
     }
 
     // parse and normalize from STATEFP + CD field combo
     if (p.STATEFP) {
         const stPo = STATE_FIPS_TO_PO[p.STATEFP];
-
-        // direct lookup for common years
-        let cdNum = p.CDFP || p.CD || p.CD113FP || p.CD114FP || p.CD115FP || p.CD116FP || p.CD117FP || p.CD118FP || p.CD119FP || p.CD109FP || p.CD108FP || p.CD103FP;
-
-        // regex fallback for other non-listed Congress shapes
-        if (cdNum === undefined) {
-            const cdKey = Object.keys(p).find(k => /^CD\d{3}FP$/i.test(k) || /^CDFP$/i.test(k));
-            if (cdKey) cdNum = p[cdKey];
-        }
-
+        let cdNum = p.CDFP || p.CD || p.CD118FP || p.CD119FP || p.CD117FP || p.CD116FP || p.CD115FP;
         if (stPo && cdNum !== undefined) {
-            return `${stPo}-${String(parseInt(cdNum, 10)).padStart(2, '0')}`;
-        }
-    }
-
-    // fallback to parsing numeric Feature ID strings (e.g., "0101" or "101")
-    if (f.id) {
-        const idStr = String(f.id).padStart(4, '0');
-        if (idStr.length === 4) {
-            const stFips = idStr.slice(0, 2);
-            const cdNum = idStr.slice(2);
-            const stPo = STATE_FIPS_TO_PO[stFips];
-            if (stPo) return `${stPo}-${cdNum.padStart(2, '0')}`;
+            const numVal = parseInt(cdNum, 10);
+            const cdStr = (isNaN(numVal) || numVal === 0) ? "AL" : String(numVal).padStart(2, '0');
+            return `${stPo}-${cdStr}`;
         }
     }
 
@@ -43339,32 +43337,6 @@ function generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyVotes
             return { dem, rep, other };
         }
         return null;
-    }
-
-    // helper to normalize and match CD codes (e.g., "IL-01" matches "IL-1" or "IL01")
-    function matchCdCodes(cd1, cd2) {
-        if (!cd1 || !cd2) return false;
-
-        const clean1 = String(cd1).toUpperCase().trim().replace(/[-\s]/g, '');
-        const clean2 = String(cd2).toUpperCase().trim().replace(/[-\s]/g, '');
-
-        if (clean1 === clean2) return true;
-
-        const parse = (str) => {
-            const m = str.match(/^([A-Z]{2})(AL|0*(\d+))$/);
-            if (m) {
-                return { state: m[1], num: m[2] === "AL" ? 0 : parseInt(m[3], 10) };
-            }
-            return null;
-        };
-
-        const p1 = parse(clean1);
-        const p2 = parse(clean2);
-
-        if (p1 && p2) {
-            return p1.state === p2.state && p1.num === p2.num;
-        }
-        return false;
     }
 
     // helper to extract CD/FIPS data from proxy tables
@@ -46267,11 +46239,11 @@ async function loadAndDrawCountyMap(mode) {
         function updatePrecinctColors() {
             if (!mlMap || !mlMapReady || isUserInteracting) return;
 
-            let hasActiveShuffle = (loadedPmTilesYear !== CURRENT_YEAR);
+            let hasActiveShuffle = (loadedPmTilesYear !== CURRENT_YEAR) || (tpCandidatesInGame && tpCandidatesInGame.length > 0);
 			if (!hasActiveShuffle) {
 				for (let fips in fipsMultipliers) {
 					const mult = fipsMultipliers[fips];
-					if (Math.abs(mult.mD - 1) > 0.001 || Math.abs(mult.mR - 1) > 0.001) {
+					if (Math.abs(mult.mD - 1) > 0.001 || Math.abs(mult.mR - 1) > 0.001 || Math.abs(mult.mO - 1) > 0.001) {
 						hasActiveShuffle = true;
 						break;
 					}
@@ -46338,12 +46310,33 @@ async function loadAndDrawCountyMap(mode) {
 					const total = dem + rep + ots;
 
 					// determine winner
-					let winnerId = demCandId;
-					let maxVotes = dem;
-					if (rep > maxVotes) { maxVotes = rep; winnerId = repCandId; }
+					const bgResults = [
+						{ id: demCandId, votes: dem },
+						{ id: repCandId, votes: rep }
+					];
+
+					if (tpCandidatesInGame && tpCandidatesInGame.length > 0) {
+						tpCandidatesInGame.forEach(candId => {
+							const share = (mults && mults.tpShares && mults.tpShares[candId] !== undefined) 
+								? mults.tpShares[candId] 
+								: (1 / Math.max(1, tpCandidatesInGame.length));
+							bgResults.push({
+								id: candId,
+								votes: Math.round(ots * share)
+							});
+						});
+					}
+
+					bgResults.sort((a, b) => b.votes - a.votes);
+
+					const winner = bgResults[0];
+					const second = bgResults.length > 1 ? bgResults[1] : { votes: 0 };
+
+					const winnerId = winner.id;
+					const maxVotes = winner.votes;
+					const secondVotes = second.votes;
 
 					// margin & color lookup
-					const secondVotes = winnerId === demCandId ? rep : dem;
 					const marginVal = total > 0 ? (maxVotes - secondVotes) / total : 0;
 					const color = colorInterpolators[winnerId] ? colorInterpolators[winnerId](Math.sqrt(marginVal)) : "#888888";
 
@@ -46449,66 +46442,67 @@ async function loadAndDrawCountyMap(mode) {
                     }
 				}
 
-				if (!geojson) return;
+                if (!geojson) return;
 
-				// normalize and ensure cd_code is always populated on features
-				geojson.features.forEach(f => {
-					const cdCode = getFeatureCdCode(f);
-					if (cdCode) {
-						f.properties.cd_code = cdCode;
-					}
-				});
+                // normalize and ensure cd_code is always populated on features
+                geojson.features.forEach(f => {
+                    const cdCode = getFeatureCdCode(f);
+                    if (cdCode) {
+                        f.properties.cd_code = cdCode;
+                    }
+                });
 
-				let finalVotesTable = votesTable;
+                // convert lat/long to screen space before calculating county weights
+                const firstGeom = geojson.features[0]?.geometry;
+                let isGeographic = false;
+                let firstPt = null;
+                if (firstGeom && firstGeom.coordinates) {
+                    if (firstGeom.type === "Polygon") firstPt = firstGeom.coordinates[0][0];
+                    else if (firstGeom.type === "MultiPolygon") firstPt = firstGeom.coordinates[0][0][0];
+                }
+                if (firstPt && Array.isArray(firstPt) && isFinite(firstPt[0]) && firstPt[0] < 0 && firstPt[0] >= -180) {
+                    isGeographic = true;
+                }
 
-				if (!exactVotesLoaded) {
-					console.log(`Generating dynamic spatial district weights from county shapes for ${CURRENT_YEAR} / vintage ${v}...`);
+                if (isGeographic) {
+                    projectGeoJsonToScreen(geojson);
+                }
 
-					const fallbackUrl = getFallbackVotesUrl(CURRENT_YEAR, v);
-					let proxyTable = null;
+                let finalVotesTable = votesTable;
 
-					if (fallbackUrl) {
-						try {
-							proxyTable = await fetch(fallbackUrl).then(r => {
-								if (!r.ok) throw new Error("Fallback votes file 404");
-								return r.json();
-							});
-							console.log(`Successfully loaded fallback blueprint from: ${fallbackUrl}`);
-						} catch (fallbackErr) {
-							console.warn("Could not load fallback blueprint:", fallbackErr);
-						}
-					}
+                if (!exactVotesLoaded) {
+                    console.log(`Generating dynamic spatial district weights from county shapes for ${CURRENT_YEAR} / vintage ${v}...`);
 
-					let refGeojsonData = null;
-					if (proxyTable) {
-						let refVintage = "111";
-						const refMatch = fallbackUrl.match(/cd_votes_\d+_(\d+)\.json/);
-						if (refMatch) refVintage = refMatch[1];
+                    const fallbackUrl = getFallbackVotesUrl(CURRENT_YEAR, v);
+                    let proxyTable = null;
 
-						try {
-							refGeojsonData = await fetch(getCdGeojsonUrl(refVintage)).then(r => r.json());
-						} catch (refGeoErr) {
-							console.warn("Could not load reference GeoJSON for cross-walk:", refGeoErr);
-						}
-					}
+                    if (fallbackUrl) {
+                        try {
+                            proxyTable = await fetch(fallbackUrl).then(r => {
+                                if (!r.ok) throw new Error("Fallback votes file 404");
+                                return r.json();
+                            });
+                            console.log(`Successfully loaded fallback blueprint from: ${fallbackUrl}`);
+                        } catch (fallbackErr) {
+                            console.warn("Could not load fallback blueprint:", fallbackErr);
+                        }
+                    }
 
-					finalVotesTable = generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyTable, refGeojsonData, proxyTable);
-				}
+                    let refGeojsonData = null;
+                    if (proxyTable) {
+                        let refVintage = "111";
+                        const refMatch = fallbackUrl.match(/cd_votes_\d+_(\d+)\.json/);
+                        if (refMatch) refVintage = refMatch[1];
 
-				const firstGeom = geojson.features[0]?.geometry;
-				let isGeographic = false;
-				let firstPt = null;
-				if (firstGeom && firstGeom.coordinates) {
-					if (firstGeom.type === "Polygon") firstPt = firstGeom.coordinates[0][0];
-					else if (firstGeom.type === "MultiPolygon") firstPt = firstGeom.coordinates[0][0][0];
-				}
-				if (firstPt && Array.isArray(firstPt) && firstPt[0] < 0 && firstPt[0] >= -180) {
-					isGeographic = true;
-				}
+                        try {
+                            refGeojsonData = await fetch(getCdGeojsonUrl(refVintage)).then(r => r.json());
+                        } catch (refGeoErr) {
+                            console.warn("Could not load reference GeoJSON for cross-walk:", refGeoErr);
+                        }
+                    }
 
-				if (isGeographic) {
-					projectGeoJsonToScreen(geojson);
-				}
+                    finalVotesTable = generateDistrictVotesTable(geojson, usCounties, fipsResults, proxyTable, refGeojsonData, proxyTable);
+                }
 
 				mlMap.addSource("districts-source", {
 					type: "geojson",

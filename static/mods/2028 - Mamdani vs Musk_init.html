@@ -1,0 +1,344 @@
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 21,
+        "fields": {
+            "year": 2020,
+            "summary": "<p>It's an American disaster. The Natural-Born Citizen Clause was officially repealed. For the first time since the founding of the republic, naturalized citizens were granted the legal right to seek the highest office in the land. Zohran Mamdani, born in Kampala, Uganda, is seeking an unprecedented run for president of the United States. Alternatively, South African-born billionaire Elon Musk is also seeking a presidential run, hoping to become the new face of the \"America First\" movement.</p>\n\n<p>It's an uphill battle for Mamdani as some pundits are skeptical that his brand of left-wing populism and democratic socialism will be enough to win the electoral college, but some pundits believe he's our only hope left.</p>",
+            "image_url": "https://files.catbox.moe/gswrg8.png",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://files.catbox.moe/imffra.png",
+            "recommended_reading": "<ul>\n<li><a href=https://www.chicagotribune.com/opinion/editorials/ct-edit-chicago-tribune-biden-endorsement-20200925-lnyxsb5qvrftnjjmj3rnzj33jy-story.html>Our Case For Joe Biden</a></li>\n<li><a href=https://nationalinterest.org/feature/case-trump-166808>The Case For Trump</a></li>\n<li><a href=https://www.npr.org/2020/11/18/935730100/how-biden-won-ramping-up-the-base-and-expanding-margins-in-the-suburbs>How Biden Won: Ramping Up The Base And Expanding Margins In The Suburbs</a></li>\n<li><a href=https://www.prospectmagazine.co.uk/politics/donald-trump-joe-biden-us-election-almost-win-votes-concede>Why Did Trump Almost Win?</a></li>\n<li><a href=https://www.hoover.org/research/no-evidence-voter-fraud-guide-statistical-claims-about-2020-election>No Evidence For Voter Fraud: A Guide To Statistical Claims About The 2020 Election</a></li>\n</ul>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
+            "creator": "Dan Bryan",
+            "display_year": "2028: Mamdani vs. Musk",
+            "recommended_reading_enabled": false
+        }
+    }
+];
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 21,
+        "year": 2020,
+        "is_premium": 0,
+        "display_year": "2028: Mamdani vs. Musk"
+    }
+];
+
+campaignTrail_temp.credits = "Enigma";
+
+// necessary so that the right election files are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "21") {
+            campaignTrail_temp.code2_id = "2028 - Mamdani vs Musk";
+        }
+    }
+}, 100);
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+];
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 41421,
+        "fields": {
+            "first_name": "Zohran",
+            "last_name": "Mamdani",
+            "election": 21,
+            "party": "Democrat",
+            "state": "New York",
+            "priority": 1,
+            "description": "<p>The mayor of New York City Zohran Mamdani seeks a run for president of the United States, due to officially becoming eligible thanks to the repeal of the Natural-Born Citizen Clause. Defeating several notable opponents in the primaries like Gavin Newsom and Kamala Harris, Mamdani's left-wing populism has been generating large amounts of enthusiasm from a very frustrated electorate who is fatigued with the standard status quo. Mamdani faces an uphill struggle, however, as Republicans and moderate Democrats fear he's far too radical of a candidate. Can Mamdani's brand of left-wing populism win him over with the American people, or will his campaign solidify yet another blunder for the DNC?</p>",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 1,
+            "image_url": "https://files.catbox.moe/auc3kl.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2028 election.</h3><p>You have officially made history as the first natural-born citizen to be elected president of the United States of America! You faced a tough battle full of challenges and propaganda, but you managed to pull off quite a resounding win with your message of left-wing populism and hope and change. Elon Musk is already claiming widespread election fraud, but you were already prepared for that. Will you be able to get this country back on track after the disaster of the second Trump administration, or will you struggle to get anything done and face opposition from Republicans and Democrats alike? Only time will tell, Mr. Mayor.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2028 election.</h3><p>Pundits are left scratching their hands wondering how Elon Musk managed to pull off quite an upset, and your base is left fearful for the current state of this country's democracy and stability. Some analysts are even beginning to question the integrity of the results, with some even calling it a rigged election orchestrated by Russia. Other analysts simply just think your campaign wasn't very good. Whatever the case, you still have options. Do you head back home and improve the lives of your fellow New Yorkers or do you seek another run in four more years? The choice is yours.</p>",
+            "no_electoral_majority_message": "<h3>Sorry! You have lost the 2020 election.</h3><p>In spite of the 269-269 tie in the electoral college, Republicans control a majority of state delegations in the House of Representatives. After an election in which many of your supporters claimed democracy itself was at stake, what happens now? Perhaps the party will need to go in a completely different direction in 2024.</p>",
+            "description_as_running_mate": "",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 41483,
+        "fields": {
+            "first_name": "Elon",
+            "last_name": "Musk",
+            "election": 21,
+            "party": "Republican",
+            "state": "Texas",
+            "priority": 2,
+            "description": "<p>Elon Musk is a filthy rich bastard.</p>",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://files.catbox.moe/g8wfvb.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2020 election.</h3><p>For the second time in a row, many analysts saw a victory for you as practically impossible. But whatever they say, it is clear that your Make America Great Again agenda has been vindicated. Where do you take things from here?</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2020 election.</h3><p>After an election in which many of your supporters claimed democracy itself was at stake, what happens now? Many analysts believe the party will need to go in a completely different direction next time. As for yourself, will you take these results sitting down, or will you prepare yourself for an epic political comeback in 2024?</p>",
+            "no_electoral_majority_message": "<h3>Congratulations! You have won the 2020 election.</h3><p>In spite of the 269-269 tie in the electoral college, Republicans control a majority of state delegations in the House of Representatives. A lot of liberals are absolutely distraught and outraged that the election came down to such a technicality, but hey, those are the rules!</p>",
+            "description_as_running_mate": "",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 41545,
+        "fields": {
+            "first_name": "Libertarian",
+            "last_name": "Party",
+            "election": 21,
+            "party": "Libertarian",
+            "state": "America",
+            "priority": 3,
+            "description": "'",
+            "color_hex": "#FFFF00",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 41607,
+        "fields": {
+            "first_name": "Green",
+            "last_name": "Party",
+            "election": 21,
+            "party": "Green",
+            "state": "America",
+            "priority": 4,
+            "description": "'",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 304,
+        "fields": {
+            "first_name": "Jon",
+            "last_name": "Ossoff",
+            "election": 21,
+            "party": "Democrat",
+            "state": "Georgia",
+            "priority": 5,
+            "description": "'",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://files.catbox.moe/gn6sfn.webp",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>Jon Ossoff is an American politician who has served as the senior United States senator from Georgia since 2021. Mamdani hopes to use Ossoff to appeal to more moderate voters in the southern states including the crucial swing state of Georgia.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 309,
+        "fields": {
+            "first_name": "Marco",
+            "last_name": "Rubio",
+            "election": 21,
+            "party": "Republican",
+            "state": "Florida",
+            "priority": 10,
+            "description": "'",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://files.catbox.moe/9rd8na.jpg",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>Marco Rubio is the 72nd United States secretary of state since 2025.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    }
+];
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 164300,
+        "fields": {
+            "candidate": 41421,
+            "running_mate": 304
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 117899,
+        "fields": {
+            "candidate": 41483,
+            "running_mate": 309
+        }
+    }
+];
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 21,
+        "candidates": [
+            41421,
+            41483,
+            41545,
+            41607
+        ]
+    }
+];
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 21,
+        "candidates": [
+            41421,
+            41483,
+            41545,
+            41607
+        ]
+    }
+];
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#1e04e7",
+    "header_text_color": "#fff",
+    "description_background_color": "#ffffff",
+    "description_text_color": "#111827",
+    "main_color": "#617ed6",
+    "secondary_color": "#ff0000",
+    "ui_text_color": "#000000",
+    "site_title": "",
+    "site_image_url": ""
+};
+
+jet_data = {
+    "headerColor": "#1e04e7",
+    "headerTextColor": "#ffffff",
+    "windowColor": "#000000",
+    "containerColor": "#000000",
+    "innerWindowColor": "#617ed6",
+    "innerWindowTextColor": "#000000",
+    "descriptionWindowColor": "#ff0000",
+    "descriptionWindowTextColor": "#000000",
+    "startButtonColor": "#1e00ff",
+    "bannerImageUrl": "https://files.catbox.moe/yc3d5q.png",
+    "backgroundImageUrl": "https://www.greenleft.org.au/sites/default/files/zohram_mamdani_campaign_rally.jpg",
+    "gameTitle": "2028: MAMDANI VS. MUSK",
+    "customQuote": "",
+    "quoteTextColor": "#ffffff",
+    "endingTextColor": "#ffffff",
+    "modBoxTheme": {
+        "header_color": "#1e04e7",
+        "header_text_color": "#000000",
+        "description_background_color": "#ffffff",
+        "description_text_color": "#111827",
+        "main_color": "#617ed6",
+        "secondary_color": "#ff0000",
+        "ui_text_color": "#000000",
+        "site_title": "",
+        "site_image_url": ""
+    }
+};
+
+//#startcode
+function applyTheme(theme) {
+    const gameHeader = document.querySelector(".game_header");
+    if (gameHeader && theme.coloring_title) {
+        gameHeader.style.backgroundColor = theme.coloring_title;
+    }
+
+    const gameWindow = document.getElementById("game_window");
+    if (gameWindow && theme.coloring_window) {
+        gameWindow.style.backgroundColor = theme.coloring_window;
+    }
+
+    const container = document.querySelector(".container");
+    if (container && theme.coloring_container) {
+        container.style.backgroundColor = theme.coloring_container;
+    }
+
+    const headerImg = document.getElementById("header");
+    if (headerImg && theme.header_image) {
+        headerImg.src = theme.header_image;
+    }
+
+    if (theme.body_background) {
+        document.body.style.backgroundImage = `url("${theme.body_background}")`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundAttachment = "fixed";
+    }
+
+    const style = document.createElement("style");
+    style.textContent = `
+      #results_container { color: #ffffff; }
+      #wittyquote { color: #ffffff; }
+      .game_header h2 { color: #ffffff; }
+      .inner_window_w_desc { background-color: #617ed6 !important; color: #000000; }
+      .inner_window_front, .person_description_window, .election_description_window, .description_window_small { background-color: #750000 !important; color: #fff; }
+      .campaign_trail_start_emphasis { background-color: #1e00ff !important; }
+    `;
+    document.head.appendChild(style);
+}
+
+corrr = '\n              <h2>2028: MAMDANI VS. MUSK</h2>\n            ';
+
+const theme = nct_stuff.themes[nct_stuff.selectedTheme];
+
+// define / override theme values
+theme.coloring_title     = "#1e04e7";
+theme.coloring_window    = "#000000";
+theme.coloring_container = "#000000";
+theme.header_image = "https://files.catbox.moe/yc3d5q.png";
+theme.body_background = "https://www.greenleft.org.au/sites/default/files/zohram_mamdani_campaign_rally.jpg";
+
+applyTheme(theme);
+//#endcode
