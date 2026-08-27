@@ -819,24 +819,6 @@
   box-decoration-break: clone;
 }
 
-/* Question screen answer list */
-.inner_window_question > .inner_inner_window {
-  display: flex;
-  flex-direction: column;
-}
-
-.inner_window_question > .inner_inner_window > * {
-  flex: 0 0 auto;
-}
-
-#question_form {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-}
-
 /* CTS theme readability fixes */
 .cts-theme .custom-mod-label,
 .cts-theme .custom-mod-note,

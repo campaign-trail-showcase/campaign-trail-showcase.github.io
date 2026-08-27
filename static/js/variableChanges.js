@@ -5,6 +5,42 @@ const variableChanges = {
   observer: null,
 };
 
+const VARIABLE_CHANGES_STYLE_ID = "variable-changes-style";
+const VARIABLE_CHANGES_CSS = `
+/* Question screen answer list */
+.inner_window_question > .inner_inner_window {
+  display: flex;
+  flex-direction: column;
+}
+
+.inner_window_question > .inner_inner_window > * {
+  flex: 0 0 auto;
+}
+
+#question_form {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+`;
+
+function syncVariableChangesStyles() {
+  const existingStyle = document.getElementById(VARIABLE_CHANGES_STYLE_ID);
+
+  if (variableChanges.enabled) {
+    if (!existingStyle) {
+      const style = document.createElement("style");
+      style.id = VARIABLE_CHANGES_STYLE_ID;
+      style.textContent = VARIABLE_CHANGES_CSS;
+      document.head.appendChild(style);
+    }
+  } else {
+    existingStyle?.remove();
+  }
+}
+
 async function fetchModVariableChanges(modName) {
   const response = await fetch(`../static/json/variablechanges/${modName}.json`);
   // most mods have no custom variables, so 404 isn't failure
@@ -96,5 +132,6 @@ async function toggleVariableChanges() {
 
   variableChanges.enabled = enabling;
   syncVariableChangesButton();
+  syncVariableChangesStyles();
   renderVariableChanges();
 }
