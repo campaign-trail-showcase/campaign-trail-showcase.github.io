@@ -97,6 +97,18 @@ function isAchievementUnlocked(modName, achName, achData = null) {
 
     // disambiguate identical achievement names by matching description and image
     const currentData = achData || (modName && typeof allAch === "object" ? allAch?.[modName]?.[achName] : null);
+    if (
+      legacy === true &&
+      modName &&
+      window.modBeingPlayed === modName &&
+      Object.prototype.hasOwnProperty.call(
+        window.campaignTrail_temp?.achievements || {},
+        achName,
+      )
+    ) {
+      return true;
+    }
+
     if (currentData && (legacy.description || legacy.image)) {
       const descMatch = !legacy.description || legacy.description === currentData.description;
       const imgMatch = !legacy.image || legacy.image === currentData.image;
@@ -964,11 +976,11 @@ function renderModList(modsToRender, useLazyLoading = false) {
 }
 
 function getCurrentModName() {
-  if (typeof allAch !== "object" || allAch === null) return null;
-
-  if (window.modBeingPlayed && allAch[window.modBeingPlayed]) {
+  if (window.modBeingPlayed) {
     return window.modBeingPlayed;
   }
+
+  if (typeof allAch !== "object" || allAch === null) return null;
 
   // check if RecReading is available and has achievements
   if (window.RecReading && Object.keys(allAch).length > 0) {
