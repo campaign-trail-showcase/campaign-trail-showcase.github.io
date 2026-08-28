@@ -1629,11 +1629,11 @@ async function editCustomMod(event, modValue) {
           </div>
           <div>
             <label style="display:block; font-weight: bold; margin-bottom: 6px; color: rgb(53, 70, 113); font-size: 14px;">Code 1:</label>
-            <textarea id="editCode1Input" rows="8" style="width: 100%; padding: 10px; box-sizing: border-box; border-radius: 8px; border: 2px solid #BFE6FF; background: #fff; color: #222; font-family: monospace; font-size: 13px; resize: vertical; outline: none; transition: border-color 0.2s;"></textarea>
+            <textarea id="editCode1Input" rows="8" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" wrap="off" style="width: 100%; padding: 10px; box-sizing: border-box; border-radius: 8px; border: 2px solid #BFE6FF; background: #fff; color: #222; font-family: monospace; font-size: 13px; resize: vertical; outline: none; transition: border-color 0.2s;"></textarea>
           </div>
           <div>
             <label style="display:block; font-weight: bold; margin-bottom: 6px; color: rgb(53, 70, 113); font-size: 14px;">Code 2 (optional):</label>
-            <textarea id="editCode2Input" rows="8" style="width: 100%; padding: 10px; box-sizing: border-box; border-radius: 8px; border: 2px solid #BFE6FF; background: #fff; color: #222; font-family: monospace; font-size: 13px; resize: vertical; outline: none; transition: border-color 0.2s;"></textarea>
+            <textarea id="editCode2Input" rows="8" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" wrap="off" style="width: 100%; padding: 10px; box-sizing: border-box; border-radius: 8px; border: 2px solid #BFE6FF; background: #fff; color: #222; font-family: monospace; font-size: 13px; resize: vertical; outline: none; transition: border-color 0.2s;"></textarea>
           </div>
           <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 5px;">
             <button id="cancelEditModBtn" class="mode-button" style="background-color: #888; padding: 8px 18px; margin: 0;">Cancel</button>
