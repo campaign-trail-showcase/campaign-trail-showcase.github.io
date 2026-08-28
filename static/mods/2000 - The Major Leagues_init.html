@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.3.3
+* @version: 1.4.0
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -204,7 +204,7 @@ const recommendedReadingContent = `
 			<li>
 				<strong>How important are the different school cliques?</strong><br>
 				They are the closest thing you have to an “electoral map” here. Each of the five main factions — the Jocks, the Burnouts, the Honors Kids, the Arts/Theatre crowd, and the Administration — has its own set of values and priorities. The Jocks generally value strength and respect Patty; the Burnouts are anti-establishment and respond to populist anger; the Honors Kids value stability and favor the status quo candidate, Linus; the Arts kids are idealists who respond to emotion but are turned off by overt aggression; and the Administration wants a student president who won’t rock the boat. You can, technically, win them all, although this is quite difficult. The core strategy of the game however, is building a winning coalition from these disparate groups, which often have competing interests. Your choices will almost always please one group at the expense of another.
-			</li>
+			</li>			
             <li>
                 <strong>What exactly is the ‘Ruthlessness’ stat?</strong><br>
                 It tracks Charlie’s descent into a Machiavellian political operator (or not, that is). If you go too far, you compromise your morals, you alienate your friends, and you become exactly the kind of establishment monster you swore you were running against. High ruthlessness alters your endings drastically.
@@ -515,7 +515,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "''",
             "electoral_loss_message": "''",
             "no_electoral_majority_message": "''",
-            "description_as_running_mate": "<p><b>Although Peppermint Patty will tell you</b> she's not the brains of this operation, and she's wrong, you'll never convince her of that. She's not book-smart in the way that gets rewarded on report cards, and she's made a certain peace with that; though the peace is sometimes uneasy in the small hours of the night when she thinks about it too hard. What she is, inarguably, is perceptive: about people and about the difference between what someone is saying and what they mean. She has been reading Charlie Brown like a book since the fourth grade and she has never once gotten the ending wrong.</p><p>Patty took this on because she believed in him before he believed in himself, as surprising as that may seem; she has standards. What she might say, if you caught her in the right moment, is that she's tired of watching people who actually give a damn get edged out by people who are just better at performing the giving of a damn. She knows the difference, and figured that if someone like Charlie Brown could be made to stand up in front of people and say the true thing, then maybe the true thing still counts for something. Now, she needed to find out.</p>",
+            "description_as_running_mate": "<p><b>Although Peppermint Patty will tell you</b> she’s not the brains of this operation, and she’s wrong, you’ll never convince her of that. She’s not book-smart in the way that gets rewarded on report cards, and she’s made a certain peace with that; though the peace is sometimes uneasy in the small hours of the night when she thinks about it too hard. What she is, inarguably, is perceptive: about people and about the difference between what someone is saying and what they mean. She has been reading Charlie Brown like a book since the fourth grade and she has never once gotten the ending wrong.</p><p>Patty took this on because she believed in him before he believed in himself, as surprising as that may seem; she has standards. What she might say, if you caught her in the right moment, is that she’s tired of watching people who actually give a damn get edged out by people who are just better at performing the giving of a damn. She knows the difference, and figured that if someone like Charlie Brown could be made to stand up in front of people and say the true thing, then maybe the true thing still counts for something. Now, she needed to find out.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -803,13 +803,13 @@ const css = `
 			#inner_window_2 p:first-of-type:first-letter,
 			#inner_window_3 p:first-of-type:first-letter,
 			#running_mate_description_window p:first-of-type:first-letter {
-				float: left;
-				font-weight: bold;
+				float: left; 
+				font-weight: bold; 
 				line-height: 0.7em;
 				margin-top: 0.05em;
 				font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
 				text-shadow: 2px 2px 0px #222222, -1px -1px 0px #fffdf2;
-
+				
 				font-size: 3.5em;
 				padding-bottom: 0.1em;
 			}
@@ -894,7 +894,7 @@ const css = `
                 margin: 5px 10px 5px 5px;
                 width: 250px;
             }
-
+			
 			#candidate_image img, #running_mate_image img {
 				background: #fffdf2;
 				border: 1px solid #222;
@@ -903,7 +903,7 @@ const css = `
 				max-width: 220px;
 				object-fit: cover;
 				object-position: top;
-				outline: 2px solid;
+				outline: 2px solid; 
 				padding: 6px 6px 16px 6px;
 				position: relative;
 				transform: rotate(-3deg);
@@ -911,11 +911,11 @@ const css = `
 				width: 100%;
 				z-index: 1;
 			}
-			#candidate_image img {
+			#candidate_image img { 
 				outline-color: #b10b0b;
 			}
-			#running_mate_image img {
-				outline-color: #414ddb;
+			#running_mate_image img { 
+				outline-color: #414ddb; 
 				transform: rotate(2deg);
 			}
 
@@ -939,7 +939,7 @@ const css = `
 				border-right: none;
                 min-height: 20em;
 			}
-
+			
 			.game_header {
 				align-items: center;
 				background-color: #d8720c;
@@ -1230,7 +1230,7 @@ const css = `
 			#election_year_form + p:first-of-type {
 			  padding-top: 5em;
 			}
-
+			
 			/* mobile tweaks for this */
 			@media only screen and (max-width: 768px) {
 			  #election_description_window {
@@ -1446,7 +1446,7 @@ const css = `
             button#ExportFileButton {
                 display: inline-flex;
             }
-
+			
             /* other, in-game issue tooltips */
             .tooltip {
                 cursor: help;
@@ -1788,7 +1788,7 @@ const css = `
 				transform: translateX(-50%) translateY(0);
 				transition-delay: 0.15s;
 			}
-
+			
 			/* tooltip extras */
 			.mytooltip .mytooltiptext.flip-bottom {
 				bottom: auto;
@@ -2089,7 +2089,7 @@ const css = `
 			  outline: 1px dotted #000;
 			  outline-offset: -4px;
 			}
-
+			
 			.achSubHolder.visible {
 			  display: flex !important;
 			  flex-wrap: wrap !important;
@@ -2111,7 +2111,7 @@ const css = `
 
 			.achBox {
 			  margin: 0 !important;
-			  width: calc((100% - 30px) / 3) !important;
+			  width: calc((100% - 30px) / 3) !important; 
 			  max-width: none !important;
 			  height: 350px !important;
 			  display: flex !important;
@@ -2121,7 +2121,7 @@ const css = `
 			  padding: 15px !important;
 			  box-sizing: border-box !important;
 			}
-
+			
 			/* extra media queries */
 			@media (max-width: 768px) {
 			  .achBox {
@@ -2459,7 +2459,7 @@ const css = `
 				border-radius: 3px;
 			}
 
-			#cheatMenu input[type="range"]::-webkit-slider-thumb {
+			#cheatMenu input[type="range"]::-webkit-slider-thumb {				
 				-webkit-appearance: none;
 				appearance: none;
 				width: 14px;
@@ -2792,7 +2792,7 @@ const css = `
 					padding: 10px 16px;
 					min-height: 44px;
 				}
-
+				
 				#question_form input[type="radio"] + label:hover,
 				#question_form input[type="radio"] + label:focus {
 					font-size: clamp(16px, 4.2vw, 20px);
@@ -3860,7 +3860,7 @@ window.a = function(e) {
 	  by the votes of the school members. Each member casts a vote, and whichever candidate receives more than
 	  half of the total votes wins.</p>
       <p>As every vote carries equal weight, the result comes down to who can win over the most people in the room.
-	  A simple majority of votes is all that's needed to win, but courting voters may be harder than it appears.</p>
+	  A simple majority of votes is all that’s needed to win, but courting voters may be harder than it appears.</p>
     `;
 
     descWindow.innerHTML = charlieBrownDesc;
@@ -4312,7 +4312,7 @@ window.a = function(e) {
 // The dynamic tooltips
 const tooltipList = [
   { searchString: "Linus", image: "https://i.pinimg.com/1200x/83/3a/3a/833a3aa1382f73a6cffe17e3193101a5.jpg", text: "The devil." },
-  { searchString: "Linus Van Pelt", image: "https://i.pinimg.com/1200x/d6/18/30/d61830629dd489745396d1eefc5ca4d5.jpg", text: "Nerd." },
+  { searchString: "Linus Van Pelt", image: "https://i.pinimg.com/1200x/d6/18/30/d61830629dd489745396d1eefc5ca4d5.jpg", text: "Nerd." },  
   { searchString: "Patty", image: "https://i.pinimg.com/1200x/22/cb/d0/22cbd081d3bc2e7306f29803cb9d7a67.jpg", text: "Ah, heavens…" },
   { searchString: "Lucy", image: "https://i.pinimg.com/1200x/40/d6/45/40d64580f6da559e27862d50810be0c7.jpg", text: "Linus’s terrifying older sister. Also known as Baphomet, she runs the school’s social hierarchy with an iron fist." },
   { searchString: "Lucy Van Pelt", image: "https://i.pinimg.com/1200x/6f/f2/ea/6ff2ea684968657b4b7319baa6eae0ee.jpg", text: "Same." },
@@ -4343,6 +4343,8 @@ const tooltipList = [
   { searchString: "Stanford Experiment", image: "https://images.newscientist.com/wp-content/uploads/2018/10/08143156/00011117_master_004.jpg", text: "Too risqué for this election." },
   { searchString: "MTV", image: "https://i.pinimg.com/1200x/d3/0f/c1/d30fc12836f8047042fb07caa08cd32c.jpg", text: "*He means Daria." },
   { searchString: "Dewey", image: "https://i.redd.it/old-photos-of-everyone-v0-ao2xb3ytcvpe1.jpg?width=395&format=pjpg&auto=webp&s=f2cc450a61fb4145cde84aba312b3346228853b9", text: "Oooh, shiny." },
+  { searchString: "Aaron Carter", image: "https://media.gettyimages.com/id/171534201/pt/foto/hollywood-ca-singer-aaron-carter-attends-the-rugrats-in-paris-hollywood-premiere-on-november-5.jpg?s=612x612&w=0&k=20&c=Vp-O3WPewyaL51GExtlUSYmGsLJmVsPnLCxFiKVwTZg=", text: "He just beat Shaq, dawg." },
+
 
 ];
 
@@ -4469,46 +4471,46 @@ document.addEventListener('mouseover', function(e) {
         { title: "They Shoot Horse, Don't They?", artist: "Quickspace", coverLink: "https://f4.bcbits.com/img/a3219574695_10.jpg", videoIds: ["gHaDeoOK4Oc", "NOM_xKF7qpY"] },
         { title: "Stabilizers For Big Boys", artist: "Panchiko", coverLink: "https://lh3.googleusercontent.com/aGQBDt47dtfaR2n5Hu_3OIi9JAtVbYzpRz4eEtH37F8ggDtJbr16yWFd-RIonmyQvzygs99FQZax5lEb=w544-h544-l90-rj", videoIds: ["ZKaOnFQRJgs", "rghRb1pIP6s"] },
         { title: "Into The Void", artist: "Nine Inch Nails", coverLink: "https://resources.tidal.com/images/e5ac15b5/66a3/42d9/878f/cf069eaca8ce/320x320.jpg", videoIds: ["Gz-fYWDRubk", "6fh2-JfrXo8"] },
-		{ title: "Ten To Twenty (Hefner Mix)", artist: "Sneaker Pimps", coverLink: "https://yt3.googleusercontent.com/NL4TZQ9to8msdvNpssKBLVLnhMhHxbiia1PiuQfG9ZEIFQhBqeKrjubNImxYVPA1LS5P4_s2nuJWU0ubRw=w544-h544-l90-rj", videoIds: ["GsaZx_djAvY", "fIocigvDSC4"] },
+        { title: "Ten To Twenty (Hefner Mix)", artist: "Sneaker Pimps", coverLink: "https://yt3.googleusercontent.com/NL4TZQ9to8msdvNpssKBLVLnhMhHxbiia1PiuQfG9ZEIFQhBqeKrjubNImxYVPA1LS5P4_s2nuJWU0ubRw=w544-h544-l90-rj", videoIds: ["GsaZx_djAvY", "fIocigvDSC4"] },
         { title: "She Gave Her Angels", artist: "Prince", coverLink: "https://images.genius.com/9c3f355f06e80ccec8f403224317aa4e.1000x1000x1.jpg", videoIds: ["2esy8BaXaOc", "5XqWIXZ5kYM"] },
-        { title: "Playing In The Streets", artist: "Pet Shop Boys", coverLink: "https://i.discogs.com/MdGPU8u9N5WaffsyRFbnowqgGADbtzYkRQ2QEI8SSrc/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExOTQx/MC0xMzc5NDE2NjYy/LTE0MjcuanBlZw.jpeg", videoIds: ["qpBctHSi_6c"] },
+        { title: "Playing In The Streets", artist: "Pet Shop Boys", coverLink: "https://i.discogs.com/MdGPU8u9N5WaffsyRFbnowqgGADbtzYkRQ2QEI8SSrc/rs:fit/g:sm/q:90/h:598/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTExOTQx/MC0xMzc5NDE2NjYy/LTE0MjcuanBlZw.jpeg", videoIds: ["qpBctHSi_6c"] }
     ];
 
     let PLAYLISTS_DATA = [];
 
-    const PLAYER_ELEMENT_ID            = "nice-music-player";
-    const PLAYER_MAIN_CONTENT_ID       = "player-main-content-wrapper";
-    const PLAYER_RIGHT_PANEL_ID        = "player-right-panel";
+    const PLAYER_ELEMENT_ID              = "nice-music-player";
+    const PLAYER_MAIN_CONTENT_ID         = "player-main-content-wrapper";
+    const PLAYER_RIGHT_PANEL_ID          = "player-right-panel";
     const PLAYLIST_SELECTOR_CONTAINER_ID = "player-playlist-selector-container";
-    const PLAYLIST_SELECTOR_ID         = "player-playlist-selector";
-    const YOUTUBE_PLAYER_DIV_ID        = "youtube-player-container";
-    const DISPLAY_BOX_ID               = "player-display-box";
-    const COVER_ID                     = "player-cover";
-    const TITLE_LINE_WRAPPER_CLASS     = "player-title-line-wrapper";
-    const TITLE_ID                     = "player-title";
-    const ARTIST_ID                    = "player-artist";
-    const YOUTUBE_LINK_ID              = "player-youtube-link";
-    const PREV_BUTTON_ID               = "player-prev-button";
-    const PLAY_PAUSE_BUTTON_ID         = "player-play-pause-button";
-    const NEXT_BUTTON_ID               = "player-next-button";
-    const PROGRESS_BAR_CONTAINER_ID    = "player-progress-bar-container";
-    const CURRENT_TIME_ID              = "player-current-time";
-    const PROGRESS_BAR_ID              = "player-progress-bar";
-    const DURATION_ID                  = "player-duration";
-    const VOLUME_CONTAINER_ID          = "player-volume-container";
-    const VOLUME_ICON_ID               = "player-volume-icon";
-    const VOLUME_PERCENTAGE_ID         = "player-volume-percentage";
-    const VOLUME_SLIDER_ID             = "player-volume-slider";
-    const REPEAT_BUTTON_ID             = "player-repeat-button";
-    const SHUFFLE_BUTTON_ID            = "player-shuffle-button";
-	const FAVORITE_BUTTON_ID           = "player-favorite-button";
-    const PLAYER_CONTROL_BUTTON_CLASS  = 'player-control-button';
-    const QUEUE_CONTAINER_ID           = "player-queue-container";
-    const QUEUE_TITLE_ID               = "player-queue-title";
-    const QUEUE_LIST_ID                = "player-queue-list";
-    const PLAYER_QUEUE_ITEM_CLASS      = "player-queue-item";
-    const QUEUE_TOGGLE_ICON_ID         = "player-queue-toggle-icon";
-    const MINIMIZE_BUTTON_ID           = "player-minimize-button";
+    const PLAYLIST_SELECTOR_ID           = "player-playlist-selector";
+    const YOUTUBE_PLAYER_DIV_ID          = "youtube-player-container";
+    const DISPLAY_BOX_ID                 = "player-display-box";
+    const COVER_ID                       = "player-cover";
+    const TITLE_LINE_WRAPPER_CLASS       = "player-title-line-wrapper";
+    const TITLE_ID                       = "player-title";
+    const ARTIST_ID                      = "player-artist";
+    const YOUTUBE_LINK_ID                = "player-youtube-link";
+    const PREV_BUTTON_ID                 = "player-prev-button";
+    const PLAY_PAUSE_BUTTON_ID           = "player-play-pause-button";
+    const NEXT_BUTTON_ID                 = "player-next-button";
+    const PROGRESS_BAR_CONTAINER_ID      = "player-progress-bar-container";
+    const CURRENT_TIME_ID                = "player-current-time";
+    const PROGRESS_BAR_ID                = "player-progress-bar";
+    const DURATION_ID                    = "player-duration";
+    const VOLUME_CONTAINER_ID            = "player-volume-container";
+    const VOLUME_ICON_ID                 = "player-volume-icon";
+    const VOLUME_PERCENTAGE_ID           = "player-volume-percentage";
+    const VOLUME_SLIDER_ID               = "player-volume-slider";
+    const REPEAT_BUTTON_ID               = "player-repeat-button";
+    const SHUFFLE_BUTTON_ID              = "player-shuffle-button";
+    const FAVORITE_BUTTON_ID             = "player-favorite-button";
+    const PLAYER_CONTROL_BUTTON_CLASS    = "player-control-button";
+    const QUEUE_CONTAINER_ID             = "player-queue-container";
+    const QUEUE_TITLE_ID                 = "player-queue-title";
+    const QUEUE_LIST_ID                  = "player-queue-list";
+    const PLAYER_QUEUE_ITEM_CLASS        = "player-queue-item";
+    const QUEUE_TOGGLE_ICON_ID           = "player-queue-toggle-icon";
+    const MINIMIZE_BUTTON_ID             = "player-minimize-button";
 
     const SVG_COLOR   = "%234a4a55";
     const STROKE_W    = "2.5";
@@ -4526,7 +4528,7 @@ document.addEventListener('mouseover', function(e) {
     const ICON_REPEAT_ONE   = `${SVG_HEAD}%3Cpolyline points='17 1 21 5 17 9' /%3E%3Cpath d='M3 11V9a4 4 0 0 1 4-4h14' /%3E%3Cpolyline points='7 23 3 19 7 15' /%3E%3Cpath d='M21 13v2a4 4 0 0 1-4 4H3' /%3E%3Ctext x='10' y='15' font-family='sans-serif' font-size='8' font-weight='bold' stroke='none' fill='${SVG_COLOR}'%3E1%3C/text%3E${SVG_TAIL}`;
     const ICON_SHUFFLE_OFF  = `${SVG_HEAD}%3Cpolyline points='16 3 21 3 21 8' /%3E%3Cline x1='4' y1='20' x2='21' y2='3' opacity='0.3' /%3E%3Cpolyline points='21 16 21 21 16 21' /%3E%3Cline x1='15' y1='15' x2='21' y2='21' opacity='0.3' /%3E%3Cline x1='4' y1='4' x2='9' y2='9' opacity='0.3' /%3E${SVG_TAIL}`;
     const ICON_SHUFFLE_ON   = `${SVG_HEAD}%3Cpolyline points='16 3 21 3 21 8' /%3E%3Cline x1='4' y1='20' x2='21' y2='3' /%3E%3Cpolyline points='21 16 21 21 16 21' /%3E%3Cline x1='15' y1='15' x2='21' y2='21' /%3E%3Cline x1='4' y1='4' x2='9' y2='9' /%3E${SVG_TAIL}`;
-	const ICON_HEART_EMPTY  = `${SVG_HEAD}%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' /%3E${SVG_TAIL}`;
+    const ICON_HEART_EMPTY  = `${SVG_HEAD}%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' /%3E${SVG_TAIL}`;
     const ICON_HEART_FILLED = `${SVG_HEAD}%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' fill='${SVG_COLOR}' /%3E${SVG_TAIL}`;
     const ICON_MINIMIZE     = `${SVG_HEAD}%3Cpolyline points='6 9 12 15 18 9' /%3E${SVG_TAIL}`;
     const ICON_MAXIMIZE     = `${SVG_HEAD}%3Cpolyline points='6 15 12 9 18 15' /%3E${SVG_TAIL}`;
@@ -4550,14 +4552,14 @@ document.addEventListener('mouseover', function(e) {
 
     class Playlist {
         constructor(songs = []) { this.songs = songs; this.currentSongIndex = 0; }
-        addSong(song)              { this.songs.push(song); }
-        getCurrentSong()           { return this.songs.length ? this.songs[this.currentSongIndex] : null; }
-        playNext()                 { if (this.songs.length) this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length; }
-        playPrevious()             { if (this.songs.length) this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length; }
-        setCurrentSongIndex(i)     { if (i >= 0 && i < this.songs.length) this.currentSongIndex = i; }
-        isEmpty()                  { return this.songs.length === 0; }
-        getSongs()                 { return this.songs; }
-        setSongs(newSongs)         { this.songs = newSongs; }
+        addSong(song)           { this.songs.push(song); }
+        getCurrentSong()        { return this.songs.length ? this.songs[this.currentSongIndex] : null; }
+        playNext()              { if (this.songs.length) this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length; }
+        playPrevious()          { if (this.songs.length) this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length; }
+        setCurrentSongIndex(i)  { if (i >= 0 && i < this.songs.length) this.currentSongIndex = i; }
+        isEmpty()               { return this.songs.length === 0; }
+        getSongs()              { return this.songs; }
+        setSongs(newSongs)      { this.songs = newSongs; }
     }
 
     let playlist;
@@ -4581,13 +4583,15 @@ document.addEventListener('mouseover', function(e) {
     let lastRafUpdateTime  = 0;
     let playerShouldBeUpdatingWhenVisible = false;
 
-    let playerContainer, playlistSelectorElement;
+    // DOM references
+    let playerContainer, displayBoxElement, playlistSelectorContainer, playlistSelectorElement;
     let coverElement, titleElement, artistElement, youtubeLinkElement;
     let playPauseButton, prevButtonElement, nextButtonElement, favoriteButtonElement;
     let progressBar, progressWrapperElement, currentTimeElement, durationElement;
     let volumeIconElement, volumePercentageElement, volumeSlider;
     let repeatButtonElement, shuffleButtonElement;
-    let queueListElement, queueTitleElement;
+    let queueContainerElement, queueListElement, queueTitleElement, queueToggleIconElement;
+    let minimizeButtonElement, minimizeButtonImg;
 
     let cachedDuration        = 0;
     let lastRenderedTimeText  = "";
@@ -4597,7 +4601,11 @@ document.addEventListener('mouseover', function(e) {
     let lastProgressRatio     = -1;
     let lastVolumePercent     = -1;
     let lastIsPaused          = null;
+    let lastMutedState        = null;
     let queueDirty            = true;
+    let previousQueueIndex    = null;
+
+    const preloadedImagesSet  = new Set();
 
     function isPlayerActive() {
         return playerReady && ytPlayer && typeof ytPlayer.getPlayerState === 'function';
@@ -4613,13 +4621,15 @@ document.addEventListener('mouseover', function(e) {
 
     function shuffleArray(array) {
         const a = [...array];
-        let i = a.length;
-        while (i) { const j = Math.floor(Math.random() * i--); [a[i], a[j]] = [a[j], a[i]]; }
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
         return a;
     }
 
     function extractYouTubeId(url) {
-        const m = url.match(/^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
+        const m = String(url).match(/^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
         return (m && m[2].length === 11) ? m[2] : url;
     }
 
@@ -4652,33 +4662,38 @@ document.addEventListener('mouseover', function(e) {
     function updatePlayPauseButton(isPaused) {
         if (!playPauseButton || lastIsPaused === isPaused) return;
         lastIsPaused = isPaused;
-        const img   = playPauseButton.querySelector('img');
+        const img = playPauseButton.firstElementChild;
         const label = isPaused ? "Play" : "Pause";
         if (img) img.src = isPaused ? ICON_PLAY : ICON_PAUSE;
         playPauseButton.setAttribute('aria-label', label);
         playPauseButton.title = label;
-        document.getElementById(DISPLAY_BOX_ID)?.classList.toggle("playing", !isPaused);
+        displayBoxElement?.classList.toggle("playing", !isPaused);
     }
 
-	let lastMutedState = null;
-
-	function updateVolumeIcon() {
-		if (!volumeIconElement || !volumeSlider) return;
-		const muted = parseFloat(volumeSlider.value) === 0 || (isPlayerActive() && ytPlayer.isMuted());
-		if (muted === lastMutedState) return;
-		lastMutedState = muted;
-		volumeIconElement.src   = muted ? ICON_MUTED : ICON_VOLUME;
-		volumeIconElement.alt   = muted ? "Unmute"   : "Mute";
-		volumeIconElement.title = muted ? "Unmute"   : "Mute";
-	}
+    function updateVolumeIcon() {
+        if (!volumeIconElement || !volumeSlider) return;
+        const muted = parseFloat(volumeSlider.value) === 0 || (isPlayerActive() && ytPlayer.isMuted());
+        if (muted === lastMutedState) return;
+        lastMutedState = muted;
+        volumeIconElement.src   = muted ? ICON_MUTED : ICON_VOLUME;
+        volumeIconElement.alt   = muted ? "Unmute"   : "Mute";
+        volumeIconElement.title = muted ? "Unmute"   : "Mute";
+    }
 
     function updateRepeatButtonUI() {
         if (!repeatButtonElement) return;
-        const img = repeatButtonElement.querySelector('img');
+        const img = repeatButtonElement.firstElementChild;
         repeatButtonElement.classList.remove('repeat-active', 'repeat-one');
         let iconSrc = ICON_REPEAT_NONE, label = "Repeat Off";
-        if (repeatMode === 'all') { iconSrc = ICON_REPEAT_ALL; label = "Repeat All"; repeatButtonElement.classList.add('repeat-active'); }
-        else if (repeatMode === 'one') { iconSrc = ICON_REPEAT_ONE; label = "Repeat One"; repeatButtonElement.classList.add('repeat-active', 'repeat-one'); }
+        if (repeatMode === 'all') { 
+            iconSrc = ICON_REPEAT_ALL; 
+            label = "Repeat All"; 
+            repeatButtonElement.classList.add('repeat-active'); 
+        } else if (repeatMode === 'one') { 
+            iconSrc = ICON_REPEAT_ONE; 
+            label = "Repeat One"; 
+            repeatButtonElement.classList.add('repeat-active', 'repeat-one'); 
+        }
         if (img) img.src = iconSrc;
         repeatButtonElement.setAttribute('aria-label', label);
         repeatButtonElement.title = label;
@@ -4686,7 +4701,7 @@ document.addEventListener('mouseover', function(e) {
 
     function updateShuffleButtonUI() {
         if (!shuffleButtonElement) return;
-        const img   = shuffleButtonElement.querySelector('img');
+        const img   = shuffleButtonElement.firstElementChild;
         const label = isShuffleActive ? "Shuffle On" : "Shuffle Off";
         shuffleButtonElement.classList.toggle('shuffle-active', isShuffleActive);
         if (img) img.src = isShuffleActive ? ICON_SHUFFLE_ON : ICON_SHUFFLE_OFF;
@@ -4697,78 +4712,80 @@ document.addEventListener('mouseover', function(e) {
     function scrollQueueToActive(index) {
         if (!isQueueSectionExpanded || !queueListElement) return;
         const item = queueListElement.children[index];
-        if (item) queueListElement.scrollTop = item.offsetTop - (queueListElement.clientHeight / 2) + (item.offsetHeight / 2);
+        if (item) {
+            const targetTop = item.offsetTop - (queueListElement.clientHeight / 2) + (item.offsetHeight / 2);
+            queueListElement.scrollTop = Math.max(0, targetTop);
+        }
     }
 
-    let previousIndex = null;
+    function updateQueueDisplay() {
+        if (!queueListElement || !playlist) {
+            if (queueListElement) queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">List is empty</li>`;
+            if (queueTitleElement) queueTitleElement.style.display = (playlist && !playlist.isEmpty()) ? 'flex' : 'none';
+            return;
+        }
 
-	function updateQueueDisplay() {
-		if (!queueListElement || !playlist) {
-			if (queueListElement) queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">List is empty</li>`;
-			if (queueTitleElement) queueTitleElement.style.display = (playlist && !playlist.isEmpty()) ? 'flex' : 'none';
-			return;
-		}
+        if (queueTitleElement) queueTitleElement.style.display = 'flex';
 
-		if (queueTitleElement) queueTitleElement.style.display = 'flex';
+        if (playlist.isEmpty()) {
+            queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">List is empty</li>`;
+            return;
+        }
 
-		if (playlist.isEmpty()) {
-			queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">List is empty</li>`;
-			return;
-		}
+        const currentIndex = playlist.currentSongIndex;
 
-		const currentIndex = playlist.currentSongIndex;
+        if (!queueDirty) {
+            const items = queueListElement.children;
+            if (previousQueueIndex !== null && items[previousQueueIndex]) {
+                items[previousQueueIndex].classList.remove('player-queue-item-active');
+            }
+            if (items[currentIndex]) {
+                items[currentIndex].classList.add('player-queue-item-active');
+            }
+            previousQueueIndex = currentIndex;
+            if (isQueueSectionExpanded) scrollQueueToActive(currentIndex);
+            return;
+        }
 
-		if (!queueDirty) {
-			const items = queueListElement.children;
+        queueDirty = false;
+        previousQueueIndex = currentIndex;
 
-			if (previousIndex !== null && items[previousIndex]) {
-				items[previousIndex].classList.remove('player-queue-item-active');
-			}
+        const fragment = document.createDocumentFragment();
+        playlist.getSongs().forEach((song, index) => {
+            const li = document.createElement("li");
+            li.className = PLAYER_QUEUE_ITEM_CLASS;
+            li.dataset.songIndex = String(index);
 
-			if (items[currentIndex]) {
-				items[currentIndex].classList.add('player-queue-item-active');
-			}
+            if (index === currentIndex) li.classList.add('player-queue-item-active');
 
-			previousIndex = currentIndex;
+            const titleSpan = document.createElement("span");
+            titleSpan.className = "player-queue-item-title";
+            titleSpan.textContent = `${index + 1}. ${song.getTitle()}`;
 
-			if (isQueueSectionExpanded) scrollQueueToActive(currentIndex);
-			return;
-		}
+            const artistSpan = document.createElement("span");
+            artistSpan.className = "player-queue-item-artist";
+            artistSpan.textContent = ` - ${song.getArtist()}`;
 
-		queueDirty = false;
-		previousIndex = currentIndex;
+            li.append(titleSpan, artistSpan);
+            fragment.appendChild(li);
+        });
 
-		const fragment = document.createDocumentFragment();
-		playlist.getSongs().forEach((song, index) => {
-			const li = document.createElement("li");
-			li.className = PLAYER_QUEUE_ITEM_CLASS;
-			li.dataset.songIndex = index;
+        queueListElement.replaceChildren(fragment);
+        if (isQueueSectionExpanded) scrollQueueToActive(currentIndex);
+    }
 
-			if (index === currentIndex) li.classList.add('player-queue-item-active');
-
-			const titleSpan = document.createElement("span");
-			titleSpan.className = "player-queue-item-title";
-			titleSpan.textContent = `${index + 1}. ${song.getTitle()}`;
-
-			const artistSpan = document.createElement("span");
-			artistSpan.className = "player-queue-item-artist";
-			artistSpan.textContent = ` - ${song.getArtist()}`;
-
-			li.append(titleSpan, artistSpan);
-			fragment.appendChild(li);
-		});
-
-		queueListElement.replaceChildren(fragment);
-
-		if (isQueueSectionExpanded) scrollQueueToActive(currentIndex);
-	}
-
-	function getFavorites() {
-        try { return JSON.parse(localStorage.getItem('musicPlayerFavorites')) || []; } catch(e) { return []; }
+    function getFavorites() {
+        try { 
+            return JSON.parse(localStorage.getItem('musicPlayerFavorites')) || []; 
+        } catch { 
+            return []; 
+        }
     }
 
     function saveFavorites(favs) {
-        localStorage.setItem('musicPlayerFavorites', JSON.stringify(favs));
+        try {
+            localStorage.setItem('musicPlayerFavorites', JSON.stringify(favs));
+        } catch {}
     }
 
     function refreshPlaylistsUI() {
@@ -4781,19 +4798,18 @@ document.addEventListener('mouseover', function(e) {
 
         const oldVal = playlistSelectorElement ? playlistSelectorElement.value : "0";
         if (playlistSelectorElement) {
-            playlistSelectorElement.innerHTML = '';
+            playlistSelectorElement.replaceChildren();
             PLAYLISTS_DATA.forEach((pl, index) => {
                 const option = document.createElement("option");
-                option.value = index.toString();
+                option.value = String(index);
                 option.textContent = pl.name;
                 playlistSelectorElement.appendChild(option);
             });
 
-            if (oldVal && parseInt(oldVal) < PLAYLISTS_DATA.length) {
+            if (oldVal && parseInt(oldVal, 10) < PLAYLISTS_DATA.length) {
                 playlistSelectorElement.value = oldVal;
             } else {
                 playlistSelectorElement.value = "0";
-                // if they emptied favorites while playing it, revert to default mix
                 if (activePlaylistIndex !== 0 && typeof loadNewPlaylistByIndex === 'function') {
                     const wasPlaying = hasUserInitiatedPlayback && isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING;
                     loadNewPlaylistByIndex(0, wasPlaying);
@@ -4801,16 +4817,15 @@ document.addEventListener('mouseover', function(e) {
             }
         }
 
-        const selectorContainer = playlistSelectorElement?.closest(`#${PLAYLIST_SELECTOR_CONTAINER_ID}`) || document.getElementById(PLAYLIST_SELECTOR_CONTAINER_ID);
-        if (selectorContainer) {
-            selectorContainer.style.display = PLAYLISTS_DATA.length > 1 ? 'flex' : 'none';
+        if (playlistSelectorContainer) {
+            playlistSelectorContainer.style.display = PLAYLISTS_DATA.length > 1 ? 'flex' : 'none';
         }
     }
 
     function updateFavoriteButtonUI() {
         if (!favoriteButtonElement) return;
         const currentSong = playlist?.getCurrentSong();
-        const img = favoriteButtonElement.querySelector('img');
+        const img = favoriteButtonElement.firstElementChild;
         if (!currentSong) {
             if (img) img.src = ICON_HEART_EMPTY;
             return;
@@ -4849,9 +4864,21 @@ document.addEventListener('mouseover', function(e) {
         const currentSong = playlist?.getCurrentSong();
 
         if (!currentSong) {
-            if (lastRenderedCover !== "")              { coverElement.src = ""; coverElement.alt = "No cover art"; lastRenderedCover = ""; }
-            if (lastRenderedTitle !== "No song loaded") { titleElement.textContent = "No song loaded"; titleElement.title = ""; lastRenderedTitle = "No song loaded"; }
-            if (lastRenderedArtist !== "")             { artistElement.textContent = ""; artistElement.title = ""; lastRenderedArtist = ""; }
+            if (lastRenderedCover !== "") { 
+                coverElement.src = ""; 
+                coverElement.alt = "No cover art"; 
+                lastRenderedCover = ""; 
+            }
+            if (lastRenderedTitle !== "No song loaded") { 
+                titleElement.textContent = "No song loaded"; 
+                titleElement.title = ""; 
+                lastRenderedTitle = "No song loaded"; 
+            }
+            if (lastRenderedArtist !== "") { 
+                artistElement.textContent = ""; 
+                artistElement.title = ""; 
+                lastRenderedArtist = ""; 
+            }
             youtubeLinkElement.href = "#";
             youtubeLinkElement.classList.add('hidden');
             updatePlayPauseButton(true);
@@ -4864,10 +4891,18 @@ document.addEventListener('mouseover', function(e) {
                 lastRenderedCover = coverLink;
             }
             const songTitle = currentSong.getTitle();
-            if (lastRenderedTitle !== songTitle) { titleElement.textContent = songTitle; titleElement.title = songTitle; lastRenderedTitle = songTitle; }
+            if (lastRenderedTitle !== songTitle) { 
+                titleElement.textContent = songTitle; 
+                titleElement.title = songTitle; 
+                lastRenderedTitle = songTitle; 
+            }
 
             const songArtist = currentSong.getArtist();
-            if (lastRenderedArtist !== songArtist) { artistElement.textContent = songArtist; artistElement.title = songArtist; lastRenderedArtist = songArtist; }
+            if (lastRenderedArtist !== songArtist) { 
+                artistElement.textContent = songArtist; 
+                artistElement.title = songArtist; 
+                lastRenderedArtist = songArtist; 
+            }
 
             youtubeLinkElement.href = currentSong.getYoutubeLink();
             youtubeLinkElement.classList.remove('hidden');
@@ -4885,36 +4920,25 @@ document.addEventListener('mouseover', function(e) {
         updateVolumeIcon();
         updateRepeatButtonUI();
         updateShuffleButtonUI();
-		updateFavoriteButtonUI();
-        if (playlistSelectorElement && playlistSelectorElement.value !== activePlaylistIndex.toString()) {
-            playlistSelectorElement.value = activePlaylistIndex.toString();
+        updateFavoriteButtonUI();
+        if (playlistSelectorElement && playlistSelectorElement.value !== String(activePlaylistIndex)) {
+            playlistSelectorElement.value = String(activePlaylistIndex);
         }
         updateQueueDisplay();
     }
 
-    let preloadLinkEl = null;
+    function preloadNextCover() {
+        if (!playlist || playlist.isEmpty()) return;
 
-	function preloadNextCover() {
-		if (!playlist || playlist.isEmpty()) return;
+        const songs = playlist.getSongs();
+        const next = songs[(playlist.currentSongIndex + 1) % songs.length];
+        const url = next?.getCoverLink();
+        if (!url || preloadedImagesSet.has(url)) return;
 
-		const songs = playlist.getSongs();
-		const next = songs[(playlist.currentSongIndex + 1) % songs.length];
-		const url = next?.getCoverLink();
-		if (!url) return;
-
-		const resolvedUrl = new URL(url, document.baseURI).href;
-
-		if (preloadLinkEl?.href === resolvedUrl) return;
-
-		if (!preloadLinkEl) {
-			preloadLinkEl = document.createElement('link');
-			preloadLinkEl.rel = 'preload';
-			preloadLinkEl.as  = 'image';
-			document.head.appendChild(preloadLinkEl);
-		}
-
-		preloadLinkEl.href = resolvedUrl;
-	}
+        preloadedImagesSet.add(url);
+        const img = new Image();
+        img.src = url;
+    }
 
     function loadCurrentSong(autoplay = false, isRetry = false) {
         const currentSong = playlist?.getCurrentSong();
@@ -4948,7 +4972,7 @@ document.addEventListener('mouseover', function(e) {
         if (isPlayerActive() && hasUserInitiatedPlayback) ytPlayer.stopVideo();
         stopRafUpdater();
 
-        const newSongs = data.songs.map(d => new Song(d.title, d.artist, d.coverLink, d.videoIds || d.videoId));
+        const newSongs = (data.songs || []).map(d => new Song(d.title, d.artist, d.coverLink, d.videoIds || d.videoId));
         originalSongOrderForCurrentPlaylist = [...newSongs];
         queueDirty = true;
 
@@ -4994,8 +5018,8 @@ document.addEventListener('mouseover', function(e) {
             if (!cachedDuration) cachedDuration = ytPlayer.getDuration();
 
             if (cachedDuration > 0) {
-                const ratio = currentTime / cachedDuration;
-                if (Math.abs(ratio - lastProgressRatio) > 0.001) {
+                const ratio = Math.min(1, Math.max(0, currentTime / cachedDuration));
+                if (Math.abs(ratio - lastProgressRatio) > 0.0005) {
                     if (progressBar) progressBar.value = ratio * 100;
                     progressWrapperElement?.style.setProperty('--progress-ratio', ratio);
                     lastProgressRatio = ratio;
@@ -5024,7 +5048,10 @@ document.addEventListener('mouseover', function(e) {
 
     function stopRafUpdater() {
         isUpdaterRunning = false;
-        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        if (rafId) { 
+            cancelAnimationFrame(rafId); 
+            rafId = null; 
+        }
     }
 
     function handleVisibilityChange() {
@@ -5036,18 +5063,20 @@ document.addEventListener('mouseover', function(e) {
             }
         } else {
             playerShouldBeUpdatingWhenVisible = false;
-            if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING && !isUpdaterRunning) startRafUpdater();
+            if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING && !isUpdaterRunning) {
+                startRafUpdater();
+            }
         }
     }
 
     function onPlayerReady() {
-		playerReady = true;
-		setVolumeFromSlider(false);
-		updateUI();
-		if (hasUserInitiatedPlayback && playlist && !playlist.isEmpty()) {
-			loadCurrentSong(true);
-		}
-	}
+        playerReady = true;
+        setVolumeFromSlider(false);
+        updateUI();
+        if (hasUserInitiatedPlayback && playlist && !playlist.isEmpty()) {
+            loadCurrentSong(true);
+        }
+    }
 
     function onPlayerStateChange(event) {
         const state = event.data;
@@ -5071,9 +5100,9 @@ document.addEventListener('mouseover', function(e) {
                 updatePlayPauseButton(true);
                 if (progressBar) progressBar.value = 100;
                 progressWrapperElement?.style.setProperty('--progress-ratio', '1');
-				if (currentTimeElement && cachedDuration > 0) {
-					currentTimeElement.textContent = formatTime(cachedDuration);
-				}
+                if (currentTimeElement && cachedDuration > 0) {
+                    currentTimeElement.textContent = formatTime(cachedDuration);
+                }
 
                 if (!hasUserInitiatedPlayback) { updateUI(); return; }
 
@@ -5184,24 +5213,19 @@ document.addEventListener('mouseover', function(e) {
 
     function toggleQueueExpansion() {
         isQueueSectionExpanded = !isQueueSectionExpanded;
-        const queueContainer = document.getElementById(QUEUE_CONTAINER_ID);
-        const toggleIcon     = queueTitleElement?.querySelector(`#${QUEUE_TOGGLE_ICON_ID}`);
-        if (!queueContainer) return;
-        queueContainer.classList.toggle('queue-collapsed', !isQueueSectionExpanded);
-        if (toggleIcon) toggleIcon.innerHTML = isQueueSectionExpanded ? "▼" : "▶";
+        if (!queueContainerElement) return;
+        queueContainerElement.classList.toggle('queue-collapsed', !isQueueSectionExpanded);
+        if (queueToggleIconElement) queueToggleIconElement.textContent = isQueueSectionExpanded ? "▼" : "▶";
     }
 
     function toggleMinimizePlayer() {
         isPlayerMinimized = !isPlayerMinimized;
-        const player    = document.getElementById(PLAYER_ELEMENT_ID);
-        const minBtnImg = document.querySelector(`#${MINIMIZE_BUTTON_ID} img`);
-        player?.classList.toggle('minimized', isPlayerMinimized);
-        if (minBtnImg) minBtnImg.src = isPlayerMinimized ? ICON_MAXIMIZE : ICON_MINIMIZE;
-        const minBtn = document.getElementById(MINIMIZE_BUTTON_ID);
-        if (minBtn) minBtn.title = isPlayerMinimized ? "Expand player" : "Minimize player";
+        playerContainer?.classList.toggle('minimized', isPlayerMinimized);
+        if (minimizeButtonImg) minimizeButtonImg.src = isPlayerMinimized ? ICON_MAXIMIZE : ICON_MINIMIZE;
+        if (minimizeButtonElement) minimizeButtonElement.title = isPlayerMinimized ? "Expand player" : "Minimize player";
     }
 
-	window.playEndingSong = (title, artist, cover, urls) => {
+    window.playEndingSong = (title, artist, cover, urls) => {
         if (!ytPlayer) return;
 
         const urlArray = Array.isArray(urls) ? urls : [urls];
@@ -5220,14 +5244,14 @@ document.addEventListener('mouseover', function(e) {
         playerContainer.id = PLAYER_ELEMENT_ID;
         fragment.appendChild(playerContainer);
 
-        const minimizeButton    = document.createElement("button");
-        minimizeButton.id       = MINIMIZE_BUTTON_ID;
-        minimizeButton.title    = "Minimize Player";
-        const minimizeIcon      = document.createElement("img");
-        minimizeIcon.src        = ICON_MINIMIZE;
-        minimizeIcon.alt        = "Minimize";
-        minimizeButton.appendChild(minimizeIcon);
-        playerContainer.appendChild(minimizeButton);
+        minimizeButtonElement       = document.createElement("button");
+        minimizeButtonElement.id    = MINIMIZE_BUTTON_ID;
+        minimizeButtonElement.title = "Minimize Player";
+        minimizeButtonImg           = document.createElement("img");
+        minimizeButtonImg.src       = ICON_MINIMIZE;
+        minimizeButtonImg.alt       = "Minimize";
+        minimizeButtonElement.appendChild(minimizeButtonImg);
+        playerContainer.appendChild(minimizeButtonElement);
 
         const mainPlayerArea    = document.createElement("div");
         mainPlayerArea.id       = "player-main-area";
@@ -5237,133 +5261,229 @@ document.addEventListener('mouseover', function(e) {
         mainContentWrapper.id       = PLAYER_MAIN_CONTENT_ID;
         mainPlayerArea.appendChild(mainContentWrapper);
 
-        const displayBox    = document.createElement("div");
-        displayBox.id       = DISPLAY_BOX_ID;
-        const cdWrapper     = document.createElement("div"); cdWrapper.id = "player-cd-wrapper";
-        const cdDisc        = document.createElement("div"); cdDisc.id   = "player-cd-disc";
+        displayBoxElement    = document.createElement("div");
+        displayBoxElement.id = DISPLAY_BOX_ID;
+        const cdWrapper      = document.createElement("div"); 
+        cdWrapper.id         = "player-cd-wrapper";
+        const cdDisc         = document.createElement("div"); 
+        cdDisc.id            = "player-cd-disc";
         cdWrapper.appendChild(cdDisc);
-        displayBox.appendChild(cdWrapper);
-        coverElement        = document.createElement("img");
-        coverElement.id     = COVER_ID;
-        coverElement.alt    = "Album cover";
-        coverElement.src    = "";
-        displayBox.appendChild(coverElement);
-        mainContentWrapper.appendChild(displayBox);
+        displayBoxElement.appendChild(cdWrapper);
+        coverElement         = document.createElement("img");
+        coverElement.id      = COVER_ID;
+        coverElement.alt     = "Album cover";
+        coverElement.src     = "";
+        displayBoxElement.appendChild(coverElement);
+        mainContentWrapper.appendChild(displayBoxElement);
 
         const rightPanel    = document.createElement("div");
         rightPanel.id       = PLAYER_RIGHT_PANEL_ID;
         mainContentWrapper.appendChild(rightPanel);
 
-        const selectorContainer = document.createElement("div");
-        selectorContainer.id    = PLAYLIST_SELECTOR_CONTAINER_ID;
-        const playlistLabel     = document.createElement("label");
-        playlistLabel.htmlFor   = PLAYLIST_SELECTOR_ID;
-        playlistLabel.textContent = "Select playlist:";
-        selectorContainer.appendChild(playlistLabel);
-        playlistSelectorElement    = document.createElement("select");
-        playlistSelectorElement.id = PLAYLIST_SELECTOR_ID;
+        playlistSelectorContainer    = document.createElement("div");
+        playlistSelectorContainer.id = PLAYLIST_SELECTOR_CONTAINER_ID;
+        const playlistLabel          = document.createElement("label");
+        playlistLabel.htmlFor        = PLAYLIST_SELECTOR_ID;
+        playlistLabel.textContent    = "Select playlist:";
+        playlistSelectorContainer.appendChild(playlistLabel);
+        playlistSelectorElement      = document.createElement("select");
+        playlistSelectorElement.id   = PLAYLIST_SELECTOR_ID;
         playlistSelectorElement.title = "Select playlist";
-        selectorContainer.appendChild(playlistSelectorElement);
+        playlistSelectorContainer.appendChild(playlistSelectorElement);
 
-        const infoContainer     = document.createElement("div"); infoContainer.id = "player-info-container";
-        const songInfo          = document.createElement("div"); songInfo.id       = "player-song-info";
-        const titleLineWrapper  = document.createElement("div"); titleLineWrapper.className = TITLE_LINE_WRAPPER_CLASS;
-        titleElement            = document.createElement("h3"); titleElement.id   = TITLE_ID; titleElement.textContent = "Loading...";
+        const infoContainer     = document.createElement("div"); 
+        infoContainer.id        = "player-info-container";
+        const songInfo          = document.createElement("div"); 
+        songInfo.id             = "player-song-info";
+        const titleLineWrapper  = document.createElement("div"); 
+        titleLineWrapper.className = TITLE_LINE_WRAPPER_CLASS;
+        titleElement            = document.createElement("h3"); 
+        titleElement.id         = TITLE_ID; 
+        titleElement.textContent = "Loading...";
         youtubeLinkElement      = document.createElement("a");
         youtubeLinkElement.id   = YOUTUBE_LINK_ID;
         youtubeLinkElement.target = "_blank";
         youtubeLinkElement.rel  = "noopener noreferrer";
         youtubeLinkElement.title = "Watch on YouTube";
         youtubeLinkElement.classList.add('hidden');
-        const ytIcon = document.createElement("img"); ytIcon.src = ICON_YOUTUBE; ytIcon.alt = "YouTube";
+        const ytIcon            = document.createElement("img"); 
+        ytIcon.src              = ICON_YOUTUBE; 
+        ytIcon.alt              = "YouTube";
         youtubeLinkElement.appendChild(ytIcon);
         titleLineWrapper.append(titleElement, youtubeLinkElement);
-        artistElement           = document.createElement("p"); artistElement.id   = ARTIST_ID; artistElement.textContent = "";
+        artistElement           = document.createElement("p"); 
+        artistElement.id        = ARTIST_ID; 
+        artistElement.textContent = "";
         songInfo.append(titleLineWrapper, artistElement);
         infoContainer.appendChild(songInfo);
         rightPanel.appendChild(infoContainer);
 
-        const progressBarContainer    = document.createElement("div"); progressBarContainer.id = PROGRESS_BAR_CONTAINER_ID;
-        currentTimeElement            = document.createElement("span"); currentTimeElement.id = CURRENT_TIME_ID; currentTimeElement.textContent = "0:00";
+        const progressBarContainer    = document.createElement("div"); 
+        progressBarContainer.id       = PROGRESS_BAR_CONTAINER_ID;
+        currentTimeElement            = document.createElement("span"); 
+        currentTimeElement.id         = CURRENT_TIME_ID; 
+        currentTimeElement.textContent = "0:00";
         progressBarContainer.appendChild(currentTimeElement);
 
-        progressWrapperElement        = document.createElement("div"); progressWrapperElement.id = "player-progress-wrapper";
-        const visualTrack             = document.createElement("div"); visualTrack.className = "visual-track";
-        const visualFill              = document.createElement("div"); visualFill.id = "player-visual-fill"; visualFill.className = "visual-fill";
-        const visualThumb             = document.createElement("div"); visualThumb.id = "player-visual-thumb"; visualThumb.className = "visual-thumb";
+        progressWrapperElement        = document.createElement("div"); 
+        progressWrapperElement.id     = "player-progress-wrapper";
+        const visualTrack             = document.createElement("div"); 
+        visualTrack.className         = "visual-track";
+        const visualFill              = document.createElement("div"); 
+        visualFill.id                 = "player-visual-fill"; 
+        visualFill.className          = "visual-fill";
+        const visualThumb             = document.createElement("div"); 
+        visualThumb.id                = "player-visual-thumb"; 
+        visualThumb.className         = "visual-thumb";
         progressBar                   = document.createElement("input");
-        progressBar.type  = "range"; progressBar.id = PROGRESS_BAR_ID; progressBar.className = "invisible-slider";
-        progressBar.value = "0"; progressBar.min = "0"; progressBar.max = "100"; progressBar.step = "0.01"; progressBar.title = "Seek";
+        progressBar.type              = "range"; 
+        progressBar.id                = PROGRESS_BAR_ID; 
+        progressBar.className         = "invisible-slider";
+        progressBar.value             = "0"; 
+        progressBar.min               = "0"; 
+        progressBar.max               = "100"; 
+        progressBar.step              = "0.01"; 
+        progressBar.title             = "Seek";
         progressWrapperElement.style.setProperty('--progress-ratio', '0');
         progressWrapperElement.append(visualTrack, visualFill, visualThumb, progressBar);
         progressBarContainer.appendChild(progressWrapperElement);
 
-        durationElement               = document.createElement("span"); durationElement.id = DURATION_ID; durationElement.textContent = "--:--";
+        durationElement               = document.createElement("span"); 
+        durationElement.id            = DURATION_ID; 
+        durationElement.textContent   = "--:--";
         progressBarContainer.appendChild(durationElement);
         rightPanel.appendChild(progressBarContainer);
 
-        const controlsContainer   = document.createElement("div"); controlsContainer.id = "player-controls-container";
-        const controls            = document.createElement("div"); controls.id           = "player-controls";
+        const controlsContainer   = document.createElement("div"); 
+        controlsContainer.id      = "player-controls-container";
+        const controls            = document.createElement("div"); 
+        controls.id               = "player-controls";
 
-        shuffleButtonElement      = document.createElement("button"); shuffleButtonElement.id = SHUFFLE_BUTTON_ID; shuffleButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-shuffle-button');
-        const shuffleIcon         = document.createElement("img"); shuffleIcon.alt = ""; shuffleIcon.src = ICON_SHUFFLE_OFF; shuffleButtonElement.appendChild(shuffleIcon);
+        shuffleButtonElement      = document.createElement("button"); 
+        shuffleButtonElement.id   = SHUFFLE_BUTTON_ID; 
+        shuffleButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-shuffle-button');
+        const shuffleIcon         = document.createElement("img"); 
+        shuffleIcon.alt           = ""; 
+        shuffleIcon.src           = ICON_SHUFFLE_OFF; 
+        shuffleButtonElement.appendChild(shuffleIcon);
 
-        prevButtonElement         = document.createElement("button"); prevButtonElement.id = PREV_BUTTON_ID; prevButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS); prevButtonElement.setAttribute('aria-label', 'Previous song'); prevButtonElement.title = 'Previous song';
-        const prevIcon            = document.createElement("img"); prevIcon.src = ICON_PREV; prevIcon.alt = ""; prevButtonElement.appendChild(prevIcon);
+        prevButtonElement         = document.createElement("button"); 
+        prevButtonElement.id      = PREV_BUTTON_ID; 
+        prevButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS); 
+        prevButtonElement.setAttribute('aria-label', 'Previous song'); 
+        prevButtonElement.title   = 'Previous song';
+        const prevIcon            = document.createElement("img"); 
+        prevIcon.src              = ICON_PREV; 
+        prevIcon.alt              = ""; 
+        prevButtonElement.appendChild(prevIcon);
 
-        playPauseButton           = document.createElement("button"); playPauseButton.id = PLAY_PAUSE_BUTTON_ID; playPauseButton.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
-        const playPauseIcon       = document.createElement("img"); playPauseIcon.alt = ""; playPauseIcon.src = ICON_PLAY; playPauseButton.appendChild(playPauseIcon);
+        playPauseButton           = document.createElement("button"); 
+        playPauseButton.id        = PLAY_PAUSE_BUTTON_ID; 
+        playPauseButton.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
+        const playPauseIcon       = document.createElement("img"); 
+        playPauseIcon.alt         = ""; 
+        playPauseIcon.src         = ICON_PLAY; 
+        playPauseButton.appendChild(playPauseIcon);
 
-        nextButtonElement         = document.createElement("button"); nextButtonElement.id = NEXT_BUTTON_ID; nextButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS); nextButtonElement.setAttribute('aria-label', 'Next song'); nextButtonElement.title = 'Next song';
-        const nextIcon            = document.createElement("img"); nextIcon.src = ICON_NEXT; nextIcon.alt = ""; nextButtonElement.appendChild(nextIcon);
+        nextButtonElement         = document.createElement("button"); 
+        nextButtonElement.id      = NEXT_BUTTON_ID; 
+        nextButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS); 
+        nextButtonElement.setAttribute('aria-label', 'Next song'); 
+        nextButtonElement.title   = 'Next song';
+        const nextIcon            = document.createElement("img"); 
+        nextIcon.src              = ICON_NEXT; 
+        nextIcon.alt              = ""; 
+        nextButtonElement.appendChild(nextIcon);
 
-        repeatButtonElement       = document.createElement("button"); repeatButtonElement.id = REPEAT_BUTTON_ID; repeatButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-repeat-button');
-        const repeatIcon          = document.createElement("img"); repeatIcon.alt = ""; repeatIcon.src = ICON_REPEAT_NONE; repeatButtonElement.appendChild(repeatIcon);
+        repeatButtonElement       = document.createElement("button"); 
+        repeatButtonElement.id    = REPEAT_BUTTON_ID; 
+        repeatButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-repeat-button');
+        const repeatIcon          = document.createElement("img"); 
+        repeatIcon.alt            = ""; 
+        repeatIcon.src            = ICON_REPEAT_NONE; 
+        repeatButtonElement.appendChild(repeatIcon);
 
-        favoriteButtonElement     = document.createElement("button"); favoriteButtonElement.id = FAVORITE_BUTTON_ID; favoriteButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-favorite-button'); favoriteButtonElement.title = "Favorite";
-        const favIcon             = document.createElement("img"); favIcon.alt = "Favorite"; favIcon.src = ICON_HEART_EMPTY; favoriteButtonElement.appendChild(favIcon);
+        favoriteButtonElement     = document.createElement("button"); 
+        favoriteButtonElement.id  = FAVORITE_BUTTON_ID; 
+        favoriteButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-favorite-button'); 
+        favoriteButtonElement.title = "Favorite";
+        const favIcon             = document.createElement("img"); 
+        favIcon.alt               = "Favorite"; 
+        favIcon.src               = ICON_HEART_EMPTY; 
+        favoriteButtonElement.appendChild(favIcon);
 
         controls.append(shuffleButtonElement, prevButtonElement, playPauseButton, nextButtonElement, repeatButtonElement, favoriteButtonElement);
-		controlsContainer.appendChild(controls);
-		controlsContainer.appendChild(selectorContainer);
+        controlsContainer.appendChild(controls);
+        controlsContainer.appendChild(playlistSelectorContainer);
 
-        const volContainer        = document.createElement("div"); volContainer.id = VOLUME_CONTAINER_ID;
-        volumeIconElement         = document.createElement("img"); volumeIconElement.id = VOLUME_ICON_ID; volumeIconElement.alt = "Mute"; volumeIconElement.title = "Mute/Unmute"; volumeIconElement.style.cursor = 'pointer'; volumeIconElement.src = ICON_VOLUME;
-        volumePercentageElement   = document.createElement("span"); volumePercentageElement.id = VOLUME_PERCENTAGE_ID; volumePercentageElement.textContent = "50%";
-        volumeSlider              = document.createElement("input"); volumeSlider.type = "range"; volumeSlider.id = VOLUME_SLIDER_ID; volumeSlider.min = 0; volumeSlider.max = 1; volumeSlider.step = 0.01; volumeSlider.value = 0.5; volumeSlider.title = "Adjust volume";
+        const volContainer        = document.createElement("div"); 
+        volContainer.id           = VOLUME_CONTAINER_ID;
+        volumeIconElement         = document.createElement("img"); 
+        volumeIconElement.id      = VOLUME_ICON_ID; 
+        volumeIconElement.alt     = "Mute"; 
+        volumeIconElement.title   = "Mute/Unmute"; 
+        volumeIconElement.style.cursor = 'pointer'; 
+        volumeIconElement.src     = ICON_VOLUME;
+        volumePercentageElement   = document.createElement("span"); 
+        volumePercentageElement.id = VOLUME_PERCENTAGE_ID; 
+        volumePercentageElement.textContent = "50%";
+        volumeSlider              = document.createElement("input"); 
+        volumeSlider.type         = "range"; 
+        volumeSlider.id           = VOLUME_SLIDER_ID; 
+        volumeSlider.min          = "0"; 
+        volumeSlider.max          = "1"; 
+        volumeSlider.step         = "0.01"; 
+        volumeSlider.value        = "0.5"; 
+        volumeSlider.title        = "Adjust volume";
         volumeSlider.style.setProperty('--volume-percent', '50%');
         volContainer.append(volumeIconElement, volumePercentageElement, volumeSlider);
         controlsContainer.appendChild(volContainer);
         rightPanel.appendChild(controlsContainer);
 
-        const queueContainer      = document.createElement("div"); queueContainer.id = QUEUE_CONTAINER_ID;
-        queueTitleElement         = document.createElement("h4"); queueTitleElement.id = QUEUE_TITLE_ID;
-        queueTitleElement.innerHTML = `Tracklist <span id="${QUEUE_TOGGLE_ICON_ID}">${isQueueSectionExpanded ? "▼" : "▸"}</span>`;
-        queueListElement          = document.createElement("ul"); queueListElement.id = QUEUE_LIST_ID;
-        queueContainer.append(queueTitleElement, queueListElement);
-        mainPlayerArea.appendChild(queueContainer);
+        queueContainerElement     = document.createElement("div"); 
+        queueContainerElement.id  = QUEUE_CONTAINER_ID;
+        queueTitleElement         = document.createElement("h4"); 
+        queueTitleElement.id      = QUEUE_TITLE_ID;
+        queueTitleElement.innerHTML = `Tracklist <span id="${QUEUE_TOGGLE_ICON_ID}">${isQueueSectionExpanded ? "▼" : "▶"}</span>`;
+        queueToggleIconElement    = queueTitleElement.querySelector(`#${QUEUE_TOGGLE_ICON_ID}`);
+        queueListElement          = document.createElement("ul"); 
+        queueListElement.id       = QUEUE_LIST_ID;
+        queueContainerElement.append(queueTitleElement, queueListElement);
+        mainPlayerArea.appendChild(queueContainerElement);
 
-        const youtubePlayerDiv    = document.createElement("div"); youtubePlayerDiv.id = YOUTUBE_PLAYER_DIV_ID;
+        const youtubePlayerDiv    = document.createElement("div"); 
+        youtubePlayerDiv.id       = YOUTUBE_PLAYER_DIV_ID;
         fragment.appendChild(youtubePlayerDiv);
 
         return fragment;
     }
 
     function bindUIEventListeners() {
-        document.getElementById(MINIMIZE_BUTTON_ID)?.addEventListener("click", toggleMinimizePlayer);
-
+        minimizeButtonElement.addEventListener("click", toggleMinimizePlayer);
         playPauseButton.addEventListener("click", togglePlayPause);
 
         nextButtonElement.addEventListener("click", () => {
-            if (!hasUserInitiatedPlayback) { if (playlist.isEmpty()) return; hasUserInitiatedPlayback = true; playlist.playNext(); loadCurrentSong(true); return; }
-            const wasPlaying   = isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING;
-            const shouldPlay   = wasPlaying || repeatMode === 'all' || playlist.currentSongIndex !== playlist.getSongs().length - 1;
+            if (!hasUserInitiatedPlayback) { 
+                if (playlist.isEmpty()) return; 
+                hasUserInitiatedPlayback = true; 
+                playlist.playNext(); 
+                loadCurrentSong(true); 
+                return; 
+            }
+            const wasPlaying = isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING;
+            const shouldPlay = wasPlaying || repeatMode === 'all' || playlist.currentSongIndex !== playlist.getSongs().length - 1;
             playlist.playNext();
             loadCurrentSong(shouldPlay);
         });
 
         prevButtonElement.addEventListener("click", () => {
-            if (!hasUserInitiatedPlayback) { if (playlist.isEmpty()) return; hasUserInitiatedPlayback = true; playlist.playPrevious(); loadCurrentSong(true); return; }
+            if (!hasUserInitiatedPlayback) { 
+                if (playlist.isEmpty()) return; 
+                hasUserInitiatedPlayback = true; 
+                playlist.playPrevious(); 
+                loadCurrentSong(true); 
+                return; 
+            }
             const wasPlaying = isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING;
             playlist.playPrevious();
             loadCurrentSong(wasPlaying || repeatMode === 'all');
@@ -5371,12 +5491,12 @@ document.addEventListener('mouseover', function(e) {
 
         repeatButtonElement.addEventListener("click", toggleRepeatMode);
         shuffleButtonElement.addEventListener("click", toggleShuffleMode);
-		favoriteButtonElement.addEventListener("click", toggleFavorite);
+        favoriteButtonElement.addEventListener("click", toggleFavorite);
         volumeIconElement.addEventListener("click", toggleMute);
         queueTitleElement.addEventListener('click', toggleQueueExpansion);
 
         const onSeekStart = () => { isSeeking = true; stopRafUpdater(); };
-        progressBar.addEventListener("mousedown",  onSeekStart);
+        progressBar.addEventListener("mousedown", onSeekStart);
         progressBar.addEventListener("touchstart", onSeekStart, { passive: true });
 
         progressBar.addEventListener("input", () => {
@@ -5402,10 +5522,13 @@ document.addEventListener('mouseover', function(e) {
             if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) startRafUpdater();
             else stopRafUpdater();
         };
-        progressBar.addEventListener("mouseup",  commitSeek);
+        progressBar.addEventListener("mouseup", commitSeek);
         progressBar.addEventListener("touchend", commitSeek);
 
-        volumeSlider.addEventListener("input", () => { setVolumeFromSlider(true); updateVolumeIcon(); });
+        volumeSlider.addEventListener("input", () => { 
+            setVolumeFromSlider(true); 
+            updateVolumeIcon(); 
+        });
 
         playlistSelectorElement.addEventListener("change", (e) => {
             const newIndex = parseInt(e.target.value, 10);
@@ -5419,7 +5542,10 @@ document.addEventListener('mouseover', function(e) {
             if (!item?.dataset.songIndex) return;
             if (!hasUserInitiatedPlayback) hasUserInitiatedPlayback = true;
             const idx = parseInt(item.dataset.songIndex, 10);
-            if (playlist.currentSongIndex !== idx) { playlist.setCurrentSongIndex(idx); loadCurrentSong(true); }
+            if (playlist.currentSongIndex !== idx) { 
+                playlist.setCurrentSongIndex(idx); 
+                loadCurrentSong(true); 
+            }
         });
 
         document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -5462,8 +5588,8 @@ document.addEventListener('mouseover', function(e) {
             #${PLAYLIST_SELECTOR_CONTAINER_ID} label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin: 0; }
             #${PLAYLIST_SELECTOR_ID} { background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.2); border-radius: 4px; padding: 2px 6px; font-family: inherit; font-size: 11px; color: var(--text-primary); cursor: pointer; outline: none; transition: background 0.2s; }
             #${PLAYLIST_SELECTOR_ID}:hover { background: rgba(255,255,255,0.8); }
-
-			#player-playlist-selector { margin: 0 5px; padding: 2px; }
+            
+            #player-playlist-selector { margin: 0 5px; padding: 2px; } 
             .hidden { display: none !important; }
 
             #${MINIMIZE_BUTTON_ID} {
@@ -5501,7 +5627,7 @@ document.addEventListener('mouseover', function(e) {
             #player-cd-wrapper {
                 position: absolute; top: 4px; left: 22px; width: var(--cover-art-size); height: var(--cover-art-size);
                 z-index: 1; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); transform: translateX(0%);
-                pointer-events: none;
+                pointer-events: none; will-change: transform;
             }
             #${DISPLAY_BOX_ID}.playing #player-cd-wrapper { transform: translateX(40%); }
             #player-cd-disc {
@@ -5509,7 +5635,7 @@ document.addEventListener('mouseover', function(e) {
                 background: radial-gradient(circle at center, transparent 15%, rgba(255,255,255,0.6) 16%, transparent 22%),
                     conic-gradient(from 0deg, #d0d0d0, #f8f8f8, #b0b0b0, #f8f8f8, #d0d0d0, #f8d8d8, #d8f8d8, #d8d8f8, #d0d0d0, #f8f8f8, #b0b0b0, #f8f8f8, #d0d0d0);
                 border: 1px solid rgba(0,0,0,0.3); box-shadow: inset 0 0 0 2px rgba(255,255,255,0.2), 2px 2px 5px rgba(0,0,0,0.4);
-                animation: cd-spin 3s linear infinite; animation-play-state: paused; position: relative;
+                animation: cd-spin 3s linear infinite; animation-play-state: paused; position: relative; will-change: transform;
             }
             #${DISPLAY_BOX_ID}.playing #player-cd-disc { animation-play-state: running; }
             #player-cd-disc::before {
@@ -5609,7 +5735,7 @@ document.addEventListener('mouseover', function(e) {
             #${QUEUE_CONTAINER_ID}.queue-collapsed { max-height: 20px; }
             #${QUEUE_CONTAINER_ID}.queue-collapsed #${QUEUE_LIST_ID} { display: none; }
 
-            /* minimised state */
+            /* minimized state */
             #${PLAYER_ELEMENT_ID}.minimized { padding: 8px 36px 8px 12px; }
             #${PLAYER_ELEMENT_ID}.minimized #${PLAYER_MAIN_CONTENT_ID} { align-items: center; gap: 12px; }
             #${PLAYER_ELEMENT_ID}.minimized #${DISPLAY_BOX_ID} { padding: 0; margin-right: 0; box-shadow: none; border: 1px solid rgba(0,0,0,0.2); border-radius: 3px; background-color: transparent; }
@@ -5628,7 +5754,7 @@ document.addEventListener('mouseover', function(e) {
             #${PLAYER_ELEMENT_ID}.minimized .player-favorite-button { display: none; }
             #${PLAYER_ELEMENT_ID}.minimized #${PROGRESS_BAR_CONTAINER_ID} { order: 3; flex: 1; margin: 0; background: transparent; border: none; padding: 0; }
             #${PLAYER_ELEMENT_ID}.minimized #${VOLUME_CONTAINER_ID} { order: 4; }
-			#${PLAYER_ELEMENT_ID}.minimized #${QUEUE_CONTAINER_ID},
+            #${PLAYER_ELEMENT_ID}.minimized #${QUEUE_CONTAINER_ID},
             #${PLAYER_ELEMENT_ID}.minimized #${PLAYLIST_SELECTOR_CONTAINER_ID} { display: none !important; }
 
             @media (max-width: 600px) {
@@ -5639,7 +5765,7 @@ document.addEventListener('mouseover', function(e) {
                 #${PLAYER_ELEMENT_ID}:not(.minimized) #player-info-container { text-align: center; }
                 #${PLAYER_ELEMENT_ID}:not(.minimized) .${TITLE_LINE_WRAPPER_CLASS} { justify-content: center; }
                 #${PLAYER_ELEMENT_ID}:not(.minimized) #player-controls-container { flex-direction: column; gap: 12px; }
-				#${PLAYER_ELEMENT_ID}:not(.minimized) #${PLAYLIST_SELECTOR_CONTAINER_ID} { margin-left: 0; }
+                #${PLAYER_ELEMENT_ID}:not(.minimized) #${PLAYLIST_SELECTOR_CONTAINER_ID} { margin-left: 0; }
                 #${PLAYER_ELEMENT_ID}:not(.minimized) #${VOLUME_PERCENTAGE_ID} { display: none; }
                 #${PLAYER_ELEMENT_ID}.minimized #${PLAYER_RIGHT_PANEL_ID} { gap: 8px; }
                 #${PLAYER_ELEMENT_ID}.minimized #player-info-container { flex: 1; }
@@ -5652,7 +5778,10 @@ document.addEventListener('mouseover', function(e) {
 
     function loadYouTubeAPI() {
         return new Promise((resolve, reject) => {
-            if (typeof YT !== 'undefined' && typeof YT.Player !== 'undefined') { resolve(); return; }
+            if (typeof YT !== 'undefined' && typeof YT.Player !== 'undefined') { 
+                resolve(); 
+                return; 
+            }
 
             const existingScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
 
@@ -5687,7 +5816,7 @@ document.addEventListener('mouseover', function(e) {
     async function initializeMusicPlayer() {
         try {
             const playerFragment = createPlayerElements();
-
+            
             refreshPlaylistsUI();
 
             const initialSongs = PLAYLISTS_DATA[0]?.songs.length
@@ -5716,7 +5845,7 @@ document.addEventListener('mouseover', function(e) {
                 events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange, onError: onPlayerError }
             });
 
-        } catch (_) {
+        } catch {
             if (titleElement)  titleElement.textContent  = "Error";
             if (artistElement) artistElement.textContent = "Could not load player.";
         }
