@@ -452,7 +452,7 @@ function applyGlobalStyles(css, id = 'app-theme') {
     el.textContent = css;
 }
 
-const css = `
+const css = `		
 					#closeButton {
 						background: none;
 						border: none;
@@ -477,8 +477,8 @@ const css = `
 					}
 					#opponent_selection_id_button_p {
 						color: #fff;
-					}
-					.container #site_credits p, .container #site_credits a { color: #fbff66 !important; }
+					}	
+					.container #site_credits p, .container #site_credits a { color: #fbff66 !important; }					
 
 					/* Override xp.css focus and hover styles */
 					#closeButton:focus,
@@ -493,7 +493,7 @@ const css = `
 						font-size:1.17em!important;
 						font-family: Segoe UI, "Helvetica Neue", Helvetica, sans-serif!important;
 					}
-
+				
 					label {
 						font-size:0.92em!important;
 						font-family: Segoe UI, "Helvetica Neue", Helvetica, sans-serif!important;
@@ -513,7 +513,7 @@ const css = `
                     padding: 0.0em;
                     width: 100em !important;
                 }
-
+				
 				#game_window {
                     background-color: #1d2754 !important;;
                     background-image: url(https://file.garden/aNtAfG887DiA_7lO/Obamanation/Code1/ENrcfdQ.png);
@@ -550,19 +550,19 @@ const css = `
 				  height: 20px; /* Adjust as needed */
 			  }
 
-
+	
 			label {
 			  display:inline-block;
 			}
-
+  
 			.content_single li {
 			  line-height: 1.39em;
 			}
-
+  
 			input[type=radio]+label {
 			  display: inline;
 			}
-
+	
 			.mytooltip {
 				position: relative;
 				display: inline-block;
@@ -571,7 +571,7 @@ const css = `
 				text-decoration: underline #84c8db;
 				text-underline-offset: 2px;
 			}
-
+	
 			.mytooltip .mytooltiptext {
 				width: 240px;
 				background-color: #00a2ed;
@@ -593,28 +593,28 @@ const css = `
 				font-weight: normal !important;
 				font-style: normal !important;
 			}
-
+	
 			.mytooltip .mytooltiptext img {
 				max-width: 240px;
 				height: auto;
 			}
 
-
+	
 			.mytooltip:hover .mytooltiptext {
 				opacity: 1;
 				transition-delay: 0.5s;
-			}
-
+			}			
+			
 			/* this is specifically for tooltips inside the advisor feedback module */
 			#visit_window .mytooltiptext {
 			  padding: .1em 1.2em .75em;
 			}
-
+  
 			#final_results_description p {
 			  color: white;
 			  font-family: Segoe UI;
 			}
-
+  
 			#overall_details_container h3,
 			#overall_election_details h4,
 			#main_content_area_reading p,
@@ -623,17 +623,17 @@ const css = `
 			#credits {
 			  color: white;
 			}
-
+			
 			#hidden_checkbox {
 			  opacity: 1;
 			  appearance: auto;
 			}
-
+			
 			/* 7.css overrides */
 			#bottomBar::before, #bottomBar::after {
 				content: none;
 			}
-
+			
 			/* Other accessibility fixes */
 			#state_info {
 				height: auto;
@@ -820,32 +820,32 @@ const css = `
 				border: none;
 				padding-top: 2px;
 			}
-
+			
 			#overall_vote_statistics, #state_result_data_summary {
 				text-shadow: none;
 			}
-
+			
 			/* this is so checkboxes do appear */
 			#difficulty_level input {
 			  appearance: checkbox;
 			  opacity: 1;
 			}
-
+			
 			#candidate_pic {
 			  margin-left: 165px;
 			}
 			#running_mate_pic {
 			  margin-right: 165px;
 			}
-
+			
 			.footer {
 				border-top: 1px solid #ddd;
 			}
-
+			
 			#game_window th {
 				background: #e7e7e7 !important;
 			}
-
+			
 			/* Tweaks for a larger election description - originally made for Moonbeam */
 			#election_summary {
 			  display: flex;
@@ -905,10 +905,10 @@ const css = `
 				}
 
 			}
-
+			
 			/* Mobile compatibility fixes - partially inspired by those of TTNW */
 			@media only screen and (max-width: 768px) {
-
+			
 			 /* necessary to ensure the music player stays in position */
 			  #game_window {
 				flex: 1 1 auto;
@@ -921,14 +921,14 @@ const css = `
 				background-repeat: no-repeat;
 				background-size: cover;
 			  }
-
+			
 			  #question_form button, #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
 				font-size: clamp(16px, 4.2vw, 20px);
 				line-height: 1.2;
 				padding: 10px 16px;
 				min-height: 44px;
 			  }
-
+			  
 			  #inner_window_2 button, #inner_window_3 button, #inner_window_4 button, #game_window button, #headquarter button, #advisorsDiv button {
 				font-size: 1em;
 				line-height: 2em;
@@ -937,7 +937,7 @@ const css = `
 			.inner_window_question button, #visit_window button, #map_footer {
 				line-height: 2.5em;
 			  }
-
+			  
 			  #map_footer {
 				padding-right: 10em;
 			  }
@@ -1001,17 +1001,17 @@ const css = `
 					font-weight: 400;
 					background: #e8e8e8; /* only change background */
 				}
-
+				
 				.overlay_window img {
 				  width: 15em;
 				  height: auto;
 				}
-
+				
 				.overlay_window h3 {
 				  padding: .5rem x .5rem;
 				  font-size: 24px;
 				}
-
+				
 			/* for the default CTS/NCT footer */
 			  #game_window g {
 				display: flex;
@@ -1021,7 +1021,7 @@ const css = `
 				gap: 8px;
 				padding: 10px 5px;
 			  }
-
+			  
 			  #candidate_pic, img#candidate_pic {
 				order: 1;
 				width: 13.5em;
@@ -1029,7 +1029,7 @@ const css = `
 				flex-shrink: 0;
 				margin: 0;
 			  }
-
+			  
 			  .inner_window_sign_display {
 				order: 2;
 				flex: 1;
@@ -1040,7 +1040,7 @@ const css = `
 				align-items: center;
 				margin: 0;
 			  }
-
+			  
 			  #running_mate_pic, img#running_mate_pic {
 				order: 3;
 				width: 13.5em;
@@ -1048,29 +1048,29 @@ const css = `
 				flex-shrink: 0;
 				margin: 0;
 			  }
-
+			  
 			  .inner_window_sign_display img {
 				max-width: 258px;
 			  }
-
+				
 			/* other fixes to not break things */
 			#map_container {
 			  height: 30.78em;
 			}
-
+			
 			.visit_text {
 			  display: inline-flex;
 			}
-
+			
 			#results_container {
 			  display: flex;
 			  flex-flow: column wrap;
 			  max-height: 80dvh;
 			  overflow: hidden;
 			}
-
+							
 			}
-
+			
 `;
 
 ensureMetaViewport();
@@ -1083,25 +1083,25 @@ let containerRef = document.getElementsByClassName("container")[0];
 function createBanner(url, sibling, isLeft) {
     let div = document.createElement("div");
     let img = document.createElement("img");
-
+    
     div.style.cssText = "position: relative; margin: auto;";
     img.src = url;
-
+    
     let x = document.createElement("div");
     x.innerText = "_";
     x.style.cssText = "position: absolute; padding: 5px; font-size: 2pt; cursor: pointer;";
-
+    
     div.appendChild(x);
     div.appendChild(img);
-
+    
     if (isLeft) {
         sibling.parentNode.insertBefore(div, sibling);
     } else {
         sibling.parentNode.insertBefore(div, sibling.nextSibling);
     }
-
+    
     x.onclick = () => div.style.visibility = "hidden";
-
+    
     return img;
 }
 
@@ -1259,7 +1259,7 @@ function createBanner(url, sibling, isLeft) {
   function getOrCreateLayoutContainer() {
     const difficultyEl = document.getElementById("difficulty_level");
     if (!difficultyEl) return null;
-
+    
     let container = document.getElementById("mod_settings_container");
     if (container) return container;
 
@@ -1279,7 +1279,7 @@ function createBanner(url, sibling, isLeft) {
 
     difficultyEl.insertBefore(container, formEl);
     container.appendChild(formEl);
-
+    
     // clean up original <p> tags if they exist to prevent extra space
     const paragraphs = formEl.querySelectorAll("p");
     paragraphs.forEach(p => p.style.display = "none");
@@ -1293,7 +1293,7 @@ function createBanner(url, sibling, isLeft) {
 
     const toggleContainer = document.createElement("div");
     toggleContainer.style.textAlign = "center";
-
+    
     const label = document.createElement("label");
     Object.assign(label.style, { cursor: "pointer", color: "#f7f7f7", fontWeight: "bold" });
 
@@ -1614,7 +1614,7 @@ function createBanner(url, sibling, isLeft) {
         this.loadFromStorage();
       }
     }
-
+	
 	saveToStorage() {
 	  if (this._saveTimer) clearTimeout(this._saveTimer);
 	  this._saveTimer = setTimeout(() => {
@@ -2245,7 +2245,7 @@ function setupMusicPlayer() {
 
     playlist = new Playlist();
     songData.forEach(s => playlist.addSong(new Song(s.title, s.artist, s.genre, s.cover, s.audio)));
-
+	
 	window.defaultPlaylist = playlist;
 
     function addAndPlaySong(song) {
@@ -2441,7 +2441,7 @@ const musicPlayer = `
 			padding: 8px;
 			border-radius: 4px;
 		}
-
+		
 		#bottom-controls {
 			display: flex;
 			justify-content: space-between;
@@ -2454,13 +2454,13 @@ const musicPlayer = `
 			align-items: center;
 			gap: 15px;
 		}
-
+		
 		#controls img {
 			cursor: pointer;
 			opacity: 0.9;
 			transition: opacity 0.2s;
 		}
-
+		
 		#prevButton, #nextButton {
 			height: 36px;
 		}
@@ -2484,13 +2484,13 @@ const musicPlayer = `
 			background-color: #7db700;
 			border-radius: 3px;
 		}
-
+		
 		#volume-container {
 			display: flex;
 			align-items: center;
 			gap: 8px;
 		}
-
+		
 		#volumeSlider {
 			-webkit-appearance: none;
 			appearance: none;
@@ -2500,9 +2500,9 @@ const musicPlayer = `
 			border-radius: 2px;
 			opacity: 0.8;
 			transition: opacity .2s;
-			margin: 0 .25em 0 0;
+			margin: 0 .25em 0 0; 
 		}
-
+		
 		#volumeSlider:hover {
 			opacity: 1;
 		}
@@ -2760,6 +2760,7 @@ campaignTrail_temp.modBoxTheme = {
     "header_color": "#69295a",
     "header_text_color": "#FBFBFB",
     "header_image_url": "https://file.garden/aNtAfG887DiA_7lO/Obamanation/Code1/npg4Eq3.png",
+    "image_border": "3px solid #2b00ad",
     "description_text_color": "#000000",
     "description_background_color": "#FBFBFB",
     "main_color": "#010012",
