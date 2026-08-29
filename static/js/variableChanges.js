@@ -57,8 +57,12 @@ async function ensureVariableChangesLoaded() {
 
 function resolveTicketChanges(changesByMod, modName) {
   const candidateChanges = changesByMod[modName]?.[campaignTrail_temp.candidate_id];
+  if (!candidateChanges) return null;
 
-  return candidateChanges?.[campaignTrail_temp.running_mate_id] ?? null;
+  const ticketsForCandidate = Object.values(candidateChanges);
+
+  return candidateChanges[campaignTrail_temp.running_mate_id]
+    ?? (ticketsForCandidate.length === 1 ? ticketsForCandidate[0] : null);
 }
 
 function formatChange(change) {
