@@ -23,7 +23,7 @@
 
 .mod-image {
   width: 80%;
-  border: 4px solid white;
+  border: var(--theme-img-border, 4px solid #fff);
   height: auto;
 }
 
@@ -41,7 +41,7 @@
   width: 100%;
   position: relative;
   background-image: var(--theme-header-bg, none);
-  background-color: var(--theme-header-color, transparent);
+  background: var(--theme-header-color, transparent);
   background-size: cover;
   background-position: center;
 }
@@ -87,7 +87,7 @@
   border-radius: 5px;
   padding: 5px;
   overflow-y: clip;
-  background-color: var(--theme-desc-bg, transparent);
+  background: var(--theme-desc-bg, transparent);
   color: var(--theme-desc-text, inherit);
 }
 
@@ -106,7 +106,8 @@
 .community-grid-element {
   width: 23%;
   height: 25rem;
-  background-color: var(--theme-main-color, #BFE6FF);
+  background: var(--theme-main-color, #BFE6FF);
+  background-attachment: local;
   margin: 5px 5px 10px 10px;
   border-radius: 10px;
   display: flex;
@@ -134,18 +135,18 @@
   text-decoration: none;
   outline: none;
   color: var(--theme-ui-text, #fff);
-  background-color: var(--theme-secondary-color, rgb(85, 111, 176));
+  background: var(--theme-secondary-color, rgb(85, 111, 176));
   border: none;
   border-radius: 10px;
   margin: 5px;
 }
 
 .hover-button:hover {
-  background-color: var(--theme-secondary-hover, rgb(76, 98, 154));
+  background: var(--theme-secondary-hover, rgb(76, 98, 154));
 }
 
 .hover-button:active {
-  background-color: var(--theme-secondary-color, rgb(85, 111, 176));
+  background: var(--theme-secondary-color, rgb(85, 111, 176));
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }

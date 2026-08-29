@@ -561,6 +561,7 @@ function applySingleModTheme(modView, state = null) {
     theme.description_text_color ? modView.style.setProperty("--theme-desc-text", theme.description_text_color) : modView.style.removeProperty("--theme-desc-text");
     theme.main_color ? modView.style.setProperty("--theme-main-color", theme.main_color) : modView.style.removeProperty("--theme-main-color");
     theme.secondary_color ? modView.style.setProperty("--theme-secondary-color", theme.secondary_color) : modView.style.removeProperty("--theme-secondary-color");
+    theme.image_border ? modView.style.setProperty("--theme-img-border", theme.image_border) : modView.style.removeProperty("--theme-img-border");
 
     let hoverColor = theme.secondary_hover_color;
     if (!hoverColor && theme.secondary_color) {
@@ -580,6 +581,7 @@ function applySingleModTheme(modView, state = null) {
     modView.style.removeProperty("--theme-secondary-color");
     modView.style.removeProperty("--theme-secondary-hover");
     modView.style.removeProperty("--theme-ui-text");
+    modView.style.removeProperty("--theme-img-border");
   }
 }
 
