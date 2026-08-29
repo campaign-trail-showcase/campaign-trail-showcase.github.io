@@ -38060,11 +38060,12 @@ async function loadAndDrawCountyMap(mode) {
     if (window.pollgraph) return;
 
     const POLL = window.pollgraph = {
-        metric: 'pv',
+        metric: 'pv', // 'pv', 'ev', 'margin', 'swing', 'breakdown'
         showThirdParties: false,
         _candCache: {},
 
         init() {
+            if (!window.campaignTrail_temp) return;
             campaignTrail_temp.poll_history = [];
 
             const hookFn = (origFn, callback, resetHeight) => {
@@ -38085,32 +38086,65 @@ async function loadAndDrawCountyMap(mode) {
 
             const hooks = ["finalMapScreenHtml", "stateResultsHtml", "furtherReadingHtml"];
             for (let i = 0; i < hooks.length; i++) {
-                window[hooks[i]] = hookFn(window[hooks[i]], null, true);
+                if (window[hooks[i]]) window[hooks[i]] = hookFn(window[hooks[i]], null, true);
             }
 
-            window.overallDetailsHtml = hookFn(window.overallDetailsHtml, () => setTimeout(POLL.injectInline, 10), false);
+            window.overallDetailsHtml = hookFn(window.overallDetailsHtml, () => setTimeout(POLL.injectInline, 15), false);
+        },
+
+        isPrimary() {
+            const ct = campaignTrail_temp;
+            return Boolean(ct.primary || (ct.primary_states && ct.primary_states.length > 0));
+        },
+
+        getEvLabel() {
+            return POLL.isPrimary() ? "delegates" : "electoral votes";
         },
 
         getCandMeta(pk) {
             if (POLL._candCache[pk]) return POLL._candCache[pk];
-            let cands = campaignTrail_temp.candidate_json;
+            let cands = campaignTrail_temp.candidate_json || [];
             for (let i = 0; i < cands.length; i++) {
                 if (cands[i].pk == pk) {
                     let f = cands[i].fields;
-                    return POLL._candCache[pk] = { name: f.last_name, color: f.color_hex };
+                    return POLL._candCache[pk] = { name: f.last_name || "Cand", color: f.color_hex || "#888" };
                 }
             }
             return POLL._candCache[pk] = { name: "Other", color: "#888" };
         },
 
+        getWinEV() {
+            const ct = campaignTrail_temp;
+            try {
+                let ev = ct.election_json[0].fields.electoral_votes_to_win;
+                return (typeof ev === 'number' && ev > 0) ? ev : 0;
+            } catch (e) {
+                return 0;
+            }
+        },
+
         record(isFinal) {
             const ct = campaignTrail_temp;
-            let label = isFinal ? "Final" : "Q" + (ct.question_number + 1);
-            let history = ct.poll_history;
-            if (history.length === 0) POLL._candCache = {};
+            if (!ct) return;
 
-            let existingIdx = history.findIndex(x => x.label === label);
+            if (!isFinal && ct.question_number === 0) {
+                ct.poll_history = [];
+                POLL._candCache = {};
+            }
+
+            let history = ct.poll_history || (ct.poll_history = []);
+            let label = isFinal ? "Final" : "Q" + (ct.question_number + 1);
             let turnData = {};
+
+            let qHeadline = "";
+            if (!isFinal && ct.questions_json && ct.questions_json[ct.question_number]) {
+                let rawQ = ct.questions_json[ct.question_number].fields.description || "";
+                let stripped = rawQ.replace(/<[^>]*>?/gm, '').trim();
+                let firstSentence = stripped.split(".")[0];
+                qHeadline = firstSentence.length > 60 ? firstSentence.substring(0, 57) + "..." : firstSentence;
+            } else if (isFinal) {
+                qHeadline = "Final election result";
+            }
 
             if (isFinal && ct.final_overall_results) {
                 let totalPV = 0;
@@ -38119,73 +38153,112 @@ async function loadAndDrawCountyMap(mode) {
                 for (let i = 0; i < res.length; i++) {
                     let c = res[i];
                     let pv = totalPV > 0 ? (c.popular_votes / totalPV) * 100 : 0;
-                    if (pv >= 0.1) turnData[c.candidate] = { pv, ev: c.electoral_votes || 0 };
+                    if (pv >= 0.1 || (c.electoral_votes && c.electoral_votes > 0)) {
+                        turnData[c.candidate] = { pv, ev: c.electoral_votes || 0 };
+                    }
                 }
             } else if (!isFinal && window.nn2) {
                 for (let i = 0; i < window.nn2.length; i++) {
                     let c = window.nn2[i];
-                    if (c.pvp * 100 >= 0.1) turnData[c.pk] = { pv: c.pvp * 100, ev: c.evvs || 0 };
+                    let pv = (c.pvp || 0) * 100;
+                    if (pv >= 0.1 || (c.evvs && c.evvs > 0)) {
+                        turnData[c.pk] = { pv, ev: c.evvs || 0 };
+                    }
                 }
             } else {
                 return;
             }
 
-            let entry = { label, data: turnData };
-            if (existingIdx >= 0) history[existingIdx] = entry;
-            else history.push(entry);
+            let existingIdx = history.findIndex(x => x.label === label);
+            let entry = { label, headline: qHeadline, data: turnData };
+            if (existingIdx >= 0) {
+                history[existingIdx] = entry;
+                history.splice(existingIdx + 1);
+            } else {
+                history.push(entry);
+            }
+        },
+
+        getControlsHtml(prefix) {
+            let evLabel = POLL.getEvLabel();
+            let m = POLL.metric;
+            let tp = POLL.showThirdParties;
+            let isLarge = prefix === 'Large';
+            return `
+                <div style="text-align:center; margin-bottom:${isLarge ? '15px' : '8px'}; font-family:sans-serif; font-size:${isLarge ? '13.5px' : '12.5px'}; color:#333; user-select:none; display:flex; flex-wrap:wrap; justify-content:center; gap:${isLarge ? '16px' : '12px'};">
+                    <label style="cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetric${prefix}" value="pv" ${m === 'pv' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('pv')"> Popular vote %</label>
+                    <label style="cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetric${prefix}" value="ev" ${m === 'ev' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('ev')"> ${evLabel}</label>
+                    <label style="cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetric${prefix}" value="margin" ${m === 'margin' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('margin')"> Net margin</label>
+                    <label style="cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetric${prefix}" value="swing" ${m === 'swing' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('swing')"> Momentum (Δ)</label>
+                    <label style="cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetric${prefix}" value="breakdown" ${m === 'breakdown' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('breakdown')"> Vote breakdown</label>
+                    <label style="cursor:pointer; font-weight:normal; font-size:${isLarge ? '13px' : '12px'}; color:#666; margin-left:${isLarge ? '10px' : '6px'};"><input type="checkbox" id="pollThirdParty${prefix}" ${tp ? 'checked' : ''} onchange="window.pollgraph.toggleThirdParties(this.checked)"> Third parties?</label>
+                </div>
+            `;
         },
 
         switchMetric(m) {
             POLL.metric = m;
-            let radios = document.querySelectorAll('input[name="pollMetricInline"], input[name="pollMetricLarge"]');
-            for (let i = 0; i < radios.length; i++) radios[i].checked = (radios[i].value === m);
-
-            if (document.getElementById("inlinePollGraph")) POLL.render("inlinePollGraph", "inlinePollTooltip", 888, 140, false);
+            document.querySelectorAll('input[name="pollMetricInline"], input[name="pollMetricLarge"]').forEach(el => el.checked = (el.value === m));
+            if (document.getElementById("inlinePollGraph")) POLL.render("inlinePollGraph", "inlinePollTooltip", 888, 150, false);
             if (document.getElementById("largePollGraph")) POLL.render("largePollGraph", "largePollTooltip", 1050, 460, true);
         },
 
         toggleThirdParties(val) {
             POLL.showThirdParties = val;
-            let cbs = document.querySelectorAll('#pollThirdPartyInline, #pollThirdPartyLarge');
-            for (let i = 0; i < cbs.length; i++) cbs[i].checked = val;
-
-            if (document.getElementById("inlinePollGraph")) POLL.render("inlinePollGraph", "inlinePollTooltip", 888, 140, false);
+            document.querySelectorAll('#pollThirdPartyInline, #pollThirdPartyLarge').forEach(el => el.checked = val);
+            if (document.getElementById("inlinePollGraph")) POLL.render("inlinePollGraph", "inlinePollTooltip", 888, 150, false);
             if (document.getElementById("largePollGraph")) POLL.render("largePollGraph", "largePollTooltip", 1050, 460, true);
+        },
+
+        exportImage(canvasId) {
+            let canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            let a = document.createElement("a");
+            a.href = canvas.toDataURL("image/png");
+            a.download = `Polling_History_${campaignTrail_temp.election_id || 'TCT'}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         },
 
         injectInline() {
             let gw = document.getElementById("game_window");
             if (gw) gw.style.height = "auto";
 
+            if (document.getElementById("inlinePollGraph")) {
+                POLL.render("inlinePollGraph", "inlinePollTooltip", 888, 150, false);
+                return;
+            }
+
             let h4s = gw ? gw.getElementsByTagName("h4") : [];
             for (let i = 0; i < h4s.length; i++) {
                 let h4 = h4s[i];
-                if (h4.innerText.indexOf("Historical") !== -1) {
+                if (h4.innerText.indexOf("Historical") !== -1 || h4.innerText.indexOf("Campaign Polling History") !== -1) {
                     h4.innerText = "Campaign Polling History";
                     let table = h4.nextElementSibling;
                     if (table && table.tagName === "TABLE") {
                         let container = document.createElement("div");
                         container.style.cssText = "position:relative; width:100%; margin-top:10px; margin-bottom:20px;";
                         container.innerHTML = `
-                            <div style="text-align:center; margin-bottom:8px; font-family:sans-serif; font-size:13px; color:#333;">
-                                <label style="margin-right:15px; cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetricInline" value="pv" ${POLL.metric === 'pv' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('pv')"> Popular Vote %</label>
-                                <label style="margin-right:25px; cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetricInline" value="ev" ${POLL.metric === 'ev' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('ev')"> Electoral Votes</label>
-                                <label style="cursor:pointer; font-weight:normal; font-size:12px; color:#555;"><input type="checkbox" id="pollThirdPartyInline" ${POLL.showThirdParties ? 'checked' : ''} onchange="window.pollgraph.toggleThirdParties(this.checked)"> Show Third Parties</label>
+                            ${POLL.getControlsHtml('Inline')}
+                            <div style="position:relative; width:100%;">
+                                <canvas id="inlinePollGraph" style="cursor:pointer; background:#fdfdfd; border:1px solid #ccc; border-radius:6px; width:100%; max-width:888px; height:150px; box-shadow:inset 0 1px 3px rgba(0,0,0,0.05); display:block; margin:0 auto;"></canvas>
+                                <div id="inlinePollTooltip" style="display:none; position:absolute; z-index:10; background:rgba(20,20,20,0.95); color:#fff; padding:10px; border-radius:6px; font-size:12px; font-family:sans-serif; pointer-events:none; box-shadow:0 4px 8px rgba(0,0,0,0.4); white-space:nowrap; left:0; top:0; transform:translate(0px, 0px);"></div>
                             </div>
-                            <div style="position:relative;">
-                                <canvas id="inlinePollGraph" style="cursor:pointer; background:#fdfdfd; border:1px solid #ccc; border-radius:6px; width:100%; max-width:888px; height:140px; box-shadow:inset 0 1px 3px rgba(0,0,0,0.05);"></canvas>
-                                <div id="inlinePollTooltip" style="display:none; position:absolute; z-index:10; background:rgba(20,20,20,0.95); color:#fff; padding:10px; border-radius:6px; font-size:13px; font-family:sans-serif; pointer-events:none; box-shadow:0 4px 8px rgba(0,0,0,0.4); white-space:nowrap; left:0; top:0; transform:translate(0px, 0px); transition: transform 0.05s linear;"></div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; max-width:888px; margin:5px auto 0 auto; font-size:11px; color:#666; font-style:italic; user-select:none;">
+                                <span>(click graph to expand full-screen view)</span>
+                                <a href="javascript:void(0)" onclick="window.pollgraph.exportImage('inlinePollGraph')" style="color:#0066cc; text-decoration:none; font-style:normal; font-weight:bold;">Save chart as image</a>
                             </div>
-                            <div style="text-align:center; font-size:11px; color:#666; margin-top:5px; font-style:italic; user-select:none;">(Click graph to expand)</div>
                         `;
                         table.parentNode.replaceChild(container, table);
-                        POLL.render("inlinePollGraph", "inlinePollTooltip", 888, 140, false);
+                        POLL.render("inlinePollGraph", "inlinePollTooltip", 888, 150, false);
+                        break;
                     }
                 }
             }
         },
 
-        render(canvasId, tooltipId, cssWidth, cssHeight, isLarge) {
+        render(canvasId, tooltipId, baseCssWidth, cssHeight, isLarge) {
             let canvas = document.getElementById(canvasId);
             let tooltip = document.getElementById(tooltipId);
             if (!canvas) return;
@@ -38195,42 +38268,39 @@ async function loadAndDrawCountyMap(mode) {
             if (hLen === 0) return;
 
             let mKey = POLL.metric;
+            let containerW = canvas.parentElement ? canvas.parentElement.clientWidth : baseCssWidth;
+            let cssWidth = Math.min(baseCssWidth, containerW || baseCssWidth);
+
             let dpr = window.devicePixelRatio || 1;
             canvas.width = cssWidth * dpr;
             canvas.height = cssHeight * dpr;
+            canvas.style.width = cssWidth + "px";
+            canvas.style.height = cssHeight + "px";
+
             let ctx = canvas.getContext('2d');
             ctx.scale(dpr, dpr);
 
-            let minY = 9999, maxY = -9999;
             let validCands = new Set();
-
-            // find major candidates based on max PV > 15%
             let maxPvPerCand = {};
             for (let i = 0; i < hLen; i++) {
                 for (let pk in history[i].data) {
                     maxPvPerCand[pk] = Math.max(maxPvPerCand[pk] || 0, history[i].data[pk].pv);
                 }
             }
-            let majorCands = Object.keys(maxPvPerCand).filter(pk => maxPvPerCand[pk] > 15.0);
-            if (majorCands.length < 2) {
-                majorCands = Object.keys(maxPvPerCand).sort((a,b) => maxPvPerCand[b] - maxPvPerCand[a]).slice(0, 2);
-            }
+            let sortedByMaxPv = Object.keys(maxPvPerCand).sort((a, b) => maxPvPerCand[b] - maxPvPerCand[a]);
+            let majorCands = sortedByMaxPv.slice(0, 2);
 
             for (let i = 0; i < hLen; i++) {
                 let data = history[i].data;
                 for (let pk in data) {
                     if (!POLL.showThirdParties && !majorCands.includes(pk)) continue;
                     let val = data[pk];
-                    if ((mKey === 'pv' && val.pv >= 1.0) || (mKey === 'ev' && val.ev > 0)) validCands.add(pk);
+                    if ((mKey === 'pv' && val.pv >= 0.5) || (mKey === 'ev' && val.ev > 0) || mKey === 'margin' || mKey === 'swing' || mKey === 'breakdown') {
+                        validCands.add(pk);
+                    }
                 }
             }
-
-            // fallback if somehow validCands is empty
-            if (validCands.size === 0) {
-                for (let i = 0; i < hLen; i++) {
-                    for (let pk in history[i].data) validCands.add(pk);
-                }
-            }
+            if (validCands.size === 0) sortedByMaxPv.slice(0, 2).forEach(pk => validCands.add(pk));
 
             let candMeta = {};
             validCands.forEach(pk => { candMeta[pk] = POLL.getCandMeta(pk); });
@@ -38241,63 +38311,261 @@ async function loadAndDrawCountyMap(mode) {
                 let turnCands = [];
                 for (let pk in data) {
                     if (!validCands.has(pk)) continue;
-                    let val = data[pk][mKey];
-                    if (val > maxY) maxY = val;
-                    if (val < minY) minY = val;
                     turnCands.push({ pk, pv: data[pk].pv, ev: data[pk].ev });
                 }
-                turnCands.sort((a, b) => b[mKey] - a[mKey]);
+                turnCands.sort((a, b) => b.pv - a.pv);
                 turnCandsCache[i] = turnCands;
             }
 
-            let range = Math.max(maxY - minY, 2);
-            let padding = range * 0.15;
+            let donutSlices = [];
+            let centerX = isLarge ? cssWidth * 0.28 : Math.min(150, cssWidth * 0.3);
+            let centerY = cssHeight / 2;
+            let outerR = Math.min(centerY - 16, isLarge ? 140 : 54);
+            let innerR = outerR * 0.55;
+            let legendX = centerX + outerR + (isLarge ? 40 : 25);
+            let legendItemH = isLarge ? 34 : 22;
+            let legendStartY = 0;
 
-            minY = Math.max(0, minY - padding);
-            maxY += padding;
-            if (mKey === 'pv' && maxY > 100) maxY = 100;
+            if (mKey === 'breakdown') {
+                let latestCands = turnCandsCache[hLen - 1] || [];
+                let totalPvSum = latestCands.reduce((acc, c) => acc + c.pv, 0) || 100;
+                let currentAngle = -Math.PI / 2;
 
-            let stepVal = mKey === 'pv'
-                ? (range <= 10 ? 2 : (range <= 30 ? 5 : 10))
-                : (range <= 20 ? 5 : (range <= 100 ? 25 : (range <= 300 ? 50 : 100)));
+                legendStartY = centerY - ((latestCands.length * legendItemH) / 2) + 8;
+
+                donutSlices = latestCands.map((c) => {
+                    let sliceAngle = (c.pv / totalPvSum) * 2 * Math.PI;
+                    let startA = currentAngle;
+                    let endA = currentAngle + sliceAngle;
+                    currentAngle = endA;
+                    return { pk: c.pk, pv: c.pv, ev: c.ev, startAngle: startA, endAngle: endA };
+                });
+            }
+
+            ctx.font = isLarge ? "bold 13px sans-serif" : "bold 11px sans-serif";
+            let maxLabelWidth = 0;
+            validCands.forEach(pk => {
+                let meta = candMeta[pk];
+                let sampleText = mKey === 'margin' ? `+99.9% ${meta.name}` : (mKey === 'swing' ? `+9.9% ${meta.name}` : meta.name);
+                let w = ctx.measureText(sampleText).width;
+                if (w > maxLabelWidth) maxLabelWidth = w;
+            });
+
+            let padT = 20, padB = 25, padL = (mKey === 'ev' || mKey === 'margin' || mKey === 'swing') ? 48 : 40;
+            let padR = Math.max(isLarge ? 120 : 85, Math.ceil(maxLabelWidth + (isLarge ? 24 : 16)));
+            let plotW = Math.max(10, cssWidth - padL - padR);
+            let plotH = Math.max(10, cssHeight - padT - padB);
+            let stepX = hLen > 1 ? plotW / (hLen - 1) : plotW;
+
+            let minY = 9999, maxY = -9999;
+            let cand1 = majorCands[0], cand2 = majorCands[1];
+
+            if (mKey === 'margin') {
+                for (let i = 0; i < hLen; i++) {
+                    let d = history[i].data;
+                    let spread = (d[cand1] ? d[cand1].pv : 0) - (d[cand2] ? d[cand2].pv : 0);
+                    if (spread > maxY) maxY = spread;
+                    if (spread < minY) minY = spread;
+                }
+                let bound = Math.max(Math.abs(maxY), Math.abs(minY), 3);
+                maxY = Math.ceil(bound + 1);
+                minY = -maxY;
+            } else if (mKey === 'swing') {
+                for (let i = 1; i < hLen; i++) {
+                    let delta = (history[i].data[cand1] ? history[i].data[cand1].pv : 0) - (history[i - 1].data[cand1] ? history[i - 1].data[cand1].pv : 0);
+                    if (delta > maxY) maxY = delta;
+                    if (delta < minY) minY = delta;
+                }
+                let bound = Math.max(Math.abs(maxY), Math.abs(minY), 1.5);
+                maxY = Math.ceil(bound * 2) / 2;
+                minY = -maxY;
+            } else if (mKey !== 'breakdown') {
+                for (let i = 0; i < hLen; i++) {
+                    let data = history[i].data;
+                    for (let pk in data) {
+                        if (!validCands.has(pk)) continue;
+                        let val = data[pk][mKey];
+                        if (val > maxY) maxY = val;
+                        if (val < minY) minY = val;
+                    }
+                }
+                let winEV = POLL.getWinEV();
+                if (mKey === 'ev' && winEV > 0) maxY = Math.max(maxY, winEV + 15);
+
+                let range = Math.max(maxY - minY, 2);
+                let padding = range * 0.12;
+                minY = Math.max(0, minY - padding);
+                maxY += padding;
+                if (mKey === 'pv' && maxY > 100) maxY = 100;
+            }
+
+            let stepVal = 5;
+            let rangeY = Math.max(maxY - minY, 2);
+            if (mKey === 'margin') stepVal = rangeY <= 10 ? 2 : (rangeY <= 25 ? 5 : 10);
+            else if (mKey === 'swing') stepVal = rangeY <= 4 ? 1 : 2;
+            else if (mKey === 'pv') stepVal = rangeY <= 10 ? 2 : (rangeY <= 30 ? 5 : 10);
+            else if (mKey === 'ev') stepVal = rangeY <= 50 ? 10 : (rangeY <= 150 ? 25 : (rangeY <= 300 ? 50 : 100));
 
             minY = Math.floor(minY / stepVal) * stepVal;
             maxY = Math.ceil(maxY / stepVal) * stepVal;
             if (minY === maxY) maxY += stepVal;
+            let yRange = Math.max(1, maxY - minY);
 
-            let padT = 20, padB = 25, padL = mKey === 'ev' ? 45 : 40, padR = isLarge ? 110 : 60;
-            let plotW = cssWidth - padL - padR, plotH = cssHeight - padT - padB;
-            let stepX = hLen > 1 ? plotW / (hLen - 1) : plotW;
-            let yRange = maxY - minY;
+            const getY = (val) => padT + plotH - ((val - minY) / yRange) * plotH;
+            const getX = (idx) => padL + idx * stepX;
 
-            let suffix = mKey === 'pv' ? "%" : "";
+            let suffix = (mKey === 'pv' || mKey === 'margin' || mKey === 'swing') ? "%" : "";
             let skipLabel = (hLen > 15 && !isLarge) ? Math.ceil(hLen / 8) : 1;
             let pointRadius = isLarge ? 5 : 3.5;
+
+            let resolvedEndLabels = [];
+            if (mKey === 'pv' || mKey === 'ev') {
+                validCands.forEach(pk => {
+                    let lastData = history[hLen - 1].data[pk];
+                    if (lastData) {
+                        resolvedEndLabels.push({
+                            name: candMeta[pk].name,
+                            color: candMeta[pk].color,
+                            x: getX(hLen - 1) + (isLarge ? 10 : 6),
+                            y: getY(lastData[mKey])
+                        });
+                    }
+                });
+
+                resolvedEndLabels.sort((a, b) => a.y - b.y);
+                let minSpacing = isLarge ? 15 : 12;
+                let minYBound = padT + 6;
+                let maxYBound = cssHeight - padB - 4;
+
+                for (let i = 1; i < resolvedEndLabels.length; i++) {
+                    if (resolvedEndLabels[i].y - resolvedEndLabels[i - 1].y < minSpacing) {
+                        resolvedEndLabels[i].y = resolvedEndLabels[i - 1].y + minSpacing;
+                    }
+                }
+                if (resolvedEndLabels.length > 0 && resolvedEndLabels[resolvedEndLabels.length - 1].y > maxYBound) {
+                    resolvedEndLabels[resolvedEndLabels.length - 1].y = maxYBound;
+                    for (let i = resolvedEndLabels.length - 2; i >= 0; i--) {
+                        if (resolvedEndLabels[i + 1].y - resolvedEndLabels[i].y < minSpacing) {
+                            resolvedEndLabels[i].y = resolvedEndLabels[i + 1].y - minSpacing;
+                        }
+                    }
+                }
+                for (let i = 0; i < resolvedEndLabels.length; i++) {
+                    resolvedEndLabels[i].y = Math.max(minYBound, Math.min(maxYBound, resolvedEndLabels[i].y));
+                }
+            }
 
             function draw(hoverIndex) {
                 ctx.clearRect(0, 0, cssWidth, cssHeight);
 
+                if (mKey === 'breakdown') {
+                    let lastPt = history[hLen - 1];
+                    let evLabel = POLL.getEvLabel();
+
+                    donutSlices.forEach((slice, idx) => {
+                        let isHovered = (idx === hoverIndex);
+                        let rOut = isHovered ? outerR + 4 : outerR;
+                        let rIn = isHovered ? innerR - 2 : innerR;
+
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, rOut, slice.startAngle, slice.endAngle);
+                        ctx.arc(centerX, centerY, rIn, slice.endAngle, slice.startAngle, true);
+                        ctx.closePath();
+                        ctx.fillStyle = candMeta[slice.pk].color;
+                        ctx.fill();
+                        ctx.lineWidth = isHovered ? 2.5 : 1.5;
+                        ctx.strokeStyle = "#fff";
+                        ctx.stroke();
+                    });
+
+                    ctx.fillStyle = "#333";
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    ctx.font = isLarge ? "bold 15px sans-serif" : "bold 11px sans-serif";
+                    ctx.fillText(lastPt.label, centerX, centerY - 6);
+                    ctx.font = isLarge ? "12px sans-serif" : "9px sans-serif";
+                    ctx.fillStyle = "#777";
+                    ctx.fillText("Share", centerX, centerY + 8);
+
+                    donutSlices.forEach((slice, idx) => {
+                        let itemY = legendStartY + idx * legendItemH;
+                        let meta = candMeta[slice.pk];
+                        let isHovered = (idx === hoverIndex);
+
+                        if (isHovered) {
+                            ctx.fillStyle = "rgba(0,0,0,0.05)";
+                            ctx.fillRect(legendX - 6, itemY - 12, cssWidth - legendX, legendItemH);
+                        }
+
+                        ctx.fillStyle = meta.color;
+                        ctx.fillRect(legendX, itemY - 9, isLarge ? 14 : 10, isLarge ? 14 : 10);
+
+                        ctx.fillStyle = isHovered ? "#000" : "#222";
+                        ctx.font = isLarge ? "bold 14px sans-serif" : "bold 11px sans-serif";
+                        ctx.textAlign = "left";
+                        ctx.fillText(meta.name, legendX + (isLarge ? 22 : 16), itemY);
+
+                        ctx.fillStyle = isHovered ? "#111" : "#555";
+                        ctx.font = isLarge ? "13px sans-serif" : "11px sans-serif";
+                        ctx.textAlign = "right";
+                        ctx.fillText(`${slice.pv.toFixed(1)}% (${slice.ev} ${evLabel})`, cssWidth - (isLarge ? 40 : 15), itemY);
+                    });
+                    return;
+                }
+
                 ctx.fillStyle = "#333";
-                ctx.font = isLarge ? "14px Arial" : "11px Arial";
+                ctx.font = isLarge ? "13px sans-serif" : "11px sans-serif";
                 ctx.textAlign = "right";
                 ctx.textBaseline = "middle";
                 ctx.lineWidth = 1;
 
                 ctx.beginPath();
                 for (let i = minY; i <= maxY; i += stepVal) {
-                    let y = padT + plotH - ((i - minY) / yRange) * plotH;
-                    ctx.fillText(i + suffix, padL - 8, y);
+                    let y = getY(i);
+                    let displayVal = ((mKey === 'margin' || mKey === 'swing') && i > 0) ? `+${i}` : `${i}`;
+                    ctx.fillText(displayVal + suffix, padL - 8, y);
                     ctx.moveTo(padL, y); ctx.lineTo(cssWidth - padR, y);
                 }
                 ctx.strokeStyle = "#e8e8e8";
                 ctx.stroke();
 
+                if (mKey === 'margin' || mKey === 'swing') {
+                    let zeroY = getY(0);
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.lineWidth = 1.5;
+                    ctx.strokeStyle = "#777";
+                    ctx.moveTo(padL, zeroY); ctx.lineTo(cssWidth - padR, zeroY);
+                    ctx.stroke();
+                    ctx.font = isLarge ? "italic 11px sans-serif" : "italic 9px sans-serif";
+                    ctx.fillStyle = "#666";
+                    ctx.textAlign = "right";
+                    ctx.fillText(mKey === 'margin' ? "TIED" : "NO CHANGE", cssWidth - padR - 6, zeroY - 6);
+                    ctx.restore();
+                }
+
+                let winEV = POLL.getWinEV();
+                if (mKey === 'ev' && winEV > 0 && winEV >= minY && winEV <= maxY) {
+                    let winY = getY(winEV);
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.setLineDash([4, 4]);
+                    ctx.strokeStyle = "rgba(180, 40, 40, 0.55)";
+                    ctx.lineWidth = 1.5;
+                    ctx.moveTo(padL, winY); ctx.lineTo(cssWidth - padR, winY);
+                    ctx.stroke();
+                    ctx.fillStyle = "rgba(180, 40, 40, 0.85)";
+                    ctx.textAlign = "right";
+                    ctx.font = isLarge ? "italic 11px sans-serif" : "italic 9px sans-serif";
+                    ctx.fillText(`${winEV} to win`, cssWidth - padR - 5, winY - 7);
+                    ctx.restore();
+                }
+
                 ctx.fillStyle = "#555";
                 ctx.textAlign = "center";
-
                 ctx.beginPath();
                 for (let i = 0; i < hLen; i++) {
-                    let x = padL + i * stepX;
+                    let x = getX(i);
                     ctx.moveTo(x, padT); ctx.lineTo(x, cssHeight - padB);
                     if (i % skipLabel === 0 || i === hLen - 1) {
                         ctx.fillText(history[i].label, x, cssHeight - padB + 14);
@@ -38307,9 +38575,9 @@ async function loadAndDrawCountyMap(mode) {
                 ctx.stroke();
 
                 if (hoverIndex !== -1) {
-                    let hx = padL + hoverIndex * stepX;
+                    let hx = getX(hoverIndex);
                     ctx.fillStyle = "rgba(0,0,0,0.04)";
-                    ctx.fillRect(hx - stepX/2, padT, stepX, plotH);
+                    ctx.fillRect(hx - stepX / 2, padT, stepX, plotH);
                     ctx.strokeStyle = "rgba(0,0,0,0.3)";
                     ctx.lineWidth = 1;
                     ctx.setLineDash([4, 4]);
@@ -38317,71 +38585,170 @@ async function loadAndDrawCountyMap(mode) {
                     ctx.setLineDash([]);
                 }
 
-                validCands.forEach(pk => {
-                    let meta = candMeta[pk];
-                    ctx.beginPath();
-                    ctx.strokeStyle = meta.color;
-                    ctx.lineWidth = isLarge ? 4 : 2.5;
-                    ctx.lineJoin = "round";
-                    ctx.lineCap = "round";
+                if (mKey === 'margin') {
+                    let c1Meta = candMeta[cand1] || { color: '#0066cc', name: 'Leader' };
+                    let c2Meta = candMeta[cand2] || { color: '#cc0000', name: 'Opponent' };
 
-                    let hasStarted = false;
-                    for (let i = 0; i < hLen; i++) {
-                        let cData = history[i].data[pk];
-                        if (!cData) continue;
-                        let x = padL + i * stepX;
-                        let y = padT + plotH - ((cData[mKey] - minY) / yRange) * plotH;
+                    for (let i = 0; i < hLen - 1; i++) {
+                        let d1 = history[i].data, d2 = history[i + 1].data;
+                        let s1 = (d1[cand1] ? d1[cand1].pv : 0) - (d1[cand2] ? d1[cand2].pv : 0);
+                        let s2 = (d2[cand1] ? d2[cand1].pv : 0) - (d2[cand2] ? d2[cand2].pv : 0);
 
-                        if (!hasStarted) { ctx.moveTo(x, y); hasStarted = true; }
-                        else ctx.lineTo(x, y);
+                        ctx.beginPath();
+                        ctx.lineWidth = isLarge ? 3.5 : 2.5;
+                        ctx.strokeStyle = s2 >= 0 ? c1Meta.color : c2Meta.color;
+                        ctx.moveTo(getX(i), getY(s1));
+                        ctx.lineTo(getX(i + 1), getY(s2));
+                        ctx.stroke();
                     }
 
-                    ctx.shadowColor = "rgba(0,0,0,0.25)";
-                    ctx.shadowBlur = isLarge ? 5 : 3;
-                    ctx.shadowOffsetY = isLarge ? 2 : 1;
-                    ctx.stroke();
-                    ctx.shadowColor = "transparent";
-
-                    ctx.fillStyle = meta.color;
                     for (let i = 0; i < hLen; i++) {
-                        let cData = history[i].data[pk];
-                        if (!cData) continue;
-                        let x = padL + i * stepX;
-                        let y = padT + plotH - ((cData[mKey] - minY) / yRange) * plotH;
+                        let d = history[i].data;
+                        let spread = (d[cand1] ? d[cand1].pv : 0) - (d[cand2] ? d[cand2].pv : 0);
+                        let x = getX(i), y = getY(spread);
+                        let pointColor = spread >= 0 ? c1Meta.color : c2Meta.color;
 
                         ctx.beginPath();
                         ctx.arc(x, y, pointRadius + (i === hoverIndex ? 2 : 0), 0, 2 * Math.PI);
+                        ctx.fillStyle = pointColor;
                         ctx.fill();
                         ctx.strokeStyle = "#fff";
                         ctx.lineWidth = isLarge ? 1.5 : 1;
                         ctx.stroke();
 
                         if (i === hLen - 1) {
-                            let lblX = x + (isLarge ? 10 : 6);
+                            let leaderName = spread >= 0 ? c1Meta.name : c2Meta.name;
                             ctx.textAlign = "left";
                             ctx.font = isLarge ? "bold 13px sans-serif" : "bold 11px sans-serif";
-                            ctx.lineWidth = isLarge ? 4 : 3;
-                            ctx.strokeStyle = "rgba(255,255,255,0.85)";
-                            ctx.strokeText(meta.name, lblX, y);
-                            ctx.fillText(meta.name, lblX, y);
+                            ctx.fillStyle = pointColor;
+                            ctx.fillText(`+${Math.abs(spread).toFixed(1)}% ${leaderName}`, x + (isLarge ? 10 : 6), y + 3);
                         }
                     }
-                });
+                } 
+                else if (mKey === 'swing') {
+                    let zeroY = getY(0);
+
+                    for (let i = 1; i < hLen; i++) {
+                        let delta = (history[i].data[cand1] ? history[i].data[cand1].pv : 0) - (history[i - 1].data[cand1] ? history[i - 1].data[cand1].pv : 0);
+                        let x = getX(i), y = getY(delta);
+                        let barW = Math.max(6, stepX * 0.4);
+                        let col = delta >= 0 ? "#27ae60" : "#e74c3c";
+
+                        ctx.fillStyle = col;
+                        ctx.fillRect(x - barW / 2, Math.min(y, zeroY), barW, Math.abs(y - zeroY));
+
+                        ctx.beginPath();
+                        ctx.arc(x, y, pointRadius - 0.5, 0, 2 * Math.PI);
+                        ctx.fill();
+
+                        if (i === hLen - 1) {
+                            ctx.textAlign = "left";
+                            ctx.font = isLarge ? "bold 13px sans-serif" : "bold 11px sans-serif";
+                            ctx.fillStyle = col;
+                            ctx.fillText(`${delta >= 0 ? '+' : ''}${delta.toFixed(1)}% Δ`, x + (isLarge ? 10 : 6), y + 3);
+                        }
+                    }
+                } 
+                else {
+                    validCands.forEach(pk => {
+                        let meta = candMeta[pk];
+                        ctx.beginPath();
+                        ctx.strokeStyle = meta.color;
+                        ctx.lineWidth = isLarge ? 4 : 2.5;
+                        ctx.lineJoin = "round";
+                        ctx.lineCap = "round";
+
+                        let hasStarted = false;
+                        for (let i = 0; i < hLen; i++) {
+                            let cData = history[i].data[pk];
+                            if (!cData) continue;
+                            let x = getX(i), y = getY(cData[mKey]);
+
+                            if (!hasStarted) { ctx.moveTo(x, y); hasStarted = true; }
+                            else ctx.lineTo(x, y);
+                        }
+
+                        ctx.shadowColor = "rgba(0,0,0,0.18)";
+                        ctx.shadowBlur = isLarge ? 4 : 2.5;
+                        ctx.shadowOffsetY = isLarge ? 1.5 : 1;
+                        ctx.stroke();
+                        ctx.shadowColor = "transparent";
+
+                        ctx.fillStyle = meta.color;
+                        for (let i = 0; i < hLen; i++) {
+                            let cData = history[i].data[pk];
+                            if (!cData) continue;
+                            let x = getX(i), y = getY(cData[mKey]);
+
+                            ctx.beginPath();
+                            ctx.arc(x, y, pointRadius + (i === hoverIndex ? 2 : 0), 0, 2 * Math.PI);
+                            ctx.fill();
+                            ctx.strokeStyle = "#fff";
+                            ctx.lineWidth = isLarge ? 1.5 : 1;
+                            ctx.stroke();
+                        }
+                    });
+
+                    for (let i = 0; i < resolvedEndLabels.length; i++) {
+                        let lbl = resolvedEndLabels[i];
+                        ctx.textAlign = "left";
+                        ctx.font = isLarge ? "bold 13px sans-serif" : "bold 11px sans-serif";
+                        ctx.lineWidth = isLarge ? 4 : 3;
+                        ctx.strokeStyle = "rgba(255,255,255,0.9)";
+                        ctx.strokeText(lbl.name, lbl.x, lbl.y + 3);
+                        ctx.fillStyle = lbl.color;
+                        ctx.fillText(lbl.name, lbl.x, lbl.y + 3);
+                    }
+                }
             }
 
             let lastHoverIdx = -1;
             let hoverFrame = null;
             draw(-1);
 
-            canvas.onmousemove = function(e) {
+            const handleHover = (clientX, clientY) => {
                 let rect = canvas.getBoundingClientRect();
-                let scaleX = canvas.width / rect.width;
-                let mouseX = (e.clientX - rect.left) * scaleX / dpr;
-                let mouseY = (e.clientY - rect.top) * scaleX / dpr;
+                let scaleX = canvas.width / (rect.width * dpr);
+                let mouseX = (clientX - rect.left) * scaleX;
+                let mouseY = (clientY - rect.top) * scaleX;
 
-                let hoverIdx = Math.round((mouseX - padL) / stepX);
-                if (hoverIdx < 0) hoverIdx = 0;
-                else if (hoverIdx >= hLen) hoverIdx = hLen - 1;
+                let hoverIdx = -1;
+
+                if (mKey === 'breakdown') {
+                    let dx = mouseX - centerX;
+                    let dy = mouseY - centerY;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist >= innerR - 5 && dist <= outerR + 10) {
+                        let angle = Math.atan2(dy, dx);
+                        if (angle < -Math.PI / 2) angle += 2 * Math.PI;
+
+                        for (let i = 0; i < donutSlices.length; i++) {
+                            let s = donutSlices[i];
+                            let start = s.startAngle;
+                            let end = s.endAngle;
+                            if (start < -Math.PI / 2) start += 2 * Math.PI;
+                            if (end < -Math.PI / 2) end += 2 * Math.PI;
+
+                            if (angle >= start && angle <= end) {
+                                hoverIdx = i;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (hoverIdx === -1 && mouseX >= legendX - 10 && mouseX <= cssWidth) {
+                        let relY = mouseY - (legendStartY - 10);
+                        if (relY >= 0) {
+                            let idx = Math.floor(relY / legendItemH);
+                            if (idx >= 0 && idx < donutSlices.length) hoverIdx = idx;
+                        }
+                    }
+                } else {
+                    hoverIdx = Math.round((mouseX - padL) / stepX);
+                    if (hoverIdx < 0) hoverIdx = 0;
+                    else if (hoverIdx >= hLen) hoverIdx = hLen - 1;
+                }
 
                 if (hoverIdx !== lastHoverIdx) {
                     lastHoverIdx = hoverIdx;
@@ -38389,18 +38756,51 @@ async function loadAndDrawCountyMap(mode) {
 
                     hoverFrame = requestAnimationFrame(() => {
                         draw(hoverIdx);
-                        if (tooltip) {
-                            let pt = history[hoverIdx];
-                            let html = `<strong style="font-size:1.15em; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:4px; display:block; margin-bottom:6px;">${pt.label}</strong>`;
+                        if (!tooltip) return;
 
-                            let turnCands = turnCandsCache[hoverIdx];
+                        if (mKey === 'breakdown') {
+                            if (hoverIdx >= 0 && hoverIdx < donutSlices.length) {
+                                let s = donutSlices[hoverIdx];
+                                let meta = candMeta[s.pk];
+                                let evLabel = POLL.getEvLabel();
+                                tooltip.innerHTML = `
+                                    <div style="font-weight:bold; color:${meta.color}; font-size:1.1em; margin-bottom:4px;">${meta.name}</div>
+                                    <div>Popular vote: <b>${s.pv.toFixed(1)}%</b></div>
+                                    <div style="color:#ccc; font-size:0.9em; margin-top:2px;">${evLabel}: <b>${s.ev}</b></div>
+                                `;
+                                tooltip.style.display = "block";
+                            } else {
+                                tooltip.style.display = "none";
+                            }
+                        } else {
+                            let pt = history[hoverIdx];
+                            let evLabel = POLL.getEvLabel();
+                            
+                            let html = `
+                                <div style="border-bottom:1px solid rgba(255,255,255,0.25); padding-bottom:4px; margin-bottom:6px;">
+                                    <strong style="font-size:1.1em; color:#fff;">${pt.label}</strong>
+                                    ${(isLarge && pt.headline) ? `<div style="font-size:0.85em; color:#ccc; margin-top:2px; font-style:italic; max-width:280px; white-space:normal;">${pt.headline}</div>` : ''}
+                                </div>
+                            `;
+
+                            let turnCands = turnCandsCache[hoverIdx] || [];
+                            if (mKey === 'margin' && cand1 && cand2) {
+                                let d = pt.data;
+                                let spread = (d[cand1] ? d[cand1].pv : 0) - (d[cand2] ? d[cand2].pv : 0);
+                                let leader = spread >= 0 ? candMeta[cand1] : candMeta[cand2];
+                                html += `<div style="font-size:1.05em; margin:4px 0;">Lead: <b style="color:${leader.color};">${leader.name} +${Math.abs(spread).toFixed(1)}%</b></div>`;
+                            } else if (mKey === 'swing' && hoverIdx > 0 && cand1) {
+                                let delta = (history[hoverIdx].data[cand1] ? history[hoverIdx].data[cand1].pv : 0) - (history[hoverIdx - 1].data[cand1] ? history[hoverIdx - 1].data[cand1].pv : 0);
+                                html += `<div style="font-size:1.05em; margin:4px 0;">Turn shift: <b style="color:${delta >= 0 ? '#27ae60' : '#e74c3c'};">${delta >= 0 ? '+' : ''}${delta.toFixed(2)}%</b></div>`;
+                            }
+
                             for (let i = 0; i < turnCands.length; i++) {
                                 let p = turnCands[i];
                                 let meta = candMeta[p.pk];
-                                let mainText = mKey === 'pv' ? p.pv.toFixed(1) + "%" : p.ev + " EV";
-                                let subText = mKey === 'pv' ? p.ev + " EV" : p.pv.toFixed(1) + "%";
+                                let mainText = mKey === 'ev' ? `${p.ev} ${evLabel}` : `${p.pv.toFixed(1)}%`;
+                                let subText = mKey === 'ev' ? `${p.pv.toFixed(1)}%` : `${p.ev} ${evLabel}`;
                                 html += `<div style="margin:3px 0; display:flex; align-items:center;">
-                                    <span style="color:${meta.color}; font-size:1.4em; line-height:0.8; margin-right:6px;">■</span>
+                                    <span style="color:${meta.color}; font-size:1.3em; line-height:0.8; margin-right:6px;">■</span>
                                     <b style="flex-grow:1; margin-right:12px;">${meta.name}</b>
                                     <span>${mainText} <span style="color:#aaa; font-size:0.85em;">(${subText})</span></span>
                                 </div>`;
@@ -38412,20 +38812,22 @@ async function loadAndDrawCountyMap(mode) {
                 }
 
                 if (tooltip && tooltip.style.display === "block") {
-                    let actualMouseX = e.clientX - rect.left;
-                    let actualMouseY = e.clientY - rect.top;
+                    let actualMouseX = clientX - rect.left;
+                    let actualMouseY = clientY - rect.top;
 
                     let ttX = actualMouseX + 15;
                     let ttY = actualMouseY + 15;
 
                     if (ttX + tooltip.offsetWidth > rect.width) ttX = actualMouseX - tooltip.offsetWidth - 15;
                     if (ttY + tooltip.offsetHeight > rect.height) ttY = actualMouseY - tooltip.offsetHeight - 15;
+                    if (ttX < 0) ttX = 5;
+                    if (ttY < 0) ttY = 5;
 
                     tooltip.style.transform = `translate(${ttX}px, ${ttY}px)`;
                 }
             };
 
-            canvas.onmouseleave = function() {
+            const handleLeave = () => {
                 if (lastHoverIdx !== -1) {
                     lastHoverIdx = -1;
                     if (hoverFrame) cancelAnimationFrame(hoverFrame);
@@ -38433,6 +38835,20 @@ async function loadAndDrawCountyMap(mode) {
                     if (tooltip) tooltip.style.display = "none";
                 }
             };
+
+            canvas.onmousemove = (e) => handleHover(e.clientX, e.clientY);
+            canvas.onmouseleave = handleLeave;
+
+            canvas.ontouchstart = (e) => {
+                if (e.touches.length > 0) handleHover(e.touches[0].clientX, e.touches[0].clientY);
+            };
+            canvas.ontouchmove = (e) => {
+                if (e.touches.length > 0) {
+                    handleHover(e.touches[0].clientX, e.touches[0].clientY);
+                    e.preventDefault();
+                }
+            };
+            canvas.ontouchend = handleLeave;
 
             if (!isLarge) canvas.onclick = POLL.openLargeModal;
         },
@@ -38446,25 +38862,30 @@ async function loadAndDrawCountyMap(mode) {
             let container = document.createElement("div");
             container.style.cssText = "position:relative; width:95%; max-width:1100px; background-color:#fcfcfc; padding:25px; border-radius:10px; box-shadow:0 10px 40px rgba(0,0,0,0.6); transform:scale(0.95); transition:transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);";
 
+            const closeModal = () => {
+                overlay.style.opacity = "0";
+                container.style.transform = "scale(0.95)";
+                window.removeEventListener("keydown", escListener);
+                setTimeout(() => { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 200);
+            };
+
+            const escListener = (e) => { if (e.key === "Escape") closeModal(); };
+            window.addEventListener("keydown", escListener);
+
             let closeBtn = document.createElement("button");
             closeBtn.innerHTML = "&times;";
             closeBtn.style.cssText = "position:absolute; top:12px; right:15px; cursor:pointer; width:30px; height:30px; background:#e74c3c; color:#fff; border:none; border-radius:50%; font-size:20px; font-weight:bold; line-height:30px; padding:0; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.2);";
-            closeBtn.onclick = () => {
-                overlay.style.opacity = "0";
-                container.style.transform = "scale(0.95)";
-                setTimeout(() => document.body.removeChild(overlay), 200);
-            };
+            closeBtn.onclick = closeModal;
 
             container.innerHTML = `
-                <h2 style="margin:0 0 15px 0; color:#222; border-bottom:2px solid #ddd; padding-bottom:10px; font-family:sans-serif;">Campaign Polling History</h2>
-                <div style="text-align:center; margin-bottom:15px; font-family:sans-serif; font-size:15px; color:#333;">
-                    <label style="margin-right:25px; cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetricLarge" value="pv" ${POLL.metric === 'pv' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('pv')"> Popular Vote %</label>
-                    <label style="margin-right:35px; cursor:pointer; font-weight:bold;"><input type="radio" name="pollMetricLarge" value="ev" ${POLL.metric === 'ev' ? 'checked' : ''} onchange="window.pollgraph.switchMetric('ev')"> Electoral Votes</label>
-                    <label style="cursor:pointer; font-weight:normal; font-size:14px; color:#555;"><input type="checkbox" id="pollThirdPartyLarge" ${POLL.showThirdParties ? 'checked' : ''} onchange="window.pollgraph.toggleThirdParties(this.checked)"> Show Third Parties</label>
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #ddd; padding-bottom:10px; margin-bottom:15px;">
+                    <h2 style="margin:0; color:#222; font-family:sans-serif;">Campaign polling & trend analysis</h2>
+                    <button onclick="window.pollgraph.exportImage('largePollGraph')" style="cursor:pointer; background:#f0f0f0; border:1px solid #ccc; padding:6px 12px; border-radius:4px; font-size:12px; font-weight:bold; margin-right:35px;">Save as image</button>
                 </div>
+                ${POLL.getControlsHtml('Large')}
                 <div style="position:relative; width:100%;">
                     <canvas id="largePollGraph" style="width:100%; max-width:1050px; height:460px; display:block; margin:0 auto; cursor:crosshair; background:#fff; border-radius:8px; border:1px solid #ddd;"></canvas>
-                    <div id="largePollTooltip" style="display:none; position:absolute; background:rgba(20,20,20,0.95); color:#fff; padding:12px; border-radius:8px; font-size:15px; font-family:sans-serif; pointer-events:none; box-shadow:0 5px 15px rgba(0,0,0,0.5); white-space:nowrap; left:0; top:0; transform:translate(0px, 0px); transition: transform 0.05s linear; z-index:100;"></div>
+                    <div id="largePollTooltip" style="display:none; position:absolute; background:rgba(20,20,20,0.95); color:#fff; padding:12px; border-radius:8px; font-size:14px; font-family:sans-serif; pointer-events:none; box-shadow:0 5px 15px rgba(0,0,0,0.5); white-space:nowrap; left:0; top:0; transform:translate(0px, 0px); z-index:100;"></div>
                 </div>
             `;
 
@@ -38479,7 +38900,7 @@ async function loadAndDrawCountyMap(mode) {
 
             setTimeout(() => POLL.render("largePollGraph", "largePollTooltip", 1050, 460, true), 50);
 
-            overlay.onclick = (e) => { if (e.target === overlay) closeBtn.click(); };
+            overlay.onclick = (e) => { if (e.target === overlay) closeModal(); };
         }
     };
 
