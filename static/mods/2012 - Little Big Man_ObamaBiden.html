@@ -21803,7 +21803,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 1,
             "candidate": 16,
-            "answer_feedback": "Some may find it courageous, but this is very reminiscent of what you said in 2008. Within hours, {{opLast}}‘s team cuts an ad with ominous music playing over images of the 9/11 attacks and insinuating you’re a terrorist, calling you Mr. Hussein or something; you don’t really pay attention to it, but you do get worried when polling from your team indicates your poll numbers in swing states have dropped overnight. "
+            "answer_feedback": "Some may find it courageous, but this is very reminiscent of what you said in 2008. Within hours, {{opLast}}’s team cuts an ad with ominous music playing over images of the 9/11 attacks and insinuating you’re a terrorist, calling you Mr. Hussein or something; you don’t really pay attention to it, but you do get worried when polling from your team indicates your poll numbers in swing states have dropped overnight. "
         }
     },
     {
@@ -25639,6 +25639,7 @@ window.generatedTimelineCache = window.generatedTimelineCache || {};
 const TIMELINE_ASSETS = {
   colors: {
     "Democratic": "#3333FF",
+    "Democratic-Labor": "#BA1B1D",
     "Republican": "#E81B23",
     "Reform": "#800080",
     "Libertarian": "#fed105",
@@ -25646,7 +25647,8 @@ const TIMELINE_ASSETS = {
     "Constitution": "#a356de",
     "Independent": "#DCDCDC",
     "Unity": "#FFD700",
-    "No Labels": "#775eb2"
+    "No Labels": "#775eb2",
+    "Ye Party": "#933953"
   },
   candidates: {
     // Democrats
@@ -25683,6 +25685,47 @@ const TIMELINE_ASSETS = {
     "Pete Buttigieg": { party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/9/91/Pete_Buttigieg_2020_%282%29.jpg" },
     "Gretchen Whitmer": { party: "Democratic", img: "https://cdn.britannica.com/23/237023-050-4DE1EFA0/Michigan-governor-Gretchen-Whitmer-2022.jpg" },
     "Roy Cooper": { party: "Democratic", img: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Roy_Cooper_at_Governor%27s_open_house_event_%28cropped%29.jpg" },
+    "Josh Shapiro": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Josh%20Shaprio%201%20term.png" },
+    "Andy Beshear": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Andy%20Beshear%201%20Term.png" },
+    "JB Pritzker": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/JB%20Pritzker%202024.png" },
+    "Wes Moore": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Wes%20Moore%202024%201%20term.png" },
+    "Raphael Warnock": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Raph%20Warnock%202024%201%20term.png" },
+    "Tim Walz": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Tim%20Walz%202024%201%20term.png" },
+    "Stacey Abrams": { party: "Democratic", img: "https://file.garden/aOp8cCiQ5ho9r5b1/1996%3A%20Hope/Stacey%20Abrams%20Term.png" },
+    "Ro Khanna": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Rohit%20Khanna%202024.png" },
+    "Jamie Raskin": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Jamie%20Raskin%202024%201%20term.png" },
+    "Katie Porter": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Katie%20Porter%202024%201%20term.png" },
+    "Hakeem Jeffries": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Hakeem%20Jeffries%202024%201%20term.png" },
+    "Jared Polis": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Jared%20Polis%202024.png" },
+    "Phil Murphy": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Phil%20Murphy%202024%201%20term.png" },
+    "Chris Murphy": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Chris%20Murphy%202024%201%20term.png" },
+    "Jon Ossoff": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Jon%20Ossoff%202024%201%20term.png" },
+    "Gina Raimondo": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Gina%20Raimondo%202024.png" },
+    "Doug Jones": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Doug%20Jones%202024%201%20term.png" },
+    "Mark Kelly": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Mark%20Kelly%202024%201%20term.png" },
+    "Kirsten Gillibrand": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Kirsten%20Gillibrand%202020%201%20term.png" },
+    "Terry McAuliffe": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Terry%20McAuliffe%202024%201%20term.png" },
+    "Tammy Duckworth": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Tammy%20Duckworth%202024%201%20term.png" },
+    "Dean Phillips": { party: "Democratic", img: "https://i.postimg.cc/j2BgQykk/Dean-Phillips-1-Term.png" },
+    "Martin O'Malley": { party: "Democratic", img: "https://file.garden/aOp8cCiQ5ho9r5b1/1996%3A%20Hope/Martin%20O'Malley%201%20Term.png" },
+    "Michael Bloomberg": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Michael%20Bloomberg%202024.png" },
+    "Andrew Cuomo": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Andrew%20Cuomo%202016%202%20terms%20(1).png" },
+    "Jerry Brown": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Jerry%20Brown%202016%202%20terms.png" },
+    "Deval Patrick": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Deval%20Patrick%202020%202%20terms.png" },
+    "John Delaney": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/John%20Kevin%20Delaney%202020%202%20terms.png" },
+    "Tom Steyer": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Tom%20Steyer%202024%201%20term.png" },
+    "Deb Haaland": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Deb%20Haaland%202024%201%20term.png" },
+    "Xavier Becerra": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Xavier%20Becerra%20%202024%201%20term%20v2.png" },
+    "Abigail Spanberger": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Abigail%20Spanberger%202024%201%20term.png" },
+    "Elissa Slotkin": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Elissa%20Slotkin%202024%201%20term.png" },
+    "Eric Adams": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Eric%20Adams%202024%201%20term.png" },
+    "Bob Casey Jr.": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Bob%20Casey%20Jr.%202012%20takes%20over%20after%20Kwame.png" },
+    "Tom Udall": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Tom%20Udall%20takes%20over%20after%20Debbie%20Wasserman%20Schultz%20impeachment.png" },
+    "Steve Beshear": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Steve%20Beshear%202012%202%20terms.png" },
+    "Ed Markey": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Edward%20John%20Markey%202024%201%20term.png" },
+    "Colin Allred": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Colin%20Allred%202024%201%20term.png" },
+    "Kathy Hochul": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Kathy%20Hochul%202024%201%20term.png" },
+    "Keith Ellison": { party: "Democratic", img: "https://file.garden/aNtjn2887DiA_8HP/Keith%20Ellison%202024%201%20term.png" },
 
     // Republicans
     "Mitt Romney": { party: "Republican", img: "https://platform.vox.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/9196729/mitt.jpg?quality=90&strip=all&crop=16.66015625,0,66.6796875,100" },
@@ -25713,32 +25756,62 @@ const TIMELINE_ASSETS = {
     "JD Vance": { party: "Republican", img: "https://m.media-amazon.com/images/M/MV5BMzgzNTY5MDUtNDg0Zi00MmMxLWE5YjItM2U0OGRjZDFlNTBkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" },
     "Tim Scott": { party: "Republican", img: "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Tim_Scott.jpeg" },
     "Kristi Noem": { party: "Republican", img: "https://sdaho.org/wp-content/uploads/2019/01/gov-noem-scaled-e1638983117849.jpg?w=640" },
+    "Glenn Youngkin": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Glenn%20Youngkin%201%20term%202020.png" },
+    "Brian Kemp": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Brian%20Porter%20Kemp%202024%201%20term%20(1).png" },
+    "Doug Burgum": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Doug%20J%20Burgum%20Term.png" },
+    "Greg Abbott": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Greg%20Abbott.%202024%201%20term.png" },
+    "Vivek Ramaswamy": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Vivek%20Ganapathy%20Ramaswamy%202024%201%20term.png" },
+    "Tom Cotton": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Tom%20Cotton%202024%201%20term%20(v2).png" },
+    "Rick Scott": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Rick%20Scott%202024%201%20term.png" },
+    "Chris Sununu": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Chris%20Sununu%202024%201%20term.png" },
+    "Todd Young": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Todd%20Young%202024%201%20term.png" },
+    "Kim Reynolds": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Kim%20Reynolds%202024%201%20term.png" },
+    "Joni Ernst": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Joni%20Ernst%202024%201%20term.png" },
+    "John Thune": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/John%20Thune%202012%201%20term.png" },
+    "John Kasich": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/John%20Kasich%202020%202%20terms.png" },
+    "Sarah Huckabee Sanders": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Sarah%20Elizabeth%20Huckabee%20Sanders%202024%201%20term.png" },
+    "Tom Emmer": { party: "Republican", img: "https://file.garden/aOp8cCiQ5ho9r5b1/1996%3A%20Hope/Tom%20Emmer%20Finishes%20Adams%20Term.png" },
+    "Larry Hogan": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Larry%20Hogan%202024.png" },
+    "Phil Scott": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Phil%20Scott%202024%201%20term.png" },
+    "Jim Justice": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Jim%20Justice%202024%201%20term.png" },
+    "Bill Schuette": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Bill%20Schuette%202020%202%20terms.png" },
+    "Rick Snyder": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Rick%20Synder%202020%201%20term.png" },
+    "Bobby Jindal": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Piyush%20'Bobby'%20Jindal%202016%201%20term.png" },
+    "Scott Walker": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Scott%20Kevin%20Walker%202016%201%20term.png" },
+    "Haley Barbour": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Haley%20Barbour%202012%202%20terms.png" },
+    "Lisa Murkowski": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Lisa%20Murkowski%202012%201%20term.png" },
+    "Lindsey Graham": { party: "Republican", img: "https://file.garden/aNtjn2887DiA_8HP/Lindsey%20Graham%202012%201%20term.png" },
 
-    // Third parties
+    // Third parties & independents
     "Jesse Ventura": { party: "Reform", img: "https://npr.brightspotcdn.com/dims4/default/3db886b/2147483647/strip/true/crop/252x200+0+0/resize/880x698!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwrkf%2Ffiles%2F201310%2Fventura.png" },
-    "Dwayne Johnson": { party: "Independent", img: "https://www.hollywoodreporter.com/wp-content/uploads/2013/10/dwayne_johnson_headshot_a_p.jpg" },
     "Andrew Yang": { party: "Reform", img: "https://media.cnn.com/api/v1/images/stellar/prod/190801064949-andrew-yang-newday-08012019.jpg?q=w_1920,h_1080,x_0,y_0,c_fill" },
     "Clint Eastwood": { party: "Libertarian", img: "https://globalnews.ca/wp-content/uploads/2014/06/ceastwood.jpg?quality=65&strip=all" },
     "Roseanne Barr": { party: "Green", img: "https://upload.wikimedia.org/wikipedia/commons/b/b3/Roseanne_Barr_2010.jpg" },
     "Jill Stein": { party: "Green", img: "https://www.democracynow.org/images/story/33/21733/splash/Jill_Stein.jpg" },
+    "Robert F. Kennedy Jr.": { party: "Reform", img: "https://file.garden/aOp8cCiQ5ho9r5b1/1996%3A%20Hope/Robert%20F.%20Kennedy%20Jr.%20Reform%20Term.png" },
     "Gary Johnson": { party: "Libertarian", img: "https://cdn.britannica.com/06/190706-050-7F1E3B2F/Gary-Johnson-2011.jpg" },
     "Virgil Goode": { party: "Constitution", img: "https://upload.wikimedia.org/wikipedia/commons/2/28/Virgil_Goode_speaking.jpg" },
     "Jon Voight": { party: "Independent", img: "https://www.hollywoodreporter.com/wp-content/uploads/2014/07/jon_voight_-_p_-_2014.jpg.jpg" },
     "Cynthia Nixon": { party: "Green", img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Cynthia_Nixon_at_the_2009_Tribeca_Film_Festival.jpg" },
     "Susan Sarandon": { party: "Green", img: "https://caras.com.br/wp-content/uploads/legacy/2014/12/12/img-649145-susan-sarandon20141212151418406132.jpg" },
     "Soleil Moon Frye": { party: "Green", img: "https://static1.purepeople.com/articles/0/15/09/60/@/1655328-soleil-moon-frye-a-los-angeles-le-7-580x0-2.jpg" },
-    "Jimmy Carter": { party: "Unity", img: "https://cdn2.picryl.com/photo/2011/02/15/jimmy-carter-at-the-lbj-library-cropped-725c53-1024.jpg" },
-    "Jimmy Fallon": { party: "Independent", img: "https://imageio.forbes.com/specials-images/imageserve/a5c3c6cf3f6284d23b696327a2f3232b/0x0.jpg?format=jpg&height=1200&width=400&fit=bounds" },
-    "Kanye West": { party: "Independent", img: "https://i.dawn.com/primary/2013/06/51b720dabae39.jpeg" },
-    "David Letterman": { party: "Independent", img: "https://variety.com/wp-content/uploads/2014/04/david-letterman.jpg?w=681&h=454&crop=1" },
+    "Adam Kinzinger": { party: "Unity", img: "https://i.postimg.cc/D0BjpBMh/Adam-Kinzinger-2020.png" },
+    "Janet Yellen": { party: "Independent", img: "https://file.garden/aNtjn2887DiA_8HP/Janet%20Yellen%202012%202%20terms.png" },
     "Mark Cuban": { party: "Independent", img: "https://cdn.britannica.com/50/232950-050-EC8D9449/American-entrepreneur-Mark-Cuban-2013.jpg" },
+    "Dwayne Johnson": { party: "Independent", img: "https://file.garden/aNtjn2887DiA_8HP/Dwayne%20The%20Rock%20Johnson%20Term.png" },
+    "Jimmy Carter": { party: "Unity", img: "https://cdn2.picryl.com/photo/2011/02/15/jimmy-carter-at-the-lbj-library-cropped-725c53-1024.jpg" },
+    "Kanye West": { party: "Ye Party", img: "https://i.dawn.com/primary/2013/06/51b720dabae39.jpeg" },
+    "Jimmy Fallon": { party: "Democratic-Labor", img: "https://imageio.forbes.com/specials-images/imageserve/a5c3c6cf3f6284d23b696327a2f3232b/0x0.jpg?format=jpg&height=1200&width=400&fit=bounds" },
+    "David Letterman": { party: "Independent", img: "https://variety.com/wp-content/uploads/2014/04/david-letterman.jpg?w=681&h=454&crop=1" },
 
     // Third party VPs
     "Alex Jones": { party: "Reform", img: "https://www.texasstandard.org/wp-content/uploads/2017/04/alex-jones.jpg" },
     "Howard Stern": { party: "Reform", img: "https://hips.hearstapps.com/hmg-prod/images/howard-stern-with-billy-joel-on-siriusxm-howard-stern-on-news-photo-1757344438.pjpeg?crop=0.325xw:0.487xh;0.138xw,0.265xh&resize=640:*" },
     "Penn Jillette": { party: "Libertarian", img: "https://content.api.news/v3/images/bin/a5191b7dba2db909d01273fbf555c2a7" },
     "Bill Weld": { party: "Libertarian", img: "https://www.bostonherald.com/wp-content/uploads/migration/2015/01/08/091614weldpw003.jpg?w=535" },
-    "Elon Musk": { party: "No Labels", img: "https://assets.ganeshaspeaks.com/wp-content/uploads/2017/04/elon-musk-2017-592.webp" }
+    "Elon Musk": { party: "No Labels", img: "https://assets.ganeshaspeaks.com/wp-content/uploads/2017/04/elon-musk-2017-592.webp" },
+    "Gary Hart": { party: "Unity", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Gary_Hart_1995_%281%29.jpg/250px-Gary_Hart_1995_%281%29.jpg" },
+    "Harmony Korine": { party: "Green", img: "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/harmony_korine.jpeg" }
   }
 };
 
@@ -25943,14 +26016,15 @@ function getRightThirdPartyVP(nominee, lib, con, usedVPs = new Set()) {
 
 function getLeftThirdPartyVP(nominee, lib, con, usedVPs = new Set()) {
   const fallback = {
-    "Jill Stein": "Soleil Moon Frye",
-    "Susan Sarandon": "Cynthia Nixon",
-    "Cynthia Nixon": "Susan Sarandon",
-    "Roseanne Barr": "Jill Stein",
-    "Soleil Moon Frye": "Jill Stein"
+    "Jill Stein": ["Soleil Moon Frye", "Cynthia Nixon", "Susan Sarandon", "Harmony Korine"],
+    "Susan Sarandon": ["Cynthia Nixon", "Jill Stein", "Nina Turner", "Harmony Korine"],
+    "Cynthia Nixon": ["Susan Sarandon", "Jill Stein", "Harmony Korine"],
+    "Roseanne Barr": ["Jill Stein", "Soleil Moon Frye", "Harmony Korine"],
+    "Soleil Moon Frye": ["Harmony Korine", "Jill Stein", "Susan Sarandon"]
   };
-  const choice = fallback[nominee] || "Jill Stein";
-  return usedVPs.has(choice) || choice === nominee ? "Jill Stein" : choice;
+  const choices = fallback[nominee] || ["Jill Stein", "Nina Turner", "Harmony Korine"];
+  const eligible = choices.filter(vp => vp !== nominee && !usedVPs.has(vp));
+  return eligible.length > 0 ? eligible[0] : (choices[0] || "Jill Stein");
 }
 
 // timeline generator
@@ -26034,7 +26108,7 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
     vp12 = (typeof getRepublicanVP === 'function') ? getRepublicanVP(winner12, lib, con) : "Paul Ryan";
 
     if (!opLast || opLast === "Opponent") {
-      const gopFallbacks = ["Mitt Romney", "Newt Gingrich", "Rick Santorum", "Jon Huntsman", "Rick Perry", "Michele Bachmann", "Ron Paul"];
+      const gopFallbacks = ["Mitt Romney", "Newt Gingrich", "Rick Santorum", "Jon Huntsman", "Rick Perry", "Michele Bachmann", "Ron Paul", "John Kasich"];
       winner12 = gopFallbacks[Math.floor(Math.random() * gopFallbacks.length)];
       vp12 = (typeof getRepublicanVP === 'function') ? getRepublicanVP(winner12, lib, con) : "Paul Ryan";
     }
@@ -26065,23 +26139,26 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
       gopChoices = [
         ["Jeb Bush", "Marco Rubio"],
         ["Mitt Romney", "Paul Ryan"],
-        ["Jon Huntsman", "Nikki Haley"]
+        ["Jon Huntsman", "Nikki Haley"],
+        ["John Kasich", "Rob Portman"]
       ];
     } else if (con >= 4 || hasSelectedAnswer(308)) {
       gopChoices = [
         ["Ted Cruz", "Carly Fiorina"],
         ["Donald Trump", "Mike Pence"],
         ["Rick Perry", "Nikki Haley"],
-        ["Rand Paul", "Nikki Haley"]
+        ["Rand Paul", "Nikki Haley"],
+        ["Tom Cotton", "Kristi Noem"]
       ];
-      if (lunarbears >= 2) {
+      if (lunarbears >= 3) {
         gopChoices.push(["Herman Cain", "Michele Bachmann"]);
-        gopChoices.push(["Tucker Carlson", "Sarah Palin"]);
       }
     } else {
       gopChoices = [
         ["Donald Trump", "Mike Pence"],
         ["Marco Rubio", "Nikki Haley"],
+        ["Ted Cruz", "Carly Fiorina"],
+        ["John Kasich", "Nikki Haley"],
         ["Chris Christie", "Sarah Palin"],
         ["Ron DeSantis", "Nikki Haley"]
       ];
@@ -26106,7 +26183,8 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
       winner16 = getLeftThirdPartyNominee(lib, con);
       if (!isEligible(winner16)) winner16 = "Jill Stein";
       vp16 = getLeftThirdPartyVP(winner16, lib, con, usedVPs);
-    } else if ((wasntme > 0 || hasSelectedAnswer(728)) && isEligible("Kanye West") && Math.random() > 0.95) {
+    } else if (wasntme > 0 && hasSelectedAnswer(728) && isEligible("Kanye West") && Math.random() > 0.99) {
+      // easter egg
       winner16 = "Kanye West";
       vp16 = "Elon Musk";
     } else if (con >= 3 && lib < 3) {
@@ -26119,9 +26197,10 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   else {
     let currentParty = TIMELINE_ASSETS.candidates[prevPres.name]?.party || "Independent";
     let incumbentWeak = (playerEV > 240); // if narrow loss, mandate is weak
+    let incumbentCanRun = isEligible(prevPres.name);
 
     if (currentParty === "Republican") {
-      if (incumbentWeak || wall <= -4 || !isEligible(prevPres.name)) {
+      if (incumbentWeak || wall <= -4 || !incumbentCanRun) {
         // incumbent loses or is term-limited
         if (lib >= 3 || hasSelectedAnswer(242)) {
           winner16 = "Bernie Sanders";
@@ -26141,9 +26220,23 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
         vp16 = vp12;
       }
     } else {
-      // 3rd/4th party incumbent crashes and burns
-      winner16 = "Hillary Clinton";
-      vp16 = get2016DemVP(winner16, lib, usedVPs);
+      // 3rd party / independent incumbent re-election check
+      let thirdPartyFavored = (con >= 4 && lib >= 2) || (con <= -4 && lib <= -2);
+      if (incumbentCanRun && (thirdPartyFavored || (!incumbentWeak && Math.random() > 0.55))) {
+        winner16 = prevPres.name;
+        vp16 = prevPres.vp;
+      } else {
+        if (lib >= 2) {
+          winner16 = "Bernie Sanders";
+          vp16 = get2016DemVP(winner16, lib, usedVPs);
+        } else if (con >= 2) {
+          winner16 = "Donald Trump";
+          vp16 = "Mike Pence";
+        } else {
+          winner16 = "Hillary Clinton";
+          vp16 = get2016DemVP(winner16, lib, usedVPs);
+        }
+      }
     }
   }
 
@@ -26152,10 +26245,10 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   usedVPs.add(vp16);
 
   // mid-term shenanigans ooh-la-la
-  const baseTurnover = winner16 === "Donald Trump" && con >= 6 ? 0.15 : 0.04;
+  const baseTurnover = winner16 === "Donald Trump" && con >= 6 ? 0.15 : 0.03;
   let modifiedTurnover = baseTurnover;
-  if (lunarbears >= 3) modifiedTurnover += 0.10;
-  if (wasntme >= 1) modifiedTurnover += 0.05;
+  if (lunarbears >= 3) modifiedTurnover += 0.08;
+  if (wasntme >= 1) modifiedTurnover += 0.03;
 
   if (Math.random() < modifiedTurnover) {
     let last = rawTimeline[rawTimeline.length - 1];
@@ -26207,11 +26300,11 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
 
       let assignedVP = "Vacant";
       if (party === "Democratic") {
-        const demPool = ["Tim Kaine", "Cory Booker", "Sherrod Brown", "Kamala Harris", "Amy Klobuchar", "Gretchen Whitmer", "Roy Cooper", "Pete Buttigieg", "Julian Castro", "Mark Warner", "Evan Bayh"];
+        const demPool = ["Tim Kaine", "Cory Booker", "Sherrod Brown", "Kamala Harris", "Amy Klobuchar", "Gretchen Whitmer", "Roy Cooper", "Pete Buttigieg", "Julian Castro", "Mark Warner", "Josh Shapiro", "Andy Beshear"];
         const eligibleDem = demPool.filter(v => v !== takeoverPres && v !== last.name && !usedVPs.has(v));
         assignedVP = eligibleDem.length > 0 ? eligibleDem[Math.floor(Math.random() * eligibleDem.length)] : "Sherrod Brown";
       } else {
-        const gopPool = ["Mike Pence", "Nikki Haley", "Tim Scott", "Marco Rubio", "Paul Ryan", "JD Vance", "Kristi Noem", "Rob Portman"];
+        const gopPool = ["Mike Pence", "Nikki Haley", "Tim Scott", "Marco Rubio", "Paul Ryan", "JD Vance", "Kristi Noem", "Rob Portman", "Glenn Youngkin", "Brian Kemp"];
         const eligibleGop = gopPool.filter(v => v !== takeoverPres && v !== last.name && !usedVPs.has(v));
         assignedVP = eligibleGop.length > 0 ? eligibleGop[Math.floor(Math.random() * eligibleGop.length)] : "Tim Scott";
       }
@@ -26250,32 +26343,35 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
     if (!isEligible(winner20)) winner20 = "Cynthia Nixon";
     vp20 = getLeftThirdPartyVP(winner20, lib, con, usedVPs);
   }
-  else if (lunarbears >= 3 && Math.random() > 0.95 && isEligible("David Letterman")) {
+  else if (lunarbears >= 3 && Math.random() > 0.995 && isEligible("David Letterman")) {
     winner20 = "David Letterman";
     vp20 = "Jon Stewart";
   }
-  else if (window.heyheyhey > 0 && Math.random() > 0.97 && isEligible("Jimmy Fallon")) {
+  else if (window.heyheyhey > 0 && Math.random() > 0.995 && isEligible("Jimmy Fallon")) {
     winner20 = "Jimmy Fallon";
     vp20 = "Elon Musk";
   }
   else {
     if (prevParty === "Republican") {
       if (bip > 2 && prevPres.start === 2017 && incumbentCanRun) {
-
         winner20 = prevPres.name;
         vp20 = prevPres.vp;
       } else {
-        // Romney is term-limited here if he served 2013-2021
         if (prevPres.name === winner12 && incumbentCanRun) {
           winner20 = prevPres.name;
           vp20 = prevPres.vp;
         } else {
-          winner20 = "Joe Biden";
-          if (lib > 4) { winner20 = "Elizabeth Warren"; }
-          if (mynutmegphantasy > 0 && Math.random() > 0.85) { winner20 = "Michelle Obama"; }
+          const dem2020Options = (lib >= 4
+            ? ["Bernie Sanders", "Elizabeth Warren", "Sherrod Brown"]
+            : ["Joe Biden", "Kamala Harris", "Amy Klobuchar", "Pete Buttigieg", "Gretchen Whitmer"]
+          ).filter(name => isEligible(name));
 
-          if (!isEligible(winner20)) {
-            winner20 = "Kamala Harris";
+          if (mynutmegphantasy > 0 && Math.random() > 0.85 && isEligible("Michelle Obama")) {
+            winner20 = "Michelle Obama";
+          } else if (dem2020Options.length > 0) {
+            winner20 = dem2020Options[Math.floor(Math.random() * dem2020Options.length)];
+          } else {
+            winner20 = "Joe Biden";
           }
           vp20 = get2020DemVP(winner20, lib, con, usedVPs);
         }
@@ -26286,9 +26382,11 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
           ["Donald Trump", "Mike Pence"],
           ["Ron DeSantis", "Nikki Haley"],
           ["Ted Cruz", "Carly Fiorina"],
-          ["Marco Rubio", "Ron DeSantis"]
+          ["Marco Rubio", "Ron DeSantis"],
+          ["Glenn Youngkin", "Tim Scott"],
+          ["Brian Kemp", "Nikki Haley"],
+          ["John Kasich", "Rob Portman"]
         ].filter(choice => isEligible(choice[0]));
-        if (lunarbears >= 2 && isEligible("Herman Cain")) rep2020Choices.push(["Herman Cain", "Tucker Carlson"]);
 
         if (rep2020Choices.length > 0) {
           let repChoice = rep2020Choices[Math.floor(Math.random() * rep2020Choices.length)];
@@ -26302,16 +26400,21 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
           winner20 = prevPres.name;
           vp20 = prevPres.vp;
         } else {
-          winner20 = "Joe Biden";
-          if (!isEligible(winner20)) { winner20 = "Kamala Harris"; }
+          const demFallbackPool = ["Joe Biden", "Kamala Harris", "Gretchen Whitmer", "Sherrod Brown", "Amy Klobuchar"].filter(name => isEligible(name));
+          winner20 = demFallbackPool.length > 0 ? demFallbackPool[Math.floor(Math.random() * demFallbackPool.length)] : "Joe Biden";
           vp20 = get2020DemVP(winner20, lib, con, usedVPs);
         }
       }
     } else {
-      // 3rd/4th party crashes
-      winner20 = "Joe Biden";
-      if (!isEligible(winner20)) { winner20 = "Kamala Harris"; }
-      vp20 = get2020DemVP(winner20, lib, con, usedVPs);
+      // 3rd party / independent incumbent re-election check
+      let thirdPartyFavored = (con >= 5 && lib >= 3) || (con <= -5 && lib <= -3);
+      if (incumbentCanRun && (thirdPartyFavored || Math.random() > 0.50)) {
+        winner20 = prevPres.name;
+        vp20 = prevPres.vp;
+      } else {
+        winner20 = isEligible("Joe Biden") ? "Joe Biden" : "Kamala Harris";
+        vp20 = get2020DemVP(winner20, lib, con, usedVPs);
+      }
     }
   }
   rawTimeline.push({ name: winner20, start: 2021, end: 2025, vp: vp20 });
@@ -26327,52 +26430,55 @@ function generateTimelineSlide(victoryType, playerEV, opLast) {
   // if incumbent served < 1 full term (VP takeover), they run again (if eligible)
   if (prevPres.start > 2021 && incumbentCanRun) {
     winner24 = prevPres.name;
-    vp24 = prevPres.vp; // keep VP
-  } else if (incumbentCanRun && Math.random() > 0.45) {
+    vp24 = prevPres.vp;
+  } else if (incumbentCanRun && Math.random() > 0.48) {
     // standard re-election check
     winner24 = prevPres.name;
-    vp24 = prevPres.vp; // keep VP
+    vp24 = prevPres.vp;
   } else {
-    // flip
+    // flip to opposition
     if (currentParty === "Democratic") {
       const rep2024Choices = (con >= 4
-        ? ["Tucker Carlson", "Ron DeSantis", "Ted Cruz", "Donald Trump", "Marco Rubio"]
-        : ["Ron DeSantis", "Nikki Haley", "Marco Rubio", "Jeb Bush", "Rand Paul"]
+        ? ["Donald Trump", "Ron DeSantis", "JD Vance", "Vivek Ramaswamy", "Tom Cotton", "Ted Cruz", "Tucker Carlson", "Kristi Noem"]
+        : ["Nikki Haley", "Glenn Youngkin", "Brian Kemp", "Chris Sununu", "Tim Scott", "Marco Rubio", "Doug Burgum", "Greg Abbott", "Ron DeSantis"]
       ).filter(name => isEligible(name));
-
-      if (lunarbears >= 2 && isEligible("Herman Cain")) rep2024Choices.push("Herman Cain");
-      if (lunarbears >= 2 && isEligible("Tucker Carlson")) rep2024Choices.push("Tucker Carlson");
 
       if (rep2024Choices.length > 0) {
         winner24 = rep2024Choices[Math.floor(Math.random() * rep2024Choices.length)];
       } else {
         winner24 = "Ron DeSantis";
       }
-    } else {
+    } else if (currentParty === "Republican") {
       const dem2024Choices = (lib >= 4
-        ? ["Alexandria Ocasio-Cortez", "Elizabeth Warren", "Bernie Sanders", "Kamala Harris"]
-        : ["Gavin Newsom", "Kamala Harris", "Joe Biden", "Cory Booker", "Amy Klobuchar"]
+        ? ["Alexandria Ocasio-Cortez", "Bernie Sanders", "Elizabeth Warren", "Ro Khanna", "Jamie Raskin", "Katie Porter", "Raphael Warnock"]
+        : ["Gavin Newsom", "Kamala Harris", "Gretchen Whitmer", "Josh Shapiro", "Andy Beshear", "JB Pritzker", "Wes Moore", "Pete Buttigieg", "Roy Cooper", "Tim Walz", "Amy Klobuchar", "Cory Booker", "Mark Kelly"]
       ).filter(name => isEligible(name));
 
-      if (mynutmegphantasy > 0 && isEligible("Michelle Obama")) dem2024Choices.push("Michelle Obama");
-      if (lunarbears >= 3) {
-        if (isEligible("Jon Stewart")) dem2024Choices.push("Jon Stewart");
-        if (isEligible("Al Gore")) dem2024Choices.push("Al Gore");
-      }
+      if (mynutmegphantasy > 0 && isEligible("Michelle Obama") && Math.random() > 0.85) dem2024Choices.push("Michelle Obama");
 
       if (dem2024Choices.length > 0) {
         winner24 = dem2024Choices[Math.floor(Math.random() * dem2024Choices.length)];
       } else {
         winner24 = "Kamala Harris";
       }
+    } else {
+      // 3rd party losing to major party
+      if (con > lib) {
+        const rep2024Choices = ["Ron DeSantis", "Nikki Haley", "Glenn Youngkin", "Donald Trump", "Tim Scott"].filter(name => isEligible(name));
+        winner24 = rep2024Choices.length > 0 ? rep2024Choices[Math.floor(Math.random() * rep2024Choices.length)] : "Ron DeSantis";
+      } else {
+        const dem2024Choices = ["Kamala Harris", "Gretchen Whitmer", "Josh Shapiro", "Gavin Newsom", "Pete Buttigieg"].filter(name => isEligible(name));
+        winner24 = dem2024Choices.length > 0 ? dem2024Choices[Math.floor(Math.random() * dem2024Choices.length)] : "Kamala Harris";
+      }
     }
   }
 
-  if (window.heyheyhey > 0 && Math.random() > 0.96 && isEligible("Jimmy Fallon")) {
+  // easter eggs
+  if (window.heyheyhey > 0 && Math.random() > 0.990 && isEligible("Jimmy Fallon")) {
     winner24 = "Jimmy Fallon";
-  } else if ((wasntme > 0 || hasSelectedAnswer(728)) && Math.random() > 0.97 && isEligible("Kanye West")) {
+  } else if ((wasntme > 0 || hasSelectedAnswer(728)) && Math.random() > 0.998 && isEligible("Kanye West")) {
     winner24 = "Kanye West";
-  } else if (lunarbears >= 4 && Math.random() > 0.95 && isEligible("David Letterman")) {
+  } else if (lunarbears >= 4 && Math.random() > 0.998 && isEligible("David Letterman")) {
     winner24 = "David Letterman";
   }
 
@@ -37705,15 +37811,13 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   }
 
-  function shuffleArray(array) {
-    let currentIndex = array.length, randomIndex;
-    const newArray = [...array];
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [newArray[currentIndex], newArray[randomIndex]] = [newArray[randomIndex], newArray[currentIndex]];
+  function shuffleArray(arr) {
+    const res = arr.slice();
+    for (let i = res.length - 1; i > 0; i--) {
+      const j = (Math.random() * (i + 1)) | 0;
+      const temp = res[i]; res[i] = res[j]; res[j] = temp;
     }
-    return newArray;
+    return res;
   }
 
   // persistence helpers
@@ -38077,80 +38181,62 @@ window.tctCityVisits = { ensureVisitOverlayCities };
   }
 
   function rafUpdateProgress(timestamp) {
-    if (!isUpdaterRunning) return;
-    if (!isPlayerActive() || !hasUserInitiatedPlayback) {
-      stopRafUpdater();
-      return;
-    }
-    if (isSeeking) {
-      rafId = requestAnimationFrame(rafUpdateProgress);
-      return;
-    }
-
-    const elapsed = timestamp - lastRafUpdateTime;
-    if (elapsed < FRAME_INTERVAL) {
-      rafId = requestAnimationFrame(rafUpdateProgress);
-      return;
-    }
-    lastRafUpdateTime = timestamp - (elapsed % FRAME_INTERVAL);
-
-    let currentTime = ytPlayer.getCurrentTime();
-
-    if (pendingSeekTime !== null) {
-      const timeDiff = Math.abs(currentTime - pendingSeekTime);
-      if (timeDiff < 0.5) {
-        pendingSeekTime = null;
-        seekSettlingTime = 0;
-      } else if (seekSettlingTime < 500) {
-        currentTime = pendingSeekTime;
-        seekSettlingTime += elapsed;
-      } else {
-        pendingSeekTime = null;
-        seekSettlingTime = 0;
+      if (!isUpdaterRunning) return;
+      if (!isPlayerActive() || !hasUserInitiatedPlayback) {
+        stopRafUpdater();
+        return;
       }
-    }
+      if (isSeeking) {
+        rafId = requestAnimationFrame(rafUpdateProgress);
+        return;
+      }
 
-    if (!cachedDuration || cachedDuration === 0) cachedDuration = ytPlayer.getDuration();
-    const duration = cachedDuration;
-
-    if (duration && isFinite(duration) && duration > 0) {
-      const targetProgress = (currentTime / duration) * 100;
+      let currentTime = ytPlayer.getCurrentTime() || 0;
 
       if (pendingSeekTime !== null) {
-        lastProgress = targetProgress;
-      } else {
-        const smoothingFactor = 0.3;
-        lastProgress += (targetProgress - lastProgress) * smoothingFactor;
-        if (Math.abs(targetProgress - lastProgress) < 0.01) lastProgress = targetProgress;
-      }
-
-      const p = Math.max(0, Math.min(100, lastProgress));
-      let bufferPercent = lastRenderedBuffer || 0;
-
-      if (timestamp - lastBufferCheckTime > 500) {
-        const loaded = ytPlayer.getVideoLoadedFraction?.() || 0;
-        bufferPercent = Math.max(0, Math.min(100, loaded * 100));
-        lastRenderedBuffer = bufferPercent;
-        lastBufferCheckTime = timestamp;
-      }
-
-      updateProgressVisuals(p, bufferPercent);
-
-      if (progressBar) {
-        progressBar.value = p;
-        if (document.activeElement === progressBar) {
-          progressBar.setAttribute('aria-valuenow', p.toFixed(2));
+        const timeDiff = Math.abs(currentTime - pendingSeekTime);
+        if (timeDiff < 0.5 || seekSettlingTime > 500) {
+          pendingSeekTime = null;
+          seekSettlingTime = 0;
+        } else {
+          currentTime = pendingSeekTime;
+          seekSettlingTime += 16.7;
         }
       }
 
-      const currentSecond = currentTime | 0;
-      if (lastRenderedSecond !== currentSecond) {
-        if (currentTimeElement) currentTimeElement.textContent = formatTime(currentTime);
-        lastRenderedSecond = currentSecond;
-      }
-    }
+      if (!cachedDuration) cachedDuration = ytPlayer.getDuration() || 0;
+      const duration = cachedDuration;
 
-    if (isUpdaterRunning) rafId = requestAnimationFrame(rafUpdateProgress);
+      if (duration > 0) {
+        const targetProgress = (currentTime / duration) * 100;
+
+        if (pendingSeekTime !== null) {
+          lastProgress = targetProgress;
+        } else {
+          lastProgress += (targetProgress - lastProgress) * 0.35;
+          if (Math.abs(targetProgress - lastProgress) < 0.01) lastProgress = targetProgress;
+        }
+
+        const p = Math.max(0, Math.min(100, lastProgress));
+
+        let bufferPercent = lastRenderedBuffer || 0;
+        if (!timestamp || timestamp - lastBufferCheckTime > 500) {
+          const loaded = ytPlayer.getVideoLoadedFraction?.() || 0;
+          bufferPercent = Math.max(0, Math.min(100, loaded * 100));
+          lastRenderedBuffer = bufferPercent;
+          lastBufferCheckTime = timestamp || 0;
+        }
+
+        updateProgressVisuals(p, bufferPercent);
+
+        const currentSecond = currentTime | 0;
+        if (lastRenderedSecond !== currentSecond) {
+          if (currentTimeElement) currentTimeElement.textContent = formatTime(currentTime);
+          lastRenderedSecond = currentSecond;
+        }
+      }
+
+      if (isUpdaterRunning) rafId = requestAnimationFrame(rafUpdateProgress);
   }
 
   function startRafUpdater() {
@@ -38171,12 +38257,10 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     if (!isPlayerActive() || !hasUserInitiatedPlayback) return;
     if (document.visibilityState === 'hidden') {
       if (isUpdaterRunning) { stopRafUpdater(); playerShouldBeUpdatingWhenVisible = true; }
-      else if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) { playerShouldBeUpdatingWhenVisible = true; }
     } else if (document.visibilityState === 'visible') {
-      if (playerShouldBeUpdatingWhenVisible) {
-        playerShouldBeUpdatingWhenVisible = false;
-        if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) startRafUpdater();
-      } else if (!isUpdaterRunning && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+      if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+        lastProgress = (ytPlayer.getCurrentTime() / (cachedDuration || ytPlayer.getDuration() || 1)) * 100;
+        updateProgressVisuals(lastProgress);
         startRafUpdater();
       }
     }
@@ -38401,99 +38485,66 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     return queueItemTemplate.content.firstElementChild.cloneNode(true);
   }
 
-  function handleDragStart(e) { dragSrcEl = this; e.dataTransfer.effectAllowed = 'move'; this.classList.add('dragging'); }
-  function handleDragOver(e) { if (e.preventDefault) e.preventDefault(); return false; }
-  function handleDrop(e) {
-    if (e.stopPropagation) e.stopPropagation();
-    if (dragSrcEl !== this) {
-      const fromIndex = parseInt(dragSrcEl.dataset.index);
-      const toIndex = parseInt(this.dataset.index);
-      const movedItem = userFavorites.splice(fromIndex, 1)[0];
-      userFavorites.splice(toIndex, 0, movedItem);
-      saveFavorites();
-
-      if (PLAYLISTS_DATA[activePlaylistIndex].isFavorites) {
-        playlist.setSongs([...userFavorites]);
-        if (fromIndex === playlist.currentSongIndex) {
-          playlist.currentSongIndex = toIndex;
-        } else {
-          const currentSong = originalSongOrderForCurrentPlaylist[playlist.currentSongIndex];
-          const newIdx = userFavorites.indexOf(currentSong);
-          if (newIdx !== -1) playlist.currentSongIndex = newIdx;
-        }
-      }
-      lastQueuePlaylistId = null;
-      updateQueueDisplay();
-    }
-    return false;
-  }
-  function handleDragEnd() { this.classList.remove('dragging'); }
-
   function updateQueueDisplay() {
     if (!queueListElement || !playlist) return;
 
-    if (playlist.isEmpty()) {
-      const emptyItem = document.createElement('li');
-      emptyItem.className = `${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty`;
-      emptyItem.textContent = 'Queue is empty';
-      queueListElement.replaceChildren(emptyItem);
-      lastQueuePlaylistId = null;
-      lastActiveQueueIndex = -1;
-      return;
-    }
+      if (playlist.isEmpty()) {
+        const emptyItem = document.createElement('li');
+        emptyItem.className = `${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty`;
+        emptyItem.textContent = 'Queue is empty';
+        queueListElement.replaceChildren(emptyItem);
+        lastQueuePlaylistId = null;
+        lastActiveQueueIndex = -1;
+        return;
+      }
 
-    const songs = playlist.getSongs();
-    const currentIndex = playlist.currentSongIndex;
-    const playlistId = playlist.id;
-    const queueVisible = queueContainerElement && !queueContainerElement.classList.contains('hidden');
+      const songs = playlist.getSongs();
+      const currentIndex = playlist.currentSongIndex;
+      const playlistId = playlist.id;
+      const queueVisible = queueContainerElement && !queueContainerElement.classList.contains('hidden');
 
-    if (lastQueuePlaylistId === playlistId) {
-      if (lastActiveQueueIndex !== currentIndex) {
-        if (lastActiveQueueIndex !== -1 && queueItemCache[lastActiveQueueIndex]) {
-          queueItemCache[lastActiveQueueIndex].classList.remove('current');
-        }
-        if (queueItemCache[currentIndex]) {
-          queueItemCache[currentIndex].classList.add('current');
-          if (queueVisible) {
-            queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (lastQueuePlaylistId === playlistId) {
+        if (lastActiveQueueIndex !== currentIndex) {
+          if (lastActiveQueueIndex !== -1 && queueItemCache[lastActiveQueueIndex]) {
+            queueItemCache[lastActiveQueueIndex].classList.remove('current');
           }
+          if (queueItemCache[currentIndex]) {
+            queueItemCache[currentIndex].classList.add('current');
+            if (queueVisible) {
+              queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }
+          lastActiveQueueIndex = currentIndex;
         }
-        lastActiveQueueIndex = currentIndex;
+        return;
       }
-      return;
-    }
 
-    lastQueuePlaylistId = playlistId;
-    lastActiveQueueIndex = currentIndex;
-    queueItemCache = [];
-    const frag = document.createDocumentFragment();
-    const isFavPlaylist = PLAYLISTS_DATA[activePlaylistIndex] && PLAYLISTS_DATA[activePlaylistIndex].isFavorites;
+      // Full queue rebuild
+      lastQueuePlaylistId = playlistId;
+      lastActiveQueueIndex = currentIndex;
+      queueItemCache = [];
+      const frag = document.createDocumentFragment();
+      const isFavPlaylist = Boolean(PLAYLISTS_DATA[activePlaylistIndex]?.isFavorites);
 
-    songs.forEach((song, index) => {
-      const li = createQueueItem();
-      const children = li.children;
-      li.title = `${song.getTitle()} — ${song.getArtist()}`;
-      li.dataset.index = String(index);
-      children[0].textContent = song.getTitle();
-      children[1].textContent = ` - ${song.getArtist()}`;
+      for (let index = 0; index < songs.length; index++) {
+        const song = songs[index];
+        const li = createQueueItem();
+        li.title = `${song.getTitle()} — ${song.getArtist()}`;
+        li.dataset.index = String(index);
+        li.children[0].textContent = song.getTitle();
+        li.children[1].textContent = ` - ${song.getArtist()}`;
 
-      if (index === currentIndex) li.classList.add('current');
+        if (index === currentIndex) li.classList.add('current');
+        if (isFavPlaylist) li.draggable = true;
 
-      if (isFavPlaylist) {
-        li.draggable = true;
-        li.addEventListener('dragstart', handleDragStart);
-        li.addEventListener('dragover', handleDragOver);
-        li.addEventListener('drop', handleDrop);
-        li.addEventListener('dragend', handleDragEnd);
+        frag.appendChild(li);
+        queueItemCache.push(li);
       }
-      frag.appendChild(li);
-      queueItemCache.push(li);
-    });
 
-    queueListElement.replaceChildren(frag);
-    if (queueVisible && queueItemCache[currentIndex]) {
-      queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+      queueListElement.replaceChildren(frag);
+      if (queueVisible && queueItemCache[currentIndex]) {
+        queueItemCache[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
   }
 
   function updateShuffleButtonUI() {
@@ -38715,15 +38766,69 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     });
 
     queueListElement.addEventListener('click', (e) => {
-      const li = e.target && e.target.closest ? e.target.closest('li') : null;
-      if (!li || !queueListElement.contains(li)) return;
-      const index = Number(li.dataset.index);
-      if (!Number.isInteger(index)) return;
-      playlist.setCurrentSongIndex(index);
-      loadCurrentSong(true);
-    });
+        const li = e.target.closest(`.${PLAYER_QUEUE_ITEM_CLASS}`);
+          if (!li || !queueListElement.contains(li)) return;
+          const index = Number(li.dataset.index);
+          if (!Number.isInteger(index)) return;
+          playlist.setCurrentSongIndex(index);
+          loadCurrentSong(true);
+        });
 
-        const coverFlowStage = document.getElementById('cover-flow-stage');
+        queueListElement.addEventListener('dragstart', (e) => {
+          const li = e.target.closest(`.${PLAYER_QUEUE_ITEM_CLASS}`);
+          if (!li || !li.draggable) return;
+          dragSrcEl = li;
+          e.dataTransfer.effectAllowed = 'move';
+          // Firefox requires dataTransfer.setData to allow dragging
+          e.dataTransfer.setData('text/plain', li.dataset.index);
+          li.classList.add('dragging');
+        });
+
+        queueListElement.addEventListener('dragover', (e) => {
+          if (!dragSrcEl) return;
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+        });
+
+        queueListElement.addEventListener('drop', (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          const targetLi = e.target.closest(`.${PLAYER_QUEUE_ITEM_CLASS}`);
+          if (!targetLi || !dragSrcEl || dragSrcEl === targetLi) return;
+
+          const fromIndex = parseInt(dragSrcEl.dataset.index, 10);
+          const toIndex = parseInt(targetLi.dataset.index, 10);
+          if (isNaN(fromIndex) || isNaN(toIndex) || fromIndex === toIndex) return;
+
+          // Reorder favorites array
+          const movedItem = userFavorites.splice(fromIndex, 1)[0];
+          userFavorites.splice(toIndex, 0, movedItem);
+          saveFavorites();
+
+          if (PLAYLISTS_DATA[activePlaylistIndex]?.isFavorites) {
+            const currentSong = playlist.getCurrentSong();
+            originalSongOrderForCurrentPlaylist = [...userFavorites];
+            playlist.setSongs(isShuffleActive ? playlist.getSongs() : [...userFavorites]);
+
+            // Keep current playing song selected at its new index
+            if (currentSong) {
+              const newIdx = playlist.getSongs().findIndex(s => s.getTitle() === currentSong.getTitle());
+              if (newIdx !== -1) playlist.setCurrentSongIndex(newIdx);
+            }
+          }
+
+          lastQueuePlaylistId = null;
+          updateQueueDisplay();
+        });
+
+        queueListElement.addEventListener('dragend', () => {
+          if (dragSrcEl) {
+            dragSrcEl.classList.remove('dragging');
+            dragSrcEl = null;
+          }
+        });
+
+    const coverFlowStage = document.getElementById('cover-flow-stage');
     coverFlowStage.addEventListener('mousedown', (e) => {
       if (!playlist || playlist.isEmpty()) return;
       isDragging = true;
@@ -38753,12 +38858,11 @@ window.tctCityVisits = { ensureVisitOverlayCities };
     coverFlowStage.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
       e.preventDefault();
-      if (!dragMoved && Math.abs(e.pageX - startX) < DRAG_THRESHOLD_PX) return;
+      const deltaX = e.pageX - startX;
+      if (!dragMoved && Math.abs(deltaX) < DRAG_THRESHOLD_PX) return;
       dragMoved = true;
-      const walk = (e.pageX - startX) * -0.005;
-      const newIndex = Math.round(dragStartIndex + walk);
-      const clampedIndex = Math.max(0, Math.min(playlist.getSongs().length - 1, newIndex));
-      scheduleDragRender(clampedIndex);
+      const fractionalOffset = deltaX * -0.005;
+      updateCoverFlow(fractionalOffset);
     });
 
     let wheelLocked = false;
@@ -38824,8 +38928,18 @@ window.tctCityVisits = { ensureVisitOverlayCities };
       progressBarObserver.observe(progressWrapper);
     }
 
-    progressBar.addEventListener('mousedown', () => { if (!hasUserInitiatedPlayback) return; isSeeking = true; stopRafUpdater(); });
-    progressBar.addEventListener('touchstart', () => { if (!hasUserInitiatedPlayback) return; isSeeking = true; stopRafUpdater(); }, { passive: true });
+    const onSeekStart = () => {
+          if (!hasUserInitiatedPlayback) return;
+          isSeeking = true;
+          stopRafUpdater();
+          progressBar.value = lastProgress;
+        };
+
+        progressBar.addEventListener('mousedown', onSeekStart);
+        progressBar.addEventListener('touchstart', onSeekStart, { passive: true });
+        progressBar.addEventListener('focus', () => {
+        progressBar.value = lastProgress;
+    });
 
     progressBar.addEventListener("input", () => {
       if (!isSeeking || !hasUserInitiatedPlayback) return;
@@ -44311,8 +44425,8 @@ function injectCountyMapButton() {
 function getAdaptiveTextColor() {
     try {
         // start checking at game_window or main_content_area before falling back to body
-        let el = document.getElementById("game_window") || 
-                 document.getElementById("main_content_area") || 
+        let el = document.getElementById("game_window") ||
+                 document.getElementById("main_content_area") ||
                  document.body;
 
         while (el && el !== document) {
@@ -44798,7 +44912,7 @@ async function loadAndDrawCountyMap(mode) {
     const activeYears = getActiveYears();
     CURRENT_YEAR = activeYears.current;
     HISTORICAL_YEAR = activeYears.historical;
-	
+
 	const loadedPmTilesYear = PMTILES_URLS[CURRENT_YEAR] ? CURRENT_YEAR : "2008";
 
     const loadScript = src => new Promise((resolve, reject) => {
@@ -45043,7 +45157,7 @@ async function loadAndDrawCountyMap(mode) {
                 nationalTotalVotes += (c.votes_all || 0);
             }
         }
-		
+
 		let pmTilesCountyMap = {};
         if (loadedPmTilesYear === CURRENT_YEAR) {
             pmTilesCountyMap = baseCurrentMap;
@@ -46317,8 +46431,8 @@ async function loadAndDrawCountyMap(mode) {
 
 					if (tpCandidatesInGame && tpCandidatesInGame.length > 0) {
 						tpCandidatesInGame.forEach(candId => {
-							const share = (mults && mults.tpShares && mults.tpShares[candId] !== undefined) 
-								? mults.tpShares[candId] 
+							const share = (mults && mults.tpShares && mults.tpShares[candId] !== undefined)
+								? mults.tpShares[candId]
 								: (1 / Math.max(1, tpCandidatesInGame.length));
 							bgResults.push({
 								id: candId,
