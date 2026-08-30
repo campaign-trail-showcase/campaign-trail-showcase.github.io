@@ -557,11 +557,17 @@ function applySingleModTheme(modView, state = null) {
     theme.header_image_url ? modView.style.setProperty("--theme-header-bg", `url('${theme.header_image_url}')`) : modView.style.removeProperty("--theme-header-bg");
     theme.header_color ? modView.style.setProperty("--theme-header-color", theme.header_color) : modView.style.removeProperty("--theme-header-color");
     theme.header_text_color ? modView.style.setProperty("--theme-header-text", theme.header_text_color) : modView.style.removeProperty("--theme-header-text");
+	theme.header_text_shadow ? modView.style.setProperty("--theme-header-text-shadow", theme.header_text_shadow) : modView.style.removeProperty("--theme-header-text-shadow");
+	theme.header_font ? modView.style.setProperty("--theme-header-font", theme.header_font) : modView.style.removeProperty("--theme-header-font");
+	theme.header_margin ? modView.style.setProperty("--theme-header-margin", theme.header_margin) : modView.style.removeProperty("--theme-header-margin");
     theme.description_background_color ? modView.style.setProperty("--theme-desc-bg", theme.description_background_color) : modView.style.removeProperty("--theme-desc-bg");
     theme.description_text_color ? modView.style.setProperty("--theme-desc-text", theme.description_text_color) : modView.style.removeProperty("--theme-desc-text");
     theme.main_color ? modView.style.setProperty("--theme-main-color", theme.main_color) : modView.style.removeProperty("--theme-main-color");
     theme.secondary_color ? modView.style.setProperty("--theme-secondary-color", theme.secondary_color) : modView.style.removeProperty("--theme-secondary-color");
+	theme.scrollbar_color ? modView.style.setProperty("--theme-scrollbar-color", theme.scrollbar_color) : modView.style.removeProperty("--theme-scrollbar-color");
+	theme.scrollbar_width ? modView.style.setProperty("--theme-scrollbar-width", theme.scrollbar_width) : modView.style.removeProperty("--theme-scrollbar-width");
 	theme.image_border ? modView.style.setProperty("--theme-img-border", theme.image_border) : modView.style.removeProperty("--theme-img-border");
+	theme.election_image_display ? modView.style.setProperty("--theme-image-display", theme.election_image_display) : modView.style.removeProperty("--theme-image-display");
 
     let hoverColor = theme.secondary_hover_color;
     if (!hoverColor && theme.secondary_color) {
@@ -575,13 +581,19 @@ function applySingleModTheme(modView, state = null) {
     modView.style.removeProperty("--theme-header-bg");
     modView.style.removeProperty("--theme-header-color");
     modView.style.removeProperty("--theme-header-text");
+	modView.style.removeProperty("--theme-header-text-shadow");
+	modView.style.removeProperty("--theme-header-font");
+	modView.style.removeProperty("--theme-header-margin");
     modView.style.removeProperty("--theme-desc-bg");
     modView.style.removeProperty("--theme-desc-text");
     modView.style.removeProperty("--theme-main-color");
     modView.style.removeProperty("--theme-secondary-color");
+	modView.style.removeProperty("--theme-scrollbar-color");
+	modView.style.removeProperty("--theme-scrollbar-width");
     modView.style.removeProperty("--theme-secondary-hover");
     modView.style.removeProperty("--theme-ui-text");
 	modView.style.removeProperty("--theme-img-border");
+	modView.style.removeProperty("--theme-image-display");
   }
 }
 
@@ -1972,7 +1984,7 @@ function updateModViews(event) {
 
     requestAnimationFrame(() => {
       const fragment = document.createDocumentFragment();
-      
+
       visibleMods.forEach((modView) => {
         modView.style.display = "flex";
         fragment.appendChild(modView);
