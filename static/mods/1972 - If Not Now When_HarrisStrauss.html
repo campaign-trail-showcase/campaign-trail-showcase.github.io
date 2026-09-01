@@ -29884,6 +29884,10 @@ window.ctsAchievement = function(name) {
     if (!campaignTrail_temp.unlockedAchievements.includes(name)) {
         campaignTrail_temp.unlockedAchievements.push(name);
     }
+
+    if (typeof unlockAchievement === "function") {
+      unlockAchievement(name, "1972 - If Not Now When");
+    }
 };
 
 // =========================
