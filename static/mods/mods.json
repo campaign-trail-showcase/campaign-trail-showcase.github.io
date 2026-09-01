@@ -2490,7 +2490,7 @@
   {
     "value": "2000 Teddy",
     "text": "2000 Teddy",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist",
     "awards": "",
     "awardimageurls": ""
@@ -2498,7 +2498,7 @@
   {
     "value": "2019-WTSA",
     "text": "2019 - When The Stars Align",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist",
     "awards": "",
     "awardimageurls": ""
@@ -2506,7 +2506,7 @@
   {
     "value": "2026 Gorton and Denton By-Election",
     "text": "2026 Gorton and Denton By-Election",
-    "mode": "new",
+    "mode": "",
     "tags": "Historical International State",
     "awards": "",
     "awardimageurls": ""
@@ -2514,7 +2514,7 @@
   {
     "value": "1993 - UBCM",
     "text": "Untitled Bill Clinton Mod",
-    "mode": "new",
+    "mode": "",
     "tags": "Historical Althist",
     "awards": "",
     "awardimageurls": ""
@@ -2522,7 +2522,7 @@
   {
     "value": "2000 - Dynasty",
     "text": "2000: Dynasty",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist",
     "awards": "",
     "awardimageurls": ""
@@ -2530,7 +2530,7 @@
   {
     "value": "Moonlight In Duneland",
     "text": "Moonlight In Duneland",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist",
     "awards": "",
     "awardimageurls": ""
@@ -2538,7 +2538,7 @@
   {
     "value": "1888 Hyperion",
     "text": "1888 Hyperion",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist",
     "awards": "",
     "awardimageurls": ""
@@ -2546,7 +2546,7 @@
   {
     "value": "2022 Senate",
     "text": "2022 Senate",
-    "mode": "new",
+    "mode": "",
     "tags": "Historical",
     "awards": "",
     "awardimageurls": ""
@@ -2554,7 +2554,7 @@
   {
     "value": "2010PH",
     "text": "2010 Philippines",
-    "mode": "new",
+    "mode": "",
     "tags": "Historical International",
     "awards": "",
     "awardimageurls": ""
@@ -2562,7 +2562,7 @@
   {
     "value": "2004 - Hail Mary",
     "text": "'04 Hail Mary",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist",
     "awards": "",
     "awardimageurls": ""
@@ -2570,7 +2570,7 @@
   {
     "value": "2016 - Our rƎVO⅃ution",
     "text": "2016: Our rƎVO⅃ution",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist",
     "awards": "",
     "awardimageurls": ""
@@ -2660,6 +2660,54 @@
     "text": "2028: Mamdani vs Musk",
     "mode": "new",
     "tags": "Althist",
+    "awards": "",
+    "awardimageurls": ""
+  },
+  {
+    "value": "1900",
+    "text": "1900: Manifest Destiny",
+    "mode": "new",
+    "tags": "Althist",
+    "awards": "",
+    "awardimageurls": ""
+  },
+  {
+    "value": "1940 Redux",
+    "text": "1940: Confidence and Security",
+    "mode": "new",
+    "tags": "Historical",
+    "awards": "",
+    "awardimageurls": ""
+  },
+  {
+    "value": "1944",
+    "text": "1944: Peace and Security",
+    "mode": "new",
+    "tags": "Historical",
+    "awards": "",
+    "awardimageurls": ""
+  },
+  {
+    "value": "1952 Redux",
+    "text": "1952: I Like Ike!",
+    "mode": "new",
+    "tags": "Historical",
+    "awards": "",
+    "awardimageurls": ""
+  },
+  {
+    "value": "1972 - If Not Now When",
+    "text": "1972: If Not Now, When?",
+    "mode": "new",
+    "tags": "Historical",
+    "awards": "",
+    "awardimageurls": ""
+  },
+  {
+    "value": "1980 - American Crossroads",
+    "text": "1980: American Crossroads",
+    "mode": "new",
+    "tags": "Historical",
     "awards": "",
     "awardimageurls": ""
   }

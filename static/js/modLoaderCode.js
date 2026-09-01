@@ -2370,6 +2370,10 @@ async function loadModFromButton(modValue) {
         }
       }
 
+      if (typeof prepareLegacyAchievementStorage === "function") {
+        prepareLegacyAchievementStorage(modValue);
+      }
+
       executeMod(modCode, {
         campaignTrail_temp,
         window,

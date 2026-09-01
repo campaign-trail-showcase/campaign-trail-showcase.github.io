@@ -78,6 +78,59 @@ let modCompletionCache = null;
 let lastCacheUpdate = 0;
 const CACHE_TTL = 5000; // 5 seconds
 
+function migrateLegacyAchievement(modName, achName, achData, legacy, removeLegacy = true) {
+  if (!modName || !legacy || unlockedAch[`${modName}:${achName}`] != null) return;
+
+  unlockedAch[`${modName}:${achName}`] = {
+    ...(legacy === true ? achData : legacy),
+    modName,
+    achName,
+  };
+  if (removeLegacy) delete unlockedAch[achName];
+
+  try {
+    localStorage.setItem("unlockedAch", JSON.stringify(unlockedAch));
+  } catch (e) {
+    console.error("Error while migrating achievements:", e);
+  }
+}
+
+function prepareLegacyAchievementStorage(modName) {
+  if (!modName || typeof allAch !== "object" || allAch === null) return;
+
+  const currentAchievements = allAch[modName];
+  if (!currentAchievements) return;
+
+  let changed = false;
+  for (const achName of Object.keys(currentAchievements)) {
+    const legacy = unlockedAch[achName];
+    if (legacy == null || unlockedAch[`${modName}:${achName}`] != null) continue;
+
+    if (legacy?.modName && legacy.modName !== modName) {
+      delete unlockedAch[achName];
+      changed = true;
+      continue;
+    }
+
+    const hasNamespacedOwner = Object.keys(unlockedAch).some((key) =>
+      key.endsWith(`:${achName}`) && key !== `${modName}:${achName}`
+    );
+    if (hasNamespacedOwner) {
+      delete unlockedAch[achName];
+      changed = true;
+    }
+
+  }
+
+  if (changed) {
+    try {
+      localStorage.setItem("unlockedAch", JSON.stringify(unlockedAch));
+    } catch (e) {
+      console.error("Error while preparing achievements:", e);
+    }
+  }
+}
+
 // checks whether an achievement is unlocked specifically for a given mod
 function isAchievementUnlocked(modName, achName, achData = null) {
   if (!unlockedAch) return false;
@@ -92,6 +145,9 @@ function isAchievementUnlocked(modName, achName, achData = null) {
   if (legacy != null) {
     // if explicit modName metadata exists on the saved object
     if (legacy.modName) {
+      if (legacy.modName === modName) {
+        migrateLegacyAchievement(modName, achName, achData, legacy);
+      }
       return legacy.modName === modName;
     }
 
@@ -106,6 +162,7 @@ function isAchievementUnlocked(modName, achName, achData = null) {
         achName,
       )
     ) {
+      migrateLegacyAchievement(modName, achName, achData, legacy);
       return true;
     }
 
@@ -113,9 +170,18 @@ function isAchievementUnlocked(modName, achName, achData = null) {
       const descMatch = !legacy.description || legacy.description === currentData.description;
       const imgMatch = !legacy.image || legacy.image === currentData.image;
       if (descMatch && imgMatch) {
+        migrateLegacyAchievement(modName, achName, currentData, legacy);
         return true;
       }
       return false; // same achievement name, but belongs to another mod
+    }
+
+    if (legacy === true && modName && typeof allAch === "object" && allAch !== null) {
+      const matchingMods = Object.keys(allAch).filter((mod) => allAch[mod]?.[achName]);
+      if (matchingMods.length > 1) {
+        migrateLegacyAchievement(modName, achName, currentData, legacy, false);
+        return true;
+      }
     }
 
     // if only one mod across all known mods defines this achievement name
@@ -129,6 +195,7 @@ function isAchievementUnlocked(modName, achName, achData = null) {
         }
       }
       if (count === 1 && ownerMod === modName) {
+        migrateLegacyAchievement(modName, achName, currentData, legacy);
         return true;
       }
       return false;
@@ -227,11 +294,6 @@ function unlockAchievement(name, targetModName = null) {
   };
 
   unlockedAch[unlockKey] = achRecord;
-
-  // set legacy key if not already occupied to maintain backward compatibility
-  if (!unlockedAch[name]) {
-    unlockedAch[name] = achRecord;
-  }
 
   try {
     localStorage.setItem("unlockedAch", JSON.stringify(unlockedAch));
