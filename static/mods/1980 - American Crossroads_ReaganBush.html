@@ -219,49 +219,70 @@ campaignTrail_temp.multiple_endings=true
 //aa = all final overall results data
 //quickstats = relevant data on candidate performance (format: your candidate's electoral vote count, your candidate's popular vote share, your candidate's raw vote total)
 ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
-if (campaignTrail_temp.player_answers.includes(2021) || campaignTrail_temp.player_answers.includes(2022) || campaignTrail_temp.player_answers.includes(2023) || campaignTrail_temp.player_answers.includes(2024)) {
 
-if (campaignTrail_temp.RepEV === 269) {
-    return getEnding("reaganties");
-} else if (campaignTrail_temp.RepEV >= 380) {
-    return getEnding("reaganlandslide");
-} else if (campaignTrail_temp.RepEV >= 270 && campaignTrail_temp.RepEV <= 379) {
-    return getEnding("reaganwins");
-} else if (campaignTrail_temp.RepEV >= 180 && campaignTrail_temp.RepEV <= 269) {
-    return getEnding("reaganloses");
-} else {
-    return getEnding("reaganlosesbig");
-}
+calculateCandidateElectoralVotes(aa);
+const playerEV = quickstats ? quickstats[0] : campaignTrail_temp.RepEV;
 
-} else if (campaignTrail_temp.player_answers.includes(2221) || campaignTrail_temp.player_answers.includes(2222) || campaignTrail_temp.player_answers.includes(2223) || campaignTrail_temp.player_answers.includes(2224)) {
+  // Reagan path
+  if (
+    campaignTrail_temp.player_answers.includes(2021) ||
+    campaignTrail_temp.player_answers.includes(2022) ||
+    campaignTrail_temp.player_answers.includes(2023) ||
+    campaignTrail_temp.player_answers.includes(2024)
+  ) {
+    if (playerEV === 269) {
+      return getEnding("reaganties");
+    } else if (playerEV >= 380) {
+      return getEnding("reaganlandslide");
+    } else if (playerEV >= 270) {
+      return getEnding("reaganwins");
+    } else if (playerEV >= 180) {
+      return getEnding("reaganloses");
+    } else {
+      return getEnding("reaganlosesbig");
+    }
+  }
 
-if (campaignTrail_temp.RepEV === 269) {
-    return getEnding("bushties");
-} else if (campaignTrail_temp.RepEV >= 380) {
-    return getEnding("bushlandslide");
-} else if (campaignTrail_temp.RepEV >= 270 && campaignTrail_temp.RepEV <= 379) {
-    return getEnding("bushwins");
-} else if (campaignTrail_temp.RepEV >= 180 && campaignTrail_temp.RepEV <= 269) {
-    return getEnding("bushloses");
-} else {
-    return getEnding("bushlosesbig");
-}
+  // Bush path
+  else if (
+    campaignTrail_temp.player_answers.includes(2221) ||
+    campaignTrail_temp.player_answers.includes(2222) ||
+    campaignTrail_temp.player_answers.includes(2223) ||
+    campaignTrail_temp.player_answers.includes(2224)
+  ) {
+    if (playerEV === 269) {
+      return getEnding("bushties");
+    } else if (playerEV >= 380) {
+      return getEnding("bushlandslide");
+    } else if (playerEV >= 270) {
+      return getEnding("bushwins");
+    } else if (playerEV >= 180) {
+      return getEnding("bushloses");
+    } else {
+      return getEnding("bushlosesbig");
+    }
+  }
 
-} else if (campaignTrail_temp.player_answers.includes(2421) || campaignTrail_temp.player_answers.includes(2422) || campaignTrail_temp.player_answers.includes(2423) || campaignTrail_temp.player_answers.includes(2424)) {
+// Anderson path
+  else if (
+    campaignTrail_temp.player_answers.includes(2421) ||
+    campaignTrail_temp.player_answers.includes(2422) ||
+    campaignTrail_temp.player_answers.includes(2423) ||
+    campaignTrail_temp.player_answers.includes(2424)
+  ) {
+    if (playerEV === 269) {
+      return getEnding("andersonties");
+    } else if (playerEV >= 380) {
+      return getEnding("andersonlandslide");
+    } else if (playerEV >= 270) {
+      return getEnding("andersonwins");
+    } else if (playerEV >= 180) {
+      return getEnding("andersonloses");
+    } else {
+      return getEnding("andersonlosesbig");
+    }
+  }
 
-if (campaignTrail_temp.RepEV === 269) {
-    return getEnding("andersonties");
-} else if (campaignTrail_temp.RepEV >= 380) {
-    return getEnding("andersonlandslide");
-} else if (campaignTrail_temp.RepEV >= 270 && campaignTrail_temp.RepEV <= 379) {
-    return getEnding("andersonwins");
-} else if (campaignTrail_temp.RepEV >= 180 && campaignTrail_temp.RepEV <= 269) {
-    return getEnding("andersonloses");
-} else {
-    return getEnding("andersonlosesbig");
-}
-
-}
 }
 campaignTrail_temp.cyoa = true
 ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1]
@@ -908,6 +929,7 @@ if (chosenP === "Reagan") {
 else if (chosenP === "Bush") {
 
   vpTable = {
+    "George Bush": bushVPs[chosenVP] || "Jack Kemp",
     "George H.W. Bush": bushVPs[chosenVP] || "Jack Kemp",
     "Jimmy Carter": carterVP,
     "Jesse Helms": "John Ashbrook",
