@@ -1178,7 +1178,7 @@ function add2024bToDropdown() {
 
 function check2024bUnlock() {
   const hasStoredUnlock = localStorage.getItem("enable2024b") === "true";
-  const hasAchievementUnlock = qualifyingAchs.filter(a => unlockedAch[a]).length >= 8;
+  const hasAchievementUnlock = qualifyingAchs.filter(a => hasAch(a)).length >= 8;
   const hasCheatBypass = typeof cheatsActive !== "undefined" && cheatsActive === true;
 
   campaignTrail_temp._2024bEnabled =
@@ -1313,8 +1313,16 @@ const newThemePicker = document.createElement("select");
 newThemePicker.id = "themePicker";
 
 let newInnerHTML = "";
-const hasFUBAR = !!unlockedAch["FUBAR"];
-const hasRestInPower = !!unlockedAch["Rest In Power"];
+
+function hasAch(name) {
+  return !!(
+    unlockedAch[name] || 
+    unlockedAch["2020 - American Carnage:" + name] || 
+    unlockedAch["American Carnage:" + name]
+  );
+}
+const hasFUBAR = hasAch("FUBAR");
+const hasRestInPower = hasAch("Rest In Power");
 
 const themeUnlockTooltips = {
   "Dark MAGA": "Unlock by earning the FUBAR achievement.",
@@ -2794,8 +2802,8 @@ function setupMusicPlayer() {
       `linear-gradient(to right, #16893f ${percent}%, #ddd ${percent}%)`;
   }
 
-  const hasTakeTheHill = !!unlockedAch["Take The Hill"];
-  const hasFellArock = !!unlockedAch["ɐllǝℲ ,ɐ ʞɔoᴚ"];
+  const hasTakeTheHill = hasAch("Take The Hill");
+  const hasFellArock = hasAch("ɐllǝℲ ,ɐ ʞɔoᴚ");
 
   const allPlaylists = [
     [
