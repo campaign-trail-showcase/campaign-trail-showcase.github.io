@@ -110,6 +110,76 @@ const cssRules = `
         margin-left: auto; 
         margin-right: auto; 
     }
+
+    #game_window {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 595px;
+      height: auto;
+      /* necessary so tooltips don't break */
+      overflow-x: visible !important;
+      overflow-y: visible !important;
+    }
+
+    .inner_window_question {
+      min-height: 321px;
+      height: auto !important;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #game_window g {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 0;
+    }
+
+    #candidate_pic, img#candidate_pic {
+      order: 1;
+      width: 13em;
+      height: auto;
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+
+    #running_mate_pic, img#running_mate_pic {
+      order: 3;
+      width: 13em;
+      height: auto;
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    .inner_window_sign_display {
+      order: 2;
+      flex: 1;
+      min-width: 180px;
+      max-width: 290px;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: .5em
+    }
+
+    #map_container {
+      height: 30.78em;
+    }
+
+    .person_description_window {
+      display: flex;
+      height: 320px;
+    }
+
+    .person_summary ul {
+      padding: 0;
+    }
+
   }
 `;
 
