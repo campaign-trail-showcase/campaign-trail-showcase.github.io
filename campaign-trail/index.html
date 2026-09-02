@@ -105,10 +105,11 @@
                 <input style="border-radius:5px; font-weight:bold;padding:10px;"  type="number" id="skipQuestionValue" placeholder="Enter question to skip to"></input>
                 <button onclick="skipQuestion(event)" style="border-radius:5px; font-weight:bold;padding:10px;">Skip To Question</button>
               </div>
-              <div style="margin-top:10px">
+              <div style="margin-top:10px;display: flex;gap: 5px;">
                 <button onclick="addSTSSMoney()" style="border-radius:5px; font-weight:bold;padding:10px;">"Borrow" $1000000 (STSS Only)</button>
                 <button onclick="useConsoleCheats()" style="border-radius:5px; font-weight:bold;padding:10px;">Open Console</button>
-                <button onclick="toggleVariableChanges()" id="variableChangesButton" aria-pressed="false" style="border-radius:5px; font-weight:bold;padding:10px;">Variable Changes</button>
+                <button onclick="toggleRng()" id="rngButton" style="border-radius:5px; font-weight:bold;padding:10px;">RNG: On</button>
+				<button onclick="toggleVariableChanges()" id="variableChangesButton" aria-pressed="false" style="border-radius:5px; font-weight:bold;padding:10px;">Variable Changes</button>
               </div>
             </div>
             <div id="autoplayMenu" style="display:none">

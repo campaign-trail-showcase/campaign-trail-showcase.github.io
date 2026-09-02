@@ -632,3 +632,29 @@ function addSTSSMoney() {
     alert("You must be playing Sea to Shining Sea mode to use this!");
   }
 }
+
+toggleRng.rngDisabled = false;
+function toggleRng() {
+  if (!toggleRng.rngDisabled) {
+    // saves the RNG function so it can be toggled back on
+    if (!toggleRng.savedRandomNormal) {
+      toggleRng.savedRandomNormal =
+      typeof randomNormal === "function" ? randomNormal : null;
+    }
+
+    if (typeof randomNormal === "function") {
+      randomNormal = () => 0;
+    }
+
+    toggleRng.rngDisabled = true;
+  } else {
+    if (typeof toggleRng.savedRandomNormal === "function") {
+      randomNormal = toggleRng.savedRandomNormal;
+    }
+
+    toggleRng.rngDisabled = false;
+  }
+
+  document.getElementById("rngButton").textContent =
+    `RNG: ${toggleRng.rngDisabled ? "Off" : "On"}`;
+}
