@@ -1,7 +1,7 @@
 /*
 * @title: 2000: The Major Leagues / The Major Leagues / 2000P
 * @author: StrawberryMaster & Friends
-* @version: 1.4.2
+* @version: 1.4.3
 * @description: The 2000 election in the eyes of Charlie Brown (and a couple of others, too)
 *
 * Coding license: Apache License 2.0
@@ -204,7 +204,7 @@ const recommendedReadingContent = `
 			<li>
 				<strong>How important are the different school cliques?</strong><br>
 				They are the closest thing you have to an “electoral map” here. Each of the five main factions — the Jocks, the Burnouts, the Honors Kids, the Arts/Theatre crowd, and the Administration — has its own set of values and priorities. The Jocks generally value strength and respect Patty; the Burnouts are anti-establishment and respond to populist anger; the Honors Kids value stability and favor the status quo candidate, Linus; the Arts kids are idealists who respond to emotion but are turned off by overt aggression; and the Administration wants a student president who won’t rock the boat. You can, technically, win them all, although this is quite difficult. The core strategy of the game however, is building a winning coalition from these disparate groups, which often have competing interests. Your choices will almost always please one group at the expense of another.
-			</li>
+			</li>			
             <li>
                 <strong>What exactly is the ‘Ruthlessness’ stat?</strong><br>
                 It tracks Charlie’s descent into a Machiavellian political operator (or not, that is). If you go too far, you compromise your morals, you alienate your friends, and you become exactly the kind of establishment monster you swore you were running against. High ruthlessness alters your endings drastically.
@@ -725,16 +725,16 @@ HistHexcolour = HistHexcolour.map(hex =>
 
 // Mod box themes
 campaignTrail_temp.modBoxTheme = {
-    "header_color": "#f9d826",
-    "header_text_color": "#fff",
-	  "header_text_shadow": "1px 1px #000",
-	  "header_image_url": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/tml_banner.webp",
-	  "image_border": "3px solid #ffe290",
-    "description_text_color": "#000",
-    "description_background_color": "#fffcdd",
-    "main_color": "#fff8bf",
-    "secondary_color": "#f9d826",
-    "ui_text_color": "#000",
+     "header_color": "#f9d826",
+     "header_text_color": "#fff",
+     "header_text_shadow": "1px 1px #000",
+     "header_image_url": "https://file.garden/aNtAfG887DiA_7lO/TML_2000/tml_banner.webp",
+     "image_border": "3px solid #ffe290",
+     "description_text_color": "#000",
+     "description_background_color": "#fffcdd",
+     "main_color": "#fff8bf",
+     "secondary_color": "#f9d826",
+     "ui_text_color": "#000",
 	  "scrollbar_color": "#776800 #dad055"
 }
 //#endcode
@@ -862,13 +862,13 @@ const css = `
 			#inner_window_2 p:first-of-type:first-letter,
 			#inner_window_3 p:first-of-type:first-letter,
 			#running_mate_description_window p:first-of-type:first-letter {
-				float: left;
-				font-weight: bold;
+				float: left; 
+				font-weight: bold; 
 				line-height: 0.7em;
 				margin-top: 0.05em;
 				font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
 				text-shadow: 2px 2px 0px #222222, -1px -1px 0px #fffdf2;
-
+				
 				font-size: 3.5em;
 				padding-bottom: 0.1em;
 			}
@@ -953,7 +953,7 @@ const css = `
                 margin: 5px 10px 5px 5px;
                 width: 250px;
             }
-
+			
 			#candidate_image img, #running_mate_image img {
 				background: #fffdf2;
 				border: 1px solid #222;
@@ -962,7 +962,7 @@ const css = `
 				max-width: 220px;
 				object-fit: cover;
 				object-position: top;
-				outline: 2px solid;
+				outline: 2px solid; 
 				padding: 6px 6px 16px 6px;
 				position: relative;
 				transform: rotate(-3deg);
@@ -970,11 +970,11 @@ const css = `
 				width: 100%;
 				z-index: 1;
 			}
-			#candidate_image img {
+			#candidate_image img { 
 				outline-color: #b10b0b;
 			}
-			#running_mate_image img {
-				outline-color: #414ddb;
+			#running_mate_image img { 
+				outline-color: #414ddb; 
 				transform: rotate(2deg);
 			}
 
@@ -996,9 +996,9 @@ const css = `
 				border-top: none;
 				border-left: none;
 				border-right: none;
-                min-height: 20em;
+        min-height: 300px;
 			}
-
+			
 			.game_header {
 				align-items: center;
 				background-color: #d8720c;
@@ -1289,7 +1289,7 @@ const css = `
 			#election_year_form + p:first-of-type {
 			  padding-top: 5em;
 			}
-
+			
 			/* mobile tweaks for this */
 			@media only screen and (max-width: 768px) {
 			  #election_description_window {
@@ -1505,7 +1505,7 @@ const css = `
             button#ExportFileButton {
                 display: inline-flex;
             }
-
+			
             /* other, in-game issue tooltips */
             .tooltip {
                 cursor: help;
@@ -1847,7 +1847,7 @@ const css = `
 				transform: translateX(-50%) translateY(0);
 				transition-delay: 0.15s;
 			}
-
+			
 			/* tooltip extras */
 			.mytooltip .mytooltiptext.flip-bottom {
 				bottom: auto;
@@ -2148,7 +2148,7 @@ const css = `
 			  outline: 1px dotted #000;
 			  outline-offset: -4px;
 			}
-
+			
 			.achSubHolder.visible {
 			  display: flex !important;
 			  flex-wrap: wrap !important;
@@ -2170,7 +2170,7 @@ const css = `
 
 			.achBox {
 			  margin: 0 !important;
-			  width: calc((100% - 30px) / 3) !important;
+			  width: calc((100% - 30px) / 3) !important; 
 			  max-width: none !important;
 			  height: 350px !important;
 			  display: flex !important;
@@ -2180,7 +2180,7 @@ const css = `
 			  padding: 15px !important;
 			  box-sizing: border-box !important;
 			}
-
+			
 			/* extra media queries */
 			@media (max-width: 768px) {
 			  .achBox {
@@ -2518,7 +2518,7 @@ const css = `
 				border-radius: 3px;
 			}
 
-			#cheatMenu input[type="range"]::-webkit-slider-thumb {
+			#cheatMenu input[type="range"]::-webkit-slider-thumb {				
 				-webkit-appearance: none;
 				appearance: none;
 				width: 14px;
@@ -2851,7 +2851,7 @@ const css = `
 					padding: 10px 16px;
 					min-height: 44px;
 				}
-
+				
 				#question_form input[type="radio"] + label:hover,
 				#question_form input[type="radio"] + label:focus {
 					font-size: clamp(16px, 4.2vw, 20px);
@@ -4248,7 +4248,7 @@ window.a = function(e) {
       if (targetMod) {
         const redirectUrl = new URL(CONFIG.baseUrl);
         redirectUrl.searchParams.set('modName', targetMod.modName);
-
+        
         // converts form-encoded '+' spaces to '%20' so they display cleanly as spaces in the browser address bar
         const cleanUrl = redirectUrl.toString().replace(/\+/g, '%20');
         window.location.href = cleanUrl;
@@ -4371,7 +4371,7 @@ window.a = function(e) {
 // The dynamic tooltips
 const tooltipList = [
   { searchString: "Linus", image: "https://i.pinimg.com/1200x/83/3a/3a/833a3aa1382f73a6cffe17e3193101a5.jpg", text: "The devil." },
-  { searchString: "Linus Van Pelt", image: "https://i.pinimg.com/1200x/d6/18/30/d61830629dd489745396d1eefc5ca4d5.jpg", text: "Nerd." },
+  { searchString: "Linus Van Pelt", image: "https://i.pinimg.com/1200x/d6/18/30/d61830629dd489745396d1eefc5ca4d5.jpg", text: "Nerd." },  
   { searchString: "Patty", image: "https://i.pinimg.com/1200x/22/cb/d0/22cbd081d3bc2e7306f29803cb9d7a67.jpg", text: "Ah, heavens…" },
   { searchString: "Lucy", image: "https://i.pinimg.com/1200x/40/d6/45/40d64580f6da559e27862d50810be0c7.jpg", text: "Linus’s terrifying older sister. Also known as Baphomet, she runs the school’s social hierarchy with an iron fist." },
   { searchString: "Lucy Van Pelt", image: "https://i.pinimg.com/1200x/6f/f2/ea/6ff2ea684968657b4b7319baa6eae0ee.jpg", text: "Same." },
@@ -4744,14 +4744,14 @@ document.addEventListener('mouseover', function(e) {
         const img = repeatButtonElement.firstElementChild;
         repeatButtonElement.classList.remove('repeat-active', 'repeat-one');
         let iconSrc = ICON_REPEAT_NONE, label = "Repeat Off";
-        if (repeatMode === 'all') {
-            iconSrc = ICON_REPEAT_ALL;
-            label = "Repeat All";
-            repeatButtonElement.classList.add('repeat-active');
-        } else if (repeatMode === 'one') {
-            iconSrc = ICON_REPEAT_ONE;
-            label = "Repeat One";
-            repeatButtonElement.classList.add('repeat-active', 'repeat-one');
+        if (repeatMode === 'all') { 
+            iconSrc = ICON_REPEAT_ALL; 
+            label = "Repeat All"; 
+            repeatButtonElement.classList.add('repeat-active'); 
+        } else if (repeatMode === 'one') { 
+            iconSrc = ICON_REPEAT_ONE; 
+            label = "Repeat One"; 
+            repeatButtonElement.classList.add('repeat-active', 'repeat-one'); 
         }
         if (img) img.src = iconSrc;
         repeatButtonElement.setAttribute('aria-label', label);
@@ -4834,10 +4834,10 @@ document.addEventListener('mouseover', function(e) {
     }
 
     function getFavorites() {
-        try {
-            return JSON.parse(localStorage.getItem('musicPlayerFavorites')) || [];
-        } catch {
-            return [];
+        try { 
+            return JSON.parse(localStorage.getItem('musicPlayerFavorites')) || []; 
+        } catch { 
+            return []; 
         }
     }
 
@@ -4923,20 +4923,20 @@ document.addEventListener('mouseover', function(e) {
         const currentSong = playlist?.getCurrentSong();
 
         if (!currentSong) {
-            if (lastRenderedCover !== "") {
-                coverElement.src = "";
-                coverElement.alt = "No cover art";
-                lastRenderedCover = "";
+            if (lastRenderedCover !== "") { 
+                coverElement.src = ""; 
+                coverElement.alt = "No cover art"; 
+                lastRenderedCover = ""; 
             }
-            if (lastRenderedTitle !== "No song loaded") {
-                titleElement.textContent = "No song loaded";
-                titleElement.title = "";
-                lastRenderedTitle = "No song loaded";
+            if (lastRenderedTitle !== "No song loaded") { 
+                titleElement.textContent = "No song loaded"; 
+                titleElement.title = ""; 
+                lastRenderedTitle = "No song loaded"; 
             }
-            if (lastRenderedArtist !== "") {
-                artistElement.textContent = "";
-                artistElement.title = "";
-                lastRenderedArtist = "";
+            if (lastRenderedArtist !== "") { 
+                artistElement.textContent = ""; 
+                artistElement.title = ""; 
+                lastRenderedArtist = ""; 
             }
             youtubeLinkElement.href = "#";
             youtubeLinkElement.classList.add('hidden');
@@ -4950,17 +4950,17 @@ document.addEventListener('mouseover', function(e) {
                 lastRenderedCover = coverLink;
             }
             const songTitle = currentSong.getTitle();
-            if (lastRenderedTitle !== songTitle) {
-                titleElement.textContent = songTitle;
-                titleElement.title = songTitle;
-                lastRenderedTitle = songTitle;
+            if (lastRenderedTitle !== songTitle) { 
+                titleElement.textContent = songTitle; 
+                titleElement.title = songTitle; 
+                lastRenderedTitle = songTitle; 
             }
 
             const songArtist = currentSong.getArtist();
-            if (lastRenderedArtist !== songArtist) {
-                artistElement.textContent = songArtist;
-                artistElement.title = songArtist;
-                lastRenderedArtist = songArtist;
+            if (lastRenderedArtist !== songArtist) { 
+                artistElement.textContent = songArtist; 
+                artistElement.title = songArtist; 
+                lastRenderedArtist = songArtist; 
             }
 
             youtubeLinkElement.href = currentSong.getYoutubeLink();
@@ -5107,9 +5107,9 @@ document.addEventListener('mouseover', function(e) {
 
     function stopRafUpdater() {
         isUpdaterRunning = false;
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-            rafId = null;
+        if (rafId) { 
+            cancelAnimationFrame(rafId); 
+            rafId = null; 
         }
     }
 
@@ -5322,9 +5322,9 @@ document.addEventListener('mouseover', function(e) {
 
         displayBoxElement    = document.createElement("div");
         displayBoxElement.id = DISPLAY_BOX_ID;
-        const cdWrapper      = document.createElement("div");
+        const cdWrapper      = document.createElement("div"); 
         cdWrapper.id         = "player-cd-wrapper";
-        const cdDisc         = document.createElement("div");
+        const cdDisc         = document.createElement("div"); 
         cdDisc.id            = "player-cd-disc";
         cdWrapper.appendChild(cdDisc);
         displayBoxElement.appendChild(cdWrapper);
@@ -5350,14 +5350,14 @@ document.addEventListener('mouseover', function(e) {
         playlistSelectorElement.title = "Select playlist";
         playlistSelectorContainer.appendChild(playlistSelectorElement);
 
-        const infoContainer     = document.createElement("div");
+        const infoContainer     = document.createElement("div"); 
         infoContainer.id        = "player-info-container";
-        const songInfo          = document.createElement("div");
+        const songInfo          = document.createElement("div"); 
         songInfo.id             = "player-song-info";
-        const titleLineWrapper  = document.createElement("div");
+        const titleLineWrapper  = document.createElement("div"); 
         titleLineWrapper.className = TITLE_LINE_WRAPPER_CLASS;
-        titleElement            = document.createElement("h3");
-        titleElement.id         = TITLE_ID;
+        titleElement            = document.createElement("h3"); 
+        titleElement.id         = TITLE_ID; 
         titleElement.textContent = "Loading...";
         youtubeLinkElement      = document.createElement("a");
         youtubeLinkElement.id   = YOUTUBE_LINK_ID;
@@ -5365,152 +5365,152 @@ document.addEventListener('mouseover', function(e) {
         youtubeLinkElement.rel  = "noopener noreferrer";
         youtubeLinkElement.title = "Watch on YouTube";
         youtubeLinkElement.classList.add('hidden');
-        const ytIcon            = document.createElement("img");
-        ytIcon.src              = ICON_YOUTUBE;
+        const ytIcon            = document.createElement("img"); 
+        ytIcon.src              = ICON_YOUTUBE; 
         ytIcon.alt              = "YouTube";
         youtubeLinkElement.appendChild(ytIcon);
         titleLineWrapper.append(titleElement, youtubeLinkElement);
-        artistElement           = document.createElement("p");
-        artistElement.id        = ARTIST_ID;
+        artistElement           = document.createElement("p"); 
+        artistElement.id        = ARTIST_ID; 
         artistElement.textContent = "";
         songInfo.append(titleLineWrapper, artistElement);
         infoContainer.appendChild(songInfo);
         rightPanel.appendChild(infoContainer);
 
-        const progressBarContainer    = document.createElement("div");
+        const progressBarContainer    = document.createElement("div"); 
         progressBarContainer.id       = PROGRESS_BAR_CONTAINER_ID;
-        currentTimeElement            = document.createElement("span");
-        currentTimeElement.id         = CURRENT_TIME_ID;
+        currentTimeElement            = document.createElement("span"); 
+        currentTimeElement.id         = CURRENT_TIME_ID; 
         currentTimeElement.textContent = "0:00";
         progressBarContainer.appendChild(currentTimeElement);
 
-        progressWrapperElement        = document.createElement("div");
+        progressWrapperElement        = document.createElement("div"); 
         progressWrapperElement.id     = "player-progress-wrapper";
-        const visualTrack             = document.createElement("div");
+        const visualTrack             = document.createElement("div"); 
         visualTrack.className         = "visual-track";
-        const visualFill              = document.createElement("div");
-        visualFill.id                 = "player-visual-fill";
+        const visualFill              = document.createElement("div"); 
+        visualFill.id                 = "player-visual-fill"; 
         visualFill.className          = "visual-fill";
-        const visualThumb             = document.createElement("div");
-        visualThumb.id                = "player-visual-thumb";
+        const visualThumb             = document.createElement("div"); 
+        visualThumb.id                = "player-visual-thumb"; 
         visualThumb.className         = "visual-thumb";
         progressBar                   = document.createElement("input");
-        progressBar.type              = "range";
-        progressBar.id                = PROGRESS_BAR_ID;
+        progressBar.type              = "range"; 
+        progressBar.id                = PROGRESS_BAR_ID; 
         progressBar.className         = "invisible-slider";
-        progressBar.value             = "0";
-        progressBar.min               = "0";
-        progressBar.max               = "100";
-        progressBar.step              = "0.01";
+        progressBar.value             = "0"; 
+        progressBar.min               = "0"; 
+        progressBar.max               = "100"; 
+        progressBar.step              = "0.01"; 
         progressBar.title             = "Seek";
         progressWrapperElement.style.setProperty('--progress-ratio', '0');
         progressWrapperElement.append(visualTrack, visualFill, visualThumb, progressBar);
         progressBarContainer.appendChild(progressWrapperElement);
 
-        durationElement               = document.createElement("span");
-        durationElement.id            = DURATION_ID;
+        durationElement               = document.createElement("span"); 
+        durationElement.id            = DURATION_ID; 
         durationElement.textContent   = "--:--";
         progressBarContainer.appendChild(durationElement);
         rightPanel.appendChild(progressBarContainer);
 
-        const controlsContainer   = document.createElement("div");
+        const controlsContainer   = document.createElement("div"); 
         controlsContainer.id      = "player-controls-container";
-        const controls            = document.createElement("div");
+        const controls            = document.createElement("div"); 
         controls.id               = "player-controls";
 
-        shuffleButtonElement      = document.createElement("button");
-        shuffleButtonElement.id   = SHUFFLE_BUTTON_ID;
+        shuffleButtonElement      = document.createElement("button"); 
+        shuffleButtonElement.id   = SHUFFLE_BUTTON_ID; 
         shuffleButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-shuffle-button');
-        const shuffleIcon         = document.createElement("img");
-        shuffleIcon.alt           = "";
-        shuffleIcon.src           = ICON_SHUFFLE_OFF;
+        const shuffleIcon         = document.createElement("img"); 
+        shuffleIcon.alt           = ""; 
+        shuffleIcon.src           = ICON_SHUFFLE_OFF; 
         shuffleButtonElement.appendChild(shuffleIcon);
 
-        prevButtonElement         = document.createElement("button");
-        prevButtonElement.id      = PREV_BUTTON_ID;
-        prevButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
-        prevButtonElement.setAttribute('aria-label', 'Previous song');
+        prevButtonElement         = document.createElement("button"); 
+        prevButtonElement.id      = PREV_BUTTON_ID; 
+        prevButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS); 
+        prevButtonElement.setAttribute('aria-label', 'Previous song'); 
         prevButtonElement.title   = 'Previous song';
-        const prevIcon            = document.createElement("img");
-        prevIcon.src              = ICON_PREV;
-        prevIcon.alt              = "";
+        const prevIcon            = document.createElement("img"); 
+        prevIcon.src              = ICON_PREV; 
+        prevIcon.alt              = ""; 
         prevButtonElement.appendChild(prevIcon);
 
-        playPauseButton           = document.createElement("button");
-        playPauseButton.id        = PLAY_PAUSE_BUTTON_ID;
+        playPauseButton           = document.createElement("button"); 
+        playPauseButton.id        = PLAY_PAUSE_BUTTON_ID; 
         playPauseButton.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
-        const playPauseIcon       = document.createElement("img");
-        playPauseIcon.alt         = "";
-        playPauseIcon.src         = ICON_PLAY;
+        const playPauseIcon       = document.createElement("img"); 
+        playPauseIcon.alt         = ""; 
+        playPauseIcon.src         = ICON_PLAY; 
         playPauseButton.appendChild(playPauseIcon);
 
-        nextButtonElement         = document.createElement("button");
-        nextButtonElement.id      = NEXT_BUTTON_ID;
-        nextButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
-        nextButtonElement.setAttribute('aria-label', 'Next song');
+        nextButtonElement         = document.createElement("button"); 
+        nextButtonElement.id      = NEXT_BUTTON_ID; 
+        nextButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS); 
+        nextButtonElement.setAttribute('aria-label', 'Next song'); 
         nextButtonElement.title   = 'Next song';
-        const nextIcon            = document.createElement("img");
-        nextIcon.src              = ICON_NEXT;
-        nextIcon.alt              = "";
+        const nextIcon            = document.createElement("img"); 
+        nextIcon.src              = ICON_NEXT; 
+        nextIcon.alt              = ""; 
         nextButtonElement.appendChild(nextIcon);
 
-        repeatButtonElement       = document.createElement("button");
-        repeatButtonElement.id    = REPEAT_BUTTON_ID;
+        repeatButtonElement       = document.createElement("button"); 
+        repeatButtonElement.id    = REPEAT_BUTTON_ID; 
         repeatButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-repeat-button');
-        const repeatIcon          = document.createElement("img");
-        repeatIcon.alt            = "";
-        repeatIcon.src            = ICON_REPEAT_NONE;
+        const repeatIcon          = document.createElement("img"); 
+        repeatIcon.alt            = ""; 
+        repeatIcon.src            = ICON_REPEAT_NONE; 
         repeatButtonElement.appendChild(repeatIcon);
 
-        favoriteButtonElement     = document.createElement("button");
-        favoriteButtonElement.id  = FAVORITE_BUTTON_ID;
-        favoriteButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-favorite-button');
+        favoriteButtonElement     = document.createElement("button"); 
+        favoriteButtonElement.id  = FAVORITE_BUTTON_ID; 
+        favoriteButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-favorite-button'); 
         favoriteButtonElement.title = "Favorite";
-        const favIcon             = document.createElement("img");
-        favIcon.alt               = "Favorite";
-        favIcon.src               = ICON_HEART_EMPTY;
+        const favIcon             = document.createElement("img"); 
+        favIcon.alt               = "Favorite"; 
+        favIcon.src               = ICON_HEART_EMPTY; 
         favoriteButtonElement.appendChild(favIcon);
 
         controls.append(shuffleButtonElement, prevButtonElement, playPauseButton, nextButtonElement, repeatButtonElement, favoriteButtonElement);
         controlsContainer.appendChild(controls);
         controlsContainer.appendChild(playlistSelectorContainer);
 
-        const volContainer        = document.createElement("div");
+        const volContainer        = document.createElement("div"); 
         volContainer.id           = VOLUME_CONTAINER_ID;
-        volumeIconElement         = document.createElement("img");
-        volumeIconElement.id      = VOLUME_ICON_ID;
-        volumeIconElement.alt     = "Mute";
-        volumeIconElement.title   = "Mute/Unmute";
-        volumeIconElement.style.cursor = 'pointer';
+        volumeIconElement         = document.createElement("img"); 
+        volumeIconElement.id      = VOLUME_ICON_ID; 
+        volumeIconElement.alt     = "Mute"; 
+        volumeIconElement.title   = "Mute/Unmute"; 
+        volumeIconElement.style.cursor = 'pointer'; 
         volumeIconElement.src     = ICON_VOLUME;
-        volumePercentageElement   = document.createElement("span");
-        volumePercentageElement.id = VOLUME_PERCENTAGE_ID;
+        volumePercentageElement   = document.createElement("span"); 
+        volumePercentageElement.id = VOLUME_PERCENTAGE_ID; 
         volumePercentageElement.textContent = "50%";
-        volumeSlider              = document.createElement("input");
-        volumeSlider.type         = "range";
-        volumeSlider.id           = VOLUME_SLIDER_ID;
-        volumeSlider.min          = "0";
-        volumeSlider.max          = "1";
-        volumeSlider.step         = "0.01";
-        volumeSlider.value        = "0.5";
+        volumeSlider              = document.createElement("input"); 
+        volumeSlider.type         = "range"; 
+        volumeSlider.id           = VOLUME_SLIDER_ID; 
+        volumeSlider.min          = "0"; 
+        volumeSlider.max          = "1"; 
+        volumeSlider.step         = "0.01"; 
+        volumeSlider.value        = "0.5"; 
         volumeSlider.title        = "Adjust volume";
         volumeSlider.style.setProperty('--volume-percent', '50%');
         volContainer.append(volumeIconElement, volumePercentageElement, volumeSlider);
         controlsContainer.appendChild(volContainer);
         rightPanel.appendChild(controlsContainer);
 
-        queueContainerElement     = document.createElement("div");
+        queueContainerElement     = document.createElement("div"); 
         queueContainerElement.id  = QUEUE_CONTAINER_ID;
-        queueTitleElement         = document.createElement("h4");
+        queueTitleElement         = document.createElement("h4"); 
         queueTitleElement.id      = QUEUE_TITLE_ID;
         queueTitleElement.innerHTML = `Tracklist <span id="${QUEUE_TOGGLE_ICON_ID}">${isQueueSectionExpanded ? "▼" : "▶"}</span>`;
         queueToggleIconElement    = queueTitleElement.querySelector(`#${QUEUE_TOGGLE_ICON_ID}`);
-        queueListElement          = document.createElement("ul");
+        queueListElement          = document.createElement("ul"); 
         queueListElement.id       = QUEUE_LIST_ID;
         queueContainerElement.append(queueTitleElement, queueListElement);
         mainPlayerArea.appendChild(queueContainerElement);
 
-        const youtubePlayerDiv    = document.createElement("div");
+        const youtubePlayerDiv    = document.createElement("div"); 
         youtubePlayerDiv.id       = YOUTUBE_PLAYER_DIV_ID;
         fragment.appendChild(youtubePlayerDiv);
 
@@ -5522,12 +5522,12 @@ document.addEventListener('mouseover', function(e) {
         playPauseButton.addEventListener("click", togglePlayPause);
 
         nextButtonElement.addEventListener("click", () => {
-            if (!hasUserInitiatedPlayback) {
-                if (playlist.isEmpty()) return;
-                hasUserInitiatedPlayback = true;
-                playlist.playNext();
-                loadCurrentSong(true);
-                return;
+            if (!hasUserInitiatedPlayback) { 
+                if (playlist.isEmpty()) return; 
+                hasUserInitiatedPlayback = true; 
+                playlist.playNext(); 
+                loadCurrentSong(true); 
+                return; 
             }
             const wasPlaying = isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING;
             const shouldPlay = wasPlaying || repeatMode === 'all' || playlist.currentSongIndex !== playlist.getSongs().length - 1;
@@ -5536,12 +5536,12 @@ document.addEventListener('mouseover', function(e) {
         });
 
         prevButtonElement.addEventListener("click", () => {
-            if (!hasUserInitiatedPlayback) {
-                if (playlist.isEmpty()) return;
-                hasUserInitiatedPlayback = true;
-                playlist.playPrevious();
-                loadCurrentSong(true);
-                return;
+            if (!hasUserInitiatedPlayback) { 
+                if (playlist.isEmpty()) return; 
+                hasUserInitiatedPlayback = true; 
+                playlist.playPrevious(); 
+                loadCurrentSong(true); 
+                return; 
             }
             const wasPlaying = isPlayerActive() && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING;
             playlist.playPrevious();
@@ -5584,9 +5584,9 @@ document.addEventListener('mouseover', function(e) {
         progressBar.addEventListener("mouseup", commitSeek);
         progressBar.addEventListener("touchend", commitSeek);
 
-        volumeSlider.addEventListener("input", () => {
-            setVolumeFromSlider(true);
-            updateVolumeIcon();
+        volumeSlider.addEventListener("input", () => { 
+            setVolumeFromSlider(true); 
+            updateVolumeIcon(); 
         });
 
         playlistSelectorElement.addEventListener("change", (e) => {
@@ -5601,9 +5601,9 @@ document.addEventListener('mouseover', function(e) {
             if (!item?.dataset.songIndex) return;
             if (!hasUserInitiatedPlayback) hasUserInitiatedPlayback = true;
             const idx = parseInt(item.dataset.songIndex, 10);
-            if (playlist.currentSongIndex !== idx) {
-                playlist.setCurrentSongIndex(idx);
-                loadCurrentSong(true);
+            if (playlist.currentSongIndex !== idx) { 
+                playlist.setCurrentSongIndex(idx); 
+                loadCurrentSong(true); 
             }
         });
 
@@ -5647,8 +5647,8 @@ document.addEventListener('mouseover', function(e) {
             #${PLAYLIST_SELECTOR_CONTAINER_ID} label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin: 0; }
             #${PLAYLIST_SELECTOR_ID} { background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.2); border-radius: 4px; padding: 2px 6px; font-family: inherit; font-size: 11px; color: var(--text-primary); cursor: pointer; outline: none; transition: background 0.2s; }
             #${PLAYLIST_SELECTOR_ID}:hover { background: rgba(255,255,255,0.8); }
-
-            #player-playlist-selector { margin: 0 5px; padding: 2px; }
+            
+            #player-playlist-selector { margin: 0 5px; padding: 2px; } 
             .hidden { display: none !important; }
 
             #${MINIMIZE_BUTTON_ID} {
@@ -5837,9 +5837,9 @@ document.addEventListener('mouseover', function(e) {
 
     function loadYouTubeAPI() {
         return new Promise((resolve, reject) => {
-            if (typeof YT !== 'undefined' && typeof YT.Player !== 'undefined') {
-                resolve();
-                return;
+            if (typeof YT !== 'undefined' && typeof YT.Player !== 'undefined') { 
+                resolve(); 
+                return; 
             }
 
             const existingScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
@@ -5875,7 +5875,7 @@ document.addEventListener('mouseover', function(e) {
     async function initializeMusicPlayer() {
         try {
             const playerFragment = createPlayerElements();
-
+            
             refreshPlaylistsUI();
 
             const initialSongs = PLAYLISTS_DATA[0]?.songs.length

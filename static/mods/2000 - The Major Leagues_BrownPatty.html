@@ -10585,7 +10585,7 @@ const peanutsFooterStyles = `
         font-size: 24px;
         font-weight: 700;
         color: #f7f4ee;
-        text-shadow: 2px 2px 2px rgba(0,0,0,0.55);
+        text-shadow: 2px 2px 2px rgba(0,0,0,0.65);
         letter-spacing: -0.5px;
     }
 
@@ -10756,6 +10756,10 @@ const achState = {
   isShowing: false
 };
 
+const nativeUnlockAchievement = typeof window.unlockAchievement === "function" 
+  ? window.unlockAchievement 
+  : (typeof unlockAchievement === "function" ? unlockAchievement : null);
+  
 function unlockAchievement(title) {
   const game = window.campaignTrail_temp;
   if (!game?.CTS) return;
@@ -10780,20 +10784,34 @@ function unlockAchievement(title) {
 
   if (shouldSavePermanently) {
     achState.permanent[title] = true;
-    localStorage.setItem(ACH_CONFIG.STORAGE_KEY, JSON.stringify(achState.permanent));
+	
+	// call the base engine's unlocker
+    if (typeof nativeUnlockAchievement === "function") {
+      const originalAlert = window.alert;
+      window.alert = () => {}; // mute browser alert
 
-    if (typeof window.unlockedAch !== 'undefined') {
-      window.unlockedAch[title] = achData;
-    }
-
-    window.modCompletionCache = null;
-    window.lastCacheUpdate = 0;
-
-    if (typeof window.addAllAchievements === 'function') {
-      window.addAllAchievements();
+      try {
+        nativeUnlockAchievement(title, window.modBeingPlayed || null);
+      } finally {
+        window.alert = originalAlert; // restore it
+      }
+    } else {
+      // update stats directly
+      try {
+        if (typeof unlockedAch !== "undefined") {
+          const modName = window.modBeingPlayed || null;
+          const key = modName ? `${modName}:${title}` : title;
+          unlockedAch[key] = { ...achData, modName, achName: title };
+        }
+        if (typeof modCompletionCache !== "undefined") modCompletionCache = null;
+        if (typeof lastCacheUpdate !== "undefined") lastCacheUpdate = 0;
+        if (typeof addAllAchievements === "function") addAllAchievements();
+      } catch (e) {
+        console.error("Error updating achievement state:", e);
+      }
     }
   }
-
+  
   // user options for achievements
   const popupSetting = game.achPopup || 'always';
   const isNewUnlock = shouldSavePermanently;
@@ -11058,7 +11076,7 @@ cyoAdventure = function (a) {
 	// Lucy's offer
 	if (e.noCounter === 4) {
 		const q349 = campaignTrail_temp.questions_json.find(q => q.pk === 349);
-		if (q349) {
+		if (q349) {		
 			if (ruthlessness >= 2) {
 				q349.fields.description = "Halfway through a plate of fries at a diner after school, you look up to find <i>the</i> Lucy Van Pelt sliding into the booth across from you without asking. Naturally, she already knows what you’ve been doing. Lucy practically runs the school’s social life, with enough gossip passing through the second-floor girls’ bathroom to make or break just about anybody’s reputation.<br><br>“I’ve been watching you, blockhead,” she says, stirring her coffee. “You’ve gotten meaner this semester. I kind of like it, I really do. Linus still thinks he’s some great philosopher who’s gonna save this school, but I’ve got something on him. Something that’ll <i>wreck</i> his campaign if it gets out.” She looks up at you. “You want it?”";
 			} else if (cynicism >= 2) {
@@ -11097,7 +11115,7 @@ cyoAdventure = function (a) {
 		const q347 = campaignTrail_temp.questions_json.find(q => q.pk === 347);
 		if (q347) {
 			if (linus_bond <= -2) {
-				q347.fields.description = "You and Linus agreed to a debate in the gym. It’s the only one, too; after their internal polling showed he had more to lose than gain from sharing a stage with you, his campaign refused to agree to another. He’s standing at his podium in a goddamn sweater vest, talking about ”leaving childish things behind” and “stepping into the future of our school,” yet you spend no time listening to his nonsense. He does not deserve your attention. After a round of applause, the moderator turns to you. You have the floor.";
+				q347.fields.description = "You and Linus agreed to a debate in the gym. It’s the only one, too; after their internal polling showed he had more to lose than gain from sharing a stage with you, his campaign refused to agree to another. He’s standing at his podium in a goddamn sweater vest, talking about ”leaving childish things behind” and “stepping into the future of our school,” yet you spend no time listening to his nonsense. He does not deserve your attention. After a round of applause, the moderator turns to you. You have the floor.";				
 			} else if (linus_bond >= 2) {
 				q347.fields.description = "You and Linus agreed to a debate in the gym. He’s standing at his podium in that goddamn sweater vest, talking about “leaving childish things behind” and “stepping into the future of our school,” among other things. Before he starts, though, he gives you a small, almost apologetic nod from across the stage. It makes being angry at him a little harder than you’d like. Hell, you don’t even think the sweater looks that bad anymore. <i>Damn.</i> After a round of applause, the moderator turns to you. You have the floor.";
 			}
@@ -11198,7 +11216,7 @@ cyoAdventure = function (a) {
 
         if (window.isRoyInCharge) {
             updateFeedback(3366, "Your ability to fuck things up at a moment’s notice amazes me.");
-			updateFeedback(3368, "You try to explain what you actually mean, but somewhere along the way Roy stops trying to argue with you and starts writing it all down. “Okay,” he mutters, flipping the page over. “I don’t know what the hell any of this means, but… sure.” By the next morning, the hallways are covered in flyers from so-called Brownites, repeating your strange little philosophies about sadness, politics, and Linus Van Pelt. Against all common sense, some people seem to like it.");
+			updateFeedback(3368, "You try to explain what you actually mean, but somewhere along the way Roy stops trying to argue with you and starts writing it all down. “Okay,” he mutters, flipping the page over. “I don’t know what the hell any of this means, but… sure.” By the next morning, the hallways are covered in flyers from so-called Brownites, repeating your strange little philosophies about sadness, politics, and Linus Van Pelt. Against all common sense, some people seem to like it.");			
         }
 	}
 
@@ -11265,7 +11283,7 @@ cyoAdventure = function (a) {
             // shameless rewrites to fit in Roy
             const q363 = campaignTrail_temp.questions_json.find(q => q.pk === 363);
             if (q363) {
-                q363.fields.description = "It’s unbelievable. Roy somehow managed to get his hands on the keys to the main office PA system. You don’t ask how. “You’ve got, like, two minutes before the janitor comes back,” he whispers, handing them over. “Go on. Say something. It’s your final message to the whole school, so make it good.” You sit down in the principal’s swivel chair, pull the microphone toward you, and click it on. The red broadcast light comes alive in the dark office, throwing long shadows across the filing cabinets and the framed portraits of former principals, all of whom seem to be vaguely disappointed in you.";
+                q363.fields.description = "It’s unbelievable. Roy somehow managed to get his hands on the keys to the main office PA system. You don’t ask how. “You’ve got, like, two minutes before the janitor comes back,” he whispers, handing them over. “Go on. Say something. It’s your final message to the whole school, so make it good.” You sit down in the principal’s swivel chair, pull the microphone toward you, and click it on. The red broadcast light comes alive in the dark office, throwing long shadows across the filing cabinets and the framed portraits of former principals, all of whom seem to be vaguely disappointed in you.";				
             }
 
             updateFeedback(3385, "“Well, at least you’ve never been a buzzkill,” Roy laughs as you both scramble out the side door before the janitor catches you. He tosses you a half-empty bag of chips as a reward once you hit the parking lot. You guess you’ve had worse speech coaches.");
@@ -11281,13 +11299,13 @@ cyoAdventure = function (a) {
         if (window.isRoyInCharge) {
             const q360 = campaignTrail_temp.questions_json.find(q => q.pk === 360);
             if (q360) {
-				q360.fields.description = "It’s Election Night, and the rain hasn’t stopped since three. Roy called from a payphone to drag you down to the watch party at the bowling alley, but you told him you were done for the night and hung up. You couldn’t stand the noise, the plastic cups, or everybody watching the returns like their lives depended on them. And so you walked home alone.<br><br>Now you’re soaked through, sitting on the living room couch with the television in front of you. The national anchors are talking over one another about razor-thin margins in states you’ve never been to, but you barely hear them. Everything feels so far away. Then comes the soft click of claws against the linoleum; Snoopy walks into the room, a little older and slower than he used to be, and rests his chin on your knee. He looks up at you with those same quiet eyes, and somehow that’s enough to bring the last two months crashing down all at once.";
+				q360.fields.description = "It’s Election Night, and the rain hasn’t stopped since three. Roy called from a payphone to drag you down to the watch party at the bowling alley, but you told him you were done for the night and hung up. You couldn’t stand the noise, the plastic cups, or everybody watching the returns like their lives depended on them. And so you walked home alone.<br><br>Now you’re soaked through, sitting on the living room couch with the television in front of you. The national anchors are talking over one another about razor-thin margins in states you’ve never been to, but you barely hear them. Everything feels so far away. Then comes the soft click of claws against the linoleum; Snoopy walks into the room, a little older and slower than he used to be, and rests his chin on your knee. He looks up at you with those same quiet eyes, and somehow that’s enough to bring the last two months crashing down all at once.";				
             }
 
             if (ruthlessness >= 3) {
                 updateFeedback(3375, "The words crack in your throat, apologizing to him, but also to yourself, to Linus, to Patty, to Roy (wherever he is right now), and to the kid you once used to be. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
             } else {
-                updateFeedback(3375, "The words catch in your throat as you thank him, and maybe yourself, too. You think about Linus, Patty, Roy (wherever he is right now), and the kid you once used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+                updateFeedback(3375, "The words catch in your throat as you thank him, and maybe yourself, too. You think about Linus, Patty, Roy (wherever he is right now), and the kid you once used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");				
             }
         } else {
             if (ruthlessness < 3) {
@@ -13045,6 +13063,372 @@ const mainEndings = [
     }
   },
   {
+    id: "specialroyending",
+    condition: (ev) => linusWin && window.isRoyInCharge && cynicism >= 5,
+    image: "https://i.pinimg.com/1200x/48/81/79/488179c8632ccd502a86fe5c43fda93f.jpg",
+    title: "only time makes it human",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  .letter-page {
+    background: linear-gradient(160deg, #fdf9ed 0%, #f5eecc 30%, #ede3b8 60%, #f2ebca 100%);
+    border: 1px solid #c8b882;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #b8a862, 4px 4px 0 #a89852, 1px 1px 8px rgba(0,0,0,0.18);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Crimson Text', 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #2a200a;
+  }
+
+  .letter-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        rgba(160, 130, 60, 0.09) 27px,
+        rgba(160, 130, 60, 0.09) 28px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .letter-page::after {
+    content: '';
+    position: absolute;
+    top: 48px; bottom: 48px;
+    left: 88px;
+    width: 1px;
+    background: rgba(190, 100, 100, 0.18);
+    pointer-events: none;
+  }
+
+  .fold-line {
+    border-top: 1px dashed rgba(150,120,50,0.25);
+    margin: 32px -54px;
+    position: relative;
+  }
+
+  .letter-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(160,130,60,0.3);
+  }
+
+  .letter-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #5a4418;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .letter-page p {
+    margin: 0 0 16px 0;
+    text-indent: 2em;
+  }
+
+  .letter-page p:first-of-type {
+    text-indent: 0;
+  }
+
+  .dialogue {
+    font-style: italic;
+  }
+
+  .section-break {
+    text-align: center;
+    color: #9a7830;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin: 24px 0 20px;
+  }
+
+  .stamp-area {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 1.5px solid #b09050;
+    border-radius: 1px;
+    background: linear-gradient(135deg, #f0e8c8, #e8dab0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #7a5828;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+  }
+
+  .stamp-perfs {
+    position: absolute;
+    top: 23px; right: 31px;
+    width: 54px; height: 64px;
+    border: 1px dotted rgba(150,110,40,0.5);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+</style>
+
+<div class="letter-page">
+  <div class="stamp-area">★</div>
+  <div class="stamp-perfs"></div>
+
+  <div class="letter-header">
+    <div class="letter-title">only time makes it human</div>
+  </div>
+
+  <p>The television screen had gone to dead gray snow about twenty minutes ago. Charlie Brown lay curled sideways on the sunken cushions of the couch, shoes still on, his hands buried deep inside his jacket pockets and his knees drawn up toward his ribs. Outside, the rain kept hammering against the bay window in violent, rattling bursts. The numbers were still going around in his head… the margins, all the lost votes in the cafeteria, and surely all the looks of pity in the gym when the final tally went up. He was glad he didn’t see it. But it wasn’t just that he’d lost, it was this feeling that the whole thing had been some cosmic joke, and he had been stupid enough to set the punchline up himself.</p>
+  
+  <p>He hated it. He hated the school, he hated the election, but most of all he hated the fact that somehow, the world was always going to find a way to put him flat on his back again. Every damn time.</p>
+  
+  <p>A moment later, the front door unlocked with a click, followed by the wet thud of boots being kicked off in the entryway. A fairly cold draft swept into the living room, and with it carrying the smell of rain. Roy was there.</p>
+
+  <p><span class="dialogue">“Man,”</span> he muttered as he shuffled into the dim room, rubbing his palms together. <span class="dialogue">“It’s like forty degrees out there, and your porch light isn’t even on. What the hell? I nearly broke my neck on a skateboard.”</span></p>
+
+  <p>Charlie didn’t turn around, however. He just kept staring at the static flickering across his cathode-ray tube TV.</p>
+
+  <p><span class="dialogue">“Go home, Roy,”</span> he said quietly. His throat felt like sandpaper. <span class="dialogue">“Party’s over, we got killed.”</span></p>
+
+  <div class="fold-line"></div>
+
+  <p>Roy didn’t leave, however. He gave a low, irritated huff instead, walked around the coffee table, and dropped onto the sofa beside Charlie, making the old springs groan. He hated seeing the place like this, with the whole living room feeling so… dead, for the lack of a better word. This house, this whole place had seen better days. More than that, he hated the sour gloom coming off Charlie, because he knew that particular look by now.</p>
+
+  <p><span class="dialogue">“Oh, shut up, Chuck,”</span> Roy said, slumping back into the cushions and staring at the ceiling. <span class="dialogue">“Seriously. You gotta stop doing that thing, acting like you personally invented suffering and all.”</span></p>
+
+  <p><span class="dialogue">“I ran a joke campaign,”</span> Charlie said, his jaw tightening. <span class="dialogue">“And look what it did to me. Linus is president, everybody laughed. It was all completely pointless.”</span> He swallowed, staring at the television. <span class="dialogue">“None of it meant anything.”</span></p>
+
+  <p><span class="dialogue">“It meant something to me,”</span> Roy said. He said it almost casually, sure, but there was something underneath it that made Charlie finally look over. Roy wasn’t really smiling, as if he had just said more than he meant to and was trying to decide whether he regretted it.</p>
+
+  <div class="section-break">· · ·</div>
+  
+  <p><span class="dialogue">“You remember when my family moved here?”</span> Roy asked, still looking up at the ceiling. <span class="dialogue">“My folks were fighting all the time. Like, every night. They’d be screaming at each other until three in the morning, breaking dishes, throwing stuff at the walls, all that shit. My dad slept on the porch half the week. And my mom kept threatening to put us in her car and drive straight into Lake Superior.”</span></p>
+
+  <p>He paused for a moment, rubbing his hands together even though they had stopped shaking.</p>
+  
+  <p><span class="dialogue">“I used to sit behind the bleachers after school for hours because I didn’t want to go home yet,”</span> he said. <span class="dialogue">“I figured everybody around here was either fake, crazy, or just waiting for the right moment to screw you over. Then I met you.”</span></p>
+
+  <p>Roy finally turned his head, looking at Charlie in the gray light of the television.</p>
+
+  <p><span class="dialogue">“You didn’t really want anything from me,”</span> he continued. <span class="dialogue">“You… you didn’t care that I was a loser or that my grades were crap. You didn’t try to tell me everything was gonna be okay, either. I remember… I remember when you gave me half your sandwich and let me sit there.”</span> A small smile tugged at his mouth. <span class="dialogue">“Things got a little better after that, Chuck. So, yeah, the election sucked, but it doesn’t get to erase all that.”</span></p>
+
+  <p>Charlie stared at him. The knot in his chest, tight and burning with weeks of cynicism and humiliation, seemed to loosen just a little. He opened his mouth to say something. An apology, maybe, an excuse, perhaps, maybe probably some miserable joke, but nothing came out.</p>
+
+  <div class="fold-line"></div>
+  
+  <p>Before Charlie could figure out what to do with himself, though, Roy shifted a little closer. He leaned over, tilted his head, and gently bumped his nose against Charlie’s cold, damp one. Charlie flinched, more from surprise than anything else, but Roy didn’t pull away. He stayed there for a moment in the dark, and let his forehead resting lightly against Charlie’s.</p>
+  
+  <p><span class="dialogue">“It’s what they say. The sooner kids talk, the sooner they talk back,”</span> Roy murmured, a faint smile in his voice. <span class="dialogue">“So I hope you never say a word.”</span></p>
+  
+  <p>A quiet breath escaped Charlie’s nose. He looked into Roy’s tired, half-lidded eyes. The corner of Charlie’s mouth twitched upward. <span class="dialogue">“You’re an idiot, Roy,”</span> he muttered.</p>
+  
+  <p><span class="dialogue">“Yeah,”</span> Roy said with a small smile, settling back into the couch and reaching for the remote. <span class="dialogue">“I know. Now go to sleep, dude. It’s getting late.”</span></p>
+  
+  <p>He clicked the television off. The static disappeared, leaving the living room in a soft-ish darkness with only the rain against the window and the faint creak of the old couch beneath them. For the first time all night, Charlie closed his eyes and let himself breathe.</p>
+
+</div>`,
+    song: {
+      title: "Cow",
+      artist: "Sparklehorse",
+      cover: "https://resources.tidal.com/images/88fdbb06/3332/428b/a553/9535ff90382c/320x320.jpg",
+      url: ["gpOBBouRj-4", "O_aE7UajQV4"]
+    }
+  },
+  {
+    id: "balls",
+    condition: (ev) => linusWin && !window.isRoyInCharge && patty_approval >= 2 && cynicism < 5 && linus_bond > -7 && linus_bond < 4,
+    image: "https://i.pinimg.com/1200x/ff/89/d5/ff89d50f602c78e98589a6d05dd3d1ee.jpg",
+    title: "always you",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  .letter-page {
+    background: linear-gradient(160deg, #fdf9ed 0%, #f5eecc 30%, #ede3b8 60%, #f2ebca 100%);
+    border: 1px solid #c8b882;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #b8a862, 4px 4px 0 #a89852, 1px 1px 8px rgba(0,0,0,0.18);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Crimson Text', 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #2a200a;
+  }
+
+  .letter-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        rgba(160, 130, 60, 0.09) 27px,
+        rgba(160, 130, 60, 0.09) 28px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .letter-page::after {
+    content: '';
+    position: absolute;
+    top: 48px; bottom: 48px;
+    left: 88px;
+    width: 1px;
+    background: rgba(190, 100, 100, 0.18);
+    pointer-events: none;
+  }
+
+  .fold-line {
+    border-top: 1px dashed rgba(150,120,50,0.25);
+    margin: 32px -54px;
+    position: relative;
+  }
+
+  .letter-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(160,130,60,0.3);
+  }
+
+  .letter-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #5a4418;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .letter-page p {
+    margin: 0 0 16px 0;
+    text-indent: 2em;
+  }
+
+  .letter-page p:first-of-type {
+    text-indent: 0;
+  }
+
+  .dialogue {
+    font-style: italic;
+  }
+
+  .section-break {
+    text-align: center;
+    color: #9a7830;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin: 24px 0 20px;
+  }
+
+  .stamp-area {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 1.5px solid #b09050;
+    border-radius: 1px;
+    background: linear-gradient(135deg, #f0e8c8, #e8dab0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #7a5828;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+  }
+
+  .stamp-perfs {
+    position: absolute;
+    top: 23px; right: 31px;
+    width: 54px; height: 64px;
+    border: 1px dotted rgba(150,110,40,0.5);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+</style>
+
+<div class="letter-page">
+  <div class="stamp-area">★</div>
+  <div class="stamp-perfs"></div>
+
+  <div class="letter-header">
+    <div class="letter-title">always you</div>
+  </div>
+
+  <p>The floodlights above the school baseball field had been shut off for hours, leaving the diamond draped in a pale, hazy blue mist. The rain had dwindled to a freezing drizzle, and turned the infield dirt into slick, dark clay. Patty had dragged Charlie out through the gap in the chain-link fence behind the bleachers just past midnight. She was standing on the pitcher’s rubber with her sneakers caked in mud, tossing a scuffed, leather baseball two feet into the air and catching it in her bare palm with a <i>thwip</i>.</p>
+
+  <p><span class="dialogue">“…so I told Sweeney, if he thinks he can give the varsity team our Tuesday slots in March, he’s out of his mind,”</span> Patty was saying, her voice loud and punchy, cutting through the stillness of the night. <span class="dialogue">“And your release point, Chuck. Really, we gotta fix that elbow droop before tryouts. When the clay gets heavy like this, you gotta grip across the four seams, right across the horseshoes… otherwise the rotation just flattens out and they’ll pull you to left field all afternoon…”</span></p>
+
+  <p>Charlie stood two feet away on the downward slope of the mound, and his hands were shoved deep into his coat pockets. His shoulders were hunched against the cold, his wet hair plastered flat across his forehead. But he wasn’t hearing a word.</p>
+
+  <div class="fold-line"></div>
+
+  <p>The four-seam grip, the varsity field, the spring schedule, oh, it all felt like noise from another planet. The numbers from the election were still burning behind his eyes. He could imagine that bastard Linus, smiling from the podium; all the the scattered claps from the back row; the suffocating pity from the faculty he’d have to see… Jesus.</p>
+
+  <p><span class="dialogue">“…and if we get Franklin to play second base, we can finally turn a double play without—”</span></p>
+
+  <p><span class="dialogue">“Patty,”</span> Charlie whispered.</p>
+
+  <p>His voice was barely louder than the rain hitting the outfield grass, but something in it made Patty stop mid-sentence. The baseball slipped through her fingers, falling into the wet clay with a soft splat.</p>
+
+  <p><span class="dialogue">“Chuck?”</span> she asked, squinting through the dark. <span class="dialogue">“What’s wrong?”</span></p>
+
+  <p>Charlie didn’t look at the ball in the mud. He kept his eyes locked on his own wet sneakers, and his chin was trembling in the freezing air. When he spoke again, the words were flat, stripped of anger, or tears, and stripped of every ounce of fight he had left in him.</p>
+
+  <p><span class="dialogue">“Why did you even bother, Patty?”</span> he said softly. <span class="dialogue">“Wouldn’t it have been better for everyone if… if you just let me die?”</span></p>
+
+  <div class="section-break">· · ·</div>
+
+  <p>The air on the mound went completely dead. Patty froze. Her brow creased into a deep frown; an expression Charlie had rarely, if ever, seen on her face in all the years they had known each other. Not when she lost a tournament, not when she struck out, not even when her grades were in the gutter. It was a look of shock, seemingly.</p>
+
+  <p>She had watched him fail at everything he had ever touched, yes. She had seen him get knocked off the mound by line drives, she had seen him get laughed off stages, and she had spent two months watching him get dragged through the dirt by Linus, Lucy, and the administration. But she had never, not once in her life, imagined that Charlie Brown could ever think something that awful about himself.</p>
+
+  <p><span class="dialogue">“What did you just say?”</span> Patty whispered, her voice cracking on the edge.</p>
+
+  <p><span class="dialogue">“You know what I mean,”</span> Charlie murmured; his breath was shaking. <span class="dialogue">“I ruin everything. I hurt Linus, I made Sally cry, I made you fail your classes. I’m just… I’m a joke, Patty. I-I’m like an empty space where a person should be. And if I wasn’t here, you wouldn’t have to spend your whole life trying to fix a loser.”</span></p>
+
+  <p><span class="dialogue">“Ow, shut up,”</span> Patty hissed.</p>
+
+  <div class="fold-line"></div>
+
+  <p>She didn’t wait for him to reply. She took two splashing steps down the slope of the mound, grabbed the lapels of his soaking denim jacket, and yanked him forward so fast his boots slipped in the clay. Before Charlie could pull away (or even think of doing anyting else), Patty threw both arms around his neck, pulling him into an embrace so tight and so fierce, it knocked the remaining wind out of his lungs. She buried her face against the crook of his collarbone, holding onto him as if she were anchoring him to the earth with her bare hands.</p>
+
+  <p><span class="dialogue">“You shut your damn mouth, Chuck,”</span> she choked out, letting her tough-girl bravado shattering into pieces against his shoulder. <span class="dialogue">“Don’t you ever say that, really. Don’t you ever think that.”</span></p>
+
+  <p>Charlie stood rigid for a second, his breath hitching, and the sudden heat of her jacket burning against his frozen chest. And then, as her grip tightened, his numbness broke. Charlie buried his face into the wool of her collar, his hands clutching desperately at the back of her coat, and letting out a trembling gasp that, eventually, dissolved into a helpless sob.</p>
+
+  <p><span class="dialogue">“You’re not a joke,”</span> Patty whispered into the quiet rain, well aware that her own eyes were hot and stinging. <span class="dialogue">“You are one of my best… my bestest friends in the whole world, Chuck. Do you hear me? My bestest friend. And I’m not letting you go anywhere, I swear.”</span></p>
+
+  <p>She raised one hand, her fingers trembling slightly, and gently smoothed back the matted blonde hair from his cold forehead. Oh, he had suffered so much already. Why didn’t she realize this earlier? She stroked his head, slow and steady, untangling the strands with a tender grace that she had shown to few people in this town.</p>
+
+  <p><span class="dialogue">“You’re stuck with me, Chuck,”</span> Patty murmured, resting her cheek against the top of his head, as the freezing mist settled over the outfield. <span class="dialogue">“Through the losses, through the bad grades, through all of it, fre real. We’ll live through this. I swear to God, we’ll live through it.”</span></p>
+
+  <p>Charlie didn’t answer; he honestly couldn’t. But as they stood together in the dark on the pitcher’s mound, with the mud clinging to their shoes and her hand resting warm against his hair, Charlie finally stopped shaking.</p>
+
+</div>`,
+    song: {
+      title: "Stay Home",
+      artist: "American Football",
+      cover: "https://yt3.googleusercontent.com/4Y4QpNDcEsAmCvf44mLPSfgjtr9RSnkUo2E7hn_OYgdLLxXpIfm2k61SdaOA4GtYPZapGFDqpNau4sQ2nA=w544-h544-l90-rj",
+      url: ["wDNuvlBFr9k", "fXmeIXE_hgk"]
+    }
+  },
+  {
     id: "differentcorner",
     condition: (ev) => linusWin && ruthlessness >= 3 && linus_bond < 0 && linus_bond > -5,
     image: "https://i.pinimg.com/1200x/1e/93/a0/1e93a022d1c0c14dbd39ab0b63aeff55.jpg",
@@ -13711,10 +14095,10 @@ const mainEndings = [
     }
   },
   {
-    id: "specialroyending",
-    condition: (ev) => linusWin && window.isRoyInCharge && cynicism >= 5,
-    image: "https://i.pinimg.com/1200x/48/81/79/488179c8632ccd502a86fe5c43fda93f.jpg",
-    title: "only time makes it human",
+    id: "clean_sweep",
+    condition: (ev) => charlieWin && window.charlieCleanSweep,
+    image: "https://i.pinimg.com/1200x/b8/c7/03/b8c70375d07f592c88fe4f8ff2c651ce.jpg",
+    title: "i wanna be adored",
     html: `<style>
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
 
@@ -13833,63 +14217,211 @@ const mainEndings = [
   <div class="stamp-perfs"></div>
 
   <div class="letter-header">
-    <div class="letter-title">only time makes it human</div>
+    <div class="letter-title">i wanna be adored</div>
   </div>
 
-  <p>The television screen had gone to dead gray snow about twenty minutes ago. Charlie Brown lay curled sideways on the sunken cushions of the couch, shoes still on, his hands buried deep inside his jacket pockets and his knees drawn up toward his ribs. Outside, the rain kept hammering against the bay window in violent, rattling bursts. The numbers were still going around in his head… the margins, all the lost votes in the cafeteria, and surely all the looks of pity in the gym when the final tally went up. He was glad he didn’t see it. But it wasn’t just that he’d lost, it was this feeling that the whole thing had been some cosmic joke, and he had been stupid enough to set the punchline up himself.</p>
+  <p>By twenty minutes to four in the morning, sleep was an impossibility. Charlie Brown had spent three hours lying flat on his back, staring at the ceiling until his vision blurred into dark swimming motes. In his head, Marcie’s cadence kept playing on a seamless loop: <i>Burnouts: Brown. Honors: Brown. Jocks: Brown. Arts: Brown. Administration: Brown.</i> Every single column. As absurd as it was, it was a clean sweep. The kid who had lost nine hundred and ninety-nine baseball games in a row, the boy who received rocks in his Halloween bag, had somehow won the entire school.</p>
 
-  <p>He hated it. He hated the school, he hated the election, but most of all he hated the fact that somehow, the world was always going to find a way to put him flat on his back again. Every damn time.</p>
+  <p>He couldn’t wrap his brain around it. How could it be? The sheer weight of it was suffocating. It didn’t even feel like an achievement; whatever clerical error this was, well, the universe was going to violently correct the second dawn broke. Pretty much every group had voted for him, and that meant that by eight o’clock, every single person in that building would be waiting for him to save them.</p>
 
-  <p>A moment later, the front door unlocked with a click, followed by the wet thud of boots being kicked off in the entryway. A fairly cold draft swept into the living room, and with it carrying the smell of rain. Roy was there.</p>
-
-  <p><span class="dialogue">“Man,”</span> he muttered as he shuffled into the dim room, rubbing his palms together. <span class="dialogue">“It’s like forty degrees out there, and your porch light isn’t even on. What the hell? I nearly broke my neck on a skateboard.”</span></p>
-
-  <p>Charlie didn’t turn around, however. He just kept staring at the static flickering across his cathode-ray tube TV.</p>
-
-  <p><span class="dialogue">“Go home, Roy,”</span> he said quietly. His throat felt like sandpaper. <span class="dialogue">“Party’s over, we got killed.”</span></p>
+  <p>He felt like he was suffocating inside his own chest. Slipping quietly out of his bedroom, he padded down the carpeted stairs. In the kitchen, his hand drifted to the back of the corner cabinet, pulling out a half-empty bottle of Canadian whiskey his father had bought for New Year’s three years ago and never really finished. Charlie slid it into the inner pocket of his denim jacket. He didn’t even like alcohol, but God, he needed this. He just wanted something blunt enough to knock his brain unconscious so morning would stop coming so fast.</p>
 
   <div class="fold-line"></div>
 
-  <p>Roy didn’t leave, however. He gave a low, irritated huff instead, walked around the coffee table, and dropped onto the sofa beside Charlie, making the old springs groan. He hated seeing the place like this, with the whole living room feeling so… dead, for the lack of a better word. This house, this whole place had seen better days. More than that, he hated the sour gloom coming off Charlie, because he knew that particular look by now.</p>
+  <p>He nudged the back screen door open, stepping out into the freezing backyard. The grass was silvered with some thick autumn frost that crunched faintly beneath the soles of his unlaced sneakers. The mist was hanging low over the lawn, and was lit only by the pale wash of the moon. Charlie pulled his jacket tighter around his neck, taking three steps across the lawn before stopping dead in his tracks.</p>
 
-  <p><span class="dialogue">“Oh, shut up, Chuck,”</span> Roy said, slumping back into the cushions and staring at the ceiling. <span class="dialogue">“Seriously. You gotta stop doing that thing, acting like you personally invented suffering and all.”</span></p>
-
-  <p><span class="dialogue">“I ran a joke campaign,”</span> Charlie said, his jaw tightening. <span class="dialogue">“And look what it did to me. Linus is president, everybody laughed. It was all completely pointless.”</span> He swallowed, staring at the television. <span class="dialogue">“None of it meant anything.”</span></p>
-
-  <p><span class="dialogue">“It meant something to me,”</span> Roy said. He said it almost casually, sure, but there was something underneath it that made Charlie finally look over. Roy wasn’t really smiling, as if he had just said more than he meant to and was trying to decide whether he regretted it.</p>
+  <p>Ahead of him, sitting in the middle of the yard, was the old red doghouse. Perched upright on the ridge of the peaked roof was Snoopy. He was not curled asleep, and he was not resting his chin on his paws. Draped around his neck was a faded white silk scarf, fluttering gently in the November breeze. And pulled snugly over his ears was a cracked brown leather aviator’s cap, with the circular glass goggles strapped down over his eyes, reflecting the dim moonlight like two opaque silver coins. The World War I Flying Ace.</p>
 
   <div class="section-break">· · ·</div>
 
-  <p><span class="dialogue">“You remember when my family moved here?”</span> Roy asked, still looking up at the ceiling. <span class="dialogue">“My folks were fighting all the time. Like, every night. They’d be screaming at each other until three in the morning, breaking dishes, throwing stuff at the walls, all that shit. My dad slept on the porch half the week. And my mom kept threatening to put us in her car and drive straight into Lake Superior.”</span></p>
+  <p>Charlie stood frozen in the wet grass. His fingers were curled tightly around the glass neck of the bottle inside his coat. The cold glass was biting into his palm. He looked at the dog on the roof, and suddenly, a wave of hot shame flooded his throat.</p>
 
-  <p>He paused for a moment, rubbing his hands together even though they had stopped shaking.</p>
+  <p>He couldn’t do it.</p>
 
-  <p><span class="dialogue">“I used to sit behind the bleachers after school for hours because I didn’t want to go home yet,”</span> he said. <span class="dialogue">“I figured everybody around here was either fake, crazy, or just waiting for the right moment to screw you over. Then I met you.”</span></p>
+  <p>No. He couldn’t pull that bottle out into the open air. He couldn’t unscrew the cap, he couldn’t take a drink in front of him, and he could never, <em>ever</em> let Snoopy know that he had even thought about it. The campaign had turned everything else into a battlefield, sure, but out here, in the yard, there was still one piece of his childhood that hadn’t been poisoned.</p>
 
-  <p>Roy finally turned his head, looking at Charlie in the gray light of the television.</p>
-
-  <p><span class="dialogue">“You didn’t really want anything from me,”</span> he continued. <span class="dialogue">“You… you didn’t care that I was a loser or that my grades were crap. You didn’t try to tell me everything was gonna be okay, either. I remember… I remember when you gave me half your sandwich and let me sit there.”</span> A small smile tugged at his mouth. <span class="dialogue">“Things got a little better after that, Chuck. So, yeah, the election sucked, but it doesn’t get to erase all that.”</span></p>
-
-  <p>Charlie stared at him. The knot in his chest, tight and burning with weeks of cynicism and humiliation, seemed to loosen just a little. He opened his mouth to say something. An apology, maybe, an excuse, perhaps, maybe probably some miserable joke, but nothing came out.</p>
+  <p>Slowly, carefully, Charlie let go of the bottle, keeping it buried deep in the shadows of his coat.</p>
 
   <div class="fold-line"></div>
 
-  <p>Before Charlie could figure out what to do with himself, though, Roy shifted a little closer. He leaned over, tilted his head, and gently bumped his nose against Charlie’s cold, damp one. Charlie flinched, more from surprise than anything else, but Roy didn’t pull away. He stayed there for a moment in the dark, and let his forehead resting lightly against Charlie’s.</p>
+  <p>On the peaked roof, Snoopy turned his head, looking down through the glass lenses at the seventeen-year-old boy standing on the lawn. Then, with a slow, if disciplined, solemn grace that was quite uncharacteristic of him, the beagle raised his front right paw to the brow of his leather flight cap. <em>A quiet salute</em>, Charlie thought. From one weary soldier at the aerodrome to another.</p>
 
-  <p><span class="dialogue">“It’s what they say. The sooner kids talk, the sooner they talk back,”</span> Roy murmured, a faint smile in his voice. <span class="dialogue">“So I hope you never say a word.”</span></p>
+  <p>Charlie felt a sudden, burning prickle behind his eyelids. His throat tightened, but for the first time in months, it wasn’t from despair. He stood straight in the freezing mist. Slowly, and deliberately, Charlie brought his right hand up to his brow, returning the salute.</p>
 
-  <p>A quiet breath escaped Charlie’s nose. He looked into Roy’s tired, half-lidded eyes. The corner of Charlie’s mouth twitched upward. <span class="dialogue">“You’re an idiot, Roy,”</span> he muttered.</p>
+  <p><span class="dialogue">“Goodnight, sir,”</span> Charlie whispered into the cold air.</p>
 
-  <p><span class="dialogue">“Yeah,”</span> Roy said with a small smile, settling back into the couch and reaching for the remote. <span class="dialogue">“I know. Now go to sleep, dude. It’s getting late.”</span></p>
+  <p>Snoopy lowered his paw and sat still in the dark, watching his pilot with steady eyes. Charlie turned on his heel, walked back across the silver lawn, and pulled the back door shut behind him. He went back to the kitchen, returned the untouched bottle to the back of the cabinet, and walked upstairs to his bedroom.</p>
 
-  <p>He clicked the television off. The static disappeared, leaving the living room in a soft-ish darkness with only the rain against the window and the faint creak of the old couch beneath them. For the first time all night, Charlie closed his eyes and let himself breathe.</p>
+  <p>He still didn’t know what tomorrow would bring, yes. But as he climbed back under the quilt and pulled it up to his chin, the room didn’t feel so terrifying anymore.</p>
 
 </div>`,
     song: {
-      title: "Cow",
-      artist: "Sparklehorse",
-      cover: "https://resources.tidal.com/images/88fdbb06/3332/428b/a553/9535ff90382c/320x320.jpg",
-      url: ["gpOBBouRj-4", "O_aE7UajQV4"]
+      title: "The Crystal Lake",
+      artist: "Grandaddy",
+      cover: "https://yt3.googleusercontent.com/32xiS5wN0HvbEhDHOhOze6s-F-oltF2wBZ9f79wLAXXBhcwbpLzkHl0gvN2oQcp9XKYG6uawP1roazkC=w544-h544-l90-rj",
+      url: "fzPnGDktVw8"
+    }
+  },
+  {
+    id: "rage",
+    condition: (ev) => charlieWin && anti_establishment >= 5 && support_burnouts >= 3,
+    image: "https://i.pinimg.com/1200x/f8/05/c7/f805c76d3c7a89a986a9137fbc598976.jpg",
+    title: "finally enough love",
+    html: `<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+  .letter-page {
+    background: linear-gradient(160deg, #fdf9ed 0%, #f5eecc 30%, #ede3b8 60%, #f2ebca 100%);
+    border: 1px solid #c8b882;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0 #b8a862, 4px 4px 0 #a89852, 1px 1px 8px rgba(0,0,0,0.18);
+    padding: 48px 54px 56px 54px;
+    max-width: 680px;
+    margin: 24px auto;
+    position: relative;
+    font-family: 'Crimson Text', 'Georgia', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #2a200a;
+  }
+
+  .letter-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        rgba(160, 130, 60, 0.09) 27px,
+        rgba(160, 130, 60, 0.09) 28px
+      );
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .letter-page::after {
+    content: '';
+    position: absolute;
+    top: 48px; bottom: 48px;
+    left: 88px;
+    width: 1px;
+    background: rgba(190, 100, 100, 0.18);
+    pointer-events: none;
+  }
+
+  .fold-line {
+    border-top: 1px dashed rgba(150,120,50,0.25);
+    margin: 32px -54px;
+    position: relative;
+  }
+
+  .letter-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(160,130,60,0.3);
+  }
+
+  .letter-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #5a4418;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .letter-page p {
+    margin: 0 0 16px 0;
+    text-indent: 2em;
+  }
+
+  .letter-page p:first-of-type {
+    text-indent: 0;
+  }
+
+  .dialogue {
+    font-style: italic;
+  }
+
+  .section-break {
+    text-align: center;
+    color: #9a7830;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    margin: 24px 0 20px;
+  }
+
+  .stamp-area {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 52px;
+    height: 62px;
+    border: 1.5px solid #b09050;
+    border-radius: 1px;
+    background: linear-gradient(135deg, #f0e8c8, #e8dab0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #7a5828;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+  }
+
+  .stamp-perfs {
+    position: absolute;
+    top: 23px; right: 31px;
+    width: 54px; height: 64px;
+    border: 1px dotted rgba(150,110,40,0.5);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+</style>
+
+<div class="letter-page">
+  <div class="stamp-area">★</div>
+  <div class="stamp-perfs"></div>
+
+  <div class="letter-header">
+    <div class="letter-title">finally enough love</div>
+  </div>
+
+  <p>The fire alarm had been screaming its pulse for about twenty minutes now, but nobody was calling the engines. Pig-Pen dragged the soles of his unlaced work boots through two inches of pulverized drywall and torn social studies syllabi. Across the ceiling of the second-floor hallway, the emergency strobe lights pulsed in violent white spasms, cutting through clouds of airborne plaster, ozone, and also sweet clove smoke. And a the end of the corridor, those long-despised clear backpacks were burning inside a steel recycling bin, with their toxic, chemical stink drifting in thick black curls toward the tiles. Around him, a very kind group of students were tossing desks into barricades, laughing like hyenas in the flickering strobes.</p>
+
+  <p>Oh, they could do whatever they wanted now…!</p>
+
+  <p>Midway down the hall, Pig-Pen stopped in front of the vending machine outside the gym. This ancient monstrosity had swallowed forty of his quarters since sophomore year. He pressed the button for a grape soda. Its internal motor gave a pathetic, wheezing click and died. Yup, this one was completely jammed. Broken.</p>
+
+  <div class="fold-line"></div>
+
+  <p>Pig-Pen could’ve reacted to this in a lot of different ways, as he had done so previously. Instead, he rocked back on his heels, took a breath, and casually slammed his forehead straight through the front plexiglass panel. The impact landed with a tremendous <i>CRACK</i>, sending a spiderweb of fracture lines across the casing and showering the linoleum in heavy plastic shards. Pig-Pen blinked through the glittering dust, surprisingly unfazed, reached his grimy arm through the jagged hole, and plucked an aluminum can off the top row.</p>
+
+  <p>Pig-Pen wasn’t crazy, of course. He just liked to be very direct.</p>
+
+  <p>A warm trickle of crimson was leaking from a shallow nick above his nose, pooling across his upper lip. He caught his reflection in a surviving shard of mirror attached to a nearby locker. He paused, admired the cut, and casually used the side of his dirty thumb to smear the blood outward across his philtrum into a neat, distinguished little mustache. Nice. He studied it for two seconds, and nodded in approval.</p>
+
+  <div class="section-break">· · ·</div>
+
+  <p>Cracking the tab on the grape soda with a crisp <i>hiss-pop</i>, Pig-Pen strolled toward the administrative wing, leaving behind a trail of clay, drywall powder, and faint drops of red along the floor. But none of that was particularly important, even as the emergency alarms seemed to keep rhythm with his boots. At the end of the hall stood the frosted glass door: <i>OFFICE OF THE PRINCIPAL</i>. The lair of Othmar I, the Bastard.</p>
+
+  <p>Pig-Pen didn’t bother knocking. He kicked the latch through the doorframe with one shove of his boot, sending the door banging against the drywall. Inside, the room’s only desk was buried under half-shredded records. Sitting frozen behind it in the dark, clutching an unhooked telephone receiver to his ear like a weapon, was Principal Othmar.</p>
+
+  <div class="fold-line"></div>
+
+  <p>The principal looked up, and whatever words he had died in his throat. How could it be? Framed in the doorway was an apparition of doom, the Devil, a spawn of Satan… Charlie… or anything close to it. A strange teenager he was, sipping a grape soda through a bloody mustache, glittering shards of glass tangled in his hair, and beyond it all, an expression of serenity in his eyes. The only thing Othmar could do was open his mouth and let out a high-pitched shriek of panic — <i>“EEEEEEEE-YAAAGH!”</i> — as he dropped the phone receiver into his lap, scrambled out of his swivel chair, and bolted blindly past Pig-Pen, sprinting down the smoky hallway toward the parking lot as fast as his orthopedic loafers could carry him.</p>
+
+  <p>Shrugging, Pig-Pen stepped aside politely to let the old man pass, watching his silhouette with some curiosity. Once the hallway was clear, Pig-Pen walked over to the executive desk, took another sip of his soda, and slouched into the warm leather chair Othmar had just vacated. He crossed his heavy boots right over the edge of the mahogany blotter. He smiled, feeling the soda hit his throat and the blood drying comfortably beneath his nose. This is it. This was it. They were it, he was <i>it</i>.</p>
+
+  <p>He let out a low chuckle. <span class="dialogue">“Finally,”</span> he murmured to the empty office. <span class="dialogue">“Finally enough love.”</span></p>
+
+</div>`,
+    song: {
+      title: "#1 Crush",
+      artist: "Garbage",
+      cover: "https://i.scdn.co/image/ab67616d0000b2730dbee17e25d160f6f2f4d92f",
+      url: ["PM6yZMbcC1U", "XtnhGz-isEA"]
     }
   },
   {
@@ -14122,8 +14654,8 @@ const mainEndings = [
   {
     id: "over",
     condition: (ev) => charlieWin && cynicism >= 4 && linus_bond < 0,
-    image: "https://file.garden/aNtAfG887DiA_7lO/TML_2000/lonely.jpg",
-    title: "slide away",
+    image: "https://i.pinimg.com/736x/bf/4a/d9/bf4ad9c866b1626b68ec2240cd03732b.jpg",
+    title: "in circles",
     html: `<style>
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
 
@@ -14242,41 +14774,41 @@ const mainEndings = [
   <div class="stamp-perfs"></div>
 
   <div class="letter-header">
-    <div class="letter-title">slide away</div>
+    <div class="letter-title">in circles</div>
   </div>
-
+  
   <p>The house phone in the downstairs hallway rang at about twenty minutes past midnight. At that point, Charlie Brown had been lying awake on top of his bedspread, staring at the narrow strip of peeling wallpaper where the wall met the ceiling moulding. He had been there long enough that the pattern had begun to lose its meaning. When the warble of the telephone suddenly tore through the house, it was so loud in the middle of the night that he could hear the faint rattle of the glass in his bedroom window. Downstairs, Snoopy gave a single muffled huff from the living room and went quiet again. He had other things to worry about.</p>
 
   <p>Charlie pushed himself up and sat on the edge of the bed for a moment, trying to convince himself that somebody else would answer it. When the ringing continued, he finally pulled on his socks and made his way downstairs, moving carefully so the floorboards wouldn’t creak enough to wake his parents. He grabbed the heavy plastic receiver just before the fourth ring.</p>
-
+  
   <p><span class="dialogue">“Hello?”</span> There was a brief crackle on the other end.</p>
-
+  
   <p><span class="dialogue">“Charles?”</span> Marcie sounded breathless, as though she had been waiting beside the telephone for him to pick up. <span class="dialogue">“I’m s-sorry to call this late, but they finished the second machine recount.”</span></p>
 
   <p>Charlie leaned against the wall. <span class="dialogue">“Okay.”</span></p>
-
+  
   <p><span class="dialogue">“It looks like you’ve won.”</span></p>
 
   <div class="fold-line"></div>
-
+  
   <p>For a moment, Charlie didn’t understand what she had said. The hallway seemed to grow strangely quiet around him. He could hear the refrigerator in the kitchen, the rain tapping against one of the downstairs windows, and even the faint electrical hiss coming through the telephone receiver pressed against his ear. <span class="dialogue">“What?”</span></p>
-
+  
   <p><span class="dialogue">“You won,”</span> Marcie repeated, more carefully this time. <span class="dialogue">“Doesn’t seem there will be another recount, and um, the faculty observer signed off on the tally a few minutes ago. You’re the president, Charles.”</span></p>
-
+  
   <p>But Charlie just stared at the floor. He had spent so long imagining what it would feel like to lose that he had never really considered the possibility of the other thing. Losing had been familiar, losing made sense, he’s gotten used to t. You lost, everyone laughed for a while, and eventually the world moved on without asking very much of you.</p>
-
+  
   <p>But this?</p>
 
   <p>His fingers tightened around the receiver. <span class="dialogue">“Are you sure?”</span></p>
 
   <p><span class="dialogue">“Yes. I mean, unless something completely bizarre happens with the paperwork, which I don’t think it will. The paper’s going to print in about forty minutes, and I thought you’d want to give me a statement for the front page.”</span></p>
-
+  
   <p>Charlie didn’t answer.</p>
-
+  
   <p>Marcie kept talking, filling the silence because she apparently hadn’t realized he had stopped listening. Something about the voting machines, something about congratulatory messages from Patty and Roy, something about what they would need from him in the morning. Her voice became increasingly distant, flattening into a thin stream of words that seemed to come from somewhere outside the house.</p>
-
+  
   <p>No. He couldn’t do this.</p>
-
+  
   <p>He couldn’t stand here and listen to them telling him that it had happened, because if it had happened then tomorrow was real, too. Tomorrow morning, everyone would walk through those doors expecting him to know what he was doing. They would expect him to fix things, they would expect him to be somebody worth voting for. And eventually, he would disappoint them.</p>
 
   <p>Oh, <em>of course</em> he would. Charlie could already see it happening. He would say the wrong thing, make the wrong decision, miss something obvious, and slowly everyone would remember why they had laughed at him in the first place. All the jokes would come back, the looks would come back. Maybe even that fucking football would come back, as the universe seemingly had an excellent memory when it came to reminding Charlie Brown of his failures.</p>
@@ -14292,31 +14824,31 @@ const mainEndings = [
   <div class="section-break">· · ·</div>
 
   <p>And so he let go. The receiver slipped from his fingers and swung against the wall, its coiled cord stretching beneath it. Marcie’s voice continued through the speaker, so small and tinny, unaware that Charlie was no longer listening. He stood there for a few seconds, staring at nothing, then he turned toward the bathroom.</p>
-
+  
   <p>He wasn’t thinking very clearly anymore. He hated these moments. What frightened him most was how little effort it took for them to make sense. The only thng he only knew that he wanted somewhere dark and quiet, somewhere he could close a door and stop being Charlie Brown for a little while. For him, the bathroom had always been there, his second lifelong companion. A little room at the end of the hall where nobody would bother him, where he could turn on the faucet and listen to the water until his thoughts became quiet.</p>
-
+  
   <p>Lately, though, there had been something else attached to the idea of that room, something he had been trying very hard not to name. Charlie walked toward it slowly., and his hand lifted toward the brass knob.</p>
-
+  
   <p>And then bedroom door across the hall opened.</p>
-
+  
   <p>Sally stood there in her oversized yellow nightshirt, her hair sticking out in every direction and her eyes barely open. She rubbed one eye with the back of her hand and stared at him for a moment, still trying to understand what she was seeing. It was pretty late, what was he doing?</p>
-
+  
   <p><span class="dialogue">“Big brother?”</span> she mumbled. <span class="dialogue">“Why are you awake?”</span></p>
-
+  
   <p>Charlie looked at her. He tried to answer, or at least come up with something. He wanted to tell her he was fine, or that she should go back to bed, or that he had just gotten a strange phone call. Any of those things would have been easier than the truth. Yet nothing came out; his eyes filled instead.</p>
-
+  
   <p>No. He looked away, embarrassed by how quickly the tears were coming. God, no, not again, not like this, not in front of her. He pressed the heel of one hand against his face, but that only made his breathing break apart. His shoulders began to shake, and he tried to swallow the sound before it could carry down the hallway.</p>
-
+  
   <div class="fold-line"></div>
-
+  
   <p>Sally’s sleepy expression disappeared. <span class="dialogue">“Charlie?”</span></p>
 
   <p>He shook his head, though he wasn’t even sure what he was trying to deny. His knees gave out, and he sank onto the carpet with his back against the wall. Charlie covered his face with both hands, trying desperately to keep quiet so he wouldn’t wake their parents, but the tears were already coming too quickly. His breathing broke into small, uneven gasps, and for a while he could do nothing but sit there and let it happen.</p>
-
+  
   <p>Confused, Sally walked over in her bare feet and sat down beside him. Not quite sure what she was supposed to do or what was wrong, she watched him. After a moment, she slipped her arms around his neck and pulled him gently against her.</p>
-
+  
   <p>Charlie folded into her almost immediately. He pressed his face into the shoulder of her nightshirt, one hand gripping the fabric while the other rested uselessly against the carpet. Sally held on tightly, with her small arms wrapped around him. She had no idea what was going on, but she could see that somebody she loved was hurting, and therefore ought to be held.</p>
-
+  
   <p>And Charlie couldn’t make out a word of it anymore.</p>
 
 </div>`,
@@ -14747,10 +15279,10 @@ const mainEndings = [
 
 </div>`,
     song: {
-      title: "A Question of Time (Remix)",
+      title: "Only When I Lose Myself",
       artist: "Depeche Mode",
       cover: "https://yt3.googleusercontent.com/rrU_3mlqZTDSalQ9h2Rh0hKB6wRnPeCb_P8mN-d1cxyaAgENV_ckxPy4aiissPtP9TsI9Va5432qG-nnkA=w544-h544-l90-rj",
-      url: "RlyOV_6551Q"
+      url: ["oNhcDTXuwWE", "UiMCm0kMeUs"]
     }
   },
   {
@@ -21124,6 +21656,209 @@ dd {
       </div>
     </div>
   </div>
+</div>`
+  },
+  {
+    id: "dnc2004",
+    condition: (ev) => ev < 269 && support_admin >= 2 && anti_establishment <= 1,
+    image: "https://thehill.com/wp-content/uploads/sites/2/2021/05/davisgray_100103_recall.jpeg?strip=1",
+    html: `<style>
+  .slate-wrap {
+    background: #ffffff;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #222222;
+    max-width: 780px;
+    margin: 10px auto;
+    border: 1px solid #c0c0c0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    line-height: 1.65;
+  }
+
+  .slate-header {
+    background: #7a0016;
+    padding: 10px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #ffcc00;
+  }
+
+  .slate-logo {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -1.5px;
+    font-style: italic;
+    line-height: 1;
+  }
+  .slate-logo span { color: #ffcc00; font-style: normal; }
+
+  .slate-tagline {
+    font-family: Verdana, sans-serif;
+    font-size: 10px;
+    color: #ffcccc;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .slate-nav {
+    background: #222222;
+    padding: 5px 18px;
+    display: flex;
+    gap: 16px;
+    font-family: Verdana, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    border-bottom: 1px solid #dddddd;
+  }
+  .slate-nav a { color: #cccccc; text-decoration: none; text-transform: uppercase; }
+  .slate-nav a:hover { color: #ffffff; }
+  .slate-nav a.on { color: #ffcc00; }
+
+  .slate-content {
+    padding: 24px 32px;
+  }
+
+  .slate-kicker {
+    font-family: Verdana, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #7a0016;
+    margin-bottom: 6px;
+  }
+
+  .slate-headline {
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.15;
+    color: #000000;
+    margin-bottom: 8px;
+  }
+
+  .slate-deck {
+    font-size: 15px;
+    font-style: italic;
+    color: #555555;
+    line-height: 1.45;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 12px;
+  }
+
+  .slate-byline {
+    font-family: Verdana, sans-serif;
+    font-size: 11px;
+    color: #777777;
+    margin-bottom: 20px;
+  }
+  .slate-byline strong { color: #222222; }
+
+  .slate-body p {
+    font-size: 14.5px;
+    margin-bottom: 16px;
+  }
+
+  .slate-pullquote {
+    float: right;
+    width: 230px;
+    margin: 8px 0 16px 20px;
+    padding: 12px 14px;
+    background: #fdfaf0;
+    border-top: 3px solid #7a0016;
+    border-bottom: 1px solid #dcdcdc;
+    font-style: italic;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: #444444;
+  }
+
+  .slate-ad-strip {
+    background: #f5f5f5;
+    border: 1px dashed #cccccc;
+    padding: 8px 12px;
+    font-family: Verdana, sans-serif;
+    font-size: 10px;
+    color: #888888;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .slate-footer {
+    background: #f4f4f4;
+    border-top: 1px solid #cccccc;
+    padding: 12px 24px;
+    font-family: Verdana, sans-serif;
+    font-size: 10px;
+    color: #777777;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+
+<div class="slate-wrap">
+
+  <div class="slate-header">
+    <div class="slate-logo">Slate<span>.com</span></div>
+    <div class="slate-tagline">Politics, Culture, and More</div>
+  </div>
+
+  <div class="slate-nav">
+    <a href="#" class="on">Ballot Box</a>
+    <a href="#">The Dismal Science</a>
+    <a href="#">Chatterbox</a>
+    <a href="#">Press Box</a>
+    <a href="#">Culturebox</a>
+  </div>
+
+  <div class="slate-content">
+
+    <div class="slate-kicker">The Trail 2004 · Campaign Notebook</div>
+
+    <h1 class="slate-headline">The Machine That Wouldn’t Die</h1>
+    <div class="slate-deck">
+      How Gray Davis bored California into submission, survived a recall, and became the inevitable Democratic front-runner — as Tom Laughlin gives President Bush trouble from the left in New Hampshire.
+    </div>
+
+    <div class="slate-byline">
+      By <strong>William Saletan</strong> | Posted Tuesday, Jan. 27, 2004, at 3:18 PM ET
+    </div>
+
+    <div class="slate-body"> <p><b>MANCHESTER, N.H. —</b> There are many ways to campaign for president. Gray Davis has chosen the least theatrical one imaginable.</p>
+
+	<p>At a rally in an unheated gymnasium outside Concord, Davis spent about thirty-eight minutes talking about municipal infrastructure, bond yields, and the importance of fiscal discipline. He read most of it from a stack of typed index cards. There were no gospel singers, no talk of two Americas, no soaring declaration that America could once again believe in itself, or anything like that. All there was was just Davis.</p>
+
+	<p>And somehow, this worked. By the time Davis finished, two hundred freezing New Hampshire Democrats were nodding along, while three local union organizers were filling out four-figure checks. Howard Dean may have the momentum, and John Kerry may have his three purple hearts, but Davis has something that can be even more valuable in a Democratic primary: an organization that simply refuses to die.</p>
+
+	<p>He had already demonstrated this in California. Davis survived the October recall with 51.4 percent of the vote, sending a bewildered Arnold Schwarzenegger back to whatever movie he was supposed to be making next. Davis did not treat his victory as a moment of political rebirth, but as an opening in his schedule; by the following Tuesday, he was back at donor luncheons.</p>
+
+	<p>That is the strange thing about Gray Davis. You don’t particularly want to cheer for him. In fact, you don’t even necessarily want to listen to him. But after watching him survive a recall election, raise tens of millions of dollars, and return to the campaign trail as though nothing unusual had happened, you begin to suspect that he may simply outlast everyone else. One does not love Gray Davis, but submits to him. This is the lesson many Democrats have been taking from it./p&gt;
+
+	</p><div class="slate-ad-strip"> ADVERTISEMENT · <b>NETSCAPE 7.2:</b> FASTER BROWSING, TABBED WINDOWS. DOWNLOAD NOW. </div>
+
+	<p>Across the partisan aisle, meanwhile, George W. Bush is discovering that even an incumbent president can develop a nuisance; Karl Rove’s re-election strategy did not include Tom Laughlin. The 72-year-old actor, writer, and martial artist best known for playing the denim-clad vigilante Billy Jack in the 1970s counterculture film series filed for the New Hampshire Republican primary on a whim in November. Party officials assumed he would disappear. Then, last Thursday, the <i>Manchester Union-Leader</i> published a tracking poll putting Laughlin at 16 percent among registered Republican voters.</p>
+
+	<p>Sixteen percent is, of course, not enough to win a primary. It is, however, enough to make a presidential campaign wonder why Billy Jack is suddenly on the phone with New Hampshire reporters. Laughlin is not running as another Buchanan-style conservative. He is running from the President’s left, attacking the Iraq war, corporate influence, and the administration’s foreign-policy establishment. He arrives at VFW halls in his battered black hat and denim jacket, called Paul Wolfowitz a “draft-dodging paper-pusher,” and has challenged Dick Cheney to an open-floor martial-arts exhibition on the steps of the statehouse.</p>
+
+	<div class="slate-pullquote"> “’I don’t hate the President,’ Laughlin shouted at a Portsmouth rally. ‘I just think he’s surrounded by corporate cowards who cannot, and do not, understand voters’ concerns.’” </div>
+
+	<p>At a rally in Nashua on Monday night, Laughlin spoke to roughly four hundred libertarians, veterans, and college students who appeared to have wandered in from several different political movements. His platform includes cutting the Pentagon’s procurement budget, funding universal trauma psychotherapy, and personally auditing Halliburton’s books with a crowbar.</p>
+
+	<p>When a reporter asked whether any of this was consistent with Republican orthodoxy, Laughlin did not answer the question so much as point at the reporter and promise that the his movement would “kick the neo-cons right out of the temple.” The White House has declined to acknowledge Laughlin’s campaign. Cheney has been dispatched to private fundraisers in Rye, while the Bush campaign avoids giving its newest Republican critic a larger stage. For now, the strategy appears to be working. Laughlin is still a curiosity, and most curiosities tend to have short political lives.</p>
+
+	<p>But the contrast with Davis is hard to miss. Bush is dealing with a protest candidate who seems to have wandered out of a generic martial-arts movie. Davis, meanwhile, is doing what a normal candidate does: making phone calls, collecting endorsements, and assembling the machinery necessary to remain standing after everyone else has stopped paying attention.</p>
+
+	<p>If this continues, the 2004 general election could become a contest between a Texas president who cannot quite shake Billy Jack and a California Democrat who has apparently discovered the political equivalent of immortality.</p> </div>
+
+  </div>
+
+  <div class="slate-footer">
+    <span>© 2004 Slate Magazine · A Washington Post Company</span>
+    <span><a href="#" style="color:#7a0016; text-decoration:none;">Terms of Service</a> | <a href="#" style="color:#7a0016; text-decoration:none;">Privacy Policy</a></span>
+  </div>
+
 </div>`
   },
   {
@@ -28034,10 +28769,10 @@ dd {
   </div>
 </div>`,
 	song: {
-      title: "Monkey Business",
-      artist: "Michael Jackson",
-      cover: "https://images.genius.com/1883d45972818169043843c95ba78f12.600x600x1.png",
-      url: ["LpL0gzU2giw", "zsG5EhvnvJs"]
+      title: "Major Leagues",
+      artist: "Pavement",
+      cover: "https://yt3.googleusercontent.com/vlJS0tdKm4l6h_JDkk4bU-jFk8FuWika6no21QYZ5x59UAW6Gs820UO_sXNdUt4NqgvthJ10G1uNTBDF=w544-h544-l90-rj",
+      url: ["iEYPgOTvsWw", "NIh07bJelQc", "IJCTA2DNz5I"]
     }
   },
   {
@@ -31920,13 +32655,13 @@ dd {
 
   <p class="written-word">“You feel like you have ruined everything. Perhaps you have ruined this one thing. But life is vast, Charlie Brown, and your town is such a remarkably small piece of it. Do not let one terrible chapter convince you to burn the whole book.”</p>
 
-  <p class="written-word">“Tomorrow will come. You will have to walk down those hallways, and you will have to face him, and worse, you will have to face yourself. It will be agonizing. You will have to live with the consequences of your ambition. But you will survive it. I know your friend will too. You just need time.”</p>
+  <p class="written-word">“Tomorrow will come. You will have to walk down those hallways, and you will have to face him, and worse, you will have to face yourself. It will be agonizing. You will have to live with the consequences of your ambition. But you will survive it. I know your friend will too. You two just need time.”</p>
 
   <p class="written-word">“There is a deep, quiet grace in living with our mistakes and choosing to be better anyway. You owe it to Linus, and you owe it to yourself, to stay here and try to be better. You cannot fix the bridge if you are gone.”</p>
 
   <div class="fold-line"></div>
 
-  <p class="written-word">“I don’t know if we will ever meet.  But I have known you through your words for a very long time. I know the boy who manages the baseball team that never wins. I know the boy who loves his cute, erratic little dog. And I know the boy who never, ever gives up.”</p>
+  <p class="written-word">“I don’t know if we will ever meet. But I have known you through your words for a very long time. I know the boy who manages the baseball team that never wins. I know the boy who loves his cute, erratic little dog. And I know the boy who never, ever gives up.”</p>
 
   <p class="written-word">“I trust that boy. I trust him to stay strong, I trust him to keep breathing. I feel for him, and I hope you will too.”</p>
 
@@ -35488,8 +36223,8 @@ function injectCountyMapButton() {
 function getAdaptiveTextColor() {
     try {
         // start checking at game_window or main_content_area before falling back to body
-        let el = document.getElementById("game_window") ||
-                 document.getElementById("main_content_area") ||
+        let el = document.getElementById("game_window") || 
+                 document.getElementById("main_content_area") || 
                  document.body;
 
         while (el && el !== document) {
@@ -35977,7 +36712,7 @@ async function loadAndDrawCountyMap(mode) {
     const activeYears = getActiveYears();
     CURRENT_YEAR = activeYears.current;
     HISTORICAL_YEAR = activeYears.historical;
-
+	
 	const loadedPmTilesYear = PMTILES_URLS[CURRENT_YEAR] ? CURRENT_YEAR : "2008";
 
     const loadScript = src => new Promise((resolve, reject) => {
@@ -36233,7 +36968,7 @@ async function loadAndDrawCountyMap(mode) {
                 nationalTotalVotes += (c.votes_all || 0);
             }
         }
-
+		
 		let pmTilesCountyMap = {};
         if (loadedPmTilesYear === CURRENT_YEAR) {
             pmTilesCountyMap = baseCurrentMap;
@@ -36596,7 +37331,7 @@ async function loadAndDrawCountyMap(mode) {
 				tpShares: tpShares
 			};
         }
-
+		
 		nationalTotalVotes = usCounties.reduce((sum, d) => sum + (d.proj ? d.proj.totalVotes : 0), 0);
         const radiusScale = d3.scaleSqrt().domain([0, maxMarginVotes]).range([0, 35]);
 
@@ -37564,8 +38299,8 @@ async function loadAndDrawCountyMap(mode) {
 					if (tpCandidatesInGame && tpCandidatesInGame.length > 0) {
 						for (let c = 0; c < tpCandidatesInGame.length; c++) {
                             const candId = tpCandidatesInGame[c];
-							const share = (mults && mults.tpShares && mults.tpShares[candId] !== undefined)
-								? mults.tpShares[candId]
+							const share = (mults && mults.tpShares && mults.tpShares[candId] !== undefined) 
+								? mults.tpShares[candId] 
 								: (1 / Math.max(1, tpCandidatesInGame.length));
 							bgResults.push({
 								id: candId,
@@ -38624,7 +39359,7 @@ async function loadAndDrawCountyMap(mode) {
                             ctx.fillText(`+${Math.abs(spread).toFixed(1)}% ${leaderName}`, x + (isLarge ? 10 : 6), y + 3);
                         }
                     }
-                }
+                } 
                 else if (mKey === 'swing') {
                     let zeroY = getY(0);
 
@@ -38648,7 +39383,7 @@ async function loadAndDrawCountyMap(mode) {
                             ctx.fillText(`${delta >= 0 ? '+' : ''}${delta.toFixed(1)}% Δ`, x + (isLarge ? 10 : 6), y + 3);
                         }
                     }
-                }
+                } 
                 else {
                     validCands.forEach(pk => {
                         let meta = candMeta[pk];
@@ -38775,7 +39510,7 @@ async function loadAndDrawCountyMap(mode) {
                         } else {
                             let pt = history[hoverIdx];
                             let evLabel = POLL.getEvLabel();
-
+                            
                             let html = `
                                 <div style="border-bottom:1px solid rgba(255,255,255,0.25); padding-bottom:4px; margin-bottom:6px;">
                                     <strong style="font-size:1.1em; color:#fff;">${pt.label}</strong>
