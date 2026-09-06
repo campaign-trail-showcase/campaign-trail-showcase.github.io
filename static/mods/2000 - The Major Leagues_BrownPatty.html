@@ -11414,36 +11414,53 @@ cyoAdventure = function (a) {
     .hdr-btn:hover { color: #ef4444; }
     #min_stats_btn:hover { color: #60a5fa; }
 
-    #gameStatsTabs {
-      display: flex;
-      background-color: #e2e8f0;
-      border-bottom: 2px solid #0f172a;
-    }
+	#gameStatsTabs {
+	  display: flex;
+	  background: linear-gradient(180deg, #dfd7c2 0%, #cfc4a6 100%);
+	  border-bottom: 2px solid #222449;
+	  padding: 6px 10px 0 10px;
+	  gap: 6px;
+	}
     #gameStatsPopup.minimized #gameStatsTabs {
       display: none;
     }
-
-    .tab-btn {
+  
+	.tab-btn {
       flex: 1;
-      padding: 8px;
-      background: none;
-      border: none;
-      font-family: Arial, sans-serif;
+      padding: .4em .5em;
+      background: linear-gradient(180deg, #e8dfc7 0%, #dad0b5 100%);
+      border: 1px solid #998f78;
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+      font-family: Arial, "Trebuchet MS", "Lucida Grande", sans-serif;
       font-weight: bold;
       font-size: 12px;
-      text-transform: uppercase;
+      text-transform: none;
       letter-spacing: 1px;
-      color: #475569;
+      color: #5c4f3a;
       cursor: pointer;
+      position: relative;
+      top: 2px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+      transition: background 0.12s ease, color 0.12s ease, top 0.1s ease;
     }
     .tab-btn:last-child { border-right: none; }
-    .tab-btn.active {
-      background-color: #f4f4f5;
-      color: #0f172a;
-      border-bottom: 2px solid #f4f4f5;
-      margin-bottom: -2px;
+    .tab-btn:hover:not(.active) {
+      background: linear-gradient(180deg, #f5ede0 0%, #e8dfc7 100%);
+      color: #222449;
+      top: 1px;
     }
-    .tab-btn:hover:not(.active) { background-color: #cbd5e1; }
+    .tab-btn.active {
+      background: #fffdf2;
+      color: #800b0b;
+      border-color: #222449;
+      border-top: 3px solid #d93829;
+      border-bottom: 2px solid #e6e6e6;
+      margin-bottom: -2px;
+      top: 0px;
+      z-index: 2;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.06);
+    }
 
     #gameStatsContent {
       display: flex;
@@ -25496,9 +25513,9 @@ dd {
 
   <div class="cbs-sect-label">60 Minutes &nbsp;·&nbsp; Health / Politics</div>
 
-  <h1 class="cbs-headline">'My Mind Has Been Given Back To Me':<br>Ronald Reagan Speaks</h1>
+  <h1 class="cbs-headline">‘My Mind Has Been Given Back To Me’:<br>Ronald Reagan Speaks</h1>
 
-  <p class="cbs-subhead">At 91, the former president discusses memory, regret, Keynes, the AIDS crisis, and the experimental stem-cell treatment that he says has "rewired" him — while his party looks the other way</p>
+  <p class="cbs-subhead">At 91, the former president discusses memory, regret, Keynes, the AIDS crisis, and the experimental stem-cell treatment that he says has “rewired” him — while his party looks the other way</p>
 
   <div class="cbs-byline">
     <span>By <strong>Ed Bradley</strong>, 60 Minutes Correspondent</span>
@@ -25519,29 +25536,29 @@ dd {
 
     <div class="cbs-context">
       <div class="cbs-context-head">Background</div>
-      <p>In November 1994, Ronald Reagan publicly disclosed his diagnosis of Alzheimer's disease in a handwritten letter to the American people. For the eight years that followed, he largely withdrew from public life, his condition worsening progressively. In late 2001, Reagan became one of twelve patients enrolled in a clinical trial of an experimental stem-cell-derived neural regeneration therapy at the Salk Institute in La Jolla, California. In the months following treatment, associates of the former president reported significant cognitive improvement. Reagan's office confirmed these reports in July 2002. His decision to speak publicly — and specifically to address the stem-cell controversy surrounding his treatment — is the context for this interview.</p>
-      <p><em>Note: 60 Minutes requested comment from the Bush White House regarding the apparent conflict between the administration's restrictions on federal stem cell funding and the therapy that has benefited the former president. The White House did not respond.</em></p>
+      <p>In November 1994, Ronald Reagan publicly disclosed his diagnosis of Alzheimer’s disease in a handwritten letter to the American people. For the eight years that followed, he largely withdrew from public life, his condition worsening progressively. In late 2001, Reagan became one of twelve patients enrolled in a clinical trial of an experimental stem-cell-derived neural regeneration therapy at the Salk Institute in La Jolla, California. In the months following treatment, associates of the former president reported significant cognitive improvement. Reagan’s office confirmed these reports in July 2002. His decision to speak publicly — and specifically to address the stem-cell controversy surrounding his treatment — is the context for this interview.</p>
+      <p><em>Note: 60 Minutes requested comment from the Bush White House regarding the apparent conflict between the administration’s restrictions on federal stem cell funding and the therapy that has benefited the former president. The White House did not respond.</em></p>
     </div>
 
     <p><span class="cbs-dateline">Santa Barbara, Calif.</span> — On a warm September afternoon at Rancho del Cielo, the 688-acre ranch above Santa Barbara where he spent so many of the happiest days of his presidency, Ronald Reagan sat in a wooden chair on the porch and looked out at the Pacific-facing hills, reacquainting himself with a view he had thought he was losing forever.</p>
 
     <p>He is ninety-one years old. His hair is mostly white, and his hands, which grip the armrests of the chair with a strength that surprises you, are the hands of someone who spent decades outdoors. And when he begins to speak — slowly and carefully —, what he says is not what you expect, from a man of his age, his party, his legacy. It is more honest than that, and also more complicated.</p>
 
-    <p>"I lost eight years," he tells me, after a moment. "I don't think about it that way all the time. But when I do think about it, I think: eight years. That's a long time. That's — well, that's two presidencies." He smiles at his own joke. The smile is Reagan's smile, the one that had been seen on a thousand posters, and it is startling to see it operating at full power again at ninety-one. "I have to say, it feels very good to be back."</p>
+    <p>“I lost eight years,” he tells me, after a moment. “I don’t think about it that way all the time. But when I do think about it, I think: eight years. That’s a long time. That’s — well, that’s two presidencies.” He smiles at his own joke. The smile is Reagan’s smile, the one that had been seen on a thousand posters, and it is startling to see it operating at full power again at ninety-one. “I have to say, it feels very good to be back.”</p>
 
     <hr class="cbs-section-rule">
     <div class="cbs-section-subhed">The Treatment</div>
 
-    <p>Reagan received the experimental stem-cell therapy — a protocol developed over seven years by researchers at the Salk Institute in collaboration with a team from the University of California San Diego — in three sessions between November 2001 and March 2002. The treatment, which has not yet received FDA approval and is not available to the general public, uses neural progenitor cells derived from embryonic stem cells to target the amyloid plaques associated with Alzheimer's disease. Reagan is one of twelve patients in the Phase II trial. Of the twelve, seven have shown measurable cognitive improvement. Reagan's improvement has been described by his neurologist as "exceptional" and, in at least some respects, "unprecedented."</p>
+    <p>Reagan received the experimental stem-cell therapy — a protocol developed over seven years by researchers at the Salk Institute in collaboration with a team from the University of California San Diego — in three sessions between November 2001 and March 2002. The treatment, which has not yet received FDA approval and is not available to the general public, uses neural progenitor cells derived from embryonic stem cells to target the amyloid plaques associated with Alzheimer’s disease. Reagan is one of twelve patients in the Phase II trial. Of the twelve, seven have shown measurable cognitive improvement. Reagan’s improvement has been described by his neurologist as “exceptional” and, in at least some respects, “unprecedented.”</p>
 
-    <p>He does not use the word "miracle," however, to describe this. "I'm a man of faith," he says, "and I would be lying if I said faith had nothing to do with how I think about this. But what happened to me is science. It's careful, patient, serious science, done by very serious people. And I want to be honest about that, because I think — I think there are people who would prefer I wasn't."</p>
+    <p>He does not use the word “miracle,” however, to describe this. “I’m a man of faith,” he says, “and I would be lying if I said faith had nothing to do with how I think about this. But what happened to me is science. It’s careful, patient, serious science, done by very serious people. And I want to be honest about that, because I think — I think there are people who would prefer I wasn’t.”</p>
 
     <div class="cbs-pullquote">
-      "I want to be honest about the science, because I think there are people who would prefer I wasn't."
+      “I want to be honest about the science, because I think there are people who would prefer I wasn’t.”
       <cite>— Ronald Reagan</cite>
     </div>
 
-    <p>He does not say who those people are, and perhaps he does not need to. A year earlier, President George W. Bush had announced severe restrictions on federal funding for embryonic stem cell research, a decision driven in significant part by the same conservative religious constituency that put both men in the White House. The treatment that returned Reagan's memory to him is the direct product of the science that policy was designed to constrain. No one in his party, in the months since Reagan's improvement became publicly known, has found a comfortable way to discuss this fact. Reagan, for his part, seems almost serenely unconcerned with giving them one.</p>
+    <p>He does not say who those people are, and perhaps he does not need to. A year earlier, President George W. Bush had announced severe restrictions on federal funding for embryonic stem cell research, a decision driven in significant part by the same conservative religious constituency that put both men in the White House. The treatment that returned Reagan’s memory to him is the direct product of the science that policy was designed to constrain. No one in his party, in the months since Reagan’s improvement became publicly known, has found a comfortable way to discuss this fact. Reagan, for his part, seems almost serenely unconcerned with giving them one.</p>
 
     <hr class="cbs-section-rule">
     <div class="cbs-section-subhed">The interview — selected transcript</div>
@@ -25560,27 +25577,27 @@ dd {
 
         <div class="cbs-q-block">
           <span class="cbs-q-label reagan">Reagan</span>
-          <span class="cbs-q-text">You know, I've thought about this a great deal. And the word I keep coming back to is "rewired." I know that sounds mechanical. Nancy doesn't like it, she thinks it makes me sound like a toaster. <em>[laughs]</em> But that's what it felt like. As though someone had gone into the back of the apparatus and reconnected things that had come loose. I would— I'd have a thought, and it would arrive. And that sounds simple, but for a long time, the thought would start and then it would just... dissolve. And now it arrives. That's extraordinary, that's— everything, really.</span>
+          <span class="cbs-q-text">You know, I’ve thought about this a great deal. And the word I keep coming back to is “rewired.” I know that sounds mechanical. Nancy doesn’t like it, she thinks it makes me sound like a toaster. <em>[laughs]</em> But that’s what it felt like. As though someone had gone into the back of the apparatus and reconnected things that had come loose. I would— I’d have a thought, and it would arrive. And that sounds simple, but for a long time, the thought would start and then it would just… dissolve. And now it arrives. That’s extraordinary, that’s— everything, really.</span>
         </div>
 
         <div class="cbs-q-block">
           <span class="cbs-q-label">Bradley</span>
-          <span class="cbs-q-text">You've been very open about saying this treatment is stem-cell based. Was that a deliberate choice?</span>
+          <span class="cbs-q-text">You’ve been very open about saying this treatment is stem-cell based. Was that a deliberate choice?</span>
         </div>
 
         <div class="cbs-q-block">
           <span class="cbs-q-label reagan">Reagan</span>
-          <span class="cbs-q-text">Well, it's the truth. I don't see the sense in being anything other than straightforward about the truth, at my age. <em>[pause]</em> There's a debate going on about this research, and I understand the moral concerns — I do, genuinely —, but I also know what this research did for me. And I think the American people deserve to know that too. All of it, and well, not just the parts that are comfortable.</span>
+          <span class="cbs-q-text">Well, it’s the truth. I don’t see the sense in being anything other than straightforward about the truth, at my age. <em>[pause]</em> There’s a debate going on about this research, and I understand the moral concerns — I do, genuinely —, but I also know what this research did for me. And I think the American people deserve to know that too. All of it, and well, not just the parts that are comfortable.</span>
         </div>
 
         <div class="cbs-q-block">
           <span class="cbs-q-label">Bradley</span>
-          <span class="cbs-q-text">We asked the White House for a response to your comments about stem cell research, but they didn't reply. Does that surprise you?</span>
+          <span class="cbs-q-text">We asked the White House for a response to your comments about stem cell research, but they didn’t reply. Does that surprise you?</span>
         </div>
 
         <div class="cbs-q-block">
           <span class="cbs-q-label reagan">Reagan</span>
-          <span class="cbs-q-text"><em>[long pause, a slight smile]</em> No. I understand the position they're in. It's not a comfortable position. I was in uncomfortable positions myself, from time to time, during my years. You find a way to be very busy on other matters. <em>[beat]</em> I don't intend to make it easier for them than that.</span>
+          <span class="cbs-q-text"><em>[long pause, a slight smile]</em> No. I understand the position they’re in. It’s not a comfortable position. I was in uncomfortable positions myself, from time to time, during my years. You find a way to be very busy on other matters. <em>[beat]</em> I don’t intend to make it easier for them than that.</span>
         </div>
 
         <hr class="cbs-section-rule" style="margin:16px 0 14px;">
@@ -25592,7 +25609,7 @@ dd {
 
         <div class="cbs-q-block">
           <span class="cbs-q-label reagan">Reagan</span>
-          <span class="cbs-q-text">Oh, that's the question, isn't it. <em>[long pause, looks out at the hills]</em> I'll tell you something that will probably surprise people. I've been thinking a great deal about economics, about my economic record. About whether — whether what I believed, and what I said I believed, were the same thing. And I think, if I'm honest, the answer is... more complicated than I made it sound at the time.</span>
+          <span class="cbs-q-text">Oh, that’s the question, isn’t it. <em>[long pause, looks out at the hills]</em> I’ll tell you something that will probably surprise people. I’ve been thinking a great deal about economics, about my economic record. About whether — whether what I believed, and what I said I believed, were the same thing. And I think, if I’m honest, the answer is… more complicated than I made it sound at the time.</span>
         </div>
 
         <div class="cbs-q-block">
@@ -25602,24 +25619,24 @@ dd {
 
         <div class="cbs-q-block">
           <span class="cbs-q-label reagan">Reagan</span>
-          <span class="cbs-q-text">Well — I'll say something now that I wouldn't have said then, and that my friends at the Heritage Foundation will be very unhappy about. <em>[laughs softly]</em> I've been reading Keynes. Or re-reading, I should say. And I think — I think I always had a Keynesian heart, even when I was making anti-Keynesian speeches. You see, the deficits, the military spending, the '82 tax adjustments... if you look at what we actually did, rather than what we said we were doing, there's a case — a strong case — that we were Keynesians in practice. I just didn't have the courage to say so. Or maybe I didn't have the clarity, I'm not sure which is worse.</span>
+          <span class="cbs-q-text">Well — I’ll say something now that I wouldn’t have said then, and that my friends at the Heritage Foundation will be very unhappy about. <em>[laughs softly]</em> I’ve been reading Keynes. Or re-reading, I should say. And I think — I think I always had a Keynesian heart, even when I was making anti-Keynesian speeches. You see, the deficits, the military spending, the ‘82 tax adjustments… if you look at what we actually did, rather than what we said we were doing, there’s a case — a strong case — that we were Keynesians in practice. I just didn’t have the courage to say so. Or maybe I didn’t have the clarity, I’m not sure which is worse.</span>
         </div>
 
         <div class="cbs-q-block">
           <span class="cbs-q-label">Bradley</span>
-          <span class="cbs-q-text">You said you had "lusted" after different ideas but were "Keynesian at heart." That's a striking way to put it.</span>
+          <span class="cbs-q-text">You said you had “lusted” after different ideas but were “Keynesian at heart.” That’s a striking way to put it.</span>
         </div>
 
         <div class="cbs-q-block">
           <span class="cbs-q-label reagan">Reagan</span>
-          <span class="cbs-q-text">Well, I have some experience with the word "lust" in a political context. <em>[laughs]</em> That was Jimmy, not me, sure, but I understand the sentiment. You hold an idea in your mind that you know isn't quite the whole story, and you dress it up in better clothes than it deserves, and you send it out and hope for the best. The supply-side argument was partly true, the spending discipline was partly real. But partly is not entirely. And I think we did, in some respects, prove Keynes right by accident. The stimulus worked. The deficits were enormous and the economy recovered. I don't think we should be too proud of the mechanism, but the outcome was — well, the outcome was strong. We got a strong outcome.</span>
+          <span class="cbs-q-text">Well, I have some experience with the word “lust” in a political context. <em>[laughs]</em> That was Jimmy, not me, sure, but I understand the sentiment. You hold an idea in your mind that you know isn’t quite the whole story, and you dress it up in better clothes than it deserves, and you send it out and hope for the best. The supply-side argument was partly true, the spending discipline was partly real. But partly is not entirely. And I think we did, in some respects, prove Keynes right by accident. The stimulus worked. The deficits were enormous and the economy recovered. I don’t think we should be too proud of the mechanism, but the outcome was — well, the outcome was strong. We got a strong outcome.</span>
         </div>
 
         <hr class="cbs-section-rule" style="margin:16px 0 14px;">
 
         <div class="cbs-q-block">
           <span class="cbs-q-label">Bradley</span>
-          <span class="cbs-q-text">I want to ask you about something that you didn't address publicly during your presidency in the way that, in retrospect, many people — and perhaps you — feel you should have. The AIDS epidemic.</span>
+          <span class="cbs-q-text">I want to ask you about something that you didn’t address publicly during your presidency in the way that, in retrospect, many people — and perhaps you — feel you should have. The AIDS epidemic.</span>
         </div>
 
         <div class="cbs-q-block">
@@ -25634,17 +25651,17 @@ dd {
 
         <div class="cbs-q-block">
           <span class="cbs-q-label reagan">Reagan</span>
-          <span class="cbs-q-text">I want to say that I was wrong. I was— I was badly wrong. And I have had— I have had a long time, some of it more conscious than I'd like to admit, to think about what that cost. What it cost people who were sick and frightened and being told by their government, in effect, by my silence and by my administration's silence, that they didn't matter enough to be spoken to directly. That is— <em>[he stops. His voice has changed a bit, and he does not look at the camera.]</em> I am sorry for that. I don't have a way to say it that doesn't sound inadequate. It is inadequate. But it's what I have.</span>
+          <span class="cbs-q-text">I want to say that I was wrong. I was— I was badly wrong. And I have had— I have had a long time, some of it more conscious than I’d like to admit, to think about what that cost. What it cost people who were sick and frightened and being told by their government, in effect, by my silence and by my administration’s silence, that they didn’t matter enough to be spoken to directly. That is— <em>[he stops. His voice has changed a bit, and he does not look at the camera.]</em> I am sorry for that. I don’t have a way to say it that doesn’t sound inadequate. It is inadequate. But it’s what I have.</span>
         </div>
 
         <div class="cbs-q-block">
           <span class="cbs-q-label">Bradley</span>
-          <span class="cbs-q-text">In an interview with an aide some years ago, you were reported to have said that when you tried to think about the epidemic, tried to imagine it, you became, in your word, "completely discombobulated." What did you mean by that?</span>
+          <span class="cbs-q-text">In an interview with an aide some years ago, you were reported to have said that when you tried to think about the epidemic, tried to imagine it, you became, in your word, “completely discombobulated.” What did you mean by that?</span>
         </div>
 
         <div class="cbs-q-block">
           <span class="cbs-q-label reagan">Reagan</span>
-          <span class="cbs-q-text">I meant that when I— when I tried to do the thing that you're supposed to do, which is put yourself in someone else's position— to imagine yourself sick with it, frightened with it, alone with it... and I couldn't hold that image in my mind without it— without something breaking down in me. Something I didn't know how to manage. I was afraid of what it would mean to feel that fully. And so I didn't, I kept a certain distance. And people died in that distance. <em>[he stops. His eyes are bright. He does not cry, but it is close.]</em> I would give a great deal to have been a braver man on that particular question.</span>
+          <span class="cbs-q-text">I meant that when I— when I tried to do the thing that you’re supposed to do, which is put yourself in someone else’s position— to imagine yourself sick with it, frightened with it, alone with it… and I couldn’t hold that image in my mind without it— without something breaking down in me. Something I didn’t know how to manage. I was afraid of what it would mean to feel that fully. And so I didn’t, I kept a certain distance. And people died in that distance. <em>[he stops. His eyes are bright. He does not cry, but it is close.]</em> I would give a great deal to have been a braver man on that particular question.</span>
         </div>
 
         <div class="cbs-q-block">
@@ -25654,7 +25671,7 @@ dd {
 
         <div class="cbs-q-block">
           <span class="cbs-q-label reagan">Reagan</span>
-          <span class="cbs-q-text">Only that I am deeply, genuinely sorry. And that the silence was cowardice. I dressed it up as other things at the time. It was cowardice. I know that now and I expect I knew it then. <em>[pause]</em> I don't think sorry is enough. I don't have anything more than sorry. But you should have the sorry, at least.</span>
+          <span class="cbs-q-text">Only that I am deeply, genuinely sorry. And that the silence was cowardice. I dressed it up as other things at the time. It was cowardice. I know that now and I expect I knew it then. <em>[pause]</em> I don’t think sorry is enough. I don’t have anything more than sorry. But you should have the sorry, at least.</span>
         </div>
 
         <hr class="cbs-section-rule" style="margin:16px 0 14px;">
@@ -25666,7 +25683,7 @@ dd {
 
         <div class="cbs-q-block">
           <span class="cbs-q-label reagan">Reagan</span>
-          <span class="cbs-q-text">Well. <em>[looks out at the hills for a long moment]</em> I think you try to tell the truth as best you can. You try to say the things you should have said when it was costly to say them. It's not costly now, I'm ninety-one. There's nothing much they can do to me. <em>[small laugh]</em> So you say the true things, and you hope that the people who still have something to lose from the true things will hear them, and find a little courage somewhere. That's what I'm doing today. I think that's what this is.</span>
+          <span class="cbs-q-text">Well. <em>[looks out at the hills for a long moment]</em> I think you try to tell the truth as best you can. You try to say the things you should have said when it was costly to say them. It’s not costly now, I’m ninety-one. There’s nothing much they can do to me. <em>[small laugh]</em> So you say the true things, and you hope that the people who still have something to lose from the true things will hear them, and find a little courage somewhere. That’s what I’m doing today. I think that’s what this is.</span>
         </div>
 
       </div>
