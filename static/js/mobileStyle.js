@@ -111,6 +111,7 @@ const cssRules = `
         margin-right: auto; 
     }
 
+    /* experimental extra patches */
     #game_window {
       position: relative;
       display: flex;
@@ -146,13 +147,20 @@ const cssRules = `
       margin: 0;
     }
 
-
     #running_mate_pic, img#running_mate_pic {
       order: 3;
       width: 13em;
       height: auto;
       flex-shrink: 0;
       margin: 0;
+    }
+
+    /* for mods that mess with the candidate images, e.g. 2012 Shattered */
+    #candidate_pic, #running_mate_pic {
+      position: static !important;
+      top: auto !important;
+      left: auto !important;
+      margin-top: 0 !important;
     }
 
     .inner_window_sign_display {
