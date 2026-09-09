@@ -17,7 +17,7 @@ campaignTrail_temp.election_json = [{
         "has_visits": 1,
         "no_electoral_majority_image": "/static/images/2012-no-majority.jpg",
 		    "site_image": "https://jetsimon.com/cts-media/public/1972d_init_0.png",
-	      "site_description": "The CPUSA, for its entire existance, has existed merely as an extremist fringe. Even at its height in the 1920s and 1930s, it was at best a pressure group, and at worst actively reviled and targeted. For years, Its influence has been waning for decades, as student activists, Black Panthers, and other New Left groups push the party into utter irrelevancy. The only thing that could ever change this is a situation in which both candidates are utterly and indisputably anathema to the mainstream American left."
+	      "site_description": "<p>The CPUSA, for its entire existance, has existed merely as an extremist fringe. Even at its height in the 1920s and 1930s, it was at best a pressure group, and at worst actively reviled and targeted. For years, Its influence has been waning for decades, as student activists, Black Panthers, and other New Left groups push the party into utter irrelevancy.</p><p>The only thing that could ever change this is a situation in which both candidates are utterly and indisputably anathema to the mainstream American left.</p>"
     }
   }, ]
   campaignTrail_temp.candidate_json = [{
@@ -377,6 +377,16 @@ campaignTrail_temp.election_json = [{
   customquote = quotes[Math.floor((Math.random() * quotes.length))]
   
   corrr = `\n<h2>The 1972 Presidential Election</h2><font id='wittyquote' size='4' color='77211C'><em>` + customquote + `</em></font>`
+
+  campaignTrail_temp.modBoxTheme = {
+    "header_text_color": "#fff",
+    "main_color": "#86B6F2",
+    "header_color": "#77211C",
+    "secondary_color": "#531714",
+    "description_background_color": "#bfd9f8",
+    "description_text_color": "#222",
+    "ui_text_color": "#fff"
+  };
   
   nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#86B6F2"
   nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#77211C"
