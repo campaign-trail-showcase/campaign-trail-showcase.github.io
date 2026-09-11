@@ -24,6 +24,38 @@ const VARIABLE_CHANGES_CSS = `
   overscroll-behavior: contain;
   scrollbar-width: thin;
 }
+
+/* for mods that use tooltips, e.g. AC, which don't display
+ * when this feature is on */
+.mytooltip {
+  position: relative;
+  anchor-scope: --active-tooltip;
+  anchor-name: --active-tooltip;
+}
+
+.mytooltip .mytooltiptext {
+  position: fixed !important;
+  position-anchor: --active-tooltip;  
+  top: anchor(bottom, 6px) !important;
+  left: anchor(center) !important;
+  translate: -50% 0;
+  bottom: auto !important;
+  margin: 0 !important;
+  position-try-fallbacks: flip-block;
+  z-index: 9999999 !important;
+  pointer-events: none;
+  transition: opacity 0.2s ease-out !important;
+}
+
+.mytooltip:hover {
+  z-index: 9999999 !important;
+}
+
+.mytooltip:hover .mytooltiptext {
+  opacity: 1 !important;
+  transition: opacity 0.3s ease-in !important;
+  transition-delay: 0.5s !important;
+}
 `;
 
 function syncVariableChangesStyles() {
