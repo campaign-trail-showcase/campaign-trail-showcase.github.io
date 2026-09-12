@@ -66439,13 +66439,12 @@ let isAchievementShowing = false;
 let unlockedAchievements = JSON.parse(localStorage.getItem("unlockedAch")) || {};
 
 function ctsAchievement(title, imageUrl, soundUrl, description, difficultyChecker = true) {
-
-    if (window.location.hostname !== "campaigntrailshowcase.com") {
+    if (!window.location.hostname.includes("campaigntrailshowcase.com") && window.location.hostname !== "localhost") {
         console.log(`Blocked achievement '${title}' — not on the correct domain.`);
         return;
     }
 
-    if (cheatsActive) {
+    if (typeof cheatsActive !== "undefined" && cheatsActive) {
         console.log(`Cannot unlock '${title}' because cheats are active!`);
         return;
     }
@@ -66458,11 +66457,25 @@ function ctsAchievement(title, imageUrl, soundUrl, description, difficultyChecke
 
     GetAchievement(title, title, imageUrl, soundUrl, description);
 
+    // register achievements in allAch
+    if (typeof allAch !== "undefined" && campaignTrail_temp.achievements) {
+        const modKey = window.modBeingPlayed || "1968 - All The Way";
+        if (!allAch[modKey]) {
+            allAch[modKey] = campaignTrail_temp.achievements;
+        }
+    }
+
     if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier <= 1) || !difficultyChecker) {
-        if (campaignTrail_temp.CTS && !unlockedAchievements[title]) {
-            unlockedAchievements[title] = true;
-            localStorage.setItem("unlockedAch", JSON.stringify(unlockedAchievements));
-            addAllAchievements();  // Refresh UI
+        if (typeof unlockAchievement === "function") {
+            const originalAlert = window.alert;
+            window.alert = () => {};
+            try {
+                unlockAchievement(title);
+            } catch (err) {
+                console.error("unlockAchievement error:", err);
+            } finally {
+                window.alert = originalAlert;
+            }
         }
     }
 }
