@@ -8,6 +8,25 @@ try {
   unlockedAch = {};
 }
 
+// mainly for combo mods (see 1974NY and 1974KS), but allows
+// them to look up for flat ach names anyway
+function createUnlockedAchProxy(target) {
+  return new Proxy(target, {
+    get(obj, prop) {
+      if (typeof prop !== "string") return obj[prop];
+      if (obj[prop] !== undefined) return obj[prop];
+      // search for any namespaced key ending with ":<prop>"
+      for (const key of Object.keys(obj)) {
+        if (key.endsWith(`:${prop}`)) {
+          return obj[key];
+        }
+      }
+      return undefined;
+    },
+  });
+}
+window.unlockedAch = createUnlockedAchProxy(unlockedAch);
+
 let currentAchPage = 1;
 const achievementsPerPage = 5;
 let totalAchPages = 1;
@@ -300,6 +319,7 @@ function unlockAchievement(name, targetModName = null) {
   } catch (e) {
     console.error("Error while saving achievements:", e);
   }
+  window.unlockedAch = createUnlockedAchProxy(unlockedAch);
 
   // invalidate cache
   modCompletionCache = null;
@@ -1066,6 +1086,26 @@ function addAllAchievements() {
 
 function performRender() {
   if (!contentContainerElement) return;
+
+  // re-sync in case an achievement was unlocked during the session
+  try {
+    const stored = localStorage.getItem("unlockedAch");
+    if (stored) {
+      unlockedAch = JSON.parse(stored);
+      window.unlockedAch = createUnlockedAchProxy(unlockedAch);
+    }
+  } catch (e) {}
+  modCompletionCache = null;
+  lastCacheUpdate = 0;
+
+  // register active in-memory mod achievements into allAch if missing
+  if (window.campaignTrail_temp?.achievements) {
+    const currentModName = getCurrentModName() || window.modBeingPlayed || "Custom Mod";
+    if (typeof allAch === "object" && allAch !== null && !allAch[currentModName]) {
+      allAch[currentModName] = window.campaignTrail_temp.achievements;
+      achievementsCache = null;
+    }
+  }
 
   if (achievementMetadataLoadPromise) {
     showAchievementLoadingState("Loading achievements...");
