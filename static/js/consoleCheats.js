@@ -95,7 +95,7 @@ const useConsoleCheats = () => {
     `).appendTo("head");
   }
 
-  // == END IMPROVE HITBOXES ==
+  // == DATA INDEXING ==
 
   // entity lookup dictionaries
   const stateNameById = Object.create(null);
@@ -106,29 +106,25 @@ const useConsoleCheats = () => {
     const o = e.states_json[i];
     stateNameById[o.pk] = o.fields.name;
     stateByPk[o.pk] = o;
-    stateAbbrToPk.set(o.fields.abbr.toLowerCase(), o.pk);
-    stateAbbrToPk.set(o.fields.name.toLowerCase(), o.pk);
+
+    if (o.fields.abbr != null) {
+      stateAbbrToPk.set(String(o.fields.abbr).trim().toLowerCase(), o.pk);
+    }
+    if (o.fields.name != null) {
+      stateAbbrToPk.set(String(o.fields.name).trim().toLowerCase(), o.pk);
+    }
   }
 
   const candidateNameById = Object.create(null);
   for (let i = 0; i < e.candidate_json.length; i++) {
     const o = e.candidate_json[i];
-    candidateNameById[o.pk] = `${o.fields.first_name} ${o.fields.last_name}`.trim();
+    candidateNameById[o.pk] = `${o.fields.first_name || ""} ${o.fields.last_name || ""}`.trim();
   }
 
   const issueNameById = Object.create(null);
   for (let i = 0; i < e.issues_json.length; i++) {
     const o = e.issues_json[i];
     issueNameById[o.pk] = o.fields.name;
-  }
-
-  const candidate_state_multipliers = {};
-  for (let i = 0; i < e.candidate_state_multiplier_json.length; i++) {
-    const o = e.candidate_state_multiplier_json[i];
-    const candidate = candidateNameById[o.fields.candidate];
-    const state = stateNameById[o.fields.state];
-    candidate_state_multipliers[candidate] = candidate_state_multipliers[candidate] || {};
-    candidate_state_multipliers[candidate][state] = o.fields.state_multiplier;
   }
 
   function determineStance(issueId, n) {
@@ -155,24 +151,6 @@ const useConsoleCheats = () => {
     return "NULL";
   }
 
-  const candidate_issue_scores = {};
-  for (let i = 0; i < e.candidate_issue_score_json.length; i++) {
-    const o = e.candidate_issue_score_json[i];
-    const candidate = candidateNameById[o.fields.candidate];
-    const issue = issueNameById[o.fields.issue];
-    candidate_issue_scores[candidate] = candidate_issue_scores[candidate] || {};
-    candidate_issue_scores[candidate][issue] = determineStance(o.fields.issue, o.fields.issue_score);
-  }
-
-  const running_mate_issue_scores = {};
-  for (let i = 0; i < e.running_mate_issue_score_json.length; i++) {
-    const o = e.running_mate_issue_score_json[i];
-    const candidate = candidateNameById[o.fields.candidate];
-    const issue = issueNameById[o.fields.issue];
-    running_mate_issue_scores[candidate] = running_mate_issue_scores[candidate] || {};
-    running_mate_issue_scores[candidate][issue] = determineStance(o.fields.issue, o.fields.issue_score);
-  }
-
   const answers = Object.create(null);
   for (let i = 0; i < e.answers_json.length; i++) {
     const o = e.answers_json[i];
@@ -186,88 +164,123 @@ const useConsoleCheats = () => {
     };
   }
 
-  for (let i = 0; i < e.answer_feedback_json.length; i++) {
-    const o = e.answer_feedback_json[i];
-    if (o.fields.candidate == e.candidate_id && answers[o.fields.answer]) {
-      answers[o.fields.answer].feedback = o.fields.answer_feedback;
+  if (e.answer_feedback_json) {
+    for (let i = 0; i < e.answer_feedback_json.length; i++) {
+      const o = e.answer_feedback_json[i];
+      if (o.fields.candidate == e.candidate_id && answers[o.fields.answer]) {
+        answers[o.fields.answer].feedback = o.fields.answer_feedback;
+      }
     }
   }
 
-  for (let i = 0; i < e.answer_score_global_json.length; i++) {
-    const o = e.answer_score_global_json[i];
-    if (o.fields.candidate != e.candidate_id) continue;
-    const ans = answers[o.fields.answer];
-    if (!ans) continue;
+  if (e.answer_score_global_json) {
+    for (let i = 0; i < e.answer_score_global_json.length; i++) {
+      const o = e.answer_score_global_json[i];
+      if (o.fields.candidate != e.candidate_id) continue;
+      const ans = answers[o.fields.answer];
+      if (!ans) continue;
 
-    const aff = candidateNameById[o.fields.affected_candidate];
-    if (!ans.global_effects.some((eff) => eff.affected_candidate === aff)) {
-      ans.global_effects.push({
-        affected_candidate: aff,
-        global_multiplier: o.fields.global_multiplier,
+      const aff = candidateNameById[o.fields.affected_candidate];
+      if (!ans.global_effects.some((eff) => eff.affected_candidate === aff)) {
+        ans.global_effects.push({
+          affected_candidate: aff,
+          global_multiplier: o.fields.global_multiplier,
+        });
+      }
+    }
+  }
+
+  if (e.answer_score_issue_json) {
+    for (let i = 0; i < e.answer_score_issue_json.length; i++) {
+      const o = e.answer_score_issue_json[i];
+      const ans = answers[o.fields.answer];
+      if (!ans) continue;
+      ans.issue_effects.push({
+        issue: issueNameById[o.fields.issue],
+        importance: o.fields.issue_importance,
+        score: o.fields.issue_score,
       });
     }
   }
 
-  for (let i = 0; i < e.answer_score_issue_json.length; i++) {
-    const o = e.answer_score_issue_json[i];
-    const ans = answers[o.fields.answer];
-    if (!ans) continue;
-    ans.issue_effects.push({
-      issue: issueNameById[o.fields.issue],
-      importance: o.fields.issue_importance,
-      score: o.fields.issue_score,
-    });
-  }
-
-  for (let i = 0; i < e.answer_score_state_json.length; i++) {
-    const o = e.answer_score_state_json[i];
-    if (o.fields.candidate != e.candidate_id) continue;
-    const ans = answers[o.fields.answer];
-    if (!ans) continue;
-    ans.state_effects.push({
-      affected_candidate: candidateNameById[o.fields.affected_candidate],
-      state: stateNameById[o.fields.state],
-      state_multiplier: o.fields.state_multiplier,
-    });
-  }
-
-  const questions = Object.create(null);
-  for (let i = 0; i < e.questions_json.length; i++) {
-    const o = e.questions_json[i];
-    questions[o.pk] = {
-      text: o.fields.description,
-      likelihood: o.fields.likelihood,
-      priority: o.fields.priority,
-      answers: [],
-    };
-  }
-
-  for (const k in answers) {
-    const o = answers[k];
-    if (questions[o.question]) {
-      questions[o.question].answers.push(o);
+  if (e.answer_score_state_json) {
+    for (let i = 0; i < e.answer_score_state_json.length; i++) {
+      const o = e.answer_score_state_json[i];
+      if (o.fields.candidate != e.candidate_id) continue;
+      const ans = answers[o.fields.answer];
+      if (!ans) continue;
+      ans.state_effects.push({
+        affected_candidate: candidateNameById[o.fields.affected_candidate],
+        state: stateNameById[o.fields.state],
+        state_multiplier: o.fields.state_multiplier,
+      });
     }
   }
 
   // == COMPUTE RESULTS ==
 
   // pre-indexed maps for compute_results
-  const globalScoreLookup = new Map();
-  for (let i = 0; i < e.answer_score_global_json.length; i++) {
-    const item = e.answer_score_global_json[i];
-    globalScoreLookup.set(
-      `${item.fields.answer}_${item.fields.candidate}_${item.fields.affected_candidate}`,
-      item.fields.global_multiplier
-    );
+  const stateIssueScoreLookup = new Map();
+  if (e.state_issue_score_json) {
+    for (let i = 0; i < e.state_issue_score_json.length; i++) {
+      const item = e.state_issue_score_json[i];
+      const sc = item.fields.state_issue_score;
+      stateIssueScoreLookup.set(`${item.fields.state}_${item.fields.issue}`, {
+        E: sc * Math.abs(sc),
+        weight: item.fields.weight,
+      });
+    }
   }
 
-  const stateIssueScoreLookup = new Map();
-  for (let i = 0; i < e.state_issue_score_json.length; i++) {
-    const item = e.state_issue_score_json[i];
-    stateIssueScoreLookup.set(`${item.fields.state}_${item.fields.issue}`, {
-      score: item.fields.state_issue_score,
-      weight: item.fields.weight,
-    });
+  // pre-indexed answer state effects
+  const ASSJByAnswerPK = new Map();
+  if (e.answer_score_state_json) {
+    for (let i = 0; i < e.answer_score_state_json.length; i++) {
+      const assj = e.answer_score_state_json[i];
+      let list = ASSJByAnswerPK.get(assj.fields.answer);
+      if (!list) {
+        list = [];
+        ASSJByAnswerPK.set(assj.fields.answer, list);
+      }
+      list.push(assj.fields);
+    }
+  }
+
+  // pre-indexed answer issue effects
+  const ASIJByAnswerPK = new Map();
+  if (e.answer_score_issue_json) {
+    for (let i = 0; i < e.answer_score_issue_json.length; i++) {
+      const asij = e.answer_score_issue_json[i];
+      let list = ASIJByAnswerPK.get(asij.fields.answer);
+      if (!list) {
+        list = [];
+        ASIJByAnswerPK.set(asij.fields.answer, list);
+      }
+      list.push(asij.fields);
+    }
+  }
+
+  // pre-indexed candidate state multipliers
+  const candidateBaseStateMul = new Map();
+  if (e.candidate_state_multiplier_json) {
+    for (let i = 0; i < e.candidate_state_multiplier_json.length; i++) {
+      const entry = e.candidate_state_multiplier_json[i];
+      let m = candidateBaseStateMul.get(entry.fields.candidate);
+      if (!m) {
+        m = new Map();
+        candidateBaseStateMul.set(entry.fields.candidate, m);
+      }
+      m.set(entry.fields.state, entry.fields);
+    }
+  }
+
+  // running mate score lookup
+  const runningMateScoreLookup = new Map();
+  if (e.running_mate_issue_score_json) {
+    for (let i = 0; i < e.running_mate_issue_score_json.length; i++) {
+      const rm = e.running_mate_issue_score_json[i].fields;
+      runningMateScoreLookup.set(rm.issue, rm.issue_score);
+    }
   }
 
   const states_map = new Map();
@@ -275,17 +288,28 @@ const useConsoleCheats = () => {
     states_map.set(e.states_json[i].pk, e.states_json[i]);
   }
 
+  const globalScoreLookup = new Map();
+  if (e.answer_score_global_json) {
+    for (let i = 0; i < e.answer_score_global_json.length; i++) {
+      const item = e.answer_score_global_json[i];
+      globalScoreLookup.set(
+        `${item.fields.answer}_${item.fields.candidate}_${item.fields.affected_candidate}`,
+        item.fields.global_multiplier
+      );
+    }
+  }
+
   function P(arr, prop) {
     return arr.sort((a, b) => (a[prop] < b[prop] ? -1 : a[prop] > b[prop] ? 1 : 0));
   }
 
-  function compute_results(tentative_answers) {
+  function compute_results(tentative_answers, calc_ev = false) {
     const answersArr = [...e.player_answers, ...(tentative_answers ?? [])];
     const candidate_ids = [e.candidate_id, ...e.opponents_list];
     const globalParams = e.global_parameter_json[0].fields;
 
     // global multipliers calculation
-    const s = [];
+    const globalMults = new Float64Array(candidate_ids.length);
     for (let a = 0; a < candidate_ids.length; a++) {
       const candId = candidate_ids[a];
       let l = 0;
@@ -293,13 +317,9 @@ const useConsoleCheats = () => {
         const mult = globalScoreLookup.get(`${answersArr[r]}_${e.candidate_id}_${candId}`);
         if (mult !== undefined) l += mult;
       }
-
       let o = (candId === e.candidate_id && l < -0.4) ? 0.6 : 1 + l;
       let c = (candId === e.candidate_id) ? o * e.difficulty_level_multiplier : o;
-      s.push({
-        candidate: candId,
-        global_multiplier: isNaN(c) ? 1 : c,
-      });
+      globalMults[a] = isNaN(c) ? 1 : c;
     }
 
     // candidate issue scores
@@ -317,146 +337,118 @@ const useConsoleCheats = () => {
           if (v.length === e.issues_json.length) break;
         }
       }
-      u.push({
-        candidate_id: candId,
-        issue_scores: v,
-      });
-    }
-
-    // state multipliers
-    const f = [];
-    for (let a = 0; a < candidate_ids.length; a++) {
-      const candId = candidate_ids[a];
-      const m = [];
-      for (let r = 0; r < e.candidate_state_multiplier_json.length; r++) {
-        const item = e.candidate_state_multiplier_json[r];
-        if (item.fields.candidate === candId) {
-          const p = item.fields.state_multiplier * s[a].global_multiplier;
-          m.push({
-            state: item.fields.state,
-            state_multiplier: p,
-          });
-          if (m.length === e.states_json.length) break;
-        }
-      }
-      P(m, "state");
-      f.push({
-        candidate_id: candId,
-        state_multipliers: m,
-      });
+      u.push(v);
     }
 
     // issue stance shifts
-    for (let a = 0; a < u[0].issue_scores.length; a++) {
-      const currentIssue = u[0].issue_scores[a].issue;
-      let h = -1;
-      for (let r = 0; r < e.running_mate_issue_score_json.length; r++) {
-        if (e.running_mate_issue_score_json[r].fields.issue === currentIssue) {
-          h = r;
-          break;
-        }
-      }
+    const playerIssueScores = u[0];
+    for (let a = 0; a < playerIssueScores.length; a++) {
+      const currentIssue = playerIssueScores[a].issue;
+      const runningMateScore = runningMateScoreLookup.get(currentIssue) ?? 0;
 
       let g = 0, b = 0;
       for (let r = 0; r < answersArr.length; r++) {
-        for (let d = 0; d < e.answer_score_issue_json.length; d++) {
-          const item = e.answer_score_issue_json[d];
-          if (item.fields.issue === currentIssue && item.fields.answer === answersArr[r]) {
-            g += item.fields.issue_score * item.fields.issue_importance;
-            b += item.fields.issue_importance;
+        const effects = ASIJByAnswerPK.get(answersArr[r]);
+        if (!effects) continue;
+        for (let d = 0; d < effects.length; d++) {
+          if (effects[d].issue === currentIssue) {
+            g += effects[d].issue_score * effects[d].issue_importance;
+            b += effects[d].issue_importance;
           }
         }
       }
 
-      const runningMateScore = h !== -1 ? e.running_mate_issue_score_json[h].fields.issue_score : 0;
-      u[0].issue_scores[a].issue_score =
-        (u[0].issue_scores[a].issue_score * globalParams.candidate_issue_weight +
+      playerIssueScores[a].issue_score =
+        (playerIssueScores[a].issue_score * globalParams.candidate_issue_weight +
           runningMateScore * globalParams.running_mate_issue_weight +
           g) /
         (globalParams.candidate_issue_weight + globalParams.running_mate_issue_weight + b);
     }
 
-    // answer score state effects
-    const ASSJByAnswerPK = new Map();
-    for (let i = 0; i < e.answer_score_state_json.length; i++) {
-      const assj = e.answer_score_state_json[i];
-      if (!ASSJByAnswerPK.has(assj.fields.answer)) {
-        ASSJByAnswerPK.set(assj.fields.answer, [assj]);
-      } else {
-        ASSJByAnswerPK.get(assj.fields.answer).push(assj);
+    // precompute candidate issue scores
+    const candIssueS = [];
+    for (let a = 0; a < candidate_ids.length; a++) {
+      const scores = u[a];
+      const sArr = new Float64Array(scores.length);
+      for (let d = 0; d < scores.length; d++) {
+        const sc = scores[d].issue_score;
+        sArr[d] = sc * Math.abs(sc);
+      }
+      candIssueS.push(sArr);
+    }
+
+    // state multiplier deltas
+    const stateDeltas = new Map();
+    for (let d = 0; d < answersArr.length; d++) {
+      const list = ASSJByAnswerPK.get(answersArr[d]);
+      if (!list) continue;
+      for (let k = 0; k < list.length; k++) {
+        const assj = list[k];
+        if (assj.candidate === e.candidate_id) {
+          const key = `${assj.affected_candidate}_${assj.state}`;
+          stateDeltas.set(key, (stateDeltas.get(key) || 0) + assj.state_multiplier);
+        }
       }
     }
 
-    for (let a = 0; a < candidate_ids.length; a++) {
-      const candId = candidate_ids[a];
-      const candStateMultipliers = f[a].state_multipliers;
-      for (let r = 0; r < candStateMultipliers.length; r++) {
-        let w = 0;
-        const st = candStateMultipliers[r].state;
-        for (let d = 0; d < answersArr.length; d++) {
-          const list = ASSJByAnswerPK.get(answersArr[d]);
-          if (!list) continue;
-          for (let k = 0; k < list.length; k++) {
-            const assj = list[k];
-            if (
-              assj.fields.state === st &&
-              assj.fields.candidate === e.candidate_id &&
-              assj.fields.affected_candidate === candId
-            ) {
-              w += assj.fields.state_multiplier;
-            }
-          }
-        }
-
-        if (a === 0) {
-          if (e.running_mate_state_id === st) {
-            w += 0.004 * candStateMultipliers[r].state_multiplier;
-          }
-          for (let d = 0; d < e.player_visits.length; d++) {
-            if (e.player_visits[d] === st) {
-              w += 0.005 * Math.max(0.1, candStateMultipliers[r].state_multiplier);
-            }
-          }
-        }
-        candStateMultipliers[r].state_multiplier += w;
-      }
+    const visitCounts = new Map();
+    for (let d = 0; d < e.player_visits.length; d++) {
+      const st = e.player_visits[d];
+      visitCounts.set(st, (visitCounts.get(st) || 0) + 1);
     }
 
     // calculate raw candidate popular vote values per state
     const y = [];
-    const stateCount = f[0].state_multipliers.length;
-    for (let a = 0; a < stateCount; a++) {
-      const statePk = f[0].state_multipliers[a].state;
+    const states = e.states_json;
+    const numStates = states.length;
+    const numCands = candidate_ids.length;
+    const voteVar = globalParams.vote_variable;
+    const rmStateId = e.running_mate_state_id;
+
+    for (let a = 0; a < numStates; a++) {
+      const statePk = states[a].pk;
       const k = [];
-      for (let r = 0; r < candidate_ids.length; r++) {
+
+      for (let r = 0; r < numCands; r++) {
+        const candId = candidate_ids[r];
         let scoreSum = 0;
-        const issueScores = u[r].issue_scores;
-        for (let d = 0; d < issueScores.length; d++) {
-          const issueObj = issueScores[d];
-          const stateIssueData = stateIssueScoreLookup.get(`${statePk}_${issueObj.issue}`) || { score: 0, weight: 1 };
-          const S = issueObj.issue_score * Math.abs(issueObj.issue_score);
-          const E = stateIssueData.score * Math.abs(stateIssueData.score);
-          scoreSum += globalParams.vote_variable - Math.abs((S - E) * stateIssueData.weight);
+        const sArr = candIssueS[r];
+        const scores = u[r];
+        const numIssues = scores.length;
+
+        for (let d = 0; d < numIssues; d++) {
+          const stateIssueData = stateIssueScoreLookup.get(`${statePk}_${scores[d].issue}`) || { E: 0, weight: 1 };
+          scoreSum += voteVar - Math.abs((sArr[d] - stateIssueData.E) * stateIssueData.weight);
         }
 
-        let stateMul = 1;
-        const smList = f[r].state_multipliers;
-        for (let d = 0; d < smList.length; d++) {
-          if (smList[d].state === statePk) {
-            stateMul = smList[d].state_multiplier;
-            break;
+        const baseField = candidateBaseStateMul.get(candId)?.get(statePk);
+        const baseMult = baseField ? baseField.state_multiplier : 1;
+        let effectiveStateMul = baseMult * globalMults[r];
+
+        const ansDelta = stateDeltas.get(`${candId}_${statePk}`);
+        if (ansDelta !== undefined) effectiveStateMul += ansDelta;
+
+        if (r === 0) {
+          if (rmStateId === statePk) {
+            effectiveStateMul += 0.004 * (baseMult * globalMults[r]);
+          }
+          const vCount = visitCounts.get(statePk);
+          if (vCount) {
+            effectiveStateMul += (0.005 * Math.max(0.1, baseMult * globalMults[r])) * vCount;
           }
         }
-        scoreSum = Math.max(scoreSum * stateMul, 0);
+
+        scoreSum = Math.max(scoreSum * effectiveStateMul, 0);
         k.push({
-          candidate: candidate_ids[r],
+          candidate: candId,
           result: scoreSum,
         });
       }
+
       y.push({
         state: statePk,
         result: k,
-        abbr: states_map.get(statePk)?.fields?.abbr || "",
+        abbr: states[a]?.fields?.abbr || "",
       });
     }
 
@@ -465,10 +457,10 @@ const useConsoleCheats = () => {
       const stateObj = states_map.get(y[a].state);
       const totalPopVotes = Math.floor(stateObj?.fields?.popular_votes || 0);
       let sumResult = 0;
-      for (let r = 0; r < y[a].result.length; r++) sumResult += y[a].result[r].result;
+      for (let r = 0; r < numCands; r++) sumResult += y[a].result[r].result;
       if (sumResult === 0) sumResult = 1;
 
-      for (let r = 0; r < y[a].result.length; r++) {
+      for (let r = 0; r < numCands; r++) {
         const pct = y[a].result[r].result / sumResult;
         y[a].result[r].percent = pct;
         y[a].result[r].votes = Math.floor(pct * totalPopVotes);
@@ -476,31 +468,33 @@ const useConsoleCheats = () => {
     }
 
     // electoral votes distribution
-    for (let a = 0; a < y.length; a++) {
-      const state = states_map.get(y[a].state);
-      const ev = state?.fields?.electoral_votes || 0;
-      P(y[a].result, "percent");
-      y[a].result.reverse();
+    if (calc_ev) {
+      for (let a = 0; a < y.length; a++) {
+        const state = states_map.get(y[a].state);
+        const ev = state?.fields?.electoral_votes || 0;
+        P(y[a].result, "percent");
+        y[a].result.reverse();
 
-      if (e.game_type_id == "1") {
-        if (state?.fields?.winner_take_all_flg == 1) {
-          for (let r = 0; r < y[a].result.length; r++) {
-            y[a].result[r].electoral_votes = r === 0 ? ev : 0;
+        if (e.game_type_id == "1") {
+          if (state?.fields?.winner_take_all_flg == 1) {
+            for (let r = 0; r < y[a].result.length; r++) {
+              y[a].result[r].electoral_votes = r === 0 ? ev : 0;
+            }
+          } else {
+            let hVotes = 0;
+            for (let r = 0; r < y[a].result.length; r++) hVotes += y[a].result[r].votes;
+            const L = Math.ceil(((y[a].result[0]?.votes || 0) / (hVotes || 1)) * ev * 1.25);
+            const D = ev - L;
+            for (let r = 0; r < y[a].result.length; r++) {
+              y[a].result[r].electoral_votes = r === 0 ? L : r === 1 ? D : 0;
+            }
           }
-        } else {
-          let hVotes = 0;
-          for (let r = 0; r < y[a].result.length; r++) hVotes += y[a].result[r].votes;
-          const L = Math.ceil(((y[a].result[0]?.votes || 0) / (hVotes || 1)) * ev * 1.25);
-          const D = ev - L;
+        } else if (e.game_type_id == "2" && typeof divideElectoralVotesProp === "function") {
+          const V = y[a].result.map((item) => item.percent);
+          const q = divideElectoralVotesProp(V, ev);
           for (let r = 0; r < y[a].result.length; r++) {
-            y[a].result[r].electoral_votes = r === 0 ? L : r === 1 ? D : 0;
+            y[a].result[r].electoral_votes = q[r];
           }
-        }
-      } else if (e.game_type_id == "2" && typeof divideElectoralVotesProp === "function") {
-        const V = y[a].result.map((item) => item.percent);
-        const q = divideElectoralVotesProp(V, ev);
-        for (let r = 0; r < y[a].result.length; r++) {
-          y[a].result[r].electoral_votes = q[r];
         }
       }
     }
@@ -517,12 +511,12 @@ const useConsoleCheats = () => {
   function BOOST(candidate_name) {
     let candidate_pk = null;
     const defaultOpponents = e.opponents_default_json.find((f) => f.election === e.election_id)?.candidates || [];
-    const playerAndOpponents = new Set([e.candidate_id, ...defaultOpponents]);
+    const playerAndOpponents = new Set([e.candidate_id, ...defaultOpponents, ...(e.opponents_list || [])]);
 
     for (let i = 0; i < campaignTrail_temp.candidate_json.length; i++) {
       const cjson = campaignTrail_temp.candidate_json[i];
       if (!playerAndOpponents.has(cjson.pk)) continue;
-      const full_name = `${cjson.fields.first_name} ${cjson.fields.last_name}`;
+      const full_name = `${cjson.fields.first_name || ""} ${cjson.fields.last_name || ""}`.trim();
       if (full_name.toLowerCase().includes(candidate_name.toLowerCase())) {
         if (candidate_pk != null) {
           throw new Error(`Multiple candidates have "${candidate_name}" in their name; please disambiguate`);
@@ -559,9 +553,9 @@ const useConsoleCheats = () => {
     if (custom_pop_vote_diff != null) {
       return custom_pop_vote_diff(results);
     }
-    const cjson = campaignTrail_temp.candidate_json.find((e) => e.pk === campaignTrail_temp.candidate_id);
+    const cjson = campaignTrail_temp.candidate_json.find((entry) => entry.pk === campaignTrail_temp.candidate_id);
     if (!cjson) return 0;
-    return BOOST(`${cjson.fields.first_name} ${cjson.fields.last_name}`)(results);
+    return BOOST(`${cjson.fields.first_name || ""} ${cjson.fields.last_name || ""}`.trim())(results);
   }
 
   // == END COMPUTE RESULTS ==
@@ -590,6 +584,7 @@ const useConsoleCheats = () => {
   let cachedPopVoteMap = null;
   let prev_answer_hint_enabled = false;
   let prev_sort_answers_state = false;
+  let isComputing = false;
 
   let sort_answers = false;
   let answer_hint_enabled = false;
@@ -604,9 +599,11 @@ const useConsoleCheats = () => {
 
   window.tct_cheat_interval = setInterval(function () {
     // auto-visit automation
+    if (isComputing) return;
+
     if ($(".visit_text").length > 0 && auto_visit != null) {
       const plugin = $("#map_container").data("plugin-usmap");
-      const availableStates = e.states_json.map((st) => st.fields.abbr);
+      const availableStates = e.states_json.map((st) => String(st.fields.abbr));
 
       if (plugin?.options?.click) {
         const visitAndConfirm = (abbr) => {
@@ -619,14 +616,13 @@ const useConsoleCheats = () => {
           for (let i = 0; i < availableStates.length; i++) {
             const state = availableStates[i];
             if (state !== firstPath) {
-              const pk = stateAbbrToPk.get(state.toLowerCase());
+              const pk = stateAbbrToPk.get(String(state).toLowerCase());
               if (pk) e.player_visits.push(pk);
             }
           }
           visitAndConfirm(firstPath);
         } else {
-          const stateExists = availableStates.includes(auto_visit);
-          if (stateExists) {
+          if (availableStates.includes(auto_visit)) {
             visitAndConfirm(auto_visit);
           }
         }
@@ -645,15 +641,20 @@ const useConsoleCheats = () => {
       cachedPopVoteMap === null;
 
     if (needsRecalculation) {
-      lastQuestionForm = questionForm;
-      lastQuestionNumber = e.question_number;
-      lastPlayerVisitsLength = e.player_visits.length;
-      lastIgnoreStatesLength = ignore_states.length;
-      cachedPopVoteMap = new Map();
+      isComputing = true;
+      try {
+        lastQuestionForm = questionForm;
+        lastQuestionNumber = e.question_number;
+        lastPlayerVisitsLength = e.player_visits.length;
+        lastIgnoreStatesLength = ignore_states.length;
+        cachedPopVoteMap = new Map();
 
-      for (let i = 0; i < inputs.length; i++) {
-        const id = inputs[i].value;
-        cachedPopVoteMap.set(id, pop_vote_diff(compute_results([parseInt(id, 10)])));
+        for (let i = 0; i < inputs.length; i++) {
+          const id = inputs[i].value;
+          cachedPopVoteMap.set(id, pop_vote_diff(compute_results([parseInt(id, 10)], false)));
+        }
+      } finally {
+        isComputing = false;
       }
     }
 
@@ -756,23 +757,18 @@ const useConsoleCheats = () => {
       }
       prev_answer_hint_enabled = false;
     }
-
-  }, 120);
+  }, 250);
 
   // == CHEATS ==
 
-  const gcsmj_map = new Map();
-  for (let i = 0; i < e.candidate_state_multiplier_json.length; i++) {
-    const entry = e.candidate_state_multiplier_json[i];
-    const cand = entry.fields.candidate;
-    const st = entry.fields.state;
-    if (!gcsmj_map.has(cand)) gcsmj_map.set(cand, new Map());
-    gcsmj_map.get(cand).set(st, entry);
-  }
-
   function get_candidate_state_mul_json(candidate_pk, state_pk) {
-    if (!gcsmj_map.has(candidate_pk)) gcsmj_map.set(candidate_pk, new Map());
-    if (!gcsmj_map.get(candidate_pk).has(state_pk)) {
+    let candMap = candidateBaseStateMul.get(candidate_pk);
+    if (!candMap) {
+      candMap = new Map();
+      candidateBaseStateMul.set(candidate_pk, candMap);
+    }
+    let fields = candMap.get(state_pk);
+    if (!fields) {
       const new_entry = {
         fields: {
           candidate: candidate_pk,
@@ -783,9 +779,10 @@ const useConsoleCheats = () => {
         pk: -1,
       };
       e.candidate_state_multiplier_json.push(new_entry);
-      gcsmj_map.get(candidate_pk).set(state_pk, new_entry);
+      candMap.set(state_pk, new_entry.fields);
+      fields = new_entry.fields;
     }
-    return gcsmj_map.get(candidate_pk).get(state_pk);
+    return fields;
   }
 
   const cheat_mod_tracker = new Map();
@@ -798,10 +795,10 @@ const useConsoleCheats = () => {
   }
 
   function add_state_modifier(candidate_pk, state_pk, amt) {
-    const obj = get_candidate_state_mul_json(candidate_pk, state_pk);
+    const fields = get_candidate_state_mul_json(candidate_pk, state_pk);
     cmt_set(candidate_pk, state_pk, (cmt_get(candidate_pk, state_pk) ?? 0) + amt);
-    obj.fields.state_multiplier += amt;
-    if (isNaN(obj.fields.state_multiplier)) throw new Error("NaN found in state modifier");
+    fields.state_multiplier += amt;
+    if (isNaN(fields.state_multiplier)) throw new Error("NaN found in state modifier");
     cachedPopVoteMap = null;
   }
 
@@ -821,8 +818,8 @@ const useConsoleCheats = () => {
   }
 
   function state_pk_of_string(str) {
-    if (!str) return null;
-    const lower = str.trim().toLowerCase();
+    if (str == null) return null;
+    const lower = String(str).trim().toLowerCase();
     if (stateAbbrToPk.has(lower)) return stateAbbrToPk.get(lower);
     return null;
   }
@@ -832,7 +829,7 @@ const useConsoleCheats = () => {
     const lower = str.trim().toLowerCase();
     const electionCandidates = e.candidate_json.filter((elt) => elt.fields.election === e.election_id);
     const elt = electionCandidates.find((cand) => {
-      const fullName = `${cand.fields.first_name} ${cand.fields.last_name}`.toLowerCase();
+      const fullName = `${cand.fields.first_name || ""} ${cand.fields.last_name || ""}`.toLowerCase();
       return fullName.includes(lower);
     });
     return elt ? elt.pk : null;
@@ -877,7 +874,7 @@ const useConsoleCheats = () => {
 
   function write(msg, color) {
     if (Array.isArray(msg)) {
-      msg.forEach((e) => write(e, color));
+      msg.forEach((m) => write(m, color));
       return;
     }
     if (typeof msg !== "string") msg = String(msg);
@@ -894,6 +891,26 @@ const useConsoleCheats = () => {
         "margin-left": `${indent * 24}px`,
       })
       .appendTo(terminalBody);
+    terminalBody.scrollTop(terminalBody.prop("scrollHeight"));
+  }
+
+  function writeBatch(messages) {
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < messages.length; i++) {
+      let msg = messages[i].msg;
+      const color = messages[i].color ?? "#fff";
+      const indentMatch = msg.match(/^\t*/);
+      const indent = indentMatch ? indentMatch[0].length : 0;
+      msg = msg.replace(/^\t+/, "");
+
+      const line = document.createElement("div");
+      line.textContent = msg;
+      line.style.color = color;
+      line.style.whiteSpace = "pre-wrap";
+      line.style.marginLeft = `${indent * 24}px`;
+      fragment.appendChild(line);
+    }
+    terminalBody[0].appendChild(fragment);
     terminalBody.scrollTop(terminalBody.prop("scrollHeight"));
   }
 
@@ -922,7 +939,7 @@ const useConsoleCheats = () => {
         "\t\tglobal -0.01 \t# Boost player candidate globally by -0.01",
       ],
       handle: (argstr) => {
-        const args = argstr.split(";").map((e) => e.trim());
+        const args = argstr.split(";").map((item) => item.trim());
         let candidate_pk, modifier;
         if (args.length === 2) {
           candidate_pk = candidate_pk_of_string(args[0]);
@@ -940,7 +957,7 @@ const useConsoleCheats = () => {
         const candidate = e.candidate_json.find((c) => c.pk === candidate_pk);
         add_global_modifier(candidate_pk, modifier);
         write(
-          `Added global modifier of ${modifier.toFixed(3)} to ${candidate.fields.first_name} ${candidate.fields.last_name}`,
+          `Added global modifier of ${modifier.toFixed(3)} to ${candidate.fields.first_name || ""} ${candidate.fields.last_name || ""}`,
           "#aaa"
         );
       },
@@ -953,7 +970,7 @@ const useConsoleCheats = () => {
         "\t\tstate Michigan; 0.02 \t# Boost player candidate in Michigan by 0.02",
       ],
       handle: (argstr) => {
-        const args = argstr.split(";").map((e) => e.trim());
+        const args = argstr.split(";").map((item) => item.trim());
         let candidate_pk, state_pk, modifier;
         if (args.length === 3) {
           candidate_pk = candidate_pk_of_string(args[0]);
@@ -975,7 +992,7 @@ const useConsoleCheats = () => {
 
         add_state_modifier(candidate_pk, state_pk, modifier);
         write(
-          `Added state modifier of ${modifier.toFixed(3)} to ${candidate.fields.first_name} ${candidate.fields.last_name} in ${state.fields.name}`,
+          `Added state modifier of ${modifier.toFixed(3)} to ${candidate.fields.first_name || ""} ${candidate.fields.last_name || ""} in ${state.fields.name}`,
           "#aaa"
         );
       },
@@ -1012,11 +1029,9 @@ const useConsoleCheats = () => {
     },
     {
       prefix: "ignore",
-      usage: [
-        "\tignore [state ;]... - Ignore state(s) for answer calculation (or 'ignore all')",
-      ],
+      usage: ["\tignore [state ;]... - Ignore state(s) for answer calculation (or 'ignore all')"],
       handle: (argstr) => {
-        const args = argstr.split(";").map((e) => e.trim().toLowerCase()).filter(Boolean);
+        const args = argstr.split(";").map((item) => item.trim().toLowerCase()).filter(Boolean);
         const added = [];
         const check_state = (stateStr) => {
           const pk = state_pk_of_string(stateStr);
@@ -1046,7 +1061,7 @@ const useConsoleCheats = () => {
       prefix: "unignore",
       usage: ["\tunignore [state ;]... - Remove state(s) from ignore list (or 'unignore all')"],
       handle: (argstr) => {
-        const args = argstr.split(";").map((e) => e.trim().toLowerCase()).filter(Boolean);
+        const args = argstr.split(";").map((item) => item.trim().toLowerCase()).filter(Boolean);
         const removed = [];
         const check_state = (stateStr) => {
           const pk = state_pk_of_string(stateStr);
@@ -1074,9 +1089,7 @@ const useConsoleCheats = () => {
     },
     {
       prefix: "autovisit",
-      usage: [
-        "\tautovisit <state|all|off> - Automatically visit specified state each turn",
-      ],
+      usage: ["\tautovisit <state|all|off> - Automatically visit specified state each turn"],
       handle: (argstr) => {
         argstr = argstr.trim().toLowerCase();
         if (argstr === "off") {
@@ -1167,7 +1180,6 @@ const useConsoleCheats = () => {
   function getAutocompletion(currentInput) {
     if (!currentInput) return null;
     const trimmed = currentInput;
-    const lower = trimmed.toLowerCase();
     const tokens = trimmed.split(" ");
     const firstWord = tokens[0].toLowerCase();
 
@@ -1199,7 +1211,7 @@ const useConsoleCheats = () => {
     }
 
     if (firstWord === "autovisit") {
-      const opts = ["all", "off", ...e.states_json.map((s) => s.fields.abbr), ...e.states_json.map((s) => s.fields.name)];
+      const opts = ["all", "off", ...e.states_json.map((s) => String(s.fields.abbr ?? "")).filter(Boolean), ...e.states_json.map((s) => String(s.fields.name ?? "")).filter(Boolean)];
       const m = opts.find((o) => o.toLowerCase().startsWith(restLower) && o.toLowerCase() !== restLower);
       if (m) {
         return {
@@ -1214,7 +1226,7 @@ const useConsoleCheats = () => {
       const currentToken = subParts[subParts.length - 1].trimStart();
       const currentTokenLower = currentToken.toLowerCase();
       if (currentTokenLower) {
-        const opts = ["all", ...e.states_json.map((s) => s.fields.abbr), ...e.states_json.map((s) => s.fields.name)];
+        const opts = ["all", ...e.states_json.map((s) => String(s.fields.abbr ?? "")).filter(Boolean), ...e.states_json.map((s) => String(s.fields.name ?? "")).filter(Boolean)];
         const m = opts.find((o) => o.toLowerCase().startsWith(currentTokenLower) && o.toLowerCase() !== currentTokenLower);
         if (m) {
           subParts[subParts.length - 1] = " " + m;
@@ -1232,7 +1244,7 @@ const useConsoleCheats = () => {
       if (subParts.length === 1 && !rest.includes(";")) {
         const candNames = e.candidate_json
           .filter((c) => c.fields.election === e.election_id)
-          .map((c) => `${c.fields.first_name} ${c.fields.last_name}`);
+          .map((c) => `${c.fields.first_name || ""} ${c.fields.last_name || ""}`.trim());
         const m = candNames.find((name) => name.toLowerCase().startsWith(restLower) && name.toLowerCase() !== restLower);
         if (m) {
           return {
@@ -1248,7 +1260,7 @@ const useConsoleCheats = () => {
       if (subParts.length === 1) {
         const candNames = e.candidate_json
           .filter((c) => c.fields.election === e.election_id)
-          .map((c) => `${c.fields.first_name} ${c.fields.last_name}`);
+          .map((c) => `${c.fields.first_name || ""} ${c.fields.last_name || ""}`.trim());
         const m = candNames.find((name) => name.toLowerCase().startsWith(restLower) && name.toLowerCase() !== restLower);
         if (m) {
           return {
@@ -1258,7 +1270,7 @@ const useConsoleCheats = () => {
         }
       } else if (subParts.length === 2) {
         const stPart = subParts[1].trimStart().toLowerCase();
-        const opts = [...e.states_json.map((s) => s.fields.abbr), ...e.states_json.map((s) => s.fields.name)];
+        const opts = [...e.states_json.map((s) => String(s.fields.abbr ?? "")).filter(Boolean), ...e.states_json.map((s) => String(s.fields.name ?? "")).filter(Boolean)];
         const m = opts.find((o) => o.toLowerCase().startsWith(stPart) && o.toLowerCase() !== stPart);
         if (m) {
           return {
@@ -1272,7 +1284,7 @@ const useConsoleCheats = () => {
     return null;
   }
 
-  // terminal UI construction
+  // terminal DOM creation
   const terminalActionBar = $("<div></div>")
     .addClass("terminal-footer")
     .appendTo(terminalContainer);
@@ -1368,12 +1380,15 @@ const useConsoleCheats = () => {
 
   $("body").append(terminalContainer);
 
-  write("Welcome to the TCT Cheat Menu.", "#aaa");
-  write("Press Tab to autocomplete commands, states, and candidates.", "#7af");
-  write("Commands:", "#aaa");
+  const initLogs = [
+    { msg: "Welcome to the TCT Cheat Menu.", color: "#aaa" },
+    { msg: "Press Tab to autocomplete commands, states, and candidates.", color: "#7af" },
+    { msg: "Commands:", color: "#aaa" }
+  ];
   for (let i = 0; i < cmds.length; i++) {
-    cmds[i].usage.forEach((msg) => write(msg, "#aaa"));
+    cmds[i].usage.forEach((u) => initLogs.push({ msg: u, color: "#aaa" }));
   }
+  writeBatch(initLogs);
 
   if (!document.getElementById("campaign-terminal-style")) {
     $("<style>")
