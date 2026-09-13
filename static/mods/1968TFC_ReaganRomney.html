@@ -1,3 +1,21 @@
+/*
+ * Mod Title: 1968TFC
+ * Mod Author: kenshii
+ * Mod Version: 1
+ * Mod Description: Reagan wins the Republican nomination in 1968 over Nelson Rockefeller (Nixon doesn’t run), Humphrey is still the Dem nominee.
+ * 
+ * Coding License: Apache License 2.0
+ * Writing License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+ * 
+ * For the coding in this mod, I hereby release the code under the terms and conditions of the Apache License 2.0. The full text of the license can be found at:
+ * https://choosealicense.com/licenses/apache-2.0/
+ * 
+ * For the writing in this mod, including documentation, text files, and other non-software written works, I hereby release the content under the terms and conditions of the Creative Commons Attribution 4.0 International (CC BY 4.0) license. The full text of the license can be found at:
+ * https://creativecommons.org/licenses/by/4.0/legalcode
+ * 
+ * By using, distributing, or modifying this mod, you agree to abide by the terms and conditions of both the Apache License 2.0 and the Creative Commons Attribution 4.0 International (CC BY 4.0) license.
+*/
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -9092,11 +9110,26 @@ campaignTrail_temp.candidate_image_url = 'https://jetsimon.com/cts-media/public/
 campaignTrail_temp.running_mate_image_url = 'https://jetsimon.com/cts-media/public/1968TFC_init_4.png';
 campaignTrail_temp.candidate_last_name = 'Reagan';
 campaignTrail_temp.running_mate_last_name = 'Romney';
-campaignTrail_temp.running_mate_state_id = '202';
+campaignTrail_temp.running_mate_state_id = '118';
 campaignTrail_temp.player_answers = [];
 campaignTrail_temp.player_visits = [];
 campaignTrail_temp.answer_feedback_flg = 1;
 campaignTrail_temp.game_start_logging_id = '3660989';
+
+const style_overwrite = document.createElement("style");
+            style_overwrite.innerHTML = 
+            `#campaign_sign {
+            background-color: #466bdb;
+            border-color: #ff0000;
+            }
+            .inner_window_question h3 {
+            background-color: #87bfff;
+            }
+            .overlay_window h3 {
+            background-color: #cf6767;
+            }
+            `;
+    document.head.appendChild(style_overwrite);
 
 e = campaignTrail_temp;
 
