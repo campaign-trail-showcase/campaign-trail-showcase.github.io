@@ -1,7 +1,52 @@
+// preserve native getItem so we can read clean storage internally
+const _rawStorageGetItem = Storage.prototype.getItem;
+
+// intercept localStorage.getItem("unlockedAch") so mods reading raw JSON can get flat keys
+Storage.prototype.getItem = function (key) {
+  const rawData = _rawStorageGetItem.apply(this, arguments);
+
+  if (key !== "unlockedAch" || !rawData) {
+    return rawData;
+  }
+
+  try {
+    const parsed = JSON.parse(rawData);
+    const virtualPayload = { ...parsed };
+    const activeMod =
+      (typeof getCurrentModName === "function" ? getCurrentModName() : null) ||
+      window.modBeingPlayed;
+
+    // map all namespaced achievements to flat names: "Mod:Ach" -> "Ach"
+    for (const k of Object.keys(parsed)) {
+      const colonIdx = k.indexOf(":");
+      if (colonIdx !== -1) {
+        const flatName = k.slice(colonIdx + 1);
+        if (!virtualPayload[flatName]) {
+          virtualPayload[flatName] = parsed[k];
+        }
+      }
+    }
+
+    // active mod takes priority so shared achievement names never collide
+    if (activeMod) {
+      const activePrefix = `${activeMod}:`;
+      for (const k of Object.keys(parsed)) {
+        if (k.startsWith(activePrefix)) {
+          virtualPayload[k.slice(activePrefix.length)] = parsed[k];
+        }
+      }
+    }
+
+    return JSON.stringify(virtualPayload);
+  } catch (e) {
+    return rawData;
+  }
+};
+
 // achievement storage & state
 let unlockedAch = {};
 try {
-  const storedAch = localStorage.getItem("unlockedAch");
+  const storedAch = _rawStorageGetItem.call(localStorage, "unlockedAch");
   unlockedAch = storedAch ? JSON.parse(storedAch) : {};
 } catch (e) {
   console.error("Error while loading achievements:", e);
@@ -15,6 +60,16 @@ function createUnlockedAchProxy(target) {
     get(obj, prop) {
       if (typeof prop !== "string") return obj[prop];
       if (obj[prop] !== undefined) return obj[prop];
+
+      const activeMod =
+        (typeof getCurrentModName === "function" ? getCurrentModName() : null) ||
+        window.modBeingPlayed;
+
+      // check current mod first to avoid cross-mod name collisions
+      if (activeMod && obj[`${activeMod}:${prop}`] !== undefined) {
+        return obj[`${activeMod}:${prop}`];
+      }
+
       // search for any namespaced key ending with ":<prop>"
       for (const key of Object.keys(obj)) {
         if (key.endsWith(`:${prop}`)) {
@@ -1089,7 +1144,7 @@ function performRender() {
 
   // re-sync in case an achievement was unlocked during the session
   try {
-    const stored = localStorage.getItem("unlockedAch");
+    const stored = _rawStorageGetItem.call(localStorage, "unlockedAch");
     if (stored) {
       unlockedAch = JSON.parse(stored);
       window.unlockedAch = createUnlockedAchProxy(unlockedAch);
