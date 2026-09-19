@@ -193,7 +193,6 @@ function prepareLegacyAchievementStorage(modName) {
       delete unlockedAch[achName];
       changed = true;
     }
-
   }
 
   if (changed) {
@@ -280,6 +279,21 @@ function isAchievementUnlocked(modName, achName, achData = null) {
 
   return false;
 }
+
+function isModFullyCompleted(modName) {
+  if (!modName || typeof allAch !== "object" || !allAch || !allAch[modName]) {
+    return false;
+  }
+
+  const modAchievements = allAch[modName];
+  const keys = Object.keys(modAchievements);
+  if (keys.length === 0) return false;
+
+  return keys.every((achName) =>
+    isAchievementUnlocked(modName, achName, modAchievements[achName])
+  );
+}
+window.isModFullyCompleted = isModFullyCompleted;
 
 function buildAchievementsCache() {
   if (achievementsCache) return achievementsCache;
@@ -1026,6 +1040,12 @@ function renderModList(modsToRender, useLazyLoading = false) {
 
     const holder = document.createElement("div");
     holder.classList.add("achHolder");
+
+    if (isModFullyCompleted(modName)) {
+      holder.classList.add("ach-black-border");
+      holder.title = "All mod achievements unlocked!";
+    }
+
     const subHolder = document.createElement("div");
     subHolder.classList.add("achSubHolder");
     const labelHolder = document.createElement("div");
