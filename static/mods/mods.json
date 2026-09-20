@@ -2710,13 +2710,21 @@
     "tags": "Historical",
     "awards": "",
     "awardimageurls": ""
-  },
-  {
-    "value": "2012 - Yes We Can",
-    "text": "Yes We Can!",
-    "mode": "new",
-    "tags": "Historical",
-    "awards": "",
-    "awardimageurls": ""
-  }
+},
+{
+  "value": "2014 - Coração Valente",
+  "text": "2014: Coração Valente",
+  "mode": "new",
+  "tags": "Historical Althist International",
+  "awards": "",
+  "awardimageurls": ""
+},
+{
+  "value": "2012 - Yes We Can",
+  "text": "Yes We Can!",
+  "mode": "new",
+  "tags": "Historical",
+  "awards": "",
+  "awardimageurls": ""
+}
 ]
