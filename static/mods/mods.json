@@ -1,5 +1,13 @@
 [
   {
+    "value": "other",
+    "text": "Other",
+    "mode": "",
+    "tags": "",
+    "awards": "",
+    "awardimageurls": ""
+  },
+  {
     "value": "0000Random_Mod",
     "text": "Random Scenario",
     "mode": "",
