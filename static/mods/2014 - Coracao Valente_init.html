@@ -30,7 +30,7 @@ campaignTrail_temp.election_json = [
     "fields": {
       "year": 2014,
       "summary": "<div class='cv2014-election-summary-copy'><h3>2014 - Coração Valente</h3><p>Brazil entered 2014 expecting a party and found an argument instead. The World Cup was finally arriving, unemployment was still low and the social gains of the previous decade remained real, but growth had slowed, inflation was becoming a kitchen-table subject, the June 2013 demonstrations were still hanging over Brasília and Petrobras was turning from national symbol into a word politicians preferred to pronounce carefully.</p><p>Dilma Rousseff begins as the favorite, armed with the presidency, Lula and more television time than anyone can reasonably use. Aécio Neves has the largest opposition party, a record in Minas Gerais and twelve years of accumulated PSDB impatience. Eduardo Campos has Pernambuco, the PSB and Marina Silva standing beside him — which is both an extraordinary asset and a useful reminder that most of the country is still learning his name.</p><p>The election will move through a World Cup, scandals, television wars, coalition bargaining and an August no campaign memo can prepare for. Pick a candidate, build a strategy and try to discover which promises survive contact with twenty-seven states, eleven parties and one hundred million voters.</p></div>",
-      "image_url": "",
+      "site_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/TSE_-_Elei%C3%A7%C3%B5es_%2815266157528%29.jpg/330px-TSE_-_Elei%C3%A7%C3%B5es_%2815266157528%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail",
       "winning_electoral_vote_number": 1,
       "advisor_url": "data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27208%27%20height%3D%27128%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27%23333333%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20fill%3D%27white%27%20font-family%3D%27Arial%27%20font-size%3D%2717%27%20font-weight%3D%27700%27%3EADVISORS%3C/text%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2768%25%27%20text-anchor%3D%27middle%27%20fill%3D%27white%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%3ECAMPAIGN%202014%3C/text%3E%3C/svg%3E",
       "recommended_reading": "",
@@ -592,6 +592,16 @@ campaignTrail_temp.temp_election_list = [
 ];
 campaignTrail_temp.credits = 'joaogiuponi';
 
+// necessary so that the right election files are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "201414") {
+            campaignTrail_temp.code2_id = "2014 - Coracao Valente";
+        }
+    }
+}, 100);
+
 campaignTrail_temp.achievements = {
   "Coração Valente": {image:"https://amarildocharge.wordpress.com/wp-content/uploads/2014/10/blog30.jpg?h=456&w=640",description:"Win the presidency as Dilma Rousseff.",cannotBeCheated:true},
   "Muda Brasil": {image:"https://blogdogiuliosanmartini.wordpress.com/wp-content/uploads/2014/10/000-roque-muda-brasil.jpg?h=400&w=630",description:"End twelve years of PT government by winning as Aécio Neves.",cannotBeCheated:true},
@@ -690,7 +700,8 @@ jet_data = {headerColor:'#303030',windowColor:'#e5e5e5',containerColor:'#f6f3ed'
    Real campaign-propaganda photograph from Brasília, CC BY 2.0.
    On publication, this image can be mirrored into the CTS asset archive and
    this header_image_url changed to the hosted copy without touching gameplay. */
-campaignTrail_temp.modBoxTheme={
+
+campaignTrail_temp.modBoxTheme = {
   header_color:'#7f1d2a',
   header_image_url:'https://upload.wikimedia.org/wikipedia/commons/0/04/Propaganda_Eleitoral_%2815174924108%29.jpg',
   header_text_color:'#fff8ea',
