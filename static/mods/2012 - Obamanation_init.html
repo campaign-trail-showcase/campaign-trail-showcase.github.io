@@ -1143,116 +1143,60 @@ function createBanner(url, sibling, isLeft) {
     }
   }
 
-  // turn many possible shapes into a set of normalized achievement titles
-  function makeTitleSetFromValue(value) {
-    const set = new Set();
-    if (!value) return set;
-
-    if (Array.isArray(value)) {
-      for (const v of value) {
-        if (typeof v === "string") set.add(NORMALIZE(v));
-        else if (v && typeof v === "object") {
-          // object might be { title: {...} } or {name: 'Title'}
-          if (v.name && typeof v.name === "string") set.add(NORMALIZE(v.name));
-          else if (v.title && typeof v.title === "string") set.add(NORMALIZE(v.title));
-          else {
-            // include any string keys if it's an object keyed by title
-            Object.keys(v).forEach((k) => set.add(NORMALIZE(k)));
-          }
-        }
-      }
-    } else if (typeof value === "object") {
-      // if keys look like titles (not numeric), add them
-      Object.keys(value).forEach((k) => {
-        // if the value is truthy (true/object), treat the key as unlocked title
-        if (value[k] !== false && value[k] !== 0 && value[k] != null) {
-          set.add(NORMALIZE(k));
-        }
-      });
-
-      // gather titles from nested objects too
-      Object.values(value).forEach((v) => {
-        if (Array.isArray(v)) {
-          for (const item of v) {
-            if (typeof item === "string") set.add(NORMALIZE(item));
-            else if (item && typeof item === "object") {
-              if (item.name) set.add(NORMALIZE(item.name));
-              else if (item.title) set.add(NORMALIZE(item.title));
-              else Object.keys(item).forEach((k) => set.add(NORMALIZE(k)));
-            }
-          }
-        } else if (v && typeof v === "object") {
-          Object.keys(v).forEach((k) => {
-            if (v[k] !== false && v[k] !== 0 && v[k] != null) set.add(NORMALIZE(k));
-          });
-        } else if (typeof v === "string") {
-          set.add(NORMALIZE(v));
-        }
-      });
-    } else if (typeof value === "string") {
-      set.add(NORMALIZE(value));
-    }
-
-    return set;
-  }
-
-  function findObamanationUnlockedSet(parsed, requiredNormalized) {
-    if (!parsed) return null;
-
-    // if parsed is an array of strings/objects, flatten it
-    if (Array.isArray(parsed)) {
-      const flat = makeTitleSetFromValue(parsed);
-      return flat;
-    }
-
-    // if parsed is an object
-    if (typeof parsed === "object") {
-      // quick check: do top-level keys include all required titles?
-      const topKeys = Object.keys(parsed).map(NORMALIZE);
-      const topKeySet = new Set(topKeys);
-      const allTopHaveRequired = requiredNormalized.every((r) => topKeySet.has(r));
-      if (allTopHaveRequired) {
-        return makeTitleSetFromValue(parsed);
-      }
-
-      // check for nested entries that cover all required titles
-      for (const [k, v] of Object.entries(parsed)) {
-        // if the key looks like a mod identifier that references Obamanation, prefer it
-        const keyNorm = NORMALIZE(k);
-        if (keyNorm.includes("obamanation") || keyNorm.includes("obama") || keyNorm.includes("2012")) {
-          const candidateSet = makeTitleSetFromValue(v);
-          const covers = requiredNormalized.every((r) => candidateSet.has(r));
-          if (covers) return candidateSet;
-        }
-      }
-
-      // otherwise, scan every nested value and pick the one that best matches required titles
-      let bestMatch = null;
-      let bestMatchCount = -1;
-      for (const v of Object.values(parsed)) {
-        const candidateSet = makeTitleSetFromValue(v);
-        const matchCount = requiredNormalized.filter((r) => candidateSet.has(r)).length;
-        if (matchCount > bestMatchCount) {
-          bestMatchCount = matchCount;
-          bestMatch = candidateSet;
-        }
-      }
-      // if best match covers everything, return it
-      if (bestMatch && requiredNormalized.every((r) => bestMatch.has(r))) return bestMatch;
-
-      // treat top-level keys as the global unlocked set
-      return makeTitleSetFromValue(parsed);
-    }
-
-    return null;
-  }
-
-  function allRequiredUnlocked(unlockedSet) {
-    if (!window.campaignTrail_temp || !window.campaignTrail_temp.achievements) return false;
-    const required = Object.keys(window.campaignTrail_temp.achievements || {});
+  function hasUnlockedAllAchievements() {
+    const achievementsObj = window.campaignTrail_temp?.achievements;
+    if (!achievementsObj) return false;
+    const required = Object.keys(achievementsObj);
     if (required.length === 0) return false;
-    const requiredNormalized = required.map(NORMALIZE);
-    return requiredNormalized.every((r) => unlockedSet.has(r));
+
+    // check window.unlockedAch Proxy or isAchievementUnlocked from achievements.js
+    if (typeof window.isAchievementUnlocked === "function") {
+      const allUnlocked = required.every(name =>
+        window.isAchievementUnlocked("2012 - Obamanation", name) ||
+        window.isAchievementUnlocked(null, name)
+      );
+      if (allUnlocked) return true;
+    }
+
+    if (window.unlockedAch) {
+      const allUnlocked = required.every(name => window.unlockedAch[name] != null);
+      if (allUnlocked) return true;
+    }
+
+    // parse raw localStorage otherwise
+    const parsed = readUnlockedAch();
+    if (!parsed) return false;
+
+    const unlockedTitles = new Set();
+    const addTitle = (str) => {
+      if (typeof str !== "string") return;
+      const norm = NORMALIZE(str);
+      unlockedTitles.add(norm);
+      // if namespaced, extract the title after the first colon
+      if (norm.includes(":")) {
+        unlockedTitles.add(norm.slice(norm.indexOf(":") + 1).trim());
+      }
+    };
+
+    if (Array.isArray(parsed)) {
+      parsed.forEach(item => {
+        if (typeof item === "string") addTitle(item);
+        else if (item && typeof item === "object") {
+          addTitle(item.achName || item.name || item.title);
+        }
+      });
+    } else if (typeof parsed === "object") {
+      Object.entries(parsed).forEach(([k, v]) => {
+        if (v !== false && v !== 0 && v != null) {
+          addTitle(k);
+          if (typeof v === "object") {
+            addTitle(v.achName || v.name || v.title);
+          }
+        }
+      });
+    }
+
+    return required.every(req => unlockedTitles.has(NORMALIZE(req)));
   }
 
   // find or create a layout container for all settings (difficulty, toggles).
@@ -1342,24 +1286,16 @@ function createBanner(url, sibling, isLeft) {
     if (portraitToggle) container.appendChild(portraitToggle);
 
     // 100% mode toggle
-    const parsed = readUnlockedAch();
-    if (parsed) {
-      const required = Object.keys(window.campaignTrail_temp?.achievements || {});
-      if (required.length > 0) {
-        const requiredNormalized = required.map(NORMALIZE);
-        const unlockedSet = findObamanationUnlockedSet(parsed, requiredNormalized);
-        if (unlockedSet && requiredNormalized.every((r) => unlockedSet.has(r))) {
-          const hiddenModeToggle = createToggle({
-            id: 'hidden_checkbox',
-            storageKey: 'hidden_mode',
-            labelText: '100% Mode',
-            descriptionText: 'Congratulations on completing THE OBAMANATION! Please enjoy this exclusive endgame mode.',
-            eventName: 'hiddenModeToggled',
-            onChangeCallback: (enabled) => { if (typeof window.enableHiddenMode === "function") window.enableHiddenMode(enabled); }
-          });
-          if (hiddenModeToggle) container.appendChild(hiddenModeToggle);
-        }
-      }
+    if (hasUnlockedAllAchievements()) {
+      const hiddenModeToggle = createToggle({
+        id: 'hidden_checkbox',
+        storageKey: 'hidden_mode',
+        labelText: '100% Mode',
+        descriptionText: 'Congratulations on completing THE OBAMANATION! Please enjoy this exclusive endgame mode.',
+        eventName: 'hiddenModeToggled',
+        onChangeCallback: (enabled) => { if (typeof window.enableHiddenMode === "function") window.enableHiddenMode(enabled); }
+      });
+      if (hiddenModeToggle) container.appendChild(hiddenModeToggle);
     }
   }
 

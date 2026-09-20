@@ -14438,7 +14438,7 @@ const mainEndings = [
       title: "#1 Crush",
       artist: "Garbage",
       cover: "https://i.scdn.co/image/ab67616d0000b2730dbee17e25d160f6f2f4d92f",
-      url: ["PM6yZMbcC1U", "XtnhGz-isEA"]
+      url: ["kr1up9hSujg", "PM6yZMbcC1U", "XtnhGz-isEA"]
     }
   },
   {
@@ -24847,6 +24847,295 @@ dd {
 </div>`
   },
   {
+    id: "hesdead",
+    condition: (ev) => linusWin && anti_establishment >= 3 && cynicism >= 4 && ev < 269,
+    image: "https://i.pinimg.com/564x/4e/a6/1f/4ea61fe3a7f2bc06a23e0e5e3ac55e31.jpg",
+    html: `<style>
+  .onion-wrapper {
+    background-color: #ffffff;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #111111;
+    max-width: 820px;
+    margin: 10px auto;
+    border: 1px solid #c0c0c0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .onion-top-meta {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 3px 12px;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 9px;
+    color: #666666;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .onion-masthead {
+    background-color: #ffffff;
+    border-bottom: 3px double #005522;
+    padding: 10px 16px 8px;
+    text-align: center;
+  }
+
+  .onion-logo {
+    font-family: 'Times New Roman', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: #005522;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .onion-tagline {
+    font-family: 'Times New Roman', serif;
+    font-size: 11px;
+    font-style: italic;
+    color: #333333;
+    letter-spacing: 0.05em;
+    margin-top: 3px;
+  }
+
+  .onion-nav {
+    background-color: #005522;
+    padding: 4px 12px;
+    font-family: Verdana, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    display: flex;
+    gap: 15px;
+  }
+  .onion-nav a { color: #ffffff; text-decoration: none; text-transform: uppercase; }
+  .onion-nav a:hover { color: #ffcc00; }
+
+  .onion-grid {
+    display: flex;
+    padding: 16px;
+    gap: 20px;
+  }
+
+  /*.onion-main {
+    flex: 1;
+    min-width: 0;
+  }*/
+
+  .onion-headline {
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 1.15;
+    color: #000000;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .onion-subhead {
+    font-size: 13.5px;
+    font-style: italic;
+    color: #444444;
+    margin-bottom: 12px;
+    line-height: 1.45;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 8px;
+  }
+
+  .onion-byline {
+    font-family: Verdana, sans-serif;
+    font-size: 10px;
+    color: #777777;
+    margin-bottom: 12px;
+  }
+
+  .onion-body p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+    text-align: justify;
+  }
+
+  .onion-dateline {
+    font-family: Verdana, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .onion-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    border-left: 1px solid #eeeeee;
+    padding-left: 16px;
+    font-family: Verdana, sans-serif;
+    font-size: 11px;
+  }
+
+  .onion-sidebox {
+    border: 1px solid #cccccc;
+    margin-bottom: 16px;
+    background: #fafafa;
+  }
+
+  .onion-sidebox-hdr {
+    background: #005522;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .onion-sidebox-body {
+    padding: 8px;
+    line-height: 1.45;
+  }
+  .onion-sidebox-body p { margin: 0 0 8px 0; }
+  .onion-sidebox-body p:last-child { margin: 0; }
+
+  .aim-mock {
+    background: #e1e1e1;
+    border: 2px outset #ffffff;
+    padding: 8px;
+    margin: 14px 0;
+    font-family: 'MS Sans Serif', Tahoma, sans-serif;
+    font-size: 11px;
+    color: #000;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .aim-icon {
+    width: 48px;
+    height: 48px;
+    background: #f0f0f0;
+    border: 1px solid #888;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .aim-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .aim-info {
+    line-height: 1.4;
+  }
+  .aim-status {
+    color: #666;
+    font-size: 10px;
+    font-style: italic;
+  }
+
+  .onion-footer {
+    background-color: #f7f7f7;
+    border-top: 2px solid #005522;
+    padding: 10px 16px;
+    font-family: Verdana, sans-serif;
+    font-size: 9.5px;
+    color: #666666;
+    text-align: center;
+  }
+</style>
+
+<div class="onion-wrapper">
+
+  <div class="onion-top-meta">
+    <span>VOL. 41 ISSUE 46 · AMERICA’S FINEST NEWS SOURCE</span>
+    <span>THURSDAY, NOVEMBER 17, 2005</span>
+  </div>
+
+  <div class="onion-masthead">
+    <h1 class="onion-logo">the onion</h1>
+    <div class="onion-tagline">“Tu Stultus Es” · Published In New York &amp; Chicago</div>
+  </div>
+
+  <div class="onion-nav">
+    <a href="#">News</a>
+    <a href="#">Opinion</a>
+    <a href="#">Local</a>
+    <a href="#">Sports</a>
+    <a href="#">Tech &amp; Media</a>
+    <a href="#">Archive</a>
+  </div>
+
+  <div class="onion-grid">
+
+    <div class="onion-main">
+      <h1 class="onion-headline">Dead AIM Friend From High School Still Has Charlie Brown Profile Picture</h1>
+      <div class="onion-subhead">In a defiant monument to late-nineties teenage nihilism</div>
+
+      <div class="onion-byline">
+        LOCAL · OBITUARIES &amp; TECHNOLOGY · ISSUE 41·46
+      </div>
+
+      <div class="onion-body">
+        <p><span class="onion-dateline">SCHAUMBURG, IL —</span> While clearing out an obsolete folder on his AOL Instant Messenger client Tuesday evening, local resident Brian Hendershot, 23, discovered that a high school acquaintance who died in 2002 was still staring back at him from the digital void: a tiny, pixelated image of an unsmiling cartoon boy in a yellow shirt.</p>
+		
+		<p>The account, registered under the screen name <i>iamananchorman</i>, has remained marked as “Offline” for approximately 1,180 consecutive days. Its accompanying 48-by-48-pixel buddy icon, a low-resolution image of <i>Peanuts</i> protagonist Charlie Brown, has survived server migrations, technological obsolescence, and the physical decay of the human body.</p>
+		
+        <div class="aim-mock">
+          <div class="aim-icon">
+            <img src="https://file.garden/aNtAfG887DiA_7lO/TML_2000/charliehead.jpg" alt="AIM Icon">
+          </div>
+          <div class="aim-info">
+            <b>ScreenName:</b> iamananchorman<br>
+            <span class="aim-status">Status: Offline (Last active: Nov 08, 2000)</span><br>
+            <span style="font-size:10px; color:#000080;">Warning Level: 0%</span>
+          </div>
+        </div>
+		
+		<p>“It’s kinda bizarre,” said Hendershot, staring at his monitor as he adjusted his office chair. “My college friends have pictures of themselves doing keg stands in Cabo. My sister has a picture of her baby, the girl from my tenth-grade chemistry class even has a State Farm headshot. And then there’s this guy, whose profile picture is just a chronically depressed six-year-old whose dog doesn’t even remember his name. Tragic, I think.”</p>
+
+		<p>Cultural historians note that between 1997 and 2001, an entire generation of disaffected suburban teenagers engaged in an unofficial, darkly ironic recontextualization of the newspaper funny pages. Rather than seeing Charles M. Schulz’s syndicated strip as a wholesome holiday diversion for grandparents, thousands of angst-ridden adolescents listening to post-punk and failing remedial geometry adopted Charlie Brown as one of the patron saints of unmedicated clinical dread.</p>
+
+		<p>“Cartoons are designed to exist in a kind of permanent, frictionless purgatory,” said Dr. Kenneth Miller, a professor of media studies at Northwestern University. “When you look at it, Calvin and Hobbes never had to pay off an auto loan, and Garfield never had to watch his 401(k) crater in the dot-com bust, but Charlie Brown was different. His entire existence was built around emotional failure. He never kicked the football, his baseball team lost nine hundred games in a row, and every autumn some little girl charged him five cents to explain why he was fundamentally unlovable.”</p>
+		
+		<p>“For a sixteen-year-old in the year 2000 who just got dumped at a diner, spent two months spreading vicious political gossip in the school hallway, and realized adulthood was a trap,” Miller added, “putting a 48-pixel image of that round-headed kid next to your screen name was the digital equivalent of carving an open wound into your desk with a compass.”</p>
+		
+		<p>According to surviving logs, the user profile for <i>iamananchorman</i> has remained unchanged since the week of the 2000 presidential election. The bio contains no contact information, listing only the user’s astrological sign, an ASCII art divider, and an eight-word lyric from a Radiohead B-side: <i>“I’m not living, I’m just killing time.”</i> The final recorded away message merely reads: <i>“~*went for a walk in the rain, don’t bother calling*~.”</i></p>
+
+		<p>Hendershot admitted that he occasionally considers deleting the screen name to tidy up his buddy list, but has never brought himself to right-click and hit “Remove.” “In a weird way, it feels disrespectful,” Hendershot said, quietly closing the AIM window and returning to a Microsoft Excel spreadsheet. “I mean, real people get older, stop talking to their childhood friends, and eventually die. But as long as that AOL server is plugged in somewhere, that poor bastard never has to grow up and find out how much worse it gets.”</p>
+      </div>
+
+    <div class="onion-sidebar">
+      <div class="onion-sidebox">
+        <div class="onion-sidebox-hdr">News in Brief</div>
+        <div class="onion-sidebox-body">
+          <p><b>Local Man Who Put 'Calvin Pissing' Decal on Truck Now Senior Vice President of Human Resources</b></p>
+          <p><b>Adult Realizes Garfield’s Deep Existential Hatred of Mondays Was Actually Modest Understatement</b></p>
+          <p><b>Former Class Radical Discovers Corporation Has Unlimited Supply of Replacement Hall Passes</b></p>
+        </div>
+      </div>
+
+      <div class="onion-sidebox">
+        <div class="onion-sidebox-hdr">Opinion</div>
+        <div class="onion-sidebox-body">
+          <p><i>“Why We Should Have Invaded Bahrein Sooner”</i><br>
+          <span style="font-size:9.5px; color:#666;">— By Chris Cillizza</span></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="onion-footer">
+    © Copyright 2005 Onion Inc. All rights reserved. The Onion is a satirical publication.
+  </div>
+
+</div>`,
+    song: {
+      title: "The District Sleeps Alone Tonight",
+      artist: "The Postal Service",
+      cover: "https://yt3.googleusercontent.com/_VPO-Aksdr98xtjpIE9B60vSsIUdks99Poa7C4Gwxy3ihbkcZ55jd0Um74ALq9lkcN3CRvNbaMhYq2RoXw=w544-h544-l90-rj",
+      url: "0SIJoBxKtPY"
+    }
+  },
+  {
     id: "reagan",
     condition: (ev) => linusWin && anti_establishment <= 2 && ruthlessness >= 5,
     image: "https://cdn2.picryl.com/photo/1986/08/08/president-ronald-reagan-during-an-interview-with-fortune-magazine-in-the-oval-e1f906-1024.jpg",
@@ -27734,10 +28023,10 @@ dd {
 
 <div class="ny-article">
 
-  <div class="ny-dept"><a href="#">Television</a> &rsaquo; Critic's Notebook</div>
+  <div class="ny-dept"><a href="#">Television</a> › Critic’s Notebook</div>
 
   <h1 class="ny-hed">The Strange, Unlikely, Surprisingly Affecting World of <em>The Commissioner</em></h1>
-  <p class="ny-dek">NBC's new workplace comedy about the office of the Major League Baseball Commissioner is funnier than it has any right to be, and that is almost entirely George W. Bush's fault.</p>
+  <p class="ny-dek">NBC’s new workplace comedy about the office of the Major League Baseball Commissioner is funnier than it has any right to be, and that is almost entirely George W. Bush’s fault.</p>
 
   <div class="ny-byline-row">
     <span>By <a href="#">Emily Nussbaum</a></span>
@@ -27765,29 +28054,29 @@ dd {
       <div class="ny-show-info-row"><span class="ny-sil">Day/Time</span><span class="ny-siv">Thursdays, 9:30 PM</span></div>
       <div class="ny-show-info-row"><span class="ny-sil">Creator</span><span class="ny-siv">Mike Schur</span></div>
       <div class="ny-show-info-row"><span class="ny-sil">Episodes</span><span class="ny-siv">3 aired (of 22)</span></div>
-      <div class="ny-show-info-row"><span class="ny-sil">Cast</span><span class="ny-siv">Bush, Aaliyah, Moore, Cho, O'Hara</span></div>
+      <div class="ny-show-info-row"><span class="ny-sil">Cast</span><span class="ny-siv">Bush, Aaliyah, Moore, Cho, O’Hara</span></div>
     </div>
 
-    <p class="ny-dc">There is a scene in the third episode of NBC's <em>The Commissioner</em> in which George W. Bush, playing Dale Hargrove, the newly appointed Commissioner of Major League Baseball, attempts to explain to his deputy press secretary — played, with a dry exasperation that is fast becoming the show's comic signature, by Aaliyah — why it is essential that the league's official position on the designated hitter rule be delivered in the form of a twelve-minute PowerPoint presentation. The presentation, we understand, was prepared entirely by Hargrove himself, over a weekend, and includes no fewer than four slides that are simply clip art of baseballs with motivational captions. Bush delivers this explanation with the serene confidence of a man who has never once entertained the possibility that the PowerPoint was a bad idea. Aaliyah listens, says nothing for a moment, and then says: "Wait, all this clip art. You put in the clip art yourself?" And Bush says: "I thought it added warmth." And the scene ends.</p>
+    <p class="ny-dc">There is a scene in the third episode of NBC’s <em>The Commissioner</em> in which George W. Bush, playing Dale Hargrove, the newly appointed Commissioner of Major League Baseball, attempts to explain to his deputy press secretary — played, with a dry exasperation that is fast becoming the show’s comic signature, by Aaliyah — why it is essential that the league’s official position on the designated hitter rule be delivered in the form of a twelve-minute PowerPoint presentation. The presentation, we understand, was prepared entirely by Hargrove himself, over a weekend, and includes no fewer than four slides that are simply clip art of baseballs with motivational captions. Bush delivers this explanation with the serene confidence of a man who has never once entertained the possibility that the PowerPoint was a bad idea. Aaliyah listens, says nothing for a moment, and then says: “Wait, all this clip art. You put in the clip art yourself?” And Bush says: “I thought it added warmth.” And the scene ends.</p>
 
     <p>It is, as weird as it is to admit, a very good scene. It is, in the way of the best scenes in this genre, a scene that is funny on the surface and mildly devastating three layers down, and it could not have been performed by anyone else on television right now. This is the paradox at the center of <em>The Commissioner</em>, and the thing that makes it worth discussing at some length: the show is built around a piece of casting that is, by any conventional measure, preposterous, and the preposterous casting is almost entirely why it works.</p>
 
     <div class="ny-pq">
-      <p>"Bush is not doing an impression of anything. He is simply being something — a specific, fully inhabited kind of American man —, and the comedy arrives because the show has placed that man in a situation that reveals him perfectly."</p>
+      <p>“Bush is not doing an impression of anything. He is simply being something — a specific, fully inhabited kind of American man —, and the comedy arrives because the show has placed that man in a situation that reveals him perfectly.”</p>
       <cite>— From this review</cite>
     </div>
 
-    <p>Some background, for those who have not been following the industry coverage. George W. Bush, the former part-owner of the Texas Rangers, whose baseball career was interrupted, as he likes to say, by "a couple of terms of public service", was announced as the show's lead in March, to reactions ranging from bewilderment to contempt to a bit of an intrigued wariness that has since resolved, three episodes in, into something approaching genuine enthusiasm. The show was created by Michael Schur, who spent the previous decade making <em>The Office</em> and <em>Parks and Recreation</em>, and who has described <em>The Commissioner</em> in interviews as "a show about what it means to love an institution more than the institution deserves." The Commissioner of Baseball, in this telling, is the perfect vessel for that theme: a man in charge of something that resists being managed, who approaches that unmanageability with undimmed enthusiasm, and who employs, around him, people who are variously more competent and more exhausted than he is.</p>
+    <p>Some background, for those who have not been following the industry coverage. George W. Bush, the former part-owner of the Texas Rangers, whose baseball career was interrupted, as he likes to say, by “a couple of terms of public service”, was announced as the show’s lead in March, to reactions ranging from bewilderment to contempt to a bit of an intrigued wariness that has since resolved, three episodes in, into something approaching genuine enthusiasm. The show was created by Michael Schur, who spent the previous decade making <em>The Office</em> and <em>Parks and Recreation</em>, and who has described <em>The Commissioner</em> in interviews as “a show about what it means to love an institution more than the institution deserves.” The Commissioner of Baseball, in this telling, is the perfect vessel for that theme: a man in charge of something that resists being managed, who approaches that unmanageability with undimmed enthusiasm, and who employs, around him, people who are variously more competent and more exhausted than he is.</p>
 
-    <p>What Schur has understood — and what the pilot's director, Miguel Arteta, executes with considerable precision —, is that Bush is not acting in the conventional sense. He is not doing an impression of anything, but he is simply being something: a specific, fully inhabited kind of American man, simultaneously incurious and warm, impervious to irony in a way that generates irony effortlessly, and possessed of a relationship to his own dignity that is entirely uncomplicated by self-awareness. The comedy arrives not because Bush is playing a fool, but because the show has placed that man in a situation that reveals him perfectly. Which is, in the end, what good casting has always done!</p>
+    <p>What Schur has understood — and what the pilot’s director, Miguel Arteta, executes with considerable precision —, is that Bush is not acting in the conventional sense. He is not doing an impression of anything, but he is simply being something: a specific, fully inhabited kind of American man, simultaneously incurious and warm, impervious to irony in a way that generates irony effortlessly, and possessed of a relationship to his own dignity that is entirely uncomplicated by self-awareness. The comedy arrives not because Bush is playing a fool, but because the show has placed that man in a situation that reveals him perfectly. Which is, in the end, what good casting has always done!</p>
 
     <div class="ny-subhed">The ensemble</div>
 
-    <p>The show would not survive on Bush alone, and Schur is too experienced a showrunner to let it try. The ensemble is the thing, and it is, with one exception, exceptional. Aaliyah's Tanya Reed is the show's fulcrum: she is the person who sees Hargrove most clearly and cares about him anyway, which is both the most demanding role in this kind of comedy, and the one most likely to be underwritten. Notably, Schur has not underwritten it. Aaliyah, whose acting career was largely suspended during the years of her recording and touring commitments, brings to Tanya a quality that is hard to name but instantly recognizable: her alertness and patience that clearly belongs to someone who is very good at her job, and has accepted that this will not always be appreciated. Her scenes with Bush have an unusual texture; they feel, at moments, less like performance than like two people genuinely trying to figure each other out, and the show is wisest when it stays in that register.</p>
+    <p>The show would not survive on Bush alone, and Schur is too experienced a showrunner to let it try. The ensemble is the thing, and it is, with one exception, exceptional. Aaliyah’s Tanya Reed is the show’s fulcrum: she is the person who sees Hargrove most clearly and cares about him anyway, which is both the most demanding role in this kind of comedy, and the one most likely to be underwritten. Notably, Schur has not underwritten it. Aaliyah, whose acting career was largely suspended during the years of her recording and touring commitments, brings to Tanya a quality that is hard to name but instantly recognizable: her alertness and patience that clearly belongs to someone who is very good at her job, and has accepted that this will not always be appreciated. Her scenes with Bush have an unusual texture; they feel, at moments, less like performance than like two people genuinely trying to figure each other out, and the show is wisest when it stays in that register.</p>
 
-    <p>Trevor Moore, as the office's director of community outreach, is given the show's most overtly comic material and handles it with the controlled mania that fans of his earlier work will recognize immediately. His character, Chip Heller, a former minor-league pitcher whose career ended under circumstances the show has so far declined to specify, is the ensemble's wild card, and Moore plays the wildness with just enough precision that keeps the character from tipping into caricature. A recurring bit in which Chip explains his community outreach strategy using terminology that is transparently borrowed from military operations manuals should not be as funny as it is. It <i>is</i> quite funny.</p>
+    <p>Trevor Moore, as the office’s director of community outreach, is given the show’s most overtly comic material and handles it with the controlled mania that fans of his earlier work will recognize immediately. His character, Chip Heller, a former minor-league pitcher whose career ended under circumstances the show has so far declined to specify, is the ensemble’s wild card, and Moore plays the wildness with just enough precision that keeps the character from tipping into caricature. A recurring bit in which Chip explains his community outreach strategy using terminology that is transparently borrowed from military operations manuals should not be as funny as it is. It <i>is</i> quite funny.</p>
 
-    <p>Margaret Cho, as the Commissioner's chief legal counsel, and Catherine O'Hara, as his veteran executive assistant, round out the core group. Cho is, at present, playing a character who could belong to any number of shows in this genre: the competent professional who exists primarily to explain to the protagonist why his latest plan is inadvisable. And yet, the specificity of her delivery suggests that Schur has more in mind. O'Hara, for her part, is doing something that requires no development: she is being Catherine O'Hara, which is to say she is the funniest person in any scene she occupies, deployed with the controlled economy of a resource that the show has correctly identified as finite and irreplaceable.</p>
+    <p>Margaret Cho, as the Commissioner’s chief legal counsel, and Catherine O’Hara, as his veteran executive assistant, round out the core group. Cho is, at present, playing a character who could belong to any number of shows in this genre: the competent professional who exists primarily to explain to the protagonist why his latest plan is inadvisable. And yet, the specificity of her delivery suggests that Schur has more in mind. O’Hara, for her part, is doing something that requires no development: she is being Catherine O’Hara, which is to say she is the funniest person in any scene she occupies, deployed with the controlled economy of a resource that the show has correctly identified as finite and irreplaceable.</p>
 
     <div class="ny-cast-box">
       <div class="ny-cast-box-head">Principal Cast</div>
@@ -27805,7 +28094,7 @@ dd {
         <div class="ny-cast-item">
           <div class="ny-cast-name">Trevor Moore</div>
           <div class="ny-cast-role">Chip Heller, Director of Community Outreach</div>
-          <div class="ny-cast-note">Co-creator, <em>The Whitest Kids U' Know</em></div>
+          <div class="ny-cast-note">Co-creator, <em>The Whitest Kids U’ Know</em></div>
         </div>
         <div class="ny-cast-item">
           <div class="ny-cast-name">Margaret Cho</div>
@@ -27813,9 +28102,9 @@ dd {
           <div class="ny-cast-note">Stand-up comedian; <em>All-American Girl</em> (1994)</div>
         </div>
         <div class="ny-cast-item">
-          <div class="ny-cast-name">Catherine O'Hara</div>
+          <div class="ny-cast-name">Catherine O’Hara</div>
           <div class="ny-cast-role">Dolores Pryce, Executive Assistant</div>
-          <div class="ny-cast-note"><em>Schitt's Creek</em>, <em>Best in Show</em>; seventeen Emmys</div>
+          <div class="ny-cast-note"><em>Schitt’s Creek</em>, <em>Best in Show</em>; seventeen Emmys</div>
         </div>
         <div class="ny-cast-item">
           <div class="ny-cast-name">Craig Robinson</div>
@@ -27827,11 +28116,11 @@ dd {
 
     <div class="ny-subhed">What the show is actually about</div>
 
-    <p>It would be easy, and not entirely wrong, to read <em>The Commissioner</em> as a piece of political rehabilitation. Bush, who left his second term as Texas Governor to return full-time to his baseball interests, has spent the subsequent decade largely out of public life, and there is, in the casting, an obvious opportunity for the kind of soft re-introduction that celebrity culture periodically offers to public figures whose image has calcified in unhelpful directions. Schur, in interviews, has denied this framing with sufficient enthusiasm to suggest he is at least aware of it. "Dale Hargrove is not George W. Bush," he told the <em>Times</em> in September. "Dale Hargrove is a fictional character, who happens to be played by a real person, who happens to have certain qualities that illuminate the character. That's what casting is."</p>
+    <p>It would be easy, and not entirely wrong, to read <em>The Commissioner</em> as a piece of political rehabilitation. Bush, who left his second term as Texas Governor to return full-time to his baseball interests, has spent the subsequent decade largely out of public life, and there is, in the casting, an obvious opportunity for the kind of soft re-introduction that celebrity culture periodically offers to public figures whose image has calcified in unhelpful directions. Schur, in interviews, has denied this framing with sufficient enthusiasm to suggest he is at least aware of it. “Dale Hargrove is not George W. Bush,” he told the <em>Times</em> in September. “Dale Hargrove is a fictional character, who happens to be played by a real person, who happens to have certain qualities that illuminate the character. That’s what casting is.”</p>
 
-    <p>This is, as a formulation, somewhat too neat. But it is not wrong, and the show earns it, because Schur has been careful to make Hargrove a character whose limitations are structural rather than personal — he is not stupid, not cruel, not corrupt; he is simply a man who has been given authority over something he loves without being given the ability to understand it —, and because the show distributes sympathy with an even hand. The other characters are not smarter than Hargrove in ways that diminish him; they are smarter than him in ways that make them tired, and the show treats that tiredness as its own kind of subject. Tanya Reed did not get this job in order to spend her afternoons talking a former governor out of announcing the league's designated hitter policy via PowerPoint. She is very good at this job anyway! That gap, between what a person intended for their life and what their life has turned out to require, is where <em>The Commissioner</em>, at its best, lives.</p>
+    <p>This is, as a formulation, somewhat too neat. But it is not wrong, and the show earns it, because Schur has been careful to make Hargrove a character whose limitations are structural rather than personal — he is not stupid, not cruel, not corrupt; he is simply a man who has been given authority over something he loves without being given the ability to understand it —, and because the show distributes sympathy with an even hand. The other characters are not smarter than Hargrove in ways that diminish him; they are smarter than him in ways that make them tired, and the show treats that tiredness as its own kind of subject. Tanya Reed did not get this job in order to spend her afternoons talking a former governor out of announcing the league’s designated hitter policy via PowerPoint. She is very good at this job anyway! That gap, between what a person intended for their life and what their life has turned out to require, is where <em>The Commissioner</em>, at its best, lives.</p>
 
-    <p>Three episodes in, the show has not yet found the consistency of tone that its best moments suggest it is capable of. The network-comedy machinery occasionally asserts itself in ways that Schur's better instincts resist: a subplot in the second episode involving a fictional player's contract dispute is resolved with a tidiness that the show's more interesting scenes specifically decline to offer. But the best of what <em>The Commissioner</em> can do — Bush and Aaliyah in a conference room, talking at cross-purposes about something that is ostensibly about baseball, and is actually about something else entirely —, well, is very good indeed. Maybe the designated hitter PowerPoint, it turns out, was the right thing to lead with.</p>
+    <p>Three episodes in, the show has not yet found the consistency of tone that its best moments suggest it is capable of. The network-comedy machinery occasionally asserts itself in ways that Schur’s better instincts resist: a subplot in the second episode involving a fictional player’s contract dispute is resolved with a tidiness that the show’s more interesting scenes specifically decline to offer. But the best of what <em>The Commissioner</em> can do — Bush and Aaliyah in a conference room, talking at cross-purposes about something that is ostensibly about baseball, and is actually about something else entirely —, well, is very good indeed. Maybe the designated hitter PowerPoint, it turns out, was the right thing to lead with.</p>
 
   </div>
 
@@ -28346,79 +28635,79 @@ dd {
 
 <div class="billys-block-wrapper">
 
-  <h3 class="billys-block-header">Welcome to Billy's Block — Episode 1.07: "Big Feelings and Big Flavors"</h3>
+  <h3 class="billys-block-header">Welcome to Billy’s Block — Episode 1.07: “Big Feelings and Big Flavors”</h3>
 
   <p><span class="stage-direction">[The scene opens on a warm, brightly lit living room with a comfortable yellow sofa, a miniature traffic light, and a large oak bookshelf. A soft, soothing saxophone melody plays in the background.]</span></p>
 
   <p><span class="stage-direction">[The front door opens. Bill Clinton enters, sporting a gentle smile, silver hair perfectly coiffed, wearing a zip-up navy blue cardigan. He waves at the camera.]</span></p>
 
-  <p>"Hello, neighbor. It's so good to see you today. I was just out taking a walk, and you know, I was thinking about you."</p>
+  <p>“Hello, neighbor. It’s so good to see you today. I was just out taking a walk, and you know, I was thinking about you.”</p>
 
   <p><span class="stage-direction">[He walks over to a small wooden bench, sits down, and begins untying his sneakers. He swaps them out for a pair of polished, velvet loafers.]</span></p>
 
-  <p>"Did you have a hard day at kindergarten today? Did somebody take a toy that you were playing with, or maybe... maybe you just felt a little overwhelmed by all the noise on the playground?"</p>
+  <p>“Did you have a hard day at kindergarten today? Did somebody take a toy that you were playing with, or maybe… maybe you just felt a little overwhelmed by all the noise on the playground?”</p>
 
-  <p><span class="stage-direction">[He looks directly into the camera, with his eyes narrowing slightly in deep, empathetic sincerity. He bites his lower lip.]</span></p>
+  <p><span class="stage-direction">[He looks directly into the camera, with his eyes narrowing slightly. He bites his lower lip.]</span></p>
 
-  <p>"I feel your pain. I really do. It's not easy being small in a world that moves so fast. Sometimes, when my feelings get too big, or when the polls in the states are looking a little tight, I like to go over to the Magic Kitchen and make something special to help me unwind. Would you like to come with me?"</p>
+  <p>“I feel your pain. I really do. It’s not easy being small in a world that moves so fast. Sometimes, when my feelings get too big, or when the polls in the states are looking a little tight, I like to go over to the Magic Kitchen and make something special to help me unwind. Would you like to come with me?”</p>
 
   <p><span class="stage-direction">[The camera pans, following him as he walks across the colorful set to a beautifully polished mahogany wet bar, complete with brass rails and crystal decanters. It is eye-level for a toddler, but fully stocked with premium, top-shelf liquor.]</span></p>
 
-  <p>"Here we are. Now, today, boys and girls, we’re going to learn about a very special drink. It's called a Manhattan. Can you say 'Manhattan'?"</p>
+  <p>“Here we are. Now, today, boys and girls, we’re going to learn about a very special drink. It’s called a Manhattan. Can you say ‘Manhattan’?”</p>
 
   <p><span class="stage-direction">[A beat of silence for the children at home to respond.]</span></p>
 
-  <p>"I knew you could. Now, the Manhattan was invented a long, long time ago. Some folks say it was at the Manhattan Club in New York City back in the 1870s. And the secret to a good Manhattan is something called balance. Just like how you have to balance when you ride your tricycle, we have to balance our ingredients."</p>
+  <p>“I knew you could. Now, the Manhattan was invented a long, long time ago. Some folks say it was at the Manhattan Club in New York City back in the 1870s. And the secret to a good Manhattan is something called balance. Just like how you have to balance when you ride your tricycle, we have to balance our ingredients.”</p>
 
   <p><span class="stage-direction">[He reaches under the counter and pulls out a heavy, crystal mixing glass.]</span></p>
 
-  <p>"First, we need our base spirit. A lot of people will tell you that a bourbon makes a sweeter, more approachable Manhattan. And you know, I believe in choices. There is nothing wrong with bourbon! But if you want a true, classic profile... the kind that makes you want to sit on a porch in Arkansas and just watch the sun go down... you need a good Rye whiskey."</p>
+  <p>“First, we need our base spirit. A lot of people will tell you that a bourbon makes a sweeter, more approachable Manhattan. And you know, I believe in choices. There is nothing wrong with bourbon! But if you want a true, classic profile… the kind that makes you want to sit on a porch in Arkansas and just watch the sun go down… you need a good Rye whiskey.”</p>
 
-  <p><span class="stage-direction">[He holds up a bottle of Michter's US*1 Straight Rye, pointing to the label with a soft smile.]</span></p>
+  <p><span class="stage-direction">[He holds up a bottle of Michter’s US*1 Straight Rye, pointing to the label with a soft smile.]</span></p>
 
-  <p>"Rye has a spicy character, just like your friend Jimmy when he doesn’t want to share his blocks. We’re going to pour two full ounces. We count to four in our heads while we pour. One, two, three, four. Good job."</p>
+  <p>“Rye has a spicy character, just like your friend Jimmy when he doesn’t want to share his blocks. We’re going to pour two full ounces. We count to four in our heads while we pour. One, two, three, four. Good job.”</p>
 
   <p><span class="stage-direction">[He pours the amber liquid into the mixing glass with ease.]</span></p>
 
-  <p>"Next, we need sweet vermouth. Now, listen to me very carefully, neighbors."</p>
+  <p>“Next, we need sweet vermouth. Now, listen to me very carefully, neighbors.”</p>
 
   <p><span class="stage-direction">[Bill leans over the bar, looking straight into the lens, his tone turning incredibly serious.]</span></p>
 
-  <p>"Do not use the cheap vermouth that has been sitting in the back of your parents' pantry since 1998. Vermouth is a fortified wine, boys and girls. It oxidizes, it goes <i>bad</i>. You must keep it in the refrigerator. I cannot stress this enough. If you use oxidized vermouth, you are compromising your future. We’re going to use exactly one ounce of Carpano Antica Formula. It has lovely notes of vanilla and star anise."</p>
+  <p>“Do not use the cheap vermouth that has been sitting in the back of your parents’ pantry since 1998. Vermouth is a fortified wine, boys and girls. It oxidizes, it goes <i>bad</i>. You must keep it in the refrigerator. I cannot stress this enough. If you use oxidized vermouth, you are compromising your future. We’re going to use exactly one ounce of Carpano Antica Formula. It has lovely notes of vanilla and star anise.”</p>
 
   <p><span class="stage-direction">[He measures the dark vermouth and adds it to the glass.]</span></p>
 
-  <p>"Now, for the bitters. Can you say 'Angostura'?"</p>
+  <p>“Now, for the bitters. Can you say ‘Angostura’?”</p>
 
   <p><span class="stage-direction">[Beat.]</span></p>
 
-  <p>"That's wonderful. Bitters are like the rules your teachers give you. A couple of dashes keep everything together and give our lives structure. Too much, and it ruins the whole experience and makes you bitter, too. Just two dashes. Dash, dash. Look at that!"</p>
+  <p>“That’s wonderful. Bitters are like the rules your teachers give you. A couple of dashes keep everything together and give our lives structure. Too much, and it ruins the whole experience and makes you bitter, too. Just two dashes. Dash, dash. Look at that!”</p>
 
   <p><span class="stage-direction">[He uses a pair of silver tongs to delicately place a large, perfectly clear ice cube into the glass.]</span></p>
 
-  <p>"Now we stir. We <i>never</i>, ever shake a Manhattan. Does anybody know why? It’s because shaking aerates the drink and bruises the spirit. And we never want to bruise our spirits, do we? No, we don't. We want to treat our spirits with kindness, and dignity, and respect."</p>
+  <p>“Now we stir. We <i>never</i>, ever shake a Manhattan. Does anybody know why? It’s because shaking aerates the drink and bruises the spirit. And we never want to bruise our spirits, do we? No, we don’t. We want to treat our spirits with kindness, and dignity, and respect.”</p>
 
   <p><span class="stage-direction">[He stirs the drink with a long, elegant bar spoon, as ice clinks softly against the glass in a hypnotic rhythm. He stirs for exactly thirty seconds, smiling the entire time.]</span></p>
 
-  <p>"Finally, we strain it into our chilled coupe glass. And we garnish. Now, I see a lot of folks using those bright red, neon cherries you put on an ice cream sundae. Oh, no. Heck no. Not in this neighborhood. We use a Luxardo cherry. It comes all the way from Italy. It’s dark, and rich, and it reminds us that the world is a big, beautiful place full of wonderful things."</p>
+  <p>“Finally, we strain it into our chilled coupe glass. And we garnish. Now, I see a lot of folks using those bright red, neon cherries you put on an ice cream sundae. Oh, no. Heck no. Not in this neighborhood. We use a Luxardo cherry. It comes all the way from Italy. It’s dark, and rich, and it reminds us that the world is a big, beautiful place full of wonderful things.”</p>
 
   <p><span class="stage-direction">[He drops the dark, syrupy cherry into the glass. He picks it up by the stem, admiring the deep, ruby-red color against the studio lights.]</span></p>
 
-  <p>"Mmmm. Look at that. Let's take a little sip, shall we?"</p>
+  <p>“Mmmm. Look at that. Let’s take a little sip, shall we?”</p>
 
-  <p><span class="stage-direction">[He takes a slow, measured sip. His eyes close, his shoulders drop, and he lets out a deep, contented sigh. For a moment, he seems to completely forget he is hosting a children's television program.]</span></p>
+  <p><span class="stage-direction">[He takes a slow, measured sip. His eyes close, his shoulders drop, and he lets out a deep, contented sigh. For a moment, he seems to completely forget he is hosting a children’s television program.]</span></p>
 
-  <p>"Lord have mercy. That is a strong economy right there. The rye cuts right through the sweetness, just perfectly..."</p>
+  <p>“Lord have mercy. That is a strong economy right there. The rye cuts right through the sweetness, just perfectly…”</p>
 
   <p><span class="stage-direction">[He clears his throat, remembering where he is, and gives the camera one last, charming smile.]</span></p>
 
-  <p>"You know, the world can be a scary place sometimes. But as long as you have good friends, a kind heart, and the basic motor skills required to properly balance a 2-to-1 ratio of whiskey to vermouth, I promise you... tomorrow is going to be a brighter day."</p>
+  <p>“You know, the world can be a scary place sometimes. But as long as you have good friends, a kind heart, and the basic motor skills required to properly balance a 2-to-1 ratio of whiskey to vermouth, I promise you… tomorrow is going to be a brighter day.”</p>
 
   <p><span class="stage-direction">[He raises his glass to the camera as the soft saxophone music swells again.]</span></p>
 
-  <p>"I'm proud of you, neighbor. Cheers."</p>
+  <p>“I’m proud of you, neighbor. Cheers.”</p>
 
-  <p><span class="stage-direction" style="margin-top: 15px; font-weight: bold; background: none;">[Fade to black. Text on screen: BILLY'S BLOCK IS MADE POSSIBLE BY VIEWERS LIKE YOU. AND THE DISTILLERS AT WILD TURKEY.]</span></p>
+  <p><span class="stage-direction" style="margin-top: 15px; font-weight: bold; background: none;">[Fade to black. Text on screen: BILLY’S BLOCK IS MADE POSSIBLE BY VIEWERS LIKE YOU. AND THE DISTILLERS AT WILD TURKEY.]</span></p>
 
 </div>`
   },

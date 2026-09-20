@@ -214,7 +214,7 @@
               <div id="tags" class="tags-grid"></div>
               <div style="color:white;margin:auto; display:flex;align-items: center;justify-content: center; margin-bottom:10px; gap:10px;">
                 <input placeholder="Filter by mod name" oninput="filterMods(event)" type="text" id="modSearch" name="modSearch"></input>
-                
+
                 <div>
                   <label for="modSorting" class="mod-sort-label">Sort by:</label>
                   <select onchange="onChangeModSorter(event)" name="sorting" id="modSorting" class="mod-sort-select">
@@ -228,8 +228,8 @@
               </div>
               <div id="mod-grid" class="community-grid"></div>
             </div>
-          </div>      
-            
+          </div>
+
             <div id="site_credits" style="text-align: center;">
                <a href="https://discord.gg/cqgVSNRKDP" style="color:#FF6B6B">Campaign Trail Showcase Discord</a><br/>
               <a href="https://discord.gg/thecampaigntrail" style="color:#FF6B6B">The Campaign Trail Discord</a><br/><br/>
@@ -243,6 +243,7 @@
                   <button onclick="activateCheatMenu()" style="border-radius:5px; font-weight:bold;padding:10px;">Cheat Menu</button>
                   <button id="customThemesButton" onclick="toggleModBoxThemes()" style="border-radius:5px; font-weight:bold;padding:10px;">Loading</button>
                   <button id="mobileModeButton" onclick="toggleMobileMode()" style="border-radius:5px; font-weight:bold;padding:10px;">Loading</button>
+                  <button id="dataTransferButton" onclick="openDataTransfer()" title="Import / export your data (experimental!)" aria-label="Import or export your data" style="border-radius:5px; font-weight:bold;padding:10px;">&#8942;</button>
                 </div>
               </div>
             </div>
@@ -266,6 +267,7 @@
   <script src="../static/js/remote.js" defer></script>
   <script src="../static/js/mobileStyle.js" defer></script>
   <script src="../static/js/variableChanges.js" defer></script>
+  <script src="../static/js/dataTransfer.js" defer></script>
   <script>
     window.addEventListener('DOMContentLoaded', function() {
       if (typeof campaignTrail_temp !== 'undefined') {
