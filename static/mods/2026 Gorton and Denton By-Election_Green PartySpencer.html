@@ -22162,7 +22162,7 @@ endingConstructor = (a = 1) => {
   }
   else if (aa[0].candidate == 3 && galloway == 0) //Spencer wins (Spencer)
 	  { ctsAchievement("Make Hope Normal Again");
-  if (e.current_results[0] >= 0.4) //Get over 40% of the vote
+  if (quickstats[1] >= 40.0) { //Get over 40% of the vote
 	{ ctsAchievement("Plumber Supremacy"); 
 	}
   if (TactVote !== 1) //Win despite not being the tactical vote
@@ -22412,7 +22412,7 @@ TactVote = 0
 else if(LabourPolling + 0.05 < GreenPolling && ans < 16504){
 TactVote = 1
 }
-else if(GallowayOut = 0 && ans < 16504){
+else if(GallowayOut == 0 && ans < 16504){
 TactVote = 2
 }
 else if(ans < 16504){
