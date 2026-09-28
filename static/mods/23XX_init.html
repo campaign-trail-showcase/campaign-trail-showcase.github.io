@@ -33,6 +33,16 @@ RecReading = true;
 
 campaignTrail_temp.credits = "pabloni21";
 
+// necessary so that the right election files are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "10") {
+            campaignTrail_temp.code2_id = "2023XX";
+        }
+    }
+}, 100);
+
 campaignTrail_temp.global_parameter_json = [
     {
         "model": "campaign_trail.global_parameter",
