@@ -98,11 +98,18 @@ function resolveTicketChanges(changesByMod, modName) {
 }
 
 function formatChange(change) {
-  return `${change.var} ${change.change}`.replaceAll(" ", "\u00A0");
+  const text = `${change.var} ${change.change}`.replaceAll(" ", "\u00A0");
+  if (!change.conditional) return text;
+
+  return `<span class="vs-conditional" title="Only in some cases">${text}?</span>`;
 }
 
-function renderChangeAnnotation(changes) {
-  const text = changes?.length ? changes.map(formatChange).join(", ") : "no changes";
+function renderChangeAnnotation(changes = []) {
+  const certainChanges = changes.filter((change) => !change.conditional);
+  const conditionalChanges = changes.filter((change) => change.conditional);
+  const orderedChanges = [...certainChanges, ...conditionalChanges];
+
+  const text = orderedChanges.length ? orderedChanges.map(formatChange).join(", ") : "no changes";
 
   return `<span class="vs-inline">${text}</span>`;
 }
