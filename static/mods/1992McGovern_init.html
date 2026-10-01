@@ -47,7 +47,7 @@ selectedTheme.text_col="black"
 
 
 campaignTrail_temp.musicOn = true
-campaignTrail_temp.musicSrc = "https://cdn.discordapp.com/attachments/993506682275627048/1146520374339719218/Whitney_Houston_-_I_Will_Always_Love_You.mp3"
+campaignTrail_temp.musicSrc = "https://web.archive.org/web/20231212040346if_/https://cdn.discordapp.com/attachments/993506682275627048/1146520374339719218/Whitney_Houston_-_I_Will_Always_Love_You.mp3"
 
 
 document.getElementById("music_player").innerHTML = "<button onclick='music_play()'>Play Soundtrack</button>         <button onclick='music_pause()'>Pause</button><br><div style='font-size:0.75em'><input type='radio' name='jukebox' value='song0' checked='' onchange='jukeboxsong()'>I Will Always Love You</div><audio id='campaigntrailmusic' loop='false' style='display:none' src='' autoplay='false'></audio>"
@@ -64,6 +64,6 @@ music_pause = function() {
 
 
 jukeboxsong = function() {
-        campaignTrail_temp.musicSrc = "https://cdn.discordapp.com/attachments/993506682275627048/1146520374339719218/Whitney_Houston_-_I_Will_Always_Love_You.mp3"
+        campaignTrail_temp.musicSrc = "https://web.archive.org/web/20231212040346if_/https://cdn.discordapp.com/attachments/993506682275627048/1146520374339719218/Whitney_Houston_-_I_Will_Always_Love_You.mp3"
         document.getElementById('campaigntrailmusic').src = campaignTrail_temp.musicSrc
 }

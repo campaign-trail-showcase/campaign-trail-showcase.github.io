@@ -9208,192 +9208,120 @@ campaignTrail_temp.answer_feedback_json = [
 
 cyoAdventure = function (a) {
     
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1];
    
     let pop_vote = e.current_results[0];
     let playerPolling = pop_vote[2].pvp;
     let i = 0;
 
-        pop_vote.sort((a, b) => {
-            return a.pk - b.pk;
-        });
-      //柯胜，默认设置
-      if (ans == 13302 || ans == 13303 || ans == 13304 || ans == 13305){     
+    pop_vote.sort((a, b) => {
+        return a.pk - b.pk;
+    });
+
+    // Helper: Cynthia Wu failed breakdown questions (3-candidate debate)
+    const setWuBreakdownQuestions = (q28pk, q28desc) => {
+        campaignTrail_temp.questions_json[19] = {
+            "model": "campaign_trail.question",
+            "pk": 13033,
+            "fields": {
+                "priority": 0,
+                "description": "On the Midnight of November 18th, as the people of Taiwan slept, in a dark and windy evening, polling experts from the TPP and KMT were nervously discussing issues related to the margin of error in the polls and the number of victories for each party. and The final results are.....",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[20] = {
+            "model": "campaign_trail.question",
+            "pk": 13350,
+            "fields": {
+                "priority": 0,
+                "description": "On the Morning of November 18th, another shocking news rocked the political scene: the KMT and TPP were embroiled in disputes within the margin of error in the polls, leading to conflicting victory claims. The TPP insisted on a margin of error of 3%, with a range of plus or minus 1.5%, while the KMT argued that each poll should be calculated based on its own determined maximum margin of error. For example, Formosa Poll indicated a maximum sampling error of ±3.0% at a 95% confidence level, totaling 6%. Now, at this crucial moment deciding Taiwan's fate, how do you perceive the negotiations reaching a deadlock?",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[21] = {
+            "model": "campaign_trail.question",
+            "pk": 13509,
+            "fields": {
+                "priority": 0,
+                "description": "On November 23rd, you and Terry Gou invited Mayor Hou You-yi to the Taipei Grand Hyatt to discuss the last hope for Joint Tickets. However, Mayor Hou You-yi brought President Ma Ying-jeou and Chairman Eric Chu to the scene, causing dissatisfaction from Terry Gou. Chairman Ko Wen-je, what points do you need to emphasize during the meeting?",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[22] = {
+            "model": "campaign_trail.question",
+            "pk": 13510,
+            "fields": {
+                "priority": 0,
+                "description": "As Joint Tickets completely failed, on November 24th, you unexpectedly chose legislator Cynthia Wu as the vice president. She is the daughter of a major business tycoon, bringing an impressive background to your campaign. Additionally, being an American-born Chinese (ABC), what special qualities do you see in her that led to your choice of her as the vice president?",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[23] = {
+            "model": "campaign_trail.question",
+            "pk": 13511,
+            "fields": {
+                "priority": 0,
+                "description": "November 24th, after you registered as a presidential candidate at the CEC, Hou Youyi called you, but you ignored it. An hour later, he teamed up with Zhao Shao-kang, the chairman of China Broadcasting Corporation, and other media figures to form the presidential and vice-presidential ticket. In the following days, many blue camp voters were emotionally stirred by this, and it seems that many blue voters who had temporarily supported you are returning to the KMT's base.....",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[24] = {
+            "model": "campaign_trail.question",
+            "pk": 13513,
+            "fields": {
+                "priority": 0,
+                "description": "Your vice president, Cynthia Wu, has many noteworthy qualities. Handing over the floor to her, what do you think she should say to attract voters?",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[25] = {
+            "model": "campaign_trail.question",
+            "pk": 13026,
+            "fields": {
+                "priority": 0,
+                "description": "Some of your aides suggest that, following the tradition of KMT candidates, you add a small Republic of China (ROC) flag emblem on top of your KP badge to increase appeal to blue-leaning voters. Will you consider this suggestion?",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[28] = {
+            "model": "campaign_trail.question",
+            "pk": q28pk,
+            "fields": {
+                "priority": 0,
+                "description": q28desc,
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[29] = { 
+            "model": "campaign_trail.question",
+            "pk": 12908,
+            "fields": {
+                "priority": 0,
+                "description": "Today, your Vice President candidate, Cynthia Wu, will have an exclusive opportunity to showcase herself in the Vice Presidential debate. She will be facing KMT's Zhao Shao-kang and DPP's Hsiao. She is the youngest and most beautiful candidate, but also the one with the least experience. Additionally, she seems to lack speaking skills. Nevertheless, what content will she emphasize today?",
+                "likelihood": 1
+            }
+        };
+    };
+
+    const threeCandDebateDesc = "In this year's presidential election, there are three candidates on the stage: Hou from the KMT, you from the TPP, and Lai from the DPP. This will be your moment to showcase your debating skills in the presidential election. What do you want to emphasize during the debate?";
+
+    //柯胜，默认设置
+    if (ans == 13302 || ans == 13303 || ans == 13304 || ans == 13305) {     
         campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/GCeTdoX.png';
         campaignTrail_temp.running_mate_last_name = 'Hou';
     }
 
     //民调低于30，整合失败
-     if (ans == 13295 || ans == 13296 || ans == 13298 && pop_vote[2].pvp <= 0.30){
-        campaignTrail_temp.questions_json[19] = {
-            "model": "campaign_trail.question",
-            "pk": 13033,
-            "fields": {
-                "priority": 0,
-                "description": "On the Midnight of November 18th, as the people of Taiwan slept, in a dark and windy evening, polling experts from the TPP and KMT were nervously discussing issues related to the margin of error in the polls and the number of victories for each party. and The final results are.....",
-                "likelihood": 1
-            }
-        }
-        campaignTrail_temp.questions_json[20] = {
-            "model": "campaign_trail.question",
-            "pk": 13350,
-            "fields": {
-                "priority": 0,
-                "description": "On the Morning of November 18th, another shocking news rocked the political scene: the KMT and TPP were embroiled in disputes within the margin of error in the polls, leading to conflicting victory claims. The TPP insisted on a margin of error of 3%, with a range of plus or minus 1.5%, while the KMT argued that each poll should be calculated based on its own determined maximum margin of error. For example, Formosa Poll indicated a maximum sampling error of ±3.0% at a 95% confidence level, totaling 6%. Now, at this crucial moment deciding Taiwan's fate, how do you perceive the negotiations reaching a deadlock?",
-                "likelihood": 1
-            }
-        }
-        campaignTrail_temp.questions_json[21] = {
-            "model": "campaign_trail.question",
-            "pk": 13509,
-            "fields": {
-                "priority": 0,
-                "description": "On November 23rd, you and Terry Gou invited Mayor Hou You-yi to the Taipei Grand Hyatt to discuss the last hope for Joint Tickets. However, Mayor Hou You-yi brought President Ma Ying-jeou and Chairman Eric Chu to the scene, causing dissatisfaction from Terry Gou. Chairman Ko Wen-je, what points do you need to emphasize during the meeting?",
-                "likelihood": 1
-            }
-        }
-
-        campaignTrail_temp.questions_json[23] = {
-            "model": "campaign_trail.question",
-            "pk": 13511,
-            "fields": {
-                "priority": 0,
-                "description": "November 24th, after you registered as a presidential candidate at the CEC, Hou Youyi called you, but you ignored it. An hour later, he teamed up with Zhao Shao-kang, the chairman of China Broadcasting Corporation, and other media figures to form the presidential and vice-presidential ticket. In the following days, many blue camp voters were emotionally stirred by this, and it seems that many blue voters who had temporarily supported you are returning to the KMT's base.....",
-                "likelihood": 1
-            }
-    }
-    campaignTrail_temp.questions_json[22] = {
-        "model": "campaign_trail.question",
-        "pk": 13510,
-        "fields": {
-            "priority": 0,
-            "description": "As Joint Tickets completely failed, on November 24th, you unexpectedly chose legislator Cynthia Wu as the vice president. She is the daughter of a major business tycoon, bringing an impressive background to your campaign. Additionally, being an American-born Chinese (ABC), what special qualities do you see in her that led to your choice of her as the vice president?",
-            "likelihood": 1
-        }
-}
-    campaignTrail_temp.questions_json[24] = {
-        "model": "campaign_trail.question",
-        "pk": 13513,
-        "fields": {
-            "priority": 0,
-            "description": "Your vice president, Cynthia Wu, has many noteworthy qualities. Handing over the floor to her, what do you think she should say to attract voters?",
-            "likelihood": 1
-        }
-    }
-        campaignTrail_temp.questions_json[25] = {
-            "model": "campaign_trail.question",
-            "pk": 13026,
-            "fields": {
-                "priority": 0,
-                "description": "Some of your aides suggest that, following the tradition of KMT candidates, you add a small Republic of China (ROC) flag emblem on top of your KP badge to increase appeal to blue-leaning voters. Will you consider this suggestion?",
-                "likelihood": 1
-            }
-        }
-        campaignTrail_temp.questions_json[28] = {
-            "model": "campaign_trail.question",
-          "pk": 13512,
-             "fields": {
-            "priority": 0,
-            "description": "In this year's presidential election, there are three candidates on the stage: Hou from the KMT, you from the TPP, and Lai from the DPP. This will be your moment to showcase your debating skills in the presidential election. What do you want to emphasize during the debate?",
-            "likelihood": 1
-         }
-        }
-        campaignTrail_temp.questions_json[29] = { 
-    "model": "campaign_trail.question",
-    "pk": 12908,
-   "fields": {
-   "priority": 0,
-    "description": "Today, your Vice President candidate, Cynthia Wu, will have an exclusive opportunity to showcase herself in the Vice Presidential debate. She will be facing KMT's Zhao Shao-kang and DPP's Hsiao. She is the youngest and most beautiful candidate, but also the one with the least experience. Additionally, she seems to lack speaking skills. Nevertheless, what content will she emphasize today?",
-   "likelihood": 1
-           }
-}
+    if ( (ans == 13295 || ans == 13296 || ans == 13298) && pop_vote[2].pvp <= 0.30 ) {
+        setWuBreakdownQuestions(13512, threeCandDebateDesc);
     }
     //直接节目上说不要合
-    else if (ans == 13361 ){
-        campaignTrail_temp.questions_json[19] = {
-            "model": "campaign_trail.question",
-            "pk": 13033,
-            "fields": {
-                "priority": 0,
-                "description": "On the Midnight of November 18th, as the people of Taiwan slept, in a dark and windy evening, polling experts from the TPP and KMT were nervously discussing issues related to the margin of error in the polls and the number of victories for each party. and The final results are.....",
-                "likelihood": 1
-            }
-        }
-        campaignTrail_temp.questions_json[20] = {
-            "model": "campaign_trail.question",
-            "pk": 13350,
-            "fields": {
-                "priority": 0,
-                "description": "On the Morning of November 18th, another shocking news rocked the political scene: the KMT and TPP were embroiled in disputes within the margin of error in the polls, leading to conflicting victory claims. The TPP insisted on a margin of error of 3%, with a range of plus or minus 1.5%, while the KMT argued that each poll should be calculated based on its own determined maximum margin of error. For example, Formosa Poll indicated a maximum sampling error of ±3.0% at a 95% confidence level, totaling 6%. Now, at this crucial moment deciding Taiwan's fate, how do you perceive the negotiations reaching a deadlock?",
-                "likelihood": 1
-            }
-        }
-        campaignTrail_temp.questions_json[21] = {
-            "model": "campaign_trail.question",
-            "pk": 13509,
-            "fields": {
-                "priority": 0,
-                "description": "On November 23rd, you and Terry Gou invited Mayor Hou You-yi to the Taipei Grand Hyatt to discuss the last hope for Joint Tickets. However, Mayor Hou You-yi brought President Ma Ying-jeou and Chairman Eric Chu to the scene, causing dissatisfaction from Terry Gou. Chairman Ko Wen-je, what points do you need to emphasize during the meeting?",
-                "likelihood": 1
-            }
-        }
+    else if ( ans == 13361 ) {
+        setWuBreakdownQuestions(13512, threeCandDebateDesc);
+    }
 
-        campaignTrail_temp.questions_json[23] = {
-            "model": "campaign_trail.question",
-            "pk": 13511,
-            "fields": {
-                "priority": 0,
-                "description": "November 24th, after you registered as a presidential candidate at the CEC, Hou Youyi called you, but you ignored it. An hour later, he teamed up with Zhao Shao-kang, the chairman of China Broadcasting Corporation, and other media figures to form the presidential and vice-presidential ticket. In the following days, many blue camp voters were emotionally stirred by this, and it seems that many blue voters who had temporarily supported you are returning to the KMT's base.....",
-                "likelihood": 1
-            }
-    }
-    campaignTrail_temp.questions_json[22] = {
-        "model": "campaign_trail.question",
-        "pk": 13510,
-        "fields": {
-            "priority": 0,
-            "description": "As Joint Tickets completely failed, on November 24th, you unexpectedly chose legislator Cynthia Wu as the vice president. She is the daughter of a major business tycoon, bringing an impressive background to your campaign. Additionally, being an American-born Chinese (ABC), what special qualities do you see in her that led to your choice of her as the vice president?",
-            "likelihood": 1
-        }
-}
-    campaignTrail_temp.questions_json[24] = {
-        "model": "campaign_trail.question",
-        "pk": 13513,
-        "fields": {
-            "priority": 0,
-            "description": "Your vice president, Cynthia Wu, has many noteworthy qualities. Handing over the floor to her, what do you think she should say to attract voters?",
-            "likelihood": 1
-        }
-    }
-        campaignTrail_temp.questions_json[25] = {
-            "model": "campaign_trail.question",
-            "pk": 13026,
-            "fields": {
-                "priority": 0,
-                "description": "Some of your aides suggest that, following the tradition of KMT candidates, you add a small Republic of China (ROC) flag emblem on top of your KP badge to increase appeal to blue-leaning voters. Will you consider this suggestion?",
-                "likelihood": 1
-            }
-        }
-        campaignTrail_temp.questions_json[28] = {
-            "model": "campaign_trail.question",
-          "pk": 13512,
-             "fields": {
-            "priority": 0,
-            "description": "In this year's presidential election, there are three candidates on the stage: Hou from the KMT, you from the TPP, and Lai from the DPP. This will be your moment to showcase your debating skills in the presidential election. What do you want to emphasize during the debate?",
-            "likelihood": 1
-         }
-        }
-        campaignTrail_temp.questions_json[29] = { 
-    "model": "campaign_trail.question",
-    "pk": 12908,
-   "fields": {
-   "priority": 0,
-    "description": "Today, your Vice President candidate, Cynthia Wu, will have an exclusive opportunity to showcase herself in the Vice Presidential debate. She will be facing KMT's Zhao Shao-kang and DPP's Hsiao. She is the youngest and most beautiful candidate, but also the one with the least experience. Additionally, she seems to lack speaking skills. Nevertheless, what content will she emphasize today?",
-   "likelihood": 1
-           }
-}
-    }
-    if (ans == 13295 || ans == 13296 || ans == 13298 && pop_vote[2].pvp > 0.30){    
+    //柯胜，民调高于30
+    if ( (ans == 13295 || ans == 13296 || ans == 13298) && pop_vote[2].pvp > 0.30 ) {    
         campaignTrail_temp.questions_json[19] = { 
             "model": "campaign_trail.question",
             "pk": 13023,
@@ -9402,148 +9330,26 @@ cyoAdventure = function (a) {
                 "description": "On November 18th, after intensive calculations and investigations, the polling experts designated by TPP and KMT are in intense discussions regarding the polling outcomes and margin of error. The final results are:",
                 "likelihood": 1
             }
-     }
-     campaignTrail_temp.questions_json[20] = { 
-        "model": "campaign_trail.question",
-        "pk": 13024,
-        "fields": {
-            "priority": 0,
-            "description": "As you succeed and unbelievably surpass both the KMT and Mayor Hou Yu-yi, it is crucial to manage your relationship with the KMT. Meanwhile, many core supporters also have reservations about the KMT. In order to ensure the longevity of this alliance, what do you hope to say or do to eliminate internal divisions caused by the alliance?",
-            "likelihood": 1
-        }
- }
- campaignTrail_temp.questions_json[21] = { 
-    "model": "campaign_trail.question",
-    "pk": 13025,
-    "fields": {
-        "priority": 0,
-        "description": "As each party finalizes their running mates, the DPP has selected Hsiao Bi-khim as the vice president. This signifies that the current Green-White showdown has completely taken shape! How do you plan to balance your campaign strategy and policies in response to this development?",
-        "likelihood": 1
-    }
-}
-campaignTrail_temp.questions_json[22] = { 
-    "model": "campaign_trail.question",
-        "pk": 13026,
-        "fields": {
-            "priority": 0,
-            "description": "Some of your aides suggest that, following the tradition of KMT candidates, you add a small Republic of China (ROC) flag emblem on top of your KP badge to increase appeal to blue-leaning voters. Will you consider this suggestion?",
-            "likelihood": 1
-        }
-}
-campaignTrail_temp.questions_json[23] = { 
-    "model": "campaign_trail.question",
-    "pk": 13027,
-    "fields": {
-        "priority": 0,
-        "description": "Chairman Ko, in a recent interview with a newspaper, you discussed various policy details. Certainly, the TPP has many comprehensive policy ideas and visions. Among these policies, what do you like the most and what would you like to emphasize the most?",
-        "likelihood": 1
-    }
-}
-campaignTrail_temp.questions_json[24] = { 
-    "model": "campaign_trail.question",
-    "pk": 13028,
-    "fields": {
-        "priority": 0,
-        "description": "As the presidential election enters its final stage, some of your former green supporters have become disappointed due to your cooperation with the Kuomintang (KMT) and have left your camp. At the same time, some elderly blue camp voters find it difficult to accept a candidate with a deep-green background and may choose not to vote. In light of this situation, how do you plan to respond?",
-        "likelihood": 1
-    }
-}
-campaignTrail_temp.questions_json[25] = { 
-    "model": "campaign_trail.question",
-    "pk": 13492,
-    "fields": {
-        "priority": 0,
-        "description": "Mayor Hou You-yi proposes that, considering his limited authority and influence as vice president, he would like to actively campaign for you across Taiwan to strengthen the TPP-KMT alliance's presence and support in various regions. Where do you think he should focus his efforts?",
-        "likelihood": 1
-    }
-}
-campaignTrail_temp.questions_json[28] = { 
-    "model": "campaign_trail.question",
-    "pk": 13031,
-    "fields": {
-        "priority": 0,
-        "description": "In this year's presidential election, you and Lai Ching-te will engage in a one-on-one debate on the stage, which could be the most crucial moment in your life. The outcome of the debate is likely to influence public perception and generate significant media coverage. What would you like to emphasize the most in this debate?",
-        "likelihood": 1
-    }
-}
-campaignTrail_temp.questions_json[29] = { 
-    "model": "campaign_trail.question",
-    "pk": 12922,
-    "fields": {
-        "priority": 1,
-        "description": "This year's vice presidential debate may not be very intense. DPP's Hsiao and KMT's Hou will confront each other on the stage. Although Hou is a candidate lacking in aggression and eloquence, his image as a Taiwanese local and an honest person can deflect most of Hsiao's attacks. Mayor Hou can also launch attacks in areas where he excels, such as law and order. So, what statements will he make?",
-        "likelihood": 1
-    }
-}   
-} 
-    if (ans == 13388 || ans == 13390 ){
-        campaignTrail_temp.candidate_image_url = "https://i.imgur.com/84Ealxo.jpeg";
-    }   
-    if (ans == 13034 || ans == 13035 || ans == 13036 || ans ==13037){
-        campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/5sM8nVt.jpeg";
-    }
-
-    if (ans == 13514 || ans == 13515 || ans == 13516 || ans == 13522 ){
-        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/OdRj8T0.png';
-        campaignTrail_temp.running_mate_last_name = 'Wu';
-    }
-    if( ans == 13522 ){
-        campaignTrail_temp.questions_json[19] = {
+        };
+        campaignTrail_temp.questions_json[20] = { 
             "model": "campaign_trail.question",
-            "pk": 13033,
+            "pk": 13024,
             "fields": {
                 "priority": 0,
-                "description": "On the Midnight of November 18th, as the people of Taiwan slept, in a dark and windy evening, polling experts from the TPP and KMT were nervously discussing issues related to the margin of error in the polls and the number of victories for each party. and The final results are.....",
+                "description": "As you succeed and unbelievably surpass both the KMT and Mayor Hou Yu-yi, it is crucial to manage your relationship with the KMT. Meanwhile, many core supporters also have reservations about the KMT. In order to ensure the longevity of this alliance, what do you hope to say or do to eliminate internal divisions caused by the alliance?",
                 "likelihood": 1
             }
-        }
-        campaignTrail_temp.questions_json[20] = {
+        };
+        campaignTrail_temp.questions_json[21] = { 
             "model": "campaign_trail.question",
-            "pk": 13350,
+            "pk": 13025,
             "fields": {
                 "priority": 0,
-                "description": "On the Morning of November 18th, another shocking news rocked the political scene: the KMT and TPP were embroiled in disputes within the margin of error in the polls, leading to conflicting victory claims. The TPP insisted on a margin of error of 3%, with a range of plus or minus 1.5%, while the KMT argued that each poll should be calculated based on its own determined maximum margin of error. For example, Formosa Poll indicated a maximum sampling error of ±3.0% at a 95% confidence level, totaling 6%. Now, at this crucial moment deciding Taiwan's fate, how do you perceive the negotiations reaching a deadlock?",
+                "description": "As each party finalizes their running mates, the DPP has selected Hsiao Bi-khim as the vice president. This signifies that the current Green-White showdown has completely taken shape! How do you plan to balance your campaign strategy and policies in response to this development?",
                 "likelihood": 1
             }
-        }
-        campaignTrail_temp.questions_json[21] = {
-            "model": "campaign_trail.question",
-            "pk": 13509,
-            "fields": {
-                "priority": 0,
-                "description": "On November 23rd, you and Terry Gou invited Mayor Hou You-yi to the Taipei Grand Hyatt to discuss the last hope for Joint Tickets. However, Mayor Hou You-yi brought President Ma Ying-jeou and Chairman Eric Chu to the scene, causing dissatisfaction from Terry Gou. Chairman Ko Wen-je, what points do you need to emphasize during the meeting?",
-                "likelihood": 1
-            }
-        }
-
-        campaignTrail_temp.questions_json[23] = {
-            "model": "campaign_trail.question",
-            "pk": 13511,
-            "fields": {
-                "priority": 0,
-                "description": "November 24th, after you registered as a presidential candidate at the CEC, Hou Youyi called you, but you ignored it. An hour later, he teamed up with Zhao Shao-kang, the chairman of China Broadcasting Corporation, and other media figures to form the presidential and vice-presidential ticket. In the following days, many blue camp voters were emotionally stirred by this, and it seems that many blue voters who had temporarily supported you are returning to the KMT's base.....",
-                "likelihood": 1
-            }
-    }
-    campaignTrail_temp.questions_json[22] = {
-        "model": "campaign_trail.question",
-        "pk": 13510,
-        "fields": {
-            "priority": 0,
-            "description": "As Joint Tickets completely failed, on November 24th, you unexpectedly chose legislator Cynthia Wu as the vice president. She is the daughter of a major business tycoon, bringing an impressive background to your campaign. Additionally, being an American-born Chinese (ABC), what special qualities do you see in her that led to your choice of her as the vice president?",
-            "likelihood": 1
-        }
-}
-    campaignTrail_temp.questions_json[24] = {
-        "model": "campaign_trail.question",
-        "pk": 13513,
-        "fields": {
-            "priority": 0,
-            "description": "Your vice president, Cynthia Wu, has many noteworthy qualities. Handing over the floor to her, what do you think she should say to attract voters?",
-            "likelihood": 1
-        }
-    }
-        campaignTrail_temp.questions_json[25] = {
+        };
+        campaignTrail_temp.questions_json[22] = { 
             "model": "campaign_trail.question",
             "pk": 13026,
             "fields": {
@@ -9551,99 +9357,143 @@ campaignTrail_temp.questions_json[29] = {
                 "description": "Some of your aides suggest that, following the tradition of KMT candidates, you add a small Republic of China (ROC) flag emblem on top of your KP badge to increase appeal to blue-leaning voters. Will you consider this suggestion?",
                 "likelihood": 1
             }
-        }
-        campaignTrail_temp.questions_json[28] =   {
+        };
+        campaignTrail_temp.questions_json[23] = { 
             "model": "campaign_trail.question",
-            "pk": 13577,
+            "pk": 13027,
             "fields": {
                 "priority": 0,
-                "description": "This year's unprecedented presidential election features four candidates participating in a debate: yourself from the TPP, Hou from the KMT, Lai from the DPP, and the independent candidate Gou. Just a month ago, you suggested that Gou should withdraw from the election, but he did not consider this proposal and chose to run independently. In this debate, what main points would you like to emphasize?",
+                "description": "Chairman Ko, in a recent interview with a newspaper, you discussed various policy details. Certainly, the TPP has many comprehensive policy ideas and visions. Among these policies, what do you like the most and what would you like to emphasize the most?",
                 "likelihood": 1
             }
-        }
+        };
+        campaignTrail_temp.questions_json[24] = { 
+            "model": "campaign_trail.question",
+            "pk": 13028,
+            "fields": {
+                "priority": 0,
+                "description": "As the presidential election enters its final stage, some of your former green supporters have become disappointed due to your cooperation with the Kuomintang (KMT) and have left your camp. At the same time, some elderly blue camp voters find it difficult to accept a candidate with a deep-green background and may choose not to vote. In light of this situation, how do you plan to respond?",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[25] = { 
+            "model": "campaign_trail.question",
+            "pk": 13492,
+            "fields": {
+                "priority": 0,
+                "description": "Mayor Hou You-yi proposes that, considering his limited authority and influence as vice president, he would like to actively campaign for you across Taiwan to strengthen the TPP-KMT alliance's presence and support in various regions. Where do you think he should focus his efforts?",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[28] = { 
+            "model": "campaign_trail.question",
+            "pk": 13031,
+            "fields": {
+                "priority": 0,
+                "description": "In this year's presidential election, you and Lai Ching-te will engage in a one-on-one debate on the stage, which could be the most crucial moment in your life. The outcome of the debate is likely to influence public perception and generate significant media coverage. What would you like to emphasize the most in this debate?",
+                "likelihood": 1
+            }
+        };
         campaignTrail_temp.questions_json[29] = { 
-    "model": "campaign_trail.question",
-    "pk": 12908,
-   "fields": {
-   "priority": 0,
-    "description": "Today, your Vice President candidate, Cynthia Wu, will have an exclusive opportunity to showcase herself in the Vice Presidential debate. She will be facing KMT's Zhao Shao-kang and DPP's Hsiao. She is the youngest and most beautiful candidate, but also the one with the least experience. Additionally, she seems to lack speaking skills. Nevertheless, what content will she emphasize today?",
-   "likelihood": 1
-           }
-}
+            "model": "campaign_trail.question",
+            "pk": 12922,
+            "fields": {
+                "priority": 1,
+                "description": "This year's vice presidential debate may not be very intense. DPP's Hsiao and KMT's Hou will confront each other on the stage. Although Hou is a candidate lacking in aggression and eloquence, his image as a Taiwanese local and an honest person can deflect most of Hsiao's attacks. Mayor Hou can also launch attacks in areas where he excels, such as law and order. So, what statements will he make?",
+                "likelihood": 1
+            }
+        };   
+    } 
+
+    if ( ans == 13388 || ans == 13390 ) {
+        campaignTrail_temp.candidate_image_url = "https://i.imgur.com/84Ealxo.jpeg";
+    }   
+    if ( ans == 13034 || ans == 13035 || ans == 13036 || ans == 13037 ) {
+        campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/5sM8nVt.jpeg";
     }
+
+    if ( ans == 13514 || ans == 13515 || ans == 13516 || ans == 13522 ) {
+        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/OdRj8T0.png';
+        campaignTrail_temp.running_mate_last_name = 'Wu';
+    }
+
+    if ( ans == 13522 ) {
+        const fourCandDebateDesc = "This year's unprecedented presidential election features four candidates participating in a debate: yourself from the TPP, Hou from the KMT, Lai from the DPP, and the independent candidate Gou. Just a month ago, you suggested that Gou should withdraw from the election, but he did not consider this proposal and chose to run independently. In this debate, what main points would you like to emphasize?";
+        setWuBreakdownQuestions(13577, fourCandDebateDesc);
+    }
+
     //柯文哲被弃保：辩论后民调未达30%，选民归队
-    if (ans == 13449 || ans == 13450 || ans == 13451 || ans == 13452 && pop_vote[2].pvp < 0.29){    
+    if ( (ans == 13449 || ans == 13450 || ans == 13451 || ans == 13452) && pop_vote[2].pvp < 0.29 ) {    
         campaignTrail_temp.questions_json[29] = { 
-    "model": "campaign_trail.question",
-    "pk": 12922,
-    "fields": {
-        "priority": 1,
-        "description": "This year's vice presidential debate may not be very intense. DPP's Hsiao and KMT's Hou will confront each other on the stage. Although Hou is a candidate lacking in aggression and eloquence, his image as a Taiwanese local and an honest person can deflect most of Hsiao's attacks. Mayor Hou can also launch attacks in areas where he excels, such as law and order. So, what statements will he make?",
-        "likelihood": 1
+            "model": "campaign_trail.question",
+            "pk": 12922,
+            "fields": {
+                "priority": 1,
+                "description": "This year's vice presidential debate may not be very intense. DPP's Hsiao and KMT's Hou will confront each other on the stage. Although Hou is a candidate lacking in aggression and eloquence, his image as a Taiwanese local and an honest person can deflect most of Hsiao's attacks. Mayor Hou can also launch attacks in areas where he excels, such as law and order. So, what statements will he make?",
+                "likelihood": 1
+            }
+        };   
+        campaignTrail_temp.questions_json[30] = {
+            "model": "campaign_trail.question",
+            "pk": 13631,
+            "fields": {
+                "priority": 0,
+                "description": "In the final week before the election, you have the opportunity to visit specific regions nationwide to boost local support. In which areas do you hope to campaign in a final effort?",
+                "likelihood": 1
+            }
+        };
     }
-}   
-campaignTrail_temp.questions_json[30] =   {
-    "model": "campaign_trail.question",
-    "pk": 13631,
-    "fields": {
-        "priority": 0,
-        "description": "In the final week before the election, you have the opportunity to visit specific regions nationwide to boost local support. In which areas do you hope to campaign in a final effort?",
-        "likelihood": 1
-    }
-}
-    }
+
     //各党特色颜色，背景图片
-    if ( ans == 13034 || ans == 13035 || ans == 13036 || ans == 13037){    
-        nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#ffffff" 
-        nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#28c8c8" 
-        $(".container")[0].style.backgroundColor = "#6848ff" 
-        $("#game_window")[0].style.borderColor = "#99A0A8" 
-        $(".container")[0].style.backgroundColor = "#F4F4EE" 
-        $("#game_window")[0].style.borderColor = "#ffffff" 
-        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/xAN3Ufz.png)" 
-        document.getElementById("header").src = "https://i.imgur.com/Q5BQ3fn.jpg" 
-        document.body.background = "https://i.imgur.com/u7NyV06.jpeg"
-    }
-    //成就
-    getResults = function (out, totv, aa, quickstats) {
-        if( quickstats[1] > 33.49 && quickstats[1] < 40.0 ) {
-            unlockAchievement("Cross The Song-Chu Yu wall");
+    if ( ans == 13034 || ans == 13035 || ans == 13036 || ans == 13037 ) {    
+        if (typeof nct_stuff !== "undefined" && nct_stuff.themes && nct_stuff.selectedTheme) {
+            nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#ffffff"; 
+            nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#28c8c8"; 
         }
+        $(".container")[0].style.backgroundColor = "#6848ff"; 
+        $("#game_window")[0].style.borderColor = "#99A0A8"; 
+        $(".container")[0].style.backgroundColor = "#F4F4EE"; 
+        $("#game_window")[0].style.borderColor = "#ffffff"; 
+        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/xAN3Ufz.png)"; 
+        document.getElementById("header").src = "https://i.imgur.com/Q5BQ3fn.jpg"; 
+        document.body.background = "https://i.imgur.com/u7NyV06.jpeg";
     }
-    getResults = function (out, totv, aa, quickstats) {
-        let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 256);
-        if( quickstats[1] > 29.9 && stateResult.result[2].candidate == 200 ) {
-            unlockAchievement("The pesky mayor");
-        }
+};
+
+getResults = function (out, totv, aa, quickstats) {
+    if (!quickstats || !aa || !aa[0]) return;
+
+    if ( quickstats[1] > 33.49 && quickstats[1] < 40.0 ) {
+        unlockAchievement("Cross The Song-Chu Yu wall");
     }
-    getResults = function (out, totv, aa, quickstats) {
-        if( quickstats[1] <= 50.29 && aa[0].candidate === 200 ) {
-            unlockAchievement("Election valid");
-        }
+
+    let stateResultChiayi = campaignTrail_temp.final_state_results?.find((x) => x.state == 256);
+    if ( quickstats[1] > 29.9 && stateResultChiayi?.result?.[2]?.candidate == 200 ) {
+        unlockAchievement("The pesky mayor");
     }
-    getResults = function (out, totv, aa, quickstats) {
-        if(aa[2].candidate === 68 ) {
-            unlockAchievement("Old Third Boxed Lunch");
-        }
+
+    if ( quickstats[1] <= 50.29 && aa[0].candidate === 200 ) {
+        unlockAchievement("Election valid");
     }
-    getResults = function (out, totv, aa, quickstats) {
-        if(aa[2].candidate === 67 ) {
-            unlockAchievement("Lai the third");
-        }
+
+    if ( aa[2] && aa[2].candidate === 68 ) {
+        unlockAchievement("Old Third Boxed Lunch");
     }
-    getResults = function (out, totv, aa, quickstats) {
-        if( e.player_answers.includes(13194) && aa[0].candidate === 200) {
-            unlockAchievement("Votes White Votes Right");
-        }
+
+    if ( aa[2] && aa[2].candidate === 67 ) {
+        unlockAchievement("Lai the third");
     }
-    getResults = function (out, totv, aa, quickstats) {
-        let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 268);
-        let stateResulttwo = campaignTrail_temp.final_state_results.find((x) => x.state == 265);
-        if( stateResult.result[0].candidate == 200 && stateResulttwo.result[0].candidate == 200 ) {
-            unlockAchievement("Loves From Hometown");
-        }
+
+    if ( e.player_answers && e.player_answers.includes(13194) && aa[0].candidate === 200 ) {
+        unlockAchievement("Votes White Votes Right");
     }
-}
+
+    let stateResultTaipei = campaignTrail_temp.final_state_results?.find((x) => x.state == 268);
+    let stateResultHsinchuCity = campaignTrail_temp.final_state_results?.find((x) => x.state == 265);
+    if ( stateResultTaipei?.result?.[0]?.candidate == 200 && stateResultHsinchuCity?.result?.[0]?.candidate == 200 ) {
+        unlockAchievement("Loves From Hometown");
+    }
+};
 
 campaignTrail_temp.jet_data = [{}
 ]
@@ -10252,8 +10102,6 @@ endingPicker = (out, totv, aa, quickstats) => {
     }
 
 // in-game achievements
-
-setInterval(endingPicker, 250);
 
 //注释代码
 function getTooltips(str) {

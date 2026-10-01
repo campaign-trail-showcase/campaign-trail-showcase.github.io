@@ -1,3 +1,11 @@
+campaignTrail_temp.achievements = {
+    "Man Behind The Slaughter": {
+        "image": "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/1988psctachievement.png", 
+        "description": "Slay Dark Falz's waking instrument on Earth.",
+        "cannotBeCheated": true
+    },
+}
+
 campaignTrail_temp.election_json = [
     {
         "model": "campaign_trail.election",
@@ -5,9 +13,9 @@ campaignTrail_temp.election_json = [
         "fields": {
             "year": 1988,
             "summary": "<p>For twenty years, Alis Landale has been the rightful queen of the Algol system. Once the legendary hero who dethroned the tyrant Lassic and destroyed the corruption of the Dark Falz, she had long since settled into the simple structures of day-to-day government.</p><p>One night, she had a horrid vision in her dreams. She saw the looming beast of darkness she once slew rise from the ashes of legend and ensnare another world in its claws - a world without magic, without heroic warriors, and without the means to destroy Dark Falz. Awakening in a cold sweat, she found herself in the very same world from her nightmare. But, thankfully, she was not alone; and Alis Landale was never one to back down from a fight.</p>",
-            "image_url": "https://i.imgur.com/QIceDdd.png",
+            "image_url": "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/electionimage1988ps.png",
             "winning_electoral_vote_number": 270,
-            "advisor_url": "https://i.imgur.com/JSEqRs7.png",
+            "advisor_url": "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/tiny%20ass%20fuckin%20uhhhh%20advisor%20image%201988ps%20-%20Imgur.png",
             "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">Books and Links</h4>Peter Goldman - <a href=\"http://www.amazon.com/exec/obidos/ASIN/B012HU7SZA/amhius20-20\" target=\"_blank\">The Quest for the Presidency, 1988</a></br>L.A. Times, November 10, 1988 - <a href=\"http://articles.latimes.com/1988-11-10/news/mn-299_1_dukakis-lost-reelection\" target=\"_blank\">How Presidential Race Was Won-and Lost : Michael S. Dukakis</a></br>L.A. Times, November 10, 1988 - <a href=\"http://articles.latimes.com/1988-11-10/news/mn-302_1_george-bush\" target=\"_blank\">How Presidential Race Was Won--and Lost : George Bush</a></br><a href=\"http://www.usnews.com/news/articles/2008/01/17/the-photo-op-that-tanked\" target=\"_blank\">Michael Dukakis: The Photo Op That Tanked</a>",
             "has_visits": 1,
             "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/2012-no-majority.jpg",
@@ -241,6 +249,16 @@ campaignTrail_temp.running_mate_json = [
 
 campaignTrail_temp.credits = "@pabloni21"
 
+campaignTrail_temp.modBoxTheme = {
+  "main_color": "#14152a",
+  "header_color": "#0a0e29",
+  "secondary_color": "#070a1d",
+  "description_background_color": "#0b0b16",
+  "header_text_color": "#fff",
+  "description_text_color": "#fff",
+  "ui_text_color": "#fff"
+};
+
 campaignTrail_temp.global_parameter_json = [
     {
         "model": "campaign_trail.global_parameter",
@@ -304,7 +322,7 @@ jet_data = {
     "windowColor": "#606298",
     "containerColor": "#557ae0",
     "innerWindowColor": "#00abad",
-    "bannerImageUrl": "https://i.imgur.com/y2kQTeW.png",
+    "bannerImageUrl": "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/bannerpsctfixed.png",
     "backgroundImageUrl": "https://i.redd.it/i-took-a-bunch-of-hd-screenshots-of-pso-to-use-as-v0-qo87gn4t5on81.png?width=2560&format=png&auto=webp&s=4f6fa977c05eef314200c69e699a36de8aa18f14",
     "endingTextColor": "#def7ff",
     "customQuote": ""
@@ -324,7 +342,7 @@ $("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selected
 
 $(".container")[0].style.backgroundColor = "#263254";
 
-document.getElementById("header").src = "https://i.imgur.com/y2kQTeW.png";
+document.getElementById("header").src = "https://file.garden/aV8MTnSmtyzzckGy/tct%20images/bannerpsctfixed.png";
 
 document.body.background = "https://i.redd.it/i-took-a-bunch-of-hd-screenshots-of-pso-to-use-as-v0-qo87gn4t5on81.png?width=2560&format=png&auto=webp&s=4f6fa977c05eef314200c69e699a36de8aa18f14";
 
@@ -611,12 +629,28 @@ generateTime = () => {
         "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Title%20-%20PSG.mp3"
       },
       {
+        "name": "Intro",
+        "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Intro%20-%20PSG.mp3"
+      },
+      {
+        "name": "Town",
+        "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Town%20-%20PSG.mp3"
+      },
+      {
+        "name": "Palma",
+        "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Palma%20-%20PSG.mp3"
+      },
+      {
         "name": "Battle",
         "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Battle%20-%20PSG.mp3"
       },
       {
         "name": "Church",
         "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Church%20-%20PSG.mp3"
+      },
+      {
+        "name": "Dungeon 2",
+        "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Dungeon%202%20-%20PSG.mp3"
       },
       {
         "name": "Sky City",
@@ -640,12 +674,28 @@ generateTime = () => {
             "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Title%20-%20FM.mp3"
         },
         {
+            "name": "Intro",
+            "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Intro%20-%20FM.mp3"
+        },
+        {
+            "name": "Town",
+            "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Town%20-%20FM.mp3"
+        },
+        {
+            "name": "Palma",
+            "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Palma%20-%20FM.mp3"
+        },
+        {
             "name": "Battle",
             "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Battle%20-%20FM.mp3"
         },
         {
             "name": "Church",
             "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Church%20-%20FM.mp3"
+        },
+        {
+            "name": "Dungeon 2",
+            "url": "https://file.garden/aV8MTnSmtyzzckGy/PS1OST/Phantasy%20Star%20OST%20-%20Dungeon%202%20-%20FM.mp3"
         },
         {
             "name": "Sky City",
@@ -730,3 +780,4 @@ e.creditsPage = () => {
 }
 
 e.credits = "<button onclick='e.creditsPage()'>Credits</button>"
+

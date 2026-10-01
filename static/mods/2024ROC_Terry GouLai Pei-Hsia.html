@@ -5833,18 +5833,16 @@ cyoAdventure = function (a) {
             }
           }
     }
-
-        getResults = function (out, totv, aa, quickstats) {
-            if (quickstats[1] > 5.0 ){
-           unlockAchievement("GTM For 2028");
-         }
-        }
-        getResults = function (out, totv, aa, quickstats) {
-            if (quickstats[1] > 13.9 ){
-           unlockAchievement("Aunt Kiss");
-         }
-        }
 }
+
+getResults = function (out, totv, aa, quickstats) {
+            if (quickstats[1] > 5.0) {
+                unlockAchievement("GTM For 2028");
+            }
+            if (quickstats[1] > 13.9) {
+                unlockAchievement("Aunt Kiss");
+            }
+        }
 
 campaignTrail_temp.jet_data = [{}
 ]
@@ -6386,7 +6384,6 @@ if (aa[0].candidate === 67 && quickstats[1] > 4.9 ){
 
 }
 
-setInterval(endingPicker, 250);
 
 //注释代码
 function getTooltips(str) {

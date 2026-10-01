@@ -1,0 +1,1754 @@
+campaignTrail_temp.election_json = campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 15,
+        "fields": {
+            "year": 1992,
+            "summary": "<div style=\"max-height: 200px; overflow-y: auto;\"><p>The commoners of America have never been more furious. A nation now two centuries removed from the times of Washington, the politicians of America have leeched off of America’s decent hard-working population for over 100 years, putting the average American in the same chains once worn by their ancestor before fleeing to America in search of a new life.</p><p>Since the passing of Abraham Lincoln, a cast of increasingly corrupt and incompetent leaders have run the country carelessly, with rare exception. There is no man who embodies these traits more than George Bush.</p><p>A nepo baby raised in the secluded, posh areas of New England, who entered politics through his fascist sympathizing father, and slithered into the administrations of many presidents due to his name, and his name alone. He has masqueraded the part of a warm southerner, hoping those southern hicks would be stupid enough to like him, but Bush underestimated Texas, losing his first opportunities for office outside of the lower chamber.</p><p>He now is an esteemed diplomat and President of the United States, slated to be the next person who drags America closer to the hell it had attempted to escape from after the horrors of the Second World War.</p><p>In the sweltering heat of Florida, one man has an idea to bring government truly back to the people. To seek a better government, and overcome every barrier rigged against them towards congress and the presidency.</p>",
+            "image_url": "https://i.imgur.com/KmiR2IW.png",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://i.imgur.com/Cl4GYxZ.gif",
+            "recommended_reading": "<div style=\"max-height: 320px; overflow-y: auto;\"><h4 style=\"margin-top: 0.5em;\">Hey everyone.</h4><p>This was my first mod ever for this game, and I am thoroughly elated to bring it all to you.</p><p>This project has been a labor of love for the better part of 6 months. Countless hours I spent pouring over this for your enjoyment, and I’m amazed that it's finally here</p><p>I created this mod in particular because I was very disappointed in our lack of Perot mods, and I thought that needed to change. So, I created a reddit account finally after spending years as a lurker, and got to work on this.</p><p>If you couldn’t tell by playing through the mod, this is not a positive nor a negative depiction of Ross Perot, it is an honest portrayal of Ross Perot, and, more importantly, his political opponents. I portray George Bush and Bill Clinton for how they genuinely are, which are big time sleazeball politicians that only care about money in their pocket. Perot is an odd person and has many bad beliefs as well, but his crusade against people like Bush and Clinton I have always admired. He wasn’t afraid to call out B.S in administrations even if it was unpopular.</p><h4 style=\"margin-top: 0.5em;\">Now, let’s talk about some of the theming</h4><p>Yes, the punk rock music playlist is completely intentional. I was attempting to in a sense capture the rage that many of those voters felt back then, which at the time was really only expressed that loudly in the punk music scene. I wanted the playlist to reflect fighting the establishment, and to be honest I haven’t really seen a full playlist have an overarching theme in a mod before (many of them have one or two, but I wanted the whole thing). I intentionally chose songs from the underground 80s scene closer to the beginning, symbolizing the beginnings of THRO before the end of the playlist which uses songs with a much more mainstream sound, symbolizing the presidential campaign of Perot. I wanted to make it essential to the playing experience to help make you want to fight the establishment just as much as Perot did. For many mods, music is an accessory, but I made it a vessel for the mod’s story. (And as an aside: Early 90s music is too good to not have around as a big part of the mod).</p><p>Speaking of vessels, there are allusions to the acclaimed American novel <i>Moby Dick</i>. Those, too, are very intentional. In my opinion, Jack Gargan/Ross Perot reflect Captain Ahab a great deal. They both want something that has wronged them in the past, and want to capture it so they can finally feel complete in their lives. Both their means of getting their ultimate prize are done through zealous methods and are often blinded by their desire to achieve said prize. They both have a vessel, Ahab has <i>The Pequod</i> and Perot/Gargan have T.H.R.O and the collective apathy of the masses.</p><p>I truly hope you guys love this mod. It's been a delight to give this all to you.</p><p>Will I write another mod? Not sure honestly, but I certainly could if I wanted to, I’ve got some ideas. I’d be happy to write for some team in the future and help out in any way that I can. If anything, this is pretty much a demo of my writing. If you like it, please reach out to me on Reddit if you want me to help out.</p><p>With all that said, I love you all! Thank you so much for reading, and if you want my sources, please check them out below!</p><h4 style=\"margin-top: 0.5em; margin-bottom: 0.35em;\">Sources</h4><ul style=\"list-style-position: inside; padding-left: 0; margin: 0 auto; text-align: center;\"><li style=\"margin-bottom: 0.3em;\"><i>Citizen Perot</i></li><li style=\"margin-bottom: 0.3em;\"><i>He Who Climbs a Tree and Hollers</i></li><li style=\"margin-bottom: 0.3em;\"><i>REFORM!</i> Video</li><li><i>Mad As Hell: Revolt at the Ballot Box</i></li></ul></div>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg",
+            "creator": "Created and Written by Noise<br><br>Developed by Noise, Bigglesuede, and StrawberryMaster<br><br>Banner by E",
+            "display_year": "1992: The White Whale"
+        }
+    }
+]
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 152,
+        "fields": {
+            "first_name": "George",
+            "last_name": "Bush",
+            "election": 15,
+            "party": "Republican",
+            "state": "Texas",
+            "priority": 2,
+            "description": "<p>George Bush is the current President of the United States who lost popularity after he backed out of his campaign promise to not raise taxes. He must prove he has the independence, ideological rigor, and strength to serve as President, all while finding some way to reduce the popularity of his opponent. Bush appears to be trailing badly as the campaign begins.</p>",
+            "color_hex": "#9b4c3f",
+            "secondary_color_hex": "#d7b7b2",
+            "is_active": 0,
+            "image_url": "../static/images/george-bush-1988.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 1992 election.</h3><p>In spite of a hard-fought challenge from both Bill Clinton and Ross Perot, you have held on to win re-election.</p><p>Whatever you did, it must have worked. Observers were leaving your campaign for dead just a few months ago. On the political front, you can continue your current policies or turn in an even more moderate direction. Internationally, you can hopefully oversee the passing of NAFTA and bring free trade to America.</p>",
+            "electoral_loss_message": "<h3>Sorry. You have lost the 1992 election.</h3><p>Perhaps it was always a long-shot -- the American people just seemed uninterested in giving you a 2nd term.</p><p>Hopefully, Bill Clinton will govern as a moderate and pass some of your legislation like NAFTA. A lot can happen in four years, but the early gossip is that Bob Dole has the inside track for the 1996 nomination. Your next steps are unclear.</p>",
+            "no_electoral_majority_message": "<h3>Sorry. You have lost the 1992 election.</h3><p>Although the Electoral College was tied, the Democrats have won a solid majority in the House, and will elevate Bill Clinton to the Presidency.</p><p>If Perot won any electoral votes, you could try to strike a deal with him, maybe allowing him to become VP, but it’s unclear if he would accept such a deal.</p>",
+            "description_as_running_mate": "'",
+            "candidate_score": 1.0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 153,
+        "fields": {
+            "first_name": "Bill",
+            "last_name": "Clinton",
+            "election": 15,
+            "party": "Democrat",
+            "state": "Arkansas",
+            "priority": 1,
+            "description": "<p>Bill Clinton is the young, charismatic, centrist governor of Arkansas. His chances this year seem to be good, if he can press the case for his own ability and point to the failures of Bush. His national reputation is mostly positive, but he has his controversies. He will be expected to define himself more clearly, and may need to explain some older votes and decisions as they become known.</p>",
+            "color_hex": "#3F579B",
+            "secondary_color_hex": "#b2bbd7",
+            "is_active": 0,
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Bill_Clinton.jpg/220px-Bill_Clinton.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 1992 election.</h3><p>In spite of a hard-fought challenge from both George Bush and Ross Perot, you have held on and became President.</p><p>You were always the favorite to win, but a lot could have gone wrong. On the political front, you can bring your Third Way beliefs to Washington DC and govern in a bipartisan manner. Internationally, you can hopefully oversee the passing of NAFTA and bring free trade to America.</p>",
+            "electoral_loss_message": "<h3>Sorry. You have lost the 1992 election.</h3><p>In spite of you being the favorite, things just didn’t go your way.</p><p>Many Democrats feel that this election was yours to lose, and it seems unlikely that you will be welcome to run again in four years. Your term as Governor, however, runs through 1993.</p>",
+            "no_electoral_majority_message": "<h3>Congratulations! You have won the 1992 election.</h3><p>Although the Electoral College was tied, the Democrats have won a solid majority in the House, and will elevate Bill Clinton to the Presidency.</p><p>If Perot won any electoral votes, he could try to strike a deal with Bush, maybe allowing him to become VP, but it’s unclear if Perot would accept such a deal.</p>",
+            "description_as_running_mate": "'",
+            "candidate_score": 1.0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 154,
+        "fields": {
+            "first_name": "Jack",
+            "last_name": "Gargan",
+            "election": 15,
+            "party": "Throw the Hypocritical Rascals Out (T.H.R.O.)",
+            "state": "Florida",
+            "priority": 1,
+            "description": "<div style=\"max-height: 200px; overflow-y: auto;\"><p><b>Jack Gargan</b><br><i>Role: Ishmael</i></p><p>Nearly a quarter century ago, Richard Nixon professed the idea of a “silent majority”. Ever since he gave this speech, no man has clung to its every word tighter than Jack Gargan. His efforts in politics have, on paper, been ineffective, but to Jack, they are another step on the road to true democracy. His fifth place showing in his Tampa City Council race showed you don’t need money to get somewhere in politics.</p><p>Ronald Reagan’s presidency a few years later proved that conservatism in its current form exploits the might of America’s economy, and he knows he’s far from the only one that agrees with this message. Unlike the politicians of today, he knows how America ticks, and he will stop at nothing to make sure his message is heard to the masses.</p><p>If he is successful, he will be a mere footnote in history, but he can rest easy, knowing America was a better place because of him.</p><p>Before any of that, however, he requires a muse, one who can carry the torch of his message effectively all the way to the White House, and, like the founders of the nation he idolizes, establish a new system of governance that works. He will do it, even if he has to die trying.</p></div>",
+            "color_hex": "#3F9B7A",
+            "secondary_color_hex": "#b2d7c9",
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/b9qZcmc.jpeg",
+            "electoral_victory_message": "<h3>Wow! You have won the 1992 election.</h3><p>This came as a surprise to even your most ardent supporters, everyone thought you had no chance of winning but you proved them wrong.</p><p>As the first Independent to win a presidential election in 200 years, it will be interesting to see how your presidency goes. On the political front, you can balance the budget and put an end to the debt and deficit once and for all. Internationally, you can hopefully veto NAFTA and Make America Great Again.</p>",
+            "electoral_loss_message": "<h3>As expected. You have lost the 1992 election.</h3><p>It was always a long-shot -- the American people haven’t elected an Independent since George Washington and you weren’t able to change that.</p><p>Hopefully, you did well enough to scare the 2 parties into embracing your beliefs. A lot can happen in four years, but the early gossip is that it will be much harder for an Independent to win in 1996. Your next steps are unclear.</p>",
+            "no_electoral_majority_message": "<h3>Congratulations! You have forced the election to the house.</h3><p>Although the Electoral College was tied, the Democrats have won a solid majority in the House, and will elevate Bill Clinton to the Presidency.</p><p>However, If you won any electoral votes, you could try to strike a deal with Bush, maybe he’ll let you become his VP in exchange for your electoral votes.</p>",
+            "description_as_running_mate": "'",
+            "candidate_score": 1.0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 155,
+        "fields": {
+            "first_name": "Andre",
+            "last_name": "Marrou/Other",
+            "election": 15,
+            "party": "Populist",
+            "state": "Nevada",
+            "priority": 4,
+            "description": "'",
+            "color_hex": "#9b7a3f",
+            "secondary_color_hex": "#d7c9b2",
+            "is_active": 0,
+            "image_url": "https://i.pinimg.com/originals/83/05/a0/8305a02160e603d87955b9a32a00dda9.png",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "'",
+            "candidate_score": 1.0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 156,
+        "fields": {
+            "first_name": "Jeane",
+            "last_name": "Kirkpatrick",
+            "election": 15,
+            "party": "Republican",
+            "state": "District of Columbia",
+            "priority": 5,
+            "description": "'",
+            "color_hex": "#3F9B7A",
+            "secondary_color_hex": "#b2d7c9",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<div style=\"max-height: 200px; overflow-y: auto;\"><p>Well Ross, you really want your own Reagan, huh? Well, I got just the person for you. Jeanne Kirkpatrick was a Democrat turned Republican, and one of the best foreign policy minds out there, a field in which you have virtually no experience in. She caused Britain to fight Argentina over those pesky islands, and supports every anti-American regime there is, despite being a conservative. By her elitist peers, she is “America’s own-goal scorer” but to you, she’s a mastermind. She also has the unique distinction of being female, which would surely bring a lot of women into the fold, especially with Clinton and Bush’s less than ideal reputations with them. However, the specter of the Mondale campaign eight years ago still looms over this pick, as many still remember the baggage Ferraro carried, arguably ruining any chance Mondale had of beating Reagan. It would be a pick that wouldn’t shock many, but could certainly be an ace in the hole…if you let it.</p></div>",
+            "candidate_score": 0.0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 157,
+        "fields": {
+            "first_name": "Peter",
+            "last_name": "Ueberroth",
+            "election": 15,
+            "party": "???",
+            "state": "California",
+            "priority": 6,
+            "description": "'",
+            "color_hex": "#3F9B7A",
+            "secondary_color_hex": "#b2d7c9",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<div style=\"max-height: 200px; overflow-y: auto;\"><p>You’ve had your eye on this guy ever since he was the head of LAOOC back in 1984, and out of all the hundreds of candidates flown by you, you like him the best. He’s a smart businessman who ran a great Olympics. He ran the MLB better than anyone has before, saving 21 teams from certain doom and preventing player strikes and league lockouts by any means necessary, even if it meant colluding with owners. So what’s his problem? He’s unknown. Nobody knows who he is, would barely make a ripple in the race, and doesn’t give you any advantage anywhere. He’d be a competent choice, for sure, but the last thing you want is for your VP to be another William Miller. And, of course, there is also the MLB powderkeg about to burst between the owners and the players, which many say is because of his misdeeds as commissioner. But hey, Ross, if you want to do this, it’s your funeral. Who knows? Maybe it’ll work.</p></div>",
+            "candidate_score": 0.0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 158,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Silber",
+            "election": 15,
+            "party": "Democrat (1828-1896)",
+            "state": "Massachusetts",
+            "priority": 7,
+            "description": "'",
+            "color_hex": "#3F9B7A",
+            "secondary_color_hex": "#b2d7c9",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<div style=\"max-height: 200px; overflow-y: auto;\"><p>In your eyes, Silber is a complete repudiation of President Bush. Like you, he was born poor in Texas, and worked his way to an Ivy League education and successful career in business, and a less-than-stellar career in politics. He’s experienced on the trail, battling valiantly in a loss to current Massachusetts Governor Bill Weld, and likely knows how campaigns work better than you do. Despite his supposed party label, Silber is very conservative on social issues, calling his state a “welfare magnet” and supports murdering old people with cancer. However, when asked what his greatest weakness was, he said that he didn’t have to tell people. That sells you more than anything. He’s outspoken, and always speaks his mind on anything, just like you, and just unlike Bush. This could be a blessing just as much as it could be a burden, as it was with his own gubernatorial campaign. That said, he could bring a lot of disaffected Democrats over to your campaign, securing even more of an ever-growing anti-establishment electorate. If you’re looking to cut into Clinton’s support with the slowly decaying good old boys of the south, Silber is your man.</p></div>",
+            "candidate_score": 0.0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 159,
+        "fields": {
+            "first_name": "Lee",
+            "last_name": "Iacocca",
+            "election": 15,
+            "party": "Whatever He Feels Like That Morning",
+            "state": "Pennsylvania",
+            "priority": 8,
+            "description": "'",
+            "color_hex": "#3F9B7A",
+            "secondary_color_hex": "#b2d7c9",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<div style=\"max-height: 200px; overflow-y: auto;\"><p>You and Lee have been friends for as long as you’ve both been in business. You immediately thought of him when you began campaigning, as you had discussed this with him years ago. Iacocca is an American hero, saving the Ford Motor Company from obscurity after designing the Mustang and other cars in the mid 1960s. He’s made history at Chrysler, and saved that business from going bankrupt too. He has a midas touch, just not with the back of a Ford Pinto, a car only slightly more stable than your campaign. He’s at the top of the world, and plans to retire from Chrysler this year anyway, lining up perfectly with your campaign. You know he wants to be in politics, he almost ran in 1988, and wanted to fill John Heinz’s spot in the Senate, but has been rejected every time. His populistic views on the auto industry and trade would be red meat to your midwestern followers, and would be a beacon to a working class destroyed by Japan and Europe. His only weakness is that he knows as much about politics as you do, which is next to nothing. He might help you win, but don’t rely on him in the White House, okay?</p></div>",
+            "candidate_score": 0.0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 160,
+        "fields": {
+            "first_name": "Jerry",
+            "last_name": "Brown",
+            "election": 15,
+            "party": "National Bolshevik Front",
+            "state": "California (über alles)",
+            "priority": 9,
+            "description": "'",
+            "color_hex": "#3F9B7A",
+            "secondary_color_hex": "#b2d7c9",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<div style=\"max-height: 200px; overflow-y: auto;\"><p>Jerry Brown is the closest thing you’ll get to a true politician as your running mate. He was famously governor of California for 8 years, elected during the Watergate era, and has made numerous bids for the presidency, including this most recent Democratic Primary, which he dropped out of. He’s a hippie at heart, and changes his positions just about every day, but one thing has remained constant, he’s an outsider. He supports a balanced budget, then supports cutting taxes, then he’ll be spouting some shit about “buddhist economics”. He’ll be anti immigrant, then pro immigrant. He’ll be anti war, then pro war. You never know what to expect with Jerry Brown, but you hope you’ll be able to get him on a good day, where he can attract many of the disaffected leftists who feel Clinton is too moderate and friendly with the Republicans. On a bad day, he’ll compliment Adolf Hitler and be proud of it. Brown is about as loose as you can get, but if he can focus, he might just have the strongest record out of anyone interested.</p></div>",
+            "candidate_score": 0.0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 161,
+        "fields": {
+            "first_name": "Steve",
+            "last_name": "Jobs",
+            "election": 15,
+            "party": "Whatever Is Best For Business",
+            "state": "California",
+            "priority": 10,
+            "description": "'",
+            "color_hex": "#3F9B7A",
+            "secondary_color_hex": "#b2d7c9",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<div style=\"max-height: 200px; overflow-y: auto;\"><p>Ross, what are you thinking? Steve Jobs? The Apple guy? The guy who has anger issues at people who disagree with him? I mean, he’s just like you I suppose… Huh? Oh, uh—nothing sir. Ross, come on, Jobs isn’t even a successful businessman, he got fired from a company he founded for Chrissake! And now he’s doing something else over at that new business of his that you invested in. He seems to be generally progressive, going to that communist school in Oregon, but he seems to also have some libertarian positions on the economy. I don’t know what the hell you think will happen, but I know you guys are friends and respect each other a lot. You don’t want him to just sit on his ass moping about losing Apple seven years ago. And, I guess, that new “internet” thing, if that takes off, he’d be great to have around to help us develop it nationwide. I fear the battles the two of you will have in office, but, what the hell, let’s give it a try anyway, you won’t listen to me no matter what I tell you.</p></div>",
+            "candidate_score": 0.0
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 162,
+        "fields": {
+            "first_name": "No",
+            "last_name": "Running Mate",
+            "election": 15,
+            "party": "None",
+            "state": "N/A",
+            "priority": 99,
+            "description": "'",
+            "color_hex": "#3F9B7A",
+            "secondary_color_hex": "#b2d7c9",
+            "is_active": 0,
+            "image_url": "'",
+            "electoral_victory_message": "'",
+            "electoral_loss_message": "'",
+            "no_electoral_majority_message": "'",
+            "description_as_running_mate": "<p>The presidential campaign—and its vice-presidential nominee—come later.</p>",
+            "candidate_score": 0.0
+        }
+    }
+]
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 98,
+        "fields": {
+            "candidate": 154,
+            "running_mate": 162
+        }
+    }
+]
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 15,
+        "candidates": [
+            154,
+            155,
+            152,
+            153
+        ]
+    }
+]
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 15,
+        "candidates": [
+            153,
+            152,
+            154,
+            155
+        ]
+    }
+]
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 15,
+        "year": 1992,
+        "is_premium": 0,
+        "display_year": "1992: The White Whale"
+    }
+]
+
+
+campaignTrail_temp.credits = "Created and Written by Noise<br><br>Developed by Noise, Bigglesuede, and StrawberryMaster<br><br>Banner by E"
+
+// necessary so that the right election files are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "15") {
+            campaignTrail_temp.code2_id = "1992 - The White Whale";
+        }
+    }
+}, 100);
+
+HistHexcolour = ["#3F579B", "#9b4c3f", "#3F9B7A", "#9b7a3f"]
+HistName = [" Bill Clinton", " George Bush", " Ross Perot", " Andre Marrou/Others"]
+HistEV = [370, 168, 0, 0]
+HistPV = ["44,909,889", "39,104,550", "19,743,821", "665,663"]
+HistPVP = ["43.0%", "37.5%", "18.9%", "0.6%"]
+
+// white whale visual
+
+campaignTrail_temp.election_json[0].fields.display_year = "1992: The White Whale"
+
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#314A4B",
+    "header_text_color": "#F5F2E8",
+    "description_text_color": "#1D2826",
+    "description_background_color": "#E8E6DC",
+    "main_color": "#B7C3BB",
+    "secondary_color": "#70847D",
+    "ui_text_color": "#1D2826"
+}
+
+campaignTrail_temp.achievements = {
+    "1,000 Hours": {
+        "image": "https://i.imgur.com/m1t5TJR.png",
+        "description": "As Jack Gargan, fail to get Ross Perot on board",
+        "cannotBeCheated": true
+    },
+    "Government Flu": {
+        "image": "https://i.imgur.com/NitkuSP.png",
+        "description": "As Jack Gargan, get Ross Perot to run for president",
+        "cannotBeCheated": true
+    },
+    "Trust Your Mechanic": {
+        "image": "https://i.imgur.com/XgSOsfr.jpeg",
+        "description": "As Ross Perot, do everything your advisors tell you to do",
+        "cannotBeCheated": true
+    },
+    "When Ya Get Drafted": {
+        "image": "https://i.imgur.com/yLjLV7v.png",
+        "description": "As Ross Perot, win despite being a Vietnam conspiracy theorist",
+        "cannotBeCheated": true
+    },
+    "Bedtime For Democracy": {
+        "image": "https://i.imgur.com/7aYqTUY.png",
+        "description": "Lose to George Bush",
+        "cannotBeCheated": true
+    },
+    "Orgasm Addict": {
+        "image": "https://i.imgur.com/6ATknKZ.png",
+        "description": "Lose to Bill Clinton",
+        "cannotBeCheated": true
+    },
+    "Rage Against The Machine": {
+        "image": "https://i.imgur.com/xUSVjvp.png",
+        "description": "Deadlock the election",
+        "cannotBeCheated": true
+    },
+    "Chump": {
+        "image": "https://i.imgur.com/QhNtQ9C.png",
+        "description": "Drop out of the race",
+        "cannotBeCheated": true
+    },
+    "Having A Blast": {
+        "image": "https://i.imgur.com/j5S0qnZ.png",
+        "description": "Stay in the race",
+        "cannotBeCheated": true
+    },
+    "Banned In D.C": {
+        "image": "https://i.imgur.com/cTf4uqE.png",
+        "description": "Get denied by the media industrial complex",
+        "cannotBeCheated": true
+    },
+    "One For The Razorbacks": {
+        "image": "https://i.imgur.com/n0hcMCU.png",
+        "description": "Do better than Bill Clinton electorally",
+        "cannotBeCheated": true
+    },
+    "Let’s Lynch The Landlord": {
+        "image": "https://i.imgur.com/GXVdg1l.png",
+        "description": "Do better than George Bush electorally",
+        "cannotBeCheated": true
+    },
+    "2000 Light Years Away": {
+        "image": "https://i.imgur.com/cti1CHx.png",
+        "description": "Beat the carpetbagger in his “home” state",
+        "cannotBeCheated": true
+    },
+    "Sailin’ On": {
+        "image": "https://i.imgur.com/S0ctfVv.png",
+        "description": "Catch it",
+        "cannotBeCheated": true
+    },
+    "In God We Trust, Inc.": {
+        "image": "https://i.imgur.com/bkkHmRA.png",
+        "description": "Win with Lee Iacocca as your running mate ",
+        "cannotBeCheated": true
+    },
+    "Plastic Surgery Disasters": {
+        "image": "https://i.imgur.com/ObcH128.jpeg",
+        "description": "Win with a shapeshifting nazbol as your running mate.",
+        "cannotBeCheated": true
+    },
+    "Android": {
+        "image": "https://i.imgur.com/OR1wTJT.png",
+        "description": "Win the election with an old business partner",
+        "cannotBeCheated": true
+    },
+    "Words I Might Have Ate": {
+        "image": "https://i.imgur.com/XSkOMaS.png",
+        "description": "Deadlock with an oratorical loose cannon",
+        "cannotBeCheated": true
+    },
+    "The One I Want": {
+        "image": "https://i.imgur.com/uBamhyh.png",
+        "description": "Deadlock and come in second with the #2 you like the best",
+        "cannotBeCheated": true
+    },
+    "The One I Really Want": {
+        "image": "https://i.imgur.com/p6fCNyt.png",
+        "description": "Win the election with the #2 you like the best",
+        "cannotBeCheated": true
+    },
+    "About A Girl": {
+        "image": "https://i.imgur.com/jmEkOMr.png",
+        "description": "Win With Reagan’s Female Counterpart as your running mate",
+        "cannotBeCheated": true
+    },
+    "Lounge Act": {
+        "image": "https://i.imgur.com/PiiPEtp.png",
+        "description": "Get over 20% of the popular vote while never campaigning or physically debating",
+        "cannotBeCheated": true
+    },
+    "Kerplunk": {
+        "image": "https://i.imgur.com/cJAqqdF.png",
+        "description": "As Ross Perot, get less than 5% of the popular vote",
+        "cannotBeCheated": true
+    },
+    "Never Mind The Bollocks": {
+        "image": "https://i.imgur.com/bR8hakK.png",
+        "description": "As Ross Perot, win while going to the NAACP rally",
+        "cannotBeCheated": true
+    },
+    "Scentless Apprentice": {
+        "image": "https://i.imgur.com/KmK1wpd.png",
+        "description": "Deadlock with dead weight as your running mate",
+        "cannotBeCheated": true
+    },
+    "Basket Case": {
+        "image": "https://i.imgur.com/xc2sQB8.png",
+        "description": "Succumb to your mind, and still deadlock the election",
+        "cannotBeCheated": true
+    }
+}
+
+//#startcode
+// gargan has no running mate
+if (!window.whiteWhaleOpeningVpBypassInstalled) {
+    window.whiteWhaleOpeningVpBypassInstalled = true
+    window.whiteWhaleBaseVpSelect = vpSelect
+
+    vpSelect = event => {
+        window.whiteWhaleBaseVpSelect(event)
+
+        const isOpeningSelection = !Array.isArray(campaignTrail_temp.player_answers) || campaignTrail_temp.player_answers.length === 0
+
+        if (Number(campaignTrail_temp.candidate_id) === 154 && isOpeningSelection) {
+            const hiddenRunningMate = document.getElementById("running_mate_id")
+            const continueButton = document.getElementById("running_mate_id_button")
+
+            if (hiddenRunningMate && continueButton) {
+                hiddenRunningMate.value = "162"
+                continueButton.click()
+            }
+        }
+    }
+}
+
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#314A4B"
+
+document.getElementById("header").src = "https://i.imgur.com/LnvCl07.png"
+
+document.body.background = "https://i.imgur.com/ipp3pqB.png"
+
+nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#E8E6DC"
+
+nct_stuff.themes[nct_stuff.selectedTheme].text_col = "#1D2826"
+
+document.getElementsByClassName("game_header")[0].style.backgroundColor = "#314A4B"
+
+$("#game_window")[0].style.backgroundColor = "#E8E6DC"
+
+$("#game_window")[0].style.borderColor = "#70847D"
+
+$(".container")[0].style.backgroundColor = "#B7C3BB"
+
+campaignTrail_temp.hasFurtherReading = true
+
+RecReading=true
+e.collect_results=true
+
+document.title = "1992: The White Whale"
+
+quotes = [
+    '“How can the prisoner reach outside except by thrusting through the wall? To me, the white whale is that wall.”'
+]
+
+customquote = quotes[Math.floor(Math.random() * quotes.length)]
+
+corrr = `
+<h2>1992: The White Whale</h2>
+<font id="wittyquote" size="4" color="#FFFFFF"><em>${customquote}</em></font>
+`
+
+let whiteWhaleFontStyle = document.createElement("style")
+
+whiteWhaleFontStyle.id = "white-whale-font"
+
+whiteWhaleFontStyle.innerHTML = `
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700&display=swap');
+
+body, .container, .game_header, #game_window {
+    font-family: 'Roboto Slab', serif !important;
+}
+`
+
+document.head.appendChild(whiteWhaleFontStyle)
+
+let whiteWhaleStyle = document.createElement("style")
+
+whiteWhaleStyle.id = "white-whale-theme"
+
+whiteWhaleStyle.innerHTML = `
+.campaign_trail_start_emphasis {
+    background-color: #70847D;
+}
+
+.inner_window_w_desc {
+    background-color: #E8E6DC !important;
+}
+
+a:-webkit-any-link {
+    color: #314A4B;
+}
+
+/* TWW achievement images */
+img.achImage[src="https://i.imgur.com/m1t5TJR.png"],
+img.achImage[src="https://i.imgur.com/NitkuSP.png"],
+img.achImage[src="https://i.imgur.com/XgSOsfr.jpeg"],
+img.achImage[src="https://i.imgur.com/yLjLV7v.png"],
+img.achImage[src="https://i.imgur.com/7aYqTUY.png"],
+img.achImage[src="https://i.imgur.com/6ATknKZ.png"],
+img.achImage[src="https://i.imgur.com/xUSVjvp.png"],
+img.achImage[src="https://i.imgur.com/QhNtQ9C.png"],
+img.achImage[src="https://i.imgur.com/j5S0qnZ.png"],
+img.achImage[src="https://i.imgur.com/cTf4uqE.png"],
+img.achImage[src="https://i.imgur.com/n0hcMCU.png"],
+img.achImage[src="https://i.imgur.com/GXVdg1l.png"],
+img.achImage[src="https://i.imgur.com/cti1CHx.png"],
+img.achImage[src="https://i.imgur.com/S0ctfVv.png"],
+img.achImage[src="https://i.imgur.com/bkkHmRA.png"],
+img.achImage[src="https://i.imgur.com/ObcH128.jpeg"],
+img.achImage[src="https://i.imgur.com/OR1wTJT.png"],
+img.achImage[src="https://i.imgur.com/XSkOMaS.png"],
+img.achImage[src="https://i.imgur.com/uBamhyh.png"],
+img.achImage[src="https://i.imgur.com/p6fCNyt.png"],
+img.achImage[src="https://i.imgur.com/jmEkOMr.png"],
+img.achImage[src="https://i.imgur.com/PiiPEtp.png"],
+img.achImage[src="https://i.imgur.com/cJAqqdF.png"],
+img.achImage[src="https://i.imgur.com/bR8hakK.png"],
+img.achImage[src="https://i.imgur.com/KmK1wpd.png"],
+img.achImage[src="https://i.imgur.com/xc2sQB8.png"] {
+    width: 100px !important;
+    height: 100px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+`
+
+document.head.appendChild(whiteWhaleStyle)
+
+let style = document.createElement('style');
+style.type = 'text/css';
+style.id = 'dynamic-style';
+
+
+
+
+
+
+
+
+style.innerHTML = `
+  .campaign_trail_start_emphasis {
+    background-color: #E8E6DC;
+  }
+  #state_info h3 {
+    background-color: #B7C3BB;
+  }
+  #state_result h3 {
+    background-color: #B7C3BB;
+  }
+  #overall_result h3 {
+    background-color: #B7C3BB;
+  }
+  #map_footer {
+    padding-top: 3em;
+  }
+  .overlay_window h3 {
+    background-color: #B7C3BB;
+  }
+  .inner_window_question h3 {
+    background-color: #B7C3BB;
+  }
+  #overall_result_container {
+    background-color: #E8E6DC;
+  }
+  #overall_result_container table tr:first-child > td:nth-child(2),
+  #overall_result_container table tr:first-child > th:nth-child(2) {
+    font-weight: 700 !important;
+  }
+  #state_result_container {
+    background-color: #E8E6DC;
+  }
+ #campaign_sign {
+  background-color: #314a4b;
+  border-color: #090e0f;
+  }
+  #map_container {
+    background: #F8F8F8;
+    border-radius: 1px;
+    box-shadow:
+      inset 0 0 4px rgba(0, 0, 0, 0.08),
+      0 0 0 2px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+  }
+  .overlay_window {
+    height: auto;
+  }
+  #menu_container {
+    background-color: #E8E6DC !important;
+  }
+  a:-webkit-any-link {
+    color: #000000;
+  }
+  
+  
+  /* base styles */
+#game_window {
+    background: radial-gradient(circle at center, #E8E6DC 0%, #D9D5C7 85%, #C2BEB0 100%);
+    box-shadow: inset 0 0 6px rgba(29, 40, 38, 0.25), 0 2px 5px rgba(0,0,0,0.3);
+    border: 3px solid #70847D;
+    border-radius: 4px;
+}
+
+.inner_window_w_desc, .inner_window_front, .person_description_window {
+    background: linear-gradient(180deg, #E8E6DC 0%, #E0DDCF 100%);
+    border: 3px double #70847D;
+    box-shadow: inset 0 0 15px rgba(49, 74, 75, 0.08);
+}
+
+.container {
+    background-color: #B7C3BB;
+    border: 4px solid #314A4B;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+}
+
+.game_header {
+    background: linear-gradient(135deg, #1D2826 0%, #314A4B 50%, #243839 100%) !important;
+    border-bottom: 3px double #70847D !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* desc windows */
+.person_description_window, #election_description_window {
+    background: #F4F1E6;
+    border: 2px solid #70847D;
+    border-radius: 2px;
+    box-shadow: 
+        inset 0 0 10px rgba(49, 74, 75, 0.08),
+        0 4px 5px rgba(0, 0, 0, 0.12);
+    position: relative;
+    padding-top: 0.5em;
+}
+
+.person_summary, #election_summary {
+    font-size: 1.05em;
+    line-height: 1.55em;
+}
+
+.person_summary div[style*="max-height"] {
+    padding-right: 8px;
+}
+
+/* brackets and stuff */
+.person_description_window::before,
+.person_description_window::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: #314A4B;
+    border-style: solid;
+    pointer-events: none;
+}
+
+.person_description_window::before {
+    top: 6px;
+    left: 6px;
+    border-width: 2px 0 0 2px;
+}
+.person_description_window::after {
+    bottom: 6px;
+    right: 6px;
+    border-width: 0 2px 2px 0;
+}
+
+/* candidate */
+.person_image, #election_image {
+    border: 4px double #314A4B;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
+    border-radius: 2px;
+    background-color: #1D2826;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.person_image:hover, #election_image:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #E2DDD0;
+    border-left: 1px solid #B7C3BB;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #70847D;
+    border-radius: 2px;
+    border: 1px solid #314A4B;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #314A4B;
+}
+
+/* other stuff for the cand screen */
+#candidate_form h3 {
+    color: #314A4B;
+    margin: 0.4em 0 0.6em;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6);
+}
+
+#candidate_id {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #314A4B;
+    color: #F5F2E8;
+    font-weight: 700;
+    padding: 6px 36px 6px 16px;
+    border: 1px solid #1D2826;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 2px 6px rgba(0,0,0,0.15);
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23F5F2E8" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    transition: all 0.2s ease;
+}
+
+#candidate_id:hover, #candidate_id:focus {
+    background-color: #3D5C5D;
+    border-color: #70847D;
+    box-shadow: 0 0 8px rgba(49, 74, 75, 0.4);
+    outline: none;
+}
+
+#candidate_summary ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 0 12px 0 !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+#candidate_summary ul li {
+    background: rgba(49, 74, 75, 0.08);
+    border: 1px solid #70847D;
+    border-left: 3px solid #314A4B;
+    padding: 4px 10px;
+    border-radius: 2px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #1D2826;
+}
+
+#candidate_summary div[style*="max-height"] {
+    background: rgba(255, 255, 255, 0.5) !important;
+    border: 1px solid #B7C3BB !important;
+    border-left: 4px solid #314A4B !important;
+    padding: 6px 14px !important;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+}
+
+#candidate_summary div[style*="max-height"] b {
+    font-size: 1.15em;
+    color: #314A4B;
+}
+
+#candidate_summary div[style*="max-height"] i {
+    color: #70847D;
+    font-size: 1.05em;
+}
+
+#candidate_summary div[style*="max-height"] p {
+    margin-bottom: 0.8em;
+    color: #1D2826;
+}
+
+/* questions et al. */
+.inner_window_question h3 {
+    border: 1px solid #1D2826;
+    padding: 5px;
+}
+
+#question_form label {
+    display: inline-block;
+    width: 93%;
+    margin-bottom: 4px;
+    padding: 2.5px 5px;
+    border-left: 3px solid transparent;
+    border-radius: 2px;
+    box-sizing: border-box;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
+}
+
+#question_form label:hover {
+    background-color: rgba(49, 74, 75, 0.12) !important;
+    border-left-color: #314A4B !important;
+}
+
+#question_form input[type="radio"]:checked + label {
+    background-color: rgba(49, 74, 75, 0.22) !important;
+    border-left-color: #314A4B !important;
+    font-weight: 600 !important;
+}
+
+#candidate_pic, #running_mate_pic {
+    border: 3px double #314A4B;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    background-color: #1D2826;
+}
+
+.inner_window_sign_display {
+    background-color: #F4F1E6;
+    border: 2px solid #70847D;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* radio buttons */
+input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 15px !important;
+    height: 15px !important;
+    margin: 0 8px 0 0;
+    vertical-align: middle;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: inset 1px 1px 0px #000000;
+    cursor: pointer;
+    position: relative;
+    top: -1px;
+}
+
+/* input dots */
+input:checked::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #000000;
+}
+
+#question_form label {
+    display: inline-block;
+    width: 90%;
+    vertical-align: middle;
+}
+  
+  
+`;
+
+
+
+
+
+
+
+
+document.head.appendChild(style);
+
+// Soundtrack
+// This is a modified version of the music player
+// used in the mod 1992: Moonbeam.
+class Song {
+  constructor(title, artist, coverLink, audioLink) {
+    this.title = title;
+    this.artist = artist;
+    this.coverLink = coverLink;
+    this.audioLink = audioLink;
+  }
+  getTitle() { return this.title; }
+  getArtist() { return this.artist; }
+  getCoverLink() { return this.coverLink; }
+  getAudioLink() { return this.audioLink; }
+}
+
+class Playlist {
+  constructor(songs = []) {
+    this.songs = songs;
+    this.currentSongIndex = 0;
+  }
+  addSong(song) { this.songs.push(song); }
+
+  getCurrentSong() {
+    if (this.songs.length === 0) {
+      return new Song("No Songs", "Add songs to a playlist", "https://itsastronomical.com/assets/music/buttons.png", "");
+    }
+    return this.songs[this.currentSongIndex];
+  }
+
+  playNext() {
+    if (this.songs.length === 0) return;
+    this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length;
+  }
+
+  playPrevious() {
+    if (this.songs.length === 0) return;
+    this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+  }
+}
+
+window.Playlist = Playlist;
+window.Song = Song;
+
+let activePlaylist = new Playlist();
+let audioInstance = null;
+let currentVolume = 5;
+
+function changePlaylist(newPlaylist) {
+  activePlaylist = newPlaylist;
+  activePlaylist.currentSongIndex = 0;
+
+  updateUI(activePlaylist);
+
+  const audio = getAudioElement();
+  const song = activePlaylist.getCurrentSong();
+
+  if (song && song.getAudioLink()) {
+    audio.src = song.getAudioLink();
+    audio.play().catch(e => console.log("Autoplay blocked or waiting for interaction", e));
+    updatePlayPauseIcon(true);
+  }
+}
+window.changePlaylist = changePlaylist;
+
+function updateUI(playlist) {
+  const currentSong = playlist.getCurrentSong();
+  const player = document.getElementById("player") || document.querySelector(".player");
+
+  if (!player || !currentSong) return;
+
+  const cover = player.querySelector(".player__album-art");
+  const title = player.querySelector(".player__song-title");
+  const artist = player.querySelector(".player__song-artist");
+
+  if (cover) cover.src = currentSong.getCoverLink();
+  if (title) title.textContent = currentSong.getTitle();
+  if (artist) artist.textContent = currentSong.getArtist();
+}
+window.updateUI = updateUI;
+
+function getAudioElement() {
+  if (!audioInstance) {
+    audioInstance = document.createElement("audio");
+    audioInstance.id = "audio";
+    document.body.appendChild(audioInstance);
+  }
+  return audioInstance;
+}
+
+function updatePlayPauseIcon(isPlaying) {
+  const btn = document.querySelector(".player__btn--playpause");
+  if (btn) {
+    if (isPlaying) {
+      btn.classList.add("is-playing");
+      btn.title = "Pause";
+    } else {
+      btn.classList.remove("is-playing");
+      btn.title = "Play";
+    }
+  }
+}
+
+function formatTime(seconds) {
+  if (isNaN(seconds)) return "00:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+function setupMusicPlayer() {
+  const gameWindow = document.getElementById("game_window");
+  if (!gameWindow) {
+    console.warn("game_window element not found. Player will not be attached.");
+    return;
+  }
+
+  if (document.getElementById("player") || document.querySelector(".player")) return;
+
+  const defaultSongs = [
+    ["We've Got a Bigger Problem Now", "Dead Kennedys", "https://i.imgur.com/0aPrwqA.jpeg", "https://audio.jukehost.co.uk/01a00df8-dfa8-711d-a6c7-d4679c386fec"],
+    ["Big Cheese", "Nirvana", "https://i.imgur.com/nTfinPI.jpeg", "https://audio.jukehost.co.uk/01a00dfa-250a-7163-951c-cc9276a6ac73"],
+    ["Paper Lanterns", "Green Day", "https://i.imgur.com/AMmtTUR.jpeg", "https://audio.jukehost.co.uk/01a00dfb-ccfc-702b-bb07-1ce3b0f05f8b"],
+    ["Knowledge", "Operation Ivy", "https://i.imgur.com/7EC3NzF.jpeg", "https://audio.jukehost.co.uk/01a00dfe-050f-72b3-83e7-464bfb1540c0"],
+    ["Hired Gun", "Bad Brains", "https://i.imgur.com/p4HQJ7q.jpeg", "https://audio.jukehost.co.uk/01a00dff-61a4-7098-a9f1-e260a5116271"],
+    ["Territorial Pissings", "Nirvana", "https://i.imgur.com/mppfPxJ.jpeg", "https://audio.jukehost.co.uk/01a00e06-58e6-7064-9d63-9dd36fb69b49"]
+  ];
+
+  if (activePlaylist.songs.length === 0) {
+    defaultSongs.forEach(data => activePlaylist.addSong(new Song(...data)));
+  }
+
+  const savedLayout = localStorage.getItem('walkman_layout');
+  const isHorizontal = savedLayout === 'horizontal';
+  const playerClass = isHorizontal ? 'player player--horizontal' : 'player';
+  const lockClass = isHorizontal ? 'player__lock-switch active' : 'player__lock-switch';
+
+  const style = document.createElement("style");
+  style.textContent = `
+
+            :root {
+                --player-bg: #212121;
+                --player-border: #1a1a1a;
+                --lcd-bg: #20372f;
+                --lcd-text: #a1d8a3;
+                --text-primary: #d1d1d1;
+                --text-secondary: #888;
+                --accent-color: #e0e0e0;
+                --button-bg: #4d4d4d;
+                --button-border: #353535;
+                --icon-color: #d1d1d1;
+            }
+            .player {
+                display: flex;
+                background: var(--player-bg);
+                border: 2px solid var(--player-border);
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.1);
+                font-family: 'Consolas', IBM Courier, Arial, sans-serif;
+                width: 100%;
+                max-width: 360px;
+                margin: 15px auto;
+                color: var(--text-primary);
+                overflow: hidden;
+                transition: max-width 0.3s ease, height 0.3s ease;
+            }
+            .player__body {
+                flex-grow: 1; padding: 8px;
+                display: flex; flex-direction: column; gap: 8px;
+            }
+            .player__header {
+                display: flex; justify-content: space-between; align-items: center;
+                font-size: 9px; color: var(--text-secondary);
+                text-transform: uppercase; letter-spacing: 0.5px;
+            }
+            .player__brand-sony { font-weight: bold; font-size: 14px; color: var(--accent-color); }
+            .player__features { display: flex; gap: 8px; }
+			.player__features span {
+				border: 1px solid #3b3d44;
+				border-radius: 2px;
+				padding: 1px 4px;
+				background: rgba(0, 0, 0, 0.2);
+			}
+
+            .player__window {
+                background: #111; border: 1px solid #000;
+                border-radius: 4px; padding: 10px;
+                box-shadow: inset 0 0 10px rgba(0,0,0,0.7);
+                display: flex; align-items: center; justify-content: center;
+            }
+            .player__window-inner { background: #333; border: 1px solid #444; width: 100%; }
+            .player__album-art { display: block; width: 100%; height: auto; object-fit: cover; max-height: 260px; }
+
+            .player__lcd-display {
+                background: var(--lcd-bg); border: 2px solid #1a2924;
+                border-radius: 4px; padding: 6px 10px;
+                box-shadow: inset 0 0 5px rgba(0,0,0,0.5); color: var(--lcd-text);
+            }
+            .player__song-info {
+                text-align: center; padding-bottom: 4px;
+                border-bottom: 1px solid #2a4b3e; margin-bottom: 4px;
+            }
+            .player__song-title { font-size: 14px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .player__song-artist { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .player__progress-container { display: flex; align-items: baseline; gap: 6px; width: 100%; }
+            .player__time-current, .player__time-duration { font-size: 11px; min-width: 35px; text-align: center; }
+
+            .progress-bar-stack { position: relative; width: 100%; height: 8px; display: flex; align-items: center; }
+            .progress-bar--display, .progress-bar--interactive { position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; padding: 0; }
+            .progress-bar--display { -webkit-appearance: none; appearance: none; }
+            .progress-bar--display::-webkit-progress-bar { background-color: #1a2924; border-radius: 4px; }
+            .progress-bar--display::-webkit-progress-value { background-color: var(--lcd-text); border-radius: 4px; }
+            .progress-bar--interactive { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; z-index: 2; }
+            .progress-bar--interactive::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0; height: 8px; }
+			.progress-bar--interactive::-moz-range-thumb {
+				width: 0;
+				height: 0;
+				border: 0;
+				background: transparent;
+			}
+			.progress-bar--interactive::-moz-range-track {
+				background: transparent;
+				border: none;
+			}
+			.progress-bar--display::-moz-progress-bar {
+				background-color: #195905;
+			}
+
+            .player__controls-area { margin-top: 3px; text-align: center; }
+            .player__brand-walkman {
+                font-size: 12px; font-style: italic; font-weight: bold; color: var(--text-secondary);
+                letter-spacing: 1.5px; margin-bottom: 8px;
+            }
+            .player__controls { display: flex; align-items: center; justify-content: center; gap: 12px; }
+            .player__btn {
+                border: none; padding: 0;
+                width: 32px; height: 32px;
+                cursor: pointer; background: var(--button-bg);
+                border-radius: 50%; border: 2px solid var(--button-border);
+                box-shadow: 0 2px 2px #111, inset 0 -1px 1px rgba(255,255,255,0.1);
+                transition: all 0.1s ease-out;
+                display: flex; align-items: center; justify-content: center;
+            }
+            .player__btn:hover { background-color: #606060; }
+            .player__btn:active { transform: translateY(1px); box-shadow: 0 1px 1px #111, inset 0 1px 2px rgba(0,0,0,0.5); }
+            .player__btn svg { width: 60%; height: 60%; fill: var(--icon-color); transition: fill 0.2s; }
+            .player__btn:hover svg { fill: #fff; }
+            .player__btn--playpause { width: 38px; height: 38px; }
+            .player__btn--playpause .icon-pause { display: none; }
+            .player__btn--playpause.is-playing .icon-play { display: none; }
+            .player__btn--playpause.is-playing .icon-pause { display: block; }
+
+            .player__side-panel {
+                background: #1c1c1c; border-left: 2px solid #111;
+                display: flex; flex-direction: column; align-items: center;
+                justify-content: space-between;
+                padding: 15px 6px;
+                width: 50px; box-sizing: border-box;
+            }
+            .player__volume-group {
+                display: flex; flex-direction: column;
+                align-items: center; gap: 8px;
+                flex-grow: 1;
+            }
+            .player__side-label {
+                font-size: 9px; color: var(--text-secondary);
+                transform: rotate(90deg);
+                letter-spacing: 0.5px;
+                margin: 0.5em 0 1.5em 0;
+            }
+            .player__volume-area {
+                width: 100%; height: 170px;
+                display: flex; align-items: center; justify-content: center; position: relative;
+            }
+
+            input[type=range].player__volume-slider {
+                -webkit-appearance: none; appearance: none;
+                width: 150px; height: 20px;
+                background: transparent; transform: rotate(-90deg); cursor: pointer;
+            }
+            input[type=range].player__volume-slider::-webkit-slider-runnable-track {
+                width: 100%; height: 6px; background: #050505;
+                border: 1px solid #333; border-radius: 3px;
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.9), 0 1px 0 rgba(255,255,255,0.05);
+            }
+            input[type=range].player__volume-slider::-webkit-slider-thumb {
+                -webkit-appearance: none; height: 16px; width: 24px; margin-top: -6px;
+                background: repeating-linear-gradient(90deg, #4a4a4a, #4a4a4a 2px, #2a2a2a 3px, #2a2a2a 4px);
+                border: 1px solid #111; border-radius: 2px; box-shadow: 0 2px 4px #000;
+            }
+            input[type=range].player__volume-slider::-moz-range-track {
+                width: 100%; height: 6px; background: #050505; border: 1px solid #333; border-radius: 3px;
+            }
+            input[type=range].player__volume-slider::-moz-range-thumb {
+                height: 16px; width: 24px; border: 1px solid #111; border-radius: 2px;
+                background: repeating-linear-gradient(90deg, #4a4a4a, #4a4a4a 2px, #2a2a2a 3px, #2a2a2a 4px);
+            }
+
+            .player__lock { text-align: center; margin-bottom: 5px; cursor: pointer; }
+            .player__lock-label { font-size: 9px; color: var(--text-secondary); }
+
+            .player__lock-switch {
+                width: 22px; height: 10px; background: #000;
+                border-radius: 8px; border: 1px solid #333;
+                margin: 3px auto 0; position: relative;
+                transition: background 0.2s;
+            }
+            .player__lock-switch::after {
+                content: ''; position: absolute;
+                width: 10px; height: 10px; background: #d32f2f;
+                border-radius: 50%; top: -1px; left: -1px;
+                border: 1px solid #555; box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+                transition: left 0.2s, background 0.2s;
+            }
+
+            .player__lock-switch.active::after {
+                left: 11px;
+                background: #4caf50;
+            }
+
+            .player.player--horizontal {
+                max-width: 600px;
+            }
+
+            .player.player--horizontal .player__body {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto 1fr;
+                gap: 12px;
+                grid-template-areas:
+                    "window header"
+                    "window lcd"
+                    "window controls";
+                align-items: center;
+                padding-right: 15px;
+            }
+
+            .player.player--horizontal .player__window {
+                grid-area: window;
+                height: 100%;
+                margin: 0;
+            }
+
+            .player.player--horizontal .player__header {
+                grid-area: header;
+                align-self: end;
+                border-bottom: 1px solid #333;
+                padding-bottom: 5px;
+            }
+
+            .player.player--horizontal .player__lcd-display {
+                grid-area: lcd;
+            }
+
+            .player.player--horizontal .player__controls-area {
+                grid-area: controls;
+                align-self: start;
+            }
+
+            .player.player--horizontal .player__album-art {
+                max-height: 100%;
+                aspect-ratio: 1/1;
+            }
+
+            /* White Whale styles all inputs as radio buttons globally.
+               Reset only the Walkman range controls so their native player dimensions survive. */
+            .player input[type="range"] {
+                border: 0 !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                margin: 0 !important;
+                top: auto !important;
+            }
+
+            .player .progress-bar--interactive {
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            .player input[type="range"].player__volume-slider {
+                width: 150px !important;
+                height: 20px !important;
+            }
+
+  `;
+  document.head.appendChild(style);
+
+  const playerContainer = document.createElement("div");
+  playerContainer.id = "player";
+  playerContainer.className = playerClass;
+  playerContainer.innerHTML = `
+    <div class="player__body">
+      <div class="player__header">
+        <span class="player__brand-sony">SONY</span>
+        <div class="player__features">
+          <span>DOLBY B NR</span>
+          <span>EX DBB</span>
+        </div>
+      </div>
+      <div class="player__window">
+        <div class="player__window-inner">
+          <img src="" alt="Album Cover" class="player__album-art">
+        </div>
+      </div>
+      <div class="player__lcd-display">
+        <div class="player__song-info">
+          <div class="player__song-title"></div>
+          <div class="player__song-artist"></div>
+        </div>
+        <div class="player__progress-container">
+          <span class="player__time-current">00:00</span>
+          <div class="progress-bar-stack">
+            <progress class="progress-bar--display" value="0" max="100"></progress>
+            <input type="range" class="progress-bar--interactive" value="0" min="0" max="100" step="0.1">
+          </div>
+          <span class="player__time-duration">00:00</span>
+        </div>
+      </div>
+      <div class="player__controls-area">
+        <div class="player__brand-walkman">WALKMAN</div>
+        <div class="player__controls">
+          <button class="player__btn player__btn--prev" id="prevButton" title="Previous">
+            <svg class="icon-prev" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
+          </button>
+          <button class="player__btn player__btn--playpause" id="playPauseButton" title="Play/Pause">
+            <svg class="icon-play" viewBox="0 0 24 24"><path d="M7.5 5v15l11-7z"></path></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+          </button>
+          <button class="player__btn player__btn--next" id="nextButton" title="Next">
+            <svg class="icon-next" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path></svg>
+          </button>
+          <button class="player__btn player__btn--stop" id="stopButton" title="Stop">
+            <svg class="icon-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="player__side-panel">
+      <div class="player__volume-group">
+        <span class="player__side-label">VOLUME</span>
+        <div class="player__volume-area">
+          <input type="range" class="player__volume-slider" id="volumeSlider" min="0" max="10" step="1" value="${currentVolume}">
+        </div>
+      </div>
+      <div class="player__lock">
+        <span class="player__lock-label">HOLD</span>
+        <div class="${lockClass}"></div>
+      </div>
+    </div>
+  `;
+
+  gameWindow.insertAdjacentElement("afterend", playerContainer);
+
+  const audio = getAudioElement();
+  const startSong = activePlaylist.getCurrentSong();
+  if (startSong && startSong.getAudioLink()) audio.src = startSong.getAudioLink();
+  audio.volume = currentVolume / 10;
+
+  const playPauseBtn = playerContainer.querySelector(".player__btn--playpause");
+  const prevBtn = playerContainer.querySelector(".player__btn--prev");
+  const nextBtn = playerContainer.querySelector(".player__btn--next");
+  const stopBtn = playerContainer.querySelector(".player__btn--stop");
+  const volumeSlider = playerContainer.querySelector(".player__volume-slider");
+  const progressBarDisplay = playerContainer.querySelector(".progress-bar--display");
+  const progressBarInteractive = playerContainer.querySelector(".progress-bar--interactive");
+  const currentTimeDisplay = playerContainer.querySelector(".player__time-current");
+  const durationTimeDisplay = playerContainer.querySelector(".player__time-duration");
+  const lockSwitchArea = playerContainer.querySelector(".player__lock");
+  const lockSwitch = playerContainer.querySelector(".player__lock-switch");
+
+  playPauseBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      updatePlayPauseIcon(true);
+    } else {
+      audio.pause();
+      updatePlayPauseIcon(false);
+    }
+  });
+
+  const playSongAtIndex = () => {
+    updateUI(activePlaylist);
+    const song = activePlaylist.getCurrentSong();
+    if (song && song.getAudioLink()) {
+      audio.src = song.getAudioLink();
+      audio.play().catch(e => console.log("Autoplay blocked or waiting for interaction", e));
+      updatePlayPauseIcon(true);
+    }
+  };
+
+  nextBtn.addEventListener("click", () => {
+    activePlaylist.playNext();
+    playSongAtIndex();
+  });
+
+  prevBtn.addEventListener("click", () => {
+    activePlaylist.playPrevious();
+    playSongAtIndex();
+  });
+
+  stopBtn.addEventListener("click", () => {
+    audio.pause();
+    audio.currentTime = 0;
+    updatePlayPauseIcon(false);
+  });
+
+  lockSwitchArea.addEventListener("click", () => {
+    const isNowHorizontal = playerContainer.classList.toggle("player--horizontal");
+    lockSwitch.classList.toggle("active");
+    localStorage.setItem("walkman_layout", isNowHorizontal ? "horizontal" : "vertical");
+  });
+
+  const updateProgress = () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) {
+      const progressPercent = (audio.currentTime / audio.duration) * 100;
+      const safePercent = isNaN(progressPercent) ? 0 : progressPercent;
+      progressBarDisplay.value = safePercent;
+      progressBarInteractive.value = safePercent;
+      currentTimeDisplay.textContent = formatTime(audio.currentTime);
+      durationTimeDisplay.textContent = formatTime(audio.duration);
+    }
+  };
+
+  audio.addEventListener("timeupdate", updateProgress);
+  audio.addEventListener("loadedmetadata", updateProgress);
+
+  audio.addEventListener("ended", () => {
+    activePlaylist.playNext();
+    playSongAtIndex();
+  });
+
+  progressBarInteractive.addEventListener("input", (event) => {
+    if (Number.isFinite(audio.duration)) {
+      audio.currentTime = (event.target.value / 100) * audio.duration;
+    }
+  });
+
+  volumeSlider.addEventListener("input", (event) => {
+    currentVolume = parseInt(event.target.value, 10);
+    audio.volume = currentVolume / 10;
+  });
+
+  updateUI(activePlaylist);
+  audio.play()
+    .then(() => updatePlayPauseIcon(true))
+    .catch(() => updatePlayPauseIcon(false));
+}
+
+window.WalkmanPlayer = {
+  init: function(targetSelector, initialPlaylist) {
+    if (initialPlaylist) activePlaylist = initialPlaylist;
+    setupMusicPlayer();
+  },
+  loadPlaylist: function(newPlaylist) {
+    changePlaylist(newPlaylist);
+  }
+};
+
+setupMusicPlayer();
+
+
+// pregame options
+campaignTrail_temp.whiteWhaleSwapColors = false
+campaignTrail_temp.whiteWhaleNormalFont = false
+campaignTrail_temp.whiteWhaleAlternatePerotColor = false
+campaignTrail_temp.whiteWhaleAlternatePerotColor2 = false
+
+function whiteWhaleHasAlternatePerotColor() {
+    try {
+        if (localStorage.getItem("whiteWhaleAlternatePerotUnlocked") === "true") {
+            return true
+        }
+
+        var unlockedAchievements = JSON.parse(localStorage.getItem("unlockedAch") || "{}")
+        if (unlockedAchievements["Rage Against The Machine"]) {
+            localStorage.setItem("whiteWhaleAlternatePerotUnlocked", "true")
+            return true
+        }
+    } catch (e) {}
+
+    return false
+}
+
+function whiteWhaleUnlockedAchievementCount() {
+    try {
+        var unlockedAchievements = JSON.parse(localStorage.getItem("unlockedAch") || "{}")
+        var achievementNames = Object.keys(campaignTrail_temp.achievements || {})
+        var unlockedCount = 0
+
+        for (var i = 0; i < achievementNames.length; i++) {
+            if (unlockedAchievements[achievementNames[i]]) unlockedCount++
+        }
+
+        return unlockedCount
+    } catch (e) {}
+
+    return 0
+}
+
+function whiteWhaleHasAlternatePerotColor2() {
+    try {
+        if (localStorage.getItem("whiteWhaleAlternatePerotColor2Unlocked") === "true") {
+            return true
+        }
+
+        if (whiteWhaleUnlockedAchievementCount() >= 25) {
+            localStorage.setItem("whiteWhaleAlternatePerotColor2Unlocked", "true")
+            return true
+        }
+    } catch (e) {}
+
+    return false
+}
+
+campaignTrail_temp.whiteWhaleAlternatePerotUnlocked = whiteWhaleHasAlternatePerotColor()
+campaignTrail_temp.whiteWhaleAlternatePerotColor2Unlocked = whiteWhaleHasAlternatePerotColor2()
+
+window.whiteWhaleUnlockAlternatePerotColor = function() {
+    var alreadyUnlocked = false
+
+    try {
+        alreadyUnlocked = localStorage.getItem("whiteWhaleAlternatePerotUnlocked") === "true"
+    } catch (e) {}
+
+    if (alreadyUnlocked) return
+
+    try {
+        localStorage.setItem("whiteWhaleAlternatePerotUnlocked", "true")
+    } catch (e) {}
+
+    campaignTrail_temp.whiteWhaleAlternatePerotUnlocked = true
+    alert("ALTERNATE OPTION UNLOCKED: Alternate Perot color")
+}
+
+window.whiteWhaleCheckAlternatePerotColor2Unlock = function() {
+    var alreadyUnlocked = false
+
+    try {
+        alreadyUnlocked = localStorage.getItem("whiteWhaleAlternatePerotColor2Unlocked") === "true"
+    } catch (e) {}
+
+    if (alreadyUnlocked) {
+        campaignTrail_temp.whiteWhaleAlternatePerotColor2Unlocked = true
+        return true
+    }
+
+    if (whiteWhaleUnlockedAchievementCount() < 25) return false
+
+    try {
+        localStorage.setItem("whiteWhaleAlternatePerotColor2Unlocked", "true")
+    } catch (e) {}
+
+    campaignTrail_temp.whiteWhaleAlternatePerotColor2Unlocked = true
+    alert("ALTERNATE OPTION UNLOCKED: Alternate Perot color 2")
+    return true
+}
+
+function updateWhiteWhalePerotColorOptionAvailability() {
+    var perotCheckbox = document.getElementById("whiteWhalePerotColour")
+    var perot2Checkbox = document.getElementById("whiteWhalePerotColour2")
+
+    if (perotCheckbox) {
+        perotCheckbox.disabled = campaignTrail_temp.whiteWhaleAlternatePerotColor2
+    }
+
+    if (perot2Checkbox) {
+        perot2Checkbox.disabled = campaignTrail_temp.whiteWhaleAlternatePerotColor
+    }
+}
+
+function updateWhiteWhaleColors() {
+    if (campaignTrail_temp.whiteWhaleSwapColors) {
+        campaignTrail_temp.candidate_json[0].fields.color_hex = '#3F579B'
+        campaignTrail_temp.candidate_json[0].fields.secondary_color_hex = '#b2bbd7'
+        campaignTrail_temp.candidate_json[1].fields.color_hex = '#9b4c3f'
+        campaignTrail_temp.candidate_json[1].fields.secondary_color_hex = '#d7b7b2'
+    } else {
+        campaignTrail_temp.candidate_json[0].fields.color_hex = '#9b4c3f'
+        campaignTrail_temp.candidate_json[0].fields.secondary_color_hex = '#d7b7b2'
+        campaignTrail_temp.candidate_json[1].fields.color_hex = '#3F579B'
+        campaignTrail_temp.candidate_json[1].fields.secondary_color_hex = '#b2bbd7'
+    }
+
+    if (campaignTrail_temp.whiteWhaleAlternatePerotColor2) {
+        campaignTrail_temp.candidate_json[2].fields.color_hex = '#D5652F'
+        campaignTrail_temp.candidate_json[2].fields.secondary_color_hex = '#D7BEB2'
+    } else if (campaignTrail_temp.whiteWhaleAlternatePerotColor) {
+        campaignTrail_temp.candidate_json[2].fields.color_hex = '#843F9B'
+        campaignTrail_temp.candidate_json[2].fields.secondary_color_hex = '#b2d7c9'
+    } else {
+        campaignTrail_temp.candidate_json[2].fields.color_hex = '#3F9B7A'
+        campaignTrail_temp.candidate_json[2].fields.secondary_color_hex = '#b2d7c9'
+    }
+
+    HistHexcolour = [
+        campaignTrail_temp.whiteWhaleSwapColors ? "#9b4c3f" : "#3F579B",
+        campaignTrail_temp.whiteWhaleSwapColors ? "#3F579B" : "#9b4c3f",
+        campaignTrail_temp.whiteWhaleAlternatePerotColor2 ? "#D5652F" : (campaignTrail_temp.whiteWhaleAlternatePerotColor ? "#843F9B" : "#3F9B7A"),
+        "#9b7a3f"
+    ]
+}
+
+function addWhiteWhaleOptions() {
+    var difficultyDiv = document.getElementById("difficulty_level");
+
+    if (difficultyDiv && !document.getElementById("whiteWhaleColour")) {
+        var colourForm = document.createElement("form");
+        colourForm.name = "white_whale_colour_selection";
+        var colourHeader = document.createElement("h3");
+        colourHeader.textContent = "Swap Bush/Clinton colors";
+        colourForm.appendChild(colourHeader);
+        var colourCheckbox = document.createElement("input");
+        colourCheckbox.type = "checkbox";
+        colourCheckbox.id = "whiteWhaleColour";
+        colourCheckbox.checked = campaignTrail_temp.whiteWhaleSwapColors;
+        colourForm.appendChild(colourCheckbox);
+        difficultyDiv.appendChild(colourForm);
+
+        colourCheckbox.addEventListener("change", function() {
+            campaignTrail_temp.whiteWhaleSwapColors = this.checked
+            updateWhiteWhaleColors()
+        });
+
+        var fontForm = document.createElement("form");
+        fontForm.name = "white_whale_font_selection";
+        var fontHeader = document.createElement("h3");
+        fontHeader.textContent = "Use Normal Font";
+        fontForm.appendChild(fontHeader);
+        var fontCheckbox = document.createElement("input");
+        fontCheckbox.type = "checkbox";
+        fontCheckbox.id = "whiteWhaleFont";
+        fontCheckbox.checked = campaignTrail_temp.whiteWhaleNormalFont;
+        fontForm.appendChild(fontCheckbox);
+        difficultyDiv.appendChild(fontForm);
+
+        fontCheckbox.addEventListener("change", function() {
+            campaignTrail_temp.whiteWhaleNormalFont = this.checked
+
+            var fontStyle = document.getElementById("white-whale-font")
+            if (fontStyle) {
+                fontStyle.media = this.checked ? "not all" : "all"
+            }
+        });
+
+        if (campaignTrail_temp.whiteWhaleAlternatePerotUnlocked) {
+            var perotForm = document.createElement("form");
+            perotForm.name = "white_whale_perot_colour_selection";
+            var perotHeader = document.createElement("h3");
+            perotHeader.textContent = "Alternate Perot color";
+            perotForm.appendChild(perotHeader);
+            var perotCheckbox = document.createElement("input");
+            perotCheckbox.type = "checkbox";
+            perotCheckbox.id = "whiteWhalePerotColour";
+            perotCheckbox.checked = campaignTrail_temp.whiteWhaleAlternatePerotColor;
+            perotForm.appendChild(perotCheckbox);
+            difficultyDiv.appendChild(perotForm);
+
+            perotCheckbox.addEventListener("change", function() {
+                campaignTrail_temp.whiteWhaleAlternatePerotColor = this.checked
+                updateWhiteWhalePerotColorOptionAvailability()
+                updateWhiteWhaleColors()
+            });
+        }
+
+        campaignTrail_temp.whiteWhaleAlternatePerotColor2Unlocked = whiteWhaleHasAlternatePerotColor2()
+
+        if (campaignTrail_temp.whiteWhaleAlternatePerotColor2Unlocked) {
+            var perot2Form = document.createElement("form");
+            perot2Form.name = "white_whale_perot_colour_2_selection";
+            var perot2Header = document.createElement("h3");
+            perot2Header.textContent = "Alternate Perot color 2";
+            perot2Form.appendChild(perot2Header);
+            var perot2Checkbox = document.createElement("input");
+            perot2Checkbox.type = "checkbox";
+            perot2Checkbox.id = "whiteWhalePerotColour2";
+            perot2Checkbox.checked = campaignTrail_temp.whiteWhaleAlternatePerotColor2;
+            perot2Form.appendChild(perot2Checkbox);
+            difficultyDiv.appendChild(perot2Form);
+
+            perot2Checkbox.addEventListener("change", function() {
+                campaignTrail_temp.whiteWhaleAlternatePerotColor2 = this.checked
+                updateWhiteWhalePerotColorOptionAvailability()
+                updateWhiteWhaleColors()
+            });
+        }
+
+        updateWhiteWhalePerotColorOptionAvailability()
+
+        var forms = document.querySelectorAll("#difficulty_level form");
+        for (var i = 0; i < forms.length; i++) {
+            forms[i].style.display = "inline-block";
+            forms[i].style.paddingLeft = "10px";
+            forms[i].style.paddingRight = "10px";
+        }
+    }
+}
+
+if (!campaignTrail_temp.whiteWhaleOptionsObserver) {
+    campaignTrail_temp.whiteWhaleOptionsObserver = true
+
+    let whiteWhaleOptionsObserver = new MutationObserver(whiteWhaleOptionsMaster)
+    function whiteWhaleOptionsMaster() {
+        whiteWhaleOptionsObserver.disconnect()
+        addWhiteWhaleOptions()
+        whiteWhaleOptionsObserver.observe(document.body, { childList: true, subtree: true })
+    }
+
+    whiteWhaleOptionsObserver.observe(document.body, { childList: true, subtree: true })
+}
+
+
+//#endcode

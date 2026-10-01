@@ -8531,141 +8531,153 @@ campaignTrail_temp.answer_feedback_json = [
 ]
 
 cyoAdventure = function (a) {
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
-    if (ans == 13019 || 13020 || 13021 ){
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1];
+
+    if ( ans == 13019 || ans == 13020 || ans == 13021 ) {
         campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/BZlgvel.jpeg";
     }
-    if (ans == 1950388 ){
+
+    if ( ans == 1950388 ) {
         campaignTrail_temp.questions_json[2] = {
             "model": "campaign_trail.question",
             "pk": 1950398,
             "fields": {
-              "priority": 1,
-              "description": "Since you have withdrawn from the primary and essentially paved the way for Terry Gou to secure the presidential candidate position, how do you plan to support him in the upcoming electoral campaign?",
-              "likelihood": 1
+                "priority": 1,
+                "description": "Since you have withdrawn from the primary and essentially paved the way for Terry Gou to secure the presidential candidate position, how do you plan to support him in the upcoming electoral campaign?",
+                "likelihood": 1
             }
-          }
-        }
-        if (ans == 1950399 ){
-            campaignTrail_temp.candidate_json[2]["fields"].first_name = "";
-            campaignTrail_temp.candidate_json[2]["fields"].last_name = "Terry Gou";
-            campaignTrail_temp.candidate_json[6]["fields"].last_name = "None";
-            campaignTrail_temp.candidate_last_name = 'Terry Gou';
-            campaignTrail_temp.candidate_image_url = 'https://www.foxconn.com/img/about/group-profile/founder-m.png?5f65a';
-            campaignTrail_temp.running_mate_image_url = 'https://img.ltn.com.tw/Upload/news/600/2015/10/07/phpbfQCOW.jpg';
-            campaignTrail_temp.running_mate_last_name = 'Hong Xiuzhu';
-            campaignTrail_temp.question_number = 29;
-            campaignTrail_temp.questions_json[30] = {
-                "model": "campaign_trail.question",
-                "pk": 1950411,
-                "fields": {
-                  "priority": 1,
-                  "description": "Today is the last day before the election, and your polls have been consistently declining since your nomination. The deadlock with Ko Wen-je and the lead by Lai Ching-te have not been broken, and the situation persists until the registration of presidential candidates in November. There are hardly any person willing to be your vice president, until Hong Xiu-Zhu, whose nomination was abolished in 2016, volunteered. It is only then that you have a vice presidential candidate to appear on the ballot. On the final day before the election, where do you plan to conduct your campaign activities?",
-                  "likelihood": 1
-                }
-              }
-        }
-        if (ans == 1950400 ){
-            campaignTrail_temp.candidate_json[2]["fields"].first_name = "";
-            campaignTrail_temp.candidate_json[2]["fields"].last_name = "Terry Gou";
-            campaignTrail_temp.candidate_json[6]["fields"].last_name = "None";
-            campaignTrail_temp.candidate_last_name = 'Terry Gou';
-            campaignTrail_temp.candidate_image_url = 'https://www.foxconn.com/img/about/group-profile/founder-m.png?5f65a';
-            campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/ZmWU9KE.png';
-            campaignTrail_temp.running_mate_last_name = 'Lai Pei-hsia';
-            campaignTrail_temp.question_number = 29;
-            campaignTrail_temp.questions_json[30] = {
-                "model": "campaign_trail.question",
-                "pk": 1950424,
-                "fields": {
-                  "priority": 1,
-                  "description": "Today is the last day before the election, On the final day before the election,  According to the latest polls conducted 10 days before the election, your and Lai Ching-te's approval ratings are within the margin of error. In other words, the presidential position hinges on a difference of just 500,000 votes.where do you plan to conduct your campaign activities?",
-                  "likelihood": 1
-                }
-              }
-        }      
-        if (ans == 1950740 ){
-            campaignTrail_temp.questions_json[27] = {
-                "model": "campaign_trail.question",
-                "pk": 1950933,
-                "fields": {
-                  "priority": 1,
-                  "description": "This year's presidential debate has an unprecedented presence of four presidential candidates: yourself, Lai Ching-te, Ko Wen-je, and the former Chairman of Hon Hai Precision Industry, Terry Gou, who does not support you. In this year's presidential debate, what main points do you want to convey?                  ",
-                  "likelihood": 1
-                }
-              }
-        }
-        
-        if (ans == 1950751 || ans == 1950755 ){
-            campaignTrail_temp.running_mate_image_url = 'https://img.ltn.com.tw/Upload/news/600/2020/01/15/php8mrM1K.jpg';
-            campaignTrail_temp.running_mate_last_name = 'Ko';
-        }
-           //县长女儿
-            getResults = function (out, totv, aa, quickstats) {
-                let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 253);
-                if( aa[0].candidate === 68 && stateResult.result[0].candidate == 68 && e.player_answers.includes(1950755) || e.player_answers.includes(1950751)) {
-                    unlockAchievement("County Mayor Daughter");
-                 }
-                }
-            //三民主义
-                getResults = function (out, totv, aa, quickstats) {
-               if( aa[0].candidate === 68 && e.player_answers.includes(1950647) && e.player_answers.includes(1950740) ) {
-                   unlockAchievement("Three Principles of People");
-                     }
-                    }
-               //果冻获胜
-                getResults = function (out, totv, aa, quickstats) {
-               if( aa[0].candidate === 68 && e.player_answers.includes(1950388) && e.player_answers.includes(1950400)){
-                   unlockAchievement("New Taipei Has A Mayor");
-                     }
-                    }
-                //嘉义之子
-                getResults = function (out, totv, aa, quickstats) {
-                    let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 256);
-                    let stateResulttwo = campaignTrail_temp.final_state_results.find((x) => x.state == 257);
-                    let stateResultthree = campaignTrail_temp.final_state_results.find((x) => x.state == 267);
-                if( aa[0].candidate === 68 && stateResult.result[0].candidate == 68 && stateResulttwo.result[0].candidate == 68 && stateResultthree.result[0].candidate == 68) {
-                    unlockAchievement("Chiayi favorite son");
-                }
-            }
-         //主流民意获胜
-         getResults = function (out, totv, aa, quickstats) {
-                        if( aa[0].candidate === 68 && quickstats[1] > 59.9) {
-                            unlockAchievement("Main Stream Opinion Wins");
-                        }
-                    }
-         //南部孩子回家了
-         getResults = function (out, totv, aa, quickstats) {
-            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 256);
-            let stateResulttwo = campaignTrail_temp.final_state_results.find((x) => x.state == 257);
-            let stateResultthree = campaignTrail_temp.final_state_results.find((x) => x.state == 259);
-            let stateResultfour = campaignTrail_temp.final_state_results.find((x) => x.state == 260);
-            let stateResultfive = campaignTrail_temp.final_state_results.find((x) => x.state == 263);
-            let stateResultsix = campaignTrail_temp.final_state_results.find((x) => x.state == 253);
-            
-            if( aa[0].candidate === 68 && stateResult.result[0].candidate == 68 && stateResulttwo.result[0].candidate == 68 && stateResultthree.result[0].candidate == 68 && stateResultfour.result[0].candidate == 68 && stateResultfive.result[0].candidate == 68 && stateResultsix.result[0].candidate == 68) {
-                unlockAchievement("Southern Boys Returning Home");
-            }
-        }
-    
-        getResults = function (out, totv, aa, quickstats) {
-            if( aa[1].candidate === 68 && quickstats[1] < 31.04) {
-                unlockAchievement("Challenge the Bottom Line");
-            }
-        }
-   //各党标题
-   if ( ans == 1950012 || ans == 1950013 || ans == 1950014 ){    
-    nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#f4f4ee" 
-    nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#13366e" 
-    $(".container")[0].style.backgroundColor = "#6848ff" 
-    $("#game_window")[0].style.borderColor = "#99A0A8" 
-    $(".container")[0].style.backgroundColor = "#F4F4EE" 
-    $("#game_window")[0].style.borderColor = "#f4f4ee" 
-    $("#game_window")[0].style.backgroundImage = "url(https://imgur.com/3praAwi.jpg)" 
-    document.getElementById("header").src = "https://i.imgur.com/I7YpjTe.jpeg" 
-    document.body.background = "https://i.imgur.com/cknN16g.jpg"
-}
+        };
     }
+
+    if ( ans == 1950399 ) {
+        campaignTrail_temp.candidate_json[2]["fields"].first_name = "";
+        campaignTrail_temp.candidate_json[2]["fields"].last_name = "Terry Gou";
+        campaignTrail_temp.candidate_json[6]["fields"].last_name = "None";
+        campaignTrail_temp.candidate_last_name = 'Terry Gou';
+        campaignTrail_temp.candidate_image_url = 'https://www.foxconn.com/img/about/group-profile/founder-m.png?5f65a';
+        campaignTrail_temp.running_mate_image_url = 'https://img.ltn.com.tw/Upload/news/600/2015/10/07/phpbfQCOW.jpg';
+        campaignTrail_temp.running_mate_last_name = 'Hong Xiuzhu';
+        campaignTrail_temp.question_number = 29;
+        campaignTrail_temp.questions_json[30] = {
+            "model": "campaign_trail.question",
+            "pk": 1950411,
+            "fields": {
+                "priority": 1,
+                "description": "Today is the last day before the election, and your polls have been consistently declining since your nomination. The deadlock with Ko Wen-je and the lead by Lai Ching-te have not been broken, and the situation persists until the registration of presidential candidates in November. There are hardly any person willing to be your vice president, until Hong Xiu-Zhu, whose nomination was abolished in 2016, volunteered. It is only then that you have a vice presidential candidate to appear on the ballot. On the final day before the election, where do you plan to conduct your campaign activities?",
+                "likelihood": 1
+            }
+        };
+    }
+
+    if ( ans == 1950400 ) {
+        campaignTrail_temp.candidate_json[2]["fields"].first_name = "";
+        campaignTrail_temp.candidate_json[2]["fields"].last_name = "Terry Gou";
+        campaignTrail_temp.candidate_json[6]["fields"].last_name = "None";
+        campaignTrail_temp.candidate_last_name = 'Terry Gou';
+        campaignTrail_temp.candidate_image_url = 'https://www.foxconn.com/img/about/group-profile/founder-m.png?5f65a';
+        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/ZmWU9KE.png';
+        campaignTrail_temp.running_mate_last_name = 'Lai Pei-hsia';
+        campaignTrail_temp.question_number = 29;
+        campaignTrail_temp.questions_json[30] = {
+            "model": "campaign_trail.question",
+            "pk": 1950424,
+            "fields": {
+                "priority": 1,
+                "description": "Today is the last day before the election, On the final day before the election,  According to the latest polls conducted 10 days before the election, your and Lai Ching-te's approval ratings are within the margin of error. In other words, the presidential position hinges on a difference of just 500,000 votes.where do you plan to conduct your campaign activities?",
+                "likelihood": 1
+            }
+        };
+    }      
+
+    if ( ans == 1950740 ) {
+        campaignTrail_temp.questions_json[27] = {
+            "model": "campaign_trail.question",
+            "pk": 1950933,
+            "fields": {
+                "priority": 1,
+                "description": "This year's presidential debate has an unprecedented presence of four presidential candidates: yourself, Lai Ching-te, Ko Wen-je, and the former Chairman of Hon Hai Precision Industry, Terry Gou, who does not support you. In this year's presidential debate, what main points do you want to convey?                  ",
+                "likelihood": 1
+            }
+        };
+    }
+    
+    if ( ans == 1950751 || ans == 1950755 ) {
+        campaignTrail_temp.running_mate_image_url = 'https://img.ltn.com.tw/Upload/news/600/2020/01/15/php8mrM1K.jpg';
+        campaignTrail_temp.running_mate_last_name = 'Ko';
+    }
+
+    //各党标题
+    if ( ans == 1950012 || ans == 1950013 || ans == 1950014 ) {    
+        if (typeof nct_stuff !== "undefined" && nct_stuff.themes && nct_stuff.selectedTheme) {
+            nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#f4f4ee"; 
+            nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#13366e"; 
+        }
+        $(".container")[0].style.backgroundColor = "#6848ff"; 
+        $("#game_window")[0].style.borderColor = "#99A0A8"; 
+        $(".container")[0].style.backgroundColor = "#F4F4EE"; 
+        $("#game_window")[0].style.borderColor = "#f4f4ee"; 
+        $("#game_window")[0].style.backgroundImage = "url(https://imgur.com/3praAwi.jpg)"; 
+        document.getElementById("header").src = "https://i.imgur.com/I7YpjTe.jpeg"; 
+        document.body.background = "https://i.imgur.com/cknN16g.jpg";
+    }
+};
+
+getResults = function (out, totv, aa, quickstats) {
+    if (!quickstats || !aa || !aa[0]) return;
+
+    const answers = e.player_answers || [];
+
+    // 县长女儿
+    let stateResultPingtung = campaignTrail_temp.final_state_results?.find((x) => x.state == 253);
+    if ( aa[0].candidate === 68 && stateResultPingtung?.result?.[0]?.candidate == 68 && (answers.includes(1950755) || answers.includes(1950751)) ) {
+        unlockAchievement("County Mayor Daughter");
+    }
+
+    // 三民主义
+    if ( aa[0].candidate === 68 && answers.includes(1950647) && answers.includes(1950740) ) {
+        unlockAchievement("Three Principles of People");
+    }
+
+    // 果冻获胜
+    if ( aa[0].candidate === 68 && answers.includes(1950388) && answers.includes(1950400) ) {
+        unlockAchievement("New Taipei Has A Mayor");
+    }
+
+    // 嘉义之子
+    let stateResultChiayiCo = campaignTrail_temp.final_state_results?.find((x) => x.state == 256);
+    let stateResultChiayiCity = campaignTrail_temp.final_state_results?.find((x) => x.state == 257);
+    let stateResultNewTaipei = campaignTrail_temp.final_state_results?.find((x) => x.state == 267);
+    if ( aa[0].candidate === 68 && 
+         stateResultChiayiCo?.result?.[0]?.candidate == 68 && 
+         stateResultChiayiCity?.result?.[0]?.candidate == 68 && 
+         stateResultNewTaipei?.result?.[0]?.candidate == 68 ) {
+        unlockAchievement("Chiayi favorite son");
+    }
+
+    // 主流民意获胜
+    if ( aa[0].candidate === 68 && quickstats[1] > 59.9 ) {
+        unlockAchievement("Main Stream Opinion Wins");
+    }
+
+    // 南部孩子回家了
+    let stateResultYunlin = campaignTrail_temp.final_state_results?.find((x) => x.state == 259);
+    let stateResultChanghua = campaignTrail_temp.final_state_results?.find((x) => x.state == 260);
+    let stateResultYilan = campaignTrail_temp.final_state_results?.find((x) => x.state == 263);
+
+    if ( aa[0].candidate === 68 && 
+         stateResultChiayiCo?.result?.[0]?.candidate == 68 && 
+         stateResultChiayiCity?.result?.[0]?.candidate == 68 && 
+         stateResultYunlin?.result?.[0]?.candidate == 68 && 
+         stateResultChanghua?.result?.[0]?.candidate == 68 && 
+         stateResultYilan?.result?.[0]?.candidate == 68 && 
+         stateResultPingtung?.result?.[0]?.candidate == 68 ) {
+        unlockAchievement("Southern Boys Returning Home");
+    }
+
+    if ( aa[1]?.candidate === 68 && quickstats[1] < 31.04 ) {
+        unlockAchievement("Challenge the Bottom Line");
+    }
+};
 
 campaignTrail_temp.jet_data = [{}
 ]
@@ -9327,8 +9339,6 @@ endingPicker = (out, totv, aa, quickstats) => {
 }
 
 // in-game achievements
-
-setInterval(endingPicker, 250);
 
 //注释代码
 function getTooltips(str) {

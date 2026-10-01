@@ -11779,7 +11779,9 @@ window.setInterval(changechart, 200);
 // Check if campaignTrail_temp exists and is structured correctly
 
 endingPicker = (out, totv, aa, quickstats) => {
-  if (quickstats[1] >= 50) {
+    e.final_overall_results.sort((a, b) => b.popular_votes - a.popular_votes);
+
+    if (aa[0].candidate === 201) {
     ctsAchievement("Let's Go Brandon!");
     setImage("https://i.imgur.com/rtobqrt.png");
     setMusic("https://files.catbox.moe/qvbs18.mp3");

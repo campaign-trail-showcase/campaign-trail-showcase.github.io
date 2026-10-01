@@ -4,20 +4,34 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out." />
+    <meta name="theme-color" content="#3a3360" />
     <title>Campaign Trail Showcase</title>
     <link rel="stylesheet" href="../static/amusa_main_2016032801.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../static/css/community.css" type="text/css" media="screen" />
     <link rel="shortcut icon" href="/static/34starcircle-2.png" type="image/png" />
     <link rel="canonical" href="https://campaigntrailshowcase.com/campaign-trail/" />
+    <meta property="og:url" content="https://campaigntrailshowcase.com/campaign-trail/" />
     <meta property="og:title" content="Campaign Trail Showcase" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="../static/34starcircle-2.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="200" />
-    <meta property="og:image:height" content="200" />
-    <meta property="og:url" content="index.html" />
+    <meta property="og:image" content="https://campaigntrailshowcase.com/static/images/banners/tct_banner.webp" />
+    <meta property="og:image:type" content="image/webp" />
     <meta property="og:description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out." />
     <meta property="og:site_name" content="Campaign Trail Showcase" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Campaign Trail Showcase" />
+    <meta name="twitter:description" content="Can you win a Presidential election? Step into the shoes of a battery of candidates across real and alternate timelines and find out." />
+    <meta name="twitter:image" content="https://campaigntrailshowcase.com/static/images/banners/tct_banner.webp" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Campaign Trail Showcase",
+        "url": "https://campaigntrailshowcase.com/campaign-trail/",
+        "description": "Play presidential election scenarios across real and alternate timelines, including community-made mods.",
+        "image": "https://campaigntrailshowcase.com/static/images/banners/tct_banner.webp"
+      }
+    </script>
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
@@ -44,7 +58,6 @@
       <div id="achwindowheader"><button onclick="closeAchievements()" id="achclose">X</button> Achievements</div>
       <div id="achcontent"></div>
     </div>
-    <div style="display:none" id="variableTooltip"></div>
     <div id="wittyquote" style="display:none"></div>
     <div class="container">
       <div class="center">
@@ -92,10 +105,11 @@
                 <input style="border-radius:5px; font-weight:bold;padding:10px;"  type="number" id="skipQuestionValue" placeholder="Enter question to skip to"></input>
                 <button onclick="skipQuestion(event)" style="border-radius:5px; font-weight:bold;padding:10px;">Skip To Question</button>
               </div>
-              <div style="margin-top:10px">
+              <div style="margin-top:10px;display: flex;gap: 5px;">
                 <button onclick="addSTSSMoney()" style="border-radius:5px; font-weight:bold;padding:10px;">"Borrow" $1000000 (STSS Only)</button>
                 <button onclick="useConsoleCheats()" style="border-radius:5px; font-weight:bold;padding:10px;">Open Console</button>
-                <button onclick="activateVariableTooltip()" style="border-radius:5px; font-weight:bold;padding:10px;">Variable Tooltip</button>
+                <button onclick="toggleRng()" id="rngButton" style="border-radius:5px; font-weight:bold;padding:10px;">RNG: On</button>
+				<button onclick="toggleVariableChanges()" id="variableChangesButton" aria-pressed="false" style="border-radius:5px; font-weight:bold;padding:10px;">Variable Changes</button>
               </div>
             </div>
             <div id="autoplayMenu" style="display:none">
@@ -200,7 +214,7 @@
               <div id="tags" class="tags-grid"></div>
               <div style="color:white;margin:auto; display:flex;align-items: center;justify-content: center; margin-bottom:10px; gap:10px;">
                 <input placeholder="Filter by mod name" oninput="filterMods(event)" type="text" id="modSearch" name="modSearch"></input>
-                
+
                 <div>
                   <label for="modSorting" class="mod-sort-label">Sort by:</label>
                   <select onchange="onChangeModSorter(event)" name="sorting" id="modSorting" class="mod-sort-select">
@@ -214,11 +228,11 @@
               </div>
               <div id="mod-grid" class="community-grid"></div>
             </div>
-          </div>      
-            
+          </div>
+
             <div id="site_credits" style="text-align: center;">
                <a href="https://discord.gg/cqgVSNRKDP" style="color:#FF6B6B">Campaign Trail Showcase Discord</a><br/>
-              <a href="https://discord.gg/CfS6yTtjZj" style="color:#FF6B6B">The Campaign Trail Discord</a><br/><br/>
+              <a href="https://discord.gg/thecampaigntrail" style="color:#FF6B6B">The Campaign Trail Discord</a><br/><br/>
               <a href="https://github.com/campaign-trail-showcase/campaign-trail-showcase.github.io/blob/main/How%20Tos/How%20to%20Get%20Your%20Mod%20in%20The%20Showcase.md" style="color:#FF6B6B">How to submit a mod to Campaign Trail Showcase</a><br>
               <a href="https://www.newcampaigntrail.com/campaign-trail/index.html" style="color:#FF6B6B">This site is a fork of The New Campaign Trail created by Decstar and NCT Staff</a><br>
               <a href="https://www.americanhistoryusa.com" style="color:#FF6B6B">Original site created by Dan Bryan &copy; 2012- <testf id="year">2022</testf></a>
@@ -229,6 +243,7 @@
                   <button onclick="activateCheatMenu()" style="border-radius:5px; font-weight:bold;padding:10px;">Cheat Menu</button>
                   <button id="customThemesButton" onclick="toggleModBoxThemes()" style="border-radius:5px; font-weight:bold;padding:10px;">Loading</button>
                   <button id="mobileModeButton" onclick="toggleMobileMode()" style="border-radius:5px; font-weight:bold;padding:10px;">Loading</button>
+                  <button id="dataTransferButton" onclick="openDataTransfer()" title="Import / export your data (experimental!)" aria-label="Import or export your data" style="border-radius:5px; font-weight:bold;padding:10px;">&#8942;</button>
                 </div>
               </div>
             </div>
@@ -251,7 +266,8 @@
   <script src="../static/js/campaign_trail.js" defer></script>
   <script src="../static/js/remote.js" defer></script>
   <script src="../static/js/mobileStyle.js" defer></script>
-  <script src="../static/js/variableChangeTooltip.js" defer></script>
+  <script src="../static/js/variableChanges.js" defer></script>
+  <script src="../static/js/dataTransfer.js" defer></script>
   <script>
     window.addEventListener('DOMContentLoaded', function() {
       if (typeof campaignTrail_temp !== 'undefined') {

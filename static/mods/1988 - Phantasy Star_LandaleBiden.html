@@ -1,3 +1,116 @@
+function ctsAchievement(achievement, difficultyChecker = true) {
+    if ((difficultyChecker && campaignTrail_temp.difficulty_level_multiplier <= 1) || !difficultyChecker)
+        if (campaignTrail_temp.CTS) {
+            unlockAchievement(achievement);
+        }
+}
+
+campaignTrail_temp.cyoa = true;
+
+// pk -> index lookup for questions
+let _questionIdxByPk = null;
+
+function _rebuildQuestionIdxMap() {
+  _questionIdxByPk = new Map();
+  const arr = campaignTrail_temp.questions_json;
+  for (let i = 0; i < arr.length; i++) {
+    _questionIdxByPk.set(Number(arr[i].pk), i);
+  }
+}
+
+// returns the true array index (>= 0) or -1 if not found
+function getQuestionIndexFromPk(pk) {
+  const n = Number(pk);
+  if (!_questionIdxByPk) _rebuildQuestionIdxMap();
+
+  let idx = _questionIdxByPk.get(n);
+  // if map is stale, rebuild once
+  if (idx == null || campaignTrail_temp.questions_json[idx]?.pk !== n) {
+    _rebuildQuestionIdxMap();
+    idx = _questionIdxByPk.get(n);
+  }
+  return idx ?? -1;
+}
+
+// index to assign into question_number before nextQuestion()
+function getJumpIndexFromPk(pk) {
+  const idx = getQuestionIndexFromPk(pk);
+  return idx >= 0 ? idx - 1 : -1;
+}
+
+// for backwards compatibility
+function getQuestionNumberFromPk(pk) {
+  return getJumpIndexFromPk(pk);
+}
+
+function questionSwapper(pk1, pk2) {
+    const questionData = campaignTrail_temp.questions_json;
+    
+    // find indices of the questions
+    const index1 = getQuestionIndexFromPk(pk1);
+    const index2 = getQuestionIndexFromPk(pk2);
+    
+    // validate both questions exist
+    if (index1 === -1 || index2 === -1) {
+        console.warn(`questionSwapper: Could not find question(s) with pk ${pk1} and/or ${pk2}`);
+        return false;
+    }
+    
+    // swap the entire question objects
+    [questionData[index1], questionData[index2]] = [questionData[index2], questionData[index1]];
+    
+    // rebuild the index map since positions changed
+    _rebuildQuestionIdxMap();
+    
+    return true;
+}
+
+function answerSwapper(pk1, pk2, takeEffects = true) {
+    // hardcoded JSON data for answers
+    const answerData = campaignTrail_temp.answers_json;
+
+    // find the indices of the objects with the specified PKs
+    const index1 = answerData.findIndex(item => item.pk === pk1);
+    const index2 = answerData.findIndex(item => item.pk === pk2);
+
+    // check if objects with those PKs exist
+    if (index1 === -1 || index2 === -1) {
+        return;
+    }
+
+    // swap the question values
+    const tempQuestion = answerData[index1].fields.question;
+    answerData[index1].fields.question = answerData[index2].fields.question;
+    answerData[index2].fields.question = tempQuestion;
+
+    // if takeEffects is true, answers swap effects also
+    if (takeEffects) {
+        const otherJsons = [
+            campaignTrail_temp.answer_score_global_json,
+            campaignTrail_temp.answer_score_issue_json,
+            campaignTrail_temp.answer_score_state_json
+        ];
+
+        otherJsons.forEach(jsonData => {
+            jsonData.forEach(item => {
+                if (item.fields.answer === pk1) {
+                    item.fields.answer = pk2;
+                }
+            });
+        });
+    }
+}
+cyoAdventure = function (a) {
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
+    // question swap CYOA here
+    if (ans == 15686) {
+        questionSwapper(724, 15685);
+    }
+    if (ans == 15688 || ans == 15689 || ans == 15690) {
+        ctsAchievement("Man Behind The Slaughter");
+    }
+}
+
 campaignTrail_temp.questions_json = [
     {
         "model": "campaign_trail.question",
@@ -173,6 +286,13 @@ campaignTrail_temp.questions_json = [
         "fields": {
             "priority": -1,
             "description": "It is now or never, Alis Landale."
+        }
+    },
+    {
+        "model": "campaign_trail.question",
+        "pk": 15685,
+        "fields": {
+            "description": "It appears the man driving the negativity is Bush's campaign manager: Lee Atwater. You suspect he is an agent of broader evils, and you resolve to dispatch him. Who will do the deed?"
         }
     }
 ]
@@ -784,6 +904,38 @@ campaignTrail_temp.answers_json = [
         "fields": {
             "question": 722,
             "description": "Let's go to Alaska and Hawaii."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 15686,
+        "fields": {
+            "question": 728,
+            "description": "The Democrats are telling me that this level of negativity is unprecedented; I suspect malevolent forces are afoot. We need to root this out."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 15688,
+        "fields": {
+            "question": 15685,
+            "description": "Noah's magic is foreign to this place, and no doubt they will be able to act freely. I trust them to do this."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 15689,
+        "fields": {
+            "question": 15685,
+            "description": "Odin may not be a particularly sneaky man, but he is an excellent fighter. Plus, he has a few weapons which can't be easily tracked..."
+        }
+    },
+    {
+        "model": "campaign_trail.answer",
+        "pk": 15690,
+        "fields": {
+            "question": 15685,
+            "description": "Why not send Myau? Nobody expects the little cat."
         }
     }
 ]
@@ -6493,7 +6645,7 @@ campaignTrail_temp.answer_score_global_json = [
             "answer": 4490,
             "candidate": 153,
             "affected_candidate": 153,
-            "global_multiplier": 0.005
+            "global_multiplier": 0.025
         }
     },
     {
@@ -6884,6 +7036,36 @@ campaignTrail_temp.answer_score_global_json = [
             "candidate": 153,
             "affected_candidate": 153,
             "global_multiplier": 0.025
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 15694,
+        "fields": {
+            "answer": 15688,
+            "candidate": 153,
+            "affected_candidate": 152,
+            "global_multiplier": -0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 15695,
+        "fields": {
+            "answer": 15689,
+            "candidate": 153,
+            "affected_candidate": 152,
+            "global_multiplier": -0.1
+        }
+    },
+    {
+        "model": "campaign_trail.answer_score_global",
+        "pk": 15696,
+        "fields": {
+            "answer": 15690,
+            "candidate": 153,
+            "affected_candidate": 152,
+            "global_multiplier": -0.1
         }
     }
 ]
@@ -7877,7 +8059,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 457,
             "candidate": 153,
             "affected_candidate": 153,
-            "state_multiplier": 0.25
+            "state_multiplier": 0.75
         }
     },
     {
@@ -7888,7 +8070,7 @@ campaignTrail_temp.answer_score_state_json = [
             "state": 466,
             "candidate": 153,
             "affected_candidate": 153,
-            "state_multiplier": 0.25
+            "state_multiplier": 0.75
         }
     },
     {
@@ -8742,6 +8924,42 @@ campaignTrail_temp.answer_feedback_json = [
             "candidate": 153,
             "answer_feedback": "Pretty much everyone brushes these visits off as superfluous and unhelpful. But these two states are already ignored enough on a daily basis, and the fact a real candidate for President is visiting them inspires a sense of real hope to be heard in the voters there."
         }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 15687,
+        "fields": {
+            "answer": 15686,
+            "candidate": 153,
+            "answer_feedback": "You ask Noah to meditate on the source of the hate; after about a day, they come back to you with the name Lee Atwater."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 15691,
+        "fields": {
+            "answer": 15688,
+            "candidate": 153,
+            "answer_feedback": "A surprise thunderstorm and extreme winds strike North Carolina overnight. When the weather clears in the morning, Lee Atwater is found to be the only casualty."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 15692,
+        "fields": {
+            "answer": 15689,
+            "candidate": 153,
+            "answer_feedback": "Atwater is found dead of apparent heatstroke out West. It is almost immediately declared a natural death."
+        }
+    },
+    {
+        "model": "campaign_trail.answer_feedback",
+        "pk": 15693,
+        "fields": {
+            "answer": 15690,
+            "candidate": 153,
+            "answer_feedback": "Atwater fails to notice the claw-scratch at his ankle as he travels. The wound becomes infected, and soon enough he is dead."
+        }
     }
 ]
 
@@ -8753,84 +8971,22 @@ campaignTrail_temp.running_mate_last_name = "Biden";
 
 
 campaignTrail_temp.jet_data = [{
-    "cyoa_enabled": false,
-    "cyoa_data": {
-        "1768934244396": {
-            "answer": 15608,
-            "question": 754,
-            "id": 1768934244396
-        },
-        "1768934415061": {
-            "answer": 15609,
-            "question": 754,
-            "id": 1768934415061
-        },
-        "1768934422923": {
-            "answer": 15610,
-            "question": 754,
-            "id": 1768934422923
-        }
-    },
-    "cyoa_variables": {
-        "1768933082086": {
-            "id": 1768933082086,
-            "name": "isAtwaterSpotted",
-            "defaultValue": 0
-        },
-        "1768933097411": {
-            "id": 1768933097411,
-            "name": "isAtwaterAlive",
-            "defaultValue": 1
-        }
-    },
-    "cyoa_variable_effects": {
-        "15606": {
-            "id": 15606,
-            "answer": 15604,
-            "variable": "isAtwaterSpotted",
-            "operation": "add",
-            "amount": 1
-        },
-        "15616": {
-            "id": 15616,
-            "answer": 15608,
-            "variable": "isAtwaterAlive",
-            "operation": "subtract",
-            "amount": 1
-        },
-        "15617": {
-            "id": 15617,
-            "answer": 15609,
-            "variable": "isAtwaterAlive",
-            "operation": "subtract",
-            "amount": 1
-        },
-        "15618": {
-            "id": 15618,
-            "answer": 15610,
-            "variable": "isAtwaterAlive",
-            "operation": "subtract",
-            "amount": 1
-        }
-    },
+    "cyoa_enabled": true,
+    "cyoa_data": {},
+    "cyoa_variables": {},
+    "cyoa_variable_effects": {},
     "cyoa_question_swaps": {
         "1768933177144": {
             "id": 1768933177144,
             "triggers": [
-                15604
+                15686
             ],
-            "conditions": [
-                {
-                    "variable": "isAtwaterSpotted",
-                    "comparator": "==",
-                    "value": 1
-                }
-            ],
+            "conditions": [],
             "conditionOperator": "AND",
             "swaps": [
                 {
                     "pk1": 724,
-                    "pk2": 15607
+                    "pk2": 15685
                 }
             ]
         }
@@ -8846,16 +9002,7 @@ campaignTrail_temp.jet_data = [{
     "mapping_enabled": false,
     "mapping_data": {},
     "endings_enabled": false,
-    "ending_data": {
-        "1768948351659": {
-            "id": 1768948351659,
-            "variable": 0,
-            "operator": ">=",
-            "amount": "340",
-            "endingImage": "",
-            "endingText": "Put ending text here, you can and should use <p>HTML tags</p>!"
-        }
-    }
+    "ending_data": {},
+    "nicknames": {}
 }
 ]
-

@@ -1,12 +1,86 @@
+// preserve native getItem so we can read clean storage internally
+const _rawStorageGetItem = Storage.prototype.getItem;
+
+// intercept localStorage.getItem("unlockedAch") so mods reading raw JSON can get flat keys
+Storage.prototype.getItem = function (key) {
+  const rawData = _rawStorageGetItem.apply(this, arguments);
+
+  if (key !== "unlockedAch" || !rawData) {
+    return rawData;
+  }
+
+  try {
+    const parsed = JSON.parse(rawData);
+    const virtualPayload = { ...parsed };
+    const activeMod =
+      (typeof getCurrentModName === "function" ? getCurrentModName() : null) ||
+      window.modBeingPlayed;
+
+    // map all namespaced achievements to flat names: "Mod:Ach" -> "Ach"
+    for (const k of Object.keys(parsed)) {
+      const colonIdx = k.indexOf(":");
+      if (colonIdx !== -1) {
+        const flatName = k.slice(colonIdx + 1);
+        if (!virtualPayload[flatName]) {
+          virtualPayload[flatName] = parsed[k];
+        }
+      }
+    }
+
+    // active mod takes priority so shared achievement names never collide
+    if (activeMod) {
+      const activePrefix = `${activeMod}:`;
+      for (const k of Object.keys(parsed)) {
+        if (k.startsWith(activePrefix)) {
+          virtualPayload[k.slice(activePrefix.length)] = parsed[k];
+        }
+      }
+    }
+
+    return JSON.stringify(virtualPayload);
+  } catch (e) {
+    return rawData;
+  }
+};
+
+// achievement storage & state
 let unlockedAch = {};
 try {
-  unlockedAch = localStorage.getItem("unlockedAch")
-    ? JSON.parse(localStorage.getItem("unlockedAch"))
-    : {};
+  const storedAch = _rawStorageGetItem.call(localStorage, "unlockedAch");
+  unlockedAch = storedAch ? JSON.parse(storedAch) : {};
 } catch (e) {
   console.error("Error while loading achievements:", e);
   unlockedAch = {};
 }
+
+// mainly for combo mods (see 1974NY and 1974KS), but allows
+// them to look up for flat ach names anyway
+function createUnlockedAchProxy(target) {
+  return new Proxy(target, {
+    get(obj, prop) {
+      if (typeof prop !== "string") return obj[prop];
+      if (obj[prop] !== undefined) return obj[prop];
+
+      const activeMod =
+        (typeof getCurrentModName === "function" ? getCurrentModName() : null) ||
+        window.modBeingPlayed;
+
+      // check current mod first to avoid cross-mod name collisions
+      if (activeMod && obj[`${activeMod}:${prop}`] !== undefined) {
+        return obj[`${activeMod}:${prop}`];
+      }
+
+      // search for any namespaced key ending with ":<prop>"
+      for (const key of Object.keys(obj)) {
+        if (key.endsWith(`:${prop}`)) {
+          return obj[key];
+        }
+      }
+      return undefined;
+    },
+  });
+}
+window.unlockedAch = createUnlockedAchProxy(unlockedAch);
 
 let currentAchPage = 1;
 const achievementsPerPage = 5;
@@ -23,14 +97,14 @@ try {
 } catch (e) {
   showAllModsLegacyAch = false;
 }
+
 let isAchUIInitialized = false;
 let pinnedAchMods = new Set();
 let achievementMetadataLoadPromise = null;
 
 try {
-  pinnedAchMods = new Set(
-    localStorage.getItem("pinnedAchMods")?.split(",").filter(Boolean) || [],
-  );
+  const storedPinned = localStorage.getItem("pinnedAchMods");
+  pinnedAchMods = new Set(storedPinned ? storedPinned.split(",").filter(Boolean) : []);
 } catch (e) {
   console.error("Error while loading pinned achievements:", e);
   pinnedAchMods = new Set();
@@ -62,10 +136,10 @@ function expandFavoriteSet(favSet) {
   if (!favSet || !(favSet instanceof Set)) return new Set();
 
   const expanded = new Set(favSet);
-
   const linkedPairs = [["2024", "2024 Divided States"]];
 
-  for (const [a, b] of linkedPairs) {
+  for (let i = 0; i < linkedPairs.length; i++) {
+    const [a, b] = linkedPairs[i];
     if (expanded.has(a) && !expanded.has(b)) expanded.add(b);
     if (expanded.has(b) && !expanded.has(a)) expanded.add(a);
   }
@@ -78,54 +152,243 @@ let modCompletionCache = null;
 let lastCacheUpdate = 0;
 const CACHE_TTL = 5000; // 5 seconds
 
+function migrateLegacyAchievement(modName, achName, achData, legacy, removeLegacy = true) {
+  if (!modName || !legacy || unlockedAch[`${modName}:${achName}`] != null) return;
+
+  unlockedAch[`${modName}:${achName}`] = {
+    ...(legacy === true ? achData : legacy),
+    modName,
+    achName,
+  };
+  if (removeLegacy) delete unlockedAch[achName];
+
+  try {
+    localStorage.setItem("unlockedAch", JSON.stringify(unlockedAch));
+  } catch (e) {
+    console.error("Error while migrating achievements:", e);
+  }
+}
+
+function prepareLegacyAchievementStorage(modName) {
+  if (!modName || typeof allAch !== "object" || allAch === null) return;
+
+  const currentAchievements = allAch[modName];
+  if (!currentAchievements) return;
+
+  let changed = false;
+  for (const achName of Object.keys(currentAchievements)) {
+    const legacy = unlockedAch[achName];
+    if (legacy == null || unlockedAch[`${modName}:${achName}`] != null) continue;
+
+    if (legacy?.modName && legacy.modName !== modName) {
+      delete unlockedAch[achName];
+      changed = true;
+      continue;
+    }
+
+    const hasNamespacedOwner = Object.keys(unlockedAch).some((key) =>
+      key.endsWith(`:${achName}`) && key !== `${modName}:${achName}`
+    );
+    if (hasNamespacedOwner) {
+      delete unlockedAch[achName];
+      changed = true;
+    }
+  }
+
+  if (changed) {
+    try {
+      localStorage.setItem("unlockedAch", JSON.stringify(unlockedAch));
+    } catch (e) {
+      console.error("Error while preparing achievements:", e);
+    }
+  }
+}
+
+// checks whether an achievement is unlocked specifically for a given mod
+function isAchievementUnlocked(modName, achName, achData = null) {
+  if (!unlockedAch) return false;
+
+  // check namespaced composite key: "modName:achName"
+  if (modName && unlockedAch[`${modName}:${achName}`] != null) {
+    return true;
+  }
+
+  // check legacy flat key: "achName"
+  const legacy = unlockedAch[achName];
+  if (legacy != null) {
+    // if explicit modName metadata exists on the saved object
+    if (legacy.modName) {
+      if (legacy.modName === modName) {
+        migrateLegacyAchievement(modName, achName, achData, legacy);
+      }
+      return legacy.modName === modName;
+    }
+
+    // disambiguate identical achievement names by matching description and image
+    const currentData = achData || (modName && typeof allAch === "object" ? allAch?.[modName]?.[achName] : null);
+    if (
+      legacy === true &&
+      modName &&
+      window.modBeingPlayed === modName &&
+      Object.prototype.hasOwnProperty.call(
+        window.campaignTrail_temp?.achievements || {},
+        achName,
+      )
+    ) {
+      migrateLegacyAchievement(modName, achName, achData, legacy);
+      return true;
+    }
+
+    if (currentData && (legacy.description || legacy.image)) {
+      const descMatch = !legacy.description || legacy.description === currentData.description;
+      const imgMatch = !legacy.image || legacy.image === currentData.image;
+      if (descMatch && imgMatch) {
+        migrateLegacyAchievement(modName, achName, currentData, legacy);
+        return true;
+      }
+      return false; // same achievement name, but belongs to another mod
+    }
+
+    if (legacy === true && modName && typeof allAch === "object" && allAch !== null) {
+      const matchingMods = Object.keys(allAch).filter((mod) => allAch[mod]?.[achName]);
+      if (matchingMods.length > 1) {
+        migrateLegacyAchievement(modName, achName, currentData, legacy, false);
+        return true;
+      }
+    }
+
+    // if only one mod across all known mods defines this achievement name
+    if (modName && typeof allAch === "object" && allAch !== null) {
+      let count = 0;
+      let ownerMod = null;
+      for (const m in allAch) {
+        if (allAch[m]?.[achName]) {
+          count++;
+          ownerMod = m;
+        }
+      }
+      if (count === 1 && ownerMod === modName) {
+        migrateLegacyAchievement(modName, achName, currentData, legacy);
+        return true;
+      }
+      return false;
+    }
+
+    return true;
+  }
+
+  return false;
+}
+
+function isModFullyCompleted(modName) {
+  if (!modName || typeof allAch !== "object" || !allAch || !allAch[modName]) {
+    return false;
+  }
+
+  const modAchievements = allAch[modName];
+  const keys = Object.keys(modAchievements);
+  if (keys.length === 0) return false;
+
+  return keys.every((achName) =>
+    isAchievementUnlocked(modName, achName, modAchievements[achName])
+  );
+}
+window.isModFullyCompleted = isModFullyCompleted;
+
 function buildAchievementsCache() {
   if (achievementsCache) return achievementsCache;
 
   achievementsCache = new Map();
-  for (const mod in allAch) {
-    for (const a in allAch[mod]) {
-      achievementsCache.set(a, allAch[mod][a]);
+  if (typeof allAch === "object" && allAch !== null) {
+    for (const mod in allAch) {
+      const modObj = allAch[mod];
+      if (modObj) {
+        for (const a in modObj) {
+          // store both namespaced and flat lookup keys
+          achievementsCache.set(`${mod}:${a}`, { modName: mod, achData: modObj[a] });
+          if (!achievementsCache.has(a)) {
+            achievementsCache.set(a, { modName: mod, achData: modObj[a] });
+          }
+        }
+      }
     }
   }
   return achievementsCache;
 }
 
-function findAchievementByName(name) {
-  let cache = buildAchievementsCache();
+function findAchievement(name, targetModName = null) {
+  const currentMod = targetModName || getCurrentModName();
 
-  // if the achievement isn't found, the cache might be stale
-  // so we invalidate it and rebuild it from current allAch
-  if (!cache.has(name)) {
-    achievementsCache = null;
-    cache = buildAchievementsCache();
+  const activeAchievements = window.campaignTrail_temp?.achievements;
+  if (activeAchievements && Object.prototype.hasOwnProperty.call(activeAchievements, name)) {
+    return {
+      modName: currentMod,
+      ach: activeAchievements[name],
+    };
   }
 
-  return cache.get(name) || null;
+  // if mod is known, query directly from allAch
+  if (currentMod && typeof allAch === "object" && allAch?.[currentMod]?.[name]) {
+    return {
+      modName: currentMod,
+      ach: allAch[currentMod][name],
+    };
+  }
+
+  // check cache
+  const cache = buildAchievementsCache();
+  if (currentMod && cache.has(`${currentMod}:${name}`)) {
+    const entry = cache.get(`${currentMod}:${name}`);
+    return { modName: entry.modName, ach: entry.achData };
+  }
+
+  if (cache.has(name)) {
+    const entry = cache.get(name);
+    return { modName: entry.modName, ach: entry.achData };
+  }
+
+  return { modName: null, ach: null };
 }
 
-function unlockAchievement(name) {
-  const ach = findAchievementByName(name);
+function findAchievementByName(name, targetModName = null) {
+  return findAchievement(name, targetModName).ach;
+}
+
+function unlockAchievement(name, targetModName = null) {
+  const { modName, ach } = findAchievement(name, targetModName);
 
   if (ach == null) {
     console.log("There is no achievement with the name '" + name + "'");
     return;
   }
 
-  if (cheatsActive && ach.cannotBeCheated) {
+  if (typeof cheatsActive !== "undefined" && cheatsActive && ach.cannotBeCheated) {
     console.log(`Would unlock '${name}' but won't because cheating!`);
     return;
   }
 
-  if (unlockedAch[name] == null) {
+  const alreadyUnlocked = isAchievementUnlocked(modName, name, ach);
+
+  if (!alreadyUnlocked) {
     alert("ACHIEVEMENT UNLOCKED: " + name);
   }
 
-  unlockedAch[name] = ach;
+  // save as "modName:achName"
+  const unlockKey = modName ? `${modName}:${name}` : name;
+  const achRecord = {
+    ...ach,
+    modName: modName,
+    achName: name,
+  };
+
+  unlockedAch[unlockKey] = achRecord;
+
   try {
     localStorage.setItem("unlockedAch", JSON.stringify(unlockedAch));
   } catch (e) {
     console.error("Error while saving achievements:", e);
   }
+  window.unlockedAch = createUnlockedAchProxy(unlockedAch);
 
   // invalidate cache
   modCompletionCache = null;
@@ -139,10 +402,12 @@ const achButton = document.getElementById("achButton");
 const achContent = document.getElementById("achcontent");
 
 function getKnownAchievementModNames() {
-  const officialMods = Array.isArray(originalModsData)
+  const officialMods = (typeof originalModsData !== "undefined" && Array.isArray(originalModsData))
     ? originalModsData.map((entry) => entry.value).filter(Boolean)
     : [];
-  const customModNames = customMods instanceof Set ? Array.from(customMods) : [];
+  const customModNames = (typeof customMods !== "undefined" && customMods instanceof Set)
+    ? Array.from(customMods)
+    : [];
 
   return Array.from(new Set([...officialMods, ...customModNames]));
 }
@@ -161,6 +426,8 @@ async function ensureAchievementMetadataLoaded() {
   }
 
   const loadedMetadataMods = window.loadedMetadataMods || new Set();
+  window.loadedMetadataMods = loadedMetadataMods;
+
   const modNames = getKnownAchievementModNames();
 
   // filter based on whether we have examined the metadata at all,
@@ -179,10 +446,12 @@ async function ensureAchievementMetadataLoaded() {
 
       await Promise.allSettled(batch.map(async (modName) => {
         try {
-          if (customMods.has(modName)) {
-            const modData = await getModFromDB(modName);
-            if (modData?.code1) {
-              extractModMetadata(modData.code1, modName);
+          if (typeof customMods !== "undefined" && customMods instanceof Set && customMods.has(modName)) {
+            if (typeof getModFromDB === "function") {
+              const modData = await getModFromDB(modName);
+              if (modData?.code1 && typeof extractModMetadata === "function") {
+                extractModMetadata(modData.code1, modName);
+              }
             }
             return;
           }
@@ -191,7 +460,9 @@ async function ensureAchievementMetadataLoaded() {
           if (!res.ok) return;
 
           const rawModText = await res.text();
-          extractModMetadata(rawModText, modName);
+          if (typeof extractModMetadata === "function") {
+            extractModMetadata(rawModText, modName);
+          }
         } catch (error) {
           console.error(`Failed to preload achievements metadata for ${modName}:`, error);
         } finally {
@@ -219,7 +490,9 @@ async function openAchievements() {
     setupAchievementUI();
   }
 
-  achWindow.style.display = "block";
+  if (achWindow) {
+    achWindow.style.display = "block";
+  }
   showAchievementLoadingState("Loading achievements...");
   centerAchievementsWindow();
 
@@ -231,6 +504,8 @@ async function openAchievements() {
 }
 
 function setupAchievementUI() {
+  if (!achContent) return;
+
   // clear the main content area ONCE
   achContent.innerHTML = "";
 
@@ -254,7 +529,7 @@ function setupAchievementUI() {
 }
 
 function centerAchievementsWindow() {
-  if (window.innerWidth <= 768) {
+  if (!achWindow || window.innerWidth <= 768) {
     return;
   }
 
@@ -275,18 +550,23 @@ function centerAchievementsWindow() {
 }
 
 function closeAchievements() {
-  achWindow.style.display = "none";
+  if (achWindow) {
+    achWindow.style.display = "none";
+  }
 }
 
-dragElement(achWindow);
+if (typeof dragElement === "function" && achWindow) {
+  dragElement(achWindow);
+}
 
+// color & contrast utilities
 const colorContrastCache = new Map();
 
 function getContrastingTextColor(bgColor) {
-  if (!bgColor) return '#000000';
+  if (!bgColor) return "#000000";
   if (colorContrastCache.has(bgColor)) return colorContrastCache.get(bgColor);
 
-  let color = (bgColor.charAt(0) === '#') ? bgColor.substring(1) : bgColor;
+  let color = (bgColor.charAt(0) === "#") ? bgColor.substring(1) : bgColor;
 
   // handle 3-character hex codes (e.g., #000 becomes #000000)
   if (color.length === 3) {
@@ -294,7 +574,7 @@ function getContrastingTextColor(bgColor) {
   }
 
   // fallback if the color is an invalid hex or a CSS color name
-  if (color.length !== 6) return '#000000';
+  if (color.length !== 6) return "#000000";
 
   const r = parseInt(color.substring(0, 2), 16);
   const g = parseInt(color.substring(2, 4), 16);
@@ -302,17 +582,29 @@ function getContrastingTextColor(bgColor) {
 
   // YIQ formula to determine brightness
   const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-  const result = (yiq >= 128) ? '#000000' : '#FFFFFF';
+  const result = (yiq >= 128) ? "#000000" : "#FFFFFF";
 
   colorContrastCache.set(bgColor, result);
   return result;
 }
 
+const colorEnhanceCache = new Map();
+
+const hue2rgb = (p, q, t) => {
+  if (t < 0) t += 1;
+  if (t > 1) t -= 1;
+  if (t < 1 / 6) return p + (q - p) * 6 * t;
+  if (t < 1 / 2) return q;
+  if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+  return p;
+};
+
 function enhanceUnlockColor(hexColor) {
   if (!hexColor) return hexColor;
+  if (colorEnhanceCache.has(hexColor)) return colorEnhanceCache.get(hexColor);
 
   // strip hash
-  let color = hexColor.charAt(0) === '#' ? hexColor.substring(1, 7) : hexColor;
+  let color = hexColor.charAt(0) === "#" ? hexColor.substring(1, 7) : hexColor;
   if (color.length !== 6) return hexColor;
 
   // convert HEX to RGB
@@ -354,41 +646,38 @@ function enhanceUnlockColor(hexColor) {
   }
 
   // if it's already colorful and bright, return the original color
-  if (!adjusted) return hexColor;
+  if (!adjusted) {
+    colorEnhanceCache.set(hexColor, hexColor);
+    return hexColor;
+  }
 
   // convert adjusted HSL back to RGB
   let r1, g1, b1;
   if (s === 0) {
     r1 = g1 = b1 = l;
   } else {
-    const hue2rgb = (p, q, t) => {
-      if (t < 0) t += 1;
-      if (t > 1) t -= 1;
-      if (t < 1/6) return p + (q - p) * 6 * t;
-      if (t < 1/2) return q;
-      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-      return p;
-    };
     let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
     let p = 2 * l - q;
-    r1 = hue2rgb(p, q, h + 1/3);
+    r1 = hue2rgb(p, q, h + 1 / 3);
     g1 = hue2rgb(p, q, h);
-    b1 = hue2rgb(p, q, h - 1/3);
+    b1 = hue2rgb(p, q, h - 1 / 3);
   }
 
   // convert back to HEX
-  const toHex = x => {
+  const toHex = (x) => {
     const hex = Math.round(x * 255).toString(16);
-    return hex.length === 1 ? '0' + hex : hex;
+    return hex.length === 1 ? "0" + hex : hex;
   };
 
-  return `#${toHex(r1)}${toHex(g1)}${toHex(b1)}`;
+  const finalHex = `#${toHex(r1)}${toHex(g1)}${toHex(b1)}`;
+  colorEnhanceCache.set(hexColor, finalHex);
+  return finalHex;
 }
 
 // Returns true if the achievement is unlocked
-function addAchivement(achName, achData, parent, theme, lazyLoad = false) {
+function addAchivement(achName, achData, parent, theme, lazyLoad = false, modName = null) {
   const ach = document.createElement("div");
-  const locked = unlockedAch[achName] == null;
+  const locked = !isAchievementUnlocked(modName, achName, achData);
 
   ach.classList.add("achBox");
   ach.classList.toggle("locked", locked);
@@ -440,7 +729,7 @@ function addAchivement(achName, achData, parent, theme, lazyLoad = false) {
         ${achName}
     </div>
     <div class="achImageHolder">
-        <img class="achImage" src="${imgSrc}" ${imgDataSrc}></img>
+        <img class="achImage" src="${imgSrc}" ${imgDataSrc} alt="${achName}">
     </div>
     <div class="achText" style="${themeStyles.textBg}; ${themeStyles.textColor}">
         ${achData.description}
@@ -461,34 +750,40 @@ function addAchivement(achName, achData, parent, theme, lazyLoad = false) {
 }
 
 // observe images locally
-const globalImageObserver = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        if (img.dataset.src) {
-          img.src = img.dataset.src;
-          img.removeAttribute("data-src");
-          img.classList.add("loaded");
-          observer.unobserve(img);
+let globalImageObserver = null;
+if (typeof IntersectionObserver !== "undefined") {
+  globalImageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      for (let i = 0; i < entries.length; i++) {
+        const entry = entries[i];
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute("data-src");
+            img.classList.add("loaded");
+            observer.unobserve(img);
+          }
         }
       }
-    });
-  },
-  { rootMargin: "50px" },
-);
+    },
+    { rootMargin: "50px" },
+  );
+}
 
 // lazy load images
 function setupLazyLoading(container) {
-  if ("IntersectionObserver" in window) {
-    container.querySelectorAll("img[data-src]").forEach((img) => {
-      globalImageObserver.observe(img);
-    });
+  if (!container) return;
+  const images = container.querySelectorAll("img[data-src]");
+  if (globalImageObserver) {
+    for (let i = 0; i < images.length; i++) {
+      globalImageObserver.observe(images[i]);
+    }
   } else {
     // fallback for older browsers
-    container.querySelectorAll("img[data-src]").forEach((img) => {
-      img.src = img.dataset.src;
-    });
+    for (let i = 0; i < images.length; i++) {
+      images[i].src = images[i].dataset.src;
+    }
   }
 }
 
@@ -499,7 +794,11 @@ function togglePinnedMod(modName) {
     pinnedAchMods.add(modName);
   }
 
-  localStorage.setItem("pinnedAchMods", Array.from(pinnedAchMods).join(","));
+  try {
+    localStorage.setItem("pinnedAchMods", Array.from(pinnedAchMods).join(","));
+  } catch (e) {
+    console.error("Error saving pinned achievements:", e);
+  }
 
   addAllAchievements();
 }
@@ -507,7 +806,8 @@ function togglePinnedMod(modName) {
 function addSortingControls() {
   if (sortingControlsElement) {
     const buttons = sortingControlsElement.querySelectorAll("button");
-    buttons.forEach((button) => {
+    for (let i = 0; i < buttons.length; i++) {
+      const button = buttons[i];
       const buttonText = button.innerText;
       if (buttonText === "Default") {
         button.classList.toggle("active", achSortMethod === "default");
@@ -521,7 +821,7 @@ function addSortingControls() {
         button.classList.toggle("active", showOnlyFavoriteMods);
         button.disabled = showAllModsLegacyAch;
       }
-    });
+    }
     return sortingControlsElement;
   }
 
@@ -540,9 +840,7 @@ function addSortingControls() {
   };
 
   controlsContainer.appendChild(createButton("Default", "default"));
-  controlsContainer.appendChild(
-    createButton("Most Complete", "percentComplete"),
-  );
+  controlsContainer.appendChild(createButton("Most Complete", "percentComplete"));
   controlsContainer.appendChild(createButton("Most Achievements", "mostAch"));
   controlsContainer.appendChild(createButton("Least Achievements", "leastAch"));
 
@@ -563,9 +861,7 @@ function addSortingControls() {
 
 function addLegacyViewControls() {
   if (legacyViewControlsElement) {
-    const checkbox = legacyViewControlsElement.querySelector(
-      "#legacyViewCheckbox",
-    );
+    const checkbox = legacyViewControlsElement.querySelector("#legacyViewCheckbox");
     if (checkbox) {
       checkbox.checked = showAllModsLegacyAch;
     }
@@ -588,7 +884,7 @@ function addLegacyViewControls() {
     showAllModsLegacyAch = checkbox.checked;
     try {
       localStorage.setItem("showAllModsLegacyAch", showAllModsLegacyAch);
-    } catch (e) { }
+    } catch (e) {}
     if (showAllModsLegacyAch) {
       showOnlyFavoriteMods = false;
     }
@@ -670,16 +966,30 @@ function getModCompletionData(forceRefresh = false) {
     return modCompletionCache;
   }
 
+  if (typeof allAch !== "object" || allAch === null) {
+    return [];
+  }
+
+  const favMods = getFavoriteMods();
   const allModNames = Object.keys(allAch);
+
   modCompletionCache = allModNames.map((modName) => {
     let count = 0;
     let total = 0;
-    if (allAch[modName]) {
-      total = Object.keys(allAch[modName]).length;
-      for (const achName in allAch[modName]) {
-        if (unlockedAch[achName] != null) count++;
+    const currentModAch = allAch[modName];
+
+    if (currentModAch) {
+      const keys = Object.keys(currentModAch);
+      total = keys.length;
+      for (let i = 0; i < total; i++) {
+        const achName = keys[i];
+        const achData = currentModAch[achName];
+        if (isAchievementUnlocked(modName, achName, achData)) {
+          count++;
+        }
       }
     }
+
     const percentComplete = total > 0 ? (count / total) * 100 : 0;
     return {
       modName,
@@ -687,7 +997,7 @@ function getModCompletionData(forceRefresh = false) {
       total,
       percentComplete,
       isPinned: pinnedAchMods.has(modName),
-      isFavorite: getFavoriteMods().has(modName),
+      isFavorite: favMods.has(modName),
     };
   });
 
@@ -712,7 +1022,11 @@ function renderModList(modsToRender, useLazyLoading = false) {
     return fragment;
   }
 
-  for (const modData of modsToRender) {
+  const themeState = localStorage.getItem("modThemeState");
+  const useThemes = themeState === "default" || themeState === "detailed";
+
+  for (let i = 0; i < modsToRender.length; i++) {
+    const modData = modsToRender[i];
     const {
       modName,
       count,
@@ -720,27 +1034,38 @@ function renderModList(modsToRender, useLazyLoading = false) {
       percentComplete,
       displayName,
       filterResult,
+      isPinned,
+      isFavorite,
     } = modData;
 
     const holder = document.createElement("div");
     holder.classList.add("achHolder");
+
+    if (isModFullyCompleted(modName)) {
+      holder.classList.add("ach-black-border");
+      holder.title = "All mod achievements unlocked!";
+    }
+
     const subHolder = document.createElement("div");
     subHolder.classList.add("achSubHolder");
     const labelHolder = document.createElement("div");
 
     let theme = null;
-    const themeState = localStorage.getItem("modThemeState");
-    if (themeState === "default" || themeState === "detailed")
+    if (useThemes && typeof customModBoxThemes !== "undefined") {
       theme = customModBoxThemes[modName];
+    }
 
     // loop through achievements
-    for (const ach in allAch[modName]) {
-      if (
-        filterResult === true ||
-        (filterResult instanceof Set && filterResult.has(ach))
-      ) {
-        const achObj = allAch[modName][ach];
-        addAchivement(ach, achObj, subHolder, theme, useLazyLoading);
+    const modAchievements = allAch[modName];
+    if (modAchievements) {
+      for (const ach in modAchievements) {
+        if (
+          filterResult === true ||
+          (filterResult instanceof Set && filterResult.has(ach))
+        ) {
+          const achObj = modAchievements[ach];
+          addAchivement(ach, achObj, subHolder, theme, useLazyLoading, modName);
+        }
       }
     }
 
@@ -749,15 +1074,15 @@ function renderModList(modsToRender, useLazyLoading = false) {
     const pinButton = document.createElement("button");
     pinButton.classList.add("pin-button");
     pinButton.innerHTML = "📌";
-    pinButton.title = pinnedAchMods.has(modName) ? "Unpin mod" : "Pin mod";
-    pinButton.classList.toggle("pinned", pinnedAchMods.has(modName));
+    pinButton.title = isPinned ? "Unpin mod" : "Pin mod";
+    pinButton.classList.toggle("pinned", isPinned);
     pinButton.addEventListener("click", (e) => {
       e.stopPropagation();
       togglePinnedMod(modName);
     });
     actionsContainer.appendChild(pinButton);
 
-    if (getFavoriteMods().has(modName)) {
+    if (isFavorite) {
       const favIcon = document.createElement("span");
       favIcon.innerHTML = "⭐";
       favIcon.classList.add("fav-icon");
@@ -768,6 +1093,7 @@ function renderModList(modsToRender, useLazyLoading = false) {
     labelHolder.innerHTML = `<p>${displayName}</p><span class="mod-completion" style="position:absolute;top:0;right:0;font-style:italic;opacity:80%;padding:8px;font-size:small;">${count}/${total} (${percentComplete.toFixed(2)}%)</span>`;
     labelHolder.classList.add("achLabel");
     labelHolder.appendChild(actionsContainer);
+
     const toggle = document.createElement("div");
     toggle.classList.add("achToggle");
     labelHolder.appendChild(toggle);
@@ -807,9 +1133,11 @@ function renderModList(modsToRender, useLazyLoading = false) {
 }
 
 function getCurrentModName() {
-  if (window.modBeingPlayed && allAch[window.modBeingPlayed]) {
+  if (window.modBeingPlayed) {
     return window.modBeingPlayed;
   }
+
+  if (typeof allAch !== "object" || allAch === null) return null;
 
   // check if RecReading is available and has achievements
   if (window.RecReading && Object.keys(allAch).length > 0) {
@@ -834,6 +1162,26 @@ function addAllAchievements() {
 function performRender() {
   if (!contentContainerElement) return;
 
+  // re-sync in case an achievement was unlocked during the session
+  try {
+    const stored = _rawStorageGetItem.call(localStorage, "unlockedAch");
+    if (stored) {
+      unlockedAch = JSON.parse(stored);
+      window.unlockedAch = createUnlockedAchProxy(unlockedAch);
+    }
+  } catch (e) {}
+  modCompletionCache = null;
+  lastCacheUpdate = 0;
+
+  // register active in-memory mod achievements into allAch if missing
+  if (window.campaignTrail_temp?.achievements) {
+    const currentModName = getCurrentModName() || window.modBeingPlayed || "Custom Mod";
+    if (typeof allAch === "object" && allAch !== null && !allAch[currentModName]) {
+      allAch[currentModName] = window.campaignTrail_temp.achievements;
+      achievementsCache = null;
+    }
+  }
+
   if (achievementMetadataLoadPromise) {
     showAchievementLoadingState("Loading achievements...");
     return;
@@ -852,9 +1200,7 @@ function performRender() {
 
   if (!showAllModsLegacyAch && currentMod) {
     const linkedMods = Array.from(expandFavoriteSet(new Set([currentMod])));
-    processedData = processedData.filter((mod) =>
-      linkedMods.includes(mod.modName),
-    );
+    processedData = processedData.filter((mod) => linkedMods.includes(mod.modName));
   } else if (showOnlyFavoriteMods) {
     const expandedFavs = expandFavoriteSet(getFavoriteMods());
     // expand favorites to include linked mods (e.g., 2024 <-> 2024 Divided States)
@@ -863,13 +1209,16 @@ function performRender() {
     );
   }
 
+  const namesMap = typeof namesOfModsFromValue !== "undefined" ? namesOfModsFromValue : null;
+
   if (achSearchQuery.trim().length > 0) {
     const query = achSearchQuery.trim();
 
     // map the data to include a "filterResult" property
     processedData = processedData.map((modData) => {
-      const modDisplayName =
-        String(namesOfModsFromValue[modData.modName] || modData.modName);
+      const modDisplayName = String(
+        (namesMap && namesMap[modData.modName]) || modData.modName,
+      );
 
       // does the mod name match?
       if (modDisplayName.toLowerCase().includes(query)) {
@@ -879,14 +1228,11 @@ function performRender() {
 
       // if not, check specific achievements
       const matchingAchKeys = new Set();
-      if (allAch[modData.modName]) {
-        for (const [achName, achData] of Object.entries(
-          allAch[modData.modName],
-        )) {
+      if (typeof allAch === "object" && allAch?.[modData.modName]) {
+        for (const [achName, achData] of Object.entries(allAch[modData.modName])) {
           if (
             achName.toLowerCase().includes(query) ||
-            (achData.description &&
-              achData.description.toLowerCase().includes(query))
+            (achData.description && achData.description.toLowerCase().includes(query))
           ) {
             matchingAchKeys.add(achName);
           }
@@ -903,7 +1249,7 @@ function performRender() {
   } else {
     processedData = processedData.map((modData) => ({
       ...modData,
-      displayName: namesOfModsFromValue[modData.modName] || modData.modName,
+      displayName: (namesMap && namesMap[modData.modName]) || modData.modName,
       filterResult: true,
     }));
   }
@@ -912,18 +1258,17 @@ function performRender() {
   switch (achSortMethod) {
     case "percentComplete":
       processedData.sort(
-        (a, b) =>
-          b.isPinned - a.isPinned || b.percentComplete - a.percentComplete,
+        (a, b) => b.isPinned - a.isPinned || b.percentComplete - a.percentComplete || a.modName.localeCompare(b.modName),
       );
       break;
     case "mostAch":
       processedData.sort(
-        (a, b) => b.isPinned - a.isPinned || b.total - a.total,
+        (a, b) => b.isPinned - a.isPinned || b.total - a.total || a.modName.localeCompare(b.modName),
       );
       break;
     case "leastAch":
       processedData.sort(
-        (a, b) => b.isPinned - a.isPinned || a.total - b.total,
+        (a, b) => b.isPinned - a.isPinned || a.total - b.total || a.modName.localeCompare(b.modName),
       );
       break;
     default:

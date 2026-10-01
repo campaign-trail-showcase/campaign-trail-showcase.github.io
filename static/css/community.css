@@ -23,7 +23,8 @@
 
 .mod-image {
   width: 80%;
-  border: 4px solid white;
+  border: var(--theme-img-border, 4px solid #fff);
+  display: var(--theme-image-display, auto);
   height: auto;
 }
 
@@ -33,10 +34,11 @@
   text-align: center;
   border-radius: 10px 10px 0 0;
   padding-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: var(--theme-header-margin, 10px);
   height: 15%;
   display: flex;
   font-size: 18px;
+  font-family: var(--theme-header-font, Arial, "Helvetica Neue", Helvetica, sans-serif);
   font-weight: bolder;
   width: 100%;
   position: relative;
@@ -71,10 +73,14 @@
 .mod-title p {
   padding: 10px;
   color: var(--theme-header-text, inherit);
+  text-shadow: var(--theme-header-text-shadow, none);
+  clip-path: border-box;
 }
 
 .mod-img-desc {
   overflow-y: scroll;
+  scrollbar-width: var(--theme-scrollbar-width, auto);
+  scrollbar-color: var(--theme-scrollbar-color, auto);
 }
 
 .mod-desc {
@@ -87,7 +93,7 @@
   border-radius: 5px;
   padding: 5px;
   overflow-y: clip;
-  background-color: var(--theme-desc-bg, transparent);
+  background: var(--theme-desc-bg, transparent);
   color: var(--theme-desc-text, inherit);
 }
 
@@ -106,7 +112,8 @@
 .community-grid-element {
   width: 23%;
   height: 25rem;
-  background-color: var(--theme-main-color, #BFE6FF);
+  background: var(--theme-main-color, #BFE6FF);
+  background-attachment: local;
   margin: 5px 5px 10px 10px;
   border-radius: 10px;
   display: flex;
@@ -134,18 +141,18 @@
   text-decoration: none;
   outline: none;
   color: var(--theme-ui-text, #fff);
-  background-color: var(--theme-secondary-color, rgb(85, 111, 176));
+  background: var(--theme-secondary-color, rgb(85, 111, 176));
   border: none;
   border-radius: 10px;
   margin: 5px;
 }
 
 .hover-button:hover {
-  background-color: var(--theme-secondary-hover, rgb(76, 98, 154));
+  background: var(--theme-secondary-hover, rgb(76, 98, 154));
 }
 
 .hover-button:active {
-  background-color: var(--theme-secondary-color, rgb(85, 111, 176));
+  background: var(--theme-secondary-color, rgb(85, 111, 176));
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -242,6 +249,169 @@
   width: 90%;
   display: flex;
   flex-direction: column;
+}
+
+/* for completed mods */
+.achHolder.ach-black-border,
+.community-grid-element.ach-black-border {
+  border: 4px solid #0c0d10 !important;
+  outline: none !important;
+  position: relative;
+  box-shadow:
+    0 0 0 1.5px #ffd700,
+    0 4px 14px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(255, 215, 0, 0.25) !important;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.achHolder.ach-black-border:hover,
+.community-grid-element.ach-black-border:hover {
+  box-shadow:
+    0 0 0 2px #ffe259,
+    0 6px 20px rgba(0, 0, 0, 0.9),
+    0 0 16px rgba(255, 215, 0, 0.5) !important;
+}
+
+.achHolder.ach-black-border::before,
+.achHolder.ach-black-border::after,
+.community-grid-element.ach-black-border::before,
+.community-grid-element.ach-black-border::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  pointer-events: none;
+  z-index: 3;
+  border-radius: inherit;
+  background-repeat: no-repeat;
+  background-size: 0px 0px;
+  opacity: 0;
+  animation-fill-mode: both;
+  filter: drop-shadow(0 0 3px #ffd700) drop-shadow(0 0 5px #ffffff);
+}
+
+.achHolder.ach-black-border::before,
+.community-grid-element.ach-black-border::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 0 Q12 12 24 12 Q12 12 12 24 Q12 12 0 12 Q12 12 12 0 Z' fill='%23ffd700'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23ffffff'/%3E%3C/svg%3E");
+  animation: ach-corner-glint-1 3.6s ease-in-out infinite;
+}
+
+.achHolder.ach-black-border::after,
+.community-grid-element.ach-black-border::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 0 Q12 12 24 12 Q12 12 12 24 Q12 12 0 12 Q12 12 12 0 Z' fill='%23ffffff'/%3E%3Ccircle cx='12' cy='12' r='2.5' fill='%23ffd700'/%3E%3C/svg%3E");
+  animation: ach-corner-glint-2 4.2s ease-in-out infinite 0.9s;
+}
+
+@keyframes ach-corner-glint-1 {
+  0% {
+    background-position: calc(100% - 4px) 0;
+    background-size: 0px 0px;
+    opacity: 0;
+  }
+  10% {
+    background-position: calc(100% - 3px) 0;
+    background-size: 11px 11px;
+    opacity: 1;
+  }
+  20% {
+    background-position: 100% 2px;
+    background-size: 7px 7px;
+    opacity: 0.7;
+  }
+  30% {
+    background-position: 100% 4px;
+    background-size: 0px 0px;
+    opacity: 0;
+  }
+
+  45% {
+    background-position: 100% calc(100% - 4px);
+    background-size: 0px 0px;
+    opacity: 0;
+  }
+
+  55% {
+    background-position: 100% calc(100% - 3px);
+    background-size: 10px 10px;
+    opacity: 1;
+  }
+  65% {
+    background-position: calc(100% - 2px) 100%;
+    background-size: 7px 7px;
+    opacity: 0.7;
+  }
+  75% {
+    background-position: calc(100% - 4px) 100%;
+    background-size: 0px 0px;
+    opacity: 0;
+  }
+  100% {
+    background-position: calc(100% - 4px) 0;
+    background-size: 0px 0px;
+    opacity: 0;
+  }
+}
+
+@keyframes ach-corner-glint-2 {
+  0% {
+    background-position: 3px 100%;
+    background-size: 0px 0px;
+    opacity: 0;
+  }
+  10% {
+    background-position: 2px 100%;
+    background-size: 11px 11px;
+    opacity: 1;
+  }
+  20% {
+    background-position: 0 calc(100% - 3px);
+    background-size: 7px 7px;
+    opacity: 0.75;
+  }
+  30% {
+    background-position: 0 calc(100% - 5px);
+    background-size: 0px 0px;
+    opacity: 0;
+  }
+
+  45% {
+    background-position: 0 4px;
+    background-size: 0px 0px;
+    opacity: 0;
+  }
+
+  55% {
+    background-position: 0 3px;
+    background-size: 10px 10px;
+    opacity: 1;
+  }
+  65% {
+    background-position: 2px 0;
+    background-size: 7px 7px;
+    opacity: 0.7;
+  }
+  75% {
+    background-position: 4px 0;
+    background-size: 0px 0px;
+    opacity: 0;
+  }
+  100% {
+    background-position: 3px 100%;
+    background-size: 0px 0px;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .achHolder.ach-black-border::before,
+  .achHolder.ach-black-border::after,
+  .community-grid-element.ach-black-border::before,
+  .community-grid-element.ach-black-border::after {
+    animation: none;
+    opacity: 0.8;
+    background-size: 8px 8px;
+  }
+  .achHolder.ach-black-border::before { background-position: calc(100% - 4px) 0; }
+  .achHolder.ach-black-border::after { background-position: 2px 100%; }
 }
 
 .achSubHolder {
@@ -804,18 +974,19 @@
   text-align: center;
 }
 
-#variableTooltip {
-  position: absolute;
-  display: none;
-  background-color: rgba(0, 0, 0, 0.85);
-  color: #fff;
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 12px;
-  z-index: 9999;
-  pointer-events: none;
-  max-width: 500px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+#question_form .vs-inline {
+  margin-left: 0.9em;
+  padding: 0.05em 0.4em;
+  background: #ffe27a;
+  color: #1a1a1a;
+  font-family: Consolas, Menlo, "DejaVu Sans Mono", monospace;
+  font-size: 0.78em;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: normal;
+  text-transform: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* CTS theme readability fixes */
@@ -842,4 +1013,79 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* for the import/export modal */
+.cts-transfer-section-title {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: rgb(53, 70, 113);
+  font-size: 15px;
+}
+
+.cts-transfer-hint {
+  font-size: 12px;
+  font-style: italic;
+  color: #555;
+  margin: 4px 0 8px 0;
+}
+
+.cts-transfer-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 6px 0 10px 0;
+  font-size: 14px;
+  color: #222;
+}
+
+.cts-transfer-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 2px solid #BFE6FF;
+  background: #fff;
+  color: #222;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.cts-transfer-summary {
+  background: #fff;
+  border: 2px solid #BFE6FF;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #222;
+  margin-top: 8px;
+}
+
+.cts-transfer-conflict {
+  background: #fff;
+  border: 2px solid #e0a800;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin: 6px 0;
+  font-size: 13px;
+  color: #222;
+}
+
+.cts-transfer-conflict-name {
+  font-weight: bold;
+}
+
+.cts-transfer-diff {
+  font-size: 12px;
+  color: #444;
+  margin: 4px 0;
+}
+
+.cts-transfer-decisions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
 }

@@ -338,12 +338,15 @@ campaignTrail_temp.opponents_weighted_json = [
 campaignTrail_temp.modBoxTheme = {
   "header_color": "#201e1a",
   "header_text_color": "#fff",
+  "header_text_shadow": "1px 1px #000",
   "header_image_url": "https://file.garden/aNtAfG887DiA_7lO/2028AOC/american_flag.png",
+  "image_border": "3px solid #ff4f4f",
   "description_text_color": "#000",
   "description_background_color": "#eee",
   "main_color": "#e6afa0",
   "secondary_color": "#c01a12",
-  "ui_text_color": "#fff"
+  "ui_text_color": "#fff",
+  "scrollbar_color": "#b5130d #c64f4b"
 }
 
 function applyTheme(theme) {
@@ -648,7 +651,7 @@ const css = `
     /* running mate */
     #candidate_description_window,
     #running_mate_description_window {
-      background: linear-gradient(#2c2323, #1a1414);
+      background: linear-gradient(#182045, #09092b);
       border: 4px ridge #5555b8;
       overflow: hidden;
       display: flex;
@@ -661,7 +664,7 @@ const css = `
     #opponent_selection_description_window {
         margin: 1em;
         height: 317px;
-        background-color: #1F1919;
+        background-color: #061634;
         /* background-image:
              linear-gradient(to right, transparent, rgba(32, 30, 26, 1)) ,
              url('https://i.imgur.com/1n3gWGS.png'); */

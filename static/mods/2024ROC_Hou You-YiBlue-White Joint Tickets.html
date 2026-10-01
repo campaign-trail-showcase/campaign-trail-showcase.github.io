@@ -8586,235 +8586,249 @@ campaignTrail_temp.answer_feedback_json = [
 ]
 
 cyoAdventure = function (a) {
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
-    if (ans == 13019 || 13020 || 13021 ){
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1];
+
+    if ( ans == 13019 || ans == 13020 || ans == 13021 ) {
         campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/BZlgvel.jpeg";
     }
-    if (ans == 1950388 ){
+
+    if ( ans == 1950388 ) {
         campaignTrail_temp.questions_json[2] = {
             "model": "campaign_trail.question",
             "pk": 1950398,
             "fields": {
-              "priority": 1,
-              "description": "Since you have withdrawn from the primary and essentially paved the way for Terry Gou to secure the presidential candidate position, how do you plan to support him in the upcoming electoral campaign?",
-              "likelihood": 1
+                "priority": 1,
+                "description": "Since you have withdrawn from the primary and essentially paved the way for Terry Gou to secure the presidential candidate position, how do you plan to support him in the upcoming electoral campaign?",
+                "likelihood": 1
             }
-          }
-        }
-        if (ans == 1950399 ){
-            campaignTrail_temp.candidate_json[2]["fields"].first_name = "";
-            campaignTrail_temp.candidate_json[2]["fields"].last_name = "Terry Gou";
-            campaignTrail_temp.candidate_json[6]["fields"].last_name = "None";
-            campaignTrail_temp.candidate_last_name = 'Terry Gou';
-            campaignTrail_temp.candidate_image_url = 'https://www.foxconn.com/img/about/group-profile/founder-m.png?5f65a';
-            campaignTrail_temp.running_mate_image_url = 'https://img.ltn.com.tw/Upload/news/600/2015/10/07/phpbfQCOW.jpg';
-            campaignTrail_temp.running_mate_last_name = 'Hong Xiuzhu';
-            campaignTrail_temp.question_number = 29;
-            campaignTrail_temp.questions_json[30] = {
-                "model": "campaign_trail.question",
-                "pk": 1950411,
-                "fields": {
-                  "priority": 1,
-                  "description": "Today is the last day before the election, and your polls have been consistently declining since your nomination. The deadlock with Ko Wen-je and the lead by Lai Ching-te have not been broken, and the situation persists until the registration of presidential candidates in November. There are hardly any person willing to be your vice president, until Hong Xiu-Zhu, whose nomination was abolished in 2016, volunteered. It is only then that you have a vice presidential candidate to appear on the ballot. On the final day before the election, where do you plan to conduct your campaign activities?",
-                  "likelihood": 1
-                }
-              }
-        }
-        if (ans == 1950400 ){
-            campaignTrail_temp.candidate_json[2]["fields"].first_name = "";
-            campaignTrail_temp.candidate_json[2]["fields"].last_name = "Terry Gou";
-            campaignTrail_temp.candidate_json[6]["fields"].last_name = "None";
-            campaignTrail_temp.candidate_last_name = 'Terry Gou';
-            campaignTrail_temp.candidate_image_url = 'https://www.foxconn.com/img/about/group-profile/founder-m.png?5f65a';
-            campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/ZmWU9KE.png';
-            campaignTrail_temp.running_mate_last_name = 'Lai Pei-hsia';
-            campaignTrail_temp.question_number = 29;
-            campaignTrail_temp.questions_json[30] = {
-                "model": "campaign_trail.question",
-                "pk": 1950424,
-                "fields": {
-                  "priority": 1,
-                  "description": "Today is the last day before the election, On the final day before the election,  According to the latest polls conducted 10 days before the election, your and Lai Ching-te's approval ratings are within the margin of error. In other words, the presidential position hinges on a difference of just 500,000 votes.where do you plan to conduct your campaign activities?",
-                  "likelihood": 1
-                }
-              }
-        }      
-        if (ans == 1950740 ){
-            campaignTrail_temp.questions_json[27] = {
-                "model": "campaign_trail.question",
-                "pk": 1950933,
-                "fields": {
-                  "priority": 1,
-                  "description": "This year's presidential debate has an unprecedented presence of four presidential candidates: yourself, Lai Ching-te, Ko Wen-je, and the former Chairman of Hon Hai Precision Industry, Terry Gou, who does not support you. In this year's presidential debate, what main points do you want to convey?                  ",
-                  "likelihood": 1
-                }
-              }
-        }
-        
-        if (ans == 1950751 || ans == 1950755 ){
-            campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/W8ycwUr.png';
-            campaignTrail_temp.running_mate_last_name = 'Zhao';
-        }
-        //蓝白合
-        if (ans == 1950688 || ans == 1950691 ){
-            campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/3fQuylW.jpeg';
-            campaignTrail_temp.running_mate_last_name = 'Ko';  
-            campaignTrail_temp.questions_json[21] = {
-                "model": "campaign_trail.question",
-                "pk": 1950890,
-                "fields": {
-                  "priority": 1,
-                  "description": "With the formation of the Joint Tickets, Ko Wen-je has officially become your vice president, marking a political tornado in Taiwan. It's highly likely that Lai Ching-te will lose the presidential position. On the day of the presidential candidate registration, what capabilities of Ko Wen-je would you like to highlight?",
-                  "likelihood": 1
-                }
-              },
-              campaignTrail_temp.questions_json[22] = {
-                "model": "campaign_trail.question",
-                "pk": 1950927,
-                "fields": {
-                  "priority": 1,
-                  "description": "Now, you are in a one-on-one battle with Lai Ching-te in the later stages of the election. Polls indicate that you currently have a lead by several percentage points, but this could be lost due to inappropriate campaign strategies or visiting mistakes. We must stabilize our current position!",
-                  "likelihood": 1
-                }
-              },
-              campaignTrail_temp.questions_json[23] = {
-                "model": "campaign_trail.question",
-                "pk": 1950900,
-                "fields": {
-                  "priority": 1,
-                  "description": "In order to achieve cooperation between the blue and white camps, the cost you have to pay is to accept some reform demands and positions of the TPP. Among these proposals, which ones do you favor more and consider most likely to reach an agreement?                  ",
-                  "likelihood": 1
-                }
-              },
-              campaignTrail_temp.questions_json[27] = {
-                "model": "campaign_trail.question",
-                "pk": 1950911,
-                "fields": {
-                  "priority": 1,
-                  "description": "In this presidential election, facing a one-on-one debate with Lai Ching-te, although you are widely regarded as not the most eloquent, and even your proficiency in Mandarin is limited, your grassroots image in stark contrast to Lai Ching-te's elite image creates a strong juxtaposition. In the debate, what content do you want to emphasize?",
-                  "likelihood": 1
-                }
-              
-            }       
-            campaignTrail_temp.questions_json[28] = {
-                "model": "campaign_trail.question",
-                "pk": 12889,
-                "fields": {
-                    "priority": 0,
-                    "description": "\nThis year's presidential election is poised for a climax as Ko Wen-je squares off against DPP's Hsiao Bi-Khim. Ko Wen-je's formidable debating skills and aggressiveness will provide you with plenty of material. In fact, many believe that this vice presidential debate is even more anticipated than the presidential debate. How will Chairman Ko Wen-je attack the DPP in the debate?",
-                    "likelihood": 1
-                }
-              }                       
-        }     
-               
+        };
+    }
+
+    if ( ans == 1950399 ) {
+        campaignTrail_temp.candidate_json[2]["fields"].first_name = "";
+        campaignTrail_temp.candidate_json[2]["fields"].last_name = "Terry Gou";
+        campaignTrail_temp.candidate_json[6]["fields"].last_name = "None";
+        campaignTrail_temp.candidate_last_name = 'Terry Gou';
+        campaignTrail_temp.candidate_image_url = 'https://www.foxconn.com/img/about/group-profile/founder-m.png?5f65a';
+        campaignTrail_temp.running_mate_image_url = 'https://img.ltn.com.tw/Upload/news/600/2015/10/07/phpbfQCOW.jpg';
+        campaignTrail_temp.running_mate_last_name = 'Hong Xiuzhu';
+        campaignTrail_temp.question_number = 29;
+        campaignTrail_temp.questions_json[30] = {
+            "model": "campaign_trail.question",
+            "pk": 1950411,
+            "fields": {
+                "priority": 1,
+                "description": "Today is the last day before the election, and your polls have been consistently declining since your nomination. The deadlock with Ko Wen-je and the lead by Lai Ching-te have not been broken, and the situation persists until the registration of presidential candidates in November. There are hardly any person willing to be your vice president, until Hong Xiu-Zhu, whose nomination was abolished in 2016, volunteered. It is only then that you have a vice presidential candidate to appear on the ballot. On the final day before the election, where do you plan to conduct your campaign activities?",
+                "likelihood": 1
+            }
+        };
+    }
+
+    if ( ans == 1950400 ) {
+        campaignTrail_temp.candidate_json[2]["fields"].first_name = "";
+        campaignTrail_temp.candidate_json[2]["fields"].last_name = "Terry Gou";
+        campaignTrail_temp.candidate_json[6]["fields"].last_name = "None";
+        campaignTrail_temp.candidate_last_name = 'Terry Gou';
+        campaignTrail_temp.candidate_image_url = 'https://www.foxconn.com/img/about/group-profile/founder-m.png?5f65a';
+        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/ZmWU9KE.png';
+        campaignTrail_temp.running_mate_last_name = 'Lai Pei-hsia';
+        campaignTrail_temp.question_number = 29;
+        campaignTrail_temp.questions_json[30] = {
+            "model": "campaign_trail.question",
+            "pk": 1950424,
+            "fields": {
+                "priority": 1,
+                "description": "Today is the last day before the election, On the final day before the election,  According to the latest polls conducted 10 days before the election, your and Lai Ching-te's approval ratings are within the margin of error. In other words, the presidential position hinges on a difference of just 500,000 votes.where do you plan to conduct your campaign activities?",
+                "likelihood": 1
+            }
+        };
+    }      
+
+    if ( ans == 1950740 ) {
+        campaignTrail_temp.questions_json[27] = {
+            "model": "campaign_trail.question",
+            "pk": 1950933,
+            "fields": {
+                "priority": 1,
+                "description": "This year's presidential debate has an unprecedented presence of four presidential candidates: yourself, Lai Ching-te, Ko Wen-je, and the former Chairman of Hon Hai Precision Industry, Terry Gou, who does not support you. In this year's presidential debate, what main points do you want to convey?                  ",
+                "likelihood": 1
+            }
+        };
+    }
+    
+    if ( ans == 1950751 || ans == 1950755 ) {
+        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/W8ycwUr.png';
+        campaignTrail_temp.running_mate_last_name = 'Zhao';
+    }
+
+    //蓝白合
+    if ( ans == 1950688 || ans == 1950691 ) {
+        campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/3fQuylW.jpeg';
+        campaignTrail_temp.running_mate_last_name = 'Ko';  
+        campaignTrail_temp.questions_json[21] = {
+            "model": "campaign_trail.question",
+            "pk": 1950890,
+            "fields": {
+                "priority": 1,
+                "description": "With the formation of the Joint Tickets, Ko Wen-je has officially become your vice president, marking a political tornado in Taiwan. It's highly likely that Lai Ching-te will lose the presidential position. On the day of the presidential candidate registration, what capabilities of Ko Wen-je would you like to highlight?",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[22] = {
+            "model": "campaign_trail.question",
+            "pk": 1950927,
+            "fields": {
+                "priority": 1,
+                "description": "Now, you are in a one-on-one battle with Lai Ching-te in the later stages of the election. Polls indicate that you currently have a lead by several percentage points, but this could be lost due to inappropriate campaign strategies or visiting mistakes. We must stabilize our current position!",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[23] = {
+            "model": "campaign_trail.question",
+            "pk": 1950900,
+            "fields": {
+                "priority": 1,
+                "description": "In order to achieve cooperation between the blue and white camps, the cost you have to pay is to accept some reform demands and positions of the TPP. Among these proposals, which ones do you favor more and consider most likely to reach an agreement?                  ",
+                "likelihood": 1
+            }
+        };
+        campaignTrail_temp.questions_json[27] = {
+            "model": "campaign_trail.question",
+            "pk": 1950911,
+            "fields": {
+                "priority": 1,
+                "description": "In this presidential election, facing a one-on-one debate with Lai Ching-te, although you are widely regarded as not the most eloquent, and even your proficiency in Mandarin is limited, your grassroots image in stark contrast to Lai Ching-te's elite image creates a strong juxtaposition. In the debate, what content do you want to emphasize?",
+                "likelihood": 1
+            }
+        };       
+        campaignTrail_temp.questions_json[28] = {
+            "model": "campaign_trail.question",
+            "pk": 12889,
+            "fields": {
+                "priority": 0,
+                "description": "\nThis year's presidential election is poised for a climax as Ko Wen-je squares off against DPP's Hsiao Bi-Khim. Ko Wen-je's formidable debating skills and aggressiveness will provide you with plenty of material. In fact, many believe that this vice presidential debate is even more anticipated than the presidential debate. How will Chairman Ko Wen-je attack the DPP in the debate?",
+                "likelihood": 1
+            }
+        };                       
+    }     
+           
+    if ( e.current_results && e.current_results[0] ) {
         let pop_vote = e.current_results[0];
-        let playerPolling = (pop_vote.find(p => p.pk === e.candidate_id)).pvp;
+        let playerCandObj = pop_vote.find(p => p.pk === e.candidate_id);
+        let playerPolling = playerCandObj ? playerCandObj.pvp : 0;
         let i = 0;
 
-        pop_vote.sort((a, b) => {
-            return a.pk - b.pk;
-        });
+        pop_vote.sort((a, b) => a.pk - b.pk);
+
         //侯输
-         if (e.player_answers.includes(1950671) || e.player_answers.includes(1950670) && playerPolling < pop_vote[1].pvp ){
+        if ( (e.player_answers.includes(1950671) || e.player_answers.includes(1950670)) && pop_vote[1] && playerPolling < pop_vote[1].pvp ) {
             campaignTrail_temp.questions_json[20] = {
-              "model": "campaign_trail.question",
-              "pk": 1950034,
-              "fields": {
-                "priority": 1,
-                "description": "On November 15th, waking up in the morning, Taiwan's media and political circles were shocked by a piece of news: KMT-TPP has confirmed the formation of a joint ticket, endorsing a single presidential candidate. This is expected to severely impact Lai Ching-te's support. Chairman Zhu, Mayor Hou, former President Ma, and Chairman Ko have reached an agreement to introduce a set of candidates using the cumulative results of previous polls. This is considered a very intense competition... but due to the selection of fixed-time polls, your current efforts may not be of much use...The final results will be announced on the 18th.",
-                "likelihood": 1
-              }
-            }
-           }
-            //侯胜/侯平
-        if (e.player_answers.includes(1950671) || e.player_answers.includes(1950670) && playerPolling >= pop_vote[2].pvp ){
-          campaignTrail_temp.questions_json[20] = {
-            "model": "campaign_trail.question",
-            "pk": 1950687,
-            "fields": {
-              "priority": 1,
-              "description": "On November 15th, waking up in the morning, Taiwan's media and political circles were shocked by a piece of news: KMT-TPP has confirmed the formation of a joint ticket, endorsing a single presidential candidate. This is expected to severely impact Lai Ching-te's support. Chairman Zhu, Mayor Hou, former President Ma, and Chairman Ko have reached an agreement to introduce a set of candidates using the cumulative results of previous polls. The terms include a provision that, if the polls fall within the margin of error, it will be considered a victory for Hou You-yi. This is widely seen as a sign that Hou You-yi is likely to win. The final results will be announced on the 18th.",
-              "likelihood": 1
-            }
-          }
-         }
-                //赵子龙
-                getResults = function (out, totv, aa, quickstats) {
-                    if( aa[0].candidate === 68 && aa[2].candidate === 200 && aa[1].candidate === 67 && e.player_answers.includes(1950537) && e.player_answers.includes(1950611) && e.player_answers.includes(1950764)) {
-                        unlockAchievement("Three Kingdom Romance");
-                          }
-                         }
-                    //三民主义
-                        getResults = function (out, totv, aa, quickstats) {
-                       if( aa[0].candidate === 68 && e.player_answers.includes(1950647) && e.player_answers.includes(1950740)) {
-                           unlockAchievement("Three Principles of People");
-                             }
-                            }
-                       //果冻获胜
-                        getResults = function (out, totv, aa, quickstats) {
-                       if( aa[0].candidate === 68 && e.player_answers.includes(1950388) && e.player_answers.includes(1950400)){
-                           unlockAchievement("New Taipei Has A Mayor");
-                             }
-                            }
-                        //嘉义之子
-                        getResults = function (out, totv, aa, quickstats) {
-                            let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 256);
-                            let stateResulttwo = campaignTrail_temp.final_state_results.find((x) => x.state == 257);
-                            let stateResultthree = campaignTrail_temp.final_state_results.find((x) => x.state == 267);
-                        if( aa[0].candidate === 68 && stateResult.result[0].candidate == 68 && stateResulttwo.result[0].candidate == 68 && stateResultthree.result[0].candidate == 68) {
-                            unlockAchievement("Chiayi favorite son");
-                        }
-                    }
-                 //主流民意获胜
-                 getResults = function (out, totv, aa, quickstats) {
-                                if( aa[0].candidate === 68 && quickstats[1] > 59.9) {
-                                    unlockAchievement("Main Stream Opinion Wins");
-                                }
-                            }
-                 //南部孩子回家了
-                 getResults = function (out, totv, aa, quickstats) {
-                    let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 256);
-                    let stateResulttwo = campaignTrail_temp.final_state_results.find((x) => x.state == 257);
-                    let stateResultthree = campaignTrail_temp.final_state_results.find((x) => x.state == 259);
-                    let stateResultfour = campaignTrail_temp.final_state_results.find((x) => x.state == 260);
-                    let stateResultfive = campaignTrail_temp.final_state_results.find((x) => x.state == 263);
-                    let stateResultsix = campaignTrail_temp.final_state_results.find((x) => x.state == 253);
-                    
-                    if( aa[0].candidate === 68 && stateResult.result[0].candidate == 68 && stateResulttwo.result[0].candidate == 68 && stateResultthree.result[0].candidate == 68 && stateResultfour.result[0].candidate == 68 && stateResultfive.result[0].candidate == 68 && stateResultsix.result[0].candidate == 68) {
-                        unlockAchievement("Southern Boys Returning Home");
-                    }
+                "model": "campaign_trail.question",
+                "pk": 1950034,
+                "fields": {
+                    "priority": 1,
+                    "description": "On November 15th, waking up in the morning, Taiwan's media and political circles were shocked by a piece of news: KMT-TPP has confirmed the formation of a joint ticket, endorsing a single presidential candidate. This is expected to severely impact Lai Ching-te's support. Chairman Zhu, Mayor Hou, former President Ma, and Chairman Ko have reached an agreement to introduce a set of candidates using the cumulative results of previous polls. This is considered a very intense competition... but due to the selection of fixed-time polls, your current efforts may not be of much use...The final results will be announced on the 18th.",
+                    "likelihood": 1
                 }
-            
-                getResults = function (out, totv, aa, quickstats) {
-                    if( aa[1].candidate === 68 && quickstats[1] < 31.04) {
-                        unlockAchievement("Challenge the Bottom Line");
-                    }
+            };
+        }
+
+        //侯胜/侯平
+        if ( (e.player_answers.includes(1950671) || e.player_answers.includes(1950670)) && pop_vote[2] && playerPolling >= pop_vote[2].pvp ) {
+            campaignTrail_temp.questions_json[20] = {
+                "model": "campaign_trail.question",
+                "pk": 1950687,
+                "fields": {
+                    "priority": 1,
+                    "description": "On November 15th, waking up in the morning, Taiwan's media and political circles were shocked by a piece of news: KMT-TPP has confirmed the formation of a joint ticket, endorsing a single presidential candidate. This is expected to severely impact Lai Ching-te's support. Chairman Zhu, Mayor Hou, former President Ma, and Chairman Ko have reached an agreement to introduce a set of candidates using the cumulative results of previous polls. The terms include a provision that, if the polls fall within the margin of error, it will be considered a victory for Hou You-yi. This is widely seen as a sign that Hou You-yi is likely to win. The final results will be announced on the 18th.",
+                    "likelihood": 1
                 }
-    //各党标题
-    if ( ans == 1950012 || ans == 1950013 || ans == 1950014 ){    
-        nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#f4f4ee" 
-        nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#13366e" 
-        $(".container")[0].style.backgroundColor = "#6848ff" 
-        $("#game_window")[0].style.borderColor = "#99A0A8" 
-        $(".container")[0].style.backgroundColor = "#F4F4EE" 
-        $("#game_window")[0].style.borderColor = "#f4f4ee" 
-        $("#game_window")[0].style.backgroundImage = "url(https://imgur.com/3praAwi.jpg)" 
-        document.getElementById("header").src = "https://i.imgur.com/I7YpjTe.jpeg" 
-        document.body.background = "https://i.imgur.com/EvtXFUE.jpeg"
-    }
-    //破局换成侯康
-    if ( ans == 1950751 || ans == 1950755){    
-        document.body.background = "https://i.imgur.com/cknN16g.jpg"
-    }
-    //2004噩梦
-    getResults = function (out, totv, aa, quickstats) {
-        if( aa[0].candidate === 67 && aa[1].candidate === 68 && quickstats[1] <= 50.12 && quickstats[1] >= 49.88 ) {
-            unlockAchievement("2004 The Nightmare KMT ONLY");
+            };
         }
     }
+
+    //各党标题
+    if ( ans == 1950012 || ans == 1950013 || ans == 1950014 ) {    
+        if (typeof nct_stuff !== "undefined" && nct_stuff.themes && nct_stuff.selectedTheme) {
+            nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#f4f4ee"; 
+            nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#13366e"; 
+        }
+        $(".container")[0].style.backgroundColor = "#6848ff"; 
+        $("#game_window")[0].style.borderColor = "#99A0A8"; 
+        $(".container")[0].style.backgroundColor = "#F4F4EE"; 
+        $("#game_window")[0].style.borderColor = "#f4f4ee"; 
+        $("#game_window")[0].style.backgroundImage = "url(https://imgur.com/3praAwi.jpg)"; 
+        document.getElementById("header").src = "https://i.imgur.com/I7YpjTe.jpeg"; 
+        document.body.background = "https://i.imgur.com/EvtXFUE.jpeg";
     }
 
-  
+    //破局换成侯康
+    if ( ans == 1950751 || ans == 1950755 ) {    
+        document.body.background = "https://i.imgur.com/cknN16g.jpg";
+    }
+};
+
+getResults = function (out, totv, aa, quickstats) {
+    if (!quickstats || !aa || !aa[0]) return;
+
+    const answers = e.player_answers || [];
+
+    //赵子龙
+    if ( aa[0].candidate === 68 && aa[2]?.candidate === 200 && aa[1]?.candidate === 67 && answers.includes(1950537) && answers.includes(1950611) && answers.includes(1950764) ) {
+        unlockAchievement("Three Kingdom Romance");
+    }
+
+    //三民主义
+    if ( aa[0].candidate === 68 && answers.includes(1950647) && answers.includes(1950740) ) {
+        unlockAchievement("Three Principles of People");
+    }
+
+    //果冻获胜
+    if ( aa[0].candidate === 68 && answers.includes(1950388) && answers.includes(1950400) ) {
+        unlockAchievement("New Taipei Has A Mayor");
+    }
+
+    //嘉义之子
+    let stateResultChiayiCo = campaignTrail_temp.final_state_results?.find((x) => x.state == 256);
+    let stateResultChiayiCity = campaignTrail_temp.final_state_results?.find((x) => x.state == 257);
+    let stateResultNewTaipei = campaignTrail_temp.final_state_results?.find((x) => x.state == 267);
+    if ( aa[0].candidate === 68 && 
+         stateResultChiayiCo?.result?.[0]?.candidate == 68 && 
+         stateResultChiayiCity?.result?.[0]?.candidate == 68 && 
+         stateResultNewTaipei?.result?.[0]?.candidate == 68 ) {
+        unlockAchievement("Chiayi favorite son");
+    }
+
+    //主流民意获胜
+    if ( aa[0].candidate === 68 && quickstats[1] > 59.9 ) {
+        unlockAchievement("Main Stream Opinion Wins");
+    }
+
+    //南部孩子回家了
+    let stateResultYunlin = campaignTrail_temp.final_state_results?.find((x) => x.state == 259);
+    let stateResultChanghua = campaignTrail_temp.final_state_results?.find((x) => x.state == 260);
+    let stateResultYilan = campaignTrail_temp.final_state_results?.find((x) => x.state == 263);
+    let stateResultPingtung = campaignTrail_temp.final_state_results?.find((x) => x.state == 253);
+
+    if ( aa[0].candidate === 68 && 
+         stateResultChiayiCo?.result?.[0]?.candidate == 68 && 
+         stateResultChiayiCity?.result?.[0]?.candidate == 68 && 
+         stateResultYunlin?.result?.[0]?.candidate == 68 && 
+         stateResultChanghua?.result?.[0]?.candidate == 68 && 
+         stateResultYilan?.result?.[0]?.candidate == 68 && 
+         stateResultPingtung?.result?.[0]?.candidate == 68 ) {
+        unlockAchievement("Southern Boys Returning Home");
+    }
+
+    if ( aa[1]?.candidate === 68 && quickstats[1] < 31.04 ) {
+        unlockAchievement("Challenge the Bottom Line");
+    }
+
+    //2004噩梦
+    if ( aa[0].candidate === 67 && aa[1]?.candidate === 68 && quickstats[1] <= 50.12 && quickstats[1] >= 49.88 ) {
+        unlockAchievement("2004 The Nightmare KMT ONLY");
+    }
+};
 
 campaignTrail_temp.jet_data = [{}
 ]
@@ -9516,9 +9530,6 @@ endingPicker = (out, totv, aa, quickstats) => {
                     return "<div style='overflow-y:scroll;height:250px;'><h3>Mainstream Opinion: DPP Suffers Complete Defeat, KMT-TPP Alliance Achieves a Landslide Victory</h3><p>When Terry Gou didn't endorse you after the primaries, you felt disheartened. As dissatisfaction among Han's supporters led to a drop in your polls, and when Ko Wen-je and his party attacked your low poll numbers and support rates, you needed to contain your anger. Throughout May to October, both the KMT and you fought hard, with fluctuating polls making your battle very challenging. However, ultimately, in October and November, due to Han Kuo-yu's endorsement and your early efforts, Ko Wen-je yielded in the final integration process, making you the presidential candidate. Almost all polls showed that after the coalition, you would be consistently leading Lai Ching-te by 5% to 10% in support, meaning a gap of a million votes. Through effective attacks, policy balance, and debate performances, in the days leading up to the election, your internal polls had already surpassed DPP by more than 10 percentage points. On January 13th, during the vote count program, Hou You-yi led from the first second and maintained the lead until the last vote was counted. Over 7.9 million votes were cast for the KMT-TPP alliance, completely destroying the DPP, and you won a landslide victory. The 8-year DPP rule ended in your hands, and Mayor Hou You-yi will be recorded in the history of the Republic of China as the president who led the KMT back to power. This is an impressive and unforgettable achievement!</p> <p>Due to your strong performance in the general election, the KMT became the largest party in the Legislative Yuan, while the DPP lost over a dozen seats, resulting in KMT having 59+2 legislators, ensuring you an absolute majority for the next four years. This will lay a solid foundation for your future governance. Han Kuo-yu will undoubtedly become the Speaker of the Legislative Yuan, and you've repaid his support and alleviated concerns from Han Kuo-yu's supporters towards you. The KMT has regained its position as the largest party in parliament and holds an absolute majority. This victory, long-awaited by the KMT since 2012, with such a high vote share, indicates the people's deep dissatisfaction with the DPP. What you need to worry about now is the by-election for the mayor of New Taipei City and the county and city mayor elections in 2026. If you not only maintain your current local governance but also expand into deep green areas, it will ensure your re-election in 2028. You're likely to be re-elected again, governing until 2032. However, Vice President Ko Wen-je is always an unpredictable factor. Hopefully, he won't oppose you and your government at that time. If all goes well, you're likely to be re-elected again, governing until 2032. Good luck, President Hou You-yi!</p></div>"
                   }
 }
-
-
-setInterval(endingPicker, 250);
 
 //注释代码
 function getTooltips(str) {

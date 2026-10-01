@@ -8251,45 +8251,46 @@ setInterval(checkIfCanAddMap, 250);
 
 cyoAdventure = function (a) { 
     //萧美琴
-    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length-1];
-    if ( ans == 13324  ) {
+    ans = campaignTrail_temp.player_answers[campaignTrail_temp.player_answers.length - 1];
+    if ( ans == 13324 ) {
         campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/JpqGVO0.jpg';
         campaignTrail_temp.running_mate_last_name = 'Hsiao';
         campaignTrail_temp.questions_json[28] = {
-          "model": "campaign_trail.question",
-          "pk": 195000,
-          "fields": {
-            "priority": 1,
-            "description": "Today, you will engage in a face-to-face debate showdown with the articulate TPP Chairman Ko Wen-je. You did not expect that a third-party candidate could possibly become the future president today, but you will not allow such a thing to happen, and the debate is your opportunity to outshine him. In what aspects do you plan to attack him? ",
-            "likelihood": 1
-          }
-        }
+            "model": "campaign_trail.question",
+            "pk": 195000,
+            "fields": {
+                "priority": 1,
+                "description": "Today, you will engage in a face-to-face debate showdown with the articulate TPP Chairman Ko Wen-je. You did not expect that a third-party candidate could possibly become the future president today, but you will not allow such a thing to happen, and the debate is your opportunity to outshine him. In what aspects do you plan to attack him? ",
+                "likelihood": 1
+            }
+        };
         campaignTrail_temp.questions_json[29] = {
             "model": "campaign_trail.question",
-        "pk": 12828,
-        "fields": {
-            "priority": 0,
-            "description": "\nIn this face-off in the vice presidential debate, Hsiao Bi-Khim will confront the incumbent Mayor of New Taipei City, Hou Yu-yi. These two individuals seem to have little in common: one is an intellectual woman with overseas and international experience, while the other is a down-to-earth local uncle from Taiwan. This suggests that there won't be too much excitement in the debate between these two. Nevertheless, what points do you want to emphasize during the debate?",
-            "likelihood": 1
-        }
-          }
+            "pk": 12828,
+            "fields": {
+                "priority": 0,
+                "description": "\nIn this face-off in the vice presidential debate, Hsiao Bi-Khim will confront the incumbent Mayor of New Taipei City, Hou Yu-yi. These two individuals seem to have little in common: one is an intellectual woman with overseas and international experience, while the other is a down-to-earth local uncle from Taiwan. This suggests that there won't be too much excitement in the debate between these two. Nevertheless, what points do you want to emphasize during the debate?",
+                "likelihood": 1
+            }
+        };
     }
     else if ( ans == 13319 ) {
         campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/JpqGVO0.jpg';
         campaignTrail_temp.running_mate_last_name = 'Hsiao';
     }
-     if (ans == 13323 ){
+
+    if ( ans == 13323 ) {
         campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/JpqGVO0.jpg';
         campaignTrail_temp.running_mate_last_name = 'Hsiao';
         campaignTrail_temp.questions_json[28] = {
-          "model": "campaign_trail.question",
-          "pk": 15781,
-          "fields": {
-            "priority": 1,
-            "description": "As the presidential debate kicks off, you go head-to-head with Mayor Hou on stage. He speaks Mandarin with a strong Taiwanese accent, interweaving Taiwanese phrases in his speech. Your eloquence and image are probably stronger than his. So, what issues do you primarily want to focus on during the debate?",
-            "likelihood": 1
-          }
-        }
+            "model": "campaign_trail.question",
+            "pk": 15781,
+            "fields": {
+                "priority": 1,
+                "description": "As the presidential debate kicks off, you go head-to-head with Mayor Hou on stage. He speaks Mandarin with a strong Taiwanese accent, interweaving Taiwanese phrases in his speech. Your eloquence and image are probably stronger than his. So, what issues do you primarily want to focus on during the debate?",
+                "likelihood": 1
+            }
+        };
         campaignTrail_temp.questions_json[29] = {
             "model": "campaign_trail.question",
             "pk": 12847,
@@ -8298,89 +8299,92 @@ cyoAdventure = function (a) {
                 "description": "Perhaps this year's vice presidential debate will be more intriguing than the presidential debate. When Ko Wen-je entered the debate room, the online viewership exceeded 500,000, with young people continuously expressing support for Ko in the chat rooms. Ko Wen-je is likely to be a formidable debater, and Hsiao must carefully handle this opponent in the final stretch of the election. What statements should she make to best navigate this challenge?",
                 "likelihood": 1
             }
-          }
+        };
     }
-    if (ans == 13019 || 13020 || 13021 ){
+
+    if ( ans == 13019 || ans == 13020 || ans == 13021 ) {
         campaignTrail_temp.election_json[0]["fields"].advisor_url = "https://i.imgur.com/DDLF2js.jpeg";
     }
+
     //四人辩论问题
-    if(ans == 13322){
+    if ( ans == 13322 ) {
         campaignTrail_temp.running_mate_image_url = 'https://i.imgur.com/JpqGVO0.jpg';
         campaignTrail_temp.running_mate_last_name = 'Hsiao';
         campaignTrail_temp.questions_json[28] = {
-          "model": "campaign_trail.question",
-          "pk": 1950,
-          "fields": {
-            "priority": 1,
-            "description": "This year's presidential debate featured four candidates on stage for the first time. They were Hou, Ko, and the qualified candidate Guo, who secured candidacy by obtaining 940,000 citizen signatures. When facing the three other opposition candidates, what statement will you make?",
-            "likelihood": 1
-          }
-        }
-    }
- //laipiliao
-    if (e.player_answers.includes(13357) && e.player_answers.includes(13370)) { 
-    unlockAchievement("On the Road To Laipiliao");  
-    }
-//Taiwan First
-    if (e.player_answers.includes(13019) && e.player_answers.includes(13049)  && e.player_answers.includes(13058)&& e.player_answers.includes(13112) && e.player_answers.includes(13204) && e.player_answers.includes(13236) && e.player_answers.includes(13253) && e.player_answers.includes(13300)) { 
-        getResults = function (out, totv, aa, quickstats) {
-            if( aa[0].candidate === 67 ) {
-                unlockAchievement("Taiwan First");
+            "model": "campaign_trail.question",
+            "pk": 1950,
+            "fields": {
+                "priority": 1,
+                "description": "This year's presidential debate featured four candidates on stage for the first time. They were Hou, Ko, and the qualified candidate Guo, who secured candidacy by obtaining 940,000 citizen signatures. When facing the three other opposition candidates, what statement will you make?",
+                "likelihood": 1
             }
+        };
+    }
+
+    //标题和背景
+    if ( ans == 13019 || ans == 13020 || ans == 13021 ) {    
+        nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#ffffff"; 
+        nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#4ade65"; 
+        $(".container")[0].style.backgroundColor = "#6848ff"; 
+        $("#game_window")[0].style.borderColor = "#99A0A8"; 
+        $(".container")[0].style.backgroundColor = "#F4F4EE"; 
+        $("#game_window")[0].style.borderColor = "#ffffff"; 
+        $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/560XCo8.png)"; 
+        document.getElementById("header").src = "https://i.imgur.com/FvRpfn9.jpeg"; 
+        document.body.background = "https://i.imgur.com/YQHN37t.jpeg";
+    }
+};
+
+getResults = function (out, totv, aa, quickstats) {
+    if (!aa || !aa[0] || !quickstats) return;
+
+    //laipiliao
+    if (e.player_answers.includes(13357) && e.player_answers.includes(13370)) { 
+        unlockAchievement("On the Road To Laipiliao");  
+    }
+
+    //Taiwan First
+    if (e.player_answers.includes(13019) && e.player_answers.includes(13049) && e.player_answers.includes(13058) && e.player_answers.includes(13112) && e.player_answers.includes(13204) && e.player_answers.includes(13236) && e.player_answers.includes(13253) && e.player_answers.includes(13300)) { 
+        if ( aa[0].candidate === 67 ) {
+            unlockAchievement("Taiwan First");
         }
     }
+
     //Guo
     if (e.player_answers.includes(13217) && e.player_answers.includes(13253) && e.player_answers.includes(13442)) { 
-     e.final_overall_results.sort((a, b) => b.popular_votes - a.popular_votes);   
-    getResults = function (out, totv, aa, quickstats) {
-            if( aa[3].candidate === 201 && quickstats[0] <= 1) {
-                unlockAchievement("Blue Spoiler");
-            }
+        if (e.final_overall_results) {
+            e.final_overall_results.sort((a, b) => b.popular_votes - a.popular_votes);
+        }
+        if ( aa[3] && aa[3].candidate === 201 && quickstats[0] <= 1 ) {
+            unlockAchievement("Blue Spoiler");
         }
     }
-        // in-game achievements
-            getResults = function (out, totv, aa, quickstats) {
-              let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 268);
-              if( aa[0].candidate === 67 && stateResult.result[0].candidate == 67) {
-                  unlockAchievement("Sorry You are Not Taipei Mayor");
-                        }
-                  }
-          getResults = function (out, totv, aa, quickstats) {
-              let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 256);
-              let stateResulttwo = campaignTrail_temp.final_state_results.find((x) => x.state == 267);
-              if( aa[0].candidate === 68 && stateResult.result[0].candidate == 68 && stateResulttwo.result[0].candidate == 67) {
-                  unlockAchievement("New Home And Hometown");
-              }
-          }
-          getResults = function (out, totv, aa, quickstats) {
-              if( aa[0].candidate === 67 && quickstats[0] == 20 ) {
-                  unlockAchievement("Taiwanese independence Protégé");
-              }
-              }
-          getResults = function (out, totv, aa, quickstats) {
-              let stateResult = campaignTrail_temp.final_state_results.find((x) => x.state == 251);
-              if( aa[0].candidate === 68 || aa[0].candidate === 200 && quickstats[0] == 1 && stateResult.result[0].candidate == 67 ) {
-                  unlockAchievement("Reverse 817");
-              }
-          }
-          getResults = function (out, totv, aa, quickstats) {
-              if( aa[0].candidate === 67 && quickstats[0] <= 5 ) {
-                  unlockAchievement("Happy surprise");
-              }
-          }
-        //标题和背景
-           if ( ans == 13019 || ans == 13020 || ans == 13021 ){    
-            nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#ffffff" 
-            nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#4ade65" 
-            $(".container")[0].style.backgroundColor = "#6848ff" 
-            $("#game_window")[0].style.borderColor = "#99A0A8" 
-            $(".container")[0].style.backgroundColor = "#F4F4EE" 
-            $("#game_window")[0].style.borderColor = "#ffffff" 
-            $("#game_window")[0].style.backgroundImage = "url(https://i.imgur.com/560XCo8.png)" 
-            document.getElementById("header").src = "https://i.imgur.com/FvRpfn9.jpeg" 
-            document.body.background = "https://i.imgur.com/YQHN37t.jpeg"
-        }
-}
+
+    // in-game achievements
+    let stateResultTaipei = campaignTrail_temp.final_state_results.find((x) => x.state == 268);
+    if ( aa[0].candidate === 67 && stateResultTaipei && stateResultTaipei.result[0].candidate == 67 ) {
+        unlockAchievement("Sorry You are Not Taipei Mayor");
+    }
+
+    let stateResultChiayi = campaignTrail_temp.final_state_results.find((x) => x.state == 256);
+    let stateResultNewTaipei = campaignTrail_temp.final_state_results.find((x) => x.state == 267);
+    if ( aa[0].candidate === 68 && stateResultChiayi && stateResultChiayi.result[0].candidate == 68 && stateResultNewTaipei && stateResultNewTaipei.result[0].candidate == 67 ) {
+        unlockAchievement("New Home And Hometown");
+    }
+
+    if ( aa[0].candidate === 67 && quickstats[0] == 20 ) {
+        unlockAchievement("Taiwanese independence Protégé");
+    }
+
+    let stateResultTainan = campaignTrail_temp.final_state_results.find((x) => x.state == 251);
+    if ( (aa[0].candidate === 68 || aa[0].candidate === 200) && quickstats[0] == 1 && stateResultTainan && stateResultTainan.result[0].candidate == 67 ) {
+        unlockAchievement("Reverse 817");
+    }
+
+    if ( aa[0].candidate === 67 && quickstats[0] <= 5 ) {
+        unlockAchievement("Happy surprise");
+    }
+};
 
 campaignTrail_temp.multiple_endings=true
 
@@ -8680,7 +8684,6 @@ getResults = function (out, totv, aa, quickstats) {
     }
 }
 
-  setInterval(endingPicker, 250);
   function changechart(){
     if (document.getElementById("overall_vote_statistics")!=null) {
     overallthing=document.getElementById("overall_vote_statistics").innerHTML;
