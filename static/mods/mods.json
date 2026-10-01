@@ -2314,7 +2314,7 @@
   {
     "value": "1990 MI",
     "text": "1990 Michigan Governor",
-    "mode": "new",
+    "mode": "",
     "tags": "Historical State",
     "awards": "",
     "awardimageurls": ""
@@ -2570,7 +2570,7 @@
   {
     "value": "2025NJGOV",
     "text": "2025 New Jersey Gubernatorial Election",
-    "mode": "new",
+    "mode": "",
     "tags": "Historical State",
     "awards": "",
     "awardimageurls": ""
@@ -2578,7 +2578,7 @@
   {
     "value": "2025NJ",
     "text": "2025 NJ",
-    "mode": "new",
+    "mode": "",
     "tags": "Historical State",
     "awards": "",
     "awardimageurls": ""
@@ -2586,7 +2586,7 @@
   {
     "value": "2004: On The Road",
     "text": "2004: On The Road",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist",
     "awards": "",
     "awardimageurls": ""
@@ -2594,7 +2594,7 @@
   {
     "value": "1968 Stassen",
     "text": "1968 Stassen",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist",
     "awards": "",
     "awardimageurls": ""
@@ -2642,7 +2642,7 @@
   {
     "value": "EricChu2020",
     "text": "Eric Chu 2020",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist International",
     "awards": "",
     "awardimageurls": ""
@@ -2650,7 +2650,7 @@
   {
     "value": "2028 - Mamdani vs Musk",
     "text": "2028: Mamdani vs Musk",
-    "mode": "new",
+    "mode": "",
     "tags": "Althist",
     "awards": "",
     "awardimageurls": ""
