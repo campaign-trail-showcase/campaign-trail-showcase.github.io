@@ -1,0 +1,1824 @@
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 9,
+        "fields": {
+            "year": 2004,
+            "summary": "<p>America, still suspicious of the legitimacy of Bushes win in 2000, heads into a fork in the road in 2004. With NCLB, the War on Terror, The Patriot act, and many more mishandling of Bushes, this is shaping up to be a real close election. </p><ul><li>Ed Rendell, a rising democratic star, needs to motivate the bases and avoid the nationwide experience issues he has.</li><li>George Walker Bush, the incumbent, must convince voters to not switch presidents in the midst of war while also keeping his own bases motivated to show up for election night.</li></ul>",
+            "image_url": "https://imgur.com/VA82I9t.jpg",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://i.imgur.com/wWtPm0v.png",
+            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">The Florida Recount / 2000 Election</h4><a href=\"http://www.amazon.com/exec/obidos/ASIN/B000RH0DVM/amhius20-20\" target=”_blank”>Jeffrey Toobin - Too Close to Call: The Thirty-Six-Day Battle to Decide the 2000 Election</a></br><a href=\"http://www.amazon.com/exec/obidos/ASIN/B00EMLDHFI/amhius20-20\" target=”_blank”>Andrew E. Busch & James W. Ceaser - The Perfect Tie: The True Story of the 2000 Presidential Election</a></br><a href=\"http://www.amazon.com/exec/obidos/ASIN/032110028X/amhius20-20\" target=”_blank”>Larry Sabato - Overtime! The Election 2000 Thriller</a><h4>Books by the Candidates</h4><a href=\"http://www.amazon.com/exec/obidos/ASIN/B000C4SV2I/amhius20-20\" target=”_blank”>George W. Bush - A Charge to Keep: My Journey to the White House</a></br><a href=\"http://www.amazon.com/exec/obidos/ASIN/0452269350/amhius20-20\" target=”_blank”>Al Gore - Earth in the Balance</a></br><a href=\"http://www.amazon.com/exec/obidos/ASIN/B003YFIYWY/amhius20-20\" target=”_blank”>The Ralph Nader Reader</a><h4>Links</h4><a href=\"http://www.digitalhistory.uh.edu/disp_textbook.cfm?smtID=2&psid=3377\" target=”_blank”>Digital History - The Disputed Election of 2000</a></br><a href=\"http://www.pbs.org/wnet/supremecourt/future/landmark_bush.html\" target=”_blank”><em>Bush v. Gore</em></a></br><a href=\"http://www.vanityfair.com/news/2004/10/florida-election-2000\" target=”_blank”>The Path to Florida</a></br><a href=\"http://www.historyplace.com/speeches/gore-concedes.htm\" target=”_blank”>Al Gore Concedes the 2000 Election</a>",
+            "has_visits": 1,
+            "no_electoral_majority_image": "https://thecampaigntrail.net/static/images/2012-no-majority.jpg",
+            "creator": "U/GoodbyeStr8nger",
+            "is_historical": true,
+            "display_year": "2004 - What a Wonderful World!",
+            "recommended_reading_enabled": true,
+            "site_description": "The Year is 2004, it has been one full election cycle since Bushes controversial win in florida, his approval ratings peaked sky high at 90% when he took the steering wheel during 9/11, the biggest tragedy in American history. However, most of his momentum is gone after the mishandling of the war on terror, NCLB, and many other sprinkles of failure. He faces Ed Rendell, who back in Iowa, called him a “wuss who uses tragedy as a mask for war” on live TV. This is shaping up to be a close one, will Rendell pull off an upset? Or will the incumbency during war leverage Bush to term 2, being the first Bush to serve 8 years?"
+        }
+    }
+];
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 9,
+        "year": 2004,
+        "is_premium": 0,
+        "display_year": "2004 - What a Wonderful World!"
+    }
+];
+
+RecReading = true;
+
+campaignTrail_temp.credits = "GoodbyeStr8nger";
+
+// necessary so that the right election files are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "9") {
+            campaignTrail_temp.code2_id = "2004 - What a Wonderful World";
+        }
+    }
+}, 100);
+
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+];
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 77,
+        "fields": {
+            "first_name": "George W.",
+            "last_name": "Bush",
+            "election": 9,
+            "party": "Republican",
+            "state": "Texas",
+            "priority": 1,
+            "description": "<p>George W. Bush enters 2000 with the support of the Republican establishment and the name recognition of his father. He has governed Texas for five years and won bipartisan support in that state. He seeks to duplicate that formula on the national stage.</p><p>Bush has broad appeal and a united base, but lacks experience and gravitas in the eyes of some. Can he make the case that he will move beyond the partisanship of the Clinton years and bring \"compassionate conservatism\" to the nation?</p>",
+            "color_hex": "#750a00",
+            "secondary_color_hex": "#a92100",
+            "is_active": 0,
+            "image_url": "https://thecampaigntrail.net/static/images/george-w-bush-2000.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>Confounding the predictions of many experts, you were able to turn the tables on Al Gore, in spite of the economy and Clinton's popularity.</p><p>On the political front, you can push for tax cuts to spur the economy and return the budget surplus to the American people. You might also pursue education and immigration reform, individual Social Security accounts, and new laws to defend the family and the sanctity of life.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2000 election.</h3><p>Perhaps it was always a long-shot, with the Democrats in such a commanding position after eight years of Bill Clinton. In any case, at least you are still the Governor of Texas.</p><p>Expect Al Gore to unleash a new round of government programs and environmental regulations. You are still youngish, however. If the election was close this time, perhaps you can run again in 2004, or work on behalf your brother Jeb.</p>",
+            "no_electoral_majority_message": "<h3>Wow! You have won in a squeaker.</h3><p>No candidate achieved a majority of the electoral votes, marking the first time this has happened since 1824. Fortunately for you, the majority of U.S. states have Republican controlled congressional delegations, and they will cast their votes accordingly.</p><p>Given the incredibly close nature of the election, you will surely be expected to govern as a moderate, conciliatory President. Right??</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 78,
+        "fields": {
+            "first_name": "Ed",
+            "last_name": "Rendell",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Pennsylvania",
+            "priority": 2,
+            "description": "<h3> Well, Ed..you made it, today’s the big day. 2004 democratic nominee, just two years after you got elected to the governorship. You are ready to take on Bush Jr. and stop the Bush dynasty for good (unless Jeb wants to run.) Of course, you can’t do this alone, We’ve compacted a running mate shortlist of six guys for you, tell us who you want, and remember..</h3> <h1> Fight like your life depends on it.</h1> ",
+            "color_hex": "#003b4f",
+            "secondary_color_hex": "#007a88",
+            "is_active": 1,
+            "image_url": "https://imgur.com/gICaQ3n.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>Though it was perhaps expected, you could have easily faltered at a number of points. Credit to you for pulling through.</p><p>On the political front, you can continue the Clinton legacy and strengthen Social Security for generations to come. Perhaps you can succeed on health care where Clinton came up short? Or maybe you can create a future of renewable energy for America. Just be wary of a (George or Jeb?) Bush challenge in 2004.</p>",
+            "electoral_loss_message": "<h3>Sorry! You have lost the 2000 election.</h3><p>Surely the second-guessing will be intense, but if things were close you could probably run again in 2004.</p><p>It seems that with George W. Bush and a Republican majority, the United States can expect some conservative policy-making over the next four years. Hopefully Bush comes through on his promise to govern in a bipartisan, conciliatory manner. A lot should depend on the margin of his victory, and whether it was large or small.</p>",
+            "no_electoral_majority_message": "<h3>Sorry! You have lost in a squeaker.</h3><p>No candidate achieved a majority of the electoral votes, for the first time since 1824. Unfortunately for you, a majority of states have Republican controlled congressional delegations.</p><p>It seems that with George W. Bush and a Republican majority, the United States can expect some conservative policy-making over the next four years. Hopefully Bush comes through on his promise to govern in a bipartisan, conciliatory manner.</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 79,
+        "fields": {
+            "first_name": "David",
+            "last_name": "Cobb",
+            "election": 9,
+            "party": "Green",
+            "state": "Connecticut",
+            "priority": 3,
+            "description": "<p>Ralph Nader enters the 2000 election as the Green candidate after years as an activist and consumer advocate.</p><p>After eight years of Bill Clinton, it is clear that the United States needs a true liberal alternative -- one that will fight for fair trade, universal health care, free college, and campaign finance reform. Nader's primary goal in this election is to win 5% of the popular vote, which will qualify the Green Party for federal matching funds in 2004.</p>",
+            "color_hex": "#615500",
+            "secondary_color_hex": "#daff75",
+            "is_active": 0,
+            "image_url": "https://thecampaigntrail.net/static/images/ralph-nader-2000.jpg",
+            "electoral_victory_message": "<h3>Congratulations! You have won the 2000 election.</h3><p>This was definitely not supposed to happen. Good luck!</p>",
+            "electoral_loss_message": "<h3>As expected, you have lost the 2000 election.</h3><p>The legacy of this campaign depends on a couple of factors. First of all, did you receive 5% of the popular vote? If so, congratulations! You will enable the Green Party to run a vigorous campaign in 2004 and present a true choice to the American people. Also, the Democrats were a little peeved that you \"stole\" votes from them in this election. Hopefully that doesn't lead to a backlash.</p>",
+            "no_electoral_majority_message": "<h3>Wow! No candidate received 270 electoral votes, but the House will elect George W. Bush as President.</h3><p>Did you receive 5% of the popular vote? If so, congratulations! You will enable the Green Party to run a vigorous campaign in 2004 and present a true choice to the American people. Also, the Democrats were a little peeved that you \"stole\" votes from them in this election. Hopefully that doesn't lead to a backlash, especially since they will lose the vote in the House.</p>",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 80,
+        "fields": {
+            "first_name": "Ralph",
+            "last_name": "Nader",
+            "election": 9,
+            "party": "Reform",
+            "state": "Virginia",
+            "priority": 4,
+            "description": "''",
+            "color_hex": "#4c009d",
+            "secondary_color_hex": "#f867ff",
+            "is_active": 0,
+            "image_url": "''",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 81,
+        "fields": {
+            "first_name": "Dick",
+            "last_name": "Cheney",
+            "election": 9,
+            "party": "Republican",
+            "state": "Wyoming",
+            "priority": 5,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://thecampaigntrail.net/static/images/dick-cheney-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Dick Cheney is a seasoned operative of the Republican Party who has served as White House Chief of Staff, Minority Whip in Congress, Secretary of Defense, and as CEO of Halliburton. He would be a respected choice across the Republican spectrum, and would add experience and gravitas to the Republican ticket.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 82,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Danforth",
+            "election": 9,
+            "party": "Republican",
+            "state": "Missouri",
+            "priority": 6,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://thecampaigntrail.net/static/images/john-danforth-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>John Danforth served four terms as Senator from Missouri. He has broad experience in government, and as a moderate Republican would reinforce Bush's claim to be a uniter. Danforth also has close relationships with conservative stalwarts such as Kit Bond, Clarence Thomas, and John Ashcroft, and would not arouse undue suspicion from the conservative wing of the party. Winning Missouri back would be a key piece of any Republican victory in 2000.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 83,
+        "fields": {
+            "first_name": "Tom",
+            "last_name": "Ridge",
+            "election": 9,
+            "party": "Republican",
+            "state": "Pennsylvania",
+            "priority": 7,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://thecampaigntrail.net/static/images/tom-ridge-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Tom Ridge is the popular Governor of a large swing state. Pennsylvania's 23 electoral votes would almost ensure a Bush victory if Ridge could deliver them. He has a reputation as an able administrator and has been very tough on crime. However, he has also been pro-choice for his entire career, and his selection as running mate could cause issues with the Republican base in other regions.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 84,
+        "fields": {
+            "first_name": "Colin",
+            "last_name": "Powell",
+            "election": 9,
+            "party": "Republican",
+            "state": "Virginia",
+            "priority": 8,
+            "description": "''",
+            "color_hex": "#FF0000",
+            "secondary_color_hex": "#FFA0A0",
+            "is_active": 0,
+            "image_url": "https://thecampaigntrail.net/static/images/colin-powell-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Colin Powell is a moderate Republican and a key general from the Desert Storm campaign. He enjoys high personal popularity among the American electorate. He would be the first African-American to be a running mate for a major party. It will take some strong inducements to get Powell to run, however. He has repeatedly stated that he is not seeking the role, but perhaps you could persuade him by taking a moderate position on the social issues of the day.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 85,
+        "fields": {
+            "first_name": "Herb",
+            "last_name": "Kohl",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Wisconsin",
+            "priority": 9,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://imgur.com/vTNzTvD.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<h3> Finding diamonds will be tough here Ed, especially since nobody wanted to show up after Bushes approval ratings spiked. The list starts with Herb Kohl, a senator and owner of the Miluwakee Bucks. He is from a swing state, which is a good start, and has a liberal record, which matches with your ideology Incase your looking to keep the base in (which shouldn’t be an issue either way.) The biggest issue is his age, at 69 years old, running with him will immediately risk people questioning if he’ll croak on the job. If you’re willing to take that risk, Herb’s your man.",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 86,
+        "fields": {
+            "first_name": "Jay",
+            "last_name": "Rockefeller",
+            "election": 9,
+            "party": "Democrat",
+            "state": "West Virginia",
+            "priority": 10,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://imgur.com/fYSJBBb.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<h3> Some men don’t require introductions, a man who would fit into the caterogry would be the Rockefeller family’s “newest” congress member. First denying Nelson’s appointment to Robert Kennedys spot in the 60s, he has build a good resume as the senator and governor of West Virginia for the past 20 or so years. if you need experience at the lack of age, he’s your man. The one problem is that West Virginia probably won’t swing your way, so geographically he’s useless.",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 87,
+        "fields": {
+            "first_name": "Max",
+            "last_name": "Baucus",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Montana ",
+            "priority": 11,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://imgur.com/M8q9B8R.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<h3> What’s not to say about Big Sky’s senator himself? A man in the senate since the late 70s who has, not only a good resume for re-elections, but he also has been doing this in Montana, a state that usually votes red on a yearly basis (Unless your name rhymes with Smill Minton.) There is one problem though, he’s a conservative. If he takes the role on the ticket, he WILL ask for concessions, which may be worth it for the experience, and the plain states.",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 88,
+        "fields": {
+            "first_name": "Jesse",
+            "last_name": "Jackson Jr.",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Illinois",
+            "priority": 12,
+            "description": "''",
+            "color_hex": "#0000FF",
+            "secondary_color_hex": "#90C0FF",
+            "is_active": 0,
+            "image_url": "https://imgur.com/QMnJWpN.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<h3> Now Ed, I need you to hear me out here on Jesse Jackson Jr. A Congressman elected to Illinois’  2nd in 1995, which will help us with a Midwest boost, and he comes from popular descent, son of Jesse Jackson, 1988 and 1984 democratic candidate. The one issue is that he has some allegations of campaign fund misuse, but those are just rumors, I’m telling you Ed, he’s the guy.",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 89,
+        "fields": {
+            "first_name": "Winona",
+            "last_name": "LaDuke",
+            "election": 9,
+            "party": "Green",
+            "state": "Minnesota",
+            "priority": 13,
+            "description": "''",
+            "color_hex": "#00C100",
+            "secondary_color_hex": "#A1FFA1",
+            "is_active": 0,
+            "image_url": "https://thecampaigntrail.net/static/images/winona-laduke-2000.jpg",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "<p>Winona LaDuke is a Native American activist of Ojibwe ancestry. She lives in Minnesota and has been active in attempts to regain land that once belonged to various American Indian tribes. She has written a book and started organizations in support of this issue.</p>",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 90,
+        "fields": {
+            "first_name": "Ezola",
+            "last_name": "Foster",
+            "election": 9,
+            "party": "Reform",
+            "state": "California",
+            "priority": 14,
+            "description": "''",
+            "color_hex": "#FFFF00",
+            "secondary_color_hex": "#FFFFC0",
+            "is_active": 0,
+            "image_url": "''",
+            "electoral_victory_message": "''",
+            "electoral_loss_message": "''",
+            "no_electoral_majority_message": "''",
+            "description_as_running_mate": "''",
+            "candidate_score": 0,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 91,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Breaux",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Louisiana",
+            "priority": 1,
+            "description": "Running mate description here.",
+            "color_hex": "#CCCCCC",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://imgur.com/u8MdUaR.jpg",
+            "electoral_victory_message": "Winner!",
+            "electoral_loss_message": "Loser!",
+            "no_electoral_majority_message": "Majority?",
+            "description_as_running_mate": "<h3> The south seems out a bit of reach this year, so why not try to throw them a bone? John Breaux has everything you want and more, a young senator who’s been in congress for a while now, so he clocks down experience AND age, lucky you. He is a conservative though, so your base may feel a little betrayed, even if Breaux dosent care for concessions. The only real southern state you’ll get a chance at is Florida or, if you get lucky, Louisiana.",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 92,
+        "fields": {
+            "first_name": "Dave",
+            "last_name": "Freudenthal ",
+            "election": 9,
+            "party": "Democrat",
+            "state": "Wyoming",
+            "priority": 1,
+            "description": "Running mate description here.",
+            "color_hex": "#CCCCCC",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://imgur.com/94b0sv6.jpg",
+            "electoral_victory_message": "Winner!",
+            "electoral_loss_message": "Loser!",
+            "no_electoral_majority_message": "Majority?",
+            "description_as_running_mate": "<h3> And to end off the list, Dave Freudenthal. First elected in 2002 as Wyoming’s governor, yes, as a democrat, he has had a staunch conservative attitude to the point where some Wyoming folk hasn’t noticed the “D” next to his name. Obviously he’ll drain your base, but he’s so popular to where maybe the plains will pick you up? Nah, just playing with ya, but if you want another rising star to double down on your newbie status, Dave is right there for ya.",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    }
+];
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 57,
+        "fields": {
+            "candidate": 80,
+            "running_mate": 90
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 56,
+        "fields": {
+            "candidate": 79,
+            "running_mate": 89
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 48,
+        "fields": {
+            "candidate": 77,
+            "running_mate": 81
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 52,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 85
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 53,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 86
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 54,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 87
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 55,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 88
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 58,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 91
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 59,
+        "fields": {
+            "candidate": 78,
+            "running_mate": 92
+        }
+    }
+];
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 9,
+        "candidates": [
+            77,
+            78,
+            79,
+            80
+        ]
+    }
+];
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 9,
+        "candidates": [
+            77,
+            78,
+            79,
+            80
+        ]
+    }
+];
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#00285a",
+    "header_text_color": "#00c1f0",
+    "description_background_color": "#003c6a",
+    "description_text_color": "#ffffff",
+    "main_color": "#001952",
+    "secondary_color": "#002d80",
+    "ui_text_color": "#002b44"
+};
+
+jet_data = {
+    "headerColor": "#002b52",
+    "headerTextColor": "#003f6e",
+    "windowColor": "#00567c",
+    "containerColor": "#002346",
+    "innerWindowColor": "#00233e",
+    "innerWindowTextColor": "#ffffff",
+    "descriptionWindowColor": "#003f60",
+    "descriptionWindowTextColor": "#ffffff",
+    "startButtonColor": "#e8e8e8",
+    "bannerImageUrl": "https://imgur.com/gpnTPmo.jpg",
+    "backgroundImageUrl": "https://imgur.com/wXDsBUL.jpg",
+    "gameTitle": "𝗪𝗛𝗔𝗧 𝗔 𝗪𝗢𝗡𝗗𝗘𝗥𝗙𝗨𝗟 𝗪𝗢𝗥𝗟𝗗!",
+    "customQuote": "",
+    "quoteTextColor": "#ffffff",
+    "endingTextColor": "#ffffff",
+    "modBoxTheme": {
+        "header_color": "#00285a",
+        "header_text_color": "#00c1f0",
+        "header_image_url": "",
+        "header_text_shadow": "",
+        "header_font": "",
+        "header_margin": "",
+        "description_background_color": "#003c6a",
+        "description_text_color": "#ffffff",
+        "main_color": "#001952",
+        "secondary_color": "#002d80",
+        "secondary_hover_color": "",
+        "scrollbar_color": "",
+        "scrollbar_width": "",
+        "image_border": "",
+        "election_image_display": "",
+        "ui_text_color": "#002b44",
+        "site_title": "",
+        "site_image_url": ""
+    }
+};
+
+//#startcode
+function applyTheme(theme) {
+    const gameHeader = document.querySelector(".game_header");
+    if (gameHeader && theme.coloring_title) {
+        gameHeader.style.backgroundColor = theme.coloring_title;
+    }
+
+    const gameWindow = document.getElementById("game_window");
+    if (gameWindow && theme.coloring_window) {
+        gameWindow.style.backgroundColor = theme.coloring_window;
+    }
+
+    const container = document.querySelector(".container");
+    if (container && theme.coloring_container) {
+        container.style.backgroundColor = theme.coloring_container;
+    }
+
+    const headerImg = document.getElementById("header");
+    if (headerImg && theme.header_image) {
+        headerImg.src = theme.header_image;
+    }
+
+    if (theme.body_background) {
+        document.body.style.backgroundImage = `url("${theme.body_background}")`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundAttachment = "fixed";
+    }
+
+    const style = document.createElement("style");
+    style.textContent = `
+      #results_container { color: #ffffff; }
+      #wittyquote { color: #ffffff; }
+      .game_header h2 { color: #003f6e; }
+      .inner_window_w_desc { background-color: #00233e !important; color: #ffffff; }
+      .inner_window_front, .person_description_window, .election_description_window, .description_window_small { background-color: #003f60 !important; color: #ffffff; }
+      .campaign_trail_start_emphasis { background-color: #e8e8e8 !important; }
+    `;
+    document.head.appendChild(style);
+}
+
+corrr = "\n              <h2>𝗪𝗛𝗔𝗧 𝗔 𝗪𝗢𝗡𝗗𝗘𝗥𝗙𝗨𝗟 𝗪𝗢𝗥𝗟𝗗!</h2>\n            ";
+
+const theme = nct_stuff.themes[nct_stuff.selectedTheme];
+
+// define / override theme values
+theme.coloring_title     = "#002b52";
+theme.coloring_window    = "#00567c";
+theme.coloring_container = "#002346";
+theme.header_image = "https://imgur.com/gpnTPmo.jpg";
+theme.body_background = "https://imgur.com/wXDsBUL.jpg";
+
+applyTheme(theme);
+//#endcode
+// The music player seen in
+// 2016: A Lifetime of This.
+(function () {
+    'use strict';
+
+    // The songs.
+    const SONGS_DATA = [
+        { title: "What a Wonderful World", artist: "Louis Armstrong", coverLink: "https://upload.wikimedia.org/wikipedia/en/6/63/Louis_Armstrong_What_a_Wonderful_World.jpg", videoIds: ["rBrd_3VMC3c"] },
+ { title: "Everybody Wants to Rule the World", artist: "Tears For Fears", coverLink: "https://upload.wikimedia.org/wikipedia/en/a/a1/Everybody_Wants_to_Rule_the_World.png", videoIds: ["awoFZaSuko4"] },
+        { title: "The Middle (Acoustic)", artist: "Jimmy Eat World", coverLink: "https://upload.wikimedia.org/wikipedia/en/3/37/Bleedamerican.jpg", videoIds: ["GR13Y_CgRME"] },
+        { title: "Ride Wit Me", artist: "Nelly", coverLink: "https://upload.wikimedia.org/wikipedia/en/4/4e/Country_Grammar.jpg", videoIds: ["FS6Fnhndo_8"] },
+        { title: "I Should Be Allowed to Think", artist: "They Might be Giants", coverLink: "https://upload.wikimedia.org/wikipedia/en/c/c0/TheyMightBeGiants-JohnHenry.jpg", videoIds: ["UryTypo2qeU"] },
+        { title: "Float On", artist: "Modest Mouse", coverLink: "https://upload.wikimedia.org/wikipedia/en/a/aa/MMGoodNews5075.jpg", videoIds: ["wSEsMpMxkg4"] },
+        { title: "Wake Me Up When September Ends", artist: "Green Day", coverLink: "https://upload.wikimedia.org/wikipedia/en/e/ed/Green_Day_-_American_Idiot_album_cover.png", videoIds: ["pGhwBFYtn1s"] },
+        { title: "The World We Knew (Over and Over)", artist: "Frank Sinatra", coverLink: "https://upload.wikimedia.org/wikipedia/en/8/82/Theworldweknew.jpg", videoIds: ["s1ABWNYZaFE"] },
+       { title: "All the Love in The World", artist: "The Outfield", coverLink: "https://upload.wikimedia.org/wikipedia/en/2/27/Play_Deep_cover.jpg", videoIds: ["ADCZAVn-eDQ"] },
+        { title: "White Sandy Beach of Hawai'i", artist: "Israel Kamakawiwo'ole", coverLink: "https://upload.wikimedia.org/wikipedia/en/f/f0/Israel_Kamakawiwo%27ole_Facing_Future.jpg", videoIds: ["nPpAqOD9i9g"] },
+    ];
+    const PLAYLIST_TWO_DATA = [
+        { title: "Domino Effect", artist: "Ozma", coverLink: "https://upload.wikimedia.org/wikipedia/en/d/d2/RockAndRollPartThree.jpg", videoIds: ["ZIpOznhS4f0"] },
+        { title: "Bring Me to Life", artist: "Evanescence", coverLink: "https://upload.wikimedia.org/wikipedia/en/2/25/Evanescence_-_Fallen.png", videoIds: ["ltoaQo2ynSo"] },
+        { title: "The Man Who Sold the World", artist: "Nirvana", coverLink: "https://upload.wikimedia.org/wikipedia/en/5/54/Nirvana_mtv_unplugged_in_new_york.png", videoIds: ["fregObNcHC8"] },
+        { title: "Governator", artist: "Green Day", coverLink: "https://upload.wikimedia.org/wikipedia/en/e/ed/Green_Day_-_American_Idiot_album_cover.png", videoIds: ["a6-NnG2l1u4"] },
+        { title: "The World Has Turned and Left me Here", artist: "Weezer", coverLink: "https://upload.wikimedia.org/wikipedia/en/7/70/Weezer_-_Blue_Album.png", videoIds: ["6fN9iBi-gnA"] },
+        { title: "Stay Together For The Kids", artist: "Blink-182", coverLink: "https://upload.wikimedia.org/wikipedia/en/c/cd/Blink-182_-_Stay_Together_for_the_Kids_cover.jpg", videoIds: ["45RYX77veK0"] },
+        { title: "Seven Nation Army", artist: "White Stripes", coverLink: "https://upload.wikimedia.org/wikipedia/en/a/a8/Elephant%2C_The_White_Stripes_Original.jpg", videoIds: ["CBEJo18auXE"] },
+        { title: "Hands Down", artist: "Dashboard Confessional", coverLink: "https://upload.wikimedia.org/wikipedia/en/0/02/AM%2CAM%2CAB%2CAS2.jpg", videoIds: ["V_4qNnbbtsY"] },
+        { title: "Lavender Buds", artist: "MF DOOM", coverLink: "https://upload.wikimedia.org/wikipedia/en/c/c2/Special_Herbs_5_%26_6_cover.jpg", videoIds: ["qhAGtfwCQaE"] },
+        { title: "Where Is The Love?", artist: "The Black Eyed Peas", coverLink: "https://upload.wikimedia.org/wikipedia/en/a/a1/Elephunk.jpg", videoIds: ["2vlJbwKiH68"] },
+    ];
+        let PLAYLISTS_DATA = [];
+
+    // constants
+    const PLAYER_ELEMENT_ID = "nice-music-player";
+    const PLAYER_MAIN_CONTENT_WRAPPER_ID = "player-main-content-wrapper";
+    const PLAYER_RIGHT_PANEL_ID = "player-right-panel";
+    const PLAYLIST_SELECTOR_CONTAINER_ID = "player-playlist-selector-container";
+    const PLAYLIST_SELECTOR_ID = "player-playlist-selector";
+    const YOUTUBE_PLAYER_DIV_ID = "youtube-player-container";
+    const DISPLAY_BOX_ID = "player-display-box";
+    const COVER_ID = "player-cover";
+    const INFO_CONTAINER_ID = "player-info-container";
+    const SONG_INFO_ID = "player-song-info";
+    const TITLE_LINE_WRAPPER_CLASS = "player-title-line-wrapper";
+    const TITLE_ID = "player-title";
+    const ARTIST_ID = "player-artist";
+    const YOUTUBE_LINK_ID = "player-youtube-link";
+    const CONTROLS_CONTAINER_ID = "player-controls-container";
+    const CONTROLS_ID = "player-controls";
+    const PREV_BUTTON_ID = "player-prev-button";
+    const PLAY_PAUSE_BUTTON_ID = "player-play-pause-button";
+    const NEXT_BUTTON_ID = "player-next-button";
+    const PROGRESS_BAR_CONTAINER_ID = "player-progress-bar-container";
+    const CURRENT_TIME_ID = "player-current-time";
+    const PROGRESS_BAR_ID = "player-progress-bar";
+    const DURATION_ID = "player-duration";
+    const VOLUME_CONTAINER_ID = "player-volume-container";
+    const VOLUME_ICON_ID = "player-volume-icon";
+    const VOLUME_PERCENTAGE_ID = "player-volume-percentage";
+    const VOLUME_SLIDER_ID = "player-volume-slider";
+    const REPEAT_BUTTON_ID = "player-repeat-button";
+    const SHUFFLE_BUTTON_ID = "player-shuffle-button";
+    const PLAYER_CONTROL_BUTTON_CLASS = 'player-control-button';
+    const QUEUE_CONTAINER_ID = "player-queue-container";
+    const QUEUE_TITLE_ID = "player-queue-title";
+    const QUEUE_LIST_ID = "player-queue-list";
+    const PLAYER_QUEUE_ITEM_CLASS = "player-queue-item";
+    const QUEUE_TOGGLE_ICON_ID = "player-queue-toggle-icon";
+
+    // icons
+    const ICON_PLAY = "https://upload.wikimedia.org/wikipedia/commons/9/96/Crystal_Project_Player_play.png";
+    const ICON_PAUSE = "https://upload.wikimedia.org/wikipedia/commons/d/dd/Crystal_Project_Player_pause.png";
+    const ICON_PREV = "https://upload.wikimedia.org/wikipedia/commons/e/ef/Crystal_Project_Player_rew.png";
+    const ICON_NEXT = "https://upload.wikimedia.org/wikipedia/commons/6/66/Crystal_Project_Player-end.png";
+    const ICON_VOLUME = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%23424242'%3E%3Cpath d='M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z'/%3E%3C/svg%3E";
+    const ICON_MUTED = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%23424242'%3E%3Cpath d='M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z'/%3E%3C/svg%3E";
+    const ICON_YOUTUBE = "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_play_button_icon_%282013%E2%80%932017%29.svg";
+    const ICON_REPEAT_NONE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%23424242'%3E%3Cpath d='M7 [REDACTED LIKELY SECRET] 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z'/%3E%3C/svg%3E";
+    const ICON_REPEAT_ALL = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%233F51B5'%3E%3Cpath d='M7 [REDACTED LIKELY SECRET] 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z'/%3E%3C/svg%3E";
+    const ICON_REPEAT_ONE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%233F51B5'%3E%3Cpath d='M7 [REDACTED LIKELY SECRET] 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z'/%3E%3Cpath d='M13 15V9h-1l-2 1v1h1.5v4z'/%3E%3C/svg%3E";
+    const ICON_SHUFFLE_OFF = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' width='24' viewBox='0 0 24 24' fill='%23424242'%3E%3Cpath d='M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm0.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z'/%3E%3C/svg%3E";
+    const ICON_SHUFFLE_ON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' width='24' viewBox='0 0 24 24' fill='%233F51B5'%3E%3Cpath d='M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm0.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z'/%3E%3C/svg%3E";
+
+    class Song {
+        constructor(title, artist, coverLink, videoIds) {
+            this.title = title;
+            this.artist = artist;
+            this.coverLink = coverLink;
+            this.videoIds = Array.isArray(videoIds) ? videoIds : [videoIds];
+            this.currentVideoIndex = 0; // to track which video to try
+        }
+        getTitle() { return this.title; }
+        getArtist() { return this.artist; }
+        getCoverLink() { return this.coverLink; }
+
+        // gets the video ID for the current attempt
+        getCurrentVideoId() {
+            return this.videoIds && this.videoIds.length > 0 ? this.videoIds[this.currentVideoIndex] : null;
+        }
+
+        // gets the YouTube link for the video that is currently being attempted
+        getYoutubeLink() {
+            const videoId = this.getCurrentVideoId();
+            return videoId ? `https://www.youtube.com/watch?v=${videoId}` : '#';
+        }
+
+        // tries to switch to the next available video ID
+        // returns true if there is a next video, false otherwise
+        tryNextVideo() {
+            if (this.currentVideoIndex < this.videoIds.length - 1) {
+                this.currentVideoIndex++;
+                return true;
+            }
+            return false;
+        }
+
+        // resets the video index to the primary one (the first in the array)
+        resetVideoIndex() {
+            this.currentVideoIndex = 0;
+        }
+    }
+    class Playlist {
+        constructor(songs = []) { this.songs = songs; this.currentSongIndex = 0; }
+        addSong(song) { this.songs.push(song); }
+        getCurrentSong() { return this.songs.length > 0 ? this.songs[this.currentSongIndex] : null; }
+        playNext() { if (this.songs.length > 0) this.currentSongIndex = (this.currentSongIndex + 1) % this.songs.length; }
+        playPrevious() { if (this.songs.length > 0) this.currentSongIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length; }
+        setCurrentSongIndex(index) { if (index >= 0 && index < this.songs.length) this.currentSongIndex = index; else console.warn(`Invalid song index: ${index}`); }
+        isEmpty() { return this.songs.length === 0; }
+        getSongs() { return this.songs; }
+        setSongs(newSongs) { this.songs = newSongs; }
+    }
+
+    let playlist;
+    let activePlaylistIndex = 0;
+    let originalSongOrderForCurrentPlaylist = [];
+    let isShuffleActive = false;
+    let ytPlayer;
+    let playerReady = false;
+    let isSeeking = false;
+    let rafId = null;
+    let isUpdaterRunning = false;
+    let volumeBeforeMute = 0.5;
+    let repeatMode = 'none';
+
+    let hasUserInitiatedPlayback = true; // prevents initial autoplay
+    let isQueueSectionExpanded = true; // for collapsible queue
+
+    const TARGET_FPS = 30;
+    const FRAME_INTERVAL = 1000 / TARGET_FPS;
+    let lastRafUpdateTime = 0;
+    let playerShouldBeUpdatingWhenVisible = false;
+    const MAX_QUEUE_ITEMS_DISPLAYED = 5;
+
+    let playerContainer, mainContentWrapper, playlistSelectorContainer, playlistSelectorElement;
+    let coverElement, titleElement, artistElement, youtubeLinkElement;
+    let playPauseButton, prevButtonElement, nextButtonElement, progressBar, currentTimeElement, durationElement;
+    let volumeContainer, volumeIconElement, volumePercentageElement, volumeSlider;
+    let repeatButtonElement, shuffleButtonElement;
+    let queueContainerElement, queueTitleElement, queueListElement;
+
+    function formatTime(totalSeconds) {
+        if (isNaN(totalSeconds) || totalSeconds < 0) { return "--:--"; }
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+    function shuffleArray(array) {
+        let currentIndex = array.length, randomIndex;
+        const newArray = [...array];
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [newArray[currentIndex], newArray[randomIndex]] = [newArray[randomIndex], newArray[currentIndex]];
+        }
+        return newArray;
+    }
+
+    function updateUI() {
+        const currentSong = playlist?.getCurrentSong();
+        if (!coverElement || !titleElement || !artistElement || !youtubeLinkElement) {
+            return;
+        }
+
+        if (!currentSong) {
+            coverElement.src = ""; coverElement.alt = "No cover art";
+            titleElement.textContent = "No song loaded"; titleElement.title = "";
+            artistElement.textContent = ""; artistElement.title = "";
+            youtubeLinkElement.href = "#"; youtubeLinkElement.classList.add('hidden');
+            if (playPauseButton) updatePlayPauseButton(true);
+            if (progressBar) { progressBar.value = 0; progressBar.style.setProperty('--progress-percent', '0%'); }
+            if (currentTimeElement) currentTimeElement.textContent = "0:00";
+            if (durationElement) durationElement.textContent = "--:--";
+        } else {
+            coverElement.src = currentSong.getCoverLink(); coverElement.alt = `Cover art for ${currentSong.getTitle()}`;
+            const songTitle = currentSong.getTitle();
+            titleElement.textContent = songTitle; titleElement.title = songTitle;
+            const songArtist = currentSong.getArtist();
+            artistElement.textContent = songArtist; artistElement.title = songArtist;
+            youtubeLinkElement.href = currentSong.getYoutubeLink(); youtubeLinkElement.classList.remove('hidden');
+        }
+
+        if (playerReady && ytPlayer && typeof ytPlayer.getPlayerState === 'function' && hasUserInitiatedPlayback) {
+            const state = ytPlayer.getPlayerState();
+            if (playPauseButton) updatePlayPauseButton(state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING);
+            updateDurationDisplay();
+        } else {
+            if (playPauseButton) updatePlayPauseButton(true);
+            if (durationElement) durationElement.textContent = "--:--";
+        }
+        updateVolumeIcon();
+        if (repeatButtonElement) updateRepeatButtonUI();
+        if (shuffleButtonElement) updateShuffleButtonUI();
+        if (playlistSelectorElement) playlistSelectorElement.value = activePlaylistIndex.toString();
+        updateQueueDisplay();
+    }
+
+    function updateDurationDisplay() {
+        if (!durationElement) return;
+        if (!playerReady || !ytPlayer || typeof ytPlayer.getDuration !== 'function' || !hasUserInitiatedPlayback) {
+            durationElement.textContent = "--:--";
+            return;
+        }
+        const duration = ytPlayer.getDuration();
+        durationElement.textContent = formatTime(duration);
+    }
+
+    function loadCurrentSong(autoplay = false, isRetry = false) {
+        console.debug(`loadCurrentSong called, autoplay=${autoplay}, isRetry=${isRetry}`);
+        const currentSong = playlist?.getCurrentSong();
+
+        // if this is a fresh attempt to play a song (not a retry from an error),
+        // reset its video index to the primary one
+        if (currentSong && !isRetry) {
+            currentSong.resetVideoIndex();
+        }
+
+        updateUI();
+        stopRafUpdater();
+        if (progressBar) { progressBar.value = 0; progressBar.style.setProperty('--progress-percent', '0%'); }
+        if (currentTimeElement) currentTimeElement.textContent = "0:00";
+        if (durationElement) durationElement.textContent = "--:--";
+
+        if (!playerReady || !ytPlayer || typeof ytPlayer.loadVideoById !== 'function') {
+            console.warn("Player not ready or loadVideoById unavailable. Cannot load song.");
+            if (playPauseButton) updatePlayPauseButton(true);
+            return;
+        }
+
+        if (!currentSong) {
+            console.warn("No current song to load.");
+            if (typeof ytPlayer.stopVideo === 'function') ytPlayer.stopVideo();
+            if (playPauseButton) updatePlayPauseButton(true);
+            return;
+        }
+
+        const videoIdToLoad = currentSong.getCurrentVideoId();
+        if (!videoIdToLoad) {
+            console.error(`No video ID found for "${currentSong.getTitle()}". Skipping.`);
+            onPlayerError({ data: 100 }); // simulate a "not found" error
+            return;
+        }
+
+        console.log(`Loading video: ${videoIdToLoad} - ${currentSong.getTitle()}`);
+        ytPlayer.loadVideoById({
+            videoId: videoIdToLoad,
+            startSeconds: 0,
+            suggestedQuality: 'small'
+        });
+        window._musicPlayerAutoplayIntent = autoplay;
+    }
+
+    function loadNewPlaylistByIndex(newPlaylistIndex, autoplayOverride = null) {
+        if (newPlaylistIndex < 0 || newPlaylistIndex >= PLAYLISTS_DATA.length) {
+            console.warn(`Invalid playlist index: ${newPlaylistIndex}`);
+            return;
+        }
+        activePlaylistIndex = newPlaylistIndex;
+        const selectedPlaylistData = PLAYLISTS_DATA[activePlaylistIndex];
+
+        if (playerReady && ytPlayer && typeof ytPlayer.stopVideo === 'function' && hasUserInitiatedPlayback) {
+            ytPlayer.stopVideo();
+        }
+        stopRafUpdater();
+
+        const newSongs = selectedPlaylistData.songs.map(d => new Song(d.title, d.artist, d.coverLink, d.videoIds || d.videoId));
+        originalSongOrderForCurrentPlaylist = [...newSongs];
+
+        if (isShuffleActive) {
+            const currentSongVideoId = playlist?.getCurrentSong()?.getCurrentVideoId();
+            const shuffledNewSongs = shuffleArray(newSongs);
+            playlist = new Playlist(shuffledNewSongs);
+            if (currentSongVideoId) {
+                const newIdx = playlist.getSongs().findIndex(s => s.videoIds.includes(currentSongVideoId));
+                if (newIdx !== -1) playlist.setCurrentSongIndex(newIdx);
+                else playlist.setCurrentSongIndex(0);
+            } else {
+                playlist.setCurrentSongIndex(0);
+            }
+        } else {
+            playlist = new Playlist(newSongs);
+            playlist.setCurrentSongIndex(0);
+        }
+
+        if (!hasUserInitiatedPlayback) {
+            updateUI();
+            loadCurrentSong(false);
+        } else {
+            let shouldAutoplayThisLoad = autoplayOverride === null ? true : autoplayOverride;
+            loadCurrentSong(shouldAutoplayThisLoad);
+        }
+    }
+
+    function togglePlayPause() {
+        if (!playerReady || !ytPlayer || typeof ytPlayer.getPlayerState !== 'function') {
+            console.warn("Player not ready, cannot toggle play/pause.");
+            return;
+        }
+
+        if (!hasUserInitiatedPlayback) {
+            if (playlist.isEmpty()) {
+                console.warn("Cannot play: Playlist is empty.");
+                return;
+            }
+            hasUserInitiatedPlayback = true;
+            loadCurrentSong(true); // load the current (first) song and play it
+        } else {
+            const state = ytPlayer.getPlayerState();
+            if (state === YT.PlayerState.PLAYING) {
+                console.debug("Pausing video.");
+                ytPlayer.pauseVideo();
+            } else { // PAUSED, ENDED, CUED, UNSTARTED
+                console.debug("Playing video.");
+                if (playlist.isEmpty() && PLAYLISTS_DATA.length > 0 && PLAYLISTS_DATA[activePlaylistIndex].songs.length > 0) {
+                    loadCurrentSong(true);
+                } else if (!playlist.isEmpty()) {
+                    if (state === YT.PlayerState.ENDED && repeatMode !== 'one') {
+                        playlist.playNext();
+                        loadCurrentSong(true);
+                    } else {
+                        ytPlayer.playVideo();
+                    }
+                } else {
+                    console.warn("Cannot play: No songs in current playlist or no playlists available.");
+                }
+            }
+        }
+    }
+
+    function updatePlayPauseButton(isPaused) {
+        if (!playPauseButton) return;
+        const img = playPauseButton.querySelector('img');
+        const label = isPaused ? "Play" : "Pause";
+        if (img) {
+            img.src = isPaused ? ICON_PLAY : ICON_PAUSE;
+            img.alt = "";
+        }
+        playPauseButton.setAttribute('aria-label', label);
+        playPauseButton.title = label;
+    }
+    function rafUpdateProgress(timestamp) {
+        if (!isUpdaterRunning) return;
+        if (!playerReady || !ytPlayer || typeof ytPlayer.getCurrentTime !== 'function' || typeof ytPlayer.getDuration !== 'function' || !hasUserInitiatedPlayback) {
+            stopRafUpdater(); return;
+        }
+        if (isSeeking) { rafId = requestAnimationFrame(rafUpdateProgress); return; }
+
+        if (timestamp - lastRafUpdateTime >= FRAME_INTERVAL) {
+            lastRafUpdateTime = timestamp;
+            const currentTime = ytPlayer.getCurrentTime();
+            const duration = ytPlayer.getDuration();
+            if (duration && isFinite(duration) && duration > 0) {
+                const progress = (currentTime / duration) * 100;
+                if (progressBar) { progressBar.value = progress; progressBar.style.setProperty('--progress-percent', `${progress}%`); }
+                if (currentTimeElement) currentTimeElement.textContent = formatTime(currentTime);
+                if (durationElement && durationElement.textContent === "--:--") updateDurationDisplay();
+            } else {
+                if (progressBar) { progressBar.value = 0; progressBar.style.setProperty('--progress-percent', '0%'); }
+                if (currentTimeElement) currentTimeElement.textContent = "0:00";
+                if (durationElement) updateDurationDisplay();
+            }
+        }
+        if (isUpdaterRunning) rafId = requestAnimationFrame(rafUpdateProgress);
+        else { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } }
+    }
+    function startRafUpdater() {
+        if (isUpdaterRunning) return;
+        if (!playerReady || !ytPlayer || typeof ytPlayer.getPlayerState !== 'function' || ytPlayer.getPlayerState() !== YT.PlayerState.PLAYING || !hasUserInitiatedPlayback) {
+            return;
+        }
+        if (document.visibilityState === 'hidden') {
+            playerShouldBeUpdatingWhenVisible = true; return;
+        }
+        isUpdaterRunning = true; lastRafUpdateTime = 0;
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(rafUpdateProgress);
+    }
+    function stopRafUpdater() {
+        if (!isUpdaterRunning && !rafId) return;
+        isUpdaterRunning = false;
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    }
+    function handleVisibilityChange() {
+        if (!playerReady || !ytPlayer || typeof ytPlayer.getPlayerState !== 'function' || !hasUserInitiatedPlayback) return;
+        if (document.visibilityState === 'hidden') {
+            if (isUpdaterRunning) { stopRafUpdater(); playerShouldBeUpdatingWhenVisible = true; }
+            else if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) { playerShouldBeUpdatingWhenVisible = true; }
+        } else if (document.visibilityState === 'visible') {
+            if (playerShouldBeUpdatingWhenVisible) {
+                playerShouldBeUpdatingWhenVisible = false;
+                if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) startRafUpdater();
+            } else if (!isUpdaterRunning && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+                startRafUpdater();
+            }
+        }
+    }
+
+    function onPlayerReady(event) {
+        console.log("YouTube player ready!");
+        playerReady = true;
+        setVolumeFromSlider(false);
+
+        updateUI();
+        updateVolumeIcon();
+
+        if (hasUserInitiatedPlayback && playlist && !playlist.isEmpty()) {
+            console.log("Attempting to autoplay first song...");
+            loadCurrentSong(true);
+        }
+
+        if (document.visibilityState === 'visible' && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING && hasUserInitiatedPlayback) {
+            startRafUpdater();
+        } else if (document.visibilityState === 'hidden' && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING && hasUserInitiatedPlayback) {
+            playerShouldBeUpdatingWhenVisible = true;
+        }
+    }
+
+    function onPlayerStateChange(event) {
+        const state = event.data;
+        const stateName = Object.keys(YT.PlayerState).find(key => YT.PlayerState[key] === state) || 'UNKNOWN';
+        //console.log(`Player state changed: ${state} (${stateName})`);
+
+        if (state !== YT.PlayerState.UNSTARTED && state !== -1) {
+        }
+
+        updateDurationDisplay();
+
+        switch (state) {
+            case YT.PlayerState.PLAYING:
+                if (playPauseButton) updatePlayPauseButton(false);
+                startRafUpdater();
+                updateUI();
+                break;
+            case YT.PlayerState.PAUSED:
+                if (playPauseButton) updatePlayPauseButton(true);
+                stopRafUpdater();
+                break;
+            case YT.PlayerState.ENDED:
+                stopRafUpdater();
+                if (playPauseButton) updatePlayPauseButton(true);
+                if (progressBar) { progressBar.value = 100; progressBar.style.setProperty('--progress-percent', '100%'); }
+                if (currentTimeElement && ytPlayer && typeof ytPlayer.getDuration === 'function') {
+                    currentTimeElement.textContent = formatTime(ytPlayer.getDuration());
+                }
+
+                if (!hasUserInitiatedPlayback) {
+                    updateUI();
+                    return;
+                }
+
+                if (repeatMode === 'one') {
+                    ytPlayer.seekTo(0, true);
+                    ytPlayer.playVideo();
+                } else {
+                    const previousSongIndex = playlist.currentSongIndex;
+                    playlist.playNext();
+
+                    const isLastSongAndNotRepeatingAll = playlist.currentSongIndex === 0 &&
+                        previousSongIndex === playlist.getSongs().length - 1 &&
+                        repeatMode !== 'all';
+
+                    let shouldAutoplay;
+                    if (isLastSongAndNotRepeatingAll) {
+                        shouldAutoplay = false;
+                    } else {
+                        shouldAutoplay = true;
+                    }
+                    loadCurrentSong(shouldAutoplay);
+                }
+                break;
+            case YT.PlayerState.BUFFERING:
+                if (playPauseButton) updatePlayPauseButton(false);
+                break;
+            case YT.PlayerState.CUED:
+                if (playPauseButton) updatePlayPauseButton(true);
+                stopRafUpdater();
+                if (progressBar) { progressBar.value = 0; progressBar.style.setProperty('--progress-percent', '0%'); }
+                if (currentTimeElement) currentTimeElement.textContent = "0:00";
+                updateUI();
+                updateDurationDisplay();
+
+                if (window._musicPlayerAutoplayIntent === true) {
+                    ytPlayer.playVideo();
+                }
+                break;
+            case YT.PlayerState.UNSTARTED:
+                if (playPauseButton) updatePlayPauseButton(true);
+                stopRafUpdater();
+                if (currentTimeElement) currentTimeElement.textContent = "0:00";
+                if (durationElement) durationElement.textContent = "--:--";
+                updateUI();
+                break;
+            default: break;
+        }
+    }
+    function onPlayerError(event) {
+        const recoverableErrorCodes = [2, 5, 100, 101, 150];
+        const errorCodes = { 2: 'Invalid parameter.', 5: 'HTML5 error.', 100: 'Not found/private.', 101: 'Embedding disallowed.', 150: 'Embedding disallowed.' };
+        const errorMsg = errorCodes[event.data] || `Unknown error (${event.data})`;
+        console.error(`YouTube Player Error: ${errorMsg}`);
+
+        const currentSong = playlist?.getCurrentSong();
+
+        // if the error is recoverable (e.g., video blocked), try the next available video ID
+        if (currentSong && recoverableErrorCodes.includes(event.data)) {
+            console.log(`Video failed for "${currentSong.getTitle()}". Checking for alternatives...`);
+            if (currentSong.tryNextVideo()) {
+                console.log(`Found an alternative. Attempting to play video ID: ${currentSong.getCurrentVideoId()}`);
+                // reload the song with the next video ID. isRetry=true prevents resetting the video index
+                loadCurrentSong(window._musicPlayerAutoplayIntent, true);
+                return; // stop further error processing for this event
+            } else {
+                console.warn(`No more alternative videos for "${currentSong.getTitle()}".`);
+            }
+        }
+
+        // handle final/unrecoverable errors
+        if (playPauseButton) updatePlayPauseButton(true);
+        stopRafUpdater();
+        if (titleElement) titleElement.textContent = "Error";
+        if (artistElement) artistElement.textContent = errorMsg;
+    }
+    function setVolumeFromSlider(shouldUnmute = true) {
+        if (!volumeSlider || !volumePercentageElement) return;
+        const volumeValue = parseFloat(volumeSlider.value);
+        const newVolumePercent = Math.round(volumeValue * 100);
+
+        if (playerReady && ytPlayer && typeof ytPlayer.setVolume === 'function') {
+            ytPlayer.setVolume(newVolumePercent);
+            if (shouldUnmute && newVolumePercent > 0 && typeof ytPlayer.isMuted === 'function' && ytPlayer.isMuted()) {
+                ytPlayer.unMute();
+            }
+            if (newVolumePercent === 0 && typeof ytPlayer.mute === 'function' && !ytPlayer.isMuted()) {
+                ytPlayer.mute();
+            }
+        }
+
+        volumePercentageElement.textContent = `${newVolumePercent}%`;
+    }
+    function toggleMute() {
+        if (!playerReady || !ytPlayer || !volumeSlider || !volumeIconElement) return;
+
+        const isCurrentlyMuted = ytPlayer.isMuted();
+
+        if (isCurrentlyMuted) {
+            ytPlayer.unMute();
+            const restoreVolume = (volumeBeforeMute > 0) ? volumeBeforeMute : 0.5;
+            ytPlayer.setVolume(restoreVolume * 100);
+            volumeSlider.value = restoreVolume;
+            if (volumePercentageElement) {
+                volumePercentageElement.textContent = `${Math.round(restoreVolume * 100)}%`;
+            }
+            volumeIconElement.src = ICON_VOLUME;
+            volumeIconElement.alt = "Mute";
+            volumeIconElement.title = "Mute";
+
+        } else {
+            const currentSliderValue = parseFloat(volumeSlider.value);
+            if (currentSliderValue > 0) {
+                volumeBeforeMute = currentSliderValue;
+            }
+
+            ytPlayer.mute();
+            volumeSlider.value = 0;
+            if (volumePercentageElement) {
+                volumePercentageElement.textContent = `0%`;
+            }
+
+            volumeIconElement.src = ICON_MUTED;
+            volumeIconElement.alt = "Unmute";
+            volumeIconElement.title = "Unmute";
+        }
+    }
+    function updateVolumeIcon() {
+        if (!volumeIconElement || !volumeSlider) return;
+
+        const sliderValue = parseFloat(volumeSlider.value);
+        const isMutedBySlider = sliderValue === 0;
+
+        let isMutedByPlayer = false;
+        if (playerReady && ytPlayer && typeof ytPlayer.isMuted === 'function') {
+            isMutedByPlayer = ytPlayer.isMuted();
+        }
+
+        const isEffectivelyMuted = isMutedBySlider || isMutedByPlayer;
+
+        volumeIconElement.src = isEffectivelyMuted ? ICON_MUTED : ICON_VOLUME;
+        volumeIconElement.alt = isEffectivelyMuted ? "Unmute" : "Mute";
+        volumeIconElement.title = isEffectivelyMuted ? "Unmute" : "Mute";
+    }
+    function toggleRepeatMode() {
+        switch (repeatMode) {
+            case 'none': repeatMode = 'all'; break;
+            case 'all': repeatMode = 'one'; break;
+            case 'one': repeatMode = 'none'; break;
+            default: repeatMode = 'none';
+        }
+        updateRepeatButtonUI();
+        updateQueueDisplay();
+    }
+    function updateRepeatButtonUI() {
+        if (!repeatButtonElement) return;
+        const img = repeatButtonElement.querySelector('img');
+        let iconSrc = ICON_REPEAT_NONE; let label = "Repeat Off";
+        repeatButtonElement.classList.remove('repeat-active', 'repeat-one');
+        if (repeatMode === 'all') { iconSrc = ICON_REPEAT_ALL; label = "Repeat All"; repeatButtonElement.classList.add('repeat-active'); }
+        else if (repeatMode === 'one') { iconSrc = ICON_REPEAT_ONE; label = "Repeat One"; repeatButtonElement.classList.add('repeat-active', 'repeat-one'); }
+        if (img) { img.src = iconSrc; img.alt = ""; }
+        repeatButtonElement.setAttribute('aria-label', label); repeatButtonElement.title = label;
+    }
+    function toggleShuffleMode() {
+        if (!playlist || playlist.isEmpty()) return;
+
+        isShuffleActive = !isShuffleActive;
+        const currentSongBeforeToggle = playlist.getCurrentSong();
+
+        if (isShuffleActive) {
+            const shuffledSongs = shuffleArray(originalSongOrderForCurrentPlaylist);
+            playlist.setSongs(shuffledSongs);
+        } else {
+            playlist.setSongs([...originalSongOrderForCurrentPlaylist]);
+        }
+
+        if (currentSongBeforeToggle) {
+            const newIndex = playlist.getSongs().findIndex(song => song.getCurrentVideoId() === currentSongBeforeToggle.getCurrentVideoId());
+            playlist.setCurrentSongIndex(newIndex !== -1 ? newIndex : 0);
+        } else {
+            playlist.setCurrentSongIndex(0);
+        }
+
+        updateShuffleButtonUI();
+        updateQueueDisplay();
+        updateUI();
+    }
+    function updateShuffleButtonUI() {
+        if (!shuffleButtonElement) return;
+        const img = shuffleButtonElement.querySelector('img');
+        let iconSrc = isShuffleActive ? ICON_SHUFFLE_ON : ICON_SHUFFLE_OFF;
+        let label = isShuffleActive ? "Shuffle On" : "Shuffle Off";
+        shuffleButtonElement.classList.toggle('shuffle-active', isShuffleActive);
+        if (img) { img.src = iconSrc; img.alt = ""; }
+        shuffleButtonElement.setAttribute('aria-label', label); shuffleButtonElement.title = label;
+    }
+
+    function updateQueueDisplay() {
+        if (!queueListElement || !playlist) {
+            if (queueListElement) queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">Queue is empty</li>`;
+            if (queueTitleElement) queueTitleElement.style.display = (playlist && !playlist.isEmpty() && PLAYLISTS_DATA.length > 0) ? 'flex' : 'none'
+            return;
+        }
+        if (queueTitleElement) queueTitleElement.style.display = 'flex';
+
+        if (playlist.isEmpty()) {
+            queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">Queue is empty</li>`;
+            return;
+        }
+
+
+        queueListElement.innerHTML = '';
+        const songs = playlist.getSongs();
+        const currentIndex = playlist.currentSongIndex;
+        const numSongs = songs.length;
+
+        if (numSongs <= 1) {
+            queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">No upcoming songs</li>`;
+            return;
+        }
+
+        let songsShownCount = 0;
+        for (let i = 1; i < numSongs && songsShownCount < MAX_QUEUE_ITEMS_DISPLAYED; i++) {
+            let nextIndex = (currentIndex + i) % numSongs;
+            if (repeatMode !== 'all' && !isShuffleActive && nextIndex < (currentIndex + i) && nextIndex < currentIndex) {
+                break;
+            }
+
+            const song = songs[nextIndex];
+            const li = document.createElement("li");
+            li.className = PLAYER_QUEUE_ITEM_CLASS;
+            li.dataset.songIndex = nextIndex;
+
+            const titleSpan = document.createElement("span");
+            titleSpan.className = "player-queue-item-title";
+            titleSpan.textContent = song.getTitle();
+            titleSpan.title = song.getTitle();
+
+            const artistSpan = document.createElement("span");
+            artistSpan.className = "player-queue-item-artist";
+            artistSpan.textContent = ` - ${song.getArtist()}`;
+            artistSpan.title = song.getArtist();
+
+            li.appendChild(titleSpan);
+            li.appendChild(artistSpan);
+
+            li.addEventListener('click', () => {
+                if (!hasUserInitiatedPlayback) {
+                    hasUserInitiatedPlayback = true;
+                }
+                const songIndexToPlay = parseInt(li.dataset.songIndex, 10);
+                playlist.setCurrentSongIndex(songIndexToPlay);
+                loadCurrentSong(true);
+            });
+            queueListElement.appendChild(li);
+            songsShownCount++;
+        }
+
+        if (songsShownCount === 0 && queueListElement.innerHTML === '') {
+            queueListElement.innerHTML = `<li class="${PLAYER_QUEUE_ITEM_CLASS} player-queue-empty">End of playlist</li>`;
+        }
+    }
+
+    function toggleQueueExpansion() {
+        isQueueSectionExpanded = !isQueueSectionExpanded;
+        const queueContainer = document.getElementById(QUEUE_CONTAINER_ID);
+        const toggleIcon = document.getElementById(QUEUE_TOGGLE_ICON_ID);
+
+        if (!queueContainer || !toggleIcon) return;
+
+        if (isQueueSectionExpanded) {
+            queueContainer.classList.remove('queue-collapsed');
+            toggleIcon.innerHTML = "▼"; // down arrow ▼
+        } else {
+            queueContainer.classList.add('queue-collapsed');
+            toggleIcon.innerHTML = "▶"; // right arrow ►
+        }
+    }
+
+    function createPlayerElements() {
+        const fragment = document.createDocumentFragment();
+        playerContainer = document.createElement("div"); playerContainer.id = PLAYER_ELEMENT_ID; fragment.appendChild(playerContainer);
+
+        const mainPlayerArea = document.createElement("div");
+        mainPlayerArea.id = "player-main-area";
+        playerContainer.appendChild(mainPlayerArea);
+
+        mainContentWrapper = document.createElement("div"); mainContentWrapper.id = PLAYER_MAIN_CONTENT_WRAPPER_ID; mainPlayerArea.appendChild(mainContentWrapper);
+
+        const displayBox = document.createElement("div"); displayBox.id = DISPLAY_BOX_ID;
+        coverElement = document.createElement("img"); coverElement.id = COVER_ID; coverElement.alt = "Album cover"; coverElement.src = ""; displayBox.appendChild(coverElement);
+        mainContentWrapper.appendChild(displayBox);
+
+        const rightPanel = document.createElement("div");
+        rightPanel.id = PLAYER_RIGHT_PANEL_ID;
+        mainContentWrapper.appendChild(rightPanel);
+
+        playlistSelectorContainer = document.createElement("div");
+        playlistSelectorContainer.id = PLAYLIST_SELECTOR_CONTAINER_ID;
+        const playlistLabel = document.createElement("label"); playlistLabel.htmlFor = PLAYLIST_SELECTOR_ID; playlistLabel.textContent = "Select playlist:"; playlistSelectorContainer.appendChild(playlistLabel);
+        playlistSelectorElement = document.createElement("select"); playlistSelectorElement.id = PLAYLIST_SELECTOR_ID; playlistSelectorElement.title = "Select playlist"; playlistSelectorContainer.appendChild(playlistSelectorElement);
+        rightPanel.appendChild(playlistSelectorContainer);
+
+        const infoContainer = document.createElement("div"); infoContainer.id = INFO_CONTAINER_ID;
+        const songInfo = document.createElement("div"); songInfo.id = SONG_INFO_ID;
+        const titleLineWrapper = document.createElement("div"); titleLineWrapper.className = TITLE_LINE_WRAPPER_CLASS;
+        titleElement = document.createElement("h3"); titleElement.id = TITLE_ID; titleElement.textContent = "Loading..."; titleLineWrapper.appendChild(titleElement);
+        youtubeLinkElement = document.createElement("a"); youtubeLinkElement.id = YOUTUBE_LINK_ID; youtubeLinkElement.target = "_blank"; youtubeLinkElement.rel = "noopener noreferrer"; youtubeLinkElement.title = "Watch on YouTube"; youtubeLinkElement.classList.add('hidden');
+        const ytIcon = document.createElement("img"); ytIcon.src = ICON_YOUTUBE; ytIcon.alt = "YouTube"; youtubeLinkElement.appendChild(ytIcon); titleLineWrapper.appendChild(youtubeLinkElement);
+        songInfo.appendChild(titleLineWrapper);
+        artistElement = document.createElement("p"); artistElement.id = ARTIST_ID; artistElement.textContent = ""; songInfo.appendChild(artistElement);
+        infoContainer.appendChild(songInfo);
+        rightPanel.appendChild(infoContainer);
+
+        const progressBarContainer = document.createElement("div"); progressBarContainer.id = PROGRESS_BAR_CONTAINER_ID;
+        currentTimeElement = document.createElement("span"); currentTimeElement.id = CURRENT_TIME_ID; currentTimeElement.textContent = "0:00"; progressBarContainer.appendChild(currentTimeElement);
+        progressBar = document.createElement("input"); progressBar.type = "range"; progressBar.id = PROGRESS_BAR_ID; progressBar.value = "0"; progressBar.min = "0"; progressBar.max = "100"; progressBar.step = "0.1"; progressBar.title = "Seek"; progressBar.style.setProperty('--progress-percent', '0%'); progressBarContainer.appendChild(progressBar);
+        durationElement = document.createElement("span"); durationElement.id = DURATION_ID; durationElement.textContent = "--:--"; progressBarContainer.appendChild(durationElement);
+        rightPanel.appendChild(progressBarContainer);
+
+        const controlsContainer = document.createElement("div"); controlsContainer.id = CONTROLS_CONTAINER_ID;
+        const controls = document.createElement("div"); controls.id = CONTROLS_ID;
+
+        shuffleButtonElement = document.createElement("button"); shuffleButtonElement.id = SHUFFLE_BUTTON_ID; shuffleButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-shuffle-button');
+        const shuffleIcon = document.createElement("img"); shuffleIcon.alt = ""; shuffleIcon.src = ICON_SHUFFLE_OFF; shuffleButtonElement.appendChild(shuffleIcon); controls.appendChild(shuffleButtonElement);
+
+        prevButtonElement = document.createElement("button"); prevButtonElement.id = PREV_BUTTON_ID; prevButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS); prevButtonElement.setAttribute('aria-label', 'Previous song'); prevButtonElement.title = 'Previous song';
+        const prevIcon = document.createElement("img"); prevIcon.src = ICON_PREV; prevIcon.alt = ""; prevButtonElement.appendChild(prevIcon); controls.appendChild(prevButtonElement);
+
+        playPauseButton = document.createElement("button"); playPauseButton.id = PLAY_PAUSE_BUTTON_ID; playPauseButton.classList.add(PLAYER_CONTROL_BUTTON_CLASS);
+        const playPauseIcon = document.createElement("img"); playPauseIcon.alt = ""; playPauseIcon.src = ICON_PLAY; playPauseButton.appendChild(playPauseIcon); controls.appendChild(playPauseButton);
+
+        nextButtonElement = document.createElement("button"); nextButtonElement.id = NEXT_BUTTON_ID; nextButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS); nextButtonElement.setAttribute('aria-label', 'Next song'); nextButtonElement.title = 'Next song';
+        const nextIcon = document.createElement("img"); nextIcon.src = ICON_NEXT; nextIcon.alt = ""; nextButtonElement.appendChild(nextIcon); controls.appendChild(nextButtonElement);
+
+        repeatButtonElement = document.createElement("button"); repeatButtonElement.id = REPEAT_BUTTON_ID; repeatButtonElement.classList.add(PLAYER_CONTROL_BUTTON_CLASS, 'player-repeat-button');
+        const repeatIcon = document.createElement("img"); repeatIcon.alt = ""; repeatIcon.src = ICON_REPEAT_NONE; repeatButtonElement.appendChild(repeatIcon); controls.appendChild(repeatButtonElement);
+
+        controlsContainer.appendChild(controls);
+
+        volumeContainer = document.createElement("div"); volumeContainer.id = VOLUME_CONTAINER_ID;
+        volumeIconElement = document.createElement("img"); volumeIconElement.id = VOLUME_ICON_ID; volumeIconElement.alt = "Mute"; volumeIconElement.title = "Mute/Unmute"; volumeIconElement.style.cursor = 'pointer'; volumeIconElement.src = ICON_VOLUME; volumeContainer.appendChild(volumeIconElement);
+        volumePercentageElement = document.createElement("span"); volumePercentageElement.id = VOLUME_PERCENTAGE_ID; volumePercentageElement.textContent = "50%"; volumeContainer.appendChild(volumePercentageElement);
+        volumeSlider = document.createElement("input"); volumeSlider.type = "range"; volumeSlider.id = VOLUME_SLIDER_ID; volumeSlider.min = 0; volumeSlider.max = 1; volumeSlider.step = 0.01; volumeSlider.value = 0.5; volumeSlider.title = "Adjust volume"; volumeContainer.appendChild(volumeSlider);
+        controlsContainer.appendChild(volumeContainer);
+
+        rightPanel.appendChild(controlsContainer);
+
+        queueContainerElement = document.createElement("div"); queueContainerElement.id = QUEUE_CONTAINER_ID;
+        queueTitleElement = document.createElement("h4"); queueTitleElement.id = QUEUE_TITLE_ID;
+        queueTitleElement.innerHTML = `Up next <span id="${QUEUE_TOGGLE_ICON_ID}">${isQueueSectionExpanded ? "▼" : "▸"}</span>`;
+        queueContainerElement.appendChild(queueTitleElement);
+        queueListElement = document.createElement("ul"); queueListElement.id = QUEUE_LIST_ID; queueContainerElement.appendChild(queueListElement);
+        mainPlayerArea.appendChild(queueContainerElement);
+
+        const youtubePlayerDiv = document.createElement("div"); youtubePlayerDiv.id = YOUTUBE_PLAYER_DIV_ID; fragment.appendChild(youtubePlayerDiv);
+        return fragment;
+    }
+
+    function loadYouTubeAPI() {
+        return new Promise((resolve, reject) => {
+            if (typeof YT !== 'undefined' && typeof YT.Player !== 'undefined') { resolve(); return; }
+            window.onYouTubeIframeAPIReady = () => { resolve(); };
+            const existingScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+            if (existingScript) return;
+            const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
+            tag.onerror = (err) => { console.error("Failed to load YouTube API script:", err); delete window.onYouTubeIframeAPIReady; reject(err); };
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            if (firstScriptTag && firstScriptTag.parentNode) firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            else document.head.appendChild(tag);
+        });
+    }
+
+    function bindUIEventListeners() {
+        if (!playPauseButton || !nextButtonElement || !prevButtonElement || !repeatButtonElement || !shuffleButtonElement ||
+            !progressBar || !volumeIconElement || !volumeSlider || !playlistSelectorElement || !queueTitleElement) {
+            console.error("Failed to bind listeners: Core UI elements missing.");
+            return;
+        }
+
+        playPauseButton.addEventListener("click", togglePlayPause);
+        nextButtonElement.addEventListener("click", () => {
+            if (!hasUserInitiatedPlayback) {
+                if (playlist.isEmpty()) return;
+                hasUserInitiatedPlayback = true;
+                playlist?.playNext();
+                loadCurrentSong(true);
+            } else {
+                const wasPlaying = playerReady && ytPlayer?.getPlayerState() === YT.PlayerState.PLAYING;
+                const shouldAutoplay = wasPlaying || repeatMode === 'all' || (playlist.currentSongIndex !== playlist.getSongs().length - 1);
+                playlist?.playNext();
+                loadCurrentSong(shouldAutoplay);
+            }
+        });
+        prevButtonElement.addEventListener("click", () => {
+            if (!hasUserInitiatedPlayback) {
+                if (playlist.isEmpty()) return;
+                hasUserInitiatedPlayback = true;
+                playlist?.playPrevious();
+                loadCurrentSong(true);
+            } else {
+                const wasPlaying = playerReady && ytPlayer?.getPlayerState() === YT.PlayerState.PLAYING;
+                const shouldAutoplay = wasPlaying || repeatMode === 'all';
+                playlist?.playPrevious();
+                loadCurrentSong(shouldAutoplay);
+            }
+        });
+        repeatButtonElement.addEventListener("click", toggleRepeatMode);
+        shuffleButtonElement.addEventListener("click", toggleShuffleMode);
+        volumeIconElement.addEventListener("click", toggleMute);
+        queueTitleElement.addEventListener('click', toggleQueueExpansion);
+
+        progressBar.addEventListener("mousedown", () => { isSeeking = true; stopRafUpdater(); });
+        progressBar.addEventListener("touchstart", () => { isSeeking = true; stopRafUpdater(); }, { passive: true });
+        progressBar.addEventListener("input", () => {
+            if (!isSeeking || !hasUserInitiatedPlayback) return;
+            const percentage = progressBar.value;
+            progressBar.style.setProperty('--progress-percent', `${percentage}%`);
+            if (playerReady && ytPlayer && typeof ytPlayer.getDuration === 'function' && currentTimeElement) {
+                const duration = ytPlayer.getDuration();
+                if (duration && isFinite(duration)) {
+                    currentTimeElement.textContent = formatTime((percentage / 100) * duration);
+                }
+            }
+        });
+        progressBar.addEventListener("change", () => {
+            if (!hasUserInitiatedPlayback) {
+                isSeeking = false; return;
+            }
+            if (!playerReady || !ytPlayer || typeof ytPlayer.getDuration !== 'function' || typeof ytPlayer.seekTo !== 'function') {
+                isSeeking = false; return;
+            }
+            const duration = ytPlayer.getDuration();
+            if (!duration || !isFinite(duration) || duration <= 0) { isSeeking = false; return; }
+            const seekTime = (progressBar.value / 100) * duration;
+            ytPlayer.seekTo(seekTime, true);
+            if (currentTimeElement) currentTimeElement.textContent = formatTime(seekTime);
+            isSeeking = false;
+            const state = ytPlayer.getPlayerState();
+            if (state === YT.PlayerState.PLAYING) startRafUpdater();
+            else stopRafUpdater();
+        });
+        const handleSeekEnd = () => { if (isSeeking) progressBar.dispatchEvent(new Event('change')); };
+        progressBar.addEventListener("mouseup", handleSeekEnd);
+        progressBar.addEventListener("touchend", handleSeekEnd);
+
+        volumeSlider.addEventListener("input", () => {
+            setVolumeFromSlider(true);
+            updateVolumeIcon();
+        });
+
+        playlistSelectorElement.addEventListener("change", (event) => {
+            const newIndex = parseInt(event.target.value, 10);
+            if (!isNaN(newIndex)) {
+                if (!hasUserInitiatedPlayback) {
+                    loadNewPlaylistByIndex(newIndex, false);
+                } else {
+                    const wasPlaying = playerReady && ytPlayer && typeof ytPlayer.getPlayerState === 'function' && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING;
+                    loadNewPlaylistByIndex(newIndex, wasPlaying);
+                }
+            }
+        });
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+    }
+
+    function injectPlayerStyles() {
+        const styleId = "nice-music-player-styles";
+        if (document.getElementById(styleId)) document.getElementById(styleId).remove();
+        const style = document.createElement("style"); style.id = styleId;
+        style.textContent = `
+            :root {
+              --player-bg: #ffffff; --player-border: rgba(0, 0, 0, 0.12);
+              --text-primary: #212121; --text-secondary: #757575;
+              --accent-color: #301934; --accent-color-hover: #303F9F;
+              --border-color: #0F0616, ; --cover-border-color: rgba(0, 0, 0, 0.08);
+              --slider-track-bg: #E0E0E0; --slider-thumb-bg: #3F51B5;
+              --slider-thumb-hover-bg: #303F9F; --progress-fill-bg: #3F51B5;
+              --cover-art-size: 10rem;
+              --base-font-size: 14px; --border-radius: 4px; --button-size: 36px;
+              --small-button-size: 24px; --spacing-xs: 4px; --spacing-sm: 8px;
+              --spacing-md: 16px; --spacing-lg: 24px;
+              --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+              --title-font-size: 16px; --artist-font-size: 14px; --time-font-size: 12px;
+              --transition-speed: 0.2s; --transition-func: cubic-bezier(0.4, 0, 0.2, 1);
+              --queue-item-hover-bg: #f0f0f0;
+            }
+            #${PLAYER_ELEMENT_ID} { 
+                background-color: var(--player-bg); border-radius: var(--border-radius); 
+                font-family: var(--font-family); font-size: var(--base-font-size); 
+                color: var(--text-primary); padding: var(--spacing-md); 
+                box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
+                margin: var(--spacing-md) auto; overflow: hidden; position: relative; 
+                box-sizing: border-box; max-width: clamp(50rem, 70vw, 60rem);
+            }
+            #player-main-area { display: flex; flex-direction: column; }
+            #${PLAYER_MAIN_CONTENT_WRAPPER_ID} {
+                display: flex; align-items: flex-start;
+                gap: var(--spacing-lg); width: 100%;
+            }
+            #${PLAYER_RIGHT_PANEL_ID} {
+                display: flex; flex-direction: column;
+                flex-grow: 1; min-width: 0;
+            }
+            #${PLAYLIST_SELECTOR_CONTAINER_ID} {
+                display: flex; align-items: center; gap: var(--spacing-sm);
+                margin-bottom: var(--spacing-sm);
+            }
+            #${PLAYLIST_SELECTOR_CONTAINER_ID} label { font-size: var(--artist-font-size); color: var(--text-secondary); flex-shrink: 0; }
+            #${PLAYLIST_SELECTOR_ID} { 
+                font-family: var(--font-family); font-size: 13px; padding: 4px 8px; 
+                border: 1px solid var(--border-color); border-radius: var(--border-radius); 
+                background-color: var(--player-bg); color: var(--text-primary); 
+                flex-grow: 1; min-width: 150px; height: auto; box-sizing: border-box; 
+                -webkit-appearance: none; -moz-appearance: none; appearance: none; 
+                background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23555%22%20d%3D%22M2%200L0%202h4zm0%205L0%203h4z%22/%3E%3C/svg%3E'); 
+                background-repeat: no-repeat; background-position: right 8px center; 
+                background-size: 8px 10px; padding-right: 25px; cursor:pointer; 
+            }
+            #${PLAYLIST_SELECTOR_ID}:focus { outline: 1px solid var(--accent-color); border-color: var(--accent-color); }
+            .hidden { display: none !important; }
+            #${DISPLAY_BOX_ID} { display: block; flex-shrink: 0; }
+            #${COVER_ID} { width: var(--cover-art-size); height: var(--cover-art-size); object-fit: cover; border-radius: var(--border-radius); box-shadow: 0 1px 3px var(--cover-border-color); flex-shrink: 0; background-color: var(--border-color); transition: transform var(--transition-speed) var(--transition-func); }
+            #${COVER_ID}:hover { transform: scale(1.03); }
+            #${INFO_CONTAINER_ID} { display: flex; flex-direction: column; justify-content: center; overflow: hidden; flex-grow: 1; min-width: 0; padding: var(--spacing-xs) 0; }
+            #${SONG_INFO_ID} { display: flex; flex-direction: column; overflow: hidden; justify-content: center; }
+            .${TITLE_LINE_WRAPPER_CLASS} { display: flex; align-items: baseline; margin-bottom: var(--spacing-xs); gap: var(--spacing-xs); }
+            #${TITLE_ID} { font-size: var(--title-font-size); font-weight: 600; margin: 0; white-space: normal; overflow-wrap: break-word; line-height: 1.3; color: var(--text-primary); flex-grow: 1; cursor: default; }
+            #${YOUTUBE_LINK_ID} { flex-shrink: 0; line-height: 1; opacity: 0.7; transition: opacity var(--transition-speed) var(--transition-func); margin-left: 2px; }
+            #${YOUTUBE_LINK_ID}:hover, #${YOUTUBE_LINK_ID}:focus { opacity: 1; }
+            #${YOUTUBE_LINK_ID} img { width: 18px; height: auto; display: block; }
+            #${ARTIST_ID} { font-size: var(--artist-font-size); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-secondary); line-height: 1.3; cursor: default; }
+            #${PROGRESS_BAR_CONTAINER_ID} { width: 100%; display: flex; align-items: center; gap: var(--spacing-sm); margin: var(--spacing-sm) 0; }
+            #${CONTROLS_CONTAINER_ID} { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: var(--spacing-md); margin-top: auto; }
+            #${CONTROLS_ID} { display: flex; justify-content: center; align-items: center; gap: var(--spacing-sm); }
+            .${PLAYER_CONTROL_BUTTON_CLASS} { background: none; border: none; cursor: pointer; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; width: var(--button-size); height: var(--button-size); opacity: 0.85; transition: all var(--transition-speed) var(--transition-func); padding: 0; margin: 0; flex-shrink: 0; outline: none; }
+            .${PLAYER_CONTROL_BUTTON_CLASS}:hover { opacity: 1; transform: scale(1.08); background-color: rgba(0,0,0,0.05); }
+            .${PLAYER_CONTROL_BUTTON_CLASS}:active { transform: scale(0.95); opacity: 0.9; }
+            .${PLAYER_CONTROL_BUTTON_CLASS}:focus-visible { opacity: 1; outline: 2px solid var(--accent-color); outline-offset: 2px; }
+            .${PLAYER_CONTROL_BUTTON_CLASS} img { display: block; width: 60%; height: 60%; user-select: none; -webkit-user-drag: none; -webkit-user-select: none; }
+            #${PLAY_PAUSE_BUTTON_ID} { width: calc(var(--button-size) * 1.25); height: calc(var(--button-size) * 1.25); background-color: rgba(63, 81, 181, 0.08); }
+            #${PLAY_PAUSE_BUTTON_ID}:hover { background-color: rgba(63, 81, 181, 0.12); }
+            .player-repeat-button, .player-shuffle-button { width: var(--small-button-size); height: var(--small-button-size); opacity: 0.6; }
+            .player-repeat-button.repeat-active, .player-shuffle-button.shuffle-active { opacity: 1; background-color: rgba(63, 81, 181, 0.1); }
+            #${CURRENT_TIME_ID}, #${DURATION_ID} { font-size: var(--time-font-size); color: var(--text-secondary); flex-shrink: 0; min-width: 3.2em; text-align: center; font-variant-numeric: tabular-nums; }
+            #${VOLUME_CONTAINER_ID} { display: flex; align-items: center; gap: var(--spacing-sm); flex-shrink: 0; }
+            #${VOLUME_ICON_ID} { width: 20px; height: 20px; opacity: 0.7; cursor: pointer; transition: opacity var(--transition-speed) var(--transition-func); filter: brightness(0.2); padding: 2px; border-radius: 50%; user-select: none; -webkit-user-select: none; }
+            #${VOLUME_ICON_ID}:hover { opacity: 1; background-color: rgba(0,0,0,0.05); }
+            #${VOLUME_PERCENTAGE_ID} { font-size: 12px; color: var(--text-secondary); min-width: 2.5em; text-align: right; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+            #${VOLUME_SLIDER_ID} { width: 80px; flex-grow: 0; flex-shrink: 0; }
+            input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; width: 100%; outline: none; transition: opacity var(--transition-speed) var(--transition-func); flex-grow: 1; height: 16px; vertical-align: middle; padding: 0; margin: 0; }
+            input[type="range"]::-webkit-slider-runnable-track { height: 4px; background: var(--slider-track-bg); border-radius: 2px; }
+            input[type="range"]::-moz-range-track { height: 4px; background: var(--slider-track-bg); border-radius: 2px; }
+            #${PROGRESS_BAR_ID}::-webkit-slider-runnable-track { background: linear-gradient( to right, var(--progress-fill-bg), var(--progress-fill-bg) var(--progress-percent, 0%), var(--slider-track-bg) var(--progress-percent, 0%) ); }
+            #${PROGRESS_BAR_ID}::-moz-range-track { background: linear-gradient( to right, var(--progress-fill-bg), var(--progress-fill-bg) var(--progress-percent, 0%), var(--slider-track-bg) var(--progress-percent, 0%) ); }
+            input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -6px; height: 16px; width: 16px; background-color: var(--slider-thumb-bg); border-radius: 50%; border: none; box-shadow: 0 1px 2px rgba(0,0,0,0.2); transition: all var(--transition-speed) var(--transition-func); }
+            input[type="range"]::-moz-range-thumb { height: 16px; width: 16px; background-color: var(--slider-thumb-bg); border-radius: 50%; border: none; box-shadow: 0 1px 2px rgba(0,0,0,0.2); transition: all var(--transition-speed) var(--transition-func); }
+            input[type="range"]:hover::-webkit-slider-thumb { background-color: var(--slider-thumb-hover-bg); transform: scale(1.15); }
+            input[type="range"]:hover::-moz-range-thumb { background-color: var(--slider-thumb-hover-bg); transform: scale(1.15); }
+            input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.3); transform: scale(1.15); background-color: var(--slider-thumb-hover-bg); }
+            input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.3); transform: scale(1.15); background-color: var(--slider-thumb-hover-bg); }
+            input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); background-color: var(--slider-thumb-hover-bg); }
+            input[type="range"]:active::-moz-range-thumb { transform: scale(1.2); background-color: var(--slider-thumb-hover-bg); }
+            #${VOLUME_SLIDER_ID}::-webkit-slider-runnable-track { height: 3px; }
+            #${VOLUME_SLIDER_ID}::-moz-range-track { height: 3px; }
+            #${VOLUME_SLIDER_ID}::-webkit-slider-thumb { margin-top: -5.5px; height: 14px; width: 14px; }
+            #${VOLUME_SLIDER_ID}::-moz-range-thumb { height: 14px; width: 14px; }
+			#${YOUTUBE_PLAYER_DIV_ID} { position: absolute !important; top: 0 !important; left: 0 !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important; }
+            
+            #${QUEUE_CONTAINER_ID} { 
+                margin-top: var(--spacing-md); 
+                padding-top: var(--spacing-sm); 
+                border-top: 1px solid var(--border-color);
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out;
+            }
+            #${QUEUE_CONTAINER_ID}:not(.queue-collapsed) {
+                max-height: 150px;
+            }
+             #${QUEUE_CONTAINER_ID}:not(.queue-collapsed) #${QUEUE_LIST_ID} {
+                 overflow-y: auto;
+                 max-height: calc(150px - 2em - var(--spacing-sm));
+             }
+            #${QUEUE_TITLE_ID} { 
+                font-size: var(--artist-font-size); 
+                color: var(--text-secondary); 
+                margin: 0 0 var(--spacing-sm) 0; 
+                font-weight: 500;
+                cursor: pointer;
+                user-select: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            #${QUEUE_TOGGLE_ICON_ID} {
+                font-size: 0.9em;
+                margin-left: var(--spacing-xs);
+                transition: transform 0.2s ease-in-out;
+                display: inline-block;
+            }
+            #${QUEUE_LIST_ID} { list-style: none; margin: 0; padding: 0; }
+            .${PLAYER_QUEUE_ITEM_CLASS} { 
+                padding: var(--spacing-xs) var(--spacing-sm); 
+                font-size: 13px; 
+                border-radius: var(--border-radius); 
+                cursor: pointer; 
+                transition: background-color var(--transition-speed) var(--transition-func);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .${PLAYER_QUEUE_ITEM_CLASS}:hover { background-color: var(--queue-item-hover-bg); }
+            .player-queue-item-title { font-weight: 600; color: var(--text-primary); }
+            .player-queue-item-artist { color: var(--text-secondary); font-size: 12px; }
+            .player-queue-empty { color: var(--text-secondary); font-style: italic; cursor: default; padding: var(--spacing-xs) var(--spacing-sm); }
+            #${QUEUE_CONTAINER_ID}.queue-collapsed {
+                max-height: calc(var(--artist-font-size) + var(--spacing-sm) + 2px);
+            }
+            #${QUEUE_CONTAINER_ID}.queue-collapsed #${QUEUE_LIST_ID} {
+                display: none;
+            }
+            #${QUEUE_CONTAINER_ID}.queue-collapsed #${QUEUE_TOGGLE_ICON_ID} {
+                transform: rotate(-90deg);
+            }
+            @media (max-width: 600px) { 
+                :root { 
+                    --cover-art-size: 100%;
+                    --button-size: 32px; 
+                    --title-font-size: 15px; 
+                    --artist-font-size: 13px; 
+                } 
+                #${PLAYER_ELEMENT_ID} { padding: var(--spacing-sm); margin-inline: auto }
+                #${PLAYER_MAIN_CONTENT_WRAPPER_ID} { flex-direction: column; gap: var(--spacing-md); }
+                #${DISPLAY_BOX_ID} { width: 100%; } 
+                #${COVER_ID} { max-width: 250px; margin: 0 auto; display: block; }
+                #${PLAYER_RIGHT_PANEL_ID} { width: 100%; }
+                #${INFO_CONTAINER_ID} { text-align: center; }
+                .${TITLE_LINE_WRAPPER_CLASS} { justify-content: center; }
+                #${ARTIST_ID} { text-align: center; }
+                #${CONTROLS_ID} { justify-content: center; } 
+                #${CONTROLS_CONTAINER_ID} { flex-direction: column; gap: var(--spacing-sm); }
+                #${VOLUME_CONTAINER_ID} { justify-content: center; } 
+                #${VOLUME_PERCENTAGE_ID} { display: none; } 
+                #${VOLUME_SLIDER_ID} { width: 120px; } 
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    async function initializeMusicPlayer() {
+        console.log("Setting up music player...");
+        try {
+            PLAYLISTS_DATA = [
+                { name: "Ed Rendells Soothing Songs", songs: SONGS_DATA },
+                { name: "Four More Years For W!", songs: PLAYLIST_TWO_DATA },
+            ];
+
+            if (!PLAYLISTS_DATA || PLAYLISTS_DATA.length === 0 || PLAYLISTS_DATA[0].songs.length === 0) {
+                console.warn("No default playlist or songs defined. Music player will be empty.");
+                playlist = new Playlist([]);
+                originalSongOrderForCurrentPlaylist = [];
+            } else {
+                activePlaylistIndex = 0;
+                const initialPlaylistSongsData = PLAYLISTS_DATA[activePlaylistIndex].songs;
+                const initialSongs = initialPlaylistSongsData.map(d => new Song(d.title, d.artist, d.coverLink, d.videoIds || d.videoId));
+                originalSongOrderForCurrentPlaylist = [...initialSongs];
+                playlist = new Playlist(initialSongs);
+            }
+
+            const playerFragment = createPlayerElements();
+
+            if (playlistSelectorElement && PLAYLISTS_DATA && PLAYLISTS_DATA.length > 0) {
+                PLAYLISTS_DATA.forEach((pl, index) => {
+                    const option = document.createElement("option");
+                    option.value = index.toString();
+                    option.textContent = pl.name;
+                    playlistSelectorElement.appendChild(option);
+                });
+                playlistSelectorElement.value = activePlaylistIndex.toString();
+            }
+
+            const anchorElement = document.getElementById("game_window");
+            const targetContainer = (anchorElement && anchorElement.parentNode) ? anchorElement.parentNode : document.body;
+            const insertBeforeElement = (anchorElement && anchorElement.parentNode) ? anchorElement.nextSibling : null;
+            targetContainer.insertBefore(playerFragment, insertBeforeElement);
+
+            injectPlayerStyles();
+            bindUIEventListeners();
+            updateUI();
+
+            await loadYouTubeAPI();
+
+            const playerDiv = document.getElementById(YOUTUBE_PLAYER_DIV_ID);
+            if (!playerDiv) throw new Error(`Cannot initialize player: Element '${YOUTUBE_PLAYER_DIV_ID}' not found.`);
+
+            ytPlayer = new YT.Player(YOUTUBE_PLAYER_DIV_ID, {
+                height: '1', width: '1',
+                playerVars: { 'playsinline': 1, 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'modestbranding': 1, 'origin': window.location.origin },
+                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': onPlayerError }
+            });
+
+        } catch (error) {
+            console.error("Failed during music player initialization:", error);
+            if (titleElement) titleElement.textContent = "Error";
+            if (artistElement) artistElement.textContent = "Could not load player.";
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeMusicPlayer);
+    } else {
+        initializeMusicPlayer();
+    }
+
+})();

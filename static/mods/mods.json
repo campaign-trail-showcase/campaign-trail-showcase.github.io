@@ -2743,9 +2743,17 @@
     "awards": "",
     "awardimageurls": ""
   },
-    {
+  {
     "value": "2016 - FeeltheBern",
     "text": "2016: Feel the Bern",
+    "mode": "new",
+    "tags": "Althist",
+    "awards": "",
+    "awardimageurls": ""
+  },
+  {
+    "value": "2004 - What a Wonderful World",
+    "text": "2004: What a Wonderful World!",
     "mode": "new",
     "tags": "Althist",
     "awards": "",
