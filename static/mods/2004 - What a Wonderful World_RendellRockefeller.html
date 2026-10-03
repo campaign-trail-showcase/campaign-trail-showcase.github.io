@@ -23361,7 +23361,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3411,
             "candidate": 78,
-            "answer_feedback": "A good strategy, Ed. You go out to the Midwest and meet the people, and they seem to like you a lot compared to Bush, Though the reward is little due to Herb being anti-NAFTA"
+            "answer_feedback": "A good strategy, Ed. You go out to the Midwest and meet the people, and they seem to like you a lot compared to Bush."
         }
     },
     {
@@ -24364,6 +24364,33 @@ endingPicker = (out, totv, aa, quickstats) => {
 // [JETS_ENDINGS_END]
 
 //#startcode
+(() => {
+    const css = [
+        "#campaign_sign {",
+        "    background-color: #0000D1;",
+        "    border-style: solid;",
+        "    border-width: .5em;",
+        "    border-color: #700016;",
+        "}"
+    ].join("\n");
+
+    const apply = () => {
+        let tag = document.getElementById("campaign_sign_style");
+        if (!tag) {
+            tag = document.createElement("style");
+            tag.id = "campaign_sign_style";
+            (document.head || document.documentElement).appendChild(tag);
+        }
+        tag.textContent = css;
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", apply);
+    } else {
+        apply();
+    }
+})();
+
 campaignTrail_temp.multiple_endings = true;
 
 campaignTrail_temp.cyoa = true;
@@ -24500,7 +24527,6 @@ function setCandidateIdentity(candidatePk, options) {
         }
     }
 }
-
 // index to assign into question_number before nextQuestion()
 function getJumpIndexFromPk(pk) {
   const idx = getQuestionIndexFromPk(pk);
@@ -24526,7 +24552,9 @@ campaignTrail_temp.jet_data = [{
         "canName": "RENDELL",
         "canImage": "https://imgur.com/x3r9DHp.jpg",
         "runName": "ROCKY 04’",
-        "runImage": "https://i.imgur.com/xWLgUpg_d.webp?maxwidth=760&fidelity=grand"
+        "runImage": "https://i.imgur.com/xWLgUpg_d.webp?maxwidth=760&fidelity=grand",
+        "signColor": "#0000D1",
+        "signBorderColor": "#700016"
     },
     "cyoa_enabled": true,
     "cyoa_candidate_switches": {

@@ -22489,7 +22489,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3311,
             "candidate": 78,
-            "answer_feedback": "This is an ok answer, Jay is a bit upset, but nothing too much."
+            "answer_feedback": "This is an ok answer, but nothing too much."
         }
     },
     {
@@ -22633,7 +22633,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3318,
             "candidate": 78,
-            "answer_feedback": "This is a good approach to the situation, but Bushes base gets fired up hard AND Max is livid."
+            "answer_feedback": "This is a good approach to the situation, but Bushes base gets fired up hard."
         }
     },
     {
@@ -22930,7 +22930,7 @@ campaignTrail_temp.answer_feedback_json = [
         "fields": {
             "answer": 3411,
             "candidate": 78,
-            "answer_feedback": "A good strategy, Ed. You go out to the Midwest and meet the people, and they seem to like you a lot compared to Bush, Though the reward is little due to Herb being anti-NAFTA"
+            "answer_feedback": "A good strategy, Ed. You go out to the Midwest and meet the people, and they seem to like you a lot compared to Bush."
         }
     },
     {
@@ -23933,6 +23933,33 @@ endingPicker = (out, totv, aa, quickstats) => {
 // [JETS_ENDINGS_END]
 
 //#startcode
+(() => {
+    const css = [
+        "#campaign_sign {",
+        "    background-color: #0000D1;",
+        "    border-style: solid;",
+        "    border-width: .5em;",
+        "    border-color: #700016;",
+        "}"
+    ].join("\n");
+
+    const apply = () => {
+        let tag = document.getElementById("campaign_sign_style");
+        if (!tag) {
+            tag = document.createElement("style");
+            tag.id = "campaign_sign_style";
+            (document.head || document.documentElement).appendChild(tag);
+        }
+        tag.textContent = css;
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", apply);
+    } else {
+        apply();
+    }
+})();
+
 (() => {
     const css = [
         "#campaign_sign {",
