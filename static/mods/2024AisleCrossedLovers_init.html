@@ -33,6 +33,16 @@ RecReading = true;
 
 campaignTrail_temp.credits = "pabloni21. Full credits in recommended reading";
 
+// necessary so that the right election files are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "21") {
+            campaignTrail_temp.code2_id = "2024AisleCrossedLovers";
+        }
+    }
+}, 100);
+
 campaignTrail_temp.global_parameter_json = [
     {
         "model": "campaign_trail.global_parameter",
