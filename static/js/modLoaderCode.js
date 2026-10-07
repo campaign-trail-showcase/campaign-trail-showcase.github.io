@@ -366,7 +366,7 @@ async function deleteModFromDB(modName) {
 
     // try to delete numeric key if it exists, to fix legacy bugs
     if (!isNaN(modName) && modName !== "") {
-      try { store.delete(Number(modName)); } catch (e) {}
+      try { store.delete(Number(modName)); } catch (e) { }
     }
 
     request.onsuccess = () => {
@@ -557,17 +557,17 @@ function applySingleModTheme(modView, state = null) {
     theme.header_image_url ? modView.style.setProperty("--theme-header-bg", `url('${theme.header_image_url}')`) : modView.style.removeProperty("--theme-header-bg");
     theme.header_color ? modView.style.setProperty("--theme-header-color", theme.header_color) : modView.style.removeProperty("--theme-header-color");
     theme.header_text_color ? modView.style.setProperty("--theme-header-text", theme.header_text_color) : modView.style.removeProperty("--theme-header-text");
-	theme.header_text_shadow ? modView.style.setProperty("--theme-header-text-shadow", theme.header_text_shadow) : modView.style.removeProperty("--theme-header-text-shadow");
-	theme.header_font ? modView.style.setProperty("--theme-header-font", theme.header_font) : modView.style.removeProperty("--theme-header-font");
-	theme.header_margin ? modView.style.setProperty("--theme-header-margin", theme.header_margin) : modView.style.removeProperty("--theme-header-margin");
+    theme.header_text_shadow ? modView.style.setProperty("--theme-header-text-shadow", theme.header_text_shadow) : modView.style.removeProperty("--theme-header-text-shadow");
+    theme.header_font ? modView.style.setProperty("--theme-header-font", theme.header_font) : modView.style.removeProperty("--theme-header-font");
+    theme.header_margin ? modView.style.setProperty("--theme-header-margin", theme.header_margin) : modView.style.removeProperty("--theme-header-margin");
     theme.description_background_color ? modView.style.setProperty("--theme-desc-bg", theme.description_background_color) : modView.style.removeProperty("--theme-desc-bg");
     theme.description_text_color ? modView.style.setProperty("--theme-desc-text", theme.description_text_color) : modView.style.removeProperty("--theme-desc-text");
     theme.main_color ? modView.style.setProperty("--theme-main-color", theme.main_color) : modView.style.removeProperty("--theme-main-color");
     theme.secondary_color ? modView.style.setProperty("--theme-secondary-color", theme.secondary_color) : modView.style.removeProperty("--theme-secondary-color");
-	theme.scrollbar_color ? modView.style.setProperty("--theme-scrollbar-color", theme.scrollbar_color) : modView.style.removeProperty("--theme-scrollbar-color");
-	theme.scrollbar_width ? modView.style.setProperty("--theme-scrollbar-width", theme.scrollbar_width) : modView.style.removeProperty("--theme-scrollbar-width");
-	theme.image_border ? modView.style.setProperty("--theme-img-border", theme.image_border) : modView.style.removeProperty("--theme-img-border");
-	theme.election_image_display ? modView.style.setProperty("--theme-image-display", theme.election_image_display) : modView.style.removeProperty("--theme-image-display");
+    theme.scrollbar_color ? modView.style.setProperty("--theme-scrollbar-color", theme.scrollbar_color) : modView.style.removeProperty("--theme-scrollbar-color");
+    theme.scrollbar_width ? modView.style.setProperty("--theme-scrollbar-width", theme.scrollbar_width) : modView.style.removeProperty("--theme-scrollbar-width");
+    theme.image_border ? modView.style.setProperty("--theme-img-border", theme.image_border) : modView.style.removeProperty("--theme-img-border");
+    theme.election_image_display ? modView.style.setProperty("--theme-image-display", theme.election_image_display) : modView.style.removeProperty("--theme-image-display");
 
     let hoverColor = theme.secondary_hover_color;
     if (!hoverColor && theme.secondary_color) {
@@ -581,19 +581,19 @@ function applySingleModTheme(modView, state = null) {
     modView.style.removeProperty("--theme-header-bg");
     modView.style.removeProperty("--theme-header-color");
     modView.style.removeProperty("--theme-header-text");
-	modView.style.removeProperty("--theme-header-text-shadow");
-	modView.style.removeProperty("--theme-header-font");
-	modView.style.removeProperty("--theme-header-margin");
+    modView.style.removeProperty("--theme-header-text-shadow");
+    modView.style.removeProperty("--theme-header-font");
+    modView.style.removeProperty("--theme-header-margin");
     modView.style.removeProperty("--theme-desc-bg");
     modView.style.removeProperty("--theme-desc-text");
     modView.style.removeProperty("--theme-main-color");
     modView.style.removeProperty("--theme-secondary-color");
-	modView.style.removeProperty("--theme-scrollbar-color");
-	modView.style.removeProperty("--theme-scrollbar-width");
+    modView.style.removeProperty("--theme-scrollbar-color");
+    modView.style.removeProperty("--theme-scrollbar-width");
     modView.style.removeProperty("--theme-secondary-hover");
     modView.style.removeProperty("--theme-ui-text");
-	modView.style.removeProperty("--theme-img-border");
-	modView.style.removeProperty("--theme-image-display");
+    modView.style.removeProperty("--theme-img-border");
+    modView.style.removeProperty("--theme-image-display");
   }
 }
 
@@ -1265,12 +1265,8 @@ $(document).ready(async () => {
     standardModsToLoad.push(mod);
   });
 
-  // sort standard mods alphabetically by value
-  standardModsToLoad.sort((a, b) => {
-    if (a.value < b.value) return -1;
-    if (a.value > b.value) return 1;
-    return 0;
-  });
+  // sort standard mods chronologically by election year
+  standardModsToLoad.sort((a, b) => compareModNamesByYear(a.value, b.value));
 
   // populate standard card shells right after custom ones
   standardModsToLoad.forEach((mod) => {
@@ -1916,6 +1912,9 @@ function getVisibleMods() {
     const modTags = modView._tagsArray || [];
     const modName = modView.getAttribute("mod-name");
     const modDisplayName = modView.getAttribute("mod-display-name");
+    // resolved election year for mods whose names don't spell one out
+    // (e.g. "'88 Afton" -> 1988, "ROC'04 Bian." -> 2004)
+    const modYear = getModYear(modName);
 
     if (
       (nameFilter === "" ||
@@ -1923,7 +1922,8 @@ function getVisibleMods() {
         modName.includes(nameFilter)) &&
       modTags.some((tag) => activeTags.has(tag)) &&
       (!onlyFavorites || isFavorite(modName)) &&
-      (!year || year.test(modName)) &&
+      (!year || year.test(modName) ||
+        (modYear !== null && Number.isFinite(modYear) && year.test(String(modYear)))) &&
       (onlyFavorites || mode === ALL || modMode === mode)
     ) {
       visibleMods.push(modView);
@@ -2524,9 +2524,66 @@ function getUrlParam(param) {
   return url.searchParams.get(param);
 }
 
-function modCompare2(a, b) {
-  const nameA = a.getAttribute("mod-name");
-  const nameB = b.getAttribute("mod-name");
+// mod-year helpers
+const modYearCache = new Map();
+
+// mods whose names don't spell out a usable election year
+// so we pin them to a specific year to keep them in place
+const MOD_PINNED_YEARS = {
+  "12NE": 37, // after 0036AD, before 1498 Florence
+  "16ABY": 1499, // after 1498 Florence, before 1776
+  "88 Afton": 1988,
+  "ROC'04 Bian.": 2004,
+};
+
+// extract a mod's election year from its name
+// returns null for undated mods, so they sort after dated mods
+function getModYear(modName) {
+  if (modYearCache.has(modName)) {
+    return modYearCache.get(modName);
+  }
+
+  // put Random Scenario ahead of everything else
+  if (modName === "0000Random_Mod") {
+    modYearCache.set(modName, -Infinity);
+    return -Infinity;
+  }
+
+  let year = null;
+  const name = String(modName ?? "");
+
+  const bceMatch = name.match(/(\d+)\s*BCE/i);
+  if (bceMatch) {
+    year = -parseInt(bceMatch[1], 10);
+  } else {
+    const ceMatch = name.match(/(?:^|\D)(\d{4})(?!\d)/);
+    if (ceMatch) {
+      year = parseInt(ceMatch[1], 10);
+    } else if (Object.prototype.hasOwnProperty.call(MOD_PINNED_YEARS, name)) {
+      year = MOD_PINNED_YEARS[name];
+    }
+  }
+
+  modYearCache.set(modName, year);
+  return year;
+}
+
+// compare by extracted election year, falling back to
+// alphabetical order for ties. if no detectable year,
+// treat as undated and sort after the rest
+function compareModNamesByYear(nameA, nameB) {
+  const yearA = getModYear(nameA);
+  const yearB = getModYear(nameB);
+
+  if (yearA === null && yearB === null) {
+    // if both undated, fall through to alphabetical below
+  } else if (yearA === null) {
+    return 1;
+  } else if (yearB === null) {
+    return -1;
+  } else if (yearA !== yearB) {
+    return yearA - yearB;
+  }
 
   if (nameA < nameB) {
     return -1;
@@ -2535,6 +2592,13 @@ function modCompare2(a, b) {
     return 1;
   }
   return 0;
+}
+
+function modCompare2(a, b) {
+  return compareModNamesByYear(
+    a.getAttribute("mod-name"),
+    b.getAttribute("mod-name"),
+  );
 }
 
 function setMode(evt, newMode) {
