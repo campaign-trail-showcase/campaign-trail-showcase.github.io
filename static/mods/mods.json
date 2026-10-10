@@ -2759,4 +2759,17 @@
     "awards": "",
     "awardimageurls": ""
   }
-]
+] ,
+{
+    "name": "2020 - Brotherly Love",
+    "filename": "2020 - Brotherly Love_init.html",
+    "description": "To the shock of nobody, Trump had failed to win. After all, did anyone seriously expect him to beat Bernie? Anyhow, with him out of the way, the GOP could begin conducting soul searching and soon the sun would shine down on everyone's favorite son: Jeb Bush.",
+    "poster": "https://imgur.com",
+    "candidates": [
+        {
+            "name": "Jeb Bush",
+            "filename": "2020 - Brotherly Love_Rubio.html"
+        }
+    ]
+}
+
