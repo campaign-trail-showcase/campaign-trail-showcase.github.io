@@ -1,0 +1,315 @@
+campaignTrail_temp.election_json = [
+    {
+        "model": "campaign_trail.election",
+        "pk": 20,
+        "fields": {
+            "year": 2020,
+            "display_year": "2020 - Brotherly Love",
+            "summary": "To the shock of nobody, Trump had failed to win, after all, did anyone seriously expect him to beat Bernie? anyhow, with him out the way the GOP could begin conducting soul searching and soon the sun would shine down on everyone's favorite son, from 0 to hero of the Republican party\n\n<p>Despite his refusal to run in the 2012 and 2016 race, he has once again found his calling to the presidency, with most of the parties favorites decapitated, Bush is coming into this race stronger then ever with clear backing from more then just one side, however as the world get's whipped into chaos not seen since the 2000's, many wonder if all this time has been used preparing",
+            "site_description": "",
+            "image_url": "https://i.imgur.com/YoBtfei.png",
+            "winning_electoral_vote_number": 270,
+            "advisor_url": "https://i.imgur.com/mc0i5wL.png",
+            "recommended_reading": "Yello!\n\n<P>Usually this section is reserved for lore and this one will be no different, the backstory to this mod is simple, Jeb never runs in 2016, meanwhile Bernie is able to snatch the Democratic nomination away from Clinton and goes onto face Trump in the general where he just narrowly wins by getting the Rust Belt \n\n<P> This leaves Jeb a opening to run in 2020, thanks' to his massive backing and the mostly exhausted GOP machine, tired of the chaos brought forward by Trump, he is able to win the nomination with Marco Rubio as his VP, he goes onto face President Sander's which, thanks to the stagnating economy, lack of change within the political system, shaky standing overseas and a pretty lackluster handling of Covid 19 and the BLM movement end's up allowing Bush to flip Colorado, Nevada, Wisconsin and Virginia, giving him the Presidency\n\n<p> for any mistakes with the lore and or gameplay i do apologize since this is my first mod, but with this serving as a spring board to put me on the map and know what and what not to do for future mod making, thank you to my friend \"Viatrinitas\" for suggesting me this idea to begin with, and i thank you for playing, stay seated, my next mod is gonna be a (unofficial) sequel to one of my favorites!",
+            "recommended_reading_enabled": true,
+            "has_visits": 1,
+            "no_electoral_majority_image": "../static/images/2012-no-majority.jpg"
+        }
+    }
+];
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 20,
+        "year": 2020,
+        "is_premium": 0,
+        "display_year": "2020 - Brotherly Love"
+    }
+];
+
+RecReading = true;
+
+campaignTrail_temp.credits = "!Bush4Ever and Viatrinitas";
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+];
+
+campaignTrail_temp.candidate_json = [
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 301,
+        "fields": {
+            "first_name": "Jeb",
+            "last_name": "Bush",
+            "election": 20,
+            "party": "Republican",
+            "state": "The GOP Machine",
+            "priority": 1,
+            "description": "<b>What is there to say about the man?<b>\n\n<p>Jeb was once the favorite within the family, always in the position to take the starlight, however, soon, he would fall out of the limelight, his brother would take the spotlight and he was forced to go into hiding, but now, he has found his calling<p> the GOP is leaderless, burned on the corporate jazz of Romney and the chaotic populism of Trump, he has taken the mantel to prove himself, but with a cluster of a primary this season, can he come out on top?",
+            "color_hex": "#d4496c",
+            "secondary_color_hex": null,
+            "is_active": 1,
+            "image_url": "https://i.imgur.com/UnvEFcu.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 1002,
+        "fields": {
+            "first_name": "Marco",
+            "last_name": "Rubio",
+            "election": 20,
+            "party": "Use to be Tea Party, those days are long behind him",
+            "state": "Florida",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#d74961",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/zKFXalP.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<b>The guy for this<b>\n\n<p> Little Marco is moving up to the big house thanks to you, with the field so expansive it felt hard to pick a running mate, but with his time in office, his help with reaching minorities and his heavy foreign policy credibility, he would soon be on your shortlist, for better or worse\n\n<p>But with his high energy coming into this season, his proven standing within the GOP and his general popularity with the general populace he is the clear choice out of the bunch, you 2 bounce off well each other and make for a good bromance, just make sure it carries you to the presidency",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 300,
+        "fields": {
+            "first_name": "Bernie",
+            "last_name": "Sanders",
+            "election": 20,
+            "party": "Democratic",
+            "state": "Vermont",
+            "priority": 1,
+            "description": "Candidate description here.",
+            "color_hex": "#609ee2",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "Winner!",
+            "electoral_loss_message": "Loser!",
+            "no_electoral_majority_message": "Majority?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 304,
+        "fields": {
+            "first_name": "Howie",
+            "last_name": "Hawkins/Other",
+            "election": 20,
+            "party": "Green",
+            "state": "New York",
+            "priority": 1,
+            "description": "Candidate description here.",
+            "color_hex": "#31da1b",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "Winner!",
+            "electoral_loss_message": "Loser!",
+            "no_electoral_majority_message": "Majority?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 305,
+        "fields": {
+            "first_name": "Jo",
+            "last_name": "Jorgensen",
+            "election": 20,
+            "party": "Libertarian",
+            "state": "South Carolina ",
+            "priority": 1,
+            "description": "Candidate description here.",
+            "color_hex": "#ebd700",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "",
+            "electoral_victory_message": "Winner!",
+            "electoral_loss_message": "Loser!",
+            "no_electoral_majority_message": "Majority?",
+            "description_as_running_mate": null,
+            "candidate_score": 1,
+            "running_mate": false
+        }
+    }
+];
+
+campaignTrail_temp.running_mate_json = [
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 200,
+        "fields": {
+            "candidate": 301,
+            "running_mate": 1002
+        }
+    }
+];
+
+campaignTrail_temp.opponents_default_json = [
+    {
+        "election": 20,
+        "candidates": [
+            301,
+            300,
+            304,
+            305
+        ]
+    }
+];
+
+campaignTrail_temp.opponents_weighted_json = [
+    {
+        "election": 20,
+        "candidates": [
+            301,
+            300,
+            304,
+            305
+        ]
+    }
+];
+
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#982b5a",
+    "header_text_color": "#ffffff",
+    "header_text_shadow": "1px 1px 2px rgba(0, 0, 0, 0.7)",
+    "description_background_color": "#eff3ff",
+    "description_text_color": "#000000",
+    "main_color": "#001c87",
+    "secondary_color": "#285179",
+    "secondary_hover_color": "#486b8d",
+    "scrollbar_color": "#285179 #001c87",
+    "scrollbar_width": "auto",
+    "image_border": "4px solid #ffffff",
+    "ui_text_color": "#ffffff"
+};
+
+jet_data = {
+    "headerColor": "#9c2943",
+    "headerTextColor": "#ffffff",
+    "windowColor": "#263e8a",
+    "containerColor": "#081a97",
+    "innerWindowColor": "#0b1572",
+    "innerWindowTextColor": "#ffffff",
+    "descriptionWindowColor": "#ffffff",
+    "descriptionWindowTextColor": "#000000",
+    "startButtonColor": "#d23841",
+    "bannerImageUrl": "https://i.imgur.com/oVMGaO5.png",
+    "backgroundImageUrl": "https://i.imgur.com/AFGodSh.png",
+    "gameTitle": "JEBAMANIA!",
+    "customQuote": "\"Please Clap... For President Jeb Bush!\"",
+    "quoteTextColor": "#ffffff",
+    "endingTextColor": "#000000",
+    "modBoxTheme": {
+        "header_color": "#982b5a",
+        "header_text_color": "#ffffff",
+        "header_image_url": "",
+        "header_text_shadow": "1px 1px 2px rgba(0, 0, 0, 0.7)",
+        "header_font": "",
+        "header_margin": "",
+        "description_background_color": "#eff3ff",
+        "description_text_color": "#000000",
+        "main_color": "#001c87",
+        "secondary_color": "#285179",
+        "secondary_hover_color": "#486b8d",
+        "scrollbar_color": "#285179 #001c87",
+        "scrollbar_width": "auto",
+        "image_border": "4px solid #ffffff",
+        "election_image_display": "",
+        "ui_text_color": "#ffffff"
+    }
+};
+
+//#startcode
+function applyTheme(theme) {
+    const gameHeader = document.querySelector(".game_header");
+    if (gameHeader && theme.coloring_title) {
+        gameHeader.style.backgroundColor = theme.coloring_title;
+    }
+
+    const gameWindow = document.getElementById("game_window");
+    if (gameWindow && theme.coloring_window) {
+        gameWindow.style.backgroundColor = theme.coloring_window;
+    }
+
+    const container = document.querySelector(".container");
+    if (container && theme.coloring_container) {
+        container.style.backgroundColor = theme.coloring_container;
+    }
+
+    const headerImg = document.getElementById("header");
+    if (headerImg && theme.header_image) {
+        headerImg.src = theme.header_image;
+    }
+
+    if (theme.body_background) {
+        document.body.style.backgroundImage = `url("${theme.body_background}")`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundAttachment = "fixed";
+    }
+
+    const style = document.createElement("style");
+    style.textContent = `
+      #results_container { color: #000000; }
+      #wittyquote { color: #ffffff; }
+      .game_header h2 { color: #ffffff; }
+      .inner_window_w_desc { background-color: #0b1572 !important; color: #ffffff; }
+      .inner_window_front, .person_description_window, .election_description_window, .description_window_small { background-color: #ffffff !important; color: #000000; }
+      .campaign_trail_start_emphasis { background-color: #d23841 !important; }
+    `;
+    document.head.appendChild(style);
+}
+
+corrr = "\n              <h2>JEBAMANIA!</h2><font id=\"wittyquote\" size=\"4\"><em>\"Please Clap... For President Jeb Bush!\"</em></font>\n            ";
+
+const theme = nct_stuff.themes[nct_stuff.selectedTheme];
+
+// define / override theme values
+theme.coloring_title     = "#9c2943";
+theme.coloring_window    = "#263e8a";
+theme.coloring_container = "#081a97";
+theme.header_image = "https://i.imgur.com/oVMGaO5.png";
+theme.body_background = "https://i.imgur.com/AFGodSh.png";
+
+applyTheme(theme);
+//#endcode
