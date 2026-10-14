@@ -2011,63 +2011,97 @@ function a(e) {
   $("#opponent_selection_description_window").html(t);
 }
 
+// checks if we are actually looking at a real candidate pairing
 function realityCheck(cand, running_mate) {
-  // checks if we are actually looking at a real candidate pairing
-  const pairs = e.running_mate_json
-    .map((f) => [f.fields.candidate, f.fields.running_mate]);
-  return pairs.some((pr) => pr[0] === cand && pr[1] === running_mate);
+  if (typeof ree === "undefined" || !ree.running_mate_json) return false;
+  const pairs = ree.running_mate_json.map((f) => [
+    f.fields.candidate,
+    f.fields.running_mate,
+  ]);
+  return pairs.some((pr) => pr[0] === Number(cand) && pr[1] === Number(running_mate));
 }
 
 // Loads up the html for an election when loading the game. From my understanding this sets up the map and such.
 // Important for mods because it will load the base scenario code 2 for the mod before loading the custom code 2.
 // That way you have less boilerplate
 function election_HTML(id, cand, running_mate) {
-  const cands = PROPS.CANDIDATES;
   const numId = Number(id);
-  if (numId !== 16) {
-    if (modded) {
-      let yearbit;
-      let lastnamebit;
-      let veeplastname;
+
+  // for 2016a
+  if (numId === 16) {
+    if (modded) return baseScenarioDict["2016a"];
+    const cands = PROPS.CANDIDATES;
+    return `2016a_${cands.get(String(cand))?.last_name}_${cands.get(String(running_mate))?.last_name}.html`;
+  }
+
+  // check if the mod explicitly requested a specific base scenario or base year
+  if (campaignTrail_temp.base_scenario) {
+    return campaignTrail_temp.base_scenario;
+  }
+  if (campaignTrail_temp.base_year && baseScenarioDict[campaignTrail_temp.base_year]) {
+    return baseScenarioDict[campaignTrail_temp.base_year];
+  }
+
+  if (modded) {
+    let yearbit;
+    let lastnamebit;
+    let veeplastname;
+
+    // ree = the actual base election json unmodded
+    try {
+      if (typeof ree !== "undefined" && ree.election_json) {
+        const reeIdx = findFromPK(ree.election_json, id);
+        if (reeIdx !== -1) {
+          yearbit = ree.election_json[reeIdx].fields.year;
+        }
+      }
+    } catch (err) {}
+
+    // if not in ree, get the year from the mod's own data
+    if (!yearbit) {
+      const modElection = PROPS.ELECTIONS.get(String(id));
+      yearbit = modElection?.year 
+        || e.temp_election_list?.find((f) => stringsEqual(f.id, id))?.year 
+        || 2012; // Ultimate default
+    }
+
+    // Check if the candidate and running mate are actually a valid pairing in the base election data
+    const isBasePairing = realityCheck(cand, running_mate);
+    if (isBasePairing && typeof ree !== "undefined") {
       try {
-        // ree = the actual base election json unmodded
-        yearbit = ree.election_json[findFromPK(ree.election_json, id)].fields.year;
-        lastnamebit = ree.candidate_json[
-          findFromPK(ree.candidate_json, campaignTrail_temp.candidate_id)
-        ].fields.last_name;
-        veeplastname = ree.candidate_json[
-          findFromPK(ree.candidate_json, campaignTrail_temp.running_mate_id)
-        ].fields.last_name;
-        // eslint-disable-next-line no-empty
-      } catch {
-      }
+        lastnamebit = ree.candidate_json[findFromPK(ree.candidate_json, cand)]?.fields.last_name;
+        veeplastname = ree.candidate_json[findFromPK(ree.candidate_json, running_mate)]?.fields.last_name;
+        if (lastnamebit && veeplastname) {
+          return `${yearbit}_${lastnamebit}_${veeplastname}.html`;
+        }
+      } catch (err) {}
+    }
 
-      // Check if this is a base scenario and if so we need the specific base scenario code 2. Otherwise we can use whatever one with the same year.
-      const real = realityCheck(cand, running_mate);
-
-      if (real) {
-        return `${yearbit}_${lastnamebit}_${veeplastname}.html`;
-      }
-
+    // if it's a base scenario
+    if (baseScenarioDict[yearbit]) {
       return baseScenarioDict[yearbit];
     }
-    // If it's not modded then it must bea real base scenario so just return the real info
-    const yearNM = PROPS.ELECTIONS.get(String(id)).year;
-    const candNM = cands.get(String(cand)).last_name;
-    const runNM = cands.get(String(running_mate)).last_name;
-    return `${yearNM}_${candNM}_${runNM}.html`;
-  }
-  if (numId === 16) {
-    // If it's a mod we don't need to get the specific 2016a scenario
-    if (modded) {
-      return baseScenarioDict["2016a"];
-    }
-    return (
-      `2016a_${cands.get(String(cand)).last_name}_${cands.get(String(running_mate)).last_name}.html`
+
+    // use the closest chronological base scenario as fallback
+    const availableYears = Object.keys(baseScenarioDict)
+      .map(Number)
+      .filter((y) => !isNaN(y))
+      .sort((a, b) => a - b);
+
+    const closestYear = availableYears.reduce((prev, curr) =>
+      Math.abs(curr - Number(yearbit)) < Math.abs(prev - Number(yearbit)) ? curr : prev,
+      2012
     );
+
+    return baseScenarioDict[closestYear] || "2012_Obama_Clinton.html";
   }
 
-  return null;
+  // fallback for non-modded base games
+  const cands = PROPS.CANDIDATES;
+  const yearNM = PROPS.ELECTIONS.get(String(id))?.year || 2012;
+  const candNM = cands.get(String(cand))?.last_name;
+  const runNM = cands.get(String(running_mate))?.last_name;
+  return `${yearNM}_${candNM}_${runNM}.html`;
 }
 
 /* eslint-disable no-use-before-define */
