@@ -71890,7 +71890,7 @@ cyoAdventure = function(a) {
     }
 
     //Foreign policy successes
-    if (ans == 256848 || ans == 256824 || ans == 256804 || ans == 256809 || ans == 256820 || ans == 256828 || ans == 256702 || ans == 256685 || ans == 256681 || ans == 256655 || ans == 256643 || ans == 256634 || ans == 256622 || ans == 256617 || ans == 256513 || ans == 254784 || ans == 254760 || ans == 254767 || ans == 254675 || ans == 254665 || ans == 254660 || ans == 254650 || ans == 254622 || ans == 254628 || ans == 25448 || ans == 25444 || ans == 25435 || ans == 25431 || ans == 22853 || ans == 20915 || ans == 20924 || ans == 5190 || ans == 5147 || ans == 22758 || ans == 22043 || ans == 5150 || ans == 20877 || ans == 24059 || ans == 24062 || ans == 23695 || ans == 20946 || ans == 24170 || ans == 24768 || ans == 24772 || ans == 24764 || ans == 24776 || ans == 24780 || ans == 24785 || ans == 24797 || ans == 24800) {
+    if (ans == 256784 || ans == 256788 || ans == 256848 || ans == 256824 || ans == 256804 || ans == 256809 || ans == 256820 || ans == 256828 || ans == 256702 || ans == 256685 || ans == 256681 || ans == 256655 || ans == 256643 || ans == 256634 || ans == 256622 || ans == 256617 || ans == 256513 || ans == 254784 || ans == 254760 || ans == 254767 || ans == 254675 || ans == 254665 || ans == 254660 || ans == 254650 || ans == 254622 || ans == 254628 || ans == 25448 || ans == 25444 || ans == 25435 || ans == 25431 || ans == 22853 || ans == 20915 || ans == 20924 || ans == 5190 || ans == 5147 || ans == 22758 || ans == 22043 || ans == 5150 || ans == 20877 || ans == 24059 || ans == 24062 || ans == 23695 || ans == 20946 || ans == 24170 || ans == 24768 || ans == 24772 || ans == 24764 || ans == 24776 || ans == 24780 || ans == 24785 || ans == 24797 || ans == 24800) {
         Nato += 1;
         updateStatsPopup();
     }
@@ -72046,11 +72046,6 @@ cyoAdventure = function(a) {
         if (Nato > 3 && Blair === 0) {
             Brown += 1;
         }
-        
-        // Turkey election
-        if (ans === 256784 || ans === 256788) {
-            Erdo += 1;
-        }
     }
 
     // German election update
@@ -72058,6 +72053,13 @@ cyoAdventure = function(a) {
         if (Nato > 4 && Merkel === 0) {
             Merz += 1;
             Shroder -= 1;
+        }
+    }
+
+    if (e.noCounter === 18) {
+        // Turkey election
+        if (ans === 256784 || ans === 256788) {
+            Erdo += 1;
         }
     }
 
