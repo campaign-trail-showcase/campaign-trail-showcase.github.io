@@ -2014,6 +2014,21 @@ function a(e) {
 // checks if we are actually looking at a real candidate pairing
 function realityCheck(cand, running_mate) {
   if (typeof ree === "undefined" || !ree.running_mate_json) return false;
+
+  const selectedCandidate = e.candidate_json?.find((f) => stringsEqual(f.pk, cand));
+  const selectedRunningMate = e.candidate_json?.find((f) => stringsEqual(f.pk, running_mate));
+  const baseCandidate = ree.candidate_json?.find((f) => stringsEqual(f.pk, cand));
+  const baseRunningMate = ree.candidate_json?.find((f) => stringsEqual(f.pk, running_mate));
+
+  if (
+    !selectedCandidate
+    || !selectedRunningMate
+    || !baseCandidate
+    || !baseRunningMate
+    || selectedCandidate.fields.last_name !== baseCandidate.fields.last_name
+    || selectedRunningMate.fields.last_name !== baseRunningMate.fields.last_name
+  ) return false;
+
   const pairs = ree.running_mate_json.map((f) => [
     f.fields.candidate,
     f.fields.running_mate,
