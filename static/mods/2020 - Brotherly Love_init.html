@@ -5,8 +5,7 @@ campaignTrail_temp.election_json = [
         "fields": {
             "year": 2020,
             "display_year": "2020 - Brotherly Love",
-            "summary": "To the shock of nobody, Trump had failed to win, after all, did anyone seriously expect him to beat Bernie? anyhow, with him out the way the GOP could begin conducting soul searching and soon the sun would shine down on everyone's favorite son, from 0 to hero of the Republican party\n\n<p>Despite his refusal to run in the 2012 and 2016 race, he has once again found his calling to the presidency, with most of the parties favorites decapitated, Bush is coming into this race stronger then ever with clear backing from more then just one side, however as the world get's whipped into chaos not seen since the 2000's, many wonder if all this time has been used preparing",
-            "site_description": "",
+            "summary": "<p>To the shock of nobody, Trump had failed to win. After all, did anyone seriously expect him to beat Bernie? Anyhow, with him out of the way, the GOP could begin conducting soul-searching, and soon the sun would shine down on everyone's favorite son, going from zero to hero of the Republican Party.</p><p>Despite his refusal to run in the 2012 and 2016 races, he has once again found his calling in the presidency. With most of the party's favorites decapitated, Bush is coming into this race stronger than ever, with clear backing from more than just one side. However, as the world gets whipped into chaos not seen since the 2000s, many wonder if all this time has been used preparing...</p>",
             "image_url": "https://i.imgur.com/YoBtfei.png",
             "winning_electoral_vote_number": 270,
             "advisor_url": "https://i.imgur.com/mc0i5wL.png",
@@ -67,7 +66,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Republican",
             "state": "The GOP Machine",
             "priority": 1,
-            "description": "<b>What is there to say about the man?<b>\n\n<p>Jeb was once the favorite within the family, always in the position to take the starlight, however, soon, he would fall out of the limelight, his brother would take the spotlight and he was forced to go into hiding, but now, he has found his calling<p> the GOP is leaderless, burned on the corporate jazz of Romney and the chaotic populism of Trump, he has taken the mantel to prove himself, but with a cluster of a primary this season, can he come out on top?",
+            "description": "<b>What is there to say about the man?</b><p>Jeb was once the favorite within the family, always in a position to take the limelight. However, soon, he would fall out of it, as his brother took the spotlight and he was forced to go into hiding. But now, he has found his calling. The GOP is leaderless, burned out on the corporate jazz of Romney and the chaotic populism of Trump. He has taken up the mantle to prove himself, but with a chaotic primary season ahead, can he come out on top?</p>",
             "color_hex": "#d4496c",
             "secondary_color_hex": null,
             "is_active": 1,
@@ -87,7 +86,7 @@ campaignTrail_temp.candidate_json = [
             "first_name": "Marco",
             "last_name": "Rubio",
             "election": 20,
-            "party": "Use to be Tea Party, those days are long behind him",
+            "party": "Used to be Tea Party, those days are long behind him",
             "state": "Florida",
             "priority": 1,
             "description": "<p>Put description here</p>",
@@ -98,7 +97,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<b>The guy for this<b>\n\n<p> Little Marco is moving up to the big house thanks to you, with the field so expansive it felt hard to pick a running mate, but with his time in office, his help with reaching minorities and his heavy foreign policy credibility, he would soon be on your shortlist, for better or worse\n\n<p>But with his high energy coming into this season, his proven standing within the GOP and his general popularity with the general populace he is the clear choice out of the bunch, you 2 bounce off well each other and make for a good bromance, just make sure it carries you to the presidency",
+            "description_as_running_mate": "<b>The guy for this</b><p>Little Marco is moving up to the big house thanks to you. With the field so expansive, it felt hard to pick a running mate, but with his time in office, his help in reaching minorities, and his foreign policy credibility, he would soon make your shortlist, for better or worse.</p><p>But with his high energy coming into this season, his proven standing within the GOP, and his general popularity with the public, he is a clear choice out of the bunch. The two of you bounce off each other well and make for a good bromance. Just make sure it carries you to the presidency.</p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -296,11 +295,20 @@ function applyTheme(theme) {
       .inner_window_w_desc { background-color: #0b1572 !important; color: #ffffff; }
       .inner_window_front, .person_description_window, .election_description_window, .description_window_small { background-color: #ffffff !important; color: #000000; }
       .campaign_trail_start_emphasis { background-color: #d23841 !important; }
+	  
+	  .inner_window_question {
+		  min-height: 325px;
+		}
+		
+		#visit_window {
+		  height: auto;
+		}
+	  
     `;
     document.head.appendChild(style);
 }
 
-corrr = "\n              <h2>JEBAMANIA!</h2><font id=\"wittyquote\" size=\"4\"><em>\"Please Clap... For President Jeb Bush!\"</em></font>\n            ";
+corrr = "\n              <h2>JEBAMANIA!</h2><font id=\"wittyquote\" size=\"4\"><em>\"Please clap... for President Jeb Bush!\"</em></font>\n            ";
 
 const theme = nct_stuff.themes[nct_stuff.selectedTheme];
 
