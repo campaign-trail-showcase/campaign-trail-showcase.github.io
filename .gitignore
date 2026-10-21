@@ -6,3 +6,6 @@ static/.DS_Store
 node_modules
 .env
 .vs/
+/cookies.txt
+/hts-log.txt
+/hts-cache/
