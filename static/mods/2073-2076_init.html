@@ -1145,6 +1145,15 @@ e.creditsPage = () => {
 
 campaignTrail_temp.credits = "<button onclick='e.creditsPage()'>Libertas aka u/Duck_Quacks</button>"
 
+// necessary so that the right election files are loaded -SM
+setInterval(() => {
+    const electionSelect = document.getElementById("election_id");
+    if (electionSelect) {
+        if (electionSelect.value === "20") {
+            campaignTrail_temp.code2_id = "2073-2076";
+        }
+    }
+}, 100);
 
 RecReading=true
 
