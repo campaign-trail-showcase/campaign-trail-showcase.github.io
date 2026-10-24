@@ -1939,14 +1939,14 @@ campaignTrail_temp.questions_json = [
         "model": "campaign_trail.question",
         "pk": 39690,
         "fields": {
-            "description": "This is not good. Rodney's sitting with you, Francis, and Rogers.\n<br>\n<br>\nThere's a Black Corvega driving by too..."
+            "description": "(This is not used because you're always forced to meet Rogers.) This is not good. Rodney's sitting with you, Francis, and Rogers.\n<br>\n<br>\nThere's a Black Corvega driving by too..."
         }
     },
     {
         "model": "campaign_trail.question",
         "pk": 39693,
         "fields": {
-            "description": "The puppet has been slain. We are so close to losing now..."
+            "description": "(This is not used because you're always forced to meet Rogers.) The puppet has been slain. We are so close to losing now..."
         }
     },
     {
@@ -87111,7 +87111,7 @@ if(UseRedScareTactic == ""){
       if (ans == 39505) {
         campaignTrail_temp.questions_json[10] = tunnel(39533);
         campaignTrail_temp.questions_json[11] = tunnel(39538);
-        campaignTrail_temp.questions_json[12] = tunnel(39576);
+        campaignTrail_temp.questions_json[12] = tunnel(39575);
         FreeStatesPoints += 2;
       }
 
@@ -87132,7 +87132,7 @@ if(UseRedScareTactic == ""){
       if (ans == 39529) {
         campaignTrail_temp.questions_json[10] = tunnel(39533);
         campaignTrail_temp.questions_json[11] = tunnel(39538);
-        campaignTrail_temp.questions_json[12] = tunnel(39576);
+        campaignTrail_temp.questions_json[12] = tunnel(39575);
         FreeStatesPoints += 2;
       }
 
@@ -87411,6 +87411,7 @@ if(UseRedScareTactic == ""){
         if (FreeStatesAssassinationPoints >= 3) {
           FreeStatesAssassinationTriggered += 1;
         }
+        else{ // to prevent the FreeStatesAssassination from overriding endings.
         if (FreeStatesRevolutionPoints >= 6) {
           FreeStatesRevolutionTriggered += 1;
           affect_issue_score(152, 60, 0.716, 1);
@@ -87423,7 +87424,7 @@ if(UseRedScareTactic == ""){
           FreeStatesUnitedFrontTriggered += 1;
           console.log("You're a Communist, Harry Potter!")
         }
-
+    }
 
         console.log("United Front Points:", FreeStatesUnitedFrontPoints);
         console.log("Free States Consolidation Points:", FreeStatesConsolidationPoints);
@@ -92054,7 +92055,7 @@ else if(playerEV == 538){
 </div>`)
     e.executable.push([0, (() => {e.image = e.image = 'https://i.imgur.com/mdzXHFY.gif'})])
 }
-else if(FreeStatesRevolutionTriggered >= 1 && FreeStatesAssassinationTriggered == 0){
+else if(FreeStatesRevolutionTriggered >= 1){
 if(playerEV >= 270){
      e.pages.push(`<div class="ending-slide">
 <h1>A Big Surprise.</h1>
