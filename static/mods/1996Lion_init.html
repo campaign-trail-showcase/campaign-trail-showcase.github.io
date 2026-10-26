@@ -1068,7 +1068,21 @@ tooltipList = [
     audio.volume = Number(this.value) / 10;
   });
 
-  loadCurrentSong(false);
+  loadCurrentSong(true);
+
+  function startLionMusicOnFirstInteraction(event) {
+    document.removeEventListener("pointerdown", startLionMusicOnFirstInteraction, true);
+    document.removeEventListener("keydown", startLionMusicOnFirstInteraction, true);
+    if (event.target.closest && event.target.closest("#lionverse-player")) return;
+    if (!audio.paused) return;
+    audio.play()
+      .then(() => { playPauseButton.textContent = "Pause"; })
+      .catch(() => { playPauseButton.textContent = "Play"; });
+  }
+
+  // If the browser blocks the initial playback, try on the next game interaction.
+  document.addEventListener("pointerdown", startLionMusicOnFirstInteraction, true);
+  document.addEventListener("keydown", startLionMusicOnFirstInteraction, true);
 
   /***************************************************************
    Lionverse styling
@@ -1416,9 +1430,6 @@ button.lionverse-player-button:active {
     return c1.map((v, i) => Math.round(v + factor * (c2[i] - v)));
   }
 
-  function varyHexColor(hex, variationFrac = 0.05) {
-    return rgbToHex(...hexToRgb(hex).map(c => Math.max(0, Math.min(255, Math.round(c + (Math.random() * 2 - 1) * variationFrac * 255)))));
-  }
 
   function darkenColor(color, amount = 30) {
     const key = `dark_${color}_${amount}`;
@@ -1677,18 +1688,6 @@ button.lionverse-player-button:active {
     else { const st = max / 4; return [max, max - st, max - st * 2, max - st * 3, 0].filter(v => v > 0); }
   }
 
-  function applyColorVariations() {
-    if (window._colorVariationsApplied) return;
-    campaignTrail_temp.candidate_json.forEach(c => {
-      const f = c.fields;
-      f._original_color_hex = f._original_color_hex || f.color_hex;
-      f._original_secondary_color_hex = f._original_secondary_color_hex || f.secondary_color_hex || f.color_hex;
-      f.color_hex = varyHexColor(f._original_color_hex, 0.05);
-      f.secondary_color_hex = f.secondary_color_hex ? varyHexColor(f._original_secondary_color_hex, 0.05) : rgbToHex(...interpolateColor(hexToRgb(f.color_hex), [255, 255, 255], 0.7));
-    });
-    if (window.HistHexcolour?.map) window.HistHexcolour = window.HistHexcolour.map(h => varyHexColor(h, 0.05));
-    window._colorVariationsApplied = true;
-  }
 
   function getTopCandidates(limit = 5) {
     let tot = 0, cands = campaignTrail_temp.final_overall_results.map(r => {
@@ -1754,7 +1753,6 @@ button.lionverse-player-button:active {
 
   function prepareStyles() {
     if (Object.keys(styleCache).length > 0) return;
-    applyColorVariations();
     analyzePerformanceData();
     const tChange = getTurnoutChangeData();
     styleCache = { solid: {}, margins: {}, candidate_strength: {}, competitiveness: {}, turnout_change: {}, vote_share: {}, issue_stance: {}, issue_weight: {}, candidate_issue_alignment: {}, tipping_point: {}, coalition_builder: {}, candidate_combiner: {}, senate_races: {}, house_composition: {} };
