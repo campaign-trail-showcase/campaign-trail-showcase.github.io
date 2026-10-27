@@ -30,6 +30,8 @@ function mapPkToFields(json) {
  */
 const stringsEqual = (a, b) => String(a) === String(b);
 
+const getUniqueCands = () => [...new Set([e.candidate_id, ...e.opponents_list])];
+
 // Call the ELECTIONS and CANDIDATES getters sparingly or when necessary as everytime they are called,
 // they have to iterate through the entire array and return a new Map. This is O(n) where n is the
 // array length.
@@ -2447,8 +2449,8 @@ function getLatestRes(t) {
   const stateDataMap = new Map(e.states_json.map(s => [s.pk, s.fields]));
 
   // get a list of all active candidates (player + opponents)
-  const activeCandidates = e.candidate_json.filter(
-    (candidate) => e.opponents_list.includes(candidate.pk) || candidate.pk === e.candidate_id
+  const activeCandidates = e.candidate_json.filter((candidate) =>
+    (e.matchup ?? getUniqueCands()).includes(candidate.pk),
   );
 
   const candidateTotals = new Map();
@@ -2957,10 +2959,8 @@ function mapResultColor(time) {
 function m() {
   if (e.primary) {
     const t = e.final_state_results;
-    const filteredCandidates = e.candidate_json.filter(
-      (candidate) =>
-        e.opponents_list.includes(candidate.pk) ||
-        stringsEqual(candidate.pk, e.candidate_id),
+    const filteredCandidates = e.candidate_json.filter((candidate) =>
+      (e.matchup ?? getUniqueCands()).includes(candidate.pk),
     );
 
     const total_v = e.final_state_results.reduce(
@@ -3198,23 +3198,14 @@ function overallResultsHtml() {
 function getSortedCands() {
   const cands = PROPS.CANDIDATES;
   const candsArr = [];
-  const mainCand = cands.get(String(e.candidate_id));
-  if (mainCand) {
-    candsArr.push({
-      candidate: e.candidate_id,
-      priority: mainCand.priority,
-      color: mainCand.color_hex,
-      last_name: mainCand.last_name,
-    });
-  }
-  e.opponents_list.forEach((f) => {
-    const opps = cands.get(String(f));
-    if (opps) {
+  (e.matchup ?? getUniqueCands()).forEach((f) => {
+    const cand = cands.get(String(f));
+    if (cand) {
       candsArr.push({
         candidate: f,
-        priority: opps.priority,
-        color: opps.color_hex,
-        last_name: opps.last_name,
+        priority: cand.priority,
+        color: cand.color_hex,
+        last_name: cand.last_name,
       });
     }
   });
