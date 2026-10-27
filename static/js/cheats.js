@@ -413,8 +413,10 @@ function autoplay() {
     }
 
     // disable map visits on autoplay
-    if (campaignTrail_temp.election_json?.[0]?.fields) {
-      campaignTrail_temp.election_json[0].fields.has_visits = false;
+    const el = campaignTrail_temp.election_json?.find(({pk}) => stringsEqual(pk, campaignTrail_temp.election_id));
+
+    if (el?.fields) {
+      el.fields.has_visits = false;
     }
   } catch (err) {
     console.error("Autoplay runtime error:", err);
@@ -590,8 +592,10 @@ document.addEventListener("click", (e) => {
 });
 
 function turnOffVisits() {
-  if (campaignTrail_temp?.election_json?.[0]?.fields) {
-    campaignTrail_temp.election_json[0].fields.has_visits = false;
+  const el = campaignTrail_temp.election_json?.find(({pk}) => stringsEqual(pk, campaignTrail_temp.election_id));
+
+  if (el?.fields) {
+    el.fields.has_visits = false;
     alert("Visits are now disabled");
   }
 }
@@ -616,13 +620,14 @@ function skipQuestion(e) {
     return;
   }
 
-  const cache = campaignTrail_temp.election_json[0].fields.has_visits;
+  const el = campaignTrail_temp.election_json?.find(({pk}) => stringsEqual(pk, campaignTrail_temp.election_id));
+  const cache = el.fields.has_visits;
 
-  campaignTrail_temp.election_json[0].fields.has_visits = false;
+  el.fields.has_visits = false;
   campaignTrail_temp.question_number = newQuestion - 2;
   campaignTrail_temp.skippingQuestion = true;
   document.getElementById("answer_select_button")?.click();
-  campaignTrail_temp.election_json[0].fields.has_visits = cache;
+  el.fields.has_visits = cache;
 }
 
 function addSTSSMoney() {
