@@ -10,7 +10,6 @@ const ALL = "all";
 const modList = [];
 const modMap = new Map();
 const tagList = [];
-const creatorTagList = [];
 let originalModsData = [];
 
 let customMods = new Set();
@@ -1112,7 +1111,6 @@ function createLegacyViewControls() {
   container.style.display = "inline-flex";
   container.style.alignItems = "center";
   container.style.gap = "6px";
-  container.style.marginLeft = "15px";
   container.style.verticalAlign = "middle";
 
   const checkbox = document.createElement("input");
@@ -1933,8 +1931,9 @@ function createTagButtons(tagsFound, creatorsFound = new Set()) {
 
 function createCreatorButtons(creatorsFound) {
   const creatorSection = document.getElementById("creator-tags-section");
-  const creatorGrid = document.getElementById("creator-tags");
-  if (!creatorGrid) return;
+  const creatorSelect = document.getElementById("creator-filter-select");
+  if (!creatorSelect) return;
+  const tagsGrid = document.getElementById("tags");
 
   const creators = Array.from(creatorsFound).sort((a, b) => a.localeCompare(b));
   if (creators.length === 0) {
@@ -1942,33 +1941,14 @@ function createCreatorButtons(creatorsFound) {
     return;
   }
 
-  const fragment = document.createDocumentFragment();
-  creators.forEach((creator, index) => {
-    const tagButton = document.createElement("div");
-    tagButton.classList.add("tag-button", "creator-tag-button");
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.id = `creator-tag-${index}`;
-    checkbox.name = `creator-tag-${index}`;
-    checkbox.value = creator;
-
-    const label = document.createElement("label");
-    label.style.userSelect = "none";
-    label.htmlFor = checkbox.id;
-    label.textContent = creator;
-
-    tagButton.append(checkbox, label, document.createElement("br"));
-    tagButton.addEventListener("click", (event) => {
-      if (event.target === tagButton) checkbox.click();
-    });
-
-    creatorTagList.push(checkbox);
-    checkbox.addEventListener("change", updateModViews);
-    fragment.appendChild(tagButton);
+  creatorSelect.replaceChildren(new Option("All creators", ""));
+  creators.forEach((creator) => {
+    creatorSelect.add(new Option(creator, creator));
   });
-
-  creatorGrid.appendChild(fragment);
+  creatorSelect.addEventListener("change", updateModViews);
+  if (tagsGrid && creatorSection) {
+    tagsGrid.appendChild(creatorSection);
+  }
   if (creatorSection) creatorSection.style.display = "";
 }
 
@@ -1980,12 +1960,8 @@ function getVisibleMods() {
     }
   }
 
-  const activeCreators = new Set();
-  for (let i = 0; i < creatorTagList.length; i++) {
-    if (creatorTagList[i].checked) {
-      activeCreators.add(creatorTagList[i].value);
-    }
-  }
+  const creatorFilter = document.getElementById("creator-filter-select");
+  const activeCreators = creatorFilter?.value ? new Set([creatorFilter.value]) : new Set();
 
   const visibleMods = [];
   for (let i = 0; i < modList.length; i++) {
