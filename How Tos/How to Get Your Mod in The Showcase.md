@@ -53,6 +53,7 @@ Scroll down to the bottom of the list and add your mod's entry right before the 
 * **`text`**: The display title shown on the mod card in the gallery.
 * **`mode`**: Set this to `"new"` for fresh releases so it appears in the *New Releases* tab.
 * **`tags`**: Space-separated category tags (see available tags below).
+* **`creators`**: Leave blank. These are added by maintainers to keep track of modmakers who made, worked on, or have been part of at least three mods.
 * **`awards`** / **`awardimageurls`**: Leave these as empty strings `""` for new submissions (awards are added by Showcase maintainers during annual award seasons).
 
 #### Available tags:

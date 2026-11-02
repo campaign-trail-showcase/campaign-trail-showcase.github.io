@@ -10,6 +10,7 @@ const ALL = "all";
 const modList = [];
 const modMap = new Map();
 const tagList = [];
+const creatorTagList = [];
 let originalModsData = [];
 
 let customMods = new Set();
@@ -1199,9 +1200,12 @@ $(document).ready(async () => {
 
   // Inject the "View all mods" checkbox next to the sorter using a more robust selector
   const sorter = document.querySelector('[onchange="onChangeModSorter(event)"]');
-  if (sorter && sorter.parentNode) {
+  const legacyView = document.querySelector(".mod-legacy-view");
+  if (legacyView) {
     const legacyControls = createLegacyViewControls();
-    // insert after the sorter element
+    legacyView.appendChild(legacyControls);
+  } else if (sorter && sorter.parentNode) {
+    const legacyControls = createLegacyViewControls();
     sorter.parentNode.insertBefore(legacyControls, sorter.nextSibling);
   } else {
     console.warn("Could not find mod sorter dropdown to attach 'View all' checkbox.");
@@ -1215,15 +1219,23 @@ $(document).ready(async () => {
   const mods = document.getElementById("modSelect").childNodes;
 
   let tagsFound = new Set();
+  let creatorsFound = new Set();
 
-  // Get tags from normal mods and add optional custom tag
+  // Get tags and creators from normal mods and add optional custom tag
   mods.forEach((mod) => {
-    if (!mod.dataset || !mod.dataset.tags) return;
-    const tags = mod.dataset.tags.split(" ");
-    tags.forEach((tag) => {
-      if (tag.length > 0) {
-        tagsFound.add(tag);
-      }
+    if (!mod.dataset) return;
+
+    if (mod.dataset.tags) {
+      const tags = mod.dataset.tags.split(" ");
+      tags.forEach((tag) => {
+        if (tag.length > 0) {
+          tagsFound.add(tag);
+        }
+      });
+    }
+
+    getModCreators(mod.dataset).forEach((creator) => {
+      creatorsFound.add(creator);
     });
 
     if (customMods.size > 0) {
@@ -1302,10 +1314,29 @@ $(document).ready(async () => {
   }
 
   // initialize tags and render views
-  createTagButtons(tagsFound);
+  createTagButtons(tagsFound, creatorsFound);
   updateModViews();
   applyModBoxThemes();
 });
+
+function getModCreators(dataset) {
+  const rawCreators = dataset?.creators;
+  if (!rawCreators) return [];
+
+  if (Array.isArray(rawCreators)) {
+    return rawCreators.filter((creator) => typeof creator === "string" && creator.length > 0);
+  }
+
+  try {
+    const parsedCreators = JSON.parse(rawCreators);
+    return Array.isArray(parsedCreators)
+      ? parsedCreators.filter((creator) => typeof creator === "string" && creator.length > 0)
+      : [];
+  } catch (error) {
+    console.warn("Could not parse mod creators:", rawCreators);
+    return [];
+  }
+}
 
 function createModView(mod, imageUrl = "", description = "Loading summary...") {
   const modView = modViewTemplate.content.firstElementChild.cloneNode(true);
@@ -1321,6 +1352,7 @@ function createModView(mod, imageUrl = "", description = "Loading summary...") {
 
   namesOfModsFromValue[mod.value] = mod.innerText ?? mod.value;
   modView._tagsArray = mod.dataset?.tags ? mod.dataset.tags.split(" ") : [];
+  modView._creatorsArray = getModCreators(mod.dataset);
 
   modView._elements = {
     title: modView.querySelector(".mod-title"),
@@ -1874,7 +1906,7 @@ function filterMods(event) {
   }, 150);
 }
 
-function createTagButtons(tagsFound) {
+function createTagButtons(tagsFound, creatorsFound = new Set()) {
   const tagsGrid = document.getElementById("tags");
   const fragment = document.createDocumentFragment();
   Array.from(tagsFound)
@@ -1895,6 +1927,49 @@ function createTagButtons(tagsFound) {
       fragment.appendChild(tagButton);
     });
   tagsGrid.appendChild(fragment);
+
+  createCreatorButtons(creatorsFound);
+}
+
+function createCreatorButtons(creatorsFound) {
+  const creatorSection = document.getElementById("creator-tags-section");
+  const creatorGrid = document.getElementById("creator-tags");
+  if (!creatorGrid) return;
+
+  const creators = Array.from(creatorsFound).sort((a, b) => a.localeCompare(b));
+  if (creators.length === 0) {
+    if (creatorSection) creatorSection.style.display = "none";
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  creators.forEach((creator, index) => {
+    const tagButton = document.createElement("div");
+    tagButton.classList.add("tag-button", "creator-tag-button");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = `creator-tag-${index}`;
+    checkbox.name = `creator-tag-${index}`;
+    checkbox.value = creator;
+
+    const label = document.createElement("label");
+    label.style.userSelect = "none";
+    label.htmlFor = checkbox.id;
+    label.textContent = creator;
+
+    tagButton.append(checkbox, label, document.createElement("br"));
+    tagButton.addEventListener("click", (event) => {
+      if (event.target === tagButton) checkbox.click();
+    });
+
+    creatorTagList.push(checkbox);
+    checkbox.addEventListener("change", updateModViews);
+    fragment.appendChild(tagButton);
+  });
+
+  creatorGrid.appendChild(fragment);
+  if (creatorSection) creatorSection.style.display = "";
 }
 
 function getVisibleMods() {
@@ -1905,22 +1980,37 @@ function getVisibleMods() {
     }
   }
 
+  const activeCreators = new Set();
+  for (let i = 0; i < creatorTagList.length; i++) {
+    if (creatorTagList[i].checked) {
+      activeCreators.add(creatorTagList[i].value);
+    }
+  }
+
   const visibleMods = [];
   for (let i = 0; i < modList.length; i++) {
     const modView = modList[i];
     const modMode = modView.getAttribute("mode");
     const modTags = modView._tagsArray || [];
+    const modCreators = modView._creatorsArray || [];
     const modName = modView.getAttribute("mod-name");
     const modDisplayName = modView.getAttribute("mod-display-name");
     // resolved election year for mods whose names don't spell one out
     // (e.g. "'88 Afton" -> 1988, "ROC'04 Bian." -> 2004)
     const modYear = getModYear(modName);
 
+    const matchesTag =
+      activeTags.size === 0 || modTags.some((tag) => activeTags.has(tag));
+    const matchesCreator =
+      activeCreators.size === 0 ||
+      modCreators.some((creator) => activeCreators.has(creator));
+
     if (
       (nameFilter === "" ||
         modDisplayName.includes(nameFilter) ||
         modName.includes(nameFilter)) &&
-      modTags.some((tag) => activeTags.has(tag)) &&
+      matchesTag &&
+      matchesCreator &&
       (!onlyFavorites || isFavorite(modName)) &&
       (!year || year.test(modName) ||
         (modYear !== null && Number.isFinite(modYear) && year.test(String(modYear)))) &&
@@ -2493,6 +2583,7 @@ function filterEntries() {
     opt.textContent = data.text;
     opt.dataset.mode = data.mode;
     opt.dataset.tags = data.tags;
+    opt.dataset.creators = JSON.stringify(Array.isArray(data.creators) ? data.creators : []);
     opt.dataset.awards = data.awards;
     opt.dataset.awardimageurls = data.awardimageurls;
     fragment.appendChild(opt);
