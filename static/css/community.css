@@ -109,6 +109,18 @@
   background-color: #aacee2;
 }
 
+.tag-button:has(input[type="checkbox"]:checked) {
+  background-color: #BFE6FF;
+  border-color: #80bfe8;
+  box-shadow: inset 0 0 0 1px rgba(22, 119, 223, .12);
+}
+
+.tag-button:has(input[type="checkbox"]:not(:checked)) {
+  background-color: #e5edf3;
+  border-color: #c8d7e2;
+  color: #526171;
+}
+
 .community-grid-element {
   width: 23%;
   height: 25rem;
@@ -159,36 +171,182 @@
 
 /* Style the tab */
 .tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-  margin: auto;
+  overflow: visible;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: center;
+  align-items: center;
+  gap: 2px;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 6px;
+  background-color: #f1f1f1;
 }
 
-/* Style the buttons that are used to open the tab content */
 .tab button {
-  background-color: inherit;
-  float: left;
+  float: none;
+  flex: 0 1 auto;
+  padding: 10px 12px;
   border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
+  border-radius: 4px;
+  background: transparent;
+  color: #171717;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
   font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s ease;
 }
 
-/* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: #dedfe5;
 }
 
-/* Create an active/current tablink class */
 .tab button.active {
-  background-color: #ccc;
+  background-color: #d0d4df;
+  color: #17264a;
+}
+
+.tab button.tab-favorites {
+  margin-right: 7px;
+  border-right: 1px solid #c3c5cc;
+  border-radius: 4px 0 0 4px;
+  padding-right: 16px;
+}
+
+.tab button.tab-favorites.active {
+  background-color: #d0d4df;
+}
+
+/* Search/sort tab */
+.mod-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 12px auto 16px;
+    padding: 0 10px;
+    color: white;
+}
+
+.mod-search {
+    flex: 1 1 220px;
+    max-width: 320px;
+}
+
+.mod-search input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 24px;
+    padding: 7px 11px;
+    border: 1px solid #c7cbd5;
+    border-radius: 5px;
+    background: #fff;
+    color: #222;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+.mod-search input:focus {
+    outline: none;
+    border-color: #8ebbe0;
+    box-shadow: 0 0 0 2px rgba(191, 230, 255, .3);
+}
+
+.mod-sort {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.mod-sort-label {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.mod-sort-select {
+    min-height: 24px;
+    padding: 6px 9px;
+    border: 1px solid #c7cbd5;
+    border-radius: 5px;
+    background: #fff;
+    color: #222;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.mod-legacy-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 24px;
+    padding: 0 10px;
+    border-left: 1px solid rgba(255,255,255,.2);
+}
+
+.mod-legacy-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.mod-legacy-toggle input {
+    margin: 0;
+    accent-color: #8fcfff;
+    cursor: pointer;
+}
+
+#mod-menu-loading-message {
+    color: #cbd7f0;
+    font-size: 11px;
+    font-style: italic;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .mod-toolbar {
+        gap: 9px;
+    }
+
+    .mod-search {
+        flex-basis: 100%;
+        max-width: 450px;
+    }
+
+    .mod-legacy-view {
+        border-left: none;
+        padding: 0 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mod-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mod-search {
+        max-width: none;
+    }
+
+    .mod-sort,
+    .mod-legacy-view {
+        justify-content: center;
+    }
 }
 
 /* Style the tab content */
