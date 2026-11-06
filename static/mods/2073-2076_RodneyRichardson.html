@@ -85005,7 +85005,7 @@ if(FannedTheFlames == -1 && UseRedScareTactic !== "PeaceWhy" && Leverage > 11 &&
   ElliotNeedstoSlep = "HijackingaVariable";
 }
 
-if(Leverage >= 16  && SinkTheDeal < 4 && FannedTheFlames == 0 && (e.player_answers.includes(38443) || e.player_answers.includes(37149))){
+if(Leverage >= 16  && SinkTheDeal < 4 && FannedTheFlames == 0 && PVPPipeline == 0 && (e.player_answers.includes(38443) || e.player_answers.includes(37149))){
     UseRedScareTactic = "NoRedScare";
 }
 
@@ -85608,7 +85608,7 @@ if(ans == 39089){
     if(e.noCounter == 28){ // Because locked into no surrender means no more deals.
 console.log("OtherDealsLeverage is:", OtherDealsLeverage)
 if(DemocratOpponent !== 3){
-      if(OtherDealsLeverage > 15  && SinkTheDeal < 4 && StrategicLeverage < 15 && FannedTheFlames == 0 && !(e.player_answers.includes(37149)) && !(e.player_answers.includes(38443)) && !(ElliotNeedstoSlep == "HijackingaVariable") && (!(ElliotNeedstoSlep == "DONOTTRIGGERASECONDTIME"))){ // So that way, obviously, we don't trigger it a second time. And also, if ElliotNeedstoSlep is HijackingaVariable, that means you've already tried to get a mainline deal. FURTHERMORE, we don't want this to trigger if there's been a FannedTheFlames variable triggered.
+      if(OtherDealsLeverage > 15  && SinkTheDeal < 4 && StrategicLeverage < 15 && FannedTheFlames == 0 && (PVPPipeline == 1 || (!(e.player_answers.includes(37149)) && !(e.player_answers.includes(38443)))) && !(ElliotNeedstoSlep == "HijackingaVariable") && (!(ElliotNeedstoSlep == "DONOTTRIGGERASECONDTIME"))){ // So that way, obviously, we don't trigger it a second time. And also, if ElliotNeedstoSlep is HijackingaVariable, that means you've already tried to get a mainline deal. FURTHERMORE, we don't want this to trigger if there's been a FannedTheFlames variable triggered.
         ElliotNeedstoSlep = "HijackedYourVariable";
         UseRedScareTactic = "AlternativeRoute";
         if(WarEscalationinChinaEnclaveRoute == 0 && PressuredtoInvadeChina < 2){
@@ -85619,7 +85619,7 @@ if(DemocratOpponent !== 3){
       }
 }
 else if(DemocratOpponent == 3){
-        if(OtherDealsLeverage > 15 && BlackArts <= 6 && SinkTheDeal < 4 && StrategicLeverage < 15 && FannedTheFlames == 0 && !(e.player_answers.includes(37149)) && !(e.player_answers.includes(38443)) && !(ElliotNeedstoSlep == "HijackingaVariable") && (!(ElliotNeedstoSlep == "DONOTTRIGGERASECONDTIME"))){ // So that way, obviously, we don't trigger it a second time. And also, if ElliotNeedstoSlep is HijackingaVariable, that means you've already tried to get a mainline deal.
+        if(OtherDealsLeverage > 15 && BlackArts <= 6 && SinkTheDeal < 4 && StrategicLeverage < 15 && FannedTheFlames == 0 && (PVPPipeline == 1 || (!(e.player_answers.includes(37149)) && !(e.player_answers.includes(38443)))) && !(ElliotNeedstoSlep == "HijackingaVariable") && (!(ElliotNeedstoSlep == "DONOTTRIGGERASECONDTIME"))){ // So that way, obviously, we don't trigger it a second time. And also, if ElliotNeedstoSlep is HijackingaVariable, that means you've already tried to get a mainline deal.
         ElliotNeedstoSlep = "HijackedYourVariable";
         UseRedScareTactic = "AlternativeRoute";
         if(WarEscalationinChinaEnclaveRoute == 0 && PressuredtoInvadeChina < 2){
