@@ -5898,7 +5898,7 @@ campaignTrail_temp.answers_json = [
         "pk": 39060,
         "fields": {
             "question": 39059,
-            "description": "I want to emphasize this fact to the Chinese: We're negotiating from a position of strength and want them to give up. Our invasion of China's progress is already proof enough of our strength. They don't want something even more drastic to happen to their homeland, now, do they?"
+            "description": "Both of us have made this journey here today. We both want this to count for something. America's intentions should be clear. We want China to capitulate fully. There is no other option besides China's unconditional surrender."
         }
     },
     {
@@ -78378,7 +78378,7 @@ let RNGDeterminer = (Math.random() - 0.2468);
 console.log("Good news! We have determined that today's lucky number is....:", RNGDeterminer, "! Thanks for playing ASH!");
 let WillYaGetSomethingIke = Math.random();
 let WillYaGetSomethingDoug = Math.random();
-console.log("Ike is: ", WillYaGetSomethingIke, "! Meanwhile, Doug is: ", WillYaGetSomethingDoug, "!");
+console.log("WillYaGetSomethingIke is: ", WillYaGetSomethingIke, "! Meanwhile, WillYaGetSomethingDoug is: ", WillYaGetSomethingDoug, "!");
 
 // no sneaky cheats system (with unlockable cheat reward)
 (() => {
@@ -85005,7 +85005,7 @@ if(FannedTheFlames == -1 && UseRedScareTactic !== "PeaceWhy" && Leverage > 11 &&
   ElliotNeedstoSlep = "HijackingaVariable";
 }
 
-if(Leverage >= 16  && SinkTheDeal < 4 && FannedTheFlames == 0 && (e.player_answers.includes(38443) || e.player_answers.includes(37149))){
+if(Leverage >= 16  && SinkTheDeal < 4 && FannedTheFlames == 0 && PVPPipeline == 0 && (e.player_answers.includes(38443) || e.player_answers.includes(37149))){
     UseRedScareTactic = "NoRedScare";
 }
 
@@ -85125,7 +85125,7 @@ else if(FannedTheFlames == 0 && UseRedScareTactic == "NoRedScare"){
               answerSwapper(38450, 38468, true);
             }
     }
-    else if((Leverage >= 16 && BlackArts <= 0 && BlackArts >= -3) || (Leverage >= 16 && BlackArts <= 0 && (SinkTheDeal == 2)) || (Leverage >= 16 && BlackArts >= 0 && BlackArts <= 2 && (SinkTheDeal == 0) && TroopVisitPoseidon == 0 && TroopVisitVim == 0)){
+    else if((Leverage >= 16 && BlackArts <= 0 && BlackArts >= -3) || (Leverage >= 16 && BlackArts <= 0 && (SinkTheDeal == 1 || SinkTheDeal == 2)) || (Leverage >= 16 && BlackArts >= 0 && BlackArts <= 2 && (SinkTheDeal == 0) && TroopVisitPoseidon == 0 && TroopVisitVim == 0)){
                           console.log("ACTIVATED SHAKY DEAL");
             campaignTrail_temp.questions_json[26] = tunnel(38985);
             if(GlobalistReopening == 2){
@@ -85608,7 +85608,7 @@ if(ans == 39089){
     if(e.noCounter == 28){ // Because locked into no surrender means no more deals.
 console.log("OtherDealsLeverage is:", OtherDealsLeverage)
 if(DemocratOpponent !== 3){
-      if(OtherDealsLeverage > 15  && SinkTheDeal < 4 && StrategicLeverage < 15 && FannedTheFlames == 0 && !(e.player_answers.includes(37149)) && !(e.player_answers.includes(38443)) && !(ElliotNeedstoSlep == "HijackingaVariable") && (!(ElliotNeedstoSlep == "DONOTTRIGGERASECONDTIME"))){ // So that way, obviously, we don't trigger it a second time. And also, if ElliotNeedstoSlep is HijackingaVariable, that means you've already tried to get a mainline deal. FURTHERMORE, we don't want this to trigger if there's been a FannedTheFlames variable triggered.
+      if(OtherDealsLeverage > 15  && SinkTheDeal < 4 && StrategicLeverage < 15 && FannedTheFlames == 0 && (PVPPipeline == 1 || (!(e.player_answers.includes(37149)) && !(e.player_answers.includes(38443)))) && !(ElliotNeedstoSlep == "HijackingaVariable") && (!(ElliotNeedstoSlep == "DONOTTRIGGERASECONDTIME"))){ // So that way, obviously, we don't trigger it a second time. And also, if ElliotNeedstoSlep is HijackingaVariable, that means you've already tried to get a mainline deal. FURTHERMORE, we don't want this to trigger if there's been a FannedTheFlames variable triggered.
         ElliotNeedstoSlep = "HijackedYourVariable";
         UseRedScareTactic = "AlternativeRoute";
         if(WarEscalationinChinaEnclaveRoute == 0 && PressuredtoInvadeChina < 2){
@@ -85619,7 +85619,7 @@ if(DemocratOpponent !== 3){
       }
 }
 else if(DemocratOpponent == 3){
-        if(OtherDealsLeverage > 15 && BlackArts <= 6 && SinkTheDeal < 4 && StrategicLeverage < 15 && FannedTheFlames == 0 && !(e.player_answers.includes(37149)) && !(e.player_answers.includes(38443)) && !(ElliotNeedstoSlep == "HijackingaVariable") && (!(ElliotNeedstoSlep == "DONOTTRIGGERASECONDTIME"))){ // So that way, obviously, we don't trigger it a second time. And also, if ElliotNeedstoSlep is HijackingaVariable, that means you've already tried to get a mainline deal.
+        if(OtherDealsLeverage > 15 && BlackArts <= 6 && SinkTheDeal < 4 && StrategicLeverage < 15 && FannedTheFlames == 0 && (PVPPipeline == 1 || (!(e.player_answers.includes(37149)) && !(e.player_answers.includes(38443)))) && !(ElliotNeedstoSlep == "HijackingaVariable") && (!(ElliotNeedstoSlep == "DONOTTRIGGERASECONDTIME"))){ // So that way, obviously, we don't trigger it a second time. And also, if ElliotNeedstoSlep is HijackingaVariable, that means you've already tried to get a mainline deal.
         ElliotNeedstoSlep = "HijackedYourVariable";
         UseRedScareTactic = "AlternativeRoute";
         if(WarEscalationinChinaEnclaveRoute == 0 && PressuredtoInvadeChina < 2){
@@ -88405,6 +88405,9 @@ if(EscapeType == "" && FannedTheFlames < 0 && playerEV >= 270 && (DemocratOppone
       { name: "Rationality When There is None Left", cond: () => ansSet.has(4554) && ansSet.has(4527) && ansSet.has(4529) && ansSet.has(1965.2) && ansSet.has(1212) && ansSet.has(4526) },
         { name: "A Secret Plan", cond: () => ansSet.has(37732)  },
         { name: "Let Go, and Begin Again", cond: () => ansSet.has(39089)  },
+        { name: "Not a START", cond: () => ansSet.has(39074) && Judge !== "Betrayal" },
+        { name: "Checkpoint Charlie", cond: () => ansSet.has(39079) && Judge !== "Betrayal"  },		
+        { name: "Decent Interval", cond: () => ansSet.has(39081) && Judge !== "Betrayal" },		
     ];
 
     achievements.forEach(({ name, cond }) => {
@@ -92575,7 +92578,6 @@ if(WarEscalationinChinaEnclaveRoute > -3 && WarEscalationinChinaEnclaveRoute !==
    e.pages.push(`<div class="ending-slide">
 <h1>Going Home.</h1>
 <p>November 3rd, 2076.</p>
-<br>
 <p>Can’t believe it. The ‘shavetail’ (no, he deserves it, Second Lieutenant) Jeremy Riley’s done it. First Sergeant George Hawkins of ‘Think Fast, Red’ is being ‘falsely proud’ of our unit. Only that cowardly Sergeant Jack Duncan of ‘Patton’s Armor’ is the most grateful of all of the four-tank tank platoon. Duncan never gets into a fight, so, of course, he’s scared. He’s not even the lead tank.</p>
 <p>Who am I kidding? Gotta be grateful that my tank’s family’s not dead: Private Alf Tripp – Driver, Specialist Dave Adams - Loader, Sergeant Ron Hitchens – Gunner, and me, Barry, are still alive. We aren’t ‘well’, but, we live. Our T95 medium tank, ‘Fighting First’, is out of gas and now no longer ours. A bunch of other tankers have left their tanks back here. APCs, artillery, whatever that you can’t carry with you is now left right where we disembarked.</p>
 <p>Alf’s outraged that we’re leaving ‘Fighting First’ behind. It’s outrageous. It was ours. It should stay ours. I get it. We all get it. That’s why we leave him alone. ‘Fighting First’, ‘Ike’s Nightmare’, ‘Think Fast, Red’, and ‘Patton’s Armor’. Left behind. Yeah, really bad. But, look ‘on the bright side’ as that Sergeant Duncan would say…</p>
@@ -92644,7 +92646,7 @@ else{
 <p>However, America is more than fine with letting someone else fight the Sino-American War. The young hawks hate the veterans. The veterans think they know more than enough to be lectured by some young hawks who have never served for any reasonable amount of time. </p>
 <p>We hate anti-war veterans. The young hawks hate anti-war veterans. Americans hate anti-war veterans. The system is not meant for anti-war veterans to be so vehemently opposed to the American war effort. The system is designed to guide the anti-war veterans back to where they belong. That’s why we funnel the veterans and their descendants back into the Alaskan warzone. They’re the ones that are trained to fight. They’ll even get showered with praise and commendation for fighting for America before being ignored If they do come home.</p>
 <p>At home, the veterans are a blight on American society. In Alaska, they are considered heroes by everyone, including the young hawks.</p>
-<p>Of course, we’re ‘following’ the rules of the de-escalation agreement. We’re withdrawing our forces from Alaska. We simply can’t afford to lose Alaska outright. A veteran is worth more than a new guy. The veteran can be tossed into where the fire is hottest and emerge victoriously. </p>
+<p>Of course, we’re ‘following’ the rules of the de-escalation agreement. We’re withdrawing our forces from Alaska. We simply can’t afford to lose Alaska outright. A veteran is worth more than a new guy. The veteran can be tossed into where the fire is hottest and emerge victorious. </p>
 <p>Besides, we know that the Chinese are doing the same thing as well. American and Chinese casualties are roughly equal. Both sides are bleeding our champions at a sustainable rate. The details are being shared between the both of us. Both sides are at a perpetual stalemate. We are at war with China, but, we shall not commit more than what is necessary to win the war against China.</p>
 <p>We thank the veterans for their service. We shall ‘surely’ honor the veterans once they finally win the war against China at the dawn of the 22nd century. All of America will be very thankful indeed.</p>
 
@@ -92723,18 +92725,18 @@ if(WarEscalationinChinaEnclaveRoute > -3 && WarEscalationinChinaEnclaveRoute !==
 <p>Your sisters are White and Yellow.</p>
 <p>We shall triumph.</p>
 <p>“Do you think they’ll believe it?”</p>
-<p>“Listen, round eye, it is something people think is plausible. We simply rewrite the narratives.”</p>
-<p>“How did we not know that you even existed in the first place? You share the same goals as us. You are basically us.”</p>
+<p>“'Listen here, White fella', it is something people think is plausible. We simply rewrite the narratives.”</p>
+<p>“'这不可能！'. How did we not know that you even existed in the first place? You share the same goals as us. You are basically us.”</p>
 <p>“In another time, my friend, we would have opened our markets. We would have become capitalists in our own right.”</p>
 <p>“And why not?”</p>
-<p>“Because they thought greed and fear would cause less people to believe than ideology and fear. Pragmatically, greed and fear is more useful to tell people: ‘Hey, follow with genuine conviction.’.”</p>
-<p>“And the economies are linked…”</p>
+<p>“Because those in charge back then thought greed and fear would cause less people to believe than ideology and fear. Pragmatically, greed and fear is better for telling people: ‘Obey and get rich; disobey and get outed.' 'Fairest trade in the world, pardner.'”</p>
+<p>“And the economies are now linked…”</p>
 <p>“Yes. We export to Africa. We share the wealth amongst ourselves first. The residual is left for those below us.”</p>
-<p>“It is good for those who thought that you are our enemy to not remain in society. There has always been peace and prosperity between the two races.”</p>
+<p>“It is good for those who thought that you are our enemy to not remain in society. There has always been peace and prosperity between the two races. And, according to history, 'both the gloriously intelligent Chinese Communist Party and the smart, pragmatic Enclave never had any underlying differences to begin with. It was natural for both of us to unite.'”</p>
 <p>“Indeed. 2180 will be a good year indeed.”</p>
-<p>“’ 良好的开端是成功的一半”</p>
-<p>“You speak like a Westerner.”</p>
-<p>“But I am not.”</p>
+<p>“’ 良好的开端是成功的一半'”</p>
+<p>“You pronounce Mandarin like a true Westerner.”</p>
+<p>“But I am not. Don't you know the Orient and Occident are now-”</p>
 <p>“That is what we just tell ourselves. Not necessarily the reality. We have more work to do until realty matches our expectations. We are low-level broadcasters.”</p>
 <p>“That is true. I like this job. The Enclave have given us a good gig.”</p>
 <p>“I do too. I am happy that the Chinese Communist People’s Party saw sense.”</p>
@@ -92782,19 +92784,19 @@ else{
 <p>Your sisters are White and Yellow.</p>
 <p>We shall triumph.</p>
 <p>“Do you think they’ll believe it?”</p>
-<p>“Listen, round eye, it is something people think is plausible. We simply rewrite narrative.”</p>
-<p>“How did we not know that you even existed in the first place? You share the same goals as us. You are basically us.”</p>
+<p>“'Listen here, White fella', it is something people think is plausible. We simply rewrite the narratives.”</p>
+<p>“'这不可能！'. How did we not know that you even existed in the first place? You share the same goals as us. You are basically us.”</p>
 <p>“In another time, my friend, we would have opened our markets. We would have become capitalists in our own right.”</p>
 <p>“And why not?”</p>
-<p>“Because they thought greed and fear would cause less people to believe than ideology and fear. Pragmatically, greed and fear is more useful to tell people: ‘Hey, follow.’.”</p>
-<p>“And the economies are linked…”</p>
+<p>“Because those in charge back then thought greed and fear would cause less people to believe than ideology and fear. Pragmatically, greed and fear is better for telling people: ‘Obey and get rich; disobey and get outed.' 'Fairest trade in the world, pardner.'”</p>
+<p>“And the economies are now linked…”</p>
 <p>“Yes. We export to Africa. We share the wealth amongst ourselves first. The residual is left for those below us.”</p>
-<p>“It is good for those who thought that you are our enemy to not remain in society. There has always been peace and prosperity between the two races.”</p>
+<p>“It is good for those who thought that you are our enemy to not remain in society. There has always been peace and prosperity between the two races. And, according to history, 'both the gloriously intelligent Chinese Communist Party and the smart, pragmatic Enclave never had any underlying differences to begin with. It was natural for both of us to unite.'”</p>
 <p>“Indeed. 2180 will be a good year indeed.”</p>
-<p>“’ 良好的开端是成功的一半”</p>
-<p>“You speak like a Westerner.”</p>
-<p>“But I am not.”</p>
-<p>“That is what we just tell ourselves. Not necessarily reality. We have more work to do until realty matches our expectations. We are low-level broadcasters.”</p>
+<p>“’ 良好的开端是成功的一半'”</p>
+<p>“You pronounce Mandarin like a true Westerner.”</p>
+<p>“But I am not. Don't you know the Orient and Occident are now-”</p>
+<p>“That is what we just tell ourselves. Not necessarily the reality. We have more work to do until realty matches our expectations. We are low-level broadcasters.”</p>
 <p>“That is true. I like this job. The Enclave have given us a good gig.”</p>
 <p>“I do too. I am happy that the Chinese Communist People’s Party saw sense.”</p>
 <p>“Indeed, what a wonderful unity party.”</p>
