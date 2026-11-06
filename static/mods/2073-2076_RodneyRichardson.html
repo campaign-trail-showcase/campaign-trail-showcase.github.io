@@ -83923,15 +83923,14 @@ if(ans == 37940){
   TheBigEBase +=6;
   TheTreatment +=1;
   BlackArts +=4;
+  SinkTheDeal = 2;
 }
 
 if(ans == 37947){
-  PlebsBase = -20;
+  PlebsBase = -10;
   TheBigEBase -=100;
   TheTreatment -=100;
         e.global_parameter_json[0].fields.question_count = e.question_number + 1
-    AlfredShift();
-  switcherdirktoalf();
 }
 
 if(e.noCounter >= 23 && LiberalRepublicanPivot >= 1 && e.noCounter < 26){
@@ -83977,6 +83976,7 @@ if(ans == 37951){
   TheBigEBase -=10;
   BlackArts +=10;
   PlebsBase -=5;
+  SinkTheDeal = 2;
 }
 
 if(ans == 37481){
@@ -85346,11 +85346,11 @@ answerSwapper(38939, 38957, true);
       }
 
 
-if(((e.player_answers.includes(38990)) && GlobalistReopening == 2)){
+if(((e.player_answers.includes(38990)) && GlobalistReopening == 2 && SinkTheDeal !== 2)){
   SinkTheDeal = 1;
 }
 
-if(((e.player_answers.includes(38450)) && GlobalistReopening == 2  && AlternativePeacePerhaps == "No" || (e.player_answers.includes(38990)) && GlobalistReopening == 2)){
+if(((e.player_answers.includes(38450)) && GlobalistReopening == 2  && AlternativePeacePerhaps == "No" || (e.player_answers.includes(38990)) && GlobalistReopening == 2 && SinkTheDeal !== 2)){
   IHaveSomething = "IGOTPEACE";
 }
 else if((e.player_answers.includes(39081)) || (e.player_answers.includes(39079) || (e.player_answers.includes(39074)))){
@@ -85891,7 +85891,7 @@ else if(e.noCounter == 29){
     openHeadquarterA();
   }
         }
-       else if((IHaveSomething == "IGOTPEACE" && SinkTheDeal == 1) || (e.player_answers.includes(38990))){
+       else if((IHaveSomething == "IGOTPEACE" && SinkTheDeal == 1) || ((e.player_answers.includes(38990) && SinkTheDeal !== 2))){
           campaignTrail_temp.questions_json[29] = tunnel(37957); 
           EconomyandConsumerGoods +=2;
           PlebsBase +=3;
