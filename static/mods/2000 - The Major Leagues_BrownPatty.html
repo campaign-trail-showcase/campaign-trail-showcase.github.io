@@ -10756,10 +10756,10 @@ const achState = {
   isShowing: false
 };
 
-const nativeUnlockAchievement = typeof window.unlockAchievement === "function"
-  ? window.unlockAchievement
+const nativeUnlockAchievement = typeof window.unlockAchievement === "function" 
+  ? window.unlockAchievement 
   : (typeof unlockAchievement === "function" ? unlockAchievement : null);
-
+  
 function unlockAchievement(title) {
   const game = window.campaignTrail_temp;
   if (!game?.CTS) return;
@@ -10784,7 +10784,7 @@ function unlockAchievement(title) {
 
   if (shouldSavePermanently) {
     achState.permanent[title] = true;
-
+	
 	// call the base engine's unlocker
     if (typeof nativeUnlockAchievement === "function") {
       const originalAlert = window.alert;
@@ -10811,7 +10811,7 @@ function unlockAchievement(title) {
       }
     }
   }
-
+  
   // user options for achievements
   const popupSetting = game.achPopup || 'always';
   const isNewUnlock = shouldSavePermanently;
@@ -11055,7 +11055,9 @@ cyoAdventure = function (a) {
 		CENTER_IMAGE_URL = "https://i.pinimg.com/1200x/4b/38/7d/4b387d964d5502f237e4951befc19adb.jpg";
 
         // as Patty stepped down
-		questionSwapper(375, 430);
+		if (ans === 12440) {
+			questionSwapper(375, 430);
+		}
 	}
 
 	// other stuff
@@ -11076,11 +11078,11 @@ cyoAdventure = function (a) {
 	// Lucy's offer
 	if (e.noCounter === 4) {
 		const q349 = campaignTrail_temp.questions_json.find(q => q.pk === 349);
-		if (q349) {
+		if (q349) {		
 			if (ruthlessness >= 2) {
 				q349.fields.description = "Halfway through a plate of fries at a diner after school, you look up to find <i>the</i> Lucy Van Pelt sliding into the booth across from you without asking. Naturally, she already knows what you’ve been doing. Lucy practically runs the school’s social life, with enough gossip passing through the second-floor girls’ bathroom to make or break just about anybody’s reputation.<br><br>“I’ve been watching you, blockhead,” she says, stirring her coffee. “You’ve gotten meaner this semester. I kind of like it, I really do. Linus still thinks he’s some great philosopher who’s gonna save this school, but I’ve got something on him. Something that’ll <i>wreck</i> his campaign if it gets out.” She looks up at you. “You want it?”";
 			} else if (cynicism >= 2) {
-				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>“You look like shit, Charlie,” she says flatly, staring into her black coffee. “And my brother isn’t looking much better. People are shitting on him from such a height, that I think God himself has crapped on him. Thing is, I’ve got something on him. ood enough to end this whole stupid campaign. Just… just take it. You two are gonna kill each other at this rate.”";
+				q349.fields.description = "Halfway through a plate of fries at a diner after school, you get confused when <i>the</i> Lucy Van Pelt, for some reason, in spooktacular fashion, slides into the booth across from you without asking. Unsurprisingly, Lucy runs the school’s entire social hierarchy with an iron fist and operates a sprawling gossip network out of the second-floor girls’ bathroom that can make or break a reputation.<br><br>“You look like shit, Charlie,” she says flatly, staring into her black coffee. “And my brother isn’t looking much better. People are shitting on him from such a height, that I think God himself has crapped on him. Thing is, I’ve got something on him. Good enough to end this whole stupid campaign. Just… just take it. You two are gonna kill each other at this rate.”";
 
 				updateFeedback(3334, "You tell her you aren’t going to win like this. You expect the usual sneer, maybe a “blockhead” thrown in for good measure. But she doesn’t. Lucy watches you for a long, quiet moment, the hard lines of her face softening into something that looks uncomfortably like pity.<br><br>“You know, Charlie Brown,” she says softly, stopping her spoon. “I offered you this because I thought you wanted to survive. But you two are just going to bleed each other dry, aren’t you?” She slides the folder back into her bag without another word. Patty is furious when she finds out, but as you walk home, you can’t stop thinking about the look in Lucy’s eyes.");
 
@@ -11105,7 +11107,7 @@ cyoAdventure = function (a) {
 
 				updateFeedback(3322, "You hate this. You really do. As you look at your little sister and see the sheer terror your radical campaign has instilled in her, you feel entirely unwanted. You apologize, but her eyes stay wide and fearful. You don’t even notice an AV club sophomore lingering a few feet away with his camcorder running, capturing the whole exchange for the weekly student broadcast, but to you, it doesn’t matter. You feel like a villain.");
 			} else if (patty_approval >= 2 && cynicism <= 1) {
-				q346.fields.description = "Sally, your freshman sister, catches you at your locker between classes, grabbing your sleeve and pulling you into the space between the school’s trophy case and the wall. It’s not good; her eyes are red-rimmed and glassy. “My friends are making fun of me because my brother is acting like a total sellout,” she hisses, her voice cracking. “My friends keep saying this is how it starts,” she hisses, her voice cracking. “First you smile for pictures and promise everybody everything, then later you’re stealing money and lying and ruining everyone around you… and I’m gonna be stuck as your sister when it happens. Why can’t you just be normal for <i>once</i>?”";
+				q346.fields.description = "Sally, your freshman sister, catches you at your locker between classes, grabbing your sleeve and pulling you into the space between the school’s trophy case and the wall. It’s not good; her eyes are red-rimmed and glassy. “My friends keep saying this is how it starts,” she hisses, her voice cracking. “First you smile for pictures and promise everybody everything, then later you’re stealing money and lying and ruining everyone around you… and I’m gonna be stuck as your sister when it happens. Why can’t you just be normal for <i>once</i>?”";
 			}
 		}
 	}
@@ -11115,7 +11117,7 @@ cyoAdventure = function (a) {
 		const q347 = campaignTrail_temp.questions_json.find(q => q.pk === 347);
 		if (q347) {
 			if (linus_bond <= -2) {
-				q347.fields.description = "You and Linus agreed to a debate in the gym. It’s the only one, too; after their internal polling showed he had more to lose than gain from sharing a stage with you, his campaign refused to agree to another. He’s standing at his podium in a goddamn sweater vest, talking about ”leaving childish things behind” and “stepping into the future of our school,” yet you spend no time listening to his nonsense. He does not deserve your attention. After a round of applause, the moderator turns to you. You have the floor.";
+				q347.fields.description = "You and Linus agreed to a debate in the gym. It’s the only one, too; after their internal polling showed he had more to lose than gain from sharing a stage with you, his campaign refused to agree to another. He’s standing at his podium in a goddamn sweater vest, talking about ”leaving childish things behind” and “stepping into the future of our school,” yet you spend no time listening to his nonsense. He does not deserve your attention. After a round of applause, the moderator turns to you. You have the floor.";				
 			} else if (linus_bond >= 2) {
 				q347.fields.description = "You and Linus agreed to a debate in the gym. He’s standing at his podium in that goddamn sweater vest, talking about “leaving childish things behind” and “stepping into the future of our school,” among other things. Before he starts, though, he gives you a small, almost apologetic nod from across the stage. It makes being angry at him a little harder than you’d like. Hell, you don’t even think the sweater looks that bad anymore. <i>Damn.</i> After a round of applause, the moderator turns to you. You have the floor.";
 			}
@@ -11134,7 +11136,7 @@ cyoAdventure = function (a) {
 			if (patty_approval >= 3 && !window.isRoyInCharge) {
 				q351.fields.description = "Somebody broke into your locker overnight. From the marks around the latch, they used a flathead screwdriver, and they stole the black notebook you keep shoved behind your chemistry textbook, the one you’ve never shown to a single living soul. Inside is a poem you wrote about Heather, the Little Red-Haired Girl, and it is every bit as pathetic and desperate as you’d expect from a seventeen-year-old boy. To your displeasure, photocopies of it have been taped to just about every locker. The good news is that, thanks to Patty’s well-oiled campaign machine, she and your supporters are already tearing them down before second period. Still, as you round the corner, Heather is holding one of the surviving copies. Oh God.";
 			} else if (cynicism >= 3) {
-				q351.fields.description = "Somebody broke into your locker overnight. They pried the latch with a flathead screwdriver, from the look of it, and stole the a black notebook you keep shoved behind your chemistry textbook, one you’ve never shown to a single living soul. Inside it is a poem you wrote about Heather, the Little Red-Haired Girl, and it is exactly as pathetic and desperate as you’d expect from a seventeen-year-old boy. The worst part isn’t even the poem itself, to be honest. It’s that, for the first time, everyone gets to see the raw, ugly parts of you that you’ve spent years trying to keep hidden. You feel exposed, and it’s as if someone peeled the skin off your life. As you round the corner, Heather is holding one of the surviving copies. Oh God.";
+				q351.fields.description = "Somebody broke into your locker overnight. They pried the latch with a flathead screwdriver, from the look of it, and stole the black notebook you keep shoved behind your chemistry textbook, one you’ve never shown to a single living soul. Inside it is a poem you wrote about Heather, the Little Red-Haired Girl, and it is exactly as pathetic and desperate as you’d expect from a seventeen-year-old boy. The worst part isn’t even the poem itself, to be honest. It’s that, for the first time, everyone gets to see the raw, ugly parts of you that you’ve spent years trying to keep hidden. You feel exposed, and it’s as if someone peeled the skin off your life. As you round the corner, Heather is holding one of the surviving copies. Oh God.";
 
 				updateFeedback(3341, "The words don’t even make it out of your mouth properly. You look down at your hands instead, noticing the shaking, the bitten-down cuticles, all the little things you usually manage not to think about, in various shades of milky-white. You realize you have nothing left to give this school. It’s like you’re a ghost. You turn and walk away before she can see the tears starting to blur your vision, hoping you can forget this day ever happened.");
 			}
@@ -11176,10 +11178,10 @@ cyoAdventure = function (a) {
 				if (a3344) a3344.fields.description = "I can’t do that, Frank, I’m sorry. Linus and the administration have been playing dirty for years while you did nothing. If I stop hitting him now, I’m just letting them get away with it.";
 
 				const a3346 = campaignTrail_temp.answers_json.find(a => a.pk === 3346);
-				if (a3346) a3346.fields.description = "What!? You’re Vice President and you do nothing while Othmar walks all over us. Just stop being a coward for once, dammit. I really would appreciate if you helped me crush Linus once and for all.";
+				if (a3346) a3346.fields.description = "What!? You’re Vice President and you do nothing while Othmar walks all over us. Just stop being a coward for once, dammit. I really would appreciate it if you helped me crush Linus once and for all.";
 
 				updateFeedback(3344, "Franklin shakes his head, clearly disgusted by your vindictiveness. He can’t believe how you’ve turned into <i>this</i>. He adjusts his backpack and walks away without another word. Patty tells you later that Franklin is officially staying neutral, but he insists that your aggressive base loves that you refused to bow down.");
-				updateFeedback(3346, "Franklin’s eyes widen slightly at your sheer ruthlessness. He genuinely cannot believe you’re sayng all of this. He’s quiet for a long time, long enough that a bell rings and the hallway empties around you. You find him the next day in the exact same place and position. Yeah, he’s definitely not endorsing you now.");
+				updateFeedback(3346, "Franklin’s eyes widen slightly at your sheer ruthlessness. He genuinely cannot believe you’re saying all of this. He’s quiet for a long time, long enough that a bell rings and the hallway empties around you. You find him the next day in the exact same place and position. Yeah, he’s definitely not endorsing you now.");
 
 			} else if (anti_establishment >= 3 && ruthlessness < 3) {
 				// more revolutionary-like
@@ -11216,7 +11218,7 @@ cyoAdventure = function (a) {
 
         if (window.isRoyInCharge) {
             updateFeedback(3366, "Your ability to fuck things up at a moment’s notice amazes me.");
-			updateFeedback(3368, "You try to explain what you actually mean, but somewhere along the way Roy stops trying to argue with you and starts writing it all down. “Okay,” he mutters, flipping the page over. “I don’t know what the hell any of this means, but… sure.” By the next morning, the hallways are covered in flyers from so-called Brownites, repeating your strange little philosophies about sadness, politics, and Linus Van Pelt. Against all common sense, some people seem to like it.");
+			updateFeedback(3368, "You try to explain what you actually mean, but somewhere along the way Roy stops trying to argue with you and starts writing it all down. “Okay,” he mutters, flipping the page over. “I don’t know what the hell any of this means, but… sure.” By the next morning, the hallways are covered in flyers from so-called Brownites, repeating your strange little philosophies about sadness, politics, and Linus Van Pelt. Against all common sense, some people seem to like it.");			
         }
 	}
 
@@ -11283,7 +11285,7 @@ cyoAdventure = function (a) {
             // shameless rewrites to fit in Roy
             const q363 = campaignTrail_temp.questions_json.find(q => q.pk === 363);
             if (q363) {
-                q363.fields.description = "It’s unbelievable. Roy somehow managed to get his hands on the keys to the main office PA system. You don’t ask how. “You’ve got, like, two minutes before the janitor comes back,” he whispers, handing them over. “Go on. Say something. It’s your final message to the whole school, so make it good.” You sit down in the principal’s swivel chair, pull the microphone toward you, and click it on. The red broadcast light comes alive in the dark office, throwing long shadows across the filing cabinets and the framed portraits of former principals, all of whom seem to be vaguely disappointed in you.";
+                q363.fields.description = "It’s unbelievable. Roy somehow managed to get his hands on the keys to the main office PA system. You don’t ask how. “You’ve got, like, two minutes before the janitor comes back,” he whispers, handing them over. “Go on. Say something. It’s your final message to the whole school, so make it good.” You sit down in the principal’s swivel chair, pull the microphone toward you, and click it on. The red broadcast light comes alive in the dark office, throwing long shadows across the filing cabinets and the framed portraits of former principals, all of whom seem to be vaguely disappointed in you.";				
             }
 
             updateFeedback(3385, "“Well, at least you’ve never been a buzzkill,” Roy laughs as you both scramble out the side door before the janitor catches you. He tosses you a half-empty bag of chips as a reward once you hit the parking lot. You guess you’ve had worse speech coaches.");
@@ -11299,13 +11301,13 @@ cyoAdventure = function (a) {
         if (window.isRoyInCharge) {
             const q360 = campaignTrail_temp.questions_json.find(q => q.pk === 360);
             if (q360) {
-				q360.fields.description = "It’s Election Night, and the rain hasn’t stopped since three. Roy called from a payphone to drag you down to the watch party at the bowling alley, but you told him you were done for the night and hung up. You couldn’t stand the noise, the plastic cups, or everybody watching the returns like their lives depended on them. And so you walked home alone.<br><br>Now you’re soaked through, sitting on the living room couch with the television in front of you. The national anchors are talking over one another about razor-thin margins in states you’ve never been to, but you barely hear them. Everything feels so far away. Then comes the soft click of claws against the linoleum; Snoopy walks into the room, a little older and slower than he used to be, and rests his chin on your knee. He looks up at you with those same quiet eyes, and somehow that’s enough to bring the last two months crashing down all at once.";
+				q360.fields.description = "It’s Election Night, and the rain hasn’t stopped since three. Roy called from a payphone to drag you down to the watch party at the bowling alley, but you told him you were done for the night and hung up. You couldn’t stand the noise, the plastic cups, or everybody watching the returns like their lives depended on them. And so you walked home alone.<br><br>Now you’re soaked through, sitting on the living room couch with the television in front of you. The national anchors are talking over one another about razor-thin margins in states you’ve never been to, but you barely hear them. Everything feels so far away. Then comes the soft click of claws against the linoleum; Snoopy walks into the room, a little older and slower than he used to be, and rests his chin on your knee. He looks up at you with those same quiet eyes, and somehow that’s enough to bring the last two months crashing down all at once.";				
             }
 
             if (ruthlessness >= 3) {
                 updateFeedback(3375, "The words crack in your throat, apologizing to him, but also to yourself, to Linus, to Patty, to Roy (wherever he is right now), and to the kid you once used to be. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
             } else {
-                updateFeedback(3375, "The words catch in your throat as you thank him, and maybe yourself, too. You think about Linus, Patty, Roy (wherever he is right now), and the kid you once used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");
+                updateFeedback(3375, "The words catch in your throat as you thank him, and maybe yourself, too. You think about Linus, Patty, Roy (wherever he is right now), and the kid you once used to be for surviving this long. Who knows? If you ran fast enough, you’d finally kick that goddamn football… Snoopy lets out a soft whine, nudging his wet nose under your hand. You oblige, stroking his ears as the news anchors on the television announce it’s going to be a long night.<br><br>You pull him into a tight hug, burying your tears in his coat, and fall asleep on the couch, exhausted.");				
             }
         } else {
             if (ruthlessness < 3) {
@@ -11424,7 +11426,7 @@ cyoAdventure = function (a) {
     #gameStatsPopup.minimized #gameStatsTabs {
       display: none;
     }
-
+  
 	.tab-btn {
       flex: 1;
       padding: .4em .5em;
@@ -13206,9 +13208,9 @@ const mainEndings = [
   </div>
 
   <p>The television screen had gone to dead gray snow about twenty minutes ago. Charlie Brown lay curled sideways on the sunken cushions of the couch, shoes still on, his hands buried deep inside his jacket pockets and his knees drawn up toward his ribs. Outside, the rain kept hammering against the bay window in violent, rattling bursts. The numbers were still going around in his head… the margins, all the lost votes in the cafeteria, and surely all the looks of pity in the gym when the final tally went up. He was glad he didn’t see it. But it wasn’t just that he’d lost, it was this feeling that the whole thing had been some cosmic joke, and he had been stupid enough to set the punchline up himself.</p>
-
+  
   <p>He hated it. He hated the school, he hated the election, but most of all he hated the fact that somehow, the world was always going to find a way to put him flat on his back again. Every damn time.</p>
-
+  
   <p>A moment later, the front door unlocked with a click, followed by the wet thud of boots being kicked off in the entryway. A fairly cold draft swept into the living room, and with it carrying the smell of rain. Roy was there.</p>
 
   <p><span class="dialogue">“Man,”</span> he muttered as he shuffled into the dim room, rubbing his palms together. <span class="dialogue">“It’s like forty degrees out there, and your porch light isn’t even on. What the hell? I nearly broke my neck on a skateboard.”</span></p>
@@ -13228,11 +13230,11 @@ const mainEndings = [
   <p><span class="dialogue">“It meant something to me,”</span> Roy said. He said it almost casually, sure, but there was something underneath it that made Charlie finally look over. Roy wasn’t really smiling, as if he had just said more than he meant to and was trying to decide whether he regretted it.</p>
 
   <div class="section-break">· · ·</div>
-
+  
   <p><span class="dialogue">“You remember when my family moved here?”</span> Roy asked, still looking up at the ceiling. <span class="dialogue">“My folks were fighting all the time. Like, every night. They’d be screaming at each other until three in the morning, breaking dishes, throwing stuff at the walls, all that shit. My dad slept on the porch half the week. And my mom kept threatening to put us in her car and drive straight into Lake Superior.”</span></p>
 
   <p>He paused for a moment, rubbing his hands together even though they had stopped shaking.</p>
-
+  
   <p><span class="dialogue">“I used to sit behind the bleachers after school for hours because I didn’t want to go home yet,”</span> he said. <span class="dialogue">“I figured everybody around here was either fake, crazy, or just waiting for the right moment to screw you over. Then I met you.”</span></p>
 
   <p>Roy finally turned his head, looking at Charlie in the gray light of the television.</p>
@@ -13242,15 +13244,15 @@ const mainEndings = [
   <p>Charlie stared at him. The knot in his chest, tight and burning with weeks of cynicism and humiliation, seemed to loosen just a little. He opened his mouth to say something. An apology, maybe, an excuse, perhaps, maybe probably some miserable joke, but nothing came out.</p>
 
   <div class="fold-line"></div>
-
+  
   <p>Before Charlie could figure out what to do with himself, though, Roy shifted a little closer. He leaned over, tilted his head, and gently bumped his nose against Charlie’s cold, damp one. Charlie flinched, more from surprise than anything else, but Roy didn’t pull away. He stayed there for a moment in the dark, and let his forehead resting lightly against Charlie’s.</p>
-
+  
   <p><span class="dialogue">“It’s what they say. The sooner kids talk, the sooner they talk back,”</span> Roy murmured, a faint smile in his voice. <span class="dialogue">“So I hope you never say a word.”</span></p>
-
+  
   <p>A quiet breath escaped Charlie’s nose. He looked into Roy’s tired, half-lidded eyes. The corner of Charlie’s mouth twitched upward. <span class="dialogue">“You’re an idiot, Roy,”</span> he muttered.</p>
-
+  
   <p><span class="dialogue">“Yeah,”</span> Roy said with a small smile, settling back into the couch and reaching for the remote. <span class="dialogue">“I know. Now go to sleep, dude. It’s getting late.”</span></p>
-
+  
   <p>He clicked the television off. The static disappeared, leaving the living room in a soft-ish darkness with only the rain against the window and the faint creak of the old couch beneath them. For the first time all night, Charlie closed his eyes and let himself breathe.</p>
 
 </div>`,
@@ -14438,7 +14440,7 @@ const mainEndings = [
       title: "#1 Crush",
       artist: "Garbage",
       cover: "https://i.scdn.co/image/ab67616d0000b2730dbee17e25d160f6f2f4d92f",
-      url: ["kr1up9hSujg", "PM6yZMbcC1U", "XtnhGz-isEA"]
+      url: ["kr1up9hSujg", "PM6yZMbcC1U", "XtnhGz-isEA", "MAVxYUXc2cE", "pCbKowZsWVo"]
     }
   },
   {
@@ -14793,39 +14795,39 @@ const mainEndings = [
   <div class="letter-header">
     <div class="letter-title">in circles</div>
   </div>
-
+  
   <p>The house phone in the downstairs hallway rang at about twenty minutes past midnight. At that point, Charlie Brown had been lying awake on top of his bedspread, staring at the narrow strip of peeling wallpaper where the wall met the ceiling moulding. He had been there long enough that the pattern had begun to lose its meaning. When the warble of the telephone suddenly tore through the house, it was so loud in the middle of the night that he could hear the faint rattle of the glass in his bedroom window. Downstairs, Snoopy gave a single muffled huff from the living room and went quiet again. He had other things to worry about.</p>
 
   <p>Charlie pushed himself up and sat on the edge of the bed for a moment, trying to convince himself that somebody else would answer it. When the ringing continued, he finally pulled on his socks and made his way downstairs, moving carefully so the floorboards wouldn’t creak enough to wake his parents. He grabbed the heavy plastic receiver just before the fourth ring.</p>
-
+  
   <p><span class="dialogue">“Hello?”</span> There was a brief crackle on the other end.</p>
-
+  
   <p><span class="dialogue">“Charles?”</span> Marcie sounded breathless, as though she had been waiting beside the telephone for him to pick up. <span class="dialogue">“I’m s-sorry to call this late, but they finished the second machine recount.”</span></p>
 
   <p>Charlie leaned against the wall. <span class="dialogue">“Okay.”</span></p>
-
+  
   <p><span class="dialogue">“It looks like you’ve won.”</span></p>
 
   <div class="fold-line"></div>
-
+  
   <p>For a moment, Charlie didn’t understand what she had said. The hallway seemed to grow strangely quiet around him. He could hear the refrigerator in the kitchen, the rain tapping against one of the downstairs windows, and even the faint electrical hiss coming through the telephone receiver pressed against his ear. <span class="dialogue">“What?”</span></p>
-
+  
   <p><span class="dialogue">“You won,”</span> Marcie repeated, more carefully this time. <span class="dialogue">“Doesn’t seem there will be another recount, and um, the faculty observer signed off on the tally a few minutes ago. You’re the president, Charles.”</span></p>
-
+  
   <p>But Charlie just stared at the floor. He had spent so long imagining what it would feel like to lose that he had never really considered the possibility of the other thing. Losing had been familiar, losing made sense, he’s gotten used to t. You lost, everyone laughed for a while, and eventually the world moved on without asking very much of you.</p>
-
+  
   <p>But this?</p>
 
   <p>His fingers tightened around the receiver. <span class="dialogue">“Are you sure?”</span></p>
 
   <p><span class="dialogue">“Yes. I mean, unless something completely bizarre happens with the paperwork, which I don’t think it will. The paper’s going to print in about forty minutes, and I thought you’d want to give me a statement for the front page.”</span></p>
-
+  
   <p>Charlie didn’t answer.</p>
-
+  
   <p>Marcie kept talking, filling the silence because she apparently hadn’t realized he had stopped listening. Something about the voting machines, something about congratulatory messages from Patty and Roy, something about what they would need from him in the morning. Her voice became increasingly distant, flattening into a thin stream of words that seemed to come from somewhere outside the house.</p>
-
+  
   <p>No. He couldn’t do this.</p>
-
+  
   <p>He couldn’t stand here and listen to them telling him that it had happened, because if it had happened then tomorrow was real, too. Tomorrow morning, everyone would walk through those doors expecting him to know what he was doing. They would expect him to fix things, they would expect him to be somebody worth voting for. And eventually, he would disappoint them.</p>
 
   <p>Oh, <em>of course</em> he would. Charlie could already see it happening. He would say the wrong thing, make the wrong decision, miss something obvious, and slowly everyone would remember why they had laughed at him in the first place. All the jokes would come back, the looks would come back. Maybe even that fucking football would come back, as the universe seemingly had an excellent memory when it came to reminding Charlie Brown of his failures.</p>
@@ -14841,31 +14843,31 @@ const mainEndings = [
   <div class="section-break">· · ·</div>
 
   <p>And so he let go. The receiver slipped from his fingers and swung against the wall, its coiled cord stretching beneath it. Marcie’s voice continued through the speaker, so small and tinny, unaware that Charlie was no longer listening. He stood there for a few seconds, staring at nothing, then he turned toward the bathroom.</p>
-
+  
   <p>He wasn’t thinking very clearly anymore. He hated these moments. What frightened him most was how little effort it took for them to make sense. The only thng he only knew that he wanted somewhere dark and quiet, somewhere he could close a door and stop being Charlie Brown for a little while. For him, the bathroom had always been there, his second lifelong companion. A little room at the end of the hall where nobody would bother him, where he could turn on the faucet and listen to the water until his thoughts became quiet.</p>
-
+  
   <p>Lately, though, there had been something else attached to the idea of that room, something he had been trying very hard not to name. Charlie walked toward it slowly., and his hand lifted toward the brass knob.</p>
-
+  
   <p>And then bedroom door across the hall opened.</p>
-
+  
   <p>Sally stood there in her oversized yellow nightshirt, her hair sticking out in every direction and her eyes barely open. She rubbed one eye with the back of her hand and stared at him for a moment, still trying to understand what she was seeing. It was pretty late, what was he doing?</p>
-
+  
   <p><span class="dialogue">“Big brother?”</span> she mumbled. <span class="dialogue">“Why are you awake?”</span></p>
-
+  
   <p>Charlie looked at her. He tried to answer, or at least come up with something. He wanted to tell her he was fine, or that she should go back to bed, or that he had just gotten a strange phone call. Any of those things would have been easier than the truth. Yet nothing came out; his eyes filled instead.</p>
-
+  
   <p>No. He looked away, embarrassed by how quickly the tears were coming. God, no, not again, not like this, not in front of her. He pressed the heel of one hand against his face, but that only made his breathing break apart. His shoulders began to shake, and he tried to swallow the sound before it could carry down the hallway.</p>
-
+  
   <div class="fold-line"></div>
-
+  
   <p>Sally’s sleepy expression disappeared. <span class="dialogue">“Charlie?”</span></p>
 
   <p>He shook his head, though he wasn’t even sure what he was trying to deny. His knees gave out, and he sank onto the carpet with his back against the wall. Charlie covered his face with both hands, trying desperately to keep quiet so he wouldn’t wake their parents, but the tears were already coming too quickly. His breathing broke into small, uneven gasps, and for a while he could do nothing but sit there and let it happen.</p>
-
+  
   <p>Confused, Sally walked over in her bare feet and sat down beside him. Not quite sure what she was supposed to do or what was wrong, she watched him. After a moment, she slipped her arms around his neck and pulled him gently against her.</p>
-
+  
   <p>Charlie folded into her almost immediately. He pressed his face into the shoulder of her nightshirt, one hand gripping the fabric while the other rested uselessly against the carpet. Sally held on tightly, with her small arms wrapped around him. She had no idea what was going on, but she could see that somebody she loved was hurting, and therefore ought to be held.</p>
-
+  
   <p>And Charlie couldn’t make out a word of it anymore.</p>
 
 </div>`,
@@ -22084,6 +22086,354 @@ dd {
   </div>
 
 </div>`
+  },  
+  {
+    id: "korine_garfield",
+    condition: (ev) => linusWin && ruthlessness >= 7 && anti_establishment >= 6 && cynicism <= 1,
+    image: "https://i.pinimg.com/1200x/de/f9/fb/def9fbd3f1a7aaa4177624a54b50398b.jpg",
+    html: `<div style="background-color: #ffffff; color: #000000; font-family: 'Times New Roman', Times, serif; font-size: 15px; line-height: 1.5; padding: 25px 30px; max-width: 700px; margin: 0 auto; text-align: left;">
+
+  <p align="CENTER">
+    <font size="6"><b>The Garfield Project (rumors &amp; press)</b></font><br>
+    <font size="2">members.aol.com/FilmKorine/garfield.html</font>
+  </p>
+
+  <hr size="1" color="#000000" noshade>
+
+  <p>
+    <b>November 2002</b><br><br>
+    Over the past two years, rumors have circulated across several independent film message boards regarding Harmony’s unproduced, heavily rumored live-action adaptation of Jim Davis’s comic strip <i>Garfield</i>. While the project appears permanently abandoned following legal threats from syndicate Paws Inc. and Harmony’s move to Europe, details surrounding the bizarre pre-production have emerged across numerous magazine profiles and festival Q&amp;As.
+  </p>
+
+  <p>
+    Much of the project took shape in late 2000, immediately following his personal and creative split from longtime muse Chloë Sevigny. In interviews with <i>Dazed &amp; Confused</i> and <i>The Face</i>, Korine openly discussed his search for a new “spiritual anchor,” explaining that he was deliberately avoiding art-house regulars in favor of tabloid fixtures and teen-movie starlets whom he felt embodied the exhausted underbelly of American consumerism. Chief among them was Tara Reid, whom Harmony repeatedly praised in <i>Index Magazine</i> as his ideal choice for Dr. Liz Wilson. Korine claimed to have held several late-night meetings with Reid at the Chateau Marmont, insisting she possessed an “unbearable, almost celestial sadness” suited to play an underpaid Indiana veterinarian who despises her clientele. Similar reports in <i>Film Threat</i> noted that he sent poetic treatments to Shannon Elizabeth and Natasha Lyonne, while briefly courting Shannen Doherty, whom he described to French journalists as an overlooked tragedy queen.
+  </p>
+
+  <p>
+    The casting rumors quickly became fodder for public mockery, most notably from former collaborator Larry Clark. During press rounds for <i>Ken Park</i> in September, Clark openly ridiculed Korine’s recent output and lifestyle, claiming Harmony was washed up and living in hotels, calling up <i>American Pie</i> actresses at four in the morning, and pitching them as the next Maria Falconetti. Clark told reporters that Harmony had approached Dustin Diamond (Screech from <i>Saved by the Bell</i>) to play a suicidal Jon Arbuckle, while also auditioning French Stewart and attempting to cast super-heavyweight boxer Butterbean as a live-action Garfield in an oversized orange fleece suit.
+  </p>
+
+  <p>
+    Korine brushed off Clark's jabs in an online chat with <i>IndieWire</i>, calling Clark a relic and defending his treatment as an earnest portrait of Midwestern loneliness. He argued that beneath the merchandise, Jim Davis was some sort of an accidental poet of suburban dread, and that placing recognizable television figures like Diamond or Stewart in dialogue-free 16mm setups was, in fact, the logical continuation of what he began with <i>Gummo</i>. 
+  </p>
+
+  <p>
+    Financiers proved unwilling to back the film without professional sound design and standard narrative concessions, and with Davis’s syndicate threatening immediate injunctions over unauthorized filming in regional Indiana strip malls, the project was quietly scrapped as Korine turned his focus to his (on life support) street-fighting documentary, <i>Fight Harm</i>.
+  </p>
+
+  <hr size="1" color="#000000" noshade>
+
+  <center>
+    <a href="#"><font size="2">[ Back to Other Projects ]</font></a> &nbsp;·&nbsp;
+    <a href="#"><font size="2">[ Back to Korine Main ]</font></a> &nbsp;·&nbsp;
+    <a href="#"><font size="2">[ Message Boards ]</font></a>
+    <br><br>
+    <font size="1" color="#666666">
+      FilmKorine · Hosted on AOL Hometown · Best viewed in Netscape Navigator
+    </font>
+  </center>
+
+</div>`,
+    song: {
+      title: "Miss H.I.V.",
+      artist: "The Wolfgang Press",
+      cover: "https://yt3.googleusercontent.com/nyCx9_OpqNGpXfxKJvAQNBh6CTn1XuvYd0wpnen5JcmU1cxgtvep58OX9YzMNqZVH54OI-hV1BKJNr8=w544-h544-l90-rj",
+      url: ["6fgFYxTLWyk"]
+    }
+  },
+  {
+    id: "calvinhobbes",
+    condition: (ev) => linusWin && ruthlessness >= 5 && linus_bond <= -7,
+    image: "https://i.pinimg.com/736x/41/8c/b7/418cb72af359a07803b5f42b169cccb4.jpg",
+    html: `<style>
+table, td, th { border: none; }
+.fnd-box {
+  background-color: #FFFFFF;
+  margin: 0 auto;
+  width: 750px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000000;
+  text-align: left;
+}
+.fnd-box .ybg { background-color: #FFFF99}
+.fnd-box .gbg { background-color: #CCCCCC}
+.fnd-box .bbu { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #003399; text-decoration: underline}
+.fnd-box .bhb { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #003399; font-weight: 600}
+.fnd-box .bsu { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #003399; text-decoration: underline; font-weight: 600}
+.fnd-box .dbb { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #666666; font-weight: 600}
+.fnd-box .dbd { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #333333}
+.fnd-box .gbd { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #333333}
+.fnd-box .dbz { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #666666}
+.fnd-box .dbt { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #666666; font-weight: 600}
+.fnd-box .dbu { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #666666; text-decoration: underline}
+.fnd-box .dgb { font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #666666; font-weight: 600}
+.fnd-box .dhb { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #666666; font-weight: 600}
+.fnd-box .dhu { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #666666; text-decoration: underline; font-weight: 600}
+.fnd-box .dtl { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #666666; text-decoration: underline; font-weight: 600}
+.fnd-box .rbd { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #CC0000}
+.fnd-box .rbu { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #CC0000; text-decoration: underline}
+.fnd-box .rhn { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #CC0000}
+.fnd-box .rhb { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #CC0000; font-weight: 600}
+.fnd-box .rsu { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #CC0000; text-decoration: underline ; font-weight: 600}
+.fnd-box .vbd { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #333333}
+.fnd-box .vbu { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #333333; text-decoration: underline}
+.fnd-box .vhb { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #333333; font-weight: 600; line-height: 11pt}
+.fnd-box .vtb { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #333333; font-weight: 600}
+.fnd-box .wbd { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #FFFFFF}
+.fnd-box .wbt { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #FFFFFF}
+.fnd-box .wbu { font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #FFFFFF; text-decoration: underline}
+.fnd-box .whb { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #FFFFFF; font-weight: 600}
+.fnd-box .whn { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #FFFFFF}
+.fnd-box .whu { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #FFFFFF; text-decoration: underline; font-weight: 600}
+.fnd-box .wtu { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #FFFFFF; text-decoration: underline}
+.fnd-box .wtl { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #FFFFFF; text-decoration: underline; font-weight: 600}
+.fnd-box .yhb { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #FFCC00; font-weight: 600}
+.fnd-box .blk11 {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #000000}
+.fnd-box .blk10 {  font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #000000}
+.fnd-box .blk11b {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: 600; color: #000000}
+.fnd-box .blk12b {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 600; color: #000000}
+.fnd-box .w12b {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 600; color: #FFFFFF}
+.fnd-box .r12b {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 600; color: #CC0000}
+.fnd-box .blue11ulink {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #003399; text-decoration: underline}
+.fnd-box .b12u {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 600; color: #003399; text-decoration: underline}
+.fnd-box .g11 {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; color: #666666}
+.fnd-box .blue11u {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #003399; text-decoration: underline; line-height: 14px}
+.fnd-box .r11u {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; color: #CC0000; text-decoration: underline}
+.fnd-box .gray10 {  font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: #666666}
+.fnd-box .showtimespast {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; color: #999999}
+.fnd-box .showtimesnotlive {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 14px; color: #333333}
+.fnd-box .o12b {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #CC6600; font-weight: 600}
+.fnd-box .blk16b {  font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 600; color: #000000}
+.fnd-box .b14bu {  font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 600; color: #003399; text-decoration: underline}
+.fnd-box .blk12 {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000}
+.fnd-box .blue11ulinkb {  font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: 600; color: #003399; text-decoration: underline}
+.fnd-box .blue12ulink {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003399; text-decoration: underline}
+</style>
+
+<div class="fnd-box">
+  <table width="750" border="0" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td width="9" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="9" height="7"></td>
+      <td width="19" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="19" height="7"></td>
+      <td width="49" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="49" height="7"></td>
+      <td width="128" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="128" height="7"></td>
+      <td width="33" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="33" height="7"></td>
+      <td width="24" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="24" height="7"></td>
+      <td width="11" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="11" height="7"></td>
+      <td width="15" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="15" height="7"></td>
+      <td width="84" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="84" height="7"></td>
+      <td width="123" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="124" height="7"></td>
+      <td width="175" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="175" height="7"></td>
+      <td width="47" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="47" height="7"></td>
+      <td width="32" height="7"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="32" height="7"></td>
+    </tr>
+    <tr> 
+      <td width="9" height="53"></td>
+      <td width="19" height="53"></td>
+      <td height="104" colspan="5" rowspan="2" valign="top" bgcolor="ffffff"><a href="#"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/logohead.gif" alt="Fandango" width="245" height="104" border="0"></a></td>
+      <td height="53" colspan="5" valign="top"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/topnotch.gif" width="444" height="53"></td>
+      <td width="32" height="53"></td>
+    </tr>
+    <tr> 
+      <td width="9" height="51"></td>
+      <td width="19" height="51"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="19" height="51"></td>
+      <td height="62" colspan="6" rowspan="2"> 
+        <table width="468" height="60" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000" style="background:#ffcc00; text-align:center;">
+          <tr>
+            <td style="font-family:Arial Black, Arial, sans-serif; font-size:12px; color:#cc0000; letter-spacing:0.5px;">
+              CARL'S JR. COOL KIDS MEAL: COLLECT ALL 4 CALVIN & HOBBES WIND-UPS!
+              <div style="font-size:10px; color:#000000; font-family:Arial, sans-serif; font-weight:normal;">Includes Double Cheeseburger, Small Fries &amp; Mountain Dew Code Red® · Collect all 4!</div>
+            </td>
+          </tr>
+        </table> 
+      </td>
+    </tr>
+    <tr> 
+      <td width="9" rowspan="6"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="9" height="4"></td>
+      <td bgcolor="ff3300" height="13" colspan="5"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/search_top.gif" width="253" height="13"></td>
+      <td width="11" height="13"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="11" height="13"></td>
+    </tr>
+    <tr> 
+      <td bgcolor="ff3300" width="19" height="72" rowspan="4"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/search_left.gif" width="19" height="72"></td>
+      <td bgcolor="ff3300" width="49" height="72" rowspan="4"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/search_label.gif" width="49" height="72"></td>
+      <td bgcolor="ff3300" colspan="2" rowspan="4" class="blk11">
+	    <table width="161" border="0" cellpadding="0" cellspacing="0">
+          <tr> 
+            <td height="26" valign="top">
+			  <select name="searchby" class="showtimesnotlive">
+				<option value="2" selected>By ZIP Code/City&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                <option value="1">By Movie Title</option>
+              </select>
+            </td>
+          </tr>
+          <tr> 
+            <td height="2"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="9" height="2"></td>
+          </tr>
+          <tr> 
+            <td width="157" height="25" valign="top"> 
+              <input name="txtCityZip" type="text" class="showtimesnotlive" size="12" maxlength="50" value="55401">
+			  <input type="image" src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/go_yel.gif" width="31" height="18" align="texttop" border="0">
+            </td>
+          </tr>
+          <tr> 
+            <td height="19" valign="bottom"><a href="#"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/search_advanced.gif" alt="Advanced Search" width="91" height="17" border="0"></a></td>
+          </tr>
+        </table>
+      </td>
+      <td bgcolor="ff3300" width="24" height="72" rowspan="4"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/search_right.gif" width="24" height="72"></td>
+      <td height="11" colspan="5" bgcolor="#FFFFFF"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="409" height="11"></td>
+      <td width="47" height="11"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/nav_border.gif" width="47" height="11"></td>
+      <td width="32" height="11"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="32" height="10"></td>
+    </tr>
+    <tr> 
+      <td height="37" colspan="7" valign="top"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/nav_main.gif" width="483" height="37" border="0"></td>
+    </tr>
+    <tr> 
+      <td height="20" bgcolor="e8e8e8">&nbsp;</td>
+      <td height="20" colspan="3" bgcolor="e8e8e8" class="dhb">&nbsp;New to Fandango? <a href="#" class="blue11ulink">Click here!</a></td>
+      <td height="20" colspan="2" bgcolor="e8e8e8"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/nav_accountnav_b.gif" width="222" height="20" border="0"></td>
+      <td width="32" height="20"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="9" height="7"></td>
+    </tr>
+    <tr> 
+      <td width="456" height="4" colspan="6" bgcolor="ffffff"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/nav_account_shadow.gif" width="456" height="4"></td>
+      <td width="32" height="4"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="9" height="4"></td>
+    </tr>
+    <tr> 
+      <td height="8" colspan="5"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/search_bottom.gif" width="253" height="8"></td>
+      <td height="8" colspan="4" bgcolor="#FFFFFF"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="9" height="8"></td>
+      <td width="175" bgcolor="#FFFFFF"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="9" height="8"></td>
+      <td width="47" height="8"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/nav_border.gif" width="47" height="8"></td>
+      <td width="32" height="8"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="32" height="8"></td>
+    </tr>
+  </table>
+
+  <table width="750" border="0" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td width="28"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="28" height="1"></td>
+      <td bgcolor="#000000" width="6"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="6" height="1"></td>
+      <td bgcolor="#ffffff" width="340"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="337" height="1"></td>
+      <td width="10" bgcolor="#FFFFFF"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="4" height="1"></td>
+      <td bgcolor="#ffffff" width="337"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="337" height="1"></td>
+      <td bgcolor="#000000" width="6"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="6" height="1"></td>
+      <td width="32"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="32" height="1"></td>
+    </tr>
+    <tr> 
+      <td width="28">&nbsp;</td>
+      <td bgcolor="#000000" width="6">&nbsp;</td>
+      <td align="left" bgcolor="#ffffff" colspan="3" valign="top">
+        <table width="678" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td colspan="6" height="10"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="1" height="1"></td>
+          </tr>
+          <tr> 
+            <td width="20" rowspan="3"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" width="20" height="10"></td>
+            <td width="250" height="18" align="left" valign="top" bgcolor="#FF3300" class="gbd"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/rlc.gif" width="22" height="18"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/h_reviews.gif" width="102" height="18"></td>
+            <td width="250" height="18" align="left" valign="top" bgcolor="#FF3300" class="gbd"> 
+              <div align="right"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/rrc.gif" width="13" height="18"></div>
+            </td>
+            <td width="24" rowspan="2"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" height="1" width="24"></td>
+            <td width="120" rowspan="3" valign="top">
+              <table width="120" height="500" border="1" cellpadding="4" cellspacing="0" bordercolor="#CCCCCC" style="background:#f4f4f4; text-align:center;">
+                <tr>
+                  <td valign="top" class="dbd">
+                    <span class="rhb">IN THEATERS</span><br><br>
+                    <a href="#" class="blue11ulink">Pirates of the Caribbean</a><br><br>
+                    <a href="#" class="blue11ulink">Bad Boys II</a><br><br>
+                    <a href="#" class="blue11ulink">The League of Extraordinary Gentlemen</a><br><br>
+                    <a href="#" class="blue11ulink">Terminator 3: Rise of the Machines</a><br><br>
+                    <a href="#" class="blue11ulink">Finding Nemo</a><br><br>
+                    <a href="#" class="blue11ulink">Legally Blonde 2</a><br><br>
+                    <a href="#" class="blue11ulink">The Italian Job</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td width="14" rowspan="4"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" height="1" width="8"></td>
+          </tr>
+          <tr> 
+            <td width="250" height="1"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" height="1" width="250"></td>
+            <td width="250" height="1"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/s.gif" height="1" width="250"></td>
+          </tr>
+          <tr> 
+            <td width="500" height="627" colspan="2" valign="top" class="gbd"> 
+              <table width="180" height="300" border="0" align="left" cellpadding="0" cellspacing="0">
+                <tr> 
+                  <td width="180" height="300" valign="top" align="left"> 
+                    <div align="center">
+                      <a href="#">
+                        <img src="https://file.garden/aNtAfG887DiA_7lO/TML_2000/calvin_movie.webp" width="180" height="272" hspace="0" vspace="0" border="0" alt="Calvin and Hobbes Poster">
+                      </a>
+                      <a href="#"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/b_buytickets.gif" width="136" height="30" border="0"></a>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+              <img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/reviewbar.gif" width="10" height="310" hspace="0" vspace="0" border="0" align="left"> 
+              <table width="310" height="20" border="0" align="left" cellpadding="0" cellspacing="0" bgcolor="efefef">
+                <tr>
+                  <td width="310" height="20" bgcolor="efefef"><span class="dhb">Hollywood Reporter | </span><a href="#" class="bsu">Los Angeles Times</a></td>
+                </tr>
+              </table>
+              <br><br>
+              <div align="justify">
+                <br><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/hollywoodrept_large.gif" width="187" height="50"><br>
+                <i>Calvin and Hobbes</i>, Bill Watterson’s revered syndicated comic strip about an introspective six-year-old and his imaginary tiger companion, makes an aggressively noisy transition to live-action under the kinetic direction of Raja Gosnell (<i>Scooby-Doo</i>). Where the strip was celebrated across its decade-long run for its philosophical inquiry and autumnal melancholy, this Universal Pictures/Imagine Entertainment release opts for wall-to-wall slapstick, relentless digital visual effects, and contemporary commercial tie-ins. The result is a rather brisk summer family package that will easily engage the elementary-school demographic, even as it leaves longtime comic purists feeling alienated by its relentless commercial momentum.<br><br>
+                Scripters Lowell Ganz and Babaloo Mandel (<i>City Slickers</i>) graft a conventional save-the-neighborhood plot onto Watterson's minimalist setup: here, the sleepy Ohio woodlands behind Calvin’s home face imminent destruction by an unscrupulous commercial developer, Mr. Vanderhoff (Larry Miller), who plans to clear the acreage for an extreme-sports megaplex and strip mall. To halt the bulldozers, Calvin must join forces with neighborhood rival Susie Derkins (Dakota Fanning) in an annual municipal downhill soapbox derby. Times, and target demographics, have surely changed.<br><br>
+                Young Spencer Breslin (<i>The Santa Clause 2</i>), inheriting one of the most recognizable silhouettes in pop culture, tackles the title role with boundless physical energy. Under Gosnell’s fast-paced direction, however, Breslin plays the six-year-old less as an introspective dreamer than as an excitable suburban daredevil, frequently breaking the fourth wall with precocious smirks and delivering punchlines designed primarily for trailer soundbites. The Spaceman Spiff fantasy sequences, while handsomely mounted with dense digital laser fire and CGI alien landscapes, are staged with the rapid-fire pacing of a video-game demo, rather than the expansive wonder of childhood reverie.<br><br>
+                The central creative departure, and also the production’s riskiest gamble, is Hobbes himself. In the presence of adults, the tiger is a limp, weathered plush toy (a physical prop designed with faithful scruffiness). In private, however, he springs to life as a fully computer-generated creature, animated with seamless fur dynamics by Rhythm &amp; Hues. But where Watterson’s tiger was a wry, contemplative philosopher, the screenplay reimagines him as a wisecracking companion voiced by David Spade with trademark dry sarcasm. While Spade lands occasional chuckles — particularly in his running commentary on suburban domesticity —, his sardonic delivery often clashes with the innocent core of the premise.<br><br>
+                The adult ensemble navigates the thin material with at least some resilience. Jason Alexander brings frantic sitcom bluster to Calvin’s father, spending much of his screen time battling runaway lawn mowers and tumbling into compost heaps, while Cheryl Hines provides warm grounding as the exasperated mother. Fanning, one of the industry's most dependable young performers, brings great comedic timing to Susie, managing to elevate a role largely written around slapstick retaliation. Miller plays the villainous developer with his customary dyspeptic relish, though one senses he is acutely aware of the film around him.<br><br>
+                The accomplished technical package serves the material well, from Oliver Wood’s bright suburban cinematography and James Bissell’s production design to the propulsive pop-punk soundtrack featuring Smash Mouth and Bowling for Soup. Opening opposite <i>Pirates of the Caribbean</i> and <i>Bad Boys II</i>, <i>Calvin and Hobbes</i> faces crowded competition, but families seeking lightweight summer diversion will find enough physical humor and colorful creature work to keep the popcorn moving.
+                <br><br><b>Sheri Linden<br>The Hollywood Reporter</b>
+                <br><br>Copyright BPI Communications, Inc./HR Industries, Inc. Used with permission from BPI Entertainment News Wire.
+              </div>
+            </td>
+            <td width="24">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td width="20" height="50">&nbsp;</td>
+            <td width="500" height="50" colspan="2"><span class="dbd">
+              <a href="#" class="dbd">Purchase tickets for this film</a><br>
+              <a href="#" class="dbd">Go to Reviews page</a>  
+            </span></td>
+            <td width="24" height="50">&nbsp;</td>
+            <td width="120" height="50">&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+      <td bgcolor="#000000" width="6">&nbsp;</td>
+      <td width="32"></td>
+    </tr>
+  </table>
+  
+  <table width="750" border="0" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td width="28" height="10"></td>
+      <td width="690" height="91"><img src="https://web.archive.org/web/20030618083547im_/http://images.fandango.com/images/footer.gif" width="690" height="91"></td>
+      <td width="32" height="10"></td>
+    </tr>
+    <tr>
+      <td width="750" height="10" colspan="3" align="center"></td>
+    </tr>
+    <tr> 
+      <td colspan="3" align="center">
+        <a href="#" class="rhn">about us</a><span class="rhn"> | </span>
+        <a href="#" class="rhn">partners</a><span class="rhn"> | </span>
+        <a href="#" class="rhn">policies</a><span class="rhn"> | </span>
+        <a href="#" class="rhn">how fandango works</a><span class="rhn"> | </span>
+        <a href="#" class="rhn">contact us</a><span class="rhn"> | </span>
+        <a href="#" class="rhn">gift certificates &amp; group tickets</a><span class="rhn"> | </span>
+        <a href="#" class="rhn">sweepstakes</a><span class="rhn"> | </span>
+        <a href="#" class="rhn">help</a><span class="blk11"><br>Copyright &copy; 2003 Fandango. All rights reserved.</span>
+      </td>
+    </tr>
+  </table>
+</div>`,
+    song: {
+      title: "Fun for Me",
+      artist: "Moloko",
+      cover: "https://yt3.googleusercontent.com/pOHdyoC4-n5LQ8yAvGoDCHUtnPHEECBivn8ZZOFYyAVLQNH7bSgI6-6NZ5J_cB2CjQuJkO0Yj1vtVy2H=w544-h544-l90-rj",
+      url: ["dZZsCIEy_ak", "f1F1teacio0"]
+    }
   },
   {
     id: "homersimpson_bad",
@@ -25075,9 +25425,9 @@ dd {
 
       <div class="onion-body">
         <p><span class="onion-dateline">SCHAUMBURG, IL —</span> While clearing out an obsolete folder on his AOL Instant Messenger client Tuesday evening, local resident Brian Hendershot, 23, discovered that a high school acquaintance who died in 2002 was still staring back at him from the digital void: a tiny, pixelated image of an unsmiling cartoon boy in a yellow shirt.</p>
-
+		
 		<p>The account, registered under the screen name <i>iamananchorman</i>, has remained marked as “Offline” for approximately 1,180 consecutive days. Its accompanying 48-by-48-pixel buddy icon, a low-resolution image of <i>Peanuts</i> protagonist Charlie Brown, has survived server migrations, technological obsolescence, and the physical decay of the human body.</p>
-
+		
         <div class="aim-mock">
           <div class="aim-icon">
             <img src="https://file.garden/aNtAfG887DiA_7lO/TML_2000/charliehead.jpg" alt="AIM Icon">
@@ -25088,15 +25438,15 @@ dd {
             <span style="font-size:10px; color:#000080;">Warning Level: 0%</span>
           </div>
         </div>
-
+		
 		<p>“It’s kinda bizarre,” said Hendershot, staring at his monitor as he adjusted his office chair. “My college friends have pictures of themselves doing keg stands in Cabo. My sister has a picture of her baby, the girl from my tenth-grade chemistry class even has a State Farm headshot. And then there’s this guy, whose profile picture is just a chronically depressed six-year-old whose dog doesn’t even remember his name. Tragic, I think.”</p>
 
 		<p>Cultural historians note that between 1997 and 2001, an entire generation of disaffected suburban teenagers engaged in an unofficial, darkly ironic recontextualization of the newspaper funny pages. Rather than seeing Charles M. Schulz’s syndicated strip as a wholesome holiday diversion for grandparents, thousands of angst-ridden adolescents listening to post-punk and failing remedial geometry adopted Charlie Brown as one of the patron saints of unmedicated clinical dread.</p>
 
 		<p>“Cartoons are designed to exist in a kind of permanent, frictionless purgatory,” said Dr. Kenneth Miller, a professor of media studies at Northwestern University. “When you look at it, Calvin and Hobbes never had to pay off an auto loan, and Garfield never had to watch his 401(k) crater in the dot-com bust, but Charlie Brown was different. His entire existence was built around emotional failure. He never kicked the football, his baseball team lost nine hundred games in a row, and every autumn some little girl charged him five cents to explain why he was fundamentally unlovable.”</p>
-
+		
 		<p>“For a sixteen-year-old in the year 2000 who just got dumped at a diner, spent two months spreading vicious political gossip in the school hallway, and realized adulthood was a trap,” Miller added, “putting a 48-pixel image of that round-headed kid next to your screen name was the digital equivalent of carving an open wound into your desk with a compass.”</p>
-
+		
 		<p>According to surviving logs, the user profile for <i>iamananchorman</i> has remained unchanged since the week of the 2000 presidential election. The bio contains no contact information, listing only the user’s astrological sign, an ASCII art divider, and an eight-word lyric from a Radiohead B-side: <i>“I’m not living, I’m just killing time.”</i> The final recorded away message merely reads: <i>“~*went for a walk in the rain, don’t bother calling*~.”</i></p>
 
 		<p>Hendershot admitted that he occasionally considers deleting the screen name to tidy up his buddy list, but has never brought himself to right-click and hit “Remove.” “In a weird way, it feels disrespectful,” Hendershot said, quietly closing the AIM window and returning to a Microsoft Excel spreadsheet. “I mean, real people get older, stop talking to their childhood friends, and eventually die. But as long as that AOL server is plugged in somewhere, that poor bastard never has to grow up and find out how much worse it gets.”</p>
@@ -36610,9 +36960,9 @@ function computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidates
               const isMatch = (res.state_po && res.state_po.toUpperCase() === statePrefix) || fips.startsWith(statePrefix);
 
               if (isMatch) {
-                const rD = res.baseDem > 0 ? (res.curDem / res.baseDem) : 1;
-                const rR = res.baseRep > 0 ? (res.curRep / res.baseRep) : 1;
-                const rO = res.baseOth > 0 ? (res.curOth / res.baseOth) : 1;
+                const rD = res.baseDem > 0 ? clampVal(res.curDem / res.baseDem, 0.1, 4.0) : 1;
+                const rR = res.baseRep > 0 ? clampVal(res.curRep / res.baseRep, 0.1, 4.0) : 1;
+                const rO = res.baseOth > 0 ? clampVal(res.curOth / res.baseOth, 0.1, 4.0) : 1;
                 sumRD += rD; sumRR += rR; sumRO += rO;
                 count++;
               }
@@ -36670,32 +37020,17 @@ function computeCdMargins(table, fipsResults, demCandId, repCandId, tpCandidates
       pieceRep = res.curRep * weight;
       pieceOth = res.curOth * weight;
     } else if (pieceData && typeof pieceData === 'object' && pieceData._xw) {
-      const spatialWeight = pieceData.dem + pieceData.rep + pieceData.other;
-      if (spatialWeight > 0) {
-        const demShare = pieceData.dem / spatialWeight;
-        const repShare = pieceData.rep / spatialWeight;
-        const othShare = pieceData.other / spatialWeight;
+      const spatialWeight = (pieceData.dem || 0) + (pieceData.rep || 0) + (pieceData.other || 0);
+      const w = spatialWeight > 0 ? spatialWeight : 1.0;
 
-        const rD = res.baseDem > 0 ? (res.curDem / res.baseDem) : 1;
-        const rR = res.baseRep > 0 ? (res.curRep / res.baseRep) : 1;
-        const rO = res.baseOth > 0 ? (res.curOth / res.baseOth) : 1;
+      const demRef = Number(pieceData.dem) || 0;
+      const repRef = Number(pieceData.rep) || 0;
+      const demRatio = (demRef + repRef > 0) ? demRef / (demRef + repRef) : 0.5;
 
-        const countyTotal = res.curDem + res.curRep + res.curOth;
-        let scaledDem = demShare * rD;
-        let scaledRep = repShare * rR;
-        let scaledOth = othShare * rO;
-        let totalScaled = scaledDem + scaledRep + scaledOth;
-
-        if (totalScaled > 0) {
-          pieceDem = countyTotal * spatialWeight * (scaledDem / totalScaled);
-          pieceRep = countyTotal * spatialWeight * (scaledRep / totalScaled);
-          pieceOth = countyTotal * spatialWeight * (scaledOth / totalScaled);
-        } else {
-          pieceDem = countyTotal * spatialWeight * demShare;
-          pieceRep = countyTotal * spatialWeight * repShare;
-          pieceOth = countyTotal * spatialWeight * othShare;
-        }
-      }
+      const county2p = res.curDem + res.curRep;
+      pieceDem = county2p * w * demRatio;
+      pieceRep = county2p * w * (1 - demRatio);
+      pieceOth = res.curOth * w;
     } else {
       const { d, r, o } = parseVotes(pieceData);
       const hist = countyHistTotals[cleanF];
@@ -37326,10 +37661,18 @@ async function ensureFipsMultipliers(baseCurrentMap, fipsResults, tpCandidatesIn
     const pmRep = pmCounty.votes_rep || res.baseRep || 1;
     const pmOth = pmCounty.votes_other || res.baseOth || 1;
 
+    const st = res.state_po;
+    const stBaseOth = (stateBase[st] && stateBase[st].all > 0) ? (stateBase[st].other / stateBase[st].all) : 0.02;
+    let stTgtOth = 0;
+    tpCandidatesInGame.forEach(cid => { stTgtOth += ((targetStatePct[st] || {})[cid] || 0); });
+    const stateOthGrowth = stBaseOth > 0 ? (stTgtOth / stBaseOth) : 1.0;
+    const maxMo = Math.max(3.0, stateOthGrowth * 2.5);
+
+    const rawMO = pmOth > 0 ? (res.curOth / pmOth) : 1;
     _fipsMultipliers[fips] = {
-      mD: pmDem > 0 ? res.curDem / pmDem : 1,
-      mR: pmRep > 0 ? res.curRep / pmRep : 1,
-      mO: pmOth > 0 ? res.curOth / pmOth : 1,
+      mD: pmDem > 0 ? clampVal(res.curDem / pmDem, 0.1, 4.0) : 1,
+      mR: pmRep > 0 ? clampVal(res.curRep / pmRep, 0.1, 4.0) : 1,
+      mO: clampVal(rawMO, 0.05, maxMo),
       tpShares: res.tpShares || {}
     };
   }
@@ -37931,7 +38274,16 @@ async function loadAndDrawCountyMap(mode) {
 
           let tpAff = null;
           if (tpCandidatesInGame.length > 0) {
-            const w = tpCandidatesInGame.map(cid => Math.exp(TP_AFFINITY_SHARPNESS * tpField[cid][i]));
+            const w = tpCandidatesInGame.map(cid => {
+              const candTgt = ((targetStatePct[st] || {})[cid]) || 0.001;
+              let histWeight = candTgt;
+
+              if (c.tp && tpMapping[cid] !== undefined && c.tp[tpMapping[cid]] !== undefined) {
+                histWeight = Math.max(0.001, c.tp[tpMapping[cid]] / Math.max(1, c.votes_other || 1));
+              }
+
+              return histWeight * Math.exp(TP_AFFINITY_SHARPNESS * (tpField[cid] ? tpField[cid][i] : 0));
+            });
             const wsum = w.reduce((a, b) => a + b, 0) || 1;
             tpAff = {};
             tpCandidatesInGame.forEach((cid, k) => { tpAff[cid] = w[k] / wsum; });
@@ -37992,12 +38344,25 @@ async function loadAndDrawCountyMap(mode) {
           const newOdds = baseOdds * Math.exp(ODDS_GAIN * clampVal(countyShift, -1.2, 1.2));
           const dem2pNew = clampVal(newOdds / (1 + newOdds), 0.0005, 0.9995);
 
+          let tgtTpShare = 0;
+          tpCandidatesInGame.forEach(cid => {
+            tgtTpShare += (target[cid] || 0);
+          });
+
           let tpShare = 0;
-          if (tpCandidatesInGame.length > 0) {
+          if (tpCandidatesInGame.length > 0 && tgtTpShare > 0) {
             const baseStateOthShare = stBase.all > 0 ? stBase.other / stBase.all : 0;
-            const tgtTpShare = Math.max(0, 1 - tgtDem - tgtRep);
-            const ratio = baseStateOthShare > 0 ? tgtTpShare / baseStateOthShare : 1;
-            tpShare = clampVal(plan.baseOthShare * ratio * (1 + 0.35 * plan.noise), 0, 0.9);
+            const stateGrowth = baseStateOthShare > 0 ? (tgtTpShare / baseStateOthShare) : 1.0;
+
+            const ratio = clampVal(stateGrowth, 0.1, Math.min(4.0, Math.max(2.0, stateGrowth * 1.5)));
+
+            const countyBaseOth = plan.baseOthShare > 0 ? plan.baseOthShare : (baseStateOthShare || tgtTpShare);
+            const rawTpShare = countyBaseOth * ratio * (1 + 0.25 * plan.noise);
+
+            const maxAllowedTp = tgtTpShare > 0.25
+              ? 0.90
+              : Math.min(0.45, Math.max(tgtTpShare * 1.5, tgtTpShare * 2.2 + 0.02));
+            tpShare = clampVal(rawTpShare, 0, maxAllowedTp);
           }
 
           const competitiveness = clampVal(Math.abs(stateDelta2p) / 0.08, 0, 1);
@@ -38006,7 +38371,9 @@ async function loadAndDrawCountyMap(mode) {
             + 0.02 * plan.noise;
           total = Math.max(1, Math.round(plan.baseAll * turnoutAdj));
 
-          const twoPartyShare = 1 - tpShare;
+          const dynamicMinTwoParty = Math.max(0.08, 1 - (tgtTpShare * 1.4));
+          const twoPartyShare = Math.max(dynamicMinTwoParty, 1 - tpShare);
+
           countyResults = activeCandidates.map(candId => {
             if (candId === demCandId) {
               const pct = dem2pNew * twoPartyShare;
@@ -38074,8 +38441,22 @@ async function loadAndDrawCountyMap(mode) {
             if (have <= 0) return;
           }
 
-          const factor = want / have;
-          rows.forEach(r => r.results.forEach(cr => { if (cr.id === cid) cr.votes *= factor; }));
+          const isThirdParty = tpCandidatesInGame.includes(cid);
+          const factor = isThirdParty ? clampVal(want / have, 0.2, 2.5) : (want / have);
+
+          const targetShare = targetPcts[cid] || 0;
+          const maxCountyShare = targetShare > 0.25 ? 0.90 : Math.min(0.45, Math.max(targetShare * 2.2 + 0.02, 0.04));
+
+          rows.forEach(r => {
+            r.results.forEach(cr => {
+              if (cr.id === cid) {
+                cr.votes *= factor;
+                if (isThirdParty && r.total > 0) {
+                  cr.votes = Math.min(cr.votes, r.total * maxCountyShare);
+                }
+              }
+            });
+          });
         });
       });
 
@@ -38894,7 +39275,14 @@ async function loadAndDrawCountyMap(mode) {
 
         const dem = Math.round(baseDem * mD);
         const rep = Math.round(baseRep * mR);
-        const oth = Math.round(baseOth * mO);
+        const rawOth = Math.round(baseOth * mO);
+
+        const parentCounty = fipsResults[countyFips];
+        const parentTotal = parentCounty ? (parentCounty.curDem + parentCounty.curRep + parentCounty.curOth) : 0;
+        const countyOthRate = (parentCounty && parentTotal > 0) ? (parentCounty.curOth / parentTotal) : 0.03;
+
+        const maxPrecinctRate = Math.min(0.92, Math.max(0.10, countyOthRate * 2.5 + 0.04));
+        const oth = Math.min(rawOth, Math.round((dem + rep + rawOth) * maxPrecinctRate));
         const total = dem + rep + oth;
 
         const bgResults = [
@@ -40289,7 +40677,7 @@ async function loadAndDrawCountyMap(mode) {
                             ctx.fillText(`+${Math.abs(spread).toFixed(1)}% ${leaderName}`, x + (isLarge ? 10 : 6), y + 3);
                         }
                     }
-                }
+                } 
                 else if (mKey === 'swing') {
                     let zeroY = getY(0);
 
@@ -40313,7 +40701,7 @@ async function loadAndDrawCountyMap(mode) {
                             ctx.fillText(`${delta >= 0 ? '+' : ''}${delta.toFixed(1)}% Δ`, x + (isLarge ? 10 : 6), y + 3);
                         }
                     }
-                }
+                } 
                 else {
                     validCands.forEach(pk => {
                         let meta = candMeta[pk];
@@ -40440,7 +40828,7 @@ async function loadAndDrawCountyMap(mode) {
                         } else {
                             let pt = history[hoverIdx];
                             let evLabel = POLL.getEvLabel();
-
+                            
                             let html = `
                                 <div style="border-bottom:1px solid rgba(255,255,255,0.25); padding-bottom:4px; margin-bottom:6px;">
                                     <strong style="font-size:1.1em; color:#fff;">${pt.label}</strong>
