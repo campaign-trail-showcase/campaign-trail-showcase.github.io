@@ -116,11 +116,11 @@
     const modValue = document.getElementById("mod_select").value;
     if (modValue && modValue !== "other") {
       try {
-        const modRes = await fetch(`../static/mods/${modValue}_init.html`);
+        const modRes = await fetch(`../static/mods/${modValue}_init.js`);
         const modCode = await modRes.text();
         eval(modCode);
         try {
-          const modCharRes = await fetch(`../static/mods/${modValue}_CharacterCharacter2.html`);
+          const modCharRes = await fetch(`../static/mods/${modValue}_CharacterCharacter2.js`);
           const modCharCode = await modCharRes.text();
           eval(modCharCode);
         } catch { }
