@@ -456,7 +456,7 @@ async function ensureAchievementMetadataLoaded() {
             return;
           }
 
-          const res = await fetch(`../static/mods/${modName}_init.html`);
+          const res = await fetch(`../static/mods/${modName}_init.js`);
           if (!res.ok) return;
 
           const rawModText = await res.text();
