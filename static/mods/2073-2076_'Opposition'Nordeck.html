@@ -1877,7 +1877,7 @@ campaignTrail_temp.answers_json = [
         "pk": 35648,
         "fields": {
             "question": 35647,
-            "description": "Stewart has served admirably in defending the causes that matter most to Americans. Stewart's work in Maine has helped those most in need in the 1st District of Maine. His selection on the ticket shows that the Democratic Party is still willing to be there for all Americans."
+            "description": "Stewart has served admirably in defending the causes that matter most to Americans. Stewart has helped those in need in New York's 28th District. His selection on the ticket shows that the Democratic Party is still willing to be there for all Americans."
         }
     },
     {
