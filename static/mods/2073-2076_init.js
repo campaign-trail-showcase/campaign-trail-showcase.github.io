@@ -1460,7 +1460,8 @@ e.creditsPage = () => {
     <p><font color='#FFA500'>Bailey Lagopus</font></p>
     <br><h3>Playtesting</h3>
     <p><font color='#b3ff00'>Cod Author</font> (Hired on 9-30-26)</p><br>
-    >p><font color='#ffbf00'>StrawberryMaster</font> (Hired on 10-20-26 for final blind playtesting before release)</p><br>
+    <p><font color='#ffbf00'>StrawberryMaster</font> (Hired on 10-20-26 for final blind playtesting before release)</p><br>
+	<p><font color='#2ecc71'>Max_6711</font> (Caught a discrepancy in the writing for one of Neville's answers related to choosing on 11-7-26 by DMing me on Discord)</p><br>
     <p>None at the Moment (From the start of the mod to 9-30-26)</p><br><br>
  <h3>Coding Bits That I Pillaged</h3>
 <p>The original idea of a Pre-Great-War Fallout - 2076: The End (the base mod)</p>
@@ -1477,7 +1478,7 @@ e.creditsPage = () => {
 <p>Candidate Switching Functions - 2008 ICARUS</p>
 <p>Music Player from The Apple Trail on <font color='#ffbf00'>StrawberryMaster's</font> <font color='#fcc7c7'>Womble</font></p>
 <p>RNG style coding - 2008 ICARUS</p>
-<p>Styling for the Map_Container - All the Way</p>
+<p>Styling for the Map_Container (and also a GIF for the tooltip of 'all the way') - All the Way</p>
 <p>Mid-Game Character Switching - All the Way</p>
 <p>Knowhow on coloring the Background - All the Way</p>
 <p>Candidate Issue and State Multiplier Shifting Functions - All the Way</p>
@@ -1499,7 +1500,7 @@ e.creditsPage = () => {
 <p>Code to Modify the Radio Buttons for Questions - 2021: DE</p>
 <p>Tooltip System - Found on Internet Archive through Nina's Website</p>
 <p>{{opLast}} function - 1912: The Men in the Arena</p>
-<p>Some inspiration for the intro with regards to the /"" thingy - UBCM</p>
+<p>Some inspiration for the intro with regards to the "" thingy - UBCM</p>
 <p>Modifying the Game Buttons - From the old #mod-help channel on the orginal The Campaign Trail discord (r.i.p.)</p>
 <p>Dynamic Election Toggler (but modified by AI and by <font color='#ffbf00'>StrawberryMaster's</font>) - 2028 - An Old Cycle</p>
 <p>And the many, many other mods that have helped contribute to this mod!</p>
