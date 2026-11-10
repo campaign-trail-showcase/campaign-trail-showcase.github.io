@@ -34761,7 +34761,21 @@ campaignTrail_temp.candidate_image_url = "https://i.imgur.com/bir35b3.png";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/S7rUJqK.png";
 campaignTrail_temp.candidate_last_name = "";
 campaignTrail_temp.running_mate_last_name = "TEST";
-window.running_mate_last_name = campaignTrail_temp.running_mate_last_name;
+
+// so running mate names can work for real
+const selectedVpId = (typeof e !== "undefined" && e.running_mate_id) 
+  ? e.running_mate_id 
+  : campaignTrail_temp.running_mate_id;
+
+const vp = (campaignTrail_temp.candidate_json || (typeof e !== "undefined" && e.candidate_json))
+  ?.find(c => c.pk == selectedVpId);
+
+if (vp && vp.fields) {
+  window.running_mate_last_name = vp.fields.last_name;
+  if (typeof e !== "undefined") {
+    e.running_mate_last_name = vp.fields.last_name;
+  }
+}
 
 // volatility functions
 function volatilizeMultiplier_Conservative(baseValue, volatilityFactor = 0.25) {
