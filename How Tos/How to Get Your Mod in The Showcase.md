@@ -14,19 +14,19 @@ Your files should use the standard naming format for The Campaign Trail. For exa
 
 ```text
 static/mods/
-├── 2020 - Example_init.html
-└── 2020 - Example_FooBar.html
+├── 2020 - Example_init.js
+└── 2020 - Example_FooBar.js
 ```
 
-The `*_init.html` file, referred to as **Code 1**, contains the basic information for your scenario, including its name. The candidate file, or **Code 2**, contains the actual game content.
+The `*_init.js` file, referred to as **Code 1**, contains the basic information for your scenario, including its name. The candidate file, or **Code 2**, contains the actual game content.
 
 The filenames are important, so make sure they match your mod's name and candidates. For example, if your mod is called **2020 - Example**, your Code 1 should be named:
 
-`2020 - Example_init.html`
+`2020 - Example_init.js`
 
 And if the candidate and running mate have the last names **Foo** and **Bar**, your Code 2 should be:
 
-`2020 - Example_FooBar.html`
+`2020 - Example_FooBar.js`
 
 ---
 
@@ -49,7 +49,7 @@ Scroll down to the bottom of the list and add your mod's entry right before the 
 ```
 
 #### Fields breakdown:
-* **`value`**: The base file name of your mod (without `_init.html`).
+* **`value`**: The base file name of your mod (without `_init.js`).
 * **`text`**: The display title shown on the mod card in the gallery.
 * **`mode`**: Set this to `"new"` for fresh releases so it appears in the *New Releases* tab.
 * **`tags`**: Space-separated category tags (see available tags below).

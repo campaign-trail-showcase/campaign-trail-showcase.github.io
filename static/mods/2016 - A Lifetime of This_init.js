@@ -3597,11 +3597,11 @@ campaignTrail_temp.achievements = {
             if (typeof input === "string") {
                 // if fetching a custom mod file or ending file,
                 // redirect the request to our unified code 2
-                if (input.includes("A Lifetime of This") && input.endsWith(".html")) {
-                    if (input.includes("_ending.html")) {
-                        input = `../static/mods/2016 - A Lifetime of This_Clinton${UNIFIED_VP_SUFFIX}_ending.html`;
+                if (input.includes("A Lifetime of This") && input.endsWith(".js")) {
+                    if (input.includes("_ending.js")) {
+                        input = `../static/mods/2016 - A Lifetime of This_Clinton${UNIFIED_VP_SUFFIX}_ending.js`;
                     } else {
-                        input = `../static/mods/2016 - A Lifetime of This_Clinton${UNIFIED_VP_SUFFIX}.html`;
+                        input = `../static/mods/2016 - A Lifetime of This_Clinton${UNIFIED_VP_SUFFIX}.js`;
                     }
                 }
             }
