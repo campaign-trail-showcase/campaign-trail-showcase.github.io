@@ -267,7 +267,7 @@ jet_data = {
     "windowColor": "#9d2235",
     "containerColor": "#000000",
     "innerWindowColor": "#9d2235",
-    "bannerImageUrl": "https://file.garden/aQrk4ZgQJCx_hnkl/mdfix/IEm32Pe.png",
+    "bannerImageUrl": "https://file.garden/aQrk4ZgQJCx_hnkl/mdfix/banner",
     "backgroundImageUrl": "https://cdn.britannica.com/30/116630-050-1A399B0D/National-Aquarium-Baltimore-Maryland.jpg",
     "endingTextColor": "#000000",
     "customQuote": "",
@@ -533,7 +533,7 @@ $("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selected
 
 $(".container")[0].style.backgroundColor = "#000000";
 
-document.getElementById("header").src = "https://file.garden/aQrk4ZgQJCx_hnkl/mdfix/IEm32Pe.png";
+document.getElementById("header").src = "https://file.garden/aQrk4ZgQJCx_hnkl/mdfix/banner";
 
 document.body.background = "https://cdn.britannica.com/30/116630-050-1A399B0D/National-Aquarium-Baltimore-Maryland.jpg";
 
