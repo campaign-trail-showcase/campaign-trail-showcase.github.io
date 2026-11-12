@@ -11179,9 +11179,7 @@ campaignTrail_temp.candidate_image_url = "https://i.imgur.com/vsBwuzw.png";
 campaignTrail_temp.running_mate_image_url = "https://i.imgur.com/SU6c3BW.png";
 campaignTrail_temp.candidate_last_name = "Roy";
 campaignTrail_temp.running_mate_last_name = "For Senate!";
-if (unlockedAch["First Time in 40 Years!"] && unlockedAch["Change is Possible"]) {
-    ctsAchievement("Utter Devastation");
-}
+
 let flip = false;
 let cloud = false;
 campaignTrail_temp.multiple_endings = true;
@@ -11205,7 +11203,11 @@ endingPicker = (out, totv, aa, quickstats) => {
         ctsAchievement("We're Going Straight To Miami, Kansas?");
     }
     if (aa[0].candidate === 91 && quickstats[1] >= 55) {
+if (unlockedAch["First Time in 40 Years!"] && unlockedAch["Change is Possible"]) {
+    ctsAchievement("Utter Devastation");
+}
 ctsAchievement("First Time in 40 Years!");
+
         setImage("https://i.imgur.com/Htz3mFl.png");
         return `<font color='white'>
             <h3>'Oh my god!'</h3><br> 
@@ -11221,6 +11223,9 @@ ctsAchievement("First Time in 40 Years!");
     if (aa[0].candidate === 91) {
 ctsAchievement("First Time in 40 Years!");
         setImage("https://i.imgur.com/8Z8JSZ5.png");
+if (unlockedAch["First Time in 40 Years!"] && unlockedAch["Change is Possible"]) {
+    ctsAchievement("Utter Devastation");
+}
         return `<font color='white'>
             <h3>'For The First Time in 40 years!'</h3><br> 
             My goodness, Bill, you have done the impossible. You have defeated Bob Dole 
@@ -11313,4 +11318,3 @@ campaignTrail_temp.jet_data = [{
     "ending_data": {}
 }
 ]
-
