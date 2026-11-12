@@ -42,6 +42,29 @@ campaignTrail_temp.election_json = [
     }
 ]
 
+campaignTrail_temp.achievements = {
+    "Ball and Chain": {
+        "image": "https://i.imgur.com/YEiidWT.png",
+        "description": "Win with Sparkman as your running mate"
+    },
+    "Who's At Fault?": {
+        "image": "https://i.imgur.com/W7s7Auw.png",
+        "description": "Get under 80 electoral votes with Sparkman as your running mate"
+    },
+    "Mean Gene": {
+        "image": "https://i.imgur.com/SgyEsbT.png",
+        "description": "As Adlai Stevenson, have McCarthy win electoral votes"
+    },
+    "Todays Subject—Slavery": {
+        "image": "https://i.imgur.com/VSgugrq.png",
+        "description": "Win 350+ electoral votes with Sparkman as your running mate"
+    },
+    "Whole House Mad": {
+        "image": "https://i.imgur.com/lSxqqmP.png",
+        "description": "Lose every state with Sparkman by your side"
+    }
+}
+
 campaignTrail_temp.temp_election_list = [
     {
         "id": 91,
@@ -151,7 +174,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "This guy wins!",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
-            "description_as_running_mate": "<b>NOT YET PLAYABLE</b><p> It seems as though the dream of the old south will never lose its grasp on the Democratic party. Under threat of another walkout, similar to the one eight years ago, Sparkman has waltzed his way onto the ticket. May God help us this election.</p><p>It’s not as though Sparkman is completely useless as a running mate, it’s who drives away that will undoubtedly drag down our ticket to hell and back. The south will gleefully vote for us this November, but I doubt with him around, anyone else will. </p>",
+            "description_as_running_mate": "<p> It seems as though the dream of the old south will never lose its grasp on the Democratic party. Under threat of another walkout, similar to the one eight years ago, Sparkman has waltzed his way onto the ticket. May God help us this election.</p><p>It’s not as though Sparkman is completely useless as a running mate, it’s who drives away that will undoubtedly drag down our ticket to hell and back. The south will gleefully vote for us this November, but I doubt with him around, anyone else will. </p>",
             "candidate_score": 1,
             "running_mate": true
         }
@@ -186,15 +209,15 @@ campaignTrail_temp.candidate_json = [
             "first_name": "Eugene",
             "last_name": "McCarthy",
             "election": 91,
-            "party": "Democrat",
+            "party": "Independent",
             "state": "Minnesota",
             "priority": 1,
-            "description": "<p>Put description here</p>",
+            "description": "<b>COMING SOON</b><p> The party has become a shell of its former self. It all started with Johnson and Vietnam, and now with Stevenson being forced to make Sparkman his second-in-command. Eugene McCarthy is not one to stand by and let it all fall apart by Southern bigots.</p><p>McCarthy’s chances are slim to none, but that never stopped him before, and it’s not stopping him now. The Democratic Party needs to be woken up, given a good smack in the face, and a look in the mirror; Eugene’s here to give it to 'em-and so much more.</p>",
             "color_hex": "#00ff91",
             "secondary_color_hex": null,
-            "is_active": 0,
+            "is_active": 1,
             "image_url": "https://i.imgur.com/eN7cZKD_d.png?maxwidth=520&shape=thumb&fidelity=high",
-            "electoral_victory_message": "<h1>What? How Did This Happen??</h1><p>Somehow, Eugene McCarthy will be the next president of the United States. With the backing of neither major party, McCarthy's agenda is most likely to be stalled, possibly being dead on day one.</p><p> I'm sorry to tell you Adlai, but you most likely will never gain another shot at the presidency ever again.",
+            "electoral_victory_message": "<h>I Don't Believe It, You Won! </h>",
             "electoral_loss_message": "This guy loses!",
             "no_electoral_majority_message": "We all win?",
             "description_as_running_mate": null,
@@ -224,6 +247,52 @@ campaignTrail_temp.candidate_json = [
             "candidate_score": 1,
             "running_mate": false
         }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50003,
+        "fields": {
+            "first_name": "Mike",
+            "last_name": "Gravel",
+            "election": 91,
+            "party": "Democrat",
+            "state": "Alaska",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#00ff91",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/sJpMq5T.png",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>There is no one who makes more sense to be your running mate than Mike Gravel. Mike was initially hesitant to join the ticket, but after Sparkman's nomination, he had no more doubts. Two peas in a pod, some may say; you and Mike have both been viewed as some of the most anti-war senators in the modern era, and both have liberal views on most issues.\n\n​\n\n<p>Mike may not broaden your coalition in any way, but there's no doubt that with his presence, the base will be fired up and ready to vote.",
+            "candidate_score": 1,
+            "running_mate": true
+        }
+    },
+    {
+        "model": "campaign_trail.candidate",
+        "pk": 50004,
+        "fields": {
+            "first_name": "Robert",
+            "last_name": "Drinan",
+            "election": 91,
+            "party": "Democrat",
+            "state": "Massachusetts",
+            "priority": 1,
+            "description": "<p>Put description here</p>",
+            "color_hex": "#00ff91",
+            "secondary_color_hex": null,
+            "is_active": 0,
+            "image_url": "https://i.imgur.com/w5yGXCK_d.png?maxwidth=520&shape=thumb&fidelity=high",
+            "electoral_victory_message": "This guy wins!",
+            "electoral_loss_message": "This guy loses!",
+            "no_electoral_majority_message": "We all win?",
+            "description_as_running_mate": "<p>Robert Drinan is a representative from Massachusetts's fourth district who ran on an anti-war platform in his first run for the House, just barely beating decades-long-serving congressman Philip Joseph Philbin.\n\n​\n\n<p>The biggest strength Drinan has is where he’s from. Massachusetts is set to be one of our best states, and having Drinan on the ticket would certainly help us bring it home. Although he wouldn't really help anywhere else, since most people outside of Massachusetts have heard very little of him, but isn't that all we need from him?",
+            "candidate_score": 1,
+            "running_mate": true
+        }
     }
 ]
 
@@ -246,10 +315,26 @@ campaignTrail_temp.running_mate_json = [
     },
     {
         "model": "campaign_trail.running_mate",
-        "pk": 108376,
+        "pk": 148752,
+        "fields": {
+            "candidate": 93,
+            "running_mate": 50003
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 113641,
         "fields": {
             "candidate": 91,
             "running_mate": 50000
+        }
+    },
+    {
+        "model": "campaign_trail.running_mate",
+        "pk": 136530,
+        "fields": {
+            "candidate": 93,
+            "running_mate": 50004
         }
     }
 ]
