@@ -4,18 +4,57 @@ campaignTrail_temp.election_json = [
         "pk": 5,
         "fields": {
             "year": 1896,
-            "summary": "<br><br>As incumbent President William Jennings Bryan seeks re-election, the Republicans rally behind Wisconsin Senator John Spooner in an attempt to retake the White House. <br><br>Bryan’s first term brought a mix of progressive achievements, including a 20:1 silver rate, a reduced tariff, and the regulation of railroads. His administration also secured numerous military successes abroad. With a vastly improved economy, Bryan starts with a strong foundation but faces skepticism from pro-business conservatives.</div>",
+            "summary": "<p>As incumbent President William Jennings Bryan seeks re-election, the Republicans rally behind Wisconsin Senator John Spooner in an attempt to retake the White House.</p><p>Bryan’s first term brought a mix of progressive achievements, including a 20:1 silver rate, a reduced tariff, and the regulation of railroads. His administration also secured numerous military successes abroad. With a vastly improved economy, Bryan starts with a strong foundation but faces skepticism from pro-business conservatives.</p>",
             "image_url": "https://pressbooks.pub/app/uploads/sites/2549/2019/02/WJB-Election-1896-Rocky-Mountain-News-Aug-15.jpg",
             "winning_electoral_vote_number": 224,
             "advisor_url": "https://i.imgur.com/Nql4UgM.png",
-            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">General Resources</h4>  <a href=\"http://www.uselectionatlas.org/RESULTS/national.php?f=0&year=1896\" target=\"_blank\">Final 1896 Results</a> <br> <a href=\"http://projects.vassar.edu/1896/1896home.html\" target=\"_blank\">1896 Election -- Overview and Political Cartoons</a> <br>  <h4>By the Candidates</h4>  William Jennings Bryan - <a href=\"http://books.google.com/books/about/The_first_battle.html?id=9k4TAAAAYAAJ\" target=\"_blank\">The First Battle: A story of the campaign of 1896</a> <br>  William Jennings Bryan - <a href=\"http://www.youtube.com/watch?v=Ydrq2-j92cU\" target=\"_blank\">\"Cross of Gold\" speech</a> <br>  William McKinley - <a href=\"http://www.youtube.com/watch?v=m6ZUneyU7Vo\" target=\"_blank\">\"Front Porch\" speech</a> <br>  <h4>The Panic of 1893</h4> <a href=\"http://www.youtube.com/watch?v=Qu_b6N-G1Os\" target=\"_blank\">The Panic of 1893 with Lawrence Reed</a> (video) <br> <a href=\"http://eh.net/encyclopedia/article/Whitten.panic.1893\" target=\"_blank\">The Depression of 1893</a>  <h4>Misceallany</h4> <a href=\"http://www.oyez.org/cases/1851-1900/1895/1895_210/\" target=\"_blank\">Plessy v. Ferguson</a> <br> <a href=\"http://www.stfrancis.edu/content/ba/ghkickul/stuwebs/btopics/works/PullmanStrike.htm\" target=\"_blank\">Pullman Strike of 1894</a> <br> <a href=\"http://en.wikipedia.org/wiki/Wilson%E2%80%93Gorman_Tariff_Act\" target=\"_blank\">Wilson-Gorman Tariff</a> <br> <a href=\"http://prosperityuk.com/2001/01/a-wonderful-wizard-of-oz-a-monetary-reform-parable/\" target=\"_blank\">The Wonderful Wizard of Oz - A Monetary Reform Parable</a>",
+            "recommended_reading": "<h4 style=\"margin-top: 0.5em;\">General Resources</h4>  <a href=\"http://www.uselectionatlas.org/RESULTS/national.php?f=0&year=1896\" target=\"_blank\">Final 1896 Results</a> <br> <a href=\"http://projects.vassar.edu/1896/1896home.html\" target=\"_blank\">1896 Election -- Overview and Political Cartoons</a> <br>  <h4>By the Candidates</h4>  William Jennings Bryan - <a href=\"http://books.google.com/books/about/The_first_battle.html?id=9k4TAAAAYAAJ\" target=\"_blank\">The First Battle: A story of the campaign of 1896</a> <br>  William Jennings Bryan - <a href=\" target=\"_blank\">\"Cross of Gold\" speech</a> <br>  William McKinley - <a href=\" target=\"_blank\">\"Front Porch\" speech</a> <br>  <h4>The Panic of 1893</h4> <a href=\" target=\"_blank\">The Panic of 1893 with Lawrence Reed</a> (video) <br> <a href=\"http://eh.net/encyclopedia/article/Whitten.panic.1893\" target=\"_blank\">The Depression of 1893</a>  <h4>Miscellany</h4> <a href=\"http://www.oyez.org/cases/1851-1900/1895/1895_210/\" target=\"_blank\">Plessy v. Ferguson</a> <br> <a href=\"http://www.stfrancis.edu/content/ba/ghkickul/stuwebs/btopics/works/PullmanStrike.htm\" target=\"_blank\">Pullman Strike of 1894</a> <br> <a href=\"http://en.wikipedia.org/wiki/Wilson%E2%80%93Gorman_Tariff_Act\" target=\"_blank\">Wilson-Gorman Tariff</a> <br> <a href=\"http://prosperityuk.com/2001/01/a-wonderful-wizard-of-oz-a-monetary-reform-parable/\" target=\"_blank\">The Wonderful Wizard of Oz - A Monetary Reform Parable</a>",
             "has_visits": 0,
             "no_electoral_majority_image": "https://www.jetsimon.com/public/static/images/1896-no-majority.jpg",
             "creator": "Dan Bryan",
-            "display_year": "1900B"
+            "display_year": "1900B",
+            "recommended_reading_enabled": true
         }
     }
-]
+];
+
+campaignTrail_temp.temp_election_list = [
+    {
+        "id": 5,
+        "year": 1896,
+        "is_premium": 0,
+        "display_year": "1900B"
+    }
+];
+
+RecReading = true;
+
+campaignTrail_temp.credits = "u/GlobalMuffin, DecstarG for the Music Player";
+
+campaignTrail_temp.global_parameter_json = [
+    {
+        "model": "campaign_trail.global_parameter",
+        "pk": 1,
+        "fields": {
+            "vote_variable": 1.125,
+            "max_swing": 0.12,
+            "start_point": 0.94,
+            "candidate_issue_weight": 10,
+            "running_mate_issue_weight": 3,
+            "issue_stance_1_max": -0.71,
+            "issue_stance_2_max": -0.3,
+            "issue_stance_3_max": -0.125,
+            "issue_stance_4_max": 0.125,
+            "issue_stance_5_max": 0.3,
+            "issue_stance_6_max": 0.71,
+            "global_variance": 0.01,
+            "state_variance": 0.005,
+            "question_count": 25,
+            "default_map_color_hex": "#C9C9C9",
+            "no_state_map_color_hex": "#999999"
+        }
+    }
+];
 
 campaignTrail_temp.candidate_json = [
     {
@@ -28,7 +67,7 @@ campaignTrail_temp.candidate_json = [
             "party": "Democrat",
             "state": "Nebraska",
             "priority": 1,
-            "description": "President Bryan is a populist Democrat known for his oratory and tireless campaigning. After securing bimetallism and implementing significant labor reforms, he campaigns on his record of delivering economic recovery and curbing corporate excess. Bryan appeals to farmers, workers, and progressives with his promises of continued regulation of powerful industries and his anti-imperialist message.",
+            "description": "<p>President Bryan is a populist Democrat known for his oratory and tireless campaigning. After securing bimetallism and implementing significant labor reforms, he campaigns on his record of delivering economic recovery and curbing corporate excess. Bryan appeals to farmers, workers, and progressives with his promises of continued regulation of powerful industries and his anti-imperialist message.</p>",
             "color_hex": "#0000ff",
             "secondary_color_hex": "#FFA0A0",
             "is_active": 1,
@@ -51,11 +90,11 @@ campaignTrail_temp.candidate_json = [
             "party": "Republican",
             "state": "Wisconsin",
             "priority": 2,
-            "description": "NOT CURRENTLY PLAYABLE, HOPEFULLY WILL BE ADDED SOON After a contentious presidential nomination, the Republicans have managed to quickly narrow the vice presidential candidates down.<br><br>Representative Dolliver is a member of the center-left wing of the Republican party.  Seen as acceptable from all wings of the party, Dolliver can appeal to progressives and citizens of the crucial swing state of Iowa.  Despite this, some at the Republican Convention have complained that he can be too progressive and does not provide geographical balance to the ticket.</div></div></div></div></div></div></div></div></div>",
+            "description": "<p><b>NOT CURRENTLY PLAYABLE; HOPEFULLY WILL BE ADDED SOON</b></p><p>After a contentious presidential nomination, the Republicans have managed to quickly narrow the vice presidential candidates down.<br><br>Representative Dolliver is a member of the center-left wing of the Republican Party. Seen as acceptable to all wings of the party, Dolliver can appeal to progressives and citizens of the crucial swing state of Iowa. Despite this, some at the Republican Convention have complained that he can be too progressive and does not provide geographical balance to the ticket.</p>",
             "color_hex": "#bf1d29",
             "secondary_color_hex": "#90C0FF",
             "is_active": 1,
-            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Portrait_of_John_Coit_Spooner.jpg/800px-Portrait_of_John_Coit_Spooner.jpg",
+            "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Portrait_of_John_Coit_Spooner.jpg/500px-Portrait_of_John_Coit_Spooner.jpg",
             "electoral_victory_message": "<h3>A New Era of Leadership</h3><p>John Spooner has emerged victorious, capturing the trust of a nation seeking stability and balance. His moderate approach to reform and dedication to constitutional principles resonated with voters eager for a steady hand. Spooner promises to lead with integrity, addressing the pressing issues of the day while uniting a country still grappling with economic and social challenges. A new chapter begins under his presidency.</p>",
             "electoral_loss_message": "<h3>A Campaign Cut Short</h3><p>John Spooner’s campaign for the presidency has ended in defeat, as voters ultimately chose William Jennings Bryan’s populist vision. Despite his loss, Spooner remains a respected statesman and a symbol of Republican moderation. He pledges to continue serving the nation, advocating for responsible governance and preserving constitutional values. The fight for the Republican Party’s future is far from over.</p>",
             "no_electoral_majority_message": "<h3>Uncertainty Looms</h3><p>In a stunning turn of events, the Electoral College has failed to produce a clear winner, thrusting the election into the hands of Congress. John Spooner, though a strong contender, was unable to secure the decisive support needed to claim victory. With the presidency hanging in the balance, Spooner appeals to lawmakers to prioritize unity and the national interest in their deliberations. The nation awaits the outcome with bated breath.</p>",
@@ -128,7 +167,7 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "After a contentious presidential nomination, the Republicans have managed to quickly narrow the vice presidential candidates down.<br><br>Representative Dolliver is a member of the center-left wing of the Republican party.  Seen as acceptable from all wings of the party, Dolliver can appeal to progressives and citizens of the crucial swing state of Iowa.  Despite this, some at the Republican Convention have complained that he can be too progressive and does not provide geographical balance to the ticket.</div></div></div></div></div></div></div></div></div>",
+            "description_as_running_mate": "<p>After a contentious presidential nomination, the Republicans have managed to quickly narrow the vice presidential candidates down.<br><br>Representative Dolliver is a member of the center-left wing of the Republican Party. Seen as acceptable to all wings of the party, Dolliver can appeal to progressives and citizens of the crucial swing state of Iowa.  Despite this, some at the Republican Convention have complained that he can be too progressive and does not provide geographical balance to the ticket.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -147,11 +186,11 @@ campaignTrail_temp.candidate_json = [
             "color_hex": "#0000FF",
             "secondary_color_hex": "#90C0FF",
             "is_active": 0,
-            "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Adlai_Stevenson_I_by_Saroney_c1892-crop.jpg/156px-Adlai_Stevenson_I_by_Saroney_c1892-crop.jpg",
+            "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Adlai_Stevenson_I_by_Saroney_c1892-crop.jpg",
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "With the incumbent Vice President, Arthur Sewell, stepping down due to health considerations, the Democratic Convention is now in a heated battle between the Bourbon and Populist factions.  <br><br>Despite not being a Bourbon Democrat himself, Adlai Stevenson has become the face of the Bourbon faction for the Vice Presidential nomination.  Seen as non-partisan and experienced, the former Vice President under President Cleveland could be vital to bring Midwestern moderates and pro-Gold Democrats back to the fold.  Unfortunately, Stevenson is also tied to President Cleveland and his handling of the economic crisis of the early 1890s.<br></div></div></div></div></div></div></div></div></div></div>",
+            "description_as_running_mate": "<p>With the incumbent Vice President, Arthur Sewall, stepping down due to health considerations, the Democratic Convention is now in a heated battle between the Bourbon and Populist factions.</p><p>Despite not being a Bourbon Democrat himself, Adlai Stevenson has become the face of the Bourbon faction for the vice presidential nomination. Seen as non-partisan and experienced, the former Vice President under President Cleveland could be vital to bringing Midwestern moderates and pro-Gold Democrats back to the fold.  Unfortunately, Stevenson is also tied to President Cleveland and his handling of the economic crisis of the early 1890s.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
@@ -174,12 +213,12 @@ campaignTrail_temp.candidate_json = [
             "electoral_victory_message": "n/a",
             "electoral_loss_message": "n/a",
             "no_electoral_majority_message": "n/a",
-            "description_as_running_mate": "With the incumbent Vice President, Arthur Sewell, stepping down due to health considerations, the Democratic Convention is now in a heated battle between the Bourbon and Populist factions.<br><br>Put forward as a progressive reformer, Representative Towne of Minnesota has become the leading vice presidential candidate from the Populist faction for the Vice Presidential nomination.  While increasing turnout from the Populists and Silver Republican, nominating Towne would leave conservatives across the Democratic Party wanting.</div></div></div></div></div></div></div></div></div></div>",
+            "description_as_running_mate": "<p>With the incumbent Vice President, Arthur Sewall, stepping down due to health considerations, the Democratic Convention is now in a heated battle between the Bourbon and Populist factions.</p><p>Put forward as a progressive reformer, Representative Towne of Minnesota has become the leading vice presidential candidate from the Populist faction for the vice presidential nomination.  While increasing turnout from the Populists and Silver Republicans, nominating Towne would leave conservatives across the Democratic Party wanting.</p>",
             "candidate_score": 0,
             "running_mate": true
         }
     }
-]
+];
 
 campaignTrail_temp.running_mate_json = [
     {
@@ -198,34 +237,7 @@ campaignTrail_temp.running_mate_json = [
             "running_mate": 1004
         }
     }
-]
-
-campaignTrail_temp.credits = "u/GlobalMuffin, DecstarG for the Music Player"
-
-campaignTrail_temp.global_parameter_json = [
-    {
-        "model": "campaign_trail.global_parameter",
-        "pk": 1,
-        "fields": {
-            "vote_variable": 1.125,
-            "max_swing": 0.12,
-            "start_point": 0.94,
-            "candidate_issue_weight": 10,
-            "running_mate_issue_weight": 3,
-            "issue_stance_1_max": -0.71,
-            "issue_stance_2_max": -0.3,
-            "issue_stance_3_max": -0.125,
-            "issue_stance_4_max": 0.125,
-            "issue_stance_5_max": 0.3,
-            "issue_stance_6_max": 0.71,
-            "global_variance": 0.01,
-            "state_variance": 0.005,
-            "question_count": 25,
-            "default_map_color_hex": "#C9C9C9",
-            "no_state_map_color_hex": "#999999"
-        }
-    }
-]
+];
 
 campaignTrail_temp.opponents_default_json = [
     {
@@ -237,7 +249,7 @@ campaignTrail_temp.opponents_default_json = [
             2622
         ]
     }
-]
+];
 
 campaignTrail_temp.opponents_weighted_json = [
     {
@@ -249,47 +261,99 @@ campaignTrail_temp.opponents_weighted_json = [
             2622
         ]
     }
-]
+];
 
-campaignTrail_temp.temp_election_list = [
-    {
-        "id": 5,
-        "year": 1896,
-        "is_premium": 0,
-        "display_year": "1900B"
-    }
-]
+campaignTrail_temp.modBoxTheme = {
+    "header_color": "#1c2833",
+    "header_text_color": "#ffffff",
+    "header_text_shadow": "1px 1px 2px rgba(0, 0, 0, 0.7)",
+    "description_background_color": "#f8f8f8",
+    "description_text_color": "#000000",
+    "main_color": "#334756",
+    "secondary_color": "#99b898",
+    "secondary_hover_color": "#85a087",
+    "scrollbar_color": "#99b898 #334756",
+    "scrollbar_width": "auto",
+    "image_border": "4px solid #ffffff",
+    "ui_text_color": "#111827"
+};
+
 
 jet_data = {
     "headerColor": "#1c2833",
+    "headerTextColor": "#ffffff",
     "windowColor": "#99b898",
     "containerColor": "#334756",
     "innerWindowColor": "#99b898",
+    "innerWindowTextColor": "#000000",
+    "descriptionWindowColor": "#f8f8f8",
+    "descriptionWindowTextColor": "#000000",
+    "startButtonColor": "#ffa0a0",
     "bannerImageUrl": "https://assets.editorial.aetnd.com/uploads/2009/12/william-jennings-bryan-democratic-presidential.jpg?width=768",
     "backgroundImageUrl": "https://i.imgur.com/h3aZJ54.jpeg",
-    "endingTextColor": "#000000",
+    "gameTitle": "1900B: Bryan's Reelection Campaign",
     "customQuote": "n/a",
-    "gameTitle": "1900B: Bryan's Reelection Campaign"
-}
+    "quoteTextColor": "#ffffff",
+    "endingTextColor": "#000000"
+};
 
 //#startcode
+function applyTheme(theme) {
+    const gameHeader = document.querySelector(".game_header");
+    if (gameHeader && theme.coloring_title) {
+        gameHeader.style.backgroundColor = theme.coloring_title;
+    }
 
+    const gameWindow = document.getElementById("game_window");
+    if (gameWindow && theme.coloring_window) {
+        gameWindow.style.backgroundColor = theme.coloring_window;
+    }
 
-nct_stuff.themes[nct_stuff.selectedTheme].coloring_title = "#1c2833";
+    const container = document.querySelector(".container");
+    if (container && theme.coloring_container) {
+        container.style.backgroundColor = theme.coloring_container;
+    }
 
-nct_stuff.themes[nct_stuff.selectedTheme].coloring_window = "#99b898";
+    const headerImg = document.getElementById("header");
+    if (headerImg && theme.header_image) {
+        headerImg.src = theme.header_image;
+    }
 
-document.getElementsByClassName("game_header")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_title;
+    if (theme.body_background) {
+        document.body.style.backgroundImage = `url("${theme.body_background}")`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundAttachment = "fixed";
+    }
 
-$("#game_window")[0].style.backgroundColor = nct_stuff.themes[nct_stuff.selectedTheme].coloring_window;
+    const style = document.createElement("style");
+    style.textContent = `
+      #results_container { color: #000000; }
+      #wittyquote { color: #ffffff; }
+      .game_header h2 { color: #ffffff; }
+      .inner_window_w_desc { background-color: #99b898 !important; color: #000000; }
+      .inner_window_front, .person_description_window, .election_description_window, .description_window_small { background-color: #f8f8f8 !important; color: #000000; }
+      .campaign_trail_start_emphasis { background-color: #ffa0a0 !important; }
+	  
+	  .person_image img {
+        object-fit: cover;
+		object-position: center top;
+      }
+    `;
+    document.head.appendChild(style);
+}
 
-$(".container")[0].style.backgroundColor = "#334756";
+corrr = "\n              <h2>The Campaign Trail</h2>\n            ";
 
-document.getElementById("header").src = "https://assets.editorial.aetnd.com/uploads/2009/12/william-jennings-bryan-democratic-presidential.jpg?width=768";
+const theme = nct_stuff.themes[nct_stuff.selectedTheme];
 
-document.body.background = "https://i.imgur.com/h3aZJ54.jpeg";
+// define / override theme values
+theme.coloring_title     = "#1c2833";
+theme.coloring_window    = "#99b898";
+theme.coloring_container = "#334756";
+theme.header_image = "https://assets.editorial.aetnd.com/uploads/2009/12/william-jennings-bryan-democratic-presidential.jpg?width=768";
+theme.body_background = "https://i.imgur.com/h3aZJ54.jpeg";
 
-document.head.innerHTML += "<style>#results_container {color:#000000;} .inner_window_w_desc {background-color:#99b898!important;}</style>";
+applyTheme(theme);
 
 $("#music_player")[0].children[0].style.display="none"
 $("#music_player")[0].children[1].style.display="none"
